@@ -4,95 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AF5AC7115B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Jun 2025 21:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EB7CC7115B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Jun 2025 03:12:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uTosh-0006f1-Vp; Mon, 23 Jun 2025 17:39:12 -0400
+	id 1uTu5H-0007bx-Pn; Mon, 23 Jun 2025 23:12:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uTosg-0006eo-EH
- for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 17:39:10 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1uTu5F-0007Yd-RP
+ for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 23:12:29 -0400
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uTose-0005L3-LM
- for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 17:39:10 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2363616a1a6so37835955ad.3
- for <qemu-riscv@nongnu.org>; Mon, 23 Jun 2025 14:39:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1uTu5E-000350-01
+ for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 23:12:29 -0400
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-b31e076f714so4075799a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 23 Jun 2025 20:12:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1750714747; x=1751319547; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=/SJ8XGZKOSTcdSpimrphHSXihH5db5LKplkn5InuLGk=;
- b=TgfxFl3G8Ldu13X5jA68YOty7Iib+KIwxkOl6tT2wMxKwVxqtDHSEqXuLqFy3dOd2/
- HphxSW2p5oqLj4gvyiJJhL7ye+I0OqJodvHqyQkcMW80ERJ1VGWTD+t/+tEzZqoHlhFl
- /DB/avpB0Nb9qniuyJyr2IfkMkzDRz4qf6X9jnYXjFt3lG+nYbcbOcU1y+s/7TE20yMe
- tW6XdIvvl0oM6v+79P/16criO1ehWfRN+0kf/ZjdfqNCgZ6hACHTDHB+DyCWywAdTyyZ
- M/VespfnjMN9rgMCoYtwo5oKUHjlppxC1uqF/5wUraB9eAWnsEADeOQHstqf4o+kRFkH
- NodA==
+ d=sifive.com; s=google; t=1750734746; x=1751339546; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=a8WABByH5fUTCtQw5whMIskkE+MdZh/jm0wbwSTvqsk=;
+ b=X1eeUHbJYqrRO6Bi0AN1EmcipU7MUdh1uaz0ZBsq0uQ/YbUr7ZJLvRjSMQkP2CPJ93
+ G+2MRkSrsom7UzcuJs3LMZRbCMyhIjNwScon9EnSOGz4nsnz/ak0/8KERp9Rpi4qYkRn
+ UEjUJobTPHBj5ho8vbb5NKeCqHDO2jIBYVUkDhFMPFGsz1q/x7XWJaepYSwmsqR09CtQ
+ NuMiP20p47MnifYP6X5c/5UY8qC2E+ch3G/X4O9c7HeqYur24oGUimGS/iMZgCpx1ke8
+ 0ZmzK8Lvck8wA+QdkL+LXsOpHJabGpbUb74DzvxgHEkvXRMZwrnQ1eljPtvh4mIOIElm
+ 8ihA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750714747; x=1751319547;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/SJ8XGZKOSTcdSpimrphHSXihH5db5LKplkn5InuLGk=;
- b=nIyHgJh5coe8l83iszoQDdOufnO0ltXoBiVKB8oEZ23PeujlkAq3FQPrQ8dyPOwRyK
- q7Bm+pxpGbxOlas031oYudTad6nfloSGIyg+9rx3qutdlTg3zV5hbYRSD+zHIMcwPw6E
- X/0fAUtYv3VaSSy20vRV3ck1jN8vDDEowTyO2ZPts/UPN3akxLkV8ZQ8MH7Mq43deS5e
- 0D5BdNkAQZVvBkkJEZ1qvhogVOvgXhwTHQ0TqIVwzGHV330Dd7fetRCP6ePFgn5vO15j
- LC8KB6W8LSTRBGyx6P5KyuOfGo+ZAQnwS0bOUILuDcpqjKLZClGT1/OcI9aIXPihrRJs
- u4ZA==
+ d=1e100.net; s=20230601; t=1750734746; x=1751339546;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a8WABByH5fUTCtQw5whMIskkE+MdZh/jm0wbwSTvqsk=;
+ b=erVu05kM2hnG/Tz6xUactvLn0zWGm0u2csVZpxMyjZgYd6O0i1U8ZccNggg9n5aDQA
+ yi1jb9zTlODu3j5x9x3Ly7ZQMFzof/za9WD6N6H0TOex6jZkUPkNUWdm5oLOtH/33mRn
+ e2fKVNj79sdNLE9gFTrLYLg8/tGT6xRp8cspkDJa8dappxUXUWNX/uh2PSZghmulUhR7
+ uhNMhD9WWpOcHg6Ut3874q1KxaAVW6M50D1/dyccJcF5iYNoTeU1aPmLCBu1OoffDUto
+ cB0DwhRv6HLG1D4jkBa2Bd8VSk9a4bPnMIyGcz4Aj4i+D0h0S7dJkTjCOnryHIELvoB9
+ nm2w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWxYL/6YjCFgDsKiyGQvwgW0dGUqoAYDYcF+drH0s3pwFu3L08eLP77Z6cnbDdiGF9Tg3Xy26QiUoGi@nongnu.org
-X-Gm-Message-State: AOJu0YwSeCKp0jxdq8K7dUndRMV7qwfDAEa+1rFcs20XOGhb5kSEyJmg
- 0CcDccHSLGuP3GwESM+NLP8GZUejH96i0pBLOWWcep5XMR+cNVi9G2MpbMYIe+fvRWc=
-X-Gm-Gg: ASbGnctpeMJ+8+z2Zl3cyB4KDQeKp513hreQR93gowaBnDhYRFxWufIuyun5lU8+XRQ
- 3o+CrKQTfYP3UTgwdMz4jXnWeIko6r5eMjBTygTLDcRBiuIKHxjDAA471mU5L6hGNwdf7cudXD0
- a7oRouin9UrQvLnyI46+pVOlJt7zLmYtcpYA1MSX8NAq050rdi6umvVYZj+NhTn5MZCL80CXu8G
- BDpMp5SARvtC5Oh0sJNFvS5pNsW65pFFN8+YHrwVLmeAjryiCtmbTYd6SEAmmNeK0VJVYYXPjRG
- m4+uqRYOnT6XU/C/KSysBBQ+ufbazdVXC2zP8pVARyOm7NZfAchwNxI6HWUnXUBUUMQ+MQVZeqE
- p
-X-Google-Smtp-Source: AGHT+IEvLgtN+QpHnET40nBbowAZlEHraQVlxeSDZ+WFAZphavKvB8qi4YWB1t11DFzO6VSRGn8myQ==
-X-Received: by 2002:a17:903:2f4b:b0:235:f70:fd44 with SMTP id
- d9443c01a7336-237d9870d24mr201928405ad.21.1750714747045; 
- Mon, 23 Jun 2025 14:39:07 -0700 (PDT)
-Received: from [192.168.68.110] ([191.255.35.152])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-237d8391494sm93564425ad.1.2025.06.23.14.39.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Jun 2025 14:39:06 -0700 (PDT)
-Message-ID: <0811914e-623e-41a2-a54b-8ce42f45740c@ventanamicro.com>
-Date: Mon, 23 Jun 2025 18:39:02 -0300
+ AJvYcCXdVNb0eu20/GJyl8wJfHehGGXNhlINIYgNm5cPwCLf3oaazUoceQuDcrA5o3Da19cLEeZOD7Xgw7+j@nongnu.org
+X-Gm-Message-State: AOJu0YxhQivv2aydJINIjW4uoCr7uC+VY/V/AqkLAHnFioTx4JWIFscS
+ 1mWe8BZyWovS2wlogzSrvQBBT/sZHNFjsN85cUD8TOTf4CoSmDzmXVMIARWXoFPkSQn/dYexe7Y
+ u84D6spbjWvjBJOhfCy7GO6kq38HclHinOwD5gDSfDg==
+X-Gm-Gg: ASbGnctc9xlUCiHrmi/sJLwidydGqfnJrofclMJwaXLKgdWIzHG386OKUEJSPTqtJWt
+ 4e2SlYQ9GGpXLijoxOS40gzrelmb6w0dUL7Crgna3ipU943NdAZdDZNIYIvYx1LLa19cVRA7aUm
+ FB9arHduRAlzaJ7BCUT5JfnkL7pXiE62YSeFZ7vmTMq2ZUDXUVc8wOR1zx
+X-Google-Smtp-Source: AGHT+IFJhPwFzG0ihnslUC5QBWZd983snHwoSyEBz9+0kyf7EiOa3oPkzWa7KdB8oIPx03/boAp7z02/duU2supmUmQ=
+X-Received: by 2002:a17:90b:5586:b0:312:e73e:cded with SMTP id
+ 98e67ed59e1d1-315ccd7261emr2794155a91.16.1750734745753; Mon, 23 Jun 2025
+ 20:12:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] target/riscv: disable *stimecmp interrupts without
- *envcfg.STCE
-To: =?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>,
- qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Atish Patra <atishp@rivosinc.com>
-References: <20250623165329.2759651-1-rkrcmar@ventanamicro.com>
- <20250623165329.2759651-2-rkrcmar@ventanamicro.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250623165329.2759651-2-rkrcmar@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62e.google.com
+References: <20250401103344.84257-1-jay.chang@sifive.com>
+In-Reply-To: <20250401103344.84257-1-jay.chang@sifive.com>
+From: Jay Chang <jay.chang@sifive.com>
+Date: Tue, 24 Jun 2025 11:12:14 +0800
+X-Gm-Features: AX0GCFu6Gti6niGyiSDlG2TCXm8MS5Be-sWZYVyAdtav8G2GPxjCBlliwlt6EOY
+Message-ID: <CACNNAjP_h4Z2QZZHJXryqsFNSENyLbhZ-ArLFjosChFzou3_kQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] target/riscv: Restrict mideleg/medeleg/medelegh
+ access to S-mode harts
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Frank Chang <frank.chang@sifive.com>
+Content-Type: multipart/alternative; boundary="0000000000009dff2c063848b299"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=jay.chang@sifive.com; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,110 +98,173 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Radim,
+--0000000000009dff2c063848b299
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-It seems like this patch is breaking 'make check-functional':
+Hi,
 
-12/12 qemu:func-quick+func-riscv64 / func-riscv64-riscv_opensbi   TIMEOUT         90.06s   killed by signal 15 SIGTERM
-
-Checking the logs I verified that the problem can be reproduced by running the
-'spike' machine as follows:
-
-$ ./build/qemu-system-riscv64 -M spike   --nographic
-Segmentation fault (core dumped)
-
-The expected result is to boot opensbi. The problem can't be reproduced with
-the 'virt' board, so something that you did here impacted 'spike' in particular
-for some reason.
-
+Gentle ping on this patch.
 
 Thanks,
+Jay Chang
 
-Daniel
+On Tue, Apr 1, 2025 at 6:34=E2=80=AFPM Jay Chang <jay.chang@sifive.com> wro=
+te:
 
-On 6/23/25 1:53 PM, Radim Krčmář wrote:
-> The specification states that menvcfg.STCE=0 prevents both *stimecmp
-> CSRs from having an effect on the pending interrupts.
-> henvcfg.STCE=0 disables only vstimecmp.
-> 
-> Make sure that when *envcfg.STCE is not set:
-> * writing the *stimecmp CSRs doesn't modify the *ip CSRs,
-> * and that the interrupt timer is disarmed.
-> 
-> Call the *stimecmp CSR update functions when *envcfg.STCE is toggled,
-> because the *ip CSRs need to immediately reflect the new behavior.
-> 
-> Fixes: 43888c2f1823 ("target/riscv: Add stimecmp support")
-> Signed-off-by: Radim Krčmář <rkrcmar@ventanamicro.com>
+> RISC-V Privileged Spec states:
+> "In harts with S-mode, the medeleg and mideleg registers must exist, and
+> setting a bit in medeleg or mideleg will delegate the corresponding trap
+> , when occurring in S-mode or U-mode, to the S-mode trap handler. In
+> harts without S-mode, the medeleg and mideleg registers should not
+> exist."
+>
+> Add smode predicate to ensure these CSRs are only accessible when S-mode
+> is supported.
+>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Signed-off-by: Jay Chang <jay.chang@sifive.com>
 > ---
->   target/riscv/csr.c         | 12 ++++++++++++
->   target/riscv/time_helper.c | 10 ++++++++++
->   2 files changed, 22 insertions(+)
-> 
+>  target/riscv/csr.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index fb149721691d..43eae9bcf153 100644
+> index 7948188356..975d6e307f 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -3181,6 +3181,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->       const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
->       uint64_t mask = MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE |
->                       MENVCFG_CBZE | MENVCFG_CDE;
-> +    typeof(env->menvcfg) old = env->menvcfg;
->   
->       if (riscv_cpu_mxl(env) == MXL_RV64) {
->           mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
-> @@ -3208,6 +3209,11 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->           }
->       }
->       env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
-> +
-> +    if ((old ^ env->menvcfg) & MENVCFG_STCE) {
-> +        riscv_timer_write_timecmp(env, env->stimer, env->stimecmp, 0, MIP_STIP);
-> +    }
-> +
->       return write_henvcfg(env, CSR_HENVCFG, env->henvcfg, ra);
->   }
->   
-> @@ -3314,6 +3320,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->                                       target_ulong val, uintptr_t ra)
->   {
->       uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
-> +    typeof(env->henvcfg) old = env->henvcfg;
->       RISCVException ret;
->   
->       ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
-> @@ -3347,6 +3354,11 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->           env->vsstatus &= ~MSTATUS_SDT;
->       }
->   
-> +    if ((old ^ env->henvcfg) & HENVCFG_STCE) {
-> +        riscv_timer_write_timecmp(env, env->vstimer, env->vstimecmp,
-> +                                  env->htimedelta, MIP_VSTIP);
-> +    }
-> +
->       return RISCV_EXCP_NONE;
->   }
->   
-> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-> index bc0d9a0c4c35..8198a2d8d92d 100644
-> --- a/target/riscv/time_helper.c
-> +++ b/target/riscv/time_helper.c
-> @@ -49,6 +49,16 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
->       uint32_t timebase_freq = mtimer->timebase_freq;
->       uint64_t rtc_r = env->rdtime_fn(env->rdtime_fn_arg) + delta;
->   
-> +    /*
-> +     * *envcfg.STCE disables *stimecmp interrupts, but still allows higher
-> +     * privileges to write the *stimecmp CSRs.
-> +     */
-> +    if (!get_field(env->menvcfg, MENVCFG_STCE) ||
-> +        (timer_irq == MIP_VSTIP && !get_field(env->henvcfg, HENVCFG_STCE))) {
-> +        timer_del(timer);
-> +        return;
-> +    }
-> +
->       if (timecmp <= rtc_r) {
->           /*
->            * If we're setting an stimecmp value in the "past",
+> @@ -5783,8 +5783,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>                            NULL,                read_mstatus_i128
+>  },
+>      [CSR_MISA]        =3D { "misa",       any,   read_misa,    write_mis=
+a,
+>                            NULL,                read_misa_i128
+>   },
+> -    [CSR_MIDELEG]     =3D { "mideleg",    any,   NULL, NULL,   rmw_midel=
+eg
+>  },
+> -    [CSR_MEDELEG]     =3D { "medeleg",    any,   read_medeleg,
+> write_medeleg },
+> +    [CSR_MIDELEG]     =3D { "mideleg",    smode,   NULL, NULL,
+>  rmw_mideleg   },
+> +    [CSR_MEDELEG]     =3D { "medeleg",    smode,   read_medeleg,
+> write_medeleg },
+>      [CSR_MIE]         =3D { "mie",        any,   NULL, NULL,   rmw_mie
+>  },
+>      [CSR_MTVEC]       =3D { "mtvec",      any,   read_mtvec,   write_mtv=
+ec
+>  },
+>      [CSR_MCOUNTEREN]  =3D { "mcounteren", umode, read_mcounteren,
+> @@ -5792,7 +5792,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>
+>      [CSR_MSTATUSH]    =3D { "mstatush",   any32, read_mstatush,
+>                            write_mstatush
+>  },
+> -    [CSR_MEDELEGH]    =3D { "medelegh",   any32, read_zero, write_ignore=
+,
+> +    [CSR_MEDELEGH]    =3D { "medelegh",   smode32, read_zero, write_igno=
+re,
+>                            .min_priv_ver =3D PRIV_VERSION_1_13_0
+>   },
+>      [CSR_HEDELEGH]    =3D { "hedelegh",   hmode32, read_hedelegh,
+> write_hedelegh,
+>                            .min_priv_ver =3D PRIV_VERSION_1_13_0
+>   },
+> --
+> 2.48.1
+>
+>
 
+--0000000000009dff2c063848b299
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi,<br><br>Gentle=C2=A0<span class=3D"gmail-il"><span clas=
+s=3D"gmail-il">ping</span></span>=C2=A0on this patch.<br><br>Thanks,<br>Jay=
+ Chang</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Tue, Apr 1, 2025 at 6:34=E2=80=AFPM Jay Ch=
+ang &lt;<a href=3D"mailto:jay.chang@sifive.com">jay.chang@sifive.com</a>&gt=
+; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
+ 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">RISC-V =
+Privileged Spec states:<br>
+&quot;In harts with S-mode, the medeleg and mideleg registers must exist, a=
+nd<br>
+setting a bit in medeleg or mideleg will delegate the corresponding trap<br=
+>
+, when occurring in S-mode or U-mode, to the S-mode trap handler. In<br>
+harts without S-mode, the medeleg and mideleg registers should not<br>
+exist.&quot;<br>
+<br>
+Add smode predicate to ensure these CSRs are only accessible when S-mode<br=
+>
+is supported.<br>
+<br>
+Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" targ=
+et=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+Signed-off-by: Jay Chang &lt;<a href=3D"mailto:jay.chang@sifive.com" target=
+=3D"_blank">jay.chang@sifive.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/csr.c | 6 +++---<br>
+=C2=A01 file changed, 3 insertions(+), 3 deletions(-)<br>
+<br>
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
+index 7948188356..975d6e307f 100644<br>
+--- a/target/riscv/csr.c<br>
++++ b/target/riscv/csr.c<br>
+@@ -5783,8 +5783,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {<br=
+>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0NULL,=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 read_mstatus_i128=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0},<br>
+=C2=A0 =C2=A0 =C2=A0[CSR_MISA]=C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D { &quot;misa&=
+quot;,=C2=A0 =C2=A0 =C2=A0 =C2=A0any,=C2=A0 =C2=A0read_misa,=C2=A0 =C2=A0 w=
+rite_misa,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0NULL,=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 read_misa_i128=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }=
+,<br>
+-=C2=A0 =C2=A0 [CSR_MIDELEG]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mideleg&quot;,=
+=C2=A0 =C2=A0 any,=C2=A0 =C2=A0NULL, NULL,=C2=A0 =C2=A0rmw_mideleg=C2=A0 =
+=C2=A0},<br>
+-=C2=A0 =C2=A0 [CSR_MEDELEG]=C2=A0 =C2=A0 =C2=A0=3D { &quot;medeleg&quot;,=
+=C2=A0 =C2=A0 any,=C2=A0 =C2=A0read_medeleg, write_medeleg },<br>
++=C2=A0 =C2=A0 [CSR_MIDELEG]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mideleg&quot;,=
+=C2=A0 =C2=A0 smode,=C2=A0 =C2=A0NULL, NULL,=C2=A0 =C2=A0rmw_mideleg=C2=A0 =
+=C2=A0},<br>
++=C2=A0 =C2=A0 [CSR_MEDELEG]=C2=A0 =C2=A0 =C2=A0=3D { &quot;medeleg&quot;,=
+=C2=A0 =C2=A0 smode,=C2=A0 =C2=A0read_medeleg, write_medeleg },<br>
+=C2=A0 =C2=A0 =C2=A0[CSR_MIE]=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D { &quot;=
+mie&quot;,=C2=A0 =C2=A0 =C2=A0 =C2=A0 any,=C2=A0 =C2=A0NULL, NULL,=C2=A0 =
+=C2=A0rmw_mie=C2=A0 =C2=A0 =C2=A0 =C2=A0},<br>
+=C2=A0 =C2=A0 =C2=A0[CSR_MTVEC]=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D { &quot;mtvec=
+&quot;,=C2=A0 =C2=A0 =C2=A0 any,=C2=A0 =C2=A0read_mtvec,=C2=A0 =C2=A0write_=
+mtvec=C2=A0 =C2=A0},<br>
+=C2=A0 =C2=A0 =C2=A0[CSR_MCOUNTEREN]=C2=A0 =3D { &quot;mcounteren&quot;, um=
+ode, read_mcounteren,<br>
+@@ -5792,7 +5792,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {<br=
+>
+<br>
+=C2=A0 =C2=A0 =C2=A0[CSR_MSTATUSH]=C2=A0 =C2=A0 =3D { &quot;mstatush&quot;,=
+=C2=A0 =C2=A0any32, read_mstatush,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0write_mstatush=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0},<br>
+-=C2=A0 =C2=A0 [CSR_MEDELEGH]=C2=A0 =C2=A0 =3D { &quot;medelegh&quot;,=C2=
+=A0 =C2=A0any32, read_zero, write_ignore,<br>
++=C2=A0 =C2=A0 [CSR_MEDELEGH]=C2=A0 =C2=A0 =3D { &quot;medelegh&quot;,=C2=
+=A0 =C2=A0smode32, read_zero, write_ignore,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0.min_priv_ver =3D PRIV_VERSION_1_13_0=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
+=C2=A0 =C2=A0 =C2=A0[CSR_HEDELEGH]=C2=A0 =C2=A0 =3D { &quot;hedelegh&quot;,=
+=C2=A0 =C2=A0hmode32, read_hedelegh, write_hedelegh,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0.min_priv_ver =3D PRIV_VERSION_1_13_0=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
+-- <br>
+2.48.1<br>
+<br>
+</blockquote></div>
+
+--0000000000009dff2c063848b299--
 
