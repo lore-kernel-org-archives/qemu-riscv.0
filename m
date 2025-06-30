@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA62C7EE39
-	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Jun 2025 00:53:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5699AC7EE39
+	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Jun 2025 10:44:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uW2lV-0008US-1t; Sun, 29 Jun 2025 20:52:58 -0400
+	id 1uWBz5-0002UO-6b; Mon, 30 Jun 2025 06:43:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uW2lR-0008Tf-MR; Sun, 29 Jun 2025 20:52:53 -0400
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
+ id 1uWBz2-0002Te-Q8; Mon, 30 Jun 2025 06:43:32 -0400
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uW2lQ-0000NX-9o; Sun, 29 Jun 2025 20:52:53 -0400
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-87f36c458afso965908241.1; 
- Sun, 29 Jun 2025 17:52:51 -0700 (PDT)
+ id 1uWBz0-0004y8-W6; Mon, 30 Jun 2025 06:43:32 -0400
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-53145c74e15so1295731e0c.0; 
+ Mon, 30 Jun 2025 03:43:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751244770; x=1751849570; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1751280208; x=1751885008; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VyBUcrafNFXi+VRn/b6EMiGk/uyewRX9M4v1p5fGOEE=;
- b=S85doqCQbU3WZ1SIhYKA2/Eby96MEZTqVJnpDM0K4RpUe6sjvBEa2Rts7BnFpoYC/C
- iIdMQ2kNan4zlrlxkOShZHV9q1hMeuasIkLjGZg3zpwCVu9ow7930y57Npyg6w+bUVpO
- fMcWGZqJkM7ZUfXFitbkQIVI8PZcYLZny64ocFr+XdmTWRL6EOHEtQkK2+WEUqvVY4hW
- C/v94WguHlNp2YGGtMf8z/DTUpHl5RT8Y9zsr+2x4u5n5tclSqyM6SfLnRL7pxcF1NJZ
- zl5noI8UkPzTNkjQlq2njy0bIqt8efwRPA3qJLayaW9a6gC8eovGbZQlDnWFEh1+mI9Y
- esBQ==
+ bh=O2F+WIp/lqj1SkhO8gd3nmfbC1olhmPf7niEjFLul5E=;
+ b=JLviYiMJ4fBraefTWDngSQp4aZR/3eslq7vGy9CQ78Fxwk+4S7dnsXBjPx9VGxuZN+
+ 1PClNzGmyeLZ0dDe8aVfQzOoEbTXGmDbArHcSMcxN2JfiP8GwEE5Z5stO3XE4qHN9DY6
+ sycwL5Lc6UB45HepR7O/rb/4p8Gn0dpJlMkUBkjxu4VE8GqHed3J+ZYEwAi+nlg/BsK9
+ Qm06BmwFPdu3AyRsB8XgCRv2Yg74P+t8QbBe0arMLJhb80u7uBdS36ocHCOCPSHAgs3z
+ sAJbZlO6yTO3Cy9o0i1gLZ9LgpnAohdiO93mGtimE6dZVdAirMjzKnm+DNoZWgCdtbMS
+ CjVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751244770; x=1751849570;
+ d=1e100.net; s=20230601; t=1751280208; x=1751885008;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VyBUcrafNFXi+VRn/b6EMiGk/uyewRX9M4v1p5fGOEE=;
- b=rqNhb49C8DgDPRe/iU3GttHT5jNVlBifjUiFBimDTc32dYIaf+2fqhiJKZ63JiWe+2
- 0tTLgFEFPWAuWea215JmGCVAyuMy3HgJfNp0vMesG9Lt1H4jjblRqZA8V6y3fKB4wClI
- Yw+ixu7YIAxJN7TCR/Y9JChuDBDn1pN3EBrn+OwuLLUqOZBojl8PZRBiTb4A26VaYLc4
- TO9HrKPVfpWsKVWPzjCwLwlJhZDXv9sgiCc/xthJcnFcLcTycgtcccEh5k5rP8rOAyuh
- wFOKYp5MCaEqKCjCD7qZhQvzIGhDwUnH1O8HKFOHpnOibzTIZL3J7wEzv91pTvrS2WZA
- xeZg==
+ bh=O2F+WIp/lqj1SkhO8gd3nmfbC1olhmPf7niEjFLul5E=;
+ b=WLdxJcc8b5OJX26aMT74u61O0uSHDQU5AGJkqOALtRX551KEdQ773kVH4ApQcbDCZ9
+ 5hR+Jw3yMk+OQ5gkSqU7QB9r+KMbf8QjleE4qIoJXRmtfYpv2PlDJnto0Q358q9Q5YG9
+ 14wRXQf1hqOsJtGqn2PDQpCDUwNC3aNgdSE0KVo3yYC/D28Lx6JN2FlbUOYVuGaRtmMX
+ 5xxWEb1S+muk19doJjn5zzPry0lnj8ikTI35dXBF44WJgaZ5qCJCN0i/F6qwXAm+Mafg
+ VzzywtVTEDV+t4MvgdT4DeqBjLeS4Ncr75rUzVcTMxz3gCWWWxwq6WlVssWKoyhG17vY
+ jlOg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVUhhP7iOQYRoTzq+Iu4sXao8JoWG5cBTxAs1l2ql76cmN6x7wxy/s04uKJ90AMkBmzm62OpoYZyIak@nongnu.org
-X-Gm-Message-State: AOJu0YwVl2phC9itZYN0ch0A59J/VIkaaOGCUd83rdVTqoc33IcaYbRj
- dYbOgFkiTlqzYn3wEpc6nR7ftW0frSVTiqnSy0DrbDtCybnk7cvxwQwq5HqHZjUG7mA1v76Shpk
- CqwPoB4sttbqPG36n81rlRYHuG/1+kZg=
-X-Gm-Gg: ASbGncs41knNOxGPGcJSNefPRx9V1tMzXNLD2TEZC8LNoieBpy1oAgfyUwjCePGgT+D
- xMXJDlgthUEnaSH7ZuM6anm7U2nJvDDV/k4WlXuc41J1yGUtpa+LoBbLPhIwfZSbUYar7kHinGc
- jGqUb+l7Ft2Ri1K/AhMgj3yp+8pE44H6gdiN6N7Bva9yk15hYS/ogeyBi480fDNP70KHRr9gB6M
- w==
-X-Google-Smtp-Source: AGHT+IGRomADjRDlAh+WqdQ4EGLCRfO4rren3DK9rHoILzPwfPmmA+9K+vS2jJgk0NJbfY8vk1w1Lop37aOPRxX0oak=
-X-Received: by 2002:a05:6102:1613:b0:4e6:245b:cf57 with SMTP id
- ada2fe7eead31-4ee4fa05e70mr7088883137.24.1751244770490; Sun, 29 Jun 2025
- 17:52:50 -0700 (PDT)
+ AJvYcCV3zbiRKCejmgzynF3IMmq/Rd24JAj7xPlPGsIPxgFfegQal8UrLZFhPzLE0DEfMKjg9fV+Z/tgJM2g@nongnu.org
+X-Gm-Message-State: AOJu0YyXLKXmtepUNCiMcS88fn+EyTH8BnUpmOOnkVnDQrOKZtznWuw+
+ fmsrwm9J5u7UuOvpje7W6jwtFjfn9YiI8NLyk0Uuv0MppCLkaIsj6pbEeUt1ciI8V0BGSPejiwt
+ NIpZ4W/jFaZ7VyBR24i1ZBYkY22PFjGI=
+X-Gm-Gg: ASbGncvxXg2M7xFtYjyG7LjwtDRu0kIJ+dCNFvW9k7g3VUj3EGDmOdVKRM/1hA511Y1
+ cdlw8+mgLduKyOEHkYVVooaipwDPgt/VroH23kYDhILRMmkW4zxsEaRSAPLjSPOG28s1Hw3MNxK
+ Nkgg8lq9rk5/lrMf7+noK0plRavHWQ301p2RUyi+vAwxdJDJlld7Wys/XS8JZEGorCtBeBGaXJ2
+ Q==
+X-Google-Smtp-Source: AGHT+IFzXQ7Tpe2s/mxlu8kuqt+h2K+HPALW9SBFtEYovzPmUOzdjr32rNyMmRJHUajtS/0hvvWlniMVhrXXRLCwIyI=
+X-Received: by 2002:a05:6122:62ea:b0:531:2f9f:8026 with SMTP id
+ 71dfb90a1353d-5330be0ce5fmr6495381e0c.1.1751280207680; Mon, 30 Jun 2025
+ 03:43:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250627133013.443997-1-max.chou@sifive.com>
-In-Reply-To: <20250627133013.443997-1-max.chou@sifive.com>
+References: <20250401103344.84257-1-jay.chang@sifive.com>
+ <CACNNAjP_h4Z2QZZHJXryqsFNSENyLbhZ-ArLFjosChFzou3_kQ@mail.gmail.com>
+In-Reply-To: <CACNNAjP_h4Z2QZZHJXryqsFNSENyLbhZ-ArLFjosChFzou3_kQ@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 30 Jun 2025 10:52:23 +1000
-X-Gm-Features: Ac12FXxv_ltPuxPjXDwpymYMgKMNc3qKS0w50SSCl1uJ10lvuyTO1RcOc1u_clI
-Message-ID: <CAKmqyKPeh6UK55oPZHOa6WfUJyZ3nbqau4oudUn_9kMP3otGEA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: rvv: Fix missing exit TB flow for ldff_trans
-To: Max Chou <max.chou@sifive.com>
+Date: Mon, 30 Jun 2025 20:43:01 +1000
+X-Gm-Features: Ac12FXzN1xch84mN8bCuLc7vUTbrmWGwjRL-kvHqo4eM03-mH_jOssIqYmAn3PM
+Message-ID: <CAKmqyKN4CDfCHTtGbs86t6UfEA_qZ=M2F+VKiC6RD2UiUbjnBQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] target/riscv: Restrict mideleg/medeleg/medelegh
+ access to S-mode harts
+To: Jay Chang <jay.chang@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Frank Chang <frank.chang@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -100,48 +102,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jun 27, 2025 at 11:31=E2=80=AFPM Max Chou <max.chou@sifive.com> wro=
-te:
+On Tue, Jun 24, 2025 at 1:12=E2=80=AFPM Jay Chang <jay.chang@sifive.com> wr=
+ote:
 >
-> According to the V spec, the vector fault-only-first load instructions
-> may change the VL CSR.
-> So the ldff_trans TCG translation function should generate the
-> lookup_and_goto_ptr flow as the vsetvl/vsetvli translation function to
-> make sure the vl_eq_vlmax TB flag is correct.
+> Hi,
 >
-> Signed-off-by: Max Chou <max.chou@sifive.com>
+> Gentle ping on this patch.
 
-Thanks!
+Sorry it slipped through. Can you include a cover letter to makes
+things easier to manage [1]
 
-Applied to riscv-to-apply.next
+1: https://www.qemu.org/docs/master/devel/submitting-a-patch.html#include-a=
+-meaningful-cover-letter
 
 Alistair
 
-> ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 6 ++++++
->  1 file changed, 6 insertions(+)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
-trans/trans_rvv.c.inc
-> index 2b6077ac067..4cd030c7eb3 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -1361,6 +1361,12 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, =
-uint32_t data,
->      fn(dest, mask, base, tcg_env, desc);
+> Thanks,
+> Jay Chang
 >
->      finalize_rvv_inst(s);
-> +
-> +    /* vector unit-stride fault-only-first load may modify vl CSR */
-> +    gen_update_pc(s, s->cur_insn_len);
-> +    lookup_and_goto_ptr(s);
-> +    s->base.is_jmp =3D DISAS_NORETURN;
-> +
->      return true;
->  }
->
-> --
-> 2.43.0
->
->
+> On Tue, Apr 1, 2025 at 6:34=E2=80=AFPM Jay Chang <jay.chang@sifive.com> w=
+rote:
+>>
+>> RISC-V Privileged Spec states:
+>> "In harts with S-mode, the medeleg and mideleg registers must exist, and
+>> setting a bit in medeleg or mideleg will delegate the corresponding trap
+>> , when occurring in S-mode or U-mode, to the S-mode trap handler. In
+>> harts without S-mode, the medeleg and mideleg registers should not
+>> exist."
+>>
+>> Add smode predicate to ensure these CSRs are only accessible when S-mode
+>> is supported.
+>>
+>> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+>> Signed-off-by: Jay Chang <jay.chang@sifive.com>
+>> ---
+>>  target/riscv/csr.c | 6 +++---
+>>  1 file changed, 3 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index 7948188356..975d6e307f 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -5783,8 +5783,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>>                            NULL,                read_mstatus_i128       =
+    },
+>>      [CSR_MISA]        =3D { "misa",       any,   read_misa,    write_mi=
+sa,
+>>                            NULL,                read_misa_i128          =
+    },
+>> -    [CSR_MIDELEG]     =3D { "mideleg",    any,   NULL, NULL,   rmw_mide=
+leg   },
+>> -    [CSR_MEDELEG]     =3D { "medeleg",    any,   read_medeleg, write_me=
+deleg },
+>> +    [CSR_MIDELEG]     =3D { "mideleg",    smode,   NULL, NULL,   rmw_mi=
+deleg   },
+>> +    [CSR_MEDELEG]     =3D { "medeleg",    smode,   read_medeleg, write_=
+medeleg },
+>>      [CSR_MIE]         =3D { "mie",        any,   NULL, NULL,   rmw_mie =
+      },
+>>      [CSR_MTVEC]       =3D { "mtvec",      any,   read_mtvec,   write_mt=
+vec   },
+>>      [CSR_MCOUNTEREN]  =3D { "mcounteren", umode, read_mcounteren,
+>> @@ -5792,7 +5792,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>>
+>>      [CSR_MSTATUSH]    =3D { "mstatush",   any32, read_mstatush,
+>>                            write_mstatush                               =
+    },
+>> -    [CSR_MEDELEGH]    =3D { "medelegh",   any32, read_zero, write_ignor=
+e,
+>> +    [CSR_MEDELEGH]    =3D { "medelegh",   smode32, read_zero, write_ign=
+ore,
+>>                            .min_priv_ver =3D PRIV_VERSION_1_13_0        =
+      },
+>>      [CSR_HEDELEGH]    =3D { "hedelegh",   hmode32, read_hedelegh, write=
+_hedelegh,
+>>                            .min_priv_ver =3D PRIV_VERSION_1_13_0        =
+      },
+>> --
+>> 2.48.1
+>>
 
