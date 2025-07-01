@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24527C8302F
-	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Jul 2025 06:43:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20CE9C7EE30
+	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Jul 2025 06:44:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uWUiW-000625-7i; Tue, 01 Jul 2025 02:43:44 -0400
+	id 1uWUic-00063Z-2X; Tue, 01 Jul 2025 02:43:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
- id 1uWUiS-00061s-T9
- for qemu-riscv@nongnu.org; Tue, 01 Jul 2025 02:43:40 -0400
-Received: from sg-1-23.ptr.blmpb.com ([118.26.132.23])
+ id 1uWUiZ-00062m-JB
+ for qemu-riscv@nongnu.org; Tue, 01 Jul 2025 02:43:47 -0400
+Received: from sg-1-12.ptr.blmpb.com ([118.26.132.12])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
- id 1uWUiM-0005Ik-Gp
- for qemu-riscv@nongnu.org; Tue, 01 Jul 2025 02:43:40 -0400
+ id 1uWUiW-0005LP-C2
+ for qemu-riscv@nongnu.org; Tue, 01 Jul 2025 02:43:47 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1751352191;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1751352216;
  h=from:subject:mime-version:from:date:message-id:subject:to:cc:
  reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=tETfWgbJ709zQxCvjvE0bpy0jjiJnpGnZKpr8dWVvgg=;
- b=3M15RYaM4vJ1t3bCWL4W7WQ8ktNu8i+KFtP8RyDYVva/0pNrQ/Xt1cYUv5NsUwSR5nyVvz
- 8fyq+WFYStntYZDZIEujYh0t9BjUqLa3uKAAIEvJjx1AT2enbUXuXsZ16X7lI7jZxVXYi4
- bZJzYr0XsfA/I1c9rbGBc2+JAnxNuOceFPRNOYnRCMNFdeFeU93kMpbbyqCq0eh8Wn143M
- +vm0Nn9NCrONJzPVjFi5+YRf0DGzsqX5F0s2hoxuAOM2460PcCE53VfeuyvZCDr4q25nE6
- KNMNp9bJB16uc/Qft6wcdvVRPQglrH4wxhkq5PK0rorRuqqAkz4OfoJJsypIvQ==
-In-Reply-To: <20250627132022.439315-3-max.chou@sifive.com>
-User-Agent: Mozilla Thunderbird
+ bh=HZEvBH3F1v0lTVrzej5P3JS7VetTP8ExWtOdIwoMbto=;
+ b=fnI7E0v6yAd9/Xzgzyij8gjS8YViAxtkhePzorQqWTkmIxyqWUpqNMsDavy9gTQEABL53f
+ xdARJxw+KjtM6Hryfvt8bIPspy700tnRsbuzcr7ej1GPkUgwtJCffHBMT/a9Wf0IgfbSzC
+ U8hOC6K6ucEDjqIsmpa7vWXpfizG+pRbayRXrL68TXlECa+8c+15exvBJK2uoqFPyvewGk
+ 0DaVisXsAtArNDbJ9RfHuri35C9IZSP7el2AC4be9ZWoYXeYrdSOG6C3f7CNjuGEDH6R1c
+ Rp4YTGLCd05SfRjGi1MHy+iMGFzupsXbYuvFcgtiD2QjhEkxK+VrUHeK4JYqjA==
 Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, 
  "Alistair Francis" <alistair.francis@wdc.com>, 
  "Weiwei Li" <liwei1518@gmail.com>, 
  "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
  "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, <antonb@tenstorrent.com>
-Date: Tue, 1 Jul 2025 14:43:07 +0800
-Message-Id: <69d73c59-2ff6-4446-ac23-c36b0e299afc@lanxincomputing.com>
+Date: Tue, 1 Jul 2025 14:43:32 +0800
+References: <20250627132022.439315-1-max.chou@sifive.com>
+ <20250627132022.439315-2-max.chou@sifive.com>
 Content-Transfer-Encoding: 7bit
 To: "Max Chou" <max.chou@sifive.com>, <qemu-devel@nongnu.org>, 
  <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH v2 2/3] target/riscv: rvv: Apply vext_check_input_eew to
- vector reduction instructions
-Mime-Version: 1.0
-X-Original-From: Nutty Liu <liujingqi@lanxincomputing.com>
-Content-Type: text/plain; charset=UTF-8
-From: "Nutty Liu" <liujingqi@lanxincomputing.com>
-References: <20250627132022.439315-1-max.chou@sifive.com>
- <20250627132022.439315-3-max.chou@sifive.com>
-Received: from [127.0.0.1] ([116.237.111.137]) by smtp.feishu.cn with ESMTPS;
- Tue, 01 Jul 2025 14:43:08 +0800
+Subject: Re: [PATCH v2 1/3] target/riscv: rvv: Apply vext_check_input_eew to
+ vector integer/fp compare instructions
 Content-Language: en-US
-X-Lms-Return-Path: <lba+26863837d+bb7641+nongnu.org+liujingqi@lanxincomputing.com>
-Received-SPF: pass client-ip=118.26.132.23;
- envelope-from=liujingqi@lanxincomputing.com; helo=sg-1-23.ptr.blmpb.com
+User-Agent: Mozilla Thunderbird
+X-Lms-Return-Path: <lba+268638396+74cbad+nongnu.org+liujingqi@lanxincomputing.com>
+Message-Id: <55543227-0791-488b-9294-44e15dc5477e@lanxincomputing.com>
+Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20250627132022.439315-2-max.chou@sifive.com>
+From: "Nutty Liu" <liujingqi@lanxincomputing.com>
+Mime-Version: 1.0
+Received: from [127.0.0.1] ([116.237.111.137]) by smtp.feishu.cn with ESMTPS;
+ Tue, 01 Jul 2025 14:43:33 +0800
+X-Original-From: Nutty Liu <liujingqi@lanxincomputing.com>
+Received-SPF: pass client-ip=118.26.132.12;
+ envelope-from=liujingqi@lanxincomputing.com; helo=sg-1-12.ptr.blmpb.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -82,44 +82,101 @@ On 6/27/2025 9:20 PM, Max Chou wrote:
 > From: Anton Blanchard <antonb@tenstorrent.com>
 >
 > Handle the overlap of source registers with different EEWs.
+>
+> Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+> Reviewed-by: Max Chou <max.chou@sifive.com>
+> Signed-off-by: Max Chou <max.chou@sifive.com>
+> ---
+>   target/riscv/insn_trans/trans_rvv.c.inc | 22 ++++++++++++----------
+>   1 file changed, 12 insertions(+), 10 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 2b6077ac067..ec34d0d8c47 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -436,9 +436,10 @@ static bool vext_check_sss(DisasContext *s, int vd, int vs1, int vs2, int vm)
+>              require_align(vs1, s->lmul);
+>   }
+>   
+> -static bool vext_check_ms(DisasContext *s, int vd, int vs)
+> +static bool vext_check_ms(DisasContext *s, int vd, int vs, int vm)
+>   {
+> -    bool ret = require_align(vs, s->lmul);
+> +    bool ret = require_align(vs, s->lmul) &&
+> +               vext_check_input_eew(s, vs, s->sew, -1, 0, vm);
+>       if (vd != vs) {
+>           ret &= require_noover(vd, 0, vs, s->lmul);
+>       }
+> @@ -461,9 +462,10 @@ static bool vext_check_ms(DisasContext *s, int vd, int vs)
+>    *      with a mask value (e.g., comparisons) or the scalar result
+>    *      of a reduction. (Section 5.3)
+>    */
+> -static bool vext_check_mss(DisasContext *s, int vd, int vs1, int vs2)
+> +static bool vext_check_mss(DisasContext *s, int vd, int vs1, int vs2, int vm)
+>   {
+> -    bool ret = vext_check_ms(s, vd, vs2) &&
+> +    bool ret = vext_check_ms(s, vd, vs2, vm) &&
+> +               vext_check_input_eew(s, vs1, s->sew, vs2, s->sew, vm) &&
+>                  require_align(vs1, s->lmul);
+>       if (vd != vs1) {
+>           ret &= require_noover(vd, 0, vs1, s->lmul);
+> @@ -2040,7 +2042,7 @@ static bool opivv_vmadc_check(DisasContext *s, arg_rmrr *a)
+>   {
+>       return require_rvv(s) &&
+>              vext_check_isa_ill(s) &&
+> -           vext_check_mss(s, a->rd, a->rs1, a->rs2);
+> +           vext_check_mss(s, a->rd, a->rs1, a->rs2, a->vm);
+>   }
+>   
+>   GEN_OPIVV_TRANS(vmadc_vvm, opivv_vmadc_check)
+> @@ -2076,7 +2078,7 @@ static bool opivx_vmadc_check(DisasContext *s, arg_rmrr *a)
+>   {
+>       return require_rvv(s) &&
+>              vext_check_isa_ill(s) &&
+> -           vext_check_ms(s, a->rd, a->rs2);
+> +           vext_check_ms(s, a->rd, a->rs2, a->vm);
+>   }
+>   
+>   GEN_OPIVX_TRANS(vmadc_vxm, opivx_vmadc_check)
+> @@ -2250,7 +2252,7 @@ static bool opivv_cmp_check(DisasContext *s, arg_rmrr *a)
+>   {
+>       return require_rvv(s) &&
+>              vext_check_isa_ill(s) &&
+> -           vext_check_mss(s, a->rd, a->rs1, a->rs2);
+> +           vext_check_mss(s, a->rd, a->rs1, a->rs2, a->vm);
+>   }
+>   
+>   GEN_OPIVV_TRANS(vmseq_vv, opivv_cmp_check)
+> @@ -2264,7 +2266,7 @@ static bool opivx_cmp_check(DisasContext *s, arg_rmrr *a)
+>   {
+>       return require_rvv(s) &&
+>              vext_check_isa_ill(s) &&
+> -           vext_check_ms(s, a->rd, a->rs2);
+> +           vext_check_ms(s, a->rd, a->rs2, a->vm);
+>   }
+>   
+>   GEN_OPIVX_TRANS(vmseq_vx, opivx_cmp_check)
+> @@ -2972,7 +2974,7 @@ static bool opfvv_cmp_check(DisasContext *s, arg_rmrr *a)
+>       return require_rvv(s) &&
+>              require_rvf(s) &&
+>              vext_check_isa_ill(s) &&
+> -           vext_check_mss(s, a->rd, a->rs1, a->rs2);
+> +           vext_check_mss(s, a->rd, a->rs1, a->rs2, a->vm);
+>   }
+>   
+>   GEN_OPFVV_TRANS(vmfeq_vv, opfvv_cmp_check)
+> @@ -2985,7 +2987,7 @@ static bool opfvf_cmp_check(DisasContext *s, arg_rmrr *a)
+>       return require_rvv(s) &&
+>              require_rvf(s) &&
+>              vext_check_isa_ill(s) &&
+> -           vext_check_ms(s, a->rd, a->rs2);
+> +           vext_check_ms(s, a->rd, a->rs2, a->vm);
+>   }
+>   
+>   GEN_OPFVF_TRANS(vmfeq_vf, opfvf_cmp_check)
 
-Above description is the same as [patch v2 1/3].
-They are different functions.
-Maybe need to add some different description.
-
-Otherwise,
 Reviewed-by: Nutty Liu<liujingqi@lanxincomputing.com>
 
 Thanks,
 Nutty
-
->
-> Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
-> Signed-off-by: Max Chou <max.chou@sifive.com>
-> ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index ec34d0d8c47..ac6f1d04c6d 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -3293,6 +3293,7 @@ static bool reduction_check(DisasContext *s, arg_rmrr *a)
->   {
->       return require_rvv(s) &&
->              vext_check_isa_ill(s) &&
-> +           vext_check_input_eew(s, a->rs1, s->sew, a->rs2, s->sew, a->vm) &&
->              vext_check_reduction(s, a->rs2);
->   }
->   
-> @@ -3309,7 +3310,8 @@ GEN_OPIVV_TRANS(vredxor_vs, reduction_check)
->   static bool reduction_widen_check(DisasContext *s, arg_rmrr *a)
->   {
->       return reduction_check(s, a) && (s->sew < MO_64) &&
-> -           ((s->sew + 1) <= (s->cfg_ptr->elen >> 4));
-> +           ((s->sew + 1) <= (s->cfg_ptr->elen >> 4)) &&
-> +           vext_check_input_eew(s, a->rs1, s->sew, a->rs2, s->sew + 1, a->vm);
->   }
->   
->   GEN_OPIVV_WIDEN_TRANS(vwredsum_vs, reduction_widen_check)
 
