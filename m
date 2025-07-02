@@ -4,61 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 233E4C83038
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Jul 2025 00:25:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 699B4C83013
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Jul 2025 07:30:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uWlHh-0005Ll-BN; Tue, 01 Jul 2025 20:25:09 -0400
+	id 1uWrv0-0002Cz-1r; Wed, 02 Jul 2025 03:30:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dg@treblig.org>)
- id 1uWlHb-0005Ji-BK; Tue, 01 Jul 2025 20:25:03 -0400
-Received: from mx.treblig.org ([2a00:1098:5b::1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dg@treblig.org>)
- id 1uWlHY-0005Ev-TG; Tue, 01 Jul 2025 20:25:03 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
- ; s=bytemarkmx;
- h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
- :Subject; bh=o1sevuZZlyZLuAIwYrrExY248AZ+Y4x1dseVvaw2EUY=; b=TGOV5g9vSgKp3PXX
- k2EctZRBwELT++ZLAcc1+xaG1poPJwV3ohiul52lnRseUStm3m3xWex56oKI/4geBHaNd8+bJdyKG
- QJNGaEIva1DM9/SJ1wQOFdnm5StV4nx+ceHEeSd3WMMcpdGilrcuwZNeihSPfe7iVJIvcEWQNXMXI
- U5OMFWiAT63cgLhhMvsUhTUB3PWKtew0SYgyOAruYlETruJ/f53gmSC20zs8TuCOgS72Gpc0lo54y
- euxbryZHOj7CjwAo01VnPPc+4svUfv+DfVZZaVdp3YmYK2TUvlwwoZHlp144AQaaB1d055twyxDWX
- uZJsSY/AGc9tscR80g==;
-Received: from dg by mx.treblig.org with local (Exim 4.96)
- (envelope-from <dg@treblig.org>) id 1uWlHT-00DR1U-1E;
- Wed, 02 Jul 2025 00:24:55 +0000
-Date: Wed, 2 Jul 2025 00:24:55 +0000
-From: "Dr. David Alan Gilbert" <dave@treblig.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- palmer@dabbelt.com, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
-Subject: Re: [PATCH] hmp-cmds-target, target/riscv: add 'info register'
-Message-ID: <aGR8V2DwnIfL0yMI@gallifrey>
-References: <20250630132228.1276838-1-dbarboza@ventanamicro.com>
- <aGMmtqfqh7ZbJzdK@gallifrey>
- <df816967-721f-4d55-8bbf-7bfffb5d508f@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1uWruw-0002Cb-Qp
+ for qemu-riscv@nongnu.org; Wed, 02 Jul 2025 03:30:07 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1uWrup-0007o1-9f
+ for qemu-riscv@nongnu.org; Wed, 02 Jul 2025 03:30:06 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-7490702fc7cso4694711b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 02 Jul 2025 00:29:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1751441396; x=1752046196;
+ darn=nongnu.org; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=o+1kya4exW9pPD1MNqhgnKAyBAUA3fmXeCE+T7pu/Zw=;
+ b=3T//lL2m47/u281B0iqsssG9ZPDPFG4cbqQiUPDT5wzNVIY5luNxHmklmty1Nisas4
+ nvAOcIQITSU+WvDUoL7n4SdwWXR5To62OpM1cegrTSn8EMsSPWU+L1oaEUBX489YAshy
+ eAn2X8TA4B8dl0C6P9lKqHKJuxx3aO+xbgmgrhTxxb5k/pOQhc1uRF1RjrWYf3Pt/KZ7
+ TJL0LvxkmYLCWTP5sQW1oNEqu7bfTX15blH2toOsAzugbbFzDfbEv4AMttzDaGW4yKlI
+ 1Vy91nYpVG4fM41hlrwlROtvHDQC9rj7u6aoSd1mpkxs+0hPeAYwU58N8qQ/P8khd0On
+ G/Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751441396; x=1752046196;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=o+1kya4exW9pPD1MNqhgnKAyBAUA3fmXeCE+T7pu/Zw=;
+ b=ksOBIPuQXDQltZC06gG4uWf6KkqmQEhPc7QIP2VG8csfQrlwz3MgkUIEI1PZiIbe8O
+ 8fnTJ3CSCN1aX+3+nNP4PBB6b8LXaSdXJZOCdSWJuPb1XGfJQRJrGb7995TK82H6cAfU
+ 2/q2e4hEcBFtrjN2X7IJC4z/Iq316cnBcZ+2X/Pjz00beRqrzQlAcLv2+yOQkDcl2Rtt
+ gJwMEI4Nv9Z3jn+8B5IteJ7NxDRgV2vFPcostDWOKP4Hp1j3aPto5xA260CrVz69zOlS
+ D+CL9jVVTMZnHp6P8JHomCbiQzhf/CYyfR8Z5vQaoXZtI4Z2Zxat0ZxA7Gfp/UW2kHQ+
+ Q70w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVBrqJ6tjc2rlNxGwe0ipVuBWHc/lxffVyR8mk5C2ObHyauXKNLAD670SST+YZ9hBf9t6j8yp0m3eHR@nongnu.org
+X-Gm-Message-State: AOJu0YzPVAyKpkFcJwy5pZ29FjnAA5SAbWU5AUyLhD8eEZPgGrg4SXZh
+ 9IMeAZcG1LDmi2ASw+VF9der4Ypuv7/ZvgpUIfcK46iNix5b41zNNvR798vFYwIyGMVabz3w+DG
+ Wblp9
+X-Gm-Gg: ASbGncvLKvtdO168ebqjwo1Vtda053iAJzanbYvuXqGqCcdzfxb0T03g5umLbxWs6Q/
+ qf8/RvjM0MQGkO0jUGYZf0AyOjQzEH/a9qqStObRmwFCbrkLlrcLd88DCqNS/NH0cH0thxC40pU
+ puORJ7usQyvqNXpYcV6MZR6bXaezSTVQx7bx7HMn9KbhdPwPOFvoWLBU4I7RCcCtWs7aDxlo5ZM
+ IAHiL7z8a5ES97c1W5MoY++xRudlo97RCCBNJArvejLFyh+oHia1cM4YrM32L9p6PAS1K6YlyYW
+ vPY4LuEk1AIYd9+vih9oI1Lg6lc1KLpfdmmP6D6mTsGepW0S2au2MyU0P1dRAy1hZuppvBRHt0O
+ Ny0AbTFnPJAAev3zAZtZjlT6wB2tdZdxa5A==
+X-Google-Smtp-Source: AGHT+IEU0tC+FaWGEWPxe6+oTneC0ovTI2YwHKtrKdY6mo+O1NQdyBTrlYmrJkHW3FS0LOTCnSrkUQ==
+X-Received: by 2002:a05:6a20:394a:b0:220:9838:32ca with SMTP id
+ adf61e73a8af0-222d7de5178mr4050095637.14.1751441395911; 
+ Wed, 02 Jul 2025 00:29:55 -0700 (PDT)
+Received: from alexghiti.eu.rivosinc.com (alexghiti.eu.rivosinc.com.
+ [141.95.202.232]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b34e31beab2sm12389878a12.47.2025.07.02.00.29.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Jul 2025 00:29:55 -0700 (PDT)
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+Date: Wed, 02 Jul 2025 07:28:52 +0000
+Subject: [PATCH v2] target: riscv: Add Svrsw60t59b extension support
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <df816967-721f-4d55-8bbf-7bfffb5d508f@ventanamicro.com>
-X-Chocolate: 70 percent or better cocoa solids preferably
-X-Operating-System: Linux/6.1.0-34-amd64 (x86_64)
-X-Uptime: 00:23:32 up 65 days, 8:37, 1 user, load average: 0.00, 0.00, 0.00
-User-Agent: Mutt/2.2.12 (2023-09-09)
-Received-SPF: pass client-ip=2a00:1098:5b::1; envelope-from=dg@treblig.org;
- helo=mx.treblig.org
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250702-dev-alex-svrsw60b59b_v2-v2-1-504ddf0f8530@rivosinc.com>
+X-B4-Tracking: v=1; b=H4sIALPfZGgC/x3MQQqDMBBG4avIrB0IA4nWq5QiSf3VgaIlA1EQ7
+ 97Q5bd47yJDVhgNzUUZRU33rULaht5r3BawTtUkTrwL4nlC4fjByVayHcEl/0hjEY4hdXPvE4K
+ Aav3NmPX8n5+v+/4BirsCjmkAAAA=
+X-Change-ID: 20250625-dev-alex-svrsw60b59b_v2-a6b7f85be62e
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
+ Deepak Gupta <debug@rivosinc.com>, Alexandre Ghiti <alexghiti@rivosinc.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6847;
+ i=alexghiti@rivosinc.com; h=from:subject:message-id;
+ bh=kB+PZ+OBnsQwjKb0LVHflg7ULO3HRw3rKAlcQWd9IBo=;
+ b=owGbwMvMwCGWYr9pz6TW912Mp9WSGDJS7t/guLytd6PMdIMON7sL7Xlet7Zs5XzIfuvNndlzp
+ msf9r6wuaOUhUGMg0FWTJFFwTyhq8X+bP3sP5few8xhZQIZwsDFKQATaeFg+MNbxyKSceLG3j2z
+ lkc2br+bxPNrUzSn5+O8Tx0nUjJmpk1k+Mm4p6teZN3Lwsc923fKhKednrPhUdRypu1Lp9VKrMu
+ cfo4HAA==
+X-Developer-Key: i=alexghiti@rivosinc.com; a=openpgp;
+ fpr=DC049C97114ED82152FE79A783E4BA75438E93E3
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-pf1-x433.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,316 +118,152 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-* Daniel Henrique Barboza (dbarboza@ventanamicro.com) wrote:
-> 
-> 
-> On 6/30/25 9:07 PM, Dr. David Alan Gilbert wrote:
-> > * Daniel Henrique Barboza (dbarboza@ventanamicro.com) wrote:
-> > 
-> > Hi Daniel,
-> > 
-> > > The RISC-V target has *a lot* of CPU registers, with more registers
-> > > being added along the way when new extensions are added. In this world,
-> > > 'info registers' will throw a wall of text that can be annoying to deal
-> > > with when the user wants to verify the value of just a couple of
-> > > registers.
-> > > 
-> > > Add a new 'info register' HMP command that prints a specific register.
-> > > The semantics, and implementation, is similar to what 'info registers'
-> > > already does, i.e. '-a' will print a register for all VCPUs and it's
-> > > possible to print a reg for a specific VCPU.
-> > > 
-> > > A RISC-V implementation is included via riscv_cpu_dump_register().
-> > > 
-> > > Here's an example:
-> > > 
-> > > Welcome to Buildroot
-> > > buildroot login: QEMU 10.0.50 monitor - type 'help' for more information
-> > > (qemu) info register mstatus
-> > > 
-> > > CPU#0
-> > >   mstatus  0000000a000000a0
-> > > (qemu) info register mstatus -a
-> > > 
-> > > CPU#0
-> > >   mstatus  0000000a000000a0
-> > > 
-> > > CPU#1
-> > >   mstatus  0000000a000000a0
-> > > (qemu)
-> > 
-> > OK, that makes some sense; some comments:
-> > 
-> >     a) I'd make that a list of register names so you can print a handful out
-> > for whatever you're debugging.
-> >         info register gpr0,gpr1,pc
-> >     b) (But then you start wondering if having some predefined like 'gprs'
-> > would work)
-> >     c) It turns out there's an old, but limited similar thing called MonitorDef's
-> > where a target can define a list of registers; so you might want to define
-> > target_monitor_defs() OR target_get_monitor_def() for your architecture anyway,
-> > on x86 you can do things like
-> >            p/x $pc
-> >            x/10i $pc
-> >            p/x $eax
-> > 
-> >        It doesn't seem very well maintained in the architectures though; the x86
-> >    one is prehistoric for example.
-> 
-> But it's a cool API to have it seems. If we couple this with 'cpu N' commands we can
-> print registers from multiple CPUs.
-> 
-> Perhaps we still want an 'info registers' or an 'info registers -r reg1,reg2...' to
-> print multiple registers anyway, but I don't see a reason to not support the MonitorDef
-> API in RISC-V too. I'll take a look.
+The Svrsw60t59b extension allows to free the PTE reserved bits 60 and 59
+for software to use.
 
-If you were doing MonitorDef, I think of the two interfaces, target_get_monitor_def
-looks easier to me, but I might be wrong.
+Reviewed-by: Deepak Gupta <debug@rivosinc.com>
+Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+---
+Changes in v2:
+  - Fix riscv32 max config (thanks Daniel!)
+  - Add RB from Deepak
+  - Remove tab usage
+---
+ hw/riscv/riscv-iommu-bits.h       | 1 +
+ hw/riscv/riscv-iommu.c            | 3 ++-
+ target/riscv/cpu.c                | 2 ++
+ target/riscv/cpu_bits.h           | 3 ++-
+ target/riscv/cpu_cfg_fields.h.inc | 1 +
+ target/riscv/cpu_helper.c         | 3 ++-
+ target/riscv/tcg/tcg-cpu.c        | 8 ++++++++
+ 7 files changed, 18 insertions(+), 3 deletions(-)
 
-> >    d) Another way would be to modify info registers to take an optional
-> >       -r register-list
-> > 
-> > Anyway, those are _suggestions_ only.
-> 
-> 
-> I don't mind adding new options in 'info registers' to do what this new API I'm
-> proposing. In fact that was my original idea, and the reason I added a new API was
-> more in a fear of adding too much stuff into it and the potential pushback.
-> 
-> IIUC from the feedbacks we have so far, we could augment 'info registers' as follows:
-> 
-> - add a '-h' option to print the names of all available registers
-> - add a '-r' option followed by a list of registers to be dumped
+diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
+index 1017d73fc6e7368dae9bec7314e68cde707d4bad..47fe01bee58697544104cfe16618307ece236132 100644
+--- a/hw/riscv/riscv-iommu-bits.h
++++ b/hw/riscv/riscv-iommu-bits.h
+@@ -79,6 +79,7 @@ struct riscv_iommu_pq_record {
+ #define RISCV_IOMMU_CAP_SV39            BIT_ULL(9)
+ #define RISCV_IOMMU_CAP_SV48            BIT_ULL(10)
+ #define RISCV_IOMMU_CAP_SV57            BIT_ULL(11)
++#define RISCV_IOMMU_CAP_SVRSW60T59B     BIT_ULL(14)
+ #define RISCV_IOMMU_CAP_SV32X4          BIT_ULL(16)
+ #define RISCV_IOMMU_CAP_SV39X4          BIT_ULL(17)
+ #define RISCV_IOMMU_CAP_SV48X4          BIT_ULL(18)
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index a877e5da84b66e3d1991bb70cc58e80d9d88d0d0..36eda95a1c6e149976c1bd60b9f6b4753682bc0a 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -2355,7 +2355,8 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
+     }
+     if (s->enable_g_stage) {
+         s->cap |= RISCV_IOMMU_CAP_SV32X4 | RISCV_IOMMU_CAP_SV39X4 |
+-                  RISCV_IOMMU_CAP_SV48X4 | RISCV_IOMMU_CAP_SV57X4;
++                  RISCV_IOMMU_CAP_SV48X4 | RISCV_IOMMU_CAP_SV57X4 |
++                  RISCV_IOMMU_CAP_SVRSW60T59B;
+     }
+ 
+     if (s->hpm_cntrs > 0) {
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 629ac37501e585bc772f3004139db363426e1596..13f1f56d9583141d913aec92344148f2e627b491 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -228,6 +228,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+     ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
++    ISA_EXT_DATA_ENTRY(svrsw60t59b, PRIV_VERSION_1_13_0, ext_svrsw60t59b),
+     ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
+     ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
+     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+@@ -1282,6 +1283,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
+     MULTI_EXT_CFG_BOOL("svnapot", ext_svnapot, false),
+     MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
++    MULTI_EXT_CFG_BOOL("svrsw60t59b", ext_svrsw60t59b, false),
+     MULTI_EXT_CFG_BOOL("svvptc", ext_svvptc, true),
+ 
+     MULTI_EXT_CFG_BOOL("zicntr", ext_zicntr, true),
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index a30317c6178111b827dddc15a18c66f2762c43bf..97384dcfa04f55e19c0da7774553fee80f6ebbb4 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -675,7 +675,8 @@ typedef enum {
+ #define PTE_SOFT            0x300 /* Reserved for Software */
+ #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory types */
+ #define PTE_N               0x8000000000000000ULL /* NAPOT translation */
+-#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
++#define PTE_RESERVED(svrsw60t59b)    \
++    (svrsw60t59b ? 0x07C0000000000000ULL : 0x1FC0000000000000ULL) /* Reserved bits */
+ #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
+ 
+ /* Page table PPN shift amount */
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+index 59f134a41924e361e0a5f7ede44214823fd971ba..ab61c1ccf214bdeaea41fbf815909fad24d40124 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -57,6 +57,7 @@ BOOL_FIELD(ext_svadu)
+ BOOL_FIELD(ext_svinval)
+ BOOL_FIELD(ext_svnapot)
+ BOOL_FIELD(ext_svpbmt)
++BOOL_FIELD(ext_svrsw60t59b)
+ BOOL_FIELD(ext_svvptc)
+ BOOL_FIELD(ext_svukte)
+ BOOL_FIELD(ext_zdinx)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 2ed69d7c2d21e59868fea9e9e77d6d36561dfb5f..3479a62cc7f3cedc6c127dc2db8e01919e3a9f15 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1309,6 +1309,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     bool svade = riscv_cpu_cfg(env)->ext_svade;
+     bool svadu = riscv_cpu_cfg(env)->ext_svadu;
+     bool adue = svadu ? env->menvcfg & MENVCFG_ADUE : !svade;
++    bool svrsw60t59b = riscv_cpu_cfg(env)->ext_svrsw60t59b;
+ 
+     if (first_stage && two_stage && env->virt_enabled) {
+         pbmte = pbmte && (env->henvcfg & HENVCFG_PBMTE);
+@@ -1376,7 +1377,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+         if (riscv_cpu_sxl(env) == MXL_RV32) {
+             ppn = pte >> PTE_PPN_SHIFT;
+         } else {
+-            if (pte & PTE_RESERVED) {
++            if (pte & PTE_RESERVED(svrsw60t59b)) {
+                 qemu_log_mask(LOG_GUEST_ERROR, "%s: reserved bits set in PTE: "
+                               "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
+                               __func__, pte_addr, pte);
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 55fd9e5584581b20406a7dc66037d6d88f4cf86d..96201e15c6d409414db68ba976ab944ba1c8f2fd 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -830,6 +830,12 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu->cfg.ext_ssctr = false;
+     }
+ 
++    if (cpu->cfg.ext_svrsw60t59b &&
++        (!cpu->cfg.mmu || mcc->def->misa_mxl_max == MXL_RV32)) {
++        error_setg(errp, "svrsw60t59b is not supported on RV32 and MMU-less platforms");
++        return;
++    }
++
+     /*
+      * Disable isa extensions based on priv spec after we
+      * validated and set everything we need.
+@@ -1606,6 +1612,8 @@ static void riscv_init_max_cpu_extensions(Object *obj)
+ 
+     if (env->misa_mxl != MXL_RV32) {
+         isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zcf), false);
++    } else {
++        isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_svrsw60t59b), false);
+     }
+ 
+     /*
 
-Yeh.
+---
+base-commit: f9a3def17b2a57679902c33064cf7853263db0ef
+change-id: 20250625-dev-alex-svrsw60b59b_v2-a6b7f85be62e
 
-> In parallel I'll take a look in MonitorDef too. Thanks,
-
-Nice.
-
-Dave
-
-> 
-> Daniel
-> 
-> 
-> 
-> 
-> 
-> > 
-> > Dave
-> > 
-> > > The API is introduced as TARGET_RISCV only.
-> > > 
-> > > Cc: Dr. David Alan Gilbert <dave@treblig.org>
-> > > Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-> > > Cc: Philippe Mathieu-Daudé <philmd@linaro.org>
-> > > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> > > ---
-> > >   hmp-commands-info.hx         | 17 +++++++++++++
-> > >   hw/core/cpu-common.c         |  8 ++++++
-> > >   include/hw/core/cpu.h        | 11 +++++++++
-> > >   include/monitor/hmp-target.h |  1 +
-> > >   monitor/hmp-cmds-target.c    | 30 ++++++++++++++++++++++
-> > >   target/riscv/cpu.c           | 48 ++++++++++++++++++++++++++++++++++++
-> > >   6 files changed, 115 insertions(+)
-> > > 
-> > > diff --git a/hmp-commands-info.hx b/hmp-commands-info.hx
-> > > index 639a450ee5..f3561e4a02 100644
-> > > --- a/hmp-commands-info.hx
-> > > +++ b/hmp-commands-info.hx
-> > > @@ -113,6 +113,23 @@ SRST
-> > >       Show the cpu registers.
-> > >   ERST
-> > > +#if defined(TARGET_RISCV)
-> > > +    {
-> > > +        .name       = "register",
-> > > +        .args_type  = "register:s,cpustate_all:-a,vcpu:i?",
-> > > +        .params     = "[register|-a|vcpu]",
-> > > +        .help       = "show a cpu register (-a: show the register value for all cpus;"
-> > > +                      " vcpu: specific vCPU to query; show the current CPU's register if"
-> > > +                      " no vcpu is specified)",
-> > > +        .cmd        = hmp_info_register,
-> > > +    },
-> > > +
-> > > +SRST
-> > > +  ``info register``
-> > > +    Show a cpu register.
-> > > +ERST
-> > > +#endif
-> > > +
-> > >   #if defined(TARGET_I386)
-> > >       {
-> > >           .name       = "lapic",
-> > > diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-> > > index 39e674aca2..9c65ce1537 100644
-> > > --- a/hw/core/cpu-common.c
-> > > +++ b/hw/core/cpu-common.c
-> > > @@ -108,6 +108,14 @@ void cpu_dump_state(CPUState *cpu, FILE *f, int flags)
-> > >       }
-> > >   }
-> > > +void cpu_dump_register(CPUState *cpu, const char *reg, FILE *f)
-> > > +{
-> > > +    if (cpu->cc->dump_register) {
-> > > +        cpu_synchronize_state(cpu);
-> > > +        cpu->cc->dump_register(cpu, reg, f);
-> > > +    }
-> > > +}
-> > > +
-> > >   void cpu_reset(CPUState *cpu)
-> > >   {
-> > >       device_cold_reset(DEVICE(cpu));
-> > > diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> > > index 33296a1c08..b9ddce22bd 100644
-> > > --- a/include/hw/core/cpu.h
-> > > +++ b/include/hw/core/cpu.h
-> > > @@ -160,6 +160,7 @@ struct CPUClass {
-> > >       int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
-> > >                              uint8_t *buf, size_t len, bool is_write);
-> > >       void (*dump_state)(CPUState *cpu, FILE *, int flags);
-> > > +    void (*dump_register)(CPUState *cpu, const char *reg, FILE *);
-> > >       void (*query_cpu_fast)(CPUState *cpu, CpuInfoFast *value);
-> > >       int64_t (*get_arch_id)(CPUState *cpu);
-> > >       void (*set_pc)(CPUState *cpu, vaddr value);
-> > > @@ -693,6 +694,16 @@ enum CPUDumpFlags {
-> > >    */
-> > >   void cpu_dump_state(CPUState *cpu, FILE *f, int flags);
-> > > +/**
-> > > + * cpu_dump_register:
-> > > + * @cpu: The CPU whose register state is to be dumped.
-> > > + * @reg: CPU register name to be dumped.
-> > > + * @f: If non-null, dump to this stream, else to current print sink.
-> > > + *
-> > > + * Dumps CPU register state.
-> > > + */
-> > > +void cpu_dump_register(CPUState *cpu, const char *reg, FILE *f);
-> > > +
-> > >   /**
-> > >    * cpu_get_phys_page_attrs_debug:
-> > >    * @cpu: The CPU to obtain the physical page address for.
-> > > diff --git a/include/monitor/hmp-target.h b/include/monitor/hmp-target.h
-> > > index b679aaebbf..da9d690f89 100644
-> > > --- a/include/monitor/hmp-target.h
-> > > +++ b/include/monitor/hmp-target.h
-> > > @@ -57,6 +57,7 @@ void hmp_info_via(Monitor *mon, const QDict *qdict);
-> > >   void hmp_memory_dump(Monitor *mon, const QDict *qdict);
-> > >   void hmp_physical_memory_dump(Monitor *mon, const QDict *qdict);
-> > >   void hmp_info_registers(Monitor *mon, const QDict *qdict);
-> > > +void hmp_info_register(Monitor *mon, const QDict *qdict);
-> > >   void hmp_gva2gpa(Monitor *mon, const QDict *qdict);
-> > >   void hmp_gpa2hva(Monitor *mon, const QDict *qdict);
-> > >   void hmp_gpa2hpa(Monitor *mon, const QDict *qdict);
-> > > diff --git a/monitor/hmp-cmds-target.c b/monitor/hmp-cmds-target.c
-> > > index 8eaf70d9c9..43f509aa60 100644
-> > > --- a/monitor/hmp-cmds-target.c
-> > > +++ b/monitor/hmp-cmds-target.c
-> > > @@ -121,6 +121,36 @@ void hmp_info_registers(Monitor *mon, const QDict *qdict)
-> > >       }
-> > >   }
-> > > +/*
-> > > + * Based on hmp_info_registers().
-> > > + */
-> > > +void hmp_info_register(Monitor *mon, const QDict *qdict)
-> > > +{
-> > > +    const char *reg = qdict_get_try_str(qdict, "register");
-> > > +    bool all_cpus = qdict_get_try_bool(qdict, "cpustate_all", false);
-> > > +    int vcpu = qdict_get_try_int(qdict, "vcpu", -1);
-> > > +    CPUState *cs;
-> > > +
-> > > +    if (all_cpus) {
-> > > +        CPU_FOREACH(cs) {
-> > > +            cpu_dump_register(cs, reg, NULL);
-> > > +        }
-> > > +    } else {
-> > > +        cs = vcpu >= 0 ? qemu_get_cpu(vcpu) : mon_get_cpu(mon);
-> > > +
-> > > +        if (!cs) {
-> > > +            if (vcpu >= 0) {
-> > > +                monitor_printf(mon, "CPU#%d not available\n", vcpu);
-> > > +            } else {
-> > > +                monitor_printf(mon, "No CPU available\n");
-> > > +            }
-> > > +            return;
-> > > +        }
-> > > +
-> > > +        cpu_dump_register(cs, reg, NULL);
-> > > +    }
-> > > +}
-> > > +
-> > >   static void memory_dump(Monitor *mon, int count, int format, int wsize,
-> > >                           hwaddr addr, int is_physical)
-> > >   {
-> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > index e3f8ecef68..8b3edf7b23 100644
-> > > --- a/target/riscv/cpu.c
-> > > +++ b/target/riscv/cpu.c
-> > > @@ -640,6 +640,53 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-> > >       }
-> > >   }
-> > > +static void riscv_cpu_dump_register(CPUState *cs, const char *reg, FILE *f)
-> > > +{
-> > > +    RISCVCPU *cpu = RISCV_CPU(cs);
-> > > +    CPURISCVState *env = &cpu->env;
-> > > +    bool match_found = false;
-> > > +    int i;
-> > > +
-> > > +    for (i = 0; i < ARRAY_SIZE(csr_ops); i++) {
-> > > +        RISCVException res;
-> > > +        target_ulong val = 0;
-> > > +        int csrno = i;
-> > > +
-> > > +        /*
-> > > +         * Early skip when possible since we're going
-> > > +         * through a lot of NULL entries.
-> > > +         */
-> > > +        if (csr_ops[csrno].predicate == NULL) {
-> > > +            continue;
-> > > +        }
-> > > +
-> > > +        /*
-> > > +         * We're doing partial register name matching,
-> > > +         * e.g. 'mhpm' will match all registers that
-> > > +         * starts with 'mhpm'.
-> > > +         */
-> > > +        if (strncasecmp(csr_ops[csrno].name, reg, strlen(reg)) != 0) {
-> > > +            continue;
-> > > +        }
-> > > +
-> > > +        res = riscv_csrrw_debug(env, csrno, &val, 0, 0);
-> > > +
-> > > +        /*
-> > > +         * Rely on the smode, hmode, etc, predicates within csr.c
-> > > +         * to do the filtering of the registers that are present.
-> > > +         */
-> > > +        if (res == RISCV_EXCP_NONE) {
-> > > +            if (!match_found) {
-> > > +                match_found = true;
-> > > +                qemu_fprintf(f, "\nCPU#%d\n", cs->cpu_index);
-> > > +            }
-> > > +
-> > > +            qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n",
-> > > +                         csr_ops[csrno].name, val);
-> > > +        }
-> > > +    }
-> > > +}
-> > > +
-> > >   static void riscv_cpu_set_pc(CPUState *cs, vaddr value)
-> > >   {
-> > >       RISCVCPU *cpu = RISCV_CPU(cs);
-> > > @@ -2690,6 +2737,7 @@ static void riscv_cpu_common_class_init(ObjectClass *c, const void *data)
-> > >       cc->class_by_name = riscv_cpu_class_by_name;
-> > >       cc->dump_state = riscv_cpu_dump_state;
-> > > +    cc->dump_register = riscv_cpu_dump_register;
-> > >       cc->set_pc = riscv_cpu_set_pc;
-> > >       cc->get_pc = riscv_cpu_get_pc;
-> > >       cc->gdb_read_register = riscv_cpu_gdb_read_register;
-> > > -- 
-> > > 2.49.0
-> > > 
-> 
+Best regards,
 -- 
- -----Open up your eyes, open up your mind, open up your code -------   
-/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
-\        dave @ treblig.org |                               | In Hex /
- \ _________________________|_____ http://www.treblig.org   |_______/
+Alexandre Ghiti <alexghiti@rivosinc.com>
+
 
