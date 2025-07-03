@@ -4,87 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09D79C83030
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Jul 2025 13:08:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B859C83030
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Jul 2025 20:22:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uXJfw-0003S0-EM; Thu, 03 Jul 2025 09:08:28 -0400
+	id 1uXQRt-0005LL-Ie; Thu, 03 Jul 2025 16:22:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uXJfv-0003RV-0q
- for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 09:08:27 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uXJfs-0008PK-RD
- for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 09:08:26 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-23aeac7d77aso51570305ad.3
- for <qemu-riscv@nongnu.org>; Thu, 03 Jul 2025 06:08:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1751548103; x=1752152903; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=c7q84lOxk7cn1+c3FhfPl7tYc+qnJ6dVDhuJq7mfJR0=;
- b=CX0Rz2zGjTamq7uP4POyB4EoMZF1wHOWYObulR3o6MO4n6vHHwZOI85//Kz9/8lqNM
- p64chazOoeznuqJhqx9vxCayzl6O6UsagNCoI5gQ2lBKle3JcyLuIP2fm65men+JH6By
- VNdXWY4D84NYxh0Z7ih9ULLMLiFQMyJL8M8MzIMHbnuttGY8k+usE4KaHHW9175fDgpF
- ypgdp6tj9Nz4Lzs/Ny7Gw2pKcSBaUUCEAa8M/GK1dclBF8faBoR6V4XbYQWNINCbIb+l
- QbFEWHh423TOzFPT0XOIZcY4AM+yWWhPbrDfksS2YqSMwZXPnK/6tJnQa8T9koS0P9+0
- wyYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751548103; x=1752152903;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c7q84lOxk7cn1+c3FhfPl7tYc+qnJ6dVDhuJq7mfJR0=;
- b=q1fjKzR1dpzXhMgKjPzyaY/y/qHflwRc7G35nceht51SfIbtKHgBIjNYZjeGxlKrdG
- xY4En8wLu+X9C0a3nrEkW31i5LdwvEi+g24t5vFYJwEOkKHENXQK6DgaGbjTDCTwI1gR
- BgLs3dypZaDQwTBjgZVVRcN9vgB10WzFyxir7JiWKn2mfY3GeEHE3LzjrjmxO/VuxiVW
- UG6Yzqr74SZoFf+nP8jV/dVcYtzOcaA6jGPuL8AeWIqPZ/6VmMzoAqMvk4aJe4AcVyA+
- SEwI92Qf78KUpIyx09PZWufO4VhQs7eGYbH0TvrrxmntesuXgc+HK+mYfYlvU7B8yjU/
- ErKg==
-X-Gm-Message-State: AOJu0YwBEBDlTuI32Y7Gd8imNzO+nNv1iVhr2QbUk5WCV1XULl6bww5w
- iwkbaf7s9EmGeI/0tln0bieJIGjvBgcPrfUtWJfAvEpNLftdaGWVB2sdw0ejo4gbcTY=
-X-Gm-Gg: ASbGnctCHsag43qQ6/HrvH2pfJYy3EwhOJdW6rLRwmjcHh0khIgbpw0oVBcg23XIZnA
- IkdelcJqhSh90gzbeiHvmyoqj1Lp/EpFMyqGFHC5DLRpGPfYk2/ewAtNQGAQW/1ofow9QoChn2b
- iimo3eqzN0eRcYvM9Y/ob/YI7djnBCTyBYxgvI11xRvwtnhLLQmno73ASdyTDdvF6EozSbfUVs1
- cY6seZyTdPbXziXzMvyNjjTDJ16BkSba8EHGOUIHbU6mep0yEH+IP4XeZv/L/v8fweLpxiDnUei
- NurCVuOs/6cqhlRCqdh4xuNyq3rkZQq0bJYdHs9LZ7MAyL0HdbVa6aY8MQFWl0ztSeEGAhiyrBm
- 3Ew/Z9ViT1tqlRes=
-X-Google-Smtp-Source: AGHT+IGzrM7tqUbYUKaz6A/Vj3kRVE7sV9ivu52U5awECN8dAh6SRKgvoV3kt9SgZImlg50wFMMk6Q==
-X-Received: by 2002:a17:902:f542:b0:231:e331:b7df with SMTP id
- d9443c01a7336-23c7a271f2emr36073225ad.29.1751548102548; 
- Thu, 03 Jul 2025 06:08:22 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([189.110.107.157])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23acb3c7041sm159483145ad.229.2025.07.03.06.08.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Jul 2025 06:08:21 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- "Dr. David Alan Gilbert" <dave@treblig.org>
-Subject: [PATCH] target/riscv: implement MonitorDef HMP API
-Date: Thu,  3 Jul 2025 10:08:15 -0300
-Message-ID: <20250703130815.1592493-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.49.0
+ (Exim 4.90_1) (envelope-from <charmitro@posteo.net>)
+ id 1uXObI-0003ms-K7
+ for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 14:24:00 -0400
+Received: from mout01.posteo.de ([185.67.36.65])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <charmitro@posteo.net>)
+ id 1uXObD-0007mh-B4
+ for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 14:24:00 -0400
+Received: from submission (posteo.de [185.67.36.169]) 
+ by mout01.posteo.de (Postfix) with ESMTPS id 96DB224002A
+ for <qemu-riscv@nongnu.org>; Thu,  3 Jul 2025 20:23:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=posteo.net;
+ s=1984.ea087b; t=1751567030;
+ bh=aONxnhG2/4C5CRB6gZRLVbyh3cNluMhiy15RdumhPlM=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:
+ Content-Transfer-Encoding:From;
+ b=iizuKDkDGjGE6OCBfRVLREmzVrM/1vk+yyLSgcUj+NIThiC13dGTAMBakeheHugn+
+ J4haCs+ajFxyWmUlb4v4ec8tQI21PUmptOsYQXqHzrK5wf5AWITjOd13a8LFcsD8aq
+ ydMbG6h0BjOzDuPP0ErshwI1QqdgeveydMXJSB/87+mnFxy1dQQzwog+yM3yJrnBhy
+ mNd8xmMQ0V0W+m3qBGk66d0xf2FPHrbPHsXw5oC94WDAEx4NzpvOy5ObQBan2c2H1k
+ QulnSnmuR8qAEBXGFow4pbqbYHYQosubdYqQUlxcz1HdyQo4c+ur6YORKBFGVXzPoT
+ xaaS/dablze4SOPqhSqTQ8Gjj5WeCRLfOdtV5VSmr1mGYdILh9UbvUyzu1ELu8NmKm
+ onhko2pCJ4uxU5yeXpPTtmz8TsD+Cr/R4xdRgGRe1gb9Mt9aM3pYmdW9gAzYOqC7Em
+ QceOJXW32ikBf3sym58yWTywK9Q0NvpSEN34cjWKJKUVXuxtU8l
+Received: from customer (localhost [127.0.0.1])
+ by submission (posteo.de) with ESMTPSA id 4bY4sK372fz6v0M;
+ Thu,  3 Jul 2025 20:23:49 +0200 (CEST)
+From: Charalampos Mitrodimas <charmitro@posteo.net>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ Charalampos Mitrodimas <charmitro@posteo.net>
+Subject: [PATCH 2/2] tests/tcg/riscv64: Add test for MEPC bit masking
+Date: Thu,  3 Jul 2025 18:21:44 +0000
+Message-ID: <20250703182157.281320-3-charmitro@posteo.net>
+In-Reply-To: <20250703182157.281320-1-charmitro@posteo.net>
+References: <20250703182157.281320-1-charmitro@posteo.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=185.67.36.65; envelope-from=charmitro@posteo.net;
+ helo=mout01.posteo.de
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.237, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 03 Jul 2025 16:22:23 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,233 +78,119 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The MonitorDef API is related to two HMP monitor commands: 'p' and 'x':
+Add a regression test to verify that MEPC properly masks the lower
+bits when an address with mode bits is written to it, as required by
+the RISC-V Privileged Architecture specification.
 
-(qemu) help p
-print|p /fmt expr -- print expression value (use $reg for CPU register access)
-(qemu) help x
-x /fmt addr -- virtual memory dump starting at 'addr'
+The test sets STVEC to an address with bit 0 set (vectored mode),
+triggers an illegal instruction exception, copies STVEC to MEPC in the
+trap handler, and verifies that MEPC masks bits [1:0] correctly for
+IALIGN=32.
 
-For x86, one of the few targets that implements it, it is possible to
-print the PC register value with $pc and use the PC value in the 'x'
-command as well.
+Without the fix, MEPC retains the mode bits (returns non-zero/FAIL).
+With the fix, MEPC clears bits [1:0] (returns 0/PASS).
 
-Those 2 commands are hooked into get_monitor_def(), called by
-exp_unary() in hmp.c. The function tries to fetch a reg value in two
-ways: by reading them directly via a target_monitor_defs array or using
-a target_get_monitor_def() helper. In RISC-V we have *A LOT* of
-registers and this number will keep getting bigger, so we're opting out
-of an array declaration.
-
-We're able to retrieve all regs but vregs because the API only fits an
-uint64_t and vregs have 'vlen' size that are bigger than that.
-
-With this patch we can do things such as:
-
-- print CSRs and use their val in expressions:
-(qemu) p $mstatus
-0xa000000a0
-(qemu) p $mstatus & 0xFF
-0xa0
-
-- dump the next 10 insn from virtual memory starting at x1 (ra):
-
-(qemu) x/10i $ra
-0xffffffff80958aea:  a9bff0ef          jal                     ra,-1382                # 0xffffffff80958584
-0xffffffff80958aee:  10016073          csrrsi                  zero,sstatus,2
-0xffffffff80958af2:  60a2              ld                      ra,8(sp)
-0xffffffff80958af4:  6402              ld                      s0,0(sp)
-0xffffffff80958af6:  0141              addi                    sp,sp,16
-0xffffffff80958af8:  8082              ret
-0xffffffff80958afa:  10016073          csrrsi                  zero,sstatus,2
-0xffffffff80958afe:  8082              ret
-0xffffffff80958b00:  1141              addi                    sp,sp,-16
-0xffffffff80958b02:  e422              sd                      s0,8(sp)
-(qemu)
-
-Suggested-by: Dr. David Alan Gilbert <dave@treblig.org>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Signed-off-by: Charalampos Mitrodimas <charmitro@posteo.net>
 ---
- target/riscv/cpu.h            |   1 +
- target/riscv/riscv-qmp-cmds.c | 148 ++++++++++++++++++++++++++++++++++
- 2 files changed, 149 insertions(+)
+ tests/tcg/riscv64/Makefile.softmmu-target |  4 ++
+ tests/tcg/riscv64/test-mepc-masking.S     | 73 +++++++++++++++++++++++
+ 2 files changed, 77 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-mepc-masking.S
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 229ade9ed9..487884c42c 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -576,6 +576,7 @@ static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
- extern const char * const riscv_int_regnames[];
- extern const char * const riscv_int_regnamesh[];
- extern const char * const riscv_fpr_regnames[];
-+extern const char * const riscv_rvv_regnames[];
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 7c1d44d3f4..3ca595335d 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -20,5 +20,9 @@ EXTRA_RUNS += run-issue1060
+ run-issue1060: issue1060
+ 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
  
- const char *riscv_cpu_get_trap_name(target_ulong cause, bool async);
- int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
-index 8ba8aa0d5f..2c8c74bbe4 100644
---- a/target/riscv/riscv-qmp-cmds.c
-+++ b/target/riscv/riscv-qmp-cmds.c
-@@ -31,6 +31,10 @@
- #include "qapi/qobject-input-visitor.h"
- #include "qapi/visitor.h"
- #include "qom/qom-qobject.h"
-+#include "qemu/ctype.h"
-+#include "qemu/qemu-print.h"
-+#include "monitor/hmp.h"
-+#include "monitor/hmp-target.h"
- #include "system/kvm.h"
- #include "system/tcg.h"
- #include "cpu-qom.h"
-@@ -240,3 +244,147 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
- 
-     return expansion_info;
- }
++EXTRA_RUNS += run-test-mepc-masking
++run-test-mepc-masking: test-mepc-masking
++	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
 +
+ # We don't currently support the multiarch system tests
+ undefine MULTIARCH_TESTS
+diff --git a/tests/tcg/riscv64/test-mepc-masking.S b/tests/tcg/riscv64/test-mepc-masking.S
+new file mode 100644
+index 0000000000..fccd2a7ac4
+--- /dev/null
++++ b/tests/tcg/riscv64/test-mepc-masking.S
+@@ -0,0 +1,73 @@
 +/*
-+ * We have way too many potential CSRs and regs being added
-+ * regularly to register them in a static array.
++ * Test for MEPC masking bug fix
 + *
-+ * Declare an empty array instead, making get_monitor_def() use
-+ * the target_get_monitor_def() API directly.
++ * This test verifies that MEPC properly masks the lower bits according
++ * to the RISC-V specification when vectored mode bits from STVEC are
++ * written to MEPC.
 + */
-+const MonitorDef monitor_defs[] = { { } };
-+const MonitorDef *target_monitor_defs(void)
-+{
-+    return monitor_defs;
-+}
 +
-+static bool reg_is_ulong_integer(CPURISCVState *env, const char *name,
-+                                 target_ulong *val, bool is_gprh)
-+{
-+    const char * const *reg_names;
-+    target_ulong *vals;
++	.option	norvc
 +
-+    if (is_gprh) {
-+        reg_names = riscv_int_regnamesh;
-+        vals = env->gprh;
-+    } else {
-+        reg_names = riscv_int_regnames;
-+        vals = env->gpr;
-+    }
++	.text
++	.global _start
++_start:
++	/* Set up machine trap vector */
++	lla	t0, machine_trap_handler
++	csrw	mtvec, t0
 +
-+    for (int i = 0; i < 32; i++) {
-+        g_autofree char *reg_name = g_strdup(reg_names[i]);
-+        char *reg1 = strtok(reg_name, "/");
-+        char *reg2 = strtok(NULL, "/");
++	/* Set STVEC with vectored mode (mode bits = 01) */
++	li	t0, 0x80004001
++	csrw	stvec, t0
 +
-+        if (strcasecmp(reg1, name) == 0 ||
-+            (reg2 && strcasecmp(reg2, name) == 0)) {
-+            *val = vals[i];
-+            return true;
-+        }
-+    }
++	/* Clear medeleg to handle exceptions in M-mode */
++	csrw	medeleg, zero
 +
-+    return false;
-+}
++	/* Trigger illegal instruction exception */
++	.word	0xffffffff
 +
-+static bool reg_is_u64_fpu(CPURISCVState *env, const char *name, uint64_t *val)
-+{
-+    if (qemu_tolower(name[0]) != 'f') {
-+        return false;
-+    }
++test_completed:
++	/* Exit with result in a0 */
++	/* a0 = 0: success (bits [1:0] were masked) */
++	/* a0 != 0: failure (some bits were not masked) */
++	j	_exit
 +
-+    for (int i = 0; i < 32; i++) {
-+        g_autofree char *reg_name = g_strdup(riscv_fpr_regnames[i]);
-+        char *reg1 = strtok(reg_name, "/");
-+        char *reg2 = strtok(NULL, "/");
++machine_trap_handler:
++	/* Check if illegal instruction (mcause = 2) */
++	csrr	t0, mcause
++	li	t1, 2
++	bne	t0, t1, skip_test
 +
-+        if (strcasecmp(reg1, name) == 0 ||
-+            (reg2 && strcasecmp(reg2, name) == 0)) {
-+            *val = env->fpr[i];
-+            return true;
-+        }
-+    }
++	/* Test: Copy STVEC (with mode bits) to MEPC */
++	csrr	t0, stvec	/* t0 = 0x80004001 */
++	csrw	mepc, t0	/* Write to MEPC */
++	csrr	t1, mepc	/* Read back MEPC */
 +
-+    return false;
-+}
++	/* Check if bits [1:0] are masked (IALIGN=32 without RVC) */
++	andi	a0, t1, 3	/* a0 = 0 if both bits masked correctly */
 +
-+static bool reg_is_vreg(const char *name)
-+{
-+    if (qemu_tolower(name[0]) != 'v' || strlen(name) > 3) {
-+        return false;
-+    }
++	/* Set correct return address */
++	lla	t0, test_completed
++	csrw	mepc, t0
 +
-+    for (int i = 0; i < 32; i++) {
-+        if (strcasecmp(name, riscv_rvv_regnames[i]) == 0) {
-+            return true;
-+        }
-+    }
++skip_test:
++	mret
 +
-+    return false;
-+}
++/* Exit with semihosting */
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
 +
-+int target_get_monitor_def(CPUState *cs, const char *name, uint64_t *pval)
-+{
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
-+    target_ulong val = 0;
-+    uint64_t val64 = 0;
-+    int i;
++	/* Semihosting call sequence */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
 +
-+    if (reg_is_ulong_integer(env, name, &val, false) ||
-+        reg_is_ulong_integer(env, name, &val, true)) {
-+        *pval = val;
-+        return 0;
-+    }
-+
-+    if (reg_is_u64_fpu(env, name, &val64)) {
-+        *pval = val64;
-+        return 0;
-+    }
-+
-+    if (reg_is_vreg(name)) {
-+        if (!riscv_has_ext(env, RVV)) {
-+            return -EINVAL;
-+        }
-+
-+        qemu_printf("Unable to print the value of vector "
-+                    "vreg '%s' from this API\n", name);
-+
-+        /*
-+         * We're returning 0 because returning -EINVAL triggers
-+         * an 'unknown register' message in exp_unary() later,
-+         * which feels ankward after our own error message.
-+         */
-+        *pval = 0;
-+        return 0;
-+    }
-+
-+    for (i = 0; i < ARRAY_SIZE(csr_ops); i++) {
-+        RISCVException res;
-+        int csrno = i;
-+
-+        /*
-+         * Early skip when possible since we're going
-+         * through a lot of NULL entries.
-+         */
-+        if (csr_ops[csrno].predicate == NULL) {
-+            continue;
-+        }
-+
-+        if (strcasecmp(csr_ops[csrno].name, name) != 0) {
-+            continue;
-+        }
-+
-+        res = riscv_csrrw_debug(env, csrno, &val, 0, 0);
-+
-+        /*
-+         * Rely on the smode, hmode, etc, predicates within csr.c
-+         * to do the filtering of the registers that are present.
-+         */
-+        if (res == RISCV_EXCP_NONE) {
-+            *pval = val;
-+            return 0;
-+        }
-+    }
-+
-+    return -EINVAL;
-+}
++	.data
++	.balign	8
++semiargs:
++	.space	16
 -- 
-2.49.0
+2.47.2
 
 
