@@ -4,62 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B859C83030
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Jul 2025 20:22:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D71BC83F03
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Jul 2025 20:22:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uXQRt-0005LL-Ie; Thu, 03 Jul 2025 16:22:25 -0400
+	id 1uXQRv-0005Oc-Im; Thu, 03 Jul 2025 16:22:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <charmitro@posteo.net>)
- id 1uXObI-0003ms-K7
+ id 1uXObG-0003mU-TY
  for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 14:24:00 -0400
 Received: from mout01.posteo.de ([185.67.36.65])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <charmitro@posteo.net>)
- id 1uXObD-0007mh-B4
- for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 14:24:00 -0400
+ id 1uXObD-0007mD-3U
+ for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 14:23:58 -0400
 Received: from submission (posteo.de [185.67.36.169]) 
- by mout01.posteo.de (Postfix) with ESMTPS id 96DB224002A
- for <qemu-riscv@nongnu.org>; Thu,  3 Jul 2025 20:23:50 +0200 (CEST)
+ by mout01.posteo.de (Postfix) with ESMTPS id B5DCF240028
+ for <qemu-riscv@nongnu.org>; Thu,  3 Jul 2025 20:23:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=posteo.net;
- s=1984.ea087b; t=1751567030;
- bh=aONxnhG2/4C5CRB6gZRLVbyh3cNluMhiy15RdumhPlM=;
+ s=1984.ea087b; t=1751567028;
+ bh=UUOaQIyt7794NUXeIiWvZBsaq8OcvNwQqqrdLwN4TRo=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:
  Content-Transfer-Encoding:From;
- b=iizuKDkDGjGE6OCBfRVLREmzVrM/1vk+yyLSgcUj+NIThiC13dGTAMBakeheHugn+
- J4haCs+ajFxyWmUlb4v4ec8tQI21PUmptOsYQXqHzrK5wf5AWITjOd13a8LFcsD8aq
- ydMbG6h0BjOzDuPP0ErshwI1QqdgeveydMXJSB/87+mnFxy1dQQzwog+yM3yJrnBhy
- mNd8xmMQ0V0W+m3qBGk66d0xf2FPHrbPHsXw5oC94WDAEx4NzpvOy5ObQBan2c2H1k
- QulnSnmuR8qAEBXGFow4pbqbYHYQosubdYqQUlxcz1HdyQo4c+ur6YORKBFGVXzPoT
- xaaS/dablze4SOPqhSqTQ8Gjj5WeCRLfOdtV5VSmr1mGYdILh9UbvUyzu1ELu8NmKm
- onhko2pCJ4uxU5yeXpPTtmz8TsD+Cr/R4xdRgGRe1gb9Mt9aM3pYmdW9gAzYOqC7Em
- QceOJXW32ikBf3sym58yWTywK9Q0NvpSEN34cjWKJKUVXuxtU8l
+ b=YyqRKa6n5QdH633djdT1lCHRfnt32VTntfLRQcGfVcYEy5T21FGbVbdlUDofJPnZC
+ OmS8TTnWQ9L81F3zfPU+edFAlTtA3PDgj1j3ScjT7LOSSuny8tjQlrXkfRniXigWX4
+ YyBwz9KjsNJfMM94eFudnPpPmEDGCRceQE+Sb0Ql3KF9ERJ2I5A2CkGtc4w2/FpJrS
+ 8VmzGwlQkV8HsQJ51CtsvGlS4nkvzjU3oKCcpxfkOjvDjrB+8pm5nFBoLNisyvmtMr
+ hKIK46uzAXESJCY5TZXcbHKGoUoVGbtHLLxwB38aQvRZlLZ3CJCvPcFwOTupRSA7xU
+ HAPE91R39bgSBIu1IyJIoJXXIqve46m4hxYozw84G1hzVQy+l02sxjwhy+ZLmcaPGx
+ H75cz/A1Fh0dhcUwZDbGrBkrgI+3jkVQfQY/tkRuoOFP3iQPjIC14zPtNt/gUB+bET
+ XNIbfw5lqUzk5U2Eu/9lz3j4gtoJYhuxP7XsVFIi9Sz1AXQesb8
 Received: from customer (localhost [127.0.0.1])
- by submission (posteo.de) with ESMTPSA id 4bY4sK372fz6v0M;
- Thu,  3 Jul 2025 20:23:49 +0200 (CEST)
+ by submission (posteo.de) with ESMTPSA id 4bY4sH1DnXz6tvZ;
+ Thu,  3 Jul 2025 20:23:46 +0200 (CEST)
 From: Charalampos Mitrodimas <charmitro@posteo.net>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  Charalampos Mitrodimas <charmitro@posteo.net>
-Subject: [PATCH 2/2] tests/tcg/riscv64: Add test for MEPC bit masking
-Date: Thu,  3 Jul 2025 18:21:44 +0000
-Message-ID: <20250703182157.281320-3-charmitro@posteo.net>
-In-Reply-To: <20250703182157.281320-1-charmitro@posteo.net>
-References: <20250703182157.281320-1-charmitro@posteo.net>
+Subject: [PATCH 0/2] target/riscv: Fix MEPC/SEPC bit masking
+Date: Thu,  3 Jul 2025 18:21:42 +0000
+Message-ID: <20250703182157.281320-1-charmitro@posteo.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=185.67.36.65; envelope-from=charmitro@posteo.net;
  helo=mout01.posteo.de
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.237, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
  SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,118 +76,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a regression test to verify that MEPC properly masks the lower
-bits when an address with mode bits is written to it, as required by
-the RISC-V Privileged Architecture specification.
+This patch series fixes incorrect behavior in MEPC/SEPC CSRs where the
+lower bits were not properly masked according to the RISC-V specification.
 
-The test sets STVEC to an address with bit 0 set (vectored mode),
-triggers an illegal instruction exception, copies STVEC to MEPC in the
-trap handler, and verifies that MEPC masks bits [1:0] correctly for
-IALIGN=32.
+The issue was discovered when vectored mode bits from STVEC were
+written to MEPC and not properly cleared, causing incorrect behavior
+on MRET.
 
-Without the fix, MEPC retains the mode bits (returns non-zero/FAIL).
-With the fix, MEPC clears bits [1:0] (returns 0/PASS).
+Charalampos Mitrodimas (2):
+  target/riscv: Fix MEPC/SEPC bit masking for IALIGN
+  tests/tcg/riscv64: Add test for MEPC bit masking
 
-Signed-off-by: Charalampos Mitrodimas <charmitro@posteo.net>
----
+ target/riscv/csr.c                        |  8 +--
+ target/riscv/internals.h                  | 11 ++++
+ target/riscv/op_helper.c                  |  4 +-
  tests/tcg/riscv64/Makefile.softmmu-target |  4 ++
  tests/tcg/riscv64/test-mepc-masking.S     | 73 +++++++++++++++++++++++
- 2 files changed, 77 insertions(+)
+ 5 files changed, 94 insertions(+), 6 deletions(-)
  create mode 100644 tests/tcg/riscv64/test-mepc-masking.S
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 7c1d44d3f4..3ca595335d 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -20,5 +20,9 @@ EXTRA_RUNS += run-issue1060
- run-issue1060: issue1060
- 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
- 
-+EXTRA_RUNS += run-test-mepc-masking
-+run-test-mepc-masking: test-mepc-masking
-+	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
-+
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/test-mepc-masking.S b/tests/tcg/riscv64/test-mepc-masking.S
-new file mode 100644
-index 0000000000..fccd2a7ac4
---- /dev/null
-+++ b/tests/tcg/riscv64/test-mepc-masking.S
-@@ -0,0 +1,73 @@
-+/*
-+ * Test for MEPC masking bug fix
-+ *
-+ * This test verifies that MEPC properly masks the lower bits according
-+ * to the RISC-V specification when vectored mode bits from STVEC are
-+ * written to MEPC.
-+ */
-+
-+	.option	norvc
-+
-+	.text
-+	.global _start
-+_start:
-+	/* Set up machine trap vector */
-+	lla	t0, machine_trap_handler
-+	csrw	mtvec, t0
-+
-+	/* Set STVEC with vectored mode (mode bits = 01) */
-+	li	t0, 0x80004001
-+	csrw	stvec, t0
-+
-+	/* Clear medeleg to handle exceptions in M-mode */
-+	csrw	medeleg, zero
-+
-+	/* Trigger illegal instruction exception */
-+	.word	0xffffffff
-+
-+test_completed:
-+	/* Exit with result in a0 */
-+	/* a0 = 0: success (bits [1:0] were masked) */
-+	/* a0 != 0: failure (some bits were not masked) */
-+	j	_exit
-+
-+machine_trap_handler:
-+	/* Check if illegal instruction (mcause = 2) */
-+	csrr	t0, mcause
-+	li	t1, 2
-+	bne	t0, t1, skip_test
-+
-+	/* Test: Copy STVEC (with mode bits) to MEPC */
-+	csrr	t0, stvec	/* t0 = 0x80004001 */
-+	csrw	mepc, t0	/* Write to MEPC */
-+	csrr	t1, mepc	/* Read back MEPC */
-+
-+	/* Check if bits [1:0] are masked (IALIGN=32 without RVC) */
-+	andi	a0, t1, 3	/* a0 = 0 if both bits masked correctly */
-+
-+	/* Set correct return address */
-+	lla	t0, test_completed
-+	csrw	mepc, t0
-+
-+skip_test:
-+	mret
-+
-+/* Exit with semihosting */
-+_exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
-+
-+	/* Semihosting call sequence */
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	8
-+semiargs:
-+	.space	16
 -- 
 2.47.2
 
