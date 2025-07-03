@@ -4,54 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D71BC83F03
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Jul 2025 20:22:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F5D4C83030
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Jul 2025 20:22:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uXQRv-0005Oc-Im; Thu, 03 Jul 2025 16:22:27 -0400
+	id 1uXQRv-0005O9-3F; Thu, 03 Jul 2025 16:22:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <charmitro@posteo.net>)
- id 1uXObG-0003mU-TY
- for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 14:24:00 -0400
-Received: from mout01.posteo.de ([185.67.36.65])
+ id 1uXObG-0003mV-Ti
+ for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 14:23:59 -0400
+Received: from mout02.posteo.de ([185.67.36.66])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <charmitro@posteo.net>)
- id 1uXObD-0007mD-3U
+ id 1uXObD-0007mN-2p
  for qemu-riscv@nongnu.org; Thu, 03 Jul 2025 14:23:58 -0400
 Received: from submission (posteo.de [185.67.36.169]) 
- by mout01.posteo.de (Postfix) with ESMTPS id B5DCF240028
- for <qemu-riscv@nongnu.org>; Thu,  3 Jul 2025 20:23:48 +0200 (CEST)
+ by mout02.posteo.de (Postfix) with ESMTPS id AC414240104
+ for <qemu-riscv@nongnu.org>; Thu,  3 Jul 2025 20:23:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=posteo.net;
- s=1984.ea087b; t=1751567028;
- bh=UUOaQIyt7794NUXeIiWvZBsaq8OcvNwQqqrdLwN4TRo=;
+ s=1984.ea087b; t=1751567029;
+ bh=tZpaJVHAkliJPZ3G0I0UHMSBeXFjO7qarSjaVZhq4fs=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:
  Content-Transfer-Encoding:From;
- b=YyqRKa6n5QdH633djdT1lCHRfnt32VTntfLRQcGfVcYEy5T21FGbVbdlUDofJPnZC
- OmS8TTnWQ9L81F3zfPU+edFAlTtA3PDgj1j3ScjT7LOSSuny8tjQlrXkfRniXigWX4
- YyBwz9KjsNJfMM94eFudnPpPmEDGCRceQE+Sb0Ql3KF9ERJ2I5A2CkGtc4w2/FpJrS
- 8VmzGwlQkV8HsQJ51CtsvGlS4nkvzjU3oKCcpxfkOjvDjrB+8pm5nFBoLNisyvmtMr
- hKIK46uzAXESJCY5TZXcbHKGoUoVGbtHLLxwB38aQvRZlLZ3CJCvPcFwOTupRSA7xU
- HAPE91R39bgSBIu1IyJIoJXXIqve46m4hxYozw84G1hzVQy+l02sxjwhy+ZLmcaPGx
- H75cz/A1Fh0dhcUwZDbGrBkrgI+3jkVQfQY/tkRuoOFP3iQPjIC14zPtNt/gUB+bET
- XNIbfw5lqUzk5U2Eu/9lz3j4gtoJYhuxP7XsVFIi9Sz1AXQesb8
+ b=VlJFzHVRMbAZUva4VHzioGYauO2NeUJTG4e4DmwfseY+2dMbt3iaLGbPD/7nX8D95
+ F2K8kSG5urudKkI6JGBCjxe5x8Z5asaL2rZ9jjd6t0UZ/ksrfyZeJSu0Kj/8HGT8tf
+ f8yYS8dAvsn/t9kI4jW54AzMhHqoHnO8RzOsY9Ex8ms/obxuCBxhok6AL0NImK2NcQ
+ hUAZm90KwYk21Q/Buj52/6OjURrWJ1F1Rb/FhU5UaCp3ehe6ZSGOs6ZQjeCBdqwu5x
+ +YMqc8X9O7lAlymvzusFAXvY85XLQA0xTlvYaLJNj05ti4lYSeW2SOHTOmLXAeAcxx
+ Tp6inOxNdkDva34rugAdJvEZw6FuEMDbo7fUv8hhrh/7J9NNvpqBNi00opUHAMIudX
+ h57R7QDkEJwmYgaxWoRP3QcICa8ItxSSR02TdC8oKzoSHiAlC5hlOBOFKprNYrR4D7
+ 3ckhcnsRi/tZ1nVpg2ZCTWDMoQJ6elL8k8l4YSefGcy4xXRr6em
 Received: from customer (localhost [127.0.0.1])
- by submission (posteo.de) with ESMTPSA id 4bY4sH1DnXz6tvZ;
- Thu,  3 Jul 2025 20:23:46 +0200 (CEST)
+ by submission (posteo.de) with ESMTPSA id 4bY4sJ3LjFz6v0p;
+ Thu,  3 Jul 2025 20:23:48 +0200 (CEST)
 From: Charalampos Mitrodimas <charmitro@posteo.net>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  Charalampos Mitrodimas <charmitro@posteo.net>
-Subject: [PATCH 0/2] target/riscv: Fix MEPC/SEPC bit masking
-Date: Thu,  3 Jul 2025 18:21:42 +0000
-Message-ID: <20250703182157.281320-1-charmitro@posteo.net>
+Subject: [PATCH 1/2] target/riscv: Fix MEPC/SEPC bit masking for IALIGN
+Date: Thu,  3 Jul 2025 18:21:43 +0000
+Message-ID: <20250703182157.281320-2-charmitro@posteo.net>
+In-Reply-To: <20250703182157.281320-1-charmitro@posteo.net>
+References: <20250703182157.281320-1-charmitro@posteo.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=185.67.36.65; envelope-from=charmitro@posteo.net;
- helo=mout01.posteo.de
+Received-SPF: pass client-ip=185.67.36.66; envelope-from=charmitro@posteo.net;
+ helo=mout02.posteo.de
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
@@ -76,25 +78,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch series fixes incorrect behavior in MEPC/SEPC CSRs where the
-lower bits were not properly masked according to the RISC-V specification.
+According to the RISC-V Privileged Architecture specification, the low
+bit of MEPC/SEPC must always be zero. When IALIGN=32, the two low bits
+must be zero.
 
-The issue was discovered when vectored mode bits from STVEC were
-written to MEPC and not properly cleared, causing incorrect behavior
-on MRET.
+This commit fixes the behavior of MEPC/SEPC CSR reads and writes, and
+the implicit reads by MRET/SRET instructions to properly mask the
+lowest bit(s) based on whether the C extension is enabled:
+- When C extension is enabled (IALIGN=16): mask bit 0
+- When C extension is disabled (IALIGN=32): mask bits [1:0]
 
-Charalampos Mitrodimas (2):
-  target/riscv: Fix MEPC/SEPC bit masking for IALIGN
-  tests/tcg/riscv64: Add test for MEPC bit masking
+Previously, when vectored mode bits from STVEC (which sets bit 0 for
+vectored mode) were written to MEPC, the bits would not be cleared
+correctly, causing incorrect behavior on MRET.
 
- target/riscv/csr.c                        |  8 +--
- target/riscv/internals.h                  | 11 ++++
- target/riscv/op_helper.c                  |  4 +-
- tests/tcg/riscv64/Makefile.softmmu-target |  4 ++
- tests/tcg/riscv64/test-mepc-masking.S     | 73 +++++++++++++++++++++++
- 5 files changed, 94 insertions(+), 6 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-mepc-masking.S
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2855
+Signed-off-by: Charalampos Mitrodimas <charmitro@posteo.net>
+---
+ target/riscv/csr.c       |  8 ++++----
+ target/riscv/internals.h | 11 +++++++++++
+ target/riscv/op_helper.c |  4 ++--
+ 3 files changed, 17 insertions(+), 6 deletions(-)
 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index fb14972169..c33a6e86d2 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -3126,14 +3126,14 @@ static RISCVException write_mscratch(CPURISCVState *env, int csrno,
+ static RISCVException read_mepc(CPURISCVState *env, int csrno,
+                                 target_ulong *val)
+ {
+-    *val = env->mepc;
++    *val = env->mepc & get_xepc_mask(env);
+     return RISCV_EXCP_NONE;
+ }
+ 
+ static RISCVException write_mepc(CPURISCVState *env, int csrno,
+                                  target_ulong val, uintptr_t ra)
+ {
+-    env->mepc = val;
++    env->mepc = val & get_xepc_mask(env);
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -4113,14 +4113,14 @@ static RISCVException write_sscratch(CPURISCVState *env, int csrno,
+ static RISCVException read_sepc(CPURISCVState *env, int csrno,
+                                 target_ulong *val)
+ {
+-    *val = env->sepc;
++    *val = env->sepc & get_xepc_mask(env);
+     return RISCV_EXCP_NONE;
+ }
+ 
+ static RISCVException write_sepc(CPURISCVState *env, int csrno,
+                                  target_ulong val, uintptr_t ra)
+ {
+-    env->sepc = val;
++    env->sepc = val & get_xepc_mask(env);
+     return RISCV_EXCP_NONE;
+ }
+ 
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index 4570bd50be..89ac6a160f 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -142,6 +142,17 @@ static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
+     }
+ }
+ 
++static inline target_ulong get_xepc_mask(CPURISCVState *env)
++{
++    /* When IALIGN=32, both low bits must be zero.
++     * When IALIGN=16 (has C extension), only bit 0 must be zero. */
++    if (riscv_has_ext(env, RVC)) {
++        return ~(target_ulong)1;
++    } else {
++        return ~(target_ulong)3;
++    }
++}
++
+ #ifndef CONFIG_USER_ONLY
+ /* Our implementation of SysemuCPUOps::has_work */
+ bool riscv_cpu_has_work(CPUState *cs);
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 557807ba4b..15460bf84b 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -280,7 +280,7 @@ target_ulong helper_sret(CPURISCVState *env)
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     }
+ 
+-    target_ulong retpc = env->sepc;
++    target_ulong retpc = env->sepc & get_xepc_mask(env);
+     if (!riscv_cpu_allow_16bit_insn(&env_archcpu(env)->cfg,
+                                     env->priv_ver,
+                                     env->misa_ext) && (retpc & 0x3)) {
+@@ -391,7 +391,7 @@ static target_ulong ssdbltrp_mxret(CPURISCVState *env, target_ulong mstatus,
+ 
+ target_ulong helper_mret(CPURISCVState *env)
+ {
+-    target_ulong retpc = env->mepc;
++    target_ulong retpc = env->mepc & get_xepc_mask(env);
+     uint64_t mstatus = env->mstatus;
+     target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
+ 
 -- 
 2.47.2
 
