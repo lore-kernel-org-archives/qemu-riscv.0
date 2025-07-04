@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D276BC83030
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Jul 2025 00:14:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B90C83030
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Jul 2025 03:29:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uXU3t-00073l-Gr; Thu, 03 Jul 2025 20:13:53 -0400
+	id 1uXX6l-0006pi-Te; Thu, 03 Jul 2025 23:29:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uXU3q-000737-DI; Thu, 03 Jul 2025 20:13:51 -0400
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
+ id 1uXX6j-0006ib-R6; Thu, 03 Jul 2025 23:29:01 -0400
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uXU3o-0003AG-A9; Thu, 03 Jul 2025 20:13:50 -0400
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-87f2ba094dcso61048241.3; 
- Thu, 03 Jul 2025 17:13:47 -0700 (PDT)
+ id 1uXX6h-0006P2-NZ; Thu, 03 Jul 2025 23:29:01 -0400
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-4e7fc3309f2so106554137.2; 
+ Thu, 03 Jul 2025 20:28:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751588026; x=1752192826; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1751599737; x=1752204537; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=31U0OZqZqxRftEY3O+tr2DE2qwh/OJDxpBdMCC/56Sc=;
- b=L7u27lgleGPyshp862sT+RGt6hYbAYEkdwpI7fFOlGeqxkN/4gIQd/uzhg3ANapPEi
- PJg73EpAteMrVBza1zbc62cLi1qA8dbwpJDUhDc8LWxWBiyNCdZnuYvJEeqzgHpF+3GF
- E5l1T49BefqVE6WOa0sqcC2ezxS0+whRx/muaaMrMgH/pNrW4gdB63CzIWtKCC2/KGeL
- AD5WXS4DvU5kuC+xYBohcc/ncTIKgSGeBZ/joQxjfflUTKLXRuAaCSinwEt1KrtcmtZI
- k9+Hw8ezivU+0xwTogjtPLiZ1UfkIxlfX2c0isgQ79V3mw2OzM0otQLptcRj0zF5FjPd
- mtDQ==
+ bh=cgMx1VqGDaJScVb9v2ZWDwgZ1dxspOT9ckd4vbNED1w=;
+ b=HkUCuFLCWcBKW7bQ8xY1+5xoUbZU8B4X8+z0efALxr6OlLZJh8jeCvjpplb3Pi1tKo
+ d2HMTadXksFEhLDI1AxgNaJdjUJicqewqrgL5vQlbXqNHwduzkM2Hw358c2/1t26xkvb
+ awD8WaiNlf6KpBhvOCwWqfy0cD08wAU2ksnevtEf4NgjO9IdtslFeQ5IUyFU3C54p4Is
+ 713+aTXNP8ZKwTQHvhFIl38FtkTN5Oa2ygK6mwbZqnnS/bbhXKaFVqG+6PaH/pz2NKxu
+ ugCEXIUaPgsV5e499L8kHnbg9PuOgwnk88L1eFW1myim32H8r9Pd2h/uThOLqN3EsNOQ
+ NDtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751588026; x=1752192826;
+ d=1e100.net; s=20230601; t=1751599737; x=1752204537;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=31U0OZqZqxRftEY3O+tr2DE2qwh/OJDxpBdMCC/56Sc=;
- b=ZWIQ2EdjpBoiMwnSWxr3Y7yxswPWHchwAag72QzMJWH1S9HDKr8talUlIPKkFipzEr
- lgfHpylGTGcCMgIOcA1SYlZ+sRyVagq4OfJfOazsUwwevrI0zDaOiCAAG9WRvFiZ05WG
- thKltPaddk6celcnhmJOVDCmNgAeH2HHO746/MX6IujGPmXmoZpaiCqm4+3RRgM82xIG
- uWRbarJ5AE1hi7NnDke9k9b88XRf9XhiGZKGBYACueX4aeWgqakNFfyjrqlm8CcfzUFd
- XZI8EdteRaxtHgDa9lDvtTs7cRakPV6SmIzks6PVW8sWrMn2tPd/aS2OhG1awVLBD5pS
- p8sw==
+ bh=cgMx1VqGDaJScVb9v2ZWDwgZ1dxspOT9ckd4vbNED1w=;
+ b=rMq0pwc17nQTGMZ61GA67RK7iE0dJ5Xt4VApNk+s9Ap5yuwEWe3uoWrznfSHrcMLTJ
+ osw8fS04ym7oUX2hg8lsCxnj1wGMIoNQ2nOot1/D2WKAGU/JBWBCZES34q7Tp80UBnEd
+ 29RIgIbhN8vY8VSe6v9CttlKHXnsPjtl9VGh8VWatwjqMpP3L+uqTPaD+QDBTwGpfacy
+ XpUkwaxV3QJN1nAsUUuV8qZcqvebjQKa0IrMRgB5lBdHbGUuurKtG10IfdzJpxiBcHxP
+ kGxpEproE8+eE5UekqbnzHh4f5J1Zg+G95RdpJSR6yPRDjJN5XERcE28oM25H9F9rvr+
+ itww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUXzlEha6GmyaBgQzUDmEDL1AffNBrqKZ6T2Jhgzb4W1o/e2f/V9jHTQufGQUlXzZWwtTy2w/PykDHy@nongnu.org
-X-Gm-Message-State: AOJu0YxyxEDbRywHtLv3iI/HYDRnYMptkx4PTuywgJw+VEqjJ4DZbSOc
- B94AicqD680CaeF1ncuaGAC/FMotoN0OOeO9mh2ak58yu2gdNBx0HV3CWnLD50XOHLgxMzCrLq5
- NrhWCxSS1MsrThW3xObEfkbN8gCE8qsA=
-X-Gm-Gg: ASbGncuYW61XU+V7MZQpq7EB14OwoHQM5WJt593hREkiP/vhbC4zjSXeepPMxQOlpSf
- 87TzqbTMp2VIFNMV75/DcRH4K84jynChCp4i30adXNU6QU83LGxpCnzlIHl1BAzc1gO9ZUXjdrg
- yAQbC2gpu2lw/kz2L03wIlUUPEcx8Z2eErGOxDJBe1g7eeWHRIexQUwxfmAxFy9KzkLN5JuLHAu
- g==
-X-Google-Smtp-Source: AGHT+IFgg7hHQGuJ7KxOUymH0y1rLWKEygaG3rKHxa2eScBnjDTI3ephzwwm+jnGZCrtNRwRv8pyO4YFj1zqQeiKOCE=
-X-Received: by 2002:a05:6102:6d5:b0:4ec:d3a:46e9 with SMTP id
- ada2fe7eead31-4f2f1dbe163mr83141137.1.1751588026339; Thu, 03 Jul 2025
- 17:13:46 -0700 (PDT)
+ AJvYcCWm4eEbIwKjp4mdZ8W6MTMgK6Fb/XbuZyoGOHNSxJX2q6aZm1RQU6nt0nm/YPIK7Jv7Mqm6WnwDmO4t@nongnu.org
+X-Gm-Message-State: AOJu0YzEUyVLWHNAR6gO/s8s+GLQY0Uqg2l3raroCENTQzXqwWL+/9Ed
+ f6RvHL+t7pQkCwq5CKvZ0UgAHP2OcCX59/PnXK2foZAYXCH7svsCks8E8kwYcSIQJLaA0tzCb70
+ 37kt6qD7lbJiNY/zdqu6RkILldWfhQ94=
+X-Gm-Gg: ASbGnctjc0yJey+pQZ8tFN/S2bq8htWSApYrN3Yorc8rjN8n56ls3yryx8U7ubirpLF
+ 2W8nUKHB2b4QALx3ZiIc4rCRPjBTtIAEc51NO2GdZSVPWB9XPI867HiEFlfB56c6VLN4P+Bg+HJ
+ 07KF/ZhbGPPK4CVpQnfn0QRZH8pTGz700P0cJOX9KUchDkjrzv6Ff7R2hSfTnuNris3o2Y4UE/1
+ A==
+X-Google-Smtp-Source: AGHT+IEDjtl4x17nVzwh8CIw89Dyz9AuEIELaDE/YJ0WmTZvDqWTujWxAmT1/MNGFN4yfgiIa5ueV9sjGfWTMoD8Phw=
+X-Received: by 2002:a05:6102:4494:b0:4de:81a:7d42 with SMTP id
+ ada2fe7eead31-4f2f170ea7emr293941137.1.1751599737301; Thu, 03 Jul 2025
+ 20:28:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250619135545.61956-1-roan.richmond@codethink.co.uk>
 In-Reply-To: <20250619135545.61956-1-roan.richmond@codethink.co.uk>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 4 Jul 2025 10:13:20 +1000
-X-Gm-Features: Ac12FXw25wI1AKV-WVpcLLfQbKndMtDXQ2Prr-COKZLUeXcT5wWU9g0rUDguZvY
-Message-ID: <CAKmqyKOk6cKO_BPwexFOY-tYEzjJ-irHZz9Xub=XyrWDzh6crg@mail.gmail.com>
+Date: Fri, 4 Jul 2025 13:28:31 +1000
+X-Gm-Features: Ac12FXzzLbweuHcFzM_yNL0LtuVR7DvTwvwMVWOvqC6LaRCgD2t4lOxUDTv4ka0
+Message-ID: <CAKmqyKMQQwHCJVgguGzMxQx16dVB5uD=stAiF8ZYV8fsDF0dmA@mail.gmail.com>
 Subject: Re: [PATCH v3] Add RISCV ZALASR extension
 To: Roan Richmond <roan.richmond@codethink.co.uk>
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
@@ -72,8 +72,8 @@ Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -108,11 +108,6 @@ On Thu, Jun 19, 2025 at 11:56=E2=80=AFPM Roan Richmond
 ISC-V+Specifications+Under+Active+Development
 >
 > Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
 > ---
 >
 > Ping! resending this as no movement on previous send.
@@ -194,123 +189,10 @@ ng with
 > +
 > +#define REQUIRE_ZALASR(ctx) do {     \
 > +    if (!ctx->cfg_ptr->ext_zalasr) { \
-> +        return false;                \
-> +    }                                \
-> +} while (0)
-> +
-> +static bool gen_load_acquire(DisasContext *ctx, arg_lb_aqrl *a, MemOp me=
-mop)
-> +{
-> +    decode_save_opc(ctx, 0);
-> +
-> +    TCGv addr =3D get_address(ctx, a->rs1, 0);
-> +    TCGv dest =3D get_gpr(ctx, a->rd, EXT_NONE);
-> +    TCGBar bar =3D (a->rl) ? TCG_BAR_STRL : 0;
-> +
-> +    /* Check that AQ is set, as this is mandatory */
-> +    if (!a->aq) {
-> +        return false;
-> +    }
-> +
-> +    memop |=3D (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
-> +
-> +    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
-> +    gen_set_gpr(ctx, a->rd, dest);
-> +
-> +    /* Add a memory barrier implied by AQ (mandatory) and RL (optional) =
-*/
-> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ | bar);
-> +
-> +    return true;
-> +}
-> +
-> +static bool trans_lb_aqrl(DisasContext *ctx, arg_lb_aqrl *a)
-> +{
-> +    REQUIRE_ZALASR(ctx);
-> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_SB));
-> +}
-> +
-> +static bool trans_lh_aqrl(DisasContext *ctx, arg_lh_aqrl *a)
-> +{
-> +    REQUIRE_ZALASR(ctx);
-> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESW));
-> +}
-> +
-> +static bool trans_lw_aqrl(DisasContext *ctx, arg_lw_aqrl *a)
-> +{
-> +    REQUIRE_ZALASR(ctx);
-> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESL));
-> +}
-> +
-> +static bool trans_ld_aqrl(DisasContext *ctx, arg_ld_aqrl *a)
-> +{
-> +    REQUIRE_64BIT(ctx);
-> +    REQUIRE_ZALASR(ctx);
-> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TEUQ));
-> +}
-> +
-> +static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp m=
-emop)
-> +{
-> +    decode_save_opc(ctx, 0);
-> +
-> +    TCGv addr =3D get_address(ctx, a->rs1, 0);
-> +    TCGv data =3D get_gpr(ctx, a->rs2, EXT_NONE);
-> +    TCGBar bar =3D (a->aq) ? TCG_BAR_LDAQ : 0;
-> +
-> +    /* Check that RL is set, as this is mandatory */
-> +    if (!a->rl) {
-> +        return false;
-> +    }
-> +
-> +    memop |=3D (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
-> +
-> +    /* Add a memory barrier implied by RL (mandatory) and AQ (optional) =
-*/
-> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
-> +
-> +    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
-> +    return true;
-> +}
-> +
-> +static bool trans_sb_aqrl(DisasContext *ctx, arg_sb_aqrl *a)
-> +{
-> +    REQUIRE_ZALASR(ctx);
-> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_SB));
-> +}
-> +
-> +static bool trans_sh_aqrl(DisasContext *ctx, arg_sh_aqrl *a)
-> +{
-> +    REQUIRE_ZALASR(ctx);
-> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESW));
-> +}
-> +
-> +static bool trans_sw_aqrl(DisasContext *ctx, arg_sw_aqrl *a)
-> +{
-> +    REQUIRE_ZALASR(ctx);
-> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESL));
-> +}
-> +
-> +static bool trans_sd_aqrl(DisasContext *ctx, arg_sd_aqrl *a)
-> +{
-> +    REQUIRE_64BIT(ctx);
-> +    REQUIRE_ZALASR(ctx);
-> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_TEUQ));
-> +}
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index d7a6de02df..4cd2d68e46 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -1183,6 +1183,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase,=
- target_ulong pc)
->  #include "insn_trans/trans_rvzicond.c.inc"
->  #include "insn_trans/trans_rvzacas.c.inc"
->  #include "insn_trans/trans_rvzabha.c.inc"
-> +#include "insn_trans/trans_rvzalasr.c.inc"
->  #include "insn_trans/trans_rvzawrs.c.inc"
->  #include "insn_trans/trans_rvzicbo.c.inc"
->  #include "insn_trans/trans_rvzimop.c.inc"
-> --
-> 2.43.0
->
+
+Wait, this variable doesn't exist.
+
+How are you testing this?
+
+Alistair
 
