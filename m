@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 596F6C71130
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Jul 2025 20:30:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 397B1C83030
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Jul 2025 22:59:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uYsTJ-0003ZC-2N; Mon, 07 Jul 2025 16:29:53 -0400
+	id 1uYuo1-0005cL-SF; Mon, 07 Jul 2025 18:59:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uYs7R-00050w-JI
- for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 16:07:22 -0400
-Received: from mail-qt1-x835.google.com ([2607:f8b0:4864:20::835])
+ id 1uYunu-0005Hh-G7
+ for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 18:59:18 -0400
+Received: from mail-oa1-x30.google.com ([2001:4860:4864:20::30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uYs7N-0002Qa-Al
- for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 16:07:16 -0400
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-4a9bf46adedso13881911cf.2
- for <qemu-riscv@nongnu.org>; Mon, 07 Jul 2025 13:07:05 -0700 (PDT)
+ id 1uYunr-00031h-Ch
+ for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 18:59:17 -0400
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-2efbbf5a754so2652628fac.0
+ for <qemu-riscv@nongnu.org>; Mon, 07 Jul 2025 15:59:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751918825; x=1752523625; darn=nongnu.org;
+ d=linaro.org; s=google; t=1751929154; x=1752533954; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=33FkQa4+h0oN3Ah6xgEFjXlJTGqQVdY3+kPUTsXd5C8=;
- b=ZpyopxDuSpkix368CcVjKMuOo3Nkjverr5n9tHMwFf7qqHQyzoi6kt+I/WTMI4wZNZ
- P+b0p2sQP1IxZOCKwsiGCnrkxm4G2b+GuQqlV4euSuOtvQdmM9Pc/ccb1KZwssV4b5bF
- 5Jtyu+PkdO290sq+3xJ98LWof7tLv5zI88Dq64tvVUyAozjt68PGm5mu+gD+lYYmDiio
- HQVX/jkIFxvA5r3ykNRQlVkEM0RlrYicECDcy4IH2+BIBKye43MP7qeyi72YHcr4Xmru
- ZMDRFhJxfDKy9otRqIxshS3nu9bxXWpCw3iEbk5oVoUwWy/FOthHuCJyZW4IU8DNdMgB
- KeGg==
+ bh=R0j5X5MDymO8m8T2LqtmuKWbmHxKuLrAzIPD/9rOxys=;
+ b=wFhGN1KVqCWxPJW40eW77Q7JKAKDcGHYU03oyIXgC6rYYMGiLSg6Gz1R/oNwFBLHSl
+ hxOuKkzcb6Cu+26UKijVUcr34UwGPtgaeru7yGhPbCQ3L6MqbPXrXg7T4pVmBn2M4OfJ
+ zvv9B6WgE5DrDmuOgSXCRoXmsdqPISPVbHIjBfqgXLw81UKgkebhPrCNWW33cg1Kkjri
+ pQ7yKkaH+idLOUhBnshcMPg4TphvPjGLynunPiZUjC7fKMZ04r3vlgRL5Oz6UWBVlSaQ
+ sn65d8DRdvIRkRrreoQv6FGZUMtbKd0dJBN6C4j29eOsnUtOxHHbId4km5GZIpNLYe6+
+ RbVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751918825; x=1752523625;
+ d=1e100.net; s=20230601; t=1751929154; x=1752533954;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=33FkQa4+h0oN3Ah6xgEFjXlJTGqQVdY3+kPUTsXd5C8=;
- b=Fzy1TEP1FxDBkFwMWskwYbIOlZOZXttKhL6PbZfqbX7F7DPqfrrN5dm6eT0Xa7e647
- swfWD+mUV+J9faQHPv3O+qlVTrNQcUjRq+mbytw1txBPkgELm9OOZv9JbOP+MBNjCopP
- d4RAXvDcwHKPG3f1Sm5tbEaE3ThF8pM9Ue5CDE3o0lUE+X3DJ5+g6O5i4axuafUSU4o3
- cow1b1sn7lZm/6ChbJfQG35BdMJj/EJgMjw3fRqT7v7pC+T0MMfiGbB0Fv3Oi58TfoVH
- anSmnC3IUus/IHGLKgb+Qy1l94Rgt6GyOZJJgbkeT+XTSAbwU5VM3CVa9Ms4EKo6N8Y9
- I2hQ==
+ bh=R0j5X5MDymO8m8T2LqtmuKWbmHxKuLrAzIPD/9rOxys=;
+ b=uss0Byvp+Pf5rbjvznRZ3MyvgUyfmMC1pOrLmVQjS6EseXglrMWbhaJAXbtCrKHTfJ
+ xs+CemCmZ8ZdSdacZZOYCDxBioy3TXJdPlhSv90PcSKAxl30Xq7jsHPOUikmXF2wFTHr
+ RWoylSJvuSbIVPY9dvd1EIdAapoTRuh+i5BcoqSkWN04BY/CKdaYFe1KfI7X0F2O+xwo
+ iTBBPa8pirSCkJEIb14tBukvMT/oCZJkFwrwBBuVjgd/Rvr8GwjdEltiShhkMRcMXHmi
+ UNrnHrl+c2jE51aiKRPltOCuPgfTxn6oyhOLM6BhpWPhKABLzbQRZmYrcT9l/T6WIxxV
+ ng8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQ/t/N9GBMfZ59v2bMIEFa5RN5ZSLp7zOB6WyHZnoA5reelUXKqR4ENMEuOeGGtcOj8T3AL9Vs78iw@nongnu.org
-X-Gm-Message-State: AOJu0YwSD2u8LG4tnpjBxjeq0qZ/ATikLhxkyHvg7eR4I4h+MKaYkdbK
- ZwtbtpcYxtF/jRvK3xdt9MrzUmz8PAvlYMBeF+UROfJb8LKASrTjua14Ey6rVtIFD/I=
-X-Gm-Gg: ASbGncvNJ3Gz0muj3/oQJ0oHWmeeeDZMdFhtTMCdUO2m/mYvL7ZBO7ytkg5twZ9Bh0f
- +Sv1LxfWvBzkx19GDEpBDw5rp7T2ybid/SGsxYl11G+b9AGx7xhc0Uk9bssk08C6LsGuxtvNwD2
- 82jUNOb2QPh98tOB+i2neWuhWgETWtpwxkrEeJhh5NpeH5dtqPXDz9jGEsG+kikxaLJlE3hk8Nn
- OR85/08HrKu312EtGdNvkDX0PHtLDrek/qvR7H6VzJzYSJXzzr4dTC8daPGQ39utFG9QxGrKFxA
- jf+YwxFeFuF8ZctnrG98kdBuMRNU8NITyYM665Zt6El3xiWoy0R5xSZwL/wCGLXg3oDbS/YZQs3
- pM4aA2u0QM1miPaa7NbVvJNpX5SU=
-X-Google-Smtp-Source: AGHT+IE0TB4c0eowcUJXdZRrsr9MyTK+hD+xSVw2bagacVXPZBjA+qPoyQNUfJRDxhDpt9j6RXLRaQ==
-X-Received: by 2002:a05:622a:4006:b0:4a6:fa5b:5438 with SMTP id
- d75a77b69052e-4a9985f91ddmr227991891cf.4.1751918824812; 
- Mon, 07 Jul 2025 13:07:04 -0700 (PDT)
-Received: from [10.225.72.227] ([172.58.142.143])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4a994aa9413sm67532191cf.78.2025.07.07.13.07.00
+ AJvYcCWOz+EOJgo99u3k4PVnAyCfsmLKL2t1dvGkip5zrEVZqm8oaM6u+7yHeIJVWYTZ/S4OFuA++umnCubh@nongnu.org
+X-Gm-Message-State: AOJu0YzjJSxu1BkzuDZaw6HV/a9Rsv4FXYymrFlqFGSB90ojHdulFiJE
+ UELxzYjvj0sqSTwlP+FBIdgDL6GrS1EtilWcS0fIMu0q+lvND7S1P+zKNY2DEJV1y1g=
+X-Gm-Gg: ASbGnctQVL+nDGUjQeVWcvWbQlZRC7wddaG3A3h156QAE5OQPmlIRUrhS2nJ/DFfdIU
+ 1NQHvuRFEW1ml1K0TJtdDGBfxyqUmMbGZR30smBQUJWL9C6P5WjVUvjhqEl12re3WJYf5yyxTWE
+ FLNlVljrsoQmtSwdZ1PiJbdbYEJ5PClL0wdF1ZEXyA+WWf6a32gifSXEWYtcmSIY9g1QW7+Zi5q
+ APpB9nxGeIu3r04dLkPCu2w9EFDtagk9i+fyrnHOsZjaMDJPWGCgqECxt+oTDIVf+Zoye+TM4GD
+ /SBeaDixa/H41hUlBQ77dMJijtd/NmXe9P4Q6BsS3DWdzPV/FB/w0g3ked1eea+5J0PXqvvuA9b
+ qvpWuxQ8GuxOWHFuYsGkdjnSeoJUxK1gqD5GToV16
+X-Google-Smtp-Source: AGHT+IG28sglKTHo5b2qcR+h5/P2Z4mnesEnVRLFkzFYDZMo7gYZ8cLzwCRSk0mc0IdwDIev/flD0g==
+X-Received: by 2002:a05:6870:80d3:b0:2ea:fc66:3775 with SMTP id
+ 586e51a60fabf-2f796e0fbcamr10269433fac.32.1751929153804; 
+ Mon, 07 Jul 2025 15:59:13 -0700 (PDT)
+Received: from [10.225.72.227] (fixed-187-189-51-143.totalplay.net.
+ [187.189.51.143]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2f7901a35c1sm2512233fac.25.2025.07.07.15.59.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Jul 2025 13:07:04 -0700 (PDT)
-Message-ID: <589efb93-f0c4-41d7-8947-6dadf1f06c56@linaro.org>
-Date: Mon, 7 Jul 2025 14:06:54 -0600
+ Mon, 07 Jul 2025 15:59:13 -0700 (PDT)
+Message-ID: <59984d23-3e5f-4d86-8111-0255ae51e76c@linaro.org>
+Date: Mon, 7 Jul 2025 16:59:03 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.1 v6 02/14] qemu/target-info: Factor target_arch()
- out
+Subject: Re: [PATCH-for-10.1 v6 10/14] hw/core/null-machine: Define machine as
+ generic QOM type
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-s390x@nongnu.org,
@@ -82,21 +82,21 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-s390x@nongnu.org,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>
 References: <20250707172009.3884-1-philmd@linaro.org>
- <20250707172009.3884-3-philmd@linaro.org>
+ <20250707172009.3884-11-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250707172009.3884-3-philmd@linaro.org>
+In-Reply-To: <20250707172009.3884-11-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::835;
- envelope-from=richard.henderson@linaro.org; helo=mail-qt1-x835.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2001:4860:4864:20::30;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oa1-x30.google.com
+X-Spam_score_int: 12
+X-Spam_score: 1.2
+X-Spam_bar: +
+X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,36 +112,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/7/25 11:19, Philippe Mathieu-Daudé wrote:
-> To keep "qemu/target-info.h" self-contained to native
-> types, declare target_arch() -- which returns a QAPI
-> type -- in "qemu/target-info-qapi.h".
+On 7/7/25 11:20, Philippe Mathieu-Daudé wrote:
+> While DEFINE_MACHINE() is a succinct macro, it doesn't
+> allow registering QOM interfaces to the defined machine.
+> Convert to the generic DEFINE_TYPES() in preparation to
+> register interfaces.
 > 
-> No logical change.
-> 
-> Keeping native types in "qemu/target-info.h" is necessary
-> to keep building tests such tests/tcg/plugins/mem.c, as
-> per the comment added in commit ecbcc9ead2f ("tests/tcg:
-> add a system test to check memory instrumentation"):
-> 
-> /*
->   * plugins should not include anything from QEMU aside from the
->   * API header. However as this is a test plugin to exercise the
->   * internals of QEMU and we want to avoid needless code duplication we
->   * do so here. bswap.h is pretty self-contained although it needs a
->   * few things provided by compiler.h.
->   */
-> 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 > ---
->   include/qemu/target-info-qapi.h | 21 +++++++++++++++++++++
->   include/qemu/target-info.h      |  2 +-
->   hw/core/machine-qmp-cmds.c      |  8 +++-----
->   target-info.c                   |  8 ++++++++
->   4 files changed, 33 insertions(+), 6 deletions(-)
->   create mode 100644 include/qemu/target-info-qapi.h
+>   hw/core/null-machine.c | 14 ++++++++++++--
+>   1 file changed, 12 insertions(+), 2 deletions(-)
+> 
+> diff --git a/hw/core/null-machine.c b/hw/core/null-machine.c
+> index a6e477a2d88..3e03771d570 100644
+> --- a/hw/core/null-machine.c
+> +++ b/hw/core/null-machine.c
+> @@ -42,8 +42,10 @@ static void machine_none_init(MachineState *mch)
+>       }
+>   }
+>   
+> -static void machine_none_machine_init(MachineClass *mc)
+> +static void null_machine_class_init(ObjectClass *oc, const void *data)
+>   {
+> +    MachineClass *mc = MACHINE_CLASS(oc);
+> +
+>       mc->desc = "empty machine";
+>       mc->init = machine_none_init;
+>       mc->max_cpus = 1;
+> @@ -55,4 +57,12 @@ static void machine_none_machine_init(MachineClass *mc)
+>       mc->no_cdrom = 1;
+>   }
+>   
+> -DEFINE_MACHINE("none", machine_none_machine_init)
+> +static const TypeInfo null_machine_types[] = {
+> +    {
+> +        .name           = MACHINE_TYPE_NAME("none"),
+> +        .parent         = TYPE_MACHINE,
+> +        .class_init     = null_machine_class_init,
+> +    },
+> +};
+> +
+> +DEFINE_TYPES(null_machine_types)
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Ought this use DEFINE_MACHINE_WITH_INTERFACES that you introduce later?
 
 r~
 
