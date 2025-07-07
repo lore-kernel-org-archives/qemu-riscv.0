@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34984C8303C
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Jul 2025 09:55:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C483C8303C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Jul 2025 10:31:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uYiZO-0006B6-B3; Mon, 07 Jul 2025 05:55:30 -0400
+	id 1uYj7c-00089K-5y; Mon, 07 Jul 2025 06:30:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1uYiZD-0005yI-4J
- for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 05:55:20 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1uYj7Y-00084t-G9
+ for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 06:30:48 -0400
+Received: from mail-oa1-x2f.google.com ([2001:4860:4864:20::2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1uYiZ9-0001eb-Id
- for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 05:55:18 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7fd581c2bf4so2348503a12.3
- for <qemu-riscv@nongnu.org>; Mon, 07 Jul 2025 02:55:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1uYj7M-0008H9-Fw
+ for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 06:30:38 -0400
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-2ef8df09ce9so1920062fac.1
+ for <qemu-riscv@nongnu.org>; Mon, 07 Jul 2025 03:30:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1751882112; x=1752486912; darn=nongnu.org;
+ d=sifive.com; s=google; t=1751884234; x=1752489034; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I0lWxCuSdZhkBEpyYwpPli8lAS8pJfEEvO4/hcithWE=;
- b=L1Xs/n9wCCyAFu+LCHWouhSbgRTLx6gT+zRpLjEgVBZTERd7+IZyCmH5p8N6+mFnqd
- 3TQkXSW96DVOfcQnMFLoBHdpIxPUQIiABk1K47Y4vcAT33knVHLZDoVilkk9gg0tkKis
- fWnjCnpcMmlp0S1USkXDhPGdGNnyuqTjBHayZgSXPoC72LNSOLoH99Vt/NCfe5zbfOc1
- 1CY0AMGOO0PKxAuNK8bvrJbUy4aH5F+lTMPgPmPbCUMVcW8QAiSemVKAxJMyLWBbxwjG
- bNBXZc3ZCV9tMqunFqVi4wjYMDYH+PC0DGGYn5Bt3i+gQpiOKr1pkmgWpVjMPF8nHbFb
- UBcA==
+ bh=hbY7xsASZH5Ki71DDj7oWoVU52ZbX4v+wWPwQU08RcE=;
+ b=H0TsxOI6qUzCiqs51orbA919gEshoRa1B+uxbapIpYOccdmtEUo6R91HHPJjK2ByGT
+ 2Jevp6/yLpy1bZJ3clDv8EkVu7RZ18fJ8cd06UyalG/9KR66ynHzlJYpvbHiSZ3rxMRy
+ 8hb3C3Q9MoJFrQ6b8sib/XJsvSBEcqyEYYgKr5wHDHuJVlsGARAA1pKkdre9e5cWrpPW
+ jVksQK5Px9I/ppyLuwrG5N1yn8KdUtjawaOrqPcV28sCRzlKPQseCtiinBKyBr3poXtu
+ VMKBkGMVpqs4VN6gL1mq6Ro1xgDlKPV5tGLy0lVRXSXPSqgSa0gS2WwErocLDZIMCKA1
+ XkkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751882112; x=1752486912;
+ d=1e100.net; s=20230601; t=1751884234; x=1752489034;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=I0lWxCuSdZhkBEpyYwpPli8lAS8pJfEEvO4/hcithWE=;
- b=i/i2IQNWBK1Yk+vIAX2esqZRyliyQRcB5aiBaqVDs7C4MLnCKdIpHgChq/NZJ3dErF
- y5nEM1RwiD8emNCV06ZbcGa0Is28Rl7Z0Oq+LLuKRHfeFyXGnIk6I33RUmzRFHb3EMdq
- C3dru45T+XhuoFPUskfpG0N9yxo11vQHWi27BcQAcX+gLdO2cg04bGjFSMSoLEGA2al/
- maARIMD9JYcn9IwIIZYBAFo3Bkr2iM1RdymiAgL5DsZbKDamZjaUMZtJpfH+v2/dWicX
- UJ7egE8uVrtiFPv71eczYWl+XqrDBjxE4RTwoEGnq4/e9Ex9rTLC4veut5CirgolIFAw
- VvJA==
+ bh=hbY7xsASZH5Ki71DDj7oWoVU52ZbX4v+wWPwQU08RcE=;
+ b=WYO9+M1jNFRBLx6GBVCnih82SFJhSFt6NfmpIJ07LtShuT6roLn8CN0q1OM083wofq
+ ToD6zSBbyrLHhjbpApBHbKUAfKTeE7TV9wvBEGI6CLhy9uEsai9zyplBBP7P4ofCGC2j
+ rkHFlpHM1WFQLK7Irh4xH6c63q4uNaUwrGRRW5aL6DdBdjG+PURwNKtnoCsw6Oah0q+c
+ NkvXJs479fKKBNPYFirbaDRSiXvbeR2L0yYEf+YKkAaPBeKU9fOF0XalMnCjHKdP7cxG
+ Q8YUImZ1TZpjrtyA+WqitKbh/XEsHstoHWo/Vtdq8spSEdob9jC2w+GsAzktSJ+gxk4m
+ 1PHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVa52dxcgvHy+K22SftljYa/jF5cinul+MCCFjljVpF9hfvH4XQwoR7kOVv0qPz4AZ1hmSVllRdiPUE@nongnu.org
-X-Gm-Message-State: AOJu0Yw8kwW+w/lWmIXSthbEDqw0ZCNAs1T0CRT44pBek6bMbDlNQAzR
- Gmq659vXU5fNhEFjxunSVCjM/V3SJ6/m4Mkiq4X3m9sSmojo3NBLW11JW1nZBKo8nlOzxJyFILL
- okWm1z+EzGGeWHWTLddrkNr9MFVI8hpggbpQfEELWaA==
-X-Gm-Gg: ASbGnctm0Ef9QY2jzBLmdlKE3Us2Vf7g/Q3GOUc0ZNI/1NSqQvnvdkbKheDCdGjRXd7
- eTJ6mf5Owio+35JkNDtbtyY2LzZy6qWe3Re8/d0bUoyRnIayTyTCx1PV2uw/KK5i7aDA8BuwKZ7
- ctPLuTIcOP/G5KbmQe1uXUCncqLyFjM+JGyi60nn6/XzZp7ofroOtKqBnp
-X-Google-Smtp-Source: AGHT+IHODomgLflxvXGYp54DtO0E8MXK312N+HLvMNz8+KWuzuRQ7JsIX1pNmtneN1inwVUdG7zc4MfU3kJpT1J5H1Y=
-X-Received: by 2002:a17:90b:3903:b0:311:abba:53c0 with SMTP id
- 98e67ed59e1d1-31aadcf4fb0mr18390793a91.9.1751882111803; Mon, 07 Jul 2025
- 02:55:11 -0700 (PDT)
+ AJvYcCW+1WNaeAwoUqm6o7WN1wfYdqAFYil/RDd+Tc6Ve8nG4ctPH8axB6pW5fPddVxwBtbmNUZ4Si8upGl3@nongnu.org
+X-Gm-Message-State: AOJu0YxJh/7emmO5cZbqOrgKW09Om31t3BFmnEgBmd42YifoRL2o2t3Q
+ HSoRwfEpYrRvPXSmzvGJuGJlb4PgttToZgaul777WWfyyPy7ylplP9T0sf87pW0F3WMXi2DQvZ8
+ R4KosBdR/Ft/o+HKouDEvEKq5WyEPWMMRsF2Dc7ou5g==
+X-Gm-Gg: ASbGnctcAXEI5oI+vSdyY/q8p+bXDIlDCBPRB8p+PRYlmbVyNLiPOJuR3xzTCkOHdnx
+ YPGXjADVS9KW/+XyfRwiUxzchuekbf1rBmK09XINj2M+0wKASwjrhAE5qfbVkLEeByfpParkZ/E
+ leIlHWJ4jG/zYUziTQlQ1zOmDoyjJOdtp2g+4uz9bVxE9mGqmqPc2l/8Il
+X-Google-Smtp-Source: AGHT+IHBtAq/RAlSU+f8+IYVo8yDxzwxfehYwTm9QXPmhBKER1xQ5qk03tn3nFDGIGQZKDrf3cFS6+8vaZhUrGHbTpU=
+X-Received: by 2002:a05:6870:a44f:b0:2c1:5fe3:22eb with SMTP id
+ 586e51a60fabf-2f796adb1b5mr7907278fac.15.1751884233761; Mon, 07 Jul 2025
+ 03:30:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250701030021.99218-1-jay.chang@sifive.com>
- <20250701030021.99218-3-jay.chang@sifive.com>
- <c8a2beb3-6a66-4d63-ac0b-e88c4dc53d64@lanxincomputing.com>
-In-Reply-To: <c8a2beb3-6a66-4d63-ac0b-e88c4dc53d64@lanxincomputing.com>
-From: Jay Chang <jay.chang@sifive.com>
-Date: Mon, 7 Jul 2025 17:55:00 +0800
-X-Gm-Features: Ac12FXyVMFfTCgB1R5lnsiKO5VGAqFL2eBopXjvCTotGoHyfPLjtPGuq3GELlAY
-Message-ID: <CACNNAjMxpTxhPOgzi+TFTt14BSByvbo2jcWB5dNXXapPuFC7Bg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] target/riscv: Restrict midelegh access to S-mode
- harts
+References: <20250627132022.439315-1-max.chou@sifive.com>
+ <20250627132022.439315-3-max.chou@sifive.com>
+ <69d73c59-2ff6-4446-ac23-c36b0e299afc@lanxincomputing.com>
+In-Reply-To: <69d73c59-2ff6-4446-ac23-c36b0e299afc@lanxincomputing.com>
+From: Max Chou <max.chou@sifive.com>
+Date: Mon, 7 Jul 2025 18:30:22 +0800
+X-Gm-Features: Ac12FXwOJiDT55ugBmk6c6JzLrp5kTmm5uLNuXJknpheqD_tlruHMRS6kNk0h_I
+Message-ID: <CANiaA1shTxcmAF2+dN-ui0nd_wnrY9kaQtMorB1hAXvF+KNjHQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] target/riscv: rvv: Apply vext_check_input_eew to
+ vector reduction instructions
 To: Nutty Liu <liujingqi@lanxincomputing.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Frank Chang <frank.chang@sifive.com>
-Content-Type: multipart/alternative; boundary="000000000000f68e56063953d623"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=jay.chang@sifive.com; helo=mail-pg1-x52d.google.com
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, antonb@tenstorrent.com
+Content-Type: multipart/alternative; boundary="00000000000070ffd606395455fe"
+Received-SPF: pass client-ip=2001:4860:4864:20::2f;
+ envelope-from=max.chou@sifive.com; helo=mail-oa1-x2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,151 +101,98 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000f68e56063953d623
+--00000000000070ffd606395455fe
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-I intended to separate the S-mode and M-mode handling.
-Do you think this change could improve performance?
+Hi Nutty,
+
+Thanks for the suggestion.
+I'll provide a new version including the new description and a fix about
+another EEWs issue.
 
 Thanks,
-Jay Chang
+Max
 
-On Tue, Jul 1, 2025 at 11:46=E2=80=AFAM Nutty Liu <liujingqi@lanxincomputin=
-g.com>
+
+On Tue, Jul 1, 2025 at 2:43=E2=80=AFPM Nutty Liu <liujingqi@lanxincomputing=
+.com>
 wrote:
 
-> On 7/1/2025 11:00 AM, Jay Chang wrote:
-> > RISC-V AIA Spec states:
-> > "For a machine-level environment, extension Smaia encompasses all added
-> > CSRs and all modifications to interrupt response behavior that the AIA
-> > specifies for a hart, over all privilege levels. For a supervisor-level
-> > environment, extension Ssaia is essentially the same as Smaia except
-> > excluding the machine-level CSRs and behavior not directly visible to
-> > supervisor level."
+> On 6/27/2025 9:20 PM, Max Chou wrote:
+> > From: Anton Blanchard <antonb@tenstorrent.com>
 > >
-> > Since midelegh is an AIA machine-mode CSR, add Smaia extension check in
-> > aia_smode32 predicate.
-> >
-> > Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > Signed-off-by: Jay Chang <jay.chang@sifive.com>
-> > ---
-> >   target/riscv/csr.c | 7 +++++--
-> >   1 file changed, 5 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> > index 0e0ad37654..74ec0e1c60 100644
-> > --- a/target/riscv/csr.c
-> > +++ b/target/riscv/csr.c
-> > @@ -374,8 +374,11 @@ static RISCVException aia_smode(CPURISCVState *env=
-,
-> int csrno)
-> >   static RISCVException aia_smode32(CPURISCVState *env, int csrno)
-> >   {
-> >       int ret;
-> > +    int csr_priv =3D get_field(csrno, 0x300);
-> >
-> > -    if (!riscv_cpu_cfg(env)->ext_ssaia) {
-> > +    if (csr_priv =3D=3D PRV_M && !riscv_cpu_cfg(env)->ext_smaia) {
-> > +        return RISCV_EXCP_ILLEGAL_INST;
-> > +    } else if (!riscv_cpu_cfg(env)->ext_ssaia) {
+> > Handle the overlap of source registers with different EEWs.
 >
-> +    if ((csr_priv =3D=3D PRV_M && !riscv_cpu_cfg(env)->ext_smaia) ||
-> +        (!riscv_cpu_cfg(env)->ext_ssaia)) {
+> Above description is the same as [patch v2 1/3].
+> They are different functions.
+> Maybe need to add some different description.
 >
-> Would the above code be better ?
 > Otherwise,
 > Reviewed-by: Nutty Liu<liujingqi@lanxincomputing.com>
 >
 > Thanks,
 > Nutty
 >
-> >           return RISCV_EXCP_ILLEGAL_INST;
-> >       }
 > >
-> > @@ -5911,7 +5914,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D =
-{
-> >       [CSR_MVIP]     =3D { "mvip",     aia_any, NULL, NULL, rmw_mvip   =
- },
+> > Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+> > Signed-off-by: Max Chou <max.chou@sifive.com>
+> > ---
+> >   target/riscv/insn_trans/trans_rvv.c.inc | 4 +++-
+> >   1 file changed, 3 insertions(+), 1 deletion(-)
 > >
-> >       /* Machine-Level High-Half CSRs (AIA) */
-> > -    [CSR_MIDELEGH] =3D { "midelegh", aia_any32, NULL, NULL, rmw_midele=
-gh
-> },
-> > +    [CSR_MIDELEGH] =3D { "midelegh", aia_smode32, NULL, NULL,
-> rmw_midelegh },
-> >       [CSR_MIEH]     =3D { "mieh",     aia_any32, NULL, NULL, rmw_mieh
->  },
-> >       [CSR_MVIENH]   =3D { "mvienh",   aia_any32, NULL, NULL, rmw_mvien=
-h
->  },
-> >       [CSR_MVIPH]    =3D { "mviph",    aia_any32, NULL, NULL, rmw_mviph
-> },
+> > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc
+> b/target/riscv/insn_trans/trans_rvv.c.inc
+> > index ec34d0d8c47..ac6f1d04c6d 100644
+> > --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> > @@ -3293,6 +3293,7 @@ static bool reduction_check(DisasContext *s,
+> arg_rmrr *a)
+> >   {
+> >       return require_rvv(s) &&
+> >              vext_check_isa_ill(s) &&
+> > +           vext_check_input_eew(s, a->rs1, s->sew, a->rs2, s->sew,
+> a->vm) &&
+> >              vext_check_reduction(s, a->rs2);
+> >   }
+> >
+> > @@ -3309,7 +3310,8 @@ GEN_OPIVV_TRANS(vredxor_vs, reduction_check)
+> >   static bool reduction_widen_check(DisasContext *s, arg_rmrr *a)
+> >   {
+> >       return reduction_check(s, a) && (s->sew < MO_64) &&
+> > -           ((s->sew + 1) <=3D (s->cfg_ptr->elen >> 4));
+> > +           ((s->sew + 1) <=3D (s->cfg_ptr->elen >> 4)) &&
+> > +           vext_check_input_eew(s, a->rs1, s->sew, a->rs2, s->sew + 1,
+> a->vm);
+> >   }
+> >
+> >   GEN_OPIVV_WIDEN_TRANS(vwredsum_vs, reduction_widen_check)
 >
 
---000000000000f68e56063953d623
+--00000000000070ffd606395455fe
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">I intended to separate the S-mode and M-mode handling.<br>
-Do you think this change could improve performance?<br><br>Thanks,<br><div>=
-Jay Chang</div></div><br><div class=3D"gmail_quote gmail_quote_container"><=
-div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jul 1, 2025 at 11:46=E2=80=AFA=
-M Nutty Liu &lt;<a href=3D"mailto:liujingqi@lanxincomputing.com">liujingqi@=
-lanxincomputing.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
-;padding-left:1ex">On 7/1/2025 11:00 AM, Jay Chang wrote:<br>
-&gt; RISC-V AIA Spec states:<br>
-&gt; &quot;For a machine-level environment, extension Smaia encompasses all=
- added<br>
-&gt; CSRs and all modifications to interrupt response behavior that the AIA=
-<br>
-&gt; specifies for a hart, over all privilege levels. For a supervisor-leve=
-l<br>
-&gt; environment, extension Ssaia is essentially the same as Smaia except<b=
-r>
-&gt; excluding the machine-level CSRs and behavior not directly visible to<=
-br>
-&gt; supervisor level.&quot;<br>
+<div dir=3D"ltr"><div>Hi=C2=A0Nutty,</div><div><br></div><div>Thanks for th=
+e suggestion.</div><div>I&#39;ll provide a new version including the new de=
+scription and a fix about another EEWs issue.</div><div><br></div><div><div=
+ dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><=
+div dir=3D"ltr">Thanks,<br>Max</div></div></div><br></div><br><div class=3D=
+"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">O=
+n Tue, Jul 1, 2025 at 2:43=E2=80=AFPM Nutty Liu &lt;<a href=3D"mailto:liuji=
+ngqi@lanxincomputing.com">liujingqi@lanxincomputing.com</a>&gt; wrote:<br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
+rder-left-width:1px;border-left-style:solid;border-left-color:rgb(204,204,2=
+04);padding-left:1ex">On 6/27/2025 9:20 PM, Max Chou wrote:<br>
+&gt; From: Anton Blanchard &lt;<a href=3D"mailto:antonb@tenstorrent.com" ta=
+rget=3D"_blank">antonb@tenstorrent.com</a>&gt;<br>
 &gt;<br>
-&gt; Since midelegh is an AIA machine-mode CSR, add Smaia extension check i=
-n<br>
-&gt; aia_smode32 predicate.<br>
-&gt;<br>
-&gt; Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com"=
- target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@w=
-dc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
-&gt; Signed-off-by: Jay Chang &lt;<a href=3D"mailto:jay.chang@sifive.com" t=
-arget=3D"_blank">jay.chang@sifive.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0target/riscv/csr.c | 7 +++++--<br>
-&gt;=C2=A0 =C2=A01 file changed, 5 insertions(+), 2 deletions(-)<br>
-&gt;<br>
-&gt; diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-&gt; index 0e0ad37654..74ec0e1c60 100644<br>
-&gt; --- a/target/riscv/csr.c<br>
-&gt; +++ b/target/riscv/csr.c<br>
-&gt; @@ -374,8 +374,11 @@ static RISCVException aia_smode(CPURISCVState *en=
-v, int csrno)<br>
-&gt;=C2=A0 =C2=A0static RISCVException aia_smode32(CPURISCVState *env, int =
-csrno)<br>
-&gt;=C2=A0 =C2=A0{<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0int ret;<br>
-&gt; +=C2=A0 =C2=A0 int csr_priv =3D get_field(csrno, 0x300);<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; -=C2=A0 =C2=A0 if (!riscv_cpu_cfg(env)-&gt;ext_ssaia) {<br>
-&gt; +=C2=A0 =C2=A0 if (csr_priv =3D=3D PRV_M &amp;&amp; !riscv_cpu_cfg(env=
-)-&gt;ext_smaia) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_ILLEGAL_INST;<br>
-&gt; +=C2=A0 =C2=A0 } else if (!riscv_cpu_cfg(env)-&gt;ext_ssaia) {<br>
+&gt; Handle the overlap of source registers with different EEWs.<br>
 <br>
-+=C2=A0 =C2=A0 if ((csr_priv =3D=3D PRV_M &amp;&amp; !riscv_cpu_cfg(env)-&g=
-t;ext_smaia) ||<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 (!riscv_cpu_cfg(env)-&gt;ext_ssaia)) {<br>
+Above description is the same as [patch v2 1/3].<br>
+They are different functions.<br>
+Maybe need to add some different description.<br>
 <br>
-Would the above code be better ?<br>
 Otherwise,<br>
 Reviewed-by: Nutty Liu&lt;<a href=3D"mailto:liujingqi@lanxincomputing.com" =
 target=3D"_blank">liujingqi@lanxincomputing.com</a>&gt;<br>
@@ -253,29 +200,49 @@ target=3D"_blank">liujingqi@lanxincomputing.com</a>&gt;<br>
 Thanks,<br>
 Nutty<br>
 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_ILLEGAL_INST=
-;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;<br>
+&gt; Signed-off-by: Anton Blanchard &lt;<a href=3D"mailto:antonb@tenstorren=
+t.com" target=3D"_blank">antonb@tenstorrent.com</a>&gt;<br>
+&gt; Signed-off-by: Max Chou &lt;<a href=3D"mailto:max.chou@sifive.com" tar=
+get=3D"_blank">max.chou@sifive.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0target/riscv/insn_trans/trans_rvv.c.inc | 4 +++-<br>
+&gt;=C2=A0 =C2=A01 file changed, 3 insertions(+), 1 deletion(-)<br>
+&gt;<br>
+&gt; diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/in=
+sn_trans/trans_rvv.c.inc<br>
+&gt; index ec34d0d8c47..ac6f1d04c6d 100644<br>
+&gt; --- a/target/riscv/insn_trans/trans_rvv.c.inc<br>
+&gt; +++ b/target/riscv/insn_trans/trans_rvv.c.inc<br>
+&gt; @@ -3293,6 +3293,7 @@ static bool reduction_check(DisasContext *s, arg=
+_rmrr *a)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return require_rvv(s) &amp;&amp;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_check_isa_ill(s) =
+&amp;&amp;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vext_check_input_eew(s, a-&g=
+t;rs1, s-&gt;sew, a-&gt;rs2, s-&gt;sew, a-&gt;vm) &amp;&amp;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_check_reduction(s=
+, a-&gt;rs2);<br>
+&gt;=C2=A0 =C2=A0}<br>
 &gt;=C2=A0 =C2=A0<br>
-&gt; @@ -5911,7 +5914,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
- {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MVIP]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mv=
-ip&quot;,=C2=A0 =C2=A0 =C2=A0aia_any, NULL, NULL, rmw_mvip=C2=A0 =C2=A0 },<=
+&gt; @@ -3309,7 +3310,8 @@ GEN_OPIVV_TRANS(vredxor_vs, reduction_check)<br>
+&gt;=C2=A0 =C2=A0static bool reduction_widen_check(DisasContext *s, arg_rmr=
+r *a)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return reduction_check(s, a) &amp;&amp; (s-&=
+gt;sew &lt; MO_64) &amp;&amp;<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0((s-&gt;sew + 1) &lt;=3D (s-=
+&gt;cfg_ptr-&gt;elen &gt;&gt; 4));<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0((s-&gt;sew + 1) &lt;=3D (s-=
+&gt;cfg_ptr-&gt;elen &gt;&gt; 4)) &amp;&amp;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vext_check_input_eew(s, a-&g=
+t;rs1, s-&gt;sew, a-&gt;rs2, s-&gt;sew + 1, a-&gt;vm);<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0GEN_OPIVV_WIDEN_TRANS(vwredsum_vs, reduction_widen_check)<=
 br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Machine-Level High-Half CSRs (AIA) */<br>
-&gt; -=C2=A0 =C2=A0 [CSR_MIDELEGH] =3D { &quot;midelegh&quot;, aia_any32, N=
-ULL, NULL, rmw_midelegh },<br>
-&gt; +=C2=A0 =C2=A0 [CSR_MIDELEGH] =3D { &quot;midelegh&quot;, aia_smode32,=
- NULL, NULL, rmw_midelegh },<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MIEH]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mi=
-eh&quot;,=C2=A0 =C2=A0 =C2=A0aia_any32, NULL, NULL, rmw_mieh=C2=A0 =C2=A0 =
-=C2=A0},<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MVIENH]=C2=A0 =C2=A0=3D { &quot;mvienh&=
-quot;,=C2=A0 =C2=A0aia_any32, NULL, NULL, rmw_mvienh=C2=A0 =C2=A0},<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MVIPH]=C2=A0 =C2=A0 =3D { &quot;mviph&q=
-uot;,=C2=A0 =C2=A0 aia_any32, NULL, NULL, rmw_mviph=C2=A0 =C2=A0 },<br>
 </blockquote></div>
 
---000000000000f68e56063953d623--
+--00000000000070ffd606395455fe--
 
