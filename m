@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FDABC83F05
-	for <qemu-riscv@archiver.kernel.org>; Sun,  6 Jul 2025 13:04:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34984C8303C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Jul 2025 09:55:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uYP2F-00071R-WE; Sun, 06 Jul 2025 09:04:00 -0400
+	id 1uYiZO-0006B6-B3; Mon, 07 Jul 2025 05:55:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vacantron@gmail.com>)
- id 1uYJIM-0001Bo-LD; Sun, 06 Jul 2025 02:56:15 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1uYiZD-0005yI-4J
+ for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 05:55:20 -0400
+Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <vacantron@gmail.com>)
- id 1uYJIK-0003cp-Un; Sun, 06 Jul 2025 02:56:14 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-3135f3511bcso2070537a91.0; 
- Sat, 05 Jul 2025 23:56:11 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1uYiZ9-0001eb-Id
+ for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 05:55:18 -0400
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-7fd581c2bf4so2348503a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 07 Jul 2025 02:55:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751784970; x=1752389770; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=s6ke95iJSuysac/p4mOP05Yo3reVZr/NakBmxO+eLKY=;
- b=PSlU8KijEnMSsU8WJOPfbh9sMZAbMeYuf7b5dXrPo8xHtQ51CRAuC/3bx0HYqTEI3/
- ft/2CLqIb9yyh/ppnQIzVE/0tCTg+nu/n82hbmSMbXWQhlMDh/rZyzmDZW8bNvlfPoka
- 7Y+PQBZ38s0ESAUxeQll9G/pIDd5R1CIZ+Bq00tMsLK2FURwDcLsaNEbby5Xqfo2Tkz0
- DjWd6mXRQAHT1AbaD6puiNY4uBxRfOjcISMy2xAFtvqEx/+L0G8jjGZVw3FrqYbBoEXb
- k6igNeU52etteKGiHIC+6ArFtStNACm2TdFJh/MvOdIzRQ7KtEzO9wduPQ+kVUnvd0a1
- C9eg==
+ d=sifive.com; s=google; t=1751882112; x=1752486912; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=I0lWxCuSdZhkBEpyYwpPli8lAS8pJfEEvO4/hcithWE=;
+ b=L1Xs/n9wCCyAFu+LCHWouhSbgRTLx6gT+zRpLjEgVBZTERd7+IZyCmH5p8N6+mFnqd
+ 3TQkXSW96DVOfcQnMFLoBHdpIxPUQIiABk1K47Y4vcAT33knVHLZDoVilkk9gg0tkKis
+ fWnjCnpcMmlp0S1USkXDhPGdGNnyuqTjBHayZgSXPoC72LNSOLoH99Vt/NCfe5zbfOc1
+ 1CY0AMGOO0PKxAuNK8bvrJbUy4aH5F+lTMPgPmPbCUMVcW8QAiSemVKAxJMyLWBbxwjG
+ bNBXZc3ZCV9tMqunFqVi4wjYMDYH+PC0DGGYn5Bt3i+gQpiOKr1pkmgWpVjMPF8nHbFb
+ UBcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751784970; x=1752389770;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1751882112; x=1752486912;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=s6ke95iJSuysac/p4mOP05Yo3reVZr/NakBmxO+eLKY=;
- b=qskL8GnHv12dqJC1SI+ctfp3+4iPt/LTwhvVu8jxBQ6wrhifmRAU1cGJmNwc9Gvmyo
- QCGnAyHTJG/kaJYTdKJUgZkxDnBVKzQRLQrElPujV+dCuCO6X3vWhYWe/Oir4d5/rkoh
- jkDlZ5vXQOhWcO0SUJDaNhu+t5z9pVjgjZk125DaZmMKuy7CAJ/ApaCkw+nK2icEEcGg
- q2k/hoIcoZfgm75DPkJmI/MQJ3jShqtvCADntyiieDVxjYp7jcwbJluPNPIsrXzIOu9B
- KNp+PnjPBOnTgn1dv2JP1pmGExbvwcH0YfQV5XFKFFnSx4jJ8jEmC5ruPHzo2M3bBqiE
- 6Xjg==
+ bh=I0lWxCuSdZhkBEpyYwpPli8lAS8pJfEEvO4/hcithWE=;
+ b=i/i2IQNWBK1Yk+vIAX2esqZRyliyQRcB5aiBaqVDs7C4MLnCKdIpHgChq/NZJ3dErF
+ y5nEM1RwiD8emNCV06ZbcGa0Is28Rl7Z0Oq+LLuKRHfeFyXGnIk6I33RUmzRFHb3EMdq
+ C3dru45T+XhuoFPUskfpG0N9yxo11vQHWi27BcQAcX+gLdO2cg04bGjFSMSoLEGA2al/
+ maARIMD9JYcn9IwIIZYBAFo3Bkr2iM1RdymiAgL5DsZbKDamZjaUMZtJpfH+v2/dWicX
+ UJ7egE8uVrtiFPv71eczYWl+XqrDBjxE4RTwoEGnq4/e9Ex9rTLC4veut5CirgolIFAw
+ VvJA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWUQPGJeHN5qHNXx/cwkrfJ4WPmgzDG8lX4DBmJ2kgzj/f5ABqq05ap3iEEwT4+vZNazVQ21vzhQuWm@nongnu.org
-X-Gm-Message-State: AOJu0YzOXBBwc+Lq/rgAiiYaSBVvgIXbkGQ0eplnBX1mm4uHRnXY0CQg
- Im++yMYZ+QZZEh3uhcUYh5+3GNZLyqTeVS2AuYkEO8sna16pc2ezYw+yKKJJYLVFOh8=
-X-Gm-Gg: ASbGnctqEVdRqAVRUhrFJ28wZ31w8o2kqYP3TGeDGvjYJOA2wP5gaCBuWdLNSYJJizM
- KNhd5p7qZ6HUxIbW4+KeJqU0bRa/vRRUIlAOEpFV9gNG0C5b7HKUNT9Dqj2VQ8sAeEABAXdXHJa
- gvGySvW+UOLC87rZJaXhT6dnsIYJSnAXqUecJeDak41bQXnAjpg0swHvYlMHGmSzFFiU6Vpagz7
- 7IO/qQWxhATgtheVEZdO8hM8qlrLf1awfVC48DeuMUtpZg94mvmcnmD9fMcwAI5Wc7AgES+5ORR
- 0kEs4LrmBGdA0TgWYcUY8D4eqWiIAs3Y2p7mO06pa3Q7XkdsUQT10xLEipY65nkmSl/GOAbczcG
- R8uGPEDre56wGf22I+D0Yxl6BFb0=
-X-Google-Smtp-Source: AGHT+IE3PBp+BwOYjet2Vt2FdCGXfiVrTQsQd+8m0FvSXbBlhmIgEdZ7GgS/hZyjErOyvKPVJJNCQg==
-X-Received: by 2002:a17:90b:3c52:b0:311:f99e:7f4b with SMTP id
- 98e67ed59e1d1-31aac4cd309mr12652746a91.28.1751784970114; 
- Sat, 05 Jul 2025 23:56:10 -0700 (PDT)
-Received: from localhost (114-32-247-71.hinet-ip.hinet.net. [114.32.247.71])
- by smtp.gmail.com with UTF8SMTPSA id
- 98e67ed59e1d1-31aaaf6fa19sm6280670a91.47.2025.07.05.23.56.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Jul 2025 23:56:09 -0700 (PDT)
-From: Vac Chen <vacantron@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-riscv@nongnu.org
-Subject: [PATCH] target/riscv: Fix pmp range wraparound on zero
-Date: Sun,  6 Jul 2025 14:55:54 +0800
-Message-ID: <20250706065554.42953-1-vacantron@gmail.com>
-X-Mailer: git-send-email 2.50.0
+ AJvYcCVa52dxcgvHy+K22SftljYa/jF5cinul+MCCFjljVpF9hfvH4XQwoR7kOVv0qPz4AZ1hmSVllRdiPUE@nongnu.org
+X-Gm-Message-State: AOJu0Yw8kwW+w/lWmIXSthbEDqw0ZCNAs1T0CRT44pBek6bMbDlNQAzR
+ Gmq659vXU5fNhEFjxunSVCjM/V3SJ6/m4Mkiq4X3m9sSmojo3NBLW11JW1nZBKo8nlOzxJyFILL
+ okWm1z+EzGGeWHWTLddrkNr9MFVI8hpggbpQfEELWaA==
+X-Gm-Gg: ASbGnctm0Ef9QY2jzBLmdlKE3Us2Vf7g/Q3GOUc0ZNI/1NSqQvnvdkbKheDCdGjRXd7
+ eTJ6mf5Owio+35JkNDtbtyY2LzZy6qWe3Re8/d0bUoyRnIayTyTCx1PV2uw/KK5i7aDA8BuwKZ7
+ ctPLuTIcOP/G5KbmQe1uXUCncqLyFjM+JGyi60nn6/XzZp7ofroOtKqBnp
+X-Google-Smtp-Source: AGHT+IHODomgLflxvXGYp54DtO0E8MXK312N+HLvMNz8+KWuzuRQ7JsIX1pNmtneN1inwVUdG7zc4MfU3kJpT1J5H1Y=
+X-Received: by 2002:a17:90b:3903:b0:311:abba:53c0 with SMTP id
+ 98e67ed59e1d1-31aadcf4fb0mr18390793a91.9.1751882111803; Mon, 07 Jul 2025
+ 02:55:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=vacantron@gmail.com; helo=mail-pj1-x1029.google.com
+References: <20250701030021.99218-1-jay.chang@sifive.com>
+ <20250701030021.99218-3-jay.chang@sifive.com>
+ <c8a2beb3-6a66-4d63-ac0b-e88c4dc53d64@lanxincomputing.com>
+In-Reply-To: <c8a2beb3-6a66-4d63-ac0b-e88c4dc53d64@lanxincomputing.com>
+From: Jay Chang <jay.chang@sifive.com>
+Date: Mon, 7 Jul 2025 17:55:00 +0800
+X-Gm-Features: Ac12FXyVMFfTCgB1R5lnsiKO5VGAqFL2eBopXjvCTotGoHyfPLjtPGuq3GELlAY
+Message-ID: <CACNNAjMxpTxhPOgzi+TFTt14BSByvbo2jcWB5dNXXapPuFC7Bg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] target/riscv: Restrict midelegh access to S-mode
+ harts
+To: Nutty Liu <liujingqi@lanxincomputing.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Frank Chang <frank.chang@sifive.com>
+Content-Type: multipart/alternative; boundary="000000000000f68e56063953d623"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
+ envelope-from=jay.chang@sifive.com; helo=mail-pg1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 06 Jul 2025 09:03:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,46 +101,181 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-pmp_is_in_range() prefers to match addresses within the interval
-[start, end]. To archieve this, pmpaddrX is decremented during the end
-address update.
+--000000000000f68e56063953d623
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-In TOR mode, a rule is ignored if its start address is greater than or
-equal to its end address.
+I intended to separate the S-mode and M-mode handling.
+Do you think this change could improve performance?
 
-However, if pmpaddrX is set to 0, this decrement operation causes the
-calulated end address to wrap around to UINT_MAX. In this scenario, the
-address guard for this PMP entry would become ineffective.
+Thanks,
+Jay Chang
 
-This patch addresses the issue by moving the guard check earlier,
-preventing the problematic wraparound when pmpaddrX is zero.
+On Tue, Jul 1, 2025 at 11:46=E2=80=AFAM Nutty Liu <liujingqi@lanxincomputin=
+g.com>
+wrote:
 
-Signed-off-by: Vac Chen <vacantron@gmail.com>
----
- target/riscv/pmp.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+> On 7/1/2025 11:00 AM, Jay Chang wrote:
+> > RISC-V AIA Spec states:
+> > "For a machine-level environment, extension Smaia encompasses all added
+> > CSRs and all modifications to interrupt response behavior that the AIA
+> > specifies for a hart, over all privilege levels. For a supervisor-level
+> > environment, extension Ssaia is essentially the same as Smaia except
+> > excluding the machine-level CSRs and behavior not directly visible to
+> > supervisor level."
+> >
+> > Since midelegh is an AIA machine-mode CSR, add Smaia extension check in
+> > aia_smode32 predicate.
+> >
+> > Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > Signed-off-by: Jay Chang <jay.chang@sifive.com>
+> > ---
+> >   target/riscv/csr.c | 7 +++++--
+> >   1 file changed, 5 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 0e0ad37654..74ec0e1c60 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -374,8 +374,11 @@ static RISCVException aia_smode(CPURISCVState *env=
+,
+> int csrno)
+> >   static RISCVException aia_smode32(CPURISCVState *env, int csrno)
+> >   {
+> >       int ret;
+> > +    int csr_priv =3D get_field(csrno, 0x300);
+> >
+> > -    if (!riscv_cpu_cfg(env)->ext_ssaia) {
+> > +    if (csr_priv =3D=3D PRV_M && !riscv_cpu_cfg(env)->ext_smaia) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    } else if (!riscv_cpu_cfg(env)->ext_ssaia) {
+>
+> +    if ((csr_priv =3D=3D PRV_M && !riscv_cpu_cfg(env)->ext_smaia) ||
+> +        (!riscv_cpu_cfg(env)->ext_ssaia)) {
+>
+> Would the above code be better ?
+> Otherwise,
+> Reviewed-by: Nutty Liu<liujingqi@lanxincomputing.com>
+>
+> Thanks,
+> Nutty
+>
+> >           return RISCV_EXCP_ILLEGAL_INST;
+> >       }
+> >
+> > @@ -5911,7 +5914,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D =
+{
+> >       [CSR_MVIP]     =3D { "mvip",     aia_any, NULL, NULL, rmw_mvip   =
+ },
+> >
+> >       /* Machine-Level High-Half CSRs (AIA) */
+> > -    [CSR_MIDELEGH] =3D { "midelegh", aia_any32, NULL, NULL, rmw_midele=
+gh
+> },
+> > +    [CSR_MIDELEGH] =3D { "midelegh", aia_smode32, NULL, NULL,
+> rmw_midelegh },
+> >       [CSR_MIEH]     =3D { "mieh",     aia_any32, NULL, NULL, rmw_mieh
+>  },
+> >       [CSR_MVIENH]   =3D { "mvienh",   aia_any32, NULL, NULL, rmw_mvien=
+h
+>  },
+> >       [CSR_MVIPH]    =3D { "mviph",    aia_any32, NULL, NULL, rmw_mviph
+> },
+>
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 3540327c9a..72f1372a49 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -211,11 +211,12 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index)
-         break;
- 
-     case PMP_AMATCH_TOR:
--        sa = prev_addr << 2; /* shift up from [xx:0] to [xx+2:2] */
--        ea = (this_addr << 2) - 1u;
--        if (sa > ea) {
-+        if (prev_addr >= this_addr) {
-             sa = ea = 0u;
-+            break;
-         }
-+        sa = prev_addr << 2; /* shift up from [xx:0] to [xx+2:2] */
-+        ea = (this_addr << 2) - 1u;
-         break;
- 
-     case PMP_AMATCH_NA4:
--- 
-2.50.0
+--000000000000f68e56063953d623
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">I intended to separate the S-mode and M-mode handling.<br>
+Do you think this change could improve performance?<br><br>Thanks,<br><div>=
+Jay Chang</div></div><br><div class=3D"gmail_quote gmail_quote_container"><=
+div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jul 1, 2025 at 11:46=E2=80=AFA=
+M Nutty Liu &lt;<a href=3D"mailto:liujingqi@lanxincomputing.com">liujingqi@=
+lanxincomputing.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
+;padding-left:1ex">On 7/1/2025 11:00 AM, Jay Chang wrote:<br>
+&gt; RISC-V AIA Spec states:<br>
+&gt; &quot;For a machine-level environment, extension Smaia encompasses all=
+ added<br>
+&gt; CSRs and all modifications to interrupt response behavior that the AIA=
+<br>
+&gt; specifies for a hart, over all privilege levels. For a supervisor-leve=
+l<br>
+&gt; environment, extension Ssaia is essentially the same as Smaia except<b=
+r>
+&gt; excluding the machine-level CSRs and behavior not directly visible to<=
+br>
+&gt; supervisor level.&quot;<br>
+&gt;<br>
+&gt; Since midelegh is an AIA machine-mode CSR, add Smaia extension check i=
+n<br>
+&gt; aia_smode32 predicate.<br>
+&gt;<br>
+&gt; Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com"=
+ target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt; Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@w=
+dc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+&gt; Signed-off-by: Jay Chang &lt;<a href=3D"mailto:jay.chang@sifive.com" t=
+arget=3D"_blank">jay.chang@sifive.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0target/riscv/csr.c | 7 +++++--<br>
+&gt;=C2=A0 =C2=A01 file changed, 5 insertions(+), 2 deletions(-)<br>
+&gt;<br>
+&gt; diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
+&gt; index 0e0ad37654..74ec0e1c60 100644<br>
+&gt; --- a/target/riscv/csr.c<br>
+&gt; +++ b/target/riscv/csr.c<br>
+&gt; @@ -374,8 +374,11 @@ static RISCVException aia_smode(CPURISCVState *en=
+v, int csrno)<br>
+&gt;=C2=A0 =C2=A0static RISCVException aia_smode32(CPURISCVState *env, int =
+csrno)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0int ret;<br>
+&gt; +=C2=A0 =C2=A0 int csr_priv =3D get_field(csrno, 0x300);<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -=C2=A0 =C2=A0 if (!riscv_cpu_cfg(env)-&gt;ext_ssaia) {<br>
+&gt; +=C2=A0 =C2=A0 if (csr_priv =3D=3D PRV_M &amp;&amp; !riscv_cpu_cfg(env=
+)-&gt;ext_smaia) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_ILLEGAL_INST;<br>
+&gt; +=C2=A0 =C2=A0 } else if (!riscv_cpu_cfg(env)-&gt;ext_ssaia) {<br>
+<br>
++=C2=A0 =C2=A0 if ((csr_priv =3D=3D PRV_M &amp;&amp; !riscv_cpu_cfg(env)-&g=
+t;ext_smaia) ||<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 (!riscv_cpu_cfg(env)-&gt;ext_ssaia)) {<br>
+<br>
+Would the above code be better ?<br>
+Otherwise,<br>
+Reviewed-by: Nutty Liu&lt;<a href=3D"mailto:liujingqi@lanxincomputing.com" =
+target=3D"_blank">liujingqi@lanxincomputing.com</a>&gt;<br>
+<br>
+Thanks,<br>
+Nutty<br>
+<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_ILLEGAL_INST=
+;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; @@ -5911,7 +5914,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
+ {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MVIP]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mv=
+ip&quot;,=C2=A0 =C2=A0 =C2=A0aia_any, NULL, NULL, rmw_mvip=C2=A0 =C2=A0 },<=
+br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Machine-Level High-Half CSRs (AIA) */<br>
+&gt; -=C2=A0 =C2=A0 [CSR_MIDELEGH] =3D { &quot;midelegh&quot;, aia_any32, N=
+ULL, NULL, rmw_midelegh },<br>
+&gt; +=C2=A0 =C2=A0 [CSR_MIDELEGH] =3D { &quot;midelegh&quot;, aia_smode32,=
+ NULL, NULL, rmw_midelegh },<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MIEH]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mi=
+eh&quot;,=C2=A0 =C2=A0 =C2=A0aia_any32, NULL, NULL, rmw_mieh=C2=A0 =C2=A0 =
+=C2=A0},<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MVIENH]=C2=A0 =C2=A0=3D { &quot;mvienh&=
+quot;,=C2=A0 =C2=A0aia_any32, NULL, NULL, rmw_mvienh=C2=A0 =C2=A0},<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MVIPH]=C2=A0 =C2=A0 =3D { &quot;mviph&q=
+uot;,=C2=A0 =C2=A0 aia_any32, NULL, NULL, rmw_mviph=C2=A0 =C2=A0 },<br>
+</blockquote></div>
+
+--000000000000f68e56063953d623--
 
