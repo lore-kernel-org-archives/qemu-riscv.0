@@ -4,85 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D11C7C8303C
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Jul 2025 10:38:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88A12C8303C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Jul 2025 17:22:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uYjEY-00073I-VT; Mon, 07 Jul 2025 06:38:02 -0400
+	id 1uYpXB-0001YI-VE; Mon, 07 Jul 2025 13:21:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1uYjEW-00070t-Hr
- for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 06:38:00 -0400
-Received: from mail-oo1-xc2a.google.com ([2607:f8b0:4864:20::c2a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uYpVr-0000O2-VD
+ for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 13:20:21 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1uYjEU-0001Da-Kp
- for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 06:38:00 -0400
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-611f48c6e30so1867646eaf.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Jul 2025 03:37:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uYpVo-0004xM-28
+ for qemu-riscv@nongnu.org; Mon, 07 Jul 2025 13:20:19 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3a575a988f9so2130738f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 07 Jul 2025 10:20:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1751884677; x=1752489477; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0W3473qESWU4eEFuLAn+Ezs5htKD99X+YyUkM+SBz84=;
- b=aazHZ7vV3r2Vl1iKMrhQ4ulGaWg5qRezKtrMz9pYB7YpTUoUljPkcrNxQYvWYP3+WP
- XMiQIUPbuwOedGy+WSpn+FXexwCM9aq+H1eNkjWp6iUzgmLQr2uOfrwqPLMEmhm5pTx5
- 41HJgZgEsFfPn2WIaYnlaiAGS+dTfW27Uf2EthoVfKMr+Qxvum3+tnHY/FH9kX/dfpNN
- WEhyhXWtoS7ZUrqYHUFzWszilIYe3iWv6ZoFBiL91SewaZm95GBbhNAEglSljZlr7EBp
- tS49rUriZVXmIIZrIcoq4KaW8GAkoBYn9VeLTZK13kHwXYEg9CVlPmfCq1IBgtEki9KT
- a08Q==
+ d=linaro.org; s=google; t=1751908812; x=1752513612; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VwlvYMLKGx15+uSdEjsebhQs/sGbFO9TGa0DA+Ywmbs=;
+ b=slskS9gbDezEGGyxN738Fe/nkwSs07DsVX6vV5fYM5Ha2FgbrrCkcj5a9Fkesoe1Au
+ mOmEwtcZtIcDeYtALlXquN09jQsY1AUtpvcD86Aw2elJsJwOl/GdF//pEzvIKqbAHFKI
+ kw/KdVMswAtzP6WEiPNLKR4CdKXM2SpjO6EhP2VDQOkHavvR3bfXmiFi5UvfiwvnUF2Y
+ 1CtzaUn2h1DBdEH9mRBGurbWH9UGGsuKIxN6O5Ygco5DFtDJdeS9igzjGMf3kJsac8rO
+ SezMr0zTqM169KyzpB/WfUuthwFyNkf7XaldPCZGhKk4Z6svpTA3JuLCQFxNE1fH4C1H
+ tTAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751884677; x=1752489477;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1751908812; x=1752513612;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0W3473qESWU4eEFuLAn+Ezs5htKD99X+YyUkM+SBz84=;
- b=DFTOWm228Uq2vSqxn/HU+jZRshnuCS2EkvSAFqeDWjK1V6AoU58iKSlixFfR2pUe3u
- qne4Qe51BnY4UTl/T/rOPKk6Zj3Q2NMWqJct0H+zqU0faoAbUxc3qFN8+d7jlu3IbkaH
- JDOXjyWg1teVXLYvsgQxUi3QQPQudFakrV5F1VRTSqX8ucRwoNDiM7sRU6Uhl7VT6ktT
- 5HY5Jvz+Oj8KGB6FNQVzO0kuxlMLxeaBw3nhvS85rzauDwheKPO1xPbb6v+f/ZSXht8p
- CAWfBt+vWo5q0reU0C+owEgsKki219levgbEzdrdg2Xpzy/0tgbLdS8Wax/1G4sVGSbS
- VGhA==
+ bh=VwlvYMLKGx15+uSdEjsebhQs/sGbFO9TGa0DA+Ywmbs=;
+ b=kG8YJ+E+B4+AIXoIRHGg6eylxP8RiImEBJNt0qbGiANuth53mO0WA9yllpgxc4C+tN
+ uQuxzBIvNkdkpzMgsEDxbC3uCZ8cX1PydCX3YWhEHa9ejpaaZxaWZ5v70wXaKxEc5hBO
+ dlc4uoWNqYS4Soip9k6SQnWYgVdXCmpJIsVr7U4pwvHH2XIv6TCnEURKIqbOhK9vqrrf
+ iRbk8+ZfMtACMlZV/X0HJBX6MnSdPQdGWI8bd3BaFrJGOekxL/I4JLvC05YMUYEporzd
+ +e9NTWpQifFZemRSVGn8BD6arCRCibWwx3EzxoORQA4y63bYv8fZgpyn2lzkopEaDSaX
+ XX7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWMmni0yqEg6tpSlPiGqnZyBfAGB1rMMdqY1ACoxJB1oJ87czbYF0gLuFCfOC+UUGeMNiTgmhiavICy@nongnu.org
-X-Gm-Message-State: AOJu0YxyLDAqXWimQLgivxAEdPgU28MSrA5UtvtF1e6lkcLvICWZ7Vw6
- heS8Ha9XarUr3FgBxJtMYlj0Rj+/hifw7eR+hPZdj15gldgOZOEz08l8pvckyGMSWJxnycOeb70
- QXiGsuYb5Rq/YwUlj64prboJYzxmlOOS3hhzZXevbVQ==
-X-Gm-Gg: ASbGncu7VlwfKyAE65SaxIO/kD7bzey4+WmfC1vO524LqBSjc/ITDI1PiJsspLMAiyI
- 0NUfIsyJWsH7zazaXpmhFMYYpFN6oZFFaA77ulvgN+XdLYMYjblw3yCCHJljDV/sJWJdG/iioiA
- 9sYpk0mH9GBQR+iUBFNb9FZWPyzCuq0+/C+71u6TiMLrBN8A==
-X-Google-Smtp-Source: AGHT+IHAMsV88igw8ShyKuf8sXEoBVwZGi/qY/mCw86df4cM34hhVcuPzGQg8QVa73gMK6Inr+4y09dFnb3ksamN8+s=
-X-Received: by 2002:a05:6870:e08f:b0:2f3:4720:f7ca with SMTP id
- 586e51a60fabf-2f7afd02bd7mr6206192fac.2.1751884676734; Mon, 07 Jul 2025
- 03:37:56 -0700 (PDT)
+ AJvYcCVEKJPMSA+6F7uV3dIALzhsGRUAvEqXS1ke2ohBlY2NY7ge15BpzJvuL+RDPudWYVfcrpe5s/Hg7Z2P@nongnu.org
+X-Gm-Message-State: AOJu0YyTvzhnjxmduh5uDjdABNTiLtua6NS7dQwz4kuTMw6k22oPEkDq
+ 2Eag0IDOBSBVG+b6d6orMDxSrM7lia7nz6jpmJxoritGTijMwYMlcy5Ea2uCIHOgUtc=
+X-Gm-Gg: ASbGncsFSRs3Hmu1KPbKqCnIS9kERi8ssub24ZKNAX9z8cMZNybRDjKaDQZNSKDqZOi
+ i/NA++kjK+Bd0DMgG8dki/G4JTqb5Zxf3sO1BSV2kFjnrD+7a7Go+4kO81incbP1nV/ZhgvgjCQ
+ zgMXc8BnJOI56OgEQ+5HsQygCk/4K34BLgrB/imKlfPS+ccjnlCnHceH3baM4ikj74Lf+DBSeMH
+ nZAahaSEuXfnNnpHDbJG+reOxPocXpAdGbR5mg2xEpv3xZx1sHymZHA0ZXKoP4L6+6J+wn66EC5
+ 0rgITJBmWFgFKMEg9ZiYqxyinCTin1/5uYFNqQzdSQqQ6eJGZrmSBUfTbcLl9RqTAWMyLW/dkF4
+ sF4a6GbF8Dgsio3JTe+23KcH47WzbjWA63NlR
+X-Google-Smtp-Source: AGHT+IFXJaWZblJsvgvZ9YocoQ5qQUoqaCOLEEeQ4pK3oPMgd5g7JTcoK86RS82udO6VSR0rHXnl5A==
+X-Received: by 2002:a05:6000:25e3:b0:3a8:38b3:1aa1 with SMTP id
+ ffacd0b85a97d-3b49aa7746bmr6842620f8f.27.1751908811677; 
+ Mon, 07 Jul 2025 10:20:11 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b472767a20sm10623419f8f.86.2025.07.07.10.20.10
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Mon, 07 Jul 2025 10:20:11 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, qemu-s390x@nongnu.org,
+ qemu-arm@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-block@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [RFC PATCH-for-10.1 v6 00/14] target-info: Add more API for VirtIO
+ cleanups & introduce ARM macros
+Date: Mon,  7 Jul 2025 19:19:54 +0200
+Message-ID: <20250707172009.3884-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <20250627132156.440214-1-max.chou@sifive.com>
- <fdffc8af-897c-4f2d-a046-2b6c2bc370c4@ventanamicro.com>
-In-Reply-To: <fdffc8af-897c-4f2d-a046-2b6c2bc370c4@ventanamicro.com>
-From: Max Chou <max.chou@sifive.com>
-Date: Mon, 7 Jul 2025 18:37:46 +0800
-X-Gm-Features: Ac12FXza_t5L1MtaKO02w03sc9Qs8EABH1oOnTKZ3xW3t4CEF-tJYtrOE9nImFc
-Message-ID: <CANiaA1uoJu0vFQVrFrww4t5Sysa1XqM1esra0YEbStRxkGEoTA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: rvv: Minimum VLEN needs to respect V/Zve
- extensions
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: multipart/alternative; boundary="000000000000d83cd60639546fc4"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2a;
- envelope-from=max.chou@sifive.com; helo=mail-oo1-xc2a.google.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,229 +104,95 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000d83cd60639546fc4
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Rather than re-spinning the whole "single-binary: Make hw/arm/
+common" series, restrict to the API additions, but include
+examples of their usefulness (hundreds of virtio objects
+removed from default Linux build).
+Time passed since I context-switched out of this work so I'm
+not sure the DEFINE_MACHINE_WITH_INTERFACES() implementation
+is in the form Zoltan asked.
 
-Hi Daniel,
+Philippe Mathieu-Daudé (14):
+  target/qmp: Use target_cpu_type()
+  qemu/target-info: Factor target_arch() out
+  qemu/target-info: Add %target_arch field to TargetInfo
+  qemu/target-info: Introduce target_base_arch()
+  qemu/target-info: Add target_endian_mode()
+  qemu: Convert target_words_bigendian() to TargetInfo API
+  gdbstub/helpers: Replace TARGET_BIG_ENDIAN -> target_big_endian()
+  qemu: Declare all load/store helpert in 'qemu/bswap.h'
+  hw/virtio: Build various files once
+  hw/core/null-machine: Define machine as generic QOM type
+  hw/arm: Register TYPE_TARGET_ARM/AARCH64_MACHINE QOM interfaces
+  hw/core: Allow ARM/Aarch64 binaries to use the 'none' machine
+  hw/boards: Introduce DEFINE_MACHINE_WITH_INTERFACES() macro
+  hw/arm: Add DEFINE_MACHINE_[ARM_]AARCH64() macros
 
-Thanks for the question.
-Yes, you are right.
-And I find that I miss some patches for the part that you mentioned here.
-I'll update this patchset for it.
+ meson.build                           |  1 +
+ include/exec/tswap.h                  | 83 +--------------------------
+ include/gdbstub/helpers.h             | 15 ++---
+ include/hw/arm/machines-qom.h         | 31 ++++++++++
+ include/hw/boards.h                   |  6 +-
+ include/qemu/bswap.h                  | 73 +++++++++++++++++++++++
+ include/qemu/target-info-impl.h       |  8 ++-
+ include/qemu/target-info-qapi.h       | 36 ++++++++++++
+ include/qemu/target-info.h            | 10 +++-
+ include/system/memory.h               |  1 -
+ include/user/abitypes.h               |  1 -
+ target/ppc/mmu-hash64.h               |  2 -
+ cpu-target.c                          |  7 ---
+ hw/acpi/bios-linker-loader.c          |  2 -
+ hw/arm/allwinner-r40.c                |  1 -
+ hw/arm/boot.c                         |  2 +
+ hw/arm/npcm7xx.c                      |  2 +-
+ hw/block/hd-geometry.c                |  1 -
+ hw/char/riscv_htif.c                  |  1 -
+ hw/core/cpu-system.c                  |  2 +-
+ hw/core/machine-qmp-cmds.c            |  8 +--
+ hw/core/null-machine.c                | 20 ++++++-
+ hw/cxl/cxl-events.c                   |  2 -
+ hw/display/artist.c                   |  1 +
+ hw/display/ati.c                      |  1 +
+ hw/display/vga.c                      |  2 +-
+ hw/net/can/ctucan_core.c              |  1 -
+ hw/net/lan9118.c                      |  1 +
+ hw/net/rtl8139.c                      |  1 +
+ hw/net/vmxnet3.c                      |  1 -
+ hw/pci-host/gt64120.c                 |  1 +
+ hw/pci-host/pnv_phb3.c                |  1 +
+ hw/pci-host/pnv_phb4.c                |  1 +
+ hw/pci-host/ppce500.c                 |  1 -
+ hw/pci-host/sh_pci.c                  |  1 -
+ hw/s390x/s390-pci-inst.c              |  1 +
+ hw/sensor/lsm303dlhc_mag.c            |  1 -
+ hw/smbios/smbios.c                    |  1 +
+ hw/vfio/migration-multifd.c           |  1 -
+ hw/virtio/virtio-config-io.c          |  1 -
+ hw/virtio/virtio-pci.c                |  1 +
+ hw/virtio/virtio.c                    |  2 +-
+ hw/vmapple/virtio-blk.c               |  1 -
+ system/memory.c                       |  1 +
+ system/qtest.c                        |  1 +
+ target-info-qom.c                     | 24 ++++++++
+ target-info-stub.c                    |  3 +
+ target-info.c                         | 33 +++++++++++
+ target/arm/arm-qmp-cmds.c             |  3 +-
+ target/arm/cpu.c                      |  1 -
+ target/arm/machine.c                  | 12 ++++
+ target/i386/tcg/system/excp_helper.c  |  1 -
+ target/i386/xsave_helper.c            |  1 -
+ target/loongarch/loongarch-qmp-cmds.c |  3 +-
+ target/mips/system/mips-qmp-cmds.c    |  3 +-
+ target/riscv/vector_helper.c          |  1 -
+ tests/tcg/plugins/mem.c               |  1 +
+ hw/block/meson.build                  |  6 +-
+ hw/virtio/meson.build                 | 20 ++++---
+ 59 files changed, 302 insertions(+), 149 deletions(-)
+ create mode 100644 include/hw/arm/machines-qom.h
+ create mode 100644 include/qemu/target-info-qapi.h
+ create mode 100644 target-info-qom.c
 
-Thanks,
-Max
+-- 
+2.49.0
 
-
-On Wed, Jul 2, 2025 at 10:48=E2=80=AFPM Daniel Henrique Barboza <
-dbarboza@ventanamicro.com> wrote:
-
->
->
-> On 6/27/25 10:21 AM, Max Chou wrote:
-> > According to the RISC-V instruction set manual, the minimum VLEN needs
-> > to respect the following extensions:
-> >
-> >    Extension     Minimum VLEN
-> > * V             128
-> > * Zve64[d|f|x]   64
-> > * Zve32[f|x]     32
-> >
-> > Signed-off-by: Max Chou <max.chou@sifive.com>
-> > ---
-> >   target/riscv/tcg/tcg-cpu.c | 13 +++++++++++--
-> >   1 file changed, 11 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> > index 163e7ce3642..187534009dd 100644
-> > --- a/target/riscv/tcg/tcg-cpu.c
-> > +++ b/target/riscv/tcg/tcg-cpu.c
-> > @@ -416,12 +416,21 @@ static void
-> riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
-> >   static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig
-> *cfg,
-> >                                    Error **errp)
-> >   {
-> > +    uint32_t min_vlen;
-> >       uint32_t vlen =3D cfg->vlenb << 3;
-> >
-> > -    if (vlen > RV_VLEN_MAX || vlen < 128) {
-> > +    if (riscv_has_ext(env, RVV)) {
-> > +        min_vlen =3D 128;
-> > +    } else if (cfg->ext_zve64x) {
-> > +        min_vlen =3D 64;
-> > +    } else if (cfg->ext_zve32x) {
-> > +        min_vlen =3D 32;
-> > +    }
->
-> At this moment this is how we're calling riscv_cpu_validate_v():
->
->      if (riscv_has_ext(env, RVV)) {
->          riscv_cpu_validate_v(env, &cpu->cfg, &local_err);
->          if (local_err !=3D NULL) {
->              error_propagate(errp, local_err);
->              return;
->          }
->      }
->
->
-> riscv_has_ext(env, RVV) is always true inside the function. The code abov=
-e
-> will
-> always result in min_vlen =3D 128 because of the 'else if' chaining.
->
-> IIUC the idea of the patch, what you want is something like:
->
-> > +    uint32_t min_vlen =3D 128;
-> >       uint32_t vlen =3D cfg->vlenb << 3;
-> >
-> > -    if (vlen > RV_VLEN_MAX || vlen < 128) {
-> > +    if (cfg->ext_zve64x) {
-> > +        min_vlen =3D 64;
-> > +    } else if (cfg->ext_zve32x) {
-> > +        min_vlen =3D 32;
-> > +    }
->
-> I.e. init min_vlen to 128 (since RVV is always true) and then change it
-> according to
-> zve64x and zve32x.
->
->
-> Thanks,
->
-> Daniel
->
->
->
-> > +
-> > +    if (vlen > RV_VLEN_MAX || vlen < min_vlen) {
-> >           error_setg(errp,
-> >                      "Vector extension implementation only supports VLE=
-N
-> "
-> > -                   "in the range [128, %d]", RV_VLEN_MAX);
-> > +                   "in the range [%d, %d]", min_vlen, RV_VLEN_MAX);
-> >           return;
-> >       }
-> >
->
->
-
---000000000000d83cd60639546fc4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi=C2=A0Daniel,</div><div><br></div><div>Thanks for t=
-he question.</div><div>Yes, you are right.</div><div>And I find=C2=A0that I=
- miss some patches for the part that you mentioned here.</div><div>I&#39;ll=
- update this patchset for it.</div><div><br></div><div><div dir=3D"ltr" cla=
-ss=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr">=
-Thanks,<br>Max</div></div></div><br></div><br><div class=3D"gmail_quote gma=
-il_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 2, 20=
-25 at 10:48=E2=80=AFPM Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarbo=
-za@ventanamicro.com">dbarboza@ventanamicro.com</a>&gt; wrote:<br></div><blo=
-ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
--width:1px;border-left-style:solid;border-left-color:rgb(204,204,204);paddi=
-ng-left:1ex"><br>
-<br>
-On 6/27/25 10:21 AM, Max Chou wrote:<br>
-&gt; According to the RISC-V instruction set manual, the minimum VLEN needs=
-<br>
-&gt; to respect the following extensions:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 Extension=C2=A0 =C2=A0 =C2=A0Minimum VLEN<br>
-&gt; * V=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0128<br>
-&gt; * Zve64[d|f|x]=C2=A0 =C2=A064<br>
-&gt; * Zve32[f|x]=C2=A0 =C2=A0 =C2=A032<br>
-&gt; <br>
-&gt; Signed-off-by: Max Chou &lt;<a href=3D"mailto:max.chou@sifive.com" tar=
-get=3D"_blank">max.chou@sifive.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0target/riscv/tcg/tcg-cpu.c | 13 +++++++++++--<br>
-&gt;=C2=A0 =C2=A01 file changed, 11 insertions(+), 2 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c<b=
-r>
-&gt; index 163e7ce3642..187534009dd 100644<br>
-&gt; --- a/target/riscv/tcg/tcg-cpu.c<br>
-&gt; +++ b/target/riscv/tcg/tcg-cpu.c<br>
-&gt; @@ -416,12 +416,21 @@ static void riscv_cpu_validate_misa_priv(CPURISC=
-VState *env, Error **errp)<br>
-&gt;=C2=A0 =C2=A0static void riscv_cpu_validate_v(CPURISCVState *env, RISCV=
-CPUConfig *cfg,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Error **errp)<br>
-&gt;=C2=A0 =C2=A0{<br>
-&gt; +=C2=A0 =C2=A0 uint32_t min_vlen;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0uint32_t vlen =3D cfg-&gt;vlenb &lt;&lt; 3;<=
-br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; -=C2=A0 =C2=A0 if (vlen &gt; RV_VLEN_MAX || vlen &lt; 128) {<br>
-&gt; +=C2=A0 =C2=A0 if (riscv_has_ext(env, RVV)) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 min_vlen =3D 128;<br>
-&gt; +=C2=A0 =C2=A0 } else if (cfg-&gt;ext_zve64x) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 min_vlen =3D 64;<br>
-&gt; +=C2=A0 =C2=A0 } else if (cfg-&gt;ext_zve32x) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 min_vlen =3D 32;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-<br>
-At this moment this is how we&#39;re calling riscv_cpu_validate_v():<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0if (riscv_has_ext(env, RVV)) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0riscv_cpu_validate_v(env, &amp;cpu-&gt;cf=
-g, &amp;local_err);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (local_err !=3D NULL) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_propagate(errp, local=
-_err);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-<br>
-<br>
-riscv_has_ext(env, RVV) is always true inside the function. The code above =
-will<br>
-always result in min_vlen =3D 128 because of the &#39;else if&#39; chaining=
-.<br>
-<br>
-IIUC the idea of the patch, what you want is something like:<br>
-<br>
-&gt; +=C2=A0 =C2=A0 uint32_t min_vlen =3D 128;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0uint32_t vlen =3D cfg-&gt;vlenb &lt;&lt; 3;<=
-br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; -=C2=A0 =C2=A0 if (vlen &gt; RV_VLEN_MAX || vlen &lt; 128) {<br>
-&gt; +=C2=A0 =C2=A0 if (cfg-&gt;ext_zve64x) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 min_vlen =3D 64;<br>
-&gt; +=C2=A0 =C2=A0 } else if (cfg-&gt;ext_zve32x) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 min_vlen =3D 32;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-<br>
-I.e. init min_vlen to 128 (since RVV is always true) and then change it acc=
-ording to<br>
-zve64x and zve32x.<br>
-<br>
-<br>
-Thanks,<br>
-<br>
-Daniel<br>
-<br>
-<br>
-<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if (vlen &gt; RV_VLEN_MAX || vlen &lt; min_vlen) {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0error_setg(errp,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 &quot;Vector extension implementation only supports VLEN &quot;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-&quot;in the range [128, %d]&quot;, RV_VLEN_MAX);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-&quot;in the range [%d, %d]&quot;, min_vlen, RV_VLEN_MAX);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0<br>
-<br>
-</blockquote></div>
-
---000000000000d83cd60639546fc4--
 
