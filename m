@@ -4,83 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44C08C8303C
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 19:42:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92425C83F09
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 20:00:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uZEBt-0002WE-EI; Tue, 08 Jul 2025 15:41:24 -0400
+	id 1uZETq-00065W-Dp; Tue, 08 Jul 2025 15:59:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uZBMA-0005sc-Tn
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 12:40:28 -0400
-Received: from mail-oo1-f53.google.com ([209.85.161.53])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1uZCO7-0008Bz-Kq
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 13:45:52 -0400
+Received: from mail-oo1-xc31.google.com ([2607:f8b0:4864:20::c31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uZBLH-0007ay-0w
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 12:39:24 -0400
-Received: by mail-oo1-f53.google.com with SMTP id
- 006d021491bc7-6118b000506so1185064eaf.0
- for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 09:34:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1uZCMn-0002HX-Jp
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 13:45:47 -0400
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-60be827f2b7so82701eaf.0
+ for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 10:44:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1751992377; x=1752597177; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1751996648; x=1752601448; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=1X4IAeA2O2T066BMmgQNMiWh7XnPFYJbke9bUDYN7EM=;
- b=Vw3kpzxzzmg3ttRj5shN0a64Lv69/8IDi8C/co9mFg7utnTIgedvObmXAaJrK93tKf
- WFjOFJU8fvmBoXuGB5wFJw8vqyzx75yvVRmvJXzel39WWDqRdw5D0CrPlHnhp2MledNY
- KkklXP6wTcIUlHqUEiYG5qcWeDKOGaSyFrCu2kWacb94iAm64n5WMnEmriS+JXcHCFUf
- 4aZSmiVEiUbzoXwDPtPS12oSmlQhed1Kubq+pAZWhD9lWZIfBNzodtM62RW5nyopKvVs
- Ng4+zgHbipquSql8X+/fBD4+IVXiyv6FkIo8tGH/3T8z8q9vxra5CE0/xsIRjE6BnA3S
- Ne8Q==
+ bh=NHI/pe/hYxCWaN7ZHnWIgGI8hQCDTXyWj/FvjsArrTs=;
+ b=UxQlEhCs61sUNKGEdNFv82Ll+ML9+MUzz+iq6XxOni/zkRdGQntf1l6dqeG70PAU4f
+ jb9+cWf6r+QS/WCK1HcCIzZ7N3wQFdtKjMvGr9+ZFqdEN4sF6ykPiJVFJjSsua9AFtz4
+ d+5Bdb4iMp6VCbksYpmolQ1a7CzEJXHr47oZTmILjFctZ9m6+Le5RTAb/G6/yy/R9r62
+ PzxSPZ8bCFoFGCaPYdrwNO04WoRC8mQmNI8jjB28D8Lh6nf+EW7ozl5Oz95fbX0b6SvN
+ Gt0CvP/0UWdeXLyI4cxo7vKkO6YBsFCv5WKvy04POLAf4SginTu65iBlgbxsVF9wOkBs
+ 9EKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751992377; x=1752597177;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1751996648; x=1752601448;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1X4IAeA2O2T066BMmgQNMiWh7XnPFYJbke9bUDYN7EM=;
- b=vEgE8iL1F7gzODdPdlaTRto7blJjdWzzCkUcGIZfO9aHNCiIFII5DM26/NWCIGF0nF
- KDDslYF0We/x1LTzQ3AqwyqjJnOhbZwFnXEvCIz5Bq+2w6yrazW9gPNUf+8LSRQcRj3G
- mqVz0giTYueLqoSbieeKw1fMFEt3V6dPmqWv/mMu3etgxDwMtIJh7pqmzp6OSNMOPyzw
- H34Q32BhSGLCguh4OQBtXqRDE3J/X+CvH+83LO1mckflG9D9+tz9JQ+5oTz0kVD/78rN
- 2h1t7se1PTWNwyVUwJz42U8n7lkJ6KbYkBbGPZ70wYhYTYfMgEagsr8PIIQipuB541jn
- aKNQ==
-X-Gm-Message-State: AOJu0YzQZTKlhmttczRQ4r4TwvsKxLnzVmNlHyi3gFfJoaOt8rouxicX
- BhOEiE9RS+MwnozYR7ZPAoQP5LRC0StVasg8Xq2kyMCyTyUuMNylb97wmK6smclsQf4173bZqsV
- oqdIE
-X-Gm-Gg: ASbGnctr8+d22x+s5gSuYmMMkqecZhSsaKK3YgntjYmpgdZs2+xxPBMmseFL4hNhPah
- H/EbJvxF+SVbZnsRzladK2pE3D9FE8poLhLyzVRRdmHSaihJJgPnj/XN2W55AwBt4yxXtXFXwod
- 0/uJSJ15YSvjWGrzL6O7FASg09tK8rK7SkYiyPm2GKlZmwbb/9DRJY67zA2CvF43dHm0W/e83no
- uOhO7ILOazoqX3a3aFxIn2ySKfUMRy26r4stotcpc2b2yaupaO9Bk0bdccX5EOE0d5R8XooeTMF
- aNxov1CrBR0LzGj2a90pn2PnymtzYYrFuUP2cb5fuueROn1hAIilp0IoVxR2uqBQc3t+w1uAb7V
- tXw==
-X-Google-Smtp-Source: AGHT+IE1RAIpgU7PfYmnyNhZFs+JOB2uhU0+u5Bzss/zroThLGY4tIyQjh/pcBTd+I7qj4plzcvEUQ==
-X-Received: by 2002:ae9:ec01:0:b0:7d4:3c5d:3256 with SMTP id
- af79cd13be357-7d9ecdfaea0mr403667685a.53.1751971708033; 
- Tue, 08 Jul 2025 03:48:28 -0700 (PDT)
-Received: from [192.168.68.110] ([189.110.107.157])
+ bh=NHI/pe/hYxCWaN7ZHnWIgGI8hQCDTXyWj/FvjsArrTs=;
+ b=e87qNz+NrE1ULr+aEYHborujLv7Rg0F+COIRUaJRbDiaXWHJdBdOq+3bR+wZaBshXc
+ Mt2exQJfzvKsp00q4nbiE1QMLHkYe+G2Ct7zgV86ztr8FOJu7v8XZO76YyVZEBzkUeU9
+ eZvIGggxm0LejPXbPlA1GGnYUJDtjNrWyIcydIsa+RKJc/dl00N3y/CWiYjPKAhf+a7Y
+ cyljEdH9/LIT0nQLQoSBLH89UxI7Pqp59OtE2rTlMEerVV9FNgZrp/b0gQp5Qr0t6OD7
+ 2s7pS01AJU8QqKBanbNy76+DQww5ECTAAILSTLqxae6EHC3aFyGLJgnhnJa0fqSzKmtk
+ LciQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXaNHxa/zd4bZAfMBT+HZOYgFu5vEfSPHgOSCRt4zxQeYCF83V/DKEwhxwibbdvd2wzNCbM0zmTkQ7/@nongnu.org
+X-Gm-Message-State: AOJu0YxnFJfX5XZ8F1LssR4xcvoyf/2vBsckzD7+lFfWmNnZc3+8g+70
+ sWBECKxpe36xnPErtNfmMGGDwZiC4SKS+xl4fP1gSP1XcTAnh9Ps0jCTYc5xyYVfYP6yK0dGbJV
+ hIhsP
+X-Gm-Gg: ASbGncsbx/jrl8HMSoFT7azSvYjbE/BMe4W2S0rB/fNN+gtc1QGjbfJFCy6XwweRxD8
+ 1jIDj7gBJyBw2StxNgkZ4n0mwGqgyhjY4LSlT9KH5Q+AI2B38Tfdcil/AlrJy8aHsfNLMeseUsg
+ SnJRdKfeF4UN6iIXQsHyrNko/QyLqRAwYa0uxDUxkua42TzEfExH8fz5qu1eKTe8BxsfJgSvc/7
+ 4cPaBUzGrTT33J8SjKy9/qpTAYkELbfuYynj9gquQ1DBPOo2RPYdBvaKn1poGe+pywEDD4WfZRA
+ a7BUfknMWQdZH2h4QUL8AN21/W+oxnoe8mUMlYUWVx45BQPJFZg4V77+zh2OPOfffTqeocZBtg1
+ dRgTDxPXweA==
+X-Google-Smtp-Source: AGHT+IHVgoyd0HH+KmsdHkQpMJxYW0hptSnGBPEC8SUBQ0yvzQICg0NnhyPOCx14mOIWwKBsXyhJFQ==
+X-Received: by 2002:a05:6a00:1ad0:b0:744:a240:fb1b with SMTP id
+ d2e1a72fcca58-74d2678c6c4mr5240287b3a.5.1751996182113; 
+ Tue, 08 Jul 2025 10:36:22 -0700 (PDT)
+Received: from [192.168.1.87] ([38.41.223.211])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7d5dbe8f844sm754423885a.82.2025.07.08.03.48.25
+ d2e1a72fcca58-74ce42cefccsm12116590b3a.156.2025.07.08.10.36.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Jul 2025 03:48:27 -0700 (PDT)
-Message-ID: <b9e539ee-cf63-4a64-a3f2-03dfe7bc82a5@ventanamicro.com>
-Date: Tue, 8 Jul 2025 07:48:23 -0300
+ Tue, 08 Jul 2025 10:36:21 -0700 (PDT)
+Message-ID: <e319122d-f7f6-4b37-930e-87d2750557f3@linaro.org>
+Date: Tue, 8 Jul 2025 10:36:20 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] riscv: add all available CSRs to 'info registers'
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
-References: <20250623172119.997166-1-dbarboza@ventanamicro.com>
+Subject: Re: [PATCH-for-10.1? v7 8/8] hw/virtio: Build various files once
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250623172119.997166-1-dbarboza@ventanamicro.com>
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-block@nongnu.org,
+ qemu-ppc@nongnu.org, Kevin Wolf <kwolf@redhat.com>,
+ Hanna Reitz <hreitz@redhat.com>
+References: <20250708171949.62500-1-philmd@linaro.org>
+ <20250708171949.62500-9-philmd@linaro.org>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+In-Reply-To: <20250708171949.62500-9-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=209.85.161.53;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-f53.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c31;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-oo1-xc31.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,41 +113,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Ping
+On 7/8/25 10:19 AM, Philippe Mathieu-Daudé wrote:
+> Now that various VirtIO files don't use target specific
+> API anymore, we can move them to the system_ss[] source
+> set to build them once.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+> ---
+> MST prefers to defer this one to 10.2.
+> 
+>   hw/virtio/virtio-config-io.c |  1 -
+>   hw/block/meson.build         |  6 ++++--
+>   hw/virtio/meson.build        | 20 +++++++++++---------
+>   3 files changed, 15 insertions(+), 12 deletions(-)
 
-It would be nice to have all CSRs for 'info registers' for the next release.
-We have one week before the freeze :D
-
-
-Thanks,
-
-Daniel
-
-On 6/23/25 2:21 PM, Daniel Henrique Barboza wrote:
-> Hi,
-> 
-> The output of HMP 'info registers', implemented by the cpu_dump_state
-> callback, returns way less CSRs than what we have available in the
-> default rv64 CPU with default options.
-> 
-> This series changes the callback to add all available non-vector CSRs
-> when issuing 'info registers'. The vector CSRs are being handled by
-> another patch [1].
-> 
-> Patches based on alistair/riscv-to-apply.next.
-> 
-> [1] https://lore.kernel.org/qemu-riscv/20250623145306.991562-1-dbarboza@ventanamicro.com/
-> 
-> 
-> Daniel Henrique Barboza (3):
->    target/riscv/cpu: add riscv_dump_csr() helper
->    target/riscv/cpu: print all FPU CSRs in riscv_cpu_dump_state()
->    target/riscv: print all available CSRs in riscv_cpu_dump_state()
-> 
->   target/riscv/cpu.c | 107 +++++++++++++++++----------------------------
->   target/riscv/cpu.h |   2 +
->   target/riscv/csr.c |  18 ++++++++
->   3 files changed, 61 insertions(+), 66 deletions(-)
-> 
+Good job!
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
 
