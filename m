@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54DC7C83F09
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 22:09:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC6DBC8303C
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 22:10:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uZGUl-0008RQ-9u; Tue, 08 Jul 2025 18:08:59 -0400
+	id 1uZGV7-0001ye-92; Tue, 08 Jul 2025 18:09:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZGCG-0003k8-Sl
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:49:52 -0400
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZGC5-0003Jd-90
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:49:42 -0400
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZGCE-0002vx-25
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:49:52 -0400
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3b49ffbb31bso2002210f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 14:49:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZGC2-0002tx-F1
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:49:40 -0400
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-453643020bdso38218315e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 14:49:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752011388; x=1752616188; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=91kh8gM7bE1DvG8K9EhiXTHWKL7JzNJQDQuB0S1EOTc=;
- b=qPi4QAjrl0OKEVH83y3dj+AMZuXeITMFOLtQaBex20C+U36HUU7OuUFbiOx5rKmMNx
- ZRwrWWCxgwWHACcgtjU50ctV9psdJ0xRsP9/F9TBMyBzaJu+qviyvMeJJvCaIgeIydza
- WhGeeu65HeXTMNxSw9CjV8AldRgNURoUMLp5KGULu1Eyg61Iq02ZNymSROHZ18UttdXi
- s1PtdZ4+bHSCXrrXAAGBgcsiKrSH1iyVCsC6F3n8Pua2Jszti8bEdyOst0Bc+6rpPyR1
- 21cA1c7C7PX7ClJlhjuZ6bYKSDJcG6+mDTbZcBfSlcrvdF+pnoxIKJv/Vc1n/xu0DUuY
- XLqQ==
+ d=linaro.org; s=google; t=1752011374; x=1752616174; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2TPssIGpA26FxAQRYqaDNvET5x0SuwepHaZsGlb/dBw=;
+ b=JLzY3OL1QHHf8V6O5czWUXG+866YXlOfYEnhPO8Jkw1P/eeyngMWER0GDyLyabKcCE
+ 1utfK6NDDf8q5/u4UGgx7LpkxEZsA1/JdNs1LWYR/TnCGLUsx12EfZ5zo9hDo7AQuOar
+ FSXk1emS2DVBS6WbDVpHHMf8r2wCTHX9HQeh/CHuPZJVDTGivBUJV8MzfBV8Fa1jFQ2a
+ B5AjIcD+IBWqzgjS8OJ5O065iPWBd1cKvqTnhJGs5GXTaSbIjQXUg2tJS/LlhN4bbMGy
+ 4dtxdvhxLbz+aPoFt3XeiSFxJKHMhEd49TIfg33ADTKmlMMfsk6iWpUTW+elmrmsFIn2
+ V+GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752011388; x=1752616188;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=91kh8gM7bE1DvG8K9EhiXTHWKL7JzNJQDQuB0S1EOTc=;
- b=XLQWUPQSd71Bz5HAmWtQdfGE4zMoQDT1DnmnCtAet2pRqj0AjwL224SNQEC2ztDhy4
- 8AUhToHf5RIKBXEBhiWS1ym0tC/qSI35wb79WiOZh7nzEE276o+ZSdySsqMtge7OF+E3
- XOIg55OiVbtCdXgS74jP6NH/ZRSahyF+fyYAtxtKj2bbdhN4LW7ZWtTdN6LlLd3UYDu6
- GIVx74Il/PAuf0OVE25LpKPcVejmJ7Y9kI8m0GRxwjlYEnSpWb7vCfjA4xSCYpMa6h+7
- Y9eR8geyA3g8JE8PAVQF/zhAyaVW8nvmKqUlF+4DqQtlGI3ZE/5iC6glK7bOltElX1qC
- 0xWg==
+ d=1e100.net; s=20230601; t=1752011374; x=1752616174;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2TPssIGpA26FxAQRYqaDNvET5x0SuwepHaZsGlb/dBw=;
+ b=A0lKFlR4WikwiMB2woSuy9v+ibqHjISEHsF+J/fJjr3x9P4J5RCwWCE6FG7bbJgDo4
+ ZE8YflhBQRCUbqRlKuULPFMYNS/Bmf4l+Hb+RTAO7BoBG+DTBKAWwvc1+Yu3eQYYU8J1
+ ub/GH7NuJKNnjZTPjMj/E7bEi+Ag0nFCurAirbEbBR/k0G1h8njFBbVNQ0HfB0LpIoxO
+ cs8hp26pYOuO5XMuYfCCUeQh55B2XKXQDSkJXnn46v2CNJs7R3RSVpF/Yi99Cw0xcoIF
+ oWL2ukwCoqZEvJFBwawwYpWCJKC6zsOeAiu066D4dy+XO0eluR0MSi5ANdYiP8yXVOnf
+ xRqQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9OSXEFEq7GS2/KlLNlrMtY7TAz/PgfmbT0bllE/LDP7SciShrl2k+VwCCCcARKpHKoBlIAckiNbYu@nongnu.org
-X-Gm-Message-State: AOJu0Yw2G5n5bSuEJIMwjUW+6QY0daAFf4K9xPAs/zYU+z4U0YlS5pf/
- MQlzGjToG0GcUCxI0dqeynKe3xdArQXydzcEHO7+8SO2uP3RMNTY2VY6GSPFuKNVFcE=
-X-Gm-Gg: ASbGnctY+Fv6ji9lK3a/iLvmPMdTeHj9uGEJA4647eGsK93Vh4FNllRfc1VzFf7TLjY
- NASwuz4eOmGFbNBfo4AguKAN8R3+Oh1jaBJS/mnKGyvdrMxhsi6QvXsAZoGpiPuSjApVgbMBhyb
- BZfEv5FQ03crg2M7f/Itlz3d1CkoztlsBBcj6gZgXaYmKVR0v76UhrepKQs2fKr/iwXLKCFXsZ4
- IVoMkfu8wUmLZ/QJxsrLTSnzlGpETgVhDrsXjGRUop1OWqLjMhLSsxQSdgMmy2Q0hTWr48D7O26
- mg/uaaVi1lj2HmySnSoZsSqcXE2ZYTw33mbPLlK7yq70Pwuf0f3FTL6LcULhMUkopu7CGbc/Ara
- LqSm5NBb0NGdhqcdHVQDQlwZxtDRMJk27QDbI
-X-Google-Smtp-Source: AGHT+IGz/nDlysTObTTFveGgG8xteLGP44HOWLHgSh2RSo9II+etzca5BMNc9nan0XmMMHCx5DdNig==
-X-Received: by 2002:adf:b64a:0:b0:3b3:9ca4:ac8e with SMTP id
- ffacd0b85a97d-3b5e320cdeemr684024f8f.44.1752011388403; 
- Tue, 08 Jul 2025 14:49:48 -0700 (PDT)
+ AJvYcCUtOfNXCDiaxnNwyU5NEmePyt/4j4Riqr/srTxMNg3xXSkh+6vQEdphemCrJFILyiMczrSGEi01buAu@nongnu.org
+X-Gm-Message-State: AOJu0YyirgMsxWRZrAu9tzEK6vlwPPt2/ScYqkrr1jCJ9ulqASpjY6RE
+ LzcqByfeVnZPS77ivdMmBQiHnIYEq49Q9A2o+Yo3CW/T47LqTVlSQg1h2DeJKnLOhA8=
+X-Gm-Gg: ASbGncuOtx2jBUVzN02hjjdUjqzjw6MUjxvt+RSHWdCGDH3gTaW9YW4ILapt+U9KcQA
+ kYUQk1Uc9k8nrCog0qgHfZfbmqIv5TImk+PuFqz3jnAj3XddnhROUW6DLu/I9khxeP5zSqQnyW/
+ PowZ++ZNxOt2GAL5ZtMoKGT/PL96iXDJgdWAdKFuUcBBAeFEzrdhhFbKiaZMO4PTpn0/rgbYJyG
+ cZek3UUATzl3nwgAEWjlrLiTCShdRekcmQ2ox6zlCd3XhyrpZIOAep9yj5NsEjuZizule/qyL0h
+ pW3izQ1B44dVAXWDIs/bytus1rx8y/OwDTeTLxm1LG5XgIEgxr177B6Dqz1kNVqPLcMbmOt7fKN
+ G4NqBAaTc60Fj5EjTOTBq/CMiHDK2iK21ZCvG
+X-Google-Smtp-Source: AGHT+IECnQy8a/pNsmle0teIaY8bm8tVZJN3JkeuFQQKRFkJMHybmXrieGz5GX9W1JJE3Jt7cI3S8A==
+X-Received: by 2002:a05:600c:6745:b0:453:8042:ba9a with SMTP id
+ 5b1f17b1804b1-454d367340fmr10191195e9.28.1752011374251; 
+ Tue, 08 Jul 2025 14:49:34 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b47285d3bbsm14150487f8f.96.2025.07.08.14.49.41
+ 5b1f17b1804b1-454d506120fsm680505e9.17.2025.07.08.14.49.26
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 08 Jul 2025 14:49:47 -0700 (PDT)
+ Tue, 08 Jul 2025 14:49:33 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -74,22 +73,16 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-arm@nongnu.org, Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>, Song Gao <gaosong@loongson.cn>,
- Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <arikalo@gmail.com>
-Subject: [PATCH-for-10.1 v8 1/8] target/qmp: Use target_cpu_type()
-Date: Tue,  8 Jul 2025 23:49:10 +0200
-Message-ID: <20250708214918.70076-2-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH-for-10.1 v8 0/8] target-info: Add more API for VirtIO cleanups
+Date: Tue,  8 Jul 2025 23:49:09 +0200
+Message-ID: <20250708214918.70076-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250708214918.70076-1-philmd@linaro.org>
-References: <20250708214918.70076-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,78 +105,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
----
- target/arm/arm-qmp-cmds.c             | 3 ++-
- target/loongarch/loongarch-qmp-cmds.c | 3 ++-
- target/mips/system/mips-qmp-cmds.c    | 3 ++-
- 3 files changed, 6 insertions(+), 3 deletions(-)
+Missing review: #6 (gdbstub)
 
-diff --git a/target/arm/arm-qmp-cmds.c b/target/arm/arm-qmp-cmds.c
-index cefd2352638..d292c974c44 100644
---- a/target/arm/arm-qmp-cmds.c
-+++ b/target/arm/arm-qmp-cmds.c
-@@ -21,6 +21,7 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qemu/target-info.h"
- #include "hw/boards.h"
- #include "kvm_arm.h"
- #include "qapi/error.h"
-@@ -241,7 +242,7 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
-     CpuDefinitionInfoList *cpu_list = NULL;
-     GSList *list;
- 
--    list = object_class_get_list(TYPE_ARM_CPU, false);
-+    list = object_class_get_list(target_cpu_type(), false);
-     g_slist_foreach(list, arm_cpu_add_definition, &cpu_list);
-     g_slist_free(list);
- 
-diff --git a/target/loongarch/loongarch-qmp-cmds.c b/target/loongarch/loongarch-qmp-cmds.c
-index f5f1cd0009d..1d8cd32f5fc 100644
---- a/target/loongarch/loongarch-qmp-cmds.c
-+++ b/target/loongarch/loongarch-qmp-cmds.c
-@@ -7,6 +7,7 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qemu/target-info.h"
- #include "qapi/error.h"
- #include "qapi/qapi-commands-machine.h"
- #include "cpu.h"
-@@ -32,7 +33,7 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
-     CpuDefinitionInfoList *cpu_list = NULL;
-     GSList *list;
- 
--    list = object_class_get_list(TYPE_LOONGARCH_CPU, false);
-+    list = object_class_get_list(target_cpu_type(), false);
-     g_slist_foreach(list, loongarch_cpu_add_definition, &cpu_list);
-     g_slist_free(list);
- 
-diff --git a/target/mips/system/mips-qmp-cmds.c b/target/mips/system/mips-qmp-cmds.c
-index d98d6623f2f..b6a2874f2dd 100644
---- a/target/mips/system/mips-qmp-cmds.c
-+++ b/target/mips/system/mips-qmp-cmds.c
-@@ -7,6 +7,7 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qemu/target-info.h"
- #include "qapi/error.h"
- #include "qapi/qapi-commands-machine.h"
- #include "cpu.h"
-@@ -40,7 +41,7 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
-     CpuDefinitionInfoList *cpu_list = NULL;
-     GSList *list;
- 
--    list = object_class_get_list(TYPE_MIPS_CPU, false);
-+    list = object_class_get_list(target_cpu_type(), false);
-     g_slist_foreach(list, mips_cpu_add_definition, &cpu_list);
-     g_slist_free(list);
- 
+Since v7:
+- Fixed e.g. typo
+- Keep "do *not* use target_big_endian()" warning
+- Do not use tswap() in gdbstub
+
+Since v6:
+- Added R-b tags
+- Fixed typos
+- Dropped "Introduce target_base_arch()" because unused so far
+- Dropped unrelated patches
+
+Philippe Mathieu-Daudé (8):
+  target/qmp: Use target_cpu_type()
+  qemu/target-info: Factor target_arch() out
+  qemu/target-info: Add %target_arch field to TargetInfo
+  qemu/target-info: Add target_endian_mode()
+  qemu: Convert target_words_bigendian() to TargetInfo API
+  gdbstub/helpers: Replace TARGET_BIG_ENDIAN -> target_big_endian()
+  qemu: Declare all load/store helper in 'qemu/bswap.h'
+  hw/virtio: Build various files once
+
+ include/exec/tswap.h                  | 83 +--------------------------
+ include/gdbstub/helpers.h             | 48 ++++++++++------
+ include/qemu/bswap.h                  | 73 +++++++++++++++++++++++
+ include/qemu/target-info-impl.h       |  6 +-
+ include/qemu/target-info-qapi.h       | 29 ++++++++++
+ include/qemu/target-info.h            | 14 ++++-
+ include/system/memory.h               |  1 -
+ include/user/abitypes.h               |  1 -
+ target/ppc/mmu-hash64.h               |  2 -
+ cpu-target.c                          |  7 ---
+ hw/acpi/bios-linker-loader.c          |  2 -
+ hw/arm/allwinner-r40.c                |  1 -
+ hw/arm/boot.c                         |  2 +
+ hw/arm/npcm7xx.c                      |  2 +-
+ hw/block/hd-geometry.c                |  1 -
+ hw/char/riscv_htif.c                  |  1 -
+ hw/core/cpu-system.c                  |  2 +-
+ hw/core/machine-qmp-cmds.c            |  8 +--
+ hw/cxl/cxl-events.c                   |  2 -
+ hw/display/artist.c                   |  1 +
+ hw/display/ati.c                      |  1 +
+ hw/display/vga.c                      |  2 +-
+ hw/net/can/ctucan_core.c              |  1 -
+ hw/net/lan9118.c                      |  1 +
+ hw/net/rtl8139.c                      |  1 +
+ hw/net/vmxnet3.c                      |  1 -
+ hw/pci-host/gt64120.c                 |  1 +
+ hw/pci-host/pnv_phb3.c                |  1 +
+ hw/pci-host/pnv_phb4.c                |  1 +
+ hw/pci-host/ppce500.c                 |  1 -
+ hw/pci-host/sh_pci.c                  |  1 -
+ hw/s390x/s390-pci-inst.c              |  1 +
+ hw/sensor/lsm303dlhc_mag.c            |  1 -
+ hw/smbios/smbios.c                    |  1 +
+ hw/vfio/migration-multifd.c           |  1 -
+ hw/virtio/virtio-config-io.c          |  1 -
+ hw/virtio/virtio-pci.c                |  1 +
+ hw/virtio/virtio.c                    |  2 +-
+ hw/vmapple/virtio-blk.c               |  1 -
+ system/memory.c                       |  1 +
+ system/qtest.c                        |  1 +
+ target-info-stub.c                    |  2 +
+ target-info.c                         | 23 ++++++++
+ target/arm/arm-qmp-cmds.c             |  3 +-
+ target/arm/cpu.c                      |  1 -
+ target/i386/tcg/system/excp_helper.c  |  1 -
+ target/i386/xsave_helper.c            |  1 -
+ target/loongarch/loongarch-qmp-cmds.c |  3 +-
+ target/mips/system/mips-qmp-cmds.c    |  3 +-
+ target/riscv/vector_helper.c          |  1 -
+ tests/tcg/plugins/mem.c               |  1 +
+ hw/block/meson.build                  |  6 +-
+ hw/virtio/meson.build                 | 20 ++++---
+ 53 files changed, 218 insertions(+), 156 deletions(-)
+ create mode 100644 include/qemu/target-info-qapi.h
+
 -- 
 2.49.0
 
