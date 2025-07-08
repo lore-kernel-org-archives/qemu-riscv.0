@@ -4,80 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6FC0C8303C
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 22:08:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54DC7C83F09
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 22:09:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uZGUE-0006Mw-4l; Tue, 08 Jul 2025 18:08:26 -0400
+	id 1uZGUl-0008RQ-9u; Tue, 08 Jul 2025 18:08:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luxu.kernel@bytedance.com>)
- id 1uZFwc-0000Gs-Kn
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:33:42 -0400
-Received: from mail-qk1-x735.google.com ([2607:f8b0:4864:20::735])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZGCG-0003k8-Sl
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:49:52 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luxu.kernel@bytedance.com>)
- id 1uZFwX-0000oc-EU
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:33:42 -0400
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7d7f0fcef86so280037785a.1
- for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 14:33:34 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZGCE-0002vx-25
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:49:52 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3b49ffbb31bso2002210f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 14:49:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance.com; s=google; t=1752010413; x=1752615213; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DlW7iJ+C8rcpKrpFJBlschQsTW0cjQ0FNGJLVtjFCKo=;
- b=bHUg0X92KJ4cRYUEZSxdFdldAN5lh+wZ+hK7qQdvRpGr/4ENOipHH4EABeMwhTIFew
- XCcnVlWbokKl0M60pcQjNfKAJDiw12zugGjty2EsK0PKZgh5laFP5q9Z4Mz+MvrcsgXy
- h4M3Nq07fegcOQFcdMgWc30oVRl1V6QHSBECp7HhD1rOtabcIEX6DlY6UZbsL/TEF22+
- mozrw6LC+tAIhwzMiaJSlO8UycZg8ny001mEiR5jojSZ0+ulm070fOyg4wN4+RDXT7hM
- rAEA7bCyuqHg72HC0IXPHOF3WXwoK33Gla/PdmWs/9hsLchHG2AVMbPi2vWXfs0hYwD1
- yDkw==
+ d=linaro.org; s=google; t=1752011388; x=1752616188; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=91kh8gM7bE1DvG8K9EhiXTHWKL7JzNJQDQuB0S1EOTc=;
+ b=qPi4QAjrl0OKEVH83y3dj+AMZuXeITMFOLtQaBex20C+U36HUU7OuUFbiOx5rKmMNx
+ ZRwrWWCxgwWHACcgtjU50ctV9psdJ0xRsP9/F9TBMyBzaJu+qviyvMeJJvCaIgeIydza
+ WhGeeu65HeXTMNxSw9CjV8AldRgNURoUMLp5KGULu1Eyg61Iq02ZNymSROHZ18UttdXi
+ s1PtdZ4+bHSCXrrXAAGBgcsiKrSH1iyVCsC6F3n8Pua2Jszti8bEdyOst0Bc+6rpPyR1
+ 21cA1c7C7PX7ClJlhjuZ6bYKSDJcG6+mDTbZcBfSlcrvdF+pnoxIKJv/Vc1n/xu0DUuY
+ XLqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752010413; x=1752615213;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DlW7iJ+C8rcpKrpFJBlschQsTW0cjQ0FNGJLVtjFCKo=;
- b=krvUC6ONFfKaQrPW2HOYTiJj4HBVg9E5Wzif+jVIMCifa+LNp+zMoQfMg/V+W3yPus
- Ky9qn1TpkF48F5Gnd90lJ3uMhYDxHMTYsZYDFb5QjAAru38CUvWojvugt3h7pOJpEd9e
- StF+MaEKAVgLlxXUUMBHlpgjE7kgPtJkwfikZRLsg1d+K1hi21rzHher/1woPIKpOVU9
- wG/RUTxmPdQOKR8qe7QXQTsrcuNgZSi2/GnhS1jgJRP/WXkRrqfKcpuvxZ5D+xSEP6fF
- +4h8hUscmKdRID1i6h/Pb4LjrR1lmttsDtrk4rxke4CG5THg09+PFma2Z8iQxTnPDHma
- CWtw==
-X-Gm-Message-State: AOJu0Yy8DdIK3qwMlorxfhM7OjiEeQWtm+ijFbEekq4EPXlHWqT2Azu0
- MVbI7Zlm6+ULSGfYTXvnVwxltlIsZXS3kGmJVv0YTo41YhJURieKtoiVLTF1zbdXc9IAtynD3Jm
- vcOun+gZ9riMw
-X-Gm-Gg: ASbGncu4FUsX85P32IggKNzn2g2QyAoDBWdfRHx7J5FSeRgrmu4vGrF1WlM/L4Xl6sg
- mnZcvQJNRTpRKhsGGQaca0LfGq1l+oWJjHdWeqJqDmd9hnpT9y6HUlDiD4SOmB+du84AWeIJZst
- 7g+DYTDfHvSnPGK+IddalxUGUb6/MB2VZxD1pVUhRNac4s7ERNqpaRBrPCNXBhicK7ZxOLIhSzZ
- 8uc4Ml0L9UvDbdr9LtpRBFcmB350qdZGTQGPMN/t70MbHd1Igba/Nz+qbVliqiXXiPZPm+pxuJH
- zV0bBin6sCwt4zzAUcCJVVopEyeSDUpCFc/GbxLt5qv0evcC2glUZp1m8FyL3DizoNC3en5vTHf
- qEBKpulVEpIYvGx85EMKPBqSqhiZn4SLnVXuqRvj9vctAco5emcu+U12779S6
-X-Google-Smtp-Source: AGHT+IF6AAIvK9eyIkmGLUG4TOKJUDJZ2TnguFMof4aiR9CrOjY+tkFI+unFspBENtcPGZ+AxsiDUg==
-X-Received: by 2002:a05:6a21:a81:b0:220:e7d:8e30 with SMTP id
- adf61e73a8af0-225b8104ab1mr26951229637.18.1751954849898; 
- Mon, 07 Jul 2025 23:07:29 -0700 (PDT)
-Received: from J9GPGXL7NT.bytedance.net ([61.213.176.56])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74ce359d634sm10615776b3a.25.2025.07.07.23.07.26
+ d=1e100.net; s=20230601; t=1752011388; x=1752616188;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=91kh8gM7bE1DvG8K9EhiXTHWKL7JzNJQDQuB0S1EOTc=;
+ b=XLQWUPQSd71Bz5HAmWtQdfGE4zMoQDT1DnmnCtAet2pRqj0AjwL224SNQEC2ztDhy4
+ 8AUhToHf5RIKBXEBhiWS1ym0tC/qSI35wb79WiOZh7nzEE276o+ZSdySsqMtge7OF+E3
+ XOIg55OiVbtCdXgS74jP6NH/ZRSahyF+fyYAtxtKj2bbdhN4LW7ZWtTdN6LlLd3UYDu6
+ GIVx74Il/PAuf0OVE25LpKPcVejmJ7Y9kI8m0GRxwjlYEnSpWb7vCfjA4xSCYpMa6h+7
+ Y9eR8geyA3g8JE8PAVQF/zhAyaVW8nvmKqUlF+4DqQtlGI3ZE/5iC6glK7bOltElX1qC
+ 0xWg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW9OSXEFEq7GS2/KlLNlrMtY7TAz/PgfmbT0bllE/LDP7SciShrl2k+VwCCCcARKpHKoBlIAckiNbYu@nongnu.org
+X-Gm-Message-State: AOJu0Yw2G5n5bSuEJIMwjUW+6QY0daAFf4K9xPAs/zYU+z4U0YlS5pf/
+ MQlzGjToG0GcUCxI0dqeynKe3xdArQXydzcEHO7+8SO2uP3RMNTY2VY6GSPFuKNVFcE=
+X-Gm-Gg: ASbGnctY+Fv6ji9lK3a/iLvmPMdTeHj9uGEJA4647eGsK93Vh4FNllRfc1VzFf7TLjY
+ NASwuz4eOmGFbNBfo4AguKAN8R3+Oh1jaBJS/mnKGyvdrMxhsi6QvXsAZoGpiPuSjApVgbMBhyb
+ BZfEv5FQ03crg2M7f/Itlz3d1CkoztlsBBcj6gZgXaYmKVR0v76UhrepKQs2fKr/iwXLKCFXsZ4
+ IVoMkfu8wUmLZ/QJxsrLTSnzlGpETgVhDrsXjGRUop1OWqLjMhLSsxQSdgMmy2Q0hTWr48D7O26
+ mg/uaaVi1lj2HmySnSoZsSqcXE2ZYTw33mbPLlK7yq70Pwuf0f3FTL6LcULhMUkopu7CGbc/Ara
+ LqSm5NBb0NGdhqcdHVQDQlwZxtDRMJk27QDbI
+X-Google-Smtp-Source: AGHT+IGz/nDlysTObTTFveGgG8xteLGP44HOWLHgSh2RSo9II+etzca5BMNc9nan0XmMMHCx5DdNig==
+X-Received: by 2002:adf:b64a:0:b0:3b3:9ca4:ac8e with SMTP id
+ ffacd0b85a97d-3b5e320cdeemr684024f8f.44.1752011388403; 
+ Tue, 08 Jul 2025 14:49:48 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3b47285d3bbsm14150487f8f.96.2025.07.08.14.49.41
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 07 Jul 2025 23:07:29 -0700 (PDT)
-From: Xu Lu <luxu.kernel@bytedance.com>
-To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, apatel@ventanamicro.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Xu Lu <luxu.kernel@bytedance.com>
-Subject: [PATCH] target/riscv: Fix exception type when VU accesses supervisor
- CSRs
-Date: Tue,  8 Jul 2025 14:07:20 +0800
-Message-Id: <20250708060720.7030-1-luxu.kernel@bytedance.com>
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
+ Tue, 08 Jul 2025 14:49:47 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-block@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>, qemu-ppc@nongnu.org,
+ qemu-s390x@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-arm@nongnu.org, Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>, Song Gao <gaosong@loongson.cn>,
+ Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>
+Subject: [PATCH-for-10.1 v8 1/8] target/qmp: Use target_cpu_type()
+Date: Tue,  8 Jul 2025 23:49:10 +0200
+Message-ID: <20250708214918.70076-2-philmd@linaro.org>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250708214918.70076-1-philmd@linaro.org>
+References: <20250708214918.70076-1-philmd@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::735;
- envelope-from=luxu.kernel@bytedance.com; helo=mail-qk1-x735.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,29 +112,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When supervisor CSRs are accessed from VU-mode, a virtual instruction
-exception should be raised instead of an illegal instruction.
-
-Fixes: c1fbcecb3a (target/riscv: Fix csr number based privilege checking)
-Signed-off-by: Xu Lu <luxu.kernel@bytedance.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- target/riscv/csr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/arm/arm-qmp-cmds.c             | 3 ++-
+ target/loongarch/loongarch-qmp-cmds.c | 3 ++-
+ target/mips/system/mips-qmp-cmds.c    | 3 ++-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 8631be97c5..9bebfae3f0 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -5577,7 +5577,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+diff --git a/target/arm/arm-qmp-cmds.c b/target/arm/arm-qmp-cmds.c
+index cefd2352638..d292c974c44 100644
+--- a/target/arm/arm-qmp-cmds.c
++++ b/target/arm/arm-qmp-cmds.c
+@@ -21,6 +21,7 @@
+  */
  
-     csr_priv = get_field(csrno, 0x300);
-     if (!env->debugger && (effective_priv < csr_priv)) {
--        if (csr_priv == (PRV_S + 1) && env->virt_enabled) {
-+        if (csr_priv <= (PRV_S + 1) && env->virt_enabled) {
-             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-         }
-         return RISCV_EXCP_ILLEGAL_INST;
+ #include "qemu/osdep.h"
++#include "qemu/target-info.h"
+ #include "hw/boards.h"
+ #include "kvm_arm.h"
+ #include "qapi/error.h"
+@@ -241,7 +242,7 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+     CpuDefinitionInfoList *cpu_list = NULL;
+     GSList *list;
+ 
+-    list = object_class_get_list(TYPE_ARM_CPU, false);
++    list = object_class_get_list(target_cpu_type(), false);
+     g_slist_foreach(list, arm_cpu_add_definition, &cpu_list);
+     g_slist_free(list);
+ 
+diff --git a/target/loongarch/loongarch-qmp-cmds.c b/target/loongarch/loongarch-qmp-cmds.c
+index f5f1cd0009d..1d8cd32f5fc 100644
+--- a/target/loongarch/loongarch-qmp-cmds.c
++++ b/target/loongarch/loongarch-qmp-cmds.c
+@@ -7,6 +7,7 @@
+  */
+ 
+ #include "qemu/osdep.h"
++#include "qemu/target-info.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-machine.h"
+ #include "cpu.h"
+@@ -32,7 +33,7 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+     CpuDefinitionInfoList *cpu_list = NULL;
+     GSList *list;
+ 
+-    list = object_class_get_list(TYPE_LOONGARCH_CPU, false);
++    list = object_class_get_list(target_cpu_type(), false);
+     g_slist_foreach(list, loongarch_cpu_add_definition, &cpu_list);
+     g_slist_free(list);
+ 
+diff --git a/target/mips/system/mips-qmp-cmds.c b/target/mips/system/mips-qmp-cmds.c
+index d98d6623f2f..b6a2874f2dd 100644
+--- a/target/mips/system/mips-qmp-cmds.c
++++ b/target/mips/system/mips-qmp-cmds.c
+@@ -7,6 +7,7 @@
+  */
+ 
+ #include "qemu/osdep.h"
++#include "qemu/target-info.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-machine.h"
+ #include "cpu.h"
+@@ -40,7 +41,7 @@ CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+     CpuDefinitionInfoList *cpu_list = NULL;
+     GSList *list;
+ 
+-    list = object_class_get_list(TYPE_MIPS_CPU, false);
++    list = object_class_get_list(target_cpu_type(), false);
+     g_slist_foreach(list, mips_cpu_add_definition, &cpu_list);
+     g_slist_free(list);
+ 
 -- 
-2.20.1
+2.49.0
 
 
