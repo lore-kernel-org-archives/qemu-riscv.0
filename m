@@ -4,88 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03B8BC8303C
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 21:22:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA585C83F0F
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 21:25:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uZFK6-0002b5-Ui; Tue, 08 Jul 2025 16:53:55 -0400
+	id 1uZFC4-0007DJ-Rh; Tue, 08 Jul 2025 16:45:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZEFK-0000U2-Hh
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 15:44:55 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1uZDmK-0003g7-56
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 15:14:59 -0400
+Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZEFJ-0006jz-5q
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 15:44:54 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-6088d856c6eso9243484a12.0
- for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 12:44:52 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1uZDmG-0006gS-C6
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 15:14:54 -0400
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-5315972826dso147853e0c.1
+ for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 12:13:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752003891; x=1752608691; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1752002031; x=1752606831; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=hI8sAmJ13x4dAhHqQ5KRW0VbwKRcg/Fsqe6mUGhQqN4=;
- b=bpJ7qnrdAM4MyjZlxtMMzgrptVxfu9WIeVflX7bG8c6VB/IOmNDzp+5C6czFYlnmyT
- /lmsoBf9FKIKpLovC/K3V7zxnkXGNvNCYnHb8CP1S+XMm4QY9oLLiC4X262oZO/KjYcK
- xFQRCM+diPik5rzq4Fpij1dpdGkn3Mj1KhxqNL9n4pbbJEjaq61fBC2IvVKC4DDfhQc1
- K2ZokEHq8vG0JK34/FoLrdrfu2qK+y2r/3aOn6/FowJHust3zQvvAvJljK+VF6/LJy1n
- Q6HDJofNJi82dBjuevjRr/5ZnIeed4FJTq8FIxeAEB1LJEUP7lN15hcmvivy9CwkMcxN
- xNPw==
+ bh=hhWCRVHslwq6uQ1RrYD5pYArFASP6BrAWb7d3H68MWU=;
+ b=EmI/O4ZMTnZhNxr9YA8Hc3v+AXCXRe6T4vU+NctaWjL46ScHX1kI1M4dPWOO2KmmkA
+ ZYAgcmVmlR9GDb9mDUxXAGbMGViQnL4+MFPixfVRNrogYISuPAbA6p6uMlGi3/wtkeJG
+ F5iGdRVBFp3Vg9m74uzDuAzjKpkoRQB2b5qxLehpnF59PvqKgnPhLhLjIIPSx3eQsDa1
+ QHfo4TTL4S4uvmHOyJazAlxLmms/tOfwQapLkFAueo5wW8veBc+dWdzxOSqbALaeQGlH
+ KvPnrx29wUeVIjeRKLsDO+BEI5n/vziMqH0N59wXI+CdQg9ImFtZ04eWMMoiwhWJb80I
+ VahQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752003891; x=1752608691;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1752002031; x=1752606831;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hI8sAmJ13x4dAhHqQ5KRW0VbwKRcg/Fsqe6mUGhQqN4=;
- b=QhvQQwgfu0ngjDM3veVZ8VawS3oLiUPr0o8LX7XU/JM47GtP1jxIdsiuM40N4mxvQR
- Q29oEzU/b6xIcdvLS+NPpgCSqYdTcRsNIUhmeHZHUg2z8a9wNFNd9hyChnU+/ZLMLYME
- F0zkMLoyB7eXP/xEkYbeOFS3QWBe0W27V18Dp5NcAdjYDo7sByCAMHSa9IjOiQYp9me/
- Vg3wYzgsE0rhJpLcyZ2tEzWoCXuq1Ku7Y+4fc41MbCr7YeIixh3AIKTllnRpY+tCz525
- qoGQiftumq/Sf7VJFKZfSY+dUwv1jhin3ta1A4EsekHlUO8NF9X3LPeInVHjEU/K34iF
- bPMA==
+ bh=hhWCRVHslwq6uQ1RrYD5pYArFASP6BrAWb7d3H68MWU=;
+ b=hDRXBYtZArEPmq+uKzRQgM4jkHm6cQvK7Kp9fqN2hMBzB5CFjdFuEDa/PXd4gLHbN8
+ kSgguur7h5CDpTnbLijDkx4HQfHVdjjJzJnDWpYE6EYgPXSqmj/x2ch6Ge6Hj9+Bgpa8
+ pBx6Ydf4P8Zsw8ojUh6dWFCldiAWJc2X9OB2tCGTc14vucksAjbrGFA55oOF62L7tcpX
+ 8HgozZyhIGLrXk71d3sT5H7h5sybp+a4V4eas3rJO7JtjR87Vwn3F6CfojmTs+gMWqd6
+ L3z0OUy+bBl391ilYe7H8JQ4b6GXkrGi41AkbiSQT1feQMOTOPbrkl2sM/XVFXA30ygN
+ AvoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEvlGl16g1CKjckl/P8gOC0axYonDncWobBFV1pDrULNFzlwSwIza7FjNAo55W7gL+hIDIIOkv55XW@nongnu.org
-X-Gm-Message-State: AOJu0YzlhI3k5WF7O65bQKbuwd+EQXLQ4owcSwAklcmmg7dt4AD77spK
- eyv75cB+FtYF6W3pt8b70iQ1bJCRIz+6HP0bzXSm89onIVkCe8cY21BjpX4KJh1Q0HIIEOUplfy
- pPOeIN+c=
-X-Gm-Gg: ASbGncvYpgDqmX2Qmju3c7MRURosYxImEdtdVZOejS3v8KxwuY3vcGNEiwRW/jwo9XW
- Q/+ogEDYOhPL/CiucU3K2oEr7b/nOxOF7MbXKUzAqCJOT4wwNgq2s2QMqTqTV/ZXVUtMmdYpRMN
- 5uUui7PgEXKk/4sMghZmUYx/tokW5hwQ9NyCA6ccJvaNp8ooyy4A5m61mJac1kHpfD39qf2ADv5
- KKTj7T2dtuxIgvX5zoae6zrRmgz/GCSYeWh0iD2FHz9c2ALsR/w3LhsuhbewwWOEzPbodnBpNCm
- FyDJOZkRJPs6rfZayYLPX2KiVnlNAQ+rhsMBTDJmYpkZ9Fh8g8CqcHaEFElGvkGrRKW6N4WwTLv
- z9Ql6kKDcStdliccg4YjpxXOkrHb/H9oJ9DYtaGrR
-X-Google-Smtp-Source: AGHT+IEBF8Dg32b2zfK2LEUCiBIqsCkszQ/RmitWt476HpBfkMyJozJs4eVA6oF9QsJ7q9Ox3RaC1w==
-X-Received: by 2002:a05:600c:4e05:b0:43d:2313:7b49 with SMTP id
- 5b1f17b1804b1-454cd4cbd79mr24423785e9.12.1751970430502; 
- Tue, 08 Jul 2025 03:27:10 -0700 (PDT)
-Received: from [192.168.69.242] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454cd39d0f6sm18081605e9.16.2025.07.08.03.27.09
+ AJvYcCUpXgijVX3YSsamw+c9AXRADmPOap1gf4k/038SfjvtfrkOBpjxgc8l8mMjXyerAPVZGRDjGItxeGRm@nongnu.org
+X-Gm-Message-State: AOJu0YwbjpQd7+uD7z844kAMYUmhVtZsT7Lbphy6/Y5vhKQqHJhFb6B7
+ uEiXapPfOxjTNG9t7fpoAFKI6L54418WGIgW7vMX9olBbnbBXjnY1NmLB+e6oXmnezXzrDhaluj
+ 9rSUa
+X-Gm-Gg: ASbGncuVe4a1cPvqzF3iVYc0PfPmzNlUp1eaz7WShAQ4045mmovz2R68pkJJJhwm49w
+ HrqL0c19pM2qiJpNUvWxeU2AZyVUCDLGVQ8P5XlwEAsvV+OsPL6f0antOxD5RsQvhUgILcF1FgZ
+ Qy9htUmIWWyQY2AijjfQhZ6SCSeQ725jhtaaoNZaU0k5m+6zQYNaVgjU540yjvbGDxBmCHccgPq
+ HZKztGaiQ6yEMFy3xlopgSIS8+hB8+xu/z1ry2eNu2W0x/+nKNw5t5SEH++C4mxk9ZjrSGG4rZC
+ 2OskiqVFPR0RtmFoROI+Jr+HBisWJowUbsIXF6dsmgciLpBhOl22bsQiEfAxDgNaWUx2s1Mu7M0
+ =
+X-Google-Smtp-Source: AGHT+IHn7j7DwtC37mVnuJxSAyamU1ibclONru48BAOFY7tp15B+Io74D//xDBie9Udp6k0JPh09yw==
+X-Received: by 2002:a05:6a20:ce47:b0:220:1843:3b7b with SMTP id
+ adf61e73a8af0-22b6640dcabmr5437329637.4.1751995905836; 
+ Tue, 08 Jul 2025 10:31:45 -0700 (PDT)
+Received: from [192.168.1.87] ([38.41.223.211])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b38ee4509d0sm12056925a12.7.2025.07.08.10.31.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Jul 2025 03:27:09 -0700 (PDT)
-Message-ID: <21692283-9767-4109-b14b-ef0ff787d856@linaro.org>
-Date: Tue, 8 Jul 2025 12:27:08 +0200
+ Tue, 08 Jul 2025 10:31:45 -0700 (PDT)
+Message-ID: <b30ca036-df53-41d3-9234-1f32070915df@linaro.org>
+Date: Tue, 8 Jul 2025 10:31:44 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH-for-10.1 v6 00/14] target-info: Add more API for
- VirtIO cleanups & introduce ARM macros
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-block@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org
-References: <20250707172009.3884-1-philmd@linaro.org>
- <20250707135403-mutt-send-email-mst@kernel.org>
+Subject: Re: [PATCH-for-10.1 v7 1/8] target/qmp: Use target_cpu_type()
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250707135403-mutt-send-email-mst@kernel.org>
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-block@nongnu.org,
+ qemu-ppc@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Song Gao <gaosong@loongson.cn>, Huacai Chen <chenhuacai@kernel.org>,
+ Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>
+References: <20250708171949.62500-1-philmd@linaro.org>
+ <20250708171949.62500-2-philmd@linaro.org>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+In-Reply-To: <20250708171949.62500-2-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x52f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-vk1-xa2d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,35 +115,15 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/7/25 19:55, Michael S. Tsirkin wrote:
-> On Mon, Jul 07, 2025 at 07:19:54PM +0200, Philippe Mathieu-Daudé wrote:
->> Rather than re-spinning the whole "single-binary: Make hw/arm/
->> common" series, restrict to the API additions, but include
->> examples of their usefulness (hundreds of virtio objects
->> removed from default Linux build).
->> Time passed since I context-switched out of this work so I'm
->> not sure the DEFINE_MACHINE_WITH_INTERFACES() implementation
->> is in the form Zoltan asked.
-> 
-> 
-> I think I'd prefer to defer cleanups to post 10.1 - already
-> too much on my plate as I was out sick. Unless there's a reason
-> I'm missing to rush this in? Is there a feature we want in
-> 10.1 that depends on it?
+On 7/8/25 10:19 AM, Philippe Mathieu-Daudé wrote:
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   target/arm/arm-qmp-cmds.c             | 3 ++-
+>   target/loongarch/loongarch-qmp-cmds.c | 3 ++-
+>   target/mips/system/mips-qmp-cmds.c    | 3 ++-
+>   3 files changed, 6 insertions(+), 3 deletions(-) 
 
-Fair enough for the virtio patch.
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-Hopefully the previous ones (TargetInfo related, not touching
-virtio) could get in (you don't have to look a them ;P).
-
-> 
->> Philippe Mathieu-Daudé (14):
->>    target/qmp: Use target_cpu_type()
->>    qemu/target-info: Factor target_arch() out
->>    qemu/target-info: Add %target_arch field to TargetInfo
->>    qemu/target-info: Introduce target_base_arch()
->>    qemu/target-info: Add target_endian_mode()
->>    qemu: Convert target_words_bigendian() to TargetInfo API
->>    gdbstub/helpers: Replace TARGET_BIG_ENDIAN -> target_big_endian()
->>    qemu: Declare all load/store helpert in 'qemu/bswap.h'
 
