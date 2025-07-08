@@ -4,89 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 742EEC8303C
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 22:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6FC0C8303C
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Jul 2025 22:08:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uZGPm-0003w1-SE; Tue, 08 Jul 2025 18:03:50 -0400
+	id 1uZGUE-0006Mw-4l; Tue, 08 Jul 2025 18:08:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZFq0-0005Oj-Uq
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:26:53 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <luxu.kernel@bytedance.com>)
+ id 1uZFwc-0000Gs-Kn
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:33:42 -0400
+Received: from mail-qk1-x735.google.com ([2607:f8b0:4864:20::735])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uZFpx-0008P1-I6
- for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:26:52 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-453398e90e9so35317385e9.1
- for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 14:26:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <luxu.kernel@bytedance.com>)
+ id 1uZFwX-0000oc-EU
+ for qemu-riscv@nongnu.org; Tue, 08 Jul 2025 17:33:42 -0400
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7d7f0fcef86so280037785a.1
+ for <qemu-riscv@nongnu.org>; Tue, 08 Jul 2025 14:33:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752010008; x=1752614808; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Mj62iE3xvIhy4oJ2TkanIiJSkBpd3fDhboJjZRfVaSM=;
- b=Qal0vdr00B8ObUs6l6VIu0HoJUsxgOUrMYcvzOdr4Y4fvoLpGvHb8WTLHPr5JDL7EN
- VMalk7jqy5ptyMBsjb7VXn9MGRVXlJWLsmC191ihqilqRNeBOWtR9OKJCc/d3zlLBdtt
- L63m3hSEz35oQlH93IFG/WaNcsf82PLcrsvrlBk9OB7h98/seKDrUYPt233Y1gqkCK6f
- g1OgKp6Y47j8XUe6/T+SA8mRqtaL07kfpTbGBVN2BHOw31ZTElsFTA/CQLOOiKAIWIWX
- 4xC8Ka48mOuAMxI04HzCJBZWHNsxHctjhYFaT+tv30KX38W7t0wNp0eGcYg/gxBHaxQj
- 0yVQ==
+ d=bytedance.com; s=google; t=1752010413; x=1752615213; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DlW7iJ+C8rcpKrpFJBlschQsTW0cjQ0FNGJLVtjFCKo=;
+ b=bHUg0X92KJ4cRYUEZSxdFdldAN5lh+wZ+hK7qQdvRpGr/4ENOipHH4EABeMwhTIFew
+ XCcnVlWbokKl0M60pcQjNfKAJDiw12zugGjty2EsK0PKZgh5laFP5q9Z4Mz+MvrcsgXy
+ h4M3Nq07fegcOQFcdMgWc30oVRl1V6QHSBECp7HhD1rOtabcIEX6DlY6UZbsL/TEF22+
+ mozrw6LC+tAIhwzMiaJSlO8UycZg8ny001mEiR5jojSZ0+ulm070fOyg4wN4+RDXT7hM
+ rAEA7bCyuqHg72HC0IXPHOF3WXwoK33Gla/PdmWs/9hsLchHG2AVMbPi2vWXfs0hYwD1
+ yDkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752010008; x=1752614808;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Mj62iE3xvIhy4oJ2TkanIiJSkBpd3fDhboJjZRfVaSM=;
- b=AbCjoxTLpU0zFA4asDakdd+UvvyPTPttT5HlTAyhvrsY1ZQMlX5hd43QAtwvDPKj3M
- 3S6I/KW3RyBcsCwYuwSP+EYeooR69gF1UdfGgiWTU00PnXQA+yAcrGkT4mmGiwTfwlIA
- PFagHQjfa6O6v3hjHP46r81mjMyLh94HcQ8lkDz2Svv4Wn7ulB0D9kjctvlifWrcXeoe
- vDoTpjMavwVzqJfYSbfSpETtsfMDs0kYOUUPYwdU1S7vSLG7oec2r0Ebwgc+p34TeZtW
- RT15GVc7ZrYMlraxMpZxyL+HvsaJQiItlVLcQmZ8fT971GlEHpocJGbxy9PCacyBzYT4
- mWkg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUYvNURpxHM3ykZmhMp497CrkfPk0dWMAUmYepjHkDhsTF18rkWh4Dhyxtu2IsHkyJJ5AAiASJr66Z6@nongnu.org
-X-Gm-Message-State: AOJu0YxypGJkcgPO361X3edMiR/kjJUF+uWvAP47+2+DIa2ujOTI5ORJ
- iMpCBTBhQUmVkrLcocj0HQWl/j4g3BRzmAsv6nhiOgcZNNKxoG1D5Hz+T5Oo6QHLaCM=
-X-Gm-Gg: ASbGncvZ3q95n2cblJXOo+FsTov/oJJKfFiNrlkquQi09eSwYyQu+uP6SM+wx31Yz34
- EnHixZ5QBwuK++j8yTd/Q5TxLJqY+BkvO2RwtAZNv+J7oSz5z1+z9s89iM+xveThvfD37TRJm7G
- X0nKFz2/Un4FOa9h7l7mjKpAO50dkcR2IJhQbnNRxrTxnUirgk6ktYsbkVzRuDBfwApQoQz31gb
- 5wPgP0TofJz6K7ss1wzZoNCW/2xJmHThmI7D4vmbPfAs8u+9hwgYh+jfD7JRBqbxUylTb7jO+S4
- K+8oWjvFnerAM/rtF992BPurexWSnjCVGqxRrqj4gu2pCQl50V5Oze0eGNGI7bpmIgbF05Wrvhy
- pR7AJFSl8BIjx4bP9LLlxOXDWkFu3xFfPup8LAmss
-X-Google-Smtp-Source: AGHT+IH7rikhE5eGoGKvue52ZLKzQXfj4RFx6aAaqSoMDyaSOuJYfO3dAWy220MnJbN3DzViz650Fw==
-X-Received: by 2002:a05:600c:3b01:b0:442:dc6f:2f11 with SMTP id
- 5b1f17b1804b1-454b3169103mr167683295e9.25.1752010007660; 
- Tue, 08 Jul 2025 14:26:47 -0700 (PDT)
-Received: from [192.168.69.242] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b5dfd4657dsm2381214f8f.17.2025.07.08.14.26.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Jul 2025 14:26:47 -0700 (PDT)
-Message-ID: <b1ff31c4-25e7-47a1-9579-095e7978e4a6@linaro.org>
-Date: Tue, 8 Jul 2025 23:26:24 +0200
+ d=1e100.net; s=20230601; t=1752010413; x=1752615213;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DlW7iJ+C8rcpKrpFJBlschQsTW0cjQ0FNGJLVtjFCKo=;
+ b=krvUC6ONFfKaQrPW2HOYTiJj4HBVg9E5Wzif+jVIMCifa+LNp+zMoQfMg/V+W3yPus
+ Ky9qn1TpkF48F5Gnd90lJ3uMhYDxHMTYsZYDFb5QjAAru38CUvWojvugt3h7pOJpEd9e
+ StF+MaEKAVgLlxXUUMBHlpgjE7kgPtJkwfikZRLsg1d+K1hi21rzHher/1woPIKpOVU9
+ wG/RUTxmPdQOKR8qe7QXQTsrcuNgZSi2/GnhS1jgJRP/WXkRrqfKcpuvxZ5D+xSEP6fF
+ +4h8hUscmKdRID1i6h/Pb4LjrR1lmttsDtrk4rxke4CG5THg09+PFma2Z8iQxTnPDHma
+ CWtw==
+X-Gm-Message-State: AOJu0Yy8DdIK3qwMlorxfhM7OjiEeQWtm+ijFbEekq4EPXlHWqT2Azu0
+ MVbI7Zlm6+ULSGfYTXvnVwxltlIsZXS3kGmJVv0YTo41YhJURieKtoiVLTF1zbdXc9IAtynD3Jm
+ vcOun+gZ9riMw
+X-Gm-Gg: ASbGncu4FUsX85P32IggKNzn2g2QyAoDBWdfRHx7J5FSeRgrmu4vGrF1WlM/L4Xl6sg
+ mnZcvQJNRTpRKhsGGQaca0LfGq1l+oWJjHdWeqJqDmd9hnpT9y6HUlDiD4SOmB+du84AWeIJZst
+ 7g+DYTDfHvSnPGK+IddalxUGUb6/MB2VZxD1pVUhRNac4s7ERNqpaRBrPCNXBhicK7ZxOLIhSzZ
+ 8uc4Ml0L9UvDbdr9LtpRBFcmB350qdZGTQGPMN/t70MbHd1Igba/Nz+qbVliqiXXiPZPm+pxuJH
+ zV0bBin6sCwt4zzAUcCJVVopEyeSDUpCFc/GbxLt5qv0evcC2glUZp1m8FyL3DizoNC3en5vTHf
+ qEBKpulVEpIYvGx85EMKPBqSqhiZn4SLnVXuqRvj9vctAco5emcu+U12779S6
+X-Google-Smtp-Source: AGHT+IF6AAIvK9eyIkmGLUG4TOKJUDJZ2TnguFMof4aiR9CrOjY+tkFI+unFspBENtcPGZ+AxsiDUg==
+X-Received: by 2002:a05:6a21:a81:b0:220:e7d:8e30 with SMTP id
+ adf61e73a8af0-225b8104ab1mr26951229637.18.1751954849898; 
+ Mon, 07 Jul 2025 23:07:29 -0700 (PDT)
+Received: from J9GPGXL7NT.bytedance.net ([61.213.176.56])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-74ce359d634sm10615776b3a.25.2025.07.07.23.07.26
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Mon, 07 Jul 2025 23:07:29 -0700 (PDT)
+From: Xu Lu <luxu.kernel@bytedance.com>
+To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, apatel@ventanamicro.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Xu Lu <luxu.kernel@bytedance.com>
+Subject: [PATCH] target/riscv: Fix exception type when VU accesses supervisor
+ CSRs
+Date: Tue,  8 Jul 2025 14:07:20 +0800
+Message-Id: <20250708060720.7030-1-luxu.kernel@bytedance.com>
+X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.1 v7 4/8] qemu/target-info: Add target_endian_mode()
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
- qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
- qemu-block@nongnu.org, qemu-ppc@nongnu.org
-References: <20250708171949.62500-1-philmd@linaro.org>
- <20250708171949.62500-5-philmd@linaro.org>
- <d182e9ee-afae-41fc-b160-971cd909b9b9@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <d182e9ee-afae-41fc-b160-971cd909b9b9@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::735;
+ envelope-from=luxu.kernel@bytedance.com; helo=mail-qk1-x735.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,22 +100,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/7/25 19:36, Richard Henderson wrote:
-> On 7/8/25 11:19, Philippe Mathieu-Daudé wrote:
->> +/**
->> + * target_endian_mode:
->> + *
->> + * Returns: QAPI EndianMode enum (i.e. ENDIAN_MODE_LITTLE).
-> 
-> s/i.e./e.g./
+When supervisor CSRs are accessed from VU-mode, a virtual instruction
+exception should be raised instead of an illegal instruction.
 
-TIL i.e. vs e.g. :)
+Fixes: c1fbcecb3a (target/riscv: Fix csr number based privilege checking)
+Signed-off-by: Xu Lu <luxu.kernel@bytedance.com>
+---
+ target/riscv/csr.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> 
-> Otherwise,
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> 
-> 
-> r~
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 8631be97c5..9bebfae3f0 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -5577,7 +5577,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+ 
+     csr_priv = get_field(csrno, 0x300);
+     if (!env->debugger && (effective_priv < csr_priv)) {
+-        if (csr_priv == (PRV_S + 1) && env->virt_enabled) {
++        if (csr_priv <= (PRV_S + 1) && env->virt_enabled) {
+             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+         }
+         return RISCV_EXCP_ILLEGAL_INST;
+-- 
+2.20.1
 
 
