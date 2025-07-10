@@ -4,149 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 592C8C83F17
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Jul 2025 12:19:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC81BC83F1D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Jul 2025 12:41:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uZqEY-0007lD-Rk; Thu, 10 Jul 2025 08:18:38 -0400
+	id 1uZqZx-00080A-3i; Thu, 10 Jul 2025 08:40:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1uZqEJ-0007QU-Do
- for qemu-riscv@nongnu.org; Thu, 10 Jul 2025 08:18:23 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1uZqEC-0003li-8H
- for qemu-riscv@nongnu.org; Thu, 10 Jul 2025 08:18:23 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1752149894;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=oZcdTKwr5VGZtAgmNu8ai1lKcazl2PBX3e6N7JXe32M=;
- b=cHM0gtTsFtwhk242/zUFiH07BXJrsTFg1dWdhjzDxAQko0xy9/TnYh4Rhv0OWVbU/FjsBK
- akFa2iksW25yUJ+/GrbA1Cjj869vmpZ2ES8eKRSMhhPSVBxWGqb/C/N0nsdqTDd6+ROP74
- 97XxXTOlkynrUbXMBEy0P4X5/I9nOe0=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-102-kg2k6vozPhOkC19txae5iQ-1; Thu, 10 Jul 2025 08:18:11 -0400
-X-MC-Unique: kg2k6vozPhOkC19txae5iQ-1
-X-Mimecast-MFC-AGG-ID: kg2k6vozPhOkC19txae5iQ_1752149890
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-45311704d1fso6041045e9.1
- for <qemu-riscv@nongnu.org>; Thu, 10 Jul 2025 05:18:11 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1uZqZb-0007tN-EN
+ for qemu-riscv@nongnu.org; Thu, 10 Jul 2025 08:40:25 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1uZqZT-0002y6-Bi
+ for qemu-riscv@nongnu.org; Thu, 10 Jul 2025 08:40:19 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4530921461aso6105275e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 10 Jul 2025 05:40:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=embecosm.com; s=google; t=1752151212; x=1752756012; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=fFAixc2IVhct2f5FPT8hD4WHQxFkfeRsELFBXN6maqo=;
+ b=TmdTaOnPDkvWRA7MEKPTznP9SPCcBwslTknwmiFD3icKsCcq7cIC3+rIYOY7VkOxxb
+ Ilz059sK5/7Lq897IpIgQze6GSmUxX7J4gWIYK4Nw9VBpRS2C+EeBavoB3wowSEY1QhY
+ 8idc+eJHksCWqjWqibinvGESbzs4uQeS+VtneOs+gg6ty1C87dWbq7YP1Co2LYM+XVrX
+ MFBA3tBIujZFAZW5EnIelgZYHo/9MRM0FmghozJurTPwPRbErijiTmH7iVY4hC/VaELh
+ J4YX78tv0qljYTno8Eu3AFOLId7yrv84NF5tHQYoB7zNA4P5i8+u8aI+i18qY7ZWaTI/
+ EB3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752149890; x=1752754690;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oZcdTKwr5VGZtAgmNu8ai1lKcazl2PBX3e6N7JXe32M=;
- b=SYxA+q1RMwzUvmjZWGHFBC4jTaFnZwHlL3OHRPvrMHP0MuPuIWOHFivMWyE+Xs1wlb
- jjm7jpFCYOHeT0FfiVDjT/1lndT/wwtsIwm6VIfpE/DzH2QF7qQOLWUj1aStSYzR5m3I
- PnLHgJt9xXvOTibYNw2GWS6iDMDS+XqkVxG1eRscVjSKeZSBpXEa3qOBVp+GlbekoAOd
- MZ+P5yobKe0hVwcW/IpoDyVeRfkLihybKX48mEe4LkpcoHXF6gNZorRaMV4vooIPJy8w
- N2w/NZB50GgxZBxdUUcsj+YfxaJdjDVz3QbDEr9Yie7yJSzTQ/vCrj3/cjkp/+fOzLbl
- a8uw==
+ d=1e100.net; s=20230601; t=1752151212; x=1752756012;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fFAixc2IVhct2f5FPT8hD4WHQxFkfeRsELFBXN6maqo=;
+ b=CeFipRDkNwFs+TP5GRR2Fo269L7zsgg4sZIM/3TDHjDGc2zU9Lqt3A8MRbYA6Tpah5
+ BpcORbhPs6cDPMJ31IXUThT6KIC+6BlX2FLg/h/Y0P2PbSCYAje80ltNatZGhq30DJm5
+ 88Ku1Mp9IgxzxOF7fY5SKki5LvhLttViyZZJvnszrr8r1begs/EbKaubSWt2SYBmNKaZ
+ +AlmNHXq9wsHanQHim7hv06HLbk8AyjLQbYL/Mg/TF6M/H2vuJRGIjpu0Eea6vQ+2flG
+ 4P+w8lSK1u1rfTQyUYCguejre1ZRXgUwvukQNZTehXbDhH0C/7m1o1eXXoBqaYEdDoIu
+ TJ9w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWvBh44AFeY54s+AbTdxzZc071pxSf2AuqUKA89WJAqBKbuXu5E4lcpYb44BbzB/zfXrMBvdzuUW3/0@nongnu.org
-X-Gm-Message-State: AOJu0YwsLQk0BjY3sAJyMq6G4zKaytpa4fvM06/t5fjFC6GXb2ctN7vM
- kVZROlJzNmdaqgTXm+CGGwOqB+Smd1T6M96jGb+FaZ33VT7kkVhZPm7fENNtq+FarVDyeQ2jqKE
- kLk/msQG0uM9FPCTTLexs8eLM6j8wnEwEnQ+/9pJSJgE4i5jOUVCuSwGh
-X-Gm-Gg: ASbGncvN8/XsR24eWJSO6pi/r1zaylsFIbmGgt4rYWgz2mybpiEOU+2TDTaDKobxyuK
- lyH1ib6GYVno1anRSEuloMEC2OL2Er2fgVZ/gSZ1sSJ9bLTvzBFP5GT55YMm/zZ4cEf65C62FJw
- jLeUmwqVZ3Yjb+mnN5ipI8qyizBrYdaLD3crRu2rNXB8znLTjEbRriO7vCkp+fCZrUyDIzCo+BR
- 2ANKk5EhBlRRnJ8G97CtKSPubzVWqqfCmnMGwgD6thEDTZ0t+RTTZ6oOgzqnmznWmK+2E2CQ2/R
- JRDgRoGDdWYmLOhNbs3kFVukN0UcegpohGrWk0f8s9I+s3EyMohgmDQHyiwXU64=
-X-Received: by 2002:a05:600c:1381:b0:453:6f1:bdba with SMTP id
- 5b1f17b1804b1-454e146b67bmr4375165e9.20.1752149889864; 
- Thu, 10 Jul 2025 05:18:09 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGMjQy8WsxdZS7+lhMyd7amgOkqcPwlFevggNA3gq8sHSr099uC0kRgVnY4uFwCXEjQE6pENA==
-X-Received: by 2002:a05:600c:1381:b0:453:6f1:bdba with SMTP id
- 5b1f17b1804b1-454e146b67bmr4374515e9.20.1752149889059; 
- Thu, 10 Jul 2025 05:18:09 -0700 (PDT)
-Received: from [192.168.0.6] (ltea-047-064-115-149.pools.arcor-ip.net.
- [47.64.115.149]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-454d575cbbfsm53755995e9.32.2025.07.10.05.18.08
+ AJvYcCVo+OYyrmw2scpuE4NTaJiAAcTRg44OXDMkMmBBmpGWOQGnjeI8o3zkqWpoQ7O1pTpLjU43hPJ31SMZ@nongnu.org
+X-Gm-Message-State: AOJu0YxVgD8bM1oUCrgssKeGABmnJc923D10WHQL/MbvKV9wgH2FbIVF
+ JsOfluUTQnnyFBLd7CfDuYyeF4GmsLFo5Ct5kReA03ryfwsnV0WG0poLUi4Q5+LEnyY=
+X-Gm-Gg: ASbGncu02AASATD1+FxvmDfAnlD7PHeWQfH1TiEVJNJG9jxvZIfKISlbyiP5c1fjyT9
+ Iq+KQG/LMOcK7JlcdLynocvPZwnMANA6XTpTJT+DXSPhnHuku/9zSr9XVuTlIhAVwPGcGg9h5T+
+ 16d/49fz3tehctMW35UFAu7deNYvj4NlfQtPFR1YZvtrVOGP2Pc7K4UR/Tjwq6FWRfsKBTC9kfG
+ i7QkVlJN8FrcHUJPSDBfU9lIgf2xKQDs0onqEYHV9jIbtk3kDDppylYf3b7nmo69vYKIIeVHcDq
+ Te8WI7kjze8YVRyxv+6dfkA8StOPkbi9WL2i4NpmN9gps1seM1FD4kPYP03e2oLxwveZqjZy
+X-Google-Smtp-Source: AGHT+IF9SY4zgzx1mugWC/GwsZRo5m7O4yiC85ZyKgXt3NK/MYnsqUVOiUzfvb9o9iy3Y4pS/C6S0g==
+X-Received: by 2002:a05:600c:6209:b0:442:d9fc:7de with SMTP id
+ 5b1f17b1804b1-454d536ca04mr58322035e9.22.1752151211884; 
+ Thu, 10 Jul 2025 05:40:11 -0700 (PDT)
+Received: from [192.168.0.172] ([212.69.42.53])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-454cdb549absm62803745e9.1.2025.07.10.05.40.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Jul 2025 05:18:08 -0700 (PDT)
-Message-ID: <2f45bae7-cee8-40f0-9627-bd47621c69b2@redhat.com>
-Date: Thu, 10 Jul 2025 14:18:06 +0200
+ Thu, 10 Jul 2025 05:40:11 -0700 (PDT)
+Message-ID: <613da8e2-f443-48b0-8686-d79855685d7f@embecosm.com>
+Date: Thu, 10 Jul 2025 13:40:10 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] tests/functional: Move tests into architecture
- specific folders
-To: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
-Cc: qemu-devel@nongnu.org, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-References: <20250710094251.139514-1-thuth@redhat.com>
- <CAAjaMXaZEWBtQ6kV2zZEj=uzvnPnOMYPV7HgW4n0yBF=TLsRJA@mail.gmail.com>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <CAAjaMXaZEWBtQ6kV2zZEj=uzvnPnOMYPV7HgW4n0yBF=TLsRJA@mail.gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: HXV8eeKrBqZnLDAq7aQMv3uSgxWIMSkpxkYcgbTCh6E_1752149890
-X-Mimecast-Originator: redhat.com
+Subject: Re: [PATCH 1/1 v2] [RISC-V/RVV] Generate strided vector loads/stores
+ with tcg nodes.
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Eric Biggers <ebiggers@kernel.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Richard Handerson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>, Jeremy Bennett
+ <jeremy.bennett@embecosm.com>, Craig Blackmore
+ <craig.blackmore@embecosm.com>, Ard Biesheuvel <ardb@kernel.org>,
+ "Jason A. Donenfeld" <Jason@zx2c4.com>
+References: <20250312155547.289642-1-paolo.savini@embecosm.com>
+ <20250312155547.289642-2-paolo.savini@embecosm.com>
+ <20250710052824.GA608727@sol>
+ <9ded37cf-cf57-4b6a-aeb7-6edf8ea1d7f2@ventanamicro.com>
 Content-Language: en-US
+From: Paolo Savini <paolo.savini@embecosm.com>
+Autocrypt: addr=paolo.savini@embecosm.com; keydata=
+ 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
+ WO+4yYga5w4c1oauMgX/IccT3awBnCU=
+In-Reply-To: <9ded37cf-cf57-4b6a-aeb7-6edf8ea1d7f2@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -162,56 +160,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/07/2025 11.59, Manos Pitsidianakis wrote:
-> On Thu, Jul 10, 2025 at 12:51 PM Thomas Huth <thuth@redhat.com> wrote:
->>
->> This patch tackles two issues. First, the tests/functional folder has
->> become quite crowded already, some restructuring would be helpful here.
->> Second, we currently encode the target architecture twice in the test
->> names since a lot of the test file names contain the target, too.
->> This contributes to the very long output lines when running "make
->> check-functional".
->>
->> So let's move the individual test files to target specific folders now.
->> Then we can drop the target from the file name (and thus from the test
->> name).
->>
->> Before the change, the output looked like this:
->>
->>   ...
->>   195/236 qemu:func-thorough+func-microblazeel-thorough+thorough / func-microblazeel-microblazeel_s3adsp1800          OK                2.00s   2 subtests passed
->>   196/236 qemu:func-thorough+func-microblaze-thorough+thorough / func-microblaze-microblaze_replay                    OK                2.78s   1 subtests passed
->>   197/236 qemu:func-thorough+func-microblaze-thorough+thorough / func-microblaze-microblaze_s3adsp1800                OK                2.02s   2 subtests passed
->>   198/236 qemu:func-thorough+func-mips64el-thorough+thorough / func-mips64el-mips64el_fuloong2e                       OK                1.95s   1 subtests passed
->>   199/236 qemu:func-thorough+func-mips64el-thorough+thorough / func-mips64el-mips64el_loongson3v                      SKIP              0.07s   0 subtests passed
->>   200/236 qemu:func-thorough+func-mips64el-thorough+thorough / func-mips64el-mips64el_tuxrun                          OK                8.52s   1 subtests passed
->>   ...
->>
->> After this change, it gets a little bit shorter:
->>
->>   ...
->>   195/236 qemu:func-thorough+func-microblazeel-thorough+thorough / func-microblazeel-s3adsp1800          OK                2.12s   2 subtests passed
->>   196/236 qemu:func-thorough+func-microblaze-thorough+thorough / func-microblaze-replay                  OK                2.90s   1 subtests passed
->>   197/236 qemu:func-thorough+func-microblaze-thorough+thorough / func-microblaze-s3adsp1800              OK                2.07s   2 subtests passed
->>   198/236 qemu:func-thorough+func-mips64el-thorough+thorough / func-mips64el-fuloong2e                   OK                2.05s   1 subtests passed
->>   199/236 qemu:func-thorough+func-mips64el-thorough+thorough / func-mips64el-loongson3v                  SKIP              0.07s   0 subtests passed
->>   200/236 qemu:func-thorough+func-mips64el-thorough+thorough / func-mips64el-tuxrun                      OK                8.84s   1 subtests passed
->>   ...
->>
->> Tests that can be used for multiple but not all targets (like the "migration"
->> test) are now handled via symlinks in the target folders.
->>
->> Signed-off-by: Thomas Huth <thuth@redhat.com>
->> ---
->>   Note: Marked as RFC since I'm not that happy about the symlinks yet ...
->>         if someone has a better idea, please let me know!
-> 
-> How about making those tests utility functions that each target arch
-> imports and calls? It feels cleaner than symlinks, I think.
+Hi Eric, Daniel,
 
-That sounds better, indeed. I'll give it a try...
+Thanks for bringing this up and for the reproducer Eric. I agree we need 
+to revert. Thanks Daniel for taking care of this. I should have time 
+this month to fix this and send a new version.
 
-  Thanks,
-   Thomas
 
+Best wishes,
+
+Paolo
+
+On 7/10/25 10:54, Daniel Henrique Barboza wrote:
+> Hi Eric,
+>
+>
+> Thanks for the bug report and the simple reproducer.
+>
+> Paolo, I'll send a revert since we don't want to keep Linux broken and 
+> to give
+> you more time to adequately fix the patch. You can then re-send it as 
+> a v3 in
+> the ML.
+>
+>
+> Thanks,
+>
+> Daniel
+>
+>
+> On 7/10/25 2:28 AM, Eric Biggers wrote:
+>> Hi,
+>>
+>> On Wed, Mar 12, 2025 at 03:55:47PM +0000, Paolo Savini wrote:
+>>> This commit improves the performance of QEMU when emulating strided 
+>>> vector
+>>> loads and stores by substituting the call for the helper function 
+>>> with the
+>>> generation of equivalent TCG operations.
+>>>
+>>> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+>>> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>>> ---
+>>>   target/riscv/insn_trans/trans_rvv.c.inc | 323 
+>>> ++++++++++++++++++++----
+>>>   1 file changed, 273 insertions(+), 50 deletions(-)
+>>
+>> This recent QEMU patch broke the RISC-V vector optimized ChaCha20 code
+>> in the Linux kernel.  I simplified the reproducer to the following,
+>> which had its behavior changed:
+>>
+>> rvv_test_func:
+>>     vsetivli    zero, 1, e32, m1, ta, ma
+>>     li        t0, 64
+>>
+>>     vlsseg8e32.v    v0, (a0), t0
+>>     addi        a0, a0, 32
+>>     vlsseg8e32.v    v8, (a0), t0
+>>
+>>     vssseg8e32.v    v0, (a1), t0
+>>     addi        a1, a1, 32
+>>     vssseg8e32.v    v8, (a1), t0
+>>     ret
+>>
+>> Before this patch, it copied 64 bytes from a0 to a1.  After this patch,
+>> the bytes at 32..47 also incorrectly get copied to 16..31.
+>>
+>> Please fix this, or else revert the patch.
+>>
+>> - Eric
+>
 
