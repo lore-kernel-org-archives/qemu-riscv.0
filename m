@@ -4,97 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C86D5C83F1A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Jul 2025 16:17:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C310FC83F1A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Jul 2025 12:56:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uaGQK-0007VV-IA; Fri, 11 Jul 2025 12:16:32 -0400
+	id 1ubIgl-00014l-Eq; Mon, 14 Jul 2025 08:53:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1uaGPN-0006ib-1t
- for qemu-riscv@nongnu.org; Fri, 11 Jul 2025 12:15:36 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1ubHzC-0003zW-Py
+ for qemu-riscv@nongnu.org; Mon, 14 Jul 2025 08:08:53 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1uaGPJ-0006RO-Q8
- for qemu-riscv@nongnu.org; Fri, 11 Jul 2025 12:15:32 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-7426c44e014so2286318b3a.3
- for <qemu-riscv@nongnu.org>; Fri, 11 Jul 2025 09:15:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1ubHz5-0004f6-0O
+ for qemu-riscv@nongnu.org; Mon, 14 Jul 2025 08:08:46 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-234bfe37cccso34106755ad.0
+ for <qemu-riscv@nongnu.org>; Mon, 14 Jul 2025 05:08:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752250526; x=1752855326; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Q6HBYgpqhq43kLP/CAjgQ8dfvFOzmWLdH7bSoaJLU9A=;
- b=E9NOa5L8/ke44hE1Mx1HAYa9yvEOxJHjmnUAIEQT1o7+BDYl48PwdSbiiAeWPPq1oV
- ZTVGWZyS/9LSmMrHAESgSgxWidqgwA+RGN7SFnA6PEPysU05LffvH9D5oF9wtmCO1FyQ
- qnnvxvPH6QP369F43qRRuOI+9O/uz8/GFoymUXJeL3txvcDWXkRW9hPispI6ricV9TjE
- itopIXJoMTRJoocsgdWL6ZSQVENl1sMLtF370Ie4fFKLfLsjJi5LZETJQthPUh4SYs6P
- a6iXwPkwmBof4+/4//Ar8PmUr5XShFLecLHbs8YHYWUIHAAiBj5uVulefv9JrCKXD7YQ
- wLgg==
+ d=ventanamicro.com; s=google; t=1752494913; x=1753099713; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3Wl8gfbM6N7ds9hzF8aCIKvoOCjkpEJPMwCp3ZCChH0=;
+ b=PlZ8hMa6mmpRVL7M63PuOCbK1hPrrBU7+Zd7P9YQJviIvx4f+ZLfjvY0UCAvLACEPA
+ flvCi9sOMtyuhpHuDHG0P+WblZjxnrMmkHcnzp+332AKw78FRm96ZwdtzAvK5gc+x4L+
+ GZsWBMU0bDTbsVSOrkrUy8ZFUEvLv8T8d/y+iOYoEBIob2ZvdSgHwNroiIiMzTYCypwZ
+ 6SG91fD61Gk9Ii9iYgY96153TDNUhphu2dMW1ITLTQ+nJN/Vq7KInLusX6F6FgCzRDfd
+ G0nzQrh1UDY/SE9yhdOLnloAn8OHnwl4WO13BgZiGhOmkBqlzmMbh4OQgKptqQ0RE0Lg
+ Q6mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752250526; x=1752855326;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Q6HBYgpqhq43kLP/CAjgQ8dfvFOzmWLdH7bSoaJLU9A=;
- b=eXCCnnZBEl6LEtcGRGnUJ+wfnLVkfXIKG1JuyBC9rBE/QgSgkZCYVw21EDGLUraAwj
- go6KNlM+e4xWvRnnsHOgvJT4+K1OkAlj4Qc6Aq7cJa3IHirYybfNX5lQht2NSk7nCvpV
- hkZTqSdEL8+hGhclRLaJ627BsI4GfRCioJ4QiiC1FFPHiYOGlOWKZvgyGJlbj5tP8GoZ
- KcazOB7iyaVfGfxo8hjJ+ixcDM7CaBdjFbWxnO1nll/5Qbx9yViY0qrfZpS3qN/J3+7j
- opmpyBrO3cNbdavoUJS5nGEigoMYonNgiLU3sujR+/9J86JF5JpG57Xkh0niW0M5ZiAW
- b7lw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXfJkJRKNU9GtoXnHQaK/zaxLtltRG+b6Jap7SG30g3kdTDDimw7SW3qTqWmZudxK5usjNH+dQxf0Ws@nongnu.org
-X-Gm-Message-State: AOJu0YzzqYQ3K/akejV3exz43tDCW11Zqx+3PA/X3599GhizfmvGsspl
- 6NqRcaCWKddSwirS2IGBMU2R0sGgmlfGw9Rt4QiAkdX3VO+EmNed2ZCjSKj89M7vaNc=
-X-Gm-Gg: ASbGncvxbeY+TjyMrihJiKVg6DfsKeO1ULO9RB/lvOZK4mELE0YoJFp34kcGIin1FeP
- V+n8n+CXJXasR+GI45wJDgrg/rf0ty3Ek1chtYbXeyE4vFxHuE5gEl0sAat5PyOF3dceE4O4b7K
- Hxvu9b6HPaNTwcwKzpq6t+XFnLgrNKXDx4iliLv/kvSHGwPvoJ41t6uBZuZkiqknJPtAtUt/l2h
- Gd9/kv8L8R69gsi0a8l0j7jfutJdAlBjdHwoSbV2CHdcEa20mnL2PmPk11jTfESosM9RwS7US0X
- ehborpZ3FsPlj2v3SI4jxN0MYzbObYvQPdOZP8Gtr41/+HDwEhcqIZL48avCB9EUrDjO999KGor
- x2O0u2SvsGPWQK2RYNT0ovGL1/fSEiYoStJk=
-X-Google-Smtp-Source: AGHT+IEH0TJ0IGqQC5mKu0bwf52NWNFjYMZCjL8FYQWrqLmizGzABahU5kJw6M6w2Yx38N79ed6zpQ==
-X-Received: by 2002:a05:6300:6c09:b0:231:c295:136d with SMTP id
- adf61e73a8af0-231c29523bdmr2635525637.14.1752250525789; 
- Fri, 11 Jul 2025 09:15:25 -0700 (PDT)
-Received: from [192.168.1.87] ([38.41.223.211])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74eb9e06bd7sm5798268b3a.70.2025.07.11.09.15.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Jul 2025 09:15:25 -0700 (PDT)
-Message-ID: <6d3cef20-9655-462b-8418-55e68caafea7@linaro.org>
-Date: Fri, 11 Jul 2025 09:15:24 -0700
+ d=1e100.net; s=20230601; t=1752494913; x=1753099713;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3Wl8gfbM6N7ds9hzF8aCIKvoOCjkpEJPMwCp3ZCChH0=;
+ b=r+oxAu6SsWsnLiK3cNGuUT/DGr05b1lcaV0o5FhLt0eC7nIldXUEbFLUPAWpiYqxA5
+ YCEJ6FDU60V4DUn9gzbMrMgkdEpRpi8UU0ldnjacJsJERl7TFNDCe3GmWDWr1ITmunXm
+ eqPkSZq9VcHuwuq9NyYxV2MlEJ/fMcuLaPB/980d+E346+KWGJBAULCP5Gz3VH/hdF7+
+ KdTZd0+rE7+biqCeW3CWmzR/QbBQq5G5LuvSYJVYeaOrAVzN+iyi2pp6c4/AVcAsmcj8
+ I80n56TOXG8gXvQBkXTJKIiDddTVXA6Ik9fnxGUyCxQ5yIASvhA2T9vx6sW64e4JiBs9
+ uf+g==
+X-Gm-Message-State: AOJu0YwRvQp6pz8BLcgs2iuV+OOQjX1qFyIyvfw1aUQbOjN2s6+umvbH
+ gAtIpnFO/eu6neyzCdeVkX46Hqt29rJmYBoN4XJNqyXQ6cmec9ux2n1WjzwlQ+MTxhw=
+X-Gm-Gg: ASbGncsxYgCjPWsYiUVxi7USfCPUMexCPg5Ed4FB5PSGj8EUYMWi+ruVWri2frM6vsH
+ DI/wFP6aVYt39uxNmHOWzWsAMCo1fHoUGlK5/CB2I1R3VsvH+woynS8UewHSA6Du1bIquvCvhZB
+ Dcj8rFX8D424fAS7TYcVk3A8PrauSkuTn98oPGVibW4W45L7+TGVy7dWNkSQucgxUAT2tfup4aQ
+ vwOsC9qYZvdmT6DrM9lPHm2JEuJyFaZhJP/gAXzpLYVpSzxsY9BSc5+GnOF1Wv9GT6tcIOsNopX
+ EJuxq4i4wQCkvCbaamBZhZYvPhHYaVntor/AYWZzqVfN7eB/YVLQ3gqbYt2lG/3rMoHOcfprO51
+ k25bufV9YcI+YVtXjbCaH6GR3eVjnORlVvw==
+X-Google-Smtp-Source: AGHT+IG/TxzQUdv6+hH7SEM7Ia/rglKxTAoNk1dGmkOBWhEgVwTamASoXIAGAn2GYgNhYIIy8N8RJw==
+X-Received: by 2002:a17:903:11c9:b0:235:2e0:aa9 with SMTP id
+ d9443c01a7336-23dede456d7mr195630975ad.14.1752494912721; 
+ Mon, 14 Jul 2025 05:08:32 -0700 (PDT)
+Received: from grind ([177.170.118.252]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23de4286b4asm97720765ad.46.2025.07.14.05.08.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Jul 2025 05:08:32 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
+ richard.henderson@linaro.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH] target/riscv: set mtval = 0 for illegal_inst if no opcode
+ avail
+Date: Mon, 14 Jul 2025 09:08:22 -0300
+Message-ID: <20250714120822.1243870-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] tests/functional: Move tests into architecture
- specific folders
-To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>, =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>
-References: <20250710094251.139514-1-thuth@redhat.com>
- <643f1db1-4a7a-4bc0-a187-9ff1561f8a3d@linaro.org>
- <8f90fbd7-1edd-45cc-9540-06fd9d0ee978@redhat.com>
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Content-Language: en-US
-In-Reply-To: <8f90fbd7-1edd-45cc-9540-06fd9d0ee978@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x430.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,63 +99,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/11/25 4:55 AM, Thomas Huth wrote:
-> On 10/07/2025 17.51, Pierrick Bouvier wrote:
->> On 7/10/25 2:42 AM, Thomas Huth wrote:
->>> This patch tackles two issues. First, the tests/functional folder has
->>> become quite crowded already, some restructuring would be helpful here.
->>> Second, we currently encode the target architecture twice in the test
->>> names since a lot of the test file names contain the target, too.
->>> This contributes to the very long output lines when running "make
->>> check-functional".
->>>
->>
->> I agree with the "crowded" aspect of functional tests, and subfolders are
->> definitely welcome.
->>
->> Concerning the long line, it seems that setup ("thorough" in this example)
->> is repeated 3 times on it, which is a bigger issue than having arch name
->> being repeated.
->>
->> A simpler solution for the "long line" issue would be to change
->> mtest2make.py to generate shorter test target names. This would not benefit
->> for using meson test directly, but from what I understood, this is not
->> recommended nor supported anyway.
-> 
-> I agree that this is a bigger annoyance here, but as far as I understood
-> that that repeated "thorough" term is just a listing of all the test suites
-> that the test is part of. I think this would rather need to be fixed on the
-> meson test runner side - why does meson list all test suites here? The one
-> that applies to the current should be enough, shouldn't it?
->
+There is no guarantee that we'll able to get a proper opcode to put into
+mtval for illegal inst exceptions, as demonstrated in [1].
 
-Meson is usually explicit (thus sometimes verbose) and unambiguous, 
-which are two very nice virtues, especially for build systems and tests, 
-at least for my personal taste. You don't want to spend time reverse 
-engineering the test infrastructure itself when you try to understand 
-why a fail happened or when writing a new test.
+The 'proper opcode' would be retrieved via unwinding the CPU state (via
+cpu_restore_state(), down to riscv_restore_state_to_opc()) after
+riscv_raise_exception(). There are cases where that doesn't happen:
+we'll see a failure in cpu_restore_state(), where in_code_gen_buffer()
+will return 'false' even for a 'host_pc' that is retrieved via GETPC()
+and not in an instruction fetch context.
 
-Another additional benefit of listing setup + suite + test in an 
-exhaustive way is that your command line never change to run any 
-specific test, whatever your current setup is.
+Hopefully we don't have to always provide mtval in these cases. The
+RISC-V priv ISA says that mtval for illegal_inst exceptions are
+optional, and the faulting instruction address will be reported in
+env->mepc.
 
-If I had to choose between a wider terminal output and spending time 
-with grep and find to understand what is running, I would pick the 
-former any time.
+The ISA also says that we can set mtval to ILEN/MXLEN bits of the
+faulting insn address, and we could do that when we're not able to fetch
+the opcode. But that would add inconsistency in how we behave since
+mtval would have either the opcode or the insn addr, and no easy way of
+knowing which one we have, and software would need to check it with mepc
+regardless. Zeroing mtval when we don't have the opcode is clearer.
 
-Maybe the complexity comes from our usage of test setups here, to 
-differentiate categories that will download, vs the one that will not. 
-We already talked about that in another thread, and I still think that 
-having a single setup (thorough), which could be the default, would make 
-things easier, even if people should accept to connect to Internet from 
-time to time to update their tests assets. They do it to download new 
-versions of QEMU or interact with the mailing list anyway. That said, 
-I'm not trying to open the can of worms again, just pointing that it may 
-be related to this topic.
+And yes, zeroing mtval due to an unwind failure isn't ideal either, but
+it's less worse than reporting a wrong mtval. Until we figure out a way
+to fix the unwinding in this case, let's clear mtval and let software
+know that it must find the faulting opcode via other means.
 
->    Thomas
-> 
+[1] https://gitlab.com/qemu-project/qemu/-/issues/3020
 
-Regards,
-Pierrick
+Closes: https://gitlab.com/qemu-project/qemu/-/issues/3020
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/cpu_helper.c |  5 +++++
+ target/riscv/op_helper.c  | 21 +++++++++++++++++++++
+ 2 files changed, 26 insertions(+)
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 3479a62cc7..1cd1849a1d 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -2243,6 +2243,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+             break;
+         case RISCV_EXCP_ILLEGAL_INST:
+         case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
++            /*
++             * Note: we'll set tval = 0 for illegal_inst cases
++             * where we failed to unwind and to get the proper
++             * opcode. See riscv_raise_exception() for more info.
++             */
+             tval = env->bins;
+             break;
+         case RISCV_EXCP_BREAKPOINT:
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 15460bf84b..930981a076 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -40,6 +40,27 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
+                           env->pc);
+ 
+     cs->exception_index = exception;
++
++    /*
++     * There is no guarantee that we'll be able to unwind
++     * and set env->bins (the opcode for the current PC)
++     * properly via the cpu_restore_state() path. The RISC-V
++     * priv ISA says that:
++     *
++     * "The mtval register can optionally also be used to return
++     * the faulting instruction bits on an illegal-instruction
++     * exception (mepc points to the faulting instruction in
++     * memory)."
++     *
++     * It's not ideal to set mtval != 0 in some cases and zero
++     * in others due to unwind failures, but it's way better
++     * than to set mtval to a bogus env->bins opcode from
++     * the last successful unwinding.
++     */
++    if (cs->exception_index == RISCV_EXCP_ILLEGAL_INST) {
++        env->bins = 0;
++    }
++
+     cpu_loop_exit_restore(cs, pc);
+ }
+ 
+-- 
+2.50.1
+
 
