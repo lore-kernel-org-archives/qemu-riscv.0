@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C310FC83F1A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Jul 2025 12:56:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAFFCC83F1B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Jul 2025 15:05:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ubIgl-00014l-Eq; Mon, 14 Jul 2025 08:53:47 -0400
+	id 1ubKkH-0002jj-4W; Mon, 14 Jul 2025 11:05:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ubHzC-0003zW-Py
- for qemu-riscv@nongnu.org; Mon, 14 Jul 2025 08:08:53 -0400
+ id 1ubJNZ-0004dw-8s
+ for qemu-riscv@nongnu.org; Mon, 14 Jul 2025 09:38:02 -0400
 Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ubHz5-0004f6-0O
- for qemu-riscv@nongnu.org; Mon, 14 Jul 2025 08:08:46 -0400
+ id 1ubJNT-0002Ms-St
+ for qemu-riscv@nongnu.org; Mon, 14 Jul 2025 09:38:01 -0400
 Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-234bfe37cccso34106755ad.0
- for <qemu-riscv@nongnu.org>; Mon, 14 Jul 2025 05:08:36 -0700 (PDT)
+ d9443c01a7336-2353a2bc210so42226125ad.2
+ for <qemu-riscv@nongnu.org>; Mon, 14 Jul 2025 06:37:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1752494913; x=1753099713; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1752500273; x=1753105073; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3Wl8gfbM6N7ds9hzF8aCIKvoOCjkpEJPMwCp3ZCChH0=;
- b=PlZ8hMa6mmpRVL7M63PuOCbK1hPrrBU7+Zd7P9YQJviIvx4f+ZLfjvY0UCAvLACEPA
- flvCi9sOMtyuhpHuDHG0P+WblZjxnrMmkHcnzp+332AKw78FRm96ZwdtzAvK5gc+x4L+
- GZsWBMU0bDTbsVSOrkrUy8ZFUEvLv8T8d/y+iOYoEBIob2ZvdSgHwNroiIiMzTYCypwZ
- 6SG91fD61Gk9Ii9iYgY96153TDNUhphu2dMW1ITLTQ+nJN/Vq7KInLusX6F6FgCzRDfd
- G0nzQrh1UDY/SE9yhdOLnloAn8OHnwl4WO13BgZiGhOmkBqlzmMbh4OQgKptqQ0RE0Lg
- Q6mg==
+ bh=zlc0P8VCWmuofdzqL3bOeDpuJqP0QcfGjEi1Fn+DLbo=;
+ b=WiuPhoXhUZM6AUJ21tvNC5ayNJN2VaQD5beu23DHRay4lRhqI7M8d9UONY0CVgLzVK
+ qo0O2eXhnBVrpRvqdyht5WPQP4jLcnd8WfTkwjnQ8d5ETjMmJr8oGy/baP9IlM7sBHAc
+ QZlSQleXI0/oHbMCCiIbkcS7AGhGvO+wTb1wpL+BUQTyjXXIQBgn2e4sAvbMeyG33ahy
+ SGa1qb0vM2pqfrCPCQGL0W3Erk6UuCqLQGljybTso41WWFrpubr5fi2kQc3TKwmV0FhX
+ 0ugBcASJrJMvQAd21Tm4I/Bp6oHIGElMGeLW/Wn6wAboHIlYyK45GJE0Ocx7TcMzewKh
+ ymYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752494913; x=1753099713;
+ d=1e100.net; s=20230601; t=1752500273; x=1753105073;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3Wl8gfbM6N7ds9hzF8aCIKvoOCjkpEJPMwCp3ZCChH0=;
- b=r+oxAu6SsWsnLiK3cNGuUT/DGr05b1lcaV0o5FhLt0eC7nIldXUEbFLUPAWpiYqxA5
- YCEJ6FDU60V4DUn9gzbMrMgkdEpRpi8UU0ldnjacJsJERl7TFNDCe3GmWDWr1ITmunXm
- eqPkSZq9VcHuwuq9NyYxV2MlEJ/fMcuLaPB/980d+E346+KWGJBAULCP5Gz3VH/hdF7+
- KdTZd0+rE7+biqCeW3CWmzR/QbBQq5G5LuvSYJVYeaOrAVzN+iyi2pp6c4/AVcAsmcj8
- I80n56TOXG8gXvQBkXTJKIiDddTVXA6Ik9fnxGUyCxQ5yIASvhA2T9vx6sW64e4JiBs9
- uf+g==
-X-Gm-Message-State: AOJu0YwRvQp6pz8BLcgs2iuV+OOQjX1qFyIyvfw1aUQbOjN2s6+umvbH
- gAtIpnFO/eu6neyzCdeVkX46Hqt29rJmYBoN4XJNqyXQ6cmec9ux2n1WjzwlQ+MTxhw=
-X-Gm-Gg: ASbGncsxYgCjPWsYiUVxi7USfCPUMexCPg5Ed4FB5PSGj8EUYMWi+ruVWri2frM6vsH
- DI/wFP6aVYt39uxNmHOWzWsAMCo1fHoUGlK5/CB2I1R3VsvH+woynS8UewHSA6Du1bIquvCvhZB
- Dcj8rFX8D424fAS7TYcVk3A8PrauSkuTn98oPGVibW4W45L7+TGVy7dWNkSQucgxUAT2tfup4aQ
- vwOsC9qYZvdmT6DrM9lPHm2JEuJyFaZhJP/gAXzpLYVpSzxsY9BSc5+GnOF1Wv9GT6tcIOsNopX
- EJuxq4i4wQCkvCbaamBZhZYvPhHYaVntor/AYWZzqVfN7eB/YVLQ3gqbYt2lG/3rMoHOcfprO51
- k25bufV9YcI+YVtXjbCaH6GR3eVjnORlVvw==
-X-Google-Smtp-Source: AGHT+IG/TxzQUdv6+hH7SEM7Ia/rglKxTAoNk1dGmkOBWhEgVwTamASoXIAGAn2GYgNhYIIy8N8RJw==
-X-Received: by 2002:a17:903:11c9:b0:235:2e0:aa9 with SMTP id
- d9443c01a7336-23dede456d7mr195630975ad.14.1752494912721; 
- Mon, 14 Jul 2025 05:08:32 -0700 (PDT)
+ bh=zlc0P8VCWmuofdzqL3bOeDpuJqP0QcfGjEi1Fn+DLbo=;
+ b=VWyGpXA0QgXG8/anFjhQktlOWTDqgJEZawmCY3N44nQerxVOoEBj6W39wPF2X2PMcV
+ pyA9Bpyg3s/JN7eJMRBigxH9/ESfaPGkM913YWcdkZT84WvsfJnpkLHo7zjsBCQShYK0
+ Z/pjm7xCYSVzp2gOzLzDLjGUw+vKT+o6RkkRRZ0gjPPU2gUgl2Sk3XYS4tyDN9COreq4
+ YPWfeCYy8piBtLYkwMMDn3pqJW7a+tbxfUBZUKrWXQpbJ2jD/ew6vX2/QDbQ1MCwHc2W
+ dQpTvF2mNS3eOIBQ5lybNQSHmMWaqxo5Y7y344qLjzif3QaqSwdb5hFhLjVA2pSyBqnb
+ yI2w==
+X-Gm-Message-State: AOJu0YwYLGLGoNQ5pdZbwtP5Vhfk4jI2gsnwuTss0d8gdntyEkznu/+P
+ TI2P4kH+vikgGcP9OJEQl/L6wo3N0egGLRicpUn3awGGxdrdLycLDYsHGFEbh0DeHDUq4jH9tPg
+ oPs+9
+X-Gm-Gg: ASbGncvyLsvbM5kkTscKQ6afaDkFImUe7xohID7KHBhbKGYQOWnIlQGLhhQkuUFHNIx
+ /PXrWOqGWZoaSmnGK6gu0Y8BqNxMW4EbYmc6yd6ZwA1F3nKSJbZaLkiT3wnaQABCUmNW7ZZsHeB
+ Q+dLYgfxga72D997mVDDMdIRMATk3kvTadYal9/je/92MSCG2WmT6TKTObSoYbDIZr5snRjrGEf
+ 9TtMYBJtPsv3CPipP+PaAy0yFB5Rt9ReVRos7jUFrYae4yjg6+8ihQ7RjZKLOt2lel4w3sCAHup
+ oAQsG4hehxhS+nEaDDcaB6UBhUW/j86yKu/McnUNv+ehzhSBIbQw2sAtswgOIYS7lcJIBfHylNI
+ 0z8U025XFVFMnTQjHxyoewvsFLjLGppLgNQ==
+X-Google-Smtp-Source: AGHT+IFjC5ilZU2AnzoM2lcWxZwG8Acxcl60+TH+ujeKwFLYuCiHmUaYOUXzFNMIS+MNiuIbyLe3Ng==
+X-Received: by 2002:a17:903:13ce:b0:235:81c7:3c45 with SMTP id
+ d9443c01a7336-23dee0de80cmr196832965ad.46.1752500272855; 
+ Mon, 14 Jul 2025 06:37:52 -0700 (PDT)
 Received: from grind ([177.170.118.252]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23de4286b4asm97720765ad.46.2025.07.14.05.08.29
+ d9443c01a7336-23de4285a22sm92883555ad.22.2025.07.14.06.37.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Jul 2025 05:08:32 -0700 (PDT)
+ Mon, 14 Jul 2025 06:37:52 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- richard.henderson@linaro.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH] target/riscv: set mtval = 0 for illegal_inst if no opcode
- avail
-Date: Mon, 14 Jul 2025 09:08:22 -0300
-Message-ID: <20250714120822.1243870-1-dbarboza@ventanamicro.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH] target/riscv: do not call GETPC() in check_ret_from_m_mode()
+Date: Mon, 14 Jul 2025 10:37:39 -0300
+Message-ID: <20250714133739.1248296-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -83,7 +83,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,90 +99,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-There is no guarantee that we'll able to get a proper opcode to put into
-mtval for illegal inst exceptions, as demonstrated in [1].
+GETPC() should always be called from the top level helper, e.g. the
+first helper that is called by the translation code. We stopped doing
+that in commit 3157a553ec, and then we introduced problems when
+unwinding the exceptions being thrown by helper_mret(), as reported by
+[1].
 
-The 'proper opcode' would be retrieved via unwinding the CPU state (via
-cpu_restore_state(), down to riscv_restore_state_to_opc()) after
-riscv_raise_exception(). There are cases where that doesn't happen:
-we'll see a failure in cpu_restore_state(), where in_code_gen_buffer()
-will return 'false' even for a 'host_pc' that is retrieved via GETPC()
-and not in an instruction fetch context.
-
-Hopefully we don't have to always provide mtval in these cases. The
-RISC-V priv ISA says that mtval for illegal_inst exceptions are
-optional, and the faulting instruction address will be reported in
-env->mepc.
-
-The ISA also says that we can set mtval to ILEN/MXLEN bits of the
-faulting insn address, and we could do that when we're not able to fetch
-the opcode. But that would add inconsistency in how we behave since
-mtval would have either the opcode or the insn addr, and no easy way of
-knowing which one we have, and software would need to check it with mepc
-regardless. Zeroing mtval when we don't have the opcode is clearer.
-
-And yes, zeroing mtval due to an unwind failure isn't ideal either, but
-it's less worse than reporting a wrong mtval. Until we figure out a way
-to fix the unwinding in this case, let's clear mtval and let software
-know that it must find the faulting opcode via other means.
+Call GETPC() at the top level helper and pass the value along.
 
 [1] https://gitlab.com/qemu-project/qemu/-/issues/3020
 
+Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+Fixes: 3157a553ec ("target/riscv: Add Smrnmi mnret instruction")
 Closes: https://gitlab.com/qemu-project/qemu/-/issues/3020
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu_helper.c |  5 +++++
- target/riscv/op_helper.c  | 21 +++++++++++++++++++++
- 2 files changed, 26 insertions(+)
+ target/riscv/op_helper.c | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 3479a62cc7..1cd1849a1d 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -2243,6 +2243,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-             break;
-         case RISCV_EXCP_ILLEGAL_INST:
-         case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
-+            /*
-+             * Note: we'll set tval = 0 for illegal_inst cases
-+             * where we failed to unwind and to get the proper
-+             * opcode. See riscv_raise_exception() for more info.
-+             */
-             tval = env->bins;
-             break;
-         case RISCV_EXCP_BREAKPOINT:
 diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 15460bf84b..930981a076 100644
+index 15460bf84b..110292e84d 100644
 --- a/target/riscv/op_helper.c
 +++ b/target/riscv/op_helper.c
-@@ -40,6 +40,27 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
-                           env->pc);
- 
-     cs->exception_index = exception;
-+
-+    /*
-+     * There is no guarantee that we'll be able to unwind
-+     * and set env->bins (the opcode for the current PC)
-+     * properly via the cpu_restore_state() path. The RISC-V
-+     * priv ISA says that:
-+     *
-+     * "The mtval register can optionally also be used to return
-+     * the faulting instruction bits on an illegal-instruction
-+     * exception (mepc points to the faulting instruction in
-+     * memory)."
-+     *
-+     * It's not ideal to set mtval != 0 in some cases and zero
-+     * in others due to unwind failures, but it's way better
-+     * than to set mtval to a bogus env->bins opcode from
-+     * the last successful unwinding.
-+     */
-+    if (cs->exception_index == RISCV_EXCP_ILLEGAL_INST) {
-+        env->bins = 0;
-+    }
-+
-     cpu_loop_exit_restore(cs, pc);
+@@ -355,21 +355,22 @@ target_ulong helper_sret(CPURISCVState *env)
  }
  
+ static void check_ret_from_m_mode(CPURISCVState *env, target_ulong retpc,
+-                                  target_ulong prev_priv)
++                                  target_ulong prev_priv,
++                                  uintptr_t ra)
+ {
+     if (!(env->priv >= PRV_M)) {
+-        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
+     }
+ 
+     if (!riscv_cpu_allow_16bit_insn(&env_archcpu(env)->cfg,
+                                     env->priv_ver,
+                                     env->misa_ext) && (retpc & 0x3)) {
+-        riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
++        riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, ra);
+     }
+ 
+     if (riscv_cpu_cfg(env)->pmp &&
+         !pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
+-        riscv_raise_exception(env, RISCV_EXCP_INST_ACCESS_FAULT, GETPC());
++        riscv_raise_exception(env, RISCV_EXCP_INST_ACCESS_FAULT, ra);
+     }
+ }
+ static target_ulong ssdbltrp_mxret(CPURISCVState *env, target_ulong mstatus,
+@@ -394,8 +395,9 @@ target_ulong helper_mret(CPURISCVState *env)
+     target_ulong retpc = env->mepc & get_xepc_mask(env);
+     uint64_t mstatus = env->mstatus;
+     target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
++    uintptr_t ra = GETPC();
+ 
+-    check_ret_from_m_mode(env, retpc, prev_priv);
++    check_ret_from_m_mode(env, retpc, prev_priv, ra);
+ 
+     target_ulong prev_virt = get_field(env->mstatus, MSTATUS_MPV) &&
+                              (prev_priv != PRV_M);
+@@ -443,8 +445,9 @@ target_ulong helper_mnret(CPURISCVState *env)
+     target_ulong retpc = env->mnepc;
+     target_ulong prev_priv = get_field(env->mnstatus, MNSTATUS_MNPP);
+     target_ulong prev_virt;
++    uintptr_t ra = GETPC();
+ 
+-    check_ret_from_m_mode(env, retpc, prev_priv);
++    check_ret_from_m_mode(env, retpc, prev_priv, ra);
+ 
+     prev_virt = get_field(env->mnstatus, MNSTATUS_MNPV) &&
+                 (prev_priv != PRV_M);
 -- 
 2.50.1
 
