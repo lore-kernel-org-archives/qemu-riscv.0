@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BBABC83F17
-	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Jul 2025 09:59:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00150C83F17
+	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Jul 2025 10:04:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ubcRP-0004e3-Go; Tue, 15 Jul 2025 05:59:15 -0400
+	id 1ubcVl-0006dA-1W; Tue, 15 Jul 2025 06:03:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ubcRG-0004a6-KT
- for qemu-riscv@nongnu.org; Tue, 15 Jul 2025 05:59:06 -0400
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1ubcVd-0006bg-Ox
+ for qemu-riscv@nongnu.org; Tue, 15 Jul 2025 06:03:37 -0400
+Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ubcRE-0006qj-RL
- for qemu-riscv@nongnu.org; Tue, 15 Jul 2025 05:59:06 -0400
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-45348bff79fso60586805e9.2
- for <qemu-riscv@nongnu.org>; Tue, 15 Jul 2025 02:59:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1ubcVb-0001WH-T4
+ for qemu-riscv@nongnu.org; Tue, 15 Jul 2025 06:03:37 -0400
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-558fa0b2c99so4365919e87.2
+ for <qemu-riscv@nongnu.org>; Tue, 15 Jul 2025 03:03:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1752573541; x=1753178341; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=FpLBRmgjQAmGD20whBP2U/LYnyFDcydpML+VeRfHVP0=;
- b=uSEK2VnfWaFhY14jnFTks4gnnvFV/DADxxQwXQEJSq6N+QXhf18j1mUAZK243FbG1i
- VKkCry02WNBQuhzmG8lATPrWfO0y3IXFFxVBMgi4YhPzEJLg9HFtnP6YA2TdILA60IYA
- qO7NhXUTpfwiD/qWlEdVKZyVEy3rGN/AiJQkIim2dQ9tgWllmCmfzhAi13W4+lSgHKEQ
- 0pm81Vl/tHR0ec8HrV3drsSD+VTDKBYlZ+h7zf3yqKBIfdlbsG1vGuYbdz+ZiQu4v2IU
- 9OPVr/L1YpAlWq/s5gkLjfAiIzqDkgQ+y6vyjKcDik75BbjxlR+civuDkbFXKEIa03FM
- VRZg==
+ d=ventanamicro.com; s=google; t=1752573812; x=1753178612; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2xjQmuDCGdjXJTbqeZ26m4iepUkkU+JnpxrcriQakXM=;
+ b=NJ6g7mldkYIiTbFvnfcxxExdGHdtxDcAeH4NoouJj9mc17G7BDW44Ke/c5dQpnNXA1
+ Lb1i1Wiofpv7Kp2krk7eknlzKZLUha3AfilyrlZlQ0nbXdy6syBldysv7K95GwnWMk3c
+ Ft/P+EMX+402a7+jrrnF7453SclbbwAr3zUmeKQrPCo1+uvEAOnmp/owUZMRpsJ3WBX5
+ qdldf7wUhIZqe68BymtkqjPGCZ9tqkKdIMz0KLLxU7MtcSp+fnLUibYDgH8Im7padF7O
+ VeoeMHP6cO4mu/bYR34Ftpidz1b9QLsTDE4Cmf99KTJYwnEMzkKOtRD9wrtmaUSYS/DZ
+ u09w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752573541; x=1753178341;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FpLBRmgjQAmGD20whBP2U/LYnyFDcydpML+VeRfHVP0=;
- b=hknQs48iTR+NsrO61cExouBCp2/MxEGoCS2+oGI/ysKMBZpoNPjvpM+Rvqzjca5/xW
- UFga+LLAo3+BVjA0all2o/S0u4faPEFqTEivkbfyee1lnkLmTYva+9NTc+vf1z33UKfO
- qgTwxKm3TErxdCAreX00WiI95ktwNjl75LBqTVl/oo+Y4TsPcmFCKrHUn8h3e5LRhNuD
- YxdT7X2HYHhUDL0fAjmQwgK4DrAyDSDRsnZpLXfXXItqe0LD+aU907MqgrHjb6k5qo1S
- NjASwQXU40E3+3mbkpndpVIu/p1r77f+pSno1641VQHG5XjPjX9Agvo7GHM8EThLwHO9
- xKMw==
-X-Gm-Message-State: AOJu0YwU+dc7rU1NzGuRczFBY6UVTXadp/epeQbUexFSlYUUxI/PRVu9
- DMvssnH9AoDge5xXDKOWhBXXD3z/4RXfENlPcWqsr1Nt+8EfmMiaM64OcZJfS8LK2tA=
-X-Gm-Gg: ASbGncsCQWr7GjkeXgrcJO8AzwhRaT/2O6hJV6xHnxXswpSJXorcToSXOoxf0VQyZHJ
- 0pNq0coxi1X27aaKQndeLGmyvxdVTTJ2oV7tJEdMiKL/F2OYEHlXPw2s2r9Is/J7PGcqW2CJx2G
- BGbdqxLOOEA/gswg4urQGw0RDAfJD52fOvQlkGFVTeAvaSvES/Kf0yPsBg+DWZ00l9QhsSHNZrY
- Sq4CYZ5fwr2QLqzVA44MF52cjJbKwfmKlrhqJZjvCSYzlmkswb8/cyu51oZtjV/WnaU/o1omVSY
- /h/Cyjt16hX5TNEoc5m+9nYKkYrVoRD4XIkPUscAgv+Lcklp7+qfqb6Y9s9fK2lUU/IUqOj4fhb
- eGaef6MTKKGkR3Ye1bcocUSfOqSNLV0hhhBX5a1Dk0ky39Urdy+T+IqhsHw2Xpg0cQ86Zp+g=
-X-Google-Smtp-Source: AGHT+IE+sn8ROE/00arljFEjbioLdaGmYT7QFoQWEj1oGg1lhEARGZg+l9dvmvF95XVrZhIWNusJzg==
-X-Received: by 2002:a05:600c:198f:b0:456:18ca:68fd with SMTP id
- 5b1f17b1804b1-45618ca700amr95011695e9.10.1752573541014; 
- Tue, 15 Jul 2025 02:59:01 -0700 (PDT)
-Received: from [192.168.69.239] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45627898725sm10671255e9.1.2025.07.15.02.59.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Jul 2025 02:59:00 -0700 (PDT)
-Message-ID: <12b159a9-15b4-456f-a601-feda1176f3f8@linaro.org>
-Date: Tue, 15 Jul 2025 11:58:59 +0200
+ d=1e100.net; s=20230601; t=1752573812; x=1753178612;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2xjQmuDCGdjXJTbqeZ26m4iepUkkU+JnpxrcriQakXM=;
+ b=slPH2p64jb7g3/xHbg21Mjpjrf23uvopjebMhQOruEye63h4axZlXCcxXeq9lUn8c8
+ 1vU41VuHdzktX2qBsT8H4RQ0+zEAvFy0TSNxXa1nMsrpvl+iKSUgFwHJWJxUDGfbjhIX
+ nFHt9WMeIfFpz9w3dVBmFoomQI7Q1w5f/wkoqPedmtW+lLnfGxZ4XYIkX543knTeR4Ke
+ 6NkWc9CZOnjbUhlTMi/O1m0HbilsijUtNiDOMv9Mt1+yviEl1n0IJgjA+svJibHYHw7R
+ pcV/3dEgsRGXlRYMPrKOpVMz4Ic8IbCDacKG9AJdaqIFqj/N7alQmsV7xgML5EbBOBWN
+ A1+Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXxGFAcsZOv0uIe3WoIiAnucGxfJO3r4nYDJ2tCQE57narIA1jXPppfyc//C5nXbeymxr+PeKIIrk5G@nongnu.org
+X-Gm-Message-State: AOJu0YzB3u3sjWD6hlK81a4/kLF/bbNm0i06AKCxaqdAhDLkWQ3fIayL
+ 5O3L3TMIrxBko1XIAhbwYJ7qhiZWBUKjtT3stGL5ExDDN3nsbvluEhkvOtkde0yqVYEIpyZ5pC9
+ ZJZSPPPqbjXOkbMEX76SbM7Vo3XrBZdkxDfTuzUmeBg==
+X-Gm-Gg: ASbGncuuYqMge8+D0SSuPvoeGFWMmsGM5hwlgwj0Z5hi0x9nz2EZScPIfC3/4d7uwzs
+ h0oAWV/asN8BnlrhoTsTG5acDP/9iiPvzY/Qb5JldGa8nyGTpshTukevWOatfusDnCUPtpI1Cor
+ zLnbDsN3gtpR9C7Q2b7ltgt07tdDQ+Te3KFXrfv821AGgJcn9L1GPM0Ufx5qzqbrd7jSbCbPqiH
+ oi9U9s/
+X-Google-Smtp-Source: AGHT+IFXLT/YIZudceKXxU577T8aQrk7qew1ipDBKwaHY1bg2iIe0I8LJJDGnk5r+vfLTBC7YsxthAc0xYjwcoLNxS0=
+X-Received: by 2002:a05:6512:b9b:b0:553:2c92:fdcb with SMTP id
+ 2adb3069b0e04-55a057c3c43mr4851000e87.3.1752573812309; Tue, 15 Jul 2025
+ 03:03:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/11] riscv: Add support for MIPS P8700 CPU
-To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>,
- "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>
-References: <20250703104925.112688-1-djordje.todorovic@htecgroup.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250703104925.112688-1-djordje.todorovic@htecgroup.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
+References: <20250708060720.7030-1-luxu.kernel@bytedance.com>
+In-Reply-To: <20250708060720.7030-1-luxu.kernel@bytedance.com>
+From: Anup Patel <apatel@ventanamicro.com>
+Date: Tue, 15 Jul 2025 15:33:21 +0530
+X-Gm-Features: Ac12FXxx34DKhRmAxeDmKtKcGhnGF01dAkjBDQu1R7v66kLO01ZB-2f8U4Xrw30
+Message-ID: <CAK9=C2VzaAyNS8fLNJS8wMF=wxRtWBX1_G1xw9=WPnPVYG99eA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix exception type when VU accesses
+ supervisor CSRs
+To: Xu Lu <luxu.kernel@bytedance.com>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::131;
+ envelope-from=apatel@ventanamicro.com; helo=mail-lf1-x131.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,35 +98,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+On Tue, Jul 8, 2025 at 11:37=E2=80=AFAM Xu Lu <luxu.kernel@bytedance.com> w=
+rote:
+>
+> When supervisor CSRs are accessed from VU-mode, a virtual instruction
+> exception should be raised instead of an illegal instruction.
+>
+> Fixes: c1fbcecb3a (target/riscv: Fix csr number based privilege checking)
+> Signed-off-by: Xu Lu <luxu.kernel@bytedance.com>
 
-On 3/7/25 12:49, Djordje Todorovic wrote:
-> In v5 of this patch set I addressed two comments:
->    - 02/11: Moved cpu_set_exception_base from target/riscv/translate.c
->    to target/riscv/cpu.c, and added some NULL pointer checking so the
->    code follows the convention
->    - 08/11: Improved git commit message by explaining cmgcr and cpc,
->    and introduced a macro for 0x100 offset used in those features
-> 
-> The reset of the patches are the same.
-> 
-> Djordje Todorovic (11):
->    hw/intc: Allow gaps in hartids for aclint and aplic
->    target/riscv: Add cpu_set_exception_base
->    target/riscv: Add MIPS P8700 CPU
->    target/riscv: Add MIPS P8700 CSRs
->    target/riscv: Add mips.ccmov instruction
->    target/riscv: Add mips.pref instruction
->    target/riscv: Add Xmipslsp instructions
->    hw/misc: Add RISC-V CMGCR and CPC device implementations
->    hw/riscv: Add support for MIPS Boston-aia board model
->    hw/pci: Allow explicit function numbers in pci
->    riscv/boston-aia: Add an e1000e NIC in slot 0 func 1
+LGTM.
 
-At a glance, various new files miss their SPDX-License-Identifier,
-which is now required.
+Reviewed-by: Anup Patel <apatel@ventanamicro.com>
 
 Regards,
+Anup
 
-Phil.
+> ---
+>  target/riscv/csr.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 8631be97c5..9bebfae3f0 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -5577,7 +5577,7 @@ static inline RISCVException riscv_csrrw_check(CPUR=
+ISCVState *env,
+>
+>      csr_priv =3D get_field(csrno, 0x300);
+>      if (!env->debugger && (effective_priv < csr_priv)) {
+> -        if (csr_priv =3D=3D (PRV_S + 1) && env->virt_enabled) {
+> +        if (csr_priv <=3D (PRV_S + 1) && env->virt_enabled) {
+>              return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+>          }
+>          return RISCV_EXCP_ILLEGAL_INST;
+> --
+> 2.20.1
+>
 
