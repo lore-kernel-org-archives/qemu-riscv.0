@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B77C83F1B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 546FDC83F27
 	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Jul 2025 15:00:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uc3bt-0000xJ-A5; Wed, 16 Jul 2025 10:59:53 -0400
+	id 1uc3bz-00011f-Bl; Wed, 16 Jul 2025 10:59:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1uc3KY-0000VM-31
- for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 10:42:00 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ id 1uc3Ki-0000Y4-Ts
+ for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 10:42:09 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1uc3KT-0004C1-Jx
- for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 10:41:57 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-31329098ae8so849603a91.1
- for <qemu-riscv@nongnu.org>; Wed, 16 Jul 2025 07:41:51 -0700 (PDT)
+ id 1uc3Kb-0004D7-Ng
+ for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 10:42:07 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-313eeb77b1fso5621903a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 16 Jul 2025 07:41:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1752676909; x=1753281709; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=sBiX9Qv2y3zYZPcpMCcNdMelG6HGZjKASmpE9pXFX6c=;
- b=TJ1lPCzr864IDk0vl4aTUiWRBL5gqS+ZiPlNhnewAYBWfa+cfYO9JlnxArshOKPE2q
- Ua0BTwC8par83FWrby5Isi8x+asRIk79pHgT8yFumBKjy5zsKPeGoP5SrDQtPk0VqbvG
- NfhokdQ533p7gPTpbbyMFYomqU8CgB98BCHmFFPwLtqPtVtqTccDCM15eEf8eAnN7Hsw
- UsD40XNTOTIukBmnAu3xi+1CtT3Bi/5BG2myZG3BOeZLkx1lJlJ+25k/DSBv3HOH/HWh
- 4Uh9IIURn6rjxj/mnP2Xfp5uS/0t0XpOjB/Fk5ZbeD7ycKd1kflvpggpLtYxME+QprIL
- 5sUA==
+ d=ventanamicro.com; s=google; t=1752676918; x=1753281718; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dvZMU+Jp2i+nkStnLXkRcOA2jT1hsR9XWGiTLF22h+c=;
+ b=diPZXD7aYzdyq0T41Xy9oNQVLU0lHomfCYqc8DiravbHjpWqtn7X25l3CKXO1IOfhm
+ 25lEkVXLgvershvj3q6+irkr0rKDEuvcc8NAWHx4kPDNfQykn3YKpbsWxcA8RUOeMqHq
+ guPOwEsGdWOwJxU13Jqz+hFXcw85rCkmVDDevyiL4wFCYpnlDX63h+dHcuMtZdj+gLFX
+ Mm8YtQqdqAmzmoScu/2yB0rTK1auA/8E764dVFKo24Yll2hu8Hhad3zfaVVg1kW/wulA
+ 3EWxEeyKktsuKn2GgwfU7JpPEQsV5Xrk3datgyDCfwAtprsahNrga+mrr33IoSsPMcFJ
+ O84g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752676909; x=1753281709;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sBiX9Qv2y3zYZPcpMCcNdMelG6HGZjKASmpE9pXFX6c=;
- b=TETYsF5gDDweKawqsqmH4fCKB374vEnJ1Nlo8Qc7N1bNwjKJyuweXfOIKM76JCPKOS
- 7K0fbeZJEMOugQx5sE3CO5KSWTu1E0NJAiXE1pm6MOoCXc0KawH2ubKYo1HTGFtX/fUH
- RvRNwN07ex2MZjwruV1/2ZLRLOlF8dZ854ZbysxAqV5Y4+qpNKdbVMR3fbaCzGh7/WFi
- seqhZQNQosUm3Qx2iQD0EFVevls6UiGAO1s82XVhKjfWLPmHRYPeTK/GQ1zAYuHjWUar
- oBGjwru9I4uz/sUKVdOfiurz7ZX3vkqW98OIUjv5a4VMfH+dovSD3Yd/uYCKUSuzmWKF
- 3UJw==
-X-Gm-Message-State: AOJu0YyG90AqkQ3zQ3jy00njGQzOFPjZECTUVeb3pU3f6yvIFFUQjLuM
- W+WQuaV1JsIlgXvDd1wRIr7NaGdmQ+xIKpA5dMhW0HTnkIC/qcqLuZcM/AfSNb9KRlAZrkdRyNs
- zZvp2atM=
-X-Gm-Gg: ASbGnctdlEqYG5DS3VbD1U/RKEaOQA+600oKyrUdXVzOg7/IqtXHy1WkYbo1hilQVA4
- 2sWlx1ilP3TS00bMskhahdO5cr2SDLUw7bGC4KIOh344A1BybCn58zizVGAvKnkPO5xEl8C9Wwa
- xvhCSRQz4tEO3HyssOdLaSFvIpXtZYkdEhC7C/FhCk6exgfYYYC0j/0MYJG6BPmL09L/KjoPTBF
- KwAFoFhpyvAPjAroOeIjAIvw1NFEixTR/fKLrT7dfN/Dh1/uA08JwQCSET4AYHHobW3IBnZxmtF
- yvKI4yP6hWEnFMDzUpLmlT574J6WPA04M2vY7c7M6DwS5q0/uRA1bKu6l0LAbBa1upjJTPBgwW/
- 8mlBG0C2+U8nj/6ID620sEGwXgBpEROUQ
-X-Google-Smtp-Source: AGHT+IFXxgy9VmS/fdIfJkVrDghoxLMv8+ztk1vVXfWTeLKn1JR8efa6KrQCL6YvWShMGmRZy51yNg==
-X-Received: by 2002:a17:90b:4cd2:b0:31c:39c2:b027 with SMTP id
- 98e67ed59e1d1-31c9e6e4200mr4995522a91.7.1752676909388; 
- Wed, 16 Jul 2025 07:41:49 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1752676918; x=1753281718;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dvZMU+Jp2i+nkStnLXkRcOA2jT1hsR9XWGiTLF22h+c=;
+ b=sN1ha2FtETBCXyBwqVWKP9IDqdbwlghHbSmsTRuLpiDs+LPOaYTliH60cbJV8Y26Og
+ biNmCGA7hO9S87ipbDGtDyNryBqdpByGkkz8/N5YWOLCTise0+2IJt5H77VTCSdYplm+
+ uAURcYXPTm1gaD+ceHBuh9OsCYb5eaWGXJaUtbORXgGcXcxmaP0ESLvrZ5D4fXuIqHEQ
+ mZpZQdguwVLinvO3Fejsd8My79bRE51yDyRFFCf+d152JznSLX/OPnLXMPEaSce+YdFI
+ wlUWkCSTDKI9vn7W60YuKDaOKEawlOIqclPos4yXflawScclteJZguLIFYtXxpQJEa2S
+ h4nA==
+X-Gm-Message-State: AOJu0YzkMgUN2ELs3tEbBt4v4RzqSfafHIY2a2kdKNSpJeascTkrknyW
+ jESGsB0vn5TXhyHmkbBwh4DLV0I24jxBoS6daqp078Wi891mdy912cOHlTeNJZcx+CzjQbQz+8W
+ Sz/Map5s=
+X-Gm-Gg: ASbGncvTdn1Dm7VOsfUq4JEa3mR6FDOVUokj/5k66fSNIry86KX6xyp5eKrCfgQF4y1
+ MKM4wBwnzfNO7FBNlJhCeu0zizORVVrcEuWHVcGBo5g12hXuFdj0mriWo4NYuBpB3vmT67wUO1I
+ EbMiOVe5AORpkKj7LNI/I31YMw1FRl2a1TbvF8TjIeMJICnHKdLy9WhDSK424b3S60a6LzH2BMz
+ mb3jtljx1v1oHJ3eYQiGvAdsrrZwY330ccs12ZyHRRftSIk+IBr9VbNv4+FoLRaJ+L/UKznzJua
+ dnVwKRU5VjotUFudbp5E7z/hWFHUm6mFKH0HGy5F0Y042sm9rrS3QTFwyprejM+375uhRoKEkiK
+ kqD8F7iR2nDFz6n5NMDIbWe/K6Bznvt1H
+X-Google-Smtp-Source: AGHT+IEONFlC7D4m23u8wP2sqs7iF1q5eTUOPlb1/yoBmV7j7soI3fKYeiqwB+sg8KxEWXH0J/OzUQ==
+X-Received: by 2002:a17:90b:3905:b0:311:f99e:7f57 with SMTP id
+ 98e67ed59e1d1-31c9f4cf480mr4252500a91.23.1752676917836; 
+ Wed, 16 Jul 2025 07:41:57 -0700 (PDT)
 Received: from sunil-pc.Dlink ([106.51.195.230])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-31c9f2879fcsm1622950a91.28.2025.07.16.07.41.45
+ 98e67ed59e1d1-31c9f2879fcsm1622950a91.28.2025.07.16.07.41.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Jul 2025 07:41:48 -0700 (PDT)
+ Wed, 16 Jul 2025 07:41:57 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -77,14 +78,16 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Andrew Jones <ajones@ventanamicro.com>, Anup Patel <anup@brainfault.org>,
  Atish Kumar Patra <atishp@rivosinc.com>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH 0/3] RISC-V: ACPI: Update FADT and MADT versions
-Date: Wed, 16 Jul 2025 20:11:37 +0530
-Message-ID: <20250716144140.3954431-1-sunilvl@ventanamicro.com>
+Subject: [PATCH 2/3] hw/riscv/virt-acpi-build.c: Update FADT and MADT versions
+Date: Wed, 16 Jul 2025 20:11:39 +0530
+Message-ID: <20250716144140.3954431-3-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250716144140.3954431-1-sunilvl@ventanamicro.com>
+References: <20250716144140.3954431-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,19 +110,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since RISC-V support is added only in ACPI 6.6, it should adhere to the
-expected FADT and MADT versions. Update them.
+RISC-V support is added only in ACPI 6.6. According to the ACPI 6.6
+specification, the minor version of the Fixed ACPI Description Table
+(FADT) should be 6, and the Multiple APIC Description Table (MADT)
+should use revision 7. So, update the RISC-V FADT and MADT to reflect
+correct versions.
 
-Sunil V L (3):
-  bios-tables-test-allowed-diff.h: Allow RISC-V FADT and MADT changes
-  hw/riscv/virt-acpi-build.c: Update FADT and MADT versions
-  tests/data/acpi/riscv64: Update expected FADT and MADT
+Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+---
+ hw/riscv/virt-acpi-build.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- hw/riscv/virt-acpi-build.c        |   4 ++--
- tests/data/acpi/riscv64/virt/APIC | Bin 116 -> 116 bytes
- tests/data/acpi/riscv64/virt/FACP | Bin 276 -> 276 bytes
- 3 files changed, 2 insertions(+), 2 deletions(-)
-
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index ee1416d264..d7e57cbb1f 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -429,7 +429,7 @@ static void build_fadt_rev6(GArray *table_data,
+ {
+     AcpiFadtData fadt = {
+         .rev = 6,
+-        .minor_ver = 5,
++        .minor_ver = 6,
+         .flags = 1 << ACPI_FADT_F_HW_REDUCED_ACPI,
+         .xdsdt_tbl_offset = &dsdt_tbl_offset,
+     };
+@@ -537,7 +537,7 @@ static void build_madt(GArray *table_data,
+ 
+     hart_index_bits = imsic_num_bits(imsic_max_hart_per_socket);
+ 
+-    AcpiTable table = { .sig = "APIC", .rev = 6, .oem_id = s->oem_id,
++    AcpiTable table = { .sig = "APIC", .rev = 7, .oem_id = s->oem_id,
+                         .oem_table_id = s->oem_table_id };
+ 
+     acpi_table_begin(&table, table_data);
 -- 
 2.43.0
 
