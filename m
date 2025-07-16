@@ -4,61 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC236C83F22
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Jul 2025 13:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B77C83F1B
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Jul 2025 15:00:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uc1zp-00016v-5y; Wed, 16 Jul 2025 09:16:30 -0400
+	id 1uc3bt-0000xJ-A5; Wed, 16 Jul 2025 10:59:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
- id 1ubwsS-0008RW-H9
- for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 03:48:32 -0400
-Received: from sg-1-38.ptr.blmpb.com ([118.26.132.38])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1uc3KY-0000VM-31
+ for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 10:42:00 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
- id 1ubwsN-00044S-9B
- for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 03:48:32 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1752652083;
- h=from:subject:mime-version:from:date:message-id:subject:to:cc:
- reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=U5ICjmmFh2LQm39YKHRoRRqmKT3VyQukSkY/TuMa9z8=;
- b=Ru5lITW0DJyz0DIdH/UXxuWs2UpXpOcBz03ws2eo0KT2gc9UORJjfDIqpTmOP9gTDqCBWP
- b2qBdd7tPVmfP1sUnfC0WoXUTFxHcibCE2INhuEgZ9GjiZGOkAJ0rcPxuvyosbhMwEpOpl
- F4nyGHgBwN9IOi08R8pe93huxpQtLa7EHRjuERYFXO1xoojWVoUh15vKUv7/eBRJKrOGTZ
- Dn7aQ8NbA89fJRYrIxIo1sV/4RYCau6FlFggH/7+S8ywXZwMcO5VDsNzLqzKl0rq5OYUzT
- 2uoxCZ2oB+dXKPauGid229TptsCm9HSnrYk7tTje0cSQpTvEgb3rkKjdszKTDQ==
-From: "BillXiang" <xiangwencheng@lanxincomputing.com>
-Subject: [PATCH] target/riscv/kvm: Introduce simple handler for VS-file
- allocation failure
-Received: from localhost.localdomain ([222.128.9.250]) by smtp.feishu.cn with
- ESMTP; Wed, 16 Jul 2025 15:48:00 +0800
-Date: Wed, 16 Jul 2025 15:47:37 +0800
-Message-Id: <20250716074738.1075-1-xiangwencheng@lanxincomputing.com>
-Mime-Version: 1.0
-X-Original-From: BillXiang <xiangwencheng@lanxincomputing.com>
-To: <palmer@dabbelt.com>
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: git-send-email 2.46.2.windows.1
-Cc: <alistair.francis@wdc.com>, <liwei1518@gmail.com>, 
- <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>, 
- <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>, 
- "BillXiang" <xiangwencheng@lanxincomputing.com>
-X-Lms-Return-Path: <lba+268775931+3e4abb+nongnu.org+xiangwencheng@lanxincomputing.com>
-Content-Type: text/plain; charset=UTF-8
-Received-SPF: pass client-ip=118.26.132.38;
- envelope-from=xiangwencheng@lanxincomputing.com; helo=sg-1-38.ptr.blmpb.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1uc3KT-0004C1-Jx
+ for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 10:41:57 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-31329098ae8so849603a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 16 Jul 2025 07:41:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1752676909; x=1753281709; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sBiX9Qv2y3zYZPcpMCcNdMelG6HGZjKASmpE9pXFX6c=;
+ b=TJ1lPCzr864IDk0vl4aTUiWRBL5gqS+ZiPlNhnewAYBWfa+cfYO9JlnxArshOKPE2q
+ Ua0BTwC8par83FWrby5Isi8x+asRIk79pHgT8yFumBKjy5zsKPeGoP5SrDQtPk0VqbvG
+ NfhokdQ533p7gPTpbbyMFYomqU8CgB98BCHmFFPwLtqPtVtqTccDCM15eEf8eAnN7Hsw
+ UsD40XNTOTIukBmnAu3xi+1CtT3Bi/5BG2myZG3BOeZLkx1lJlJ+25k/DSBv3HOH/HWh
+ 4Uh9IIURn6rjxj/mnP2Xfp5uS/0t0XpOjB/Fk5ZbeD7ycKd1kflvpggpLtYxME+QprIL
+ 5sUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752676909; x=1753281709;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sBiX9Qv2y3zYZPcpMCcNdMelG6HGZjKASmpE9pXFX6c=;
+ b=TETYsF5gDDweKawqsqmH4fCKB374vEnJ1Nlo8Qc7N1bNwjKJyuweXfOIKM76JCPKOS
+ 7K0fbeZJEMOugQx5sE3CO5KSWTu1E0NJAiXE1pm6MOoCXc0KawH2ubKYo1HTGFtX/fUH
+ RvRNwN07ex2MZjwruV1/2ZLRLOlF8dZ854ZbysxAqV5Y4+qpNKdbVMR3fbaCzGh7/WFi
+ seqhZQNQosUm3Qx2iQD0EFVevls6UiGAO1s82XVhKjfWLPmHRYPeTK/GQ1zAYuHjWUar
+ oBGjwru9I4uz/sUKVdOfiurz7ZX3vkqW98OIUjv5a4VMfH+dovSD3Yd/uYCKUSuzmWKF
+ 3UJw==
+X-Gm-Message-State: AOJu0YyG90AqkQ3zQ3jy00njGQzOFPjZECTUVeb3pU3f6yvIFFUQjLuM
+ W+WQuaV1JsIlgXvDd1wRIr7NaGdmQ+xIKpA5dMhW0HTnkIC/qcqLuZcM/AfSNb9KRlAZrkdRyNs
+ zZvp2atM=
+X-Gm-Gg: ASbGnctdlEqYG5DS3VbD1U/RKEaOQA+600oKyrUdXVzOg7/IqtXHy1WkYbo1hilQVA4
+ 2sWlx1ilP3TS00bMskhahdO5cr2SDLUw7bGC4KIOh344A1BybCn58zizVGAvKnkPO5xEl8C9Wwa
+ xvhCSRQz4tEO3HyssOdLaSFvIpXtZYkdEhC7C/FhCk6exgfYYYC0j/0MYJG6BPmL09L/KjoPTBF
+ KwAFoFhpyvAPjAroOeIjAIvw1NFEixTR/fKLrT7dfN/Dh1/uA08JwQCSET4AYHHobW3IBnZxmtF
+ yvKI4yP6hWEnFMDzUpLmlT574J6WPA04M2vY7c7M6DwS5q0/uRA1bKu6l0LAbBa1upjJTPBgwW/
+ 8mlBG0C2+U8nj/6ID620sEGwXgBpEROUQ
+X-Google-Smtp-Source: AGHT+IFXxgy9VmS/fdIfJkVrDghoxLMv8+ztk1vVXfWTeLKn1JR8efa6KrQCL6YvWShMGmRZy51yNg==
+X-Received: by 2002:a17:90b:4cd2:b0:31c:39c2:b027 with SMTP id
+ 98e67ed59e1d1-31c9e6e4200mr4995522a91.7.1752676909388; 
+ Wed, 16 Jul 2025 07:41:49 -0700 (PDT)
+Received: from sunil-pc.Dlink ([106.51.195.230])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-31c9f2879fcsm1622950a91.28.2025.07.16.07.41.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Jul 2025 07:41:48 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ Andrew Jones <ajones@ventanamicro.com>, Anup Patel <anup@brainfault.org>,
+ Atish Kumar Patra <atishp@rivosinc.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH 0/3] RISC-V: ACPI: Update FADT and MADT versions
+Date: Wed, 16 Jul 2025 20:11:37 +0530
+Message-ID: <20250716144140.3954431-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1031.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 16 Jul 2025 09:11:24 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,60 +107,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Consider a system with 8 harts, where each hart supports 5
-Guest Interrupt Files (GIFs), yielding 40 total GIFs.
-If we launch a QEMU guest with over 5 vCPUs using
-"-M virt,aia=3D'aplic-imsic' -accel kvm,riscv-aia=3Dhwaccel" =E2=80=93 whic=
-h
-relies solely on VS-files (not SW-files) for higher performance =E2=80=93 t=
-he
-guest requires more than 5 GIFs. However, the current Linux scheduler
-lacks GIF awareness, potentially scheduling >5 vCPUs to a single hart.
-This triggers VS-file allocation failure, and since no handler exists
-for this error, the QEMU guest becomes corrupted.
+Since RISC-V support is added only in ACPI 6.6, it should adhere to the
+expected FADT and MADT versions. Update them.
 
-To address this, we introduce this simple handler by rescheduling vCPU
-to alternative harts when VS-file allocation fails on the current hart.
+Sunil V L (3):
+  bios-tables-test-allowed-diff.h: Allow RISC-V FADT and MADT changes
+  hw/riscv/virt-acpi-build.c: Update FADT and MADT versions
+  tests/data/acpi/riscv64: Update expected FADT and MADT
 
-Signed-off-by: BillXiang <xiangwencheng@lanxincomputing.com>
----
- target/riscv/kvm/kvm-cpu.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+ hw/riscv/virt-acpi-build.c        |   4 ++--
+ tests/data/acpi/riscv64/virt/APIC | Bin 116 -> 116 bytes
+ tests/data/acpi/riscv64/virt/FACP | Bin 276 -> 276 bytes
+ 3 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 5c19062c19..7cf258604f 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1706,6 +1706,9 @@ static bool kvm_riscv_handle_debug(CPUState *cs)
- int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
- {
-     int ret =3D 0;
-+    uint64_t code;
-+    cpu_set_t set;
-+    long cpus;
-     switch (run->exit_reason) {
-     case KVM_EXIT_RISCV_SBI:
-         ret =3D kvm_riscv_handle_sbi(cs, run);
-@@ -1718,6 +1721,18 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_ru=
-n *run)
-             ret =3D EXCP_DEBUG;
-         }
-         break;
-+    case KVM_EXIT_FAIL_ENTRY:
-+        code =3D run->fail_entry.hardware_entry_failure_reason;
-+        if (code =3D=3D CSR_HSTATUS) {
-+            // Schedule vcpu to next hart upon VS-file=20
-+            // allocation failure on current hart.
-+            cpus =3D sysconf(_SC_NPROCESSORS_ONLN);
-+            CPU_ZERO(&set);
-+            CPU_SET((run->fail_entry.cpu+1)%cpus, &set);
-+            ret =3D sched_setaffinity(0, sizeof(set), &set);
-+            break;
-+        }
-+        /* FALLTHRU */
-     default:
-         qemu_log_mask(LOG_UNIMP, "%s: un-handled exit reason %d\n",
-                       __func__, run->exit_reason);
---=20
-2.46.2.windows.1
+-- 
+2.43.0
+
 
