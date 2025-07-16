@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C6DC83F1B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Jul 2025 11:29:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15ECCC83F27
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Jul 2025 11:30:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uc0IH-0007Ai-M7; Wed, 16 Jul 2025 07:27:25 -0400
+	id 1uc0Kb-0002GK-0a; Wed, 16 Jul 2025 07:29:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1uc0CY-0002Xj-Fx; Wed, 16 Jul 2025 07:21:30 -0400
+ id 1uc0Cy-00034A-BV; Wed, 16 Jul 2025 07:21:56 -0400
 Received: from sender4-pp-f112.zoho.com ([136.143.188.112])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1uc0CW-00016A-Lz; Wed, 16 Jul 2025 07:21:30 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1752664817; cv=none; 
+ id 1uc0Cw-0001An-BD; Wed, 16 Jul 2025 07:21:56 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1752664821; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=iCGFl2rjIOwwbW52CqzeViOMA7g2UEjrXcb/EtaGDFyqGSpygOmmn8FAcbBNM9XMrXnoW/T04hg4BSy/y7r+4UdP+ATqVQKAvJIPCiZMQVqavL2j810dW3Omy9mW0Ew7Ym3m14qKpxQIMXxI0fFp2PA6xe9yP/39ColCVun/9lc=
+ b=gyoebC35v+ys6LSvZo11XETOECJweIaILQ4LVYcLReqxOyYx0PHBPHxyqFGplMdOpEIcqwruk0Xo8rl1jt1/2BFt9q3KCV/984xNAL2NBkDR9vEQ5HjZf5bP6NkMbboA822ZXnecmOHnpaSOKDU31wtr1srnW9C2YZoC59kReXI=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1752664817;
+ s=zohoarc; t=1752664821;
  h=Content-Transfer-Encoding:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
- bh=zURQNxoyZKdVtB1gy/iQeZPpxTEyEiUmAjpAwlC0X+U=; 
- b=YXRYyQqupz/5LVmn4In2ztqn4N82/luBe2Y4QcNxLVQFjLKolzTx4zFjBJc4UZAgVasCXdBpbNt4Me9UdyNUxOnj3LfDM64zJUI2X6iSH3aIyKswho20J347M+plYGw6Ow3EJbxDGj2ANOO8rEeP8Dgo9HQMZ9SIW5p1ywQHxko=
+ bh=hpzfBSOA39ym1MCPK/wVMzJwkjoefykvPuXbZzLpGMc=; 
+ b=jH81O11gzUcI4CMdXuwOGqdar0jQUQWpWB0o+zPNj18HPJSEQPhQVsAIv6VIHc/YEeO72YxE4efjwV/AG9dvRtOxlGiFhsy5+q5gEEL+TSkqTEDP7hSsX79it6kBeG3xtZFNIj/eD3K52bdysMOQ0lI/+RMTIRGf83XzpS+9fic=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=linux.beauty;
  spf=pass  smtp.mailfrom=me@linux.beauty;
  dmarc=pass header.from=<me@linux.beauty>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1752664817; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1752664821; 
  s=zmail; d=linux.beauty; i=me@linux.beauty;
  h=From:From:To:To:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To:Cc;
- bh=zURQNxoyZKdVtB1gy/iQeZPpxTEyEiUmAjpAwlC0X+U=;
- b=EOYIJLjV0hS6HImpwochjXKY93HrCDoRcbqi9/iGEwbE71fPRDCOnK7TzDu7LNRe
- 45DJCRkgmsklYaI7LeGoNFML6v+tQXX7LFeR6vytYwQAgoXAw/S3kD79Z9w7UkbjmdP
- MBrZZ+/rTVANxtLhAqxAIMZxVsOqKuqAkOs1fNkA=
-Received: by mx.zohomail.com with SMTPS id 1752664814920410.61354923073725;
- Wed, 16 Jul 2025 04:20:14 -0700 (PDT)
+ bh=hpzfBSOA39ym1MCPK/wVMzJwkjoefykvPuXbZzLpGMc=;
+ b=JZTJSaY2zRbDXMaHZmOkaGL9nZdaNWeb/iSB7XKHJg8FaB8Mk4gwmQJeqkMMWFjx
+ 2mmLVJpaA9nsCkk/QKdE/Fbr9kxsxcbekMxbkofUBPcXUNRUWFUOzH2Wo3dCGuFMjQ8
+ Jmd5UWBdzaHKOSwCk58z6b1ywDvic/RLBTM+AhBk=
+Received: by mx.zohomail.com with SMTPS id 1752664819828742.8670461414554;
+ Wed, 16 Jul 2025 04:20:19 -0700 (PDT)
 From: Li Chen <me@linux.beauty>
 To: "Peter Maydell" <peter.maydell@linaro.org>,
  "Shannon Zhao" <shannon.zhaosl@gmail.com>,
@@ -54,10 +54,10 @@ To: "Peter Maydell" <peter.maydell@linaro.org>,
  "Alistair Francis" <alistair.francis@wdc.com>,
  "Weiwei Li" <liwei1518@gmail.com>, "qemu-arm" <qemu-arm@nongnu.org>,
  "qemu-devel" <qemu-devel@nongnu.org>, "qemu-riscv" <qemu-riscv@nongnu.org>
-Subject: [PATCH v5 2/4] tests/qtest/bios-tables-test: Add test for disabling
- SPCR on AArch64
-Date: Wed, 16 Jul 2025 19:19:54 +0800
-Message-ID: <20250716111959.404917-3-me@linux.beauty>
+Subject: [PATCH v5 3/4] tests/qtest/bios-tables-test: Add test for disabling
+ SPCR on RISC-V
+Date: Wed, 16 Jul 2025 19:19:55 +0800
+Message-ID: <20250716111959.404917-4-me@linux.beauty>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20250716111959.404917-1-me@linux.beauty>
 References: <20250716111959.404917-1-me@linux.beauty>
@@ -91,51 +91,58 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Li Chen <chenl311@chinatelecom.cn>
 
-Add ACPI SPCR table test case for ARM when SPCR was off.
+Add ACPI SPCR table test case for RISC-V when SPCR was off.
 
 Signed-off-by: Li Chen <chenl311@chinatelecom.cn>
+Reviewed-by: Sunil V L <sunilvl@ventanamicro.com>
 ---
- tests/qtest/bios-tables-test.c | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+
+Notes:
+    Changes since v3: Add Reviewed-by from Sunil V L <sunilvl@ventanamicro.com>
+
+ tests/qtest/bios-tables-test.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
 diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
-index 4dbc07ec5e..ede846f905 100644
+index ede846f905..04a9d8a4da 100644
 --- a/tests/qtest/bios-tables-test.c
 +++ b/tests/qtest/bios-tables-test.c
-@@ -1789,6 +1789,24 @@ static void test_acpi_aarch64_virt_tcg_pxb(void)
+@@ -1807,6 +1807,26 @@ static void test_acpi_aarch64_virt_tcg_acpi_spcr(void)
+                   " -machine spcr=off", &data);
      free_test_data(&data);
  }
- 
-+static void test_acpi_aarch64_virt_tcg_acpi_spcr(void)
++
++static void test_acpi_riscv_virt_tcg_acpi_spcr(void)
 +{
 +    test_data data = {
 +        .machine = "virt",
-+        .arch = "aarch64",
++        .arch = "riscv64",
 +        .tcg_only = true,
-+        .uefi_fl1 = "pc-bios/edk2-aarch64-code.fd",
-+        .uefi_fl2 = "pc-bios/edk2-arm-vars.fd",
-+        .cd = "tests/data/uefi-boot-images/bios-tables-test.aarch64.iso.qcow2",
-+        .ram_start = 0x40000000ULL,
++        .uefi_fl1 = "pc-bios/edk2-riscv-code.fd",
++        .uefi_fl2 = "pc-bios/edk2-riscv-vars.fd",
++        .cd = "tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2",
++        .ram_start = 0x80000000ULL,
 +        .scan_len = 128ULL * 1024 * 1024,
 +        .variant = ".acpispcr",
 +    };
 +
-+    test_acpi_one("-cpu cortex-a57 "
-+                  " -machine spcr=off", &data);
++    test_acpi_one("-cpu rva22s64 "
++                  "-machine spcr=off", &data);
 +    free_test_data(&data);
 +}
++
  static void test_acpi_tcg_acpi_hmat(const char *machine, const char *arch)
  {
      test_data data = {};
-@@ -2604,6 +2622,8 @@ int main(int argc, char *argv[])
-             qtest_add_func("acpi/virt/pxb", test_acpi_aarch64_virt_tcg_pxb);
-             qtest_add_func("acpi/virt/oem-fields",
-                            test_acpi_aarch64_virt_oem_fields);
+@@ -2633,6 +2653,8 @@ int main(int argc, char *argv[])
+             qtest_add_func("acpi/virt", test_acpi_riscv64_virt_tcg);
+             qtest_add_func("acpi/virt/numamem",
+                            test_acpi_riscv64_virt_tcg_numamem);
 +            qtest_add_func("acpi/virt/acpispcr",
-+                           test_acpi_aarch64_virt_tcg_acpi_spcr);
-             if (qtest_has_device("virtio-iommu-pci")) {
-                 qtest_add_func("acpi/virt/viot", test_acpi_aarch64_virt_viot);
-             }
++                           test_acpi_riscv_virt_tcg_acpi_spcr);
+         }
+     }
+     ret = g_test_run();
 -- 
 2.50.0
 
