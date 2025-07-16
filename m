@@ -4,86 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81DD0C83F27
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Jul 2025 12:07:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC236C83F22
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Jul 2025 13:17:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uc0uq-00044F-1v; Wed, 16 Jul 2025 08:07:17 -0400
+	id 1uc1zp-00016v-5y; Wed, 16 Jul 2025 09:16:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1uc0nl-0007eV-94; Wed, 16 Jul 2025 07:59:57 -0400
-Received: from sender4-op-o12.zoho.com ([136.143.188.12])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1uc0nf-0000Y3-B7; Wed, 16 Jul 2025 07:59:56 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1752667156; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=XiL8XQN4ym855SneN6kEO4G9cHxPApiD87ii8xoa/TgiqS+pajzhTTGqq1ZlQTmRnpkjVvFJKbAWpg3O83X8z1Kq8WKTThByNVKSSicqUhWaBRG0WomySd0vENmLy555JXd2fJIitcx1fXsxv43M8JqiaklYEDpfn+n3qWuHlSY=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1752667156;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=RAfeCURvXMiMScDTykZANyqL5e/VhXBrjVcH1Ir72Tw=; 
- b=JP+H/VzhVmRBGi6qn64gH6ABOo6OnBkjsS6V+4Bfufr6PpESRRiYQk5p6J7EK7BeFfNEtF3/psvoAaFlLs+D1dWfk+bHWHROxxidn8wgQixUcphn9IoHEaA5aXO4RdCL3Kb5CqD8oJn2X+24wSS5VHa5wEWo58eGRPAZnIYZzFI=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=linux.beauty;
- spf=pass  smtp.mailfrom=me@linux.beauty;
- dmarc=pass header.from=<me@linux.beauty>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1752667156; 
- s=zmail; d=linux.beauty; i=me@linux.beauty;
- h=Date:Date:From:From:To:To:Cc:Cc:Message-ID:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=RAfeCURvXMiMScDTykZANyqL5e/VhXBrjVcH1Ir72Tw=;
- b=f4Lm2QSrwfApJRjPXSnYh46XrQNT3Q2OxpmoD4vDd0vLkpaCO04EPuc4uYbR6PxL
- grbq1C/9gZGPpBAH5gw4lSC33uzc3SJAUwqr2ccl+XVidwm3CWMPnhe3UVNyHa3YNo3
- o/D+FK3+w9gc952VvC0DnJNevPWyqW2F4EcPIX8U=
-Received: from mail.zoho.com by mx.zohomail.com
- with SMTP id 1752667154652735.6352112545944;
- Wed, 16 Jul 2025 04:59:14 -0700 (PDT)
-Date: Wed, 16 Jul 2025 19:59:14 +0800
-From: Li Chen <me@linux.beauty>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: "Peter Maydell" <peter.maydell@linaro.org>,
- "Shannon Zhao" <shannon.zhaosl@gmail.com>,
- "Igor Mammedov" <imammedo@redhat.com>, "Ani Sinha" <anisinha@redhat.com>,
- "Eduardo Habkost" <eduardo@habkost.net>,
- "Marcel Apfelbaum" <marcel.apfelbaum@gmail.com>,
- =?UTF-8?Q?=22Philippe_Mathieu-Daud=C3=A9=22?= <philmd@linaro.org>,
- "Yanan Wang" <wangyanan55@huawei.com>,
- "Zhao Liu" <zhao1.liu@intel.com>, "Song Gao" <gaosong@loongson.cn>,
- "Jiaxun Yang" <jiaxun.yang@flygoat.com>,
- "Sunil V L" <sunilvl@ventanamicro.com>,
- "Palmer Dabbelt" <palmer@dabbelt.com>,
- "Alistair Francis" <alistair.francis@wdc.com>,
- "Weiwei Li" <liwei1518@gmail.com>, "qemu-arm" <qemu-arm@nongnu.org>,
- "qemu-devel" <qemu-devel@nongnu.org>, "qemu-riscv" <qemu-riscv@nongnu.org>,
- "Li Chen" <chenl311@chinatelecom.cn>
-Message-ID: <198131a686b.18fb34702623779.7633947002456257034@linux.beauty>
-In-Reply-To: <20250716074207-mutt-send-email-mst@kernel.org>
-References: <20250528105404.457729-1-me@linux.beauty>
- <20250528105404.457729-5-me@linux.beauty>
- <20250714144303-mutt-send-email-mst@kernel.org>
- <1981309e2fa.31709fd32611761.5900055972026140740@linux.beauty>
- <20250716074207-mutt-send-email-mst@kernel.org>
-Subject: Re: [PATCH REPOST v4 4/4] acpi/virt: suppress UART device & SPCR
- when guest has no serial hardware
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1ubwsS-0008RW-H9
+ for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 03:48:32 -0400
+Received: from sg-1-38.ptr.blmpb.com ([118.26.132.38])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1ubwsN-00044S-9B
+ for qemu-riscv@nongnu.org; Wed, 16 Jul 2025 03:48:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1752652083;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=U5ICjmmFh2LQm39YKHRoRRqmKT3VyQukSkY/TuMa9z8=;
+ b=Ru5lITW0DJyz0DIdH/UXxuWs2UpXpOcBz03ws2eo0KT2gc9UORJjfDIqpTmOP9gTDqCBWP
+ b2qBdd7tPVmfP1sUnfC0WoXUTFxHcibCE2INhuEgZ9GjiZGOkAJ0rcPxuvyosbhMwEpOpl
+ F4nyGHgBwN9IOi08R8pe93huxpQtLa7EHRjuERYFXO1xoojWVoUh15vKUv7/eBRJKrOGTZ
+ Dn7aQ8NbA89fJRYrIxIo1sV/4RYCau6FlFggH/7+S8ywXZwMcO5VDsNzLqzKl0rq5OYUzT
+ 2uoxCZ2oB+dXKPauGid229TptsCm9HSnrYk7tTje0cSQpTvEgb3rkKjdszKTDQ==
+From: "BillXiang" <xiangwencheng@lanxincomputing.com>
+Subject: [PATCH] target/riscv/kvm: Introduce simple handler for VS-file
+ allocation failure
+Received: from localhost.localdomain ([222.128.9.250]) by smtp.feishu.cn with
+ ESMTP; Wed, 16 Jul 2025 15:48:00 +0800
+Date: Wed, 16 Jul 2025 15:47:37 +0800
+Message-Id: <20250716074738.1075-1-xiangwencheng@lanxincomputing.com>
+Mime-Version: 1.0
+X-Original-From: BillXiang <xiangwencheng@lanxincomputing.com>
+To: <palmer@dabbelt.com>
 Content-Transfer-Encoding: quoted-printable
-Importance: Medium
-User-Agent: Zoho Mail
-X-Mailer: Zoho Mail
-Received-SPF: pass client-ip=136.143.188.12; envelope-from=me@linux.beauty;
- helo=sender4-op-o12.zoho.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+X-Mailer: git-send-email 2.46.2.windows.1
+Cc: <alistair.francis@wdc.com>, <liwei1518@gmail.com>, 
+ <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>, 
+ <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>, 
+ "BillXiang" <xiangwencheng@lanxincomputing.com>
+X-Lms-Return-Path: <lba+268775931+3e4abb+nongnu.org+xiangwencheng@lanxincomputing.com>
+Content-Type: text/plain; charset=UTF-8
+Received-SPF: pass client-ip=118.26.132.38;
+ envelope-from=xiangwencheng@lanxincomputing.com; helo=sg-1-38.ptr.blmpb.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001,
- RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
  RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 16 Jul 2025 09:11:24 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,24 +73,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Michael,
+Consider a system with 8 harts, where each hart supports 5
+Guest Interrupt Files (GIFs), yielding 40 total GIFs.
+If we launch a QEMU guest with over 5 vCPUs using
+"-M virt,aia=3D'aplic-imsic' -accel kvm,riscv-aia=3Dhwaccel" =E2=80=93 whic=
+h
+relies solely on VS-files (not SW-files) for higher performance =E2=80=93 t=
+he
+guest requires more than 5 GIFs. However, the current Linux scheduler
+lacks GIF awareness, potentially scheduling >5 vCPUs to a single hart.
+This triggers VS-file allocation failure, and since no handler exists
+for this error, the QEMU guest becomes corrupted.
 
- ---- On Wed, 16 Jul 2025 19:42:42 +0800  Michael S. Tsirkin <mst@redhat.co=
-m> wrote ---=20
- > On Wed, Jul 16, 2025 at 07:41:11PM +0800, Li Chen wrote:
- > > Hi Michael,
- > >=20
- > > Thanks for your kind review! All issues below have been fixed in v5:
- > > https://lore.kernel.org/qemu-devel/20250716111959.404917-5-me@linux.be=
-auty/T/#m696cee9a95646add1b74b866c3d6761aa4c5c762
- >=20
- > Past soft freeze now: I tagged this but pls remind me after the release
- > to help make sure it's not lost.
- >=20
+To address this, we introduce this simple handler by rescheduling vCPU
+to alternative harts when VS-file allocation fails on the current hart.
 
-Ok.
+Signed-off-by: BillXiang <xiangwencheng@lanxincomputing.com>
+---
+ target/riscv/kvm/kvm-cpu.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-Regards,
-Li=E2=80=8B
-
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 5c19062c19..7cf258604f 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1706,6 +1706,9 @@ static bool kvm_riscv_handle_debug(CPUState *cs)
+ int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+ {
+     int ret =3D 0;
++    uint64_t code;
++    cpu_set_t set;
++    long cpus;
+     switch (run->exit_reason) {
+     case KVM_EXIT_RISCV_SBI:
+         ret =3D kvm_riscv_handle_sbi(cs, run);
+@@ -1718,6 +1721,18 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_ru=
+n *run)
+             ret =3D EXCP_DEBUG;
+         }
+         break;
++    case KVM_EXIT_FAIL_ENTRY:
++        code =3D run->fail_entry.hardware_entry_failure_reason;
++        if (code =3D=3D CSR_HSTATUS) {
++            // Schedule vcpu to next hart upon VS-file=20
++            // allocation failure on current hart.
++            cpus =3D sysconf(_SC_NPROCESSORS_ONLN);
++            CPU_ZERO(&set);
++            CPU_SET((run->fail_entry.cpu+1)%cpus, &set);
++            ret =3D sched_setaffinity(0, sizeof(set), &set);
++            break;
++        }
++        /* FALLTHRU */
+     default:
+         qemu_log_mask(LOG_UNIMP, "%s: un-handled exit reason %d\n",
+                       __func__, run->exit_reason);
+--=20
+2.46.2.windows.1
 
