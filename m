@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FE93C83F1A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Jul 2025 09:43:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C70C83F34
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Jul 2025 09:43:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ueVzb-0004Gs-1F; Wed, 23 Jul 2025 05:42:31 -0400
+	id 1ueVzc-0004Iz-Cm; Wed, 23 Jul 2025 05:42:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ueVzZ-0004Fa-Mr
- for qemu-riscv@nongnu.org; Wed, 23 Jul 2025 05:42:29 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1ueVzb-0004I2-DF
+ for qemu-riscv@nongnu.org; Wed, 23 Jul 2025 05:42:31 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ueVzX-0005lD-Jz
- for qemu-riscv@nongnu.org; Wed, 23 Jul 2025 05:42:29 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-234b440afa7so59871035ad.0
- for <qemu-riscv@nongnu.org>; Wed, 23 Jul 2025 02:42:26 -0700 (PDT)
+ id 1ueVzZ-0005lw-9d
+ for qemu-riscv@nongnu.org; Wed, 23 Jul 2025 05:42:31 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-237311f5a54so51856145ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 23 Jul 2025 02:42:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1753263745; x=1753868545; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0MrgxsI1odmrb/YPjNLodWdZqYACxXeEs3w3/m5PvV0=;
- b=cMyWCM8LfL0y4O0V9zmoC6SsQ+pwzUHNIr4XqwXwj03KqHuPHNgo+E5yQL7b5jhGT0
- jgT+rUmSlu7Z/AVAbn+stjcm4hvu2jFFOarulvwlzIAj+sTb+0srxDHHXjgyRRwGjHWo
- TlMBMV4wvw8nAme1r5tvO0kV3Fy5n/BZJxEaMccSQQrkCjiQFx2aX7/SsvXDMgtVsMMX
- HsXu6YRUEwonJF59KGJID7dNGHixrnV8OK3mZmOegOfhwkysi7BYCg+ZKflNmpVLbqjX
- czzpd/zUU6/GCW5klQgDhi9DzLRJflo+PGo3aKCq0xTqJXyLnOE9ZONGxsL1CGptbICf
- Ozwg==
+ d=ventanamicro.com; s=google; t=1753263747; x=1753868547; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mxJ9997vLSNcd0hQskYWllp+aKzQqhaB9PVyEgB28CE=;
+ b=ew1cPO/oTobcay5oxduj2HkqotyEWqWsVfBqTOx39EQJC+cEVf/eaTg0Rl302BkFmg
+ JMVTuX71cOpT3m++ajNxnjJHxyOZk9UrVQB6U0Sx0Cm6hWQR4uIXbSLvttFUB9XJCtSs
+ eoaisqQQzNE+FrF6XS/twaLtoApqZumLzKv5pf5tjcWWxFaqZLcP4tK50A5Ys5i2Abfe
+ KuNWp0oQsOVTJ1sG7tfbsbhnOCt/+H9rUNZNLvq8P9r8QCwKIIIF4r1QOpIDtGS4Pp/w
+ qoI86QEzZd3/8v8VnkryDpPfxT+KZEGBBmOd5XO4iHvcd3AhHRpVelf8HBnlR+Alr0Sb
+ VZ9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753263745; x=1753868545;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0MrgxsI1odmrb/YPjNLodWdZqYACxXeEs3w3/m5PvV0=;
- b=GM3ZDYBNYrlnt6stdB1tMF5RLBv+qHxNIIitH/iMc9b5N/lCYSRksj46ZoNBKinSq4
- +A3iYZ2zjvbscw/0GIsNufoyuXR7cdU99j1+mgSsOWIwhs8hDQbtkH4XD/iqXgvvMcRF
- 91+zeUMdA6lS9YOVRgGZBxH1jywuQZ/+yQeqfSQew+yRIYTeWYs+WSoPbmF42CXIzbuN
- RRxrBLM9eiNndGoDAW2WY7hW5cekyAC6REMpB/T2QM9F6e5NmTpLIGXuEXcl5sEc8p1y
- T0nXcgfGIyPdOZusNgtXNYJL0WM/mS5haYBHL3Z5VqZMEn9M5BPjsc/GZUDNTN3lca1J
- 9Ckg==
-X-Gm-Message-State: AOJu0Yyj5NLHT7h4Fe2ZFGd2f2W7lBvhgPqrrcAFQOWOQM2C3Mh0u+kk
- 2ZzKNy0EIiTLY1YdyAVa6e++d8uRsgn/xxWCvG7o5pEwscaZ8fj+vi+6JGLueWtcoIM=
-X-Gm-Gg: ASbGncs3r7evMCT8wvJY/WXbTI1BN6+BMVrDK4c8l8iMqgnA7YcFI0QGi00GPJVKCD/
- wXpmRlcJbhTIbV8cALLFMZhliK+V2u0j7MMTVYKViP2VrIeH2HpiQIIcNNWzkLrB3x0FNreeyW1
- EtBrdtNbt8pqLDBRMPKGeI9wZBkGso1u0vfruVdXDKaQWf5smsdRmnBB3grd7MdtHZv65qXZhGw
- +Fg8v/kLmY21SXQmNUMmdzbntQO0XbABHZSP3gTrmrBBirTZqdcELMe7M3qEYS7/GXpPMHgKt3F
- hj1hvRQZapeeMICdBcr3gUkKJP6FAyVaNobUjcbcKHbwXO7V4eCpZZDBUcdXjwpMWtu3aAO2K3n
- dqeirFzAZ90dPnLw11kKd0lU=
-X-Google-Smtp-Source: AGHT+IHgXjAXY1RLDtEouEOULJcEX7AoF5l4lNQQ3cW0tMnoM52kMza6wfAlc3pr5/0HcnqzgN5izg==
-X-Received: by 2002:a17:902:d4cc:b0:236:7079:fafd with SMTP id
- d9443c01a7336-23f981b346emr32790795ad.36.1753263744838; 
- Wed, 23 Jul 2025 02:42:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1753263747; x=1753868547;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mxJ9997vLSNcd0hQskYWllp+aKzQqhaB9PVyEgB28CE=;
+ b=I1diIjH1PzsGZA01QFotILNyL1J7v8bsFcC052pRjZ8nzydIDKo7yLWIdGYPznfI+M
+ l8XL0u43gNxiBoOnU0ox+sSnC8xSh7oMO5sPQJjXLgZrh43i1GFKIhxSTT8ThE+zOSUI
+ b5aQHUn8AC4AkgLWZF/VYiJ/9TqJ05ef08MA27DNvD8BVOvIisa/JhiIGZoGreZiHFwj
+ 2GoOqEY8TgAR9GI4GNgsNSIhp9HDl27UHbfjVhLBapmRnhX57Amch56LcfbXLq1nxQ4p
+ sTeR/ZV2Oi3K4KHdgQCqu1TuN6hG1JNwtNMETJKxFl6911Jjz7jXh1FxeUaAYtIUO1h1
+ PSpw==
+X-Gm-Message-State: AOJu0YxPhyAUyAvEzpnB3KE3GbcMgeawVC5EmXeLYYYZQX/jUrQaoy7T
+ gq0IS3wMguTPm/aCRv6EUZ2qpHh1rnXHC5wOxnuWCq9NW2F6TyHaVp81Thw7JZavv/u9Y8sPnuh
+ 8pOlF
+X-Gm-Gg: ASbGncv0zsKBylVmLUntRalUbgqTOE3dsS+/ExentkgEhkHbBSryh0I0WqpU5GzF1FA
+ hNGRv9goHCr3E4x9hUGCoge561m+qPDEGWsPwwwPGpFA6i12YkODkXvpfx+BjQ6eYm+IDe2RY8D
+ T3R4SKuUT9b3Qhj0e5vM37Flyhe1a8s3UQbA5yjSRSxJZUdsBr7sA/SQebje1ZQ7wPNqZXx2oCu
+ GuZTQJclYbh6iOy3xK5wGjNrRQH2TegSKPntppbYueaIU47fZO4vArcy9DfurruYa8xTv3IG2Z8
+ joaccmHiN2lofikHyCo4o0M0VB0iU7m2z4ytQpPPf05RVlBbrEIKr2x92oQoZe8iqDed1t/dUhe
+ fR0ee8zso3jtT5NQmXxiegpJvWE2MTmAN4Q==
+X-Google-Smtp-Source: AGHT+IFd/nmgiDQ99wsIkjYLR3F3gniHKyps0Q79iQmZKI+OFypcdQWKSeKnSAClo5b5NbqvAkMulA==
+X-Received: by 2002:a17:903:28c:b0:234:f182:a735 with SMTP id
+ d9443c01a7336-23f981b42a6mr34786885ad.34.1753263747616; 
+ Wed, 23 Jul 2025 02:42:27 -0700 (PDT)
 Received: from grind ([177.170.118.252]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23e3b6b4a88sm92732205ad.131.2025.07.23.02.42.22
+ d9443c01a7336-23e3b6b4a88sm92732205ad.131.2025.07.23.02.42.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Jul 2025 02:42:24 -0700 (PDT)
+ Wed, 23 Jul 2025 02:42:27 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-10.1 0/1] roms/opensbi: Update to v1.7
-Date: Wed, 23 Jul 2025 06:42:12 -0300
-Message-ID: <20250723094213.2975268-1-dbarboza@ventanamicro.com>
+Subject: [PATCH for-10.1 1/1] roms/opensbi: Update to v1.7
+Date: Wed, 23 Jul 2025 06:42:13 -0300
+Message-ID: <20250723094213.2975268-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250723094213.2975268-1-dbarboza@ventanamicro.com>
+References: <20250723094213.2975268-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,29 +101,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+Update OpenSBI and the pre-built opensbi32 and opensbi64 images to
+version 1.7.
 
-It has been awhile since we last updated OpenSBI - we're still running
-v1.5.1, updated almost a year ago. We're missing out a lot of fixes and
-goodies (including SBI 3.0) from v1.6 and v1.7.
+It has been almost an year since we last updated OpenSBI (at the time,
+up to v1.5.1) and we're missing a lot of good stuff from both v1.6 and
+v1.7, including SBI 3.0 and RPMI 1.0.
 
-This update didn't trigger any regressions in our opensbi tests so I
-would like to update the roms for 10.1 to avoid yet another release with
-OpenSBI v1.5.1.
+The changelog is too large and tedious to post in the commit msg so I
+encourage referring to [1] and [2] to see the new features we're adding
+into the QEMU roms.
 
-Please download the roms from:
+[1] https://github.com/riscv-software-src/opensbi/releases/tag/v1.6
+[2] https://github.com/riscv-software-src/opensbi/releases/tag/v1.7
 
-https://gitlab.com/danielhb/qemu/-/tree/opensbi_update
-
-
-Daniel Henrique Barboza (1):
-  roms/opensbi: Update to v1.7
-
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
  .../opensbi-riscv32-generic-fw_dynamic.bin    | Bin 268312 -> 268752 bytes
  .../opensbi-riscv64-generic-fw_dynamic.bin    | Bin 272504 -> 273048 bytes
  roms/opensbi                                  |   2 +-
  3 files changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
+index b2e740010b..02be3a72a8 100644
+Binary files a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin and b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin differ
+diff --git a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
+index 018b4731a7..cce35c65c2 100644
+Binary files a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin and b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin differ
+diff --git a/roms/opensbi b/roms/opensbi
+index 43cace6c36..a32a910691 160000
+--- a/roms/opensbi
++++ b/roms/opensbi
+@@ -1 +1 @@
+-Subproject commit 43cace6c3671e5172d0df0a8963e552bb04b7b20
++Subproject commit a32a91069119e7a5aa31e6bc51d5e00860be3d80
 -- 
 2.50.1
 
