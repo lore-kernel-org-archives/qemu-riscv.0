@@ -4,101 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78601C83F1A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Jul 2025 11:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98E99C83F26
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Jul 2025 13:14:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ueuAi-0006h0-JY; Thu, 24 Jul 2025 07:31:36 -0400
+	id 1uevlt-0003G3-VB; Thu, 24 Jul 2025 09:14:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ueuAW-0006DL-7M
- for qemu-riscv@nongnu.org; Thu, 24 Jul 2025 07:31:29 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ueuAT-0003iF-I8
- for qemu-riscv@nongnu.org; Thu, 24 Jul 2025 07:31:23 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-749068b9b63so630977b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 24 Jul 2025 04:31:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1753356680; x=1753961480; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4ck9T/jF+PL5A+Qgew1lYRC5089aRjomI5oJ+XOm2M0=;
- b=E/vNMjrEcgGqTeceWgN36g8SLAjKiVwLlgT8ZHut4vVKJjrdwmR+4XgIGRz36QYUWt
- m2Nx7QB6GnglMToh2GN1W43KTDTLg/1t0FAZlDaQ9Nndg4FvYEdSj0dETxYjKUI8/skE
- Y/mv+69TLRWvvwaWCPlbRGlj65Af9ZJY1q9XpjMRJgZWXLjWDiUpWyQwDE312NNVVDKZ
- C4XhmzCZu/zHJsCPJRBeZmixskrp/UekVwltny1U0+X+LbgZi39CvEqkYwYlBl2O2DfF
- 80EvfEZD0TxpnUDI0kCWGEkhvN1PaOejZ2NQLurKi8ag1m90gKmAuq1qCJdoNMUSSoXf
- DnsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753356680; x=1753961480;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4ck9T/jF+PL5A+Qgew1lYRC5089aRjomI5oJ+XOm2M0=;
- b=ciQFrX2RIAYE5+ZQQHsI2y9ICXpzQSPQjNcq6HRbTj3vWwcRyiXamtZ+VnI1eSqi10
- bBhyOsRVEnujA02OQPX5l9UKheFKBxaleWQC6Fo9g8CMmkwz+fAdqF4hCNud5/vbEnWl
- PXeNMsLqV2BP9oAZuiEhJ0+4pn/qVXt0sEJAziksFzMe7+Yo1Nm8tOTLV4zT9y0Tjyj0
- KMxuHAOW82eD8flvfNHvt7AZBDELFLKInu6+Bm/5CgoE2PuNXPww10OOysY79EujXC0a
- O22+ZNbogeyJ/F04Lf0vbUv8NskoZKAuTJtpKH9djszc9E4OqtgYyBNXCFBbbE/GTc89
- Pvqw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXCBJfWgCjodmCcKSSogr9PIx4oMOJwVQRsZZW/k+BDnnuzJwvGvV8SGanG1dRZMscjjp5z2BIqxKc4@nongnu.org
-X-Gm-Message-State: AOJu0YyINZDb0DDPPuiLq6kDKp0w0wSclyWcZRDFtJDr2JLsHd+WabI+
- JKbzOAuVaX+DyS2weD9gbdCm5YA6ldlMCSMUzg5JnYur4bg+xsU2AfllFT3mFG+SBOg=
-X-Gm-Gg: ASbGncswTBZI1252CfQq+oMgeXm5x7/IXImRU/xpucmlVQQVBhakQnoCK/OmNiXkQmp
- UzqAIop+jLKGPbFgiRYYUZmzrAbxRWdZ3vAXRFJIaKnAhd7elw87E+MiYHfRXQ8nbks70s4jCKJ
- C9r9NocYH7jlpELQIalHhxNHVM3RMbHmr7Zvx1/BS+PPaSJhd5FytiFuYkWXw6dejuCdthlsRoe
- Muq8PN2vCDa7zwTox1FgqGSIC2f3NCLb8lg5JjmcjwPu8L1VmiFIeGUqcAk/SyA11D6eYbtwSWy
- LtNJJbxRnFvqWYG18X0DmglOBX9mG/MD3+Ko77PwgfK5el/KM8i5X9FVr78AeBXHDLITW+u1jvf
- AWH1mLO7uRipF8Mm47ho8Pgg3L0wmeOfLX9AvhNknjr8Wp9oZQPdq0bUrWJwc2JGH3tioIyzEhu
- J2
-X-Google-Smtp-Source: AGHT+IGlR2PemdOvM4ky41A/u3NeTmCzpzbt0Aijr588oRsmEJrssvz7j/eiuCoiIB1DjvM56fwBMg==
-X-Received: by 2002:a05:6a20:914b:b0:238:e380:a282 with SMTP id
- adf61e73a8af0-23d49121b97mr10220429637.26.1753356679776; 
- Thu, 24 Jul 2025 04:31:19 -0700 (PDT)
-Received: from ?IPV6:2804:7f0:bcc0:8924:370b:6e58:6804:59a0?
- ([2804:7f0:bcc0:8924:370b:6e58:6804:59a0])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-761ae158ab9sm1494182b3a.45.2025.07.24.04.31.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Jul 2025 04:31:19 -0700 (PDT)
-Message-ID: <ffc50826-a21d-4b26-b25f-0432a2a57faf@ventanamicro.com>
-Date: Thu, 24 Jul 2025 08:31:14 -0300
+ (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
+ id 1uesXI-0000OR-JY; Thu, 24 Jul 2025 05:46:48 -0400
+Received: from mail-m16.yeah.net ([1.95.21.14])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
+ id 1uesX9-0008DS-5m; Thu, 24 Jul 2025 05:46:47 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
+ s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=U+
+ bEyJCRkOOjW2WuDRHjgnixsRl5GRu1j6nn0Pr0hMQ=; b=GE0QmRhyvM7c7TtqMd
+ JzZLTxVNsB/soA6HyzTYo5Bqgh3Mh/h/zcN5fZ/UwLEPI7ltatX451bU2Gap5+5k
+ 8A4ft0YL266FnT6v+syKQkTvq4hHp3r/QohGj/+Gn7APRLAaU/DPipD8Q+UVW+s0
+ YhBDAtSG8amL4CwAhnDXT1z+A=
+Received: from vcore-181.. (unknown [])
+ by gzsmtp1 (Coremail) with SMTP id Mc8vCgD3P93kAIJoQlVNAQ--.8853S2;
+ Thu, 24 Jul 2025 17:46:14 +0800 (CST)
+From: Yang Jialong <z_bajeer@yeah.net>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: yangjialong@rvcore.com, Yang Jialong <z_bajeer@yeah.net>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: [PATCH v1] intc/riscv_aplic: Fix target register read when source is
+ inactive
+Date: Thu, 24 Jul 2025 17:34:26 +0800
+Message-Id: <20250724093426.4179617-1-z_bajeer@yeah.net>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] tests/data/acpi/riscv64: Update expected FADT and
- MADT
-To: Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "Michael S . Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Ani Sinha <anisinha@redhat.com>, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <anup@brainfault.org>, Atish Kumar Patra <atishp@rivosinc.com>
-References: <20250724110350.452828-1-sunilvl@ventanamicro.com>
- <20250724110350.452828-4-sunilvl@ventanamicro.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250724110350.452828-4-sunilvl@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x429.google.com
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: Mc8vCgD3P93kAIJoQlVNAQ--.8853S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7Kr4UAFy3ZFWDKF18AFWDArb_yoW8JFW5pr
+ s3GFsIvrs8tF1UGa1kJr18XF4UGr98Wr98ur1DuryIkwsxtw4FgrykK345Zr48CFy5Cr1Y
+ vFZ0kr13CF4jv3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UeBT5UUUUU=
+X-Originating-IP: [103.233.53.226]
+X-CM-SenderInfo: p2betyxhhuq5hhdkh0dhw/1tbiNQbzF2iCAOb+RQAA3g
+Received-SPF: pass client-ip=1.95.21.14; envelope-from=z_bajeer@yeah.net;
+ helo=mail-m16.yeah.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 24 Jul 2025 09:13:59 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,113 +75,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The RISC-V Advanced interrupt Architecture:
+4.5.16. Interrupt targets:
+If interrupt source i is inactive in this domain, register target[i] is
+read-only zero.
 
+Signed-off-by: Yang Jialong <z_bajeer@yeah.net>
+---
+ hw/intc/riscv_aplic.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-On 7/24/25 8:03 AM, Sunil V L wrote:
-> Update the expected tables for the version change.
->   /*
->    *
->    * ACPI Data Table [FACP]
->    *
->    * Format: [HexOffset DecimalOffset ByteLength]  FieldName : FieldValue (in hex)
->    */
-> 
->   [000h 0000 004h]                   Signature : "FACP"    [Fixed ACPI Description Table (FADT)]
->   [004h 0004 004h]                Table Length : 00000114
->   [008h 0008 001h]                    Revision : 06
-> -[009h 0009 001h]                    Checksum : 13
-> +[009h 0009 001h]                    Checksum : 12
->   [00Ah 0010 006h]                      Oem ID : "BOCHS "
->   [010h 0016 008h]                Oem Table ID : "BXPC    "
->   [018h 0024 004h]                Oem Revision : 00000001
->   [01Ch 0028 004h]             Asl Compiler ID : "BXPC"
->   [020h 0032 004h]       Asl Compiler Revision : 00000001
-> 
->   [024h 0036 004h]                FACS Address : 00000000
->   [028h 0040 004h]                DSDT Address : 00000000
->   [02Ch 0044 001h]                       Model : 00
->   [02Dh 0045 001h]                  PM Profile : 00 [Unspecified]
->   [02Eh 0046 002h]               SCI Interrupt : 0000
->   [030h 0048 004h]            SMI Command Port : 00000000
->   [034h 0052 001h]           ACPI Enable Value : 00
->   [035h 0053 001h]          ACPI Disable Value : 00
->   [036h 0054 001h]              S4BIOS Command : 00
->   [037h 0055 001h]             P-State Control : 00
-> @@ -86,33 +86,33 @@
->        Use APIC Physical Destination Mode (V4) : 0
->                          Hardware Reduced (V5) : 1
->                         Low Power S0 Idle (V5) : 0
-> 
->   [074h 0116 00Ch]              Reset Register : [Generic Address Structure]
->   [074h 0116 001h]                    Space ID : 00 [SystemMemory]
->   [075h 0117 001h]                   Bit Width : 00
->   [076h 0118 001h]                  Bit Offset : 00
->   [077h 0119 001h]        Encoded Access Width : 00 [Undefined/Legacy]
->   [078h 0120 008h]                     Address : 0000000000000000
-> 
->   [080h 0128 001h]        Value to cause reset : 00
->   [081h 0129 002h]   ARM Flags (decoded below) : 0000
->                                 PSCI Compliant : 0
->                          Must use HVC for PSCI : 0
-> 
-> -[083h 0131 001h]         FADT Minor Revision : 05
-> +[083h 0131 001h]         FADT Minor Revision : 06
->   [084h 0132 008h]                FACS Address : 0000000000000000
-> [...]
-> 
->   /*
->    *
->    * ACPI Data Table [APIC]
->    *
->    * Format: [HexOffset DecimalOffset ByteLength]  FieldName : FieldValue (in hex)
->    */
-> 
->   [000h 0000 004h]                   Signature : "APIC"    [Multiple APIC Description Table (MADT)]
->   [004h 0004 004h]                Table Length : 00000074
-> -[008h 0008 001h]                    Revision : 06
-> -[009h 0009 001h]                    Checksum : B4
-> +[008h 0008 001h]                    Revision : 07
-> +[009h 0009 001h]                    Checksum : B3
->   [00Ah 0010 006h]                      Oem ID : "BOCHS "
->   [010h 0016 008h]                Oem Table ID : "BXPC    "
-> [...]
-> 
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   tests/data/acpi/riscv64/virt/APIC           | Bin 116 -> 116 bytes
->   tests/data/acpi/riscv64/virt/FACP           | Bin 276 -> 276 bytes
->   tests/qtest/bios-tables-test-allowed-diff.h |   2 --
->   3 files changed, 2 deletions(-)
-> 
-> diff --git a/tests/data/acpi/riscv64/virt/APIC b/tests/data/acpi/riscv64/virt/APIC
-> index 66a25dfd2d6ea2b607c024722b2eab95873a01e9..3fb5b753596fc7c2618b3d5210be8b00b0c177f6 100644
-> GIT binary patch
-> delta 16
-> XcmXRZ;c^V{bS`0FU|`=okt+)TB&q~M
-> 
-> delta 16
-> XcmXRZ;c^V{bS`0FU|`!akt+)TB&h^L
-> 
-> diff --git a/tests/data/acpi/riscv64/virt/FACP b/tests/data/acpi/riscv64/virt/FACP
-> index a5276b65ea8ce46cc9b40d96d98f0669c9089ed4..78e1b14b1d4ff0533a6a4c041f195a69b4ef114d 100644
-> GIT binary patch
-> delta 30
-> mcmbQjG=+)F&CxkPgpq-PO=u!lB_rF!iPaMgcqj8PasU8k76z;U
-> 
-> delta 30
-> mcmbQjG=+)F&CxkPgpq-PO?V<#B_r#^iPaMgcqj8PasU8k8wRWZ
-> 
-> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
-> index 0c3f7a6cac..dfb8523c8b 100644
-> --- a/tests/qtest/bios-tables-test-allowed-diff.h
-> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
-> @@ -1,3 +1 @@
->   /* List of comma-separated changed AML files to ignore */
-> -"tests/data/acpi/riscv64/virt/APIC",
-> -"tests/data/acpi/riscv64/virt/FACP",
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index 4fa5f75..cfef69f 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -628,7 +628,7 @@ static void riscv_aplic_request(void *opaque, int irq, int level)
+ 
+ static uint64_t riscv_aplic_read(void *opaque, hwaddr addr, unsigned size)
+ {
+-    uint32_t irq, word, idc;
++    uint32_t irq, word, idc, sm;
+     RISCVAPLICState *aplic = opaque;
+ 
+     /* Reads must be 4 byte words */
+@@ -696,6 +696,10 @@ static uint64_t riscv_aplic_read(void *opaque, hwaddr addr, unsigned size)
+     } else if ((APLIC_TARGET_BASE <= addr) &&
+             (addr < (APLIC_TARGET_BASE + (aplic->num_irqs - 1) * 4))) {
+         irq = ((addr - APLIC_TARGET_BASE) >> 2) + 1;
++        sm = aplic->sourcecfg[irq] * APLIC_SOURCECFG_SM_MASK;
++        if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
++            return 0;
++        }
+         return aplic->target[irq];
+     } else if (!aplic->msimode && (APLIC_IDC_BASE <= addr) &&
+             (addr < (APLIC_IDC_BASE + aplic->num_harts * APLIC_IDC_SIZE))) {
+-- 
+2.34.1
 
 
