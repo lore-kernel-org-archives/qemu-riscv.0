@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A16C83F26
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Jul 2025 11:30:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78601C83F1A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Jul 2025 11:31:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ueu9f-00027y-2W; Thu, 24 Jul 2025 07:30:31 -0400
+	id 1ueuAi-0006h0-JY; Thu, 24 Jul 2025 07:31:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ueu9d-0001mw-7e
- for qemu-riscv@nongnu.org; Thu, 24 Jul 2025 07:30:29 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1ueuAW-0006DL-7M
+ for qemu-riscv@nongnu.org; Thu, 24 Jul 2025 07:31:29 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ueu9a-0003PA-V5
- for qemu-riscv@nongnu.org; Thu, 24 Jul 2025 07:30:28 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-23c8a5053c2so6916965ad.1
- for <qemu-riscv@nongnu.org>; Thu, 24 Jul 2025 04:30:26 -0700 (PDT)
+ id 1ueuAT-0003iF-I8
+ for qemu-riscv@nongnu.org; Thu, 24 Jul 2025 07:31:23 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-749068b9b63so630977b3a.0
+ for <qemu-riscv@nongnu.org>; Thu, 24 Jul 2025 04:31:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1753356625; x=1753961425; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1753356680; x=1753961480; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=pY3mZN2ThEQo9fBqak9v2U5Bt/vr5h53HZ4uvSNiqYc=;
- b=UyXwr8bIGJMpKkModqyBa27dd35whqWU6Hz+6a6Gbyr18bhgIWiR4PcNRznpztrHw+
- QCgIlqbwYzy2Bcj/HB9o8KHmCAZWeTWfrRMrQMptk9UwlSiLNnm/OCtafXiVSmlWL+sG
- YtUc/ysvNr4+vXvYwiQzV9jmz9mN7Fv1r5TgLKIlWS6Jl+3AaBzzI5eG6xuIE9EFT/Le
- 0Q60B6KhTnXsQ8HJFKP+4EqqGqZmGOzHwd2TMjHyXP2ccrvBCk1EsKgHRbM8wRmBZS6+
- SiQxylI+5f/RdR2dcFr8oHNkPeVmGx2hCpyqhV5HoqMdKoO9+pJybLDWN/1CrKQBDh6p
- hMFQ==
+ bh=4ck9T/jF+PL5A+Qgew1lYRC5089aRjomI5oJ+XOm2M0=;
+ b=E/vNMjrEcgGqTeceWgN36g8SLAjKiVwLlgT8ZHut4vVKJjrdwmR+4XgIGRz36QYUWt
+ m2Nx7QB6GnglMToh2GN1W43KTDTLg/1t0FAZlDaQ9Nndg4FvYEdSj0dETxYjKUI8/skE
+ Y/mv+69TLRWvvwaWCPlbRGlj65Af9ZJY1q9XpjMRJgZWXLjWDiUpWyQwDE312NNVVDKZ
+ C4XhmzCZu/zHJsCPJRBeZmixskrp/UekVwltny1U0+X+LbgZi39CvEqkYwYlBl2O2DfF
+ 80EvfEZD0TxpnUDI0kCWGEkhvN1PaOejZ2NQLurKi8ag1m90gKmAuq1qCJdoNMUSSoXf
+ DnsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753356625; x=1753961425;
+ d=1e100.net; s=20230601; t=1753356680; x=1753961480;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pY3mZN2ThEQo9fBqak9v2U5Bt/vr5h53HZ4uvSNiqYc=;
- b=UIMtgcq0j7jb0QYvlbb7bXVOMhducwyY0XI/NkB+NN6ccalq+9il4cYnW/xlhQz8k4
- zWkc+4rnizxfbUbyyPTS7jI7Yj5mKktn3EvJgvRJKenW9BusnU77XAmx7IDEaKhWBBPo
- qgopegoajOXzbtlnm5whKLz3xbfkCxzWXrhsKFn3ENbtaMfcHXi+Q8OMRhwHRWCeYdig
- rwkONXADJdsScFOvQRMbpaqQ1ZGTEuqRicoYK13k+f510YUQmZlWLD3ET2PfSFgxw4IW
- OFRyrNobqiCP5+f8g23g9otqy1PhKPPhoieqde1d964OxbGApM5HcGPMvpaB+Mz5wu24
- ry7A==
+ bh=4ck9T/jF+PL5A+Qgew1lYRC5089aRjomI5oJ+XOm2M0=;
+ b=ciQFrX2RIAYE5+ZQQHsI2y9ICXpzQSPQjNcq6HRbTj3vWwcRyiXamtZ+VnI1eSqi10
+ bBhyOsRVEnujA02OQPX5l9UKheFKBxaleWQC6Fo9g8CMmkwz+fAdqF4hCNud5/vbEnWl
+ PXeNMsLqV2BP9oAZuiEhJ0+4pn/qVXt0sEJAziksFzMe7+Yo1Nm8tOTLV4zT9y0Tjyj0
+ KMxuHAOW82eD8flvfNHvt7AZBDELFLKInu6+Bm/5CgoE2PuNXPww10OOysY79EujXC0a
+ O22+ZNbogeyJ/F04Lf0vbUv8NskoZKAuTJtpKH9djszc9E4OqtgYyBNXCFBbbE/GTc89
+ Pvqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgPuEdXsPFnIm65IVxH44JSBrl4pP5vK+bSG3nU7PJ3ExcOSApBrmUsPLOKh7Ojcpbc4nyz6mrqfhc@nongnu.org
-X-Gm-Message-State: AOJu0YzYl06LUMs0SjESge0J4On5ybpPMnpyMpkopR8O8xKDQW/FORzx
- dUfU0jczq59eA4ehZVm0M3XNuEFhHUa6agbVJXvChWk2jEET5wF5Qycnni4gVO6L+EA=
-X-Gm-Gg: ASbGncuwtnxsaxoMSNqKY43nezMKZwhryHIGmJgA7ITKLbrBqBvOiSAlKHtPJ3a0gro
- p2hu5jkPYvuMyo/f0uprzxs7Dj4Dxn5+rD9zkFAh7DHp/7w3gDCieCWgmMagHlD7Jsxf8yO6kH5
- WQLiPfR02kH3eYb5jb+c2SsyjH+WJHM3KNHymHHg/w6GiX5rlFP8S0hh/cNA/Z36hHwC/PJXvYS
- bkscdZUGqeuSdk9HxmtPug+c5JVk3AJ27/B6p4nCWntMTVGcgzMQkzdr6BgxDtaQ3JvgdBe1KRY
- ki+QAWV0JExlQzP9kEP0RNJRPcdNTYlLvWUtw1osnJbkSi6HYARf+hBbKozq0ZhQ2QWtb1mI6+l
- 2kSTITeg71gMJP1/02nNLnqxasixtEddiwkzhn9HRzDbwa3q1o15BJ2a0AuZUAOKlNt/x/rdhhU
- w8
-X-Google-Smtp-Source: AGHT+IE3B/iIREJvLUUKRLcSWziIgVOBVxORPBCoVtTHcrsyA0EAPPj2FbDiZ6s7J5bCUzSJLV1+qQ==
-X-Received: by 2002:a17:902:cf05:b0:236:15b7:62e4 with SMTP id
- d9443c01a7336-23f9821d167mr115334195ad.38.1753356624822; 
- Thu, 24 Jul 2025 04:30:24 -0700 (PDT)
+ AJvYcCXCBJfWgCjodmCcKSSogr9PIx4oMOJwVQRsZZW/k+BDnnuzJwvGvV8SGanG1dRZMscjjp5z2BIqxKc4@nongnu.org
+X-Gm-Message-State: AOJu0YyINZDb0DDPPuiLq6kDKp0w0wSclyWcZRDFtJDr2JLsHd+WabI+
+ JKbzOAuVaX+DyS2weD9gbdCm5YA6ldlMCSMUzg5JnYur4bg+xsU2AfllFT3mFG+SBOg=
+X-Gm-Gg: ASbGncswTBZI1252CfQq+oMgeXm5x7/IXImRU/xpucmlVQQVBhakQnoCK/OmNiXkQmp
+ UzqAIop+jLKGPbFgiRYYUZmzrAbxRWdZ3vAXRFJIaKnAhd7elw87E+MiYHfRXQ8nbks70s4jCKJ
+ C9r9NocYH7jlpELQIalHhxNHVM3RMbHmr7Zvx1/BS+PPaSJhd5FytiFuYkWXw6dejuCdthlsRoe
+ Muq8PN2vCDa7zwTox1FgqGSIC2f3NCLb8lg5JjmcjwPu8L1VmiFIeGUqcAk/SyA11D6eYbtwSWy
+ LtNJJbxRnFvqWYG18X0DmglOBX9mG/MD3+Ko77PwgfK5el/KM8i5X9FVr78AeBXHDLITW+u1jvf
+ AWH1mLO7uRipF8Mm47ho8Pgg3L0wmeOfLX9AvhNknjr8Wp9oZQPdq0bUrWJwc2JGH3tioIyzEhu
+ J2
+X-Google-Smtp-Source: AGHT+IGlR2PemdOvM4ky41A/u3NeTmCzpzbt0Aijr588oRsmEJrssvz7j/eiuCoiIB1DjvM56fwBMg==
+X-Received: by 2002:a05:6a20:914b:b0:238:e380:a282 with SMTP id
+ adf61e73a8af0-23d49121b97mr10220429637.26.1753356679776; 
+ Thu, 24 Jul 2025 04:31:19 -0700 (PDT)
 Received: from ?IPV6:2804:7f0:bcc0:8924:370b:6e58:6804:59a0?
  ([2804:7f0:bcc0:8924:370b:6e58:6804:59a0])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23fa48bbe95sm13642045ad.86.2025.07.24.04.30.20
+ d2e1a72fcca58-761ae158ab9sm1494182b3a.45.2025.07.24.04.31.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Jul 2025 04:30:24 -0700 (PDT)
-Message-ID: <cca41cc9-a481-466a-a233-706ffd027f52@ventanamicro.com>
-Date: Thu, 24 Jul 2025 08:30:19 -0300
+ Thu, 24 Jul 2025 04:31:19 -0700 (PDT)
+Message-ID: <ffc50826-a21d-4b26-b25f-0432a2a57faf@ventanamicro.com>
+Date: Thu, 24 Jul 2025 08:31:14 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] hw/riscv/virt-acpi-build.c: Update FADT and MADT
- versions
+Subject: Re: [PATCH v2 3/3] tests/data/acpi/riscv64: Update expected FADT and
+ MADT
 To: Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -83,14 +83,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Ani Sinha <anisinha@redhat.com>, Andrew Jones <ajones@ventanamicro.com>,
  Anup Patel <anup@brainfault.org>, Atish Kumar Patra <atishp@rivosinc.com>
 References: <20250724110350.452828-1-sunilvl@ventanamicro.com>
- <20250724110350.452828-3-sunilvl@ventanamicro.com>
+ <20250724110350.452828-4-sunilvl@ventanamicro.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250724110350.452828-3-sunilvl@ventanamicro.com>
+In-Reply-To: <20250724110350.452828-4-sunilvl@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -116,13 +116,73 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 7/24/25 8:03 AM, Sunil V L wrote:
-> RISC-V support is added only in ACPI 6.6. According to the ACPI 6.6
-> specification, the minor version of the Fixed ACPI Description Table
-> (FADT) should be 6, and the Multiple APIC Description Table (MADT)
-> should use revision 7. So, update the RISC-V FADT and MADT to reflect
-> correct versions.
+> Update the expected tables for the version change.
+>   /*
+>    *
+>    * ACPI Data Table [FACP]
+>    *
+>    * Format: [HexOffset DecimalOffset ByteLength]  FieldName : FieldValue (in hex)
+>    */
 > 
-> Update the code comments to reflect ACPI 6.6 version details.
+>   [000h 0000 004h]                   Signature : "FACP"    [Fixed ACPI Description Table (FADT)]
+>   [004h 0004 004h]                Table Length : 00000114
+>   [008h 0008 001h]                    Revision : 06
+> -[009h 0009 001h]                    Checksum : 13
+> +[009h 0009 001h]                    Checksum : 12
+>   [00Ah 0010 006h]                      Oem ID : "BOCHS "
+>   [010h 0016 008h]                Oem Table ID : "BXPC    "
+>   [018h 0024 004h]                Oem Revision : 00000001
+>   [01Ch 0028 004h]             Asl Compiler ID : "BXPC"
+>   [020h 0032 004h]       Asl Compiler Revision : 00000001
+> 
+>   [024h 0036 004h]                FACS Address : 00000000
+>   [028h 0040 004h]                DSDT Address : 00000000
+>   [02Ch 0044 001h]                       Model : 00
+>   [02Dh 0045 001h]                  PM Profile : 00 [Unspecified]
+>   [02Eh 0046 002h]               SCI Interrupt : 0000
+>   [030h 0048 004h]            SMI Command Port : 00000000
+>   [034h 0052 001h]           ACPI Enable Value : 00
+>   [035h 0053 001h]          ACPI Disable Value : 00
+>   [036h 0054 001h]              S4BIOS Command : 00
+>   [037h 0055 001h]             P-State Control : 00
+> @@ -86,33 +86,33 @@
+>        Use APIC Physical Destination Mode (V4) : 0
+>                          Hardware Reduced (V5) : 1
+>                         Low Power S0 Idle (V5) : 0
+> 
+>   [074h 0116 00Ch]              Reset Register : [Generic Address Structure]
+>   [074h 0116 001h]                    Space ID : 00 [SystemMemory]
+>   [075h 0117 001h]                   Bit Width : 00
+>   [076h 0118 001h]                  Bit Offset : 00
+>   [077h 0119 001h]        Encoded Access Width : 00 [Undefined/Legacy]
+>   [078h 0120 008h]                     Address : 0000000000000000
+> 
+>   [080h 0128 001h]        Value to cause reset : 00
+>   [081h 0129 002h]   ARM Flags (decoded below) : 0000
+>                                 PSCI Compliant : 0
+>                          Must use HVC for PSCI : 0
+> 
+> -[083h 0131 001h]         FADT Minor Revision : 05
+> +[083h 0131 001h]         FADT Minor Revision : 06
+>   [084h 0132 008h]                FACS Address : 0000000000000000
+> [...]
+> 
+>   /*
+>    *
+>    * ACPI Data Table [APIC]
+>    *
+>    * Format: [HexOffset DecimalOffset ByteLength]  FieldName : FieldValue (in hex)
+>    */
+> 
+>   [000h 0000 004h]                   Signature : "APIC"    [Multiple APIC Description Table (MADT)]
+>   [004h 0004 004h]                Table Length : 00000074
+> -[008h 0008 001h]                    Revision : 06
+> -[009h 0009 001h]                    Checksum : B4
+> +[008h 0008 001h]                    Revision : 07
+> +[009h 0009 001h]                    Checksum : B3
+>   [00Ah 0010 006h]                      Oem ID : "BOCHS "
+>   [010h 0016 008h]                Oem Table ID : "BXPC    "
+> [...]
 > 
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 > Acked-by: Michael S. Tsirkin <mst@redhat.com>
@@ -130,81 +190,36 @@ On 7/24/25 8:03 AM, Sunil V L wrote:
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   hw/riscv/virt-acpi-build.c | 25 ++++++++++---------------
->   1 file changed, 10 insertions(+), 15 deletions(-)
+>   tests/data/acpi/riscv64/virt/APIC           | Bin 116 -> 116 bytes
+>   tests/data/acpi/riscv64/virt/FACP           | Bin 276 -> 276 bytes
+>   tests/qtest/bios-tables-test-allowed-diff.h |   2 --
+>   3 files changed, 2 deletions(-)
 > 
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index ee1416d264..f1406cb683 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -270,11 +270,8 @@ spcr_setup(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
->   #define RHCT_NODE_ARRAY_OFFSET 56
->   
->   /*
-> - * ACPI spec, Revision 6.5+
-> - * 5.2.36 RISC-V Hart Capabilities Table (RHCT)
-> - * REF: https://github.com/riscv-non-isa/riscv-acpi/issues/16
-> - *      https://drive.google.com/file/d/1nP3nFiH4jkPMp6COOxP6123DCZKR-tia/view
-> - *      https://drive.google.com/file/d/1sKbOa8m1UZw1JkquZYe3F1zQBN1xXsaf/view
-> + * ACPI spec, Revision 6.6
-> + * 5.2.37 RISC-V Hart Capabilities Table (RHCT)
->    */
->   static void build_rhct(GArray *table_data,
->                          BIOSLinker *linker,
-> @@ -421,7 +418,10 @@ static void build_rhct(GArray *table_data,
->       acpi_table_end(linker, &table);
->   }
->   
-> -/* FADT */
-> +/*
-> + * ACPI spec, Revision 6.6
-> + * 5.2.9 Fixed ACPI Description Table (MADT)
-> + */
->   static void build_fadt_rev6(GArray *table_data,
->                               BIOSLinker *linker,
->                               RISCVVirtState *s,
-> @@ -429,7 +429,7 @@ static void build_fadt_rev6(GArray *table_data,
->   {
->       AcpiFadtData fadt = {
->           .rev = 6,
-> -        .minor_ver = 5,
-> +        .minor_ver = 6,
->           .flags = 1 << ACPI_FADT_F_HW_REDUCED_ACPI,
->           .xdsdt_tbl_offset = &dsdt_tbl_offset,
->       };
-> @@ -508,11 +508,8 @@ static void build_dsdt(GArray *table_data,
->   }
->   
->   /*
-> - * ACPI spec, Revision 6.5+
-> + * ACPI spec, Revision 6.6
->    * 5.2.12 Multiple APIC Description Table (MADT)
-> - * REF: https://github.com/riscv-non-isa/riscv-acpi/issues/15
-> - *      https://drive.google.com/file/d/1R6k4MshhN3WTT-hwqAquu5nX6xSEqK2l/view
-> - *      https://drive.google.com/file/d/1oMGPyOD58JaPgMl1pKasT-VKsIKia7zR/view
->    */
->   static void build_madt(GArray *table_data,
->                          BIOSLinker *linker,
-> @@ -537,7 +534,7 @@ static void build_madt(GArray *table_data,
->   
->       hart_index_bits = imsic_num_bits(imsic_max_hart_per_socket);
->   
-> -    AcpiTable table = { .sig = "APIC", .rev = 6, .oem_id = s->oem_id,
-> +    AcpiTable table = { .sig = "APIC", .rev = 7, .oem_id = s->oem_id,
->                           .oem_table_id = s->oem_table_id };
->   
->       acpi_table_begin(&table, table_data);
-> @@ -812,10 +809,8 @@ static void build_rimt(GArray *table_data, BIOSLinker *linker,
->   }
->   
->   /*
-> - * ACPI spec, Revision 6.5+
-> + * ACPI spec, Revision 6.6
->    * 5.2.16 System Resource Affinity Table (SRAT)
-> - * REF: https://github.com/riscv-non-isa/riscv-acpi/issues/25
-> - *      https://drive.google.com/file/d/1YTdDx2IPm5IeZjAW932EYU-tUtgS08tX/view
->    */
->   static void
->   build_srat(GArray *table_data, BIOSLinker *linker, RISCVVirtState *vms)
+> diff --git a/tests/data/acpi/riscv64/virt/APIC b/tests/data/acpi/riscv64/virt/APIC
+> index 66a25dfd2d6ea2b607c024722b2eab95873a01e9..3fb5b753596fc7c2618b3d5210be8b00b0c177f6 100644
+> GIT binary patch
+> delta 16
+> XcmXRZ;c^V{bS`0FU|`=okt+)TB&q~M
+> 
+> delta 16
+> XcmXRZ;c^V{bS`0FU|`!akt+)TB&h^L
+> 
+> diff --git a/tests/data/acpi/riscv64/virt/FACP b/tests/data/acpi/riscv64/virt/FACP
+> index a5276b65ea8ce46cc9b40d96d98f0669c9089ed4..78e1b14b1d4ff0533a6a4c041f195a69b4ef114d 100644
+> GIT binary patch
+> delta 30
+> mcmbQjG=+)F&CxkPgpq-PO=u!lB_rF!iPaMgcqj8PasU8k76z;U
+> 
+> delta 30
+> mcmbQjG=+)F&CxkPgpq-PO?V<#B_r#^iPaMgcqj8PasU8k8wRWZ
+> 
+> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+> index 0c3f7a6cac..dfb8523c8b 100644
+> --- a/tests/qtest/bios-tables-test-allowed-diff.h
+> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
+> @@ -1,3 +1 @@
+>   /* List of comma-separated changed AML files to ignore */
+> -"tests/data/acpi/riscv64/virt/APIC",
+> -"tests/data/acpi/riscv64/virt/FACP",
 
 
