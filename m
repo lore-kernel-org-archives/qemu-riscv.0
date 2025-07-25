@@ -4,61 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8803BC87FCC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Jul 2025 02:38:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 640B3C83F26
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Jul 2025 04:04:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uf8JZ-00060O-2N; Thu, 24 Jul 2025 22:37:41 -0400
+	id 1uf9el-0006XP-HY; Fri, 25 Jul 2025 00:03:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
- id 1uf8JW-0005yI-6y; Thu, 24 Jul 2025 22:37:38 -0400
-Received: from mail-m16.yeah.net ([220.197.32.17])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
- id 1uf8JR-0001xq-Is; Thu, 24 Jul 2025 22:37:37 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
- s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=XE
- 47keZ2BqznQXDv9U1SHEM4o3k2Y3zH2e+VYsKpem8=; b=XKUzWx1qWqStxCaNue
- O3tGqjv+E+IbqcGQV9KaAJaQwYY85eVAN+suY5UAehnj0soit4WQIISiBGl2fqCF
- vP/nlb+njya8sPN2RGj0ZNsCBBsXI2dRLLTMDmFQl96C+5+ffC5twvbDrnbd3dMQ
- eXfEUivta41Nyhto5D0Bua0k4=
-Received: from vcore-181.. (unknown [])
- by gzsmtp2 (Coremail) with SMTP id Ms8vCgC3nx_V7YJof+FeAQ--.34326S2;
- Fri, 25 Jul 2025 10:37:11 +0800 (CST)
-From: Yang Jialong <z_bajeer@yeah.net>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: yangjialong@rvcore.com, Yang Jialong <z_bajeer@yeah.net>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v2] intc/riscv_aplic: Fix target register read when source is
- inactive
-Date: Fri, 25 Jul 2025 10:25:20 +0800
-Message-ID: <20250724093426.4179617-1-z_bajeer@yeah.net>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: Ms8vCgC3nx_V7YJof+FeAQ--.34326S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7Kr4UAFy3ZFW5CryDtrWfGrg_yoW8Gr45pr
- 4fGFsIvFs8tF1UWa1kGr1UXF43GrZ8Wry5ur1DuryIkwsIyw4Fgryqk345Zr4ruFy3Cr1Y
- vFZ0kr1fCF42v3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UeBT5UUUUU=
-X-Originating-IP: [49.7.252.142]
-X-CM-SenderInfo: p2betyxhhuq5hhdkh0dhw/1tbiEhGVI2iCwcGawAAAsF
-Received-SPF: pass client-ip=220.197.32.17; envelope-from=z_bajeer@yeah.net;
- helo=mail-m16.yeah.net
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
+ id 1uf9ej-0006Uh-8k
+ for qemu-riscv@nongnu.org; Fri, 25 Jul 2025 00:03:37 -0400
+Received: from sg-1-13.ptr.blmpb.com ([118.26.132.13])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
+ id 1uf9eg-0007wQ-N2
+ for qemu-riscv@nongnu.org; Fri, 25 Jul 2025 00:03:36 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1753416208;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=Jcs4v6qK8o7HqKb2WWsc6we9zXzeK8o0vFNRRrd95RU=;
+ b=0FzgjOoTeQIieMscPTulHXWtPcLpawHvqY2Xg1pgE7VYAh4tXEHqAxhAQGbduBHYCdgKKz
+ V/TDSnWE6k3coj558+9uLRRw5D6KdX0JJsi8r++yEBNmlJ8iG5m9686r5bAKGS/yJQ6+ek
+ +0XGVIvpUqMC5qzoKJl0YE2esfALgtwOP6xufx2AfqTqCOBV68MbDaISdM5ofaTg4kUAtG
+ U4m9EKEUDxkoIXEbV2o31AJBLIaa4SeVY3i8MxG55rYa5e1nbOSPFYAR0yACHhfn9vzDPt
+ aI/JSy8Aqdju1wjn1GuCFPNnlj4ptxQ1v3QTqhoTlJrBZa1SMiebJB0XRZVfVg==
+Subject: Re: [PATCH v2 3/3] tests/data/acpi/riscv64: Update expected FADT and
+ MADT
+Content-Type: text/plain; charset=UTF-8
+X-Lms-Return-Path: <lba+26883020e+e22382+nongnu.org+liujingqi@lanxincomputing.com>
+To: "Sunil V L" <sunilvl@ventanamicro.com>, <qemu-riscv@nongnu.org>, 
+ <qemu-devel@nongnu.org>
+Mime-Version: 1.0
+X-Original-From: Nutty Liu <liujingqi@lanxincomputing.com>
+Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, 
+ "Alistair Francis" <alistair.francis@wdc.com>, 
+ "Weiwei Li" <liwei1518@gmail.com>, 
+ "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
+ "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, 
+ "Michael S . Tsirkin" <mst@redhat.com>, 
+ "Igor Mammedov" <imammedo@redhat.com>, "Ani Sinha" <anisinha@redhat.com>, 
+ "Andrew Jones" <ajones@ventanamicro.com>, 
+ "Anup Patel" <anup@brainfault.org>, 
+ "Atish Kumar Patra" <atishp@rivosinc.com>
+Message-Id: <0d863e5c-ceb2-4e86-8c1a-be13ad36acc1@lanxincomputing.com>
+Content-Language: en-US
+Received: from [127.0.0.1] ([116.237.111.137]) by smtp.feishu.cn with ESMTPS;
+ Fri, 25 Jul 2025 12:03:25 +0800
+Content-Transfer-Encoding: 7bit
+References: <20250724110350.452828-1-sunilvl@ventanamicro.com>
+ <20250724110350.452828-4-sunilvl@ventanamicro.com>
+Date: Fri, 25 Jul 2025 12:03:23 +0800
+User-Agent: Mozilla Thunderbird
+In-Reply-To: <20250724110350.452828-4-sunilvl@ventanamicro.com>
+From: "Nutty Liu" <liujingqi@lanxincomputing.com>
+Received-SPF: pass client-ip=118.26.132.13;
+ envelope-from=liujingqi@lanxincomputing.com; helo=sg-1-13.ptr.blmpb.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, MSGID_FROM_MTA_HEADER=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,46 +82,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-Message-ID: <20250725022520.lJuPHeZNBehGPnPOL5xb96d_hJYQMtgXhtUgTY-UvEc@z>
 
-The RISC-V Advanced interrupt Architecture:
-4.5.16. Interrupt targets:
-If interrupt source i is inactive in this domain, register target[i] is
-read-only zero.
+On 7/24/2025 7:03 PM, Sunil V L wrote:
+> Update the expected tables for the version change.
+>   /*
+>    *
+>    * ACPI Data Table [FACP]
+>    *
+>    * Format: [HexOffset DecimalOffset ByteLength]  FieldName : FieldValue (in hex)
+>    */
+>
+>   [000h 0000 004h]                   Signature : "FACP"    [Fixed ACPI Description Table (FADT)]
+>   [004h 0004 004h]                Table Length : 00000114
+>   [008h 0008 001h]                    Revision : 06
+> -[009h 0009 001h]                    Checksum : 13
+> +[009h 0009 001h]                    Checksum : 12
+>   [00Ah 0010 006h]                      Oem ID : "BOCHS "
+>   [010h 0016 008h]                Oem Table ID : "BXPC    "
+>   [018h 0024 004h]                Oem Revision : 00000001
+>   [01Ch 0028 004h]             Asl Compiler ID : "BXPC"
+>   [020h 0032 004h]       Asl Compiler Revision : 00000001
+>
+>   [024h 0036 004h]                FACS Address : 00000000
+>   [028h 0040 004h]                DSDT Address : 00000000
+>   [02Ch 0044 001h]                       Model : 00
+>   [02Dh 0045 001h]                  PM Profile : 00 [Unspecified]
+>   [02Eh 0046 002h]               SCI Interrupt : 0000
+>   [030h 0048 004h]            SMI Command Port : 00000000
+>   [034h 0052 001h]           ACPI Enable Value : 00
+>   [035h 0053 001h]          ACPI Disable Value : 00
+>   [036h 0054 001h]              S4BIOS Command : 00
+>   [037h 0055 001h]             P-State Control : 00
+> @@ -86,33 +86,33 @@
+>        Use APIC Physical Destination Mode (V4) : 0
+>                          Hardware Reduced (V5) : 1
+>                         Low Power S0 Idle (V5) : 0
+>
+>   [074h 0116 00Ch]              Reset Register : [Generic Address Structure]
+>   [074h 0116 001h]                    Space ID : 00 [SystemMemory]
+>   [075h 0117 001h]                   Bit Width : 00
+>   [076h 0118 001h]                  Bit Offset : 00
+>   [077h 0119 001h]        Encoded Access Width : 00 [Undefined/Legacy]
+>   [078h 0120 008h]                     Address : 0000000000000000
+>
+>   [080h 0128 001h]        Value to cause reset : 00
+>   [081h 0129 002h]   ARM Flags (decoded below) : 0000
+>                                 PSCI Compliant : 0
+>                          Must use HVC for PSCI : 0
+>
+> -[083h 0131 001h]         FADT Minor Revision : 05
+> +[083h 0131 001h]         FADT Minor Revision : 06
+>   [084h 0132 008h]                FACS Address : 0000000000000000
+> [...]
+>
+>   /*
+>    *
+>    * ACPI Data Table [APIC]
+>    *
+>    * Format: [HexOffset DecimalOffset ByteLength]  FieldName : FieldValue (in hex)
+>    */
+>
+>   [000h 0000 004h]                   Signature : "APIC"    [Multiple APIC Description Table (MADT)]
+>   [004h 0004 004h]                Table Length : 00000074
+> -[008h 0008 001h]                    Revision : 06
+> -[009h 0009 001h]                    Checksum : B4
+> +[008h 0008 001h]                    Revision : 07
+> +[009h 0009 001h]                    Checksum : B3
+>   [00Ah 0010 006h]                      Oem ID : "BOCHS "
+>   [010h 0016 008h]                Oem Table ID : "BXPC    "
+> [...]
+>
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Acked-by: Michael S. Tsirkin <mst@redhat.com>
+> ---
+Reviewed-by: Nutty Liu <liujingqi@lanxincomputing.com>
 
-Signed-off-by: Yang Jialong <z_bajeer@yeah.net>
----
- hw/intc/riscv_aplic.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-v1 --> v2:
-- Use '&' replace the error '*'.
-
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index 4fa5f7597b..a1d9fa5085 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -628,7 +628,7 @@ static void riscv_aplic_request(void *opaque, int irq, int level)
- 
- static uint64_t riscv_aplic_read(void *opaque, hwaddr addr, unsigned size)
- {
--    uint32_t irq, word, idc;
-+    uint32_t irq, word, idc, sm;
-     RISCVAPLICState *aplic = opaque;
- 
-     /* Reads must be 4 byte words */
-@@ -696,6 +696,10 @@ static uint64_t riscv_aplic_read(void *opaque, hwaddr addr, unsigned size)
-     } else if ((APLIC_TARGET_BASE <= addr) &&
-             (addr < (APLIC_TARGET_BASE + (aplic->num_irqs - 1) * 4))) {
-         irq = ((addr - APLIC_TARGET_BASE) >> 2) + 1;
-+        sm = aplic->sourcecfg[irq] & APLIC_SOURCECFG_SM_MASK;
-+        if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
-+            return 0;
-+        }
-         return aplic->target[irq];
-     } else if (!aplic->msimode && (APLIC_IDC_BASE <= addr) &&
-             (addr < (APLIC_IDC_BASE + aplic->num_harts * APLIC_IDC_SIZE))) {
--- 
-2.34.1
-
+Thanks,
+Nutty
+>   tests/data/acpi/riscv64/virt/APIC           | Bin 116 -> 116 bytes
+>   tests/data/acpi/riscv64/virt/FACP           | Bin 276 -> 276 bytes
+>   tests/qtest/bios-tables-test-allowed-diff.h |   2 --
+>   3 files changed, 2 deletions(-)
+>
+> diff --git a/tests/data/acpi/riscv64/virt/APIC b/tests/data/acpi/riscv64/virt/APIC
+> index 66a25dfd2d6ea2b607c024722b2eab95873a01e9..3fb5b753596fc7c2618b3d5210be8b00b0c177f6 100644
+> GIT binary patch
+> delta 16
+> XcmXRZ;c^V{bS`0FU|`=okt+)TB&q~M
+>
+> delta 16
+> XcmXRZ;c^V{bS`0FU|`!akt+)TB&h^L
+>
+> diff --git a/tests/data/acpi/riscv64/virt/FACP b/tests/data/acpi/riscv64/virt/FACP
+> index a5276b65ea8ce46cc9b40d96d98f0669c9089ed4..78e1b14b1d4ff0533a6a4c041f195a69b4ef114d 100644
+> GIT binary patch
+> delta 30
+> mcmbQjG=+)F&CxkPgpq-PO=u!lB_rF!iPaMgcqj8PasU8k76z;U
+>
+> delta 30
+> mcmbQjG=+)F&CxkPgpq-PO?V<#B_r#^iPaMgcqj8PasU8k8wRWZ
+>
+> diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+> index 0c3f7a6cac..dfb8523c8b 100644
+> --- a/tests/qtest/bios-tables-test-allowed-diff.h
+> +++ b/tests/qtest/bios-tables-test-allowed-diff.h
+> @@ -1,3 +1 @@
+>   /* List of comma-separated changed AML files to ignore */
+> -"tests/data/acpi/riscv64/virt/APIC",
+> -"tests/data/acpi/riscv64/virt/FACP",
 
