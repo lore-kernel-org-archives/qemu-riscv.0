@@ -4,64 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC40C83F26
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Jul 2025 02:09:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8803BC87FCC
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Jul 2025 02:38:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uf7sR-0005AQ-6F; Thu, 24 Jul 2025 22:09:39 -0400
+	id 1uf8JZ-00060O-2N; Thu, 24 Jul 2025 22:37:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
- id 1uf7rz-0004Kp-BA; Thu, 24 Jul 2025 22:09:12 -0400
-Received: from mail-m16.yeah.net ([220.197.32.18])
+ id 1uf8JW-0005yI-6y; Thu, 24 Jul 2025 22:37:38 -0400
+Received: from mail-m16.yeah.net ([220.197.32.17])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
- id 1uf7ru-0002Us-9c; Thu, 24 Jul 2025 22:09:10 -0400
+ id 1uf8JR-0001xq-Is; Thu, 24 Jul 2025 22:37:37 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
- s=s110527; h=From:To:Subject:Date:Message-ID:Content-Type:
- MIME-Version; bh=BeOyYMZK3vF3A36IALcn58yWpRIK9tgxHRU/4T7Up0E=;
- b=Mh5AkzCukuhtZMqCccK6jzRVo76I2NaziqxtnDTqEtXZPJM8xGQstf/GBx+Vkp
- +gNQ9ZYoU9WV5U15yDWQbKJr71aLMWubupICsC85BwjBQWed6MDnSVAMpe9zbQXd
- 5YzSgTj86d41LPFLxePYAmOB+E8wTfcbYktuTNSHnPEvU=
-Received: from OS3PR01MB7756.jpnprd01.prod.outlook.com (unknown [])
- by gzsmtp3 (Coremail) with SMTP id M88vCgD39pAt54Jof1pXAQ--.50184S2;
- Fri, 25 Jul 2025 10:08:46 +0800 (CST)
-From: "z_bajeer@yeah.net" <z_bajeer@yeah.net>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-CC: "yangjialong@rvcore.com" <yangjialong@rvcore.com>, "qemu-riscv@nongnu.org"
- <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Subject: =?utf-8?B?5Zue5aSNOiBbUEFUQ0ggdjFdIGludGMvcmlzY3ZfYXBsaWM6IEZpeCB0YXJn?=
- =?utf-8?Q?et_register_read_when_source_is_inactive?=
-Thread-Topic: [PATCH v1] intc/riscv_aplic: Fix target register read when
- source is inactive
-Thread-Index: AXJfMS4wACQBZRBl1eFvSrISyBaTozE1YzRk0bIEWpg=
-X-MS-Exchange-MessageSentRepresentingType: 1
-Date: Fri, 25 Jul 2025 02:08:39 +0000
-Message-ID: <OS3PR01MB77568C8FEA443592D17CED54F559A@OS3PR01MB7756.jpnprd01.prod.outlook.com>
-References: <20250724093426.4179617-1-z_bajeer@yeah.net>
- <a779c4ed-913e-4886-a2c6-7d3b505077c1@ventanamicro.com>
-In-Reply-To: <a779c4ed-913e-4886-a2c6-7d3b505077c1@ventanamicro.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-Exchange-Organization-SCL: -1
-X-MS-TNEF-Correlator: 
-X-MS-Exchange-Organization-RecordReviewCfmType: 0
-msip_labels: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=XE
+ 47keZ2BqznQXDv9U1SHEM4o3k2Y3zH2e+VYsKpem8=; b=XKUzWx1qWqStxCaNue
+ O3tGqjv+E+IbqcGQV9KaAJaQwYY85eVAN+suY5UAehnj0soit4WQIISiBGl2fqCF
+ vP/nlb+njya8sPN2RGj0ZNsCBBsXI2dRLLTMDmFQl96C+5+ffC5twvbDrnbd3dMQ
+ eXfEUivta41Nyhto5D0Bua0k4=
+Received: from vcore-181.. (unknown [])
+ by gzsmtp2 (Coremail) with SMTP id Ms8vCgC3nx_V7YJof+FeAQ--.34326S2;
+ Fri, 25 Jul 2025 10:37:11 +0800 (CST)
+From: Yang Jialong <z_bajeer@yeah.net>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: yangjialong@rvcore.com, Yang Jialong <z_bajeer@yeah.net>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: [PATCH v2] intc/riscv_aplic: Fix target register read when source is
+ inactive
+Date: Fri, 25 Jul 2025 10:25:20 +0800
+Message-ID: <20250724093426.4179617-1-z_bajeer@yeah.net>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-CM-TRANSID: M88vCgD39pAt54Jof1pXAQ--.50184S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7Cw4xXr47Zr1kZw1kWr4Uurg_yoW8Zw1Upr
- s5GFZ8ArW5KF1kGa1xGr1UXFW8Grn8W3Z8ur1UZFy8CwsxJw4Ygryqgr909r1UGr48Cr1Y
- yF4UZr13ZF47ArJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07U8wIDUUUUU=
-X-Originating-IP: [2603:1046:c0a:2099::5]
-X-CM-SenderInfo: p2betyxhhuq5hhdkh0dhw/1tbiCQKVI2iC1jxAYAAAsd
-Received-SPF: pass client-ip=220.197.32.18; envelope-from=z_bajeer@yeah.net;
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: Ms8vCgC3nx_V7YJof+FeAQ--.34326S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7Kr4UAFy3ZFW5CryDtrWfGrg_yoW8Gr45pr
+ 4fGFsIvFs8tF1UWa1kGr1UXF43GrZ8Wry5ur1DuryIkwsIyw4Fgryqk345Zr4ruFy3Cr1Y
+ vFZ0kr1fCF42v3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UeBT5UUUUU=
+X-Originating-IP: [49.7.252.142]
+X-CM-SenderInfo: p2betyxhhuq5hhdkh0dhw/1tbiEhGVI2iCwcGawAAAsF
+Received-SPF: pass client-ip=220.197.32.17; envelope-from=z_bajeer@yeah.net;
  helo=mail-m16.yeah.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -85,42 +73,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
+Message-ID: <20250725022520.lJuPHeZNBehGPnPOL5xb96d_hJYQMtgXhtUgTY-UvEc@z>
 
-PiBPbiA3LzI0LzI1IDY6MzQgQU0sIFlhbmcgSmlhbG9uZyB3cm90ZToKPiA+IFRoZSBSSVNDLVYg
-QWR2YW5jZWQgaW50ZXJydXB0IEFyY2hpdGVjdHVyZToKPiA+IDQuNS4xNi4gSW50ZXJydXB0IHRh
-cmdldHM6Cj4gPiBJZiBpbnRlcnJ1cHQgc291cmNlIGkgaXMgaW5hY3RpdmUgaW4gdGhpcyBkb21h
-aW4sIHJlZ2lzdGVyIHRhcmdldFtpXSBpcwo+ID4gcmVhZC1vbmx5IHplcm8uCj4gPiAKPiA+IFNp
-Z25lZC1vZmYtYnk6IFlhbmcgSmlhbG9uZyA8el9iYWplZXJAeWVhaC5uZXQ+Cj4gPiAtLS0KPiA+
-wqDCoCBody9pbnRjL3Jpc2N2X2FwbGljLmMgfCA2ICsrKysrLQo+ID7CoMKgIDEgZmlsZSBjaGFu
-Z2VkLCA1IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKPiA+IAo+ID4gZGlmZiAtLWdpdCBh
-L2h3L2ludGMvcmlzY3ZfYXBsaWMuYyBiL2h3L2ludGMvcmlzY3ZfYXBsaWMuYwo+ID4gaW5kZXgg
-NGZhNWY3NS4uY2ZlZjY5ZiAxMDA2NDQKPiA+IC0tLSBhL2h3L2ludGMvcmlzY3ZfYXBsaWMuYwo+
-ID4gKysrIGIvaHcvaW50Yy9yaXNjdl9hcGxpYy5jCj4gPiBAQCAtNjI4LDcgKzYyOCw3IEBAIHN0
-YXRpYyB2b2lkIHJpc2N2X2FwbGljX3JlcXVlc3Qodm9pZCAqb3BhcXVlLCBpbnQgaXJxLCBpbnQg
-bGV2ZWwpCj4gPsKgwqAgCj4gPsKgwqAgc3RhdGljIHVpbnQ2NF90IHJpc2N2X2FwbGljX3JlYWQo
-dm9pZCAqb3BhcXVlLCBod2FkZHIgYWRkciwgdW5zaWduZWQgc2l6ZSkKPiA+wqDCoCB7Cj4gPiAt
-wqDCoMKgIHVpbnQzMl90IGlycSwgd29yZCwgaWRjOwo+ID4gK8KgwqDCoCB1aW50MzJfdCBpcnEs
-IHdvcmQsIGlkYywgc207Cj4gPsKgwqDCoMKgwqDCoCBSSVNDVkFQTElDU3RhdGUgKmFwbGljID0g
-b3BhcXVlOwo+ID7CoMKgIAo+ID7CoMKgwqDCoMKgwqAgLyogUmVhZHMgbXVzdCBiZSA0IGJ5dGUg
-d29yZHMgKi8KPiA+IEBAIC02OTYsNiArNjk2LDEwIEBAIHN0YXRpYyB1aW50NjRfdCByaXNjdl9h
-cGxpY19yZWFkKHZvaWQgKm9wYXF1ZSwgaHdhZGRyIGFkZHIsIHVuc2lnbmVkIHNpemUpCj4gPsKg
-wqDCoMKgwqDCoCB9IGVsc2UgaWYgKChBUExJQ19UQVJHRVRfQkFTRSA8PSBhZGRyKSAmJgo+ID7C
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIChhZGRyIDwgKEFQTElDX1RBUkdFVF9CQVNFICsg
-KGFwbGljLT5udW1faXJxcyAtIDEpICogNCkpKSB7Cj4gPsKgwqDCoMKgwqDCoMKgwqDCoMKgIGly
-cSA9ICgoYWRkciAtIEFQTElDX1RBUkdFVF9CQVNFKSA+PiAyKSArIDE7Cj4gPiArwqDCoMKgwqDC
-oMKgwqAgc20gPSBhcGxpYy0+c291cmNlY2ZnW2lycV0gKiBBUExJQ19TT1VSQ0VDRkdfU01fTUFT
-SzsKPiAKPiBJIGJlbGlldmUgeW91IHdhbnQgJyYnIGhlcmU6Cj4gCgouLi4gWWVzLiBUaGFua3Mu
-IEkgd2lsbCBzdWJtaXQgYSBuZXdlciBvbmUuCgo+IAo+IHNtID0gYXBsaWMtPnNvdXJjZWNmZ1tp
-cnFdICYgQVBMSUNfU09VUkNFQ0ZHX1NNX01BU0s7Cj4gCj4gT3RoZXJ3aXNlLCBnaXZlbiB0aGF0
-IEFQTElDX1NPVVJDRUNGR19TTV9JTkFDVElWRSBpcyAweDAsIHRoZSBvbmx5IHdheQo+IAo+IHNt
-ID09IEFQTElDX1NPVVJDRUNGR19TTV9JTkFDVElWRQo+IAo+IHdpbGwgaGFwcGVuIGlzIGFwbGlj
-LT5zb3VyY2VjZmdbaXJxXSBiZWluZyAwLgo+IAo+IAo+IFRoYW5rcywKPiAKPiBEYW5pZWwKPiAK
-PiA+ICvCoMKgwqDCoMKgwqDCoCBpZiAoc20gPT0gQVBMSUNfU09VUkNFQ0ZHX1NNX0lOQUNUSVZF
-KSB7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gMDsKPiA+ICvCoMKgwqDCoMKg
-wqDCoCB9Cj4gPsKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiBhcGxpYy0+dGFyZ2V0W2lycV07
-Cj4gPsKgwqDCoMKgwqDCoCB9IGVsc2UgaWYgKCFhcGxpYy0+bXNpbW9kZSAmJiAoQVBMSUNfSURD
-X0JBU0UgPD0gYWRkcikgJiYKPiA+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAoYWRkciA8
-IChBUExJQ19JRENfQkFTRSArIGFwbGljLT5udW1faGFydHMgKiBBUExJQ19JRENfU0laRSkpKSB7
-Cg==
+The RISC-V Advanced interrupt Architecture:
+4.5.16. Interrupt targets:
+If interrupt source i is inactive in this domain, register target[i] is
+read-only zero.
+
+Signed-off-by: Yang Jialong <z_bajeer@yeah.net>
+---
+ hw/intc/riscv_aplic.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+v1 --> v2:
+- Use '&' replace the error '*'.
+
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index 4fa5f7597b..a1d9fa5085 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -628,7 +628,7 @@ static void riscv_aplic_request(void *opaque, int irq, int level)
+ 
+ static uint64_t riscv_aplic_read(void *opaque, hwaddr addr, unsigned size)
+ {
+-    uint32_t irq, word, idc;
++    uint32_t irq, word, idc, sm;
+     RISCVAPLICState *aplic = opaque;
+ 
+     /* Reads must be 4 byte words */
+@@ -696,6 +696,10 @@ static uint64_t riscv_aplic_read(void *opaque, hwaddr addr, unsigned size)
+     } else if ((APLIC_TARGET_BASE <= addr) &&
+             (addr < (APLIC_TARGET_BASE + (aplic->num_irqs - 1) * 4))) {
+         irq = ((addr - APLIC_TARGET_BASE) >> 2) + 1;
++        sm = aplic->sourcecfg[irq] & APLIC_SOURCECFG_SM_MASK;
++        if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
++            return 0;
++        }
+         return aplic->target[irq];
+     } else if (!aplic->msimode && (APLIC_IDC_BASE <= addr) &&
+             (addr < (APLIC_IDC_BASE + aplic->num_harts * APLIC_IDC_SIZE))) {
+-- 
+2.34.1
 
 
