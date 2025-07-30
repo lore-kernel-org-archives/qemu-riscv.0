@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F0FC87FD2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D46C87FC9
 	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Jul 2025 22:08:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uhEyI-0006Rv-43; Wed, 30 Jul 2025 18:08:26 -0400
+	id 1uhEyk-0007fN-Fq; Wed, 30 Jul 2025 18:08:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1uhEwW-0001Dm-Tg
- for qemu-riscv@nongnu.org; Wed, 30 Jul 2025 18:06:38 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1uhEwW-0001Dp-T4
+ for qemu-riscv@nongnu.org; Wed, 30 Jul 2025 18:06:37 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1uhEwR-0002Z0-Ra
- for qemu-riscv@nongnu.org; Wed, 30 Jul 2025 18:06:35 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-23fe2be6061so1978805ad.0
- for <qemu-riscv@nongnu.org>; Wed, 30 Jul 2025 15:06:30 -0700 (PDT)
+ id 1uhEwS-0002aO-CX
+ for qemu-riscv@nongnu.org; Wed, 30 Jul 2025 18:06:36 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-b34a6d0c9a3so305779a12.3
+ for <qemu-riscv@nongnu.org>; Wed, 30 Jul 2025 15:06:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753913190; x=1754517990; darn=nongnu.org;
+ d=linaro.org; s=google; t=1753913191; x=1754517991; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BFKbQ//LgI79f1zxRYycYxEHuzsaGiAZjs584Y89tXI=;
- b=TERUefhssIQU2adeKZZgxDshEFwxQz1ax9DkiC0kgOcVCawT66vI394+a+EA9DAqo4
- rX4FStYU+6LaQfMlAlra4VvUCtydJhwNB6l6C4cseEtVUvedlXKC/YUjvU0DcBQuPbR1
- /ff0NLdWOsXsbi5z/BeLlKZ7eMQbGenE0GkGaFtiY6D2RtC64foeUm+W3Ctyp0lr6chE
- dZviMpXm+jIDrJEfeTinvoPtuW09QwaXtkQkqemJzSim04EQownPHmhJ8612ap9pEcnL
- YzKyOFcTDhNsRW2vPItP2cMl4V38bnBzv4w5UP99X/rbjSSNO3NV7lqnRddi7lV659yT
- 3Idg==
+ bh=biby8AEWdDyhxbx/eUBt+4KP1PI/+4PwOX0JKhuZlPM=;
+ b=eW+2I579FMM+j5DOEI2f9OI8A+NcJBcoUibr9MCacwCXrCvxSGKhub3fCH0opkJF9b
+ fcBQxxG7kQ6w2HXGcTLjnpMalWQa2208dorkyNEI/PCWvZdgVELmGn1IWsOvPma6qxjE
+ CMKI9d/WS2kb3VxQhRu5iavKNs7+huOu9S1svETF3Pla1yphumLYoHklMJUogbMTubyH
+ HSq6W1RqmbDxiPghMm2KrwmsFeXyvCWhMsxdF5MPgL77el2R3fCnQxmEfiHs/0cNMlyi
+ jEFczL2I8MrH7RcAQPJvGH52wQ5prs0r9Y/FA4qPmT4fTR9wjswvpuEzX5jPKE3qCNRt
+ cGWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753913190; x=1754517990;
+ d=1e100.net; s=20230601; t=1753913191; x=1754517991;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BFKbQ//LgI79f1zxRYycYxEHuzsaGiAZjs584Y89tXI=;
- b=KDp6nF9LLdklcc6t3eVbvO2MNh5YCX7hW663p99uem3Yd/OtmPjKtP5wtqoKDYgohK
- sn04U3oqZ8u09RiYDJ4VxPhV5hOnrtT5TEUYZ55FyjCKWsTCY01VyFqyl7xoJA3ru1vO
- tnnAvl78VcBgyC89leZQd784PA/nbAaB8xefo+jLgnXAdiLFpV7S280wtz0Ac6P6c4oZ
- LR95gUaGO4NGmtZ691K1iBw5ftB4YqYocNnGtc18/Twd8JZE2tMb0YIhFJE8o6DHlXPx
- S5bzZmPO1tumKntZSQlYcYLCIAoysYU/MFFXQwNOcCeLORe7/1bO6iyl+GR0M93P3O/U
- 1EnQ==
+ bh=biby8AEWdDyhxbx/eUBt+4KP1PI/+4PwOX0JKhuZlPM=;
+ b=XPOn7GE8HKKpy3r7L1CCriCU8BfROiABC7/UAy8DOozkY4KRRt5NcdLrYt40Z0Ezk6
+ Mc4eGbCU08Wo5DrBBo7LO529shYGbp4VhRJ/8h7DIyB0Al0Tk90Nd4PnaxFFKnVJ6c1h
+ Cs4cWhrnPcB9iIidAkhVfRFk2szq7lvSzIMmaUFedBmN7zN87TSXAROsJ70tJQcCy0A4
+ OjqtSBibdpk/sUMuZpgtp8pfvF9LYyPtv+Ta6PKtd2FHgXJmLsQXe4hdwXV+2OnpFZuB
+ KtqNYOtV2p1fZ8SEZJMEpiu5lKytjJDNfj0X21wU8AgOJ0wnc4i08DwnoqWvLKCTMP+w
+ 5G/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhK3kXKEv5uKRaxKxIHOB8ZDNuNO+R4Q5Wn/38Ml/UBocUVlbJ2umJi8P+dmVQuNofXrnyD2t3ZTIX@nongnu.org
-X-Gm-Message-State: AOJu0Yzrrtz3jNAUM5gEIQTdbMIyXTG2SBXo40KKPrKD0E/SOnB2FwR5
- 35yLhk2lsof+4hrv7O3AGzXtx4Kva7cl9EFsxHHONsxWekYmVsmE6kuav9mSAols3xw=
-X-Gm-Gg: ASbGnctaIvOB0dRPGo9mVAum2g5lAF0cJfNdTcMR2Urpaq575DNl/TSd6x3hFD5VG5Z
- c9PdHiYQtageI6ly690GhM0gkbXtJc2J2NByFQAtvX04DiUiIAgisYmHMZNEHFXLWu0vfnrQVCh
- I16vYbnDlP5UPcT/le2k+KkxV9O4ikBfgqrtmybOQ7OvRel6sPl0EexNu7tltFTdxQwthuwtFyy
- Xj8p3kFEIZbeMLVlOmdDScJUiyfvFi0qXUEX8xSdW9/f410Y+NA5m8kQLfh1u+sOmnVFVfY3YqT
- +8B3nVpYifgYYUhAOT02kYX2anTLNGyM7dNUTzoc/XsnQ+vyUPJUo0BbiMQSL4U4/0FUfs/BIdq
- XzuQ0tVbnC7d4nCgHezGI5w==
-X-Google-Smtp-Source: AGHT+IGZ1yYndVG9K2s8R/mLJl7MuT4SvFdUntXEkA/Q3Ye5zDqHpH0ZPp6sQY0Ctr+3x7XGeEL/JQ==
-X-Received: by 2002:a17:903:90c:b0:231:9817:6ec1 with SMTP id
- d9443c01a7336-2409689f466mr71269985ad.17.1753913189930; 
- Wed, 30 Jul 2025 15:06:29 -0700 (PDT)
+ AJvYcCVrFiHT8dYE0EIj6KiFT9ISucs/nK8oNnvOO55IRvXKYaQO4SycpArLdN2pF5wtgfKUYU3pHY9Jdq/d@nongnu.org
+X-Gm-Message-State: AOJu0YwWRMhj5BgBPaVvtV40W03jzeSItY7s1Fmdc2R/E06PTOQA9OfD
+ mjE1+5bhT0vMbTn++Ck0ic1CfZQ3ya/EvGOTbJCa23I+3OJpjqFCvidFfEmDIiFTS7I=
+X-Gm-Gg: ASbGnct5KFa8EKIL7yc2M5ltWD0jFz3gdoMKvlTquOVonB66hywHt0uWC31G8hGqMod
+ eaeXx/4neoSU7hK6+WWT7hjeZnMMD62sRE33cLDB9KO8tBdnVcDDxNtOoVwX6rx6F6X9nG5B9kC
+ Q0nTNjKs1k9dCeE2Zl4+T33tpN5gO6dbktUUua7RumWwjao/hey3j9Y1onaaGTEAn9u6DSgIll/
+ 9WqQRmJsSrs1TsFqah2lLKm0AwgUCXK9w6Ow5zP6VFSSrUMKmR8cHmzJwKnC9ItBcC5QI3ilA6r
+ LqN1DUH6pdh0OwtrUUWVhxnErhS9ISeygYFFKuhbuQTy1FsoWzNO/d6TMIxSw1zZSvhhM+SBvhL
+ 1Nh9P5FKO6RGAJ58YX4uebw==
+X-Google-Smtp-Source: AGHT+IEvPQWR7zgJn+Oqwe0BOueSXe0I1iEQVZkV1WjRy6zEa1UnnxsrRmmLGbKfCx8r3ACqjle2Xw==
+X-Received: by 2002:a17:903:291:b0:234:df51:d16c with SMTP id
+ d9443c01a7336-24096b79730mr74246705ad.45.1753913190826; 
+ Wed, 30 Jul 2025 15:06:30 -0700 (PDT)
 Received: from pc.. ([38.41.223.211]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-241e899d272sm981535ad.135.2025.07.30.15.06.29
+ d9443c01a7336-241e899d272sm981535ad.135.2025.07.30.15.06.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Jul 2025 15:06:29 -0700 (PDT)
+ Wed, 30 Jul 2025 15:06:30 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
@@ -75,23 +75,24 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, richard.henderson@linaro.org,
  qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH 02/10] semihosting/guestfd: compile once for system/user
-Date: Wed, 30 Jul 2025 15:06:13 -0700
-Message-ID: <20250730220621.1142496-3-pierrick.bouvier@linaro.org>
+Subject: [PATCH 03/10] semihosting/arm-compat-semi: remove
+ common_semi_sys_exit_extended
+Date: Wed, 30 Jul 2025 15:06:14 -0700
+Message-ID: <20250730220621.1142496-4-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250730220621.1142496-1-pierrick.bouvier@linaro.org>
 References: <20250730220621.1142496-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,201 +108,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We move relevant code to semihosting/arm-compat-semi.c, and add
-functions to query CONFIG_ARM_COMPATIBLE_SEMIHOSTING at runtime.
+This allows to get rid of sizeof(target_ulong) for riscv, without
+changing the semantic.
 
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- include/semihosting/guestfd.h      |  7 -------
- include/semihosting/semihost.h     |  2 ++
- semihosting/arm-compat-semi-stub.c | 19 +++++++++++++++++++
- semihosting/arm-compat-semi.c      | 26 ++++++++++++++++++++++++++
- semihosting/guestfd.c              | 26 +++++---------------------
- semihosting/meson.build            | 11 ++++++-----
- 6 files changed, 58 insertions(+), 33 deletions(-)
- create mode 100644 semihosting/arm-compat-semi-stub.c
+ target/arm/common-semi-target.h   | 5 -----
+ target/riscv/common-semi-target.h | 5 -----
+ semihosting/arm-compat-semi.c     | 4 +++-
+ 3 files changed, 3 insertions(+), 11 deletions(-)
 
-diff --git a/include/semihosting/guestfd.h b/include/semihosting/guestfd.h
-index 3d426fedab3..a7ea1041ea0 100644
---- a/include/semihosting/guestfd.h
-+++ b/include/semihosting/guestfd.h
-@@ -35,13 +35,6 @@ typedef struct GuestFD {
-     };
- } GuestFD;
- 
--/*
-- * For ARM semihosting, we have a separate structure for routing
-- * data for the console which is outside the guest fd address space.
-- */
--extern GuestFD console_in_gf;
--extern GuestFD console_out_gf;
--
- /**
-  * alloc_guestfd:
-  *
-diff --git a/include/semihosting/semihost.h b/include/semihosting/semihost.h
-index b03e6375787..231dc890395 100644
---- a/include/semihosting/semihost.h
-+++ b/include/semihosting/semihost.h
-@@ -33,6 +33,8 @@ typedef enum SemihostingTarget {
-  * Return true if guest code is allowed to make semihosting calls.
-  */
- bool semihosting_enabled(bool is_user);
-+bool semihosting_arm_compatible(void);
-+void semihosting_arm_compatible_init(void);
- 
- SemihostingTarget semihosting_get_target(void);
- const char *semihosting_get_arg(int i);
-diff --git a/semihosting/arm-compat-semi-stub.c b/semihosting/arm-compat-semi-stub.c
-new file mode 100644
-index 00000000000..bfa3681e267
---- /dev/null
-+++ b/semihosting/arm-compat-semi-stub.c
-@@ -0,0 +1,19 @@
-+/*
-+ * Stubs for platforms different from ARM
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "semihosting/semihost.h"
-+#include <glib.h>
-+
-+bool semihosting_arm_compatible(void)
-+{
-+    return false;
-+}
-+
-+void semihosting_arm_compatible_init(void)
-+{
-+    g_assert_not_reached();
-+}
-diff --git a/semihosting/arm-compat-semi.c b/semihosting/arm-compat-semi.c
-index 40dc778529d..33614108094 100644
---- a/semihosting/arm-compat-semi.c
-+++ b/semihosting/arm-compat-semi.c
-@@ -101,6 +101,13 @@ static int gdb_open_modeflags[12] = {
-     GDB_O_RDWR | GDB_O_CREAT | GDB_O_APPEND,
- };
- 
-+/*
-+ * For ARM semihosting, we have a separate structure for routing
-+ * data for the console which is outside the guest fd address space.
-+ */
-+GuestFD console_in_gf;
-+GuestFD console_out_gf;
-+
- #ifndef CONFIG_USER_ONLY
- 
- /**
-@@ -353,6 +360,25 @@ static const uint8_t featurefile_data[] = {
-     SH_EXT_EXIT_EXTENDED | SH_EXT_STDOUT_STDERR, /* Feature byte 0 */
- };
- 
-+bool semihosting_arm_compatible(void)
-+{
-+    return true;
-+}
-+
-+void semihosting_arm_compatible_init(void)
-+{
-+    /* For ARM-compat, the console is in a separate namespace. */
-+    if (use_gdb_syscalls()) {
-+        console_in_gf.type = GuestFDGDB;
-+        console_in_gf.hostfd = 0;
-+        console_out_gf.type = GuestFDGDB;
-+        console_out_gf.hostfd = 2;
-+    } else {
-+        console_in_gf.type = GuestFDConsole;
-+        console_out_gf.type = GuestFDConsole;
-+    }
-+}
-+
- /*
-  * Do a semihosting call.
-  *
-diff --git a/semihosting/guestfd.c b/semihosting/guestfd.c
-index d3241434c51..e8f236c690c 100644
---- a/semihosting/guestfd.c
-+++ b/semihosting/guestfd.c
-@@ -12,35 +12,20 @@
- #include "gdbstub/syscalls.h"
- #include "semihosting/semihost.h"
- #include "semihosting/guestfd.h"
--#ifndef CONFIG_USER_ONLY
--#include CONFIG_DEVICES
--#endif
- 
- static GArray *guestfd_array;
- 
--#ifdef CONFIG_ARM_COMPATIBLE_SEMIHOSTING
--GuestFD console_in_gf;
--GuestFD console_out_gf;
--#endif
--
- void qemu_semihosting_guestfd_init(void)
- {
-     /* New entries zero-initialized, i.e. type GuestFDUnused */
-     guestfd_array = g_array_new(FALSE, TRUE, sizeof(GuestFD));
- 
--#ifdef CONFIG_ARM_COMPATIBLE_SEMIHOSTING
--    /* For ARM-compat, the console is in a separate namespace. */
--    if (use_gdb_syscalls()) {
--        console_in_gf.type = GuestFDGDB;
--        console_in_gf.hostfd = 0;
--        console_out_gf.type = GuestFDGDB;
--        console_out_gf.hostfd = 2;
--    } else {
--        console_in_gf.type = GuestFDConsole;
--        console_out_gf.type = GuestFDConsole;
-+    if (semihosting_arm_compatible()) {
-+        semihosting_arm_compatible_init();
-+        return;
+diff --git a/target/arm/common-semi-target.h b/target/arm/common-semi-target.h
+index da51f2d7f54..7ebd2136d93 100644
+--- a/target/arm/common-semi-target.h
++++ b/target/arm/common-semi-target.h
+@@ -34,11 +34,6 @@ static inline void common_semi_set_ret(CPUState *cs, target_ulong ret)
      }
--#else
--    /* Otherwise, the stdio file descriptors apply. */
-+
-+    /* Out of ARM, the stdio file descriptors apply. */
-     guestfd_array = g_array_set_size(guestfd_array, 3);
- #ifndef CONFIG_USER_ONLY
-     if (!use_gdb_syscalls()) {
-@@ -54,7 +39,6 @@ void qemu_semihosting_guestfd_init(void)
-     associate_guestfd(0, 0);
-     associate_guestfd(1, 1);
-     associate_guestfd(2, 2);
--#endif
  }
  
- /*
-diff --git a/semihosting/meson.build b/semihosting/meson.build
-index 77200a7f27b..bb0db323937 100644
---- a/semihosting/meson.build
-+++ b/semihosting/meson.build
-@@ -1,17 +1,18 @@
--specific_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
--  'guestfd.c',
--))
+-static inline bool common_semi_sys_exit_extended(CPUState *cs, int nr)
+-{
+-    return nr == TARGET_SYS_EXIT_EXTENDED || is_a64(cpu_env(cs));
+-}
 -
- common_ss.add(when: 'CONFIG_SEMIHOSTING', if_false: files('stubs-all.c'))
--user_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files('user.c'))
-+user_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
-+  'user.c',
-+  'guestfd.c'))
- system_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
-   'config.c',
-   'console.c',
-+  'guestfd.c',
-   'uaccess.c',
-   'syscalls.c',
- ), if_false: files(
-   'stubs-system.c',
- ))
-+system_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
-+  if_false: files('arm-compat-semi-stub.c'))
+ static inline bool is_64bit_semihosting(CPUArchState *env)
+ {
+     return is_a64(env);
+diff --git a/target/riscv/common-semi-target.h b/target/riscv/common-semi-target.h
+index 7c8a59e0cc3..63bbcd2d5fa 100644
+--- a/target/riscv/common-semi-target.h
++++ b/target/riscv/common-semi-target.h
+@@ -25,11 +25,6 @@ static inline void common_semi_set_ret(CPUState *cs, target_ulong ret)
+     env->gpr[xA0] = ret;
+ }
  
- specific_ss.add(when: ['CONFIG_SEMIHOSTING', 'CONFIG_USER_ONLY'],
-                 if_true: files('syscalls.c'))
+-static inline bool common_semi_sys_exit_extended(CPUState *cs, int nr)
+-{
+-    return (nr == TARGET_SYS_EXIT_EXTENDED || sizeof(target_ulong) == 8);
+-}
+-
+ static inline bool is_64bit_semihosting(CPUArchState *env)
+ {
+     return riscv_cpu_mxl(env) != MXL_RV32;
+diff --git a/semihosting/arm-compat-semi.c b/semihosting/arm-compat-semi.c
+index 33614108094..1a3abd45c5b 100644
+--- a/semihosting/arm-compat-semi.c
++++ b/semihosting/arm-compat-semi.c
+@@ -755,7 +755,9 @@ void do_common_semihosting(CPUState *cs)
+     {
+         uint32_t ret;
+ 
+-        if (common_semi_sys_exit_extended(cs, nr)) {
++        bool extended = (nr == TARGET_SYS_EXIT_EXTENDED ||
++                         is_64bit_semihosting(cpu_env(cs)));
++        if (extended) {
+             /*
+              * The A64 version of SYS_EXIT takes a parameter block,
+              * so the application-exit type can return a subcode which
 -- 
 2.47.2
 
