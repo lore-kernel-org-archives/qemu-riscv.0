@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE734C87FCA
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 258A9C87FD2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:49:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uhb2m-00004u-9H; Thu, 31 Jul 2025 17:42:32 -0400
+	id 1uhb8i-0008CY-Rh; Thu, 31 Jul 2025 17:48:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapZ-0001uL-6i
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:53 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapI-0000qr-5t
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:36 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapW-0007xo-P9
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:52 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4563cfac19cso14658605e9.2
- for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:28:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapF-0007ua-Q0
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:35 -0400
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3b783ea502eso993448f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:28:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753997329; x=1754602129; darn=nongnu.org;
+ d=linaro.org; s=google; t=1753997312; x=1754602112; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s7mVqzkbs28pCgNpi8SZYEC1s3rbOHdivZGAjYGLV1c=;
- b=jZKRDNrnFwLB9pE6JVTge48BHOxQsZrtCWdzFKlTH+5IGa+5nxjqeu/vGymhtLvOHX
- nz2eFbURjYJ8vTpXoUD9PcVUyzjXZMyxNc8u6JCRR/rNaaQ3t/v/rwWNE2M2VZZIaIcZ
- mzSsLbdFXNePDunqrRKhHp8xgjAHc6hPLJZhNVC+uIg5R1S19T0liiHLgNgm+5eARnI4
- Ii7QVmHQHNz0qMbpr66Yj78QhAs6e5SssIy2th5M94RqoRhDptQGdAe6/mO8QkZiIuAH
- lsz2sxvr4fECqa07T0zC9UteWQgR4S+hteHcGn1FQxVAjAu7t2IATokjpsO9ycBv7AZW
- RbAg==
+ bh=6t4dl7I3YR65XFWp3ATfpWTUnCa6FCBH5piCnGFOEbA=;
+ b=hcLRFd7LG5LdT8pYLlh8Duhk5IWGe4LDY6uzAvrL2ThIoWDPIslUof7ZGbWNFRmJHt
+ hZDBS267Wo0+/wXx2hOEygGggy5gthro0lM9DDnL1MShaHfcik8bs/Ks19zlxC3OYjOM
+ QzxVYwwKqwUnJ6BYmYEFo1u3gDpjyd6SsAd7DDqOjziVvzOeBFaFf3jISLzLfFkvgWJD
+ yT/pXd1vLOhOlZQ/AZnSPGzweSEVn3lIh7AgVrZcr3AD/bTzhgJEg88XaUGnwvFCUvOs
+ mBCR4+bjc2dWbvDiC7u3ciW3ttNloEl+W1LShTaMXFmW0ZVkebZzRmdz4vWJ90fCscLX
+ 0DEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753997329; x=1754602129;
+ d=1e100.net; s=20230601; t=1753997312; x=1754602112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=s7mVqzkbs28pCgNpi8SZYEC1s3rbOHdivZGAjYGLV1c=;
- b=MVZNAnqT4SBKNVTG6uJEZjXsCCspII4fUI0cK72yjWGVlBRIeBDLQeUvWMKmt8CsPD
- inebvzk2oBY+JpQ1NG3hgCq26f/gbMvQIAS8lEaG+PJxhZJSxo29poidFsyzhhurgkf7
- aymqKBCZAcrDpOqrq4Hq2q8Fw1qsPG+7uL1nZcjfMl3bV7LTGdgc7bt2ozHdvN5gCmeZ
- DAppWD2Wf9xryRTs7MJDmb4eSdt/Cp+VfbuiYVnhNw3utuDOH4SoeC79buOAo4SDxHwI
- PAatpxiipdDvXb/9S/jMJfYdJTqndXNo73SyQxRtAYjA5nLMXg7qbGzM1LN5eKuwV/Sk
- Ep6w==
+ bh=6t4dl7I3YR65XFWp3ATfpWTUnCa6FCBH5piCnGFOEbA=;
+ b=ivDXbS72xfIdZVp6NntW7TXVnIe4ievPTMdz5z+lIixqKIBnPNtbDZZxnKEUEm6xBG
+ PdC3WEhkGRacyJOcIhblFBBiBAJamTeYln06JRuT9qh7i0hAxo43HIuPfchIytAmmOQl
+ NvrX/xkBGi4do0Hcovwkw3jwQZDIEyyWHQ5C/NZaL60bAkrJktW8gTJ7GX463MCtQjAO
+ ObFOyRw+BzI+zg3fM6P9GM7tIIuH/Hu2MF3sPZIx5vDP1inhl1i0ZvomcWLgG5F/8AuN
+ yGePIPYAlaMoNZ/qYS29+2d1LTA16/Sy0hnYerGOMPoGeBUmuCUBOiFynQpYAlADuYFA
+ rV1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW+gL0OcCi3rr7jVHZAW9IpdycHB3amCSHmv8AUrC0PUkGoZ+uBlDjl2x6WVYdeHDZjdH04/kfrBNu3@nongnu.org
-X-Gm-Message-State: AOJu0YzC0mCEtjlDljxsfvC9+XihBb9ZkmpEubuiP5QNt0wxU9/sv1GP
- pwVNc7hmq63dAL5UxZHK+CKouYnpE3xdqR34wSGbdDFgUZIco84rzfDU84oVTphIVI0=
-X-Gm-Gg: ASbGncvZrq/jdBaai4KWokoigdTXbPaN8KU4iwQuZLHcdLibuarKxunlHYQMsEuwcc4
- pCJcY3r5hHfkVwDuWfivFpgrf6Hmf99UdFxQCNaUJgm3Hg5BGZcyK75lIzoGeN2PfFClmUHmkaC
- v01Jl0oBsSfGsjTvqdWlmZmdTPitD81deJc0rKbyQjVNw8bnA2SkmUyd8oM7gDdld2azRCB6z0w
- 34DJtjTo5D9UPBrvNjzIepYeBTSnYkJUFz2WlHeIUR81VfwacGLPP4M1cw1DMzB6lzpCxK/cPTi
- dIq7zoDZmlDIw5BsolAVl/nLtMnHOUCfo9i036eIIpoDXyMCY4dWKf8gbDjq84lFY3Nqd5fBhWf
- 4rkKZjP1tEA0turTf0iIW0YIFWAZ7WqPxp9HJ2oRW3nfJ9PVAA8STJRbTSRkuK3/4clFTyVov
-X-Google-Smtp-Source: AGHT+IFCPNBycVrXvv6jP5Sb1x+FI6TNUlsCxeMHh2pnFyPN9SeeEM1PguaW6827RS0lOXuzANFKTQ==
-X-Received: by 2002:a05:600c:1388:b0:456:25e7:bed with SMTP id
- 5b1f17b1804b1-4589af5ba2fmr76998555e9.14.1753997329028; 
- Thu, 31 Jul 2025 14:28:49 -0700 (PDT)
+ AJvYcCUN/hqQ+hTWf8rDcI+OLgTWYopDpM8Or1qvGRN4/4FRz/KRCJ0EqlklNDPabK/WgXfny2QVtCWSATmT@nongnu.org
+X-Gm-Message-State: AOJu0Yw5wLtEsCOD87kGMR/IOs+a98ffdQBnUbObg5PK8m+M26/gEx5A
+ 5hpkBmhmkvrjaJwQbyhFmidwySCZKNoKPq0edQcCwvbRVOKAC1W76yDbt8bcJ0JEWu4=
+X-Gm-Gg: ASbGncsaNeYFcSR26voe1RQp3XG3SeRGzQCMnAGp/4keqnLq5eut8uGLaM+8OUCECgi
+ Ccxy8pkGwS1Yb6MUIv7xsCqBEHdYVonPEX79kwRWyx08FIki2r0XGfqXZciGWqrcywOgFbpYAYf
+ WO3Vy4JZ0nrBpN653IOGlahgDvfxOLcUMKt16Y/bQQtBTXK2jJShQHJtYdLe8LMMc5iuNp/EM2V
+ bOQdDzEscIJX0aN18LcovY8ylohZCmh392gu5d6bNoFWa3K4X+8dX454YGNZA5vG6MUPEvnAl4q
+ 8/EQjveL94ZVQjLyu7GkMlyhzNDhTN1MFnF6NJ7Z5TKv3k9CITxLfPy/3Q+KSPGASIuu0ycKMoP
+ Wa9trQvve9YHYjlS0bDkkqY3B9IbaOldQumJvfJ4nggFzKBOOv2lqGcY9E+sSrH8PmZ50kZV3
+X-Google-Smtp-Source: AGHT+IGM+QiNhY0H45ZaQRrmD89B5BwUhnmLFBeQd7WGDM/NkhjCE7ccuf/oqIrRdRrJt9Ep5Af0Ow==
+X-Received: by 2002:a5d:5f52:0:b0:3b7:8ed8:1c80 with SMTP id
+ ffacd0b85a97d-3b79d41deaemr2663579f8f.3.1753997312008; 
+ Thu, 31 Jul 2025 14:28:32 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4589ee4f164sm39164505e9.17.2025.07.31.14.28.47
+ ffacd0b85a97d-3b79c4534b3sm3532176f8f.47.2025.07.31.14.28.30
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Jul 2025 14:28:48 -0700 (PDT)
+ Thu, 31 Jul 2025 14:28:31 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Peter Maydell <peter.maydell@linaro.org>
@@ -77,18 +77,18 @@ Cc: Guenter Roeck <linux@roeck-us.net>, Palmer Dabbelt <palmer@dabbelt.com>,
  Ben Dooks <ben.dooks@codethink.co.uk>, Weiwei Li <liwei1518@gmail.com>,
  qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-10.1 07/11] hw/sd/sdcard: Allow using SWITCH_FUNCTION in
- more SPI states
-Date: Thu, 31 Jul 2025 23:28:02 +0200
-Message-ID: <20250731212807.2706-8-philmd@linaro.org>
+Subject: [PATCH-for-10.1 04/11] hw/sd/sdcard: Fill SPI response bits in card
+ code
+Date: Thu, 31 Jul 2025 23:27:59 +0200
+Message-ID: <20250731212807.2706-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250731212807.2706-1-philmd@linaro.org>
 References: <20250731212807.2706-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,36 +111,202 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In SPI mode, SWITCH_FUNCTION is valid in all mode
-(except the IDLE one).
+ssi-sd.c contains the SPI link layer adaptation,
+while sd.c contains all the SD card internal details.
 
-Fixes: 775616c3ae8 ("Partial SD card SPI mode support")
+We already handle the response values in sd.c, but
+missed the SPI case. Complete them (fill R1, prepend
+R1 in R3/R7 and always return something in SPI mode).
+Remove all the duplication in ssi-sd.c.
+
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/sd/sd.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ hw/sd/sd.c     | 31 +++++++++++++++---
+ hw/sd/ssi-sd.c | 87 ++++----------------------------------------------
+ 2 files changed, 34 insertions(+), 84 deletions(-)
 
 diff --git a/hw/sd/sd.c b/hw/sd/sd.c
-index d6493d44734..04b3a1651c0 100644
+index 22bdb4ca3ab..f7c231d9f30 100644
 --- a/hw/sd/sd.c
 +++ b/hw/sd/sd.c
-@@ -1476,8 +1476,14 @@ static sd_rsp_type_t sd_cmd_SWITCH_FUNCTION(SDState *sd, SDRequest req)
-     if (sd->mode != sd_data_transfer_mode) {
-         return sd_invalid_mode_for_cmd(sd, req);
-     }
--    if (sd->state != sd_transfer_state) {
--        return sd_invalid_state_for_cmd(sd, req);
-+    if (sd_is_spi(sd)) {
-+        if (sd->state == sd_idle_state) {
-+            return sd_invalid_state_for_cmd(sd, req);
-+        }
-+    } else {
-+        if (sd->state != sd_transfer_state) {
-+            return sd_invalid_state_for_cmd(sd, req);
-+        }
-     }
+@@ -731,10 +731,25 @@ static int sd_req_crc_validate(SDRequest *req)
  
-     sd_function_switch(sd, req.arg);
+ static size_t sd_response_r1_make(SDState *sd, uint8_t *response, size_t respsz)
+ {
+-    size_t rsplen = 4;
++    size_t rsplen;
+ 
+-    assert(respsz >= 4);
+-    stl_be_p(response, sd->card_status);
++    if (sd_is_spi(sd)) {
++        assert(respsz >= 1);
++        response[0] = sd->state == sd_idle_state
++                   && !FIELD_EX32(sd->ocr, OCR, CARD_POWER_UP);
++        response[0] |= FIELD_EX32(sd->card_status, CSR, ERASE_RESET) << 1;
++        response[0] |= FIELD_EX32(sd->card_status, CSR, ILLEGAL_COMMAND) << 2;
++        response[0] |= FIELD_EX32(sd->card_status, CSR, COM_CRC_ERROR) << 3;
++        response[0] |= FIELD_EX32(sd->card_status, CSR, ERASE_SEQ_ERROR) << 4;
++        response[0] |= FIELD_EX32(sd->card_status, CSR, ADDRESS_ERROR) << 5;
++        response[0] |= FIELD_EX32(sd->card_status, CSR, BLOCK_LEN_ERROR) << 6;
++        response[0] |= 0 << 7;
++        rsplen = 1;
++    } else {
++        assert(respsz >= 4);
++        stl_be_p(response, sd->card_status);
++        rsplen = 4;
++    }
+ 
+     /* Clear the "clear on read" status bits */
+     sd->card_status &= ~CARD_STATUS_C;
+@@ -746,6 +761,10 @@ static size_t sd_response_r3_make(SDState *sd, uint8_t *response, size_t respsz)
+ {
+     size_t rsplen = 4;
+ 
++    if (sd_is_spi(sd)) {
++        rsplen += sd_response_r1_make(sd, response, respsz);
++        response++;
++    }
+     assert(respsz >= rsplen);
+     stl_be_p(response, sd->ocr & ACMD41_R3_MASK);
+ 
+@@ -771,6 +790,10 @@ static size_t sd_response_r7_make(SDState *sd, uint8_t *response, size_t respsz)
+ {
+     size_t rsplen = 4;
+ 
++    if (sd_is_spi(sd)) {
++        rsplen += sd_response_r1_make(sd, response, respsz);
++        response++;
++    }
+     assert(respsz >= rsplen);
+     stl_be_p(response, sd->vhs);
+ 
+@@ -2261,7 +2284,7 @@ send_response:
+         sd->data_offset = 0;
+         /* fall-through */
+     case sd_illegal:
+-        rsplen = 0;
++        rsplen = sd_is_spi(sd) ? sd_response_r1_make(sd, response, respsz) : 0;
+         break;
+     default:
+         g_assert_not_reached();
+diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
+index 3aba0e08ffe..79b6d34a489 100644
+--- a/hw/sd/ssi-sd.c
++++ b/hw/sd/ssi-sd.c
+@@ -70,23 +70,6 @@ struct ssi_sd_state {
+ #define TYPE_SSI_SD "ssi-sd"
+ OBJECT_DECLARE_SIMPLE_TYPE(ssi_sd_state, SSI_SD)
+ 
+-/* State word bits.  */
+-#define SSI_SDR_LOCKED          0x0001
+-#define SSI_SDR_WP_ERASE        0x0002
+-#define SSI_SDR_ERROR           0x0004
+-#define SSI_SDR_CC_ERROR        0x0008
+-#define SSI_SDR_ECC_FAILED      0x0010
+-#define SSI_SDR_WP_VIOLATION    0x0020
+-#define SSI_SDR_ERASE_PARAM     0x0040
+-#define SSI_SDR_OUT_OF_RANGE    0x0080
+-#define SSI_SDR_IDLE            0x0100
+-#define SSI_SDR_ERASE_RESET     0x0200
+-#define SSI_SDR_ILLEGAL_COMMAND 0x0400
+-#define SSI_SDR_COM_CRC_ERROR   0x0800
+-#define SSI_SDR_ERASE_SEQ_ERROR 0x1000
+-#define SSI_SDR_ADDRESS_ERROR   0x2000
+-#define SSI_SDR_PARAMETER_ERROR 0x4000
+-
+ /* multiple block write */
+ #define SSI_TOKEN_MULTI_WRITE   0xfc
+ /* terminate multiple block write */
+@@ -104,7 +87,7 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+ {
+     ssi_sd_state *s = SSI_SD(dev);
+     SDRequest request;
+-    uint8_t longresp[16];
++    uint8_t longresp[5];
+ 
+     /*
+      * Special case: allow CMD12 (STOP TRANSMISSION) while reading data.
+@@ -171,74 +154,18 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
+             /* FIXME: Check CRC.  */
+             request.cmd = s->cmd;
+             request.arg = ldl_be_p(s->cmdarg);
+-            DPRINTF("CMD%d arg 0x%08x\n", s->cmd, request.arg);
+             s->arglen = sdbus_do_command(&s->sdbus, &request,
+                                          longresp, sizeof(longresp));
+-            if (s->arglen == 0) {
+-                s->arglen = 1;
+-                s->response[0] = 4;
+-                DPRINTF("SD command failed\n");
+-            } else if (s->cmd == 8 || s->cmd == 58) {
+-                /* CMD8/CMD58 returns R3/R7 response */
+-                DPRINTF("Returned R3/R7\n");
+-                s->arglen = 5;
+-                s->response[0] = 1;
+-                memcpy(&s->response[1], longresp, 4);
+-            } else if (s->arglen != 4) {
+-                BADF("Unexpected response to cmd %d\n", s->cmd);
+-                /* Illegal command is about as near as we can get.  */
+-                s->arglen = 1;
+-                s->response[0] = 4;
+-            } else {
+-                /* All other commands return status.  */
+-                uint32_t cardstatus;
+-                uint16_t status;
++            DPRINTF("CMD%d arg 0x%08x = %d\n", s->cmd, request.arg, s->arglen);
++            assert(s->arglen > 0);
+                 /* CMD13 returns a 2-byte statuse work. Other commands
+                    only return the first byte.  */
+                 s->arglen = (s->cmd == 13) ? 2 : 1;
++            memcpy(s->response, longresp, s->arglen);
+ 
+-                /* handle R1b */
+-                if (s->cmd == 28 || s->cmd == 29 || s->cmd == 38) {
+-                    s->stopping = 1;
+-                }
+-
+-                cardstatus = ldl_be_p(longresp);
+-                status = 0;
+-                if (((cardstatus >> 9) & 0xf) < 4)
+-                    status |= SSI_SDR_IDLE;
+-                if (cardstatus & ERASE_RESET)
+-                    status |= SSI_SDR_ERASE_RESET;
+-                if (cardstatus & ILLEGAL_COMMAND)
+-                    status |= SSI_SDR_ILLEGAL_COMMAND;
+-                if (cardstatus & COM_CRC_ERROR)
+-                    status |= SSI_SDR_COM_CRC_ERROR;
+-                if (cardstatus & ERASE_SEQ_ERROR)
+-                    status |= SSI_SDR_ERASE_SEQ_ERROR;
+-                if (cardstatus & ADDRESS_ERROR)
+-                    status |= SSI_SDR_ADDRESS_ERROR;
+-                if (cardstatus & CARD_IS_LOCKED)
+-                    status |= SSI_SDR_LOCKED;
+-                if (cardstatus & (LOCK_UNLOCK_FAILED | WP_ERASE_SKIP))
+-                    status |= SSI_SDR_WP_ERASE;
+-                if (cardstatus & SD_ERROR)
+-                    status |= SSI_SDR_ERROR;
+-                if (cardstatus & CC_ERROR)
+-                    status |= SSI_SDR_CC_ERROR;
+-                if (cardstatus & CARD_ECC_FAILED)
+-                    status |= SSI_SDR_ECC_FAILED;
+-                if (cardstatus & WP_VIOLATION)
+-                    status |= SSI_SDR_WP_VIOLATION;
+-                if (cardstatus & ERASE_PARAM)
+-                    status |= SSI_SDR_ERASE_PARAM;
+-                if (cardstatus & (OUT_OF_RANGE | CID_CSD_OVERWRITE))
+-                    status |= SSI_SDR_OUT_OF_RANGE;
+-                /* ??? Don't know what Parameter Error really means, so
+-                   assume it's set if the second byte is nonzero.  */
+-                if (status & 0xff)
+-                    status |= SSI_SDR_PARAMETER_ERROR;
+-                s->response[0] = status >> 8;
+-                s->response[1] = status;
+-                DPRINTF("Card status 0x%02x\n", status);
++            /* handle R1b (busy signal) */
++            if (s->cmd == 28 || s->cmd == 29 || s->cmd == 38) {
++                s->stopping = 1;
+             }
+             s->mode = SSI_SD_PREP_RESP;
+             s->response_pos = 0;
 -- 
 2.49.0
 
