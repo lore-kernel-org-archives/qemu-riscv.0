@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98A4CC87FCA
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC29C87FD2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:49:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uhb8A-0007QU-ND; Thu, 31 Jul 2025 17:48:06 -0400
+	id 1uhb8G-0007b3-Rs; Thu, 31 Jul 2025 17:48:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhaow-0008BC-AM
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:14 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapC-0000WE-8m
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:30 -0400
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhaot-0007pK-9c
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:13 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-45896cf24ebso2444605e9.1
- for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:28:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapA-0007tc-7b
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:29 -0400
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3b783d851e6so187702f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:28:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753997289; x=1754602089; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=4rW26l1ud9Wfnd9RpVRyL7qycFijHbATbRRp9qeZyns=;
- b=kLQfttBjRdsL2wU8rTxER1bOyIQ5uOUVBWZBGTy2IdCZuy0cQFnWFwjKxZEzxN2ZDY
- X9HFTIqxuCN2tofeF8FqFEZhtvoEwG4aVRrs6WpuWNntvzDzbmZx+UzilCHmtppAZjow
- EFGUmqbzm/cE1D7El1KKjBvvmsIJ4jw8RMC4rTw+4RLtM9gAsZHxVqK16rBaf3pfTkka
- 9EMnFmZS744zExcp0KZb9tI3XU4bRgfYFSSsc7gGh2xdMtHMmvpYLFugO53L8i1DzibM
- p1OrCDkwxVWxdnGFs0aZ8rxhYqzpR6TmMQSIkd+2dJjzpEHVpM+z2DbiSTHCzkYbBXEW
- KlCQ==
+ d=linaro.org; s=google; t=1753997306; x=1754602106; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3YPXddK5v6Xqtrub7LpqRKl+Wnp2Pnfr2Y1mDvAIzEY=;
+ b=guikIQ796S6Q8ndeZxADvDj0htenmATMken99Mucg0v+Stbqxk/3znVEpqW5ODP42n
+ xm7c6TZ1lEeWArjI46/U1/vHrYVEOe/U+Wg6+wF+E9nu1RzYXMbMkO5khQ+RAM1AWukb
+ JCPRVD+oBxXuSXXk1TRJ4GKY2pHLm0NRp7RFrfTOd0QcOUOaQvkg+FnsSIKL5VBYM0fu
+ 5xo8qQuWItrmCW4R7fZruMDcBzJyy1lUX0tV/7Kl5ztulWx8OxuGMj57fX0pjiTfF1P2
+ 7+AfyHCwX8FdeRUgL1nIGTfTd/NRI6gW3fpGjjxpJlOARz4FvPN659TaqP3EzVovcJO1
+ mzAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753997289; x=1754602089;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4rW26l1ud9Wfnd9RpVRyL7qycFijHbATbRRp9qeZyns=;
- b=rYH4niZ0Of5MT3FG+oJMrfZdCAwhaB6uFgLBMhL+TL2zVlH6lGQdA8aWAVxFrJ6k1B
- kzRHH10D4TAnUACS/VXd263BWnyOzDjWEF5Unzf9oM9F2P/VwZlxmgTclEtbdx2j+y/h
- uxW8Bl8YTXV3sR4tNwbVABLyTs2U4F5eb6IcMv5HwjQyw6aWFSwSXfgBHBViam1GAPOG
- CITCt0rdOA4SM4+93yszJTa0zpMyQBwty+YHK2Usw41JLbs7mC29mRehOSmQbQTzRD5t
- MGt2qstddFnNMq+tGXN2VL2YQEENN0pqEviEFuILdZpZ+zxrlEdzWsZ3Lnz9Bp/c/djb
- c5lg==
+ d=1e100.net; s=20230601; t=1753997306; x=1754602106;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3YPXddK5v6Xqtrub7LpqRKl+Wnp2Pnfr2Y1mDvAIzEY=;
+ b=c36OZ3FjSOv0BlmoDRlU06LwoMURwWMduL89vzh5sXpearRZ3rE2+wrbM5IYwE+9zB
+ 1Op9pKVaLJfMWkxFkyh3E0jjEzzXbhIRc8bajjwsKJehlZExw2pqXvjp0qNLYrbyjOiO
+ xeZHj4CVtVcZNe37KhESbKJ7/yvnlf1hMQksXrCE7QE0mwl9eQ6y7EyxjKe9C4hgWVBj
+ XS9gz5rC2XGLupi2HhgvgCj9xFYo5a46jKB/zOPXgp/IyLqtSiBru69NAeLJ5GdhiEV3
+ ODNIp/K+VNPUgOWrYyZC5UfEVSBlu98MZ/f2JmBVQJXXKayHHnBJ2OvRy0Cjh/Ca6Ytn
+ QUoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZWN7TRmgstpMhrfH19OyScn6dtFVQRgwZwlVZTA5Am4SIuajn5vJ8oLvWVB4aOXpCvteoUWfnhTPX@nongnu.org
-X-Gm-Message-State: AOJu0YweTot+hA3+qLcfcVbkvOl+giiFYbzqta7T0MgexgAnTo6bUE8t
- nGLoEC8iq1Ym0ICPPpUgVijqWKrq/jaVm2xYaaSIFa+AGB8HUikBhd+/hYB8KPDCfj8=
-X-Gm-Gg: ASbGnctlyQhrrjLELseafDc/G095YdOHr7NIj/BxTHktOuDMFzAmmRufNNQFL6pTYiS
- pfJ+g5xVb/iQshRUSYH09fA7p2LCYN2mbRwkcGvCDYyt330FKNrq4+Sa8RUdgMhqfHK0Dh/FOVw
- BMHNAO2CwZOL/XTOCNLs3NIjoHpALLgURzcbUQA96tco31UtUTxCqM+szz0GIa+CoCDW/6b9bjt
- T3EeyUBLd8tHckMPvZ2HDkW2pToR/yVbiOuGaGuvHNhow0b/BZO1d2cVXGj4OTbvFADmCwpe+Mj
- 4b1vIn49azuyYwFuOCNXJ25UaujQ5FP/01aPy54Va/gD/6JH71jSuwGw+bLcWe2PGuBfVBx2iA4
- HELtRImhoorQJOiblSAHExGRBL8EwVPTqZM3nu++eJ6P9tKND5JZzyMOwLK9f6cWvjaKvr07o
-X-Google-Smtp-Source: AGHT+IGNzl4rHqWQuUXdfDwKPQIL/yr4xm1fSXN8V5qZ8dXCcqXi6wDeJw20xy8sUvmXMHmDChzwng==
-X-Received: by 2002:a05:600c:8b63:b0:43c:fdbe:4398 with SMTP id
- 5b1f17b1804b1-45892b93413mr80723945e9.6.1753997289525; 
- Thu, 31 Jul 2025 14:28:09 -0700 (PDT)
+ AJvYcCVwYGS5wi0S68fJuXpYN55cMgwe+s7R+X3j08tRQMbdTncRyqe5WYDUtN/HEvfB/Q6z0BL33GBxv4KH@nongnu.org
+X-Gm-Message-State: AOJu0YwM2NPm9p5N6pIyYevx9Ex2HLrBLNIoRXyQU6B6hpOht817i5JY
+ L52DL89tMMBzBfua/rynArjHYbJcqUgVwfh927P1Sek3a3a3g+5tN9d1qtcMKjEAWmo=
+X-Gm-Gg: ASbGncvZfCmD8YUOj+dy0oEmi0g/Y1R1qFVIhV8nWEajJI7NLYHAFL+gdit+dIJxFQ4
+ Uh0Oyl6zWjva0uF51lDrK9MYS/aXfrWZt3mpkK3y81vSc/YQlxJt3WGwZRa/XvH9g4sM/pfAvTb
+ lu/i3cFrdFr7Z6aeJ9GcJs14PpDGYAjBCHSwmuGbXdKisPd94tT6uV66dZICz1nWCZHJ3unFulm
+ E3WPTqeioPWyhcUdNAFzK1IZyOXoICMxpoXu8FK/Q9RwBUM/CAUstzKC9YmQlyk16w+q1PZQp08
+ gKIo5UD4Xdbj97Lnx/9RuKi07aUl5ECG3h9WZ6ER2e7Rcw+sUq1K2AtqxaMsLurgqpaMVzXUzH8
+ 4mQXe0YLPnVA2LodGr03MwlFK6oeNOZ6DQpMeJKUce7yaXv2tXeb8V3lIDZgVjvfoAa4ZHvkNT6
+ yTaDCBYCE=
+X-Google-Smtp-Source: AGHT+IGI/zApcUREjex3r/KFRt72ym9B43x474plpmVmVHVsNwAXFaOO3Mt4foWnSu7ahDM6LVfaiw==
+X-Received: by 2002:adf:e9ca:0:b0:3a4:ef70:e0e1 with SMTP id
+ ffacd0b85a97d-3b795022391mr6020703f8f.55.1753997306488; 
+ Thu, 31 Jul 2025 14:28:26 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4588dd375e0sm81527455e9.2.2025.07.31.14.28.08
+ ffacd0b85a97d-3b79c3abec8sm3742066f8f.8.2025.07.31.14.28.25
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Jul 2025 14:28:09 -0700 (PDT)
+ Thu, 31 Jul 2025 14:28:26 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Peter Maydell <peter.maydell@linaro.org>
@@ -76,15 +78,18 @@ Cc: Guenter Roeck <linux@roeck-us.net>, Palmer Dabbelt <palmer@dabbelt.com>,
  Ben Dooks <ben.dooks@codethink.co.uk>, Weiwei Li <liwei1518@gmail.com>,
  qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-10.1 00/11] hw/sd: Fix SD cards in SPI mode
-Date: Thu, 31 Jul 2025 23:27:55 +0200
-Message-ID: <20250731212807.2706-1-philmd@linaro.org>
+Subject: [PATCH-for-10.1 03/11] hw/sd/sdcard: Propagate response size to
+ sd_response_r*_make()
+Date: Thu, 31 Jul 2025 23:27:58 +0200
+Message-ID: <20250731212807.2706-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250731212807.2706-1-philmd@linaro.org>
+References: <20250731212807.2706-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,53 +112,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series fix a pair of issues with SD cards used wired
-via a SPI link / controller.
+All sd_response_r*_make() fill the @response buffer. Now that
+sd_do_command() knows the buffer size, propagate it to the
+response fillers and assert for any overflow.
 
-Such mode implementation was minimal. I was testing it with
-the ARM Gumstix machines, but we remove them in the v9.2.0
-release (commit a2ccff4d2bc ), so they bit-rotted.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/sd/sd.c | 40 ++++++++++++++++++++++++++++------------
+ 1 file changed, 28 insertions(+), 12 deletions(-)
 
-Although the series looks big, I shrinked it a lot to have
-the minimum amount of meaningful changes. Other changes
-added during debugging will be shared later, as I believe
-they will still be useful to debug other future issues.
-
-The last patch add testing coverage, to avoid further bitrot.
-
-Regards,
-
-Phil.
-
-Philippe Mathieu-Daudé (11):
-  hw/sd/sdcard: Do not ignore errors in sd_cmd_to_sendingdata()
-  hw/sd/sdbus: Provide buffer size to sdbus_do_command()
-  hw/sd/sdcard: Propagate response size to sd_response_r*_make()
-  hw/sd/sdcard: Fill SPI response bits in card code
-  hw/sd/sdcard: Implement SPI R2 return value
-  hw/sd/sdcard: Use complete SEND_OP_COND implementation in SPI mode
-  hw/sd/sdcard: Allow using SWITCH_FUNCTION in more SPI states
-  hw/sd/sdcard: Factor spi_cmd_SEND_CxD() out
-  hw/sd/sdcard: Disable checking STBY mode in SPI SEND_CSD/CID
-  hw/sd/sdcard: Remove SDState::mode field
-  tests/functional: Test SD cards in SPI mode (using sifive_u machine)
-
- MAINTAINERS                               |   1 +
- include/hw/sd/sd.h                        |  23 ++-
- hw/sd/allwinner-sdhost.c                  |   5 +-
- hw/sd/bcm2835_sdhost.c                    |   5 +-
- hw/sd/core.c                              |   5 +-
- hw/sd/omap_mmc.c                          |   2 +-
- hw/sd/pl181.c                             |   4 +-
- hw/sd/sd.c                                | 202 +++++++++++++++-------
- hw/sd/sdhci.c                             |   4 +-
- hw/sd/ssi-sd.c                            |  96 ++--------
- hw/sd/trace-events                        |   4 +-
- tests/functional/meson.build              |   1 +
- tests/functional/test_riscv64_sifive_u.py |  51 ++++++
- 13 files changed, 238 insertions(+), 165 deletions(-)
- create mode 100755 tests/functional/test_riscv64_sifive_u.py
-
+diff --git a/hw/sd/sd.c b/hw/sd/sd.c
+index 1d88aee38d5..22bdb4ca3ab 100644
+--- a/hw/sd/sd.c
++++ b/hw/sd/sd.c
+@@ -729,34 +729,52 @@ static int sd_req_crc_validate(SDRequest *req)
+     return sd_crc7(buffer, 5) != req->crc;  /* TODO */
+ }
+ 
+-static void sd_response_r1_make(SDState *sd, uint8_t *response)
++static size_t sd_response_r1_make(SDState *sd, uint8_t *response, size_t respsz)
+ {
++    size_t rsplen = 4;
++
++    assert(respsz >= 4);
+     stl_be_p(response, sd->card_status);
+ 
+     /* Clear the "clear on read" status bits */
+     sd->card_status &= ~CARD_STATUS_C;
++
++    return rsplen;
+ }
+ 
+-static void sd_response_r3_make(SDState *sd, uint8_t *response)
++static size_t sd_response_r3_make(SDState *sd, uint8_t *response, size_t respsz)
+ {
++    size_t rsplen = 4;
++
++    assert(respsz >= rsplen);
+     stl_be_p(response, sd->ocr & ACMD41_R3_MASK);
++
++    return rsplen;
+ }
+ 
+-static void sd_response_r6_make(SDState *sd, uint8_t *response)
++static size_t sd_response_r6_make(SDState *sd, uint8_t *response, size_t respsz)
+ {
+     uint16_t status;
+ 
++    assert(respsz >= 4);
+     status = ((sd->card_status >> 8) & 0xc000) |
+              ((sd->card_status >> 6) & 0x2000) |
+               (sd->card_status & 0x1fff);
+     sd->card_status &= ~(CARD_STATUS_C & 0xc81fff);
+     stw_be_p(response + 0, sd->rca);
+     stw_be_p(response + 2, status);
++
++    return 4;
+ }
+ 
+-static void sd_response_r7_make(SDState *sd, uint8_t *response)
++static size_t sd_response_r7_make(SDState *sd, uint8_t *response, size_t respsz)
+ {
++    size_t rsplen = 4;
++
++    assert(respsz >= rsplen);
+     stl_be_p(response, sd->vhs);
++
++    return rsplen;
+ }
+ 
+ static uint32_t sd_blk_len(SDState *sd)
+@@ -2207,33 +2225,31 @@ send_response:
+     switch (rtype) {
+     case sd_r1:
+     case sd_r1b:
+-        sd_response_r1_make(sd, response);
+-        rsplen = 4;
++        rsplen = sd_response_r1_make(sd, response, respsz);
+         break;
+ 
+     case sd_r2_i:
++        assert(respsz >= 16);
+         memcpy(response, sd->cid, sizeof(sd->cid));
+         rsplen = 16;
+         break;
+ 
+     case sd_r2_s:
++        assert(respsz >= 16);
+         memcpy(response, sd->csd, sizeof(sd->csd));
+         rsplen = 16;
+         break;
+ 
+     case sd_r3:
+-        sd_response_r3_make(sd, response);
+-        rsplen = 4;
++        rsplen = sd_response_r3_make(sd, response, respsz);
+         break;
+ 
+     case sd_r6:
+-        sd_response_r6_make(sd, response);
+-        rsplen = 4;
++        rsplen = sd_response_r6_make(sd, response, respsz);
+         break;
+ 
+     case sd_r7:
+-        sd_response_r7_make(sd, response);
+-        rsplen = 4;
++        rsplen = sd_response_r7_make(sd, response, respsz);
+         break;
+ 
+     case sd_r0:
 -- 
 2.49.0
 
