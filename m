@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB9FDC87FD2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:43:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10A20C87FD2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:43:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uhb2e-0007vj-FY; Thu, 31 Jul 2025 17:42:24 -0400
+	id 1uhb2e-0007xJ-QF; Thu, 31 Jul 2025 17:42:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapT-0001aY-JX
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:47 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapf-0002Ci-P7
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:29:04 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapR-0007wV-IG
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:47 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3b792b0b829so143195f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:28:45 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapc-0007yt-4f
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:58 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3b7823559a5so867337f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:28:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753997324; x=1754602124; darn=nongnu.org;
+ d=linaro.org; s=google; t=1753997334; x=1754602134; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pz9zKdw2mAwFUG5tOQkJs8yneXKkyowJKPF8euu8n00=;
- b=EV9gm93jUFHfcb3/gr62rvYL656pVoqwvyWbRYy0XoShF95fyeAvNYQaexhY+z6LWq
- 9MhNRSv53jn98jG14MSOaZuFmgrOUBKHibnz6VVU6WSMLLRbQvDTyh3jem481dWD5snT
- ZYv8id9c0v5CvgIPTU8UVBBj0+u2Ld6FSnvEewChId2mJ8pjg+rAWUZNFDJA0wcKHL/u
- Xmf6rsA+Ox3d4jIVw5GHPoRdkFIP+FhWPtaHAzJZsQ3aV4+4AaoVM71wtVA5iI2vnRz+
- QEKoguo1AV6RXEocTtVBMJs4geK1FRF+md/2rcrHQhV5YSACZb3DMoQZpnIdcPgAiAyS
- 74Xg==
+ bh=sBV+uzJ1KXdLFqT+HlvZO+Zs0JU9P9tlvSCNA6c7IfA=;
+ b=PlfSriAvvRpSbuh5wpaUfY+9+u3z/JpKwLB5379d/w4fvdEmfF34RaMPsAZ1CufcES
+ loY2vSXsxJD446nev10I7bAXSkkBzLefRezyY3gWePZf7jUS7DQ80mYFvmcslCSCCWYf
+ N+BUVPJNHBpmSIO75ZhQj1+ssQAjY5I3/Vn9ejLCAtS0SeASIodNX0gni/RaPLZq1O54
+ b/M4gmfKHE9hffoCri6wQftZZPAfWUE+EngkGVfsq8ofsLkXFgOZVpU85c6hTojrbyH+
+ 747uT8l5JnnUNWudNyrp9hgmABBPbfpVedLHYiwV0VQVFSebaDzkgZLm5Y9t2V9I1PTO
+ 4T0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753997324; x=1754602124;
+ d=1e100.net; s=20230601; t=1753997334; x=1754602134;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Pz9zKdw2mAwFUG5tOQkJs8yneXKkyowJKPF8euu8n00=;
- b=LMsbO8lOpF1UT3rkCaBjBU65Qmn9sojoc0tY0A+G0RwPstZUAcv+mQQdAbu9nalTWG
- f2/RWrEKIPfGv5hvIRqAJRC4MmlpuPf6HEqHr9mzGhfR00XTxiTIUacbtUqLBnkZXj/5
- MXvccRYc7XdctE8fiXXBCufnmbpk4X9HHya15Ct6QF+7oTg44bMSfu4ntRJNA5K/OqXQ
- k+VQpziD7LOgHkKEw4q9uiR9IKJ9LJwYWhTMefGRk5tJ4Tti/q/sAcZlMSqYl96wvV6r
- K9iOEkyT/FnF+gpAVCLp+QAMpjQAdfNAvR14qKykM+PQCPZmNn0NVoCelVHgxWGfdPRl
- sgug==
+ bh=sBV+uzJ1KXdLFqT+HlvZO+Zs0JU9P9tlvSCNA6c7IfA=;
+ b=RqQWi9ukqTQ7CdwvIC/zLdSeimFGKi3Fyf4S6ndUrSfYZUdtcA/hfjwfRvssztR5d1
+ ggQ9uV02fHMqc38/4/5JasuqgZqjdcCglbeXHjIpECN4do9e8Z2PIcfdACw0jhC+4sBC
+ sXQZz2PX89Ak+HdOoO6W5MrW6CKtduOXv3cXr6kgKqDkfp8ek0SoRDkkuNCHtxawvou5
+ LKezx5xa8RNDUH/jPzM+t6HSHfLGBhfunNR+hzgmCKpR3OOKokvbGYuiMEKUES/ZkFYP
+ 9F9a7vYbodtDZQy0UJnU9kihWajyd0byaz8dU+a7rlzWyl96s6zUfiBJ+uxGiDOfP+wN
+ 3hKg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUjJoQIIFsrXAJOrMgocJkGF7qU4hoha+FIrsrePOzBqN15Kf/KmOM66tWUa++FoMsBzLWyXMQ3Yh6K@nongnu.org
-X-Gm-Message-State: AOJu0Yz0Kaol5AuvaN4IinRdG6rfZxvG/z6u44hGdwLxuoZF4nkghGDh
- l/xgXaf1In+S6Nt4q77q/iRbcs8jflWC+E2BJ2WCN42WwE3CJt8rYw0Wl2YLo5RpJ7w=
-X-Gm-Gg: ASbGncuw4lGyCpb4SUIOslwZJHZ6mBL48af3RhZerOnVlD/G51bTUDADmz2OJIAIzwo
- tLLA+zRvDfWrpFlxPhLMCs0BRjurToFQ+vwWJ/OWSp0VbFF1YmgQKrg0HoD+seOMJZz7snOyZZM
- jg3QQlYd+rOdMZPQvhzlPAcBalBzSYzycN2zLAureyo+uK1CBfFj4F+SyaPqA2FV1Vmi/yMwQF1
- oGtzLss38a5AhnBoxno//D+O4IXL6F+T9jpXcujrr+oUAh2xzPshrQqZH38l3jKeH9URwQpvAeG
- Tro0rp/WqL9w35TuFJOuLeFwyGsj+GUyYInhxpt4jEI+k0sPhwlN47f+bG5XB5cIirhaI/nOaBi
- nWPASrziqrj7hXaTZMEE9dxKstMcq7EmY6z/FhTlWP94G+DZcPgYx+7LBgyIn0aui0FzuOYRt
-X-Google-Smtp-Source: AGHT+IEf9L3k7mfDKxCRxFGVv3T8l+t3zTYDAGh09vGam0zAIiUHP2i3KvQ/qNWaJmBtAOVyMC+K1w==
-X-Received: by 2002:a05:6000:4310:b0:3b7:8914:cd95 with SMTP id
- ffacd0b85a97d-3b794fc2b55mr8104682f8f.7.1753997323705; 
- Thu, 31 Jul 2025 14:28:43 -0700 (PDT)
+ AJvYcCVO/ssc4BvC5Q9NUgAcPpdNxTP7gHYy7KfdwSuLCqAOG5RPCX2vdHoRuWB0TppBz/UXfDtn4eh0VXFm@nongnu.org
+X-Gm-Message-State: AOJu0YyKR2fc6BuIuRoMr81gDDurUVJn0xmeremWwsgNlZP0f1lozuYE
+ K7gPq+29SOvaiL22yHGxfzgKRNFcOmMB9B63cpsFcxY0nhv8iU/rnBnUZyDK0LyJ51c=
+X-Gm-Gg: ASbGncu5voxcn410V6h9T9ziW77ag/vaAcCjeU8e+IIMsckQeaQaXWo1skKVeKd9jxB
+ 4Cxm1F2mdGgwHSbbK5vLrL+ETlIpc/4hwXt3mbqF1Jno2fVd1qDSi3mORhwxfY0N4Rdfy8NIxyo
+ 24nSDYjO7prSdfAtLRsLCMpsZa0nm9u7IWOEEInx+2dw8waHOWP0isaU/7/tFtOtusETxob+mHo
+ 8v0KNZqnkZjuzaWVYnfhLFrfZmQ+FAwyQRMMatN9jp1NHyDhOqSaRLOAPWpxp7Aonwh9MqJWXD/
+ vrr9Ty1VfXc6ZxVQJm1XtrON9aD3xwBIFjwjtzBn3dejiCW/jBraOrVFwBCRwOQGAIuwWDzWCrj
+ 139vVfovyoMhFhmzXuV+ghcEkMSdK5TQ3VIFit2nPUh2dMp2pL+mtVvq3ukeyEojcaqlbvQEDig
+ LdX0VuvI8=
+X-Google-Smtp-Source: AGHT+IHO4HikjPZVpifbu6NuUKtGd2+RYTWDmPJ0XDxxx1BabiJc8mK25TDq7amE/f6P8BgxOR5Exw==
+X-Received: by 2002:a05:6000:2289:b0:3b7:89a3:80a5 with SMTP id
+ ffacd0b85a97d-3b795029a90mr7217951f8f.45.1753997334344; 
+ Thu, 31 Jul 2025 14:28:54 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4589ee628fcsm40155635e9.31.2025.07.31.14.28.41
+ ffacd0b85a97d-3b79c3abec8sm3743136f8f.8.2025.07.31.14.28.53
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Jul 2025 14:28:43 -0700 (PDT)
+ Thu, 31 Jul 2025 14:28:53 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Peter Maydell <peter.maydell@linaro.org>
@@ -77,18 +78,17 @@ Cc: Guenter Roeck <linux@roeck-us.net>, Palmer Dabbelt <palmer@dabbelt.com>,
  Ben Dooks <ben.dooks@codethink.co.uk>, Weiwei Li <liwei1518@gmail.com>,
  qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-10.1 06/11] hw/sd/sdcard: Use complete SEND_OP_COND
- implementation in SPI mode
-Date: Thu, 31 Jul 2025 23:28:01 +0200
-Message-ID: <20250731212807.2706-7-philmd@linaro.org>
+Subject: [PATCH-for-10.1 08/11] hw/sd/sdcard: Factor spi_cmd_SEND_CxD() out
+Date: Thu, 31 Jul 2025 23:28:03 +0200
+Message-ID: <20250731212807.2706-9-philmd@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250731212807.2706-1-philmd@linaro.org>
 References: <20250731212807.2706-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,63 +111,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-While spi_cmd_SEND_OP_COND() is incomplete, sd_cmd_SEND_OP_COND()
-is, except it doesn't return the correct value in SPI mode.
-Correct and use, removing the need for spi_cmd_SEND_OP_COND().
+spi_cmd_SEND_CSD() and spi_cmd_SEND_CID() are very
+similar. Factor the common code as spi_cmd_SEND_CxD().
 
-Fixes: 775616c3ae8 ("Partial SD card SPI mode support")
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/sd/sd.c | 15 +++++----------
- 1 file changed, 5 insertions(+), 10 deletions(-)
+ hw/sd/sd.c | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
 
 diff --git a/hw/sd/sd.c b/hw/sd/sd.c
-index 078bc5ef091..d6493d44734 100644
+index 04b3a1651c0..ef72ce717b8 100644
 --- a/hw/sd/sd.c
 +++ b/hw/sd/sd.c
-@@ -1402,14 +1402,6 @@ static sd_rsp_type_t sd_cmd_GO_IDLE_STATE(SDState *sd, SDRequest req)
-     return sd_is_spi(sd) ? sd_r1 : sd_r0;
+@@ -1576,14 +1576,19 @@ static sd_rsp_type_t emmc_cmd_SEND_EXT_CSD(SDState *sd, SDRequest req)
+                                  sd->ext_csd, sizeof(sd->ext_csd));
  }
  
--/* CMD1 */
--static sd_rsp_type_t spi_cmd_SEND_OP_COND(SDState *sd, SDRequest req)
--{
--    sd->state = sd_transfer_state;
--
--    return sd_r1;
--}
--
- /* CMD2 */
- static sd_rsp_type_t sd_cmd_ALL_SEND_CID(SDState *sd, SDRequest req)
+-/* CMD9 */
+-static sd_rsp_type_t spi_cmd_SEND_CSD(SDState *sd, SDRequest req)
++static sd_rsp_type_t spi_cmd_SEND_CxD(SDState *sd, SDRequest req,
++                                      const void *data, size_t size)
  {
-@@ -2034,6 +2026,9 @@ static sd_rsp_type_t sd_cmd_SEND_OP_COND(SDState *sd, SDRequest req)
-         sd->state = sd_ready_state;
+     if (sd->state != sd_standby_state) {
+         return sd_invalid_state_for_cmd(sd, req);
      }
- 
-+    if (sd_is_spi(sd)) {
-+        return sd_r1;
-+    }
-     return sd_r3;
+-    return sd_cmd_to_sendingdata(sd, req, sd_req_get_address(sd, req),
+-                                 sd->csd, 16);
++    return sd_cmd_to_sendingdata(sd, req, 0, data, size);
++}
++
++/* CMD9 */
++static sd_rsp_type_t spi_cmd_SEND_CSD(SDState *sd, SDRequest req)
++{
++    return spi_cmd_SEND_CxD(sd, req, sd->csd, sizeof(sd->csd));
  }
  
-@@ -2580,7 +2575,7 @@ static const SDProto sd_proto_spi = {
-     .name = "SPI",
-     .cmd = {
-         [0]  = {0,  sd_spi, "GO_IDLE_STATE", sd_cmd_GO_IDLE_STATE},
--        [1]  = {0,  sd_spi, "SEND_OP_COND", spi_cmd_SEND_OP_COND},
-+        [1]  = {0,  sd_spi, "SEND_OP_COND", sd_cmd_SEND_OP_COND},
-         [5]  = {9,  sd_spi, "IO_SEND_OP_COND", sd_cmd_optional},
-         [6]  = {10, sd_spi, "SWITCH_FUNCTION", sd_cmd_SWITCH_FUNCTION},
-         [8]  = {0,  sd_spi, "SEND_IF_COND", sd_cmd_SEND_IF_COND},
-@@ -2616,7 +2611,7 @@ static const SDProto sd_proto_spi = {
-         [13] = {8,  sd_spi, "SD_STATUS", sd_acmd_SD_STATUS},
-         [22] = {8,  sd_spi, "SEND_NUM_WR_BLOCKS", sd_acmd_SEND_NUM_WR_BLOCKS},
-         [23] = {8,  sd_spi, "SET_WR_BLK_ERASE_COUNT", sd_acmd_SET_WR_BLK_ERASE_COUNT},
--        [41] = {8,  sd_spi, "SEND_OP_COND", spi_cmd_SEND_OP_COND},
-+        [41] = {8,  sd_spi, "SEND_OP_COND", sd_cmd_SEND_OP_COND},
-         [42] = {8,  sd_spi, "SET_CLR_CARD_DETECT", sd_acmd_SET_CLR_CARD_DETECT},
-         [51] = {8,  sd_spi, "SEND_SCR", sd_acmd_SEND_SCR},
-     },
+ static sd_rsp_type_t sd_cmd_SEND_CSD(SDState *sd, SDRequest req)
+@@ -1598,11 +1603,7 @@ static sd_rsp_type_t sd_cmd_SEND_CSD(SDState *sd, SDRequest req)
+ /* CMD10 */
+ static sd_rsp_type_t spi_cmd_SEND_CID(SDState *sd, SDRequest req)
+ {
+-    if (sd->state != sd_standby_state) {
+-        return sd_invalid_state_for_cmd(sd, req);
+-    }
+-    return sd_cmd_to_sendingdata(sd, req, sd_req_get_address(sd, req),
+-                                 sd->cid, 16);
++    return spi_cmd_SEND_CxD(sd, req, sd->cid, sizeof(sd->cid));
+ }
+ 
+ static sd_rsp_type_t sd_cmd_SEND_CID(SDState *sd, SDRequest req)
 -- 
 2.49.0
 
