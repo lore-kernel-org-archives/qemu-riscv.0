@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 258A9C87FD2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98A4CC87FCA
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:49:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uhb8i-0008CY-Rh; Thu, 31 Jul 2025 17:48:40 -0400
+	id 1uhb8A-0007QU-ND; Thu, 31 Jul 2025 17:48:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapI-0000qr-5t
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:36 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhaow-0008BC-AM
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:14 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapF-0007ua-Q0
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:35 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3b783ea502eso993448f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:28:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhaot-0007pK-9c
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:13 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-45896cf24ebso2444605e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:28:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753997312; x=1754602112; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6t4dl7I3YR65XFWp3ATfpWTUnCa6FCBH5piCnGFOEbA=;
- b=hcLRFd7LG5LdT8pYLlh8Duhk5IWGe4LDY6uzAvrL2ThIoWDPIslUof7ZGbWNFRmJHt
- hZDBS267Wo0+/wXx2hOEygGggy5gthro0lM9DDnL1MShaHfcik8bs/Ks19zlxC3OYjOM
- QzxVYwwKqwUnJ6BYmYEFo1u3gDpjyd6SsAd7DDqOjziVvzOeBFaFf3jISLzLfFkvgWJD
- yT/pXd1vLOhOlZQ/AZnSPGzweSEVn3lIh7AgVrZcr3AD/bTzhgJEg88XaUGnwvFCUvOs
- mBCR4+bjc2dWbvDiC7u3ciW3ttNloEl+W1LShTaMXFmW0ZVkebZzRmdz4vWJ90fCscLX
- 0DEA==
+ d=linaro.org; s=google; t=1753997289; x=1754602089; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4rW26l1ud9Wfnd9RpVRyL7qycFijHbATbRRp9qeZyns=;
+ b=kLQfttBjRdsL2wU8rTxER1bOyIQ5uOUVBWZBGTy2IdCZuy0cQFnWFwjKxZEzxN2ZDY
+ X9HFTIqxuCN2tofeF8FqFEZhtvoEwG4aVRrs6WpuWNntvzDzbmZx+UzilCHmtppAZjow
+ EFGUmqbzm/cE1D7El1KKjBvvmsIJ4jw8RMC4rTw+4RLtM9gAsZHxVqK16rBaf3pfTkka
+ 9EMnFmZS744zExcp0KZb9tI3XU4bRgfYFSSsc7gGh2xdMtHMmvpYLFugO53L8i1DzibM
+ p1OrCDkwxVWxdnGFs0aZ8rxhYqzpR6TmMQSIkd+2dJjzpEHVpM+z2DbiSTHCzkYbBXEW
+ KlCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753997312; x=1754602112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6t4dl7I3YR65XFWp3ATfpWTUnCa6FCBH5piCnGFOEbA=;
- b=ivDXbS72xfIdZVp6NntW7TXVnIe4ievPTMdz5z+lIixqKIBnPNtbDZZxnKEUEm6xBG
- PdC3WEhkGRacyJOcIhblFBBiBAJamTeYln06JRuT9qh7i0hAxo43HIuPfchIytAmmOQl
- NvrX/xkBGi4do0Hcovwkw3jwQZDIEyyWHQ5C/NZaL60bAkrJktW8gTJ7GX463MCtQjAO
- ObFOyRw+BzI+zg3fM6P9GM7tIIuH/Hu2MF3sPZIx5vDP1inhl1i0ZvomcWLgG5F/8AuN
- yGePIPYAlaMoNZ/qYS29+2d1LTA16/Sy0hnYerGOMPoGeBUmuCUBOiFynQpYAlADuYFA
- rV1Q==
+ d=1e100.net; s=20230601; t=1753997289; x=1754602089;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4rW26l1ud9Wfnd9RpVRyL7qycFijHbATbRRp9qeZyns=;
+ b=rYH4niZ0Of5MT3FG+oJMrfZdCAwhaB6uFgLBMhL+TL2zVlH6lGQdA8aWAVxFrJ6k1B
+ kzRHH10D4TAnUACS/VXd263BWnyOzDjWEF5Unzf9oM9F2P/VwZlxmgTclEtbdx2j+y/h
+ uxW8Bl8YTXV3sR4tNwbVABLyTs2U4F5eb6IcMv5HwjQyw6aWFSwSXfgBHBViam1GAPOG
+ CITCt0rdOA4SM4+93yszJTa0zpMyQBwty+YHK2Usw41JLbs7mC29mRehOSmQbQTzRD5t
+ MGt2qstddFnNMq+tGXN2VL2YQEENN0pqEviEFuILdZpZ+zxrlEdzWsZ3Lnz9Bp/c/djb
+ c5lg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUN/hqQ+hTWf8rDcI+OLgTWYopDpM8Or1qvGRN4/4FRz/KRCJ0EqlklNDPabK/WgXfny2QVtCWSATmT@nongnu.org
-X-Gm-Message-State: AOJu0Yw5wLtEsCOD87kGMR/IOs+a98ffdQBnUbObg5PK8m+M26/gEx5A
- 5hpkBmhmkvrjaJwQbyhFmidwySCZKNoKPq0edQcCwvbRVOKAC1W76yDbt8bcJ0JEWu4=
-X-Gm-Gg: ASbGncsaNeYFcSR26voe1RQp3XG3SeRGzQCMnAGp/4keqnLq5eut8uGLaM+8OUCECgi
- Ccxy8pkGwS1Yb6MUIv7xsCqBEHdYVonPEX79kwRWyx08FIki2r0XGfqXZciGWqrcywOgFbpYAYf
- WO3Vy4JZ0nrBpN653IOGlahgDvfxOLcUMKt16Y/bQQtBTXK2jJShQHJtYdLe8LMMc5iuNp/EM2V
- bOQdDzEscIJX0aN18LcovY8ylohZCmh392gu5d6bNoFWa3K4X+8dX454YGNZA5vG6MUPEvnAl4q
- 8/EQjveL94ZVQjLyu7GkMlyhzNDhTN1MFnF6NJ7Z5TKv3k9CITxLfPy/3Q+KSPGASIuu0ycKMoP
- Wa9trQvve9YHYjlS0bDkkqY3B9IbaOldQumJvfJ4nggFzKBOOv2lqGcY9E+sSrH8PmZ50kZV3
-X-Google-Smtp-Source: AGHT+IGM+QiNhY0H45ZaQRrmD89B5BwUhnmLFBeQd7WGDM/NkhjCE7ccuf/oqIrRdRrJt9Ep5Af0Ow==
-X-Received: by 2002:a5d:5f52:0:b0:3b7:8ed8:1c80 with SMTP id
- ffacd0b85a97d-3b79d41deaemr2663579f8f.3.1753997312008; 
- Thu, 31 Jul 2025 14:28:32 -0700 (PDT)
+ AJvYcCWZWN7TRmgstpMhrfH19OyScn6dtFVQRgwZwlVZTA5Am4SIuajn5vJ8oLvWVB4aOXpCvteoUWfnhTPX@nongnu.org
+X-Gm-Message-State: AOJu0YweTot+hA3+qLcfcVbkvOl+giiFYbzqta7T0MgexgAnTo6bUE8t
+ nGLoEC8iq1Ym0ICPPpUgVijqWKrq/jaVm2xYaaSIFa+AGB8HUikBhd+/hYB8KPDCfj8=
+X-Gm-Gg: ASbGnctlyQhrrjLELseafDc/G095YdOHr7NIj/BxTHktOuDMFzAmmRufNNQFL6pTYiS
+ pfJ+g5xVb/iQshRUSYH09fA7p2LCYN2mbRwkcGvCDYyt330FKNrq4+Sa8RUdgMhqfHK0Dh/FOVw
+ BMHNAO2CwZOL/XTOCNLs3NIjoHpALLgURzcbUQA96tco31UtUTxCqM+szz0GIa+CoCDW/6b9bjt
+ T3EeyUBLd8tHckMPvZ2HDkW2pToR/yVbiOuGaGuvHNhow0b/BZO1d2cVXGj4OTbvFADmCwpe+Mj
+ 4b1vIn49azuyYwFuOCNXJ25UaujQ5FP/01aPy54Va/gD/6JH71jSuwGw+bLcWe2PGuBfVBx2iA4
+ HELtRImhoorQJOiblSAHExGRBL8EwVPTqZM3nu++eJ6P9tKND5JZzyMOwLK9f6cWvjaKvr07o
+X-Google-Smtp-Source: AGHT+IGNzl4rHqWQuUXdfDwKPQIL/yr4xm1fSXN8V5qZ8dXCcqXi6wDeJw20xy8sUvmXMHmDChzwng==
+X-Received: by 2002:a05:600c:8b63:b0:43c:fdbe:4398 with SMTP id
+ 5b1f17b1804b1-45892b93413mr80723945e9.6.1753997289525; 
+ Thu, 31 Jul 2025 14:28:09 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c4534b3sm3532176f8f.47.2025.07.31.14.28.30
+ 5b1f17b1804b1-4588dd375e0sm81527455e9.2.2025.07.31.14.28.08
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Jul 2025 14:28:31 -0700 (PDT)
+ Thu, 31 Jul 2025 14:28:09 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Peter Maydell <peter.maydell@linaro.org>
@@ -77,18 +76,15 @@ Cc: Guenter Roeck <linux@roeck-us.net>, Palmer Dabbelt <palmer@dabbelt.com>,
  Ben Dooks <ben.dooks@codethink.co.uk>, Weiwei Li <liwei1518@gmail.com>,
  qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-10.1 04/11] hw/sd/sdcard: Fill SPI response bits in card
- code
-Date: Thu, 31 Jul 2025 23:27:59 +0200
-Message-ID: <20250731212807.2706-5-philmd@linaro.org>
+Subject: [PATCH-for-10.1 00/11] hw/sd: Fix SD cards in SPI mode
+Date: Thu, 31 Jul 2025 23:27:55 +0200
+Message-ID: <20250731212807.2706-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250731212807.2706-1-philmd@linaro.org>
-References: <20250731212807.2706-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,202 +107,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-ssi-sd.c contains the SPI link layer adaptation,
-while sd.c contains all the SD card internal details.
+This series fix a pair of issues with SD cards used wired
+via a SPI link / controller.
 
-We already handle the response values in sd.c, but
-missed the SPI case. Complete them (fill R1, prepend
-R1 in R3/R7 and always return something in SPI mode).
-Remove all the duplication in ssi-sd.c.
+Such mode implementation was minimal. I was testing it with
+the ARM Gumstix machines, but we remove them in the v9.2.0
+release (commit a2ccff4d2bc ), so they bit-rotted.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- hw/sd/sd.c     | 31 +++++++++++++++---
- hw/sd/ssi-sd.c | 87 ++++----------------------------------------------
- 2 files changed, 34 insertions(+), 84 deletions(-)
+Although the series looks big, I shrinked it a lot to have
+the minimum amount of meaningful changes. Other changes
+added during debugging will be shared later, as I believe
+they will still be useful to debug other future issues.
 
-diff --git a/hw/sd/sd.c b/hw/sd/sd.c
-index 22bdb4ca3ab..f7c231d9f30 100644
---- a/hw/sd/sd.c
-+++ b/hw/sd/sd.c
-@@ -731,10 +731,25 @@ static int sd_req_crc_validate(SDRequest *req)
- 
- static size_t sd_response_r1_make(SDState *sd, uint8_t *response, size_t respsz)
- {
--    size_t rsplen = 4;
-+    size_t rsplen;
- 
--    assert(respsz >= 4);
--    stl_be_p(response, sd->card_status);
-+    if (sd_is_spi(sd)) {
-+        assert(respsz >= 1);
-+        response[0] = sd->state == sd_idle_state
-+                   && !FIELD_EX32(sd->ocr, OCR, CARD_POWER_UP);
-+        response[0] |= FIELD_EX32(sd->card_status, CSR, ERASE_RESET) << 1;
-+        response[0] |= FIELD_EX32(sd->card_status, CSR, ILLEGAL_COMMAND) << 2;
-+        response[0] |= FIELD_EX32(sd->card_status, CSR, COM_CRC_ERROR) << 3;
-+        response[0] |= FIELD_EX32(sd->card_status, CSR, ERASE_SEQ_ERROR) << 4;
-+        response[0] |= FIELD_EX32(sd->card_status, CSR, ADDRESS_ERROR) << 5;
-+        response[0] |= FIELD_EX32(sd->card_status, CSR, BLOCK_LEN_ERROR) << 6;
-+        response[0] |= 0 << 7;
-+        rsplen = 1;
-+    } else {
-+        assert(respsz >= 4);
-+        stl_be_p(response, sd->card_status);
-+        rsplen = 4;
-+    }
- 
-     /* Clear the "clear on read" status bits */
-     sd->card_status &= ~CARD_STATUS_C;
-@@ -746,6 +761,10 @@ static size_t sd_response_r3_make(SDState *sd, uint8_t *response, size_t respsz)
- {
-     size_t rsplen = 4;
- 
-+    if (sd_is_spi(sd)) {
-+        rsplen += sd_response_r1_make(sd, response, respsz);
-+        response++;
-+    }
-     assert(respsz >= rsplen);
-     stl_be_p(response, sd->ocr & ACMD41_R3_MASK);
- 
-@@ -771,6 +790,10 @@ static size_t sd_response_r7_make(SDState *sd, uint8_t *response, size_t respsz)
- {
-     size_t rsplen = 4;
- 
-+    if (sd_is_spi(sd)) {
-+        rsplen += sd_response_r1_make(sd, response, respsz);
-+        response++;
-+    }
-     assert(respsz >= rsplen);
-     stl_be_p(response, sd->vhs);
- 
-@@ -2261,7 +2284,7 @@ send_response:
-         sd->data_offset = 0;
-         /* fall-through */
-     case sd_illegal:
--        rsplen = 0;
-+        rsplen = sd_is_spi(sd) ? sd_response_r1_make(sd, response, respsz) : 0;
-         break;
-     default:
-         g_assert_not_reached();
-diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-index 3aba0e08ffe..79b6d34a489 100644
---- a/hw/sd/ssi-sd.c
-+++ b/hw/sd/ssi-sd.c
-@@ -70,23 +70,6 @@ struct ssi_sd_state {
- #define TYPE_SSI_SD "ssi-sd"
- OBJECT_DECLARE_SIMPLE_TYPE(ssi_sd_state, SSI_SD)
- 
--/* State word bits.  */
--#define SSI_SDR_LOCKED          0x0001
--#define SSI_SDR_WP_ERASE        0x0002
--#define SSI_SDR_ERROR           0x0004
--#define SSI_SDR_CC_ERROR        0x0008
--#define SSI_SDR_ECC_FAILED      0x0010
--#define SSI_SDR_WP_VIOLATION    0x0020
--#define SSI_SDR_ERASE_PARAM     0x0040
--#define SSI_SDR_OUT_OF_RANGE    0x0080
--#define SSI_SDR_IDLE            0x0100
--#define SSI_SDR_ERASE_RESET     0x0200
--#define SSI_SDR_ILLEGAL_COMMAND 0x0400
--#define SSI_SDR_COM_CRC_ERROR   0x0800
--#define SSI_SDR_ERASE_SEQ_ERROR 0x1000
--#define SSI_SDR_ADDRESS_ERROR   0x2000
--#define SSI_SDR_PARAMETER_ERROR 0x4000
--
- /* multiple block write */
- #define SSI_TOKEN_MULTI_WRITE   0xfc
- /* terminate multiple block write */
-@@ -104,7 +87,7 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
- {
-     ssi_sd_state *s = SSI_SD(dev);
-     SDRequest request;
--    uint8_t longresp[16];
-+    uint8_t longresp[5];
- 
-     /*
-      * Special case: allow CMD12 (STOP TRANSMISSION) while reading data.
-@@ -171,74 +154,18 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
-             /* FIXME: Check CRC.  */
-             request.cmd = s->cmd;
-             request.arg = ldl_be_p(s->cmdarg);
--            DPRINTF("CMD%d arg 0x%08x\n", s->cmd, request.arg);
-             s->arglen = sdbus_do_command(&s->sdbus, &request,
-                                          longresp, sizeof(longresp));
--            if (s->arglen == 0) {
--                s->arglen = 1;
--                s->response[0] = 4;
--                DPRINTF("SD command failed\n");
--            } else if (s->cmd == 8 || s->cmd == 58) {
--                /* CMD8/CMD58 returns R3/R7 response */
--                DPRINTF("Returned R3/R7\n");
--                s->arglen = 5;
--                s->response[0] = 1;
--                memcpy(&s->response[1], longresp, 4);
--            } else if (s->arglen != 4) {
--                BADF("Unexpected response to cmd %d\n", s->cmd);
--                /* Illegal command is about as near as we can get.  */
--                s->arglen = 1;
--                s->response[0] = 4;
--            } else {
--                /* All other commands return status.  */
--                uint32_t cardstatus;
--                uint16_t status;
-+            DPRINTF("CMD%d arg 0x%08x = %d\n", s->cmd, request.arg, s->arglen);
-+            assert(s->arglen > 0);
-                 /* CMD13 returns a 2-byte statuse work. Other commands
-                    only return the first byte.  */
-                 s->arglen = (s->cmd == 13) ? 2 : 1;
-+            memcpy(s->response, longresp, s->arglen);
- 
--                /* handle R1b */
--                if (s->cmd == 28 || s->cmd == 29 || s->cmd == 38) {
--                    s->stopping = 1;
--                }
--
--                cardstatus = ldl_be_p(longresp);
--                status = 0;
--                if (((cardstatus >> 9) & 0xf) < 4)
--                    status |= SSI_SDR_IDLE;
--                if (cardstatus & ERASE_RESET)
--                    status |= SSI_SDR_ERASE_RESET;
--                if (cardstatus & ILLEGAL_COMMAND)
--                    status |= SSI_SDR_ILLEGAL_COMMAND;
--                if (cardstatus & COM_CRC_ERROR)
--                    status |= SSI_SDR_COM_CRC_ERROR;
--                if (cardstatus & ERASE_SEQ_ERROR)
--                    status |= SSI_SDR_ERASE_SEQ_ERROR;
--                if (cardstatus & ADDRESS_ERROR)
--                    status |= SSI_SDR_ADDRESS_ERROR;
--                if (cardstatus & CARD_IS_LOCKED)
--                    status |= SSI_SDR_LOCKED;
--                if (cardstatus & (LOCK_UNLOCK_FAILED | WP_ERASE_SKIP))
--                    status |= SSI_SDR_WP_ERASE;
--                if (cardstatus & SD_ERROR)
--                    status |= SSI_SDR_ERROR;
--                if (cardstatus & CC_ERROR)
--                    status |= SSI_SDR_CC_ERROR;
--                if (cardstatus & CARD_ECC_FAILED)
--                    status |= SSI_SDR_ECC_FAILED;
--                if (cardstatus & WP_VIOLATION)
--                    status |= SSI_SDR_WP_VIOLATION;
--                if (cardstatus & ERASE_PARAM)
--                    status |= SSI_SDR_ERASE_PARAM;
--                if (cardstatus & (OUT_OF_RANGE | CID_CSD_OVERWRITE))
--                    status |= SSI_SDR_OUT_OF_RANGE;
--                /* ??? Don't know what Parameter Error really means, so
--                   assume it's set if the second byte is nonzero.  */
--                if (status & 0xff)
--                    status |= SSI_SDR_PARAMETER_ERROR;
--                s->response[0] = status >> 8;
--                s->response[1] = status;
--                DPRINTF("Card status 0x%02x\n", status);
-+            /* handle R1b (busy signal) */
-+            if (s->cmd == 28 || s->cmd == 29 || s->cmd == 38) {
-+                s->stopping = 1;
-             }
-             s->mode = SSI_SD_PREP_RESP;
-             s->response_pos = 0;
+The last patch add testing coverage, to avoid further bitrot.
+
+Regards,
+
+Phil.
+
+Philippe Mathieu-Daudé (11):
+  hw/sd/sdcard: Do not ignore errors in sd_cmd_to_sendingdata()
+  hw/sd/sdbus: Provide buffer size to sdbus_do_command()
+  hw/sd/sdcard: Propagate response size to sd_response_r*_make()
+  hw/sd/sdcard: Fill SPI response bits in card code
+  hw/sd/sdcard: Implement SPI R2 return value
+  hw/sd/sdcard: Use complete SEND_OP_COND implementation in SPI mode
+  hw/sd/sdcard: Allow using SWITCH_FUNCTION in more SPI states
+  hw/sd/sdcard: Factor spi_cmd_SEND_CxD() out
+  hw/sd/sdcard: Disable checking STBY mode in SPI SEND_CSD/CID
+  hw/sd/sdcard: Remove SDState::mode field
+  tests/functional: Test SD cards in SPI mode (using sifive_u machine)
+
+ MAINTAINERS                               |   1 +
+ include/hw/sd/sd.h                        |  23 ++-
+ hw/sd/allwinner-sdhost.c                  |   5 +-
+ hw/sd/bcm2835_sdhost.c                    |   5 +-
+ hw/sd/core.c                              |   5 +-
+ hw/sd/omap_mmc.c                          |   2 +-
+ hw/sd/pl181.c                             |   4 +-
+ hw/sd/sd.c                                | 202 +++++++++++++++-------
+ hw/sd/sdhci.c                             |   4 +-
+ hw/sd/ssi-sd.c                            |  96 ++--------
+ hw/sd/trace-events                        |   4 +-
+ tests/functional/meson.build              |   1 +
+ tests/functional/test_riscv64_sifive_u.py |  51 ++++++
+ 13 files changed, 238 insertions(+), 165 deletions(-)
+ create mode 100755 tests/functional/test_riscv64_sifive_u.py
+
 -- 
 2.49.0
 
