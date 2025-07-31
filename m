@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40DF4C87FCA
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:42:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 533C3C87FCA
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Jul 2025 21:42:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uhb28-0006SF-IL; Thu, 31 Jul 2025 17:41:53 -0400
+	id 1uhb2j-0008Fd-8X; Thu, 31 Jul 2025 17:42:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapS-0001W0-6a
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:46 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapj-0002IU-1E
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:29:05 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhapL-0007vW-Aj
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:28:45 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3b7848df30cso1463351f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:28:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uhaph-0007zv-F6
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 17:29:02 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4560add6cd2so10680835e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 14:29:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1753997317; x=1754602117; darn=nongnu.org;
+ d=linaro.org; s=google; t=1753997340; x=1754602140; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oWBEps/IHV7G68SkGN78QP86K/TyIINFKInszR+1c2o=;
- b=ebP6tiO3DCPWhK3zfDIkjAx1NVyv/gK+Kr/A6bHbsG1pQbshgbKkN7e1KDaI9657IE
- Bf2L9Gb5//z2LgBv5RgAGBYWlbPOgYdwgHUiQyFq0c2BalSuMHc5wIRiNPXcZCyH6Yc3
- 7XH670+7oVrxA4KmEACxd9viJ/b0jWlhL36q46Mxd72KzVYsmnyP/QTo75rmZ9jhkX+l
- 84gTdAoavOEJw1i7IIICXu0xiY5R2X3SeqULydLX3XCIp34awFIGVb+MVJ+7oJa01gQX
- u2fpU47MT5lEkZAjqvw4EzkQRW4Yks9w273B4I26+t6TfXuAVBn6R3dEOmcI5c9hP2PR
- Xbqw==
+ bh=Obt7l2dUxC1zZFfVKxnVIXG3NpYsLOMtlWCU49WAEg0=;
+ b=rHn+gtU/BZPOYKM1FvdO1B+JDY6UuL+hwppn203K2lKvC+O9cDEzHg7rfJaZOmfyH1
+ GVpGx05ro/QKKHaG1k5cqY2ywlSvSO+xLWBjeIEzR1YLqYuNnMRRtqeS3y4bZ/Lw35ck
+ Uf6RqXij7zMRrLDcs/Rxz95gt/xNG0ncUmPgwgiXC74rt5Ngjft8kH6Ud3o3zIXY3Vtf
+ 3vHLCJPB3JX+MOr8Ef3E2UticS2XjBg7pCYu4FRfsz5BOH3SkRyiFFBgsw4Yeat/XQPc
+ UIDsJhII3RDeLu7+ntxKhq8r31j98ORSJsDPcnLJim8ENOR0QLIUW/ugbgz8rh8hP2oX
+ 2lhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753997317; x=1754602117;
+ d=1e100.net; s=20230601; t=1753997340; x=1754602140;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oWBEps/IHV7G68SkGN78QP86K/TyIINFKInszR+1c2o=;
- b=g1GFw/bc7ZwZo38y2ddCLD3tZvzMeIdv3QVzZdrIilBjABmPMbqQEyPuTTcC5LFVUm
- p7nrUDqWXa+G1Q11x5NHBouEzrh+HUSdrIop/BK2E//VRucx8Yrcjf0/59+O7kN9yUkf
- Wt++sH7B5Q7qgqS/sOfa+MaOpGKj/lvoFrIhYbg9bUkD0tMKWddhLQrtEZWoDgpm0+Z7
- tf+V+/trtbDPOGWudqOkHMI5Vd3yGAohbKFmfA2GDq3Dtk2uM/CgSsTjogJRGQfs5cc0
- H4geY6Yif4tnH6k5tyjtUURaWomkHanIhUtWNf1sbv8EkxpUfZR6ejiHK6W2+E1xevCN
- vP7w==
+ bh=Obt7l2dUxC1zZFfVKxnVIXG3NpYsLOMtlWCU49WAEg0=;
+ b=sMfTYeULXGpb+PyyOCc+vwlPtdFWeuDQW1q2tpFgX72NgydpplZdJrdEDLc9iWyixs
+ +b+pCZUh/a6ocVZMiH9Vd+rJ3u7yh71sBTc2E4Z3A9zyAjXdJrMAzRyvFxuxHBs8D8UJ
+ ksGawU3933XnRfUKXwSDVYHGgN5QuUvfrOeWmOpa73gPHewLpKKGKMGfPq2hHF5J6at+
+ AcYZ19n+GcnJGdg1YRvpm7e2DuaL+txZrpARgCn35BOMud78lTDDN7WgCAOfzNL4+Wvz
+ IKYRsYfXNpbFkbtWuaK/EUJPAzAEJFfingO3nGJH2Fcbq9GVFZA9HgGyXt6aUW+kn1sT
+ 61TA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWBwl9ULzBybXwNTwflflfn2gduo6DRQ1pU8EGqHu1e5A7L1NtOUy+CQJaL5wB/paFBWmkpkp7lN9K@nongnu.org
-X-Gm-Message-State: AOJu0Yx8whoHSaDRYjC859GMOkZteMx2l15Kfpwy91F65rxN6xh/qIHq
- 4YEWcHAOFV+2YkcingpUlKeTpqukHFP7R1jVrRzQ0TAOFGk3ORCFGL7GaIu6xXFbOVw=
-X-Gm-Gg: ASbGncuju8Vypfkgd7vrRjqJucNOiwIJvaaFIpywzWl/dEIaebCKuKn7dbM+Aw76KCU
- Pqi09ozv8nhzaXGXLDIcO2ZcNFg6B4K8x1j0KyKk41gwjkL1kOAwFG2XuUgZwQv4w8xtGkCN9UF
- EmImLiC/rOmyo2WdN3YJgWkL0wH8tsDRRGTVI0RDMRyw6R6xsCnMVXlbz9xiaVrOfWQ2OX91etP
- 3etXE3gLNPW3RsqKA+4L1cR1DX+P0CdDvuE9AGxRpM/XZ8WsMj6DiS+pdQFSo5fHNDxPnIZKsgm
- G6j6wD1vurPcIWCgK88+vwshwLaZ8uLvrfyxbC6SE1/dmwddqMvH+phoO2w7rRDVqQLB+xr+WhW
- neASt51sdcMh8D3IDlxCvaBO1zKYrFIRM0zagMDIwhBhw34RFot5UuHmZjodPpNzr4HLKvZ8X
-X-Google-Smtp-Source: AGHT+IFjFXvvqb59RVjZVs8PSLccxOE6ccsUXrudgefeE44V5UyNFjtIJexdbtBY1GGye27mxbtnug==
-X-Received: by 2002:a05:6000:2004:b0:3b7:882c:778 with SMTP id
- ffacd0b85a97d-3b79d4e38b5mr2767800f8f.17.1753997317444; 
- Thu, 31 Jul 2025 14:28:37 -0700 (PDT)
+ AJvYcCXKww/tvBXfC0C4A5GRqXTYC00yRmV1vjvquFLr4vVojTbLvEwDzEQMrSRNZaKdb+VP+78beF96FD4w@nongnu.org
+X-Gm-Message-State: AOJu0YxKFngUucca8QtWHCrtkaHgxGEOv1Z60rCveE4xXMIQ1QoXKJEP
+ MzpVztQOolwA3eWGYbponxnfVL2owFj+3EQZ1PBoB+J/16GmYGT7gFjJOBTbKqPHZpU=
+X-Gm-Gg: ASbGncsHU9s8CH9Bj/z3etz2NFzwqd8hhX3GK3orwtFyRTjiSildCEoYiUGGrtNdc/X
+ iuMC6C3Ut7MtWBl53CsAeXYnjTfYthw+5vL39uvuqTrjB+hl6Gwh7Zhk3s/6Ak7v85b42dVJc/A
+ h4t3DtPL4McyI11Dz6N40XFOTsyJwQsbyDiBrRgnVHnw0VJWFVrD12bdyyJ5snY99b/vn5BPErM
+ tlqqD3SR+O6O4BUq9vC7QBck+UCRJsN72ZWYKmCTm3JZQOiCY8Xr71XPbwg6db5EJAKVDIykijD
+ WisyRVHiJKbEphMYNCUo2eoDjsuP13L5BXgtsIDSAxvU0YreseEnRT8YgWuKPfGZVGmkjVIjqnM
+ gF4c8UMPR9N1nbNpvzw0YKi7csWyW/65PIJ/P8dsIjKSW1KvIVN8VknzKYja/4zybAeF8Vt9P
+X-Google-Smtp-Source: AGHT+IF0x1KCEHM6qibFWkF/SRblq0y5j3s9nWHgsDMIjOquYMLJ1MWGmeq0wvW4yyd8xeqMt7qyOA==
+X-Received: by 2002:a05:600c:1d09:b0:458:6dea:af6f with SMTP id
+ 5b1f17b1804b1-458a2431906mr39548015e9.15.1753997339922; 
+ Thu, 31 Jul 2025 14:28:59 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c467994sm3569009f8f.50.2025.07.31.14.28.36
+ 5b1f17b1804b1-458981d0b06sm82538785e9.5.2025.07.31.14.28.58
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 31 Jul 2025 14:28:36 -0700 (PDT)
+ Thu, 31 Jul 2025 14:28:59 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org,
 	Peter Maydell <peter.maydell@linaro.org>
@@ -77,24 +77,25 @@ Cc: Guenter Roeck <linux@roeck-us.net>, Palmer Dabbelt <palmer@dabbelt.com>,
  Ben Dooks <ben.dooks@codethink.co.uk>, Weiwei Li <liwei1518@gmail.com>,
  qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-10.1 05/11] hw/sd/sdcard: Implement SPI R2 return value
-Date: Thu, 31 Jul 2025 23:28:00 +0200
-Message-ID: <20250731212807.2706-6-philmd@linaro.org>
+Subject: [PATCH-for-10.1 09/11] hw/sd/sdcard: Disable checking STBY mode in
+ SPI SEND_CSD/CID
+Date: Thu, 31 Jul 2025 23:28:04 +0200
+Message-ID: <20250731212807.2706-10-philmd@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250731212807.2706-1-philmd@linaro.org>
 References: <20250731212807.2706-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,114 +111,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In SPI mode, R2 is a 2-byte value.
-Implement in spi_response_r2_make() and
-return SPI R2 in the SEND_STATUS commands.
+The card should be in STANDBY mode to process SEND_CSD or SEND_CID,
+but is still in IDLE mode.
+
+Unfortunately I don't have enough time to keep debugging this issue,
+so disable the check for the time being and the next release, as it
+blocks Linux. I'll keep looking.
 
 Reported-by: Guenter Roeck <linux@roeck-us.net>
-Fixes: 775616c3ae8 ("Partial SD card SPI mode support")
+Reported-by: Ben Dooks <ben.dooks@codethink.co.uk>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/sd/sd.c     | 36 +++++++++++++++++++++++++++++++++---
- hw/sd/ssi-sd.c |  3 ---
- 2 files changed, 33 insertions(+), 6 deletions(-)
+ hw/sd/sd.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
 diff --git a/hw/sd/sd.c b/hw/sd/sd.c
-index f7c231d9f30..078bc5ef091 100644
+index ef72ce717b8..79395f7c5bb 100644
 --- a/hw/sd/sd.c
 +++ b/hw/sd/sd.c
-@@ -61,6 +61,7 @@
- typedef enum {
-     sd_r0 = 0,    /* no response */
-     sd_r1,        /* normal response command */
-+    spi_r2,       /* STATUS */
-     sd_r2_i,      /* CID register */
-     sd_r2_s,      /* CSD register */
-     sd_r3,        /* OCR register */
-@@ -247,6 +248,7 @@ static const char *sd_response_name(sd_rsp_type_t rsp)
-     static const char *response_name[] = {
-         [sd_r0]     = "RESP#0 (no response)",
-         [sd_r1]     = "RESP#1 (normal cmd)",
-+        [spi_r2]    = "RESP#2 (STATUS reg)",
-         [sd_r2_i]   = "RESP#2 (CID reg)",
-         [sd_r2_s]   = "RESP#2 (CSD reg)",
-         [sd_r3]     = "RESP#3 (OCR reg)",
-@@ -757,6 +759,24 @@ static size_t sd_response_r1_make(SDState *sd, uint8_t *response, size_t respsz)
-     return rsplen;
+@@ -1579,9 +1579,20 @@ static sd_rsp_type_t emmc_cmd_SEND_EXT_CSD(SDState *sd, SDRequest req)
+ static sd_rsp_type_t spi_cmd_SEND_CxD(SDState *sd, SDRequest req,
+                                       const void *data, size_t size)
+ {
++    /*
++     * XXX as of v10.1.0-rc1 command is reached in sd_idle_state,
++     * so disable this check.
+     if (sd->state != sd_standby_state) {
+         return sd_invalid_state_for_cmd(sd, req);
+     }
++    */
++
++    /*
++     * Since SPI returns CSD and CID on the DAT lines,
++     * switch to sd_transfer_state.
++     */
++    sd->state = sd_transfer_state;
++
+     return sd_cmd_to_sendingdata(sd, req, 0, data, size);
  }
  
-+static size_t spi_response_r2_make(SDState *sd, uint8_t *resp, size_t respsz)
-+{
-+    sd_response_r1_make(sd, resp, respsz);
-+
-+    assert(respsz >= 2);
-+    resp[1]  = FIELD_EX32(sd->card_status, CSR, CARD_IS_LOCKED) << 0;
-+    resp[1] |= (FIELD_EX32(sd->card_status, CSR, LOCK_UNLOCK_FAILED)
-+                || FIELD_EX32(sd->card_status, CSR, WP_ERASE_SKIP)) << 1;
-+    resp[1] |= FIELD_EX32(sd->card_status, CSR, ERROR) << 2;
-+    resp[1] |= FIELD_EX32(sd->card_status, CSR, CC_ERROR) << 3;
-+    resp[1] |= FIELD_EX32(sd->card_status, CSR, CARD_ECC_FAILED) << 4;
-+    resp[1] |= FIELD_EX32(sd->card_status, CSR, WP_VIOLATION) << 5;
-+    resp[1] |= FIELD_EX32(sd->card_status, CSR, ERASE_PARAM) << 6;
-+    resp[1] |= FIELD_EX32(sd->card_status, CSR, OUT_OF_RANGE) << 7;
-+
-+    return 2;
-+}
-+
- static size_t sd_response_r3_make(SDState *sd, uint8_t *response, size_t respsz)
- {
-     size_t rsplen = 4;
-@@ -1633,7 +1653,7 @@ static sd_rsp_type_t sd_cmd_SEND_STATUS(SDState *sd, SDRequest req)
-     }
- 
-     if (sd_is_spi(sd)) {
--        return sd_r2_s;
-+        return spi_r2;
-     }
- 
-     return sd_req_rca_same(sd, req) ? sd_r1 : sd_r0;
-@@ -1947,8 +1967,14 @@ static sd_rsp_type_t sd_acmd_SET_BUS_WIDTH(SDState *sd, SDRequest req)
- /* ACMD13 */
- static sd_rsp_type_t sd_acmd_SD_STATUS(SDState *sd, SDRequest req)
- {
--    return sd_cmd_to_sendingdata(sd, req, 0,
--                                 sd->sd_status, sizeof(sd->sd_status));
-+    sd_rsp_type_t rsp;
-+
-+    rsp = sd_cmd_to_sendingdata(sd, req, 0,
-+                                sd->sd_status, sizeof(sd->sd_status));
-+    if (sd_is_spi(sd) && rsp != sd_illegal) {
-+        return spi_r2;
-+    }
-+    return rsp;
- }
- 
- /* ACMD22 */
-@@ -2251,6 +2277,10 @@ send_response:
-         rsplen = sd_response_r1_make(sd, response, respsz);
-         break;
- 
-+    case spi_r2:
-+        rsplen = spi_response_r2_make(sd, response, respsz);
-+        break;
-+
-     case sd_r2_i:
-         assert(respsz >= 16);
-         memcpy(response, sd->cid, sizeof(sd->cid));
-diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-index 79b6d34a489..ace155186cf 100644
---- a/hw/sd/ssi-sd.c
-+++ b/hw/sd/ssi-sd.c
-@@ -158,9 +158,6 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
-                                          longresp, sizeof(longresp));
-             DPRINTF("CMD%d arg 0x%08x = %d\n", s->cmd, request.arg, s->arglen);
-             assert(s->arglen > 0);
--                /* CMD13 returns a 2-byte statuse work. Other commands
--                   only return the first byte.  */
--                s->arglen = (s->cmd == 13) ? 2 : 1;
-             memcpy(s->response, longresp, s->arglen);
- 
-             /* handle R1b (busy signal) */
 -- 
 2.49.0
 
