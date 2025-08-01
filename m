@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF08CC87FD3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Aug 2025 01:36:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30E08C87FD3
+	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Aug 2025 01:37:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uhehX-0005q2-R8; Thu, 31 Jul 2025 21:36:52 -0400
+	id 1uhei3-0006Vm-2v; Thu, 31 Jul 2025 21:37:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uheXp-00080M-Nr
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 21:26:50 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1uheWk-00073c-Lz
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 21:25:43 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uheXn-0006dQ-Vh
- for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 21:26:49 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2403df11a2aso8032735ad.0
- for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 18:26:47 -0700 (PDT)
+ id 1uheWj-0006LM-6Y
+ for qemu-riscv@nongnu.org; Thu, 31 Jul 2025 21:25:42 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-31329098ae8so1370993a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 31 Jul 2025 18:25:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754011606; x=1754616406; darn=nongnu.org;
+ d=linaro.org; s=google; t=1754011539; x=1754616339; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=vAFLFveFnl9hEIcUUREBOvWx+i0TTO48OUICvMS7lZg=;
- b=RvZGkrZfJh6srUjqkdwMZ2UDFWmt6GcH/9H61EHwqqXMOZRdYmU3d88VvnYrzzyTdp
- fQlDiuSzmRvruMeDuQ5gvPEdzTwQzevXROL1M6gj87qOQn2KXx0TtEwesRWl1o4LZ4UB
- 26xDho+sYrYJ3f926zAf67J4nSK1h4nrBLi+xcTVtC46GLOBQ6XgFaVyo1Icp4Daa/eF
- Z4SgtzF8gdwKbg3/gsH4Kjvgs7Seqon1dF8kG9Ri9ktBMVhY/C1X/+gDUzWW/ISRILfF
- 0qLA0MzyJFyjo2xCy/grnSEHbIy/JSD8pdRezkHENpDhYyQSE9vnIZXp++tt7SpRXBdw
- UrkQ==
+ bh=4PkS6NJWZlEvIkgId2xY2csCYbG80mFPQANLk+r2zgI=;
+ b=ziJpfYl9b6qIfVGgal4+6m+YfJU1nZAz/7F3qvWPQC1qgC0pOK/qLxKt8tck6dBnv9
+ ZKl6LY+db5im8IZcpkgXxtG5Lr2wBkSIXkOrOG5t7lqEKhp01get8kppNqheLiqBqROL
+ EQmUZw7swh0E/WBFBIyFlxD79Yg8SoXEiiZni1yuiKm6T1hxllSeIAu/NaD6kzO0TQuh
+ A+06vOtRo9fiQpqzQOGgXsGYogN1LNako0CGImegG2oQ9wA1PMzG+NanIHaG/Y/wLc1+
+ 7DeUYueoXtOIyhRLyhokGmfJE6KEJ/sbkZ5XwAEFmz938xcsTLr3B7WkMcgVn9Dlcl2C
+ wtlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754011606; x=1754616406;
+ d=1e100.net; s=20230601; t=1754011539; x=1754616339;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vAFLFveFnl9hEIcUUREBOvWx+i0TTO48OUICvMS7lZg=;
- b=ZbISKHARZpAuEAOn0AtnXwXacGRv8NhLh/ALdfiVJzgLV8j+rPCCdsF1HXTeg/xNxO
- 1lb3qWbLZ3EZRPhbYIc61h5rzoKXQbUcok8Pwyi9xPX83sqK+pvNyxVj+WK28xmkq3Uw
- 6oCpMofVkgElHh4cdumS73tk1ve5fQ2oMVfQsBa7GJSVCpFNfr+SpYCoRxFHipM+KtvG
- iBCejJTae/s5tWjNABkHaPkjZEdnD+O12q8RRW5D0Jw6E3TE4dKG1NR9CKykhDKDq+84
- V3Ihm3t6KxIuJF0dyQVthxmZyuHjBx/m30Oxp9tXsubgGfgLfD+4I2NE20wxwepmCz9x
- alRg==
+ bh=4PkS6NJWZlEvIkgId2xY2csCYbG80mFPQANLk+r2zgI=;
+ b=wWPSQVck8XBO1Al5yMlOpjaoE+pqVCl+s9TlWYAl4gLtosSEpdM/WqLhzx3ceGHUGV
+ FR+ZzKrLRSpcn8i+lhJqFfsDpWFT5vG4JAQtIxzOYyY43WM8cvGqfLF/9aExqBiKOQkp
+ 9AK67YxFApCNM8dbkI2a7gOXYYhPrCEJBTOJJNbnJy+aZFJ4r3wvsWb9/vB/eEesVhul
+ HwngHf9ShSAgX01YyHDgOhZn1aNzmuY0f23S0P7tl5mG7iEMHzT/QSus97dyk8kESwgC
+ MnMGa7SCgmcNcQhK4nP9QjUXtktXztOkRxHYrqHluNPYtW+TEmNPhjQ2CPeSES3sFB7e
+ M3qQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQ5sxW++reMtajES+MtuMmhbZHJTHL9GCSB7eQx+NvUDLBEyszOnI9kbrYl92BR6JLvOE5zjrEjDvH@nongnu.org
-X-Gm-Message-State: AOJu0YwN+7LBzxzwez+SJEzqRYN2BEg9Y9llaJcVEF2gUiwxYs2/QZqE
- AmDHhgssX2+zLmueapaV57iXd0yUImwo+j5W16wVFk0ho6s/uWSn6cS0IiA0WE75tVw=
-X-Gm-Gg: ASbGncuEdGv9MWS9jImh1hmaiOWPifc40Yhvu+KdkDsXiX853ynyjAs/alxGZlvSPVB
- Fol+0zod/szSdehnGRq2un6IXCa+gI2YmZ0J4ySacmf12pPAnkfk4C06vkZTQoSOxZ5gK1/eJAB
- JpxV9u8OO44fx0FzLNx8hC4ZMnkuoVldB+5YLFqSGQuCS9yYgRURTsO4BCB5FDTZc6Scrn0F+G2
- PhGO1I/SUZ56N/UrfS+4IPC/0d9vgkI3OrlQp0qHaIo0sl31oF1c+JPa8UW4Ts/QDPZbRjLN0A9
- OeI7yFNxgiSheKAPraTiJEywmKLTvCsC9Eh07H2LNJ5tuVGVOsChIGIqjoXS17JOSVBu8E9RPVW
- qjJwHJ0xrDm/wgbgH5+saPqiOShHFp+eg4vJN9p91
-X-Google-Smtp-Source: AGHT+IHk2SQ7+cvK7TCjbeCIpuNRqy0GS5UVCRvnaMUapBpXAhgmMJNtIoVoKFv9lmYP/H4sqBZkKw==
-X-Received: by 2002:a17:903:1c5:b0:240:14c:c648 with SMTP id
- d9443c01a7336-2422a699bd0mr11855235ad.25.1754011606047; 
- Thu, 31 Jul 2025 18:26:46 -0700 (PDT)
+ AJvYcCXgY0KbUDySaq0W5gNJCYafDZreed/6rWzWpib3p7TrFh0n52iNSen3j0xjC9wefwIfEUvWz38NP33c@nongnu.org
+X-Gm-Message-State: AOJu0Yxi+76MXiajTn0dY5Wr4aWR6/vJbntG5xF3JovLEeOHMI6CwGG2
+ /swk4YyONDKaeJTwCsoBoMT0M7Zk3yg3Nc365kMukZQSzuUPGZaUI6qu4MF3381rcwQ=
+X-Gm-Gg: ASbGncvGs4V/CI+H/MInmKeXB1Nu8AhDwEP7IgXGuOT6mDASFuy6eyxwb102b1KVVs3
+ iHi5ivU7JToyEEDjNe1KSKi97G0NobyjYCOz50dLKr9eDpOqTZbtCTSDVwBnwbJv6132BhpnnRP
+ Q8imMlLxHTyMtOVG41ZBTgIkXD7CisYxH6fUlSPWanhrjGNpwHusxUjT6UMK4aEtKhpognNTfEz
+ 9rjwqOg7WfLxoeNb0TLivvh6duP6jn+YPZ8AsF8Pet+jyppWDP1triN3ts2P6kDT+h8WWiNYpjB
+ +UxVSYMFZHFJXX1g+4aJQmZFHfjeKSuuOJik4Jxs/+/pV0K3FvbF6JI9QhfNlL7ON2L3/BFcbNu
+ tkR7PD+2c8sYx5UKo6oondNMLyB4+/fY2LY1LtzLp
+X-Google-Smtp-Source: AGHT+IEqzMwfSW69NBLAK9pMQKegBcPHAYyFTfJHUaz1tnLGrxUK1T8HSKLoxzoj/zLV9lfDq+eWJQ==
+X-Received: by 2002:a17:90b:4c0e:b0:31e:b772:dfcb with SMTP id
+ 98e67ed59e1d1-320da604471mr6543903a91.10.1754011539505; 
+ Thu, 31 Jul 2025 18:25:39 -0700 (PDT)
 Received: from [192.168.4.112] ([180.233.125.160])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-241e899d21dsm28688075ad.139.2025.07.31.18.26.40
+ 98e67ed59e1d1-3207eba6f4csm3128282a91.5.2025.07.31.18.25.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 31 Jul 2025 18:26:45 -0700 (PDT)
-Message-ID: <855c4ee4-e997-42d7-bb2b-95929fd6184e@linaro.org>
-Date: Fri, 1 Aug 2025 11:26:37 +1000
+ Thu, 31 Jul 2025 18:25:38 -0700 (PDT)
+Message-ID: <8658920e-34ff-4aba-b412-92d06b29fe5b@linaro.org>
+Date: Fri, 1 Aug 2025 11:25:31 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 10/10] semihosting/arm-compat-semi: compile once in system
- and per target for user mode
+Subject: Re: [PATCH 08/10] semihosting/arm-compat-semi: replace target_long
+ with int64_t
 To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
@@ -81,14 +81,14 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>
 References: <20250730220621.1142496-1-pierrick.bouvier@linaro.org>
- <20250730220621.1142496-11-pierrick.bouvier@linaro.org>
+ <20250730220621.1142496-9-pierrick.bouvier@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <20250730220621.1142496-11-pierrick.bouvier@linaro.org>
+In-Reply-To: <20250730220621.1142496-9-pierrick.bouvier@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: 12
 X-Spam_score: 1.2
 X-Spam_bar: +
@@ -112,35 +112,28 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 7/31/25 08:06, Pierrick Bouvier wrote:
-> We don't have any target dependency left in system mode, so we can
-> compile once.
-> 
-> User mode depends on qemu.h, which is duplicated between linux and bsd,
-> so we can't easily compile it once.
-> 
 > Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 > ---
->   semihosting/meson.build | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
+>   semihosting/arm-compat-semi.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/semihosting/meson.build b/semihosting/meson.build
-> index bb0db323937..99f10e2e2bb 100644
-> --- a/semihosting/meson.build
-> +++ b/semihosting/meson.build
-> @@ -12,9 +12,10 @@ system_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
->     'stubs-system.c',
->   ))
->   system_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
-> +  if_true: files('arm-compat-semi.c'),
->     if_false: files('arm-compat-semi-stub.c'))
+> diff --git a/semihosting/arm-compat-semi.c b/semihosting/arm-compat-semi.c
+> index e3b520631b3..715a22528ab 100644
+> --- a/semihosting/arm-compat-semi.c
+> +++ b/semihosting/arm-compat-semi.c
+> @@ -502,7 +502,7 @@ void do_common_semihosting(CPUState *cs)
 >   
->   specific_ss.add(when: ['CONFIG_SEMIHOSTING', 'CONFIG_USER_ONLY'],
->                   if_true: files('syscalls.c'))
-> -specific_ss.add(when: ['CONFIG_ARM_COMPATIBLE_SEMIHOSTING'],
-> +specific_ss.add(when: ['CONFIG_ARM_COMPATIBLE_SEMIHOSTING', 'CONFIG_USER_ONLY'],
->   		if_true: files('arm-compat-semi.c'))
+>       case TARGET_SYS_ISERROR:
+>           GET_ARG(0);
+> -        common_semi_set_ret(cs, (target_long)arg0 < 0);
+> +        common_semi_set_ret(cs, (int64_t)arg0 < 0);
+>           break;
+>   
+>       case TARGET_SYS_ISTTY:
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Here we have a semantic change.  For 32-bit, we used get_user_u32, so this will always 
+return false.
+
 
 r~
 
