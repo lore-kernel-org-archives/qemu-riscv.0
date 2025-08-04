@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB3F1C87FCB
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Aug 2025 19:20:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE45C87FCB
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Aug 2025 19:21:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uj0jC-000243-4F; Mon, 04 Aug 2025 15:20:10 -0400
+	id 1uj0k5-0002bg-9j; Mon, 04 Aug 2025 15:21:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1uj06P-00016X-Id
- for qemu-riscv@nongnu.org; Mon, 04 Aug 2025 14:40:07 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ id 1uj06U-0001AA-De
+ for qemu-riscv@nongnu.org; Mon, 04 Aug 2025 14:40:13 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1uj06K-0000v2-TR
- for qemu-riscv@nongnu.org; Mon, 04 Aug 2025 14:40:05 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-76bc61152d8so3897131b3a.2
- for <qemu-riscv@nongnu.org>; Mon, 04 Aug 2025 11:40:00 -0700 (PDT)
+ id 1uj06P-00013y-6y
+ for qemu-riscv@nongnu.org; Mon, 04 Aug 2025 14:40:10 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-76bd7676e60so2570313b3a.0
+ for <qemu-riscv@nongnu.org>; Mon, 04 Aug 2025 11:40:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754332799; x=1754937599; darn=nongnu.org;
+ d=linaro.org; s=google; t=1754332803; x=1754937603; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M9U0/wZZ+X7jDvuQEIrxHKhigwEtRJDRddgS55lpDeU=;
- b=v83gKcA1IO85y5HsdNA4rzZJ+jiKm2/AWkUq/cqjoxjUxdd6GtB6+oVK5GlO8UbDcz
- pPHVFxMmR5ZDIaJwN2YavOX8f8tozy+XvYQyLH31UeTAyuN0eehlOyM7A3uCFY9bU+GE
- DMtoKMKjDsSJz44E+OJMwSMPA5uQCM4GlfClbxzSU/yOt/6ffkS4g+RZV9NgYXMUCLpe
- EWGtI3s8y7gjoUvmVK6Q/XKNA6Zn6/0SqwbRWFHXXtJmHXr9b0Vd9hq1v1fMsEwxAfL6
- WGrsJuxamGfEpGyGcFEzJ6Jzw7YWfEK1kwijRhMvskSRr0bnuv8G8pFFbCs8PvBDL6pj
- w53w==
+ bh=c+UBZqDttGYfj8iBFfEmX5S23CgoyF14FdfzJLxCYYE=;
+ b=NZ5E+KjF7uCcMifWTrG1se1FYXpOS/apP7A4CGddapbLVmQcEEKnriktiq3pN7uqIP
+ QlXTAuqzPcHITYUiCm+6WTplKxbsBF7h7L3qFU0ZMU/cRMrlrs7LLaRlP/m3aB0laXYc
+ Op8/Yve7L8iHwQ1V+TmnMexK4mfJYTpPZWtc6AeWMmTHacge/abKodbEx5fImsvI4QBQ
+ jTf7KhBQamYbaeVyPS1UZP+wOqtRenCMGLUyrkyNUAy2V18gT4KGBfD39F2DkDAHDE+/
+ g2fd3xcI01/ONBj2Necc0MTTVYpRulPXCbdqcHUGrwzJxuqNdVprTns8BVbvDbqbibqb
+ b/Wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754332799; x=1754937599;
+ d=1e100.net; s=20230601; t=1754332803; x=1754937603;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M9U0/wZZ+X7jDvuQEIrxHKhigwEtRJDRddgS55lpDeU=;
- b=Vk3AMrMIF+zS8Fl/giO1K4QOw4foJkBSpuRcqkuNZHGACd9Fmq9x529GgrNh7n/4PI
- XeFMlBkqON/Vb2/JyTN7hmCNO2Er5lkz9Hb935he5p9d2QRqGAO4cfkbeYim248Ow1bq
- PbyXCSXP2srlFlI2h6xybsLdvpzpIxEcaY58oJE4mCqeJX8VaSTRkEvw9skuO2YZ/rVm
- MKv2YSfLFiONmv/1uwA2U2+j1WBSYm+o/0BScOOXnG60F92ZvPwTnxUX83Dythu6XT56
- qe38W3btg4dBDUgTRbVXMg6s70px5XA/Hjwq2YXBZaYgLr9UVpSpgKXz7MrTeRHLaFCP
- xqHw==
-X-Gm-Message-State: AOJu0Yzz4vTiPQmCEnitbEo/i798j3bBp3NGugw5iFRud5fguEnve0vU
- WLord+EvDppfOSpE5UKzuNKDgLTzG49WC+Vu6F1uBdMnWC9LMFv0tz792cqy80FArI4=
-X-Gm-Gg: ASbGncuFXljCAlzpJmh+Abi2j1uaes7hdZn4C7p5fgpuIqi4+cxBfpHYc073axRftkP
- Z+YQ5133abDXOqEdVWkqaoUfgCnlYrL6QGDPogQo5hjWNN6YdS4m1joaKxclfvOm9f+S4SCffcu
- mVHHBH9aNdCc5CdkNmYhLxFKmehu+pZdnr9qvRsJjB+qGZlezTKymqh3JZIH3EvsrDQ5PeRrgfe
- wIzk4t+7jXMTuJiqObbFCczlDEhNWJBm2JX1drM+nTeGuUlQl6AApq0pme2jhjLSs1D/XvhNqwL
- pnlJMkhoBA9lAjL/XHkHm9o909g/NqfEISBv0jajSTxufAdV2JOuzlUmOsgYA9i35K3u+kEADUs
- tS7g2QlzdDsOZih29gSEIBQ==
-X-Google-Smtp-Source: AGHT+IGXv/toE0slkkXu0tzxMxIDZx1hCC4UlcjLD+Xw8v5mt+ojSlfeQMHFcqGK3tMy6M7PAimzOg==
-X-Received: by 2002:a05:6a00:4c97:b0:76b:f01c:ff08 with SMTP id
- d2e1a72fcca58-76bf01d0125mr11318107b3a.2.1754332799444; 
- Mon, 04 Aug 2025 11:39:59 -0700 (PDT)
+ bh=c+UBZqDttGYfj8iBFfEmX5S23CgoyF14FdfzJLxCYYE=;
+ b=EzeZwkpzNltpTDOK45p0xlqUmr0LqBa53DvYUAc2GqHjn3U50EC/AUfZs90H0sqc+4
+ e4dL3grjnCnXIZHHkAtaj77nD9YBjzMbSPmIfLyxG35qyqz9gIZFXArEobYpPNsrghwg
+ 9fAXB02WnNxHrd0DT7/Aem2OaRBqcdbajlWOOaniURTvBNmKRdk73fWrewfIhNo16RR7
+ k4bYzl5bAWTk9zGcMWt93rVkCzMUihJh02DrLpA2eQJmDg6Lz6W+XAha/ZOXk7iUYOOJ
+ W+qCbNdO27sM3hAxiiy4V0zy8pYmFLALpt0h+azy/Hw2WHOCzkvYI4cKmdhQVblGi5v9
+ I8hw==
+X-Gm-Message-State: AOJu0YyYDiJLO1BTnDBb0eeItikdhRn8ZD7/dyPALC0pGXbU5iotwQR7
+ shG8Nwcg6WXPpwzsAU0tXws3+A7gqRO/qrTXJTDQLOdDgyae3uKb2RzSZuIPhg+KY/I=
+X-Gm-Gg: ASbGnctJYIdobVjqRi5Lh0eTD2Gu+Xymc+gGs8qpy/7lcyKlULXLVQBqWccvDqr9LCh
+ 6msOcfzbKp6DdP3BIwtpIQfXf4KsPIEYI/rTktOSXVjNKUuCLPyh2pTV1ToOEmoNIYdcSOzGivh
+ NFKYUvNhLoODUroIwvBRjSmIj7sRWRdoawS+2XGeZP/zCS47Y+TQ/W67bROtlYVne3vDKQ6yIUa
+ 0hgIQj71beTe/JmQqRaQQmFirakW0EBGVHiLAYRn4XHvHUAKOoQjKmtbxZO0LKWty42qgxVCUqd
+ qXlzW9Xqz7Z4R5lGw7P124SE+6H4SYFStTHVO27Y1LhxPjl2Zg1M6SB02pJeac650gVLMsyAO4c
+ DcC1bz0GHNy4DIwQEHZo/TahUCQzlGJzp
+X-Google-Smtp-Source: AGHT+IHN31UnwxogKhOBjyr/yOzuKJQLWZsxa9xqp1VJ8C/E2SwAK0SWIuVQjl+MkwdnD/swD0JSEA==
+X-Received: by 2002:a05:6a00:1254:b0:76b:e109:a1f4 with SMTP id
+ d2e1a72fcca58-76bec4812c8mr13953681b3a.12.1754332803385; 
+ Mon, 04 Aug 2025 11:40:03 -0700 (PDT)
 Received: from pc.. ([38.41.223.211]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-76bd78875cesm9940171b3a.15.2025.08.04.11.39.58
+ d2e1a72fcca58-76bd78875cesm9940171b3a.15.2025.08.04.11.40.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Aug 2025 11:39:59 -0700 (PDT)
+ Mon, 04 Aug 2025 11:40:03 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, philmd@linaro.org, Weiwei Li <liwei1518@gmail.com>,
@@ -73,16 +73,17 @@ Cc: qemu-riscv@nongnu.org, philmd@linaro.org, Weiwei Li <liwei1518@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v3 03/12] semihosting/guestfd: compile once for system/user
-Date: Mon,  4 Aug 2025 11:39:41 -0700
-Message-ID: <20250804183950.3147154-4-pierrick.bouvier@linaro.org>
+Subject: [PATCH v3 07/12] include/semihosting/common-semi: extract common_semi
+ API
+Date: Mon,  4 Aug 2025 11:39:45 -0700
+Message-ID: <20250804183950.3147154-8-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250804183950.3147154-1-pierrick.bouvier@linaro.org>
 References: <20250804183950.3147154-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,202 +106,217 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We move relevant code to semihosting/arm-compat-semi.c, and add
-functions to query CONFIG_ARM_COMPATIBLE_SEMIHOSTING at runtime.
+We transform target/{arm,riscv}/common-semi-target.h headers to proper
+compilation units, and use them in arm-compat-semi.c.
+
+This way, we can include only the declaration header (which is target
+agnostic), and selectively link the appropriate implementation based on
+current target.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- include/semihosting/guestfd.h      |  7 -------
- include/semihosting/semihost.h     |  2 ++
- semihosting/arm-compat-semi-stub.c | 19 +++++++++++++++++++
- semihosting/arm-compat-semi.c      | 26 ++++++++++++++++++++++++++
- semihosting/guestfd.c              | 26 +++++---------------------
- semihosting/meson.build            | 11 ++++++-----
- 6 files changed, 58 insertions(+), 33 deletions(-)
- create mode 100644 semihosting/arm-compat-semi-stub.c
+ include/semihosting/common-semi.h             |  6 ++++++
+ semihosting/arm-compat-semi.c                 |  3 +--
+ ...mon-semi-target.h => common-semi-target.c} | 20 +++++++++----------
+ ...mon-semi-target.h => common-semi-target.c} | 19 +++++++++---------
+ target/arm/meson.build                        |  4 ++++
+ target/riscv/meson.build                      |  4 ++++
+ 6 files changed, 33 insertions(+), 23 deletions(-)
+ rename target/arm/{common-semi-target.h => common-semi-target.c} (64%)
+ rename target/riscv/{common-semi-target.h => common-semi-target.c} (59%)
 
-diff --git a/include/semihosting/guestfd.h b/include/semihosting/guestfd.h
-index 3d426fedab3..a7ea1041ea0 100644
---- a/include/semihosting/guestfd.h
-+++ b/include/semihosting/guestfd.h
-@@ -35,13 +35,6 @@ typedef struct GuestFD {
-     };
- } GuestFD;
+diff --git a/include/semihosting/common-semi.h b/include/semihosting/common-semi.h
+index 0a91db7c414..aa511a46f42 100644
+--- a/include/semihosting/common-semi.h
++++ b/include/semihosting/common-semi.h
+@@ -35,5 +35,11 @@
+ #define COMMON_SEMI_H
  
--/*
-- * For ARM semihosting, we have a separate structure for routing
-- * data for the console which is outside the guest fd address space.
-- */
--extern GuestFD console_in_gf;
--extern GuestFD console_out_gf;
--
- /**
-  * alloc_guestfd:
-  *
-diff --git a/include/semihosting/semihost.h b/include/semihosting/semihost.h
-index b03e6375787..231dc890395 100644
---- a/include/semihosting/semihost.h
-+++ b/include/semihosting/semihost.h
-@@ -33,6 +33,8 @@ typedef enum SemihostingTarget {
-  * Return true if guest code is allowed to make semihosting calls.
-  */
- bool semihosting_enabled(bool is_user);
-+bool semihosting_arm_compatible(void);
-+void semihosting_arm_compatible_init(void);
+ void do_common_semihosting(CPUState *cs);
++uint64_t common_semi_arg(CPUState *cs, int argno);
++void common_semi_set_ret(CPUState *cs, uint64_t ret);
++bool is_64bit_semihosting(CPUArchState *env);
++bool common_semi_sys_exit_is_extended(CPUState *cs);
++uint64_t common_semi_stack_bottom(CPUState *cs);
++bool common_semi_has_synccache(CPUArchState *env);
  
- SemihostingTarget semihosting_get_target(void);
- const char *semihosting_get_arg(int i);
-diff --git a/semihosting/arm-compat-semi-stub.c b/semihosting/arm-compat-semi-stub.c
-new file mode 100644
-index 00000000000..bfa3681e267
---- /dev/null
-+++ b/semihosting/arm-compat-semi-stub.c
-@@ -0,0 +1,19 @@
-+/*
-+ * Stubs for platforms different from ARM
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "semihosting/semihost.h"
-+#include <glib.h>
-+
-+bool semihosting_arm_compatible(void)
-+{
-+    return false;
-+}
-+
-+void semihosting_arm_compatible_init(void)
-+{
-+    g_assert_not_reached();
-+}
+ #endif /* COMMON_SEMI_H */
 diff --git a/semihosting/arm-compat-semi.c b/semihosting/arm-compat-semi.c
-index 40dc778529d..3f653c6e7a9 100644
+index 1c593d5e0dc..5877214c47d 100644
 --- a/semihosting/arm-compat-semi.c
 +++ b/semihosting/arm-compat-semi.c
-@@ -101,6 +101,13 @@ static int gdb_open_modeflags[12] = {
-     GDB_O_RDWR | GDB_O_CREAT | GDB_O_APPEND,
- };
+@@ -174,8 +174,7 @@ static LayoutInfo common_semi_find_bases(CPUState *cs)
  
-+/*
-+ * For ARM semihosting, we have a separate structure for routing
-+ * data for the console which is outside the guest fd address space.
-+ */
-+static GuestFD console_in_gf;
-+static GuestFD console_out_gf;
-+
- #ifndef CONFIG_USER_ONLY
+ #endif
  
- /**
-@@ -353,6 +360,25 @@ static const uint8_t featurefile_data[] = {
-     SH_EXT_EXIT_EXTENDED | SH_EXT_STDOUT_STDERR, /* Feature byte 0 */
- };
+-#include "cpu.h"
+-#include "common-semi-target.h"
++#include "semihosting/common-semi.h"
  
-+bool semihosting_arm_compatible(void)
-+{
-+    return true;
-+}
-+
-+void semihosting_arm_compatible_init(void)
-+{
-+    /* For ARM-compat, the console is in a separate namespace. */
-+    if (use_gdb_syscalls()) {
-+        console_in_gf.type = GuestFDGDB;
-+        console_in_gf.hostfd = 0;
-+        console_out_gf.type = GuestFDGDB;
-+        console_out_gf.hostfd = 2;
-+    } else {
-+        console_in_gf.type = GuestFDConsole;
-+        console_out_gf.type = GuestFDConsole;
-+    }
-+}
-+
  /*
-  * Do a semihosting call.
-  *
-diff --git a/semihosting/guestfd.c b/semihosting/guestfd.c
-index d3241434c51..e8f236c690c 100644
---- a/semihosting/guestfd.c
-+++ b/semihosting/guestfd.c
-@@ -12,35 +12,20 @@
- #include "gdbstub/syscalls.h"
- #include "semihosting/semihost.h"
- #include "semihosting/guestfd.h"
--#ifndef CONFIG_USER_ONLY
--#include CONFIG_DEVICES
--#endif
+  * Read the input value from the argument block; fail the semihosting
+diff --git a/target/arm/common-semi-target.h b/target/arm/common-semi-target.c
+similarity index 64%
+rename from target/arm/common-semi-target.h
+rename to target/arm/common-semi-target.c
+index 6775a270aaa..2b77ce9c17b 100644
+--- a/target/arm/common-semi-target.h
++++ b/target/arm/common-semi-target.c
+@@ -7,12 +7,12 @@
+  * SPDX-License-Identifier: GPL-2.0-or-later
+  */
  
- static GArray *guestfd_array;
- 
--#ifdef CONFIG_ARM_COMPATIBLE_SEMIHOSTING
--GuestFD console_in_gf;
--GuestFD console_out_gf;
--#endif
+-#ifndef TARGET_ARM_COMMON_SEMI_TARGET_H
+-#define TARGET_ARM_COMMON_SEMI_TARGET_H
 -
- void qemu_semihosting_guestfd_init(void)
- {
-     /* New entries zero-initialized, i.e. type GuestFDUnused */
-     guestfd_array = g_array_new(FALSE, TRUE, sizeof(GuestFD));
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "semihosting/common-semi.h"
+ #include "target/arm/cpu-qom.h"
  
--#ifdef CONFIG_ARM_COMPATIBLE_SEMIHOSTING
--    /* For ARM-compat, the console is in a separate namespace. */
--    if (use_gdb_syscalls()) {
--        console_in_gf.type = GuestFDGDB;
--        console_in_gf.hostfd = 0;
--        console_out_gf.type = GuestFDGDB;
--        console_out_gf.hostfd = 2;
--    } else {
--        console_in_gf.type = GuestFDConsole;
--        console_out_gf.type = GuestFDConsole;
-+    if (semihosting_arm_compatible()) {
-+        semihosting_arm_compatible_init();
-+        return;
+-static inline uint64_t common_semi_arg(CPUState *cs, int argno)
++uint64_t common_semi_arg(CPUState *cs, int argno)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+@@ -23,7 +23,7 @@ static inline uint64_t common_semi_arg(CPUState *cs, int argno)
      }
--#else
--    /* Otherwise, the stdio file descriptors apply. */
-+
-+    /* Out of ARM, the stdio file descriptors apply. */
-     guestfd_array = g_array_set_size(guestfd_array, 3);
- #ifndef CONFIG_USER_ONLY
-     if (!use_gdb_syscalls()) {
-@@ -54,7 +39,6 @@ void qemu_semihosting_guestfd_init(void)
-     associate_guestfd(0, 0);
-     associate_guestfd(1, 1);
-     associate_guestfd(2, 2);
--#endif
  }
  
- /*
-diff --git a/semihosting/meson.build b/semihosting/meson.build
-index 77200a7f27b..bb0db323937 100644
---- a/semihosting/meson.build
-+++ b/semihosting/meson.build
-@@ -1,17 +1,18 @@
--specific_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
--  'guestfd.c',
--))
--
- common_ss.add(when: 'CONFIG_SEMIHOSTING', if_false: files('stubs-all.c'))
--user_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files('user.c'))
-+user_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
-+  'user.c',
-+  'guestfd.c'))
- system_ss.add(when: 'CONFIG_SEMIHOSTING', if_true: files(
-   'config.c',
-   'console.c',
-+  'guestfd.c',
-   'uaccess.c',
-   'syscalls.c',
- ), if_false: files(
-   'stubs-system.c',
- ))
-+system_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
-+  if_false: files('arm-compat-semi-stub.c'))
+-static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
++void common_semi_set_ret(CPUState *cs, uint64_t ret)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+@@ -34,27 +34,25 @@ static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
+     }
+ }
  
- specific_ss.add(when: ['CONFIG_SEMIHOSTING', 'CONFIG_USER_ONLY'],
-                 if_true: files('syscalls.c'))
+-static inline bool common_semi_sys_exit_is_extended(CPUState *cs)
++bool common_semi_sys_exit_is_extended(CPUState *cs)
+ {
+     return is_a64(cpu_env(cs));
+ }
+ 
+-static inline bool is_64bit_semihosting(CPUArchState *env)
++bool is_64bit_semihosting(CPUArchState *env)
+ {
+     return is_a64(env);
+ }
+ 
+-static inline uint64_t common_semi_stack_bottom(CPUState *cs)
++uint64_t common_semi_stack_bottom(CPUState *cs)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+     return is_a64(env) ? env->xregs[31] : env->regs[13];
+ }
+ 
+-static inline bool common_semi_has_synccache(CPUArchState *env)
++bool common_semi_has_synccache(CPUArchState *env)
+ {
+     /* Ok for A64, invalid for A32/T32 */
+     return is_a64(env);
+ }
+-
+-#endif
+diff --git a/target/riscv/common-semi-target.h b/target/riscv/common-semi-target.c
+similarity index 59%
+rename from target/riscv/common-semi-target.h
+rename to target/riscv/common-semi-target.c
+index 663dedfdad2..aeaeb88d536 100644
+--- a/target/riscv/common-semi-target.h
++++ b/target/riscv/common-semi-target.c
+@@ -8,43 +8,42 @@
+  * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+-#ifndef TARGET_RISCV_COMMON_SEMI_TARGET_H
+-#define TARGET_RISCV_COMMON_SEMI_TARGET_H
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "semihosting/common-semi.h"
+ 
+-static inline uint64_t common_semi_arg(CPUState *cs, int argno)
++uint64_t common_semi_arg(CPUState *cs, int argno)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     return env->gpr[xA0 + argno];
+ }
+ 
+-static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
++void common_semi_set_ret(CPUState *cs, uint64_t ret)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     env->gpr[xA0] = ret;
+ }
+ 
+-static inline bool is_64bit_semihosting(CPUArchState *env)
++bool is_64bit_semihosting(CPUArchState *env)
+ {
+     return riscv_cpu_mxl(env) != MXL_RV32;
+ }
+ 
+-static inline bool common_semi_sys_exit_is_extended(CPUState *cs)
++bool common_semi_sys_exit_is_extended(CPUState *cs)
+ {
+     return is_64bit_semihosting(cpu_env(cs));
+ }
+ 
+-static inline uint64_t common_semi_stack_bottom(CPUState *cs)
++uint64_t common_semi_stack_bottom(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     return env->gpr[xSP];
+ }
+ 
+-static inline bool common_semi_has_synccache(CPUArchState *env)
++bool common_semi_has_synccache(CPUArchState *env)
+ {
+     return true;
+ }
+-
+-#endif
+diff --git a/target/arm/meson.build b/target/arm/meson.build
+index 07d9271aa4d..688b50a2e26 100644
+--- a/target/arm/meson.build
++++ b/target/arm/meson.build
+@@ -27,12 +27,16 @@ arm_user_ss.add(files(
+   'helper.c',
+   'vfp_fpscr.c',
+ ))
++arm_user_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
++		        if_true: files('common-semi-target.c'))
+ 
+ arm_common_system_ss.add(files('cpu.c'))
+ arm_common_system_ss.add(when: 'TARGET_AARCH64', if_false: files(
+   'cpu32-stubs.c'))
+ arm_common_system_ss.add(when: 'CONFIG_KVM', if_false: files('kvm-stub.c'))
+ arm_common_system_ss.add(when: 'CONFIG_HVF', if_false: files('hvf-stub.c'))
++arm_common_system_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
++		                 if_true: files('common-semi-target.c'))
+ arm_common_system_ss.add(files(
+   'arch_dump.c',
+   'arm-powerctl.c',
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index a4bd61e52a9..fdefe88ccdd 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -8,6 +8,10 @@ gen = [
+ 
+ riscv_ss = ss.source_set()
+ riscv_ss.add(gen)
++
++riscv_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
++		     if_true: files('common-semi-target.c'))
++
+ riscv_ss.add(files(
+   'cpu.c',
+   'cpu_helper.c',
 -- 
 2.47.2
 
