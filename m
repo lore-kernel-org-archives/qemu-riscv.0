@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE5CCC87FD1
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Aug 2025 22:55:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69AADC87FCB
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Aug 2025 22:57:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uj45u-0002yR-BJ; Mon, 04 Aug 2025 18:55:50 -0400
+	id 1uj479-0004M7-D6; Mon, 04 Aug 2025 18:57:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uj45r-0002we-67
- for qemu-riscv@nongnu.org; Mon, 04 Aug 2025 18:55:47 -0400
+ id 1uj46q-00046z-Ce
+ for qemu-riscv@nongnu.org; Mon, 04 Aug 2025 18:56:50 -0400
 Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uj45d-00005v-Ov
- for qemu-riscv@nongnu.org; Mon, 04 Aug 2025 18:55:36 -0400
+ id 1uj46n-0000Fi-BS
+ for qemu-riscv@nongnu.org; Mon, 04 Aug 2025 18:56:47 -0400
 Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-76c18568e5eso668338b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 04 Aug 2025 15:55:33 -0700 (PDT)
+ d2e1a72fcca58-76b8d289f73so3418542b3a.1
+ for <qemu-riscv@nongnu.org>; Mon, 04 Aug 2025 15:56:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754348132; x=1754952932; darn=nongnu.org;
+ d=linaro.org; s=google; t=1754348204; x=1754953004; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=1gRXBSmLKGaLNVF2FdE2ZTYiCMmsp/V3kiOQiKyG3Io=;
- b=Aa+1QTE+W0N/hZRjhIhss+AAS2IOYjyZABVtYAUPG6Oh4ablkOtweuCT58yzNU/IBk
- r+ZefjZzIiZmcqW49fDBZbUvL2Awjgj7qsLJH8ggSq0AxYgptQa0MRz6sbGiSzxYhXTa
- dp6JKCiehSa0TFcG5Yj6Ac2CCAWnT0jGIeehSXn6/iLgIMFhPk/HX48wXYznx74odIH2
- 5LftUiJ3b6cV8ITPG6eHOnP6d4FIzRDGJmNvJ1t0soh44tCG4j3rwBAeS31j+riGM5Pa
- Cfu76Sxq6sid6CKotEK4UQf0ONIM40q7nyJl3MT5BOiOvFWrM5WsXDL3kgdqS5vTR22c
- Ajww==
+ bh=KXmJcDFY/K6kmvJKvRb9yzIOFxWc0d1jqukisbQaPXI=;
+ b=Vz/GVFc1HG0nsvV/2H6jyUL2khw3RRSftt6MPuGObWLYO9dwY2S6JCoqhBEIUaOZN0
+ oo2LZxHalOjk2G7hq4D7lNMOss94rjztfA1Z1TJuaUrgtNgc6+yH2N6FX7USC0rq9iaY
+ B4FOhibQ/XBxnYNy/eKYZE+IqsMwMCPPCqDNdKnTqCZo1cged1YXjPAMSXdwhZQe9v60
+ VbpjyDAiIZQyjgqPDzrmbYfWfVxmUtbly8Qlaw4e3D2rhzgoOrr5ADpEdmfCfGr++4XV
+ 18QqcBhUG/8quVcZTsdC9G493vSnobwPF1NjxUsf82vgmG7EIV5Pybo+GvbOxRCri/O/
+ GHlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754348132; x=1754952932;
+ d=1e100.net; s=20230601; t=1754348204; x=1754953004;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1gRXBSmLKGaLNVF2FdE2ZTYiCMmsp/V3kiOQiKyG3Io=;
- b=SK8tEiUri5k/HZ7iQiZlq8BMzNBMpomZdf3sGDUyIGryJjgL0NyWI0ZPVDppgD8XMR
- 3NXbQV5WHvmhXWXF3exX7l9TJAEldIgA5EC6m1XvXOtPPdTDofME8HAUUzA6blRCfzm2
- fM1TRzTQrXHkHSrfdcx8jy79GvezDeZogxDl6FJUZMqmxbfWV4pYoK0eAm1OlPFoIBBA
- Qyjiq7VO2yjdbZtrSmfHzdEfbFXhr0PjRqTB4Fl5KvO9xAtz2pLtzSg84jKuFFE/xLyg
- DETMRkw+8aZS3Z1BIUu+cxO3LrtW4cwfLSvbEM6xZzz6QbZgFFEngYdv9/4lRgs12elz
- V1Jg==
+ bh=KXmJcDFY/K6kmvJKvRb9yzIOFxWc0d1jqukisbQaPXI=;
+ b=Rk87ipnfv/An0N6Vr7ocnK62JNuN4AfyQ8scjYvuUPiQpPbRfPSsgtvdVFN7skPKKq
+ pFhQZ3qfoYX2ytcKOaMfkyjUSV0k+I37J4o7Hicljv3cI4lBSBqe2BO75uvUyv5krL2V
+ WKF9wbd3Iiwq3iPwoj665EU8h9Bl6wheDEcFjLrMaRBNQegVpv1XIvm9OlcZEi7qB3j+
+ uHfh7SxdFaTVF3KfaLNJ/GFQ06MIs/0nCINhx9PsIJ9+mO+YKr60bRvvsKDF7yjpDLgm
+ 3/TBfrY3UuZAMpDv/SKEClQSgJZC+C56RMRVicq425RcZnN6madePmDcjs6hMi4Q2VGt
+ RbNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVATbvnPhxoJscjEkZBWXrIJ9XSjvgn/JDhVLI5qjMBRBeYfdRLYqY1yHK+m9Dx9bnhx7gEKU+9Lp2k@nongnu.org
-X-Gm-Message-State: AOJu0YyL/0KW4DYI3TM1OgMKjKABGCUWd/vMPPCAzjtQ+LTYSZahQ95J
- 6ZCNCdMS0scHNCqSq5DjLi6WsdW0oC/AT9SAdOfzR/hV5qFjDaPc9POVw6WqNE+jltA=
-X-Gm-Gg: ASbGnctTo/LW9KTxxuIHOwluphoTM+SKeg9Soru93owLt4Oom0eAxZbj6CsecgsoDIz
- NjswCHkiJPihE/wOTWQQR7URjMlf1Gn3QN29G8RbnA9PeTVCIOChkYNUkdZWD0/gjPuv0kcvkq1
- Rnl42O7Y42QE6F3DgJIpu7l8nNV13i6TNVnr4o6Tqidb4jnCwTTf2LttmuROPN5ZQH1fhB4YIPp
- nTpbYjEy9G+Vy/L8Q8IC246GiHjqEBeKZUhf8uzJPHVqIMZW3vPy4aGlpcrLHm45dHBNgDZSqoZ
- EXkT/goRGqYLTNG2qaRqm87QGh2C72UTOY0W/UJr7H+EJrYCLHgKW/bJiEAjX29Sknw3DZAJoka
- ZFITupGZQ0lyK+uGuKNQrYcAruma8ZRa3yb/VlosM
-X-Google-Smtp-Source: AGHT+IESCQBHKNoHTUnzaSGR6MwUqHVi9IYXSqqW9hiqFK+MEiyCA3HV/KV8UpoIzWnHMUsxUKjr1Q==
-X-Received: by 2002:a05:6a00:1a14:b0:76b:d791:42e5 with SMTP id
- d2e1a72fcca58-76bec4bf168mr11445432b3a.17.1754348132013; 
- Mon, 04 Aug 2025 15:55:32 -0700 (PDT)
+ AJvYcCUpsNgyzucxPt/mZgMq6GN/vm3CTXB5WGmdGbvJh5kJy68Yc4rfSbqze8IpoiO9Jy4xg6xVkNos0DUD@nongnu.org
+X-Gm-Message-State: AOJu0Ywe3CWKuSC9feqaagzNXSE/VKuLsjSLZ/R5H/BleB0YOaXfW40R
+ l2DiLYWMQNd7fAHDA2n8sq+5/8F/7AkxL0fddZ/A05seiEc//ddtl+GXjK6mGenDG7c=
+X-Gm-Gg: ASbGnctazy/3wa1EnkXFf6KdXkP0gbD5An/zXHyJb711XLaE0vhCu7X4VuWRdHLLXid
+ X/mbaQu5fFSTD5SeOLnjMIh5aXSDfMUL30ICwqutOlz8TCVb7aP6g4rVpZbraewUpuCnk2KVyPw
+ cwG4+DU3NEbqFaW9dsyfUr/JlmdcbwgVIG9D4z12X/FymCJcz5H2bQUTblosSCQp8EeU10gNcyM
+ mRODeuglgLJ4hqMEIh3Uh1Ysb2CKKfpEzWpmzhqlRT+GW2gw+BozjyUHjPsU0Pu9uuSvlUHZEFt
+ IN8mYVZdQHGSnXM8vgTMNauhX2wbskpii15mSbFvOpZbpmw8oVblhJZZtytgxxeSrVGGC8SQOKG
+ 5fs1ECChf8lDXeNtPZARc2Tjfh4Wce3025f/H1Y5m
+X-Google-Smtp-Source: AGHT+IEYwQLXqyJ2ojex8oje4ka/V25DO3QQcq0DaGDHRYahPslLoNdskn7nBHOzVauqw6sC9swNYQ==
+X-Received: by 2002:a05:6a20:3d11:b0:23d:58e9:347a with SMTP id
+ adf61e73a8af0-23df906a3c7mr13762018637.26.1754348203792; 
+ Mon, 04 Aug 2025 15:56:43 -0700 (PDT)
 Received: from [192.168.4.112] ([180.233.125.160])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-76bea205365sm7109511b3a.83.2025.08.04.15.55.28
+ d2e1a72fcca58-76bd6aacad9sm10411500b3a.124.2025.08.04.15.56.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Aug 2025 15:55:31 -0700 (PDT)
-Message-ID: <3db084fb-0646-4dc0-91a1-a7dba275d18d@linaro.org>
-Date: Tue, 5 Aug 2025 08:55:24 +1000
+ Mon, 04 Aug 2025 15:56:43 -0700 (PDT)
+Message-ID: <b7c6b929-ec99-4eb2-9f9b-c91632dd8ac3@linaro.org>
+Date: Tue, 5 Aug 2025 08:56:36 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.1 v2 02/11] hw/sd/sdcard: Factor sd_response_size()
- out
+Subject: Re: [PATCH-for-10.1 v2 03/11] hw/sd/sdbus: Provide buffer size to
+ sdbus_do_command()
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org
 Cc: Ben Dooks <ben.dooks@codethink.co.uk>, qemu-riscv@nongnu.org,
  qemu-block@nongnu.org, qemu-arm@nongnu.org,
- Guenter Roeck <linux@roeck-us.net>, Bin Meng <bmeng.cn@gmail.com>
+ Guenter Roeck <linux@roeck-us.net>, Bin Meng <bmeng.cn@gmail.com>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>
 References: <20250804133406.17456-1-philmd@linaro.org>
- <20250804133406.17456-3-philmd@linaro.org>
+ <20250804133406.17456-4-philmd@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <20250804133406.17456-3-philmd@linaro.org>
+In-Reply-To: <20250804133406.17456-4-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
@@ -109,14 +111,29 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/4/25 23:33, Philippe Mathieu-Daudé wrote:
-> Set @rsplen once before switching to fill the response buffer.
-> This will allow to assert in a single place that the buffer is
-> big enough to be filled with the response.
+> We provide to sdbus_do_command() a pointer to a buffer to be
+> filled with a varying number of bytes. By not providing the
+> buffer size, the callee can not check the buffer is big enough.
+> Pass the buffer size as argument to follow good practices.
+> 
+> sdbus_do_command() doesn't return any error, only the size filled
+> in the buffer. Convert the returned type to unsigned and remove
+> the few unreachable lines in callers.
+> 
+> This allow to check for possible overflow in sd_do_command().
 > 
 > Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   hw/sd/sd.c | 36 +++++++++++++++++++++++++++++-------
->   1 file changed, 29 insertions(+), 7 deletions(-)
+>   include/hw/sd/sd.h       | 23 +++++++++++++++++++++--
+>   hw/sd/allwinner-sdhost.c |  7 ++-----
+>   hw/sd/bcm2835_sdhost.c   |  7 ++-----
+>   hw/sd/core.c             |  5 +++--
+>   hw/sd/omap_mmc.c         |  5 +++--
+>   hw/sd/pl181.c            |  6 ++----
+>   hw/sd/sd.c               |  6 ++++--
+>   hw/sd/sdhci.c            |  6 +++---
+>   hw/sd/ssi-sd.c           | 12 +++++++-----
+>   9 files changed, 47 insertions(+), 30 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
