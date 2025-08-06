@@ -4,92 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92479C87FCB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Aug 2025 07:23:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2205DC87FCB
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Aug 2025 08:59:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ujYUI-0007II-4f; Wed, 06 Aug 2025 03:23:02 -0400
+	id 1ujZz1-0000VF-G1; Wed, 06 Aug 2025 04:58:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ujYU7-0007Dw-TG
- for qemu-riscv@nongnu.org; Wed, 06 Aug 2025 03:22:56 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
+ id 1ujZyw-0000TV-0Y
+ for qemu-riscv@nongnu.org; Wed, 06 Aug 2025 04:58:47 -0400
+Received: from sg-1-12.ptr.blmpb.com ([118.26.132.12])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ujYU5-0003Lp-Qx
- for qemu-riscv@nongnu.org; Wed, 06 Aug 2025 03:22:51 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-451d3f72391so55614905e9.3
- for <qemu-riscv@nongnu.org>; Wed, 06 Aug 2025 00:22:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754464967; x=1755069767; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Bae4Rj8LksmUKRExgA49m4XV5dPKfuJ3tBM7IB+NI0M=;
- b=xlQPsPLyN4ro1uJ0/pEenwFv0bwb79kA59DNSycpieDf4+EV2PBni9a+1HEq5EHBii
- HFmvCodYswicyQzYcI8Ks2GaC5OAqVNujzMvCA5WA8WVu+v1uEDHCp6l0YdtzvoMc+lp
- y/YF5gjRuWHntkTeX0Q1K2EiLVab7JGajM7vX7YXVn/BplSN5kec+2HNVvvH0vR0XqTC
- XO/7HHz6V38VwFVsbGGo9sAdqAEnqfsQA19mqBPGyVNhVbhwOm3CG+xXiZUQz2ZA+6ws
- BJZ8exGv6G12L1ZSRWxowo6PCTKfCxTYwCrYJfFq0FaF/Ri1CitqX8Owa+zX6my/Vpb8
- jasw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754464967; x=1755069767;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Bae4Rj8LksmUKRExgA49m4XV5dPKfuJ3tBM7IB+NI0M=;
- b=WXZ+gumasSKOogxuZfqQMI3WTsgHPEPITgRyCJoBN9setqfwNoSZBcS7aQRK2KZuxs
- Huimv73IbauOuV6QKooAMUUbC918c0v6CyLJDidslzzM3k+M9arc9b7ck7kRh+TRRUql
- 4RvgiG31hdTiKa0tZjw7r0gkeFGHAGj2OIcKDVRsXCi20shOR0HqwBp9MK8dLgXPu2jt
- EuhHFWdCkt+BVkXJGce9yKOHQu9Gdi7/VuQXuBKjjhsSmjd3OaH0enn4tpBP23aB0am0
- kcyur8EtACF+QXP5StO0GKbATAhgMqQwdq2lMUvxSXHjaNCO9ShEEmNzUGXI1jnCakgw
- 1qHA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIg4+h3uDMoV4nA9hwlMWBaE5TJCualotHav0Q+SeQZx1Sk4EOPWH53V28qTpP31G+izEhYCMkeyVu@nongnu.org
-X-Gm-Message-State: AOJu0YypTYXeApy3zkkBHe3r0BmkI3WxgHGvyCLUOPcPp+Uar3+aucj7
- EMXOaBx2deTG/IOrZbEHKAV2P0L86mxe1KckcwvtWt8BwPgGkehKNGnxX7gIvSP/Bzo=
-X-Gm-Gg: ASbGncsW9ceK3AAFj38RCVRuP/JrLZeRWZ6DkWE6NJ+TiamhSbCcWwL3jVgu96wCXxo
- czgdfnI2zYe/Tsh+s7NgphFRRiHFlL/+ob8dnCyeS4pxZwnc0Qp+eupIi3jrqf9Jtgmdx4KAZpg
- EReJOSkfF8C91KhgpMkmRw+T5qBNZEX0Pn1E7BEJ84iybzhU/fEyUj58lS5pRFeuPQBotv0g+dg
- W1bUYjsRAznvIESnqbMeZOYPAEcX9NOmeVxXWOI+2zpmUyb2puwwbJSbkLw78b1cKs9STQzaq3c
- TuwFsW0pyggKPhg7hoiEVr/vDvpuIDUqQVO9MtasBbW6gm17gZMisEa55SkCjmmEwGNj4eI2vaF
- mf/r5jySLmGzLtRjNBo6qw6eFsZekLZljmedwkOa3xbBcbaIiwTFlmax7DdMe/M7vhw==
-X-Google-Smtp-Source: AGHT+IEq7Fi+v8VMGb3iE03uYVSnoegLa4ss7xD7txAF33FygpV+xi18teaRJhVGAgls37e5/InL+A==
-X-Received: by 2002:a05:600c:a342:b0:459:e3a1:a0c4 with SMTP id
- 5b1f17b1804b1-459e70f63cfmr14736275e9.30.1754464967572; 
- Wed, 06 Aug 2025 00:22:47 -0700 (PDT)
-Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b79c453333sm22751525f8f.45.2025.08.06.00.22.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Aug 2025 00:22:47 -0700 (PDT)
-Message-ID: <9dc90489-9e74-4e00-8fc6-f97e3f425495@linaro.org>
-Date: Wed, 6 Aug 2025 09:22:46 +0200
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
+ id 1ujZyn-00054F-GA
+ for qemu-riscv@nongnu.org; Wed, 06 Aug 2025 04:58:45 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1754470698;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=KKulyDUcp/MKSScQH30vuFfwgiub77DSBg8m9vS1Qi0=;
+ b=qblMZ3AsBjWsgNE70TS7NHtDLVKXXSWT65Jh9Fk+Rhfy1DljuGT1uRtZtJVd7+oK7ZfjzJ
+ 2hmjztXe0TmSS1tKHeERqjthamRYR49y/jHRcC9KFKeYQiS8uG3pf2tyYHA//mp1f+83km
+ INaM1cLQN+3gUburfRpXemfQsHGH9JEVhUEDtDXTgXyI+bPHrmaxAC6qF4Dszd2pv4IeOa
+ bqjcPZWXJUAwR9v27/tNykKQ/svyFC3g561cPgqBkB2s2p8fkf9YJ5hdp8QYd6NVJn70H3
+ o3PWI3sk5tADQbPt71A5YC+qDlzWx3ZT0/2Qy8Ou/UGRLRjGfgMO6BtHM+XwOQ==
+References: <20250804171238.354493-1-guoren@kernel.org>
+Content-Transfer-Encoding: 7bit
+From: "Nutty Liu" <liujingqi@lanxincomputing.com>
+Message-Id: <524ac37c-cdd3-4010-aba9-9dacfdd123cc@lanxincomputing.com>
+X-Lms-Return-Path: <lba+268931928+7955a0+nongnu.org+liujingqi@lanxincomputing.com>
+X-Original-From: Nutty Liu <liujingqi@lanxincomputing.com>
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.1 v2 00/11] hw/sd: Fix SD cards in SPI mode
-To: Michael Tokarev <mjt@tls.msk.ru>, Peter Maydell
- <peter.maydell@linaro.org>, qemu-devel@nongnu.org
-Cc: Ben Dooks <ben.dooks@codethink.co.uk>, qemu-riscv@nongnu.org,
- qemu-block@nongnu.org, qemu-arm@nongnu.org,
- Guenter Roeck <linux@roeck-us.net>, Bin Meng <bmeng.cn@gmail.com>
-References: <20250804133406.17456-1-philmd@linaro.org>
- <39982478-b3fb-46b0-bef0-c0839c123300@tls.msk.ru>
+Received: from [127.0.0.1] ([116.237.111.137]) by smtp.feishu.cn with ESMTPS;
+ Wed, 06 Aug 2025 16:58:15 +0800
+In-Reply-To: <20250804171238.354493-1-guoren@kernel.org>
+To: <guoren@kernel.org>, <zhiwei_liu@linux.alibaba.com>, 
+ <liwei1518@gmail.com>, <alistair.francis@wdc.com>, <seb@rivosinc.com>, 
+ <tjeznach@rivosinc.com>
+Cc: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>, <qemu-stable@nongnu.org>
+Date: Wed, 6 Aug 2025 16:58:14 +0800
+Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH V2] hw/riscv/riscv-iommu: Fixup PDT Nested Walk
+Mime-Version: 1.0
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <39982478-b3fb-46b0-bef0-c0839c123300@tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=118.26.132.12;
+ envelope-from=liujingqi@lanxincomputing.com; helo=sg-1-12.ptr.blmpb.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, MSGID_FROM_MTA_HEADER=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,22 +73,200 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/8/25 08:39, Michael Tokarev wrote:
+On 8/5/2025 1:12 AM, guoren@kernel.org wrote:
+> From: "Guo Ren (Alibaba DAMO Academy)" <guoren@kernel.org>
+>
+> Current implementation is wrong when iohgatp != bare. The RISC-V
+> IOMMU specification has defined that the PDT is based on GPA, not
+> SPA. So this patch fixes the problem, making PDT walk correctly
+> when the G-stage table walk is enabled.
+>
+> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+> Cc: qemu-stable@nongnu.org
+> Cc: Sebastien Boeuf <seb@rivosinc.com>
+> Cc: Tomasz Jeznach <tjeznach@rivosinc.com>
+> Signed-off-by: Guo Ren (Alibaba DAMO Academy) <guoren@kernel.org>
+> ---
+> Changes in V2:
+>   - Remove nested param to make patch clearer.
+>
+>   hw/riscv/riscv-iommu.c | 141 ++++++++++++++++++++++++++++++++++++++++-
+>   1 file changed, 139 insertions(+), 2 deletions(-)
+>
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 96a7fbdefcf3..ded3f7b2fdce 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -866,6 +866,143 @@ static bool riscv_iommu_validate_process_ctx(RISCVIOMMUState *s,
+>       return true;
+>   }
+>   
+> +/**
+> + * pdt_memory_read: PDT wrapper of dma_memory_read.
+> + *
+> + * @s: IOMMU Device State
+> + * @ctx: Device Translation Context with devid and pasid set
+> + * @addr: address within that address space
+> + * @buf: buffer with the data transferred
+> + * @len: length of the data transferred
+> + * @attrs: memory transaction attributes
+> + */
+> +static MemTxResult pdt_memory_read(RISCVIOMMUState *s,
+> +                                   RISCVIOMMUContext *ctx,
+> +                                   dma_addr_t addr,
+> +                                   void *buf, dma_addr_t len,
+> +                                   MemTxAttrs attrs)
+> +{
+> +    uint64_t gatp_mode, pte;
+> +    struct {
+> +        unsigned char step;
+> +        unsigned char levels;
+> +        unsigned char ptidxbits;
+> +        unsigned char ptesize;
+> +    } sc;
+> +    MemTxResult ret;
+> +    dma_addr_t base = addr;
+> +
+> +    /* G stages translation mode */
+> +    gatp_mode = get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
+> +    if (gatp_mode == RISCV_IOMMU_DC_IOHGATP_MODE_BARE)
+> +        goto out;
+> +
+> +    /* G stages translation tables root pointer */
+> +    base = PPN_PHYS(get_field(ctx->gatp, RISCV_IOMMU_ATP_PPN_FIELD));
+> +
+> +    /* Start at step 0 */
+> +    sc.step = 0;
+> +
+> +    if (s->fctl & RISCV_IOMMU_FCTL_GXL) {
+> +        /* 32bit mode for GXL == 1 */
+> +        switch (gatp_mode) {
+> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4:
+> +            if (!(s->cap & RISCV_IOMMU_CAP_SV32X4)) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +            sc.levels    = 2;
+> +            sc.ptidxbits = 10;
+> +            sc.ptesize   = 4;
+> +            break;
+> +        default:
+> +            return MEMTX_ACCESS_ERROR;
+> +        }
+> +    } else {
+> +        /* 64bit mode for GXL == 0 */
+> +        switch (gatp_mode) {
+> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV39X4:
+> +            if (!(s->cap & RISCV_IOMMU_CAP_SV39X4)) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +            sc.levels    = 3;
+> +            sc.ptidxbits = 9;
+> +            sc.ptesize   = 8;
+> +            break;
+> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV48X4:
+> +            if (!(s->cap & RISCV_IOMMU_CAP_SV48X4)) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +            sc.levels    = 4;
+> +            sc.ptidxbits = 9;
+> +            sc.ptesize   = 8;
+> +            break;
+> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV57X4:
+> +            if (!(s->cap & RISCV_IOMMU_CAP_SV57X4)) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +            sc.levels    = 5;
+> +            sc.ptidxbits = 9;
+> +            sc.ptesize   = 8;
+> +            break;
+> +        default:
+> +            return MEMTX_ACCESS_ERROR;
+> +        }
+> +    }
+How about moving the variables of 'gatp_mode', 'base' and 'sc' out of 
+this wrapper function ?
+Since all of them are the same except for 'sc.step' during the traversal 
+of PDT.
 
-> Philippe, do you think this series is something which should
-> go to stable-10.0 (LTS) branch?  I'm not sure for the impact if
-> it is not applied, though, - what do we miss in this case?
+Otherwise,
+Reviewed-by: Nutty Liu <liujingqi@lanxincomputing.com>
 
-Only 2 machines use a SD card wired over SPI lines:
-
-$ git grep '"ssi-sd"'
-hw/arm/stellaris.c:1302:            sddev = ssi_create_peripheral(bus, 
-"ssi-sd");
-hw/riscv/sifive_u.c:671:    sd_dev = 
-ssi_create_peripheral(s->soc.spi2.spi, "ssi-sd");
-hw/sd/ssi-sd.c:70:#define TYPE_SSI_SD "ssi-sd"
-
-I don't know them enough to tell if they are that important. This
-isn't a security problem. The emulation of the transport (SPI) to the
-SD card being broken, guests can not access the emulated card.
+Thanks,
+Nutty
+> +
+> +    do {
+> +        const unsigned va_bits = (sc.step ? 0 : 2) + sc.ptidxbits;
+> +        const unsigned va_skip = TARGET_PAGE_BITS + sc.ptidxbits *
+> +                                 (sc.levels - 1 - sc.step);
+> +        const unsigned idx = (addr >> va_skip) & ((1 << va_bits) - 1);
+> +        const dma_addr_t pte_addr = base + idx * sc.ptesize;
+> +
+> +        /* Address range check before first level lookup */
+> +        if (!sc.step) {
+> +            const uint64_t va_mask = (1ULL << (va_skip + va_bits)) - 1;
+> +            if ((addr & va_mask) != addr) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +        }
+> +
+> +        /* Read page table entry */
+> +        if (sc.ptesize == 4) {
+> +            uint32_t pte32 = 0;
+> +            ret = ldl_le_dma(s->target_as, pte_addr, &pte32, attrs);
+> +            pte = pte32;
+> +        } else {
+> +            ret = ldq_le_dma(s->target_as, pte_addr, &pte, attrs);
+> +        }
+> +        if (ret != MEMTX_OK)
+> +            return ret;
+> +
+> +        sc.step++;
+> +        hwaddr ppn = pte >> PTE_PPN_SHIFT;
+> +
+> +        if (!(pte & PTE_V)) {
+> +            return MEMTX_ACCESS_ERROR; /* Invalid PTE */
+> +        } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
+> +            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W */
+> +        } else if ((pte & (PTE_R | PTE_W | PTE_X)) == (PTE_W | PTE_X)) {
+> +            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W + PTE_X */
+> +        } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
+> +            return MEMTX_ACCESS_ERROR; /* Misaligned PPN */
+> +        } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+> +            base = PPN_PHYS(ppn); /* Inner PTE, continue walking */
+> +        } else {
+> +            /* Leaf PTE, translation completed. */
+> +            base = PPN_PHYS(ppn) | (addr & ((1ULL << va_skip) - 1));
+> +            break;
+> +        }
+> +
+> +        if (sc.step == sc.levels) {
+> +            return MEMTX_ACCESS_ERROR; /* Can't find leaf PTE */
+> +        }
+> +    } while (1);
+> +
+> +out:
+> +    return dma_memory_read(s->target_as, base, buf, len, attrs);
+> +}
+> +
+>   /*
+>    * RISC-V IOMMU Device Context Loopkup - Device Directory Tree Walk
+>    *
+> @@ -1038,7 +1175,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
+>            */
+>           const int split = depth * 9 + 8;
+>           addr |= ((ctx->process_id >> split) << 3) & ~TARGET_PAGE_MASK;
+> -        if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
+> +        if (pdt_memory_read(s, ctx, addr, &de, sizeof(de),
+>                               MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
+>               return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
+>           }
+> @@ -1053,7 +1190,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
+>   
+>       /* Leaf entry in PDT */
+>       addr |= (ctx->process_id << 4) & ~TARGET_PAGE_MASK;
+> -    if (dma_memory_read(s->target_as, addr, &dc.ta, sizeof(uint64_t) * 2,
+> +    if (pdt_memory_read(s, ctx, addr, &dc.ta, sizeof(uint64_t) * 2,
+>                           MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
+>           return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
+>       }
 
