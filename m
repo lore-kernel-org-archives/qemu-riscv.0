@@ -4,82 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC0ECC87FCB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Aug 2025 14:20:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE90FC87FD3
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Aug 2025 17:59:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ujf04-0007Su-1I; Wed, 06 Aug 2025 10:20:25 -0400
+	id 1ujiPd-0005uf-4F; Wed, 06 Aug 2025 13:58:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liwei1518@gmail.com>)
- id 1ujezj-0007Ms-7d; Wed, 06 Aug 2025 10:19:56 -0400
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1ujiPZ-0005tP-Vp
+ for qemu-riscv@nongnu.org; Wed, 06 Aug 2025 13:58:50 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <liwei1518@gmail.com>)
- id 1ujezf-0005m5-SA; Wed, 06 Aug 2025 10:19:54 -0400
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ae9c2754a00so1595753266b.2; 
- Wed, 06 Aug 2025 07:19:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1ujiPX-0003a2-4j
+ for qemu-riscv@nongnu.org; Wed, 06 Aug 2025 13:58:49 -0400
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-76b6422756fso333499b3a.2
+ for <qemu-riscv@nongnu.org>; Wed, 06 Aug 2025 10:58:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754489989; x=1755094789; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kiB9/CR9FZaA8vjWm2cyjJCURhQDb1/QrMBZE15e/Sg=;
- b=V8/l34bn9nv0HfNR77EJaPJwfs/GL6munG4aKP3GzBF9FwP0mhPn3vfWJcr/KEpSbH
- pHh0papc87lRtWsCLkwwNnpkxE2npLYOgjq38ZjrVtuxDy2b82HwPwBdgIElLxRDwvI5
- Z/Nde29Jy0vfGB38Q25octOPGGqL3pvcmiCTSWehoSOQewfiTahwHFHPITsvjuLFrtyW
- quoWbMYAJbukhujoYKGFflSYklwGpI2wIGdfFCruknt3AJzrhbHyaNeAmqezaJ3XWsJW
- IdR7QJJJXaZfisFQe2z1W523CyBMKN/FkVejTPmhsGx6Qzaaz1mIXM7ckYLe50OkoZYp
- lY5g==
+ d=linaro.org; s=google; t=1754503124; x=1755107924; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KUzhoRa9kWNC+956n2XC5X9V/+aRZPom4rXJNxrCnJc=;
+ b=FH/2ZdqMXoKVul1VRMlEJoSjNfYnB5Kd2zyPQgLBvqy46geprLgn/imWE5dJlojBXr
+ 0VIcOUlzjyZkRu80IBZHWPCqniglsJKVYfw+ajb+qDoja9IvM05AWrlqLJhsgxgw3hbo
+ AgrWZS9ZT8p2NHlBBXBQXxcA0iDgvzmB5tvPW/U9sJo8d+aV51haoGswjQQlqwwl7zWg
+ kA72wt1OvJlauPKyiMJed4+oJ8FpzFNpqs6lFTPXw3FRPjQQ0aa1SsVgr0mGh8uPY8t8
+ YquhJwKOZ1Kd2Gxbgdiqm/YiNYJlZmVESyOUrNNWAxvwipcWsl/qowxfJCZsck75Kz9I
+ gsAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754489989; x=1755094789;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kiB9/CR9FZaA8vjWm2cyjJCURhQDb1/QrMBZE15e/Sg=;
- b=b/6Y2t//5Rx3+djkx+DZWtBXOfdLFnE23ze2YjquAjnExATn/yMR+X/+R4vIn4QUtC
- eRaCTcGFNZRSwdtQB9OCFTM6Dz9YpG/+KOMrTul4pzulthHxBt4qmO5bRmIDc1RLcQE7
- WlPc5mBSpT/0fmXDdqud0yzKCdtxyuWPfBdVtlvl/5O5z7buwg6C31pyCMumqoaz/Qmv
- P+pCJBNbAn1Nx8Pqme0kmdDoJcyYBnNue4bPqLH4yKi6Osym/rfUVGW/xtHK9EoH4zXK
- hdw6Z6YRZ25FKZaS0l1eqcsekP13P434KAXWBEV93WzP5FgM5ET+EHie7eBG2MNm3dcs
- qg4w==
+ d=1e100.net; s=20230601; t=1754503124; x=1755107924;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=KUzhoRa9kWNC+956n2XC5X9V/+aRZPom4rXJNxrCnJc=;
+ b=lZw+aB3rUuje+ewOIt8jmabaaj5rF5DcsFuiNH4QTdSJcMg3P9wbKbKEROub/OuLLb
+ pxl8Cbyn5drLuCfMvtf8Grw+jEAhP+1qoRTtFJHBNrWqqXkdq9O5qU30feSlzX1wuxZH
+ OBP5tIBLTj9MdsJo4cV9guhYO048HQTwVoGNFAbv8NDxLE/s50mxte6lmsWDLwgjam23
+ UpNKXMQKIV4GnaZsaSe5Ww2V/DZRXY5Y9cmAvvLWy5B069uRIqCzvn7OwGc5O6A4Gz5z
+ T1ZnAKszsLipnvtmYLZ3jMsz9ZdTaUa4Y/ZAgfWLIyzE4pV2TrICBn7GcuqNi/N7Y4tt
+ lfzw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURTyQFwPo/rW/9GTEuol9AvAfHhULJKzoopB2h2kkYDSVgZ860yLZa6brMIKVJDVJt+VTcrdK6iPBJ@nongnu.org,
- AJvYcCWD0DERxRVSgqqWnzV3kv3epjUh85zXthAHwBWnA6KeLnsqRQUJwvOEWiB2n5iox5OgZaZQeUBLzUr0ig==@nongnu.org,
- AJvYcCWknHRKEWBOpiLWkRE2MO4ajYXRH1ByGdkQZflLfEc8MrVNAeBTa1jvsLeDPdLx28XVq1Vo0Xtuu9RN7dk=@nongnu.org
-X-Gm-Message-State: AOJu0Yx9aT8H1N2OgoWukAwZ7Fx14J+RDCRN67p1eQuy/uqQ9wdwozLN
- HFT1pHPMZZ3enRl9i6HXeLUwwlEbNV1C0536VdOp924G/ocUzQMJsgrg9Uz+ffuyiT6uVMFSz8Z
- oxgMVJk+jxpvb1FQvim+ndiH2zv+i/wA=
-X-Gm-Gg: ASbGnctdQYLkn1Y+9JuE7ER7gkBSL7Ol2/xzPoTt2wXojA4mQh+SUb8OfhIORg71ceU
- 2AvrAu0p+cIeneY8BCLLqnusBxslLEhDOIs5GvcawOMzZ9jH2y2cJBxZBpwt5yxYpPMc2UY85do
- S9KNW7uGFN6xb76QXbz93USFP/modbbEYBkk/sSZ9lzINvcdrICI0ImKrWG48Tfikm8m8v0YQ9j
- bCMczyHRUI1FFOgXYE=
-X-Google-Smtp-Source: AGHT+IFrDbrpCzcZgHV4pBiyROCV0OAlX7z20UzYmzmjRPPjvGp/4yin59RDH4Y/oKSCXYqVfhe0Thybd3n6+pGPorQ=
-X-Received: by 2002:a17:906:ef0a:b0:ae6:c9b3:57cb with SMTP id
- a640c23a62f3a-af990108b04mr299342866b.5.1754489988865; Wed, 06 Aug 2025
- 07:19:48 -0700 (PDT)
+ AJvYcCVgjNzNzXDY7EaVcHSYTkJnMCTeTgP7v43ktmImsFdbbWq3rfGbjXQwZM/B5lGJugLyg82/jFqtNmvk@nongnu.org
+X-Gm-Message-State: AOJu0Yy0Du2yfAMx/MOIDLX/zsHXDSFEYyjEyq4hzOKhTiwAqYstlnfH
+ ScX57g5DjMnBjGIbeLl/ZgFIn/eRodApzQsPqyxz5imuOKT7tARKtq7eTXjgEsYqApQ=
+X-Gm-Gg: ASbGncs2d2dyGwy/ErFx4qhtPBJORq3dbQ1k9kvjohgoJbU0GHeR5U7oMVWrHGSFTU1
+ bcbHHVd7IhZ79+QM1X3+WHA67/STtjSjrm+inlkT7Cre+KaQ9tBhzemaIYxgQwfKafIF9ZnnaIM
+ O4k0DYNdNqMF+RFov7eAucnS/5gC9bECLSZFkzy6VaUITQwPBsNFD7NQIxu6if/+IP1TVwaFer0
+ B9r8XmDG3XCyI5OFQuJ5660wcQ5mZcELkkll225KrpaFGWnHlR0a+mZwiSs3aLOBxf8V3NEF96j
+ lhz7VPfc+oGCL3hV734d2BLIFfNurQO6riX2EUSJNVAxc6OlD2PhX9Wu83Jv02pF9/cW909O5ud
+ /kIKn7lQSb9hxLXgRqHoyrlPIqKlIdmwWilU=
+X-Google-Smtp-Source: AGHT+IFuSrIvv2ahIGq5H2kSoMaEzNPI3bzvD6uYVydV+3Gftmznag6PPCNrrFiNAeRtRVihSAeXOA==
+X-Received: by 2002:a05:6a20:729f:b0:240:7ed:402d with SMTP id
+ adf61e73a8af0-240313ec465mr7740921637.31.1754503124081; 
+ Wed, 06 Aug 2025 10:58:44 -0700 (PDT)
+Received: from [192.168.1.87] ([38.41.223.211])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-76c0401f3d7sm8451375b3a.96.2025.08.06.10.58.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 06 Aug 2025 10:58:43 -0700 (PDT)
+Message-ID: <cf516dd1-51ae-45fb-a3df-6f7e0056234c@linaro.org>
+Date: Wed, 6 Aug 2025 10:58:42 -0700
 MIME-Version: 1.0
-References: <20250804171238.354493-1-guoren@kernel.org>
-In-Reply-To: <20250804171238.354493-1-guoren@kernel.org>
-From: wei li <liwei1518@gmail.com>
-Date: Wed, 6 Aug 2025 22:19:36 +0800
-X-Gm-Features: Ac12FXxS0CCPEx5sYpNjMRzYkwCF6mflO_4ebjR3tz9fdRsfOd4NcxDmTjx1p34
-Message-ID: <CADCiS9+FkT2pQCTOjm-=jbtwGVJqj7Rs-axdLUBg19H_BdgJdw@mail.gmail.com>
-Subject: Re: [PATCH V2] hw/riscv/riscv-iommu: Fixup PDT Nested Walk
-To: guoren@kernel.org
-Cc: zhiwei_liu@linux.alibaba.com, alistair.francis@wdc.com, seb@rivosinc.com, 
- tjeznach@rivosinc.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- qemu-stable@nongnu.org
-Content-Type: multipart/alternative; boundary="0000000000008c61aa063bb308b1"
-Received-SPF: pass client-ip=2a00:1450:4864:20::634;
- envelope-from=liwei1518@gmail.com; helo=mail-ej1-x634.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PULL 11/13] tests/functional: Test SD cards in SPI mode (using
+ sifive_u machine)
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Guenter Roeck <linux@roeck-us.net>, Ben Dooks
+ <ben.dooks@codethink.co.uk>, Richard Henderson
+ <richard.henderson@linaro.org>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+References: <20250805173135.38045-1-philmd@linaro.org>
+ <20250805173135.38045-12-philmd@linaro.org>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20250805173135.38045-12-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -97,538 +111,146 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000008c61aa063bb308b1
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-<guoren@kernel.org> =E4=BA=8E2025=E5=B9=B48=E6=9C=885=E6=97=A5=E5=91=A8=E4=
-=BA=8C 01:12=E5=86=99=E9=81=93=EF=BC=9A
-
-> From: "Guo Ren (Alibaba DAMO Academy)" <guoren@kernel.org>
->
-> Current implementation is wrong when iohgatp !=3D bare. The RISC-V
-> IOMMU specification has defined that the PDT is based on GPA, not
-> SPA. So this patch fixes the problem, making PDT walk correctly
-> when the G-stage table walk is enabled.
->
-> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-> Cc: qemu-stable@nongnu.org
-> Cc: Sebastien Boeuf <seb@rivosinc.com>
-> Cc: Tomasz Jeznach <tjeznach@rivosinc.com>
-> Signed-off-by: Guo Ren (Alibaba DAMO Academy) <guoren@kernel.org>
+On 8/5/25 10:31 AM, Philippe Mathieu-Daudé wrote:
+> Add a test which uses the sifive_u machine to boot a Linux
+> kernel from a SD card connected via a SPI interface.
+> 
+> Inspired from the command provided in:
+> - https://lore.kernel.org/qemu-devel/94b2c5bf-53d0-4c74-8264-f3021916f38c@roeck-us.net/
+> - https://lore.kernel.org/qemu-devel/840016d0-0d49-4ef4-8372-b62b3bcd0ac6@codethink.co.uk/
+> 
+> Inspired-by: Guenter Roeck <linux@roeck-us.net>
+> Inspired-by: Ben Dooks <ben.dooks@codethink.co.uk>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Acked-by: Richard Henderson <richard.henderson@linaro.org>
+> Message-Id: <20250804133406.17456-12-philmd@linaro.org>
 > ---
-> Changes in V2:
->  - Remove nested param to make patch clearer.
->
->  hw/riscv/riscv-iommu.c | 141 ++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 139 insertions(+), 2 deletions(-)
->
-> LGTM.
+>   MAINTAINERS                               |  1 +
+>   tests/functional/meson.build              |  1 +
+>   tests/functional/test_riscv64_sifive_u.py | 51 +++++++++++++++++++++++
+>   3 files changed, 53 insertions(+)
+>   create mode 100755 tests/functional/test_riscv64_sifive_u.py
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 28cea342718..a07086ed762 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1695,6 +1695,7 @@ S: Supported
+>   F: docs/system/riscv/sifive_u.rst
+>   F: hw/*/*sifive*.c
+>   F: include/hw/*/*sifive*.h
+> +F: tests/functional/test_riscv64_sifive_u.py
+>   
+>   AMD Microblaze-V Generic Board
+>   M: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
+> diff --git a/tests/functional/meson.build b/tests/functional/meson.build
+> index ecf965adc6c..311c6f18065 100644
+> --- a/tests/functional/meson.build
+> +++ b/tests/functional/meson.build
+> @@ -274,6 +274,7 @@ tests_riscv64_system_quick = [
+>   ]
+>   
+>   tests_riscv64_system_thorough = [
+> +  'riscv64_sifive_u',
+>     'riscv64_tuxrun',
+>   ]
+>   
+> diff --git a/tests/functional/test_riscv64_sifive_u.py b/tests/functional/test_riscv64_sifive_u.py
+> new file mode 100755
+> index 00000000000..dc4cb8a4a96
+> --- /dev/null
+> +++ b/tests/functional/test_riscv64_sifive_u.py
+> @@ -0,0 +1,51 @@
+> +#!/usr/bin/env python3
+> +#
+> +# Functional test that boots a Linux kernel on a Sifive U machine
+> +# and checks the console
+> +#
+> +# Copyright (c) Linaro Ltd.
+> +#
+> +# Author:
+> +#  Philippe Mathieu-Daudé
+> +#
+> +# SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +import os
+> +
+> +from qemu_test import Asset, LinuxKernelTest
+> +from qemu_test import skipIfMissingCommands
+> +
+> +
+> +class SifiveU(LinuxKernelTest):
+> +
+> +    ASSET_KERNEL = Asset(
+> +        'https://storage.tuxboot.com/buildroot/20241119/riscv64/Image',
+> +        '2bd8132a3bf21570290042324fff48c987f42f2a00c08de979f43f0662ebadba')
+> +    ASSET_ROOTFS = Asset(
+> +        ('https://github.com/groeck/linux-build-test/raw/'
+> +         '9819da19e6eef291686fdd7b029ea00e764dc62f/rootfs/riscv64/'
+> +         'rootfs.ext2.gz'),
+> +        'b6ed95610310b7956f9bf20c4c9c0c05fea647900df441da9dfe767d24e8b28b')
+> +
+> +    def test_riscv64_sifive_u_mmc_spi(self):
+> +        self.set_machine('sifive_u')
+> +        kernel_path = self.ASSET_KERNEL.fetch()
+> +        rootfs_path = self.uncompress(self.ASSET_ROOTFS)
+> +
+> +        self.vm.set_console()
+> +        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+> +                               'root=/dev/mmcblk0 rootwait '
+> +                               'earlycon=sbi console=ttySIF0 '
+> +                               'panic=-1 noreboot')
+> +        self.vm.add_args('-kernel', kernel_path,
+> +                         '-drive', f'file={rootfs_path},if=sd,format=raw',
+> +                         '-append', kernel_command_line,
+> +                         '-no-reboot')
+> +        self.vm.launch()
+> +        self.wait_for_console_pattern('Boot successful.')
+> +
+> +        os.remove(rootfs_path)
+> +
+> +
+> +if __name__ == '__main__':
+> +    LinuxKernelTest.main()
 
-*"3.3.2. Process to locate the Process-context*
+This new test triggers a usban error, which seems unrelated to what is 
+tested.
 
-*
-The device-context provides the PDT root page PPN (pdtp.ppn). When
-DC.iohgatp.mode is not
-*
+tests/functional/riscv64/test_riscv64_sifive_u.SifiveU.test_riscv64_sifive_u_mmc_spi/default.log
+../net/checksum.c:78:23: runtime error: member access within misaligned 
+address 0x63300000ff71 for type 'struct eth_header', which requires 2 
+byte alignment
+0x63300000ff71: note: pointer points here
+  00 00 00  00 33 33 00 00 00 16 52  54 00 12 34 56 86 dd 60  00 00 00 
+00 24 00 01 00  00 00 00 00 00
+               ^
+     #0 0x56492d505aeb in net_checksum_calculate ../net/checksum.c:78
+     #1 0x56492cde3b75 in gem_transmit ../hw/net/cadence_gem.c:1386
+     #2 0x56492cde3b75 in gem_write ../hw/net/cadence_gem.c:1639
+     #3 0x56492d35ba8d in memory_region_write_accessor 
+../system/memory.c:490
+     #4 0x56492d368449 in access_with_adjusted_size ../system/memory.c:566
+     #5 0x56492d36de3c in memory_region_dispatch_write 
+../system/memory.c:1553
+     #6 0x56492d39fb22 in flatview_write_continue_step 
+../system/physmem.c:2972
+     #7 0x56492d3a007c in flatview_write_continue ../system/physmem.c:3002
+     #8 0x56492d3a007c in flatview_write ../system/physmem.c:3033
+     #9 0x56492d3a0376 in subpage_write ../system/physmem.c:2635
+     #10 0x56492d368449 in access_with_adjusted_size ../system/memory.c:566
+     #11 0x56492d36de3c in memory_region_dispatch_write 
+../system/memory.c:1553
+     #12 0x56492d6b16a4 in int_st_mmio_leN ../accel/tcg/cputlb.c:2503
+     #13 0x56492d6b1a3b in do_st_mmio_leN ../accel/tcg/cputlb.c:2538
+     #14 0x56492d6c80e8 in do_st_4 ../accel/tcg/cputlb.c:2708
+     #15 0x56492d6c80e8 in do_st4_mmu ../accel/tcg/cputlb.c:2784
+     #16 0x7fd5c72bcf7d  (/memfd:tcg-jit (deleted)+0x527ff7d)
 
-*
-Bare, pdtp.PPN as well as pdte.PPN are Guest Physical Addresses (GPA)
-which must be translated
-*
-
-*
-into Supervisor Physical Addresses (SPA) using the second-stage page
-table pointed to by
-*
-
-*
-DC.iohgatp. The memory accesses to the PDT are treated as implicit
-read memory accesses by the
-*
-
-* second-stage."*
-
-Reviewed-by: Weiwei Li <liwei1518@gmail.com>
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior 
+../net/checksum.c:78:23
 
 Regards,
-
-Weiwei Li
-
-
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 96a7fbdefcf3..ded3f7b2fdce 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -866,6 +866,143 @@ static bool
-> riscv_iommu_validate_process_ctx(RISCVIOMMUState *s,
->      return true;
->  }
->
-> +/**
-> + * pdt_memory_read: PDT wrapper of dma_memory_read.
-> + *
-> + * @s: IOMMU Device State
-> + * @ctx: Device Translation Context with devid and pasid set
-> + * @addr: address within that address space
-> + * @buf: buffer with the data transferred
-> + * @len: length of the data transferred
-> + * @attrs: memory transaction attributes
-> + */
-> +static MemTxResult pdt_memory_read(RISCVIOMMUState *s,
-> +                                   RISCVIOMMUContext *ctx,
-> +                                   dma_addr_t addr,
-> +                                   void *buf, dma_addr_t len,
-> +                                   MemTxAttrs attrs)
-> +{
-> +    uint64_t gatp_mode, pte;
-> +    struct {
-> +        unsigned char step;
-> +        unsigned char levels;
-> +        unsigned char ptidxbits;
-> +        unsigned char ptesize;
-> +    } sc;
-> +    MemTxResult ret;
-> +    dma_addr_t base =3D addr;
-> +
-> +    /* G stages translation mode */
-> +    gatp_mode =3D get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
-> +    if (gatp_mode =3D=3D RISCV_IOMMU_DC_IOHGATP_MODE_BARE)
-> +        goto out;
-> +
-> +    /* G stages translation tables root pointer */
-> +    base =3D PPN_PHYS(get_field(ctx->gatp, RISCV_IOMMU_ATP_PPN_FIELD));
-> +
-> +    /* Start at step 0 */
-> +    sc.step =3D 0;
-> +
-> +    if (s->fctl & RISCV_IOMMU_FCTL_GXL) {
-> +        /* 32bit mode for GXL =3D=3D 1 */
-> +        switch (gatp_mode) {
-> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4:
-> +            if (!(s->cap & RISCV_IOMMU_CAP_SV32X4)) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +            sc.levels    =3D 2;
-> +            sc.ptidxbits =3D 10;
-> +            sc.ptesize   =3D 4;
-> +            break;
-> +        default:
-> +            return MEMTX_ACCESS_ERROR;
-> +        }
-> +    } else {
-> +        /* 64bit mode for GXL =3D=3D 0 */
-> +        switch (gatp_mode) {
-> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV39X4:
-> +            if (!(s->cap & RISCV_IOMMU_CAP_SV39X4)) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +            sc.levels    =3D 3;
-> +            sc.ptidxbits =3D 9;
-> +            sc.ptesize   =3D 8;
-> +            break;
-> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV48X4:
-> +            if (!(s->cap & RISCV_IOMMU_CAP_SV48X4)) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +            sc.levels    =3D 4;
-> +            sc.ptidxbits =3D 9;
-> +            sc.ptesize   =3D 8;
-> +            break;
-> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV57X4:
-> +            if (!(s->cap & RISCV_IOMMU_CAP_SV57X4)) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +            sc.levels    =3D 5;
-> +            sc.ptidxbits =3D 9;
-> +            sc.ptesize   =3D 8;
-> +            break;
-> +        default:
-> +            return MEMTX_ACCESS_ERROR;
-> +        }
-> +    }
-> +
-> +    do {
-> +        const unsigned va_bits =3D (sc.step ? 0 : 2) + sc.ptidxbits;
-> +        const unsigned va_skip =3D TARGET_PAGE_BITS + sc.ptidxbits *
-> +                                 (sc.levels - 1 - sc.step);
-> +        const unsigned idx =3D (addr >> va_skip) & ((1 << va_bits) - 1);
-> +        const dma_addr_t pte_addr =3D base + idx * sc.ptesize;
-> +
-> +        /* Address range check before first level lookup */
-> +        if (!sc.step) {
-> +            const uint64_t va_mask =3D (1ULL << (va_skip + va_bits)) - 1=
-;
-> +            if ((addr & va_mask) !=3D addr) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +        }
-> +
-> +        /* Read page table entry */
-> +        if (sc.ptesize =3D=3D 4) {
-> +            uint32_t pte32 =3D 0;
-> +            ret =3D ldl_le_dma(s->target_as, pte_addr, &pte32, attrs);
-> +            pte =3D pte32;
-> +        } else {
-> +            ret =3D ldq_le_dma(s->target_as, pte_addr, &pte, attrs);
-> +        }
-> +        if (ret !=3D MEMTX_OK)
-> +            return ret;
-> +
-> +        sc.step++;
-> +        hwaddr ppn =3D pte >> PTE_PPN_SHIFT;
-> +
-> +        if (!(pte & PTE_V)) {
-> +            return MEMTX_ACCESS_ERROR; /* Invalid PTE */
-> +        } else if ((pte & (PTE_R | PTE_W | PTE_X)) =3D=3D PTE_W) {
-> +            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W
-> */
-> +        } else if ((pte & (PTE_R | PTE_W | PTE_X)) =3D=3D (PTE_W | PTE_X=
-)) {
-> +            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W
-> + PTE_X */
-> +        } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
-> +            return MEMTX_ACCESS_ERROR; /* Misaligned PPN */
-> +        } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
-> +            base =3D PPN_PHYS(ppn); /* Inner PTE, continue walking */
-> +        } else {
-> +            /* Leaf PTE, translation completed. */
-> +            base =3D PPN_PHYS(ppn) | (addr & ((1ULL << va_skip) - 1));
-> +            break;
-> +        }
-> +
-> +        if (sc.step =3D=3D sc.levels) {
-> +            return MEMTX_ACCESS_ERROR; /* Can't find leaf PTE */
-> +        }
-> +    } while (1);
-> +
-> +out:
-> +    return dma_memory_read(s->target_as, base, buf, len, attrs);
-> +}
-> +
->  /*
->   * RISC-V IOMMU Device Context Loopkup - Device Directory Tree Walk
->   *
-> @@ -1038,7 +1175,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s=
-,
-> RISCVIOMMUContext *ctx)
->           */
->          const int split =3D depth * 9 + 8;
->          addr |=3D ((ctx->process_id >> split) << 3) & ~TARGET_PAGE_MASK;
-> -        if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
-> +        if (pdt_memory_read(s, ctx, addr, &de, sizeof(de),
->                              MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {
->              return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
->          }
-> @@ -1053,7 +1190,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s=
-,
-> RISCVIOMMUContext *ctx)
->
->      /* Leaf entry in PDT */
->      addr |=3D (ctx->process_id << 4) & ~TARGET_PAGE_MASK;
-> -    if (dma_memory_read(s->target_as, addr, &dc.ta, sizeof(uint64_t) * 2=
-,
-> +    if (pdt_memory_read(s, ctx, addr, &dc.ta, sizeof(uint64_t) * 2,
->                          MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {
->          return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
->      }
-> --
-> 2.40.1
->
->
-
---0000000000008c61aa063bb308b1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">&lt;<a href=3D"=
-mailto:guoren@kernel.org">guoren@kernel.org</a>&gt; =E4=BA=8E2025=E5=B9=B48=
-=E6=9C=885=E6=97=A5=E5=91=A8=E4=BA=8C 01:12=E5=86=99=E9=81=93=EF=BC=9A<br><=
-/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
-rder-left:1px solid rgb(204,204,204);padding-left:1ex">From: &quot;Guo Ren =
-(Alibaba DAMO Academy)&quot; &lt;<a href=3D"mailto:guoren@kernel.org" targe=
-t=3D"_blank">guoren@kernel.org</a>&gt;<br>
-<br>
-Current implementation is wrong when iohgatp !=3D bare. The RISC-V<br>
-IOMMU specification has defined that the PDT is based on GPA, not<br>
-SPA. So this patch fixes the problem, making PDT walk correctly<br>
-when the G-stage table walk is enabled.<br>
-<br>
-Fixes: 0c54acb8243d (&quot;hw/riscv: add RISC-V IOMMU base emulation&quot;)=
-<br>
-Cc: <a href=3D"mailto:qemu-stable@nongnu.org" target=3D"_blank">qemu-stable=
-@nongnu.org</a><br>
-Cc: Sebastien Boeuf &lt;<a href=3D"mailto:seb@rivosinc.com" target=3D"_blan=
-k">seb@rivosinc.com</a>&gt;<br>
-Cc: Tomasz Jeznach &lt;<a href=3D"mailto:tjeznach@rivosinc.com" target=3D"_=
-blank">tjeznach@rivosinc.com</a>&gt;<br>
-Signed-off-by: Guo Ren (Alibaba DAMO Academy) &lt;<a href=3D"mailto:guoren@=
-kernel.org" target=3D"_blank">guoren@kernel.org</a>&gt;<br>
----<br>
-Changes in V2:<br>
-=C2=A0- Remove nested param to make patch clearer.<br>
-<br>
-=C2=A0hw/riscv/riscv-iommu.c | 141 ++++++++++++++++++++++++++++++++++++++++=
--<br>
-=C2=A01 file changed, 139 insertions(+), 2 deletions(-)<br>
-<br></blockquote><div>LGTM.=C2=A0=C2=A0</div><div><br></div><div><i>&quot;3=
-.3.2.=C2=A0Process=C2=A0to=C2=A0locate=C2=A0the=C2=A0Process-context</i></d=
-iv>
-<p><i>
-The=C2=A0device-context=C2=A0provides=C2=A0the=C2=A0PDT=C2=A0root=C2=A0page=
-=C2=A0PPN=C2=A0(pdtp.ppn).=C2=A0When=C2=A0DC.iohgatp.mode=C2=A0is=C2=A0not
-</i></p><p><i>
-Bare,=C2=A0pdtp.PPN=C2=A0as=C2=A0well=C2=A0as=C2=A0pdte.PPN=C2=A0are=C2=A0G=
-uest=C2=A0Physical=C2=A0Addresses=C2=A0(GPA)=C2=A0which=C2=A0must=C2=A0be=
-=C2=A0translated
-</i></p><p><i>
-into=C2=A0Supervisor=C2=A0Physical=C2=A0Addresses=C2=A0(SPA)=C2=A0using=C2=
-=A0the=C2=A0second-stage=C2=A0page=C2=A0table=C2=A0pointed=C2=A0to=C2=A0by
-</i></p><p><i>
-DC.iohgatp.=C2=A0The=C2=A0memory=C2=A0accesses=C2=A0to=C2=A0the=C2=A0PDT=C2=
-=A0are=C2=A0treated=C2=A0as=C2=A0implicit=C2=A0read=C2=A0memory=C2=A0access=
-es=C2=A0by=C2=A0the
-</i></p><p><i>
-second-stage.&quot;</i></p><p>Reviewed-by:=C2=A0<span style=3D"color:rgb(0,=
-0,0)">Weiwei Li &lt;<a href=3D"mailto:liwei1518@gmail.com">liwei1518@gmail.=
-com</a>&gt;</span></p><p><span style=3D"color:rgb(0,0,0)">Regards,</span></=
-p><p><span style=3D"color:rgb(0,0,0)">Weiwei Li</span></p><p><span style=3D=
-"color:rgb(0,0,0)"><br></span></p><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c<br>
-index 96a7fbdefcf3..ded3f7b2fdce 100644<br>
---- a/hw/riscv/riscv-iommu.c<br>
-+++ b/hw/riscv/riscv-iommu.c<br>
-@@ -866,6 +866,143 @@ static bool riscv_iommu_validate_process_ctx(RISCVIOM=
-MUState *s,<br>
-=C2=A0 =C2=A0 =C2=A0return true;<br>
-=C2=A0}<br>
-<br>
-+/**<br>
-+ * pdt_memory_read: PDT wrapper of dma_memory_read.<br>
-+ *<br>
-+ * @s: IOMMU Device State<br>
-+ * @ctx: Device Translation Context with devid and pasid set<br>
-+ * @addr: address within that address space<br>
-+ * @buf: buffer with the data transferred<br>
-+ * @len: length of the data transferred<br>
-+ * @attrs: memory transaction attributes<br>
-+ */<br>
-+static MemTxResult pdt_memory_read(RISCVIOMMUState *s,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0RISCVIOMMUContext *ctx,=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dma_addr_t addr,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0void *buf, dma_addr_t l=
-en,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0MemTxAttrs attrs)<br>
-+{<br>
-+=C2=A0 =C2=A0 uint64_t gatp_mode, pte;<br>
-+=C2=A0 =C2=A0 struct {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 unsigned char step;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 unsigned char levels;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 unsigned char ptidxbits;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 unsigned char ptesize;<br>
-+=C2=A0 =C2=A0 } sc;<br>
-+=C2=A0 =C2=A0 MemTxResult ret;<br>
-+=C2=A0 =C2=A0 dma_addr_t base =3D addr;<br>
-+<br>
-+=C2=A0 =C2=A0 /* G stages translation mode */<br>
-+=C2=A0 =C2=A0 gatp_mode =3D get_field(ctx-&gt;gatp, RISCV_IOMMU_ATP_MODE_F=
-IELD);<br>
-+=C2=A0 =C2=A0 if (gatp_mode =3D=3D RISCV_IOMMU_DC_IOHGATP_MODE_BARE)<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 goto out;<br>
-+<br>
-+=C2=A0 =C2=A0 /* G stages translation tables root pointer */<br>
-+=C2=A0 =C2=A0 base =3D PPN_PHYS(get_field(ctx-&gt;gatp, RISCV_IOMMU_ATP_PP=
-N_FIELD));<br>
-+<br>
-+=C2=A0 =C2=A0 /* Start at step 0 */<br>
-+=C2=A0 =C2=A0 sc.step =3D 0;<br>
-+<br>
-+=C2=A0 =C2=A0 if (s-&gt;fctl &amp; RISCV_IOMMU_FCTL_GXL) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* 32bit mode for GXL =3D=3D 1 */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (gatp_mode) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 case RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!(s-&gt;cap &amp; RISCV_IOMM=
-U_CAP_SV32X4)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCES=
-S_ERROR;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.levels=C2=A0 =C2=A0 =3D 2;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.ptidxbits =3D 10;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.ptesize=C2=A0 =C2=A0=3D 4;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 default:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCESS_ERROR;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 } else {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* 64bit mode for GXL =3D=3D 0 */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (gatp_mode) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 case RISCV_IOMMU_DC_IOHGATP_MODE_SV39X4:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!(s-&gt;cap &amp; RISCV_IOMM=
-U_CAP_SV39X4)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCES=
-S_ERROR;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.levels=C2=A0 =C2=A0 =3D 3;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.ptidxbits =3D 9;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.ptesize=C2=A0 =C2=A0=3D 8;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 case RISCV_IOMMU_DC_IOHGATP_MODE_SV48X4:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!(s-&gt;cap &amp; RISCV_IOMM=
-U_CAP_SV48X4)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCES=
-S_ERROR;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.levels=C2=A0 =C2=A0 =3D 4;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.ptidxbits =3D 9;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.ptesize=C2=A0 =C2=A0=3D 8;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 case RISCV_IOMMU_DC_IOHGATP_MODE_SV57X4:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!(s-&gt;cap &amp; RISCV_IOMM=
-U_CAP_SV57X4)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCES=
-S_ERROR;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.levels=C2=A0 =C2=A0 =3D 5;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.ptidxbits =3D 9;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.ptesize=C2=A0 =C2=A0=3D 8;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 default:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCESS_ERROR;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 do {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 const unsigned va_bits =3D (sc.step ? 0 : 2) +=
- sc.ptidxbits;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 const unsigned va_skip =3D TARGET_PAGE_BITS + =
-sc.ptidxbits *<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(sc.levels - 1 - sc.step);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 const unsigned idx =3D (addr &gt;&gt; va_skip)=
- &amp; ((1 &lt;&lt; va_bits) - 1);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 const dma_addr_t pte_addr =3D base + idx * sc.=
-ptesize;<br>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Address range check before first level look=
-up */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!sc.step) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 const uint64_t va_mask =3D (1ULL=
- &lt;&lt; (va_skip + va_bits)) - 1;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if ((addr &amp; va_mask) !=3D ad=
-dr) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCES=
-S_ERROR;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Read page table entry */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (sc.ptesize =3D=3D 4) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t pte32 =3D 0;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D ldl_le_dma(s-&gt;target_=
-as, pte_addr, &amp;pte32, attrs);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pte =3D pte32;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D ldq_le_dma(s-&gt;target_=
-as, pte_addr, &amp;pte, attrs);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ret !=3D MEMTX_OK)<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return ret;<br>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 sc.step++;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 hwaddr ppn =3D pte &gt;&gt; PTE_PPN_SHIFT;<br>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!(pte &amp; PTE_V)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCESS_ERROR; /* In=
-valid PTE */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if ((pte &amp; (PTE_R | PTE_W | PTE_X))=
- =3D=3D PTE_W) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCESS_ERROR; /* Re=
-served leaf PTE flags: PTE_W */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if ((pte &amp; (PTE_R | PTE_W | PTE_X))=
- =3D=3D (PTE_W | PTE_X)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCESS_ERROR; /* Re=
-served leaf PTE flags: PTE_W + PTE_X */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (ppn &amp; ((1ULL &lt;&lt; (va_skip =
-- TARGET_PAGE_BITS)) - 1)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCESS_ERROR; /* Mi=
-saligned PPN */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (!(pte &amp; (PTE_R | PTE_W | PTE_X)=
-)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 base =3D PPN_PHYS(ppn); /* Inner=
- PTE, continue walking */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Leaf PTE, translation complet=
-ed. */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 base =3D PPN_PHYS(ppn) | (addr &=
-amp; ((1ULL &lt;&lt; va_skip) - 1));<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (sc.step =3D=3D sc.levels) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMTX_ACCESS_ERROR; /* Ca=
-n&#39;t find leaf PTE */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+=C2=A0 =C2=A0 } while (1);<br>
-+<br>
-+out:<br>
-+=C2=A0 =C2=A0 return dma_memory_read(s-&gt;target_as, base, buf, len, attr=
-s);<br>
-+}<br>
-+<br>
-=C2=A0/*<br>
-=C2=A0 * RISC-V IOMMU Device Context Loopkup - Device Directory Tree Walk<b=
-r>
-=C2=A0 *<br>
-@@ -1038,7 +1175,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, =
-RISCVIOMMUContext *ctx)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const int split =3D depth * 9 + 8;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0addr |=3D ((ctx-&gt;process_id &gt;&gt; s=
-plit) &lt;&lt; 3) &amp; ~TARGET_PAGE_MASK;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (dma_memory_read(s-&gt;target_as, addr, &am=
-p;de, sizeof(de),<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (pdt_memory_read(s, ctx, addr, &amp;de, siz=
-eof(de),<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_IOMMU_FQ_CAUSE=
-_PDT_LOAD_FAULT;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-@@ -1053,7 +1190,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, =
-RISCVIOMMUContext *ctx)<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0/* Leaf entry in PDT */<br>
-=C2=A0 =C2=A0 =C2=A0addr |=3D (ctx-&gt;process_id &lt;&lt; 4) &amp; ~TARGET=
-_PAGE_MASK;<br>
--=C2=A0 =C2=A0 if (dma_memory_read(s-&gt;target_as, addr, &amp;dc.ta, sizeo=
-f(uint64_t) * 2,<br>
-+=C2=A0 =C2=A0 if (pdt_memory_read(s, ctx, addr, &amp;dc.ta, sizeof(uint64_=
-t) * 2,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAUL=
-T;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
--- <br>
-2.40.1<br>
-<br>
-</blockquote></div></div>
-
---0000000000008c61aa063bb308b1--
+Pierrick
 
