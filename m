@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5E17C87FD2
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Aug 2025 13:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70891C87FD2
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Aug 2025 13:52:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ukNF5-0004bh-7N; Fri, 08 Aug 2025 09:34:43 -0400
+	id 1ukNVc-0003ag-OS; Fri, 08 Aug 2025 09:51:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukNEu-0004UL-0h
- for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 09:34:34 -0400
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukNVD-0003Vd-4J
+ for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 09:51:23 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukNEl-0007Mc-Nv
- for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 09:34:27 -0400
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3b78b2c6ecfso1203125f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 08 Aug 2025 06:34:22 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukNV9-0002Gh-EW
+ for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 09:51:22 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3b783ea5014so1100571f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 08 Aug 2025 06:51:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754660061; x=1755264861; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=e170LGFXn1rlJaN78yP9eVnF2Ri6sfI7ENjDPoXcdww=;
- b=JBrzi+tPdUK+WVUe97h0gELy7BFXkvwimasT1NXURd4fbO3Ew/ONGipX1T9J8V+d6R
- uCsQwci90/bP8n3Uzz2lCPdr/962J7KoPtcLiriQssK7SM3NWoK4RH3SYRdj/gry9tn3
- v+ZXcyr+a8KyS/SB4gzoBDcFJfQ0nr5YsBxRC8k1lV7AWeI+hNLDCBEM+3qJunw6eyVD
- Aqfcl+zyypDP1pJ9x3KSSA2AxHq34uZDn8+o5xRnD7NOzmXP9xeIh6s0dtjIWbS0reAm
- SYy4OJyTbQbsql05RxcHgl4AuoyJO+phaMz6rrgHs+PC8MWFfRx8eFIZdh8y62XVE4AE
- iF+A==
+ d=linaro.org; s=google; t=1754661077; x=1755265877; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=biukNyNLYj2YKv6lz0uhsiGlEtJOutmbXn7faU4jjQg=;
+ b=DFiS/MOvuUxOPGGOP/oGmNrXQkUhjjWq00r/LD/8d6KKC9L+mN+nebKfmXD0T0EzXX
+ HQ22MNAtjleyvhjgUy/v7KQ7FsBwBhrTlDvTX60qrWDmZTIZyy5wKj9vBEK2gU7OD04H
+ wP9bYdkWumJ+v7uorXWmZGf3CV6bg0Z8L19YDxrWkEfOmSVI5c7NPXxPulfF3lSD14EU
+ 51GD9gNDboeuJ9wUpXFkKbtSTXez5qYRuNCbVEtZwcMc37Q9dP+QIm6/SUDhTe9MPj97
+ xJT09UvQz1lBfKKq2AB1HrSMZ+HFymZ5PpFQCBFZvCB4vbllSA1IM0vksxpLa94Jt24q
+ MYag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754660061; x=1755264861;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=e170LGFXn1rlJaN78yP9eVnF2Ri6sfI7ENjDPoXcdww=;
- b=gV92MCmKo4MUH18tIiNheeegbkoeE4/loww1YN12DNxNQSNWsElFiTOKEKiyeAny5v
- bDl4PYzDONwFq7RX3exWYhW1Ho2eRURNax06j8bo5+Lelnd+ctnBxrNZq62bHthoxwC3
- fWY9zerkQtmvFWK21HZbfuDyxS0YOYDIKTSPGdaHPLbKcnMT69JYtgxOyqfDTiDOxvVI
- BShSewtwvKep2RSPpgRUY49cqH+dYS6FbHkHXsdSVdfCq+S6j7wrcnF0cSvqKi2a5ToW
- ISCKrZjXrN73F8itU5znkThrECZ1TNKngj4u2b3h3MralsYrFztlGtqQMQnY27Oxmi0Y
- 4Gaw==
+ d=1e100.net; s=20230601; t=1754661077; x=1755265877;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=biukNyNLYj2YKv6lz0uhsiGlEtJOutmbXn7faU4jjQg=;
+ b=FSOFC/c8OWvEGi/KbQYu9HJNnIE1frjUGgtY6T1ePhotilMDKb7qhVABUQw51EGk15
+ h5ezBLGg1ap7KDgkDxs/R6fr9mgY51FK9jMJWjdVU3tzrtfBnAT9pwwCtKZC2TDZx4u+
+ znN30rodlSulY3DXURb/MeYwTfTrU3hJQz7dvucDFV8+RfOXaSv8XbpG22H3/BeUm7/K
+ HxxTRQjxDC9JN8lDdweYKqvrkcuiUuxkBQQp4MRum8YEYBhW7a9/DlJafhCDkrG9+CuI
+ 1xhno+Lb4T1vWyfBROD0I9hcwo5lDZ5CN8SrNv3S2cgNMohOj2KMSXrQoFVSXyv+geTt
+ Yh9g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmgMCXN3g/LX0/a0vroSvk35mu81uExFXxx6uxDALF14d3qj3mesSeyXJ3Ya7UweMmpj870OwSpXeG@nongnu.org
-X-Gm-Message-State: AOJu0YyolmZafJvrUzvQsgOcSEcx10GXVdnKNCLgDCwFiH8W0Eku1z61
- nIDvmgfVB9Wjvfue+fqfpRq62dLLMS7mpScga4j35RxsQLZjvYa1vvaIJm4dKMG9M1g=
-X-Gm-Gg: ASbGncuFviRFyOij6+qXZ3Sy3omH2hDD4XyZwabRJo01FhMINsqOJBXkVuMdysowT2m
- 9b5xHXxg71Ac+1SOopD4f6ztn0ahbkt3evnfCWkEaQ80GKiT0Mro1GddmXxBONAZOPcCnE15vlw
- neSAwhpFzUx3Sn9Ew3Y6jnvYN+6tvfOuf+yU55cCcFMcLAKY0bjyR2TtsjgZ/aEaYbFMdTwV9t0
- aM6QflSBCbj4wT2VXo0ACypOnvroGwzxZzf6ybDTbialsF0FWJrSQJB+0Q7cQJf648bsGit0+PV
- J5CfQytjGxO2d45aUeH4opkV6GhWmT957i8dzC9Ye+Xo2diZO83MrM9a5+qihcF36s9MGE34788
- UejUl/JDlNSZYstxh4Ehbkz1AHAWTukkrsFYO317KqV0Ao96u/JAcpavfHFDulgMAeA==
-X-Google-Smtp-Source: AGHT+IFlgYVZCum5aT/6nO/o0heDInm5TgPBGHB6k/QDaa+VzganUxVLOKqrUB0h8/zdixkz4XpnRA==
-X-Received: by 2002:a05:6000:144c:b0:3b8:ebfb:4592 with SMTP id
- ffacd0b85a97d-3b900b57347mr2961413f8f.55.1754660060792; 
- Fri, 08 Aug 2025 06:34:20 -0700 (PDT)
-Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
+ AJvYcCXNn5WWs9sllFJ92iJ6rE6gehkWNxfDdtuYN8vbSr1TchEMeLHE9bNMs5YZ/0WVe6YlEEhfAhYfgDG7@nongnu.org
+X-Gm-Message-State: AOJu0Yyj755LmLoCpMd6AHgUFFtjsqe2hWn4aPWz7VMT7rNCPpNqs+X4
+ gGoDobSi/luIgQJPpFdQELQUxqP2KAW911j1Txjn1MFbfnyb607HOaVevY4lgH72WtqiFkxYA+U
+ ccZPO
+X-Gm-Gg: ASbGncvz6leVMvq0bp4+BtYbZ45ZggpLLYwM8rOPbRw7VALceAumulnOqb6gNxyo/RI
+ aZGbd7SJEaqOX+9XvzIjnub36em0MEs3MYCu1enrjGZmFVm1QlmpenQLHc/pdTUipWo05RKKFeA
+ mDUUiwkgTrN1nCxHDZeGQhVhj9yJBMv64L0A6vgRZbqYxRWuKGvF4bSzielOyKa7P/aBUcQkCHu
+ 4RtkC3Fn9hJPY1DD03+wl86sv9cpxe+qiV9O3VhExGaQybVc+P+cNe4g2QUiSl7t6jMPZpBJkgy
+ kqEwfvOvuov39hatp9z1EvyvjV6hMDhzuvx4NG6kTu0c/Fr7u6/AN8mBb9wZ/9y+WmXJkGvFa7i
+ w9ghPQC7CnK8XLnfCLlJWKxsxHoJkhlIYeX4C008cyEjH+FYakRQEnXSO2k0QQVe8vf63whOr
+X-Google-Smtp-Source: AGHT+IFAsuzEdFVn1Y1yktnXSP7JR1iU51QdI+ig3MK8CHl2toQKS98jJC2oZd5G22H3C37zyCHMuQ==
+X-Received: by 2002:a05:6000:188f:b0:3b8:d3cc:8dc with SMTP id
+ ffacd0b85a97d-3b900b5040amr2669729f8f.28.1754661077220; 
+ Fri, 08 Aug 2025 06:51:17 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e585430csm136220455e9.11.2025.08.08.06.34.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 08 Aug 2025 06:34:19 -0700 (PDT)
-Message-ID: <5dc6784f-bbe8-4354-ab8a-4d8e6b0d1f39@linaro.org>
-Date: Fri, 8 Aug 2025 15:34:19 +0200
+ ffacd0b85a97d-3b79c3bf956sm31134697f8f.24.2025.08.08.06.51.15
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 08 Aug 2025 06:51:16 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Guenter Roeck <linux@roeck-us.net>, qemu-riscv@nongnu.org,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-block@nongnu.org
+Subject: [PATCH-for-10.1 0/2] hw/sd/ssi-sd: Return noise (dummy byte) when no
+ card connected
+Date: Fri,  8 Aug 2025 15:51:13 +0200
+Message-ID: <20250808135115.77310-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.1 v2 00/11] hw/sd: Fix SD cards in SPI mode
-To: Guenter Roeck <linux@roeck-us.net>
-Cc: Michael Tokarev <mjt@tls.msk.ru>, Peter Maydell
- <peter.maydell@linaro.org>, qemu-devel@nongnu.org,
- Ben Dooks <ben.dooks@codethink.co.uk>, qemu-riscv@nongnu.org,
- qemu-block@nongnu.org, qemu-arm@nongnu.org, Bin Meng <bmeng.cn@gmail.com>
-References: <20250804133406.17456-1-philmd@linaro.org>
- <39982478-b3fb-46b0-bef0-c0839c123300@tls.msk.ru>
- <9dc90489-9e74-4e00-8fc6-f97e3f425495@linaro.org>
- <5b2dc427-f0db-4332-a997-fe0c82415acd@roeck-us.net>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <5b2dc427-f0db-4332-a997-fe0c82415acd@roeck-us.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,42 +105,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/8/25 18:06, Guenter Roeck wrote:
-> On Wed, Aug 06, 2025 at 09:22:46AM +0200, Philippe Mathieu-Daudé wrote:
->> On 6/8/25 08:39, Michael Tokarev wrote:
->>
->>> Philippe, do you think this series is something which should
->>> go to stable-10.0 (LTS) branch?  I'm not sure for the impact if
->>> it is not applied, though, - what do we miss in this case?
->>
->> Only 2 machines use a SD card wired over SPI lines:
->>
->> $ git grep '"ssi-sd"'
->> hw/arm/stellaris.c:1302:            sddev = ssi_create_peripheral(bus,
->> "ssi-sd");
->> hw/riscv/sifive_u.c:671:    sd_dev = ssi_create_peripheral(s->soc.spi2.spi,
->> "ssi-sd");
->> hw/sd/ssi-sd.c:70:#define TYPE_SSI_SD "ssi-sd"
->>
->> I don't know them enough to tell if they are that important. This
->> isn't a security problem. The emulation of the transport (SPI) to the
->> SD card being broken, guests can not access the emulated card.
-> 
-> With 10.1.0-rc2, trying to boot v6.16-11744-g9c389564fa8e on sifive_u, I get:
-> 
-> [    2.503619] riscv-pmu-sbi: 16 firmware and 18 hardware counters
-> [    2.503672] riscv-pmu-sbi: Perf sampling/filtering is not supported as sscof extension is not available
-> qemu-system-riscv64: ../hw/sd/ssi-sd.c:160: ssi_sd_transfer: Assertion `s->arglen > 0' failed.
-> 
-> This is without trying to boot from it. Oddly enough, booting from SD card
-> does work.
+Trivial fix for the issue reported by Guenter here:
+https://lore.kernel.org/qemu-devel/5b2dc427-f0db-4332-a997-fe0c82415acd@roeck-us.net/
 
-This was a latent bug, thank you for the report.
+- Return dummy byte when no card is connected
+- Add a test
 
-I'll post a fix & test ASAP.
+Philippe Mathieu-Daudé (2):
+  hw/sd/ssi-sd: Return noise (dummy byte) when no card connected
+  tests/functional: Test SPI-SD adapter without SD card connected
 
-Regards,
+ hw/sd/ssi-sd.c                            |  4 ++++
+ tests/functional/test_riscv64_sifive_u.py | 22 +++++++++++++++++-----
+ 2 files changed, 21 insertions(+), 5 deletions(-)
 
-Phil.
+-- 
+2.49.0
 
 
