@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47AABC87FCA
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Aug 2025 18:35:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5E17C87FD2
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Aug 2025 13:35:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uk5Sh-0000u9-Mx; Thu, 07 Aug 2025 14:35:35 -0400
+	id 1ukNF5-0004bh-7N; Fri, 08 Aug 2025 09:34:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uk5Sf-0000lM-Be
- for qemu-riscv@nongnu.org; Thu, 07 Aug 2025 14:35:33 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukNEu-0004UL-0h
+ for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 09:34:34 -0400
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uk5Sc-0006DV-Ad
- for qemu-riscv@nongnu.org; Thu, 07 Aug 2025 14:35:32 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-24022261323so24856385ad.1
- for <qemu-riscv@nongnu.org>; Thu, 07 Aug 2025 11:35:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukNEl-0007Mc-Nv
+ for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 09:34:27 -0400
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3b78b2c6ecfso1203125f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 08 Aug 2025 06:34:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1754591728; x=1755196528; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
+ d=linaro.org; s=google; t=1754660061; x=1755264861; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=08xo9BsKaNqnXduZM0h/ZvRtNXdesc62tf2XRbRyNg8=;
- b=kqDttEqiR8sO3qZHj763Z8kIfCHdY5yMx3byjuZrv0UFUd2+K9h4dnE71eCGF3zEZh
- oO3gkEBGwrnKuTh5aevQPn87Dy11oXGDyBCbRc9R1vAMOOIVdN3Gs9q930r5CZ3nhTGD
- fj2pX/M7CSUKerHEbZGTgZc1wbWoJWwI+2Bxe23fMEbK7HxPfSEgtiPwK75bQzgCGK5V
- V+VQPoutFQzljibe2sFoYP5VwYqFc483RJBudNfleGi9wgkvVmtgp/2WrHnqA2k5fXpv
- I0Mf++dOzRnsVi4OZX9jo0iPdUg7BqZqlHXhs4Rm2AM5Q7Cl5KIfGl0GuJcn8KOuISst
- Tx2A==
+ bh=e170LGFXn1rlJaN78yP9eVnF2Ri6sfI7ENjDPoXcdww=;
+ b=JBrzi+tPdUK+WVUe97h0gELy7BFXkvwimasT1NXURd4fbO3Ew/ONGipX1T9J8V+d6R
+ uCsQwci90/bP8n3Uzz2lCPdr/962J7KoPtcLiriQssK7SM3NWoK4RH3SYRdj/gry9tn3
+ v+ZXcyr+a8KyS/SB4gzoBDcFJfQ0nr5YsBxRC8k1lV7AWeI+hNLDCBEM+3qJunw6eyVD
+ Aqfcl+zyypDP1pJ9x3KSSA2AxHq34uZDn8+o5xRnD7NOzmXP9xeIh6s0dtjIWbS0reAm
+ SYy4OJyTbQbsql05RxcHgl4AuoyJO+phaMz6rrgHs+PC8MWFfRx8eFIZdh8y62XVE4AE
+ iF+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754591728; x=1755196528;
- h=content-transfer-encoding:in-reply-to:content-language:from
+ d=1e100.net; s=20230601; t=1754660061; x=1755264861;
+ h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=08xo9BsKaNqnXduZM0h/ZvRtNXdesc62tf2XRbRyNg8=;
- b=b8VJzBC+ikJrqCSGGofWe0Cz6A92+bfsDMEIANueW0bnNUMEo3/ckzl0K43lcWxS1t
- ZbdPGIS0sn6K/0jg5PtHLuQbX5ZW8+KzgOfH3PdWqKzIb+Nr1SXg205oMq61EL/MDjvf
- UDrd4/jAAF+nYImjSSN8hKW/vyjeYx/RgmSOi1JNd+Pk/J0MabbGVBBw8JqXQxpVTc8T
- qJuIku/VPWY90m9sZClcGSqom2Ov5MktKgM4INEuPAe9UQiunjAQdW2K+GHwiAevMNJx
- oPjo0Iru8dSLRQFKAXUYp41nDVdwre03BXGraX+ea5y88XkFWC+QBUDZFel88OU/d6YS
- MzmQ==
-X-Gm-Message-State: AOJu0YyftwVZN/k6bd9szD99g7p3xRtFeUrkTQUH0jPQUqb9wggiO+nF
- 7Opk/8YtHkkrr/JJswgZPDjIl+epdAAT4zQQUt+BbQ3SDQOBjP1Bj/xMmp4UwHpwv0I=
-X-Gm-Gg: ASbGncsLoSXQWZCWo/TTMwVu7aHN6KsoY1UMUkR8HeyekwLsosE9yAoLaJXBAgscfY0
- UOmk7EB0X0vgLavfs0Rz03utDWNFHjgz44DlEZTfLKEwIKbZhrMTLXb7WxW70zaxI3nBwlghw5e
- 9HkGPu23gNu5vjsFHVjdVlRXz7fGegdt2kUMz7A2f35hbwp2THHNsFtUV5rfrP6yl4S2zqiYi4Y
- vvAYLXDod+9ex0Imv7bdXi41b5SeOjyEpZRrgJRHvQplDX9RqueudGoxqibGivaVLNSP7D1HJGV
- 54wj9DgSSBerjy7dS2UuU35m5BBHTC7TCp76hPwprhIAdz8HWUQZcnYbA42x6kJMxsvjqoV2Ior
- ihkrROviLRW1smFv3Cg0HoXVNn90f0KZ0pMfKrw==
-X-Google-Smtp-Source: AGHT+IFydHUWH43fj+2wUYLa3I+9L14ZPgfbTIvdz+GZMaVnhXY0NIwlBi+4Fsoo4hm1zQG2ULrqgw==
-X-Received: by 2002:a17:903:198c:b0:240:b630:e600 with SMTP id
- d9443c01a7336-242b06624f8mr64149965ad.11.1754591727840; 
- Thu, 07 Aug 2025 11:35:27 -0700 (PDT)
-Received: from [192.168.68.110] ([152.234.127.110])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-241e89768a7sm191381895ad.83.2025.08.07.11.35.25
+ bh=e170LGFXn1rlJaN78yP9eVnF2Ri6sfI7ENjDPoXcdww=;
+ b=gV92MCmKo4MUH18tIiNheeegbkoeE4/loww1YN12DNxNQSNWsElFiTOKEKiyeAny5v
+ bDl4PYzDONwFq7RX3exWYhW1Ho2eRURNax06j8bo5+Lelnd+ctnBxrNZq62bHthoxwC3
+ fWY9zerkQtmvFWK21HZbfuDyxS0YOYDIKTSPGdaHPLbKcnMT69JYtgxOyqfDTiDOxvVI
+ BShSewtwvKep2RSPpgRUY49cqH+dYS6FbHkHXsdSVdfCq+S6j7wrcnF0cSvqKi2a5ToW
+ ISCKrZjXrN73F8itU5znkThrECZ1TNKngj4u2b3h3MralsYrFztlGtqQMQnY27Oxmi0Y
+ 4Gaw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmgMCXN3g/LX0/a0vroSvk35mu81uExFXxx6uxDALF14d3qj3mesSeyXJ3Ya7UweMmpj870OwSpXeG@nongnu.org
+X-Gm-Message-State: AOJu0YyolmZafJvrUzvQsgOcSEcx10GXVdnKNCLgDCwFiH8W0Eku1z61
+ nIDvmgfVB9Wjvfue+fqfpRq62dLLMS7mpScga4j35RxsQLZjvYa1vvaIJm4dKMG9M1g=
+X-Gm-Gg: ASbGncuFviRFyOij6+qXZ3Sy3omH2hDD4XyZwabRJo01FhMINsqOJBXkVuMdysowT2m
+ 9b5xHXxg71Ac+1SOopD4f6ztn0ahbkt3evnfCWkEaQ80GKiT0Mro1GddmXxBONAZOPcCnE15vlw
+ neSAwhpFzUx3Sn9Ew3Y6jnvYN+6tvfOuf+yU55cCcFMcLAKY0bjyR2TtsjgZ/aEaYbFMdTwV9t0
+ aM6QflSBCbj4wT2VXo0ACypOnvroGwzxZzf6ybDTbialsF0FWJrSQJB+0Q7cQJf648bsGit0+PV
+ J5CfQytjGxO2d45aUeH4opkV6GhWmT957i8dzC9Ye+Xo2diZO83MrM9a5+qihcF36s9MGE34788
+ UejUl/JDlNSZYstxh4Ehbkz1AHAWTukkrsFYO317KqV0Ao96u/JAcpavfHFDulgMAeA==
+X-Google-Smtp-Source: AGHT+IFlgYVZCum5aT/6nO/o0heDInm5TgPBGHB6k/QDaa+VzganUxVLOKqrUB0h8/zdixkz4XpnRA==
+X-Received: by 2002:a05:6000:144c:b0:3b8:ebfb:4592 with SMTP id
+ ffacd0b85a97d-3b900b57347mr2961413f8f.55.1754660060792; 
+ Fri, 08 Aug 2025 06:34:20 -0700 (PDT)
+Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-459e585430csm136220455e9.11.2025.08.08.06.34.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Aug 2025 11:35:27 -0700 (PDT)
-Message-ID: <9a305b9e-98b6-4693-84c9-b506bd2b830d@ventanamicro.com>
-Date: Thu, 7 Aug 2025 15:35:23 -0300
+ Fri, 08 Aug 2025 06:34:19 -0700 (PDT)
+Message-ID: <5dc6784f-bbe8-4354-ab8a-4d8e6b0d1f39@linaro.org>
+Date: Fri, 8 Aug 2025 15:34:19 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 00/14] riscv: Add support for MIPS P8700 CPU
-To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>,
- "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
- "philmd@linaro.org" <philmd@linaro.org>
-References: <20250717093833.402237-1-djordje.todorovic@htecgroup.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: Re: [PATCH-for-10.1 v2 00/11] hw/sd: Fix SD cards in SPI mode
+To: Guenter Roeck <linux@roeck-us.net>
+Cc: Michael Tokarev <mjt@tls.msk.ru>, Peter Maydell
+ <peter.maydell@linaro.org>, qemu-devel@nongnu.org,
+ Ben Dooks <ben.dooks@codethink.co.uk>, qemu-riscv@nongnu.org,
+ qemu-block@nongnu.org, qemu-arm@nongnu.org, Bin Meng <bmeng.cn@gmail.com>
+References: <20250804133406.17456-1-philmd@linaro.org>
+ <39982478-b3fb-46b0-bef0-c0839c123300@tls.msk.ru>
+ <9dc90489-9e74-4e00-8fc6-f97e3f425495@linaro.org>
+ <5b2dc427-f0db-4332-a997-fe0c82415acd@roeck-us.net>
 Content-Language: en-US
-In-Reply-To: <20250717093833.402237-1-djordje.todorovic@htecgroup.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <5b2dc427-f0db-4332-a997-fe0c82415acd@roeck-us.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,101 +107,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
-
-I have provided reviews and acks on the v4 review:
-
-https://lore.kernel.org/qemu-riscv/20250625141732.59084-1-djordje.todorovic@htecgroup.com/
-
-I also gave one additional ack/review in patch 8 in v5:
-
-https://lore.kernel.org/qemu-riscv/20250703104925.112688-1-djordje.todorovic@htecgroup.com/
-
-I see no acks in any patches in this version.
-
-The common practice is to include any reviewed-by/acked-by tags received in the commit
-msg of each patch when submitting a new version, letting other ppl know that the patch
-was already looked at once. Unless you make changes in the patch and the review gave
-before is now invalid - then in this case you drop the tag and a new review is
-required.
-
-Unless you completely changed all the patches and all the reviews doesn't apply
-anymore, please re-send this series with the acks/reviewed-by tags in the patches.
- From my estimation this series is supposed to have 2-3 patches missing review only.
-
-
-Thanks,
-
-Daniel
-
-
-
-
-On 7/17/25 6:38 AM, Djordje Todorovic wrote:
-> I addressed several comments in this version, major ones:
->    - split CPC / CMGCR into separated changes
->    - split CPS into a separated change
->    - added functional tests for boston-aia board
+On 7/8/25 18:06, Guenter Roeck wrote:
+> On Wed, Aug 06, 2025 at 09:22:46AM +0200, Philippe Mathieu-Daudé wrote:
+>> On 6/8/25 08:39, Michael Tokarev wrote:
+>>
+>>> Philippe, do you think this series is something which should
+>>> go to stable-10.0 (LTS) branch?  I'm not sure for the impact if
+>>> it is not applied, though, - what do we miss in this case?
+>>
+>> Only 2 machines use a SD card wired over SPI lines:
+>>
+>> $ git grep '"ssi-sd"'
+>> hw/arm/stellaris.c:1302:            sddev = ssi_create_peripheral(bus,
+>> "ssi-sd");
+>> hw/riscv/sifive_u.c:671:    sd_dev = ssi_create_peripheral(s->soc.spi2.spi,
+>> "ssi-sd");
+>> hw/sd/ssi-sd.c:70:#define TYPE_SSI_SD "ssi-sd"
+>>
+>> I don't know them enough to tell if they are that important. This
+>> isn't a security problem. The emulation of the transport (SPI) to the
+>> SD card being broken, guests can not access the emulated card.
 > 
-> Djordje Todorovic (14):
->    hw/intc: Allow gaps in hartids for aclint and aplic
->    target/riscv: Add cpu_set_exception_base
->    target/riscv: Add MIPS P8700 CPU
->    target/riscv: Add MIPS P8700 CSRs
->    target/riscv: Add mips.ccmov instruction
->    target/riscv: Add mips.pref instruction
->    target/riscv: Add Xmipslsp instructions
->    hw/misc: Add RISC-V CMGCR device implementation
->    hw/misc: Add RISC-V CPC device implementation
->    hw/riscv: Add support for RISCV CPS
->    hw/riscv: Add support for MIPS Boston-aia board mode
->    hw/pci: Allow explicit function numbers in pci
->    riscv/boston-aia: Add an e1000e NIC in slot 0 func 1
->    test/functional: Add test for boston-aia board
+> With 10.1.0-rc2, trying to boot v6.16-11744-g9c389564fa8e on sifive_u, I get:
 > 
->   configs/devices/riscv64-softmmu/default.mak |   1 +
->   docs/system/riscv/mips.rst                  |  20 +
->   docs/system/target-riscv.rst                |   1 +
->   hw/intc/riscv_aclint.c                      |  21 +-
->   hw/intc/riscv_aplic.c                       |  11 +-
->   hw/misc/Kconfig                             |  20 +
->   hw/misc/meson.build                         |   3 +
->   hw/misc/riscv_cmgcr.c                       | 234 ++++++++++
->   hw/misc/riscv_cpc.c                         | 239 ++++++++++
->   hw/pci/pci.c                                |  15 +-
->   hw/riscv/Kconfig                            |   6 +
->   hw/riscv/boston-aia.c                       | 489 ++++++++++++++++++++
->   hw/riscv/cps.c                              | 197 ++++++++
->   hw/riscv/meson.build                        |   3 +
->   include/hw/misc/riscv_cmgcr.h               |  49 ++
->   include/hw/misc/riscv_cpc.h                 |  73 +++
->   include/hw/riscv/cps.h                      |  76 +++
->   target/riscv/cpu-qom.h                      |   1 +
->   target/riscv/cpu.c                          |  40 ++
->   target/riscv/cpu.h                          |   7 +
->   target/riscv/cpu_cfg.h                      |   6 +
->   target/riscv/cpu_cfg_fields.h.inc           |   3 +
->   target/riscv/cpu_vendorid.h                 |   1 +
->   target/riscv/insn_trans/trans_xmips.c.inc   | 142 ++++++
->   target/riscv/meson.build                    |   2 +
->   target/riscv/mips_csr.c                     | 228 +++++++++
->   target/riscv/translate.c                    |   3 +
->   target/riscv/xmips.decode                   |  35 ++
->   tests/functional/meson.build                |   1 +
->   tests/functional/test_riscv64_boston.py     |  78 ++++
->   30 files changed, 1994 insertions(+), 11 deletions(-)
->   create mode 100644 docs/system/riscv/mips.rst
->   create mode 100644 hw/misc/riscv_cmgcr.c
->   create mode 100644 hw/misc/riscv_cpc.c
->   create mode 100644 hw/riscv/boston-aia.c
->   create mode 100644 hw/riscv/cps.c
->   create mode 100644 include/hw/misc/riscv_cmgcr.h
->   create mode 100644 include/hw/misc/riscv_cpc.h
->   create mode 100644 include/hw/riscv/cps.h
->   create mode 100644 target/riscv/insn_trans/trans_xmips.c.inc
->   create mode 100644 target/riscv/mips_csr.c
->   create mode 100644 target/riscv/xmips.decode
->   create mode 100755 tests/functional/test_riscv64_boston.py
+> [    2.503619] riscv-pmu-sbi: 16 firmware and 18 hardware counters
+> [    2.503672] riscv-pmu-sbi: Perf sampling/filtering is not supported as sscof extension is not available
+> qemu-system-riscv64: ../hw/sd/ssi-sd.c:160: ssi_sd_transfer: Assertion `s->arglen > 0' failed.
 > 
+> This is without trying to boot from it. Oddly enough, booting from SD card
+> does work.
+
+This was a latent bug, thank you for the report.
+
+I'll post a fix & test ASAP.
+
+Regards,
+
+Phil.
 
 
