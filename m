@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29C9AC87FD2
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Aug 2025 13:52:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C46FC87FD2
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Aug 2025 15:52:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ukNVt-0003iZ-DY; Fri, 08 Aug 2025 09:52:05 -0400
+	id 1ukPOG-0003mg-Nw; Fri, 08 Aug 2025 11:52:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukNVM-0003ZN-OR
- for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 09:51:36 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukPOC-0003gs-0i
+ for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 11:52:16 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukNVJ-0002Hu-3K
- for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 09:51:32 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-455fdfb5d04so11414845e9.2
- for <qemu-riscv@nongnu.org>; Fri, 08 Aug 2025 06:51:28 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ukPO9-0003YT-W6
+ for qemu-riscv@nongnu.org; Fri, 08 Aug 2025 11:52:15 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3b7848df30cso1771405f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 08 Aug 2025 08:52:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1754661087; x=1755265887; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5l7n3D9ctZbGZm4ngX5c30d2jXCKAPPPYSiErk+U9JA=;
- b=ta3vhjwLZFf5A9TsOptl2/6EW7gKCzTL5GqybHhKJ4r/ip2yf8KuNanoQMKmLeeSld
- qYnqANjQnZdhgYjv80OIZwsZ0DqSar+caYJ5uoGS0N18oMvP14es9hI0kyWRg43qZqql
- 9Q7ZjqmwItiMh9oY21Weta5xm/Ker7R2aoTJ/AMk2/5OwBDXHGCGvDY3w+BIBu6/1gCy
- P8BOBH2mGPpx/zaGnEvelVJr03q6ytCZwIHfIsepnd1gfq9Z8uxEESUcpPNaKj5JsjVR
- DrFM3i813kJf/uXqmxiW26Cpqty15n/P6x+89tcSSli1onjjxqI+mSVFCgXBlg0DbixR
- wkyw==
+ d=linaro.org; s=google; t=1754668331; x=1755273131; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=f7oT8vg7HMFo/rfWiiwua42SUDaULdyy8fUyCy39DeM=;
+ b=Cy0fwPeVT7Uf0j4+xLRX8B+3AMPfUGiCuTew/dzFDo3YMSleWa2mmqubS36yf7CJ4r
+ gOh/fGaxPgS5Q8/W4LWfjXL9RhDVp/QkO3uiiZGfNFPKDqlGKNUfgY7La1adSmtm08wE
+ 0LHwuSnR1CnxMpXDBFe8oZ7LzzhLNGwxNxJkTm4VJpRcHisz+40xt3cHXcal1aH1EQb3
+ DUd2gjlIlN8G6891j6wRlOAx92r2DDvi8I5cbg/zR08JJuHfl7VoN4r/3e1eFM8eFMJn
+ U/0QWxk0VzlHKcuNRpByg8Hd7hMi4HZjjLzy9nidAvUhlrrzdA2bAmU5ZX0KTmTwPXl1
+ PQ/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754661087; x=1755265887;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5l7n3D9ctZbGZm4ngX5c30d2jXCKAPPPYSiErk+U9JA=;
- b=RZwH56erblP8/FhG3L/WkVfX07Ps3rwmOGLNynEob34N3PdXNsnhKvdpJP+mXmjx9v
- YZodHOQ12d9666Kfb8M33NKmXu18xRFWysoiILw6sLjZOn2W1dTBcnKBbGhv84ZiFwHd
- em9zCQ6FHbIa/O2v3hyS34OHjxFzlIbpcnFwjfsC9iKuNApZwZ7uZJDUdxBdEGL27Qr9
- N+jeaypNB802r4fy57S321RxUkC+tUPbrbknxA83S7e5+83jncMcuh10+mE9hesIqowP
- MQG31uDB1z5nbxStNgKoYdrCWBIhMDfoS/CE9hxjexkV/kLaZwSs7vH5OVA3t2XwXQ58
- j/zA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWHhX7m9K9fcQmxrVw0NCDOIiCXOW0laacVdqiKLRyWqyzTcKqJtOzWa/3MGe4m9pl8NKt1itSMQEN2@nongnu.org
-X-Gm-Message-State: AOJu0YzjOQV1e82kIlJnyB4jRLfnTO3baVRwdqfdd4j8xop4k1zubOeQ
- veHyCAY/kt/Xys3WjkkkUfZnopAqMaDFrpQC1LtVc2VlQd7jex49YckXRTJQ7qx7LjM=
-X-Gm-Gg: ASbGncsb8Hs08pDes8YSKqwl/GVgc5wWLhmhXI52olMCsti+ALqlXYyR2x4ccd5Awgw
- Eivtn9RfZGF+EJB2lV48ubTX4lOXDNZXVm2EFmZeVQXvIpebOtB4jPGRfJwugJ6AiVjjtye15fh
- gvuUgUhifEG7q4TmuR7AuwV1hr+7W5DkD6tq7PX3GydzF/KABdTWcM8U2n17PhMmyBfqR+mg+sG
- mAqBxCxyALkww+6BgLiHnsUGVswUr/KZfYDRJaO6ureNzoHAuyTyVMklVaRoC66tdMKvgj+QKpF
- dk7IpnmipvpFDpLhHtjwi/pZ5lQLkLZKcUH6gTk96wTFwmLYtS+v4z+uIa4Tazrg/NMEGmssEJV
- N10Lfy98s+m2RjCcl5QidtCjitQDTzSo8MRmVEhOQtWefGAfqkc8AEWcJ3X078rNS7gSUZGO3
-X-Google-Smtp-Source: AGHT+IHjP+LfvGq0+GFppwTBcfZwQeILlxu//QZAS1Vn2mW1Idvjp5FeSBKD1eY8d2GZM727Rjua+g==
-X-Received: by 2002:a05:600c:4449:b0:459:dfde:332e with SMTP id
- 5b1f17b1804b1-459f4f1447cmr25906755e9.29.1754661087139; 
- Fri, 08 Aug 2025 06:51:27 -0700 (PDT)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ d=1e100.net; s=20230601; t=1754668331; x=1755273131;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=f7oT8vg7HMFo/rfWiiwua42SUDaULdyy8fUyCy39DeM=;
+ b=d7go+u6D/1OkmgSXp7fzmZkpwseWN25LjuCiGVZ/+rXj0pez3XGGkKQwpxcEXexQlY
+ laLg5/l4QoAZ3g36yAbo4rJy86KUKGaBjs5Y0C6r57Ti/ESaWhT74E0ZRj/GA/iFJyds
+ 9XPA0JHRsnwVW+zKu8QLdZy1tJFUruLlkOCo/XwR92Eia1H79oHcg7ZIZkc5+LOiPH3t
+ 85oEiclc9TN17NTYZp56GgDrRK1eCj9uZZdS2xXYegdygwKJsYdCUpevBuXOqELmJa3T
+ I2xLASX0fOJhCMQJQduotCy5V+bcyN7FTum0o0f2M5JkhcfgeDjNO4pMH+K1HJ4exjcx
+ IHBQ==
+X-Gm-Message-State: AOJu0YzWwpOffUkFHx4kGPOiTJHDk/TGOsZT5al0h4ldZ+6+//f56c1j
+ 8DUQ+F5snQJxKz2Y19l1FcNp4HQHhtHEE/np8MlhAe276vZmXowIqEBwg/AVu/uAK20=
+X-Gm-Gg: ASbGncuO+zQV6WCgNIh2qVA0yyRVaGABq6nX7Ihq7xS8zFr3YWBGSl4VbGzH8GZNUba
+ waLqB3MNLXno2oX0v/AjuQDiSIHrXKP0cX0b6SF89dSHi7v0Nf6PAmWcm7V4vmTaByhRtYE3X/X
+ DWAG24NKL2WBPApCfOQ8ttOpCbiM5lmmbATB6tvh02bzGkq1QLC+q6Riec0YxcaTodUJgwmdPO6
+ xgS9BLzd2qOB78Dw19ak+xvmOYhqRYnQnKlSfyCUCcyRHueJNp2moOArSec7r42cc65PCgBtGsf
+ 2q9933Yv1iZy00vt0Kv/s2dqnqJllJ6CNW0vSItsfKgYrt0lcPGZ3ru24UW2Q89oLsCieTX5ZoJ
+ sX2bq7IS8cbb7eomMu7tzW0mv73fDTMgxDC/fkDo+ryIdJKw1HF8FaCj7kCHiOJ2DZg==
+X-Google-Smtp-Source: AGHT+IHYn+tlP0TPdz5qomcIZqdRf8ER/rsL3zip1JDD5AGh7alaEnE1zumE4m/yiycVxz0VGHTbvQ==
+X-Received: by 2002:a05:6000:4028:b0:3b7:8842:8a0c with SMTP id
+ ffacd0b85a97d-3b8f97ec49emr7295254f8f.19.1754668331440; 
+ Fri, 08 Aug 2025 08:52:11 -0700 (PDT)
+Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3b8e9464f46sm16174067f8f.19.2025.08.08.06.51.26
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 08 Aug 2025 06:51:26 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Guenter Roeck <linux@roeck-us.net>, qemu-riscv@nongnu.org,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-block@nongnu.org
-Subject: [PATCH-for-10.1 2/2] tests/functional: Test SPI-SD adapter without SD
- card connected
-Date: Fri,  8 Aug 2025 15:51:15 +0200
-Message-ID: <20250808135115.77310-3-philmd@linaro.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250808135115.77310-1-philmd@linaro.org>
-References: <20250808135115.77310-1-philmd@linaro.org>
+ 5b1f17b1804b1-459e3d37439sm88430145e9.2.2025.08.08.08.52.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 08 Aug 2025 08:52:10 -0700 (PDT)
+Message-ID: <5f0fb254-fa9c-4e29-a848-6e9b3bc8274d@linaro.org>
+Date: Fri, 8 Aug 2025 17:52:09 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 01/14] hw/intc: Allow gaps in hartids for aclint and
+ aplic
+To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>,
+ "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
+ "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>
+References: <20250717093833.402237-1-djordje.todorovic@htecgroup.com>
+ <20250717093833.402237-2-djordje.todorovic@htecgroup.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20250717093833.402237-2-djordje.todorovic@htecgroup.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,65 +105,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-SPI-SD adapter should be usable, even without any SD card
-wired. Refactor test_riscv64_sifive_u_mmc_spi() to make it
-more generic and add another test, inspired by this report:
-https://lore.kernel.org/qemu-devel/5b2dc427-f0db-4332-a997-fe0c82415acd@roeck-us.net/
+On 17/7/25 11:38, Djordje Todorovic wrote:
+> This is needed for riscv based CPUs by MIPS since those may have
+> sparse hart-ID layouts. ACLINT and APLIC still assume a dense
+> range, and if a hart is missing, this causes NULL derefs.
+> 
+> Signed-off-by: Chao-ying Fu <cfu@mips.com>
+> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
+> ---
+>   hw/intc/riscv_aclint.c | 21 +++++++++++++++++++--
+>   hw/intc/riscv_aplic.c  | 11 ++++++++---
+>   2 files changed, 27 insertions(+), 5 deletions(-)
+> 
+> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+> index b0139f03f5..22ac4133d5 100644
+> --- a/hw/intc/riscv_aclint.c
+> +++ b/hw/intc/riscv_aclint.c
+> @@ -292,7 +292,13 @@ static void riscv_aclint_mtimer_realize(DeviceState *dev, Error **errp)
+>       s->timecmp = g_new0(uint64_t, s->num_harts);
+>       /* Claim timer interrupt bits */
+>       for (i = 0; i < s->num_harts; i++) {
+> -        RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(s->hartid_base + i));
+> +        CPUState *cpu_by_hartid = cpu_by_arch_id(s->hartid_base + i);
+> +        if (cpu_by_hartid == NULL) {
+> +            qemu_log_mask(LOG_GUEST_ERROR, "aclint-mtimer: invalid hartid: %u",
+> +                          s->hartid_base + i);
 
-Inspired-by: Guenter Roeck <linux@roeck-us.net>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- tests/functional/test_riscv64_sifive_u.py | 22 +++++++++++++++++-----
- 1 file changed, 17 insertions(+), 5 deletions(-)
+DeviceRealize() handlers are part of machine modelling, not guest uses.
 
-diff --git a/tests/functional/test_riscv64_sifive_u.py b/tests/functional/test_riscv64_sifive_u.py
-index dc4cb8a4a96..f7ab1abfd56 100755
---- a/tests/functional/test_riscv64_sifive_u.py
-+++ b/tests/functional/test_riscv64_sifive_u.py
-@@ -27,25 +27,37 @@ class SifiveU(LinuxKernelTest):
-          'rootfs.ext2.gz'),
-         'b6ed95610310b7956f9bf20c4c9c0c05fea647900df441da9dfe767d24e8b28b')
- 
--    def test_riscv64_sifive_u_mmc_spi(self):
-+    def do_test_riscv64_sifive_u_mmc_spi(self, connect_card):
-         self.set_machine('sifive_u')
-         kernel_path = self.ASSET_KERNEL.fetch()
-         rootfs_path = self.uncompress(self.ASSET_ROOTFS)
- 
-         self.vm.set_console()
-         kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
--                               'root=/dev/mmcblk0 rootwait '
-                                'earlycon=sbi console=ttySIF0 '
--                               'panic=-1 noreboot')
-+                               'root=/dev/mmcblk0 ')
-         self.vm.add_args('-kernel', kernel_path,
--                         '-drive', f'file={rootfs_path},if=sd,format=raw',
-                          '-append', kernel_command_line,
-                          '-no-reboot')
-+        if connect_card:
-+            self.vm.add_args('-drive', f'file={rootfs_path},if=sd,format=raw')
-+            kernel_command_line += 'panic=-1 noreboot rootwait '
-+            pattern = 'Boot successful.'
-+        else:
-+            kernel_command_line += 'panic=0 noreboot '
-+            pattern = 'Cannot open root device "mmcblk0" or unknown-block(0,0)'
-+
-         self.vm.launch()
--        self.wait_for_console_pattern('Boot successful.')
-+        self.wait_for_console_pattern(pattern)
- 
-         os.remove(rootfs_path)
- 
-+    def _test_riscv64_sifive_u_nommc_spi(self):
-+        self.do_test_riscv64_sifive_u_mmc_spi(False)
-+
-+    def test_riscv64_sifive_u_mmc_spi(self):
-+        self.do_test_riscv64_sifive_u_mmc_spi(True)
-+
- 
- if __name__ == '__main__':
-     LinuxKernelTest.main()
--- 
-2.49.0
+IOW, triggering this is a programming mistake, so we should just
+abort() here.
 
 
