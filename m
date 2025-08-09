@@ -4,143 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43308C87FCB
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Aug 2025 20:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEBAEC87FCB
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Aug 2025 12:13:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ukTSj-0001q9-2l; Fri, 08 Aug 2025 16:13:13 -0400
+	id 1ukiRT-0004jD-90; Sat, 09 Aug 2025 08:12:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
- id 1ukTSb-0001lq-92; Fri, 08 Aug 2025 16:13:05 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1ukiRL-0004iH-4K
+ for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 08:12:48 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
- id 1ukTSX-0007F5-Ph; Fri, 08 Aug 2025 16:13:04 -0400
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-76bdc73f363so2507565b3a.3; 
- Fri, 08 Aug 2025 13:12:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1ukiRH-00028t-Dv
+ for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 08:12:45 -0400
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-b4245235a77so2495658a12.1
+ for <qemu-riscv@nongnu.org>; Sat, 09 Aug 2025 05:12:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754683979; x=1755288779; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
- bh=CqcAcp9Y/0mTvAESsvSkuGhtwb6vFv5pOqiTj6z4VsE=;
- b=Vz5PfLOXr+Mw2rVjO5SRfeBCuJvdyBTHHCfCNh7EuidxelBRCEVSDfHFJwObsgzT7H
- AaD7M4EvXkPPu8AnV5Uj6ZoZRpP9cadaolwvutRBaW4jn1URCYKPsspWOFYw5odcw+OH
- 6TmKfK6ZLv+jxSqLkcY/9+gTKIHUEwdt+lhk8eWDismUfdLMNfR9DCVHoDylWa4OFoZz
- cst1EuJPMNgV6gyyXfI+AtxTX4xONkXlUSlXM6Kz1ekKReaRfN0cHut6Jj0JDI2Sq1cn
- llPDIvLPmTXByWUiWrSTObZz2LCSUO6m5e0BE2ZxpQs63OY0NDOoD0IZCluw8ARAQ7An
- /gRQ==
+ d=ventanamicro.com; s=google; t=1754741560; x=1755346360; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1Z/VirRQp9x5HIUEn152PrNpkGR+njVzvOtZvEJ551k=;
+ b=BmaOlOv/mzRwbEtWoHQxntDMQDLA6vYVgr1CR+aZ6bbLObRHRhr56Tk+sQCRa5QPaC
+ vV6HY17VhlH/nF2rHdCc2NmYZdHvHZ1sr+ho+asFgG5Kd9RdDVYs7RVeUY1TpXnw0pWX
+ dvJ/umh0a6kAmNLKVVb7BDai8mjs+Ud1bXdMoIHDNG3/wc/GUxf3gMOgC0BJcVaWgwsp
+ FxcZH4kZqC6G+OycDdeWr8zgow0R3BgbFKjPEV1X5EQetxvc/NidTu9ijRiONA6BnspP
+ WVJdDtNX+KJPrd2KPTkp9hnIUK+Rqh59nnHStb59v+AKcBeRQvlVXzDms1hKS1NfOGlb
+ 1I8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754683979; x=1755288779;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:sender:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CqcAcp9Y/0mTvAESsvSkuGhtwb6vFv5pOqiTj6z4VsE=;
- b=cZIwje6VAbyXuEtTEaiWYd2g3uhYqJtUYowmaZRwg4TDL0P1TT6QtG+uGUrMUt3f+G
- LirJnnJfzhqf4JHj9IvPE51VFZjaywjnagJGIt+xr9hBCAARhVHWxCAPRtNjmR6OB4me
- DkrwfmAF8eBgxOuPxin25kCmCJizgPX5K1Y6uKlYNS16A7MUIsoWgOiyOM/9pRQhSPkf
- VTbcgKb7KMMuq2u0NyTSACuKWu/y6AdUL0tjY4pZvIHwOlVbPEZDOCH5uRbNuhySYnAJ
- 27g7IgD7xTN5MLVQBu4KaUnQ0AKmUh3SL8bqlUx2n0s7nk2S97V6N3zoW1bmD/gCDaZE
- IF7w==
+ d=1e100.net; s=20230601; t=1754741560; x=1755346360;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1Z/VirRQp9x5HIUEn152PrNpkGR+njVzvOtZvEJ551k=;
+ b=NYOe27X3kwZ8P6XmRdclErAE5ULJtdIxr+EfsoC37mwKkNuPbqlcH6jY0WOqRWIhMD
+ rwMMy7oSnscUm6NWpQtP6ayc7yvkYOAuTwpbT6chLGZuBRuZg1051X0nzcaloJd37UGZ
+ f4ymcdqQPboKZUvWz+1DxQFIPLQXil6pBFpwEqkKWQKgdqfrUWDjxL2fQGivIMKbHmWd
+ IIHm7D8pY2XX4SdTeZ8W9plu0k1taPTN9U4Za0kWLgAHX4YouhxBrd1SpYZ32W19U4zI
+ +dTK9QbpB7VFXaEF8haNEpLnmGa6KlNBC/zk1jXkn9zVb8tzcWxx+sZ7C/xofgBRcwHt
+ Zj/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6tLOsGsB5g/h1N2xF/HufdX2yAenvze7J6KxR1f5tSeHs2VKUDRZ5rxUg96Pqztn3RysPEpreT2/Q@nongnu.org,
- AJvYcCXBgZEwmeZANcJlYuHbENrgopL+IsR6mz06DHLAsNTMj/+ZgSw+OVok3zXTHVmbtyjry5GiltYFwXwMiA==@nongnu.org
-X-Gm-Message-State: AOJu0YxicHZuGgje4zLEsuhHX2LAlLPpZTSfZZNOiIjM4HVlDEpgXMd/
- bMnxxR5hlODW9OyHNh/4cHUaCT2WZpI0SXJtgkZjtZOxgAu3DBx4t/nq
-X-Gm-Gg: ASbGncu9tB93WwT8nmeG4H8zbBjLYZwlQtW4Z59nzHudFuTPG0RLtNVJ5MIP/bJUs77
- l6wngqh6tfZk0JJ2UCgmkOjuqnrP6yj8oYw0tWlXH8vaEJOnObIdqGK0AEQWJHiBhhqbGy0vZqU
- zvU35DR/lbUYVHzxYdiu0WNNP73SiKcVjRUKZR29EjhWBkK6Ur/UOsMHPsRjE/dvuvLn4Gx+53I
- oU9QfbSsMdHDHLF3TnX80qIfKJAhXcEYDCQc9WF1LWkdzgO/neZ5LygYF74qhYiYFCO8Zj71dns
- dj6+KbaagmiA8YbvM7SQWHL8GUfvTSkmeVFd0EM1pRc/VWlXvUr2IElI/iUUW9EWguelidN9MWr
- DgeloGMn60jSQLvO7BlT1bo81GmG8cc9jGVu73uBtSWemLf48jrGGg0MTmi4hT1HgjdhyBQg=
-X-Google-Smtp-Source: AGHT+IFZrYuorYr8pRsvCRUbo8gPJbJE9DamwhzJ9b1qixJ6BI8ISA4EC9Pde5fTFHJWMcFVsnpACg==
-X-Received: by 2002:a05:6a00:4b53:b0:76a:d724:d6fe with SMTP id
- d2e1a72fcca58-76c46176c9bmr6215107b3a.11.1754683978381; 
- Fri, 08 Aug 2025 13:12:58 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5?
- ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+ AJvYcCWoSu2V9GKgOzLt7Nw4/rqwClT3mSjcZDiAQc8Y6fsjwB8gkh+MnzULH5v4L11GZm9sF3mZNxTq4xkg@nongnu.org
+X-Gm-Message-State: AOJu0YzOvwRTOow0F3vHVnwh/rMHMZntqUyUSP/oBOQsyzoZYCHCzyCs
+ JnTgOnJ2YnbtFcbK0+wV8XSE/UJ2h1x7tQANVLNUBczg4CNsPMC9gGEU+/Sgzmc8cPKJVVIauKi
+ bd0m1
+X-Gm-Gg: ASbGncshaSlaqM1nl0HSKIAH90ZwHeUzi2GE3SBw4bjvhwKs1tvhA5g+ExYU+3pYkWw
+ 0kcxQ+/+x0z8Rn7FEGh+J0lFXsTlIUGttXaEuQ7tmqQSa02W9z9Q3+ybjdm9G6kZRh7R/amvbQo
+ cGvc9ZDNZ4AWoqe0OCqw9aTBbK9YRpwSUZAd8e1uK+BICEa7MrlPYkNEVaDKlX9uUwF6/3KOe2P
+ pxdrL39bNyHdck3DCGNGqBuT7mgu/OMjrCezYNb+NYB8hHwatQWW13qJqkPZFc9PdKPhPkkRqPo
+ 9lWQTkWKbFK5CJlDtmjLkX/U3qnfay2s7FXbh3gYyWgwuGdIQUDXSKIjHAuudm1hvVDFx4ppHb3
+ HG0uzPbCQ1Sc/cbuNhzHN2Bzges8CJFuJYWFjzw==
+X-Google-Smtp-Source: AGHT+IH5loBiDknf6qmpmM5+eYRcfoDNZ1Z8SdJvx+50XXjNRFHlZBRV0+v5kMXnh3HGA854mrv8mg==
+X-Received: by 2002:a17:902:d50b:b0:240:10dc:b795 with SMTP id
+ d9443c01a7336-242c1fdc662mr109610915ad.1.1754741560238; 
+ Sat, 09 Aug 2025 05:12:40 -0700 (PDT)
+Received: from [192.168.68.110] ([152.234.127.110])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-76bccfd4893sm21000034b3a.107.2025.08.08.13.12.56
+ d9443c01a7336-241d1ef6cb7sm227808275ad.26.2025.08.09.05.12.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 08 Aug 2025 13:12:57 -0700 (PDT)
-Message-ID: <6466150c-c4aa-41a0-b362-7d47b92fddb7@roeck-us.net>
-Date: Fri, 8 Aug 2025 13:12:56 -0700
+ Sat, 09 Aug 2025 05:12:39 -0700 (PDT)
+Message-ID: <5a03a487-cd96-480c-b420-2ebfe4e15550@ventanamicro.com>
+Date: Sat, 9 Aug 2025 09:12:35 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.1 1/2] hw/sd/ssi-sd: Return noise (dummy byte) when
- no card connected
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Bin Meng <bmeng.cn@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-block@nongnu.org
-References: <20250808135115.77310-1-philmd@linaro.org>
- <20250808135115.77310-2-philmd@linaro.org>
+Subject: Re: [PATCH] aplic: fix mask for smsiaddrcfgh
+To: Yang Jialong <z_bajeer@yeah.net>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: yangjialong@rvcore.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Anup Patel <apatel@ventanamicro.com>
+References: <20250807082346.3752212-1-z_bajeer@yeah.net>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <20250808135115.77310-2-philmd@linaro.org>
+In-Reply-To: <20250807082346.3752212-1-z_bajeer@yeah.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=groeck7@gmail.com; helo=mail-pf1-x429.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x529.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,40 +107,119 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 8/8/25 06:51, Philippe Mathieu-Daudé wrote:
-> Commit 1585ab9f1ba ("hw/sd/sdcard: Fill SPI response bits in card
-> code") exposed a bug in the SPI adapter: if no SD card is plugged,
-> we shouldn't return any particular packet response, but the noise
-> shifted on the MISO line. Return the dummy byte, otherwise we get:
+CCing Anup
+
+On 8/7/25 5:23 AM, Yang Jialong wrote:
+> 4.5.4. Supervisor MSI address configuration (smsiaddrcfg and
+>    smsiaddrcfgh)
+> smsiaddrcfgh:
+> 	bits 22:20 LHXS(WARL)
+> 	bits 11:0  High Base PPN(WARL)
 > 
->    qemu-system-riscv64: ../hw/sd/ssi-sd.c:160: ssi_sd_transfer: Assertion `s->arglen > 0' failed.
-> 
-> Reported-by: Guenter Roeck <linux@roeck-us.net>
-> Fixes: 775616c3ae8 ("Partial SD card SPI mode support")
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-
-Tested-by: Guenter Roeck <linux@roeck-us.net>
-
-Guenter
-
+> Signed-off-by: Yang Jialong <z_bajeer@yeah.net>
 > ---
->   hw/sd/ssi-sd.c | 4 ++++
->   1 file changed, 4 insertions(+)
+
+This patch is causing boot slowdowns in a setup I have with Ubuntu 25.04 and
+iommu enabled. This is the command line I'm using:
+
+qemu-system-riscv64 \
+	-machine virt,iommu-sys=on,aia=aplic-imsic,aia-guests=5 -nographic -m 8G -smp 8 \
+	-cpu rv64 \
+	-kernel u-boot \
+         -netdev bridge,id=bridge1,br=virbr0 -device virtio-net-pci,netdev=bridge1 \
+         -device virtio-rng-pci \
+         -drive file=ubuntu-25.04-preinstalled-server-riscv64.img,format=raw,if=virtio \
+	-netdev user,id=net1,net=10.0.2.0/24 \
+	-device e1000e,netdev=net1
+
+A regular boot of this setup, without this patch, finishes around ~30 seconds:
+
+
+(...)
+[   29.831336] sh[798]: Completed socket interaction for boot stage final
+
+Ubuntu 25.04 ubuntu ttyS0
+
+ubuntu login:
+
+
+With this patch I am experiencing a boot slowdown. Note the 'dmesg' timestamps:
+
+(...)
+[    8.167639] EXT4-fs (vda1): mounted filesystem fb804e3f-f59c-41d7-ab48-20c2af71ad1a ro with ordered data mode. Quota mode: disabled.
+[   70.662648] systemd[1]: systemd 257.4-1ubuntu3.1 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +IPE +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -BPF_FRAMEWORK -BTF -XKBCOMMON -UTMP +SYSVINIT +LIBARCHIVE)
+[   70.665041] systemd[1]: Detected virtualization qemu.
+[   70.665581] systemd[1]: Detected architecture riscv64.
+[  101.384348] systemd[1]: Hostname set to <ubuntu>.
+[  133.467012] systemd[1]: Queued start job for default target graphical.target.
+[  133.573797] systemd[1]: Created slice system-modprobe.slice - Slice /system/modprobe.
+[  164.889837] systemd[1]: Created slice system-serial\x2dgetty.slice - Slice /system/serial-getty.
+[  195.608413] systemd[1]: Created slice system-systemd\x2dfsck.slice - Slice /system/systemd-fsck.
+[  226.326764] systemd[1]: Created slice user.slice - User and Session Slice.
+[  257.044684] systemd[1]: Started systemd-ask-password-wall.path - Forward Password Requests to Wall Directory Watch.
+[  287.764541] systemd[1]: proc-sys-fs-binfmt_misc.automount - Arbitrary Executable File Formats File System Automount Point was skipped because of an unmet condition check (ConditionPathExists=/proc/sys/fs/binfmt_misc).
+[  287.767418] systemd[1]: Expecting device dev-disk-by\x2dlabel-UEFI.device - /dev/disk/by-label/UEFI...
+(...)
+
+
+I haven't waited to see how long the login prompt would take.
+
+The two codebases (with and without this patch) were tested around 10 times each to see if
+the slowdowns were an emulation variance and so on. This behavior is consistent.
+
+Anup is CC'ed in case he has something to add. This patch is either incorrect or Linux
+isn't playing well with it, but either way we can't take the risk of breaking Linux.
+
+
+Thanks,
+
+Daniel
+
+
+>   hw/intc/riscv_aplic.c | 10 +++++++---
+>   1 file changed, 7 insertions(+), 3 deletions(-)
 > 
-> diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-> index 594dead19ee..3aacbd03871 100644
-> --- a/hw/sd/ssi-sd.c
-> +++ b/hw/sd/ssi-sd.c
-> @@ -89,6 +89,10 @@ static uint32_t ssi_sd_transfer(SSIPeripheral *dev, uint32_t val)
->       SDRequest request;
->       uint8_t longresp[5];
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index a1d9fa5085..174ccb3a64 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -96,7 +96,7 @@
+>       (APLIC_xMSICFGADDR_PPN_HHX_MASK(__hhxw) << \
+>        APLIC_xMSICFGADDR_PPN_HHX_SHIFT(__hhxs))
 >   
-> +    if (!sdbus_get_inserted(&s->sdbus)) {
-> +        return SSI_DUMMY;
-> +    }
+> -#define APLIC_xMSICFGADDRH_VALID_MASK   \
+> +#define APLIC_MMSICFGADDRH_VALID_MASK   \
+>       (APLIC_xMSICFGADDRH_L | \
+>        (APLIC_xMSICFGADDRH_HHXS_MASK << APLIC_xMSICFGADDRH_HHXS_SHIFT) | \
+>        (APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
+> @@ -104,6 +104,10 @@
+>        (APLIC_xMSICFGADDRH_LHXW_MASK << APLIC_xMSICFGADDRH_LHXW_SHIFT) | \
+>        APLIC_xMSICFGADDRH_BAPPN_MASK)
+>   
+> +#define APLIC_SMSICFGADDRH_VALID_MASK   \
+> +    ((APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
+> +     APLIC_xMSICFGADDRH_BAPPN_MASK)
 > +
->       /*
->        * Special case: allow CMD12 (STOP TRANSMISSION) while reading data.
->        *
+>   #define APLIC_SETIP_BASE               0x1c00
+>   #define APLIC_SETIPNUM                 0x1cdc
+>   
+> @@ -771,7 +775,7 @@ static void riscv_aplic_write(void *opaque, hwaddr addr, uint64_t value,
+>       } else if (aplic->mmode && aplic->msimode &&
+>                  (addr == APLIC_MMSICFGADDRH)) {
+>           if (!(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+> -            aplic->mmsicfgaddrH = value & APLIC_xMSICFGADDRH_VALID_MASK;
+> +            aplic->mmsicfgaddrH = value & APLIC_MMSICFGADDRH_VALID_MASK;
+>           }
+>       } else if (aplic->mmode && aplic->msimode &&
+>                  (addr == APLIC_SMSICFGADDR)) {
+> @@ -792,7 +796,7 @@ static void riscv_aplic_write(void *opaque, hwaddr addr, uint64_t value,
+>                  (addr == APLIC_SMSICFGADDRH)) {
+>           if (aplic->num_children &&
+>               !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+> -            aplic->smsicfgaddrH = value & APLIC_xMSICFGADDRH_VALID_MASK;
+> +            aplic->smsicfgaddrH = value & APLIC_SMSICFGADDRH_VALID_MASK;
+>           }
+>       } else if ((APLIC_SETIP_BASE <= addr) &&
+>               (addr < (APLIC_SETIP_BASE + aplic->bitfield_words * 4))) {
 
 
