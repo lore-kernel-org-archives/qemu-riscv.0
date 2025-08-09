@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 839A3C87FCF
-	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Aug 2025 13:08:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF109C87FCB
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Aug 2025 16:40:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ukjIj-0007D7-AT; Sat, 09 Aug 2025 09:07:57 -0400
+	id 1ukmbf-0005ap-Gx; Sat, 09 Aug 2025 12:39:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ukjIg-0007C1-L5
- for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 09:07:55 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ id 1ukmbd-0005Z7-HE
+ for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 12:39:41 -0400
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ukjIe-00013n-Fa
- for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 09:07:54 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-31efefd2655so2451405a91.0
- for <qemu-riscv@nongnu.org>; Sat, 09 Aug 2025 06:07:52 -0700 (PDT)
+ id 1ukmbb-0003by-6t
+ for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 12:39:41 -0400
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-b429db71b3dso1770823a12.0
+ for <qemu-riscv@nongnu.org>; Sat, 09 Aug 2025 09:39:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1754744871; x=1755349671; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1754757577; x=1755362377; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=fnhvN/QEHbRtVO7YxiovAlrUeekiX1kxdle80dQ1Rbg=;
- b=NGM4GUE+/NTjtP1lKfE1uhr1pF60/v4UwqSXnsoXruIDBKxX1UZL3MjNjNwc6AJPTG
- trAA3XdLZdxSX/6FOsppZnxrPWBbD0rXjdE07PtJKkAhvxvvgmFnM3aqsR8gVZWyvaBc
- NYr25lrx4DXhMn1AM4NnIxEBeETtLfpxR8+bfMnCrBr5c+A18ERTGSFEKqs6iAEBG4x8
- LpZPJ5vj5bybhxeJp+SoyUjE8E9mWAya2PyK/nqVRHIdfWOluzvoVjDlPx8aG/TJqejv
- 3yG2i4TCY2nHWT+oWTTHgZdWP0SPRMpYbRuSoqW2auYTjM6aV/gDVnbeFkmuSdh3yV2Z
- Bcag==
+ bh=HFJgI2ugXTAC8a5i2+VWDcIWxEZUl1vWZ1nA7BGb2D4=;
+ b=k8H/8daZQEUEPtE3UIQEaRPZysWkfBoLmnW95jRhfCL/j2kaUzWHVOwDeu8KXnG/ft
+ VzQ7UQh+HPBn/HSM/A8kSrkAP7Lvq2kg47nRjnPIHGvLTRYFBluazSkBTOtxZoFOYOMF
+ 6DVrT8LK29GlJrjI4WIdcz9Y3p1EmRJoHZkWm3CeVGT9P/+vwGkHMlEGEpKZ4pP5YLh3
+ 62U8oqeaIHutTlckomHqoTOfbMcWtqvrtSqGsH8LfSyYgkwuZ+tJ8hMULkIPJE7KccP3
+ I8Tndo/l1hye4pS9/yU6baVHD6d1fVG0+6RDmix6EVuEpaqDkbiq0tzbAvTZhytg3Ioj
+ EjbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754744871; x=1755349671;
+ d=1e100.net; s=20230601; t=1754757577; x=1755362377;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fnhvN/QEHbRtVO7YxiovAlrUeekiX1kxdle80dQ1Rbg=;
- b=SRqJnMq+NnPuUPt2kqcSg3gmxNPdkyFieBFuNW3s+yO8eOS5yI7XeOAlgEN2CIS5Us
- GK2u9F+W5ONATqE1gzEbMCnm6nUCe7GcJVBRulGTlnd9XDefhrTAVrh8O0Aci9EySlCO
- 34iBobcSjHtc2mwAcAatKfHjbTHmLHL4RqPz8EsROFKRQm+3PEFmp/kUPFfJMhMUvKHn
- ib48jXqed6Lbcw94Ei6dsb2MAXSV4c4+s3rPNbt9EUxyamNObKYUKL2+MHAdnm/I6bn2
- r59/jE/sn5yGM1RTx4HcpJObZ00TjPiEasT5jvLYUJNM+YBnz5m0q3Ob5IwVwhJMlAK/
- g6OA==
+ bh=HFJgI2ugXTAC8a5i2+VWDcIWxEZUl1vWZ1nA7BGb2D4=;
+ b=Iev55p7EuqbhzeLbnL7bN4eNmQT5oiu+hmSzgRBVEEjLjlriIuDxAemyVSjGOXXRaI
+ CrI5yEqR18Y0tfK5sG+p3/emeiTEyZQd1UiH1yfJ+dxiNwIk3TjWWzbnYqpFMk/YFR27
+ NUENfQZKFb96YPR/hBNrNAdjAIOSSA/Hpfbzbr1V1LXf5YnIQ+sTBmTB0228EXCXYbMC
+ CdYdUCpdrd5rDGhFvInZ8f638qxRpV6Vnk+6UiTjr1jSU9cIPBtwzmbeKBFHIzRv8lMD
+ 9RWtkWJCn4J+D2rr38qa3OsPf5t8sGaqRSnBg59magPxbkNPp3JUhLl5MqxhurcNQ5Us
+ 7BBQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXXtOSnE7QsZYNb1+Rjk6WUhMSuXnNqyHeNES+VDxjGLmdly+eAujCFFXIgu+dY/qHLl478PfOemHXv@nongnu.org
-X-Gm-Message-State: AOJu0YwV+wnOcVQWOeyciNFzd+x5DFRq+HkYFIHym5EvqWK+xLiWggVE
- PjTS/iJs0w/XNmQDIXdzn+kEBwkV68m4RDso9A13Ii8INMmYDFbcZaObxbcn/Bjpv0o=
-X-Gm-Gg: ASbGncvpdehtAgSSFYb8xi8OlTxFfKqL80vnQJ+0Ajg2fN/3NqyH0EU6GW6DDTKTueN
- 9EShjQSjGjFAL2djLe/9cRdc5ZQ5YneR5Wbkey0u/xynZHMfRY+Gn+Kp1ffbFI6vH7xPyUPh4hn
- zNSMc+ONicVOwm8dYUuQpKXRjrsUrtIYX5y/bHjfjftp+Wpu7yeWaxV3t0WM9MrnSuDcW3kBeY2
- xccUrXpX7FlowUY7RW8znsVaFIA4BVt9vOkZ9HnS61wk0M8x9DsLqAlCLSeQSoQ1O2a7Qe+xIsE
- p5rj94D9mt/7i8H6/YtTsZHsh/D2Cn8ln0YROJrb7Be3Mbssikd0KyWQVAPBCaasHhK2rdD3z29
- CcUZM4LAKr/HCZ4LA2zCW5m3WiYCFNKm3mLBLMg==
-X-Google-Smtp-Source: AGHT+IH9krsvhR1fqbCrcYcf4Rj/VlJNTuvVi0EVjfJ+RkpEg5QAWe9LvaaCLaJqFAiHjCN88dQ5mw==
-X-Received: by 2002:a17:90b:3c04:b0:31f:14b:f397 with SMTP id
- 98e67ed59e1d1-32184377ae6mr10571848a91.1.1754744870744; 
- Sat, 09 Aug 2025 06:07:50 -0700 (PDT)
+ AJvYcCUa+GOhZMM+jYdw8Au2WEkE1eudhBVo4Q7FWonLRksyNtUlEvB3K3ZuPgLcjNWBZW8xOPB5WDvRgYqN@nongnu.org
+X-Gm-Message-State: AOJu0YwdxrB8jQUeFo10DsKdtWxuRv9ct3VzwvmUjURFjZMvvFF0EjYz
+ mz1CT7zVqCT0Mf46AUogER5+uz9+svdgTO49y0iRBiSn0oMN9krQox1kevR+iSMP5EM=
+X-Gm-Gg: ASbGncuB7XcL6Y3qEP5MRGbX7CWyd7hZ4XOzFS8m14MfrMFzHp3I+ieKt1IV3Mx8PUf
+ sH4UvViw66218eC37ju0m0krPSclkcCZENQahDA3uNbY4SD3X6AD3XSAzDa/L0gTRfWDVY7cynJ
+ eS6DPnNmmUH2eFrPsXTaFPzygCvNUmCrVNE1bWI08Q++9nyVcUhphkT8a1sbZ9QcMxyPBKISOIR
+ D1lIyq0EQI6Cqdv9WoM7wCW7fMwiECag9dQ42VcFW6BtjUGAV773tjdoWV5Vo5Dfuf/aAxEiTPg
+ +VyTVcC0yaJTMFURDbvHhvK/n9lBkxF8LUQZk1bppypUkMgv020DumUh+VCtXjFT/xSepWGi5vc
+ 0VtFGKfG0EkubZgt39yyB/tM3+0RTtJhXj6cT5g==
+X-Google-Smtp-Source: AGHT+IE+fk52r5xu/emUzR5O4V9Vw+HuckASvFVd0GPCN0BqyiwhLZMv0hsFnOot4DqaLMBFAsd36w==
+X-Received: by 2002:a17:902:d481:b0:223:619e:71da with SMTP id
+ d9443c01a7336-242c225767emr119650755ad.49.1754757577379; 
+ Sat, 09 Aug 2025 09:39:37 -0700 (PDT)
 Received: from [192.168.68.110] ([152.234.127.110])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-31f63da602asm26961926a91.2.2025.08.09.06.07.42
+ d9443c01a7336-241e899a909sm231663125ad.123.2025.08.09.09.39.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 09 Aug 2025 06:07:50 -0700 (PDT)
-Message-ID: <20701dc8-d156-4ad9-8945-282321c15527@ventanamicro.com>
-Date: Sat, 9 Aug 2025 10:07:41 -0300
+ Sat, 09 Aug 2025 09:39:36 -0700 (PDT)
+Message-ID: <efccad5e-d5a8-4ebe-b2ae-1b683239399d@ventanamicro.com>
+Date: Sat, 9 Aug 2025 13:39:28 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/18] hw/misc: riscv_worldguard: Add API to enable WG
- extension of CPU
+Subject: Re: [PATCH v2 14/18] hw/misc: riscv_wgchecker: Implement RISC-V
+ WorldGuard Checker
 To: Jim Shu <jim.shu@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -96,21 +96,21 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
  "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
 References: <20250417105249.18232-1-jim.shu@sifive.com>
- <20250417105249.18232-14-jim.shu@sifive.com>
+ <20250417105249.18232-15-jim.shu@sifive.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20250417105249.18232-14-jim.shu@sifive.com>
+In-Reply-To: <20250417105249.18232-15-jim.shu@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,148 +129,307 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 4/17/25 7:52 AM, Jim Shu wrote:
-> riscv_worldguard_apply_cpu() could enable WG CPU extension and set WG
-> callback to CPUs. It is used by machine code after realizing global WG
-> device.
+> Implement the RISC-V WorldGuard Checker, which sits in front of RAM or
+> device MMIO and allow software to configure it to either pass through or
+> reject transactions.
+> 
+> We implement the wgChecker as a QEMU IOMMU, which will direct transactions
+> either through to the devices and memory behind it or to a special
+> "never works" AddressSpace if they are blocked.
+> 
+> This initial commit implements the skeleton of the device:
+>   * it always permits accesses
+>   * it doesn't implement wgChecker's slot registers
+>   * it doesn't implement the interrupt or other behaviour
+>     for blocked transactions
 > 
 > Signed-off-by: Jim Shu <jim.shu@sifive.com>
 > ---
->   hw/misc/riscv_worldguard.c         | 87 ++++++++++++++++++++++++++++++
->   include/hw/misc/riscv_worldguard.h |  1 +
->   2 files changed, 88 insertions(+)
+>   hw/misc/meson.build                |   2 +-
+>   hw/misc/riscv_wgchecker.c          | 603 +++++++++++++++++++++++++++++
+>   hw/misc/trace-events               |   8 +
+>   include/hw/misc/riscv_worldguard.h |  63 +++
+>   4 files changed, 675 insertions(+), 1 deletion(-)
+>   create mode 100644 hw/misc/riscv_wgchecker.c
 > 
-> diff --git a/hw/misc/riscv_worldguard.c b/hw/misc/riscv_worldguard.c
-> index b02bd28d02..1a910f4cf3 100644
-> --- a/hw/misc/riscv_worldguard.c
-> +++ b/hw/misc/riscv_worldguard.c
-> @@ -92,6 +92,93 @@ uint32_t mem_attrs_to_wid(MemTxAttrs attrs)
->       }
->   }
+> diff --git a/hw/misc/meson.build b/hw/misc/meson.build
+> index 3d2f4bb6a3..73c11bc7c9 100644
+> --- a/hw/misc/meson.build
+> +++ b/hw/misc/meson.build
+> @@ -34,7 +34,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
+>   system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
+>   system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
+>   system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
+> -specific_ss.add(when: 'CONFIG_RISCV_WORLDGUARD', if_true: files('riscv_worldguard.c'))
+> +specific_ss.add(when: 'CONFIG_RISCV_WORLDGUARD', if_true: files('riscv_worldguard.c', 'riscv_wgchecker.c'))
 >   
-> +static void riscv_cpu_wg_reset(CPURISCVState *env)
-> +{
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +    uint32_t mlwid, slwid, mwiddeleg;
-> +    uint32_t trustedwid;
+>   subdir('macio')
+>   
+> diff --git a/hw/misc/riscv_wgchecker.c b/hw/misc/riscv_wgchecker.c
+> new file mode 100644
+> index 0000000000..ea50f4f53a
+> --- /dev/null
+> +++ b/hw/misc/riscv_wgchecker.c
+> @@ -0,0 +1,603 @@
+
+(...)
+
 > +
-> +    if (!riscv_cpu_cfg(env)->ext_smwg) {
-> +        return;
-> +    }
+> +static void riscv_wgchecker_realize(DeviceState *dev, Error **errp)
+> +{
+> +    Object *obj = OBJECT(dev);
+> +    RISCVWgCheckerState *s = RISCV_WGCHECKER(dev);
+> +    uint64_t size;
 > +
 > +    if (worldguard_config == NULL) {
-> +        /*
-> +         * Note: This reset is dummy now and WG CSRs will be reset again
-> +         * after worldguard_config is realized.
-> +         */
+> +        error_setg(errp, "Couldn't find global WorldGuard configs. "
+> +                   "Please realize %s device at first.",
+
+Extra "at":  "Please realize %s device first."
+
+
+Everything else LGTM:
+
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+> +                   TYPE_RISCV_WORLDGUARD);
 > +        return;
 > +    }
 > +
-> +    trustedwid = worldguard_config->trustedwid;
-> +    if (trustedwid == NO_TRUSTEDWID) {
-> +        trustedwid = worldguard_config->nworlds - 1;
+> +    if (s->slot_count == 0) {
+> +        error_setg(errp, "wgChecker slot-count couldn't be zero.");
+> +        return;
 > +    }
 > +
-> +    /* Reset mlwid, slwid, mwiddeleg CSRs */
-> +    if (worldguard_config->hw_bypass) {
-> +        /* HW bypass mode */
-> +        mlwid = trustedwid;
-> +    } else {
-> +        mlwid = 0;
-> +    }
-> +    slwid = 0;
-> +    mwiddeleg = 0;
+> +    memory_region_init_io(&s->mmio, OBJECT(dev), &riscv_wgchecker_ops, s,
+> +                          TYPE_RISCV_WGCHECKER, s->mmio_size);
+> +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
+> +    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
 > +
-> +    env->mlwid = mlwid;
-> +    if (riscv_cpu_cfg(env)->ext_sswg) {
-> +        env->slwid = slwid;
-> +        env->mwiddeleg = mwiddeleg;
-> +    }
+> +    /* Address range should be NAPOT alignment */
+> +    address_range_align_napot(s);
 > +
-> +    /* Check mwid, mwidlist config */
-> +    if (worldguard_config != NULL) {
-> +        uint32_t valid_widlist = MAKE_64BIT_MASK(0, worldguard_config->nworlds);
+> +    for (int i=0; i<WGC_NUM_REGIONS; i++) {
+> +        WgCheckerRegion *region = &s->mem_regions[i];
 > +
-> +        /* CPU use default mwid / mwidlist config if not set */
-> +        if (cpu->cfg.mwidlist == UINT32_MAX) {
-> +            /* mwidlist contains all WIDs */
-> +            cpu->cfg.mwidlist = valid_widlist;
+> +        if (!region->downstream) {
+> +            continue;
 > +        }
-> +        if (cpu->cfg.mwid == UINT32_MAX) {
-> +            cpu->cfg.mwid = trustedwid;
-> +        }
+> +        region->wgchecker = s;
 > +
-> +        /* Check if mwid/mwidlist HW config is valid in NWorld. */
-> +        g_assert((cpu->cfg.mwidlist & ~valid_widlist) == 0);
-> +        g_assert(cpu->cfg.mwid < worldguard_config->nworlds);
+> +        const char *upstream_name = g_strdup_printf(
+> +            "wgchecker-upstream-%"HWADDR_PRIx, region->region_offset);
+> +        const char *downstream_name = g_strdup_printf(
+> +            "wgchecker-downstream-%"HWADDR_PRIx, region->region_offset);
+> +
+> +        size = memory_region_size(region->downstream);
+> +        memory_region_init_iommu(&region->upstream, sizeof(region->upstream),
+> +                                 TYPE_RISCV_WGC_IOMMU_MEMORY_REGION,
+> +                                 obj, upstream_name, size);
+> +
+> +        /* upstream MRs are 2nd ~ (n+1)th MemoryRegion. */
+> +        sysbus_init_mmio(SYS_BUS_DEVICE(dev), MEMORY_REGION(&region->upstream));
+> +
+> +        /*
+> +         * This memory region is not exposed to users of this device as a
+> +         * sysbus MMIO region, but is instead used internally as something
+> +         * that our IOMMU translate function might direct accesses to.
+> +         */
+> +        memory_region_init_io(&region->blocked_io, obj, &riscv_wgc_mem_blocked_ops,
+> +                              region, "wgchecker-blocked-io", size);
+> +
+> +        address_space_init(&region->downstream_as, region->downstream,
+> +                           downstream_name);
+> +        address_space_init(&region->blocked_io_as, &region->blocked_io,
+> +                           "wgchecker-blocked-io");
 > +    }
 > +}
+> +
+> +static void riscv_wgchecker_unrealize(DeviceState *dev)
+> +{
+> +    RISCVWgCheckerState *s = RISCV_WGCHECKER(dev);
+> +
+> +    g_free(s->slots);
+> +    if (s->num_default_slots && s->default_slots) {
+> +        g_free(s->default_slots);
+> +    }
+> +}
+> +
+> +static void riscv_wgchecker_reset_enter(Object *obj, ResetType type)
+> +{
+> +    RISCVWgCheckerState *s = RISCV_WGCHECKER(obj);
+> +    uint64_t start = s->addr_range_start;
+> +    uint64_t end = s->addr_range_start + s->addr_range_size;
+> +    int nslots = s->slot_count;
+> +
+> +    s->errcause = 0;
+> +    s->erraddr = 0;
+> +}
+> +
+> +static void riscv_wgchecker_class_init(ObjectClass *klass, void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +
+> +    device_class_set_props(dc, riscv_wgchecker_properties);
+> +    dc->user_creatable = true;
+> +    dc->realize = riscv_wgchecker_realize;
+> +    dc->unrealize = riscv_wgchecker_unrealize;
+> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
+> +    rc->phases.enter = riscv_wgchecker_reset_enter;
+> +}
+> +
+> +static void riscv_wgchecker_instance_init(Object *obj)
+> +{
+> +    RISCVWgCheckerState *s = RISCV_WGCHECKER(obj);
+> +
+> +    s->num_default_slots = 0;
+> +}
+> +
+> +static const TypeInfo riscv_wgchecker_info = {
+> +    .name          = TYPE_RISCV_WGCHECKER,
+> +    .parent        = TYPE_SYS_BUS_DEVICE,
+> +    .instance_init = riscv_wgchecker_instance_init,
+> +    .instance_size = sizeof(RISCVWgCheckerState),
+> +    .class_init    = riscv_wgchecker_class_init,
+> +};
+> +
+> +static void riscv_wgchecker_register_types(void)
+> +{
+> +    type_register_static(&riscv_wgchecker_info);
+> +    type_register_static(&riscv_wgc_iommu_memory_region_info);
+> +}
+> +
+> +type_init(riscv_wgchecker_register_types)
 > +
 > +/*
-> + * riscv_worldguard_apply_cpu - Enable WG extension of CPU
-> + *
-> + * Note: This API should be used after global WG device is created
-> + * (riscv_worldguard_realize()).
+> + * Create WgChecker device
 > + */
-> +void riscv_worldguard_apply_cpu(uint32_t hartid)
+> +DeviceState *riscv_wgchecker_create(hwaddr addr, uint32_t size,
+> +                                    qemu_irq irq, uint32_t slot_count,
+> +                                    uint64_t addr_range_start,
+> +                                    uint64_t addr_range_size,
+> +                                    uint32_t num_of_region,
+> +                                    MemoryRegion **downstream,
+> +                                    uint64_t *region_offset,
+> +                                    uint32_t num_default_slots,
+> +                                    WgCheckerSlot *default_slots)
 > +{
-> +    /* WG global config should exist */
-> +    g_assert(worldguard_config);
-
-We usually add g_asserts() after the variable declarations.
-
+> +    DeviceState *dev = qdev_new(TYPE_RISCV_WGCHECKER);
+> +    RISCVWgCheckerState *s = RISCV_WGCHECKER(dev);
+> +    char name_mr[32];
+> +    char name_offset[32];
+> +    int i;
 > +
-> +    CPUState *cpu = qemu_get_cpu(hartid);
-> +    RISCVCPU *rcpu = RISCV_CPU(cpu);
-> +    CPURISCVState *env = cpu ? cpu_env(cpu) : NULL;
-> +
-> +    rcpu->cfg.ext_smwg = true;
-> +    if (riscv_has_ext(env, RVS) && riscv_has_ext(env, RVU)) {
-> +        rcpu->cfg.ext_sswg = true;
+> +    qdev_prop_set_uint32(dev, "slot-count", slot_count);
+> +    qdev_prop_set_uint32(dev, "mmio-size", size);
+> +    qdev_prop_set_uint64(dev, "addr-range-start", addr_range_start);
+> +    if (addr_range_size) {
+> +        qdev_prop_set_uint64(dev, "addr-range-size", addr_range_size);
 > +    }
-
-riscv_has_ext() will segfault if env == NULL, and you're creating a code
-path where this might happen:
-
-> +    CPURISCVState *env = cpu ? cpu_env(cpu) : NULL;
-
-In fact, cpu == NULL will explode on you earlier via this macro:
-
-> +    RISCVCPU *rcpu = RISCV_CPU(cpu);
-
-You can either handle cpu == NULL with a clean exit before using 'cpu' to assign
-stuff or g_assert(cpu != NULL) for a more rude exit. But with this code as is
-you're gambling with segfaults.
-
-
-Thanks,
-
-Daniel
-
-
 > +
-> +    /* Set machine specific WorldGuard callback */
-> +    env->wg_reset = riscv_cpu_wg_reset;
-> +    env->wid_to_mem_attrs = wid_to_mem_attrs;
+> +    g_assert(num_of_region <= WGC_NUM_REGIONS);
+> +    for (i=0; i<num_of_region; i++) {
+> +        snprintf(name_mr, 32, "downstream-mr[%d]", i);
+> +        snprintf(name_offset, 32, "region-offset[%d]", i);
 > +
-> +    /* Reset WG CSRs in CPU */
-> +    env->wg_reset(env);
+> +        object_property_set_link(OBJECT(dev), name_mr,
+> +                                 OBJECT(downstream[i]), &error_fatal);
+> +        qdev_prop_set_uint64(dev, name_offset, region_offset[i]);
+> +    }
+> +
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq);
+> +    return dev;
 > +}
+> diff --git a/hw/misc/trace-events b/hw/misc/trace-events
+> index 4383808d7a..b1d8538220 100644
+> --- a/hw/misc/trace-events
+> +++ b/hw/misc/trace-events
+> @@ -395,3 +395,11 @@ ivshmem_flat_interrupt_peer(uint16_t peer_id, uint16_t vector_id) "Interrupting
+>   i2c_echo_event(const char *id, const char *event) "%s: %s"
+>   i2c_echo_recv(const char *id, uint8_t data) "%s: recv 0x%02" PRIx8
+>   i2c_echo_send(const char *id, uint8_t data) "%s: send 0x%02" PRIx8
 > +
->   bool could_access_wgblocks(MemTxAttrs attrs, const char *wgblock)
->   {
->       uint32_t wid = mem_attrs_to_wid(attrs);
+> +# riscv_worldguard.c
+> +riscv_wgchecker_mmio_read(uint64_t base, uint64_t offset, unsigned int size) "base = 0x%"PRIx64", offset = 0x%"PRIx64", size = 0x%x"
+> +riscv_wgchecker_mmio_write(uint64_t base, uint64_t offset, unsigned int size, uint64_t val) "base = 0x%"PRIx64", offset = 0x%"PRIx64", size = 0x%x, val = 0x%"PRIx64
+> +
+> +riscv_wgc_mem_blocked_read(uint64_t addr, unsigned size, uint32_t wid) "wgChecker blocked read: offset 0x%" PRIx64 " size %u wid %" PRIu32
+> +riscv_wgc_mem_blocked_write(uint64_t addr, uint64_t data, unsigned size, uint32_t wid) "wgChecker blocked write: offset 0x%" PRIx64 " data 0x%" PRIx64 " size %u wid %" PRIu32
+> +riscv_wgc_translate(uint64_t addr, int flags, int wid, const char *res) "wgChecker translate: addr 0x%016" PRIx64 " flags 0x%x wid %d: %s"
 > diff --git a/include/hw/misc/riscv_worldguard.h b/include/hw/misc/riscv_worldguard.h
-> index 8a533a0517..211a72e438 100644
+> index 211a72e438..7b5aae866a 100644
 > --- a/include/hw/misc/riscv_worldguard.h
 > +++ b/include/hw/misc/riscv_worldguard.h
-> @@ -48,6 +48,7 @@ extern struct RISCVWorldGuardState *worldguard_config;
->   
->   DeviceState *riscv_worldguard_create(uint32_t nworlds, uint32_t trustedwid,
->                                        bool hw_bypass, bool tz_compat);
-> +void riscv_worldguard_apply_cpu(uint32_t hartid);
->   
+> @@ -53,4 +53,67 @@ void riscv_worldguard_apply_cpu(uint32_t hartid);
 >   uint32_t mem_attrs_to_wid(MemTxAttrs attrs);
 >   bool could_access_wgblocks(MemTxAttrs attrs, const char *wgblock);
+>   
+> +#define TYPE_RISCV_WGCHECKER  "riscv.wgchecker"
+> +
+> +typedef struct RISCVWgCheckerState RISCVWgCheckerState;
+> +DECLARE_INSTANCE_CHECKER(RISCVWgCheckerState, RISCV_WGCHECKER,
+> +                         TYPE_RISCV_WGCHECKER)
+> +
+> +#define TYPE_RISCV_WGC_IOMMU_MEMORY_REGION    "riscv-wgc-iommu-memory-region"
+> +
+> +typedef struct WgCheckerSlot WgCheckerSlot;
+> +struct WgCheckerSlot {
+> +    uint64_t addr;
+> +    uint64_t perm;
+> +    uint32_t cfg;
+> +};
+> +
+> +typedef struct WgCheckerRegion WgCheckerRegion;
+> +struct WgCheckerRegion {
+> +    MemoryRegion *downstream;
+> +    uint64_t region_offset;
+> +
+> +    IOMMUMemoryRegion upstream;
+> +    MemoryRegion blocked_io;
+> +    AddressSpace downstream_as;
+> +    AddressSpace blocked_io_as;
+> +
+> +    RISCVWgCheckerState *wgchecker;
+> +};
+> +
+> +#define WGC_NUM_REGIONS     16
+> +
+> +struct RISCVWgCheckerState {
+> +    /*< private >*/
+> +    SysBusDevice parent_obj;
+> +
+> +    /*< public >*/
+> +    MemoryRegion mmio;
+> +    qemu_irq irq;
+> +
+> +    /* error reg */
+> +    uint64_t errcause;
+> +    uint64_t erraddr;
+> +
+> +    /* Memory regions protected by wgChecker */
+> +    WgCheckerRegion mem_regions[WGC_NUM_REGIONS];
+> +
+> +    /* Property */
+> +    uint32_t slot_count; /* nslots */
+> +    uint32_t mmio_size;
+> +    uint64_t addr_range_start;
+> +    uint64_t addr_range_size;
+> +    bool hw_bypass;
+> +};
+> +
+> +DeviceState *riscv_wgchecker_create(hwaddr addr, uint32_t size,
+> +                                    qemu_irq irq, uint32_t slot_count,
+> +                                    uint64_t addr_range_start,
+> +                                    uint64_t addr_range_size,
+> +                                    uint32_t num_of_region,
+> +                                    MemoryRegion **downstream,
+> +                                    uint64_t *region_offset,
+> +                                    uint32_t num_default_slots,
+> +                                    WgCheckerSlot *default_slots);
+> +
+>   #endif
 
 
