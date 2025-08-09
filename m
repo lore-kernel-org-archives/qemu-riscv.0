@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51225C87FCB
-	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Aug 2025 12:50:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16654C87FCB
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Aug 2025 12:51:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ukj1C-0000BC-9S; Sat, 09 Aug 2025 08:49:50 -0400
+	id 1ukj22-0001Do-1N; Sat, 09 Aug 2025 08:50:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ukj19-0008VN-Uz
- for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 08:49:47 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
+ id 1ukj1p-00017Y-Lt
+ for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 08:50:31 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ukj17-00078x-Mn
- for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 08:49:47 -0400
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-b3f80661991so2940059a12.0
- for <qemu-riscv@nongnu.org>; Sat, 09 Aug 2025 05:49:45 -0700 (PDT)
+ id 1ukj1m-0007OZ-Tg
+ for qemu-riscv@nongnu.org; Sat, 09 Aug 2025 08:50:29 -0400
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2403df11a2aso20657845ad.0
+ for <qemu-riscv@nongnu.org>; Sat, 09 Aug 2025 05:50:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1754743784; x=1755348584; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1754743824; x=1755348624; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=w09CCBVYqUo5pbgfurzsAoBNtKNzmPl0DGwTqnWOIG4=;
- b=BvdhP8t0JTv3mcidfOWh6BRozAeigboZJptAjnYBao9h2J04crczJWl+qwpUdm1GA4
- aTc3jX2n6YbU3UEAI6pPU8aQcLxuIj+k73Wc1pHhx0Qb+U4soKGeqY2bvKbWshYAnXTe
- sFrwHDvn3Ff1TI0OiGeqsJ2Dut5CYVXiNhFQfSAexnq4j81VOltUuOBDqnOqM/B7KVs3
- AvcveXc1ph09a5PdNsN+gxfkDFIpBw5LVc+0pGSvvajd3qehk3kmmigYN9xBFzksiaih
- Ak1UqCqFUzil8J1T4VTFpinGwgAeuhW9mu87Ftjj6Biz7BHkt1DBpKz9lmV9F6fPgpcW
- B5LA==
+ bh=LrF1sr/Za9VEJARSC9I1I1CqztQa+L7FqZNozf1lj3Q=;
+ b=Uak1ZnsrVujKLCKXf7D/qHMGt8IJYkz93g6GSRU2Uan+5qDxdeAsea1C/oqJUu9VC4
+ eQ74To3RSI3nHkihh4XukB5ZCBp2bkJhw1sutleIJy15M+4Ywbf9DZtzmHupHT3gpvCN
+ BpRjomv21vL5lEMf7oSU+qRkD281jjvNRYJb9+1ZkUVOF0IO3qmmvcey6UcNdSyuKBzE
+ 7aeDxaGZ7YJ+lS4F/XaooEvT+Bco9niFRMZHBj3YY4z5SQVETTd/XSGVLXPRnW3+I9hz
+ JI9SaIqE/0ge6Q28Rqv4WOrQ1Vwco08QmPg0N/zFNYAa2bjYEwncQxZpktP5rYbFyNBT
+ 5EPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754743784; x=1755348584;
+ d=1e100.net; s=20230601; t=1754743824; x=1755348624;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=w09CCBVYqUo5pbgfurzsAoBNtKNzmPl0DGwTqnWOIG4=;
- b=JpYr9wfvMsblPxWVC3zip0cO0dI0LOL896Cc+OOeb0uCgf4Vr8002pBUhGMjrk6gHK
- ZFLKNPNeDeKvQI6mvZtd2LVu3/Ft+tzZiB2uG6Ma0DYuMxXc33cYl+B9QB5AMqvlVe+0
- tPf6WpBYRP4vzsfCvrLTzq8Td5GPG5jZ4FqR2uy3kQDQirp/laMKQk/WqcExUJk3OyJo
- iowENYqOVMQIDBVlun3lKH7v0mjgvbeyt6KwxQY0TFvrqLfiXkGzzxGLAyO+o0DOfMKD
- 57Q/MNHCs0HASf15jej2xNsVMeC9An0MP6OTZnzit+yx7mDVedAulnRlO9sckBHQyA61
- qbvw==
+ bh=LrF1sr/Za9VEJARSC9I1I1CqztQa+L7FqZNozf1lj3Q=;
+ b=wBjhyvZm7nc6esKbyKhhIZx6eL0UqSiY3GLygMkBxe0bhIit14RZjoFnizCY1T4Oud
+ ZGxsie6mhjek0+6vVsXG5YH8MRwVkHkZMEZSnhe1GChfB7hjLSr3p5zaHr4fDr+6ZJoQ
+ RxD6H4QSvnxM6zANOT7UNhTlKD30q8Zwt+ii1XupwRC7/e2xWN5PBHQ317+GqcoTPkzP
+ aH7vxm6KF8hK28b+JFiJNPfrXaXoQemZchFBrlQMDPA9gN+JNVI7t7+0lR+aah45xm6U
+ Dvh/hgHTSmrotTIli26estPnzHF/6eLrpyPBDtrsRUURzenhC/0Wm4l9a7fnVNd50Vky
+ ZAJw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUlfYVTL/wd94+mihFm4asMM0iDrEGuL9E4O92LgkIo8dnmbtac5C5Ndxx2Q9oyxM28q4/vq5isJxaI@nongnu.org
-X-Gm-Message-State: AOJu0Yz8hRfXhtgmpXqjKv9U/TLCaOaVs3S67/6BSTglpUJAIJwPGGM3
- g+d9Z267x92npgIod0wfJMOlaZDtlXJfkaS+NhJoRgynPnri4husSZUMeVK9cCXrWn4=
-X-Gm-Gg: ASbGncseuYs0qKS2n2irWRWn95lconAAd6MPXF+BfMyZDY8MRNNUPIWrL4aZp+EB2DO
- T/Rw5VhmxVnJrdZTsSEgNcgZy/ddTvIF0ub8vpjac6wPxkH5KlZFgpAOWzRA9ityynVbmVCX2ep
- kvJ+BfNKRDVm+i8ejxx3sp6F1AR3JD4K5w5cMkwQjG88GWskuD+D/IDcIqnNnL7DfD3UjbPkJOt
- w31y5CgKfwW/joKTmilYTyAPJlhhMOG7pljTQ+1Kf/bZbLDFUnhQy9NTKYh28mkclKYq/Tq+vq6
- tQxZl+p4q+AvExAZS4kabgtv7HyRcm8vo2RJejRcAw+/pwBs3fRNogO3grA5s8dlu9KcUnx3+iC
- RmyytGULcfh3zEeQlo7Nt6+IQcflD1miTG4bXpA==
-X-Google-Smtp-Source: AGHT+IH2Fciw8X05TFXG1pDAD73gDFYh2OONxZm9M8tzQuRsrchUI1YkD2KJKjxtu2GG1aU3+zfSSQ==
-X-Received: by 2002:a17:902:f54d:b0:235:e1e4:edb0 with SMTP id
- d9443c01a7336-242b0792788mr189784435ad.22.1754743783918; 
- Sat, 09 Aug 2025 05:49:43 -0700 (PDT)
+ AJvYcCVD66TenurdRCINIg4hvsqQhwocQ9eWbQ6je/IGBxJ2BFyqCPitgoJg3rflLbn6ZH+Vx3FAwIKSIr/f@nongnu.org
+X-Gm-Message-State: AOJu0Yz1A81XshXx3eZbgudrXBKCkK18bE4ucHdPhtkmEwwvLz0CGamD
+ uLltiSwMM17Q5SxQJkDRk9usrBueniwAJ+XovMnO5iVaFxMdlK/jksKBLrud5IsRdm0=
+X-Gm-Gg: ASbGncsn3uwSfcJRmG2iU/6yK5z9FnCn/VSuZwj72QBxJt419plxKYCAZf8flBCALHp
+ +54cA56EF6ShrJclNIt1k/DW3YT6TKyMqVITer7R5S4gs8blM0BQFPaz0bgyeilD82niZz8xVWP
+ v6Wg7+wE4nSBtdtp3kNqpsIPjOylgeuN6GCbXZiDTiJDOqP7u3ZOKAZSVJQg2nwGXLk+C2w27K8
+ 09FqubZ6IFeMHD6/si0PL8Yz4+K5a12nXGdpjNeDQjix2RhW3vVM6zU36LZF2WiRirSkpj+Btsd
+ BvF68xw7TNictryJF1ZRX7BAzEAepk01myEYUVZzFhcRxUk4OK50hSVaFbSNSr/z/2Ugl0T07EP
+ P5LIzwhtsKZLvbh61M732nawI03tcLT1ABK99qA==
+X-Google-Smtp-Source: AGHT+IHbdpKchpoYibitLmv0ytfiPjgAFA28HUk5Rcv0vg/Gr387kb/QWpnLzlZK9Rsat3Whs+ZNcw==
+X-Received: by 2002:a17:902:dac8:b0:240:3915:99ba with SMTP id
+ d9443c01a7336-242c1ff405dmr87922715ad.5.1754743824378; 
+ Sat, 09 Aug 2025 05:50:24 -0700 (PDT)
 Received: from [192.168.68.110] ([152.234.127.110])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-241d1ef83f3sm229602175ad.28.2025.08.09.05.49.36
+ 98e67ed59e1d1-32102b9022fsm10828167a91.4.2025.08.09.05.50.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 09 Aug 2025 05:49:43 -0700 (PDT)
-Message-ID: <5c159058-83a5-487e-87ca-6d2d3211b0f4@ventanamicro.com>
-Date: Sat, 9 Aug 2025 09:49:35 -0300
+ Sat, 09 Aug 2025 05:50:23 -0700 (PDT)
+Message-ID: <bdd56f8e-af0f-4ffe-bed3-d5acf5c42adb@ventanamicro.com>
+Date: Sat, 9 Aug 2025 09:50:15 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 08/18] target/riscv: Add defines for WorldGuard CSRs
+Subject: Re: [PATCH v2 09/18] target/riscv: Allow global WG config to set WG
+ CPU callbacks
 To: Jim Shu <jim.shu@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -95,14 +96,14 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
  "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
 References: <20250417105249.18232-1-jim.shu@sifive.com>
- <20250417105249.18232-9-jim.shu@sifive.com>
+ <20250417105249.18232-10-jim.shu@sifive.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20250417105249.18232-9-jim.shu@sifive.com>
+In-Reply-To: <20250417105249.18232-10-jim.shu@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,31 +129,32 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 4/17/25 7:52 AM, Jim Shu wrote:
-> Add CSRs for 3 WG extensions: Smwg, Smwgd, and Sswg.
+> Some WG CPU functions depend on global WG config (like num-of-world), so
+> we let the global WG config device to set callbacks of a RISC-V HART.
 > 
 > Signed-off-by: Jim Shu <jim.shu@sifive.com>
 > ---
 
+
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/cpu_bits.h | 5 +++++
->   1 file changed, 5 insertions(+)
+>   target/riscv/cpu.h | 4 ++++
+>   1 file changed, 4 insertions(+)
 > 
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index a30317c617..7705c6995e 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -408,6 +408,11 @@
->   #define CSR_DPC             0x7b1
->   #define CSR_DSCRATCH        0x7b2
->   
-> +/* RISC-V WorldGuard */
-> +#define CSR_MLWID           0x390
-> +#define CSR_SLWID           0x190
-> +#define CSR_MWIDDELEG       0x748
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index ac50928b57..6dfc260a07 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -500,6 +500,10 @@ struct CPUArchState {
+>       target_ulong rnmip;
+>       uint64_t rnmi_irqvec;
+>       uint64_t rnmi_excpvec;
 > +
->   /* Performance Counters */
->   #define CSR_MHPMCOUNTER3    0xb03
->   #define CSR_MHPMCOUNTER4    0xb04
+> +    /* machine specific WorldGuard callback */
+> +    void (*wg_reset)(CPURISCVState *env);
+> +    void (*wid_to_mem_attrs)(MemTxAttrs *attrs, uint32_t wid);
+>   };
+>   
+>   /*
 
 
