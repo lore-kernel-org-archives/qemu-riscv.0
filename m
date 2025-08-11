@@ -4,49 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5F1AC87FDB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Aug 2025 13:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27CD3C87FD2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Aug 2025 13:04:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ulSAk-00025X-Dh; Mon, 11 Aug 2025 09:02:43 -0400
+	id 1ulSAv-0002I6-MU; Mon, 11 Aug 2025 09:02:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1ulS9j-0001YW-7Z
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1ulS9h-0001Xy-8M
  for qemu-riscv@nongnu.org; Mon, 11 Aug 2025 09:01:43 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1ulS9X-0005lz-2f
- for qemu-riscv@nongnu.org; Mon, 11 Aug 2025 09:01:35 -0400
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1ulS9V-0005lH-I9
+ for qemu-riscv@nongnu.org; Mon, 11 Aug 2025 09:01:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1754917285;
+ s=mimecast20190719; t=1754917284;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=51uVZQwvGGaiH/cdbg8t3AQUF4KGiJr4UMrO6US+pAY=;
- b=BflMA4Ed272sPTADEWG+fIFYehmnZA8bMzdJLr0ivTNGY5/IMCoQvFRtO2X1XryZ6KY6YZ
- xKax2qGaWn6LQslP5FjvJ67Z7KKZF7aUaWND5oh/LenW1wCU14o1MNGFmFoAr18UJkiODr
- 1PhscsQsSUEjopYPrRhf9FC98ik1xOE=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=zuQhEoinGr3rMW34j1QOGKEss7ngnYiePpZwWcS3+fQ=;
+ b=YnXmCiR04mLeAPbRuXqfVpIoxtvtyCDCFYgfAZBhLxiWxjmAFo/X2YMmJlq+ogg3EodMpJ
+ RMwMVKDvHIMGdWK/H15zIOOnBc5iD8cnOi3Vr5bY9NYrQV3Dz1tN1yv4ZLtveOQKFOQ7r9
+ 9/7m1JxcSzF5iZmSwUJwD5YOV0xtlT0=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-12-lbtKrdrCNtq2AfFb7hsHWg-1; Mon,
- 11 Aug 2025 09:01:21 -0400
-X-MC-Unique: lbtKrdrCNtq2AfFb7hsHWg-1
-X-Mimecast-MFC-AGG-ID: lbtKrdrCNtq2AfFb7hsHWg_1754917279
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-577-XERMBIfqO-y-HFBMPlakAg-1; Mon,
+ 11 Aug 2025 09:01:18 -0400
+X-MC-Unique: XERMBIfqO-y-HFBMPlakAg-1
+X-Mimecast-MFC-AGG-ID: XERMBIfqO-y-HFBMPlakAg_1754917275
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 1899A18002D5; Mon, 11 Aug 2025 13:01:19 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 345AF19560B9; Mon, 11 Aug 2025 13:01:15 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.45.224.64])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id D1F43180044F; Mon, 11 Aug 2025 13:01:17 +0000 (UTC)
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 073E11955F16; Mon, 11 Aug 2025 13:01:12 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id AB4B418000B4; Mon, 11 Aug 2025 15:01:10 +0200 (CEST)
+ id 7FFB51800091; Mon, 11 Aug 2025 15:01:10 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Kashyap Chamarthy <kchamart@redhat.com>,
@@ -60,15 +59,14 @@ Cc: Kashyap Chamarthy <kchamart@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-riscv@nongnu.org
-Subject: [PATCH 3/3] hw/uefi: open json file in binary mode
-Date: Mon, 11 Aug 2025 15:01:10 +0200
-Message-ID: <20250811130110.820958-4-kraxel@redhat.com>
-In-Reply-To: <20250811130110.820958-1-kraxel@redhat.com>
-References: <20250811130110.820958-1-kraxel@redhat.com>
+Subject: [PATCH 0/3] hw/uefi: three small bug fixes.
+Date: Mon, 11 Aug 2025 15:01:07 +0200
+Message-ID: <20250811130110.820958-1-kraxel@redhat.com>
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=kraxel@redhat.com;
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=kraxel@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -77,7 +75,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,28 +91,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Fixes file length discrepancies due to line ending conversions
-on windows hosts.
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/3058
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
+
+Gerd Hoffmann (3):
+  hw/uefi: return success for notifications
+  hw/uefi: check access for first variable
+  hw/uefi: open json file in binary mode
+
  hw/uefi/var-service-json.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/uefi/var-service-vars.c | 5 +++++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/hw/uefi/var-service-json.c b/hw/uefi/var-service-json.c
-index ad3462cd1557..f5f155683334 100644
---- a/hw/uefi/var-service-json.c
-+++ b/hw/uefi/var-service-json.c
-@@ -172,7 +172,7 @@ static GString *uefi_vars_to_json(uefi_vars_state *uv)
- void uefi_vars_json_init(uefi_vars_state *uv, Error **errp)
- {
-     if (uv->jsonfile) {
--        uv->jsonfd = qemu_create(uv->jsonfile, O_RDWR, 0666, errp);
-+        uv->jsonfd = qemu_create(uv->jsonfile, O_RDWR | O_BINARY, 0666, errp);
-     }
- }
- 
 -- 
 2.50.1
 
