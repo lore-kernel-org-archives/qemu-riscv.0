@@ -4,95 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1ABBC87FCB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Aug 2025 17:03:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48527CA0EDC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Aug 2025 03:10:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ulsOO-0004dQ-NW; Tue, 12 Aug 2025 13:02:32 -0400
+	id 1um1sD-0001Zb-OG; Tue, 12 Aug 2025 23:09:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ulsOK-0004bv-CY
- for qemu-riscv@nongnu.org; Tue, 12 Aug 2025 13:02:29 -0400
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ulsOF-00089L-BC
- for qemu-riscv@nongnu.org; Tue, 12 Aug 2025 13:02:28 -0400
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3b9141866dcso466074f8f.2
- for <qemu-riscv@nongnu.org>; Tue, 12 Aug 2025 10:02:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755018139; x=1755622939; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dJY01AiwGpenoup2DC6cwZzWsgWRqxLsf1J5dtZCptc=;
- b=VIrL8hNm+lgWhclOEPpnklB6QP2lmDlb1Mw1irwl3MS1mkmmnCYwRch57hfKtaLXlc
- WqwNsGXw1qrKaYm/RF5SdoctwvndLNtAERg5nSCAdeUN9N+Xg2p1fBbiz1FzHnGzXrMl
- r6lhqxgL8Igud0kuKJRn0MbvQJJkvW2vYsuCKwTzNj3lsw5uJCcnMk+pXFxzlitWeorC
- 30OGtH1Lz8EE+6lEpfvLCGkTXk03kG4Z5N+JXyN9mQuQA7SWiNtI8FpH8T1rzsgpWYY5
- Nv3/WkapmVsPBUUn/7c2xjzx3BmWMLaOM2j7qmJEsTNt7pcZSgsil5D93GpP4UouEnTj
- en3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755018139; x=1755622939;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dJY01AiwGpenoup2DC6cwZzWsgWRqxLsf1J5dtZCptc=;
- b=joAzpw0sINKfJ2YDwIPyMBXEYGGXnWdvrSO4YS19DR6iraiADTWgQVxQhWOYAsuxcs
- gStYUls3aNbjGcdEtN4cPGjv77fMOLd5OKoEDdAqVjn+iCtCFCw37eB+Ahl+Frpkm7oU
- jtn/iIUUhZwDs21VrFgZafDFlTmC3Y+jyfzIrBggdn48UiywSVQsoeEikNs3iwxYHF5Q
- dmL39pTyZmtBxAg0xYTVDif3MU0lMIsU4M+dQ2CLggrtARJp39nJnMNRBVWVrf1/XHYQ
- asMriW7AZbTAwHBXEdYzEdVtOhPmieH2Udr+wM7S0UZ5bKPHWD/KIbiDjy1+GuqRcD4D
- bdMA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXGV9VeB2n63E18cF2qJl/9r68SsmB+RDu92QZgnV+DrO5zcKPElk7uXOnPFv7ZG9/gyUxpMeWKwkVb@nongnu.org
-X-Gm-Message-State: AOJu0YypXRbLNSPX1n5PwDnW/icARD+92F8wwjo5CS49eTeN2QjstN3c
- CEb5Ri5uH5lIkc8k1tBs8BU8GksNNAO+mHzFZKP45wtd0dsRsCXS2Htum+Nh+ENk+as=
-X-Gm-Gg: ASbGncvLbuQ8pN4BxFHTcf6+2NGPjVgbANJ8PPC3s/PdsSe0kyaecoEMmdDn4F6zPoG
- wLfGRC7ktQ7QU4ADxb3FLE0GqxnvtpLiCw5okReDaom923hmexTvLYXNdiR7nW7Y5CkURMomys4
- 8ell71stQwTGt7YEGPD/KZggkgt/DaeC/4wIWokjWG/5mKTQPUHLjycfNrWqzl5sPIbKsgYc+Jk
- M4SMmLf78ZdzrTHjzx8MxgX0+5jVwboV5g4AE0PQF7iYTPLaT8Q+K0zjhQns7N3S0oSFJZycewi
- GH+IUMY0RCMouB+Q0n5K/1unjMWaiFw/XmG+ifHK5/cTOSK/8oJ1ACxe3RGBc2fQeQ873quQUVX
- xGiZoRXGS9kJpXFrlhvame19Logf5tW8G074NnN8rEWJDK+2F69MElGhJBe69W3e3z/YhZjJ8
-X-Google-Smtp-Source: AGHT+IGfN6do/RZU+7MN5AJSRmaQ0spPgWUakyiB7qSGoVI/RQcgLmCUE5BLD6FnUt303XRbYtfukg==
-X-Received: by 2002:a05:6000:40cd:b0:3b5:dd38:3523 with SMTP id
- ffacd0b85a97d-3b917246236mr128443f8f.8.1755018138720; 
- Tue, 12 Aug 2025 10:02:18 -0700 (PDT)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-459e587e154sm328347905e9.27.2025.08.12.10.02.17
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 12 Aug 2025 10:02:17 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Guenter Roeck <linux@roeck-us.net>,
- Gustavo Romero <gustavo.romero@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-Subject: [PULL 2/2] tests/functional: Test SPI-SD adapter without SD card
- connected
-Date: Tue, 12 Aug 2025 19:02:14 +0200
-Message-ID: <20250812170214.81484-1-philmd@linaro.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250812165642.81157-1-philmd@linaro.org>
-References: <20250812165642.81157-1-philmd@linaro.org>
+ (Exim 4.90_1) (envelope-from <chao.liu@yeah.net>)
+ id 1um1sA-0001Xu-9q; Tue, 12 Aug 2025 23:09:55 -0400
+Received: from mail-m16.yeah.net ([220.197.32.19])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <chao.liu@yeah.net>)
+ id 1um1rc-0001RB-AR; Tue, 12 Aug 2025 23:09:53 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
+ s=s110527; h=Message-ID:Date:MIME-Version:To:Subject:From:
+ Content-Type; bh=0i4t+iVXztnfd6PoyjrMxbBDXos5ErwkV1LUwMLvQSE=;
+ b=HNx0DCgAPN/H7hnrzwKjp1fjJbggmgLbD7UcacDs3qVqXa+qBWqdhk64+ctOLh
+ ZBGJtwL8D0N1KcXpw+XiMYdJogdD0UvuMHjB8S96LQXq43DdvZdT3kCp9SvIeFdL
+ Sp6BHHPv1+OkbPDay6W7kD1eK208NA6jtl7PcK0jE/QLQ=
+Received: from [192.168.71.3] (unknown [])
+ by gzsmtp2 (Coremail) with SMTP id Ms8vCgD3dyBiAZxo_heOAg--.18116S2;
+ Wed, 13 Aug 2025 11:07:16 +0800 (CST)
+Message-ID: <4d658cff-d8ab-4d95-b340-c6b7b5375395@yeah.net>
+Date: Wed, 13 Aug 2025 11:07:12 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42f.google.com
+User-Agent: Mozilla Thunderbird
+To: jim.shu@sifive.com, dbarboza@ventanamicro.com
+Cc: alistair.francis@wdc.com, arikalo@gmail.com, atar4qemu@gmail.com,
+ aurelien@aurel32.net, david@redhat.com, deller@gmx.de,
+ edgar.iglesias@gmail.com, eduardo@habkost.net, gaosong@loongson.cn,
+ iii@linux.ibm.com, jcmvbkbc@gmail.com, jiaxun.yang@flygoat.com,
+ kbastian@mail.uni-paderborn.de, laurent@vivier.eu, liwei1518@gmail.com,
+ marcel.apfelbaum@gmail.com, mark.cave-ayland@ilande.co.uk,
+ mrolnik@gmail.com, npiggin@gmail.com, palmer@dabbelt.com,
+ pbonzini@redhat.com, peterx@redhat.com, philmd@linaro.org,
+ qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, richard.henderson@linaro.org, shorne@gmail.com,
+ thuth@redhat.com, wangyanan55@huawei.com, zhao1.liu@intel.com,
+ zhiwei_liu@linux.alibaba.com
+References: <20701dc8-d156-4ad9-8945-282321c15527@ventanamicro.com>
+Subject: Re: [PATCH v2 13/18] hw/misc: riscv_worldguard: Add API to enable WG
+ extension of CPU
+From: Chao Liu <chao.liu@yeah.net>
+In-Reply-To: <20701dc8-d156-4ad9-8945-282321c15527@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: Ms8vCgD3dyBiAZxo_heOAg--.18116S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxAw4fAw1fWw4DGw4DKry5XFb_yoW7Jw47pr
+ 4rCF4aqr1DWry3J3W3XryxJF1Sg3s5Wr15Cws7Aa4fCwsFvFWxArn0k3y2kFn7XFs3Zr1F
+ vFy2grWUua1SvFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jq6wAUUUUU=
+X-Originating-IP: [114.88.98.193]
+X-CM-SenderInfo: pfkd0hxolxq5hhdkh0dhw/1tbiNQSawmicAWRjqQAA3y
+Received-SPF: pass client-ip=220.197.32.19; envelope-from=chao.liu@yeah.net;
+ helo=mail-m16.yeah.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,69 +83,171 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-SPI-SD adapter should be usable, even without any SD card
-wired. Refactor test_riscv64_sifive_u_mmc_spi() to make it
-more generic and add another test, inspired by this report:
-https://lore.kernel.org/qemu-devel/5b2dc427-f0db-4332-a997-fe0c82415acd@roeck-us.net/
+> On 4/17/25 7:52 AM, Jim Shu wrote:
+> > riscv_worldguard_apply_cpu() could enable WG CPU extension and set WG
+> > callback to CPUs. It is used by machine code after realizing global WG
+> > device.
+> > 
+> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> > ---
+> >   hw/misc/riscv_worldguard.c         | 87 ++++++++++++++++++++++++++++++
+> >   include/hw/misc/riscv_worldguard.h |  1 +
+> >   2 files changed, 88 insertions(+)
+> > 
+> > diff --git a/hw/misc/riscv_worldguard.c b/hw/misc/riscv_worldguard.c
+> > index b02bd28d02..1a910f4cf3 100644
+> > --- a/hw/misc/riscv_worldguard.c
+> > +++ b/hw/misc/riscv_worldguard.c
+> > @@ -92,6 +92,93 @@ uint32_t mem_attrs_to_wid(MemTxAttrs attrs)
+> >       }
+> >   }
+> >   
+> > +static void riscv_cpu_wg_reset(CPURISCVState *env)
+> > +{
+> > +    CPUState *cs = env_cpu(env);
+> > +    RISCVCPU *cpu = RISCV_CPU(cs);
+> > +    uint32_t mlwid, slwid, mwiddeleg;
+> > +    uint32_t trustedwid;
+> > +
+> > +    if (!riscv_cpu_cfg(env)->ext_smwg) {
+> > +        return;
+> > +    }
+> > +
+> > +    if (worldguard_config == NULL) {
+> > +        /*
+> > +         * Note: This reset is dummy now and WG CSRs will be reset again
+> > +         * after worldguard_config is realized.
+> > +         */
+> > +        return;
+> > +    }
+> > +
+> > +    trustedwid = worldguard_config->trustedwid;
+> > +    if (trustedwid == NO_TRUSTEDWID) {
+> > +        trustedwid = worldguard_config->nworlds - 1;
+> > +    }
+> > +
+> > +    /* Reset mlwid, slwid, mwiddeleg CSRs */
+> > +    if (worldguard_config->hw_bypass) {
+> > +        /* HW bypass mode */
+> > +        mlwid = trustedwid;
+> > +    } else {
+> > +        mlwid = 0;
+> > +    }
+> > +    slwid = 0;
+> > +    mwiddeleg = 0;
+> > +
+> > +    env->mlwid = mlwid;
+> > +    if (riscv_cpu_cfg(env)->ext_sswg) {
+> > +        env->slwid = slwid;
+> > +        env->mwiddeleg = mwiddeleg;
+> > +    }
+> > +
+> > +    /* Check mwid, mwidlist config */
+> > +    if (worldguard_config != NULL) {
+> > +        uint32_t valid_widlist = MAKE_64BIT_MASK(0, worldguard_config->nworlds);
+> > +
+> > +        /* CPU use default mwid / mwidlist config if not set */
+> > +        if (cpu->cfg.mwidlist == UINT32_MAX) {
+> > +            /* mwidlist contains all WIDs */
+> > +            cpu->cfg.mwidlist = valid_widlist;
+> > +        }
+> > +        if (cpu->cfg.mwid == UINT32_MAX) {
+> > +            cpu->cfg.mwid = trustedwid;
+> > +        }
+> > +
+> > +        /* Check if mwid/mwidlist HW config is valid in NWorld. */
+> > +        g_assert((cpu->cfg.mwidlist & ~valid_widlist) == 0);
+> > +        g_assert(cpu->cfg.mwid < worldguard_config->nworlds);
+> > +    }
+> > +}
+> > +
+> > +/*
+> > + * riscv_worldguard_apply_cpu - Enable WG extension of CPU
+> > + *
+> > + * Note: This API should be used after global WG device is created
+> > + * (riscv_worldguard_realize()).
+> > + */
+> > +void riscv_worldguard_apply_cpu(uint32_t hartid)
+> > +{
+> > +    /* WG global config should exist */
+> > +    g_assert(worldguard_config);
+> 
+> We usually add g_asserts() after the variable declarations.
+> 
+> > +
+> > +    CPUState *cpu = qemu_get_cpu(hartid);
 
-Inspired-by: Guenter Roeck <linux@roeck-us.net>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Gustavo Romero <gustavo.romero@linaro.org>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Tested-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20250812140415.70153-3-philmd@linaro.org>
----
- tests/functional/test_riscv64_sifive_u.py | 22 +++++++++++++++++-----
- 1 file changed, 17 insertions(+), 5 deletions(-)
+arm_get_cpu() uses CPUState::cpu_index to obtain the corresponding CPUState pointer.
 
-diff --git a/tests/functional/test_riscv64_sifive_u.py b/tests/functional/test_riscv64_sifive_u.py
-index dc4cb8a4a96..358ff0d1f60 100755
---- a/tests/functional/test_riscv64_sifive_u.py
-+++ b/tests/functional/test_riscv64_sifive_u.py
-@@ -27,25 +27,37 @@ class SifiveU(LinuxKernelTest):
-          'rootfs.ext2.gz'),
-         'b6ed95610310b7956f9bf20c4c9c0c05fea647900df441da9dfe767d24e8b28b')
- 
--    def test_riscv64_sifive_u_mmc_spi(self):
-+    def do_test_riscv64_sifive_u_mmc_spi(self, connect_card):
-         self.set_machine('sifive_u')
-         kernel_path = self.ASSET_KERNEL.fetch()
-         rootfs_path = self.uncompress(self.ASSET_ROOTFS)
- 
-         self.vm.set_console()
-         kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
--                               'root=/dev/mmcblk0 rootwait '
-                                'earlycon=sbi console=ttySIF0 '
--                               'panic=-1 noreboot')
-+                               'root=/dev/mmcblk0 ')
-         self.vm.add_args('-kernel', kernel_path,
--                         '-drive', f'file={rootfs_path},if=sd,format=raw',
-                          '-append', kernel_command_line,
-                          '-no-reboot')
-+        if connect_card:
-+            kernel_command_line += 'panic=-1 noreboot rootwait '
-+            self.vm.add_args('-drive', f'file={rootfs_path},if=sd,format=raw')
-+            pattern = 'Boot successful.'
-+        else:
-+            kernel_command_line += 'panic=0 noreboot '
-+            pattern = 'Cannot open root device "mmcblk0" or unknown-block(0,0)'
-+
-         self.vm.launch()
--        self.wait_for_console_pattern('Boot successful.')
-+        self.wait_for_console_pattern(pattern)
- 
-         os.remove(rootfs_path)
- 
-+    def test_riscv64_sifive_u_nommc_spi(self):
-+        self.do_test_riscv64_sifive_u_mmc_spi(False)
-+
-+    def test_riscv64_sifive_u_mmc_spi(self):
-+        self.do_test_riscv64_sifive_u_mmc_spi(True)
-+
- 
- if __name__ == '__main__':
-     LinuxKernelTest.main()
--- 
-2.49.0
+However, CPUState::cpu_index and the RISC-V HART index are not necessarily strictly
+one-to-one (for instance, when the hartid base is non-zero or when hartids are
+discontinuous).
+
+Typically, we use arm_get_cpu() at the accelerators, rather than in hw/code.
+
+A better approach is to use cpu_by_arch_id() instead of qemu_get_cpu(),
+in RISC-V cpu_by_arch_id() uses the hartid.
+
+e.g.
+
+     CPUState *cpu = cpu_by_arch_id(hartid);
+
+
+Thanks,
+
+Chao
+
+> > +    RISCVCPU *rcpu = RISCV_CPU(cpu);
+> > +    CPURISCVState *env = cpu ? cpu_env(cpu) : NULL;
+> > +
+> > +    rcpu->cfg.ext_smwg = true;
+> > +    if (riscv_has_ext(env, RVS) && riscv_has_ext(env, RVU)) {
+> > +        rcpu->cfg.ext_sswg = true;
+> > +    }
+> 
+> riscv_has_ext() will segfault if env == NULL, and you're creating a code
+> path where this might happen:
+> 
+> > +    CPURISCVState *env = cpu ? cpu_env(cpu) : NULL;
+> 
+> In fact, cpu == NULL will explode on you earlier via this macro:
+> 
+> > +    RISCVCPU *rcpu = RISCV_CPU(cpu);
+> 
+> You can either handle cpu == NULL with a clean exit before using 'cpu' to assign
+> stuff or g_assert(cpu != NULL) for a more rude exit. But with this code as is
+> you're gambling with segfaults.
+> 
+> 
+> Thanks,
+> 
+> Daniel
+> 
+> 
+> > +
+> > +    /* Set machine specific WorldGuard callback */
+> > +    env->wg_reset = riscv_cpu_wg_reset;
+> > +    env->wid_to_mem_attrs = wid_to_mem_attrs;
+> > +
+> > +    /* Reset WG CSRs in CPU */
+> > +    env->wg_reset(env);
+> > +}
+> > +
+> >   bool could_access_wgblocks(MemTxAttrs attrs, const char *wgblock)
+> >   {
+> >       uint32_t wid = mem_attrs_to_wid(attrs);
+> > diff --git a/include/hw/misc/riscv_worldguard.h b/include/hw/misc/riscv_worldguard.h
+> > index 8a533a0517..211a72e438 100644
+> > --- a/include/hw/misc/riscv_worldguard.h
+> > +++ b/include/hw/misc/riscv_worldguard.h
+> > @@ -48,6 +48,7 @@ extern struct RISCVWorldGuardState *worldguard_config;
+> >   
+> >   DeviceState *riscv_worldguard_create(uint32_t nworlds, uint32_t trustedwid,
+> >                                        bool hw_bypass, bool tz_compat);
+> > +void riscv_worldguard_apply_cpu(uint32_t hartid);
+> >   
+> >   uint32_t mem_attrs_to_wid(MemTxAttrs attrs);
+> >   bool could_access_wgblocks(MemTxAttrs attrs, const char *wgblock);
+> 
 
 
