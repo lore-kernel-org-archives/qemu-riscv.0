@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D8CECA0EE4
-	for <qemu-riscv@archiver.kernel.org>; Sat, 16 Aug 2025 00:31:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32B86CA0EE4
+	for <qemu-riscv@archiver.kernel.org>; Sat, 16 Aug 2025 00:58:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1un4oD-0000P8-Ew; Fri, 15 Aug 2025 20:30:09 -0400
+	id 1un5FH-0006oV-Rc; Fri, 15 Aug 2025 20:58:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@yeah.net>)
- id 1un4oB-0000OV-5V; Fri, 15 Aug 2025 20:30:07 -0400
-Received: from mail-m16.yeah.net ([220.197.32.19])
+ id 1un5FG-0006nx-0P; Fri, 15 Aug 2025 20:58:06 -0400
+Received: from mail-m16.yeah.net ([1.95.21.15])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@yeah.net>)
- id 1un4o6-0002vv-Vx; Fri, 15 Aug 2025 20:30:06 -0400
+ id 1un5F8-0002SM-55; Fri, 15 Aug 2025 20:58:03 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=PN
- g+wTrmTTLoLgU6tKSOWk/nt3Gsu/A6S6G6VoF0+Lw=; b=ASldNkbWttpuvzJm1O
- Fb97BtIswoDtOzvreCrjPNUxK/mfesaZ0Zy5aCx44o8duUhrhWdvh2ay1KF+hNyM
- HIAVtNZ8ulGmMBY+kVaQ/7abmDS1gxTiE1E3z/RAhr3K0BYbXxMdtpRGnH6DAAj0
- DlEvSUAx01Yew5ODm4iuVQMrs=
-Received: from ZEVORN-PC (unknown [])
- by gzsmtp1 (Coremail) with SMTP id Mc8vCgAXHbHr0J9oFNywAg--.22102S4;
- Sat, 16 Aug 2025 08:29:32 +0800 (CST)
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=hZ
+ ZENjkAOpN1p6sHcD7STCn/6k1MJfqF7ZgKYQ0RnVo=; b=Yk6efYwZlhSd0jw5/h
+ i9UZ5eBSUGZSOA4wJkNYYD9QzAcp6Sq1RwxSfsdBYND1lHZoDwoql4es0hOLSIwM
+ 34PW4WfIUgiyyJJWRiEZOMOifU4qbAcevgrY8sWBj4qMRCZPzb3AaignSGbO8Dfk
+ k4ND4CxFdwzDfq6D2BQ/Rdg7k=
+Received: from localhost.localdomain (unknown [])
+ by gzsmtp2 (Coremail) with SMTP id Ms8vCgD3VMlX159oJLK7Ag--.12739S4;
+ Sat, 16 Aug 2025 08:56:59 +0800 (CST)
 From: Chao Liu <chao.liu@yeah.net>
-To: paolo.savini@embecosm.com, dbarboza@ventanamicro.com, ebiggers@kernel.org,
+To: paolo.savini@embecosm.com, ebiggers@kernel.org, dbarboza@ventanamicro.com,
  palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Chao Liu <chao.liu@yeah.net>
-Subject: [PATCH v2 2/2] tests/tcg/riscv64: Add test for vlsseg8e32 instruction
-Date: Sat, 16 Aug 2025 08:29:21 +0800
-Message-ID: <5c9df353c77f6eec479975f41efc3de6e17a47c3.1755287531.git.chao.liu@yeah.net>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1755287531.git.chao.liu@yeah.net>
-References: <cover.1755287531.git.chao.liu@yeah.net>
+Subject: [PATCH v3 2/2] tests/tcg/riscv64: Add test for vlsseg8e32 instruction
+Date: Sat, 16 Aug 2025 08:56:43 +0800
+Message-ID: <4335811b078a4628e76a97d269ab1cc635c86ba4.1755305184.git.chao.liu@yeah.net>
+X-Mailer: git-send-email 2.48.1.windows.1
+In-Reply-To: <cover.1755305184.git.chao.liu@yeah.net>
+References: <cover.1755305184.git.chao.liu@yeah.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: Mc8vCgAXHbHr0J9oFNywAg--.22102S4
-X-Coremail-Antispam: 1Uf129KBjvJXoWxWr4DXr1UXr1xWF1UCr4rXwb_yoW5urW3pr
- 15Gw4qkr4vq343Ka43GF1UuFyrWr4F9F1UXFy8K3W09rW8ZFZruF4ktFWUtFyrAw4UCr13
- uFnYqF1rKanxA3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UfEf5UUUUU=
-X-Originating-IP: [240e:b8f:29d6:3800:7c84:49f3:ff4c:3c80]
-X-CM-SenderInfo: pfkd0hxolxq5hhdkh0dhw/1tbiIg1xmWif0O3DTQAA3D
-Received-SPF: pass client-ip=220.197.32.19; envelope-from=chao.liu@yeah.net;
+X-CM-TRANSID: Ms8vCgD3VMlX159oJLK7Ag--.12739S4
+X-Coremail-Antispam: 1Uf129KBjvJXoWxWr4DXr1UGw4fZFyUCF13CFg_yoW5try8pr
+ 45Gw4qkr4vq34aga43GF1DuFyrWr4F9F1UXFy8Ka109rWrZFZruF4ktFWUtFy5ZrWUCr43
+ u3ZYqF1fGanxA3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UWE__UUUUU=
+X-Originating-IP: [114.88.98.193]
+X-CM-SenderInfo: pfkd0hxolxq5hhdkh0dhw/1tbiNBsONmif11uYkgAA3m
+Received-SPF: pass client-ip=1.95.21.15; envelope-from=chao.liu@yeah.net;
  helo=mail-m16.yeah.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -71,22 +71,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-Message-ID: <20250816002921.HP-ipo95KzEz7aHT1DFdEJ6qlq1zHKtLk7EBF0ne4Bw@z>
 
 This case, it copied 64 bytes from a0 to a1 with vlsseg8e32.
 
 Signed-off-by: Chao Liu <chao.liu@yeah.net>
 ---
  tests/tcg/riscv64/Makefile.softmmu-target |   8 +-
- tests/tcg/riscv64/test-vlsseg8e32.S       | 108 ++++++++++++++++++++++
- 2 files changed, 114 insertions(+), 2 deletions(-)
+ tests/tcg/riscv64/test-vlsseg8e32.S       | 107 ++++++++++++++++++++++
+ 2 files changed, 113 insertions(+), 2 deletions(-)
  create mode 100644 tests/tcg/riscv64/test-vlsseg8e32.S
 
 diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 7c1d44d3f4..c3c5b66713 100644
+index 3ca595335d..384c291554 100644
 --- a/tests/tcg/riscv64/Makefile.softmmu-target
 +++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -7,18 +7,22 @@ VPATH += $(TEST_SRC)
+@@ -7,14 +7,14 @@ VPATH += $(TEST_SRC)
  
  LINK_SCRIPT = $(TEST_SRC)/semihost.ld
  LDFLAGS = -T $(LINK_SCRIPT)
@@ -103,6 +102,8 @@ index 7c1d44d3f4..c3c5b66713 100644
  
  EXTRA_RUNS += run-issue1060
  run-issue1060: issue1060
+@@ -24,5 +24,9 @@ EXTRA_RUNS += run-test-mepc-masking
+ run-test-mepc-masking: test-mepc-masking
  	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
  
 +EXTRA_RUNS += run-vlsseg8e32
@@ -113,10 +114,10 @@ index 7c1d44d3f4..c3c5b66713 100644
  undefine MULTIARCH_TESTS
 diff --git a/tests/tcg/riscv64/test-vlsseg8e32.S b/tests/tcg/riscv64/test-vlsseg8e32.S
 new file mode 100644
-index 0000000000..2861ff3702
+index 0000000000..bbc79d5e8d
 --- /dev/null
 +++ b/tests/tcg/riscv64/test-vlsseg8e32.S
-@@ -0,0 +1,108 @@
+@@ -0,0 +1,107 @@
 +#
 +# QEMU RISC-V Vector Strided Load Instruction testcase
 +#
@@ -124,13 +125,12 @@ index 0000000000..2861ff3702
 +#
 +# SPDX-License-Identifier: GPL-2.0-or-later
 +#
-+
 +	.option	norvc
 +
 +	.section .data
 +	.align 4
 +source_data:
-+	.asciz "Test the vlsseg8e32 insn by copy 64b and verifying correctness."
++	.asciz "Test the vssseg8e32 insn by copy 64b and verifying correctness."
 +	.equ source_len, 64
 +
 +	.text
