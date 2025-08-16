@@ -4,50 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CECACA0EE6
-	for <qemu-riscv@archiver.kernel.org>; Sat, 16 Aug 2025 08:58:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BC62CA0EE4
+	for <qemu-riscv@archiver.kernel.org>; Sat, 16 Aug 2025 08:58:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1unCkD-0004Vs-09; Sat, 16 Aug 2025 04:58:33 -0400
+	id 1unCk9-0004UP-S2; Sat, 16 Aug 2025 04:58:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@yeah.net>)
- id 1unCk9-0004UQ-Ca; Sat, 16 Aug 2025 04:58:29 -0400
-Received: from mail-m16.yeah.net ([220.197.32.17])
+ id 1unCk7-0004U0-WD; Sat, 16 Aug 2025 04:58:28 -0400
+Received: from mail-m16.yeah.net ([1.95.21.14])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@yeah.net>)
- id 1unCk1-0003le-73; Sat, 16 Aug 2025 04:58:29 -0400
+ id 1unCk1-0003lc-CA; Sat, 16 Aug 2025 04:58:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=bM
- rq7fL1SMcj91yUcqKwIm9l86HWM1k5R7CcthcA8fI=; b=hRIAe/i2j1bb+nSo+0
- GoQhna+4IPJmPPTz140eiIaMpvB9xZQMF3PKDsxSrUVDQS8v2xRekPj02CejMS+d
- 7ZX+uEHjvZCkq+kb0mUKoG6FeSyTp8RoA4+PVCq0lhUYfKPf2+JhquA84RrH1CYF
- iqXmfbudFU3dfbmFmaGvuXRNo=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=sa
+ QC+BB9xw1BdHerigzJ67clSJNT1OTLlTNrRef9RWw=; b=FWQoroKNV1fkBp8K5o
+ xz5K+gr3VaoNfVFjkz/56agn+Zk6IO083jKcvkMNLU54bN4hmvAKLfPDOR/2cQkS
+ QRsV/mHORHvUwf5WWGreS9C/mfeDh/XC7HKx7FzhZeQ7MVlPiYMc56ZwSuQIeCYZ
+ biqmtL30dStm9H2i6Qforqb5k=
 Received: from localhost.localdomain (unknown [])
- by gzsmtp2 (Coremail) with SMTP id Ms8vCgC37_f_R6BoEUXBAg--.43192S4;
- Sat, 16 Aug 2025 16:57:39 +0800 (CST)
+ by gzsmtp2 (Coremail) with SMTP id Ms8vCgC37_f_R6BoEUXBAg--.43192S2;
+ Sat, 16 Aug 2025 16:57:38 +0800 (CST)
 From: Chao Liu <chao.liu@yeah.net>
 To: richard.henderson@linaro.org, paolo.savini@embecosm.com,
  ebiggers@kernel.org, dbarboza@ventanamicro.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Chao Liu <chao.liu@yeah.net>
-Subject: [PATCH v4 2/2] tests/tcg/riscv64: Add test for vlsseg8e32 instruction
-Date: Sat, 16 Aug 2025 16:56:36 +0800
-Message-ID: <5728d0ad5560433a9d4815877ddf7f16ee1793de.1755333616.git.chao.liu@yeah.net>
+Subject: [PATCH v4 0/2] target/riscv: Generate strided vector ld/st with tcg
+Date: Sat, 16 Aug 2025 16:56:34 +0800
+Message-ID: <cover.1755333616.git.chao.liu@yeah.net>
 X-Mailer: git-send-email 2.48.1.windows.1
-In-Reply-To: <cover.1755333616.git.chao.liu@yeah.net>
-References: <cover.1755333616.git.chao.liu@yeah.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: Ms8vCgC37_f_R6BoEUXBAg--.43192S4
-X-Coremail-Antispam: 1Uf129KBjvJXoWxWr4kGFykZw4kuFW7tF4rGrg_yoW5uw18pr
- 45Gws0kr4vq34aga43GF1DuFyrWr4F9F1UXFy8Ka109rWrZF9ruF4ktFW8tFy3ZrWUCr43
- u3ZYvF1fGanxA3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UWE__UUUUU=
+X-CM-TRANSID: Ms8vCgC37_f_R6BoEUXBAg--.43192S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWrtF1UZF43ZF4fWrW5CFWfXwb_yoW8JF1Upa
+ 15Krya9r4xXa9rXF4fGr4xCr90qw4fu3W5AF1xJw1rurW5tr9rtFn2gw4UKF13GFyxur1a
+ v3WayFs5uF1ava7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jOcTQUUUUU=
 X-Originating-IP: [114.88.98.193]
-X-CM-SenderInfo: pfkd0hxolxq5hhdkh0dhw/1tbiAQWrKGigQzwHGAABsu
-Received-SPF: pass client-ip=220.197.32.17; envelope-from=chao.liu@yeah.net;
+X-CM-SenderInfo: pfkd0hxolxq5hhdkh0dhw/1tbiNgJUfGigSAJOvwAA3v
+Received-SPF: pass client-ip=1.95.21.14; envelope-from=chao.liu@yeah.net;
  helo=mail-m16.yeah.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -72,157 +70,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This case, it copied 64 bytes from a0 to a1 with vlsseg8e32.
----
+Hi all,
+
+Thanks Richard for the review.
+
+For patch v4, the main modification is to improve the implementation of the
+get_log2() function.
+
++static inline uint32_t get_log2(uint32_t a)
++{
+-    uint32_t i = 0;
+-    if (a == 0) {
+-        return i;
+-    }
+-    for (; a > 1;) {
+-        a >>= 1;
+-        i++;
+-    } 
++    assert(is_power_of_2(a));
++    return ctz32(a);
++}
+
+patch v3 changes:
+- Fix the get_log2() function:
+  https://lore.kernel.org/qemu-riscv/cover.1755287531.git.chao.liu@yeah.net/T/#t
+- Add test for vlsseg8e32 instruction.
+- Rebase on top of the latest master.
+
+patch v2 changes:
+- Split the TCG node emulation of the complex strided load/store operation into
+  two separate functions to simplify the implementation:
+  https://lore.kernel.org/qemu-riscv/20250312155547.289642-1-paolo.savini@embecosm.com/
+
+
+Best regards,
+
+Chao
+
+Chao Liu (2):
+  Generate strided vector loads/stores with tcg nodes.
+  tests/tcg/riscv64: Add test for vlsseg8e32 instruction
+
+ target/riscv/insn_trans/trans_rvv.c.inc   | 319 ++++++++++++++++++----
  tests/tcg/riscv64/Makefile.softmmu-target |   8 +-
- tests/tcg/riscv64/test-vlsseg8e32.S       | 107 ++++++++++++++++++++++
- 2 files changed, 113 insertions(+), 2 deletions(-)
+ tests/tcg/riscv64/test-vlsseg8e32.S       | 107 ++++++++
+ 3 files changed, 382 insertions(+), 52 deletions(-)
  create mode 100644 tests/tcg/riscv64/test-vlsseg8e32.S
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 3ca595335d..384c291554 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -7,14 +7,14 @@ VPATH += $(TEST_SRC)
- 
- LINK_SCRIPT = $(TEST_SRC)/semihost.ld
- LDFLAGS = -T $(LINK_SCRIPT)
--CFLAGS += -g -Og
-+CFLAGS += -march=rv64gcv -mabi=lp64d -g -Og
- 
- %.o: %.S
- 	$(CC) $(CFLAGS) $< -Wa,--noexecstack -c -o $@
- %: %.o $(LINK_SCRIPT)
- 	$(LD) $(LDFLAGS) $< -o $@
- 
--QEMU_OPTS += -M virt -display none -semihosting -device loader,file=
-+QEMU_OPTS += -M virt -cpu rv64,v=true -display none -semihosting -device loader,file=
- 
- EXTRA_RUNS += run-issue1060
- run-issue1060: issue1060
-@@ -24,5 +24,9 @@ EXTRA_RUNS += run-test-mepc-masking
- run-test-mepc-masking: test-mepc-masking
- 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
- 
-+EXTRA_RUNS += run-vlsseg8e32
-+run-vlsseg8e32: test-vlsseg8e32
-+	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
-+
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/test-vlsseg8e32.S b/tests/tcg/riscv64/test-vlsseg8e32.S
-new file mode 100644
-index 0000000000..bbc79d5e8d
---- /dev/null
-+++ b/tests/tcg/riscv64/test-vlsseg8e32.S
-@@ -0,0 +1,107 @@
-+#
-+# QEMU RISC-V Vector Strided Load Instruction testcase
-+#
-+# Copyright (c) 2025 Chao Liu chao.liu@yeah.net
-+#
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+	.option	norvc
-+
-+	.section .data
-+	.align 4
-+source_data:
-+	.asciz "Test the vssseg8e32 insn by copy 64b and verifying correctness."
-+	.equ source_len, 64
-+
-+	.text
-+	.global _start
-+_start:
-+	lla	t0, trap
-+	csrw	mtvec, t0
-+
-+enable_rvv:
-+
-+	li	x15, 0x800000000024112d
-+	csrw	0x301, x15
-+	li	x1, 0x2200
-+	csrr	x2, mstatus
-+	or	x2, x2, x1
-+	csrw	mstatus, x2
-+
-+rvv_test_func:
-+	la	a0, source_data
-+	li	a1, 0x80020000
-+	vsetivli	zero, 1, e32, m1, ta, ma
-+	li	t0, 64
-+
-+	vlsseg8e32.v	v0, (a0), t0
-+	addi	a0, a0, 32
-+	vlsseg8e32.v	v8, (a0), t0
-+
-+	vssseg8e32.v	v0, (a1), t0
-+	addi	a1, a1, 32
-+	vssseg8e32.v	v8, (a1), t0
-+
-+compare_start:
-+	la	a0, source_data
-+	li	a1, 0x80020000
-+	li	t0, 0
-+	li	t1, source_len
-+
-+compare_loop:
-+	# when t0 >= len, compare end
-+	bge	 t0, t1, compare_done
-+
-+	lb	t2, 0(a0)
-+	lb	t3, 0(a1)
-+	bne	t2, t3, compare_fail
-+
-+	addi	a0, a0, 1
-+	addi	a1, a1, 1
-+	addi	t0, t0, 1
-+	j	compare_loop
-+
-+compare_done:
-+	# compare ok, return 0
-+	li	a0, 0
-+	j	_exit
-+
-+compare_fail:
-+	# compare failed, return 2
-+	li	a0, 2
-+	j	_exit
-+
-+trap:
-+	# When an instruction traps, compare it to the insn in memory.
-+	csrr	t0, mepc
-+	csrr	t1, mtval
-+	lwu	t2, 0(t0)
-+	bne	t1, t2, fail
-+
-+	# Skip the insn and continue.
-+	addi	t0, t0, 4
-+	csrw	mepc, t0
-+	mret
-+
-+fail:
-+	li	a0, 1
-+
-+# Exit code in a0
-+_exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
-+
-+	# Semihosting call sequence
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	16
-+semiargs:
-+	.space	16
 -- 
 2.50.1
 
