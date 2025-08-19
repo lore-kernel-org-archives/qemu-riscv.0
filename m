@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE66CA0EEB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Aug 2025 18:29:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2C07CA0EEB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Aug 2025 18:30:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uoR1a-0001kv-UD; Tue, 19 Aug 2025 14:25:35 -0400
+	id 1uoR1y-00036K-Vv; Tue, 19 Aug 2025 14:25:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uoR0x-0000mo-Jz; Tue, 19 Aug 2025 14:24:55 -0400
+ id 1uoR1U-0001jZ-3r; Tue, 19 Aug 2025 14:25:29 -0400
 Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uoR0p-00042G-Co; Tue, 19 Aug 2025 14:24:55 -0400
+ id 1uoR1S-0004Wh-4J; Tue, 19 Aug 2025 14:25:27 -0400
 Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-2445827be70so62692985ad.3; 
- Tue, 19 Aug 2025 11:24:46 -0700 (PDT)
+ d9443c01a7336-24458272c00so56805435ad.3; 
+ Tue, 19 Aug 2025 11:25:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755627885; x=1756232685; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1755627924; x=1756232724; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1XQ5Jo5crue3zHzTvhYx20Kx9ei5eKTIPqnLlwVAWPs=;
- b=Afk5xVzqN+lU7dplQz0yFQbKr94rCf6FsFxCH6vpdwFLjfZKv3gMGgDAv5LKK/mb2V
- +t1kDOy0lHz50PS64qE5poWn33edVS7t+tD9+XmQZoKiB4xWkmn6qB4gN2XlZoFArFf6
- LTYgyMp3PrVwqm+GXNo67wJuCrBOP/P3o9b7Ebt79xSLTQt1YsTmOXeQrkK+Z/8JQ4kf
- DGnc+o/Ny8R0dai0BBOBLyGyFf4TiP1U+uCChyWasPz5jkQjWZr3BbI8tna0ATgZeZsT
- XDZUu+29H2AiMQ+77JOZeHHL3JMzmWI2cE4YhkZ8kQnrZLIyNUdhtNNtLKI9CegiTweC
- lqkQ==
+ bh=VLeDWSkTQRfvzmWorL2lfp3RyCcc75fwMMerpGbsxQw=;
+ b=FPSJGQB5OM9hYQL6G6EAocsweHFGroRIHK8IBqF11TMKdepgsZc9MN/+Frqzm4ncdE
+ pwSEvtr6kmkxM9x8txHtdWo6TQ4PRFfkOloy4gB0EJptV8un4afnZ4I88HofFQUpGfP6
+ OTa4k+oyHyyIBRcplCHUQSwUNIpL1JLGlHNbSHuhsasjWvXbb0DLXXACE7Imj7OWcMkH
+ wXdiiVLiA2rTZLP5+3UW84p1HcQDiDp1fGWjvHDJ+bRqDkemq/41TCJoFWkQryBr9F6f
+ nyMjd67Dwy46UaheYaq1jDq4ouFGh9ra0vNx1Mz7wp4TSKLbAx1IwkZ+VTUMvX7w7zvx
+ fmdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755627885; x=1756232685;
+ d=1e100.net; s=20230601; t=1755627924; x=1756232724;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1XQ5Jo5crue3zHzTvhYx20Kx9ei5eKTIPqnLlwVAWPs=;
- b=N0ZRzK2UsyMr7uXOmABwqi6kC5IrdKWnCfu5Ypz1nx1KLNK9jQCvqrrEUWxQqQRewM
- GPZHwGjkMd5gSikMIRfa245fDsdbyPcFPbY7TbrKctlwO7XsZ8hJvaibofUM+zXa5Sup
- I/7dufScozIM7Q1d9XoCiCql6PxGnQTwD2cUo1dv5aZTZ7sR13naC2rwPYr/vTbITGEC
- iC1xPBofIzQAUVKHDkTPAL6OoN8bL0I/GRsCjzc5kVsf0XhdryI2fmrQ92yf71gHI+WR
- QW8qrL1cifjs3FomhAeDCCeFbJ4eS+qQUT3Qazfut1EoL1GA8qd13NZ6N4SVSixsgahx
- JubA==
+ bh=VLeDWSkTQRfvzmWorL2lfp3RyCcc75fwMMerpGbsxQw=;
+ b=rjxxXHuSyZJ1zl0x0G64lA6MZeU/RjcKV8UAPQaSX+CWbw8mLEoHi9Iz8hfqjhk/2U
+ dH5l0BxyR2HAra6RkQPQ5QPNiWaGyPfUKKZVvqEW2XC6ESSDLWrjZRoMMCB5/BQwHpsf
+ daYy2/m9/uB4lSwWjgR0ywvPti86k+HrkLB83OfXyT2ieePtAmmOB3vHkv3aRRomph2t
+ etVmCuv+6ESax5fqI+Coh9NOa8EkiDuYtue1a9WadZzelSyAMjjKAgortmpq7mgiAAmq
+ le/woY1LI1+T3jtqWwatQZukPDGw0qPfGPk1fTn0xmoyXrv2YqYJqJsktgS8Ztsgszxm
+ IEwg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVbn8/7Sh1tonjgwjuVbR+Lau5xOxlDELdb0Tqci90UrHXjGh1GHPijUrURb1QVDaFZFP2mRQQ8lJPY2A==@nongnu.org,
- AJvYcCWFJ5CuqYuLe8OH6P3C1Gck0RhOWbaBm2Qh6PUNqHj9WGSU2Jb+BncE2RdS5z06draSc84ln35ZNA==@nongnu.org
-X-Gm-Message-State: AOJu0YyEXVppPzo3ZpFXCkmN3OJIDKafRj7TXyGQoV1VvQTeb6KA5SvS
- Z8tAW7mS5GBaFZmcQ+dZlz7nSozP/ynmk+KigYO2rW8m1bTVsVvqKNRkaU76c5ig
-X-Gm-Gg: ASbGncuGEKfpVxueEbIrFI+wBsiIRWw3W8R2lCBDtr/C80uS2IKpV8RpK68RXie8Li8
- NvsmRIkfiNrpfJu9l+MrZnITN1xdREnKpNDp7VcgsT3RiYMNDV+XiDbVXQ1nSvxeYpLrsx0M0pe
- vq8wSd6lwkyGqYP8mesuYx/ulF+UiaWOzph8a78pkGqG+Oq29dyGfxE0tJci6iCKYlvWs0EBxPR
- 0hrYBLkKCDH9m2p/S87f4C3gx9uCAaKKAntl0f9Qe5WWQ8QH2mzMkG6PSEXBUmvdDJ8O4Yzd/6b
- zFwoiyrsSui98UkmNLhSgxaryYEw8KXEpOhyS6pDH5eT5hnWqad/OO7mugX1Y5abydGCx7/Uis6
- EzxzvlnNpN8AW+lNRd8886JxnLCOteqtu
-X-Google-Smtp-Source: AGHT+IHppkBEiVRzCvKspSBGJBXnWfMgsr4FxgKwz9oYd5SYS+peW3zywCNd8mthuilECxWqcUwqEA==
-X-Received: by 2002:a17:903:19ef:b0:244:5cde:d384 with SMTP id
- d9443c01a7336-245e047bfa5mr50100465ad.31.1755627884309; 
- Tue, 19 Aug 2025 11:24:44 -0700 (PDT)
+ AJvYcCUK9hQ9BiMEOO/9myyyOmoEYxOHU+pFiuZB6EPpNCKBX9OK/T257LWpkWLeDRq5b5A5drB0NMz/Xw==@nongnu.org,
+ AJvYcCVzVZTHOVZ8xUxWLRWUHgkx0s61oE86mKVzQjYqaPL4LdPoAS3EKuduY3Rp4cim/+8YSvWhfrVe0kiERA==@nongnu.org
+X-Gm-Message-State: AOJu0Yxbq/a3zEFbxMXGQKFbXTh72nyEk5gI+GL9esFJskPhUES7E/sW
+ ZbuDU8/5+ccRvc0cirUeW2/Q8rgfN731I5imESvhPL1hUGk3DxL/ZJ5sbYsgUQ==
+X-Gm-Gg: ASbGncuU57SoStnrKoUH54Hw3Mg8W0xaJpezVYcyZxUluTYOR3W6EUDAzs5Q5Ps0sLJ
+ gmeGGt9WubgtkYPsVcyDhWYunrkcfRwcF4khGPcLZFof0uv0mH69XJH0stp7ylleqKzsb5+zfVS
+ wRsgOXlKJoGKgUdcKmRG9GGEFW/LH3yfkAVtMkxGgpWVh7XcnfdRC3pgSdmWpc2XO8IodXsy1rY
+ THM3VrkwSFb9AnOwWopnJQvbdbcpagUE0bGZBI0tOfbZ34DxFbM0nE9PSaMHacVMuWY4aIa48S3
+ PHi52MDb0yaZUBJ9SbtGGWupWa37SMFOaSOGN6ohL/2+MuT5CoaskGQcfHi9GGFn7vhGGiCXOsW
+ elhcbJha+CpclNLdZ54ES91NK8Y3wWCIVNPKLNdBdw0s=
+X-Google-Smtp-Source: AGHT+IGoOqJOj1cPfn78hD8vlFxsKQWwq6CGFnUar6hxXovlXPO3dsvLvIk8dmpGKHJa3T43IyBUJg==
+X-Received: by 2002:a17:903:fab:b0:240:1f25:d443 with SMTP id
+ d9443c01a7336-245e047f53bmr49657645ad.30.1755627923708; 
+ Tue, 19 Aug 2025 11:25:23 -0700 (PDT)
 Received: from ktock.. ([240d:1a:3b6:8b00:29ce:ef58:c2c9:e52f])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-245ed33b4c2sm3725125ad.25.2025.08.19.11.24.38
+ d9443c01a7336-245ed33b4c2sm3725125ad.25.2025.08.19.11.25.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Aug 2025 11:24:43 -0700 (PDT)
+ Tue, 19 Aug 2025 11:25:23 -0700 (PDT)
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -80,9 +80,9 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Stefan Hajnoczi <stefanha@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, ktokunaga.mail@gmail.com
-Subject: [PATCH 23/35] tcg/wasm: Add br/brcond instructions
-Date: Wed, 20 Aug 2025 03:21:52 +0900
-Message-ID: <f234eb5f3492c747a94392a5e94ca852541f7c8c.1755623522.git.ktokunaga.mail@gmail.com>
+Subject: [PATCH 30/35] tcg/wasm: Implement instantiation of Wasm binary
+Date: Wed, 20 Aug 2025 03:21:59 +0900
+Message-ID: <2ed7c66cf4fc77e69262486f0c735d747b4dcba1.1755623522.git.ktokunaga.mail@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1755623521.git.ktokunaga.mail@gmail.com>
 References: <cover.1755623521.git.ktokunaga.mail@gmail.com>
@@ -112,541 +112,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Wasm does not support direct jumps to arbitrary code addresses, so br and
-brcond are implemented using Wasm's control flow instructions.
+instantiate_wasm is a function that instantiates a TB's Wasm binary,
+importing the functions as specified by its arguments. Following the header
+definition in wasm/tcg-target.c.inc, QEMU's memory is imported into the
+module as "env.memory", and helper functions are imported as "helper.<idx>".
 
-As illustrated in the pseudo-code below, each TB wraps instructions inside a
-large loop. Each set of codes separated by TCG labels is placed inside an
-"if" block. Br is implemented by breaking out of the current block and
-entering the target block:
+The instantiated Wasm module is imported to QEMU using Emscripten's
+"addFunction" feature[1] which returns a function pointer. This allows QEMU
+to call this module directly from C code via that pointer.
 
-loop
-  if
-    ... code after the first label
-  end
-  if
-    ... code after the second label
-  end
-  ...
-end
+Since the subarray() method doesn't accept a BigInt value which is used for
+the 64bit pointer value, it is converted to a Number (i53) using
+bigintToI53Checked method of Emscripten. Although this conversion (64bit to
+53bit) drops higher bits, the maximum memory size of the engine
+implementations is currently limited to 16GiB[2] so we can assume that the
+pointers are within the Number's range.
 
-Each block is assigned an unique integer ID. The br implementation sets the
-destination block's ID in BLOCK_IDX Wasm variable and breaks from the
-current if block. As control flow continues, each if block checks whether
-the BLOCK_IDX matches its own ID. If so, execution resumes within that
-block.
+Note that since FireFox 138, WebAssembly.Module no longer accepts a
+SharedArrayBuffer as input [3] as reported by Nicolas Vandeginste in my
+fork[4]. This commit ensures that WebAssembly.Module() is passed a
+Uint8Array created from the binary data on a SharedArrayBuffer.
 
-The tcg_out_tb_start function generates the start of the global loop and the
-first if block. To properly close these blocks, this commit also introduces
-a new callback tcg_out_tb_end which emits the "end" instructions for the
-final if block and the loop.
-
-Another new callback tcg_out_label_cb is used to emit block boundaries,
-specifically the end of the previous block and the if of the next block, at
-label positions. It also records the mapping between label IDs and block IDs
-in a LabelInfo list.
-
-Since the block ID for a label might not be known when a br instruction is
-generated, a placeholder is emitted instead. These placeholders are tracked
-in a BlockPlaceholder list and resolved later using LabelInfo.
+[1] https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#calling-javascript-functions-as-function-pointers-from-c
+[2] https://webassembly.github.io/memory64/js-api/#limits
+[3] https://bugzilla.mozilla.org/show_bug.cgi?id=1965217
+[4] https://github.com/ktock/qemu-wasm/pull/25
 
 Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 ---
- tcg/aarch64/tcg-target.c.inc     |  11 +++
- tcg/arm/tcg-target.c.inc         |  11 +++
- tcg/i386/tcg-target.c.inc        |  11 +++
- tcg/loongarch64/tcg-target.c.inc |  11 +++
- tcg/mips/tcg-target.c.inc        |  11 +++
- tcg/ppc/tcg-target.c.inc         |  11 +++
- tcg/riscv/tcg-target.c.inc       |  11 +++
- tcg/s390x/tcg-target.c.inc       |  11 +++
- tcg/sparc64/tcg-target.c.inc     |  11 +++
- tcg/tcg.c                        |   7 ++
- tcg/tci/tcg-target.c.inc         |  11 +++
- tcg/wasm/tcg-target.c.inc        | 161 +++++++++++++++++++++++++++++++
- 12 files changed, 278 insertions(+)
+ tcg/wasm.c | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
 
-diff --git a/tcg/aarch64/tcg-target.c.inc b/tcg/aarch64/tcg-target.c.inc
-index 3b088b7bd9..9323161607 100644
---- a/tcg/aarch64/tcg-target.c.inc
-+++ b/tcg/aarch64/tcg-target.c.inc
-@@ -3514,6 +3514,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     tcg_out_bti(s, BTI_J);
- }
+diff --git a/tcg/wasm.c b/tcg/wasm.c
+index 4bc53d76d0..835167f769 100644
+--- a/tcg/wasm.c
++++ b/tcg/wasm.c
+@@ -25,6 +25,7 @@
+ #include "disas/dis-asm.h"
+ #include "tcg-has.h"
+ #include <ffi.h>
++#include <emscripten.h>
  
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    /* nothing to do */
-+    return 0;
-+}
-+
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
-+
- static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
- {
-     int i;
-diff --git a/tcg/arm/tcg-target.c.inc b/tcg/arm/tcg-target.c.inc
-index 836894b16a..bd8428491a 100644
---- a/tcg/arm/tcg-target.c.inc
-+++ b/tcg/arm/tcg-target.c.inc
-@@ -3441,6 +3441,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     /* nothing to do */
- }
  
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    /* nothing to do */
-+    return 0;
-+}
-+
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
-+
- typedef struct {
-     DebugFrameHeader h;
-     uint8_t fde_def_cfa[4];
-diff --git a/tcg/i386/tcg-target.c.inc b/tcg/i386/tcg-target.c.inc
-index 088c6c9264..cf8b50e162 100644
---- a/tcg/i386/tcg-target.c.inc
-+++ b/tcg/i386/tcg-target.c.inc
-@@ -4759,6 +4759,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     /* nothing to do */
- }
+ #define ctpop_tr    glue(ctpop, TCG_TARGET_REG_BITS)
+@@ -44,6 +45,42 @@
  
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    /* nothing to do */
-+    return 0;
-+}
-+
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
-+
- static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
- {
-     memset(p, 0x90, count);
-diff --git a/tcg/loongarch64/tcg-target.c.inc b/tcg/loongarch64/tcg-target.c.inc
-index 10c69211ac..75f6a97b2b 100644
---- a/tcg/loongarch64/tcg-target.c.inc
-+++ b/tcg/loongarch64/tcg-target.c.inc
-@@ -2658,6 +2658,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     /* nothing to do */
- }
+ __thread uintptr_t tci_tb_ptr;
  
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    /* nothing to do */
-+    return 0;
-+}
++#define EM_JS_PRE(ret, name, args, body...) EM_JS(ret, name, args, body)
 +
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
++#define DEC_PTR(p) bigintToI53Checked(p)
++#define ENC_PTR(p) BigInt(p)
++#if defined(WASM64_MEMORY64_2)
++#define ENC_WASM_TABLE_IDX(i) Number(i)
++#else
++#define ENC_WASM_TABLE_IDX(i) i
++#endif
 +
- static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
- {
-     for (int i = 0; i < count; ++i) {
-diff --git a/tcg/mips/tcg-target.c.inc b/tcg/mips/tcg-target.c.inc
-index 400eafbab4..d1241912ac 100644
---- a/tcg/mips/tcg-target.c.inc
-+++ b/tcg/mips/tcg-target.c.inc
-@@ -2745,6 +2745,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     /* nothing to do */
- }
- 
-+static int tcg_out_tb_end(TCGContext *s)
++EM_JS_PRE(void*, instantiate_wasm, (void *wasm_begin,
++                                    int wasm_size,
++                                    void *import_vec_begin,
++                                    int import_vec_size),
 +{
-+    /* nothing to do */
-+    return 0;
-+}
-+
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
-+
- static void tcg_target_init(TCGContext *s)
- {
-     tcg_target_detect_isa();
-diff --git a/tcg/ppc/tcg-target.c.inc b/tcg/ppc/tcg-target.c.inc
-index b8b23d44d5..20cc2594b8 100644
---- a/tcg/ppc/tcg-target.c.inc
-+++ b/tcg/ppc/tcg-target.c.inc
-@@ -2859,6 +2859,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     }
- }
- 
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    /* nothing to do */
-+    return 0;
-+}
-+
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
-+
- static void tcg_out_exit_tb(TCGContext *s, uintptr_t arg)
- {
-     tcg_out_movi(s, TCG_TYPE_PTR, TCG_REG_R3, arg);
-diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-index 31b9f7d87a..63e7438291 100644
---- a/tcg/riscv/tcg-target.c.inc
-+++ b/tcg/riscv/tcg-target.c.inc
-@@ -2983,6 +2983,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     init_setting_vtype(s);
- }
- 
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    /* nothing to do */
-+    return 0;
-+}
-+
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
-+
- static bool vtype_check(unsigned vtype)
- {
-     unsigned long tmp;
-diff --git a/tcg/s390x/tcg-target.c.inc b/tcg/s390x/tcg-target.c.inc
-index 84a9e73a46..457e568d30 100644
---- a/tcg/s390x/tcg-target.c.inc
-+++ b/tcg/s390x/tcg-target.c.inc
-@@ -3830,6 +3830,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     /* nothing to do */
- }
- 
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    /* nothing to do */
-+    return 0;
-+}
-+
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
-+
- static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
- {
-     memset(p, 0x07, count * sizeof(tcg_insn_unit));
-diff --git a/tcg/sparc64/tcg-target.c.inc b/tcg/sparc64/tcg-target.c.inc
-index 5e5c3f1cda..ae695b115b 100644
---- a/tcg/sparc64/tcg-target.c.inc
-+++ b/tcg/sparc64/tcg-target.c.inc
-@@ -1017,6 +1017,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     /* nothing to do */
- }
- 
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    /* nothing to do */
-+    return 0;
-+}
-+
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
-+
- static void tcg_out_nop_fill(tcg_insn_unit *p, int count)
- {
-     int i;
-diff --git a/tcg/tcg.c b/tcg/tcg.c
-index e6f8f9db5c..8b44cd3078 100644
---- a/tcg/tcg.c
-+++ b/tcg/tcg.c
-@@ -116,6 +116,7 @@ static void tcg_register_jit_int(const void *buf, size_t size,
- 
- /* Forward declarations for functions declared and used in tcg-target.c.inc. */
- static void tcg_out_tb_start(TCGContext *s);
-+static int tcg_out_tb_end(TCGContext *s);
- static void tcg_out_ld(TCGContext *s, TCGType type, TCGReg ret, TCGReg arg1,
-                        intptr_t arg2);
- static bool tcg_out_mov(TCGContext *s, TCGType type, TCGReg ret, TCGReg arg);
-@@ -187,6 +188,7 @@ static void tcg_out_call(TCGContext *s, const tcg_insn_unit *target,
- static TCGReg tcg_target_call_oarg_reg(TCGCallReturnKind kind, int slot);
- static bool tcg_target_const_match(int64_t val, int ct,
-                                    TCGType type, TCGCond cond, int vece);
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l);
- 
- #ifndef CONFIG_USER_ONLY
- #define guest_base  ({ qemu_build_not_reached(); (uintptr_t)0; })
-@@ -361,6 +363,7 @@ static void tcg_out_label(TCGContext *s, TCGLabel *l)
-     tcg_debug_assert(!l->has_value);
-     l->has_value = 1;
-     l->u.value_ptr = tcg_splitwx_to_rx(s->code_ptr);
-+    tcg_out_label_cb(s, l);
- }
- 
- TCGLabel *gen_new_label(void)
-@@ -7047,6 +7050,10 @@ int tcg_gen_code(TCGContext *s, TranslationBlock *tb, uint64_t pc_start)
-     if (!tcg_resolve_relocs(s)) {
-         return -2;
-     }
-+    i = tcg_out_tb_end(s);
-+    if (i < 0) {
-+        return i;
++    const memory_v = new DataView(HEAP8.buffer);
++    const wasm = HEAP8.subarray(DEC_PTR(wasm_begin),
++                                DEC_PTR(wasm_begin) + wasm_size);
++    var helper = {};
++    const entsize = TCG_TARGET_REG_BITS / 8;
++    for (var i = 0; i < import_vec_size / entsize; i++) {
++        const idx = memory_v.getBigInt64(
++            DEC_PTR(import_vec_begin) + i * entsize, true);
++        helper[i] = wasmTable.get(ENC_WASM_TABLE_IDX(idx));
 +    }
- 
- #if !defined(CONFIG_TCG_INTERPRETER) && !defined(EMSCRIPTEN)
-     /* flush instruction cache */
-diff --git a/tcg/tci/tcg-target.c.inc b/tcg/tci/tcg-target.c.inc
-index 35c66a4836..d99d06c1da 100644
---- a/tcg/tci/tcg-target.c.inc
-+++ b/tcg/tci/tcg-target.c.inc
-@@ -1301,6 +1301,17 @@ static void tcg_out_tb_start(TCGContext *s)
-     /* nothing to do */
- }
- 
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    /* nothing to do */
-+    return 0;
-+}
++    const mod = new WebAssembly.Module(new Uint8Array(wasm));
++    const inst = new WebAssembly.Instance(mod, {
++            "env" : {
++                "memory" : wasmMemory,
++            },
++            "helper" : helper,
++    });
 +
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    /* nothing to do */
-+}
++    return ENC_PTR(addFunction(inst.exports.start, 'ii'));
++});
 +
- bool tcg_target_has_memory_bswap(MemOp memop)
+ static void tci_write_reg64(tcg_target_ulong *regs, uint32_t high_index,
+                             uint32_t low_index, uint64_t value)
  {
-     return true;
-diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c.inc
-index 74f3177753..a9fad306cb 100644
---- a/tcg/wasm/tcg-target.c.inc
-+++ b/tcg/wasm/tcg-target.c.inc
-@@ -116,14 +116,22 @@ static const uint8_t tcg_target_reg_index[TCG_TARGET_NB_REGS] = {
- 
- #define REG_IDX(r) tcg_target_reg_index[r]
- 
-+/*
-+ * Global variable used for storing the current block index
-+ */
-+#define BLOCK_IDX 16
-+
- /* Temporary local variables */
- #define TMP32_LOCAL_0_IDX 0
- #define TMP64_LOCAL_0_IDX 1
- 
- typedef enum {
-+    OPC_UNREACHABLE = 0x00,
-+    OPC_LOOP = 0x03,
-     OPC_IF = 0x04,
-     OPC_ELSE = 0x05,
-     OPC_END = 0x0b,
-+    OPC_BR = 0x0c,
-     OPC_LOCAL_GET = 0x20,
-     OPC_LOCAL_SET = 0x21,
-     OPC_GLOBAL_GET = 0x23,
-@@ -268,6 +276,17 @@ static void linked_buf_out_sleb128(LinkedBuf *p, int64_t v)
-     }
- }
- 
-+static int linked_buf_len(LinkedBuf *p)
-+{
-+    int total = 0;
-+    LinkedBufEntry *e;
-+
-+    QSIMPLEQ_FOREACH(e, p, entry) {
-+        total += e->size;
-+    }
-+    return total;
-+}
-+
- /*
-  * wasm code is generataed in the dynamically allocated buffer which
-  * are managed as a linked list.
-@@ -278,6 +297,10 @@ static void init_sub_buf(void)
- {
-     QSIMPLEQ_INIT(&sub_buf);
- }
-+static int sub_buf_len(void)
-+{
-+    return linked_buf_len(&sub_buf);
-+}
- static void tcg_wasm_out8(TCGContext *s, uint8_t v)
- {
-     linked_buf_out8(&sub_buf, v);
-@@ -786,6 +809,125 @@ static void tcg_wasm_out_movi(TCGContext *s, TCGType type,
-    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, REG_IDX(ret));
- }
- 
-+typedef struct LabelInfo {
-+    int label;
-+    int block;
-+    QSIMPLEQ_ENTRY(LabelInfo) entry;
-+} LabelInfo;
-+
-+static __thread QSIMPLEQ_HEAD(, LabelInfo) label_info;
-+
-+static void init_label_info(void)
-+{
-+    QSIMPLEQ_INIT(&label_info);
-+}
-+
-+static void add_label(int label, int block)
-+{
-+    LabelInfo *e = tcg_malloc(sizeof(LabelInfo));
-+    e->label = label;
-+    e->block = block;
-+    QSIMPLEQ_INSERT_TAIL(&label_info, e, entry);
-+}
-+
-+typedef struct BlockPlaceholder {
-+    int label;
-+    int pos;
-+    QSIMPLEQ_ENTRY(BlockPlaceholder) entry;
-+} BlockPlaceholder;
-+
-+static __thread QSIMPLEQ_HEAD(, BlockPlaceholder) block_placeholder;
-+static __thread int64_t cur_block_idx;
-+
-+static void init_blocks(void)
-+{
-+    QSIMPLEQ_INIT(&block_placeholder);
-+    cur_block_idx = 0;
-+}
-+
-+static void add_block_placeholder(int label, int pos)
-+{
-+    BlockPlaceholder *e = tcg_malloc(sizeof(BlockPlaceholder));
-+    e->label = label;
-+    e->pos = pos;
-+    QSIMPLEQ_INSERT_TAIL(&block_placeholder, e, entry);
-+}
-+
-+static int get_block_of_label(int label)
-+{
-+    LabelInfo *e;
-+    QSIMPLEQ_FOREACH(e, &label_info, entry) {
-+        if (e->label == label) {
-+            return e->block;
-+        }
-+    }
-+    return -1;
-+}
-+
-+static void tcg_wasm_out_new_block(TCGContext *s)
-+{
-+    tcg_wasm_out_op(s, OPC_END); /* close this block */
-+
-+    /* next block */
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, BLOCK_IDX);
-+    tcg_wasm_out_op_const(s, OPC_I64_CONST, ++cur_block_idx);
-+    tcg_wasm_out_op(s, OPC_I64_LE_U);
-+    tcg_wasm_out_op_block(s, OPC_IF, BLOCK_NORET);
-+}
-+
-+static void tcg_out_label_cb(TCGContext *s, TCGLabel *l)
-+{
-+    add_label(l->id, cur_block_idx + 1);
-+    tcg_wasm_out_new_block(s);
-+}
-+
-+static void tcg_wasm_out_br_to_label(TCGContext *s, TCGLabel *l, bool br_if)
-+{
-+    int toploop_depth = 1;
-+    if (br_if) {
-+        tcg_wasm_out_op_block(s, OPC_IF, BLOCK_NORET);
-+        toploop_depth++;
-+    }
-+    tcg_wasm_out8(s, OPC_I64_CONST);
-+
-+    add_block_placeholder(l->id, sub_buf_len());
-+
-+    tcg_wasm_out8(s, 0x80); /* placeholder for the target block idx */
-+    tcg_wasm_out8(s, 0x80);
-+    tcg_wasm_out8(s, 0x80);
-+    tcg_wasm_out8(s, 0x80);
-+    tcg_wasm_out8(s, 0x00);
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, BLOCK_IDX);
-+    if (get_block_of_label(l->id) != -1) {
-+        /*
-+         * The label is placed before this br, branch to the top of loop
-+         */
-+        tcg_wasm_out_op_idx(s, OPC_BR, toploop_depth);
-+    } else {
-+        /*
-+         * The label will be generated after this br,
-+         * branch to the end of the current block
-+         */
-+        tcg_wasm_out_op_idx(s, OPC_BR, toploop_depth - 1);
-+    }
-+    if (br_if) {
-+        tcg_wasm_out_op(s, OPC_END);
-+    }
-+}
-+
-+static void tcg_wasm_out_br(TCGContext *s, TCGLabel *l)
-+{
-+    tcg_wasm_out_br_to_label(s, l, false);
-+}
-+
-+static void tcg_wasm_out_brcond(TCGContext *s, TCGType type,
-+                                TCGReg arg1, TCGReg arg2,
-+                                TCGCond cond, TCGLabel *l)
-+{
-+    tcg_wasm_out_cond(s, type, cond, arg1, arg2);
-+    tcg_wasm_out_br_to_label(s, l, true);
-+}
-+
- static bool patch_reloc(tcg_insn_unit *code_ptr_i, int type,
-                         intptr_t value, intptr_t addend)
- {
-@@ -1804,6 +1946,7 @@ static void tgen_brcond(TCGContext *s, TCGType type, TCGCond cond,
- {
-     tgen_setcond_tci(s, type, cond, TCG_REG_TMP, arg0, arg1);
-     tcg_out_op_rl(s, INDEX_op_brcond, TCG_REG_TMP, l);
-+    tcg_wasm_out_brcond(s, type, arg0, arg1, cond, l);
- }
- 
- static const TCGOutOpBrcond outop_brcond = {
-@@ -1835,6 +1978,7 @@ static void tcg_out_mb(TCGContext *s, unsigned a0)
- static void tcg_out_br(TCGContext *s, TCGLabel *l)
- {
-     tcg_out_op_l(s, INDEX_op_br, l);
-+    tcg_wasm_out_br(s, l);
- }
- 
- static void tgen_ld8u(TCGContext *s, TCGType type, TCGReg dest,
-@@ -2037,6 +2181,23 @@ static inline void tcg_target_qemu_prologue(TCGContext *s)
- static void tcg_out_tb_start(TCGContext *s)
- {
-     init_sub_buf();
-+    init_blocks();
-+    init_label_info();
-+
-+    tcg_wasm_out_op_block(s, OPC_LOOP, BLOCK_NORET);
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, BLOCK_IDX);
-+    tcg_wasm_out_op(s, OPC_I64_EQZ);
-+    tcg_wasm_out_op_block(s, OPC_IF, BLOCK_NORET);
-+}
-+
-+static int tcg_out_tb_end(TCGContext *s)
-+{
-+    tcg_wasm_out_op(s, OPC_END); /* end if */
-+    tcg_wasm_out_op(s, OPC_END); /* end loop */
-+    tcg_wasm_out_op(s, OPC_UNREACHABLE);
-+    tcg_wasm_out_op(s, OPC_END); /* end func */
-+
-+    return 0;
- }
- 
- bool tcg_target_has_memory_bswap(MemOp memop)
 -- 
 2.43.0
 
