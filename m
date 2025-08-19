@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED0CECA0EEB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Aug 2025 22:33:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A751CA0EEB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Aug 2025 22:33:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uoUsf-0004NJ-Jw; Tue, 19 Aug 2025 18:32:37 -0400
+	id 1uoUtn-00058T-4u; Tue, 19 Aug 2025 18:33:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uoUse-0004MH-7k
- for qemu-riscv@nongnu.org; Tue, 19 Aug 2025 18:32:36 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1uoUtl-000570-83
+ for qemu-riscv@nongnu.org; Tue, 19 Aug 2025 18:33:45 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uoUsb-0006rC-AF
- for qemu-riscv@nongnu.org; Tue, 19 Aug 2025 18:32:35 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-24456f3f669so4344795ad.1
- for <qemu-riscv@nongnu.org>; Tue, 19 Aug 2025 15:32:32 -0700 (PDT)
+ id 1uoUti-0006y6-9l
+ for qemu-riscv@nongnu.org; Tue, 19 Aug 2025 18:33:44 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-323267872f3so5051297a91.1
+ for <qemu-riscv@nongnu.org>; Tue, 19 Aug 2025 15:33:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1755642751; x=1756247551; darn=nongnu.org;
+ d=linaro.org; s=google; t=1755642820; x=1756247620; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=0UG8bHYH9qhHIRwV5i1DVVt3dqKwyCbwf3bPUxBc7V4=;
- b=Sr+z+4DNRelgDAZxhKgC0b46IkK6VOYDL3NpCizoNalzcq6HYL3T/odUB5ijwTxaPH
- 8nOn2rEzT0yhaOBBFz/dMCbzFohdZP8jA19tXE9MgOJK2dlFEZzScYEvlNOvk/vtdHAM
- +JZMAFkn/agtj5gSYogoMHGd2ceFkJmrcUXmIluGnTR3ql/jkOAAF0b9x+j4z2WM7QPm
- IrEWMdjJ93UKHbRELEiBOiGNTejKA8rRHahm6ayBPoHU0hO46/RY6N2S7AxVo58Rxava
- YnuJ1A9rd8N4qrFCxIDHphVN09FzweN+Uf5yQ40AGXmin3ZiJlZCpdy/B1SmXWJ9NLw/
- jNJg==
+ bh=EecAmkTmFpVA3qOBBByQgMFEMgwekptfdvHKr+SlSdc=;
+ b=yUmMWUiEASWETBP9prGaUsjezNJa4DRdFSSsFGO0Y/95sTJ6/F8CKOUlt0BFZuNH9F
+ KGFCxcIRT0kAJH+OBC73NRGgiUp5qXlxrtBe8RNTQPzexiC2SDjZTUWPHsZVqUYs8/7S
+ 0N5IIJL9yGAv3Tt1D12HHHuOI3s8MJJoXoCdhNPXl8wSn/YihqO9ql9xA3JGUqYEbyym
+ twkUNszcTX77sXpdhGEqAC4hwj5z0JCgzBJqvVw8064SxSXWBQYdIG05WHA5tmLRKmI4
+ ztL1+lc7NFFzpVh/D7nJ+smhVCeBRNqpUR1QJ/gxf+K1XJo5Qr0ZEevhbgdAt87rA/tL
+ G16A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755642751; x=1756247551;
+ d=1e100.net; s=20230601; t=1755642820; x=1756247620;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0UG8bHYH9qhHIRwV5i1DVVt3dqKwyCbwf3bPUxBc7V4=;
- b=hfGJEhONqKxgw1NAucWNujv3XIRXjThg5/qAY4wgAWtHGnFPwrkM2cfHFYZQr1+Gdf
- sIGEe9U+QDYDm1T3IGAHir35rKjNdApMmE5T7zwLTP341221DA6DpGRF7i/P7b9wFjRm
- R90yXq3ztgaM7wnTCC3J3/sDn1ZmCO8xsWRpgOCcZDW+nDMni+a9j2PIlgtVT2lx9g6P
- PetVQI9GW6rmsFXsjD+wOol6wkg9qufF2dGiD6VdjNPUBnPRBIAp1k3npm59sLu1Yj5w
- 6N8Naob16R6+d6V6QwxQQIxRxgbsgbuOUeI6ZiLjtEPfJQBp9U3m2TQIPtVvAakoOEeO
- fMHw==
+ bh=EecAmkTmFpVA3qOBBByQgMFEMgwekptfdvHKr+SlSdc=;
+ b=RE6iv2ioIUe6MaR6Wr3NuVIfio3U6h7XOBQrh0hM1Hiz2tfYDuzpgZ7SNDvbLj5eiA
+ ZRAKsBP7YpSDfi737np7vR9ODbBiNQiBevyuYbRNIAAL+IDC8AxVS1Eu95t0hV2cko5J
+ igeFDaKkGIV6M6XWSn2ZTxwAjPNKwAm/apfKPRlcLGrra7UpO6Rj2vsNHmNJ2YFIDU0K
+ Bn0R6l+kqG9e7bI1I4GPRtQQ5tZ2/0bKrrJwPB96+fzZnN/lZlCiMRLMQHgKWjsfTo2F
+ fQ0tfBZPO7jg6DIjgCmh8XQpaHPb/NOcSZJpFBHU6GVEvgUxi/UqTAdFY4tlpkUAdQHI
+ F0Uw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX6pe1z6aZ2Lk3obC+4aCIU5LV1dlURWV03iyLcJ+xnPPl+NTeJbINliX00WQl8diTmTyVdaF2KYDUa@nongnu.org
-X-Gm-Message-State: AOJu0Yx3t6MUGYmlBYxKGLF9vMouT2YFeaQIXCQxKYZ7e+WmMCtvXzl4
- 3wsXdhsQBND1V4KrNvF4Z2OwBFzeW7wydUBKKm0VA6632+7Zb5QT+c1z4YOSlBCRHxY=
-X-Gm-Gg: ASbGncv2v6Ln5luuYAG6cIcBBWb1D7rc5p1e/voXse7uOTwIZ2UIxfN7OESU+vzo3uh
- QEUCptymKfr8lzR/leftrLYzChISU574sQYp/c4uyd4rTeAUVb6oFrYlb6XrlD/Gb/j51d/2bro
- NYTLivobR6kzDwBBfsxaF/lZXIGy0r+WD9c4VltknOsioEk2UVtylKsbDhwICSUODzXqCZsdZPf
- w5NlAEQsJ8qqs1qbVJ05dvfx7yM3LORuZQ11O2BrMUk+DIlCwTKaIQYwkD3aKhluq58+4JhX9w7
- QiU6t95PdEvUjc1wUEDn8VlLyQlpga8AVNLhgLolqGHpfdd05BnCXcCgcA9gFCA6hmjGnTdkwxe
- Jt/lCg/2jfUlGEFfM19gIqjJy+gLU/k42rg==
-X-Google-Smtp-Source: AGHT+IHp8VTKG9Vpn6FAHdmy+mSnJ5GgTEl0qI+uay+ssgl1frq/JCQo7z7Y3bdVkLlZC9I8Uw3G3Q==
-X-Received: by 2002:a17:903:41c2:b0:23f:fa47:f933 with SMTP id
- d9443c01a7336-245e0930050mr46957165ad.8.1755642751182; 
- Tue, 19 Aug 2025 15:32:31 -0700 (PDT)
+ AJvYcCWW/hxJ9TNCqQ+3v6XtMqY0X1FUcSxdg+8+REPvj269SMgmaD6nAmbqFUPTk+2ODWDZxt8ljE7+9C8Z@nongnu.org
+X-Gm-Message-State: AOJu0YyjJRgLQVzVi0QW/p/WO9B2RV1Q5vEbxWBzOozaltmqrTN9wlZq
+ 29Iw7W3O/o8zOcqXSOoEvatMJmuELuOsesXWXlhZOjYV9cd8ZrWcmqIGQEKzTcKwQF8=
+X-Gm-Gg: ASbGnctDk0ifwrrG1MT9gvXcjtey36CIivF8N4ql13Dfkgs7wc8ImZWbuSg0Rl/OBdQ
+ XiszzV3MSNwNkkuMVur3EFFmZRoqAby2nJryGWfY6KEC73QGkjW0UN2C8iVnkzDuIGxIdWjNB4r
+ 4xGJpIwX/nzX/X1sJX/OD/IG7Z1A+ZOPOyIGvHinpPWOiHNuItmnjzK4nEPHGfZPqqrW6JEqitQ
+ TD6oxhnqNtE8/BkamBWPW8vTfVSnPhvsdA/0P6q4ePE7SVDpsCMPEE74nIdpfK1XqkENMzkvAWb
+ 1fQc+pyUI1tS2ekF1GZy8xnq9W+eTCW5ERsAyywB/ceHYsQssU415tpD2f371114OP4rMZjs+oM
+ CRpXyPMKHxkfZrO2YjCj+db9ITEduXNBsxQ==
+X-Google-Smtp-Source: AGHT+IFmMIgsxmzoZFMZzx1pIAMpHJ5dDbCgTAV80a5vGKt1ge/W6NTZSuayF6cSU2E0X7hkbVz7nQ==
+X-Received: by 2002:a17:90b:3511:b0:31f:253e:d34f with SMTP id
+ 98e67ed59e1d1-324e142051bmr1030264a91.19.1755642820510; 
+ Tue, 19 Aug 2025 15:33:40 -0700 (PDT)
 Received: from [10.0.0.90] ([120.159.20.238]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-324e251e891sm233987a91.5.2025.08.19.15.32.23
+ 98e67ed59e1d1-324e2625998sm226275a91.16.2025.08.19.15.33.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Aug 2025 15:32:30 -0700 (PDT)
-Message-ID: <bcdcb0b0-3427-4c4e-b3cf-32b53b5e6c4e@linaro.org>
-Date: Wed, 20 Aug 2025 08:32:21 +1000
+ Tue, 19 Aug 2025 15:33:40 -0700 (PDT)
+Message-ID: <ac5ac33d-26a7-4be6-bf02-75fa61d3ad9a@linaro.org>
+Date: Wed, 20 Aug 2025 08:33:30 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 18/35] tcg/wasm: Add bswap instructions
+Subject: Re: [PATCH 20/35] tcg/wasm: Add andc/orc/eqv/nand/nor instructions
 To: Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-devel@nongnu.org
 Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
@@ -84,14 +84,14 @@ Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Stefan Hajnoczi <stefanha@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
 References: <cover.1755623521.git.ktokunaga.mail@gmail.com>
- <ceb5f4b3fb6a4c0f6c647a7e1b39c801144ac6af.1755623522.git.ktokunaga.mail@gmail.com>
+ <cf283ca6c957d3c454facb228000129c171c904f.1755623522.git.ktokunaga.mail@gmail.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <ceb5f4b3fb6a4c0f6c647a7e1b39c801144ac6af.1755623522.git.ktokunaga.mail@gmail.com>
+In-Reply-To: <cf283ca6c957d3c454facb228000129c171c904f.1755623522.git.ktokunaga.mail@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,47 +115,34 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 8/20/25 04:21, Kohei Tokunaga wrote:
-> +static void tcg_wasm_out_bswap64(
-> +    TCGContext *s, TCGReg dest, TCGReg src)
+> This commit implements andc, orc, eqv, nand and nor operations using Wasm
+> instructions.
+> 
+> Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+> ---
+>   tcg/wasm/tcg-target.c.inc | 55 +++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 55 insertions(+)
+> 
+> diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c.inc
+> index 01ef7d32f3..3c0374cd01 100644
+> --- a/tcg/wasm/tcg-target.c.inc
+> +++ b/tcg/wasm/tcg-target.c.inc
+> @@ -449,6 +449,56 @@ static void tcg_wasm_out_cond(
+>       }
+>   }
+>   
+> +static void tcg_wasm_out_andc(
+> +    TCGContext *s, TCGReg ret, TCGReg arg1, TCGReg arg2)
 > +{
-> +    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(src));
-> +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 32);
-> +    tcg_wasm_out_op(s, OPC_I64_ROTR);
-> +    tcg_wasm_out_op_idx(s, OPC_LOCAL_SET, TMP64_LOCAL_0_IDX);
-> +
-> +    tcg_wasm_out_op_idx(s, OPC_LOCAL_GET, TMP64_LOCAL_0_IDX);
-> +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0xff000000ff000000);
+> +    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(arg1));
+> +    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(arg2));
+> +    tcg_wasm_out_op_not(s);
 > +    tcg_wasm_out_op(s, OPC_I64_AND);
-> +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 24);
-> +    tcg_wasm_out_op(s, OPC_I64_SHR_U);
-> +
-> +    tcg_wasm_out_op_idx(s, OPC_LOCAL_GET, TMP64_LOCAL_0_IDX);
-> +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0x00ff000000ff0000);
-> +    tcg_wasm_out_op(s, OPC_I64_AND);
-> +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 8);
-> +    tcg_wasm_out_op(s, OPC_I64_SHR_U);
-> +
-> +    tcg_wasm_out_op(s, OPC_I64_OR);
-> +
-> +    tcg_wasm_out_op_idx(s, OPC_LOCAL_GET, TMP64_LOCAL_0_IDX);
-> +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0x0000ff000000ff00);
-> +    tcg_wasm_out_op(s, OPC_I64_AND);
-> +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 8);
-> +    tcg_wasm_out_op(s, OPC_I64_SHL);
-> +
-> +    tcg_wasm_out_op_idx(s, OPC_LOCAL_GET, TMP64_LOCAL_0_IDX);
-> +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0x000000ff000000ff);
-> +    tcg_wasm_out_op(s, OPC_I64_AND);
-> +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 24);
-> +    tcg_wasm_out_op(s, OPC_I64_SHL);
-> +
-> +    tcg_wasm_out_op(s, OPC_I64_OR);
-> +
-> +    tcg_wasm_out_op(s, OPC_I64_OR);
-> +    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, REG_IDX(dest));
+> +    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, REG_IDX(ret));
 > +}
 
-Is this any better than the default expansion?
+Don't implement stuff that's not present in the ISA.
+This will be handled generically.
 
 
 r~
