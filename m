@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA5FCA0EEB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Aug 2025 18:26:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 289BECA0EE6
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Aug 2025 18:26:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uoR29-00040y-Br; Tue, 19 Aug 2025 14:26:09 -0400
+	id 1uoR19-0001FW-5L; Tue, 19 Aug 2025 14:25:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uoR1j-00024g-06; Tue, 19 Aug 2025 14:25:44 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1uoR0x-0000oG-OZ; Tue, 19 Aug 2025 14:24:56 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uoR1d-0004eM-Sq; Tue, 19 Aug 2025 14:25:40 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-24458317464so63752345ad.3; 
- Tue, 19 Aug 2025 11:25:36 -0700 (PDT)
+ id 1uoR0v-00044s-K2; Tue, 19 Aug 2025 14:24:55 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2449978aceaso12733665ad.2; 
+ Tue, 19 Aug 2025 11:24:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755627935; x=1756232735; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1755627890; x=1756232690; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7lEO6Ug5ERIuH8Mlq3IETtFos+2BtbJerwnarkvJecM=;
- b=IyHiUcuNtjalZgBpJ6X8KRRxwhTkcvLYgG3nvKOZwBM27VV2xc2vhz9RQX8yklNuA/
- X3YWHvAXguYkaDs2LqyWFPlUIdOTrTDRCKagFEE//49H2afBf0KADOs4v2Lq7AjN3CDK
- Dw9oeKMXJRKxZzchFuwN+BZXNJCYdhOUXMrIqZL2EjCt57v23ZmugAsp1VJFzrBiCGEa
- 8syq9Pl0l+tFkwCEiBiO39w8eAu6teTINtcZHlT9Sib1NusOE3a1AJIFI+Smn4NkDU+X
- EVyRZ0xHk9lhJlSP/71oklB7r+mNTs3CFacafM8lXRwAZDrdoHPf0Geg0Ags5dd7JH+r
- jtwQ==
+ bh=nHtHKkltqbJxqH57j4a6ITgFlcnXNSgJcWlXt3E5jp8=;
+ b=ei9hBZGb1nhJPtXYYk8BXS4Npt+AaoMK0d9Qk28YDd9w1vFmGmWF7JUUfNw8QuvIrW
+ V4AzPlyPx7IWrbhpUW4dsJFKy4O+fwVVg/GJbaTTA1YkWB7DWbK6mGIKiTUg0AOfFh/k
+ +fro+C5uFb90JjtUW99jH7MfS7joDybt8qjoyJX4pY03SIuywOz78e+ns1BzctbEX0qs
+ wCSNdt2FvnA8fhUdo5Urj90FKUYIYMsOl/RCbwqn024mtYtIQG10AtCqUZo3N3HDV0a2
+ 8JDnB22qMRj9NaH9G1YwWrTBJjBi/kAy0SqOFOMlOqAInnd/7kS4Ekj/98l0TV+QqRvW
+ dsWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755627935; x=1756232735;
+ d=1e100.net; s=20230601; t=1755627890; x=1756232690;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7lEO6Ug5ERIuH8Mlq3IETtFos+2BtbJerwnarkvJecM=;
- b=GNOOzbjX8c6/qgFsRzBAUmXCS5NvBurgkOEOPs/fjLdolfN+W4/uk9XekaacHytfId
- mAiBOjcmGRcUy5b3qangmj3OpOwBouan8/JP+FBb8YIM8cYzE6HofmGZCkbZFQUxti4H
- 0wHVSn7jnl8zEvOh/jNAoltCaWVjGFRS+p8zH1dpUQgyaOtU/TBgXly2GsY+F2Hbmnlr
- irBJebmdPNkcazzCCp3vqf3pNbywULqzoc9hl8eu4RpgR+yMjk9QpeC8t4riDRCqjfUN
- CKwaNAEVHZdYHZjrmNpZDzp37xl75C8CNB4906jdVGN7gr9VOLCNHT1c5LN9Z+qvfqJO
- 2ivg==
+ bh=nHtHKkltqbJxqH57j4a6ITgFlcnXNSgJcWlXt3E5jp8=;
+ b=oouwQw1UXY93wzD81JEC697i+f2ZgJitifumOUDy2rbuC/q81rdvMgpqROKcapxY6/
+ sAzWtrOv+3f5FsD4sJs+x5wwoGnRPs3fZaBE3txem62qrrs6dIhLc2CWwvg/pg82PNYz
+ HS5ZoPnzdXjgTwPtH/j2Xe9Zonj+Xiy4oqiia4ColUNFbPCM/8uKXyl1zUJRCfQu4kri
+ vW2g2d5qyLPcYkg+73XGGc9rGFTuJsNNocOb/Yzr5TRnQPBYryU9iwboG8cLr8QX+ELv
+ 6vMlq9/2XOIjj0Eu+tj9hTvf+MQq/1OawWXJ1vPrJGilax+1igtWXQHG9wM8ZXoh1EhD
+ Tz4A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/bhnq225tQxHj1O+38mdUSbTpo1lZg0KGvcYsWEKl9Q1+nuzs2iupbY+x8sgWmuShnweZG+5ZVQ==@nongnu.org,
- AJvYcCXZlRtO9icMWtEtzQNK4iiR8gnGR9WQHoZLW4sJQsXdFkgAjk8XTx8SmOF1bJienbleXsee1IBz5IjK5Q==@nongnu.org
-X-Gm-Message-State: AOJu0YwmGnWBvkzbT5ArQZt+t8LSADsyC3/ZCd4igNGt7vlyNzuPMWW+
- 9EFjqsWhdt181Lh0miS5t2vAVAlapfq9r6dqrJvxXDB4uAFUGhmLo/q3t90g5A==
-X-Gm-Gg: ASbGncvmOga6ekMLqJS0L+X7J8sMMFooE4rxwDnBg9f6Tkoqz+bIGr2qPuLUayZC9ew
- 2MsRKjxBlK54x3FG7FCU/8c0BGaorZm4V7G//LCG7NmkAisTioetkAyPwwj+D9Mwg+OStUOd0/o
- QTHDzfsvHrnrnkP0dbL9nsAxFX4btPNoskmuP1PQz8cVvWN+DLInROFvRJmu4RWu8QNjLNtQZ8m
- kbPMumMQik6zHndrQ/SZfRg8nnb1bf0sjp/rnG6/SIb3Er+6OFxt/5rEVWWhLQyebk6U6ts4mcp
- PIrUGwv9rFbZs8PFCZUbbBJHhruxEUnsTUMw1VEm6LZEb2uN8u5gI/xWel0u2cAgFzaWIuXoUJr
- +X0IDtLXgQS8JV/OwkJx+IryvfTriyCM9
-X-Google-Smtp-Source: AGHT+IFWVd0UgV/zaRXnBgiI+AmRtfvKgtPmB4/a6lFAeRl7AuAImttXXw2MX3VLyHz7TjWtt6fn9g==
-X-Received: by 2002:a17:902:c947:b0:244:5089:ff44 with SMTP id
- d9443c01a7336-245e0526b5emr45861735ad.41.1755627935261; 
- Tue, 19 Aug 2025 11:25:35 -0700 (PDT)
+ AJvYcCVIDEIsBrP0eVpUu0tsjUmv0iaQ4C9kP9EymfqUHgy/mzM6uYd9ioVxA2sRuc1o4imzoDzxV5zN2/FfDw==@nongnu.org,
+ AJvYcCXGFsleAr5Wm0YebJ/MyPXMiGn+5AfmNc20W+jLdVz8AAqBPQyxBWBelu0p1K8SS89r81P+W5UMYQ==@nongnu.org
+X-Gm-Message-State: AOJu0YxMQiB8j++uQiPlT6mRUJVS1fBBn0wGzkDCJ4xL6K4/oiBzl4Yy
+ 33/mgO1WtXqoWIJYaAYEzi1G29N+a002C6W0aAj6UPLOuPheQsJWE4YVz+/08brF
+X-Gm-Gg: ASbGncuRSnVG8Z+4MaemRhFgnASCrd5MhYVjE5JMn84R4HAGxUpnv8IIvcC9EbgLeWc
+ N4pohzZB/L11a9MWwal6cV+hzf+YpKTftzoLBzUp/lYgZwvmHnb37ie2VhtseXcIWfW6pK11Hy2
+ hMoKUqmQkxgz3TsdU1U+rGbL3M09dINWs4GWcZh85HgVtJEOeQ4Jh+KRLh7kOaDMIQ4KTDZz+Zq
+ dis8eX5wi9H8Jms1B9jxGi3JnjsJseJYztv/MhX4Ik3JtezO/lbjBYW+8RMnBdczATLXvIvqsF0
+ esokRTvEnXUf2XWK4wReQyOBZeLuhrOq6hPJwf449XEMWZnzcweOrk5nIjq5N8jLahypODmJhPA
+ QCFS2cizt6uaDZoMiZLu04A==
+X-Google-Smtp-Source: AGHT+IHVFObN2OZfxz/17D56FXqeV+VEOhsEqc+70KK/t31LD8HxRla2+m00umgKw+aUD82qxKYoPw==
+X-Received: by 2002:a17:902:c952:b0:244:9b69:c920 with SMTP id
+ d9443c01a7336-245e0307e4dmr41772335ad.14.1755627889862; 
+ Tue, 19 Aug 2025 11:24:49 -0700 (PDT)
 Received: from ktock.. ([240d:1a:3b6:8b00:29ce:ef58:c2c9:e52f])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-245ed33b4c2sm3725125ad.25.2025.08.19.11.25.29
+ d9443c01a7336-245ed33b4c2sm3725125ad.25.2025.08.19.11.24.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Aug 2025 11:25:34 -0700 (PDT)
+ Tue, 19 Aug 2025 11:24:49 -0700 (PDT)
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -80,17 +80,16 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Stefan Hajnoczi <stefanha@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, ktokunaga.mail@gmail.com
-Subject: [PATCH 32/35] tcg/wasm: Enable instantiation of TBs executed many
- times
-Date: Wed, 20 Aug 2025 03:22:01 +0900
-Message-ID: <0a68602fe660f0c77bf8b54fd26e4933e7255dec.1755623522.git.ktokunaga.mail@gmail.com>
+Subject: [PATCH 24/35] tcg/wasm: Add exit_tb/goto_tb/goto_ptr instructions
+Date: Wed, 20 Aug 2025 03:21:53 +0900
+Message-ID: <10976da800d72ebd0a91b4898ac40831f85fa827.1755623522.git.ktokunaga.mail@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1755623521.git.ktokunaga.mail@gmail.com>
 References: <cover.1755623521.git.ktokunaga.mail@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -113,455 +112,207 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This commit enables instantiations of TBs in wasm.c. Browsers cause out of
-memory error if too many Wasm instances are created so the number of
-instances needs to be limited. So this commit restricts instantiation only
-for TBs that are called many times.
+In the Wasm backend, each TB is compiled to a separeted Wasm module. Control
+transfer between TBs (i.e. from one Wasm module to another) is handled by
+the caller of the module.
 
-This commit adds a counter (or its array if there are multiple threads) to
-the TB. Each time a TB is executed on TCI, the counter on TB is
-incremented. If it reaches to a threshold, that TB is instantiated as Wasm
-via instantiate_wasm.
+The goto_tb and goto_ptr operations are implemented by returning control to
+the caller using the return instruction. The destination TB's pointer is
+passed to the caller via a shared WasmContext structure which is accessible
+from both the Wasm module and the caller. This WasmContext must be provided
+to the module as an argument.
 
-The total number of instances are tracked by the instances_global variable
-and its maximum number is limited by MAX_INSTANCES. When a Wasm module is
-instantiated, instances_global is incremented and the instance's function
-pointer is recorded to an array of WasmInstanceInfo.
+If the destination TB is the current TB itself, there is no need to return
+control to the caller. Instead, execution can jump directly to the top of
+the loop within the TB.
 
-Each TB refers to the WasmInstanceInfo entry via WasmTBHeader's info_ptr (or
-its array if there are multiple threads). This allows tcg_qemu_tb_exec to
-resolve the instance's function pointer from the TB.
-
-When a new instantiation would exceed the limit, the Wasm backend doesn't
-perform instantiation (i.e. TB continues execution on TCI). Instead, it
-triggers the removal of older Wasm instances using Emscripten's
-removeFunction function. Once the removal is completed and detected via
-FinalizationRegistry API[1], instances_global is decremented, allowing new
-modules to be instantiated.
-
-[1] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/FinalizationRegistry
+The exit_tb operation sets the pointer in WasmContext to 0, indicating that
+there is no destination TB.
 
 Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 ---
- tcg/wasm.c                | 245 +++++++++++++++++++++++++++++++++++++-
- tcg/wasm.h                |  45 +++++++
- tcg/wasm/tcg-target.c.inc |  18 +++
- 3 files changed, 304 insertions(+), 4 deletions(-)
+ MAINTAINERS               |  1 +
+ tcg/wasm.h                | 17 ++++++++
+ tcg/wasm/tcg-target.c.inc | 89 ++++++++++++++++++++++++++++++++++++++-
+ 3 files changed, 105 insertions(+), 2 deletions(-)
+ create mode 100644 tcg/wasm.h
 
-diff --git a/tcg/wasm.c b/tcg/wasm.c
-index f879ab0d4a..abc5d6b940 100644
---- a/tcg/wasm.c
-+++ b/tcg/wasm.c
-@@ -26,6 +26,7 @@
- #include "tcg-has.h"
- #include <ffi.h>
- #include <emscripten.h>
-+#include "wasm.h"
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 217bf2066c..d528b9ec90 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -4004,6 +4004,7 @@ M: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+ S: Maintained
+ F: tcg/wasm/
+ F: tcg/wasm.c
++F: tcg/wasm.h
  
- 
- #define ctpop_tr    glue(ctpop, TCG_TARGET_REG_BITS)
-@@ -45,6 +46,9 @@
- 
- __thread uintptr_t tci_tb_ptr;
- 
-+/* TBs executed more than this value will be compiled to wasm */
-+#define INSTANTIATE_NUM 1500
-+
- #define EM_JS_PRE(ret, name, args, body...) EM_JS(ret, name, args, body)
- 
- #define DEC_PTR(p) bigintToI53Checked(p)
-@@ -81,6 +85,8 @@ EM_JS_PRE(void*, instantiate_wasm, (void *wasm_begin,
-             "helper" : helper,
-     });
- 
-+    Module.__wasm_tb.inst_gc_registry.register(inst, "tbinstance");
-+
-     return ENC_PTR(addFunction(inst.exports.start, 'ii'));
- });
- 
-@@ -366,16 +372,59 @@ static void tci_qemu_st(CPUArchState *env, uint64_t taddr, uint64_t val,
-     }
- }
- 
-+static __thread int thread_idx;
-+
-+static inline int32_t get_counter_local(void *tb_ptr)
-+{
-+    return get_counter(tb_ptr, thread_idx);
-+}
-+
-+static inline void set_counter_local(void *tb_ptr, int v)
-+{
-+    set_counter(tb_ptr, thread_idx, v);
-+}
-+
-+static inline struct WasmInstanceInfo *get_info_local(void *tb_ptr)
-+{
-+    return get_info(tb_ptr, thread_idx);
-+}
-+
-+static inline void set_info_local(void *tb_ptr, struct WasmInstanceInfo *info)
-+{
-+    set_info(tb_ptr, thread_idx, info);
-+}
+ Block drivers
+ -------------
+diff --git a/tcg/wasm.h b/tcg/wasm.h
+new file mode 100644
+index 0000000000..bd12f1039b
+--- /dev/null
++++ b/tcg/wasm.h
+@@ -0,0 +1,17 @@
++/*
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++#ifndef TCG_WASM_H
++#define TCG_WASM_H
 +
 +/*
-+ * inc_counter increments the execution counter in the specified TB.
-+ * If the counter reaches the limit, it returns true otherwise returns false.
++ * WasmContext is a data shared among QEMU and wasm modules.
 + */
-+static inline bool inc_counter(void *tb_ptr)
-+{
-+    int32_t counter = get_counter_local(tb_ptr);
-+    if ((counter >= 0) && (counter < INSTANTIATE_NUM)) {
-+        set_counter_local(tb_ptr, counter + 1);
-+    } else {
-+        return true; /* enter to wasm TB */
-+    }
-+    return false;
-+}
-+
-+static __thread struct WasmContext ctx = {
-+    .tb_ptr = 0,
-+    .stack = NULL,
-+    .do_init = 1,
-+    .buf128 = NULL,
++struct WasmContext {
++    /*
++     * Pointer to the TB to be executed.
++     */
++    void *tb_ptr;
 +};
 +
- /* Interpret pseudo code in tb. */
- /*
-  * Disable CFI checks.
-  * One possible operation in the pseudo code is a call to binary code.
-  * Therefore, disable CFI checks in the interpreter function
-  */
--uintptr_t QEMU_DISABLE_CFI tcg_qemu_tb_exec(CPUArchState *env,
--                                            const void *v_tb_ptr)
-+static uintptr_t QEMU_DISABLE_CFI tcg_qemu_tb_exec_tci(CPUArchState *env)
- {
--    const uint32_t *tb_ptr = v_tb_ptr;
-+    uint32_t *tb_ptr = get_tci_ptr(ctx.tb_ptr);
-     tcg_target_ulong regs[TCG_TARGET_NB_REGS];
-     uint64_t stack[(TCG_STATIC_CALL_ARGS_SIZE + TCG_STATIC_FRAME_SIZE)
-                    / sizeof(uint64_t)];
-@@ -814,20 +863,34 @@ uintptr_t QEMU_DISABLE_CFI tcg_qemu_tb_exec(CPUArchState *env,
- 
-         case INDEX_op_exit_tb:
-             tci_args_l(insn, tb_ptr, &ptr);
-+            ctx.tb_ptr = 0;
-             return (uintptr_t)ptr;
- 
-         case INDEX_op_goto_tb:
-             tci_args_l(insn, tb_ptr, &ptr);
--            tb_ptr = *(void **)ptr;
-+            if (tb_ptr != *(void **)ptr) {
-+                tb_ptr = *(void **)ptr;
-+                ctx.tb_ptr = tb_ptr;
-+                if (inc_counter(tb_ptr)) {
-+                    return 0; /* enter to wasm TB */
-+                }
-+                tb_ptr = get_tci_ptr(tb_ptr);
-+            }
-             break;
- 
-         case INDEX_op_goto_ptr:
-             tci_args_r(insn, &r0);
-             ptr = (void *)regs[r0];
-             if (!ptr) {
-+                ctx.tb_ptr = 0;
-                 return 0;
-             }
-             tb_ptr = ptr;
-+            ctx.tb_ptr = tb_ptr;
-+            if (inc_counter(tb_ptr)) {
-+                return 0; /* enter to wasm TB */
-+            }
-+            tb_ptr = get_tci_ptr(tb_ptr);
-             break;
- 
-         case INDEX_op_qemu_ld:
-@@ -873,3 +936,177 @@ uintptr_t QEMU_DISABLE_CFI tcg_qemu_tb_exec(CPUArchState *env,
- /*
-  * TODO: Disassembler is not implemented
-  */
-+
-+/*
-+ * The maximum number of instances that can exist simultaneously
-+ *
-+ * If this limit is reached and a new instance is required, older instances are
-+ * removed to allow creation of new ones without exceeding the browser's limit.
-+ */
-+#define MAX_INSTANCES 15000
-+
-+static int instances_global;
-+
-+/* Avoid overwrapping of begin/end pointers */
-+#define INSTANCES_BUF_MAX (MAX_INSTANCES + 1)
-+
-+static __thread struct WasmInstanceInfo instances[INSTANCES_BUF_MAX];
-+static __thread int instances_begin;
-+static __thread int instances_end;
-+
-+static void add_instance(wasm_tb_func tb_func, void *tb_ptr)
-+{
-+    instances[instances_end].tb_func = tb_func;
-+    instances[instances_end].tb_ptr = tb_ptr;
-+    set_info_local(tb_ptr, &(instances[instances_end]));
-+    instances_end  = (instances_end + 1) % INSTANCES_BUF_MAX;
-+
-+    qatomic_inc(&instances_global);
-+}
-+
-+static __thread int instance_pending_gc;
-+static __thread int instance_done_gc;
-+
-+static void remove_old_instances(void)
-+{
-+    int num;
-+    if (instance_pending_gc > 0) {
-+        return;
-+    }
-+    if (instances_begin <= instances_end) {
-+        num = instances_end - instances_begin;
-+    } else {
-+        num = instances_end + (INSTANCES_BUF_MAX - instances_begin);
-+    }
-+    /* removes the half of the oldest instances in the buffer */
-+    num /= 2;
-+    for (int i = 0; i < num; i++) {
-+        EM_ASM({ removeFunction($0); }, instances[instances_begin].tb_func);
-+        instances[instances_begin].tb_ptr = NULL;
-+        instances_begin = (instances_begin + 1) % INSTANCES_BUF_MAX;
-+    }
-+    instance_pending_gc += num;
-+}
-+
-+static bool can_add_instance(void)
-+{
-+    return qatomic_read(&instances_global) < MAX_INSTANCES;
-+}
-+
-+static wasm_tb_func get_instance_from_tb(void *tb_ptr)
-+{
-+    struct WasmInstanceInfo *elm = get_info_local(tb_ptr);
-+    if (elm == NULL) {
-+        return NULL;
-+    }
-+    if (elm->tb_ptr != tb_ptr) {
-+        /*
-+         * This TB was instantiated before, but has been removed. Set counter to
-+         * the max value so that this will be instantiated.
-+         */
-+        set_counter_local(tb_ptr, INSTANTIATE_NUM);
-+        set_info_local(tb_ptr, NULL);
-+        return NULL;
-+    }
-+    return elm->tb_func;
-+}
-+
-+static void check_gc_completion(void)
-+{
-+    if (instance_done_gc > 0) {
-+        qatomic_sub(&instances_global, instance_done_gc);
-+        instance_pending_gc -= instance_done_gc;
-+        instance_done_gc = 0;
-+    }
-+}
-+
-+EM_JS_PRE(void, init_wasm_js, (void *instance_done_gc),
-+{
-+    Module.__wasm_tb = {
-+        inst_gc_registry: new FinalizationRegistry((i) => {
-+            if (i == "tbinstance") {
-+                const memory_v = new DataView(HEAP8.buffer);
-+                let v = memory_v.getInt32(instance_done_gc, true);
-+                memory_v.setInt32(instance_done_gc, v + 1, true);
-+            }
-+        })
-+    };
-+});
-+
-+#define MAX_EXEC_NUM 50000
-+static __thread int exec_cnt = MAX_EXEC_NUM;
-+static inline void trysleep(void)
-+{
-+    /*
-+     * Even during running TBs continuously, try to return the control
-+     * to the browser periodically and allow browsers doing tasks.
-+     */
-+    if (--exec_cnt == 0) {
-+        if (!can_add_instance()) {
-+            emscripten_sleep(0);
-+            check_gc_completion();
-+        }
-+        exec_cnt = MAX_EXEC_NUM;
-+    }
-+}
-+
-+static int thread_idx_max;
-+
-+static void init_wasm(void)
-+{
-+    thread_idx = qatomic_fetch_inc(&thread_idx_max);
-+    ctx.stack = g_malloc(TCG_STATIC_CALL_ARGS_SIZE + TCG_STATIC_FRAME_SIZE);
-+    ctx.buf128 = g_malloc(16);
-+    ctx.tci_tb_ptr = (uint32_t *)&tci_tb_ptr;
-+    init_wasm_js(&instance_done_gc);
-+}
-+
-+static __thread bool initdone;
-+
-+uintptr_t tcg_qemu_tb_exec(CPUArchState *env, const void *v_tb_ptr)
-+{
-+    if (!initdone) {
-+        init_wasm();
-+        initdone = true;
-+    }
-+    ctx.env = env;
-+    ctx.tb_ptr = (void *)v_tb_ptr;
-+    while (true) {
-+        trysleep();
-+        uintptr_t res;
-+        wasm_tb_func tb_func = get_instance_from_tb(ctx.tb_ptr);
-+        if (tb_func) {
-+            /*
-+             * Call the Wasm instance
-+             */
-+            res = call_wasm_tb(tb_func, &ctx);
-+        } else if (!inc_counter(ctx.tb_ptr)) {
-+            /*
-+             * Run it on TCI because the counter value is small
-+             */
-+            res = tcg_qemu_tb_exec_tci(env);
-+        } else if (!can_add_instance()) {
-+            /*
-+             * Too many instances has been created, try removing older
-+             * instances and keep running this TB on TCI
-+             */
-+            remove_old_instances();
-+            check_gc_completion();
-+            res = tcg_qemu_tb_exec_tci(env);
-+        } else {
-+            /*
-+             * Instantiate and run the Wasm module
-+             */
-+            struct WasmTBHeader *header = (struct WasmTBHeader *)ctx.tb_ptr;
-+            tb_func = (wasm_tb_func)instantiate_wasm(header->wasm_ptr,
-+                                                     header->wasm_size,
-+                                                     header->import_ptr,
-+                                                     header->import_size);
-+            add_instance(tb_func, ctx.tb_ptr);
-+            res = call_wasm_tb(tb_func, &ctx);
-+        }
-+        if (!ctx.tb_ptr) {
-+            return res;
-+        }
-+    }
-+}
-diff --git a/tcg/wasm.h b/tcg/wasm.h
-index a7e2ba0dd7..a9306529e7 100644
---- a/tcg/wasm.h
-+++ b/tcg/wasm.h
-@@ -46,6 +46,14 @@ static inline uintptr_t call_wasm_tb(wasm_tb_func f, struct WasmContext *ctx)
- {
-     ctx->do_init = 1; /* reset the block index (rewinding will skip this) */
-     return f(ctx);
-+}
-+
-+/*
-+ * WasmInstanceInfo holds the relationship between TB and Wasm instance.
-+ */
-+struct WasmInstanceInfo {
-+    void *tb_ptr;
-+    wasm_tb_func tb_func;
- };
- 
- /*
-@@ -69,6 +77,43 @@ struct WasmTBHeader {
-      */
-     void *import_ptr;
-     int import_size;
-+
-+    /*
-+     * Counter holds how many times the TB is executed before the instantiation
-+     * for each thread.
-+     */
-+    int32_t *counter_ptr;
-+
-+    /*
-+     * Pointer to the instance information on each thread.
-+     */
-+    struct WasmInstanceInfo **info_ptr;
- };
- 
-+static inline void *get_tci_ptr(void *tb_ptr)
-+{
-+    return ((struct WasmTBHeader *)tb_ptr)->tci_ptr;
-+}
-+
-+static inline int32_t get_counter(void *tb_ptr, int idx)
-+{
-+    return ((struct WasmTBHeader *)tb_ptr)->counter_ptr[idx];
-+}
-+
-+static inline void set_counter(void *tb_ptr, int idx, int v)
-+{
-+    ((struct WasmTBHeader *)tb_ptr)->counter_ptr[idx] = v;
-+}
-+
-+static inline struct WasmInstanceInfo *get_info(void *tb_ptr, int idx)
-+{
-+    return ((struct WasmTBHeader *)tb_ptr)->info_ptr[idx];
-+}
-+
-+static inline void set_info(void *tb_ptr, int idx,
-+                            struct WasmInstanceInfo *info)
-+{
-+    ((struct WasmTBHeader *)tb_ptr)->info_ptr[idx] = info;
-+}
-+
- #endif
++#endif
 diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c.inc
-index f1b7ec5f47..cf84c3ca4f 100644
+index a9fad306cb..c907a18d9e 100644
 --- a/tcg/wasm/tcg-target.c.inc
 +++ b/tcg/wasm/tcg-target.c.inc
-@@ -28,6 +28,11 @@
- #include "qemu/queue.h"
- #include "../wasm.h"
+@@ -26,6 +26,7 @@
+  */
  
-+/*
-+ * This is included to get the number of threads via tcg_max_ctxs.
-+ */
-+#include "../tcg-internal.h"
-+
+ #include "qemu/queue.h"
++#include "../wasm.h"
+ 
  /* Used for function call generation. */
  #define TCG_TARGET_CALL_STACK_OFFSET    0
- #define TCG_TARGET_STACK_ALIGN          8
-@@ -2789,6 +2794,7 @@ static int write_mod_code(TCGContext *s)
+@@ -121,9 +122,14 @@ static const uint8_t tcg_target_reg_index[TCG_TARGET_NB_REGS] = {
+  */
+ #define BLOCK_IDX 16
  
- static void tcg_out_tb_start(TCGContext *s)
++/*
++ * pointer to WasmContext
++ */
++#define CTX_IDX 0
++
+ /* Temporary local variables */
+-#define TMP32_LOCAL_0_IDX 0
+-#define TMP64_LOCAL_0_IDX 1
++#define TMP32_LOCAL_0_IDX 1
++#define TMP64_LOCAL_0_IDX 2
+ 
+ typedef enum {
+     OPC_UNREACHABLE = 0x00,
+@@ -132,6 +138,7 @@ typedef enum {
+     OPC_ELSE = 0x05,
+     OPC_END = 0x0b,
+     OPC_BR = 0x0c,
++    OPC_RETURN = 0x0f,
+     OPC_LOCAL_GET = 0x20,
+     OPC_LOCAL_SET = 0x21,
+     OPC_GLOBAL_GET = 0x23,
+@@ -928,6 +935,81 @@ static void tcg_wasm_out_brcond(TCGContext *s, TCGType type,
+     tcg_wasm_out_br_to_label(s, l, true);
+ }
+ 
++#define CTX_OFFSET(f) offsetof(struct WasmContext, f)
++
++static intptr_t tcg_wasm_out_get_ctx(TCGContext *s, intptr_t off)
++{
++    tcg_wasm_out_op_idx(s, OPC_LOCAL_GET, CTX_IDX);
++    return tcg_wasm_out_norm_ptr(s, off);
++}
++
++static void tcg_wasm_out_exit_tb(TCGContext *s, uintptr_t arg)
++{
++    intptr_t ofs;
++
++    /* Store ctx.tb_ptr = 0 which indicates there is no next TB */
++    ofs = tcg_wasm_out_get_ctx(s, CTX_OFFSET(tb_ptr));
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0);
++    tcg_wasm_out_op_ldst(s, OPC_I64_STORE, 0, ofs);
++
++    /* Return the control to the caller */
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, arg);
++    tcg_wasm_out_op(s, OPC_RETURN);
++}
++
++static void tcg_wasm_out_goto(TCGContext *s, TCGReg target, int block_depth)
++{
++    intptr_t ofs;
++
++    /* Check if the target TB is the same as the current TB */
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(target));
++    ofs = tcg_wasm_out_get_ctx(s, CTX_OFFSET(tb_ptr));
++    tcg_wasm_out_op_ldst(s, OPC_I64_LOAD, 0, ofs);
++    tcg_wasm_out_op(s, OPC_I64_EQ);
++
++    /*
++     * If the target TB is the same as the current TB, no need to return to the
++     * caller. Just branch to the top of the current TB.
++     */
++    tcg_wasm_out_op_block(s, OPC_IF, BLOCK_NORET);
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0);
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, BLOCK_IDX);
++    tcg_wasm_out_op_idx(s, OPC_BR, block_depth); /* br to the top of loop */
++    tcg_wasm_out_op(s, OPC_END);
++
++    /* Store the target TB to ctx.tb_ptr and return */
++    ofs = tcg_wasm_out_get_ctx(s, CTX_OFFSET(tb_ptr));
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(target));
++    tcg_wasm_out_op_ldst(s, OPC_I64_STORE, 0, ofs);
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0);
++    tcg_wasm_out_op(s, OPC_RETURN);
++}
++
++static void tcg_wasm_out_goto_ptr(TCGContext *s, TCGReg arg)
++{
++    tcg_wasm_out_goto(s, arg, 2);
++}
++
++static void tcg_wasm_out_goto_tb(
++    TCGContext *s, int which, uintptr_t cur_reset_ptr)
++{
++    intptr_t ofs;
++
++    /* Set the target TB in the tmp variable. */
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, get_jmp_target_addr(s, which));
++    ofs = tcg_wasm_out_norm_ptr(s, 0);
++    tcg_wasm_out_op_ldst(s, OPC_I64_LOAD, 0, ofs);
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, REG_IDX(TCG_REG_TMP));
++
++    /* Goto the target TB if it's registered. */
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(TCG_REG_TMP));
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, cur_reset_ptr);
++    tcg_wasm_out_op(s, OPC_I64_NE);
++    tcg_wasm_out_op_block(s, OPC_IF, BLOCK_NORET);
++    tcg_wasm_out_goto(s, TCG_REG_TMP, 3);
++    tcg_wasm_out_op(s, OPC_END);
++}
++
+ static bool patch_reloc(tcg_insn_unit *code_ptr_i, int type,
+                         intptr_t value, intptr_t addend)
  {
-+    int size;
-     struct WasmTBHeader *h;
-     intptr_t ofs;
+@@ -1343,6 +1425,7 @@ static void tcg_out_call(TCGContext *s, const tcg_insn_unit *func,
+ static void tcg_out_exit_tb(TCGContext *s, uintptr_t arg)
+ {
+     tcg_out_op_p(s, INDEX_op_exit_tb, (void *)arg);
++    tcg_wasm_out_exit_tb(s, arg);
+ }
  
-@@ -2803,6 +2809,18 @@ static void tcg_out_tb_start(TCGContext *s)
-     h = (struct WasmTBHeader *)(s->code_ptr);
-     s->code_ptr += sizeof(struct WasmTBHeader);
+ static void tcg_out_goto_tb(TCGContext *s, int which)
+@@ -1350,11 +1433,13 @@ static void tcg_out_goto_tb(TCGContext *s, int which)
+     /* indirect jump method. */
+     tcg_out_op_p(s, INDEX_op_goto_tb, (void *)get_jmp_target_addr(s, which));
+     set_jmp_reset_offset(s, which);
++    tcg_wasm_out_goto_tb(s, which, (intptr_t)s->code_ptr);
+ }
  
-+    /* locate counters */
-+    h->counter_ptr = (int32_t *)s->code_ptr;
-+    size = tcg_max_ctxs * sizeof(int32_t);
-+    memset(s->code_ptr, 0, size);
-+    s->code_ptr += size;
-+
-+    /* locate the instance information */
-+    h->info_ptr = (struct WasmInstanceInfo **)s->code_ptr;
-+    size = tcg_max_ctxs * sizeof(void *);
-+    memset(s->code_ptr, 0, size);
-+    s->code_ptr += size;
-+
-     /* Followed by TCI code */
-     h->tci_ptr = s->code_ptr;
+ static void tcg_out_goto_ptr(TCGContext *s, TCGReg a0)
+ {
+     tcg_out_op_r(s, INDEX_op_goto_ptr, a0);
++    tcg_wasm_out_goto_ptr(s, a0);
+ }
  
+ void tb_target_set_jmp_target(const TranslationBlock *tb, int n,
 -- 
 2.43.0
 
