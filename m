@@ -4,97 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5867CCA0EE6
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Aug 2025 18:33:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4F6CA0EE6
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Aug 2025 22:19:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uoR1t-0002W6-7w; Tue, 19 Aug 2025 14:25:53 -0400
+	id 1uoUfo-0006vc-SB; Tue, 19 Aug 2025 18:19:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uoR1B-0001TN-2g; Tue, 19 Aug 2025 14:25:10 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uoUfn-0006uY-5h
+ for qemu-riscv@nongnu.org; Tue, 19 Aug 2025 18:19:19 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uoR16-00049e-R4; Tue, 19 Aug 2025 14:25:07 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-b474e8d6d04so1586294a12.0; 
- Tue, 19 Aug 2025 11:25:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uoUfl-0004sj-2y
+ for qemu-riscv@nongnu.org; Tue, 19 Aug 2025 18:19:18 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-b47174beb13so4217345a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 19 Aug 2025 15:19:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755627901; x=1756232701; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mJ2AmRGKg71BgJxwHycIvBP2PoRXyVHsYPqFMrkrais=;
- b=QI2brFdqdm8L+BvzgVoo+S+dka6AkBgcQsFmyNDY1och6f63T8Eeg4CI+J3pdqFFbw
- t4DDcjvwTxu+z19u/xP4nwUDkaeKIJKEtRGyKuDx+e/8yxA0m8tXJ53OgEMLmwRZgbxd
- XFU1tZItEjzX04Kfl2nBK6dORmSf3Jmof1wliw4IZe+Gd3NNmYwgVXknY4TGQxAbatqi
- Nj40FQvHFXPhHdTQDgEFcaXBQEyOFKOF0ABC0ZfYyiq5VL1ZZzby/X+fQ8VIWE6mqrLv
- tZiZkCVeqBZyFJdKD1oS84pyQ6dSMGG21e4DE6OcFA+vTTkM5eZc/90GIXnsF81SUi8r
- uIJA==
+ d=linaro.org; s=google; t=1755641955; x=1756246755; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=n5hxrXAjf61iNW1Ll31DQuEb03MvcLYfvlT+/iSK8KA=;
+ b=P1mi+VzZoskqqC75cMoLluC+eHenRsN6Q0S5GISQRaZ3YRiPZIctOfI5d/TUkcWZfj
+ KHODlvR+v86Z6RQtWASvZ05f1ROlO66pUsrDFYDy8HYRov2VJAB/5WEhOXdUfV7h4Qv0
+ drb9lbbSAK2v6C1TVZuE/iusOEBq+K4DChuhznfT318G+noKSNwSjGqsissPbIR9I/vS
+ 8zNe1ZKYdYrujaV4Cpg+L6TnBBQuwSJDznYT9tSoDmA07RUt+3ylllSDayBVkQA2i5WB
+ Za30tsYH08YVDSbP9LotFHQB0tAwOKAuFpbJFaDtf+Tf7+atFiZAGEt/mQDrMnASaPkG
+ bVGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755627901; x=1756232701;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mJ2AmRGKg71BgJxwHycIvBP2PoRXyVHsYPqFMrkrais=;
- b=l4DR0GkKSF/9WMX4wH8s7OIJgcshF140IUCyuzfg1aGCDP62vibloUt0vTq9EonhsU
- CZCwN3vsapFBI3ks+hJnpJ0omvim5os8n2TMS7gESdPLBdjvK7ewmzTNagKZN92aKqgX
- Z3Q4jkwuhBVypCL8RlyLx/m9KauFqQ0F1xE3R/zGB6wLXofdkZbg5tzjVW7S6BtzFA46
- 7DiaC6pAMjmr8R79Coh2Me+R+uY/NEpOzj+Qg4xEJTiwaVbfVt9bfWSAfSbTnQDChc55
- sVlNYyfqouHKvw31eVhMNzPTYKLeaYDVJ49zgzavb2QFrVrInrJb0A0rB0bM+z7F2QiQ
- oKNg==
+ d=1e100.net; s=20230601; t=1755641955; x=1756246755;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=n5hxrXAjf61iNW1Ll31DQuEb03MvcLYfvlT+/iSK8KA=;
+ b=TYXPyDrPOFBvgXJTxsu1hynVQqHY+UlF/jKqZ6LQ+xPAoXjkupt9/6wYmf0tpRZqpk
+ xW/V5aqaI4AuOUqLSEeeVV+8+wag3sIsaoKAZFsXdlrty4lI+tadjpokJCv1sg90HqHC
+ 7MiplLwgKPdaK34ZhFmSedX6YnhIYNK+iwyVJwnfb4qp9eLpNCuoVqeE2v5uXVGHhtWQ
+ 1w8Z/xWt1G81IIHN/46BnKRHDEHd/3JNbjud+FYTF2/QDkEVYWsrV7ImkulraVAXiw6y
+ ssXHsClihhEUvhuCVDzF1FW92qMo5R5qzIfhCMLJa90ry5T5atEQovN93vX4YjS9YPBr
+ /7+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVSa3zsz2o6u7XsNRqjgeInAVqaGhx8if+xLx3G6DPD4+IIxnm6sMvFSZSBhvJI2Y77B3R7e/qiJA==@nongnu.org,
- AJvYcCVqHj0zKWluqThVPalM7otf3g3uneRI7OmhkQ9o0rYi7H8MiCqErLL4B8tyd6HagJdURISxAZ2HzCCZQg==@nongnu.org
-X-Gm-Message-State: AOJu0YzstkXe73wCt94GlAt7lDLjOs4paab9YPx9XzjkTvwhWFC3Z6c0
- uKQE3+iodo/JTRM4Mb+tfyM3pToBZ40acpEZH0vZ1JWLT2cqo3K5Cf48a7pASA==
-X-Gm-Gg: ASbGncvCFYXjxeZnUIj3l64Rj9V/sIRSjHtS9XjQf1Xh2vVqyQYPHjPx6EmZK6ZXydb
- vxTGtfAaGASv3PvnvxHgdGVYzAHsiZMMpEb1zxbgmRkTCbPzmfhDoq428bubPd3MiqQo5KIYjmc
- KoQXwgkbpx0OzwGnoIcA1eVyFFII5H/qgcljOROquVtnOBMtbj8yskja2E1uUVvUd7RNkznLvfj
- xTZnTJzRrLTwPb2J8nRjaqCcGS0jHIq+6PxfASc/NAmL2EFV8JiOmDnPmKZacc+bLxsjOK77Ukv
- ReHTNsQW5dP+tL2lSOPUkmqlWubAYFYtKMWnwEVJyP9FXmGl626FyS3uQrnhAojMf+K41zRabHR
- O4IHK0OtBkniU/m+tXpjAxA==
-X-Google-Smtp-Source: AGHT+IEKRG45BU+fO3Sa1lBHip2Ekmy/CpCu0yzlt0rex6zd0LjhamAbNxOkzWjxSEtMr0H2n48Bbg==
-X-Received: by 2002:a17:903:2346:b0:23e:22dc:665c with SMTP id
- d9443c01a7336-245e0492439mr52750485ad.33.1755627901085; 
- Tue, 19 Aug 2025 11:25:01 -0700 (PDT)
-Received: from ktock.. ([240d:1a:3b6:8b00:29ce:ef58:c2c9:e52f])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-245ed33b4c2sm3725125ad.25.2025.08.19.11.24.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Aug 2025 11:25:00 -0700 (PDT)
-From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ AJvYcCX4zSbWUPosbMPlI50uubQviIVSlJEwOqRw6wmJaPpKujbC5BJvtAG2sHg7Q7g9xx7psh4h8K8fXQpp@nongnu.org
+X-Gm-Message-State: AOJu0YxZe6rMbhDXvOJFWWYS1bRyRes54rIv23xF5ww5fLmwLsU/ae0n
+ JRkeDnALm1fmiv9BShGeB5wLwoeDuSlQ1FO/Tjl9SWAcoOa03O6rB0k1YpwdMMSzmcM=
+X-Gm-Gg: ASbGncuTnRm9RMAYFs4YiQ5OCYdPX9ryiwq3ly/1SVIXZHs+bXY8ASuCo7irlr7Avdr
+ bZJUa4GGi2khvZhZ6Z2CXnYzfU+oQ/OnqYNbV8ALDemB8jmrh1a+xLGCq1eAc2AeMg6V+SEwR44
+ otCRKEWJFNZHNpTwcQQf3qNVw5BTShXHZ9yp13s2psTEf5avL59Li2pAWmPsMIxSUGg8HMbkbRn
+ hGl4irLSeIKI7qQthhgKItupD5IWnvUbzRakw0dagxUNtjo9TVUBVg8+wd0DmwviJaSTd0kXT+t
+ 6mtgfbxrpFk6XDEQcA8hgPhd6YoAt1LDaBz3x+eUb53w/BKy7Jdb89YhuvU/yB+fdGETVuqed1j
+ 1/UHgQ821PXclYOP+6z8b/9IPkwnT+kUKFA==
+X-Google-Smtp-Source: AGHT+IEb8E1VqWUBJJgZFNZYPmcIhZjMlmLLtOvK9pLf8/m8D8vXmlH+qAFh+KFYh9lxoqwhbpkn9w==
+X-Received: by 2002:a17:90b:51c1:b0:31e:beae:2934 with SMTP id
+ 98e67ed59e1d1-324e1423f88mr967743a91.18.1755641955176; 
+ Tue, 19 Aug 2025 15:19:15 -0700 (PDT)
+Received: from [10.0.0.90] ([120.159.20.238]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-324e258cb88sm211008a91.28.2025.08.19.15.19.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Aug 2025 15:19:14 -0700 (PDT)
+Message-ID: <fa2566d9-0102-4de0-aa33-18154c623d56@linaro.org>
+Date: Wed, 20 Aug 2025 08:19:04 +1000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 05/35] tcg: Fork TCI for wasm backend
+To: Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-devel@nongnu.org
+Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
  WANG Xuerui <git@xen0n.name>, Aurelien Jarno <aurelien@aurel32.net>,
  Huacai Chen <chenhuacai@kernel.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Aleksandar Rikalo <arikalo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, Stefan Weil <sw@weilnetz.de>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Stefan Hajnoczi <stefanha@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, ktokunaga.mail@gmail.com
-Subject: [PATCH 26/35] tcg/wasm: Add qemu_ld/qemu_st instructions
-Date: Wed, 20 Aug 2025 03:21:55 +0900
-Message-ID: <aeaf5cedd55a620870255106d232a3ba47fad40c.1755623522.git.ktokunaga.mail@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1755623521.git.ktokunaga.mail@gmail.com>
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>
 References: <cover.1755623521.git.ktokunaga.mail@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pg1-x52d.google.com
+ <630c91852939acf3c7fdd95c37b363fa5d4e60fd.1755623521.git.ktokunaga.mail@gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <630c91852939acf3c7fdd95c37b363fa5d4e60fd.1755623521.git.ktokunaga.mail@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -112,135 +114,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This commit adds qemu_ld and qemu_st by calling the helper functions
-corresponding to MemOp.
+On 8/20/25 04:21, Kohei Tokunaga wrote:
+> The Wasm backend is implemented based on the forked TCI backend with
+> utilizing the TCI interpreter to execute TBs.
+> 
+> Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 
-Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
----
- tcg/wasm/tcg-target.c.inc | 95 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 95 insertions(+)
+This is the wrong way to go about things.
 
-diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c.inc
-index d7d4fd4e58..db92463941 100644
---- a/tcg/wasm/tcg-target.c.inc
-+++ b/tcg/wasm/tcg-target.c.inc
-@@ -1155,6 +1155,99 @@ static void tcg_wasm_out_call(TCGContext *s, intptr_t func,
-     gen_call(s, info, func_idx);
- }
- 
-+static void *qemu_ld_helper_ptr(uint32_t oi)
-+{
-+    MemOp mop = get_memop(oi);
-+    switch (mop & MO_SSIZE) {
-+    case MO_UB:
-+        return helper_ldub_mmu;
-+    case MO_SB:
-+        return helper_ldsb_mmu;
-+    case MO_UW:
-+        return helper_lduw_mmu;
-+    case MO_SW:
-+        return helper_ldsw_mmu;
-+    case MO_UL:
-+        return helper_ldul_mmu;
-+    case MO_SL:
-+        return helper_ldsl_mmu;
-+    case MO_UQ:
-+        return helper_ldq_mmu;
-+    default:
-+        g_assert_not_reached();
-+    }
-+}
-+
-+static void tcg_wasm_out_qemu_ld(TCGContext *s, TCGReg data_reg,
-+                                 TCGReg addr_reg, MemOpIdx oi)
-+{
-+    intptr_t helper_idx;
-+    int64_t func_idx;
-+
-+    helper_idx = (intptr_t)qemu_ld_helper_ptr(oi);
-+    func_idx = get_helper_idx(s, helper_idx);
-+    if (func_idx < 0) {
-+        func_idx = register_helper(s, helper_idx);
-+    }
-+
-+    /* call the target helper */
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(TCG_AREG0));
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(addr_reg));
-+    tcg_wasm_out_op_const(s, OPC_I32_CONST, oi);
-+    tcg_wasm_out_op_const(s, OPC_I64_CONST, (intptr_t)s->code_ptr);
-+
-+    tcg_wasm_out_op_idx(s, OPC_CALL, func_idx);
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, REG_IDX(data_reg));
-+}
-+
-+static void *qemu_st_helper_ptr(uint32_t oi)
-+{
-+    MemOp mop = get_memop(oi);
-+    switch (mop & MO_SIZE) {
-+    case MO_8:
-+        return helper_stb_mmu;
-+    case MO_16:
-+        return helper_stw_mmu;
-+    case MO_32:
-+        return helper_stl_mmu;
-+    case MO_64:
-+        return helper_stq_mmu;
-+    default:
-+        g_assert_not_reached();
-+    }
-+}
-+
-+static void tcg_wasm_out_qemu_st(TCGContext *s, TCGReg data_reg,
-+                                 TCGReg addr_reg, MemOpIdx oi)
-+{
-+    intptr_t helper_idx;
-+    int64_t func_idx;
-+    MemOp mop = get_memop(oi);
-+
-+    helper_idx = (intptr_t)qemu_st_helper_ptr(oi);
-+    func_idx = get_helper_idx(s, helper_idx);
-+    if (func_idx < 0) {
-+        func_idx = register_helper(s, helper_idx);
-+    }
-+
-+    /* call the target helper */
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(TCG_AREG0));
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(addr_reg));
-+    switch (mop & MO_SSIZE) {
-+    case MO_UQ:
-+        tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(data_reg));
-+        break;
-+    default:
-+        tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(data_reg));
-+        tcg_wasm_out_op(s, OPC_I32_WRAP_I64);
-+        break;
-+    }
-+    tcg_wasm_out_op_const(s, OPC_I32_CONST, oi);
-+    tcg_wasm_out_op_const(s, OPC_I64_CONST, (intptr_t)s->code_ptr);
-+
-+    tcg_wasm_out_op_idx(s, OPC_CALL, func_idx);
-+}
-+
- static bool patch_reloc(tcg_insn_unit *code_ptr_i, int type,
-                         intptr_t value, intptr_t addend)
- {
-@@ -2319,6 +2412,7 @@ static void tgen_qemu_ld(TCGContext *s, TCGType type, TCGReg data,
-                          TCGReg addr, MemOpIdx oi)
- {
-     tcg_out_op_rrm(s, INDEX_op_qemu_ld, data, addr, oi);
-+    tcg_wasm_out_qemu_ld(s, data, addr, oi);
- }
- 
- static const TCGOutOpQemuLdSt outop_qemu_ld = {
-@@ -2334,6 +2428,7 @@ static void tgen_qemu_st(TCGContext *s, TCGType type, TCGReg data,
-                          TCGReg addr, MemOpIdx oi)
- {
-     tcg_out_op_rrm(s, INDEX_op_qemu_st, data, addr, oi);
-+    tcg_wasm_out_qemu_st(s, data, addr, oi);
- }
- 
- static const TCGOutOpQemuLdSt outop_qemu_st = {
--- 
-2.43.0
+Don't copy the tci backend and replace it piece by piece.
+Start with a clean slate and add the pieces one at a time.
 
+
+r~
 
