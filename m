@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AACCDCA0EFA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Aug 2025 08:34:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035CFCA0EDC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Aug 2025 08:35:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uoeAb-0007F4-GG; Wed, 20 Aug 2025 04:27:45 -0400
+	id 1uoeCW-0002yo-MI; Wed, 20 Aug 2025 04:29:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uoeAS-0006sk-Pt; Wed, 20 Aug 2025 04:27:37 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
+ id 1uoeCA-00023m-Ki; Wed, 20 Aug 2025 04:29:22 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uoeAN-00016H-1e; Wed, 20 Aug 2025 04:27:36 -0400
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-b474a38b25cso2359112a12.0; 
- Wed, 20 Aug 2025 01:27:29 -0700 (PDT)
+ id 1uoeC8-0001JR-5m; Wed, 20 Aug 2025 04:29:22 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-24458242b33so58925315ad.3; 
+ Wed, 20 Aug 2025 01:29:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755678448; x=1756283248; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1755678557; x=1756283357; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=V7fAKMSbTNa9ntikrP+lYZirQUgGeZAh7FsOcE/UtIs=;
- b=UvfZFgSd9ZSZKG6Lw7T1yJ/3DogMghew1uItLHF0DsTq6CbPMAWnSkdYEqu2ux78Gn
- PJXWwtNXdIp7S99I4b0/V256mjL99rjMSQlmmNLdNTRTYadDG+dsVsIMA/PAXg9n+fZU
- cxSR6HZqaR3Ndx3a4gHxkw7cL2teuHQTP8rx1TWzq64IBMl13OEZ+0eQB1tMCgc8LftI
- wcg3IJbIgJi5kMI/lF1UARs9y+w5eLNKigt37iXK+1fAfQHdXIIp68EEffSqP/+qzW3R
- 4cbquE/MU187RSx/9VYddY+kYpsTzz2r8YsUNTUcn4ZSZ/tZzBthkAyUUhqLan3Fh7sw
- UJTA==
+ bh=IKE3b5qPXwRrUn+igVHRTK4ED5kjBFoYAc2j8PIQR/c=;
+ b=EF+gWmu9YNDCFV8BkU40jbadKys0dAYIOcwKcJmhN5gYalc5qJvH6R4nQOKIGJpvp3
+ +fFxVe994jOGYEe3aDaV4I5Lok7919QLo+S/UT/PM7cNEg0KJSQbmmH8jKL6kws1+kGS
+ C2Tlmk6S945Q9TQJij4HL75Saau1wQA3Apl5KfCExR72IOVu38yByINbuHHuImBVfJJE
+ wm0zAnDNdBCLya9SSqRCsK+imVhcZkwFQcnvokf7iNIgoms21gEhgeWsND9KPJB5VXPS
+ 8H6LYKW9qHYV0mIikmh8z/f05qT8jKc/m11Lt5YOsme1x9s8vWL0bo8yspi8pndO1XA6
+ fSOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755678448; x=1756283248;
+ d=1e100.net; s=20230601; t=1755678557; x=1756283357;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=V7fAKMSbTNa9ntikrP+lYZirQUgGeZAh7FsOcE/UtIs=;
- b=QL+DiWWK0jHlt5OIdM4NDL9rfr3LcpjGTxChOyiY5IkBJS5PPn51Nne6KjEd4FkSHu
- WeI40Xi6Ez/qUdVmT3M5aEHwOLfUA5DSMNmRAnei/lZxj762h1NMLKYcfbTKt5RcyTSL
- Liolw0SbfLSoFEJXVq6oSUKL9jgN3uuZsEyfGnfWNriLNdcpom71jQ21DhcpoxnaA2uh
- XC8xgVe/W5eIOQQZKUv8WezrkjdnyUQrRUXpBpiEIFDCKyH9wHswfWQSW/3CMZxnIxEw
- 35ylYj3behkvovE4/d41gUaFHEm9nZx3FYxThq+Ca9/QaxPr06Msnj6gRRm7HpbtqHda
- HfIg==
+ bh=IKE3b5qPXwRrUn+igVHRTK4ED5kjBFoYAc2j8PIQR/c=;
+ b=qMqj1BkV/jbV0RMV+rd59QYT2sT7Zdd6Q4JnQGu3oKBw02uKOVbXoFmnuGOp/bEQUy
+ Ne5tWPInskaeJJRLwC5z8l4LosEp6KDZdsBrSvmRRGVFhbcc1B/nOpQSqae2q6B1Vgh5
+ d7pRmsJTl0zp/HHYgzk7LF1RXB67yFAHepRKqY+4alfvjXI10DKQOPPCna1bD8j63Ve7
+ 8QvQAwYbXlEg28Vr2BttKbiaUjmYJpcQk4htv86Zu44Tb3Lku1rI5SBFPigLQ4XVVcE6
+ U0m2KGPocq/hMoGMap+AL335AnJpPLW42JJ1HUHysahb/p4937w38iHMvTPHvGgM2258
+ 1agw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCPif1UAeoOxvJJG4tTde7ILKEMQsKghD6vw+dmUZnCMzceZUiaNnF5idewu4svGX35OqnRyB+uw==@nongnu.org,
- AJvYcCUkFpmk5xM4bScTbNbgX4J/LYfl2MzM5TYT38dzwdKP7MgHftmKnasy0mEWaLQWvT7ihRdywwB78zj7uA==@nongnu.org,
- AJvYcCXABOxge7rf8Y4KJ1RY8rxzPL/q+bZyL7QhtFqxezLJsp3aZmIh65B9ntj5F4Wtr07D4EsQaqNFHu4LOA==@nongnu.org
-X-Gm-Message-State: AOJu0Yw4XffJ6kBoPz+2HyWxgdIi7qKad4Ursehc6XtRFNyVMUKALiaD
- 00On1qh1srA+8scCMuUK/dCabcybv7nSEzyq5JY9pLepTdQg+7kyGOD/q5Pe/ub0h2gktfZaohA
- KgcYuSw1KENuX2Xl8rmcfeMISqobzMg0=
-X-Gm-Gg: ASbGncuB5wN7RGQxiQXG3LfSmKjMY0Jw6w7vrbsAvebze5tGU8npqowObwVKybfuquG
- wbm23W/4qUIlXP2Ji62BUqP2Ngxvo9buT9V9rZA4ywbuy/lj5lC/qy7cNrK/DuRGM2pvwHNHNxf
- 4UFp5mMbYH9wfiku8hEQhV7Rs4PPWHA0ZxazxSArktVMpytsWFGo4VnfKtXQRrpnmPt3FZ0pMwg
- m3vLkqCfkxxbKB0K1YnZFYNnneMnxOrGJIBXx0F9fbeRWbi
-X-Google-Smtp-Source: AGHT+IH1nsUb28CHqWUeZgZdTKrAL/O6lBCk9HZlgPtf6sIqdp3ca0S9KDAFHYiMQAA/4nlFHO4lvJCuhyOwVO/HCF8=
-X-Received: by 2002:a17:903:228c:b0:23f:df36:5f0c with SMTP id
- d9443c01a7336-245ef22772emr23663335ad.29.1755678447798; Wed, 20 Aug 2025
- 01:27:27 -0700 (PDT)
+ AJvYcCUijisfJxIcr3QThdB1wxTBk7/W4Uh9IFLDNGK5irseR5QMv9xHNFUkDlA42O2tMV2uecan8/Z2aw==@nongnu.org,
+ AJvYcCVEBlbsD1nz1qut8lT6BQdjRGOMDxruD5MIW2kfXIw8pSDVOmRcoCyO1riXVpVICV9CxtcecfNDBh55FQ==@nongnu.org,
+ AJvYcCWSzlBkJjPraAwQ6yQBY1SByAFv+PkPe0NKWv4SW+wLrGDhcMP4MrLIOChQZr+W4gPDFTL8KIPMy1dYig==@nongnu.org
+X-Gm-Message-State: AOJu0YxeSPYvb2kI1NjPdXTeITgx7GezLHvFAWLFhhvi2+bQ5dX3QIlu
+ xrEEUCCMGsE3PbmQeHfRrRORDor6plNZXuS4CkkRDkwVdGofdjsWk9TmIn5AtShsgegzb9+7W4r
+ IOrQJlLhiJBWOWexFjoe7pbXiqEqODx0=
+X-Gm-Gg: ASbGncvOQdkgH2q3S35WDZ0QAUINY2V/SgnIQbbu27/14eJDX/mQDf9qOeXP5HGGWaZ
+ V2lrVtdkkdUTw9cLJfrRqp6kLqFULxD2Utz0PvsvXQs+gIsy7Jr1NxeqrLZZDtrX9ksYaE/Jzcm
+ lLpsv0dhn1ipJGTNVEshqMqqu0yBBoE25cCvzjmRBmluzOV8KP1cKKqGlg1JmjLVnNos12m9r6B
+ 0Lkty3ZTcy8Ppmz+011M32NVadRqaKkxr/13g==
+X-Google-Smtp-Source: AGHT+IGuWEj8lJL3+weZ0DRpzBTvoZZDrhY+xXBh+HoNq7VfBffg3zpICxObAGljXBnnQvY6r/hRvZ9pfotGKdSMzrw=
+X-Received: by 2002:a17:903:2bcb:b0:240:4d19:8797 with SMTP id
+ d9443c01a7336-245ef15fe7emr24486915ad.22.1755678557022; Wed, 20 Aug 2025
+ 01:29:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1755623521.git.ktokunaga.mail@gmail.com>
- <cf283ca6c957d3c454facb228000129c171c904f.1755623522.git.ktokunaga.mail@gmail.com>
- <ac5ac33d-26a7-4be6-bf02-75fa61d3ad9a@linaro.org>
-In-Reply-To: <ac5ac33d-26a7-4be6-bf02-75fa61d3ad9a@linaro.org>
+ <0eb3445353ddde2f34bac187bf8d3ecf02f106b4.1755623522.git.ktokunaga.mail@gmail.com>
+ <d01829eb-48fc-40ca-b6cc-b3e8700c3c2c@linaro.org>
+In-Reply-To: <d01829eb-48fc-40ca-b6cc-b3e8700c3c2c@linaro.org>
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-Date: Wed, 20 Aug 2025 17:27:16 +0900
-X-Gm-Features: Ac12FXzEH5igDaer4Lkq1pe4jEyNIefHUYYyQ9KTo6xtAmGNGg3VVLUN1b2noeQ
-Message-ID: <CAEDrbUZo33Ay4efVr==sYmq+V_ya5NDXs6O9c_dHpLHOnDXc_w@mail.gmail.com>
-Subject: Re: [PATCH 20/35] tcg/wasm: Add andc/orc/eqv/nand/nor instructions
+Date: Wed, 20 Aug 2025 17:29:05 +0900
+X-Gm-Features: Ac12FXy5B2omOjFv6K2oeSmNpQGJOO9VtBXw49XnWNuNS1LPnStY204ydALo16Y
+Message-ID: <CAEDrbUbfON6TmwxCPGdJQt2ymuDrK2PB9pURnToqDn2Zeocc+w@mail.gmail.com>
+Subject: Re: [PATCH 21/35] tcg/wasm: Add neg/not/ctpop instructions
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
@@ -82,9 +82,9 @@ Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>,
  qemu-arm@nongnu.org, 
  qemu-riscv@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>, 
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Content-Type: multipart/alternative; boundary="000000000000388da6063cc7be76"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pg1-x530.google.com
+Content-Type: multipart/alternative; boundary="000000000000bb2e24063cc7c42d"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,75 +107,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000388da6063cc7be76
+--000000000000bb2e24063cc7c42d
 Content-Type: text/plain; charset="UTF-8"
 
 Hi Richard,
 
 > On 8/20/25 04:21, Kohei Tokunaga wrote:
-> > This commit implements andc, orc, eqv, nand and nor operations using
-Wasm
-> > instructions.
-> >
-> > Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-> > ---
-> >   tcg/wasm/tcg-target.c.inc | 55 +++++++++++++++++++++++++++++++++++++++
-> >   1 file changed, 55 insertions(+)
-> >
-> > diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c.inc
-> > index 01ef7d32f3..3c0374cd01 100644
-> > --- a/tcg/wasm/tcg-target.c.inc
-> > +++ b/tcg/wasm/tcg-target.c.inc
-> > @@ -449,6 +449,56 @@ static void tcg_wasm_out_cond(
-> >       }
-> >   }
-> >
-> > +static void tcg_wasm_out_andc(
-> > +    TCGContext *s, TCGReg ret, TCGReg arg1, TCGReg arg2)
+> > +static void tcg_wasm_out_neg(TCGContext *s, TCGReg ret, TCGReg arg)
 > > +{
-> > +    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(arg1));
-> > +    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(arg2));
+> > +    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(arg));
 > > +    tcg_wasm_out_op_not(s);
-> > +    tcg_wasm_out_op(s, OPC_I64_AND);
+> > +    tcg_wasm_out_op_const(s, OPC_I64_CONST, 1);
+> > +    tcg_wasm_out_op(s, OPC_I64_ADD);
 > > +    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, REG_IDX(ret));
 > > +}
 >
-> Don't implement stuff that's not present in the ISA.
-> This will be handled generically.
+> This is an odd expansion.  I would have expected ret = 0 - arg.
 
-Thank you for the feedback. I'll remove them and rely on the default
-expansion.
+Thank you for the suggestion. I'll change this to ret = 0 - arg.
 
 Regards,
 Kohei
 
---000000000000388da6063cc7be76
+--000000000000bb2e24063cc7c42d
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr">Hi Richard,<br><br>&gt; On 8/20/25 04:21,=
- Kohei Tokunaga wrote:<br>&gt; &gt; This commit implements andc, orc, eqv, =
-nand and nor operations using Wasm<br>&gt; &gt; instructions.<br>&gt; &gt; =
-<br>&gt; &gt; Signed-off-by: Kohei Tokunaga &lt;<a href=3D"mailto:ktokunaga=
-.mail@gmail.com">ktokunaga.mail@gmail.com</a>&gt;<br>&gt; &gt; ---<br>&gt; =
-&gt; =C2=A0 tcg/wasm/tcg-target.c.inc | 55 ++++++++++++++++++++++++++++++++=
-+++++++<br>&gt; &gt; =C2=A0 1 file changed, 55 insertions(+)<br>&gt; &gt; <=
-br>&gt; &gt; diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c=
-.inc<br>&gt; &gt; index 01ef7d32f3..3c0374cd01 100644<br>&gt; &gt; --- a/tc=
-g/wasm/tcg-target.c.inc<br>&gt; &gt; +++ b/tcg/wasm/tcg-target.c.inc<br>&gt=
-; &gt; @@ -449,6 +449,56 @@ static void tcg_wasm_out_cond(<br>&gt; &gt; =C2=
-=A0 =C2=A0 =C2=A0 }<br>&gt; &gt; =C2=A0 }<br>&gt; &gt; =C2=A0 <br>&gt; &gt;=
- +static void tcg_wasm_out_andc(<br>&gt; &gt; + =C2=A0 =C2=A0TCGContext *s,=
- TCGReg ret, TCGReg arg1, TCGReg arg2)<br>&gt; &gt; +{<br>&gt; &gt; + =C2=
-=A0 =C2=A0tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(arg1));<br>&gt; &g=
-t; + =C2=A0 =C2=A0tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(arg2));<br=
->&gt; &gt; + =C2=A0 =C2=A0tcg_wasm_out_op_not(s);<br>&gt; &gt; + =C2=A0 =C2=
-=A0tcg_wasm_out_op(s, OPC_I64_AND);<br>&gt; &gt; + =C2=A0 =C2=A0tcg_wasm_ou=
-t_op_idx(s, OPC_GLOBAL_SET, REG_IDX(ret));<br>&gt; &gt; +}<br>&gt; <br>&gt;=
- Don&#39;t implement stuff that&#39;s not present in the ISA.<br>&gt; This =
-will be handled generically.<br><br>Thank you for the feedback. I&#39;ll re=
-move them and rely on the default<br>expansion.<br><br>Regards,<br>Kohei<br=
-><br></div></div>
+ Kohei Tokunaga wrote:<br>&gt; &gt; +static void tcg_wasm_out_neg(TCGContex=
+t *s, TCGReg ret, TCGReg arg)<br>&gt; &gt; +{<br>&gt; &gt; + =C2=A0 =C2=A0t=
+cg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(arg));<br>&gt; &gt; + =C2=A0 =
+=C2=A0tcg_wasm_out_op_not(s);<br>&gt; &gt; + =C2=A0 =C2=A0tcg_wasm_out_op_c=
+onst(s, OPC_I64_CONST, 1);<br>&gt; &gt; + =C2=A0 =C2=A0tcg_wasm_out_op(s, O=
+PC_I64_ADD);<br>&gt; &gt; + =C2=A0 =C2=A0tcg_wasm_out_op_idx(s, OPC_GLOBAL_=
+SET, REG_IDX(ret));<br>&gt; &gt; +}<br>&gt; <br>&gt; This is an odd expansi=
+on.=C2=A0 I would have expected ret =3D 0 - arg.<br><br>Thank you for the s=
+uggestion. I&#39;ll change this to ret =3D 0 - arg.<br><br>Regards,<br>Kohe=
+i<br><br></div></div>
 
---000000000000388da6063cc7be76--
+--000000000000bb2e24063cc7c42d--
 
