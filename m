@@ -4,97 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21FB2CA0EFC
-	for <qemu-riscv@archiver.kernel.org>; Sun, 24 Aug 2025 09:22:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EBFCCA0FE1
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Aug 2025 09:57:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uq6vi-0006hJ-47; Sun, 24 Aug 2025 05:22:26 -0400
+	id 1uqTwK-00067k-Mk; Mon, 25 Aug 2025 05:56:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uq6vd-0006dD-7Z
- for qemu-riscv@nongnu.org; Sun, 24 Aug 2025 05:22:21 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uqTw3-00063Z-9R
+ for qemu-riscv@nongnu.org; Mon, 25 Aug 2025 05:56:21 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uq6vZ-00008M-LX
- for qemu-riscv@nongnu.org; Sun, 24 Aug 2025 05:22:20 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-244580523a0so32350485ad.1
- for <qemu-riscv@nongnu.org>; Sun, 24 Aug 2025 02:22:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uqTvx-00026I-Uh
+ for qemu-riscv@nongnu.org; Mon, 25 Aug 2025 05:56:18 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-45b49f7aaf5so24537935e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 25 Aug 2025 02:56:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1756027333; x=1756632133; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
+ d=linaro.org; s=google; t=1756115763; x=1756720563; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=10KVTjiTjkDeYAW3f7yc0y5TY4emnBCzSRWe4eb/+jU=;
- b=hZNvYHC198vViWvNgWvxQLwH7+9Xl1dQWx0ONX3KG4ygbBatRK1QGICT1BdGqG7768
- C6ACABkpmrh0ZWcSB8hpwMtFeNdR26/ymDnWjBNCeqevdxpNmcebYtsdfpxjpzsjrvUZ
- T2+kMVeGhmjPEfJuliazL8VMIoaHqXxQtVwiTmGow57wuQPFA0v0reODzoq+ni7B5Yp+
- Q3F1hFhzlxy8dRl4v9ByEuPKg/s0evaqdSRHet/GWHlpfMyXIqZi2dGXWkT5eBeQSA22
- xR2pgSAijJQE87Hp5Lpho3KruFJC0W/l3GVJaFwFaJQi1nS+k+YZshxpsqJaFVj0umCM
- 0xuA==
+ bh=DtPysv0q8plRMP+uuaG7xvmK7HEMKFlASd4qR6lUwg4=;
+ b=Vh5CXMbcfLy1kmYwFrrbe0iRmuIFD7qb6tKOjR5D51ppZCKInMsNYLgSObhNwVjaQu
+ jAGDlDuy6HgrWsHhihzz3sjqa1Sv/3Idx6QKz7EUSmpXOpaIl1MuQYLTUkUbza00obXe
+ rxlH6uzC5f+H5s0XayXMi9J5B2BNBFnAbVcwQ4O3AUJrEGkqoJcQ84TsTCTHCZimH1S0
+ Qw9keCyqy3goV6KqmHAdQPXq4rKjiuYaWkiFzD0UczIiH467ymG9ST227Vn0fS35baKL
+ ejIdT8Lwp9JSVXplkZD7KGcPxNd34Zv2LK26OFznmWJN6eggfkN1KDr7UVD5GRKCizLd
+ Z72g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756027333; x=1756632133;
- h=content-transfer-encoding:in-reply-to:content-language:from
+ d=1e100.net; s=20230601; t=1756115763; x=1756720563;
+ h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=10KVTjiTjkDeYAW3f7yc0y5TY4emnBCzSRWe4eb/+jU=;
- b=VXt+mZsQ5yrh15/l4QFkmWG40fvIlc6kG2GSY35+rrI9NvbRgesRI/NQTYRZPAIXWp
- PIWKM646wM+OzFPe8fnjMcNUq1UaH0PPIWktxT/octk0SizzBy2cIungKH58ca87godh
- OxoNnj3B1hT9F3mSPct/LMqay5Bv3UG1XW6cAXRK0DQ3r1gSbHPPRW1Fq0oPCcskw1Yz
- fqz3S4+3yu8yFfP/Qhbz6SFtwPHAhWxoqkoq5TnOShkf020Fz2nC+FvqO22lqoLJto8L
- 4N5FBqXx6/GMnDGNKp+Yk89eoIaJb1KZ+sqLoEsXC1IhgSBGkd7zUZR44/4XspPcQQYf
- aM5Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXqiHFeENHJPjENTIlQYBh5vDyecWTYTPmB7Bi4TpZmndOxT4qvdSMTFwNSuv9swIaOEw31yOtRMMiA@nongnu.org
-X-Gm-Message-State: AOJu0Yz98fYxmIGo1QRmcbAsBuCZ3nUs/FT+PYxrFo2MeLzjqgVU1Ph2
- dF08GhcD4EJP9bNgc1DWoMkSulLNigYcmAJGuo+1+QLDfYuU2tE/o+bWG4mTd69Z+Uc=
-X-Gm-Gg: ASbGncu4abyzrLmoktXkuUMuBHpeeyk2TH6SOuueO3zK0LRFninakYfSw2iBRwCFhIh
- 8gckffBY3NkZwNKeAncmXIIZyN9FEmldgmeeSSFvFUFFhGsVMdym8JIdLGFVW31EFxzqJhH6YJJ
- MmpjUzjATNeTEXIZEACBvPbviG0mQ2QmZJYmjdikH02VGXUT8DyIopKFH/vgC0cyFzvKK8cd0+c
- QT+VD8v8ukjOXieFSJdW9RupPMdHa6r0JuvzbQzyazdMvwuafs7zEUB0UD/DM3uE6A3nxZI715u
- FNynG4asCtk9LLb+1GCfhLm31zN5SvU+XxHVHNEUsOm1Qb+UmRpwIsbiRkRSlHWOYo9xN1h3BVJ
- FLt7+rhQeHuhgDhUOhqiB+QwopH7LW28tYTM=
-X-Google-Smtp-Source: AGHT+IG3QuVXZba8kDezAVZAOutqReXs8MTo6BPog2Bt5V6xYiY5YoOVEyaapszgsryCM//bIZIJPg==
-X-Received: by 2002:a17:902:e888:b0:240:a54e:21a0 with SMTP id
- d9443c01a7336-2462ee13154mr117050765ad.19.1756027333379; 
- Sun, 24 Aug 2025 02:22:13 -0700 (PDT)
-Received: from [192.168.68.110] ([187.11.154.56])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24668871071sm39558425ad.103.2025.08.24.02.22.07
+ bh=DtPysv0q8plRMP+uuaG7xvmK7HEMKFlASd4qR6lUwg4=;
+ b=Ic66RzkPFpVWk5qG9+8E/vuD4qTNuhNsqGxHWloA6XQZ3nNSclVYbClh+t7C/hwzZg
+ gADw8m0hLW6HJ66nJvH/089Cbmkb91iEI8iX5aZRNdpzXcwY8Lu2bWEdDqqLLFkzXNCH
+ ZKqX1sHYRVrgRCSYIPLHKGW+RP/LowzmU6EzH/bHWpo/y/ad2LD+GUFzp2pAaxm/a84d
+ Hl7Wf/ZQPec0cQ1RX1bxN3LZc/2GLiUMLtckLK9n2U8CE1TyIKIFHNPzHDryathJ/8jl
+ yX6y4sauY92CZ6dw+L1Pdl1XqFhtHUFvtiheRkB3D6OWeItnsWNNAXWQELAycF7rTOs3
+ aYGA==
+X-Gm-Message-State: AOJu0YwSNLuoLM7zNK8skiRf0I+BIF+oCqlNcbj0ouaBIKlm1Zo4YjB1
+ P8Zdlc/lsdJx7rc9/4ovSUuoefTmjHeSGiVYMB82CfSInlqaaNp6/B6qYV9EUmXl9jk=
+X-Gm-Gg: ASbGnct/RF6gbyKUm4kgZhhEGaTKKzF/FAtlMdeWYlK+8TLTalgt7lMlsDNlLfZjI7o
+ QQI6uMpK1TUwD8B0ao/fcn5SGA1+ZAYl8Pv/5Xyn1FXDezbYsC4IInHthWZlTYgsOYluLXxmifo
+ NpPG2eZCpDcAr9uCVM3vCmgTWdaFkux7Bsz5N4d9vvXKq0YX9zjGliZ7JPt0BDCRXlRJ2qp+iR1
+ h+LPK26mEDnjZ+Jv/ClFfXziaKc+lRwitumacL2Esnh4XzkHjmiLzPEiHVGeHt7PCFvI4Ekao2/
+ Q0F3cBpNXjhW25kC8S+zpO2zNsUj8ubLNgdhNxqkQfoI+1g7eRviPUOYiq5oInPkEm/+YUjda25
+ 0z4SpT49freurJcUIKSqyMTSY7fJtC1ft6s7JzFHpSDLQT2+W5QW7De+N4J7JC2NTHA==
+X-Google-Smtp-Source: AGHT+IFII4uz9bHKRVMU/jqk/Ik1xyv1FNOwKxKjbIfzqXS6ferhx9aYm6vJ1OcwtxUTA8WX5oiUAQ==
+X-Received: by 2002:a05:600c:1d87:b0:45b:5ff4:2f8f with SMTP id
+ 5b1f17b1804b1-45b5ff43124mr24307765e9.4.1756115762660; 
+ Mon, 25 Aug 2025 02:56:02 -0700 (PDT)
+Received: from [192.168.69.208] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45b5757453fsm101240695e9.14.2025.08.25.02.56.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 24 Aug 2025 02:22:12 -0700 (PDT)
-Message-ID: <0c7c5894-3f57-4c95-b863-d9fce8d8f26b@ventanamicro.com>
-Date: Sun, 24 Aug 2025 06:22:04 -0300
+ Mon, 25 Aug 2025 02:56:02 -0700 (PDT)
+Message-ID: <eb4da435-2b16-4421-a192-612a33524897@linaro.org>
+Date: Mon, 25 Aug 2025 11:56:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 2/9] hw/riscv: iommu-trap: remove .impl.unaligned =
- true
-To: CJ Chen <cjchen@igel.co.jp>, qemu-devel@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Keith Busch <kbusch@kernel.org>,
- Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
- Max Filippov <jcmvbkbc@gmail.com>, Peter Xu <peterx@redhat.com>,
- David Hildenbrand <david@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Tomoyuki Hirose <hrstmyk811m@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>
-References: <20250822092410.25833-1-cjchen@igel.co.jp>
- <20250822092410.25833-3-cjchen@igel.co.jp>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: Re: [PATCH v3 00/12] single-binary: compile once semihosting
+To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, richard.henderson@linaro.org,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-arm@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+References: <20250804183950.3147154-1-pierrick.bouvier@linaro.org>
+ <7c026d43-04b4-4615-8478-639393b640c2@linaro.org>
+ <e7ea76f9-b66c-4656-b8b6-4d0ff0dfee35@linaro.org>
+ <33849bb7-07a8-4a04-b142-ebfe5d286332@linaro.org>
 Content-Language: en-US
-In-Reply-To: <20250822092410.25833-3-cjchen@igel.co.jp>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <33849bb7-07a8-4a04-b142-ebfe5d286332@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -117,37 +108,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 22/8/25 16:57, Pierrick Bouvier wrote:
+> On 2025-08-22 07:56, Philippe Mathieu-Daudé wrote:
+>> On 22/8/25 16:31, Pierrick Bouvier wrote:
+>>> On 2025-08-04 11:39, Pierrick Bouvier wrote:
+>>>> This series compiles once semihosting files in system mode.
+>>>> The most complicated file was semihosting/arm-compat-semi.c, which was
+>>>> carefully
+>>>> cleaned in easy to understand steps.
 
 
-On 8/22/25 6:24 AM, CJ Chen wrote:
-> Since riscv-iommu does not support unaligned accesses, drop
-> `.impl.unaligned = true` to avoid the contradictory pairing with
-> `.valid.unaligned = false`.  This makes QEMU reject unaligned accesses
-> for this device and prevents the assertion in memory.c that previously
-> caused `make check` to fail.
-> 
-> Signed-off-by: CJ Chen <cjchen@igel.co.jp>
-> Tested-by: CJ Chen <cjchen@igel.co.jp>
-> Acked-by: Tomoyuki Hirose <hrstmyk811m@gmail.com>
-> Reported-by: Tomoyuki Hirose <hrstmyk811m@gmail.com>
-> ---
+>>> Ping on this series.
+>>> I'll be out next week, but it should be ready to be pulled once the
+>>> trunk reopens.
+>>
+>> Modulo the comment on patch #9, the series is fully reviewed.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Sorry, this was a comment for the maintainer, hoping he'd update the
+comment while queuing the series, not asking you to respin another one.
 
->   hw/riscv/riscv-iommu.c | 1 -
->   1 file changed, 1 deletion(-)
-> 
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index a877e5da84..277746598a 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -2288,7 +2288,6 @@ static const MemoryRegionOps riscv_iommu_trap_ops = {
->       .impl = {
->           .min_access_size = 4,
->           .max_access_size = 8,
-> -        .unaligned = true,
->       },
->       .valid = {
->           .min_access_size = 4,
+Next time I'll be more verbose with such comments.
 
+> I'll send a v4 with this, thanks.
+
+We should be super good now ;)
 
