@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04483CA0FF2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Aug 2025 16:21:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 249B2CA0FE7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Aug 2025 16:22:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uqwK5-0000kn-Mw; Tue, 26 Aug 2025 12:15:01 -0400
+	id 1uqwJi-0007IS-RJ; Tue, 26 Aug 2025 12:14:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uqwJF-0006ie-PS; Tue, 26 Aug 2025 12:14:10 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1uqwIi-0005L5-Ge; Tue, 26 Aug 2025 12:13:36 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uqwJ7-0008Bn-Qq; Tue, 26 Aug 2025 12:14:08 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-24458272c00so67996305ad.3; 
- Tue, 26 Aug 2025 09:13:55 -0700 (PDT)
+ id 1uqwIf-00088H-0w; Tue, 26 Aug 2025 12:13:36 -0400
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-b49db86cac4so1841491a12.3; 
+ Tue, 26 Aug 2025 09:13:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756224833; x=1756829633; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1756224810; x=1756829610; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NkF/SrWBRt7mpVRvpwQdPdICO84Pyhp/wixwRcKtvEU=;
- b=koVE/+Xe6nKc+jv6vnl9iZspQUDPrl+iRxEPqHXXEnqtZcRbYmOCqU1f1BW6wY8ppd
- VdzQYRNf7GgVcp5miVlqL+N3jBJprk4xbTtrUus6fg0BGViKN3FHI5S2fQ875fNoNYU5
- fFP1lXQQ8v2XMuh+lrd26jka9DeRMQC2t0iM9nq0wSXH/K+wT5eNQMYvvxjbTdScbzhW
- 7cJe8/b3GeEr+ClUNDpYXmTPFhyjyh1u9sBi5g6n2mO81UR9tqZgMb5/lRbD9pYwErig
- XQFz79bqNlAbXD/x9SRP69PaZU70CzCDqknPXu1m58si8Av+8N6VTwF7/1XJ2/jCMuYN
- rM8A==
+ bh=wdm5qlPjiiBmfUrpVbsMm6TdPYck5xoQGraSVKOpe8I=;
+ b=OPGPPY9ZAiV/ByuEVPQOoX9Qz1JrSCD57L08m2a+4pLeMUzIiuUQrt7yiVQlDn5fOi
+ 8T6tkQ2whtbuj+hHqdXUhBQrtQUdV37xCbr7MHjq+IUVCz5luCMyz5/la6pFVc2bBKrf
+ TllMavomIG0ls5y0LDNaIu5dxPsgiz8KpA1hmR5fr5oRltBKhYUVVPodMKyr90S+RGbY
+ xjIJepQUh2kS/e22gPAqT+83YrpIU+rp7p0QfpMD2c2CZFcxFdElZWlojcBT3U7m75Y3
+ bOhnZg4Dkj6aaruomrFKW2i0Djz1zGex4jr4B/KrbwaP/bN/HH66X45k26CsqSVJWKnK
+ hILA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756224833; x=1756829633;
+ d=1e100.net; s=20230601; t=1756224810; x=1756829610;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NkF/SrWBRt7mpVRvpwQdPdICO84Pyhp/wixwRcKtvEU=;
- b=fSHj3K2njpuTSr1YvwAEST75DLPo7NnMXOGNXSSS2fAqaNDWcGqcm1h5S67Vqmc6Xj
- tUzuAblVNstWXqUnCmGqA0qwdBTS73qCdkDES1cDw6auE1f9BrTEcvA/8Qx50Ndyw7sL
- 1w/Zo365XrAOqVzWawIRiNQl4rlbQAZrLBWffobLVIKx53sT1L4C3mhEJ7lBU641251z
- KiWnJ7HlPtkXCL4hV3N9jc7KSH64NM44m7C+/UHua00vDLXFgVMWKorXK9HVN7svijj5
- 9SFOp6ZtrqOBygovhVPyqUAb+z7Yql+JaIHtIEfgWsF3FEXTH71NihzuZcRLB/ALz39D
- d7BQ==
+ bh=wdm5qlPjiiBmfUrpVbsMm6TdPYck5xoQGraSVKOpe8I=;
+ b=P9Z7HvYv7A48rZl+5X77HMZ4FxQuOzXHeLoP0oG6tmsaSk5v8fTFabXMrmFibx1J1L
+ 3ydlm86Lxo6kQ1vuZhquYCkXUnh0TYdxJiupdaRlbvT1dF/CF0AAn4/VMVWrzG6/Zaux
+ oXGGfffSecE2WKzOe3yATLGwy3PEcwK1ssyHxCACPQnbEA3j8Y+puKFHPquknHO1qHck
+ ulCTwsGXa+fr3DmempvRRCLZ9AbQevD1QVpG6EASwJUMBJWl+2dCxdexp9jMZv2h3mEL
+ KRnFcnBv2cCDhpk6i/42BIBgIsvd7b5cYtI+H/k+XVS1AxCKnKXnjXoNQ/RngjELaNje
+ CGiQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUI4yRhqWyhjVobi4Oy3eAhjaIApkLQ2fGdZlTl3gfR2c4Q8uwfIZYie4IKDEdVDNXDfo4H+PzDfQ==@nongnu.org,
- AJvYcCV2pwY1Mp/wCf6dHEfKP8KAfBVuj4Dkej68aNmalUZsYJNcNrbc+92WsZczcnAeVLSrCPmXSMNpKt+WMw==@nongnu.org
-X-Gm-Message-State: AOJu0Yw/4hUNEc5Pe1sLDAZYI+edxegypeEvouFmkRL3tObbyBtuUpeo
- paBHOvk/GH+gkgvw9O8XOItVJ9AEsAdYnq9ImhylxQalza+qvbOhQk5Ok7T18w==
-X-Gm-Gg: ASbGnctOvFegxKg6s9IcvtHW0V2J0Pd1f1TadRt2fY1u28/rILYbqFiYido6Nw4U8wF
- F4m6TYM+/rsVXcWZ/kUC4hxjCAIzV6+5DXPYU0W0E2jSKduirEE8lKD2iTUWulqtkqHDdc1RtZc
- 96xpW+aqL+hAvpBn3cBHvs5KODyeXFfai2bp1RtrmE/yy0kLlfDwbj4NoPrSqTOuzt4wId7SZ7h
- cNTXPeUbSYP1n1bEj5EmKWa8yy4Jn6KmbmIV0FdHa3KWGOn1srWv7r1daGTc3bJiL9LB9lRW8SO
- 3GxpbCe/otVmx3vc9FgTgC249hFW1wjG2EWYApG/kMpnVRKE0JcK8cRqwt2cDo+YW492ODuL13/
- 1iDmQC3jqbk9YxcyMzeAmtw==
-X-Google-Smtp-Source: AGHT+IEFvgv334bH701ne0mKaBmxUq/pjTqrgeDMEvrImaiNqmHHp0Z+joyZhm835L4NeY5p5xazNA==
-X-Received: by 2002:a17:902:db0c:b0:240:6406:c471 with SMTP id
- d9443c01a7336-2462ee0b897mr216696975ad.10.1756224833007; 
- Tue, 26 Aug 2025 09:13:53 -0700 (PDT)
+ AJvYcCVHw3zVD15Bn/TrsxmLvAdbl3MJznZwx62Ln+B84XLtO65s6riULofIdCpQga6zsxSyyVdeJT5khQ==@nongnu.org,
+ AJvYcCX4319KgR1pITBpg9bc2vH7y8OaeNloUF/BvIMhssLx85IGYv+kmF7Bbi4EolHSN29IcDU+tHK6nIr1Fw==@nongnu.org
+X-Gm-Message-State: AOJu0Yz8ftffL2LU1caotP/mAL3SMCv9z/9flH2mBaAWCEJDP2stI3qI
+ Cmnp/G/OBrlyhefelIqjuWXkvczv06ZupMWt/JDV9mLWGRh6gw+s6K1Bg+sY1Q==
+X-Gm-Gg: ASbGncvj8K4ZVZwBKaA13DvZOfWp4Lr84TBu1+ws2Bt4IEQY0pDuaizde35+o54WTZ+
+ Xm0Spe2CL4KVBkl30RJVvZboW6AiNEjGWnugKT1A5RryFqnjA5NvYJH/UXk+F4KV61OYG86DiMo
+ lYBmEbqEDKhKjnqiSM6qsTvrTsk3A0CTdIGZFLfbAgJ48KAfpPZQllxeoJ0Y1w7dUhVuUmswwk9
+ xRPthXuaoOQal76gecAPdtFpKrlrBdNxdCD8rwqMha/lnqZMjOzbqoSiouduzxMz0JQ2S3gmXDg
+ 5wNbPofEyYR8xuPeeVXE8f9kP9au2nRagZY3Xch4S5yZGrb9Oa7SKEBrmUWdpsHWpFfCPq9mrcS
+ hWJ2i8Tvq3aArrXNlllGizg==
+X-Google-Smtp-Source: AGHT+IHM08p3gwEauAwGot3XMz9a+Eisy9iW8w94o7N8zZy3qFDxVmnsbhhE93IhyI2Bii++6C9NFQ==
+X-Received: by 2002:a17:902:ec81:b0:246:92f5:1c07 with SMTP id
+ d9443c01a7336-24692f51fb7mr134640575ad.51.1756224809607; 
+ Tue, 26 Aug 2025 09:13:29 -0700 (PDT)
 Received: from ktock.. ([240d:1a:3b6:8b00:561f:1400:11f5:714b])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-32750bc341asm1749747a91.19.2025.08.26.09.13.47
+ 98e67ed59e1d1-32750bc341asm1749747a91.19.2025.08.26.09.13.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Aug 2025 09:13:52 -0700 (PDT)
+ Tue, 26 Aug 2025 09:13:28 -0700 (PDT)
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -80,16 +80,16 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Stefan Hajnoczi <stefanha@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, ktokunaga.mail@gmail.com
-Subject: [PATCH v2 28/35] tcg/wasm: Implement instantiation of Wasm binary
-Date: Wed, 27 Aug 2025 01:10:33 +0900
-Message-ID: <c0d05186cd431515eb3f97a7c860ec5b6deac0a5.1756216429.git.ktokunaga.mail@gmail.com>
+Subject: [PATCH v2 24/35] tcg/wasm: Add mb instruction
+Date: Wed, 27 Aug 2025 01:10:29 +0900
+Message-ID: <3db8ec74078663cbaabcc680e53f1d588f5f5970.1756216429.git.ktokunaga.mail@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756216429.git.ktokunaga.mail@gmail.com>
 References: <cover.1756216429.git.ktokunaga.mail@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,85 +112,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-instantiate_wasm is a function that instantiates a TB's Wasm binary,
-importing the functions as specified by its arguments. Following the header
-definition in wasm/tcg-target.c.inc, QEMU's memory is imported into the
-module as "env.memory", and helper functions are imported as "helper.<idx>".
+This commit generates the mb operation. In Wasm, it uses the atomic.fence
+instruction as the fence operator [1]. TCI instruction is also generated in
+the same way as the original TCI backend using smp_mb().
 
-The instantiated Wasm module is imported to QEMU using Emscripten's
-"addFunction" feature[1] which returns a function pointer. This allows QEMU
-to call this module directly from C code via that pointer.
-
-Since the subarray() method doesn't accept a BigInt value which is used for
-the 64bit pointer value, it is converted to a Number (i53) using
-bigintToI53Checked method of Emscripten. Although this conversion (64bit to
-53bit) drops higher bits, the maximum memory size of the engine
-implementations is currently limited to 16GiB[2] so we can assume that the
-pointers are within the Number's range.
-
-Note that since FireFox 138, WebAssembly.Module no longer accepts a
-SharedArrayBuffer as input [3] as reported by Nicolas Vandeginste in my
-fork[4]. This commit ensures that WebAssembly.Module() is passed a
-Uint8Array created from the binary data on a SharedArrayBuffer.
-
-[1] https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#calling-javascript-functions-as-function-pointers-from-c
-[2] https://webassembly.github.io/memory64/js-api/#limits
-[3] https://bugzilla.mozilla.org/show_bug.cgi?id=1965217
-[4] https://github.com/ktock/qemu-wasm/pull/25
+[1] https://webassembly.github.io/threads/core/syntax/instructions.html#atomic-memory-instructions
 
 Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 ---
- tcg/wasm.c | 37 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+ tcg/wasm.c                |  4 ++++
+ tcg/wasm/tcg-target.c.inc | 19 +++++++++++++++++++
+ 2 files changed, 23 insertions(+)
+
+V2:
+- Added Wasm implementation of the mb operation using the atomic.fence
+  instruction.
 
 diff --git a/tcg/wasm.c b/tcg/wasm.c
-index 1cc2e45e77..15db1f9a8a 100644
+index 793c1807c2..1cc2e45e77 100644
 --- a/tcg/wasm.c
 +++ b/tcg/wasm.c
-@@ -23,6 +23,43 @@
- #include "tcg/tcg-ldst.h"
- #include "tcg/helper-info.h"
- #include <ffi.h>
-+#include <emscripten.h>
-+
-+#define EM_JS_PRE(ret, name, args, body...) EM_JS(ret, name, args, body)
-+
-+#define DEC_PTR(p) bigintToI53Checked(p)
-+#define ENC_PTR(p) BigInt(p)
-+#if defined(WASM64_MEMORY64_2)
-+#define ENC_WASM_TABLE_IDX(i) Number(i)
-+#else
-+#define ENC_WASM_TABLE_IDX(i) i
-+#endif
-+
-+EM_JS_PRE(void*, instantiate_wasm, (void *wasm_begin,
-+                                    int wasm_size,
-+                                    void *import_vec_begin,
-+                                    int import_vec_size),
+@@ -566,6 +566,10 @@ static uintptr_t tcg_qemu_tb_exec_tci(CPUArchState *env, const void *v_tb_ptr)
+             taddr = regs[r1];
+             tci_qemu_st(env, taddr, regs[r0], oi, tb_ptr);
+             break;
++        case INDEX_op_mb:
++            /* Ensure ordering for all kinds */
++            smp_mb();
++            break;
+         default:
+             g_assert_not_reached();
+         }
+diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c.inc
+index e1ee2f6485..1d639561db 100644
+--- a/tcg/wasm/tcg-target.c.inc
++++ b/tcg/wasm/tcg-target.c.inc
+@@ -1116,6 +1116,11 @@ static void tcg_out_op_r(TCGContext *s, TCGOpcode op, TCGReg r0)
+     tcg_out32(s, insn);
+ }
+ 
++static void tcg_out_op_v(TCGContext *s, TCGOpcode op)
 +{
-+    const memory_v = new DataView(HEAP8.buffer);
-+    const wasm = HEAP8.subarray(DEC_PTR(wasm_begin),
-+                                DEC_PTR(wasm_begin) + wasm_size);
-+    var helper = {};
-+    const entsize = TCG_TARGET_REG_BITS / 8;
-+    for (var i = 0; i < import_vec_size / entsize; i++) {
-+        const idx = memory_v.getBigInt64(
-+            DEC_PTR(import_vec_begin) + i * entsize, true);
-+        helper[i] = wasmTable.get(ENC_WASM_TABLE_IDX(idx));
-+    }
-+    const mod = new WebAssembly.Module(new Uint8Array(wasm));
-+    const inst = new WebAssembly.Instance(mod, {
-+            "env" : {
-+                "memory" : wasmMemory,
-+            },
-+            "helper" : helper,
-+    });
++    tcg_out32(s, (uint8_t)op);
++}
 +
-+    return ENC_PTR(addFunction(inst.exports.start, 'ii'));
-+});
+ static void tcg_out_op_ri(TCGContext *s, TCGOpcode op, TCGReg r0, int32_t i1)
+ {
+     tcg_insn_unit_tci insn = 0;
+@@ -1931,6 +1936,20 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+     g_assert_not_reached();
+ }
  
- __thread uintptr_t tci_tb_ptr;
- 
++static void tcg_out_mb(TCGContext *s, unsigned a0)
++{
++    tcg_out_op_v(s, INDEX_op_mb);
++
++    /*
++     * Wasm's threading proposal provides atomic.fence instruction as the fence
++     * operator.
++     * https://webassembly.github.io/threads/core/syntax/instructions.html#atomic-memory-instructions
++     */
++    tcg_wasm_out8(s, 0xfe);
++    tcg_wasm_out8(s, 0x03);
++    tcg_wasm_out8(s, 0x00);
++}
++
+ static void tcg_out_tb_start(TCGContext *s)
+ {
+     init_sub_buf();
 -- 
 2.43.0
 
