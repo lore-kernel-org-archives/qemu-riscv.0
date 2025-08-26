@@ -4,97 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DF56CA0FE7
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Aug 2025 02:05:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A674ACA0FE7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Aug 2025 16:12:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uqj41-0001K6-TG; Mon, 25 Aug 2025 22:05:35 -0400
+	id 1uqwGv-0003mR-8I; Tue, 26 Aug 2025 12:11:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cjchen@igel.co.jp>) id 1uqj3i-00012a-QK
- for qemu-riscv@nongnu.org; Mon, 25 Aug 2025 22:05:18 -0400
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
+ (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
+ id 1uqwGl-0003g9-CE; Tue, 26 Aug 2025 12:11:36 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cjchen@igel.co.jp>) id 1uqj3I-0004Vo-6B
- for qemu-riscv@nongnu.org; Mon, 25 Aug 2025 22:05:12 -0400
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-55ce5243f6dso5415492e87.2
- for <qemu-riscv@nongnu.org>; Mon, 25 Aug 2025 19:04:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
+ id 1uqwGi-0007lq-NR; Tue, 26 Aug 2025 12:11:35 -0400
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-b4c3d8bd21eso173318a12.2; 
+ Tue, 26 Aug 2025 09:11:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=igel-co-jp.20230601.gappssmtp.com; s=20230601; t=1756173875; x=1756778675;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1756224688; x=1756829488; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oYbhx6akeMrp0+j7CppN23HVOCbSEz9iiNk+OzyMiew=;
- b=cyD/5Ic9YokVOeId+PJFy821ebZFTjTqeAgvDCtSxpHmBdVrx7QAd+N+0V/3urRl8F
- d2NUKJ7T1zGRhBWzEuiP8WyV24HiyGKJZJ1sRT8MyR4YCzn2mRVOWL79MfK4MQo7oZJD
- 5RNcWKtEjdVAs9MEv5dQOJTgCXC6GvnxjQjmkfpmYOuKAioORHoxs18NZKSH9hFgd/K6
- feoaHMzpiq/xybgrHpqAtCFtioQ5LTpEQiI2NmcYKmgZX9zub9FdWUqcNHaDTwKcL3Rr
- N/jILAB9kqYw+2MI+sEbdUVfQF8FCloHiPfTnwTN2J+141EvBVAZFyU+Yso/jV13L21H
- chEg==
+ bh=0kdhJ8qVaboMFQEuaKJAhE/K3VU7nR9Fg/XwpkOOA2I=;
+ b=KW7k4OVxN/+9+e4akGHbmSQGXnDb847jFGLolZ+sDhic1L9CKQ1GVQ/8a3uTkyfVw2
+ EQBkgAS99KaHqSC27FQqixVIS8wBSN7woNSnTF3diuP/uavWzMyLe1TvWkLode0tuIJY
+ Ym0BcAR5HrSGW/DCXGHxj3a8fwg4E/d8ks3NKZIEzRT+u6Pdjge55hVOnebGjPerjGAW
+ weWDVKHAV9sYVCC6E6xA6DFG3QWVxyJ5PXhJ8gCbUVdaJopacNYSVchvf6Uxo4+8Yv2f
+ YZf7LIBranOgfdq81XAGCKzVyrh1OKmaWSZc0UqG2WPcdAApLPUzZPwVvHhE7Ab6DBJW
+ xmGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756173875; x=1756778675;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1756224688; x=1756829488;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oYbhx6akeMrp0+j7CppN23HVOCbSEz9iiNk+OzyMiew=;
- b=QgwNVcXuqFbmtehGsg0qX44HvW9ds8xZdGziA/OyD4MR0f02AbHrLZJ6Jv+brdfZt2
- uT3rV0nkABLaZ6aUefPJzlbCHZNw9rMr0qnMIAzJuz00sNUbHsw5OrlBuNOLX1umzjSY
- baZklsigUnp/Z/v54KqDkVfT/Ou3o2gEGd5Rw2A+6mOWMGJKsFi5fKdjrIDSv0xKBxNi
- ct6ms5VE9N+GyGPo9eVRM0u2M811A0c2dGbNB+PuqdF7s6omD8wwV/zYqoIJF2MWbGkr
- nvaZQmRvqvt2RyzYu1NCCNx9ftulo1vzIM3uqOYajtNZcvl5w/kzPxwFfEgeJzdKLjOG
- RDgw==
+ bh=0kdhJ8qVaboMFQEuaKJAhE/K3VU7nR9Fg/XwpkOOA2I=;
+ b=ZjWtkJ1zVexWaDg3qvQEorJ8LN4hhwKiof1YaQD6gn8xsvozSMEUPGRTBMa3Dy2vCw
+ 6uJwop51moVaHCii3MYwQn4sNgMvJ7hXGd/wA7sxeSXQ44kDkADtfMYWTk+GVl2Dwe+u
+ B12x/XegpNZI2rkMyXKBziMe1YCQHYa7zuZY7HVhjaPBy69f2qdfUGXrPvG0eJ4nWVP+
+ l0zzU2Dmr53/8SYRK3QMYIdSM27dgI9e2s6SgVaYf3VUTQIbgfakYpni4gE/XSRcomJ8
+ AwD2hQLS7F7Wzm+GoY0uDKfWnWZz1IiJ2ujd+g7RuhVykbEilYLRS8T9hP51bVRuCGth
+ iB1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUzMM1AP+71QsHVNuIR9b8610lIqQy1Kl+OAhwRWiO0mTzkIfuiVj/F8Gcu/5Vz6Fuz2aQeNkKmzCJW@nongnu.org
-X-Gm-Message-State: AOJu0Yzt2JfdJhO6XANDQru6ZQoQXrzFXSDWF1aau9bPgW7y6eSSvKyw
- XMcDo60v3JFP9UnB0HpklAThbYHZGXSdEthEtN8hnzQf+sgjBpWSzD/Ql5frSdyo72zyeR1b062
- V3acdS1pBTvo+aj5LCqhvDdp2AE/4/HhZi5pxWdDLCA==
-X-Gm-Gg: ASbGncs6ZknqCAny0UMRvzeXLiLL60XSqt07Hu7x8koOSIJJkCfe9TTzJZrfJQlh1Ln
- Cysa3b5MrP+EAkeAKIyOms7QIlXfcsuhlOXJwENHIqD2RjDM4zEgwuFuEFYaMLe5OYXRWTzU6O3
- RrFtxMP52GV78Etr+S9ZArQneFF4T4CkBNnaelYwaEnd7ZReT56XS3RRemWZj8sbQZEXVQ1RIzZ
- cLCwmhgeGTq+99F3lfl
-X-Google-Smtp-Source: AGHT+IEszcJrVgWpZnUqNIKpNx2DkAOEn5XCeJFnYinMzW2Ne9pmJsYXTABQ7yr06tRvIUjlak1xZ0qnVmeooL9zs54=
-X-Received: by 2002:a05:6512:3a94:b0:55f:4031:4374 with SMTP id
- 2adb3069b0e04-55f40314508mr2318638e87.47.1756173875045; Mon, 25 Aug 2025
- 19:04:35 -0700 (PDT)
+ AJvYcCVYBL5cAvO8tLTbn5hy9aOXhQVF06lwIc2Oz1e2f7cffGa+5jFUj0GYh1VX69qnSpElusqueLrWig==@nongnu.org,
+ AJvYcCXsiZB0KXCSN9D1xr3haaBMwP4gt3i2sU61adrDMk7XLILR433g474Q6+VoxRiTx+tSAbN2z3DvKNL17w==@nongnu.org
+X-Gm-Message-State: AOJu0YwgHmPiTeQJmhPmPGpSqRH1owB7ArbKbu3Y0l3y4O88OfQdbj7N
+ giJDgM0I77+VTPaDJfpSRXqNArU7UEVUTEhBFVTvFS9+sXfwxa4Pd1B4PWhKFw==
+X-Gm-Gg: ASbGncvrEnUDRYTuKTMDLIKiL8ZtowE4uspvzlGufpoxH9Y/QH+kJwAemfI8pv73KPc
+ DMsoQnkABy/BzA9lZO9dIv6OxuptekzdkdzhaDAldTmbbk/AXtDH+nmuyzrDZWzPqQlGNvUE7Ot
+ xcovRJT+pbHd2ipH6uoBe8sp8QpdlRuXyJmsIdA/hzUhuQwcTsJiHdqSQI7eH/cVQwjkifEnJDz
+ K2/8k93D4jBVy0fPG1FbDZhr3SHDH4JfY9EaEE977Ne4CJPvSQzl+fDkojAxoN5ISBrF+9Y+zUP
+ 4ol8Am6DjGLkmg1scQ7oYSWoCjcjHChGHIpID0c054TRYIAReXm9mq4hfKIZan82fmQO7cKdMH0
+ LBtiFwygNMatgh1+QiGV7Pg==
+X-Google-Smtp-Source: AGHT+IFzvxQCHKPwaGwQEGeld5cnUhg5+g3NLLqLFlCfWoXgneEah+9GpE/7wzlXmT9xhRivPIefOA==
+X-Received: by 2002:a17:90b:3dcb:b0:325:4731:cea5 with SMTP id
+ 98e67ed59e1d1-3254731d6c8mr14741705a91.31.1756224687782; 
+ Tue, 26 Aug 2025 09:11:27 -0700 (PDT)
+Received: from ktock.. ([240d:1a:3b6:8b00:561f:1400:11f5:714b])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-32750bc341asm1749747a91.19.2025.08.26.09.11.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Aug 2025 09:11:26 -0700 (PDT)
+From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ WANG Xuerui <git@xen0n.name>, Aurelien Jarno <aurelien@aurel32.net>,
+ Huacai Chen <chenhuacai@kernel.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, Stefan Weil <sw@weilnetz.de>,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, ktokunaga.mail@gmail.com
+Subject: [PATCH v2 03/35] dockerfiles: Add support for wasm64 to the wasm
+ Dockerfile
+Date: Wed, 27 Aug 2025 01:10:08 +0900
+Message-ID: <dd1d5aee5cc69ad95f6cf11106cf020bc3bc4b59.1756216429.git.ktokunaga.mail@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1756216429.git.ktokunaga.mail@gmail.com>
+References: <cover.1756216429.git.ktokunaga.mail@gmail.com>
 MIME-Version: 1.0
-References: <20250822092410.25833-1-cjchen@igel.co.jp>
- <20250822092410.25833-10-cjchen@igel.co.jp>
- <e755b413-b983-4c98-bda8-e0c7ec6e29b5@linaro.org>
-In-Reply-To: <e755b413-b983-4c98-bda8-e0c7ec6e29b5@linaro.org>
-From: chen CJ <cjchen@igel.co.jp>
-Date: Tue, 26 Aug 2025 11:04:24 +0900
-X-Gm-Features: Ac12FXzS2vczPWQMQ-PQmOJZV62OGYrLk4GHU71rFORmH0JpAwXZUq8dRM8DWNo
-Message-ID: <CAAMq-Y_9tqhAQmCfyMDhqmQEeF+XiyAq+RXiBY-GJGwmRMsEGw@mail.gmail.com>
-Subject: Re: [PATCH RFC v2 9/9] tests/qtest: add test for memory region access
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org, 
- qemu-arm@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- Keith Busch <kbusch@kernel.org>, 
- Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Tyrone Ting <kfting@nuvoton.com>, 
- Hao Wu <wuhaotsh@google.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Peter Xu <peterx@redhat.com>, 
- David Hildenbrand <david@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Laurent Vivier <lvivier@redhat.com>, 
- Tomoyuki Hirose <hrstmyk811m@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=cjchen@igel.co.jp; helo=mail-lf1-x12e.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pg1-x531.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,188 +113,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Philippe,
+This commit fixes Dockerfile of the wasm build to support both of wasm32 and
+wasm64 build. Dockerfile takes the following build arguments and use these
+values for building dependencies.
 
-Thanks for the review and the pointer.
+- TARGET_CPU: target wasm arch (wasm32 or wasm64)
+- WASM64_MEMORY64: target -sMEMORY64 mode (1 or 2)
 
-You=E2=80=99re right =E2=80=94 the CPUs are not involved in the test path, =
-and the only
-difference that matters is the binary endianness. I will re-spin the
-series and reduce the test matrix to one little-endian and one big-endian
-target to avoid redundant runs.
+Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+---
+ MAINTAINERS                                   |  2 +-
+ ...2-cross.docker => emsdk-wasm-cross.docker} | 29 ++++++++++++++-----
+ 2 files changed, 23 insertions(+), 8 deletions(-)
+ rename tests/docker/dockerfiles/{emsdk-wasm32-cross.docker => emsdk-wasm-cross.docker} (85%)
 
-Specifically, I will keep:
-  - x86_64  (cpu: "qemu64,apic-id=3D0")  =E2=80=94 little-endian
-  - s390x   (cpu: "qemu")              =E2=80=94 big-endian
+V2:
+- This commit is under review in another patch series so please ignore it
+  here.
 
-Thanks again for the feedback. If you have any further comments, please
-let me know.
-
-Best regards,
-CJ
-
-
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> =E6=96=BC 2025=E5=B9=B48=E6=
-=9C=8825=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=888:16=E5=AF=AB=E9=81=
-=93=EF=BC=9A
->
-> On 22/8/25 11:24, CJ Chen wrote:
-> > From: Tomoyuki Hirose <hrstmyk811m@gmail.com>
-> >
-> > This commit adds a qtest for accessing various memory regions. The
-> > qtest checks the correctness of handling the access to memory regions
-> > by using 'memaccess-testdev'.
-> >
-> > Signed-off-by: CJ Chen <cjchen@igel.co.jp>
-> > Co-developed-by: CJ Chen <cjchen@igel.co.jp>
-> > Reported-by: Tomoyuki Hirose <hrstmyk811m@gmail.com>
-> > ---
-> >   tests/qtest/memaccess-test.c | 597 ++++++++++++++++++++++++++++++++++=
+diff --git a/MAINTAINERS b/MAINTAINERS
+index a07086ed76..433a44118d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -647,7 +647,7 @@ F: include/system/os-wasm.h
+ F: os-wasm.c
+ F: util/coroutine-wasm.c
+ F: configs/meson/emscripten.txt
+-F: tests/docker/dockerfiles/emsdk-wasm32-cross.docker
++F: tests/docker/dockerfiles/emsdk-wasm-cross.docker
+ 
+ Alpha Machines
+ --------------
+diff --git a/tests/docker/dockerfiles/emsdk-wasm32-cross.docker b/tests/docker/dockerfiles/emsdk-wasm-cross.docker
+similarity index 85%
+rename from tests/docker/dockerfiles/emsdk-wasm32-cross.docker
+rename to tests/docker/dockerfiles/emsdk-wasm-cross.docker
+index 60a7d02f56..4b41be62ab 100644
+--- a/tests/docker/dockerfiles/emsdk-wasm32-cross.docker
++++ b/tests/docker/dockerfiles/emsdk-wasm-cross.docker
+@@ -1,14 +1,17 @@
+ # syntax = docker/dockerfile:1.5
+ 
+-ARG EMSDK_VERSION_QEMU=3.1.50
++ARG EMSDK_VERSION_QEMU=4.0.10
+ ARG ZLIB_VERSION=1.3.1
+ ARG GLIB_MINOR_VERSION=2.84
+ ARG GLIB_VERSION=${GLIB_MINOR_VERSION}.0
+ ARG PIXMAN_VERSION=0.44.2
+-ARG FFI_VERSION=v3.4.7
++ARG FFI_VERSION=v3.5.2
+ ARG MESON_VERSION=1.5.0
++ARG TARGET_CPU=wasm32
++ARG WASM64_MEMORY64=0
+ 
+-FROM emscripten/emsdk:$EMSDK_VERSION_QEMU AS build-base
++FROM emscripten/emsdk:$EMSDK_VERSION_QEMU AS build-base-common
++ARG TARGET_CPU
+ ARG MESON_VERSION
+ ENV TARGET=/builddeps/target
+ ENV CPATH="$TARGET/include"
+@@ -33,8 +36,8 @@ RUN <<EOF
+ cat <<EOT > /cross.meson
+ [host_machine]
+ system = 'emscripten'
+-cpu_family = 'wasm32'
+-cpu = 'wasm32'
++cpu_family = '${TARGET_CPU}'
++cpu = '${TARGET_CPU}'
+ endian = 'little'
+ 
+ [binaries]
+@@ -46,6 +49,16 @@ pkgconfig = ['pkg-config', '--static']
+ EOT
+ EOF
+ 
++FROM build-base-common AS build-base-wasm32
 +
-> >   tests/qtest/meson.build      |   9 +
-> >   2 files changed, 606 insertions(+)
-> >   create mode 100644 tests/qtest/memaccess-test.c
-> >
-> > diff --git a/tests/qtest/memaccess-test.c b/tests/qtest/memaccess-test.=
-c
-> > new file mode 100644
-> > index 0000000000..7e90028ea0
-> > --- /dev/null
-> > +++ b/tests/qtest/memaccess-test.c
-> > @@ -0,0 +1,597 @@
-> > +/*
-> > + * QEMU memory region access test
-> > + *
-> > + * SPDX-License-Identifier: GPL-2.0-or-later
-> > + *
-> > + * Author: Tomoyuki HIROSE <hrstmyk811m@gmail.com>
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "libqtest.h"
-> > +
-> > +#include "hw/misc/memaccess-testdev.h"
-> > +
-> > +static const char *arch =3D "";
-> > +static const hwaddr base =3D 0x200000000;
-> > +
-> > +struct arch2cpu {
-> > +    const char *arch;
-> > +    const char *cpu_model;
-> > +};
-> > +
-> > +static struct arch2cpu cpus_map[] =3D {
-> > +    /* tested targets list */
-> > +    { "arm", "cortex-a15" },
-> > +    { "aarch64", "cortex-a57" },
-> > +    { "avr", "avr6-avr-cpu" },
-> > +    { "x86_64", "qemu64,apic-id=3D0" },
-> > +    { "i386", "qemu32,apic-id=3D0" },
-> > +    { "alpha", "ev67" },
-> > +    { "cris", "crisv32" },
-> > +    { "m68k", "m5206" },
-> > +    { "microblaze", "any" },
-> > +    { "microblazeel", "any" },
-> > +    { "mips", "4Kc" },
-> > +    { "mipsel", "I7200" },
-> > +    { "mips64", "20Kc" },
-> > +    { "mips64el", "I6500" },
-> > +    { "or1k", "or1200" },
-> > +    { "ppc", "604" },
-> > +    { "ppc64", "power8e_v2.1" },
-> > +    { "s390x", "qemu" },
-> > +    { "sh4", "sh7750r" },
-> > +    { "sh4eb", "sh7751r" },
-> > +    { "sparc", "LEON2" },
-> > +    { "sparc64", "Fujitsu Sparc64" },
-> > +    { "tricore", "tc1796" },
-> > +    { "xtensa", "dc233c" },
-> > +    { "xtensaeb", "fsf" },
-> > +    { "hppa", "hppa" },
-> > +    { "riscv64", "rv64" },
-> > +    { "riscv32", "rv32" },
-> > +    { "rx", "rx62n" },
-> > +    { "loongarch64", "la464" },
->
-> IIUC CPUs are not involved in the test path. The only difference
-> is the binary endianness. So we are testing 2 distinct code path
-> duplicated as ARRAY_SIZE(cpus_map) =3D 31 times.
->
-> Let's run the tests with a pair of common targets and save 29
-> pointless tests:
->
-> ... cpus_map[] =3D {
->        /* One little endian and one big endian target */
->        { "x86_64", "qemu64,apic-id=3D0" },
->        { "s390x", "qemu" }
-> }
->
-> > +};
-> > +
-> > +static const char *get_cpu_model_by_arch(const char *arch)
-> > +{
-> > +    for (int i =3D 0; i < ARRAY_SIZE(cpus_map); i++) {
-> > +        if (!strcmp(arch, cpus_map[i].arch)) {
-> > +            return cpus_map[i].cpu_model;
-> > +        }
-> > +    }
-> > +    return NULL;
-> > +}
-> > +
-> > +static QTestState *create_memaccess_qtest(void)
-> > +{
-> > +    QTestState *qts;
-> > +
-> > +    qts =3D qtest_initf("-machine none -cpu \"%s\" "
-> > +                      "-device memaccess-testdev,address=3D0x%" PRIx64=
-,
-> > +                      get_cpu_model_by_arch(arch), base);
-> > +    return qts;
-> > +}
->
->
-> > +DEFINE_test_memaccess(little, LITTLE, b, B, valid, VALID)
-> > +DEFINE_test_memaccess(little, LITTLE, w, W, valid, VALID)
-> > +DEFINE_test_memaccess(little, LITTLE, l, L, valid, VALID)
-> > +DEFINE_test_memaccess(little, LITTLE, q, Q, valid, VALID)
-> > +DEFINE_test_memaccess(little, LITTLE, b, B, invalid, INVALID)
-> > +DEFINE_test_memaccess(little, LITTLE, w, W, invalid, INVALID)
-> > +DEFINE_test_memaccess(little, LITTLE, l, L, invalid, INVALID)
-> > +DEFINE_test_memaccess(little, LITTLE, q, Q, invalid, INVALID)
-> > +DEFINE_test_memaccess(big, BIG, b, B, valid, VALID)
-> > +DEFINE_test_memaccess(big, BIG, w, W, valid, VALID)
-> > +DEFINE_test_memaccess(big, BIG, l, L, valid, VALID)
-> > +DEFINE_test_memaccess(big, BIG, q, Q, valid, VALID)
-> > +DEFINE_test_memaccess(big, BIG, b, B, invalid, INVALID)
-> > +DEFINE_test_memaccess(big, BIG, w, W, invalid, INVALID)
-> > +DEFINE_test_memaccess(big, BIG, l, L, invalid, INVALID)
-> > +DEFINE_test_memaccess(big, BIG, q, Q, invalid, INVALID)
-> > +
-> > +#undef DEFINE_test_memaccess
-> > +
-> > +static struct {
-> > +    const char *name;
-> > +    void (*test)(void);
-> > +} tests[] =3D {
-> > +    {"little_b_valid", test_memaccess_little_b_valid},
-> > +    {"little_w_valid", test_memaccess_little_w_valid},
-> > +    {"little_l_valid", test_memaccess_little_l_valid},
-> > +    {"little_q_valid", test_memaccess_little_q_valid},
-> > +    {"little_b_invalid", test_memaccess_little_b_invalid},
-> > +    {"little_w_invalid", test_memaccess_little_w_invalid},
-> > +    {"little_l_invalid", test_memaccess_little_l_invalid},
-> > +    {"little_q_invalid", test_memaccess_little_q_invalid},
-> > +    {"big_b_valid", test_memaccess_big_b_valid},
-> > +    {"big_w_valid", test_memaccess_big_w_valid},
-> > +    {"big_l_valid", test_memaccess_big_l_valid},
-> > +    {"big_q_valid", test_memaccess_big_q_valid},
-> > +    {"big_b_invalid", test_memaccess_big_b_invalid},
-> > +    {"big_w_invalid", test_memaccess_big_w_invalid},
-> > +    {"big_l_invalid", test_memaccess_big_l_invalid},
-> > +    {"big_q_invalid", test_memaccess_big_q_invalid},
-> > +};
-> BTW this reminds me of
-> https://lore.kernel.org/qemu-devel/20200817161853.593247-8-f4bug@amsat.or=
-g/
-> ;)
++FROM build-base-common AS build-base-wasm64
++ARG WASM64_MEMORY64
++ENV CFLAGS="$CFLAGS -sMEMORY64=${WASM64_MEMORY64}"
++ENV CXXFLAGS="$CXXFLAGS -sMEMORY64=${WASM64_MEMORY64}"
++ENV LDFLAGS="$LDFLAGS -sMEMORY64=${WASM64_MEMORY64}"
++
++FROM build-base-${TARGET_CPU} AS build-base
++
+ FROM build-base AS zlib-dev
+ ARG ZLIB_VERSION
+ RUN mkdir -p /zlib
+@@ -56,17 +69,19 @@ RUN emconfigure ./configure --prefix=$TARGET --static
+ RUN emmake make install -j$(nproc)
+ 
+ FROM build-base AS libffi-dev
++ARG TARGET_CPU
++ARG WASM64_MEMORY64
+ ARG FFI_VERSION
+ RUN mkdir -p /libffi
+ RUN git clone https://github.com/libffi/libffi /libffi
+ WORKDIR /libffi
+ RUN git checkout $FFI_VERSION
+ RUN autoreconf -fiv
+-RUN emconfigure ./configure --host=wasm32-unknown-linux \
++RUN emconfigure ./configure --host=${TARGET_CPU}-unknown-linux \
+     --prefix=$TARGET --enable-static \
+     --disable-shared --disable-dependency-tracking \
+     --disable-builddir --disable-multi-os-directory \
+-    --disable-raw-api --disable-docs
++    --disable-raw-api --disable-docs WASM64_MEMORY64=${WASM64_MEMORY64}
+ RUN emmake make install SUBDIRS='include' -j$(nproc)
+ 
+ FROM build-base AS pixman-dev
+-- 
+2.43.0
+
 
