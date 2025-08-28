@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32ADCCA0FED
-	for <qemu-riscv@archiver.kernel.org>; Wed, 27 Aug 2025 20:36:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68178CA0FF9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 28 Aug 2025 09:38:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1urMse-0003or-0b; Wed, 27 Aug 2025 16:36:28 -0400
+	id 1urZ4n-0000j5-6O; Thu, 28 Aug 2025 05:37:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stove@rivosinc.com>)
- id 1urMsb-0003mt-CN
- for qemu-riscv@nongnu.org; Wed, 27 Aug 2025 16:36:25 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1urZ4h-0000fw-Sl
+ for qemu-riscv@nongnu.org; Thu, 28 Aug 2025 05:37:46 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <stove@rivosinc.com>)
- id 1urMsY-0002Rw-Fl
- for qemu-riscv@nongnu.org; Wed, 27 Aug 2025 16:36:24 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-771f90a45easo280486b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 27 Aug 2025 13:36:20 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1urZ4f-00083u-G7
+ for qemu-riscv@nongnu.org; Thu, 28 Aug 2025 05:37:42 -0400
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-b4c6fee41c9so143066a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 28 Aug 2025 02:37:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc.com; s=google; t=1756326979; x=1756931779; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6Ddve7p4fI8qnHNRjLS5NATRfUqe+W6ozPOkYas4euQ=;
- b=J/xpgUX+OUnvJfcyFlg0W+gYkrNX+wjUs4uf9FLZC6zZtYyYFnROFu3Jw3b9F7xDLW
- wI/K06JV6u2L1bxk5ob9UTxwcDFhii+8ix0bkOPnonrD2tmJ2fNrbKIQVtJYCpNtyHW9
- Gpk4aPLb4x339XPRSLEmit6NhO/zFjmqdHi0Nv646eYzREK3rlZSMpC6ykz986OD7NtO
- oQdlBQiQWhjBSLhbMnLH1+Ym5FPLjJfePTB3BId2Va2/ddx/XnxH67r+nS88T6Pb0TUe
- dp4B37VMgW7Fyk7bJszxIus6rKZxTW4fgSwaqQDEvodQB4TyrjyG7tLa1z9hbhDZO4QC
- xbXA==
+ d=ventanamicro.com; s=google; t=1756373858; x=1756978658; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ZNqqbmsJO3IFpQkWwKrQ4GThmbM/ferEW/+t1C2XHN4=;
+ b=iI5E7ahIf6YPvh4yX5l7FXMTzFskkfauDBBufG3+b5QIfwxpTUx8X5ghnzejRiOfOf
+ BKBLEUmnov0w5x0D+whp1KgslNVzrc5Y+aRI970M/ybDgVBse48wkS3ScuE6FPfJ5LEZ
+ 6KRgdo/EGoShWMyteiuyjzN1F28xvvzR1RRC9IkN6iUZH43oiHzan3dXf2WdrsmxNVbB
+ RLs7OrjH3Keq1peoxg46msCZZVLKPexGrejhd85u8qWDS2Em8NecfXq0eZ3PrBGyHgSM
+ Gi3GtvgFGul3Anuccd1V/PypCm0ar9I/Yo73q0fZjHnnco45r7ZAhldLttwPpjGfP21c
+ nhag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756326979; x=1756931779;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6Ddve7p4fI8qnHNRjLS5NATRfUqe+W6ozPOkYas4euQ=;
- b=U2kCyE74c8P19ZA86i2VSTsKpLQtyk/gI6LGn660u3EwUkgiq9zc9gVlL39ZGrRd8e
- p3OelGlHd0ZcfQvCSNmA0d1Op9mGri+3XIfve7eKGyHA1yPiH2WF32GYm5M/PPMFrou/
- Y9l4WjK4444xErBIhPr2Ufa5F9bhkCUKiMaj8gPaMfI0nmcbp3f6CHCLe54xvD+0KjDQ
- ReUTOUycgWMBMVUl/VJmjnHw9b7TNl/tE2MNZNVWTlTDqd3BEvSwq3fHZ3B0VdK78eSQ
- NFZ3xCLbEhv3HpqUwFfZGrVFbtf/VVtZYni1MjddOeYY8bAl6fZQEUH17vI1ub1r4VBl
- p8EA==
+ d=1e100.net; s=20230601; t=1756373858; x=1756978658;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZNqqbmsJO3IFpQkWwKrQ4GThmbM/ferEW/+t1C2XHN4=;
+ b=RGDvho6eeHQMSBPyOBFiJ+7Owtq5nrwSUwkmr2EeTgsJUCiLtCCJTYWz5gPpcRjhFU
+ KLqfA0EHwodbNPCeLZP8lXoxOxIPcwBWt+2elgJuJOl6JfKdaRk/KlZC/7pSViN7UNPw
+ pAjCc7iZTTNDOr4qNYZKavHFO3pdF1+rX016Td4uZ7k8VnOB0IXykTfDEcy5Eo3anURl
+ CEYHQ/a0rnI39w1eUpegn496Eyfp6xsjvdkmQnYt/Pyf3eKWMAhWxiOq/6jE9GtFZmE0
+ O6B+v/18+MALxRE43bDzcIEKkcZAbx9XdHlOUOznJykJ/IEhIb4m7YzMgdh1DbVAERuF
+ k7Yg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTDRthunEyN391w6ZsvTxea7Jxs9OhpwYYDdTOiZJfHGJgZ6XlXf+1594cLjvk0Z6C5LN2Mwuvsms+@nongnu.org
-X-Gm-Message-State: AOJu0YxTtPcQ6lmddQew9t3GVaNExuPp7Cw/uu3bXtRh9w/tL75tkKmu
- yTqd1ClZ8EVdROYL505CFHbMKIvodxRO88tsEykVrnP2AF6uBZI29vN0K1+zEfxRjis=
-X-Gm-Gg: ASbGnctqTYGMu4ltQ34G7cyg0ek4JEub/4cs1JSm5pVFWTympKcN6QITGu4WO6GSnC4
- ZWeoXNUV7gsZDJjNCvYkWYwWlVfIDo5GwMWH173TbKsmw3Xszzvv8M8vIw/4ct98/cREOl2xr8Y
- pTgT2xpafA7rRD3o86jLcpgE9sFPzyDzHoEay0UiRcnAnym7FDi1tJa3J+/FSVC599kgn1loiLW
- bYLF8VuaAMtxHxKRLZRLUx38MZStmwuT3bevEbMCQBd3fGOwYyfU3YKQOdqLcSECzQmpz4c/vHF
- mnycPxisDXp5YE2htMfu07d1x1/EzpuP8BFp503yHlG9UyMDsZ62pfIqKupHWHAHf8WP5e43t4Y
- Kb/j+d+Bmu87v1V3YSZOiZIzmaomYNjSyKHbxVENY
-X-Google-Smtp-Source: AGHT+IFx+fyEmVZjkee3XZtmXtLNubdmYGpTt4glOlJ629w74cDd8GBr0FIJTxAK3IhQosGL0NIkPQ==
-X-Received: by 2002:a05:6a00:99d:b0:771:58e:5b10 with SMTP id
- d2e1a72fcca58-771058e5ff3mr16281797b3a.8.1756326978817; 
- Wed, 27 Aug 2025 13:36:18 -0700 (PDT)
-Received: from mbp-nixosvm.ph.rivosinc.com ([12.151.45.234])
+ AJvYcCWLfQkfZtcvutctQj0S93visODMdpnITlScRpB/WLW9r87Ozf696wXq2+2RD1jEZ/MC9hz3Nck8Mwc/@nongnu.org
+X-Gm-Message-State: AOJu0Yxd0/Tnk3ibPBcWZpyMkpGyStc++csw7flqxLwmYnK1bNwtp0y7
+ Bh9XFO7hNpEmAaj0lxqQg9KBUgSPuWK+rI9T0YBod1cohc56exM3W+Emfq8a4Vo6kig=
+X-Gm-Gg: ASbGncu1oj1biVcpxJp35PVZnkWVVd14JB8QJSRye5gsHQub420cMPc+85KdIn1gDSt
+ iXP8gXQ9fo4clOChblfDeoEIYqPn38/KGVIPlEVxmHKAxlrPUUax42jT0LO2OoNd3/zYdoJe5sT
+ HTBaJ8Yqu6ROWoBTLehfFJDUn1p+PtzU3ZB+aRfWkccnFsT09GowpwLmmEi2MvU+C/zIAgjlOWb
+ bb/yHgkOycMobx3nntmzIHQJ3VxyjK9TKZAE7b+vdg2jXVpZGpBUZEDG7Ek3GaTOjMh556h14xD
+ zkhJZG1MdHmwPoShXhOMB4Qom2TuxxOpcNNX+JvxAHO0tvjNXw6WOQMeRSx5j5AHmR18HJLkRAf
+ uBQ76js+AwuQ0BPzMuu2TydZqLwau+R9Bg5/UhIWfAMqXw8WH
+X-Google-Smtp-Source: AGHT+IHlFmLxsz86hfiUnOiwYwNPhDio0ujdoM63z6vAfv55uUUmwih3hjAWqJtLoKwCKyV/V0n6pQ==
+X-Received: by 2002:a17:90b:5644:b0:327:70b9:9d68 with SMTP id
+ 98e67ed59e1d1-32770b99e1bmr6964846a91.16.1756373858478; 
+ Thu, 28 Aug 2025 02:37:38 -0700 (PDT)
+Received: from [192.168.68.110] ([191.202.238.136])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-771fc95888dsm4959732b3a.89.2025.08.27.13.36.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Aug 2025 13:36:18 -0700 (PDT)
-From: stove <stove@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- stove <stove@rivosinc.com>
-Subject: [PATCH] target/riscv: use riscv_csrr in riscv_csr_read
-Date: Wed, 27 Aug 2025 13:36:17 -0700
-Message-ID: <20250827203617.79947-1-stove@rivosinc.com>
-X-Mailer: git-send-email 2.50.1
+ d2e1a72fcca58-77210e226a8sm2794141b3a.33.2025.08.28.02.37.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 28 Aug 2025 02:37:37 -0700 (PDT)
+Message-ID: <dccc6ea0-d173-4a55-8c69-9313e2accbff@ventanamicro.com>
+Date: Thu, 28 Aug 2025 06:37:33 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=stove@rivosinc.com; helo=mail-pf1-x435.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: use riscv_csrr in riscv_csr_read
+To: stove <stove@rivosinc.com>, qemu-devel@nongnu.org
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-stable <qemu-stable@nongnu.org>
+References: <20250827203617.79947-1-stove@rivosinc.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <20250827203617.79947-1-stove@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,34 +106,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Commit 38c83e8d3a33 ("target/riscv: raise an exception when CSRRS/CSRRC
-writes a read-only CSR") changed the behavior of riscv_csrrw, which
-would formerly be treated as read-only if the write mask were set to 0.
+Cc: qemu-stable
 
-Fixes an exception being raised when accessing read-only vector CSRs
-like vtype.
+On 8/27/25 5:36 PM, stove wrote:
+> Commit 38c83e8d3a33 ("target/riscv: raise an exception when CSRRS/CSRRC
+> writes a read-only CSR") changed the behavior of riscv_csrrw, which
+> would formerly be treated as read-only if the write mask were set to 0.
+> 
+> Fixes an exception being raised when accessing read-only vector CSRs
+> like vtype.
+> 
+> Fixes: 38c83e8d3a33 ("target/riscv: raise an exception when CSRRS/CSRRC writes a read-only CSR")
+> 
+> Signed-off-by: stove <stove@rivosinc.com>
+> ---
 
-Fixes: 38c83e8d3a33 ("target/riscv: raise an exception when CSRRS/CSRRC writes a read-only CSR")
 
-Signed-off-by: stove <stove@rivosinc.com>
----
- target/riscv/cpu.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 4a862da615..dca8edff6d 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -873,7 +873,7 @@ static inline void riscv_csr_write(CPURISCVState *env, int csrno,
- static inline target_ulong riscv_csr_read(CPURISCVState *env, int csrno)
- {
-     target_ulong val = 0;
--    riscv_csrrw(env, csrno, &val, 0, 0, 0);
-+    riscv_csrr(env, csrno, &val);
-     return val;
- }
- 
--- 
-2.50.1
+
+>   target/riscv/cpu.h | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 4a862da615..dca8edff6d 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -873,7 +873,7 @@ static inline void riscv_csr_write(CPURISCVState *env, int csrno,
+>   static inline target_ulong riscv_csr_read(CPURISCVState *env, int csrno)
+>   {
+>       target_ulong val = 0;
+> -    riscv_csrrw(env, csrno, &val, 0, 0, 0);
+> +    riscv_csrr(env, csrno, &val);
+>       return val;
+>   }
+>   
 
 
