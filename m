@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E1CBCA0FFF
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 17:12:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BBBBCA0FFF
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 17:22:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut84R-0001CJ-3j; Mon, 01 Sep 2025 13:11:55 -0400
+	id 1ut8Dp-0005SO-SP; Mon, 01 Sep 2025 13:21:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1ut82f-000694-M8
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 13:10:09 -0400
-Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32])
+ id 1ut8Dg-0005Q4-Sb
+ for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 13:21:28 -0400
+Received: from mail-yw1-x112d.google.com ([2607:f8b0:4864:20::112d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1ut82a-0007uX-VJ
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 13:10:05 -0400
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-e931cad1fd8so3642615276.1
- for <qemu-riscv@nongnu.org>; Mon, 01 Sep 2025 10:09:58 -0700 (PDT)
+ id 1ut8De-0001Pm-QC
+ for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 13:21:28 -0400
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-71d603a9cfaso34397757b3.1
+ for <qemu-riscv@nongnu.org>; Mon, 01 Sep 2025 10:21:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756746598; x=1757351398; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mWm75LlarvNPNkG/j1YdIDdAaspy5HO2BeQIm0j5o6s=;
- b=dOjtOV51wilE0mMhI7NU9a2fx06noC/7PFixlFhgavWfpcM5K7F5AitEexcFeexlNH
- mpJBjP2Utx0G2bYTvGmuWR9BGExgQdymutc7mYTKyLi55Z59bOuKrWgnmQR4tEr0CuId
- B7b9ZpUiMMgvH9PkrBWZ0OYx8oWfrF/7mIoNQW5k1gIEEQvUKvmAcNvyoDXa4vEM+aRq
- ypdrDtu3xJUEMEN7vs+Bn0LuOx0MRHSTeMwNtQ294jfp0rDZh2/5QKZJ99GRIMs7k3fG
- JElberhyRUrj1OZPssGaPK25UaEJ9NT5rnuJRv5geaThBoBh7acvMWFixeBNkGPIkj1V
- gLbw==
+ d=linaro.org; s=google; t=1756747285; x=1757352085; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RTyD0Fn6bbjlULr96B4sZT8TrLBKaOXaASlNy+KFpbY=;
+ b=i4RnK0YRDvMmOjBJ33LIKL7yj5QU0tuccfzCoNKf+RrfMyqcas0ZZ1Px2oQVQAVZdq
+ dWWQ9x3Maxjuj6EmNQSVC1NKOHYI7cUQ33cBGDJcfvuCMjo924e1lEOTwYKQ+In9Bpn2
+ Xu3fZE/HRH0XxjQxBWFQamLWsTvZWbCuyT5i3aaJaC4wdCOH1hlMb/Hrl9yIbqJOWgnu
+ W6xN7CRklnKGFxk+ZMOpC/mvplFu2Sg4SJtZ1Z/Zakb8IRtpBf2kUIPUwL7pLfz8he4z
+ IG6iIYki40HJYO3m48GIKuIWo3em5WStgPClAfVn5m3AbUdDM+nhbJnol1d6U5Qb74WN
+ KHAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756746598; x=1757351398;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mWm75LlarvNPNkG/j1YdIDdAaspy5HO2BeQIm0j5o6s=;
- b=DecngE25xezHLhuzgeYJW2e5VU50UZqm9WqzULVfm2XtksPzZgIl9ANeLFvsSbGGXO
- QjatTS2p3e2TGLxhNfgQClYP0Dwz4o1btjl4QQhWm6pQSceHWd20hLXP1q1Mt7dgMy6K
- ZmRCbNf2wijSH/FwseahiYGBYrc0q1geTfKsteNkMUaJJsL3nTpvpcMlGUjkjvNXXBWE
- OWuQJq2SZ0ahQueGre/b5L36opk92ZdlX8uzLm6G6G+LlUTqH42Ei4LJfoAVKcvO0zuf
- f3IBSHF8+jLYf8rVLH1taRjKgVoHr1imPzGOdFZWToKGWGSGGiuWSlfP3VpScFpHyA6I
- eb8Q==
+ d=1e100.net; s=20230601; t=1756747285; x=1757352085;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RTyD0Fn6bbjlULr96B4sZT8TrLBKaOXaASlNy+KFpbY=;
+ b=nKGnvrVD+a2rExgRNHfEGf+iqc638y5Wf7awSdefA+ysNqeew8O41daVeVDZi8w9s/
+ yhjpmpilu4t9DcRytamftONDC8u2hKnWMA91iCW4B4S3vll17MRwwl/bOHLXkYXStGVt
+ uInzq+vn+RR3QXUbUKFMzSg2opLFPDoHYUGRKPxD+C+0NpGVf5LM4Bz6DD5la4yWO7Ck
+ nxb9kJP4Rcu1QwfyRUM1nbjkX0LLryS67cqX1gemZvb4mRQ0124xnfwa9/6FR1m/JhDw
+ cVpffjDpQYnH9anEWAVoCe0gH4aS/XAYyEGsZMrETS6uhg70jhp/ToJiycUZn/F0dnLv
+ FfWg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXqT5JBgqCws8aNUBfTEe1L8kcV7mZHEB5MfZs/AlTQVt1XClSkuX5L3tJVjr6RODCFqcCJInhPXBa1@nongnu.org
-X-Gm-Message-State: AOJu0YyjsDcFxSiE/kPLHhRZ5sJjopGvoHu8NQsWR5sF63xlx/gCFLmm
- v688bGoeFq9m84hS8MzbZNRdm8uzN52Y0gFtyqpKzP0Xs+EvPlwehDjG+W+PIvicTWFyf3EXtcI
- jHu7erXO26YcnOhFiYSUFJTHqMBlXfbiwecABKnWScA==
-X-Gm-Gg: ASbGncvDX9sFvX6h26gdcF+Kt3Ohvb59eKGT54jOK5iNF5C7jAZmZwrgPP5hZJzRx6L
- wZQFVLNJbDpj0d7U3A4Lct3m1E7EKKgrYIYHofY7UmpDHZWamqgLzX+370PCcTQ7Cd3Dndj898v
- lSYmJKKPhzPZZiGc/OkSYjGpS8OMA7gH6rSad6iyGp05HdtQMzT3cnan+8yQypN9f6v3UnvYKTM
- /+mZvgO
-X-Google-Smtp-Source: AGHT+IERTXHqlXXU39mvv5axTI9DNn+sVagnssYa+KVH5QXxHSA0PR8s+lbWdjQfl/g6dqIX3J7EdL/C2hw6Y+v7CeA=
-X-Received: by 2002:a05:690c:61ca:b0:723:89bb:7c63 with SMTP id
- 00721157ae682-72389bb8b40mr41845077b3.14.1756746597452; Mon, 01 Sep 2025
- 10:09:57 -0700 (PDT)
+ AJvYcCVazJaOjSvqWWzlxF7SxWDRGVKaiw4SL4OjpTOEKzP868oq/uD0/lADRgC+txCxp2uoZxFrRMiBTCvd@nongnu.org
+X-Gm-Message-State: AOJu0YxZy9aSLWhmTuC9qXVAkK95qYE4WqXjPwlA3YAw9xXduzhF1MWQ
+ Pa7FQjJ6m4oaPXa9pOlzc4ysTSikC67vqw/W78EW4Ubxz4IvzX0mk6Mo6YVlXjEuj3G9jOVa59w
+ nXJ4+wgLXm2/OYU2xHv/KrApcX6bGRpL6OIJWi8/6Og==
+X-Gm-Gg: ASbGncuO3XCWYem6iysC+9t/YTONtghQ0Ewp8mO7BS/X7/GBKGumcuJZrCTYeg217Ou
+ +4AzG/WcCfrNt32+DasqT0BPIPjKyUMxJmjrZMYxvC6JkAQGDRr742ou+OIwoeK560C7j+Fd+KI
+ 4KomczEtJjqPGYQdtdv5eJ3QIreK1WkKwXVcGjLkSO0s2RgDzZsrGpUkk7dfVOeCKdCVWJrpKc6
+ sZIXGrs
+X-Google-Smtp-Source: AGHT+IEM4LWO9XF6/p6tzvHWtlI8xKRmDaB562+uYVGjDHh5dpBaivNV/mUAMAFq97Wwnjtgjw2hBy1S+SFWm73u5+s=
+X-Received: by 2002:a05:690c:7088:b0:71f:f3bc:3b9 with SMTP id
+ 00721157ae682-722764aca8cmr93519497b3.29.1756747285163; Mon, 01 Sep 2025
+ 10:21:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250822092410.25833-1-cjchen@igel.co.jp>
- <20250822092410.25833-2-cjchen@igel.co.jp>
-In-Reply-To: <20250822092410.25833-2-cjchen@igel.co.jp>
+ <20250822092410.25833-6-cjchen@igel.co.jp>
+In-Reply-To: <20250822092410.25833-6-cjchen@igel.co.jp>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 1 Sep 2025 18:09:45 +0100
-X-Gm-Features: Ac12FXyp5aoGFJCJISjg0rWTbnKib39-xtFSHoOxLlgVVJx173cxOAbUvbrHHzc
-Message-ID: <CAFEAcA8M6EAeEqSkJG-D+t=+3D4T99UoVNe94nfhRGxc80=PAw@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 1/9] doc/devel/memory.rst: additional explanation
- for unaligned access
+Date: Mon, 1 Sep 2025 18:21:13 +0100
+X-Gm-Features: Ac12FXyJI2XnjPtE5F4YxZ1Q2oPpPsqvK45yYj6G0ijTh80jOYqdxYimZXMihn8
+Message-ID: <CAFEAcA9EgODY_wR2j9Bsy66P-CRfdTBPRSfYeJ1MGTGyEUDouw@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 5/9] system/memory: support unaligned access
 To: CJ Chen <cjchen@igel.co.jp>
 Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org, 
  qemu-arm@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
@@ -86,16 +84,15 @@ Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
  Tomoyuki Hirose <hrstmyk811m@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
- envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112d;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x112d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,89 +110,212 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On Fri, 22 Aug 2025 at 10:25, CJ Chen <cjchen@igel.co.jp> wrote:
 >
-> Add documentation to clarify that if `.valid.unaligned =3D true` but
-> `.impl.unaligned =3D false`, QEMU=E2=80=99s memory core will automaticall=
-y split
-> unaligned guest accesses into multiple aligned accesses. This helps
-> devices avoid implementing their own unaligned logic, but can be
-> problematic for devices with side-effect-heavy registers. Also note
-> that setting `.valid.unaligned =3D false` together with
-> `.impl.unaligned =3D true` is invalid, as it contradicts itself and
-> will trigger an assertion.
+> From: Tomoyuki Hirose <hrstmyk811m@gmail.com>
 >
+> The previous code ignored 'impl.unaligned' and handled unaligned
+> accesses as-is. But this implementation could not emulate specific
+> registers of some devices that allow unaligned access such as xHCI
+> Host Controller Capability Registers.
+>
+> This commit emulates an unaligned access with multiple aligned
+> accesses. Additionally, the overwriting of the max access size is
+> removed to retrieve the actual max access size.
+>
+> Based-on-a-patch-by: Tomoyuki Hirose <hrstmyk811m@gmail.com>
 > Signed-off-by: CJ Chen <cjchen@igel.co.jp>
-> Acked-by: Tomoyuki Hirose <hrstmyk811m@gmail.com>
-> Suggested-by: Peter Maydell <peter.maydell@linaro.org>
+> Tested-by: CJ Chen <cjchen@igel.co.jp>
+> Reported-by: Tomoyuki Hirose <hrstmyk811m@gmail.com>
 > ---
->  docs/devel/memory.rst | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
+>  system/memory.c  | 147 ++++++++++++++++++++++++++++++++++++++---------
+>  system/physmem.c |   8 ---
+>  2 files changed, 119 insertions(+), 36 deletions(-)
 >
-> diff --git a/docs/devel/memory.rst b/docs/devel/memory.rst
-> index 57fb2aec76..71d7de7ae5 100644
-> --- a/docs/devel/memory.rst
-> +++ b/docs/devel/memory.rst
-> @@ -365,6 +365,24 @@ callbacks are called:
->  - .impl.unaligned specifies that the *implementation* supports unaligned
->    accesses; if false, unaligned accesses will be emulated by two aligned
->    accesses.
-> +- Additionally, if .valid.unaligned =3D true but .impl.unaligned =3D fal=
-se, the
-> +  memory core will emulate each unaligned guest access by splitting it i=
-nto
-> +  multiple aligned sub-accesses.
-
-Can we say in more specific detail what the core handling is, please?
-I should be able to read this documentation and know exactly what
-extra accesses I will get to my device. (Then I can make the decision
-about whether I will be OK with those or if I will need to do the
-unaligned handling myself.)
-
-Documenting the behaviour we intend to provide will also make it
-easier to review the implementation and the tests in the later patches.
-
-> This ensures that devices which only handle
-> +  aligned requests do not need to implement unaligned logic themselves. =
-For
-> +  example, see xhci_cap_ops in hw/usb/hcd-xhci.c: it sets  .valid.unalig=
-ned
-> +  =3D true so guests can do unaligned reads on the xHCI Capability Regis=
-ters,
-> +  while keeping .impl.unaligned =3D false to rely on the core splitting =
-logic.
-> +  However, if a device=E2=80=99s registers have side effects on read or =
-write, this
-> +  extra splitting can introduce undesired behavior. Specifically, for de=
-vices
-> +  whose registers trigger state changes on each read/write, splitting an=
- access
-> +  can lead to reading or writing bytes beyond the originally requested s=
-ubrange
-> +  thereby triggering repeated or otherwise unintended register side effe=
-cts.
-> +  In such cases, one should set .valid.unaligned =3D false to reject una=
-ligned
-> +  accesses entirely.
-
-.valid.unaligned has to match what the real hardware requires.
-So we should instead say something like:
-
- If your device must support unaligned accesses and these extra
- accesses would cause unintended side-effects, then you must set
- .impl.unaligned and handle the unaligned access cases yourself.
-
-> +- Conversely, if .valid.unaligned =3D false but .impl.unaligned =3D true=
-,
-> +  that setting is considered invalid; it claims unaligned access is allo=
-wed
-> +  by the implementation yet disallowed for the device. QEMU enforces thi=
-s with
-> +  an assertion to prevent contradictory usage.
+> diff --git a/system/memory.c b/system/memory.c
+> index 63b983efcd..d6071b4414 100644
+> --- a/system/memory.c
+> +++ b/system/memory.c
+> @@ -509,27 +509,118 @@ static MemTxResult memory_region_write_with_attrs_accessor(MemoryRegion *mr,
+>      return mr->ops->write_with_attrs(mr->opaque, addr, tmp, size, attrs);
+>  }
 >
->  API Reference
->  -------------
-> --
-> 2.25.1
+> +typedef MemTxResult (*MemoryRegionAccessFn)(MemoryRegion *mr,
+> +                                            hwaddr addr,
+> +                                            uint64_t *value,
+> +                                            unsigned size,
+> +                                            signed shift,
+> +                                            uint64_t mask,
+> +                                            MemTxAttrs attrs);
+
+So we now have access_emulation and access_fastpath and
+the function is_access_fastpath() to select between them.
+Can we have a comment please that says what the two are
+doing and what the criterion is that lets us pick the fast path ?
+
+> +
+> +static MemTxResult access_emulation(hwaddr addr,
+> +                                    uint64_t *value,
+> +                                    unsigned int size,
+> +                                    unsigned int access_size_min,
+> +                                    unsigned int access_size_max,
+> +                                    MemoryRegion *mr,
+> +                                    MemTxAttrs attrs,
+> +                                    MemoryRegionAccessFn access_fn_read,
+> +                                    MemoryRegionAccessFn access_fn_write,
+> +                                    bool is_write)
+> +{
+> +    hwaddr a;
+> +    uint8_t *d;
+> +    uint64_t v;
+> +    MemTxResult r = MEMTX_OK;
+> +    bool is_big_endian = devend_big_endian(mr->ops->endianness);
+> +    void (*store)(void *, int, uint64_t) = is_big_endian ? stn_be_p : stn_le_p;
+> +    uint64_t (*load)(const void *, int) = is_big_endian ? ldn_be_p : ldn_le_p;
+
+Please use a typedef for all function pointers: it makes it
+much easier to read.
+
+> +    size_t access_size = MAX(MIN(size, access_size_max), access_size_min);
+> +    uint64_t access_mask = MAKE_64BIT_MASK(0, access_size * 8);
+> +    hwaddr round_down = mr->ops->impl.unaligned && addr + size <= mr->size ?
+> +        0 : addr % access_size;
+> +    hwaddr start = addr - round_down;
+> +    hwaddr tail = addr + size <= mr->size ? addr + size : mr->size;
+> +    uint8_t data[16] = {0};
+> +    g_assert(size <= 8);
+
+There should be a blank line after the last variable definition
+and before the g_assert() here.
+
+> +
+> +    for (a = start, d = data, v = 0; a < tail;
+> +         a += access_size, d += access_size, v = 0) {
+> +        r |= access_fn_read(mr, a, &v, access_size, 0, access_mask,
+> +                            attrs);
+> +        store(d, access_size, v);
+> +    }
+> +    if (is_write) {
+> +        stn_he_p(&data[round_down], size, load(value, size));
+> +        for (a = start, d = data; a < tail;
+> +             a += access_size, d += access_size) {
+> +            v = load(d, access_size);
+> +            r |= access_fn_write(mr, a, &v, access_size, 0, access_mask,
+> +                                 attrs);
+> +        }
+> +    } else {
+> +        store(value, size, ldn_he_p(&data[round_down], size));
+> +    }
+
+This would be much easier to review if there were comments
+that said what the intention/design of the code was.
+
+> +
+> +    return r;
+> +}
+> +
+> +static bool is_access_fastpath(hwaddr addr,
+> +                               unsigned int size,
+> +                               unsigned int access_size_min,
+> +                               unsigned int access_size_max,
+> +                               MemoryRegion *mr)
+> +{
+> +    size_t access_size = MAX(MIN(size, access_size_max), access_size_min);
+> +    hwaddr round_down = mr->ops->impl.unaligned && addr + size <= mr->size ?
+> +        0 : addr % access_size;
+> +
+> +    return round_down == 0 && access_size <= size;
+> +}
+> +
+> +static MemTxResult access_fastpath(hwaddr addr,
+> +                                   uint64_t *value,
+> +                                   unsigned int size,
+> +                                   unsigned int access_size_min,
+> +                                   unsigned int access_size_max,
+> +                                   MemoryRegion *mr,
+> +                                   MemTxAttrs attrs,
+> +                                   MemoryRegionAccessFn fastpath)
+> +{
+> +    MemTxResult r = MEMTX_OK;
+> +    size_t access_size = MAX(MIN(size, access_size_max), access_size_min);
+> +    uint64_t access_mask = MAKE_64BIT_MASK(0, access_size * 8);
+> +
+> +    if (devend_big_endian(mr->ops->endianness)) {
+> +        for (size_t i = 0; i < size; i += access_size) {
+> +            r |= fastpath(mr, addr + i, value, access_size,
+> +                          (size - access_size - i) * 8, access_mask, attrs);
+> +        }
+> +    } else {
+> +        for (size_t i = 0; i < size; i += access_size) {
+> +            r |= fastpath(mr, addr + i, value, access_size,
+> +                          i * 8, access_mask, attrs);
+> +        }
+> +    }
+> +
+> +    return r;
+> +}
+> +
+>  static MemTxResult access_with_adjusted_size(hwaddr addr,
+>                                        uint64_t *value,
+>                                        unsigned size,
+>                                        unsigned access_size_min,
+>                                        unsigned access_size_max,
+> -                                      MemTxResult (*access_fn)
+> -                                                  (MemoryRegion *mr,
+> -                                                   hwaddr addr,
+> -                                                   uint64_t *value,
+> -                                                   unsigned size,
+> -                                                   signed shift,
+> -                                                   uint64_t mask,
+> -                                                   MemTxAttrs attrs),
+> +                                      MemoryRegionAccessFn access_fn_read,
+> +                                      MemoryRegionAccessFn access_fn_write,
+> +                                      bool is_write,
+>                                        MemoryRegion *mr,
+>                                        MemTxAttrs attrs)
+>  {
+> -    uint64_t access_mask;
+> -    unsigned access_size;
+> -    unsigned i;
+>      MemTxResult r = MEMTX_OK;
+>      bool reentrancy_guard_applied = false;
+> +    MemoryRegionAccessFn access_fn_fastpath =
+> +        is_write ? access_fn_write : access_fn_read;
 >
+>      if (!access_size_min) {
+>          access_size_min = 1;
+> @@ -551,20 +642,16 @@ static MemTxResult access_with_adjusted_size(hwaddr addr,
+>          reentrancy_guard_applied = true;
+>      }
+>
+> -    /* FIXME: support unaligned access? */
+> -    access_size = MAX(MIN(size, access_size_max), access_size_min);
+> -    access_mask = MAKE_64BIT_MASK(0, access_size * 8);
+> -    if (devend_big_endian(mr->ops->endianness)) {
+> -        for (i = 0; i < size; i += access_size) {
+> -            r |= access_fn(mr, addr + i, value, access_size,
+> -                        (size - access_size - i) * 8, access_mask, attrs);
+> -        }
+> +    if (is_access_fastpath(addr, size, access_size_min, access_size_max, mr)) {
+> +        r |= access_fastpath(addr, value, size,
+> +                             access_size_min, access_size_max, mr, attrs,
+> +                             access_fn_fastpath);
+>      } else {
+> -        for (i = 0; i < size; i += access_size) {
+> -            r |= access_fn(mr, addr + i, value, access_size, i * 8,
+> -                        access_mask, attrs);
+> -        }
+> +        r |= access_emulation(addr, value, size,
+> +                              access_size_min, access_size_max, mr, attrs,
+> +                              access_fn_read, access_fn_write, is_write);
+>      }
+
+Because you've removed the loops from this function, we don't
+any longer need to set r to MEMTX_OK and then OR in the
+return value from access_whatever; we can just set r = ...
+
+> +
+>      if (mr->dev && reentrancy_guard_applied) {
+>          mr->dev->mem_reentrancy_guard.engaged_in_io = false;
+>      }
 
 thanks
 -- PMM
