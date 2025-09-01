@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34289CA0FF0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:55:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4601ACA1005
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:56:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut33f-0006RO-A0; Mon, 01 Sep 2025 07:50:47 -0400
+	id 1ut2zs-0008AC-Nt; Mon, 01 Sep 2025 07:46:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1ut31R-0003Xj-NG; Mon, 01 Sep 2025 07:48:32 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1ut2zD-0006sZ-Bs; Mon, 01 Sep 2025 07:46:13 -0400
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1ut318-0001nq-9M; Mon, 01 Sep 2025 07:48:26 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-248c7f955a2so37342945ad.2; 
- Mon, 01 Sep 2025 04:48:04 -0700 (PDT)
+ id 1ut2z5-0001L9-7e; Mon, 01 Sep 2025 07:46:09 -0400
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-b47175d02dcso3633218a12.3; 
+ Mon, 01 Sep 2025 04:45:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756727283; x=1757332083; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1756727157; x=1757331957; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NkF/SrWBRt7mpVRvpwQdPdICO84Pyhp/wixwRcKtvEU=;
- b=k8yGjVed8FRLRj4fqLIK9xLS9An/GsNSP3SXXofpSmk5qPF/9gI5XMn/9us2q+3iSh
- hEehByRmXmXXftwmb3S0+dTiZGhfq+r5yjybGMyOqKy7NxK+RSEBozuyrKI4JQf3EUs6
- 1PxWY+VeXnFGPRhIEe9v4XnBuzDChFl2anexxD/gL9rBTsY0OiluDhEUCKhvoBBQ3NQ+
- sXYFXhs5NPMlYDMzYSmC/FA3nOEAWQG8Auoqe1t0sKb+R4A/a/RM0OXG2Rk1WLA5hCZf
- NUqFvPFtvNiq5m0+9Z+J1Ka5An3VhyX5WdvsojWFNcFkoP2wGC9PkgJJ7WRef0iWKlxL
- QxPA==
+ bh=UlFgd5lXojT+BzMbp7XrzAMP3YD6Ncv6gWAYJEjREGE=;
+ b=EQCDXNfJ6HjdIVBmxrTXcyYmlRqkYhQnNAy/3SrdLmtPOhSIIIFbszh7qjCZSmsIow
+ jV4lfCdGp81c9qrY5zavkMIDwsfwVNOJLFTC2pIG/OdKMvME4a3u8J2pQbap9gLsgDWG
+ x4OpCFAr3iGSPncfAny5BnYZnWpcR+b3zHuRd8+b3Q5cQGdqMaQa+Y05jhaLWu8D9FpZ
+ 1ABRVxYHQYNPxTXp7NP5snn1SOQ4ymya/M1XZRlzGXz9OuLFCVM3JpArCnLG7yD3QXD4
+ 4JH+HZRC+aaZ8o2HzE4WlJBsUbkuFs+6jFeCoJLluYoLFjNBu8eU0gY5EYwgbsuKC8Ps
+ 4KIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756727283; x=1757332083;
+ d=1e100.net; s=20230601; t=1756727157; x=1757331957;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NkF/SrWBRt7mpVRvpwQdPdICO84Pyhp/wixwRcKtvEU=;
- b=H9G/t3rnM4jtAmUkwyqdUs8SPQdaEKsgpjtb4foU9fHuEdW8FPSZFXF7MxFzgn0jEs
- KTYIFHOeF7BURfg5C35pN3m2qsyyySY29IKDVRcHnH5q+yoJR4PfmaeVu4OsomnMj0Ki
- 1MwABDwMJJd7R6bDL1quV165YOtA7AFwoUo7hcrAGvh2bsMxMQVOUF9DgCX0QSMIcDwk
- EVSxQ49VCsvkvMmQEZtJ2/JuQd1AFSH4/VBfk2kntQ7Uhl415TyJdnPygEeSC8RzvswN
- wfZUXPdCaJzVIObGRfTotOj0I5M7TkPWXLKs+3EeK4aX4gX8AvlD5v5hO6CjigHm412f
- RXgw==
+ bh=UlFgd5lXojT+BzMbp7XrzAMP3YD6Ncv6gWAYJEjREGE=;
+ b=u2Of6GuO89vGRX48F7nQopqzfBpvbMdK88C3iSkCgbuNh2NMNlfcNThP3hPpaTku9a
+ b+aO1oCaD6vm8vZe0DB2iLxC2cSLGnkokBmuzaR7mM6N82p0KJaUWbntGiTiRl537n39
+ tEvTao55z7cxpmkNWDPpzAEl7aG4mnWjN+TdQ60fUWYSQToE7vxe1EUlYZNSlvgqOjcw
+ SIgCLxvXvZSTbZfaDOZMpPevGeRjsmLAfXEPQ55dAE49nH1wLHQfIYLDLxdt7X/HWD8/
+ rkD2xugkUnamWiBvkC32NjWbtl77xG9oP5pnSoYU0E5rArstrgCIEeGTK1l0L1y09ZLX
+ 8f8w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVttcoZ0YKculnCcx/ZphYTBOSnyusa813kCcWHdlZtujLI9RPBYGS/nq/50IjbaKdHbCFplWnwfA==@nongnu.org,
- AJvYcCXCQXiYx9EzQL1WdMmBDTjea+iW+kfJAS+Kpm+Tt0emzuPGDsJ6DViSuso1vdlOe1oN/hwN0sw/M26JwA==@nongnu.org
-X-Gm-Message-State: AOJu0YzE5CMq9Cq8JXI1s9pIq8wrZ8+sy6aQ3y/bI6lKIWQtloxDIBAo
- pNePuSkpkaqPLKAyzNdvr71Nz1X7LZmIA6BkLCeVWwA1HStL9C9oVqiCgD9YAQ==
-X-Gm-Gg: ASbGnctTyXsl2GY7T2zpm8TXqLf5N1pFR3WdvhfxfVDqau4xDoSWL/fh6a89naQNDPh
- TCNBgf22zW725uedFXUPeKpnso/YkJBxNSwkXjF4W2lIPriLuyQVSViMAIRwlFLxa3qB7FKXPhK
- NYN0F6jT9Ecs883aTZx9ZlArw36XT/eb18hgHHwU3EGjWaHkVZl62mFkwECBTrlM5+kfheP3c3Y
- tYvNtREb3o0HChDgh6UikrXS3pYP6wfbQNDeVfiQ1cegz1r2QmHwQyrUInDkIRwyU+opq1Y+VH3
- roGJu1tiKOBolSnzW15HR6a7cpQKfIYqRGUYK3XmnBI+lKMJ0wgr767l1Z2iXAf5AePAc4/GaLn
- idInppHOewoIXsam4kzFJzQ==
-X-Google-Smtp-Source: AGHT+IGUn25ZeeJI9WLAckX6lUgqQ7vUWG/PMX7jQQzeUj//EkzeoPWDh8SsJSFxSR46d+uLY0ukJA==
-X-Received: by 2002:a17:902:f641:b0:24a:9475:3db2 with SMTP id
- d9443c01a7336-24a94754493mr90911585ad.35.1756727283063; 
- Mon, 01 Sep 2025 04:48:03 -0700 (PDT)
+ AJvYcCU9VnJJOY8X3UT8VpYFoRzy9bftIu4bBQ21ouSbTXr4BMY3NwrUEuTwGpV/OsNiIDpkD7m8OfbYhw==@nongnu.org,
+ AJvYcCXzQ7SRjJkz3hFjH4fN8LXoxM/aEnQNPb3GMunhhTf45mWaSxX/BhOAFZUYhH7eQtw49c4nKC2lsvD5Kw==@nongnu.org
+X-Gm-Message-State: AOJu0Yyy66TKX/Z6vLbhCofknEff6Ln7KkZZFRwF8VkxaNKGjpZRXYyL
+ GvDygghpXRK6R/QdtOTvUZCwdL1HRi+RebQRp6cQbAF/C0SliJlt2jsDq13wig==
+X-Gm-Gg: ASbGncuvDXOGX6SF+qewR99r4temKnNdX8GX4a09mB5PZPoTTxTGUIomuNGwQ84RXEV
+ o6y78lOM+uaz8n6OtZ6VPj+6vJtKouW71PZuhpk3gqxq5woCc+i4kjoKesEAv1l1M8aMaLCuM/g
+ A1hWADLNnODAVTZ5Uj2kOEo+RU0hDf+i2ZXlXj7UixeE68c9sdIMr40CB3BYcgfpRk/3cGDc0Kw
+ RAUnLTRBkb/8qJbocue/dWhB5WtI4d4thiYwjZbEh0GyHEc6pXJLpclaTyPIsSZjFqs0/nMM2G8
+ M8sC0f0H85aCKtC1PgYABWMFyAal2EgcgAXmzFe/oKrsZpSLQSn5ZTtoABQhB0lH10bD0H0FcTJ
+ QXI8qfd3DiOYMQ5m08bAwQuZ27ZJZSzmF
+X-Google-Smtp-Source: AGHT+IEkUCnP6JXuWT8gfRp2jur/WnSaq6ah7CS9FpCZKPdUEINQcJ234j5iV+DIBRSHhcjK9DgbsA==
+X-Received: by 2002:a17:902:cf43:b0:249:c2f4:5af8 with SMTP id
+ d9443c01a7336-249c2f47c40mr90316775ad.33.1756727156619; 
+ Mon, 01 Sep 2025 04:45:56 -0700 (PDT)
 Received: from ktock.. ([240d:1a:3b6:8b00:750a:cb0b:f0f9:68f4])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-249065a8036sm103038775ad.129.2025.09.01.04.47.57
+ d9443c01a7336-249065a8036sm103038775ad.129.2025.09.01.04.45.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 04:48:02 -0700 (PDT)
+ Mon, 01 Sep 2025 04:45:55 -0700 (PDT)
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -80,23 +80,23 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Stefan Hajnoczi <stefanha@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, ktokunaga.mail@gmail.com
-Subject: [PATCH v3 28/35] tcg/wasm: Implement instantiation of Wasm binary
-Date: Mon,  1 Sep 2025 20:44:30 +0900
-Message-ID: <c0d05186cd431515eb3f97a7c860ec5b6deac0a5.1756724464.git.ktokunaga.mail@gmail.com>
+Subject: [PATCH v3 06/35] tcg/wasm: Add register-related definitions
+Date: Mon,  1 Sep 2025 20:44:08 +0900
+Message-ID: <1582a3fb83f9a0f12a988bc159319362f69676e6.1756724464.git.ktokunaga.mail@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756724464.git.ktokunaga.mail@gmail.com>
 References: <cover.1756724464.git.ktokunaga.mail@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, T_SPF_HELO_TEMPERROR=0.01,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,85 +112,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-instantiate_wasm is a function that instantiates a TB's Wasm binary,
-importing the functions as specified by its arguments. Following the header
-definition in wasm/tcg-target.c.inc, QEMU's memory is imported into the
-module as "env.memory", and helper functions are imported as "helper.<idx>".
-
-The instantiated Wasm module is imported to QEMU using Emscripten's
-"addFunction" feature[1] which returns a function pointer. This allows QEMU
-to call this module directly from C code via that pointer.
-
-Since the subarray() method doesn't accept a BigInt value which is used for
-the 64bit pointer value, it is converted to a Number (i53) using
-bigintToI53Checked method of Emscripten. Although this conversion (64bit to
-53bit) drops higher bits, the maximum memory size of the engine
-implementations is currently limited to 16GiB[2] so we can assume that the
-pointers are within the Number's range.
-
-Note that since FireFox 138, WebAssembly.Module no longer accepts a
-SharedArrayBuffer as input [3] as reported by Nicolas Vandeginste in my
-fork[4]. This commit ensures that WebAssembly.Module() is passed a
-Uint8Array created from the binary data on a SharedArrayBuffer.
-
-[1] https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#calling-javascript-functions-as-function-pointers-from-c
-[2] https://webassembly.github.io/memory64/js-api/#limits
-[3] https://bugzilla.mozilla.org/show_bug.cgi?id=1965217
-[4] https://github.com/ktock/qemu-wasm/pull/25
+This commit adds the register allocation definitions and register names to
+the Wasm backend. As in TCI, call arguments are stored on the stack buffer
+and the return value is placed in the registers R0 and R1 when needed.
 
 Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 ---
- tcg/wasm.c | 37 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+ tcg/wasm/tcg-target.c.inc | 77 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 77 insertions(+)
+ create mode 100644 tcg/wasm/tcg-target.c.inc
 
-diff --git a/tcg/wasm.c b/tcg/wasm.c
-index 1cc2e45e77..15db1f9a8a 100644
---- a/tcg/wasm.c
-+++ b/tcg/wasm.c
-@@ -23,6 +23,43 @@
- #include "tcg/tcg-ldst.h"
- #include "tcg/helper-info.h"
- #include <ffi.h>
-+#include <emscripten.h>
+V3:
+- Although checkpatch.pl reports the following error in tcg/wasm/tcg-target.c.inc,
+  this file is based on the TCI code so it is preserved as-is.
+  > New file 'tcg/wasm/tcg-target.c.inc' must not have license boilerplate
+  > header text, only the SPDX-License-Identifier, unless this file was
+  > copied from existing code already having such text.
+
+diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c.inc
+new file mode 100644
+index 0000000000..3affc17232
+--- /dev/null
++++ b/tcg/wasm/tcg-target.c.inc
+@@ -0,0 +1,77 @@
++/* SPDX-License-Identifier: MIT */
++/*
++ * Tiny Code Generator for QEMU
++ *
++ * Copyright (c) 2009, 2011 Stefan Weil
++ *
++ * Based on tci/tcg-target.c.inc
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a copy
++ * of this software and associated documentation files (the "Software"), to deal
++ * in the Software without restriction, including without limitation the rights
++ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ * copies of the Software, and to permit persons to whom the Software is
++ * furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++ * THE SOFTWARE.
++ */
 +
-+#define EM_JS_PRE(ret, name, args, body...) EM_JS(ret, name, args, body)
++static const int tcg_target_reg_alloc_order[] = {
++    TCG_REG_R2,
++    TCG_REG_R3,
++    TCG_REG_R4,
++    TCG_REG_R5,
++    TCG_REG_R6,
++    TCG_REG_R7,
++    TCG_REG_R8,
++    TCG_REG_R9,
++    TCG_REG_R10,
++    TCG_REG_R11,
++    TCG_REG_R12,
++    TCG_REG_R13,
++    TCG_REG_R14,
++    TCG_REG_R15,
++    /* 2 of these are call clobbered, so use them last. */
++    TCG_REG_R1,
++    TCG_REG_R0,
++};
 +
-+#define DEC_PTR(p) bigintToI53Checked(p)
-+#define ENC_PTR(p) BigInt(p)
-+#if defined(WASM64_MEMORY64_2)
-+#define ENC_WASM_TABLE_IDX(i) Number(i)
-+#else
-+#define ENC_WASM_TABLE_IDX(i) i
++#ifdef CONFIG_DEBUG_TCG
++static const char *const tcg_target_reg_names[TCG_TARGET_NB_REGS] = {
++    "r00",
++    "r01",
++    "r02",
++    "r03",
++    "r04",
++    "r05",
++    "r06",
++    "r07",
++    "r08",
++    "r09",
++    "r10",
++    "r11",
++    "r12",
++    "r13",
++    "r14",
++    "r15",
++};
 +#endif
 +
-+EM_JS_PRE(void*, instantiate_wasm, (void *wasm_begin,
-+                                    int wasm_size,
-+                                    void *import_vec_begin,
-+                                    int import_vec_size),
-+{
-+    const memory_v = new DataView(HEAP8.buffer);
-+    const wasm = HEAP8.subarray(DEC_PTR(wasm_begin),
-+                                DEC_PTR(wasm_begin) + wasm_size);
-+    var helper = {};
-+    const entsize = TCG_TARGET_REG_BITS / 8;
-+    for (var i = 0; i < import_vec_size / entsize; i++) {
-+        const idx = memory_v.getBigInt64(
-+            DEC_PTR(import_vec_begin) + i * entsize, true);
-+        helper[i] = wasmTable.get(ENC_WASM_TABLE_IDX(idx));
-+    }
-+    const mod = new WebAssembly.Module(new Uint8Array(wasm));
-+    const inst = new WebAssembly.Instance(mod, {
-+            "env" : {
-+                "memory" : wasmMemory,
-+            },
-+            "helper" : helper,
-+    });
++/* No call arguments via registers.  All will be stored on the "stack". */
++static const int tcg_target_call_iarg_regs[] = { };
 +
-+    return ENC_PTR(addFunction(inst.exports.start, 'ii'));
-+});
- 
- __thread uintptr_t tci_tb_ptr;
- 
++static TCGReg tcg_target_call_oarg_reg(TCGCallReturnKind kind, int slot)
++{
++    tcg_debug_assert(kind == TCG_CALL_RET_NORMAL);
++    tcg_debug_assert(slot >= 0 && slot < 128 / TCG_TARGET_REG_BITS);
++    return TCG_REG_R0 + slot;
++}
 -- 
 2.43.0
 
