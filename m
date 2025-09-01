@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8652CCA1005
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:09:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3CFACA1002
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:17:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut2PN-0001R4-T3; Mon, 01 Sep 2025 07:09:10 -0400
+	id 1ut2Ww-0004FQ-PH; Mon, 01 Sep 2025 07:16:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ut2PM-0001Qn-HB
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 07:09:08 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ut2Wu-0004Ef-PV
+ for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 07:16:57 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ut2PK-00038j-DP
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 07:09:08 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-45b7c01a708so13472085e9.3
- for <qemu-riscv@nongnu.org>; Mon, 01 Sep 2025 04:09:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ut2Ws-0004fS-L2
+ for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 07:16:56 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-45b8e28b3c5so4209895e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 01 Sep 2025 04:16:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756724945; x=1757329745; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756725409; x=1757330209; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=sRHr5guPu7iMPr3nU1tfv6PHzbX40PpKttGsE7g8MxE=;
- b=eq+fYuGFkAA088V8hTVCC4rATQSqeo1ERzte1Tj7PE7q0p1m29mY+pXc0BpZmSKAdF
- x7BNioH1imtTgzpoeJ2dLR5fvTxfDNtOfDk+x9L3BnEHiHkuhRovtOP+hyh/KaH3GpwC
- Jo4R/f6nvoSTyxr4TfnF/DE5ngVYP/KvPZcKT4D0rDMA2vcoLXPoC9Jm+tT5tpHVVZmq
- 9rLl0sQkMiTJJ3fqVmec6AT43DnZe40OnLN2lOBES8lFNKFmmf/2uBXyrdDf5V6mi0OQ
- mS5QIvhdNWThCwCndNX1rzyhooA3XJ3yE8F06M7cJ+2sM7hhcmoFND5hRt5K3vOig1fK
- qqIw==
+ bh=SeDYy1DEgpcx4+sqiAQw9KNiJu2uZ5LQ1cRlI1CZNsQ=;
+ b=AFXhgxL4/wbsgdE9DlSToEyQE4tZ/du+BiD3xeo/Y13AqcC0D6fw87oveDDLxHX1gC
+ sYs1EsYc3SqHVhQDjpnekMhS7eLqw53TY3eRRnOXDmD2XlydzUHbZe6CZAu7eCdymYN9
+ fYXhjXz7H99u5dWVfoWJeqgaSs9oMVm5FshzljZy8r+smAfqXgRSsBWXn+10MPirdq2j
+ aXqkH+sL08YCFTlSvxf2MyPQWjfWNPf0fkKl8kPEaAYsOhtZ2JkM9MOzDvFS0ygTOaNp
+ gLtmPZvRhZ6Ej7feK+qdaY2npeV055uvYV3c657SHBzyaMC/s70YSA/MiTL3CFO9szoi
+ 9t0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756724945; x=1757329745;
+ d=1e100.net; s=20230601; t=1756725409; x=1757330209;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sRHr5guPu7iMPr3nU1tfv6PHzbX40PpKttGsE7g8MxE=;
- b=sJRSgGzPQf+CVXgccStoZivbZR1QOZhlK2O/C4b6VeRZi59ulx0BSZhUvYRu4s+7dI
- 9R6OTsqk0kg0hKjrvrKv9W766jEEYzTiy94CZAdvZwyfU23wtNVLnnlm9T7qFj5l/hal
- 1+88AaLPjeWpPftplA42lhutHcDHt0Bbl0MmaYPN2EGPcctNEc8O6NbIy3rqDMwvlMxb
- TeaDLwvgQ5WngTXHlUR/1xNG5U0k7kCtK/pO9mVEpCMMA1OC3nIfxkYHzKQuix5WAEfJ
- MrqK8Xfeth7FsWWqx8En+otbKAx+11w9E+T1IOn3JFX3eZFnIRhRcOdfKcRgpbR0IA8r
- xgtw==
-X-Gm-Message-State: AOJu0Ywh4b6TGOTKFxct0gBPjo7L26Fu+9uOMZsYbjc27ggq3sQrSKu7
- mg0pEbybuzSmdusT7dLLi7aW5g2WqVwdoh4vlJMgHXRpTTg+8II7h7Jr79X5Q92sPng=
-X-Gm-Gg: ASbGnctcgLgKn0QmhuUrOqZv3N6hsp7gudYa7smlI/PnX6O7NrN0J/3t89vrk7X+YHM
- GGyoz3T9iNNq3k8luGEQ1JS8bDVvBJOK8YWEYEWTScxwL70ZiRdDuDycaxrmR2s97qucxteduym
- f/PQsaTviuEJMjJqRmlDqbLiKsytBYlst7KAcmkJ2ixWCoZzJt6Ss6aX8DioLZc5d0J5LwR17GQ
- FrNGoEru0ndmEI3ttPBqwsj7pxXiyvRwoatkMrVx6yt84EthNG3ysQV2ioOgU4M1iH771p6FN1a
- 9KuOUy95fC1BG/CLRZ9d1Y1gRfN/SvfgGVuwAiKVbPtKE51JljH3OHHJ/xHBVL8jsLnLwCVR51Y
- eIUdDZluW1ZRty3d7ZnFLWsvWgu2Y8845IKOdbcrjGfFvpk+Reqj9lqJfUgTaW0CwJA==
-X-Google-Smtp-Source: AGHT+IFdSChrNZBgh+G+ZPiCNJM44gS23B8A9HZ9z2jgAbSZbaDgR1QCxTmRal7HhuVYQgcDCgbjyQ==
-X-Received: by 2002:a05:600c:1ca9:b0:45b:8c3f:7d5a with SMTP id
- 5b1f17b1804b1-45b8c3f7dc6mr30041875e9.4.1756724944622; 
- Mon, 01 Sep 2025 04:09:04 -0700 (PDT)
+ bh=SeDYy1DEgpcx4+sqiAQw9KNiJu2uZ5LQ1cRlI1CZNsQ=;
+ b=jpEvu+nXKB6NIz0xyOqyd17bW9J8x83vDAqPam5TqcRRCyOVypHDJTOtuR4ZBvkFdF
+ AxaLpas1T+LHT2EbL/ki/s8DFbe4EPE4qTVdDvMAU6qscCfgMKDHBcfFvAuqRaGJ6qzC
+ MADvathiMAkaKW9V5rqGMh4tarhr9kwcnVOC5QEj8eQTu28SY5BMb+fvBIcBjjPKIU15
+ f/5u9DK7HQ2s+qUPcQnsbu/dkLxvnRVt07lsHRgDEi13EwsUDfDLWI+iZ2Y4a46PYoA6
+ ADyjCixyIE8J7vstdoz2KQLtEsrrlniybp8mVnTIdBOVqYuQ/Jcb+X95ONMODmyw2+cJ
+ CGvw==
+X-Gm-Message-State: AOJu0YxacgM+8s60/RxnIDR2VUWmzXnkLj3JfeMVYGkeG06QpXVjbAPd
+ RJJrcQre9ithyYWjoS4LgYXrvBkUPgzANIoio+hWhpI6zYJYzMCIWABp3G3EPfAvlhQ=
+X-Gm-Gg: ASbGnctYlzQufr4xbkMa7vEcYV4bUrVJdaR83F1MMvAu5+27gnq28x/WfLiQ2E926As
+ RxiZm4b0JN9yHp7XlqGZD2duG8MWKcceDvaK2xAqZ2ol/CjOnS19UGOTZWKpTesvGN1GgVEuAXt
+ YXIjnW9KZSjtc58Er9du/Y+2lEFOZlAoKMUHOYoyyQghet8PGDTlas66nhTJTsBHYwdWEdLXT9J
+ CaVg6bTsJ9QQMmYaqVHmDG7uOdOQLcs9EDGvdzIU+HJY/6ciPrLiFjLtEmzepcrAD5H9QOcWEQS
+ UDyp7kAPl/UR7vyHUpQhyEl9w257jXyWavgxXrm6ytOE7dods1TxFKbY8ACAp8m3waDepvETqaG
+ YUhvG5QgAhsVZxznn/GJX7MgLKEuHMbYPP0HQoPEwdtCegxPX+E6CITgwfDOupEwraLn5eedY1w
+ 0T
+X-Google-Smtp-Source: AGHT+IGYCiFhbzG8hE1HPz2tiQL8ZlJymxcKbWzkZ5BTsFKvL13gq0SSyI64VNQEDIRSNJBBmZZl0Q==
+X-Received: by 2002:a05:600c:35d5:b0:45b:8996:997d with SMTP id
+ 5b1f17b1804b1-45b89969e0dmr46245175e9.16.1756725409510; 
+ Mon, 01 Sep 2025 04:16:49 -0700 (PDT)
 Received: from [192.168.69.207] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b7e8ab093sm157419385e9.22.2025.09.01.04.09.03
+ 5b1f17b1804b1-45b7e7d141esm157883025e9.2.2025.09.01.04.16.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 Sep 2025 04:09:04 -0700 (PDT)
-Message-ID: <f903021c-e4e4-46c3-ae6a-d03201ee76bf@linaro.org>
-Date: Mon, 1 Sep 2025 13:09:03 +0200
+ Mon, 01 Sep 2025 04:16:49 -0700 (PDT)
+Message-ID: <a250edb4-7df5-4e3d-9f82-361778d8612a@linaro.org>
+Date: Mon, 1 Sep 2025 13:16:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 07/14] target/riscv: Add Xmipslsp instructions
+Subject: Re: [PATCH v7 12/14] hw/pci: Allow explicit function numbers in pci
 To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
  "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
 Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
  "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>,
  "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
  "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>
-References: <20250717093833.402237-1-djordje.todorovic@htecgroup.com>
- <20250717093833.402237-8-djordje.todorovic@htecgroup.com>
- <87427d18-af1e-4815-b95f-75bae32720d3@linaro.org>
- <00c8547e-dbbc-44d3-bcdf-122899d7dc2e@htecgroup.com>
+References: <20250901102850.1172983-1-djordje.todorovic@htecgroup.com>
+ <20250901102850.1172983-13-djordje.todorovic@htecgroup.com>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <00c8547e-dbbc-44d3-bcdf-122899d7dc2e@htecgroup.com>
+In-Reply-To: <20250901102850.1172983-13-djordje.todorovic@htecgroup.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,45 +105,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 1/9/25 10:30, Djordje Todorovic wrote:
+On 1/9/25 12:29, Djordje Todorovic wrote:
+> Since there is no pch_gbe emulation, we could be using func other
+> than 0 when adding new devices to specific boards.
 > 
-> On 8. 8. 25. 18:02, Philippe Mathieu-Daudé wrote:
->> CAUTION: This email originated from outside of the organization. Do
->> not click links or open attachments unless you recognize the sender
->> and know the content is safe.
->>
->>
->> On 17/7/25 11:38, Djordje Todorovic wrote:
->>> Add MIPS P8700 ldp, lwp, sdp, swp instructions.
->>>
->>> Signed-off-by: Chao-ying Fu <cfu@mips.com>
->>> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
->>> ---
->>>    target/riscv/cpu.c                        |  3 +
->>>    target/riscv/cpu_cfg.h                    |  2 +-
->>>    target/riscv/cpu_cfg_fields.h.inc         |  1 +
->>>    target/riscv/insn_trans/trans_xmips.c.inc | 84 +++++++++++++++++++++++
->>>    target/riscv/xmips.decode                 | 23 +++++++
->>>    5 files changed, 112 insertions(+), 1 deletion(-)
->>
->>
->>> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
->>> index 9734963035..f35d477f27 100644
->>> --- a/target/riscv/cpu_cfg.h
->>> +++ b/target/riscv/cpu_cfg.h
->>> @@ -39,7 +39,7 @@ static inline bool always_true_p(const
->>> RISCVCPUConfig *cfg __attribute__((__unus
->>>
->>>    static inline bool has_xmips_p(const RISCVCPUConfig *cfg)
->>>    {
->>> -    return cfg->ext_xmipscbop || cfg->ext_xmipscmov;
->>> +    return cfg->ext_xmipscbop || cfg->ext_xmipscmov ||
->>> cfg->ext_xmipslsp;
->>
->> Checking for any XMIPS instruction implemented to return vendor
->> extension presence seems odd. Can you implement them separately?
+> Signed-off-by: Chao-ying Fu <cfu@mips.com>
+> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
+> ---
+>   hw/pci/pci.c | 15 +++++++++------
+>   1 file changed, 9 insertions(+), 6 deletions(-)
 > 
-> And I tried several options, but it only made the code even "more off" :(
+> diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+> index c70b5ceeba..0c6d11e145 100644
+> --- a/hw/pci/pci.c
+> +++ b/hw/pci/pci.c
+> @@ -984,14 +984,15 @@ static int pci_parse_devaddr(const char *addr, int *domp, int *busp,
+>   
+>       slot = val;
+>   
+> -    if (funcp != NULL) {
+> -        if (*e != '.')
+> +    if (funcp != NULL && *e != 0) {
 
-OK, maybe this is the correct way to go then.
+s/0/'\0'/, otherwise:
+
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+
+> +        if (*e != '.') {
+>               return -1;
+> -
+> +        }
+>           p = e + 1;
+>           val = strtoul(p, &e, 16);
+> -        if (e == p)
+> +        if (e == p) {
+>               return -1;
+> +        }
+>   
+>           func = val;
+>       }
+> @@ -2054,13 +2055,15 @@ bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
+>       int dom, busnr, devfn;
+>       PCIDevice *pci_dev;
+>       unsigned slot;
+> +    unsigned func;
+> +
+>       PCIBus *bus;
+>   
+>       if (!nd) {
+>           return false;
+>       }
+>   
+> -    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL) < 0) {
+> +    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, &func) < 0) {
+>           error_report("Invalid PCI device address %s for device %s",
+>                        devaddr, model);
+>           exit(1);
+> @@ -2071,7 +2074,7 @@ bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
+>           exit(1);
+>       }
+>   
+> -    devfn = PCI_DEVFN(slot, 0);
+> +    devfn = PCI_DEVFN(slot, func);
+>   
+>       bus = pci_find_bus_nr(rootbus, busnr);
+>       if (!bus) {
+
 
