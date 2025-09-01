@@ -4,77 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3908CA0FFD
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 10:50:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87E95CA1002
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 10:53:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut26o-0002CQ-Oo; Mon, 01 Sep 2025 06:49:58 -0400
+	id 1ut2AJ-0004Ae-Jp; Mon, 01 Sep 2025 06:53:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1ut26n-0002C2-Sm
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 06:49:57 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1ut26l-0008RG-Mv
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 06:49:57 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1756723794;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=YHntFevXo73QLVEqNQao70/IiH3hy0xtaU592yGchNE=;
- b=BI9tSqeqL6qalxRGIlj8Vk8K2yagvp8pdfCyyQJ4H+z9IcgUefo7k43Gk4Hmvg5VHUtmL3
- Z8T8ttHhfryuXwdgGwv/BInrF/92h4l9/RMvy+rVR1+eVQWCUq7Pot1gNxLsrq9rjgQjI0
- IcWS8s8Xl9dGAgagGfcVF5w8oA4j/ew=
-Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-427-TtzD-cfyO12eMGyYT0Ayug-1; Mon,
- 01 Sep 2025 06:49:50 -0400
-X-MC-Unique: TtzD-cfyO12eMGyYT0Ayug-1
-X-Mimecast-MFC-AGG-ID: TtzD-cfyO12eMGyYT0Ayug_1756723789
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8AEE61956087; Mon,  1 Sep 2025 10:49:49 +0000 (UTC)
-Received: from redhat.com (unknown [10.42.28.100])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8ACA7180028F; Mon,  1 Sep 2025 10:49:46 +0000 (UTC)
-Date: Mon, 1 Sep 2025 11:49:42 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
-Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ut2AH-0004A2-FK
+ for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 06:53:33 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ut2AF-0000Vp-7G
+ for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 06:53:33 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3cf991e8c82so2040492f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 01 Sep 2025 03:53:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1756724008; x=1757328808; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=QWs1+isj0sACY35fxeiPiOI5GkRT3otFreoWoWwwz0g=;
+ b=almreH8mZwub+9atRINhRHoIh3eH9K6cTijuAxWVh9vJg4SL8Hh1IwABy8UFkqZv65
+ uL3YS8cLBjjuixZ6LFZ1bzjL9x06TEPwhC9oRyJSJZvxHCZBUo6yq5X2j8d8ZnpphmqL
+ VhRLOT/BgnoPfx4sC/p2zsX9xTYnkQMi5mo8ckDrwVDyJeoFa+9hg47W49moXd3d35NH
+ kFRAa01igIliuXpJ9excHmIZnQUsiZpV3plyDaeteio5Xghx6OC2r/szjqETQ11rCAC+
+ SMJd8GnWXUzDGt9oIghbVbQZAd5+4WjQwaa5ov9zGyTcYdoGUMqc30r28gy1LNrLqrtk
+ BgiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756724008; x=1757328808;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=QWs1+isj0sACY35fxeiPiOI5GkRT3otFreoWoWwwz0g=;
+ b=fMnM9U6LZH2s4Zlgqu/iCCqGe6ABmvnU4/kGw2oS+91HywgUje1epIcNZbqbA1BSib
+ DMT+GzXjrQ2zXREUDYP8e1XPkI96NL8CluHSqOPbVM6rpZCRHQO7eomhR208iLC37AGH
+ k15Fy1d4qIBbopLtpT6lJMjaKgscyNKGNA+x7VKoTgLT82vG/zgEh/pFuL76spyWcF9b
+ i8NDPBezRKKE2sGbE8ahTDUYbaD5Hcvlu9hYbEsUsKssML+/MJUxYK0nWPjcN3Fs2wrV
+ AoYK4vmPeTDHwihg9EQ4QZXYwYfs+6UQbX1xV0w/aMnnZHaZ/O5y1YZEDphMcOSLEXl+
+ 25kg==
+X-Gm-Message-State: AOJu0YxUvK1Gi+fN2x8gCBYU3M5PURVoW+H6M3THEPrr6gfBhknIuccS
+ Ksb043OnSzOW6fjs0cLP99feMsC/8POmUaJNXqjHl+HmUqEzhlQfEceBgZD1FRHU9jc=
+X-Gm-Gg: ASbGncsZyjnr4bedpi3dKozv8SFzgCYmuTsUEhGMfzDfrLT7dzGIlOrXqtZrbTT3Ele
+ 1C9GQ9AK5lVVod1ZQKLFoXr9gNf/oSP3glFxVxxVE6EVpLk5SyD9g9gPOHUpDW6jO3Ke6lYph8x
+ wVgV+yI17yPDquIiFr0fFudqB7JPbLYpsRen7q50ZYvkqozd7BmkpbI9q0EcsAM6T1NVYNwpCe4
+ sN2MLG7ZdwhSkj/PeloXA7GMYmg29JKV57S6152FQa3XDVw+3O8RX8Aw5t9cZkY5FeBmZawMseJ
+ 1aAyCPZK0ksQvLfU0FUyFebMhFIdRd952PmySjumE1jmMtHKbDBvpYa4SYoZImocxdJxkXOI39Z
+ Bio/cFR4NzNPHRdlI33FyYyn+349v7QjxofmsozVjfccakFF6qED/sgZUkCGqxOoKkaLikf2H6s
+ Hp
+X-Google-Smtp-Source: AGHT+IFKRg3R1b0T+7BLHTt6nJq3uPkK+61Orbti3+GNciryq6nkh/9Z93evdusaZsjt4fbMu6diuw==
+X-Received: by 2002:a05:6000:1787:b0:3d6:92ed:caf6 with SMTP id
+ ffacd0b85a97d-3d692edce49mr2257174f8f.21.1756724008257; 
+ Mon, 01 Sep 2025 03:53:28 -0700 (PDT)
+Received: from [192.168.69.207] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3d520eada16sm6050775f8f.41.2025.09.01.03.53.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 01 Sep 2025 03:53:27 -0700 (PDT)
+Message-ID: <7f6fc4f0-9c83-4106-a408-dc213467c96c@linaro.org>
+Date: Mon, 1 Sep 2025 12:53:27 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 08/14] hw/misc: Add RISC-V CMGCR device implementation
+To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
  "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>,
  "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>,
- "philmd@linaro.org" <philmd@linaro.org>
-Subject: Re: [PATCH v7 09/14] hw/misc: Add RISC-V CPC device implementation
-Message-ID: <aLV6RjGTizwAbyd-@redhat.com>
-References: <20250901102850.1172983-1-djordje.todorovic@htecgroup.com>
- <20250901102850.1172983-10-djordje.todorovic@htecgroup.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20250901102850.1172983-10-djordje.todorovic@htecgroup.com>
-User-Agent: Mutt/2.2.14 (2025-02-20)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+ "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>
+References: <20250717093833.402237-1-djordje.todorovic@htecgroup.com>
+ <20250717093833.402237-9-djordje.todorovic@htecgroup.com>
+ <a9874cc7-e18e-4b6c-aaac-2c6ce56c1bf7@linaro.org>
+ <1cf4f7e5-c9d2-49fd-98db-fd8d05fd241f@linaro.org>
+ <4b7973d5-c126-44c8-970d-27059a806512@htecgroup.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <4b7973d5-c126-44c8-970d-27059a806512@htecgroup.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,135 +105,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Sep 01, 2025 at 10:29:05AM +0000, Djordje Todorovic wrote:
-> Add RISC-V implementation of the Cluster Power Controller (CPC) device.
-> It is based on the existing MIPS CPC implementations but adapted for
-> RISC-V systems.
+On 1/9/25 10:24, Djordje Todorovic wrote:
 > 
-> The CPC device manages power control for CPU clusters in RISC-V
-> systems.
-> 
-> This is needed for the MIPS BOSTON AIA board.
-> 
-> Signed-off-by: Chao-ying Fu <cfu@mips.com>
-> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  hw/misc/Kconfig             |   4 +
->  hw/misc/meson.build         |   1 +
->  hw/misc/riscv_cpc.c         | 271 ++++++++++++++++++++++++++++++++++++
->  include/hw/misc/riscv_cpc.h |  75 ++++++++++
->  4 files changed, 351 insertions(+)
->  create mode 100644 hw/misc/riscv_cpc.c
->  create mode 100644 include/hw/misc/riscv_cpc.h
-> 
-> diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-> index c72927c3ff..1e35bcd443 100644
-> --- a/hw/misc/Kconfig
-> +++ b/hw/misc/Kconfig
-> @@ -124,11 +124,15 @@ config MIPS_ITU
->  config RISCV_CMGCR
->      bool
->  
-> +config RISCV_CPC
-> +    bool
-> +
->  config MIPS_BOSTON_AIA
->      bool
->      default y
->      depends on RISCV64
->      select RISCV_CMGCR
-> +    select RISCV_CPC
->  
->  config MPS2_FPGAIO
->      bool
-> diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-> index ef891e465b..1f9945755f 100644
-> --- a/hw/misc/meson.build
-> +++ b/hw/misc/meson.build
-> @@ -158,6 +158,7 @@ specific_ss.add(when: 'CONFIG_MIPS_CPS', if_true: files('mips_cmgcr.c', 'mips_cp
->  specific_ss.add(when: 'CONFIG_MIPS_ITU', if_true: files('mips_itu.c'))
->  
->  specific_ss.add(when: 'CONFIG_RISCV_CMGCR', if_true: files('riscv_cmgcr.c'))
-> +specific_ss.add(when: 'CONFIG_RISCV_CPC', if_true: files('riscv_cpc.c'))
->  
->  system_ss.add(when: 'CONFIG_SBSA_REF', if_true: files('sbsa_ec.c'))
->  
-> diff --git a/hw/misc/riscv_cpc.c b/hw/misc/riscv_cpc.c
-> new file mode 100644
-> index 0000000000..6a6cf72d45
-> --- /dev/null
-> +++ b/hw/misc/riscv_cpc.c
-> @@ -0,0 +1,271 @@
-> +/*
-> + * Cluster Power Controller emulation
-> + *
-> + * Copyright (c) 2016 Imagination Technologies
-> + *
-> + * Copyright (c) 2025 MIPS
-> + *
-> + * This library is free software; you can redistribute it and/or
-> + * modify it under the terms of the GNU Lesser General Public
-> + * License as published by the Free Software Foundation; either
-> + * version 2.1 of the License, or (at your option) any later version.
-> + *
-> + * This library is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-> + * Lesser General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU Lesser General Public
-> + * License along with this library; if not, see <http://www.gnu.org/licenses/>.
-> + *
-> + * SPDX-License-Identifier: LGPL-2.1-or-later
+> On 8. 8. 25. 18:07, Philippe Mathieu-Daudé wrote:
+>> CAUTION: This email originated from outside of the organization. Do
+>> not click links or open attachments unless you recognize the sender
+>> and know the content is safe.
+>>
+>>
+>> On 8/8/25 18:00, Philippe Mathieu-Daudé wrote:
+>>> On 17/7/25 11:38, Djordje Todorovic wrote:
+>>>> Add RISC-V implementation of the Coherent Manager Global Control
+>>>> Register (CMGCR) device. It is based on the existing MIPS CMGCR
+>>>> implementation but adapted for RISC-V systems.
+>>>>
+>>>> The CMGCR device provides global system control for multi-core
+>>>> configurations in RISC-V systems.
+>>>>
+>>>> This is needed for the MIPS BOSTON AIA board.
+>>>>
+>>>> Signed-off-by: Chao-ying Fu <cfu@mips.com>
+>>>> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
+>>>> ---
+>>>>    hw/misc/Kconfig               |  10 ++
+>>>>    hw/misc/meson.build           |   2 +
+>>>>    hw/misc/riscv_cmgcr.c         | 234
+>>>> ++++++++++++++++++++++++++++++++++
+>>>>    include/hw/misc/riscv_cmgcr.h |  49 +++++++
+>>>>    4 files changed, 295 insertions(+)
+>>>>    create mode 100644 hw/misc/riscv_cmgcr.c
+>>>>    create mode 100644 include/hw/misc/riscv_cmgcr.h
+>>>
+>>>
+>>>> +static void riscv_gcr_realize(DeviceState *dev, Error **errp)
+>>>> +{
+>>>> +    RISCVGCRState *s = RISCV_GCR(dev);
+>>>
+>>> Please report an error for invalid num_vps values (0 or >MAX).
+>>
+>> Per the next patch:
+>>
+>>    #define VPS_MAX 64
+>>
+>> Is it possible to have a config with 7, 24 or 35 vps?
+>>
+> 64 is maximum, and we can have fewer than 64 vps.
+> So, yes, it is possible to have that configuration.
 
-As this was copied from an existing file, just leave the original GPL
-header here unchanged, don't add a SPDX tag to pre-existing code, only
-to newly authored files.
+Please provide a test with 7 and 35 VPs then.
 
-
-> diff --git a/include/hw/misc/riscv_cpc.h b/include/hw/misc/riscv_cpc.h
-> new file mode 100644
-> index 0000000000..3e908f4f44
-> --- /dev/null
-> +++ b/include/hw/misc/riscv_cpc.h
-> @@ -0,0 +1,75 @@
-> +/*
-> + * Cluster Power Controller emulation
-> + *
-> + * Copyright (c) 2016 Imagination Technologies
-> + *
-> + * Copyright (c) 2025 MIPS
-> + *
-> + * This library is free software; you can redistribute it and/or
-> + * modify it under the terms of the GNU Lesser General Public
-> + * License as published by the Free Software Foundation; either
-> + * version 2.1 of the License, or (at your option) any later version.
-> + *
-> + * This library is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-> + * Lesser General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU Lesser General Public
-> + * License along with this library; if not, see <http://www.gnu.org/licenses/>.
-> + *
-> + * SPDX-License-Identifier: LGPL-2.1-or-later
-> + *
-> + */
-
-Same points as above.
-
-
-With regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
-
+Thanks!
 
