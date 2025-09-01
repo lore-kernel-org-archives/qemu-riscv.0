@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E04CA0FF0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:55:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34289CA0FF0
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:55:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut33k-0006c3-0C; Mon, 01 Sep 2025 07:50:52 -0400
+	id 1ut33f-0006RO-A0; Mon, 01 Sep 2025 07:50:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1ut31E-0002zw-8K; Mon, 01 Sep 2025 07:48:16 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1ut31R-0003Xj-NG; Mon, 01 Sep 2025 07:48:32 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1ut30z-0001lW-CH; Mon, 01 Sep 2025 07:48:11 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-249036375a1so28531635ad.2; 
- Mon, 01 Sep 2025 04:47:52 -0700 (PDT)
+ id 1ut318-0001nq-9M; Mon, 01 Sep 2025 07:48:26 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-248c7f955a2so37342945ad.2; 
+ Mon, 01 Sep 2025 04:48:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756727271; x=1757332071; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1756727283; x=1757332083; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YcsuOuyWwjyfdwSMhCo/Q1vq9Xw5uCZDKRhMY5glHGY=;
- b=DDi9sIfalZlUKL+uZv5ryvaDk8S2uIUbNBxErpmkvIVEo25kfR9DXLOrUf7PXwWw74
- Hz61HNyrUgaYHs0SAor/mPIdR1B52xvnw0oAv6KNTmi61zL7ryYbTrUc7CZsIGNZXczs
- lJzhmLhpS0S2ivhbHf7H0j4cAePvZn+QOPFcSt1oeFb9DWFtDziNJw0GX8Mk5oZU6K5w
- qISn64Q5ewDYBfmVmHFUIEITkNvoqX2BprhvluVZL6Pa0j3vpbBM+BAZpmz6e/cFiLag
- VM3qd3YLM7DYBePSNiBqHiQS+K9kYAgZrgnqXEpqudslHU+EpT4drhx0AMjoMwEn3RSv
- Mebw==
+ bh=NkF/SrWBRt7mpVRvpwQdPdICO84Pyhp/wixwRcKtvEU=;
+ b=k8yGjVed8FRLRj4fqLIK9xLS9An/GsNSP3SXXofpSmk5qPF/9gI5XMn/9us2q+3iSh
+ hEehByRmXmXXftwmb3S0+dTiZGhfq+r5yjybGMyOqKy7NxK+RSEBozuyrKI4JQf3EUs6
+ 1PxWY+VeXnFGPRhIEe9v4XnBuzDChFl2anexxD/gL9rBTsY0OiluDhEUCKhvoBBQ3NQ+
+ sXYFXhs5NPMlYDMzYSmC/FA3nOEAWQG8Auoqe1t0sKb+R4A/a/RM0OXG2Rk1WLA5hCZf
+ NUqFvPFtvNiq5m0+9Z+J1Ka5An3VhyX5WdvsojWFNcFkoP2wGC9PkgJJ7WRef0iWKlxL
+ QxPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756727271; x=1757332071;
+ d=1e100.net; s=20230601; t=1756727283; x=1757332083;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YcsuOuyWwjyfdwSMhCo/Q1vq9Xw5uCZDKRhMY5glHGY=;
- b=s7BWwXz4AAJa4FHMBKsbKWQ3Lsx2fVYiZK38DXmfOuRLCZ7kBkyROm6rNgsOilrUYJ
- iT8DK5AvlvHR8FVmBGMstr2P5Kk3z0fjGb2Po/AN7L5SDgSZQseg6yILoARWaAP2zskb
- CLs5KH/e3lw+xq/OpcqSOCkF3ejRRnE4dQqJtLA3AuAyxIgLE3/PgFNyptZfEu8VApYQ
- KFDLKGeeM2tx8dRdwBv0lOhSQfeHeqI5o0FrsKKOzMWA7x4tPcSYRXCf2iOCZkPtXexg
- xCk5afckQic086GKd7/Ko2zUgGeZiElW+UJor1Js0MowIB+eGntPTBH/Xs3elZuw56qc
- K/5Q==
+ bh=NkF/SrWBRt7mpVRvpwQdPdICO84Pyhp/wixwRcKtvEU=;
+ b=H9G/t3rnM4jtAmUkwyqdUs8SPQdaEKsgpjtb4foU9fHuEdW8FPSZFXF7MxFzgn0jEs
+ KTYIFHOeF7BURfg5C35pN3m2qsyyySY29IKDVRcHnH5q+yoJR4PfmaeVu4OsomnMj0Ki
+ 1MwABDwMJJd7R6bDL1quV165YOtA7AFwoUo7hcrAGvh2bsMxMQVOUF9DgCX0QSMIcDwk
+ EVSxQ49VCsvkvMmQEZtJ2/JuQd1AFSH4/VBfk2kntQ7Uhl415TyJdnPygEeSC8RzvswN
+ wfZUXPdCaJzVIObGRfTotOj0I5M7TkPWXLKs+3EeK4aX4gX8AvlD5v5hO6CjigHm412f
+ RXgw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3QzalOD5vUKS37aL2cgI9p7Y0l2MquzuMoZrPR2IbVZ9zv5udu2+xEI40wRDmbZ2QhsrpcQUJq5tyLw==@nongnu.org,
- AJvYcCXBbSq8kXC2JkIzjhzo+NIWYkQatE7v/FISvqcy00hu50AhwvlkKaVzxgg7AYJ+kl1iXhBYjYiPBg==@nongnu.org
-X-Gm-Message-State: AOJu0YzjRFlzFDU/Zoy313IHmo/6s5WTegDAktj1lDWOEiPV1Mqx4Fq+
- IEgqk7P/H7hYnzBoOZoP0WJqOyuvxb5s/fRQgC/CIezUrNe45tNT/fGwwk3zIA==
-X-Gm-Gg: ASbGncvfFThFW3ndrCzp8qiZwgJwA0JLbQWaGZPAcuapdMXrFjxJIabLaDfQsphr2CJ
- FnietEvv2ZmPh04iS5kWjF97pL9TUCakwJOWxsvcQqlP1pTVxJbB/Ka3Y37Bs8Cpv6KEcAEn5aB
- BLdxdFO5rpbPS99ozp7SsC5DjwGQM8lIYSnuR+0xolsSp0Z2n+6yEILMfheGP/Nt0HLRK8Jb3Tg
- oTsZkRhYb1AXYj5llGn2SIKWqts9WTtC01G15PxS1qKkDQ+gwbCD1B0IX9Z2PshGVtd1/VZ/RXB
- YF119twHAVIp7xHa2elVYfwSrDykyE9Ta3fOYMowj2u3xNKAQm/jRQa6BAj5TkA2R63Pl3m3DBF
- JS2RRe/8FpmvRudpiKhqwVCsT2QcbN1uw
-X-Google-Smtp-Source: AGHT+IF4k9JW28yu2OtLJ1XqaF1j/293B4OszVExYt/QthFRfpgB1k2PmXcco84Bp6e1958f9Pusig==
-X-Received: by 2002:a17:903:1585:b0:24a:8d33:96e3 with SMTP id
- d9443c01a7336-24a8d339832mr92663785ad.19.1756727271304; 
- Mon, 01 Sep 2025 04:47:51 -0700 (PDT)
+ AJvYcCVttcoZ0YKculnCcx/ZphYTBOSnyusa813kCcWHdlZtujLI9RPBYGS/nq/50IjbaKdHbCFplWnwfA==@nongnu.org,
+ AJvYcCXCQXiYx9EzQL1WdMmBDTjea+iW+kfJAS+Kpm+Tt0emzuPGDsJ6DViSuso1vdlOe1oN/hwN0sw/M26JwA==@nongnu.org
+X-Gm-Message-State: AOJu0YzE5CMq9Cq8JXI1s9pIq8wrZ8+sy6aQ3y/bI6lKIWQtloxDIBAo
+ pNePuSkpkaqPLKAyzNdvr71Nz1X7LZmIA6BkLCeVWwA1HStL9C9oVqiCgD9YAQ==
+X-Gm-Gg: ASbGnctTyXsl2GY7T2zpm8TXqLf5N1pFR3WdvhfxfVDqau4xDoSWL/fh6a89naQNDPh
+ TCNBgf22zW725uedFXUPeKpnso/YkJBxNSwkXjF4W2lIPriLuyQVSViMAIRwlFLxa3qB7FKXPhK
+ NYN0F6jT9Ecs883aTZx9ZlArw36XT/eb18hgHHwU3EGjWaHkVZl62mFkwECBTrlM5+kfheP3c3Y
+ tYvNtREb3o0HChDgh6UikrXS3pYP6wfbQNDeVfiQ1cegz1r2QmHwQyrUInDkIRwyU+opq1Y+VH3
+ roGJu1tiKOBolSnzW15HR6a7cpQKfIYqRGUYK3XmnBI+lKMJ0wgr767l1Z2iXAf5AePAc4/GaLn
+ idInppHOewoIXsam4kzFJzQ==
+X-Google-Smtp-Source: AGHT+IGUn25ZeeJI9WLAckX6lUgqQ7vUWG/PMX7jQQzeUj//EkzeoPWDh8SsJSFxSR46d+uLY0ukJA==
+X-Received: by 2002:a17:902:f641:b0:24a:9475:3db2 with SMTP id
+ d9443c01a7336-24a94754493mr90911585ad.35.1756727283063; 
+ Mon, 01 Sep 2025 04:48:03 -0700 (PDT)
 Received: from ktock.. ([240d:1a:3b6:8b00:750a:cb0b:f0f9:68f4])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-249065a8036sm103038775ad.129.2025.09.01.04.47.45
+ d9443c01a7336-249065a8036sm103038775ad.129.2025.09.01.04.47.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 04:47:50 -0700 (PDT)
+ Mon, 01 Sep 2025 04:48:02 -0700 (PDT)
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -80,22 +80,23 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Stefan Hajnoczi <stefanha@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, ktokunaga.mail@gmail.com
-Subject: [PATCH v3 26/35] tcg/wasm: Add initialization of fundamental registers
-Date: Mon,  1 Sep 2025 20:44:28 +0900
-Message-ID: <6cad2aa3c86c1b67dc2742a7749bef1e752d1ac9.1756724464.git.ktokunaga.mail@gmail.com>
+Subject: [PATCH v3 28/35] tcg/wasm: Implement instantiation of Wasm binary
+Date: Mon,  1 Sep 2025 20:44:30 +0900
+Message-ID: <c0d05186cd431515eb3f97a7c860ec5b6deac0a5.1756724464.git.ktokunaga.mail@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756724464.git.ktokunaga.mail@gmail.com>
 References: <cover.1756724464.git.ktokunaga.mail@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pl1-x633.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, T_SPF_HELO_TEMPERROR=0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,73 +112,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This commit adds initialization of TCG_AREG0 and TCG_REG_CALL_STACK at the
-beginning of each TB. The CPUArchState struct and the stack array are passed
-from the caller via the WasmContext structure. The BLOCK_IDX variable is
-initialized to 0 as TB execution begins at the first block.
+instantiate_wasm is a function that instantiates a TB's Wasm binary,
+importing the functions as specified by its arguments. Following the header
+definition in wasm/tcg-target.c.inc, QEMU's memory is imported into the
+module as "env.memory", and helper functions are imported as "helper.<idx>".
+
+The instantiated Wasm module is imported to QEMU using Emscripten's
+"addFunction" feature[1] which returns a function pointer. This allows QEMU
+to call this module directly from C code via that pointer.
+
+Since the subarray() method doesn't accept a BigInt value which is used for
+the 64bit pointer value, it is converted to a Number (i53) using
+bigintToI53Checked method of Emscripten. Although this conversion (64bit to
+53bit) drops higher bits, the maximum memory size of the engine
+implementations is currently limited to 16GiB[2] so we can assume that the
+pointers are within the Number's range.
+
+Note that since FireFox 138, WebAssembly.Module no longer accepts a
+SharedArrayBuffer as input [3] as reported by Nicolas Vandeginste in my
+fork[4]. This commit ensures that WebAssembly.Module() is passed a
+Uint8Array created from the binary data on a SharedArrayBuffer.
+
+[1] https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#calling-javascript-functions-as-function-pointers-from-c
+[2] https://webassembly.github.io/memory64/js-api/#limits
+[3] https://bugzilla.mozilla.org/show_bug.cgi?id=1965217
+[4] https://github.com/ktock/qemu-wasm/pull/25
 
 Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 ---
- tcg/wasm.h                | 10 ++++++++++
- tcg/wasm/tcg-target.c.inc | 19 +++++++++++++++++++
- 2 files changed, 29 insertions(+)
+ tcg/wasm.c | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
 
-diff --git a/tcg/wasm.h b/tcg/wasm.h
-index a3631b34a8..f2b67c1099 100644
---- a/tcg/wasm.h
-+++ b/tcg/wasm.h
-@@ -20,6 +20,16 @@ struct WasmContext {
-      * Buffer to store 128bit return value on call.
-      */
-     void *buf128;
+diff --git a/tcg/wasm.c b/tcg/wasm.c
+index 1cc2e45e77..15db1f9a8a 100644
+--- a/tcg/wasm.c
++++ b/tcg/wasm.c
+@@ -23,6 +23,43 @@
+ #include "tcg/tcg-ldst.h"
+ #include "tcg/helper-info.h"
+ #include <ffi.h>
++#include <emscripten.h>
 +
-+    /*
-+     * Pointer to the CPUArchState struct.
-+     */
-+    CPUArchState *env;
++#define EM_JS_PRE(ret, name, args, body...) EM_JS(ret, name, args, body)
 +
-+    /*
-+     * Pointer to a stack array.
-+     */
-+    uint64_t *stack;
- };
++#define DEC_PTR(p) bigintToI53Checked(p)
++#define ENC_PTR(p) BigInt(p)
++#if defined(WASM64_MEMORY64_2)
++#define ENC_WASM_TABLE_IDX(i) Number(i)
++#else
++#define ENC_WASM_TABLE_IDX(i) i
++#endif
++
++EM_JS_PRE(void*, instantiate_wasm, (void *wasm_begin,
++                                    int wasm_size,
++                                    void *import_vec_begin,
++                                    int import_vec_size),
++{
++    const memory_v = new DataView(HEAP8.buffer);
++    const wasm = HEAP8.subarray(DEC_PTR(wasm_begin),
++                                DEC_PTR(wasm_begin) + wasm_size);
++    var helper = {};
++    const entsize = TCG_TARGET_REG_BITS / 8;
++    for (var i = 0; i < import_vec_size / entsize; i++) {
++        const idx = memory_v.getBigInt64(
++            DEC_PTR(import_vec_begin) + i * entsize, true);
++        helper[i] = wasmTable.get(ENC_WASM_TABLE_IDX(idx));
++    }
++    const mod = new WebAssembly.Module(new Uint8Array(wasm));
++    const inst = new WebAssembly.Instance(mod, {
++            "env" : {
++                "memory" : wasmMemory,
++            },
++            "helper" : helper,
++    });
++
++    return ENC_PTR(addFunction(inst.exports.start, 'ii'));
++});
  
- #endif
-diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c.inc
-index 598db7b4bd..ba7a5efb5a 100644
---- a/tcg/wasm/tcg-target.c.inc
-+++ b/tcg/wasm/tcg-target.c.inc
-@@ -2071,11 +2071,30 @@ static void tcg_out_set_carry(TCGContext *s)
+ __thread uintptr_t tci_tb_ptr;
  
- static void tcg_out_tb_start(TCGContext *s)
- {
-+    intptr_t ofs;
-+
-     init_sub_buf();
-     init_blocks();
-     init_label_info();
-     init_helpers();
- 
-+    /* Initialize fundamental registers */
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(TCG_AREG0));
-+    tcg_wasm_out_op(s, OPC_I64_EQZ);
-+    tcg_wasm_out_op_block(s, OPC_IF, BLOCK_NORET);
-+
-+    ofs = tcg_wasm_out_get_ctx(s, CTX_OFFSET(env));
-+    tcg_wasm_out_op_ldst(s, OPC_I64_LOAD, 0, ofs);
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, REG_IDX(TCG_AREG0));
-+
-+    ofs = tcg_wasm_out_get_ctx(s, CTX_OFFSET(stack));
-+    tcg_wasm_out_op_ldst(s, OPC_I64_LOAD, 0, ofs);
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, REG_IDX(TCG_REG_CALL_STACK));
-+    tcg_wasm_out_op(s, OPC_END);
-+
-+    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0);
-+    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, BLOCK_IDX);
-+
-     tcg_wasm_out_op_block(s, OPC_LOOP, BLOCK_NORET);
-     tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, BLOCK_IDX);
-     tcg_wasm_out_op(s, OPC_I64_EQZ);
 -- 
 2.43.0
 
