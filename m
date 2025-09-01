@@ -4,92 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3CFACA1002
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:17:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23B5CCA0FF0
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:47:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut2Ww-0004FQ-PH; Mon, 01 Sep 2025 07:16:58 -0400
+	id 1ut2zn-0007mO-Di; Mon, 01 Sep 2025 07:46:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ut2Wu-0004Ef-PV
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 07:16:57 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
+ id 1ut2yt-0006kE-F4; Mon, 01 Sep 2025 07:45:52 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ut2Ws-0004fS-L2
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 07:16:56 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-45b8e28b3c5so4209895e9.1
- for <qemu-riscv@nongnu.org>; Mon, 01 Sep 2025 04:16:52 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
+ id 1ut2yj-0001Ho-K9; Mon, 01 Sep 2025 07:45:51 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2445805aa2eso43000915ad.1; 
+ Mon, 01 Sep 2025 04:45:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756725409; x=1757330209; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=SeDYy1DEgpcx4+sqiAQw9KNiJu2uZ5LQ1cRlI1CZNsQ=;
- b=AFXhgxL4/wbsgdE9DlSToEyQE4tZ/du+BiD3xeo/Y13AqcC0D6fw87oveDDLxHX1gC
- sYs1EsYc3SqHVhQDjpnekMhS7eLqw53TY3eRRnOXDmD2XlydzUHbZe6CZAu7eCdymYN9
- fYXhjXz7H99u5dWVfoWJeqgaSs9oMVm5FshzljZy8r+smAfqXgRSsBWXn+10MPirdq2j
- aXqkH+sL08YCFTlSvxf2MyPQWjfWNPf0fkKl8kPEaAYsOhtZ2JkM9MOzDvFS0ygTOaNp
- gLtmPZvRhZ6Ej7feK+qdaY2npeV055uvYV3c657SHBzyaMC/s70YSA/MiTL3CFO9szoi
- 9t0w==
+ d=gmail.com; s=20230601; t=1756727134; x=1757331934; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+PQrFo8EBMIk0vCQdMb98g3now50VhqZJnrrrRXa3xE=;
+ b=UqBKkC+nUrm2+6qsp+AZ78DQgyCSYcp6TCzo69z9uHkx8N7Sm2KnPRBmdF0N1zxP4q
+ NvNhnL7QAL4H0I5wWX+MM1Xxrr7IpH3vw5Vp/iG8OoReE/jVhr1mZ1nSqL6k0MtBQQgI
+ bSHg6SeiKUpGLR7G7fIVJt8v0yyeTzx6gMOzihxcgWpXF9ZpVkXDE+Ygye85fNv6in97
+ 6/3SftmBIUhrq9sgTL5f3Ci3Fug9OlGwzdfWyFuhyk/oqn11HBVu+AjTq9YKMH66Sd5Y
+ 3e4VQ0tyJxkRMcbTFPiqkrxiHyfvL/9xR2wGKxl11zWKFMH553dIq0n8mP7KrGUi5TW/
+ aZrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756725409; x=1757330209;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SeDYy1DEgpcx4+sqiAQw9KNiJu2uZ5LQ1cRlI1CZNsQ=;
- b=jpEvu+nXKB6NIz0xyOqyd17bW9J8x83vDAqPam5TqcRRCyOVypHDJTOtuR4ZBvkFdF
- AxaLpas1T+LHT2EbL/ki/s8DFbe4EPE4qTVdDvMAU6qscCfgMKDHBcfFvAuqRaGJ6qzC
- MADvathiMAkaKW9V5rqGMh4tarhr9kwcnVOC5QEj8eQTu28SY5BMb+fvBIcBjjPKIU15
- f/5u9DK7HQ2s+qUPcQnsbu/dkLxvnRVt07lsHRgDEi13EwsUDfDLWI+iZ2Y4a46PYoA6
- ADyjCixyIE8J7vstdoz2KQLtEsrrlniybp8mVnTIdBOVqYuQ/Jcb+X95ONMODmyw2+cJ
- CGvw==
-X-Gm-Message-State: AOJu0YxacgM+8s60/RxnIDR2VUWmzXnkLj3JfeMVYGkeG06QpXVjbAPd
- RJJrcQre9ithyYWjoS4LgYXrvBkUPgzANIoio+hWhpI6zYJYzMCIWABp3G3EPfAvlhQ=
-X-Gm-Gg: ASbGnctYlzQufr4xbkMa7vEcYV4bUrVJdaR83F1MMvAu5+27gnq28x/WfLiQ2E926As
- RxiZm4b0JN9yHp7XlqGZD2duG8MWKcceDvaK2xAqZ2ol/CjOnS19UGOTZWKpTesvGN1GgVEuAXt
- YXIjnW9KZSjtc58Er9du/Y+2lEFOZlAoKMUHOYoyyQghet8PGDTlas66nhTJTsBHYwdWEdLXT9J
- CaVg6bTsJ9QQMmYaqVHmDG7uOdOQLcs9EDGvdzIU+HJY/6ciPrLiFjLtEmzepcrAD5H9QOcWEQS
- UDyp7kAPl/UR7vyHUpQhyEl9w257jXyWavgxXrm6ytOE7dods1TxFKbY8ACAp8m3waDepvETqaG
- YUhvG5QgAhsVZxznn/GJX7MgLKEuHMbYPP0HQoPEwdtCegxPX+E6CITgwfDOupEwraLn5eedY1w
- 0T
-X-Google-Smtp-Source: AGHT+IGYCiFhbzG8hE1HPz2tiQL8ZlJymxcKbWzkZ5BTsFKvL13gq0SSyI64VNQEDIRSNJBBmZZl0Q==
-X-Received: by 2002:a05:600c:35d5:b0:45b:8996:997d with SMTP id
- 5b1f17b1804b1-45b89969e0dmr46245175e9.16.1756725409510; 
- Mon, 01 Sep 2025 04:16:49 -0700 (PDT)
-Received: from [192.168.69.207] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b7e7d141esm157883025e9.2.2025.09.01.04.16.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 Sep 2025 04:16:49 -0700 (PDT)
-Message-ID: <a250edb4-7df5-4e3d-9f82-361778d8612a@linaro.org>
-Date: Mon, 1 Sep 2025 13:16:48 +0200
+ d=1e100.net; s=20230601; t=1756727134; x=1757331934;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+PQrFo8EBMIk0vCQdMb98g3now50VhqZJnrrrRXa3xE=;
+ b=oczDQkDi4HcLwU3dJhcx9ZsUbD7ymb4HEom/ofJ6DCyrMd+magnHj38EzPJnr2H5XL
+ ywBXy6onCUVrdjzw6Jf4oObg8n6YnUC5FJK48gqe/7vFO8+kHiBJr/CAwRsJBRg8AC4m
+ 78s6garp88dSEAzSp/w46s/UFmw/5GoeiN7btKGJPz4HJR9JGYv9zHzQ+fzhzwAL5GBu
+ PNWkR8QpBKKnYfr8RNVmv8iFLsgX/sXvKfIZ+b9vFxJC/gHdHIv2ZW0eq6kEFVLPgF/q
+ 1RqYQLJzJyG8Qz8MALCzhgX3xWY45Pl9c+UKaIcIk0cXD8D78s5XneAZWZBI8Aof/C8V
+ iiLg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZvf1FznWrfUb1/suNUlRBFZrl9cARE9R+palk+S294p+UCjBQPndlWnXUXg6G+79ifdUdb84Ez1Llcw==@nongnu.org,
+ AJvYcCX249PDfpqdk/GAiNXhyN0bAemKR60YKFEgOAXcykxd6jTRGegAmiubmFFKIM379hX6V8v5JQRrSQ==@nongnu.org
+X-Gm-Message-State: AOJu0Yw8FLJgFu5zsDU7+mCD5uc6S5Wtg6WU0y3c7vWFxVIP6Kx/IbhS
+ FUC2G+Ttzktk1ZuUX40yGACbhNdandYfPG9pOQlGVfKVfiJ0tBXY66yX/+oOPQ==
+X-Gm-Gg: ASbGncvNSYW3sb0UnL4sjZqu4atoIE4c6c7eMTzn60ll6JpYexpO0ykwtuTcW0kPphF
+ 5wk0KPU2RbXDreLagPgm3hmE6JkZR4R7yoHU6wBxceBSNtNxatqhRC/1bDXit1O/+1wrJkVUrhU
+ sAWqK4zIxHsSQBT7YeXRMia1z3EWk8AqA4GRuTJVr7QNaUwtIQ1y30kYfImopnAB28apP3PFLH+
+ Wh1sucuudVZN5PYg2+J71hewro4kavCuKpRqHAQ91wQxXGibMgduOahkRhXfc+msurlb11UqYAT
+ fTOqLAs+sLl/2BTe3xYlEP2TIK4bTuTNMBczpHcXl2C6j5oINLOlWWNFQim2hVz7dkIVui7p8Hy
+ uo0ufeK2q1FkdPPxo8Ij2VEuheEYLhhMg
+X-Google-Smtp-Source: AGHT+IFTP42mQXbO3bVx0khj5I4eMKvfb49LTCNklV65+sAfcX5ZtwtVIu4pyFy2Lm9MzV1oMPfdlw==
+X-Received: by 2002:a17:902:e810:b0:23d:fa76:5c3b with SMTP id
+ d9443c01a7336-249448eb7a3mr92183895ad.22.1756727133912; 
+ Mon, 01 Sep 2025 04:45:33 -0700 (PDT)
+Received: from ktock.. ([240d:1a:3b6:8b00:750a:cb0b:f0f9:68f4])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-249065a8036sm103038775ad.129.2025.09.01.04.45.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Sep 2025 04:45:33 -0700 (PDT)
+From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ WANG Xuerui <git@xen0n.name>, Aurelien Jarno <aurelien@aurel32.net>,
+ Huacai Chen <chenhuacai@kernel.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, Stefan Weil <sw@weilnetz.de>,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, ktokunaga.mail@gmail.com
+Subject: [PATCH v3 02/35] configure: Enable to propagate -sMEMORY64 flag to
+ Emscripten
+Date: Mon,  1 Sep 2025 20:44:04 +0900
+Message-ID: <f0fcfef4573d19ff9291f6aac8f53c08f72509f7.1756724464.git.ktokunaga.mail@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1756724464.git.ktokunaga.mail@gmail.com>
+References: <cover.1756724464.git.ktokunaga.mail@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 12/14] hw/pci: Allow explicit function numbers in pci
-To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>,
- "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>
-References: <20250901102850.1172983-1-djordje.todorovic@htecgroup.com>
- <20250901102850.1172983-13-djordje.todorovic@htecgroup.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250901102850.1172983-13-djordje.todorovic@htecgroup.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,70 +113,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 1/9/25 12:29, Djordje Todorovic wrote:
-> Since there is no pch_gbe emulation, we could be using func other
-> than 0 when adding new devices to specific boards.
-> 
-> Signed-off-by: Chao-ying Fu <cfu@mips.com>
-> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-> ---
->   hw/pci/pci.c | 15 +++++++++------
->   1 file changed, 9 insertions(+), 6 deletions(-)
-> 
-> diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-> index c70b5ceeba..0c6d11e145 100644
-> --- a/hw/pci/pci.c
-> +++ b/hw/pci/pci.c
-> @@ -984,14 +984,15 @@ static int pci_parse_devaddr(const char *addr, int *domp, int *busp,
->   
->       slot = val;
->   
-> -    if (funcp != NULL) {
-> -        if (*e != '.')
-> +    if (funcp != NULL && *e != 0) {
+Currently there are some engines that don't support wasm64 (e.g. unsupported
+on Safari[1]). To mitigate this issue, the configure script allows the user
+to use Emscripten's compatibility feature, "-sMEMORY64=2" flag[2].
 
-s/0/'\0'/, otherwise:
+Emscripten's "-sMEMORY64=2" flag still enables 64bit pointers in C code. But
+this flag lowers the output binary into wasm32, with limiting the maximum
+memory size to 4GB. So QEMU can run on wasm32 engines.
 
+[1] https://webassembly.org/features/
+[2] https://emscripten.org/docs/tools_reference/settings_reference.html#memory64
+
+Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+---
+ configure | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-> +        if (*e != '.') {
->               return -1;
-> -
-> +        }
->           p = e + 1;
->           val = strtoul(p, &e, 16);
-> -        if (e == p)
-> +        if (e == p) {
->               return -1;
-> +        }
->   
->           func = val;
->       }
-> @@ -2054,13 +2055,15 @@ bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
->       int dom, busnr, devfn;
->       PCIDevice *pci_dev;
->       unsigned slot;
-> +    unsigned func;
-> +
->       PCIBus *bus;
->   
->       if (!nd) {
->           return false;
->       }
->   
-> -    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL) < 0) {
-> +    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, &func) < 0) {
->           error_report("Invalid PCI device address %s for device %s",
->                        devaddr, model);
->           exit(1);
-> @@ -2071,7 +2074,7 @@ bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
->           exit(1);
->       }
->   
-> -    devfn = PCI_DEVFN(slot, 0);
-> +    devfn = PCI_DEVFN(slot, func);
->   
->       bus = pci_find_bus_nr(rootbus, busnr);
->       if (!bus) {
+V3:
+- This commit is under review in another patch series so please ignore it
+  here.
+
+diff --git a/configure b/configure
+index 112e4725fc..8ac6cacc06 100755
+--- a/configure
++++ b/configure
+@@ -182,6 +182,10 @@ EXTRA_CXXFLAGS=""
+ EXTRA_OBJCFLAGS=""
+ EXTRA_LDFLAGS=""
+ 
++# The value is propagated to Emscripten's "-sMEMORY64" flag.
++# https://emscripten.org/docs/tools_reference/settings_reference.html#memory64
++wasm64_memory64=1
++
+ # Default value for a variable defining feature "foo".
+ #  * foo="no"  feature will only be used if --enable-foo arg is given
+ #  * foo=""    feature will be searched for, and if found, will be used
+@@ -239,6 +243,8 @@ for opt do
+   ;;
+   --without-default-features) default_feature="no"
+   ;;
++  --wasm64-32bit-address-limit) wasm64_memory64="2"
++  ;;
+   esac
+ done
+ 
+@@ -537,7 +543,7 @@ case "$cpu" in
+     CPU_CFLAGS="-m32"
+     ;;
+   wasm64)
+-    CPU_CFLAGS="-m64 -sMEMORY64=1"
++    CPU_CFLAGS="-m64 -sMEMORY64=$wasm64_memory64"
+     ;;
+ esac
+ 
+@@ -795,6 +801,8 @@ for opt do
+   ;;
+   --disable-rust) rust=disabled
+   ;;
++  --wasm64-32bit-address-limit)
++  ;;
+   # everything else has the same name in configure and meson
+   --*) meson_option_parse "$opt" "$optarg"
+   ;;
+@@ -920,6 +928,8 @@ Advanced options (experts only):
+   --disable-containers     don't use containers for cross-building
+   --container-engine=TYPE  which container engine to use [$container_engine]
+   --gdb=GDB-path           gdb to use for gdbstub tests [$gdb_bin]
++  --wasm64-32bit-address-limit Restrict wasm64 address space to 32-bit (default
++                               is to use the whole 64-bit range).
+ EOF
+   meson_options_help
+ cat << EOF
+-- 
+2.43.0
 
 
