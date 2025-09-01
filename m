@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD9ACA0FFD
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9542CA0FF0
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 11:50:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut2yq-0006e5-Pw; Mon, 01 Sep 2025 07:45:48 -0400
+	id 1ut31F-00031K-1E; Mon, 01 Sep 2025 07:48:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1ut2yj-0006c4-NC; Mon, 01 Sep 2025 07:45:42 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
+ id 1ut30Z-0001Xy-UN; Mon, 01 Sep 2025 07:47:44 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1ut2ya-0001GA-9L; Mon, 01 Sep 2025 07:45:39 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-b471756592cso2722328a12.3; 
- Mon, 01 Sep 2025 04:45:23 -0700 (PDT)
+ id 1ut30U-0001fK-OY; Mon, 01 Sep 2025 07:47:34 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2445805aa2eso43016385ad.1; 
+ Mon, 01 Sep 2025 04:47:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756727122; x=1757331922; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tWKvDDP5dwP9a+GHQGcF3kvJvaJfbssiacc01wFF9gI=;
- b=OGOaSdL8PUM90O4rJDMWffj+1m1crNXwnbheFWG0wzD+fh103KJkeYmYTPGCJz7YhV
- w+S+ZrmHdhkRH0ULg8I5DB8CYyZHRxH/s/7pBfBfgkGhpanIPpSXhWlhAu4F+OwLOK5z
- eGc42pPPyAlhfARF/UdS+JchoYIFsO0f6TTW5OKwzn3KafT6Z1iGBKodjddFdP9pGIjU
- wxeRF7DtN5BybMjbfZP+mcF85+BOO4Rr5v9laSVe2q8eNfoq9bTdtkKG/cEt9QVb06YA
- auTiA/C95DC1+nt0myFAoCy0GdIzwbWRYUFfBo1RRA6be0OR9tJt7G4KgORKTj9TMN1h
- ZTfQ==
+ d=gmail.com; s=20230601; t=1756727243; x=1757332043; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7bJBbZ+Iwv2WKJz+iQgt35bTAqawC+zEuhzRbMD4jxc=;
+ b=K6HhJJpTB3E5g1NXhmwpP6jSBXgJcF+nBCBJBYbyY/hEM6qudsj2iYYST4iqE+gjau
+ uOs5gJWZhBAKBg8J99jZA0R4HtBgl5ij0eW++cfQJHK4hAbLXMGrDHsFh9hwclBbm5Yo
+ 12QVKkRooMwCtbbF4fedpEL3hUx2i+QzKyZLELdbKf481XLZe+jYdTy4wqsEJJ33a8+n
+ f6AW+vpQ9MS6i5FbbuN7AD8X/Tx4HAIAGicb2Ldcs73/t+PQr2gwieZsMXJZBYtgEnQF
+ ReQ2nI6jLfKbnwzsHQmudjca1y5u9l8Pj1IzEP1A9JWx9wjl7+3NWjKx9vatGEzEFFW4
+ 8/Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756727122; x=1757331922;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tWKvDDP5dwP9a+GHQGcF3kvJvaJfbssiacc01wFF9gI=;
- b=G8pBd8ZnjpFxCyBaMfdqfDEUAuj9F5NChZOLDPJJ6uXU82x3VugynkNAlG9XJHi1RI
- cUu3V0KroLdMjWnZ8JMezu49nfJXNauFwTD73LUCu/og7PGlunOpg5qwMyDk5cay16c4
- i9s2Ke3BVOsMO30xQH8v/0GPf0HN5M0CO1kc7ipW/NgxLlHCtbbQr1meC3CdxH0d1uSo
- g/ElCqd+ZYpqTZJ9RPxKI1SPJy9TwFJ9q8zXLDBxOn4yIjeaKj1Wet/hLaWDe9PjPL1g
- XiBLbxBqnVZSpxDY//I6LFXSMZoBs+eMzFCre1Yc1oJL9g2vXwjSe0O6Ugxnnib8rIG9
- kcag==
+ d=1e100.net; s=20230601; t=1756727243; x=1757332043;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7bJBbZ+Iwv2WKJz+iQgt35bTAqawC+zEuhzRbMD4jxc=;
+ b=dFFGbwP8VAOnAW61xv2fvD7VNZfwtfIq04YFb1yWDty4irps5b01P6uu2vCzj6GGva
+ asw7nTjWftSVgxllIY4hhq4EpruF0FFhK8tmxbc/hF6Wajn0JOzEH1YN06Ddt8eq1fcX
+ 5R5XxKkIFHraRT2xDqMQRbkNnjQc74e0JdzKL52DN9bsj/mSIs8xtm0I6EL2iQ37rRqo
+ +RXE2dsAObtRY0kIWZZC4QwadT0T3XAjaBKcRN859HinAVT1vnzPgWEXDKe/VFD4jjRh
+ 47xrK+p3QwGv4BSkwbbuv4WA1AAEa6bpLjSWdO6fDvwPNiojXRCqZpnzLJx2F+ljbpxM
+ swFg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWTU3EiCTyjyi0NxLBN/bTty1xIIlbif4DhOen0ImqgJCHSUjj0n2MPSZqmJ6NwOa4LCKRvjLoz8Q==@nongnu.org,
- AJvYcCXy814wee+/Pa22QpFk+aE0HlN29aDNHn9wg9aGN9iSVZwbqBdNfHqW7ItXk3TQlw3YujoXJBtLD2A1cw==@nongnu.org
-X-Gm-Message-State: AOJu0Ywo9o9Bag6yM+w7aZt6HM/oe2+MihO8Yp/KJnT7w2IffaeJOWGi
- +3YOCXM0mC6kFydPkyuCoj/rRbIvzxoV+EulrIKp8imaKmp/v9Dhg8j3fxLfDw==
-X-Gm-Gg: ASbGncsAW4ZopqnQxBqPNO4ap8mt+xC1zz4QHSSNShDXtY8cemlpUh+FTs9QgcekFi7
- mMXGcsBnBHpHnqBIRtTL0g9N8ZMrWZmv02//6EOull640ZnVhGJbd+0jm3DQsdrfkwpKfyaKPMz
- WOYHL34iqiD3TIvRDkateegcfytiVx7GOlQDSEiU/cP2j6SbGMljKnKbR3tAISI8Pm2f6wjRG8i
- O7fJSd7I+q9T5RPzU8qT7BrZrdfkEJOGVo7aUR0tB2Lw7ITPSzN9tyNijwdPksSz99R/sISqVJ9
- NHuYvdAnfM5bs+PGVX3XzL5va8rGRUuz47qR3kUmo/vcxLGN1wmXf3UvMNfujxhcav28V8LkRy0
- 06/+S9t7a4uL2bbV/diE7fQ==
-X-Google-Smtp-Source: AGHT+IGfE1Dw7d3AU5pu0OEqFkeyLda3ECKEUuw2gOdfGscotDPDxO5XmVWq2GxQ0iNWuVgoaJNqCQ==
-X-Received: by 2002:a17:903:284:b0:248:db40:daf0 with SMTP id
- d9443c01a7336-24944aa3d39mr103030815ad.31.1756727122251; 
- Mon, 01 Sep 2025 04:45:22 -0700 (PDT)
+ AJvYcCUmelVlKHy/mWB1yUv70l7jIY6n1ObobEcEJ1Hjo2qplzJKu66BzkXjgV9wVihv7Hcey5qqDO7p7r7TfQ==@nongnu.org,
+ AJvYcCXRxrgD/CCUjHMkc4ip0XZmcMU+xv3swjPrN4IT9mWY6Wu14aM/EixnlAuK0CetyYdpmXn9OOC+kg==@nongnu.org
+X-Gm-Message-State: AOJu0YwXpkNJsxVx2izPhfihWF18aHceyctObpYIe1PvuwRVZmBIseW3
+ YmB47hexJdZrLqeTcZTOU2Y7sOU4P8/n4ZVRg1W1WiU+wZ8k9lQ0OB5xF7286A==
+X-Gm-Gg: ASbGncvtOWVMnPR/IYix0RtPSzKzRpkDtv7vULZ5DDYPxf02bhPeWsFxuUIFfSTL1GY
+ WfLpNbiLOLzlBXi8MPdR7UziN5ti6NHFgutOFGCamgQUVbyRWbVctbnwxGLL6zSHY6Pn2fQ8+34
+ cg6SlKsCTTyH61C/t1DTp691QfeIiJJYMANqFD0SG+NDZdPxl2RthXS4AJN8rPYCV6fEu35PQhp
+ TpnG5//jGKMMxJDEyf8FHdxJwPKRz1/Xi3QXbuYc9MPW6kbuNhHq8hhSa4iDLLFqGunN3MkPhcM
+ kQdWQ5EFk+ZdIi7C/zmyoRmhWBjJ5w2/ehidHDYBZwNi1pRvvvvHx+7Ue9eRyucNAAKli3Ojuyu
+ pQYAzOz2cVEQYG8lDV4pbNA==
+X-Google-Smtp-Source: AGHT+IGHeax/fqpI5YZ2Y+MLrxoWZYnkFRqSUC3w6Yc5vJYkarWfDKe0qe/WMQ/r9TQGeju5IocC7g==
+X-Received: by 2002:a17:903:1211:b0:249:34b:29fe with SMTP id
+ d9443c01a7336-24944aa2e2bmr83973035ad.32.1756727242820; 
+ Mon, 01 Sep 2025 04:47:22 -0700 (PDT)
 Received: from ktock.. ([240d:1a:3b6:8b00:750a:cb0b:f0f9:68f4])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-249065a8036sm103038775ad.129.2025.09.01.04.45.16
+ d9443c01a7336-249065a8036sm103038775ad.129.2025.09.01.04.47.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 04:45:21 -0700 (PDT)
+ Mon, 01 Sep 2025 04:47:22 -0700 (PDT)
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -79,15 +80,16 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Stefan Hajnoczi <stefanha@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, ktokunaga.mail@gmail.com
-Subject: [PATCH v3 00/35] wasm: Add Wasm TCG backend based on wasm64
-Date: Mon,  1 Sep 2025 20:44:02 +0900
-Message-ID: <cover.1756724464.git.ktokunaga.mail@gmail.com>
+Subject: [PATCH v3 21/35] tcg/wasm: Add exit_tb/goto_tb/goto_ptr instructions
+Date: Mon,  1 Sep 2025 20:44:23 +0900
+Message-ID: <f15853e3bc8c5e6b3a622de90dd14261cb9c82be.1756724464.git.ktokunaga.mail@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1756724464.git.ktokunaga.mail@gmail.com>
+References: <cover.1756724464.git.ktokunaga.mail@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pg1-x52e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,223 +112,288 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-V3:
-- Fixed init_wasm_js to correctly cast pointers to Numbers when passing the
-  arguments to the getInt32 and setInt32 methods.
-- Lowered the the maximum number of instances (MAX_INSTANCES) to avoid the
-  out of memory error in recent versions of FireFox.
+In the Wasm backend, each TB is compiled to a separeted Wasm module. Control
+transfer between TBs (i.e. from one Wasm module to another) is handled by
+the caller of the module.
 
-V2:
+The goto_tb and goto_ptr operations are implemented by returning control to
+the caller using the return instruction. The destination TB's pointer is
+passed to the caller via a shared WasmContext structure which is accessible
+from both the Wasm module and the caller. This WasmContext must be provided
+to the module as an argument.
 
-- Reorganized commits to implement the backend incrementally from a clean
-  state.
-- Removed the andc, orc, eqv, nand and nor operations to rely on default
-  expansion.
-- Removed the bswap operations to use default expansion.
-- Removed the extract and deposit oprations to use default expansion.
-- Updated the sextract to emit only when the corresponding Wasm instruction
-  is available
-- Removed the not operation to rely on default expansion.
-- Fixed the neg implementation to "ret = 0 - arg"
-- Added Wasm implementation of the mb operation using the atomic.fence
-  instruction.
+If the destination TB is the current TB itself, there is no need to return
+control to the caller. Instead, execution can jump directly to the top of
+the loop within the TB.
 
-Note:
-The first four commits are temporarily imported from a separated patch
-series which enables 64bit guests using wasm64 [2]. These commits are under
-review in that series and are included here only to allow subsequent patches
-to build. Please ignore them when reviewing this series.
+The exit_tb operation sets the pointer in WasmContext to 0, indicating that
+there is no destination TB.
 
-V1:
+TCI instructions are also generated in the same way as the original TCI
+backend.
 
-This patch series adds a TCG backend for WebAssembly. Unlike eariler
-attempts [1], it is implemented using Emscripten's wasm64 target to support
-64bit guests.
-
-The first four commits are temporarily imported from a separated patch
-series which enables 64bit guests using wasm64 [2]. These commits are under
-review in that series and are included here only to allow subsequent patches
-to build. Please ignore them when reviewing this series.
-
-# New TCG Backend for Browsers
-
-A new TCG backend translates IR instructions into Wasm instructions and runs
-them using the browser's WebAssembly APIs (WebAssembly.Module and
-WebAssembly.instantiate). To minimize compilation overhead and avoid hitting
-the browser's limitation of the number of instances, this backend integrates
-a forked TCI. TBs run on TCI by default, with frequently executed TBs
-compiled into WebAssembly.
-
-# 64bit guests support by wasm64
-
-Support for 64bit guests is being reviewed in a separated patch series [2],
-which enables QEMU to use 64bit pointers by compiling with the --cpu=wasm64
-flag. The Wasm TCG backend is based on this feature and also requires
---cpu=wasm64.
-
-QEMU compiled with --cpu=wasm64 runs on wasm64-capable engines. To support
-engines which don't support wasm64 (e.g. Safari), the Wasm backend can use
-the compatibility flag "--enable-wasm64-32bit-address-limit" also introduced
-in [2]. This flag enables 64bit pointers in the C code while Emscripten
-lowers the output binary to wasm32 and limits the maximum memory size to
-4GB. As a result, the Wasm backend can run on wasm32 engiens while
-supporting 64bit guests.
-
-Note: The flag was originally named --wasm64-32bit-address-limit but this
-patch series moved it from the configure script into meson_options.txt. To
-follow Meson's naming conventions, it was renamed to
---enable-wasm64-32bit-address-limit.
-
-# Overview of build process
-
-To compile QEMU with Emscripten, the following dependencies are required.
-The emsdk-wasm-cross.docker environment includes all necessary components
-and can be used as the build environment:
-
-- Emscripten SDK (emsdk) v4.0.10
-- Libraries cross-compiled with Emscripten (please see also
-  emsdk-wasm-cross.docker for build steps)
-  - GLib v2.84.0
-  - zlib v1.3.1
-  - libffi v3.5.2
-  - Pixman v0.44.2
-
-The configure script supports --cpu=wasm64 flag to compile QEMU with 64bit
-pointer support.
-
-emconfigure ./configure --cpu=wasm64 \
-                        --static --disable-tools \
-                        --target-list=x86_64-softmmu
-emmake make -j$(nproc)
-
-If the output needs to run on wasm32 engines, use
-"--enable-wasm64-32bit-address-limit" flag.
-
-emconfigure ./configure --cpu=wasm64 --enable-wasm64-32bit-address-limit \
-                        --static --disable-tools \
-                        --target-list=x86_64-softmmu
-emmake make -j$(nproc)
-
-Either of the above commands generates the following files:
-
-- qemu-system-x86_64.js
-- qemu-system-x86_64.wasm
-
-Guest images can be packaged using Emscripten's file_packager.py tool.
-For example, if the images are stored in a directory named "pack", the
-following command packages them, allowing QEMU to access them through
-Emscripten's virtual filesystem:
-
-/path/to/file_packager.py qemu-system-x86_64.data --preload pack > load.js
-
-This process generates the following files:
-
-- qemu-system-x86_64.data
-- load.js
-
-Emscripten allows passing arguments to the QEMU command via the Module
-object in JavaScript:
-
-Module['arguments'] = [
-    '-nographic', '-m', '512M',
-    '-L', 'pack/',
-    '-drive', 'if=virtio,format=raw,file=pack/rootfs.bin',
-    '-kernel', 'pack/bzImage',
-    '-append', 'earlyprintk=ttyS0 console=ttyS0 root=/dev/vda loglevel=7',
-];
-
-The sample repository [3] (tcgdev64 branch) provides a complete setup,
-including an HTML file that implements a terminal UI.
-
-[1] https://patchew.org/QEMU/cover.1747744132.git.ktokunaga.mail@gmail.com/
-[2] https://patchew.org/QEMU/cover.1754534225.git.ktokunaga.mail@gmail.com/
-[3] https://github.com/ktock/qemu-wasm-sample/tree/tcgdev64
-
-Kohei Tokunaga (35):
-  meson: Add wasm64 support to the --cpu flag
-  configure: Enable to propagate -sMEMORY64 flag to Emscripten
-  dockerfiles: Add support for wasm64 to the wasm Dockerfile
-  .gitlab-ci.d: Add build tests for wasm64
-  tcg/wasm: Add tcg-target.h and tcg-target-reg-bits.h
-  tcg/wasm: Add register-related definitions
-  tcg/wasm: Add constraint definitions
-  tcg/wasm: Add relocation callbacks
-  tcg/wasm: Add and/or/xor instructions
-  tcg/wasm: Add add/sub/mul instructions
-  tcg/wasm: Add shl/shr/sar instructions
-  tcg/wasm: Add setcond/negsetcond/movcond instructions
-  tcg/wasm: Add sextract instruction
-  tcg/wasm: Add load and store instructions
-  tcg/wasm: Add mov/movi instructions
-  tcg/wasm: Add ext instructions
-  tcg/wasm: Add div/rem instructions
-  tcg/wasm: Add neg/ctpop instructions
-  tcg/wasm: Add rot/clz/ctz instructions
-  tcg/wasm: Add br/brcond instructions
-  tcg/wasm: Add exit_tb/goto_tb/goto_ptr instructions
-  tcg/wasm: Add call instruction
-  tcg/wasm: Add qemu_ld/qemu_st instructions
-  tcg/wasm: Add mb instruction
-  tcg/wasm: Mark unimplemented instructions
-  tcg/wasm: Add initialization of fundamental registers
-  tcg/wasm: Write wasm binary to TB
-  tcg/wasm: Implement instantiation of Wasm binary
-  tcg/wasm: Allow switching coroutine from a helper
-  tcg/wasm: Enable instantiation of TBs executed many times
-  tcg/wasm: Enable TLB lookup
-  tcg/wasm: Add tcg_target_init function
-  meson.build: enable to build Wasm backend
-  meson.build: Propagate optimization flag for linking on Emscripten
-  .gitlab-ci.d: build wasm backend in CI
-
- .gitlab-ci.d/buildtest.yml                    |   26 +-
- .gitlab-ci.d/container-cross.yml              |   20 +-
- .gitlab-ci.d/container-template.yml           |    4 +-
- MAINTAINERS                                   |    9 +-
- configure                                     |   14 +-
- include/accel/tcg/getpc.h                     |    2 +-
- include/tcg/helper-info.h                     |    4 +-
- include/tcg/tcg.h                             |    2 +-
- meson.build                                   |   16 +-
- meson_options.txt                             |    3 +
- scripts/meson-buildoptions.sh                 |    5 +
- tcg/aarch64/tcg-target.c.inc                  |   11 +
- tcg/arm/tcg-target.c.inc                      |   11 +
- tcg/i386/tcg-target.c.inc                     |   11 +
- tcg/loongarch64/tcg-target.c.inc              |   11 +
- tcg/meson.build                               |    5 +
- tcg/mips/tcg-target.c.inc                     |   11 +
- tcg/ppc/tcg-target.c.inc                      |   11 +
- tcg/region.c                                  |   10 +-
- tcg/riscv/tcg-target.c.inc                    |   11 +
- tcg/s390x/tcg-target.c.inc                    |   11 +
- tcg/sparc64/tcg-target.c.inc                  |   11 +
- tcg/tcg.c                                     |   21 +-
- tcg/tci/tcg-target.c.inc                      |   11 +
- tcg/wasm.c                                    |  855 +++++
- tcg/wasm.h                                    |  117 +
- tcg/wasm/tcg-target-con-set.h                 |   19 +
- tcg/wasm/tcg-target-con-str.h                 |   14 +
- tcg/wasm/tcg-target-has.h                     |   14 +
- tcg/wasm/tcg-target-mo.h                      |   20 +
- tcg/wasm/tcg-target-opc.h.inc                 |   18 +
- tcg/wasm/tcg-target-reg-bits.h                |   11 +
- tcg/wasm/tcg-target.c.inc                     | 2843 +++++++++++++++++
- tcg/wasm/tcg-target.h                         |   61 +
- ...2-cross.docker => emsdk-wasm-cross.docker} |   29 +-
- 35 files changed, 4218 insertions(+), 34 deletions(-)
- create mode 100644 tcg/wasm.c
+Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+---
+ MAINTAINERS               |   1 +
+ tcg/wasm.c                |  20 ++++++
+ tcg/wasm.h                |  15 +++++
+ tcg/wasm/tcg-target.c.inc | 136 ++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 172 insertions(+)
  create mode 100644 tcg/wasm.h
- create mode 100644 tcg/wasm/tcg-target-con-set.h
- create mode 100644 tcg/wasm/tcg-target-con-str.h
- create mode 100644 tcg/wasm/tcg-target-has.h
- create mode 100644 tcg/wasm/tcg-target-mo.h
- create mode 100644 tcg/wasm/tcg-target-opc.h.inc
- create mode 100644 tcg/wasm/tcg-target-reg-bits.h
- create mode 100644 tcg/wasm/tcg-target.c.inc
- create mode 100644 tcg/wasm/tcg-target.h
- rename tests/docker/dockerfiles/{emsdk-wasm32-cross.docker => emsdk-wasm-cross.docker} (85%)
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 217bf2066c..d528b9ec90 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -4004,6 +4004,7 @@ M: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+ S: Maintained
+ F: tcg/wasm/
+ F: tcg/wasm.c
++F: tcg/wasm.h
+ 
+ Block drivers
+ -------------
+diff --git a/tcg/wasm.c b/tcg/wasm.c
+index ca67436192..c54c5c5b2c 100644
+--- a/tcg/wasm.c
++++ b/tcg/wasm.c
+@@ -28,6 +28,11 @@ static void tci_args_l(uint32_t insn, const void *tb_ptr, void **l0)
+     *l0 = diff ? (void *)tb_ptr + diff : NULL;
+ }
+ 
++static void tci_args_r(uint32_t insn, TCGReg *r0)
++{
++    *r0 = extract32(insn, 8, 4);
++}
++
+ static void tci_args_rl(uint32_t insn, const void *tb_ptr,
+                         TCGReg *r0, void **l1)
+ {
+@@ -413,6 +418,21 @@ static uintptr_t tcg_qemu_tb_exec_tci(CPUArchState *env, const void *v_tb_ptr)
+                 tb_ptr = ptr;
+             }
+             break;
++        case INDEX_op_exit_tb:
++            tci_args_l(insn, tb_ptr, &ptr);
++            return (uintptr_t)ptr;
++        case INDEX_op_goto_tb:
++            tci_args_l(insn, tb_ptr, &ptr);
++            tb_ptr = *(void **)ptr;
++            break;
++        case INDEX_op_goto_ptr:
++            tci_args_r(insn, &r0);
++            ptr = (void *)regs[r0];
++            if (!ptr) {
++                return 0;
++            }
++            tb_ptr = ptr;
++            break;
+         default:
+             g_assert_not_reached();
+         }
+diff --git a/tcg/wasm.h b/tcg/wasm.h
+new file mode 100644
+index 0000000000..9da38e4d0e
+--- /dev/null
++++ b/tcg/wasm.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++#ifndef TCG_WASM_H
++#define TCG_WASM_H
++
++/*
++ * WasmContext is a data shared among QEMU and wasm modules.
++ */
++struct WasmContext {
++    /*
++     * Pointer to the TB to be executed.
++     */
++    void *tb_ptr;
++};
++
++#endif
+diff --git a/tcg/wasm/tcg-target.c.inc b/tcg/wasm/tcg-target.c.inc
+index ca10f97ed8..c077c8ad7c 100644
+--- a/tcg/wasm/tcg-target.c.inc
++++ b/tcg/wasm/tcg-target.c.inc
+@@ -26,6 +26,7 @@
+  */
+ 
+ #include "qemu/queue.h"
++#include "../wasm.h"
+ 
+ typedef uint32_t tcg_insn_unit_tci;
+ 
+@@ -139,6 +140,9 @@ static const uint8_t tcg_target_reg_index[TCG_TARGET_NB_REGS] = {
+ /* Global variable used for storing the current block index */
+ #define BLOCK_IDX 16
+ 
++/* Local variable pointing to WasmContext */
++#define CTX_IDX 0
++
+ typedef enum {
+     OPC_UNREACHABLE = 0x00,
+     OPC_LOOP = 0x03,
+@@ -146,6 +150,8 @@ typedef enum {
+     OPC_ELSE = 0x05,
+     OPC_END = 0x0b,
+     OPC_BR = 0x0c,
++    OPC_RETURN = 0x0f,
++    OPC_LOCAL_GET = 0x20,
+     OPC_GLOBAL_GET = 0x23,
+     OPC_GLOBAL_SET = 0x24,
+ 
+@@ -751,6 +757,81 @@ static void tcg_wasm_out_brcond(TCGContext *s, TCGType type,
+     tcg_wasm_out_br_to_label(s, l, true);
+ }
+ 
++#define CTX_OFFSET(f) offsetof(struct WasmContext, f)
++
++static intptr_t tcg_wasm_out_get_ctx(TCGContext *s, intptr_t off)
++{
++    tcg_wasm_out_op_idx(s, OPC_LOCAL_GET, CTX_IDX);
++    return tcg_wasm_out_norm_ptr(s, off);
++}
++
++static void tcg_wasm_out_exit_tb(TCGContext *s, uintptr_t arg)
++{
++    intptr_t ofs;
++
++    /* Store ctx.tb_ptr = 0 which indicates there is no next TB */
++    ofs = tcg_wasm_out_get_ctx(s, CTX_OFFSET(tb_ptr));
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0);
++    tcg_wasm_out_op_ldst(s, OPC_I64_STORE, 0, ofs);
++
++    /* Return the control to the caller */
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, arg);
++    tcg_wasm_out_op(s, OPC_RETURN);
++}
++
++static void tcg_wasm_out_goto(TCGContext *s, TCGReg target, int block_depth)
++{
++    intptr_t ofs;
++
++    /* Check if the target TB is the same as the current TB */
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(target));
++    ofs = tcg_wasm_out_get_ctx(s, CTX_OFFSET(tb_ptr));
++    tcg_wasm_out_op_ldst(s, OPC_I64_LOAD, 0, ofs);
++    tcg_wasm_out_op(s, OPC_I64_EQ);
++
++    /*
++     * If the target TB is the same as the current TB, no need to return to the
++     * caller. Just branch to the top of the current TB.
++     */
++    tcg_wasm_out_op_block(s, OPC_IF, BLOCK_NORET);
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0);
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, BLOCK_IDX);
++    tcg_wasm_out_op_idx(s, OPC_BR, block_depth); /* br to the top of loop */
++    tcg_wasm_out_op(s, OPC_END);
++
++    /* Store the target TB to ctx.tb_ptr and return */
++    ofs = tcg_wasm_out_get_ctx(s, CTX_OFFSET(tb_ptr));
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(target));
++    tcg_wasm_out_op_ldst(s, OPC_I64_STORE, 0, ofs);
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, 0);
++    tcg_wasm_out_op(s, OPC_RETURN);
++}
++
++static void tcg_wasm_out_goto_ptr(TCGContext *s, TCGReg arg)
++{
++    tcg_wasm_out_goto(s, arg, 2);
++}
++
++static void tcg_wasm_out_goto_tb(
++    TCGContext *s, int which, uintptr_t cur_reset_ptr)
++{
++    intptr_t ofs;
++
++    /* Set the target TB in the tmp variable. */
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, get_jmp_target_addr(s, which));
++    ofs = tcg_wasm_out_norm_ptr(s, 0);
++    tcg_wasm_out_op_ldst(s, OPC_I64_LOAD, 0, ofs);
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_SET, REG_IDX(TCG_REG_TMP));
++
++    /* Goto the target TB if it's registered. */
++    tcg_wasm_out_op_idx(s, OPC_GLOBAL_GET, REG_IDX(TCG_REG_TMP));
++    tcg_wasm_out_op_const(s, OPC_I64_CONST, cur_reset_ptr);
++    tcg_wasm_out_op(s, OPC_I64_NE);
++    tcg_wasm_out_op_block(s, OPC_IF, BLOCK_NORET);
++    tcg_wasm_out_goto(s, TCG_REG_TMP, 3);
++    tcg_wasm_out_op(s, OPC_END);
++}
++
+ static void tcg_out_op_l(TCGContext *s, TCGOpcode op, TCGLabel *l0)
+ {
+     tcg_insn_unit_tci insn = 0;
+@@ -760,6 +841,35 @@ static void tcg_out_op_l(TCGContext *s, TCGOpcode op, TCGLabel *l0)
+     tcg_out32(s, insn);
+ }
+ 
++static void tcg_out_op_p(TCGContext *s, TCGOpcode op, void *p0)
++{
++    tcg_insn_unit_tci insn = 0;
++    intptr_t diff;
++
++    /* Special case for exit_tb: map null -> 0. */
++    if (p0 == NULL) {
++        diff = 0;
++    } else {
++        diff = p0 - (void *)(s->code_ptr + 4);
++        tcg_debug_assert(diff != 0);
++        if (diff != sextract32(diff, 0, 20)) {
++            tcg_raise_tb_overflow(s);
++        }
++    }
++    insn = deposit32(insn, 0, 8, op);
++    insn = deposit32(insn, 12, 20, diff);
++    tcg_out32(s, insn);
++}
++
++static void tcg_out_op_r(TCGContext *s, TCGOpcode op, TCGReg r0)
++{
++    tcg_insn_unit_tci insn = 0;
++
++    insn = deposit32(insn, 0, 8, op);
++    insn = deposit32(insn, 8, 4, r0);
++    tcg_out32(s, insn);
++}
++
+ static void tcg_out_op_ri(TCGContext *s, TCGOpcode op, TCGReg r0, int32_t i1)
+ {
+     tcg_insn_unit_tci insn = 0;
+@@ -1468,6 +1578,32 @@ static void tcg_out_br(TCGContext *s, TCGLabel *l)
+     tcg_wasm_out_br(s, l);
+ }
+ 
++static void tcg_out_exit_tb(TCGContext *s, uintptr_t arg)
++{
++    tcg_out_op_p(s, INDEX_op_exit_tb, (void *)arg);
++    tcg_wasm_out_exit_tb(s, arg);
++}
++
++static void tcg_out_goto_tb(TCGContext *s, int which)
++{
++    /* indirect jump method. */
++    tcg_out_op_p(s, INDEX_op_goto_tb, (void *)get_jmp_target_addr(s, which));
++    set_jmp_reset_offset(s, which);
++    tcg_wasm_out_goto_tb(s, which, (intptr_t)s->code_ptr);
++}
++
++static void tcg_out_goto_ptr(TCGContext *s, TCGReg a0)
++{
++    tcg_out_op_r(s, INDEX_op_goto_ptr, a0);
++    tcg_wasm_out_goto_ptr(s, a0);
++}
++
++void tb_target_set_jmp_target(const TranslationBlock *tb, int n,
++                              uintptr_t jmp_rx, uintptr_t jmp_rw)
++{
++    /* Always indirect, nothing to do */
++}
++
+ static void tcg_out_tb_start(TCGContext *s)
+ {
+     init_sub_buf();
 -- 
 2.43.0
 
