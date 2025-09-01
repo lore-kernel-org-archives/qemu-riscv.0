@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1602ECA0FF0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 13:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86B8FCA1002
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 13:40:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut4kp-0006ro-89; Mon, 01 Sep 2025 09:39:34 -0400
+	id 1ut4lI-0007E4-3m; Mon, 01 Sep 2025 09:40:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1ut4kH-0006iX-OA
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 09:38:58 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ id 1ut4kc-0006rk-L8
+ for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 09:39:19 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1ut4kF-0002wp-Pv
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 09:38:53 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2490369145fso25010955ad.2
- for <qemu-riscv@nongnu.org>; Mon, 01 Sep 2025 06:38:51 -0700 (PDT)
+ id 1ut4kK-0002x0-Ew
+ for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 09:38:59 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-b475dfb4f42so2921083a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 01 Sep 2025 06:38:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1756733929; x=1757338729; darn=nongnu.org;
+ d=sifive.com; s=google; t=1756733932; x=1757338732; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mdJ8wwcPHAV4GqLevlt7OBZa8kgoKz5Gyd3+06/T7c4=;
- b=QX1tzWjB6CfCl5mf/0Nw0ZatKHrgYN1OGZoJ7x5/WNWB+0LYJNMlFk5BuWBlEP5S2q
- C2c2IY1a2IyzCjAzac9ZiBIhsviorxogZhFgI1QcYyZV+1YHPLFgk7Lx9PmCxNrDSBjT
- skKmEnpAeycK6vZTIi62rc1mN4CffJayeOMYE1IhzHQSWtuuclX8Vcqobl8at/U9EBZG
- 6GA5+l9IICxH25Qk9k6WOXpR5snICWd+ocO5XJmK8wZhx7u0K5BsKS3moxQtrxFEQuJ3
- 0hbtj/Px5pClhXZH4t7x526hf0by96r3BJlGI+gv1pjrN2BBmWpUm/tV4hZ+pSbfYe+U
- a7SQ==
+ bh=d4c1UhapPXWlX06VAlECXnxjVuo5dfuXxQHbFBsnDUU=;
+ b=Nk2ql3Eze69a1NZiV0cWFYnWJtmL3D2tMzgPwgphp+1i4y7O/bpKzvXK+DmVfstF87
+ aWbr3qknf2RtRRLJ3HW+3/D/LcT5qsXTCF1zuT9JiP8ClMui48oQEyNO95dG+3AVo1nJ
+ HEEPB0ZYAeSw+CcRtqpAU7r0X9QIPnIt4xA+h/nocJ2jWmTp7dpMJJ+rpqtHdcr0ILve
+ nff4d0uNWoboqqwySv9ueIOSeIacowpUA2t0cybZJpyDffvLVnQ1E040tR1st5eTEUpB
+ zfHG0YQMu5W8L/s4ycU6zvrhgK/48dBLCaMy0FyL/U2z5S26Isk3MDwQeUb3DQ7zbIqs
+ B5+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756733929; x=1757338729;
+ d=1e100.net; s=20230601; t=1756733932; x=1757338732;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mdJ8wwcPHAV4GqLevlt7OBZa8kgoKz5Gyd3+06/T7c4=;
- b=l5LOoqnWT2vZznFA9y788ock/tnVg/ohIb6t5wzAMus9f4F3qtAad4S3mys03PlZM3
- G6vZNekzndivXVjysY2nIP3fYChiAp0ktvS5ZQFyNVUvTe09ufYrdIVbklcsOlU/FT2S
- m1v/KfraTvuxUqQtyMGY2KuvW1DUCqN0W2jV3WwkkUSrtXoBkxVVxvBqiqYUzcXh4Hkk
- lpMEMuQAuJp2UNZDbMcnlxpAg6GRBGbAe3y0lEYO3MPdxRjw+Vvh90+HWqgeaUG3l6DF
- gm5ztdxLMxdMOtUdBHu9HjIkxWCJKmselN5E8N785WL171GEA9wpSgbAtvg9e8bEFcbU
- ioEw==
+ bh=d4c1UhapPXWlX06VAlECXnxjVuo5dfuXxQHbFBsnDUU=;
+ b=nofaRndl6n090X+fTHHcNSNpKeVet4zhlGSKlspnTLBQo/kF7OG9pstj+cvhvwBqg0
+ gx5Hkd889fJh7AssT1XfkgBBjlWVjsYwXS3eMBnQVTCPqhsWZpyXUFu/9g0GWEreaY+g
+ qGSFFvVRA+vHCabPxhrbLgRPxvv6jJktNoDJtFm+A05NxNUJu+1aN37FLfD7Qcuxhn4N
+ Bc2xB1vkFIFEREa88a276AzugazTEGOH2dSrtlntsHYDEDhIuejBBLZYaPdsrcI9nrlz
+ azv39aha3dNgRSlOWbzPAnwoeBzitrpEFJH9PVd9Bd4sJCq2axOBMqKCVvJ/iP7wVfi8
+ Y4+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVANxLouuqowMue/UIpVrcj7xs1CKgJ1ScfFCQvTA4LVxMEeYnfrQHQh3cPiHbAdgyZterhXqBi+Kmq@nongnu.org
-X-Gm-Message-State: AOJu0YzZ6qDtIT+v9uSKoyCwdtu45zeV+88L5oxkVlAJDEepqi9aw2cy
- ABfcXWGq/mfArZalSnaB9g9ufoMq6P005qHt1TpHEi7/G47giaek3Kjxzim+JxXgoBI=
-X-Gm-Gg: ASbGncsYOEjFDoYMx68gKwWnJOCItkiSVsKbS2c2cMEWjEIx7+KxFpTEdBe2vdDvPru
- TI9giRVds8uaDS9heV6BYYlw/N+7k8Sc6Sfr6eOEEBMMziVlmfM9HXkhdb8C8E7r4vTD7kW+SaE
- aESTOMvJIS8ZJfftJ6RUqMG2krwmPlwhO000aZ1DiSKZ1Uh9+xbML9qXatYa4kdNzggzgtc8pZB
- mdsbqtVJP/slL0CjL5L3sDL8PDnzZkjQZvB+uZ5clC6HyQgBnCO/KuqIEKxQHJ4Zb4+Usjfd7Z6
- zPqv/lu5zTn64oii1EbteqRo1Ny0mdtXEsHZp4JAg58PK65s1T73bNLKb/t9V1Modnku7++fkpw
- BdyWfQr1LRWwlyTR4DrDFj+jhGR3JS9qt1uMmSVfpHwgPWFxtr22TzWuruRBN3RbyEIU=
-X-Google-Smtp-Source: AGHT+IEetOEkDXNrgniqm/+dy2cOFxxBTIl5actKDnH7MlZILXB3IWQVwZJZtf+qvo8/l5SuGtQ/eg==
-X-Received: by 2002:a17:903:1786:b0:24a:f7a1:50c6 with SMTP id
- d9443c01a7336-24af7a1535emr11742735ad.52.1756733929246; 
- Mon, 01 Sep 2025 06:38:49 -0700 (PDT)
+ AJvYcCUUoW+pcR6S4ZOQGNB8lZCoqiraApLT4VvUKDDWoBYLfpugxuoHspKyg88H0CmJ6B1R8FbLl6j0Rj15@nongnu.org
+X-Gm-Message-State: AOJu0Yzyf/t4sYtklmsNWQZr+f+8azkNVPF2SRJDVlG15mWKCcRQ+C34
+ tZ1U8Wok6S3q9qTMkOhsafZRYwQxwz0du8/3a4GJnmTrer7C3G0fVNA+br/+sfMHKoUZpRjUpZE
+ QflAQcMw=
+X-Gm-Gg: ASbGncu45H779KiEdyoSn6uLTrqUv2awWN7DHmvKoiaKWGhO22cAzX7+UdMoIW5aHS1
+ aYiNPvaGRvVvTjowPl/GVMfY6hKXYaKz/qPI/2gAGsg2napdAlEJI/0nEDAUQgt7TlCY8md1Chj
+ Gt5YHhX9gMSBQfe4zZTZ9MRNiNg9qJKC0pLjY57kuKKlr2dxP7AErzl1Wih8OFT5/P6qkIXJKMq
+ ICIlO8eYhKhCBASRuVpdMHOdSfe5j4NmCdP26CZT9dchMu5QvcIJa5K/uJVVJmH/1Pb2UkgtEzO
+ s1QCB78415kzHCYt3gTNv+vxwoAWBWty++jreVtjQmHt37iRFWJt/VWgU64zZNwVosDklGgldmG
+ Mkke3zdDDtUJUz4BUPUww12Bnj1Cq3qnhebuZJ2AqwcowYFwdzJisUTdRnK74Whl3tPQ=
+X-Google-Smtp-Source: AGHT+IEnF/RAKZaQrhKYf5FuOuJgMlB66iX/JmOciEXFcpKZoO3FLRNf3WXijjwNXlBqj7QSzAAwkA==
+X-Received: by 2002:a17:902:ce02:b0:246:a42b:a31d with SMTP id
+ d9443c01a7336-24944ad758dmr99381865ad.44.1756733932302; 
+ Mon, 01 Sep 2025 06:38:52 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24905da3bbfsm103106375ad.70.2025.09.01.06.38.47
+ d9443c01a7336-24905da3bbfsm103106375ad.70.2025.09.01.06.38.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 06:38:49 -0700 (PDT)
+ Mon, 01 Sep 2025 06:38:51 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -74,23 +75,23 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Max Chou <max.chou@sifive.com>
-Subject: [RFC PATCH 1/3] target/riscv: Add Zvqdotq cfg property
-Date: Mon,  1 Sep 2025 21:38:13 +0800
-Message-ID: <20250901133815.1693077-2-max.chou@sifive.com>
+Subject: [RFC PATCH 2/3] target/riscv: rvv: Add Zvqdotq support
+Date: Mon,  1 Sep 2025 21:38:14 +0800
+Message-ID: <20250901133815.1693077-3-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250901133815.1693077-1-max.chou@sifive.com>
 References: <20250901133815.1693077-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,55 +107,214 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Zvqdotq extension is the vector dot-product extension of RISC-V.
+Support instructions for vector dot-product extension (Zvqdotq)
+- vqdot.[vv,vx]
+- vqdotu.[vv,vx]
+- vqdotsu.[vv,vx]
+- vqdotus.vx
 
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/cpu.c                | 1 +
- target/riscv/cpu_cfg_fields.h.inc | 1 +
- target/riscv/tcg/tcg-cpu.c        | 5 +++++
- 3 files changed, 7 insertions(+)
+ target/riscv/helper.h                         | 10 +++
+ target/riscv/insn32.decode                    |  9 +++
+ target/riscv/insn_trans/trans_rvzvqdotq.c.inc | 61 ++++++++++++++++++
+ target/riscv/translate.c                      |  1 +
+ target/riscv/vector_helper.c                  | 63 +++++++++++++++++++
+ 5 files changed, 144 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzvqdotq.c.inc
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d055ddf4623..95edd02e683 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -187,6 +187,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zvksg, PRIV_VERSION_1_12_0, ext_zvksg),
-     ISA_EXT_DATA_ENTRY(zvksh, PRIV_VERSION_1_12_0, ext_zvksh),
-     ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
-+    ISA_EXT_DATA_ENTRY(zvqdotq, PRIV_VERSION_1_12_0, ext_zvqdotq),
-     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
-     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
-     ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, debug),
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index e2d116f0dfb..5da59c22d68 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -100,6 +100,7 @@ BOOL_FIELD(ext_zvfbfmin)
- BOOL_FIELD(ext_zvfbfwma)
- BOOL_FIELD(ext_zvfh)
- BOOL_FIELD(ext_zvfhmin)
-+BOOL_FIELD(ext_zvqdotq)
- BOOL_FIELD(ext_smaia)
- BOOL_FIELD(ext_ssaia)
- BOOL_FIELD(ext_smctr)
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 78fb2791847..7015370ab00 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -767,6 +767,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
-+    if (cpu->cfg.ext_zvqdotq && !cpu->cfg.ext_zve32x) {
-+        error_setg(errp, "Zvqdotq extension requires V or Zve* extensions");
-+        return;
-+    }
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index f712b1c368e..80274f1dad6 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1284,3 +1284,13 @@ DEF_HELPER_4(vgmul_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_5(vsm4k_vi, void, ptr, ptr, i32, env, i32)
+ DEF_HELPER_4(vsm4r_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_4(vsm4r_vs, void, ptr, ptr, env, i32)
 +
-     if ((cpu->cfg.ext_zvbc || cpu->cfg.ext_zvknhb) && !cpu->cfg.ext_zve64x) {
-         error_setg(
-             errp,
++/* Vector dot-product functions */
++DEF_HELPER_6(vqdot_vv, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vqdotu_vv, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vqdotsu_vv, void, ptr, ptr, ptr, ptr, env, i32)
++
++DEF_HELPER_6(vqdot_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vqdotu_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vqdotsu_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vqdotus_vx, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index cd23b1f3a9b..50a61566670 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -1066,3 +1066,12 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
+ amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
+ amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
+ amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
++
++# *** Zvqdotq Vector Dot-Product Extension ***
++vqdot_vv    101100 . ..... ..... 010 ..... 1010111 @r_vm
++vqdot_vx    101100 . ..... ..... 110 ..... 1010111 @r_vm
++vqdotu_vv   101000 . ..... ..... 010 ..... 1010111 @r_vm
++vqdotu_vx   101000 . ..... ..... 110 ..... 1010111 @r_vm
++vqdotsu_vv  101010 . ..... ..... 010 ..... 1010111 @r_vm
++vqdotsu_vx  101010 . ..... ..... 110 ..... 1010111 @r_vm
++vqdotus_vx  101110 . ..... ..... 110 ..... 1010111 @r_vm
+diff --git a/target/riscv/insn_trans/trans_rvzvqdotq.c.inc b/target/riscv/insn_trans/trans_rvzvqdotq.c.inc
+new file mode 100644
+index 00000000000..b203c826a2e
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzvqdotq.c.inc
+@@ -0,0 +1,61 @@
++/*
++ * RISC-V translation routines for the Zvqdotq vector dot-product extension
++ *
++ * Copyright (c) 2025 Max Chou, max.chou@sifive.com
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++static bool vext_zvqdotq_base_check(DisasContext *s)
++{
++    return s->cfg_ptr->ext_zvqdotq && s->sew == MO_32;
++}
++
++static bool vext_vqdotq_opivv_check(DisasContext *s, arg_rmrr *a)
++{
++    return vext_zvqdotq_base_check(s) && opivv_check(s, a);
++}
++
++#define GEN_VQDOTQ_OPIVV_TRANS(NAME, CHECK)              \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
++{                                                        \
++    if (CHECK(s, a)) {                                   \
++        return opivv_trans(a->rd, a->rs1, a->rs2, a->vm, \
++                           gen_helper_##NAME, s);        \
++    }                                                    \
++    return false;                                        \
++}
++
++GEN_VQDOTQ_OPIVV_TRANS(vqdot_vv, vext_vqdotq_opivv_check)
++GEN_VQDOTQ_OPIVV_TRANS(vqdotu_vv, vext_vqdotq_opivv_check)
++GEN_VQDOTQ_OPIVV_TRANS(vqdotsu_vv, vext_vqdotq_opivv_check)
++
++static bool vext_vqdotq_opivx_check(DisasContext *s, arg_rmrr *a)
++{
++    return vext_zvqdotq_base_check(s) && opivx_check(s, a);
++}
++
++#define GEN_VQDOTQ_OPIVX_TRANS(NAME, CHECK)              \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
++{                                                        \
++    if (CHECK(s, a)) {                                   \
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, \
++                           gen_helper_##NAME, s);        \
++    }                                                    \
++    return false;                                        \
++}
++
++GEN_VQDOTQ_OPIVX_TRANS(vqdot_vx, vext_vqdotq_opivx_check)
++GEN_VQDOTQ_OPIVX_TRANS(vqdotu_vx, vext_vqdotq_opivx_check)
++GEN_VQDOTQ_OPIVX_TRANS(vqdotsu_vx, vext_vqdotq_opivx_check)
++GEN_VQDOTQ_OPIVX_TRANS(vqdotus_vx, vext_vqdotq_opivx_check)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 9ddef2d6e2a..6f43ed1ffdb 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1190,6 +1190,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvzfh.c.inc"
+ #include "insn_trans/trans_rvk.c.inc"
+ #include "insn_trans/trans_rvvk.c.inc"
++#include "insn_trans/trans_rvzvqdotq.c.inc"
+ #include "insn_trans/trans_privileged.c.inc"
+ #include "insn_trans/trans_svinval.c.inc"
+ #include "insn_trans/trans_rvbf16.c.inc"
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 7c67d67a13f..961b62add3f 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -921,6 +921,10 @@ GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b_tlb, ste_b_host)
+ #define WOP_SSU_B int16_t, int8_t, uint8_t, int16_t, uint16_t
+ #define WOP_SSU_H int32_t, int16_t, uint16_t, int32_t, uint32_t
+ #define WOP_SSU_W int64_t, int32_t, uint32_t, int64_t, uint64_t
++#define QOP_SSS_B int32_t, int8_t, int8_t, int32_t, int32_t
++#define QOP_SUS_B int32_t, uint8_t, int8_t, uint32_t, int32_t
++#define QOP_SSU_B int32_t, int8_t, uint8_t, int32_t, uint32_t
++#define QOP_UUU_B uint32_t, uint8_t, uint8_t, uint32_t, uint32_t
+ #define NOP_SSS_B int8_t, int8_t, int16_t, int8_t, int16_t
+ #define NOP_SSS_H int16_t, int16_t, int32_t, int16_t, int32_t
+ #define NOP_SSS_W int32_t, int32_t, int64_t, int32_t, int64_t
+@@ -5473,3 +5477,62 @@ GEN_VEXT_INT_EXT(vsext_vf2_d, int64_t, int32_t, H8, H4)
+ GEN_VEXT_INT_EXT(vsext_vf4_w, int32_t, int8_t,  H4, H1)
+ GEN_VEXT_INT_EXT(vsext_vf4_d, int64_t, int16_t, H8, H2)
+ GEN_VEXT_INT_EXT(vsext_vf8_d, int64_t, int8_t,  H8, H1)
++
++
++/* Vector dot-product instructions. */
++
++#define OPMVV_VQDOTQ(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2)          \
++static void do_##NAME(void *vd, void *vs1, void *vs2, int i)            \
++{                                                                       \
++    int idx;                                                            \
++    T1 r1;                                                              \
++    T2 r2;                                                              \
++    TX1 *r1_buf = (TX1 *)vs1 + HD(i);                                   \
++    TX2 *r2_buf = (TX2 *)vs2 + HD(i);                                   \
++    TD acc = *((TD *)vd + HD(i));                                       \
++    int64_t partial_sum = 0;                                            \
++                                                                        \
++    for (idx = 0; idx < 4; ++idx) {                                     \
++        r1 = *((T1 *)r1_buf + HS1(idx));                                \
++        r2 = *((T2 *)r2_buf + HS2(idx));                                \
++        partial_sum += (r1 * r2);                                       \
++    }                                                                   \
++    *((TD *)vd + HD(i)) = (acc + partial_sum) & MAKE_64BIT_MASK(0, 32); \
++}
++
++RVVCALL(OPMVV_VQDOTQ, vqdot_vv, QOP_SSS_B, H4, H1, H1)
++RVVCALL(OPMVV_VQDOTQ, vqdotu_vv, QOP_UUU_B, H4, H1, H1)
++RVVCALL(OPMVV_VQDOTQ, vqdotsu_vv, QOP_SUS_B, H4, H1, H1)
++
++GEN_VEXT_VV(vqdot_vv, 4)
++GEN_VEXT_VV(vqdotu_vv, 4)
++GEN_VEXT_VV(vqdotsu_vv, 4)
++
++#define OPMVX_VQDOTQ(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2)       \
++static void do_##NAME(void *vd, target_long s1, void *vs2, int i)       \
++{                                                                       \
++    int idx;                                                            \
++    T1 r1;                                                              \
++    T2 r2;                                                              \
++    TX1 *r1_buf = (TX1 *)&s1;                                           \
++    TX2 *r2_buf = (TX2 *)vs2 + HD(i);                                   \
++    TD acc = *((TD *)vd + HD(i));                                       \
++    int64_t partial_sum = 0;                                            \
++                                                                        \
++    for (idx = 0; idx < 4; ++idx) {                                     \
++        r1 = *((T1 *)r1_buf + HS1(idx));                                \
++        r2 = *((T2 *)r2_buf + HS2(idx));                                \
++        partial_sum += (r1 * r2);                                       \
++    }                                                                   \
++    *((TD *)vd + HD(i)) = (acc + partial_sum) & MAKE_64BIT_MASK(0, 32); \
++}
++
++RVVCALL(OPMVX_VQDOTQ, vqdot_vx, QOP_SSS_B, H4, H1, H1)
++RVVCALL(OPMVX_VQDOTQ, vqdotu_vx, QOP_UUU_B, H4, H1, H1)
++RVVCALL(OPMVX_VQDOTQ, vqdotsu_vx, QOP_SUS_B, H4, H1, H1)
++RVVCALL(OPMVX_VQDOTQ, vqdotus_vx, QOP_SSU_B, H4, H1, H1)
++
++GEN_VEXT_VX(vqdot_vx, 4)
++GEN_VEXT_VX(vqdotu_vx, 4)
++GEN_VEXT_VX(vqdotsu_vx, 4)
++GEN_VEXT_VX(vqdotus_vx, 4)
 -- 
 2.43.0
 
