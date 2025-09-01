@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B512CA0FF0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 10:32:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48E39CA0FFD
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 10:33:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut1nA-00043h-Mt; Mon, 01 Sep 2025 06:29:40 -0400
+	id 1ut1n8-00041q-DW; Mon, 01 Sep 2025 06:29:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1ut1my-0003vA-Lk; Mon, 01 Sep 2025 06:29:29 -0400
-Received: from mail-northeuropeazlp170100001.outbound.protection.outlook.com
- ([2a01:111:f403:c200::1] helo=DB3PR0202CU003.outbound.protection.outlook.com)
+ id 1ut1n4-0003xo-FK; Mon, 01 Sep 2025 06:29:34 -0400
+Received: from mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ ([2a01:111:f403:c200::3] helo=DU2PR03CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1ut1mv-0005M5-56; Mon, 01 Sep 2025 06:29:28 -0400
+ id 1ut1n2-0005KU-DJ; Mon, 01 Sep 2025 06:29:34 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BxHRiDZd5/CsfNQYCl8zn0chSTFv8CWP7mWVxrCdaHb8SLjscWe3NU5PLoGaIqBymgpeGel8O07D8nXf0bU2rnOlatUOl6n6mCYTnwWXvzc4FWX5BDk+eYfCTZKuokfl/BfZSDbul9MQuvosetFrD3yyfzFvEwlbU8xYvYV5MWV5TTdc0hyA7/TcBd/j9rmwAwtwxFsCnBbaKsObMGVFGaksZU0H/PL6YGV5HxlKCr2zjZSLGGRzMnXYPV2OPc8Zb2p7wcLkMeZGPSsZsAeBLnUYscMztnK783pEL7UKr8VJF1d3LRYCbn/HPpHxDwF9uAE8vrWmCg4yQjOd3N6syw==
+ b=oEYut4EqBYzYeM7Klxfpu3OJlkXgmZZUIC0uHpxaJwoGtzbaHJuBW3g7MlYNidHsmwmrLF+rVrQQIeTxse0w/wLsObI1g7RXSUDWc269j75dcPe78jBonj4RiBTby/2qVs5+FjvxTAcxKZyS+J150MyKHAGz2gvirj5Jy+fb25wO4n3CssLCV2XDZhAJlw5Crgzzi6KiwWkzeYe1mXUTwbPVHf+T8SOzWkmQlGYSDt0k0o9fQ4OBUC2uA7JVbsgbul4xSkYlNnTcPDhIm0bNLJ3dGT3ccv2CP2f4aJFny1R5ZiLq489yQAwdnIS8Z1FTj2HAZCIg9iLQJzUERV4qQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DSvD9SFB9kQi2l4O0kK5d+55oKIpDMfpuOiAudbNHVE=;
- b=i4kvo99yuggLuurKflQOwzATCZ73MyWdqqr5Ib8wSg5jI/dxkbSOj9gTOwDveNK/Y03nTzOD0Hl1ihaWBrjbvlg04yKiuGQV9KZaNUjOvpuTwZUU9vuH8179sFWbB/kKp5p78uOWJ+C/0Nwxo3YwM3EvjQYqT58AA68GFhOVGxLPBp2MMxPYb2ObrMk7doLvOqMcUsUEQhiTEkBbJWWrA1EwfMuELwDN0pk+yCwDbyk0G4P9pBlGisimhLsMbss35urr62pfqJzpavfdraxPhD+R4BFX8P2QJrmCNsPbzj0wVuRUW7htwiahZhu7sKOoRZaKXWr0h9pvrwNhjtW9cQ==
+ bh=e0H3mtfTxP444XZaqpQ4BNzALpxnjQDw7Oc9qtvC86Q=;
+ b=t4p2gt7giHaiVWtW0Yh8dT1JJtlNrVPnUpwgiQLgvyxV1vbfl9wjhBCO6q6hMNM2rP1NpzQCNrYfekXDT/9YpTFps9bmgQoq2w82mcJpKdvwvAdWvEugc9zWfxczFlDVOO+PzAmXRsv0uGWZoGiXRfjV+mUma8zFAE1/VRpTzKJO4C6LPrC8wqBb4g9MfhAEe07LaVJdOW945c1L8OWAxr/nnTdy34zjKj2vrXYOAOvOvXoYoDx15dPf3/5aghMdJ36mvmqWZvy4tJZkmiOg0dCCrUqNx2ndV8t2TGoLv3W1ySjJaACHLnWMj+MimlP9AAIY3BLOFuxX5NeS7gIC1Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DSvD9SFB9kQi2l4O0kK5d+55oKIpDMfpuOiAudbNHVE=;
- b=Ykb8u9RGfJrT6TTqAAZw7vY0dPSOqOFtrSdEaTSftHLgRpMIWA5Ez92LVIbPSLziPX2041/OB50So2+Lhw/4VCBOOEDgwfdIKLw8oEqLS6tTZ0w1E7kkdsZJdEqnM3DGhwoJNfYnDj0chIlIPOCX6bsKFsBNZDvWQ9ohWJJ0aGSi0R9F0MHFf4hDopdTEy+JB+Le0YLYaIwE6+zrsGLQHS+EfoqHPlSR6QZizlsKF3ZisyjlcmeGV8QwQ6wen0N4KdcdpYP/9NXP9jqSv6/dXxfprZ9rhFdz9NSb5lWdznqKr+llJunYniMuALLvAg2DZ+YM6JmrPr+XKvORpnPbJQ==
+ bh=e0H3mtfTxP444XZaqpQ4BNzALpxnjQDw7Oc9qtvC86Q=;
+ b=afm4XpBACYysselO9ZbFhAowxsuATPimHZdm4CMQ+Dw/U40gNxGGC5zXbhUmQbDM2VqvBjA+XCe6Ir+eyIAMosgUGEWwkuxovvLCEVPijIJ7fQ3FeWmqocaWpJQLgRUoVoml0LI+8ToxpZZo/hhvFodJfhpvpzcGsM2Kxrfein8N9s5WG1MDEpI9sHFI09Mk5YGLUUZw73HA8dyjXaFi+xeS8gywXNrGaUCkAlsyIahoqEv523pnIPVZcWHle6cuTz6VaIIbJVHkB/bYgf1EBJQC7c5xWbMpaVUOxPVcblN2g4MuRoAcqeW6EFVbX8G9qbcyUM+aRv00TqKUMeEN5w==
 Received: from AS4PR09MB6518.eurprd09.prod.outlook.com (2603:10a6:20b:4fb::5)
  by GV2PR09MB5992.eurprd09.prod.outlook.com (2603:10a6:150:be::7) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.28; Mon, 1 Sep
- 2025 10:29:08 +0000
+ 2025 10:29:11 +0000
 Received: from AS4PR09MB6518.eurprd09.prod.outlook.com
  ([fe80::ad50:891a:847c:580a]) by AS4PR09MB6518.eurprd09.prod.outlook.com
  ([fe80::ad50:891a:847c:580a%4]) with mapi id 15.20.9052.019; Mon, 1 Sep 2025
- 10:29:08 +0000
+ 10:29:11 +0000
 From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
 CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cfu@mips.com"
@@ -50,11 +50,11 @@ CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cfu@mips.com"
  "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
  "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>, "philmd@linaro.org"
  <philmd@linaro.org>, Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
-Subject: [PATCH v7 10/14] hw/riscv: Add support for RISCV CPS
-Thread-Topic: [PATCH v7 10/14] hw/riscv: Add support for RISCV CPS
-Thread-Index: AQHcGys+C5Hv/zQDNUOuthxDJQy7ag==
-Date: Mon, 1 Sep 2025 10:29:05 +0000
-Message-ID: <20250901102850.1172983-11-djordje.todorovic@htecgroup.com>
+Subject: [PATCH v7 14/14] test/functional: Add test for boston-aia board
+Thread-Topic: [PATCH v7 14/14] test/functional: Add test for boston-aia board
+Thread-Index: AQHcGys/9tuZz59UK0Cs8j8iKyR9Nw==
+Date: Mon, 1 Sep 2025 10:29:07 +0000
+Message-ID: <20250901102850.1172983-15-djordje.todorovic@htecgroup.com>
 References: <20250901102850.1172983-1-djordje.todorovic@htecgroup.com>
 In-Reply-To: <20250901102850.1172983-1-djordje.todorovic@htecgroup.com>
 Accept-Language: en-US
@@ -65,87 +65,86 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: AS4PR09MB6518:EE_|GV2PR09MB5992:EE_
-x-ms-office365-filtering-correlation-id: 69bfdaaf-58d6-48d8-0ce7-08dde942626f
+x-ms-office365-filtering-correlation-id: c3f8b996-3da0-428b-3f4a-08dde9426401
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|13003099007|38070700018; 
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?gQ/Sqjr9jYQJ+5ltTTA8ZqyjoIKGqw2WuE9kh9FNDolRmaIVz198b6xgTE?=
- =?iso-8859-1?Q?PSxxlqo1U91OxnunsV1GcT/MImU0asomYW6x7T0hmeAPTjMWnBVdWh7AeW?=
- =?iso-8859-1?Q?81wd/QlQN4q+uMJn50eR3Wtj07Q7mJc04YjIcyiFsiYQb9xRhYIMJiptvI?=
- =?iso-8859-1?Q?gtNrjLyb2tybFDIkjDKCmmVvhnpIjjLY3hFnyk1DSscBDJ7+WNGo+tKOMm?=
- =?iso-8859-1?Q?Xm/iYKBgnbxfLP1THeBWyaLq8mkc9z+Ap24xHfBE+V9Ha+ry9VEQAkV4LL?=
- =?iso-8859-1?Q?1zyCFUgoyNePc7cS9ShIOdOnRn1kE3SsivXEe27PjpScYKbMhuIWVEMf6H?=
- =?iso-8859-1?Q?3qxnQRhpuYQ4aJpcEnREbxtzmlUVx3PirYXiEyxpV9hrklxu2tiEhRscY3?=
- =?iso-8859-1?Q?ExgR0ut9fNasockxUdPP0BRLVUKdXslIsCpgL33QzsSFPEcXbemEDNW98W?=
- =?iso-8859-1?Q?mTI8Wuwpx35PRuRhr3H6Bf8xrT2jLyS5FMsQ2q089VyZL8CDOCxrX+yUQk?=
- =?iso-8859-1?Q?EoKNEQ+wErfi7+NjxJX2nZJBk7J5z41/wJMRUI7yUeE8NpkYFhwO6ve/KF?=
- =?iso-8859-1?Q?hKM+JkeEsEOO98dphZ7HK/9UXuYnmqy7794is1CzhQtplcPtzsObky7/Xa?=
- =?iso-8859-1?Q?1P0ZrhIJGnwPAI+Hl8ZLvL2vEmGQAq2MOptxCzm290S9aSudttHcsxxYW5?=
- =?iso-8859-1?Q?PccejWbTdMiCTnC7R71LB6zoJSwDeTSzE0xjk6HL7LOylkC12/kuAi+Bfz?=
- =?iso-8859-1?Q?426RZ+9czCCclDnhG4G1PHnNAKNwoBlSGOuXqk6Yd1rd/Pv/hy5cNFSE0G?=
- =?iso-8859-1?Q?gFcXoiVSpqI7rkdfJ7MAt9XMIYfn1FB4iywxFJKr0//Fm/+ESHSqiBbubA?=
- =?iso-8859-1?Q?fW1mX1NmUlmG0YSnJ06PRvbLOLjEQv1OisqeBjAqmuHWtZe6EJSRp12eTU?=
- =?iso-8859-1?Q?zKAq/cbGYwHDij46ektBjswWBfCMs6CV1EM0B9VEpnL1rD75DlDDMG9WAb?=
- =?iso-8859-1?Q?7SvsKYMuE/BkG1eUR4VEs+iT+C9qgszRGScyCESQ55Ib/5vXPzdUxwhUPs?=
- =?iso-8859-1?Q?ly7GMOXgo5zGfE7C9XGAwbRIc5joe2vAUYhsJKDVaKfB7LAPTQHjLeSmqE?=
- =?iso-8859-1?Q?8uFV0EetdhqQX+AoZ8QQjB+TtLLwGJH0PFOEDOQ3EXhAeEVq4EH97cgA7S?=
- =?iso-8859-1?Q?Lc3eXLfQx7PsyqhXWU9UnGqp3WXF2gLy522Z+X6bpXtM8S4TpugPUxjQKn?=
- =?iso-8859-1?Q?HpCBHgHCHDxZDeeHN/PuGN/PbtbwDlGyvKiVCckfO41+KCnC2hV0CoygrS?=
- =?iso-8859-1?Q?k9lTWAkgTtt1hQ0P6Ze0e91ZjpUjbuluveRHccgIzePwfp7xYorw2XCZHC?=
- =?iso-8859-1?Q?tOG1DhirwWCQ7GzzulV5TlsIu/VAhq530xndntBWBxZwicPTr2XsrJ3k9V?=
- =?iso-8859-1?Q?CVQXsCoDuERVb5iC8hfYHLsgED5MgBKgAiJo9j8cm+rSfFRbe0/wZp4ECj?=
- =?iso-8859-1?Q?9FMko2Im1kNu9gSUuEF68miZN0XfJw94BaMq73IGBWUw=3D=3D?=
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?Zdj3IfdSYoVV6w93n+UfkMs3Kdktnmycyr+ynjeTVluB2dWNZtHe4kwkAH?=
+ =?iso-8859-1?Q?rw+KL8bWTdlUvxxAFQKH7PgNrUrNrwZ6Ed3Mg81n8Kfp2rJsuOXu8dnB1r?=
+ =?iso-8859-1?Q?MZa+5x+/HuhrdHpri5jI1e3xFdpuO5En+3Nlm4IynV0lFbF0AchRPtnfEV?=
+ =?iso-8859-1?Q?Tizjnbjl4veKybvvUtuaXPLRrZSWy4QiTLCO5Sc6cmLvY8KA2ZXzr+sQbu?=
+ =?iso-8859-1?Q?qHsfwTUqHcZf5h/AXwUqWs7nwXd4BKrr0IXI6hcRqMNpC2roJebAu3ICgw?=
+ =?iso-8859-1?Q?1Rcuyz7Z8cbr3EEGOfX2x9JIVUehKKdTmOj3sDA00kEaF+jb7CBOuKQWGt?=
+ =?iso-8859-1?Q?Iefk7XePxoFqidKqDe/afU9m+cYm6XUHJ1oZam0H+WtcF3TKMKk+xXVCF1?=
+ =?iso-8859-1?Q?rlq4HgH/k2v6Y0I6TVg5fcE5lYZ6Nr11dNkL86DAn2tildVLqYyzO5Jf3F?=
+ =?iso-8859-1?Q?xZc2CRcBGADO1UfbLk+GojRh0Im860Z8wHUS0P/BU6ITYpSf5aDLRzW1og?=
+ =?iso-8859-1?Q?Rn7so+7wu2Aa0mUBEMM9d6zpkvl8bkbE9tpU3vGkyKX9Usrkll+P11v7Nc?=
+ =?iso-8859-1?Q?a0ot4nzuJtHvBnGZaPaNtSttc7BdduJwA6eWQ8OnzI+K6ytCqcFuyAaLfj?=
+ =?iso-8859-1?Q?4QKgBESrpvCfvtti679VKIXsdYP2eWDp/b4BabrJXqS5YJ9Yo4lg1XJgA0?=
+ =?iso-8859-1?Q?K9oim01vjE2N0TbsqFEXgfl07ZN4gndbGSvzdqDdbh4Og/1ioCkJo6JqAy?=
+ =?iso-8859-1?Q?EWSuKNUOf8iYCQWqvJi/Sv9WEX+TclJahZU3WGdcms4t/V1lIDVcSnHZCK?=
+ =?iso-8859-1?Q?168oRqnE14bfh5FpnxhQuV0ZzL6AMBKoJb8lKOsu2DP3Grw45dCTNQeDjL?=
+ =?iso-8859-1?Q?+m9Y/swzgUy0DiYfAa9Yf1jaBmJRiwoKs/oKMSeE1ctK83tp4pUCm0l05g?=
+ =?iso-8859-1?Q?nWnrHxCEDnSSyeDx+DYoYC+l+SNg3zReaQqjSBpgbxdyMuOR3IcwOobGPL?=
+ =?iso-8859-1?Q?m55VDPjTMTg+WyHbNUKB17QRU5YbKBrceBLdt0nfdoeJ+mZYFKuFIBrA9A?=
+ =?iso-8859-1?Q?G6gDQwsVfnujvdgtaL+dUs/USpv8qxm6Tpef8ehbe0BdDkgRuWNG2Pgmrv?=
+ =?iso-8859-1?Q?ozyKSmft/5Uy/x82MybOAK36FYJdZnPflFa5/5D9YwQU40IB4Lc6ZRLLl6?=
+ =?iso-8859-1?Q?jIDy2jPmbChRs7gO8eA6n+7TpI97OosVz5ZBol3i/ZDPb2px2K0QGCXd3u?=
+ =?iso-8859-1?Q?mB6f3ZJpZuSGlU0vNd7zL9/D1JCHSNGKjemyjZtF9OjETPZS1p84w5y/yu?=
+ =?iso-8859-1?Q?XwM0vMibCLSxhoWpEHPDdayVqkZ24wqxI3vlWubKEYvrf3YMT5DYqdOS2b?=
+ =?iso-8859-1?Q?QmOQVazDC3FXEMGDqA1PcBeId1mX20ldZwcq3MAubb64J7GThxVxV/ctoC?=
+ =?iso-8859-1?Q?qg/SEATpcVHYp0jnsou08vIzc45zR2CL7njr981rcLACQD06XZm6ZNROLR?=
+ =?iso-8859-1?Q?fo7utSvmB6Fw439tXfylcQT4o0t5L5xZJRU5ExXAtMlp4rJxB+c9h14l+7?=
+ =?iso-8859-1?Q?rimw8K4=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4PR09MB6518.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(13003099007)(38070700018); DIR:OUT;
- SFP:1102; 
+ SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?rco6mXkBVaUVOsEkS0IQC6xCxSyiFLeLvGzUjh7DLZnCw6wvmCd19fD6HJ?=
- =?iso-8859-1?Q?NxVpYS8dtzOEUtXs2I0YMoDtDogV6/RBlty5shiNTgtviYBQt25wdv+Ka2?=
- =?iso-8859-1?Q?i315J231dmQienhdIEU76F8BqIO7L2CwhdEXLq9+P0LRJapKxBr/P8xhub?=
- =?iso-8859-1?Q?4+qiPPPUc1beXEbxCUT6Vrm3iighJ0pLvyjH8FiGEwHPL/bvF13+k8iPct?=
- =?iso-8859-1?Q?JB8PHZuhEJqz1oRQ3HAj8Z+wZKogYOqTa1d+dSxWBdVDALFU7hv7jVady1?=
- =?iso-8859-1?Q?zQmJu+uUnNdLRB1RWY4zZZ4Y8r2y/o5ApWtHuzjtBpHWJn03v26RD1/kgu?=
- =?iso-8859-1?Q?Z0O7M1u2d5A2eEWEa8pG0QdSDGguh1p3Q5fdvUDdjFj/cNauxPPs5sZimm?=
- =?iso-8859-1?Q?87O0I1GQq9VkZLJmx1WKESgO/Sd52GWwRh2icfy/bLZyYfv+VElYKn1rFf?=
- =?iso-8859-1?Q?a+GuOYBpwvGaOvmNpAiXOuMjD0xFKCq9DmSaLez6Pss+rLYivX10Y/iWUn?=
- =?iso-8859-1?Q?NXtlkzR1BSuHuFbSEDAS3/09iMC+nxjEqBCrrbKw3fjX90nRoie+q8Ufwx?=
- =?iso-8859-1?Q?nt3LVi/j9VQGd+UitNgPF0eaahmZhO2eK/wcx0W1IbaEsXSJy67sH4nxh1?=
- =?iso-8859-1?Q?wE/UIPXCOHlIVs0ym7o4tB9JzJrMhWZNADL/+Xw6MKd2vYaKK0E40hth6H?=
- =?iso-8859-1?Q?A9mpwoV+axNQbicTHyjwJe9NqzdcNq99rCyJE76CCIeMdrXRFByrcgQO+f?=
- =?iso-8859-1?Q?46ttaRngVL3cxNeQDZTm/q6VA4jW7KuI73LnjKksbtmlzOfhBPjGCNVXNz?=
- =?iso-8859-1?Q?Th0Du00PSiyGnCtsBUhGC4WqZZMRv69hXFGK7RMa/YiO2wN1ZjuQpi/2xP?=
- =?iso-8859-1?Q?+80GrxRPAfMiXwV7jpVGT4ONh2mSvRkMUYBFR7QL23UgthhWguq8CV5KLg?=
- =?iso-8859-1?Q?Z0pAXDnrr2cgtuvvrIthWt1EIjOHhAI9Id+xEcWI/t+SrXczhYFfdFQEp2?=
- =?iso-8859-1?Q?XBlGI4mc0P0lvXJTiJrSUvvZkgZQKaFbVso4q55YqnHrkQBfhgxL4e3FAp?=
- =?iso-8859-1?Q?m/2DlTUChJ5+zNiJpOJnSkw9AUJM8Xqzw2zSvgG/L5WQuaFgbB5waOsMr8?=
- =?iso-8859-1?Q?rDHQmloXNyOmpg07Aq+1Xtd956GHRnZxqslivNzzD9EkN2UJycOeRWsjmk?=
- =?iso-8859-1?Q?SfmFvvSxsdhaYy3RyIAdNc6CwQd5Tz5fgzfH04KOktdbjafjqUec9NMFEL?=
- =?iso-8859-1?Q?XDdxyp0SEb6NSX5wcRe5OkfNwKGdswjRcNEKG8tnyBI3szWrtRgWeaoan9?=
- =?iso-8859-1?Q?tOEjAzxdLFtgD1rYpFfVMkL2oME9+wcwLQXtWNF/+QaddVsfZO7KGucjyl?=
- =?iso-8859-1?Q?2acZA5IUiihADfPjz2LEcX7AMFLRlkpR2zmDg2ZB8zc5OGxC4x5jGrpwaN?=
- =?iso-8859-1?Q?v+rKsGW0NEU3v14BXcvGZB+HZwGi7JkqFqev8NM+W8iIE+ntQcIemdwORe?=
- =?iso-8859-1?Q?8zxl/vzY/dpCqycI0cdhFVriLO01+RQaFWZcK4BAUEWz+074XBR8mHfbZG?=
- =?iso-8859-1?Q?dqZdre8lXpuo2txO3vXVzQpcGY9D7Z4EuQB5hCnbGH1s2Fg/0TdIm8cCLB?=
- =?iso-8859-1?Q?M4lE9uau5HgsUpxk4g3vPqNtyZGi94IOY4hukwV06Qi7nz1UaybZVCUHGG?=
- =?iso-8859-1?Q?sywgLurSqYvYubBaRHM=3D?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?JFgKsyaVp82hVF3eG5rhD+OL/Bd3xoTFMvdrkGXXMY82HiT+a299paIEVh?=
+ =?iso-8859-1?Q?sScospvC9k4XDIcrQhnNkeIFwOoB6Sll276uJQccSBlCr+W8u5SE5OhxNQ?=
+ =?iso-8859-1?Q?uB7MiMn3PGXnd2atRg+YgyJUOOD+ZH3ynCcy5xbhGIriwc/QePEyonj9s7?=
+ =?iso-8859-1?Q?t7e20be0uKOJSjK+50LLS8pkQ+DeZmbtmueCQcn8eTMldawPiY/9OROFPS?=
+ =?iso-8859-1?Q?WlorZrX3ern/FOUEk6tCcWlAOdOpE8kBqhpJ0MZWb+w+swmx4EKG0gHIhp?=
+ =?iso-8859-1?Q?siAmzLWB1RKR55ImytnR2nppbr8LKHoS7L4ps1B0+sMEfKTPdhSxjRMAAN?=
+ =?iso-8859-1?Q?ycnZ69C3TDtx3jCXSkJqedsCfSmfNf6wPH8OSW4KfXo9B8SVcqSgI8KI9z?=
+ =?iso-8859-1?Q?q0rQmCAAPCSba6DH3ALFAA7E8FMqsC0UMjHw2mX7Uhod7ktX33uwQsZmOz?=
+ =?iso-8859-1?Q?r9V6It5zsxhqkQzfLQ0Ar6yAQ0nB4bHrnidm7q8P3/thjqOSLfLlvB+mcV?=
+ =?iso-8859-1?Q?v14u9OUw+5rzTVgZweMeRqGDMGBqpqd5rapAvse1k18a/E3o4RzDs9RBLz?=
+ =?iso-8859-1?Q?D9gA7pCqxWX419q+GkZ4rKzYU7KbuZksNkX4qzDMS+GwZ3bI6l+MzuxB+Z?=
+ =?iso-8859-1?Q?EVUllHqmA9E/KQ4/yo6tX/Rka42XLdAF6AvVe78ha05YQwVdI4Oq9Kvhwc?=
+ =?iso-8859-1?Q?8drDOAahR4QbUZoGw19ceAU0Wu1wZuNHOXT+R9h4/pxohdBm0urcyJGUJ7?=
+ =?iso-8859-1?Q?Zfx4bFruVBJUaaJT0SVzRNsCuEQ9sATJDn6uzO+3RQexKlXFuHofmKzVCW?=
+ =?iso-8859-1?Q?QjXqiqxvhav/pq6CsS9zJyRznQro4FpcpRR1qRjjnbYD7n9c9rak51IdyJ?=
+ =?iso-8859-1?Q?cUpVZzS+SMlLC+H9/Fi9Q3SxE9ayXG1vrUA6UBeaSaM4pbOoAVrlJVR68+?=
+ =?iso-8859-1?Q?dOBe/8DV+whiISXNhQbabB7Om5DgsJfFT0Uc9USAzTA4lc6YGHHxIYxxO4?=
+ =?iso-8859-1?Q?jVjI1Pl79IvtzqYr5mdn9hjGxVo3cirHKkiUAaLZiM1kU9LTuZuf/2AJmq?=
+ =?iso-8859-1?Q?iwoxXlQx2rxY+/DBvuCuJd40hnbtvQcJU8wX/cqjNNI6fjSvx++OomZa4M?=
+ =?iso-8859-1?Q?/2uRDJZ+LwCuzLSHvgckB6WmBwfKOkyUXJRLGntiOpBs7J0+TdCPU4jICB?=
+ =?iso-8859-1?Q?1DQjVbH8OH2WdlPHVVocZYR7rr89IOYRqcMICTPYv5jFYnhICbwPc7+pVI?=
+ =?iso-8859-1?Q?HvPMC7Ahpz67XGfBVBBmKUfs8IUZXKlsvAQhny17cQPxXOzrY5bNR44hLm?=
+ =?iso-8859-1?Q?afhCiuXQmRTRwjj5vG6YqdSaxq4ffbeNxjfHqHgrJucCPOuCK7bPDytSUp?=
+ =?iso-8859-1?Q?J/LRTmCj/4N1NavKOSMKESB/RUcFGwsi1jdbYD0CUY9IEZyFETj5s6+Vxn?=
+ =?iso-8859-1?Q?mTdcnhnEYXpGr7EsXcPdAoiHCxrdLVwuPw+nS8EW6hODU3TiGfx2n1I63X?=
+ =?iso-8859-1?Q?JxTtR/hJKLsqv3T0z6sdpi7CEJqjwjo/cXtatgt9b8rBEPGZjXOipAdR9a?=
+ =?iso-8859-1?Q?3ptr0zdGZhhTfKyegABjgRp0nwg8tBxl2i1+NbLc7T6JKH+wyz+xOUORzt?=
+ =?iso-8859-1?Q?slkKeUkNwZmTbIx32YxGfHdhd5eJiD40LypGSn8PHrR1ZUMMnZZEMV8/8y?=
+ =?iso-8859-1?Q?v/SjlfZ6dJWGPcu4wAc=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR09MB6518.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 69bfdaaf-58d6-48d8-0ce7-08dde942626f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Sep 2025 10:29:05.6123 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c3f8b996-3da0-428b-3f4a-08dde9426401
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Sep 2025 10:29:07.1056 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: yVQce9x61e8AxWbLwoEmS6duBcLQJqfTe34w0RxIerfObXGhIvbeq6+atYTuuJeptRWmg1lr6jH+euQAXpzd5aILKFbfhVcBTxxYNtOe12A=
+X-MS-Exchange-CrossTenant-userprincipalname: G8fdB2A+u8KgPSeEDMQmFpjjCiP3DbYJ9rXzB5iGGYqzBPCjd0ScwoPm2r2vVjTo15T/1FNq0aFqo77ZodX7/godDugUbR3h2rBzV2LpB8I=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR09MB5992
-Received-SPF: pass client-ip=2a01:111:f403:c200::1;
+Received-SPF: pass client-ip=2a01:111:f403:c200::3;
  envelope-from=Djordje.Todorovic@htecgroup.com;
- helo=DB3PR0202CU003.outbound.protection.outlook.com
+ helo=DU2PR03CU002.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -167,361 +166,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add support for the Coherent Processing System for RISC-V.
-This enables SMP support for RISC-V boards that require
-cache-coherent multiprocessor systems.
+Add functional test for Boston AIA board. The P8700 RISC-V based
+CPU by MIPS supports it at the moment.
 
 Signed-off-by: Chao-ying Fu <cfu@mips.com>
 Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-Acked-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/misc/Kconfig        |   4 +
- hw/riscv/cps.c         | 209 +++++++++++++++++++++++++++++++++++++++++
- hw/riscv/meson.build   |   2 +
- include/hw/riscv/cps.h |  76 +++++++++++++++
- 4 files changed, 291 insertions(+)
- create mode 100644 hw/riscv/cps.c
- create mode 100644 include/hw/riscv/cps.h
+ tests/functional/riscv64/meson.build          |  1 +
+ .../functional/riscv64/test_riscv64_boston.py | 71 +++++++++++++++++++
+ 2 files changed, 72 insertions(+)
+ create mode 100755 tests/functional/riscv64/test_riscv64_boston.py
 
-diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-index 1e35bcd443..de44afc5b6 100644
---- a/hw/misc/Kconfig
-+++ b/hw/misc/Kconfig
-@@ -127,12 +127,16 @@ config RISCV_CMGCR
- config RISCV_CPC
-     bool
+diff --git a/tests/functional/riscv64/meson.build b/tests/functional/riscv6=
+4/meson.build
+index c1704d9275..9bce341b80 100644
+--- a/tests/functional/riscv64/meson.build
++++ b/tests/functional/riscv64/meson.build
+@@ -7,6 +7,7 @@ test_riscv64_timeouts =3D {
+ tests_riscv64_system_quick =3D [
+   'migration',
+   'opensbi',
++  'riscv64_boston',
+ ]
 =20
-+config RISCV_CPS
-+    bool
-+
- config MIPS_BOSTON_AIA
-     bool
-     default y
-     depends on RISCV64
-     select RISCV_CMGCR
-     select RISCV_CPC
-+    select RISCV_CPS
-=20
- config MPS2_FPGAIO
-     bool
-diff --git a/hw/riscv/cps.c b/hw/riscv/cps.c
-new file mode 100644
-index 0000000000..361dded660
+ tests_riscv64_system_thorough =3D [
+diff --git a/tests/functional/riscv64/test_riscv64_boston.py b/tests/functi=
+onal/riscv64/test_riscv64_boston.py
+new file mode 100755
+index 0000000000..ea4e144cf2
 --- /dev/null
-+++ b/hw/riscv/cps.c
-@@ -0,0 +1,209 @@
-+/*
-+ * Coherent Processing System emulation.
-+ *
-+ * Copyright (c) 2016 Imagination Technologies
-+ *
-+ * Copyright (c) 2025 MIPS
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation; either
-+ * version 2.1 of the License, or (at your option) any later version.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; if not, see <http://www.gnu.org/licens=
-es/>.
-+ *
-+ * SPDX-License-Identifier: LGPL-2.1-or-later
-+ *
-+ */
++++ b/tests/functional/riscv64/test_riscv64_boston.py
+@@ -0,0 +1,71 @@
++#!/usr/bin/env python3
++#
++# Boston board test for RISC-V P8700 processor by MIPS
++#
++# Copyright (c) 2025 MIPS
++#
++# SPDX-License-Identifier: LGPL-2.1-or-later
++#
 +
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "qemu/module.h"
-+#include "hw/riscv/cps.h"
-+#include "hw/qdev-properties.h"
-+#include "system/reset.h"
-+#include "hw/intc/riscv_aclint.h"
-+#include "hw/intc/riscv_aplic.h"
-+#include "hw/intc/riscv_imsic.h"
-+#include "hw/pci/msi.h"
++import os
++from qemu_test import QemuSystemTest, Asset
++from qemu_test import wait_for_console_pattern
 +
-+static void riscv_cps_init(Object *obj)
-+{
-+    SysBusDevice *sbd =3D SYS_BUS_DEVICE(obj);
-+    RISCVCPSState *s =3D RISCV_CPS(obj);
++class RiscvBostonTest(QemuSystemTest):
++    """
++    Test the boston-aia board with P8700 processor
++    """
 +
-+    /*
-+     * Cover entire address space as there do not seem to be any
-+     * constraints for the base address of CPC .
-+     */
-+    memory_region_init(&s->container, obj, "mips-cps-container", UINT64_MA=
-X);
-+    sysbus_init_mmio(sbd, &s->container);
-+}
++    timeout =3D 120  # Timeout for boot tests
 +
-+static void main_cpu_reset(void *opaque)
-+{
-+    CPUState *cs =3D opaque;
++    ASSET_FW_PAYLOAD =3D Asset(
++        'https://github.com/MIPS/linux-test-downloads/raw/main/p8700/fw_pa=
+yload.bin',
++        'd6f4ae14d0c178c1d0bb38ddf64557536ca8602a588b220729a8aa17caa383aa'=
+)
 +
-+    cpu_reset(cs);
-+}
++    ASSET_ROOTFS =3D Asset(
++        'https://github.com/MIPS/linux-test-downloads/raw/main/p8700/rootf=
+s.ext2',
++        'f937e21b588f0d1d17d10a063053979686897bbbbc5e9617a5582f7c1f48e565'=
+)
 +
-+static void riscv_cps_realize(DeviceState *dev, Error **errp)
-+{
-+    RISCVCPSState *s =3D RISCV_CPS(dev);
-+    RISCVCPU *cpu;
-+    int i;
++    def _fetch_rootfs(self):
++        """Fetch rootfs and fix permissions"""
++        rootfs_path =3D self.ASSET_ROOTFS.fetch()
++        # Ensure the rootfs file is readable
++        try:
++            os.chmod(rootfs_path, 0o644)
++        except:
++            pass  # If we can't change permissions, try anyway
++        return rootfs_path
 +
-+    /* Validate num_vp */
-+    if (s->num_vp =3D=3D 0) {
-+        error_setg(errp, "num-vp must be at least 1");
-+        return;
-+    }
-+    if (s->num_vp > MAX_HARTS) {
-+        error_setg(errp, "num-vp cannot exceed %d", MAX_HARTS);
-+        return;
-+    }
++    def test_boston_boot_linux(self):
++        """
++        Test full Linux kernel boot with rootfs on Boston board
++        """
++        self.set_machine('boston-aia')
++        fw_payload_path =3D self.ASSET_FW_PAYLOAD.fetch()
++        rootfs_path =3D self._fetch_rootfs()
 +
-+    /* Allocate CPU array */
-+    s->cpus =3D g_new0(CPUState *, s->num_vp);
++        self.vm.add_args('-cpu', 'mips-p8700')
++        self.vm.add_args('-m', '2G')
++        self.vm.add_args('-smp', '2')
++        self.vm.add_args('-kernel', fw_payload_path)
++        self.vm.add_args('-drive', f'file=3D{rootfs_path},format=3Draw')
 +
-+    /* Set up cpu_index and mhartid for avaiable CPUs. */
-+    int harts_in_cluster =3D s->num_hart * s->num_core;
-+    int num_of_clusters =3D s->num_vp / harts_in_cluster;
-+    for (i =3D 0; i < s->num_vp; i++) {
-+        cpu =3D RISCV_CPU(object_new(s->cpu_type));
++        self.vm.set_console()
++        self.vm.launch()
 +
-+        /* All VPs are halted on reset. Leave powering up to CPC. */
-+        object_property_set_bool(OBJECT(cpu), "start-powered-off", true,
-+                                 &error_abort);
++        # Wait for OpenSBI
++        wait_for_console_pattern(self, 'OpenSBI')
 +
-+        if (!qdev_realize_and_unref(DEVICE(cpu), NULL, errp)) {
-+            return;
-+        }
++        # Wait for Linux kernel boot
++        wait_for_console_pattern(self, 'Linux version')
++        wait_for_console_pattern(self, 'Machine model: MIPS P8700')
 +
-+        /* Store CPU in array */
-+        s->cpus[i] =3D CPU(cpu);
++        # Test e1000e network card functionality
++        wait_for_console_pattern(self, 'e1000e')
++        wait_for_console_pattern(self, 'Network Connection')
 +
-+        /* Set up mhartid */
-+        int cluster_id =3D i / harts_in_cluster;
-+        int hart_id =3D (i % harts_in_cluster) % s->num_hart;
-+        int core_id =3D (i % harts_in_cluster) / s->num_hart;
-+        int mhartid =3D (cluster_id << MHARTID_CLUSTER_SHIFT) +
-+                      (core_id << MHARTID_CORE_SHIFT) +
-+                      (hart_id << MHARTID_HART_SHIFT);
-+        cpu->env.mhartid =3D mhartid;
-+        qemu_register_reset(main_cpu_reset, s->cpus[i]);
-+    }
++        # Wait for boot to complete - system reaches login prompt
++        wait_for_console_pattern(self, 'Run /sbin/init as init process')
 +
-+    /* Cluster Power Controller */
-+    object_initialize_child(OBJECT(dev), "cpc", &s->cpc, TYPE_RISCV_CPC);
-+    object_property_set_uint(OBJECT(&s->cpc), "cluster-id", 0,
-+                            &error_abort);
-+    object_property_set_uint(OBJECT(&s->cpc), "num-vp", s->num_vp,
-+                            &error_abort);
-+    object_property_set_uint(OBJECT(&s->cpc), "num-hart", s->num_hart,
-+                            &error_abort);
-+    object_property_set_uint(OBJECT(&s->cpc), "num-core", s->num_core,
-+                            &error_abort);
-+
-+    /* Pass CPUs to CPC using link properties */
-+    for (i =3D 0; i < s->num_vp; i++) {
-+        char *propname =3D g_strdup_printf("cpu[%d]", i);
-+        object_property_set_link(OBJECT(&s->cpc), propname,
-+                                OBJECT(s->cpus[i]), &error_abort);
-+        g_free(propname);
-+    }
-+
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->cpc), errp)) {
-+        return;
-+    }
-+
-+    memory_region_add_subregion(&s->container, 0,
-+                            sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->cpc)=
-, 0));
-+
-+    /* Global Configuration Registers */
-+    object_initialize_child(OBJECT(dev), "gcr", &s->gcr, TYPE_RISCV_GCR);
-+    object_property_set_uint(OBJECT(&s->gcr), "cluster-id", 0,
-+                            &error_abort);
-+    object_property_set_uint(OBJECT(&s->gcr), "num-vp", s->num_vp,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->gcr), "gcr-rev", 0xa00,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->gcr), "gcr-base", s->gcr_base,
-+                            &error_abort);
-+    object_property_set_link(OBJECT(&s->gcr), "cpc", OBJECT(&s->cpc.mr),
-+                             &error_abort);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->gcr), errp)) {
-+        return;
-+    }
-+
-+    memory_region_add_subregion(&s->container, s->gcr_base,
-+                            sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->gcr)=
-, 0));
-+
-+    for (i =3D 0; i < num_of_clusters; i++) {
-+        uint64_t cm_base =3D GLOBAL_CM_BASE + (CM_SIZE * i);
-+        uint32_t hartid_base =3D i << MHARTID_CLUSTER_SHIFT;
-+        s->aplic =3D riscv_aplic_create(cm_base + AIA_PLIC_M_OFFSET,
-+                                      AIA_PLIC_M_SIZE,
-+                                      hartid_base, /* hartid_base */
-+                                      MAX_HARTS, /* num_harts */
-+                                      APLIC_NUM_SOURCES,
-+                                      APLIC_NUM_PRIO_BITS,
-+                                      false, true, NULL);
-+        riscv_aplic_create(cm_base + AIA_PLIC_S_OFFSET,
-+                           AIA_PLIC_S_SIZE,
-+                           hartid_base, /* hartid_base */
-+                           MAX_HARTS, /* num_harts */
-+                           APLIC_NUM_SOURCES,
-+                           APLIC_NUM_PRIO_BITS,
-+                           false, false, s->aplic);
-+        /* PLIC changes msi_nonbroken to ture. We revert the change. */
-+        msi_nonbroken =3D false;
-+        riscv_aclint_swi_create(cm_base + AIA_CLINT_OFFSET,
-+                                hartid_base, MAX_HARTS, false);
-+        riscv_aclint_mtimer_create(cm_base + AIA_CLINT_OFFSET +
-+                                   RISCV_ACLINT_SWI_SIZE,
-+                                   RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-+                                   hartid_base,
-+                                   MAX_HARTS,
-+                                   RISCV_ACLINT_DEFAULT_MTIMECMP,
-+                                   RISCV_ACLINT_DEFAULT_MTIME,
-+                                   RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, fal=
-se);
-+    }
-+}
-+
-+static const Property riscv_cps_properties[] =3D {
-+    DEFINE_PROP_UINT32("num-vp", RISCVCPSState, num_vp, 1),
-+    DEFINE_PROP_UINT32("num-hart", RISCVCPSState, num_hart, 1),
-+    DEFINE_PROP_UINT32("num-core", RISCVCPSState, num_core, 1),
-+    DEFINE_PROP_UINT64("gcr-base", RISCVCPSState, gcr_base, GCR_BASE_ADDR)=
-,
-+    DEFINE_PROP_STRING("cpu-type", RISCVCPSState, cpu_type),
-+};
-+
-+static void riscv_cps_class_init(ObjectClass *klass, const void *data)
-+{
-+    DeviceClass *dc =3D DEVICE_CLASS(klass);
-+
-+    dc->realize =3D riscv_cps_realize;
-+    device_class_set_props(dc, riscv_cps_properties);
-+}
-+
-+static const TypeInfo riscv_cps_info =3D {
-+    .name =3D TYPE_RISCV_CPS,
-+    .parent =3D TYPE_SYS_BUS_DEVICE,
-+    .instance_size =3D sizeof(RISCVCPSState),
-+    .instance_init =3D riscv_cps_init,
-+    .class_init =3D riscv_cps_class_init,
-+};
-+
-+static void riscv_cps_register_types(void)
-+{
-+    type_register_static(&riscv_cps_info);
-+}
-+
-+type_init(riscv_cps_register_types)
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 2a8d5b136c..945ba20612 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -15,4 +15,6 @@ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
- riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-gen=
-eric.c'))
- riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan=
-_kmh.c'))
-=20
-+riscv_ss.add(when: 'CONFIG_RISCV_CPS', if_true: files('cps.c'))
-+
- hw_arch +=3D {'riscv': riscv_ss}
-diff --git a/include/hw/riscv/cps.h b/include/hw/riscv/cps.h
-new file mode 100644
-index 0000000000..4886a01ec9
---- /dev/null
-+++ b/include/hw/riscv/cps.h
-@@ -0,0 +1,76 @@
-+/*
-+ * Coherent Processing System emulation.
-+ *
-+ * Copyright (c) 2016 Imagination Technologies
-+ *
-+ * Copyright (c) 2025 MIPS
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation; either
-+ * version 2.1 of the License, or (at your option) any later version.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; if not, see <http://www.gnu.org/licens=
-es/>.
-+ *
-+ * SPDX-License-Identifier: LGPL-2.1-or-later
-+ *
-+ */
-+
-+#ifndef RISCV_CPS_H
-+#define RISCV_CPS_H
-+
-+#include "hw/sysbus.h"
-+#include "hw/misc/riscv_cmgcr.h"
-+#include "hw/misc/riscv_cpc.h"
-+#include "target/riscv/cpu.h"
-+#include "qom/object.h"
-+
-+#define TYPE_RISCV_CPS "riscv-cps"
-+OBJECT_DECLARE_SIMPLE_TYPE(RISCVCPSState, RISCV_CPS)
-+
-+/* The model supports up to 64 harts. */
-+#define MAX_HARTS 64
-+
-+/* The global CM base for the boston-aia model. */
-+#define GLOBAL_CM_BASE 0x16100000
-+/* The CM block is 512 KiB. */
-+#define CM_SIZE (1 << 19)
-+
-+/* The mhartid bits has cluster at bit 16, core at bit 4, and hart at
-+   bit 0. */
-+#define MHARTID_CLUSTER_SHIFT 16
-+#define MHARTID_CORE_SHIFT 4
-+#define MHARTID_HART_SHIFT 0
-+
-+#define APLIC_NUM_SOURCES 0x35 /* Arbitray maximum number of interrupts. *=
-/
-+#define APLIC_NUM_PRIO_BITS 3
-+#define AIA_PLIC_M_OFFSET 0x40000
-+#define AIA_PLIC_M_SIZE 0x8000
-+#define AIA_PLIC_S_OFFSET 0x60000
-+#define AIA_PLIC_S_SIZE 0x8000
-+#define AIA_CLINT_OFFSET 0x50000
-+
-+typedef struct RISCVCPSState {
-+    SysBusDevice parent_obj;
-+
-+    uint32_t num_vp;
-+    uint32_t num_hart;
-+    uint32_t num_core;
-+    uint64_t gcr_base;
-+    char *cpu_type;
-+
-+    MemoryRegion container;
-+    RISCVGCRState gcr;
-+    RISCVCPCState cpc;
-+
-+    DeviceState *aplic;
-+    CPUState **cpus;
-+} RISCVCPSState;
-+
-+#endif
++if __name__ =3D=3D '__main__':
++    QemuSystemTest.main()
 --=20
 2.34.1
 
