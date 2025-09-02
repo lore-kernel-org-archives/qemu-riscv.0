@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ECBBCA0FF0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Sep 2025 17:23:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDF2CA0FFE
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Sep 2025 13:39:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ut8Eu-0006Je-GY; Mon, 01 Sep 2025 13:22:44 -0400
+	id 1utREb-0004Co-UF; Tue, 02 Sep 2025 09:39:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1ut8Eo-00068L-4W
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 13:22:38 -0400
-Received: from mail-yw1-x1136.google.com ([2607:f8b0:4864:20::1136])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1utRDr-0003tq-UJ
+ for qemu-riscv@nongnu.org; Tue, 02 Sep 2025 09:38:58 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1ut8Em-0001dj-Av
- for qemu-riscv@nongnu.org; Mon, 01 Sep 2025 13:22:37 -0400
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-71d6059f490so44229927b3.3
- for <qemu-riscv@nongnu.org>; Mon, 01 Sep 2025 10:22:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1utRDj-00007V-7F
+ for qemu-riscv@nongnu.org; Tue, 02 Sep 2025 09:38:49 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-61ded2712f4so4000584a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 02 Sep 2025 06:38:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756747355; x=1757352155; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W32JbMj7HdeUvsjOu6FpTcDvcbyBGjo1P+nBU4sazrw=;
- b=LhlQX25Qg7bR52yB6k9YCEzoONeLtHobIjC1RXB8YsIfkepXZHLnr/jP5gUMWRbug/
- fD4d2IUSI92EO4X2qgpeasZPODMquFfqMj6sE722l9h72KRMxKgxEYji62Yn9aPT9oaK
- SZ+c4OvAMMn2HHNdBBssWkgHPK51oFiNyGU+BR/HDsbjNBdwMwrZJnazbud+08CNsjgq
- coOoRVmVNkoR1/WFPOK1PFjuDQkAl9DeyYtdFicT5Yw7OUnLWzp+dYfH3P/ErTCNWIMS
- f330C4CNyVkcLeqWyGbhRRoaEbQguqKHNOexy4ZfKMkzIa68fO3csq80cM/zKn+y57+j
- atIg==
+ d=linaro.org; s=google; t=1756820323; x=1757425123; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wmLuN/L6a+1f3NMiwbY7vqahMITBbCj9nv51vA3FXlE=;
+ b=m8UAPs9hKhDQcyX0UVafI/BQLiH9q8ddqwSnaJ8pJI+cCm8YTQEF7DMkmny5P8c2XX
+ fTpyBC0BwHyk5hRpHXypj7+pT1dKBQ22DxhL8TN0S51XbupDdE4FLkks4HClT0wuTbau
+ VWykT8JtWFmxwM2trU2gWdzGG8m2fTFW5NfrZRfQlbKSbDRYg5rWgpYbeVf9D0B4FmAs
+ f/8e1J5jxeiyHYO8wbL/CVy5bypg6UFxHBLwAJXUsaf5HtKTWJPihHYFzHUU7JhNpdVE
+ tbZzVlhGietvCBa4GrNmS+EBsE5Z4MX92aCFZQ+aGK4w9x54DcBHPjlcPa+D8DgBFvcT
+ peXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756747355; x=1757352155;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=W32JbMj7HdeUvsjOu6FpTcDvcbyBGjo1P+nBU4sazrw=;
- b=jRoWwpyah5s+0qjYCefQt5xcDXH1XOMu5yNWDZIUQsmihp7HNK/sRWFQbvpqL8pw34
- 3pOE2UQ8ZebuZvtXLm27apxTMCroo8lX1hTGo/ya+N9n51uN1x/tFFogU+8KC6n4z2+o
- oajPPfFnavOMJkg7dnOhtn/9hDlPWNpwlqpdVuRk57Kp6ez9dqTEWIgjfBCAuLMtH8b4
- 4d4Mbb2S75gUaDLCg6AXeoLAYNA9kluuGKWSRdfM4abU47yF28P9uVli3iiWrP4vd14n
- 4QYMo/Z3B9hOSM8hPJ///SvXGnq7aZ2yhelpAuvnWq34mhM24A7zPLfXZKbv4DgToFhv
- D4Zw==
+ d=1e100.net; s=20230601; t=1756820323; x=1757425123;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wmLuN/L6a+1f3NMiwbY7vqahMITBbCj9nv51vA3FXlE=;
+ b=kce2Wy/gP3oBLmThgz8AUcAodQqdIwOxhG2QZE+TBd5h+pxwS86aTGywfVaogFyrnl
+ 6G/oeR9Cx6c07yvHtWwxE7lEGqsLKTP9qKbM3Lqwq6ojsruV7tfwzxRcssnjNk9LXRpk
+ I70L09efugAHFBLnQHLmeyzt3SdPFfMt4nqrigyEDcXwZP3ZzfvFKP1PPmW+y0lD8stk
+ IW3nS85y3BD/ptXiIstrcqN/pyFk/4cmoO50HGmcs3tLG6WFVY0fZQA/ie2OIyoENhGb
+ iNm4LcToBit5mjebCRob3QOMTt8vTnPkAYz1ctQLZIarKHmCypNK4KFgPy0OIREbOyx/
+ TWRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWgrxZfxKd3ze6kY8oimLrOgCZZI7Y0NqGWlZzzunVbXrSuEIGUa1IZKZ5zrQ4YYJcWxp7RXZ0jlESS@nongnu.org
-X-Gm-Message-State: AOJu0Yz5imD6/vKhsteSF6IOVo/PI+QqabYwbld36UOvXq1Cv3aAJbAa
- en2L4tCnGEpNc01ABevXP7IBrSvYS13LSknA4a+0Q3XgnyGEAJvMRQtMTPLEkp6QQUosPgASIwv
- 9vGvv9RDXDOVxqq6tsAC0AKIRj78b8NA62n6sJ5NwsA==
-X-Gm-Gg: ASbGncvUH2elEKK+Z3OXTw7E3wITbZ48gaXqdtzS1KbVtIVspc44Q+cZEgq1GMtacGa
- PJMdr2dC3WNaJuIlNzpfFj9j/ZIML97VUehsdili92U/mWbvOxg1utkmB5UmSi1wsDRA889gKsA
- jqmMjNeLIkQPUhkbdYJjFw4JRXFGvgwcMAJHhM78HZOy4naYmHSve3aQ/1HmCwpCk2sW/t81AMd
- 1H1tiRmVYxIXmUtzPI=
-X-Google-Smtp-Source: AGHT+IFMBNAZpOfvX8SbnCB3gv+7ItfdwgvkhTuf6t2hwSVPw1ztr3LJLm91g41PCVIvBPMTH8T8y2DlJbGJ+ny2TR0=
-X-Received: by 2002:a05:690c:9416:20b0:722:7a7f:5381 with SMTP id
- 00721157ae682-7227a7f6e8cmr78637077b3.14.1756747354887; Mon, 01 Sep 2025
- 10:22:34 -0700 (PDT)
+ AJvYcCUyYaBVUD/NSq2FR2vGr7efMhJEUrq6cMTW2stUPM6tGrJQUWbLyomzUrr4P7FD9zsgw9yzftnWyZ9e@nongnu.org
+X-Gm-Message-State: AOJu0YwJgcNwwjhra34GRXpjUS4cPeG3xskZiCBGylcBkI6AhkUGDP3d
+ lDUnGU06PQAhQUL20Qj5v18KkcOKvOvkVSkOh7kFBQ3lK9d0RCsamgLieuGprktfvH8=
+X-Gm-Gg: ASbGncuFdhc1U+cescV89lYAzq1dnyYbrECYtKE34NjIe378gG+ui+JWvyEJJnMRwbA
+ ZBqp8t281urum8pZViOPCcmDpK935yeFTyIqXsvr18DefRC7cwaVXRPmhZn2H6tGPevGwQxt4OB
+ at0OQkdyYDzLPIMH5h36CN1IJAM94aqh8zmi2xlG6+uwT/cLDRMeYi8d52LuqNDQNKZl64X2Mdp
+ czlXUV0+H9BZs6ud8ziNhe5xvowfun201ZVaA1GB83i1jQAvoq/i4UvTYysqA+9YdkaEAlUxjwc
+ lErOxlVFQ8FKciE8wNKlSINi6Q2rScKZqh5MPCHDB7blW3qrHUOupvcEfcZsU+Y8rwHG+XdVCEp
+ 84azjgYQLZaT1vJsN8dWLb5l7qXpUI+Ys2V2nLRjo+tfUl8kn6vKlc0Yl/Qz9b5XLLUHTUr8=
+X-Google-Smtp-Source: AGHT+IFySwjcqrEbFbl72gAuJPszLA7vj3X0Qv/OAIcOit4yG81vxbDgXgKPrKaGdvAihpRT+uPzKQ==
+X-Received: by 2002:a05:6402:504b:b0:61c:5264:902c with SMTP id
+ 4fb4d7f45d1cf-61d26c53e03mr11015110a12.23.1756820323467; 
+ Tue, 02 Sep 2025 06:38:43 -0700 (PDT)
+Received: from [10.40.6.207] (93-51-222-138.ip268.fastwebnet.it.
+ [93.51.222.138]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-61cfc52a886sm9467717a12.43.2025.09.02.06.38.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 02 Sep 2025 06:38:43 -0700 (PDT)
+Message-ID: <5d0fe741-9063-441d-8abc-3bb0662c1fbe@linaro.org>
+Date: Tue, 2 Sep 2025 15:38:41 +0200
 MIME-Version: 1.0
-References: <20250822092410.25833-1-cjchen@igel.co.jp>
-In-Reply-To: <20250822092410.25833-1-cjchen@igel.co.jp>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 1 Sep 2025 18:22:23 +0100
-X-Gm-Features: Ac12FXx4bqVFmiV0CZPmFhtyvqOeF2ktAnEx6UW5G9ETXHK22vVaMgcmrLmZ4TQ
-Message-ID: <CAFEAcA96Dk3s=SGfm-vtiuxCnjpHmA0Oh5P81wyvtWJzK6KPSQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 0/9] support unaligned access to xHCI Capability
-To: CJ Chen <cjchen@igel.co.jp>
-Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org, 
- qemu-arm@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- Keith Busch <kbusch@kernel.org>, 
- Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Tyrone Ting <kfting@nuvoton.com>, 
- Hao Wu <wuhaotsh@google.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
- Tomoyuki Hirose <hrstmyk811m@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1136;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1136.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 2/3] target/riscv: rvv: Add Zvqdotq support
+To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20250901133815.1693077-1-max.chou@sifive.com>
+ <20250901133815.1693077-3-max.chou@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20250901133815.1693077-3-max.chou@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,22 +108,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 22 Aug 2025 at 10:25, CJ Chen <cjchen@igel.co.jp> wrote:
->
-> This patch set aims to support unaligned access to xHCI Capability
-> Registers.
->
-> To achieve this, we introduce the emulation of an unaligned access
-> through multiple aligned accesses. This patch set also adds a test
-> device and several tests using this device to verify that the
-> emulation functions correctly.
+On 9/1/25 23:38, Max Chou wrote:
+> +#define OPMVV_VQDOTQ(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2)          \
+> +static void do_##NAME(void *vd, void *vs1, void *vs2, int i)            \
+> +{                                                                       \
+> +    int idx;                                                            \
+> +    T1 r1;                                                              \
+> +    T2 r2;                                                              \
+> +    TX1 *r1_buf = (TX1 *)vs1 + HD(i);                                   \
+> +    TX2 *r2_buf = (TX2 *)vs2 + HD(i);                                   \
+> +    TD acc = *((TD *)vd + HD(i));                                       \
+> +    int64_t partial_sum = 0;                                            \
 
-I think it would be good if we can land this series early in
-the 10.2 cycle so we have plenty of time to fix any
-unexpected issues that might crop up.
+I think it's clear partial_sum should be the 32-bit type TD.
+Indeed, I'm not sure why you don't just have
 
-I've left my review comments on various of the patches.
+	TD acc = ((TD *)vd)[HD(i)];
 
-thanks
--- PMM
+> +                                                                        \
+> +    for (idx = 0; idx < 4; ++idx) {                                     \
+> +        r1 = *((T1 *)r1_buf + HS1(idx));                                \
+> +        r2 = *((T2 *)r2_buf + HS2(idx));                                \
+> +        partial_sum += (r1 * r2);                                       \
+
+	acc += r1 * r2;
+
+> +    }                                                                   \
+> +    *((TD *)vd + HD(i)) = (acc + partial_sum) & MAKE_64BIT_MASK(0, 32); \
+
+	((TD *)vd)[HD(i)] = acc;
+
+because that final mask is bogus.
+
+
+r~
+
+> +}
+> +
+> +RVVCALL(OPMVV_VQDOTQ, vqdot_vv, QOP_SSS_B, H4, H1, H1)
+> +RVVCALL(OPMVV_VQDOTQ, vqdotu_vv, QOP_UUU_B, H4, H1, H1)
+> +RVVCALL(OPMVV_VQDOTQ, vqdotsu_vv, QOP_SUS_B, H4, H1, H1)
+
 
