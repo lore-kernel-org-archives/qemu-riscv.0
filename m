@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 123D0CA0FF2
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 17:19:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6628CA1009
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 20:14:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1utr8k-0004zY-HS; Wed, 03 Sep 2025 13:19:22 -0400
+	id 1uttrj-0000Vd-RX; Wed, 03 Sep 2025 16:13:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1utr8g-0004z9-JM
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 13:19:18 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1uttrc-0000U4-6I
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 16:13:56 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1utr8d-0007xv-Ti
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 13:19:18 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-24456ce0b96so1361635ad.0
- for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 10:19:15 -0700 (PDT)
+ id 1uttrT-0002ix-SJ
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 16:13:49 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-32326793a85so167059a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 13:13:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1756919953; x=1757524753; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1756930421; x=1757535221; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=hMiuVffIgpE15VRvxm6M0vZ5A6OdLUBM0JnSzEEV5Os=;
- b=msv8ouQ1a3LxY5eWIJVJmO6+D4zIheBvRC7pSBjlgd5btDPwXKZV/n4kw4A3n5++Yt
- +GvqpTOuLksBO8UiuFoHZFP5wP4N2tqHmeCCb20+DJsXkoFGZXimVacp86u1KJDvcCOH
- Xpb2Ejk9W7hQrCAoKiHEqPHP/2J0Lp7UODQntEb5DpjrO7adwKgx7TDVzj0idUWUpUcw
- I5PKwbwhStA9MsO6FTkmU84qds40akboiT7Gq7loDW1FgKXMgs0kkYuAe1EPkdf180Y+
- KiOn5XG6mNYASRly/+NB704D155vfVT3JqNbPIShaeA5Q4pDTvqGDSD9LXlmW8M90yiM
- jPwg==
+ bh=Z8oR7Ug/NBOYS0ZxmroGQfUtno2HikxnOcrwBNJDARM=;
+ b=FWW4FJn8KXBKM+GrSYZ9no6yiNtK8bxahMoFypUUN6RF2RecqA09vxgdQBiKjrHVFg
+ sY7FDfEyqGxv0dLDivRr4TQT4x9M9624/MYc2OjZYUihvBB1tRSXUtDONHtY9u84tvHM
+ 42sXCtCHD0Qg8hy2jcxjhb945T2cI0O6BugF8AX6tKvj7V1vKSCLvky85Oc6DvTKoI3b
+ san7pPy9xZwXEGdexq19/iyIJNHbbyc3FL0K1uD9VFvbv573J+7hK/jhXEXlvHA0cOxC
+ sZM5IMmlSQc/i98vfcwcKzttUOpYw26J51fKF2IjVlfB9hjqx6ASLqOlt4xKvGbsKn8V
+ ZcSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756919953; x=1757524753;
+ d=1e100.net; s=20230601; t=1756930421; x=1757535221;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hMiuVffIgpE15VRvxm6M0vZ5A6OdLUBM0JnSzEEV5Os=;
- b=lmdkoiETXRCLFAhUWzV0KSZvnzu9CuJMMOiRsZWEvhj0co0bbIulkvX4dkxz2fLezY
- M6Hm/8EGkvWD5VRmSRomKv5kic32rO5Cre4jOARhub1jK2MwkT6W0NVg4fyDxdmF5rbc
- mTagBVY/sRWO4bG4TuhySzxjp8br0UVdPqfw+IU6Zq/qJTWbY9qjR3P45/9PZs3W2xHj
- r1XUwTA/O6vhkEALpoiqX4f/pfJIBnaSTzMv6KNGujgGafQ+t9L+ZDJmtF7/lwwTZ/SX
- Squz6dm+gjI2WgFnz0HrVdY3Oywhj5SJE0P9cPwhyJ3x40tI3UdfP3Lm1wHXf/B0VlqX
- GjpQ==
+ bh=Z8oR7Ug/NBOYS0ZxmroGQfUtno2HikxnOcrwBNJDARM=;
+ b=BvPkHV1iSnJnINTwCg9eidr8pY9cN4ZyG2kScT7FYcfjRBstruqhIQA0PXJmOEpwxN
+ Bv821Wc+3ZrANGeiDRwlQY6CjMZ0ApUv9flugutQJUTFXJm2PuDjcQ8NhHk/GAB53CuP
+ jLEPTAWtuvL8yyH0Rpn41Ea1vnP5GfeAMzeKWNk7MFC/Sf6SbRSg5kQbBjz+I2A9zVFf
+ ofJK+HP7euxqelj3tC0HjWr7HwKhJjRggg4IGd4n8RchgVt/r5m8hK2CinFnabCTEpDs
+ kiUvtLDdlDr42jgGQzfu7SgfR6ZC58vR/YlOgXptegXsnsBjAVbnOlo5JzO0AXaXTRoV
+ XqSw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJaUfbk1HOU1OrKMzm2BDNXOjMAegdpO8wy/OkcPvFgyU/YIYxzKjsr40rilW4iWneX6c0HB2xEDm2@nongnu.org
-X-Gm-Message-State: AOJu0Ywy0BYP8JsvnG4l63PUaTW+5Obz5bRMGqwskTm5TS6lsonmVU16
- fTGNUVfnNkY2yI4eXrVqpzcLYDoCbauIZZnDanQEaHdFVAnRMC7pJ6CLSLCCZuMm4eI=
-X-Gm-Gg: ASbGncsZKrwQ9lqxsFZ0mE3l/qz3J3TZm/GcAQIRZBgCYQ22JS6x0F8Tg+eZWGMnYVG
- 4E3AaQhCy7dGgjMkyeTAM+HqSU87wZaBXz82rGbyikFxBiaiU84RRxEuENEpA4rgQE90HQCtwGp
- SKrG+I8cLPpmGbULoW8+yK9f2wTsd2ZQeX3pi7Ibf9iKHR2Ua/lELcatuTInXd+L1x5MWJnLoVn
- ME/zBslvwphSEEU9YuJm5fKUtAbq9e7llfpee8K6qBt32xiOjYcEBE3uMZyo7Zv6la+NmSUrtHD
- H/YrzG8yM+CJvdF0iTEE+B3RySWcGAdKwwc9RcqnZX4pX2n310V7YPsRzmjYpUALuM8lJRh8Xl5
- DdZqS1PXQLPK8D+oHN83SZSZbl5ruFPlk4yJRl3tNW7xRisI=
-X-Google-Smtp-Source: AGHT+IFFiIfHyaPkcqhvvUlPRFH2dNcM1d7gNp2tcJTXjm+EwPdIakB4C26rMLekxHA9x3IgsAqR9w==
-X-Received: by 2002:a17:902:dac7:b0:24b:1585:6350 with SMTP id
- d9443c01a7336-24b158566c4mr99468175ad.11.1756919953056; 
- Wed, 03 Sep 2025 10:19:13 -0700 (PDT)
+ AJvYcCXv8xYRdUL5sdx50xsT3y6q+5FGls7ykStGSzJ8iMYMRd/3yyYQMMTXOxWFs0LXO/LfGl9if3PMT8O2@nongnu.org
+X-Gm-Message-State: AOJu0Yyd+nRk9dHvxoOF6RzMvCodcWynyJQ9jeQTzCjOU5UtDXFU+qYB
+ ddZzW/wTvPKW6BFXrSiieKVT5H/fUvQ5F+Aap1mNCTs32mvX/6gGAjPlrGMK7MFsK/I=
+X-Gm-Gg: ASbGncvlJvxfYB6/TFt9q8vaBI3DcPQCuIwerZHSIbKSz5OdI2ZUtjTH0rGZXwz4RWB
+ RkV1LqadOQSZA5q3Y6oia/PvxI0wF1yza91EweKLSpmUmZPK/E8vWg8Bqv9amcMLjvP6BNxgXCE
+ 9JrCF2BVr2L6EQ8o6h9+ZvuI9rWv4gCZgw6xEYQybFfB4sexZ43bLE8afWpVFQOYDjIsZs7tC3i
+ DQLNsa8ppDS59YkYbADYI/emsYRhp5ojmTvQGtK7MVhOmGskgTmlcder9vPjigG4CaEOVamA2l/
+ cr7nUYDq6VVGFH1axlq9Sl7FIefqRJfTUgW3jS3/m1bwlWyYt/RToODjgIdYrgqu/2nIP1b6XAB
+ 9lmGkE4Ia5I5kqxxfSIls5BCYBPVhlcXpJvsxPs9m97J7YfU=
+X-Google-Smtp-Source: AGHT+IH6lyJIqKNClqanASQizB/0VF5Kcvuuvw8f/faiT7LrhBlLXCWtptmMbwZJ3BXuvduUv3DIOg==
+X-Received: by 2002:a17:90b:1642:b0:32b:6132:5f94 with SMTP id
+ 98e67ed59e1d1-32b61326258mr4103392a91.21.1756930421459; 
+ Wed, 03 Sep 2025 13:13:41 -0700 (PDT)
 Received: from [192.168.68.110] ([187.10.187.251])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24903705b91sm167974185ad.12.2025.09.03.10.19.09
+ 41be03b00d2f7-b4cd28adc00sm15228576a12.32.2025.09.03.13.13.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Sep 2025 10:19:12 -0700 (PDT)
-Message-ID: <5cef4d88-9a4c-42a2-a405-debfe3a61497@ventanamicro.com>
-Date: Wed, 3 Sep 2025 14:19:08 -0300
+ Wed, 03 Sep 2025 13:13:41 -0700 (PDT)
+Message-ID: <6bff4c9d-1da4-40b3-901a-789923d8ef7e@ventanamicro.com>
+Date: Wed, 3 Sep 2025 17:13:36 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] target/riscv: Fix IALIGN check in misa write
+Subject: Re: [PATCH 2/3] target/risvc: Fix vector whole ldst vstart check
 To: Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
@@ -79,14 +79,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Nicholas Joaquin <njoaquin@tenstorrent.com>,
  Ganesh Valliappan <gvalliappan@tenstorrent.com>
 References: <20250903030114.274535-1-npiggin@gmail.com>
- <20250903030114.274535-2-npiggin@gmail.com>
+ <20250903030114.274535-3-npiggin@gmail.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20250903030114.274535-2-npiggin@gmail.com>
+In-Reply-To: <20250903030114.274535-3-npiggin@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,174 +109,172 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi Nick,
 
+^ typo in the patch subject: s/risvc/riscv
 
 On 9/3/25 12:01 AM, Nicholas Piggin wrote:
-> The instruction alignment check for the C extension was inverted.
-> The new value should be checked for C bit clear (thus increasing
-> IALIGN). If IALIGN is incompatible, then the write to misa should
-> be suppressed, not just ignoring the update to the C bit.
+> The whole vector ldst instructions do not include a vstart check,
+> so an overflowed vstart can result in an underflowed memory address
+> offset and crash:
 > 
->  From the ISA:
+>      accel/tcg/cputlb.c:1465:probe_access_flags:
+>        assertion failed: (-(addr | TARGET_PAGE_MASK) >= size)
 > 
->    Writing misa may increase IALIGN, e.g., by disabling the "C"
->    extension. If an instruction that would write misa increases IALIGN,
->    and the subsequent instruction’s address is not IALIGN-bit aligned,
->    the write to misa is suppressed, leaving misa unchanged.
+> Add the VSTART_CHECK_EARLY_EXIT() check for these helpers.
 > 
 > This was found with a verification test generator based on RiESCUE.
 > 
 > Reported-by: Nicholas Joaquin <njoaquin@tenstorrent.com>
 > Reported-by: Ganesh Valliappan <gvalliappan@tenstorrent.com>
 > Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-
-Fixes: f18637cd61 ("RISC-V: Add misa runtime write support")
-
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/csr.c                        | 16 ++++-
->   tests/tcg/riscv64/Makefile.softmmu-target |  5 ++
->   tests/tcg/riscv64/misa-ialign.S           | 88 +++++++++++++++++++++++
->   3 files changed, 106 insertions(+), 3 deletions(-)
->   create mode 100644 tests/tcg/riscv64/misa-ialign.S
+>   target/riscv/vector_helper.c             |  2 +
+>   tests/tcg/riscv64/Makefile.target        |  5 ++
+>   tests/tcg/riscv64/test-vstart-overflow.c | 75 ++++++++++++++++++++++++
+>   3 files changed, 82 insertions(+)
+>   create mode 100644 tests/tcg/riscv64/test-vstart-overflow.c
 > 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 8842e07a73..64b55b7add 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2140,9 +2140,19 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->       /* Mask extensions that are not supported by this hart */
->       val &= env->misa_ext_mask;
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index fc85a34a84..e0e8735000 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -825,6 +825,8 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+>       uint32_t esz = 1 << log2_esz;
+>       int mmu_index = riscv_env_mmu_index(env, false);
 >   
-> -    /* Suppress 'C' if next instruction is not aligned. */
-> -    if ((val & RVC) && (get_next_pc(env, ra) & 3) != 0) {
-> -        val &= ~RVC;
-> +    /*
-> +     * misa writes that increase IALIGN beyond alignment of the next
-> +     * instruction cause the write to misa to be suppressed. Clearing
-> +     * "C" extension increases IALIGN.
-> +     */
-> +    if (!(val & RVC) && (get_next_pc(env, ra) & 3) != 0) {
-> +        /*
-> +         * If the next instruction is unaligned mod 4 then "C" must be
-> +         * set or this instruction could not be executing, so we know
-> +         * this is is clearing "C" (and not just keeping it clear).
-> +         */
-> +        g_assert(env->misa_ext & RVC);
-> +        return RISCV_EXCP_NONE;
->       }
->   
->       /* Disable RVG if any of its dependencies are disabled */
-> diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-> index 3ca595335d..6e470a028f 100644
-> --- a/tests/tcg/riscv64/Makefile.softmmu-target
-> +++ b/tests/tcg/riscv64/Makefile.softmmu-target
-> @@ -24,5 +24,10 @@ EXTRA_RUNS += run-test-mepc-masking
->   run-test-mepc-masking: test-mepc-masking
->   	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
->   
-> +EXTRA_RUNS += run-misa-ialign
-> +run-misa-ialign: QEMU_OPTS := -cpu rv64,c=true,v=true,x-misa-w=on $(QEMU_OPTS)
-> +run-misa-ialign: misa-ialign
-> +	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
+> +    VSTART_CHECK_EARLY_EXIT(env, evl);
 > +
->   # We don't currently support the multiarch system tests
->   undefine MULTIARCH_TESTS
-> diff --git a/tests/tcg/riscv64/misa-ialign.S b/tests/tcg/riscv64/misa-ialign.S
+>       /* Calculate the page range of first page */
+>       addr = base + (env->vstart << log2_esz);
+>       page_split = -(addr | TARGET_PAGE_MASK);
+> diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
+> index 4da5b9a3b3..19a49b6467 100644
+> --- a/tests/tcg/riscv64/Makefile.target
+> +++ b/tests/tcg/riscv64/Makefile.target
+> @@ -18,3 +18,8 @@ TESTS += test-fcvtmod
+>   test-fcvtmod: CFLAGS += -march=rv64imafdc
+>   test-fcvtmod: LDFLAGS += -static
+>   run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,zfa=true
+> +
+> +# Test for vstart >= vl
+> +TESTS += test-vstart-overflow
+> +test-vstart-overflow: CFLAGS += -march=rv64gcv
+> +run-test-vstart-overflow: QEMU_OPTS += -cpu rv64,v=on
+> diff --git a/tests/tcg/riscv64/test-vstart-overflow.c b/tests/tcg/riscv64/test-vstart-overflow.c
 > new file mode 100644
-> index 0000000000..7f1eb30023
+> index 0000000000..72999f2c8a
 > --- /dev/null
-> +++ b/tests/tcg/riscv64/misa-ialign.S
-> @@ -0,0 +1,88 @@
+> +++ b/tests/tcg/riscv64/test-vstart-overflow.c
+> @@ -0,0 +1,75 @@
 > +/*
-> + * Test for MISA changing C and related IALIGN alignment cases
+> + * Test for VSTART set to overflow VL
 > + *
-> + * This test verifies that the "C" extension can be cleared and set in MISA,
-> + * that a branch to 2-byte aligned instructions can be executed when "C" is
-> + * enabled, and that a write to MISA which would increase IALIGN and cause
-> + * the next instruction to be unaligned is ignored.
+> + * TCG vector instructions should call VSTART_CHECK_EARLY_EXIT() to check
+> + * this case, otherwise memory addresses can underflow and misbehave or
+> + * crash QEMU.
+> + *
+> + * TODO: Add stores and other instructions.
 > + *
 > + * SPDX-License-Identifier: GPL-2.0-or-later
 > + */
+> +#include <stdint.h>
+> +#include <riscv_vector.h>
+
+The fix in vector_helper.c is fine but this patch (and patch 3) won't execute
+'make check-tcg'. It complains about this header being missing in the docker
+env.
+
+To eliminate the possibility of my env being the problem I ran this series in
+Gitlab. Same error:
+
+
+https://gitlab.com/danielhb/qemu/-/jobs/11236091281
+
+/builds/danielhb/qemu/tests/tcg/riscv64/test-vstart-overflow.c:13:10: fatal error: riscv_vector.h: No such file or directory
+3899
+    13 | #include <riscv_vector.h>
+3900
+       |          ^~~~~~~~~~~~~~~~
+3901
+compilation terminated.
+3902
+make[1]: *** [Makefile:122: test-vstart-overflow] Error 1
+
+
+I believe you need to add the Docker changes you made in this patch. Same
+thing for patch 3. And same thing for patch 4 of:
+
+[PATCH 0/4] linux-user/riscv: add vector state to signal
+
+Given that you're also using riscv_vector.h in there too. Thanks,
+
+
+Daniel
+
+
+
 > +
-> +#define RVC (1 << ('C'-'A'))
-> +#define RVV (1 << ('V'-'A'))
+> +#define VSTART_OVERFLOW_TEST(insn)                \
+> +({                                                \
+> +    uint8_t vmem[64] = { 0 };                     \
+> +    uint64_t vstart;                              \
+> +    asm volatile("                           \r\n \
+> +    # Set VL=52 and VSTART=56                \r\n \
+> +    li          t0, 52                       \r\n \
+> +    vsetvli     x0, t0, e8, m4, ta, ma       \r\n \
+> +    li          t0, 56                       \r\n \
+> +    csrrw       x0, vstart, t0               \r\n \
+> +    li          t1, 64                       \r\n \
+> +    " insn "                                 \r\n \
+> +    csrr        %0, vstart                   \r\n \
+> +    " : "=r"(vstart), "+A"(vmem) :: "t0", "t1", "v24", "memory"); \
+> +    vstart;                                       \
+> +})
 > +
-> +.option norvc
-> +	.text
-> +	.global _start
-> +_start:
-> +	lla	t0, trap
-> +	csrw	mtvec, t0
+> +int run_vstart_overflow_tests()
+> +{
+> +    /*
+> +     * An implementation is permitted to raise an illegal instruction
+> +     * exception when executing a vector instruction if vstart is set to a
+> +     * value that could not be produced by the execution of that instruction
+> +     * with the same vtype. If TCG is changed to do this, then this test
+> +     * could be updated to handle the SIGILL.
+> +     */
+> +    if (VSTART_OVERFLOW_TEST("vl1re16.v    v24, %1")) {
+> +        return 1;
+> +    }
 > +
-> +	csrr	t0, misa
-> +	li	t1, RVC
-> +	not	t1, t1
-> +	and	t0, t0, t1
-> +	csrw	misa, t0
-> +	csrr	t1, misa
-> +	li	a0, 2 # fail code
-> +	bne	t0, t1, _exit # Could not clear RVC in MISA
+> +    if (VSTART_OVERFLOW_TEST("vs1r.v       v24, %1")) {
+> +        return 1;
+> +    }
 > +
-> +	li	t1, RVC
-> +	or	t0, t0, t1
-> +	csrw	misa, t0
-> +	csrr	t1, misa
-> +	li	a0, 3 # fail code
-> +	bne	t0, t1, _exit # Could not set RVC in MISA
+> +    if (VSTART_OVERFLOW_TEST("vle16.v      v24, %1")) {
+> +        return 1;
+> +    }
 > +
-> +	j	unalign
-> +. = . + 2
-> +unalign:
+> +    if (VSTART_OVERFLOW_TEST("vse16.v      v24, %1")) {
+> +        return 1;
+> +    }
 > +
-> +	li	t1, RVC
-> +	not	t1, t1
-> +	and	t0, t0, t1
-> +	csrw	misa, t0
-> +	csrr	t1, misa
-> +	li	a0, 4 # fail code
-> +	beq	t0, t1, _exit # Was able to clear RVC in MISA
+> +    if (VSTART_OVERFLOW_TEST("vluxei8.v    v24, %1, v20")) {
+> +        return 1;
+> +    }
 > +
-> +	li	t0, (RVC|RVV)
-> +	not	t0, t0
-> +	and	t0, t0, t1
-> +	csrw	misa, t0
-> +	csrr	t0, misa
-> +	li	a0, 5 # fail code
-> +	bne	t0, t1, _exit # MISA write was not ignored (RVV was cleared)
+> +    if (VSTART_OVERFLOW_TEST("vlse16.v     v24, %1, t1")) {
+> +        return 1;
+> +    }
 > +
-> +	j	realign
-> +. = . + 2
-> +realign:
+> +    if (VSTART_OVERFLOW_TEST("vlseg2e8.v  v24, %1")) {
+> +        return 1;
+> +    }
 > +
-> +	# Success!
-> +	li	a0, 0
-> +	j	_exit
+> +    return 0;
+> +}
 > +
-> +trap:
-> +	# Any trap is a fail code 1
-> +	li	a0, 1
-> +
-> +# Exit code in a0
-> +_exit:
-> +	lla	a1, semiargs
-> +	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
-> +	sd	t0, 0(a1)
-> +	sd	a0, 8(a1)
-> +	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
-> +
-> +	# Semihosting call sequence
-> +	.balign	16
-> +	slli	zero, zero, 0x1f
-> +	ebreak
-> +	srai	zero, zero, 0x7
-> +	j	.
-> +
-> +	.data
-> +	.balign	16
-> +semiargs:
-> +	.space	16
+> +int main()
+> +{
+> +    return run_vstart_overflow_tests();
+> +}
 
 
