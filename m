@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 771DACA1011
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 16:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 123D0CA0FF2
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 17:19:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1utqkM-0004Zu-0l; Wed, 03 Sep 2025 12:54:10 -0400
+	id 1utr8k-0004zY-HS; Wed, 03 Sep 2025 13:19:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1utqkJ-0004Wr-CF
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 12:54:07 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
+ id 1utr8g-0004z9-JM
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 13:19:18 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1utqkH-0007Vw-7J
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 12:54:07 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-b4c53892a56so19707a12.2
- for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 09:54:04 -0700 (PDT)
+ id 1utr8d-0007xv-Ti
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 13:19:18 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-24456ce0b96so1361635ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 10:19:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1756918442; x=1757523242; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1756919953; x=1757524753; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=cG220IvrBBzohe0nehbLIOrLF79QlAXgJztfBX0aUaI=;
- b=bkMrb3r4zUwnliJ1jIt2vBo03Qm7o+PeYZCXfGcb+yuyA4Wi/XGczEl8kDq3R+8y3H
- 3T7+umzqTfL23cvYYaxzjSHXpOT6DBvWfvD96ZJeZihCUj0FwfYoI0Llapz98hM38vj2
- SfGueiCPkK/qJ/njvKBzYA9SdnXN23pokElLDmwLMM/teyS3/7qFNSE+1SUw0m+6PiZr
- zb8/SBQnvDIqifRzqCdIujr99d47WIGfABVAE4kHU3//lF1ukbtWvALpVrX+Yol8cBCD
- rUdTGds+udIxDjKi84vnznjFZDyiuVnlsW5AUVWNFlyWKrFQ6SGNQxHkxHDTSDDL2MCv
- s7PA==
+ bh=hMiuVffIgpE15VRvxm6M0vZ5A6OdLUBM0JnSzEEV5Os=;
+ b=msv8ouQ1a3LxY5eWIJVJmO6+D4zIheBvRC7pSBjlgd5btDPwXKZV/n4kw4A3n5++Yt
+ +GvqpTOuLksBO8UiuFoHZFP5wP4N2tqHmeCCb20+DJsXkoFGZXimVacp86u1KJDvcCOH
+ Xpb2Ejk9W7hQrCAoKiHEqPHP/2J0Lp7UODQntEb5DpjrO7adwKgx7TDVzj0idUWUpUcw
+ I5PKwbwhStA9MsO6FTkmU84qds40akboiT7Gq7loDW1FgKXMgs0kkYuAe1EPkdf180Y+
+ KiOn5XG6mNYASRly/+NB704D155vfVT3JqNbPIShaeA5Q4pDTvqGDSD9LXlmW8M90yiM
+ jPwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756918442; x=1757523242;
+ d=1e100.net; s=20230601; t=1756919953; x=1757524753;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cG220IvrBBzohe0nehbLIOrLF79QlAXgJztfBX0aUaI=;
- b=YUtjayNbK+zvo/WTe4x0NOh7sHPO0xYMf+YXqbjYxcw3DGs/IFwxshRYvVArVF+OyV
- EO+eudBd7QaaDfhd16Zj5O7acWUDdMwxq1hEIYjojT9Uce1B/5+9LtH0/bMHZkDY0pon
- bc5oUfRh5Xo4QH3fETwEp1RmzSu8NQtlK+VnKNyrYhXFTNLA6F2EXN15+tt6EqHed7vb
- W24EEy3prWcHn+jkQ6ZZirfbMFkx5G59rYRxl/AhhcFy/zhbycB8lSI496eR/9VQ0ORl
- nW7qH82V1x+/qVW79rvZPsZqpegcXStveojkZktQ4e/yg1nE3OfVUxS4f3M+Z15XqVmZ
- nx2A==
-X-Gm-Message-State: AOJu0YzTWdEjoSF+GSL+bLNh8FW4nQj46x4Cv4oBFRXgM7KImKN3IfwW
- NWrkEmuB4OcZPmujTNfslzFfuTx0e+KbHuC31+asKvZO8SbRQbToY2YNe3NF5FpwlT4=
-X-Gm-Gg: ASbGncsNyl6na7gBfFbqS7wmr2+9MfbIrroJvsfaKGe1mF8dKqxBho1X9TuvyD5BN2p
- ixdPeWNg5Yk7TNwhs0DT4b1MkQENEebLzw8Ow0AHyX3vIt3f0pHhC9K/ypUV+AkgE718BzyYYrq
- 6xwk3v2bKIKaFmWSjxZTj8A2qdCUEgyFStrlc0CIOor5QSjbmVSk5mJhdrekTcq7jeJ+8OTEtOx
- i3GSbQR//cU8as9djB6DHgbWcuo30e+KZZGeM9y3ElZoj70oZOHoksUEQI6vlCJLAQKGgkn0bDI
- gfvi+ufzPi5BVK3P+ykEnCgnCf4D2/Wo9kqY8dKpYbEEJ6RiwECYxySytceVnvb0Iyv9xO9Hcj1
- fwK8h9rwdDNXjm1cdVlxYgqWMv8k3jWaKPL4G
-X-Google-Smtp-Source: AGHT+IET0Ex2z+54XMERVVU5wklWhDExaXCBqppEL9wzmJ3T8j/q2uyo+al8FL4KXQA2C+gGGV8RVQ==
-X-Received: by 2002:a17:903:18b:b0:24c:9a51:9a4b with SMTP id
- d9443c01a7336-24c9a519e27mr32419245ad.21.1756918442412; 
- Wed, 03 Sep 2025 09:54:02 -0700 (PDT)
+ bh=hMiuVffIgpE15VRvxm6M0vZ5A6OdLUBM0JnSzEEV5Os=;
+ b=lmdkoiETXRCLFAhUWzV0KSZvnzu9CuJMMOiRsZWEvhj0co0bbIulkvX4dkxz2fLezY
+ M6Hm/8EGkvWD5VRmSRomKv5kic32rO5Cre4jOARhub1jK2MwkT6W0NVg4fyDxdmF5rbc
+ mTagBVY/sRWO4bG4TuhySzxjp8br0UVdPqfw+IU6Zq/qJTWbY9qjR3P45/9PZs3W2xHj
+ r1XUwTA/O6vhkEALpoiqX4f/pfJIBnaSTzMv6KNGujgGafQ+t9L+ZDJmtF7/lwwTZ/SX
+ Squz6dm+gjI2WgFnz0HrVdY3Oywhj5SJE0P9cPwhyJ3x40tI3UdfP3Lm1wHXf/B0VlqX
+ GjpQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJaUfbk1HOU1OrKMzm2BDNXOjMAegdpO8wy/OkcPvFgyU/YIYxzKjsr40rilW4iWneX6c0HB2xEDm2@nongnu.org
+X-Gm-Message-State: AOJu0Ywy0BYP8JsvnG4l63PUaTW+5Obz5bRMGqwskTm5TS6lsonmVU16
+ fTGNUVfnNkY2yI4eXrVqpzcLYDoCbauIZZnDanQEaHdFVAnRMC7pJ6CLSLCCZuMm4eI=
+X-Gm-Gg: ASbGncsZKrwQ9lqxsFZ0mE3l/qz3J3TZm/GcAQIRZBgCYQ22JS6x0F8Tg+eZWGMnYVG
+ 4E3AaQhCy7dGgjMkyeTAM+HqSU87wZaBXz82rGbyikFxBiaiU84RRxEuENEpA4rgQE90HQCtwGp
+ SKrG+I8cLPpmGbULoW8+yK9f2wTsd2ZQeX3pi7Ibf9iKHR2Ua/lELcatuTInXd+L1x5MWJnLoVn
+ ME/zBslvwphSEEU9YuJm5fKUtAbq9e7llfpee8K6qBt32xiOjYcEBE3uMZyo7Zv6la+NmSUrtHD
+ H/YrzG8yM+CJvdF0iTEE+B3RySWcGAdKwwc9RcqnZX4pX2n310V7YPsRzmjYpUALuM8lJRh8Xl5
+ DdZqS1PXQLPK8D+oHN83SZSZbl5ruFPlk4yJRl3tNW7xRisI=
+X-Google-Smtp-Source: AGHT+IFFiIfHyaPkcqhvvUlPRFH2dNcM1d7gNp2tcJTXjm+EwPdIakB4C26rMLekxHA9x3IgsAqR9w==
+X-Received: by 2002:a17:902:dac7:b0:24b:1585:6350 with SMTP id
+ d9443c01a7336-24b158566c4mr99468175ad.11.1756919953056; 
+ Wed, 03 Sep 2025 10:19:13 -0700 (PDT)
 Received: from [192.168.68.110] ([187.10.187.251])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24905da183asm162888425ad.74.2025.09.03.09.54.00
+ d9443c01a7336-24903705b91sm167974185ad.12.2025.09.03.10.19.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Sep 2025 09:54:01 -0700 (PDT)
-Message-ID: <db0b750b-b4c9-4d10-aec8-7ad6412a0c74@ventanamicro.com>
-Date: Wed, 3 Sep 2025 13:53:59 -0300
+ Wed, 03 Sep 2025 10:19:12 -0700 (PDT)
+Message-ID: <5cef4d88-9a4c-42a2-a405-debfe3a61497@ventanamicro.com>
+Date: Wed, 3 Sep 2025 14:19:08 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: implement MonitorDef HMP API
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- "Dr. David Alan Gilbert" <dave@treblig.org>
-References: <20250703130815.1592493-1-dbarboza@ventanamicro.com>
+Subject: Re: [PATCH 1/3] target/riscv: Fix IALIGN check in misa write
+To: Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-devel@nongnu.org, Chao Liu <chao.liu@zevorn.cn>,
+ Nicholas Joaquin <njoaquin@tenstorrent.com>,
+ Ganesh Valliappan <gvalliappan@tenstorrent.com>
+References: <20250903030114.274535-1-npiggin@gmail.com>
+ <20250903030114.274535-2-npiggin@gmail.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20250703130815.1592493-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20250903030114.274535-2-npiggin@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52a.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,234 +109,174 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Ping
 
-On 7/3/25 10:08 AM, Daniel Henrique Barboza wrote:
-> The MonitorDef API is related to two HMP monitor commands: 'p' and 'x':
+
+On 9/3/25 12:01 AM, Nicholas Piggin wrote:
+> The instruction alignment check for the C extension was inverted.
+> The new value should be checked for C bit clear (thus increasing
+> IALIGN). If IALIGN is incompatible, then the write to misa should
+> be suppressed, not just ignoring the update to the C bit.
 > 
-> (qemu) help p
-> print|p /fmt expr -- print expression value (use $reg for CPU register access)
-> (qemu) help x
-> x /fmt addr -- virtual memory dump starting at 'addr'
+>  From the ISA:
 > 
-> For x86, one of the few targets that implements it, it is possible to
-> print the PC register value with $pc and use the PC value in the 'x'
-> command as well.
+>    Writing misa may increase IALIGN, e.g., by disabling the "C"
+>    extension. If an instruction that would write misa increases IALIGN,
+>    and the subsequent instruction’s address is not IALIGN-bit aligned,
+>    the write to misa is suppressed, leaving misa unchanged.
 > 
-> Those 2 commands are hooked into get_monitor_def(), called by
-> exp_unary() in hmp.c. The function tries to fetch a reg value in two
-> ways: by reading them directly via a target_monitor_defs array or using
-> a target_get_monitor_def() helper. In RISC-V we have *A LOT* of
-> registers and this number will keep getting bigger, so we're opting out
-> of an array declaration.
+> This was found with a verification test generator based on RiESCUE.
 > 
-> We're able to retrieve all regs but vregs because the API only fits an
-> uint64_t and vregs have 'vlen' size that are bigger than that.
-> 
-> With this patch we can do things such as:
-> 
-> - print CSRs and use their val in expressions:
-> (qemu) p $mstatus
-> 0xa000000a0
-> (qemu) p $mstatus & 0xFF
-> 0xa0
-> 
-> - dump the next 10 insn from virtual memory starting at x1 (ra):
-> 
-> (qemu) x/10i $ra
-> 0xffffffff80958aea:  a9bff0ef          jal                     ra,-1382                # 0xffffffff80958584
-> 0xffffffff80958aee:  10016073          csrrsi                  zero,sstatus,2
-> 0xffffffff80958af2:  60a2              ld                      ra,8(sp)
-> 0xffffffff80958af4:  6402              ld                      s0,0(sp)
-> 0xffffffff80958af6:  0141              addi                    sp,sp,16
-> 0xffffffff80958af8:  8082              ret
-> 0xffffffff80958afa:  10016073          csrrsi                  zero,sstatus,2
-> 0xffffffff80958afe:  8082              ret
-> 0xffffffff80958b00:  1141              addi                    sp,sp,-16
-> 0xffffffff80958b02:  e422              sd                      s0,8(sp)
-> (qemu)
-> 
-> Suggested-by: Dr. David Alan Gilbert <dave@treblig.org>
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reported-by: Nicholas Joaquin <njoaquin@tenstorrent.com>
+> Reported-by: Ganesh Valliappan <gvalliappan@tenstorrent.com>
+> Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+
+Fixes: f18637cd61 ("RISC-V: Add misa runtime write support")
+
 > ---
->   target/riscv/cpu.h            |   1 +
->   target/riscv/riscv-qmp-cmds.c | 148 ++++++++++++++++++++++++++++++++++
->   2 files changed, 149 insertions(+)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/csr.c                        | 16 ++++-
+>   tests/tcg/riscv64/Makefile.softmmu-target |  5 ++
+>   tests/tcg/riscv64/misa-ialign.S           | 88 +++++++++++++++++++++++
+>   3 files changed, 106 insertions(+), 3 deletions(-)
+>   create mode 100644 tests/tcg/riscv64/misa-ialign.S
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 229ade9ed9..487884c42c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -576,6 +576,7 @@ static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
->   extern const char * const riscv_int_regnames[];
->   extern const char * const riscv_int_regnamesh[];
->   extern const char * const riscv_fpr_regnames[];
-> +extern const char * const riscv_rvv_regnames[];
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 8842e07a73..64b55b7add 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2140,9 +2140,19 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+>       /* Mask extensions that are not supported by this hart */
+>       val &= env->misa_ext_mask;
 >   
->   const char *riscv_cpu_get_trap_name(target_ulong cause, bool async);
->   int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
-> diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
-> index 8ba8aa0d5f..2c8c74bbe4 100644
-> --- a/target/riscv/riscv-qmp-cmds.c
-> +++ b/target/riscv/riscv-qmp-cmds.c
-> @@ -31,6 +31,10 @@
->   #include "qapi/qobject-input-visitor.h"
->   #include "qapi/visitor.h"
->   #include "qom/qom-qobject.h"
-> +#include "qemu/ctype.h"
-> +#include "qemu/qemu-print.h"
-> +#include "monitor/hmp.h"
-> +#include "monitor/hmp-target.h"
->   #include "system/kvm.h"
->   #include "system/tcg.h"
->   #include "cpu-qom.h"
-> @@ -240,3 +244,147 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansion(CpuModelExpansionType type,
+> -    /* Suppress 'C' if next instruction is not aligned. */
+> -    if ((val & RVC) && (get_next_pc(env, ra) & 3) != 0) {
+> -        val &= ~RVC;
+> +    /*
+> +     * misa writes that increase IALIGN beyond alignment of the next
+> +     * instruction cause the write to misa to be suppressed. Clearing
+> +     * "C" extension increases IALIGN.
+> +     */
+> +    if (!(val & RVC) && (get_next_pc(env, ra) & 3) != 0) {
+> +        /*
+> +         * If the next instruction is unaligned mod 4 then "C" must be
+> +         * set or this instruction could not be executing, so we know
+> +         * this is is clearing "C" (and not just keeping it clear).
+> +         */
+> +        g_assert(env->misa_ext & RVC);
+> +        return RISCV_EXCP_NONE;
+>       }
 >   
->       return expansion_info;
->   }
+>       /* Disable RVG if any of its dependencies are disabled */
+> diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+> index 3ca595335d..6e470a028f 100644
+> --- a/tests/tcg/riscv64/Makefile.softmmu-target
+> +++ b/tests/tcg/riscv64/Makefile.softmmu-target
+> @@ -24,5 +24,10 @@ EXTRA_RUNS += run-test-mepc-masking
+>   run-test-mepc-masking: test-mepc-masking
+>   	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
+>   
+> +EXTRA_RUNS += run-misa-ialign
+> +run-misa-ialign: QEMU_OPTS := -cpu rv64,c=true,v=true,x-misa-w=on $(QEMU_OPTS)
+> +run-misa-ialign: misa-ialign
+> +	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
 > +
+>   # We don't currently support the multiarch system tests
+>   undefine MULTIARCH_TESTS
+> diff --git a/tests/tcg/riscv64/misa-ialign.S b/tests/tcg/riscv64/misa-ialign.S
+> new file mode 100644
+> index 0000000000..7f1eb30023
+> --- /dev/null
+> +++ b/tests/tcg/riscv64/misa-ialign.S
+> @@ -0,0 +1,88 @@
 > +/*
-> + * We have way too many potential CSRs and regs being added
-> + * regularly to register them in a static array.
+> + * Test for MISA changing C and related IALIGN alignment cases
 > + *
-> + * Declare an empty array instead, making get_monitor_def() use
-> + * the target_get_monitor_def() API directly.
+> + * This test verifies that the "C" extension can be cleared and set in MISA,
+> + * that a branch to 2-byte aligned instructions can be executed when "C" is
+> + * enabled, and that a write to MISA which would increase IALIGN and cause
+> + * the next instruction to be unaligned is ignored.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
 > + */
-> +const MonitorDef monitor_defs[] = { { } };
-> +const MonitorDef *target_monitor_defs(void)
-> +{
-> +    return monitor_defs;
-> +}
 > +
-> +static bool reg_is_ulong_integer(CPURISCVState *env, const char *name,
-> +                                 target_ulong *val, bool is_gprh)
-> +{
-> +    const char * const *reg_names;
-> +    target_ulong *vals;
+> +#define RVC (1 << ('C'-'A'))
+> +#define RVV (1 << ('V'-'A'))
 > +
-> +    if (is_gprh) {
-> +        reg_names = riscv_int_regnamesh;
-> +        vals = env->gprh;
-> +    } else {
-> +        reg_names = riscv_int_regnames;
-> +        vals = env->gpr;
-> +    }
+> +.option norvc
+> +	.text
+> +	.global _start
+> +_start:
+> +	lla	t0, trap
+> +	csrw	mtvec, t0
 > +
-> +    for (int i = 0; i < 32; i++) {
-> +        g_autofree char *reg_name = g_strdup(reg_names[i]);
-> +        char *reg1 = strtok(reg_name, "/");
-> +        char *reg2 = strtok(NULL, "/");
+> +	csrr	t0, misa
+> +	li	t1, RVC
+> +	not	t1, t1
+> +	and	t0, t0, t1
+> +	csrw	misa, t0
+> +	csrr	t1, misa
+> +	li	a0, 2 # fail code
+> +	bne	t0, t1, _exit # Could not clear RVC in MISA
 > +
-> +        if (strcasecmp(reg1, name) == 0 ||
-> +            (reg2 && strcasecmp(reg2, name) == 0)) {
-> +            *val = vals[i];
-> +            return true;
-> +        }
-> +    }
+> +	li	t1, RVC
+> +	or	t0, t0, t1
+> +	csrw	misa, t0
+> +	csrr	t1, misa
+> +	li	a0, 3 # fail code
+> +	bne	t0, t1, _exit # Could not set RVC in MISA
 > +
-> +    return false;
-> +}
+> +	j	unalign
+> +. = . + 2
+> +unalign:
 > +
-> +static bool reg_is_u64_fpu(CPURISCVState *env, const char *name, uint64_t *val)
-> +{
-> +    if (qemu_tolower(name[0]) != 'f') {
-> +        return false;
-> +    }
+> +	li	t1, RVC
+> +	not	t1, t1
+> +	and	t0, t0, t1
+> +	csrw	misa, t0
+> +	csrr	t1, misa
+> +	li	a0, 4 # fail code
+> +	beq	t0, t1, _exit # Was able to clear RVC in MISA
 > +
-> +    for (int i = 0; i < 32; i++) {
-> +        g_autofree char *reg_name = g_strdup(riscv_fpr_regnames[i]);
-> +        char *reg1 = strtok(reg_name, "/");
-> +        char *reg2 = strtok(NULL, "/");
+> +	li	t0, (RVC|RVV)
+> +	not	t0, t0
+> +	and	t0, t0, t1
+> +	csrw	misa, t0
+> +	csrr	t0, misa
+> +	li	a0, 5 # fail code
+> +	bne	t0, t1, _exit # MISA write was not ignored (RVV was cleared)
 > +
-> +        if (strcasecmp(reg1, name) == 0 ||
-> +            (reg2 && strcasecmp(reg2, name) == 0)) {
-> +            *val = env->fpr[i];
-> +            return true;
-> +        }
-> +    }
+> +	j	realign
+> +. = . + 2
+> +realign:
 > +
-> +    return false;
-> +}
+> +	# Success!
+> +	li	a0, 0
+> +	j	_exit
 > +
-> +static bool reg_is_vreg(const char *name)
-> +{
-> +    if (qemu_tolower(name[0]) != 'v' || strlen(name) > 3) {
-> +        return false;
-> +    }
+> +trap:
+> +	# Any trap is a fail code 1
+> +	li	a0, 1
 > +
-> +    for (int i = 0; i < 32; i++) {
-> +        if (strcasecmp(name, riscv_rvv_regnames[i]) == 0) {
-> +            return true;
-> +        }
-> +    }
+> +# Exit code in a0
+> +_exit:
+> +	lla	a1, semiargs
+> +	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
+> +	sd	t0, 0(a1)
+> +	sd	a0, 8(a1)
+> +	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
 > +
-> +    return false;
-> +}
+> +	# Semihosting call sequence
+> +	.balign	16
+> +	slli	zero, zero, 0x1f
+> +	ebreak
+> +	srai	zero, zero, 0x7
+> +	j	.
 > +
-> +int target_get_monitor_def(CPUState *cs, const char *name, uint64_t *pval)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
-> +    target_ulong val = 0;
-> +    uint64_t val64 = 0;
-> +    int i;
-> +
-> +    if (reg_is_ulong_integer(env, name, &val, false) ||
-> +        reg_is_ulong_integer(env, name, &val, true)) {
-> +        *pval = val;
-> +        return 0;
-> +    }
-> +
-> +    if (reg_is_u64_fpu(env, name, &val64)) {
-> +        *pval = val64;
-> +        return 0;
-> +    }
-> +
-> +    if (reg_is_vreg(name)) {
-> +        if (!riscv_has_ext(env, RVV)) {
-> +            return -EINVAL;
-> +        }
-> +
-> +        qemu_printf("Unable to print the value of vector "
-> +                    "vreg '%s' from this API\n", name);
-> +
-> +        /*
-> +         * We're returning 0 because returning -EINVAL triggers
-> +         * an 'unknown register' message in exp_unary() later,
-> +         * which feels ankward after our own error message.
-> +         */
-> +        *pval = 0;
-> +        return 0;
-> +    }
-> +
-> +    for (i = 0; i < ARRAY_SIZE(csr_ops); i++) {
-> +        RISCVException res;
-> +        int csrno = i;
-> +
-> +        /*
-> +         * Early skip when possible since we're going
-> +         * through a lot of NULL entries.
-> +         */
-> +        if (csr_ops[csrno].predicate == NULL) {
-> +            continue;
-> +        }
-> +
-> +        if (strcasecmp(csr_ops[csrno].name, name) != 0) {
-> +            continue;
-> +        }
-> +
-> +        res = riscv_csrrw_debug(env, csrno, &val, 0, 0);
-> +
-> +        /*
-> +         * Rely on the smode, hmode, etc, predicates within csr.c
-> +         * to do the filtering of the registers that are present.
-> +         */
-> +        if (res == RISCV_EXCP_NONE) {
-> +            *pval = val;
-> +            return 0;
-> +        }
-> +    }
-> +
-> +    return -EINVAL;
-> +}
+> +	.data
+> +	.balign	16
+> +semiargs:
+> +	.space	16
 
 
