@@ -4,88 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE022CA1009
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 12:43:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 325FDCA1009
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 13:02:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1utmpi-0001c0-IG; Wed, 03 Sep 2025 08:43:26 -0400
+	id 1utn7v-0005C7-G4; Wed, 03 Sep 2025 09:02:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1utmpd-0001a8-12
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 08:43:21 -0400
-Received: from mail-oo1-xc34.google.com ([2607:f8b0:4864:20::c34])
+ id 1utn7i-0005Ar-DO
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 09:02:02 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1utmpb-0006lH-9Q
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 08:43:20 -0400
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-61e536ada47so882161eaf.1
- for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 05:43:18 -0700 (PDT)
+ id 1utn7f-0000WY-TI
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 09:02:02 -0400
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-b47052620a6so739165a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 06:01:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1756903396; x=1757508196; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TD7RSAs8lK0s4scvG5RhyQOCx+tpakZ0/0Gex9hKCn4=;
- b=RbDzgZZ9htmiDd+GMCYAlSq1Xs4wsEAnI/YmeJ5CSx/obTPg6m4dvNGEqE3UM3OpBT
- N5r2DFt+44EDEVHpAVcXZ/GdxdoKVzot/LMLL8QDquI6jmEBQSg4flzZ3N4SVr1GXQ7M
- /ZqMPUGrVZqK/l9cOyXowCw3wtFSVyHR5Of5eWVIYM2JWtJRjv4lP9xw/tnq4452Uq47
- opWxo1yQWfoHkob+Pj39ADQP7H8aK+UVkgP+XVe6m5FQQh7sG3fXvhlZBd4LWvAads+i
- KLBET5KKZfsN9jmCWI0TLim3rtg9eBVOMb+V3n5oBZ2Wnm8Vkf6ZUGC1iEpkUW8hrlkn
- +cBw==
+ d=sifive.com; s=google; t=1756904518; x=1757509318; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Nd1CFSqBPyT+ku8Fo0AM5AoNQDImOsroqwPkGFgKXHQ=;
+ b=de+isoOYET3e5C/ApOgOOiwNPyKnWNobY/seSedXwM5ttNRzFSzdf0Aa6suLQcXq7r
+ W9xIIh8dD+5PiOvUv/MsnagfHYyBuqtD1ZM1d7UeD1OJD1KLsGz8zC3knhRRtFQUAsPT
+ 8e3ZcC8n4QJ3BiKBuIqJfnAxH6+kqgQdSyE1wcv4K/L2le0y9R3ASt+HKlHd3qYwMK2s
+ pNk186B0s5EEbFmFawVqYYW58M+cUMOflxiCq09HMuhB0ceYT47Y9Fu7jP8rsG5engXk
+ dMYhJDdkwhsfMtLU0pY6Val10d5dMLj3KPVjxM9Nch0qwqkjhP4UZFJHeSTX7sTjlO8b
+ JflQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756903396; x=1757508196;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TD7RSAs8lK0s4scvG5RhyQOCx+tpakZ0/0Gex9hKCn4=;
- b=hC1uFIbDsuP3ZrOputZDE4BvVZCr2UtUZ2G1eGIBhEYXVNhk31qA0MOVIXb/dOVOKz
- BU45ULCB5HFtjwY5NSjPTevjiaCp1nU5YlsbQBFPKeWfAh0br0BEyPzgoIMCOcnQzXr0
- HPZa7h3bRhZmnf9b9hk1gkfKHQEzJ4hYvy8IRvE+2q45LNBnHycqlS+uAY5RUFVbo+LI
- Oa5UGJs5zQJ3oMKXShUhOgK/xLergH9XXwDaNTqzO+YTgBq1XvXG/LlBnlUC76dhiv22
- R6nhFbovSdxrDfkyqc9nJNSk7A04YkjCjMADg1EuXpc5bagzTJKqABml5Wb+qQXnfDOj
- RawA==
+ d=1e100.net; s=20230601; t=1756904518; x=1757509318;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Nd1CFSqBPyT+ku8Fo0AM5AoNQDImOsroqwPkGFgKXHQ=;
+ b=d2qBhxm9uRZ4dX22UlN369o3lMPYFaENwko3bafc2+ffefSeZWm0XbwSGOcok3pRCN
+ 3fgNNJwt/Rjxn61fW2K6EzfujYmz2Yj+xqzEwfOfn/dbMNSEgqieTQNjPxXdsz1GxHZ/
+ PzK8IdvX9PSt2Ud4/FRYRpDPu8LBPVI/JvbLQL23XsWY680sbqawZSY1+U1a47MsUPZN
+ 7iRbbXXX8W+qnvOhtGcPWaEo8lqdhr4Prex2haMWRXdz6205ri1DlTHh1xTp6KpTLp/M
+ benSMDP6o+pq4B2VquPp9mQdIeosiSdfn0rw51UVgYcCe1qTOfAA7xEwi6bWY9hYmMrq
+ asLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUja5mBIDnoulyfLZCnS/L4V/ikI2fDFDw/C/3z8gOpu8Y3eJvW4eiFxAL7CHstgU96CTl+7S8peau/@nongnu.org
-X-Gm-Message-State: AOJu0YwdPGEji1t5pOzhFxZd3je8BbLL1FWduL0nuu+5YG3MW37j3/nY
- zVDVyW3EroWcMaEd5tgyPWHtTL868rJ59KZuNA1dAC7WhbxPz/mJAe783YP480oITjkKAOkF9X6
- qgk6oOBu2rmVhZBd1cGJG45ciFIfXrSLL7lawoS37xw==
-X-Gm-Gg: ASbGncsPdV7+O1ujBrg581Z0V7rxQ635lWLgCSZUjmlC57ub/rdTj/C56wBGkANluSf
- pMRqGNM2gH4sCHfnodd31qDtEge956ddMxlyVuXBngViL3s04yG5UrqiWioiO47Y6u6ZItMKnz1
- X1/swYL/f8+RjJnCez84wvBMUdaK5drJkdYFmUIeW8IcLnYylqFusM3dEs2MYMFrk6yzX/z55IS
- CohBO1c9KZWjJY+Yj8=
-X-Google-Smtp-Source: AGHT+IH0gwnZfk1Hv7CKxrbUsBX1+Qoh3OYSq8nf8z4JE73WOKPJ6R0d90fu/I/2U1NpsN2xkT7sSpiBQucDangVK/M=
-X-Received: by 2002:a05:6808:48d4:b0:437:e5d6:8c2d with SMTP id
- 5614622812f47-437f7d20d05mr7031028b6e.2.1756903396593; Wed, 03 Sep 2025
- 05:43:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250901133815.1693077-1-max.chou@sifive.com>
- <20250901133815.1693077-3-max.chou@sifive.com>
- <5d0fe741-9063-441d-8abc-3bb0662c1fbe@linaro.org>
- <CANiaA1sP1KvhFhOOZRYJPzb=cf1DwTJNMTgEx5j2oppFNj6mdA@mail.gmail.com>
- <54f806ed-a393-4ced-8343-877e5e76c586@linaro.org>
-In-Reply-To: <54f806ed-a393-4ced-8343-877e5e76c586@linaro.org>
+ AJvYcCWiZsNjHYP69P/gl3GunAFazA+k19FWMybpC0eA3zswuGfaBl4QeQFxlv3ncBbhWQZpauhExYlb8HBD@nongnu.org
+X-Gm-Message-State: AOJu0YwDzqI06WJYgEFjAPY1fF02l4VLRmRhOy+lY2HZYZvgn/+1HSB1
+ SGQG5Us8CumJ6XeoR8qI9msdD8CIqJCcpmdsZIOcigutAlu+kPxj6RFTj76or5ZUe40=
+X-Gm-Gg: ASbGnctOz0RHVfP6AyPIJAFttn6c6muFE3FZa7vFGPpNV/fFlKj8IpBDvdGuIswnVCT
+ A4lphC9kdfxZ1R/TFWCCeGU2r1k2qjGDNLDZiJ4HnE8xaBYwQ2svGRoKHjen9XRja2w4Wo8AfFK
+ wvnDUUamfO5uj4L9+tyNqfoBdtHAlJbS8X6oXOKzLRP1tzFMgItP+p0xrGlyNNABzFACobO/REx
+ TqQ6LToZaxgdXFc8dTDjjVBZu7x211klZzQGWVbtpvTzWDlUUqqWGotyAyJ35m2E8X4JrFA7vef
+ TTjl5EJYGjqIuE5mJwnwaT6VewDcvPKrVZbAUkZXSCScspSkrW5ISO260kW79G3xPOnXxxakIUR
+ 45/rM4KmT25pqtpUGN0b4S9EeBrn9m4C7YeRJ6N8eyU6uo4btaXE/vSsB1hOB5jQrCIA=
+X-Google-Smtp-Source: AGHT+IH3pMkJ8WUqog3cVllcYm/keq3w5jbOQpv8LxPOQ9vmMH+/yRH64N36QKt0MhoM/omy0ujIow==
+X-Received: by 2002:a17:90b:3d8f:b0:325:e31c:4c6c with SMTP id
+ 98e67ed59e1d1-3280d2ba979mr20404553a91.2.1756904516446; 
+ Wed, 03 Sep 2025 06:01:56 -0700 (PDT)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-329e23858ecsm5472278a91.14.2025.09.03.06.01.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Sep 2025 06:01:56 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
-Date: Wed, 3 Sep 2025 21:43:05 +0900
-X-Gm-Features: Ac12FXxJLhlDfUreUqcK8CJDePN7D4TV6viaCWLTkscTaIRmY7oSO7oqXNlOnCQ
-Message-ID: <CANiaA1veZq2YLg1E-3RjH8aZd91nck6XCoq3YdKrszFfN7gBUw@mail.gmail.com>
-Subject: Re: [RFC PATCH 2/3] target/riscv: rvv: Add Zvqdotq support
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: multipart/alternative; boundary="000000000000dbe88f063de4f215"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c34;
- envelope-from=max.chou@sifive.com; helo=mail-oo1-xc34.google.com
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, richard.henderson@linaro.org,
+ Max Chou <max.chou@sifive.com>
+Subject: [RFC PATCH v2 2/3] target/riscv: rvv: Add Zvqdotq support
+Date: Wed,  3 Sep 2025 21:01:24 +0800
+Message-ID: <20250903130125.1701363-3-max.chou@sifive.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250903130125.1701363-1-max.chou@sifive.com>
+References: <20250903130125.1701363-1-max.chou@sifive.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -103,57 +107,213 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000dbe88f063de4f215
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Support instructions for vector dot-product extension (Zvqdotq)
+- vqdot.[vv,vx]
+- vqdotu.[vv,vx]
+- vqdotsu.[vv,vx]
+- vqdotus.vx
 
-On Wed, Sep 3, 2025 at 12:43=E2=80=AFPM Richard Henderson <
-richard.henderson@linaro.org> wrote:
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ target/riscv/helper.h                         | 10 +++
+ target/riscv/insn32.decode                    |  9 +++
+ target/riscv/insn_trans/trans_rvzvqdotq.c.inc | 61 +++++++++++++++++++
+ target/riscv/translate.c                      |  1 +
+ target/riscv/vector_helper.c                  | 61 +++++++++++++++++++
+ 5 files changed, 142 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzvqdotq.c.inc
 
-> On 9/3/25 02:26, Max Chou wrote:
-> > The partial_sum and the final mask are created to ensure the behavior
-> described in the
-> > Zvqdotq isa spec section 3 as follows:
-> >
-> > =E2=80=9CFinally, the four products are accumulated into the correspond=
-ing
-> element of vd, wrapping
-> > around signed overflow.=E2=80=9D
->
-> This is accomplished by the -fwrapv argument to the compiler, with which
-> all of qemu is
-> compiled.
->
-Thanks for this information. It=E2=80=99s helpful.
-I=E2=80=99ll update version 2 to include this part.
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index f712b1c368..80274f1dad 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1284,3 +1284,13 @@ DEF_HELPER_4(vgmul_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_5(vsm4k_vi, void, ptr, ptr, i32, env, i32)
+ DEF_HELPER_4(vsm4r_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_4(vsm4r_vs, void, ptr, ptr, env, i32)
++
++/* Vector dot-product functions */
++DEF_HELPER_6(vqdot_vv, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vqdotu_vv, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vqdotsu_vv, void, ptr, ptr, ptr, ptr, env, i32)
++
++DEF_HELPER_6(vqdot_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vqdotu_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vqdotsu_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vqdotus_vx, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index cd23b1f3a9..50a6156667 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -1066,3 +1066,12 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
+ amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
+ amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
+ amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
++
++# *** Zvqdotq Vector Dot-Product Extension ***
++vqdot_vv    101100 . ..... ..... 010 ..... 1010111 @r_vm
++vqdot_vx    101100 . ..... ..... 110 ..... 1010111 @r_vm
++vqdotu_vv   101000 . ..... ..... 010 ..... 1010111 @r_vm
++vqdotu_vx   101000 . ..... ..... 110 ..... 1010111 @r_vm
++vqdotsu_vv  101010 . ..... ..... 010 ..... 1010111 @r_vm
++vqdotsu_vx  101010 . ..... ..... 110 ..... 1010111 @r_vm
++vqdotus_vx  101110 . ..... ..... 110 ..... 1010111 @r_vm
+diff --git a/target/riscv/insn_trans/trans_rvzvqdotq.c.inc b/target/riscv/insn_trans/trans_rvzvqdotq.c.inc
+new file mode 100644
+index 0000000000..80134874e9
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzvqdotq.c.inc
+@@ -0,0 +1,61 @@
++/*
++ * RISC-V translation routines for the Zvqdotq vector dot-product extension
++ *
++ * Copyright (C) 2025 SiFive, Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++static bool vext_zvqdotq_base_check(DisasContext *s)
++{
++    return s->cfg_ptr->ext_zvqdotq && s->sew == MO_32;
++}
++
++static bool vext_vqdotq_opivv_check(DisasContext *s, arg_rmrr *a)
++{
++    return vext_zvqdotq_base_check(s) && opivv_check(s, a);
++}
++
++#define GEN_VQDOTQ_OPIVV_TRANS(NAME, CHECK)              \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
++{                                                        \
++    if (CHECK(s, a)) {                                   \
++        return opivv_trans(a->rd, a->rs1, a->rs2, a->vm, \
++                           gen_helper_##NAME, s);        \
++    }                                                    \
++    return false;                                        \
++}
++
++GEN_VQDOTQ_OPIVV_TRANS(vqdot_vv, vext_vqdotq_opivv_check)
++GEN_VQDOTQ_OPIVV_TRANS(vqdotu_vv, vext_vqdotq_opivv_check)
++GEN_VQDOTQ_OPIVV_TRANS(vqdotsu_vv, vext_vqdotq_opivv_check)
++
++static bool vext_vqdotq_opivx_check(DisasContext *s, arg_rmrr *a)
++{
++    return vext_zvqdotq_base_check(s) && opivx_check(s, a);
++}
++
++#define GEN_VQDOTQ_OPIVX_TRANS(NAME, CHECK)              \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
++{                                                        \
++    if (CHECK(s, a)) {                                   \
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, \
++                           gen_helper_##NAME, s);        \
++    }                                                    \
++    return false;                                        \
++}
++
++GEN_VQDOTQ_OPIVX_TRANS(vqdot_vx, vext_vqdotq_opivx_check)
++GEN_VQDOTQ_OPIVX_TRANS(vqdotu_vx, vext_vqdotq_opivx_check)
++GEN_VQDOTQ_OPIVX_TRANS(vqdotsu_vx, vext_vqdotq_opivx_check)
++GEN_VQDOTQ_OPIVX_TRANS(vqdotus_vx, vext_vqdotq_opivx_check)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 9ddef2d6e2..6f43ed1ffd 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1190,6 +1190,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvzfh.c.inc"
+ #include "insn_trans/trans_rvk.c.inc"
+ #include "insn_trans/trans_rvvk.c.inc"
++#include "insn_trans/trans_rvzvqdotq.c.inc"
+ #include "insn_trans/trans_privileged.c.inc"
+ #include "insn_trans/trans_svinval.c.inc"
+ #include "insn_trans/trans_rvbf16.c.inc"
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 7c67d67a13..e706e29909 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -921,6 +921,10 @@ GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b_tlb, ste_b_host)
+ #define WOP_SSU_B int16_t, int8_t, uint8_t, int16_t, uint16_t
+ #define WOP_SSU_H int32_t, int16_t, uint16_t, int32_t, uint32_t
+ #define WOP_SSU_W int64_t, int32_t, uint32_t, int64_t, uint64_t
++#define QOP_SSS_B int32_t, int8_t, int8_t, int32_t, int32_t
++#define QOP_SUS_B int32_t, uint8_t, int8_t, uint32_t, int32_t
++#define QOP_SSU_B int32_t, int8_t, uint8_t, int32_t, uint32_t
++#define QOP_UUU_B uint32_t, uint8_t, uint8_t, uint32_t, uint32_t
+ #define NOP_SSS_B int8_t, int8_t, int16_t, int8_t, int16_t
+ #define NOP_SSS_H int16_t, int16_t, int32_t, int16_t, int32_t
+ #define NOP_SSS_W int32_t, int32_t, int64_t, int32_t, int64_t
+@@ -5473,3 +5477,60 @@ GEN_VEXT_INT_EXT(vsext_vf2_d, int64_t, int32_t, H8, H4)
+ GEN_VEXT_INT_EXT(vsext_vf4_w, int32_t, int8_t,  H4, H1)
+ GEN_VEXT_INT_EXT(vsext_vf4_d, int64_t, int16_t, H8, H2)
+ GEN_VEXT_INT_EXT(vsext_vf8_d, int64_t, int8_t,  H8, H1)
++
++
++/* Vector dot-product instructions. */
++
++#define OPMVV_VQDOTQ(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2)          \
++static void do_##NAME(void *vd, void *vs1, void *vs2, int i)            \
++{                                                                       \
++    int idx;                                                            \
++    T1 r1;                                                              \
++    T2 r2;                                                              \
++    TX1 *r1_buf = (TX1 *)vs1 + HD(i);                                   \
++    TX2 *r2_buf = (TX2 *)vs2 + HD(i);                                   \
++    TD acc = ((TD *)vd)[HD(i)];                                         \
++                                                                        \
++    for (idx = 0; idx < 4; ++idx) {                                     \
++        r1 = (TD)(*((T1 *)r1_buf + HS1(idx)));                          \
++        r2 = (TD)(*((T2 *)r2_buf + HS2(idx)));                          \
++        acc += r1 * r2;                                                 \
++    }                                                                   \
++    ((TD *)vd)[HD(i)] = acc;                                            \
++}
++
++RVVCALL(OPMVV_VQDOTQ, vqdot_vv, QOP_SSS_B, H4, H1, H1)
++RVVCALL(OPMVV_VQDOTQ, vqdotu_vv, QOP_UUU_B, H4, H1, H1)
++RVVCALL(OPMVV_VQDOTQ, vqdotsu_vv, QOP_SUS_B, H4, H1, H1)
++
++GEN_VEXT_VV(vqdot_vv, 4)
++GEN_VEXT_VV(vqdotu_vv, 4)
++GEN_VEXT_VV(vqdotsu_vv, 4)
++
++#define OPMVX_VQDOTQ(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2)          \
++static void do_##NAME(void *vd, target_long s1, void *vs2, int i)       \
++{                                                                       \
++    int idx;                                                            \
++    T1 r1;                                                              \
++    T2 r2;                                                              \
++    TX1 *r1_buf = (TX1 *)&s1;                                           \
++    TX2 *r2_buf = (TX2 *)vs2 + HD(i);                                   \
++    TD acc = ((TD *)vd)[HD(i)];                                         \
++                                                                        \
++    for (idx = 0; idx < 4; ++idx) {                                     \
++        r1 = *((T1 *)r1_buf + HS1(idx));                                \
++        r2 = *((T2 *)r2_buf + HS2(idx));                                \
++        acc += r1 * r2;                                                 \
++    }                                                                   \
++    ((TD *)vd)[HD(i)] = acc;                                            \
++}
++
++RVVCALL(OPMVX_VQDOTQ, vqdot_vx, QOP_SSS_B, H4, H1, H1)
++RVVCALL(OPMVX_VQDOTQ, vqdotu_vx, QOP_UUU_B, H4, H1, H1)
++RVVCALL(OPMVX_VQDOTQ, vqdotsu_vx, QOP_SUS_B, H4, H1, H1)
++RVVCALL(OPMVX_VQDOTQ, vqdotus_vx, QOP_SSU_B, H4, H1, H1)
++
++GEN_VEXT_VX(vqdot_vx, 4)
++GEN_VEXT_VX(vqdotu_vx, 4)
++GEN_VEXT_VX(vqdotsu_vx, 4)
++GEN_VEXT_VX(vqdotus_vx, 4)
+-- 
+2.39.3
 
-Thanks,
-Max
-
---000000000000dbe88f063de4f215
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div>On Wed, Sep 3, 2025 at 12:43=E2=80=
-=AFPM Richard Henderson &lt;<a href=3D"mailto:richard.henderson@linaro.org"=
->richard.henderson@linaro.org</a>&gt; wrote:<br></div></div><div class=3D"g=
-mail_quote gmail_quote_container"><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;=
-border-left-color:rgb(204,204,204);padding-left:1ex">On 9/3/25 02:26, Max C=
-hou wrote:<br>
-&gt; The partial_sum and the final mask are created to ensure the behavior =
-described in the <br>
-&gt; Zvqdotq isa spec section 3 as follows:<br>
-&gt; <br>
-&gt; =E2=80=9CFinally, the four products are accumulated into the correspon=
-ding element of vd, wrapping <br>
-&gt; around signed overflow.=E2=80=9D<br>
-<br>
-This is accomplished by the -fwrapv argument to the compiler, with which al=
-l of qemu is <br>
-compiled.<br></blockquote><div>Thanks for this information. It=E2=80=99s he=
-lpful.</div><div>I=E2=80=99ll update version 2 to include this part.</div><=
-div><br></div><div>Thanks,</div><div>Max</div></div></div>
-
---000000000000dbe88f063de4f215--
 
