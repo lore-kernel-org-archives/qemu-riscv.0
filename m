@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9C47CA0FF2
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 13:03:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C1BCA1009
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 13:03:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1utn7z-0005Mv-3A; Wed, 03 Sep 2025 09:02:19 -0400
+	id 1utn7f-00059M-CU; Wed, 03 Sep 2025 09:01:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1utn7o-0005I3-2r
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 09:02:15 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ id 1utn7Z-00056c-Nz
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 09:01:57 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1utn7l-0000XC-9H
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 09:02:07 -0400
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-b49c1c130c9so4428081a12.0
- for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 06:02:03 -0700 (PDT)
+ id 1utn7X-0000Uq-2m
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 09:01:53 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-3297a168470so2920926a91.3
+ for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 06:01:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1756904523; x=1757509323; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q7yO8ADA0pol4cy8ipnt6jQ+4uDi0a2eWjgPSJWFAag=;
- b=W5dWaqwDzxLLEm8YFZUgX18zgumHcVzfB4UNa6kADQGdX7/byX3paik4yJCUajF8y3
- 7vw/EhyLoe79ZZM5cFn/f+c5/jNy2y27gadA+jglULlaf9YK3+BjmJT5p7FlcTxgim6R
- 06n39OvQmKuYUiwGEfmF0KLSu17JrCE6id4fzwsOjObcruSSsuO1uQs/hJLfEdmhQnur
- Pn76JF7SJLlSz8h6f105MNyksZ1MWCfW8omRh6lFVuWuuoHu0MwNOha4aJu0vA/SF2HW
- 3tClMUCrC028iobjojQhIfsntj3LLkSgGxTCVszIF+GqKVQhzISKEvm4WSHCUH7499oA
- rSAA==
+ d=sifive.com; s=google; t=1756904509; x=1757509309; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=a5HBE4kGgHVv5ddGcsNk2eOhjM/e0af34LDVEryaLhU=;
+ b=dmOA3ErJlFQLr6dvZxnd8Gl7ZdOAuHY5+NgEsZ9VWmfOoXbdTkYTx2fS2uQOqWm84g
+ yz3K1LFOcVqb7RGxDl2pTNhPo0Eyi4qNGFjqlwKUMbXH4b474vamVTtlAaQhUMAHV2S7
+ J15zqgqm1Xnp8tyEYpRQIdqJFLmrWSgfQbrrqBzuhPYcdWWtunJsGwmCsotSoZQ5zS/g
+ 1Tm+QKe5Y2ytQcROJUk9aCSnRvP91K7LopSj6vV8EJ8jn5NYFkD8AivgfN332XKWMXTg
+ LmMCPPMzCHHLy1jgNaoVOA1FTwowrSWODgPAZUZHsXAJLhIW42VowLAF4806eVvJncby
+ keRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756904523; x=1757509323;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Q7yO8ADA0pol4cy8ipnt6jQ+4uDi0a2eWjgPSJWFAag=;
- b=civLiTKbR2PpAvLilg6RW5Dv2hy6SQqmywoR2Bm14O9+JV0D7uOWga/Si5d4pP3WUg
- jcrPJj0ei8TnhCjJ0GUfkbkN2mkkGhnUB0pdGstYSRmvsmiP9TPEYk7/RMEaapwRN/Dq
- Pxh6o/bi2pshBF2ZXhx3X63YCpfEEoyIS/l9bLO1q1sljn6vsEM1eRMaC0c9zDE/H9j9
- +WQCJvewoyzvQ//hbAw/8iXGNDl2Ji4M1QMbSCU6WVw+uVfxVJrQ5oo52c+kCD3YPGh5
- xedLzd+mCpNl5QouzsieWrXb6IbJAzo28JUBDAtDdvAinhzZaJ+/kf+A9Y2qfSvqlQwk
- lSkg==
+ d=1e100.net; s=20230601; t=1756904509; x=1757509309;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a5HBE4kGgHVv5ddGcsNk2eOhjM/e0af34LDVEryaLhU=;
+ b=OoSOV2hnsWB6Z7LwhVaP5l+OdCXNkvP7+sBhsVMIK55hkPeyvoin70Ke5P3qLRQ3JM
+ x+WQ4n51MjZu7Xmi/RiguaNFkzs6wj/OTYwH0MjE93BCrNWeyPbUI9Inbd55t/EB1vwg
+ zaCrCpZE+9hi83hisVJetj8BCjdzuWJFYRKue7CZxNidf2M/PJcQAIZ65RxUYKJHrFDX
+ OLyespSTTusqF1PA9mVZ1xIyyZyxlSyGCNeSFpiWv8D2puSVtS3XbLN+57s14qMHkaNa
+ M0+phAjD0NESD1+9ofgnaluJi7UW0Fch6+BIpICUQi+Hfjw2BYHk7VWy5hXVSexp9Jk4
+ r+kA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXlfNZDM2qU5E/d6MYxXq/SdhgrAmLxGHHOvvBBq4m0f0sYuoQISv0rmDPXcXipPldR0eVOuMjx/+HX@nongnu.org
-X-Gm-Message-State: AOJu0YwR/aJ85JtQfXXwy6LWcQg1dJyy3GkSTEOT4zbS8bHSgppxDWDt
- Q2JLcMa5C1kwmWecD3ivh8ASwqr9SrWdQ6lruPK4sc3AQOnwjTwbZTF/IQ8j5bV+Vpk=
-X-Gm-Gg: ASbGncv1iylUZbzat2CtWkudy0ZtZ272Bg/w00Td8gP2JoRFtnCI/NApOplief4NhTB
- MHa73dtqLiwT8u/xtZgm9mVCGwH+R5KMUQGpkMULnLI4I2riVHo1E9eCAJ543+rS8zUd+gkVNAr
- W5ojxwZJk/OjTVLU46ttUn7R25F7rV0gq6vmWjXQyaeAUKKa/RWeJOGLvAVdWd2wPZ3KdXsj6C0
- TGiyJfl+q60gw2nSBgwMZSwfbCKAhDEhVWHX5VA+RrLee8fTdbmDNwo3IjeylrvQaEAKvzZ2qfI
- LGnX4o4W34ESG51eoDj5w7ekyKxmqvtKJioNdJHke4I8HcB7RKHzLbDR+Up+U+Yr3kCK0cSX523
- QA7ZSDZxNFxWxALgc6YKbnwfeKyCG7pZBm6x1OWsZVJRzNEq1WRJuT7geMsUlExYpOOU=
-X-Google-Smtp-Source: AGHT+IGgfRSMell+/W3XLFCDDR80gZvnWvEbUrMOkY74hJ14lx4kYrnVxKGZ0YBfuAwyGNt9sJIxwQ==
-X-Received: by 2002:a17:902:ef52:b0:248:8d0a:b4c4 with SMTP id
- d9443c01a7336-24944b523d9mr205320645ad.47.1756904521068; 
- Wed, 03 Sep 2025 06:02:01 -0700 (PDT)
+ AJvYcCWR3/jVUu/VqUOUktWuCTK8ciQK1SkCbJ2fS6kiBwFY43rGRfge8RTue8DlKtN5FF9uYT53eofVRC/5@nongnu.org
+X-Gm-Message-State: AOJu0YwclYsJ15mX8u8MuD8eizV7mve3SU80BtMj/MDzvFzn7FvBXjmt
+ JCpCw+baQLLYrJTf6B/3nxRXXpCYi5I70v05sExM6XiATwxucGvSCtUWwGlOJXXLjA9p1b3KbTz
+ hYOyD95M=
+X-Gm-Gg: ASbGnct5HzV0DxzoYBdxbTVkD/AFsnO9YHGb2VnrbE+QBx16MKcnmHJ2GSze4OxeAfK
+ gmyFTA0k0ABonsPmiiiE2PzW8e3rVkQXXhlxwJ1AZsuVVlA0pU+u6oJxtHLOdBh7uu5dhmzX+3P
+ hHefndw4h7d+weoBqCeWZTxboP9s6wPFoi1nPQIwBdTp1ndw51F4ROMsJY+2qkBeUhez7Irzt1f
+ aSK3ztUmgz0CaT8e1siEqOg4LvZJwUFaNVoRbOcP+7mqYaOEiFh3fxHYK/ulOiq6FuwI/i7R5sk
+ MvW60e+8kVpMGYzCIWwKHJ1Y/DEWTjBaBLl5jfDD3Q/Q64fQToLkxhVXqH5xt0K4BEK7tzpc7wJ
+ t3XokGNrlklI2f8+O8GE/3LJ/Cu/1WMBrx44nmZnknyPafXDJsqK0ftLreTexJ3Xrz0/8tvHQ+4
+ Q7RQ==
+X-Google-Smtp-Source: AGHT+IHhWSOOYiOkcPRhJAVTlaM+xESFcT8Qo77wqYZmR3jF1T1RFHevuaicR6xrxPJXgb+mw6+p9w==
+X-Received: by 2002:a17:90b:5205:b0:329:cb75:fef2 with SMTP id
+ 98e67ed59e1d1-329cb761185mr10499582a91.3.1756904509046; 
+ Wed, 03 Sep 2025 06:01:49 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-329e23858ecsm5472278a91.14.2025.09.03.06.01.59
+ 98e67ed59e1d1-329e23858ecsm5472278a91.14.2025.09.03.06.01.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Sep 2025 06:02:00 -0700 (PDT)
+ Wed, 03 Sep 2025 06:01:48 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -75,24 +76,21 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, richard.henderson@linaro.org,
  Max Chou <max.chou@sifive.com>
-Subject: [RFC PATCH v2 3/3] target/riscv: Expose Zvqdotq extension as a cpu
- property
-Date: Wed,  3 Sep 2025 21:01:25 +0800
-Message-ID: <20250903130125.1701363-4-max.chou@sifive.com>
+Subject: [RFC PATCH v2 0/3] Add Zvqdotq support
+Date: Wed,  3 Sep 2025 21:01:22 +0800
+Message-ID: <20250903130125.1701363-1-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250903130125.1701363-1-max.chou@sifive.com>
-References: <20250903130125.1701363-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=max.chou@sifive.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=max.chou@sifive.com; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,24 +106,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Max Chou <max.chou@sifive.com>
----
- target/riscv/cpu.c | 1 +
- 1 file changed, 1 insertion(+)
+This patch series adds Zvqdotq support.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 95edd02e68..ed486113ba 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1373,6 +1373,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
- /* These are experimental so mark with 'x-' */
- const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-     MULTI_EXT_CFG_BOOL("x-svukte", ext_svukte, false),
-+    MULTI_EXT_CFG_BOOL("x-zvqdotq", ext_zvqdotq, false),
- 
-     { },
- };
--- 
+The isa spec of Zvqdotq extension is not ratified yet, so this patch series
+is based on the latest draft of the spec (v0.0.2) and make the Zvqdotq
+extension as an experimental extension.
+
+The draft of the Zvqdotq isa spec:
+https://github.com/riscv/riscv-dot-product
+
+v2:
+* Remove unnecessary variable and mask (Thanks for Richard Henderson's
+  suggestion)
+
+Max Chou (3):
+  target/riscv: Add Zvqdotq cfg property
+  target/riscv: rvv: Add Zvqdotq support
+  target/riscv: Expose Zvqdotq extension as a cpu property
+
+ target/riscv/cpu.c                            |  2 +
+ target/riscv/cpu_cfg_fields.h.inc             |  1 +
+ target/riscv/helper.h                         | 10 +++
+ target/riscv/insn32.decode                    |  9 +++
+ target/riscv/insn_trans/trans_rvzvqdotq.c.inc | 61 +++++++++++++++++++
+ target/riscv/tcg/tcg-cpu.c                    |  5 ++
+ target/riscv/translate.c                      |  1 +
+ target/riscv/vector_helper.c                  | 61 +++++++++++++++++++
+ 8 files changed, 150 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzvqdotq.c.inc
+
+--
 2.39.3
 
 
