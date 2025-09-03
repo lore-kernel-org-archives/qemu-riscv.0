@@ -4,113 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8126CCA1007
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Sep 2025 19:10:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2716BCA1007
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 00:27:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1utWO7-0002sN-23; Tue, 02 Sep 2025 15:09:51 -0400
+	id 1utbKk-0004nN-NV; Tue, 02 Sep 2025 20:26:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1utWO5-0002rT-NV
- for qemu-riscv@nongnu.org; Tue, 02 Sep 2025 15:09:49 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1utWO3-0000vO-VY
- for qemu-riscv@nongnu.org; Tue, 02 Sep 2025 15:09:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1756840187;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=T6aZo6bFOejCKlebgRxBSqBSOCqRXA0s/PEkc9kxZzw=;
- b=jF/PRVnGMj1vc4fzB2VmhBG8AqkQi3Pqt+0wigD0vuxYJiTQ/tKYKCLCvBglG8UyKIFHhG
- VcuSNkQaSqQRBOURnpdKwLCBFJJMv2Sp8hZrC6ZAv4HvYOBnqtvHYHktDJQW0wALE2hZyC
- oDrVEd2Z+xiAK1dCEm8Mqe1WMVkBkjc=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-587-ud_o2ddvN0GU1vS6a_yr4g-1; Tue, 02 Sep 2025 15:09:43 -0400
-X-MC-Unique: ud_o2ddvN0GU1vS6a_yr4g-1
-X-Mimecast-MFC-AGG-ID: ud_o2ddvN0GU1vS6a_yr4g_1756840183
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-80593bfe0a2so311697085a.3
- for <qemu-riscv@nongnu.org>; Tue, 02 Sep 2025 12:09:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1utbKb-0004kT-Sl
+ for qemu-riscv@nongnu.org; Tue, 02 Sep 2025 20:26:34 -0400
+Received: from mail-oa1-x35.google.com ([2001:4860:4864:20::35])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1utbKa-0005Lv-4J
+ for qemu-riscv@nongnu.org; Tue, 02 Sep 2025 20:26:33 -0400
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-30ccea8a199so5709359fac.2
+ for <qemu-riscv@nongnu.org>; Tue, 02 Sep 2025 17:26:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1756859190; x=1757463990; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ojMM3DSGurOM+fnFHd1qQ6BjKqQ2fmjMD9Qvz0IqYE8=;
+ b=g68KSz2gM0HXo1AS7Qe2zwM5XLX6m/df3Ge7ccB8IRsXSJnSxTLF7lDGRBtOWZjHHv
+ MzUNDFEREoQgKMmYeBPVR16slSw3wkvAAI0kaYmwsCGyeF0/+SiusLHgx2G9jJcf8tqK
+ QkXm9Qc9G6w7amnAhpAlO2TlPJEFAs4JFT/BiA2/WLZFm35JT7AvmrBI52ThpGqZzD8M
+ XhHlgHzDRblwQnn3p0NcALLHnPAXz5swR3JEH6gcUFbIfH9razzsOCmVcy2wP7bGKg+g
+ YFgG10Mo1vehZ5Odr/XggpTcjMh4HFVtwIR6IXhARvTn6d3GKiTgMJabPwvaaj+Ywyju
+ TGUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756840183; x=1757444983;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=T6aZo6bFOejCKlebgRxBSqBSOCqRXA0s/PEkc9kxZzw=;
- b=HDQp8uIfEkwq2eBvLHZluPtn35KaKXHw9UvajtK4+dl98FMFaTXEa+7b6WTJJ0THTy
- xBZ392YHgGOHXLQOATppljK2Oz3wVb4xBt66+/dbsYdV92632gIQPbXuJsK354cEeJJB
- K/3mGflH0lFpuzo2JymyN4w/HyBKgzfQ587NZk8eBVzBZFVTNDiy6W0DAltLWJWPWfbJ
- TnlhB6qjz2sHaYSVl1P0iNOFaTomlu8Gv458EoONBZzGuamCpGtuzw1W42CMmCGw63Sh
- Ta3Uzpl6TV9S241Ns/qsTqtEzHbA5/TVRpsVRJcGU46Va3dGGM2CaIX2UJpRto4kEjoh
- +6NQ==
+ d=1e100.net; s=20230601; t=1756859190; x=1757463990;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ojMM3DSGurOM+fnFHd1qQ6BjKqQ2fmjMD9Qvz0IqYE8=;
+ b=b1kZpM1R2il2mmoZyDEVx0v0Ywg4Q5xZwnjudUpaUR2lYDDM7RE5kAuzQw+vy6bxQj
+ 6lYjqbngzapCoIyDtyDAMAThJFl2u8P4AqcJYaRiRlY1CfBuk60iKAmmSQOtJtgZh633
+ aPIA1lhVybEC8S5PyoglM+mXW5XEXm54pn+Do1ieMWpJwOWu8C/7MsEpYKibyUq88vwh
+ A/ffTAOV2C1mPK0RVOXBERz8p72FUnF8HkqdRWUWu4/avDPoCzKwlkip4V3knhZLoovx
+ Quiuv9VztG9ZoPJL7yC6j+Y+C2laawyvqZt9sfLavJUb4FuKD72qztHxi/nqTHwdRiac
+ MbVg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/2aAibVZ7JaEU/rWzzlw50vrfzaDgR7fb5PsqKHHIwkHunwui0XDSAGw02YXaV3IyPtfpZBBDj2fX@nongnu.org
-X-Gm-Message-State: AOJu0Ywa/MarzGooZ1TMtQiWGg1nQ15Ypy/nRgotir/SJShcIfrVY6bN
- UNj6Zbz0Mpg2XGiP3uqOnfgu4taxih1woxb5FR6gObTvviKt8fCfc7RZK5KvyTjEScuUna1PWx+
- iuxczEMsczC0Ym/MnSTN+u+uQVvMIlRj2NTkkwL4SC2Ve5Qp/txJDsWBe
-X-Gm-Gg: ASbGncvSSOe+bQGeONDz7dKbOmrJL3h8ONGdWob4MzEI3GYeud6w8Q8uVtz1+J5/ftL
- aeAFP0kvjIQoB+0XPodha3XHt8pe+hpYLcbytYcabQkzJEyWGcM8rFvlZtnbFjkN0U+/DyQD2X+
- WTMsUcDYSCnwzLUOVwv7MfdQ0Ke3cQlja23gHU2RT7VFBGyvwpzb46UuCc+foLV1MXCuO/uyBOO
- G1VcD13ULhbTk3UsbrBd3ua6XdJqqSCdCGQtsJmLosQaX/wyxu1lCj2L0bNqSW678k25dkm0pW5
- AtcRsGo7okd9Dq8TrNG7nIf+Cr6oMVXN
-X-Received: by 2002:a05:620a:2043:b0:809:3aea:1401 with SMTP id
- af79cd13be357-8093aea6251mr189380285a.75.1756840183198; 
- Tue, 02 Sep 2025 12:09:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGvr13b2cdJkcUH4TQ6/CI39Vrq5Vu33VWLBBTCta1UQzE2Fcgg8l3R8uExaeGI7N3K3jtzDw==
-X-Received: by 2002:a05:620a:2043:b0:809:3aea:1401 with SMTP id
- af79cd13be357-8093aea6251mr189375385a.75.1756840182677; 
- Tue, 02 Sep 2025 12:09:42 -0700 (PDT)
-Received: from x1.local ([174.89.135.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8069cdf0c07sm180439385a.59.2025.09.02.12.09.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Sep 2025 12:09:41 -0700 (PDT)
-Date: Tue, 2 Sep 2025 15:09:22 -0400
-From: Peter Xu <peterx@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: CJ Chen <cjchen@igel.co.jp>, qemu-devel@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- Keith Busch <kbusch@kernel.org>, Klaus Jensen <its@irrelevant.dk>,
- Jesper Devantier <foss@defmacro.it>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
- Max Filippov <jcmvbkbc@gmail.com>, David Hildenbrand <david@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Tomoyuki Hirose <hrstmyk811m@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Subject: Re: [RFC PATCH v2 3/9] hw: npcm7xx_fiu and mx_pic change
- .impl.unaligned = true
-Message-ID: <aLdA4uH5CGbfz9Gd@x1.local>
-References: <20250822092410.25833-1-cjchen@igel.co.jp>
- <20250822092410.25833-4-cjchen@igel.co.jp>
- <3a80c5e5-9889-4830-9a00-5d4d92141a3a@linaro.org>
+ AJvYcCUdjNpx/EOt8OKgO20nHpCTteL8+1IYnlLq0Y1+ghrwkQmSJOrgLf1C8RpcMt2K/1XpGuGGLVhiK++Q@nongnu.org
+X-Gm-Message-State: AOJu0YyoieQkTI8eFG7QjYEwauHLCJUd+mx0Id1666DAnPvIo+GgHkAU
+ hB25iu5CmLmwCT/33nd+NRcnoimAkf0ZCh1owXKyGPTpoFsA8lUa2yyCAqVfsqOReR1ElN1NK0e
+ Yw7lUffFCsdJzEHEvco07EYxMIXBRsciuV8KtvRi9Ag==
+X-Gm-Gg: ASbGncsrRC7mApSma04KxHIQGKepNmJ+A8F887y6Qb+DK1RkPgAVk/aHId+Le9IPucT
+ QdrU5n5zlcRgHIQ4V6THDPEXCuENo+6rqZwFEcpcVoFT0IJMz8Cj1RghwQLvn9Ewy3CPOV86D04
+ 1d+gOTj/MNC7UYn2kA+WKH/zQPnqCASNvseu3q2rdwrDFMW/RahoGyoIHGyG9XSLQxC8mRbMu1n
+ o/X1w9z
+X-Google-Smtp-Source: AGHT+IFs99mPixsyJ7Yc5+bPiusaqxlL/x91MA6N4XVfRs1vfq3g7wgdhCpYcsA6e+4W7EqOtyVaJheNM/x05upZAJ8=
+X-Received: by 2002:a05:6870:3913:b0:314:b6a6:6860 with SMTP id
+ 586e51a60fabf-3196347d06dmr6794377fac.46.1756859189731; Tue, 02 Sep 2025
+ 17:26:29 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <3a80c5e5-9889-4830-9a00-5d4d92141a3a@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: ZVGhdlRFPn_5F3JZmC-AYgnysno4kz6oeYf2BnGuqA8_1756840183
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=peterx@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+References: <20250901133815.1693077-1-max.chou@sifive.com>
+ <20250901133815.1693077-3-max.chou@sifive.com>
+ <5d0fe741-9063-441d-8abc-3bb0662c1fbe@linaro.org>
+In-Reply-To: <5d0fe741-9063-441d-8abc-3bb0662c1fbe@linaro.org>
+From: Max Chou <max.chou@sifive.com>
+Date: Wed, 3 Sep 2025 09:26:19 +0900
+X-Gm-Features: Ac12FXylKOyKFvo1kcQ4fxqouJUxJBvy15oY_D2DjL7KHKy4t-bpFws7dh5NXLU
+Message-ID: <CANiaA1sP1KvhFhOOZRYJPzb=cf1DwTJNMTgEx5j2oppFNj6mdA@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/3] target/riscv: rvv: Add Zvqdotq support
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: multipart/alternative; boundary="000000000000ecb7ec063ddaa729"
+Received-SPF: pass client-ip=2001:4860:4864:20::35;
+ envelope-from=max.chou@sifive.com; helo=mail-oa1-x35.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -126,62 +101,142 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Aug 25, 2025 at 01:00:21PM +0200, Philippe Mathieu-Daudé wrote:
-> Hi,
-> 
-> On 22/8/25 11:24, CJ Chen wrote:
-> > By setting .impl.unaligned = true, we allow QEMU to pass along
-> > unaligned requests directly as-is, rather than splitting them into
-> > multiple aligned sub-requests that might cause repeated device
-> > callbacks or unintended side effects.
-> > 
-> > Signed-off-by: CJ Chen <cjchen@igel.co.jp>
-> > Tested-by: CJ Chen <cjchen@igel.co.jp>
-> > Acked-by: Tomoyuki Hirose <hrstmyk811m@gmail.com>
-> > Reported-by: Tomoyuki Hirose <hrstmyk811m@gmail.com>
-> > ---
-> >   hw/ssi/npcm7xx_fiu.c | 3 +++
-> >   hw/xtensa/mx_pic.c   | 3 +++
-> >   2 files changed, 6 insertions(+)
-> 
-> 
-> > diff --git a/hw/xtensa/mx_pic.c b/hw/xtensa/mx_pic.c
-> > index 8211c993eb..6bf524a918 100644
-> > --- a/hw/xtensa/mx_pic.c
-> > +++ b/hw/xtensa/mx_pic.c
-> > @@ -270,6 +270,9 @@ static const MemoryRegionOps xtensa_mx_pic_ops = {
-> >       .valid = {
-> >           .unaligned = true,
-> >       },
-> > +    .impl = {
-> > +        .unaligned = true,
-> > +    },
-> >   };
-> 
-> Surely a distinct patch.
+--000000000000ecb7ec063ddaa729
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Besides that, I also don't understand how it used to work even before this
-change..
+On Tue, Sep 2, 2025 at 22:38 Richard Henderson <richard.henderson@linaro.or=
+g>
+wrote:
 
-E.g., both of the xtensa mx_pic read/write ignores size, that doesn't look
-right already when there's totally no limitation of impl.*_access_size.
+> On 9/1/25 23:38, Max Chou wrote:
+> > +#define OPMVV_VQDOTQ(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2)
+> \
+> > +static void do_##NAME(void *vd, void *vs1, void *vs2, int i)
+> \
+> > +{
+>  \
+> > +    int idx;
+> \
+> > +    T1 r1;
+> \
+> > +    T2 r2;
+> \
+> > +    TX1 *r1_buf =3D (TX1 *)vs1 + HD(i);
+>  \
+> > +    TX2 *r2_buf =3D (TX2 *)vs2 + HD(i);
+>  \
+> > +    TD acc =3D *((TD *)vd + HD(i));
+>  \
+> > +    int64_t partial_sum =3D 0;
+> \
+>
+> I think it's clear partial_sum should be the 32-bit type TD.
+> Indeed, I'm not sure why you don't just have
+>
+>         TD acc =3D ((TD *)vd)[HD(i)];
 
-Meanwhile, taking xtensa_mx_pic_ext_reg_read() as example, it'll return a
-u32 by offset smaller than MX_MAX_IRQ (where MIROUT==0):
+Thanks for the suggestion. I=E2=80=99ll update version 2 for this part.
 
-    if (offset < MIROUT + MX_MAX_IRQ) {
-        return mx->mirout[offset - MIROUT];
-    }
 
-But it returns different u32 for different offsets.. so reading 0x0 returns
-the 1st u32, then 0x1 returns the 2nd (rather than reading 0x4 returns
-that).
+>
+> > +
+> \
+> > +    for (idx =3D 0; idx < 4; ++idx) {
+>  \
+> > +        r1 =3D *((T1 *)r1_buf + HS1(idx));
+> \
+> > +        r2 =3D *((T2 *)r2_buf + HS2(idx));
+> \
+> > +        partial_sum +=3D (r1 * r2);
+>  \
+>
+>         acc +=3D r1 * r2;
+>
+> > +    }
+>  \
+> > +    *((TD *)vd + HD(i)) =3D (acc + partial_sum) & MAKE_64BIT_MASK(0, 3=
+2);
+> \
+>
+>         ((TD *)vd)[HD(i)] =3D acc;
+>
+> because that final mask is bogus.
+>
 
-Even if there might be a driver that works with it, it still doesn't look
-like the traditional way of doing MMIOs.. irrelevant of setting unaligned
-or not in its .impl.
+The partial_sum and the final mask are created to ensure the behavior
+described in the Zvqdotq isa spec section 3 as follows:
 
--- 
-Peter Xu
+=E2=80=9CFinally, the four products are accumulated into the corresponding =
+element
+of vd, wrapping around signed overflow.=E2=80=9D
 
+Thanks,
+Max.
+
+--000000000000ecb7ec063ddaa729
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+PGRpdiBkaXI9ImF1dG8iPk9uIFR1ZSwgU2VwIDIsIDIwMjUgYXQgMjI6MzggUmljaGFyZCBIZW5k
+ZXJzb24gJmx0OzxhIGhyZWY9Im1haWx0bzpyaWNoYXJkLmhlbmRlcnNvbkBsaW5hcm8ub3JnIj5y
+aWNoYXJkLmhlbmRlcnNvbkBsaW5hcm8ub3JnPC9hPiZndDsgd3JvdGU6PGJyPjwvZGl2PjxkaXY+
+PGRpdiBjbGFzcz0iZ21haWxfcXVvdGUgZ21haWxfcXVvdGVfY29udGFpbmVyIj48YmxvY2txdW90
+ZSBjbGFzcz0iZ21haWxfcXVvdGUiIHN0eWxlPSJtYXJnaW46MHB4IDBweCAwcHggMC44ZXg7Ym9y
+ZGVyLWxlZnQtd2lkdGg6MXB4O2JvcmRlci1sZWZ0LXN0eWxlOnNvbGlkO3BhZGRpbmctbGVmdDox
+ZXg7Ym9yZGVyLWxlZnQtY29sb3I6cmdiKDIwNCwyMDQsMjA0KSI+T24gOS8xLzI1IDIzOjM4LCBN
+YXggQ2hvdSB3cm90ZTo8YnI+DQomZ3Q7ICsjZGVmaW5lIE9QTVZWX1ZRRE9UUShOQU1FLCBURCwg
+VDEsIFQyLCBUWDEsIFRYMiwgSEQsIEhTMSwgSFMyKcKgIMKgIMKgIMKgIMKgIFw8YnI+DQomZ3Q7
+ICtzdGF0aWMgdm9pZCBkb18jI05BTUUodm9pZCAqdmQsIHZvaWQgKnZzMSwgdm9pZCAqdnMyLCBp
+bnQgaSnCoCDCoCDCoCDCoCDCoCDCoCBcPGJyPg0KJmd0OyAre8KgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgXDxicj4NCiZndDsgK8KgIMKgIGludCBpZHg7
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgXDxicj4NCiZndDsgK8KgIMKgIFQxIHIx
+O8KgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIFw8YnI+DQomZ3Q7ICvCoCDCoCBU
+MiByMjvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBcPGJyPg0KJmd0OyArwqAg
+wqAgVFgxICpyMV9idWYgPSAoVFgxICopdnMxICsgSEQoaSk7wqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBcPGJyPg0KJmd0OyArwqAgwqAgVFgyICpy
+Ml9idWYgPSAoVFgyICopdnMyICsgSEQoaSk7wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBcPGJyPg0KJmd0OyArwqAgwqAgVEQgYWNjID0gKigoVEQg
+Kil2ZCArIEhEKGkpKTvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoFw8YnI+DQomZ3Q7ICvCoCDCoCBpbnQ2NF90IHBhcnRpYWxfc3VtID0g
+MDvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCBcPGJyPg0KPGJyPg0KSSB0aGluayBpdCYjMzk7cyBjbGVhciBwYXJ0aWFsX3N1
+bSBzaG91bGQgYmUgdGhlIDMyLWJpdCB0eXBlIFRELjxicj4NCkluZGVlZCwgSSYjMzk7bSBub3Qg
+c3VyZSB3aHkgeW91IGRvbiYjMzk7dCBqdXN0IGhhdmU8YnI+DQo8YnI+DQrCoCDCoCDCoCDCoCBU
+RCBhY2MgPSAoKFREICopdmQpW0hEKGkpXTs8L2Jsb2NrcXVvdGU+PGRpdiBkaXI9ImF1dG8iPjxk
+aXY+DQo8ZGl2Pg0KPHAgZGlyPSJhdXRvIj5UaGFua3MgZm9yIHRoZSBzdWdnZXN0aW9uLiBJ4oCZ
+bGwgdXBkYXRlIHZlcnNpb24gMiBmb3IgdGhpcyBwYXJ0LjwvcD48L2Rpdj48L2Rpdj48L2Rpdj48
+ZGl2IGRpcj0iYXV0byI+PGJyPjwvZGl2PjxibG9ja3F1b3RlIGNsYXNzPSJnbWFpbF9xdW90ZSIg
+c3R5bGU9Im1hcmdpbjowcHggMHB4IDBweCAwLjhleDtib3JkZXItbGVmdC13aWR0aDoxcHg7Ym9y
+ZGVyLWxlZnQtc3R5bGU6c29saWQ7cGFkZGluZy1sZWZ0OjFleDtib3JkZXItbGVmdC1jb2xvcjpy
+Z2IoMjA0LDIwNCwyMDQpIiBkaXI9ImF1dG8iPjxicj4NCjxicj4NCiZndDsgK8KgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIFw8YnI+DQomZ3Q7ICvCoCDC
+oCBmb3IgKGlkeCA9IDA7IGlkeCAmbHQ7IDQ7ICsraWR4KSB7wqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBcPGJyPg0KJmd0OyArwqAgwqAgwqAg
+wqAgcjEgPSAqKChUMSAqKXIxX2J1ZiArIEhTMShpZHgpKTvCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCBcPGJyPg0KJmd0OyArwqAgwqAgwqAgwqAgcjIgPSAq
+KChUMiAqKXIyX2J1ZiArIEhTMihpZHgpKTvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCBcPGJyPg0KJmd0OyArwqAgwqAgwqAgwqAgcGFydGlhbF9zdW0gKz0g
+KHIxICogcjIpO8KgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgXDxicj4NCjxicj4NCsKgIMKgIMKgIMKgIGFjYyArPSByMSAqIHIyOzxicj4N
+Cjxicj4NCiZndDsgK8KgIMKgIH3CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoFw8YnI+DQomZ3Q7ICvCoCDCoCAqKChURCAqKXZkICsgSEQoaSkpID0gKGFjYyArIHBh
+cnRpYWxfc3VtKSAmYW1wOyBNQUtFXzY0QklUX01BU0soMCwgMzIpOyBcPGJyPg0KPGJyPg0KwqAg
+wqAgwqAgwqAgKChURCAqKXZkKVtIRChpKV0gPSBhY2M7PGJyPg0KPGJyPg0KYmVjYXVzZSB0aGF0
+IGZpbmFsIG1hc2sgaXMgYm9ndXMuPGJyPg0KPC9ibG9ja3F1b3RlPjxkaXYgZGlyPSJhdXRvIj48
+YnI+PC9kaXY+PGRpdiBkaXI9ImF1dG8iPjxkaXY+DQo8ZGl2Pg0KPHAgZGlyPSJhdXRvIj5UaGUg
+cGFydGlhbF9zdW0gYW5kIHRoZSBmaW5hbCBtYXNrIGFyZSBjcmVhdGVkIHRvIGVuc3VyZSB0aGUg
+YmVoYXZpb3IgZGVzY3JpYmVkIGluIHRoZSBadnFkb3RxIGlzYSBzcGVjIHNlY3Rpb24gMyBhcyBm
+b2xsb3dzOjwvcD4NCjxwIGRpcj0iYXV0byI+4oCcRmluYWxseSwgdGhlIGZvdXIgcHJvZHVjdHMg
+YXJlIGFjY3VtdWxhdGVkIGludG8gdGhlIGNvcnJlc3BvbmRpbmcgZWxlbWVudCBvZiB2ZCwgd3Jh
+cHBpbmcgYXJvdW5kIHNpZ25lZCBvdmVyZmxvdy7igJ08L3A+DQo8L2Rpdj4NCjwvZGl2Pjxicj48
+L2Rpdj48ZGl2IGRpcj0iYXV0byI+VGhhbmtzLDwvZGl2PjxkaXYgZGlyPSJhdXRvIj5NYXguPC9k
+aXY+PC9kaXY+PC9kaXY+DQo=
+--000000000000ecb7ec063ddaa729--
 
