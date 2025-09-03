@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39894CA1009
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 08:15:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F88CA1009
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 08:16:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1utide-0002kG-EV; Wed, 03 Sep 2025 04:14:42 -0400
+	id 1utidp-0002oT-1J; Wed, 03 Sep 2025 04:14:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1utidb-0002je-Qi; Wed, 03 Sep 2025 04:14:39 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1utidn-0002np-4h; Wed, 03 Sep 2025 04:14:51 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1utida-0001h5-1r; Wed, 03 Sep 2025 04:14:39 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-24456ce0b96so8388995ad.0; 
- Wed, 03 Sep 2025 01:14:35 -0700 (PDT)
+ id 1utidl-0001jk-5D; Wed, 03 Sep 2025 04:14:50 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-248df8d82e2so52931235ad.3; 
+ Wed, 03 Sep 2025 01:14:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756887274; x=1757492074; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yCb97mwKl0zDXDe9mlZ6s8SrOQ+RIl2akiT0e1loX4I=;
- b=E/uk+RyM8NCEbKfxF+Tlt3xgmfK843148tlLBGCPqYWfTpj9XCNdRnRLsf2yw57+yI
- eP820js3sd8EoegAkcft1JJHD3bn+E/enF9RKIv2/wfpq2k8OaUchjukner2vkkX2O0v
- huDNOAMGdTqrUmK2EaFmt6uaIFW+5fINihlg1aIrDpk9ORjbo6KVBmXyE4pLkGsxoMEf
- m8RXPJrM2SCOHeBejqM3Jm/QlnYzsBhSt/ti0uUHC2fRcc3vTuTz2POsoD5lf2u9tIld
- BY2pB/ej6Cp4pOQIClvRDAwGjtM8jV86Zr1886QebnaQFcn0zo2F4ZhZBMaCz+WK4b0W
- dZUA==
+ d=gmail.com; s=20230601; t=1756887286; x=1757492086; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YvRVwijnneGWg1Edja7q4SQVpGJeMep01w/gAcM43ZQ=;
+ b=Fs4nHkHpZkJPISI0OlZSYBi6nLoKf/v+FvR0dPrU/756fCFHkJz+SnFLe0KDJ2xHtW
+ MyZow/aFnrGK42jlQSUrwq0n/ZV9R1qy8l/rUvsVIUzkW3gd5EJInCX3uorEosPP0y7w
+ B2Em3fdB01IrWNJ3Y8X5LOWrTIYEyKiVZQhY4ueCPgak9J30WnzBBH46PnREJ5U5ccet
+ AjYE0MM8MqfveAhQsRaoNsOJ8Ae1Dc4veIfReufA/rjtWNDTsZdSNn3jmcbdwNx3RM9m
+ Bdw0y/G/WgKuWWureKJo0Zm3phzRJFWTJESg+O/S//Dw/MKr9o+O2OB+F60B7CJcie1C
+ eRLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756887274; x=1757492074;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yCb97mwKl0zDXDe9mlZ6s8SrOQ+RIl2akiT0e1loX4I=;
- b=sG6DBoxOOeyrZB00hXo4Dub62VjoCnMDYGzjAZGIuHNew9PSuz8vk5j2HeoBzGdwN+
- GchQ9xaC9DIhJk0rj1pvzSkA+VS85ZWocUOvtXoabN7B3LzlTv+eaVtxokat2j8Yz0Y3
- SUXzRe3M+Y1XXMycwmNQfcfaaRmg86LUUCpMOT0VvsaLfDyBALmqn0d7Y5Eoq2hSNFdk
- KbvDtRulae1Z0n0mXZgLTtw+w/CQXLMNrEFcVrlKpcTosbCLKR5Tqv+0tWgalAZ6DB75
- uu6FKhwED7i2QuUTU8k/DvJbNZ/ADTwAzXvNataNFhwPUpYYknAxv4afcfxwHajRtQRQ
- I4qA==
+ d=1e100.net; s=20230601; t=1756887286; x=1757492086;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YvRVwijnneGWg1Edja7q4SQVpGJeMep01w/gAcM43ZQ=;
+ b=WF532K4yGrlnQHEPenCLLDokjc853xjFOj0rBLRhU/9hFFuftkJz9uDODRBn0NiC2K
+ JQKMu/ha6WSLbyiTCp1md2ddySLB2R84qtw1ftfTzUoGg9I4HxAyq5aEpYTpLA4Qsaql
+ secNiNSxQ8dnhnRn9R4p/V170WI5q0rKRSgIJi5aYD5ompm45tcHZ+AFO/MHJjy+VC8c
+ VdxE27yp6y82h1GWD/aXzsVzKizRFw89VDOjuzHNAeT9id1bFq9J61gnG4tI7LDxpA8c
+ pbL87oFVW6lsDPx9uzzbesUULPxpT8sntYkLuGwouL5TkGE0c4dH4jt0RJIhxzlzezVn
+ uKIg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVcr5LvynZvrkeG10t98oFEsapw89huGFUidBzJpEwZRu+I4Thqev8SeZrRJBcSP0XjCSzmRjKJLlBW@nongnu.org
-X-Gm-Message-State: AOJu0Yx0ibGvezr2x61LpPBnUb2zWYgfoIZt7h4YJoox8hYMGWu8YNMG
- jrZy2hSSLvjAyUKSuTLhY8KSKM8qNB1CoNsDJyo4NM6uS20audkkcL+qS3g4Rg==
-X-Gm-Gg: ASbGncuen8jyLliueDL+sh//i60CwyfrRIOJYnXI/l7BHnqKhDW26FGdI9ly8YUVjZc
- WZ728GWzrcGcg4lFGjOEATiXhItzYi1eAc4LHHu/+oGwMiT0DKBI78ukHWjQdnClsec9HaddYsv
- xu1C0032cYKr2uYQf9uUyBbTLltuqojHE16UtAGZiIbR7GwKKgU2HNSYwHUHRwnmhcuq0YQR4s2
- b36B6iWoWot+dUu9/y/xP85wfTYZXpIcSFtfTYe6Pa6KxjLHKb9T+SGU5r8okdUKnfRuKRQll3h
- ETXqs+fGm6aXG7OHERpSi27kP7cH2hTC4sSauVbr/mbmFGgpJ7xfuBdgkraNYMXkUUMicCvC94a
- HVs9sqCyieqTVxBqaF15yn9cp2UOGuRaqL60T8eMB2GfzLhpdjyEL4uLkvJM8YGXp7+Fo
-X-Google-Smtp-Source: AGHT+IHJS5Lax5RuypX7/uvbB9Mw436f1+AytLFHTlk0k26/tlhMWv0Tr6dKvIUkYZlWi1Z7G0vmPA==
-X-Received: by 2002:a17:902:ecc3:b0:24b:eef:643c with SMTP id
- d9443c01a7336-24b0eef6874mr83328945ad.5.1756887273762; 
- Wed, 03 Sep 2025 01:14:33 -0700 (PDT)
+ AJvYcCVF7E9XD7AbwSVz8lxNBNIHKLJelKKISlHGpx2T4CbH2YWRd6xT1taNfN6sHV/AYI3IRdjr4PP9Ckr4@nongnu.org
+X-Gm-Message-State: AOJu0YxgN5gzrrbM/rH3kgbM38VhwQnRIAfR4HlWiIZZ8A6eI/N67EAY
+ kLSz8maTPpHctVXSkFwbyHHwmQkhOOewrdOSLD0nido/zakzn7K/EPwrWJ06RA==
+X-Gm-Gg: ASbGncsEpS9MuwmAbKMukBKwtRy2gEo3gCK99sb8cYrwU4djXUOYADkRLbD0iSIek1w
+ /pRfLmVgeKkvZoVJ4xA9F1X4kKyuSQSYcmrLhTYqLJuho26dIQfxMMNq5HE0jgyheGq3Sgpasx7
+ 8fTJS/1cPMbGAq94ffiiQdXVby2gq3pGdZ4L2oSpkbNxYHPeD9M5k25I5fS/hoFiJysEpa7uhin
+ IIkxZYdJR7dLVxF0VfmhpsSwawfokp9M/o46g1LDfy8BYPGY78xjZYL8Pd8HJSNAX43l00qlFCr
+ z8DeEZ72ZKFQ/FLOXdXsFMMXT0yiK9NeC3NYqFeDs9zY5G4/CWGO03fD2rqc/WzrMDpy+Sk1qc8
+ L4q4E5vcrs+FfSZ7zmBaYFAtNt7qP+zaNptk8F8cVZgeC7J8OBB465E2bnrp1NU7PW55z
+X-Google-Smtp-Source: AGHT+IHDKngE7z+ISk9X7AAVoYQatEhKUjexYINGxIGIStv4iu8Z5qCxZ9UMqzrd2WYMFM5W/7Gv3Q==
+X-Received: by 2002:a17:902:f652:b0:249:3eec:15b8 with SMTP id
+ d9443c01a7336-24944908a47mr194442395ad.24.1756887286150; 
+ Wed, 03 Sep 2025 01:14:46 -0700 (PDT)
 Received: from lima-default (123.253.189.97.qld.leaptel.network.
  [123.253.189.97]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24c9a46bcf1sm8806555ad.3.2025.09.03.01.14.30
+ d9443c01a7336-24c9a46bcf1sm8806555ad.3.2025.09.03.01.14.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Sep 2025 01:14:33 -0700 (PDT)
+ Wed, 03 Sep 2025 01:14:45 -0700 (PDT)
 From: Nicholas Piggin <npiggin@gmail.com>
 To: qemu-riscv@nongnu.org
 Cc: Nicholas Piggin <npiggin@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
@@ -71,14 +72,16 @@ Cc: Nicholas Piggin <npiggin@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Subject: [PATCH v2 0/4] linux-user/riscv: add vector state to signal context
-Date: Wed,  3 Sep 2025 18:14:13 +1000
-Message-ID: <20250903081417.338515-1-npiggin@gmail.com>
+Subject: [PATCH v2 3/4] linux-user/riscv: Add vector state to signal context
+Date: Wed,  3 Sep 2025 18:14:16 +1000
+Message-ID: <20250903081417.338515-4-npiggin@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250903081417.338515-1-npiggin@gmail.com>
+References: <20250903081417.338515-1-npiggin@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=npiggin@gmail.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=npiggin@gmail.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,42 +104,187 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Changes in v2:
-- Fix 32-bit compile
-- Moved sizeof_rt_sigframe change to its correct patch (patch 2 is the
-  one that extends the size of rt_sigframe, patch 3 is adding new
-  extended state to the frame which is added dynamically).
+This enables vector state to be saved and restored across signals.
 
-This series adds vector state to the linux-user signal handler,
-and adds a basic signal handling test case. As a sanity check, I
-also verified the signal handling test works in the same way when
-run under a real Linux kernel.
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+---
+ linux-user/riscv/signal.c | 132 ++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 128 insertions(+), 4 deletions(-)
 
-The signal handler test has some gross header hacks in it to make
-it work for me (debian arm64->riscv64 cross compile environment),
-I would not be surprised if it breaks in other environments, any
-ideas or breakages let me know. May just have to define the types
-by hand for now if it becomes intractable.
-
-I couldn't find much in the way of previous discussion or work on
-this, forgive me if I've missed it.
-
-Thanks,
-Nick
-
-Nicholas Piggin (4):
-  tests/tcg/riscv64: Add a user signal handling test
-  linux-user/riscv: Add extended state to sigcontext
-  linux-user/riscv: Add vector state to signal context
-  tests/tcg/riscv64: Add vector state to signal test
-
- linux-user/riscv/signal.c                | 197 ++++++++-
- linux-user/riscv/vdso-asmoffset.h        |   4 +-
- tests/tcg/riscv64/Makefile.target        |   5 +
- tests/tcg/riscv64/test-signal-handling.c | 507 +++++++++++++++++++++++
- 4 files changed, 700 insertions(+), 13 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-signal-handling.c
-
+diff --git a/linux-user/riscv/signal.c b/linux-user/riscv/signal.c
+index 4ef55d0848..6af7f6b0f3 100644
+--- a/linux-user/riscv/signal.c
++++ b/linux-user/riscv/signal.c
+@@ -41,7 +41,17 @@ struct target_fp_state {
+     uint32_t fcsr;
+ };
+ 
++struct target_v_ext_state {
++    target_ulong vstart;
++    target_ulong vl;
++    target_ulong vtype;
++    target_ulong vcsr;
++    target_ulong vlenb;
++    target_ulong datap;
++} __attribute__((aligned(16)));
++
+ /* The Magic number for signal context frame header. */
++#define RISCV_V_MAGIC   0x53465457
+ #define END_MAGIC       0x0
+ 
+ /* The size of END signal context header. */
+@@ -106,6 +116,90 @@ static abi_ulong get_sigframe(struct target_sigaction *ka,
+     return sp;
+ }
+ 
++static unsigned int get_v_state_size(CPURISCVState *env)
++{
++    RISCVCPU *cpu = env_archcpu(env);
++
++    return sizeof(struct target_ctx_hdr) +
++           sizeof(struct target_v_ext_state) +
++           cpu->cfg.vlenb * 32;
++}
++
++static struct target_ctx_hdr *save_v_state(CPURISCVState *env,
++                                           struct target_ctx_hdr *hdr)
++{
++    RISCVCPU *cpu = env_archcpu(env);
++    target_ulong vlenb = cpu->cfg.vlenb;
++    uint32_t riscv_v_sc_size = get_v_state_size(env);
++    struct target_v_ext_state *vs;
++    target_ulong datap;
++    int i;
++
++    __put_user(RISCV_V_MAGIC, &hdr->magic);
++    __put_user(riscv_v_sc_size, &hdr->size);
++
++    vs = (struct target_v_ext_state *)(hdr + 1);
++    datap = (unsigned long)(vs + 1);
++
++    __put_user(env->vstart, &vs->vstart);
++    __put_user(env->vl, &vs->vl);
++    __put_user(env->vtype, &vs->vtype);
++    target_ulong vcsr = riscv_csr_read(env, CSR_VCSR);
++    __put_user(vcsr, &vs->vcsr);
++    __put_user(vlenb, &vs->vlenb);
++    __put_user(datap, &vs->datap);
++
++    for (i = 0; i < 32; i++) {
++        int j;
++        for (j = 0; j < vlenb; j += 8) {
++            size_t idx = (i * vlenb + j);
++            __put_user(env->vreg[idx / 8],
++                       (uint64_t *)(unsigned long)(datap + idx));
++        }
++    }
++
++    return (void *)hdr + riscv_v_sc_size;
++}
++
++static void restore_v_state(CPURISCVState *env,
++                            struct target_ctx_hdr *hdr)
++{
++    RISCVCPU *cpu = env_archcpu(env);
++    target_ulong vlenb = cpu->cfg.vlenb;
++    struct target_v_ext_state *vs;
++    target_ulong datap;
++    int i;
++
++    uint32_t size;
++    __get_user(size, &hdr->size);
++    if (size != get_v_state_size(env)) {
++        qemu_log_mask(LOG_GUEST_ERROR, "signal: restoring sigcontext vector "
++                                       "state with wrong size header (%u)\n",
++                                       size);
++        return;
++    }
++
++    vs = (struct target_v_ext_state *)(hdr + 1);
++
++    __get_user(env->vstart, &vs->vstart);
++    __get_user(env->vl, &vs->vl);
++    __get_user(env->vtype, &vs->vtype);
++    target_ulong vcsr;
++    __get_user(vcsr, &vs->vcsr);
++    riscv_csr_write(env, CSR_VCSR, vcsr);
++    __get_user(vlenb, &vs->vlenb);
++    __get_user(datap, &vs->datap);
++
++    for (i = 0; i < 32; i++) {
++        int j;
++        for (j = 0; j < vlenb; j += 8) {
++            size_t idx = (i * vlenb + j);
++            __get_user(env->vreg[idx / 8],
++                       (uint64_t *)(unsigned long)(datap + idx));
++        }
++    }
++}
++
+ static void setup_sigcontext(struct target_sigcontext *sc, CPURISCVState *env)
+ {
+     struct target_ctx_hdr *hdr;
+@@ -124,7 +218,11 @@ static void setup_sigcontext(struct target_sigcontext *sc, CPURISCVState *env)
+     __put_user(fcsr, &sc->sc_fpregs.fcsr);
+ 
+     __put_user(0, &sc->sc_extdesc.reserved);
++
+     hdr = &sc->sc_extdesc.hdr;
++    if (riscv_has_ext(env, RVV)) {
++        hdr = save_v_state(env, hdr);
++    }
+     __put_user(END_MAGIC, &hdr->magic);
+     __put_user(END_HDR_SIZE, &hdr->size);
+ }
+@@ -151,8 +249,13 @@ void setup_rt_frame(int sig, struct target_sigaction *ka,
+ {
+     abi_ulong frame_addr;
+     struct target_rt_sigframe *frame;
++    size_t frame_size = sizeof(*frame);
+ 
+-    frame_addr = get_sigframe(ka, env, sizeof(*frame));
++    if (riscv_has_ext(env, RVV)) {
++        frame_size += get_v_state_size(env);
++    }
++
++    frame_addr = get_sigframe(ka, env, frame_size);
+     trace_user_setup_rt_frame(env, frame_addr);
+ 
+     if (!lock_user_struct(VERIFY_WRITE, frame, frame_addr, 0)) {
+@@ -207,9 +310,30 @@ static void restore_sigcontext(CPURISCVState *env, struct target_sigcontext *sc)
+ 
+     uint32_t magic;
+     __get_user(magic, &hdr->magic);
+-    if (magic != END_MAGIC) {
+-        qemu_log_mask(LOG_UNIMP, "signal: unknown extended context header: "
+-                                 "0x%08x, ignoring", magic);
++    while (magic != END_MAGIC) {
++        if (magic == RISCV_V_MAGIC) {
++            if (riscv_has_ext(env, RVV)) {
++                restore_v_state(env, hdr);
++            } else {
++                qemu_log_mask(LOG_GUEST_ERROR, "signal: sigcontext has V state "
++                                               "but CPU does not.");
++            }
++        } else {
++            qemu_log_mask(LOG_GUEST_ERROR, "signal: unknown extended state in "
++                                           "sigcontext magic=0x%08x", magic);
++        }
++
++        if (hdr->size == 0) {
++            qemu_log_mask(LOG_GUEST_ERROR, "signal: extended state in "
++                                           "sigcontext has size 0");
++        }
++        hdr = (void *)hdr + hdr->size;
++        __get_user(magic, &hdr->magic);
++    }
++
++    if (hdr->size != END_HDR_SIZE) {
++        qemu_log_mask(LOG_GUEST_ERROR, "signal: extended state end header has "
++                                       "size=%u (should be 0)", hdr->size);
+     }
+ }
+ 
 -- 
 2.51.0
 
