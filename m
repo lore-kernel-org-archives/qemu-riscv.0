@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BFFACA1009
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 16:41:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 386D5CA1009
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Sep 2025 16:53:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1utqXn-0000dA-Rz; Wed, 03 Sep 2025 12:41:11 -0400
+	id 1utqjr-0004LK-Aq; Wed, 03 Sep 2025 12:53:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1utqXh-0000c8-0s
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 12:41:07 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ id 1utqjn-0004I5-1L
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 12:53:35 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1utqXc-0003GH-UU
- for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 12:41:02 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-77287fb79d3so121582b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 09:40:59 -0700 (PDT)
+ id 1utqjl-0007RF-1q
+ for qemu-riscv@nongnu.org; Wed, 03 Sep 2025 12:53:34 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-24622df0d95so1217715ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 03 Sep 2025 09:53:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1756917658; x=1757522458; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=peOgdQDR7Jp7t8z6GJiGFqGLvBe6W/ZtwJSEvPMjO3Q=;
- b=VsCnjh6hAETcB+knR+8iwmy/0689YyoxQCr19Tl7Rzg3WmG4B/N3tHBPvOB7n08/9K
- lyUYlZQJFxWZckyIgPhiF2SrxRZXa/6b090PiR85fZDbg27rx6CZkaSm2MKbLdbf3cdh
- c8elDbrZBIGGUslagDHiPsRjQlRCdsvxRvtjW8W7+uxxHQgTrvFeJ5jAl19o2qoKsZmI
- EHMV3aF+iQLOE4UuJWaHfWp/HbLlMrdyek6sBA/c0SoYASs1ZbCv2Dx8GSHRSd1rXRF3
- jgyFaYSt+N/daawMJ+kndKnZrL4GZSxiao442czNqvkHeKv53xEsolL9RLGdhh8hsjXh
- 0O7w==
+ d=ventanamicro.com; s=google; t=1756918411; x=1757523211; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4cG4f9JgMDGnqH3OmMRaNeWvcJJZQ4otU2Q4xxdEaeY=;
+ b=MdvqgDzn6EIhnojsZSgki93tyE8H59lENFAY1H2nY8+qJrdTkwJEtgb0SbLw+gBFi7
+ stiUANu0Y0TAcMhucv2EzUmOvCFgryuQRrSduDRoCvD3eMVq9wuI9g2gR8/UAVVN0XjF
+ k6oqu71QIP4VVI9SlJ/x/TRWVjL62Lr2nEztPwb82CN0CDKwBrNwbhUPAWeR/mngDjuT
+ /JyWnG/EswDT0T0X4uxD2zybfhUfICg6XlaRoiIi06XyjeU74LZmhwENNTz3peWrwId3
+ P7ZfQ0G1wzszJLLdQ6KF7WRKPbb5DhLMSrCbrhhNe2DOW232oGELonK+YPs/lH5NQyuU
+ 0MKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756917658; x=1757522458;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=peOgdQDR7Jp7t8z6GJiGFqGLvBe6W/ZtwJSEvPMjO3Q=;
- b=pW3Ntn8t0J5RlERr5FrhsEcdAHORTnCT6+vUiqfmqU6VxYtaIDIZfT5eglPAo42zUs
- AREjMlFeH6X2MUyVfMksgC/48PoI8WtGl8h+rZMDURfNig68T8GFXugZGPEgkNrMI0KJ
- uJRzH3ekwC14NOyZFp7vzV19x4IfbBVCKSbOrSL4DyDtXNzo8JWxAr2N49mOQOXpZrKp
- yJFindyYHsb0q3CR3RlBcjCQAdrllf5VAouBtmny5m0ZQmUlD1fgQfnL/JLv7alUFzx4
- DGZV9LTAzJ28p21I28rMhQwdzS3XBaOxKPIx1S0NP3YEWTCwmn4JV/25uBR9EqN3kjxe
- lMMA==
-X-Gm-Message-State: AOJu0Yzz9cBm74Hec4gefYOTz/gTshZUSAYRT1Rudp/FmF6oI5rQ42wG
- QQFojrfhsgWSrXEGHioVZKVKRz+LzuyrfJcgrtfFLVzfEJcy0RINYClPoMJhoVo3uac=
-X-Gm-Gg: ASbGncsh8eaS7s62VzcxzO99B6kngAJVFCIhrpSfAcgVsYUIe85rlH7xm19B0LudmIJ
- 1cSO5lVxPlE7fK64KPc+0RImcmgo/Oz6uBbsbBdV80QA0jxAUbtiyDViK7vJ8TyJ5kodjMDURXJ
- ZdVmiqXcA1v2hekkjEFaz6rHWTzdVt5QSa+wRmZZnu633sJi2QbSX+RU41PDQg00R8b/7FWSow6
- Lfe85mD2wmsUhnhmtqnyXbdDobbItEygvxSmmRKFYDm9Yr/S9Bk1mdawn5MPDiEDBGzTbB8s5A5
- xXaGG/0gP2VwkdcjmJLSIebpIVFdAO36OoBD0A9yBXAX4kieN5b2s7lzBkLKyNdeZV1WtCxgrJ9
- p5uI25L9WjRjuDkYw/aaYG6Vsh8UXiLFY
-X-Google-Smtp-Source: AGHT+IFLksObn6cMs1VHSbnxG3voVJZ9IsP3yLRooyGqKPu8VorIzVIW+BKt/nyI8FkXJLnpu6cHdQ==
-X-Received: by 2002:a05:6a20:9189:b0:248:7a71:c1e with SMTP id
- adf61e73a8af0-2487a710dcfmr4561076637.52.1756917658060; 
- Wed, 03 Sep 2025 09:40:58 -0700 (PDT)
-Received: from grind ([187.10.187.251]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b4d6cde2f0fsm14284511a12.13.2025.09.03.09.40.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Sep 2025 09:40:57 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ d=1e100.net; s=20230601; t=1756918411; x=1757523211;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4cG4f9JgMDGnqH3OmMRaNeWvcJJZQ4otU2Q4xxdEaeY=;
+ b=m2h0KYqsGvOLBE46jqvMwkQMdFNpai7m3YvYb+3n3xeba51ExTEEykx8FiJ6t0JFtt
+ eOqY8TiVSBO5eJZRn59rUdr5G2Qc9+v+SReXdT9nQQBWuv4j5sFN8kjNMICGMEvNNbGt
+ +E/WbsDtxBKe+WpDSPpA7NIstKSwOrMSBf04xHJeXJJaftu3d4hKuoTSh9Wd2SExC52Q
+ gGq1eGgfJXwEtxufDdAG80OVPw1/ZtQ2/NA6YJkdlbBiUZuyD3jMKWpJjEYU95XVKddb
+ dCKrSFVvipCErwyDSFwFxsv06oTpsvG4MKHo9IsdBJiot0om0wbqEJLWafTmNKMKcbZL
+ gVkA==
+X-Gm-Message-State: AOJu0Yyu2z9Z7zdVI6VTGMlo0jMy1ztOk8sG5oCTpwAPsDCNnnuhnlk0
+ Io1wkh7r5EzALcdmPTTEc8EcT9aPG9GRXzQQHRS79gvrayVuPrQDr5FcZjM+UzQOa3Q=
+X-Gm-Gg: ASbGnctcUk+GvjEomViDWLRjxNz+2lzEXFd5wB0j0f6C3/3Nmj1ydNzLc1qifpASzxu
+ KiZHcLE0Ump63qSSfK3I/4vxFtfKucFN12DYfPGqO8V2IIUZUB6vVc7ne27QXbOb2XTxLsixFwW
+ BpHv1ff4JhtlB7r9GF0mbMA3bNnmhsyfcBoJ5fRCY8cnD2zpCvr+iutEZL77bDNbHJneEHHy1qj
+ pNhaqheAYrztzUDF4KnySpm1ZX0aQWQyeV2r//mzNuGN0am+XYWHHMcaiusKa6NeNrnnjwUHNMR
+ xdJ0x3wa6d+eLSyStfWkGWez0avhUtmnYz+FUNRybdVq4Tb6laF8TqkG8wtwkKgmNAa9xhjxUvO
+ OOByIVvr91gQf7XJ0ebSli0PmuoWYBBez1m9f
+X-Google-Smtp-Source: AGHT+IG7LllPmrR4osGLxY+5SrQesUCxtCydiv2rCTODLd4H1Ny03lo6wedl+ATL+VLUUOd3Aqpwhw==
+X-Received: by 2002:a17:903:186:b0:249:1bac:eefb with SMTP id
+ d9443c01a7336-24944b1fe75mr194529145ad.54.1756918411239; 
+ Wed, 03 Sep 2025 09:53:31 -0700 (PDT)
+Received: from [192.168.68.110] ([187.10.187.251])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-24b1589e480sm51902225ad.130.2025.09.03.09.53.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 03 Sep 2025 09:53:30 -0700 (PDT)
+Message-ID: <e9ff707e-baf1-472b-b762-eae9d958b14a@ventanamicro.com>
+Date: Wed, 3 Sep 2025 13:53:27 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/3] riscv: add all available CSRs to 'info registers'
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH] linux-user/syscall.c: sync RISC-V hwprobe with Linux
-Date: Wed,  3 Sep 2025 13:40:43 -0300
-Message-ID: <20250903164043.2828336-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.50.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42b.google.com
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
+References: <20250623172119.997166-1-dbarboza@ventanamicro.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <20250623172119.997166-1-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,139 +102,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-It has been awhile since the last sync. Let's bring QEMU hwprobe support
-on par with Linux 6.17-rc4.
+Ping
 
-A lot of new RISCV_HWPROBE_KEY_* entities are added but this patch is
-only adding support for ZICBOM_BLOCK_SIZE.
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- linux-user/syscall.c | 89 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 89 insertions(+)
-
-diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-index 91360a072c..ef80c689d2 100644
---- a/linux-user/syscall.c
-+++ b/linux-user/syscall.c
-@@ -8992,6 +8992,29 @@ static int do_getdents64(abi_long dirfd, abi_long arg2, abi_long count)
- #define     RISCV_HWPROBE_EXT_ZTSO          (1ULL << 33)
- #define     RISCV_HWPROBE_EXT_ZACAS         (1ULL << 34)
- #define     RISCV_HWPROBE_EXT_ZICOND        (1ULL << 35)
-+#define     RISCV_HWPROBE_EXT_ZIHINTPAUSE   (1ULL << 36)
-+#define     RISCV_HWPROBE_EXT_ZVE32X        (1ULL << 37)
-+#define     RISCV_HWPROBE_EXT_ZVE32F        (1ULL << 38)
-+#define     RISCV_HWPROBE_EXT_ZVE64X        (1ULL << 39)
-+#define     RISCV_HWPROBE_EXT_ZVE64F        (1ULL << 40)
-+#define     RISCV_HWPROBE_EXT_ZVE64D        (1ULL << 41)
-+#define     RISCV_HWPROBE_EXT_ZIMOP         (1ULL << 42)
-+#define     RISCV_HWPROBE_EXT_ZCA           (1ULL << 43)
-+#define     RISCV_HWPROBE_EXT_ZCB           (1ULL << 44)
-+#define     RISCV_HWPROBE_EXT_ZCD           (1ULL << 45)
-+#define     RISCV_HWPROBE_EXT_ZCF           (1ULL << 46)
-+#define     RISCV_HWPROBE_EXT_ZCMOP         (1ULL << 47)
-+#define     RISCV_HWPROBE_EXT_ZAWRS         (1ULL << 48)
-+#define     RISCV_HWPROBE_EXT_SUPM          (1ULL << 49)
-+#define     RISCV_HWPROBE_EXT_ZICNTR        (1ULL << 50)
-+#define     RISCV_HWPROBE_EXT_ZIHPM         (1ULL << 51)
-+#define     RISCV_HWPROBE_EXT_ZFBFMIN       (1ULL << 52)
-+#define     RISCV_HWPROBE_EXT_ZVFBFMIN      (1ULL << 53)
-+#define     RISCV_HWPROBE_EXT_ZVFBFWMA      (1ULL << 54)
-+#define     RISCV_HWPROBE_EXT_ZICBOM        (1ULL << 55)
-+#define     RISCV_HWPROBE_EXT_ZAAMO         (1ULL << 56)
-+#define     RISCV_HWPROBE_EXT_ZALRSC        (1ULL << 57)
-+#define     RISCV_HWPROBE_EXT_ZABHA         (1ULL << 58)
- 
- #define RISCV_HWPROBE_KEY_CPUPERF_0     5
- #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
-@@ -9002,6 +9025,22 @@ static int do_getdents64(abi_long dirfd, abi_long arg2, abi_long count)
- #define     RISCV_HWPROBE_MISALIGNED_MASK        (7 << 0)
- 
- #define RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE 6
-+#define RISCV_HWPROBE_KEY_HIGHEST_VIRT_ADDRESS 7
-+#define RISCV_HWPROBE_KEY_TIME_CSR_FREQ 8
-+#define RISCV_HWPROBE_KEY_MISALIGNED_SCALAR_PERF        9
-+#define     RISCV_HWPROBE_MISALIGNED_SCALAR_UNKNOWN     0
-+#define     RISCV_HWPROBE_MISALIGNED_SCALAR_EMULATED    1
-+#define     RISCV_HWPROBE_MISALIGNED_SCALAR_SLOW        2
-+#define     RISCV_HWPROBE_MISALIGNED_SCALAR_FAST        3
-+#define     RISCV_HWPROBE_MISALIGNED_SCALAR_UNSUPPORTED 4
-+#define RISCV_HWPROBE_KEY_MISALIGNED_VECTOR_PERF 10
-+#define     RISCV_HWPROBE_MISALIGNED_VECTOR_UNKNOWN     0
-+#define     RISCV_HWPROBE_MISALIGNED_VECTOR_SLOW        2
-+#define     RISCV_HWPROBE_MISALIGNED_VECTOR_FAST        3
-+#define     RISCV_HWPROBE_MISALIGNED_VECTOR_UNSUPPORTED 4
-+#define RISCV_HWPROBE_KEY_VENDOR_EXT_THEAD_0     11
-+#define RISCV_HWPROBE_KEY_ZICBOM_BLOCK_SIZE      12
-+#define RISCV_HWPROBE_KEY_VENDOR_EXT_SIFIVE_0    13
- 
- struct riscv_hwprobe {
-     abi_llong  key;
-@@ -9110,6 +9149,52 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *env,
-                      RISCV_HWPROBE_EXT_ZACAS : 0;
-             value |= cfg->ext_zicond ?
-                      RISCV_HWPROBE_EXT_ZICOND : 0;
-+            value |= cfg->ext_zihintpause ?
-+                     RISCV_HWPROBE_EXT_ZIHINTPAUSE : 0;
-+            value |= cfg->ext_zve32x ?
-+                     RISCV_HWPROBE_EXT_ZVE32X : 0;
-+            value |= cfg->ext_zve32f ?
-+                     RISCV_HWPROBE_EXT_ZVE32F : 0;
-+            value |= cfg->ext_zve64x ?
-+                     RISCV_HWPROBE_EXT_ZVE64X : 0;
-+            value |= cfg->ext_zve64f ?
-+                     RISCV_HWPROBE_EXT_ZVE64F : 0;
-+            value |= cfg->ext_zve64d ?
-+                     RISCV_HWPROBE_EXT_ZVE64D : 0;
-+            value |= cfg->ext_zimop ?
-+                     RISCV_HWPROBE_EXT_ZIMOP : 0;
-+            value |= cfg->ext_zca ?
-+                     RISCV_HWPROBE_EXT_ZCA : 0;
-+            value |= cfg->ext_zcb ?
-+                     RISCV_HWPROBE_EXT_ZCB : 0;
-+            value |= cfg->ext_zcd ?
-+                     RISCV_HWPROBE_EXT_ZCD : 0;
-+            value |= cfg->ext_zcf ?
-+                     RISCV_HWPROBE_EXT_ZCF : 0;
-+            value |= cfg->ext_zcmop ?
-+                     RISCV_HWPROBE_EXT_ZCMOP : 0;
-+            value |= cfg->ext_zawrs ?
-+                     RISCV_HWPROBE_EXT_ZAWRS : 0;
-+            value |= cfg->ext_supm ?
-+                     RISCV_HWPROBE_EXT_SUPM : 0;
-+            value |= cfg->ext_zicntr ?
-+                     RISCV_HWPROBE_EXT_ZICNTR : 0;
-+            value |= cfg->ext_zihpm ?
-+                     RISCV_HWPROBE_EXT_ZIHPM : 0;
-+            value |= cfg->ext_zfbfmin ?
-+                     RISCV_HWPROBE_EXT_ZFBFMIN : 0;
-+            value |= cfg->ext_zvfbfmin ?
-+                     RISCV_HWPROBE_EXT_ZVFBFMIN : 0;
-+            value |= cfg->ext_zvfbfwma ?
-+                     RISCV_HWPROBE_EXT_ZVFBFWMA : 0;
-+            value |= cfg->ext_zicbom ?
-+                     RISCV_HWPROBE_EXT_ZICBOM : 0;
-+            value |= cfg->ext_zaamo ?
-+                     RISCV_HWPROBE_EXT_ZAAMO : 0;
-+            value |= cfg->ext_zalrsc ?
-+                     RISCV_HWPROBE_EXT_ZALRSC : 0;
-+            value |= cfg->ext_zabha ?
-+                     RISCV_HWPROBE_EXT_ZABHA : 0;
-             __put_user(value, &pair->value);
-             break;
-         case RISCV_HWPROBE_KEY_CPUPERF_0:
-@@ -9119,6 +9204,10 @@ static void risc_hwprobe_fill_pairs(CPURISCVState *env,
-             value = cfg->ext_zicboz ? cfg->cboz_blocksize : 0;
-             __put_user(value, &pair->value);
-             break;
-+        case RISCV_HWPROBE_KEY_ZICBOM_BLOCK_SIZE:
-+            value = cfg->ext_zicbom ? cfg->cbom_blocksize : 0;
-+            __put_user(value, &pair->value);
-+            break;
-         default:
-             __put_user(-1, &pair->key);
-             break;
--- 
-2.50.1
+On 6/23/25 2:21 PM, Daniel Henrique Barboza wrote:
+> Hi,
+> 
+> The output of HMP 'info registers', implemented by the cpu_dump_state
+> callback, returns way less CSRs than what we have available in the
+> default rv64 CPU with default options.
+> 
+> This series changes the callback to add all available non-vector CSRs
+> when issuing 'info registers'. The vector CSRs are being handled by
+> another patch [1].
+> 
+> Patches based on alistair/riscv-to-apply.next.
+> 
+> [1] https://lore.kernel.org/qemu-riscv/20250623145306.991562-1-dbarboza@ventanamicro.com/
+> 
+> 
+> Daniel Henrique Barboza (3):
+>    target/riscv/cpu: add riscv_dump_csr() helper
+>    target/riscv/cpu: print all FPU CSRs in riscv_cpu_dump_state()
+>    target/riscv: print all available CSRs in riscv_cpu_dump_state()
+> 
+>   target/riscv/cpu.c | 107 +++++++++++++++++----------------------------
+>   target/riscv/cpu.h |   2 +
+>   target/riscv/csr.c |  18 ++++++++
+>   3 files changed, 61 insertions(+), 66 deletions(-)
+> 
 
 
