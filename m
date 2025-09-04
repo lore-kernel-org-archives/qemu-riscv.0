@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D58BCA1013
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E70C5CA1013
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:20:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu5AC-0006zD-SI; Thu, 04 Sep 2025 04:17:50 -0400
+	id 1uu59s-0006HV-Vv; Thu, 04 Sep 2025 04:17:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu55a-0006y3-IG
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:04 -0400
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
+ id 1uu55S-0006vj-V5
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:02 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54s-0004KW-0R
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:00 -0400
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b03fa5c5a89so107145666b.2
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:14 -0700 (PDT)
+ id 1uu54r-0004Lf-GQ
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:54 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-61e8fdfd9b4so1639507a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973533; x=1757578333; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973534; x=1757578334; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6EbVn5eJ4TWHIldxY30gfc+9eY3s2xC+za4HvKYilBo=;
- b=gl0mOPL07G2HE3NCvmWd+aGklYmuARNHb3+uHuQXZ7QjHrq0oPBgo8q9I0eR2QXRVA
- /9r3Md7QbkOsOXL2/ApZ3jhivD9E8Su0LpZbyPpEfxzdfqCegRsWkO6hukZQsUya07jI
- 2Yja6NrB4XVM2ISHD8OyIKbnOgj8efr4UJFEWCI+6dHGYDWw/j5Pf880yHTvsZH/Xirl
- OUP3wm9gcUtTfp59cgX64xOaRkay/DU58W7Bf9L/ZMOmhMg5e1N8tLcQuq6h05EwkiRP
- f4fZvelbMWnlaqS41SCkH2nS4zW6w691LAwgkQxAStBwf7ubvaAK+Lin1UvPCCQvRMeR
- IS8w==
+ bh=2o641iW9Eoei/+yvUIKi4qJ7pGzfbvmdWyUoyzoyuTo=;
+ b=kLS9wcHTZ98o9sIon35e/AtjzIRP+tFVU9jCCVr7lX2+dcAxgs7rdrqLurw6V78Nks
+ rngpBWIkmkrckBjLvTUxdvUMZGXGhhZi5cXUOfjMfs4NVNqdj+rtz3lGiGM7vhPGeMQw
+ aoAqgvVrMMXxlT9D4vYZrkcEwVQhI75VZp05rRfiiHbfmbn5C1kh+UWy7BCYABVz7Fex
+ t/rI+SrrEuG4LGOwHns1vwmvvG7gxMT6AiMoao9puOABjjPBSGrQxgbnpUjCpAb0lsjx
+ HRDaaTib8D3oFwwfVjSDDZfASHvgyEYQzoS9VzSNF8dtLs7rk5H/7pcGHIGYUSDT5Q/X
+ mUqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973533; x=1757578333;
+ d=1e100.net; s=20230601; t=1756973534; x=1757578334;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6EbVn5eJ4TWHIldxY30gfc+9eY3s2xC+za4HvKYilBo=;
- b=VpdyJFbEdBUczyn6Uw/4xh1wLqAvxzDP3dISqyO2kRThkL5+UTPHEoPlGX4/CQf++h
- njPQfYWUNeqEswmtTTvbbK8xue6A7zRfmH64b5MW0r4+K02hB7FWHrRRlZGVU9zHfHwB
- pG/RKEHPKMJFtopCxDK/stmp/nMsILGZDhX/pQWSFCwasf5SQmkBqtVZBhp1uZWrM2v4
- nWYZNLUvwnirLqJgGu8P+E57XMh3ZpPUmDjUXs3Zahbuv7jxjfw09EIU31kkLb7yy0jH
- wyCMZ/CvYvo261EERW1c99ICPpN8iTdoDBZSyZqlA4hw5B7L8bY5MiFZtVyXtARDrB1f
- jeUg==
+ bh=2o641iW9Eoei/+yvUIKi4qJ7pGzfbvmdWyUoyzoyuTo=;
+ b=YU9YYLvtwzV2J8tBj2kHbT/3amIkHvVP3ShNZxPw3o7IEG7CSv3SJMwTUhZVokKm9W
+ T23pVqu3FCs2DmCYbCiwrvOggBxIwFVaRHet5pSr4k3Uzeb9bYOSpogjcTgFLNXhX1q4
+ 710TXaurlnPnoPhBAkG873811OttRWl3sQiYfcItI1o/+Ruei/Qq1VJosk5zDvr40X6x
+ Gyz6xn5bi4SyNytywAqijk/MVuYMGfXHEu6+5jhsVEkfM39pQ2I3XYNiQBSwaFSXlc2n
+ 45taKi+6wHD08zZMiQcnTC9G6oCbyz4ly3A5I+qIjkBBmKsKGgO+erKMzXzyWMOCi0Ij
+ gAag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/RxuCml0lu8QZVXgP5Y1kXNL3gshlI5C9F71Qe5qVh1lzX9rygUjQ+ZUKy3qHcd8qMxIjqG8Lu3J/@nongnu.org
-X-Gm-Message-State: AOJu0YxrER11TsI+OJFzV1MZQofPm/yxPWyn1+QzddVYhfRowueu6VVu
- T1keyAfDMsKoxJpmFe1IDsh90qjHKZaVsXI3KgWfOwiQQjYENYKdAjRHtmxnQlmaARQ=
-X-Gm-Gg: ASbGnct+Ta9JWNhxcRCijai31PqrrAW9ueAvWEp8yljdaOweKo08va83jt6Kkd/So8Q
- xRFdGwV8youUDoWxeXhvG0QHKya480PJ6qOv/p80xCbXJHbd4lNTnzg/HMQUrRdkgCUppACvm6w
- Xmvarxwd1df1gkq3+qa3Bd744BGiWDQF2hnq07y1806wP6WJh5Gmt6l3CrzIDgAqqJA23YxBRes
- RcHCq2RIhxiTqvZnw2lc4fki56fBqyFxjn/DUne7M8wFr+/7JV6dDYJMzkhCbsQjwtWTB819zdz
- 54o48IbguGUcQGF/WOHeonWejHM5hhma0PuJoH1B+6Er9SIsPXYQisTtWxzwI/pmtFki7Xxw3u2
- 97+SGuvgJgiYb8KZl55j3o2M=
-X-Google-Smtp-Source: AGHT+IGE72xujCzrpuvniQ2ueJZ4x/ss9sVMxOq4r/64b7nh3Vp6WuzYsL8MWp7c3HyS0dLplsfeZA==
-X-Received: by 2002:a17:907:7253:b0:af9:8438:de48 with SMTP id
- a640c23a62f3a-b01d978f785mr1865512266b.48.1756973533095; 
- Thu, 04 Sep 2025 01:12:13 -0700 (PDT)
+ AJvYcCVD7k5zq5uQoR3aZyHtJ1kd+LTQVBZDMy6Bch2ys0TZXFe5lEAKfZ2KAa4APShRqXy5Pz3IAmUkQnwJ@nongnu.org
+X-Gm-Message-State: AOJu0YxXYFrGZA8YkgFYo6mtfHI2QYSFqt1t33eqDaISr9qM0wTzUQRh
+ J0WFo5Tb7Ps+HtRTOufh8vpcr+U7Jt0lnfrCs+HBLR8rRouKmvnWIJu/f0JQbWIm7bQ=
+X-Gm-Gg: ASbGncshN8YY0GTF2kYz6zp7sxzZIxDpFihkOJff6NiE6SjMk7VcQixfRA0Rm9FI5Ck
+ qfY25VPVfww7PpDtAE6bnLD0oB3/T8ReW8xmGQetLx1eqk7rljWKhAiGsF2dnSszfOcEha8bdXo
+ 8mYWNJ64bFPnpXEVLACfKYV3Y442ma4IF7ZoPvyY01INyMJTMLF8XlFZrINU2Rae3tKF6gSSdWL
+ 2nZk6MhpLfGfiWH6C0G4BeLgrfPp7LQQAErOpQODG2kAy4f4OCaKWIUwcY0Fz30LntoPS+uyNBh
+ XfpCXF86+i6mRl3cAyyFS7YnkrUnYB6FvPjLF5H4B7gUXGbxBBJYOAVfrGnw3g1azVgX3STnx0K
+ a7EFNPZma3QDfF+eORfWfHQc=
+X-Google-Smtp-Source: AGHT+IGLKV6kj/wdkKv1zH+QlHElinS7UZypfjzlhnOqgFK2g8smAfI2YLmWX9/F3AuN9VCXaBC4yQ==
+X-Received: by 2002:a05:6402:35d3:b0:61c:7ee2:f41a with SMTP id
+ 4fb4d7f45d1cf-61d26d93883mr16733782a12.15.1756973534355; 
+ Thu, 04 Sep 2025 01:12:14 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b04190700a4sm1095117366b.63.2025.09.04.01.12.05
+ 4fb4d7f45d1cf-61cfc1c7a10sm14089854a12.5.2025.09.04.01.12.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 04 Sep 2025 01:12:10 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id F184860AED;
+ by draig.lan (Postfix) with ESMTP id D4EB660AE4;
  Thu, 04 Sep 2025 09:11:38 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -130,16 +130,16 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
-Subject: [PATCH v2 084/281] linux-user/m68k: Create init_main_thread
-Date: Thu,  4 Sep 2025 09:07:58 +0100
-Message-ID: <20250904081128.1942269-85-alex.bennee@linaro.org>
+Subject: [PATCH v2 083/281] linux-user/sh4: Create init_main_thread
+Date: Thu,  4 Sep 2025 09:07:57 +0100
+Message-ID: <20250904081128.1942269-84-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x632.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -170,66 +170,49 @@ There's no point going through a target_pt_regs intermediate.
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- linux-user/elfload.c       | 11 +----------
- linux-user/m68k/cpu_loop.c | 25 ++++++-------------------
- 2 files changed, 7 insertions(+), 29 deletions(-)
+ linux-user/elfload.c      |  8 +-------
+ linux-user/sh4/cpu_loop.c | 10 ++++------
+ 2 files changed, 5 insertions(+), 13 deletions(-)
 
 diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-index 8604308a310..46150586aff 100644
+index 03c95397744..8604308a310 100644
 --- a/linux-user/elfload.c
 +++ b/linux-user/elfload.c
-@@ -746,16 +746,7 @@ static inline void elf_core_copy_regs(target_elf_gregset_t *regs,
- #define ELF_CLASS       ELFCLASS32
- #define ELF_ARCH        EM_68K
+@@ -701,13 +701,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
+ #define ELF_CLASS ELFCLASS32
+ #define ELF_ARCH  EM_SH
  
--/* ??? Does this need to do anything?
--   #define ELF_PLAT_INIT(_r) */
--
 -static inline void init_thread(struct target_pt_regs *regs,
 -                               struct image_info *infop)
 -{
--    regs->usp = infop->start_stack;
--    regs->sr = 0;
+-    /* Check other registers XXXXX */
 -    regs->pc = infop->entry;
+-    regs->regs[15] = infop->start_stack;
 -}
 +#define HAVE_INIT_MAIN_THREAD
  
- /* See linux kernel: arch/m68k/include/asm/elf.h.  */
- #define ELF_NREG 20
-diff --git a/linux-user/m68k/cpu_loop.c b/linux-user/m68k/cpu_loop.c
-index 23693f33582..aca0bf23dc6 100644
---- a/linux-user/m68k/cpu_loop.c
-+++ b/linux-user/m68k/cpu_loop.c
-@@ -92,24 +92,11 @@ void cpu_loop(CPUM68KState *env)
+ /* See linux kernel: arch/sh/include/asm/elf.h.  */
+ #define ELF_NREG 23
+diff --git a/linux-user/sh4/cpu_loop.c b/linux-user/sh4/cpu_loop.c
+index ee9eff3428a..259ea1cc8bb 100644
+--- a/linux-user/sh4/cpu_loop.c
++++ b/linux-user/sh4/cpu_loop.c
+@@ -81,12 +81,10 @@ void cpu_loop(CPUSH4State *env)
      }
  }
  
 -void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
 +void init_main_thread(CPUState *cs, struct image_info *info)
  {
--    env->pc = regs->pc;
--    env->dregs[0] = regs->d0;
--    env->dregs[1] = regs->d1;
--    env->dregs[2] = regs->d2;
--    env->dregs[3] = regs->d3;
--    env->dregs[4] = regs->d4;
--    env->dregs[5] = regs->d5;
--    env->dregs[6] = regs->d6;
--    env->dregs[7] = regs->d7;
--    env->aregs[0] = regs->a0;
--    env->aregs[1] = regs->a1;
--    env->aregs[2] = regs->a2;
--    env->aregs[3] = regs->a3;
--    env->aregs[4] = regs->a4;
--    env->aregs[5] = regs->a5;
--    env->aregs[6] = regs->a6;
--    env->aregs[7] = regs->usp;
--    env->sr = regs->sr;
+-    int i;
 +    CPUArchState *env = cpu_env(cs);
-+
+ 
+-    for(i = 0; i < 16; i++) {
+-        env->gregs[i] = regs->regs[i];
+-    }
+-    env->pc = regs->pc;
 +    env->pc = info->entry;
-+    env->aregs[7] = info->start_stack;
-+    env->sr = 0;
++    env->gregs[15] = info->start_stack;
  }
 -- 
 2.47.2
