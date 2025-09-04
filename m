@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59717CA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:13:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84E65CA1013
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:14:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu54u-0006Pn-Nn; Thu, 04 Sep 2025 04:12:21 -0400
+	id 1uu55w-0007TR-UI; Thu, 04 Sep 2025 04:13:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54b-0006H8-GO
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:01 -0400
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ id 1uu54l-0006PI-L3
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:17 -0400
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54J-00040r-3I
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:01 -0400
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-afcb7ace3baso137833066b.3
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:41 -0700 (PDT)
+ id 1uu54M-00043n-76
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:10 -0400
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-61cd6089262so1203266a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973500; x=1757578300; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973504; x=1757578304; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YHrtANvKFxNzkcAR0b6AvL2FoL97RQya7kVY684YbqM=;
- b=SEQkebx0f+a2248VgstBtza4jORb0i7e7R7xUbUN1rdFAHXcFfebXhdT+9rTtAgh2L
- /ub5rvBndNE30JwVRtOxMnNuwDDRGDIb8AWnsQQBpX7sTkckbkTMkkZTSBf2FmbmH1C0
- pEZsJx1szvd9YA+Se9tq76IWZROoa0pQ0ygYpA5dJ6r0Ao3LHpTZBxxmsIlzMHtDenv0
- hKyoOR+dKQTGGPt8xqrGB/O3y6BfjBCO2mxMj/YBQdHOOVAr9gnVbPHMRY9SIyZME/LC
- ZWu6gi1otc0iSGjcLVNAnUWN7qvLlX152oiRT9ZBR9vJsanBTFwXX13dZEApi17lxUBq
- 7kDQ==
+ bh=myCatgpniSey/NjO+dQuRIOhbIuhsJO0uetvy2+5HH0=;
+ b=RUxR2UhYbVNB7RMY5XfgxDcFmBAI78Y24kCaKVwfdUCAqdRnbSNVHHJ31raF+IjUao
+ WM2u8pTa+xGdyee6Q0SRyk8jaHv5BvkODZOs/Z18JkD4OSL0prIiSn/kvEXAxZJHh+C+
+ +5AyX9x/8KEP1vVqMT15OVhpwwYOLYinUH+BQgezubS/ZaEMYKJGpE2/ThiyxP+LLP6f
+ TBCc63DRH9/rhlSbex46dRaIZ3ZD88JcDjHTMYPhi5jvIdHdxhZwoFHQckYS0jKcrQoD
+ a4H5hYKV8OO8FUgaRK5aHujBFQmXJ3A9Br/MSzwEhe8pQOkESDG9NJqDAPoKs109vnTB
+ zxHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973500; x=1757578300;
+ d=1e100.net; s=20230601; t=1756973504; x=1757578304;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YHrtANvKFxNzkcAR0b6AvL2FoL97RQya7kVY684YbqM=;
- b=dWPUIi8UyLbNYTfioauLQth6AW+DgwleHhuat2cBnIxXR/nb1sKhIlhwNflnjDYyFT
- yeNLwkQ1qOICe5dgydSwWNDlBiw1e3gsoxrPZ9GvTucKya7LbNT4iMR74SwY3gfHLybW
- Nf6Lp87wybKvYGGOfc+IEI6EMiicdTx5QZndxo0OOdaApYAGuRJc3B4ewQHFDKe6bEMm
- Drc4kQSXHgq803/hvXegAXWQpc9baQfzBQ2WtdPcOLH1+xK7+s6l0wzWIagvVJ+tUIef
- vuV0Qxc21bBqwf2SWPmisb6lXLbBDnd5Y+VAaGE9PtAaGLQa7yXLCDXcsgTGhtdtzS/8
- qD3A==
+ bh=myCatgpniSey/NjO+dQuRIOhbIuhsJO0uetvy2+5HH0=;
+ b=lT7wGG38bZ7LiWGc7l3lH+glkfmsglaNqbkugrEiCiAPxjTdffIrJjeUWkGXDDGVGG
+ WACk8n1xt02Qh3t6K8TuqXpPG0tlDf16eKBjx1J7+65Xgh9V/TvhCeGSYPP5SAI7aWut
+ +Gpc50QPp7IHMRfcJwtFjXakBaHUF1QJ+M4EV3wPdfcKRt1VfSDvYaneJjNcC/nIdOPB
+ P9I6sHRhy6CX+HWHv8IH1+FUDkjrqPgXzMoQ9aMst6tQ9Dne0HPlNkbZWFAHu7Vy3x+x
+ XwC+vt1j6ClFsXEm3D7PoWQ2SR1uXDQ3MyNteonxLum/WzqhTWm9gjCtHPjIp8teKrhB
+ 0X4A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU7kuTVw9IN2dKXmFsEKrZigKq2ej9Yy8TYsA9qx/LE8GupcuWkf9hFTFVZidiZdb1K/rEUgAgytSP2@nongnu.org
-X-Gm-Message-State: AOJu0YxO4DxCqiLgQFaTswFdnKQXf52eNgnV4bvxZN+drduVI/rfoI7L
- HRPcY85eEN3WfImkQ35c4DQTY4H8LyX/gtyvv8nOal0dfz6r46MX3oig7MzbRp1NnNU=
-X-Gm-Gg: ASbGncvRlpsBK0WJeCxLA850jevvV9BjrL/u89SfKZL1sn+hnacv50Q1h34uHTtKq7f
- 7w3D4YFpfzTm2AKH3Y7/+noyzc8z7t8Yyc/y7zlyRi0+su6gD3tUVR0KYOo7+kjU+mllc6aVWmA
- ZRphwCocJ4LJ6ZF38SNVqCuMM1uOEHd2irsrki+mtImr/r3D+YrzmmFre8jwHS9vf7iMeoSjx0k
- XlZaPWoDi52Lv6yvR6EGmZya6ZMYjRI69e9WFODm9XBkKdbJY6xHRVp02g6dtcHFExatk50nm93
- fIMOmRT2E8lSvKbRKRY6Ie6LPhe2yn8OUkoTD3/rXRb4KW8aKjFA/CamDdXvm8DYpcPKU74PJMt
- XECkMckiUGr/AMlvBkADAETQ=
-X-Google-Smtp-Source: AGHT+IHWlLajDsQ384nIBXustMLg5QOay+NZ7bnHzT4T4G8CTt2TPFaQ6+dQTw7Hxia/vwaMzjizQQ==
-X-Received: by 2002:a17:906:12cf:b0:b04:11e5:9a8e with SMTP id
- a640c23a62f3a-b0411e59b44mr1462147366b.40.1756973499887; 
- Thu, 04 Sep 2025 01:11:39 -0700 (PDT)
+ AJvYcCVwhXkr5Uvmg5K5JIghChzLnwrwUwqoWtfLUwTZlCh0gF6Z7sp04GXw3CX24f3i+ta54cJ0zHFUCGsv@nongnu.org
+X-Gm-Message-State: AOJu0Yzj/gEDi8XRAAT14Ba6wNtyZx5CUA321n5gcxpUYL/8H2YGBwfZ
+ Uy9kGKcDQnTpVFrha8CXCnaBUSCcBvOYOao78sKHDkYuf7nDFRHBGV1kRsVMb0X1CbA=
+X-Gm-Gg: ASbGncvfpIRhr0YikhnfCbrz5e+isbvJki3e7sHAp/sLST5pLc6TxPSR3nIGo0iACtx
+ dFwK+Dgm4qdXrmR13YIxquOS52/6xSuIboT8JljUASgBorjnDmnMqCuH2fZKWq49KFfXaBoxbYn
+ OkLyx8sGFSjntVjcbXlM6DIubJpsdYZmp86b+1XPoCSPq4/fbe3H66R3tAvvtDckFv3q7MHPOr3
+ 8QwpNc6ULH7hc7luGFpLhqaD2J+KXJNjHbYF35lMBD5w13Y7sT2MM0zVHwGNZuHUwHzqRfcIIqz
+ jYf6RIZgq47L9lfy8xFNktkWWm0M81BAZzA9fyOAIYYLbiSrm/5VVptBUMWZfw5WBvpKPr3uHzn
+ +W7jE1VELHT+S1ovZr0doC1g=
+X-Google-Smtp-Source: AGHT+IEkvYRALNYOlXlCh0M9P7tOTgw2dIkqwHytdvjqGaEFKKMvexexT1+4HGfULBPkmc4HuBN2QQ==
+X-Received: by 2002:a05:6402:40ce:b0:61d:cd5:8b6e with SMTP id
+ 4fb4d7f45d1cf-61d260cc220mr16736785a12.0.1756973504083; 
+ Thu, 04 Sep 2025 01:11:44 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b046d420e02sm306741066b.39.2025.09.04.01.11.32
+ 4fb4d7f45d1cf-61ede659366sm2877110a12.24.2025.09.04.01.11.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:11:37 -0700 (PDT)
+ Thu, 04 Sep 2025 01:11:43 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id D1C1B5F93A;
- Thu, 04 Sep 2025 09:11:28 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 16B025FA31;
+ Thu, 04 Sep 2025 09:11:30 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -130,17 +130,18 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
- Stefan Hajnoczi <stefanha@redhat.com>
-Subject: [PATCH v2 006/281] Update version for the v10.1.0 release
-Date: Thu,  4 Sep 2025 09:06:40 +0100
-Message-ID: <20250904081128.1942269-7-alex.bennee@linaro.org>
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 016/281] tests/functional/meson.build: Allow tests to
+ reside in subfolders
+Date: Thu,  4 Sep 2025 09:06:50 +0100
+Message-ID: <20250904081128.1942269-17-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -163,20 +164,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Stefan Hajnoczi <stefanha@redhat.com>
+From: Thomas Huth <thuth@redhat.com>
 
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+We are going to move target-specific tests to subfolders that are
+named after the target (and generic tests will be put into a "generic"
+folder), so prepare the meson.build file to allow such locations, too.
+
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+Message-ID: <20250819112403.432587-5-thuth@redhat.com>
 ---
- VERSION | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests/functional/meson.build | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/VERSION b/VERSION
-index dadcbd47d3c..4149c39eec6 100644
---- a/VERSION
-+++ b/VERSION
-@@ -1 +1 @@
--10.0.94
-+10.1.0
+diff --git a/tests/functional/meson.build b/tests/functional/meson.build
+index 356aad12dee..8c24ac1cc2d 100644
+--- a/tests/functional/meson.build
++++ b/tests/functional/meson.build
+@@ -423,7 +423,13 @@ foreach speed : ['quick', 'thorough']
+ 
+     foreach test : target_tests
+       testname = '@0@-@1@'.format(target_base, test)
+-      testfile = 'test_' + test + '.py'
++      if fs.exists('test_' + test + '.py')
++        testfile = 'test_' + test + '.py'
++      elif fs.exists('generic' / 'test_' + test + '.py')
++        testfile = 'generic' / 'test_' + test + '.py'
++      else
++        testfile = target_base / 'test_' + test + '.py'
++      endif
+       testpath = meson.current_source_dir() / testfile
+       teststamp = testname + '.tstamp'
+       test_precache_env = environment()
 -- 
 2.47.2
 
