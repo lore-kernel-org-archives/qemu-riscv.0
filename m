@@ -4,50 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84808CA1002
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:40:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD16CCA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 09:18:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu5VP-0001DP-G3; Thu, 04 Sep 2025 04:39:43 -0400
+	id 1uu66s-0006Z4-Mh; Thu, 04 Sep 2025 05:18:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
- id 1uu5VO-0001CX-83; Thu, 04 Sep 2025 04:39:42 -0400
-Received: from [115.124.28.59] (helo=out28-59.mail.aliyun.com)
+ id 1uu66p-0006Xm-TI; Thu, 04 Sep 2025 05:18:23 -0400
+Received: from [115.124.28.63] (helo=out28-63.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
- id 1uu5VE-0006t8-AM; Thu, 04 Sep 2025 04:39:41 -0400
-Received: from 10.13.14.160(mailfrom:chao.liu@zevorn.cn
- fp:SMTPD_---.eXFRmBL_1756974909 cluster:ay29) by smtp.aliyun-inc.com;
- Thu, 04 Sep 2025 16:35:10 +0800
-Message-ID: <46df01bf-8885-4834-bf51-8bc304f2aa47@zevorn.cn>
-Date: Thu, 4 Sep 2025 16:35:09 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/2] target/riscv: Generate strided vector loads/stores
- with tcg nodes.
-To: Nicholas Piggin <npiggin@gmail.com>
-Cc: richard.henderson@linaro.org, paolo.savini@embecosm.com,
- ebiggers@kernel.org, dbarboza@ventanamicro.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Chao Liu <chao.liu@yeah.net>
-References: <cover.1756906528.git.chao.liu@zevorn.cn>
- <bcb383174cf82be8116685273e271cdbdda28a59.1756906528.git.chao.liu@zevorn.cn>
- <eimd6dqomns6jqkh4rnma42lxlzlroyibbgm32yb7oztljensy@gw4u4flnwpwo>
+ id 1uu66i-0002t6-3l; Thu, 04 Sep 2025 05:18:23 -0400
+Received: from ZEVORN-PC(mailfrom:chao.liu@zevorn.cn
+ fp:SMTPD_---.eXOUI5S_1756977230 cluster:ay29) by smtp.aliyun-inc.com;
+ Thu, 04 Sep 2025 17:13:51 +0800
 From: Chao Liu <chao.liu@zevorn.cn>
-In-Reply-To: <eimd6dqomns6jqkh4rnma42lxlzlroyibbgm32yb7oztljensy@gw4u4flnwpwo>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.59 (deferred)
-Received-SPF: pass client-ip=115.124.28.59; envelope-from=chao.liu@zevorn.cn;
- helo=out28-59.mail.aliyun.com
+To: richard.henderson@linaro.org, paolo.savini@embecosm.com, npiggin@gmail.com,
+ ebiggers@kernel.org, dbarboza@ventanamicro.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Chao Liu <chao.liu@yeah.net>,
+ Chao Liu <chao.liu@zevorn.cn>
+Subject: [PATCH v7 2/2] tests/tcg/riscv64: Add test for vlsseg8e32 instruction
+Date: Thu,  4 Sep 2025 17:13:46 +0800
+Message-ID: <3cca0b24eefda81505bf4eb6276764b34bc0bb82.1756975571.git.chao.liu@zevorn.cn>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <cover.1756975571.git.chao.liu@zevorn.cn>
+References: <cover.1756975571.git.chao.liu@zevorn.cn>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.63 (deferred)
+Received-SPF: pass client-ip=115.124.28.63; envelope-from=chao.liu@zevorn.cn;
+ helo=out28-63.mail.aliyun.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
 X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -64,123 +60,157 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2025/9/4 13:05, Nicholas Piggin wrote:
-> On Wed, Sep 03, 2025 at 09:52:01PM +0800, Chao Liu wrote:
->> From: Chao Liu <chao.liu@yeah.net>
-> 
->> +static void gen_ldst_stride_main_loop(DisasContext *s, TCGv dest, uint32_t rs1,
->> +                                      uint32_t rs2, uint32_t vm, uint32_t nf,
->> +                                      gen_tl_ldst *ld_fn, gen_tl_ldst *st_fn,
->> +                                      bool is_load)
->> +{
->> +    TCGv addr = tcg_temp_new();
->> +    TCGv base = get_gpr(s, rs1, EXT_NONE);
->> +    TCGv stride = get_gpr(s, rs2, EXT_NONE);
->> +
->> +    TCGv i = tcg_temp_new();
->> +    TCGv i_esz = tcg_temp_new();
->> +    TCGv k = tcg_temp_new();
->> +    TCGv k_esz = tcg_temp_new();
->> +    TCGv k_max = tcg_temp_new();
->> +    TCGv mask = tcg_temp_new();
->> +    TCGv mask_offs = tcg_temp_new();
->> +    TCGv mask_offs_64 = tcg_temp_new();
->> +    TCGv mask_elem = tcg_temp_new();
->> +    TCGv mask_offs_rem = tcg_temp_new();
->> +    TCGv vreg = tcg_temp_new();
->> +    TCGv dest_offs = tcg_temp_new();
->> +    TCGv stride_offs = tcg_temp_new();
->> +
->> +    uint32_t max_elems = MAXSZ(s) >> s->sew;
->> +
->> +    TCGLabel *start = gen_new_label();
->> +    TCGLabel *end = gen_new_label();
->> +    TCGLabel *start_k = gen_new_label();
->> +    TCGLabel *inc_k = gen_new_label();
->> +    TCGLabel *end_k = gen_new_label();
->> +
->> +    MemOp atomicity = MO_ATOM_NONE;
->> +    if (s->sew == 0) {
->> +        atomicity = MO_ATOM_NONE;
->> +    } else {
->> +        atomicity = MO_ATOM_IFALIGN_PAIR;
->> +    }
->> +
->> +    tcg_gen_addi_tl(mask, (TCGv)tcg_env, vreg_ofs(s, 0));
->> +
->> +    /* Start of outer loop. */
->> +    tcg_gen_mov_tl(i, cpu_vstart);
->> +    gen_set_label(start);
->> +    tcg_gen_brcond_tl(TCG_COND_GE, i, cpu_vl, end);
->> +    tcg_gen_shli_tl(i_esz, i, s->sew);
->> +    /* Start of inner loop. */
->> +    tcg_gen_movi_tl(k, 0);
->> +    gen_set_label(start_k);
->> +    tcg_gen_brcond_tl(TCG_COND_GE, k, tcg_constant_tl(nf), end_k);
->> +    /*
->> +     * If we are in mask agnostic regime and the operation is not unmasked we
->> +     * set the inactive elements to 1.
->> +     */
->> +    if (!vm && s->vma) {
->> +        TCGLabel *active_element = gen_new_label();
->> +        /* (i + k * max_elems) * esz */
->> +        tcg_gen_shli_tl(mask_offs, k, get_log2(max_elems << s->sew));
->> +        tcg_gen_add_tl(mask_offs, mask_offs, i_esz);
->> +
->> +        /*
->> +         * Check whether the i bit of the mask is 0 or 1.
->> +         *
->> +         * static inline int vext_elem_mask(void *v0, int index)
->> +         * {
->> +         *     int idx = index / 64;
->> +         *     int pos = index  % 64;
->> +         *     return (((uint64_t *)v0)[idx] >> pos) & 1;
->> +         * }
->> +         */
->> +        tcg_gen_shri_tl(mask_offs_64, mask_offs, 3);
->> +        tcg_gen_add_tl(mask_offs_64, mask_offs_64, mask);
->> +        tcg_gen_ld_i64((TCGv_i64)mask_elem, (TCGv_ptr)mask_offs_64, 0);
->> +        tcg_gen_rem_tl(mask_offs_rem, mask_offs, tcg_constant_tl(8));
-> 
-> Could this be faster with tcg_gen_andi_tl(mask_offs_rem, mask_offs, 7)?
-> 
+From: Chao Liu <chao.liu@yeah.net>
 
-This is a good catch! I'll include this change in the next patch version.
+This case, it copied 64 bytes from a0 to a1 with vlsseg8e32.
 
+Signed-off-by: Chao Liu <chao.liu@zevorn.cn>
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Tested-by: Eric Biggers <ebiggers@kernel.org>
+---
+ tests/tcg/riscv64/Makefile.softmmu-target |   7 +-
+ tests/tcg/riscv64/test-vlsseg8e32.S       | 107 ++++++++++++++++++++++
+ 2 files changed, 113 insertions(+), 1 deletion(-)
+ create mode 100644 tests/tcg/riscv64/test-vlsseg8e32.S
 
->> +        tcg_gen_shr_tl(mask_elem, mask_elem, mask_offs_rem);
->> +        tcg_gen_andi_tl(mask_elem, mask_elem, 1);
->> +        tcg_gen_brcond_tl(TCG_COND_NE, mask_elem, tcg_constant_tl(0),
->> +                          active_element);
->> +        /*
->> +         * Set masked-off elements in the destination vector register to 1s.
->> +         * Store instructions simply skip this bit as memory ops access memory
->> +         * only for active elements.
->> +         */
->> +        if (is_load) {
->> +            tcg_gen_shli_tl(mask_offs, mask_offs, s->sew);
->> +            tcg_gen_add_tl(mask_offs, mask_offs, dest);
->> +            st_fn(tcg_constant_tl(-1), (TCGv_ptr)mask_offs, 0);
-> 
-> One more small thing. This is implementing load and store instructions,
-> yet there are these ld_fn and st_fn, which makes it a bit confusing.
-> Calling them something like read_vreg / write_vreg might help make them
-> a bit clearer.
-> 
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 3ca595335d..e52c005f87 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -7,7 +7,7 @@ VPATH += $(TEST_SRC)
+ 
+ LINK_SCRIPT = $(TEST_SRC)/semihost.ld
+ LDFLAGS = -T $(LINK_SCRIPT)
+-CFLAGS += -g -Og
++CFLAGS += -march=rv64gcv -mabi=lp64d -g -Og
+ 
+ %.o: %.S
+ 	$(CC) $(CFLAGS) $< -Wa,--noexecstack -c -o $@
+@@ -24,5 +24,10 @@ EXTRA_RUNS += run-test-mepc-masking
+ run-test-mepc-masking: test-mepc-masking
+ 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
+ 
++EXTRA_RUNS += run-vlsseg8e32
++run-vlsseg8e32: QEMU_OPTS := -cpu rv64,v=true $(QEMU_OPTS)
++run-vlsseg8e32: test-vlsseg8e32
++	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
++
+ # We don't currently support the multiarch system tests
+ undefine MULTIARCH_TESTS
+diff --git a/tests/tcg/riscv64/test-vlsseg8e32.S b/tests/tcg/riscv64/test-vlsseg8e32.S
+new file mode 100644
+index 0000000000..bbc79d5e8d
+--- /dev/null
++++ b/tests/tcg/riscv64/test-vlsseg8e32.S
+@@ -0,0 +1,107 @@
++#
++# QEMU RISC-V Vector Strided Load Instruction testcase
++#
++# Copyright (c) 2025 Chao Liu chao.liu@yeah.net
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++	.option	norvc
++
++	.section .data
++	.align 4
++source_data:
++	.asciz "Test the vssseg8e32 insn by copy 64b and verifying correctness."
++	.equ source_len, 64
++
++	.text
++	.global _start
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++
++enable_rvv:
++
++	li	x15, 0x800000000024112d
++	csrw	0x301, x15
++	li	x1, 0x2200
++	csrr	x2, mstatus
++	or	x2, x2, x1
++	csrw	mstatus, x2
++
++rvv_test_func:
++	la	a0, source_data
++	li	a1, 0x80020000
++	vsetivli	zero, 1, e32, m1, ta, ma
++	li	t0, 64
++
++	vlsseg8e32.v	v0, (a0), t0
++	addi	a0, a0, 32
++	vlsseg8e32.v	v8, (a0), t0
++
++	vssseg8e32.v	v0, (a1), t0
++	addi	a1, a1, 32
++	vssseg8e32.v	v8, (a1), t0
++
++compare_start:
++	la	a0, source_data
++	li	a1, 0x80020000
++	li	t0, 0
++	li	t1, source_len
++
++compare_loop:
++	# when t0 >= len, compare end
++	bge	 t0, t1, compare_done
++
++	lb	t2, 0(a0)
++	lb	t3, 0(a1)
++	bne	t2, t3, compare_fail
++
++	addi	a0, a0, 1
++	addi	a1, a1, 1
++	addi	t0, t0, 1
++	j	compare_loop
++
++compare_done:
++	# compare ok, return 0
++	li	a0, 0
++	j	_exit
++
++compare_fail:
++	# compare failed, return 2
++	li	a0, 2
++	j	_exit
++
++trap:
++	# When an instruction traps, compare it to the insn in memory.
++	csrr	t0, mepc
++	csrr	t1, mtval
++	lwu	t2, 0(t0)
++	bne	t1, t2, fail
++
++	# Skip the insn and continue.
++	addi	t0, t0, 4
++	csrw	mepc, t0
++	mret
++
++fail:
++	li	a0, 1
++
++# Exit code in a0
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
++
++	# Semihosting call sequence
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
+-- 
+2.50.1
 
-I think the current names are okay? After splitting the vector and mask access
-code into smaller functions, it's already much easier to read. Let's review the
-next patch version first, then decide if we need to change the names.
-
-> I also suggest try to split the at generation of access for the vector
-> data and mask registers to see if you can split them into helper
-> functions. That could make this function smaller and a bit nicer to
-> review.
-> 
-
-Get, I'll split the check for vext_elem_mask() and the Load/Store of the vector
-register into separate sub-functions to make review easier.
-
-Thanks,
-Chao
 
