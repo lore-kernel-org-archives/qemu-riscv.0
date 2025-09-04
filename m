@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA6F9CA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:24:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1F86CA1015
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:25:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu5Cf-0003Tu-Fd; Thu, 04 Sep 2025 04:20:21 -0400
+	id 1uu54g-0006MY-20; Thu, 04 Sep 2025 04:12:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu5BF-0001Lf-1U
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:18:54 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1uu54a-0006Gg-RX
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:00 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu5B2-0008EV-Nn
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:18:52 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-61ec59e833aso1178822a12.1
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:18:40 -0700 (PDT)
+ id 1uu54J-00041d-O5
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:00 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b03fa5c5a89so107069666b.2
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973918; x=1757578718; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973501; x=1757578301; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fTwVN2pdB6APtd4vJTidA71Ye17u96MfvC5vKsLhS50=;
- b=p1ae7NMzRSWnpR4jVCWgQ3pev7i0v6m9jCE7rPMi8lVC0+tCsL3MG33Z/Yg8MQ+a/X
- lJeUD+ekFS9ayuxSIp98rC6iYP5XDdnRy8M61+tNqbKM08ElbmzLZdR4TiQhQQw7ZC9i
- MVuHp2KQ7LFd/SOwqYbfsMLxDfvGFL2zXUQQAA32hScVJZz678Dx9cW5Mzh6HisbWZzT
- wQJn/EvajGpO5M1f5AQZO6fEJpSQKBE4DAvGSPoweM6MF1JuuVZxpx/IxBbbgl1O/a8d
- peRzpvZChswNHdfwVBqVbgMwsezZgsve9ydxEuisSSIhN5BqaSQUbV6Iry2K0DHugEtz
- WBIQ==
+ bh=3j1jG2MY/WGcH+crz7CtyaM5tw55oKFFqSyUb2OGtbM=;
+ b=xNT+gtAKGeol2h2GXBI9/QpScgbWnH/9lYAyf+ydexCHyJR3MbG6diaU1f4RciO8i3
+ J/+j5W9wYbqQvWrjCoDcHJqpvZPD0GcTDdv0kRK0WMjAvFUPR6PMm4p3df1Z+G9n7Lpg
+ GAWIXEsoQTLL5qFU68EUiRf8yDlPBYYSF6AwIecc3Vai9YtQjXnIESEVREzinjxeaZq8
+ nXqqaeLLmrkBHC3ufD6qGwmZYmdRetEhVicmqw5UpaNMDp3BLiL7mk9X952FgozqcShp
+ 2aFk6nMDm2h8l4C+O7RBouylyPQBeujvUEt50j5P8RZMxB/Gqs9IP+2B9KGcLO8fLjw5
+ e5tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973918; x=1757578718;
+ d=1e100.net; s=20230601; t=1756973501; x=1757578301;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fTwVN2pdB6APtd4vJTidA71Ye17u96MfvC5vKsLhS50=;
- b=RFD4f8G4NiISxOvuFCZy5Zpgn+6cp3QR8w6VbXa+c1p0nQXPA3gdlbjKqzrGcLB4Im
- ESkYUI+Us8895Iws35OWDkt3oO+DLuP+KjwiHR5t9/XB+jA6A9J9H6ScVHzuZndnnk9b
- VZHdx+Ek32heLg6F7MWbF7MJmF5cStn2lEe5DbENWWMD9S8+F8stHu3rJt3FUkrTglZR
- /WB9DVxxSJuoaTCC8ImjgjRX29amdwJcS7qxrWSq6Pw7/DZFGfknFzKl0YVzcPlqiJaN
- ZKBnEoqhJR437TsG4Aqb/6usF5wo0dkQWahVPxvSvqOEprXvKRPuLfAzTN0FT6ScYzTk
- LGFA==
+ bh=3j1jG2MY/WGcH+crz7CtyaM5tw55oKFFqSyUb2OGtbM=;
+ b=tYCu4FKzAtCrJ5z/DZ+AKLTJlRupXgbHNzbH3roa3dkLkMEqyVVDELGNW+1FD1+HJP
+ GgAd3F/Kjf05joNsx29w5tqc/WwUOTmz1RfST5tL4bRXA0/YL0CEoxTa8iW3A5/Ep8IG
+ 4qNaC1Qjnbm2sbLeupZ3ytiXzxtHQtZSaPT5OOqlEG6QRxJ6gS8Okfz85nYSZXavKrEy
+ M0ir5FwKlqa4SIGYJdCd7PnNndxPheXFoTz7SUuk3RGDV+BCpvkMCKce8qqQAqC2xBOA
+ hYCOxlNCwqi9TNC6nFZX5Z3aDj4hTuVoK3nSV5lIpiYwufiPQ0K9C4FWKfjiCkzLUPwd
+ wL6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqgh5tHi1ic9G9urILZ+Ke2CCSwGtWTfDORWwPHB1qpNEGjkrygOV8anIs6w06KIutXCvm/+XH952d@nongnu.org
-X-Gm-Message-State: AOJu0YxeHyF5ajup1JhUjBK2dQzFw03h6EimpfjKgVkUYmQP2NuhCmyK
- FjnGhWXe5UNAkn3gN8hSFCi+IXGjCdhiFh6lhkKQ3XGHGSY5pYNERlMAEvRce6uhZtk=
-X-Gm-Gg: ASbGncvfkdfdd/Da8lN+JGFC3PPKx80W8bZyPU6SlRR8lM95o6l427BtkDjS2pb2moh
- uU6KMw0Ui0aeEOTdOocMnzAS6ZwAeqX23ymE7NSW9P4UvJ2uLgIzQulyI0uMdbdLhn5JzSuHMhx
- LKGaa0hI17t8U48krry77FNvILvOtidSVqicuoe8uX/db7+FRvZp8ynkJG5+9rVjxmnRqmpUl2Y
- gb1mpio/7uN8ECmksCC/oOOVIcmHQnOED5puYSkiDqqskmhu5aLAyn9l7c63K9mO5kUAJr0Zr9j
- gsf5y9RkpurHkDocuTiNJGmOfkJgUfcjdJ9h1/xTDfXP/N4xP1m19vQ6xHVmWq4xCvCW2ih8rmK
- ONrYd10n/O335ZBVVZLSfd6/nB+wKQc+M6A==
-X-Google-Smtp-Source: AGHT+IF1g0xPlQZwXvixbktzxWp7pylp9yJpF3ozVocEpxZl4vhVy/vLrP8CDNUZO12I//3cD7pawA==
-X-Received: by 2002:a17:907:7e86:b0:afe:ad18:8662 with SMTP id
- a640c23a62f3a-b01d8c74c8emr1897318666b.23.1756973918422; 
- Thu, 04 Sep 2025 01:18:38 -0700 (PDT)
+ AJvYcCU6OhtJGLmRwOSX9MrXJundvmvT/JPW7j/MoBu/+mi5IYCUwVdDQEuQwPgNf4kEtbh2/x4JSbRDAToQ@nongnu.org
+X-Gm-Message-State: AOJu0Yy89oqU/oLabqmzTzPM0sNM/xiLJ5ncx1mlK9biFniKjcbfXKLr
+ Id1mp7cdcM7lLsETDxP3iJcEsX4OpnZVRyQZMQvUvEcsVSEN1/dPKUxXXw7wb3xhnEM=
+X-Gm-Gg: ASbGncttYPRo2X+NvLu4OsHEEOLvBHWyGFTG3FpVUkNFDkNQM7qJ8RC36FYmSefOIgF
+ a5rozHbY6goiALWAr8BCEW/Or/QQQPpSqAtUPP2lr5bmh1Yi5szzXnXICGIiWYdG8ipAwPHD887
+ F/AgPaPOTh928GsqgFYEY4Jsv43E7HgQmtBTPRmh++jCZVh54f+q+lpaNDXSL4XHnBILlCHAnfY
+ V53/vmX49ahbpo+x7FxGr0SeAXj85HfwSU+rx7Y0fCmQXPsCZ/zqpTsEc9ky6wFP5jdpINIWYKe
+ LC6RZpZ82zKM5TfcBGIUZ4pm1AfTzcyUESPvdKnheMryb1Ih5Oy6XssC0J4mOGLLjkxwkRN0/Me
+ LSXrkfU83y4aDWYy1Mzr26CHjT1ASxTDZMw==
+X-Google-Smtp-Source: AGHT+IHtaOAptd/dOyrxka90iG+Ickwt+7m6mDEjwCXtB/2x+x0WNk1ZvG1BgsoUzoIQQ2o03oW8Ow==
+X-Received: by 2002:a17:906:4789:b0:b04:1a1c:cb5b with SMTP id
+ a640c23a62f3a-b041a1ccc38mr1426344866b.7.1756973501036; 
+ Thu, 04 Sep 2025 01:11:41 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aff12a6b404sm1396323866b.88.2025.09.04.01.18.35
+ a640c23a62f3a-b03ab857474sm1225662366b.89.2025.09.04.01.11.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:18:37 -0700 (PDT)
+ Thu, 04 Sep 2025 01:11:37 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 5CC61601C5;
- Thu, 04 Sep 2025 09:11:35 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 71DFF5F9F7;
+ Thu, 04 Sep 2025 09:11:29 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -129,17 +129,19 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
-Subject: [PATCH v2 055/281] linux-user: Move get_elf_hwcap to sparc/elfload.c
-Date: Thu,  4 Sep 2025 09:07:29 +0100
-Message-ID: <20250904081128.1942269-56-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
+ Gustavo Romero <gustavo.romero@linaro.org>
+Subject: [PATCH v2 011/281] tests/functional: Fix reverse_debugging asset
+ precaching
+Date: Thu,  4 Sep 2025 09:06:45 +0100
+Message-ID: <20250904081128.1942269-12-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -162,127 +164,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Richard Henderson <richard.henderson@linaro.org>
+From: Gustavo Romero <gustavo.romero@linaro.org>
 
-Change the return type to abi_ulong, and pass in the cpu.
+This commit fixes the asset precaching in the reverse_debugging test on
+aarch64.
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+QemuBaseTest.main() precaches assets (kernel, rootfs, DT blobs, etc.)
+that are defined in variables with the ASSET_ prefix. This works because
+it ultimately calls Asset.precache_test(), which relies on introspection
+to locate these variables.
+
+If an asset variable is not named with the ASSET_ prefix, precache_test
+cannot find the asset and precaching silently fails. Hence, fix the
+asset precaching by fixing the asset variable name.
+
+Signed-off-by: Gustavo Romero <gustavo.romero@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Message-ID: <20250827001008.22112-1-gustavo.romero@linaro.org>
+Signed-off-by: Thomas Huth <thuth@redhat.com>
 ---
- linux-user/loader.h           |  3 ++-
- linux-user/sparc/target_elf.h |  2 ++
- linux-user/elfload.c          | 30 +-----------------------------
- linux-user/sparc/elfload.c    | 27 +++++++++++++++++++++++++++
- 4 files changed, 32 insertions(+), 30 deletions(-)
+ tests/functional/test_aarch64_reverse_debug.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/linux-user/loader.h b/linux-user/loader.h
-index 151a06f5db5..2c8414e0e53 100644
---- a/linux-user/loader.h
-+++ b/linux-user/loader.h
-@@ -101,7 +101,8 @@ extern unsigned long guest_stack_size;
- /* Note that Elf32 and Elf64 use uint32_t for e_flags. */
- const char *get_elf_cpu_model(uint32_t eflags);
+diff --git a/tests/functional/test_aarch64_reverse_debug.py b/tests/functional/test_aarch64_reverse_debug.py
+index 58d45328350..8bc91ccfde7 100755
+--- a/tests/functional/test_aarch64_reverse_debug.py
++++ b/tests/functional/test_aarch64_reverse_debug.py
+@@ -21,7 +21,7 @@ class ReverseDebugging_AArch64(ReverseDebugging):
  
--#if defined(TARGET_I386) || defined(TARGET_X86_64) || defined(TARGET_ARM)
-+#if defined(TARGET_I386) || defined(TARGET_X86_64) || defined(TARGET_ARM) \
-+    || defined(TARGET_SPARC)
- abi_ulong get_elf_hwcap(CPUState *cs);
- abi_ulong get_elf_hwcap2(CPUState *cs);
- #endif
-diff --git a/linux-user/sparc/target_elf.h b/linux-user/sparc/target_elf.h
-index 7e46748d261..b7544db0a1c 100644
---- a/linux-user/sparc/target_elf.h
-+++ b/linux-user/sparc/target_elf.h
-@@ -8,4 +8,6 @@
- #ifndef SPARC_TARGET_ELF_H
- #define SPARC_TARGET_ELF_H
+     REG_PC = 32
  
-+#define HAVE_ELF_HWCAP          1
-+
- #endif
-diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-index 149d1313c0a..16709865f78 100644
---- a/linux-user/elfload.c
-+++ b/linux-user/elfload.c
-@@ -565,35 +565,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
- # define ELF_ARCH   EM_SPARCV9
- #endif
- 
--#include "elf.h"
--
--#define ELF_HWCAP get_elf_hwcap()
--
--static uint32_t get_elf_hwcap(void)
--{
--    /* There are not many sparc32 hwcap bits -- we have all of them. */
--    uint32_t r = HWCAP_SPARC_FLUSH | HWCAP_SPARC_STBAR |
--                 HWCAP_SPARC_SWAP | HWCAP_SPARC_MULDIV;
--
--#ifdef TARGET_SPARC64
--    CPUSPARCState *env = cpu_env(thread_cpu);
--    uint32_t features = env->def.features;
--
--    r |= HWCAP_SPARC_V9 | HWCAP_SPARC_V8PLUS;
--    /* 32x32 multiply and divide are efficient. */
--    r |= HWCAP_SPARC_MUL32 | HWCAP_SPARC_DIV32;
--    /* We don't have an internal feature bit for this. */
--    r |= HWCAP_SPARC_POPC;
--    r |= features & CPU_FEATURE_FSMULD ? HWCAP_SPARC_FSMULD : 0;
--    r |= features & CPU_FEATURE_VIS1 ? HWCAP_SPARC_VIS : 0;
--    r |= features & CPU_FEATURE_VIS2 ? HWCAP_SPARC_VIS2 : 0;
--    r |= features & CPU_FEATURE_FMAF ? HWCAP_SPARC_FMAF : 0;
--    r |= features & CPU_FEATURE_VIS3 ? HWCAP_SPARC_VIS3 : 0;
--    r |= features & CPU_FEATURE_IMA ? HWCAP_SPARC_IMA : 0;
--#endif
--
--    return r;
--}
-+#define ELF_HWCAP get_elf_hwcap(thread_cpu)
- 
- static inline void init_thread(struct target_pt_regs *regs,
-                                struct image_info *infop)
-diff --git a/linux-user/sparc/elfload.c b/linux-user/sparc/elfload.c
-index 243e6f9b66a..32ca1b05b1a 100644
---- a/linux-user/sparc/elfload.c
-+++ b/linux-user/sparc/elfload.c
-@@ -3,6 +3,7 @@
- #include "qemu/osdep.h"
- #include "qemu.h"
- #include "loader.h"
-+#include "elf.h"
+-    KERNEL_ASSET = Asset(
++    ASSET_KERNEL = Asset(
+         ('https://archives.fedoraproject.org/pub/archive/fedora/linux/'
+          'releases/29/Everything/aarch64/os/images/pxeboot/vmlinuz'),
+         '7e1430b81c26bdd0da025eeb8fbd77b5dc961da4364af26e771bd39f379cbbf7')
+@@ -30,7 +30,7 @@ class ReverseDebugging_AArch64(ReverseDebugging):
+     def test_aarch64_virt(self):
+         self.set_machine('virt')
+         self.cpu = 'cortex-a53'
+-        kernel_path = self.KERNEL_ASSET.fetch()
++        kernel_path = self.ASSET_KERNEL.fetch()
+         self.reverse_debugging(args=('-kernel', kernel_path))
  
  
- const char *get_elf_cpu_model(uint32_t eflags)
-@@ -13,3 +14,29 @@ const char *get_elf_cpu_model(uint32_t eflags)
-     return "Fujitsu MB86904";
- #endif
- }
-+
-+abi_ulong get_elf_hwcap(CPUState *cs)
-+{
-+    /* There are not many sparc32 hwcap bits -- we have all of them. */
-+    uint32_t r = HWCAP_SPARC_FLUSH | HWCAP_SPARC_STBAR |
-+                 HWCAP_SPARC_SWAP | HWCAP_SPARC_MULDIV;
-+
-+#ifdef TARGET_SPARC64
-+    CPUSPARCState *env = cpu_env(cs);
-+    uint32_t features = env->def.features;
-+
-+    r |= HWCAP_SPARC_V9 | HWCAP_SPARC_V8PLUS;
-+    /* 32x32 multiply and divide are efficient. */
-+    r |= HWCAP_SPARC_MUL32 | HWCAP_SPARC_DIV32;
-+    /* We don't have an internal feature bit for this. */
-+    r |= HWCAP_SPARC_POPC;
-+    r |= features & CPU_FEATURE_FSMULD ? HWCAP_SPARC_FSMULD : 0;
-+    r |= features & CPU_FEATURE_VIS1 ? HWCAP_SPARC_VIS : 0;
-+    r |= features & CPU_FEATURE_VIS2 ? HWCAP_SPARC_VIS2 : 0;
-+    r |= features & CPU_FEATURE_FMAF ? HWCAP_SPARC_FMAF : 0;
-+    r |= features & CPU_FEATURE_VIS3 ? HWCAP_SPARC_VIS3 : 0;
-+    r |= features & CPU_FEATURE_IMA ? HWCAP_SPARC_IMA : 0;
-+#endif
-+
-+    return r;
-+}
 -- 
 2.47.2
 
