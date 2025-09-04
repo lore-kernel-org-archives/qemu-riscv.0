@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F6ECA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:15:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFFE9CA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:15:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu54O-000617-5I; Thu, 04 Sep 2025 04:11:48 -0400
+	id 1uu54P-00063y-Pj; Thu, 04 Sep 2025 04:11:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54L-0005y1-Pl
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:45 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ id 1uu54N-00060s-Nm
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:47 -0400
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54B-0003wq-JT
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:45 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-620724883e6so159818a12.2
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:34 -0700 (PDT)
+ id 1uu54D-0003y5-Vr
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:47 -0400
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b03fa5c5a89so107056466b.2
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973493; x=1757578293; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973496; x=1757578296; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pfipyU6Vd8H7OBNmQiaCitsZISqNnzAeEnNiRJw+yKE=;
- b=j+t4M6t4+KAzEqB4WncLVFK+vDTk8jry+wESXKfSJo3iaEEZodCOFGFvrmVIxjgnjG
- DreE72xXFyNLECwnamxe4RHC0mBASb4VRx5EmnNXqJEGgGBeWVa/ydcJF86fSd6ktQqR
- VrAWBWtBUS999mW1m07sFq1tuEcXV/MkGANYhI7SOCrgnyBGvNZIBK9+NrozYjQJ0hjd
- MVkM3ltKL+V8tfyd+ZQO2Mp7753i7XQEPcEymhpIE8nk0X6ywIX5mB8px8r2Ve8k9Kft
- d5Rh78Rvj1KfRbw2/Tl5SCiRTI7CtEWrcnL53DvXiGo+aCDzzlDhcmP/lXcWYXTUhnIT
- 2YpQ==
+ bh=XYe2srEOzuPavOLB2dyXu3UjjKzRy0khJhV96Tf8OLU=;
+ b=GPp0vZemNvNyJgvcR7/O10++xWClSA71KC2YLk3EmCU58+nOcwVld/gkAU18UcC2xN
+ 5ti4gyT27VrUE0WpiveCDdag1ltms/+YkSY9AbrICuf5Yap97up5tycDZ71tRjQZgUu/
+ ZoCoGstf/NuDpw4icSMUpQn76CSec4FSkAwWSkrQ4m7eci+l5EZ566NxN3ORr8LrCKA0
+ pa9CCem66pmIviovYrKG9TK9/8xVztbdLRltNYlVLDSaylbHG2OU88LiUf+v6lROoPBH
+ vhPPRCprtATihsd3oY65xQ2a4oernB8ShON7D+fXOZjmrdf/gibQMIwPuvZ5H7s9SMTR
+ pKCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973494; x=1757578294;
+ d=1e100.net; s=20230601; t=1756973496; x=1757578296;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pfipyU6Vd8H7OBNmQiaCitsZISqNnzAeEnNiRJw+yKE=;
- b=kE7AiAJ0BpT3t3/VZIBI/MTAcocsYyOL/OFxe+ZQCBYT1bvOP2P5FP1mpwbIsh/Ob2
- 78o45Fn0LFtO4JAilcWCnj7AoJjUp4PRzFLFH/rN2WxTCJyDAzceTPiCSbzF7W/Oywbc
- i2NT50rsBKnK9eC6tUBo8Cq3YOpFz45qNgaOrvTEL3EHPD21X/BglX5fZFjPQGtANpAR
- yHKgCQnWlq9LNByaP/m3e7A98UDUn0NACN4uFPdE9f++PWP5fyAAYqdGpyGy/F1zBCzl
- RnuE/hRSrmj5x55C5yxX6o66hF9uElTgxfm7EJ2q3Y/8i7Ofer+Vm/ZAACkcinzyDAEK
- P+6g==
+ bh=XYe2srEOzuPavOLB2dyXu3UjjKzRy0khJhV96Tf8OLU=;
+ b=oEW4mfdPnx2m7oWo0ydH75+wUA6BG5ONi5+sDBt5oOgOgcuvw+OKX4aeHlMuKzWc/5
+ BsBJVsh0Qs5H0id9CGaroUTb24mMI3cUWA11D+pf7D3N5q1//FKsYdUW51huhTtho0RL
+ NtxRct9ugesPiM+OeM51jW+n3YExVT4uEjkoKC7SSsFC9J0OgOFVcpGHIhUXmNxAocft
+ KNhBxYjYp21pXpIFTlOB82o9LInsqS2BC6Mz0ECmdNc9C7cekimBug26Py9wKtb1jJgH
+ GJiOkSAKG4sz0XJEbVgoo5TJBfLcn8/2lI5GpFChhf1s4BKPAL+e1UuiWv9f8wIwbzEs
+ rseg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW5E5xiUeWkyZD+2ROWeKOO3GPv78b/ySBhAmHOzplFFbgG5xEig37vQBjs8wUJb1PznhQm+QU0Q9Tl@nongnu.org
-X-Gm-Message-State: AOJu0Yx0X+oKgJN9E+XIyfDP2BIPiTybcmRWiOlKVZY9djMw12NnS+ox
- JMFuzQxXkHgg044CDvMhjNHafbjROn+bxadnMNxqANNbN0U4iKPLT2Osu4CewNTYBdk=
-X-Gm-Gg: ASbGncsgd0Vr4J9ykjnpZyM6r0i0YUcMSThKA5rda2o24NaJL50loe8lJ63ht+MeapV
- uEK5YRFfacrVpeog1FjIIiEWzh6BCFzV43Jb7AZditooSf/2rvNqvrFOuKOCTcEbxMENo7ltupH
- 3SQmw8CcQvKCXQWEPSg1cBD9MXBEOQDB/NPWxXCzUEHF+AQ+IG3eIC+ziPxHJ3xFufn1ATcQ8PS
- +SNrgZrstlZT+z0UCaE1jF7rJBd8g1vbgHkD8Wx+03korj4u07vgItMlK7Ft8c264DWsLns5Gsc
- lW4qHASIuddzG7K80mtnvGd3UiXmTAIiTUx5e1t4Pt+C1h5HBLEhQfJWQitQSQgwea6xnIF3qn/
- gg7isn67kyEDOumkqM1mEE20=
-X-Google-Smtp-Source: AGHT+IEoaLYHbkuQ5w0GIOHrSrp6jiGSZD/L88aCCuGmKVKhMNAGz92wDlGLKlrjfHoRe3Zrhm5FPg==
-X-Received: by 2002:a05:6402:40c8:b0:620:1c6d:e6c4 with SMTP id
- 4fb4d7f45d1cf-6201c6de967mr689986a12.38.1756973493583; 
- Thu, 04 Sep 2025 01:11:33 -0700 (PDT)
+ AJvYcCWBbAYZ+EKMA2KkPdqjdnzoODU2XFG9rj+3u7TIv03uDc+ubtEIzP6EBNqjm4mpn4e/wWbqH0HaMjTE@nongnu.org
+X-Gm-Message-State: AOJu0YyqGQqGbNIC/sRXdIn4Eob/kj6UoZdUQMScba7d/fhB9GNQBtJz
+ yAS6ucXrtNasa3l9eaLMbagoPjpJ7+qbu5K49nS1OtS4VvVNVbLBHmX/+4Ge87K64S8=
+X-Gm-Gg: ASbGncs03V2zIZrY4iEV+HBxA7DvgzNhvR/9lerO46+g32LCOr75nwF1IfrzcXq4SpW
+ QK8GANQtQg4LG8aLUVxNsDQcS/SwSFCo4FJbMSQvY9OkqHZjtIJyA95MmTB4UIDU9gHLAdxzvy6
+ dOZ+EQcMGaza7t8K/06hYnDEBhm3dAGqLLkyENqBJYUAOf21tBX9p+VbxwuHi/wWsgHCtoMay+U
+ 77pzBAMM5zxBwOdmnwB2JHPhE2xBxR1beKiBzInuWESO9xN/4daPr9p827V96o20Fkyxj9F23qQ
+ OdlaTh8hADyD3DSW6l3H3qEtmL+OGuxoFSgpYToquM77AHhbBSZsiau1q40e1HSWmBO4cY395qC
+ iO0CG1dTl7YJzyk027opiyzvwUGG6+XOcXA==
+X-Google-Smtp-Source: AGHT+IFuFf8b0FN8m1f6QwjfoO5kUp2eWUieR36l5Mw4cqCx0SRMNKUchjBVGkuWlbdtmtCQOxC3yA==
+X-Received: by 2002:a17:906:7953:b0:b04:813e:491 with SMTP id
+ a640c23a62f3a-b04813e1a1amr139361166b.12.1756973495989; 
+ Thu, 04 Sep 2025 01:11:35 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61cfc52ade4sm13646124a12.45.2025.09.04.01.11.30
+ a640c23a62f3a-b0471c7a163sm248962666b.47.2025.09.04.01.11.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 04 Sep 2025 01:11:32 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 674E15F913;
+ by draig.lan (Postfix) with ESMTP id 807A05F92E;
  Thu, 04 Sep 2025 09:11:28 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -130,16 +130,16 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
-Subject: [PATCH v2 002/281] scripts/minikconf.py: fix invalid attribute access
-Date: Thu,  4 Sep 2025 09:06:36 +0100
-Message-ID: <20250904081128.1942269-3-alex.bennee@linaro.org>
+Subject: [PATCH v2 003/281] scripts/minikconf.py: s/Error/KconfigParserError
+Date: Thu,  4 Sep 2025 09:06:37 +0100
+Message-ID: <20250904081128.1942269-4-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -164,30 +164,31 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
 
-Fix parse method to use `defconfig` global variable instead of the
-non-existent KconfigParser class attribute
+Error is not defined in this script, raise KconfigParserError instead.
 
-Fixes: f349474920d80838ecea3d421531fdb0660b8740 ("minikconfig: implement allnoconfig and defconfig modes")
+Fixes: 82f5181777ebe04b550fd94a1d04c49dd3f012dc ("kconfig: introduce kconfig files")
 Signed-off-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
-Link: https://lore.kernel.org/r/20250820-scripts-minikconf-fixes-v1-1-252041a9125e@linaro.org
+Link: https://lore.kernel.org/r/20250820-scripts-minikconf-fixes-v1-2-252041a9125e@linaro.org
 Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
 ---
- scripts/minikconf.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ scripts/minikconf.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/scripts/minikconf.py b/scripts/minikconf.py
-index 6f7f43b2918..2a4694fb6a3 100644
+index 2a4694fb6a3..4de5aeed11a 100644
 --- a/scripts/minikconf.py
 +++ b/scripts/minikconf.py
-@@ -340,7 +340,7 @@ class KconfigParser:
+@@ -363,7 +363,9 @@ def parse_file(self, fp):
  
-     @classmethod
-     def parse(self, fp, mode=None):
--        data = KconfigData(mode or KconfigParser.defconfig)
-+        data = KconfigData(mode or defconfig)
-         parser = KconfigParser(data)
-         parser.parse_file(fp)
-         return data
+     def do_assignment(self, var, val):
+         if not var.startswith("CONFIG_"):
+-            raise Error('assigned variable should start with CONFIG_')
++            raise KconfigParserError(
++                self, "assigned variable should start with CONFIG_"
++            )
+         var = self.data.do_var(var[7:])
+         self.data.do_assignment(var, val)
+ 
 -- 
 2.47.2
 
