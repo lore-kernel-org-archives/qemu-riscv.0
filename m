@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32146CA101C
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:22:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0936ACA1013
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:22:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu5Ah-0000MI-ES; Thu, 04 Sep 2025 04:18:19 -0400
+	id 1uu5AT-0007vw-Ks; Thu, 04 Sep 2025 04:18:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu55b-0006yO-2x
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:04 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1uu55R-0006oG-Ib
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:02 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54s-0004L5-MP
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:02 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-61ce4c32a36so1286312a12.3
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:15 -0700 (PDT)
+ id 1uu54o-0004IS-Ik
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:53 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-619487c8865so3299343a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973534; x=1757578334; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973529; x=1757578329; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V5Zye4y6NxJaSczxcVcmt24avvGWMTOUTr/+SGRum6M=;
- b=oZhNqbatmZbF5XPkK5klFuGhvaJvT6KVFz3fRH5XG27CwSAMYzsM9qP3Z66ez/2krB
- 5CqKOiqSTDkzYL8UacVOA4M0qqv84l8ThZl82hpeftWyN8flWAMGoNPv+1PjHx13Hi2s
- ibd/bBmPAoWBHnyY5EoHa3mqel3RxePPgW/5d4UPDMopgAYqvY9+1BNM92n3AwXSoSg/
- /e/81SCMDBKmctQZKsiRKSfg3B7KIfSddVQn5+F2jXs+M4s+vsOHLjxxixd0NoEkx1GE
- j3IWQ1zF1RvTvW8vuXuO9TP1Frx2TBlXbpEm911qCY4hkqhue9i/eeZ0J42pAa7569Mi
- yOhQ==
+ bh=yLl9oYpNkKlC5u6Dy+xpIH1LWB2sTjU8xRvbErhSckk=;
+ b=JfQGnLN7wlpBU3Nh26joYZOJ0Mz8cEWd5b0NVhOr7Rcq3xKhk2gDZpQCJS46CNVpxD
+ i4XdCv+3mqdnKcNvpa9RWfkphNwI24oLSQr+v61moDMZx+f3421iycK3LQpE9vCT04ew
+ V6pqtyjyE+5qwOMIRfMj5UI7tnO7J4FSCB4NYENQmavRzdMltznTWlrGqjgv5fp9I5B5
+ wlQV7C5EozBFK8O7hacQh8QDlcRzidhv6Q4WisNfNR+tlwtVXPDz3jAmrXYzsLomTz3O
+ Mq+i3D6n8TF+drQiuvTP8JPq4UrVTBEGEHWybikFnKmWQFWDXKLIoC2dTmC8kgA5PYsZ
+ 1y2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973534; x=1757578334;
+ d=1e100.net; s=20230601; t=1756973529; x=1757578329;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V5Zye4y6NxJaSczxcVcmt24avvGWMTOUTr/+SGRum6M=;
- b=i903YgPx22wAG556t+H1EMuLy08oQdOjGo5OunDm+p4UeEz9Eyt4w34Bzb5BwA66JV
- +ITeFWVfd8Ud8nm28MMdc4q/1zPrNqjBvoBuCip6fE+5PO/SpEO+TldBhYlsehyzdaUN
- pbPiHeA2nQogQXWEmnXnIn83upYdYXVHCCvvJzpqtNmO+ia+x3uW3qkJwOWgxOC7ay4/
- PBIjJYK1LsOLzLghH9yQNbK+q9XNzqvU0dPbMCJdNVUBFq27iqCC9Sw3/TDpkhFt9pVA
- obU+cP4bSEvit/plYUDtR2gLpdk2aAlfQhTkJNqwyjIRnfrukz3JoRGCVOT7tzn61fpK
- 7c3w==
+ bh=yLl9oYpNkKlC5u6Dy+xpIH1LWB2sTjU8xRvbErhSckk=;
+ b=UY0EDibh0+xQXZSsIfO46dJ5WMNcMYYr+OTJBxT0D6sVvT/vAuMB+kch+34aCVYnbK
+ aS/+rja01QzOab3Lmk/G+2anJhwOM9rIHQW7C51Ik/o0gFJzK54rFAt546eyFYPJPmxR
+ dUIUvPBgjiFI8zbpjiSBwIWhfeHCk7sSzmZN9ywTxlBKCd2bGcyLo69/sABkqiHpu3iF
+ mt5I3YWzUOP4sYwnZbwnO0bkbEVAkbI0Y818Pvnss9NNh66/Zu5aLK154cvIbf0qRod9
+ ACtq5r1vZ3RVakxBNeq5T7M5Ma6wKalKAZE9e+m7Ld1/ekqUgEjoLEdD9ixItbEtjPab
+ 1EwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWafT7RyZds0ZnKM4fjIarrITtuuP/eKz1Rej0yHfHQ9IL1BqCoNLjBy8+1dY6FkqIVNA5DQnk9t9xe@nongnu.org
-X-Gm-Message-State: AOJu0YymcPV9d1z+fLxvreY29/18CmGGxJ0w4Db91ZOpW3D6LYHa2caG
- zTWBIUp20/qYMKNsFzdghxY8ksURpjWlfOcLinAuVVdBVKm97QfftV1mK9/N/yXkyIw=
-X-Gm-Gg: ASbGncsSrDIllva/e3i1IgqttvVAxbtvv6icyWTmh32ibj2SOO2ixrJ9+V54XVyeuPP
- jwzCrhTdO8+2wdzzfemPF+Y5mALrOGAsAD//zNhSH5HkbvQxml4FrpZPlxgCl0ixF+ikVqTnTuS
- kCcEv5GUaSBv4cnqi37F4bbYVCQUFddjGGKlTDsLTXlRErfr/cD2Exf6ujvP97+pTVMPQ3n7xyw
- za2Ncbm267eS1SUMAMZSViPELEb27Y0NqtIjCZSALe7oYzNOjjq4MnLf+wTLTqO5ZXijwcAFnfb
- 9LL1DR81hrnWYXCtIFJk/BfjPzVEMIsK0f12YOpcv3RViFXyazOVSL1xVONBJ4yp79WLhtR+fIS
- aP15pOsogqQJBaLOpylStje0jhI2EvN8edA==
-X-Google-Smtp-Source: AGHT+IGvhyi3Ob8FQTO0E+SlWXz70PknUDYB759PnOR+EDDgh33qtQBCOSrVgpXzaEOgq2NGLcCnnA==
-X-Received: by 2002:a05:6402:2549:b0:618:afa:70b1 with SMTP id
- 4fb4d7f45d1cf-61d26c32e70mr15695243a12.20.1756973533908; 
- Thu, 04 Sep 2025 01:12:13 -0700 (PDT)
+ AJvYcCU0cC2F0tVX6NquUB5YH+wWgShuHBxia7IP4e+2rbv1uLAWUSBeZmOqQI2ZWgcV4BncTZn1BoRGoabt@nongnu.org
+X-Gm-Message-State: AOJu0YwvZxDgbxq+p5+EkA6D1INtOObM59njVPZh0/0X3VMGZh2wyg8b
+ DlzZRwautgTp0jpDCjqsyW9rnj6I0PhlOob6hl6nRSk0jDFqfl13AqHxdE60yZIF0Tg=
+X-Gm-Gg: ASbGnctr3EhbHBXDPZ3/iGwlGc/pXmQRtq05HNSQwnS8T6j4jlo41cqrTNBbiJItFe5
+ g9Y6JMinvBLV6H/K0JXqm9Z68tO5hQIoTShYz+yB33WVhX3Cxi9B9lUdLq57+CGaxHOZpiY/f6X
+ Cz5e+8++82+OJGD4Nk3+7NDCkHttkJmV1DETBqHFnFmOhBtGBgL1LoLMxXCE4Zbxvsn3TqMZAnp
+ LMkNW3r2UBV4HrbrLEr4W4AAWi9lumTSUHXjMBmaidQYuFfrQQY8i9dLuMxx7ZBAXw8OIWa5fHv
+ F/eq/GtSI2JNWYINTahieqU0qsj8aBle1qsBXyZChOlGlnB903Y3e7ywMQW+nRQsWuV9xxuxodz
+ JHCEqFbD1KdfCC1sKfyrMAx9yq9OFEVZcnk9a82P7XiRe
+X-Google-Smtp-Source: AGHT+IHg43VIz5IWaoCglFsXYUVyXtk+RFiP5eDwfdW8F/G9pRndbxerLOqZv98JEUjySgovhYynfw==
+X-Received: by 2002:a17:907:3fa2:b0:b04:3623:aa10 with SMTP id
+ a640c23a62f3a-b043623b1c6mr1473568066b.2.1756973529066; 
+ Thu, 04 Sep 2025 01:12:09 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61cfc4bbc6bsm13985707a12.29.2025.09.04.01.12.03
+ a640c23a62f3a-b018fe7c638sm1311287266b.6.2025.09.04.01.12.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:12:10 -0700 (PDT)
+ Thu, 04 Sep 2025 01:12:04 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id BA7BD5F93B;
+ by draig.lan (Postfix) with ESMTP id 7EACA60AD9;
  Thu, 04 Sep 2025 09:11:38 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -130,16 +130,16 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
-Subject: [PATCH v2 082/281] linux-user/openrisc: Create init_main_thread
-Date: Thu,  4 Sep 2025 09:07:56 +0100
-Message-ID: <20250904081128.1942269-83-alex.bennee@linaro.org>
+Subject: [PATCH v2 080/281] linux-user/mips: Create init_main_thread
+Date: Thu,  4 Sep 2025 09:07:54 +0100
+Message-ID: <20250904081128.1942269-81-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -167,53 +167,72 @@ From: Richard Henderson <richard.henderson@linaro.org>
 Merge init_thread and target_cpu_copy_regs.
 There's no point going through a target_pt_regs intermediate.
 
+Note that init_thread had set cp0_status in target_pt_regs, but
+target_cpu_copy_regs did not copy to env.  This turns out to be
+ok because mips_cpu_reset_hold initializes CP0_Status properly.
+
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- linux-user/elfload.c           |  7 +------
- linux-user/openrisc/cpu_loop.c | 11 ++++-------
- 2 files changed, 5 insertions(+), 13 deletions(-)
+ linux-user/elfload.c       |  8 +-------
+ linux-user/mips/cpu_loop.c | 16 ++++++----------
+ 2 files changed, 7 insertions(+), 17 deletions(-)
 
 diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-index 3f9ec493595..03c95397744 100644
+index 0feccfbe916..ac96755b06c 100644
 --- a/linux-user/elfload.c
 +++ b/linux-user/elfload.c
-@@ -673,12 +673,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs, const CPUMBState *env
- #define ELF_CLASS ELFCLASS32
- #define ELF_DATA  ELFDATA2MSB
+@@ -581,13 +581,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
+ #define elf_check_abi(x) (!((x) & EF_MIPS_ABI2))
+ #endif
  
 -static inline void init_thread(struct target_pt_regs *regs,
 -                               struct image_info *infop)
 -{
--    regs->pc = infop->entry;
--    regs->gpr[1] = infop->start_stack;
+-    regs->cp0_status = 2 << CP0St_KSU;
+-    regs->cp0_epc = infop->entry;
+-    regs->regs[29] = infop->start_stack;
 -}
 +#define HAVE_INIT_MAIN_THREAD
  
- #define USE_ELF_CORE_DUMP
- #define ELF_EXEC_PAGESIZE 8192
-diff --git a/linux-user/openrisc/cpu_loop.c b/linux-user/openrisc/cpu_loop.c
-index 306b4f8eb43..8c72347a99a 100644
---- a/linux-user/openrisc/cpu_loop.c
-+++ b/linux-user/openrisc/cpu_loop.c
-@@ -83,13 +83,10 @@ void cpu_loop(CPUOpenRISCState *env)
+ /* See linux kernel: arch/mips/include/asm/elf.h.  */
+ #define ELF_NREG 45
+diff --git a/linux-user/mips/cpu_loop.c b/linux-user/mips/cpu_loop.c
+index 6405806eb02..e67b8a2e463 100644
+--- a/linux-user/mips/cpu_loop.c
++++ b/linux-user/mips/cpu_loop.c
+@@ -211,12 +211,9 @@ done_syscall:
      }
  }
  
 -void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
 +void init_main_thread(CPUState *cs, struct image_info *info)
  {
+-    CPUState *cpu = env_cpu(env);
+-    TaskState *ts = get_task_state(cpu);
+-    struct image_info *info = ts->info;
 -    int i;
 +    CPUArchState *env = cpu_env(cs);
  
--    for (i = 0; i < 32; i++) {
--        cpu_set_gpr(env, i, regs->gpr[i]);
+     struct mode_req {
+         bool single;
+@@ -245,12 +242,11 @@ void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
+ 
+     struct mode_req prog_req;
+     struct mode_req interp_req;
++    target_ulong entry = info->entry;
+ 
+-    for(i = 0; i < 32; i++) {
+-        env->active_tc.gpr[i] = regs->regs[i];
 -    }
--    env->pc = regs->pc;
--    cpu_set_sr(env, regs->sr);
-+    env->pc = info->entry;
-+    cpu_set_gpr(env, 1, info->start_stack);
- }
+-    env->active_tc.PC = regs->cp0_epc & ~(target_ulong)1;
+-    if (regs->cp0_epc & 1) {
++    env->active_tc.gpr[29] = info->start_stack;
++    env->active_tc.PC = entry & ~(target_ulong)1;
++    if (entry & 1) {
+         env->hflags |= MIPS_HFLAG_M16;
+     }
+ 
 -- 
 2.47.2
 
