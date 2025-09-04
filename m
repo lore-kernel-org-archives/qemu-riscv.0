@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A380ACA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30FEFCA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:20:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu54Y-0006Cu-N0; Thu, 04 Sep 2025 04:11:58 -0400
+	id 1uu5Ah-0000Lp-AP; Thu, 04 Sep 2025 04:18:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54U-00069j-UJ
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:54 -0400
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ id 1uu55Y-0006wi-N3
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:04 -0400
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54H-000407-7C
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:54 -0400
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b0428b537e5so122682666b.3
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:40 -0700 (PDT)
+ id 1uu54w-0004Hq-6I
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:59 -0400
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b042cc3962aso114361066b.0
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973499; x=1757578299; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973527; x=1757578327; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JNutAIaXOMQtmCL/HAblUioHloxc8S7R+7KvtZJ66hg=;
- b=WELSlFtnFMupd5sqLHWtp02i//6odsSXXrotDo50BaGuGqhK6gx47RO6P8p80vgWyi
- JTx/DoQ8vbPmIog8yXfdjSsPBzoq9Y4apzi3aMh6dzF+67TDi3jrs5vIwa5ecXt0YznJ
- zUgN+4D4Z/jWn7WSPbBAZWWwmQPZXyQVbHbFWD2z4WvKVpHLK3g+ei/Di+7/3SAgKzbN
- 2+03SqGkQ5vc0MDwP4j/ViAxhkQkRg+5ZQj9oOem3yS6hb0iwcDj0nFZH/LJgvVSQyIk
- kOv2yRCNB+EaS3HqFiEs54QJVL+ZblJTvFOZIDrRm28enddR0AfRuQsCNhCg+L9xKtq0
- JQvw==
+ bh=nJY1IlIgq7GGkBP3hhYu6s36xjwpVbPeSOjHkNAYnEM=;
+ b=cyobJwuGRt9H6UNvZA+/NQVgRyPPSxsvf4MBHiYtSPwUUeoBI1jFRv0yyp3/H5L/Cc
+ 5MOUQzlZU3T5Ag2a+T71bKF670X94XY/cB8gpLjlxFAqYuHy9XMvyMDtOB9POphkJERq
+ rROKl6A0psCzEG8M40PnoXfhB77RS5wpIqp50qQ1uKbSOb0a8IKkhpEFaSX94oGfU3mc
+ OEEhLFEeRH9+dJTHgltNhAWkGu2y8FgBSmiFNhrefh9r2bjbyk1vzBEpPkPj7WWC6QMX
+ vhXqkFHTGAWnGAvIEd5+uWbFK2hl04N280pLYhpZRTJDUnFHg+MRtMUnXXu+g8GDePoH
+ Aw4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973499; x=1757578299;
+ d=1e100.net; s=20230601; t=1756973527; x=1757578327;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JNutAIaXOMQtmCL/HAblUioHloxc8S7R+7KvtZJ66hg=;
- b=s3Yy92Aglyxyr2TKlc6vr++z02R9SmS5jkgf039ibMbiFxMrlW3nvOk71w1ZbQR2Fm
- zmuIAKeNfI3OI4vGdr9xGiymG4Z8IAeIFuHCHjaNrTsZj3svf3SHissGR4auwn1BLocI
- W8nCtNX6pbrSTGLbWOIQmX1CCvfj39zrVdvoQzePBpfFkoJHA3x0I6hMd9Uso0SNAemG
- CwyugAEpJNZXJSQEkjWBnRM3FN/CqCPD/aApy6YSicNNdgrQkCfMJPF6IqKIcvuRZLwK
- NNPIzy53p42n7UwohnkKSbPaoeWyAbkJkIXc98ZnV+vV5h4MSgIfzLNA5HC6EAmWgsq7
- w7jQ==
+ bh=nJY1IlIgq7GGkBP3hhYu6s36xjwpVbPeSOjHkNAYnEM=;
+ b=SzETXXGOMbP+g+MH08lfa6Okoce+YCgQKJB50E4leuYMJaTl+bsn2UHARG8mx8aktz
+ eZH8sOnj930x1zMggO/GDEiUkt0opwWIO8hUIWR3QwAThvJVdradlyXR14ntv61qEtYs
+ rwsC9jBni7N4x5aEpdMUWTjB1At79uEmHdq2g4DlPnTGUIDhWxNM+xD4FYdFD7ioco9h
+ Mtj2BtG4nTL2iOjr1U7pUdtcwFnkkBjYQWVh8j1tUdlzBetyAqHV36Ma+9yn8jHioh5y
+ hYXMJhJ8Zo4i64k+rTyRjq239gPyVKZHDXO5CApDWEl4nBhhDHbWQSSCpf6Jb1hNEfSR
+ fRtg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3psJJYtR+dSL5XKkHugTHeWL1s9JMHAECmGKg3uAYyJ0ioYya4ZF7KfpZkjR/YtHbrWj6tF6nOgv+@nongnu.org
-X-Gm-Message-State: AOJu0Yw/QESCdPCE1/WLN8NxDS6X+PNnRNUEbVgSPs/OjhqP61aAPfNQ
- 45NQ8Zx4ie7iLgRMcNf91v4r010Vrkm2iPOFAb67heWLo/nxv4uiFKbCw8jylQXh1QU=
-X-Gm-Gg: ASbGncvTGYQamONUYDxLE0J41rnDNsbLc7rbSjE9fowdwLlleo/k/SpbPzzARmnN9v6
- A0yeys0c9kBz33k5LYUKVUdS7KHATLo7EPHlF/SGiFeqMvYwa1hkgO75PLzZVCgmnWXSpJkW1LT
- hj6vUZ5Z+WRlKENakdMdgo6XgVYeOO7xopD3ejpVGplvOjunleDFO2wwshoRnq1+lmxpe4Vopmt
- vxqf+Rgb4DPNc1EMDiiIKzh9RSB/CKs3wl74EUGPbx3ClKEX66+KnHhHj2DpW5wWV83Z2SgLrrF
- z+dkB79+og9k5AC2QTtC4yJ9Uj6qntvMUJH78sz6fd9N0IXejb8Nd4apAdOXyKcC8chbZdFhnO6
- TE6CJtyHWyTa0Pa4f2SKjxT4L2NFJvkBhYz2zp1MTl9jr
-X-Google-Smtp-Source: AGHT+IFJkCbW6+YbkwCqXH5HqGu4cDJmqLYEEKmaO7rAylz2zE8LC1W+s4a2pcKUaXmJqvD/qrocUg==
-X-Received: by 2002:a17:907:948a:b0:afe:93e2:3984 with SMTP id
- a640c23a62f3a-b01d8a321f3mr1572672866b.8.1756973498594; 
- Thu, 04 Sep 2025 01:11:38 -0700 (PDT)
+ AJvYcCVeGZRlT7GWf7Br562THBsoZVooBtOufy00Tf2G6NFn4Vs8MY/3xfX5sQM4D1zfROHKTF0tRfI0Vs0l@nongnu.org
+X-Gm-Message-State: AOJu0YxvHkH8pTQydjEQQPRGJYocQsWCT0Oww97D+/6jkF7BYR3robo+
+ RP6DS6qCzLtaGfHMd647zEZvo3kaj0K7qM301MixR07TEuQ4Z53gknrm9lTOvJYeYUI=
+X-Gm-Gg: ASbGncv4Rrcwp1nZfe4JLC1y/qJqinPK1e0M1trNL+KZ3/6lq3V9YYk4vCL3QZsFp6U
+ fMzAmEcyNn4W2Lv4s+EnR3wvGHriCg5qp4h/33WZVI5BQSz94DGIomzZQ2l070/NCeOzUX9XI+2
+ dhQ5edo+IOP9hZOqrLtoioGK58exsAgiIu0wkL2yQdBRNzjgAT/KmLEb/PYomRKH/hCTduMDUN2
+ TwdjEylo48qEimQFH9f/Vrnqa5K8HOxp3iYYRYdJ0bTKNrp91QqoW0yEpr7Uw1kmuXu1Cz21ZyV
+ Uu7U/kzdReP2cZJSj/mP6lgKzTev4D85iStxQ2SBbxdRtlaMcM0MhjNllxdNC1rDmqKwnYczsM8
+ hJJi74BK3dkRNHXTbFAt0z9Y=
+X-Google-Smtp-Source: AGHT+IEi9pe0oeBOE15/8xuZT4mmtCw/EODsHqznTJDr3Z4WP9YjhwiV366LnSMgu6QLvZ6qkctWyg==
+X-Received: by 2002:a17:907:86a6:b0:afe:bdcb:9e62 with SMTP id
+ a640c23a62f3a-b01d973074dmr1930653766b.33.1756973527252; 
+ Thu, 04 Sep 2025 01:12:07 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aff0971379esm1438937866b.102.2025.09.04.01.11.33
+ a640c23a62f3a-b0424cc1698sm987487966b.21.2025.09.04.01.12.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:11:37 -0700 (PDT)
+ Thu, 04 Sep 2025 01:12:04 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id EA7D95F93B;
- Thu, 04 Sep 2025 09:11:28 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 093DB60ABF;
+ Thu, 04 Sep 2025 09:11:38 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -129,18 +129,17 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
- Stefan Hajnoczi <stefanha@redhat.com>
-Subject: [PATCH v2 007/281] Open 10.2 development tree
-Date: Thu,  4 Sep 2025 09:06:41 +0100
-Message-ID: <20250904081128.1942269-8-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
+Subject: [PATCH v2 076/281] linux-user/aarch64: Create init_main_thread
+Date: Thu,  4 Sep 2025 09:07:50 +0100
+Message-ID: <20250904081128.1942269-77-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::630;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -163,20 +162,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Stefan Hajnoczi <stefanha@redhat.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+Merge init_thread and target_cpu_copy_regs.
+There's no point going through a target_pt_regs intermediate.
+
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- VERSION | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ linux-user/aarch64/cpu_loop.c | 14 ++++++--------
+ linux-user/elfload.c          | 10 +---------
+ 2 files changed, 7 insertions(+), 17 deletions(-)
 
-diff --git a/VERSION b/VERSION
-index 4149c39eec6..9856be5dd98 100644
---- a/VERSION
-+++ b/VERSION
-@@ -1 +1 @@
--10.1.0
-+10.1.50
+diff --git a/linux-user/aarch64/cpu_loop.c b/linux-user/aarch64/cpu_loop.c
+index 030a630c936..4c4921152e8 100644
+--- a/linux-user/aarch64/cpu_loop.c
++++ b/linux-user/aarch64/cpu_loop.c
+@@ -137,10 +137,10 @@ void cpu_loop(CPUARMState *env)
+     }
+ }
+ 
+-void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
++void init_main_thread(CPUState *cs, struct image_info *info)
+ {
++    CPUARMState *env = cpu_env(cs);
+     ARMCPU *cpu = env_archcpu(env);
+-    int i;
+ 
+     if (!(arm_feature(env, ARM_FEATURE_AARCH64))) {
+         fprintf(stderr,
+@@ -148,14 +148,12 @@ void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
+         exit(EXIT_FAILURE);
+     }
+ 
+-    for (i = 0; i < 31; i++) {
+-        env->xregs[i] = regs->regs[i];
+-    }
+-    env->pc = regs->pc;
+-    env->xregs[31] = regs->sp;
++    env->pc = info->entry & ~0x3ULL;
++    env->xregs[31] = info->start_stack;
++
+ #if TARGET_BIG_ENDIAN
+     env->cp15.sctlr_el[1] |= SCTLR_E0E;
+-    for (i = 1; i < 4; ++i) {
++    for (int i = 1; i < 4; ++i) {
+         env->cp15.sctlr_el[i] |= SCTLR_EE;
+     }
+     arm_rebuild_hflags(env);
+diff --git a/linux-user/elfload.c b/linux-user/elfload.c
+index 95868739546..f93afbdcea3 100644
+--- a/linux-user/elfload.c
++++ b/linux-user/elfload.c
+@@ -395,15 +395,7 @@ static const VdsoImageInfo *vdso_image_info(uint32_t elf_flags)
+ #define ELF_ARCH        EM_AARCH64
+ #define ELF_CLASS       ELFCLASS64
+ 
+-static inline void init_thread(struct target_pt_regs *regs,
+-                               struct image_info *infop)
+-{
+-    abi_long stack = infop->start_stack;
+-    memset(regs, 0, sizeof(*regs));
+-
+-    regs->pc = infop->entry & ~0x3ULL;
+-    regs->sp = stack;
+-}
++#define HAVE_INIT_MAIN_THREAD
+ 
+ #define ELF_NREG    34
+ typedef target_elf_greg_t  target_elf_gregset_t[ELF_NREG];
 -- 
 2.47.2
 
