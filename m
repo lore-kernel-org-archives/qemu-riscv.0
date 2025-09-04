@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E70C5CA1013
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A380ACA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:20:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu59s-0006HV-Vv; Thu, 04 Sep 2025 04:17:29 -0400
+	id 1uu54Y-0006Cu-N0; Thu, 04 Sep 2025 04:11:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu55S-0006vj-V5
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:02 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ id 1uu54U-00069j-UJ
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:54 -0400
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54r-0004Lf-GQ
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:54 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-61e8fdfd9b4so1639507a12.1
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:15 -0700 (PDT)
+ id 1uu54H-000407-7C
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:54 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b0428b537e5so122682666b.3
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973534; x=1757578334; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973499; x=1757578299; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2o641iW9Eoei/+yvUIKi4qJ7pGzfbvmdWyUoyzoyuTo=;
- b=kLS9wcHTZ98o9sIon35e/AtjzIRP+tFVU9jCCVr7lX2+dcAxgs7rdrqLurw6V78Nks
- rngpBWIkmkrckBjLvTUxdvUMZGXGhhZi5cXUOfjMfs4NVNqdj+rtz3lGiGM7vhPGeMQw
- aoAqgvVrMMXxlT9D4vYZrkcEwVQhI75VZp05rRfiiHbfmbn5C1kh+UWy7BCYABVz7Fex
- t/rI+SrrEuG4LGOwHns1vwmvvG7gxMT6AiMoao9puOABjjPBSGrQxgbnpUjCpAb0lsjx
- HRDaaTib8D3oFwwfVjSDDZfASHvgyEYQzoS9VzSNF8dtLs7rk5H/7pcGHIGYUSDT5Q/X
- mUqw==
+ bh=JNutAIaXOMQtmCL/HAblUioHloxc8S7R+7KvtZJ66hg=;
+ b=WELSlFtnFMupd5sqLHWtp02i//6odsSXXrotDo50BaGuGqhK6gx47RO6P8p80vgWyi
+ JTx/DoQ8vbPmIog8yXfdjSsPBzoq9Y4apzi3aMh6dzF+67TDi3jrs5vIwa5ecXt0YznJ
+ zUgN+4D4Z/jWn7WSPbBAZWWwmQPZXyQVbHbFWD2z4WvKVpHLK3g+ei/Di+7/3SAgKzbN
+ 2+03SqGkQ5vc0MDwP4j/ViAxhkQkRg+5ZQj9oOem3yS6hb0iwcDj0nFZH/LJgvVSQyIk
+ kOv2yRCNB+EaS3HqFiEs54QJVL+ZblJTvFOZIDrRm28enddR0AfRuQsCNhCg+L9xKtq0
+ JQvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973534; x=1757578334;
+ d=1e100.net; s=20230601; t=1756973499; x=1757578299;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2o641iW9Eoei/+yvUIKi4qJ7pGzfbvmdWyUoyzoyuTo=;
- b=YU9YYLvtwzV2J8tBj2kHbT/3amIkHvVP3ShNZxPw3o7IEG7CSv3SJMwTUhZVokKm9W
- T23pVqu3FCs2DmCYbCiwrvOggBxIwFVaRHet5pSr4k3Uzeb9bYOSpogjcTgFLNXhX1q4
- 710TXaurlnPnoPhBAkG873811OttRWl3sQiYfcItI1o/+Ruei/Qq1VJosk5zDvr40X6x
- Gyz6xn5bi4SyNytywAqijk/MVuYMGfXHEu6+5jhsVEkfM39pQ2I3XYNiQBSwaFSXlc2n
- 45taKi+6wHD08zZMiQcnTC9G6oCbyz4ly3A5I+qIjkBBmKsKGgO+erKMzXzyWMOCi0Ij
- gAag==
+ bh=JNutAIaXOMQtmCL/HAblUioHloxc8S7R+7KvtZJ66hg=;
+ b=s3Yy92Aglyxyr2TKlc6vr++z02R9SmS5jkgf039ibMbiFxMrlW3nvOk71w1ZbQR2Fm
+ zmuIAKeNfI3OI4vGdr9xGiymG4Z8IAeIFuHCHjaNrTsZj3svf3SHissGR4auwn1BLocI
+ W8nCtNX6pbrSTGLbWOIQmX1CCvfj39zrVdvoQzePBpfFkoJHA3x0I6hMd9Uso0SNAemG
+ CwyugAEpJNZXJSQEkjWBnRM3FN/CqCPD/aApy6YSicNNdgrQkCfMJPF6IqKIcvuRZLwK
+ NNPIzy53p42n7UwohnkKSbPaoeWyAbkJkIXc98ZnV+vV5h4MSgIfzLNA5HC6EAmWgsq7
+ w7jQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVD7k5zq5uQoR3aZyHtJ1kd+LTQVBZDMy6Bch2ys0TZXFe5lEAKfZ2KAa4APShRqXy5Pz3IAmUkQnwJ@nongnu.org
-X-Gm-Message-State: AOJu0YxXYFrGZA8YkgFYo6mtfHI2QYSFqt1t33eqDaISr9qM0wTzUQRh
- J0WFo5Tb7Ps+HtRTOufh8vpcr+U7Jt0lnfrCs+HBLR8rRouKmvnWIJu/f0JQbWIm7bQ=
-X-Gm-Gg: ASbGncshN8YY0GTF2kYz6zp7sxzZIxDpFihkOJff6NiE6SjMk7VcQixfRA0Rm9FI5Ck
- qfY25VPVfww7PpDtAE6bnLD0oB3/T8ReW8xmGQetLx1eqk7rljWKhAiGsF2dnSszfOcEha8bdXo
- 8mYWNJ64bFPnpXEVLACfKYV3Y442ma4IF7ZoPvyY01INyMJTMLF8XlFZrINU2Rae3tKF6gSSdWL
- 2nZk6MhpLfGfiWH6C0G4BeLgrfPp7LQQAErOpQODG2kAy4f4OCaKWIUwcY0Fz30LntoPS+uyNBh
- XfpCXF86+i6mRl3cAyyFS7YnkrUnYB6FvPjLF5H4B7gUXGbxBBJYOAVfrGnw3g1azVgX3STnx0K
- a7EFNPZma3QDfF+eORfWfHQc=
-X-Google-Smtp-Source: AGHT+IGLKV6kj/wdkKv1zH+QlHElinS7UZypfjzlhnOqgFK2g8smAfI2YLmWX9/F3AuN9VCXaBC4yQ==
-X-Received: by 2002:a05:6402:35d3:b0:61c:7ee2:f41a with SMTP id
- 4fb4d7f45d1cf-61d26d93883mr16733782a12.15.1756973534355; 
- Thu, 04 Sep 2025 01:12:14 -0700 (PDT)
+ AJvYcCV3psJJYtR+dSL5XKkHugTHeWL1s9JMHAECmGKg3uAYyJ0ioYya4ZF7KfpZkjR/YtHbrWj6tF6nOgv+@nongnu.org
+X-Gm-Message-State: AOJu0Yw/QESCdPCE1/WLN8NxDS6X+PNnRNUEbVgSPs/OjhqP61aAPfNQ
+ 45NQ8Zx4ie7iLgRMcNf91v4r010Vrkm2iPOFAb67heWLo/nxv4uiFKbCw8jylQXh1QU=
+X-Gm-Gg: ASbGncvTGYQamONUYDxLE0J41rnDNsbLc7rbSjE9fowdwLlleo/k/SpbPzzARmnN9v6
+ A0yeys0c9kBz33k5LYUKVUdS7KHATLo7EPHlF/SGiFeqMvYwa1hkgO75PLzZVCgmnWXSpJkW1LT
+ hj6vUZ5Z+WRlKENakdMdgo6XgVYeOO7xopD3ejpVGplvOjunleDFO2wwshoRnq1+lmxpe4Vopmt
+ vxqf+Rgb4DPNc1EMDiiIKzh9RSB/CKs3wl74EUGPbx3ClKEX66+KnHhHj2DpW5wWV83Z2SgLrrF
+ z+dkB79+og9k5AC2QTtC4yJ9Uj6qntvMUJH78sz6fd9N0IXejb8Nd4apAdOXyKcC8chbZdFhnO6
+ TE6CJtyHWyTa0Pa4f2SKjxT4L2NFJvkBhYz2zp1MTl9jr
+X-Google-Smtp-Source: AGHT+IFJkCbW6+YbkwCqXH5HqGu4cDJmqLYEEKmaO7rAylz2zE8LC1W+s4a2pcKUaXmJqvD/qrocUg==
+X-Received: by 2002:a17:907:948a:b0:afe:93e2:3984 with SMTP id
+ a640c23a62f3a-b01d8a321f3mr1572672866b.8.1756973498594; 
+ Thu, 04 Sep 2025 01:11:38 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61cfc1c7a10sm14089854a12.5.2025.09.04.01.12.05
+ a640c23a62f3a-aff0971379esm1438937866b.102.2025.09.04.01.11.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:12:10 -0700 (PDT)
+ Thu, 04 Sep 2025 01:11:37 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id D4EB660AE4;
- Thu, 04 Sep 2025 09:11:38 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id EA7D95F93B;
+ Thu, 04 Sep 2025 09:11:28 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -129,17 +129,18 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
-Subject: [PATCH v2 083/281] linux-user/sh4: Create init_main_thread
-Date: Thu,  4 Sep 2025 09:07:57 +0100
-Message-ID: <20250904081128.1942269-84-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>
+Subject: [PATCH v2 007/281] Open 10.2 development tree
+Date: Thu,  4 Sep 2025 09:06:41 +0100
+Message-ID: <20250904081128.1942269-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -162,58 +163,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Richard Henderson <richard.henderson@linaro.org>
+From: Stefan Hajnoczi <stefanha@redhat.com>
 
-Merge init_thread and target_cpu_copy_regs.
-There's no point going through a target_pt_regs intermediate.
-
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- linux-user/elfload.c      |  8 +-------
- linux-user/sh4/cpu_loop.c | 10 ++++------
- 2 files changed, 5 insertions(+), 13 deletions(-)
+ VERSION | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-index 03c95397744..8604308a310 100644
---- a/linux-user/elfload.c
-+++ b/linux-user/elfload.c
-@@ -701,13 +701,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
- #define ELF_CLASS ELFCLASS32
- #define ELF_ARCH  EM_SH
- 
--static inline void init_thread(struct target_pt_regs *regs,
--                               struct image_info *infop)
--{
--    /* Check other registers XXXXX */
--    regs->pc = infop->entry;
--    regs->regs[15] = infop->start_stack;
--}
-+#define HAVE_INIT_MAIN_THREAD
- 
- /* See linux kernel: arch/sh/include/asm/elf.h.  */
- #define ELF_NREG 23
-diff --git a/linux-user/sh4/cpu_loop.c b/linux-user/sh4/cpu_loop.c
-index ee9eff3428a..259ea1cc8bb 100644
---- a/linux-user/sh4/cpu_loop.c
-+++ b/linux-user/sh4/cpu_loop.c
-@@ -81,12 +81,10 @@ void cpu_loop(CPUSH4State *env)
-     }
- }
- 
--void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
-+void init_main_thread(CPUState *cs, struct image_info *info)
- {
--    int i;
-+    CPUArchState *env = cpu_env(cs);
- 
--    for(i = 0; i < 16; i++) {
--        env->gregs[i] = regs->regs[i];
--    }
--    env->pc = regs->pc;
-+    env->pc = info->entry;
-+    env->gregs[15] = info->start_stack;
- }
+diff --git a/VERSION b/VERSION
+index 4149c39eec6..9856be5dd98 100644
+--- a/VERSION
++++ b/VERSION
+@@ -1 +1 @@
+-10.1.0
++10.1.50
 -- 
 2.47.2
 
