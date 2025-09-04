@@ -4,61 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C81ECA1015
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 06:01:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33DFDCA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 07:00:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu31y-000246-JP; Thu, 04 Sep 2025 02:01:10 -0400
+	id 1uu3xL-0006Zk-GP; Thu, 04 Sep 2025 03:00:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
- id 1uu31v-000237-DQ; Thu, 04 Sep 2025 02:01:08 -0400
-Received: from mail-m16.yeah.net ([220.197.32.17])
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uu3xH-0006Yp-0p; Thu, 04 Sep 2025 03:00:23 -0400
+Received: from [115.124.28.65] (helo=out28-65.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
- id 1uu31q-0003Tw-EQ; Thu, 04 Sep 2025 02:01:07 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
- s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=rk
- zJ4gjJh079LWNdIJucwQLnSJqoMbRVHmUlg0WwUDM=; b=ZqQrBphi6ujWsmf/Y9
- EopJJ2vBYM6I4g+BIPac+Cge32kpB+YX4VCXLZpXaXfCdQLexmEvX1m81XrAzw8Q
- smd1PDHg3YcW2yq/iwTfyvU7U/S2O/G+CEUTPvQqdJwxMqn0plT1GhacMHlNSrYO
- pez8P9DDE6UwACJ9QbO7Ba4iA=
-Received: from vcore-181.. (unknown [])
- by gzsmtp1 (Coremail) with SMTP id Mc8vCgAnLbEFK7loqUfvAw--.46633S2;
- Thu, 04 Sep 2025 14:00:39 +0800 (CST)
-From: Yang Jialong <z_bajeer@yeah.net>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: yangjialong@rvcore.com, Yang Jialong <z_bajeer@yeah.net>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH] intc/aia: fix the read of in_clrip register
-Date: Thu,  4 Sep 2025 14:00:22 +0800
-Message-Id: <20250904060022.2828441-1-z_bajeer@yeah.net>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uu3xC-0002A5-4a; Thu, 04 Sep 2025 03:00:22 -0400
+Received: from 10.13.14.160(mailfrom:chao.liu@zevorn.cn
+ fp:SMTPD_---.eXDIV52_1756968952 cluster:ay29) by smtp.aliyun-inc.com;
+ Thu, 04 Sep 2025 14:55:53 +0800
+Message-ID: <cf85034b-5f37-4b28-840b-2982a540eade@zevorn.cn>
+Date: Thu, 4 Sep 2025 14:55:52 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: Mc8vCgAnLbEFK7loqUfvAw--.46633S2
-X-Coremail-Antispam: 1Uf129KBjvdXoW7GrWruFyUZFy8ZrWDCrWrGrg_yoWfuFg_Ca
- y0k34fC34DJw1fK3WDGFs8C348Zas5uFyfGw1SgF4jkw17KrW5Gwn2qr9xZr18ury7JrZ8
- GrsxCry09r13KjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7xRMBMKDUUUUU==
-X-Originating-IP: [49.7.252.142]
-X-CM-SenderInfo: p2betyxhhuq5hhdkh0dhw/1tbiEhK+I2i5DEpypQAAsd
-Received-SPF: pass client-ip=220.197.32.17; envelope-from=z_bajeer@yeah.net;
- helo=mail-m16.yeah.net
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/2] target/riscv: Generate strided vector loads/stores
+ with tcg nodes.
+To: Nicholas Piggin <npiggin@gmail.com>
+Cc: richard.henderson@linaro.org, paolo.savini@embecosm.com,
+ ebiggers@kernel.org, dbarboza@ventanamicro.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Chao Liu <chao.liu@yeah.net>
+References: <cover.1756906528.git.chao.liu@zevorn.cn>
+ <bcb383174cf82be8116685273e271cdbdda28a59.1756906528.git.chao.liu@zevorn.cn>
+ <lzyoldc5srfkz33clacyjwdrvhyfjyjhn3bhyepo7hv32tsm6t@ogvkrjid23lv>
+From: Chao Liu <chao.liu@zevorn.cn>
+In-Reply-To: <lzyoldc5srfkz33clacyjwdrvhyfjyjhn3bhyepo7hv32tsm6t@ogvkrjid23lv>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.65 (deferred)
+Received-SPF: pass client-ip=115.124.28.65; envelope-from=chao.liu@zevorn.cn;
+ helo=out28-65.mail.aliyun.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,33 +64,147 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-4.5.7. Rectified inputs, clear interrupt-pending bits
-A read of an in_clrip register returns the rectified input values of the
-corresponding interrupt sources.
-A read of an in_clrip register doesn't should be an active interrupt
-source.
-A write of an in_clrip register should be an active interrupt source.
 
-Signed-off-by: Yang Jialong <z_bajeer@yeah.net>
----
- hw/intc/riscv_aplic.c | 3 ---
- 1 file changed, 3 deletions(-)
+On 2025/9/4 12:37, Nicholas Piggin wrote:
+> On Wed, Sep 03, 2025 at 09:52:01PM +0800, Chao Liu wrote:
+>> From: Chao Liu <chao.liu@yeah.net>
+>>
+>> This commit improves the performance of QEMU when emulating strided vector
+>> loads and stores by substituting the call for the helper function with the
+>> generation of equivalent TCG operations.
+>>
+>> PS:
+>>
+>> An implementation is permitted to cause an illegal instruction if vstart
+>> is not 0 and it is set to a value that can not be produced implicitly by
+>> the implementation, but memory accesses will generally always need to
+>> deal with page faults.
+>>
+>> So, if a strided vector memory access instruction has non-zero vstart,
+>> check it through vlse/vsse helpers function.
+> 
+> [...]
+> 
+>>  typedef void gen_helper_ldst_stride(TCGv_ptr, TCGv_ptr, TCGv,
+>>                                      TCGv, TCGv_env, TCGv_i32);
+>>  
+>>  static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
+>>                                uint32_t data, gen_helper_ldst_stride *fn,
+>> -                              DisasContext *s)
+>> +                              DisasContext *s, bool is_load)
+>>  {
+>> -    TCGv_ptr dest, mask;
+>> -    TCGv base, stride;
+>> -    TCGv_i32 desc;
+>> +    if (!s->vstart_eq_zero) {
+>> +        TCGv_ptr dest, mask;
+>> +        TCGv base, stride;
+>> +        TCGv_i32 desc;
+>>  
+>> -    dest = tcg_temp_new_ptr();
+>> -    mask = tcg_temp_new_ptr();
+>> -    base = get_gpr(s, rs1, EXT_NONE);
+>> -    stride = get_gpr(s, rs2, EXT_NONE);
+>> -    desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+>> -                                      s->cfg_ptr->vlenb, data));
+>> +        dest = tcg_temp_new_ptr();
+>> +        mask = tcg_temp_new_ptr();
+>> +        base = get_gpr(s, rs1, EXT_NONE);
+>> +        stride = get_gpr(s, rs2, EXT_NONE);
+>> +        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+>> +                                          s->cfg_ptr->vlenb, data));
+>>  
+>> -    tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>> -    tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+>> +        tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+>> +        tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+>> +        mark_vs_dirty(s);
+>> +        fn(dest, mask, base, stride, tcg_env, desc);
+>> +        return true;
+> 
+> Most of the lines changed here should just be indenting the
+> existing code into the 'if' branch. So maybe to split the patch
+> up a little and make less churn, you could do patch 1 that moves
+> this code into a function like gen_call_helper_ldst_stride().
+> 
+> Then after patch 2 it would be
+> 
+>     if (!s->vstart_eq_zero) {
+>         /* vstart != 0 helper slowpath */
+>         gen_call_helper_ldst_stride(vd, rs1, rs2, data, fn, is, is_load);
+>         return true;
+>     }
+> 
+>     [...]
+> 
 
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index a1d9fa5085..2583d6d305 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -204,9 +204,6 @@ static bool riscv_aplic_irq_rectified_val(RISCVAPLICState *aplic,
-     }
- 
-     sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
--    if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
--        return false;
--    }
- 
-     raw_input = (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
-     irq_inverted = (sm == APLIC_SOURCECFG_SM_LEVEL_LOW ||
--- 
-2.34.1
+Good idea. I've given it a try, and splitting out the
+gen_call_helper_ldst_stride() into a separate patch is also very convenient for
+review.
+
+I'll include this change in the next version of the patch.
+
+>> +    }
+>> +
+>> +    TCGv dest = tcg_temp_new();
+>> +
+>> +    uint32_t nf = FIELD_EX32(data, VDATA, NF);
+>> +    uint32_t vm = FIELD_EX32(data, VDATA, VM);
+>> +
+>> +    /* Destination register and mask register */
+>> +    tcg_gen_addi_tl(dest, (TCGv)tcg_env, vreg_ofs(s, vd));
+>> +
+>> +    /*
+>> +     * Select the appropriate load/tore to retrieve data from the vector
+>                                       ^^^^ store
+> 
+
+get~
+
+> [...]
+> 
+>> @@ -899,7 +1165,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+>>  {
+>>      uint32_t data = 0;
+>>      gen_helper_ldst_stride *fn;
+>> -    static gen_helper_ldst_stride * const fns[4] = {
+>> +    static gen_helper_ldst_stride *const fns[4] = {
+>>          gen_helper_vlse8_v, gen_helper_vlse16_v,
+>>          gen_helper_vlse32_v, gen_helper_vlse64_v
+>>      };
+> 
+> This probably comes from my patch, just remove the hunk to
+> reduce patch size. Ditto for any other stray "cleanups".
+> 
+>> @@ -915,7 +1181,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+>>      data = FIELD_DP32(data, VDATA, NF, a->nf);
+>>      data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>>      data = FIELD_DP32(data, VDATA, VMA, s->vma);
+>> -    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
+>> +    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
+>>  }
+>>  
+>>  static bool ld_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
+>> @@ -933,23 +1199,13 @@ GEN_VEXT_TRANS(vlse64_v, MO_64, rnfvm, ld_stride_op, ld_stride_check)
+>>  static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+>>  {
+>>      uint32_t data = 0;
+>> -    gen_helper_ldst_stride *fn;
+>> -    static gen_helper_ldst_stride * const fns[4] = {
+>> -        /* masked stride store */
+>> -        gen_helper_vsse8_v,  gen_helper_vsse16_v,
+>> -        gen_helper_vsse32_v,  gen_helper_vsse64_v
+>> -    };
+> 
+> I gave you an old patch without the stores done, sorry. You
+> just need to pass the store helper fn through here similarly
+> as for loads (i.e., this hunk should just be the one liner
+> change to add extra 'is_load=false' argument to the
+> ldst_stride_trans() call.).
+> 
+> Thanks,
+> Nick
+
+get~
 
 
