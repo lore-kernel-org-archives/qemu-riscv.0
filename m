@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0936ACA1013
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:22:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16553CA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:22:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu5AT-0007vw-Ks; Thu, 04 Sep 2025 04:18:05 -0400
+	id 1uu5Co-0004D4-Hj; Thu, 04 Sep 2025 04:20:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu55R-0006oG-Ib
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:02 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ id 1uu5BL-0001Y2-9D
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:19:03 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54o-0004IS-Ik
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:53 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-619487c8865so3299343a12.1
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:10 -0700 (PDT)
+ id 1uu5B3-0008De-5S
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:18:58 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6188b72b7caso946027a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:18:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973529; x=1757578329; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973916; x=1757578716; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yLl9oYpNkKlC5u6Dy+xpIH1LWB2sTjU8xRvbErhSckk=;
- b=JfQGnLN7wlpBU3Nh26joYZOJ0Mz8cEWd5b0NVhOr7Rcq3xKhk2gDZpQCJS46CNVpxD
- i4XdCv+3mqdnKcNvpa9RWfkphNwI24oLSQr+v61moDMZx+f3421iycK3LQpE9vCT04ew
- V6pqtyjyE+5qwOMIRfMj5UI7tnO7J4FSCB4NYENQmavRzdMltznTWlrGqjgv5fp9I5B5
- wlQV7C5EozBFK8O7hacQh8QDlcRzidhv6Q4WisNfNR+tlwtVXPDz3jAmrXYzsLomTz3O
- Mq+i3D6n8TF+drQiuvTP8JPq4UrVTBEGEHWybikFnKmWQFWDXKLIoC2dTmC8kgA5PYsZ
- 1y2w==
+ bh=ompVlJELO9ntgp7NqWovDalEEm5jaDFBaNVePh2Fg+k=;
+ b=lqYpu8iTmfnRDkPsYPfWztkOHruSw/9HDNGJXi2AUKgD2QshF8ZVZgxVfo5/ciCepf
+ rKV2iawkbnU1xvxO8tHX6k5Rj7eRU2cLG1LTxzQ6lLDWG9JpA6bJxjYSdl+njg0sEHyn
+ QBxAtAho0yliqPYWp9QMmnoxYQS/rz0y+IIUtlqmxVUgl1x74H+07Zua3du1gvee1brZ
+ H1Wkj7mBGshRf5sELwH7eSJ9rXk/kB4NO0CNSAGdt9nEQLlbEVtMXY7/o4I+7f+0VJGa
+ rgJwcHqh1YDPejeLnAanrDnUdOtdEpYTdT/00WOnqVxxQWn1rHTjhmrUWqkbMl2V0cHc
+ RNXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973529; x=1757578329;
+ d=1e100.net; s=20230601; t=1756973916; x=1757578716;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yLl9oYpNkKlC5u6Dy+xpIH1LWB2sTjU8xRvbErhSckk=;
- b=UY0EDibh0+xQXZSsIfO46dJ5WMNcMYYr+OTJBxT0D6sVvT/vAuMB+kch+34aCVYnbK
- aS/+rja01QzOab3Lmk/G+2anJhwOM9rIHQW7C51Ik/o0gFJzK54rFAt546eyFYPJPmxR
- dUIUvPBgjiFI8zbpjiSBwIWhfeHCk7sSzmZN9ywTxlBKCd2bGcyLo69/sABkqiHpu3iF
- mt5I3YWzUOP4sYwnZbwnO0bkbEVAkbI0Y818Pvnss9NNh66/Zu5aLK154cvIbf0qRod9
- ACtq5r1vZ3RVakxBNeq5T7M5Ma6wKalKAZE9e+m7Ld1/ekqUgEjoLEdD9ixItbEtjPab
- 1EwQ==
+ bh=ompVlJELO9ntgp7NqWovDalEEm5jaDFBaNVePh2Fg+k=;
+ b=efU6eKhUEQ6/NN+1Hbc/vDnIGaNH9ZXcUSViV3lzEWFwYajOyx0l3ijT0vfZKM5eOs
+ pVnBFEeWGIBnTmceLdNlqs9YQ4LuhgXlZ7BI4KBu0IwMJRcMjlOkV3nWG9r4UgJJT1NI
+ 0Cyi9H59N6slGTM5nyWOdepkVJXsoTeILl7KBX/xYZ5Cp8L1XOnzHQpIIDep4Avpn3Wd
+ jSONXkV/rrSTQ0tSCDQO3iqAHmO7RIPYJzYt3lL26zv+FJUJJNY5+kinCe8utIJa6/qx
+ 7w4QsWPQ3J7JuhUQtB8MSmpJZtluFZF88XUi9dGIZLBIBrHnYMZOhEsqiLDdwmZJ3NL/
+ aurg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0cC2F0tVX6NquUB5YH+wWgShuHBxia7IP4e+2rbv1uLAWUSBeZmOqQI2ZWgcV4BncTZn1BoRGoabt@nongnu.org
-X-Gm-Message-State: AOJu0YwvZxDgbxq+p5+EkA6D1INtOObM59njVPZh0/0X3VMGZh2wyg8b
- DlzZRwautgTp0jpDCjqsyW9rnj6I0PhlOob6hl6nRSk0jDFqfl13AqHxdE60yZIF0Tg=
-X-Gm-Gg: ASbGnctr3EhbHBXDPZ3/iGwlGc/pXmQRtq05HNSQwnS8T6j4jlo41cqrTNBbiJItFe5
- g9Y6JMinvBLV6H/K0JXqm9Z68tO5hQIoTShYz+yB33WVhX3Cxi9B9lUdLq57+CGaxHOZpiY/f6X
- Cz5e+8++82+OJGD4Nk3+7NDCkHttkJmV1DETBqHFnFmOhBtGBgL1LoLMxXCE4Zbxvsn3TqMZAnp
- LMkNW3r2UBV4HrbrLEr4W4AAWi9lumTSUHXjMBmaidQYuFfrQQY8i9dLuMxx7ZBAXw8OIWa5fHv
- F/eq/GtSI2JNWYINTahieqU0qsj8aBle1qsBXyZChOlGlnB903Y3e7ywMQW+nRQsWuV9xxuxodz
- JHCEqFbD1KdfCC1sKfyrMAx9yq9OFEVZcnk9a82P7XiRe
-X-Google-Smtp-Source: AGHT+IHg43VIz5IWaoCglFsXYUVyXtk+RFiP5eDwfdW8F/G9pRndbxerLOqZv98JEUjySgovhYynfw==
-X-Received: by 2002:a17:907:3fa2:b0:b04:3623:aa10 with SMTP id
- a640c23a62f3a-b043623b1c6mr1473568066b.2.1756973529066; 
- Thu, 04 Sep 2025 01:12:09 -0700 (PDT)
+ AJvYcCWwH6vXJ5q9lznBGF2sbD7NoVvp00qLYXPSZQcF6tMsKNy0vGK4X2I7s+WlDxcn+b6UL7f05cqEhb3y@nongnu.org
+X-Gm-Message-State: AOJu0YxestrxgNIUSn0oLHE3Hk9Esrykaj+jh65GKFJ20UE+ZCrkx8qN
+ 37YyRI84oUHNtFa80x9GkwK6eGVqX/ROsBaSMnlSeROMMiEA6fh65IPV84kKC5PNwCQ=
+X-Gm-Gg: ASbGnctogrmIL/g+mj6UkvX3Ai903+cw7qiK1WVN8KNVMje78UM39SGr/QKVUcCEg5P
+ Pqt5mWGpuCeZlMEqEbf+zpoHnb9r7xUId3E1jHXWEOov57K1HG+RItrQAf0wTZzJTeEqVBoS3lD
+ aquKBMFHRB8T4LIbiImAUskr1taf+5YgJar/5tjrs9D0663NVXc/9nvcEcVXm0e0n0v4itev4kM
+ cdSXAPbvy1sp0LX+DPSkN16kVD0xjP3MY1+Y45/uw/1k8UR2S+g3f+9KaegQwBfjtXejwyNc/6R
+ tUffUBvbHHLSR9hwvs6+nrYbK/ov0g0H31foq8ERndvp8irNKPP7DWt7UNYjZtz4eILpM3Njzj5
+ wf9iXobfwXzcLITGIS5GRtYcFi5Tfek1Y+w==
+X-Google-Smtp-Source: AGHT+IFXKnqgaKsY2aRYlcO4LSLsCuART/SZSEUFpFcB1viH9haZ5yBXysPjsYR6aV+gJtHba4UXNg==
+X-Received: by 2002:a17:907:e916:b0:afe:ae6c:411c with SMTP id
+ a640c23a62f3a-b01f2113c64mr1656930766b.64.1756973915989; 
+ Thu, 04 Sep 2025 01:18:35 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b018fe7c638sm1311287266b.6.2025.09.04.01.12.01
+ a640c23a62f3a-aff138a8c1dsm1395320766b.99.2025.09.04.01.18.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:12:04 -0700 (PDT)
+ Thu, 04 Sep 2025 01:18:34 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 7EACA60AD9;
- Thu, 04 Sep 2025 09:11:38 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 58E905F9D0;
+ Thu, 04 Sep 2025 09:11:29 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -129,17 +129,20 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
-Subject: [PATCH v2 080/281] linux-user/mips: Create init_main_thread
-Date: Thu,  4 Sep 2025 09:07:54 +0100
-Message-ID: <20250904081128.1942269-81-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Subject: [PATCH v2 010/281] tests/functional/test_aarch64_virt_gpu: Skip test
+ if EGL won't initialize
+Date: Thu,  4 Sep 2025 09:06:44 +0100
+Message-ID: <20250904081128.1942269-11-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x529.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -162,77 +165,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Richard Henderson <richard.henderson@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
 
-Merge init_thread and target_cpu_copy_regs.
-There's no point going through a target_pt_regs intermediate.
+If you are using the Nvidia drivers and have installed new versions
+of those packages but have not yet rebooted the host kernel,
+attempting to use the egl-headless display will cause QEMU to fail to
+start with
 
-Note that init_thread had set cp0_status in target_pt_regs, but
-target_cpu_copy_regs did not copy to env.  This turns out to be
-ok because mips_cpu_reset_hold initializes CP0_Status properly.
+$ qemu-system-aarch64 -M virt -display egl-headless
+qemu-system-aarch64: egl: eglInitialize failed: EGL_NOT_INITIALIZED
+qemu-system-aarch64: egl: render node init failed
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+together with this complaint in the host kernel dmesg:
+
+[7874777.555649] NVRM: API mismatch: the client has the version 535.247.01, but
+                 NVRM: this kernel module has the version 535.230.02.  Please
+                 NVRM: make sure that this kernel module and all NVIDIA driver
+                 NVRM: components have the same version.
+
+This isn't a problem with QEMU itself, so reporting this as a test
+failure is misleading.  Instead skip the tests, as we already do for
+various other kinds of "host system can't actually run the EGL
+display" situation.
+
+Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+Message-ID: <20250826123455.2856988-1-peter.maydell@linaro.org>
+Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Acked-by: Alex Bennée <alex.bennee@linaro.org>
+Acked-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Signed-off-by: Thomas Huth <thuth@redhat.com>
 ---
- linux-user/elfload.c       |  8 +-------
- linux-user/mips/cpu_loop.c | 16 ++++++----------
- 2 files changed, 7 insertions(+), 17 deletions(-)
+ tests/functional/test_aarch64_virt_gpu.py | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-index 0feccfbe916..ac96755b06c 100644
---- a/linux-user/elfload.c
-+++ b/linux-user/elfload.c
-@@ -581,13 +581,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
- #define elf_check_abi(x) (!((x) & EF_MIPS_ABI2))
- #endif
- 
--static inline void init_thread(struct target_pt_regs *regs,
--                               struct image_info *infop)
--{
--    regs->cp0_status = 2 << CP0St_KSU;
--    regs->cp0_epc = infop->entry;
--    regs->regs[29] = infop->start_stack;
--}
-+#define HAVE_INIT_MAIN_THREAD
- 
- /* See linux kernel: arch/mips/include/asm/elf.h.  */
- #define ELF_NREG 45
-diff --git a/linux-user/mips/cpu_loop.c b/linux-user/mips/cpu_loop.c
-index 6405806eb02..e67b8a2e463 100644
---- a/linux-user/mips/cpu_loop.c
-+++ b/linux-user/mips/cpu_loop.c
-@@ -211,12 +211,9 @@ done_syscall:
-     }
- }
- 
--void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
-+void init_main_thread(CPUState *cs, struct image_info *info)
- {
--    CPUState *cpu = env_cpu(env);
--    TaskState *ts = get_task_state(cpu);
--    struct image_info *info = ts->info;
--    int i;
-+    CPUArchState *env = cpu_env(cs);
- 
-     struct mode_req {
-         bool single;
-@@ -245,12 +242,11 @@ void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
- 
-     struct mode_req prog_req;
-     struct mode_req interp_req;
-+    target_ulong entry = info->entry;
- 
--    for(i = 0; i < 32; i++) {
--        env->active_tc.gpr[i] = regs->regs[i];
--    }
--    env->active_tc.PC = regs->cp0_epc & ~(target_ulong)1;
--    if (regs->cp0_epc & 1) {
-+    env->active_tc.gpr[29] = info->start_stack;
-+    env->active_tc.PC = entry & ~(target_ulong)1;
-+    if (entry & 1) {
-         env->hflags |= MIPS_HFLAG_M16;
-     }
- 
+diff --git a/tests/functional/test_aarch64_virt_gpu.py b/tests/functional/test_aarch64_virt_gpu.py
+index 38447278579..4e50887c3e9 100755
+--- a/tests/functional/test_aarch64_virt_gpu.py
++++ b/tests/functional/test_aarch64_virt_gpu.py
+@@ -76,6 +76,8 @@ def _launch_virt_gpu(self, gpu_device):
+                 self.skipTest("egl-headless support is not available")
+             elif "'type' does not accept value 'dbus'" in excp.output:
+                 self.skipTest("dbus display support is not available")
++            elif "eglInitialize failed: EGL_NOT_INITIALIZED" in excp.output:
++                self.skipTest("EGL failed to initialize on this host")
+             else:
+                 self.log.info("unhandled launch failure: %s", excp.output)
+                 raise excp
 -- 
 2.47.2
 
