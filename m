@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93E30CA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BE2CCA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:26:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu5Ct-0004QX-KC; Thu, 04 Sep 2025 04:20:35 -0400
+	id 1uu58n-0003JR-BM; Thu, 04 Sep 2025 04:16:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu5BT-0001h1-Rv
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:19:09 -0400
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
+ id 1uu553-0006YY-Pz
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:29 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu5B6-0008GK-4R
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:19:07 -0400
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b0411b83aafso114413366b.1
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:18:43 -0700 (PDT)
+ id 1uu54X-0004As-5f
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:28 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6188b5ad681so1149402a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973922; x=1757578722; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973515; x=1757578315; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4Qo9EKDwE3/n/WLrIsObXlhp0emB+zNEnQk4ZCSW4aE=;
- b=yiB5+DZmnFFyDSLVh1FJEJl91Gef9cIi2oimXpGRtFY+eWivuqzfeDsRtnz9+E9KEb
- C98WVC/XuzybnUDH9Po9QM4ZvJY6HRzywEBGsbBVuK4gSWCyrKGqNUeDD3GMS/bZvQOK
- LPJnsDZD3M5515jvvRjaTkagqJG/8y0ZPzrcYrESGVq3f0Oh/AowANqc9Zq0IA5vLCUl
- nU9Wr6QYghkfMo+K8ye3x68MIxu/1uC9ikkRLchXsc9K0hG12fCgTIpQUALxRfzMjopR
- tnIeSAT/twOaPmeSOm7+M5KzuthyqeNxDX9SrANcGWBva8lqEWfxvDs/KbnCVOUOKedg
- qHxA==
+ bh=KKf3LX74QuDicrn7aIOxjy5IHw4dOUBMKNzlJ8lYJDM=;
+ b=z1Ag0651Y2v/3qprg58MVyMZb7i7n7VpPzYCIGE9cnK1WFvH1O5rsK7t7TdzaaS0Dg
+ iF99L71UuucQCnA6Gw+9f5/xOTsKwqOHgQ7EsiB7ds5khgvayYhnSn7NfIUnPl+XwKWo
+ PpUv42c+t2XMZAuSh+R6nwnnINkdnx+bGDlxXumwkJXPSctDb2e6o+n4gClYRq43sKau
+ lmE2h+0uBo3LlOhQd/uuc51BirZImDCL+oOz3e2IxQ7CHyZJ22td6IQxvCJwYuIOt2yR
+ ommf1zCYM3KmoDjOGXbtr0wl4jthG+6dEQIus4w6YnXVPrLVOrESrB61fLGdbxsbRWqQ
+ eVvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973922; x=1757578722;
+ d=1e100.net; s=20230601; t=1756973515; x=1757578315;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4Qo9EKDwE3/n/WLrIsObXlhp0emB+zNEnQk4ZCSW4aE=;
- b=iWZ6STtEFg5Ut/PxDmeM2tNf3kUpt1D6y2dctd3lIxszQDksB3jPyhWPQn9fgj/tr4
- vFnyfIggZTCl2fd8y6S+6KpDutFWtF0R6v3MWtSQx2S3IHWqelzalYQzaWXP5Wo0FL31
- Cxif3fY35rHeasIVeZZ0cATYEyBJlQFlKjSB0nQl784YZp9JAo7BrnQbH7o7b000Nbco
- 6yRKxiG6M6dIVbnn7fKirNLEG+aYJt7oOKoHsQ3euhf274/scIz/9/fBwGSKVYtpA7iZ
- cHBAjaURb7n4iZEr4oPvWY2SZe4zL3MnlMZWG6vvx4IVU2MyvjUbMmfY2oeT7qstlPIZ
- v/qg==
+ bh=KKf3LX74QuDicrn7aIOxjy5IHw4dOUBMKNzlJ8lYJDM=;
+ b=jCwxX2TvEESuFL3HcJ7uxltNhAwObWDiY2wl9XkBc463FVZOVCLkubaynY1OB4iF5l
+ mlEWzcTdmN120Uexsf/GyqKv/QsO/+fvoAmg+L0Shc7JiakPpinxn0Whyw0jXuZbW51p
+ H4F0JcfXqrVxjFbYMDWT9L3OjZHrivatMVTLq7ckussDI7XupiZ92rJpr31VU1HMJo1Q
+ D7HC/CehCVgI6N0n97QjiqOMMSOCewUHBbZrzBwpsYLVvLV4mohaOi9y3Xz7mH8arP4J
+ vwbloyh7l44GCbLci5U1ishuXTlho/Otpc3z45TQCDLS26gjGAl5cMfj2E5VOOcKyRNH
+ VI5Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLvnXSkJdIog+oVe2XpcgLYKLDtZRPXC04DpVbBxpYFZgeDRBkUr8EZzlJk/qsTZ69VdDH5ITMd/zz@nongnu.org
-X-Gm-Message-State: AOJu0YyJ8tZP7m8gDqLR6RjGPto/pxQ4BBZUVZHSXN8MoC6r26HMRcIf
- 6si6lU4pwyLYqKRDO2ZLcxbqAH+MH3Jjk6GUPs6cQYJb4/4jQmVly7U9qbkxkfF8IfU=
-X-Gm-Gg: ASbGncsbQTZW+khCi9+4b9t5jRsbHyuEzy/hXbfhG/APUXV422Fcs4/9Yzy88xwFs5v
- 9StqBfxui8AsBPNmLOc9oNgzhh583dyjRaAAObhu8UwVAUL7YRUV0/SvE/rzlc5UjrKLZhlPs8K
- eaTzex1hdZXCu+wZuWEO+uNv18pXn+fFSWdVmb8nxScbJ5LdU01e/firZdPfYyA0x6AFVaHD/Cs
- Y81m6S3rfwAFhNZGu8XgyA9JsA0wEGsdSC0CntEC2KBPJhgiTR/vQpK+dYSLH+UB9+kY8ZgvVEI
- H0XV/88txmFPD1Bn2tE7saGpgQqY4prmip0x8KlgLkDMdh3Uy6OLVznrN7cbXYbZHdyNI6/j4zn
- tEldUHOXPUMkR/mpEtYZGsfsaUSE4TGjtuw==
-X-Google-Smtp-Source: AGHT+IH72PsAQjSge09/VEswdIRor8b+s0ivH0yVqM4TiBV9FovWzP9bspcPBbf4+HVqFBF5NwAp4Q==
-X-Received: by 2002:a17:907:7245:b0:b04:76ed:3ff5 with SMTP id
- a640c23a62f3a-b0476ed442bmr339748766b.40.1756973921478; 
- Thu, 04 Sep 2025 01:18:41 -0700 (PDT)
+ AJvYcCWao49sBYy3Lk3Q+kQOGDaOC+L9sOMKqra1aOarxJQWIougVvsXN76knIi+zxtP3A0mDrcmKfkHGN6W@nongnu.org
+X-Gm-Message-State: AOJu0YzGoMjtyhDvNOJP2a9qV67XYTuCpGbx12JJh3mlbgqghp2VcGE5
+ 7azcAjlERWiwXnGUfhKc/0BE9QqEfgH+WxzTRBwpRcNEU5LQZTq7zImFcYT3hWwK40I=
+X-Gm-Gg: ASbGnctWXSVnUbLcXubqLa2glh6PYFks2/d2VCFnnnW1w5zBRwHm1yruW3dgl/VDZBt
+ DVCoS69H5I/uaESv45BV3vW57ZqEab4Ej6dcVS3TTE/H8WuSgzFsJ1djjtS6tUM5cM9Kh+sMXES
+ zWYwZC8f56bBsgLlhTl7/yY1EdOsR/NpVW98vt1vMPdl9OMEGur1BSiz4PrkMHFfJVq9VFihrT6
+ 8ZrZIKUYL1u51xfCAfnrOnEk60brLE8rybQnQL/MUHL4aO1f1J/540P5TsIvLjitcsnBSyh7VMk
+ vZWGhcRjaENRLK6uM1ZttcYriVmCCljPYQ20LGfn/YLUxDcSKB/vq7UZSliZZTedh9ufDr56aD2
+ mQnFlSl9e3K7maFqlMSM4hFPUgQnnqbLtqA==
+X-Google-Smtp-Source: AGHT+IGx8ZJxjps5cff/PZm9JBRuTzbh2ffGQw/tl1lRzj/lZpIUq6TJ0w2xsdrM6qRT2xpIi5PODA==
+X-Received: by 2002:a05:6402:1e8c:b0:620:894c:656c with SMTP id
+ 4fb4d7f45d1cf-620894c7c6fmr30028a12.29.1756973515184; 
+ Thu, 04 Sep 2025 01:11:55 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b04634dbd5csm417619266b.19.2025.09.04.01.18.36
+ 4fb4d7f45d1cf-61cfc5622f0sm13427169a12.51.2025.09.04.01.11.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:18:37 -0700 (PDT)
+ Thu, 04 Sep 2025 01:11:49 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 2C5BA60A38;
- Thu, 04 Sep 2025 09:11:37 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id A1FB260193;
+ Thu, 04 Sep 2025 09:11:33 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -130,16 +130,18 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
-Subject: [PATCH v2 069/281] linux-user: Remove ELF_PLATFORM
-Date: Thu,  4 Sep 2025 09:07:43 +0100
-Message-ID: <20250904081128.1942269-70-alex.bennee@linaro.org>
+Subject: [PATCH v2 045/281] rust/qemu-api-macros: make derive(Object) friendly
+ when missing parent
+Date: Thu,  4 Sep 2025 09:07:19 +0100
+Message-ID: <20250904081128.1942269-46-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::634;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x634.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -162,96 +164,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Richard Henderson <richard.henderson@linaro.org>
+From: Marc-André Lureau <marcandre.lureau@redhat.com>
 
-All real definitions of ELF_PLATFORM are now identical, and the stub
-definitions are NULL.  Use HAVE_ELF_PLATFORM and provide a stub as a
-fallback definition of get_elf_platform.
-
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Link: https://lore.kernel.org/r/20250826133132.4064478-5-marcandre.lureau@redhat.com
+Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
 ---
- linux-user/elfload.c | 18 ++++--------------
- 1 file changed, 4 insertions(+), 14 deletions(-)
+ rust/qemu-api-macros/src/lib.rs | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-index 83cb6731ec8..d2d73b06fc0 100644
---- a/linux-user/elfload.c
-+++ b/linux-user/elfload.c
-@@ -149,8 +149,6 @@ typedef abi_int         target_pid_t;
+diff --git a/rust/qemu-api-macros/src/lib.rs b/rust/qemu-api-macros/src/lib.rs
+index b525d89c09e..a6147418891 100644
+--- a/rust/qemu-api-macros/src/lib.rs
++++ b/rust/qemu-api-macros/src/lib.rs
+@@ -85,7 +85,15 @@ fn derive_object_or_error(input: DeriveInput) -> Result<proc_macro2::TokenStream
+     is_c_repr(&input, "#[derive(Object)]")?;
  
- #ifdef TARGET_I386
+     let name = &input.ident;
+-    let parent = &get_fields(&input, "#[derive(Object)]")?[0].ident;
++    let parent = &get_fields(&input, "#[derive(Object)]")?
++        .get(0)
++        .ok_or_else(|| {
++            Error::new(
++                input.ident.span(),
++                "#[derive(Object)] requires a parent field",
++            )
++        })?
++        .ident;
  
--#define ELF_PLATFORM get_elf_platform(thread_cpu)
--
- #ifdef TARGET_X86_64
- #define ELF_CLASS      ELFCLASS64
- #define ELF_ARCH       EM_X86_64
-@@ -309,8 +307,6 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs, const CPUX86State *en
- 
- #ifdef TARGET_ARM
- 
--#define ELF_PLATFORM get_elf_platform(thread_cpu)
--
- #ifndef TARGET_AARCH64
- /* 32 bit ARM definitions */
- 
-@@ -665,8 +661,6 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
- #define USE_ELF_CORE_DUMP
- #define ELF_EXEC_PAGESIZE        4096
- 
--#define ELF_PLATFORM get_elf_platform(thread_cpu)
--
- #endif /* TARGET_LOONGARCH64 */
- 
- #ifdef TARGET_MIPS
-@@ -846,8 +840,6 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
-     (*regs)[33] = tswapreg(cpu_get_sr(env));
- }
- 
--#define ELF_PLATFORM NULL
--
- #endif /* TARGET_OPENRISC */
- 
- #ifdef TARGET_SH4
-@@ -1046,7 +1038,6 @@ static inline void init_thread(struct target_pt_regs *regs,
- 
- #define ELF_CLASS       ELFCLASS32
- #define ELF_ARCH        EM_PARISC
--#define ELF_PLATFORM    get_elf_platform(thread_cpu)
- #define STACK_GROWS_DOWN 0
- #define STACK_ALIGNMENT  64
- 
-@@ -1182,10 +1173,6 @@ static inline void init_thread(struct target_pt_regs *regs,
- #define ELF_BASE_PLATFORM (NULL)
- #endif
- 
--#ifndef ELF_PLATFORM
--#define ELF_PLATFORM (NULL)
--#endif
--
- #ifndef ELF_MACHINE
- #define ELF_MACHINE ELF_ARCH
- #endif
-@@ -1229,6 +1216,9 @@ abi_ulong get_elf_hwcap(CPUState *cs) { return 0; }
- abi_ulong get_elf_hwcap2(CPUState *cs) { g_assert_not_reached(); }
- #define HAVE_ELF_HWCAP2 0
- #endif
-+#ifndef HAVE_ELF_PLATFORM
-+const char *get_elf_platform(CPUState *cs) { return NULL; }
-+#endif
- 
- #include "elf.h"
- 
-@@ -1699,7 +1689,7 @@ static abi_ulong create_elf_tables(abi_ulong p, int argc, int envc,
-     }
- 
-     u_platform = 0;
--    k_platform = ELF_PLATFORM;
-+    k_platform = get_elf_platform(thread_cpu);
-     if (k_platform) {
-         size_t len = strlen(k_platform) + 1;
-         if (STACK_GROWS_DOWN) {
+     Ok(quote! {
+         ::qemu_api::assert_field_type!(#name, #parent,
 -- 
 2.47.2
 
