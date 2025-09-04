@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E432CA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:21:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A55DACA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:21:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu5Cw-0004Ww-AO; Thu, 04 Sep 2025 04:20:38 -0400
+	id 1uu5Ap-0000gK-2J; Thu, 04 Sep 2025 04:18:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu5BZ-0001le-45
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:19:22 -0400
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
+ id 1uu55a-0006y4-Jh
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:04 -0400
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu5B9-0008HF-Aw
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:19:12 -0400
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-afcb7ace3baso138921466b.3
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:18:45 -0700 (PDT)
+ id 1uu54x-0004Iq-3V
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:13:00 -0400
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b02c719a117so132919566b.1
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973923; x=1757578723; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973530; x=1757578330; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+88w9AQZ9cLJwlirAZW/BDB9U/6ab+UNG3qEc9GZaw4=;
- b=BzEB9PPmghWInhBr1X8AzbUEd390VutkJj+I2M5SSSJkQWvGRWAsxGzo/IYGd3NNAO
- ObUIJW3mzJ1RXOyGyP6N/9Yinbk4zdwHUuBTZDuwQNynLfOpdpE7L8Wsb42jTRFj7I6L
- ndB6TttCDrW/+Z3rKyMDqrUP4nKHvacZiXU0bNdMXZy2SexXcJsP/H8wwBXkQYvwXXLd
- ayf94I4M3XA0T/Y35kRaDxFbNw13YEt4mgWyEKqtg3oOsatZ57GknOqXPqUknLp5KIxM
- sROq43d9yYPx0+kWJX51WtDQ8RI6dF6+PtGWgWWnvoA8XbzZ2vzPTnO9ExG80wCAOD4J
- p3aA==
+ bh=arwdiSLHZSf6gZ/oJp/0pmlfrIs2tD4nzezQj8ONLa8=;
+ b=mfrsU7Q6owDfBPScwGQxtT4RyEWegKmliZdTFUlePJV4WI2mkR3r/SGCTM/lIcsgB7
+ FxEQohX00KbyQpDTp7uuGvv9Dd6O/B/xzniI2yRzmfdLxiUdQl91nikzdVEdGPjx3q5y
+ uusgI/b/3DAviazmS1F6jeFStCQEBp/hZFI++vbv9g/BrvNLuVqgSrX5bT3t+53lniiL
+ jRGAAKUUd1J9iIztP2XEcnuL1BL2yan3XFI3pMUPZbhFY08KS2hB5Llo7ZsXf0QHYzK+
+ XYtQ+iOELZeBh+Nw9JDqmF/Yth72UjvZ9RlTPsCNzuHSGWJwGcZsNFHcoiIq2AQ18wds
+ hAHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973923; x=1757578723;
+ d=1e100.net; s=20230601; t=1756973530; x=1757578330;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+88w9AQZ9cLJwlirAZW/BDB9U/6ab+UNG3qEc9GZaw4=;
- b=A9q1w33V93UzsxF2CqkuK/2iMEfINYqi90ztY8VsNLXCRfgZfqrTQmdl6gQJFwuCkJ
- 3cfZ6n4Uw+6ENQmFZK7eWj/pM8AOUR0Vgr+e4jihWBfgu0obYDmB6elfTxoTX6jjCAuB
- qJX+oxMQ/fb8ne0BE8DvFun0mX/21HPR68JSGLgeEZ+fZaHMcD92JogEG6ijPOvsJEFT
- r81RvhAVTQ1d6S4E7XQxzqWJzqbXWKpm4yLivy9dCSq8FZ1KiLL0Ka4K+v8vcUzRvsFU
- 6cisAm4QZleoreAaQ1Qpy7kGIhDDhGLyyZ7ZwcDa62h1k9MjDsC4yfzL0gb3uK9MUJeX
- Jhvg==
+ bh=arwdiSLHZSf6gZ/oJp/0pmlfrIs2tD4nzezQj8ONLa8=;
+ b=fefpa8UGd5iBMMl4PbDbspCEFv921fRpQaTDAgcbxx1lG/jDWADX3C6xDmO1naAaRC
+ hJUhHvlKSBtq8WKp1sY9EPHzrRe3T1NjLwXQLnkTN/nBNBglSj/gxcC9vwYoVkw16A3H
+ cug0PS859NQijRdx1KXqymGZHL8obI8kRH5KSEieJns5DbDuyFo1KdARuMIrfiLlcP8l
+ BQ1+sfcjrvS9F5/CnY3i3y/ECGYG/7CaXWPAwvfEf+6FI7+gjVXo076PvudGh4fQ4vqY
+ nzfya0zZCwJhh9qbMBjP9PCHf2ADnReaWAxAHGhB+G1QiCAmteZ7heac0ZyqbWLnZ4dd
+ kEsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXatjc4vB2ek9N7EguWo8q9/D2OR06DwS8xHMDuRZPq9ENT8wuFi25PXeMVnSNO0+1dCb98CvGZOvGp@nongnu.org
-X-Gm-Message-State: AOJu0Yz/p7+KMPhB1BJismGh68WebHqVkzOvKm1VE7Z/Evln609kVNLg
- btEfefmB1BXe2xWb4UXRNcrZ/M7c7v2BJDw0i+kRviM1QG/wc54sUIrNPQKPjWsdz24=
-X-Gm-Gg: ASbGncty4ZMADs12s918PjdyPNUVUhI6DrJN3Z3vWoS5JECGzKN6RB3f1PCEW9Wcmro
- lFEOK5Gqy2qRyoYFT+2Nld4YXKYNKwRnlVeSg2hXCMN6sQ3yfxDNZC3h79uyoen9OiQXY0jGQUP
- pkFgzYcTuhutmGCHYq49NPyYs+r8v9PGF1BW30VAKVkVhSS5txnMFDnM88PcfMAR2NUOpEqy8bD
- QCfwfi5YA8PvbQBbpoc9Fm6BHhkmeF6HfE+QOhag3CFaQD/6CPpLgk9WnrDvi/xKXcWe5hr16ED
- ZkmIwLeAnDwOFLvX8JDb6DH3RxDPkqu4LKNEyxTydHz6JNZxxhSTyUG0CCO8oD+Cl85+1rIMDxI
- cetqbPy2aGMFMFnuoYEjcsqs=
-X-Google-Smtp-Source: AGHT+IGxjVBN0FQryOFHW7NPMAzsYYrdCtTTvqWBsGarhpRXGfdwEbKrpxErVnpLvup6bLCipLULiA==
-X-Received: by 2002:a17:906:4fca:b0:b04:6546:347e with SMTP id
- a640c23a62f3a-b0465463a5bmr592167766b.51.1756973919569; 
- Thu, 04 Sep 2025 01:18:39 -0700 (PDT)
+ AJvYcCXgJwG3qMU3HojYZXuDCPGdU4wQ2wKcEmz42GbkDc2ZfFsZOx1Gc8l5185K2cjeN+272WIgxQQhEa2k@nongnu.org
+X-Gm-Message-State: AOJu0YxdgFEW1+wqoqVSW0ckVDL5JNxZNhd+uo+hHRgjKMrorimeqyTN
+ OOt2xbn9W19y1YHTlLCOx51BzXB7QAgcxV30M3xv7dIcH4j/AlNnpBWcvTe+XwH3F6A=
+X-Gm-Gg: ASbGnctq45kLbKlnMiECItBDkK63EUGnQmvTGJ257Pnn2+aGUjNrtEV2WReF1XJMqLo
+ 36/W/VLgZKSX1UKPL2nGQtyAPAY/9JSkXEGINUSWo5TZfbFH3U8ZvESpgZdRaLkMkRJhii8oU7g
+ CxnFUajBxO7f5a9YUWFxdCOp3aKGxei0J5I5EqwiD3zjz1JJTd7DJmricetJof7D0b6tr+s1hF5
+ cW7pSPNFlmweh8sDjG482dnGlJawa4C8NJ9dRy4DJ4hqb5NhMpbqRPAccidckPv4+qRKDeQSc9W
+ s+fHUFML55PgLao+lPLMKWpwmqUNehMGmTa7zq/U08w8lTp0PCO9MKRtbNoT5Ccp4OlPf+ar8KN
+ UWP1bgOHP4U9YhoUWBf9a5ybFq+57GCaK8Q==
+X-Google-Smtp-Source: AGHT+IFQfEnVE3jwf+K8A9mRCuKbsvAdVucPiFVZ9gLtG5kMjB7TuNZVupCy9McVaCvmyY+uZupkMA==
+X-Received: by 2002:a17:907:7f20:b0:afe:d62a:f04b with SMTP id
+ a640c23a62f3a-b01d8a25c7bmr1778270066b.3.1756973529775; 
+ Thu, 04 Sep 2025 01:12:09 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b0425ce98f1sm977746666b.67.2025.09.04.01.18.36
+ a640c23a62f3a-b04110b94cbsm1152568366b.93.2025.09.04.01.11.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:18:37 -0700 (PDT)
+ Thu, 04 Sep 2025 01:12:04 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 5504A60AF7;
- Thu, 04 Sep 2025 09:11:39 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 694A560AAF;
+ Thu, 04 Sep 2025 09:11:37 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -130,16 +130,17 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
-Subject: [PATCH v2 087/281] linux-user/riscv: Create init_main_thread
-Date: Thu,  4 Sep 2025 09:08:01 +0100
-Message-ID: <20250904081128.1942269-88-alex.bennee@linaro.org>
+Subject: [PATCH v2 071/281] linux-user: Move target_cpu_copy_regs decl to
+ qemu.h
+Date: Thu,  4 Sep 2025 09:07:45 +0100
+Message-ID: <20250904081128.1942269-72-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::633;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x633.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -164,57 +165,41 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Richard Henderson <richard.henderson@linaro.org>
 
-Merge init_thread and target_cpu_copy_regs.
-There's no point going through a target_pt_regs intermediate.
+The function is not used by bsd-user, so placement
+within include/user/cpu_loop.h is not ideal.
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- linux-user/elfload.c        |  7 +------
- linux-user/riscv/cpu_loop.c | 10 ++++------
- 2 files changed, 5 insertions(+), 12 deletions(-)
+ include/user/cpu_loop.h | 4 ----
+ linux-user/qemu.h       | 3 +++
+ 2 files changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-index 16aa09214e8..556f11d720d 100644
---- a/linux-user/elfload.c
-+++ b/linux-user/elfload.c
-@@ -849,12 +849,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
- #define VDSO_HEADER "vdso-64.c.inc"
+diff --git a/include/user/cpu_loop.h b/include/user/cpu_loop.h
+index ad8a1d711f0..346e37ede8b 100644
+--- a/include/user/cpu_loop.h
++++ b/include/user/cpu_loop.h
+@@ -81,8 +81,4 @@ void target_exception_dump(CPUArchState *env, const char *fmt, int code);
+ #define EXCP_DUMP(env, fmt, code) \
+     target_exception_dump(env, fmt, code)
+ 
+-typedef struct target_pt_regs target_pt_regs;
+-
+-void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs);
+-
  #endif
+diff --git a/linux-user/qemu.h b/linux-user/qemu.h
+index 4d6fad28c63..0c3cfe93a14 100644
+--- a/linux-user/qemu.h
++++ b/linux-user/qemu.h
+@@ -359,4 +359,7 @@ void *lock_user_string(abi_ulong guest_addr);
+ /* Clone cpu state */
+ CPUArchState *cpu_copy(CPUArchState *env);
  
--static inline void init_thread(struct target_pt_regs *regs,
--                               struct image_info *infop)
--{
--    regs->sepc = infop->entry;
--    regs->sp = infop->start_stack;
--}
-+#define HAVE_INIT_MAIN_THREAD
- 
- #define ELF_EXEC_PAGESIZE 4096
- 
-diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
-index 2dd30c7b288..b3162815320 100644
---- a/linux-user/riscv/cpu_loop.c
-+++ b/linux-user/riscv/cpu_loop.c
-@@ -94,14 +94,12 @@ void cpu_loop(CPURISCVState *env)
-     }
- }
- 
--void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
-+void init_main_thread(CPUState *cs, struct image_info *info)
- {
--    CPUState *cpu = env_cpu(env);
--    TaskState *ts = get_task_state(cpu);
--    struct image_info *info = ts->info;
-+    CPUArchState *env = cpu_env(cs);
- 
--    env->pc = regs->sepc;
--    env->gpr[xSP] = regs->sp;
-+    env->pc = info->entry;
-+    env->gpr[xSP] = info->start_stack;
-     env->elf_flags = info->elf_flags;
- 
-     if ((env->misa_ext & RVE) && !(env->elf_flags & EF_RISCV_RVE)) {
++typedef struct target_pt_regs target_pt_regs;
++void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs);
++
+ #endif /* QEMU_H */
 -- 
 2.47.2
 
