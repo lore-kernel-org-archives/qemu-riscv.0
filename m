@@ -4,92 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CC5CA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 18:25:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33CFFCA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 20:50:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uuEeS-00013h-PW; Thu, 04 Sep 2025 14:25:41 -0400
+	id 1uuGu3-0006ub-Sp; Thu, 04 Sep 2025 16:49:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uuEeH-00012b-7s
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 14:25:30 -0400
-Received: from mail-oo1-xc32.google.com ([2607:f8b0:4864:20::c32])
+ (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uuGtw-0006Fh-CM
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 16:49:51 -0400
+Received: from mailgate01.uberspace.is ([2001:1a50:11:0:c83f:a8ff:fea6:c8da])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uuEeD-00032q-Ac
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 14:25:27 -0400
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-61e783a1e00so921065eaf.1
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 11:25:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1757010321; x=1757615121; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QlJKr2kmzgorUOed1s1i1UOCBvvJOz6cxURcHJe4XYs=;
- b=KTlq2D6jBlEhQkgCwRd0U/6ZnjloFvVAzAhnUXejoiUdIsJacWaYSDWNoeOwwlKDJW
- qXpMl6SyAkSI9PBPh1d5/pJEei6x2HEqjW2nOMvjNLY4H4RTLe9fODJBThXMkUxsfCfG
- UN93Xyd0mo6hYdSL0BO7G9eJ/yupZ8NR8h8WuQdDqdDFxKIqkCu57CWC498teQ7F53BK
- CQUGEsboGi/wl+apzwk2KHN2CmhMBejxK4ct6hDTRsTeGCRHXg15P31PLjgHWgB9VxOm
- vi2VCLwnOfoVUkUL4KWwOQizuQUqcMJQpgYZHVEs1413ZbuSjMqrv1JiENSAth6C7Iab
- TiJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757010321; x=1757615121;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QlJKr2kmzgorUOed1s1i1UOCBvvJOz6cxURcHJe4XYs=;
- b=Zy8lsUTEV9an8o0FLt82kBq1EGOgXMZ/yXOxjDUvAjcfo5IK/+eEciwxT1uVULNg8E
- RF/ElhxbjQU8COLZjc4VhhCiBSZGrbpB3OiXHAzzCyRXL4Scz6Ol2eJ9ZTrl9dsTvbCi
- pFkETNiWeJJd0hfKRiNiuC2jC9T4lS7vt8zAQGt2IoQpaDxuIr3zZCYigzntUH5hAFk8
- F5YHTAra7GfeehJ9ZXT8XgZYWAvcKTI3MaXEbK5sxACKkH+U+EzR53h6r8y5YQX+4I/s
- euzVhGQ2lpPe0AXVKwZ3+zYJNYw5UmzO3RC1aioa1hK5FaARmkA3ZaMMsQMNDmhpzWNv
- PsGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7z4nskRlGV+fRFg/NkWVmIQuzOV7KPfodm1sHN1Azp1+NctaJMru8+EY0WzeDFfgTgbpm88HOueFj@nongnu.org
-X-Gm-Message-State: AOJu0YwlDZ0bYOkXU0wHq0t1e9mBMweUOM+PG+Ag8ZWsDdSWVTxr0rpS
- anj2WXjyjpx7KDVyZABZJ2dcDJmKkp7NpfYjBrCA6rhqA3psz6uP+RmUanIrtETdXU0=
-X-Gm-Gg: ASbGnctyyEQJdReSEaLBnq+fZ7FpFvLn9ey2b1uni4FyVEEu7egEANxKo+BgHnFS8JY
- rEeki30gQjarPjygFlq4NefgL+3pTsOHbDM9aB2WA3mmlkVHj1nh4hX+zR19JjimJbdPw2j39g3
- rncAEKw9LLjli/yFad7Cx84SFox8Cymt4rQmpT8+8pnADNbYynOwXa7mW2IEIeubz8o/0U4rXv6
- 9b7BuujQqqPJlcMZlte0MxlLttwpV2AVI+tDJoXutuvRt4I949Y885rl3nu4SZNmrgwcF6K0OEK
- JNavUsXm9/VglE7hR40NYI61DZQtIDIe9VGAag/pFNVRXSP/nKljWb2TfR9rfPXJ4d3R26Sh+3I
- f5p/PSw5s+DTQwXQZ9HFmSgS+2OWN4uASofGhv7w+GMA4MzE=
-X-Google-Smtp-Source: AGHT+IFLw3TQMTfpx+cJkppoUUAqm5Q4zZTbL/JMwk3ieho7jIC7WVCuBL/8naeSUbmZRjKQOKSRwQ==
-X-Received: by 2002:a05:6820:1c9e:b0:61e:7139:b476 with SMTP id
- 006d021491bc7-61e7139b79dmr3362647eaf.1.1757010321137; 
- Thu, 04 Sep 2025 11:25:21 -0700 (PDT)
-Received: from [192.168.68.110] ([187.10.187.251])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-61e723d320asm698009eaf.18.2025.09.04.11.25.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 Sep 2025 11:25:20 -0700 (PDT)
-Message-ID: <b60684bb-da89-4c35-a523-b22387c44dda@ventanamicro.com>
-Date: Thu, 4 Sep 2025 15:25:16 -0300
+ (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uuGtl-00012Y-7F
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 16:49:47 -0400
+Received: from skiff.uberspace.de (skiff.uberspace.de [185.26.156.131])
+ by mailgate01.uberspace.is (Postfix) with ESMTPS id 0093560C41
+ for <qemu-riscv@nongnu.org>; Thu,  4 Sep 2025 22:49:18 +0200 (CEST)
+Received: (qmail 2471 invoked by uid 990); 4 Sep 2025 20:49:18 -0000
+Authentication-Results: skiff.uberspace.de;
+	auth=pass (plain)
+Received: from unknown (HELO unkown) (::1)
+ by skiff.uberspace.de (Haraka/3.0.1) with ESMTPSA;
+ Thu, 04 Sep 2025 22:49:18 +0200
+From: Julian Ganz <neither@nut.email>
+To: qemu-devel@nongnu.org
+Cc: Julian Ganz <neither@nut.email>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH v6 25/25] tests: add test with interrupted memory accesses on
+ rv64
+Date: Thu,  4 Sep 2025 22:49:00 +0200
+Message-ID: <f74becaa58fe129897639d126a321afdc7ef2d05.1757018626.git.neither@nut.email>
+X-Mailer: git-send-email 2.49.1
+In-Reply-To: <cover.1757018626.git.neither@nut.email>
+References: <cover.1757018626.git.neither@nut.email>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/riscv-iommu: Fix MSI table size limit
-To: Andrew Jones <ajones@ventanamicro.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, tjeznach@rivosinc.com
-References: <20250904132723.614507-2-ajones@ventanamicro.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Language: en-US
-In-Reply-To: <20250904132723.614507-2-ajones@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c32;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc32.google.com
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Bar: -----
+X-Rspamd-Report: REPLY(-4) BAYES_HAM(-2.796651) MID_CONTAINS_FROM(1)
+ MIME_GOOD(-0.1) R_MISSING_CHARSET(0.5)
+X-Rspamd-Score: -5.396651
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nut.email; s=uberspace;
+ h=from:to:cc:subject:date;
+ bh=mVLyiyy1HWjSWhu1/Q5w+icoVuven8S3d7VhRcdbntg=;
+ b=TY0pT536o+ZHiEnQhsgtRx4ZNUf6S2pZiLT1gb/yjcik9RKdUnmUjTkyG5NGEd9mQkc1Jb0afI
+ vo/L5CAqROcyN2s9IpYFsHlQ8u07uhcHrvdqTow9sauWmKKigBjRwy4zUxns5VS8rhmOEnpyCr+Y
+ nbsF6kqSU+x71OIr++/1EddorRfWcpJxv8PdjYqMD05obdoL5IYygKi7mtSL1eJ8d9xMJmOWp2mr
+ /yqYNs9L3qRTUl0frDIGOjcgGt57P8cP3tMCOX+PelVwjHt1vOb0UfRbpwfKvKYMOZtzTquBVzqG
+ 43IuC/yM1kO0+LFt0qaFURxwxaOf8i7evaF+Uz2HTvr4ahejBf6tECerYTQGGpQkDHvZJP5mwdSi
+ k/NfcqdQPaiJkGD4yn+/N0/J/N+SZZFMkN9uHmXuiYCx8QUsH5M+WaySrKxMPcPu/jcgfrxzbnN5
+ WOoryyWzZ/VLWiEHv7m8rb+5B0d07X794jJFihbn5cF893Qptl5cdbOXKEDA9GYL9FHd2dTpwaMN
+ 5y0v5x/w2lftroUJvxGn84a11+0HW/I0UKgA9jzSEhZqFBnOlk1/cZBD5OJjCP+TrktkVJ0bJWs1
+ e1nTAIWJkmxuJ216aicRogsNkC7EwZqXkGNgPhzIYg0K2jYo5bwjWHl5CvQqrI4SWNeKsHR+Y4ja
+ o=
+Received-SPF: pass client-ip=2001:1a50:11:0:c83f:a8ff:fea6:c8da;
+ envelope-from=neither@nut.email; helo=mailgate01.uberspace.is
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,60 +84,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+This test aims at catching API misbehaviour w.r.t. the interaction
+between interrupts and memory accesses, such as the bug fixed in
 
+    27f347e6a1d269c533633c812321cabb249eada8
 
-On 9/4/25 10:27 AM, Andrew Jones wrote:
-> The MSI table is not limited to 4k. The only constraint the table has
-> is that its base address must be aligned to its size, ensuring no
-> offsets of the table size will overrun when added to the base address
-> (see "8.5. MSI page tables" of the AIA spec).
-> 
-> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> ---
+Because the condition for triggering misbehaviour may not be
+deterministic and the cross-section between memory accesses and
+interrupt handlers may be small, we have to place our trust in large
+numbers. Instead of guessing/trying an arbitrary, fixed loop-bound, we
+decided to loop for a fixed amount of real-time. This avoids the test
+running into a time-out on slower machines while enabling a high number
+of possible interactions on faster machines.
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Signed-off-by: Julian Ganz <neither@nut.email>
+---
+ tests/tcg/riscv64/Makefile.softmmu-target |  6 ++
+ tests/tcg/riscv64/interruptedmemory.S     | 67 +++++++++++++++++++++++
+ 2 files changed, 73 insertions(+)
+ create mode 100644 tests/tcg/riscv64/interruptedmemory.S
 
->   hw/riscv/riscv-iommu.c | 17 ++++++++++-------
->   1 file changed, 10 insertions(+), 7 deletions(-)
-> 
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 96a7fbdefcf3..155190d032dd 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -558,6 +558,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
->       MemTxResult res;
->       dma_addr_t addr;
->       uint64_t intn;
-> +    size_t offset;
->       uint32_t n190;
->       uint64_t pte[2];
->       int fault_type = RISCV_IOMMU_FQ_TTYPE_UADDR_WR;
-> @@ -565,16 +566,18 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
->   
->       /* Interrupt File Number */
->       intn = riscv_iommu_pext_u64(PPN_DOWN(gpa), ctx->msi_addr_mask);
-> -    if (intn >= 256) {
-> -        /* Interrupt file number out of range */
-> -        res = MEMTX_ACCESS_ERROR;
-> -        cause = RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT;
-> -        goto err;
-> -    }
-> +    offset = intn * sizeof(pte);
->   
->       /* fetch MSI PTE */
->       addr = PPN_PHYS(get_field(ctx->msiptp, RISCV_IOMMU_DC_MSIPTP_PPN));
-> -    addr = addr | (intn * sizeof(pte));
-> +    if (addr & offset) {
-> +        /* Interrupt file number out of range */
-> +        res = MEMTX_ACCESS_ERROR;
-> +        cause = RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT;
-> +        goto err;
-> +    }
-> +
-> +    addr |= offset;
->       res = dma_memory_read(s->target_as, addr, &pte, sizeof(pte),
->               MEMTXATTRS_UNSPECIFIED);
->       if (res != MEMTX_OK) {
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 1a71a78653..d8f92b8e61 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -30,5 +30,11 @@ run-plugin-doubletrap: doubletrap
+ 	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
+ 	  $(QEMU_OPTS)$<)
+ 
++EXTRA_RUNS += run-plugin-interruptedmemory
++run-plugin-interruptedmemory: interruptedmemory
++	$(call run-test, $<, \
++	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
++	  $(QEMU_OPTS)$<)
++
+ # We don't currently support the multiarch system tests
+ undefine MULTIARCH_TESTS
+diff --git a/tests/tcg/riscv64/interruptedmemory.S b/tests/tcg/riscv64/interruptedmemory.S
+new file mode 100644
+index 0000000000..a32d672849
+--- /dev/null
++++ b/tests/tcg/riscv64/interruptedmemory.S
+@@ -0,0 +1,67 @@
++	.option norvc
++
++	.text
++	.global _start
++_start:
++	# Set up trap vector
++	lla	t0, trap
++	csrw	mtvec, t0
++
++	# Set up timer
++	lui	t1, 0x02004
++	sd	zero, 0(t1) # MTIMECMP0
++
++	# Enable timer interrupts
++	li	t0, 0x80
++	csrrs	zero, mie, t0
++	csrrsi	zero, mstatus, 0x8
++
++	# Find out when to stop
++	call	rtc_get
++	li	t0, 60
++	slli	t0, t0, 30 # Approx. 10e9 ns
++	add	t0, t0, a0
++
++	# Loop with memory accesses
++	la	t1, semiargs
++0:
++	ld	t2, 0(t1)
++	sd	t2, 0(t1)
++	call	rtc_get
++	bltu	a0, t0, 0b
++
++	li	a0, 0
++	lla	a1, semiargs
++	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
++
++	# Semihosting call sequence
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++rtc_get:
++	# Get current time from the goldfish RTC
++	lui	t3, 0x0101
++	lw	a0, 0(t3)
++	lw	t3, 4(t3)
++	slli	t3, t3, 32
++	add	a0, a0, t3
++	ret
++
++trap:
++	lui	t5, 0x0200c
++	ld	t6, -0x8(t5) # MTIME
++	addi	t6, t6, 100
++	lui	t5, 0x02004
++	sd	t6, 0(t5) # MTIMECMP
++	mret
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
+-- 
+2.49.1
 
 
