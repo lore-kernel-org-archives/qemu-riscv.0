@@ -4,151 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BE2CCA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:26:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84808CA1002
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:40:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu58n-0003JR-BM; Thu, 04 Sep 2025 04:16:21 -0400
+	id 1uu5VP-0001DP-G3; Thu, 04 Sep 2025 04:39:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu553-0006YY-Pz
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:29 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54X-0004As-5f
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:28 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-6188b5ad681so1149402a12.0
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973515; x=1757578315; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KKf3LX74QuDicrn7aIOxjy5IHw4dOUBMKNzlJ8lYJDM=;
- b=z1Ag0651Y2v/3qprg58MVyMZb7i7n7VpPzYCIGE9cnK1WFvH1O5rsK7t7TdzaaS0Dg
- iF99L71UuucQCnA6Gw+9f5/xOTsKwqOHgQ7EsiB7ds5khgvayYhnSn7NfIUnPl+XwKWo
- PpUv42c+t2XMZAuSh+R6nwnnINkdnx+bGDlxXumwkJXPSctDb2e6o+n4gClYRq43sKau
- lmE2h+0uBo3LlOhQd/uuc51BirZImDCL+oOz3e2IxQ7CHyZJ22td6IQxvCJwYuIOt2yR
- ommf1zCYM3KmoDjOGXbtr0wl4jthG+6dEQIus4w6YnXVPrLVOrESrB61fLGdbxsbRWqQ
- eVvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973515; x=1757578315;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KKf3LX74QuDicrn7aIOxjy5IHw4dOUBMKNzlJ8lYJDM=;
- b=jCwxX2TvEESuFL3HcJ7uxltNhAwObWDiY2wl9XkBc463FVZOVCLkubaynY1OB4iF5l
- mlEWzcTdmN120Uexsf/GyqKv/QsO/+fvoAmg+L0Shc7JiakPpinxn0Whyw0jXuZbW51p
- H4F0JcfXqrVxjFbYMDWT9L3OjZHrivatMVTLq7ckussDI7XupiZ92rJpr31VU1HMJo1Q
- D7HC/CehCVgI6N0n97QjiqOMMSOCewUHBbZrzBwpsYLVvLV4mohaOi9y3Xz7mH8arP4J
- vwbloyh7l44GCbLci5U1ishuXTlho/Otpc3z45TQCDLS26gjGAl5cMfj2E5VOOcKyRNH
- VI5Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWao49sBYy3Lk3Q+kQOGDaOC+L9sOMKqra1aOarxJQWIougVvsXN76knIi+zxtP3A0mDrcmKfkHGN6W@nongnu.org
-X-Gm-Message-State: AOJu0YzGoMjtyhDvNOJP2a9qV67XYTuCpGbx12JJh3mlbgqghp2VcGE5
- 7azcAjlERWiwXnGUfhKc/0BE9QqEfgH+WxzTRBwpRcNEU5LQZTq7zImFcYT3hWwK40I=
-X-Gm-Gg: ASbGnctWXSVnUbLcXubqLa2glh6PYFks2/d2VCFnnnW1w5zBRwHm1yruW3dgl/VDZBt
- DVCoS69H5I/uaESv45BV3vW57ZqEab4Ej6dcVS3TTE/H8WuSgzFsJ1djjtS6tUM5cM9Kh+sMXES
- zWYwZC8f56bBsgLlhTl7/yY1EdOsR/NpVW98vt1vMPdl9OMEGur1BSiz4PrkMHFfJVq9VFihrT6
- 8ZrZIKUYL1u51xfCAfnrOnEk60brLE8rybQnQL/MUHL4aO1f1J/540P5TsIvLjitcsnBSyh7VMk
- vZWGhcRjaENRLK6uM1ZttcYriVmCCljPYQ20LGfn/YLUxDcSKB/vq7UZSliZZTedh9ufDr56aD2
- mQnFlSl9e3K7maFqlMSM4hFPUgQnnqbLtqA==
-X-Google-Smtp-Source: AGHT+IGx8ZJxjps5cff/PZm9JBRuTzbh2ffGQw/tl1lRzj/lZpIUq6TJ0w2xsdrM6qRT2xpIi5PODA==
-X-Received: by 2002:a05:6402:1e8c:b0:620:894c:656c with SMTP id
- 4fb4d7f45d1cf-620894c7c6fmr30028a12.29.1756973515184; 
- Thu, 04 Sep 2025 01:11:55 -0700 (PDT)
-Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61cfc5622f0sm13427169a12.51.2025.09.04.01.11.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:11:49 -0700 (PDT)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id A1FB260193;
- Thu, 04 Sep 2025 09:11:33 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Reinoud Zandijk <reinoud@netbsd.org>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>, Zhao Liu <zhao1.liu@intel.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-arm@nongnu.org,
- Fam Zheng <fam@euphon.net>, Helge Deller <deller@gmx.de>,
- Matthew Rosato <mjrosato@linux.ibm.com>, Fabiano Rosas <farosas@suse.de>,
- qemu-rust@nongnu.org, Bibo Mao <maobibo@loongson.cn>,
- qemu-riscv@nongnu.org, Thanos Makatos <thanos.makatos@nutanix.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Riku Voipio <riku.voipio@iki.fi>, Cameron Esfahani <dirty@apple.com>,
- Alexander Graf <agraf@csgraf.de>, Laurent Vivier <lvivier@redhat.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- qemu-ppc@nongnu.org, Stafford Horne <shorne@gmail.com>,
- Sunil Muthuswamy <sunilmut@microsoft.com>,
- Jagannathan Raman <jag.raman@oracle.com>,
- Igor Mammedov <imammedo@redhat.com>,
- Brian Cain <brian.cain@oss.qualcomm.com>,
- Phil Dennis-Jordan <phil@philjordan.eu>, devel@lists.libvirt.org,
- Mads Ynddal <mads@ynddal.dk>, Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Peter Xu <peterx@redhat.com>, Jason Herne <jjherne@linux.ibm.com>,
- Michael Rolnik <mrolnik@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Laurent Vivier <laurent@vivier.eu>, Ilya Leoshkevich <iii@linux.ibm.com>,
- qemu-block@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
- Kostiantyn Kostiuk <kkostiuk@redhat.com>, Kyle Evans <kevans@freebsd.org>,
- David Hildenbrand <david@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Warner Losh <imp@bsdimp.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- John Snow <jsnow@redhat.com>, Yoshinori Sato <yoshinori.sato@nifty.com>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- Alistair Francis <alistair@alistair23.me>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- Yonggang Luo <luoyonggang@gmail.com>,
- Radoslaw Biernacki <rad@semihalf.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Eduardo Habkost <eduardo@habkost.net>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org,
- Alex Williamson <alex.williamson@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Roman Bolshakov <rbolshakov@ddn.com>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Chinmay Rath <rathc@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Cleber Rosa <crosa@redhat.com>, kvm@vger.kernel.org,
- Song Gao <gaosong@loongson.cn>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Halil Pasic <pasic@linux.ibm.com>, Eric Farman <farman@linux.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Leif Lindholm <leif.lindholm@oss.qualcomm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Michael Roth <michael.roth@amd.com>,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
-Subject: [PATCH v2 045/281] rust/qemu-api-macros: make derive(Object) friendly
- when missing parent
-Date: Thu,  4 Sep 2025 09:07:19 +0100
-Message-ID: <20250904081128.1942269-46-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
-References: <20250904081128.1942269-1-alex.bennee@linaro.org>
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uu5VO-0001CX-83; Thu, 04 Sep 2025 04:39:42 -0400
+Received: from [115.124.28.59] (helo=out28-59.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uu5VE-0006t8-AM; Thu, 04 Sep 2025 04:39:41 -0400
+Received: from 10.13.14.160(mailfrom:chao.liu@zevorn.cn
+ fp:SMTPD_---.eXFRmBL_1756974909 cluster:ay29) by smtp.aliyun-inc.com;
+ Thu, 04 Sep 2025 16:35:10 +0800
+Message-ID: <46df01bf-8885-4834-bf51-8bc304f2aa47@zevorn.cn>
+Date: Thu, 4 Sep 2025 16:35:09 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/2] target/riscv: Generate strided vector loads/stores
+ with tcg nodes.
+To: Nicholas Piggin <npiggin@gmail.com>
+Cc: richard.henderson@linaro.org, paolo.savini@embecosm.com,
+ ebiggers@kernel.org, dbarboza@ventanamicro.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Chao Liu <chao.liu@yeah.net>
+References: <cover.1756906528.git.chao.liu@zevorn.cn>
+ <bcb383174cf82be8116685273e271cdbdda28a59.1756906528.git.chao.liu@zevorn.cn>
+ <eimd6dqomns6jqkh4rnma42lxlzlroyibbgm32yb7oztljensy@gw4u4flnwpwo>
+From: Chao Liu <chao.liu@zevorn.cn>
+In-Reply-To: <eimd6dqomns6jqkh4rnma42lxlzlroyibbgm32yb7oztljensy@gw4u4flnwpwo>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.59 (deferred)
+Received-SPF: pass client-ip=115.124.28.59; envelope-from=chao.liu@zevorn.cn;
+ helo=out28-59.mail.aliyun.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01,
+ UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -164,37 +64,123 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Marc-André Lureau <marcandre.lureau@redhat.com>
+On 2025/9/4 13:05, Nicholas Piggin wrote:
+> On Wed, Sep 03, 2025 at 09:52:01PM +0800, Chao Liu wrote:
+>> From: Chao Liu <chao.liu@yeah.net>
+> 
+>> +static void gen_ldst_stride_main_loop(DisasContext *s, TCGv dest, uint32_t rs1,
+>> +                                      uint32_t rs2, uint32_t vm, uint32_t nf,
+>> +                                      gen_tl_ldst *ld_fn, gen_tl_ldst *st_fn,
+>> +                                      bool is_load)
+>> +{
+>> +    TCGv addr = tcg_temp_new();
+>> +    TCGv base = get_gpr(s, rs1, EXT_NONE);
+>> +    TCGv stride = get_gpr(s, rs2, EXT_NONE);
+>> +
+>> +    TCGv i = tcg_temp_new();
+>> +    TCGv i_esz = tcg_temp_new();
+>> +    TCGv k = tcg_temp_new();
+>> +    TCGv k_esz = tcg_temp_new();
+>> +    TCGv k_max = tcg_temp_new();
+>> +    TCGv mask = tcg_temp_new();
+>> +    TCGv mask_offs = tcg_temp_new();
+>> +    TCGv mask_offs_64 = tcg_temp_new();
+>> +    TCGv mask_elem = tcg_temp_new();
+>> +    TCGv mask_offs_rem = tcg_temp_new();
+>> +    TCGv vreg = tcg_temp_new();
+>> +    TCGv dest_offs = tcg_temp_new();
+>> +    TCGv stride_offs = tcg_temp_new();
+>> +
+>> +    uint32_t max_elems = MAXSZ(s) >> s->sew;
+>> +
+>> +    TCGLabel *start = gen_new_label();
+>> +    TCGLabel *end = gen_new_label();
+>> +    TCGLabel *start_k = gen_new_label();
+>> +    TCGLabel *inc_k = gen_new_label();
+>> +    TCGLabel *end_k = gen_new_label();
+>> +
+>> +    MemOp atomicity = MO_ATOM_NONE;
+>> +    if (s->sew == 0) {
+>> +        atomicity = MO_ATOM_NONE;
+>> +    } else {
+>> +        atomicity = MO_ATOM_IFALIGN_PAIR;
+>> +    }
+>> +
+>> +    tcg_gen_addi_tl(mask, (TCGv)tcg_env, vreg_ofs(s, 0));
+>> +
+>> +    /* Start of outer loop. */
+>> +    tcg_gen_mov_tl(i, cpu_vstart);
+>> +    gen_set_label(start);
+>> +    tcg_gen_brcond_tl(TCG_COND_GE, i, cpu_vl, end);
+>> +    tcg_gen_shli_tl(i_esz, i, s->sew);
+>> +    /* Start of inner loop. */
+>> +    tcg_gen_movi_tl(k, 0);
+>> +    gen_set_label(start_k);
+>> +    tcg_gen_brcond_tl(TCG_COND_GE, k, tcg_constant_tl(nf), end_k);
+>> +    /*
+>> +     * If we are in mask agnostic regime and the operation is not unmasked we
+>> +     * set the inactive elements to 1.
+>> +     */
+>> +    if (!vm && s->vma) {
+>> +        TCGLabel *active_element = gen_new_label();
+>> +        /* (i + k * max_elems) * esz */
+>> +        tcg_gen_shli_tl(mask_offs, k, get_log2(max_elems << s->sew));
+>> +        tcg_gen_add_tl(mask_offs, mask_offs, i_esz);
+>> +
+>> +        /*
+>> +         * Check whether the i bit of the mask is 0 or 1.
+>> +         *
+>> +         * static inline int vext_elem_mask(void *v0, int index)
+>> +         * {
+>> +         *     int idx = index / 64;
+>> +         *     int pos = index  % 64;
+>> +         *     return (((uint64_t *)v0)[idx] >> pos) & 1;
+>> +         * }
+>> +         */
+>> +        tcg_gen_shri_tl(mask_offs_64, mask_offs, 3);
+>> +        tcg_gen_add_tl(mask_offs_64, mask_offs_64, mask);
+>> +        tcg_gen_ld_i64((TCGv_i64)mask_elem, (TCGv_ptr)mask_offs_64, 0);
+>> +        tcg_gen_rem_tl(mask_offs_rem, mask_offs, tcg_constant_tl(8));
+> 
+> Could this be faster with tcg_gen_andi_tl(mask_offs_rem, mask_offs, 7)?
+> 
 
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-Link: https://lore.kernel.org/r/20250826133132.4064478-5-marcandre.lureau@redhat.com
-Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
----
- rust/qemu-api-macros/src/lib.rs | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+This is a good catch! I'll include this change in the next patch version.
 
-diff --git a/rust/qemu-api-macros/src/lib.rs b/rust/qemu-api-macros/src/lib.rs
-index b525d89c09e..a6147418891 100644
---- a/rust/qemu-api-macros/src/lib.rs
-+++ b/rust/qemu-api-macros/src/lib.rs
-@@ -85,7 +85,15 @@ fn derive_object_or_error(input: DeriveInput) -> Result<proc_macro2::TokenStream
-     is_c_repr(&input, "#[derive(Object)]")?;
- 
-     let name = &input.ident;
--    let parent = &get_fields(&input, "#[derive(Object)]")?[0].ident;
-+    let parent = &get_fields(&input, "#[derive(Object)]")?
-+        .get(0)
-+        .ok_or_else(|| {
-+            Error::new(
-+                input.ident.span(),
-+                "#[derive(Object)] requires a parent field",
-+            )
-+        })?
-+        .ident;
- 
-     Ok(quote! {
-         ::qemu_api::assert_field_type!(#name, #parent,
--- 
-2.47.2
 
+>> +        tcg_gen_shr_tl(mask_elem, mask_elem, mask_offs_rem);
+>> +        tcg_gen_andi_tl(mask_elem, mask_elem, 1);
+>> +        tcg_gen_brcond_tl(TCG_COND_NE, mask_elem, tcg_constant_tl(0),
+>> +                          active_element);
+>> +        /*
+>> +         * Set masked-off elements in the destination vector register to 1s.
+>> +         * Store instructions simply skip this bit as memory ops access memory
+>> +         * only for active elements.
+>> +         */
+>> +        if (is_load) {
+>> +            tcg_gen_shli_tl(mask_offs, mask_offs, s->sew);
+>> +            tcg_gen_add_tl(mask_offs, mask_offs, dest);
+>> +            st_fn(tcg_constant_tl(-1), (TCGv_ptr)mask_offs, 0);
+> 
+> One more small thing. This is implementing load and store instructions,
+> yet there are these ld_fn and st_fn, which makes it a bit confusing.
+> Calling them something like read_vreg / write_vreg might help make them
+> a bit clearer.
+> 
+
+I think the current names are okay? After splitting the vector and mask access
+code into smaller functions, it's already much easier to read. Let's review the
+next patch version first, then decide if we need to change the names.
+
+> I also suggest try to split the at generation of access for the vector
+> data and mask registers to see if you can split them into helper
+> functions. That could make this function smaller and a bit nicer to
+> review.
+> 
+
+Get, I'll split the check for vext_elem_mask() and the Load/Store of the vector
+register into separate sub-functions to make review easier.
+
+Thanks,
+Chao
 
