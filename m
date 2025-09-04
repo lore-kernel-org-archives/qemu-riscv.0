@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 027A8CA1013
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:20:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83864CA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:21:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu59q-0006C3-K9; Thu, 04 Sep 2025 04:17:26 -0400
+	id 1uu58o-0003Wx-0K; Thu, 04 Sep 2025 04:16:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu553-0006Yc-QW
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:29 -0400
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ id 1uu559-0006by-Jb
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:37 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54V-00049e-TO
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:26 -0400
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-b04163fe08dso122347266b.3
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:55 -0700 (PDT)
+ id 1uu54b-0004DN-8J
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:35 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b0449b1b56eso111703066b.1
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973513; x=1757578313; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973519; x=1757578319; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qtgYk8tL09X7evEehKpRVdQ+nFs0oLJoTM08eLIHHIc=;
- b=f8UdJ4yA7QIyJlZ/xSU9PRHA1RfjCZLZ1pO4SoGUSiGbInnsupUv2ROht8EDM6LZwd
- NtbMMdqJ9IA6OSBMyOJmWMs1iNKd9OcMdkHqHxR4t8gHHDzsjRQX8MfOICRVm5sDH9Dj
- DO7MwUSIWpNUrxel3bKb34ohR+1XniY1dJQ+UM/LWmyt7ZbMH0ftlY3Yw2AbpOv/14w1
- r3LEie+Czje8TUT5J5+dTQANX7ZUeG51JSVmKivvnDOnFRzLz5ZJ241nuxIFItbfnmqq
- 29ngHZSyY/W4QRdotkwNJMC80i0OGxqMr1lOzWL8Wzuy62nZyNtchVllUno4MxpDoUuj
- nUwg==
+ bh=TRlsHGqvmjF2Vf3U8TOAt/9n2Jks0amzBlUrbfofXWc=;
+ b=QI+cZspRjrpy3CvOuDYgZuKvrx1UpTP+Ydr27eM91ovS2np+ZU/ijhXONbGIEMTeSp
+ lBlpzoFqOuNuKyE3tiW4MM3V5S1N9MiIezdHF72Z2zb91Crgx5exCu18+FAATovq3SH5
+ J5MCTT+HEf2cMv1Z94WW3esJDS2ySdL0ZdIo6r/JCHljCHxiNLqAWBBcOGGtadpVLahT
+ DPzJQQhjLZ2hNY/AIl3mIW6/Dvc4shzM/26/Ey1WTxjDxsqMheQjL2ctz3Qe4RRA4RAS
+ hpWLhMsFQUhZms35B9DeBL3pnFIqRDFw13TadUYOdZpv0VfD7wCjRcHs069t8eYapzEw
+ 614Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973513; x=1757578313;
+ d=1e100.net; s=20230601; t=1756973519; x=1757578319;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qtgYk8tL09X7evEehKpRVdQ+nFs0oLJoTM08eLIHHIc=;
- b=XJoQvJgFNFgOCqy0L5/q6dYMx4Sqqi7eAMqoLmEJgO0b3Ih0+lLSipc2+sCbfLYdZx
- nJRPeuzz1gY3xTrs4TUHE+axpjryV3L4YFwIK+vZ13pgLSmd/Nq2ZC7iwRxzBxYpymDt
- 0oD9AsZzpzQt1KyBO8fj49UclHErvP8BfL3w7zuNx3uv4B8bHTbfog5tNxN4inzMNqXX
- zc03D3I+OoRBTP6dsu3fbE/hQCX3E4WU41zcFhxYE+s8wjFqOjpLTeU71SeJ2vot96Sb
- rwD2XyOYVrtt9nu3BQDcp2W+kJsw+xw7ggtQJKBZw0OU4G7HE+AupPtUsjEEMlUH+Yfj
- 55XQ==
+ bh=TRlsHGqvmjF2Vf3U8TOAt/9n2Jks0amzBlUrbfofXWc=;
+ b=XQrYxiGP20RspzcUv76fUB3JBvlIb5asAm+QEyFd5oVXOVRDxlDrj7ufW9Opx0k8NO
+ ANasUdqrawvI5B3PzopamkKrIEbfpjVFKl+AQcyJyogW4PIDduv2D9o8AKbCndKXrRG/
+ BlEepguyECjw79uCYiuYHidzBm3b/DHymp/SUBDZJclyJyVdTb4jUyEcyKDowr9jA+Rn
+ GhZVBYON57A5kzyzckoNNGXIPhezi9Z5ZfU2cUByiD3uiOZ9ycJGpLX8WZz1rZqguyr+
+ 3axW9+fyMhsyLzS3vzN9nEAJxoz+zEoKD28mk4U1b/mtjL9z2bOrNcUBTzJYxCE45h2I
+ oi9g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjIp/PQ34FF6V1pfNGHbOqadIMwtvndfGyeCBakigJrzA5HyVwhN4luxtt9IIjprI3npAvXrcKsO6+@nongnu.org
-X-Gm-Message-State: AOJu0Yzauc+zBia0XS6w9Ww5OViTwOUBZOPfcv8rK0O/LEB99qGlAE1m
- Qp3JgFaChySI8ZIS3pIP3uHyjCq2XCS9u3cbN7AoxxSU+JuIFRMAUCWTx2W4mhc9XrM=
-X-Gm-Gg: ASbGncur5dqEcC/ThKdmqUkVqBvHgTNwKD+gAbR5RnrchzlWbTrLvDsHsW0BR5bZLWb
- aB9EV7ZOgYtY3GXGWf5pCHe0TIOn7ysbTWwNMQDMabawLYA24CSFEbXE8JPaWrAdF+OiKrLCCnS
- 4+L8llzQU45SFDadu5WGx/0cuZb7GRCPEuAn5wrZJLg3YviP9WLPUsl9NDERpaUdvwpI1fW+5ic
- Av4BwHibO7wJyNo4Qbu/sl4DPxuCHjmqt75UcSGhN/BRiHy57TjtI/9Ie2r7kAQUeunKgGCrhYw
- 81MulptRPnbmvRFd8rUY+AyykZz+0IwAmak/rnPycqSLjg3ArzTFhcDsE/11fLl7LSK/FkN0swJ
- ePxz3TJSGc+AxaKPoCSaQovS8zUcMMrorSl/+bs6L7pMS
-X-Google-Smtp-Source: AGHT+IGYskyBYR3n5Q9uI+8AP0+1GXixN328LvmrggmBgoiP7mVHjL06ko8pn8Trl6ZXEys7FI6f0Q==
-X-Received: by 2002:a17:907:daa:b0:b04:8420:b6ef with SMTP id
- a640c23a62f3a-b048420c5b0mr91846366b.61.1756973513129; 
- Thu, 04 Sep 2025 01:11:53 -0700 (PDT)
+ AJvYcCWXM358PCZFc5OkMuv9mdJvRhDF7U4CH8jvzRHqdiGpHikh3A3gKShDtGauU9TibNrBnRPKq/E9DyH7@nongnu.org
+X-Gm-Message-State: AOJu0YwuWBO24xGzbNfPx8gZ8y9H8IALVnYW1wGgall+TUHWWRLC7oEx
+ IN18Y1XX0IQarA6rH4eFDa2iL2c69FDI9iIuzRCnnJhYU31trIrkcM2f4lX/uT77nvM=
+X-Gm-Gg: ASbGnctV803U3n+6HoqWi6t8q6//B4X03OoSUHOgs9ig+dG5FOrpWt+zoV8GnTehUjc
+ pODIJu9x7rvb2IJC6pF2JVX5u9myWbGCgLR/yjPqNdIC9PPCgzQ4qCVn3HytCYBBXKxYA+De5Ls
+ 87Esix9QtXGBFpjYOnaQhzHaQarjczyRdn4UqJcdYmjIDKSivvJdJ01JKNMwGNE0emnoD+1jG47
+ ZCblFbwqiiRcmJ6Lik2cLBmSX0e3gRC5c1gsd3rL3xyWVTo2Yr35lU02ppJN32cEJLYUo22V35+
+ yxiGZicl7LLqQbtcO0/V3LMK0bY8Bj9bCm5Ba57+EYxCl0tPqtQfk9PS5O+11NzhytKFSSVTjXA
+ I7iaTDrDNbgaZ7F+JRqyleis=
+X-Google-Smtp-Source: AGHT+IHiB61XSQJ8aB9kXr4pJ7kTktTaOCm5+fM0Vksx2NmfVFmOxv3vcmFjV8pk0rEQY7r1+KjTyw==
+X-Received: by 2002:a17:907:3cca:b0:b04:354e:47a5 with SMTP id
+ a640c23a62f3a-b04354e4b78mr1354661066b.17.1756973519415; 
+ Thu, 04 Sep 2025 01:11:59 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b017e4b9ed7sm1280476466b.90.2025.09.04.01.11.43
+ a640c23a62f3a-b0432937d7esm869790666b.17.2025.09.04.01.11.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:11:49 -0700 (PDT)
+ Thu, 04 Sep 2025 01:11:55 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 02D196000B;
- Thu, 04 Sep 2025 09:11:32 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 9C0DE60363;
+ Thu, 04 Sep 2025 09:11:35 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -129,20 +129,18 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 031/281] tests/functional: Move s390x tests into
- target-specific folders
-Date: Thu,  4 Sep 2025 09:07:05 +0100
-Message-ID: <20250904081128.1942269-32-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
+Subject: [PATCH v2 057/281] linux-user: Move get_elf_hwcap to
+ loongarch64/elfload.c
+Date: Thu,  4 Sep 2025 09:07:31 +0100
+Message-ID: <20250904081128.1942269-58-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -165,133 +163,159 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Thomas Huth <thuth@redhat.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 
-The tests/functional folder has become quite crowded, thus move the
-s390x tests into a target-specific subfolder.
+Change the return type to abi_ulong, and pass in the cpu.
 
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Signed-off-by: Thomas Huth <thuth@redhat.com>
-Message-ID: <20250819112403.432587-20-thuth@redhat.com>
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- MAINTAINERS                                         |  6 +++---
- tests/functional/meson.build                        | 13 +------------
- tests/functional/s390x/meson.build                  | 13 +++++++++++++
- .../test_ccw_virtio.py}                             |  0
- .../test_pxelinux.py}                               |  0
- .../{test_s390x_replay.py => s390x/test_replay.py}  |  0
- .../test_topology.py}                               |  0
- .../{test_s390x_tuxrun.py => s390x/test_tuxrun.py}  |  0
- 8 files changed, 17 insertions(+), 15 deletions(-)
- create mode 100644 tests/functional/s390x/meson.build
- rename tests/functional/{test_s390x_ccw_virtio.py => s390x/test_ccw_virtio.py} (100%)
- rename tests/functional/{test_s390x_pxelinux.py => s390x/test_pxelinux.py} (100%)
- rename tests/functional/{test_s390x_replay.py => s390x/test_replay.py} (100%)
- rename tests/functional/{test_s390x_topology.py => s390x/test_topology.py} (100%)
- rename tests/functional/{test_s390x_tuxrun.py => s390x/test_tuxrun.py} (100%)
+ linux-user/loader.h                 |  3 +-
+ linux-user/loongarch64/target_elf.h |  2 ++
+ linux-user/elfload.c                | 49 +----------------------------
+ linux-user/loongarch64/elfload.c    | 47 +++++++++++++++++++++++++++
+ 4 files changed, 52 insertions(+), 49 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c6410a5f5fd..4a55a20f6a5 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1797,7 +1797,7 @@ S: Supported
- F: hw/s390x/
- F: include/hw/s390x/
- F: configs/devices/s390x-softmmu/default.mak
--F: tests/functional/test_s390x_*
-+F: tests/functional/s390x
- T: git https://github.com/borntraeger/qemu.git s390-next
- L: qemu-s390x@nongnu.org
+diff --git a/linux-user/loader.h b/linux-user/loader.h
+index 818c5e6d7d7..92b6d41145e 100644
+--- a/linux-user/loader.h
++++ b/linux-user/loader.h
+@@ -102,7 +102,8 @@ extern unsigned long guest_stack_size;
+ const char *get_elf_cpu_model(uint32_t eflags);
  
-@@ -1811,7 +1811,7 @@ F: hw/s390x/ipl.*
- F: pc-bios/s390-ccw/
- F: pc-bios/s390-ccw.img
- F: docs/devel/s390-dasd-ipl.rst
--F: tests/functional/test_s390x_pxelinux.py
-+F: tests/functional/s390x/test_pxelinux.py
- T: git https://github.com/borntraeger/qemu.git s390-next
- L: qemu-s390x@nongnu.org
+ #if defined(TARGET_I386) || defined(TARGET_X86_64) || defined(TARGET_ARM) \
+-    || defined(TARGET_SPARC) || defined(TARGET_PPC)
++    || defined(TARGET_SPARC) || defined(TARGET_PPC) \
++    || defined(TARGET_LOONGARCH64)
+ abi_ulong get_elf_hwcap(CPUState *cs);
+ abi_ulong get_elf_hwcap2(CPUState *cs);
+ #endif
+diff --git a/linux-user/loongarch64/target_elf.h b/linux-user/loongarch64/target_elf.h
+index 39a08d35d9b..037740d36f2 100644
+--- a/linux-user/loongarch64/target_elf.h
++++ b/linux-user/loongarch64/target_elf.h
+@@ -6,4 +6,6 @@
+ #ifndef LOONGARCH_TARGET_ELF_H
+ #define LOONGARCH_TARGET_ELF_H
  
-@@ -1865,7 +1865,7 @@ F: hw/s390x/cpu-topology.c
- F: target/s390x/kvm/stsi-topology.c
- F: docs/devel/s390-cpu-topology.rst
- F: docs/system/s390x/cpu-topology.rst
--F: tests/functional/test_s390x_topology.py
-+F: tests/functional/s390x/test_topology.py
++#define HAVE_ELF_HWCAP          1
++
+ #endif
+diff --git a/linux-user/elfload.c b/linux-user/elfload.c
+index 843b1f7b6cc..574b37a22c1 100644
+--- a/linux-user/elfload.c
++++ b/linux-user/elfload.c
+@@ -725,54 +725,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
+ #define USE_ELF_CORE_DUMP
+ #define ELF_EXEC_PAGESIZE        4096
  
- X86 Machines
- ------------
-diff --git a/tests/functional/meson.build b/tests/functional/meson.build
-index 7e7a6aa0c93..abaa4e00fca 100644
---- a/tests/functional/meson.build
-+++ b/tests/functional/meson.build
-@@ -29,10 +29,7 @@ subdir('ppc64')
- subdir('riscv32')
- subdir('riscv64')
- subdir('rx')
+-#define ELF_HWCAP get_elf_hwcap()
 -
--test_s390x_timeouts = {
--  's390x_ccw_virtio' : 420,
+-/* See arch/loongarch/include/uapi/asm/hwcap.h */
+-enum {
+-    HWCAP_LOONGARCH_CPUCFG   = (1 << 0),
+-    HWCAP_LOONGARCH_LAM      = (1 << 1),
+-    HWCAP_LOONGARCH_UAL      = (1 << 2),
+-    HWCAP_LOONGARCH_FPU      = (1 << 3),
+-    HWCAP_LOONGARCH_LSX      = (1 << 4),
+-    HWCAP_LOONGARCH_LASX     = (1 << 5),
+-    HWCAP_LOONGARCH_CRC32    = (1 << 6),
+-    HWCAP_LOONGARCH_COMPLEX  = (1 << 7),
+-    HWCAP_LOONGARCH_CRYPTO   = (1 << 8),
+-    HWCAP_LOONGARCH_LVZ      = (1 << 9),
+-    HWCAP_LOONGARCH_LBT_X86  = (1 << 10),
+-    HWCAP_LOONGARCH_LBT_ARM  = (1 << 11),
+-    HWCAP_LOONGARCH_LBT_MIPS = (1 << 12),
+-};
+-
+-static uint32_t get_elf_hwcap(void)
+-{
+-    LoongArchCPU *cpu = LOONGARCH_CPU(thread_cpu);
+-    uint32_t hwcaps = 0;
+-
+-    hwcaps |= HWCAP_LOONGARCH_CRC32;
+-
+-    if (FIELD_EX32(cpu->env.cpucfg[1], CPUCFG1, UAL)) {
+-        hwcaps |= HWCAP_LOONGARCH_UAL;
+-    }
+-
+-    if (FIELD_EX32(cpu->env.cpucfg[2], CPUCFG2, FP)) {
+-        hwcaps |= HWCAP_LOONGARCH_FPU;
+-    }
+-
+-    if (FIELD_EX32(cpu->env.cpucfg[2], CPUCFG2, LAM)) {
+-        hwcaps |= HWCAP_LOONGARCH_LAM;
+-    }
+-
+-    if (FIELD_EX32(cpu->env.cpucfg[2], CPUCFG2, LSX)) {
+-        hwcaps |= HWCAP_LOONGARCH_LSX;
+-    }
+-
+-    if (FIELD_EX32(cpu->env.cpucfg[2], CPUCFG2, LASX)) {
+-        hwcaps |= HWCAP_LOONGARCH_LASX;
+-    }
+-
+-    return hwcaps;
 -}
-+subdir('s390x')
++#define ELF_HWCAP get_elf_hwcap(thread_cpu)
  
- test_sh4_timeouts = {
-   'sh4_tuxrun' : 240,
-@@ -59,14 +56,6 @@ tests_generic_linuxuser = [
- tests_generic_bsduser = [
- ]
+ #define ELF_PLATFORM "loongarch"
  
--tests_s390x_system_thorough = [
--  's390x_ccw_virtio',
--  's390x_pxelinux',
--  's390x_replay',
--  's390x_topology',
--  's390x_tuxrun',
--]
--
- tests_sh4_system_thorough = [
-   'sh4_r2d',
-   'sh4_tuxrun',
-diff --git a/tests/functional/s390x/meson.build b/tests/functional/s390x/meson.build
-new file mode 100644
-index 00000000000..030b116039c
---- /dev/null
-+++ b/tests/functional/s390x/meson.build
-@@ -0,0 +1,13 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
+diff --git a/linux-user/loongarch64/elfload.c b/linux-user/loongarch64/elfload.c
+index 874dc4c2304..ee4a85b8d6c 100644
+--- a/linux-user/loongarch64/elfload.c
++++ b/linux-user/loongarch64/elfload.c
+@@ -9,3 +9,50 @@ const char *get_elf_cpu_model(uint32_t eflags)
+ {
+     return "la464";
+ }
 +
-+test_s390x_timeouts = {
-+  'ccw_virtio' : 420,
++/* See arch/loongarch/include/uapi/asm/hwcap.h */
++enum {
++    HWCAP_LOONGARCH_CPUCFG   = (1 << 0),
++    HWCAP_LOONGARCH_LAM      = (1 << 1),
++    HWCAP_LOONGARCH_UAL      = (1 << 2),
++    HWCAP_LOONGARCH_FPU      = (1 << 3),
++    HWCAP_LOONGARCH_LSX      = (1 << 4),
++    HWCAP_LOONGARCH_LASX     = (1 << 5),
++    HWCAP_LOONGARCH_CRC32    = (1 << 6),
++    HWCAP_LOONGARCH_COMPLEX  = (1 << 7),
++    HWCAP_LOONGARCH_CRYPTO   = (1 << 8),
++    HWCAP_LOONGARCH_LVZ      = (1 << 9),
++    HWCAP_LOONGARCH_LBT_X86  = (1 << 10),
++    HWCAP_LOONGARCH_LBT_ARM  = (1 << 11),
++    HWCAP_LOONGARCH_LBT_MIPS = (1 << 12),
++};
++
++abi_ulong get_elf_hwcap(CPUState *cs)
++{
++    LoongArchCPU *cpu = LOONGARCH_CPU(cs);
++    abi_ulong hwcaps = 0;
++
++    hwcaps |= HWCAP_LOONGARCH_CRC32;
++
++    if (FIELD_EX32(cpu->env.cpucfg[1], CPUCFG1, UAL)) {
++        hwcaps |= HWCAP_LOONGARCH_UAL;
++    }
++
++    if (FIELD_EX32(cpu->env.cpucfg[2], CPUCFG2, FP)) {
++        hwcaps |= HWCAP_LOONGARCH_FPU;
++    }
++
++    if (FIELD_EX32(cpu->env.cpucfg[2], CPUCFG2, LAM)) {
++        hwcaps |= HWCAP_LOONGARCH_LAM;
++    }
++
++    if (FIELD_EX32(cpu->env.cpucfg[2], CPUCFG2, LSX)) {
++        hwcaps |= HWCAP_LOONGARCH_LSX;
++    }
++
++    if (FIELD_EX32(cpu->env.cpucfg[2], CPUCFG2, LASX)) {
++        hwcaps |= HWCAP_LOONGARCH_LASX;
++    }
++
++    return hwcaps;
 +}
-+
-+tests_s390x_system_thorough = [
-+  'ccw_virtio',
-+  'pxelinux',
-+  'replay',
-+  'topology',
-+  'tuxrun',
-+]
-diff --git a/tests/functional/test_s390x_ccw_virtio.py b/tests/functional/s390x/test_ccw_virtio.py
-similarity index 100%
-rename from tests/functional/test_s390x_ccw_virtio.py
-rename to tests/functional/s390x/test_ccw_virtio.py
-diff --git a/tests/functional/test_s390x_pxelinux.py b/tests/functional/s390x/test_pxelinux.py
-similarity index 100%
-rename from tests/functional/test_s390x_pxelinux.py
-rename to tests/functional/s390x/test_pxelinux.py
-diff --git a/tests/functional/test_s390x_replay.py b/tests/functional/s390x/test_replay.py
-similarity index 100%
-rename from tests/functional/test_s390x_replay.py
-rename to tests/functional/s390x/test_replay.py
-diff --git a/tests/functional/test_s390x_topology.py b/tests/functional/s390x/test_topology.py
-similarity index 100%
-rename from tests/functional/test_s390x_topology.py
-rename to tests/functional/s390x/test_topology.py
-diff --git a/tests/functional/test_s390x_tuxrun.py b/tests/functional/s390x/test_tuxrun.py
-similarity index 100%
-rename from tests/functional/test_s390x_tuxrun.py
-rename to tests/functional/s390x/test_tuxrun.py
 -- 
 2.47.2
 
