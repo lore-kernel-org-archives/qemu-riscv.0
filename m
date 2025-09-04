@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1674BCA1013
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 027A8CA1013
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:20:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu58Q-0002Rr-Rs; Thu, 04 Sep 2025 04:15:59 -0400
+	id 1uu59q-0006C3-K9; Thu, 04 Sep 2025 04:17:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54y-0006Vi-7r
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:26 -0400
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ id 1uu553-0006Yc-QW
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:29 -0400
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54Q-00046V-83
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:23 -0400
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-afcb7322da8so151093666b.0
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:49 -0700 (PDT)
+ id 1uu54V-00049e-TO
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:26 -0400
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b04163fe08dso122347266b.3
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973508; x=1757578308; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973513; x=1757578313; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=omV0Vr4nYXMtMeXSQYoBuMjm05IYf3r1DGykbz6eHk0=;
- b=L8B1XdrHxhtpz0AQN2KkL47ysytT/deI9iv4Al2yKsCJCCWxxu2+JW2eEhkbYOhw7H
- FeKojj0sFIyFJXTDrm0Zn9YkQ9Zg1W+m0dwnWNfyrTHQXEmbrT+9Afivi1JG2iPnVZw1
- 5I+144N8+Uz8jKp8U0/vgf72FGEsnaiQCGCOgKDcEmtTRhJ2SlhkYzjAO70pKeee2xos
- nF+ltSifYn4WyDa/WDebEBlwc5iayIGThOTqAT8QybcXtLBIuavqExAI5OJjPQm6Hg7f
- TqqCf8s3iNMYF0ATIRyUOxg0ndTWNZs6dd6ISyfKgz6EtDz2FC8ehpDYFZK0buw4FT1k
- TTmg==
+ bh=qtgYk8tL09X7evEehKpRVdQ+nFs0oLJoTM08eLIHHIc=;
+ b=f8UdJ4yA7QIyJlZ/xSU9PRHA1RfjCZLZ1pO4SoGUSiGbInnsupUv2ROht8EDM6LZwd
+ NtbMMdqJ9IA6OSBMyOJmWMs1iNKd9OcMdkHqHxR4t8gHHDzsjRQX8MfOICRVm5sDH9Dj
+ DO7MwUSIWpNUrxel3bKb34ohR+1XniY1dJQ+UM/LWmyt7ZbMH0ftlY3Yw2AbpOv/14w1
+ r3LEie+Czje8TUT5J5+dTQANX7ZUeG51JSVmKivvnDOnFRzLz5ZJ241nuxIFItbfnmqq
+ 29ngHZSyY/W4QRdotkwNJMC80i0OGxqMr1lOzWL8Wzuy62nZyNtchVllUno4MxpDoUuj
+ nUwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973508; x=1757578308;
+ d=1e100.net; s=20230601; t=1756973513; x=1757578313;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=omV0Vr4nYXMtMeXSQYoBuMjm05IYf3r1DGykbz6eHk0=;
- b=MkNquC4Hxe02s20xbLzcCwzcEsU3zGEe2qlK0AbOEjUk0gWn9m4m87kZRD8iOjNn2M
- bUvgqPHeS2z3Q7VwEW9Euy5vhKCsjUIMgPXI912TOitZeLjQjC3uxBcjII+jhnTXTUk0
- UQFFzpSUrPzgIBbzy5TRtYtikgARzmRRXQ4OzHZBHLkq0e6X6GF6nmE8/1iGjsssKMhN
- J4w205pUknF8XzXapTwHZq+CFVzF38S7rrhF4+WEZw1wjCDQrT6qNezN5q71G8hq8YNb
- dDH7w6k/QdQaAaiRSNeIEafg3NbzrK9IZvfnpQmq7Z4V5CqGuBZ8Q/Hovtzw0hb4TBwg
- bIgw==
+ bh=qtgYk8tL09X7evEehKpRVdQ+nFs0oLJoTM08eLIHHIc=;
+ b=XJoQvJgFNFgOCqy0L5/q6dYMx4Sqqi7eAMqoLmEJgO0b3Ih0+lLSipc2+sCbfLYdZx
+ nJRPeuzz1gY3xTrs4TUHE+axpjryV3L4YFwIK+vZ13pgLSmd/Nq2ZC7iwRxzBxYpymDt
+ 0oD9AsZzpzQt1KyBO8fj49UclHErvP8BfL3w7zuNx3uv4B8bHTbfog5tNxN4inzMNqXX
+ zc03D3I+OoRBTP6dsu3fbE/hQCX3E4WU41zcFhxYE+s8wjFqOjpLTeU71SeJ2vot96Sb
+ rwD2XyOYVrtt9nu3BQDcp2W+kJsw+xw7ggtQJKBZw0OU4G7HE+AupPtUsjEEMlUH+Yfj
+ 55XQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVaSvQwk3m8otsxZu3GW6dlpX/fOzc+2ghi0ukcLG8vFlyykHBTkopbEcE63UiJ61G6kGUe3AD8NjrQ@nongnu.org
-X-Gm-Message-State: AOJu0YyUydLzF0mR10kmptt26KlKAr3X8ZthyYkLg+/90v8tvwFKO7n7
- lV2AW0YrThvYJUxLTsnmSWhB9gYBM3y3S4iWN/2m52ia2RHJaCOz2KsuXWScYPWRNWc=
-X-Gm-Gg: ASbGncv8u9HREZsRSr4fJ87233jsslz4rKVP0j8oLAi7zfjZGfTRE52oprcepwYxTBr
- sMD0GkmZjNQHuIiINF+c5hGR94y19Y9RtOUIjx1eF3oqAhKkCRr4nLxMi7Kj9m1pprRV/kfJ2mQ
- 2QhE0rv4K4Xv7YMrIdhJC7ip2/LvAp8yVTQrtE2vyKSFjYg68YImJN46sHjFLnf0RMGYlXqJkAy
- d1BLHY9Y4EuyOCHm5S7fW31uXshX45XAODBbXlteQbL6CYSxH0ywZ4feByM4ZVzDEHk7BKJHQ2V
- h/ZZtofa/wWNmnbeaYrYl1DMlqb7H1MtJT8iYTzv29P9KhJwiPDrqbqIn68d15KEz3kTc+6mcgL
- JmugSHCCurUXsR+RN9gkQcYc=
-X-Google-Smtp-Source: AGHT+IFABY+GNZll4Er2gNXt3l+Crhs6fVMAbrNAexTY49T7TJMEwSOPjIndEkqPytMN7BQSr89N5A==
-X-Received: by 2002:a17:907:3cd2:b0:afe:9777:ed0e with SMTP id
- a640c23a62f3a-b01af2e15camr1761502866b.0.1756973508120; 
- Thu, 04 Sep 2025 01:11:48 -0700 (PDT)
+ AJvYcCXjIp/PQ34FF6V1pfNGHbOqadIMwtvndfGyeCBakigJrzA5HyVwhN4luxtt9IIjprI3npAvXrcKsO6+@nongnu.org
+X-Gm-Message-State: AOJu0Yzauc+zBia0XS6w9Ww5OViTwOUBZOPfcv8rK0O/LEB99qGlAE1m
+ Qp3JgFaChySI8ZIS3pIP3uHyjCq2XCS9u3cbN7AoxxSU+JuIFRMAUCWTx2W4mhc9XrM=
+X-Gm-Gg: ASbGncur5dqEcC/ThKdmqUkVqBvHgTNwKD+gAbR5RnrchzlWbTrLvDsHsW0BR5bZLWb
+ aB9EV7ZOgYtY3GXGWf5pCHe0TIOn7ysbTWwNMQDMabawLYA24CSFEbXE8JPaWrAdF+OiKrLCCnS
+ 4+L8llzQU45SFDadu5WGx/0cuZb7GRCPEuAn5wrZJLg3YviP9WLPUsl9NDERpaUdvwpI1fW+5ic
+ Av4BwHibO7wJyNo4Qbu/sl4DPxuCHjmqt75UcSGhN/BRiHy57TjtI/9Ie2r7kAQUeunKgGCrhYw
+ 81MulptRPnbmvRFd8rUY+AyykZz+0IwAmak/rnPycqSLjg3ArzTFhcDsE/11fLl7LSK/FkN0swJ
+ ePxz3TJSGc+AxaKPoCSaQovS8zUcMMrorSl/+bs6L7pMS
+X-Google-Smtp-Source: AGHT+IGYskyBYR3n5Q9uI+8AP0+1GXixN328LvmrggmBgoiP7mVHjL06ko8pn8Trl6ZXEys7FI6f0Q==
+X-Received: by 2002:a17:907:daa:b0:b04:8420:b6ef with SMTP id
+ a640c23a62f3a-b048420c5b0mr91846366b.61.1756973513129; 
+ Thu, 04 Sep 2025 01:11:53 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b046f888b95sm275965566b.34.2025.09.04.01.11.39
+ a640c23a62f3a-b017e4b9ed7sm1280476466b.90.2025.09.04.01.11.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:11:43 -0700 (PDT)
+ Thu, 04 Sep 2025 01:11:49 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id B85DB5FAA7;
- Thu, 04 Sep 2025 09:11:30 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 02D196000B;
+ Thu, 04 Sep 2025 09:11:32 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -131,18 +131,18 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 021/281] tests/functional: Move hppa tests into
- architecture specific folder
-Date: Thu,  4 Sep 2025 09:06:55 +0100
-Message-ID: <20250904081128.1942269-22-alex.bennee@linaro.org>
+Subject: [PATCH v2 031/281] tests/functional: Move s390x tests into
+ target-specific folders
+Date: Thu,  4 Sep 2025 09:07:05 +0100
+Message-ID: <20250904081128.1942269-32-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -168,72 +168,130 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 From: Thomas Huth <thuth@redhat.com>
 
 The tests/functional folder has become quite crowded, thus move the
-avr tests into a target-specific subfolder.
+s390x tests into a target-specific subfolder.
 
 Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Thomas Huth <thuth@redhat.com>
-Message-ID: <20250819112403.432587-10-thuth@redhat.com>
+Message-ID: <20250819112403.432587-20-thuth@redhat.com>
 ---
- MAINTAINERS                                                  | 2 +-
- tests/functional/hppa/meson.build                            | 5 +++++
- .../{test_hppa_seabios.py => hppa/test_seabios.py}           | 0
- tests/functional/meson.build                                 | 5 +----
- 4 files changed, 7 insertions(+), 5 deletions(-)
- create mode 100644 tests/functional/hppa/meson.build
- rename tests/functional/{test_hppa_seabios.py => hppa/test_seabios.py} (100%)
+ MAINTAINERS                                         |  6 +++---
+ tests/functional/meson.build                        | 13 +------------
+ tests/functional/s390x/meson.build                  | 13 +++++++++++++
+ .../test_ccw_virtio.py}                             |  0
+ .../test_pxelinux.py}                               |  0
+ .../{test_s390x_replay.py => s390x/test_replay.py}  |  0
+ .../test_topology.py}                               |  0
+ .../{test_s390x_tuxrun.py => s390x/test_tuxrun.py}  |  0
+ 8 files changed, 17 insertions(+), 15 deletions(-)
+ create mode 100644 tests/functional/s390x/meson.build
+ rename tests/functional/{test_s390x_ccw_virtio.py => s390x/test_ccw_virtio.py} (100%)
+ rename tests/functional/{test_s390x_pxelinux.py => s390x/test_pxelinux.py} (100%)
+ rename tests/functional/{test_s390x_replay.py => s390x/test_replay.py} (100%)
+ rename tests/functional/{test_s390x_topology.py => s390x/test_topology.py} (100%)
+ rename tests/functional/{test_s390x_tuxrun.py => s390x/test_tuxrun.py} (100%)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index d01afcbea6d..2e1754912f6 100644
+index c6410a5f5fd..4a55a20f6a5 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1273,7 +1273,7 @@ F: include/hw/pci-host/astro.h
- F: include/hw/pci-host/dino.h
- F: pc-bios/hppa-firmware.img
- F: roms/seabios-hppa/
--F: tests/functional/test_hppa_seabios.py
-+F: tests/functional/hppa/test_seabios.py
+@@ -1797,7 +1797,7 @@ S: Supported
+ F: hw/s390x/
+ F: include/hw/s390x/
+ F: configs/devices/s390x-softmmu/default.mak
+-F: tests/functional/test_s390x_*
++F: tests/functional/s390x
+ T: git https://github.com/borntraeger/qemu.git s390-next
+ L: qemu-s390x@nongnu.org
  
- LoongArch Machines
- ------------------
-diff --git a/tests/functional/hppa/meson.build b/tests/functional/hppa/meson.build
-new file mode 100644
-index 00000000000..a3348370884
---- /dev/null
-+++ b/tests/functional/hppa/meson.build
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+
-+tests_hppa_system_quick = [
-+  'seabios',
-+]
-diff --git a/tests/functional/test_hppa_seabios.py b/tests/functional/hppa/test_seabios.py
-similarity index 100%
-rename from tests/functional/test_hppa_seabios.py
-rename to tests/functional/hppa/test_seabios.py
+@@ -1811,7 +1811,7 @@ F: hw/s390x/ipl.*
+ F: pc-bios/s390-ccw/
+ F: pc-bios/s390-ccw.img
+ F: docs/devel/s390-dasd-ipl.rst
+-F: tests/functional/test_s390x_pxelinux.py
++F: tests/functional/s390x/test_pxelinux.py
+ T: git https://github.com/borntraeger/qemu.git s390-next
+ L: qemu-s390x@nongnu.org
+ 
+@@ -1865,7 +1865,7 @@ F: hw/s390x/cpu-topology.c
+ F: target/s390x/kvm/stsi-topology.c
+ F: docs/devel/s390-cpu-topology.rst
+ F: docs/system/s390x/cpu-topology.rst
+-F: tests/functional/test_s390x_topology.py
++F: tests/functional/s390x/test_topology.py
+ 
+ X86 Machines
+ ------------
 diff --git a/tests/functional/meson.build b/tests/functional/meson.build
-index 81eaa9c218c..8f85c13d3d1 100644
+index 7e7a6aa0c93..abaa4e00fca 100644
 --- a/tests/functional/meson.build
 +++ b/tests/functional/meson.build
-@@ -13,6 +13,7 @@ subdir('aarch64')
- subdir('alpha')
- subdir('arm')
- subdir('avr')
-+subdir('hppa')
+@@ -29,10 +29,7 @@ subdir('ppc64')
+ subdir('riscv32')
+ subdir('riscv64')
+ subdir('rx')
+-
+-test_s390x_timeouts = {
+-  's390x_ccw_virtio' : 420,
+-}
++subdir('s390x')
  
- test_mips_timeouts = {
-   'mips_malta' : 480,
-@@ -78,10 +79,6 @@ tests_generic_linuxuser = [
+ test_sh4_timeouts = {
+   'sh4_tuxrun' : 240,
+@@ -59,14 +56,6 @@ tests_generic_linuxuser = [
  tests_generic_bsduser = [
  ]
  
--tests_hppa_system_quick = [
--  'hppa_seabios',
+-tests_s390x_system_thorough = [
+-  's390x_ccw_virtio',
+-  's390x_pxelinux',
+-  's390x_replay',
+-  's390x_topology',
+-  's390x_tuxrun',
 -]
 -
- tests_i386_system_quick = [
-   'i386_migration',
- ]
+ tests_sh4_system_thorough = [
+   'sh4_r2d',
+   'sh4_tuxrun',
+diff --git a/tests/functional/s390x/meson.build b/tests/functional/s390x/meson.build
+new file mode 100644
+index 00000000000..030b116039c
+--- /dev/null
++++ b/tests/functional/s390x/meson.build
+@@ -0,0 +1,13 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++
++test_s390x_timeouts = {
++  'ccw_virtio' : 420,
++}
++
++tests_s390x_system_thorough = [
++  'ccw_virtio',
++  'pxelinux',
++  'replay',
++  'topology',
++  'tuxrun',
++]
+diff --git a/tests/functional/test_s390x_ccw_virtio.py b/tests/functional/s390x/test_ccw_virtio.py
+similarity index 100%
+rename from tests/functional/test_s390x_ccw_virtio.py
+rename to tests/functional/s390x/test_ccw_virtio.py
+diff --git a/tests/functional/test_s390x_pxelinux.py b/tests/functional/s390x/test_pxelinux.py
+similarity index 100%
+rename from tests/functional/test_s390x_pxelinux.py
+rename to tests/functional/s390x/test_pxelinux.py
+diff --git a/tests/functional/test_s390x_replay.py b/tests/functional/s390x/test_replay.py
+similarity index 100%
+rename from tests/functional/test_s390x_replay.py
+rename to tests/functional/s390x/test_replay.py
+diff --git a/tests/functional/test_s390x_topology.py b/tests/functional/s390x/test_topology.py
+similarity index 100%
+rename from tests/functional/test_s390x_topology.py
+rename to tests/functional/s390x/test_topology.py
+diff --git a/tests/functional/test_s390x_tuxrun.py b/tests/functional/s390x/test_tuxrun.py
+similarity index 100%
+rename from tests/functional/test_s390x_tuxrun.py
+rename to tests/functional/s390x/test_tuxrun.py
 -- 
 2.47.2
 
