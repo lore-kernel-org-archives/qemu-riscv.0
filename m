@@ -4,100 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2CECA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 11:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD146CA1002
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 12:09:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu7nu-0001mD-VP; Thu, 04 Sep 2025 07:06:58 -0400
+	id 1uu8mB-0008Lm-KV; Thu, 04 Sep 2025 08:09:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uu7ns-0001kd-0o
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 07:06:57 -0400
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uu7np-0001YC-41
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 07:06:55 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-545dccac2f9so806266e0c.0
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 04:06:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1756984010; x=1757588810; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jerxXcM/PsSFMx1bsFeXBYF/oYx7XQlJp/qkQuX6kzc=;
- b=LLpVCYCfz6ZwuC5ZJY9XWKHuoVcyNGd8dCRm04LDn1KcxUq1QU704/2jl2BpjhOlLE
- 2Yn34+TRHYWm4oyHG52AHHfzMdJiSUA82X/e3gBugGduQ3qPFK30suncQqkf3Fq8Jrbg
- X0t8PR1Vq3Xj+HC3bI/+6Xqu1GgnbFjbcElCR3AJ+K+ILb+AtnsxmyX61GGjBuh0ebfb
- YQ6ix0jLEZqhKgAHwZxFMpp/qaRvyJ0P04a7GEY8Q7pT3rm3fSnLPMECNIsg5dYXcCMG
- FF2EZaoxBnz73x+8V/lUQi6T4FVbROF5JfUsu0ubTstNyqBc3hxE4UEXv/AbGVNByChA
- cX2w==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1uu8m8-0008KH-4D
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 08:09:12 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1uu8lv-0003wR-Gk
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 08:09:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1756987732;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RGfsbECkN8yDi9zfYlQG8Tqcfjb7p7ijr5WocyCehHg=;
+ b=ImkBjQkQomJUMirJA1KUN5j6d16u7g26loI8bUkESfKKmhPu8Q/zQ2yqTPTguH8mnsQVMh
+ ff927sA05gOyzVG94ujkBa2ahVbJ7wTk0Lt/VT3rNOJB0COAd6mnnzpbfXhtXGKIeLfgm5
+ LXndA623GRYcC0K1CQX3Gr+6i9KAndA=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-473-TwiN2hGZPDKkaISAAyRCCw-1; Thu, 04 Sep 2025 08:08:50 -0400
+X-MC-Unique: TwiN2hGZPDKkaISAAyRCCw-1
+X-Mimecast-MFC-AGG-ID: TwiN2hGZPDKkaISAAyRCCw_1756987730
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-3da4c617a95so846534f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 05:08:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756984010; x=1757588810;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jerxXcM/PsSFMx1bsFeXBYF/oYx7XQlJp/qkQuX6kzc=;
- b=k/qSSzekxz9fRaxqmVQ4FRoThscpJyPe5LPcP0YyWmaPPX+Jio4d7X3umfPdbFv73S
- 1xK6PzIkYnpg2nLKRZ2rHa3dGcMnCQ4uMCDzsKA7U307qh7Nv/JuL4Hvw91G8lqV4Qr5
- HSk7PmwEUQM39UEVynWzFxZ3sSN8KJvVC95e/499GAiotIzK0ziZpPxvHAtlfp3A1NXM
- 2+hgRSzZCpWm1eat/WnorJcKnedSjvDtZQU1rwq9zqzoeKsQ42WvmjCGj7ogjTtDEtpz
- 60BkkvID8OHvr9l1BOiPRF+L0AZbxAI2r1k1oLycriRuaAx3yoi50gkCyUucy9VULTVl
- mlDw==
-X-Gm-Message-State: AOJu0YymPl8t+td6rtKw9EABZzPSqpMB8zZpliwotHDPsX4keq64TBJB
- qMyDN2wEuIpged9AJ6aKCl8s4VtBt7/4XIx9W89tc2bAChmG/EXnstMzFmDpraEsAdg=
-X-Gm-Gg: ASbGnctQiU6miYJbNyyzb5F8/Eag3oaHyD8qOkucWWgzEWIOQ5sHEFqSV9KnM6zBQl5
- 7Gt6Z6Gi0NMztOzJUH6jT/9tDm3OKsHC+dWmVm+JKn32vx/qzi+4o7m3vMspRPFb6IKxeFZoqhW
- UZ/4VXFyIWMRjut3D1W62uttFqxqMEBaw6VXXOzf3e1gNRGd1kZhFA2LgcV94QubX5H8hsKZ1fk
- qAVaUG/70gl0JJN34prnEiUo8zN94iRsQvy/O6Dq4hIaIgW7PHBm4holqX6W7OE1UVy/IiCCR5o
- 6n+CNAG6eAHI14wDiMg5WW5q0WzTNay5czpSk+sYnKBf+pApPRCck+bxUKSJhcqwIeLyjDicdbA
- 36OxYCEBFDMZCdF0RfT5TtpxSKffVpvyC8+hFVLDxwe+HB3NlJi+54pCA/vomr5ZW/ZDWmikqAt
- SoiIXMRsG1eS4=
-X-Google-Smtp-Source: AGHT+IF0V0gb5hIzm+ByRmsXfZH4BMY6Z7VepRTqBMq5Qda2uRmut+1PGtt1b5M0IwGMrtpM33P54w==
-X-Received: by 2002:a05:6122:1d9f:b0:545:df94:e5f1 with SMTP id
- 71dfb90a1353d-545df94e8f2mr1847888e0c.10.1756984010536; 
- Thu, 04 Sep 2025 04:06:50 -0700 (PDT)
-Received: from ?IPV6:2804:7f0:bcc0:a026:14f7:a39e:7d17:ef5a?
- ([2804:7f0:bcc0:a026:14f7:a39e:7d17:ef5a])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-54491464a00sm7938597e0c.16.2025.09.04.04.06.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 Sep 2025 04:06:50 -0700 (PDT)
-Message-ID: <3dd9888f-be16-48f8-a858-f58a5b57825d@ventanamicro.com>
-Date: Thu, 4 Sep 2025 08:06:44 -0300
+ d=1e100.net; s=20230601; t=1756987729; x=1757592529;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RGfsbECkN8yDi9zfYlQG8Tqcfjb7p7ijr5WocyCehHg=;
+ b=j4NXEHFja9YCvGlElTK99X+OA+J1BMBphP4JHd21D+zBouOEWJeB1RZBi5/4x6ay4I
+ PhlXLjnO6p89+Q6yRmupHIx4p+38Gf1j8ITWFcp8zK65+t3SIC6H1AcKihPIG0ffLenF
+ hDXlBdfqesJfERs4/6CsirGgZumIUOqBfbgBDpxik7f7e7KoS3ETiv1OuNaIrMH67VXn
+ iHJeg6w4Krrc+QH7xrLtEmIA30EB21LGPP6RBXWlK/5gftUeE3oItFjlc1cU7Bp5KVIx
+ U/H+/0a3nQWt+Rg7i4XZw/qhtDdTeZiL9CCMryYA7j0O98h0CZ4OiEFOEM65/O9ZIsfX
+ 05ew==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVLJJ/zw15vHYaCb+Bd+ZjK1IJxzuW7O9kocxN4Y6QmK6Q35palSmDoPtcR5UHv/OuYBJj+30YoTXgJ@nongnu.org
+X-Gm-Message-State: AOJu0YxQXDYagSxqbwRMY5zsOD8WbKs151nNSMHY7W0oLu+ptqMQnc0q
+ 7ttknMDFKxByxUm7M8kIoM3y+G77SXoYypPg+AjKohugwc8fQ/AGa9aqtx+AcECdtGdVwTEtzf6
+ 42H6TeH1zJUfz9gdHgSHbJLWwow1Qu+sXNitjllCCNvimhFNDh9UweArr
+X-Gm-Gg: ASbGncuinijMWQHBJNaDWvVMvt/peMgxd6trqjKcEw60gH34E/K3ou2IAIH1eT1Pq9L
+ ymEOFb/acvmFJ8Q5TyRNigO0SBuLjdMMw5ZIqBcaFLyRfgZoSJ05sbG2CdXiA0Tq777yQkDnJE1
+ q/e99+UVUEFVsbzrUWlLpD36SyKfg440lQQMKd4929M0lbeh8NOhiPlfX8kE5+vDiS70csNeBQA
+ X9KFU0kR0/yH2nyscZALFEGZIcowDQ5Yqp7JNPrR6vEaGmA9/NKCDymj/AQlW1Ss7NH/Us7IGCa
+ JwfEJq8Ddc1vorm4C2hIkdA2GyoeRg==
+X-Received: by 2002:a05:6000:2681:b0:3df:1a8b:ff40 with SMTP id
+ ffacd0b85a97d-3df1a8c028amr3675208f8f.43.1756987729314; 
+ Thu, 04 Sep 2025 05:08:49 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGX0PPz3yh7ncUtLm/xW0ZxJtT+AldckvinW77LYH+EITFhgO23Jx24JW/wmCpN9gO6bSEhZg==
+X-Received: by 2002:a05:6000:2681:b0:3df:1a8b:ff40 with SMTP id
+ ffacd0b85a97d-3df1a8c028amr3675186f8f.43.1756987728720; 
+ Thu, 04 Sep 2025 05:08:48 -0700 (PDT)
+Received: from fedora ([85.93.96.130]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3d53fda847dsm18324880f8f.0.2025.09.04.05.08.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Sep 2025 05:08:48 -0700 (PDT)
+Date: Thu, 4 Sep 2025 14:08:44 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Alex =?UTF-8?B?QmVubsOpZQ==?= <alex.bennee@linaro.org>, Peter Xu
+ <peterx@redhat.com>
+Cc: qemu-devel@nongnu.org, Reinoud Zandijk <reinoud@netbsd.org>,
+ =?UTF-8?B?Q8OpZHJpYw==?= Le Goater <clg@redhat.com>, Huacai Chen
+ <chenhuacai@kernel.org>, Zhao Liu <zhao1.liu@intel.com>, Paolo Bonzini
+ <pbonzini@redhat.com>, Alistair Francis <alistair.francis@wdc.com>,
+ qemu-arm@nongnu.org, Fam Zheng <fam@euphon.net>, Helge Deller
+ <deller@gmx.de>, Matthew Rosato <mjrosato@linux.ibm.com>, Fabiano Rosas
+ <farosas@suse.de>, qemu-rust@nongnu.org, Bibo Mao <maobibo@loongson.cn>,
+ qemu-riscv@nongnu.org, Thanos Makatos <thanos.makatos@nutanix.com>, Liu
+ Zhiwei <zhiwei_liu@linux.alibaba.com>, Riku Voipio <riku.voipio@iki.fi>,
+ Cameron Esfahani <dirty@apple.com>, Alexander Graf <agraf@csgraf.de>,
+ Laurent Vivier <lvivier@redhat.com>, Harsh Prateek Bora
+ <harshpb@linux.ibm.com>, "Daniel P. =?UTF-8?B?QmVycmFuZ8Op?="
+ <berrange@redhat.com>, qemu-ppc@nongnu.org, Stafford Horne
+ <shorne@gmail.com>, Sunil Muthuswamy <sunilmut@microsoft.com>, Jagannathan
+ Raman <jag.raman@oracle.com>, Brian Cain <brian.cain@oss.qualcomm.com>,
+ Phil Dennis-Jordan <phil@philjordan.eu>, devel@lists.libvirt.org, Mads
+ Ynddal <mads@ynddal.dk>, Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ Jason Herne <jjherne@linux.ibm.com>, Michael Rolnik <mrolnik@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Laurent Vivier <laurent@vivier.eu>, Ilya
+ Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org, Peter Maydell
+ <peter.maydell@linaro.org>, Kostiantyn Kostiuk <kkostiuk@redhat.com>, Kyle
+ Evans <kevans@freebsd.org>, David Hildenbrand <david@redhat.com>, "Edgar E.
+ Iglesias" <edgar.iglesias@gmail.com>, Warner Losh <imp@bsdimp.com>, Daniel
+ Henrique Barboza <dbarboza@ventanamicro.com>, John Snow <jsnow@redhat.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>, Aleksandar Rikalo
+ <arikalo@gmail.com>, Alistair Francis <alistair@alistair23.me>, Marcelo
+ Tosatti <mtosatti@redhat.com>, Yonggang Luo <luoyonggang@gmail.com>,
+ Radoslaw Biernacki <rad@semihalf.com>, Artyom Tarasenko
+ <atar4qemu@gmail.com>, Yanan Wang <wangyanan55@huawei.com>, Eduardo Habkost
+ <eduardo@habkost.net>, Aurelien Jarno <aurelien@aurel32.net>, Richard
+ Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org, Alex
+ Williamson <alex.williamson@redhat.com>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>, Roman Bolshakov
+ <rbolshakov@ddn.com>, Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Chinmay Rath <rathc@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, Cleber
+ Rosa <crosa@redhat.com>, kvm@vger.kernel.org, Song Gao
+ <gaosong@loongson.cn>, Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?=
+ <philmd@linaro.org>, Halil Pasic <pasic@linux.ibm.com>, Eric Farman
+ <farman@linux.ibm.com>, Palmer Dabbelt <palmer@dabbelt.com>, Leif Lindholm
+ <leif.lindholm@oss.qualcomm.com>, Christian Borntraeger
+ <borntraeger@linux.ibm.com>, Michael Roth <michael.roth@amd.com>, Mauro
+ Carvalho Chehab <mchehab+huawei@kernel.org>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
+ <marcandre.lureau@redhat.com>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, John
+ Levon <john.levon@nutanix.com>, Xin Wang <wangxinxin.wang@huawei.com>
+Subject: Re: [PATCH v2 001/281] target/i386: Add support for save/load of
+ exception error code
+Message-ID: <20250904140844.5b670290@fedora>
+In-Reply-To: <20250904081128.1942269-2-alex.bennee@linaro.org>
+References: <20250904081128.1942269-1-alex.bennee@linaro.org>
+ <20250904081128.1942269-2-alex.bennee@linaro.org>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] target/risvc: Fix vector whole ldst vstart check
-To: Nicholas Piggin <npiggin@gmail.com>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-devel@nongnu.org, Chao Liu <chao.liu@zevorn.cn>,
- Nicholas Joaquin <njoaquin@tenstorrent.com>,
- Ganesh Valliappan <gvalliappan@tenstorrent.com>,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20250903030114.274535-1-npiggin@gmail.com>
- <20250903030114.274535-3-npiggin@gmail.com>
- <6bff4c9d-1da4-40b3-901a-789923d8ef7e@ventanamicro.com>
- <qyikdqxxiewb7tqykt74gpx5oereckbepyptd3vr4flptmrvoc@midnt5c7agnc>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Language: en-US
-In-Reply-To: <qyikdqxxiewb7tqykt74gpx5oereckbepyptd3vr4flptmrvoc@midnt5c7agnc>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-vk1-xa2f.google.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: x2NIXmPz4uHBXm_ybC5CQ4QefYmPI8bKJNSSb2GhQFw_1756987730
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,133 +161,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Alex, Richard,
+On Thu,  4 Sep 2025 09:06:35 +0100
+Alex Benn=C3=A9e <alex.bennee@linaro.org> wrote:
 
-On 9/4/25 2:16 AM, Nicholas Piggin wrote:
-> On Wed, Sep 03, 2025 at 05:13:36PM -0300, Daniel Henrique Barboza wrote:
->> Hi Nick,
->>
->> ^ typo in the patch subject: s/risvc/riscv
-> 
-> Well I'm off to a fine start :/
-> 
->>
->> On 9/3/25 12:01 AM, Nicholas Piggin wrote:
->>> The whole vector ldst instructions do not include a vstart check,
->>> so an overflowed vstart can result in an underflowed memory address
->>> offset and crash:
->>>
->>>       accel/tcg/cputlb.c:1465:probe_access_flags:
->>>         assertion failed: (-(addr | TARGET_PAGE_MASK) >= size)
->>>
->>> Add the VSTART_CHECK_EARLY_EXIT() check for these helpers.
->>>
->>> This was found with a verification test generator based on RiESCUE.
->>>
->>> Reported-by: Nicholas Joaquin <njoaquin@tenstorrent.com>
->>> Reported-by: Ganesh Valliappan <gvalliappan@tenstorrent.com>
->>> Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
->>> ---
->>>    target/riscv/vector_helper.c             |  2 +
->>>    tests/tcg/riscv64/Makefile.target        |  5 ++
->>>    tests/tcg/riscv64/test-vstart-overflow.c | 75 ++++++++++++++++++++++++
->>>    3 files changed, 82 insertions(+)
->>>    create mode 100644 tests/tcg/riscv64/test-vstart-overflow.c
->>>
->>> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
->>> index fc85a34a84..e0e8735000 100644
->>> --- a/target/riscv/vector_helper.c
->>> +++ b/target/riscv/vector_helper.c
->>> @@ -825,6 +825,8 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->>>        uint32_t esz = 1 << log2_esz;
->>>        int mmu_index = riscv_env_mmu_index(env, false);
->>> +    VSTART_CHECK_EARLY_EXIT(env, evl);
->>> +
->>>        /* Calculate the page range of first page */
->>>        addr = base + (env->vstart << log2_esz);
->>>        page_split = -(addr | TARGET_PAGE_MASK);
->>> diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
->>> index 4da5b9a3b3..19a49b6467 100644
->>> --- a/tests/tcg/riscv64/Makefile.target
->>> +++ b/tests/tcg/riscv64/Makefile.target
->>> @@ -18,3 +18,8 @@ TESTS += test-fcvtmod
->>>    test-fcvtmod: CFLAGS += -march=rv64imafdc
->>>    test-fcvtmod: LDFLAGS += -static
->>>    run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,zfa=true
->>> +
->>> +# Test for vstart >= vl
->>> +TESTS += test-vstart-overflow
->>> +test-vstart-overflow: CFLAGS += -march=rv64gcv
->>> +run-test-vstart-overflow: QEMU_OPTS += -cpu rv64,v=on
->>> diff --git a/tests/tcg/riscv64/test-vstart-overflow.c b/tests/tcg/riscv64/test-vstart-overflow.c
->>> new file mode 100644
->>> index 0000000000..72999f2c8a
->>> --- /dev/null
->>> +++ b/tests/tcg/riscv64/test-vstart-overflow.c
->>> @@ -0,0 +1,75 @@
->>> +/*
->>> + * Test for VSTART set to overflow VL
->>> + *
->>> + * TCG vector instructions should call VSTART_CHECK_EARLY_EXIT() to check
->>> + * this case, otherwise memory addresses can underflow and misbehave or
->>> + * crash QEMU.
->>> + *
->>> + * TODO: Add stores and other instructions.
->>> + *
->>> + * SPDX-License-Identifier: GPL-2.0-or-later
->>> + */
->>> +#include <stdint.h>
->>> +#include <riscv_vector.h>
->>
->> The fix in vector_helper.c is fine but this patch (and patch 3) won't execute
->> 'make check-tcg'. It complains about this header being missing in the docker
->> env.
->>
->> To eliminate the possibility of my env being the problem I ran this series in
->> Gitlab. Same error:
->>
->>
->> https://gitlab.com/danielhb/qemu/-/jobs/11236091281
->>
->> /builds/danielhb/qemu/tests/tcg/riscv64/test-vstart-overflow.c:13:10: fatal error: riscv_vector.h: No such file or directory
->> 3899
->>     13 | #include <riscv_vector.h>
->> 3900
->>        |          ^~~~~~~~~~~~~~~~
->> 3901
->> compilation terminated.
->> 3902
->> make[1]: *** [Makefile:122: test-vstart-overflow] Error 1
->>
->>
->> I believe you need to add the Docker changes you made in this patch. Same
->> thing for patch 3. And same thing for patch 4 of:
->>
->> [PATCH 0/4] linux-user/riscv: add vector state to signal
->>
->> Given that you're also using riscv_vector.h in there too. Thanks,
-> 
-> Hmm, thanks. It did work for my local build.
-> 
-> I think the header is provided by the compiler, so I might have
-> to work out a way to skip the test if the compiler is too old.
-> GCC13 might have been the first one to support.
+> From: Xin Wang <wangxinxin.wang@huawei.com>
+>=20
+> For now, qemu save/load CPU exception info(such as exception_nr and
+> has_error_code), while the exception error_code is ignored. This will
+> cause the dest hypervisor reinject a vCPU exception with error_code(0),
+> potentially causing a guest kernel panic.
+>=20
+> For instance, if src VM stopped with an user-mode write #PF (error_code 6=
+),
+> the dest hypervisor will reinject an #PF with error_code(0) when vCPU res=
+ume,
+> then guest kernel panic as:
+>   BUG: unable to handle page fault for address: 00007f80319cb010
+>   #PF: supervisor read access in user mode
+>   #PF: error_code(0x0000) - not-present page
+>   RIP: 0033:0x40115d
+>=20
+> To fix it, support save/load exception error_code.
 
-How hard it is to update the GCC version we're running in the docker images for
-"check-tcg"? We would like to use a RISC-V vector header that isn't supported
-ATM.
+this potentially will break migration between new/old QEMU versions
+due to presence new subsection. But then according to commit message
+the guest might panic (on dst) when resumed anyways.
 
+So patch changes how guest will fail
+(panic: old =3D> old, old =3D> new
+ vs migration error: new =3D> old ).
 
-Thanks,
+Peter,
+do we care and do we need a compat knob to make existing
+machine type behave old way?
 
-Daniel
-
-
-> 
-> I was considering writing .S files for these. Should have done so
-> if I realized, but nevermind.
-> 
-> Thanks,
-> Nick
+>=20
+> Signed-off-by: Xin Wang <wangxinxin.wang@huawei.com>
+> Link: https://lore.kernel.org/r/20250819145834.3998-1-wangxinxin.wang@hua=
+wei.com
+> Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+> ---
+>  target/i386/machine.c | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
+>=20
+> diff --git a/target/i386/machine.c b/target/i386/machine.c
+> index dd2dac1d443..45b7cea80aa 100644
+> --- a/target/i386/machine.c
+> +++ b/target/i386/machine.c
+> @@ -462,6 +462,24 @@ static const VMStateDescription vmstate_exception_in=
+fo =3D {
+>      }
+>  };
+> =20
+> +static bool cpu_errcode_needed(void *opaque)
+> +{
+> +    X86CPU *cpu =3D opaque;
+> +
+> +    return cpu->env.has_error_code !=3D 0;
+> +}
+> +
+> +static const VMStateDescription vmstate_error_code =3D {
+> +    .name =3D "cpu/error_code",
+> +    .version_id =3D 1,
+> +    .minimum_version_id =3D 1,
+> +    .needed =3D cpu_errcode_needed,
+> +    .fields =3D (const VMStateField[]) {
+> +        VMSTATE_INT32(env.error_code, X86CPU),
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+>  /* Poll control MSR enabled by default */
+>  static bool poll_control_msr_needed(void *opaque)
+>  {
+> @@ -1746,6 +1764,7 @@ const VMStateDescription vmstate_x86_cpu =3D {
+>      },
+>      .subsections =3D (const VMStateDescription * const []) {
+>          &vmstate_exception_info,
+> +        &vmstate_error_code,
+>          &vmstate_async_pf_msr,
+>          &vmstate_async_pf_int_msr,
+>          &vmstate_pv_eoi_msr,
 
 
