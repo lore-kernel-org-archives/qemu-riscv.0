@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB43CA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:15:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F6ECA1012
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:15:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu54E-0005rn-Ay; Thu, 04 Sep 2025 04:11:38 -0400
+	id 1uu54O-000617-5I; Thu, 04 Sep 2025 04:11:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54C-0005qe-7q
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:36 -0400
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1uu54L-0005y1-Pl
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:45 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu548-0003vi-OM
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:35 -0400
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-61ce4c32a36so1285096a12.3
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:32 -0700 (PDT)
+ id 1uu54B-0003wq-JT
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:45 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-620724883e6so159818a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973491; x=1757578291; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973493; x=1757578293; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BNEGVA0a3lSomvk/RYtnyV9U8MhQRFndjMqEzv6fEMo=;
- b=B5L2x+xNWWu/ohVHcXzYS6SoLd49RKD9rv9CHikeDtt2hXBIrk8r+rflRrfvcXmsEq
- /7xkFVW+HjZMfVrxhWN5CccdHnXtsu3XjrP6Y/zb7TEAQHLsZgUoWXR1mMHPsOy6IkKw
- 5MVoW/w9uwiPUdlsNf8m36Jm5zTJdYM0GCC1z7T11gXv8LpmIoN+53hvfO8DP0ppe+ZR
- KKWHYmaMzBKwsd8JnCdSEr4oPfKTccTFEinPm5jsEpbQyibNKYvm0nRCsUroGFbOK/Yq
- QjyVbnVjpM89OShLMhXaFngbxVTe0LoFkOxZGtAhUv7Yig3gwGtW042M0O5mWalf3ZNf
- nQpw==
+ bh=pfipyU6Vd8H7OBNmQiaCitsZISqNnzAeEnNiRJw+yKE=;
+ b=j+t4M6t4+KAzEqB4WncLVFK+vDTk8jry+wESXKfSJo3iaEEZodCOFGFvrmVIxjgnjG
+ DreE72xXFyNLECwnamxe4RHC0mBASb4VRx5EmnNXqJEGgGBeWVa/ydcJF86fSd6ktQqR
+ VrAWBWtBUS999mW1m07sFq1tuEcXV/MkGANYhI7SOCrgnyBGvNZIBK9+NrozYjQJ0hjd
+ MVkM3ltKL+V8tfyd+ZQO2Mp7753i7XQEPcEymhpIE8nk0X6ywIX5mB8px8r2Ve8k9Kft
+ d5Rh78Rvj1KfRbw2/Tl5SCiRTI7CtEWrcnL53DvXiGo+aCDzzlDhcmP/lXcWYXTUhnIT
+ 2YpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973491; x=1757578291;
+ d=1e100.net; s=20230601; t=1756973494; x=1757578294;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BNEGVA0a3lSomvk/RYtnyV9U8MhQRFndjMqEzv6fEMo=;
- b=HXYrNpI7Xn7h6dEsdKFeoni41X0yoLBPAHLH2qXrA3CQZUUKgYsrv7Io+Nk/pi2T2K
- RQinAhaZ7oaHj9UYg7JHC3Vfnt4FGBjc43YyXCyaV+AJ7dlB1hFpEwGG2SrEDpzRJuGh
- h5W0CvIEuLIOB596a1pz/ImiFILwp98hOf4FVfERtXysz5tzw1thiaNEsixtnNtyl8oR
- rI3CNEuKZdeR80UFr2E4NHAwMb76fKDrG8uPlAmqvXrvEib4w4BjmXtI0wqDRJEaWotl
- QGy2Iae0QPW6TAyYhMA+5kQ2PVnFMoaTpFVQ36jo2+yoIrmPTiaeqfwa13T3v0Bn7Sjo
- 39aQ==
+ bh=pfipyU6Vd8H7OBNmQiaCitsZISqNnzAeEnNiRJw+yKE=;
+ b=kE7AiAJ0BpT3t3/VZIBI/MTAcocsYyOL/OFxe+ZQCBYT1bvOP2P5FP1mpwbIsh/Ob2
+ 78o45Fn0LFtO4JAilcWCnj7AoJjUp4PRzFLFH/rN2WxTCJyDAzceTPiCSbzF7W/Oywbc
+ i2NT50rsBKnK9eC6tUBo8Cq3YOpFz45qNgaOrvTEL3EHPD21X/BglX5fZFjPQGtANpAR
+ yHKgCQnWlq9LNByaP/m3e7A98UDUn0NACN4uFPdE9f++PWP5fyAAYqdGpyGy/F1zBCzl
+ RnuE/hRSrmj5x55C5yxX6o66hF9uElTgxfm7EJ2q3Y/8i7Ofer+Vm/ZAACkcinzyDAEK
+ P+6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXNCBgqOJxiQNA2uApi2kZPB8Qs6Niu3I+Lk8avk4iWjmvS129aKMiQx6/kOW6m/4po9vrkg4P+7sK7@nongnu.org
-X-Gm-Message-State: AOJu0Yx7NVgR43HpXlQ1loY3J0+52yIuXoLa6woWk/QjU+/9W7t5HG0+
- 8EiIzIfBeyfCP77rpEBG+VIcjr1elZIPc42DIzWNepMzapQZ6VXoUD0SJkOo0JJIFTI=
-X-Gm-Gg: ASbGncthnz+uoYM66Hrp+zL09dIHaQycwWXd/tVT3Ju5JFX6H5JRfz1gPXGsh2Uf9gs
- hIb/Wei7E69el2riJMjz1Q40o9Dozyz0n1QznsWD+0iqXLvv+M3qh7Tx9UaU8zJopjhhgaXWXXR
- bGI/R2MfAdqisDgVan6IpmXldDEdvJc6BB7NgQJepXm2T3m4QuZwCFSTDRSVkekygTm/Il1iE5Q
- CaNHRhLUx9tTXJ2yF8i24XntO+0nZsTCio4+NjxfTiiy5G/za6VtPsP15bOgyskny7IGvb+dZOT
- KxHtHHzT1NtED9KKKHaf2O+ytNcfLKMbyXHWg1b2zzIWrERO/LTj3kfWl+J55/J/8sShwmGIf8k
- +1xOliDdBEHgHDRrGZhXPLfwAoc7s1X4PRQ==
-X-Google-Smtp-Source: AGHT+IHexK94NPWoWCrwjuk3gIAjHKSuKZUcH35FtgtMhup7hPhQojKoYZ1y3LzApeF9bdhKrTjgdQ==
-X-Received: by 2002:a05:6402:1e8c:b0:620:894c:656c with SMTP id
- 4fb4d7f45d1cf-620894c7c6fmr28663a12.29.1756973490788; 
- Thu, 04 Sep 2025 01:11:30 -0700 (PDT)
+ AJvYcCW5E5xiUeWkyZD+2ROWeKOO3GPv78b/ySBhAmHOzplFFbgG5xEig37vQBjs8wUJb1PznhQm+QU0Q9Tl@nongnu.org
+X-Gm-Message-State: AOJu0Yx0X+oKgJN9E+XIyfDP2BIPiTybcmRWiOlKVZY9djMw12NnS+ox
+ JMFuzQxXkHgg044CDvMhjNHafbjROn+bxadnMNxqANNbN0U4iKPLT2Osu4CewNTYBdk=
+X-Gm-Gg: ASbGncsgd0Vr4J9ykjnpZyM6r0i0YUcMSThKA5rda2o24NaJL50loe8lJ63ht+MeapV
+ uEK5YRFfacrVpeog1FjIIiEWzh6BCFzV43Jb7AZditooSf/2rvNqvrFOuKOCTcEbxMENo7ltupH
+ 3SQmw8CcQvKCXQWEPSg1cBD9MXBEOQDB/NPWxXCzUEHF+AQ+IG3eIC+ziPxHJ3xFufn1ATcQ8PS
+ +SNrgZrstlZT+z0UCaE1jF7rJBd8g1vbgHkD8Wx+03korj4u07vgItMlK7Ft8c264DWsLns5Gsc
+ lW4qHASIuddzG7K80mtnvGd3UiXmTAIiTUx5e1t4Pt+C1h5HBLEhQfJWQitQSQgwea6xnIF3qn/
+ gg7isn67kyEDOumkqM1mEE20=
+X-Google-Smtp-Source: AGHT+IEoaLYHbkuQ5w0GIOHrSrp6jiGSZD/L88aCCuGmKVKhMNAGz92wDlGLKlrjfHoRe3Zrhm5FPg==
+X-Received: by 2002:a05:6402:40c8:b0:620:1c6d:e6c4 with SMTP id
+ 4fb4d7f45d1cf-6201c6de967mr689986a12.38.1756973493583; 
+ Thu, 04 Sep 2025 01:11:33 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61cfc5575dcsm13745805a12.49.2025.09.04.01.11.29
+ 4fb4d7f45d1cf-61cfc52ade4sm13646124a12.45.2025.09.04.01.11.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:11:29 -0700 (PDT)
+ Thu, 04 Sep 2025 01:11:32 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 4CE8D5F900;
+ by draig.lan (Postfix) with ESMTP id 674E15F913;
  Thu, 04 Sep 2025 09:11:28 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -129,19 +129,17 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
- Xin Wang <wangxinxin.wang@huawei.com>
-Subject: [PATCH v2 001/281] target/i386: Add support for save/load of
- exception error code
-Date: Thu,  4 Sep 2025 09:06:35 +0100
-Message-ID: <20250904081128.1942269-2-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
+Subject: [PATCH v2 002/281] scripts/minikconf.py: fix invalid attribute access
+Date: Thu,  4 Sep 2025 09:06:36 +0100
+Message-ID: <20250904081128.1942269-3-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x536.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -164,67 +162,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Xin Wang <wangxinxin.wang@huawei.com>
+From: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
 
-For now, qemu save/load CPU exception info(such as exception_nr and
-has_error_code), while the exception error_code is ignored. This will
-cause the dest hypervisor reinject a vCPU exception with error_code(0),
-potentially causing a guest kernel panic.
+Fix parse method to use `defconfig` global variable instead of the
+non-existent KconfigParser class attribute
 
-For instance, if src VM stopped with an user-mode write #PF (error_code 6),
-the dest hypervisor will reinject an #PF with error_code(0) when vCPU resume,
-then guest kernel panic as:
-  BUG: unable to handle page fault for address: 00007f80319cb010
-  #PF: supervisor read access in user mode
-  #PF: error_code(0x0000) - not-present page
-  RIP: 0033:0x40115d
-
-To fix it, support save/load exception error_code.
-
-Signed-off-by: Xin Wang <wangxinxin.wang@huawei.com>
-Link: https://lore.kernel.org/r/20250819145834.3998-1-wangxinxin.wang@huawei.com
+Fixes: f349474920d80838ecea3d421531fdb0660b8740 ("minikconfig: implement allnoconfig and defconfig modes")
+Signed-off-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Link: https://lore.kernel.org/r/20250820-scripts-minikconf-fixes-v1-1-252041a9125e@linaro.org
 Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
 ---
- target/i386/machine.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ scripts/minikconf.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/i386/machine.c b/target/i386/machine.c
-index dd2dac1d443..45b7cea80aa 100644
---- a/target/i386/machine.c
-+++ b/target/i386/machine.c
-@@ -462,6 +462,24 @@ static const VMStateDescription vmstate_exception_info = {
-     }
- };
+diff --git a/scripts/minikconf.py b/scripts/minikconf.py
+index 6f7f43b2918..2a4694fb6a3 100644
+--- a/scripts/minikconf.py
++++ b/scripts/minikconf.py
+@@ -340,7 +340,7 @@ class KconfigParser:
  
-+static bool cpu_errcode_needed(void *opaque)
-+{
-+    X86CPU *cpu = opaque;
-+
-+    return cpu->env.has_error_code != 0;
-+}
-+
-+static const VMStateDescription vmstate_error_code = {
-+    .name = "cpu/error_code",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = cpu_errcode_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_INT32(env.error_code, X86CPU),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- /* Poll control MSR enabled by default */
- static bool poll_control_msr_needed(void *opaque)
- {
-@@ -1746,6 +1764,7 @@ const VMStateDescription vmstate_x86_cpu = {
-     },
-     .subsections = (const VMStateDescription * const []) {
-         &vmstate_exception_info,
-+        &vmstate_error_code,
-         &vmstate_async_pf_msr,
-         &vmstate_async_pf_int_msr,
-         &vmstate_pv_eoi_msr,
+     @classmethod
+     def parse(self, fp, mode=None):
+-        data = KconfigData(mode or KconfigParser.defconfig)
++        data = KconfigData(mode or defconfig)
+         parser = KconfigParser(data)
+         parser.parse_file(fp)
+         return data
 -- 
 2.47.2
 
