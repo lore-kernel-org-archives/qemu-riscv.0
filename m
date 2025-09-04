@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1F86CA1015
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:25:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6DA9CA1013
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:26:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu54g-0006MY-20; Thu, 04 Sep 2025 04:12:06 -0400
+	id 1uu5AH-00073V-GN; Thu, 04 Sep 2025 04:17:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54a-0006Gg-RX
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:00 -0400
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ id 1uu55J-0006kB-PK
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:49 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54J-00041d-O5
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:00 -0400
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b03fa5c5a89so107069666b.2
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:42 -0700 (PDT)
+ id 1uu54h-0004Fm-Sg
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:44 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-61e8fdfd9b4so1639187a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:12:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973501; x=1757578301; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973524; x=1757578324; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3j1jG2MY/WGcH+crz7CtyaM5tw55oKFFqSyUb2OGtbM=;
- b=xNT+gtAKGeol2h2GXBI9/QpScgbWnH/9lYAyf+ydexCHyJR3MbG6diaU1f4RciO8i3
- J/+j5W9wYbqQvWrjCoDcHJqpvZPD0GcTDdv0kRK0WMjAvFUPR6PMm4p3df1Z+G9n7Lpg
- GAWIXEsoQTLL5qFU68EUiRf8yDlPBYYSF6AwIecc3Vai9YtQjXnIESEVREzinjxeaZq8
- nXqqaeLLmrkBHC3ufD6qGwmZYmdRetEhVicmqw5UpaNMDp3BLiL7mk9X952FgozqcShp
- 2aFk6nMDm2h8l4C+O7RBouylyPQBeujvUEt50j5P8RZMxB/Gqs9IP+2B9KGcLO8fLjw5
- e5tA==
+ bh=JLxFb3NYbTS9f/pm1eUqTOiDM/5DBuFeeS5GZ+vjJzw=;
+ b=ip+lrQZDNSFNY4DI7P4Y3AQgARPPBv4N05IrOFKAAaxL4csVrkMOykOJ9MKFM/kAKS
+ iLWItl/58o+eTJgBRfXa8n2x74YYPz/WMDl5uGp56VbeZPzUjodQHKKVWePZfjDBbDb/
+ K8Cf+eLR3eief69E17hnxioUDfwisFFfeablYXK7wARiOvZrjo5fJ0/WDIoRgTfUMTsN
+ 9KWayY29cfjj0RLDw2ypbj2tILsvKKmLqI9qRPqDZlodkoJ0O2DTrHTU/C0Q+DoqTVCW
+ HLVXiYXNbqD8tNyoKGW5Y4DBSlKNJAsKd0eNCnMV10orGSyp4myU99UQVsewCuoMLwU4
+ xzBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973501; x=1757578301;
+ d=1e100.net; s=20230601; t=1756973524; x=1757578324;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3j1jG2MY/WGcH+crz7CtyaM5tw55oKFFqSyUb2OGtbM=;
- b=tYCu4FKzAtCrJ5z/DZ+AKLTJlRupXgbHNzbH3roa3dkLkMEqyVVDELGNW+1FD1+HJP
- GgAd3F/Kjf05joNsx29w5tqc/WwUOTmz1RfST5tL4bRXA0/YL0CEoxTa8iW3A5/Ep8IG
- 4qNaC1Qjnbm2sbLeupZ3ytiXzxtHQtZSaPT5OOqlEG6QRxJ6gS8Okfz85nYSZXavKrEy
- M0ir5FwKlqa4SIGYJdCd7PnNndxPheXFoTz7SUuk3RGDV+BCpvkMCKce8qqQAqC2xBOA
- hYCOxlNCwqi9TNC6nFZX5Z3aDj4hTuVoK3nSV5lIpiYwufiPQ0K9C4FWKfjiCkzLUPwd
- wL6g==
+ bh=JLxFb3NYbTS9f/pm1eUqTOiDM/5DBuFeeS5GZ+vjJzw=;
+ b=ABG0lcxJISaru1mkiH4hlcNmaMP7pFjt7F5wIzdrjv0meiOQuoMLYj/xmaX+bq7TlM
+ S3+n5RYVM9Xeofa6cS9o2L2Q1ctYnJIWfWsSxCPGUvRb/RCDWk6GhQ4tYjCKhqjWzAxr
+ Xptrg3IRzKx78EAUTQ2TQUncjj0diKGNkhSH+sKhCj56x1knRUpNgB0Hx+m3G8Vlru07
+ bj3bkMT7pFMoM7DJ8Ycj8zPmudd6BmOHmDDlb5N84ZxuytS+AQEH0mJPBO2ocEAwIh+k
+ EiUBRhzU9KUX3G7KE2WKwqcSPHjz3RBAH8vXCfvgxvqNrWlsry1bUVqB41tZw/dY+pQf
+ 1icQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6OhtJGLmRwOSX9MrXJundvmvT/JPW7j/MoBu/+mi5IYCUwVdDQEuQwPgNf4kEtbh2/x4JSbRDAToQ@nongnu.org
-X-Gm-Message-State: AOJu0Yy89oqU/oLabqmzTzPM0sNM/xiLJ5ncx1mlK9biFniKjcbfXKLr
- Id1mp7cdcM7lLsETDxP3iJcEsX4OpnZVRyQZMQvUvEcsVSEN1/dPKUxXXw7wb3xhnEM=
-X-Gm-Gg: ASbGncttYPRo2X+NvLu4OsHEEOLvBHWyGFTG3FpVUkNFDkNQM7qJ8RC36FYmSefOIgF
- a5rozHbY6goiALWAr8BCEW/Or/QQQPpSqAtUPP2lr5bmh1Yi5szzXnXICGIiWYdG8ipAwPHD887
- F/AgPaPOTh928GsqgFYEY4Jsv43E7HgQmtBTPRmh++jCZVh54f+q+lpaNDXSL4XHnBILlCHAnfY
- V53/vmX49ahbpo+x7FxGr0SeAXj85HfwSU+rx7Y0fCmQXPsCZ/zqpTsEc9ky6wFP5jdpINIWYKe
- LC6RZpZ82zKM5TfcBGIUZ4pm1AfTzcyUESPvdKnheMryb1Ih5Oy6XssC0J4mOGLLjkxwkRN0/Me
- LSXrkfU83y4aDWYy1Mzr26CHjT1ASxTDZMw==
-X-Google-Smtp-Source: AGHT+IHtaOAptd/dOyrxka90iG+Ickwt+7m6mDEjwCXtB/2x+x0WNk1ZvG1BgsoUzoIQQ2o03oW8Ow==
-X-Received: by 2002:a17:906:4789:b0:b04:1a1c:cb5b with SMTP id
- a640c23a62f3a-b041a1ccc38mr1426344866b.7.1756973501036; 
- Thu, 04 Sep 2025 01:11:41 -0700 (PDT)
+ AJvYcCU/uFKHmxrvx9sYHpInbaQ/Dp7NDXEiQLFuRHbsTYk6AwIbrkOjLprVUEH+3v6cBk03ZKcPGrvvkxj0@nongnu.org
+X-Gm-Message-State: AOJu0YxrjPRanuBH8BwzKdkJLj0PgfG+SUZvpa+6Vkn5Bzq47JNpEU1m
+ Pqi9vXEk/vNpDcEROA2AVqbcmQZdVylkUpj7gu32m6Co8vL/U+HLo8QXTWWz1ea4rmo=
+X-Gm-Gg: ASbGncsnfXL4NI4QKpcnhlURvzAy3iaqZwxDyqlweaDCTM5Zmd3H8/G9sLGx52Pq0Og
+ tI9e6ZVsBfm8iMvtXUqsHX+entbMyJWb1eLPpCNPlwGtqp3zsaqjRDhhYBJMaaRFF97eAoDLX/l
+ CScJFAImMkYZRIFravdN7Cjf0eXuNSgJ5wkzr+l5Fx0c/PdQVRIMEHbT9gWRYZea5pSHVyJc7tj
+ hrENTCkGGTVbxdWOr4WKs5S5+u16+fHfTUMc8l/fzT1V+ad1mb5moqvxfe56jSOXFcme7yQ1A7t
+ 8rkugCGDTAjgwbK1pUETWeQXhEZR5NiWlg28Y4WZKDfGCdF81uG5JrlA8GIH3KO08pGeVktg43P
+ esb0dol04Vt5XVtBqqzZQrNY=
+X-Google-Smtp-Source: AGHT+IGCIzSs++vG4Q/r44POEQofytYBuUaIuGpsL8NKxkWgprP60aqkJ1SOMVPil+NtFGgd+q+1ug==
+X-Received: by 2002:a05:6402:2356:b0:61c:e287:7ad3 with SMTP id
+ 4fb4d7f45d1cf-61d22dfbd0emr19350555a12.6.1756973524107; 
+ Thu, 04 Sep 2025 01:12:04 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b03ab857474sm1225662366b.89.2025.09.04.01.11.36
+ 4fb4d7f45d1cf-61cfc216304sm12809226a12.19.2025.09.04.01.11.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:11:37 -0700 (PDT)
+ Thu, 04 Sep 2025 01:11:58 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 71DFF5F9F7;
- Thu, 04 Sep 2025 09:11:29 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id BE271603EE;
+ Thu, 04 Sep 2025 09:11:35 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -129,19 +129,17 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
- Gustavo Romero <gustavo.romero@linaro.org>
-Subject: [PATCH v2 011/281] tests/functional: Fix reverse_debugging asset
- precaching
-Date: Thu,  4 Sep 2025 09:06:45 +0100
-Message-ID: <20250904081128.1942269-12-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
+Subject: [PATCH v2 058/281] linux-user: Move get_elf_hwcap to mips/elfload.c
+Date: Thu,  4 Sep 2025 09:07:32 +0100
+Message-ID: <20250904081128.1942269-59-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -164,51 +162,176 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Gustavo Romero <gustavo.romero@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
 
-This commit fixes the asset precaching in the reverse_debugging test on
-aarch64.
+Change the return type to abi_ulong, and pass in the cpu.
 
-QemuBaseTest.main() precaches assets (kernel, rootfs, DT blobs, etc.)
-that are defined in variables with the ASSET_ prefix. This works because
-it ultimately calls Asset.precache_test(), which relies on introspection
-to locate these variables.
-
-If an asset variable is not named with the ASSET_ prefix, precache_test
-cannot find the asset and precaching silently fails. Hence, fix the
-asset precaching by fixing the asset variable name.
-
-Signed-off-by: Gustavo Romero <gustavo.romero@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
-Message-ID: <20250827001008.22112-1-gustavo.romero@linaro.org>
-Signed-off-by: Thomas Huth <thuth@redhat.com>
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- tests/functional/test_aarch64_reverse_debug.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ linux-user/loader.h            |  2 +-
+ linux-user/mips/target_elf.h   |  2 ++
+ linux-user/mips64/target_elf.h |  2 ++
+ linux-user/elfload.c           | 52 +---------------------------------
+ linux-user/mips/elfload.c      | 50 ++++++++++++++++++++++++++++++++
+ 5 files changed, 56 insertions(+), 52 deletions(-)
 
-diff --git a/tests/functional/test_aarch64_reverse_debug.py b/tests/functional/test_aarch64_reverse_debug.py
-index 58d45328350..8bc91ccfde7 100755
---- a/tests/functional/test_aarch64_reverse_debug.py
-+++ b/tests/functional/test_aarch64_reverse_debug.py
-@@ -21,7 +21,7 @@ class ReverseDebugging_AArch64(ReverseDebugging):
+diff --git a/linux-user/loader.h b/linux-user/loader.h
+index 92b6d41145e..04457737dd4 100644
+--- a/linux-user/loader.h
++++ b/linux-user/loader.h
+@@ -103,7 +103,7 @@ const char *get_elf_cpu_model(uint32_t eflags);
  
-     REG_PC = 32
+ #if defined(TARGET_I386) || defined(TARGET_X86_64) || defined(TARGET_ARM) \
+     || defined(TARGET_SPARC) || defined(TARGET_PPC) \
+-    || defined(TARGET_LOONGARCH64)
++    || defined(TARGET_LOONGARCH64) || defined(TARGET_MIPS)
+ abi_ulong get_elf_hwcap(CPUState *cs);
+ abi_ulong get_elf_hwcap2(CPUState *cs);
+ #endif
+diff --git a/linux-user/mips/target_elf.h b/linux-user/mips/target_elf.h
+index febf710c7ae..877f8347d70 100644
+--- a/linux-user/mips/target_elf.h
++++ b/linux-user/mips/target_elf.h
+@@ -8,4 +8,6 @@
+ #ifndef MIPS_TARGET_ELF_H
+ #define MIPS_TARGET_ELF_H
  
--    KERNEL_ASSET = Asset(
-+    ASSET_KERNEL = Asset(
-         ('https://archives.fedoraproject.org/pub/archive/fedora/linux/'
-          'releases/29/Everything/aarch64/os/images/pxeboot/vmlinuz'),
-         '7e1430b81c26bdd0da025eeb8fbd77b5dc961da4364af26e771bd39f379cbbf7')
-@@ -30,7 +30,7 @@ class ReverseDebugging_AArch64(ReverseDebugging):
-     def test_aarch64_virt(self):
-         self.set_machine('virt')
-         self.cpu = 'cortex-a53'
--        kernel_path = self.KERNEL_ASSET.fetch()
-+        kernel_path = self.ASSET_KERNEL.fetch()
-         self.reverse_debugging(args=('-kernel', kernel_path))
++#define HAVE_ELF_HWCAP          1
++
+ #endif
+diff --git a/linux-user/mips64/target_elf.h b/linux-user/mips64/target_elf.h
+index 02e6d14840a..c0347e5cb6e 100644
+--- a/linux-user/mips64/target_elf.h
++++ b/linux-user/mips64/target_elf.h
+@@ -8,4 +8,6 @@
+ #ifndef MIPS64_TARGET_ELF_H
+ #define MIPS64_TARGET_ELF_H
  
++#define HAVE_ELF_HWCAP          1
++
+ #endif
+diff --git a/linux-user/elfload.c b/linux-user/elfload.c
+index 574b37a22c1..dc3f502277a 100644
+--- a/linux-user/elfload.c
++++ b/linux-user/elfload.c
+@@ -834,57 +834,7 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs, const CPUMIPSState *e
+ #define USE_ELF_CORE_DUMP
+ #define ELF_EXEC_PAGESIZE        4096
  
+-/* See arch/mips/include/uapi/asm/hwcap.h.  */
+-enum {
+-    HWCAP_MIPS_R6           = (1 << 0),
+-    HWCAP_MIPS_MSA          = (1 << 1),
+-    HWCAP_MIPS_CRC32        = (1 << 2),
+-    HWCAP_MIPS_MIPS16       = (1 << 3),
+-    HWCAP_MIPS_MDMX         = (1 << 4),
+-    HWCAP_MIPS_MIPS3D       = (1 << 5),
+-    HWCAP_MIPS_SMARTMIPS    = (1 << 6),
+-    HWCAP_MIPS_DSP          = (1 << 7),
+-    HWCAP_MIPS_DSP2         = (1 << 8),
+-    HWCAP_MIPS_DSP3         = (1 << 9),
+-    HWCAP_MIPS_MIPS16E2     = (1 << 10),
+-    HWCAP_LOONGSON_MMI      = (1 << 11),
+-    HWCAP_LOONGSON_EXT      = (1 << 12),
+-    HWCAP_LOONGSON_EXT2     = (1 << 13),
+-    HWCAP_LOONGSON_CPUCFG   = (1 << 14),
+-};
+-
+-#define ELF_HWCAP get_elf_hwcap()
+-
+-#define GET_FEATURE_INSN(_flag, _hwcap) \
+-    do { if (cpu->env.insn_flags & (_flag)) { hwcaps |= _hwcap; } } while (0)
+-
+-#define GET_FEATURE_REG_SET(_reg, _mask, _hwcap) \
+-    do { if (cpu->env._reg & (_mask)) { hwcaps |= _hwcap; } } while (0)
+-
+-#define GET_FEATURE_REG_EQU(_reg, _start, _length, _val, _hwcap) \
+-    do { \
+-        if (extract32(cpu->env._reg, (_start), (_length)) == (_val)) { \
+-            hwcaps |= _hwcap; \
+-        } \
+-    } while (0)
+-
+-static uint32_t get_elf_hwcap(void)
+-{
+-    MIPSCPU *cpu = MIPS_CPU(thread_cpu);
+-    uint32_t hwcaps = 0;
+-
+-    GET_FEATURE_REG_EQU(CP0_Config0, CP0C0_AR, CP0C0_AR_LENGTH,
+-                        2, HWCAP_MIPS_R6);
+-    GET_FEATURE_REG_SET(CP0_Config3, 1 << CP0C3_MSAP, HWCAP_MIPS_MSA);
+-    GET_FEATURE_INSN(ASE_LMMI, HWCAP_LOONGSON_MMI);
+-    GET_FEATURE_INSN(ASE_LEXT, HWCAP_LOONGSON_EXT);
+-
+-    return hwcaps;
+-}
+-
+-#undef GET_FEATURE_REG_EQU
+-#undef GET_FEATURE_REG_SET
+-#undef GET_FEATURE_INSN
++#define ELF_HWCAP get_elf_hwcap(thread_cpu)
+ 
+ #endif /* TARGET_MIPS */
+ 
+diff --git a/linux-user/mips/elfload.c b/linux-user/mips/elfload.c
+index 04e3b767401..739f71c21b1 100644
+--- a/linux-user/mips/elfload.c
++++ b/linux-user/mips/elfload.c
+@@ -42,3 +42,53 @@ const char *get_elf_cpu_model(uint32_t eflags)
+     return "24Kf";
+ #endif
+ }
++
++/* See arch/mips/include/uapi/asm/hwcap.h.  */
++enum {
++    HWCAP_MIPS_R6           = (1 << 0),
++    HWCAP_MIPS_MSA          = (1 << 1),
++    HWCAP_MIPS_CRC32        = (1 << 2),
++    HWCAP_MIPS_MIPS16       = (1 << 3),
++    HWCAP_MIPS_MDMX         = (1 << 4),
++    HWCAP_MIPS_MIPS3D       = (1 << 5),
++    HWCAP_MIPS_SMARTMIPS    = (1 << 6),
++    HWCAP_MIPS_DSP          = (1 << 7),
++    HWCAP_MIPS_DSP2         = (1 << 8),
++    HWCAP_MIPS_DSP3         = (1 << 9),
++    HWCAP_MIPS_MIPS16E2     = (1 << 10),
++    HWCAP_LOONGSON_MMI      = (1 << 11),
++    HWCAP_LOONGSON_EXT      = (1 << 12),
++    HWCAP_LOONGSON_EXT2     = (1 << 13),
++    HWCAP_LOONGSON_CPUCFG   = (1 << 14),
++};
++
++#define GET_FEATURE_INSN(_flag, _hwcap) \
++    do { if (cpu->env.insn_flags & (_flag)) { hwcaps |= _hwcap; } } while (0)
++
++#define GET_FEATURE_REG_SET(_reg, _mask, _hwcap) \
++    do { if (cpu->env._reg & (_mask)) { hwcaps |= _hwcap; } } while (0)
++
++#define GET_FEATURE_REG_EQU(_reg, _start, _length, _val, _hwcap) \
++    do { \
++        if (extract32(cpu->env._reg, (_start), (_length)) == (_val)) { \
++            hwcaps |= _hwcap; \
++        } \
++    } while (0)
++
++abi_ulong get_elf_hwcap(CPUState *cs)
++{
++    MIPSCPU *cpu = MIPS_CPU(cs);
++    abi_ulong hwcaps = 0;
++
++    GET_FEATURE_REG_EQU(CP0_Config0, CP0C0_AR, CP0C0_AR_LENGTH,
++                        2, HWCAP_MIPS_R6);
++    GET_FEATURE_REG_SET(CP0_Config3, 1 << CP0C3_MSAP, HWCAP_MIPS_MSA);
++    GET_FEATURE_INSN(ASE_LMMI, HWCAP_LOONGSON_MMI);
++    GET_FEATURE_INSN(ASE_LEXT, HWCAP_LOONGSON_EXT);
++
++    return hwcaps;
++}
++
++#undef GET_FEATURE_REG_EQU
++#undef GET_FEATURE_REG_SET
++#undef GET_FEATURE_INSN
 -- 
 2.47.2
 
