@@ -4,63 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33CFFCA1012
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 20:50:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49317CA1013
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 20:50:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uuGu3-0006ub-Sp; Thu, 04 Sep 2025 16:49:55 -0400
+	id 1uuGsE-0003ZG-Jm; Thu, 04 Sep 2025 16:48:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uuGtw-0006Fh-CM
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 16:49:51 -0400
+ (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uuGsC-0003Y9-FI
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 16:48:00 -0400
 Received: from mailgate01.uberspace.is ([2001:1a50:11:0:c83f:a8ff:fea6:c8da])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uuGtl-00012Y-7F
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 16:49:47 -0400
+ (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uuGrw-0000kj-Qn
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 16:48:00 -0400
 Received: from skiff.uberspace.de (skiff.uberspace.de [185.26.156.131])
- by mailgate01.uberspace.is (Postfix) with ESMTPS id 0093560C41
- for <qemu-riscv@nongnu.org>; Thu,  4 Sep 2025 22:49:18 +0200 (CEST)
-Received: (qmail 2471 invoked by uid 990); 4 Sep 2025 20:49:18 -0000
+ by mailgate01.uberspace.is (Postfix) with ESMTPS id E20A760C1C
+ for <qemu-riscv@nongnu.org>; Thu,  4 Sep 2025 22:47:23 +0200 (CEST)
+Received: (qmail 32736 invoked by uid 990); 4 Sep 2025 20:47:23 -0000
 Authentication-Results: skiff.uberspace.de;
 	auth=pass (plain)
 Received: from unknown (HELO unkown) (::1)
  by skiff.uberspace.de (Haraka/3.0.1) with ESMTPSA;
- Thu, 04 Sep 2025 22:49:18 +0200
+ Thu, 04 Sep 2025 22:47:23 +0200
 From: Julian Ganz <neither@nut.email>
 To: qemu-devel@nongnu.org
 Cc: Julian Ganz <neither@nut.email>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v6 25/25] tests: add test with interrupted memory accesses on
- rv64
-Date: Thu,  4 Sep 2025 22:49:00 +0200
-Message-ID: <f74becaa58fe129897639d126a321afdc7ef2d05.1757018626.git.neither@nut.email>
+Subject: [PATCH v6 16/25] target/riscv: call plugin trap callbacks
+Date: Thu,  4 Sep 2025 22:46:53 +0200
+Message-ID: <b2661be6d5851f5d070b90a6d3ac801b67e96929.1757018626.git.neither@nut.email>
 X-Mailer: git-send-email 2.49.1
 In-Reply-To: <cover.1757018626.git.neither@nut.email>
 References: <cover.1757018626.git.neither@nut.email>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Bar: -----
-X-Rspamd-Report: REPLY(-4) BAYES_HAM(-2.796651) MID_CONTAINS_FROM(1)
+X-Rspamd-Report: REPLY(-4) BAYES_HAM(-2.990391) MID_CONTAINS_FROM(1)
  MIME_GOOD(-0.1) R_MISSING_CHARSET(0.5)
-X-Rspamd-Score: -5.396651
+X-Rspamd-Score: -5.590391
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nut.email; s=uberspace;
  h=from:to:cc:subject:date;
- bh=mVLyiyy1HWjSWhu1/Q5w+icoVuven8S3d7VhRcdbntg=;
- b=TY0pT536o+ZHiEnQhsgtRx4ZNUf6S2pZiLT1gb/yjcik9RKdUnmUjTkyG5NGEd9mQkc1Jb0afI
- vo/L5CAqROcyN2s9IpYFsHlQ8u07uhcHrvdqTow9sauWmKKigBjRwy4zUxns5VS8rhmOEnpyCr+Y
- nbsF6kqSU+x71OIr++/1EddorRfWcpJxv8PdjYqMD05obdoL5IYygKi7mtSL1eJ8d9xMJmOWp2mr
- /yqYNs9L3qRTUl0frDIGOjcgGt57P8cP3tMCOX+PelVwjHt1vOb0UfRbpwfKvKYMOZtzTquBVzqG
- 43IuC/yM1kO0+LFt0qaFURxwxaOf8i7evaF+Uz2HTvr4ahejBf6tECerYTQGGpQkDHvZJP5mwdSi
- k/NfcqdQPaiJkGD4yn+/N0/J/N+SZZFMkN9uHmXuiYCx8QUsH5M+WaySrKxMPcPu/jcgfrxzbnN5
- WOoryyWzZ/VLWiEHv7m8rb+5B0d07X794jJFihbn5cF893Qptl5cdbOXKEDA9GYL9FHd2dTpwaMN
- 5y0v5x/w2lftroUJvxGn84a11+0HW/I0UKgA9jzSEhZqFBnOlk1/cZBD5OJjCP+TrktkVJ0bJWs1
- e1nTAIWJkmxuJ216aicRogsNkC7EwZqXkGNgPhzIYg0K2jYo5bwjWHl5CvQqrI4SWNeKsHR+Y4ja
- o=
+ bh=6jnG3wDchPvR9iC7OeKM71ZvHzTjOj/B4aMwSwCZlYo=;
+ b=oLgOyCO7C9M1gkLL/S0CJ9o/yrdfe7/Vd9aQR769jL0B18VeZ6F+L+DET46QiMoUAAJRXQwg8l
+ nv4m8LrHM3NICRZm8FsDzHpWgEADZP1EEERwNshRQt8BgngvNhoIE8Wc+ix5N8HVgJIevx+/sjxf
+ oxyPdLAS83YSuUqND3+lLkYngBdOQztzHGdCIO74oem1ARexkuL0v9m7Qk+xReT73IRX921Tz/IP
+ iJt8/5Jt980qy8GwKkODA6diT2PmZmlAVbU4ucOOF+a+KrG0le3ZHpjOctXCltptsRJ1JynrNmVQ
+ vHIV/Gxcf1edCEVC8OwlAn+UMYIbPD4DISxsT+1Sutb0geoc8MM8i2ZlMRz3EsyTJLONaaQsBNxx
+ VhE/WCEiVJFh+ByhIoH1OUR5rRDcmf85ACgb6LjgIQyHExvhKc+SLU36+VxT/gxmwZb2CEJAijQC
+ h/ixUij9dsak6x+pFK/bLfYHIIv03B41iigGgoHXiMqrUGEHzb7HlEh41zBlJN+Pe5GjfkyhBLiM
+ sdnulqtYv/eNE/nWKqJCbk6LS+CDFJzDYo/C0/hsElLnYv3uJVs3z9P/KCEVzCdb/z/6rZkmwyag
+ JFauhsu9sAjUF2GY3o+UN+lY5kj7DzFlTd9Mg/fpTKmHm8swwawQJhdl9h0tZdMyZ+NZfzNlfxa4
+ U=
 Received-SPF: pass client-ip=2001:1a50:11:0:c83f:a8ff:fea6:c8da;
  envelope-from=neither@nut.email; helo=mailgate01.uberspace.is
 X-Spam_score_int: -20
@@ -84,116 +83,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This test aims at catching API misbehaviour w.r.t. the interaction
-between interrupts and memory accesses, such as the bug fixed in
+We recently introduced API for registering callbacks for trap related
+events as well as the corresponding hook functions. Due to differences
+between architectures, the latter need to be called from target specific
+code.
 
-    27f347e6a1d269c533633c812321cabb249eada8
-
-Because the condition for triggering misbehaviour may not be
-deterministic and the cross-section between memory accesses and
-interrupt handlers may be small, we have to place our trust in large
-numbers. Instead of guessing/trying an arbitrary, fixed loop-bound, we
-decided to loop for a fixed amount of real-time. This avoids the test
-running into a time-out on slower machines while enabling a high number
-of possible interactions on faster machines.
+This change places hooks for RISC-V targets.
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Julian Ganz <neither@nut.email>
 ---
- tests/tcg/riscv64/Makefile.softmmu-target |  6 ++
- tests/tcg/riscv64/interruptedmemory.S     | 67 +++++++++++++++++++++++
- 2 files changed, 73 insertions(+)
- create mode 100644 tests/tcg/riscv64/interruptedmemory.S
+ target/riscv/cpu_helper.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 1a71a78653..d8f92b8e61 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -30,5 +30,11 @@ run-plugin-doubletrap: doubletrap
- 	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
- 	  $(QEMU_OPTS)$<)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 3479a62cc7..10a10dcd90 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -36,6 +36,7 @@
+ #include "cpu_bits.h"
+ #include "debug.h"
+ #include "pmp.h"
++#include "qemu/plugin.h"
  
-+EXTRA_RUNS += run-plugin-interruptedmemory
-+run-plugin-interruptedmemory: interruptedmemory
-+	$(call run-test, $<, \
-+	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
-+	  $(QEMU_OPTS)$<)
+ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+ {
+@@ -2176,6 +2177,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
+     const bool prev_virt = env->virt_enabled;
+     const target_ulong prev_priv = env->priv;
++    uint64_t last_pc = env->pc;
+     target_ulong tval = 0;
+     target_ulong tinst = 0;
+     target_ulong htval = 0;
+@@ -2198,6 +2200,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         case RISCV_EXCP_SEMIHOST:
+             do_common_semihosting(cs);
+             env->pc += 4;
++            qemu_plugin_vcpu_hostcall_cb(cs, last_pc);
+             return;
+ #endif
+         case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+@@ -2467,6 +2470,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                         prev_priv, prev_virt);
+     }
+ 
++    if (async) {
++        qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
++    } else {
++        qemu_plugin_vcpu_exception_cb(cs, last_pc);
++    }
 +
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/interruptedmemory.S b/tests/tcg/riscv64/interruptedmemory.S
-new file mode 100644
-index 0000000000..a32d672849
---- /dev/null
-+++ b/tests/tcg/riscv64/interruptedmemory.S
-@@ -0,0 +1,67 @@
-+	.option norvc
-+
-+	.text
-+	.global _start
-+_start:
-+	# Set up trap vector
-+	lla	t0, trap
-+	csrw	mtvec, t0
-+
-+	# Set up timer
-+	lui	t1, 0x02004
-+	sd	zero, 0(t1) # MTIMECMP0
-+
-+	# Enable timer interrupts
-+	li	t0, 0x80
-+	csrrs	zero, mie, t0
-+	csrrsi	zero, mstatus, 0x8
-+
-+	# Find out when to stop
-+	call	rtc_get
-+	li	t0, 60
-+	slli	t0, t0, 30 # Approx. 10e9 ns
-+	add	t0, t0, a0
-+
-+	# Loop with memory accesses
-+	la	t1, semiargs
-+0:
-+	ld	t2, 0(t1)
-+	sd	t2, 0(t1)
-+	call	rtc_get
-+	bltu	a0, t0, 0b
-+
-+	li	a0, 0
-+	lla	a1, semiargs
-+	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
-+
-+	# Semihosting call sequence
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+rtc_get:
-+	# Get current time from the goldfish RTC
-+	lui	t3, 0x0101
-+	lw	a0, 0(t3)
-+	lw	t3, 4(t3)
-+	slli	t3, t3, 32
-+	add	a0, a0, t3
-+	ret
-+
-+trap:
-+	lui	t5, 0x0200c
-+	ld	t6, -0x8(t5) # MTIME
-+	addi	t6, t6, 100
-+	lui	t5, 0x02004
-+	sd	t6, 0(t5) # MTIMECMP
-+	mret
-+
-+	.data
-+	.balign	16
-+semiargs:
-+	.space	16
+     /*
+      * Interrupt/exception/trap delivery is asynchronous event and as per
+      * zicfilp spec CPU should clear up the ELP state. No harm in clearing
 -- 
 2.49.1
 
