@@ -4,148 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD146CA1002
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 12:09:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8252CA1002
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 13:28:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu8mB-0008Lm-KV; Thu, 04 Sep 2025 08:09:16 -0400
+	id 1uuA0A-00018n-7w; Thu, 04 Sep 2025 09:27:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uu8m8-0008KH-4D
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 08:09:12 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uu8lv-0003wR-Gk
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 08:09:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1756987732;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RGfsbECkN8yDi9zfYlQG8Tqcfjb7p7ijr5WocyCehHg=;
- b=ImkBjQkQomJUMirJA1KUN5j6d16u7g26loI8bUkESfKKmhPu8Q/zQ2yqTPTguH8mnsQVMh
- ff927sA05gOyzVG94ujkBa2ahVbJ7wTk0Lt/VT3rNOJB0COAd6mnnzpbfXhtXGKIeLfgm5
- LXndA623GRYcC0K1CQX3Gr+6i9KAndA=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-473-TwiN2hGZPDKkaISAAyRCCw-1; Thu, 04 Sep 2025 08:08:50 -0400
-X-MC-Unique: TwiN2hGZPDKkaISAAyRCCw-1
-X-Mimecast-MFC-AGG-ID: TwiN2hGZPDKkaISAAyRCCw_1756987730
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-3da4c617a95so846534f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 05:08:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1uuA04-00017t-O8
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 09:27:41 -0400
+Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1uu9zu-0004GC-0E
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 09:27:39 -0400
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3f2da50ad46so6682905ab.3
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 06:27:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1756992445; x=1757597245; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=g+Z6by8yj153dStYnaj/Rum+7G7Oqf9yATcM8/24AcA=;
+ b=Ghq6kNxfU1szQUulPI4Qg1CAl84Vtl/ntfEQWUwN0Evd/CJL+8caSSJq5A7KzOjrWa
+ H+ySBZm0Z+ZIGds+K5Z1fjCSpcC0Yi+HTmu6fAy5DPSw3J1mU7Cc6AQEzyL/pxuu0XFV
+ CcQg7EkWEhDw2ssUfzozds7ss1yew5ZrYZ3bsaCfNJqfpEJVXfLhDyEGL27ErE5aFO6L
+ rWlhxGluBRXKQzeYX5Q7FD2/6DWXlXCDx/C3f1cRvaTsSKgh1C+RCVk5Elaxi1MTg33h
+ Y5D/oMcrW9lALKu8XEIlYKoOOcgp+Fh4DghWktUTGDNDDaGzgoUZGErv+3xWT0VZf51n
+ 42ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756987729; x=1757592529;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RGfsbECkN8yDi9zfYlQG8Tqcfjb7p7ijr5WocyCehHg=;
- b=j4NXEHFja9YCvGlElTK99X+OA+J1BMBphP4JHd21D+zBouOEWJeB1RZBi5/4x6ay4I
- PhlXLjnO6p89+Q6yRmupHIx4p+38Gf1j8ITWFcp8zK65+t3SIC6H1AcKihPIG0ffLenF
- hDXlBdfqesJfERs4/6CsirGgZumIUOqBfbgBDpxik7f7e7KoS3ETiv1OuNaIrMH67VXn
- iHJeg6w4Krrc+QH7xrLtEmIA30EB21LGPP6RBXWlK/5gftUeE3oItFjlc1cU7Bp5KVIx
- U/H+/0a3nQWt+Rg7i4XZw/qhtDdTeZiL9CCMryYA7j0O98h0CZ4OiEFOEM65/O9ZIsfX
- 05ew==
+ d=1e100.net; s=20230601; t=1756992445; x=1757597245;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=g+Z6by8yj153dStYnaj/Rum+7G7Oqf9yATcM8/24AcA=;
+ b=dVirMlkqLXzMQej8Lu1IKqVdexg0cIRy3Wl8zDisOTW8nlbTvskntUh8lqGHgpVsZJ
+ csF5eeeNJvndehrftjIa8RK6Uv4cmDzX7t/9zSaAhofZl09i3NcpyiaVz6gBk2gjRls7
+ MhjB0W51IWEwuqU/b8rhnYDKc+heWMEnGCShL0/V/MavTt+pcz+BjRvipmrfXYVfYBFT
+ HR5YG8oomN8bUTeBS3n1skfGK6TdIQeqGXOKohmf3lTtmg2HwAbBoH1NbZtHFtuktXaZ
+ hsZ5Is9aD6fUwEq2FwWiIDpdz4B06c6MoZsybSwCIDmSSJo2wwt32hIDhXJIhuPZEiOu
+ sQ7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVLJJ/zw15vHYaCb+Bd+ZjK1IJxzuW7O9kocxN4Y6QmK6Q35palSmDoPtcR5UHv/OuYBJj+30YoTXgJ@nongnu.org
-X-Gm-Message-State: AOJu0YxQXDYagSxqbwRMY5zsOD8WbKs151nNSMHY7W0oLu+ptqMQnc0q
- 7ttknMDFKxByxUm7M8kIoM3y+G77SXoYypPg+AjKohugwc8fQ/AGa9aqtx+AcECdtGdVwTEtzf6
- 42H6TeH1zJUfz9gdHgSHbJLWwow1Qu+sXNitjllCCNvimhFNDh9UweArr
-X-Gm-Gg: ASbGncuinijMWQHBJNaDWvVMvt/peMgxd6trqjKcEw60gH34E/K3ou2IAIH1eT1Pq9L
- ymEOFb/acvmFJ8Q5TyRNigO0SBuLjdMMw5ZIqBcaFLyRfgZoSJ05sbG2CdXiA0Tq777yQkDnJE1
- q/e99+UVUEFVsbzrUWlLpD36SyKfg440lQQMKd4929M0lbeh8NOhiPlfX8kE5+vDiS70csNeBQA
- X9KFU0kR0/yH2nyscZALFEGZIcowDQ5Yqp7JNPrR6vEaGmA9/NKCDymj/AQlW1Ss7NH/Us7IGCa
- JwfEJq8Ddc1vorm4C2hIkdA2GyoeRg==
-X-Received: by 2002:a05:6000:2681:b0:3df:1a8b:ff40 with SMTP id
- ffacd0b85a97d-3df1a8c028amr3675208f8f.43.1756987729314; 
- Thu, 04 Sep 2025 05:08:49 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGX0PPz3yh7ncUtLm/xW0ZxJtT+AldckvinW77LYH+EITFhgO23Jx24JW/wmCpN9gO6bSEhZg==
-X-Received: by 2002:a05:6000:2681:b0:3df:1a8b:ff40 with SMTP id
- ffacd0b85a97d-3df1a8c028amr3675186f8f.43.1756987728720; 
- Thu, 04 Sep 2025 05:08:48 -0700 (PDT)
-Received: from fedora ([85.93.96.130]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3d53fda847dsm18324880f8f.0.2025.09.04.05.08.45
+ AJvYcCUQH/cIMD8p+tWfWi+ZCZ/EwCtlRvtWkq0jL7XevQnCHxlA/9y5KwsRd4PV5ho46/UseYwM5m72ZbmG@nongnu.org
+X-Gm-Message-State: AOJu0YzhaKx5mC3K9/tLxqmwKAv6R4I6KmUYYS2lfRHypavlIKph/oq8
+ EUZwa8NJrdoRmQYk+i6Uf9AKBxSygFJFFpbPsVH3ktJCs4B+taQFwewUFvArIGWtQTM=
+X-Gm-Gg: ASbGncsyhmH9nd9iZOUOGtb0MKejr0RHeEXhCXJdDuElzosM+Khtyqru5qe0r2ZQoK7
+ EWIs3pTNXe060J6tFfKDhy/Q9MSe5tooIE7HuFHsLg38T96IEkmYiC20G73k6LsfIMKQ/TV6Q9d
+ AJOn3Q86scVPl8JfisRxorKbyfSw5ghC2krgoyeBN8ueqISWXDaQ2/FfqC4YQdtcdt8o6AmgKeX
+ Bxl0PxE7WjYKOqg0hGbupADxsLHRoula+E6aJ/O55EtKnNhOQEL8+/eD0VZjLWiuOa6ywyfQBbH
+ nYVGnhYQxS2gvwcdlIUjdhvcy4LqUtFH7RrgWQdTgj3B9Qxuo49XrsNFx9+7mHdmEK8Aq/ZAikC
+ nu4d3Vc9b0mdEla8TeV0Hiv7tuQzLot/5nhE=
+X-Google-Smtp-Source: AGHT+IHeetYnpOzcl8+XrEPSiIS2VwZYvR6BTeXnZz8w/uHdiBgapf7uUhLxAXbewd882R8wqoZZ1w==
+X-Received: by 2002:a05:6e02:4614:b0:3f6:546b:5c9a with SMTP id
+ e9e14a558f8ab-3f6546b5d53mr152829605ab.19.1756992444706; 
+ Thu, 04 Sep 2025 06:27:24 -0700 (PDT)
+Received: from localhost ([140.82.166.162]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-5104c5a4d0dsm679121173.0.2025.09.04.06.27.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 05:08:48 -0700 (PDT)
-Date: Thu, 4 Sep 2025 14:08:44 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: Alex =?UTF-8?B?QmVubsOpZQ==?= <alex.bennee@linaro.org>, Peter Xu
- <peterx@redhat.com>
-Cc: qemu-devel@nongnu.org, Reinoud Zandijk <reinoud@netbsd.org>,
- =?UTF-8?B?Q8OpZHJpYw==?= Le Goater <clg@redhat.com>, Huacai Chen
- <chenhuacai@kernel.org>, Zhao Liu <zhao1.liu@intel.com>, Paolo Bonzini
- <pbonzini@redhat.com>, Alistair Francis <alistair.francis@wdc.com>,
- qemu-arm@nongnu.org, Fam Zheng <fam@euphon.net>, Helge Deller
- <deller@gmx.de>, Matthew Rosato <mjrosato@linux.ibm.com>, Fabiano Rosas
- <farosas@suse.de>, qemu-rust@nongnu.org, Bibo Mao <maobibo@loongson.cn>,
- qemu-riscv@nongnu.org, Thanos Makatos <thanos.makatos@nutanix.com>, Liu
- Zhiwei <zhiwei_liu@linux.alibaba.com>, Riku Voipio <riku.voipio@iki.fi>,
- Cameron Esfahani <dirty@apple.com>, Alexander Graf <agraf@csgraf.de>,
- Laurent Vivier <lvivier@redhat.com>, Harsh Prateek Bora
- <harshpb@linux.ibm.com>, "Daniel P. =?UTF-8?B?QmVycmFuZ8Op?="
- <berrange@redhat.com>, qemu-ppc@nongnu.org, Stafford Horne
- <shorne@gmail.com>, Sunil Muthuswamy <sunilmut@microsoft.com>, Jagannathan
- Raman <jag.raman@oracle.com>, Brian Cain <brian.cain@oss.qualcomm.com>,
- Phil Dennis-Jordan <phil@philjordan.eu>, devel@lists.libvirt.org, Mads
- Ynddal <mads@ynddal.dk>, Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Jason Herne <jjherne@linux.ibm.com>, Michael Rolnik <mrolnik@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Laurent Vivier <laurent@vivier.eu>, Ilya
- Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org, Peter Maydell
- <peter.maydell@linaro.org>, Kostiantyn Kostiuk <kkostiuk@redhat.com>, Kyle
- Evans <kevans@freebsd.org>, David Hildenbrand <david@redhat.com>, "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>, Warner Losh <imp@bsdimp.com>, Daniel
- Henrique Barboza <dbarboza@ventanamicro.com>, John Snow <jsnow@redhat.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>, Aleksandar Rikalo
- <arikalo@gmail.com>, Alistair Francis <alistair@alistair23.me>, Marcelo
- Tosatti <mtosatti@redhat.com>, Yonggang Luo <luoyonggang@gmail.com>,
- Radoslaw Biernacki <rad@semihalf.com>, Artyom Tarasenko
- <atar4qemu@gmail.com>, Yanan Wang <wangyanan55@huawei.com>, Eduardo Habkost
- <eduardo@habkost.net>, Aurelien Jarno <aurelien@aurel32.net>, Richard
- Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org, Alex
- Williamson <alex.williamson@redhat.com>, "Michael S. Tsirkin"
- <mst@redhat.com>, Ani Sinha <anisinha@redhat.com>, Roman Bolshakov
- <rbolshakov@ddn.com>, Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Chinmay Rath <rathc@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, Cleber
- Rosa <crosa@redhat.com>, kvm@vger.kernel.org, Song Gao
- <gaosong@loongson.cn>, Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?=
- <philmd@linaro.org>, Halil Pasic <pasic@linux.ibm.com>, Eric Farman
- <farman@linux.ibm.com>, Palmer Dabbelt <palmer@dabbelt.com>, Leif Lindholm
- <leif.lindholm@oss.qualcomm.com>, Christian Borntraeger
- <borntraeger@linux.ibm.com>, Michael Roth <michael.roth@amd.com>, Mauro
- Carvalho Chehab <mchehab+huawei@kernel.org>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
- <marcandre.lureau@redhat.com>, Mark Cave-Ayland
- <mark.cave-ayland@ilande.co.uk>, Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, John
- Levon <john.levon@nutanix.com>, Xin Wang <wangxinxin.wang@huawei.com>
-Subject: Re: [PATCH v2 001/281] target/i386: Add support for save/load of
- exception error code
-Message-ID: <20250904140844.5b670290@fedora>
-In-Reply-To: <20250904081128.1942269-2-alex.bennee@linaro.org>
-References: <20250904081128.1942269-1-alex.bennee@linaro.org>
- <20250904081128.1942269-2-alex.bennee@linaro.org>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+ Thu, 04 Sep 2025 06:27:24 -0700 (PDT)
+From: Andrew Jones <ajones@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, tjeznach@rivosinc.com
+Subject: [PATCH] hw/riscv/riscv-iommu: Fix MSI table size limit
+Date: Thu,  4 Sep 2025 08:27:24 -0500
+Message-ID: <20250904132723.614507-2-ajones@ventanamicro.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: x2NIXmPz4uHBXm_ybC5CQ4QefYmPI8bKJNSSb2GhQFw_1756987730
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
+ envelope-from=ajones@ventanamicro.com; helo=mail-il1-x12f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -161,86 +99,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu,  4 Sep 2025 09:06:35 +0100
-Alex Benn=C3=A9e <alex.bennee@linaro.org> wrote:
+The MSI table is not limited to 4k. The only constraint the table has
+is that its base address must be aligned to its size, ensuring no
+offsets of the table size will overrun when added to the base address
+(see "8.5. MSI page tables" of the AIA spec).
 
-> From: Xin Wang <wangxinxin.wang@huawei.com>
->=20
-> For now, qemu save/load CPU exception info(such as exception_nr and
-> has_error_code), while the exception error_code is ignored. This will
-> cause the dest hypervisor reinject a vCPU exception with error_code(0),
-> potentially causing a guest kernel panic.
->=20
-> For instance, if src VM stopped with an user-mode write #PF (error_code 6=
-),
-> the dest hypervisor will reinject an #PF with error_code(0) when vCPU res=
-ume,
-> then guest kernel panic as:
->   BUG: unable to handle page fault for address: 00007f80319cb010
->   #PF: supervisor read access in user mode
->   #PF: error_code(0x0000) - not-present page
->   RIP: 0033:0x40115d
->=20
-> To fix it, support save/load exception error_code.
+Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+---
+ hw/riscv/riscv-iommu.c | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
 
-this potentially will break migration between new/old QEMU versions
-due to presence new subsection. But then according to commit message
-the guest might panic (on dst) when resumed anyways.
-
-So patch changes how guest will fail
-(panic: old =3D> old, old =3D> new
- vs migration error: new =3D> old ).
-
-Peter,
-do we care and do we need a compat knob to make existing
-machine type behave old way?
-
->=20
-> Signed-off-by: Xin Wang <wangxinxin.wang@huawei.com>
-> Link: https://lore.kernel.org/r/20250819145834.3998-1-wangxinxin.wang@hua=
-wei.com
-> Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
-> ---
->  target/i386/machine.c | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->=20
-> diff --git a/target/i386/machine.c b/target/i386/machine.c
-> index dd2dac1d443..45b7cea80aa 100644
-> --- a/target/i386/machine.c
-> +++ b/target/i386/machine.c
-> @@ -462,6 +462,24 @@ static const VMStateDescription vmstate_exception_in=
-fo =3D {
->      }
->  };
-> =20
-> +static bool cpu_errcode_needed(void *opaque)
-> +{
-> +    X86CPU *cpu =3D opaque;
-> +
-> +    return cpu->env.has_error_code !=3D 0;
-> +}
-> +
-> +static const VMStateDescription vmstate_error_code =3D {
-> +    .name =3D "cpu/error_code",
-> +    .version_id =3D 1,
-> +    .minimum_version_id =3D 1,
-> +    .needed =3D cpu_errcode_needed,
-> +    .fields =3D (const VMStateField[]) {
-> +        VMSTATE_INT32(env.error_code, X86CPU),
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
->  /* Poll control MSR enabled by default */
->  static bool poll_control_msr_needed(void *opaque)
->  {
-> @@ -1746,6 +1764,7 @@ const VMStateDescription vmstate_x86_cpu =3D {
->      },
->      .subsections =3D (const VMStateDescription * const []) {
->          &vmstate_exception_info,
-> +        &vmstate_error_code,
->          &vmstate_async_pf_msr,
->          &vmstate_async_pf_int_msr,
->          &vmstate_pv_eoi_msr,
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index 96a7fbdefcf3..155190d032dd 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -558,6 +558,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
+     MemTxResult res;
+     dma_addr_t addr;
+     uint64_t intn;
++    size_t offset;
+     uint32_t n190;
+     uint64_t pte[2];
+     int fault_type = RISCV_IOMMU_FQ_TTYPE_UADDR_WR;
+@@ -565,16 +566,18 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
+ 
+     /* Interrupt File Number */
+     intn = riscv_iommu_pext_u64(PPN_DOWN(gpa), ctx->msi_addr_mask);
+-    if (intn >= 256) {
+-        /* Interrupt file number out of range */
+-        res = MEMTX_ACCESS_ERROR;
+-        cause = RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT;
+-        goto err;
+-    }
++    offset = intn * sizeof(pte);
+ 
+     /* fetch MSI PTE */
+     addr = PPN_PHYS(get_field(ctx->msiptp, RISCV_IOMMU_DC_MSIPTP_PPN));
+-    addr = addr | (intn * sizeof(pte));
++    if (addr & offset) {
++        /* Interrupt file number out of range */
++        res = MEMTX_ACCESS_ERROR;
++        cause = RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT;
++        goto err;
++    }
++
++    addr |= offset;
+     res = dma_memory_read(s->target_as, addr, &pte, sizeof(pte),
+             MEMTXATTRS_UNSPECIFIED);
+     if (res != MEMTX_OK) {
+-- 
+2.49.0
 
 
