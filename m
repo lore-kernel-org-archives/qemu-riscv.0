@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C0F6CA1013
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:17:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DECACA1013
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 08:18:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uu54d-0006Km-R6; Thu, 04 Sep 2025 04:12:03 -0400
+	id 1uu59i-0005ed-H0; Thu, 04 Sep 2025 04:17:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54Z-0006FI-Vj
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:00 -0400
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ id 1uu559-0006c0-Ql
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:37 -0400
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uu54J-00040X-Lc
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:11:59 -0400
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-619487c8865so3298482a12.1
- for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:41 -0700 (PDT)
+ id 1uu54Z-0004CF-9i
+ for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 04:12:35 -0400
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b04271cfc3eso89341366b.3
+ for <qemu-riscv@nongnu.org>; Thu, 04 Sep 2025 01:11:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756973500; x=1757578300; darn=nongnu.org;
+ d=linaro.org; s=google; t=1756973518; x=1757578318; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZYVyVNsFyTXeOSFCWu8uUvsiqoxRwuwTGPuSI8iWgeI=;
- b=rZ4ZeC78nxBSs7Hm28KPJA5UJ9/lmcd+qT6HI2dPYRgjbSbw8vupniVlEUHXvqpbsn
- 6MeEkMYeEq/YchF968lN9sYtAbppFqVpYC/43sQmjCIMFtH9d3RCZy0CjSbJlH0COMkO
- p+fkLqifdJb4uTSQDeYHOcAWBNd15ftan2CM9gzXQNY4LC9D918wKhTnIoynp/txtjm8
- Zmzu4E1LcDGH1WKI8qe9NIZZhVPWdReTtf8tfSByB9PJuRE25pirUXXDydE/M97AnMaN
- eInmWkGSTDl936dtve9BqbQUbseczCRXpssU3GICm/dRQ/c6TRcMGz/ZdIfHPbM+58zL
- qIEw==
+ bh=KM2ZDhNYkLW1KWUOdLmFVe8gLAQ7wgd1StjOThDS9B0=;
+ b=JISPeP60TaaTAmN88DaImEbB/tI2yBQj4Bl+oV9mNYxY66JWiLSm9X6Lp4NmPIPjgG
+ Kz4yRRBqXIS2ymgpsfyHUHauwsqPGk9d18Xo983MlC6PR/2JMXkNexjsI5qDQlSAJhPK
+ rS7OZfTGP4/vXI2VKK9gRN0saArVXaXABOWncUXXqoeXRBZR198DYyeqQaVnNxvYodr1
+ cPB0vVoiP3Ahid7IZXqVitFSg98hdzws24587LeOV0jHRlV0q2IJbQxKKEoZwylO1OG3
+ mj+98AxuFMvQAgDr8PkpaNts7tW9NDN0YAngMuzEomhLHGL3MqGAyM++bYy15IRqlifG
+ Mbvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756973500; x=1757578300;
+ d=1e100.net; s=20230601; t=1756973518; x=1757578318;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZYVyVNsFyTXeOSFCWu8uUvsiqoxRwuwTGPuSI8iWgeI=;
- b=dW+tPIaJ8S3/JFEHAZ0KhK/loLMxSagoNSVtbjrk4/3Sd5J49+7hwDuEfuz2T0u2kA
- NDvCOIebqkqt1Q0ovtgl5n6x4cRDFaBlAmP572vLZs1IdQTKTwmSyTfWU3OKdRMut7Lu
- npapAVYaS6JEMUtAlECz9Gfm1Sa8lDAjQPpMfxae5CCoc5XOmA3fhXAkayWVzEB0dbSM
- 9p3x2rM0/mHZ6/vsLDVfhdR/5r6IAYbPfa/e+NpqhKd0Uy34SP/8nDz/2+QY3GTDxRRD
- hzAxOJn6WDXlMcWDdEWYC1yH1+WO9IzHt6I71/8XGCke3PHvHyTRlc1fKQrSI54jF/bd
- LKXQ==
+ bh=KM2ZDhNYkLW1KWUOdLmFVe8gLAQ7wgd1StjOThDS9B0=;
+ b=bhkevFiWq/Z4DpH8wnizs9l3/A6Ny2xI3SHQ6k191LgP8mZJo9H0UHIjx8CZ43T4X5
+ ems8Vu3EUSOcfx0HCn/Lr3ZwfrWBuC/hDAcgc7drqeD1s+63DiA8alGTA8Csv6Od+Ilr
+ w2aEvt11wyRGd5KyKvt5M0oGArI6h3LcBRbdBjqTqfcYncDSVgVceUhM5dlihvnhmOJn
+ mtXMsKfZIo4mPHQ0M4nGM/FppGIIQYARaxsUCS5+C8Fb71VV7K/ArG4RcKCQtlRqA/bE
+ mbFfd6jmXJ190m80FQ+WNR+lBo8DOUNc5cIgW/aCYf/dIMfzmcWKrZ8cu1nmBDHg9ojY
+ Dzbg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmWgJwE3GdQ9vt4M8d0PymALu5uIP2hHXHFjDWnoqv4klqnE2+hdlZymBZewPZ/nOO0L+rnKxbpSxL@nongnu.org
-X-Gm-Message-State: AOJu0Yxz+iz2UZ9aCXGun/axMAJzPzyX+ZxcJ+sOpopRaLRbMW75hugm
- ZPA+/T/vhAQmsSNVH3knigeIk62DOij0gNMst+6lKGyrzdu+QkWtIk2n1AaIBCdUAuQ=
-X-Gm-Gg: ASbGnctlwRFQQQMLksmlJTATaQolXccvYZppEno993BiIRj0K2e5EQMIHUBMhjOzwAL
- kzZ4HjR0qF1Oru9SZWxKS/aJIXF56JjIkYACCkhSWOow4blx2OUcVSzssYit8qoTrblOotHU4ar
- Eu9vO7bg09HzHvbcfxfh7Od1Aa5Fb85otZzCeTCUwo4S3MrbIHJJFBAhcSrwEm/0nRgyO02bh8M
- bpbsQoTQ2WjzUp8PZ/MKjEmYFmfivO6RWcBPvR75ICsGIel9sAGotpWqW0g8DrkBgdnncSczLTd
- QU6WyAmgWdGZgdZK57hvAhLq6iw6GQBkY+01/JQcuRAokWjooxjc8uD6np1FNBDjuKABFgTtW/+
- +D4WUDkIl7RDV/6/SS/CaRAg7yUVXHMUHiQ==
-X-Google-Smtp-Source: AGHT+IFieb+gm+rWJ0Oa45cj1KjcPCC4rl/ynxe9G4bgf3W7srLgMSyNw8FhmhZu6eY5HA4lnrH5tA==
-X-Received: by 2002:a17:907:9729:b0:af9:8739:10ca with SMTP id
- a640c23a62f3a-b01083235f9mr1709209966b.28.1756973499527; 
- Thu, 04 Sep 2025 01:11:39 -0700 (PDT)
+ AJvYcCXXCTidVPcMqqQx9QkAP0aOODoojx16KGz35wRgcgay/DQwnz9+SZNGPa6+icStv/ZwhakFbwTWWQRt@nongnu.org
+X-Gm-Message-State: AOJu0YzuxPvlXlXgeuwbPAiGxjf9Vui1fLX9wTswuIcWEVV+viSjUZTm
+ 5o4mQ17SxPj8kVA7fhVHmb39IDQEimDLSTgP7S2RRFcBaCik/SUy3b5I+uEqBUhVhyGZbuyPtKr
+ eiXFWFqldNQ==
+X-Gm-Gg: ASbGncskEgNO2K1GHtu98Ww6wdRqlOV//GiPfwejbtgM54fNcPlKNTMrSPFcKed2dO/
+ DvYu6cGqarGhZ1IELVY2a5iV1Q9KuFxfhFXktE9/vdX4i4xfW4aOh3Rj1zAX7CW5n8VENxR3XFO
+ zQ1I814BSk6SKp591folIv17pO3aJUS54UK1fGj78y6ZCgagASf3ruDiWYsudx7g5Q03fdxqlq2
+ rS/LIryHOz1nb1X+ewk+FPCVY6GCWhyazF/ZehkzPBlTP9VFF7fNVHRBlv6FPdlEjwwrw/28ECn
+ TAMlQU+C417PicEg/LRyJUceW23RYUZrR/ACgKz+vrtaEuWXA1baF+awY6v9CR2Qe/fa84SO+rf
+ bWsNcvTZp99uyDdm8Fqeue4gRnzuvu4BXow==
+X-Google-Smtp-Source: AGHT+IE6k0GqNytWpGYUw8aMikHxjbuztoWFqvzmVO/on4V3dK6nYD0ba2/sDJcNk3Tb6kLpXPbyDw==
+X-Received: by 2002:a17:907:961a:b0:b04:2edd:280b with SMTP id
+ a640c23a62f3a-b042edd2a50mr1478196866b.39.1756973517480; 
+ Thu, 04 Sep 2025 01:11:57 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b047011daa1sm275133966b.79.2025.09.04.01.11.34
+ a640c23a62f3a-b041f6fb232sm1080452766b.87.2025.09.04.01.11.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 01:11:37 -0700 (PDT)
+ Thu, 04 Sep 2025 01:11:55 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 2163E5F93E;
- Thu, 04 Sep 2025 09:11:29 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 30E81601A8;
+ Thu, 04 Sep 2025 09:11:34 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -129,25 +130,24 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>,
- Cornelia Huck <cohuck@redhat.com>
-Subject: [PATCH v2 008/281] hw: add compat machines for 10.2
-Date: Thu,  4 Sep 2025 09:06:42 +0100
-Message-ID: <20250904081128.1942269-9-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, John Levon <john.levon@nutanix.com>
+Subject: [PATCH v2 049/281] semihosting: Initialize heap once per process
+Date: Thu,  4 Sep 2025 09:07:23 +0100
+Message-ID: <20250904081128.1942269-50-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250904081128.1942269-1-alex.bennee@linaro.org>
 References: <20250904081128.1942269-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x530.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::633;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -163,251 +163,182 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Cornelia Huck <cohuck@redhat.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 
-Add 10.2 machine types for arm/i440fx/m68k/q35/s390x/spapr.
+While semihosting isn't really thread aware, the current
+implementation allocates space for the heap per-thread.
 
-Signed-off-by: Cornelia Huck <cohuck@redhat.com>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-Message-ID: <20250805095616.1168905-1-cohuck@redhat.com>
-Signed-off-by: Thomas Huth <thuth@redhat.com>
+Remove the heap_base and heap_limit fields from TaskState.
+Replace with static variables within do_common_semihosting.
+
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/hw/boards.h        |  3 +++
- include/hw/i386/pc.h       |  3 +++
- hw/arm/virt.c              |  9 ++++++++-
- hw/core/machine.c          |  3 +++
- hw/i386/pc.c               |  3 +++
- hw/i386/pc_piix.c          | 13 +++++++++++--
- hw/i386/pc_q35.c           | 13 +++++++++++--
- hw/m68k/virt.c             |  9 ++++++++-
- hw/ppc/spapr.c             | 15 +++++++++++++--
- hw/s390x/s390-virtio-ccw.c | 14 +++++++++++++-
- 10 files changed, 76 insertions(+), 9 deletions(-)
+ linux-user/qemu.h             |  5 -----
+ linux-user/aarch64/cpu_loop.c |  7 -------
+ linux-user/arm/cpu_loop.c     | 25 +++++++++++--------------
+ linux-user/m68k/cpu_loop.c    |  8 --------
+ linux-user/riscv/cpu_loop.c   |  4 ----
+ semihosting/arm-compat-semi.c | 22 +++++++++-------------
+ 6 files changed, 20 insertions(+), 51 deletions(-)
 
-diff --git a/include/hw/boards.h b/include/hw/boards.h
-index f94713e6e29..665b6201214 100644
---- a/include/hw/boards.h
-+++ b/include/hw/boards.h
-@@ -779,6 +779,9 @@ struct MachineState {
-     } \
-     type_init(machine_initfn##_register_types)
+diff --git a/linux-user/qemu.h b/linux-user/qemu.h
+index b6621536b36..4d6fad28c63 100644
+--- a/linux-user/qemu.h
++++ b/linux-user/qemu.h
+@@ -121,11 +121,6 @@ struct TaskState {
+     abi_ulong child_tidptr;
+ #ifdef TARGET_M68K
+     abi_ulong tp_value;
+-#endif
+-#if defined(TARGET_ARM) || defined(TARGET_M68K) || defined(TARGET_RISCV)
+-    /* Extra fields for semihosted binaries.  */
+-    abi_ulong heap_base;
+-    abi_ulong heap_limit;
+ #endif
+     int used; /* non zero if used */
+     struct image_info *info;
+diff --git a/linux-user/aarch64/cpu_loop.c b/linux-user/aarch64/cpu_loop.c
+index b65999a75bf..030a630c936 100644
+--- a/linux-user/aarch64/cpu_loop.c
++++ b/linux-user/aarch64/cpu_loop.c
+@@ -140,9 +140,6 @@ void cpu_loop(CPUARMState *env)
+ void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
+ {
+     ARMCPU *cpu = env_archcpu(env);
+-    CPUState *cs = env_cpu(env);
+-    TaskState *ts = get_task_state(cs);
+-    struct image_info *info = ts->info;
+     int i;
  
-+extern GlobalProperty hw_compat_10_1[];
-+extern const size_t hw_compat_10_1_len;
-+
- extern GlobalProperty hw_compat_10_0[];
- extern const size_t hw_compat_10_0_len;
- 
-diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-index 79b72c54dd3..e83157ab358 100644
---- a/include/hw/i386/pc.h
-+++ b/include/hw/i386/pc.h
-@@ -214,6 +214,9 @@ void pc_system_parse_ovmf_flash(uint8_t *flash_ptr, size_t flash_size);
- /* sgx.c */
- void pc_machine_init_sgx_epc(PCMachineState *pcms);
- 
-+extern GlobalProperty pc_compat_10_1[];
-+extern const size_t pc_compat_10_1_len;
-+
- extern GlobalProperty pc_compat_10_0[];
- extern const size_t pc_compat_10_0_len;
- 
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index ef6be3660f5..9326cfc895f 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -3455,10 +3455,17 @@ static void machvirt_machine_init(void)
+     if (!(arm_feature(env, ARM_FEATURE_AARCH64))) {
+@@ -167,8 +164,4 @@ void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
+     if (cpu_isar_feature(aa64_pauth, cpu)) {
+         qemu_guest_getrandom_nofail(&env->keys, sizeof(env->keys));
+     }
+-
+-    ts->heap_base = info->brk;
+-    /* This will be filled in on the first SYS_HEAPINFO call.  */
+-    ts->heap_limit = 0;
  }
- type_init(machvirt_machine_init);
+diff --git a/linux-user/arm/cpu_loop.c b/linux-user/arm/cpu_loop.c
+index e40d6beafa2..9d54422736c 100644
+--- a/linux-user/arm/cpu_loop.c
++++ b/linux-user/arm/cpu_loop.c
+@@ -492,19 +492,16 @@ void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
+     for(i = 0; i < 16; i++) {
+         env->regs[i] = regs->uregs[i];
+     }
+-#if TARGET_BIG_ENDIAN
+-    /* Enable BE8.  */
+-    if (EF_ARM_EABI_VERSION(info->elf_flags) >= EF_ARM_EABI_VER4
+-        && (info->elf_flags & EF_ARM_BE8)) {
+-        env->uncached_cpsr |= CPSR_E;
+-        env->cp15.sctlr_el[1] |= SCTLR_E0E;
+-    } else {
+-        env->cp15.sctlr_el[1] |= SCTLR_B;
+-    }
+-    arm_rebuild_hflags(env);
+-#endif
  
-+static void virt_machine_10_2_options(MachineClass *mc)
-+{
-+}
-+DEFINE_VIRT_MACHINE_AS_LATEST(10, 2)
-+
- static void virt_machine_10_1_options(MachineClass *mc)
- {
-+    virt_machine_10_2_options(mc);
-+    compat_props_add(mc->compat_props, hw_compat_10_1, hw_compat_10_1_len);
+-    ts->heap_base = info->brk;
+-    /* This will be filled in on the first SYS_HEAPINFO call.  */
+-    ts->heap_limit = 0;
++    if (TARGET_BIG_ENDIAN) {
++        /* Enable BE8.  */
++        if (EF_ARM_EABI_VERSION(info->elf_flags) >= EF_ARM_EABI_VER4
++            && (info->elf_flags & EF_ARM_BE8)) {
++            env->uncached_cpsr |= CPSR_E;
++            env->cp15.sctlr_el[1] |= SCTLR_E0E;
++        } else {
++            env->cp15.sctlr_el[1] |= SCTLR_B;
++        }
++        arm_rebuild_hflags(env);
++    }
  }
--DEFINE_VIRT_MACHINE_AS_LATEST(10, 1)
-+DEFINE_VIRT_MACHINE(10, 1)
+diff --git a/linux-user/m68k/cpu_loop.c b/linux-user/m68k/cpu_loop.c
+index 3aaaf02ca4e..23693f33582 100644
+--- a/linux-user/m68k/cpu_loop.c
++++ b/linux-user/m68k/cpu_loop.c
+@@ -94,10 +94,6 @@ void cpu_loop(CPUM68KState *env)
  
- static void virt_machine_10_0_options(MachineClass *mc)
+ void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
  {
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index bd47527479a..38c949c4f2c 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -37,6 +37,9 @@
- #include "hw/virtio/virtio-iommu.h"
- #include "audio/audio.h"
- 
-+GlobalProperty hw_compat_10_1[] = {};
-+const size_t hw_compat_10_1_len = G_N_ELEMENTS(hw_compat_10_1);
-+
- GlobalProperty hw_compat_10_0[] = {
-     { "scsi-hd", "dpofua", "off" },
-     { "vfio-pci", "x-migration-load-config-after-iter", "off" },
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 2f58e73d334..bc048a6d137 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -81,6 +81,9 @@
-     { "qemu64-" TYPE_X86_CPU, "model-id", "QEMU Virtual CPU version " v, },\
-     { "athlon-" TYPE_X86_CPU, "model-id", "QEMU Virtual CPU version " v, },
- 
-+GlobalProperty pc_compat_10_1[] = {};
-+const size_t pc_compat_10_1_len = G_N_ELEMENTS(pc_compat_10_1);
-+
- GlobalProperty pc_compat_10_0[] = {
-     { TYPE_X86_CPU, "x-consistent-cache", "false" },
-     { TYPE_X86_CPU, "x-vendor-cpuid-only-v2", "false" },
-diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-index c03324281bd..d165ac72ed7 100644
---- a/hw/i386/pc_piix.c
-+++ b/hw/i386/pc_piix.c
-@@ -504,12 +504,21 @@ static void pc_i440fx_machine_options(MachineClass *m)
-                      pc_piix_compat_defaults, pc_piix_compat_defaults_len);
+-    CPUState *cpu = env_cpu(env);
+-    TaskState *ts = get_task_state(cpu);
+-    struct image_info *info = ts->info;
+-
+     env->pc = regs->pc;
+     env->dregs[0] = regs->d0;
+     env->dregs[1] = regs->d1;
+@@ -116,8 +112,4 @@ void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
+     env->aregs[6] = regs->a6;
+     env->aregs[7] = regs->usp;
+     env->sr = regs->sr;
+-
+-    ts->heap_base = info->brk;
+-    /* This will be filled in on the first SYS_HEAPINFO call.  */
+-    ts->heap_limit = 0;
  }
- 
--static void pc_i440fx_machine_10_1_options(MachineClass *m)
-+static void pc_i440fx_machine_10_2_options(MachineClass *m)
- {
-     pc_i440fx_machine_options(m);
+diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+index 541de765ffa..2dd30c7b288 100644
+--- a/linux-user/riscv/cpu_loop.c
++++ b/linux-user/riscv/cpu_loop.c
+@@ -108,8 +108,4 @@ void target_cpu_copy_regs(CPUArchState *env, target_pt_regs *regs)
+         error_report("Incompatible ELF: RVE cpu requires RVE ABI binary");
+         exit(EXIT_FAILURE);
+     }
+-
+-    ts->heap_base = info->brk;
+-    /* This will be filled in on the first SYS_HEAPINFO call.  */
+-    ts->heap_limit = 0;
  }
- 
--DEFINE_I440FX_MACHINE_AS_LATEST(10, 1);
-+DEFINE_I440FX_MACHINE_AS_LATEST(10, 2);
-+
-+static void pc_i440fx_machine_10_1_options(MachineClass *m)
-+{
-+    pc_i440fx_machine_10_2_options(m);
-+    compat_props_add(m->compat_props, hw_compat_10_1, hw_compat_10_1_len);
-+    compat_props_add(m->compat_props, pc_compat_10_1, pc_compat_10_1_len);
-+}
-+
-+DEFINE_I440FX_MACHINE(10, 1);
- 
- static void pc_i440fx_machine_10_0_options(MachineClass *m)
- {
-diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
-index b309b2b378d..e89951285e5 100644
---- a/hw/i386/pc_q35.c
-+++ b/hw/i386/pc_q35.c
-@@ -374,12 +374,21 @@ static void pc_q35_machine_options(MachineClass *m)
-                      pc_q35_compat_defaults, pc_q35_compat_defaults_len);
- }
- 
--static void pc_q35_machine_10_1_options(MachineClass *m)
-+static void pc_q35_machine_10_2_options(MachineClass *m)
- {
-     pc_q35_machine_options(m);
- }
- 
--DEFINE_Q35_MACHINE_AS_LATEST(10, 1);
-+DEFINE_Q35_MACHINE_AS_LATEST(10, 2);
-+
-+static void pc_q35_machine_10_1_options(MachineClass *m)
-+{
-+    pc_q35_machine_10_2_options(m);
-+    compat_props_add(m->compat_props, hw_compat_10_1, hw_compat_10_1_len);
-+    compat_props_add(m->compat_props, pc_compat_10_1, pc_compat_10_1_len);
-+}
-+
-+DEFINE_Q35_MACHINE(10, 1);
- 
- static void pc_q35_machine_10_0_options(MachineClass *m)
- {
-diff --git a/hw/m68k/virt.c b/hw/m68k/virt.c
-index 875fd00ef8d..98cfe43c73a 100644
---- a/hw/m68k/virt.c
-+++ b/hw/m68k/virt.c
-@@ -367,10 +367,17 @@ type_init(virt_machine_register_types)
- #define DEFINE_VIRT_MACHINE(major, minor) \
-     DEFINE_VIRT_MACHINE_IMPL(false, major, minor)
- 
-+static void virt_machine_10_2_options(MachineClass *mc)
-+{
-+}
-+DEFINE_VIRT_MACHINE_AS_LATEST(10, 2)
-+
- static void virt_machine_10_1_options(MachineClass *mc)
- {
-+    virt_machine_10_2_options(mc);
-+    compat_props_add(mc->compat_props, hw_compat_10_1, hw_compat_10_1_len);
- }
--DEFINE_VIRT_MACHINE_AS_LATEST(10, 1)
-+DEFINE_VIRT_MACHINE(10, 1)
- 
- static void virt_machine_10_0_options(MachineClass *mc)
- {
-diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
-index 1855a3cd8d0..eb22333404d 100644
---- a/hw/ppc/spapr.c
-+++ b/hw/ppc/spapr.c
-@@ -4761,15 +4761,26 @@ static void spapr_machine_latest_class_options(MachineClass *mc)
- #define DEFINE_SPAPR_MACHINE(major, minor) \
-     DEFINE_SPAPR_MACHINE_IMPL(false, major, minor)
- 
-+/*
-+ * pseries-10.2
-+ */
-+static void spapr_machine_10_2_class_options(MachineClass *mc)
-+{
-+    /* Defaults for the latest behaviour inherited from the base class */
-+}
-+
-+DEFINE_SPAPR_MACHINE_AS_LATEST(10, 2);
-+
- /*
-  * pseries-10.1
-  */
- static void spapr_machine_10_1_class_options(MachineClass *mc)
- {
--    /* Defaults for the latest behaviour inherited from the base class */
-+    spapr_machine_10_2_class_options(mc);
-+    compat_props_add(mc->compat_props, hw_compat_10_1, hw_compat_10_1_len);
- }
- 
--DEFINE_SPAPR_MACHINE_AS_LATEST(10, 1);
-+DEFINE_SPAPR_MACHINE(10, 1);
- 
- /*
-  * pseries-10.0
-diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
-index a79bd13275b..d0c6e80cb05 100644
---- a/hw/s390x/s390-virtio-ccw.c
-+++ b/hw/s390x/s390-virtio-ccw.c
-@@ -911,14 +911,26 @@ static const TypeInfo ccw_machine_info = {
-     DEFINE_CCW_MACHINE_IMPL(false, major, minor)
- 
- 
-+static void ccw_machine_10_2_instance_options(MachineState *machine)
-+{
-+}
-+
-+static void ccw_machine_10_2_class_options(MachineClass *mc)
-+{
-+}
-+DEFINE_CCW_MACHINE_AS_LATEST(10, 2);
-+
- static void ccw_machine_10_1_instance_options(MachineState *machine)
- {
-+    ccw_machine_10_2_instance_options(machine);
- }
- 
- static void ccw_machine_10_1_class_options(MachineClass *mc)
- {
-+    ccw_machine_10_2_class_options(mc);
-+    compat_props_add(mc->compat_props, hw_compat_10_1, hw_compat_10_1_len);
- }
--DEFINE_CCW_MACHINE_AS_LATEST(10, 1);
-+DEFINE_CCW_MACHINE(10, 1);
- 
- static void ccw_machine_10_0_instance_options(MachineState *machine)
- {
+diff --git a/semihosting/arm-compat-semi.c b/semihosting/arm-compat-semi.c
+index bc04b02eba8..bcd13cd6dfd 100644
+--- a/semihosting/arm-compat-semi.c
++++ b/semihosting/arm-compat-semi.c
+@@ -666,7 +666,7 @@ void do_common_semihosting(CPUState *cs)
+             int i;
+ #ifdef CONFIG_USER_ONLY
+             TaskState *ts = get_task_state(cs);
+-            target_ulong limit;
++            static abi_ulong heapbase, heaplimit;
+ #else
+             LayoutInfo info = common_semi_find_bases(cs);
+ #endif
+@@ -678,24 +678,20 @@ void do_common_semihosting(CPUState *cs)
+              * Some C libraries assume the heap immediately follows .bss, so
+              * allocate it using sbrk.
+              */
+-            if (!ts->heap_limit) {
+-                abi_ulong ret;
+-
+-                ts->heap_base = do_brk(0);
+-                limit = ts->heap_base + COMMON_SEMI_HEAP_SIZE;
++            if (!heaplimit) {
++                heapbase = do_brk(0);
+                 /* Try a big heap, and reduce the size if that fails.  */
+-                for (;;) {
+-                    ret = do_brk(limit);
++                for (abi_ulong size = COMMON_SEMI_HEAP_SIZE; ; size >>= 1) {
++                    abi_ulong limit = heapbase + size;
++                    abi_ulong ret = do_brk(limit);
+                     if (ret >= limit) {
++                        heaplimit = limit;
+                         break;
+                     }
+-                    limit = (ts->heap_base >> 1) + (limit >> 1);
+                 }
+-                ts->heap_limit = limit;
+             }
+-
+-            retvals[0] = ts->heap_base;
+-            retvals[1] = ts->heap_limit;
++            retvals[0] = heapbase;
++            retvals[1] = heaplimit;
+             /*
+              * Note that semihosting is *not* thread aware.
+              * Always return the stack base of the main thread.
 -- 
 2.47.2
 
