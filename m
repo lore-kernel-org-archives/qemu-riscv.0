@@ -4,69 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57291CA1013
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Sep 2025 20:50:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB5BDCA0FED
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Sep 2025 07:18:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uuGtz-0006FW-8m; Thu, 04 Sep 2025 16:49:51 -0400
+	id 1uuQiF-00078v-4e; Fri, 05 Sep 2025 03:18:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uuGti-0005sY-AX
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 16:49:36 -0400
-Received: from mailgate01.uberspace.is ([2001:1a50:11:0:c83f:a8ff:fea6:c8da])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uuQiD-00078V-Ba
+ for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 03:18:21 -0400
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uuGtY-000100-5M
- for qemu-riscv@nongnu.org; Thu, 04 Sep 2025 16:49:33 -0400
-Received: from skiff.uberspace.de (skiff.uberspace.de [185.26.156.131])
- by mailgate01.uberspace.is (Postfix) with ESMTPS id A5A6360C1C
- for <qemu-riscv@nongnu.org>; Thu,  4 Sep 2025 22:49:18 +0200 (CEST)
-Received: (qmail 2444 invoked by uid 990); 4 Sep 2025 20:49:18 -0000
-Authentication-Results: skiff.uberspace.de;
-	auth=pass (plain)
-Received: from unknown (HELO unkown) (::1)
- by skiff.uberspace.de (Haraka/3.0.1) with ESMTPSA;
- Thu, 04 Sep 2025 22:49:18 +0200
-From: Julian Ganz <neither@nut.email>
-To: qemu-devel@nongnu.org
-Cc: Julian Ganz <neither@nut.email>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v6 24/25] tests: add test for double-traps on rv64
-Date: Thu,  4 Sep 2025 22:48:59 +0200
-Message-ID: <dbe812aa186083ce4f4161072abc2f4ce8a83156.1757018626.git.neither@nut.email>
-X-Mailer: git-send-email 2.49.1
-In-Reply-To: <cover.1757018626.git.neither@nut.email>
-References: <cover.1757018626.git.neither@nut.email>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uuQiA-0004k1-DM
+ for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 03:18:20 -0400
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-45dd505a1dfso6837785e9.2
+ for <qemu-riscv@nongnu.org>; Fri, 05 Sep 2025 00:18:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1757056695; x=1757661495; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=x1rZnXyYQeXsor6QbFERTM6stkUtc/K583rwP288en0=;
+ b=cSfvPqURcJ94X6CG9lQR2qJKF6s+sbQaZhZ/Y1wBoQMcYDmtlmFQGkeBJKMWsbZInC
+ JftMrYaLh9uTx3ZHgo+dUmHlodq0T9OQwHZsigrc0NRRAlJCpwVKKDsX6FnnaSlLM6Co
+ 2u19LzbolxZxu2hR3Yje8T+ue0Qh2gbBO5ruV2iP8u0+sBbxtAobIIp6T4R8cKvyh98r
+ DOOhmnRHtZ7pEtwHUrz5rkayUA4MID58hGdcU6SBZ77xp/zetRn9YLaANL2AyYK9ZOHq
+ 5bwT6veRzzwh7+Ue8Wq+tmBABqgxaPCEoxZjUL0hZi1iuRu2dx20J7uIDlrH619YPLNL
+ qLQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757056695; x=1757661495;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=x1rZnXyYQeXsor6QbFERTM6stkUtc/K583rwP288en0=;
+ b=QBpRJ2RwJeA+pD9+qwOf5rtKkcawhIQVj0zyTLzJliTufEw4Jp1REx+sVt7NtonzJj
+ 3GMboU+37sZZPIiqjWw6y7HWvriedI6+hZb4IBNmZvEucSU0j1M6BagUhywTJHxyCod+
+ OyqoaP/y5frSRCcVmF+VKwq9Mjcu/H7UWTh3WUjukyIZnqcNdOZ6xxwxvfK/awvb54MP
+ 2g4Rd3/zFrZMx62YmN44H2W5X59mO4wGsh/O80Ee4//7YBukZdTc1ot4BRtpz94XdK+k
+ vLfnyKGdHR8rcZxvRuxKqe4AHkdUGYAz/3dDPiRTzMcJy9knpUpM9Og4BkBINtlh36mv
+ 5AWQ==
+X-Gm-Message-State: AOJu0YzPfXmaafl2LGWtA10yx1fQGQIIbOhhtbiwLZp0346aFNhn1xiS
+ iJsFZShpb1tAy6JjORj3hssw9b3zLfoQ7I1TOnEETFc/yYHO7tM1BbzS6tSCCeTB5z8=
+X-Gm-Gg: ASbGncsO6dblruKM8CY1+zcIVCqxJPZzpTYm4aNfeeVZqIkYT+ohLUiUfxEYVfzGe7A
+ +6LWMjDSV/toxpYZbzWiYoPqqATvIEf1rxfkPaZu0M0NvdXBLM/sD2aSY1akd8aK6R4cS56lVxm
+ faqA8dskhkaxL8IICbI5Vv68u3sImKNbhLEZgk02MJrYal8aQ+G9mtfinrP0zyOGK+/g3/bJfNU
+ DSwHd1bo+Of7jgiW7i/V++7kWNivlEIiUS6Sv1DsvHKjUhgkekii2y9DMnWbPg553lKN6j0vkgv
+ GYR0Xgk/rLZ/4vPkFnMaoJiz8bQI3slXoQLhKnqXydyxu+q7yLkb81SreRu13PnGK1qLhbLe7rn
+ TryTjhk+myLwCmqTDcOlRjK4O/tX5vJt3Qvbd7ANnLtS1NIg=
+X-Google-Smtp-Source: AGHT+IFsiNRYrUhXGkqlIeuwPRqxCctEpllByJe1vtxFe3OqCQbWssqiIs5M2dDWZ0VKwoG25ez3ZA==
+X-Received: by 2002:a05:600c:a44:b0:45b:72a9:28b0 with SMTP id
+ 5b1f17b1804b1-45b8557d227mr184174905e9.28.1757056695580; 
+ Fri, 05 Sep 2025 00:18:15 -0700 (PDT)
+Received: from [10.175.133.6] ([131.175.126.3])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45dd07480d5sm32393185e9.8.2025.09.05.00.18.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Sep 2025 00:18:15 -0700 (PDT)
+Message-ID: <188f0525-154e-4d08-a155-68e8800e302d@linaro.org>
+Date: Fri, 5 Sep 2025 09:18:11 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Bar: -----
-X-Rspamd-Report: REPLY(-4) BAYES_HAM(-2.999521) MID_CONTAINS_FROM(1)
- MIME_GOOD(-0.1) R_MISSING_CHARSET(0.5)
-X-Rspamd-Score: -5.599521
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nut.email; s=uberspace;
- h=from:to:cc:subject:date;
- bh=hJeTNN+EDtHALUaN38ske2iZTHRjFTg++mevsB5iNj8=;
- b=GtnvqD95XKsk2LdqvkQzffGuhlZZQtbBeHpDMgDGiM+uCpcHX7/jBI9z8e6NUjQSi2Rur7dFQh
- HiWaFJqVp7EnkZ+vdxR1v2FGcytVq/zFjfLSIjCb4Hu7ptxcVVOVMEUHNa8ALP0oIx/xlGVlp15/
- F9rVzlg7iZmAFBqrHqw4iKKMRJGXipQy4dEoxutAg52JYhKZegtkMesoGcyG3ytuC/+P8GDZMyxu
- 891XXosLMFAPJyyuCfR4HiKW1czOjAs+O8CIQfYrIi0G8k8gFX3U5kKFwRYSAfyJo+2lpkuK30DJ
- pnPcFF+Enqu7GCx4rOXz/0/4W0lu3KXVul3w/COo8A4+SlF09lUApA05EA0ddaqlH3dzmTfCUTCS
- NdWjPg6pC9PtREeqGjmG5nqUlqY6a3m+0HJLiWNa3gSQ5O0mu2ke7nKVEPB500YYzaOKcFc3iuBt
- UNPojxPC1FOQgDuzo1tHjWEwvNhUjDD9NZ/sv+ECaDcfAkpIepLykTMiIK+64blB0PAvjzWdfqmU
- h6B+NqKwkNhviYD5H5v7Rs7fzL/k21556UJRzijjBndChUBXYhoyURXB+DXwJDAygxyOA/Q6mBST
- c58oONwC5R+kD+YyUUCG/qa8mQ9WnyY6qj5TYe3vp3deVpjRpSL2HnlhCrX1oJ5HscU+aWdJGstb
- 4=
-Received-SPF: pass client-ip=2001:1a50:11:0:c83f:a8ff:fea6:c8da;
- envelope-from=neither@nut.email; helo=mailgate01.uberspace.is
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] target/risvc: Fix vector whole ldst vstart check
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Nicholas Piggin <npiggin@gmail.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-devel@nongnu.org, Chao Liu <chao.liu@zevorn.cn>,
+ Nicholas Joaquin <njoaquin@tenstorrent.com>,
+ Ganesh Valliappan <gvalliappan@tenstorrent.com>,
+ =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+References: <20250903030114.274535-1-npiggin@gmail.com>
+ <20250903030114.274535-3-npiggin@gmail.com>
+ <6bff4c9d-1da4-40b3-901a-789923d8ef7e@ventanamicro.com>
+ <qyikdqxxiewb7tqykt74gpx5oereckbepyptd3vr4flptmrvoc@midnt5c7agnc>
+ <3dd9888f-be16-48f8-a858-f58a5b57825d@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <3dd9888f-be16-48f8-a858-f58a5b57825d@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,115 +112,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We do have a number of test-case for various architectures exercising
-their interrupt/exception logic. However, for the recently introduced
-trap API we also want to exercise the logic for double traps on at least
-one architecture.
+On 9/4/25 13:06, Daniel Henrique Barboza wrote:
+> How hard it is to update the GCC version we're running in the docker images for
+> "check-tcg"? We would like to use a RISC-V vector header that isn't supported
+> ATM.
+If debian packages the gcc version, then it's easy: change
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Signed-off-by: Julian Ganz <neither@nut.email>
----
- tests/tcg/riscv64/Makefile.softmmu-target |  6 ++
- tests/tcg/riscv64/doubletrap.S            | 73 +++++++++++++++++++++++
- 2 files changed, 79 insertions(+)
- create mode 100644 tests/tcg/riscv64/doubletrap.S
+   gcc-riscv-linux-gnu
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 3ca595335d..1a71a78653 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -24,5 +24,11 @@ EXTRA_RUNS += run-test-mepc-masking
- run-test-mepc-masking: test-mepc-masking
- 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
- 
-+EXTRA_RUNS += run-plugin-doubletrap
-+run-plugin-doubletrap: doubletrap
-+	$(call run-test, $<, \
-+	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
-+	  $(QEMU_OPTS)$<)
-+
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/doubletrap.S b/tests/tcg/riscv64/doubletrap.S
-new file mode 100644
-index 0000000000..b61089c9c1
---- /dev/null
-+++ b/tests/tcg/riscv64/doubletrap.S
-@@ -0,0 +1,73 @@
-+	.option norvc
-+
-+	.text
-+	.global _start
-+_start:
-+	# Set up vectored interrupts
-+	lla	t0, trap
-+	add	t0, t0, 1
-+	csrw	mtvec, t0
-+
-+	# Enable sw interrupts
-+	csrrsi	zero, mie, 0x8
-+	csrrsi	zero, mstatus, 0x8
-+
-+	# Engage the double trap: we trigger an machine-level software
-+	# interrupt, which will trap to an illegal instruction
-+	lui	t1, 0x02000
-+	li	t0, 1
-+	sw	t0, 0(t1)
-+
-+	# If we still not went out via the software interrupt route after a
-+	# short while, we failed the test.
-+	lui	t0, 0x1
-+0:
-+	addi	t0, t0, -1
-+	bnez	t0, 0b
-+	j	fail
-+
-+trap:
-+	j	illegal_insn # Exceptions
-+	j	fail # Supervisor software interrupt
-+	j	fail
-+	.insn	i CUSTOM_0, 0, x0, x0, 0 # Machine software interrupt
-+	j	fail
-+	j	fail # Supervisor timer interrupt
-+	j	fail
-+	j	fail # Machine timer interrupt
-+	j	fail
-+	j	fail # Supervisor external interrupt
-+	j	fail
-+	j	fail # Machine external interrupt
-+	j	fail
-+	j	fail # Counter overflow interrupt
-+	j	fail
-+	j	fail
-+
-+illegal_insn:
-+	# Check whether we really got an illegal instruction
-+	csrr	t0, mcause
-+	li	t1, 2
-+	bne	t0, t1, fail
-+	li	a0, 0
-+	j	_exit
-+fail:
-+	li	a0, 1
-+_exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
-+
-+	# Semihosting call sequence
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	16
-+semiargs:
-+	.space	16
--- 
-2.49.1
+to
 
+   gcc-NN-riscv-linux-gnu
+
+If the version isn't packaged, then it's harder, and we would need to either build our own 
+gcc within the container (see dockerfiles/debian-microblaze-cross.d/build-toolchain.sh), 
+or you can host a pre-built version somewhere (see dockerfiles/debian-loongarch-cross.docker).
+
+
+r~
 
