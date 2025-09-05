@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B79E8CA1010
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Sep 2025 07:51:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0100CA0FED
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Sep 2025 07:53:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uuRDP-0002zw-KL; Fri, 05 Sep 2025 03:50:35 -0400
+	id 1uuRGJ-0006kr-NI; Fri, 05 Sep 2025 03:53:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1uuRDJ-0002zC-Mf; Fri, 05 Sep 2025 03:50:30 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ id 1uuRGI-0006kJ-39; Fri, 05 Sep 2025 03:53:34 -0400
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1uuRDF-0008MK-Uu; Fri, 05 Sep 2025 03:50:28 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-772481b2329so2023555b3a.2; 
- Fri, 05 Sep 2025 00:50:24 -0700 (PDT)
+ id 1uuRGF-0000ES-Tp; Fri, 05 Sep 2025 03:53:33 -0400
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-32b959b4895so1058099a91.1; 
+ Fri, 05 Sep 2025 00:53:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757058622; x=1757663422; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cuVQJVG8AFduxrpsLUWxQFTob1fSZFfaFdZeH8uN5UM=;
- b=juFFyYYnD8dpmMYVExe/L9WueXqzMt2Id+kvbYXCB3QZ58NlwaC7pfqaGOs2h1wkwT
- WStO+Trwg2p3vJ2UFXOVhUBTAS1o9yX3yPejJGy6wcLfVDfKv/X0OAzqdFqvXI5zifeh
- QDFk9V+CB+fxQYPipz241t8UdwPKuSfx7NU5ZHryVNg+UXzLj3sAY/3RcdYAiy4XD6yh
- viqJQZFP4ELZ7q/vltaB9ipcNjNgJLsDqzJyRodLHErtSR3+bf1OyENH+p9wirg5ceZv
- sy5yIEtRd7pBaQH4Fc+S6KxQpX04bFwMYD7KSYZeuTxCdTuRLdNUVqvWGUuds9ipO62y
- nLkw==
+ d=gmail.com; s=20230601; t=1757058807; x=1757663607; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r9fobgHF8BPoZ4YDoGnftfY3pCQ30cooqytFfFW2iyM=;
+ b=LDMwTJShM8jdFpJD6W0mcPQhzWiYPqEwhz3UwvLOcPjGzJuvyvukyyNSz1Tm3MnVCb
+ WY3IVVrcniZtmYZxuEtymubFVT3FALb49yfUILez36gzw2favLSDRXQcvLOUuabqqI0n
+ GUjkXh5KnAltyLpkY5LNUH+HJw1ULLm90wd0xW9uOgHg285DVCeCCrmP33U24WlD5XPp
+ XW45Xl2ghOr9Dgb9tasV/w9HGe4+elpYfFRnbD3jl6Fu/YuSBd6tJobGXO8gtmVaAu9D
+ s8lWG/IYhd0U2ltWgF3xiSXH//1CM9XsZ0pZZbR8q1LKNc+2Y848jOoZCAydzNunS8WC
+ NN+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757058622; x=1757663422;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cuVQJVG8AFduxrpsLUWxQFTob1fSZFfaFdZeH8uN5UM=;
- b=xKSs4AD63gjQG3BFJ2ROV2T1KE/ewLP06IQHz2DTpIk3ojQnThQjVfsmQECm/4iadw
- McN/l0QqPsBNar4M6FFBcZeKrUqJB+ib+IOYcHh30hftwAslV+IpgJS4ReD5oH8Zj5WS
- gqfUeTydKPXgQP1lHRaryl9/Xp/ABGGcQRy0V0LSmtkPs69icnRYBP5N7+Uk3ppmiov+
- B3Qp5kKbbjeOHzOG9uBI3EQ8KpdhvL6awpQ1ReiL8l0/CYWW0/Rgp11hdhakqBHta4Ca
- e2qPRUOYmKgl654kzoK4BtQ6mDtjIpPWs35w+i++8w7Xkh6mI371qxtDyR8lle6PetOt
- KqOw==
+ d=1e100.net; s=20230601; t=1757058807; x=1757663607;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=r9fobgHF8BPoZ4YDoGnftfY3pCQ30cooqytFfFW2iyM=;
+ b=gM9TPO8QxcLjVsldtOM3Ndsp11gDa4hsc7P0Q2YETqJkrxyL52sKUZ0No99ZTR/XrJ
+ 18LOnqwenEQUDgiOGloUzAU9K+s2WWPo7unRKAyXFN5VheEZf59FZ8B4BDu6cKspEYdk
+ wyOQ4NNpkDw0DyXIPY/5sBAmFGEubvFQJ0lpLV3rkM+L6gbcGVFes3Ou2nRy5u9SvMvW
+ zMrNWeu7UQ0ehbLXlCafZf1g0sD4mDJI46Vz+oCTMndPCLlw0h451uWvoCt+Q+fooZJb
+ Y6/K2vKeDVVauRKxHZD4BTZFFO1bWDD92Vmbj+kNDrCNyHelUOce5bf4N7XSiZ8p+8Pe
+ ISQQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJ49gwyPq7jQ71mPeyaS44rTTzQkGMA+5kC5xO42G/QttpgTHqqa2M7LhsBjWyO2c4LlMvhVMNJZZS@nongnu.org
-X-Gm-Message-State: AOJu0YzPIlMrTdoL8dE0ZJ+XYKU5u9yzS1g4dJi4iTFbCm8BZdXW0Mye
- 25VoaOMu1BRz6iObu0aW8K5QQrVpeCrvrxuxYBF5hTB9Y8jp0+0jRbJribx9//xv
-X-Gm-Gg: ASbGncsMp69asHQHQhdX1p5qiqIQs96pAEcAhaKdykIw9k5IWV2NV0jn5g6WH6J9vHH
- ahwbs8qBkMjVjEpoVjFJMHNxRNGw73frGI0FNvfH6XUHeHzxg0nLdzLOz8BYgeTIzaTAP1predh
- 3i399cNo/chisqS9bxXwAEm15h2BP2iBuSJtYxRRkMQJM4T7jg17/TfMsSiP1X7Lx7nFVaFdsoW
- fEmaRVDOqjAOqCXigjNx0msHScsk3xnsyT44JJX2LQ2gu0Uyu6SsvV9UdPaGbqr9WHlyJhvSye+
- nBCz71FJtQwLv5LJDcyki2ioe8z+7yFjf31STy+teM+Vl/7rPnpAEPYnvxuieEr959ndKD7i5s2
- fNAJW5vEy/o3OyUO2OHCFYu6sr+4DFT86m5CPhQ==
-X-Google-Smtp-Source: AGHT+IH5mIQYz3cCkwiAAqcwghHmUpB/sRcpuVF8lZkiJisaMqtOAimd+9DQXN4C6G19IXKELugqLA==
-X-Received: by 2002:a05:6a00:2e2a:b0:772:65b2:99b6 with SMTP id
- d2e1a72fcca58-77265b29bb8mr21378604b3a.25.1757058621959; 
- Fri, 05 Sep 2025 00:50:21 -0700 (PDT)
+ AJvYcCWngyA6Vs+TGS+IiOAvmQAbWx6uWmAnoAZomtUo4U+NiTzmjHWiLrj/n3TeQj4Hkz/eiPF/9s84otwC@nongnu.org
+X-Gm-Message-State: AOJu0YzGzX4gmqmvpnncKswrqXYbKfElCe+ZgY9arFqlQhgTfdziEBAW
+ twg+6upGv+YAccze7DucJVYLET1RjydI72UwHsIBn+j6LQvgfobvbMT4ZnNoHAu7
+X-Gm-Gg: ASbGncsXWxD+4BUpbd8a8iNM1MtACh9cCcqok5NC8YYgMY9QK469htMJ7/ClwTOtXoM
+ v/dHpm6p95RfJ609CRMh5PkXOLg0qo5zPwBpw2AwYbzTUNgzyqTTJU0GVFCP1RzIHbMG6IOEJ8R
+ G+CGVzANaifYxQ9aVMYcWIFaIoDNNsNyJedKyyNoDTZmkGfHF2WeYyzV2GRRPdB23NmWH1a1mX1
+ SWPEQFyRS/UI7VXVKTUfgD8Nmt1+gpiDkHOh8uOUAt/uHMV/JAG8JPfRefA3dEsX2pl4xODygC9
+ /gGweOn5fktFPmx+aF2nBXvX4yxIBbOVFqxc0CVddXuq1RMNJNu1CmYeMvenWXANDz4cmtEsPfg
+ jlOrIZlo3gLbr3wXho41VFM0E+WvVi+LjBzFYHg==
+X-Google-Smtp-Source: AGHT+IGCOqZQMTCQrOpjHbRzmqi7x7hlF2DY8tT6/nPVA1T14lb+e36kYx0agwxoWC9AGTJWuLJjgA==
+X-Received: by 2002:a17:90b:394f:b0:32b:c9fc:8aa2 with SMTP id
+ 98e67ed59e1d1-32bc9fc8db5mr2583906a91.20.1757058806866; 
+ Fri, 05 Sep 2025 00:53:26 -0700 (PDT)
 Received: from lima-default ([1.146.99.18]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7722a26ae02sm20967560b3a.21.2025.09.05.00.50.17
+ d2e1a72fcca58-7722a26ae02sm20967560b3a.21.2025.09.05.00.53.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Sep 2025 00:50:21 -0700 (PDT)
+ Fri, 05 Sep 2025 00:53:26 -0700 (PDT)
 From: Nicholas Piggin <npiggin@gmail.com>
 To: qemu-riscv@nongnu.org
 Cc: Nicholas Piggin <npiggin@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
@@ -69,16 +70,20 @@ Cc: Nicholas Piggin <npiggin@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
  Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Subject: [PATCH v2 0/3] target/riscv: corner case fixes
-Date: Fri,  5 Sep 2025 17:49:55 +1000
-Message-ID: <20250905074959.426911-1-npiggin@gmail.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org,
+ Nicholas Joaquin <njoaquin@tenstorrent.com>,
+ Ganesh Valliappan <gvalliappan@tenstorrent.com>
+Subject: [PATCH v2 1/3] target/riscv: Fix IALIGN check in misa write
+Date: Fri,  5 Sep 2025 17:49:56 +1000
+Message-ID: <20250905074959.426911-2-npiggin@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250905074959.426911-1-npiggin@gmail.com>
+References: <20250905074959.426911-1-npiggin@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=npiggin@gmail.com; helo=mail-pf1-x42b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=npiggin@gmail.com; helo=mail-pj1-x102e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,41 +106,166 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Changes:
-v1->v2:
-* Added a tcg tests build-time check for vector intrinsics support
-  in target compiler before building new tests that require it.
-  ci images may not support these yet unfortunately, but upgrading
-  those will be a separate effort.
+The instruction alignment check for the C extension was inverted.
+The new value should be checked for C bit clear (thus increasing
+IALIGN). If IALIGN is incompatible, then the write to misa should
+be suppressed, not just ignoring the update to the C bit.
 
-There is ongoing effort to run generated test verification on the 
-QEMU riscv CPU which has turned out a few corner cases.
+From the ISA:
 
-I added some fixes for these, as well as tcg tests. The
-interrupted vector test also catches a bug in
-"Generate strided vector loads/stores with tcg nodes." that
-I referred to in the v5 thread for that series.
+  Writing misa may increase IALIGN, e.g., by disabling the "C"
+  extension. If an instruction that would write misa increases IALIGN,
+  and the subsequent instruction’s address is not IALIGN-bit aligned,
+  the write to misa is suppressed, leaving misa unchanged.
 
-Thanks,
-Nick
+This was found with a verification test generator based on RiESCUE.
 
-Nicholas Piggin (3):
-  target/riscv: Fix IALIGN check in misa write
-  target/risvc: Fix vector whole ldst vstart check
-  tests/tcg: Add riscv test for interrupted vector ops
-
- target/riscv/csr.c                        |  16 +-
- target/riscv/vector_helper.c              |   2 +
- tests/tcg/riscv64/Makefile.softmmu-target |   5 +
- tests/tcg/riscv64/Makefile.target         |  15 ++
- tests/tcg/riscv64/misa-ialign.S           |  88 +++++++++
- tests/tcg/riscv64/test-interrupted-v.c    | 208 ++++++++++++++++++++++
- tests/tcg/riscv64/test-vstart-overflow.c  |  75 ++++++++
- 7 files changed, 406 insertions(+), 3 deletions(-)
+Reported-by: Nicholas Joaquin <njoaquin@tenstorrent.com>
+Reported-by: Ganesh Valliappan <gvalliappan@tenstorrent.com>
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+---
+ target/riscv/csr.c                        | 16 ++++-
+ tests/tcg/riscv64/Makefile.softmmu-target |  5 ++
+ tests/tcg/riscv64/misa-ialign.S           | 88 +++++++++++++++++++++++
+ 3 files changed, 106 insertions(+), 3 deletions(-)
  create mode 100644 tests/tcg/riscv64/misa-ialign.S
- create mode 100644 tests/tcg/riscv64/test-interrupted-v.c
- create mode 100644 tests/tcg/riscv64/test-vstart-overflow.c
 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 8842e07a73..64b55b7add 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2140,9 +2140,19 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+     /* Mask extensions that are not supported by this hart */
+     val &= env->misa_ext_mask;
+ 
+-    /* Suppress 'C' if next instruction is not aligned. */
+-    if ((val & RVC) && (get_next_pc(env, ra) & 3) != 0) {
+-        val &= ~RVC;
++    /*
++     * misa writes that increase IALIGN beyond alignment of the next
++     * instruction cause the write to misa to be suppressed. Clearing
++     * "C" extension increases IALIGN.
++     */
++    if (!(val & RVC) && (get_next_pc(env, ra) & 3) != 0) {
++        /*
++         * If the next instruction is unaligned mod 4 then "C" must be
++         * set or this instruction could not be executing, so we know
++         * this is is clearing "C" (and not just keeping it clear).
++         */
++        g_assert(env->misa_ext & RVC);
++        return RISCV_EXCP_NONE;
+     }
+ 
+     /* Disable RVG if any of its dependencies are disabled */
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 3ca595335d..6e470a028f 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -24,5 +24,10 @@ EXTRA_RUNS += run-test-mepc-masking
+ run-test-mepc-masking: test-mepc-masking
+ 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
+ 
++EXTRA_RUNS += run-misa-ialign
++run-misa-ialign: QEMU_OPTS := -cpu rv64,c=true,v=true,x-misa-w=on $(QEMU_OPTS)
++run-misa-ialign: misa-ialign
++	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
++
+ # We don't currently support the multiarch system tests
+ undefine MULTIARCH_TESTS
+diff --git a/tests/tcg/riscv64/misa-ialign.S b/tests/tcg/riscv64/misa-ialign.S
+new file mode 100644
+index 0000000000..7f1eb30023
+--- /dev/null
++++ b/tests/tcg/riscv64/misa-ialign.S
+@@ -0,0 +1,88 @@
++/*
++ * Test for MISA changing C and related IALIGN alignment cases
++ *
++ * This test verifies that the "C" extension can be cleared and set in MISA,
++ * that a branch to 2-byte aligned instructions can be executed when "C" is
++ * enabled, and that a write to MISA which would increase IALIGN and cause
++ * the next instruction to be unaligned is ignored.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#define RVC (1 << ('C'-'A'))
++#define RVV (1 << ('V'-'A'))
++
++.option norvc
++	.text
++	.global _start
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++
++	csrr	t0, misa
++	li	t1, RVC
++	not	t1, t1
++	and	t0, t0, t1
++	csrw	misa, t0
++	csrr	t1, misa
++	li	a0, 2 # fail code
++	bne	t0, t1, _exit # Could not clear RVC in MISA
++
++	li	t1, RVC
++	or	t0, t0, t1
++	csrw	misa, t0
++	csrr	t1, misa
++	li	a0, 3 # fail code
++	bne	t0, t1, _exit # Could not set RVC in MISA
++
++	j	unalign
++. = . + 2
++unalign:
++
++	li	t1, RVC
++	not	t1, t1
++	and	t0, t0, t1
++	csrw	misa, t0
++	csrr	t1, misa
++	li	a0, 4 # fail code
++	beq	t0, t1, _exit # Was able to clear RVC in MISA
++
++	li	t0, (RVC|RVV)
++	not	t0, t0
++	and	t0, t0, t1
++	csrw	misa, t0
++	csrr	t0, misa
++	li	a0, 5 # fail code
++	bne	t0, t1, _exit # MISA write was not ignored (RVV was cleared)
++
++	j	realign
++. = . + 2
++realign:
++
++	# Success!
++	li	a0, 0
++	j	_exit
++
++trap:
++	# Any trap is a fail code 1
++	li	a0, 1
++
++# Exit code in a0
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
++
++	# Semihosting call sequence
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
 -- 
 2.51.0
 
