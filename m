@@ -4,92 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 350E4CA1010
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Sep 2025 07:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59D60CA0FED
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Sep 2025 09:03:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uuRGQ-0006mV-Mo; Fri, 05 Sep 2025 03:53:42 -0400
+	id 1uuSL1-000601-42; Fri, 05 Sep 2025 05:02:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1uuRGN-0006m0-Os; Fri, 05 Sep 2025 03:53:39 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1uuSKz-0005wz-Ls
+ for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 05:02:29 -0400
+Received: from mail-ot1-x331.google.com ([2607:f8b0:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>)
- id 1uuRGK-0000F5-6g; Fri, 05 Sep 2025 03:53:38 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-24457f581aeso18774865ad.0; 
- Fri, 05 Sep 2025 00:53:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1uuSKo-0005Ar-I4
+ for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 05:02:27 -0400
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-74381e207a0so1462989a34.0
+ for <qemu-riscv@nongnu.org>; Fri, 05 Sep 2025 02:02:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757058813; x=1757663613; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5Z6SuNhFPrPhzfMBT/bngXY1a+8lOkAShgssGKYktwc=;
- b=k3Tjpuzyo4kDGYZ+RljETzQSf2dCMJHxVtM2733U8k5WkDYRbyYrxr/7hFTZ4LKPCf
- /NHnLCrs7DQY79ZELsm7+80T1+9K1uMXLd5zg1MZnibj/TE7peJqVoA0sKVnBDH7xypl
- JvF19jL1gv5pbOIc9bctUcA3cld8FUe6irkWCGpS8aeHRC3cRVGoKFjpXX/boxwXFmLk
- eYlB43IL7y2EmT20paRI4kk1GmyeSwwSPez95gGPmQXWtlpfM/uiMNhZWlWA4WcvlUDv
- h6TE99IV5BMa7KWtE+MIrDgV7e2CxZN+uihQlyxB91Szs3QpuVVw9qjKKb1DZlQjKXh4
- vtMg==
+ d=sifive.com; s=google; t=1757062934; x=1757667734; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9Ce9aRh4vsKWroT5mV5jGSfybTzO3OJePW9XqpwOKz0=;
+ b=J2Cs0ronVB01efLctuLObigM1ebIXNeD49liWHcxKrEF05wgkUptHsWUEukJAFPWpk
+ Sd81/rGVMmURo7ghcQLDdyEq77394H3vFVQ7txd2JKffa92lrnrDlfgAbtifa8XhTd3G
+ e3LA8ErOS6rFz6YecgU/Ejio+sTpvqRRvAsEba7vrPkv0doNNw4r0jnnnaOrQlj2MreQ
+ wN1dtTQWHklQkbSk/eBSStW8zvipT0z5bAR9txLOBoJtA/WQiBvxGrdNGGeHQcuFKxOX
+ muqAyrrZdsmfDa+OZwiaTRsP7MBUm7o/4nqUnKlKfFMzVab/xwfzfPkEC19La7jt1SXi
+ 3VbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757058813; x=1757663613;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5Z6SuNhFPrPhzfMBT/bngXY1a+8lOkAShgssGKYktwc=;
- b=oCjwpBoERc3XtBUOoaZ04qp3qQvDEzGz+zjTQLYtQfw9salLQNk4Z4VQ1pDF1DrgKC
- Oo8dlqKD+e5uZBvbN0Ult883s+CzkD3SeZcfJdmgolh8IH5lxtvD3PuGZt8F9k/T+BIy
- 5mP4RdOiBO/f1/36GMXJRSYPK9abxJfZ6F5HIT14o9AbUcrBn2WUK/RWPvBKd7fan3mA
- YhA0N8Ti6yrP0/arzfiWKxxFR+zRPh29hSX77IzW49oJXoe/qI6j3ZyTgvn0b3KP+T1X
- Xls2sfH4rW8KLqjyt8RT7d2ZYUydKpkQ+hY0+hFhtlaBGziELaesX3sV5IlN4q5H2vmN
- +jjA==
+ d=1e100.net; s=20230601; t=1757062934; x=1757667734;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9Ce9aRh4vsKWroT5mV5jGSfybTzO3OJePW9XqpwOKz0=;
+ b=ifbBMyElZCTnlbn+8DUoauHlUYTk8vUJThGKMBhcm+q3OUxjv9FcxTZ12j7gDXXvlE
+ 3Sd6DQ2D8npxpuo6aOb3G5b/iZ0oP9P2KU4Z/+UwEpjy4378EyBlIEE6xYV6L+RhBSRF
+ eRTDEubOjGZLly8+H69CXz8n5s2NDr7Gy5+kSi4XjuLhA7JswCvxCb5StfXYrPSmrz0I
+ /7chFgRMkMl1B/mYt+1yxXmmlY/F/HQF3ObvCMU5NMKvG6KX6Z7d8OZ/6gQYDmhMd5Ae
+ nYYuM3Mf9IBwEpYbG6iCppgydZRxMc8Z1HyBSvam9PmZa4R8H6UKge1vepo6Ku63VHcH
+ 5vgw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCwSTsYIUfw/7OBxnjuq3VklAG2ET3LfIM29dCFkMpSNSw8kVOPzTv1Hp7BdoRAbtssGGadZ6yim+i@nongnu.org
-X-Gm-Message-State: AOJu0YxuLDhUK0SqWx517yoiw/gB5ntR3cbRM1f/6OiLkzp7ar9nUiAn
- U8K87vzBdUjJ/nljmMf+HZKfAQbusp8+EU1Xm8upNpNqNVtT3S6WuEN7/Sf/3EpM
-X-Gm-Gg: ASbGncv9qJ2eu8xNszu5AtyUcwyNBBozwVO2lRLX1j9dziBdgH+jumWycxRoM0qX0e9
- 8gOryfRGheq7rOrCzU0MEXFJ3ht356/y9+rGR/e4LKkrRVKsEtg+539Osq/6GcsrxeBQBpspzeh
- /VSUdUyPb1Hmk4kEClBXMfnp6dX12vxRSwLjLvyfAOtQiEZW9RrjTBvNC+T1KXMgCPS2LN82jJ9
- aM0MkadmIGFp+iiFasqzjz8udJsVZ6P3k4ICPL9HAk2vwHlOBF1CR7LaqEV79VLGG5kSE+qUKTd
- IliAsP8EKG6gASV6hoYl+ET9Qn1z+fO2fstJ4RTUSQN3GxdxDVa9w5VJEHRdv4uMYCLiGksK2K8
- Om2gRj4RB+9bc1kV9JPtza6LZoqiclcPoQVzoQw==
-X-Google-Smtp-Source: AGHT+IGIRqtrH6SRilkpaokCQKNMfNdm5X64FF6tQy5NCEo2eY8uevM3fhVRYlT1a/49j9Ue6CPghQ==
-X-Received: by 2002:a17:903:4405:b0:24e:47ea:951e with SMTP id
- d9443c01a7336-24e47ea95dfmr6286985ad.19.1757058813485; 
- Fri, 05 Sep 2025 00:53:33 -0700 (PDT)
-Received: from lima-default ([1.146.99.18]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7722a26ae02sm20967560b3a.21.2025.09.05.00.53.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Sep 2025 00:53:33 -0700 (PDT)
-From: Nicholas Piggin <npiggin@gmail.com>
-To: qemu-riscv@nongnu.org
-Cc: Nicholas Piggin <npiggin@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org,
- Nicholas Joaquin <njoaquin@tenstorrent.com>,
- Ganesh Valliappan <gvalliappan@tenstorrent.com>
-Subject: [PATCH v2 2/3] target/risvc: Fix vector whole ldst vstart check
-Date: Fri,  5 Sep 2025 17:49:57 +1000
-Message-ID: <20250905074959.426911-3-npiggin@gmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250905074959.426911-1-npiggin@gmail.com>
-References: <20250905074959.426911-1-npiggin@gmail.com>
+ AJvYcCVsoBFSPtpxq2BdFDOCype7tkrNg4eSrr+b/9sN6rwugi0P/V0C0Y72wXVG8VcFTpZ0vnZz+C/AH8WW@nongnu.org
+X-Gm-Message-State: AOJu0Yzg2uvSHHyqXzzMIQyQX6RpPRdDJV2vP7abIge227Efhz5rk8Ib
+ FTOXgw/iXxsXcr9FdWJPl93EuIsr+h1XVHbIfLSKIU+CIDqs3AyA3/RhRyyvOZhSbSvu8b626dk
+ NkgEr3iizT/aVrCv1+oYeBpktZc6GQAx4w3Gujl5XqA==
+X-Gm-Gg: ASbGnctm8NyicJmMeBQxlojrQ9XjICsNkAV/qPMhgSynoW8U/7YMb/vcManuQSq/qB3
+ /CiknEfLoeFAvYuClddE6X4qsFb9otd+A6GdWoMaALui5QsVUZigK/p0lUm7apOR7f9ENbLlRQe
+ dm/ANCRgA7pJvdn0AUyOKuw9M6DcP6ASUECh7QFKHmxmq2yvCipPYaAKkuWFryv2WM40GqoNCxT
+ JQM1ULFKCMf8PvxGqw=
+X-Google-Smtp-Source: AGHT+IERucbWGI/cplq0L5ncWMX6UDYo1kzLTg77oEwWIxpZvC77P9+GeASYnYs5UNyEEcKSc3VWoTb2IHOccU7NRfQ=
+X-Received: by 2002:a05:6808:d4c:b0:439:acee:9a77 with SMTP id
+ 5614622812f47-439aceea5c3mr1922222b6e.37.1757062934047; Fri, 05 Sep 2025
+ 02:02:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=npiggin@gmail.com; helo=mail-pl1-x636.google.com
+References: <20250903140308.1705751-1-max.chou@sifive.com>
+ <20250903140308.1705751-2-max.chou@sifive.com>
+ <da524d10-fee5-45f2-ba9e-23f66a754e9b@ventanamicro.com>
+In-Reply-To: <da524d10-fee5-45f2-ba9e-23f66a754e9b@ventanamicro.com>
+From: Max Chou <max.chou@sifive.com>
+Date: Fri, 5 Sep 2025 18:02:02 +0900
+X-Gm-Features: Ac12FXwQN4Z-JgbvMZvY_SikSy21Oz_Zk3UPc8TpwKNTNXZXd5rQhf5mwbObHek
+Message-ID: <CANiaA1vs9Z9FHj8u8HLzb_gpTiSorG5FkYdS0ep9cDa4ER9HRA@mail.gmail.com>
+Subject: Re: [RFC PATCH v3 1/3] target/riscv: Add Zvqdotq cfg property
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ richard.henderson@linaro.org
+Content-Type: multipart/alternative; boundary="000000000000084281063e0a18e7"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::331;
+ envelope-from=max.chou@sifive.com; helo=mail-ot1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,147 +100,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The whole vector ldst instructions do not include a vstart check, so an
-overflowed vstart can result in an underflowed memory address offset and
-crash:
+--000000000000084281063e0a18e7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-    accel/tcg/cputlb.c:1465:probe_access_flags:
-      assertion failed: (-(addr | TARGET_PAGE_MASK) >= size)
+On Thu, Sep 4, 2025 at 7:14=E2=80=AFPM Daniel Henrique Barboza <
+dbarboza@ventanamicro.com> wrote:
 
-Add the VSTART_CHECK_EARLY_EXIT() check for these helpers.
+>
+>
+> On 9/3/25 11:03 AM, Max Chou wrote:
+> > The Zvqdotq extension is the vector dot-product extension of RISC-V.
+> >
+> > Signed-off-by: Max Chou <max.chou@sifive.com>
+> > ---
+> >   target/riscv/cpu.c                | 1 +
+> >   target/riscv/cpu_cfg_fields.h.inc | 1 +
+> >   target/riscv/tcg/tcg-cpu.c        | 5 +++++
+> >   3 files changed, 7 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index d055ddf462..95edd02e68 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -187,6 +187,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+> >       ISA_EXT_DATA_ENTRY(zvksg, PRIV_VERSION_1_12_0, ext_zvksg),
+> >       ISA_EXT_DATA_ENTRY(zvksh, PRIV_VERSION_1_12_0, ext_zvksh),
+> >       ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+> > +    ISA_EXT_DATA_ENTRY(zvqdotq, PRIV_VERSION_1_12_0, ext_zvqdotq),
+>
+> Is this really 1.12? If it's marked as experimental I would expect it be =
+a
+> new
+> extension, e.g. 1.13.
+>
+>
+> Thanks,
+>
+> Daniel
+>
 
-This was found with a verification test generator based on RiESCUE.
+Thanks for pointing out this part. I=E2=80=99ll update v4 for this.
 
-Reported-by: Nicholas Joaquin <njoaquin@tenstorrent.com>
-Reported-by: Ganesh Valliappan <gvalliappan@tenstorrent.com>
-Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
----
- target/riscv/vector_helper.c             |  2 +
- tests/tcg/riscv64/Makefile.target        | 10 ++++
- tests/tcg/riscv64/test-vstart-overflow.c | 75 ++++++++++++++++++++++++
- 3 files changed, 87 insertions(+)
- create mode 100644 tests/tcg/riscv64/test-vstart-overflow.c
+Thanks,
+Max
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index fc85a34a84..e0e8735000 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -825,6 +825,8 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-     uint32_t esz = 1 << log2_esz;
-     int mmu_index = riscv_env_mmu_index(env, false);
- 
-+    VSTART_CHECK_EARLY_EXIT(env, evl);
-+
-     /* Calculate the page range of first page */
-     addr = base + (env->vstart << log2_esz);
-     page_split = -(addr | TARGET_PAGE_MASK);
-diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
-index 4da5b9a3b3..daa0c6688f 100644
---- a/tests/tcg/riscv64/Makefile.target
-+++ b/tests/tcg/riscv64/Makefile.target
-@@ -1,6 +1,9 @@
- # -*- Mode: makefile -*-
- # RISC-V specific tweaks
- 
-+HAVE_RISCV_VECTOR_INTRINSICS := $(shell echo '#ifndef __riscv_v_intrinsic\n#error\n#endif' |  \
-+                                  $(CC) -march=rv64gcv -E -x c - >/dev/null 2>&1 && echo y)
-+
- VPATH += $(SRC_PATH)/tests/tcg/riscv64
- TESTS += test-div
- TESTS += noexec
-@@ -18,3 +21,10 @@ TESTS += test-fcvtmod
- test-fcvtmod: CFLAGS += -march=rv64imafdc
- test-fcvtmod: LDFLAGS += -static
- run-test-fcvtmod: QEMU_OPTS += -cpu rv64,d=true,zfa=true
-+
-+ifeq ($(HAVE_RISCV_VECTOR_INTRINSICS),y)
-+# Test for vstart >= vl
-+TESTS += test-vstart-overflow
-+test-vstart-overflow: CFLAGS += -march=rv64gcv
-+run-test-vstart-overflow: QEMU_OPTS += -cpu rv64,v=on
-+endif
-diff --git a/tests/tcg/riscv64/test-vstart-overflow.c b/tests/tcg/riscv64/test-vstart-overflow.c
-new file mode 100644
-index 0000000000..72999f2c8a
---- /dev/null
-+++ b/tests/tcg/riscv64/test-vstart-overflow.c
-@@ -0,0 +1,75 @@
-+/*
-+ * Test for VSTART set to overflow VL
-+ *
-+ * TCG vector instructions should call VSTART_CHECK_EARLY_EXIT() to check
-+ * this case, otherwise memory addresses can underflow and misbehave or
-+ * crash QEMU.
-+ *
-+ * TODO: Add stores and other instructions.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+#include <stdint.h>
-+#include <riscv_vector.h>
-+
-+#define VSTART_OVERFLOW_TEST(insn)                \
-+({                                                \
-+    uint8_t vmem[64] = { 0 };                     \
-+    uint64_t vstart;                              \
-+    asm volatile("                           \r\n \
-+    # Set VL=52 and VSTART=56                \r\n \
-+    li          t0, 52                       \r\n \
-+    vsetvli     x0, t0, e8, m4, ta, ma       \r\n \
-+    li          t0, 56                       \r\n \
-+    csrrw       x0, vstart, t0               \r\n \
-+    li          t1, 64                       \r\n \
-+    " insn "                                 \r\n \
-+    csrr        %0, vstart                   \r\n \
-+    " : "=r"(vstart), "+A"(vmem) :: "t0", "t1", "v24", "memory"); \
-+    vstart;                                       \
-+})
-+
-+int run_vstart_overflow_tests()
-+{
-+    /*
-+     * An implementation is permitted to raise an illegal instruction
-+     * exception when executing a vector instruction if vstart is set to a
-+     * value that could not be produced by the execution of that instruction
-+     * with the same vtype. If TCG is changed to do this, then this test
-+     * could be updated to handle the SIGILL.
-+     */
-+    if (VSTART_OVERFLOW_TEST("vl1re16.v    v24, %1")) {
-+        return 1;
-+    }
-+
-+    if (VSTART_OVERFLOW_TEST("vs1r.v       v24, %1")) {
-+        return 1;
-+    }
-+
-+    if (VSTART_OVERFLOW_TEST("vle16.v      v24, %1")) {
-+        return 1;
-+    }
-+
-+    if (VSTART_OVERFLOW_TEST("vse16.v      v24, %1")) {
-+        return 1;
-+    }
-+
-+    if (VSTART_OVERFLOW_TEST("vluxei8.v    v24, %1, v20")) {
-+        return 1;
-+    }
-+
-+    if (VSTART_OVERFLOW_TEST("vlse16.v     v24, %1, t1")) {
-+        return 1;
-+    }
-+
-+    if (VSTART_OVERFLOW_TEST("vlseg2e8.v  v24, %1")) {
-+        return 1;
-+    }
-+
-+    return 0;
-+}
-+
-+int main()
-+{
-+    return run_vstart_overflow_tests();
-+}
--- 
-2.51.0
+--000000000000084281063e0a18e7
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div dir=3D"ltr"><div>On Thu, Sep 4, 2025 at 7:14=E2=80=AF=
+PM Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@ventanamicro.com"=
+>dbarboza@ventanamicro.com</a>&gt; wrote:<br></div></div><div class=3D"gmai=
+l_quote gmail_quote_container"><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;borde=
+r-left-color:rgb(204,204,204);padding-left:1ex"><br>
+<br>
+On 9/3/25 11:03 AM, Max Chou wrote:<br>
+&gt; The Zvqdotq extension is the vector dot-product extension of RISC-V.<b=
+r>
+&gt; <br>
+&gt; Signed-off-by: Max Chou &lt;<a href=3D"mailto:max.chou@sifive.com" tar=
+get=3D"_blank">max.chou@sifive.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 | 1 +<br>
+&gt;=C2=A0 =C2=A0target/riscv/cpu_cfg_fields.h.inc | 1 +<br>
+&gt;=C2=A0 =C2=A0target/riscv/tcg/tcg-cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 5 =
++++++<br>
+&gt;=C2=A0 =C2=A03 files changed, 7 insertions(+)<br>
+&gt; <br>
+&gt; diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
+&gt; index d055ddf462..95edd02e68 100644<br>
+&gt; --- a/target/riscv/cpu.c<br>
+&gt; +++ b/target/riscv/cpu.c<br>
+&gt; @@ -187,6 +187,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zvksg, PRIV_VERSION_1_12_=
+0, ext_zvksg),<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zvksh, PRIV_VERSION_1_12_=
+0, ext_zvksh),<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0=
+, ext_zvkt),<br>
+&gt; +=C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(zvqdotq, PRIV_VERSION_1_12_0, ext_zv=
+qdotq),<br>
+<br>
+Is this really 1.12? If it&#39;s marked as experimental I would expect it b=
+e a new<br>
+extension, e.g. 1.13.<br>
+<br>
+<br>
+Thanks,<br>
+<br>
+Daniel<br></blockquote><div><br></div><div>Thanks for pointing out this par=
+t. I=E2=80=99ll update v4 for this.</div><div><br></div><div>Thanks,</div><=
+div>Max=C2=A0</div></div></div>
+
+--000000000000084281063e0a18e7--
 
