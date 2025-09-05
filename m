@@ -4,87 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59D60CA0FED
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Sep 2025 09:03:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5FC4CA1013
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Sep 2025 14:22:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uuSL1-000601-42; Fri, 05 Sep 2025 05:02:31 -0400
+	id 1uuXJq-0007Xc-SC; Fri, 05 Sep 2025 10:21:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1uuSKz-0005wz-Ls
- for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 05:02:29 -0400
-Received: from mail-ot1-x331.google.com ([2607:f8b0:4864:20::331])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1uuSKo-0005Ar-I4
- for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 05:02:27 -0400
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-74381e207a0so1462989a34.0
- for <qemu-riscv@nongnu.org>; Fri, 05 Sep 2025 02:02:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1757062934; x=1757667734; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9Ce9aRh4vsKWroT5mV5jGSfybTzO3OJePW9XqpwOKz0=;
- b=J2Cs0ronVB01efLctuLObigM1ebIXNeD49liWHcxKrEF05wgkUptHsWUEukJAFPWpk
- Sd81/rGVMmURo7ghcQLDdyEq77394H3vFVQ7txd2JKffa92lrnrDlfgAbtifa8XhTd3G
- e3LA8ErOS6rFz6YecgU/Ejio+sTpvqRRvAsEba7vrPkv0doNNw4r0jnnnaOrQlj2MreQ
- wN1dtTQWHklQkbSk/eBSStW8zvipT0z5bAR9txLOBoJtA/WQiBvxGrdNGGeHQcuFKxOX
- muqAyrrZdsmfDa+OZwiaTRsP7MBUm7o/4nqUnKlKfFMzVab/xwfzfPkEC19La7jt1SXi
- 3VbA==
+ (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1uuXJo-0007Wp-1q
+ for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 10:21:36 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1uuXJd-0008Ey-OP
+ for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 10:21:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1757082080;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=eUnAleF54zHWLtK6x5C95lNix9wdJClggXJb7jgC2Dc=;
+ b=S7gvPSUUS/O1AKYR4yyRARnIThHWWfnjevSvnZYp2k0SzWVBNU1Jlo4jjj9gy6VkOWHRiK
+ 8l6NjqnTQdXim3DwFJXYtGA11iaFnIN+zIhbBeoRPbOjCRWIzqCxuTEqit9ACnVgifRRZk
+ RTJNPIXvsoa3uKwuWXy1hWsSSS/d8QA=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-255-NmHKgTzlMCGjIasqXlYUyQ-1; Fri, 05 Sep 2025 10:21:19 -0400
+X-MC-Unique: NmHKgTzlMCGjIasqXlYUyQ-1
+X-Mimecast-MFC-AGG-ID: NmHKgTzlMCGjIasqXlYUyQ_1757082078
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-4b5ecf597acso16969001cf.1
+ for <qemu-riscv@nongnu.org>; Fri, 05 Sep 2025 07:21:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757062934; x=1757667734;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9Ce9aRh4vsKWroT5mV5jGSfybTzO3OJePW9XqpwOKz0=;
- b=ifbBMyElZCTnlbn+8DUoauHlUYTk8vUJThGKMBhcm+q3OUxjv9FcxTZ12j7gDXXvlE
- 3Sd6DQ2D8npxpuo6aOb3G5b/iZ0oP9P2KU4Z/+UwEpjy4378EyBlIEE6xYV6L+RhBSRF
- eRTDEubOjGZLly8+H69CXz8n5s2NDr7Gy5+kSi4XjuLhA7JswCvxCb5StfXYrPSmrz0I
- /7chFgRMkMl1B/mYt+1yxXmmlY/F/HQF3ObvCMU5NMKvG6KX6Z7d8OZ/6gQYDmhMd5Ae
- nYYuM3Mf9IBwEpYbG6iCppgydZRxMc8Z1HyBSvam9PmZa4R8H6UKge1vepo6Ku63VHcH
- 5vgw==
+ d=1e100.net; s=20230601; t=1757082078; x=1757686878;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eUnAleF54zHWLtK6x5C95lNix9wdJClggXJb7jgC2Dc=;
+ b=WPxJkm6IhRddODN0Dx9xEIsFXew9NJqJcC+LuWMTR3B6jUTeCQ8832O/dMbCsWO/49
+ nSRKC5wR3HHEEZENmnu5CHscfjfGfK0fYo6yF6fVJ/5zVMwZHbQdXzA6bys1c4XMNrHL
+ LuOdVqzMuh2Ew5MuVoIfn5D3O12ozdKP00MX+kIMZZZdwXc7HihCOK32pvWM22eI9jkM
+ SLzoJfYOsF0kUk2nJwEFUfkqGu6cXoS9CTsStJzdJfCQKQP3egqRuTFUEOvQmZnvMomI
+ 4OXYf2hGEZWb9zST3j7nlsuiMM2owZPpRgCzOdGwXM3XquDYJse9t5QGanXyxg8IWMob
+ p/Gg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVsoBFSPtpxq2BdFDOCype7tkrNg4eSrr+b/9sN6rwugi0P/V0C0Y72wXVG8VcFTpZ0vnZz+C/AH8WW@nongnu.org
-X-Gm-Message-State: AOJu0Yzg2uvSHHyqXzzMIQyQX6RpPRdDJV2vP7abIge227Efhz5rk8Ib
- FTOXgw/iXxsXcr9FdWJPl93EuIsr+h1XVHbIfLSKIU+CIDqs3AyA3/RhRyyvOZhSbSvu8b626dk
- NkgEr3iizT/aVrCv1+oYeBpktZc6GQAx4w3Gujl5XqA==
-X-Gm-Gg: ASbGnctm8NyicJmMeBQxlojrQ9XjICsNkAV/qPMhgSynoW8U/7YMb/vcManuQSq/qB3
- /CiknEfLoeFAvYuClddE6X4qsFb9otd+A6GdWoMaALui5QsVUZigK/p0lUm7apOR7f9ENbLlRQe
- dm/ANCRgA7pJvdn0AUyOKuw9M6DcP6ASUECh7QFKHmxmq2yvCipPYaAKkuWFryv2WM40GqoNCxT
- JQM1ULFKCMf8PvxGqw=
-X-Google-Smtp-Source: AGHT+IERucbWGI/cplq0L5ncWMX6UDYo1kzLTg77oEwWIxpZvC77P9+GeASYnYs5UNyEEcKSc3VWoTb2IHOccU7NRfQ=
-X-Received: by 2002:a05:6808:d4c:b0:439:acee:9a77 with SMTP id
- 5614622812f47-439aceea5c3mr1922222b6e.37.1757062934047; Fri, 05 Sep 2025
- 02:02:14 -0700 (PDT)
+ AJvYcCVDFKiqVdhXmNfg3u3hw1yTX8xYH59zy0iXxdAX5EE8wUzm28crXQ+CrA1/Ii4KB7gLkZUyaiM+JTdI@nongnu.org
+X-Gm-Message-State: AOJu0Yxg9nHhAHLJLAOMJJ6u4TYIIIZw9uJr6QoJ8MVHMq5c5SAZ3k8S
+ zl4CHQ4U5yQOO4YOLzbESDCWMB4MBCiT7bw6k4PoOehF8BujAfnGGlrJGN0NV6vvmivwoZzwfC7
+ mcPsWCUAuNbwhl6mB9ekd0y1t0YfIVH0FAchrE2ofDvIi9Mbxsi4HBl7U
+X-Gm-Gg: ASbGncvNtEYxRvSp/3jIjIS6hYPgZF4pXClaczf9YJmXgoOa4BM/ppp0iagf2jh0eW6
+ 1Ov2Zqvyv1rtB+ECZmzOxIPO5ebi79DdJaABJKyfWeiMdk1mrP4UG1nPVwXGTWVxpQXsJf6ZUyP
+ uUwlhgPwQPPhKjc1Ok9GxKwQ7fW9iDkSI/WdQPlFnjX7TOgMv6R7+ufAYr2eZBHsyxjZbOhqsc+
+ R5/0kGL/oQt/WNN4kO3Tww0L+93doN7DjZY+VFtEY2QvWZKQxHOqlf0uK00X0R9Un4JzkXcrXdn
+ SNnMr31jKFDZJFsJtNunt5fYsyGt9/R8
+X-Received: by 2002:a05:622a:47c4:b0:4b3:4c51:643e with SMTP id
+ d75a77b69052e-4b34c516d88mr151826801cf.68.1757082078237; 
+ Fri, 05 Sep 2025 07:21:18 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEapsx7hdiwyAtz86wiBs5ovYT7iicwjCRqOzxZu4Gh3/sDmYc1nsrF6JpCKn3Fs+++gIlX/Q==
+X-Received: by 2002:a05:622a:47c4:b0:4b3:4c51:643e with SMTP id
+ d75a77b69052e-4b34c516d88mr151826171cf.68.1757082077635; 
+ Fri, 05 Sep 2025 07:21:17 -0700 (PDT)
+Received: from x1.local ([174.89.135.121]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4b48f780b9fsm45731361cf.41.2025.09.05.07.21.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Sep 2025 07:21:16 -0700 (PDT)
+Date: Fri, 5 Sep 2025 10:21:03 -0400
+From: Peter Xu <peterx@redhat.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: CJ Chen <cjchen@igel.co.jp>, qemu-devel@nongnu.org,
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Keith Busch <kbusch@kernel.org>, Klaus Jensen <its@irrelevant.dk>,
+ Jesper Devantier <foss@defmacro.it>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, David Hildenbrand <david@redhat.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
+ Tomoyuki Hirose <hrstmyk811m@gmail.com>
+Subject: Re: [PATCH RFC v2 9/9] tests/qtest: add test for memory region access
+Message-ID: <aLrxz-ULSP3rrm8p@x1.local>
+References: <20250822092410.25833-1-cjchen@igel.co.jp>
+ <20250822092410.25833-10-cjchen@igel.co.jp>
+ <CAFEAcA-r5DdZj-+BxBkN+XqWJ3QrN6g+RshjShVoD-Zf1weYPg@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250903140308.1705751-1-max.chou@sifive.com>
- <20250903140308.1705751-2-max.chou@sifive.com>
- <da524d10-fee5-45f2-ba9e-23f66a754e9b@ventanamicro.com>
-In-Reply-To: <da524d10-fee5-45f2-ba9e-23f66a754e9b@ventanamicro.com>
-From: Max Chou <max.chou@sifive.com>
-Date: Fri, 5 Sep 2025 18:02:02 +0900
-X-Gm-Features: Ac12FXwQN4Z-JgbvMZvY_SikSy21Oz_Zk3UPc8TpwKNTNXZXd5rQhf5mwbObHek
-Message-ID: <CANiaA1vs9Z9FHj8u8HLzb_gpTiSorG5FkYdS0ep9cDa4ER9HRA@mail.gmail.com>
-Subject: Re: [RFC PATCH v3 1/3] target/riscv: Add Zvqdotq cfg property
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- richard.henderson@linaro.org
-Content-Type: multipart/alternative; boundary="000000000000084281063e0a18e7"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::331;
- envelope-from=max.chou@sifive.com; helo=mail-ot1-x331.google.com
+In-Reply-To: <CAFEAcA-r5DdZj-+BxBkN+XqWJ3QrN6g+RshjShVoD-Zf1weYPg@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: T27rPjsgqZ9GwHlK6jy3myOfbHUxN6fidY7dPxyUOGs_1757082078
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=peterx@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,100 +123,118 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000084281063e0a18e7
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Sep 4, 2025 at 7:14=E2=80=AFPM Daniel Henrique Barboza <
-dbarboza@ventanamicro.com> wrote:
-
->
->
-> On 9/3/25 11:03 AM, Max Chou wrote:
-> > The Zvqdotq extension is the vector dot-product extension of RISC-V.
+On Mon, Sep 01, 2025 at 05:57:57PM +0100, Peter Maydell wrote:
+> On Fri, 22 Aug 2025 at 10:26, CJ Chen <cjchen@igel.co.jp> wrote:
 > >
-> > Signed-off-by: Max Chou <max.chou@sifive.com>
+> > From: Tomoyuki Hirose <hrstmyk811m@gmail.com>
+> >
+> > This commit adds a qtest for accessing various memory regions. The
+> > qtest checks the correctness of handling the access to memory regions
+> > by using 'memaccess-testdev'.
+> >
+> > Signed-off-by: CJ Chen <cjchen@igel.co.jp>
+> > Co-developed-by: CJ Chen <cjchen@igel.co.jp>
+> > Reported-by: Tomoyuki Hirose <hrstmyk811m@gmail.com>
 > > ---
-> >   target/riscv/cpu.c                | 1 +
-> >   target/riscv/cpu_cfg_fields.h.inc | 1 +
-> >   target/riscv/tcg/tcg-cpu.c        | 5 +++++
-> >   3 files changed, 7 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index d055ddf462..95edd02e68 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -187,6 +187,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
-> >       ISA_EXT_DATA_ENTRY(zvksg, PRIV_VERSION_1_12_0, ext_zvksg),
-> >       ISA_EXT_DATA_ENTRY(zvksh, PRIV_VERSION_1_12_0, ext_zvksh),
-> >       ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
-> > +    ISA_EXT_DATA_ENTRY(zvqdotq, PRIV_VERSION_1_12_0, ext_zvqdotq),
->
-> Is this really 1.12? If it's marked as experimental I would expect it be =
-a
-> new
-> extension, e.g. 1.13.
->
->
-> Thanks,
->
-> Daniel
->
+> >  tests/qtest/memaccess-test.c | 597 +++++++++++++++++++++++++++++++++++
+> >  tests/qtest/meson.build      |   9 +
+> >  2 files changed, 606 insertions(+)
+> >  create mode 100644 tests/qtest/memaccess-test.c
+> 
+> There seems to be a lot of duplication in these test functions
+> (for instance, aren't all of little_b_valid(), little_b_invalid(),
+> big_b_valid() and big_b_invalid() identical?  and the various
+> _invalid functions seem to have if() blocks where the code in
+> the if and the else halves is the same).
 
-Thanks for pointing out this part. I=E2=80=99ll update v4 for this.
+Besides that, I don't yet understand some of the test code on endianess,
+this might be relevant to the question I raised in the other reply.
 
-Thanks,
-Max
+Taking example of big_w_valid() test:
 
---000000000000084281063e0a18e7
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+static void big_w_valid(QTestState *qts, hwaddr offset)
+{
+    if (qtest_big_endian(qts)) {
+        qtest_writew(qts, base + offset + 0, 0x1100);                     <--- [1]
+        qtest_writew(qts, base + offset + 1, 0x3322);                     <--- [2]
+        qtest_writew(qts, base + offset + 2, 0x5544);
+        qtest_writew(qts, base + offset + 3, 0x7766);
+        qtest_writew(qts, base + offset + 4, 0x9988);
+        qtest_writew(qts, base + offset + 5, 0xbbaa);
+        qtest_writew(qts, base + offset + 6, 0xddcc);
+        qtest_writew(qts, base + offset + 7, 0xffee);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 0), ==, 0x1133); <--- [3]
+        g_assert_cmphex(qtest_readw(qts, base + offset + 1), ==, 0x3355);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 2), ==, 0x5577);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 3), ==, 0x7799);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 4), ==, 0x99bb);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 5), ==, 0xbbdd);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 6), ==, 0xddff);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 7), ==, 0xffee);
+    } else {
+        qtest_writew(qts, base + offset + 0, 0x1100);                     <--- [4]
+        qtest_writew(qts, base + offset + 1, 0x3322);                     <--- [5]
+        qtest_writew(qts, base + offset + 2, 0x5544);
+        qtest_writew(qts, base + offset + 3, 0x7766);
+        qtest_writew(qts, base + offset + 4, 0x9988);
+        qtest_writew(qts, base + offset + 5, 0xbbaa);
+        qtest_writew(qts, base + offset + 6, 0xddcc);
+        qtest_writew(qts, base + offset + 7, 0xffee);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 0), ==, 0x2200); <--- [6]
+        g_assert_cmphex(qtest_readw(qts, base + offset + 1), ==, 0x4422);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 2), ==, 0x6644);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 3), ==, 0x8866);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 4), ==, 0xaa88);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 5), ==, 0xccaa);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 6), ==, 0xeecc);
+        g_assert_cmphex(qtest_readw(qts, base + offset + 7), ==, 0xffee);
+    }
+}
 
-<div dir=3D"ltr"><div dir=3D"ltr"><div>On Thu, Sep 4, 2025 at 7:14=E2=80=AF=
-PM Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@ventanamicro.com"=
->dbarboza@ventanamicro.com</a>&gt; wrote:<br></div></div><div class=3D"gmai=
-l_quote gmail_quote_container"><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;borde=
-r-left-color:rgb(204,204,204);padding-left:1ex"><br>
-<br>
-On 9/3/25 11:03 AM, Max Chou wrote:<br>
-&gt; The Zvqdotq extension is the vector dot-product extension of RISC-V.<b=
-r>
-&gt; <br>
-&gt; Signed-off-by: Max Chou &lt;<a href=3D"mailto:max.chou@sifive.com" tar=
-get=3D"_blank">max.chou@sifive.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 | 1 +<br>
-&gt;=C2=A0 =C2=A0target/riscv/cpu_cfg_fields.h.inc | 1 +<br>
-&gt;=C2=A0 =C2=A0target/riscv/tcg/tcg-cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 5 =
-+++++<br>
-&gt;=C2=A0 =C2=A03 files changed, 7 insertions(+)<br>
-&gt; <br>
-&gt; diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
-&gt; index d055ddf462..95edd02e68 100644<br>
-&gt; --- a/target/riscv/cpu.c<br>
-&gt; +++ b/target/riscv/cpu.c<br>
-&gt; @@ -187,6 +187,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zvksg, PRIV_VERSION_1_12_=
-0, ext_zvksg),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zvksh, PRIV_VERSION_1_12_=
-0, ext_zvksh),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0=
-, ext_zvkt),<br>
-&gt; +=C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(zvqdotq, PRIV_VERSION_1_12_0, ext_zv=
-qdotq),<br>
-<br>
-Is this really 1.12? If it&#39;s marked as experimental I would expect it b=
-e a new<br>
-extension, e.g. 1.13.<br>
-<br>
-<br>
-Thanks,<br>
-<br>
-Daniel<br></blockquote><div><br></div><div>Thanks for pointing out this par=
-t. I=E2=80=99ll update v4 for this.</div><div><br></div><div>Thanks,</div><=
-div>Max=C2=A0</div></div></div>
+It tests on all MRs that are (1) device using big endianess, (2)
+.valid.min_access_size=2, (3) .valid.unaligned=true.
 
---000000000000084281063e0a18e7--
+First of all, I don't understand why a test case needs to behave
+differently according to the TARGET endianess, aka, qtest_big_endian().
+IIUC, each of the qtest_writew() should request a WRITE with an integer
+value to be applied to the MMIO region, when we know the endianess of the
+region (in this case, big endian), we know exactly how it will be read out.
+
+Taking above steps [1-3] as example.  Here [1+2] will write two words to
+offset 0x0, 0x1 correspondingly:
+
+  - [1] WRITE(addr=0x0, size=2, data=0x1100)
+  - [2] WRITE(addr=0x1, size=2, data=0x3322)
+
+Here, IMHO the result should not depend on the internal property of the
+systems (e.g. MR .impl values, after we have unaligned support memory core
+should resolve all of these issues by either split 2B MMIO into two 1B, or
+do proper padding on start/end to amplify the write if necessary).  Because
+we know the device / MR is big endianess, so we should know the result of
+the write already, as below:
+
+  - After [1] WRITE(addr=0x0, size=2, data=0x1100), data should look like:
+
+    [0x11, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, ...]
+     ^^^^^^^^^^^
+    Here it should always follow device's endianess.
+
+  - After [2] WRITE(addr=0x1, size=2, data=0x3322), data should look like:
+
+    [0x11, 0x33, 0x22, 0x00, 0x00, 0x00, 0x00, 0x00, ...]
+           ^^^^^^^^^^^
+    Here it should always follow device's endianess.
+
+Above would be verified by step [3].  Basically it verifies READ(addr=0x0,
+size=2) would result in 0x1133, which looks correct.
+
+However the problem is, when GUEST is little endian, the test, even if
+written the same data [4-5], expecting different results [6].  That's the
+part I don't understand.  I think it would make sense if [6] should also
+verify the same as [3].  IOW, the chunk in the "if" section looks like the
+right thing to test for both big/little GUEST endianess.
+
+-- 
+Peter Xu
+
 
