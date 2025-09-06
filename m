@@ -4,98 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AC2CCA1012
-	for <qemu-riscv@archiver.kernel.org>; Sat,  6 Sep 2025 05:23:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C4FCA1002
+	for <qemu-riscv@archiver.kernel.org>; Sat,  6 Sep 2025 13:08:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uulNv-00075E-6Y; Sat, 06 Sep 2025 01:22:47 -0400
+	id 1uusdv-0003PS-Kl; Sat, 06 Sep 2025 09:07:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uulNt-00074C-3r
- for qemu-riscv@nongnu.org; Sat, 06 Sep 2025 01:22:46 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uulNl-0007MQ-6Y
- for qemu-riscv@nongnu.org; Sat, 06 Sep 2025 01:22:42 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-45cb6428c46so22916085e9.1
- for <qemu-riscv@nongnu.org>; Fri, 05 Sep 2025 22:22:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757136151; x=1757740951; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:cc:content-language
- :references:to:from:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vS2uyc14YHrlgQgbLTIElRTPpPc/4haz6a4U+nkwawY=;
- b=C+Ms+K9X8vq1WVPeY6AUWDxT0/Hborezfb7eOI+XoZ1L0Sc8Y0zb1lffsciaonoYqL
- dWA1WB6npz/SrD7yEJXenJTNijKy1ICeWsFjs3CprHWLQw56auvaaXJfmih3h6QgfgZV
- xadhBl137PVtBJbReo+qDIEy7vUxOdO4nc/EwcZACFeUafP1BFBw9rPOiGYWCxGejwDU
- G7kRjpCWAsHG4+JY2s7XbYIT/WQLpckbJIZ0mk35lo74fFmX4qGrW7ZuloJJhFSpvPRF
- +pk8ZfC+P1i1Bdl1hRcxNbeeqGZoTJ8gVpt/4w/QiF96rmD5vReOnvhV/sYliiw3B2hk
- 4wUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757136151; x=1757740951;
- h=content-transfer-encoding:in-reply-to:cc:content-language
- :references:to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vS2uyc14YHrlgQgbLTIElRTPpPc/4haz6a4U+nkwawY=;
- b=B+5p5i+tSiLOpVTuycxLnIFuPkTynnmUtwfdQn2ByHjhEcb0BzZcYicQMkxApq7ExS
- pSnUuJjdEKzLQVKcKR0GyJJpWScrOIhsyRXn5ytpsFK3X5q1ZPjLiPK193py28bhYvbn
- 9A8vu7bZ23FBeQUSedJWT4UAM+wLPQ43W0pkxPBwjhk4JBb1wDTRRAUbkDA48seqEStc
- HlXJn/DIPY5HE/H+MvuOv9xYdaWMnLHF9tP3+BAZ14BbDY9DUaQ9bZfAnun1NTgaPw0N
- fOcraV4lGIlkE8Bl7AOL7Kdj/wkCrDKSG07UUu5QLuBkRjfLSuc1gvfEU2+nbfp4SZwZ
- yUfg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWhGU4qtEFYrX+XRtOZtOnzSvcCp0/HvaL3vF7ae3oyFa1EDN1ggh5Kf4wUnilEmTvQeRekJMIuFfny@nongnu.org
-X-Gm-Message-State: AOJu0Yygyv+DT5TOG+0yeLZc7OcHoNMVRQhX+FnFJ5yVaw8yFkQL5Qzq
- SoDkWSRH9MdgoOeejcF957qT//i/LKK6lsSd53O5mredHqtIodLozo8Iaxqnbbmkn6nMXHSbxKc
- B8vjmMaI=
-X-Gm-Gg: ASbGncuM6hfovEQPkuEmUwMReJEdkcmXclvTMuXrU98kphmun64SHkL+ysVGMWGRiSS
- D4qiSKuEQ0FD1rslxJdG1nkDtZAmnGj7Vbza2pp42addH1OHVgbhNELF63Dui3AYv2xuIGaWXOS
- wtjoT2uRvJT+T+cwDx502T+KKyTPk8BynE6v5YgYnL3lzsmHLHmwecYGT8WLrIy7jPrjFAilx2n
- YPTxTeE/Y1rCeJdL3dFD4Btv+q8kv+orJTkmwv03CVf1ZUAm68b1WOE/RsPhStFS6+XERlWbP3n
- KxwbSnNiYmIbLaEhs1H8kPNvPgonCexeC8GgWMRbc+/M/cF+ZmQFKSYV4Zrs4jTF/KgAfa8Bt9D
- ofJiGowvaC1jOIFAcx82u7gaJDofD4jGW5VwqT0c0nPB2QwCZEIkvA3ht6c1fBDJESpXe1oEj1o
- UDnVcaVQ==
-X-Google-Smtp-Source: AGHT+IEgoPzJSfaXRJMtZhw2C5Wzqg+jJFkE1NNnidoWu7dQ2VykFgmaoYzETZY5HN4q0JYEQxXK8Q==
-X-Received: by 2002:a05:600c:6995:b0:45d:ded8:3b6e with SMTP id
- 5b1f17b1804b1-45dded83cecmr5731225e9.17.1757136151483; 
- Fri, 05 Sep 2025 22:22:31 -0700 (PDT)
-Received: from [10.40.6.207] (93-51-222-138.ip268.fastwebnet.it.
- [93.51.222.138]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b9c234b24sm166831325e9.16.2025.09.05.22.22.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Sep 2025 22:22:31 -0700 (PDT)
-Message-ID: <1b224de2-a412-4f24-971f-b43582d4b8fd@linaro.org>
-Date: Sat, 6 Sep 2025 07:22:29 +0200
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uusde-0003LH-4Y; Sat, 06 Sep 2025 09:07:30 -0400
+Received: from [115.124.28.68] (helo=out28-68.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uusdR-0003mc-KE; Sat, 06 Sep 2025 09:07:29 -0400
+Received: from 192.168.71.3(mailfrom:chao.liu@zevorn.cn
+ fp:SMTPD_---.eZ.szR._1757163747 cluster:ay29) by smtp.aliyun-inc.com;
+ Sat, 06 Sep 2025 21:02:52 +0800
+Message-ID: <cf7a8699-7c5a-42bd-baba-99b61d4d7443@zevorn.cn>
+Date: Sat, 6 Sep 2025 21:02:23 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/11] accel/tcg: Improve tb_flush usage
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-References: <20250906051820.160432-1-richard.henderson@linaro.org>
-Content-Language: en-US
-Cc: "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, Peter Xu <peterx@redhat.com>,
- Fabiano Rosas <farosas@suse.de>
-In-Reply-To: <20250906051820.160432-1-richard.henderson@linaro.org>
+Subject: Re: [PATCH v7 1/2] target/riscv: Use tcg nodes for strided vector
+ ld/st generation
+To: Richard Henderson <richard.henderson@linaro.org>,
+ paolo.savini@embecosm.com, npiggin@gmail.com, ebiggers@kernel.org,
+ dbarboza@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <cover.1756975571.git.chao.liu@zevorn.cn>
+ <74e3337dfebbeb29667492a1e57e87c75b55c725.1756975571.git.chao.liu@zevorn.cn>
+ <0cb963d6-744b-4181-b590-08fee5516e30@linaro.org>
+From: Chao Liu <chao.liu@zevorn.cn>
+In-Reply-To: <0cb963d6-744b-4181-b590-08fee5516e30@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x336.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.68 (deferred)
+Received-SPF: pass client-ip=115.124.28.68; envelope-from=chao.liu@zevorn.cn;
+ helo=out28-68.mail.aliyun.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01,
+ UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,64 +64,130 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-+cc target and migration maintainers
-
-On 9/6/25 07:18, Richard Henderson wrote:
-> It is too easy to mis-use tb_flush().  For instance, because of
-> the cpu argument, some parts assumed that it needed to call the
-> global flush function for every cpu.  It is easy to forget that
-> the flush is not complete when the call returns: we have merely
-> queued work to the cpu run loop.
+On 9/4/2025 9:53 PM, Richard Henderson wrote:
+> On 9/4/25 11:13, Chao Liu wrote:
+>> +/*
+>> + * Check whether the i bit of the mask is 0 or 1.
+>> + *
+>> + * static inline int vext_elem_mask(void *v0, int index)
+>> + * {
+>> + *     int idx = index / 64;
+>> + *     int pos = index % 64;
+>> + *     return (((uint64_t *)v0)[idx] >> pos) & 1;
+>> + * }
+>> + *
+>> + * And
+>> + *
+>> + * if (vext_elem_mask(v0, i) != 0) {
+>> + *     goto label;
+>> + * }
+>> + */
+>> +static void gen_check_vext_elem_mask(TCGLabel *label, TCGv mask, TCGv mask_offs)
+>> +{
+>> +    TCGv mask_offs_64 = tcg_temp_new();
+>> +    TCGv mask_offs_rem = tcg_temp_new();
+>> +    TCGv mask_elem = tcg_temp_new();
+>> +
+>> +    tcg_gen_shri_tl(mask_offs_64, mask_offs, 3);
+>> +    tcg_gen_add_tl(mask_offs_64, mask_offs_64, mask);
+>> +    tcg_gen_ld_i64((TCGv_i64)mask_elem, (TCGv_ptr)mask_offs_64, 0);
 > 
-> (Phil, I suspect this second case is what's biting split-accel.)
+> Each and every time you cast a TCGv, you're doing something wrong.
+> There are a lot of them in this patch.
 > 
-> So: remove tb_flush and expose only the core as tb_flush__exclusive,
-> to be used only when we are already within an exclusive context.
-> 
-> In some cases (gdbstub, alpha, riscv, ppc spapr), we can eliminate
-> the need for tb_flush completely.
-> 
-> Lightly tested so far, and I'm off on holiday next, but I thought
-> this might help others working on split-accel in the meantime.
-> 
-> 
-> r~
-> 
-> 
-> Richard Henderson (11):
->    gdbstub: Remove tb_flush uses
->    accel/tcg: Split out tb_flush__exclusive
->    target/alpha: Simplify call_pal implementation
->    target/riscv: Record misa_ext in TCGTBCPUState.cs_base
->    accel/tcg: Move post-load tb_flush to vm_change_state hook
->    hw/ppc/spapr: Use tb_invalidate_phys_range in h_page_init
->    linux-user: Use tb_flush_exclusive to start second thread
->    plugins: Use tb_flush__exclusive
->    accel/tcg: Introduce EXCP_TB_FLUSH
->    accel/tcg: Use EXCP_TB_FLUSH in tb_gen_code
->    accel/tcg: Remove tb_flush
-> 
->   include/exec/cpu-common.h       |  1 +
->   include/exec/tb-flush.h         | 18 +++++++---------
->   target/alpha/helper.h           |  1 -
->   accel/tcg/tb-maint.c            | 38 +++++++--------------------------
->   accel/tcg/tcg-accel-ops-mttcg.c |  7 ++++++
->   accel/tcg/tcg-accel-ops-rr.c    |  9 ++++++--
->   accel/tcg/tcg-all.c             | 21 ++++++++++++++++++
->   accel/tcg/translate-all.c       |  5 +----
->   gdbstub/system.c                |  4 ----
->   gdbstub/user.c                  |  3 ---
->   hw/core/cpu-system.c            |  8 -------
->   hw/ppc/spapr_hcall.c            |  4 ++--
->   linux-user/mmap.c               |  4 ++--
->   linux-user/syscall.c            |  2 +-
->   plugins/core.c                  |  6 ++----
->   plugins/loader.c                |  2 +-
->   target/alpha/sys_helper.c       |  6 ------
->   target/alpha/translate.c        | 21 ++++++------------
->   target/riscv/csr.c              |  3 ---
->   target/riscv/tcg/tcg-cpu.c      |  3 ++-
->   20 files changed, 69 insertions(+), 97 deletions(-)
+> Your host pointer arithmetic should be using TCGv_ptr and tcg_gen_*_ptr().
+> This mask_elem should itself be TCGv_i64.
 > 
 
+Thanks, I will include these changes in the next version. :)
+
+>> +    tcg_gen_andi_tl(mask_elem, mask_elem, 1);
+>> +    tcg_gen_brcond_tl(TCG_COND_NE, mask_elem, tcg_constant_tl(0), label);
+> 
+> This should be
+> 
+>      tcg_gen_brcond_i64(TCG_COND_TSTNE, mask_elem, tcg_constant_i64(1), label);
+> 
+> 
+>> +/*
+>> + * Simulate the strided load/store main loop:
+>> + *
+>> + * for (i = env->vstart; i < env->vl; env->vstart = ++i) {
+>> + *     k = 0;
+>> + *     while (k < nf) {
+>> + *         if (!vm && !vext_elem_mask(v0, i)) {
+>> + *             vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
+>> + *                               (i + k * max_elems + 1) * esz);
+>> + *             k++;
+>> + *             continue;
+>> + *         }
+>> + *         target_ulong addr = base + stride * i + (k << log2_esz);
+>> + *         ldst(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
+>> + *         k++;
+>> + *     }
+>> + * }
+> 
+> The form of this loop causes you to do more reads for vext_elem_mask than necessary.
+> 
+> Better to test once outside of the loop over K:
+> 
+>      for (i in vl) {
+>          if (!vm && !vext_elem_mask(v0, i)) {
+>              for (k in nf) {
+>                  vd[i, k] = -1;
+>              }
+>          } else {
+>              for (k in nf) {
+>                  vd[i, k] = ld(addr);
+>              }
+>          }
+>      }
+> 
+
+Good idea, I've already made some attempts, and I will apply this suggestion in the next version.
+
+> If vl_eq_vlmax, and VL is a multiple of 64, you can structure this loop like:
+> 
+>      i = 0;
+>      do {
+>          mask = v0[i / 64];
+>          do {
+>              if (mask & 1) {
+>                  ...
+>              }
+>              mask >>= 1;
+>          } while (++i & 63);
+>      } while (i < vl);
+> 
+> If VL is a smaller power of 2, you can load smaller units of mask to match. 
+
+Reducing memory access is correct. this is a great optimization point.
+
+> Though beware of the big-endian host addressing fixup.
+
+Get~
+
+> If VM, you should fuse I and K into a single loop over all elements.
+> 
+
+I have made some tests, such as:
+
+     uint32_t total = env->vl * nf;
+     for (uint32_t idx = 0; idx < total; idx++) {
+         k = idx / env->vl;
+         i = idx % env->vl;
+         target_ulong addr = base + stride * i + (k << log2_esz);
+         uint32_t elem_idx = i + k * max_elems;
+         ldst_elem(env, adjust_addr(env, addr), elem_idx, vd, ra);
+     }
+
+If we implement it using TCG ops, would division and modulo operations be more efficient than adding an extra loop layer?
+
+Or is there a better way to merge the loops for i and k into a single for loop?
+
+Also, I will make more tests to check that the changes above are correct and work well.
+
+
+Thanks,
+Chao
 
