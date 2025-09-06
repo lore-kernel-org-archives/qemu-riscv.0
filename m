@@ -4,111 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B8ACAC580
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Sep 2025 14:33:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AC2CCA1012
+	for <qemu-riscv@archiver.kernel.org>; Sat,  6 Sep 2025 05:23:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uuXUm-0004MZ-GG; Fri, 05 Sep 2025 10:32:56 -0400
+	id 1uulNv-00075E-6Y; Sat, 06 Sep 2025 01:22:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1uuXUl-0004Lf-4F
- for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 10:32:55 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1uuXUc-0003I6-Px
- for qemu-riscv@nongnu.org; Fri, 05 Sep 2025 10:32:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1757082761;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=AJYsQ0k41dYEtEm+qEtpIcG16VDv3rXSXQjY6KH6CC8=;
- b=SbN27ZXSN7kWZgZQiH6Q3umAKvh6BoA+ctWFRc0qZh5DP6Pc0MXMvbGH1LMgH8EhFx4QhZ
- O7tDgeb7ZzuD8/yCL+/ZNj5GRgHgiBMVvQF2oHTzBA8ukCRZYRi+v5OsoFCQuNY5vTNAhW
- oJvHIgVItRUwgEOtHOdfh7jBSnvS37U=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-22-uhoqR3ruNfad5kSA9-idJw-1; Fri, 05 Sep 2025 10:32:40 -0400
-X-MC-Unique: uhoqR3ruNfad5kSA9-idJw-1
-X-Mimecast-MFC-AGG-ID: uhoqR3ruNfad5kSA9-idJw_1757082760
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-4b5e9b60ce6so23522071cf.2
- for <qemu-riscv@nongnu.org>; Fri, 05 Sep 2025 07:32:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uulNt-00074C-3r
+ for qemu-riscv@nongnu.org; Sat, 06 Sep 2025 01:22:46 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uulNl-0007MQ-6Y
+ for qemu-riscv@nongnu.org; Sat, 06 Sep 2025 01:22:42 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-45cb6428c46so22916085e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 05 Sep 2025 22:22:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1757136151; x=1757740951; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:cc:content-language
+ :references:to:from:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vS2uyc14YHrlgQgbLTIElRTPpPc/4haz6a4U+nkwawY=;
+ b=C+Ms+K9X8vq1WVPeY6AUWDxT0/Hborezfb7eOI+XoZ1L0Sc8Y0zb1lffsciaonoYqL
+ dWA1WB6npz/SrD7yEJXenJTNijKy1ICeWsFjs3CprHWLQw56auvaaXJfmih3h6QgfgZV
+ xadhBl137PVtBJbReo+qDIEy7vUxOdO4nc/EwcZACFeUafP1BFBw9rPOiGYWCxGejwDU
+ G7kRjpCWAsHG4+JY2s7XbYIT/WQLpckbJIZ0mk35lo74fFmX4qGrW7ZuloJJhFSpvPRF
+ +pk8ZfC+P1i1Bdl1hRcxNbeeqGZoTJ8gVpt/4w/QiF96rmD5vReOnvhV/sYliiw3B2hk
+ 4wUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757082760; x=1757687560;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AJYsQ0k41dYEtEm+qEtpIcG16VDv3rXSXQjY6KH6CC8=;
- b=jCi8Lc64NKdOsK9tdG353wIROkocwVPUVCx8mqnVfRVR1rHYXUX9Hg3BI++KcuXAyw
- KXYF+pFODjUs90T7SBO9YGJBZ804EbY6xmDeJLkTvfg4uXTio7dsYLECU6wthOYHnd0y
- nwvpQ3pEeZj+bG5WTpWHzi8igS8zPeTwywwnbE1/ADLr8OOK5PtGDAn3ZEcxN5tGb+wq
- ItqIvnpZNCInfUJOaWFa+ENrKSNux9T2dkCDRQwGlucONG96Ajq14uMq0DmoSCG3Gses
- kFPKmAoFuzKu97e1H7AEV0kRKU5u1PiFyQ4Dtv9w8gQiMDhjcn7rM4K0wx9Gmevok9Il
- ROvg==
+ d=1e100.net; s=20230601; t=1757136151; x=1757740951;
+ h=content-transfer-encoding:in-reply-to:cc:content-language
+ :references:to:from:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vS2uyc14YHrlgQgbLTIElRTPpPc/4haz6a4U+nkwawY=;
+ b=B+5p5i+tSiLOpVTuycxLnIFuPkTynnmUtwfdQn2ByHjhEcb0BzZcYicQMkxApq7ExS
+ pSnUuJjdEKzLQVKcKR0GyJJpWScrOIhsyRXn5ytpsFK3X5q1ZPjLiPK193py28bhYvbn
+ 9A8vu7bZ23FBeQUSedJWT4UAM+wLPQ43W0pkxPBwjhk4JBb1wDTRRAUbkDA48seqEStc
+ HlXJn/DIPY5HE/H+MvuOv9xYdaWMnLHF9tP3+BAZ14BbDY9DUaQ9bZfAnun1NTgaPw0N
+ fOcraV4lGIlkE8Bl7AOL7Kdj/wkCrDKSG07UUu5QLuBkRjfLSuc1gvfEU2+nbfp4SZwZ
+ yUfg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+h2G5apVVZ4Nu9iahfNaPpRwboP06efe6ZJMm8dIF8TBiK7HFrX5VOPa6mI2oVloda6afHwCRjFJ+@nongnu.org
-X-Gm-Message-State: AOJu0YyF8xl16Wr73m+eSo7GVeuBmueSfCg+2GoWNRgpF9w0mJrhFO6D
- imwQmcGv7RumTPBNFSkaBt52rhgqne++sCd+/xlAnbyn0kZbHd4cV3mP4d2p8uWVvlzASw7kEEd
- xcPykH/3QVVgezJIOTuD/J0wyGp+EYRCNr6+1/HU7QJeC0RXo7QnwQawK
-X-Gm-Gg: ASbGnctK4se+msLt8pjBr9AOBPxplDuBGQOmx3RomvP/k7vSPur3ezl7RwB9GmzhPZ6
- ec5hc9nUcLNqzN2X/kE3Q392Q/Mj52XWfxbdMI2g4uT/zfyfGk3FUa/EHvImIMKk784Szx+JccC
- +cxsB5DsT+EavofcK3Xw0tYWmebUZWxlskN3m35i/aLDnyuapNfQcbnv4s0ZAZUWpKiRoTONeFN
- D6thH0+s19CH41iF01WLljlvJ9vhC1xbJHNZ78lwbk8+jaLepw922hytzgyhx4R+ZiwsDgICK5N
- quKRuXM1BJ0hAXYm18djjOg+QTicABUd
-X-Received: by 2002:a05:622a:10c:b0:4b0:69d6:85a2 with SMTP id
- d75a77b69052e-4b31d86175amr301290611cf.31.1757082759490; 
- Fri, 05 Sep 2025 07:32:39 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGGW45Sakcic0/au626zXwdL13HxP0OyaIYT2HgE/EM8+kHYAiCyErP6T4Qce2avfFhoAv8oA==
-X-Received: by 2002:a05:622a:10c:b0:4b0:69d6:85a2 with SMTP id
- d75a77b69052e-4b31d86175amr301289721cf.31.1757082758538; 
- Fri, 05 Sep 2025 07:32:38 -0700 (PDT)
-Received: from x1.local ([174.89.135.121]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4b48f673fecsm45984731cf.21.2025.09.05.07.32.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Sep 2025 07:32:37 -0700 (PDT)
-Date: Fri, 5 Sep 2025 10:32:25 -0400
-From: Peter Xu <peterx@redhat.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: chen CJ <cjchen@igel.co.jp>, qemu-devel@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
- Keith Busch <kbusch@kernel.org>, Klaus Jensen <its@irrelevant.dk>,
- Jesper Devantier <foss@defmacro.it>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
- Max Filippov <jcmvbkbc@gmail.com>, David Hildenbrand <david@redhat.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Tomoyuki Hirose <hrstmyk811m@gmail.com>
-Subject: Re: [Withdrawn] [RFC PATCH v2 0/9] support unaligned access to xHCI
- Capability
-Message-ID: <aLr0eTjUe8FXkQmV@x1.local>
-References: <20250822092410.25833-1-cjchen@igel.co.jp>
- <CAAMq-Y86UY7LNe-p2P_d8mw7FgTqLm=HQdqbMvV8xxTdsZmx1A@mail.gmail.com>
- <CAFEAcA_EZxgnSHOEwdF5QayAxsncYnGGe4RDPP-vwYTqwU+dNA@mail.gmail.com>
+ AJvYcCWhGU4qtEFYrX+XRtOZtOnzSvcCp0/HvaL3vF7ae3oyFa1EDN1ggh5Kf4wUnilEmTvQeRekJMIuFfny@nongnu.org
+X-Gm-Message-State: AOJu0Yygyv+DT5TOG+0yeLZc7OcHoNMVRQhX+FnFJ5yVaw8yFkQL5Qzq
+ SoDkWSRH9MdgoOeejcF957qT//i/LKK6lsSd53O5mredHqtIodLozo8Iaxqnbbmkn6nMXHSbxKc
+ B8vjmMaI=
+X-Gm-Gg: ASbGncuM6hfovEQPkuEmUwMReJEdkcmXclvTMuXrU98kphmun64SHkL+ysVGMWGRiSS
+ D4qiSKuEQ0FD1rslxJdG1nkDtZAmnGj7Vbza2pp42addH1OHVgbhNELF63Dui3AYv2xuIGaWXOS
+ wtjoT2uRvJT+T+cwDx502T+KKyTPk8BynE6v5YgYnL3lzsmHLHmwecYGT8WLrIy7jPrjFAilx2n
+ YPTxTeE/Y1rCeJdL3dFD4Btv+q8kv+orJTkmwv03CVf1ZUAm68b1WOE/RsPhStFS6+XERlWbP3n
+ KxwbSnNiYmIbLaEhs1H8kPNvPgonCexeC8GgWMRbc+/M/cF+ZmQFKSYV4Zrs4jTF/KgAfa8Bt9D
+ ofJiGowvaC1jOIFAcx82u7gaJDofD4jGW5VwqT0c0nPB2QwCZEIkvA3ht6c1fBDJESpXe1oEj1o
+ UDnVcaVQ==
+X-Google-Smtp-Source: AGHT+IEgoPzJSfaXRJMtZhw2C5Wzqg+jJFkE1NNnidoWu7dQ2VykFgmaoYzETZY5HN4q0JYEQxXK8Q==
+X-Received: by 2002:a05:600c:6995:b0:45d:ded8:3b6e with SMTP id
+ 5b1f17b1804b1-45dded83cecmr5731225e9.17.1757136151483; 
+ Fri, 05 Sep 2025 22:22:31 -0700 (PDT)
+Received: from [10.40.6.207] (93-51-222-138.ip268.fastwebnet.it.
+ [93.51.222.138]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45b9c234b24sm166831325e9.16.2025.09.05.22.22.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Sep 2025 22:22:31 -0700 (PDT)
+Message-ID: <1b224de2-a412-4f24-971f-b43582d4b8fd@linaro.org>
+Date: Sat, 6 Sep 2025 07:22:29 +0200
 MIME-Version: 1.0
-In-Reply-To: <CAFEAcA_EZxgnSHOEwdF5QayAxsncYnGGe4RDPP-vwYTqwU+dNA@mail.gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: FXeeDXCaS1XdGJ_TCsD8WzS7GoODBeecFVj9v17-b0U_1757082760
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=peterx@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/11] accel/tcg: Improve tb_flush usage
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+References: <20250906051820.160432-1-richard.henderson@linaro.org>
+Content-Language: en-US
+Cc: "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, Peter Xu <peterx@redhat.com>,
+ Fabiano Rosas <farosas@suse.de>
+In-Reply-To: <20250906051820.160432-1-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,53 +111,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 03, 2025 at 10:47:17AM +0100, Peter Maydell wrote:
-> On Wed, 3 Sept 2025 at 06:03, chen CJ <cjchen@igel.co.jp> wrote:
-> >
-> > I would like to withdraw this patch series.
-> >
-> > Sorry for the inconvenience, and thank you for your understanding.
++cc target and migration maintainers
+
+On 9/6/25 07:18, Richard Henderson wrote:
+> It is too easy to mis-use tb_flush().  For instance, because of
+> the cpu argument, some parts assumed that it needed to call the
+> global flush function for every cpu.  It is easy to forget that
+> the flush is not complete when the call returns: we have merely
+> queued work to the cpu run loop.
 > 
-> That's unfortunate; I think it's an issue we really do need to fix,
-> but I entirely understand if you don't have the time to work
-> on it further.
+> (Phil, I suspect this second case is what's biting split-accel.)
 > 
-> I might pick it up if I have the time to do so.
-
-I worked on this problem a bit more in the past few days while almost
-everyone will be at the forum.  It's almost because I saw similar issues
-that I have commented before on old versions, but they still existed in the
-core patch 5.  Then I found more issues.  Keep commenting on that might be
-awkward because there will be quite a few dependency changes.  One example
-is, I kept thinking we should not worry about MMIO out-of-bound over
-mr->size when reaching as deep as access_with_adjusted_size().  There are
-still quite a few places in patch 5 of this series that does the
-calculation and it's not obvious what happens if mr->size violated.
-
-Peter, if you want to pick it up, please consider reading the replies I
-left in this series, alone with this version below as comparison reading
-material.  The hope is the reworked patchset below _might_ be easier to
-read (at least I did add rich comments, because the unaligned changes are
-tricky and not easy to follow):
-
-https://gitlab.com/peterx/qemu/-/commits/mem-unaligned-fix-v0.1?ref_type=tags
-
-Especially this patch:
-
-https://gitlab.com/peterx/qemu/-/commit/8a8f0f5728a7adc6ecb2cf4358366d2d663a5ed9
-
-However that won't pass the test cases.  I still doubt the test case is
-wrong but I didn't go further modifying the test cases yet (or any better
-way to test this as you suggested in the other reply).  I think that can be
-the 1st thing we figure out, not the best way to test, but the correctness
-of the current test case, because IIUC it shouldn't be relevant to impl of
-unaligned access.  To me, if we can reach a consensus on what is the
-correct (test) behavior on all kinds of unaligned access emulations, fixing
-the impl should be relatively easy.
-
-Thanks,
-
--- 
-Peter Xu
+> So: remove tb_flush and expose only the core as tb_flush__exclusive,
+> to be used only when we are already within an exclusive context.
+> 
+> In some cases (gdbstub, alpha, riscv, ppc spapr), we can eliminate
+> the need for tb_flush completely.
+> 
+> Lightly tested so far, and I'm off on holiday next, but I thought
+> this might help others working on split-accel in the meantime.
+> 
+> 
+> r~
+> 
+> 
+> Richard Henderson (11):
+>    gdbstub: Remove tb_flush uses
+>    accel/tcg: Split out tb_flush__exclusive
+>    target/alpha: Simplify call_pal implementation
+>    target/riscv: Record misa_ext in TCGTBCPUState.cs_base
+>    accel/tcg: Move post-load tb_flush to vm_change_state hook
+>    hw/ppc/spapr: Use tb_invalidate_phys_range in h_page_init
+>    linux-user: Use tb_flush_exclusive to start second thread
+>    plugins: Use tb_flush__exclusive
+>    accel/tcg: Introduce EXCP_TB_FLUSH
+>    accel/tcg: Use EXCP_TB_FLUSH in tb_gen_code
+>    accel/tcg: Remove tb_flush
+> 
+>   include/exec/cpu-common.h       |  1 +
+>   include/exec/tb-flush.h         | 18 +++++++---------
+>   target/alpha/helper.h           |  1 -
+>   accel/tcg/tb-maint.c            | 38 +++++++--------------------------
+>   accel/tcg/tcg-accel-ops-mttcg.c |  7 ++++++
+>   accel/tcg/tcg-accel-ops-rr.c    |  9 ++++++--
+>   accel/tcg/tcg-all.c             | 21 ++++++++++++++++++
+>   accel/tcg/translate-all.c       |  5 +----
+>   gdbstub/system.c                |  4 ----
+>   gdbstub/user.c                  |  3 ---
+>   hw/core/cpu-system.c            |  8 -------
+>   hw/ppc/spapr_hcall.c            |  4 ++--
+>   linux-user/mmap.c               |  4 ++--
+>   linux-user/syscall.c            |  2 +-
+>   plugins/core.c                  |  6 ++----
+>   plugins/loader.c                |  2 +-
+>   target/alpha/sys_helper.c       |  6 ------
+>   target/alpha/translate.c        | 21 ++++++------------
+>   target/riscv/csr.c              |  3 ---
+>   target/riscv/tcg/tcg-cpu.c      |  3 ++-
+>   20 files changed, 69 insertions(+), 97 deletions(-)
+> 
 
 
