@@ -4,51 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C4FCA1002
-	for <qemu-riscv@archiver.kernel.org>; Sat,  6 Sep 2025 13:08:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6143CA1013
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Sep 2025 02:52:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uusdv-0003PS-Kl; Sat, 06 Sep 2025 09:07:47 -0400
+	id 1uvRyz-0004oQ-F5; Sun, 07 Sep 2025 22:51:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
- id 1uusde-0003LH-4Y; Sat, 06 Sep 2025 09:07:30 -0400
-Received: from [115.124.28.68] (helo=out28-68.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
- id 1uusdR-0003mc-KE; Sat, 06 Sep 2025 09:07:29 -0400
-Received: from 192.168.71.3(mailfrom:chao.liu@zevorn.cn
- fp:SMTPD_---.eZ.szR._1757163747 cluster:ay29) by smtp.aliyun-inc.com;
- Sat, 06 Sep 2025 21:02:52 +0800
-Message-ID: <cf7a8699-7c5a-42bd-baba-99b61d4d7443@zevorn.cn>
-Date: Sat, 6 Sep 2025 21:02:23 +0800
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1uvRyv-0004nS-Jb
+ for qemu-riscv@nongnu.org; Sun, 07 Sep 2025 22:51:49 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1uvRyl-0003k2-Oa
+ for qemu-riscv@nongnu.org; Sun, 07 Sep 2025 22:51:49 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7722bcb989aso2904484b3a.1
+ for <qemu-riscv@nongnu.org>; Sun, 07 Sep 2025 19:51:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1757299890; x=1757904690; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nqAwKmltmiI7r/nUnFfBQ+cYPc/avcq0j+oCHbJPWtQ=;
+ b=MTB8+hcp7+PplU+cX52DVxh1/e6TMTtKs41nu/jZto9v0vdpEhPLx1M5Cv6vUpoSCv
+ My7BUJUKore1wfIBbZqDsCLpOEmrY38aXNyAkOuKhVMbLqFtj822MESWY7g3v+9zy1C9
+ LOPnJroAo/s83cUIT7tMrF6APMVGQVihMn0S/u0m/7fpw3QonIQsEr8PG6o4GNKOL2SG
+ zf9pkYSD8ymO572zAd/iH/uYXF5rULsg82u9CGeDxc8MxUU0mY5qvmP4SBwIBx1GcjcT
+ MaPuLef9J328IB3u2COOYrCgZQ/BQ0LcnWWTkrWUeaUTwrUK6k09pxN4zYJFyYQr/1wZ
+ a1Pg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757299890; x=1757904690;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nqAwKmltmiI7r/nUnFfBQ+cYPc/avcq0j+oCHbJPWtQ=;
+ b=bPBYv/cBpqOJg+6KXrFyvJgLY8WI2KKhEKDSTJMS8MGTo++Ho1EkNP2Ju5y7+Xzvdy
+ vKLhbIJ/BZxW8HHqQH3gud/1msZT+I2I3r64GSLai5LJmd1itCXq1o3Mbr845AQyLXcG
+ bdgssZhE1DOdZ56rtaX0o0PGQcoi3hd3uf2+FyLgSIHtuwKXrqpW3svhCQ031wp6POy4
+ i8CPfgVX2SMb4qjJpLiNgQdsfGllxI19OLTbk2anbq/LYnDwwxobYUkm1jqnJUUvulYt
+ CnxVTOQKZKOq4ize7oxuGtgpYmv+3FWuxn8DvmLcoHWfWKwOe5KDoe2fpJ7LfAx54QEx
+ GNKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXxxBZknQC4FHeIADIUQE4GHNNPQUDrrr7VFb696/I8KIhMzWh2wAP5iMoK02ti8OvHGbHDJOlArI9V@nongnu.org
+X-Gm-Message-State: AOJu0Yxx+x71ad3TTftNh9UUm/Fiyi/n7kmeh10d4RBKWcMRFN7p+Fhz
+ RVf4uBMGBYRgugBgvGwb8HTQx440iXWnchF0946LHEmTM+JP/0Df8okmAIhqKcHrKgo=
+X-Gm-Gg: ASbGnctT/8B4ZLssJDcODhJIrkrcxVg0MkIe49E+4CLDncfuv+VLR61yISOac1f7af2
+ dgEoriLbPN4z+/ZVMJ2F3+9va7fBHO+L2APwxUApCf7UqF/9cnqKn7mMjkyW3YXSynjCS2VDWbu
+ K22EppaZko2FgK0Z7jqTPhncywX8EyvqtRYeUaAbwWGRg/wcCOPYf7eaYaTg4pX4S5oIg2w5LlP
+ wvL74AiM1BinS64yDCGZO2rfFrd9ZXGZ37QwGaJn2QHWu0QiFM16G8dLiz45TQnOLFoWJjKDJiW
+ kROBTVEP7jnqEcJNsbfv65Cd+HJytrjcBqfM4TGjcJBZcXZwrBIfz7lWQ92jsKWel0vNThgUQA1
+ UQDB9pYIpAnn0GRsBGMunk9vfxnqF8kjcVX/BCPwOYb2neNtl/QyuLTkNvgHYLU48I/o=
+X-Google-Smtp-Source: AGHT+IEC6NKjraz1tesWXvI0LleraqbCKTYjkprfbRnLaKTwUF6V3GDKh09ClOqIx5SmXpxmuLDSPg==
+X-Received: by 2002:a05:6a00:23d4:b0:76b:d75c:8a76 with SMTP id
+ d2e1a72fcca58-7742dc9f446mr8484594b3a.1.1757299889828; 
+ Sun, 07 Sep 2025 19:51:29 -0700 (PDT)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-772306a1870sm26823834b3a.75.2025.09.07.19.51.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Sep 2025 19:51:29 -0700 (PDT)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, richard.henderson@linaro.org,
+ Max Chou <max.chou@sifive.com>
+Subject: [RFC PATCH v4 2/3] target/riscv: rvv: Add Zvqdotq support
+Date: Mon,  8 Sep 2025 10:51:16 +0800
+Message-ID: <20250908025117.1728895-3-max.chou@sifive.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250908025117.1728895-1-max.chou@sifive.com>
+References: <20250908025117.1728895-1-max.chou@sifive.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/2] target/riscv: Use tcg nodes for strided vector
- ld/st generation
-To: Richard Henderson <richard.henderson@linaro.org>,
- paolo.savini@embecosm.com, npiggin@gmail.com, ebiggers@kernel.org,
- dbarboza@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <cover.1756975571.git.chao.liu@zevorn.cn>
- <74e3337dfebbeb29667492a1e57e87c75b55c725.1756975571.git.chao.liu@zevorn.cn>
- <0cb963d6-744b-4181-b590-08fee5516e30@linaro.org>
-From: Chao Liu <chao.liu@zevorn.cn>
-In-Reply-To: <0cb963d6-744b-4181-b590-08fee5516e30@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.68 (deferred)
-Received-SPF: pass client-ip=115.124.28.68; envelope-from=chao.liu@zevorn.cn;
- helo=out28-68.mail.aliyun.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01,
- UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x42f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -64,130 +107,210 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/4/2025 9:53 PM, Richard Henderson wrote:
-> On 9/4/25 11:13, Chao Liu wrote:
->> +/*
->> + * Check whether the i bit of the mask is 0 or 1.
->> + *
->> + * static inline int vext_elem_mask(void *v0, int index)
->> + * {
->> + *     int idx = index / 64;
->> + *     int pos = index % 64;
->> + *     return (((uint64_t *)v0)[idx] >> pos) & 1;
->> + * }
->> + *
->> + * And
->> + *
->> + * if (vext_elem_mask(v0, i) != 0) {
->> + *     goto label;
->> + * }
->> + */
->> +static void gen_check_vext_elem_mask(TCGLabel *label, TCGv mask, TCGv mask_offs)
->> +{
->> +    TCGv mask_offs_64 = tcg_temp_new();
->> +    TCGv mask_offs_rem = tcg_temp_new();
->> +    TCGv mask_elem = tcg_temp_new();
->> +
->> +    tcg_gen_shri_tl(mask_offs_64, mask_offs, 3);
->> +    tcg_gen_add_tl(mask_offs_64, mask_offs_64, mask);
->> +    tcg_gen_ld_i64((TCGv_i64)mask_elem, (TCGv_ptr)mask_offs_64, 0);
-> 
-> Each and every time you cast a TCGv, you're doing something wrong.
-> There are a lot of them in this patch.
-> 
-> Your host pointer arithmetic should be using TCGv_ptr and tcg_gen_*_ptr().
-> This mask_elem should itself be TCGv_i64.
-> 
+Support instructions for vector dot-product extension (Zvqdotq)
+- vqdot.[vv,vx]
+- vqdotu.[vv,vx]
+- vqdotsu.[vv,vx]
+- vqdotus.vx
 
-Thanks, I will include these changes in the next version. :)
+Signed-off-by: Max Chou <max.chou@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/helper.h                         | 10 +++
+ target/riscv/insn32.decode                    |  9 +++
+ target/riscv/insn_trans/trans_rvzvqdotq.c.inc | 61 +++++++++++++++++++
+ target/riscv/translate.c                      |  1 +
+ target/riscv/vector_helper.c                  | 57 +++++++++++++++++
+ 5 files changed, 138 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzvqdotq.c.inc
 
->> +    tcg_gen_andi_tl(mask_elem, mask_elem, 1);
->> +    tcg_gen_brcond_tl(TCG_COND_NE, mask_elem, tcg_constant_tl(0), label);
-> 
-> This should be
-> 
->      tcg_gen_brcond_i64(TCG_COND_TSTNE, mask_elem, tcg_constant_i64(1), label);
-> 
-> 
->> +/*
->> + * Simulate the strided load/store main loop:
->> + *
->> + * for (i = env->vstart; i < env->vl; env->vstart = ++i) {
->> + *     k = 0;
->> + *     while (k < nf) {
->> + *         if (!vm && !vext_elem_mask(v0, i)) {
->> + *             vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
->> + *                               (i + k * max_elems + 1) * esz);
->> + *             k++;
->> + *             continue;
->> + *         }
->> + *         target_ulong addr = base + stride * i + (k << log2_esz);
->> + *         ldst(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->> + *         k++;
->> + *     }
->> + * }
-> 
-> The form of this loop causes you to do more reads for vext_elem_mask than necessary.
-> 
-> Better to test once outside of the loop over K:
-> 
->      for (i in vl) {
->          if (!vm && !vext_elem_mask(v0, i)) {
->              for (k in nf) {
->                  vd[i, k] = -1;
->              }
->          } else {
->              for (k in nf) {
->                  vd[i, k] = ld(addr);
->              }
->          }
->      }
-> 
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index f712b1c368..80274f1dad 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1284,3 +1284,13 @@ DEF_HELPER_4(vgmul_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_5(vsm4k_vi, void, ptr, ptr, i32, env, i32)
+ DEF_HELPER_4(vsm4r_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_4(vsm4r_vs, void, ptr, ptr, env, i32)
++
++/* Vector dot-product functions */
++DEF_HELPER_6(vqdot_vv, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vqdotu_vv, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vqdotsu_vv, void, ptr, ptr, ptr, ptr, env, i32)
++
++DEF_HELPER_6(vqdot_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vqdotu_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vqdotsu_vx, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vqdotus_vx, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index cd23b1f3a9..50a6156667 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -1066,3 +1066,12 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
+ amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
+ amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
+ amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
++
++# *** Zvqdotq Vector Dot-Product Extension ***
++vqdot_vv    101100 . ..... ..... 010 ..... 1010111 @r_vm
++vqdot_vx    101100 . ..... ..... 110 ..... 1010111 @r_vm
++vqdotu_vv   101000 . ..... ..... 010 ..... 1010111 @r_vm
++vqdotu_vx   101000 . ..... ..... 110 ..... 1010111 @r_vm
++vqdotsu_vv  101010 . ..... ..... 010 ..... 1010111 @r_vm
++vqdotsu_vx  101010 . ..... ..... 110 ..... 1010111 @r_vm
++vqdotus_vx  101110 . ..... ..... 110 ..... 1010111 @r_vm
+diff --git a/target/riscv/insn_trans/trans_rvzvqdotq.c.inc b/target/riscv/insn_trans/trans_rvzvqdotq.c.inc
+new file mode 100644
+index 0000000000..80134874e9
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzvqdotq.c.inc
+@@ -0,0 +1,61 @@
++/*
++ * RISC-V translation routines for the Zvqdotq vector dot-product extension
++ *
++ * Copyright (C) 2025 SiFive, Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++static bool vext_zvqdotq_base_check(DisasContext *s)
++{
++    return s->cfg_ptr->ext_zvqdotq && s->sew == MO_32;
++}
++
++static bool vext_vqdotq_opivv_check(DisasContext *s, arg_rmrr *a)
++{
++    return vext_zvqdotq_base_check(s) && opivv_check(s, a);
++}
++
++#define GEN_VQDOTQ_OPIVV_TRANS(NAME, CHECK)              \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
++{                                                        \
++    if (CHECK(s, a)) {                                   \
++        return opivv_trans(a->rd, a->rs1, a->rs2, a->vm, \
++                           gen_helper_##NAME, s);        \
++    }                                                    \
++    return false;                                        \
++}
++
++GEN_VQDOTQ_OPIVV_TRANS(vqdot_vv, vext_vqdotq_opivv_check)
++GEN_VQDOTQ_OPIVV_TRANS(vqdotu_vv, vext_vqdotq_opivv_check)
++GEN_VQDOTQ_OPIVV_TRANS(vqdotsu_vv, vext_vqdotq_opivv_check)
++
++static bool vext_vqdotq_opivx_check(DisasContext *s, arg_rmrr *a)
++{
++    return vext_zvqdotq_base_check(s) && opivx_check(s, a);
++}
++
++#define GEN_VQDOTQ_OPIVX_TRANS(NAME, CHECK)              \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)   \
++{                                                        \
++    if (CHECK(s, a)) {                                   \
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, \
++                           gen_helper_##NAME, s);        \
++    }                                                    \
++    return false;                                        \
++}
++
++GEN_VQDOTQ_OPIVX_TRANS(vqdot_vx, vext_vqdotq_opivx_check)
++GEN_VQDOTQ_OPIVX_TRANS(vqdotu_vx, vext_vqdotq_opivx_check)
++GEN_VQDOTQ_OPIVX_TRANS(vqdotsu_vx, vext_vqdotq_opivx_check)
++GEN_VQDOTQ_OPIVX_TRANS(vqdotus_vx, vext_vqdotq_opivx_check)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 9ddef2d6e2..6f43ed1ffd 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1190,6 +1190,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvzfh.c.inc"
+ #include "insn_trans/trans_rvk.c.inc"
+ #include "insn_trans/trans_rvvk.c.inc"
++#include "insn_trans/trans_rvzvqdotq.c.inc"
+ #include "insn_trans/trans_privileged.c.inc"
+ #include "insn_trans/trans_svinval.c.inc"
+ #include "insn_trans/trans_rvbf16.c.inc"
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 7c67d67a13..9d32fe0acc 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -921,6 +921,10 @@ GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b_tlb, ste_b_host)
+ #define WOP_SSU_B int16_t, int8_t, uint8_t, int16_t, uint16_t
+ #define WOP_SSU_H int32_t, int16_t, uint16_t, int32_t, uint32_t
+ #define WOP_SSU_W int64_t, int32_t, uint32_t, int64_t, uint64_t
++#define QOP_SSS_B int32_t, int8_t, int8_t, int32_t, int32_t
++#define QOP_SUS_B int32_t, uint8_t, int8_t, uint32_t, int32_t
++#define QOP_SSU_B int32_t, int8_t, uint8_t, int32_t, uint32_t
++#define QOP_UUU_B uint32_t, uint8_t, uint8_t, uint32_t, uint32_t
+ #define NOP_SSS_B int8_t, int8_t, int16_t, int8_t, int16_t
+ #define NOP_SSS_H int16_t, int16_t, int32_t, int16_t, int32_t
+ #define NOP_SSS_W int32_t, int32_t, int64_t, int32_t, int64_t
+@@ -5473,3 +5477,56 @@ GEN_VEXT_INT_EXT(vsext_vf2_d, int64_t, int32_t, H8, H4)
+ GEN_VEXT_INT_EXT(vsext_vf4_w, int32_t, int8_t,  H4, H1)
+ GEN_VEXT_INT_EXT(vsext_vf4_d, int64_t, int16_t, H8, H2)
+ GEN_VEXT_INT_EXT(vsext_vf8_d, int64_t, int8_t,  H8, H1)
++
++
++/* Vector dot-product instructions. */
++
++#define OPMVV_VQDOTQ(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2)          \
++static void do_##NAME(void *vd, void *vs1, void *vs2, int i)            \
++{                                                                       \
++    int idx;                                                            \
++    TX1 *r1_buf = (TX1 *)vs1 + HD(i);                                   \
++    TX2 *r2_buf = (TX2 *)vs2 + HD(i);                                   \
++    TD acc = ((TD *)vd)[HD(i)];                                         \
++                                                                        \
++    for (idx = 0; idx < 4; ++idx) {                                     \
++        T1 r1 = ((T1 *)r1_buf)[HS1(idx)];                               \
++        T2 r2 = ((T2 *)r2_buf)[HS2(idx)];                               \
++        acc += (TD)r1 * (TD)r2;                                         \
++    }                                                                   \
++    ((TD *)vd)[HD(i)] = acc;                                            \
++}
++
++RVVCALL(OPMVV_VQDOTQ, vqdot_vv, QOP_SSS_B, H4, H1, H1)
++RVVCALL(OPMVV_VQDOTQ, vqdotu_vv, QOP_UUU_B, H4, H1, H1)
++RVVCALL(OPMVV_VQDOTQ, vqdotsu_vv, QOP_SUS_B, H4, H1, H1)
++
++GEN_VEXT_VV(vqdot_vv, 4)
++GEN_VEXT_VV(vqdotu_vv, 4)
++GEN_VEXT_VV(vqdotsu_vv, 4)
++
++#define OPMVX_VQDOTQ(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2)          \
++static void do_##NAME(void *vd, target_long s1, void *vs2, int i)       \
++{                                                                       \
++    int idx;                                                            \
++    TX1 *r1_buf = (TX1 *)&s1;                                           \
++    TX2 *r2_buf = (TX2 *)vs2 + HD(i);                                   \
++    TD acc = ((TD *)vd)[HD(i)];                                         \
++                                                                        \
++    for (idx = 0; idx < 4; ++idx) {                                     \
++        T1 r1 = ((T1 *)r1_buf)[HS1(idx)];                               \
++        T2 r2 = ((T2 *)r2_buf)[HS2(idx)];                               \
++        acc += (TD)r1 * (TD)r2;                                         \
++    }                                                                   \
++    ((TD *)vd)[HD(i)] = acc;                                            \
++}
++
++RVVCALL(OPMVX_VQDOTQ, vqdot_vx, QOP_SSS_B, H4, H1, H1)
++RVVCALL(OPMVX_VQDOTQ, vqdotu_vx, QOP_UUU_B, H4, H1, H1)
++RVVCALL(OPMVX_VQDOTQ, vqdotsu_vx, QOP_SUS_B, H4, H1, H1)
++RVVCALL(OPMVX_VQDOTQ, vqdotus_vx, QOP_SSU_B, H4, H1, H1)
++
++GEN_VEXT_VX(vqdot_vx, 4)
++GEN_VEXT_VX(vqdotu_vx, 4)
++GEN_VEXT_VX(vqdotsu_vx, 4)
++GEN_VEXT_VX(vqdotus_vx, 4)
+-- 
+2.39.3
 
-Good idea, I've already made some attempts, and I will apply this suggestion in the next version.
-
-> If vl_eq_vlmax, and VL is a multiple of 64, you can structure this loop like:
-> 
->      i = 0;
->      do {
->          mask = v0[i / 64];
->          do {
->              if (mask & 1) {
->                  ...
->              }
->              mask >>= 1;
->          } while (++i & 63);
->      } while (i < vl);
-> 
-> If VL is a smaller power of 2, you can load smaller units of mask to match. 
-
-Reducing memory access is correct. this is a great optimization point.
-
-> Though beware of the big-endian host addressing fixup.
-
-Get~
-
-> If VM, you should fuse I and K into a single loop over all elements.
-> 
-
-I have made some tests, such as:
-
-     uint32_t total = env->vl * nf;
-     for (uint32_t idx = 0; idx < total; idx++) {
-         k = idx / env->vl;
-         i = idx % env->vl;
-         target_ulong addr = base + stride * i + (k << log2_esz);
-         uint32_t elem_idx = i + k * max_elems;
-         ldst_elem(env, adjust_addr(env, addr), elem_idx, vd, ra);
-     }
-
-If we implement it using TCG ops, would division and modulo operations be more efficient than adding an extra loop layer?
-
-Or is there a better way to merge the loops for i and k into a single for loop?
-
-Also, I will make more tests to check that the changes above are correct and work well.
-
-
-Thanks,
-Chao
 
