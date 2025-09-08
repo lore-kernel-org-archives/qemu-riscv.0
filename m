@@ -4,97 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CCF6CAC586
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Sep 2025 12:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27BB9CAC588
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Sep 2025 13:10:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uvbLH-0002HI-7I; Mon, 08 Sep 2025 08:51:35 -0400
+	id 1uvbdC-0004Ei-G5; Mon, 08 Sep 2025 09:10:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1uvbL3-0001rv-4S
- for qemu-riscv@nongnu.org; Mon, 08 Sep 2025 08:51:18 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1uvbKv-0005Qx-IT
- for qemu-riscv@nongnu.org; Mon, 08 Sep 2025 08:51:16 -0400
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-45cb5492350so27969915e9.1
- for <qemu-riscv@nongnu.org>; Mon, 08 Sep 2025 05:51:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757335861; x=1757940661; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nxPytzeq6dPngJT4hbcEIQRox1Pjr2WlO0kU+VWzsNQ=;
- b=KI6+11hpGUo708lRewtQ8Pte1mbp7EhsEmrCYSkgbXNhHnpTdMg7iR8BLlS5K14mql
- EzMOetdj2IiwMvgiOgbIWAu4j9+hmtwLrQ/TYH9emtjQWqAOJJ7+R1kg1CDlOPYONjK+
- h3aHJ5FUjLoNLIqzJTLZRLJ52fEaAI3X4V0NS9vd75YjEyhmWK+MpS0BbDOHpw3+PEO2
- wpkDrKDsAJEEO0I6ckmHM3AUwwXWJF3rAgNoHImpro8jv1OrmRN/jDdOXq7Fa00vxvu8
- kuaf2PYdKovR4SG+HZPE3Vz1QkjRR00WLalrpNUOqnkNFK3vBg0SLPb7UPDZboILxNK1
- 6VPg==
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1uvbd9-0004Cu-Qi
+ for qemu-riscv@nongnu.org; Mon, 08 Sep 2025 09:09:59 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1uvbd0-0007vI-FW
+ for qemu-riscv@nongnu.org; Mon, 08 Sep 2025 09:09:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1757336984;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=u9rBbDBkBCTtqr6qKdjAv4+DymLGXhOSd1J6cFxBUnA=;
+ b=hiD6hycNlXFhimpxxsi3MHEPyVIh4HC245eSwuCOhy2RKdFSE1fr+4va3jYpWisEo5VMor
+ 3ORvChbDo5qwvkRxn9YI6/pYTsAiSs866B/iT43SJzHnHn+3fc4blaBWX1UdFM59uSo/Av
+ AFa2lI6zt56m/LoYZWNE0PCCKo9cZ9I=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-640-tNMc-f14NIWqALKo4Ro-_g-1; Mon, 08 Sep 2025 09:09:43 -0400
+X-MC-Unique: tNMc-f14NIWqALKo4Ro-_g-1
+X-Mimecast-MFC-AGG-ID: tNMc-f14NIWqALKo4Ro-_g_1757336982
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-3e424a186fcso1291631f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 08 Sep 2025 06:09:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757335861; x=1757940661;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1757336982; x=1757941782;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nxPytzeq6dPngJT4hbcEIQRox1Pjr2WlO0kU+VWzsNQ=;
- b=gcUzEB+ReK/DphFVMNoYHkSVmavyAsL7WbFpuG2ax6GecasNOtaxKEFb5v/AVzlhZr
- vjxPOnQq5Nb8DTEiXRQgAdCwgP1ClD3/DNmBEjm7mtlGWAwl1SBKy6GQKU3DrNcoMCs9
- 1s8nijq4oh090dVF+cyo/A+kff7S5+LQ9y6TIZJwS367eYyrAb+q/dFONN/6de2lbBiv
- aQh8kGJC74l92C1sByJvitW8NqFHl9cgyce53Ihvv39SxA7J8VzOClimktS6qlpOUcV5
- KnPYR+izYyT+F7q7K2ZpKgfaYb4t/b2lM42hbMt+BfuPvktJ9SaU8Lv3Z1EJ1/+9chAA
- R2sQ==
+ bh=u9rBbDBkBCTtqr6qKdjAv4+DymLGXhOSd1J6cFxBUnA=;
+ b=nwb8VbBmagBFrU7oaxNAVhdxrp7135ZzYHldgQLZh6djsc2mEYLx4spmmOAc4smxaH
+ jaMMooZ9JwSu5JQQzShk8X9OXrbYtO9rYTC+cy5GubMK+ENooSZYVrfApoSv1b9wVVCj
+ 7mnmxhaFRinbLXBm2qIt9jpK2DrIBNZy65CnddRhvn/ulFExyVBk8Ih9IeXzLN5/uaJX
+ DGGo+KrVNwV9GPl1DBBV9czHaioOteJmUGUvRAj94K2bZgYAApueCt8NPC225vU+lp35
+ Qyo79SxUwJ2d3EC/u0rHEbcSnKPiKyYlFM5cs6S9ouqU3h4FaSQY9xbOUymyqUh33Hl6
+ Az1A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVeFUrR+ZbSRrxrGJUfOl/+qW6HQnGd9D9tcFxIQtGYeGY5EvHppNHp0b0kdSKffsgb9qhPi5/QIOv7@nongnu.org
-X-Gm-Message-State: AOJu0YxVFnl2nAWt3Oza6ZnSGamtt7ejJHAWiZnWXl1vcxJ9mydBnaF8
- +YrJXu6L5BXbhaqrWUUAJJmdhFDGw1VGkMdtKoKi1cozd9BRdOBA1zBXI2zmVfgNJcE=
-X-Gm-Gg: ASbGnctz/Utf84DMxDco5ApRf3oH7OLFB6jc8aoSTSpRNSAoJsLxMz4+lNBEf/v/HKi
- uAGYNSuyaCKDEbhPvCZLss3ElJTC6Ih4dT7J7bdpwgeIFndvfQhndu5NOqtNjcIonVUO5KwKDUI
- frzVTAKxKLsqGuK+VQ4+GfavcGewLExMyMgDhRVR8Tp60y2owiPemW51vCvWKHZP/8ZkI23UZEX
- UqpLyKtz9vHhBjYvcUsJhHucSb55xO2DYbZBMNN/JMAoEJZg6gYJjChHUcDtEX1wqtorxhSmbn5
- Gs/j963R/6TYY8p1hRu4q5l/ySdDXX1ObWj4j7URIAJOkoBuijsysz8WG+i6otTRjR5PmiV8gPR
- I72FWM8OLgZCb9R2EPFjLfjWPnFRF
-X-Google-Smtp-Source: AGHT+IGsDim/DMSViM56KXy45ZJJdjM1w8uuhVmP2tGMEZ4H5/V+mkgrys6of98GIjOlt/H+9UXilA==
-X-Received: by 2002:a05:600c:1993:b0:45d:db2a:ce30 with SMTP id
- 5b1f17b1804b1-45ddde0d828mr63620025e9.0.1757335860663; 
- Mon, 08 Sep 2025 05:51:00 -0700 (PDT)
-Received: from orth.archaic.org.uk (orth.archaic.org.uk. [2001:8b0:1d0::2])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45deab47e5dsm15240425e9.2.2025.09.08.05.50.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Sep 2025 05:50:59 -0700 (PDT)
-From: Peter Maydell <peter.maydell@linaro.org>
-To: qemu-devel@nongnu.org
+ AJvYcCWr6ddvBGVQLaWR39GILlN+qEkW883nn/8KorfGyZ9V4i6w2I9FoEfjOX/5QRdA2HiTP9B5yT2C7nIi@nongnu.org
+X-Gm-Message-State: AOJu0YwZgBjSlUKAS9ql1RyZaAn2K6VljFn9xZ/F4WlT5o6p65NGoAgZ
+ UPbza8glpacVuumP8kqhm/yzRrn5dqPo7wrDqVClxyUYXZpGJ6tPS76NTEAGsAx0PjfC23X4hg8
+ R2k6FnsWOFQzluZag6Aq/AYtCyRuDO2/zC1LfIMBVNQ17Wy+EU/2EUi9n
+X-Gm-Gg: ASbGnct4ZMwV7XXBfvLTqBoZBOCXc7ZMylXCMD69vsmvfRhDAevjzjtzEmQwYTv+AAr
+ kQ0Mj7OAFun0CA5XSC1Ijemhk5S+K3DrN0i077YjrFc2/ETfwrvhisj9cZdjbaB+EcNBScEF9M3
+ JeoFEaIUuRoj2XBSv4K6UGj6yXWCaP7YcAwZQrY+ibcnnasYVzYBMMQXUN0wKX/6FV/e96CwFse
+ xClz3DWFHGnmW1s7Jbap8Bm4wwgCi7M5DWe20Bl66kXS2Q77EoOQpeMZhZQlloAiUFgWBlCZLmC
+ dAwLhhCUdJUBorwh2n7gvzcEJSlqUB0uBvAEftaRspZwH01EVzc9s+EDLUrrwa3R1zBsoVQiEv0
+ m5zakYgxKrgv7rzAaGVUZjJkgdo5B0MbAw12N6lXokjk=
+X-Received: by 2002:adf:a2de:0:b0:3e6:e931:b3e7 with SMTP id
+ ffacd0b85a97d-3e6e931f910mr3841465f8f.61.1757336982114; 
+ Mon, 08 Sep 2025 06:09:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGxyLezQA4/PKwjWgzAeAlKCa07RXIAixnbayTQ7KFa8x0SwM3nFFmWSTSlU6N3GjkkeYMeWA==
+X-Received: by 2002:adf:a2de:0:b0:3e6:e931:b3e7 with SMTP id
+ ffacd0b85a97d-3e6e931f910mr3841431f8f.61.1757336981695; 
+ Mon, 08 Sep 2025 06:09:41 -0700 (PDT)
+Received: from [192.168.10.48] ([151.95.56.250])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-3dbead0b247sm22477352f8f.6.2025.09.08.06.09.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 08 Sep 2025 06:09:40 -0700 (PDT)
+Message-ID: <58abecd0-4071-4cd9-8df6-78478c310969@redhat.com>
+Date: Mon, 8 Sep 2025 15:09:38 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH] docs/system/security: Restrict "virtualization use
+ case" to specific machines
+To: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org
 Cc: Stefan Hajnoczi <stefanha@redhat.com>,
  Bernhard Beschow <shentey@gmail.com>, Thomas Huth <thuth@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, "Michael S . Tsirkin"
+ <mst@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>,
  qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
  Christian Borntraeger <borntraeger@linux.ibm.com>,
  Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
-Subject: [RFC PATCH] docs/system/security: Restrict "virtualization use case"
- to specific machines
-Date: Mon,  8 Sep 2025 13:50:57 +0100
-Message-ID: <20250908125058.220973-1-peter.maydell@linaro.org>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=peter.maydell@linaro.org; helo=mail-wm1-x333.google.com
+References: <20250908125058.220973-1-peter.maydell@linaro.org>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Autocrypt: addr=pbonzini@redhat.com; keydata=
+ xsEhBFRCcBIBDqDGsz4K0zZun3jh+U6Z9wNGLKQ0kSFyjN38gMqU1SfP+TUNQepFHb/Gc0E2
+ CxXPkIBTvYY+ZPkoTh5xF9oS1jqI8iRLzouzF8yXs3QjQIZ2SfuCxSVwlV65jotcjD2FTN04
+ hVopm9llFijNZpVIOGUTqzM4U55sdsCcZUluWM6x4HSOdw5F5Utxfp1wOjD/v92Lrax0hjiX
+ DResHSt48q+8FrZzY+AUbkUS+Jm34qjswdrgsC5uxeVcLkBgWLmov2kMaMROT0YmFY6A3m1S
+ P/kXmHDXxhe23gKb3dgwxUTpENDBGcfEzrzilWueOeUWiOcWuFOed/C3SyijBx3Av/lbCsHU
+ Vx6pMycNTdzU1BuAroB+Y3mNEuW56Yd44jlInzG2UOwt9XjjdKkJZ1g0P9dwptwLEgTEd3Fo
+ UdhAQyRXGYO8oROiuh+RZ1lXp6AQ4ZjoyH8WLfTLf5g1EKCTc4C1sy1vQSdzIRu3rBIjAvnC
+ tGZADei1IExLqB3uzXKzZ1BZ+Z8hnt2og9hb7H0y8diYfEk2w3R7wEr+Ehk5NQsT2MPI2QBd
+ wEv1/Aj1DgUHZAHzG1QN9S8wNWQ6K9DqHZTBnI1hUlkp22zCSHK/6FwUCuYp1zcAEQEAAc0j
+ UGFvbG8gQm9uemluaSA8cGJvbnppbmlAcmVkaGF0LmNvbT7CwU0EEwECACMFAlRCcBICGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRB+FRAMzTZpsbceDp9IIN6BIA0Ol7MoB15E
+ 11kRz/ewzryFY54tQlMnd4xxfH8MTQ/mm9I482YoSwPMdcWFAKnUX6Yo30tbLiNB8hzaHeRj
+ jx12K+ptqYbg+cevgOtbLAlL9kNgLLcsGqC2829jBCUTVeMSZDrzS97ole/YEez2qFpPnTV0
+ VrRWClWVfYh+JfzpXmgyhbkuwUxNFk421s4Ajp3d8nPPFUGgBG5HOxzkAm7xb1cjAuJ+oi/K
+ CHfkuN+fLZl/u3E/fw7vvOESApLU5o0icVXeakfSz0LsygEnekDbxPnE5af/9FEkXJD5EoYG
+ SEahaEtgNrR4qsyxyAGYgZlS70vkSSYJ+iT2rrwEiDlo31MzRo6Ba2FfHBSJ7lcYdPT7bbk9
+ AO3hlNMhNdUhoQv7M5HsnqZ6unvSHOKmReNaS9egAGdRN0/GPDWr9wroyJ65ZNQsHl9nXBqE
+ AukZNr5oJO5vxrYiAuuTSd6UI/xFkjtkzltG3mw5ao2bBpk/V/YuePrJsnPFHG7NhizrxttB
+ nTuOSCMo45pfHQ+XYd5K1+Cv/NzZFNWscm5htJ0HznY+oOsZvHTyGz3v91pn51dkRYN0otqr
+ bQ4tlFFuVjArBZcapSIe6NV8C4cEiSTOwE0EVEJx7gEIAMeHcVzuv2bp9HlWDp6+RkZe+vtl
+ KwAHplb/WH59j2wyG8V6i33+6MlSSJMOFnYUCCL77bucx9uImI5nX24PIlqT+zasVEEVGSRF
+ m8dgkcJDB7Tps0IkNrUi4yof3B3shR+vMY3i3Ip0e41zKx0CvlAhMOo6otaHmcxr35sWq1Jk
+ tLkbn3wG+fPQCVudJJECvVQ//UAthSSEklA50QtD2sBkmQ14ZryEyTHQ+E42K3j2IUmOLriF
+ dNr9NvE1QGmGyIcbw2NIVEBOK/GWxkS5+dmxM2iD4Jdaf2nSn3jlHjEXoPwpMs0KZsgdU0pP
+ JQzMUMwmB1wM8JxovFlPYrhNT9MAEQEAAcLBMwQYAQIACQUCVEJx7gIbDAAKCRB+FRAMzTZp
+ sadRDqCctLmYICZu4GSnie4lKXl+HqlLanpVMOoFNnWs9oRP47MbE2wv8OaYh5pNR9VVgyhD
+ OG0AU7oidG36OeUlrFDTfnPYYSF/mPCxHttosyt8O5kabxnIPv2URuAxDByz+iVbL+RjKaGM
+ GDph56ZTswlx75nZVtIukqzLAQ5fa8OALSGum0cFi4ptZUOhDNz1onz61klD6z3MODi0sBZN
+ Aj6guB2L/+2ZwElZEeRBERRd/uommlYuToAXfNRdUwrwl9gRMiA0WSyTb190zneRRDfpSK5d
+ usXnM/O+kr3Dm+Ui+UioPf6wgbn3T0o6I5BhVhs4h4hWmIW7iNhPjX1iybXfmb1gAFfjtHfL
+ xRUr64svXpyfJMScIQtBAm0ihWPltXkyITA92ngCmPdHa6M1hMh4RDX+Jf1fiWubzp1voAg0
+ JBrdmNZSQDz0iKmSrx8xkoXYfA3bgtFN8WJH2xgFL28XnqY4M6dLhJwV3z08tPSRqYFm4NMP
+ dRsn0/7oymhneL8RthIvjDDQ5ktUjMe8LtHr70OZE/TT88qvEdhiIVUogHdo4qBrk41+gGQh
+ b906Dudw5YhTJFU3nC6bbF2nrLlB4C/XSiH76ZvqzV0Z/cAMBo5NF/w=
+In-Reply-To: <20250908125058.220973-1-peter.maydell@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 44NNOpNNVCGt2z9NkCsuFo9gKRyyqeU-CVD2uif50S0_1757336982
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=pbonzini@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,110 +162,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Currently our security policy defines a "virtualization use case"
-where we consider bugs to be security issues, and a
-"non-virtualization use case" where we do not make any security
-guarantees and don't consider bugs to be security issues.
+On 9/8/25 14:50, Peter Maydell wrote:
+> architectures where I've made a guess:
+> 
+> i386, x86_64:
+>   -- I have assumed that all machine types except the "experimental"
+>      x-remote are supported
 
-The rationale for this split is that much code in QEMU is older and
-was not written with malicious guests in mind, and we don't have the
-resources to audit, fix and defend it.  So instead we inform users
-about what the can in practice rely on as a security barrier, and
-what they can't.
+Please exclude isapc as well.
 
-We don't currently restrict the "virtualization use case" to any
-particular set of machine types.  This means that we have effectively
-barred ourselves from adding KVM support to any machine type that we
-don't want to put into the "bugs are security issues" category, even
-if it would be useful for users to be able to get better performance
-with a trusted guest by enabling KVM. This seems an unnecessary
-restriction, and in practice the set of machine types it makes
-sense to use for untrusted-guest virtualization is quite small.
+> mips, mips64
 
-Specifically, we would like to be able to enable the use of
-KVM with the imx8 development board machine types, but we don't
-want to commit ourselves to having to support those SoC models
-and device models as part of QEMU's security boundary:
-https://lore.kernel.org/qemu-devel/20250629204851.1778-3-shentey@gmail.com/
+Probably none.
 
-This patch updates the security policy to explicitly list the
-machine types we consider to be useful for the "virtualization
-use case".
+> riscv32, riscv64
 
-This is an RFC partly to see if we have consensus that this change
-makes sense, and partly because I was only able to identify the
-machine types we want to cover for some of our target architectures.
-If maintainers for the other architectures could clarify which
-machine types work with KVM that would be helpful.
+I'd assume "virt" only.
 
-Notes on the listed machine types:
+> ppc, ppc64
 
-architectures I'm pretty sure about:
+"pseries" only.
 
-aarch64:
- -- virt is definitely the only supported one
-s390x:
- -- s390-ccw-virtio is the only machine type for this architecture
-loongarch64:
- -- virt is the only machine type for this architecture
-
-architectures where I've made a guess:
-
-i386, x86_64:
- -- I have assumed that all machine types except the "experimental"
-    x-remote are supported
-
-architectures I don't know:
-
-mips, mips64
-riscv32, riscv64
-ppc, ppc64
-
-Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
----
- docs/system/security.rst | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
-
-diff --git a/docs/system/security.rst b/docs/system/security.rst
-index f2092c8768b..395c2d7fb88 100644
---- a/docs/system/security.rst
-+++ b/docs/system/security.rst
-@@ -35,6 +35,34 @@ malicious:
- Bugs affecting these entities are evaluated on whether they can cause damage in
- real-world use cases and treated as security bugs if this is the case.
- 
-+To be covered by this security support policy you must:
-+
-+- use a virtualization accelerator like KVM or HVF
-+- use one of the machine types listed below
-+
-+It may be possible to use other machine types with a virtualization
-+accelerator to provide improved performance with a trusted guest
-+workload, but any machine type not listed here should not be
-+considered to be providing guest isolation or security guarantees,
-+and falls under the "non-virtualization use case".
-+
-+Supported machine types for the virtualization use case, by target architecture:
-+
-+aarch64
-+  ``virt``
-+i386, x86_64
-+  ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``, ``pc``, ``q35``, ``isapc``
-+s390x
-+  ``s390-ccw-virtio``
-+loongarch64:
-+  ``virt``
-+ppc, ppc64:
-+  TODO
-+mips, mips64:
-+  TODO
-+riscv32, riscv64:
-+  TODO
-+
- Non-virtualization Use Case
- '''''''''''''''''''''''''''
- 
--- 
-2.43.0
+Paolo
 
 
