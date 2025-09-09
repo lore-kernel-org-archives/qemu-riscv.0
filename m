@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012D5CAC583
-	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Sep 2025 12:37:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 430F4CA0FED
+	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Sep 2025 12:45:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uvxau-0007vR-5u; Tue, 09 Sep 2025 08:37:08 -0400
+	id 1uvxiz-0001wG-60; Tue, 09 Sep 2025 08:45:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uvxar-0007v4-15
- for qemu-riscv@nongnu.org; Tue, 09 Sep 2025 08:37:05 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ id 1uvxit-0001vB-Aa
+ for qemu-riscv@nongnu.org; Tue, 09 Sep 2025 08:45:24 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uvxam-0000Df-Gw
- for qemu-riscv@nongnu.org; Tue, 09 Sep 2025 08:37:04 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-b4c72885c8bso4521296a12.0
- for <qemu-riscv@nongnu.org>; Tue, 09 Sep 2025 05:36:58 -0700 (PDT)
+ id 1uvxil-0001M3-Ln
+ for qemu-riscv@nongnu.org; Tue, 09 Sep 2025 08:45:21 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-24b1622788dso38213265ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 09 Sep 2025 05:45:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1757421416; x=1758026216; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1757421911; x=1758026711; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=mPyGQ6358lK6j1oEuTF1y5eOpaLNaFJppXt5tnxqm04=;
- b=EJA0LjeRotW20L6fRYsltHzxX+JQSRRTXc9+iTRm9LXgPOxIOX7dB4YbiHlAJ4wVh/
- yKmbGmRTFDpqPqtibzFk9dJMoV0XNfH3DyKXxB0ZhS1o5u3sPMRuf1whsQvY49xYlQ6o
- zMc28X1vtvxIH3Xxf/59gXuhtgCs4kfT1VJBiY9ca4DfAsKN8Kuic62BUMhQC9PUvhmx
- Q4lsqjSPdYLaX6yW1oKAeFDCAfzivV9X6B4/CsilxOU1RsAwMsfq93oajPPgCFuw/ntm
- ff0B/X2MAYKWMthBRdOB4t9SkLgghUjCObfvD2DgBpx6X0hxQK0YMEX4WhRDj53E+ZJb
- uMzQ==
+ bh=K2SAzTTWEn0NzP+tNQNUpX1Y95kG27tn9rny0UcROJ4=;
+ b=J0Heb+HrrOxuDqIhM0zB5zAzqnQCKwIwf1z1klHQ5PRBfjowvQAtXuX/btbQSsLx2x
+ tzRmRK2FaiZHbPoYmH6rxOokXfTawDydgloVrnllAuDTtcPxYwWN7HnaBRVcsyJueBeg
+ msAmjtndMM8w26htbvopQG9wdMKcyHmbO8T20BxGQZ+dnO5pXrm2r5rA9FCjA0lALERl
+ i3IhUaKF3zsIzJtK7pqgp+Cl9TgFvwjBluth4lJRE8bgqFgKYt/lg6/AYkHtP7+t/nKg
+ S+V0chdhXvYI/GYtlZt5rDjrY7NQRpERZ/wSVue67AlDCwvwuVeqluCla6U4ersbgwrZ
+ XDBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757421416; x=1758026216;
+ d=1e100.net; s=20230601; t=1757421911; x=1758026711;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mPyGQ6358lK6j1oEuTF1y5eOpaLNaFJppXt5tnxqm04=;
- b=Mz2caM64b9bGkMgwviv7qxOlPptY3flU8ydzetUrAmbhim/m6j1Lg43Ri/nkO9TDOY
- 0601VtPLhorUsQdFWbDHjHnZqzXeRIzmKtQsclp8sQK2B1byDaHWgumhBO4DWE4v6iGK
- jgW8cMv5dkHjv/SHyRVlVx6bUj4pqXVfLVCN7KdDUdbLiHVdLH1XCkPMvgz+8zh438yH
- gh4MNnFclXqCxBNL8DG3dB1QzqdisoUjXfNyrAgZfjl8Pwo5z6v0qg69eYWlblFJNuFG
- 1gLkX2srl5beKrUXJkTPzfSZGf2bB8WjYgKPYvHj7pCLhmecLmT1W8exQyNfRjcKCbxs
- dWog==
+ bh=K2SAzTTWEn0NzP+tNQNUpX1Y95kG27tn9rny0UcROJ4=;
+ b=Id5ylHr9PrjKVgF+iwoGGXSx2Xn9oM21IjOo3j0JVQRkcY9mVfnK9PYoLbHH9HW3l3
+ oTAWFiDnwbauVtao1YI9fcoB3W7NG9JhTwG4eDbzJLfRKQvz5kqkYYgDbhA2Lzbrbx3s
+ gF4SuIKPxm+6PZ3yZckJaGiHfAi1/rhNFhmx4BpzK5Eza4MvEbFfUDmY3dlK/uVB/1Eu
+ T1rxUstNeNu7rn08HzSadeMPwcWmiGRGfJaWz/VO27FuFNKlRuoCjz1bgan9Y/OWcFY/
+ fHt2ZaKTToDThaaCMS/MjrF2GlmOEUODuvjy1zPUEPkgbgExVYNUZWdLtuPuli9OF4ZQ
+ 888A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWEPQNdiTbNM9r9LED2uyOXAKyXkZBCNVwxK1s+h04FpSkAjkPjIKC9IqQ9YwmOAWE8xjbVdz/NLVfw@nongnu.org
-X-Gm-Message-State: AOJu0YxP0nUYmJvB0VHb9FTUaXpFI+Iw6f3nQHmg2ZqK4FXUXG4bqBu1
- GblivkO/2WMe6n6mBMXovXbvQD4N+BhjBCDReR+4fxrQy8OFk6Zw6/CQ/BQhbmkLRQ8=
-X-Gm-Gg: ASbGncvTsmMU282chz1qd4y1gIDs1C03UML+xWr/haVWioj1BUDLO2LUeY2v1RjGvRh
- O/ny8nG1z+RQgJfGK8CRRKhjOnkUZmop2wqq0p834mtURXlIjaFdEToZtgnew80V4ylkpTmPtpO
- Xb+z06Q4R6uJZaOjSmX9inlyJg0RJwfMxmtPjAOWcJx/o2vK50pDhqzTGFi9RsoFfytYsO3Xk6q
- aEdsPg4K0EwS4zBG9Sst4X81x71Vox5+ER4Z1xMnccP7ryAkG3GYI9aEwE8cPLOMP39yyaMsWAo
- EAqJaMkXVPXbfJtqIwA48tZpVMxdUV6Wv+Zsk7A39j6WE/dGN52W3mySRdwyrhOvNKt13aiMELV
- 9Ar634+EXuykSbtn6gBzxekFczoA9Arg3ORkJ
-X-Google-Smtp-Source: AGHT+IHpZD6iVITVFteapE5Wsluy9IMEJ5Ar0efHpX6dyD5NSNzwt1xKf4+eXxnRzTM+i8FtMyeadQ==
-X-Received: by 2002:a17:902:e848:b0:246:d70e:ea82 with SMTP id
- d9443c01a7336-2516ef591e9mr193817465ad.5.1757421416293; 
- Tue, 09 Sep 2025 05:36:56 -0700 (PDT)
+ AJvYcCUS19sph3PujNzrZ7pgKeLBuGh5TR0bDJ7KhdL5DxPjZv+ZvySXNjnGqZFaHN4hoJtxI5qnaJ58G/kI@nongnu.org
+X-Gm-Message-State: AOJu0YwKdWHyY2W4smqw9pGxk6RcOcpc7w0ER9vhEAnhgCoyw3jAcdM+
+ z4J707RxDFFLeF1b9P84d6RyEwTvu09ZXS8Ptkd0czx4Wvruf70E8+f+BdOUZzkfUVU=
+X-Gm-Gg: ASbGncsfgb9SmcMGp/zSudpPSSs3hjnJozggOM4vY1fBYATGHzms523fsDVCY0RZ/Fx
+ IlZisdZGZ6hZZYkGM4GAHNJYLMj7do2S3T7Z9MIr46ezFCWBKB1WQTGX5VzN/ZTeBVAr7Q05S+a
+ OMxzMNKqWpBBn2+5HzeSS5dr6q+ra7MLdTnwFdyGEjiGvIGwWgVc67JAHnTdlePZfvSpjo8Id52
+ huh5W70Wsudtly8NUlZFCTAti6oe7klhDfKiNFBruKCyiVf47g5In73LaE5v2yuTCXkVbG1DuWw
+ cQj4d73hYVpClueMgoMCmZC74UUcvWjTlydnhZRNSXoizI04gZNu6hAmpgEDZLiymDaXNZ7gmWD
+ pVtbpHgklJnKRdy3UZ8pSahs70SJftSPxVNvOLUiZnfvzrWc=
+X-Google-Smtp-Source: AGHT+IH9ZZZtJphhszcCMvJo1n/OFeU9b/+QXhJF0p3WgljJ9nL2jlniuADQ5HQOY+cCpFHryqJttQ==
+X-Received: by 2002:a17:902:d510:b0:24e:9e47:2327 with SMTP id
+ d9443c01a7336-25170f37b63mr163658605ad.30.1757421911141; 
+ Tue, 09 Sep 2025 05:45:11 -0700 (PDT)
 Received: from [192.168.68.110] ([187.10.187.251])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-24b14e1b097sm202135235ad.21.2025.09.09.05.36.53
+ d9443c01a7336-252184a16c2sm87663885ad.38.2025.09.09.05.45.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Sep 2025 05:36:55 -0700 (PDT)
-Message-ID: <7f8a9622-cc0d-43f5-92d2-7e6d925e7546@ventanamicro.com>
-Date: Tue, 9 Sep 2025 09:36:52 -0300
+ Tue, 09 Sep 2025 05:45:10 -0700 (PDT)
+Message-ID: <aa5ea2e9-8d01-4d45-99fc-efa5e6061c8b@ventanamicro.com>
+Date: Tue, 9 Sep 2025 09:45:07 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] hw/intc: Save time_delta in RISC-V mtimer VMState
+Subject: Re: [PATCH 2/3] hw/intc: Save timers array in RISC-V mtimer VMState
 To: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
@@ -78,14 +78,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org, Peter Xu <peterx@redhat.com>,
  Fabiano Rosas <farosas@suse.de>
 References: <20250909-timers-v1-0-7ee18a9d8f4b@linux.alibaba.com>
- <20250909-timers-v1-1-7ee18a9d8f4b@linux.alibaba.com>
+ <20250909-timers-v1-2-7ee18a9d8f4b@linux.alibaba.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20250909-timers-v1-1-7ee18a9d8f4b@linux.alibaba.com>
+In-Reply-To: <20250909-timers-v1-2-7ee18a9d8f4b@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,76 +111,100 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 9/9/25 6:46 AM, TANG Tiancheng wrote:
-> In QEMU's RISC-V ACLINT timer model, 'mtime' is not stored directly as a
-> state variable. It is computed on demand as:
+> The current 'timecmp' field in vmstate_riscv_mtimer is insufficient to keep
+> timers functional after migration.
 > 
->      mtime = rtc_r + time_delta
+> If an mtimer's entry in 'mtimer->timers' is active at the time the snapshot
+> is taken, it means riscv_aclint_mtimer_write_timecmp() has written to
+> 'mtimecmp' and scheduled a timer into QEMU's main loop 'timer_list'.
 > 
-> where:
-> - 'rtc_r' is the current VM virtual time (in ticks) obtained via
->    cpu_riscv_read_rtc_raw() from QEMU_CLOCK_VIRTUAL.
-> - 'time_delta' is an offset applied when the guest writes a new 'mtime'
->    value via riscv_aclint_mtimer_write():
+> During snapshot save, these active timers must also be migrated; otherwise,
+> after snapshot load there is no mechanism to restore 'mtimer->timers' back
+> into the 'timer_list', and any pending timer events would be lost.
 > 
->      time_delta = value - rtc_r
+> QEMU's migration framework commonly uses VMSTATE_TIMER_xxx macros to save
+> and restore 'QEMUTimer' variables. However, 'timers' is a pointer array
+> with variable length, and vmstate.h did not previously provide a helper
+> macro for such type.
 > 
-> Under this design, 'rtc_r' is assumed to be monotonically increasing
-> during VM execution. Even if the guest writes an 'mtime' value smaller
-> than the current one (making 'time_delta' negative in signed arithmetic,
-> or underflow in unsigned arithmetic), the computed 'mtime' remains
-> correct because 'rtc_r_new > rtc_r_old':
-> 
->      mtime_new = rtc_r_new + (value - rtc_r_old)
-> 
-> However, this monotonicity assumption breaks on snapshot load.
-> 
-> Before restoring a snapshot, QEMU resets the guest, which calls
-> riscv_aclint_mtimer_reset_enter() to set 'mtime' to 0 and recompute
-> 'time_delta' as:
-> 
->      time_delta = 0 - rtc_r_reset
-> 
-> Here, the time_delta differs from the value that was present when the
-> snapshot was saved. As a result, subsequent reads produce a fixed offset
-> from the true mtime.
-> 
-> This can be observed with the 'date' command inside the guest: after loading
-> a snapshot, the reported time appears "frozen" at the save point, and only
-> resumes correctly after the guest has run long enough to compensate for the
-> erroneous offset.
-> 
-> The fix is to treat 'time_delta' as part of the device's migratable
-> state and save/restore it via vmstate. This preserves the correct
-> relation between 'rtc_r' and 'mtime' across snapshot save/load, ensuring
-> 'mtime' continues incrementing from the precise saved value after
-> restore.
+> This commit adds a new macro, 'VMSTATE_TIMER_PTR_VARRAY', to handle saving
+> and restoring a variable-length array of 'QEMUTimer *'. We then use this
+> macro to migrate the 'mtimer->timers' array, ensuring that timer events
+> remain scheduled correctly after snapshot load.
 > 
 > Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 > Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 > ---
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+LGTM but I wonder if changing one of the VMSTATE_TIMER_xxxx macros to accept
+variable length arrays is better than creating a new macro that only RISC-V
+cares about. Creating a new macro surely is easier and less messier than
+changing all existing callers though ...
 
->   hw/intc/riscv_aclint.c | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
+I'll let the migration folks weight in. Thanks,
+
+Daniel
+
+
+
+>   hw/intc/riscv_aclint.c      |  6 ++++--
+>   include/migration/vmstate.h | 14 ++++++++++++++
+>   2 files changed, 18 insertions(+), 2 deletions(-)
 > 
 > diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-> index 4623cfa029365c6cbdead4bd4a9f0d8b9e88b939..318a9c8248432a8cd4c3f3fa990739917ecf7ca1 100644
+> index 318a9c8248432a8cd4c3f3fa990739917ecf7ca1..9f4c36e965e2aa379d75c0a9f656177f0dd82a45 100644
 > --- a/hw/intc/riscv_aclint.c
 > +++ b/hw/intc/riscv_aclint.c
-> @@ -323,9 +323,10 @@ static void riscv_aclint_mtimer_reset_enter(Object *obj, ResetType type)
+> @@ -323,13 +323,15 @@ static void riscv_aclint_mtimer_reset_enter(Object *obj, ResetType type)
 >   
 >   static const VMStateDescription vmstate_riscv_mtimer = {
 >       .name = "riscv_mtimer",
-> -    .version_id = 1,
-> -    .minimum_version_id = 1,
-> +    .version_id = 2,
-> +    .minimum_version_id = 2,
+> -    .version_id = 2,
+> -    .minimum_version_id = 2,
+> +    .version_id = 3,
+> +    .minimum_version_id = 3,
 >       .fields = (const VMStateField[]) {
-> +            VMSTATE_UINT64(time_delta, RISCVAclintMTimerState),
+>               VMSTATE_UINT64(time_delta, RISCVAclintMTimerState),
 >               VMSTATE_VARRAY_UINT32(timecmp, RISCVAclintMTimerState,
 >                                     num_harts, 0,
 >                                     vmstate_info_uint64, uint64_t),
+> +            VMSTATE_TIMER_PTR_VARRAY(timers, RISCVAclintMTimerState,
+> +                                     num_harts),
+>               VMSTATE_END_OF_LIST()
+>           }
+>   };
+> diff --git a/include/migration/vmstate.h b/include/migration/vmstate.h
+> index 1ff7bd9ac425ba67cd5ca7ad97bcf570f9e19abe..255e403e5a103188712425d95a719d181e1a7202 100644
+> --- a/include/migration/vmstate.h
+> +++ b/include/migration/vmstate.h
+> @@ -522,6 +522,16 @@ extern const VMStateInfo vmstate_info_qlist;
+>       .offset     = vmstate_offset_array(_s, _f, _type*, _n),          \
+>   }
+>   
+> +#define VMSTATE_VARRAY_OF_POINTER_UINT32(_field, _state, _field_num, _version, _info, _type) { \
+> +    .name       = (stringify(_field)),                                    \
+> +    .version_id = (_version),                                             \
+> +    .num_offset = vmstate_offset_value(_state, _field_num, uint32_t),     \
+> +    .info       = &(_info),                                               \
+> +    .size       = sizeof(_type),                                          \
+> +    .flags      = VMS_VARRAY_UINT32 | VMS_ARRAY_OF_POINTER | VMS_POINTER, \
+> +    .offset     = vmstate_offset_pointer(_state, _field, _type),          \
+> +}
+> +
+>   #define VMSTATE_STRUCT_SUB_ARRAY(_field, _state, _start, _num, _version, _vmsd, _type) { \
+>       .name       = (stringify(_field)),                                     \
+>       .version_id = (_version),                                              \
+> @@ -1035,6 +1045,10 @@ extern const VMStateInfo vmstate_info_qlist;
+>   #define VMSTATE_TIMER_PTR_ARRAY(_f, _s, _n)                              \
+>       VMSTATE_ARRAY_OF_POINTER(_f, _s, _n, 0, vmstate_info_timer, QEMUTimer *)
+>   
+> +#define VMSTATE_TIMER_PTR_VARRAY(_f, _s, _f_n)                        \
+> +VMSTATE_VARRAY_OF_POINTER_UINT32(_f, _s, _f_n, 0, vmstate_info_timer, \
+> +                                                        QEMUTimer *)
+> +
+>   #define VMSTATE_TIMER_TEST(_f, _s, _test)                             \
+>       VMSTATE_SINGLE_TEST(_f, _s, _test, 0, vmstate_info_timer, QEMUTimer)
+>   
 > 
 
 
