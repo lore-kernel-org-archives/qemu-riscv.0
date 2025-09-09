@@ -4,70 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FEBCAC587
-	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Sep 2025 09:11:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012D5CAC583
+	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Sep 2025 12:37:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uvuMo-0000Lk-M6; Tue, 09 Sep 2025 05:10:22 -0400
+	id 1uvxau-0007vR-5u; Tue, 09 Sep 2025 08:37:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xb@ultrarisc.com>)
- id 1uvuMh-0000Id-0n; Tue, 09 Sep 2025 05:10:15 -0400
-Received: from [218.76.62.146] (helo=ultrarisc.com)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <xb@ultrarisc.com>)
- id 1uvuMc-0006m0-Al; Tue, 09 Sep 2025 05:10:13 -0400
-Received: from ur-dp1000.. (unknown [192.168.100.1])
- by localhost.localdomain (Coremail) with SMTP id
- AQAAfwDnYNAE779o6nwsAA--.43713S4; 
- Tue, 09 Sep 2025 17:11:08 +0800 (CST)
-From: Xie Bo <xb@ultrarisc.com>
-To: qemu-devel@nongnu.org
-Cc: ajones@ventanamicro.com, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- anup@brainfault.org, alistair.francis@wdc.com, rkrcmar@ventanamicro.com,
- palmer@dabbelt.com, xiamy@ultrarisc.com, Xie Bo <xb@ultrarisc.com>
-Subject: [PATCH v5 for v10.0.0 2/2]
- =?UTF-8?q?target/riscv/kvm=EF=BC=9AFixed=20the=20i?=
- =?UTF-8?q?ssue=20of=20resume=20after=20QEMU+KVM=20migration?=
-Date: Tue,  9 Sep 2025 17:09:17 +0800
-Message-ID: <20250909090917.21301-3-xb@ultrarisc.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250909090917.21301-1-xb@ultrarisc.com>
-References: <20250818-e7e56e26bbf62a23417c2567@orel>
- <20250909090917.21301-1-xb@ultrarisc.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uvxar-0007v4-15
+ for qemu-riscv@nongnu.org; Tue, 09 Sep 2025 08:37:05 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uvxam-0000Df-Gw
+ for qemu-riscv@nongnu.org; Tue, 09 Sep 2025 08:37:04 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-b4c72885c8bso4521296a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 09 Sep 2025 05:36:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1757421416; x=1758026216; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mPyGQ6358lK6j1oEuTF1y5eOpaLNaFJppXt5tnxqm04=;
+ b=EJA0LjeRotW20L6fRYsltHzxX+JQSRRTXc9+iTRm9LXgPOxIOX7dB4YbiHlAJ4wVh/
+ yKmbGmRTFDpqPqtibzFk9dJMoV0XNfH3DyKXxB0ZhS1o5u3sPMRuf1whsQvY49xYlQ6o
+ zMc28X1vtvxIH3Xxf/59gXuhtgCs4kfT1VJBiY9ca4DfAsKN8Kuic62BUMhQC9PUvhmx
+ Q4lsqjSPdYLaX6yW1oKAeFDCAfzivV9X6B4/CsilxOU1RsAwMsfq93oajPPgCFuw/ntm
+ ff0B/X2MAYKWMthBRdOB4t9SkLgghUjCObfvD2DgBpx6X0hxQK0YMEX4WhRDj53E+ZJb
+ uMzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757421416; x=1758026216;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mPyGQ6358lK6j1oEuTF1y5eOpaLNaFJppXt5tnxqm04=;
+ b=Mz2caM64b9bGkMgwviv7qxOlPptY3flU8ydzetUrAmbhim/m6j1Lg43Ri/nkO9TDOY
+ 0601VtPLhorUsQdFWbDHjHnZqzXeRIzmKtQsclp8sQK2B1byDaHWgumhBO4DWE4v6iGK
+ jgW8cMv5dkHjv/SHyRVlVx6bUj4pqXVfLVCN7KdDUdbLiHVdLH1XCkPMvgz+8zh438yH
+ gh4MNnFclXqCxBNL8DG3dB1QzqdisoUjXfNyrAgZfjl8Pwo5z6v0qg69eYWlblFJNuFG
+ 1gLkX2srl5beKrUXJkTPzfSZGf2bB8WjYgKPYvHj7pCLhmecLmT1W8exQyNfRjcKCbxs
+ dWog==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWEPQNdiTbNM9r9LED2uyOXAKyXkZBCNVwxK1s+h04FpSkAjkPjIKC9IqQ9YwmOAWE8xjbVdz/NLVfw@nongnu.org
+X-Gm-Message-State: AOJu0YxP0nUYmJvB0VHb9FTUaXpFI+Iw6f3nQHmg2ZqK4FXUXG4bqBu1
+ GblivkO/2WMe6n6mBMXovXbvQD4N+BhjBCDReR+4fxrQy8OFk6Zw6/CQ/BQhbmkLRQ8=
+X-Gm-Gg: ASbGncvTsmMU282chz1qd4y1gIDs1C03UML+xWr/haVWioj1BUDLO2LUeY2v1RjGvRh
+ O/ny8nG1z+RQgJfGK8CRRKhjOnkUZmop2wqq0p834mtURXlIjaFdEToZtgnew80V4ylkpTmPtpO
+ Xb+z06Q4R6uJZaOjSmX9inlyJg0RJwfMxmtPjAOWcJx/o2vK50pDhqzTGFi9RsoFfytYsO3Xk6q
+ aEdsPg4K0EwS4zBG9Sst4X81x71Vox5+ER4Z1xMnccP7ryAkG3GYI9aEwE8cPLOMP39yyaMsWAo
+ EAqJaMkXVPXbfJtqIwA48tZpVMxdUV6Wv+Zsk7A39j6WE/dGN52W3mySRdwyrhOvNKt13aiMELV
+ 9Ar634+EXuykSbtn6gBzxekFczoA9Arg3ORkJ
+X-Google-Smtp-Source: AGHT+IHpZD6iVITVFteapE5Wsluy9IMEJ5Ar0efHpX6dyD5NSNzwt1xKf4+eXxnRzTM+i8FtMyeadQ==
+X-Received: by 2002:a17:902:e848:b0:246:d70e:ea82 with SMTP id
+ d9443c01a7336-2516ef591e9mr193817465ad.5.1757421416293; 
+ Tue, 09 Sep 2025 05:36:56 -0700 (PDT)
+Received: from [192.168.68.110] ([187.10.187.251])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-24b14e1b097sm202135235ad.21.2025.09.09.05.36.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 09 Sep 2025 05:36:55 -0700 (PDT)
+Message-ID: <7f8a9622-cc0d-43f5-92d2-7e6d925e7546@ventanamicro.com>
+Date: Tue, 9 Sep 2025 09:36:52 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAfwDnYNAE779o6nwsAA--.43713S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxJF1kJF1UCr4rCr15Cw47CFg_yoW7Gr48pr
- s8GFWDCryxJrWxXw1fJ34DXFn5Gw47GanxC3y09r4akF45GrZ09r1kKay2yrn5Jry8Ar12
- 9F45AFy3ua15tFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUmm14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
- ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UM2AI
- xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
- vE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
- r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04
- v7MxkF7I0En4kS14v26r1q6r43MxkIecxEwVCm-wCF04k20xvY0x0EwIxGrwCFx2IqxVCF
- s4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r
- 1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWU
- JVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r
- 1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1U
- YxBIdaVFxhVjvjDU0xZFpf9x0JUczV8UUUUU=
-X-CM-SenderInfo: l0e63zxwud2x1vfou0bp/1tbiAQAAB2i-hXAAIAAAsE
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 218.76.62.146 (failed)
-Received-SPF: pass client-ip=218.76.62.146; envelope-from=xb@ultrarisc.com;
- helo=ultrarisc.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] hw/intc: Save time_delta in RISC-V mtimer VMState
+To: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org, Peter Xu <peterx@redhat.com>,
+ Fabiano Rosas <farosas@suse.de>
+References: <20250909-timers-v1-0-7ee18a9d8f4b@linux.alibaba.com>
+ <20250909-timers-v1-1-7ee18a9d8f4b@linux.alibaba.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <20250909-timers-v1-1-7ee18a9d8f4b@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,161 +108,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch fixes two migration issues for virtual machines in KVM mode:
 
-1.It saves and restores the vCPU's privilege mode to ensure that the vCPU's privilege mode is correct after migration.
-2.It saves and restores the vCPU's mp_state (runnable or stopped) and includes this state in the migration sequence, upgrading the vmstate version to ensure
-that the vCPU's mp_state is correct after migration.
 
-Signed-off-by: Xie Bo <xb@ultrarisc.com>
----
- target/riscv/kvm/kvm-cpu.c   | 59 ++++++++++++++++++++++++++++--------
- target/riscv/kvm/kvm_riscv.h |  3 +-
- target/riscv/machine.c       |  5 +--
- 3 files changed, 51 insertions(+), 16 deletions(-)
+On 9/9/25 6:46 AM, TANG Tiancheng wrote:
+> In QEMU's RISC-V ACLINT timer model, 'mtime' is not stored directly as a
+> state variable. It is computed on demand as:
+> 
+>      mtime = rtc_r + time_delta
+> 
+> where:
+> - 'rtc_r' is the current VM virtual time (in ticks) obtained via
+>    cpu_riscv_read_rtc_raw() from QEMU_CLOCK_VIRTUAL.
+> - 'time_delta' is an offset applied when the guest writes a new 'mtime'
+>    value via riscv_aclint_mtimer_write():
+> 
+>      time_delta = value - rtc_r
+> 
+> Under this design, 'rtc_r' is assumed to be monotonically increasing
+> during VM execution. Even if the guest writes an 'mtime' value smaller
+> than the current one (making 'time_delta' negative in signed arithmetic,
+> or underflow in unsigned arithmetic), the computed 'mtime' remains
+> correct because 'rtc_r_new > rtc_r_old':
+> 
+>      mtime_new = rtc_r_new + (value - rtc_r_old)
+> 
+> However, this monotonicity assumption breaks on snapshot load.
+> 
+> Before restoring a snapshot, QEMU resets the guest, which calls
+> riscv_aclint_mtimer_reset_enter() to set 'mtime' to 0 and recompute
+> 'time_delta' as:
+> 
+>      time_delta = 0 - rtc_r_reset
+> 
+> Here, the time_delta differs from the value that was present when the
+> snapshot was saved. As a result, subsequent reads produce a fixed offset
+> from the true mtime.
+> 
+> This can be observed with the 'date' command inside the guest: after loading
+> a snapshot, the reported time appears "frozen" at the save point, and only
+> resumes correctly after the guest has run long enough to compensate for the
+> erroneous offset.
+> 
+> The fix is to treat 'time_delta' as part of the device's migratable
+> state and save/restore it via vmstate. This preserves the correct
+> relation between 'rtc_r' and 'mtime' across snapshot save/load, ensuring
+> 'mtime' continues incrementing from the precise saved value after
+> restore.
+> 
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+> ---
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 0f4997a918..1b09c505d3 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -576,6 +576,12 @@ static int kvm_riscv_get_regs_core(CPUState *cs)
-     }
-     env->pc = reg;
- 
-+    ret = kvm_get_one_reg(cs, RISCV_CORE_REG(env, mode), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->priv = reg;
-+
-     for (i = 1; i < 32; i++) {
-         uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
-         ret = kvm_get_one_reg(cs, id, &reg);
-@@ -601,6 +607,12 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
-         return ret;
-     }
- 
-+    reg = env->priv;
-+    ret = kvm_set_one_reg(cs, RISCV_CORE_REG(env, mode), &reg);
-+    if (ret) {
-+        return ret;
-+    }
-+
-     for (i = 1; i < 32; i++) {
-         uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
-         reg = env->gpr[i];
-@@ -1244,25 +1256,51 @@ int kvm_arch_get_registers(CPUState *cs, Error **errp)
-         return ret;
-     }
- 
-+    ret = kvm_riscv_sync_mpstate_to_qemu(cs);
-+    if (ret) {
-+        return ret;
-+    }
-+
-     return ret;
- }
- 
--int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state)
-+int kvm_riscv_sync_mpstate_to_kvm(CPUState *cs)
- {
-+    int ret = 0;
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
-+
-     if (cap_has_mp_state) {
-         struct kvm_mp_state mp_state = {
--            .mp_state = state
-+            .mp_state = env->mp_state
-         };
- 
--        int ret = kvm_vcpu_ioctl(CPU(cpu), KVM_SET_MP_STATE, &mp_state);
-+        ret = kvm_vcpu_ioctl(cs, KVM_SET_MP_STATE, &mp_state);
-         if (ret) {
--            fprintf(stderr, "%s: failed to sync MP_STATE %d/%s\n",
-+            fprintf(stderr, "%s: failed to sync MP_STATE to KVM %d/%s\n",
-                     __func__, ret, strerror(-ret));
--            return -1;
-         }
-     }
- 
--    return 0;
-+    return ret;
-+}
-+
-+int kvm_riscv_sync_mpstate_to_qemu(CPUState *cs)
-+{
-+    int ret = 0;
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
-+
-+    if (cap_has_mp_state) {
-+        struct kvm_mp_state mp_state;
-+
-+        ret = kvm_vcpu_ioctl(cs, KVM_GET_MP_STATE, &mp_state);
-+        if (ret) {
-+            fprintf(stderr, "%s: failed to sync MP_STATE to QEMU %d/%s\n",
-+                    __func__, ret, strerror(-ret));
-+        }
-+        env->mp_state = mp_state.mp_state;
-+    }
-+
-+    return ret;
- }
- 
- int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
-@@ -1289,13 +1327,8 @@ int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
-         return ret;
-     }
- 
--    if (KVM_PUT_RESET_STATE == level) {
--        RISCVCPU *cpu = RISCV_CPU(cs);
--        if (cs->cpu_index == 0) {
--            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_RUNNABLE);
--        } else {
--            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_STOPPED);
--        }
-+    if (level >= KVM_PUT_RESET_STATE) {
-+        ret = kvm_riscv_sync_mpstate_to_kvm(cs);
-         if (ret) {
-             return ret;
-         }
-diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
-index b2bcd1041f..953db94160 100644
---- a/target/riscv/kvm/kvm_riscv.h
-+++ b/target/riscv/kvm/kvm_riscv.h
-@@ -28,7 +28,8 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
-                           uint64_t aplic_base, uint64_t imsic_base,
-                           uint64_t guest_num);
- void riscv_kvm_aplic_request(void *opaque, int irq, int level);
--int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
-+int kvm_riscv_sync_mpstate_to_kvm(CPUState *cs);
-+int kvm_riscv_sync_mpstate_to_qemu(CPUState *cs);
- void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
- uint64_t kvm_riscv_get_timebase_frequency(RISCVCPU *cpu);
- 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 889e2b6570..8562a0a1d6 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -401,8 +401,8 @@ static const VMStateDescription vmstate_ssp = {
- 
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
--    .version_id = 10,
--    .minimum_version_id = 10,
-+    .version_id = 11,
-+    .minimum_version_id = 11,
-     .post_load = riscv_cpu_post_load,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-@@ -422,6 +422,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UNUSED(4),
-         VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
-         VMSTATE_UINTTL(env.priv, RISCVCPU),
-+        VMSTATE_UINT32(env.mp_state, RISCVCPU),
-         VMSTATE_BOOL(env.virt_enabled, RISCVCPU),
-         VMSTATE_UINT64(env.resetvec, RISCVCPU),
-         VMSTATE_UINTTL(env.mhartid, RISCVCPU),
--- 
-2.43.0
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   hw/intc/riscv_aclint.c | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+> index 4623cfa029365c6cbdead4bd4a9f0d8b9e88b939..318a9c8248432a8cd4c3f3fa990739917ecf7ca1 100644
+> --- a/hw/intc/riscv_aclint.c
+> +++ b/hw/intc/riscv_aclint.c
+> @@ -323,9 +323,10 @@ static void riscv_aclint_mtimer_reset_enter(Object *obj, ResetType type)
+>   
+>   static const VMStateDescription vmstate_riscv_mtimer = {
+>       .name = "riscv_mtimer",
+> -    .version_id = 1,
+> -    .minimum_version_id = 1,
+> +    .version_id = 2,
+> +    .minimum_version_id = 2,
+>       .fields = (const VMStateField[]) {
+> +            VMSTATE_UINT64(time_delta, RISCVAclintMTimerState),
+>               VMSTATE_VARRAY_UINT32(timecmp, RISCVAclintMTimerState,
+>                                     num_harts, 0,
+>                                     vmstate_info_uint64, uint64_t),
+> 
 
 
