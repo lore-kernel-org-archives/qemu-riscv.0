@@ -4,94 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D59ECA0FED
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Sep 2025 09:54:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A3ECA101F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Sep 2025 12:55:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uwHWF-0007uB-Qy; Wed, 10 Sep 2025 05:53:40 -0400
+	id 1uwKM0-0007If-S7; Wed, 10 Sep 2025 08:55:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1uwHWB-0007sz-G2; Wed, 10 Sep 2025 05:53:36 -0400
-Received: from isrv.corpit.ru ([212.248.84.144])
+ (Exim 4.90_1) (envelope-from <guoyaxing@bosc.ac.cn>)
+ id 1uwGy2-0008Gl-Rc
+ for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 05:18:18 -0400
+Received: from [115.124.28.92] (helo=out28-92.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1uwHW5-0001ub-Ke; Wed, 10 Sep 2025 05:53:34 -0400
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 6B5171522CA;
- Wed, 10 Sep 2025 12:53:08 +0300 (MSK)
-Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
- by tsrv.corpit.ru (Postfix) with ESMTP id D115527BA43;
- Wed, 10 Sep 2025 12:53:14 +0300 (MSK)
-Message-ID: <9e0c71fe-55fb-4ca9-aac4-40d38a77e07a@tls.msk.ru>
-Date: Wed, 10 Sep 2025 12:53:14 +0300
+ (Exim 4.90_1) (envelope-from <guoyaxing@bosc.ac.cn>)
+ id 1uwGxl-0005Pb-VL
+ for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 05:18:15 -0400
+Received: from LAPTOP-2KT3QRS7.localdomain(mailfrom:guoyaxing@bosc.ac.cn
+ fp:SMTPD_---.ebxwqBv_1757495403 cluster:ay29) by smtp.aliyun-inc.com;
+ Wed, 10 Sep 2025 17:10:22 +0800
+From: Yaxing Guo <guoyaxing@bosc.ac.cn>
+To: qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ guoyaxing@bosc.ac.cn, wangran@bosc.ac.cn
+Subject: [PATCH v1] hw/riscv/virt.c: Modify the riscv-iommu dts node
+Date: Wed, 10 Sep 2025 17:10:02 +0800
+Message-Id: <20250910091002.88140-1-guoyaxing@bosc.ac.cn>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?Q?Re=3A_=5BPATCH_v6_for_v10=2E0=2E0_0/2=5D_target/riscv?=
- =?UTF-8?Q?=EF=BC=9AFix_riscv64_kvm_migration?=
-To: Xie Bo <xb@ultrarisc.com>, qemu-devel@nongnu.org
-Cc: ajones@ventanamicro.com, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- anup@brainfault.org, alistair.francis@wdc.com, rkrcmar@ventanamicro.com,
- palmer@dabbelt.com, xiamy@ultrarisc.com
-References: <20250910093529.614305-1-xb@ultrarisc.com>
-Content-Language: en-US, ru-RU
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- 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
-In-Reply-To: <20250910093529.614305-1-xb@ultrarisc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.92 (deferred)
+Received-SPF: pass client-ip=115.124.28.92; envelope-from=guoyaxing@bosc.ac.cn;
+ helo=out28-92.mail.aliyun.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RDNS_NONE=0.793, SPF_PASS=-0.001, T_SPF_HELO_TEMPERROR=0.01,
+ UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 10 Sep 2025 08:55:06 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -106,19 +61,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10.09.2025 12:35, Xie Bo wrote:
-> This series(v6) replaces the earlier series patch"[PATCH v5 for v10.0.0 0/2]
-> target/riscv: Fix riscv64 kvm migration".
+The current iommu dts node generated in virt machine is only
+applicable to the case where using aia. If the parameter is
+set to aia=none(that is, using plic) at startup, the iommu
+driver in Linux will fail to initialize due to parsing interrupts
+properties, causing the system to be unabled to use iommu properly.
 
-Hi!
+So, when aia_type is VIRT_AIA_TYPE_NONE, generate interrupts
+attributes applicable to plic.
 
-You're targetting qemu 10.0, while we already released 10.1,
-and the next release is 10.2.
+Signed-off-by: Yaxing Guo <guoyaxing@bosc.ac.cn>
+---
+ hw/riscv/virt.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
-Does it mean your patchset should be applied to 10.2, and
-cherry-picked to stable 10.0.x and 10.1.x series?
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 47e573f85a..2d7a1f3ac6 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1091,13 +1091,19 @@ static void create_fdt_iommu_sys(RISCVVirtState *s, uint32_t irq_chip,
+     qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg", 2, addr, 2, size);
+     qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip);
+ 
+-    qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
+-        iommu_irq_map[0], FDT_IRQ_TYPE_EDGE_LOW,
+-        iommu_irq_map[1], FDT_IRQ_TYPE_EDGE_LOW,
+-        iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
+-        iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
++    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
++        qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
++            iommu_irq_map[0], iommu_irq_map[1],
++            iommu_irq_map[2], iommu_irq_map[3]);
++    } else {
++        qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
++            iommu_irq_map[0], FDT_IRQ_TYPE_EDGE_LOW,
++            iommu_irq_map[1], FDT_IRQ_TYPE_EDGE_LOW,
++            iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
++            iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
+ 
+-    qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
++            qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
++    }
+ 
+     *iommu_sys_phandle = iommu_phandle;
+ }
+-- 
+2.34.1
 
-Thanks,
-
-/mjt
 
