@@ -4,49 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A3ECA101F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Sep 2025 12:55:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2AD9CA101F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Sep 2025 15:05:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uwKM0-0007If-S7; Wed, 10 Sep 2025 08:55:17 -0400
+	id 1uwMOQ-0005c8-EH; Wed, 10 Sep 2025 11:05:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guoyaxing@bosc.ac.cn>)
- id 1uwGy2-0008Gl-Rc
- for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 05:18:18 -0400
-Received: from [115.124.28.92] (helo=out28-92.mail.aliyun.com)
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1uwMOK-0005VR-D5; Wed, 10 Sep 2025 11:05:48 -0400
+Received: from [115.124.30.99] (helo=out30-99.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guoyaxing@bosc.ac.cn>)
- id 1uwGxl-0005Pb-VL
- for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 05:18:15 -0400
-Received: from LAPTOP-2KT3QRS7.localdomain(mailfrom:guoyaxing@bosc.ac.cn
- fp:SMTPD_---.ebxwqBv_1757495403 cluster:ay29) by smtp.aliyun-inc.com;
- Wed, 10 Sep 2025 17:10:22 +0800
-From: Yaxing Guo <guoyaxing@bosc.ac.cn>
-To: qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- guoyaxing@bosc.ac.cn, wangran@bosc.ac.cn
-Subject: [PATCH v1] hw/riscv/virt.c: Modify the riscv-iommu dts node
-Date: Wed, 10 Sep 2025 17:10:02 +0800
-Message-Id: <20250910091002.88140-1-guoyaxing@bosc.ac.cn>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
+ id 1uwMOF-0003f7-So; Wed, 10 Sep 2025 11:05:48 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1757516722; h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To;
+ bh=3hTwrgSwdp3Rfn+8E33xqC1mmHPXNZ2zKgx8QMkf6aE=;
+ b=jmgO5tCBHWIRdwvTECIAaNSVlhUkrjJxYNb0q0Xy6LaNrG2F3/QDcDnwfLl/qH0E0mCfjabSORxXp9E9QZd2gm7j8AKfR0Fe9q2/6t0S/kKsHrnJdMngk2izB1z3RDdJOAkUSK/1UOrTL6Y+R8cq1T748ypHYQh++ddEvHgikdQ=
+Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
+ fp:SMTPD_---0WniJAy3_1757516717 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 10 Sep 2025 23:05:20 +0800
+From: TANG Tiancheng <lyndra@linux.alibaba.com>
+Subject: [PATCH v2 0/4] Fix RISC-V timer migration issues
+Date: Wed, 10 Sep 2025 23:04:24 +0800
+Message-Id: <20250910-timers-v2-0-31359f1f6ee8@linux.alibaba.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.92 (deferred)
-Received-SPF: pass client-ip=115.124.28.92; envelope-from=guoyaxing@bosc.ac.cn;
- helo=out28-92.mail.aliyun.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_PASS=-0.001, T_SPF_HELO_TEMPERROR=0.01,
- UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHiTwWgC/2XMyw7CIBCF4VdpZi0NELXgyvcwXQx0aifpxUAlN
+ Q3vLnbr8j85+XaIFJgi3KodAiWOvMwl9KkCP+D8JMFdadBSX6SVVqw8UYhCGa/9tXEKNUI5vwL
+ 1vB3Qoy09cFyX8DncpH7rH5GUkKIhUgZtZ/qzu488v7caR3bosPbLBG3O+QvxfZrhpAAAAA==
+X-Change-ID: 20250909-timers-18c2c67b1a2a
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
+ Peter Xu <peterx@redhat.com>, Fabiano Rosas <farosas@suse.de>, 
+ TANG Tiancheng <lyndra@linux.alibaba.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1757516719; l=2207;
+ i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
+ bh=qhskT1NkJirVHE9x1Qr/P1472g+XACtByXEXvsPkUIU=;
+ b=ZGnZciczPKSXNsu9v03kmH1SviK+rHMy0PAiBZISnpa3Ek32ZfKMzTgWRmo2RQZlR2YFhiO/d
+ 4CUf+KA2h61CCVtNuCtr3v2ydW2XhaK0Y12muCWNuE4ag2ty5FdCLyv
+X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
+ pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.99 (deferred)
+Received-SPF: pass client-ip=115.124.30.99;
+ envelope-from=lyndra@linux.alibaba.com; helo=out30-99.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 10 Sep 2025 08:55:06 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,51 +80,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The current iommu dts node generated in virt machine is only
-applicable to the case where using aia. If the parameter is
-set to aia=none(that is, using plic) at startup, the iommu
-driver in Linux will fail to initialize due to parsing interrupts
-properties, causing the system to be unabled to use iommu properly.
+This patch set fixes several timer-related migration issues in QEMU's
+RISC-V implementation that cause timer events to be lost or behave
+incorrectly after snapshot save/restore or live migration.
 
-So, when aia_type is VIRT_AIA_TYPE_NONE, generate interrupts
-attributes applicable to plic.
+The problems addressed are:
 
-Signed-off-by: Yaxing Guo <guoyaxing@bosc.ac.cn>
+1. ACLINT mtimer time_delta not migrated: The time_delta field in
+   RISCVAclintMTimerState was missing from vmstate, causing incorrect
+   mtime values after snapshot restore. This resulted in guest time
+   appearing "frozen" until enough virtual time elapsed to compensate
+   for the offset error.
+
+2. ACLINT mtimer timers array not migrated: Active timer events
+   scheduled via riscv_aclint_mtimer_write_timecmp() were not being
+   migrated, causing pending timer interrupts to be lost after restore.
+
+3. CPU stimer/vstimer not migrated: The S-mode and VS-mode timer
+   pointers in CPURISCVState were missing from vmstate_riscv_cpu,
+   causing supervisor-level timer events to be lost.
+
+The patch set introduces a new VMSTATE_TIMER_PTR_VARRAY macro to handle
+migration of variable-length timer pointer arrays, and adds the missing
+timer fields to the appropriate vmstate structures.
+
+Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 ---
- hw/riscv/virt.c | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+Changes in v2:
+- Split VMSTATE_VARRAY_OF_POINTER_UINT32() into a separate patch,
+  and define VMSTATE_TIMER_PTR_VARRAY() in riscv_aclint.h.
+- Added Reviewed-by from Daniel Henrique Barboza.
+- Link to v1: https://lore.kernel.org/qemu-devel/20250909-timers-v1-0-7ee18a9d8f4b@linux.alibaba.com
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 47e573f85a..2d7a1f3ac6 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1091,13 +1091,19 @@ static void create_fdt_iommu_sys(RISCVVirtState *s, uint32_t irq_chip,
-     qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg", 2, addr, 2, size);
-     qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip);
- 
--    qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
--        iommu_irq_map[0], FDT_IRQ_TYPE_EDGE_LOW,
--        iommu_irq_map[1], FDT_IRQ_TYPE_EDGE_LOW,
--        iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
--        iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
-+    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-+        qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
-+            iommu_irq_map[0], iommu_irq_map[1],
-+            iommu_irq_map[2], iommu_irq_map[3]);
-+    } else {
-+        qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
-+            iommu_irq_map[0], FDT_IRQ_TYPE_EDGE_LOW,
-+            iommu_irq_map[1], FDT_IRQ_TYPE_EDGE_LOW,
-+            iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
-+            iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
- 
--    qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
-+            qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
-+    }
- 
-     *iommu_sys_phandle = iommu_phandle;
- }
+---
+TANG Tiancheng (4):
+      hw/intc: Save time_delta in RISC-V mtimer VMState
+      include/migration: Add support for a variable-length array of UINT32 pointers
+      hw/intc: Save timers array in RISC-V mtimer VMState
+      target/riscv: Save stimer and vstimer in CPU vmstate
+
+ hw/intc/riscv_aclint.c         |  7 +++++--
+ include/hw/intc/riscv_aclint.h |  4 ++++
+ include/migration/vmstate.h    | 10 ++++++++++
+ target/riscv/machine.c         | 25 +++++++++++++++++++++++++
+ 4 files changed, 44 insertions(+), 2 deletions(-)
+---
+base-commit: 6a9fa5ef3230a7d51e0d953a59ee9ef10af705b8
+change-id: 20250909-timers-18c2c67b1a2a
+
+Best regards,
 -- 
-2.34.1
+TANG Tiancheng <lyndra@linux.alibaba.com>
 
 
