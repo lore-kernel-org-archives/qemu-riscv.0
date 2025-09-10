@@ -4,88 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4408DCA101F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Sep 2025 16:38:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C845CAC587
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Sep 2025 16:42:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uwNp6-0007vo-2U; Wed, 10 Sep 2025 12:37:32 -0400
+	id 1uwNtQ-0001dg-Nc; Wed, 10 Sep 2025 12:42:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1uwNp3-0007v6-N9
- for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 12:37:30 -0400
-Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34])
+ id 1uwNtO-0001cx-H6
+ for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 12:41:58 -0400
+Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1uwNox-0000K8-CW
- for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 12:37:29 -0400
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-8876462a34aso202309339f.2
- for <qemu-riscv@nongnu.org>; Wed, 10 Sep 2025 09:37:21 -0700 (PDT)
+ id 1uwNtL-00018S-TA
+ for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 12:41:58 -0400
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-8876462a34aso202748639f.2
+ for <qemu-riscv@nongnu.org>; Wed, 10 Sep 2025 09:41:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1757522240; x=1758127040; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=77Sp7vE/cjj+LkmFLQCy5EPSzbhLfnme7P3vlpAn3y0=;
- b=jxe7hBmuZAsLlCshqvHH9gXJovIUQK+cP4NkzAIb0Ytf8TQ+brX2RVeJ798KyLcOVW
- Kqni55TpQ96HhHp3Dl5AHYdeg1lTT3I6VMriKTIJ1gy4b3gMqa+vIo72+0Tw+uGv3oFT
- uGANQPhVol3WWe4Z9wfN8th4ttk062ZzfcnagY6LuBaLAwV6d5nfm82Yoz15/D4D+vfC
- cDnKwMQwAC+N2meZHwmHG+ZAyXAq768060Oz5YFpsDJrlAggGMbabllrZNcpVcBVh026
- JrrLm5IWBZ9e3iciWqmWbSkcmUf6yt6mcjQD+PqRRkSKAsGTBypI7cqMhW72hyimIV3K
- sX4g==
+ d=ventanamicro.com; s=google; t=1757522514; x=1758127314; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=xL7JQIWeInW0ZYmfRZSfWkrWj7pxXYJHUuLb/gsAAIs=;
+ b=iC+KSpNIMzqoSxn80ASDtzMGBVYQO+piiURuAPL8pTiwxYs9b2jBHk80VECYSVW8PL
+ HP3ihPVpsF/MI9oC/m4sTRAQGIInOz3vwIBFW6JlhQFxAddgISGcA0ZZfz8DLMYp4JnI
+ OFDM+USIujVf5PfRmH3NKrHLC5rteav5Elm4GWjVD75YXqZsM9f6aedz27rZGLNNM++u
+ GPgyA8UUKZgvVm49BurZS8CuWGqAkYGzJSDFFS2/XLjxylKHody551GMg0OL/p40UpGY
+ YcGhnxYZLu6+b4KI7U0F9o9RWRzry/fJWJ8xkSDBmF1wdCtTCKMxdOXMrhP7QlHFFA2y
+ egLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757522240; x=1758127040;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=77Sp7vE/cjj+LkmFLQCy5EPSzbhLfnme7P3vlpAn3y0=;
- b=SrSpfYSC9w9fq4sZcBvERrIFeR0htA7Bk5uz06JkNmnH6ry/y9ddigCisEFB3pzalV
- is7Tct/gFJMvRr35faRUUJ7511GlcAiaNE5xfSm/i/hfs6NWw1T/QYfX1GSVqW+VUVBd
- KvLaaNBGxtWAaoNmGwmByoKbk8EDqbHNdtpeiNrZg82Zno+jX6w//oyMH0944UdmTXCE
- /3+xFXUxg4AQ78GUqPvTa3snQtFF9i9fVGC7ci6TejxiEPs83kC8jN9TkULm1Pl0cEiN
- yFUQnMrIsiAak6WTA3G/GWwMxql5/6599aePXbaOyYxkmk1KwYELbPrRx8hMHcRzQQUC
- Tqdw==
+ d=1e100.net; s=20230601; t=1757522514; x=1758127314;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xL7JQIWeInW0ZYmfRZSfWkrWj7pxXYJHUuLb/gsAAIs=;
+ b=jcGfo4G5kS9L0UAibq86tC4wdjS0K3YJsQBTSPFy5X1DNEawKsKbpO/mJHU3FNL4tG
+ tlOS1TtP2S4L1uSFnYorOz1fdbJIlRbZBuak0d8ds7f8RtBABEnBKV6KO5aZYTGp9qR0
+ wHfnm92C8rxgdUqdSEl8zhcFAz2PY+moKLTkTnht/1bj7COIb4VkYBK1BrzOghIK/6yG
+ b61Zrc46AuJmcvSl3jTx9Gzih2t1YxNn9kVmdlIeO5E0bR5NPWtnExYqyBdTPA1TFwTP
+ /lXjGw/2MUo4dUYOIWnFhQZMjYdjlxuqiytpel1G6Rnon4cpQm9VvRQncadB7QGAr3Nu
+ pekA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQVwd4XRgJnGQCFdsKZA/k0ZL/CDV200aQAA6OXFpUBJm54G+l5i6XqGr3acpAckR/YzLSxmfHKv4r@nongnu.org
-X-Gm-Message-State: AOJu0YwGPomrQhyCMZ4GRAW8R3LIeNOfo+jvbaDXqzW5y+z2sfTtjysF
- o7vdHGJL1bunrK3en67Nuxa1ienyhzqn0NQgeBrpG03V+MP856Hxh2o9YJHD7/5qe/s=
-X-Gm-Gg: ASbGnct7ZptKW30cy9uxGraQkz3jTaMA315n9+TLvD4Yc6LK+4vKhRkwa0G6LUMcbKN
- JBQdmTED6ElImM4YK/Xt7eI1oxWD5j5E11lEASQXI4++uS73JhCunlMCM2JatvGnuyzkkdsPES4
- ZFUTjZLhTxUoPAzEhMq3dD5dCQWcp1E+tH9vsm5kwnfwJK0inAEMRcvSK91w6P76VkXfp6lPW00
- FzunWVTXTkOCQjhvzpMieCIijtN78dmK0wlZX6O194dqymJRMUH9sV+Tz9z3czLrDfb7XAqb4V9
- D/bkhPHCED+bNVzPZM8J+GBZe8Ss1e2QpddTEEmxYTGbu000S8szeauumwgQvkMFhNTlhX9/DR2
- GfbONd+SEz0ciKI47k+n6qMui
-X-Google-Smtp-Source: AGHT+IEj51rHSaWEmWFKrq4fsZ9TFd6EsLaWMqTM/n5mbFm9ZUpUVtMN0kilDtFpe/LMcJPFArKfEw==
-X-Received: by 2002:a05:6602:2ccb:b0:887:5ebe:bb9c with SMTP id
- ca18e2360f4ac-887776bb156mr2366486539f.14.1757522239709; 
- Wed, 10 Sep 2025 09:37:19 -0700 (PDT)
+ AJvYcCWM2upPTEDgj+8JmNEheVS7WTQ795ITz8fJJ9A15Ec+axKpz1XmdAZhU1duu3pae+w9zRGmHKYvZleg@nongnu.org
+X-Gm-Message-State: AOJu0YyobKxiqA4I+nquPOq6IhFDTJOkxRunz4RMWeckkjCCkzFqYtNz
+ kqxoFBfytTCgA06RYqzocGKBaRHOZ62raKYIQbs6I19ystkPG5ZqYs8HZoR9OzL/Tsc=
+X-Gm-Gg: ASbGncugpfCSnMUU+CSFC8ZGfeVmiPWeTw23Osc7qwbs32oorcclQ9PEYf2NfeWo6Cl
+ mtSZwmKJIi0PQ3vrEBT6gD4Vz6gNVTeB5MC/kVI3vC6iyqH5zCDuQjpt/6gVpBBIXbzSQZP4DKO
+ H9EVUkiix9n+lFD3yOsMGR85fKv1FSCT9Tt3Pe0Mk9fBHexNEhF3G4w7ylFMAfQM3AX/E69L4mR
+ 8iXJzsuvwE5fTbZ2Kw7qXx6x75jo1pPWc457jxWMJMS6e7KZRCRzPRRWg0roYqdlLSECop/dWZ5
+ zBf4OeXzMM+S2MSQlu7iK0K8rvDMfX40sELjJ9Au0qQFCRSW3hzeQ+B4mINpcC5hEhIkK51v/eS
+ RSTFjANl5uIeMqqgBH2sc0bZu6CTaTBXQqQE=
+X-Google-Smtp-Source: AGHT+IEkSvSwFfZNNpANLAhbTabK+ErP+BOBwvt7XlFXNALbCsEN2h3/TaIWe620QnwhkO6tMjmxCw==
+X-Received: by 2002:a05:6602:36ce:b0:88d:9dce:2916 with SMTP id
+ ca18e2360f4ac-88d9dce2a43mr557426039f.8.1757522513939; 
+ Wed, 10 Sep 2025 09:41:53 -0700 (PDT)
 Received: from localhost ([140.82.166.162]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-88c35d4bbc5sm265997439f.27.2025.09.10.09.37.18
+ ca18e2360f4ac-8897613808csm406675739f.15.2025.09.10.09.41.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Sep 2025 09:37:19 -0700 (PDT)
-Date: Wed, 10 Sep 2025 11:37:18 -0500
+ Wed, 10 Sep 2025 09:41:53 -0700 (PDT)
+Date: Wed, 10 Sep 2025 11:41:52 -0500
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Xie Bo <xb@ultrarisc.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
  anup@brainfault.org, alistair.francis@wdc.com, rkrcmar@ventanamicro.com, 
  palmer@dabbelt.com, xiamy@ultrarisc.com
-Subject: Re: [PATCH v6 1/2] Set KVM initial privilege mode and mp_state
-Message-ID: <20250910-70e85bb0410ddfa6fb425b0a@orel>
+Subject: Re: [PATCH v6 2/2] Fix VM resume after QEMU+KVM migration
+Message-ID: <20250910-f405263ec7a71e1384c39da4@orel>
 References: <20250910093529.614305-1-xb@ultrarisc.com>
- <20250910093529.614305-2-xb@ultrarisc.com>
+ <20250910093529.614305-3-xb@ultrarisc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20250910093529.614305-2-xb@ultrarisc.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
- envelope-from=ajones@ventanamicro.com; helo=mail-io1-xd34.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250910093529.614305-3-xb@ultrarisc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
+ envelope-from=ajones@ventanamicro.com; helo=mail-io1-xd2a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,96 +104,172 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 10, 2025 at 05:35:27PM +0800, Xie Bo wrote:
-> For KVM mode, the privilege mode should not include M-mode, and the 
-> initial value should be set to S-mode. Additionally, a following patch 
-> adds the implementation of putting the vCPU privilege mode to KVM. 
-> When the vCPU runs for the first time, QEMU will first put the privilege 
-> state to KVM. If the initial value is set to M-mode, KVM will encounter
-> an error.
+On Wed, Sep 10, 2025 at 05:35:28PM +0800, Xie Bo wrote:
+> Fix two migration issues for virtual machines in KVM mode:
+> 1.It saves and restores the vCPU's privilege mode to ensure that the 
+> vCPU's privilege mode is correct after migration.
+> 2.It saves and restores the vCPU's mp_state (runnable or stopped) and 
+> includes this state in the migration sequence, upgrading the vmstate 
+> version to ensure that the vCPU's mp_state is correct after migration.
 > 
-> In addition, this patch introduces the 'mp_state' field to RISC-V 
-> vCPUs, following the convention used by KVM on x86. The 'mp_state' 
-> reflects the multiprocessor state of a vCPU, and is used to control 
-> whether the vCPU is runnable by KVM. Randomly select one CPU as the 
-> boot CPU.
+> KVM_PUT_RUNTIME_STATE only synchronizes the vCPU’s runtime-modified 
+> state (such as registers), whereas mp_state is related to system boot, 
+> multi-core initialization, and is not modified during normal operation. 
+> Therefore, mp_state is only synchronized to KVM during KVM_PUT_RESET_STATE 
+> and KVM_PUT_FULL_STATE.
 > 
 > Signed-off-by: Xie Bo <xb@ultrarisc.com>
 > ---
->  target/riscv/cpu.c | 17 ++++++++++++++++-
->  target/riscv/cpu.h |  2 ++
->  2 files changed, 18 insertions(+), 1 deletion(-)
+>  target/riscv/kvm/kvm-cpu.c   | 60 ++++++++++++++++++++++++++++--------
+>  target/riscv/kvm/kvm_riscv.h |  3 +-
+>  target/riscv/machine.c       |  5 +--
+>  3 files changed, 52 insertions(+), 16 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 09ded6829a..57b8c421bd 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -38,6 +38,7 @@
->  #include "kvm/kvm_riscv.h"
->  #include "tcg/tcg-cpu.h"
->  #include "tcg/tcg.h"
-> +#include "hw/boards.h"
->  
->  /* RISC-V CPU definitions */
->  static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
-> @@ -1031,18 +1032,32 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
->  #ifndef CONFIG_USER_ONLY
->      uint8_t iprio;
->      int i, irq, rdzero;
-> +    static int boot_cpu_index = -1;
->  #endif
->      CPUState *cs = CPU(obj);
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(obj);
->      CPURISCVState *env = &cpu->env;
-> +    MachineState *ms = MACHINE(qdev_get_machine());
->  
->      if (mcc->parent_phases.hold) {
->          mcc->parent_phases.hold(obj, type);
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 0f4997a918..1434dd1c51 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -576,6 +576,12 @@ static int kvm_riscv_get_regs_core(CPUState *cs)
 >      }
->  #ifndef CONFIG_USER_ONLY
->      env->misa_mxl = mcc->misa_mxl_max;
-> -    env->priv = PRV_M;
-> +    if (kvm_enabled()) {
-> +        env->priv = PRV_S;
-> +    } else {
-> +        env->priv = PRV_M;
-> +    }
-> +    if (boot_cpu_index < 0) {
-> +        boot_cpu_index = g_random_int() % ms->smp.cpus;
-
-I don't think we're obliged to use the same boot cpu on each reset
-after initially randomly selecting it. We can randomly select each
-time.
-
-Also, we can use g_random_int_range() instead of the mod.
-
-Thanks,
-drew
-
-> +    }
-> +    if (cs->cpu_index == boot_cpu_index) {
-> +        env->mp_state = KVM_MP_STATE_RUNNABLE;
-> +    } else {
-> +        env->mp_state = KVM_MP_STATE_STOPPED;
-> +    }
->      env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
->      if (env->misa_mxl > MXL_RV32) {
->          /*
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 51e49e03de..4b1c5bf0e4 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -256,6 +256,8 @@ struct CPUArchState {
->  #endif
+>      env->pc = reg;
 >  
->      target_ulong priv;
-> +    /* Current multiprocessor state of this vCPU. */
-> +    uint32_t mp_state;
->      /* CSRs for execution environment configuration */
->      uint64_t menvcfg;
->      target_ulong senvcfg;
+> +    ret = kvm_get_one_reg(cs, RISCV_CORE_REG(env, mode), &reg);
+> +    if (ret) {
+> +        return ret;
+> +    }
+> +    env->priv = reg;
+> +
+>      for (i = 1; i < 32; i++) {
+>          uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
+>          ret = kvm_get_one_reg(cs, id, &reg);
+> @@ -601,6 +607,12 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
+>          return ret;
+>      }
+>  
+> +    reg = env->priv;
+> +    ret = kvm_set_one_reg(cs, RISCV_CORE_REG(env, mode), &reg);
+> +    if (ret) {
+> +        return ret;
+> +    }
+> +
+>      for (i = 1; i < 32; i++) {
+>          uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
+>          reg = env->gpr[i];
+> @@ -1244,25 +1256,52 @@ int kvm_arch_get_registers(CPUState *cs, Error **errp)
+>          return ret;
+>      }
+>  
+> +    ret = kvm_riscv_sync_mpstate_to_qemu(cs);
+> +    if (ret) {
+> +        return ret;
+> +    }
+> +
+>      return ret;
+>  }
+>  
+> -int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state)
+> +int kvm_riscv_sync_mpstate_to_kvm(CPUState *cs)
+>  {
+> +    int ret = 0;
+> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
+> +
+>      if (cap_has_mp_state) {
+>          struct kvm_mp_state mp_state = {
+> -            .mp_state = state
+> +            .mp_state = env->mp_state
+>          };
+>  
+> -        int ret = kvm_vcpu_ioctl(CPU(cpu), KVM_SET_MP_STATE, &mp_state);
+> +        ret = kvm_vcpu_ioctl(cs, KVM_SET_MP_STATE, &mp_state);
+>          if (ret) {
+> -            fprintf(stderr, "%s: failed to sync MP_STATE %d/%s\n",
+> +            fprintf(stderr, "%s: failed to sync MP_STATE to KVM %d/%s\n",
+>                      __func__, ret, strerror(-ret));
+> -            return -1;
+>          }
+>      }
+>  
+> -    return 0;
+> +    return ret;
+> +}
+> +
+> +int kvm_riscv_sync_mpstate_to_qemu(CPUState *cs)
+> +{
+> +    int ret = 0;
+> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
+> +
+> +    if (cap_has_mp_state) {
+> +        struct kvm_mp_state mp_state;
+> +
+> +        ret = kvm_vcpu_ioctl(cs, KVM_GET_MP_STATE, &mp_state);
+> +        if (ret) {
+> +            fprintf(stderr, "%s: failed to sync MP_STATE to QEMU %d/%s\n",
+> +                    __func__, ret, strerror(-ret));
+> +            return ret;
+> +        }
+> +        env->mp_state = mp_state.mp_state;
+> +    }
+> +
+> +    return ret;
+>  }
+>  
+>  int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
+> @@ -1289,13 +1328,8 @@ int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
+>          return ret;
+>      }
+>  
+> -    if (KVM_PUT_RESET_STATE == level) {
+> -        RISCVCPU *cpu = RISCV_CPU(cs);
+> -        if (cs->cpu_index == 0) {
+> -            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_RUNNABLE);
+> -        } else {
+> -            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_STOPPED);
+> -        }
+> +    if (level >= KVM_PUT_RESET_STATE) {
+> +        ret = kvm_riscv_sync_mpstate_to_kvm(cs);
+>          if (ret) {
+>              return ret;
+>          }
+> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
+> index b2bcd1041f..953db94160 100644
+> --- a/target/riscv/kvm/kvm_riscv.h
+> +++ b/target/riscv/kvm/kvm_riscv.h
+> @@ -28,7 +28,8 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+>                            uint64_t aplic_base, uint64_t imsic_base,
+>                            uint64_t guest_num);
+>  void riscv_kvm_aplic_request(void *opaque, int irq, int level);
+> -int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
+> +int kvm_riscv_sync_mpstate_to_kvm(CPUState *cs);
+> +int kvm_riscv_sync_mpstate_to_qemu(CPUState *cs);
+>  void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+>  uint64_t kvm_riscv_get_timebase_frequency(RISCVCPU *cpu);
+>  
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 889e2b6570..8562a0a1d6 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -401,8 +401,8 @@ static const VMStateDescription vmstate_ssp = {
+>  
+>  const VMStateDescription vmstate_riscv_cpu = {
+>      .name = "cpu",
+> -    .version_id = 10,
+> -    .minimum_version_id = 10,
+> +    .version_id = 11,
+> +    .minimum_version_id = 11,
+>      .post_load = riscv_cpu_post_load,
+>      .fields = (const VMStateField[]) {
+>          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+> @@ -422,6 +422,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          VMSTATE_UNUSED(4),
+>          VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
+>          VMSTATE_UINTTL(env.priv, RISCVCPU),
+> +        VMSTATE_UINT32(env.mp_state, RISCVCPU),
+>          VMSTATE_BOOL(env.virt_enabled, RISCVCPU),
+>          VMSTATE_UINT64(env.resetvec, RISCVCPU),
+>          VMSTATE_UINTTL(env.mhartid, RISCVCPU),
 > -- 
 > 2.43.0
-> 
+>
+
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
