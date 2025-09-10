@@ -4,102 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADF4DCA0FED
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Sep 2025 15:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4408DCA101F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Sep 2025 16:38:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uwMt4-0001O4-9d; Wed, 10 Sep 2025 11:37:34 -0400
+	id 1uwNp6-0007vo-2U; Wed, 10 Sep 2025 12:37:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1uwMt0-0001Mm-Mw
- for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 11:37:30 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1uwMsy-0000mX-Ar
- for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 11:37:30 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1757518645;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=kz9SnuI3/vpVZX5JTY6tsF5sQkS6K7Yu30w0y6EtaSE=;
- b=fvLL7s6p3B62R3t4/NUmbqIxGXHKTDb6LK6cDn6VpyTegJWzLJ2mTpqSrKoFaQUKU6PfwZ
- DHy0A8JkSEspNNoBp+T1HMbCoZQATp+D+LQzsOSjxuPyMNBR38pHrg/AUYtl8yEffV1jt1
- HBnAHJ4vNP1PAtkrNTxoh2xkTZq1PWg=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-397-PurBP5UUP6ywauzyv21k4g-1; Wed, 10 Sep 2025 11:37:24 -0400
-X-MC-Unique: PurBP5UUP6ywauzyv21k4g-1
-X-Mimecast-MFC-AGG-ID: PurBP5UUP6ywauzyv21k4g_1757518644
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-8080713fa17so1462598585a.2
- for <qemu-riscv@nongnu.org>; Wed, 10 Sep 2025 08:37:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1uwNp3-0007v6-N9
+ for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 12:37:30 -0400
+Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1uwNox-0000K8-CW
+ for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 12:37:29 -0400
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-8876462a34aso202309339f.2
+ for <qemu-riscv@nongnu.org>; Wed, 10 Sep 2025 09:37:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1757522240; x=1758127040; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=77Sp7vE/cjj+LkmFLQCy5EPSzbhLfnme7P3vlpAn3y0=;
+ b=jxe7hBmuZAsLlCshqvHH9gXJovIUQK+cP4NkzAIb0Ytf8TQ+brX2RVeJ798KyLcOVW
+ Kqni55TpQ96HhHp3Dl5AHYdeg1lTT3I6VMriKTIJ1gy4b3gMqa+vIo72+0Tw+uGv3oFT
+ uGANQPhVol3WWe4Z9wfN8th4ttk062ZzfcnagY6LuBaLAwV6d5nfm82Yoz15/D4D+vfC
+ cDnKwMQwAC+N2meZHwmHG+ZAyXAq768060Oz5YFpsDJrlAggGMbabllrZNcpVcBVh026
+ JrrLm5IWBZ9e3iciWqmWbSkcmUf6yt6mcjQD+PqRRkSKAsGTBypI7cqMhW72hyimIV3K
+ sX4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757518644; x=1758123444;
+ d=1e100.net; s=20230601; t=1757522240; x=1758127040;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kz9SnuI3/vpVZX5JTY6tsF5sQkS6K7Yu30w0y6EtaSE=;
- b=kANkLKAsNy5o7d6+CdXBIiOfFUBAymPRxre1/CmJkJbm/oE2TfjOrKJwJ9+LrpTW+M
- NXohiGtr9g+b3/MQQmiXz3Uc5nmOSaNkDYYfM3X2+oCs3burhR1K7RMPQSOhnFOWTzdA
- 6Es+1jlX67ekrNPOTNaQ2vAw7UMdiZ2M+twk8BOFI3a6nQXX1Q2ssBRdsJJn7BHtGTFJ
- Tflijzp4ywrwOztwnhOyr8/Ad74rkZW3l6Svk2l/qL6z8grii+M0urTobAxGCSE4botF
- qUj0NdH1dSeANHDx1J/kgYbQyRGycVBjr2hzv4jG0YNSdpbdgyA7YrqM0U7rNKPvuSom
- eusg==
+ bh=77Sp7vE/cjj+LkmFLQCy5EPSzbhLfnme7P3vlpAn3y0=;
+ b=SrSpfYSC9w9fq4sZcBvERrIFeR0htA7Bk5uz06JkNmnH6ry/y9ddigCisEFB3pzalV
+ is7Tct/gFJMvRr35faRUUJ7511GlcAiaNE5xfSm/i/hfs6NWw1T/QYfX1GSVqW+VUVBd
+ KvLaaNBGxtWAaoNmGwmByoKbk8EDqbHNdtpeiNrZg82Zno+jX6w//oyMH0944UdmTXCE
+ /3+xFXUxg4AQ78GUqPvTa3snQtFF9i9fVGC7ci6TejxiEPs83kC8jN9TkULm1Pl0cEiN
+ yFUQnMrIsiAak6WTA3G/GWwMxql5/6599aePXbaOyYxkmk1KwYELbPrRx8hMHcRzQQUC
+ Tqdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbX9Dtx7zmEiimeGOu799E4wWqaVCkf2IE2SMI6Tph1J/GZsUnJNiKM8zKSLokN1aSq3d9KGdZkc3p@nongnu.org
-X-Gm-Message-State: AOJu0Yx0RXEto5/u6vRYvgMs6CRM94AMW7/hiXyUu5faKAegnZpYW6mm
- v6XRvTuUOc1CBNOrHkEDQ7GzDxov24LyAman+OsVvl0USYTDEvIOB9qIPuOYalZujnFR0KbRlZi
- O8xJCAZCfE8s9xM6FEAH+kqJ+Ti7hk9t7ZtT2hgY82mwqRwHEhHhrzI56
-X-Gm-Gg: ASbGncvBUZuRl5TVy0IILkIsI17DRdGR8SsuvuESdnb/1gEjsH7pIhTMWJzB6s1oXJ/
- bQYH2qvXXzj3xuFgdbPnTgHxkHll1OkCmYxIY9pYBbhwTjPv86GzpIOvQTIoH4mNz9e05qgIGlA
- xwogyFUOPoLkVLDlQxqEtMTx6TGzp3z1rYwqYBG1wqifRBWtKsej8NFEZyapF4rruD6EFeIft67
- bdghM0oH/NWHetOdQabEI85eDv8LTR4Z0b9wcYcomL+uEdDTinrAcLOIUhh5MPQrlme3kiVYZvR
- jZsrjIzHy77J8O+3/32BiIU6mbNkp0x0
-X-Received: by 2002:a05:620a:2795:b0:813:f407:b231 with SMTP id
- af79cd13be357-813f407b2c1mr1353189385a.7.1757518643591; 
- Wed, 10 Sep 2025 08:37:23 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEf/KuVdeKLvj4EGYJry2HAEzT1NBiK0ZFDkaqiHiRRXlDFFH/PmMK8tC1foIGn96Mz68XKwA==
-X-Received: by 2002:a05:620a:2795:b0:813:f407:b231 with SMTP id
- af79cd13be357-813f407b2c1mr1353183785a.7.1757518642801; 
- Wed, 10 Sep 2025 08:37:22 -0700 (PDT)
-Received: from x1.local ([174.89.135.121]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4b61bbbc0ecsm25838081cf.25.2025.09.10.08.37.21
+ AJvYcCVQVwd4XRgJnGQCFdsKZA/k0ZL/CDV200aQAA6OXFpUBJm54G+l5i6XqGr3acpAckR/YzLSxmfHKv4r@nongnu.org
+X-Gm-Message-State: AOJu0YwGPomrQhyCMZ4GRAW8R3LIeNOfo+jvbaDXqzW5y+z2sfTtjysF
+ o7vdHGJL1bunrK3en67Nuxa1ienyhzqn0NQgeBrpG03V+MP856Hxh2o9YJHD7/5qe/s=
+X-Gm-Gg: ASbGnct7ZptKW30cy9uxGraQkz3jTaMA315n9+TLvD4Yc6LK+4vKhRkwa0G6LUMcbKN
+ JBQdmTED6ElImM4YK/Xt7eI1oxWD5j5E11lEASQXI4++uS73JhCunlMCM2JatvGnuyzkkdsPES4
+ ZFUTjZLhTxUoPAzEhMq3dD5dCQWcp1E+tH9vsm5kwnfwJK0inAEMRcvSK91w6P76VkXfp6lPW00
+ FzunWVTXTkOCQjhvzpMieCIijtN78dmK0wlZX6O194dqymJRMUH9sV+Tz9z3czLrDfb7XAqb4V9
+ D/bkhPHCED+bNVzPZM8J+GBZe8Ss1e2QpddTEEmxYTGbu000S8szeauumwgQvkMFhNTlhX9/DR2
+ GfbONd+SEz0ciKI47k+n6qMui
+X-Google-Smtp-Source: AGHT+IEj51rHSaWEmWFKrq4fsZ9TFd6EsLaWMqTM/n5mbFm9ZUpUVtMN0kilDtFpe/LMcJPFArKfEw==
+X-Received: by 2002:a05:6602:2ccb:b0:887:5ebe:bb9c with SMTP id
+ ca18e2360f4ac-887776bb156mr2366486539f.14.1757522239709; 
+ Wed, 10 Sep 2025 09:37:19 -0700 (PDT)
+Received: from localhost ([140.82.166.162]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-88c35d4bbc5sm265997439f.27.2025.09.10.09.37.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Sep 2025 08:37:22 -0700 (PDT)
-Date: Wed, 10 Sep 2025 11:37:10 -0400
-From: Peter Xu <peterx@redhat.com>
-To: TANG Tiancheng <lyndra@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- Fabiano Rosas <farosas@suse.de>
-Subject: Re: [PATCH v2 2/4] include/migration: Add support for a
- variable-length array of UINT32 pointers
-Message-ID: <aMGbJusVNgQ-N7y3@x1.local>
-References: <20250910-timers-v2-0-31359f1f6ee8@linux.alibaba.com>
- <20250910-timers-v2-2-31359f1f6ee8@linux.alibaba.com>
+ Wed, 10 Sep 2025 09:37:19 -0700 (PDT)
+Date: Wed, 10 Sep 2025 11:37:18 -0500
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Xie Bo <xb@ultrarisc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
+ anup@brainfault.org, alistair.francis@wdc.com, rkrcmar@ventanamicro.com, 
+ palmer@dabbelt.com, xiamy@ultrarisc.com
+Subject: Re: [PATCH v6 1/2] Set KVM initial privilege mode and mp_state
+Message-ID: <20250910-70e85bb0410ddfa6fb425b0a@orel>
+References: <20250910093529.614305-1-xb@ultrarisc.com>
+ <20250910093529.614305-2-xb@ultrarisc.com>
 MIME-Version: 1.0
-In-Reply-To: <20250910-timers-v2-2-31359f1f6ee8@linux.alibaba.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: w7grEqHz_9pHJcbf8sKINWkab78s8k_RUZVgWJeClNI_1757518644
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=peterx@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+In-Reply-To: <20250910093529.614305-2-xb@ultrarisc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
+ envelope-from=ajones@ventanamicro.com; helo=mail-io1-xd34.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,23 +101,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 10, 2025 at 11:04:26PM +0800, TANG Tiancheng wrote:
-> Add support for defining a vmstate field which is a variable-length array
-> of pointers, and use this to define a VMSTATE_TIMER_PTR_VARRAY() which allows
-> a variable-length array of QEMUTimer* to be used by devices.
+On Wed, Sep 10, 2025 at 05:35:27PM +0800, Xie Bo wrote:
+> For KVM mode, the privilege mode should not include M-mode, and the 
+> initial value should be set to S-mode. Additionally, a following patch 
+> adds the implementation of putting the vCPU privilege mode to KVM. 
+> When the vCPU runs for the first time, QEMU will first put the privilege 
+> state to KVM. If the initial value is set to M-mode, KVM will encounter
+> an error.
 > 
-> Message-id: 20250909-timers-v1-0-7ee18a9d8f4b@linux.alibaba.com
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+> In addition, this patch introduces the 'mp_state' field to RISC-V 
+> vCPUs, following the convention used by KVM on x86. The 'mp_state' 
+> reflects the multiprocessor state of a vCPU, and is used to control 
+> whether the vCPU is runnable by KVM. Randomly select one CPU as the 
+> boot CPU.
+> 
+> Signed-off-by: Xie Bo <xb@ultrarisc.com>
+> ---
+>  target/riscv/cpu.c | 17 ++++++++++++++++-
+>  target/riscv/cpu.h |  2 ++
+>  2 files changed, 18 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 09ded6829a..57b8c421bd 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -38,6 +38,7 @@
+>  #include "kvm/kvm_riscv.h"
+>  #include "tcg/tcg-cpu.h"
+>  #include "tcg/tcg.h"
+> +#include "hw/boards.h"
+>  
+>  /* RISC-V CPU definitions */
+>  static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
+> @@ -1031,18 +1032,32 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>  #ifndef CONFIG_USER_ONLY
+>      uint8_t iprio;
+>      int i, irq, rdzero;
+> +    static int boot_cpu_index = -1;
+>  #endif
+>      CPUState *cs = CPU(obj);
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+>      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(obj);
+>      CPURISCVState *env = &cpu->env;
+> +    MachineState *ms = MACHINE(qdev_get_machine());
+>  
+>      if (mcc->parent_phases.hold) {
+>          mcc->parent_phases.hold(obj, type);
+>      }
+>  #ifndef CONFIG_USER_ONLY
+>      env->misa_mxl = mcc->misa_mxl_max;
+> -    env->priv = PRV_M;
+> +    if (kvm_enabled()) {
+> +        env->priv = PRV_S;
+> +    } else {
+> +        env->priv = PRV_M;
+> +    }
+> +    if (boot_cpu_index < 0) {
+> +        boot_cpu_index = g_random_int() % ms->smp.cpus;
 
-Thanks.
+I don't think we're obliged to use the same boot cpu on each reset
+after initially randomly selecting it. We can randomly select each
+time.
 
-No need for a repost, but the subject can be prefixed directly with
-"migration", if can be fixed when merge.
+Also, we can use g_random_int_range() instead of the mod.
 
-Reviewed-by: Peter Xu <peterx@redhat.com>
+Thanks,
+drew
 
--- 
-Peter Xu
-
+> +    }
+> +    if (cs->cpu_index == boot_cpu_index) {
+> +        env->mp_state = KVM_MP_STATE_RUNNABLE;
+> +    } else {
+> +        env->mp_state = KVM_MP_STATE_STOPPED;
+> +    }
+>      env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+>      if (env->misa_mxl > MXL_RV32) {
+>          /*
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 51e49e03de..4b1c5bf0e4 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -256,6 +256,8 @@ struct CPUArchState {
+>  #endif
+>  
+>      target_ulong priv;
+> +    /* Current multiprocessor state of this vCPU. */
+> +    uint32_t mp_state;
+>      /* CSRs for execution environment configuration */
+>      uint64_t menvcfg;
+>      target_ulong senvcfg;
+> -- 
+> 2.43.0
+> 
 
