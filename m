@@ -4,66 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 781DDCAC58D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Sep 2025 09:58:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E70FFCAC58D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Sep 2025 12:45:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uwe34-0001jF-AT; Thu, 11 Sep 2025 05:57:02 -0400
+	id 1uwgfM-0008LV-Go; Thu, 11 Sep 2025 08:44:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1uwe2y-0001fZ-8I; Thu, 11 Sep 2025 05:56:56 -0400
-Received: from [115.124.30.113] (helo=out30-113.freemail.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1uwe2l-0005Oz-4Q; Thu, 11 Sep 2025 05:56:54 -0400
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1uwgex-0008G3-SF
+ for qemu-riscv@nongnu.org; Thu, 11 Sep 2025 08:44:20 -0400
+Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1uwgeo-0003xn-Rh
+ for qemu-riscv@nongnu.org; Thu, 11 Sep 2025 08:44:18 -0400
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-3fc5f08699aso5433865ab.2
+ for <qemu-riscv@nongnu.org>; Thu, 11 Sep 2025 05:44:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1757584579; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=CgPzvRW3PYzQdn11ycTE+/tC0brKHXf/hxY7dZiqdA0=;
- b=XGBEyuwff66vK3txMViFTYpzQguPI0OHyxy8eslHSbATRiM9flvdU15v47mtkxzFEQtiKrQJForWVh3BqkH6Jf4TdgLk7o8shK/ceTgwmO1TSns21GANtq8G0Rfe5AHQlBaHb34Ui6gDOHXJxgAofBqO7Ntosud5YrHxeauldS4=
-Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0Wnlj.Kl_1757584578 cluster:ay36) by smtp.aliyun-inc.com;
- Thu, 11 Sep 2025 17:56:18 +0800
-From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Thu, 11 Sep 2025 17:56:15 +0800
-Subject: [PATCH v3 3/4] hw/intc: Save timers array in RISC-V mtimer VMState
+ d=ventanamicro.com; s=google; t=1757594644; x=1758199444; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yW90efROcsM2IUxTHOGCg8qqBVBwuI5GuHrye/uDWGI=;
+ b=iDoy5nPVhuBzEpkOpjE5EdVf1z5eHh3ThuptUulVaDe1K8X9Qijtn053vbrQtDklWm
+ UtOgHPD9xzuujmTQHdpdpEKsCzAwOfaQbVrZP9mi+y2WceJgSvKnrk5iOI3QErB9z7sG
+ Y6R3phX1hivfRaMCuGDCK8ykdO0T3aXrMJaZerKjUrfqw4XkTukbX2S27lzVRjpL5U9W
+ lYb21H1+qXv8chfnVvymaHg87pg1Tzozd656gIOxjd83C3rAd3+9Xx+rnFJSy7SF75TR
+ oXntYM8SFVMqvkrNftsK46aqWVlMBjFozSqYKC3p9s2Adxi2AtfUqiO3v/CySDQ3wAhh
+ TDVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757594644; x=1758199444;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yW90efROcsM2IUxTHOGCg8qqBVBwuI5GuHrye/uDWGI=;
+ b=U/imaU4UPiE/8BoMxNpOMpbYXnwtzu3UZiN4Z8MmMcHZEx6Asu98vFeGu/WRYq/VOp
+ rMsZXmsBg69tbinOq3ysiMs02/VlNiDgHcxmLsHezlPqQWBZbsJ+2oyiHqKwCXW2WsfC
+ KdQQViFbDl2yPMRgCsi+xf0KT7AM3nlmykbDb9ILHE9kkkxSoQxOPsuS+PL2O5mQTEa9
+ Gic40zIDeBh2vhQ6ZRaxL68NEV5jH7kw1aawPAhETpMB6EyU/ooM1ygDwav423m3WJB7
+ mwlLEyu7B/NAoBCxizWOLqVFGl7Vg5W2YW3jhm8nWMf3jyMyhJpvtAzoFTCN+7AUvs4n
+ gMZg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU0qgpjZIhF5bhh7H/pm9T+MtQHEWABnYq25MobwHfBaGwaTqNvEAbbOUeZYJR9m1R9lgGJwt7YKIGy@nongnu.org
+X-Gm-Message-State: AOJu0YyXP5QqE4H7ZPYB5Yzm5ZA3cgDTKiIxep+SqUxxQGU4czGLk8dR
+ B39dwyzPMwd6Rg54hhZ2od/t2gqzttvLU8fBwkNnQTmMhYWzxbsYAUE1NAus7ZohSHc=
+X-Gm-Gg: ASbGnctz/Vu9/s/a73wfmkaiVFnqN8IQtKQ2l/y45kvN5lgGzIOu5LviWxWt4FP6i7r
+ BjW+v5y4JaFciisfhZdpKYPvWcnXXNOfC30CMVZx2gGx/Dr4xRCXXGsP2wtIWR+boSgTNcJDdW1
+ ymeoeFb9smQJqwlGtBvDCk3rwjSfCWEMcYPVlsQURCNS/mliyy82iFHCIbYG9n3egPFzaY+cOrN
+ Vfi+Ki6becB4x4ih1DR9RGaYZgY1O+sPN5VCCLh9sPrI+al6QhiUzJL8wmj53ode2XlWn332DqM
+ L+ho79sEGUa5UuJNGnhqhTyQ7aHwPwKppfpIFb5CYwNSCczBH/Higxs+EPQDBvKBCeovGH5M5YN
+ jX1XJVhMLVUNkRDDy93CU1Gl+
+X-Google-Smtp-Source: AGHT+IFnQWkyraTMmbqyAiW0x5V5ifu070ly3jVZ1z8ptkdd8K03YxM3hPWXSFzc/ssdjJvNf7l6oA==
+X-Received: by 2002:a05:6e02:b41:b0:414:d8b9:5aa8 with SMTP id
+ e9e14a558f8ab-414d8b96034mr120358085ab.32.1757594643815; 
+ Thu, 11 Sep 2025 05:44:03 -0700 (PDT)
+Received: from localhost ([140.82.166.162]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-41deede6de7sm6379805ab.10.2025.09.11.05.44.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Sep 2025 05:44:03 -0700 (PDT)
+Date: Thu, 11 Sep 2025 07:44:02 -0500
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Xie Bo <xb@ultrarisc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, mjt@tls.msk.ru, 
+ pbonzini@redhat.com, anup@brainfault.org, alistair.francis@wdc.com, 
+ rkrcmar@ventanamicro.com, palmer@dabbelt.com, xiamy@ultrarisc.com
+Subject: Re: [PATCH v7 for v10.0.0 0/2] =?utf-8?B?dGFyZ2V0L3Jpc2N277yaRmk=?=
+ =?utf-8?Q?x?= riscv64 kvm migration 
+Message-ID: <20250911-d0793572c80e87bd6614afe0@orel>
+References: <20250911083617.1173094-1-xb@ultrarisc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250911-timers-v3-3-60508f640050@linux.alibaba.com>
-References: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
-In-Reply-To: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
- Peter Xu <peterx@redhat.com>, Fabiano Rosas <farosas@suse.de>, 
- TANG Tiancheng <lyndra@linux.alibaba.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1757584576; l=2900;
- i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=YkJJfhz9vbR/O68Q0eP/tZoK/MlSnuQnZJEPg8ettsM=;
- b=zX8pSu4q98Mxg1Cx/NhE9Xy5ssHS2EgrSBbWvAsguzNZFRtKURz6cnysq8xsiUApmSzJ6uz61
- 7zPl1UxfB97B8WZir890h1DqTa5eTfph8AnTXz6r8UviLLHhiV3oAXx
-X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
- pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.113 (deferred)
-Received-SPF: pass client-ip=115.124.30.113;
- envelope-from=lyndra@linux.alibaba.com;
- helo=out30-113.freemail.mail.aliyun.com
-X-Spam_score_int: -86
-X-Spam_score: -8.7
-X-Spam_bar: --------
-X-Spam_report: (-8.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01,
- UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_DKIM_WL=-7.5 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250911083617.1173094-1-xb@ultrarisc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=ajones@ventanamicro.com; helo=mail-il1-x12e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,71 +101,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The current 'timecmp' field in vmstate_riscv_mtimer is insufficient to keep
-timers functional after migration.
+On Thu, Sep 11, 2025 at 04:36:14PM +0800, Xie Bo wrote:
+> This series(v7) replaces the earlier series patch"[PATCH v6 for v10.0.0 0/2]
+> target/riscv: Fix riscv64 kvm migration".
+> 
+> Changes since v6:
+> - Patch 1: allow boot CPU to be randomly selected on each reset
+> - Patch 2: unchanged; keep Reviewed-by from Andrew Jones <ajones@ventanamicro.com>
 
-If an mtimer's entry in 'mtimer->timers' is active at the time the snapshot
-is taken, it means riscv_aclint_mtimer_write_timecmp() has written to
-'mtimecmp' and scheduled a timer into QEMU's main loop 'timer_list'.
+Except my r-b isn't on the patch...
 
-During snapshot save, these active timers must also be migrated; otherwise,
-after snapshot load there is no mechanism to restore 'mtimer->timers' back
-into the 'timer_list', and any pending timer events would be lost.
-
-QEMU's migration framework commonly uses VMSTATE_TIMER_xxx macros to save
-and restore 'QEMUTimer' variables. However, 'timers' is a pointer array
-with variable length, and vmstate.h did not previously provide a helper
-macro for such type.
-
-This commit adds a new macro, 'VMSTATE_TIMER_PTR_VARRAY', to handle saving
-and restoring a variable-length array of 'QEMUTimer *'. We then use this
-macro to migrate the 'mtimer->timers' array, ensuring that timer events
-remain scheduled correctly after snapshot load.
-
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
----
- hw/intc/riscv_aclint.c         | 6 ++++--
- include/hw/intc/riscv_aclint.h | 4 ++++
- 2 files changed, 8 insertions(+), 2 deletions(-)
-
-diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-index 318a9c8248432a8cd4c3f3fa990739917ecf7ca1..9f4c36e965e2aa379d75c0a9f656177f0dd82a45 100644
---- a/hw/intc/riscv_aclint.c
-+++ b/hw/intc/riscv_aclint.c
-@@ -323,13 +323,15 @@ static void riscv_aclint_mtimer_reset_enter(Object *obj, ResetType type)
- 
- static const VMStateDescription vmstate_riscv_mtimer = {
-     .name = "riscv_mtimer",
--    .version_id = 2,
--    .minimum_version_id = 2,
-+    .version_id = 3,
-+    .minimum_version_id = 3,
-     .fields = (const VMStateField[]) {
-             VMSTATE_UINT64(time_delta, RISCVAclintMTimerState),
-             VMSTATE_VARRAY_UINT32(timecmp, RISCVAclintMTimerState,
-                                   num_harts, 0,
-                                   vmstate_info_uint64, uint64_t),
-+            VMSTATE_TIMER_PTR_VARRAY(timers, RISCVAclintMTimerState,
-+                                     num_harts),
-             VMSTATE_END_OF_LIST()
-         }
- };
-diff --git a/include/hw/intc/riscv_aclint.h b/include/hw/intc/riscv_aclint.h
-index 693415eb6defe4454e5731a681e025f3bac3ad2e..4b7406eec005a06b7c040d8483a8790866a39297 100644
---- a/include/hw/intc/riscv_aclint.h
-+++ b/include/hw/intc/riscv_aclint.h
-@@ -80,4 +80,8 @@ enum {
-     RISCV_ACLINT_SWI_SIZE              = 0x4000
- };
- 
-+#define VMSTATE_TIMER_PTR_VARRAY(_f, _s, _f_n)                        \
-+VMSTATE_VARRAY_OF_POINTER_UINT32(_f, _s, _f_n, 0, vmstate_info_timer, \
-+                                                        QEMUTimer *)
-+
- #endif
-
--- 
-2.43.0
-
+> 
+> Xie Bo (2):
+>   Set KVM initial privilege mode and mp_state
+>   Fix VM resume after QEMU+KVM migration
+> 
+>  target/riscv/cpu.c           | 17 +++++++++-
+>  target/riscv/cpu.h           |  2 ++
+>  target/riscv/kvm/kvm-cpu.c   | 60 ++++++++++++++++++++++++++++--------
+>  target/riscv/kvm/kvm_riscv.h |  3 +-
+>  target/riscv/machine.c       |  5 +--
+>  5 files changed, 70 insertions(+), 17 deletions(-)
+> 
+> -- 
+> 2.43.0
+> 
 
