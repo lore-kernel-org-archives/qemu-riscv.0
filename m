@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAEACCAC58D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Sep 2025 09:57:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22FCFCA1016
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Sep 2025 09:57:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uwe2v-0001dQ-15; Thu, 11 Sep 2025 05:56:54 -0400
+	id 1uwe2t-0001d5-Tf; Thu, 11 Sep 2025 05:56:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1uwe2r-0001cQ-Dk; Thu, 11 Sep 2025 05:56:49 -0400
-Received: from [115.124.30.97] (helo=out30-97.freemail.mail.aliyun.com)
+ id 1uwe2r-0001cR-Dm; Thu, 11 Sep 2025 05:56:49 -0400
+Received: from [115.124.30.100] (helo=out30-100.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1uwe2h-0005P4-B2; Thu, 11 Sep 2025 05:56:46 -0400
+ id 1uwe2l-0005Or-4E; Thu, 11 Sep 2025 05:56:47 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1757584579; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=1gqd1TzCEIyvFYfjyBctacJ1+0G9407EGdXdIQ5mOdw=;
- b=GZEBXztvhdIwrDy+Q0iadCMAlFff6Ubh4Rq2mkiRDA+BbJRsRcyMO9F7HW4sOq0ulDTR5rHxR1+YyxmoLiZ7lwvZ+rRpmOy9rWZJHclutNGf+jQ0S0/OSEAj+nseLi3BzmudRM/EildDfenELDKTbTSubH14C2PN1tvDTR54ypI=
+ t=1757584578; h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To;
+ bh=DYiQL74ZEsuBIaGsaZfjxbsfdIN0YBm/3+mOK/dlVfM=;
+ b=c4lmcPMGtuZakyuVEIoylGK84UMALEDFY+gAmCUUQ3Tg6gpxVZGNh0ZyyVcMpZVxYZ4jTMPEPaEWz25s/Xtl+w54V6zRuN+Dpp0Ubkl1nsKrCYNLCnrJMIYaNuESZ/HTPXrrVvWftsgvTqX6Wrwl4wi6GK3nN64KhVgRubRESCg=
 Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0Wnlj.L-_1757584579 cluster:ay36) by smtp.aliyun-inc.com;
- Thu, 11 Sep 2025 17:56:19 +0800
+ fp:SMTPD_---0Wnlj.Iv_1757584574 cluster:ay36) by smtp.aliyun-inc.com;
+ Thu, 11 Sep 2025 17:56:17 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Thu, 11 Sep 2025 17:56:16 +0800
-Subject: [PATCH v3 4/4] target/riscv: Save stimer and vstimer in CPU
- vmstate
+Subject: [PATCH v3 0/4] Fix RISC-V timer migration issues
+Date: Thu, 11 Sep 2025 17:56:12 +0800
+Message-Id: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250911-timers-v3-4-60508f640050@linux.alibaba.com>
-References: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
-In-Reply-To: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
+X-B4-Tracking: v=1; b=H4sIALycwmgC/22MwQ6CMBAFf4X0bEm3CBRP/ofx0JatbIJgWmwwh
+ H+3cDAmepyXN7OwgJ4wsFO2MI+RAo1DguKQMdvp4Yac2sRMClmKRjR8ojv6wEFZaavagJaapfP
+ Do6N5D12uiTsK0+hfezfCtv4kInDBa0RQummVO5pzT8NzznVPRhud2/HOtlSUXzqIjy6TXkBRN
+ g5chaj+6eu6vgEkxrXB4wAAAA==
+X-Change-ID: 20250909-timers-18c2c67b1a2a
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -45,16 +47,17 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Peter Xu <peterx@redhat.com>, Fabiano Rosas <farosas@suse.de>, 
  TANG Tiancheng <lyndra@linux.alibaba.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1757584576; l=1731;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1757584576; l=2408;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=db8HgAaEdZbHQou94hhdJN2K2puP3nx87MpC33YWDYQ=;
- b=rnE8KAyA9YE2wPYoNdk7C1NlNMyzW4RDdk9kDIdRq/TxTEluv39LB2c1HOMy6tQ7vMY0CeSqN
- TQ/C8V5tDlJDLs+DBwdycbMzEPyXfF8O/IVtfM6sEYXlUzRRrHnLhEw
+ bh=ZO4kc8jDpGjEzIDc4wxgL5AjLr8RUHhkcJicWIAedwA=;
+ b=LGimB6MwZwSRsseKUmo1Ffkix+QPbZY4007QhHAEOw0IQ8yu3NSvEFLYOG+cjUEp7nKE23qHb
+ Q/GuGoTujv9Djb2f/WWFdFuCGzkWd5eoCqR9Wt9H735ktdUloZBD8Yw
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.97 (deferred)
-Received-SPF: pass client-ip=115.124.30.97;
- envelope-from=lyndra@linux.alibaba.com; helo=out30-97.freemail.mail.aliyun.com
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.100 (deferred)
+Received-SPF: pass client-ip=115.124.30.100;
+ envelope-from=lyndra@linux.alibaba.com;
+ helo=out30-100.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -79,64 +82,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-vmstate_riscv_cpu was missing env.stimer and env.vstimer.
-Without migrating these QEMUTimer fields, active S/VS-mode
-timer events are lost after snapshot or migration.
+This patch set fixes several timer-related migration issues in QEMU's
+RISC-V implementation that cause timer events to be lost or behave
+incorrectly after snapshot save/restore or live migration.
 
-Add VMSTATE_TIMER_PTR() entries to save and restore them.
+The problems addressed are:
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+1. ACLINT mtimer time_delta not migrated: The time_delta field in
+   RISCVAclintMTimerState was missing from vmstate, causing incorrect
+   mtime values after snapshot restore. This resulted in guest time
+   appearing "frozen" until enough virtual time elapsed to compensate
+   for the offset error.
+
+2. ACLINT mtimer timers array not migrated: Active timer events
+   scheduled via riscv_aclint_mtimer_write_timecmp() were not being
+   migrated, causing pending timer interrupts to be lost after restore.
+
+3. CPU stimer/vstimer not migrated: The S-mode and VS-mode timer
+   pointers in CPURISCVState were missing from vmstate_riscv_cpu,
+   causing supervisor-level timer events to be lost.
+
+The patch set introduces a new VMSTATE_TIMER_PTR_VARRAY macro to handle
+migration of variable-length timer pointer arrays, and adds the missing
+timer fields to the appropriate vmstate structures.
+
 Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 ---
- target/riscv/machine.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+Changes in v3:
+- Remove 'include/' of the subject at patch v2 2/4.
+- Added Reviewed-by from Peter Xu.
+- Link to v2: https://lore.kernel.org/qemu-devel/20250910-timers-v2-0-31359f1f6ee8@linux.alibaba.com
 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 1600ec44f0b755fdd49fc0df47c2288c9940afe0..51e0567ed30cbab5e791ea904165bc1854709192 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -400,6 +400,30 @@ static const VMStateDescription vmstate_ssp = {
-     }
- };
- 
-+static bool sstc_timer_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+    CPURISCVState *env = &cpu->env;
-+
-+    if (!cpu->cfg.ext_sstc) {
-+        return false;
-+    }
-+
-+    return env->stimer != NULL || env->vstimer != NULL;
-+}
-+
-+static const VMStateDescription vmstate_sstc = {
-+    .name = "cpu/timer",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = sstc_timer_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_TIMER_PTR(env.stimer, RISCVCPU),
-+        VMSTATE_TIMER_PTR(env.vstimer, RISCVCPU),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 10,
-@@ -476,6 +500,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_elp,
-         &vmstate_ssp,
-         &vmstate_ctr,
-+        &vmstate_sstc,
-         NULL
-     }
- };
+Changes in v2:
+- Split VMSTATE_VARRAY_OF_POINTER_UINT32() into a separate patch,
+  and define VMSTATE_TIMER_PTR_VARRAY() in riscv_aclint.h.
+- Added Reviewed-by from Daniel Henrique Barboza.
+- Link to v1: https://lore.kernel.org/qemu-devel/20250909-timers-v1-0-7ee18a9d8f4b@linux.alibaba.com
 
+---
+TANG Tiancheng (4):
+      hw/intc: Save time_delta in RISC-V mtimer VMState
+      migration: Add support for a variable-length array of UINT32 pointers
+      hw/intc: Save timers array in RISC-V mtimer VMState
+      target/riscv: Save stimer and vstimer in CPU vmstate
+
+ hw/intc/riscv_aclint.c         |  7 +++++--
+ include/hw/intc/riscv_aclint.h |  4 ++++
+ include/migration/vmstate.h    | 10 ++++++++++
+ target/riscv/machine.c         | 25 +++++++++++++++++++++++++
+ 4 files changed, 44 insertions(+), 2 deletions(-)
+---
+base-commit: 6a9fa5ef3230a7d51e0d953a59ee9ef10af705b8
+change-id: 20250909-timers-18c2c67b1a2a
+
+Best regards,
 -- 
-2.43.0
+TANG Tiancheng <lyndra@linux.alibaba.com>
 
 
