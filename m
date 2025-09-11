@@ -4,91 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C845CAC587
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Sep 2025 16:42:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC4D0CAC587
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Sep 2025 08:28:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uwNtQ-0001dg-Nc; Wed, 10 Sep 2025 12:42:00 -0400
+	id 1uwcf8-0004WW-Av; Thu, 11 Sep 2025 04:28:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1uwNtO-0001cx-H6
- for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 12:41:58 -0400
-Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1uwNtL-00018S-TA
- for qemu-riscv@nongnu.org; Wed, 10 Sep 2025 12:41:58 -0400
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-8876462a34aso202748639f.2
- for <qemu-riscv@nongnu.org>; Wed, 10 Sep 2025 09:41:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1757522514; x=1758127314; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=xL7JQIWeInW0ZYmfRZSfWkrWj7pxXYJHUuLb/gsAAIs=;
- b=iC+KSpNIMzqoSxn80ASDtzMGBVYQO+piiURuAPL8pTiwxYs9b2jBHk80VECYSVW8PL
- HP3ihPVpsF/MI9oC/m4sTRAQGIInOz3vwIBFW6JlhQFxAddgISGcA0ZZfz8DLMYp4JnI
- OFDM+USIujVf5PfRmH3NKrHLC5rteav5Elm4GWjVD75YXqZsM9f6aedz27rZGLNNM++u
- GPgyA8UUKZgvVm49BurZS8CuWGqAkYGzJSDFFS2/XLjxylKHody551GMg0OL/p40UpGY
- YcGhnxYZLu6+b4KI7U0F9o9RWRzry/fJWJ8xkSDBmF1wdCtTCKMxdOXMrhP7QlHFFA2y
- egLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757522514; x=1758127314;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xL7JQIWeInW0ZYmfRZSfWkrWj7pxXYJHUuLb/gsAAIs=;
- b=jcGfo4G5kS9L0UAibq86tC4wdjS0K3YJsQBTSPFy5X1DNEawKsKbpO/mJHU3FNL4tG
- tlOS1TtP2S4L1uSFnYorOz1fdbJIlRbZBuak0d8ds7f8RtBABEnBKV6KO5aZYTGp9qR0
- wHfnm92C8rxgdUqdSEl8zhcFAz2PY+moKLTkTnht/1bj7COIb4VkYBK1BrzOghIK/6yG
- b61Zrc46AuJmcvSl3jTx9Gzih2t1YxNn9kVmdlIeO5E0bR5NPWtnExYqyBdTPA1TFwTP
- /lXjGw/2MUo4dUYOIWnFhQZMjYdjlxuqiytpel1G6Rnon4cpQm9VvRQncadB7QGAr3Nu
- pekA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWM2upPTEDgj+8JmNEheVS7WTQ795ITz8fJJ9A15Ec+axKpz1XmdAZhU1duu3pae+w9zRGmHKYvZleg@nongnu.org
-X-Gm-Message-State: AOJu0YyobKxiqA4I+nquPOq6IhFDTJOkxRunz4RMWeckkjCCkzFqYtNz
- kqxoFBfytTCgA06RYqzocGKBaRHOZ62raKYIQbs6I19ystkPG5ZqYs8HZoR9OzL/Tsc=
-X-Gm-Gg: ASbGncugpfCSnMUU+CSFC8ZGfeVmiPWeTw23Osc7qwbs32oorcclQ9PEYf2NfeWo6Cl
- mtSZwmKJIi0PQ3vrEBT6gD4Vz6gNVTeB5MC/kVI3vC6iyqH5zCDuQjpt/6gVpBBIXbzSQZP4DKO
- H9EVUkiix9n+lFD3yOsMGR85fKv1FSCT9Tt3Pe0Mk9fBHexNEhF3G4w7ylFMAfQM3AX/E69L4mR
- 8iXJzsuvwE5fTbZ2Kw7qXx6x75jo1pPWc457jxWMJMS6e7KZRCRzPRRWg0roYqdlLSECop/dWZ5
- zBf4OeXzMM+S2MSQlu7iK0K8rvDMfX40sELjJ9Au0qQFCRSW3hzeQ+B4mINpcC5hEhIkK51v/eS
- RSTFjANl5uIeMqqgBH2sc0bZu6CTaTBXQqQE=
-X-Google-Smtp-Source: AGHT+IEkSvSwFfZNNpANLAhbTabK+ErP+BOBwvt7XlFXNALbCsEN2h3/TaIWe620QnwhkO6tMjmxCw==
-X-Received: by 2002:a05:6602:36ce:b0:88d:9dce:2916 with SMTP id
- ca18e2360f4ac-88d9dce2a43mr557426039f.8.1757522513939; 
- Wed, 10 Sep 2025 09:41:53 -0700 (PDT)
-Received: from localhost ([140.82.166.162]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-8897613808csm406675739f.15.2025.09.10.09.41.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Sep 2025 09:41:53 -0700 (PDT)
-Date: Wed, 10 Sep 2025 11:41:52 -0500
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Xie Bo <xb@ultrarisc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
- anup@brainfault.org, alistair.francis@wdc.com, rkrcmar@ventanamicro.com, 
- palmer@dabbelt.com, xiamy@ultrarisc.com
-Subject: Re: [PATCH v6 2/2] Fix VM resume after QEMU+KVM migration
-Message-ID: <20250910-f405263ec7a71e1384c39da4@orel>
+ (Exim 4.90_1) (envelope-from <xb@ultrarisc.com>)
+ id 1uwcf4-0004W3-K7; Thu, 11 Sep 2025 04:28:10 -0400
+Received: from [218.76.62.146] (helo=ultrarisc.com)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <xb@ultrarisc.com>)
+ id 1uwcey-0002Iq-Ft; Thu, 11 Sep 2025 04:28:09 -0400
+Received: from xb$ultrarisc.com ( [192.168.100.1] ) by
+ ajax-webmail-localhost.localdomain (Coremail) ; Thu, 11 Sep 2025 16:28:54
+ +0800 (GMT+08:00)
+X-Originating-IP: [192.168.100.1]
+Date: Thu, 11 Sep 2025 16:28:54 +0800 (GMT+08:00)
+X-CM-HeaderCharset: UTF-8
+From: =?UTF-8?B?6LCi5rOi?= <xb@ultrarisc.com>
+To: "Michael Tokarev" <mjt@tls.msk.ru>
+Cc: qemu-devel@nongnu.org, ajones@ventanamicro.com, qemu-riscv@nongnu.org,
+ pbonzini@redhat.com, anup@brainfault.org, alistair.francis@wdc.com,
+ rkrcmar@ventanamicro.com, palmer@dabbelt.com, xiamy@ultrarisc.com
+Subject: =?UTF-8?Q?Re:_Re:_[PATCH_v6_for_v10.0.0_0/2]_t?=
+ =?UTF-8?Q?arget/riscv=EF=BC=9AFix_riscv64_kvm_migration?=
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2024.1-cmXT6 build
+ 20240625(a75f206e) Copyright (c) 2002-2025 www.mailtech.cn
+ mispb-8cc425bc-7df6-4523-bb46-a48cc1a964e6-ultrarisc.com
+In-Reply-To: <9e0c71fe-55fb-4ca9-aac4-40d38a77e07a@tls.msk.ru>
 References: <20250910093529.614305-1-xb@ultrarisc.com>
- <20250910093529.614305-3-xb@ultrarisc.com>
+ <9e0c71fe-55fb-4ca9-aac4-40d38a77e07a@tls.msk.ru>
+Content-Transfer-Encoding: base64
+X-CM-CTRLDATA: iOob5GZvb3Rlcl90eHQ9MTA0MDo4NDA=
+Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250910093529.614305-3-xb@ultrarisc.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
- envelope-from=ajones@ventanamicro.com; helo=mail-io1-xd2a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Message-ID: <49f382e6.10fb.19937e45190.Coremail.xb@ultrarisc.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: AQAAfwBXxM5GiMJovvwsAA--.2097W
+X-CM-SenderInfo: l0e63zxwud2x1vfou0bp/1tbiAQABB2jA1vAALAATs2
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
+ CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
+ daVFxhVjvjDU=
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 218.76.62.146 (failed)
+Received-SPF: pass client-ip=218.76.62.146; envelope-from=xb@ultrarisc.com;
+ helo=ultrarisc.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ RDNS_NONE=0.793, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,172 +74,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 10, 2025 at 05:35:28PM +0800, Xie Bo wrote:
-> Fix two migration issues for virtual machines in KVM mode:
-> 1.It saves and restores the vCPU's privilege mode to ensure that the 
-> vCPU's privilege mode is correct after migration.
-> 2.It saves and restores the vCPU's mp_state (runnable or stopped) and 
-> includes this state in the migration sequence, upgrading the vmstate 
-> version to ensure that the vCPU's mp_state is correct after migration.
-> 
-> KVM_PUT_RUNTIME_STATE only synchronizes the vCPU’s runtime-modified 
-> state (such as registers), whereas mp_state is related to system boot, 
-> multi-core initialization, and is not modified during normal operation. 
-> Therefore, mp_state is only synchronized to KVM during KVM_PUT_RESET_STATE 
-> and KVM_PUT_FULL_STATE.
-> 
-> Signed-off-by: Xie Bo <xb@ultrarisc.com>
-> ---
->  target/riscv/kvm/kvm-cpu.c   | 60 ++++++++++++++++++++++++++++--------
->  target/riscv/kvm/kvm_riscv.h |  3 +-
->  target/riscv/machine.c       |  5 +--
->  3 files changed, 52 insertions(+), 16 deletions(-)
-> 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 0f4997a918..1434dd1c51 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -576,6 +576,12 @@ static int kvm_riscv_get_regs_core(CPUState *cs)
->      }
->      env->pc = reg;
->  
-> +    ret = kvm_get_one_reg(cs, RISCV_CORE_REG(env, mode), &reg);
-> +    if (ret) {
-> +        return ret;
-> +    }
-> +    env->priv = reg;
-> +
->      for (i = 1; i < 32; i++) {
->          uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
->          ret = kvm_get_one_reg(cs, id, &reg);
-> @@ -601,6 +607,12 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
->          return ret;
->      }
->  
-> +    reg = env->priv;
-> +    ret = kvm_set_one_reg(cs, RISCV_CORE_REG(env, mode), &reg);
-> +    if (ret) {
-> +        return ret;
-> +    }
-> +
->      for (i = 1; i < 32; i++) {
->          uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
->          reg = env->gpr[i];
-> @@ -1244,25 +1256,52 @@ int kvm_arch_get_registers(CPUState *cs, Error **errp)
->          return ret;
->      }
->  
-> +    ret = kvm_riscv_sync_mpstate_to_qemu(cs);
-> +    if (ret) {
-> +        return ret;
-> +    }
-> +
->      return ret;
->  }
->  
-> -int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state)
-> +int kvm_riscv_sync_mpstate_to_kvm(CPUState *cs)
->  {
-> +    int ret = 0;
-> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
-> +
->      if (cap_has_mp_state) {
->          struct kvm_mp_state mp_state = {
-> -            .mp_state = state
-> +            .mp_state = env->mp_state
->          };
->  
-> -        int ret = kvm_vcpu_ioctl(CPU(cpu), KVM_SET_MP_STATE, &mp_state);
-> +        ret = kvm_vcpu_ioctl(cs, KVM_SET_MP_STATE, &mp_state);
->          if (ret) {
-> -            fprintf(stderr, "%s: failed to sync MP_STATE %d/%s\n",
-> +            fprintf(stderr, "%s: failed to sync MP_STATE to KVM %d/%s\n",
->                      __func__, ret, strerror(-ret));
-> -            return -1;
->          }
->      }
->  
-> -    return 0;
-> +    return ret;
-> +}
-> +
-> +int kvm_riscv_sync_mpstate_to_qemu(CPUState *cs)
-> +{
-> +    int ret = 0;
-> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
-> +
-> +    if (cap_has_mp_state) {
-> +        struct kvm_mp_state mp_state;
-> +
-> +        ret = kvm_vcpu_ioctl(cs, KVM_GET_MP_STATE, &mp_state);
-> +        if (ret) {
-> +            fprintf(stderr, "%s: failed to sync MP_STATE to QEMU %d/%s\n",
-> +                    __func__, ret, strerror(-ret));
-> +            return ret;
-> +        }
-> +        env->mp_state = mp_state.mp_state;
-> +    }
-> +
-> +    return ret;
->  }
->  
->  int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
-> @@ -1289,13 +1328,8 @@ int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
->          return ret;
->      }
->  
-> -    if (KVM_PUT_RESET_STATE == level) {
-> -        RISCVCPU *cpu = RISCV_CPU(cs);
-> -        if (cs->cpu_index == 0) {
-> -            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_RUNNABLE);
-> -        } else {
-> -            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_STOPPED);
-> -        }
-> +    if (level >= KVM_PUT_RESET_STATE) {
-> +        ret = kvm_riscv_sync_mpstate_to_kvm(cs);
->          if (ret) {
->              return ret;
->          }
-> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
-> index b2bcd1041f..953db94160 100644
-> --- a/target/riscv/kvm/kvm_riscv.h
-> +++ b/target/riscv/kvm/kvm_riscv.h
-> @@ -28,7 +28,8 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
->                            uint64_t aplic_base, uint64_t imsic_base,
->                            uint64_t guest_num);
->  void riscv_kvm_aplic_request(void *opaque, int irq, int level);
-> -int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
-> +int kvm_riscv_sync_mpstate_to_kvm(CPUState *cs);
-> +int kvm_riscv_sync_mpstate_to_qemu(CPUState *cs);
->  void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
->  uint64_t kvm_riscv_get_timebase_frequency(RISCVCPU *cpu);
->  
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 889e2b6570..8562a0a1d6 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -401,8 +401,8 @@ static const VMStateDescription vmstate_ssp = {
->  
->  const VMStateDescription vmstate_riscv_cpu = {
->      .name = "cpu",
-> -    .version_id = 10,
-> -    .minimum_version_id = 10,
-> +    .version_id = 11,
-> +    .minimum_version_id = 11,
->      .post_load = riscv_cpu_post_load,
->      .fields = (const VMStateField[]) {
->          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-> @@ -422,6 +422,7 @@ const VMStateDescription vmstate_riscv_cpu = {
->          VMSTATE_UNUSED(4),
->          VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
->          VMSTATE_UINTTL(env.priv, RISCVCPU),
-> +        VMSTATE_UINT32(env.mp_state, RISCVCPU),
->          VMSTATE_BOOL(env.virt_enabled, RISCVCPU),
->          VMSTATE_UINT64(env.resetvec, RISCVCPU),
->          VMSTATE_UINTTL(env.mhartid, RISCVCPU),
-> -- 
-> 2.43.0
->
-
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+SGkgTWljaGFlbO+8jAoKWWVzLCB0aGUgcGF0Y2ggc2VyaWVzIGlzIGludGVuZGVkIHRvIGJlIGFw
+cGxpZWQgdG8gdGhlIG5leHQgZGV2ZWxvcG1lbnQgcmVsZWFzZSwgMTAuMi4gIApBZGRpdGlvbmFs
+bHksIHdlIHdhbnQgdG8gY2hlcnJ5LXBpY2sgaXQgdG8gdGhlIHN0YWJsZSAxMC4wLnggYW5kIDEw
+LjEueCBzZXJpZXMgYXMgd2VsbC4KCkJlc3QgcmVnYXJkcywKWGllIEJvCgoKPiAtLS0tLeWOn+Wn
+i+mCruS7ti0tLS0tCj4g5Y+R5Lu25Lq6OiAiTWljaGFlbCBUb2thcmV2IiA8bWp0QHRscy5tc2su
+cnU+Cj4g5Y+R6YCB5pe26Ze0OjIwMjUtMDktMTAgMTc6NTM6MTQgKOaYn+acn+S4iSkKPiDmlLbk
+u7bkuro6ICJYaWUgQm8iIDx4YkB1bHRyYXJpc2MuY29tPiwgcWVtdS1kZXZlbEBub25nbnUub3Jn
+Cj4g5oqE6YCBOiBham9uZXNAdmVudGFuYW1pY3JvLmNvbSwgcWVtdS1yaXNjdkBub25nbnUub3Jn
+LCBwYm9uemluaUByZWRoYXQuY29tLCBhbnVwQGJyYWluZmF1bHQub3JnLCBhbGlzdGFpci5mcmFu
+Y2lzQHdkYy5jb20sIHJrcmNtYXJAdmVudGFuYW1pY3JvLmNvbSwgcGFsbWVyQGRhYmJlbHQuY29t
+LCB4aWFteUB1bHRyYXJpc2MuY29tCj4g5Li76aKYOiBSZTogW1BBVENIIHY2IGZvciB2MTAuMC4w
+IDAvMl0gdGFyZ2V0L3Jpc2N277yaRml4IHJpc2N2NjQga3ZtIG1pZ3JhdGlvbgo+IAo+IE9uIDEw
+LjA5LjIwMjUgMTI6MzUsIFhpZSBCbyB3cm90ZToKPiA+IFRoaXMgc2VyaWVzKHY2KSByZXBsYWNl
+cyB0aGUgZWFybGllciBzZXJpZXMgcGF0Y2giW1BBVENIIHY1IGZvciB2MTAuMC4wIDAvMl0KPiA+
+IHRhcmdldC9yaXNjdjogRml4IHJpc2N2NjQga3ZtIG1pZ3JhdGlvbiIuCj4gCj4gSGkhCj4gCj4g
+WW91J3JlIHRhcmdldHRpbmcgcWVtdSAxMC4wLCB3aGlsZSB3ZSBhbHJlYWR5IHJlbGVhc2VkIDEw
+LjEsCj4gYW5kIHRoZSBuZXh0IHJlbGVhc2UgaXMgMTAuMi4KPiAKPiBEb2VzIGl0IG1lYW4geW91
+ciBwYXRjaHNldCBzaG91bGQgYmUgYXBwbGllZCB0byAxMC4yLCBhbmQKPiBjaGVycnktcGlja2Vk
+IHRvIHN0YWJsZSAxMC4wLnggYW5kIDEwLjEueCBzZXJpZXM/Cj4gCj4gVGhhbmtzLAo+IAo+IC9t
+anQKDQoNCl9fX19fX19fX19fX19fX19fX19fX193d3cudWx0cmFyaXNjLmNvbQ0K6YeN6KaB5o+Q
+56S677ya5pys6YKu5Lu25YyF5ous6ZmE5Lu255qE5YaF5a655piv5Y+X5rOV5b6L5L+d5oqk55qE
+5L+d5a+G5L+h5oGv77yM5aaC5p6c5oKo5LiN5piv5oyH5a6a5pS25Lu25Lq677yM6K+356uL5Y2z
+5bCG5pys6YKu5Lu25Yig6Zmk77yM5rOV5b6L56aB5q2i5Lu75L2V6Z2e5rOV55qE5oqr6Zyy44CB
+5aSN5Yi244CB5Lyg5pKt5oiW5Lul5Lu75L2V5pa55byP5L2/55So5pys6YKu5Lu244CC5pys6YKu
+5Lu25Lit5YyF5ZCr55qE5oSP6KeB44CB5bu66K6u5piv5Z+65LqO5oiW5Y+X5Yiw5oiR5pa56KGo
+6L6+5ZKM5a6a5LmJ55qE5p2h5qy+5Y+K5p2h5Lu255qE6ZmQ5a6a77yM5aaC5peg5oiR5pa555qE
+5q2j5byP5Lmm6Z2i5r6E5riF5oiW5o6I5p2D77yM5LiN5Y+v6KKr5Y2V54us5L2c5Li65Lu75L2V
+5oOF5b2i5LiL55qE6K+B5o2u5oiW5L6d5o2u44CC5oSf6LCi5oKo55qE55CG6Kej5LiO6YWN5ZCI
+44CC54mI5p2D5omA5pyJ44CCSU1QT1JUQU5UIE5PVElDRTogVGhpcyBlbWFpbCwgaW5jbHVkaW5n
+IGl0cyBhdHRhY2htZW50IGlmIGFueSwgaXMgY29uZmlkZW50aWFsLiBJZiB5b3UgYXJlIG5vdCB0
+aGUgaW50ZW5kZWQgcmVjaXBpZW50LCBwbGVhc2UgZGVsZXRlIGl0IGZyb20geW91ciBjb21wdXRl
+ciBpbW1lZGlhdGVseS4gQW55IGRpc2Nsb3N1cmUsIGNvcHlpbmcsIG9yIGRpc3RyaWJ1dGlvbiBv
+ZiB0aGlzIG1lc3NhZ2UsIG9yIHRha2luZyBvZiBhbnkgYWN0aW9uIGJhc2VkIG9uIGl0IGlzIHN0
+cmljdGx5IHByb2hpYml0ZWQuICBBbnkgb3BpbmlvbnMgYW5kIHN1Z2dlc3Rpb25zIGNvbnRhaW5l
+ZCBpbiB0aGlzIGVtYWlsIGFyZSBzdWJqZWN0IHRvIHRoZSB0ZXJtcyBhbmQgY29uZGl0aW9ucyBl
+eHByZXNzZWQgYW5kIGRlZmluZWQgYnkgdXMgYW5kIHNob3VsZCBub3QgYmUgcmVsaWVkIHVwb24g
+dW5jb25kaXRpb25hbGx5IHVuZGVyIGFueSBjaXJjdW1zdGFuY2VzIHVubGVzcyB0aGV5IGFyZSBj
+b25maXJtZWQgaW4gb2ZmaWNpYWwgd3JpdHRlbiBjbGFyaWZpY2F0aW9uIG9yIGF1dGhvcml6YXRp
+b24gZnJvbSB1cy4gIFRoYW5rIHlvdSBmb3IgeW91ciB1bmRlcnN0YW5kaW5nIGFuZCBjb29wZXJh
+dGlvbi5BbGwgcmlnaHRzIHJlc2VydmVkLg==
 
