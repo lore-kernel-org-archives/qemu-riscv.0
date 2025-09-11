@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7828CAC58D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Sep 2025 12:46:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05D3BCAC58E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Sep 2025 16:07:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uwghD-00011k-Fr; Thu, 11 Sep 2025 08:46:39 -0400
+	id 1uwjpC-00058q-F8; Thu, 11 Sep 2025 12:07:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1uwgh8-0000xP-EU
- for qemu-riscv@nongnu.org; Thu, 11 Sep 2025 08:46:34 -0400
-Received: from mail-io1-xd31.google.com ([2607:f8b0:4864:20::d31])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1uwjp5-00056J-Hf
+ for qemu-riscv@nongnu.org; Thu, 11 Sep 2025 12:07:00 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1uwgh2-0004FW-JG
- for qemu-riscv@nongnu.org; Thu, 11 Sep 2025 08:46:33 -0400
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-88432e29adcso18516839f.2
- for <qemu-riscv@nongnu.org>; Thu, 11 Sep 2025 05:46:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1uwjp3-00068u-K8
+ for qemu-riscv@nongnu.org; Thu, 11 Sep 2025 12:06:59 -0400
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-b4e84a61055so647127a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 11 Sep 2025 09:06:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1757594785; x=1758199585; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZrMI/UQCPUOK+lYpzzNGXyFkKmZBkCOOrg3ZVSWqMFY=;
- b=cxTCOsQXEyto+t4bU28FnXS6/uqbShJidqAP9ubiqu+VpnqgCjPOjcplBAw8I0/b9q
- 2hbuLmW/+lMNsD5k/DQaYczLDt//O6BG10urv+27K7bN900ZZtBSBfGMapzERYGej1J2
- XU5IYjjQCPEqwDsL8Hi+9dP+4FVCKQZmfsq0kOQgQd3BnLpWKOgpJZk1AO8p8b/jmZn0
- VLsCCtpXkpYHb0pcYzSzKS7nZjsr2sOTN09kus9TnM/3B4BxRZHJ6Tu+vEcm9oK2Q+97
- IS+k5MPIef2Z60otkm9wAGN/fmAGCDqDb2psy6DgwHndxSGzaaiuM5Y9JDVRTZENirZw
- udsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757594785; x=1758199585;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=sifive.com; s=google; t=1757606816; x=1758211616; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZrMI/UQCPUOK+lYpzzNGXyFkKmZBkCOOrg3ZVSWqMFY=;
- b=BJeD2Xt54Wyrxa7LbsF9kBrlWVOsUEDW8bcx/QE3gaWivh3bv10ZngbMZStGzm1OWQ
- CRmWv5OI9pJom89bVqr/PcpHehN38MWlQpwCrJwUJ1MztdC75GM+f2RRQVmLvePY7j91
- TQu+X/rFBZap6QVrZu7GntSoT6OTO+J4Lzx0s5nChNb6XmmAkQ+gdvR9gTWJ9elh/Th7
- LdDootb/cmG4W9l5BDT3SiDh7AbtDsQwqJlO/zKxjiuvVZtftkzcfSBn1JEn1NVCx3GF
- OXRGWBrpCWeX26Gm0hFjjgpDbantpSzMIf1T+99iUTY7c/bbqD8JF2xKq7wCjBf4g5ds
- o71A==
+ bh=nZFC+ElBJPA1AjpB7Nc8nsuONRYfUOZ2+Qi69XrYzlo=;
+ b=T8IPqNFVYH2c9c6igwPOIr09pj5mLTPwAZ5AerXgLqZ64kO2w2YfJpPIA47Tw5h77t
+ ATufqBIfxaD3alcYgybbOIZ1+OhjBcrDr9o7JtOuV2sThvXT+R1ktSOo6v0N2XDrGsrp
+ Y3eZIIMUa0REYdZvMLTn8+S8Q0+HuN7JajAXndgvGDZdnUdnjSJzoC+Jtp+BzChCk5/T
+ q9DELiCKxqRJMBLBr3srlF5J1iQfSHuLuQ8LlHpxLT4D0cr/ggwQn7XWiMczra7vdGQH
+ 8q8vZ59JYmCVC3NwzgBuTq7+ZnZmYQmWgcMTKRtYJwyZam1LzpQiuFkhnQxVNNs2QEd3
+ HUzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757606816; x=1758211616;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nZFC+ElBJPA1AjpB7Nc8nsuONRYfUOZ2+Qi69XrYzlo=;
+ b=tOiOn4lCxC/n6+NtldGARQRgNZKCeCcuXk8Tns68Y7m0lywkQn2POPhNcCg3N05PB6
+ PTSry7uPAK4RkSh4iWehV20Dyf3kNiiN96raNWr9oDy1JwTBJ8K4/XjBzQOqqFpZFvxj
+ SuOXJm/OofrTe3hQcmkXjmEbgAJI93QsmvF3BMvSZ1SozSMSQpzGcBDjtgAzr4NuDy05
+ qUq3ajm6yQmOIGo2b5yYVqt2oFTJvtf/VaLEGBts/kOQr/WHdRtnPp13F/64Rt9r3YO0
+ Ij+wa1phU+xCRZfilj6iezYcvu8Nl07Rwm72RZhMaIQQaBSuRlXK51/+74tGk59lTb/Q
+ 6jcQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW8J2Qg3x1btB1+DxXSCGklaMjd5voKEF109pz7NSef2aMBMaTqYQT7vRe1Kpg1eBJ1ltZvRxcchz/D@nongnu.org
-X-Gm-Message-State: AOJu0Yxko02vd1NRIVCcDep2qxFwesASB4d3AY1p+ii80B6dBpHhQ836
- 6+1Tfkqi94phUukLRTwgqdMGjkuYz09TY9fweHzIrap9sJ73sGOibAts+tpFalmm8lk=
-X-Gm-Gg: ASbGncs2oiBxhko215ptZAEE3b/lvpev8733iu8OZZkGJQQP6aB9dpiJQoyCoLE1qCE
- cce169K+L7dWlqhfRmBUZS+2bDEw+i2Vk4RUOLWIzwQWk3kEQZ0r9pVL+05lEZn6vmklDEECBb/
- ahNkEVj4nacF2z2pWmXPv/PYJuSbKjSA59HsnlOeeP35bGfVOcc9CFzC5ud+68Fd87/Zwdt5jrY
- dULoQBLFW9GcfXYIjC/cHBl8GVukdvBFm0Ci5tqhS2MCPh+4R548i3uooBjsE3s5agBGgU88Eyz
- ARzv7VXac4rRXYzM1pMUgU4F1xOd1e//XpOsOvQv09CuKUaL/4ArAoUXrA7OMQOY6QBwNGhVIx2
- HFPC6twJbEw9pxiJZqeiv/ShfbOQ3RMyT0VU=
-X-Google-Smtp-Source: AGHT+IFwEd/ORFVt79NhnL5cGBqEHtyXZpA8Ltmn4DyQFoyRY2/vbHU5V5Yqnhq5V5qFX0Brdi2ZQQ==
-X-Received: by 2002:a05:6e02:b4c:b0:405:5e08:a3e4 with SMTP id
- e9e14a558f8ab-4055e17ea60mr205917515ab.1.1757594785530; 
- Thu, 11 Sep 2025 05:46:25 -0700 (PDT)
-Received: from localhost ([140.82.166.162]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-511f2efcd0csm564275173.5.2025.09.11.05.46.25
+ AJvYcCVUAYkv8uNs+DKHJxDKWtnky5k+JwBbSNgRPF6kwhSgTe21FpxXELRvMOMrGXQZL1maKk0Fv2lgTjDb@nongnu.org
+X-Gm-Message-State: AOJu0YxFGAwrw2CeMjBE+uN1XTysnZoU0J1LGmmebHX9gxA3P8GWnPk6
+ y/dPYaf1iT7JlM1rqjVOBPHSirJeWjfFn0aYbpZh62jzVjX+vTvttu7E7/5YTvdPI4M=
+X-Gm-Gg: ASbGncuBN1rewJCtFmibwFCPqYlyZHnvRxK6bUoNBPa5LkALltTGAqHV9vQ9JlalGfb
+ K4W1D+0+gdgvzN+WSC2Y4aZc6+PULbXiB+y+fGFsZ850exozTjuvA4q9KuxDbKcpLmIyqNm78uw
+ /P/a+IWvASGN+o7Pu9sgNmJFhiMzuANLpzznGW7FC61GFSpSqUEFvvq3UWNJzxpjZvK3eUODfFx
+ CKSZS1X9xDkGUc3Gh9ilFwx2E3X+SBdvl3CpE9UvHmxD+MisBcI2frPbsziSrkvQLay2czdEAty
+ dl8BsAwmptu9LT/4yE77USr7JKC4QJrmDBhEtSMH+5T+yGGql/WLGj+i1ZHRbEcvDtX4CtGSUsL
+ a6R/UAtKasbhaNpdGFyyqve33kEs5w7eY6uZBSsoMZ+Hr426QzHF2klDKJmftE368pY941KY=
+X-Google-Smtp-Source: AGHT+IFjeu0KSReedT4gszyGkIA9bES2oc+Nw8PGZ3HYA1jB/xtHwMR3Y+uSYLOJPoCYD8WtWNIAgQ==
+X-Received: by 2002:a17:903:b0b:b0:249:1156:31f3 with SMTP id
+ d9443c01a7336-25d243e7fd8mr56435ad.8.1757606815906; 
+ Thu, 11 Sep 2025 09:06:55 -0700 (PDT)
+Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-32dd9903a2asm2618765a91.24.2025.09.11.09.06.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Sep 2025 05:46:25 -0700 (PDT)
-Date: Thu, 11 Sep 2025 07:46:24 -0500
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Xie Bo <xb@ultrarisc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, mjt@tls.msk.ru, 
- pbonzini@redhat.com, anup@brainfault.org, alistair.francis@wdc.com, 
- rkrcmar@ventanamicro.com, palmer@dabbelt.com, xiamy@ultrarisc.com
-Subject: Re: [PATCH v7 for v10.0.0 1/2] Set KVM initial privilege mode and
- mp_state
-Message-ID: <20250911-de7f0f79263432894c875141@orel>
-References: <20250911083617.1173094-1-xb@ultrarisc.com>
- <20250911083617.1173094-2-xb@ultrarisc.com>
+ Thu, 11 Sep 2025 09:06:55 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-riscv@nongnu.org (open list:SiFive Machines),
+ Frank Chang <frank.chang@sifive.com>,
+ Emmanuel Blot <emmanuel.blot@sifive.com>
+Subject: [PATCH 1/4] hw/char: sifive_uart: Raise IRQ according to the Tx/Rx
+ watermark thresholds
+Date: Fri, 12 Sep 2025 00:06:43 +0800
+Message-ID: <20250911160647.5710-2-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250911160647.5710-1-frank.chang@sifive.com>
+References: <20250911160647.5710-1-frank.chang@sifive.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250911083617.1173094-2-xb@ultrarisc.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
- envelope-from=ajones@ventanamicro.com; helo=mail-io1-xd31.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,89 +108,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 11, 2025 at 04:36:15PM +0800, Xie Bo wrote:
-> For KVM mode, the privilege mode should not include M-mode, and the 
-> initial value should be set to S-mode. Additionally, a following patch 
-> adds the implementation of putting the vCPU privilege mode to KVM. 
-> When the vCPU runs for the first time, QEMU will first put the privilege 
-> state to KVM. If the initial value is set to M-mode, KVM will encounter 
-> an error.
-> 
-> In addition, this patch introduces the 'mp_state' field to RISC-V 
-> vCPUs, following the convention used by KVM on x86. The 'mp_state' 
-> reflects the multiprocessor state of a vCPU, and is used to control 
-> whether the vCPU is runnable by KVM. Randomly select one CPU as the 
-> boot CPU. Since each CPU executes the riscv_cpu_reset_hold() function 
-> and CPU0 executes first, only CPU0 randomly selects the boot CPU.
-> 
-> Signed-off-by: Xie Bo <xb@ultrarisc.com>
-> ---
->  target/riscv/cpu.c | 17 ++++++++++++++++-
->  target/riscv/cpu.h |  2 ++
->  2 files changed, 18 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 09ded6829a..f6c787ebdc 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -38,6 +38,7 @@
->  #include "kvm/kvm_riscv.h"
->  #include "tcg/tcg-cpu.h"
->  #include "tcg/tcg.h"
-> +#include "hw/boards.h"
->  
->  /* RISC-V CPU definitions */
->  static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
-> @@ -1031,18 +1032,32 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
->  #ifndef CONFIG_USER_ONLY
->      uint8_t iprio;
->      int i, irq, rdzero;
-> +    static int boot_cpu_index;
->  #endif
->      CPUState *cs = CPU(obj);
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(obj);
->      CPURISCVState *env = &cpu->env;
-> +    MachineState *ms = MACHINE(qdev_get_machine());
->  
->      if (mcc->parent_phases.hold) {
->          mcc->parent_phases.hold(obj, type);
->      }
->  #ifndef CONFIG_USER_ONLY
->      env->misa_mxl = mcc->misa_mxl_max;
-> -    env->priv = PRV_M;
-> +    if (kvm_enabled()) {
-> +        env->priv = PRV_S;
-> +    } else {
-> +        env->priv = PRV_M;
-> +    }
-> +    if (cs->cpu_index == 0) {
-> +        boot_cpu_index = g_random_int_range(0, ms->smp.cpus);
-> +    }
-> +    if (cs->cpu_index == boot_cpu_index) {
-> +        env->mp_state = KVM_MP_STATE_RUNNABLE;
-> +    } else {
-> +        env->mp_state = KVM_MP_STATE_STOPPED;
-> +    }
->      env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
->      if (env->misa_mxl > MXL_RV32) {
->          /*
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 51e49e03de..4b1c5bf0e4 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -256,6 +256,8 @@ struct CPUArchState {
->  #endif
->  
->      target_ulong priv;
-> +    /* Current multiprocessor state of this vCPU. */
-> +    uint32_t mp_state;
->      /* CSRs for execution environment configuration */
->      uint64_t menvcfg;
->      target_ulong senvcfg;
-> -- 
-> 2.43.0
->
+From: Frank Chang <frank.chang@sifive.com>
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Currently, the SiFive UART raises an IRQ whenever:
+
+  1. ie.txwm is enabled.
+  2. ie.rxwm is enabled and the Rx FIFO is not empty.
+
+It does not check the watermark thresholds set by software. However,
+since commit [1] changed the SiFive UART character printing from
+synchronous to asynchronous, Tx overflows may occur, causing characters
+to be dropped when running Linux because:
+
+  1. The Linux SiFive UART driver sets the transmit watermark level to 1
+     [2], meaning a transmit watermark interrupt is raised whenever a
+     character is enqueued into the Tx FIFO.
+  2. Upon receiving a transmit watermark interrupt, the Linux driver
+     transfers up to a full Tx FIFO's worth of characters from the Linux
+     serial transmit buffer [3], without checking the txdata.full flag
+     before transferring multiple characters [4].
+
+To fix this issue, we must honor the Tx/Rx watermark thresholds and
+raise interrupts only when the Tx threshold is exceeded or the Rx
+threshold is undercut.
+
+[1] 53c1557b230986ab6320a58e1b2c26216ecd86d5
+[2] https://github.com/torvalds/linux/blob/master/drivers/tty/serial/sifive.c#L1039
+[3] https://github.com/torvalds/linux/blob/master/drivers/tty/serial/sifive.c#L538
+[4] https://github.com/torvalds/linux/blob/master/drivers/tty/serial/sifive.c#L291
+
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Signed-off-by: Emmanuel Blot <emmanuel.blot@sifive.com>
+---
+ hw/char/sifive_uart.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+index 9bc697a67b5..138c31fcabf 100644
+--- a/hw/char/sifive_uart.c
++++ b/hw/char/sifive_uart.c
+@@ -35,16 +35,17 @@
+  */
+ 
+ /* Returns the state of the IP (interrupt pending) register */
+-static uint64_t sifive_uart_ip(SiFiveUARTState *s)
++static uint32_t sifive_uart_ip(SiFiveUARTState *s)
+ {
+-    uint64_t ret = 0;
++    uint32_t ret = 0;
+ 
+-    uint64_t txcnt = SIFIVE_UART_GET_TXCNT(s->txctrl);
+-    uint64_t rxcnt = SIFIVE_UART_GET_RXCNT(s->rxctrl);
++    uint32_t txcnt = SIFIVE_UART_GET_TXCNT(s->txctrl);
++    uint32_t rxcnt = SIFIVE_UART_GET_RXCNT(s->rxctrl);
+ 
+-    if (txcnt != 0) {
++    if (fifo8_num_used(&s->tx_fifo) < txcnt) {
+         ret |= SIFIVE_UART_IP_TXWM;
+     }
++
+     if (s->rx_fifo_len > rxcnt) {
+         ret |= SIFIVE_UART_IP_RXWM;
+     }
+@@ -55,15 +56,14 @@ static uint64_t sifive_uart_ip(SiFiveUARTState *s)
+ static void sifive_uart_update_irq(SiFiveUARTState *s)
+ {
+     int cond = 0;
+-    if ((s->ie & SIFIVE_UART_IE_TXWM) ||
+-        ((s->ie & SIFIVE_UART_IE_RXWM) && s->rx_fifo_len)) {
++    uint32_t ip = sifive_uart_ip(s);
++
++    if (((ip & SIFIVE_UART_IP_TXWM) && (s->ie & SIFIVE_UART_IE_TXWM)) ||
++        ((ip & SIFIVE_UART_IP_RXWM) && (s->ie & SIFIVE_UART_IE_RXWM))) {
+         cond = 1;
+     }
+-    if (cond) {
+-        qemu_irq_raise(s->irq);
+-    } else {
+-        qemu_irq_lower(s->irq);
+-    }
++
++    qemu_set_irq(s->irq, cond);
+ }
+ 
+ static gboolean sifive_uart_xmit(void *do_not_use, GIOCondition cond,
+-- 
+2.49.0
+
 
