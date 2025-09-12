@@ -4,95 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87E5ECAC587
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Sep 2025 16:08:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C43A5CA101F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Sep 2025 08:57:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uwjpD-000599-Cj; Thu, 11 Sep 2025 12:07:07 -0400
+	id 1uwzZy-000288-DR; Fri, 12 Sep 2025 04:56:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1uwjp7-00056c-Gw
- for qemu-riscv@nongnu.org; Thu, 11 Sep 2025 12:07:02 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1uwjp5-00069F-Ac
- for qemu-riscv@nongnu.org; Thu, 11 Sep 2025 12:07:00 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-b4fb8d3a2dbso718768a12.3
- for <qemu-riscv@nongnu.org>; Thu, 11 Sep 2025 09:06:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1757606818; x=1758211618; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Vtn/P0RSi7hHJExTcycuQeWBhjKBhcvfR0eoJo2mnyg=;
- b=ISpUqbZRtT4r7zCAFy5vldedAUnSSGz/pG7b9SVVIuOVpmm6F5qfQVHOTbe6R+Rgvo
- hw2CZl8idgA5FzU5eAu1Mij1MOIEUtgOfQOm5KjBX/9e0TSIzWq+Q958oA5VPCccnqTq
- rr46AB5Y12LlglP+7HEA/fUEU23v9q82R9we0Ud7gfQDqf1c56usZfDvW34wf2SYPzkr
- MpQYjNd4M4dBzuxmHTdKLKtIRYHJ1/57bAGtDNbr9ZcMxoKEE7sBmZZPuuMom4sHRZbD
- jNmdXbj5Ep/o6kVv4ZY59xJ80B2zR+qwn3EZ8M/XvkbCcnkUxMJ2+z6rtOyaVcxxx6mv
- a27g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757606818; x=1758211618;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Vtn/P0RSi7hHJExTcycuQeWBhjKBhcvfR0eoJo2mnyg=;
- b=Mqra+4r/2//EPIfKe80Bs2ZSJBEtgl519mkvXsRGte6OrxQHKMA5huQLrWeXLeMEg2
- NRWpHrsh11M3/Fmhvrp9gn7JA26jI5JruWN05XVZE3v8hJ1Pe6Cz81/g9hbBgaMywc6O
- xQaC5KPykJAS+jWX44wkVShweFDglX5GWvMX3vvvqksqeC1KHClM23Wp8Cb/GLPKey+K
- 4/stGFrgmL2Q55HkAujDevvVWC2/15D/Kk8cuelCoqmuC+HqhBba4VULfnEfYhrg44dr
- 1wnJzzuQHg9d7//usSfrkjT/aEhxUl47r0HitkM5BzWb7cgEzLnnwXbsLZEqW58iMfBh
- UCug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWiL7GpKG/cxH5p3WbsaZvAilCXlX2nhMmu2iobAVhfQEEl7jaAiVE2YcfPV56MhAfzHFLXEQYKU16s@nongnu.org
-X-Gm-Message-State: AOJu0Yx7mrMqbsv/sv5vznAupZ3+pexUQDD16Q0wLc6zQ5fTdFBgsrQI
- /FiSGmiFFSomGdzNvVtWIwECaDB4VztpdXEBIrr6Y8eObr43WS8/UPuk8JPGLAruSATE/0bDUcV
- pzng3Krg=
-X-Gm-Gg: ASbGncv8X6/13fprLsq3WnQHkDL8NvvwJOelTxTLSaN/R9pZu6xxtl5XFwhrsRQeq8V
- 0UCgLApKUYHd4eviViI6TR3e5IQkgTaYxZEvIC8UNolOKK00RW0yeAkkBp6TiHZ8el1RciR4w/g
- YBWx+xStFtEkMr1hQ0oC6IujRJeyC8V+NA450Et3KnJlTYV6gcCVFfzWrvJdEGoqHqlxEEE1MfV
- rub4eTE/GtWi/PJh5ZFhZ1XrZKkm0+2Cruyd30G/a0ElLfiHZfK/F4eBv826fvn02QMcmg6PyhJ
- ssSGNKMg+pNRIreODUdrdhFx/2ROcbD6ddN4ZVKX2TxPNFFaNG+O+fM/rzZttXumwvFrwIoiIO0
- rImAxaN4bHV97r5pSLnVxvV89HX24WKGBAludNV4N3AsGbHGAQQ+aA23Gu9ts
-X-Google-Smtp-Source: AGHT+IHSG7yc6QMm1MwjKEtdgpTLLmYFqDutKKmlNN/Skkiwm3gmRfQXNxpur/zJQlqMqpTo99hbUA==
-X-Received: by 2002:a17:90b:2683:b0:327:ba77:a47 with SMTP id
- 98e67ed59e1d1-32d43f05b51mr28369135a91.15.1757606817949; 
- Thu, 11 Sep 2025 09:06:57 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-32dd9903a2asm2618765a91.24.2025.09.11.09.06.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Sep 2025 09:06:57 -0700 (PDT)
-From: frank.chang@sifive.com
+ (Exim 4.90_1) (envelope-from <xb@ultrarisc.com>)
+ id 1uwzZm-0001mp-J8; Fri, 12 Sep 2025 04:56:14 -0400
+Received: from [218.76.62.146] (helo=ultrarisc.com)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <xb@ultrarisc.com>)
+ id 1uwzZh-0007hs-Pr; Fri, 12 Sep 2025 04:56:13 -0400
+Received: from ur-dp1000.. (unknown [192.168.100.1])
+ by localhost.localdomain (Coremail) with SMTP id
+ AQAAfwCXENBN4MNofEEtAA--.43821S4; 
+ Fri, 12 Sep 2025 16:57:02 +0800 (CST)
+From: Xie Bo <xb@ultrarisc.com>
 To: qemu-devel@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org (open list:SiFive Machines),
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH 2/4] hw/char: sifive_uart: Avoid pushing Tx FIFO when size is
- zero
-Date: Fri, 12 Sep 2025 00:06:44 +0800
-Message-ID: <20250911160647.5710-3-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250911160647.5710-1-frank.chang@sifive.com>
-References: <20250911160647.5710-1-frank.chang@sifive.com>
+Cc: ajones@ventanamicro.com, qemu-riscv@nongnu.org, mjt@tls.msk.ru,
+ pbonzini@redhat.com, anup@brainfault.org, alistair.francis@wdc.com,
+ rkrcmar@ventanamicro.com, palmer@dabbelt.com, xiamy@ultrarisc.com,
+ Xie Bo <xb@ultrarisc.com>
+Subject: [PATCH v8 for v10.0.0 2/2] Fix VM resume after QEMU+KVM migration
+Date: Fri, 12 Sep 2025 16:55:33 +0800
+Message-ID: <20250912085535.1649347-3-xb@ultrarisc.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250912085535.1649347-1-xb@ultrarisc.com>
+References: <20250912085535.1649347-1-xb@ultrarisc.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-CM-TRANSID: AQAAfwCXENBN4MNofEEtAA--.43821S4
+X-Coremail-Antispam: 1UD129KBjvJXoWxtF4kZw1rKF4rWw1kJr4xJFb_yoW7ArW7pr
+ s8GFZ8CryxGrWxX34fJ34DXFn5Gw47GanxC3y09r4akF45GrZ09r1kKay2yrs5G348Ar12
+ 9F45AFy3ua15tFJanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUml14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
+ x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
+ ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJwAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+ xKxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE-syl42xK82IYc2Ij64vIr41l4I8I3I0E
+ 4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGV
+ WUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_
+ JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rV
+ WUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4U
+ JbIYCTnIWIevJa73UjIFyTuYvjfUF5rcDUUUU
+X-CM-SenderInfo: l0e63zxwud2x1vfou0bp/1tbiAQADB2jDefAAOgAAsd
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 218.76.62.146 (failed)
+Received-SPF: pass client-ip=218.76.62.146; envelope-from=xb@ultrarisc.com;
+ helo=ultrarisc.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ RDNS_NONE=0.793, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,31 +81,170 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frank Chang <frank.chang@sifive.com>
+Fix two migration issues for virtual machines in KVM mode:
+1.It saves and restores the vCPU's privilege mode to ensure that the 
+vCPU's privilege mode is correct after migration.
+2.It saves and restores the vCPU's mp_state (runnable or stopped) and 
+includes this state in the migration sequence, upgrading the vmstate 
+version to ensure that the vCPU's mp_state is correct after migration.
 
-There's no need to call fifo8_push_all() when size is zero.
+KVM_PUT_RUNTIME_STATE only synchronizes the vCPU’s runtime-modified 
+state (such as registers), whereas mp_state is related to system boot, 
+multi-core initialization, and is not modified during normal operation. 
+Therefore, mp_state is only synchronized to KVM during KVM_PUT_RESET_STATE 
+and KVM_PUT_FULL_STATE.
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Signed-off-by: Xie Bo <xb@ultrarisc.com>
 ---
- hw/char/sifive_uart.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ target/riscv/kvm/kvm-cpu.c   | 60 ++++++++++++++++++++++++++++--------
+ target/riscv/kvm/kvm_riscv.h |  3 +-
+ target/riscv/machine.c       |  5 +--
+ 3 files changed, 52 insertions(+), 16 deletions(-)
 
-diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-index 138c31fcabf..401f869680d 100644
---- a/hw/char/sifive_uart.c
-+++ b/hw/char/sifive_uart.c
-@@ -122,7 +122,9 @@ static void sifive_uart_write_tx_fifo(SiFiveUARTState *s, const uint8_t *buf,
-         qemu_log_mask(LOG_GUEST_ERROR, "sifive_uart: TX FIFO overflow");
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 0f4997a918..1434dd1c51 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -576,6 +576,12 @@ static int kvm_riscv_get_regs_core(CPUState *cs)
+     }
+     env->pc = reg;
+ 
++    ret = kvm_get_one_reg(cs, RISCV_CORE_REG(env, mode), &reg);
++    if (ret) {
++        return ret;
++    }
++    env->priv = reg;
++
+     for (i = 1; i < 32; i++) {
+         uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
+         ret = kvm_get_one_reg(cs, id, &reg);
+@@ -601,6 +607,12 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
+         return ret;
      }
  
--    fifo8_push_all(&s->tx_fifo, buf, size);
-+    if (size > 0) {
-+        fifo8_push_all(&s->tx_fifo, buf, size);
++    reg = env->priv;
++    ret = kvm_set_one_reg(cs, RISCV_CORE_REG(env, mode), &reg);
++    if (ret) {
++        return ret;
 +    }
++
+     for (i = 1; i < 32; i++) {
+         uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
+         reg = env->gpr[i];
+@@ -1244,25 +1256,52 @@ int kvm_arch_get_registers(CPUState *cs, Error **errp)
+         return ret;
+     }
  
-     if (fifo8_is_full(&s->tx_fifo)) {
-         s->txfifo |= SIFIVE_UART_TXFIFO_FULL;
++    ret = kvm_riscv_sync_mpstate_to_qemu(cs);
++    if (ret) {
++        return ret;
++    }
++
+     return ret;
+ }
+ 
+-int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state)
++int kvm_riscv_sync_mpstate_to_kvm(CPUState *cs)
+ {
++    int ret = 0;
++    CPURISCVState *env = &RISCV_CPU(cs)->env;
++
+     if (cap_has_mp_state) {
+         struct kvm_mp_state mp_state = {
+-            .mp_state = state
++            .mp_state = env->mp_state
+         };
+ 
+-        int ret = kvm_vcpu_ioctl(CPU(cpu), KVM_SET_MP_STATE, &mp_state);
++        ret = kvm_vcpu_ioctl(cs, KVM_SET_MP_STATE, &mp_state);
+         if (ret) {
+-            fprintf(stderr, "%s: failed to sync MP_STATE %d/%s\n",
++            fprintf(stderr, "%s: failed to sync MP_STATE to KVM %d/%s\n",
+                     __func__, ret, strerror(-ret));
+-            return -1;
+         }
+     }
+ 
+-    return 0;
++    return ret;
++}
++
++int kvm_riscv_sync_mpstate_to_qemu(CPUState *cs)
++{
++    int ret = 0;
++    CPURISCVState *env = &RISCV_CPU(cs)->env;
++
++    if (cap_has_mp_state) {
++        struct kvm_mp_state mp_state;
++
++        ret = kvm_vcpu_ioctl(cs, KVM_GET_MP_STATE, &mp_state);
++        if (ret) {
++            fprintf(stderr, "%s: failed to sync MP_STATE to QEMU %d/%s\n",
++                    __func__, ret, strerror(-ret));
++            return ret;
++        }
++        env->mp_state = mp_state.mp_state;
++    }
++
++    return ret;
+ }
+ 
+ int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
+@@ -1289,13 +1328,8 @@ int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
+         return ret;
+     }
+ 
+-    if (KVM_PUT_RESET_STATE == level) {
+-        RISCVCPU *cpu = RISCV_CPU(cs);
+-        if (cs->cpu_index == 0) {
+-            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_RUNNABLE);
+-        } else {
+-            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_STOPPED);
+-        }
++    if (level >= KVM_PUT_RESET_STATE) {
++        ret = kvm_riscv_sync_mpstate_to_kvm(cs);
+         if (ret) {
+             return ret;
+         }
+diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
+index b2bcd1041f..953db94160 100644
+--- a/target/riscv/kvm/kvm_riscv.h
++++ b/target/riscv/kvm/kvm_riscv.h
+@@ -28,7 +28,8 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+                           uint64_t aplic_base, uint64_t imsic_base,
+                           uint64_t guest_num);
+ void riscv_kvm_aplic_request(void *opaque, int irq, int level);
+-int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
++int kvm_riscv_sync_mpstate_to_kvm(CPUState *cs);
++int kvm_riscv_sync_mpstate_to_qemu(CPUState *cs);
+ void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+ uint64_t kvm_riscv_get_timebase_frequency(RISCVCPU *cpu);
+ 
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 889e2b6570..8562a0a1d6 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -401,8 +401,8 @@ static const VMStateDescription vmstate_ssp = {
+ 
+ const VMStateDescription vmstate_riscv_cpu = {
+     .name = "cpu",
+-    .version_id = 10,
+-    .minimum_version_id = 10,
++    .version_id = 11,
++    .minimum_version_id = 11,
+     .post_load = riscv_cpu_post_load,
+     .fields = (const VMStateField[]) {
+         VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+@@ -422,6 +422,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_UNUSED(4),
+         VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
+         VMSTATE_UINTTL(env.priv, RISCVCPU),
++        VMSTATE_UINT32(env.mp_state, RISCVCPU),
+         VMSTATE_BOOL(env.virt_enabled, RISCVCPU),
+         VMSTATE_UINT64(env.resetvec, RISCVCPU),
+         VMSTATE_UINTTL(env.mhartid, RISCVCPU),
 -- 
-2.49.0
+2.43.0
 
 
