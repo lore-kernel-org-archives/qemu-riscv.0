@@ -4,90 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D672CAC58E
-	for <qemu-riscv@archiver.kernel.org>; Sat, 13 Sep 2025 06:28:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B41D3CAC587
+	for <qemu-riscv@archiver.kernel.org>; Sat, 13 Sep 2025 09:23:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uxJjx-00007A-FM; Sat, 13 Sep 2025 02:28:05 -0400
+	id 1uxMSg-0002Ea-L6; Sat, 13 Sep 2025 05:22:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1uxJju-00005x-F2; Sat, 13 Sep 2025 02:28:02 -0400
-Received: from isrv.corpit.ru ([212.248.84.144])
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uxMSd-0002DC-0V; Sat, 13 Sep 2025 05:22:24 -0400
+Received: from [115.124.28.43] (helo=out28-43.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1uxJjr-0008AP-03; Sat, 13 Sep 2025 02:28:02 -0400
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id CC3B6153378;
- Sat, 13 Sep 2025 09:27:53 +0300 (MSK)
-Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
- by tsrv.corpit.ru (Postfix) with ESMTP id 886FD27EEAC;
- Sat, 13 Sep 2025 09:27:56 +0300 (MSK)
-Message-ID: <0032d919-d99c-4ad6-8883-b13d08510bd1@tls.msk.ru>
-Date: Sat, 13 Sep 2025 09:27:56 +0300
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uxMSX-0004yq-F3; Sat, 13 Sep 2025 05:22:22 -0400
+Received: from ZEVORN-PC(mailfrom:chao.liu@zevorn.cn
+ fp:SMTPD_---.eeCn-1x_1757755077 cluster:ay29) by smtp.aliyun-inc.com;
+ Sat, 13 Sep 2025 17:17:58 +0800
+From: Chao Liu <chao.liu@zevorn.cn>
+To: richard.henderson@linaro.org, paolo.savini@embecosm.com, npiggin@gmail.com,
+ ebiggers@kernel.org, dbarboza@ventanamicro.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Chao Liu <chao.liu@zevorn.cn>
+Subject: [PATCH v8 1/2] target/riscv: Use tcg nodes for strided vector ld/st
+ generation
+Date: Sat, 13 Sep 2025 17:17:09 +0800
+Message-ID: <1f22506f44570abf3bb17bf144d398807be0ab40.1757690407.git.chao.liu@zevorn.cn>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <cover.1757690407.git.chao.liu@zevorn.cn>
+References: <cover.1757690407.git.chao.liu@zevorn.cn>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: target/riscv/pmu.c:216:riscv_pmu_icount_update_priv: assertion
- failed: (newpriv <= PRV_S)
-From: Michael Tokarev <mjt@tls.msk.ru>
-To: QEMU Development <qemu-devel@nongnu.org>, qemu-riscv@nongnu.org
-References: <48ae7017-6388-454c-aaff-42ca82331b00@tls.msk.ru>
-Content-Language: en-US, ru-RU
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- xsFNBGYpLkcBEACsajkUXU2lngbm6RyZuCljo19q/XjZTMikctzMoJnBGVSmFV66kylUghxs
- HDQQF2YZJbnhSVt/mP6+V7gG6MKR5gYXYxLmypgu2lJdqelrtGf1XtMrobG6kuKFiD8OqV6l
- 2M5iyOZT3ydIFOUX0WB/B9Lz9WcQ6zYO9Ohm92tiWWORCqhAnwZy4ua/nMZW3RgO7bM6GZKt
- /SFIorK9rVqzv40D6KNnSyeWfqf4WN3EvEOozMfWrXbEqA7kvd6ShjJoe1FzCEQ71Fj9dQHL
- DZG+44QXvN650DqEtQ4RW9ozFk3Du9u8lbrXC5cqaCIO4dx4E3zxIddqf6xFfu4Oa5cotCM6
- /4dgxDoF9udvmC36qYta+zuDsnAXrYSrut5RBb0moez/AR8HD/cs/dS360CLMrl67dpmA+XD
- 7KKF+6g0RH46CD4cbj9c2egfoBOc+N5XYyr+6ejzeZNf40yjMZ9SFLrcWp4yQ7cpLsSz08lk
- a0RBKTpNWJdblviPQaLW5gair3tyJR+J1ER1UWRmKErm+Uq0VgLDBDQoFd9eqfJjCwuWZECp
- z2JUO+zBuGoKDzrDIZH2ErdcPx3oSlVC2VYOk6H4cH1CWr9Ri8i91ClivRAyVTbs67ha295B
- y4XnxIVaZU+jJzNgLvrXrkI1fTg4FJSQfN4W5BLCxT4sq8BDtwARAQABzSBNaWNoYWVsIFRv
- a2FyZXYgPG1qdEB0bHMubXNrLnJ1PsLBlAQTAQoAPhYhBJ2L4U4/Kp3XkZko8WGtPZjs3yyO
- BQJmKS5HAhsDBQkSzAMABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEGGtPZjs3yyOZSAP
- /ibilK1gbHqEI2zR2J59Dc0tjtbByVmQ8IMh0SYU3j1jeUoku2UCgdnGKpwvLXtwZINgdl6Q
- cEaDBRX6drHLJFAi/sdgwVgdnDxaWVJO/ZIN/uJI0Tx7+FSAk8CWSa4IWUOzPNmtrDfb4z6v
- G36rppY8bTNKbX6nWFXuv2LXQr7g6+kKnbwv4QFpD+UFF1CrLm3byMq4ikdBXpZx030qBL61
- b7PrfXcBLao0357kWGH6C2Zu4wBnDUJwGi68pI5rzSRAFyAQsE89sjLdR1yFoBH8NiFnAQXP
- LA8Am9FMsC7D/bi/kwKTJdcZvzdGU1HG6tJvXLWC+nqGpJNBzRdDpjqtxNuL76vVd/JbsFMS
- JchLN+01fNQ5FHglvkd6md7vO+ULq+r9An5hMiDoRbYVUOBN8uiYNk+qKbdgSfbhsgPURqHi
- 1bXkgMeMasqWbGMe7iBW/YH2ePfZ6HuKLNQDCkiWZYPQZvyXHvQHjuJJ5+US81tkqM+Q6Snq
- 0L/O/LD0qLlbinHrcx0abg06VXBoYmGICJpf/3hhWQM4f+B/5w4vpl8q0B6Osz01pBUBfYak
- CiYCNHMWWVZkW9ZnY7FWiiPOu8iE1s5oPYqBljk3FNUk04SDKMF5TxL87I2nMBnVnvp0ZAuY
- k9ojiLqlhaKnZ1+zwmwmPmXzFSwlyMczPUMSzsFNBGYpLkcBEAC0mxV2j5M1x7GiXqxNVyWy
- OnlWqJkbkoyMlWFSErf+RUYlC9qVGwUihgsgEhQMg0nJiSISmU3vsNEx5j0T13pTEyWXWBdS
- XtZpNEW1lZ2DptoGg+6unpvxd2wn+dqzJqlpr4AY3vc95q4Za/NptWtSCsyJebZ7DxCCkzET
- tzbbnCjW1souCETrMy+G916w1gJkz4V1jLlRMEEoJHLrr1XKDdJRk/34AqXPKOzILlWRFK6s
- zOWa80/FNQV5cvjc2eN1HsTMFY5hjG3zOZb60WqwTisJwArjQbWKF49NLHp/6MpiSXIxF/FU
- jcVYrEk9sKHN+pERnLqIjHA8023whDWvJide7f1V9lrVcFt0zRIhZOp0IAE86E3stSJhZRhY
- xyIAx4dpDrw7EURLOhu+IXLeEJbtW89tp2Ydm7TVAt5iqBubpHpGTWV7hwPRQX2w2MBq1hCn
- K5Xx79omukJisbLqG5xUCR1RZBUfBlYnArssIZSOpdJ9wWMK+fl5gn54cs+yziUYU3Tgk0fJ
- t0DzQsgfd2JkxOEzJACjJWti2Gh3szmdgdoPEJH1Og7KeqbOu2mVCJm+2PrNlzCybOZuHOV5
- +vSarkb69qg9nU+4ZGX1m+EFLDqVUt1g0SjY6QmM5yjGBA46G3dwTEV0/u5Wh7idNT0mRg8R
- eP/62iTL55AM6QARAQABwsF8BBgBCgAmFiEEnYvhTj8qndeRmSjxYa09mOzfLI4FAmYpLkcC
- GwwFCRLMAwAACgkQYa09mOzfLI53ag/+ITb3WW9iqvbjDueV1ZHwUXYvebUEyQV7BFofaJbJ
- Sr7ek46iYdV4Jdosvq1FW+mzuzrhT+QzadEfYmLKrQV4EK7oYTyQ5hcch55eX00o+hyBHqM2
- RR/B5HGLYsuyQNv7a08dAUmmi9eAktQ29IfJi+2Y+S1okAEkWFxCUs4EE8YinCrVergB/MG5
- S7lN3XxITIaW00faKbqGtNqij3vNxua7UenN8NHNXTkrCgA+65clqYI3MGwpqkPnXIpTLGl+
- wBI5S540sIjhgrmWB0trjtUNxe9QcTGHoHtLeGX9QV5KgzNKoUNZsyqh++CPXHyvcN3OFJXm
- VUNRs/O3/b1capLdrVu+LPd6Zi7KAyWUqByPkK18+kwNUZvGsAt8WuVQF5telJ6TutfO8xqT
- FUzuTAHE+IaRU8DEnBpqv0LJ4wqqQ2MeEtodT1icXQ/5EDtM7OTH231lJCR5JxXOnWPuG6el
- YPkzzso6HT7rlapB5nulYmplJZSZ4RmE1ATZKf+wUPocDu6N10LtBNbwHWTT5NLtxNJAJAvl
- ojis6H1kRWZE/n5buyPY2NYeyWfjjrerOYt3er55n4C1I88RSCTGeejVmXWuo65QD2epvzE6
- 3GgKngeVm7shlp7+d3D3+fAAHTvulQQqV3jOodz+B4yzuZ7WljkNrmrWrH8aI4uA98c=
-In-Reply-To: <48ae7017-6388-454c-aaff-42ca82331b00@tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.43 (deferred)
+Received-SPF: pass client-ip=115.124.28.43; envelope-from=chao.liu@zevorn.cn;
+ helo=out28-43.mail.aliyun.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,17 +60,446 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 13.09.2025 09:22, Michael Tokarev wrote:
+This commit improves the performance of QEMU when emulating strided vector
+loads and stores by substituting the call for the helper function with the
+generation of equivalent TCG operations.
 
-> There's a bug open on launchpad too:
-> https://bugs.launchpad.net/ubuntu/+source/edk2/+bug/2120835
+PS:
 
-Hmm, I should consume some coffee before sending emails in the morning.
+An implementation is permitted to cause an illegal instruction if vstart
+is not 0 and it is set to a value that can not be produced implicitly by
+the implementation, but memory accesses will generally always need to
+deal with page faults.
 
-https://lists.gnu.org/archive/html/qemu-devel/2025-08/msg03901.html
-https://gcc.gnu.org/bugzilla/show_bug.cgi?id=121689
+So, if a strided vector memory access instruction has non-zero vstart,
+check it through vlse/vsse helpers function.
 
-Thanks,
+Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+Signed-off-by: Chao Liu <chao.liu@zevorn.cn>
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Tested-by: Eric Biggers <ebiggers@kernel.org>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 360 ++++++++++++++++++++++--
+ 1 file changed, 343 insertions(+), 17 deletions(-)
 
-/mjt
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 71f98fb350..092304a137 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -16,6 +16,7 @@
+  */
+ #include "tcg/tcg-op-gvec.h"
+ #include "tcg/tcg-gvec-desc.h"
++#include "tcg/tcg-temp-internal.h"
+ #include "internals.h"
+ 
+ static inline bool is_overlapped(const int8_t astart, int8_t asize,
+@@ -863,15 +864,296 @@ static bool st_us_mask_check(DisasContext *s, arg_vsm_v *a, uint8_t eew)
+ GEN_VEXT_TRANS(vlm_v, MO_8, vlm_v, ld_us_mask_op, ld_us_mask_check)
+ GEN_VEXT_TRANS(vsm_v, MO_8, vsm_v, st_us_mask_op, st_us_mask_check)
+ 
++/*
++ * MAXSZ returns the maximum vector size can be operated in bytes,
++ * which is used in GVEC IR when vl_eq_vlmax flag is set to true
++ * to accelerate vector operation.
++ */
++static inline uint32_t MAXSZ(DisasContext *s)
++{
++    int max_sz = s->cfg_ptr->vlenb << 3;
++    return max_sz >> (3 - s->lmul);
++}
++
++static inline uint32_t get_log2(uint32_t a)
++{
++    assert(is_power_of_2(a));
++    return ctz32(a);
++}
++
++typedef void gen_tl_ldst(TCGv, TCGv_ptr, tcg_target_long);
++
++static void gen_ldst_vreg(DisasContext *s, TCGv_i64 vreg, TCGv_i64 dest_offs,
++                          TCGv_i64 addr, gen_tl_ldst *ld_fn, gen_tl_ldst *st_fn,
++                          bool is_load)
++{
++    MemOp atomicity = (s->sew == 0) ? MO_ATOM_NONE : MO_ATOM_IFALIGN_PAIR;
++    TCGv_ptr dest_ptr = tcg_temp_new_ptr();
++    tcg_gen_trunc_i64_ptr(dest_ptr, dest_offs);
++
++    if (is_load) {
++        tcg_gen_qemu_ld_tl(vreg, addr, s->mem_idx, MO_LE | s->sew | atomicity);
++        st_fn(vreg, dest_ptr, 0);
++    } else {
++        ld_fn(vreg, dest_ptr, 0);
++        tcg_gen_qemu_st_tl(vreg, addr, s->mem_idx, MO_LE | s->sew | atomicity);
++    }
++    tcg_temp_free_ptr(dest_ptr);
++}
++
++/*
++ * Check whether the i bit of the mask is 0 or 1.
++ *
++ * static inline int vext_elem_mask(void *v0, int index)
++ * {
++ *     int idx = index / 64;
++ *     int pos = index % 64;
++ *     return (((uint64_t *)v0)[idx] >> pos) & 1;
++ * }
++ *
++ * And
++ *
++ * if (vext_elem_mask(v0, i) != 0) {
++ *     goto label;
++ * }
++ */
++static void gen_check_vext_elem_mask(TCGLabel *label, TCGv_i64 mask, TCGv_i64 mask_offs)
++{
++    TCGv_i64 mask_offs_i64 = tcg_temp_new_i64();
++    TCGv_ptr mask_offs_ptr = tcg_temp_new_ptr();
++    TCGv_i64 mask_offs_rem = tcg_temp_new_i64();
++    TCGv_i64 mask_elem = tcg_temp_new_i64();
++
++    tcg_gen_shri_tl(mask_offs_i64, mask_offs, 3);
++    tcg_gen_add_tl(mask_offs_i64, mask_offs_i64, mask);
++    tcg_gen_trunc_i64_ptr(mask_offs_ptr, mask_offs_i64);
++    tcg_gen_ld_i64(mask_elem, mask_offs_ptr, 0);
++    tcg_gen_andi_tl(mask_offs_rem, mask_offs, 7);
++    tcg_gen_shr_tl(mask_elem, mask_elem, mask_offs_rem);
++    tcg_gen_andi_tl(mask_elem, mask_elem, 1);
++    tcg_gen_brcond_i64(TCG_COND_TSTNE, mask_elem, tcg_constant_i64(1), label);
++
++    tcg_temp_free_i64(mask_offs_i64);
++    tcg_temp_free_ptr(mask_offs_ptr);
++    tcg_temp_free_i64(mask_offs_rem);
++    tcg_temp_free_i64(mask_elem);
++}
++
++static void gen_vext_set_elems_1s(TCGv dest, TCGv_i64 mask_offs, int sew,
++                                  gen_tl_ldst *st_fn, bool is_load)
++{
++    if (is_load) {
++        TCGv_ptr mask_offs_ptr = tcg_temp_new_ptr();
++        tcg_gen_shli_tl(mask_offs, mask_offs, sew);
++        tcg_gen_add_tl(mask_offs, mask_offs, dest);
++        tcg_gen_trunc_i64_ptr(mask_offs_ptr, mask_offs);
++        st_fn(tcg_constant_tl(-1), mask_offs_ptr, 0);
++        tcg_temp_free_ptr(mask_offs_ptr);
++    }
++}
++
++/*
++ * Simulate the strided load/store main loop:
++ *
++ * for (i = env->vstart; i < env->vl; env->vstart = ++i) {
++ *     k = 0;
++ *     while (k < nf) {
++ *         if (!vm && !vext_elem_mask(v0, i)) {
++ *             vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
++ *                               (i + k * max_elems + 1) * esz);
++ *             k++;
++ *             continue;
++ *         }
++ *         target_ulong addr = base + stride * i + (k << log2_esz);
++ *         ldst(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
++ *         k++;
++ *     }
++ * }
++ */
++static void gen_ldst_stride_main_loop(DisasContext *s, TCGv dest, uint32_t rs1,
++                                      uint32_t rs2, uint32_t vm, uint32_t nf,
++                                      gen_tl_ldst *ld_fn, gen_tl_ldst *st_fn,
++                                      bool is_load)
++{
++    TCGv_i64 addr = tcg_temp_new_i64();
++    TCGv base = get_gpr(s, rs1, EXT_NONE);
++    TCGv stride = get_gpr(s, rs2, EXT_NONE);
++
++    TCGv i = tcg_temp_new();
++    TCGv i_esz = tcg_temp_new();
++    TCGv k = tcg_temp_new();
++    TCGv k_esz = tcg_temp_new();
++    TCGv k_max = tcg_temp_new();
++    TCGv_i64 mask = tcg_temp_new_i64();
++    TCGv_i64 mask_offs = tcg_temp_new_i64();
++    TCGv_i64 env_i64 = tcg_temp_new_i64();
++    TCGv_i64 vreg = tcg_temp_new_i64();
++    TCGv_i64 dest_offs = tcg_temp_new_i64();
++    TCGv_i64 stride_offs = tcg_temp_new_i64();
++
++    uint32_t max_elems = MAXSZ(s) >> s->sew;
++
++    TCGLabel *start = gen_new_label();
++    TCGLabel *end = gen_new_label();
++    TCGLabel *start_k = gen_new_label();
++    TCGLabel *inc_k = gen_new_label();
++    TCGLabel *end_k = gen_new_label();
++
++    tcg_gen_extu_ptr_i64(env_i64, tcg_env);
++    tcg_gen_addi_tl(mask, env_i64, vreg_ofs(s, 0));
++
++    /* Start of outer loop. */
++    tcg_gen_mov_tl(i, cpu_vstart);
++    gen_set_label(start);
++    tcg_gen_brcond_tl(TCG_COND_GE, i, cpu_vl, end);
++    tcg_gen_shli_tl(i_esz, i, s->sew);
++
++    /* Start of inner loop. */
++    tcg_gen_movi_tl(k, 0);
++    gen_set_label(start_k);
++    tcg_gen_brcond_tl(TCG_COND_GE, k, tcg_constant_tl(nf), end_k);
++
++    /*
++     * If we are in mask agnostic regime and the operation is not unmasked we
++     * set the inactive elements to 1.
++     */
++    if (!vm && s->vma) {
++        TCGLabel *active_element = gen_new_label();
++        /* (i + k * max_elems) * esz */
++        tcg_gen_shli_tl(mask_offs, k, get_log2(max_elems << s->sew));
++        tcg_gen_add_tl(mask_offs, mask_offs, i_esz);
++
++        /*
++         * Check whether the i bit of the mask is 0 or 1.
++         * If it is 0, set masked-off elements;
++         * otherwise, directly load/store the vector register.
++         */
++        gen_check_vext_elem_mask(active_element, mask, mask_offs);
++
++        /*
++         * Set masked-off elements in the destination vector register to 1s.
++         * Store instructions simply skip this bit as memory ops access memory
++         * only for active elements.
++         */
++        gen_vext_set_elems_1s(dest, mask_offs, s->sew, st_fn, is_load);
++
++        tcg_gen_br(inc_k);
++        gen_set_label(active_element);
++    }
++
++    /*
++     * The element is active, calculate the address with stride:
++     * target_ulong addr = base + stride * i + (k << log2_esz);
++     */
++    tcg_gen_mul_tl(stride_offs, stride, i);
++    tcg_gen_shli_tl(k_esz, k, s->sew);
++    tcg_gen_add_tl(stride_offs, stride_offs, k_esz);
++    tcg_gen_add_tl(addr, base, stride_offs);
++
++    /* Calculate the offset in the dst/src vector register. */
++    tcg_gen_shli_tl(k_max, k, get_log2(max_elems));
++    tcg_gen_add_tl(dest_offs, i, k_max);
++    tcg_gen_shli_tl(dest_offs, dest_offs, s->sew);
++    tcg_gen_add_tl(dest_offs, dest_offs, dest);
++
++    /* Load/Store vector register. */
++    gen_ldst_vreg(s, vreg, dest_offs, addr, ld_fn, st_fn, is_load);
++
++    /*
++     * We don't execute the load/store above if the element was inactive.
++     * We jump instead directly to incrementing k and continuing the loop.
++     */
++    if (!vm && s->vma) {
++        gen_set_label(inc_k);
++    }
++    tcg_gen_addi_tl(k, k, 1);
++    tcg_gen_br(start_k);
++
++    /* End of the inner loop. */
++    gen_set_label(end_k);
++
++    tcg_gen_addi_tl(i, i, 1);
++    tcg_gen_mov_tl(cpu_vstart, i);
++    tcg_gen_br(start);
++
++    /* End of the outer loop. */
++    gen_set_label(end);
++
++    return;
++}
++
++/*
++ * Set the tail bytes of the strided loads/stores to 1:
++ *
++ * for (k = 0; k < nf; ++k) {
++ *     cnt = (k * max_elems + vl) * esz;
++ *     tot = (k * max_elems + max_elems) * esz;
++ *     for (i = cnt; i < tot; i += esz) {
++ *         store_1s(-1, vd[vl+i]);
++ *     }
++ * }
++ */
++static void gen_ldst_stride_tail_loop(DisasContext *s, TCGv dest, uint32_t nf,
++                                      gen_tl_ldst *st_fn)
++{
++    TCGv i = tcg_temp_new();
++    TCGv k = tcg_temp_new();
++    TCGv tail_cnt = tcg_temp_new();
++    TCGv tail_tot = tcg_temp_new();
++    TCGv tail_addr = tcg_temp_new();
++
++    TCGLabel *start = gen_new_label();
++    TCGLabel *end = gen_new_label();
++    TCGLabel *start_i = gen_new_label();
++    TCGLabel *end_i = gen_new_label();
++
++    uint32_t max_elems_b = MAXSZ(s);
++    uint32_t esz = 1 << s->sew;
++
++    /* Start of the outer loop. */
++    tcg_gen_movi_tl(k, 0);
++    tcg_gen_shli_tl(tail_cnt, cpu_vl, s->sew);
++    tcg_gen_movi_tl(tail_tot, max_elems_b);
++    tcg_gen_add_tl(tail_addr, dest, tail_cnt);
++    gen_set_label(start);
++    tcg_gen_brcond_tl(TCG_COND_GE, k, tcg_constant_tl(nf), end);
++
++    /* Start of the inner loop. */
++    tcg_gen_mov_tl(i, tail_cnt);
++    gen_set_label(start_i);
++    tcg_gen_brcond_tl(TCG_COND_GE, i, tail_tot, end_i);
++
++    /* store_1s(-1, vd[vl+i]); */
++    st_fn(tcg_constant_tl(-1), (TCGv_ptr)tail_addr, 0);
++    tcg_gen_addi_tl(tail_addr, tail_addr, esz);
++    tcg_gen_addi_tl(i, i, esz);
++    tcg_gen_br(start_i);
++
++    /* End of the inner loop. */
++    gen_set_label(end_i);
++
++    /* Update the counts */
++    tcg_gen_addi_tl(tail_cnt, tail_cnt, max_elems_b);
++    tcg_gen_addi_tl(tail_tot, tail_cnt, max_elems_b);
++    tcg_gen_addi_tl(k, k, 1);
++    tcg_gen_br(start);
++
++    /* End of the outer loop. */
++    gen_set_label(end);
++
++    return;
++}
++
+ /*
+  *** stride load and store
+  */
+ typedef void gen_helper_ldst_stride(TCGv_ptr, TCGv_ptr, TCGv,
+                                     TCGv, TCGv_env, TCGv_i32);
+ 
+-static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
+-                              uint32_t data, gen_helper_ldst_stride *fn,
+-                              DisasContext *s)
++static
++bool gen_call_helper_ldst_stride(uint32_t vd, uint32_t rs1, uint32_t rs2,
++                                 uint32_t data, gen_helper_ldst_stride *fn,
++                                 DisasContext *s)
+ {
+     TCGv_ptr dest, mask;
+     TCGv base, stride;
+@@ -895,11 +1177,66 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
+     return true;
+ }
+ 
++static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
++                              uint32_t data, gen_helper_ldst_stride *fn,
++                              DisasContext *s, bool is_load)
++{
++    if (!s->vstart_eq_zero) {
++        /* vstart != 0 helper slowpath */
++        return gen_call_helper_ldst_stride(vd, rs1, rs2, data, fn, s);
++    }
++
++    TCGv dest = tcg_temp_new();
++
++    uint32_t nf = FIELD_EX32(data, VDATA, NF);
++    uint32_t vm = FIELD_EX32(data, VDATA, VM);
++
++    /* Destination register and mask register */
++    tcg_gen_addi_tl(dest, (TCGv)tcg_env, vreg_ofs(s, vd));
++
++    /*
++     * Select the appropriate load/store to retrieve data from the vector
++     * register given a specific sew.
++     */
++    static gen_tl_ldst * const ld_fns[4] = {
++        tcg_gen_ld8u_tl, tcg_gen_ld16u_tl,
++        tcg_gen_ld32u_tl, tcg_gen_ld_tl
++    };
++
++    static gen_tl_ldst * const st_fns[4] = {
++        tcg_gen_st8_tl, tcg_gen_st16_tl,
++        tcg_gen_st32_tl, tcg_gen_st_tl
++    };
++
++    gen_tl_ldst *ld_fn = ld_fns[s->sew];
++    gen_tl_ldst *st_fn = st_fns[s->sew];
++
++    if (ld_fn == NULL || st_fn == NULL) {
++        return false;
++    }
++
++    mark_vs_dirty(s);
++
++    gen_ldst_stride_main_loop(s, dest, rs1, rs2, vm, nf, ld_fn, st_fn, is_load);
++
++    tcg_gen_movi_tl(cpu_vstart, 0);
++
++    /*
++     * Set the tail bytes to 1 if tail agnostic:
++     */
++    if (s->vta != 0 && is_load) {
++        gen_ldst_stride_tail_loop(s, dest, nf, st_fn);
++    }
++
++    finalize_rvv_inst(s);
++    return true;
++}
++
+ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+ {
+     uint32_t data = 0;
+     gen_helper_ldst_stride *fn;
+-    static gen_helper_ldst_stride * const fns[4] = {
++    static gen_helper_ldst_stride *const fns[4] = {
+         gen_helper_vlse8_v, gen_helper_vlse16_v,
+         gen_helper_vlse32_v, gen_helper_vlse64_v
+     };
+@@ -915,7 +1252,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+     data = FIELD_DP32(data, VDATA, NF, a->nf);
+     data = FIELD_DP32(data, VDATA, VTA, s->vta);
+     data = FIELD_DP32(data, VDATA, VMA, s->vma);
+-    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
++    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
+ }
+ 
+ static bool ld_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
+@@ -949,7 +1286,7 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+         return false;
+     }
+ 
+-    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
++    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
+ }
+ 
+ static bool st_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
+@@ -1300,17 +1637,6 @@ GEN_LDST_WHOLE_TRANS(vs8r_v, int8_t, 8, false)
+  *** Vector Integer Arithmetic Instructions
+  */
+ 
+-/*
+- * MAXSZ returns the maximum vector size can be operated in bytes,
+- * which is used in GVEC IR when vl_eq_vlmax flag is set to true
+- * to accelerate vector operation.
+- */
+-static inline uint32_t MAXSZ(DisasContext *s)
+-{
+-    int max_sz = s->cfg_ptr->vlenb * 8;
+-    return max_sz >> (3 - s->lmul);
+-}
+-
+ static bool opivv_check(DisasContext *s, arg_rmrr *a)
+ {
+     return require_rvv(s) &&
+-- 
+2.51.0
+
 
