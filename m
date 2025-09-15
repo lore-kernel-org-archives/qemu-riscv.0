@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7390BCAC58E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 04:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC1EFCA101F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 05:07:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uy0nN-0000tt-A2; Mon, 15 Sep 2025 00:26:29 -0400
+	id 1uy1QX-0001EK-CZ; Mon, 15 Sep 2025 01:06:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uy0nM-0000t2-Bb
- for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 00:26:28 -0400
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
+ id 1uy1QT-0001Dv-Jz
+ for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 01:06:53 -0400
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uy0nA-0005UY-OB
- for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 00:26:26 -0400
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b0787fc3008so545515266b.3
- for <qemu-riscv@nongnu.org>; Sun, 14 Sep 2025 21:26:14 -0700 (PDT)
+ id 1uy1QM-0002DJ-Rf
+ for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 01:06:53 -0400
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b07d4d24d09so387644266b.2
+ for <qemu-riscv@nongnu.org>; Sun, 14 Sep 2025 22:06:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757910372; x=1758515172; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1757912803; x=1758517603; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ehxXcNcjHZAVgY8AyxOEN8eciuPmK27T8vI26P3FQhs=;
- b=cTRXWLEHEpaHvAupANQ+pQcSorjqFTLTrud0iLm3OMrlr7DOT+Yfq5KtES0gW0ucql
- nleiFnZDhc0SaPq6/mKRY2ja1F1eJTjppb6+Y2ZMTue1oi1iSvQ49fE5nF/2fVj9j8zV
- IRewJEM9IrvwQuxuwdPgZjXIVLMA4sRGwtWMyFvj9jHMFg6GkJvrB66/QRAJDPwMWqUl
- jgUIJxI1RdVSJPhoQbkPGzB4x2ylPQFjKMBsqlqJp9bXCsplx7s2dZtigij1WxA32FH+
- tzc37oTxO3OA3Hcu5BYBKLjXIcDY9D+7KqQ5ROTrAdf7fF8WZzraH75MZ1uBDNelJaox
- gBrg==
+ bh=d4mxnX93sxVltgwLPrlDOvOXUv0zxLe/o5zISseAaXQ=;
+ b=fFiPITCR3MoOqV5fu9cKLiGR4SydXj0c5vTuEOydXjnhqQ2RWtf3QzqrBOLIIJfJq/
+ wtYkCmdcVHq7IbONrSiaGM1wPwfSpN01Z4EF+G4XnBOXMt1WX2ZSRHypIC5keopJDDOh
+ BukmvQAOBuRZvWc3MtPweSxsj2uF8F1pIO2/OGXow6ThFYUmJkFFfIC4STJBkzLKvVLE
+ sq3MMHm0Q0aFup2SiBnqN9pxZ3KvIQsfST5427eE97cJyPOjh8PiC9m6c2D+beqBDPzo
+ TwBSnbExdi0/XphULtvhUWNKLY9Wkx1hh8+VjDndCLCUiCaPaT4zlcUSWOr/3QC2TVly
+ GZSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757910372; x=1758515172;
+ d=1e100.net; s=20230601; t=1757912803; x=1758517603;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ehxXcNcjHZAVgY8AyxOEN8eciuPmK27T8vI26P3FQhs=;
- b=TE0/Qv/Tqvgpk24/wHn4+s94m/9apmtAfyqwed9le/GyJ5qVuZyQrr8nOw223j1hO1
- znnzMz6jMKa6Kl9NMgRXjEZSIH8vIWUWrzgs5GQbmhzKCpEEnXnbbwRVedsOlBkAhCDo
- xjZhMYcJJzVQLRO0MqPLAc7wELKGc19NIEpkBq9qImPZJUf/Ix8/MpAWQEB22Siy6vXZ
- NaXHbj1BCwh2im4ykirxSThKmMJ6unAI9nalJT2EiA3wP2wB5+syEMW2J8LP45ND0FNo
- hgPa62/I12JF597bMR+soi4bG4thF5fvLmZwut5vcMi9dCLBDiJzZiI/QFw2JZ4e8f2N
- l6nQ==
+ bh=d4mxnX93sxVltgwLPrlDOvOXUv0zxLe/o5zISseAaXQ=;
+ b=w52iVLUMYs47Z87Oek/jtPla7e6nj48jAWHtX2KUOODonrG3e7Si3JL4h30o1GTyAR
+ bxFzNjEtAG5ErMbGMDGNqRE1kvQLHOrTepafbQUlkoBnHF3oLZMBB3yCxFT9sao5fJ5i
+ u485DQ8kZCY5omRLlk4/tNPA0huxTnAUMVwgT52hoipKMp6hiAg30Og8vGKhLohRd5ry
+ RVr1n0CkyksUHg1k0fvtWCY6Ab3D0b4A7fgGtC1tgc1TT+aQlEWE5W47HXFDcxg37u0s
+ Vhw5PWWZFcnQrdW4sfE+WWvhmzBJWeTuT2Sm1dNiGShpwfrRcehFAfzJo/wfaRrvR5BZ
+ C5jA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVtXSgc6lkvK0Z9tlchxdYZl6uq2ViwjNewjGvIgLByMlIy/gKUbXlOA2NuDA3P9ZpSGuJGu2w6hJEK@nongnu.org
-X-Gm-Message-State: AOJu0YzyLlpmaqlsqfWqCEJ+qPGVu2S2FXceBmbV2+9In5JHBGc+8dMD
- JpRFOJ1p0o2rWhkdOLLXnGoaR2uCiRVy69CXUkQ4J6/3fIq0GvRrHHubbdmmhBMMygLWUjmSDIi
- TZLy3k3TG1XbFoJjGR42hSBSQxHa11R4=
-X-Gm-Gg: ASbGncv5gINSi8WkzoQGJ4y8MS0Gg3F2mEnojYRpqVwlZdmYTfNOspB3x5q5phbqOq0
- /XAz1KsUN8E2FIFh/Sf47XgHHjBjcyBR6ucLkLWPEnU/maBlJrTEFqol5/waM1CkrOXM3CN+deN
- vqKVuSnDo8RDDXdDESxjn62qRMU0PtZB3vjRFVCjiWJaCb+EO1yH3Dnffxoc91tEAa9fATf3QWu
- ICi3/vRBqma4vc15vX+rmsM5TGora+yqGvQjvXCa8i94Nst
-X-Google-Smtp-Source: AGHT+IEHpdW/dhee0G2mXZ8ftv6j81WKvMKqL1KjkGHGPVZyzCtyb6kBpbMwROEaXsZLZvyNGNlfHGybSS39aD/nbnw=
-X-Received: by 2002:a17:907:3f2a:b0:afe:af04:33e4 with SMTP id
- a640c23a62f3a-b07c354057amr1237776366b.11.1757910372133; Sun, 14 Sep 2025
- 21:26:12 -0700 (PDT)
+ AJvYcCVxjU0MHDxJS4q+n5W2Nn2W6R+MNbSCm6gjpIGn7aW2C6VctZUwuQ3syVhzxTgD1OI02Fas/28Ib/1Q@nongnu.org
+X-Gm-Message-State: AOJu0YyGTt/+BL7cIXCLw8hM4VqD5YG+db1KYuDDpXG/BN+5KkgzPVoa
+ bgeKeuRZoCcf+XfF/uTt6TDihVQrHzbN3zCOvbxTznCPPt40qh1OABxescNwpUXQ/iPgAsq2VWp
+ sJYBsih7JOePRT+EKS9OHeBCWkGiU0ww=
+X-Gm-Gg: ASbGncsXJMIxPgpTVuLaCeT/FZdUyBoPGn6FMUsXEXJ+n5idB3nMW5XlcPIXUICOyI7
+ F65Ptl6lQiyPgann0Sma96kv/F6Tu6/6KWuZ4BeTADiqsU1qA4iqt4IBREnAFmiytiI46Fs5Usi
+ ViQ/eotfe34yYGT7Ihgzz60Gt4kTRHf1b1kz1eKic7HGi2a1e0txs8ChwmcIzbn7btxaP6VLW20
+ Hob4JUx/68q6gGF51PMlqIt0VwzSLG8ryU3WeMGhsomXE//Y8JPRO/vUAI=
+X-Google-Smtp-Source: AGHT+IEB4xf1dufoLMbPrxZlj2+lwGLELqaN9P5AG6AGY/B+s4p17guODIe2wuF0M2Wq9tp0YYjdjagPjszvSH3ZkZ8=
+X-Received: by 2002:a17:907:9710:b0:b0c:6cae:51e3 with SMTP id
+ a640c23a62f3a-b0c6cae688fmr531574866b.35.1757912802690; Sun, 14 Sep 2025
+ 22:06:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
-In-Reply-To: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
+References: <20250912085535.1649347-1-xb@ultrarisc.com>
+In-Reply-To: <20250912085535.1649347-1-xb@ultrarisc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Sep 2025 14:25:45 +1000
-X-Gm-Features: Ac12FXw0Eub9aHJj5p_6n5FD8DPbZgMTQhAnBSvi5T2v-fvB_FJ26M65t4nh2MQ
-Message-ID: <CAKmqyKM2Pm-_pci0uany7cNmwCUf8UXNA6K24UYRDta29fDv=g@mail.gmail.com>
-Subject: Re: [PATCH v3 0/4] Fix RISC-V timer migration issues
-To: TANG Tiancheng <lyndra@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- qemu-riscv@nongnu.org, Peter Xu <peterx@redhat.com>,
- Fabiano Rosas <farosas@suse.de>
+Date: Mon, 15 Sep 2025 15:06:16 +1000
+X-Gm-Features: AS18NWAOAH6kFhTj-SfOJoxNDIX44u9uTMmdNgyVbeScHsQYJPVZbUbRA_TXY1c
+Message-ID: <CAKmqyKN80GDakc6MzBcPur2BtLJCMFMg39fLTgKBh1W8GfZ-AA@mail.gmail.com>
+Subject: =?UTF-8?Q?Re=3A_=5BPATCH_v8_for_v10=2E0=2E0_0=2F2=5D_target=2Friscv=EF=BC=9AFix_ri?=
+ =?UTF-8?Q?scv64_kvm_migration?=
+To: Xie Bo <xb@ultrarisc.com>
+Cc: qemu-devel@nongnu.org, ajones@ventanamicro.com, qemu-riscv@nongnu.org, 
+ mjt@tls.msk.ru, pbonzini@redhat.com, anup@brainfault.org, 
+ alistair.francis@wdc.com, rkrcmar@ventanamicro.com, palmer@dabbelt.com, 
+ xiamy@ultrarisc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::633;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x633.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x62e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -102,75 +101,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 11, 2025 at 7:59=E2=80=AFPM TANG Tiancheng <lyndra@linux.alibab=
-a.com> wrote:
+On Fri, Sep 12, 2025 at 6:56=E2=80=AFPM Xie Bo <xb@ultrarisc.com> wrote:
 >
-> This patch set fixes several timer-related migration issues in QEMU's
-> RISC-V implementation that cause timer events to be lost or behave
-> incorrectly after snapshot save/restore or live migration.
+> This series(v8) replaces the earlier series patch"[PATCH v7 for v10.0.0 0=
+/2]
+> target/riscv: Fix riscv64 kvm migration".
 >
-> The problems addressed are:
+> Changes since v7:
+> - Patch 1: unchanged; keep Reviewed-by from Andrew Jones <ajones@ventanam=
+icro.com>
+> - Patch 2: add Reviewed-by from Andrew Jones <ajones@ventanamicro.com>
+> - No other changes (code is the same as v7)
 >
-> 1. ACLINT mtimer time_delta not migrated: The time_delta field in
->    RISCVAclintMTimerState was missing from vmstate, causing incorrect
->    mtime values after snapshot restore. This resulted in guest time
->    appearing "frozen" until enough virtual time elapsed to compensate
->    for the offset error.
->
-> 2. ACLINT mtimer timers array not migrated: Active timer events
->    scheduled via riscv_aclint_mtimer_write_timecmp() were not being
->    migrated, causing pending timer interrupts to be lost after restore.
->
-> 3. CPU stimer/vstimer not migrated: The S-mode and VS-mode timer
->    pointers in CPURISCVState were missing from vmstate_riscv_cpu,
->    causing supervisor-level timer events to be lost.
->
-> The patch set introduces a new VMSTATE_TIMER_PTR_VARRAY macro to handle
-> migration of variable-length timer pointer arrays, and adds the missing
-> timer fields to the appropriate vmstate structures.
->
-> Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+> Xie Bo (2):
+>   Set KVM initial privilege mode and mp_state
+>   Fix VM resume after QEMU+KVM migration
 
-Thanks!
+Can you add the following tag:
 
-Applied to riscv-to-apply.next
+Cc: qemu-stable@nongnu.org
+
+to each commit message. That way it will be picked up for stable.
+
+Can you also rebase the series on:
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
 Alistair
 
-> ---
-> Changes in v3:
-> - Remove 'include/' of the subject at patch v2 2/4.
-> - Added Reviewed-by from Peter Xu.
-> - Link to v2: https://lore.kernel.org/qemu-devel/20250910-timers-v2-0-313=
-59f1f6ee8@linux.alibaba.com
 >
-> Changes in v2:
-> - Split VMSTATE_VARRAY_OF_POINTER_UINT32() into a separate patch,
->   and define VMSTATE_TIMER_PTR_VARRAY() in riscv_aclint.h.
-> - Added Reviewed-by from Daniel Henrique Barboza.
-> - Link to v1: https://lore.kernel.org/qemu-devel/20250909-timers-v1-0-7ee=
-18a9d8f4b@linux.alibaba.com
+>  target/riscv/cpu.c           | 17 +++++++++-
+>  target/riscv/cpu.h           |  2 ++
+>  target/riscv/kvm/kvm-cpu.c   | 60 ++++++++++++++++++++++++++++--------
+>  target/riscv/kvm/kvm_riscv.h |  3 +-
+>  target/riscv/machine.c       |  5 +--
+>  5 files changed, 70 insertions(+), 17 deletions(-)
 >
-> ---
-> TANG Tiancheng (4):
->       hw/intc: Save time_delta in RISC-V mtimer VMState
->       migration: Add support for a variable-length array of UINT32 pointe=
-rs
->       hw/intc: Save timers array in RISC-V mtimer VMState
->       target/riscv: Save stimer and vstimer in CPU vmstate
->
->  hw/intc/riscv_aclint.c         |  7 +++++--
->  include/hw/intc/riscv_aclint.h |  4 ++++
->  include/migration/vmstate.h    | 10 ++++++++++
->  target/riscv/machine.c         | 25 +++++++++++++++++++++++++
->  4 files changed, 44 insertions(+), 2 deletions(-)
-> ---
-> base-commit: 6a9fa5ef3230a7d51e0d953a59ee9ef10af705b8
-> change-id: 20250909-timers-18c2c67b1a2a
->
-> Best regards,
 > --
-> TANG Tiancheng <lyndra@linux.alibaba.com>
+> 2.43.0
 >
 >
 
