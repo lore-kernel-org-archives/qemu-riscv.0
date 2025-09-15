@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A63AECA0EE8
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 02:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2883CA0EE8
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 02:47:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uxzEA-0004HZ-SF; Sun, 14 Sep 2025 22:46:02 -0400
+	id 1uxzEl-0004if-QA; Sun, 14 Sep 2025 22:46:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uxzE7-0004H7-Vl
- for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:46:01 -0400
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ id 1uxzEk-0004iU-Ss
+ for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:46:38 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uxzDz-0001Be-Lk
- for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:45:58 -0400
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b0418f6fc27so625504666b.3
- for <qemu-riscv@nongnu.org>; Sun, 14 Sep 2025 19:45:48 -0700 (PDT)
+ id 1uxzEf-0001ND-76
+ for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:46:37 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b07c28f390eso458583066b.2
+ for <qemu-riscv@nongnu.org>; Sun, 14 Sep 2025 19:46:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757904345; x=1758509145; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1757904389; x=1758509189; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OOwfGJPbcKy5egc0Vc/xPrHlga6zY9r9p0hgHwbAlMc=;
- b=SUK7yhxNP/kWkoGANbnKSQLiIGIHu8Cq3ycVJNaliow8qaLO1cF89/XOdQcv97Pqj+
- 8l7cricgv/upIS9KIiBgnIyOKxK3bjO3V203/MUVUQ7Wh6Mq804kKSnd+rCIpJRiO2Mh
- +zkIzBvRGEEB7uHCGP/ZEiVFWHH7Zjf6G/nxLNEGrsBO2/fJpaxj7ccyi+fB58GyZ4Cl
- XhT5iibw+28tDrCDMuB/C9wC4BbwYCIj4BW7azYVXCGJXc+OaQV0UgvDT4GpPWarbvyk
- 1xhJoHwKgcdrHFZvqP7m2wnXrbEIygrvmdLrIDmag4sXoxb/kvZYCTufx1QNqrXySEHw
- wr0Q==
+ bh=iXUV/kd9EGV1/EaGgc27BXhHc4WuvWETYrbFbPQbcfM=;
+ b=kgckyIxlHFJx8wsl9pX4an3Pe41z+uKEPc5lLClId8kDhDwBU4l6pq1OmepQpwiULA
+ 8m9ZgmMOX1IxIsFa30BjY1B2wAMoQpnT8Ko35h8DZHmTyU2sfi0HfBsjKk2pQygmC3yD
+ aq8gqZh5Y5PTAc48UNXGZXYdAGxblms60KenYFA/IicltbEbt/zPI8r4mg88JvTqzYGU
+ kofB8jFkyFqJ3CE5QMsUOJoU6cDUW9PxTrZ2fbVPv7rFdlyrEUQf7HJQquj9pKvl6Ngv
+ 1a1EzK8EM7wdm/l/EL+hVO5/Nd2iZKQmxMJHQoC/rk1Rz+9Im/slsfgvUH6taJH73tHP
+ tvNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757904345; x=1758509145;
+ d=1e100.net; s=20230601; t=1757904389; x=1758509189;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OOwfGJPbcKy5egc0Vc/xPrHlga6zY9r9p0hgHwbAlMc=;
- b=OywrumeMobLm95U3J8UrCRdO7NQ5SviO6vvs5jBct1JcgUZGZtfOisYLq89Ylj4HDA
- h5I25AEv27OQDVbFlEPMxKdY3ag7HY4FCmv2tVASo7oE15zhU39dlRfwcCQBS2aSjVnZ
- AWaM0sy435DOMx2UHuJVq5wurgvnFXwxZPHGqBo4guWhKCTXGQKdoBSmOSUbmF5WGr/s
- ExNO06J4MkE8JUjkdJ/vbxkjDKuX3T3CffSxyzqOzwxGGRsH31+rvh9dP2YAkPhYIW2z
- sPx4A6l/S7vQs1Hm9+suS6sgMB8akiKlPIoWgGUT5ltB+3E+k9QU5oyIbjx/g3YBw5cW
- 3AlQ==
+ bh=iXUV/kd9EGV1/EaGgc27BXhHc4WuvWETYrbFbPQbcfM=;
+ b=ql5qvi0o3yIurQf3dVGu63sayg47hts9yYf0x/yPUFxTgUGcvZC9J0E3dkNPxJ1ans
+ KvQrvYWgb9NM9avKZwYoG0b0mBvRRW8Bayhxr4Cf9TgjK1N2kGVVdGMAjnibLJEpQfsw
+ wtpsQjSg3DQ6O50fVwvwgO/rcEMd0dTZ+5F3B6HlY2Di/OMMecvfq+76CzbehlCP6CM+
+ HXyWPa63KwwOSCSTAQOeYRmwXp2lRR/8E/lXn6R6JqMXs7vSjKj7sOFfVt6EKwYyM0JL
+ C+uWaaA1f3wP1TcSytgmk4oJvOUSBFUBfA7ffqaHpw2nOjOsriKt90ZCaPtpAjaCYxm4
+ Hn+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWHWeFInwBq3cJRFcZgof1NzOkeU7XM85cVJ6XeA3P9hVUbdZvbmXJ13amSSmhqnjt52G3BJK8ChqBt@nongnu.org
-X-Gm-Message-State: AOJu0YwBBM+aLkI+I4JyC623B7vjIvpe5mBX75VrR95w6PIFYog4cOYK
- X9hIqlOuFA2/U60jQf5GQ2fMUCGyYwF2QI1Hdv0P/X6Ha+ditAtuel8+pxFpI70dhMcbkEs54sw
- dkCyydnMD7q0fym5z5O/og6ZOgGG73D4=
-X-Gm-Gg: ASbGnctIT4R/ev9Kk6gbw5DJsb+CsU5Z2XhNPyLLeVLxlHyAmgMSIT4oESNsaPDT5Cd
- OACyxlstBJ49WyGL1A3fVDepWmfy7ErnrLdHCZp0yawqvd6F//xRa0g1VcB8aORU43DyTSoJ0bd
- TAuz0QbnYKEJWYrqVf+JV7hITpW7iXBmBYm28F5GZhXrjQD2B4VQ8FutLoUwp+KYiNgBoFzwIig
- u9/Q6YjLsHSHSRDwgz9gmuZtSYfXhtDmtj1t5o74/sJqqrnbSAs7P7szj0=
-X-Google-Smtp-Source: AGHT+IH6v/d6Z7+VTYvJ2bHdf2AoRnQqHlp2vTqFw12i7mkBqmIep1g4y8p19pPnJ45hDnOu8TxzQ8MWKyHqagtDUHU=
-X-Received: by 2002:a17:907:1c0b:b0:b0f:53c0:e2b9 with SMTP id
- a640c23a62f3a-b0f53ef41b8mr274178566b.2.1757904345285; Sun, 14 Sep 2025
- 19:45:45 -0700 (PDT)
+ AJvYcCX/ZUgjtB27ys84DL8xxoOePfb6gDFyJU+OEwdN9h+MP56peXX4Wd/0zoJNJvtc4FNOrJSty8QPKsoK@nongnu.org
+X-Gm-Message-State: AOJu0Yyn6PAzliUQHZ2VCZiKjaHTItBlk2if4re2QtQBrLgKKIdUI/NC
+ ZXA5WxGEo94PBQow69x4D8ANGHWE48IeaeQNUdR11SXv/srXzS2QSeWHThZyCT+e+k+n9OT57I2
+ hgo3oux6Sc6wy/nXkzPcdYQTCKjFbfeA=
+X-Gm-Gg: ASbGnctXKa0fej1K4XnAaiQKCQGkL2kxeIsSQQq/AmW9oPwX0JkrCkgsaATyfhI0W/H
+ Fcq7AJSjB9wi4zxsDvI/H5ve2yHeMtwF5g58CYi5s15+08ltnhRQfx/7gB0iq1/pwVLtWKfRlXL
+ ReIIMdMDXCcmB4C6wHmireIBPC6B03Xm7NhHwS9n5IJ7HB7/huPFkl0Pzz5OrxoH1uD1+29ojDr
+ Q3rlNED9gydExp2cqCSOzSJg8fmIcw31WbLq8b9mYE6jRsb
+X-Google-Smtp-Source: AGHT+IFSuTXXvH+JajUXyz0LBdcC226VVuPNd7arj0VxB4rwsBV6x75dol/Yyss4sqvsyIYByA8sZkDjZLB8W217bp0=
+X-Received: by 2002:a17:906:aad2:b0:b07:c94c:a1aa with SMTP id
+ a640c23a62f3a-b07c94ca24bmr956141566b.57.1757904388854; Sun, 14 Sep 2025
+ 19:46:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250903164043.2828336-1-dbarboza@ventanamicro.com>
 In-Reply-To: <20250903164043.2828336-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Sep 2025 12:45:19 +1000
-X-Gm-Features: Ac12FXzTMYpD6Ez19ycS-f3bSfc-1SpWpzuTrgd2W7AzLKzX8hMkN2o5tRU82xc
-Message-ID: <CAKmqyKPWrG3UWZWM8TOpi7Eu7QbV-n68EnjPN1agRuwtn4RXnA@mail.gmail.com>
+Date: Mon, 15 Sep 2025 12:46:02 +1000
+X-Gm-Features: Ac12FXwDgkAbKXRt3NdbtOr8zTT-59u4F5Kp2fa4QERZnmXNeF9vHm4-YarN6Ns
+Message-ID: <CAKmqyKPW1EavcBhE85aY=XgUbV=XF8OeWUiEQ6iq5qorUojfKg@mail.gmail.com>
 Subject: Re: [PATCH] linux-user/syscall.c: sync RISC-V hwprobe with Linux
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x62a.google.com
-X-Spam_score_int: -13
-X-Spam_score: -1.4
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x62b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
 X-Spam_action: no action
@@ -108,7 +109,9 @@ On Thu, Sep 4, 2025 at 2:42=E2=80=AFAM Daniel Henrique Barboza
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
