@@ -4,93 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FAA1CAC592
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 13:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB33CAC592
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 15:08:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uy9ee-0002Fw-Up; Mon, 15 Sep 2025 09:54:04 -0400
+	id 1uyAoR-0001WI-HQ; Mon, 15 Sep 2025 11:08:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uy9eX-0002Dl-GF
- for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 09:53:58 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <stefanha@gmail.com>)
+ id 1uyAoG-0001TX-Pd
+ for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 11:08:09 -0400
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uy9eQ-0003NL-IR
- for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 09:53:57 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-24456ce0b96so48211685ad.0
- for <qemu-riscv@nongnu.org>; Mon, 15 Sep 2025 06:53:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <stefanha@gmail.com>)
+ id 1uyAo5-0008Jb-JN
+ for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 11:08:04 -0400
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-62f261a128cso2599917a12.2
+ for <qemu-riscv@nongnu.org>; Mon, 15 Sep 2025 08:07:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757944424; x=1758549224; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pP0z3glL9FmWp+3YDaQUiTlaOF5jQcV65GjHjl0DQSo=;
- b=TFTPSVLzwSnA8x+zxomZZEG8CSxbAJnww3mum9cg2ob4mZdjihc0ImXU1XZXs2+JF9
- maBBzo0b771OqhWyWUe5an375bJJP5iRDemj05i/46sfRaXIG8fMjD1Rs3MLqCRydjOe
- nKUg/bECsOqnRfVaRcsY5rtJNyOM7TTwDzBHjeXVSW+Ku/ov+KdF+ZYQrJPlv4bj6weU
- 0QIxpALpK/hWAuPn0JnD56HwCuX7yhOrxEoFtJTDMXNAxR+hFQkbexmCkhFTbG0PCBUs
- +NCHgN/QR4h8Cus2OkZBCl7gVDfdgcwxJHnRC7eXG34tyE6cXz5dOw7DKAIA38X+RiJd
- Xeog==
+ d=gmail.com; s=20230601; t=1757948863; x=1758553663; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=i/gk1wcd0tfcAPjvuX3k0K5vHvVRZQUqfNIFTz4jE2Q=;
+ b=ddLR0aYwvcHq3ay+UsxWEHKwGJjh/wSMNDVogU50i0f58vuvyB0atytmyFy7Ca3xLM
+ h7uK7+avZUGFP25O+nNUlZ66PLh41LEWuy/0/SWbEcQTZfZ+qp77bUZqLipzoVnpc3sv
+ f2YiIlbHSvwcngaOnJvgdDGcETASyXv7L9cSAw6no3UnrRt0Q+NYc5GP1pGlG9sqWS0K
+ E/6IaM1GUePy8RoMOR5AOGTwOSYg+UeoeuY4UI4mCD4A4VOZcalett0LDHOIY5PbpLnZ
+ FURre6HTqmA+RnyjbIHKIBhRuQEWUNQryswTD8pMaC+y3uOR3at5gsElOtuQBFoOtghu
+ xYhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757944424; x=1758549224;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pP0z3glL9FmWp+3YDaQUiTlaOF5jQcV65GjHjl0DQSo=;
- b=NcLQuydEARGzfQK29CymKWAsq9Ct3p+jBlpfCKKm12NCWW9a7J2lga7GiiMIJyCaTQ
- a5MVMFKcRYmI+O2xFijxpjqZuvyepTBB/E8e4ZylTCQJ4xrN1z2sVi1psX9bRoBje5H/
- 8a2GnSPXHhd4BqrSMvLUYbwDcMlOcxAZdTOXaxtcofSTTVY/Y8OwmKDbYroTr4LsNo7A
- yDJCMPv6cZMoKVvVl/xjbBJw2VHcF3/A/o+0I8S/cueAOI/yroBYyT0shxdJBYsyuBCr
- NPV0ewbnMY+YT95glQtJwNrYQRTR6UT3nyj4MA0zrEkKNzQixHGUxzxVaxovjJQCJq5i
- g4gA==
-X-Gm-Message-State: AOJu0YwpLrtHUyPvn6fikQeYDxIQEXA4t971W4sbZ+EzubN3J8lZ1OYP
- OUHoRLTtAPJr5Kh/qsCmUL5yP0/JD6mpuryI1hkuFznXPZF3IvwlgbviKtitYLjgxt8=
-X-Gm-Gg: ASbGncuIubCCAb2O/BWk+YOq28DbOyPoJYJZSQTLc+HMRZK6s3ArwFOAzhcwtSMxKmL
- CXw8d38QGOzw0XK8OYbFMwq0eORtYqZqDfBk9WeUSIJZ9u+Bg7m71NG56yYXPLBOvoVQsFXcFqz
- diRylvQoJbVWCep1qo5OKIc5+xmt88UG3EFNxOA6Ksg9B0qgh0CsSYeBKRDa9g+yD7RPrSe1x0G
- +52u7pR3Ls2Q+DQwx/tjKYmeZYYf48b42q4rkrVNcEAvU7F6+UZY21mBtdKKrlcjg66ZcuJE8m9
- zylIeb0jZ3KpN879zNlyTmMLtSNGgSfdi/hDy8F0hi/EByTkYOUIqhDOcTn1BW6o4TQDtskSE6M
- 2nHf+y0hBnS/csyS/bA54cFp7ozg81emU2EyJGaHQLbykeCyp8jdkfsaxRw==
-X-Google-Smtp-Source: AGHT+IHACe5KuVxIMppKyLnKHVwJUZ8hrb1Z8DYNSPw5EEYnlTbWDn/da5/hxZmMk13kdw1xqYIttQ==
-X-Received: by 2002:a17:902:b216:b0:24e:b713:adac with SMTP id
- d9443c01a7336-25bae8dcb48mr145429755ad.28.1757944423768; 
- Mon, 15 Sep 2025 06:53:43 -0700 (PDT)
-Received: from [192.168.0.4] ([71.212.157.132])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-25c3b0219f9sm130533695ad.123.2025.09.15.06.53.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Sep 2025 06:53:43 -0700 (PDT)
-Message-ID: <8e43c44f-609c-4a30-8559-a5dcb567b950@linaro.org>
-Date: Mon, 15 Sep 2025 06:53:41 -0700
+ d=1e100.net; s=20230601; t=1757948863; x=1758553663;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=i/gk1wcd0tfcAPjvuX3k0K5vHvVRZQUqfNIFTz4jE2Q=;
+ b=i6aw+HhQN5ctWSg3LFDMR6iVFiuE1GVCJJzwcIvFCAageNoCj6+/L7l+pfjDj+tT4N
+ D9bE9sH8NEr2v3sJEUYpatyC6n7OE066+mhqOX5hVBNWJEOxaji/7u7X4HmGlfgicZCM
+ f7lNPwhFLoiwR9N1uiakmUFAfjWEVDrV/20nRXrKaKxjGWtRKsrTg07gp1BaZHFvW9rp
+ PE5yZwEWl+090OBnWLS+aIwGEY7YVCOVdfpWmFr/TJ/fY88d1uvhWu5kSEAPjVhT4kSN
+ Bzh15SUeTqToNd9iWwnwt7RIk7ett5fQHHeZ57UhuwSBApiSfeoswEx7xoL+1CDF0GOI
+ pZBg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWY40qEWKrUfzhcTsUYm2TJ238FNN0I6fxLL9Kj+SfKgEKKihBSukYZZT0vdMBAIG1KTKUqQH3AyKFJ@nongnu.org
+X-Gm-Message-State: AOJu0YyF6I7mRJMHdmSpLVNGbCXKlQjg+bSkzvBuVMksRbr353Dz3Son
+ Y0ODV7GbnsLtqhkNIYIt8jJ5n73EI193Geox5szBbZk9prQZVnqO9aYz3sEkmScEHpPgdZsHJf1
+ BBfsDmrFf3cva2K8O0fkWqGzuT6tb1TU=
+X-Gm-Gg: ASbGncvfWIYvio7PRggPUNyoCYrikVbmRGJfZ6l4ExvlCnE8QM+RfjG6VOb+XcDJHvl
+ QZsHMTIp3SYCoEjCfx3Z8xGm8VT1F9ww475mTTUkILR3ri7JJuXt84poOnHYJcwEuqvbzo0UJot
+ Gol2Ohs952wKGrdcfxfXoK4S015CTFoA92dMreFwWlkxJoRNFdQ0xEQe0/bgy7SKxSr0M0YLPjH
+ BHrsr0BytbG5LTT
+X-Google-Smtp-Source: AGHT+IHsk43BrUxq2AjuHY+HfsyCUMY1UwQuJnWIXD/IFVT+5luiz/nbEw9QRq4D0rBGJy7oL3xuqaoYVNiburWqMMY=
+X-Received: by 2002:a05:6402:454c:b0:61c:935d:da3e with SMTP id
+ 4fb4d7f45d1cf-62ed8288d19mr10105373a12.15.1757948863178; Mon, 15 Sep 2025
+ 08:07:43 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 1/2] target/riscv: Use tcg nodes for strided vector
- ld/st generation
-To: Chao Liu <chao.liu@zevorn.cn>, paolo.savini@embecosm.com,
- npiggin@gmail.com, ebiggers@kernel.org, dbarboza@ventanamicro.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <cover.1757690407.git.chao.liu@zevorn.cn>
- <1f22506f44570abf3bb17bf144d398807be0ab40.1757690407.git.chao.liu@zevorn.cn>
-From: Richard Henderson <richard.henderson@linaro.org>
-Content-Language: en-US
-In-Reply-To: <1f22506f44570abf3bb17bf144d398807be0ab40.1757690407.git.chao.liu@zevorn.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62b.google.com
+References: <20250723094213.2975268-1-dbarboza@ventanamicro.com>
+ <20250723094213.2975268-2-dbarboza@ventanamicro.com>
+ <CAKmqyKPirO4wLus3kWeHk_ir6kOTru6U745AVUW1jNzYXbzr2Q@mail.gmail.com>
+ <5319bc5d-ee82-43e0-adb2-2657b150a0ea@ventanamicro.com>
+In-Reply-To: <5319bc5d-ee82-43e0-adb2-2657b150a0ea@ventanamicro.com>
+From: Stefan Hajnoczi <stefanha@gmail.com>
+Date: Mon, 15 Sep 2025 11:07:30 -0400
+X-Gm-Features: AS18NWAFYVloW4Yc36_cKw5fGk9A7oMS-DBP1tvduBOLFVfSXAk-FtHfp6ogQwM
+Message-ID: <CAJSP0QU0XeuQML+kLGBZgk2V2ABsqdyUA__M4YL_VSp+oYJYaA@mail.gmail.com>
+Subject: Re: [PATCH for-10.1 1/1] roms/opensbi: Update to v1.7
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Alistair Francis <alistair23@gmail.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@dabbelt.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=stefanha@gmail.com; helo=mail-ed1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,44 +100,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/13/25 02:17, Chao Liu wrote:
-> +static void gen_check_vext_elem_mask(TCGLabel *label, TCGv_i64 mask, TCGv_i64 mask_offs)
-> +{
-> +    TCGv_i64 mask_offs_i64 = tcg_temp_new_i64();
-> +    TCGv_ptr mask_offs_ptr = tcg_temp_new_ptr();
-> +    TCGv_i64 mask_offs_rem = tcg_temp_new_i64();
-> +    TCGv_i64 mask_elem = tcg_temp_new_i64();
-> +
-> +    tcg_gen_shri_tl(mask_offs_i64, mask_offs, 3);
-> +    tcg_gen_add_tl(mask_offs_i64, mask_offs_i64, mask);
-> +    tcg_gen_trunc_i64_ptr(mask_offs_ptr, mask_offs_i64);
-> +    tcg_gen_ld_i64(mask_elem, mask_offs_ptr, 0);
+Hi Alistair,
+I saw you requested access to the opensbi mirror repo on QEMU's GitLab project.
 
-You can remove the "mask" argument, simplifying the code here.
+I went ahead and pushed the latest OpenSBI master branch to QEMU's mirror:
+https://gitlab.com/qemu-project/opensbi/-/commits/master?ref_type=HEADS
 
-	tcg_gen_trunc_i64_ptr(ptr, mask_offs_i64);
-	tcg_gen_add_ptr(ptr, ptr, tcg_env);
-	tcg_gen_ld_i64(mask_elem, ptr, vreg_ofs(s, 0))
+The mirror got stuck because commit a2807646a858 ("include: Adjust
+Sscofpmf mhpmevent mask for upper 6 bits") is not present in the
+upstream repo. There was probably a force push upstream that replaced
+it with commit df997c6e55fe ("include: Adjust Sscofpmf mhpmevent mask
+for upper 8 bits"). The diff of the QEMU mirror commit and the
+upstream commit is:
 
-You can also change mask_offs to TCGv_i32, which replaces
+diff --git a/include/sbi/riscv_encoding.h b/include/sbi/riscv_encoding.h
+index 050674a..2ed05f2 100644
+--- a/include/sbi/riscv_encoding.h
++++ b/include/sbi/riscv_encoding.h
+@@ -207,7 +207,7 @@
 
-	tcg_gen_extu_i32_ptr(pr, mask_offs_i32);
+ #endif
 
-which more obviously does not discard data from mask_offs.
+-#define MHPMEVENT_SSCOF_MASK           _ULL(0xFC00000000000000)
++#define MHPMEVENT_SSCOF_MASK           _ULL(0xFF00000000000000)
 
+ #define ENVCFG_STCE                    (_ULL(1) << 63)
+ #define ENVCFG_PBMTE                   (_ULL(1) << 62)
 
-> +    tcg_gen_andi_tl(mask_offs_rem, mask_offs, 7);
-> +    tcg_gen_shr_tl(mask_elem, mask_elem, mask_offs_rem);
+I looked at the upstream discussion about the reserved bits and I
+guess that the author changed their mind and force pushed with an
+updated mask constant. I mention this because I came to the conclusion
+that there was nothing nefarious about the force push and that it's
+safe to update QEMU's mirror to follow upstream again.
 
-The mask of 7 suggests you're only interested in the low 8 bits.  Which means either the 
-load is wrong (we don't need to be loading 64 bits), or the mask and shift are wrong.
+Please let me know if you have any issues updating OpenSBI in QEMU and
+I can tweak the QEMU mirror repository as needed.
 
-
-> +    tcg_gen_andi_tl(mask_elem, mask_elem, 1);
-> +    tcg_gen_brcond_i64(TCG_COND_TSTNE, mask_elem, tcg_constant_i64(1), label);
-
-The andi before the brcond is redundant with the TSTNE.
-
-
-r~
+Thanks,
+Stefan
 
