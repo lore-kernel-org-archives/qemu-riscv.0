@@ -4,45 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B64ECAC587
-	for <qemu-riscv@archiver.kernel.org>; Sat, 13 Sep 2025 09:23:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4718BCAC587
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 01:53:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uxMSg-0002EI-84; Sat, 13 Sep 2025 05:22:26 -0400
+	id 1uxyOO-0006eO-1y; Sun, 14 Sep 2025 21:52:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
- id 1uxMSa-0002Cf-6K; Sat, 13 Sep 2025 05:22:20 -0400
-Received: from [115.124.28.60] (helo=out28-60.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
- id 1uxMSW-0004yo-WE; Sat, 13 Sep 2025 05:22:19 -0400
-Received: from ZEVORN-PC(mailfrom:chao.liu@zevorn.cn
- fp:SMTPD_---.eeCn-.t_1757755075 cluster:ay29) by smtp.aliyun-inc.com;
- Sat, 13 Sep 2025 17:17:57 +0800
-From: Chao Liu <chao.liu@zevorn.cn>
-To: richard.henderson@linaro.org, paolo.savini@embecosm.com, npiggin@gmail.com,
- ebiggers@kernel.org, dbarboza@ventanamicro.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Chao Liu <chao.liu@zevorn.cn>
-Subject: [PATCH v8 0/2] Generate strided vector loads/stores with tcg nodes
-Date: Sat, 13 Sep 2025 17:17:08 +0800
-Message-ID: <cover.1757690407.git.chao.liu@zevorn.cn>
-X-Mailer: git-send-email 2.51.0
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uxyOB-0006d0-0R
+ for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 21:52:21 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uxyO0-0003U2-0F
+ for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 21:52:18 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b07c2908f3eso397498366b.1
+ for <qemu-riscv@nongnu.org>; Sun, 14 Sep 2025 18:52:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1757901120; x=1758505920; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iqmgw6yw863S+JEZhpJI5nXVJoZKOzradCBjcW1lB+k=;
+ b=JeIZBpS9vFJog0Nz5dNSpKZRyTaLEzm/FmzHi9ZauD9ca/LMky8drLABP/Ig5ITJPk
+ TANeOreJ/RGZdtFZbJq1oS4zHft0BvYeN8g7ap50NFdu/v4DvxoEkQJD0JeiENAwsHtz
+ 3SZtzyE+vZpMmOG6K2H3Ebn/0cpNkaG8rj4UbhFM9HL9aEY481H4y+BJ31gKC7mgwbQh
+ fs8lMtxEcb9QYJrpd32F0FuHoiSQEHijQsGbBYJY6coYp7ac4k3Y0mkiq4dtbb+Fs3aI
+ ftwps6p56mPdyOBia/rkRpcX3s7wsa53gUQgZkNkJFohTcdVqjoTQfeSH5IhTKASLQJW
+ QbZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757901120; x=1758505920;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=iqmgw6yw863S+JEZhpJI5nXVJoZKOzradCBjcW1lB+k=;
+ b=iwh8BkqaLGyuoXtT62xUFjqi89zvx5hxcQM+DHb4pKZ6c26W4qdzwmWpmQtRhPBIBG
+ ldSStR+DeweGGrmPY/w83jYhqHBE/tQZ/btgLKvAiSBylXQsEbydQcF2KUtYbueZ/wo6
+ IjU2gVh1VN1laA4gMfa0unt+uMe4ZCUb07OgXhS7P3INgJ2qEr7sMU6e7e6iLFKRe/EY
+ L9i1XGJ+x2eVlaNSzfYWaR6kGruED9JePF5TCKYZTt/2LQedmeSxJGKSrSQlCmbZ3hQM
+ 1CC3NSKU1Hvk8Y6evjaWnC0zKM/bs33qxH4UKGzyZXoNPYTmBkCK3pk4kq9NRaYrqExG
+ 10Wg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU2/cibCy66NfhTQxnfe+vX13+YeGiyPXNyAdODaDY6Uug6uHyjsr0mkV2ji7P5tI6Ido4yDaZ7lFf9@nongnu.org
+X-Gm-Message-State: AOJu0YwNgqFE7jnXEssYBtUQwvlQ8TvlOxzIvA0bGsR9FeNEcU30Pv9S
+ LIAJTk+VGK7yqE1jLXM1ZlTAogF9axryyJqXTsqH99pZPuFLsGAgYECrFzI9mtfyEr0ghiP6JKU
+ Xepg8XX8w1kC1Q0TaFqtJlVeLCHBB1d4=
+X-Gm-Gg: ASbGncttX4Q9tr/c3mVPfjZgXb/PuQuvfRcBBCee6BfyUgJBiQQWvYPhbbwvTijmaJv
+ YNAjW4CO+EMGl7xMkRkT0gqRCdiye0kz8eLUMLVqCYwWvxo+SuHgdXHcs/dbJ+Rbxe7XMwa2dpO
+ sk6t4mVwGEyFjKj5wjji7I7aIcB6z67YKPDU8siR6UzhGmjaoNfa7uiIC0Ok3lJcTzHW4J/PIns
+ Zz4qMfC2dLUd4L1susv9BR81t5huMKrgp6+gw==
+X-Google-Smtp-Source: AGHT+IFXff4JtgnPRRCOjFGDOtdrpSyX+7wrgW1PslY22BLvdFL6RFwurjvmzso0IOWYWoexzXyaaijG9c+0l8D3h3g=
+X-Received: by 2002:a17:907:97d2:b0:b04:31c6:a434 with SMTP id
+ a640c23a62f3a-b07c324cf12mr1063368666b.0.1757901120152; Sun, 14 Sep 2025
+ 18:52:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.60 (deferred)
-Received-SPF: pass client-ip=115.124.28.60; envelope-from=chao.liu@zevorn.cn;
- helo=out28-60.mail.aliyun.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+References: <20250811034454.189208-1-z_bajeer@yeah.net>
+In-Reply-To: <20250811034454.189208-1-z_bajeer@yeah.net>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 15 Sep 2025 11:51:33 +1000
+X-Gm-Features: AS18NWAtqy7PQixv0DK8JTMvqrzHtODNbbIsgpsWlLFPiyfZyuKHS48pUv0Fod4
+Message-ID: <CAKmqyKPwZWmFcKhwC_88tTJ5Fh1hGr6Xn9wB5vjXoQpoWZH8QQ@mail.gmail.com>
+Subject: Re: [PATCH v2] aplic: fix mask for smsiaddrcfgh
+To: Yang Jialong <z_bajeer@yeah.net>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, yangjialong@rvcore.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x62b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, T_SPF_HELO_TEMPERROR=0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -58,79 +102,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi all,
+On Mon, Aug 11, 2025 at 1:59=E2=80=AFPM Yang Jialong <z_bajeer@yeah.net> wr=
+ote:
+>
+> 4.5.4. Supervisor MSI address configuration (smsiaddrcfg and
+>   smsiaddrcfgh)
+> smsiaddrcfgh:
+>         bits 22:20 LHXS(WARL)
+>         bits 11:0  High Base PPN(WARL)
+>
+> Signed-off-by: Yang Jialong <z_bajeer@yeah.net>
 
-Thanks Richard for the review. In patch v8:
+Thanks!
 
-Richard gave some good improvements, but I don't have time or energy to
-do them now. So this patch only fixes the clear and easy problems first.
+Applied to riscv-to-apply.next
 
-1. Use the right TCGv type for each variable — for example, make mask_elem
-   type TCGv_i64.
+Alistair
 
-2. Use tcg_gen_trunc_i64_ptr() to change TCGv types — don't use C-style
-   casting.
-
-3. Use TCG_COND_TSTNE, not TCG_COND_NE in tcg_gen_brcond_i64() to represent:
-   if (vext_elem_mask(v0, i) != 0)
-
-
-History of changes:
-
-patch v7:
-  - Standardize the subject line of patch 1 and remove the trailing period.
-  - Split into sub-functions to improve the patch's code readability and
-    facilitate review.
-  - Use more faster TCG ops, use tcg_gen_andi_tl() instead of tcg_gen_rem_tl().
-  - Add a tested-by signature for patch 2, as Eric has already tested it.
-  https://lore.kernel.org/qemu-devel/cover.1756975571.git.chao.liu@zevorn.cn/
-
-patch v6:
-- If a strided vector memory access instruction has non-zero vstart, 
-  check it through vlse/vsse helpers function.
-- Adjust the tcg test Makefile.
-  https://lore.kernel.org/qemu-devel/cover.1756906528.git.chao.liu@zevorn.cn/
-
-Patch v5:
-- Removed the redundant call to mark_vs_dirty(s) within the
-  gen_ldst_stride_main_loop() function.
-  https://lore.kernel.org/qemu-riscv/cover.1755609029.git.chao.liu@zevorn.cn/
-
-Patch v4:
-- Use ctz32() replace to for-loop
-  https://lore.kernel.org/qemu-devel/cover.1755333616.git.chao.liu@yeah.net/
-
-Patch v3:
-- Fix the get_log2() function:
-  https://lore.kernel.org/qemu-riscv/cover.1755287531.git.chao.liu@yeah.net/T/#t
-- Add test for vlsseg8e32 instruction.
-- Rebase on top of the latest master.
-
-Patch v2:
-- Split the TCG node emulation of the complex strided load/store operation into
-  two separate functions to simplify the implementation:
-  https://lore.kernel.org/qemu-riscv/20250312155547.289642-1-paolo.savini@embecosm.com/
-
-Patch v1:
-- Paolo submitted the initial version of the patch.
-  https://lore.kernel.org/qemu-devel/20250211182056.412867-1-paolo.savini@embecosm.com/
-
-
-Tanks,
-Chao
-
-
-Chao Liu (2):
-  target/riscv: Use tcg nodes for strided vector ld/st generation
-  tests/tcg/riscv64: Add test for vlsseg8e32 instruction
-
- target/riscv/insn_trans/trans_rvv.c.inc   | 360 +++++++++++++++++++++-
- tests/tcg/riscv64/Makefile.softmmu-target |   7 +-
- tests/tcg/riscv64/test-vlsseg8e32.S       | 107 +++++++
- 3 files changed, 456 insertions(+), 18 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-vlsseg8e32.S
-
--- 
-2.51.0
-
+> ---
+>  hw/intc/riscv_aplic.c | 27 +++++++++++++++++----------
+>  1 file changed, 17 insertions(+), 10 deletions(-)
+>
+> v1 --> v2:
+> - fix calculation of MSI address.
+> - In Supervisor mode, lhxw/hhxs/hhxw fields are in mmsiaddrcfgh register.
+> - And lhxs field is in smsiaddrcfgh.
+>
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index a1d9fa5085..2dd54cafaa 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -96,7 +96,7 @@
+>      (APLIC_xMSICFGADDR_PPN_HHX_MASK(__hhxw) << \
+>       APLIC_xMSICFGADDR_PPN_HHX_SHIFT(__hhxs))
+>
+> -#define APLIC_xMSICFGADDRH_VALID_MASK   \
+> +#define APLIC_MMSICFGADDRH_VALID_MASK   \
+>      (APLIC_xMSICFGADDRH_L | \
+>       (APLIC_xMSICFGADDRH_HHXS_MASK << APLIC_xMSICFGADDRH_HHXS_SHIFT) | \
+>       (APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
+> @@ -104,6 +104,10 @@
+>       (APLIC_xMSICFGADDRH_LHXW_MASK << APLIC_xMSICFGADDRH_LHXW_SHIFT) | \
+>       APLIC_xMSICFGADDRH_BAPPN_MASK)
+>
+> +#define APLIC_SMSICFGADDRH_VALID_MASK   \
+> +    ((APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
+> +     APLIC_xMSICFGADDRH_BAPPN_MASK)
+> +
+>  #define APLIC_SETIP_BASE               0x1c00
+>  #define APLIC_SETIPNUM                 0x1cdc
+>
+> @@ -409,13 +413,8 @@ static void riscv_aplic_msi_send(RISCVAPLICState *ap=
+lic,
+>          msicfgaddr =3D aplic->kvm_msicfgaddr;
+>          msicfgaddrH =3D ((uint64_t)aplic->kvm_msicfgaddrH << 32);
+>      } else {
+> -        if (aplic->mmode) {
+> -            msicfgaddr =3D aplic_m->mmsicfgaddr;
+> -            msicfgaddrH =3D aplic_m->mmsicfgaddrH;
+> -        } else {
+> -            msicfgaddr =3D aplic_m->smsicfgaddr;
+> -            msicfgaddrH =3D aplic_m->smsicfgaddrH;
+> -        }
+> +        msicfgaddr =3D aplic_m->mmsicfgaddr;
+> +        msicfgaddrH =3D aplic_m->mmsicfgaddrH;
+>      }
+>
+>      lhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
+> @@ -427,6 +426,14 @@ static void riscv_aplic_msi_send(RISCVAPLICState *ap=
+lic,
+>      hhxw =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXW_SHIFT) &
+>              APLIC_xMSICFGADDRH_HHXW_MASK;
+>
+> +    if (!aplic->kvm_splitmode && !aplic->mmode) {
+> +        msicfgaddrH =3D aplic_m->smsicfgaddrH;
+> +        msicfgaddr =3D aplic_m->smsicfgaddr;
+> +
+> +        lhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
+> +            APLIC_xMSICFGADDRH_LHXS_MASK;
+> +    }
+> +
+>      group_idx =3D hart_idx >> lhxw;
+>
+>      addr =3D msicfgaddr;
+> @@ -771,7 +778,7 @@ static void riscv_aplic_write(void *opaque, hwaddr ad=
+dr, uint64_t value,
+>      } else if (aplic->mmode && aplic->msimode &&
+>                 (addr =3D=3D APLIC_MMSICFGADDRH)) {
+>          if (!(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+> -            aplic->mmsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
+K;
+> +            aplic->mmsicfgaddrH =3D value & APLIC_MMSICFGADDRH_VALID_MAS=
+K;
+>          }
+>      } else if (aplic->mmode && aplic->msimode &&
+>                 (addr =3D=3D APLIC_SMSICFGADDR)) {
+> @@ -792,7 +799,7 @@ static void riscv_aplic_write(void *opaque, hwaddr ad=
+dr, uint64_t value,
+>                 (addr =3D=3D APLIC_SMSICFGADDRH)) {
+>          if (aplic->num_children &&
+>              !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+> -            aplic->smsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
+K;
+> +            aplic->smsicfgaddrH =3D value & APLIC_SMSICFGADDRH_VALID_MAS=
+K;
+>          }
+>      } else if ((APLIC_SETIP_BASE <=3D addr) &&
+>              (addr < (APLIC_SETIP_BASE + aplic->bitfield_words * 4))) {
+> --
+> 2.34.1
+>
+>
 
