@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2883CA0EE8
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 02:47:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01AF2CAC587
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 03:00:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uxzEl-0004if-QA; Sun, 14 Sep 2025 22:46:40 -0400
+	id 1uxzRO-000870-WC; Sun, 14 Sep 2025 22:59:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uxzEk-0004iU-Ss
- for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:46:38 -0400
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ id 1uxzRM-00086U-9Y
+ for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:59:40 -0400
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uxzEf-0001ND-76
- for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:46:37 -0400
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b07c28f390eso458583066b.2
- for <qemu-riscv@nongnu.org>; Sun, 14 Sep 2025 19:46:30 -0700 (PDT)
+ id 1uxzRB-0002VR-5y
+ for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:59:39 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b042cc3954fso663795066b.0
+ for <qemu-riscv@nongnu.org>; Sun, 14 Sep 2025 19:59:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757904389; x=1758509189; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1757905163; x=1758509963; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iXUV/kd9EGV1/EaGgc27BXhHc4WuvWETYrbFbPQbcfM=;
- b=kgckyIxlHFJx8wsl9pX4an3Pe41z+uKEPc5lLClId8kDhDwBU4l6pq1OmepQpwiULA
- 8m9ZgmMOX1IxIsFa30BjY1B2wAMoQpnT8Ko35h8DZHmTyU2sfi0HfBsjKk2pQygmC3yD
- aq8gqZh5Y5PTAc48UNXGZXYdAGxblms60KenYFA/IicltbEbt/zPI8r4mg88JvTqzYGU
- kofB8jFkyFqJ3CE5QMsUOJoU6cDUW9PxTrZ2fbVPv7rFdlyrEUQf7HJQquj9pKvl6Ngv
- 1a1EzK8EM7wdm/l/EL+hVO5/Nd2iZKQmxMJHQoC/rk1Rz+9Im/slsfgvUH6taJH73tHP
- tvNA==
+ bh=beunKNVuZm35GDhVUgDKLikV0TKgfENd+xLUOeNU9cQ=;
+ b=GJ+g6QDFvHbTRcRtRIaKHFhWskGLp3NkdstpTeWh9jKNzk6bHgiQS3SssZ2XYVD60B
+ v5goaHs2KkKrjl9ZshKqyQbJSlhi1iGVAIXhfnqvd6Qs1jliCkiqHhcFZFlTQiCelr52
+ Cf2iICt5lICj+mrEpeUJ3Un6wtaImuXWNVkc2VnOFfckAWwzTysLy8G4MZysDiizVrKG
+ 9Y1ubFvect3KxqwaJkePs5bVesHRxEjpoYv4OK+9NgqswBwjMIT/KGngEkX8J/k5A8Ve
+ tJ3AmdJdJx6sjNOnqqEisKAFrhWikLwYiNjAxgpaK8amqLBQ7KWnN4qy7pmMOpBJZSzZ
+ odIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757904389; x=1758509189;
+ d=1e100.net; s=20230601; t=1757905163; x=1758509963;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iXUV/kd9EGV1/EaGgc27BXhHc4WuvWETYrbFbPQbcfM=;
- b=ql5qvi0o3yIurQf3dVGu63sayg47hts9yYf0x/yPUFxTgUGcvZC9J0E3dkNPxJ1ans
- KvQrvYWgb9NM9avKZwYoG0b0mBvRRW8Bayhxr4Cf9TgjK1N2kGVVdGMAjnibLJEpQfsw
- wtpsQjSg3DQ6O50fVwvwgO/rcEMd0dTZ+5F3B6HlY2Di/OMMecvfq+76CzbehlCP6CM+
- HXyWPa63KwwOSCSTAQOeYRmwXp2lRR/8E/lXn6R6JqMXs7vSjKj7sOFfVt6EKwYyM0JL
- C+uWaaA1f3wP1TcSytgmk4oJvOUSBFUBfA7ffqaHpw2nOjOsriKt90ZCaPtpAjaCYxm4
- Hn+A==
+ bh=beunKNVuZm35GDhVUgDKLikV0TKgfENd+xLUOeNU9cQ=;
+ b=LBSKGPBrI1PZ6o89nQ5ac9mIUqK2uuwEovkqFEqTBWYp88hcqgPUx0XPgmKxcivb3f
+ QObQOwDX8rmL/I4DluPE5tVo3LSEwPHFwyP2dLkQa5sM9D56gVwyzToMv7I7qJwQZzz9
+ /S4/k0mPK2vB80HhYxjDBsXAJcf+cwje/dcWnJDgcUmvafR1TLO7quLOI3a9iMDJcEI9
+ hpFjw/fYkH1kYrBwdyogkazDeYijnFYFSLw9AggYIPcedHo+kXsQQlW55ZFPD9maGGAA
+ RP7z0EIX/P2ZiYWMThinSzwLpzQQP5gdsoQKETeROLI7rV/R+IG8Wr7sKpxKPdU1+ODd
+ jPww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/ZUgjtB27ys84DL8xxoOePfb6gDFyJU+OEwdN9h+MP56peXX4Wd/0zoJNJvtc4FNOrJSty8QPKsoK@nongnu.org
-X-Gm-Message-State: AOJu0Yyn6PAzliUQHZ2VCZiKjaHTItBlk2if4re2QtQBrLgKKIdUI/NC
- ZXA5WxGEo94PBQow69x4D8ANGHWE48IeaeQNUdR11SXv/srXzS2QSeWHThZyCT+e+k+n9OT57I2
- hgo3oux6Sc6wy/nXkzPcdYQTCKjFbfeA=
-X-Gm-Gg: ASbGnctXKa0fej1K4XnAaiQKCQGkL2kxeIsSQQq/AmW9oPwX0JkrCkgsaATyfhI0W/H
- Fcq7AJSjB9wi4zxsDvI/H5ve2yHeMtwF5g58CYi5s15+08ltnhRQfx/7gB0iq1/pwVLtWKfRlXL
- ReIIMdMDXCcmB4C6wHmireIBPC6B03Xm7NhHwS9n5IJ7HB7/huPFkl0Pzz5OrxoH1uD1+29ojDr
- Q3rlNED9gydExp2cqCSOzSJg8fmIcw31WbLq8b9mYE6jRsb
-X-Google-Smtp-Source: AGHT+IFSuTXXvH+JajUXyz0LBdcC226VVuPNd7arj0VxB4rwsBV6x75dol/Yyss4sqvsyIYByA8sZkDjZLB8W217bp0=
-X-Received: by 2002:a17:906:aad2:b0:b07:c94c:a1aa with SMTP id
- a640c23a62f3a-b07c94ca24bmr956141566b.57.1757904388854; Sun, 14 Sep 2025
- 19:46:28 -0700 (PDT)
+ AJvYcCVViMaOHI0aXAdX2psotrIzxvS/Ll9tfCB9EiFM9+jlM6mEfYCBjDjCA048LG+FufZMCW3FyszF4z/B@nongnu.org
+X-Gm-Message-State: AOJu0YyswvOND5QNET+XLduFflPcnobEL7VClKHBXYpqJVWq4z29iHPi
+ udrCPAMUfouk3HHWl5+mIW/wsdMaaJuoaPmWneIT2/+ZwNcNzjGR/xi/dAf4Hzhrn91mKSuA4jn
+ D6DCEVdt4C66UgO8WdI7ATzYyeX3SAsM=
+X-Gm-Gg: ASbGnctlBTLkpO1pp/RRXar3URD5i4cGtCGwZTRBvsfWh9UeR43aOxlRbwLu/5tpfNd
+ m89GQ8/eTY492QswpGD4yZpRLNwyvfF4uxhz6ijfM9JIrs4zf3lfQvbhJvBepjzKI/WtjL6HIuZ
+ RtHMXWmjhrYFTKo/p+KyUBaIePPkVVKwU317HODvHw6d6JV40XyoBPTMZ2N7XIngZBwerxw/CVv
+ pm4OKNc8o8kVtzgRaUG6ovodiS41dc9bcA+t77oJosbd6kE
+X-Google-Smtp-Source: AGHT+IGH/hFg333BzEpcOiXk7E1J1jpFuoCp8/0iTAZbCoOgnxziRHRA/2+rsOLQHw8/T6OLUJu8USy2tR27SwhdJv4=
+X-Received: by 2002:a17:907:3e95:b0:b04:9acf:46c4 with SMTP id
+ a640c23a62f3a-b07c38345f9mr1080672866b.51.1757905162778; Sun, 14 Sep 2025
+ 19:59:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250903164043.2828336-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20250903164043.2828336-1-dbarboza@ventanamicro.com>
+References: <20250703130815.1592493-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20250703130815.1592493-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Sep 2025 12:46:02 +1000
-X-Gm-Features: Ac12FXwDgkAbKXRt3NdbtOr8zTT-59u4F5Kp2fa4QERZnmXNeF9vHm4-YarN6Ns
-Message-ID: <CAKmqyKPW1EavcBhE85aY=XgUbV=XF8OeWUiEQ6iq5qorUojfKg@mail.gmail.com>
-Subject: Re: [PATCH] linux-user/syscall.c: sync RISC-V hwprobe with Linux
+Date: Mon, 15 Sep 2025 12:58:56 +1000
+X-Gm-Features: Ac12FXx8zE1GKLaOaLyE329LNI3B5E14VZH0aa3aIKf1tgOkNRtxl0_WTcelevo
+Message-ID: <CAKmqyKOduKFDX8biFe0j0qj0HYRYVp7NaSXOVZgqdWMBNmJDbQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: implement MonitorDef HMP API
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
+ "Dr. David Alan Gilbert" <dave@treblig.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x62b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x62a.google.com
+X-Spam_score_int: -13
+X-Spam_score: -1.4
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,154 +98,251 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 4, 2025 at 2:42=E2=80=AFAM Daniel Henrique Barboza
+On Thu, Jul 3, 2025 at 11:09=E2=80=AFPM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> It has been awhile since the last sync. Let's bring QEMU hwprobe support
-> on par with Linux 6.17-rc4.
+> The MonitorDef API is related to two HMP monitor commands: 'p' and 'x':
 >
-> A lot of new RISCV_HWPROBE_KEY_* entities are added but this patch is
-> only adding support for ZICBOM_BLOCK_SIZE.
+> (qemu) help p
+> print|p /fmt expr -- print expression value (use $reg for CPU register ac=
+cess)
+> (qemu) help x
+> x /fmt addr -- virtual memory dump starting at 'addr'
 >
+> For x86, one of the few targets that implements it, it is possible to
+> print the PC register value with $pc and use the PC value in the 'x'
+> command as well.
+>
+> Those 2 commands are hooked into get_monitor_def(), called by
+> exp_unary() in hmp.c. The function tries to fetch a reg value in two
+> ways: by reading them directly via a target_monitor_defs array or using
+> a target_get_monitor_def() helper. In RISC-V we have *A LOT* of
+> registers and this number will keep getting bigger, so we're opting out
+> of an array declaration.
+>
+> We're able to retrieve all regs but vregs because the API only fits an
+> uint64_t and vregs have 'vlen' size that are bigger than that.
+>
+> With this patch we can do things such as:
+>
+> - print CSRs and use their val in expressions:
+> (qemu) p $mstatus
+> 0xa000000a0
+> (qemu) p $mstatus & 0xFF
+> 0xa0
+>
+> - dump the next 10 insn from virtual memory starting at x1 (ra):
+>
+> (qemu) x/10i $ra
+> 0xffffffff80958aea:  a9bff0ef          jal                     ra,-1382  =
+              # 0xffffffff80958584
+> 0xffffffff80958aee:  10016073          csrrsi                  zero,sstat=
+us,2
+> 0xffffffff80958af2:  60a2              ld                      ra,8(sp)
+> 0xffffffff80958af4:  6402              ld                      s0,0(sp)
+> 0xffffffff80958af6:  0141              addi                    sp,sp,16
+> 0xffffffff80958af8:  8082              ret
+> 0xffffffff80958afa:  10016073          csrrsi                  zero,sstat=
+us,2
+> 0xffffffff80958afe:  8082              ret
+> 0xffffffff80958b00:  1141              addi                    sp,sp,-16
+> 0xffffffff80958b02:  e422              sd                      s0,8(sp)
+> (qemu)
+>
+> Suggested-by: Dr. David Alan Gilbert <dave@treblig.org>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  linux-user/syscall.c | 89 ++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 89 insertions(+)
+>  target/riscv/cpu.h            |   1 +
+>  target/riscv/riscv-qmp-cmds.c | 148 ++++++++++++++++++++++++++++++++++
+>  2 files changed, 149 insertions(+)
 >
-> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-> index 91360a072c..ef80c689d2 100644
-> --- a/linux-user/syscall.c
-> +++ b/linux-user/syscall.c
-> @@ -8992,6 +8992,29 @@ static int do_getdents64(abi_long dirfd, abi_long =
-arg2, abi_long count)
->  #define     RISCV_HWPROBE_EXT_ZTSO          (1ULL << 33)
->  #define     RISCV_HWPROBE_EXT_ZACAS         (1ULL << 34)
->  #define     RISCV_HWPROBE_EXT_ZICOND        (1ULL << 35)
-> +#define     RISCV_HWPROBE_EXT_ZIHINTPAUSE   (1ULL << 36)
-> +#define     RISCV_HWPROBE_EXT_ZVE32X        (1ULL << 37)
-> +#define     RISCV_HWPROBE_EXT_ZVE32F        (1ULL << 38)
-> +#define     RISCV_HWPROBE_EXT_ZVE64X        (1ULL << 39)
-> +#define     RISCV_HWPROBE_EXT_ZVE64F        (1ULL << 40)
-> +#define     RISCV_HWPROBE_EXT_ZVE64D        (1ULL << 41)
-> +#define     RISCV_HWPROBE_EXT_ZIMOP         (1ULL << 42)
-> +#define     RISCV_HWPROBE_EXT_ZCA           (1ULL << 43)
-> +#define     RISCV_HWPROBE_EXT_ZCB           (1ULL << 44)
-> +#define     RISCV_HWPROBE_EXT_ZCD           (1ULL << 45)
-> +#define     RISCV_HWPROBE_EXT_ZCF           (1ULL << 46)
-> +#define     RISCV_HWPROBE_EXT_ZCMOP         (1ULL << 47)
-> +#define     RISCV_HWPROBE_EXT_ZAWRS         (1ULL << 48)
-> +#define     RISCV_HWPROBE_EXT_SUPM          (1ULL << 49)
-> +#define     RISCV_HWPROBE_EXT_ZICNTR        (1ULL << 50)
-> +#define     RISCV_HWPROBE_EXT_ZIHPM         (1ULL << 51)
-> +#define     RISCV_HWPROBE_EXT_ZFBFMIN       (1ULL << 52)
-> +#define     RISCV_HWPROBE_EXT_ZVFBFMIN      (1ULL << 53)
-> +#define     RISCV_HWPROBE_EXT_ZVFBFWMA      (1ULL << 54)
-> +#define     RISCV_HWPROBE_EXT_ZICBOM        (1ULL << 55)
-> +#define     RISCV_HWPROBE_EXT_ZAAMO         (1ULL << 56)
-> +#define     RISCV_HWPROBE_EXT_ZALRSC        (1ULL << 57)
-> +#define     RISCV_HWPROBE_EXT_ZABHA         (1ULL << 58)
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 229ade9ed9..487884c42c 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -576,6 +576,7 @@ static inline int riscv_has_ext(CPURISCVState *env, t=
+arget_ulong ext)
+>  extern const char * const riscv_int_regnames[];
+>  extern const char * const riscv_int_regnamesh[];
+>  extern const char * const riscv_fpr_regnames[];
+> +extern const char * const riscv_rvv_regnames[];
 >
->  #define RISCV_HWPROBE_KEY_CPUPERF_0     5
->  #define     RISCV_HWPROBE_MISALIGNED_UNKNOWN     (0 << 0)
-> @@ -9002,6 +9025,22 @@ static int do_getdents64(abi_long dirfd, abi_long =
-arg2, abi_long count)
->  #define     RISCV_HWPROBE_MISALIGNED_MASK        (7 << 0)
+>  const char *riscv_cpu_get_trap_name(target_ulong cause, bool async);
+>  int riscv_cpu_write_elf64_note(WriteCoreDumpFunction f, CPUState *cs,
+> diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.=
+c
+> index 8ba8aa0d5f..2c8c74bbe4 100644
+> --- a/target/riscv/riscv-qmp-cmds.c
+> +++ b/target/riscv/riscv-qmp-cmds.c
+> @@ -31,6 +31,10 @@
+>  #include "qapi/qobject-input-visitor.h"
+>  #include "qapi/visitor.h"
+>  #include "qom/qom-qobject.h"
+> +#include "qemu/ctype.h"
+> +#include "qemu/qemu-print.h"
+> +#include "monitor/hmp.h"
+> +#include "monitor/hmp-target.h"
+>  #include "system/kvm.h"
+>  #include "system/tcg.h"
+>  #include "cpu-qom.h"
+> @@ -240,3 +244,147 @@ CpuModelExpansionInfo *qmp_query_cpu_model_expansio=
+n(CpuModelExpansionType type,
 >
->  #define RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE 6
-> +#define RISCV_HWPROBE_KEY_HIGHEST_VIRT_ADDRESS 7
-> +#define RISCV_HWPROBE_KEY_TIME_CSR_FREQ 8
-> +#define RISCV_HWPROBE_KEY_MISALIGNED_SCALAR_PERF        9
-> +#define     RISCV_HWPROBE_MISALIGNED_SCALAR_UNKNOWN     0
-> +#define     RISCV_HWPROBE_MISALIGNED_SCALAR_EMULATED    1
-> +#define     RISCV_HWPROBE_MISALIGNED_SCALAR_SLOW        2
-> +#define     RISCV_HWPROBE_MISALIGNED_SCALAR_FAST        3
-> +#define     RISCV_HWPROBE_MISALIGNED_SCALAR_UNSUPPORTED 4
-> +#define RISCV_HWPROBE_KEY_MISALIGNED_VECTOR_PERF 10
-> +#define     RISCV_HWPROBE_MISALIGNED_VECTOR_UNKNOWN     0
-> +#define     RISCV_HWPROBE_MISALIGNED_VECTOR_SLOW        2
-> +#define     RISCV_HWPROBE_MISALIGNED_VECTOR_FAST        3
-> +#define     RISCV_HWPROBE_MISALIGNED_VECTOR_UNSUPPORTED 4
-> +#define RISCV_HWPROBE_KEY_VENDOR_EXT_THEAD_0     11
-> +#define RISCV_HWPROBE_KEY_ZICBOM_BLOCK_SIZE      12
-> +#define RISCV_HWPROBE_KEY_VENDOR_EXT_SIFIVE_0    13
->
->  struct riscv_hwprobe {
->      abi_llong  key;
-> @@ -9110,6 +9149,52 @@ static void risc_hwprobe_fill_pairs(CPURISCVState =
-*env,
->                       RISCV_HWPROBE_EXT_ZACAS : 0;
->              value |=3D cfg->ext_zicond ?
->                       RISCV_HWPROBE_EXT_ZICOND : 0;
-> +            value |=3D cfg->ext_zihintpause ?
-> +                     RISCV_HWPROBE_EXT_ZIHINTPAUSE : 0;
-> +            value |=3D cfg->ext_zve32x ?
-> +                     RISCV_HWPROBE_EXT_ZVE32X : 0;
-> +            value |=3D cfg->ext_zve32f ?
-> +                     RISCV_HWPROBE_EXT_ZVE32F : 0;
-> +            value |=3D cfg->ext_zve64x ?
-> +                     RISCV_HWPROBE_EXT_ZVE64X : 0;
-> +            value |=3D cfg->ext_zve64f ?
-> +                     RISCV_HWPROBE_EXT_ZVE64F : 0;
-> +            value |=3D cfg->ext_zve64d ?
-> +                     RISCV_HWPROBE_EXT_ZVE64D : 0;
-> +            value |=3D cfg->ext_zimop ?
-> +                     RISCV_HWPROBE_EXT_ZIMOP : 0;
-> +            value |=3D cfg->ext_zca ?
-> +                     RISCV_HWPROBE_EXT_ZCA : 0;
-> +            value |=3D cfg->ext_zcb ?
-> +                     RISCV_HWPROBE_EXT_ZCB : 0;
-> +            value |=3D cfg->ext_zcd ?
-> +                     RISCV_HWPROBE_EXT_ZCD : 0;
-> +            value |=3D cfg->ext_zcf ?
-> +                     RISCV_HWPROBE_EXT_ZCF : 0;
-> +            value |=3D cfg->ext_zcmop ?
-> +                     RISCV_HWPROBE_EXT_ZCMOP : 0;
-> +            value |=3D cfg->ext_zawrs ?
-> +                     RISCV_HWPROBE_EXT_ZAWRS : 0;
-> +            value |=3D cfg->ext_supm ?
-> +                     RISCV_HWPROBE_EXT_SUPM : 0;
-> +            value |=3D cfg->ext_zicntr ?
-> +                     RISCV_HWPROBE_EXT_ZICNTR : 0;
-> +            value |=3D cfg->ext_zihpm ?
-> +                     RISCV_HWPROBE_EXT_ZIHPM : 0;
-> +            value |=3D cfg->ext_zfbfmin ?
-> +                     RISCV_HWPROBE_EXT_ZFBFMIN : 0;
-> +            value |=3D cfg->ext_zvfbfmin ?
-> +                     RISCV_HWPROBE_EXT_ZVFBFMIN : 0;
-> +            value |=3D cfg->ext_zvfbfwma ?
-> +                     RISCV_HWPROBE_EXT_ZVFBFWMA : 0;
-> +            value |=3D cfg->ext_zicbom ?
-> +                     RISCV_HWPROBE_EXT_ZICBOM : 0;
-> +            value |=3D cfg->ext_zaamo ?
-> +                     RISCV_HWPROBE_EXT_ZAAMO : 0;
-> +            value |=3D cfg->ext_zalrsc ?
-> +                     RISCV_HWPROBE_EXT_ZALRSC : 0;
-> +            value |=3D cfg->ext_zabha ?
-> +                     RISCV_HWPROBE_EXT_ZABHA : 0;
->              __put_user(value, &pair->value);
->              break;
->          case RISCV_HWPROBE_KEY_CPUPERF_0:
-> @@ -9119,6 +9204,10 @@ static void risc_hwprobe_fill_pairs(CPURISCVState =
-*env,
->              value =3D cfg->ext_zicboz ? cfg->cboz_blocksize : 0;
->              __put_user(value, &pair->value);
->              break;
-> +        case RISCV_HWPROBE_KEY_ZICBOM_BLOCK_SIZE:
-> +            value =3D cfg->ext_zicbom ? cfg->cbom_blocksize : 0;
-> +            __put_user(value, &pair->value);
-> +            break;
->          default:
->              __put_user(-1, &pair->key);
->              break;
+>      return expansion_info;
+>  }
+> +
+> +/*
+> + * We have way too many potential CSRs and regs being added
+> + * regularly to register them in a static array.
+> + *
+> + * Declare an empty array instead, making get_monitor_def() use
+> + * the target_get_monitor_def() API directly.
+> + */
+> +const MonitorDef monitor_defs[] =3D { { } };
+> +const MonitorDef *target_monitor_defs(void)
+> +{
+> +    return monitor_defs;
+> +}
+> +
+> +static bool reg_is_ulong_integer(CPURISCVState *env, const char *name,
+> +                                 target_ulong *val, bool is_gprh)
+> +{
+> +    const char * const *reg_names;
+> +    target_ulong *vals;
+> +
+> +    if (is_gprh) {
+> +        reg_names =3D riscv_int_regnamesh;
+> +        vals =3D env->gprh;
+> +    } else {
+> +        reg_names =3D riscv_int_regnames;
+> +        vals =3D env->gpr;
+> +    }
+> +
+> +    for (int i =3D 0; i < 32; i++) {
+> +        g_autofree char *reg_name =3D g_strdup(reg_names[i]);
+> +        char *reg1 =3D strtok(reg_name, "/");
+> +        char *reg2 =3D strtok(NULL, "/");
+> +
+> +        if (strcasecmp(reg1, name) =3D=3D 0 ||
+> +            (reg2 && strcasecmp(reg2, name) =3D=3D 0)) {
+> +            *val =3D vals[i];
+> +            return true;
+> +        }
+> +    }
+> +
+> +    return false;
+> +}
+> +
+> +static bool reg_is_u64_fpu(CPURISCVState *env, const char *name, uint64_=
+t *val)
+> +{
+> +    if (qemu_tolower(name[0]) !=3D 'f') {
+> +        return false;
+> +    }
+> +
+> +    for (int i =3D 0; i < 32; i++) {
+> +        g_autofree char *reg_name =3D g_strdup(riscv_fpr_regnames[i]);
+> +        char *reg1 =3D strtok(reg_name, "/");
+> +        char *reg2 =3D strtok(NULL, "/");
+> +
+> +        if (strcasecmp(reg1, name) =3D=3D 0 ||
+> +            (reg2 && strcasecmp(reg2, name) =3D=3D 0)) {
+> +            *val =3D env->fpr[i];
+> +            return true;
+> +        }
+> +    }
+> +
+> +    return false;
+> +}
+> +
+> +static bool reg_is_vreg(const char *name)
+> +{
+> +    if (qemu_tolower(name[0]) !=3D 'v' || strlen(name) > 3) {
+> +        return false;
+> +    }
+> +
+> +    for (int i =3D 0; i < 32; i++) {
+> +        if (strcasecmp(name, riscv_rvv_regnames[i]) =3D=3D 0) {
+> +            return true;
+> +        }
+> +    }
+> +
+> +    return false;
+> +}
+> +
+> +int target_get_monitor_def(CPUState *cs, const char *name, uint64_t *pva=
+l)
+> +{
+> +    CPURISCVState *env =3D &RISCV_CPU(cs)->env;
+> +    target_ulong val =3D 0;
+> +    uint64_t val64 =3D 0;
+> +    int i;
+> +
+> +    if (reg_is_ulong_integer(env, name, &val, false) ||
+> +        reg_is_ulong_integer(env, name, &val, true)) {
+> +        *pval =3D val;
+> +        return 0;
+> +    }
+> +
+> +    if (reg_is_u64_fpu(env, name, &val64)) {
+> +        *pval =3D val64;
+> +        return 0;
+> +    }
+> +
+> +    if (reg_is_vreg(name)) {
+> +        if (!riscv_has_ext(env, RVV)) {
+> +            return -EINVAL;
+> +        }
+> +
+> +        qemu_printf("Unable to print the value of vector "
+> +                    "vreg '%s' from this API\n", name);
+> +
+> +        /*
+> +         * We're returning 0 because returning -EINVAL triggers
+> +         * an 'unknown register' message in exp_unary() later,
+> +         * which feels ankward after our own error message.
+> +         */
+> +        *pval =3D 0;
+> +        return 0;
+> +    }
+> +
+> +    for (i =3D 0; i < ARRAY_SIZE(csr_ops); i++) {
+> +        RISCVException res;
+> +        int csrno =3D i;
+> +
+> +        /*
+> +         * Early skip when possible since we're going
+> +         * through a lot of NULL entries.
+> +         */
+> +        if (csr_ops[csrno].predicate =3D=3D NULL) {
+> +            continue;
+> +        }
+> +
+> +        if (strcasecmp(csr_ops[csrno].name, name) !=3D 0) {
+> +            continue;
+> +        }
+> +
+> +        res =3D riscv_csrrw_debug(env, csrno, &val, 0, 0);
+> +
+> +        /*
+> +         * Rely on the smode, hmode, etc, predicates within csr.c
+> +         * to do the filtering of the registers that are present.
+> +         */
+> +        if (res =3D=3D RISCV_EXCP_NONE) {
+> +            *pval =3D val;
+> +            return 0;
+> +        }
+> +    }
+> +
+> +    return -EINVAL;
+> +}
 > --
-> 2.50.1
+> 2.49.0
 >
 >
 
