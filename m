@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07EBDCAC598
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 08:43:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32669CAC598
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 08:44:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uy4m3-0007YI-1S; Mon, 15 Sep 2025 04:41:24 -0400
+	id 1uy4mL-0007zb-Nx; Mon, 15 Sep 2025 04:41:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1uy4ls-0007WM-GZ
- for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 04:41:13 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ id 1uy4mF-0007oC-O0
+ for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 04:41:36 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1uy4lc-0002Or-HN
- for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 04:41:10 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-b523fb676efso2785620a12.3
- for <qemu-riscv@nongnu.org>; Mon, 15 Sep 2025 01:40:53 -0700 (PDT)
+ id 1uy4lq-0002QI-9s
+ for qemu-riscv@nongnu.org; Mon, 15 Sep 2025 04:41:32 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-772627dd50aso5594762b3a.1
+ for <qemu-riscv@nongnu.org>; Mon, 15 Sep 2025 01:41:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1757925650; x=1758530450; darn=nongnu.org;
+ d=sifive.com; s=google; t=1757925668; x=1758530468; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7gULplgMLCLslKgcVIvWoNyxi8gkKVOmzAYNJTIpxIg=;
- b=ZR2xikcOz8rB3q1wp6IYcOxjbS4P1GTK+Uv2F/vdmgILqxexi9YKg8A4WCQC/q68L6
- ek7jS5RD8CLJH8ZxtAp+qXgqRIZIBEBeAw9m/MbdO6vL3sv1/Hp0vP3BVY+GrEVxnQGX
- 10uo74FzfX+xWf2zg4OBWKyQGjuyuC/bF+ENdbFDFmL6Tzc6AxjXR986Y35YiJLsAL+x
- W41pNy8nKE4s28cK249//hRvCX8WPThx6IDW1Uuloxc19SMR6EiOiiF0s7c3aVGME9kw
- QMU4rF6I6yWXnAz0el3kfDFbkdmeb840gL6OHm9QlsZaul7n+Qac6G4i8Duvmk9Z7VSX
- dxxQ==
+ bh=512SNwG/42h2YVFM//EPeL3wCt1vmEMWdeuDeCr6XOw=;
+ b=hsWaG110Tr/+1APCn+Z1oU+Nfzc2BV6YGoInurvARb8KvsfIdO47/oKDX1zBNCvRke
+ L8aln72Eh2nrrN6fDDHY8gdmAwZuce3najB8TyqlFIhG0AQzoDB9qDVX6PcewOntIz8c
+ ZTwK+RTPS1BGgAfQ4wK07pr6NgNSE8aiRDux8ahnkC0WlWldUSu5Ig21+5/1I/7ggYH5
+ 5ZXzYyVx1YOa2Wbz2q5tEiOkWJn4LkKfskMRrQUkxZJcR8Af2zN2rWPMPGnsvJyZaovl
+ 4WGGS76CIGy6Vl7zUIiIbSSk5GxKlrKac8RIxME4zf9sTUv42ffryupvoPn2OXHHl2ZA
+ /4tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757925650; x=1758530450;
+ d=1e100.net; s=20230601; t=1757925668; x=1758530468;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7gULplgMLCLslKgcVIvWoNyxi8gkKVOmzAYNJTIpxIg=;
- b=YFGua6Jqe2pk9j8vIy01W7BDaFxfyTUAD3rNP1Rhu77gQNtVJcE4qGzgp6X5f/kqvI
- BT9K4BEVIdKOhlmi64QJUBP4PV1TNtRBBSuOnsgHQvSG1suWTFedCUvPxR47v4hzy89g
- FG3n+wBIyuudrSHMVQaskdJ+X/NvhbHtvGnAOEnFsv7FPeaPlqyEZmVJ2ylCUCsolX02
- RYBmhb2YKnp1ICEBg8dtCh6tpm8CAo3Us5xp2zD5QJuZXAVlP/LLYkPdWM+yYyYPQyPc
- Srs9XIirGP2SenUdd3i0WxWRKYsNS3Ykw/PHcNGWB07tjblMs+tW0IEgt37jb63kAO5f
- EpPw==
+ bh=512SNwG/42h2YVFM//EPeL3wCt1vmEMWdeuDeCr6XOw=;
+ b=ujwLDYT+gBgC31IIrc2oe+iu3OV4Ey9ph/TGHDf8rIx+TjGk2/PsQJ5pBMRvLfVEwu
+ bNYgsVuGdWC7iAFDufnJSeaNaiEJfnVHvoYcIahq8lP5dPCH1qmZYn2UoGP6VsczFuRx
+ 6vuhEbhVdapj30puI1Ek+RyXTbN6Ipl8JudcHmXk7WhPgsbjHp1SBWcvlUlb7OTRlYrW
+ joUsvyw0ksjnXBhkGOLTa8To3AkN6GvPjC7hljsyTJERNtegp/7Y247UCCcVxYBNu0lF
+ s8D0hpeKUbQmWYv6C/F3py2eHmedZNA7vi9MJgFaNMZdVkDRgJttAAvKmXzWCujhTws/
+ brAw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwYlTwFOK7XHx95W/7NBTC5EnpeYFbZ4ZqIMQcrjOJYdyj6qYTKJ0ipUXAXaMEDUK8cVxU3jenKktd@nongnu.org
-X-Gm-Message-State: AOJu0Yxgama7+U0gry/+74H18Q4mp/0qBFZe2OeDdziPZ0rZEhdDd+Ui
- 9133lC1sVCB2cj9simZfAfnoe9+aH2SwXIPE2ejLNfaeGjaPvGgZuteZLX5cbMsAFoc=
-X-Gm-Gg: ASbGncvaGyH39YZZyQQnzThZhUymTgKfcKBtzXBT49rZd4pPa+tvEys55NbMCE19eyS
- wYW+iYVGbGcw3sfktzTaxMseGOIXOz+oHgiwgPoDl/iJD+BGHY7ILZMkkI8almrNseYczkWx2oj
- 0pJvsPLWcowDhNShOdIFtoPUFP7WtHROd7YCuaXyriMeyCvOZbnDL7FwV7UbF0dCn1W3veX0Oec
- mGFk6BCjO5VHv4jLo0LsVV/ybQn5dyg+L5fYu1xWpllr3LKUvrhs1MrJfqlpgXmdO/0fiM8sZyK
- j2Om5sxyl5RcJ4YGRDdRL/ldMbcQmZDe4zS1wDO0CCvk6lSXHY55Ts+yA2gmCS4xP/lbYzamuRP
- b7rGcqPBFgGUaLECgFV18KhUv+3uVhogaI/udLmEJjFs3pvH3IzOncXHkBMdQx24RpKQcJkBAHw
- 2MEQ==
-X-Google-Smtp-Source: AGHT+IGZO4l1hS8dha8ovnzDslNRABpQ9aoOETpEBmS09+P+ewAOiOeE29rYFU6k4Obd4m+DfSzUPA==
-X-Received: by 2002:a17:902:dac8:b0:267:6649:ec17 with SMTP id
- d9443c01a7336-2676649f0bamr21805315ad.23.1757925650075; 
- Mon, 15 Sep 2025 01:40:50 -0700 (PDT)
+ AJvYcCW1wxDG59ZRMqKfTNafjAq5TP842IZvMlsqP/WYGRBFtp0gN4k/SeqOGVT6z47L32R0ULxKyA+yOPxM@nongnu.org
+X-Gm-Message-State: AOJu0Yz5V/yqeRWvJModd4HvN/W+yaXHxbscDB4pEAnpGg+KxDEG1udN
+ M3g61+tIK4I7BDW6IRjFARPQeFm1gPh9Z/G0K7c7mAnqPFdTv7Y3NIn7h2VOWoTDLqs=
+X-Gm-Gg: ASbGnctRpDP5tNXYs4f/wAr3aM5XrvJir7PSYLSC/AF+XtzOTKT7neBBo2r9GrxjVVU
+ TjSFChSc6z//MqrXvfbiiYPnYvhrUTkBmylC+m1aIdAy0xY9EVaKQLycOTMe+DLzYDAOx04sKAB
+ oOeUGkpNLa5y5ywsjyasfCVq+mNLPRLrMW7tmexGPF2dGcaV7E8GfjoBOKRwO8eX1Do5jgH468w
+ a1VHEGvmqzaFCJpX/CzRTZ+X0fVkuGhlD2GcMrUf5msXGC/NKd22IaOuT7xUcXmm57bUZRha54Q
+ NQa+Wrf6tmJ3Ok0VuqJTxMDSG4XRjYQyCn0Av+UJxMWeyBGc/MpUQwHKIK9RXnuMV/TRIg6Zl1b
+ JXuDJH1pw7rqeBcJMslJxdwsn19j3WFApVd65i6F/9qamk+55r5lnMuQupSkjOHhKz6tea//iun
+ /r1w==
+X-Google-Smtp-Source: AGHT+IFoDLndtxzmRjFmPNgqUmSrx8zHVIqUFQdp3DCFdYMLVkCo8j8khTc7kBxGeNWoTrQ9LMlZZw==
+X-Received: by 2002:a17:902:d507:b0:24b:270e:56d4 with SMTP id
+ d9443c01a7336-25d2a11abefmr139836035ad.4.1757925667933; 
+ Mon, 15 Sep 2025 01:41:07 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-26295996ff6sm55852045ad.64.2025.09.15.01.40.48
+ d9443c01a7336-26295996ff6sm55852045ad.64.2025.09.15.01.41.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Sep 2025 01:40:49 -0700 (PDT)
+ Mon, 15 Sep 2025 01:41:07 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -75,23 +75,24 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Max Chou <max.chou@sifive.com>
-Subject: [RFC PATCH 1/8] target/riscv: Add cfg properities for Zvfbfa
- extensions
-Date: Mon, 15 Sep 2025 16:40:29 +0800
-Message-ID: <20250915084037.1816893-2-max.chou@sifive.com>
+Subject: [RFC PATCH 6/8] target/riscv: Introduce BF16 canonical NaN for Zvfbfa
+ extension
+Date: Mon, 15 Sep 2025 16:40:34 +0800
+Message-ID: <20250915084037.1816893-7-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250915084037.1816893-1-max.chou@sifive.com>
 References: <20250915084037.1816893-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=max.chou@sifive.com; helo=mail-pg1-x52d.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x42a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,59 +108,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Zvfbfa extension adds more complete BF16 vector compute support
-and requires the Zve32f and Zfbfmin extensions.
+According to the Zvfbfa ISA spec (v0.1), improperly NaN-boxed
+f-register operands must substitute the BF16 canonical NaN instead of
+the FP16 canonical NaN for some vector floating-point instructions.
 
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/cpu.c                | 1 +
- target/riscv/cpu_cfg_fields.h.inc | 1 +
- target/riscv/tcg/tcg-cpu.c        | 8 ++++++++
- 3 files changed, 10 insertions(+)
+ target/riscv/insn_trans/trans_rvv.c.inc | 18 +++++++++---------
+ target/riscv/translate.c                |  8 ++++++++
+ 2 files changed, 17 insertions(+), 9 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d055ddf4623..fc0614dadba 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -169,6 +169,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
-     ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
-     ISA_EXT_DATA_ENTRY(zve64x, PRIV_VERSION_1_10_0, ext_zve64x),
-+    ISA_EXT_DATA_ENTRY(zvfbfa, PRIV_VERSION_1_13_0, ext_zvfbfa),
-     ISA_EXT_DATA_ENTRY(zvfbfmin, PRIV_VERSION_1_12_0, ext_zvfbfmin),
-     ISA_EXT_DATA_ENTRY(zvfbfwma, PRIV_VERSION_1_12_0, ext_zvfbfwma),
-     ISA_EXT_DATA_ENTRY(zvfh, PRIV_VERSION_1_12_0, ext_zvfh),
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index e2d116f0dfb..f69be188e4a 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -96,6 +96,7 @@ BOOL_FIELD(ext_zvks)
- BOOL_FIELD(ext_zvksc)
- BOOL_FIELD(ext_zvksg)
- BOOL_FIELD(ext_zmmul)
-+BOOL_FIELD(ext_zvfbfa)
- BOOL_FIELD(ext_zvfbfmin)
- BOOL_FIELD(ext_zvfbfwma)
- BOOL_FIELD(ext_zvfh)
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 78fb2791847..07b2b137934 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -704,6 +704,14 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
-+    if (cpu->cfg.ext_zvfbfa) {
-+        if (!cpu->cfg.ext_zve32f || !cpu->cfg.ext_zfbfmin) {
-+            error_setg(errp, "Zvfbfa extension requires Zve32f extension "
-+                             "and Zfbfmin extension");
-+            return;
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 71f98fb350b..62cc03784cb 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -2347,17 +2347,17 @@ GEN_OPIWI_NARROW_TRANS(vnclip_wi, IMM_ZX, vnclip_wx)
+  */
+ static void do_nanbox(DisasContext *s, TCGv_i64 out, TCGv_i64 in)
+ {
+-    switch (s->sew) {
+-    case 1:
+-        gen_check_nanbox_h(out, in);
+-        break;
+-    case 2:
++    if (s->sew == MO_16) {
++        if (s->altfmt) {
++            gen_check_nanbox_h_bf16(out, in);
++        } else {
++            gen_check_nanbox_h(out, in);
 +        }
-+    }
++    } else if (s->sew == MO_32) {
+         gen_check_nanbox_s(out, in);
+-        break;
+-    case 3:
++    } else if (s->sew == MO_64) {
+         tcg_gen_mov_i64(out, in);
+-        break;
+-    default:
++    } else {
+         g_assert_not_reached();
+     }
+ }
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 8ad147946c9..d99b58629d0 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -201,6 +201,14 @@ static void gen_check_nanbox_h(TCGv_i64 out, TCGv_i64 in)
+     tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
+ }
+ 
++static void gen_check_nanbox_h_bf16(TCGv_i64 out, TCGv_i64 in)
++{
++    TCGv_i64 t_max = tcg_constant_i64(0xffffffffffff0000ull);
++    TCGv_i64 t_nan = tcg_constant_i64(0xffffffffffff7fc0ull);
 +
-     if ((cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) && !cpu->cfg.ext_zfinx) {
-         error_setg(errp, "Zdinx/Zhinx/Zhinxmin extensions require Zfinx");
-         return;
++    tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
++}
++
+ static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+ {
+     TCGv_i64 t_max = tcg_constant_i64(0xffffffff00000000ull);
 -- 
 2.43.0
 
