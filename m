@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ACCCCAC587
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 01:55:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3B42CA0EE8
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Sep 2025 02:13:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uxyQj-0007E9-7x; Sun, 14 Sep 2025 21:54:59 -0400
+	id 1uxyiC-00046W-HC; Sun, 14 Sep 2025 22:13:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uxyQd-0007AZ-TB
- for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 21:54:51 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ id 1uxyi8-00045k-U2
+ for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:12:56 -0400
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uxyQV-0003c1-00
- for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 21:54:50 -0400
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-afcb78ead12so483426566b.1
- for <qemu-riscv@nongnu.org>; Sun, 14 Sep 2025 18:54:40 -0700 (PDT)
+ id 1uxyhz-0005kd-US
+ for qemu-riscv@nongnu.org; Sun, 14 Sep 2025 22:12:56 -0400
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-62f0bf564e4so1894095a12.3
+ for <qemu-riscv@nongnu.org>; Sun, 14 Sep 2025 19:12:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757901279; x=1758506079; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1757902357; x=1758507157; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wh35gwmePaTudZC9v7TbD45o+/CFAax/uaC0LPtvB+w=;
- b=NMfhGdTFz5O0A7pgCbFBBKixjSzq8JvlGx0/6Dayfr01p14fcBfOwZAFKKoNUOUh8V
- IiUwfVVwDoHarHf4FWkKoIn7q2OdIrfPgqtXdTjVoaORVjuTdIjocTkiWYoWxHzDYYcV
- Rd8c7bbsAveLb8VKXp3BEffW41O43BkVEJotJkpX2k8Rjua6VhxHcBV1MMAb6SFOipXP
- cvAAGFD4Cm6d/oAdWP3FXm5/0jEwILhJ/2GRjOX/aDWh0UFTqVWOg8ic5waPQaluoHVk
- zaVIWlzBpIq1iHsHjyDMYjyh03nfjUSBck2oqn0JRO+YA+0jmDYvJVHtRyzCvt5h4X7D
- NgUA==
+ bh=Cgs/gwT/Li3NjQ9nXCI/LXVX5CL9/PfvDPoWbLk/92c=;
+ b=nK6Fm9dXORLmFIF4gi9VWWydvhz1YDpBPHwrCpBAe7yUVSY/wyj7rtRDvHSs1774NW
+ 25eehGBgYveXRrnsr2p85lfx6PkuE2tAFBE20PhF0Bytn6maNDuuhNrrUkHaYvRsiB+s
+ CymWDxy8LB6STUCgWknrsspdu4J2h3p81SdSMQC6iwCAoyiipY6sU3QIJO13AuX7xfLN
+ BVGatS6JT5VH/yRFEZQte05eLz47r9ul+Yn1/xngdV146xeua0Do9OyU4asFL6wUcZgL
+ 2XcS1lXjKh3IvZIFREkfqXhG091RsRz97DneASGM7NgQK0YqJ/UtEKbNkPwl5BdnfbbB
+ hjhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757901279; x=1758506079;
+ d=1e100.net; s=20230601; t=1757902357; x=1758507157;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Wh35gwmePaTudZC9v7TbD45o+/CFAax/uaC0LPtvB+w=;
- b=RwJ8w7eqjAYJzpJsdmBRvFCy1ceWkKL7+ECut6I/uSfh1qH7A55fwtCLZTrb7TVzLH
- HQ1M1tx8Fl5RReZ4kEcmHmaS1jRCjXyFwz5LMIV0jljtD2iJ3+68sI44oePJLE/hqMF1
- TORiWOiydBlifqCTTEGNQhz+QVj0ti039T4+gzL1l9qdeff4jPa8RGKIsaLdswb9VYYF
- ATLXBkeCKmtinS97VwFp+KEs/g1IOS7YH0sGYc2iBknlw9Ok18JnIxwCpZn0MaPR5vK+
- WMXjNPkxfm2kmj1ctevoYPxrXuEykgaEPtfVc2OSzB+eP6OOvcCblQBVfVc3o+NclU6i
- w7ig==
+ bh=Cgs/gwT/Li3NjQ9nXCI/LXVX5CL9/PfvDPoWbLk/92c=;
+ b=f65immbP2wQA05bkD8UwyMXJ1GQ1UXctIAcCJ5nj++uT0A+IxUiT/WK8YQJsYUEoPn
+ DJSWOxA5SliVlOqvh6p3jAGbkjuKwqvSzjL8pVM6AHZntpuwR2htBH9i+AKECzBywWRz
+ roYyVtyoHv5CfsAPkevqYixQr55x7RioXZp/o0a//iLezo6jJ2VtPNUQq2skf70QhVD6
+ ON2pqz4P+y7TIIz1tWxesTl46gKXRurxr8upxQz0/tULJqqbNjik2+pcCf9kBk7cS9Ql
+ gUBHe8KYrIlWeKYbXLIepWFdPNtIfgQCl7CGpEoF5MleGZIS41CXfQKf4CaOLhplA6iU
+ r+LA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWpNca1pQal7gzqwDFhk6CkaKBJ+OcFpvutuOJxKyFXRJ2CfC3zLTFwnZCl7nrZDD5VDH0SJeB477OP@nongnu.org
-X-Gm-Message-State: AOJu0YySl+CnaRPIP//oiSbFefUUJ9q/InLG0tFucVs3oCejWwUAEEiw
- RUD21pyMVtoValhngc8shRurU7mRdMsqg9ulkjMb4Jyl/tuq4vsawsAdEz0QUsweXlFf1rWnE7C
- OWBPQiC891nFb4SeGGuVKsnYVDdoQ7hI=
-X-Gm-Gg: ASbGncuqPQYV+MasnxESSaiafNuUflRhU5fzsDD+1misInzuS+GUtxxgco62Vby3UWI
- P7pqPqEZdbBIYbtLmwIlUUezvihTf11a5J82IIEtSLzYxhm9kmY4F+YTEni9GC1PnEWevqzj/2g
- pYjMZ6vfhm8ypqTGrgos3HCZp4IXIrKXVeG6XwzuKXLKofN7iLJw8L/tLeSInw+xVDZXfEMe442
- JkJHY2HRdOEOucBwKV9MDbnEUGvliWq1hy+nLzsqazU3NLX
-X-Google-Smtp-Source: AGHT+IHHhFE8mit4GABCpz+WIhIP3mTGk5t711eCNN4WnVkrcgy3BwYyiLDWhT5hlNTLQU2TzSTO3S9IhwpiT2bHkFE=
-X-Received: by 2002:a17:907:3e1a:b0:b01:6e50:208c with SMTP id
- a640c23a62f3a-b07c3582d6amr1052572466b.22.1757901278587; Sun, 14 Sep 2025
- 18:54:38 -0700 (PDT)
+ AJvYcCX/Sa3rMI38uq6FlZfcg/gIGrwanu2bwqVq5OYpGY390GnVpR+CKAdFLRKJk+cXDfVi3HW20lyE4K+h@nongnu.org
+X-Gm-Message-State: AOJu0Yye4rWs9T9CrVHz0D8JniwvRHJowY9wLvl5Gqf/eCQnmgqDxyoO
+ CzEiMghK35S9s6vQxUBOzAH3V/3pA6+26gPMLXYuZwNarPhvWeyTq/rdRWLuM26kqG71P5oH0ac
+ gGtvVTFhRBnMjDgljZ/661eK3lExmdHc=
+X-Gm-Gg: ASbGncto9JPq+eykTsSlsAeRN4bXnJrh5D1VIaegIc7vcS4IXHr7glJHxWzGfNNRioJ
+ Qxo8anyaduQu6FV2nfH5xdwPFG1WChtsYUZzn7zigolxBBDcvddIc8Oi45jHKRSJOuPTCn8x8df
+ jCvMnkNLG3GjWE+oZdiIQoUhZVMSRrsJ/Rm1xRLm2NHVTqvQ8sfpuDLuOnDT75c6iWwgPYA6AMY
+ wsNTDIQczjO8AqieaOJWxeEj7jNq1vgqW47HxvMrtX5weDG
+X-Google-Smtp-Source: AGHT+IHYWuc/3WbMsIsCneNPQ0WKClxu3JFlbtvzOypfXPdaIPRigKSEOXtd+gUvXuHjz6ihj9o5lAtDXRdg55KXwpM=
+X-Received: by 2002:a17:907:2d2c:b0:b07:9c13:153e with SMTP id
+ a640c23a62f3a-b07c353e3f8mr1100157866b.2.1757902356716; Sun, 14 Sep 2025
+ 19:12:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250904132723.614507-2-ajones@ventanamicro.com>
-In-Reply-To: <20250904132723.614507-2-ajones@ventanamicro.com>
+References: <20250904060022.2828441-1-z_bajeer@yeah.net>
+In-Reply-To: <20250904060022.2828441-1-z_bajeer@yeah.net>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Sep 2025 11:54:12 +1000
-X-Gm-Features: AS18NWCtTED248ft_V2kU4jhEn2xmvZcu2m95t_6Kx-DYH1dFOblDP5Zu8AS-DE
-Message-ID: <CAKmqyKMoPeCQV9Ag-UK613GqUU1M+FcP+H08jTozNE4hH1hmzA@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv/riscv-iommu: Fix MSI table size limit
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- tjeznach@rivosinc.com
+Date: Mon, 15 Sep 2025 12:12:10 +1000
+X-Gm-Features: Ac12FXymf6svEVRdwz-_1pLRMEMKOawNIfQaD47n5TeIRoChNp_KkOG5zawGKNA
+Message-ID: <CAKmqyKNN_+zgALV_5aa7mW7Fs+XnwLwG2298xAuH5o-7BH9Obg@mail.gmail.com>
+Subject: Re: [PATCH] intc/aia: fix the read of in_clrip register
+To: Yang Jialong <z_bajeer@yeah.net>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, yangjialong@rvcore.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,70 +102,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 4, 2025 at 11:29=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
+On Thu, Sep 4, 2025 at 4:02=E2=80=AFPM Yang Jialong <z_bajeer@yeah.net> wro=
+te:
 >
-> The MSI table is not limited to 4k. The only constraint the table has
-> is that its base address must be aligned to its size, ensuring no
-> offsets of the table size will overrun when added to the base address
-> (see "8.5. MSI page tables" of the AIA spec).
->
-> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+> 4.5.7. Rectified inputs, clear interrupt-pending bits
+> A read of an in_clrip register returns the rectified input values of the
+> corresponding interrupt sources.
+> A read of an in_clrip register doesn't should be an active interrupt
+> source.
+> A write of an in_clrip register should be an active interrupt source.
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Can you please explain in the commit message what is wrong with the
+current code and why your patch fixes it
 
 Alistair
 
+>
+> Signed-off-by: Yang Jialong <z_bajeer@yeah.net>
 > ---
->  hw/riscv/riscv-iommu.c | 17 ++++++++++-------
->  1 file changed, 10 insertions(+), 7 deletions(-)
+>  hw/intc/riscv_aplic.c | 3 ---
+>  1 file changed, 3 deletions(-)
 >
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 96a7fbdefcf3..155190d032dd 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -558,6 +558,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUSt=
-ate *s,
->      MemTxResult res;
->      dma_addr_t addr;
->      uint64_t intn;
-> +    size_t offset;
->      uint32_t n190;
->      uint64_t pte[2];
->      int fault_type =3D RISCV_IOMMU_FQ_TTYPE_UADDR_WR;
-> @@ -565,16 +566,18 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMU=
-State *s,
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index a1d9fa5085..2583d6d305 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -204,9 +204,6 @@ static bool riscv_aplic_irq_rectified_val(RISCVAPLICS=
+tate *aplic,
+>      }
 >
->      /* Interrupt File Number */
->      intn =3D riscv_iommu_pext_u64(PPN_DOWN(gpa), ctx->msi_addr_mask);
-> -    if (intn >=3D 256) {
-> -        /* Interrupt file number out of range */
-> -        res =3D MEMTX_ACCESS_ERROR;
-> -        cause =3D RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT;
-> -        goto err;
+>      sm =3D sourcecfg & APLIC_SOURCECFG_SM_MASK;
+> -    if (sm =3D=3D APLIC_SOURCECFG_SM_INACTIVE) {
+> -        return false;
 > -    }
-> +    offset =3D intn * sizeof(pte);
 >
->      /* fetch MSI PTE */
->      addr =3D PPN_PHYS(get_field(ctx->msiptp, RISCV_IOMMU_DC_MSIPTP_PPN))=
-;
-> -    addr =3D addr | (intn * sizeof(pte));
-> +    if (addr & offset) {
-> +        /* Interrupt file number out of range */
-> +        res =3D MEMTX_ACCESS_ERROR;
-> +        cause =3D RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT;
-> +        goto err;
-> +    }
-> +
-> +    addr |=3D offset;
->      res =3D dma_memory_read(s->target_as, addr, &pte, sizeof(pte),
->              MEMTXATTRS_UNSPECIFIED);
->      if (res !=3D MEMTX_OK) {
+>      raw_input =3D (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
+>      irq_inverted =3D (sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_LOW ||
 > --
-> 2.49.0
+> 2.34.1
 >
 >
 
