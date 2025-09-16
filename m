@@ -4,51 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC976CAC599
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Sep 2025 05:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F72CAC598
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Sep 2025 08:01:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyOdB-00024S-9c; Tue, 16 Sep 2025 01:53:33 -0400
+	id 1uyQcY-0003By-6G; Tue, 16 Sep 2025 04:01:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
- id 1uyOd4-00023M-QX; Tue, 16 Sep 2025 01:53:27 -0400
-Received: from [115.124.28.78] (helo=out28-78.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
- id 1uyOd2-0003gC-Ju; Tue, 16 Sep 2025 01:53:26 -0400
-Received: from 10.13.14.160(mailfrom:chao.liu@zevorn.cn
- fp:SMTPD_---.eg6GaBL_1758001739 cluster:ay29) by smtp.aliyun-inc.com;
- Tue, 16 Sep 2025 13:49:00 +0800
-Message-ID: <8af27769-0ebb-4e5a-9a4c-9369c6d52394@zevorn.cn>
-Date: Tue, 16 Sep 2025 13:48:59 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 1/2] target/riscv: Use tcg nodes for strided vector
- ld/st generation
-To: Richard Henderson <richard.henderson@linaro.org>,
- paolo.savini@embecosm.com, npiggin@gmail.com, ebiggers@kernel.org,
- dbarboza@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <cover.1757690407.git.chao.liu@zevorn.cn>
- <1f22506f44570abf3bb17bf144d398807be0ab40.1757690407.git.chao.liu@zevorn.cn>
- <8e43c44f-609c-4a30-8559-a5dcb567b950@linaro.org>
-From: Chao Liu <chao.liu@zevorn.cn>
-In-Reply-To: <8e43c44f-609c-4a30-8559-a5dcb567b950@linaro.org>
+ (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
+ id 1uyQcU-0003Au-91
+ for qemu-riscv@nongnu.org; Tue, 16 Sep 2025 04:01:01 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
+ id 1uyQcQ-0001zI-JT
+ for qemu-riscv@nongnu.org; Tue, 16 Sep 2025 04:00:57 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-45a1b0ce15fso7491595e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 16 Sep 2025 01:00:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1758009650; x=1758614450; darn=nongnu.org;
+ h=in-reply-to:references:from:to:cc:subject:message-id:date
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AE/MAE2+U2XckKQNt6+5UA9qxiPOCtpECODvz6ek0iQ=;
+ b=QG93A5O4mzp0thh++O90T5+zXCaurysEjNAOykIE8mEVEv91VTDrKVLAOAFFLOoIjy
+ 2AGuUTzkbe9N5UDEdte3PDP1PQGBIkai4lu9IN0cKdrR6diio/Zoe9rD39VJYMlK190w
+ b2sL0W1wGlddqt/ynz0nUefZuoLcw/dmK8aS17AtrOd4l079ZT8mt5UJlGcDZr4uW+jX
+ ztUw670TVIDSS9/ye6hTAtMtI2Rnq5UCK48jfy/x8tghI/BXe1jJt/hYB2LwZu7qO7Ln
+ vx0rZfVWi2O9XBR4rC/riXoy811UnHJNcd+ga+WRrTkc7lSK9HSXa7TXXYcVIbGO7YN7
+ vtWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758009650; x=1758614450;
+ h=in-reply-to:references:from:to:cc:subject:message-id:date
+ :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=AE/MAE2+U2XckKQNt6+5UA9qxiPOCtpECODvz6ek0iQ=;
+ b=egCXATHbld5nbkdML48jUH/AvWTMZV4vvYDvtWgFkaeodOJs23PlfbYJ2kZcjtRPKw
+ i0v6sbpy4CONnphDEBfRkny7UDwG9vC5NtKPcwu0YzoJyxpZGt9qC0kqAnYJw7JtsO8p
+ xpi1LQZQgiIwRwmWadvibX5VLUwo4TwzYRnYaYJDBvbn4nqSBZbReR9hZCIq0Mm12ege
+ 9yJBIJXweH7lsRu5Vxda3pGkpdyYrr1cc89FAfq2A2kJk3uPS75IFKW7gul/XG0ENjkP
+ e8MwQNeThaU4/UAUnWQBEs2gsdBaUc1naV7Odh7VdNJ+ckG8uU6GG1d+5wewtPPARH6j
+ mfhw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWAdhK0AN+bdaP7sMFaLaVYQTnHZwn8Py9iwBi1o8SICZBNfYYOd3KgvwZQEMvqBnMxTID/pkSTr9S/@nongnu.org
+X-Gm-Message-State: AOJu0Yx5DhrJ70dKXrUmu6Ha2q8CaC6JiBjg7i20DYbeTruzYGQs0Jfh
+ c9bv4Tz7teLaE05RvTip4r3AwbIbPsjwQ7oGOaPyB2CCRelyuFXzK036vzjVUmkwb8s=
+X-Gm-Gg: ASbGncvGja3JYVn6aJumkCFe21ZZw6M5GkxUXPb7vsnqbSQ1miw2hH9jdlcBorwPQtb
+ WjTIF487UprLHPwB3U7izmCfDsfmaU9BxIRPm5eSiPAqtUIMpVZ6S1GnCXhCK71oP6kvUYveTao
+ lwFI3KlP9KkTAEfN3zBHDfrC9YS3RdcT1xPjnNQdSJ0dOJciTo+9ZOfMOB1bWQEJZQV9bhe3wxT
+ UEKnpmrSlMj3Z0ZsbOiBvJZQb1QcNbnRjjNiMaEvcAUyTszFd1SgNi20DM2gx/y4+g7+dNkAWdL
+ HGSRC62soRYthUjqb8fahxM1S316xRCJi8RGoV5fc+a6n6cPffVDA3x0nRMwPbZS2fnAHrm9bPP
+ zZT4a07ezkFN3tfs4wdd5l+jq1ZXIXp19XKwDN7DecnX2bjKFw7RadazVuA==
+X-Google-Smtp-Source: AGHT+IHAl56fKrELTIscO/fJuSw/dTnnz+Li5IxzBhqfeYhSYXDPJNExduTjjkXJRio/17Uw0Ox7lg==
+X-Received: by 2002:a05:600c:47d1:b0:45f:2919:5e8d with SMTP id
+ 5b1f17b1804b1-45f291960acmr33718365e9.1.1758009649793; 
+ Tue, 16 Sep 2025 01:00:49 -0700 (PDT)
+Received: from localhost (ip-89-103-73-235.bb.vodafone.cz. [89.103.73.235])
+ by smtp.gmail.com with UTF8SMTPSA id
+ 5b1f17b1804b1-45f3261358bsm11073185e9.7.2025.09.16.01.00.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Sep 2025 01:00:49 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.78 (deferred)
-Received-SPF: pass client-ip=115.124.28.78; envelope-from=chao.liu@zevorn.cn;
- helo=out28-78.mail.aliyun.com
+Date: Tue, 16 Sep 2025 10:00:48 +0200
+Message-Id: <DCU2ER2UIJDS.3CTYAJAJP8NSX@ventanamicro.com>
+Subject: Re: [PATCH v9 1/2] Set KVM initial privilege mode and mp_state
+Cc: <ajones@ventanamicro.com>, <qemu-riscv@nongnu.org>,
+ <alistair23@gmail.com>, <pbonzini@redhat.com>, <anup@brainfault.org>,
+ <alistair.francis@wdc.com>, <palmer@dabbelt.com>, <xiamy@ultrarisc.com>,
+ <qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org>
+To: "Xie Bo" <xb@ultrarisc.com>, <qemu-devel@nongnu.org>
+From: =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>
+References: <20250915070811.3422578-1-xb@ultrarisc.com>
+ <20250915070811.3422578-2-xb@ultrarisc.com>
+In-Reply-To: <20250915070811.3422578-2-xb@ultrarisc.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=rkrcmar@ventanamicro.com; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ HK_RANDOM_ENVFROM=0.001, HK_RANDOM_FROM=0.999, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -64,72 +105,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/15/2025 9:53 PM, Richard Henderson wrote:
-> On 9/13/25 02:17, Chao Liu wrote:
->> +static void gen_check_vext_elem_mask(TCGLabel *label, TCGv_i64 mask, TCGv_i64
->> mask_offs)
->> +{
->> +    TCGv_i64 mask_offs_i64 = tcg_temp_new_i64();
->> +    TCGv_ptr mask_offs_ptr = tcg_temp_new_ptr();
->> +    TCGv_i64 mask_offs_rem = tcg_temp_new_i64();
->> +    TCGv_i64 mask_elem = tcg_temp_new_i64();
->> +
->> +    tcg_gen_shri_tl(mask_offs_i64, mask_offs, 3);
->> +    tcg_gen_add_tl(mask_offs_i64, mask_offs_i64, mask);
->> +    tcg_gen_trunc_i64_ptr(mask_offs_ptr, mask_offs_i64);
->> +    tcg_gen_ld_i64(mask_elem, mask_offs_ptr, 0);
-> 
-> You can remove the "mask" argument, simplifying the code here.
-> 
->     tcg_gen_trunc_i64_ptr(ptr, mask_offs_i64);
->     tcg_gen_add_ptr(ptr, ptr, tcg_env);
->     tcg_gen_ld_i64(mask_elem, ptr, vreg_ofs(s, 0))
-> 
-Thanks, I will try modifying it this way:
+2025-09-15T15:08:07+08:00, Xie Bo <xb@ultrarisc.com>:
+> For KVM mode, the privilege mode should not include M-mode, and the
+> initial value should be set to S-mode. Additionally, a following patch
+> adds the implementation of putting the vCPU privilege mode to KVM.
+> When the vCPU runs for the first time, QEMU will first put the privilege
+> state to KVM. If the initial value is set to M-mode, KVM will encounter
+> an error.
+>
+> In addition, this patch introduces the 'mp_state' field to RISC-V
+> vCPUs, following the convention used by KVM on x86. The 'mp_state'
+> reflects the multiprocessor state of a vCPU, and is used to control
+> whether the vCPU is runnable by KVM. Randomly select one CPU as the
+> boot CPU. Since each CPU executes the riscv_cpu_reset_hold() function
+> and CPU0 executes first, only CPU0 randomly selects the boot CPU.
 
-    	tcg_gen_shri_tl(temp, mask_offs, 3);
-    	tcg_gen_trunc_i64_ptr(ptr, temp);
-    	tcg_gen_add_ptr(ptr, ptr, tcg_env);
+This could really be two patches, as changing the boot=20
 
-Based on your suggestion, I have removed the `mask` args.
+> Signed-off-by: Xie Bo <xb@ultrarisc.com>
+> ---
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> @@ -685,18 +686,32 @@ static void riscv_cpu_reset_hold(Object *obj, Reset=
+Type type)
+> +    static int boot_cpu_index;
+       ^^^^^^
+!
 
-> You can also change mask_offs to TCGv_i32, which replaces
-> 
->     tcg_gen_extu_i32_ptr(pr, mask_offs_i32);
-> 
-> which more obviously does not discard data from mask_offs.
-> 
-> 
->> +    tcg_gen_andi_tl(mask_offs_rem, mask_offs, 7);
->> +    tcg_gen_shr_tl(mask_elem, mask_elem, mask_offs_rem);
-> 
-> The mask of 7 suggests you're only interested in the low 8 bits.  Which means
-> either the load is wrong (we don't need to be loading 64 bits), or the mask and
-> shift are wrong.
-> 
-> 
-Get, loading just one byte at a time is sufficient. I will modify it accordingly:
+> +    if (kvm_enabled()) {
+> +        env->priv =3D PRV_S;
+> +    } else {
+> +        env->priv =3D PRV_M;
+> +    }
 
-	tcg_gen_ld8u_i64(elem, ptr, 0);
-    	tcg_gen_andi_tl(temp, mask_offs, 7);
-    	tcg_gen_shr_tl(elem, elem, temp);
+(I think changing the priv belongs to a separate patch.)
 
->> +    tcg_gen_andi_tl(mask_elem, mask_elem, 1);
->> +    tcg_gen_brcond_i64(TCG_COND_TSTNE, mask_elem, tcg_constant_i64(1), label);
-> 
-> The andi before the brcond is redundant with the TSTNE.
-> 
+> +    if (cs->cpu_index =3D=3D 0) {
+> +        boot_cpu_index =3D g_random_int_range(0, ms->smp.cpus);
+> +    }
 
-Get~
+This adds an assumption that vcpu_index =3D=3D 0 is executed first.
+Is that always going to be true?
 
-> 
-> r~
+If we reset the VCPUs in a different order (or in parallel), we might
+also online zero or two VCPUs.
 
-In addition, I also found other redundant parameters, such as the `vreg`
-argument in gen_ldst_vreg(). I will remove them together in the next version of
-the patch.
+Performing the selection just once, in the reset initiator, would allow
+us to avoid the dreaded static variable by putting it in machine arch
+state.
 
+> +    if (cs->cpu_index =3D=3D boot_cpu_index) {
+> +        env->mp_state =3D KVM_MP_STATE_RUNNABLE;
+> +    } else {
+> +        env->mp_state =3D KVM_MP_STATE_STOPPED;
+> +    }
 
-Thanks,
-Chao
+Thanks.
 
