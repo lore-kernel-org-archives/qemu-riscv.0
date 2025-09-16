@@ -4,93 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A1C3CAC599
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Sep 2025 08:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2F63CAC598
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Sep 2025 09:26:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyQfK-0004VZ-87; Tue, 16 Sep 2025 04:03:54 -0400
+	id 1uyRxb-0002za-D1; Tue, 16 Sep 2025 05:26:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
- id 1uyQfI-0004VM-EI
- for qemu-riscv@nongnu.org; Tue, 16 Sep 2025 04:03:52 -0400
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
- id 1uyQfF-0002E7-Vx
- for qemu-riscv@nongnu.org; Tue, 16 Sep 2025 04:03:51 -0400
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-45de4ebe79eso6664885e9.0
- for <qemu-riscv@nongnu.org>; Tue, 16 Sep 2025 01:03:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1758009827; x=1758614627; darn=nongnu.org;
- h=in-reply-to:references:to:cc:subject:from:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cwu5KEUH2m6Jpze51fqVpmKcc+wlK9DmKGIIelwd8g8=;
- b=lUEoNytlP+meQTDC0Rr5jLgHH5/pfZAbSK40fNbVBXavYT3lEBBMMGSIgTriDpLn4g
- 9GktdfZUDnw4kJnq12TJDEytbjFf4/8WDvzYDTRW29yOX2Aq5evei0PpEdsZBNlXc6Mt
- SaKJ5xQeewxyB5rIbohlIab0d9Shz/RtOQjIyMgO609YL9WLydYlHBCjVVnblgu6kymb
- T+qyKcmiBZA5vwzuU0z0UoaryEpjg0/n72IFLmGFgSLQ30bRiZiQnpR00TTyTQ3qvVJ/
- hsUDZ2UFDHEiXM3WF2K+4Q/aO//uWFLPItWNqW7zDLTW8Bju9DIzd+9r6Nrw0vv91TR7
- 796Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758009827; x=1758614627;
- h=in-reply-to:references:to:cc:subject:from:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=cwu5KEUH2m6Jpze51fqVpmKcc+wlK9DmKGIIelwd8g8=;
- b=nabfOKEQgLqMedcozFwC55rUrbRPP8CkBY2ryHvGRgcZ+qDr7PZ/nXm0NrJ5l7rGKy
- 6jhBaSObgRaf3ZrJEo68Ii0DgTFWKeZ0enpP0DVIPmpehLcnIapJKpA5ZVmU5jitXQPS
- b4ZHAxrbxiHG/QxCvQOuLRj3BVGpr1n4KyhZws/RGCLaTvcNi3Qelhv0+MfyGMBRpN53
- 6vckeCL6WJPuZ6UiA+4VkV9aclwuekzbHW/Pzegf7EZrDwkZ3w/8NHZbpxSANjucQ4c6
- 9GaNseVbyXs8fsTzsOoaEOHcOugEwig37WdQBGJZP4HQ1eA9eupurYTDfAGfyhIhUjqB
- SGlQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQV+5Jx3Sk9/66lE38v8CxNR+x3eVz5Pdi6eu2PA5Stynt1hN3RM7bryjBlKXqRV01NnKjJYK/jMly@nongnu.org
-X-Gm-Message-State: AOJu0YxZn9OAKokFYpHytfcLlE8/V6jKDY6+PeigrOzkH/idU2GtJnRb
- SL4TY+trkoWCuUNAS98hhYdE+lvjzNrlNmD77aiNtazTzZqF7Gj6GPcy3uXbuMYNGdoF/n5D+G5
- J1ipKBu4=
-X-Gm-Gg: ASbGncsATi9HJdrBDLjnyMRSg358q/wEDfavC7Dn84v2sAVSwvNt7RWNv0WtsWo0RgZ
- U/A+xn3oqT+EipQD45Aju99FIY9KHCYoG1CsOIGSWTTnXn7DwXPMnO/Y3MLejZj6plqJ5Vk6zXg
- oxO6TguYgnO/qdhuKpVCaIu2UUMa8xxXNKoVtj6HAM+Nl/v5osvejQsPceBHiLG/aCdgXEZFbG3
- VjqXHFGPNksNS+qGd/vI+zs567aanxQXYRfGN81Cu/jsUP0RvSJmWpgqTDiwsvA4+tmUm9UbLhD
- o693KdQ5l4cXmMJjTHHx2TbKRcRO2S+tK1Bowj/isTIX26C9kvK+bFywOvH5t3cDrwJVjeqBe5E
- RvxzTt4n84Bl3KXEg2v9R1yZ7e4Bcoy8lx4bB+KkIoq/JxfEcfue3wY89MQ==
-X-Google-Smtp-Source: AGHT+IHA2GPbDrgEsz2MrXTI7M4w39dhPlYTM3e+lLvtoySdqtNemPgIYLOci+L2JPclB0jvvU+B1g==
-X-Received: by 2002:a05:600c:4691:b0:459:dfa8:b866 with SMTP id
- 5b1f17b1804b1-45f214afb6dmr78761675e9.2.1758009827291; 
- Tue, 16 Sep 2025 01:03:47 -0700 (PDT)
-Received: from localhost (ip-89-103-73-235.bb.vodafone.cz. [89.103.73.235])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-45e0372ae57sm205872385e9.8.2025.09.16.01.03.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 01:03:46 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 16 Sep 2025 10:03:46 +0200
-Message-Id: <DCU2H0SG4WG0.10TIXQISFI07A@ventanamicro.com>
-From: =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>
-Subject: Re: [PATCH v9 2/2] Fix VM resume after QEMU+KVM migration
-Cc: <ajones@ventanamicro.com>, <qemu-riscv@nongnu.org>,
- <alistair23@gmail.com>, <pbonzini@redhat.com>, <anup@brainfault.org>,
- <alistair.francis@wdc.com>, <palmer@dabbelt.com>, <xiamy@ultrarisc.com>,
- <qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org>
-To: "Xie Bo" <xb@ultrarisc.com>, <qemu-devel@nongnu.org>
-References: <20250915070811.3422578-1-xb@ultrarisc.com>
- <20250915070811.3422578-3-xb@ultrarisc.com>
-In-Reply-To: <20250915070811.3422578-3-xb@ultrarisc.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=rkrcmar@ventanamicro.com; helo=mail-wm1-x335.google.com
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uyRwx-0002Z2-7P; Tue, 16 Sep 2025 05:26:12 -0400
+Received: from [115.124.28.84] (helo=out28-84.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <chao.liu@zevorn.cn>)
+ id 1uyRwr-0002fw-ST; Tue, 16 Sep 2025 05:26:09 -0400
+Received: from ZEVORN-PC(mailfrom:chao.liu@zevorn.cn
+ fp:SMTPD_---.egLKg9k_1758014506 cluster:ay29) by smtp.aliyun-inc.com;
+ Tue, 16 Sep 2025 17:21:46 +0800
+From: Chao Liu <chao.liu@zevorn.cn>
+To: richard.henderson@linaro.org, paolo.savini@embecosm.com, npiggin@gmail.com,
+ ebiggers@kernel.org, dbarboza@ventanamicro.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Chao Liu <chao.liu@yeah.net>,
+ Chao Liu <chao.liu@zevorn.cn>
+Subject: [PATCH v9 2/2] tests/tcg/riscv64: Add test for vlsseg8e32 instruction
+Date: Tue, 16 Sep 2025 17:21:38 +0800
+Message-ID: <948d065ae900bc44cbfbb107baff157dab4f1b4a.1758006834.git.chao.liu@zevorn.cn>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <cover.1758006834.git.chao.liu@zevorn.cn>
+References: <cover.1758006834.git.chao.liu@zevorn.cn>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.84 (deferred)
+Received-SPF: pass client-ip=115.124.28.84; envelope-from=chao.liu@zevorn.cn;
+ helo=out28-84.mail.aliyun.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- HK_RANDOM_ENVFROM=0.001, HK_RANDOM_FROM=0.999, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,23 +60,157 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-2025-09-15T15:08:08+08:00, Xie Bo <xb@ultrarisc.com>:
-> Fix two migration issues for virtual machines in KVM mode:
-> 1.It saves and restores the vCPU's privilege mode to ensure that the
-> vCPU's privilege mode is correct after migration.
-> 2.It saves and restores the vCPU's mp_state (runnable or stopped) and
-> includes this state in the migration sequence, upgrading the vmstate
-> version to ensure that the vCPU's mp_state is correct after migration.
+From: Chao Liu <chao.liu@yeah.net>
 
-This could be two patches, each doing just one thing:
-  * fix mode
-  * fix mp_state
+This case, it copied 64 bytes from a0 to a1 with vlsseg8e32.
 
-And the mode hunk that I pointed out in [v9 1/2] could be put in the
-patch that fixes mode.
+Signed-off-by: Chao Liu <chao.liu@zevorn.cn>
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Tested-by: Eric Biggers <ebiggers@kernel.org>
+---
+ tests/tcg/riscv64/Makefile.softmmu-target |   7 +-
+ tests/tcg/riscv64/test-vlsseg8e32.S       | 107 ++++++++++++++++++++++
+ 2 files changed, 113 insertions(+), 1 deletion(-)
+ create mode 100644 tests/tcg/riscv64/test-vlsseg8e32.S
 
-I jumped quite late into the review, so if others are fine with the
-current split,
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 3ca595335d..e52c005f87 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -7,7 +7,7 @@ VPATH += $(TEST_SRC)
+ 
+ LINK_SCRIPT = $(TEST_SRC)/semihost.ld
+ LDFLAGS = -T $(LINK_SCRIPT)
+-CFLAGS += -g -Og
++CFLAGS += -march=rv64gcv -mabi=lp64d -g -Og
+ 
+ %.o: %.S
+ 	$(CC) $(CFLAGS) $< -Wa,--noexecstack -c -o $@
+@@ -24,5 +24,10 @@ EXTRA_RUNS += run-test-mepc-masking
+ run-test-mepc-masking: test-mepc-masking
+ 	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
+ 
++EXTRA_RUNS += run-vlsseg8e32
++run-vlsseg8e32: QEMU_OPTS := -cpu rv64,v=true $(QEMU_OPTS)
++run-vlsseg8e32: test-vlsseg8e32
++	$(call run-test, $<, $(QEMU) $(QEMU_OPTS)$<)
++
+ # We don't currently support the multiarch system tests
+ undefine MULTIARCH_TESTS
+diff --git a/tests/tcg/riscv64/test-vlsseg8e32.S b/tests/tcg/riscv64/test-vlsseg8e32.S
+new file mode 100644
+index 0000000000..bbc79d5e8d
+--- /dev/null
++++ b/tests/tcg/riscv64/test-vlsseg8e32.S
+@@ -0,0 +1,107 @@
++#
++# QEMU RISC-V Vector Strided Load Instruction testcase
++#
++# Copyright (c) 2025 Chao Liu chao.liu@yeah.net
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++	.option	norvc
++
++	.section .data
++	.align 4
++source_data:
++	.asciz "Test the vssseg8e32 insn by copy 64b and verifying correctness."
++	.equ source_len, 64
++
++	.text
++	.global _start
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++
++enable_rvv:
++
++	li	x15, 0x800000000024112d
++	csrw	0x301, x15
++	li	x1, 0x2200
++	csrr	x2, mstatus
++	or	x2, x2, x1
++	csrw	mstatus, x2
++
++rvv_test_func:
++	la	a0, source_data
++	li	a1, 0x80020000
++	vsetivli	zero, 1, e32, m1, ta, ma
++	li	t0, 64
++
++	vlsseg8e32.v	v0, (a0), t0
++	addi	a0, a0, 32
++	vlsseg8e32.v	v8, (a0), t0
++
++	vssseg8e32.v	v0, (a1), t0
++	addi	a1, a1, 32
++	vssseg8e32.v	v8, (a1), t0
++
++compare_start:
++	la	a0, source_data
++	li	a1, 0x80020000
++	li	t0, 0
++	li	t1, source_len
++
++compare_loop:
++	# when t0 >= len, compare end
++	bge	 t0, t1, compare_done
++
++	lb	t2, 0(a0)
++	lb	t3, 0(a1)
++	bne	t2, t3, compare_fail
++
++	addi	a0, a0, 1
++	addi	a1, a1, 1
++	addi	t0, t0, 1
++	j	compare_loop
++
++compare_done:
++	# compare ok, return 0
++	li	a0, 0
++	j	_exit
++
++compare_fail:
++	# compare failed, return 2
++	li	a0, 2
++	j	_exit
++
++trap:
++	# When an instruction traps, compare it to the insn in memory.
++	csrr	t0, mepc
++	csrr	t1, mtval
++	lwu	t2, 0(t0)
++	bne	t1, t2, fail
++
++	# Skip the insn and continue.
++	addi	t0, t0, 4
++	csrw	mepc, t0
++	mret
++
++fail:
++	li	a0, 1
++
++# Exit code in a0
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
++
++	# Semihosting call sequence
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
+-- 
+2.51.0
 
-Reviewed-by: Radim Kr=C4=8Dm=C3=A1=C5=99 <rkrcmar@ventanamicro.com>
 
