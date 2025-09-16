@@ -4,60 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B96DDCAC598
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Sep 2025 11:43:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 230D3CAC598
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Sep 2025 12:06:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyU5C-0000Wt-GI; Tue, 16 Sep 2025 07:42:50 -0400
+	id 1uyURJ-0006zm-9F; Tue, 16 Sep 2025 08:05:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
- id 1uyU56-0000U2-Fn
- for qemu-riscv@nongnu.org; Tue, 16 Sep 2025 07:42:45 -0400
-Received: from sg-1-23.ptr.blmpb.com ([118.26.132.23])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uyURE-0006z0-CD
+ for qemu-riscv@nongnu.org; Tue, 16 Sep 2025 08:05:37 -0400
+Received: from mail-yw1-x1136.google.com ([2607:f8b0:4864:20::1136])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
- id 1uyU4t-0003PJ-88
- for qemu-riscv@nongnu.org; Tue, 16 Sep 2025 07:42:44 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1758022927;
- h=from:subject:mime-version:from:date:message-id:subject:to:cc:
- reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=zAIkPCtH5/gSXDqa9mtSDLXkEaENTX70VnPZtF+PJjQ=;
- b=Hv/ezAbHkwR6Te0IelU8DhmdPWKybkyZ7VNOWu8NCeSc/fwqHUHj2BgrbciZ3cwn0I+VAl
- fEPYLuYgQRDDL1zfavexbrDMXGpJsz2cyEywULdExtUZkt3k+oaTwC763B+mqWjH3o2TlS
- f19u1ZVAo4Nkm/FtiH2YnPKW6F6QXqLK08Gytevw5TBsRBQ4WU3+AXbEVWoLZNzZ3kiMjV
- wMDePorETHc5+/WGaC0pJd8Fi1nRYgosCd8YfnzcvWQ0+he1SNlrcagUCYmO3fI9TMVdKU
- gmCMSWalKFg71u21BkaBeOJNBucCIvapnvpkCN7ExFfBB1gSXvMzrG+byKIapw==
-Cc: <qemu-riscv@nongnu.org>, <zhiwei_liu@linux.alibaba.com>, 
- <dbarboza@ventanamicro.com>, <liwei1518@gmail.com>, 
- <alistair.francis@wdc.com>, <palmer@dabbelt.com>
-Date: Tue, 16 Sep 2025 19:42:03 +0800
-Content-Language: en-US
-X-Original-From: BillXiang <xiangwencheng@lanxincomputing.com>
-Subject: Re: [PATCH] target/riscv/kvm: Sync vCPU mp_state for migration
-References: <20250916104843.1953-1-xiangwencheng@lanxincomputing.com>
-Received: from [127.0.0.1] ([222.128.9.250]) by smtp.feishu.cn with ESMTPS;
- Tue, 16 Sep 2025 19:42:04 +0800
-X-Lms-Return-Path: <lba+268c94d0d+2e9ccc+nongnu.org+xiangwencheng@lanxincomputing.com>
-To: <qemu-devel@nongnu.org>
-From: "BillXiang" <xiangwencheng@lanxincomputing.com>
-Message-Id: <5716dba7-eba3-4e25-8479-3b7218c66ea5@lanxincomputing.com>
-Content-Transfer-Encoding: 7bit
-Mime-Version: 1.0
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uyUR6-0006I0-Ut
+ for qemu-riscv@nongnu.org; Tue, 16 Sep 2025 08:05:35 -0400
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-723ad237d1eso48847217b3.1
+ for <qemu-riscv@nongnu.org>; Tue, 16 Sep 2025 05:05:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1758024323; x=1758629123; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=O1wTHEjKkT6gso74JJRkO0c9QRHBxGZBBewytwJK3co=;
+ b=NjkHxhvbGugBiCsE0Q6FLAatBs/mBwd3m2O6kfBCQUCyOIpNzUTHIdcjeNV95elj1E
+ GmjE5A6KNUtZjBQyVREO3ynDepRtztn9STdqHy7AWIkGuBopG5+SLWZg/5Pyp1R2v+hc
+ Wf6uapPCxy7MmB/KP9E77e+swHhpZVfpCGhVzUtg1DfRl5RAk8R/Hh17C8prJdM1jVP3
+ M6xLA6of7qNHYc0RkePuHuw86BEvBnXbAY0qCMq7HyfRK7NkeUSkO+zFcTDOPzEorCqt
+ IhuwuazwRiO54PhLGF0cfMyr7FNS832YAEYq67h1RkiYOqNnfDdX4+Ht5vluh7FW+9TY
+ TLtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758024324; x=1758629124;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=O1wTHEjKkT6gso74JJRkO0c9QRHBxGZBBewytwJK3co=;
+ b=OFQ7jpp2yBe2Ki7SyzYZfEhNb5/kmYfSkmv/iA03TJDo6TZrFBJxBn7YGr4BfjRSEB
+ CNkHEaPu/MwArFf0UkgpnlkL2AtW54O+tvCMiCRQihLtCST/63HHXFTg5VSwsIHlLgCR
+ GJ9V6u1f8J+s6AtOIx2kjRqoiB2oJ7Xq8OMvrFRfLEiyUYJwk6xypQ/PLuZvcZ49MjBG
+ k/WpcLVzlWr7aIOubjv5ewcxya6/PXjpdbDB8kwv4KB9t4vua71w67A+2lsj8s8WfXca
+ BVdnLxlnCfc0FfwaYza7KqSfrUTr1OBdivufvucht3qoFsxnLsajTWLvNA3jr491XiYc
+ c53g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVYtjBxx2NZBOpXVSXKrsJDvVnCM5dZbCrXNgZnxRfnQ+6q52BfS/EyNKa88qEfykKX7h7+Z7Lic6sA@nongnu.org
+X-Gm-Message-State: AOJu0YyTTk0V9xs+NkLw2tPAaDn5llewToeBCubNRjm21eFjei3XR0H/
+ 7SVHC/UApudiGTDKoYylcDKe09GlbXeL398dOSxWxsbPNCg1PtoF10re2EKC4VHyzr8=
+X-Gm-Gg: ASbGncu7qrWg+bdsdVDvHgi00OCqMxf2733R43ByOt/TbrfD0aeRhYtPNWppqp3Qudd
+ HFd6XkfeSrDFcB4to1qp9zvtU+47UB72oyvzoEMgLfwhxQpkMr9lm5GuPfiGvc66eYrhShmwQqL
+ f+Y9wmPdDDodrZLm2CkYBx7zrhq0MJL5pZ5Di5H2X3HuBTSheRKvnrNhric+u+W8i6jxB8h+GO4
+ JdcjM2oPzK2GyMzIeJGuTZ+rvl0CgHdMrzbUCqChcz9d3mm7wt2qO53hKvO4XzJNO+V6bTvjVIB
+ rFkmAjbLivP8gM4c3qde6VUm3DcfnIrqbks0l/Z/wOUSm6p81b0YCukcaj8qVFDniIqkgthiMo/
+ QuqA9oQoDDzN85TEV/IdZZVUVCBU8hzzfFgWz8lqN8nJagtPu
+X-Google-Smtp-Source: AGHT+IHtZDFYnW9576p1OORnG63/UreHrM/Lyp/leLHi30vS0/ghj9j8E+HG/sfSlQBhbLE7kTgZjw==
+X-Received: by 2002:a05:690c:6c91:b0:730:4c94:be14 with SMTP id
+ 00721157ae682-730631947a2mr141129137b3.18.1758024323495; 
+ Tue, 16 Sep 2025 05:05:23 -0700 (PDT)
+Received: from [192.168.68.110] ([179.225.245.173])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-72f791a35bcsm39034557b3.39.2025.09.16.05.05.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Sep 2025 05:05:22 -0700 (PDT)
+Message-ID: <7c7a8917-0b98-48e0-90db-8bfd7b13a8cb@ventanamicro.com>
+Date: Tue, 16 Sep 2025 09:05:18 -0300
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-In-Reply-To: <20250916104843.1953-1-xiangwencheng@lanxincomputing.com>
-Content-Type: text/plain; charset=UTF-8
-Received-SPF: pass client-ip=118.26.132.23;
- envelope-from=xiangwencheng@lanxincomputing.com; helo=sg-1-23.ptr.blmpb.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Subject: Re: [RFC PATCH v4 1/3] target/riscv: Add Zvqdotq cfg property
+To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ richard.henderson@linaro.org
+References: <20250908025117.1728895-1-max.chou@sifive.com>
+ <20250908025117.1728895-2-max.chou@sifive.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <20250908025117.1728895-2-max.chou@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1136;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x1136.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,170 +108,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi all, sorry for bothering. I just noticed that
-Xie Bo <xb@ultrarisc.com> is already working on this.
 
-On 9/16/2025 6:48 PM, BillXiang wrote:
-> Fix secondary vCPUs(id > 0) stall after migration.
+
+On 9/7/25 11:51 PM, Max Chou wrote:
+> The Zvqdotq extension is the vector dot-product extension of RISC-V.
 > 
-> Signed-off-by: BillXiang <xiangwencheng@lanxincomputing.com>
+> Signed-off-by: Max Chou <max.chou@sifive.com>
 > ---
->   target/riscv/cpu.h           |  3 +++
->   target/riscv/kvm/kvm-cpu.c   | 34 ++++++++++++++++++++++++++--------
->   target/riscv/kvm/kvm_riscv.h |  3 ++-
->   target/riscv/machine.c       | 30 ++++++++++++++++++++++++++++++
->   4 files changed, 61 insertions(+), 9 deletions(-)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/cpu.c                | 1 +
+>   target/riscv/cpu_cfg_fields.h.inc | 1 +
+>   target/riscv/tcg/tcg-cpu.c        | 5 +++++
+>   3 files changed, 7 insertions(+)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 4a862da615..4290229c56 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -20,6 +20,7 @@
->   #ifndef RISCV_CPU_H
->   #define RISCV_CPU_H
->   
-> +#include <linux/kvm.h>
->   #include "hw/core/cpu.h"
->   #include "hw/registerfields.h"
->   #include "hw/qdev-properties.h"
-> @@ -546,6 +547,8 @@ struct ArchCPU {
->       RISCVCPUConfig cfg;
->       RISCVSATPModes satp_modes;
->   
-> +    struct kvm_mp_state mp_state;
-> +
->       QEMUTimer *pmu_timer;
->       /* A bitmask of Available programmable counters */
->       uint32_t pmu_avail_ctrs;
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 5c19062c19..f0a97293f9 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1348,17 +1348,16 @@ int kvm_arch_get_registers(CPUState *cs, Error **errp)
->           return ret;
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d055ddf462..d0909f7beb 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -187,6 +187,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(zvksg, PRIV_VERSION_1_12_0, ext_zvksg),
+>       ISA_EXT_DATA_ENTRY(zvksh, PRIV_VERSION_1_12_0, ext_zvksh),
+>       ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+> +    ISA_EXT_DATA_ENTRY(zvqdotq, PRIV_VERSION_1_13_0, ext_zvqdotq),
+>       ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+>       ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+>       ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, debug),
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+> index e2d116f0df..5da59c22d6 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -100,6 +100,7 @@ BOOL_FIELD(ext_zvfbfmin)
+>   BOOL_FIELD(ext_zvfbfwma)
+>   BOOL_FIELD(ext_zvfh)
+>   BOOL_FIELD(ext_zvfhmin)
+> +BOOL_FIELD(ext_zvqdotq)
+>   BOOL_FIELD(ext_smaia)
+>   BOOL_FIELD(ext_ssaia)
+>   BOOL_FIELD(ext_smctr)
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 78fb279184..7015370ab0 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -767,6 +767,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           return;
 >       }
 >   
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +    ret = kvm_riscv_sync_mpstate_to_qemu(cpu);
-> +
->       return ret;
->   }
->   
-> -int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state)
-> +int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu)
->   {
->       if (cap_has_mp_state) {
-> -        struct kvm_mp_state mp_state = {
-> -            .mp_state = state
-> -        };
-> -
-> -        int ret = kvm_vcpu_ioctl(CPU(cpu), KVM_SET_MP_STATE, &mp_state);
-> +        int ret = kvm_vcpu_ioctl(CPU(cpu), KVM_SET_MP_STATE, &cpu->mp_state);
->           if (ret) {
->               fprintf(stderr, "%s: failed to sync MP_STATE %d/%s\n",
->                       __func__, ret, strerror(-ret));
-> @@ -1369,6 +1368,17 @@ int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state)
->       return 0;
->   }
->   
-> +int kvm_riscv_sync_mpstate_to_qemu(RISCVCPU *cpu)
-> +{
-> +    if (cap_has_mp_state) {
-> +        int ret = kvm_vcpu_ioctl(CPU(cpu), KVM_GET_MP_STATE, &cpu->mp_state);
-> +        if (ret) {
-> +            return ret;
-> +        }
+> +    if (cpu->cfg.ext_zvqdotq && !cpu->cfg.ext_zve32x) {
+> +        error_setg(errp, "Zvqdotq extension requires V or Zve* extensions");
+> +        return;
 > +    }
-> +    return 0;
-> +}
 > +
->   int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
->   {
->       int ret = 0;
-> @@ -1396,13 +1406,21 @@ int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
->       if (KVM_PUT_RESET_STATE == level) {
->           RISCVCPU *cpu = RISCV_CPU(cs);
->           if (cs->cpu_index == 0) {
-> -            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_RUNNABLE);
-> +            cpu->mp_state.mp_state = KVM_MP_STATE_RUNNABLE;
-> +            ret = kvm_riscv_sync_mpstate_to_kvm(cpu);
->           } else {
-> -            ret = kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_STOPPED);
-> +            cpu->mp_state.mp_state = KVM_MP_STATE_STOPPED;
-> +            ret = kvm_riscv_sync_mpstate_to_kvm(cpu);
->           }
->           if (ret) {
->               return ret;
->           }
-> +    } else if (KVM_PUT_FULL_STATE == level) {
-> +        RISCVCPU *cpu = RISCV_CPU(cs);
-> +        ret = kvm_riscv_sync_mpstate_to_kvm(cpu);
-> +        if (ret) {
-> +            return ret;
-> +        }
->       }
->   
->       return ret;
-> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
-> index b2bcd1041f..770f58bf0a 100644
-> --- a/target/riscv/kvm/kvm_riscv.h
-> +++ b/target/riscv/kvm/kvm_riscv.h
-> @@ -28,7 +28,8 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
->                             uint64_t aplic_base, uint64_t imsic_base,
->                             uint64_t guest_num);
->   void riscv_kvm_aplic_request(void *opaque, int irq, int level);
-> -int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state);
-> +int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu);
-> +int kvm_riscv_sync_mpstate_to_qemu(RISCVCPU *cpu);
->   void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
->   uint64_t kvm_riscv_get_timebase_frequency(RISCVCPU *cpu);
->   
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 1600ec44f0..178ae6a3a0 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -251,6 +251,28 @@ static const VMStateDescription vmstate_debug = {
->       }
->   };
->   
-> +static int get_mp_state(QEMUFile *f, void *opaque, size_t size,
-> +                    const VMStateField *field)
-> +{
-> +    RISCVCPU *cpu = opaque;
-> +    cpu->mp_state.mp_state = qemu_get_be32(f);
-> +    return 0;
-> +}
-> +
-> +static int put_mp_state(QEMUFile *f, void *opaque, size_t size,
-> +                    const VMStateField *field, JSONWriter *vmdesc)
-> +{
-> +    RISCVCPU *cpu = opaque;
-> +    qemu_put_be32(f, cpu->mp_state.mp_state);
-> +    return 0;
-> +}
-> +
-> +static const VMStateInfo vmstate_mp_state = {
-> +    .name = "mp_state",
-> +    .get = get_mp_state,
-> +    .put = put_mp_state,
-> +};
-> +
->   static int riscv_cpu_post_load(void *opaque, int version_id)
->   {
->       RISCVCPU *cpu = opaque;
-> @@ -457,6 +479,14 @@ const VMStateDescription vmstate_riscv_cpu = {
->           VMSTATE_UINTTL(env.sscratch, RISCVCPU),
->           VMSTATE_UINTTL(env.mscratch, RISCVCPU),
->           VMSTATE_UINT64(env.stimecmp, RISCVCPU),
-> +        {
-> +            .name = "mp_state",
-> +            .version_id = 0,
-> +            .size = sizeof(bool),
-> +            .info = &vmstate_mp_state,
-> +            .flags = VMS_SINGLE,
-> +            .offset = 0,
-> +        },
->   
->           VMSTATE_END_OF_LIST()
->       },
+>       if ((cpu->cfg.ext_zvbc || cpu->cfg.ext_zvknhb) && !cpu->cfg.ext_zve64x) {
+>           error_setg(
+>               errp,
+
 
