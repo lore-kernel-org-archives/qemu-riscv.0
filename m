@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC224CAC5A5
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:07:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D07FCAC5A0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:08:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyrpA-0005Z4-Gp; Wed, 17 Sep 2025 09:03:52 -0400
+	id 1uyroD-0004Vb-3e; Wed, 17 Sep 2025 09:02:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrlY-00012C-Mt; Wed, 17 Sep 2025 09:00:12 -0400
+ id 1uyrlB-0000fZ-KA; Wed, 17 Sep 2025 08:59:47 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrlL-0005Gc-Jh; Wed, 17 Sep 2025 09:00:06 -0400
+ id 1uyrl9-00058O-JK; Wed, 17 Sep 2025 08:59:45 -0400
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN7B008967
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN6u008967
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 21:56:56 +0900 (JST)
+ Wed, 17 Sep 2025 21:56:44 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=QBwrwrnsE1FoC507zgp90eTWpyZH/hajqME9o3OUmT4=; 
+DKIM-Signature: a=rsa-sha256; bh=KcdfImNWKUrOQSIAZWAELHa88NKPS345i+R9bE7i56Q=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Date:Subject:Message-Id:To;
- s=rs20250326; t=1758113817; v=1;
- b=kYxhy6+9dqTDk/uCvtp8qrxm6EFeDZp+tr0d4KtbPV3tOn6ezkr/WCTdJhOqhN2s
- /ldESHLVVgrZ2ZgMTakYedXLE2tsNxs5WMMy+mdKXWKGMFmlMa6TtKlnoW3G7nIp
- 1u6KYk8jrVsmGSP8/jyzKMvei5raAklSfI0GjrFEoijcKg50cu9RiorVHt6dX3Vw
- 4cwNeDvMERqWMj0aapNap1/TfbiUpn+LlKMULQl8NjcplNhEEhzm3VA9NyCidwbD
- V2vVeR4E992wgVQnFahlId4fRs6WJWJ3P5rUzkIKW8BN8OZ/h7561tDF4+Gf7bgm
- 6oojDAoTjZJg92PfQyhC/w==
+ s=rs20250326; t=1758113805; v=1;
+ b=GeMdsRiaQ1HzSgq1dVBdlCwV9fw8kyxV14WhrrS8pjcPt0VFR7MsBQrP2sU0UFqE
+ 3OGl13Dm+WAJOY8qxILNZh400lXX0kVS2yLKW7Hglm+asug5YncLuBYowvVHgjR8
+ rAFJwCnOF46sxAWi5YneSeWL6k/BczKPnMzKBTgRk5Wdk9byj6xYpsKzBI185Cbp
+ BFHE06D+R/eP1cp8n3YYywGkGQGXzeyxmov9+YLUoFH4GY9H1dSVmbJ6DCX5iK11
+ dwEaDJXj3l/v53GgkjFryhdVXLs00aJgmc5BBuBGJLTaUNiD4D4Jl3JLww3w00bQ
+ oCS212O2c8dp51N1g1CnRw==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 21:56:43 +0900
-Subject: [PATCH 31/35] system/physmem: QOM-ify AddressSpace
+Date: Wed, 17 Sep 2025 21:56:28 +0900
+Subject: [PATCH 16/35] hw/nubus: QOM-ify AddressSpace
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-qom-v1-31-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-qom-v1-16-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -136,85 +136,31 @@ concise and also avoid conflicts with other properties.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- include/exec/cpu-common.h |  4 ++--
- system/physmem.c          | 17 ++++++++---------
- 2 files changed, 10 insertions(+), 11 deletions(-)
+ hw/nubus/nubus-bus.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
-index 9b658a3f48f7..420e7a71001a 100644
---- a/include/exec/cpu-common.h
-+++ b/include/exec/cpu-common.h
-@@ -105,7 +105,7 @@ size_t qemu_ram_pagesize_largest(void);
-  * cpu_address_space_init:
-  * @cpu: CPU to add this address space to
-  * @asidx: integer index of this address space
-- * @prefix: prefix to be used as name of address space
-+ * @name: name of address space
-  * @mr: the root memory region of address space
-  *
-  * Add the specified address space to the CPU's cpu_ases list.
-@@ -121,7 +121,7 @@ size_t qemu_ram_pagesize_largest(void);
-  * Note that with KVM only one address space is supported.
-  */
- void cpu_address_space_init(CPUState *cpu, int asidx,
--                            const char *prefix, MemoryRegion *mr);
-+                            const char *name, MemoryRegion *mr);
- /**
-  * cpu_address_space_destroy:
-  * @cpu: CPU for which address space needs to be destroyed
-diff --git a/system/physmem.c b/system/physmem.c
-index 6190eca7daed..7fa7b9ee6b76 100644
---- a/system/physmem.c
-+++ b/system/physmem.c
-@@ -774,16 +774,13 @@ hwaddr memory_region_section_get_iotlb(CPUState *cpu,
- #endif /* CONFIG_TCG */
- 
- void cpu_address_space_init(CPUState *cpu, int asidx,
--                            const char *prefix, MemoryRegion *mr)
-+                            const char *name, MemoryRegion *mr)
+diff --git a/hw/nubus/nubus-bus.c b/hw/nubus/nubus-bus.c
+index 1d553be77662..75767c9fc399 100644
+--- a/hw/nubus/nubus-bus.c
++++ b/hw/nubus/nubus-bus.c
+@@ -82,7 +82,7 @@ static void nubus_unrealize(BusState *bus)
  {
-     CPUAddressSpace *newas;
-     AddressSpace *as = g_new0(AddressSpace, 1);
--    char *as_name;
+     NubusBus *nubus = NUBUS_BUS(bus);
  
-     assert(mr);
--    as_name = g_strdup_printf("%s-%d", prefix, cpu->cpu_index);
--    address_space_init(as, NULL, mr, as_name);
--    g_free(as_name);
-+    address_space_init(as, OBJECT(cpu), mr, name);
- 
-     /* Target code should have set num_ases before calling us */
-     assert(asidx < cpu->num_ases);
-@@ -831,7 +828,7 @@ void cpu_address_space_destroy(CPUState *cpu, int asidx)
-         memory_listener_unregister(&cpuas->tcg_as_listener);
-     }
- 
--    address_space_destroy(cpuas->as);
-+    object_unparent(OBJECT(cpuas->as));
-     call_rcu1(&cpuas->as->rcu, address_space_free);
- 
-     if (asidx == 0) {
-@@ -2814,15 +2811,17 @@ static void tcg_commit(MemoryListener *listener)
- 
- static void memory_map_init(void)
- {
--    system_memory = g_malloc(sizeof(*system_memory));
-+    Object *owner = machine_get_container("unattached");
- 
-+    system_memory = g_malloc(sizeof(*system_memory));
-     memory_region_init(system_memory, NULL, "system", UINT64_MAX);
--    address_space_init(&address_space_memory, NULL, system_memory, "memory");
-+    address_space_init(&address_space_memory, owner, system_memory,
-+                       "system-as");
- 
-     system_io = g_malloc(sizeof(*system_io));
-     memory_region_init_io(system_io, NULL, &unassigned_io_ops, NULL, "io",
-                           65536);
--    address_space_init(&address_space_io, NULL, system_io, "I/O");
-+    address_space_init(&address_space_io, owner, system_io, "io-as");
+-    address_space_destroy(&nubus->nubus_as);
++    object_unparent(OBJECT(&nubus->nubus_as));
  }
  
- MemoryRegion *get_system_memory(void)
+ static void nubus_realize(BusState *bus, Error **errp)
+@@ -94,7 +94,7 @@ static void nubus_realize(BusState *bus, Error **errp)
+         return;
+     }
+ 
+-    address_space_init(&nubus->nubus_as, NULL, &nubus->nubus_mr, "nubus");
++    address_space_init(&nubus->nubus_as, OBJECT(nubus), &nubus->nubus_mr, "as");
+ }
+ 
+ static void nubus_init(Object *obj)
 
 -- 
 2.51.0
