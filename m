@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F79DCAC59A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:01:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 983BECAC59A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:02:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyrkg-0008SY-O7; Wed, 17 Sep 2025 08:59:14 -0400
+	id 1uyrk9-000893-3s; Wed, 17 Sep 2025 08:58:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrk2-00080l-Pn; Wed, 17 Sep 2025 08:58:34 -0400
+ id 1uyrk2-00080g-P5; Wed, 17 Sep 2025 08:58:34 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrjw-00051x-Qq; Wed, 17 Sep 2025 08:58:34 -0400
+ id 1uyrjy-00052I-0J; Wed, 17 Sep 2025 08:58:34 -0400
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN72008967
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN74008967
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 21:56:49 +0900 (JST)
+ Wed, 17 Sep 2025 21:56:50 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=IS0Tljii9BUeTawhiYrgJzEedgytOqOQnDBHONON+jo=; 
+DKIM-Signature: a=rsa-sha256; bh=IObcSxb1mEGR5pVanbHlUpUo799Y/B2tp5AzAzydRGA=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Date:Subject:Message-Id:To;
- s=rs20250326; t=1758113810; v=1;
- b=g7mxblnCLeiiBLEETSS3OMb9IBlQ+4YOPgXVYl1zODnt2zyZMgW5VmrIGdwLS5OZ
- j5RLplNXlGHlgKKJjnf32OxeH7j3j+Ga3rwqpDHljTWZPhZ7hAM1hu6x/GfwlFzR
- IWGhkCORcMI5ozLVpZkQnRRmwzSuXEyt7yX7aAZ2bW3MrfMG9nFI8HSibmUMEezf
- yXcpDqyqCyrpYA9e3pHDtu3NjYlzuAew3kSTEvH3eM6uPSvxh6+OaGxJhNrauI5y
- TAaQ+bqEvcwoHtYA5tuDuF8x2uwrW5m84xknqXSOb38wl3m2ZMZBRQNwpR8dOCL2
- jRaeOOnYE0BoeD6vVrSAPA==
+ s=rs20250326; t=1758113811; v=1;
+ b=tFZy7oa+nP+PtLJI2EIl6sGY+GMaHR/7ptxbf+ii5lc3dKpFVZ+4S2QOVk12hOme
+ 8FwO8O11BILpR094dmNm9daOQeTFpooTEiW4hoobEhu2S0jwte5AsLLc8nz8LFMa
+ Cm96KElGwqbrlq1HZoI7iWC9SQW+OmSQsJHXuTpWLf4uThpEzfZbB3LBL+uLw+UR
+ b4hErl+1sD+yjb/gYVMbmzvLUCHQa3/QTIqg3f6H0a+l2MlMkitW9hMmmMIL4wxj
+ wSBGrblbGHzZXGUL8OEXNJn5GCjX9oO9BRS1KjL5f5zP8nq1OS1v/00XYWLPONkQ
+ 5k3CkYTpwPFwX04fT2TAlg==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 21:56:34 +0900
-Subject: [PATCH 22/35] hw/s390x: QOM-ify AddressSpace
+Date: Wed, 17 Sep 2025 21:56:36 +0900
+Subject: [PATCH 24/35] hw/sd: QOM-ify AddressSpace
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-qom-v1-22-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-qom-v1-24-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -136,42 +136,45 @@ concise and also avoid conflicts with other properties.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/s390x/s390-pci-bus.c | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
+ hw/sd/allwinner-sdhost.c | 2 +-
+ hw/sd/sdhci.c            | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/hw/s390x/s390-pci-bus.c b/hw/s390x/s390-pci-bus.c
-index 67fce1c133b0..3febf9df968f 100644
---- a/hw/s390x/s390-pci-bus.c
-+++ b/hw/s390x/s390-pci-bus.c
-@@ -623,18 +623,13 @@ static S390PCIIOMMU *s390_pci_get_iommu(S390pciState *s, PCIBus *bus,
-                                         pci_bus_num(bus),
-                                         PCI_SLOT(devfn),
-                                         PCI_FUNC(devfn));
--        char *as_name = g_strdup_printf("iommu-pci-%02x:%02x.%01x",
--                                        pci_bus_num(bus),
--                                        PCI_SLOT(devfn),
--                                        PCI_FUNC(devfn));
-         memory_region_init(&iommu->mr, OBJECT(iommu), mr_name, UINT64_MAX);
--        address_space_init(&iommu->as, NULL, &iommu->mr, as_name);
-+        address_space_init(&iommu->as, OBJECT(iommu), &iommu->mr, "as");
-         iommu->iotlb = g_hash_table_new_full(g_int64_hash, g_int64_equal,
-                                              NULL, g_free);
-         table->iommu[PCI_SLOT(devfn)] = iommu;
- 
-         g_free(mr_name);
--        g_free(as_name);
+diff --git a/hw/sd/allwinner-sdhost.c b/hw/sd/allwinner-sdhost.c
+index 158d434e7fde..c001dfd60203 100644
+--- a/hw/sd/allwinner-sdhost.c
++++ b/hw/sd/allwinner-sdhost.c
+@@ -832,7 +832,7 @@ static void allwinner_sdhost_realize(DeviceState *dev, Error **errp)
+         return;
      }
  
-     return iommu;
-@@ -785,7 +780,7 @@ static void s390_pci_iommu_free(S390pciState *s, PCIBus *bus, int32_t devfn)
-      * Remove the listeners now before destroying the address space.
-      */
-     address_space_remove_listeners(&iommu->as);
--    address_space_destroy(&iommu->as);
-+    object_unparent(OBJECT(&iommu->as));
-     object_unparent(OBJECT(&iommu->mr));
-     object_unparent(OBJECT(iommu));
-     object_unref(OBJECT(iommu));
+-    address_space_init(&s->dma_as, NULL, s->dma_mr, "sdhost-dma");
++    address_space_init(&s->dma_as, OBJECT(s), s->dma_mr, "as");
+ }
+ 
+ static void allwinner_sdhost_reset(DeviceState *dev)
+diff --git a/hw/sd/sdhci.c b/hw/sd/sdhci.c
+index c6a203744463..1a6b6e1198f2 100644
+--- a/hw/sd/sdhci.c
++++ b/hw/sd/sdhci.c
+@@ -1594,7 +1594,7 @@ static void sdhci_sysbus_realize(DeviceState *dev, Error **errp)
+ 
+     if (s->dma_mr) {
+         s->dma_as = &s->sysbus_dma_as;
+-        address_space_init(s->dma_as, NULL, s->dma_mr, "sdhci-dma");
++        address_space_init(s->dma_as, OBJECT(s), s->dma_mr, "as");
+     } else {
+         /* use system_memory() if property "dma" not set */
+         s->dma_as = &address_space_memory;
+@@ -1612,7 +1612,7 @@ static void sdhci_sysbus_unrealize(DeviceState *dev)
+     sdhci_common_unrealize(s);
+ 
+      if (s->dma_mr) {
+-        address_space_destroy(s->dma_as);
++        object_unparent(OBJECT(s->dma_as));
+     }
+ }
+ 
 
 -- 
 2.51.0
