@@ -4,95 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E89ECAC599
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:43:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87321CAC59A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:45:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uysQx-0003gi-4W; Wed, 17 Sep 2025 09:42:55 -0400
+	id 1uysSz-0004U9-GW; Wed, 17 Sep 2025 09:45:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1uysQu-0003gE-61; Wed, 17 Sep 2025 09:42:52 -0400
-Received: from [185.176.79.56] (helo=frasgout.his.huawei.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1uysQq-0003x3-1Q; Wed, 17 Sep 2025 09:42:51 -0400
-Received: from mail.maildlp.com (unknown [172.18.186.231])
- by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4cRfb36G2vz6GDKy;
- Wed, 17 Sep 2025 21:22:55 +0800 (CST)
-Received: from frapeml500008.china.huawei.com (unknown [7.182.85.71])
- by mail.maildlp.com (Postfix) with ESMTPS id CF4CE1400F4;
- Wed, 17 Sep 2025 21:24:28 +0800 (CST)
-Received: from localhost (10.203.177.15) by frapeml500008.china.huawei.com
- (7.182.85.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Wed, 17 Sep
- 2025 15:24:25 +0200
-Date: Wed, 17 Sep 2025 14:24:24 +0100
-To: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-CC: <qemu-devel@nongnu.org>, Richard Henderson <richard.henderson@linaro.org>, 
- Peter Maydell <peter.maydell@linaro.org>, "=?ISO-8859-1?Q?C=E9dric?= Le
- Goater" <clg@kaod.org>, Steven Lee <steven_lee@aspeedtech.com>, Troy Lee
- <leetroy@gmail.com>, Jamin Lin <jamin_lin@aspeedtech.com>, Andrew Jeffery
- <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>, Eric Auger
- <eric.auger@redhat.com>, Helge Deller <deller@gmx.de>, Philippe
- =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>, =?ISO-8859-1?Q?Herv?=
- =?ISO-8859-1?Q?=E9?= Poussineau <hpoussin@reactos.org>, Aleksandar Rikalo
- <arikalo@gmail.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Alistair
- Francis <alistair@alistair23.me>, Ninad Palsule <ninad@linux.ibm.com>, Paolo
- Bonzini <pbonzini@redhat.com>, "Eduardo Habkost" <eduardo@habkost.net>,
- "Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>, Jason Wang <jasowang@redhat.com>, Yi Liu
- <yi.l.liu@intel.com>, =?ISO-8859-1?Q?Cl=E9m?= =?ISO-8859-1?Q?ent?=
- Mathieu--Drif <clement.mathieu--drif@eviden.com>, Nicholas Piggin
- <npiggin@gmail.com>, Aditya Gupta <adityag@linux.ibm.com>, Gautam Menghani
- <gautam@linux.ibm.com>, Song Gao <gaosong@loongson.cn>, Bibo Mao
- <maobibo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, "Fan Ni"
- <fan.ni@samsung.com>, David Hildenbrand <david@redhat.com>, "Igor Mammedov"
- <imammedo@redhat.com>, Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
- Beniamino Galvani <b.galvani@gmail.com>, Strahinja Jankovic
- <strahinja.p.jankovic@gmail.com>, Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- Jan Kiszka <jan.kiszka@web.de>, Laurent Vivier <laurent@vivier.eu>, Andrey
- Smirnov <andrew.smirnov@gmail.com>, "Aurelien Jarno" <aurelien@aurel32.net>,
- BALATON Zoltan <balaton@eik.bme.hu>, Bernhard Beschow <shentey@gmail.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Elena Ufimtseva
- <elena.ufimtseva@oracle.com>, Jagannathan Raman <jag.raman@oracle.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, "Daniel
- Henrique Barboza" <dbarboza@ventanamicro.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Matthew Rosato <mjrosato@linux.ibm.com>, Eric
- Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, "Halil Pasic"
- <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, "Fam Zheng" <fam@euphon.net>, Bin Meng
- <bmeng.cn@gmail.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Peter Xu <peterx@redhat.com>, Marcelo
- Tosatti <mtosatti@redhat.com>, "Max Filippov" <jcmvbkbc@gmail.com>,
- <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
- <qemu-s390x@nongnu.org>, <qemu-block@nongnu.org>, <kvm@vger.kernel.org>, Alex
- Williamson <alex.williamson@redhat.com>, =?ISO-8859-1?Q?C=E9dric?= Le Goater
- <clg@redhat.com>, Stefano Garzarella <sgarzare@redhat.com>, "Alistair
- Francis" <alistair.francis@wdc.com>
-Subject: Re: [PATCH 13/35] hw/mem: QOM-ify AddressSpace
-Message-ID: <20250917142424.000019d3@huawei.com>
-In-Reply-To: <20250917-qom-v1-13-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
-References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
- <20250917-qom-v1-13-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1uysSx-0004TE-F3
+ for qemu-riscv@nongnu.org; Wed, 17 Sep 2025 09:44:59 -0400
+Received: from mail-yb1-xb2b.google.com ([2607:f8b0:4864:20::b2b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1uysSt-00048j-WE
+ for qemu-riscv@nongnu.org; Wed, 17 Sep 2025 09:44:58 -0400
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e931c71a1baso6390058276.0
+ for <qemu-riscv@nongnu.org>; Wed, 17 Sep 2025 06:44:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=jms.id.au; s=google; t=1758116693; x=1758721493; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DnAo/2DPNzNJlRCruVcjhGpDofdhOKJsOj0CkRAW0IA=;
+ b=W90MhyGYuXGydLIG+rKt3TVC0EU71Hi+qM7uhMSxpmARFPvFRfgdlZXTOO9yYT7p8U
+ BSniosN1bQC8i60K4YKG9JWi9XB0NXXD9Wbu6OY2G0vjnL9hWiyb6FJ+fctx+yrmkmM/
+ HBvSaOL2fYHlb9MLh6VB8PapHVzwkjRPI5Nbk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758116693; x=1758721493;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DnAo/2DPNzNJlRCruVcjhGpDofdhOKJsOj0CkRAW0IA=;
+ b=m/WiHpfGWiLShVK1411e/c1j12v2gqF6PxSfs8Lela3ucPLPusQSvJ/bS1vYoyzwzD
+ XrbVUMZnh3L4ulxWEYpmf0Zw07NNW4fX1caFFdqMHT9dLzuTf5OZpbHdUP0w7aeHRmKp
+ VzGleiBsRazmkt/mczQvfhCCXUCIph2hMPjPQNLJ8dTzFJNY/FhJut95DR61XFChSYYF
+ P03f6OrnoV49Uxtkj/BNZahA51f4YjNL5teSVFILYmw7xYdsmpG/DIE0LATKwHELIv1X
+ O4zHHg7c9LiTqqcsqWrkjTEvMXJ3xjdfozFspjEQ6ipWIjkibTpOfsuSI++7EDckT5kG
+ CQzA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6MasqvlVEeeT95rh/MSqbbGHiD0XE9TEjZIIziCr+mB5Bz+Nx6xME9pANxV39nj/063IKlBv6xFUk@nongnu.org
+X-Gm-Message-State: AOJu0YzO+7ACV6CqX+shHw+Tvw331gkp+jZgEza1e8kfGW3ML9k1XmGD
+ Ednj2dIlzl2CmabzhSRTy09uv8HUlt0rm5meg0yIe8BD+CZf4UJcCeLFfMqkFyvR6TtQWQcRnGm
+ ffRC6FIYyDScfFJ7aYxHEv43yN0aAka4=
+X-Gm-Gg: ASbGnctciI+Vw1/y5RGasPDEF+TUyTkn93tnkiygf9Abt4ZdlDHOaFKV1K+SfCXcrtb
+ yfYIUB8qbsUtnlsAf2t6kEPtr0oRS4EiBOSk6dkzm0tMtPrNiNTSCdUZl8E6lLuUGkGkLLrrFHe
+ ibNa8u6XsUbPubAJM44kzLKqQvlbUjNJixO+aGdrImQDMV6VOf3K3wSSB8F/eQtg2GeB1tYFicj
+ igiggA=
+X-Google-Smtp-Source: AGHT+IHgmMs5+X+sQEWEMHFWE610CrlbWgH9A1Rc6LlrOXPzIxlnt/SDMG6N3YwrHeDPmFn7nRAks5AfBQvM/zPEkLU=
+X-Received: by 2002:a05:6902:6283:b0:ea3:be0a:ccdb with SMTP id
+ 3f1490d57ef6-ea5c06ca785mr1698131276.49.1758116692811; Wed, 17 Sep 2025
+ 06:44:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.203.177.15]
-X-ClientProxiedBy: lhrpeml500006.china.huawei.com (7.191.161.198) To
- frapeml500008.china.huawei.com (7.182.85.71)
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 185.176.79.56 (deferred)
-Received-SPF: pass client-ip=185.176.79.56;
- envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
-X-Spam_score_int: -33
-X-Spam_score: -3.4
-X-Spam_bar: ---
-X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+References: <20250903030114.274535-1-npiggin@gmail.com>
+ <20250903030114.274535-3-npiggin@gmail.com>
+ <6bff4c9d-1da4-40b3-901a-789923d8ef7e@ventanamicro.com>
+ <qyikdqxxiewb7tqykt74gpx5oereckbepyptd3vr4flptmrvoc@midnt5c7agnc>
+ <3dd9888f-be16-48f8-a858-f58a5b57825d@ventanamicro.com>
+ <188f0525-154e-4d08-a155-68e8800e302d@linaro.org>
+In-Reply-To: <188f0525-154e-4d08-a155-68e8800e302d@linaro.org>
+From: Joel Stanley <joel@jms.id.au>
+Date: Wed, 17 Sep 2025 23:14:41 +0930
+X-Gm-Features: AS18NWCeGWFuyoGez7_HVxFGxkW8bU2PFEbxZV1W3p48u8b7E3YyLpPT6h8kHMY
+Message-ID: <CACPK8Xd183vLgSyNfjzN5caUeJGRrjM1J8ugTVRd2k0Ea5LpfQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] target/risvc: Fix vector whole ldst vstart check
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ qemu-devel@nongnu.org, Chao Liu <chao.liu@zevorn.cn>, 
+ Nicholas Joaquin <njoaquin@tenstorrent.com>,
+ Ganesh Valliappan <gvalliappan@tenstorrent.com>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2b;
+ envelope-from=joel.stan@gmail.com; helo=mail-yb1-xb2b.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -106,28 +102,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Jonathan Cameron <jonathan.cameron@huawei.com>
-From:  Jonathan Cameron via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 17 Sep 2025 21:56:25 +0900
-Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp> wrote:
+On Fri, 5 Sept 2025 at 16:50, Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 9/4/25 13:06, Daniel Henrique Barboza wrote:
+> > How hard it is to update the GCC version we're running in the docker images for
+> > "check-tcg"? We would like to use a RISC-V vector header that isn't supported
+> > ATM.
+> If debian packages the gcc version, then it's easy: change
+>
+>    gcc-riscv-linux-gnu
+>
+> to
+>
+>    gcc-NN-riscv-linux-gnu
 
-> Make AddressSpaces QOM objects to ensure that they are destroyed when
-> their owners are finalized and also to get a unique path for debugging
-> output.
-> 
-> The name arguments were used to distinguish AddresSpaces in debugging
-> output, but they will represent property names after QOM-ification and
-> debugging output will show QOM paths. So change them to make them more
-> concise and also avoid conflicts with other properties.
-> 
-> Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Assuming the fundamental change makes sense (which I haven't looked into in
-enough depth!), this CXL bit looks fine to me.
+The test that was failing uses debian-all-test-cross. This is based on
+Debian 12 which maxes out at GCC 12.
 
-Acked-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-> 
+If we move to Debian 13, we get GCC 14. Something like this would do it:
 
+--- a/tests/docker/dockerfiles/debian-all-test-cross.docker
++++ b/tests/docker/dockerfiles/debian-all-test-cross.docker
+@@ -6,7 +6,7 @@
+ # basic compilers for as many targets as possible. We shall use this
+ # to build and run linux-user tests on GitLab
+ #
+-FROM docker.io/library/debian:12-slim
++FROM docker.io/library/debian:13-slim
+
+Is updating the distro something we would consider for this development cycle?
+
+Cheers,
+
+Joel
 
