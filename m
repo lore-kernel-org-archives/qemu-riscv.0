@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD247CAC599
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:17:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA44CAC599
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:18:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyrsy-00039K-U2; Wed, 17 Sep 2025 09:07:48 -0400
+	id 1uyrkM-0008JE-LC; Wed, 17 Sep 2025 08:58:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrpm-0005wN-KW; Wed, 17 Sep 2025 09:04:36 -0400
+ id 1uyrk2-00080w-Rj; Wed, 17 Sep 2025 08:58:34 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrpj-0005xa-AN; Wed, 17 Sep 2025 09:04:29 -0400
+ id 1uyrjz-00052T-GR; Wed, 17 Sep 2025 08:58:34 -0400
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN6h008967
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN7A008967
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 21:56:33 +0900 (JST)
+ Wed, 17 Sep 2025 21:56:55 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=KPkgneIU/Kxw3przf+/EO57BUaP8vFhAy1Y4oUYjPZY=; 
+DKIM-Signature: a=rsa-sha256; bh=gwBe2d1SPiEG7iGelhRfKdE35+7XHfMINRwT4MKXiLM=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Date:Subject:Message-Id:To;
- s=rs20250326; t=1758113794; v=1;
- b=p6CW3wGmzP/3BPNGDz1fVZLaV3/Flytml54QCdn8QBKxE6XKmetfZg+fVzt4n3th
- uEh/vkZLkgUVKsYEiLky4LLz2fap1aN0EvqGq1e9vNVAWzWcfgG6K6sA+bGk5P2n
- NvwF1DofnV5zwtMCEMIMrFE+9IU3tr5uTUhEGBa1t0tzJVVE/307LUt11ZJe1odm
- n+Pr7o9eLkl6ZOYsvA0KBY13AXAqTmHrZ3Ar7hNmBQB5yMJeAkQG3AvdEXy6djmz
- kH08sM2K4Hw+w6MGKkARhjxu6TBl4+r0aA38T1JSM5QVjwgYa0TiThAAholfXC6N
- M6bs5/EkJjSFRjC8tqNnhQ==
+ s=rs20250326; t=1758113816; v=1;
+ b=IakF6xb1y6e3J++ELT8zmlhVoNMYHBM96451uoVilbwHdL9KQ+l3FBvVgicRvmGm
+ 6xkwood2776jSaTOLnKLhkDEHFHeVh4DZYcV0lZBFtbjumcS3OrU1nbFoQ0pegnA
+ 3FNRpQMnBN4CucKDdexGpxP0i3EjiedJQayy86a+Df2lZxwu8oJkUFkmCS1X7i2k
+ eFERUKqRLCWqjZkE4LlmJJcApUYtqxNv0vJ+uV+ETn50NEosXa/nJugPNz1c2iwl
+ fYyLQlZYfkVUf2FL96pYMoC/bNeGfjH/yyKvWhnSxDRGTjRGLxMWlIWD6meC5XzL
+ ToV+oFyyI+cprwbWQIo4Sw==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 21:56:15 +0900
-Subject: [PATCH 03/35] vfio: Use address_space_get_path()
+Date: Wed, 17 Sep 2025 21:56:42 +0900
+Subject: [PATCH 30/35] hw/virtio: QOM-ify AddressSpace
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-qom-v1-3-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-qom-v1-30-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -125,62 +125,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The name field of an QOM-ified AddressSpace represents a property name,
-which may not be sufficient to identify the AddressSpace. Use
-address_space_get_path() instead.
+Make AddressSpaces QOM objects to ensure that they are destroyed when
+their owners are finalized and also to get a unique path for debugging
+output.
+
+The name arguments were used to distinguish AddresSpaces in debugging
+output, but they will represent property names after QOM-ification and
+debugging output will show QOM paths. So change them to make them more
+concise and also avoid conflicts with other properties.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/vfio/listener.c     | 8 ++++++--
- hw/virtio/vhost-vdpa.c | 4 +++-
- 2 files changed, 9 insertions(+), 3 deletions(-)
+ hw/virtio/virtio-iommu.c |  3 ++-
+ hw/virtio/virtio-pci.c   | 12 ++++++------
+ 2 files changed, 8 insertions(+), 7 deletions(-)
 
-diff --git a/hw/vfio/listener.c b/hw/vfio/listener.c
-index f498e23a9374..d0418db28c8b 100644
---- a/hw/vfio/listener.c
-+++ b/hw/vfio/listener.c
-@@ -137,9 +137,11 @@ static void vfio_iommu_map_notify(IOMMUNotifier *n, IOMMUTLBEntry *iotlb)
-                                 iova, iova + iotlb->addr_mask);
+diff --git a/hw/virtio/virtio-iommu.c b/hw/virtio/virtio-iommu.c
+index d9713a38bfae..84c6076dc0e3 100644
+--- a/hw/virtio/virtio-iommu.c
++++ b/hw/virtio/virtio-iommu.c
+@@ -421,6 +421,7 @@ static AddressSpace *virtio_iommu_find_add_as(PCIBus *bus, void *opaque,
+         char *name = g_strdup_printf("%s-%d-%d",
+                                      TYPE_VIRTIO_IOMMU_MEMORY_REGION,
+                                      mr_index++, devfn);
++        g_autofree char *as_name = g_strconcat(name, "-as", NULL);
+         sdev = sbus->pbdev[devfn] = g_new0(IOMMUDevice, 1);
  
-     if (iotlb->target_as != &address_space_memory) {
-+        g_autofree char *path = address_space_get_path(iotlb->target_as);
-+
-         error_setg(&local_err,
-                    "Wrong target AS \"%s\", only system memory is allowed",
--                   iotlb->target_as->name ? iotlb->target_as->name : "none");
-+                   path);
-         if (migration_is_running()) {
-             migration_file_set_error(-EINVAL, local_err);
-         } else {
-@@ -1060,9 +1062,11 @@ static void vfio_iommu_map_dirty_notify(IOMMUNotifier *n, IOMMUTLBEntry *iotlb)
-     trace_vfio_iommu_map_dirty_notify(iova, iova + iotlb->addr_mask);
+         sdev->viommu = s;
+@@ -430,7 +431,7 @@ static AddressSpace *virtio_iommu_find_add_as(PCIBus *bus, void *opaque,
+         trace_virtio_iommu_init_iommu_mr(name);
  
-     if (iotlb->target_as != &address_space_memory) {
-+        g_autofree char *path = address_space_get_path(iotlb->target_as);
-+
-         error_setg(&local_err,
-                    "Wrong target AS \"%s\", only system memory is allowed",
--                   iotlb->target_as->name ? iotlb->target_as->name : "none");
-+                   path);
-         goto out;
+         memory_region_init(&sdev->root, OBJECT(s), name, UINT64_MAX);
+-        address_space_init(&sdev->as, NULL, &sdev->root, TYPE_VIRTIO_IOMMU);
++        address_space_init(&sdev->as, OBJECT(s), &sdev->root, as_name);
+         add_prop_resv_regions(sdev);
+ 
+         /*
+diff --git a/hw/virtio/virtio-pci.c b/hw/virtio/virtio-pci.c
+index a3cd8f642706..7b63829c6c56 100644
+--- a/hw/virtio/virtio-pci.c
++++ b/hw/virtio/virtio-pci.c
+@@ -2062,8 +2062,8 @@ static void virtio_pci_device_plugged(DeviceState *d, Error **errp)
+         if (modern_pio) {
+             memory_region_init(&proxy->io_bar, OBJECT(proxy),
+                                "virtio-pci-io", 0x4);
+-            address_space_init(&proxy->modern_cfg_io_as, NULL, &proxy->io_bar,
+-                               "virtio-pci-cfg-io-as");
++            address_space_init(&proxy->modern_cfg_io_as, OBJECT(proxy),
++                               &proxy->io_bar, "io-as");
+ 
+             pci_register_bar(&proxy->pci_dev, proxy->modern_io_bar_idx,
+                              PCI_BASE_ADDRESS_SPACE_IO, &proxy->io_bar);
+@@ -2199,8 +2199,8 @@ static void virtio_pci_realize(PCIDevice *pci_dev, Error **errp)
+                        /* PCI BAR regions must be powers of 2 */
+                        pow2ceil(proxy->notify.offset + proxy->notify.size));
+ 
+-    address_space_init(&proxy->modern_cfg_mem_as, NULL, &proxy->modern_bar,
+-                       "virtio-pci-cfg-mem-as");
++    address_space_init(&proxy->modern_cfg_mem_as, OBJECT(proxy),
++                       &proxy->modern_bar, "mem-as");
+ 
+     if (proxy->disable_legacy == ON_OFF_AUTO_AUTO) {
+         proxy->disable_legacy = pcie_port ? ON_OFF_AUTO_ON : ON_OFF_AUTO_OFF;
+@@ -2296,9 +2296,9 @@ static void virtio_pci_exit(PCIDevice *pci_dev)
+         pci_is_express(pci_dev)) {
+         pcie_aer_exit(pci_dev);
      }
- 
-diff --git a/hw/virtio/vhost-vdpa.c b/hw/virtio/vhost-vdpa.c
-index 7061b6e1a386..7ed639358458 100644
---- a/hw/virtio/vhost-vdpa.c
-+++ b/hw/virtio/vhost-vdpa.c
-@@ -213,8 +213,10 @@ static void vhost_vdpa_iommu_map_notify(IOMMUNotifier *n, IOMMUTLBEntry *iotlb)
-     hwaddr xlat;
- 
-     if (iotlb->target_as != &address_space_memory) {
-+        g_autofree char *path = address_space_get_path(iotlb->target_as);
-+
-         error_report("Wrong target AS \"%s\", only system memory is allowed",
--                     iotlb->target_as->name ? iotlb->target_as->name : "none");
-+                     path);
-         return;
+-    address_space_destroy(&proxy->modern_cfg_mem_as);
++    object_unparent(OBJECT(&proxy->modern_cfg_mem_as));
+     if (modern_pio) {
+-        address_space_destroy(&proxy->modern_cfg_io_as);
++        object_unparent(OBJECT(&proxy->modern_cfg_io_as));
      }
-     RCU_READ_LOCK_GUARD();
+ }
+ 
 
 -- 
 2.51.0
