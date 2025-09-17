@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85EFECAC59A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:17:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD247CAC599
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:17:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyrkj-0008Vi-6k; Wed, 17 Sep 2025 08:59:17 -0400
+	id 1uyrsy-00039K-U2; Wed, 17 Sep 2025 09:07:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrk3-00081G-1U; Wed, 17 Sep 2025 08:58:35 -0400
+ id 1uyrpm-0005wN-KW; Wed, 17 Sep 2025 09:04:36 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrjz-00052X-IM; Wed, 17 Sep 2025 08:58:34 -0400
+ id 1uyrpj-0005xa-AN; Wed, 17 Sep 2025 09:04:29 -0400
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN7C008967
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN6h008967
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 21:56:57 +0900 (JST)
+ Wed, 17 Sep 2025 21:56:33 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=iRO+hrK4XG9Id0QZlzueAlZAZ0CQr5cH8M80zLSFtdk=; 
+DKIM-Signature: a=rsa-sha256; bh=KPkgneIU/Kxw3przf+/EO57BUaP8vFhAy1Y4oUYjPZY=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Date:Subject:Message-Id:To;
- s=rs20250326; t=1758113818; v=1;
- b=DCgdJUt8BsdsHaJ7TwtGHOS5Bl+Hwe0u8DbfwZddRm5m1qylu0a+Tk+XJ9mPKh4V
- GI5qS8dH3Hppq9l5T4V9FNgNDWDqFIVCdhiln1db/ePtu4FqIB0OHAdFkAUb5mAy
- /Ji7aqCMf7kqS68Ly2a1S0sohdoaJyFCMstjOQZeJz7P4WkxQtZqvnChgL14XASY
- mO8cuykhmZhA4DLkJwQJzj2KKNbDgcb8ub5uOinuhksLZDWT+/BRod80gdIB1yUf
- Omoayby052Xn8pF4FkTs/Y9nXTcac/MxWwyCDfRLe1l2Q9QJm0k6W+4+VjIHkq6J
- 6ZqMRSnfmSFLUdRYgEG1Fg==
+ s=rs20250326; t=1758113794; v=1;
+ b=p6CW3wGmzP/3BPNGDz1fVZLaV3/Flytml54QCdn8QBKxE6XKmetfZg+fVzt4n3th
+ uEh/vkZLkgUVKsYEiLky4LLz2fap1aN0EvqGq1e9vNVAWzWcfgG6K6sA+bGk5P2n
+ NvwF1DofnV5zwtMCEMIMrFE+9IU3tr5uTUhEGBa1t0tzJVVE/307LUt11ZJe1odm
+ n+Pr7o9eLkl6ZOYsvA0KBY13AXAqTmHrZ3Ar7hNmBQB5yMJeAkQG3AvdEXy6djmz
+ kH08sM2K4Hw+w6MGKkARhjxu6TBl4+r0aA38T1JSM5QVjwgYa0TiThAAholfXC6N
+ M6bs5/EkJjSFRjC8tqNnhQ==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 21:56:44 +0900
-Subject: [PATCH 32/35] target/i386: QOM-ify AddressSpace
+Date: Wed, 17 Sep 2025 21:56:15 +0900
+Subject: [PATCH 03/35] vfio: Use address_space_get_path()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-qom-v1-32-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-qom-v1-3-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -125,34 +125,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Make AddressSpaces QOM objects to ensure that they are destroyed when
-their owners are finalized and also to get a unique path for debugging
-output.
-
-The name arguments were used to distinguish AddresSpaces in debugging
-output, but they will represent property names after QOM-ification and
-debugging output will show QOM paths. So change them to make them more
-concise and also avoid conflicts with other properties.
+The name field of an QOM-ified AddressSpace represents a property name,
+which may not be sufficient to identify the AddressSpace. Use
+address_space_get_path() instead.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- target/i386/kvm/kvm.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ hw/vfio/listener.c     | 8 ++++++--
+ hw/virtio/vhost-vdpa.c | 4 +++-
+ 2 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 2ce071dfafb2..17f3c3c9e543 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -2725,7 +2725,8 @@ static void register_smram_listener(Notifier *n, void *unused)
-         memory_region_set_enabled(smram, true);
+diff --git a/hw/vfio/listener.c b/hw/vfio/listener.c
+index f498e23a9374..d0418db28c8b 100644
+--- a/hw/vfio/listener.c
++++ b/hw/vfio/listener.c
+@@ -137,9 +137,11 @@ static void vfio_iommu_map_notify(IOMMUNotifier *n, IOMMUTLBEntry *iotlb)
+                                 iova, iova + iotlb->addr_mask);
+ 
+     if (iotlb->target_as != &address_space_memory) {
++        g_autofree char *path = address_space_get_path(iotlb->target_as);
++
+         error_setg(&local_err,
+                    "Wrong target AS \"%s\", only system memory is allowed",
+-                   iotlb->target_as->name ? iotlb->target_as->name : "none");
++                   path);
+         if (migration_is_running()) {
+             migration_file_set_error(-EINVAL, local_err);
+         } else {
+@@ -1060,9 +1062,11 @@ static void vfio_iommu_map_dirty_notify(IOMMUNotifier *n, IOMMUTLBEntry *iotlb)
+     trace_vfio_iommu_map_dirty_notify(iova, iova + iotlb->addr_mask);
+ 
+     if (iotlb->target_as != &address_space_memory) {
++        g_autofree char *path = address_space_get_path(iotlb->target_as);
++
+         error_setg(&local_err,
+                    "Wrong target AS \"%s\", only system memory is allowed",
+-                   iotlb->target_as->name ? iotlb->target_as->name : "none");
++                   path);
+         goto out;
      }
  
--    address_space_init(&smram_address_space, NULL, &smram_as_root, "KVM-SMRAM");
-+    address_space_init(&smram_address_space, OBJECT(kvm_state), &smram_as_root,
-+                       "smram-as");
-     kvm_memory_listener_register(kvm_state, &smram_listener,
-                                  &smram_address_space, 1, "kvm-smram");
- }
+diff --git a/hw/virtio/vhost-vdpa.c b/hw/virtio/vhost-vdpa.c
+index 7061b6e1a386..7ed639358458 100644
+--- a/hw/virtio/vhost-vdpa.c
++++ b/hw/virtio/vhost-vdpa.c
+@@ -213,8 +213,10 @@ static void vhost_vdpa_iommu_map_notify(IOMMUNotifier *n, IOMMUTLBEntry *iotlb)
+     hwaddr xlat;
+ 
+     if (iotlb->target_as != &address_space_memory) {
++        g_autofree char *path = address_space_get_path(iotlb->target_as);
++
+         error_report("Wrong target AS \"%s\", only system memory is allowed",
+-                     iotlb->target_as->name ? iotlb->target_as->name : "none");
++                     path);
+         return;
+     }
+     RCU_READ_LOCK_GUARD();
 
 -- 
 2.51.0
