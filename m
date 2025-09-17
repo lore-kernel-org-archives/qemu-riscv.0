@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27580CAC59A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:06:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A47FCCAC59A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:07:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyrqq-0006yU-HV; Wed, 17 Sep 2025 09:05:37 -0400
+	id 1uyrsG-0000cx-6Q; Wed, 17 Sep 2025 09:07:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrn3-00020V-ME; Wed, 17 Sep 2025 09:01:43 -0400
+ id 1uyroe-0004yz-HH; Wed, 17 Sep 2025 09:03:20 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrn0-0005eP-T0; Wed, 17 Sep 2025 09:01:41 -0400
+ id 1uyroa-0005tL-OV; Wed, 17 Sep 2025 09:03:20 -0400
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN7D008967
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN6i008967
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 21:56:58 +0900 (JST)
+ Wed, 17 Sep 2025 21:56:34 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=7PCGJmdjfJHA8NxdiTCGq5+u1H1eLf1xFPp6xeAliLU=; 
+DKIM-Signature: a=rsa-sha256; bh=uz+BL2X3YmDbVVBFbvJGic/cMJEwips82++86oOiCGc=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Date:Subject:Message-Id:To;
- s=rs20250326; t=1758113819; v=1;
- b=ltioezOZX36yhHqqk43mS978ufccOEdZSM8Jx7oYevVrtSzy7fAYmnbW5qi2XcRY
- E+1tC5VWYu4GbRZzYOqObhHcNSFC2Rpdu7JjbMa4EL29PhopMiYnZZsptvTKNcrO
- 6uqRg/E/2mVSI/orxoAOVoG5BvHeJpz+1FYJ9UqNxSJdjDnYBlZS3pJGXF1FCd+7
- /kPSDyWBukC5UmKguKm6MqDuChgUXO1XIwv1FFtsTnG+niPGoBCF08flIQvrVrRO
- rL2V/cS1ZaKTkRlI2KSe2R/6cu+VkCvQzNTJTV/mzmIVFIGAM4DyLAH3v0IgVqyX
- mQOjOlLkEeAFxLM2qATLeg==
+ s=rs20250326; t=1758113795; v=1;
+ b=c4CC69tVnJgnpKyDuD5vzuMxSmvIVObFGRYzQ7YgDCkTW4D2BTOOziGDq2HOTomj
+ EGZ78CyMVy0sA7wO9v7B2O13lDdrwf0tPSfU6PCAqB6FTwXkjY7PZH+dLhjfGipm
+ Saiktp8B/WvPhMOBvucPkble2/mkgO07bFo5T7N+c7MnvKfoM4kRPuFg2tzxk9hh
+ H/Mq2zGXjSRCczBWAV+FDAepx9016OZIxigNIgdcR0do8MeNalYjGM6XKvK6QIRt
+ WZKOK1QaTYbnyPIVoctTU4P2WbEJslCrYWD6KX0qMUL9xXfPmmfDj0XA/JI9BV9g
+ oPYwT3tP4a8KIVGdG59rbQ==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 21:56:45 +0900
-Subject: [PATCH 33/35] target/mips: QOM-ify AddressSpace
+Date: Wed, 17 Sep 2025 21:56:16 +0900
+Subject: [PATCH 04/35] hw/alpha: QOM-ify AddressSpace
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-qom-v1-33-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-qom-v1-4-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -129,31 +129,26 @@ Make AddressSpaces QOM objects to ensure that they are destroyed when
 their owners are finalized and also to get a unique path for debugging
 output.
 
-The name arguments were used to distinguish AddresSpaces in debugging
-output, but they will represent property names after QOM-ification and
-debugging output will show QOM paths. So change them to make them more
-concise and also avoid conflicts with other properties.
-
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- target/mips/cpu.c | 4 ++--
+ hw/alpha/typhoon.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/mips/cpu.c b/target/mips/cpu.c
-index b13df32e6479..571caf6f4e0b 100644
---- a/target/mips/cpu.c
-+++ b/target/mips/cpu.c
-@@ -505,8 +505,8 @@ static void mips_cpu_initfn(Object *obj)
-     if (mcc->cpu_def->lcsr_cpucfg2 & (1 << CPUCFG2_LCSRP)) {
-         memory_region_init_io(&env->iocsr.mr, OBJECT(cpu), NULL,
-                                 env, "iocsr", UINT64_MAX);
--        address_space_init(&env->iocsr.as, NULL,
--                            &env->iocsr.mr, "IOCSR");
-+        address_space_init(&env->iocsr.as, OBJECT(cpu),
-+                            &env->iocsr.mr, "iocsr-as");
-     }
- #endif
- }
+diff --git a/hw/alpha/typhoon.c b/hw/alpha/typhoon.c
+index d2307b076897..7c38be2378ed 100644
+--- a/hw/alpha/typhoon.c
++++ b/hw/alpha/typhoon.c
+@@ -900,8 +900,8 @@ PCIBus *typhoon_init(MemoryRegion *ram, qemu_irq *p_isa_irq,
+     memory_region_init_iommu(&s->pchip.iommu, sizeof(s->pchip.iommu),
+                              TYPE_TYPHOON_IOMMU_MEMORY_REGION, OBJECT(s),
+                              "iommu-typhoon", UINT64_MAX);
+-    address_space_init(&s->pchip.iommu_as, NULL, MEMORY_REGION(&s->pchip.iommu),
+-                       "pchip0-pci");
++    address_space_init(&s->pchip.iommu_as, OBJECT(s),
++                       MEMORY_REGION(&s->pchip.iommu), "pchip0-pci");
+     pci_setup_iommu(b, &typhoon_iommu_ops, s);
+ 
+     /* Pchip0 PCI special/interrupt acknowledge, 0x801.F800.0000, 64MB.  */
 
 -- 
 2.51.0
