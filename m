@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40E91CAC59A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:02:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CB3BCAC59A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:02:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyrk9-000894-94; Wed, 17 Sep 2025 08:58:41 -0400
+	id 1uyrkS-0008NV-JT; Wed, 17 Sep 2025 08:59:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrk1-0007zX-My; Wed, 17 Sep 2025 08:58:33 -0400
+ id 1uyrk4-00082B-2R; Wed, 17 Sep 2025 08:58:36 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrjw-00051p-Ji; Wed, 17 Sep 2025 08:58:33 -0400
+ id 1uyrk0-00053K-64; Wed, 17 Sep 2025 08:58:35 -0400
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN6k008967
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN6m008967
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 21:56:36 +0900 (JST)
+ Wed, 17 Sep 2025 21:56:37 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=t7gZYZry7+AY7F/ztLeWkPizR8T5wkzF6no/b+Jg/94=; 
+DKIM-Signature: a=rsa-sha256; bh=AJDWmN4L41yfypclNPa9nkE7NslZs1RqVWFRg0YxSyg=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Date:Subject:Message-Id:To;
- s=rs20250326; t=1758113797; v=1;
- b=MuGDuLxI/Nk2Quxviz5Ui5dtxnTGbK8mjPe2jODrn4AsztRYEvQj1jJLdTuUg03f
- HTJSt00FKZ7lY3Lo9hOfvxbXCr46OLfp6LkI9N8LTlxkSaKru3qI7wVC08JaXZNR
- EZ+gTuihaQZVohfX41xVaits6xxS/VoncImwZkDTqvxg82wtLangPnWLXVK4hxzM
- wJUKHr0ygxllEtOusH0TbikQNDdlJ1oOpQaxMqthDk9jpfiZCradiiHS2qbl+6EJ
- HLwA/vNRVzKK3hQ3kv4Uxmfx4vUy3+yUoGpNjgaeJ9X4WUfHuilOyAd6VhAPplj0
- NS6jwsLpje/k5RyMWH9KjQ==
+ s=rs20250326; t=1758113798; v=1;
+ b=dGm/igvl0OzEWgpIft4X52yFO4DicZ/wHsTMsqmCrecZkl288EJNuCdc6YR7aLFl
+ cD6x2SXhP9dwkXAZTmkozz9IiFMmGNWh5TAWN3MeDf4BDhlcd7iIyKyz91aBrHX6
+ IC3CFZiA6L6CJNGf1ky42YxSm7oLbnWL95cWIxRaUFKGNDJg3x6D0EEHuwXbzJp0
+ wbxJzp1aoWwvtkr8OJj//oGWy2/qsyIaaPfOSzuZvaCmpURg+ts848JlMWZ/pQI/
+ ZzznLyojiU8ZDbTJZafavjV0m3AlDG1PI1loXSKUhfeAmGjUan7v7LAJ3tQYSvJj
+ wIy+Cn8ACUUSUDHvhv5llw==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 21:56:18 +0900
-Subject: [PATCH 06/35] hw/display: QOM-ify AddressSpace
+Date: Wed, 17 Sep 2025 21:56:20 +0900
+Subject: [PATCH 08/35] hw/fsi: QOM-ify AddressSpace
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-qom-v1-6-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-qom-v1-8-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -136,36 +136,22 @@ concise and also avoid conflicts with other properties.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/display/artist.c     | 2 +-
- hw/display/bcm2835_fb.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ hw/fsi/aspeed_apb2opb.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/display/artist.c b/hw/display/artist.c
-index 42905563ad49..b47ca875f93a 100644
---- a/hw/display/artist.c
-+++ b/hw/display/artist.c
-@@ -1391,7 +1391,7 @@ static void artist_realizefn(DeviceState *dev, Error **errp)
-     }
+diff --git a/hw/fsi/aspeed_apb2opb.c b/hw/fsi/aspeed_apb2opb.c
+index 8eda6f67cfd9..d337f567c6f5 100644
+--- a/hw/fsi/aspeed_apb2opb.c
++++ b/hw/fsi/aspeed_apb2opb.c
+@@ -349,7 +349,7 @@ static void fsi_opb_init(Object *o)
+     OPBus *opb = OP_BUS(o);
  
-     memory_region_init(&s->mem_as_root, OBJECT(dev), "artist", ~0ull);
--    address_space_init(&s->as, NULL, &s->mem_as_root, "artist");
-+    address_space_init(&s->as, OBJECT(s), &s->mem_as_root, "as");
+     memory_region_init(&opb->mr, 0, TYPE_FSI_OPB, UINT32_MAX);
+-    address_space_init(&opb->as, NULL, &opb->mr, TYPE_FSI_OPB);
++    address_space_init(&opb->as, OBJECT(opb), &opb->mr, "as");
+ }
  
-     artist_create_buffer(s, "cmap", &offset, ARTIST_BUFFER_CMAP, 2048, 4);
-     artist_create_buffer(s, "ap", &offset, ARTIST_BUFFER_AP,
-diff --git a/hw/display/bcm2835_fb.c b/hw/display/bcm2835_fb.c
-index c6710bdc0700..cc1567895522 100644
---- a/hw/display/bcm2835_fb.c
-+++ b/hw/display/bcm2835_fb.c
-@@ -421,7 +421,7 @@ static void bcm2835_fb_realize(DeviceState *dev, Error **errp)
-     s->initial_config.base = s->vcram_base + BCM2835_FB_OFFSET;
- 
-     s->dma_mr = MEMORY_REGION(obj);
--    address_space_init(&s->dma_as, NULL, s->dma_mr, TYPE_BCM2835_FB "-memory");
-+    address_space_init(&s->dma_as, OBJECT(s), s->dma_mr, "as");
- 
-     bcm2835_fb_reset(dev);
- 
+ static const TypeInfo opb_info = {
 
 -- 
 2.51.0
