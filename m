@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A655CAC599
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:12:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF8DCAC59A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:12:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyrkA-00089J-6V; Wed, 17 Sep 2025 08:58:42 -0400
+	id 1uyrsb-00028I-Ml; Wed, 17 Sep 2025 09:07:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrk1-0007za-OH; Wed, 17 Sep 2025 08:58:33 -0400
+ id 1uyroj-00052E-LG; Wed, 17 Sep 2025 09:03:30 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrjx-00052E-VC; Wed, 17 Sep 2025 08:58:33 -0400
+ id 1uyroh-0005vP-Jd; Wed, 17 Sep 2025 09:03:25 -0400
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN6l008967
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN70008967
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 21:56:37 +0900 (JST)
+ Wed, 17 Sep 2025 21:56:47 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=I0NMvF5OGZVy1ri6cDaaDK+4nakFScwWAWwMOrizyQw=; 
+DKIM-Signature: a=rsa-sha256; bh=IeYVbNa9ewH8X0AMzPHwbB1bovCCW1XINUrS833KFLU=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Date:Subject:Message-Id:To;
- s=rs20250326; t=1758113797; v=1;
- b=bberKOrO6J7tY0L7zJPCCBce2lzuLyNtHl2vnIJUXIZZMwbfrJwuttLnlc9sonPs
- 14JtvF6GMhefXFETjBqtOUjw14A2IcAg4+INF921qr21btTZ10oeoS6eqXhEYTpc
- d2+qDuD7DVPiUYKJcmYxuegzPPIPRVujjO8SrPvhayhKHi+7JNbbJ8+F88JzRNdg
- tZdN/NDdvDo+XlEfojYYM41UVanxTLjA+D/SRzZw2zeqJAQ8nsVebcxYrGGVVMh0
- 7LIYrh0+uNGOWQXR1XPZA8cO1V4zTuMbGIifi4NtgOtyxInjjcjlxVpfI1G5DRRW
- TFV4JVQb0q8Jp6z3Ra2GfQ==
+ s=rs20250326; t=1758113808; v=1;
+ b=RaCvs2pC4/oFYc/lwHEOZmzgDc8bmeoHZZOSvm4cn4lA7ojwDk6bZGqre9/Sk8p9
+ 9Yx79ItQGLJwc6hNE3Iy88Gr/Js2OAkqcafa6FPKGzaHCWUbzhDjliw9QU9P1wio
+ OyvpFayXqX9th2ut3T54cvwQNbpXusK7b4RNYpjZ02vM2/PP1H4jLqx6vISedT8k
+ QOW3pS/INVZUcLck6cZ30TO3AaQIi9GGa8LYlB6kxAtsSNKlmUF1an/wtFjeVpBa
+ 8iRmUJUoUxg0CLdGTiJILaNd7W8l0tlwCwuZYAnPgsabs+O2Ze12VHrBRtaNYfS/
+ qrZ1xfTkg8Fz9asUWZ3Cpw==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 21:56:19 +0900
-Subject: [PATCH 07/35] hw/dma: QOM-ify AddressSpace
+Date: Wed, 17 Sep 2025 21:56:32 +0900
+Subject: [PATCH 20/35] hw/remote: QOM-ify AddressSpace
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-qom-v1-7-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-qom-v1-20-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -136,120 +136,31 @@ concise and also avoid conflicts with other properties.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/dma/bcm2835_dma.c   | 2 +-
- hw/dma/pl080.c         | 3 +--
- hw/dma/pl330.c         | 3 +--
- hw/dma/rc4030.c        | 5 ++---
- hw/dma/xilinx_axidma.c | 4 ++--
- hw/dma/xlnx-zdma.c     | 2 +-
- hw/dma/xlnx_csu_dma.c  | 2 +-
- 7 files changed, 9 insertions(+), 12 deletions(-)
+ hw/remote/iommu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/hw/dma/bcm2835_dma.c b/hw/dma/bcm2835_dma.c
-index ebef56d8d613..8ff266c48882 100644
---- a/hw/dma/bcm2835_dma.c
-+++ b/hw/dma/bcm2835_dma.c
-@@ -380,7 +380,7 @@ static void bcm2835_dma_realize(DeviceState *dev, Error **errp)
- 
-     obj = object_property_get_link(OBJECT(dev), "dma-mr", &error_abort);
-     s->dma_mr = MEMORY_REGION(obj);
--    address_space_init(&s->dma_as, NULL, s->dma_mr, TYPE_BCM2835_DMA "-memory");
-+    address_space_init(&s->dma_as, OBJECT(s), s->dma_mr,  "as");
- 
-     bcm2835_dma_reset(dev);
- }
-diff --git a/hw/dma/pl080.c b/hw/dma/pl080.c
-index cf02a484d6a6..1b6e9f741330 100644
---- a/hw/dma/pl080.c
-+++ b/hw/dma/pl080.c
-@@ -398,8 +398,7 @@ static void pl080_realize(DeviceState *dev, Error **errp)
-         return;
+diff --git a/hw/remote/iommu.c b/hw/remote/iommu.c
+index aac5c178ec81..89d79e9480da 100644
+--- a/hw/remote/iommu.c
++++ b/hw/remote/iommu.c
+@@ -54,7 +54,7 @@ static AddressSpace *remote_iommu_find_add_as(PCIBus *pci_bus,
+     if (!elem->mr) {
+         elem->mr = MEMORY_REGION(object_new(TYPE_MEMORY_REGION));
+         memory_region_set_size(elem->mr, UINT64_MAX);
+-        address_space_init(&elem->as, NULL, elem->mr, NULL);
++        address_space_init(&elem->as, OBJECT(iommu), elem->mr, "as");
      }
  
--    address_space_init(&s->downstream_as, NULL, s->downstream,
--                       "pl080-downstream");
-+    address_space_init(&s->downstream_as, OBJECT(s), s->downstream, "as");
- }
+     qemu_mutex_unlock(&iommu->lock);
+@@ -73,7 +73,7 @@ void remote_iommu_unplug_dev(PCIDevice *pci_dev)
  
- static void pl081_init(Object *obj)
-diff --git a/hw/dma/pl330.c b/hw/dma/pl330.c
-index 4733799f4045..e9bf8f86ee5a 100644
---- a/hw/dma/pl330.c
-+++ b/hw/dma/pl330.c
-@@ -1569,8 +1569,7 @@ static void pl330_realize(DeviceState *dev, Error **errp)
-         s->mem_as = &address_space_memory;
-     } else {
-         s->mem_as = g_new0(AddressSpace, 1);
--        address_space_init(s->mem_as, NULL, s->mem_mr,
--                           memory_region_name(s->mem_mr));
-+        address_space_init(s->mem_as, OBJECT(s), s->mem_mr, "as");
-     }
+     elem = container_of(as, RemoteIommuElem, as);
  
-     s->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL, pl330_exec_cycle_timer, s);
-diff --git a/hw/dma/rc4030.c b/hw/dma/rc4030.c
-index cf76f90f4d3b..65f2c7f1bd19 100644
---- a/hw/dma/rc4030.c
-+++ b/hw/dma/rc4030.c
-@@ -688,8 +688,7 @@ static void rc4030_realize(DeviceState *dev, Error **errp)
-     memory_region_init_iommu(&s->dma_mr, sizeof(s->dma_mr),
-                              TYPE_RC4030_IOMMU_MEMORY_REGION,
-                              o, "rc4030.dma", 4 * GiB);
--    address_space_init(&s->dma_as, NULL, MEMORY_REGION(&s->dma_mr),
--                       "rc4030-dma");
-+    address_space_init(&s->dma_as, o, MEMORY_REGION(&s->dma_mr), "as");
- }
+-    address_space_destroy(&elem->as);
++    object_unparent(OBJECT(&elem->as));
  
- static void rc4030_unrealize(DeviceState *dev)
-@@ -698,7 +697,7 @@ static void rc4030_unrealize(DeviceState *dev)
+     object_unref(elem->mr);
  
-     timer_free(s->periodic_timer);
- 
--    address_space_destroy(&s->dma_as);
-+    object_unparent(OBJECT(&s->dma_as));
-     object_unparent(OBJECT(&s->dma_mr));
- }
- 
-diff --git a/hw/dma/xilinx_axidma.c b/hw/dma/xilinx_axidma.c
-index 0f340abc2c6f..5f85b686fd18 100644
---- a/hw/dma/xilinx_axidma.c
-+++ b/hw/dma/xilinx_axidma.c
-@@ -588,8 +588,8 @@ static void xilinx_axidma_realize(DeviceState *dev, Error **errp)
-         ptimer_transaction_commit(st->ptimer);
-     }
- 
--    address_space_init(&s->as, NULL,
--                       s->dma_mr ? s->dma_mr : get_system_memory(), "dma");
-+    address_space_init(&s->as, OBJECT(s),
-+                       s->dma_mr ? s->dma_mr : get_system_memory(), "as");
- }
- 
- static void xilinx_axidma_init(Object *obj)
-diff --git a/hw/dma/xlnx-zdma.c b/hw/dma/xlnx-zdma.c
-index 9b9ccd1e3c08..ad93bab5d4fa 100644
---- a/hw/dma/xlnx-zdma.c
-+++ b/hw/dma/xlnx-zdma.c
-@@ -769,7 +769,7 @@ static void zdma_realize(DeviceState *dev, Error **errp)
-         error_setg(errp, TYPE_XLNX_ZDMA " 'dma' link not set");
-         return;
-     }
--    address_space_init(&s->dma_as, NULL, s->dma_mr, "zdma-dma");
-+    address_space_init(&s->dma_as, OBJECT(s), s->dma_mr, "as");
- 
-     for (i = 0; i < ARRAY_SIZE(zdma_regs_info); ++i) {
-         RegisterInfo *r = &s->regs_info[zdma_regs_info[i].addr / 4];
-diff --git a/hw/dma/xlnx_csu_dma.c b/hw/dma/xlnx_csu_dma.c
-index 8b88392bb92b..8a0ec5bc5b94 100644
---- a/hw/dma/xlnx_csu_dma.c
-+++ b/hw/dma/xlnx_csu_dma.c
-@@ -653,7 +653,7 @@ static void xlnx_csu_dma_realize(DeviceState *dev, Error **errp)
-         error_setg(errp, TYPE_XLNX_CSU_DMA " 'dma' link not set");
-         return;
-     }
--    address_space_init(&s->dma_as, NULL, s->dma_mr, "csu-dma");
-+    address_space_init(&s->dma_as, OBJECT(s), s->dma_mr, "as");
- 
-     reg_array =
-         register_init_block32(dev, xlnx_csu_dma_regs_info[!!s->is_dst],
 
 -- 
 2.51.0
