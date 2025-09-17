@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2403CAC59A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:09:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1D4CAC59A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 13:10:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyrsn-0002cD-3f; Wed, 17 Sep 2025 09:07:37 -0400
+	id 1uyrsO-0001Dj-6o; Wed, 17 Sep 2025 09:07:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrpk-0005wB-Au; Wed, 17 Sep 2025 09:04:36 -0400
+ id 1uyroi-000529-To; Wed, 17 Sep 2025 09:03:30 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uyrpg-0005wC-Vk; Wed, 17 Sep 2025 09:04:27 -0400
+ id 1uyrof-0005ub-LQ; Wed, 17 Sep 2025 09:03:24 -0400
 Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.205]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN79008967
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58HCuN71008967
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 17 Sep 2025 21:56:55 +0900 (JST)
+ Wed, 17 Sep 2025 21:56:48 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=HLe7pvlXLzUEMbjcEoVHTcQq1sGyjMOPV2Jd4nQBR28=; 
+DKIM-Signature: a=rsa-sha256; bh=GOQKVqefPAJmBrPvNMsFbTKEyGldKAyJfG+hCf+5Ixc=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Date:Subject:Message-Id:To;
- s=rs20250326; t=1758113815; v=1;
- b=YUl26O9sN95D4FLlZBogOnlopmCljnZ1xDZ1c0b8MltFYLgUupQPEgTlgcBwEJsR
- fmatzo2AaDh6vw4DOgNUqN+rTwXvzjEriYq3NqND14tpJX2lhRp5EirQN6N0HRGi
- HY7Vo7dDq3vnXhnU5VF5+6s/K477/QK+0o2LCayg5mSz0kSiRT5BTsG7TSEIBcSF
- 4xkclhwiUFP917BLzbPt5IhRMsANO/wtH2fyS46bzO04Y4My7nkCYnTMDlLw7WxG
- CaYktq0pnmtUvLW/cLv65Y1WG4LusxVyFrY7pEWWLQyD9+7XHfJmfGGo5+HWBT/I
- 8AEOI60+py1DtcoYghKkSA==
+ s=rs20250326; t=1758113809; v=1;
+ b=e1Ob/piSj7cxEtTEojTvIjLvvXI1f4M9y8dhT54XWq2NNAJK9e2AYRl2yqkukXIJ
+ WNBaTiUjkp5ztkR7CHz3BNA978TDmZeQy5pc3yl62Vzt/0Js1cT0LcXU4FGcwqRg
+ dRxW9VdL6bphyt4odv6HmfTX2+QpMhY89N+CyVoZn2mvzcV3M/keLZcktZ+IdaHU
+ MJwsw33Awyb1v5g3OtTceF/ilc4az8tU3oVjdJYtf3Yige5Yi+G9ohT4ViEiNIUW
+ Fal/pEC7t79R1ra38eeCEkawlu+TqatE52yndj1zYLalrJPWSKG6MimIXorWBWTv
+ T6W+nb8n8IZMLJpu20ftXg==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Wed, 17 Sep 2025 21:56:41 +0900
-Subject: [PATCH 29/35] hw/usb: QOM-ify AddressSpace
+Date: Wed, 17 Sep 2025 21:56:33 +0900
+Subject: [PATCH 21/35] hw/riscv: QOM-ify AddressSpace
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250917-qom-v1-29-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20250917-qom-v1-21-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -136,22 +136,44 @@ concise and also avoid conflicts with other properties.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- hw/usb/hcd-xhci-sysbus.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/riscv/riscv-iommu.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/hw/usb/hcd-xhci-sysbus.c b/hw/usb/hcd-xhci-sysbus.c
-index 6d060062ab86..a078ab489c54 100644
---- a/hw/usb/hcd-xhci-sysbus.c
-+++ b/hw/usb/hcd-xhci-sysbus.c
-@@ -45,7 +45,7 @@ static void xhci_sysbus_realize(DeviceState *dev, Error **errp)
-                              s->xhci.numintrs);
-     if (s->xhci.dma_mr) {
-         s->xhci.as =  g_malloc0(sizeof(AddressSpace));
--        address_space_init(s->xhci.as, NULL, s->xhci.dma_mr, NULL);
-+        address_space_init(s->xhci.as, OBJECT(s), s->xhci.dma_mr, "as");
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index aed84d87a823..6e2962f8331b 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -1221,8 +1221,8 @@ static AddressSpace *riscv_iommu_space(RISCVIOMMUState *s, uint32_t devid)
+         memory_region_init_iommu(&as->iova_mr, sizeof(as->iova_mr),
+             TYPE_RISCV_IOMMU_MEMORY_REGION,
+             OBJECT(as), "riscv_iommu", UINT64_MAX);
+-        address_space_init(&as->iova_as, NULL, MEMORY_REGION(&as->iova_mr),
+-                           name);
++        address_space_init(&as->iova_as, OBJECT(s), MEMORY_REGION(&as->iova_mr),
++                           "iova-as");
+ 
+         QLIST_INSERT_HEAD(&s->spaces, as, list);
+ 
+@@ -2427,8 +2427,8 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
+     /* Memory region for downstream access, if specified. */
+     if (s->target_mr) {
+         s->target_as = g_new0(AddressSpace, 1);
+-        address_space_init(s->target_as, NULL, s->target_mr,
+-            "riscv-iommu-downstream");
++        address_space_init(s->target_as, OBJECT(s), s->target_mr,
++                           "downstream-as");
      } else {
-         s->xhci.as = &address_space_memory;
-     }
+         /* Fallback to global system memory. */
+         s->target_as = &address_space_memory;
+@@ -2437,7 +2437,7 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
+     /* Memory region for untranslated MRIF/MSI writes */
+     memory_region_init_io(&s->trap_mr, OBJECT(dev), &riscv_iommu_trap_ops, s,
+             "riscv-iommu-trap", ~0ULL);
+-    address_space_init(&s->trap_as, NULL, &s->trap_mr, "riscv-iommu-trap-as");
++    address_space_init(&s->trap_as, OBJECT(s), &s->trap_mr, "trap-as");
+ 
+     if (s->cap & RISCV_IOMMU_CAP_HPM) {
+         s->hpm_timer =
 
 -- 
 2.51.0
