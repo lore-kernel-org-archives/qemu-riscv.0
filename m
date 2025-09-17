@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6777ACAC598
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 11:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D5ECA0EE8
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Sep 2025 11:34:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uyqLt-0000u6-CL; Wed, 17 Sep 2025 07:29:33 -0400
+	id 1uyqQE-0002rM-5I; Wed, 17 Sep 2025 07:34:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uyqLr-0000tD-J2
- for qemu-riscv@nongnu.org; Wed, 17 Sep 2025 07:29:31 -0400
+ id 1uyqQA-0002qn-64
+ for qemu-riscv@nongnu.org; Wed, 17 Sep 2025 07:33:58 -0400
 Received: from mail-yx1-xb12d.google.com ([2607:f8b0:4864:20::b12d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uyqLp-0006Tb-95
- for qemu-riscv@nongnu.org; Wed, 17 Sep 2025 07:29:31 -0400
+ id 1uyqQ5-0007At-Rr
+ for qemu-riscv@nongnu.org; Wed, 17 Sep 2025 07:33:57 -0400
 Received: by mail-yx1-xb12d.google.com with SMTP id
- 956f58d0204a3-60f476eab6cso3592588d50.2
- for <qemu-riscv@nongnu.org>; Wed, 17 Sep 2025 04:29:28 -0700 (PDT)
+ 956f58d0204a3-633b87e7b9fso79096d50.1
+ for <qemu-riscv@nongnu.org>; Wed, 17 Sep 2025 04:33:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1758108568; x=1758713368; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1758108832; x=1758713632; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=yKkudT8Py2aIpneMv3ad60UnbSZ9i4tGvoq5OWXup+I=;
- b=hF3cgAF1kFG1M7sDFx+m85mImD8mBxeOfBn17CeG6Y3nLKFwFUFJEf56pVp16FpXIW
- w67EkGzH3lEUpfX7gqUbrJyWEOxGhBGvcJvivxUm+wsvWSGHxtW/M1eCQCBLYKTn4isz
- Z9G/UbKal/z0lMl4UT1E10kbemvXVMz+/IqrsfuikY7qzH12ZX5wGjbP9NPGdB9BOu1X
- bC0B+5tsdAzIOJuZuas63OroFAGnJXNYI0BsjPo0zh6+Wdje1EAFCOnhn/jdXCyMXZhh
- QzBLEYfKJXZkYDZUQkZ2lDah2EhWHvgdYida0358oIYVyvXj9uijOb/BDb67w6cRgybD
- EU7w==
+ bh=ZCLycGSctS9nUiQ2ptFxl7W8ZiF6zfMkmnFkuhYOYoM=;
+ b=WNlO9L9Ys+QdAOAsk07IJ+PS3Dg7cRxrP/wpB6m5rsdvWiDUID4cC+VxlHukn7D5+9
+ +2OCmczcEbXTa0BH5NUFLR3hhcNH69tSiJbdGsniJJJgI/TsYgH+/Mhwu5PXradY+/6G
+ guZEGg7SLa53JZHjC6jswKjfsfvpySTEeMJHywe4apQPfjpQIOHwybpzHQqnKcxonJ21
+ RMKPyUhVAGIosyCOF8r2mX7pOpoV2QypiHC791HqIm8wa0oH+jdCyM2s7NzJUIoz8lA8
+ o5oh/SPtnrGHz2sgo9xT/+asacVED+wx8c+TsXkTG6eT9PTjfUtXE5XrBjPodwQ9ehAA
+ wIjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758108568; x=1758713368;
+ d=1e100.net; s=20230601; t=1758108832; x=1758713632;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yKkudT8Py2aIpneMv3ad60UnbSZ9i4tGvoq5OWXup+I=;
- b=sFd1DyZQn6Of1pf8zjO4gQI6ltpY6rZzxID9uOMpIyAFaFk7xKOgdUniTCVIlpD8cs
- 6mtCgeviXfce/A5YU3ribn5hD4q8rixQIOZa0vYHr16TwusiUtz0aJ6nV5FXCRJVJCWa
- qFSLWnZdgB/4nTaOy2XS/N2aHBYX3A3fzvKyKkF+aO/i5iT0TdxGPDMZeKYaYjFEU7q6
- UtmxruznPcGoyzxYgahXxAJsrA1XO8qiiOjr+yohZhAPl0XYF27/WI84Lzh6W6f07xQu
- 2lSzx+8FcuO0gDVCqLYRPl+K5pO8knhOPAZq9ZrUUlVWPc0kYQC0vJV4v5nxfbsVO6VD
- iDRA==
-X-Gm-Message-State: AOJu0YwKYDxX+NtjttneePQhxkF73oN+iHna2WXAjNcbDR/rNEkAU2XV
- YPfTK03hpEFhFzB2seCqmeeRT9I4u7RHkLNUwhuX074cAkbLO+2HTKQkEkITj7QQRuZD2we58GS
- hIU3Yx2I=
-X-Gm-Gg: ASbGnctMKl2vDwlfphlb3AUlAXgpq9x88+zPldKoU6Q3zWLhVh53B9JzBog24DMJxTi
- qQkY22RacsYkjfB3Rl5onUOah1TamA6pXlYImvfM0K6vFOPwV78F3dDgrcWL/QCS0A1quyfFjO/
- bm1scq/w38CVC+Yjo2e5VBEdlCyxMTxopGxRmy5ueFxH4+iYmFLJS81rVDVfg9iTnU4cR+LDD4U
- ZDeNcbrnBoYd9cGnbgl+ua88dx0IyHI9TooIfI/k1Be1NHkfK6RC1PCd74d9P0RT2qUlLANATsa
- tyHoDDEZYT+sgFZg1hYEVOpWNZ55Efqe17Ep6lb2rbdpMpMd39bX0wYjzTBfOrKs451wKG82sNs
- FU3bTQRdD4NDIK5BNaFVWa/ytRZfqWUAIUsQ/Sa7l2w5lB0qaDZ/XtKsgMUdt2NVav3MOUrWW+w
- 8T
-X-Google-Smtp-Source: AGHT+IFk4bVq7ft4WoCTQAgzoo7JgbBUimrfwSJWZlSXNgvOIOloHAlHNj7U1tcu5yLs9Wi2EpQXyg==
-X-Received: by 2002:a05:690c:62c3:b0:722:74d3:3e98 with SMTP id
- 00721157ae682-73893246594mr14589927b3.45.1758108567565; 
- Wed, 17 Sep 2025 04:29:27 -0700 (PDT)
+ bh=ZCLycGSctS9nUiQ2ptFxl7W8ZiF6zfMkmnFkuhYOYoM=;
+ b=MyqLMJi87CW6lm5bl4C+tCID+tDVFaeglauKbXdGUgumEjPT+kvpL5VzWKc55MUHY5
+ 1cBWGCCWLu7Cnl6VDisDSNCHlwddzjkbcIk1Qt7+SThMVznScNtqoG+PVbgGrKOThbII
+ lOQQL0+a5HCf+/Il4A6epU2dANt3zmbVLEvFBN5lE/0ANB0833/H2gpKZpgMicA0O5hp
+ rtKVmEzzntzZixhymjUa9LD7fRgS+gknpb1fmuDZ74ZqkSgxci1sKWRuiLD6QI7Iu2IE
+ vK2gkxZKbllHON/UpacmdHLwjmh5tXoC/xCZQU0kzYSBgJqlbTqBLzoP6h95iGy5T/5L
+ X3Fg==
+X-Gm-Message-State: AOJu0YxmpzXgq2fSf3Z30UcIwZl6oyu79cXAuaNlsGT97l54NX3RN0PD
+ 3Z8nqUONhJnRp6KejhE565+Ovzj7TzeiQRVKRTZrwGGK39VTGqmnGQZ4+oSfNfgzPxo=
+X-Gm-Gg: ASbGncsHcLJbNkggwYoac+kcPkSQzcHonh2uB59bkzlu4yYweIIfrp7BX2umzHWdUeq
+ eDInDfO0J4ogbDrHrH4HaLohQIOuFH7w8fq1yp7aXGP1bN61/p9CG6zlR5bQOMOlBD4EvLi577X
+ oYAI5cltwjLMOTaOlBGkPPT96sb3ijPXimbZoGnKECAAxkJgP4ad2ONlH6vS1mLs36AUEvp5sjw
+ Zi8Nm07JVKyOktO4RbSSY2gmUGf856lHk5WBjLFZhUsS5LUJlLtgcEX/JaC4nbxjoI5Aifn7iIe
+ jz2TZti//slzHl3rxscyKF2En4U9ilolmq02SC5HtoTjjgY53Gyhq8PEuZSNRJilXBJ9GtLRlTJ
+ 7mG8QJU6r2f/CIljbjcsD5AwBJkI8qu54JNGpa6bK+oo5IDmg8kDmv/jyoYoFgo/9OD6Hse4bll
+ 8P
+X-Google-Smtp-Source: AGHT+IEhM/NjdYcSA7GNgp9MWAmEVDgpU7WUpEWAIpl6HYmd0lmmGXsyYkCVRmolgQ9iv9Dt83ZwiQ==
+X-Received: by 2002:a53:cd8a:0:b0:628:9b45:5e29 with SMTP id
+ 956f58d0204a3-633b05f11eamr1084041d50.15.1758108831238; 
+ Wed, 17 Sep 2025 04:33:51 -0700 (PDT)
 Received: from ?IPV6:2804:7f0:bcc0:ba1a:8719:7c4c:526a:fdea?
  ([2804:7f0:bcc0:ba1a:8719:7c4c:526a:fdea])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-732e77812fdsm29691557b3.19.2025.09.17.04.29.25
+ 956f58d0204a3-633b8c8442bsm118972d50.5.2025.09.17.04.33.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Sep 2025 04:29:26 -0700 (PDT)
-Message-ID: <0bbf45d1-b83b-4ca4-8ce5-da146f3fa578@ventanamicro.com>
-Date: Wed, 17 Sep 2025 08:29:24 -0300
+ Wed, 17 Sep 2025 04:33:50 -0700 (PDT)
+Message-ID: <9f9a3c62-de35-4290-a046-e0928bf67831@ventanamicro.com>
+Date: Wed, 17 Sep 2025 08:33:48 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 2/5] target/riscv: Implement core SMMPT lookup logic
+Subject: Re: [RFC PATCH 3/5] target/riscv: Integrate SMMPT checks into MMU and
+ TLB fill
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  liwei1518@gmail.com, Huang Tao <eric.huang@linux.alibaba.com>,
  TANG Tiancheng <lyndra@linux.alibaba.com>
 References: <20250909132533.32205-1-zhiwei_liu@linux.alibaba.com>
- <20250909132533.32205-3-zhiwei_liu@linux.alibaba.com>
+ <20250909132533.32205-4-zhiwei_liu@linux.alibaba.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20250909132533.32205-3-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20250909132533.32205-4-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::b12d;
@@ -91,7 +91,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,396 +110,160 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 9/9/25 10:25 AM, LIU Zhiwei wrote:
-> This patch introduces the core implementation for the Memory Protection Table
-> (MPT) walk, which is the central mechanism of the SMMPT extension.
+> With the core MPT lookup logic in place, this patch integrates the
+> permission checks into QEMU's main MMU processing functions.
 > 
-> A new file, `riscv_smmpt.c`, is added to encapsulate the MPT logic. It
-> implements the `smmpt_lookup()` function, which performs a multi-level
-> page table-like walk starting from the physical address specified in the
-> `mptppn` CSR field. This walk determines the access permissions (read,
-> write, execute) for a given physical address.
+> A new helper, `get_physical_address_mpt`, is introduced to check the
+> permissions for a given physical address against the MPT. This helper
+> is then called at two critical points:
 > 
-> The implementation supports various SMMPT modes (SMMTT34, SMMTT43, etc.) and
-> correctly handles leaf and non-leaf entries, including reserved bit
-> checks. Helper functions for parsing MPT entries and converting access
-> permissions are also included in the new `riscv_smmpt.h` header.
+> 1. During page table walks (`get_physical_address`): The physical
+>     address of the Page Table Entry (PTE) itself is checked to ensure
+>     the supervisor has permission to read it.
+> 
+> 2. After successful address translation (`riscv_cpu_tlb_fill`): The final
+>     guest-physical address is checked against the MPT before the access
+>     is allowed to proceed.
+> 
+> This ensures that SMMPT protection is enforced for both the translation
+> process and the final memory access, as required by the specification.
 > 
 > Co-authored-by: Huang Tao <eric.huang@linux.alibaba.com>
 > Co-authored-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 > ---
->   target/riscv/meson.build   |   1 +
->   target/riscv/pmp.h         |   3 +
->   target/riscv/riscv_smmpt.c | 273 +++++++++++++++++++++++++++++++++++++
->   target/riscv/riscv_smmpt.h |  38 ++++++
->   4 files changed, 315 insertions(+)
->   create mode 100644 target/riscv/riscv_smmpt.c
->   create mode 100644 target/riscv/riscv_smmpt.h
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+
+>   target/riscv/cpu_helper.c | 81 +++++++++++++++++++++++++++++++++++++--
+>   1 file changed, 77 insertions(+), 4 deletions(-)
 > 
-> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> index a4bd61e52a..e85b534a64 100644
-> --- a/target/riscv/meson.build
-> +++ b/target/riscv/meson.build
-> @@ -29,6 +29,7 @@ riscv_system_ss = ss.source_set()
->   riscv_system_ss.add(files(
->     'arch_dump.c',
->     'pmp.c',
-> +  'riscv_smmpt.c',
->     'debug.c',
->     'monitor.c',
->     'machine.c',
-> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-> index 271cf24169..d9c5e74345 100644
-> --- a/target/riscv/pmp.h
-> +++ b/target/riscv/pmp.h
-> @@ -85,6 +85,9 @@ void pmp_update_rule_nums(CPURISCVState *env);
->   uint32_t pmp_get_num_rules(CPURISCVState *env);
->   int pmp_priv_to_page_prot(pmp_priv_t pmp_priv);
->   void pmp_unlock_entries(CPURISCVState *env);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 3479a62cc7..f8ca74ef61 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1089,9 +1089,8 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en)
+>    * @access_type: The type of MMU access
+>    * @mode: Indicates current privilege level.
+>    */
+> -static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
+> -                                    int size, MMUAccessType access_type,
+> -                                    int mode)
 > +int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
-> +                             int size, MMUAccessType access_type,
-> +                             int mode);
+> +                             int size, MMUAccessType access_type, int mode)
+>   {
+>       pmp_priv_t pmp_priv;
+>       bool pmp_has_privs;
+> @@ -1162,6 +1161,60 @@ static bool check_svukte_addr(CPURISCVState *env, vaddr addr)
+>       return !high_bit;
+>   }
 >   
->   #define MSECCFG_MML_ISSET(env) get_field(env->mseccfg, MSECCFG_MML)
->   #define MSECCFG_MMWP_ISSET(env) get_field(env->mseccfg, MSECCFG_MMWP)
-> diff --git a/target/riscv/riscv_smmpt.c b/target/riscv/riscv_smmpt.c
-> new file mode 100644
-> index 0000000000..09e3c66c7f
-> --- /dev/null
-> +++ b/target/riscv/riscv_smmpt.c
-> @@ -0,0 +1,273 @@
 > +/*
-> + * QEMU RISC-V Smmpt (Memory Protection Table)
+> + * get_physical_address_mpt - check mpt permission for this physical address
 > + *
-> + * Copyright (c) 2024 Alibaba Group. All rights reserved.
+> + * Lookup the Memory Protection Table and check permission for this
+> + * physical address. Returns 0 if the permission checking was successful
 > + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + * @env: CPURISCVState
+> + * @prot: The returned protection attributes
+> + * @addr: The physical address to be checked permission
+> + * @access_type: The type of MMU access
+> + * @mode: Indicates current privilege level.
 > + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "riscv_smmpt.h"
-> +#include "pmp.h"
-> +#include "system/memory.h"
-> +
-> +typedef uint64_t load_entry_fn(AddressSpace *, hwaddr,
-> +                               MemTxAttrs, MemTxResult *);
-> +
-> +static uint64_t load_entry_32(AddressSpace *as, hwaddr addr,
-> +                              MemTxAttrs attrs, MemTxResult *result)
+> +static int get_physical_address_mpt(CPURISCVState *env, int *prot, hwaddr addr,
+> +                                    MMUAccessType access_type, int mode)
 > +{
-> +    return address_space_ldl(as, addr, attrs, result);
-> +}
-> +
-> +static uint64_t load_entry_64(AddressSpace *as, hwaddr addr,
-> +                              MemTxAttrs attrs, MemTxResult *result)
-> +{
-> +    return address_space_ldq(as, addr, attrs, result);
-> +}
-> +
-> +typedef union {
-> +    uint64_t raw;
-> +    struct {
-> +        uint32_t v:1;
-> +        uint32_t l:1;
-> +        uint32_t rsv1:5;
-> +        uint32_t perms:24;
-> +        uint32_t n:1;
-> +    } leaf32;
-> +    struct {
-> +        uint32_t v:1;
-> +        uint32_t l:1;
-> +        uint32_t rsv1:8;
-> +        uint32_t ppn:22;
-> +    } nonleaf32;
-> +    struct {
-> +        uint64_t v:1;
-> +        uint64_t l:1;
-> +        uint64_t rsv1:8;
-> +        uint64_t perms:48;
-> +        uint64_t rsv2:5;
-> +        uint64_t n:1;
-> +    } leaf64;
-> +    struct {
-> +        uint64_t v:1;
-> +        uint64_t l:1;
-> +        uint64_t rsv1:8;
-> +        uint64_t ppn:52;
-> +        uint64_t rsv2:1;
-> +        uint64_t n:1;
-> +    } nonleaf64;
-> +} mpte_union_t;
-> +
-> +static inline bool mpte_is_leaf(uint64_t mpte)
-> +{
-> +   return mpte & 0x2;
-> +}
-> +
-> +static inline bool mpte_is_valid(uint64_t mpte)
-> +{
-> +    return mpte & 0x1;
-> +}
-> +
-> +static uint64_t mpte_get_rsv(CPURISCVState *env, uint64_t mpte)
-> +{
-> +    RISCVMXL mxl = riscv_cpu_mxl(env);
-> +    bool leaf = mpte_is_leaf(mpte);
-> +    mpte_union_t *u = (mpte_union_t *)&mpte;
-> +
-> +    return (mxl == MXL_RV32)
-> +        ? (leaf ? u->leaf32.rsv1 : u->nonleaf32.rsv1)
-> +        : (leaf ? (u->leaf64.rsv1 << 5) | u->leaf64.rsv2
-> +                : (u->nonleaf64.rsv1 << 1) | u->nonleaf64.rsv2);
-> +}
-
-I suggest going a little easier on the ternary nesting:
-
-if (mxl == MXL_RV32) {
-     return leaf ? u->leaf32.rsv1 : u->nonleaf32.rsv1;
-}
-
-return leaf ? (u->leaf64.rsv1 << 5) | u->leaf64.rsv2
-             : (u->nonleaf64.rsv1 << 1) | u->nonleaf64.rsv2);
-
-
-Everything else LGTM.  Thanks,
-
-
-Daniel
-
-> +
-> +static uint64_t mpte_get_perms(CPURISCVState *env, uint64_t mpte)
-> +{
-> +    RISCVMXL mxl = riscv_cpu_mxl(env);
-> +    mpte_union_t *u = (mpte_union_t *)&mpte;
-> +
-> +    return (mxl == MXL_RV32) ? u->leaf32.perms : u->leaf64.perms;
-> +}
-> +
-> +static bool mpte_check_nlnapot(CPURISCVState *env, uint64_t mpte, bool *nlnapot)
-> +{
-> +    RISCVMXL mxl = riscv_cpu_mxl(env);
-> +    mpte_union_t *u = (mpte_union_t *)&mpte;
-> +    if (mxl == MXL_RV32) {
-> +        *nlnapot = false;
-> +        return true;
-> +    }
-> +    *nlnapot = u->nonleaf64.n;
-> +    return u->nonleaf64.n ? (u->nonleaf64.ppn & 0x1ff) == 0x100 : true;
-> +}
-> +
-> +static uint64_t mpte_get_ppn(CPURISCVState *env, uint64_t mpte, int pn,
-> +                             bool nlnapot)
-> +{
-> +    RISCVMXL mxl = riscv_cpu_mxl(env);
-> +    mpte_union_t *u = (mpte_union_t *)&mpte;
-> +
-> +    if (nlnapot) {
-> +        return deposit64(u->nonleaf64.ppn, 0, 9, pn & 0x1ff);
-> +    }
-> +    return (mxl == MXL_RV32) ? u->nonleaf32.ppn : u->nonleaf64.ppn;
-> +}
-> +
-> +/* Caller should assert i before call this interface */
-> +static int mpt_get_pn(hwaddr addr, int i, mpt_mode_t mode)
-> +{
-> +    if (mode == SMMTT34) {
-> +        return i == 0
-> +            ? extract64(addr, 15, 10)
-> +            : extract64(addr, 25, 9);
-> +    } else {
-> +        int offset = 16 + i * 9;
-> +        if ((mode == SMMTT64) && (i == 4)) {
-> +            return extract64(addr, offset, 12);
-> +        } else {
-> +            return extract64(addr, offset, 9);
-> +        }
-> +    }
-> +}
-> +
-> +/* Caller should assert i before call this interface */
-> +static int mpt_get_pi(hwaddr addr, int i, mpt_mode_t mode)
-> +{
-> +    if (mode == SMMTT34) {
-> +        return i == 0
-> +            ? extract64(addr, 12, 3)
-> +            : extract64(addr, 22, 3);
-> +    } else {
-> +        int offset = 16 + i * 9;
-> +        return extract64(addr, offset - 4, 4);
-> +    }
-> +}
-> +
-> +static bool smmpt_lookup(CPURISCVState *env, hwaddr addr, mpt_mode_t mode,
-> +                         mpt_access_t *allowed_access,
-> +                         MMUAccessType access_type)
-> +{
-> +    MemTxResult res;
-> +    MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
-> +    CPUState *cs = env_cpu(env);
-> +    hwaddr mpte_addr, base = (hwaddr)env->mptppn << PGSHIFT;
-> +    load_entry_fn *load_entry;
-> +    uint32_t mptesize, levels, xwr;
-> +    int pn, pi, pmp_prot, pmp_ret;
-> +    uint64_t mpte, perms;
-> +
-> +    switch (mode) {
-> +    case SMMTT34:
-> +        load_entry = &load_entry_32; levels = 2; mptesize = 4; break;
-> +    case SMMTT43:
-> +        load_entry = &load_entry_64; levels = 3; mptesize = 8; break;
-> +        break;
-> +    case SMMTT52:
-> +        load_entry = &load_entry_64; levels = 4; mptesize = 8; break;
-> +    case SMMTT64:
-> +        load_entry = &load_entry_64; levels = 5; mptesize = 8; break;
-> +    case SMMTTBARE:
-> +        *allowed_access = ACCESS_ALLOW_RWX;
-> +        return true;
-> +    default:
-> +        g_assert_not_reached();
-> +        break;
-> +    }
-> +    for (int i = levels - 1; i >= 0 ; i--) {
-> +        /* 1. Get pn[i] as the mpt index */
-> +        pn = mpt_get_pn(addr, i, mode);
-> +        /* 2. Get mpte address and get mpte */
-> +        mpte_addr = base + pn * mptesize;
-> +        pmp_ret = get_physical_address_pmp(env, &pmp_prot, mpte_addr,
-> +                                           mptesize, MMU_DATA_LOAD, PRV_M);
-> +        if (pmp_ret != TRANSLATE_SUCCESS) {
-> +            return false;
-> +        }
-> +        mpte = load_entry(cs->as, mpte_addr, attrs, &res);
-> +        /* 3. Check valid bit and reserve bits of mpte */
-> +        if (!mpte_is_valid(mpte) || mpte_get_rsv(env, mpte)) {
-> +            return false;
-> +        }
-> +
-> +        /* 4. Process non-leaf node */
-> +        if (!mpte_is_leaf(mpte)) {
-> +            bool nlnapot = false;
-> +            if (i == 0) {
-> +                return false;
-> +            }
-> +            if (!mpte_check_nlnapot(env, mpte, &nlnapot)) {
-> +                return false;
-> +            }
-> +            base = mpte_get_ppn(env, mpte, pn, nlnapot) << PGSHIFT;
-> +            continue;
-> +        }
-> +
-> +        /* 5. Process leaf node */
-> +        pi = mpt_get_pi(addr, i, mode);
-> +        perms = mpte_get_perms(env, mpte);
-> +        xwr = (perms >> (pi * 3)) & 0x7;
-> +        switch (xwr) {
-> +        case ACCESS_ALLOW_R:
-> +            *allowed_access = ACCESS_ALLOW_R;
-> +            return access_type == MMU_DATA_LOAD;
-> +        case ACCESS_ALLOW_X:
-> +            *allowed_access = ACCESS_ALLOW_X;
-> +            return access_type == MMU_INST_FETCH;
-> +        case ACCESS_ALLOW_RX:
-> +            *allowed_access = ACCESS_ALLOW_R;
-> +            return (access_type == MMU_DATA_LOAD ||
-> +                    access_type == MMU_INST_FETCH);
-> +        case ACCESS_ALLOW_RW:
-> +            *allowed_access = ACCESS_ALLOW_RW;
-> +            return (access_type == MMU_DATA_LOAD ||
-> +                    access_type == MMU_DATA_STORE);
-> +        case ACCESS_ALLOW_RWX:
-> +            *allowed_access = ACCESS_ALLOW_RWX;
-> +            return true;
-> +        default:
-> +            return false;
-> +        }
-> +    }
-> +    return false;
-> +}
-> +
-> +bool smmpt_check_access(CPURISCVState *env, hwaddr addr,
-> +                        mpt_access_t *allowed_access, MMUAccessType access_type)
-> +{
+> +    mpt_access_t mpt_access;
 > +    bool mpt_has_access;
-> +    mpt_mode_t mode = env->mptmode;
 > +
-> +    mpt_has_access = smmpt_lookup(env, addr, mode,
-> +                                  allowed_access, access_type);
-> +    return mpt_has_access;
-> +}
-> +
-> +/*
-> + * Convert MPT access to TLB page privilege.
-> + */
-> +int smmpt_access_to_page_prot(mpt_access_t mpt_access)
-> +{
-> +    int prot;
-> +    switch (mpt_access) {
-> +    case ACCESS_ALLOW_R:
-> +        prot = PAGE_READ;
-> +        break;
-> +    case ACCESS_ALLOW_X:
-> +        prot = PAGE_EXEC;
-> +        break;
-> +    case ACCESS_ALLOW_RX:
-> +        prot = PAGE_READ | PAGE_EXEC;
-> +        break;
-> +    case ACCESS_ALLOW_RW:
-> +        prot = PAGE_READ | PAGE_WRITE;
-> +        break;
-> +    case ACCESS_ALLOW_RWX:
-> +        prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
-> +        break;
-> +    default:
-> +        prot = 0;
-> +        break;
+> +    /*
+> +     * If the extension is not supported or the mmpt.mode is Bare,
+> +     * there is no protection, return success.
+> +     */
+> +    if (!riscv_cpu_cfg(env)->ext_smmpt || env->mptmode == 0) {
+> +        *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
+> +        return TRANSLATE_SUCCESS;
 > +    }
 > +
-> +    return prot;
+> +    /*
+> +     * MPT is checked for all accesses to physical memory, unless the
+> +     * effective privilege mode is M.
+> +     *
+> +     * Data accesses in M-mode when the MPRV bit in mstatus is set and
+> +     * the MPP field in mstatus contains S or U are subject to MPT checks.
+> +     *
+> +     * In riscv_env_mmu_index, The MPRV and MPP bits are already checked and
+> +     * encoded to mmu_idx, So we do not need to check it here.
+> +     */
+> +    if (mode == PRV_M) {
+> +        *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
+> +        return TRANSLATE_SUCCESS;
+> +    }
+> +
+> +    mpt_has_access = smmpt_check_access(env, addr,
+> +                                      &mpt_access, access_type);
+> +    if (!mpt_has_access) {
+> +        *prot = 0;
+> +        return TRANSLATE_MPT_FAIL;
+> +    }
+> +
+> +    *prot = smmpt_access_to_page_prot(mpt_access);
+> +
+> +    return TRANSLATE_SUCCESS;
 > +}
-> diff --git a/target/riscv/riscv_smmpt.h b/target/riscv/riscv_smmpt.h
-> new file mode 100644
-> index 0000000000..d5797c6168
-> --- /dev/null
-> +++ b/target/riscv/riscv_smmpt.h
-> @@ -0,0 +1,38 @@
-> +/*
-> + * QEMU RISC-V Smmpt (Memory Protection Table)
-> + *
-> + * Copyright (c) 2024 Alibaba Group. All rights reserved.
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
 > +
-> +#ifndef RISCV_SMPT_H
-> +#define RISCV_SMPT_H
+>   /*
+>    * get_physical_address - get the physical address for this virtual address
+>    *
+> @@ -1356,6 +1409,13 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>               pte_addr = base + idx * ptesize;
+>           }
+>   
+> +        int mpt_prot;
+> +        int mpt_ret = get_physical_address_mpt(env, &mpt_prot, pte_addr,
+> +                                               MMU_DATA_LOAD, PRV_S);
+> +        if (mpt_ret != TRANSLATE_SUCCESS) {
+> +            return TRANSLATE_MPT_FAIL;
+> +        }
 > +
-> +#include "cpu.h"
-> +#include "exec/mmu-access-type.h"
-> +
-> +typedef enum {
-> +    SMMTTBARE = 0,
-> +    SMMTT34   = 1,
-> +    SMMTT43   = 2,
-> +    SMMTT52   = 3,
-> +    SMMTT64   = 4,
-> +    SMMTTMAX
-> +} mpt_mode_t;
-> +
-> +typedef enum {
-> +    ACCESS_ALLOW_R = 0b001,
-> +    ACCESS_ALLOW_X = 0b100,
-> +    ACCESS_ALLOW_RX = 0b101 ,
-> +    ACCESS_ALLOW_RW = 0b011,
-> +    ACCESS_ALLOW_RWX = 0b111,
-> +} mpt_access_t;
-> +
-> +
-> +int smmpt_access_to_page_prot(mpt_access_t mpt_access);
-> +bool smmpt_check_access(CPURISCVState *env, hwaddr addr,
-> +                        mpt_access_t *allowed_access,
-> +                        MMUAccessType access_type);
-> +
-> +#endif
+>           int pmp_prot;
+>           int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
+>                                                  sxlen_bytes,
+> @@ -1766,7 +1826,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>       CPURISCVState *env = &cpu->env;
+>       vaddr im_address;
+>       hwaddr pa = 0;
+> -    int prot, prot2, prot_pmp;
+> +    int prot, prot2, prot_pmp, mpt_prot;
+>       bool pmp_violation = false;
+>       bool first_stage_error = true;
+>       bool two_stage_lookup = mmuidx_2stage(mmu_idx);
+> @@ -1820,6 +1880,13 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>               prot &= prot2;
+>   
+>               if (ret == TRANSLATE_SUCCESS) {
+> +                ret = get_physical_address_mpt(env, &mpt_prot, pa,
+> +                                               access_type, mode);
+> +                qemu_log_mask(CPU_LOG_MMU,
+> +                              "%s MPT address=" HWADDR_FMT_plx " ret %d prot"
+> +                              " %d\n",
+> +                              __func__, pa, ret, mpt_prot);
+> +                prot &= mpt_prot;
+>                   ret = get_physical_address_pmp(env, &prot_pmp, pa,
+>                                                  size, access_type, mode);
+>                   tlb_size = pmp_get_tlb_size(env, pa);
+> @@ -1855,6 +1922,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                         __func__, address, ret, pa, prot);
+>   
+>           if (ret == TRANSLATE_SUCCESS) {
+> +            ret = get_physical_address_mpt(env, &mpt_prot, pa,
+> +                                           access_type, mode);
+> +            qemu_log_mask(CPU_LOG_MMU,
+> +                          "%s MPT address=" HWADDR_FMT_plx " ret %d prot %d\n",
+> +                          __func__, pa, ret, mpt_prot);
+> +            prot &= mpt_prot;
+>               ret = get_physical_address_pmp(env, &prot_pmp, pa,
+>                                              size, access_type, mode);
+>               tlb_size = pmp_get_tlb_size(env, pa);
 
 
