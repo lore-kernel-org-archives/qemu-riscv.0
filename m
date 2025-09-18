@@ -4,97 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47BD7CAC59A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Sep 2025 11:56:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCC41CAC5A0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Sep 2025 12:21:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uzDFQ-0007J6-FB; Thu, 18 Sep 2025 07:56:24 -0400
+	id 1uzDd7-0000Fo-Ke; Thu, 18 Sep 2025 08:20:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uzDFN-0007Bs-QY
- for qemu-riscv@nongnu.org; Thu, 18 Sep 2025 07:56:22 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1uzDFL-0004os-BH
- for qemu-riscv@nongnu.org; Thu, 18 Sep 2025 07:56:21 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-45b4d89217aso6695385e9.2
- for <qemu-riscv@nongnu.org>; Thu, 18 Sep 2025 04:56:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758196575; x=1758801375; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ea4dGLZwkNAAjB6aRS/oVWq8L6qzJHadECqmXARy89A=;
- b=KPx+iMM9ZQEGQeTuwDW/WJ63Z+mwphiSCu7LeFClH52pn4EBG4A+6aBjlDd8YTt8X4
- WeJoMWywqANbGV0QsbEBuAo3j7H+B8Y64fLW9PEupr7kXUPqDJrBNXBvkKhedmdDdpTj
- witkmlJSn7mqk+DvCtZqlPYx7/BxNKRjWCdEueVkqskvnOBsgk7EGQ1dSKUI96mjtwU7
- HzC+Rcp1fc2DjBGRCJehLpUH0ZDR4damy4AB3tev7rPlO3FcN2ty7NYWdrM6/dSAgKcG
- dUf/33xyMhwaD6Mvapf7pgxPMAOu/qUMZ1wUQzwTOkCFl5iH6e2MEURrVUbyWYkSUIQC
- MjuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758196575; x=1758801375;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ea4dGLZwkNAAjB6aRS/oVWq8L6qzJHadECqmXARy89A=;
- b=X52MzMxbpoi1onKsS25G0+RYEpZ6Mtkf4nEHI0Ga5xtsgzqfYhGFQatkRYrnj21WeU
- 1EsOZHpX67Dj8eSd/EwvF0zzYCO1u3f0hcpq08mk2AH8rAYuE0QTAYC4cXX7ELaAUsIp
- itBifmBiivnIPpkxLQNaHz5N9eJbHh5Y92ckGeALacqGL8W7pPsnXfyEXmc6uL8OErZA
- lHtd5PdnrXhAWrSUFbcRU1y7cbDagWE358SvzQ2erJD7/teTnNNpMSPEveObvLIqGJNq
- 3vt5E+ExjdUhQ6aDQepSU74v/04ncYTaaZx5Mq/q23EJ8pbbu9bM0wL6io+6hVNsdneo
- q48g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV0Yv0ndvklsC/B+8pt24xknK56bPZhoGdm7Z/BCyEV4H1BHEI0d6JuEvKGMNPc4XOdtkQevdTBH2mj@nongnu.org
-X-Gm-Message-State: AOJu0YxdmIHXt/B0P7JnIHc1XnemaTYAckZatO2kh0pVSCG9vDddcDyS
- AKQR+/0M3JBMbV/ITbulA/QeWL+6D65ZuAVrleA7ZCIPzULJh9WAfaOVbJxHSeXa2vg=
-X-Gm-Gg: ASbGnctM0lGHpieu0eIHzoL/ihuDMp8Ekf+OLgb/Z8dDD+IzM8YB+IO7gWSVNu6ztae
- Mq5A3iegAfbzOOVMUDi1CV36mjL1WhSJsu9yZQMdRJnpOmXkeA/3LZaryZfBtMw0BYamb1crIjW
- SFEA5fqNS+sOwPxpzFXd1BKVbUsnBCGAwxHunZolhh5s+6LPyiQzYNgiKU/HaFl+i7KaV71PzQF
- WYNFZCdA92qJ0fsBDbeLjE/Qx0HFeO8hk84volapwqMfLj+C5qYEZzA8VH8T0oieZDp952IKJpX
- OaGKoyNPXBC52E02+p9Onip804cCu06+owFvGCyGZV73wi0o5zaHtD1PVDbjiCsE/ST+gDOPYR3
- XXITH5yYXmoi0fYUKnLlGN56m/M5cKMTNDWx7NC8iYQ==
-X-Google-Smtp-Source: AGHT+IGVamkNTcu9utD5pHxzuFfZ+jhfrZ9TwzK/0zXfYIby6q9QLkSPedCiw9zxurwYCpq6P6JcTQ==
-X-Received: by 2002:a05:600c:1991:b0:45f:2869:c3b2 with SMTP id
- 5b1f17b1804b1-462072d723emr55655395e9.33.1758196574857; 
- Thu, 18 Sep 2025 04:56:14 -0700 (PDT)
-Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-464f16272e4sm43170925e9.9.2025.09.18.04.56.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Sep 2025 04:56:14 -0700 (PDT)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id F02FC5F8AC;
- Thu, 18 Sep 2025 12:56:12 +0100 (BST)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Cc: qemu-devel@nongnu.org,  qemu-arm@nongnu.org,  Alistair Francis
- <alistair.francis@wdc.com>,  Weiwei Li <liwei1518@gmail.com>,  Palmer
- Dabbelt <palmer@dabbelt.com>,  qemu-riscv@nongnu.org,
- richard.henderson@linaro.org,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  philmd@linaro.org,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Peter Maydell <peter.maydell@linaro.org>
-Subject: Re: [PATCH v4 00/12] single-binary: compile once semihosting
-In-Reply-To: <20250822150058.18692-1-pierrick.bouvier@linaro.org> (Pierrick
- Bouvier's message of "Fri, 22 Aug 2025 08:00:46 -0700")
-References: <20250822150058.18692-1-pierrick.bouvier@linaro.org>
-User-Agent: mu4e 1.12.12; emacs 30.1
-Date: Thu, 18 Sep 2025 12:56:12 +0100
-Message-ID: <87ms6sm0tf.fsf@draig.linaro.org>
+ (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
+ id 1uzDcr-0000Bi-4d; Thu, 18 Sep 2025 08:20:37 -0400
+Received: from www3579.sakura.ne.jp ([49.212.243.89])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
+ id 1uzDcl-0008KF-Ud; Thu, 18 Sep 2025 08:20:35 -0400
+Received: from [133.11.54.205] (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
+ (authenticated bits=0)
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 58ICGpZG015138
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Thu, 18 Sep 2025 21:16:51 +0900 (JST)
+ (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=3gRH8iNZdxrVCMmHBiEB8svHVHUJgh9SBiCdxh/rErs=; 
+ c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+ h=Message-ID:Date:Subject:To:From;
+ s=rs20250326; t=1758197812; v=1;
+ b=ncih+7Z+Iq77ZtsPGIxVnHq3UyoofFR20q9ukLu6ggyhvkeM45o26pRuiRlZ1ygh
+ bvqO9pqoDi51Bf469GDustGnkMvrOEYx4wq8iBHvNa3HVx7dKZYyAnOf1hAOhiZ0
+ az4UCk701ZUURs8HqyU+Z0Y9TPDhCGVp08jn/fEGcCYTn+FZFPz5Elk6K/jRsBiL
+ osyUPH7CV8Rke50bdhKV1bwJxrKeDaiy3Sh9hDX+K1T8ORUPQi3kiDCUYviJNCSY
+ pAj32hWZ36YLEvwHNuKual9bk3SHAzSByqEF72lW1YRUpFE4CjJn3yUuSdJZniJ7
+ O6E2XhUYZW2FNZ+4108QOg==
+Message-ID: <819cdc32-23f4-4517-bc67-600d3ecce133@rsg.ci.i.u-tokyo.ac.jp>
+Date: Thu, 18 Sep 2025 21:16:51 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 10/35] hw/i386: QOM-ify AddressSpace
+To: CLEMENT MATHIEU--DRIF <clement.mathieu--drif@eviden.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
+ <clg@kaod.org>,
+ Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>,
+ Jamin Lin <jamin_lin@aspeedtech.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>,
+ Joel Stanley <joel@jms.id.au>, Eric Auger <eric.auger@redhat.com>,
+ Helge Deller <deller@gmx.de>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+ Aleksandar Rikalo <arikalo@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Ninad Palsule <ninad@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Jason Wang <jasowang@redhat.com>, Yi Liu <yi.l.liu@intel.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Aditya Gupta <adityag@linux.ibm.com>,
+ Gautam Menghani <gautam@linux.ibm.com>, Song Gao <gaosong@loongson.cn>,
+ Bibo Mao <maobibo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Jonathan Cameron <jonathan.cameron@huawei.com>,
+ Fan Ni <fan.ni@samsung.com>, David Hildenbrand <david@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>,
+ Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, Laurent Vivier <laurent@vivier.eu>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, BALATON Zoltan <balaton@eik.bme.hu>,
+ Bernhard Beschow <shentey@gmail.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ Jagannathan Raman <jag.raman@oracle.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Fam Zheng <fam@euphon.net>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Peter Xu <peterx@redhat.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
+ "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>,
+ "qemu-block@nongnu.org" <qemu-block@nongnu.org>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>,
+ Stefano Garzarella <sgarzare@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+ <20250917-qom-v1-10-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+ <d571d1aa47ddbf466e9e8edf1cbb7d29f3bb0a83.camel@eviden.com>
+Content-Language: en-US
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <d571d1aa47ddbf466e9e8edf1cbb7d29f3bb0a83.camel@eviden.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=49.212.243.89;
+ envelope-from=odaki@rsg.ci.i.u-tokyo.ac.jp; helo=www3579.sakura.ne.jp
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,16 +129,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Pierrick Bouvier <pierrick.bouvier@linaro.org> writes:
+On 2025/09/18 14:53, CLEMENT MATHIEU--DRIF wrote:
+> Hi Akihiko,
+> 
+> Why do we change the naming scheme in amd-vi?
+> Did you have any issue with the old one?
 
-> This series compiles once semihosting files in system mode.
-> The most complicated file was semihosting/arm-compat-semi.c, which was ca=
-refully
-> cleaned in easy to understand steps.
+QOM-ifying AddressSpaces moves the responsibility to create distinct 
+identifiers for debug outputs from the callers of address_space_init() 
+to AddressSpaces. QOM-ified AddressSpaces can create unique, unambigous 
+identifiers by inspecting the QOM hierarchy and cover all devices, not 
+just amd-iommu.
 
-Queued to semihosting/next, thanks.
+> 
+> If we decide not to stick to the old one, maybe splitting the slot and function would be convenient.
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+Strictly speaking such a change is an out-of-scope of this patch, but it 
+won't hurt to have it. I'll make the change with the next version.
+
+Regards,
+Akihiko Odaki
 
