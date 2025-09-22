@@ -4,90 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D4ADCAC5A7
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 11:41:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82F9ECAC5A7
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 11:53:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v0evT-0006Lg-2W; Mon, 22 Sep 2025 07:41:50 -0400
+	id 1v0f5x-0002WL-JT; Mon, 22 Sep 2025 07:52:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1v0evB-0006KO-OC
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 07:41:31 -0400
-Received: from mail-yx1-xb136.google.com ([2607:f8b0:4864:20::b136])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v0f5m-0002T0-Bl
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 07:52:27 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1v0ev0-0003s6-9W
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 07:41:23 -0400
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-63470a6f339so2198456d50.0
- for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 04:41:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v0f5d-0006eF-KN
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 07:52:26 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-45dcff2f313so25481755e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 04:52:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1758541275; x=1759146075; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
+ d=linaro.org; s=google; t=1758541930; x=1759146730; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=WuLGT7NbBAiH+gR9lGV3KijyooEFYXSa7Esj2mlztW0=;
- b=RXdeB5AfM1xrNxhlJZ2dMrIg8TAnnRv410CYxRjXS+7Sx28CGi0kYSbU3TEiP2Sr+D
- rxravebgD6zoRcd0P1O4NtSZ2oDHrWy5Fzb6+zcSsXXEdfoLkh9J6p7aYVfr/THu7x0U
- oQYSQ5ksEdQjLIJqa73CI6w1JTiUKyofMqY9GVoO1PEUSOd5frXfVgwsMg4p6ViRXHcd
- oXs0AH1aYrAtwmFZNME413OBMhchRGSt/C4cj170MYCOGWRITI981JeAUepoTrbpZyGE
- hSKrofZFEsw1BxT/zEK52yDAhV1SAhao9X6CqKpegQN6O4IjxzosNUR6vhPJFTiXQs5J
- RUFQ==
+ bh=xzeOzFV6f9ebg2fJBHj6nu9ySkmpD0tvjZMjaRHj4AA=;
+ b=u6o+03ylm1kfE6eM8B0/qMdqmeJmnVV4lO/3X4hxEQJsrA7v8oToFLMHV6V0mnKsMS
+ /EaxYlyPnTEnsCxgT3Gb5gHRAwZu1yuka1nUYoJcZx6FaYkuDOcvlpTjVa++w8pr1hMI
+ 5L7ik6mWQpTzPqFshTHpVDga2tGrwbMuccH4JuwKIDeF+lcSgVqtVHIEAHi/GTTeAOxn
+ 08vElgTYsKRcMDDjsLluIY90tF1aaH+05hTsgAJ1FT+SFbGqDVPvZqe2akXngkWLadCQ
+ cLGGcPSgPXFe7le+/venZltrBvOGofU7WtSoefg/AuhrKUDAEPEaDICjV3UmDRUYh2Y/
+ aKQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758541275; x=1759146075;
- h=content-transfer-encoding:in-reply-to:content-language:from
+ d=1e100.net; s=20230601; t=1758541930; x=1759146730;
+ h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WuLGT7NbBAiH+gR9lGV3KijyooEFYXSa7Esj2mlztW0=;
- b=IjVyB8hZPWdu4asrUcT1dBWlJJxUubsZnApNpv/Ea9dapS8WmREw0cjbFuPRf5vafU
- aVSIivHMw8mttDGGsA0srohT/8dLn2sSbe3hzxI6/oAcmK9o9Bsuhy2lQLPGki0o36ek
- JVIvuvW9FeqyuPo2dylaevVD1ZntWH9BjbDmxgVZLwvqQfAAZUBV14vdItUGR6RL1TL0
- dv9twScm3J68jyWJzPPz3KhMliOpVDYvWtbjoEwSKIicg4HPgCIjQTyfs1DkiM7MLU/+
- 3nDvjPIUV/A/n5oXMkA5uzkrBL96ompjNbj5LtzVnEOuX5GzLdTF54eM74ABWB3pykgA
- a6hg==
+ bh=xzeOzFV6f9ebg2fJBHj6nu9ySkmpD0tvjZMjaRHj4AA=;
+ b=T8umAevi5JP4A0PGIP9mSmHXgkq61kJ0akpk5n5C59exlBWzvGMSfv1xKQY+A1+Rhl
+ 9buSz9FF9DvGyvzCWomL1L83vwBkicBc5huRSLJfLcv5Qemc3+s56R+s/qeyBIMyehpD
+ 7qThkMk5+xTZIkZdsUTSk1iqvLBoJ5KBLexDNVncBAOznTBote/+5ypwSymEP/dxsD55
+ 2UNjYoYWb/m11syZW6nTq+LVwvIIrSYUOMNBBva+1v9gCftbm1RKzqgacWmrPd1HZDJy
+ rB+nLELZ75O9192G6GFgLCAlAHhB3W6u7D24KSPMgwZ1D2wsdPPwzhIXQyg8JdHUq9tH
+ rt7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWjEIt2A4dgMpY2DFwnNokBIaAhPF0KGklpm+bkJqfc1/oJb7HoQGEaKvJhaVsWRea/DUSOS93AbGjp@nongnu.org
-X-Gm-Message-State: AOJu0YyLkeIFzsrJ+R5y8o1lzoSFnr58YL7AAckNGmMyw5dAi/gZo0eb
- EvEa2XOV5O0xWZuexc+YCjt8usigkAGcVyhrTU6n8LrMbDbToQ8SOiEPYDnGGpPYa3o=
-X-Gm-Gg: ASbGncvEPpQlyB7Teub8zosfoZt1dlbToOOpY/sH1x4TRIqcdQ49gCCzHwuRXCzmNW8
- onB49y0WLh5jlCZ9DI7Iz6RPALNj29Hro/0EtW2R3/vaUE3UkdizxQQZQUjyMbbdlpQFUKv2z9O
- 7GGgKaJ07Tb1TZ25xxrblKD06h1IePG054f9fPXw11hWptU3BcCbC2XJccPkPTkLXv8Iy3uCJWP
- i0j2K+A5yBot5yPviVtU/zcFid5oj0X4X3nP6oQtaT/RaxVHoVp+HZgze0lUkIMn6M5lNnNyfpk
- 5E//G6Ygw+DdL4sv4RCIs3InhGZZB0en93cvMU/wGoPFhuwSfnYfM6+P0Ip6TFrWYx5ROR17Ai9
- 2SNtXu8uOsFIKJ8sf2ekXFe3Pqw6m5qJF4cH1lMK5AN3+
-X-Google-Smtp-Source: AGHT+IHrxfUGMtywOleIxjQ+fw06wG4BwagZ+Zs1X6c/wGSkssXPAxiZxIyjzIamyRqGZ4YS06BUjg==
-X-Received: by 2002:a05:690c:d0d:b0:730:5445:4b2a with SMTP id
- 00721157ae682-73d3caa1e2emr110385597b3.45.1758541275205; 
- Mon, 22 Sep 2025 04:41:15 -0700 (PDT)
-Received: from [192.168.68.110] ([189.79.22.64])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-74612b99365sm16383977b3.71.2025.09.22.04.41.12
+ AJvYcCVtNkqivt5Wdph1W+XaM7oqtvQtHdCou/j7nQfLDClcICvZwWsjUwEK/75/rAr9Im6YieMF23a9eh/+@nongnu.org
+X-Gm-Message-State: AOJu0YxLY1GeXROTY7rGEzjty+DMifpbXYZVPs3UOduepCuZo8XIUS6C
+ wTi4qNonSKCGiMT6vMIQoe04f/RcQ4m44VpptDhk+o6RDGygEmb7JKYUSk6qPEZZCDI=
+X-Gm-Gg: ASbGncsDSoSo0MUOSi0tX4Hz3FpRBlLoT5+/cKdt9aUpncTgLWtcoNoRxrewd3JRmiv
+ CdPMPJDw1yzx1QF2AxESi4pWeXWK373i07+v5eW8ifGSobjx3ma9vh9159JnBkkZz8tZIvpEQba
+ xiWY2KnvwOZUwgl2Xw3NKIaimX1lSpHiHEUypSYKnv5tQsQlf+BZwnFSwaaH+AzR5OyCM4+Xfut
+ uhJAG3aZ77HNqkpvhwQSqzWM0L/VHjylEP0CKCPJURBP3TPHI0ZsbFvyULu9pSGx0XQy0baYrNP
+ XDj5d4xHreWqs8QAE7k1jtFVpU8aOKvyzsmAf00yLsmOaRRcA9ls8MYeXNFCQq+uj4sku9Zn8Ap
+ 6J29frisR9GbvXVj4bU4qXv/Xv5VN7gfT/8qKqxPtIXl4KM7rye4MAf6DxSE4bsHTnQ==
+X-Google-Smtp-Source: AGHT+IGgw0LqDQ7r1/T6odtz9zB5wIBDnC9BRKdDP32gffJkEcsCuSirEuYsRqGQb7RV+mikDCVgtQ==
+X-Received: by 2002:a05:600c:630e:b0:46c:9e81:ad0 with SMTP id
+ 5b1f17b1804b1-46c9e904ffamr37242405e9.0.1758541929709; 
+ Mon, 22 Sep 2025 04:52:09 -0700 (PDT)
+Received: from [192.168.69.221] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-464f527d6cdsm226382965e9.12.2025.09.22.04.52.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Sep 2025 04:41:13 -0700 (PDT)
-Message-ID: <1128d12f-c518-430d-b90a-8e628ac69c5e@ventanamicro.com>
-Date: Mon, 22 Sep 2025 08:41:09 -0300
+ Mon, 22 Sep 2025 04:52:09 -0700 (PDT)
+Message-ID: <dc5cf3fc-0e1d-41e1-bbfa-a3451eee1741@linaro.org>
+Date: Mon, 22 Sep 2025 13:52:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 3/8] target/riscv: rvv: Add new VTYPE CSR field -
- altfmt
-To: Max Chou <max.chou@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20250915084037.1816893-1-max.chou@sifive.com>
- <20250915084037.1816893-4-max.chou@sifive.com>
- <26d72d8e-5e58-4a04-865c-34f6094e74e9@ventanamicro.com>
- <CANiaA1tzoM+y8vcFUdFaP8Po8Af2AGy_1gyuHzzPo8sG9rJ+Pg@mail.gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: Re: [PATCH 11/25] semihosting/arm-compat-semi: eradicate
+ sizeof(target_ulong)
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Iooss <erdnaxe@crans.org>, 
+ Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Thomas Huth <thuth@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-arm@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+References: <20250922093711.2768983-1-alex.bennee@linaro.org>
+ <20250922093711.2768983-12-alex.bennee@linaro.org>
 Content-Language: en-US
-In-Reply-To: <CANiaA1tzoM+y8vcFUdFaP8Po8Af2AGy_1gyuHzzPo8sG9rJ+Pg@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20250922093711.2768983-12-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b136;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-yx1-xb136.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -109,113 +111,19 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 22/9/25 11:36, Alex Bennée wrote:
+> From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> 
+> No semantic change.
+> 
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> Message-ID: <20250822150058.18692-9-pierrick.bouvier@linaro.org>
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> ---
+>   semihosting/arm-compat-semi.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 
-
-On 9/22/25 5:03 AM, Max Chou wrote:
-> On Wed, Sep 17, 2025 at 9:57 PM Daniel Henrique Barboza <dbarboza@ventanamicro.com <mailto:dbarboza@ventanamicro.com>> wrote:
-> 
->     Is this correct? The 'reserved' value you're returning when the new extension is enabled
->     is the original  value from vsetvl:
-> 
->      > +    if (riscv_cpu_cfg(env)->ext_zvfbfa) {
->      > +        reserved = vtype & MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
->      > +                                           xlen - 1 - R_VTYPE_RESERVED_SHIFT);
-> 
->     The original val you removed:
-> 
->      > -    target_ulong reserved = s2 &
->      > -                            MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
->      > -                                            xlen - 1 - R_VTYPE_RESERVED_SHIFT);
-> 
-> 
->     To preserve the existing behavior I believe you want to negate the conditional:
-> 
->      > +    if (!riscv_cpu_cfg(env)->ext_zvfbfa) {
->      > +        reserved = vtype & MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
->      > +                                           xlen - 1 - R_VTYPE_RESERVED_SHIFT);
->      > +    } else {
->      > +        reserved = vtype & MAKE_64BIT_MASK(R_VTYPE_ALTFMT_SHIFT,
->      > +                                           xlen - 1 - R_VTYPE_ALTFMT_SHIFT);
->      > +    }
-> 
-> 
->     i.e. return the existing 'reserved' val if the new extension is absent, otherwise return
->     the new val.
-> 
-> 
->     Thanks,
-> 
->     Daniel
-> 
-> Hi Daniel,
-> 
-> 
-> Yes, I believe that’s correct. After enabling the Zvfbfa extension, the reserved field in the VTYPE CSR depends on the extension as follows:
-> 
->   * When Zvfbfa is enabled:
->       o The reserved field in the VTYPE CSR: from bit 9 (VTYPE_RESERVED) to XLEN
->   * When Zvfbfa is not enabled:
->       o The reserved field in the VTYPE CSR: from bit 8 (VTYPE_ALTFMT) to XLEN
-> 
-> 
-> PS: This commit also modifies the definition of VTYPE_RESERVED.
-> 
-> Because the EDIV extension is not planned to be part of the base V extension. Therefore, this commit modifies the default RESERVED field definition.
-> 
-> 
-> Reference: https://github.com/riscvarchive/riscv-v-spec/blob/master/ediv.adoc <https://github.com/riscvarchive/riscv-v-spec/blob/master/ediv.adoc>
-
-
-Thanks for the info. That makes sense now. I suggest mentioning in the commit
-msg that VTYPE_RESERVED was changed and the default value without Zvfbfa is
-now different.
-
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-> 
-> 
-> Thanks,
-> 
-> Max
-> 
-> 
->      > +
->      > +    return reserved;
->      > +}
->      > +
->      >   target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
->      >                               target_ulong s2, target_ulong x0)
->      >   {
->      > @@ -41,12 +57,9 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
->      >       uint64_t vlmul = FIELD_EX64(s2, VTYPE, VLMUL);
->      >       uint8_t vsew = FIELD_EX64(s2, VTYPE, VSEW);
->      >       uint16_t sew = 8 << vsew;
->      > -    uint8_t ediv = FIELD_EX64(s2, VTYPE, VEDIV);
->      > +    uint8_t altfmt = FIELD_EX64(s2, VTYPE, ALTFMT);
->      >       int xlen = riscv_cpu_xlen(env);
->      >       bool vill = (s2 >> (xlen - 1)) & 0x1;
->      > -    target_ulong reserved = s2 &
->      > -                            MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
->      > -                                            xlen - 1 - R_VTYPE_RESERVED_SHIFT);
->      >       uint16_t vlen = cpu->cfg.vlenb << 3;
->      >       int8_t lmul;
->      >
->      > @@ -63,7 +76,13 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
->      >           }
->      >       }
->      >
->      > -    if ((sew > cpu->cfg.elen) || vill || (ediv != 0) || (reserved != 0)) {
->      > +    if (cpu->cfg.ext_zvfbfa) {
->      > +        if (altfmt == 1 && vsew >= MO_32) {
->      > +            vill = true;
->      > +        }
->      > +    }
->      > +
->      > +    if ((sew > cpu->cfg.elen) || vill || (vtype_reserved(env, s2) != 0)) {
->      >           /* only set vill bit. */
->      >           env->vill = 1;
->      >           env->vtype = 0;
-> 
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
