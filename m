@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29F5ECAC5AC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 09:39:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30DA4CAC5A7
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 09:39:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v0d0W-0002z4-W2; Mon, 22 Sep 2025 05:38:53 -0400
+	id 1v0d10-0004uk-3F; Mon, 22 Sep 2025 05:39:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0czA-00022C-U3
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:37:31 -0400
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ id 1v0czy-0002ZA-Bk
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:38:26 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0cz3-0000cT-5U
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:37:28 -0400
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3f2cf786abeso1425984f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 02:37:18 -0700 (PDT)
+ id 1v0czI-0000hS-3Q
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:38:17 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-45f31adf368so29198615e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 02:37:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758533834; x=1759138634; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DY0XmkUw/px6He2/QViLhoiKimIF9WS2BOzUGcig47M=;
- b=PRJhJXsQuRNVUX4enWK7NFbkSDSg0iemfSk5i549omoA0IaoiJNnV0MVuPyfBse8Pg
- Tov9TRIezI/UsJvSCq1S5ujaiIUfjr58Bzq3AitgEFizGBZU4NHnKqoajYvz36DMGITu
- 8mHCiLFZC1AYpxUEy1tMVTWyvw2Za0houDPMRac7MenoHmiAIhQReXpQwuiw1sGghjns
- 6bthUT/WIUU16q4FwLvrhCOdRBBxPB8MJftFMUouQQxkJkRuv6QkKVNlPH0saItxZA4T
- ANarUY00AuZ9gRRl8gtxoS61WX3PKbvR2mNsnUr21+NNozXeR+7KxJ0xqmXo0HBaC4P0
- u6Lg==
+ d=linaro.org; s=google; t=1758533849; x=1759138649; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+a3CcA7uLenSBTz2VMDBFRvLVHxH8fqsvjG7VIzS+i8=;
+ b=slf88DH95zqEECNUrRazB52Lmp233bhb3NvOSOT1VGZiC85DbYfwDBp1g/HefOPaGq
+ naJiwha6eI/I8WBSTo11XSsWMH4yFQ15/mZDoXbW+lokAs+uD0wEuWUtjs47v9uamL3/
+ 0fOlAPKvsxpmBf/u9VFx9yAyCo7ZUweLyRbcibNnORX7qGYAXIYG+saSHqucqL3k1u1/
+ 6FnHOn7Rd3IC0r7zYe0btLOsPDrYPhE0y+mfy76uiY3lNzk7Yk/m1N9xkP/MUsSCXFYW
+ 18nYAWx/8KLEI6RvXdkswsqeyyIWIHCsyBLSZFGU7KInWSUHrPgBRIy7k33fb0iQn0A2
+ Pfvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758533834; x=1759138634;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DY0XmkUw/px6He2/QViLhoiKimIF9WS2BOzUGcig47M=;
- b=qY6sspfeBcF58idl1DeOAxdHNdYoT6ZNUdymxtQTaw+KbckJj3qo8SlPwYh71RBvVh
- fbGj+GExPU1eciyNVg9JRD8fy0+0FVz1g2JDoZCexpF6+nlmVpkVNZlLVSVrblRKWxz2
- lD+RNy2QmxOqGm/V40BCdXKdHbx+UilArtHEFEPx4aKXYZVb8/JWYKsUz657XjS4e6vL
- 4n1SE5Yqk+8zFm8tCP6aSl9Ht7LDhKMlZyMMTEWb5ekCnrhoSDeNcT9yffenZBvHpYNm
- 6QOH+AFDt0WYQo2ulZZCuuepQ61d14s2dRtQ55rTpdJOa9RkSVURddyDQJMKBIISKL5a
- 70+A==
+ d=1e100.net; s=20230601; t=1758533849; x=1759138649;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+a3CcA7uLenSBTz2VMDBFRvLVHxH8fqsvjG7VIzS+i8=;
+ b=HAkjB7mn9nf6vT7xztBCMBmDs3/7i4K9/tR1lBjigPKdG+o5QkR0RrwFnj1aBuPowT
+ GxfjtNWM39HMvalwtSe8lBtPH6FKo4ioNGZY0nYe7MnwIxGarisTpEiL5aCfKJu2hSu5
+ Mw+lrh/wouYXdy3PVmQSYlXLP9cGDc3ScqkVrX+ipJ40JK5lZmhzi9ejyTmTZqHX9vUf
+ IvE3DF60yoslsGxrF+ky5JHRcR2RyDPKhR7OACiwXgJo5pV0z+rXFtqnic+x3v2Cp+nt
+ 3AcWTb6Rbh+dbm6JxcjvPyoF3ZwyppHHaMO6GYFjkTZdesBsoNb28BInkdTD4/W1ixUY
+ LPGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWfAIzcvtBU0ZDmZ8UWEfgVBJXr4lKPIHnN+FjwLqEr6AFbGaNihs1PJQ6s+tGBMOmt6oBvmwAXpwOB@nongnu.org
-X-Gm-Message-State: AOJu0Ywj7CTs22ao/qd0IOBw7RrDVVRtqiJ5CcpEzsdBf9x5XFAGVEUV
- pa1U0UmCyP0R4QB5uwvOklgVFJuo3Vz63nSyMvsXcJ1OflwxVk5ZaCd2YIr3Lt7X3sk=
-X-Gm-Gg: ASbGncuZ4KdOWCrbTNEO9yeh2ZfbVWB/jMz+MLb5aaJdzaib73vG7PB/ZvVUU5R4s3A
- m670k/OVA1edjin6EpH4TFyoJSrAkwGiErmriA6Uq5rbqjEneHQQ60SXLro4sLzgVQTtV2b/znh
- RexoXZW/2FDHAgjDZGkSt6JYesK5RxafEil6qkps8SosSMtGsAZmvdZz9spLmFU+byPGlGp54q7
- QMbb4lMa/X4ODqaL3VwSCtOf9nl2OkEzQ9v7rDpMhiv8hEge/S7MrLLv3jfloVBjEc9yblLiald
- On4rewpxVd8IOkIcjAz75ZsKnW9PD0p15d7pQc3ZucUJjwc93P0MRuZokuPseBUtkn8puNkb4Kd
- y6DEc/9Z7Rx4s7Osyc4nGo0IqFhDYhgJMAg==
-X-Google-Smtp-Source: AGHT+IHWrI4/43aheYywm2/WnfKmVmn8vZizXgUs4ZCZPfXuPbJzRHgAuqENnwGr/lbSzIRfsf+B8Q==
-X-Received: by 2002:a05:6000:440a:b0:3f9:e348:f5c with SMTP id
- ffacd0b85a97d-3f9e34815b0mr2918240f8f.60.1758533834086; 
- Mon, 22 Sep 2025 02:37:14 -0700 (PDT)
+ AJvYcCUIHUjAL12eGhZ9x6ybz7Je3SyFwncVew6A21hDkk+X9MD3IJ0EE05Ak2SP+ekn0YuOBgxUzzxuorgM@nongnu.org
+X-Gm-Message-State: AOJu0Yx2H1a7i2+p8kTIhZaz/tlnCYl1SErzJSPobhSpYEoq/xPbZbJX
+ LmnwNV+BDGOrZQqa0o3wfm6+FAy4HHDrg3v099deTXpnyCOWOSswCiXg96XrwklIlAM=
+X-Gm-Gg: ASbGnctryUfdn3ZVul3nuxnKVXJ79Lu3X6FmWBz4rgc1NUl0U7CC4+ZWKeOG5FSabc7
+ 8znvYnPU3S6jNa57yrk8t5z1nLX6WQlmqy8B61TR24q8mPBvXFNfNEJ8i4HjVb2e7K4TQpfh0VL
+ pqWYooIWucY2qXlsCym9MDlWfjHMipbexjZD9b8bXJwB1qSZkK8dhn7PNJxooI54p+kW58peSn9
+ nEj95RifIBx4zyiK3fxTF6jC4/wSpau8oi/3sn5ANNsga3jLplIu5pn3ZKL3mhztRd18mC1OsM1
+ l/CnSqlr9OeS6IHWVXk9vWqvjJ1XHG+U4RHvVu76ZaUrzQqKR/COUCN/jAilG1qq2t0cdfF776X
+ CNGZMCvrL8dIbnhas8FbY1PTEjvxGvaBCWQ==
+X-Google-Smtp-Source: AGHT+IG3ndmsjU4bbWOAnoNWNzTnJGA31mG1EG0SJnedwU7MQSfWvmNHUqcLH2HPNn1H1Dx3vzcDVg==
+X-Received: by 2002:a05:6000:2c06:b0:3ec:d78d:8fcc with SMTP id
+ ffacd0b85a97d-3ee7e1059d7mr10967822f8f.14.1758533848798; 
+ Mon, 22 Sep 2025 02:37:28 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46d7a566a27sm27122065e9.20.2025.09.22.02.37.12
+ ffacd0b85a97d-3f61703b206sm8925031f8f.6.2025.09.22.02.37.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Sep 2025 02:37:12 -0700 (PDT)
+ Mon, 22 Sep 2025 02:37:24 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 85B005F7B1;
- Mon, 22 Sep 2025 10:37:11 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 15CBF5FA1B;
+ Mon, 22 Sep 2025 10:37:13 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Iooss <erdnaxe@crans.org>,
@@ -79,23 +80,25 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Iooss <erdnaxe@crans.org>,
  Weiwei Li <liwei1518@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 00/25] September maintainer updates (docs, plugins,
- semihosting) pre-PR
-Date: Mon, 22 Sep 2025 10:36:45 +0100
-Message-ID: <20250922093711.2768983-1-alex.bennee@linaro.org>
+Subject: [PATCH 16/25] contrib/plugins/execlog: Explicitly check for
+ qemu_plugin_read_register() failure
+Date: Mon, 22 Sep 2025 10:37:01 +0100
+Message-ID: <20250922093711.2768983-17-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20250922093711.2768983-1-alex.bennee@linaro.org>
+References: <20250922093711.2768983-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,97 +114,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-These are all bits and pieces that have been mostly reviewed when
-posted with a few minor additional patches. I plan to send the PR by
-the end of the week.
+From: Peter Maydell <peter.maydell@linaro.org>
 
-Plugins
+In insn_check_regs() we don't explicitly check whether
+qemu_plugin_read_register() failed, which confuses Coverity into
+thinking that sz can be -1 in the memcmp().  In fact the assertion
+that sz == reg->last->len means this can't happen, but it's clearer
+to both humans and Coverity if we explicitly assert that sz > 0, as
+we already do in init_vcpu_register().
 
-  - minor fix checking return values from Peter
-  - Pierrick's nifty uftrace plugin
+Coverity: CID 1611901, 1611902
+Fixes: af6e4e0a22c1 ("contrib/plugins: extend execlog to track register changes")
+Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Message-ID: <20250710144543.1187715-1-peter.maydell@linaro.org>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ contrib/plugins/execlog.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Semihosting
-
-  - build the sub-system once (single binary work)
-
-Misc
-
-  - typo fix
-  - tweak to checkpatch license checking
-  - *new* gitlab-failure-analysis script
-
-The following still need review:
-
-  scripts/ci: add gitlab-failure-analysis script
-  docs/devel: fix typo in code-provenance.rst
-
-Alex.
-
-Alex Bennée (2):
-  docs/devel: fix typo in code-provenance.rst
-  scripts/ci: add gitlab-failure-analysis script
-
-Nabih Estefan (1):
-  checkpatch: Ignore removed lines in license check
-
-Peter Maydell (1):
-  contrib/plugins/execlog: Explicitly check for
-    qemu_plugin_read_register() failure
-
-Pierrick Bouvier (21):
-  semihosting/syscalls: compile once in system and per target for user
-    mode
-  semihosting/syscalls: replace uint64_t with vaddr where appropriate
-  semihosting/guestfd: compile once for system/user
-  semihosting/arm-compat-semi: change common_semi_sys_exit_extended
-  target/riscv/common-semi-target: remove sizeof(target_ulong)
-  target/{arm, riscv}/common-semi-target: eradicate target_ulong
-  include/semihosting/common-semi: extract common_semi API
-  semihosting/arm-compat-semi: eradicate sizeof(target_ulong)
-  semihosting/arm-compat-semi: replace target_ulong with vaddr
-  semihosting/arm-compat-semi: eradicate target_long
-  semihosting/arm-compat-semi: remove dependency on cpu.h
-  semihosting/arm-compat-semi: compile once in system and per target for
-    user mode
-  contrib/plugins/uftrace: skeleton file
-  contrib/plugins/uftrace: define cpu operations and implement aarch64
-  contrib/plugins/uftrace: track callstack
-  contrib/plugins/uftrace: implement tracing
-  contrib/plugins/uftrace: implement privilege level tracing
-  contrib/plugins/uftrace: generate additional files for uftrace
-  contrib/plugins/uftrace: implement x64 support
-  contrib/plugins/uftrace_symbols.py
-  contrib/plugins/uftrace: add documentation
-
- docs/about/emulation.rst                      | 199 ++++
- docs/devel/code-provenance.rst                |   2 +-
- include/semihosting/common-semi.h             |   6 +
- include/semihosting/guestfd.h                 |   7 -
- include/semihosting/semihost.h                |   2 +
- include/semihosting/syscalls.h                |  30 +-
- contrib/plugins/execlog.c                     |   1 +
- contrib/plugins/uftrace.c                     | 878 ++++++++++++++++++
- semihosting/arm-compat-semi-stub.c            |  19 +
- semihosting/arm-compat-semi.c                 |  63 +-
- semihosting/guestfd.c                         |  26 +-
- semihosting/syscalls.c                        | 109 ++-
- ...mon-semi-target.h => common-semi-target.c} |  22 +-
- ...mon-semi-target.h => common-semi-target.c} |  23 +-
- contrib/plugins/meson.build                   |   3 +-
- contrib/plugins/uftrace_symbols.py            | 152 +++
- scripts/checkpatch.pl                         |   3 +-
- scripts/ci/gitlab-failure-analysis            | 117 +++
- semihosting/meson.build                       |  18 +-
- target/arm/meson.build                        |   4 +
- target/riscv/meson.build                      |   4 +
- 21 files changed, 1539 insertions(+), 149 deletions(-)
- create mode 100644 contrib/plugins/uftrace.c
- create mode 100644 semihosting/arm-compat-semi-stub.c
- rename target/arm/{common-semi-target.h => common-semi-target.c} (59%)
- rename target/riscv/{common-semi-target.h => common-semi-target.c} (53%)
- create mode 100755 contrib/plugins/uftrace_symbols.py
- create mode 100755 scripts/ci/gitlab-failure-analysis
-
+diff --git a/contrib/plugins/execlog.c b/contrib/plugins/execlog.c
+index 06ec76d6e9a..811f3203199 100644
+--- a/contrib/plugins/execlog.c
++++ b/contrib/plugins/execlog.c
+@@ -95,6 +95,7 @@ static void insn_check_regs(CPU *cpu)
+ 
+         g_byte_array_set_size(reg->new, 0);
+         sz = qemu_plugin_read_register(reg->handle, reg->new);
++        g_assert(sz > 0);
+         g_assert(sz == reg->last->len);
+ 
+         if (memcmp(reg->last->data, reg->new->data, sz)) {
 -- 
 2.47.3
 
