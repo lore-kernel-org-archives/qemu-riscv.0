@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30DA4CAC5A7
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 09:39:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 556F4CAC5A7
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 09:39:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v0d10-0004uk-3F; Mon, 22 Sep 2025 05:39:23 -0400
+	id 1v0d0o-0004bZ-U6; Mon, 22 Sep 2025 05:39:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0czy-0002ZA-Bk
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:38:26 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ id 1v0czd-0002Qw-V1
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:38:03 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0czI-0000hS-3Q
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:38:17 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-45f31adf368so29198615e9.3
- for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 02:37:31 -0700 (PDT)
+ id 1v0cz9-0000f1-5R
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:37:57 -0400
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3b9edf4cf6cso3576353f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 02:37:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758533849; x=1759138649; darn=nongnu.org;
+ d=linaro.org; s=google; t=1758533842; x=1759138642; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+a3CcA7uLenSBTz2VMDBFRvLVHxH8fqsvjG7VIzS+i8=;
- b=slf88DH95zqEECNUrRazB52Lmp233bhb3NvOSOT1VGZiC85DbYfwDBp1g/HefOPaGq
- naJiwha6eI/I8WBSTo11XSsWMH4yFQ15/mZDoXbW+lokAs+uD0wEuWUtjs47v9uamL3/
- 0fOlAPKvsxpmBf/u9VFx9yAyCo7ZUweLyRbcibNnORX7qGYAXIYG+saSHqucqL3k1u1/
- 6FnHOn7Rd3IC0r7zYe0btLOsPDrYPhE0y+mfy76uiY3lNzk7Yk/m1N9xkP/MUsSCXFYW
- 18nYAWx/8KLEI6RvXdkswsqeyyIWIHCsyBLSZFGU7KInWSUHrPgBRIy7k33fb0iQn0A2
- Pfvw==
+ bh=rN+UABDX33GElLhpMxpOfn/bxSt0jF+QLakS0yUkPiM=;
+ b=csUCUzthCrfiTPGLeshqpcGSNkBzKLAskM6fghiccJrFkm/2d12UAN/TKuD+6FfmAE
+ wGBQIpvZIbLrlnzSIpS29OvFn0SAlndx1Pu3sl3MpvfR7ZryuIAhk41MOWo6++snSVm2
+ cG0/dWlkaWNYo3/ta0Ys5aF3w4Q8UmGHgrVq+VA2Zhft+fF3P38nt1APUf/jhXnsO+rG
+ 1Sd3lpL7ld95KphkXHr8OTNmRULKbBPzc0J2ALIvQ5UHB80dAay1hEalskXrmeL5RwH/
+ FxGE1ClHbFBCmRJQUfTC6caba333PcbXJrgeOv/VMXMWR3zMQToMmotX65+VSQPzhwUa
+ fAkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758533849; x=1759138649;
+ d=1e100.net; s=20230601; t=1758533842; x=1759138642;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+a3CcA7uLenSBTz2VMDBFRvLVHxH8fqsvjG7VIzS+i8=;
- b=HAkjB7mn9nf6vT7xztBCMBmDs3/7i4K9/tR1lBjigPKdG+o5QkR0RrwFnj1aBuPowT
- GxfjtNWM39HMvalwtSe8lBtPH6FKo4ioNGZY0nYe7MnwIxGarisTpEiL5aCfKJu2hSu5
- Mw+lrh/wouYXdy3PVmQSYlXLP9cGDc3ScqkVrX+ipJ40JK5lZmhzi9ejyTmTZqHX9vUf
- IvE3DF60yoslsGxrF+ky5JHRcR2RyDPKhR7OACiwXgJo5pV0z+rXFtqnic+x3v2Cp+nt
- 3AcWTb6Rbh+dbm6JxcjvPyoF3ZwyppHHaMO6GYFjkTZdesBsoNb28BInkdTD4/W1ixUY
- LPGg==
+ bh=rN+UABDX33GElLhpMxpOfn/bxSt0jF+QLakS0yUkPiM=;
+ b=FWWGSOtE729htjGxOr2NObecxZYkn/5c5IbSmAJbi5ChYnsAAn0sz5rC7j/WRvDLVk
+ mwsghp74vtMDyzVeGQfveTyOeuc4T4iIRfnwVAgQX8+BK4a8NQVpcJb6wty0HqBqLyQE
+ /Yb2EmLT8NIgm2QKxiLH7jn5eKAkr0gtB1Oq1050l3iuokwIhhjRlG5VR47sDwnUrvGA
+ rn12XRi5JBt57ALxuyB209r3YNLD+arqc91JBZdyUlk6FG8rMhK+6OjYaUZ/knKqvd6u
+ Wct1+wAb/rAmi/Yg3salws6SZLKDrifRbMspRvie9aJ/UN777deXTjYuMX3033NhLuur
+ B1Cg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUIHUjAL12eGhZ9x6ybz7Je3SyFwncVew6A21hDkk+X9MD3IJ0EE05Ak2SP+ekn0YuOBgxUzzxuorgM@nongnu.org
-X-Gm-Message-State: AOJu0Yx2H1a7i2+p8kTIhZaz/tlnCYl1SErzJSPobhSpYEoq/xPbZbJX
- LmnwNV+BDGOrZQqa0o3wfm6+FAy4HHDrg3v099deTXpnyCOWOSswCiXg96XrwklIlAM=
-X-Gm-Gg: ASbGnctryUfdn3ZVul3nuxnKVXJ79Lu3X6FmWBz4rgc1NUl0U7CC4+ZWKeOG5FSabc7
- 8znvYnPU3S6jNa57yrk8t5z1nLX6WQlmqy8B61TR24q8mPBvXFNfNEJ8i4HjVb2e7K4TQpfh0VL
- pqWYooIWucY2qXlsCym9MDlWfjHMipbexjZD9b8bXJwB1qSZkK8dhn7PNJxooI54p+kW58peSn9
- nEj95RifIBx4zyiK3fxTF6jC4/wSpau8oi/3sn5ANNsga3jLplIu5pn3ZKL3mhztRd18mC1OsM1
- l/CnSqlr9OeS6IHWVXk9vWqvjJ1XHG+U4RHvVu76ZaUrzQqKR/COUCN/jAilG1qq2t0cdfF776X
- CNGZMCvrL8dIbnhas8FbY1PTEjvxGvaBCWQ==
-X-Google-Smtp-Source: AGHT+IG3ndmsjU4bbWOAnoNWNzTnJGA31mG1EG0SJnedwU7MQSfWvmNHUqcLH2HPNn1H1Dx3vzcDVg==
-X-Received: by 2002:a05:6000:2c06:b0:3ec:d78d:8fcc with SMTP id
- ffacd0b85a97d-3ee7e1059d7mr10967822f8f.14.1758533848798; 
- Mon, 22 Sep 2025 02:37:28 -0700 (PDT)
+ AJvYcCUZNqC1z9AnNnl/wRcRoln0HFmcRsVd6/WpczFLsLG4nytguwpHSuZV2rWqXTSGzELFVKk2IFvxaamH@nongnu.org
+X-Gm-Message-State: AOJu0YytP9eEQLQlS8Kh8sEOR/0XH3wSzrzQFzD5/mtnIyJVGdAZtQJj
+ qba8nczAyiyFPcDhUwXc2XGTYUvebl7TzXo1isWrqsolRKDmvs22g/GwqUk+LOVWZ6M=
+X-Gm-Gg: ASbGncvUkfktmJxw/FfifCVTYdeCBklfcGq2/ec7mPumCYY66WGhTpMQZp6cQI2J6l7
+ /m4OOViXspeNkySW1pfDnIrQlSeymDWZIxIPGVVLj+74wpsLBX9EROH/MP8fXBKp1HzLMfQvfaT
+ mFwYGRwCtW2MjBbJw/OlojDiJwVfOWlC6IZbW4ju2EEHol4ZQLj6BVmxZsuqNoMLFUdqRnqXCK9
+ kDWGxUW821ZdQSJTDQZwwS04ZNI8GqMW1f4KDBGu16Wykx8gZ6CtkfHXD92Q0byeA8ljiC5Keu1
+ YxBN6s/KtssWTIC6FZfscyJ8I9/iJvX/nqUZCG4xSqzUVsD0pJFx35cpFHnEGlHxCS517+P97W8
+ /4NfZZ3wu2NBTTDqcK/CDs6o=
+X-Google-Smtp-Source: AGHT+IGXplVmD3OLqQHoKMQjJiyf0VDSnMaQcgJSVKAaJgaw9ilpZyoJrTJgqViPJpdsOBDUn8fHSA==
+X-Received: by 2002:a05:6000:22c7:b0:3eb:df84:62e with SMTP id
+ ffacd0b85a97d-3ee7c5535d9mr10926109f8f.3.1758533842377; 
+ Mon, 22 Sep 2025 02:37:22 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3f61703b206sm8925031f8f.6.2025.09.22.02.37.19
+ ffacd0b85a97d-3ee0fbd63a2sm19049094f8f.48.2025.09.22.02.37.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Sep 2025 02:37:24 -0700 (PDT)
+ Mon, 22 Sep 2025 02:37:17 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 15CBF5FA1B;
- Mon, 22 Sep 2025 10:37:13 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 683855F9FF;
+ Mon, 22 Sep 2025 10:37:12 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Iooss <erdnaxe@crans.org>,
@@ -79,19 +79,20 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Iooss <erdnaxe@crans.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Weiwei Li <liwei1518@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 16/25] contrib/plugins/execlog: Explicitly check for
- qemu_plugin_read_register() failure
-Date: Mon, 22 Sep 2025 10:37:01 +0100
-Message-ID: <20250922093711.2768983-17-alex.bennee@linaro.org>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH 09/25] target/{arm,
+ riscv}/common-semi-target: eradicate target_ulong
+Date: Mon, 22 Sep 2025 10:36:54 +0100
+Message-ID: <20250922093711.2768983-10-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20250922093711.2768983-1-alex.bennee@linaro.org>
 References: <20250922093711.2768983-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -114,37 +115,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Peter Maydell <peter.maydell@linaro.org>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-In insn_check_regs() we don't explicitly check whether
-qemu_plugin_read_register() failed, which confuses Coverity into
-thinking that sz can be -1 in the memcmp().  In fact the assertion
-that sz == reg->last->len means this can't happen, but it's clearer
-to both humans and Coverity if we explicitly assert that sz > 0, as
-we already do in init_vcpu_register().
+We replace mechanically with uint64_t.
+There is no semantic change, and allows us to extract a proper API from
+this set of functions.
 
-Coverity: CID 1611901, 1611902
-Fixes: af6e4e0a22c1 ("contrib/plugins: extend execlog to track register changes")
-Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-ID: <20250710144543.1187715-1-peter.maydell@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Message-ID: <20250822150058.18692-7-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- contrib/plugins/execlog.c | 1 +
- 1 file changed, 1 insertion(+)
+ target/arm/common-semi-target.h   | 6 +++---
+ target/riscv/common-semi-target.h | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/contrib/plugins/execlog.c b/contrib/plugins/execlog.c
-index 06ec76d6e9a..811f3203199 100644
---- a/contrib/plugins/execlog.c
-+++ b/contrib/plugins/execlog.c
-@@ -95,6 +95,7 @@ static void insn_check_regs(CPU *cpu)
+diff --git a/target/arm/common-semi-target.h b/target/arm/common-semi-target.h
+index 7bb442f24ca..6775a270aaa 100644
+--- a/target/arm/common-semi-target.h
++++ b/target/arm/common-semi-target.h
+@@ -12,7 +12,7 @@
  
-         g_byte_array_set_size(reg->new, 0);
-         sz = qemu_plugin_read_register(reg->handle, reg->new);
-+        g_assert(sz > 0);
-         g_assert(sz == reg->last->len);
+ #include "target/arm/cpu-qom.h"
  
-         if (memcmp(reg->last->data, reg->new->data, sz)) {
+-static inline target_ulong common_semi_arg(CPUState *cs, int argno)
++static inline uint64_t common_semi_arg(CPUState *cs, int argno)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+@@ -23,7 +23,7 @@ static inline target_ulong common_semi_arg(CPUState *cs, int argno)
+     }
+ }
+ 
+-static inline void common_semi_set_ret(CPUState *cs, target_ulong ret)
++static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+@@ -44,7 +44,7 @@ static inline bool is_64bit_semihosting(CPUArchState *env)
+     return is_a64(env);
+ }
+ 
+-static inline target_ulong common_semi_stack_bottom(CPUState *cs)
++static inline uint64_t common_semi_stack_bottom(CPUState *cs)
+ {
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+diff --git a/target/riscv/common-semi-target.h b/target/riscv/common-semi-target.h
+index 7e6ea8da02c..663dedfdad2 100644
+--- a/target/riscv/common-semi-target.h
++++ b/target/riscv/common-semi-target.h
+@@ -11,14 +11,14 @@
+ #ifndef TARGET_RISCV_COMMON_SEMI_TARGET_H
+ #define TARGET_RISCV_COMMON_SEMI_TARGET_H
+ 
+-static inline target_ulong common_semi_arg(CPUState *cs, int argno)
++static inline uint64_t common_semi_arg(CPUState *cs, int argno)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     return env->gpr[xA0 + argno];
+ }
+ 
+-static inline void common_semi_set_ret(CPUState *cs, target_ulong ret)
++static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+@@ -35,7 +35,7 @@ static inline bool common_semi_sys_exit_is_extended(CPUState *cs)
+     return is_64bit_semihosting(cpu_env(cs));
+ }
+ 
+-static inline target_ulong common_semi_stack_bottom(CPUState *cs)
++static inline uint64_t common_semi_stack_bottom(CPUState *cs)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
 -- 
 2.47.3
 
