@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A55A4CAC592
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 09:44:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F41CAC5AC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 09:44:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v0d68-0006ih-QY; Mon, 22 Sep 2025 05:44:40 -0400
+	id 1v0d5m-0005ji-AO; Mon, 22 Sep 2025 05:44:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0d4z-0005Dp-Rh
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:43:31 -0400
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ id 1v0d50-0005Ij-Vv
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:43:33 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0d4m-0001zQ-Nh
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:43:26 -0400
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3f99ac9acc4so991694f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 02:43:14 -0700 (PDT)
+ id 1v0d4n-0001zg-Rk
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:43:30 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-45dcff2f313so24450505e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 02:43:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1758534193; x=1759138993; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=68wbma/YcKI1TwJYc3fIO/8B8AyrFhnJSIMXhgyet+0=;
- b=UFUxenMH5RYBLb53SomAZHn1PnotInnTEyJzibeRchh2cS603uHJm6XWS7C7yA5dGX
- ICNJ6nC0XvdNI6FnJdUWeXAVyMmjTrqiaVhQEF+27Q9aSZroLg7DNIQc5xwQB/NjqyYo
- qQ1KeQ8N8ZsWhpuxjMtck5gQ1fac3qYGHP6GK55PL6QDopaScTTFmaCQMfIi/U1Dnnw2
- JAH+G0VDR5X1MkRtD7Go6eZNhcR4THYy0fBkZbm/bjqQ1O4pRJDLSfIZVTS10kOlfzMt
- 7LjFTaR7MO6v2rYXq6ggfo+TntUEl5tA8Kh0Zy4UMnrOSFfun32PZBSN/+POZGdp5Hv9
- sTCQ==
+ bh=7GRsJV0VAPOLcd8y8nlS+oqJKDqNktygqxz6o8+pfd4=;
+ b=JQz1DxL8QuRXlkOTtdHivr6qOQRQ7jVEHe1DNBfmnTl2u98Pz36JnbO/Kc0h+pM+Ge
+ iZFjfhckIpEoBmCKj8BnH0/uCGbJ4k0k0+w3xQHOXXlTHwhWx7eNNXx0WHfy0HThXamb
+ LbLlD1Ej5Nrv+R6gQVfk2lRo1/4BnkdjT/7iI3UgFl5gdXZNBBh5tfxplOvA6rEmwmSg
+ zE8McGCoqnUHwex2UIgAgvscTM8tgQWq2Ijs+UBQQSPynoxcxm0oGYVug9I+McQsAXkV
+ h5+s/J/rCy7NxJtPeWtKV834svC6NGFVOW3XErVsdxSBU5xkwZikwZ6i/s/FJKYa7bWU
+ J20g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1758534193; x=1759138993;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=68wbma/YcKI1TwJYc3fIO/8B8AyrFhnJSIMXhgyet+0=;
- b=naCPFRLp2nf+s0d0PMASjcXsqs4O1vVoBW1Q01hS/EfYSkjw0uwN9qh5NhwJkVwr2y
- qXQbQ1mDMhjkRCQ9l1BZ+aaSDcwmDV7kg/xAABckjCC1DxEMmnuPLO/B0vVMWmzBlFOB
- z2qoT/+ofd3VEmpo96AmNWUbz/65zJh1O3SvgjI7BZgBgA+ew7J4wZFek/y2YHg7qKUJ
- 4gxxFoAz1X7VGsNGO/7dAW8MI+T+yKBDacqlQf6Th6Meb6R0Q+rHXBDz6GolVpVCDGi8
- SagDZ1ue9KgHklldJ6usSU3X5wlnIAu5cHq9AiVnj/FZB6QdeNWwjzbUBVESXwI3VenA
- 8F8g==
+ bh=7GRsJV0VAPOLcd8y8nlS+oqJKDqNktygqxz6o8+pfd4=;
+ b=Yt7Iw2S/k6jPocF7hnYtVcLjp5cpAyHABMavodXJfr3vGAqV2hSrR4mqmg7lar5cr0
+ EW6E4sHfDwsgzBUeetLCi9lCNv4W5FI23aMkVo6gpowcCCL9btpn0ol7l+C1bk1QvlYe
+ XEL8rjvtwD56Lp4O3/P5ZOZQfWqmEihpoc0od7vATXh+k13d+ISQ0QnWmF54dThi31Y4
+ lrfgCjO/Ikl6Fx03LVviAwZkzJN2AY5R5LRg3Z/UScw3w8m/I40MxocCqdd6j1SSG9Jn
+ Lsu1FXn6w/Dbpp0GOIlyz3DJOSBldZoMNQ+RiIio5drpi3afuMgIuLwtu2Oo2SluarBA
+ IGXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWUNKy5XOnTESeB5zxl24k3wsCXSlYe0he1WMWAw1t3SBDKVi+RqV0OPPNDaCLA/MvhEZ8sU8KNty2G@nongnu.org
-X-Gm-Message-State: AOJu0Yxq/3UmG8wfD7F3XOzUwd29hlyJoGOoQfXQ9iFbOd4YyNhFO//b
- UIKvOYsignGtnlwmnMpRmERQTZuqYxdUSaRn/7wXKDi0IXfLe9Ea2XIfEq8QjmDJcuI=
-X-Gm-Gg: ASbGncsSTR0iiUllw2KwiAwCZnTRoawCLGX7pX3g3eg7XvdhPCveUbfDS3vcYAyNaeH
- hmmIUtVvHJhG4uq4UiUwTO/V2KD8pw2Rd39G7lDheQ9xvRvjGQAGa3XTRJv/zeNZwGEkWyJFjT1
- XCFxk8MtCp4aRt2CEmBrMJIGGhB53P+IboiUlxIj+7+4AuhpIxsX85OtJjTRafPfEH2as0z2/IE
- meZueFc19Ie1QZ6m9GOWWGrNjQ0o3ak76eq6zvAm8TbC5ZZz6wTQNakRs0zGH3kIhiD2PTUEZdo
- sChbNSSRDzOmtdKM4m0rAT6I3iAFgJ5FDe3dkcZpNcPf7xO3gkAUZLNWEraAgYQe0Mx5g6/L6rK
- 5IDkRKXkcKuuOEyS+G86h/N8=
-X-Google-Smtp-Source: AGHT+IFpjqJHRrNaIVglNlSJIofFd6QodqeBxiHyAVpa6HQccGp7WPW9KWukBOfY8HXKK2HWR8JSyA==
-X-Received: by 2002:a05:6000:1843:b0:3f7:9dcf:c066 with SMTP id
- ffacd0b85a97d-3f79dcfc487mr5309325f8f.51.1758534192583; 
- Mon, 22 Sep 2025 02:43:12 -0700 (PDT)
+ AJvYcCXBEDeSTtZhJndCxiltknkBQP5yb2bHGPAaukeN0vm15sr/F671Sz53bRfFr7jeF24Zc3NtVxKtJZBM@nongnu.org
+X-Gm-Message-State: AOJu0Yw6ty3jvETvY8+ZXg/0G0Ol6DLZJDMwVnOt+PtmvUeZ4gPnOLY6
+ c9b748OZV4bZd2Avdk/aF5o81jCx2k1HK7A/LpF+kSWYL0aUfxJlVxoDg2nROIJOQ6k=
+X-Gm-Gg: ASbGncuAIFsS3zEZAA1E2hAZuDvu0qmME0xYaH2d9kyuhiCl1rT2bV0ZPeqPALGymzd
+ cY6BQ3nrTehvo7CZFn+6Ilk/sQRbtuKSYOVtyVmG5AeJPd1ri4BLBV3W/IUMRM35LbahGE9wpk5
+ 3PHA8Mhv/IDmMhSmLzPr54zNJYHKv9uO30Eymnz9dFRueHPgxiB4nqnGAROQry+xjpbiREEazHs
+ pC8hZeJozX83hZtvhANQNGuf6qUmG+Qb8s2M3pImZGvBBUaFVY6ypbvguKHIgesDZWVitb6MAMT
+ GBVDoUaZ918ZcFpCGNmq6Bs8sC3ZGFDOeQ+aThxZbUeeUqGGrdPXwwycLnP9YYkmB175JH3YOJE
+ X7lrQMle9E2V7t3LBuaugRHc=
+X-Google-Smtp-Source: AGHT+IGog4+Y0WnU5KswDpjQ1MvsxTCEtNhvD3dapvSYl1WAcp7YJ15rUMx6prxALge0mIrPKtA+PA==
+X-Received: by 2002:a05:600c:3593:b0:45b:8477:de1a with SMTP id
+ 5b1f17b1804b1-467ead67316mr122960165e9.7.1758534193220; 
+ Mon, 22 Sep 2025 02:43:13 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46566f72354sm193693225e9.3.2025.09.22.02.43.09
+ 5b1f17b1804b1-464f527d6cdsm220145955e9.12.2025.09.22.02.43.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 22 Sep 2025 02:43:09 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 997ED5FA07;
- Mon, 22 Sep 2025 10:37:12 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id 42BE95FA2E;
+ Mon, 22 Sep 2025 10:37:13 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Iooss <erdnaxe@crans.org>,
@@ -80,25 +80,26 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Iooss <erdnaxe@crans.org>,
  Weiwei Li <liwei1518@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH 11/25] semihosting/arm-compat-semi: eradicate
- sizeof(target_ulong)
-Date: Mon, 22 Sep 2025 10:36:56 +0100
-Message-ID: <20250922093711.2768983-12-alex.bennee@linaro.org>
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Subject: [PATCH 18/25] contrib/plugins/uftrace: define cpu operations and
+ implement aarch64
+Date: Mon, 22 Sep 2025 10:37:03 +0100
+Message-ID: <20250922093711.2768983-19-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20250922093711.2768983-1-alex.bennee@linaro.org>
 References: <20250922093711.2768983-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x434.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,29 +117,176 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-No semantic change.
+We define a new CpuOps structure that will be used to implement tracking
+independently of guest architecture.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+As well, we now instrument only instructions following ones that might
+have touched the frame pointer.
+
+Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-ID: <20250822150058.18692-9-pierrick.bouvier@linaro.org>
+Message-ID: <20250902075042.223990-3-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- semihosting/arm-compat-semi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ contrib/plugins/uftrace.c | 114 ++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 110 insertions(+), 4 deletions(-)
 
-diff --git a/semihosting/arm-compat-semi.c b/semihosting/arm-compat-semi.c
-index 604a69e3646..6725dcf4ba7 100644
---- a/semihosting/arm-compat-semi.c
-+++ b/semihosting/arm-compat-semi.c
-@@ -786,7 +786,7 @@ void do_common_semihosting(CPUState *cs)
+diff --git a/contrib/plugins/uftrace.c b/contrib/plugins/uftrace.c
+index 4af0130b159..d060513446c 100644
+--- a/contrib/plugins/uftrace.c
++++ b/contrib/plugins/uftrace.c
+@@ -11,14 +11,94 @@
  
-     case TARGET_SYS_ELAPSED:
-         elapsed = get_clock() - clock_start;
--        if (sizeof(target_ulong) == 8) {
-+        if (is_64bit_semihosting(env)) {
-             if (SET_ARG(0, elapsed)) {
-                 goto do_fault;
-             }
+ #include <qemu-plugin.h>
+ #include <glib.h>
++#include <stdio.h>
+ 
+ QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
+ 
++typedef struct Cpu Cpu;
++
++typedef struct {
++    void (*init)(Cpu *cpu);
++    void (*end)(Cpu *cpu);
++    uint64_t (*get_frame_pointer)(Cpu *cpu);
++    bool (*does_insn_modify_frame_pointer)(const char *disas);
++} CpuOps;
++
+ typedef struct Cpu {
+     GByteArray *buf;
++    CpuOps ops;
++    void *arch;
+ } Cpu;
+ 
++typedef struct {
++    struct qemu_plugin_register *reg_fp;
++} Aarch64Cpu;
++
+ static struct qemu_plugin_scoreboard *score;
++static CpuOps arch_ops;
++
++static uint64_t cpu_read_register64(Cpu *cpu, struct qemu_plugin_register *reg)
++{
++    GByteArray *buf = cpu->buf;
++    g_byte_array_set_size(buf, 0);
++    size_t sz = qemu_plugin_read_register(reg, buf);
++    g_assert(sz == 8);
++    g_assert(buf->len == 8);
++    return *((uint64_t *) buf->data);
++}
++
++static struct qemu_plugin_register *plugin_find_register(const char *name)
++{
++    g_autoptr(GArray) regs = qemu_plugin_get_registers();
++    for (int i = 0; i < regs->len; ++i) {
++        qemu_plugin_reg_descriptor *reg;
++        reg = &g_array_index(regs, qemu_plugin_reg_descriptor, i);
++        if (!strcmp(reg->name, name)) {
++            return reg->handle;
++        }
++    }
++    return NULL;
++}
++
++static uint64_t aarch64_get_frame_pointer(Cpu *cpu_)
++{
++    Aarch64Cpu *cpu = cpu_->arch;
++    return cpu_read_register64(cpu_, cpu->reg_fp);
++}
++
++static void aarch64_init(Cpu *cpu_)
++{
++    Aarch64Cpu *cpu = g_new0(Aarch64Cpu, 1);
++    cpu_->arch = cpu;
++    cpu->reg_fp = plugin_find_register("x29");
++    if (!cpu->reg_fp) {
++        fprintf(stderr, "uftrace plugin: frame pointer register (x29) is not "
++                        "available. Please use an AArch64 cpu (or -cpu max).\n");
++        g_abort();
++    }
++}
++
++static void aarch64_end(Cpu *cpu)
++{
++    g_free(cpu->arch);
++}
++
++static bool aarch64_does_insn_modify_frame_pointer(const char *disas)
++{
++    /*
++     * Check if current instruction concerns fp register "x29".
++     * We add a prefix space to make sure we don't match addresses dump
++     * in disassembly.
++     */
++    return strstr(disas, " x29");
++}
++
++static CpuOps aarch64_ops = {
++    .init = aarch64_init,
++    .end = aarch64_end,
++    .get_frame_pointer = aarch64_get_frame_pointer,
++    .does_insn_modify_frame_pointer = aarch64_does_insn_modify_frame_pointer,
++};
+ 
+ static void track_callstack(unsigned int cpu_index, void *udata)
+ {
+@@ -28,19 +108,37 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
+ {
+     size_t n_insns = qemu_plugin_tb_n_insns(tb);
+ 
++    /*
++     * Callbacks and inline instrumentation are inserted before an instruction.
++     * Thus, to see instruction effect, we need to wait for next one.
++     * Potentially, the last instruction of a block could modify the frame
++     * pointer. Thus, we need to always instrument first instruction in a tb.
++     */
++    bool instrument_insn = true;
+     for (size_t i = 0; i < n_insns; i++) {
+         struct qemu_plugin_insn *insn = qemu_plugin_tb_get_insn(tb, i);
+ 
+-        uintptr_t pc = qemu_plugin_insn_vaddr(insn);
+-        qemu_plugin_register_vcpu_insn_exec_cb(insn, track_callstack,
+-                                               QEMU_PLUGIN_CB_R_REGS,
+-                                               (void *) pc);
++        if (instrument_insn) {
++            uintptr_t pc = qemu_plugin_insn_vaddr(insn);
++            qemu_plugin_register_vcpu_insn_exec_cb(insn, track_callstack,
++                                                   QEMU_PLUGIN_CB_R_REGS,
++                                                   (void *) pc);
++            instrument_insn = false;
++        }
++
++        char *disas = qemu_plugin_insn_disas(insn);
++        if (arch_ops.does_insn_modify_frame_pointer(disas)) {
++            instrument_insn = true;
++        }
+     }
+ }
+ 
+ static void vcpu_init(qemu_plugin_id_t id, unsigned int vcpu_index)
+ {
+     Cpu *cpu = qemu_plugin_scoreboard_find(score, vcpu_index);
++    cpu->ops = arch_ops;
++
++    cpu->ops.init(cpu);
+     cpu->buf = g_byte_array_new();
+ }
+ 
+@@ -64,6 +162,14 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
+                                            const qemu_info_t *info,
+                                            int argc, char **argv)
+ {
++    if (!strcmp(info->target_name, "aarch64")) {
++        arch_ops = aarch64_ops;
++    } else {
++        fprintf(stderr, "plugin uftrace: %s target is not supported\n",
++                info->target_name);
++        return 1;
++    }
++
+     score = qemu_plugin_scoreboard_new(sizeof(Cpu));
+     qemu_plugin_register_vcpu_init_cb(id, vcpu_init);
+     qemu_plugin_register_atexit_cb(id, at_exit, NULL);
 -- 
 2.47.3
 
