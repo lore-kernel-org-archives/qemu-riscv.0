@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 556F4CAC5A7
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 09:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 258C9CAC5A7
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 09:39:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v0d0o-0004bZ-U6; Mon, 22 Sep 2025 05:39:10 -0400
+	id 1v0d0S-0002t2-O4; Mon, 22 Sep 2025 05:38:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0czd-0002Qw-V1
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:38:03 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ id 1v0czI-0002Bw-SL
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:37:40 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0cz9-0000f1-5R
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:37:57 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3b9edf4cf6cso3576353f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 02:37:23 -0700 (PDT)
+ id 1v0cz4-0000dH-2z
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 05:37:36 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-45f2313dd86so35524915e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 02:37:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758533842; x=1759138642; darn=nongnu.org;
+ d=linaro.org; s=google; t=1758533837; x=1759138637; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rN+UABDX33GElLhpMxpOfn/bxSt0jF+QLakS0yUkPiM=;
- b=csUCUzthCrfiTPGLeshqpcGSNkBzKLAskM6fghiccJrFkm/2d12UAN/TKuD+6FfmAE
- wGBQIpvZIbLrlnzSIpS29OvFn0SAlndx1Pu3sl3MpvfR7ZryuIAhk41MOWo6++snSVm2
- cG0/dWlkaWNYo3/ta0Ys5aF3w4Q8UmGHgrVq+VA2Zhft+fF3P38nt1APUf/jhXnsO+rG
- 1Sd3lpL7ld95KphkXHr8OTNmRULKbBPzc0J2ALIvQ5UHB80dAay1hEalskXrmeL5RwH/
- FxGE1ClHbFBCmRJQUfTC6caba333PcbXJrgeOv/VMXMWR3zMQToMmotX65+VSQPzhwUa
- fAkA==
+ bh=HsKBSNXGouODjqFbzXtr6MHfNWWtyiLAciJxtw6gymY=;
+ b=W14YmG0MU6pRZxRSJ//7UCm8M0lxzH03+U3gfPI68YjEdUH2Jq6Bpx7i1PMSE7qqw0
+ qZomsVQfAEY0B+pi6chGiZwOEIB/tRLnPfDgBL8wQbee6x+57Oi3fPsOGKajz0f8wH9z
+ MNGXiOJAzOFdD3LZjjDpGY8gjWUQLz1ZNJd3y7zX5YPQruJDzVsA4g+bJMrNJOGBksCo
+ 2wa9njZLe0Aks0g2nkv9XJwdnvU5ZaNjyJX0uQzq21A1qyVEhQeff7f2El5jLn3YUrhK
+ 5uI4ci6VpxwhZhz4zSZMbh6UNA7/QwM2K6iAaTJtgbd3L7TpGhyhQW1IyosntETnTyNH
+ nhqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758533842; x=1759138642;
+ d=1e100.net; s=20230601; t=1758533837; x=1759138637;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rN+UABDX33GElLhpMxpOfn/bxSt0jF+QLakS0yUkPiM=;
- b=FWWGSOtE729htjGxOr2NObecxZYkn/5c5IbSmAJbi5ChYnsAAn0sz5rC7j/WRvDLVk
- mwsghp74vtMDyzVeGQfveTyOeuc4T4iIRfnwVAgQX8+BK4a8NQVpcJb6wty0HqBqLyQE
- /Yb2EmLT8NIgm2QKxiLH7jn5eKAkr0gtB1Oq1050l3iuokwIhhjRlG5VR47sDwnUrvGA
- rn12XRi5JBt57ALxuyB209r3YNLD+arqc91JBZdyUlk6FG8rMhK+6OjYaUZ/knKqvd6u
- Wct1+wAb/rAmi/Yg3salws6SZLKDrifRbMspRvie9aJ/UN777deXTjYuMX3033NhLuur
- B1Cg==
+ bh=HsKBSNXGouODjqFbzXtr6MHfNWWtyiLAciJxtw6gymY=;
+ b=lDjJXc6NslLWOanDGj1I5LjmpYCMDHe5mvHPSqhRaL3X78D21nOkphEG0YNFSj0ku0
+ 8/WTglEAYkTm5aZ6xeizEsdrK8aQOipM7zUmQmE3T1Qi4v+GsephREDUzGPmf+4DhkGG
+ Y4kHBGTf+ZrewbSuRUkXg9j5GEYIqWbQ6g9lmbQK2ylhzDAqCUYqWD3d3suxiiZGpD5H
+ 5UiUuCaW5t4oPRJidw6cVDBEulaF+3mM22OY+drdircgghffaznX/HLdsceG3v+6vJQ1
+ rSt6w6ug35i6x8XDQ+esYOVak3ZKntD6YiXnPhr8g3rtfWQKXDGPTSEt1O0kyRQ9ShJ9
+ fL4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZNqC1z9AnNnl/wRcRoln0HFmcRsVd6/WpczFLsLG4nytguwpHSuZV2rWqXTSGzELFVKk2IFvxaamH@nongnu.org
-X-Gm-Message-State: AOJu0YytP9eEQLQlS8Kh8sEOR/0XH3wSzrzQFzD5/mtnIyJVGdAZtQJj
- qba8nczAyiyFPcDhUwXc2XGTYUvebl7TzXo1isWrqsolRKDmvs22g/GwqUk+LOVWZ6M=
-X-Gm-Gg: ASbGncvUkfktmJxw/FfifCVTYdeCBklfcGq2/ec7mPumCYY66WGhTpMQZp6cQI2J6l7
- /m4OOViXspeNkySW1pfDnIrQlSeymDWZIxIPGVVLj+74wpsLBX9EROH/MP8fXBKp1HzLMfQvfaT
- mFwYGRwCtW2MjBbJw/OlojDiJwVfOWlC6IZbW4ju2EEHol4ZQLj6BVmxZsuqNoMLFUdqRnqXCK9
- kDWGxUW821ZdQSJTDQZwwS04ZNI8GqMW1f4KDBGu16Wykx8gZ6CtkfHXD92Q0byeA8ljiC5Keu1
- YxBN6s/KtssWTIC6FZfscyJ8I9/iJvX/nqUZCG4xSqzUVsD0pJFx35cpFHnEGlHxCS517+P97W8
- /4NfZZ3wu2NBTTDqcK/CDs6o=
-X-Google-Smtp-Source: AGHT+IGXplVmD3OLqQHoKMQjJiyf0VDSnMaQcgJSVKAaJgaw9ilpZyoJrTJgqViPJpdsOBDUn8fHSA==
-X-Received: by 2002:a05:6000:22c7:b0:3eb:df84:62e with SMTP id
- ffacd0b85a97d-3ee7c5535d9mr10926109f8f.3.1758533842377; 
- Mon, 22 Sep 2025 02:37:22 -0700 (PDT)
-Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3ee0fbd63a2sm19049094f8f.48.2025.09.22.02.37.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ AJvYcCXGWwiuK7jGQfuSRpvwa6nbmJVH/kJniuQiOEdUjL6Wj6dhpRrA8wt3b3tLHzmmqbMiHoaQJi3i6geV@nongnu.org
+X-Gm-Message-State: AOJu0YyPu+LT/wA2LUNu+v/zAMKRzzVjcgsieTFciAT/TntsMBtL1G1C
+ mDXqGawtImNPv47BYS2qxHxBVUC5BhNKtiJ8DZLH+z8sPVl2z5X3UEWRZVW43WOmysU=
+X-Gm-Gg: ASbGncvc2+l0WHFtTatLn2nMEqsKAJHmEq6Esku/D3lkehvuc4jx/gq/ovlU3D9pDDK
+ nYUCVeYI8eJofMM+X1PTlQi7M56fy0VaCVwgJ6f3hLTVNf+gjLZw7cdcWv0Le+haJwI+3Q3Q5Bn
+ NAzBfoYFMyYIkdn8baQI0fnOe3z+S5q/VkioKAj3uxe2UlBmyBY5nAX/IpmmaN+gxHqO7xvpwNN
+ J4+Lc3Ei5ksporQWtk/qgf/uB/mFx52UJX3Wj1ZNlFWh5Bh5NIcOcmMy0+sGVYPTCwY8UD+Q5KI
+ DQKgvRIeSSLn7yzg7SqffMHpwESkhjg1x2uYyCo4bxmJa5GzsPAUrKQsNaqkiIQWf+lnpBbw46+
+ gwUXQhrln/dZjHRa3kzwQ/pc=
+X-Google-Smtp-Source: AGHT+IFIypwEWr8DwwXRt9q2058GETFtcA5IwQgWAc8iWw9WAXe+GbJKhxpFivk3Jk0kSuTLOE/8xw==
+X-Received: by 2002:a05:600c:45d2:b0:45b:7d77:b592 with SMTP id
+ 5b1f17b1804b1-467e6f36218mr115147425e9.12.1758533837185; 
  Mon, 22 Sep 2025 02:37:17 -0700 (PDT)
+Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-464f190721esm192810625e9.10.2025.09.22.02.37.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Sep 2025 02:37:12 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 683855F9FF;
- Mon, 22 Sep 2025 10:37:12 +0100 (BST)
+ by draig.lan (Postfix) with ESMTP id AD75A5F8FC;
+ Mon, 22 Sep 2025 10:37:11 +0100 (BST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Iooss <erdnaxe@crans.org>,
@@ -79,27 +79,25 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Iooss <erdnaxe@crans.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Weiwei Li <liwei1518@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH 09/25] target/{arm,
- riscv}/common-semi-target: eradicate target_ulong
-Date: Mon, 22 Sep 2025 10:36:54 +0100
-Message-ID: <20250922093711.2768983-10-alex.bennee@linaro.org>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 02/25] scripts/ci: add gitlab-failure-analysis script
+Date: Mon, 22 Sep 2025 10:36:47 +0100
+Message-ID: <20250922093711.2768983-3-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20250922093711.2768983-1-alex.bennee@linaro.org>
 References: <20250922093711.2768983-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,82 +113,160 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+This is a script designed to collect data from multiple pipelines and
+analyse the failure modes they have. By default it will probe the last
+3 failed jobs on the staging branch. However this can all be
+controlled by the CLI:
 
-We replace mechanically with uint64_t.
-There is no semantic change, and allows us to extract a proper API from
-this set of functions.
+  ./scripts/ci/gitlab-failure-analysis --count 2 --branch=testing/next --id 39915562 --status=
+  running pipeline 2028486060, total jobs 125, skipped 5, failed 0,  39742 tests, 0 failed tests
+  success pipeline 2015018135, total jobs 125, skipped 5, failed 0,  49219 tests, 0 failed tests
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-ID: <20250822150058.18692-7-pierrick.bouvier@linaro.org>
+You can also skip failing jobs and just dump the tests:
+
+  ./scripts/ci/gitlab-failure-analysis --branch= --id 39915562 --status= --skip-jobs --pipeline 1946202491 1919542960
+  failed pipeline 1946202491, total jobs 127, skipped 5, failed 26,  38742 tests, 278 skipped tests, 2 failed tests
+    Failed test qemu.qemu:qtest+qtest-s390x / qtest-s390x/boot-serial-test, check-system-opensuse, 1 /s390x/boot-serial/s390-ccw-virtio - FATAL-ERROR: Failed to find expected string. Please check '/tmp/qtest-boot-serial-sW77EA3'
+    Failed test qemu.qemu:qtest+qtest-aarch64 / qtest-aarch64/arm-cpu-features, check-system-opensuse, 1 /aarch64/arm/query-cpu-model-expansion - ERROR:../tests/qtest/arm-cpu-features.c:459:test_query_cpu_model_expansion: assertion failed (_error == "The CPU type 'host' requires KVM"): ("The CPU type 'host' requires hardware accelerator" == "The CPU type 'host' requires KVM")
+  failed pipeline 1919542960, total jobs 127, skipped 5, failed 2,  48753 tests, 441 skipped tests, 1 failed tests
+    Failed test qemu.qemu:unit / test-aio, msys2-64bit, 12 /aio/timer/schedule - ERROR:../tests/unit/test-aio.c:413:test_timer_schedule: assertion failed: (aio_poll(ctx, true))
+
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- target/arm/common-semi-target.h   | 6 +++---
- target/riscv/common-semi-target.h | 6 +++---
- 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/target/arm/common-semi-target.h b/target/arm/common-semi-target.h
-index 7bb442f24ca..6775a270aaa 100644
---- a/target/arm/common-semi-target.h
-+++ b/target/arm/common-semi-target.h
-@@ -12,7 +12,7 @@
- 
- #include "target/arm/cpu-qom.h"
- 
--static inline target_ulong common_semi_arg(CPUState *cs, int argno)
-+static inline uint64_t common_semi_arg(CPUState *cs, int argno)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-@@ -23,7 +23,7 @@ static inline target_ulong common_semi_arg(CPUState *cs, int argno)
-     }
- }
- 
--static inline void common_semi_set_ret(CPUState *cs, target_ulong ret)
-+static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-@@ -44,7 +44,7 @@ static inline bool is_64bit_semihosting(CPUArchState *env)
-     return is_a64(env);
- }
- 
--static inline target_ulong common_semi_stack_bottom(CPUState *cs)
-+static inline uint64_t common_semi_stack_bottom(CPUState *cs)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-diff --git a/target/riscv/common-semi-target.h b/target/riscv/common-semi-target.h
-index 7e6ea8da02c..663dedfdad2 100644
---- a/target/riscv/common-semi-target.h
-+++ b/target/riscv/common-semi-target.h
-@@ -11,14 +11,14 @@
- #ifndef TARGET_RISCV_COMMON_SEMI_TARGET_H
- #define TARGET_RISCV_COMMON_SEMI_TARGET_H
- 
--static inline target_ulong common_semi_arg(CPUState *cs, int argno)
-+static inline uint64_t common_semi_arg(CPUState *cs, int argno)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-     return env->gpr[xA0 + argno];
- }
- 
--static inline void common_semi_set_ret(CPUState *cs, target_ulong ret)
-+static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-@@ -35,7 +35,7 @@ static inline bool common_semi_sys_exit_is_extended(CPUState *cs)
-     return is_64bit_semihosting(cpu_env(cs));
- }
- 
--static inline target_ulong common_semi_stack_bottom(CPUState *cs)
-+static inline uint64_t common_semi_stack_bottom(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
+---
+v2
+  - allow status selection, handle empty strings as None
+  - allow individual pipeline selection
+  - extract individual tests
+  - allow skipping of jobs
+---
+ scripts/ci/gitlab-failure-analysis | 117 +++++++++++++++++++++++++++++
+ 1 file changed, 117 insertions(+)
+ create mode 100755 scripts/ci/gitlab-failure-analysis
+
+diff --git a/scripts/ci/gitlab-failure-analysis b/scripts/ci/gitlab-failure-analysis
+new file mode 100755
+index 00000000000..906725be973
+--- /dev/null
++++ b/scripts/ci/gitlab-failure-analysis
+@@ -0,0 +1,117 @@
++#!/usr/bin/env python3
++#
++# A script to analyse failures in the gitlab pipelines. It requires an
++# API key from gitlab with the following permissions:
++#  - api
++#  - read_repository
++#  - read_user
++#
++
++import argparse
++import gitlab
++import os
++
++#
++# Arguments
++#
++class NoneForEmptyStringAction(argparse.Action):
++    def __call__(self, parser, namespace, value, option_string=None):
++        if value == '':
++            setattr(namespace, self.dest, None)
++        else:
++            setattr(namespace, self.dest, value)
++
++
++parser = argparse.ArgumentParser(description="Analyse failed GitLab CI runs.")
++
++parser.add_argument("--gitlab",
++                    default="https://gitlab.com",
++                    help="GitLab instance URL (default: https://gitlab.com).")
++parser.add_argument("--id", default=11167699,
++                    type=int,
++                    help="GitLab project id (default: 11167699 for qemu-project/qemu)")
++parser.add_argument("--token",
++                    default=os.getenv("GITLAB_TOKEN"),
++                    help="Your personal access token with 'api' scope.")
++parser.add_argument("--branch",
++                    type=str,
++                    default="staging",
++                    action=NoneForEmptyStringAction,
++                    help="The name of the branch (default: 'staging')")
++parser.add_argument("--status",
++                    type=str,
++                    action=NoneForEmptyStringAction,
++                    default="failed",
++                    help="Filter by branch status (default: 'failed')")
++parser.add_argument("--count", type=int,
++                    default=3,
++                    help="The number of failed runs to fetch.")
++parser.add_argument("--skip-jobs",
++                    default=False,
++                    action='store_true',
++                    help="Skip dumping the job info")
++parser.add_argument("--pipeline", type=int,
++                    nargs="+",
++                    default=None,
++                    help="Explicit pipeline ID(s) to fetch.")
++
++
++if __name__ == "__main__":
++    args = parser.parse_args()
++
++    gl = gitlab.Gitlab(url=args.gitlab, private_token=args.token)
++    project = gl.projects.get(args.id)
++
++
++    pipelines_to_process = []
++
++    # Use explicit pipeline IDs if provided, otherwise fetch a list
++    if args.pipeline:
++        args.count = len(args.pipeline)
++        for p_id in args.pipeline:
++            pipelines_to_process.append(project.pipelines.get(p_id))
++    else:
++        # Use an iterator to fetch the pipelines
++        pipe_iter = project.pipelines.list(iterator=True,
++                                           status=args.status,
++                                           ref=args.branch)
++        # Check each failed pipeline
++        pipelines_to_process = [next(pipe_iter) for _ in range(args.count)]
++
++    # Check each pipeline
++    for p in pipelines_to_process:
++
++        jobs = p.jobs.list(get_all=True)
++        failed_jobs = [j for j in jobs if j.status == "failed"]
++        skipped_jobs = [j for j in jobs if j.status == "skipped"]
++        manual_jobs = [j for j in jobs if j.status == "manual"]
++
++        trs = p.test_report_summary.get()
++        total = trs.total["count"]
++        skipped = trs.total["skipped"]
++        failed = trs.total["failed"]
++
++        print(f"{p.status} pipeline {p.id}, total jobs {len(jobs)}, "
++              f"skipped {len(skipped_jobs)}, "
++              f"failed {len(failed_jobs)}, ",
++              f"{total} tests, "
++              f"{skipped} skipped tests, "
++              f"{failed} failed tests")
++
++        if not args.skip_jobs:
++            for j in failed_jobs:
++                print(f"  Failed job {j.id}, {j.name}, {j.web_url}")
++
++        # It seems we can only extract failing tests from the full
++        # test report, maybe there is some way to filter it.
++
++        if failed > 0:
++            ftr = p.test_report.get()
++            failed_suites = [s for s in ftr.test_suites if
++                             s["failed_count"] > 0]
++            for fs in failed_suites:
++                name = fs["name"]
++                tests = fs["test_cases"]
++                failed_tests = [t for t in tests if t["status"] == 'failed']
++                for t in failed_tests:
++                    print(f"  Failed test {t["classname"]}, {name}, {t["name"]}")
 -- 
 2.47.3
 
