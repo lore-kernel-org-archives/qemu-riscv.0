@@ -4,97 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92180CAC592
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Sep 2025 12:44:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53A03CAC5A7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Sep 2025 02:41:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v0ftd-0003ZB-Ps; Mon, 22 Sep 2025 08:44:00 -0400
+	id 1v0swY-0004HC-1b; Mon, 22 Sep 2025 22:39:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0ftE-0003TT-K2
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 08:43:32 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1v0swO-0004EC-GH
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 22:39:41 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v0ft9-00072O-UQ
- for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 08:43:31 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3f1153f4254so1264468f8f.1
- for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 05:43:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1v0swG-0003gw-Au
+ for qemu-riscv@nongnu.org; Mon, 22 Sep 2025 22:39:38 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-26983b5411aso36155935ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 22 Sep 2025 19:39:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758545005; x=1759149805; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1758595167; x=1759199967; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n+AQRU5D6V12P4jEQ1/5rEpDjVxKlca8uQBKv4v8I4E=;
- b=roqbcAroqGT3fGZO9fV6v5yh1Ii8et6rPoQMz0qpCm38ZETNwsgl24GQ8MgDQBJ+a/
- TGqUqidRUBUgZ47GHJk+QI7QQ7O9jz1t4t5ijOJgvNFGelLY6iSmmlyupsE/Hrc/1Bm3
- FpschiQ4ZU5NL2fV+gLkAZgN2oz/upzUw/dmBswcVQVbkJk9FDaGyLQkw85zRI10rwA6
- wB4oB00fHjZCdwpL+zPoiMQYN7fbuG0DCVj6wmsGbFom+sX8Lql4Cxwy4c4m+SXz/u+d
- IHD33Kdf7T11BmP7v9BEpZEjhNd4GT49rgwO3FSh2p+bZ1iLaaKj8aCrAwgzWzOFbXRv
- /JqA==
+ bh=WtS+tUcTZk2GBqf6yxqhjiU0irGyIDNvqIFdhqaZrSY=;
+ b=wwyDa6JkLfuLYwBHIc8zEiL39+DMOFgA8u6f9Y7p/++TqfwKw20od+LOsdtvKh/cOV
+ gQp/eSIAGhu8Ssm3+TIwVRKs90Vm05o8Js58buuuAedvLy60LdysavT6l5+5wtTzSIXW
+ HlsG4RWAh3hVBfZIYn7VgdnUB8c1xa0wOcwXx3ac0+CtYnzTtkiB2pTZUPIFPHwgrahR
+ GOyRuohSFDzpvwGUJG0RQnpEza4L1VWiFIJBuU6ZfcYq9pKhZHoKycesSsBqd+oWGRGW
+ OoEljtf4QotrMxOEzonSjKy1Xu4DwEyimbv0QrH2s5G+NoyIDZb+uIGkUPMgjPILc4eK
+ u0ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758545005; x=1759149805;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=n+AQRU5D6V12P4jEQ1/5rEpDjVxKlca8uQBKv4v8I4E=;
- b=YLSJXIMaitmbRKWT9QKPhyDtDdItpGMeZ+kCZOVvmifqgB+JzkH7vvkAaHjmTNxq4X
- B9Jmr4/xnZQ6JQIFwzDE049ZfHjcMfOqWOCxCVpt+Ak6X1pPstDRDuclqJq9l+NYkbTu
- hqWnwmPthNTBjcg9oTvW6WGeHIyauPjatwsDqtCr84vCvhFfXL3NL9DpHDHVzusS3IvX
- 1D5Zl6qus/mwsdez/KmPQJwG/2yogOq/XCtNpGGUKwITDfUIhQS6Bh7wfPUIPpxfQk7T
- oa9wwLSPH+LAe+rAKj9a1uDLBg8ry55V3u+tMVAmb5m7KvcEMh9KLcb6O2/r2/WONqhz
- Ho6Q==
+ d=1e100.net; s=20230601; t=1758595167; x=1759199967;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WtS+tUcTZk2GBqf6yxqhjiU0irGyIDNvqIFdhqaZrSY=;
+ b=NRJCJkjtZL0xh774yHE/Bh/W3V4Uc9QCdrVbRA5C3kmIQKh+LvxdqmRvkCL1i9Jfr6
+ Oc4xjey7+cigc7LE3F8VjOzQdnDdhyeqBZUUL2qXomKxvUURArj9lVnNwCQ2hrGYwu4E
+ 8yHfttThib68G6Q+LGZnnQhe+ED76258ux+vLfvQaOVVikhXTOOt5Wjd3dinTaC3Og/2
+ O5970HYqFeDET85A9UCGJaoBS/xR3gMlHy/edtL1LTpTeI1ofqYQRaW4w212pgEhMTN3
+ GJ6APTgl6cmhLsjCwxWTv2F8Q96mXPKsex0yIn91kWFln8sUhftAQz66AXGOpnBsSjVf
+ TKqA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU5O9e83hpvxQcDhQdvfcRDwZ6asMPF2oq9yL1C7QMbT3gwhPv0UeX+lJQyM/mwr+OMzTSvcZPggKlO@nongnu.org
-X-Gm-Message-State: AOJu0YzN5Tm1J30wkUw7wBtzuzMW2zzllj40vXlPvbiGzNLkYiwry+Is
- oLR9pVdu3Iv5yfxQCTdsxAMak/aK73/kicoMPdVajOMS11qWydPt2Sx6b/SlrEcPwDE=
-X-Gm-Gg: ASbGncuOTPkBx44o6x9hGWw7uz0KTLlIrFDT6RkTyvFx4WgHxKUgR3lH9/E5aELbDME
- xuYxN4T4zvr/KU67vI+mi1hQ6xHA34udXhGb8spdKwh+DvN/gEqvwOlwpGFXfGrJjLfLKkoLRko
- V8aPx1kq4CF50FRA238mFhnAJqHVy4ptikkSIUhKCIu8HmPpyNbWxBkp6F9JqEAYWPAKZw4DSl3
- ElmgclkWqzqdi31+Tg4qAnmhQ+vnfptCW3X6o7jiaTqcWJnAJyqubnefDvfgPi7yX+4WmHx0I60
- flcDNIcVrc8Dk2zFGbqjd9uTNeHi0xxmGtP+sEmpA9XHZg2yhjLqrhcXM383/I8F6CmR0wF8+WN
- FK1CILdHogpqVuoOK3wJ8vDS9G5rQhKrp4g==
-X-Google-Smtp-Source: AGHT+IGQR2xdxGcXqBlgPnaB7JWL9i+RW4RsClC3SkqmkHr3AnnY9UQv11HUhmWWvNdssr/MZqPpyA==
-X-Received: by 2002:a05:6000:2509:b0:3ec:db87:e5f4 with SMTP id
- ffacd0b85a97d-3ee7c55298emr11459511f8f.7.1758545005430; 
- Mon, 22 Sep 2025 05:43:25 -0700 (PDT)
-Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3f0e28c83d6sm14335469f8f.56.2025.09.22.05.43.24
+ AJvYcCUNTAjvgSb4Xhg8/dTWc/IxZzYs43vfzmjUhgR+4u2M+3Voxog29kp+tjcMbWxFwDCRptYv29DMmKJu@nongnu.org
+X-Gm-Message-State: AOJu0YwvepYvy2unKC0OxpOzw1PsYd61kb1jhY5LjcBby5oIeXtnKEQS
+ HWqUQyI3D9ZYTAqy4QPkwl5cSVIbE71WxtRYUFItuBGRXBY6bpArR53vLcuVF7H6AXk=
+X-Gm-Gg: ASbGncsuIGR8HVcwaIy+qI49JF0YfC3kNi6WiiiP0IMD2ABTvW0MMsLU5P0Wr3kX19d
+ bPUYtbhA2ZvIpB9zOZp8DE/2Nkj+r/Mty4Y+9KA8hB98wZ38Wrw0N0ISWHHbCe4RKo5HgjRuvFb
+ pdSLpKKDyCjB3HlsUS5JrJOy53DejLfCy7rB1tpRzXLSqReU3+NP8OZRE34pSDnF+FJs/LOxidw
+ 7luHg0DY6OjP17Wt84HCxEwgA1ROHURjEzX9sAGsI351BEsQWQ6KKRf80+/lwOxYSpWS3lHods+
+ YRhUK1jPgr6ObXdyE/9wJy86OPYO3QcaKtd3K0gTtR7E0/8KfrngXLp83x7IztS8zjwMsgcuB++
+ 4A/V76b1c1sYrQIEjopWZMHKjJfge
+X-Google-Smtp-Source: AGHT+IFhdkBYZJ64ekLETcR0+kLRvIW8hmVQeZ3JUqgpSGj4LuHeM+ubYQVBCmKgaFBEgQRM79KwiQ==
+X-Received: by 2002:a17:902:ef4c:b0:26e:62c9:1cc4 with SMTP id
+ d9443c01a7336-27cc1197880mr10617925ad.4.1758595166932; 
+ Mon, 22 Sep 2025 19:39:26 -0700 (PDT)
+Received: from stoup.. ([71.212.157.132]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-77f0da43089sm9899622b3a.90.2025.09.22.19.39.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Sep 2025 05:43:24 -0700 (PDT)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 8F2035F7C4;
- Mon, 22 Sep 2025 13:43:23 +0100 (BST)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org,  Palmer Dabbelt <palmer@dabbelt.com>,  Alexandre
- Iooss <erdnaxe@crans.org>,  Mahmoud Mandour <ma.mandourr@gmail.com>,
- qemu-riscv@nongnu.org,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Thomas Huth <thuth@redhat.com>,  Peter
- Maydell <peter.maydell@linaro.org>,  Alistair Francis
- <alistair.francis@wdc.com>,  qemu-arm@nongnu.org,  Weiwei Li
- <liwei1518@gmail.com>,  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,  Richard Henderson
- <richard.henderson@linaro.org>
-Subject: Re: [PATCH 12/25] semihosting/arm-compat-semi: replace target_ulong
- with vaddr
-In-Reply-To: <935cfb4b-1990-4ca8-91a2-b9b96b503c42@linaro.org> ("Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Mon, 22 Sep 2025 13:53:26
- +0200")
-References: <20250922093711.2768983-1-alex.bennee@linaro.org>
- <20250922093711.2768983-13-alex.bennee@linaro.org>
- <935cfb4b-1990-4ca8-91a2-b9b96b503c42@linaro.org>
-User-Agent: mu4e 1.12.12; emacs 30.1
-Date: Mon, 22 Sep 2025 13:43:23 +0100
-Message-ID: <87ldm6odxw.fsf@draig.linaro.org>
+ Mon, 22 Sep 2025 19:39:26 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v2 04/12] target/riscv: Record misa_ext in
+ TCGTBCPUState.cs_base
+Date: Mon, 22 Sep 2025 19:39:08 -0700
+Message-ID: <20250923023922.3102471-5-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250923023922.3102471-1-richard.henderson@linaro.org>
+References: <20250923023922.3102471-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x432.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -117,106 +105,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+The tb_flush within write_misa was incorrect.  It assumed
+that we could adjust the ISA of the current processor and
+discard all TB and all would be well.  But MISA is per vcpu,
+so globally flushing TB does not mean that the TB matches
+the MISA of any given vcpu.
 
-> On 22/9/25 11:36, Alex Benn=C3=A9e wrote:
->> From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
->> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
->> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
->> Message-ID: <20250822150058.18692-10-pierrick.bouvier@linaro.org>
->> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
->> ---
->>   semihosting/arm-compat-semi.c | 22 +++++++++++-----------
->>   1 file changed, 11 insertions(+), 11 deletions(-)
->> diff --git a/semihosting/arm-compat-semi.c
->> b/semihosting/arm-compat-semi.c
->> index 6725dcf4ba7..29cdab66f73 100644
->> --- a/semihosting/arm-compat-semi.c
->> +++ b/semihosting/arm-compat-semi.c
->> @@ -123,7 +123,7 @@ static GuestFD console_out_gf;
->>    */
->>     typedef struct LayoutInfo {
->> -    target_ulong rambase;
->> +    vaddr rambase;
->
-> This is what the subject describes. Most of the other changes aren't.
+By recording misa in the tb state, we ensure that the code
+generated matches the vcpu.
 
-I was going to say vaddr is functionally a uint64_t but we actually made
-it a uintptr_t in February. Shall I update to:
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Weiwei Li <liwei1518@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-riscv@nongnu.org
+---
+ target/riscv/csr.c         | 3 ---
+ target/riscv/tcg/tcg-cpu.c | 3 ++-
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
-  semihosting/arm-compat-semi: replace target_ulong
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 8842e07a73..3c8989f522 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -25,7 +25,6 @@
+ #include "pmu.h"
+ #include "time_helper.h"
+ #include "exec/cputlb.h"
+-#include "exec/tb-flush.h"
+ #include "exec/icount.h"
+ #include "accel/tcg/getpc.h"
+ #include "qemu/guest-random.h"
+@@ -2173,8 +2172,6 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+         env->mstatus &= ~MSTATUS_FS;
+     }
+ 
+-    /* flush translation cache */
+-    tb_flush(env_cpu(env));
+     env->xl = riscv_cpu_mxl(env);
+     return RISCV_EXCP_NONE;
+ }
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 78fb279184..143ab079d4 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -191,7 +191,8 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
+ 
+     return (TCGTBCPUState){
+         .pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc,
+-        .flags = flags
++        .flags = flags,
++        .cs_base = env->misa_ext,
+     };
+ }
+ 
+-- 
+2.43.0
 
-  Replace with vaddr or uint64_t where appropriate
-
-?
->
->>       size_t ramsize;
->>       hwaddr heapbase;
->>       hwaddr heaplimit;
->> @@ -214,7 +214,7 @@ static LayoutInfo common_semi_find_bases(CPUState *c=
-s)
->>    * global, and we assume that the guest takes care of avoiding any rac=
-es.
->>    */
->>   #ifndef CONFIG_USER_ONLY
->> -static target_ulong syscall_err;
->> +static uint64_t syscall_err;
->>     #include "semihosting/uaccess.h"
->>   #endif
->> @@ -260,8 +260,8 @@ static void common_semi_rw_cb(CPUState *cs, uint64_t=
- ret, int err)
->>   {
->>       /* Recover the original length from the third argument. */
->>       CPUArchState *env G_GNUC_UNUSED =3D cpu_env(cs);
->> -    target_ulong args =3D common_semi_arg(cs, 1);
->> -    target_ulong arg2;
->> +    uint64_t args =3D common_semi_arg(cs, 1);
->> +    uint64_t arg2;
->>       GET_ARG(2);
->>         if (err) {
->> @@ -300,9 +300,9 @@ static void common_semi_seek_cb(CPUState *cs, uint64=
-_t ret, int err)
->>    * is defined by GDB's remote protocol and is not target-specific.)
->>    * We put this on the guest's stack just below SP.
->>    */
->> -static target_ulong common_semi_flen_buf(CPUState *cs)
->> +static uint64_t common_semi_flen_buf(CPUState *cs)
->>   {
->> -    target_ulong sp =3D common_semi_stack_bottom(cs);
->> +    vaddr sp =3D common_semi_stack_bottom(cs);
->>       return sp - 64;
->>   }
->>   @@ -389,9 +389,9 @@ void semihosting_arm_compatible_init(void)
->>   void do_common_semihosting(CPUState *cs)
->>   {
->>       CPUArchState *env =3D cpu_env(cs);
->> -    target_ulong args;
->> -    target_ulong arg0, arg1, arg2, arg3;
->> -    target_ulong ul_ret;
->> +    uint64_t args;
->> +    uint64_t arg0, arg1, arg2, arg3;
->> +    uint64_t ul_ret;
->>       char * s;
->>       int nr;
->>       int64_t elapsed;
->> @@ -462,7 +462,7 @@ void do_common_semihosting(CPUState *cs)
->>         case TARGET_SYS_WRITEC:
->>           /*
->> -         * FIXME: the byte to be written is in a target_ulong slot,
->> +         * FIXME: the byte to be written is in a uint64_t slot,
->>            * which means this is wrong for a big-endian guest.
->>            */
->>           semihost_sys_write_gf(cs, common_semi_dead_cb,
->> @@ -688,7 +688,7 @@ void do_common_semihosting(CPUState *cs)
->>         case TARGET_SYS_HEAPINFO:
->>           {
->> -            target_ulong retvals[4];
->> +            uint64_t retvals[4];
->>               int i;
->>   #ifdef CONFIG_USER_ONLY
->>               TaskState *ts =3D get_task_state(cs);
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
 
