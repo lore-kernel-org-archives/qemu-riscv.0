@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35FACCAC5A5
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Sep 2025 07:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0CFBCAC5A5
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Sep 2025 07:50:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v1KFO-0000up-3a; Wed, 24 Sep 2025 03:49:06 -0400
+	id 1v1KFI-0000tV-NB; Wed, 24 Sep 2025 03:49:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1v1KFA-0000rX-9r
- for qemu-riscv@nongnu.org; Wed, 24 Sep 2025 03:48:52 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ id 1v1KFE-0000sG-Jj
+ for qemu-riscv@nongnu.org; Wed, 24 Sep 2025 03:48:56 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1v1KF4-0007da-Fw
- for qemu-riscv@nongnu.org; Wed, 24 Sep 2025 03:48:51 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-76e6cbb991aso5405823b3a.1
- for <qemu-riscv@nongnu.org>; Wed, 24 Sep 2025 00:48:45 -0700 (PDT)
+ id 1v1KFA-0007dr-4K
+ for qemu-riscv@nongnu.org; Wed, 24 Sep 2025 03:48:55 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-267f0fe72a1so46880615ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 24 Sep 2025 00:48:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1758700124; x=1759304924; darn=nongnu.org;
+ d=sifive.com; s=google; t=1758700127; x=1759304927; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eb55lICRRwyizrb+ynSF6MmTdD+9/2j2YC45GQfIco0=;
- b=huT9JV1QfeZhIWjl6bqyT8tBWy4bHFacDBuh6mEHZrUQxlC56Th2J0QR2wztsuC3HK
- jm/SaDU4sumzH8HNV2ECk0GRK2kghhkw9+Dy3EAwXBRL2XXRInobP1yFfhOFs+c8k9MW
- kwRDvUgPdDZn0Gc5Dd2EKebVy+B83yBweGIErJ/7LmbMqx6UJrNNfQTlf93UU9FdC2t/
- o9cYRvnnVU/jY/k+McwSaRq22NbsKYOQid5VDrtjuDZmjpYQKdnNAdKEUcwp3tqc3sZv
- OG0ZxYff3wUeSvNSV5qkYGI6jjssz4Dg861VYt+ojLkTtHDuJbUga8UF5tmFndkAidBo
- XEfg==
+ bh=ojdUEYl9Lbk4rUbClRXCfBPwqK3RCWoKxJJxNd/cr2s=;
+ b=PBR5+1aE/dZF03ocNTuTAOs0w9KXqQp5Sr8CcrDO7muT7jGzzLRwhsAYXQWyPKuP3r
+ 0nbDi0HFVn3QdmIXt4uvXT5LQFhFSGEl07+90T7IRQA1RjDZXJUA80Row5EIDFSQXx3w
+ gRvdUTHRRaMF1W1A718DqzwcRcFIkmgFxBMWOzFjHcaa53T1DPwFvNDcVw1ZeoT3sC7E
+ auxThna8GqWkWJGH3ljy5vDJ24KDAxkXjZpFi73+xWdPXtCc6nGAcOlckpuy9fgpAt0h
+ Bd2GOPMYr8L0IHbEtRrtTF7soXTXcR8tVBQ2esu2KnKwquFX14Ywwxz/seT83Kh4pttN
+ nqaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758700124; x=1759304924;
+ d=1e100.net; s=20230601; t=1758700127; x=1759304927;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eb55lICRRwyizrb+ynSF6MmTdD+9/2j2YC45GQfIco0=;
- b=pv4Jg2r3vHUhaic7vxpacF0cQ4Sw33IjmL4Dso7Aoj7QypM99ll8njzez80zvMh0es
- CjHS+GgTGBGLO1Uf8McVXrS1cSm74HEJvF6iwe/dmtIJL+FVGRPEFeXwhHvaFJPSYWOg
- Xmbt/mNmwSCVJkRnEZREceWTfPnL0LeELPuULaf10K7iw4TqretgV4WTSDN8bS3SnGQ8
- jTSUVYaDQQf2OPqvXianfERd5s+ocUIJ1jW7wz+vIBm4+onNecn3zPwZZOZMsW/nEHds
- BJCKytOBO22sOywhQVCNzD6UO76k5aW40OBVyxV+6gkJtxGccE853f27aHlNFTHAwwmN
- utFw==
+ bh=ojdUEYl9Lbk4rUbClRXCfBPwqK3RCWoKxJJxNd/cr2s=;
+ b=wGn99CP+Uh/DkEO0Tb5OpS1rA1aIL2twITTFV3SNs9+8G0ei0ok+fY2Rd0pEBCwU+X
+ sQFQdJnxcxinq00+U3wgoY3zjy7pB04Cf/wDHvcCwbfikWuvYDi6vtABl4ZfyOyZIzKO
+ 9c4Z9rEIh7fUuJqHjcJjumtkQ1UAfuMp+pxnUgdMOxZ6fCm0tQgEAs1nawp60p7a+/pI
+ N2pAjQb53m12bqYE+zbW27ivly6FvB9rXPVJ8okOfPdJXkFFAs1Sn9zYp28o6ip2woO3
+ xsolJcsM4dFi8vB5DfZqNEABWTeqG8Q2tvD+OaXNJdZbQn3SbKIWf3+Ks7DpgQlaZheQ
+ wW0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrX64RVR1XtLMYWKg5EhPnnPRvdOtPhYzBVNSaG5ComEFiZO9v/opGjRP3JHd8ccW6i6YXFdB9kwnf@nongnu.org
-X-Gm-Message-State: AOJu0Yx7WqGXAFgkQawoApS03EWtHsPxjq4zeXECvbZpj+g2pMTjrWEi
- 8p9N9evwnMLmRzBGaKKg9/yHEnJhlwdecFg1GVLUosg/z4o1l859sE6FbwrzvIY/g9w=
-X-Gm-Gg: ASbGncvXtxUp5PB3Vp+im1eBTnPTQQrIAWgAPhDnVnWryddj8PPsHghkJmW8XXrY0f/
- Hv0ybpeeQJcXM9p7/pUzGmC/RWEjdYeyNoDhoSZHBHrBZ33wVGav2XXcSXN8dOPcNT6/ahUm9G1
- EIzI3zqTa0l/lCBYrTAz/DeGHPDjcASXgNatUZwwtxVzOycDBOXnHuVAUz8iiwBpsF9aWCPZfqQ
- ZGokFSQk30rIGtue7lrnIeGuoFGGUvUde5oJYcDZ0OfRXcKfK9qvMD1AWTxxmqgyvR6QaWnpkH/
- lxPS63kvddGX3PA6dUxj7qSKtVg5Mp8VsPTY1zr23pqAmT8rN4UOhOpRrSOxZpvqekO1oRbbS1O
- twAqzLm2Y8mU2FhmJVnvLuvQToB1zFbq9ic1A12Oq3vx+
-X-Google-Smtp-Source: AGHT+IGnzKxU10AMbfLST1qfylj0DTrLsvoSmcBWAaqYshPA2yR88f2r00biVnO8c4F2wOrEmYATtA==
-X-Received: by 2002:a05:6a20:3d24:b0:262:c083:bb41 with SMTP id
- adf61e73a8af0-2cfde03e8b8mr6921745637.3.1758700124330; 
- Wed, 24 Sep 2025 00:48:44 -0700 (PDT)
+ AJvYcCVGjUktNsEs3Iv9l0FatUb+MAFtNCGZEiGLrMtb4zlWhHAuFUgFj66NjTeCOdSV1geIuY2oSVRp/MaL@nongnu.org
+X-Gm-Message-State: AOJu0YwBZh7lQTCmh1Hu2gTlZhiYFPOMHAX8MvnAQR+e4A5yGGu4n4rt
+ NhBVg7W0HRRRccFi4AzZvxSf7+Ewx2md6hop7Q/cZzBsZWb5RtqEolRtGoa2dj3Gnhg=
+X-Gm-Gg: ASbGncvm9Af3SmjjnPUEJSQfJ3LgtRviHTA0Bbbwm0vT4O+RPeOvHuk3vsQztBo65Zt
+ fKKc/+6tx71RDplb1bWfeoWD562hJrSaB8/opClf/MDZz6bxKymGVa6EiH3LSlqd73BgiiiEqAh
+ DkNap+SGARw3hTYtTxFgRtvyZq+lXdFMJFHjb8eXuyUruEtBl0QHQXYI/mUSyfvALE7yq348jr+
+ tfE/qBx21wRfiuWwQM7WbAMOIE1Ih2lpLLjwI1pAErc6T8sL/pzM3kOw5IkLa9eJv0C+Z9ip7/b
+ BwOhmt/7DaqXc942hj/U/9qGNGhBUoRlo8EyeccVkXepA1WLw5ngZoAGsL8hUfLISmMf1mC4M3o
+ qLkCF3vfJEaeY7ETKQD5QYInvhLJqrESdASi6vT9yyUsk
+X-Google-Smtp-Source: AGHT+IH/1pYoQAma4pPmBTo3WalDFbmbrpkTdz+H3LWfkBXZsc4ls0A7feq/6dzkiQ51t16jgFUe1Q==
+X-Received: by 2002:a17:903:32c8:b0:24c:7b94:2f87 with SMTP id
+ d9443c01a7336-27cc156e18dmr69369035ad.14.1758700126617; 
+ Wed, 24 Sep 2025 00:48:46 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b5541f0374csm8778502a12.49.2025.09.24.00.48.42
+ 41be03b00d2f7-b5541f0374csm8778502a12.49.2025.09.24.00.48.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Sep 2025 00:48:43 -0700 (PDT)
+ Wed, 24 Sep 2025 00:48:46 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -74,23 +74,23 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v1 2/3] target/riscv: Fix SSP CSR error handling in VU/VS mode
-Date: Wed, 24 Sep 2025 15:48:17 +0800
-Message-ID: <20250924074818.230010-3-jim.shu@sifive.com>
+Subject: [PATCH v1 3/3] target/riscv: Fix ssamoswap error handling
+Date: Wed, 24 Sep 2025 15:48:18 +0800
+Message-ID: <20250924074818.230010-4-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250924074818.230010-1-jim.shu@sifive.com>
 References: <20250924074818.230010-1-jim.shu@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=jim.shu@sifive.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=jim.shu@sifive.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,30 +106,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In VU/VS mode, accessing $ssp CSR will trigger the virtual instruction
-exception instead of illegal instruction exception if SSE is disabled
-via xenvcfg CSRs.
+Follow the RISC-V CFI v1.0 spec [1] to fix the exception type
+when ssamoswap is disabled by xSSE.
 
-This is from RISC-V CFI v1.0 spec ch2.2.4. Shadow Stack Pointer
+[1] RISC-V CFI spec v1.0, ch2.7 Atomic Swap from a Shadow Stack Location
 
 Signed-off-by: Jim Shu <jim.shu@sifive.com>
 ---
- target/riscv/csr.c | 2 ++
- 1 file changed, 2 insertions(+)
+ target/riscv/helper.h                         |  5 ++
+ target/riscv/insn_trans/trans_rvzicfiss.c.inc |  8 +++
+ target/riscv/op_helper.c                      | 49 +++++++++++++++++++
+ 3 files changed, 62 insertions(+)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 8842e07a73..0299a214ef 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -204,6 +204,8 @@ static RISCVException cfi_ss(CPURISCVState *env, int csrno)
- #if !defined(CONFIG_USER_ONLY)
-         if (env->debugger) {
-             return RISCV_EXCP_NONE;
-+        } else if (env->virt_enabled) {
-+            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-         }
- #endif
-         return RISCV_EXCP_ILLEGAL_INST;
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index f712b1c368..c82bacdc39 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1284,3 +1284,8 @@ DEF_HELPER_4(vgmul_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_5(vsm4k_vi, void, ptr, ptr, i32, env, i32)
+ DEF_HELPER_4(vsm4r_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_4(vsm4r_vs, void, ptr, ptr, env, i32)
++
++/* CFI (zicfiss) helpers */
++#ifndef CONFIG_USER_ONLY
++DEF_HELPER_1(ssamoswap_disabled, void, env)
++#endif
+diff --git a/target/riscv/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+index 45686af4d6..f4a1c12ca0 100644
+--- a/target/riscv/insn_trans/trans_rvzicfiss.c.inc
++++ b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+@@ -91,7 +91,11 @@ static bool trans_ssamoswap_w(DisasContext *ctx, arg_amoswap_w *a)
+     }
+ 
+     if (!ctx->bcfi_enabled) {
++#ifndef CONFIG_USER_ONLY
++        gen_helper_ssamoswap_disabled(tcg_env);
++#else
+         return false;
++#endif
+     }
+ 
+     TCGv dest = dest_gpr(ctx, a->rd);
+@@ -116,7 +120,11 @@ static bool trans_ssamoswap_d(DisasContext *ctx, arg_amoswap_w *a)
+     }
+ 
+     if (!ctx->bcfi_enabled) {
++#ifndef CONFIG_USER_ONLY
++        gen_helper_ssamoswap_disabled(tcg_env);
++#else
+         return false;
++#endif
+     }
+ 
+     TCGv dest = dest_gpr(ctx, a->rd);
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 110292e84d..8382aa94cb 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -717,4 +717,53 @@ target_ulong helper_hyp_hlvx_wu(CPURISCVState *env, target_ulong addr)
+     return cpu_ldl_code_mmu(env, addr, oi, ra);
+ }
+ 
++void helper_ssamoswap_disabled(CPURISCVState *env)
++{
++    int exception = RISCV_EXCP_ILLEGAL_INST;
++
++    /*
++     * Here we follow the RISC-V CFI spec [1] to implement the exception type
++     * of ssamoswap* instruction.
++     *
++     * [1] RISC-V CFI spec v1.0, ch2.7 Atomic Swap from a Shadow Stack Location
++     *
++     * Note: We have already checked some conditions in trans_* functions:
++     *   1. The effective priv mode is not M-mode.
++     *   2. The xSSE specific to the effictive priv mode is disabled.
++     */
++    if (!get_field(env->menvcfg, MENVCFG_SSE)) {
++        /*
++         * Disabled M-mode SSE always trigger illegal instruction when
++         * current priv mode is not M-mode.
++         */
++        exception = RISCV_EXCP_ILLEGAL_INST;
++        goto done;
++    }
++
++    if (!riscv_has_ext(env, RVS)) {
++        /* S-mode is not implemented */
++        exception = RISCV_EXCP_ILLEGAL_INST;
++        goto done;
++    } else if (env->virt_enabled) {
++        /*
++         * VU/VS-mode with disabled xSSE will trigger the virtual instruction
++         * exception.
++         */
++        exception = RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++        goto done;
++    } else {
++        /*
++         * U-mode with disabled S-mode SSE will trigger the illegal instruction
++         * exception.
++         *
++         * Note: S-mode is already handled in the disabled M-mode SSE case.
++         */
++        exception = RISCV_EXCP_ILLEGAL_INST;
++        goto done;
++    }
++
++done:
++    riscv_raise_exception(env, exception, GETPC());
++}
++
+ #endif /* !CONFIG_USER_ONLY */
 -- 
 2.43.0
 
