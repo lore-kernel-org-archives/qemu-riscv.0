@@ -4,102 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BBA8CAC5A5
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Sep 2025 18:24:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C046CAC5AE
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Sep 2025 20:31:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v1U9a-0006t6-8B; Wed, 24 Sep 2025 14:23:46 -0400
+	id 1v1W8O-0000iC-56; Wed, 24 Sep 2025 16:30:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1v1U9N-0006pm-Ha
- for qemu-riscv@nongnu.org; Wed, 24 Sep 2025 14:23:37 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1v1W8G-0000hQ-EI
+ for qemu-riscv@nongnu.org; Wed, 24 Sep 2025 16:30:32 -0400
+Received: from mail-yx1-xb131.google.com ([2607:f8b0:4864:20::b131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1v1U97-0004jE-U4
- for qemu-riscv@nongnu.org; Wed, 24 Sep 2025 14:23:33 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-631787faf35so140241a12.3
- for <qemu-riscv@nongnu.org>; Wed, 24 Sep 2025 11:23:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1v1W85-0007Yt-P4
+ for qemu-riscv@nongnu.org; Wed, 24 Sep 2025 16:30:31 -0400
+Received: by mail-yx1-xb131.google.com with SMTP id
+ 956f58d0204a3-6353e91a04aso111181d50.2
+ for <qemu-riscv@nongnu.org>; Wed, 24 Sep 2025 13:30:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758738184; x=1759342984; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qhX3cGpugBOUCAOUFnHfVWF9PYilYJFsOAksyFoBrSk=;
- b=AaFrhDyqXimvU65zQSf9Onadfj8OjBl9EgNqPmzDP2GG4ZBHh6Zsi5/xBwA3QjHaVY
- 1l/XJImxF/8fIN3tTcpg/RgUwAeLu0K2sE8n+7+DYueFb1w9zzidR3ck49iD046QvMVa
- ft5pIoYoI1NwHWOZRE7toFcdeqP9msjGR2l3BZvFYL1mUXq1BYf/28u9YDdN2JwtbmKN
- 6WTlB9+2MRkik3UiPV0h/sNK+hQdIX8GSOdAuLVdZUasRaSP5PJSA5EczXNydaCLwnYL
- GoXZ1ZH/fZiPYThz78bUG51tXYsC1sTCv8qRQUzOwocybEAiFRFrgFBOhm19jadllSbM
- UypA==
+ d=ventanamicro.com; s=google; t=1758745817; x=1759350617; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=FTuDQF9zXmn9U0UoAIk+2JX1nQHHEydEwUFb5dgsHgE=;
+ b=AfQvujr7L503s8hW3CBurQuEBP5FJ0pP9L6kbrwLDZ/AshoL4E906pmgK359LVOPkO
+ pI1OyhZQ5yFxWLQQuFm+7OZ2XmPxAaFaayZSAZLMV3PosXeNC1yfs1m2LCxa/oC48wKw
+ rCh5i9J3T0ymIqKajdzACFCfiaOa348sAJb62o7jMS7yWnTPo4mwdv4FtNfPOEUHGpS5
+ WGKmHSs5uP4OzgvXRhyDUCG6/sQnJ38ATxo/6VwPthkXMPREZMWjGmPcMvhfeCvbOJWm
+ udnBu0bKNLP7s2CYpXQPpbaRGXGTUmAGshJtJDQ1C7uBuBrD3U0GNn6OyFXGsClKpMWk
+ Jdfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758738184; x=1759342984;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qhX3cGpugBOUCAOUFnHfVWF9PYilYJFsOAksyFoBrSk=;
- b=vp4Xc6AsSG4TrgQK6SAQkyZpjV1LEvrV+60H2IeuJz+lyCUcglTWRD6TdC8zztO8wM
- tXc5sJnHGkqkCOy1IataBgDWNenBQzpzyf66J9nwo0dCka+HL87PdbvRpnv2LNVEweq3
- a7+GD1cc/l7J5X28gvqWWiAnGWsUH0grXSz062hz87Ebxfr/MIlbl8fAjhZXEzVE2zZw
- Bgv3NWkBG/Wj1CtqPL+2FOgpsTFD5oNL09tVkxGUAYT1dDgbyBJHkh3VHcEmvK/g3Or+
- VzGC3VLm5aM5Pdf8mZoUSaJT2yXgyiTVQsxZ01T2HP1mCamFkEuCK2lOP5alvnHVO/mv
- 56lg==
+ d=1e100.net; s=20230601; t=1758745817; x=1759350617;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FTuDQF9zXmn9U0UoAIk+2JX1nQHHEydEwUFb5dgsHgE=;
+ b=ditp1Zm4FV9uKRwSvyPKKG59yMCihcpTKpCKeGYDci9TPo0N1WtTRIl0f2+t/0zKD9
+ vCnBEIQc1pD8XIZFZgsj2PS8/LKE1ktvfLOeppPbPPR2VKaeLfXETfYbiwdH6FFgaYoG
+ LZpGc/HelXzHpc3aeEGJsGMzo1VX6X0fR25ZpYWboc49hxwNjbvVeuUODoJw5Dag+AKs
+ i0xgGQ71qJOS+874bgwO9tJQfDt0fUchaMwcq7LY/s/RgzldvpWtW5wxHBP3ZK/2eZy5
+ UTFQHk+kv9x4qlMsf35U2Fw7kDpIsAjOlIR/VNzOja6r0sWZPmJRxIzRfMcVzbLM6J5D
+ EcRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWq7OeT0Mv2VHhqs+S+wNDSekCyhGXgT3oqEKbHeXYwWIYvBnnAlbdcG0oZJgEtAo7jYZ9tD/4Sathn@nongnu.org
-X-Gm-Message-State: AOJu0Ywd4KLgTGtJsv7ja0tKswA95goNyFt2xjjldWWYUW6hau5QnUDX
- iK26USQQOY2YJx0Bh9Rba+/6KpIrC5U2+XxtCgSFnsCD7T8XDxEpiVFV
-X-Gm-Gg: ASbGnct6SgFpgdfWnQo4thBpLBwwsyZXtbGwrJ7Zq164obkWSpOhn2RHv3ypt/qnwN5
- QJhDQnmBBpg4MQRvTAgy+WiZCXGDCN6e5/whZv1NAZqv75O5Hs489RnFpAfi1SGffAG8aglNh2E
- TEd8prhnn0QuiZKNQAUq5iQmRdoYMHAkfFVNQVtXwPHbdhYgMuiBMPmgjKNKYAYvWm9Y+620gsi
- 2q7WYX6BEEbBNLkGpsMkqzcZZkihMR0HLZ/N5NHkfZ38U7jWkJe7PM4MLCaC+nZeohQ8geDBuec
- Jxy+6yTIr19NO2Hhw7WS34gtd+NN7VLnwqbBlVYoFsOhCs66q+v0NyVasnj7NR3WuJFIyboE17P
- E09CXq1MRJmVS7wMHTX7qWmvTel+lKNKXEXuIvuUUT7E2cFWT+b+1lXol9GtDAQkCGg==
-X-Google-Smtp-Source: AGHT+IHO1mlgZyZ9TKjlKqlWG5u19lYUIZPxFjkaI7EZ8+kMPox+tqZoyHZGlyu4TjNoGkUGN8NZyg==
-X-Received: by 2002:aa7:d441:0:b0:62f:68c3:57d0 with SMTP id
- 4fb4d7f45d1cf-6349f9cbc18mr301420a12.4.1758738184169; 
- Wed, 24 Sep 2025 11:23:04 -0700 (PDT)
-Received: from ehlo.thunderbird.net (ip-109-40-240-217.web.vodafone.de.
- [109.40.240.217]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-62fb10537d1sm12229963a12.24.2025.09.24.11.23.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Sep 2025 11:23:03 -0700 (PDT)
-Date: Wed, 24 Sep 2025 18:16:51 +0000
-From: Bernhard Beschow <shentey@gmail.com>
-To: Peter Maydell <peter.maydell@linaro.org>,
- =?ISO-8859-1?Q?Daniel_P=2E_Berrang=E9?= <berrange@redhat.com>
-CC: qemu-devel@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>,
- Thomas Huth <thuth@redhat.com>,
- =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>,
- qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
-Subject: =?US-ASCII?Q?Re=3A_=5BRFC_PATCH=5D_docs/system/security=3A_Restrict?=
- =?US-ASCII?Q?_=22virtualization_use_case=22_to_specific_machines?=
-In-Reply-To: <CAFEAcA_wt3HwDq=sJ+VuLdx_RFFwB6E9FjrbT1zgNXGGvfQ9YA@mail.gmail.com>
-References: <20250908125058.220973-1-peter.maydell@linaro.org>
- <aL7xrilR-gyByKEM@redhat.com>
- <CAFEAcA_wt3HwDq=sJ+VuLdx_RFFwB6E9FjrbT1zgNXGGvfQ9YA@mail.gmail.com>
-Message-ID: <B5215A1D-C8F5-44FD-B19B-70D78B7FD4F5@gmail.com>
+ AJvYcCVCiLbw3rOoMX+bTs0wWKEQdrhoE6HgteZ2l6zKjODruA0kCoV8sX9WCot1X3O3UNP8wjdY8PSBlEYs@nongnu.org
+X-Gm-Message-State: AOJu0YwI/GRukufM9U5W/Ttr1/oixSU7Soibz1bH5HkRJDa6smL98qwP
+ Azgixh4i3wYkCWjtikexVp2lreXxIwzsiDV9jA+X7SaiDYbCP4qyfgkypkEgPyXsDnA=
+X-Gm-Gg: ASbGncujUbtzh9vu4u6gn2J1oGgkfE2bO4+HpMwnE9A7Q018mD4NzdiXlULUxRQcnhC
+ Z5PTbqqDXqKdnZXnPf+JKuBmuwqfwVNR7/srVUeiokOnk/hBwot1euYQzcSKwxptEduazAHpUi2
+ gFlb+pCXGFj6PtvmV87t58ShoY4QcpzAs5wQyBErJcGoPqAbX7n8ksVUIgO5YAN0OkKslS6AY4i
+ wWNfVbMmSD/YpKpaOjrdC6rvEblqBQg7eq570zftmV0r0XsLf1vb3gr9wHgiWxQPbaQ//z/fP97
+ F7AA0eRHwXs307t6ji2Bn8XoAWD8nBOsVjRyVuXWWT9/JPOgyFE5S/NllI1CyGPDLl0gsWfRkhz
+ +nLxSZyMri8+Y2O33XZyTJ7FD0jw95cStdTnP7Vq2PQ==
+X-Google-Smtp-Source: AGHT+IEo0ToDd65nMxjcKVOrJipoOYGWZMMtv6EqZuB8UfsIU8JhhQfds7+U5HDWBzi3XFjdfUf3PA==
+X-Received: by 2002:a05:690e:160a:b0:636:1784:c5ff with SMTP id
+ 956f58d0204a3-6361a7156eemr594115d50.11.1758745816843; 
+ Wed, 24 Sep 2025 13:30:16 -0700 (PDT)
+Received: from localhost ([173.23.183.85]) by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-75210e5afa0sm22166757b3.3.2025.09.24.13.30.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Sep 2025 13:30:16 -0700 (PDT)
+Date: Wed, 24 Sep 2025 15:30:15 -0500
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH] target/riscv/kvm: Use riscv_cpu_is_32bit() when handling
+ SBI_DBCN reg
+Message-ID: <20250924-56f55a61a8428438eb6252ce@orel>
+References: <20250924164515.51782-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=shentey@gmail.com; helo=mail-ed1-x534.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250924164515.51782-1-philmd@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b131;
+ envelope-from=ajones@ventanamicro.com; helo=mail-yx1-xb131.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,152 +105,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-Am 8=2E September 2025 15:15:43 UTC schrieb Peter Maydell <peter=2Emaydell=
-@linaro=2Eorg>:
->On Mon, 8 Sept 2025 at 16:09, Daniel P=2E Berrang=C3=A9 <berrange@redhat=
-=2Ecom> wrote:
->>
->> On Mon, Sep 08, 2025 at 01:50:57PM +0100, Peter Maydell wrote:
->> > Currently our security policy defines a "virtualization use case"
->> > where we consider bugs to be security issues, and a
->> > "non-virtualization use case" where we do not make any security
->> > guarantees and don't consider bugs to be security issues=2E
->> >
->> > The rationale for this split is that much code in QEMU is older and
->> > was not written with malicious guests in mind, and we don't have the
->> > resources to audit, fix and defend it=2E  So instead we inform users
->> > about what the can in practice rely on as a security barrier, and
->> > what they can't=2E
->> >
->> > We don't currently restrict the "virtualization use case" to any
->> > particular set of machine types=2E  This means that we have effective=
-ly
->> > barred ourselves from adding KVM support to any machine type that we
->> > don't want to put into the "bugs are security issues" category, even
->> > if it would be useful for users to be able to get better performance
->> > with a trusted guest by enabling KVM=2E This seems an unnecessary
->> > restriction, and in practice the set of machine types it makes
->> > sense to use for untrusted-guest virtualization is quite small=2E
->> >
->> > Specifically, we would like to be able to enable the use of
->> > KVM with the imx8 development board machine types, but we don't
->> > want to commit ourselves to having to support those SoC models
->> > and device models as part of QEMU's security boundary:
->> > https://lore=2Ekernel=2Eorg/qemu-devel/20250629204851=2E1778-3-shente=
-y@gmail=2Ecom/
->> >
->> > This patch updates the security policy to explicitly list the
->> > machine types we consider to be useful for the "virtualization
->> > use case"=2E
->> >
->> > This is an RFC partly to see if we have consensus that this change
->> > makes sense, and partly because I was only able to identify the
->> > machine types we want to cover for some of our target architectures=
-=2E
->> > If maintainers for the other architectures could clarify which
->> > machine types work with KVM that would be helpful=2E
->>
->> The split of "virtualization" vs "non-virtualization" use case
->> in the docs was always as rather a crude hack=2E
->>
->> "Virtualization uses cases" was more or less a code phrase to
->> mean "the subset of QEMU that we traditionally shipped in RHEL"
->> as that is approximately what we have reasonable confidence
->> about=2E
->>
->> Personally I wouldn't assign strict equivalence between "machine
->> can use KVM" and  "virtualization use case"=2E
+On Wed, Sep 24, 2025 at 06:45:15PM +0200, Philippe Mathieu-Daudé wrote:
+> Use the existing riscv_cpu_is_32bit() helper to check for 32-bit CPU.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>  target/riscv/kvm/kvm-cpu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 5c19062c19b..187c2c9501e 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1588,7 +1588,7 @@ static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
+>           * Handle the case where a 32 bit CPU is running in a
+>           * 64 bit addressing env.
+>           */
+> -        if (riscv_cpu_mxl(&cpu->env) == MXL_RV32) {
+> +        if (riscv_cpu_is_32bit(cpu)) {
+>              addr |= (uint64_t)run->riscv_sbi.args[2] << 32;
+>          }
+>  
+> -- 
+> 2.51.0
+> 
 >
->I agree, but this is effectively what our docs are currently doing,
->and what I'm trying to decouple with this patch=2E=2E=2E
 
-Ping
-
-Anything left to discuss?
-
->
->> Case in point - the "isapc" machine type can use KVM but I would
->> not consider that to be a virtualization use case, and would likely
->> reject a security report if it /only/ affected isapc, and not 'pc'
->> / 'q35'=2E
->>
->> We didn't want to undertake the work to annotate every QOM/QDev
->> impl in QEMU with info about whether we considered it in scope
->> for security fixes or not, which is what we really ought to do
->> at some point=2E The main challenge is someone having the time
->> to do the audit & annotation work=2E
->>
->> > diff --git a/docs/system/security=2Erst b/docs/system/security=2Erst
->> > index f2092c8768b=2E=2E395c2d7fb88 100644
->> > --- a/docs/system/security=2Erst
->> > +++ b/docs/system/security=2Erst
->> > @@ -35,6 +35,34 @@ malicious:
->> >  Bugs affecting these entities are evaluated on whether they can caus=
-e damage in
->> >  real-world use cases and treated as security bugs if this is the cas=
-e=2E
->> >
->> > +To be covered by this security support policy you must:
->> > +
->> > +- use a virtualization accelerator like KVM or HVF
->> > +- use one of the machine types listed below
->> > +
->> > +It may be possible to use other machine types with a virtualization
->> > +accelerator to provide improved performance with a trusted guest
->> > +workload, but any machine type not listed here should not be
->> > +considered to be providing guest isolation or security guarantees,
->> > +and falls under the "non-virtualization use case"=2E
->> > +
->> > +Supported machine types for the virtualization use case, by target a=
-rchitecture:
->> > +
->> > +aarch64
->> > +  ``virt``
->> > +i386, x86_64
->> > +  ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``, ``pc``, ``q35``, ``=
-isapc``
->> > +s390x
->> > +  ``s390-ccw-virtio``
->> > +loongarch64:
->> > +  ``virt``
->> > +ppc, ppc64:
->> > +  TODO
->> > +mips, mips64:
->> > +  TODO
->> > +riscv32, riscv64:
->> > +  TODO
->>
->> Currently 'virtualization use case' is reasonably vague such that we ca=
-n
->> bend its scope as we desire, at the time it is questioned in a possible
->> security report=2E
->>
->> Machine types are only one aspect of this=2E Devices are the other, and
->> the area where it gets significantly more fuzzy and difficult because
->> essentially any device can be used with KVM, and where we draw the
->> line is fairly arbitrary=2E
->
->I think that being vague like this is a disservice to our users=2E
->If I'm a user of QEMU, I'd like to know whether I'm inside the
->line or outside of it before I put my config into production,
->not later on when it turns out there was an exploitable bug
->that wasn't classified as a security issue=2E=2E=2E
->
->Most devices can't in fact be used with KVM, because they're
->sysbus devices that aren't used in the machines that you can
->use with KVM=2E Pluggable devices are rarer (and yes, under
->our current policy random PCI devices are effectively
->in-scope)=2E
-
-From=20the top of my head: Various USB and I=C2=B2C devices can be used as w=
-ell=2E
-
-Best regards,
-Bernhard
-
->
->thanks
->-- PMM
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
