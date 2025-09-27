@@ -4,37 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CD04CAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Sep 2025 13:57:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07428CAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Sep 2025 14:01:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v2VQa-0006SC-DM; Sat, 27 Sep 2025 09:57:32 -0400
+	id 1v2VTl-0007hL-Qd; Sat, 27 Sep 2025 10:00:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v2VQU-0006RP-Dw; Sat, 27 Sep 2025 09:57:26 -0400
+ id 1v2VTR-0007YG-RB; Sat, 27 Sep 2025 10:00:29 -0400
 Received: from isrv.corpit.ru ([212.248.84.144])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v2VQN-0002QC-Hx; Sat, 27 Sep 2025 09:57:26 -0400
+ id 1v2VTG-0003Bw-CA; Sat, 27 Sep 2025 10:00:29 -0400
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 343D11585E5;
- Sat, 27 Sep 2025 16:57:04 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id 2F3681585EC;
+ Sat, 27 Sep 2025 17:00:01 +0300 (MSK)
 Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
- by tsrv.corpit.ru (Postfix) with ESMTP id 48C822916B0;
- Sat, 27 Sep 2025 16:57:07 +0300 (MSK)
-Message-ID: <4103cde2-2e4a-4622-98a8-38a2a46723d7@tls.msk.ru>
-Date: Sat, 27 Sep 2025 16:57:06 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id 3641F2916B6;
+ Sat, 27 Sep 2025 17:00:04 +0300 (MSK)
+Message-ID: <72efb886-3709-447f-b3f9-5581c1811b62@tls.msk.ru>
+Date: Sat, 27 Sep 2025 17:00:03 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?Q?Re=3A_=5BPATCH_v8_for_v10=2E0=2E0_0/2=5D_target/riscv?=
- =?UTF-8?Q?=EF=BC=9AFix_riscv64_kvm_migration?=
-To: Xie Bo <xb@ultrarisc.com>, qemu-devel@nongnu.org
-Cc: ajones@ventanamicro.com, qemu-riscv@nongnu.org, pbonzini@redhat.com,
- anup@brainfault.org, alistair.francis@wdc.com, rkrcmar@ventanamicro.com,
- palmer@dabbelt.com, xiamy@ultrarisc.com
-References: <20250912085535.1649347-1-xb@ultrarisc.com>
+Subject: Re: [PATCH] target/riscv: use riscv_csrr in riscv_csr_read
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ stove <stove@rivosinc.com>, qemu-devel@nongnu.org
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-stable <qemu-stable@nongnu.org>
+References: <20250827203617.79947-1-stove@rivosinc.com>
+ <dccc6ea0-d173-4a55-8c69-9313e2accbff@ventanamicro.com>
 Content-Language: en-US, ru-RU
 From: Michael Tokarev <mjt@tls.msk.ru>
 Autocrypt: addr=mjt@tls.msk.ru; keydata=
@@ -80,7 +82,7 @@ Autocrypt: addr=mjt@tls.msk.ru; keydata=
  YPkzzso6HT7rlapB5nulYmplJZSZ4RmE1ATZKf+wUPocDu6N10LtBNbwHWTT5NLtxNJAJAvl
  ojis6H1kRWZE/n5buyPY2NYeyWfjjrerOYt3er55n4C1I88RSCTGeejVmXWuo65QD2epvzE6
  3GgKngeVm7shlp7+d3D3+fAAHTvulQQqV3jOodz+B4yzuZ7WljkNrmrWrH8aI4uA98c=
-In-Reply-To: <20250912085535.1649347-1-xb@ultrarisc.com>
+In-Reply-To: <dccc6ea0-d173-4a55-8c69-9313e2accbff@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
@@ -90,7 +92,7 @@ X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,14 +108,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12.09.2025 11:55, Xie Bo wrote:
-> This series(v8) replaces the earlier series patch"[PATCH v7 for v10.0.0 0/2]
-> target/riscv: Fix riscv64 kvm migration".
+On 28.08.2025 12:37, Daniel Henrique Barboza wrote:
+> Cc: qemu-stable
+> 
+> On 8/27/25 5:36 PM, stove wrote:
+>> Commit 38c83e8d3a33 ("target/riscv: raise an exception when CSRRS/CSRRC
+>> writes a read-only CSR") changed the behavior of riscv_csrrw, which
+>> would formerly be treated as read-only if the write mask were set to 0.
+>>
+>> Fixes an exception being raised when accessing read-only vector CSRs
+>> like vtype.
+>>
+>> Fixes: 38c83e8d3a33 ("target/riscv: raise an exception when CSRRS/ 
+>> CSRRC writes a read-only CSR")
 
-Ping?  Can we apply this to the master branch, so I can pick it up
-for the stable series?
+Ping?  Can we apply this to the master branch, so I can pick it up for
+the stable series?
 
 Thanks,
 
 /mjt
+
 
