@@ -4,102 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C69FACAC5BC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Sep 2025 13:22:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB2C0CAC5B8
+	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Sep 2025 13:04:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v28LO-00087S-8U; Fri, 26 Sep 2025 09:18:38 -0400
+	id 1v2Uam-0003L3-F9; Sat, 27 Sep 2025 09:04:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v28LL-00085g-1Q
- for qemu-riscv@nongnu.org; Fri, 26 Sep 2025 09:18:36 -0400
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1v28Kw-00043V-04
- for qemu-riscv@nongnu.org; Fri, 26 Sep 2025 09:18:34 -0400
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-46e3cdc1a6aso5171605e9.1
- for <qemu-riscv@nongnu.org>; Fri, 26 Sep 2025 06:17:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758892676; x=1759497476; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y9d5BP7lns2PVAN5IYXcTxZLAWv4Unp9pZLQ6Ob5dbg=;
- b=t47cemEPBneKMQi5o6Lo94nnrGs/0dzsJqSaxK+4ZqC04jfXh1ZwYDfE/NjCO5la74
- +upLJju9/8CuuvY/lSo3i3T9BY6mufTH/so/y0xsz3GGLNNtAgY234NDSzUXRE0mF6uK
- 5lzVoPFxHgoXQJGjxV9kE9FfkMDde1neryxDDUvFPzKvQcfHsAx/EwCqhzuNgRLle9AQ
- y1zlqNhAI7LsNulNQ9qvU9sTPQquRNQ+d7wUI75ah+GhLBYS95YWurSJchkC1sI4kCLt
- HcPBdhgl/kkk1LKWX8TylgakyjPUp2D+BIpUlZg29BnmyOxSuqDMDt/WyOwmV3UYPMOS
- T1sw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758892676; x=1759497476;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=y9d5BP7lns2PVAN5IYXcTxZLAWv4Unp9pZLQ6Ob5dbg=;
- b=ErlL8ejrzLZCmT2kdywYKt4WCKx8dkwN2EsuiJOWHZe+ozjwwa1nlvBlCjVtgZw6/H
- G3h/S2vI82bPK7mZjB+fj8/8Fo/rPkmDcsvAfgRN6vOY+XjaxQEQQrFEtUi+3OH27VVE
- 00F5JimzVjajMvBf2LAG74iV515sPC3xPrC8EZW2prt1ktk/wJwDwPeB6XEL4aj0Svj1
- BI/1wi4pwWgV/ha9pmLceiV0jNpdsPlq0fldNvT61s4HFPKcyprguGeOFw80XXdd7fh5
- EQsPIDtyM2uMeZ5Izxw96iibToyXwwp5PZz2QyoQmAd8JkSS48tUTESAqt+vqxuyqcYk
- 8ZAg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVGnNM5xsXR979gLQTViAzLSdIitmjGW9Fx8QVoEdZG0pEwu0exC6kFfbqd2aQ9Gkh7OoJJbKP8H8xt@nongnu.org
-X-Gm-Message-State: AOJu0Ywo4HNW+/gA+B9pomZmhVfb7vikBl9aupgluEy1h5thoubfvPxd
- 60//Gj4doeexo9GTqDiAmn0167b/4McDMBXa8tSiFv/yATsjGzhGpu+wuNBq7GVaQXs=
-X-Gm-Gg: ASbGnctvzSUa0FW5UltQ4otL+I69j8wDkT0qaB5rJyEbVNcxprxp56zpKSRV1gYo6HT
- avrca0gpIkMhxKuK5UZCeXXRcOrmsqikmvPMBrxTil2Wp75r5qKqzfl+nNrVtPIRa80Dkuq7Toi
- yxOC+fnS2m3XfJPwBng8ROPdg/6qWKX4dRVe07L8YCLoxg3EWCwh/WaafPUHwQGlzDPEv/07P4d
- RR2NTHZdWnFSeatd1+uAXOs0ubVPGPuyvXmRfpZudoUUTlCgCWAjfM8j7I0EvJXaI1oBo852PEe
- c021jXgd2XGCoC9+/Hh3f4W0Vlbp491ICg2sV9RTtMRIvBIul05c5jTm4GwbWIJyAAWg1I2B5yg
- 6O6hbc0IKncv9r3gajsslNoI=
-X-Google-Smtp-Source: AGHT+IFwNCoKqYkvjcluvDzTRuZ7pHZpM0OcM0pWV5vpgzZePXa2ycPhSZfvL+o2DIY995dN+bIoBQ==
-X-Received: by 2002:a05:600c:8b23:b0:458:b8b0:6338 with SMTP id
- 5b1f17b1804b1-46e33c4bd45mr75387065e9.6.1758892675569; 
- Fri, 26 Sep 2025 06:17:55 -0700 (PDT)
-Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e42eee0b6sm6427805e9.10.2025.09.26.06.17.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Sep 2025 06:17:50 -0700 (PDT)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 7AE815F8E0;
- Fri, 26 Sep 2025 14:17:45 +0100 (BST)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-arm@nongnu.org (open list:ARM TCG CPUs),
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PULL 08/24] target/{arm,
- riscv}/common-semi-target: eradicate target_ulong
-Date: Fri, 26 Sep 2025 14:17:27 +0100
-Message-ID: <20250926131744.432185-9-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20250926131744.432185-1-alex.bennee@linaro.org>
-References: <20250926131744.432185-1-alex.bennee@linaro.org>
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1v2Uai-0003Jp-0f; Sat, 27 Sep 2025 09:03:56 -0400
+Received: from isrv.corpit.ru ([212.248.84.144])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1v2UaU-0000db-IM; Sat, 27 Sep 2025 09:03:54 -0400
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id AD1771585CE;
+ Sat, 27 Sep 2025 16:03:25 +0300 (MSK)
+Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
+ by tsrv.corpit.ru (Postfix) with ESMTP id BA260291678;
+ Sat, 27 Sep 2025 16:03:28 +0300 (MSK)
+Message-ID: <87ca1ace-bab9-4f7e-9d6c-1661da691a01@tls.msk.ru>
+Date: Sat, 27 Sep 2025 16:03:28 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V3] hw/riscv/riscv-iommu: Fixup PDT Nested Walk
+To: guoren@kernel.org, zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com,
+ alistair.francis@wdc.com, seb@rivosinc.com, tjeznach@rivosinc.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, qemu-stable@nongnu.org,
+ Nutty Liu <liujingqi@lanxincomputing.com>
+References: <20250913041233.972870-1-guoren@kernel.org>
+Content-Language: en-US, ru-RU
+From: Michael Tokarev <mjt@tls.msk.ru>
+Autocrypt: addr=mjt@tls.msk.ru; keydata=
+ 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
+In-Reply-To: <20250913041233.972870-1-guoren@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ T_SPF_HELO_TEMPERROR=0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,80 +106,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+On 13.09.2025 07:12, guoren@kernel.org wrote:
+> From: "Guo Ren (Alibaba DAMO Academy)" <guoren@kernel.org>
+> 
+> Current implementation is wrong when iohgatp != bare. The RISC-V
+> IOMMU specification has defined that the PDT is based on GPA, not
+> SPA. So this patch fixes the problem, making PDT walk correctly
+> when the G-stage table walk is enabled.
+> 
+> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+> Cc: qemu-stable@nongnu.org
+> Cc: Sebastien Boeuf <seb@rivosinc.com>
+> Cc: Tomasz Jeznach <tjeznach@rivosinc.com>
+> Reviewed-by: Weiwei Li <liwei1518@gmail.com>
+> Reviewed-by: Nutty Liu <liujingqi@lanxincomputing.com>
+> Signed-off-by: Guo Ren (Alibaba DAMO Academy) <guoren@kernel.org>
 
-We replace mechanically with uint64_t.
-There is no semantic change, and allows us to extract a proper API from
-this set of functions.
+Ping?  Can we merge this one to master, so I can pick it up for
+the stable branches?
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-ID: <20250822150058.18692-7-pierrick.bouvier@linaro.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-ID: <20250922093711.2768983-10-alex.bennee@linaro.org>
+Thanks,
 
-diff --git a/target/arm/common-semi-target.h b/target/arm/common-semi-target.h
-index 7bb442f24ca..6775a270aaa 100644
---- a/target/arm/common-semi-target.h
-+++ b/target/arm/common-semi-target.h
-@@ -12,7 +12,7 @@
- 
- #include "target/arm/cpu-qom.h"
- 
--static inline target_ulong common_semi_arg(CPUState *cs, int argno)
-+static inline uint64_t common_semi_arg(CPUState *cs, int argno)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-@@ -23,7 +23,7 @@ static inline target_ulong common_semi_arg(CPUState *cs, int argno)
-     }
- }
- 
--static inline void common_semi_set_ret(CPUState *cs, target_ulong ret)
-+static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-@@ -44,7 +44,7 @@ static inline bool is_64bit_semihosting(CPUArchState *env)
-     return is_a64(env);
- }
- 
--static inline target_ulong common_semi_stack_bottom(CPUState *cs)
-+static inline uint64_t common_semi_stack_bottom(CPUState *cs)
- {
-     ARMCPU *cpu = ARM_CPU(cs);
-     CPUARMState *env = &cpu->env;
-diff --git a/target/riscv/common-semi-target.h b/target/riscv/common-semi-target.h
-index 7e6ea8da02c..663dedfdad2 100644
---- a/target/riscv/common-semi-target.h
-+++ b/target/riscv/common-semi-target.h
-@@ -11,14 +11,14 @@
- #ifndef TARGET_RISCV_COMMON_SEMI_TARGET_H
- #define TARGET_RISCV_COMMON_SEMI_TARGET_H
- 
--static inline target_ulong common_semi_arg(CPUState *cs, int argno)
-+static inline uint64_t common_semi_arg(CPUState *cs, int argno)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-     return env->gpr[xA0 + argno];
- }
- 
--static inline void common_semi_set_ret(CPUState *cs, target_ulong ret)
-+static inline void common_semi_set_ret(CPUState *cs, uint64_t ret)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-@@ -35,7 +35,7 @@ static inline bool common_semi_sys_exit_is_extended(CPUState *cs)
-     return is_64bit_semihosting(cpu_env(cs));
- }
- 
--static inline target_ulong common_semi_stack_bottom(CPUState *cs)
-+static inline uint64_t common_semi_stack_bottom(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
--- 
-2.47.3
-
+/mjt
 
