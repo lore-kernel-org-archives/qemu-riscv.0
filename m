@@ -4,61 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E1FACAC5BC
-	for <qemu-riscv@archiver.kernel.org>; Sun, 28 Sep 2025 02:46:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B87A9CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Sun, 28 Sep 2025 23:11:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v2hPv-0003mD-AR; Sat, 27 Sep 2025 22:45:40 -0400
+	id 1v30Y2-0005tt-Hp; Sun, 28 Sep 2025 19:11:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xb@ultrarisc.com>)
- id 1v2hPs-0003lx-GZ; Sat, 27 Sep 2025 22:45:36 -0400
-Received: from [218.76.62.146] (helo=ultrarisc.com)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <xb@ultrarisc.com>)
- id 1v2hPj-00049j-UK; Sat, 27 Sep 2025 22:45:36 -0400
-Received: from xb$ultrarisc.com ( [192.168.100.1] ) by
- ajax-webmail-localhost.localdomain (Coremail) ; Sun, 28 Sep 2025 10:46:13
- +0800 (GMT+08:00)
-X-Originating-IP: [192.168.100.1]
-Date: Sun, 28 Sep 2025 10:46:13 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: =?UTF-8?B?6LCi5rOi?= <xb@ultrarisc.com>
-To: "Michael Tokarev" <mjt@tls.msk.ru>
-Cc: qemu-devel@nongnu.org, ajones@ventanamicro.com, qemu-riscv@nongnu.org,
- pbonzini@redhat.com, anup@brainfault.org, alistair.francis@wdc.com,
- rkrcmar@ventanamicro.com, palmer@dabbelt.com, xiamy@ultrarisc.com
-Subject: =?UTF-8?Q?Re:_Re:_[PATCH_v8_for_v10.0.0_0/2]_t?=
- =?UTF-8?Q?arget/riscv=EF=BC=9AFix_riscv64_kvm_migration?=
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2024.1-cmXT6 build
- 20240625(a75f206e) Copyright (c) 2002-2025 www.mailtech.cn
- mispb-8cc425bc-7df6-4523-bb46-a48cc1a964e6-ultrarisc.com
-In-Reply-To: <4103cde2-2e4a-4622-98a8-38a2a46723d7@tls.msk.ru>
-References: <20250912085535.1649347-1-xb@ultrarisc.com>
- <4103cde2-2e4a-4622-98a8-38a2a46723d7@tls.msk.ru>
-Content-Transfer-Encoding: base64
-X-CM-CTRLDATA: /1QfhmZvb3Rlcl90eHQ9OTA0Ojg0MA==
-Content-Type: text/plain; charset=UTF-8
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v30Y1-0005te-I1
+ for qemu-riscv@nongnu.org; Sun, 28 Sep 2025 19:11:17 -0400
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v30Xs-0000Ox-Ot
+ for qemu-riscv@nongnu.org; Sun, 28 Sep 2025 19:11:17 -0400
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b3194020e86so639930866b.1
+ for <qemu-riscv@nongnu.org>; Sun, 28 Sep 2025 16:11:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1759101057; x=1759705857; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mog8oUm3GfSh/a1W7fWPJzrqCB9h73CM8E7faKrW9eE=;
+ b=aN/Q7jSlJn7534dNqxtKgFFtdJpfZSLxyQ63AyArQV/g36/hYSN6b5XMSpmjmdS2nt
+ cpeAvBd357yjM+X2oey+DzVtw63v/MDUKD0RQk3KTpFEf1pV969KHsqtfcJNcUFOX8xx
+ itKa1kDw/vHtgkFqPe3UlELSsdoVEuVsyc33azWcIc1nHVKVlIEjSi04gBhjprtmJ2HD
+ Mm4wTiqhKUYtxBvGQNGv3zr+23IcWApg6Rf7QnYIlgLuG9AuJk0PDO3ABmryEFeuHMlP
+ 5jDB/b/Cg3iuPCNZjja/Z3BAIOInkpsWKapL5dgBXemuVLwOP7juitceLQ1jmxWHMb8f
+ toeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759101057; x=1759705857;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mog8oUm3GfSh/a1W7fWPJzrqCB9h73CM8E7faKrW9eE=;
+ b=vz6o0bV/M4Mr8X2NPj+DbrEmmdIc/061yHcBn0Gw1/dS8cV8ykJP2aEX9pe6QHmrci
+ 4B18CCoYGom9fSkvNF/bhvQ/ctE1GS0mlVsXFi4rcPRxwP+0IhuSvCr8Q9gMU2dhIoME
+ IcTTpYPBtA2mu465j4kwRrWWoWuiYjLnlDbjF2tJAio4yAJuZVdbG0iM05+ysmvUvZB9
+ i8rZrF9h/Zw9EPWlEBXbNZho787ZiwdaGM89sHL0Exm6212mk8akytEe/Tw0+QrIpaRE
+ 3EdSzs/G6935zlWIAoXwzBOoX66us7zk32lGHzn2G9X12O1+7iPwRzpdum2Ruff5rfQL
+ krVw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmDBbTOZPoQ/4wbUrkf/dkbRDNUbjrt4agoNA8pewcNGbFwmR4S2m+yF9dcMCVdqwFZ7DDuvBW+QXH@nongnu.org
+X-Gm-Message-State: AOJu0YzbSC46PrKzGLcXKzsDogDKIN1IlEys1Zmq9KzVQjAxGCcAuO4/
+ NjHo5wmmWoCqlTDcjpbV1a2D4mj+6LlAKy9WeGJwfH6no9dJlyAYe/Gu0KOapqe9PI7ED6lungN
+ PJXNefLy4vLBYWPGsJKWUZ+X8ikdVeig=
+X-Gm-Gg: ASbGnct9XoMq3fph7AhODpgG0J/TuHxW09SC5BUCzFV1iiMC4YtMjz4JrXbisXle81c
+ WmsHmhgSZMwalCaLjoilAA01OJ2tX0zeIIjtNaIiRgOMlBsh5FeyK57x7frhndwcuOCJnX+5rgd
+ 30pdr0I7O5nisLLJHc29eDUr8LnflMZNnUh/zitC4aCDCipxZyNqoZWei2WNImFJQ967K+rZLKj
+ yXr/1zfbUOpXuGRcdjlfveQu5m6V6J05c0vR3KU9Xwswy692YpMGxGTudBd0ZrvICs=
+X-Google-Smtp-Source: AGHT+IF+S5bZdlBglMeEnZu1MlyGT6JihY1PP8pGsNeu03U+934BflgcrpcpssOARukQmW/JaJ8MD7Tnpv9Kg97R+E8=
+X-Received: by 2002:a17:907:9404:b0:b0e:bb58:652b with SMTP id
+ a640c23a62f3a-b34bbbd99camr1573491666b.39.1759101056622; Sun, 28 Sep 2025
+ 16:10:56 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <4f79395a.1352.1998e36b165.Coremail.xb@ultrarisc.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: AQAAfwBXxM51odhoLYwxAA--.2414W
-X-CM-SenderInfo: l0e63zxwud2x1vfou0bp/1tbiAQATB2jYkfQADwABsO
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VW7Jw
- CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
- daVFxhVjvjDU=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 218.76.62.146 (failed)
-Received-SPF: pass client-ip=218.76.62.146; envelope-from=xb@ultrarisc.com;
- helo=ultrarisc.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+References: <20250923023922.3102471-1-richard.henderson@linaro.org>
+ <20250923023922.3102471-5-richard.henderson@linaro.org>
+In-Reply-To: <20250923023922.3102471-5-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 29 Sep 2025 09:10:28 +1000
+X-Gm-Features: AS18NWBFjmti2V3rqLKnHCQKD8Uc7KWrVBCeXeHF1qMwbP1Mjqr-Zqja4dzrcOg
+Message-ID: <CAKmqyKPbkLHOL-qhWxFMwj99Oc-Jdrijh7R=ZqFn0RN35A65zA@mail.gmail.com>
+Subject: Re: [PATCH v2 04/12] target/riscv: Record misa_ext in
+ TCGTBCPUState.cs_base
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, Pierrick Bouvier <pierrick.bouvier@linaro.org>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x62f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,42 +102,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-SGkgTWljaGFlbO+8jAoKd2UgYXJlIHBsYW5uZWQgdG8gaGF2ZSBhIHJlZ3VsYXIgUlZJIHNpZy1o
-eXBlcnZpc29yIG1lZXRpbmcgb24gdGhlIDMwdGgsIAp3aXRoIFJhZGltIGFuZCBBbmRyZXcuIEEg
-Y29uY2x1c2l2ZSBlbWFpbCB3aWxsIGJlIHNlbnQgc2hvcnRseSBhZnRlci4gClRoYW5rcyBmb3Ig
-dGhlIHJlbWluZGVyLiAKClJlZ2FyZHPvvIwKWGllIEJvCgoKPiAtLS0tLeWOn+Wni+mCruS7ti0t
-LS0tCj4g5Y+R5Lu25Lq6OiAiTWljaGFlbCBUb2thcmV2IiA8bWp0QHRscy5tc2sucnU+Cj4g5Y+R
-6YCB5pe26Ze0OjIwMjUtMDktMjcgMjE6NTc6MDYgKOaYn+acn+WFrSkKPiDmlLbku7bkuro6ICJY
-aWUgQm8iIDx4YkB1bHRyYXJpc2MuY29tPiwgcWVtdS1kZXZlbEBub25nbnUub3JnCj4g5oqE6YCB
-OiBham9uZXNAdmVudGFuYW1pY3JvLmNvbSwgcWVtdS1yaXNjdkBub25nbnUub3JnLCBwYm9uemlu
-aUByZWRoYXQuY29tLCBhbnVwQGJyYWluZmF1bHQub3JnLCBhbGlzdGFpci5mcmFuY2lzQHdkYy5j
-b20sIHJrcmNtYXJAdmVudGFuYW1pY3JvLmNvbSwgcGFsbWVyQGRhYmJlbHQuY29tLCB4aWFteUB1
-bHRyYXJpc2MuY29tCj4g5Li76aKYOiBSZTogW1BBVENIIHY4IGZvciB2MTAuMC4wIDAvMl0gdGFy
-Z2V0L3Jpc2N277yaRml4IHJpc2N2NjQga3ZtIG1pZ3JhdGlvbgo+IAo+IE9uIDEyLjA5LjIwMjUg
-MTE6NTUsIFhpZSBCbyB3cm90ZToKPiA+IFRoaXMgc2VyaWVzKHY4KSByZXBsYWNlcyB0aGUgZWFy
-bGllciBzZXJpZXMgcGF0Y2giW1BBVENIIHY3IGZvciB2MTAuMC4wIDAvMl0KPiA+IHRhcmdldC9y
-aXNjdjogRml4IHJpc2N2NjQga3ZtIG1pZ3JhdGlvbiIuCj4gCj4gUGluZz8gIENhbiB3ZSBhcHBs
-eSB0aGlzIHRvIHRoZSBtYXN0ZXIgYnJhbmNoLCBzbyBJIGNhbiBwaWNrIGl0IHVwCj4gZm9yIHRo
-ZSBzdGFibGUgc2VyaWVzPwo+IAo+IFRoYW5rcywKPiAKPiAvbWp0Cg0KDQpfX19fX19fX19fX19f
-X19fX19fX19fd3d3LnVsdHJhcmlzYy5jb20NCumHjeimgeaPkOekuu+8muacrOmCruS7tuWMheaL
-rOmZhOS7tueahOWGheWuueaYr+WPl+azleW+i+S/neaKpOeahOS/neWvhuS/oeaBr++8jOWmguae
-nOaCqOS4jeaYr+aMh+WumuaUtuS7tuS6uu+8jOivt+eri+WNs+WwhuacrOmCruS7tuWIoOmZpO+8
-jOazleW+i+emgeatouS7u+S9lemdnuazleeahOaKq+mcsuOAgeWkjeWItuOAgeS8oOaSreaIluS7
-peS7u+S9leaWueW8j+S9v+eUqOacrOmCruS7tuOAguacrOmCruS7tuS4reWMheWQq+eahOaEj+in
-geOAgeW7uuiuruaYr+WfuuS6juaIluWPl+WIsOaIkeaWueihqOi+vuWSjOWumuS5ieeahOadoeas
-vuWPiuadoeS7tueahOmZkOWumu+8jOWmguaXoOaIkeaWueeahOato+W8j+S5pumdoua+hOa4heaI
-luaOiOadg++8jOS4jeWPr+iiq+WNleeLrOS9nOS4uuS7u+S9leaDheW9ouS4i+eahOivgeaNruaI
-luS+neaNruOAguaEn+iwouaCqOeahOeQhuino+S4jumFjeWQiOOAgueJiOadg+aJgOacieOAgklN
-UE9SVEFOVCBOT1RJQ0U6IFRoaXMgZW1haWwsIGluY2x1ZGluZyBpdHMgYXR0YWNobWVudCBpZiBh
-bnksIGlzIGNvbmZpZGVudGlhbC4gSWYgeW91IGFyZSBub3QgdGhlIGludGVuZGVkIHJlY2lwaWVu
-dCwgcGxlYXNlIGRlbGV0ZSBpdCBmcm9tIHlvdXIgY29tcHV0ZXIgaW1tZWRpYXRlbHkuIEFueSBk
-aXNjbG9zdXJlLCBjb3B5aW5nLCBvciBkaXN0cmlidXRpb24gb2YgdGhpcyBtZXNzYWdlLCBvciB0
-YWtpbmcgb2YgYW55IGFjdGlvbiBiYXNlZCBvbiBpdCBpcyBzdHJpY3RseSBwcm9oaWJpdGVkLiAg
-QW55IG9waW5pb25zIGFuZCBzdWdnZXN0aW9ucyBjb250YWluZWQgaW4gdGhpcyBlbWFpbCBhcmUg
-c3ViamVjdCB0byB0aGUgdGVybXMgYW5kIGNvbmRpdGlvbnMgZXhwcmVzc2VkIGFuZCBkZWZpbmVk
-IGJ5IHVzIGFuZCBzaG91bGQgbm90IGJlIHJlbGllZCB1cG9uIHVuY29uZGl0aW9uYWxseSB1bmRl
-ciBhbnkgY2lyY3Vtc3RhbmNlcyB1bmxlc3MgdGhleSBhcmUgY29uZmlybWVkIGluIG9mZmljaWFs
-IHdyaXR0ZW4gY2xhcmlmaWNhdGlvbiBvciBhdXRob3JpemF0aW9uIGZyb20gdXMuICBUaGFuayB5
-b3UgZm9yIHlvdXIgdW5kZXJzdGFuZGluZyBhbmQgY29vcGVyYXRpb24uQWxsIHJpZ2h0cyByZXNl
-cnZlZC4=
+On Tue, Sep 23, 2025 at 12:43=E2=80=AFPM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> The tb_flush within write_misa was incorrect.  It assumed
+> that we could adjust the ISA of the current processor and
+> discard all TB and all would be well.  But MISA is per vcpu,
+> so globally flushing TB does not mean that the TB matches
+> the MISA of any given vcpu.
+>
+> By recording misa in the tb state, we ensure that the code
+> generated matches the vcpu.
+>
+> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+> Cc: Alistair Francis <alistair.francis@wdc.com>
+> Cc: Weiwei Li <liwei1518@gmail.com>
+> Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Cc: qemu-riscv@nongnu.org
+> ---
+>  target/riscv/csr.c         | 3 ---
+>  target/riscv/tcg/tcg-cpu.c | 3 ++-
+>  2 files changed, 2 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 8842e07a73..3c8989f522 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -25,7 +25,6 @@
+>  #include "pmu.h"
+>  #include "time_helper.h"
+>  #include "exec/cputlb.h"
+> -#include "exec/tb-flush.h"
+>  #include "exec/icount.h"
+>  #include "accel/tcg/getpc.h"
+>  #include "qemu/guest-random.h"
+> @@ -2173,8 +2172,6 @@ static RISCVException write_misa(CPURISCVState *env=
+, int csrno,
+>          env->mstatus &=3D ~MSTATUS_FS;
+>      }
+>
+> -    /* flush translation cache */
+> -    tb_flush(env_cpu(env));
+>      env->xl =3D riscv_cpu_mxl(env);
+>      return RISCV_EXCP_NONE;
+>  }
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 78fb279184..143ab079d4 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -191,7 +191,8 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState =
+*cs)
+>
+>      return (TCGTBCPUState){
+>          .pc =3D env->xl =3D=3D MXL_RV32 ? env->pc & UINT32_MAX : env->pc=
+,
+> -        .flags =3D flags
+> +        .flags =3D flags,
+> +        .cs_base =3D env->misa_ext,
+>      };
+>  }
+>
+> --
+> 2.43.0
+>
+>
 
