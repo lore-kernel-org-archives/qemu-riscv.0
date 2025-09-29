@@ -4,101 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0565CAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Sep 2025 22:21:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21AE8CAC5B9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Sep 2025 22:35:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3MF2-0007f2-44; Mon, 29 Sep 2025 18:21:08 -0400
+	id 1v3MSd-0001nT-BD; Mon, 29 Sep 2025 18:35:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1v3MEy-0007eu-Hh
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 18:21:04 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v3MSa-0001mq-Sd
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 18:35:09 -0400
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1v3MEu-00028y-DU
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 18:21:04 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-7811fa91774so2798255b3a.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 15:20:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v3MSU-0003Py-0G
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 18:35:08 -0400
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b3d196b7eeeso352608866b.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 15:34:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759184453; x=1759789253; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IUCiUliMax4cyCxq3lhy/C1UElmsAMDKsIa9C583Qs4=;
- b=MHhv3XnaPsBkhSDQYiFgDd2afsUUVxX5BazWMhC1gq+iNfivmG2sNXo/r5FGP//0uV
- VgAOXRVkgRaDKz/RsiNTkcaEkFc/vN8rLo3pc73PzBJFUmE3eevE5g07IlmxrtviCE9g
- IyTltN+BqLLIZnvzs8Ukjcnd3yA8kEMwDKVdFzPUMNhEfBszKBOXddKroRY+lxpGN2Nk
- LwuEYh0ujXvmdetiLoWistY+ELk8kJw00DOtZOMvSNX4Ini6vJGA91NokWS+vzJ2WfDk
- +eaA33wnJS98yqEWnee79fp+cu3YcHYt+FxytoyV3rqQMXS97l0+M+JfJ8rm0+RTeBnN
- cpjA==
+ d=gmail.com; s=20230601; t=1759185297; x=1759790097; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Jtr24F54A7vAg6tDCIn3Tg59LbtqoA7RE5vVwINhI7M=;
+ b=Ih03sHsWKsq2JJFgjUQwY6PotahvS7EVfCiIejRFO6mJpjc258SQ0kMtVk441OmnwI
+ plPVJzA24aKHg22JEdqbrehzTVXqRQU7ZAHhG2MLNNMQgZVJ1PVfZJ3rRzWlqX/A4ycY
+ Blc8RN+6mzxVmTEAt2UXkNtPuCjqqbfOeg51Hgqn3ME+iVi3jZwTfNyFkpKYK1Su9boh
+ kHGG18BJrrlGRk45lHlwCpf/qkAYEEE+a1eRBjGshfrqaRFV/q1mf94A5IYN45c+TO7s
+ giDelCFq9Zfkde+HrUB+EuhrQJBKqZZWjVo15rkop6SVUXU5oi4P/SmKybCAHQCGJkXW
+ Yj6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759184453; x=1759789253;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IUCiUliMax4cyCxq3lhy/C1UElmsAMDKsIa9C583Qs4=;
- b=sjy3jyk4wnZ0NXkGbC8MJkoUXvByVf0YDI1FHbmBNTBlfO5bBxyhV4t7VjKMFyaZc/
- sN01jBpFAJJ2Sv5alBbNaIbuyvu14FFX3Mn+2PBXQLNonTH1xUJC81fSofNFrsXdEumO
- lwIzhSAZYt3HuuoF1smLoHqoww51PwHnRwzzGdJslP9XyOrClIZ0uIhsNasrKL5ffw3k
- w2fDSKwGjGdaC79st6SxwKw2xerViq1Rx9nVvg0HXVHlm5KYcN/aIx9q3P9muFwnALCv
- bfkJYUDWVCnfZ6AunkYhOZoyeZHhSrrBPR7Mm8jwG3a+TLCz1QNzZzkdgfQCIpuzddKh
- OceQ==
+ d=1e100.net; s=20230601; t=1759185297; x=1759790097;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Jtr24F54A7vAg6tDCIn3Tg59LbtqoA7RE5vVwINhI7M=;
+ b=Eiz9wq5Ryv+jixsF9awhvP6xyBMPnwelQS+82vPrlzjwc3o8fcVUGrFlpDwxAm5N5c
+ bJSTRj55e6hhtfsZjHynHRuexhJzjn6AIca0mCWmNz8BLbLLrGFpqJgccVJjxEQIOpH6
+ dFaIwhjBWS7tXh1PUaIQXRjwzIIVncYFP/Q3++s81KdgnnjC/yROMsYL6fbseokO6RzQ
+ HXuTLy+KQnVep46p9YB4UDB9OJoH8Do0NCukozkECqjF+8jwUIlarnR5epJGzLmgtTey
+ MTj3WhqLwSOWYZQYNb6epBMcOS8Pjab8hJwT1HKvvJl66UUcr0k8xKwlS5ur/aWXU5uG
+ iLjw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2DVEcEA1n6QirgcmDlAYtJ1T06W1+IydkC8763+cePROOValA9CbKQ9vY9lyEleZd2arTDKupF1V1@nongnu.org
-X-Gm-Message-State: AOJu0YwQxIXBzyp7GFRVm9oci1sLev2Kt8oIc97Vm001HSeLZOMVTeyG
- mbkhgbjvg8spKJFQhnTxclHNyki7JivSJCqIX7cYR4QuJLPgY7KdyF3K0hE/4LL2ONo=
-X-Gm-Gg: ASbGncuNNo0GBHGwJlAmUCFcFdygdqNR3G5lEFeAE4WyUMMfiMNO/L72UR6NiYCpP7o
- 9yNyuUbNZHRYBy/eAs9ppUxbjr1lgSUQAnGqZY8pfUczZS9ff5MtKV7DzeAQfa4XPrRHAgfefhh
- 2pUlUizGuwC0TYBbl1iMAz8B39tvYurIV9ARDlG9a1LQPdEof8lpclN1XjwrHL6Nj12ZkBdSyE7
- mN64kqCSEyzUOtWV/uefa2XqYFOXJZDpitZFWVkb7X7w2h/b9cqWhD6xHJkYDbXRMQhfW/ZgI4d
- GMHcGGB88SauHnydBwY2lz44JSPFSAkGBJ+3KjInmFCn4Iex/7oVDHZ1pJqK3LvfTRU41vYQaIn
- zyVwMfl7pFGL8zz3AB/Hq0tI/oopQGrXoOTClelz9AhvrSw==
-X-Google-Smtp-Source: AGHT+IHkes0ktozQy1e76FB+touSVp81KcH62U5D+oAw+gymzgMLaix8ce3S8YEAJqncy8CpmAAitQ==
-X-Received: by 2002:a17:90b:1b4a:b0:330:72fb:ac13 with SMTP id
- 98e67ed59e1d1-3342a22cc80mr18293339a91.5.1759184453451; 
- Mon, 29 Sep 2025 15:20:53 -0700 (PDT)
-Received: from [192.168.1.87] ([38.41.223.211])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-338387256cdsm2333136a91.20.2025.09.29.15.20.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 29 Sep 2025 15:20:53 -0700 (PDT)
-Message-ID: <ba60c570-fff0-4ab8-b3bc-d191663d2912@linaro.org>
-Date: Mon, 29 Sep 2025 15:20:51 -0700
+ AJvYcCW/5RlB8lkYzsCz5VGEjKvLtd9hojbiNw8E+2OxpZRObdhdOnNHpV0rTO8ncjqLyv3dtUY8DZOWLLbF@nongnu.org
+X-Gm-Message-State: AOJu0Yy7nLDFTgoqgE3ratiNXwl2Svx5aweeg66GR9F2eoL7gAmiVaFU
+ gbmzdgaOqjQL1aScFRW/Z7qAGniFrpz8pq4gqrNY+bnonumVDpXZ6rxUk4i1tR/1zva5+Jpj0Pc
+ pafkD68+4yksknN0hJqeNmPBkQOqTHnI=
+X-Gm-Gg: ASbGncsOHm8HE0BG2vTrCHZ+FEjXyI181e2J8dnsh+CTE3hkew8ir1zn475h7VvNyXm
+ r5s3WEGbTCnX77f7XaSUgna2ce5XGVGVGDgGSvd4Dutjin7QLtg18RKIaftTZrEu2bAdlTyN/fk
+ znpSgfYQXSle6wl97AB54GFVi7AXB6BOlHI+l+mba/07u1CGlPmHio3HcB9RKRtRJyd+WLkAwut
+ LT42cWLd5npr6N23ax4Z0+oB44w2WHSaOa9+4SQ0OP2Fmjb
+X-Google-Smtp-Source: AGHT+IEEHNvUYHuehQKhkrw6kVKqMbGDXcfldvPoSyKSI6ViEv61yLp3J4mj+KKUDFONWU9J5R5r4JaRAgtYvJCiX7Y=
+X-Received: by 2002:a17:906:f049:b0:b40:b6a9:f704 with SMTP id
+ a640c23a62f3a-b40b6a9fbbfmr303363566b.7.1759185296332; Mon, 29 Sep 2025
+ 15:34:56 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 00/35] wasm: Add Wasm TCG backend based on wasm64
-Content-Language: en-US
-To: Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-devel@nongnu.org
-Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- WANG Xuerui <git@xen0n.name>, Aurelien Jarno <aurelien@aurel32.net>,
- Huacai Chen <chenhuacai@kernel.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <arikalo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, Stefan Weil <sw@weilnetz.de>,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Stefan Hajnoczi <stefanha@redhat.com>
-References: <cover.1756724464.git.ktokunaga.mail@gmail.com>
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <cover.1756724464.git.ktokunaga.mail@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x430.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250811034454.189208-1-z_bajeer@yeah.net>
+In-Reply-To: <20250811034454.189208-1-z_bajeer@yeah.net>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 30 Sep 2025 08:34:30 +1000
+X-Gm-Features: AS18NWDaqr6FiesPZK7c1z0Bv2ZO-poCfekApkDTmh4kr4qJK32swlpZ7bzhkKM
+Message-ID: <CAKmqyKN_asnf6Au8xN0XTdAgEGhUxR6Mi_CUopzDhTkeLYdO+g@mail.gmail.com>
+Subject: Re: [PATCH v2] aplic: fix mask for smsiaddrcfgh
+To: Yang Jialong <z_bajeer@yeah.net>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, yangjialong@rvcore.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x62f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,281 +102,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Kohei,
+On Mon, Aug 11, 2025 at 1:59=E2=80=AFPM Yang Jialong <z_bajeer@yeah.net> wr=
+ote:
+>
+> 4.5.4. Supervisor MSI address configuration (smsiaddrcfg and
+>   smsiaddrcfgh)
+> smsiaddrcfgh:
+>         bits 22:20 LHXS(WARL)
+>         bits 11:0  High Base PPN(WARL)
+>
+> Signed-off-by: Yang Jialong <z_bajeer@yeah.net>
 
-On 9/1/25 4:44 AM, Kohei Tokunaga wrote:
-> V3:
-> - Fixed init_wasm_js to correctly cast pointers to Numbers when passing the
->    arguments to the getInt32 and setInt32 methods.
-> - Lowered the the maximum number of instances (MAX_INSTANCES) to avoid the
->    out of memory error in recent versions of FireFox.
-> 
-> V2:
-> 
-> - Reorganized commits to implement the backend incrementally from a clean
->    state.
-> - Removed the andc, orc, eqv, nand and nor operations to rely on default
->    expansion.
-> - Removed the bswap operations to use default expansion.
-> - Removed the extract and deposit oprations to use default expansion.
-> - Updated the sextract to emit only when the corresponding Wasm instruction
->    is available
-> - Removed the not operation to rely on default expansion.
-> - Fixed the neg implementation to "ret = 0 - arg"
-> - Added Wasm implementation of the mb operation using the atomic.fence
->    instruction.
-> 
-> Note:
-> The first four commits are temporarily imported from a separated patch
-> series which enables 64bit guests using wasm64 [2]. These commits are under
-> review in that series and are included here only to allow subsequent patches
-> to build. Please ignore them when reviewing this series.
-> 
-> V1:
-> 
-> This patch series adds a TCG backend for WebAssembly. Unlike eariler
-> attempts [1], it is implemented using Emscripten's wasm64 target to support
-> 64bit guests.
-> 
-> The first four commits are temporarily imported from a separated patch
-> series which enables 64bit guests using wasm64 [2]. These commits are under
-> review in that series and are included here only to allow subsequent patches
-> to build. Please ignore them when reviewing this series.
-> 
-> # New TCG Backend for Browsers
-> 
-> A new TCG backend translates IR instructions into Wasm instructions and runs
-> them using the browser's WebAssembly APIs (WebAssembly.Module and
-> WebAssembly.instantiate). To minimize compilation overhead and avoid hitting
-> the browser's limitation of the number of instances, this backend integrates
-> a forked TCI. TBs run on TCI by default, with frequently executed TBs
-> compiled into WebAssembly.
-> 
-> # 64bit guests support by wasm64
-> 
-> Support for 64bit guests is being reviewed in a separated patch series [2],
-> which enables QEMU to use 64bit pointers by compiling with the --cpu=wasm64
-> flag. The Wasm TCG backend is based on this feature and also requires
-> --cpu=wasm64.
-> 
-> QEMU compiled with --cpu=wasm64 runs on wasm64-capable engines. To support
-> engines which don't support wasm64 (e.g. Safari), the Wasm backend can use
-> the compatibility flag "--enable-wasm64-32bit-address-limit" also introduced
-> in [2]. This flag enables 64bit pointers in the C code while Emscripten
-> lowers the output binary to wasm32 and limits the maximum memory size to
-> 4GB. As a result, the Wasm backend can run on wasm32 engiens while
-> supporting 64bit guests.
-> 
-> Note: The flag was originally named --wasm64-32bit-address-limit but this
-> patch series moved it from the configure script into meson_options.txt. To
-> follow Meson's naming conventions, it was renamed to
-> --enable-wasm64-32bit-address-limit.
-> 
-> # Overview of build process
-> 
-> To compile QEMU with Emscripten, the following dependencies are required.
-> The emsdk-wasm-cross.docker environment includes all necessary components
-> and can be used as the build environment:
-> 
-> - Emscripten SDK (emsdk) v4.0.10
-> - Libraries cross-compiled with Emscripten (please see also
->    emsdk-wasm-cross.docker for build steps)
->    - GLib v2.84.0
->    - zlib v1.3.1
->    - libffi v3.5.2
->    - Pixman v0.44.2
-> 
-> The configure script supports --cpu=wasm64 flag to compile QEMU with 64bit
-> pointer support.
-> 
-> emconfigure ./configure --cpu=wasm64 \
->                          --static --disable-tools \
->                          --target-list=x86_64-softmmu
-> emmake make -j$(nproc)
-> 
-> If the output needs to run on wasm32 engines, use
-> "--enable-wasm64-32bit-address-limit" flag.
-> 
-> emconfigure ./configure --cpu=wasm64 --enable-wasm64-32bit-address-limit \
->                          --static --disable-tools \
->                          --target-list=x86_64-softmmu
-> emmake make -j$(nproc)
-> 
-> Either of the above commands generates the following files:
-> 
-> - qemu-system-x86_64.js
-> - qemu-system-x86_64.wasm
-> 
-> Guest images can be packaged using Emscripten's file_packager.py tool.
-> For example, if the images are stored in a directory named "pack", the
-> following command packages them, allowing QEMU to access them through
-> Emscripten's virtual filesystem:
-> 
-> /path/to/file_packager.py qemu-system-x86_64.data --preload pack > load.js
-> 
-> This process generates the following files:
-> 
-> - qemu-system-x86_64.data
-> - load.js
-> 
-> Emscripten allows passing arguments to the QEMU command via the Module
-> object in JavaScript:
-> 
-> Module['arguments'] = [
->      '-nographic', '-m', '512M',
->      '-L', 'pack/',
->      '-drive', 'if=virtio,format=raw,file=pack/rootfs.bin',
->      '-kernel', 'pack/bzImage',
->      '-append', 'earlyprintk=ttyS0 console=ttyS0 root=/dev/vda loglevel=7',
-> ];
-> 
-> The sample repository [3] (tcgdev64 branch) provides a complete setup,
-> including an HTML file that implements a terminal UI.
-> 
-> [1] https://patchew.org/QEMU/cover.1747744132.git.ktokunaga.mail@gmail.com/
-> [2] https://patchew.org/QEMU/cover.1754534225.git.ktokunaga.mail@gmail.com/
-> [3] https://github.com/ktock/qemu-wasm-sample/tree/tcgdev64
-> 
-> Kohei Tokunaga (35):
->    meson: Add wasm64 support to the --cpu flag
->    configure: Enable to propagate -sMEMORY64 flag to Emscripten
->    dockerfiles: Add support for wasm64 to the wasm Dockerfile
->    .gitlab-ci.d: Add build tests for wasm64
->    tcg/wasm: Add tcg-target.h and tcg-target-reg-bits.h
->    tcg/wasm: Add register-related definitions
->    tcg/wasm: Add constraint definitions
->    tcg/wasm: Add relocation callbacks
->    tcg/wasm: Add and/or/xor instructions
->    tcg/wasm: Add add/sub/mul instructions
->    tcg/wasm: Add shl/shr/sar instructions
->    tcg/wasm: Add setcond/negsetcond/movcond instructions
->    tcg/wasm: Add sextract instruction
->    tcg/wasm: Add load and store instructions
->    tcg/wasm: Add mov/movi instructions
->    tcg/wasm: Add ext instructions
->    tcg/wasm: Add div/rem instructions
->    tcg/wasm: Add neg/ctpop instructions
->    tcg/wasm: Add rot/clz/ctz instructions
->    tcg/wasm: Add br/brcond instructions
->    tcg/wasm: Add exit_tb/goto_tb/goto_ptr instructions
->    tcg/wasm: Add call instruction
->    tcg/wasm: Add qemu_ld/qemu_st instructions
->    tcg/wasm: Add mb instruction
->    tcg/wasm: Mark unimplemented instructions
->    tcg/wasm: Add initialization of fundamental registers
->    tcg/wasm: Write wasm binary to TB
->    tcg/wasm: Implement instantiation of Wasm binary
->    tcg/wasm: Allow switching coroutine from a helper
->    tcg/wasm: Enable instantiation of TBs executed many times
->    tcg/wasm: Enable TLB lookup
->    tcg/wasm: Add tcg_target_init function
->    meson.build: enable to build Wasm backend
->    meson.build: Propagate optimization flag for linking on Emscripten
->    .gitlab-ci.d: build wasm backend in CI
-> 
->   .gitlab-ci.d/buildtest.yml                    |   26 +-
->   .gitlab-ci.d/container-cross.yml              |   20 +-
->   .gitlab-ci.d/container-template.yml           |    4 +-
->   MAINTAINERS                                   |    9 +-
->   configure                                     |   14 +-
->   include/accel/tcg/getpc.h                     |    2 +-
->   include/tcg/helper-info.h                     |    4 +-
->   include/tcg/tcg.h                             |    2 +-
->   meson.build                                   |   16 +-
->   meson_options.txt                             |    3 +
->   scripts/meson-buildoptions.sh                 |    5 +
->   tcg/aarch64/tcg-target.c.inc                  |   11 +
->   tcg/arm/tcg-target.c.inc                      |   11 +
->   tcg/i386/tcg-target.c.inc                     |   11 +
->   tcg/loongarch64/tcg-target.c.inc              |   11 +
->   tcg/meson.build                               |    5 +
->   tcg/mips/tcg-target.c.inc                     |   11 +
->   tcg/ppc/tcg-target.c.inc                      |   11 +
->   tcg/region.c                                  |   10 +-
->   tcg/riscv/tcg-target.c.inc                    |   11 +
->   tcg/s390x/tcg-target.c.inc                    |   11 +
->   tcg/sparc64/tcg-target.c.inc                  |   11 +
->   tcg/tcg.c                                     |   21 +-
->   tcg/tci/tcg-target.c.inc                      |   11 +
->   tcg/wasm.c                                    |  855 +++++
->   tcg/wasm.h                                    |  117 +
->   tcg/wasm/tcg-target-con-set.h                 |   19 +
->   tcg/wasm/tcg-target-con-str.h                 |   14 +
->   tcg/wasm/tcg-target-has.h                     |   14 +
->   tcg/wasm/tcg-target-mo.h                      |   20 +
->   tcg/wasm/tcg-target-opc.h.inc                 |   18 +
->   tcg/wasm/tcg-target-reg-bits.h                |   11 +
->   tcg/wasm/tcg-target.c.inc                     | 2843 +++++++++++++++++
->   tcg/wasm/tcg-target.h                         |   61 +
->   ...2-cross.docker => emsdk-wasm-cross.docker} |   29 +-
->   35 files changed, 4218 insertions(+), 34 deletions(-)
->   create mode 100644 tcg/wasm.c
->   create mode 100644 tcg/wasm.h
->   create mode 100644 tcg/wasm/tcg-target-con-set.h
->   create mode 100644 tcg/wasm/tcg-target-con-str.h
->   create mode 100644 tcg/wasm/tcg-target-has.h
->   create mode 100644 tcg/wasm/tcg-target-mo.h
->   create mode 100644 tcg/wasm/tcg-target-opc.h.inc
->   create mode 100644 tcg/wasm/tcg-target-reg-bits.h
->   create mode 100644 tcg/wasm/tcg-target.c.inc
->   create mode 100644 tcg/wasm/tcg-target.h
->   rename tests/docker/dockerfiles/{emsdk-wasm32-cross.docker => emsdk-wasm-cross.docker} (85%)
-> 
+This fails to build as there is still a APLIC_xMSICFGADDRH_VALID_MASK user
 
-I tried to build this series to test it, but unfortunately, I have some 
-errors:
+../hw/intc/riscv_aplic.c: In function =E2=80=98riscv_aplic_set_kvm_msicfgad=
+dr=E2=80=99:
+../hw/intc/riscv_aplic.c:191:34: error:
+=E2=80=98APLIC_xMSICFGADDRH_VALID_MASK=E2=80=99 undeclared (first use in th=
+is
+function); did you mean =E2=80=98APLIC_MMSICFGADDRH_VALID_MASK=E2=80=99?
+191 | APLIC_xMSICFGADDRH_VALID_MASK;
+| ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| APLIC_MMSICFGADDRH_VALID_MASK
+../hw/intc/riscv_aplic.c:191:34: note: each undeclared identifier is
+reported only once for each function it appears in
 
-$ podman build -t wasm - --build-arg TARGET_CPU=wasm64 \
-   --build-arg WASM64_MEMORY64=1 \
-   < ./tests/docker/dockerfiles/emsdk-wasm-cross.docker
-$ podman run -it --rm -w $(pwd) -v $(pwd):$(pwd) wasm bash
-$ emconfigure ./configure --cpu=wasm64 \
-   --static --disable-tools --target-list=x86_64-softmmu
-$ emmake make -j$(nproc)
+https://gitlab.com/alistair23/qemu/-/jobs/11528885170
 
-* /builddeps/target/include/ffi.h:430:6: error: 'FFI_NATIVE_RAW_API' is 
-not defined, evaluates to 0 [-Werror,-Wundef]
-* various "format specifies type 'long long' but the argument has type 
-'long' [-Werror,-Wformat]"
+Alistair
 
-Is it working fine on your side? If yes, what am I missing?
-
-Note: To build with podman, I needed those changes (that you can 
-probably integrate as they are compatible with docker also):
---- a/tests/docker/dockerfiles/emsdk-wasm-cross.docker
-+++ b/tests/docker/dockerfiles/emsdk-wasm-cross.docker
-@@ -10,7 +10,7 @@ ARG MESON_VERSION=1.5.0
-  ARG TARGET_CPU=wasm32
-  ARG WASM64_MEMORY64=0
-
--FROM emscripten/emsdk:$EMSDK_VERSION_QEMU AS build-base-common
-+FROM docker.io/emscripten/emsdk:$EMSDK_VERSION_QEMU AS build-base-common
-  ARG TARGET_CPU
-  ARG MESON_VERSION
-  ENV TARGET=/builddeps/target
-@@ -130,8 +130,8 @@ RUN mkdir -p /glib
-  RUN curl -Lks 
-https://download.gnome.org/sources/glib/${GLIB_MINOR_VERSION}/glib-$GLIB_VERSION.tar.xz 
-| \
-      tar xJC /glib --strip-components=1
-
--COPY --link --from=zlib-dev /builddeps/ /builddeps/
--COPY --link --from=libffi-dev /builddeps/ /builddeps/
-+COPY --from=zlib-dev /builddeps/ /builddeps/
-+COPY --from=libffi-dev /builddeps/ /builddeps/
-
-  WORKDIR /glib
-  RUN <<EOF
-@@ -156,5 +156,5 @@ RUN sed -i -E "/#define HAVE_PTHREAD_GETNAME_NP 1/d" 
-./_build/config.h
-  RUN meson install -C _build
-
-  FROM build-base
--COPY --link --from=glib-dev /builddeps/ /builddeps/
--COPY --link --from=pixman-dev /builddeps/ /builddeps/
-+COPY --from=glib-dev /builddeps/ /builddeps/
-+COPY --from=pixman-dev /builddeps/ /builddeps/
-
-Regards,
-Pierrick
+> ---
+>  hw/intc/riscv_aplic.c | 27 +++++++++++++++++----------
+>  1 file changed, 17 insertions(+), 10 deletions(-)
+>
+> v1 --> v2:
+> - fix calculation of MSI address.
+> - In Supervisor mode, lhxw/hhxs/hhxw fields are in mmsiaddrcfgh register.
+> - And lhxs field is in smsiaddrcfgh.
+>
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index a1d9fa5085..2dd54cafaa 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -96,7 +96,7 @@
+>      (APLIC_xMSICFGADDR_PPN_HHX_MASK(__hhxw) << \
+>       APLIC_xMSICFGADDR_PPN_HHX_SHIFT(__hhxs))
+>
+> -#define APLIC_xMSICFGADDRH_VALID_MASK   \
+> +#define APLIC_MMSICFGADDRH_VALID_MASK   \
+>      (APLIC_xMSICFGADDRH_L | \
+>       (APLIC_xMSICFGADDRH_HHXS_MASK << APLIC_xMSICFGADDRH_HHXS_SHIFT) | \
+>       (APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
+> @@ -104,6 +104,10 @@
+>       (APLIC_xMSICFGADDRH_LHXW_MASK << APLIC_xMSICFGADDRH_LHXW_SHIFT) | \
+>       APLIC_xMSICFGADDRH_BAPPN_MASK)
+>
+> +#define APLIC_SMSICFGADDRH_VALID_MASK   \
+> +    ((APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
+> +     APLIC_xMSICFGADDRH_BAPPN_MASK)
+> +
+>  #define APLIC_SETIP_BASE               0x1c00
+>  #define APLIC_SETIPNUM                 0x1cdc
+>
+> @@ -409,13 +413,8 @@ static void riscv_aplic_msi_send(RISCVAPLICState *ap=
+lic,
+>          msicfgaddr =3D aplic->kvm_msicfgaddr;
+>          msicfgaddrH =3D ((uint64_t)aplic->kvm_msicfgaddrH << 32);
+>      } else {
+> -        if (aplic->mmode) {
+> -            msicfgaddr =3D aplic_m->mmsicfgaddr;
+> -            msicfgaddrH =3D aplic_m->mmsicfgaddrH;
+> -        } else {
+> -            msicfgaddr =3D aplic_m->smsicfgaddr;
+> -            msicfgaddrH =3D aplic_m->smsicfgaddrH;
+> -        }
+> +        msicfgaddr =3D aplic_m->mmsicfgaddr;
+> +        msicfgaddrH =3D aplic_m->mmsicfgaddrH;
+>      }
+>
+>      lhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
+> @@ -427,6 +426,14 @@ static void riscv_aplic_msi_send(RISCVAPLICState *ap=
+lic,
+>      hhxw =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXW_SHIFT) &
+>              APLIC_xMSICFGADDRH_HHXW_MASK;
+>
+> +    if (!aplic->kvm_splitmode && !aplic->mmode) {
+> +        msicfgaddrH =3D aplic_m->smsicfgaddrH;
+> +        msicfgaddr =3D aplic_m->smsicfgaddr;
+> +
+> +        lhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
+> +            APLIC_xMSICFGADDRH_LHXS_MASK;
+> +    }
+> +
+>      group_idx =3D hart_idx >> lhxw;
+>
+>      addr =3D msicfgaddr;
+> @@ -771,7 +778,7 @@ static void riscv_aplic_write(void *opaque, hwaddr ad=
+dr, uint64_t value,
+>      } else if (aplic->mmode && aplic->msimode &&
+>                 (addr =3D=3D APLIC_MMSICFGADDRH)) {
+>          if (!(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+> -            aplic->mmsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
+K;
+> +            aplic->mmsicfgaddrH =3D value & APLIC_MMSICFGADDRH_VALID_MAS=
+K;
+>          }
+>      } else if (aplic->mmode && aplic->msimode &&
+>                 (addr =3D=3D APLIC_SMSICFGADDR)) {
+> @@ -792,7 +799,7 @@ static void riscv_aplic_write(void *opaque, hwaddr ad=
+dr, uint64_t value,
+>                 (addr =3D=3D APLIC_SMSICFGADDRH)) {
+>          if (aplic->num_children &&
+>              !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
+> -            aplic->smsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
+K;
+> +            aplic->smsicfgaddrH =3D value & APLIC_SMSICFGADDRH_VALID_MAS=
+K;
+>          }
+>      } else if ((APLIC_SETIP_BASE <=3D addr) &&
+>              (addr < (APLIC_SETIP_BASE + aplic->bitfield_words * 4))) {
+> --
+> 2.34.1
+>
+>
 
