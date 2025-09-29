@@ -4,155 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 299D8CAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Sep 2025 20:59:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0565CAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Sep 2025 22:21:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3Kxb-0007ta-80; Mon, 29 Sep 2025 16:59:03 -0400
+	id 1v3MF2-0007f2-44; Mon, 29 Sep 2025 18:21:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1v3KxW-0007tJ-Pj
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 16:58:58 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1v3KxQ-0000vh-Uh
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 16:58:58 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1759179528;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qGlYEFRv8xDNhpiiWlWf8YqSTaYSiFOP+ymflG4dl6g=;
- b=YtpjqGFK09goaTDTuT1z2mEcpt5i4E1O5W0/gKkmZ1mjSAYFmGk3ovZFzhok2cmwjJXkkX
- nEFphMdKWvj2piPJmgoOCBQX+pnNN0s60C0WEc6PRbnFtNib8OoVdz/tTIIJE0RJP3dMgc
- cnmyfM1ZnH17c/vn/y+ZeUFaGNi/nCQ=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-412-CCJYPmx4NwmgfaNDONrCIg-1; Mon, 29 Sep 2025 16:58:46 -0400
-X-MC-Unique: CCJYPmx4NwmgfaNDONrCIg-1
-X-Mimecast-MFC-AGG-ID: CCJYPmx4NwmgfaNDONrCIg_1759179526
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-8635d47553dso565556285a.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 13:58:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1v3MEy-0007eu-Hh
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 18:21:04 -0400
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1v3MEu-00028y-DU
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 18:21:04 -0400
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-7811fa91774so2798255b3a.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 15:20:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1759184453; x=1759789253; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=IUCiUliMax4cyCxq3lhy/C1UElmsAMDKsIa9C583Qs4=;
+ b=MHhv3XnaPsBkhSDQYiFgDd2afsUUVxX5BazWMhC1gq+iNfivmG2sNXo/r5FGP//0uV
+ VgAOXRVkgRaDKz/RsiNTkcaEkFc/vN8rLo3pc73PzBJFUmE3eevE5g07IlmxrtviCE9g
+ IyTltN+BqLLIZnvzs8Ukjcnd3yA8kEMwDKVdFzPUMNhEfBszKBOXddKroRY+lxpGN2Nk
+ LwuEYh0ujXvmdetiLoWistY+ELk8kJw00DOtZOMvSNX4Ini6vJGA91NokWS+vzJ2WfDk
+ +eaA33wnJS98yqEWnee79fp+cu3YcHYt+FxytoyV3rqQMXS97l0+M+JfJ8rm0+RTeBnN
+ cpjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759179526; x=1759784326;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1759184453; x=1759789253;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qGlYEFRv8xDNhpiiWlWf8YqSTaYSiFOP+ymflG4dl6g=;
- b=sjITPCTq+9ph5MjfB97iRvky7sQcw65nVzTtTWgRXJLXn9Ec0o+ejufONi148/+1/P
- OqWXCWLe6miwDn9yZwayFZMICTWAi/fMApcReZhgzlXVS8rQV4hfR3DwFjV60GgdpwTa
- I2+/I/FNd/3zKdgSFs3Nvg/fErsk+wFbAkYBXOXkpg+ioLc+sa0JrQSLsb6QlEN01qYm
- MBjDTG60xazxBBVGI8oepYK2cYQXL9bRez5+2mcQxd+zr4nNSu8ciaPjTp5IhHRFs1dv
- h580fumnQNzyuSaDCrmtWBigiPGfwWS6TIj33magYO51TmMCL7ozvs0mLJ1YAw3lNLbJ
- 0tEA==
+ bh=IUCiUliMax4cyCxq3lhy/C1UElmsAMDKsIa9C583Qs4=;
+ b=sjy3jyk4wnZ0NXkGbC8MJkoUXvByVf0YDI1FHbmBNTBlfO5bBxyhV4t7VjKMFyaZc/
+ sN01jBpFAJJ2Sv5alBbNaIbuyvu14FFX3Mn+2PBXQLNonTH1xUJC81fSofNFrsXdEumO
+ lwIzhSAZYt3HuuoF1smLoHqoww51PwHnRwzzGdJslP9XyOrClIZ0uIhsNasrKL5ffw3k
+ w2fDSKwGjGdaC79st6SxwKw2xerViq1Rx9nVvg0HXVHlm5KYcN/aIx9q3P9muFwnALCv
+ bfkJYUDWVCnfZ6AunkYhOZoyeZHhSrrBPR7Mm8jwG3a+TLCz1QNzZzkdgfQCIpuzddKh
+ OceQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCViXJ/WXBNlti6c/k4Ui/zmbR3sVT8TWJbovz0iPzmbN8gGNs6yXxcFlbi3cnVR9r0baiz+yXgR3mC0@nongnu.org
-X-Gm-Message-State: AOJu0YzAW6n5UML3ZEuD7nrKmwcqgiOYJOdUVR1stuj7oMmdEzaLqs8c
- AqF5qO1JEsSpPSdilrKeVcEnI5qODCjFiREriRhwOx3jMPvqgiLXlIHVQ62Au+I2RIutUH6vGNG
- alXfddpiBjLuyabp1H5eW3Ja/mC8fjmuCVzVHd8ABWPH/Sl/CJU+9RGz9
-X-Gm-Gg: ASbGncuQCFgJZ5WW5JhLo7al+ZxQrm5+nHCpNqUOVHbT7mvej4/oLc/Oh4S+oOpa/4N
- ELULNewKIIEYf1MIMBLRkl3aezp8GeBPTqgVKXXKeTuDXRgvvPiflkNUxTw5CjI/Cp+VijUNAKU
- 21Rnyz5OffFArxYomZircJ4lCBIY4Jf81PRlIo/QJKgBMZZCP6mN7/HpA/H9wrmQ8z1aD3g41e0
- YRFaWgxi7DISN+V7cZX9W0zhubvzM5zrQSgyGktxpD41rdzQ6lr2+G/2GdxK9aH19UIEgLAj7jP
- J3fVZcHeohS3fYlEFkgkFOT69XcIYvP8
-X-Received: by 2002:a05:620a:a00d:b0:85c:3bcf:e843 with SMTP id
- af79cd13be357-85c3bcfeaa1mr2112609485a.43.1759179526135; 
- Mon, 29 Sep 2025 13:58:46 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEDVAfO10gZpyYJ8dwCVcOEIU84P0ACyRABeDGvxvxzPh4CJm5bPu8NN+2BKbE3WeVcAszc+g==
-X-Received: by 2002:a05:620a:a00d:b0:85c:3bcf:e843 with SMTP id
- af79cd13be357-85c3bcfeaa1mr2112601685a.43.1759179525509; 
- Mon, 29 Sep 2025 13:58:45 -0700 (PDT)
-Received: from x1.local ([142.188.210.50]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-85c2a1913d5sm893653985a.31.2025.09.29.13.58.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 13:58:45 -0700 (PDT)
-Date: Mon, 29 Sep 2025 16:58:41 -0400
-From: Peter Xu <peterx@redhat.com>
-To: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>,
- =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@redhat.com>
-Cc: =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@redhat.com>, qemu-devel@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,
- Steven Lee <steven_lee@aspeedtech.com>,
- Troy Lee <leetroy@gmail.com>, Jamin Lin <jamin_lin@aspeedtech.com>,
- Andrew Jeffery <andrew@codeconstruct.com.au>,
- Joel Stanley <joel@jms.id.au>, Eric Auger <eric.auger@redhat.com>,
- Helge Deller <deller@gmx.de>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- =?utf-8?B?SGVydsOp?= Poussineau <hpoussin@reactos.org>,
- Aleksandar Rikalo <arikalo@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>,
- Ninad Palsule <ninad@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Jason Wang <jasowang@redhat.com>, Yi Liu <yi.l.liu@intel.com>,
- =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
- Nicholas Piggin <npiggin@gmail.com>, Aditya Gupta <adityag@linux.ibm.com>,
- Gautam Menghani <gautam@linux.ibm.com>,
- Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Jonathan Cameron <jonathan.cameron@huawei.com>,
- Fan Ni <fan.ni@samsung.com>, David Hildenbrand <david@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>,
- Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
- Beniamino Galvani <b.galvani@gmail.com>,
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Jan Kiszka <jan.kiszka@web.de>, Laurent Vivier <laurent@vivier.eu>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, BALATON Zoltan <balaton@eik.bme.hu>,
- Bernhard Beschow <shentey@gmail.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Jagannathan Raman <jag.raman@oracle.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Fam Zheng <fam@euphon.net>,
- Bin Meng <bmeng.cn@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- qemu-block@nongnu.org, kvm@vger.kernel.org,
- Alex Williamson <alex.williamson@redhat.com>,
- Stefano Garzarella <sgarzare@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: Re: [PATCH 00/35] memory: QOM-ify AddressSpace
-Message-ID: <aNrzASvJCP_axv22@x1.local>
-References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
- <a06a989d-b685-4e62-be06-d96fb91ed6ea@redhat.com>
- <61e4c2bb-d8fa-446a-b4ec-027d4eae35b5@rsg.ci.i.u-tokyo.ac.jp>
+ AJvYcCV2DVEcEA1n6QirgcmDlAYtJ1T06W1+IydkC8763+cePROOValA9CbKQ9vY9lyEleZd2arTDKupF1V1@nongnu.org
+X-Gm-Message-State: AOJu0YwQxIXBzyp7GFRVm9oci1sLev2Kt8oIc97Vm001HSeLZOMVTeyG
+ mbkhgbjvg8spKJFQhnTxclHNyki7JivSJCqIX7cYR4QuJLPgY7KdyF3K0hE/4LL2ONo=
+X-Gm-Gg: ASbGncuNNo0GBHGwJlAmUCFcFdygdqNR3G5lEFeAE4WyUMMfiMNO/L72UR6NiYCpP7o
+ 9yNyuUbNZHRYBy/eAs9ppUxbjr1lgSUQAnGqZY8pfUczZS9ff5MtKV7DzeAQfa4XPrRHAgfefhh
+ 2pUlUizGuwC0TYBbl1iMAz8B39tvYurIV9ARDlG9a1LQPdEof8lpclN1XjwrHL6Nj12ZkBdSyE7
+ mN64kqCSEyzUOtWV/uefa2XqYFOXJZDpitZFWVkb7X7w2h/b9cqWhD6xHJkYDbXRMQhfW/ZgI4d
+ GMHcGGB88SauHnydBwY2lz44JSPFSAkGBJ+3KjInmFCn4Iex/7oVDHZ1pJqK3LvfTRU41vYQaIn
+ zyVwMfl7pFGL8zz3AB/Hq0tI/oopQGrXoOTClelz9AhvrSw==
+X-Google-Smtp-Source: AGHT+IHkes0ktozQy1e76FB+touSVp81KcH62U5D+oAw+gymzgMLaix8ce3S8YEAJqncy8CpmAAitQ==
+X-Received: by 2002:a17:90b:1b4a:b0:330:72fb:ac13 with SMTP id
+ 98e67ed59e1d1-3342a22cc80mr18293339a91.5.1759184453451; 
+ Mon, 29 Sep 2025 15:20:53 -0700 (PDT)
+Received: from [192.168.1.87] ([38.41.223.211])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-338387256cdsm2333136a91.20.2025.09.29.15.20.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Sep 2025 15:20:53 -0700 (PDT)
+Message-ID: <ba60c570-fff0-4ab8-b3bc-d191663d2912@linaro.org>
+Date: Mon, 29 Sep 2025 15:20:51 -0700
 MIME-Version: 1.0
-In-Reply-To: <61e4c2bb-d8fa-446a-b4ec-027d4eae35b5@rsg.ci.i.u-tokyo.ac.jp>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: l6gwU7Jlqdw-iUoVeMGMnPx_Xvu07StyTuPgSYMIxps_1759179526
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=peterx@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001,
- RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/35] wasm: Add Wasm TCG backend based on wasm64
+Content-Language: en-US
+To: Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-devel@nongnu.org
+Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ WANG Xuerui <git@xen0n.name>, Aurelien Jarno <aurelien@aurel32.net>,
+ Huacai Chen <chenhuacai@kernel.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, Stefan Weil <sw@weilnetz.de>,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ Stefan Hajnoczi <stefanha@redhat.com>
+References: <cover.1756724464.git.ktokunaga.mail@gmail.com>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+In-Reply-To: <cover.1756724464.git.ktokunaga.mail@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x430.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -168,52 +114,281 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 18, 2025 at 09:47:07PM +0900, Akihiko Odaki wrote:
-> On 2025/09/18 21:39, Cédric Le Goater wrote:
-> > Hello Akihiko,
-> > 
-> > On 9/17/25 14:56, Akihiko Odaki wrote:
-> > > Based-on: <20250917-subregion-v1-0-bef37d9b4f73@rsg.ci.i.u-tokyo.ac.jp>
-> > > ("[PATCH 00/14] Fix memory region use-after-finalization")
-> > > 
-> > > Make AddressSpaces QOM objects to ensure that they are destroyed when
-> > > their owners are finalized and also to get a unique path for debugging
-> > > output.
-> > > 
-> > > Suggested by BALATON Zoltan:
-> > > https://lore.kernel.org/qemu-devel/cd21698f-db77-eb75-6966-
-> > > d559fdcab835@eik.bme.hu/
-> > > 
-> > > Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-> > 
-> > I wonder if this is going to fix an issue I was seeing a while ago
-> > in the FSI models. I couldn't find a clean way to avoid corrupting
-> > memory because of how the address_space was created and later on
-> > destroyed. See below,
+Hi Kohei,
+
+On 9/1/25 4:44 AM, Kohei Tokunaga wrote:
+> V3:
+> - Fixed init_wasm_js to correctly cast pointers to Numbers when passing the
+>    arguments to the getInt32 and setInt32 methods.
+> - Lowered the the maximum number of instances (MAX_INSTANCES) to avoid the
+>    out of memory error in recent versions of FireFox.
 > 
-> Partially, but this is insufficient.
+> V2:
 > 
-> The first problem is that AddressSpace suffers from circular references the
-> following series solves:
-> https://lore.kernel.org/qemu-devel/20250906-mr-v2-0-2820f5a3d282@rsg.ci.i.u-tokyo.ac.jp/
-> "[PATCH v2 0/3] memory: Stop piggybacking on memory region owners"
+> - Reorganized commits to implement the backend incrementally from a clean
+>    state.
+> - Removed the andc, orc, eqv, nand and nor operations to rely on default
+>    expansion.
+> - Removed the bswap operations to use default expansion.
+> - Removed the extract and deposit oprations to use default expansion.
+> - Updated the sextract to emit only when the corresponding Wasm instruction
+>    is available
+> - Removed the not operation to rely on default expansion.
+> - Fixed the neg implementation to "ret = 0 - arg"
+> - Added Wasm implementation of the mb operation using the atomic.fence
+>    instruction.
 > 
-> Another problem is that RCU is not properly waited. This is left to future
-> work.
+> Note:
+> The first four commits are temporarily imported from a separated patch
+> series which enables 64bit guests using wasm64 [2]. These commits are under
+> review in that series and are included here only to allow subsequent patches
+> to build. Please ignore them when reviewing this series.
+> 
+> V1:
+> 
+> This patch series adds a TCG backend for WebAssembly. Unlike eariler
+> attempts [1], it is implemented using Emscripten's wasm64 target to support
+> 64bit guests.
+> 
+> The first four commits are temporarily imported from a separated patch
+> series which enables 64bit guests using wasm64 [2]. These commits are under
+> review in that series and are included here only to allow subsequent patches
+> to build. Please ignore them when reviewing this series.
+> 
+> # New TCG Backend for Browsers
+> 
+> A new TCG backend translates IR instructions into Wasm instructions and runs
+> them using the browser's WebAssembly APIs (WebAssembly.Module and
+> WebAssembly.instantiate). To minimize compilation overhead and avoid hitting
+> the browser's limitation of the number of instances, this backend integrates
+> a forked TCI. TBs run on TCI by default, with frequently executed TBs
+> compiled into WebAssembly.
+> 
+> # 64bit guests support by wasm64
+> 
+> Support for 64bit guests is being reviewed in a separated patch series [2],
+> which enables QEMU to use 64bit pointers by compiling with the --cpu=wasm64
+> flag. The Wasm TCG backend is based on this feature and also requires
+> --cpu=wasm64.
+> 
+> QEMU compiled with --cpu=wasm64 runs on wasm64-capable engines. To support
+> engines which don't support wasm64 (e.g. Safari), the Wasm backend can use
+> the compatibility flag "--enable-wasm64-32bit-address-limit" also introduced
+> in [2]. This flag enables 64bit pointers in the C code while Emscripten
+> lowers the output binary to wasm32 and limits the maximum memory size to
+> 4GB. As a result, the Wasm backend can run on wasm32 engiens while
+> supporting 64bit guests.
+> 
+> Note: The flag was originally named --wasm64-32bit-address-limit but this
+> patch series moved it from the configure script into meson_options.txt. To
+> follow Meson's naming conventions, it was renamed to
+> --enable-wasm64-32bit-address-limit.
+> 
+> # Overview of build process
+> 
+> To compile QEMU with Emscripten, the following dependencies are required.
+> The emsdk-wasm-cross.docker environment includes all necessary components
+> and can be used as the build environment:
+> 
+> - Emscripten SDK (emsdk) v4.0.10
+> - Libraries cross-compiled with Emscripten (please see also
+>    emsdk-wasm-cross.docker for build steps)
+>    - GLib v2.84.0
+>    - zlib v1.3.1
+>    - libffi v3.5.2
+>    - Pixman v0.44.2
+> 
+> The configure script supports --cpu=wasm64 flag to compile QEMU with 64bit
+> pointer support.
+> 
+> emconfigure ./configure --cpu=wasm64 \
+>                          --static --disable-tools \
+>                          --target-list=x86_64-softmmu
+> emmake make -j$(nproc)
+> 
+> If the output needs to run on wasm32 engines, use
+> "--enable-wasm64-32bit-address-limit" flag.
+> 
+> emconfigure ./configure --cpu=wasm64 --enable-wasm64-32bit-address-limit \
+>                          --static --disable-tools \
+>                          --target-list=x86_64-softmmu
+> emmake make -j$(nproc)
+> 
+> Either of the above commands generates the following files:
+> 
+> - qemu-system-x86_64.js
+> - qemu-system-x86_64.wasm
+> 
+> Guest images can be packaged using Emscripten's file_packager.py tool.
+> For example, if the images are stored in a directory named "pack", the
+> following command packages them, allowing QEMU to access them through
+> Emscripten's virtual filesystem:
+> 
+> /path/to/file_packager.py qemu-system-x86_64.data --preload pack > load.js
+> 
+> This process generates the following files:
+> 
+> - qemu-system-x86_64.data
+> - load.js
+> 
+> Emscripten allows passing arguments to the QEMU command via the Module
+> object in JavaScript:
+> 
+> Module['arguments'] = [
+>      '-nographic', '-m', '512M',
+>      '-L', 'pack/',
+>      '-drive', 'if=virtio,format=raw,file=pack/rootfs.bin',
+>      '-kernel', 'pack/bzImage',
+>      '-append', 'earlyprintk=ttyS0 console=ttyS0 root=/dev/vda loglevel=7',
+> ];
+> 
+> The sample repository [3] (tcgdev64 branch) provides a complete setup,
+> including an HTML file that implements a terminal UI.
+> 
+> [1] https://patchew.org/QEMU/cover.1747744132.git.ktokunaga.mail@gmail.com/
+> [2] https://patchew.org/QEMU/cover.1754534225.git.ktokunaga.mail@gmail.com/
+> [3] https://github.com/ktock/qemu-wasm-sample/tree/tcgdev64
+> 
+> Kohei Tokunaga (35):
+>    meson: Add wasm64 support to the --cpu flag
+>    configure: Enable to propagate -sMEMORY64 flag to Emscripten
+>    dockerfiles: Add support for wasm64 to the wasm Dockerfile
+>    .gitlab-ci.d: Add build tests for wasm64
+>    tcg/wasm: Add tcg-target.h and tcg-target-reg-bits.h
+>    tcg/wasm: Add register-related definitions
+>    tcg/wasm: Add constraint definitions
+>    tcg/wasm: Add relocation callbacks
+>    tcg/wasm: Add and/or/xor instructions
+>    tcg/wasm: Add add/sub/mul instructions
+>    tcg/wasm: Add shl/shr/sar instructions
+>    tcg/wasm: Add setcond/negsetcond/movcond instructions
+>    tcg/wasm: Add sextract instruction
+>    tcg/wasm: Add load and store instructions
+>    tcg/wasm: Add mov/movi instructions
+>    tcg/wasm: Add ext instructions
+>    tcg/wasm: Add div/rem instructions
+>    tcg/wasm: Add neg/ctpop instructions
+>    tcg/wasm: Add rot/clz/ctz instructions
+>    tcg/wasm: Add br/brcond instructions
+>    tcg/wasm: Add exit_tb/goto_tb/goto_ptr instructions
+>    tcg/wasm: Add call instruction
+>    tcg/wasm: Add qemu_ld/qemu_st instructions
+>    tcg/wasm: Add mb instruction
+>    tcg/wasm: Mark unimplemented instructions
+>    tcg/wasm: Add initialization of fundamental registers
+>    tcg/wasm: Write wasm binary to TB
+>    tcg/wasm: Implement instantiation of Wasm binary
+>    tcg/wasm: Allow switching coroutine from a helper
+>    tcg/wasm: Enable instantiation of TBs executed many times
+>    tcg/wasm: Enable TLB lookup
+>    tcg/wasm: Add tcg_target_init function
+>    meson.build: enable to build Wasm backend
+>    meson.build: Propagate optimization flag for linking on Emscripten
+>    .gitlab-ci.d: build wasm backend in CI
+> 
+>   .gitlab-ci.d/buildtest.yml                    |   26 +-
+>   .gitlab-ci.d/container-cross.yml              |   20 +-
+>   .gitlab-ci.d/container-template.yml           |    4 +-
+>   MAINTAINERS                                   |    9 +-
+>   configure                                     |   14 +-
+>   include/accel/tcg/getpc.h                     |    2 +-
+>   include/tcg/helper-info.h                     |    4 +-
+>   include/tcg/tcg.h                             |    2 +-
+>   meson.build                                   |   16 +-
+>   meson_options.txt                             |    3 +
+>   scripts/meson-buildoptions.sh                 |    5 +
+>   tcg/aarch64/tcg-target.c.inc                  |   11 +
+>   tcg/arm/tcg-target.c.inc                      |   11 +
+>   tcg/i386/tcg-target.c.inc                     |   11 +
+>   tcg/loongarch64/tcg-target.c.inc              |   11 +
+>   tcg/meson.build                               |    5 +
+>   tcg/mips/tcg-target.c.inc                     |   11 +
+>   tcg/ppc/tcg-target.c.inc                      |   11 +
+>   tcg/region.c                                  |   10 +-
+>   tcg/riscv/tcg-target.c.inc                    |   11 +
+>   tcg/s390x/tcg-target.c.inc                    |   11 +
+>   tcg/sparc64/tcg-target.c.inc                  |   11 +
+>   tcg/tcg.c                                     |   21 +-
+>   tcg/tci/tcg-target.c.inc                      |   11 +
+>   tcg/wasm.c                                    |  855 +++++
+>   tcg/wasm.h                                    |  117 +
+>   tcg/wasm/tcg-target-con-set.h                 |   19 +
+>   tcg/wasm/tcg-target-con-str.h                 |   14 +
+>   tcg/wasm/tcg-target-has.h                     |   14 +
+>   tcg/wasm/tcg-target-mo.h                      |   20 +
+>   tcg/wasm/tcg-target-opc.h.inc                 |   18 +
+>   tcg/wasm/tcg-target-reg-bits.h                |   11 +
+>   tcg/wasm/tcg-target.c.inc                     | 2843 +++++++++++++++++
+>   tcg/wasm/tcg-target.h                         |   61 +
+>   ...2-cross.docker => emsdk-wasm-cross.docker} |   29 +-
+>   35 files changed, 4218 insertions(+), 34 deletions(-)
+>   create mode 100644 tcg/wasm.c
+>   create mode 100644 tcg/wasm.h
+>   create mode 100644 tcg/wasm/tcg-target-con-set.h
+>   create mode 100644 tcg/wasm/tcg-target-con-str.h
+>   create mode 100644 tcg/wasm/tcg-target-has.h
+>   create mode 100644 tcg/wasm/tcg-target-mo.h
+>   create mode 100644 tcg/wasm/tcg-target-opc.h.inc
+>   create mode 100644 tcg/wasm/tcg-target-reg-bits.h
+>   create mode 100644 tcg/wasm/tcg-target.c.inc
+>   create mode 100644 tcg/wasm/tcg-target.h
+>   rename tests/docker/dockerfiles/{emsdk-wasm32-cross.docker => emsdk-wasm-cross.docker} (85%)
+> 
 
-Just to mention, Peter Maydell just posted a series for fixing AS
-destructions here:
+I tried to build this series to test it, but unfortunately, I have some 
+errors:
 
-https://lore.kernel.org/qemu-devel/20250929144228.1994037-1-peter.maydell@linaro.org/
+$ podman build -t wasm - --build-arg TARGET_CPU=wasm64 \
+   --build-arg WASM64_MEMORY64=1 \
+   < ./tests/docker/dockerfiles/emsdk-wasm-cross.docker
+$ podman run -it --rm -w $(pwd) -v $(pwd):$(pwd) wasm bash
+$ emconfigure ./configure --cpu=wasm64 \
+   --static --disable-tools --target-list=x86_64-softmmu
+$ emmake make -j$(nproc)
 
-IIUC it should also work for FSI, if FSI can convert to use dynamically
-allocated AddressSpaces (with/without QOMify; as Akihiko pointed out
-correctly, these should be orthogonal), then provide a proper unrealize()
-of the bus device to invoke address_space_destroy_free().
+* /builddeps/target/include/ffi.h:430:6: error: 'FFI_NATIVE_RAW_API' is 
+not defined, evaluates to 0 [-Werror,-Wundef]
+* various "format specifies type 'long long' but the argument has type 
+'long' [-Werror,-Wformat]"
 
-Thanks,
+Is it working fine on your side? If yes, what am I missing?
 
--- 
-Peter Xu
+Note: To build with podman, I needed those changes (that you can 
+probably integrate as they are compatible with docker also):
+--- a/tests/docker/dockerfiles/emsdk-wasm-cross.docker
++++ b/tests/docker/dockerfiles/emsdk-wasm-cross.docker
+@@ -10,7 +10,7 @@ ARG MESON_VERSION=1.5.0
+  ARG TARGET_CPU=wasm32
+  ARG WASM64_MEMORY64=0
 
+-FROM emscripten/emsdk:$EMSDK_VERSION_QEMU AS build-base-common
++FROM docker.io/emscripten/emsdk:$EMSDK_VERSION_QEMU AS build-base-common
+  ARG TARGET_CPU
+  ARG MESON_VERSION
+  ENV TARGET=/builddeps/target
+@@ -130,8 +130,8 @@ RUN mkdir -p /glib
+  RUN curl -Lks 
+https://download.gnome.org/sources/glib/${GLIB_MINOR_VERSION}/glib-$GLIB_VERSION.tar.xz 
+| \
+      tar xJC /glib --strip-components=1
+
+-COPY --link --from=zlib-dev /builddeps/ /builddeps/
+-COPY --link --from=libffi-dev /builddeps/ /builddeps/
++COPY --from=zlib-dev /builddeps/ /builddeps/
++COPY --from=libffi-dev /builddeps/ /builddeps/
+
+  WORKDIR /glib
+  RUN <<EOF
+@@ -156,5 +156,5 @@ RUN sed -i -E "/#define HAVE_PTHREAD_GETNAME_NP 1/d" 
+./_build/config.h
+  RUN meson install -C _build
+
+  FROM build-base
+-COPY --link --from=glib-dev /builddeps/ /builddeps/
+-COPY --link --from=pixman-dev /builddeps/ /builddeps/
++COPY --from=glib-dev /builddeps/ /builddeps/
++COPY --from=pixman-dev /builddeps/ /builddeps/
+
+Regards,
+Pierrick
 
