@@ -4,93 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42C96CAC5B9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Sep 2025 17:38:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 299D8CAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Sep 2025 20:59:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3HpQ-0006Nv-15; Mon, 29 Sep 2025 13:38:24 -0400
+	id 1v3Kxb-0007ta-80; Mon, 29 Sep 2025 16:59:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
- id 1v3HpO-0006Mx-EJ
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 13:38:22 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
- id 1v3HpB-0007lF-NA
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 13:38:22 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3ee0fd0c5c4so636955f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 10:38:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1759167484; x=1759772284; darn=nongnu.org;
- h=in-reply-to:references:from:to:cc:subject:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V52Crn6Nz00R+bIQosCcIfTtiYqYITWKRc8t6+yTbUQ=;
- b=I8quUPZdCyhlMrB2CisVx7sG1PP/D6+EH8J8vW/1iCatEFFZXu+JbhD0XaC3X+okNQ
- I55AVyjhOAv4PfquWxLYmlcs6wZDoaDtkoUygImV2EGAhOwQhYE+kolZ3bwF+pf1Q02r
- mMaMho2UBAZa36Euf6JlL4lHg1SGMh8WfhJmuaZxMouOKowhGs3eKJX9qmJOG7z5UD9J
- LEiT1W/+aCnwgaj9er8/5UidhgyS5L7uasPgZW0FM+Ts9xIl1yETJN/EMxrqc27SZOY9
- TK4SNppYU6sZQ04bTisY51PLSerzum0bDZGaPQCcBnIMpVQZ/lhQX0AZmMymi1FxJzV1
- bB/g==
+ (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1v3KxW-0007tJ-Pj
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 16:58:58 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1v3KxQ-0000vh-Uh
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 16:58:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1759179528;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qGlYEFRv8xDNhpiiWlWf8YqSTaYSiFOP+ymflG4dl6g=;
+ b=YtpjqGFK09goaTDTuT1z2mEcpt5i4E1O5W0/gKkmZ1mjSAYFmGk3ovZFzhok2cmwjJXkkX
+ nEFphMdKWvj2piPJmgoOCBQX+pnNN0s60C0WEc6PRbnFtNib8OoVdz/tTIIJE0RJP3dMgc
+ cnmyfM1ZnH17c/vn/y+ZeUFaGNi/nCQ=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-412-CCJYPmx4NwmgfaNDONrCIg-1; Mon, 29 Sep 2025 16:58:46 -0400
+X-MC-Unique: CCJYPmx4NwmgfaNDONrCIg-1
+X-Mimecast-MFC-AGG-ID: CCJYPmx4NwmgfaNDONrCIg_1759179526
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-8635d47553dso565556285a.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 13:58:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759167484; x=1759772284;
- h=in-reply-to:references:from:to:cc:subject:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=V52Crn6Nz00R+bIQosCcIfTtiYqYITWKRc8t6+yTbUQ=;
- b=tq+tewAbCs3N1FISjfUiga5PuprrCvhBs6XLYnafnthdTjOzlgARg0SdGT9pjEvjuY
- 748cT3Rt6zz0g+wUtl65dvqFZELyDCDscVWqsRHD97Y6FOg5mH+8zlcL3X/fLROlR11J
- EPWRtrApvlh6V369X7IpZaNQBmnM/OYli/T/00VGSpSIqCdm+rkxJI/Jg5FMTbPjyEuI
- YtmH69PkTdsD1xTzcI29LoyLxvYlOFp9GuRDU6BC//FZouLxZ6hSGha2HgFnM77ACv5j
- GnKhouzWFyJCbGusvVxjfwQr3sedRPLJxc42/F6wY37rsMBV+fc8pHsGyqsaLWvqnSb4
- FAKQ==
+ d=1e100.net; s=20230601; t=1759179526; x=1759784326;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qGlYEFRv8xDNhpiiWlWf8YqSTaYSiFOP+ymflG4dl6g=;
+ b=sjITPCTq+9ph5MjfB97iRvky7sQcw65nVzTtTWgRXJLXn9Ec0o+ejufONi148/+1/P
+ OqWXCWLe6miwDn9yZwayFZMICTWAi/fMApcReZhgzlXVS8rQV4hfR3DwFjV60GgdpwTa
+ I2+/I/FNd/3zKdgSFs3Nvg/fErsk+wFbAkYBXOXkpg+ioLc+sa0JrQSLsb6QlEN01qYm
+ MBjDTG60xazxBBVGI8oepYK2cYQXL9bRez5+2mcQxd+zr4nNSu8ciaPjTp5IhHRFs1dv
+ h580fumnQNzyuSaDCrmtWBigiPGfwWS6TIj33magYO51TmMCL7ozvs0mLJ1YAw3lNLbJ
+ 0tEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXPD9LZEXtW20NSjygZpvDUX4/oRUxbjxV9ylVO0Ds9uasr+qY8rbKkVbeTDSPHnmxcE04jWij+SD70@nongnu.org
-X-Gm-Message-State: AOJu0Yz5Pen1rlpPTuzEC9IO826FaSwJmCpc/W3Px0sO/JDk7fKt911+
- iP8Kae4pG6/IguEi6JPu2JqVGmaxfdNqK2kzIRUkDjgzf1ZCG9CUvOp5W1TRvn50iZ0=
-X-Gm-Gg: ASbGnctFC6fWxETGYF5RWOan8COW1jzf+k/Y5aWDGp0yOXgOoo3gM0KLk1KbmhywmYM
- mMAvxvn9N0qTIF/AYx5+FxExq2gpkzG+WAGruW+8sYhRhFB+dKhBTel0L4uRskcrSfG4JzqMyBw
- 05iaAXN89ScA/O7qR21DqGBEvllXSCkM3y2r2+PsKaFOGGE+eBsZDBUeSib9IaW6bnPsbMxMLtE
- erqgeHt9ANSaKajvDJX++WTCZu5SswNCcd9wrs5evdqyPUhQ7YilU+tvhkV0dMyKn9Ax87Rlb1P
- dxf/JIP8iF9tOJ/eocRAdHD3daZkgML59GizKPlBUYor6NPboA4mNYCplruiWOVDK/a9kVtPqkc
- m9cKcVlc+8xE=
-X-Google-Smtp-Source: AGHT+IG7iJS7gF0moqttIOHNgFk6bj8EUtz/kbXO7BG75tJlqkGduicQcAwp/3dxbvzxI44fqmqNjQ==
-X-Received: by 2002:a05:600c:8b5b:b0:46e:3dc2:ebae with SMTP id
- 5b1f17b1804b1-46e3dc2ee1cmr69936275e9.5.1759167483867; 
- Mon, 29 Sep 2025 10:38:03 -0700 (PDT)
-Received: from localhost ([2a02:8308:a00c:e200::bfbb])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-46e56f64d06sm21182395e9.12.2025.09.29.10.38.03
+ AJvYcCViXJ/WXBNlti6c/k4Ui/zmbR3sVT8TWJbovz0iPzmbN8gGNs6yXxcFlbi3cnVR9r0baiz+yXgR3mC0@nongnu.org
+X-Gm-Message-State: AOJu0YzAW6n5UML3ZEuD7nrKmwcqgiOYJOdUVR1stuj7oMmdEzaLqs8c
+ AqF5qO1JEsSpPSdilrKeVcEnI5qODCjFiREriRhwOx3jMPvqgiLXlIHVQ62Au+I2RIutUH6vGNG
+ alXfddpiBjLuyabp1H5eW3Ja/mC8fjmuCVzVHd8ABWPH/Sl/CJU+9RGz9
+X-Gm-Gg: ASbGncuQCFgJZ5WW5JhLo7al+ZxQrm5+nHCpNqUOVHbT7mvej4/oLc/Oh4S+oOpa/4N
+ ELULNewKIIEYf1MIMBLRkl3aezp8GeBPTqgVKXXKeTuDXRgvvPiflkNUxTw5CjI/Cp+VijUNAKU
+ 21Rnyz5OffFArxYomZircJ4lCBIY4Jf81PRlIo/QJKgBMZZCP6mN7/HpA/H9wrmQ8z1aD3g41e0
+ YRFaWgxi7DISN+V7cZX9W0zhubvzM5zrQSgyGktxpD41rdzQ6lr2+G/2GdxK9aH19UIEgLAj7jP
+ J3fVZcHeohS3fYlEFkgkFOT69XcIYvP8
+X-Received: by 2002:a05:620a:a00d:b0:85c:3bcf:e843 with SMTP id
+ af79cd13be357-85c3bcfeaa1mr2112609485a.43.1759179526135; 
+ Mon, 29 Sep 2025 13:58:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEDVAfO10gZpyYJ8dwCVcOEIU84P0ACyRABeDGvxvxzPh4CJm5bPu8NN+2BKbE3WeVcAszc+g==
+X-Received: by 2002:a05:620a:a00d:b0:85c:3bcf:e843 with SMTP id
+ af79cd13be357-85c3bcfeaa1mr2112601685a.43.1759179525509; 
+ Mon, 29 Sep 2025 13:58:45 -0700 (PDT)
+Received: from x1.local ([142.188.210.50]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-85c2a1913d5sm893653985a.31.2025.09.29.13.58.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 10:38:03 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 29 Sep 2025 19:36:58 +0200
-Message-Id: <DD5GSZ9KWEIJ.2GLJ40HGEWWM1@ventanamicro.com>
-Subject: Re: [PATCH v9 1/2] Set KVM initial privilege mode and mp_state
-Cc: <qemu-devel@nongnu.org>, <ajones@ventanamicro.com>,
- <qemu-riscv@nongnu.org>, <pbonzini@redhat.com>, <anup@brainfault.org>,
- <alistair.francis@wdc.com>, <palmer@dabbelt.com>, <xiamy@ultrarisc.com>,
- <qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org>
-To: "Alistair Francis" <alistair23@gmail.com>, "Xie Bo" <xb@ultrarisc.com>
-From: =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>
-References: <20250915070811.3422578-1-xb@ultrarisc.com>
- <20250915070811.3422578-2-xb@ultrarisc.com>
- <CAKmqyKMMo0XfaEsTYqpsV8UfXkhM5YHZsCdptFVR5pSYM1KRxQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKMMo0XfaEsTYqpsV8UfXkhM5YHZsCdptFVR5pSYM1KRxQ@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=rkrcmar@ventanamicro.com; helo=mail-wr1-x435.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+ Mon, 29 Sep 2025 13:58:45 -0700 (PDT)
+Date: Mon, 29 Sep 2025 16:58:41 -0400
+From: Peter Xu <peterx@redhat.com>
+To: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>,
+ =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@redhat.com>
+Cc: =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@redhat.com>, qemu-devel@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,
+ Steven Lee <steven_lee@aspeedtech.com>,
+ Troy Lee <leetroy@gmail.com>, Jamin Lin <jamin_lin@aspeedtech.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>,
+ Joel Stanley <joel@jms.id.au>, Eric Auger <eric.auger@redhat.com>,
+ Helge Deller <deller@gmx.de>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ =?utf-8?B?SGVydsOp?= Poussineau <hpoussin@reactos.org>,
+ Aleksandar Rikalo <arikalo@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Ninad Palsule <ninad@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Jason Wang <jasowang@redhat.com>, Yi Liu <yi.l.liu@intel.com>,
+ =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Aditya Gupta <adityag@linux.ibm.com>,
+ Gautam Menghani <gautam@linux.ibm.com>,
+ Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Jonathan Cameron <jonathan.cameron@huawei.com>,
+ Fan Ni <fan.ni@samsung.com>, David Hildenbrand <david@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>,
+ Xiao Guangrong <xiaoguangrong.eric@gmail.com>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>, Laurent Vivier <laurent@vivier.eu>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, BALATON Zoltan <balaton@eik.bme.hu>,
+ Bernhard Beschow <shentey@gmail.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ Jagannathan Raman <jag.raman@oracle.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Fam Zheng <fam@euphon.net>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-block@nongnu.org, kvm@vger.kernel.org,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Stefano Garzarella <sgarzare@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: [PATCH 00/35] memory: QOM-ify AddressSpace
+Message-ID: <aNrzASvJCP_axv22@x1.local>
+References: <20250917-qom-v1-0-7262db7b0a84@rsg.ci.i.u-tokyo.ac.jp>
+ <a06a989d-b685-4e62-be06-d96fb91ed6ea@redhat.com>
+ <61e4c2bb-d8fa-446a-b4ec-027d4eae35b5@rsg.ci.i.u-tokyo.ac.jp>
+MIME-Version: 1.0
+In-Reply-To: <61e4c2bb-d8fa-446a-b4ec-027d4eae35b5@rsg.ci.i.u-tokyo.ac.jp>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: l6gwU7Jlqdw-iUoVeMGMnPx_Xvu07StyTuPgSYMIxps_1759179526
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=peterx@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- HK_RANDOM_ENVFROM=0.001, HK_RANDOM_FROM=1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,60 +168,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-2025-09-29T11:48:08+10:00, Alistair Francis <alistair23@gmail.com>:
-> On Mon, Sep 15, 2025 at 5:08=E2=80=AFPM Xie Bo <xb@ultrarisc.com> wrote:
->>
->> For KVM mode, the privilege mode should not include M-mode, and the
->> initial value should be set to S-mode. Additionally, a following patch
->> adds the implementation of putting the vCPU privilege mode to KVM.
->> When the vCPU runs for the first time, QEMU will first put the privilege
->> state to KVM. If the initial value is set to M-mode, KVM will encounter
->> an error.
->>
->> In addition, this patch introduces the 'mp_state' field to RISC-V
->> vCPUs, following the convention used by KVM on x86. The 'mp_state'
->> reflects the multiprocessor state of a vCPU, and is used to control
->> whether the vCPU is runnable by KVM. Randomly select one CPU as the
->> boot CPU. Since each CPU executes the riscv_cpu_reset_hold() function
->> and CPU0 executes first, only CPU0 randomly selects the boot CPU.
->>
->> Signed-off-by: Xie Bo <xb@ultrarisc.com>
->> ---
->>  target/riscv/cpu.c | 17 ++++++++++++++++-
->>  target/riscv/cpu.h |  2 ++
->>  2 files changed, 18 insertions(+), 1 deletion(-)
->
-> This fails to build with the following error, it seems an include is miss=
-ing
->
-> ../target/riscv/cpu.c: In function =E2=80=98riscv_cpu_reset_hold=E2=80=99=
-:
-> ../target/riscv/cpu.c:711:25: error: =E2=80=98KVM_MP_STATE_RUNNABLE=E2=80=
-=99
-> undeclared (first use in this function)
->  711 |         env->mp_state =3D KVM_MP_STATE_RUNNABLE;
->      |                         ^~~~~~~~~~~~~~~~~~~~~
-> ../target/riscv/cpu.c:711:25: note: each undeclared identifier is
-> reported only once for each function it appears in
-> ../target/riscv/cpu.c:713:25: error: =E2=80=98KVM_MP_STATE_STOPPED=E2=80=
-=99 undeclared
-> (first use in this function); did you mean =E2=80=98S390_CPU_STATE_STOPPE=
-D=E2=80=99?
->  713 |         env->mp_state =3D KVM_MP_STATE_STOPPED;
->      |                         ^~~~~~~~~~~~~~~~~~~~
->      |                         S390_CPU_STATE_STO
+On Thu, Sep 18, 2025 at 09:47:07PM +0900, Akihiko Odaki wrote:
+> On 2025/09/18 21:39, Cédric Le Goater wrote:
+> > Hello Akihiko,
+> > 
+> > On 9/17/25 14:56, Akihiko Odaki wrote:
+> > > Based-on: <20250917-subregion-v1-0-bef37d9b4f73@rsg.ci.i.u-tokyo.ac.jp>
+> > > ("[PATCH 00/14] Fix memory region use-after-finalization")
+> > > 
+> > > Make AddressSpaces QOM objects to ensure that they are destroyed when
+> > > their owners are finalized and also to get a unique path for debugging
+> > > output.
+> > > 
+> > > Suggested by BALATON Zoltan:
+> > > https://lore.kernel.org/qemu-devel/cd21698f-db77-eb75-6966-
+> > > d559fdcab835@eik.bme.hu/
+> > > 
+> > > Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+> > 
+> > I wonder if this is going to fix an issue I was seeing a while ago
+> > in the FSI models. I couldn't find a clean way to avoid corrupting
+> > memory because of how the address_space was created and later on
+> > destroyed. See below,
+> 
+> Partially, but this is insufficient.
+> 
+> The first problem is that AddressSpace suffers from circular references the
+> following series solves:
+> https://lore.kernel.org/qemu-devel/20250906-mr-v2-0-2820f5a3d282@rsg.ci.i.u-tokyo.ac.jp/
+> "[PATCH v2 0/3] memory: Stop piggybacking on memory region owners"
+> 
+> Another problem is that RCU is not properly waited. This is left to future
+> work.
 
-I think this is because the code belongs in kvm_riscv_reset_vcpu().
+Just to mention, Peter Maydell just posted a series for fixing AS
+destructions here:
 
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> +    static int boot_cpu_index;
->> +    MachineState *ms =3D MACHINE(qdev_get_machine());
->> +    if (cs->cpu_index =3D=3D 0) {
->> +        boot_cpu_index =3D g_random_int_range(0, ms->smp.cpus);
->> +    }
+https://lore.kernel.org/qemu-devel/20250929144228.1994037-1-peter.maydell@linaro.org/
 
-If we're already touching the code, can we also express boot_cpu_index
-in a VM state?  Using a static variable is pretty scary.
+IIUC it should also work for FSI, if FSI can convert to use dynamically
+allocated AddressSpaces (with/without QOMify; as Akihiko pointed out
+correctly, these should be orthogonal), then provide a proper unrealize()
+of the bus device to invoke address_space_destroy_free().
 
-Thanks.
+Thanks,
+
+-- 
+Peter Xu
+
 
