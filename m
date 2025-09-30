@@ -4,89 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB5ECCA468
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 10:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02978CCA468
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 11:49:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3XDs-00074z-4P; Tue, 30 Sep 2025 06:04:40 -0400
+	id 1v3Yq2-0001x2-PZ; Tue, 30 Sep 2025 07:48:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3XDq-00074j-8y
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 06:04:38 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3XDj-00031A-Qc
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 06:04:37 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-46e2e363118so54942895e9.0
- for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 03:04:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759226665; x=1759831465; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=j0rzO/VT1zC0JROCevxKtQYy0KyGXEt7waNrDHcyX4g=;
- b=aBec8NuPWUYp8dmdBnseBzb/NPN1/AubaRVNAGqBGijV61cBe2zYsPtd9lop3vjxqN
- cAsjVL5988mhoa4VoWnFB5u8W33JzkiCpvSRG8ffFEQtSs6hHLr2ni9zgnRhBQnG+kLX
- qJn0rWcHhKyimH50xAfOlruVxRAIbu/iA+Uk3gXl2goSIGywM+xTAteGnwRGm0xIonWk
- W6SUfLReglCPH48jRkdUr+G8OGY2YZ7Z1oGkOAAe643l5wQieq8tdev4rtNnfTCc4kEn
- nrOQWuvuKQx+vmLEUgXCGIwVEnkPcuVkmo8TCFgeEnbmhKl2mDA0B1Ul3PAzaDHZ1kxm
- 21wA==
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1v3YpJ-00015d-GB
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 07:47:27 -0400
+Received: from smtp-relay-internal-0.canonical.com ([185.125.188.122])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1v3YpB-0006ZA-FI
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 07:47:25 -0400
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6DF3B3FCEE
+ for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 11:47:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1759232830;
+ bh=mz3aJKIILHiMAKdazyMKsFstlN7XV1pg95Z4ilFMa7Q=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=G9WVapRbwZLHb4LDv1OvCKDm1us4XJJP2jLvg5/dtKLYlCzavKdy4NKrJR6MSah6K
+ sKxslqq0/r9eATgEOjZ91Ul9VCBZPmoatUi1rVPsboGUsAFb3iN80iupt48CocVPGg
+ oaCtCUV/1ywEKcnB6IO1fw059tA4XAOXAf2IVR/9LnamlaFBV/KKPDa579B90ZntZ8
+ ho2Hv5oTndXOxR5JqgHyNPpQULgfUZxTr819cruvP0wN8u8M5OTj5ajdHWeHyxaMBI
+ pw/7NsxNfcXIULoDq3ePR1ChG3FtH+tg3xA4H1gs+wSJGN3EKAcYMJkCva+leAii1h
+ JvxDdHcmvcWIg==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-46e4cb3e4deso7183595e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 04:47:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759226665; x=1759831465;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1759232830; x=1759837630;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=j0rzO/VT1zC0JROCevxKtQYy0KyGXEt7waNrDHcyX4g=;
- b=laCC6PvFUyzillwLGPtggI2F9M9jhK6L+JCd3OeejtvTXEFicLTTgYncx1Lf907TYW
- /CG5rdfmESw71mcF4sciYzuxSZpCQElyzdWomRx0QGObuxC+ZjbBcMoFzOudD56xFHIU
- yJbYQsMghnz/LdhlvG5T49uhU/VnuX7pQTQdpSG+nou77mLOUizAAyuR712xVDQyPQPi
- uQvdm+J1TAaXBA1GyGXJLr34jtdKjJmpw10D3aBctRAAcQ4zgCAMzy+vMdvtJag50WiT
- judS7CfNS964LMxDvTd9G279ASE6CdC3IUwPGb5DRV5r2PSm/aSVszHsCMJQcohCGjdt
- h8Gw==
-X-Gm-Message-State: AOJu0YztldemkLfbiE7yRp9+LsVl8M7gvqcTDNOBf3YVHbxc5WeMpMxR
- 9SdGNJeX0NC22A+a2UssmfEa/Qc71ob/j/8OLY4OtLXalyq2tOEg3YYxItVFeJg8F6U=
-X-Gm-Gg: ASbGncuWmt0HZPiJlODuxhrz3JdgnYzXeBC+B1SEHrDA1A9OhttSZEJooktSDhplkh8
- V2eBasva317CSkF5AYU3GZztN6Y8ZGdvxY8g31WTwzShZOnog8Z0bFJZ8d3UDYecdHNIKTlF781
- XSG7xWcjzY5ePFdg+Rz3NY84S1Szxx47HNZhn4XVUPm+jYR8yXsiITcu5/MkdAG8f9xBdywSvQM
- ScKZK1FnUVMHsBGhHtyYGTFeLTqhRyrpIWh6kfgl3+59J5zYe/hv4l+QoeXoyOZ/hGBDhwefbJR
- kcXY6smoQ4FZtYifW8Dgn6hZxVMvnbJDkCjwBPHs0aUcRtih5qTNgD6z74c0I5eisDRHa2Q3AEm
- 8EFdUyb3Rri4WdyfD9yRM06UX/6VvnCK6DY3c1KpTVDGPki98abOQGP1T727zDdVLLd6xC/6YVq
- szTKwhUGRCRd/BDMEpkENRE5QB
-X-Google-Smtp-Source: AGHT+IH/MLFqaqpbjAlBHCfbxfU/prxhPdDUbX2SCsmuyFah/8ykfhCrUjP6QGTw3gXQUxbrfLBbdg==
-X-Received: by 2002:a05:600c:314b:b0:46e:3d41:5fe7 with SMTP id
- 5b1f17b1804b1-46e3d41626cmr145802425e9.29.1759226664964; 
- Tue, 30 Sep 2025 03:04:24 -0700 (PDT)
-Received: from [192.168.69.221] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fc5602df0sm22064227f8f.36.2025.09.30.03.04.24
+ bh=mz3aJKIILHiMAKdazyMKsFstlN7XV1pg95Z4ilFMa7Q=;
+ b=eoA04gqZLj91iQuMn4eGB1Uj3ZZO/xlvEQZflg1jt+wnL9X2z64FoTgmoKHSpTUmol
+ u5yrkDhlRFd56H4u+2dSa0IpsvaZbYbA663kgMCDdfQ1UU9c0kG09GFafjhFzd1JJ716
+ DZI4VMymSeBrEkXJK3y5eH50aCQwESFFrKElb/Ut84npwZmAd5Lu6aUDJbmcE1fVaY1M
+ 00Uwr8g+2Blx3bs11/32yokQ2gWsd2DOzV3ylpzPoNRk/VLP8K7ZLsG3ETms3ReC/Ocw
+ AXuXrZj0Y/GRsD7+OvWoi/TBZZhOyFpeCsa8jGSc7yrD4iDXVdPC9tOxkluPryHcU8U1
+ vf7A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWpX8OdOphhnYrWrDq4+lwlxf1UQ2VdHrIxkDPH2qA2pbWQgvEw2NdyC4HUQwmlDimRKWZ26zQZZxD+@nongnu.org
+X-Gm-Message-State: AOJu0Yz1/LItPCqzB42glC9QPSWj8XInr4gnGqFFyjoT9CRPaJaD3WSk
+ 0f7x+hOnlCzNYOLjddT8/O+Xyn7vfRRbClsBNPBeFgegJCYiNkWYWph/nUqXay6UHt4MO1QkMwH
+ sDBuM3eDuaYgcUUktW6wWHHfXz0O5LqC9KRPs+rZ9xEqyn5Tmg78YfCCLVGZVKs+TflR4Nqh4
+X-Gm-Gg: ASbGncvJPIiU116OzkIQxK++5uyIbBtfc+bWYnwQqhJqIogSg7B8+ZW9ukN5uO/wNyK
+ GfIazDSC6LWudvx6x+APFivzKZtM21ogcrtHYd/RnAq/JjOvTpJBCEwo179aG+AonrgE/63UtLa
+ sOlsjgFp/RJ+B6iGwKRY5rzRnSCWVhWPBrp0os1TuH49xWXJgo5uXk4Db6OhGs0kTLxu355ZsHF
+ al+Irzg4Hp9KPDGx6rJeLZCXYlkXW+hkJgD3G26kyGTjR2BQrocc7NxDHhdW6eC8+xfcjeDzk+V
+ D6gLzYrdwkP1rf+T9rxy5gNWTet1ihBllKg663BjzJRq2mHYki6yTR/n4RNlIOysRkWnJnJ3712
+ hfFp6CtqajeG9NQRwF0WrPgn2VGAZfGt5c0MW
+X-Received: by 2002:a05:600c:6c90:b0:46e:25f2:705c with SMTP id
+ 5b1f17b1804b1-46e58cea272mr27826385e9.13.1759232830004; 
+ Tue, 30 Sep 2025 04:47:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF2MtG3GcFKNMl3eEsIY1PGNTCtfqVBLPA+Qj10d0vquUkrSYgE6u4MX73vwQ9lesop68jWxw==
+X-Received: by 2002:a05:600c:6c90:b0:46e:25f2:705c with SMTP id
+ 5b1f17b1804b1-46e58cea272mr27826255e9.13.1759232829610; 
+ Tue, 30 Sep 2025 04:47:09 -0700 (PDT)
+Received: from ?IPV6:2a02:3035:6e0:3cde:b3c8:a011:cdf1:6752?
+ ([2a02:3035:6e0:3cde:b3c8:a011:cdf1:6752])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-40fc82f2ff6sm22279547f8f.56.2025.09.30.04.47.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Sep 2025 03:04:24 -0700 (PDT)
-Message-ID: <a9cb3275-4707-4476-84e5-e42711e89116@linaro.org>
-Date: Tue, 30 Sep 2025 12:04:23 +0200
+ Tue, 30 Sep 2025 04:47:08 -0700 (PDT)
+Message-ID: <07683a05-baa0-463e-b153-28f8f3f31a28@canonical.com>
+Date: Tue, 30 Sep 2025 13:47:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Flush the TLB entry for the specified
- address
+Subject: Re: [RFC PATCH 0/7] Add RISCV big endian support
+To: Ben Dooks <ben.dooks@codethink.co.uk>,
+ Roan Richmond <roan.richmond@codethink.co.uk>,
+ lawrence.hunter@codethink.co.uk
+Cc: felix.chong@codethink.co.uk, sagark@eecs.berkeley.edu, palmer@dabbet.com, 
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, qemu-riscv@nongnu.org
+References: <20241220154616.283933-1-roan.richmond@codethink.co.uk>
+ <6ad3dee0-0fe8-4368-b43f-e7f8f30ead24@canonical.com>
+ <13322f17-8826-4b60-b52c-e885bae91e52@codethink.co.uk>
 Content-Language: en-US
-To: wang.yechao255@zte.com.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20250930174849833XG1Q1ETbNvg66WU2UVBTV@zte.com.cn>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250930174849833XG1Q1ETbNvg66WU2UVBTV@zte.com.cn>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <13322f17-8826-4b60-b52c-e885bae91e52@codethink.co.uk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=185.125.188.122;
+ envelope-from=heinrich.schuchardt@canonical.com;
+ helo=smtp-relay-internal-0.canonical.com
+X-Spam_score_int: -47
+X-Spam_score: -4.8
+X-Spam_bar: ----
+X-Spam_report: (-4.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,54 +121,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
-
-On 30/9/25 11:48, wang.yechao255@zte.com.cn wrote:
-> From: yechao-w <wang.yechao255@zte.com.cn>
+On 9/30/25 12:03, Ben Dooks wrote:
+> On 30/09/2025 10:46, Heinrich Schuchardt wrote:
+>> On 12/20/24 16:45, Roan Richmond wrote:
+>>> This is part of our project to investigate big endian on RISC-V.
+>>> The full information is documented on our gitlab[1] which includes
+>>> source repositories, build information and project documentation.
+>>>
+>>> We have a minimal buildroot, qemu and kernel working on QEMU.
+>>>
+>>> As this is a work in progress any review or help is appreciated.
+>>>
+>>> [1] https://gitlab.com/CodethinkLabs/riscv_bigendian
+>>>
+>>> Ben Dooks (2):
+>>>    target/riscv: Add big endian check for atomic ops
+>>>    taregt/riscv: Add big endian checks for pagetable
+>>>
+>>> Lawrence Hunter (3):
+>>>    target/riscv: Add SSTATUS_UBE
+>>>    target/riscv: Add sfence.vma for endian change
+>>>    target/riscv: Add big endian CPU target
+>>
+>> The RISC-V specification explicitly allows for bi-endian cpus. 
+>> Shouldn't we change the existing generic RISC-V cpus to allow starting 
+>> low-endian and switching the endianness at runtime instead of adding a 
+>> new CPU?
 > 
-> When the guest executes sfence/svinval with an address parameter,
-> invalidating only the specific TLB entry for that address rather
-> than the entire TLB enhances TCG performance.
+> I think the patch also allowed for building qemu for running by default
+> big-endian. It might be worth adding an parameter for defaulting the
+> CSRs at init time.
 > 
-> Signed-off-by: yechao-w <wang.yechao255@zte.com.cn>
-> ---
->   target/riscv/helper.h                          | 2 +-
->   target/riscv/insn_trans/trans_privileged.c.inc | 4 +++-
->   target/riscv/insn_trans/trans_svinval.c.inc    | 4 +++-
->   target/riscv/op_helper.c                       | 8 ++++++--
->   4 files changed, 13 insertions(+), 5 deletions(-)
-
-
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 110292e84d..0fe5fcb3ac 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -555,7 +555,7 @@ void helper_wrs_nto(CPURISCVState *env)
->       }
->   }
+>> The switch to big-endian could occur at the entry-point of OpenSBI.
+>>
+>> Best add a cpu parameter to define a cpu as big-endian, low-endian, or 
+>> bi-endian and default to low-endian only.
 > 
-> -void helper_tlb_flush(CPURISCVState *env)
-> +void helper_tlb_flush(CPURISCVState *env, target_ulong addr)
->   {
->       CPUState *cs = env_cpu(env);
->       if (!env->virt_enabled &&
-> @@ -566,7 +566,11 @@ void helper_tlb_flush(CPURISCVState *env)
->                  (env->priv == PRV_U || get_field(env->hstatus, HSTATUS_VTVM))) {
->           riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
->       } else {
-> -        tlb_flush(cs);
-> +        if (addr) {
-> +            tlb_flush_page(cs, addr);
-
-I suspect tlb_flush_page(cs, addr) is the right thing to do,
-even for addr=0.
-
-Can you point at the doc?
-
-> +        } else {
-> +            tlb_flush(cs);
-> +        }
->       }
->   }
+> The default is LE and the initial work used the CSRs to allow runtime
+> endian. If you start the system BE you can still switch back to LE as
+> it it was a default to set the CSR values to all modes being big on
+> qemu initialisation.
 > 
+
+MO_TEUQ used in patch 5/7 does not allow for bi-endianness. You need to 
+determine endianness at runtime. Please, have a look at mo_endian(ctx) 
+used by the MIPS architecture.
+
+Best regards
+
+Heinrich
 
