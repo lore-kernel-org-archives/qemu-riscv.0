@@ -4,96 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC7D4CAC5B8
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 08:35:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC33CCA470
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 09:47:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3Vp1-0006SV-C7; Tue, 30 Sep 2025 04:34:55 -0400
+	id 1v3Wwt-0000r3-Rn; Tue, 30 Sep 2025 05:47:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1v3Voy-0006PR-Tz
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 04:34:52 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1v3Voj-0004Qw-DR
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 04:34:51 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3324fdfd54cso5986772a91.0
- for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 01:34:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1759221265; x=1759826065; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zLBYrqjpNvkhmLUsF54KL5bWhDBVu9ThZEehNSlvIcQ=;
- b=nhOpkzcEGd9drnsB3/ABbmvUT7KUCvZHE4+yPFvaLR5yIhH0L2QgndiAWT8N435XlI
- ietS7oKGpD7/4A+O8PoaRq2PKG1ef42Z43RMv5Jt+p5DOa16nGGsQaccPNoY8juo+G1z
- pjzftxWJfQDRb0WkTIhTy9z7PdK+oyHhZ1Q2XaigZzcxyTCvqQZ8NdGf9gOxW+foMFSx
- 76nAt+W7TvQODlwADUiFTPqNB2vhppr2W4Y+ragcKCV3KzlESV1TFxoZctUTH+kVFcl5
- xXjqB0Ih9UoHSiKyb0bVmagDzXF9zgcOEv5THrw9HEpMJMAjJWe6E5OPIMopiA9IOnU4
- jn/Q==
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1v3Wwp-0000pi-Qa
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 05:47:03 -0400
+Received: from smtp-relay-internal-0.canonical.com ([185.125.188.122])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1v3Wwf-0004XV-S3
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 05:47:03 -0400
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D08E03FC44
+ for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 09:46:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1759225607;
+ bh=uvo9NKKhIxL7ku6fF0tnNNYwziWTsfr/mzHizUMKmBQ=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=uaaArUGVCN6UpmU1N7yMuKbs1PVx8nhfDm1KipiUMcckgM52TNPJJf9WCU4qgSN3g
+ 3LCXasExwYahLyXmo/NnhQKLFsw+fEV3FczL5g92dHjF+LuZD6bs++YHiCz2gZd9Tu
+ tcvt9ertfhAnuBelXuBhNS7C3rwDWcWOd9z63rzgdhyA0MpxqYdC7as8ei6b7KYPc9
+ 417ugWPxTDssIB8RHMVANAvT2EYedZsQTypOhgdLS6joNAavU/6a/QRD2S4jAfA7VE
+ TMxoJyCUeGTJY/9Kzu1qdteVpHHTH+HFeyzNL196g5gBbPFCscNt9td6XC7+8mQxAg
+ TyhVYB6Kg9Qxw==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-3f4fbdf144dso3243419f8f.2
+ for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 02:46:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759221265; x=1759826065;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zLBYrqjpNvkhmLUsF54KL5bWhDBVu9ThZEehNSlvIcQ=;
- b=iCjmqAy8rZCHrEkkwK7ZQqwAYNrHU271rj5l66PMqi+lmeg9SNo+TvEIgKDARUOq4P
- JLBQmnLTvv6vRqq9HhFs9z/2NE92yGE7y0aOnHALYX4AEZmsWECjksVHxnXcc3eAakr1
- eAHcT0kwnS6fLKtEqnJL/rVkyBlaI7qAOE97uoUkRXz21ole43d2Ra1pMB0MtYB/g4BD
- idOOGtJvFYjL8ZG5sMEmpOtLz24hcNreMm7x25IORUrO0OYU0TvlO02tPw3RHKGVVm01
- HIc4V5ksLq+JoilQ1N8CAYDKJaH9qpTLWkLwjOHZ6QNmsfv0+w5ndWK2SHiUdRe09G4V
- 4Zdw==
+ d=1e100.net; s=20230601; t=1759225607; x=1759830407;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=uvo9NKKhIxL7ku6fF0tnNNYwziWTsfr/mzHizUMKmBQ=;
+ b=dAtXZY70TXZBENQxleEI8n2cqxB7hQjNVQojH3dkhjIIJbsPNCiylYzCSCuGJONt9z
+ eEq9EXBDiZjEM1kdZdsQ5bO7HFIlP+Wbjln1I5hY4s/5Fm4xkOVLbmz5eznoyAIxdARc
+ tHdnHxYRCGZR35ibjzKpy8Ph00nbuSqbI2lihJoDJy4PktR6GZdqagO5xyMXRRkB+AxS
+ BlwljNHINdWB+68Rv3IdLV1qU5dXl0CviqajXRMG39BbaFK3fZC4yoZ+TP6zAFl3OIVa
+ 5hprWIK3gssGsv6Jj4pVIl+TunCR+Vam6fgt3y7fbsMg75x1vLrJzAm199tbFsQj1ZTG
+ nFQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXlRaI87BOB4HhliaL9j8zRq0zxsSUwmu6GkQMLnRRP34Grr+uzR8AoxWtUaSQoLFhTDASD2euoMUpO@nongnu.org
-X-Gm-Message-State: AOJu0YzGf1FmE1Aorq38vouKi+uNDBGXgICuo3F3f/WWtLZo2a7zRUp+
- eFXIBWwbqLPeB93nLRLtW/26Khobr9zm5vTLtd95mSxi87ooTHRDyOZrz2W8Rw74iGo=
-X-Gm-Gg: ASbGnctecYkKrokNJL3G4zcEN6RNy5gx/553M9RPD2sz5S9nV4ohBZ3pI2MJfbljDH9
- 3n5LvF/sOwrWyKWqz9puxe1HD6qMqBun8vx5uT+tU1Bkldh2IaitrHHfm9R3Muaq8hJAg/B4vQl
- FqLVGSZiCZpxkomuCHSiy1irkfP2wj/+wnSshs2wGgrA5aob43dLRA94lgj9beMyBTu4toP70nR
- WEvabwFCaJ+Zy8cskwJKsfcc8eQMF1JIi90SGPuW1zB6TQw8GR/nQW1mn0EbrYGyENxY+rEnhpa
- 2egQRcCcA8Hhl29kExHrdRI0wMr+msl9JPrDbKuclOHnMJlCGAhhW1QbrHBibbH3QriisIR3U2u
- CasUboXbjdZAIH6ydvte0DaehVYbxdRuvnTeYPGMn749rP09zfWi82z6NNGWZ237UKDW2v2GXW7
- a76TVJKDB34A==
-X-Google-Smtp-Source: AGHT+IGEXTjk3S30/hwvfoxbI+ekPBIblXJ80EPwi785hk6LWn8afelfHnQgJo9pnxJQQ66Yfyq/Ng==
-X-Received: by 2002:a17:90b:1a81:b0:32e:8c14:5cd2 with SMTP id
- 98e67ed59e1d1-3342a2b0debmr19197010a91.28.1759221264641; 
- Tue, 30 Sep 2025 01:34:24 -0700 (PDT)
-Received: from jchang-1875.internal.sifive.com ([136.226.240.190])
+ AJvYcCVaN9dFPmw8VAh6YCdskYT1qfsa97oAZc6eFgKZz14S9787Cl1tsseW3Uc7CThdjBSG4oj6vsGQgdiR@nongnu.org
+X-Gm-Message-State: AOJu0Yy2tB27MCQZcO+Iegk+dH4WMZFTKVx65bVL6qiXmwoh2ynrGygR
+ HH/9OgKwHMx81u0k/gLFwNUPONI3waP/hTqyzkv550YR4mbyPUGghaBe0lfC+I0cMXoMr7q+3En
+ NWhbSK8bbmCrQDKO5cY9VlWQ+W9DdO5DYRrOzv8JgLftu4FZWmYwteTvU9s05nHDmNmyGdTOB
+X-Gm-Gg: ASbGncvjcBzw7QRy/8MFXC1Fw5a863bw6onxSMH/gmxU40lGaHy/aKoB47bft1yxw3B
+ tbqroPcestRIXJXcLQmpg1tn4h+WvCof5bZbvoTA7XTgUubwuscG2vKJU88PctAWqT188R7aDRu
+ 8sgwQGM8pntPdlkUq2kTI4uReLeCfKEjc9KQ00UylsuXhuXHKeroO58nDjTvCahehBxFDGWfWbj
+ T14p0q7EAGgGaxI6mk1kyXkTJ3f+GJ54IeDXZTxoImdcqGY7/ghcK3v/pK827wx7xEH+zyU9TMT
+ hrmMagyqmAE6kjlXAJfCPxHUMazyA+4IehUSlCVX1ZsGo4SC5smZ767RHGid6k7K7fdUmy5Wxbe
+ IMrLhBxIdmnXoCNrH1LELg3/yA9+onlbX9nePmAa+8ss=
+X-Received: by 2002:a05:6000:26c8:b0:3cd:edee:c7f1 with SMTP id
+ ffacd0b85a97d-40e50e6223bmr18651954f8f.56.1759225607326; 
+ Tue, 30 Sep 2025 02:46:47 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGWW3ErnnMMma3/fMkNbRn8zYh0PrnPVegrfGd79swb2KiDNOr19fVF0UmgLX2zFxRAKKG+GQ==
+X-Received: by 2002:a05:6000:26c8:b0:3cd:edee:c7f1 with SMTP id
+ ffacd0b85a97d-40e50e6223bmr18651925f8f.56.1759225606874; 
+ Tue, 30 Sep 2025 02:46:46 -0700 (PDT)
+Received: from [192.168.103.116]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b580bd86c4csm10340089a12.14.2025.09.30.01.34.22
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 30 Sep 2025 01:34:24 -0700 (PDT)
-From: Jay Chang <jay.chang@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Jay Chang <jay.chang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
- Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH 2/2] target/riscv: Make PMP CSRs conform to WARL constraints
-Date: Tue, 30 Sep 2025 16:33:59 +0800
-Message-ID: <20250930083359.27637-3-jay.chang@sifive.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250930083359.27637-1-jay.chang@sifive.com>
-References: <20250930083359.27637-1-jay.chang@sifive.com>
+ ffacd0b85a97d-40fb72facf9sm22558618f8f.13.2025.09.30.02.46.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Sep 2025 02:46:46 -0700 (PDT)
+Message-ID: <6ad3dee0-0fe8-4368-b43f-e7f8f30ead24@canonical.com>
+Date: Tue, 30 Sep 2025 11:46:44 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=jay.chang@sifive.com; helo=mail-pj1-x102e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 0/7] Add RISCV big endian support
+To: Roan Richmond <roan.richmond@codethink.co.uk>, ben.dooks@codethink.co.uk, 
+ lawrence.hunter@codethink.co.uk
+Cc: felix.chong@codethink.co.uk, sagark@eecs.berkeley.edu, palmer@dabbet.com, 
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, qemu-riscv@nongnu.org
+References: <20241220154616.283933-1-roan.richmond@codethink.co.uk>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241220154616.283933-1-roan.richmond@codethink.co.uk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=185.125.188.122;
+ envelope-from=heinrich.schuchardt@canonical.com;
+ helo=smtp-relay-internal-0.canonical.com
+X-Spam_score_int: -48
+X-Spam_score: -4.9
+X-Spam_bar: ----
+X-Spam_report: (-4.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.513,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,122 +118,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch ensure pmpcfg and pmpaddr comply with WARL constraints.
+On 12/20/24 16:45, Roan Richmond wrote:
+> This is part of our project to investigate big endian on RISC-V.
+> The full information is documented on our gitlab[1] which includes
+> source repositories, build information and project documentation.
+> 
+> We have a minimal buildroot, qemu and kernel working on QEMU.
+> 
+> As this is a work in progress any review or help is appreciated.
+> 
+> [1] https://gitlab.com/CodethinkLabs/riscv_bigendian
+> 
+> Ben Dooks (2):
+>    target/riscv: Add big endian check for atomic ops
+>    taregt/riscv: Add big endian checks for pagetable
+> 
+> Lawrence Hunter (3):
+>    target/riscv: Add SSTATUS_UBE
+>    target/riscv: Add sfence.vma for endian change
+>    target/riscv: Add big endian CPU target
 
-When the PMP granularity is greater than 4 bytes, NA4 mode is not valid
-per the spec and will be silently ignored.
+The RISC-V specification explicitly allows for bi-endian cpus. Shouldn't 
+we change the existing generic RISC-V cpus to allow starting low-endian 
+and switching the endianness at runtime instead of adding a new CPU?
 
-According to the spec, changing pmpcfg.A only affects the "read" value
-of pmpaddr. When G > 2 and pmpcfg.A is NAPOT, bits pmpaddr[G-2:0] read
-as all ones. When G > 1 and pmpcfg.A is OFF or TOR, bits pmpaddr[G-1:0]
-read as all zeros. This allows software to read back the correct
-granularity value.
+The switch to big-endian could occur at the entry-point of OpenSBI.
 
-In addition, when updating the PMP address rule in TOR mode,
-the start and end addresses of the PMP region should be aligned
-to the PMP granularity. (The current SPEC only state in TOR mode
-that bits pmpaddr[G-1:0] do not affect the TOR address-matching logic.)
+Best add a cpu parameter to define a cpu as big-endian, low-endian, or 
+bi-endian and default to low-endian only.
 
-Signed-off-by: Jay Chang <jay.chang@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Jim Shu <jim.shu@sifive.com>
----
- target/riscv/pmp.c | 46 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 46 insertions(+)
+Best regards
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 72f1372a49..d5cd76df3a 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -108,6 +108,17 @@ static int pmp_is_invalid_smepmp_cfg(CPURISCVState *env, uint8_t val)
-         g_assert_not_reached();
-     }
- }
-+/*
-+ * Calculate PMP granularity value 'g'
-+ *
-+ * The granularity value 'g' is defined as log2(granularity) - 2, where
-+ * granularity is the minimum alignment requirement for PMP regions in bytes.
-+ */
-+static inline int pmp_get_granularity_g(CPURISCVState *env)
-+{
-+    return __builtin_ctz(riscv_cpu_cfg(env)->pmp_granularity >> 2);
-+}
-+
- 
- /*
-  * Count the number of active rules.
-@@ -153,6 +164,15 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-             qemu_log_mask(LOG_GUEST_ERROR,
-                           "ignoring pmpcfg write - invalid\n");
-         } else {
-+            uint8_t a_field = pmp_get_a_field(val);
-+            /*
-+             * When granularity g >= 1 (i.e., granularity > 4 bytes),
-+             * the NA4 (Naturally Aligned 4-byte) mode is not selectable
-+             */
-+            if ((riscv_cpu_cfg(env)->pmp_granularity >
-+                MIN_RISCV_PMP_GRANULARITY) && (a_field == PMP_AMATCH_NA4)) {
-+                    return false;
-+            }
-             env->pmp_state.pmp[pmp_index].cfg_reg = val;
-             pmp_update_rule_addr(env, pmp_index);
-             return true;
-@@ -199,6 +219,7 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index)
-     target_ulong prev_addr = 0u;
-     hwaddr sa = 0u;
-     hwaddr ea = 0u;
-+    int g = pmp_get_granularity_g(env);
- 
-     if (pmp_index >= 1u) {
-         prev_addr = env->pmp_state.pmp[pmp_index - 1].addr_reg;
-@@ -211,6 +232,11 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index)
-         break;
- 
-     case PMP_AMATCH_TOR:
-+        /* Bits pmpaddr[G-1:0] do not affect the TOR address-matching logic. */
-+        if (g >= 1) {
-+            prev_addr &= ~((1UL << g) - 1UL);
-+            this_addr &= ~((1UL << g) - 1UL);
-+        }
-         if (prev_addr >= this_addr) {
-             sa = ea = 0u;
-             break;
-@@ -577,6 +603,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
- 
- /*
-  * Handle a read from a pmpaddr CSR
-+ * Change A field of pmpcfg affects the read value of pmpaddr
-  */
- target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
- {
-@@ -585,6 +612,25 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
- 
-     if (addr_index < pmp_regions) {
-         val = env->pmp_state.pmp[addr_index].addr_reg;
-+        int g = pmp_get_granularity_g(env);
-+        switch (pmp_get_a_field(env->pmp_state.pmp[addr_index].cfg_reg)) {
-+        case PMP_AMATCH_OFF:
-+            /* fallthrough */
-+        case PMP_AMATCH_TOR:
-+            /* Bit [g-1:0] read all zero */
-+            if (g >= 1) {
-+                val &= ~((1 << g) - 1);
-+            }
-+            break;
-+        case PMP_AMATCH_NAPOT:
-+            /* Bit [g-2:0] read all one */
-+            if (g >= 2) {
-+                val |= ((1 << (g - 1)) - 1);
-+            }
-+            break;
-+        default:
-+            break;
-+        }
-         trace_pmpaddr_csr_read(env->mhartid, addr_index, val);
-     } else {
-         qemu_log_mask(LOG_GUEST_ERROR,
--- 
-2.48.1
+Heinrich
+
+> 
+> Roan Richmond (2):
+>    target/riscv: Add riscv MSTATUS_xBE CSR support
+>    target/riscv: Add riscv big endian data flag into DisasContext
+> 
+>   target/riscv/cpu-qom.h                      |  1 +
+>   target/riscv/cpu.c                          |  8 +++++
+>   target/riscv/cpu.h                          |  2 ++
+>   target/riscv/cpu_bits.h                     |  3 ++
+>   target/riscv/cpu_helper.c                   | 34 ++++++++++++++++-----
+>   target/riscv/csr.c                          | 19 ++++++++++--
+>   target/riscv/insn_trans/trans_rva.c.inc     |  4 +++
+>   target/riscv/insn_trans/trans_rvi.c.inc     |  6 ++++
+>   target/riscv/insn_trans/trans_rvzacas.c.inc |  8 ++---
+>   target/riscv/translate.c                    |  5 +++
+>   10 files changed, 76 insertions(+), 14 deletions(-)
+> 
 
 
