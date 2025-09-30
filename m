@@ -4,64 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD67BCCA470
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 10:04:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB5ECCA468
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 10:05:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3XDd-00073z-Dq; Tue, 30 Sep 2025 06:04:25 -0400
+	id 1v3XDs-00074z-4P; Tue, 30 Sep 2025 06:04:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
- id 1v3XDZ-00073W-7j
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 06:04:22 -0400
-Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
- id 1v3XDU-000305-EG
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 06:04:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
- Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
- Message-ID:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=01OZGbMXl6Kb0PYzXi/92BZThHh3Pp9tAoQ+jqMFg1s=; b=tPBPUb3zhZ627qj461PkgSaHkg
- GFN1uV1+Q9+NBmh29KGpOMfxFijD33pfCRouX4albBeVCqnrBLDN9sBvCqEun/A5tIIEh+j3s4gyL
- SJtAHHdxAjQPS7Fk1FfD8AVMAnBzm9/5YtZWl+xd/QeNS50jALE0vQVoPCwnjj2l1inG8kL/uAWdN
- BDdgGQvBMfu/v0WlvqdDwtWsw85Ruw3kBcAD6rvIfzRSiTMHNze68XaXBWTDtyrBWtuPN2dxWUAB9
- gqr7A2TATeOw9oEckpnFjAgvAguUv/oZfAUocB65gcAK4DQaLB/uHX8K3XDxQvFRwK+i7e3+Milnq
- mH7L42qg==;
-Received: from [63.135.74.212] (helo=[192.168.1.249])
- by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1v3XDE-004pmV-Au; Tue, 30 Sep 2025 11:04:00 +0100
-Message-ID: <13322f17-8826-4b60-b52c-e885bae91e52@codethink.co.uk>
-Date: Tue, 30 Sep 2025 11:03:59 +0100
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3XDq-00074j-8y
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 06:04:38 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3XDj-00031A-Qc
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 06:04:37 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-46e2e363118so54942895e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 03:04:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1759226665; x=1759831465; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=j0rzO/VT1zC0JROCevxKtQYy0KyGXEt7waNrDHcyX4g=;
+ b=aBec8NuPWUYp8dmdBnseBzb/NPN1/AubaRVNAGqBGijV61cBe2zYsPtd9lop3vjxqN
+ cAsjVL5988mhoa4VoWnFB5u8W33JzkiCpvSRG8ffFEQtSs6hHLr2ni9zgnRhBQnG+kLX
+ qJn0rWcHhKyimH50xAfOlruVxRAIbu/iA+Uk3gXl2goSIGywM+xTAteGnwRGm0xIonWk
+ W6SUfLReglCPH48jRkdUr+G8OGY2YZ7Z1oGkOAAe643l5wQieq8tdev4rtNnfTCc4kEn
+ nrOQWuvuKQx+vmLEUgXCGIwVEnkPcuVkmo8TCFgeEnbmhKl2mDA0B1Ul3PAzaDHZ1kxm
+ 21wA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759226665; x=1759831465;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=j0rzO/VT1zC0JROCevxKtQYy0KyGXEt7waNrDHcyX4g=;
+ b=laCC6PvFUyzillwLGPtggI2F9M9jhK6L+JCd3OeejtvTXEFicLTTgYncx1Lf907TYW
+ /CG5rdfmESw71mcF4sciYzuxSZpCQElyzdWomRx0QGObuxC+ZjbBcMoFzOudD56xFHIU
+ yJbYQsMghnz/LdhlvG5T49uhU/VnuX7pQTQdpSG+nou77mLOUizAAyuR712xVDQyPQPi
+ uQvdm+J1TAaXBA1GyGXJLr34jtdKjJmpw10D3aBctRAAcQ4zgCAMzy+vMdvtJag50WiT
+ judS7CfNS964LMxDvTd9G279ASE6CdC3IUwPGb5DRV5r2PSm/aSVszHsCMJQcohCGjdt
+ h8Gw==
+X-Gm-Message-State: AOJu0YztldemkLfbiE7yRp9+LsVl8M7gvqcTDNOBf3YVHbxc5WeMpMxR
+ 9SdGNJeX0NC22A+a2UssmfEa/Qc71ob/j/8OLY4OtLXalyq2tOEg3YYxItVFeJg8F6U=
+X-Gm-Gg: ASbGncuWmt0HZPiJlODuxhrz3JdgnYzXeBC+B1SEHrDA1A9OhttSZEJooktSDhplkh8
+ V2eBasva317CSkF5AYU3GZztN6Y8ZGdvxY8g31WTwzShZOnog8Z0bFJZ8d3UDYecdHNIKTlF781
+ XSG7xWcjzY5ePFdg+Rz3NY84S1Szxx47HNZhn4XVUPm+jYR8yXsiITcu5/MkdAG8f9xBdywSvQM
+ ScKZK1FnUVMHsBGhHtyYGTFeLTqhRyrpIWh6kfgl3+59J5zYe/hv4l+QoeXoyOZ/hGBDhwefbJR
+ kcXY6smoQ4FZtYifW8Dgn6hZxVMvnbJDkCjwBPHs0aUcRtih5qTNgD6z74c0I5eisDRHa2Q3AEm
+ 8EFdUyb3Rri4WdyfD9yRM06UX/6VvnCK6DY3c1KpTVDGPki98abOQGP1T727zDdVLLd6xC/6YVq
+ szTKwhUGRCRd/BDMEpkENRE5QB
+X-Google-Smtp-Source: AGHT+IH/MLFqaqpbjAlBHCfbxfU/prxhPdDUbX2SCsmuyFah/8ykfhCrUjP6QGTw3gXQUxbrfLBbdg==
+X-Received: by 2002:a05:600c:314b:b0:46e:3d41:5fe7 with SMTP id
+ 5b1f17b1804b1-46e3d41626cmr145802425e9.29.1759226664964; 
+ Tue, 30 Sep 2025 03:04:24 -0700 (PDT)
+Received: from [192.168.69.221] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-40fc5602df0sm22064227f8f.36.2025.09.30.03.04.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Sep 2025 03:04:24 -0700 (PDT)
+Message-ID: <a9cb3275-4707-4476-84e5-e42711e89116@linaro.org>
+Date: Tue, 30 Sep 2025 12:04:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/7] Add RISCV big endian support
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Roan Richmond <roan.richmond@codethink.co.uk>,
- lawrence.hunter@codethink.co.uk
-Cc: felix.chong@codethink.co.uk, sagark@eecs.berkeley.edu, palmer@dabbet.com, 
- alistair.francis@wdc.com, bmeng.cn@gmail.com, qemu-riscv@nongnu.org
-References: <20241220154616.283933-1-roan.richmond@codethink.co.uk>
- <6ad3dee0-0fe8-4368-b43f-e7f8f30ead24@canonical.com>
-Content-Language: en-GB
-From: Ben Dooks <ben.dooks@codethink.co.uk>
-Organization: Codethink Limited.
-In-Reply-To: <6ad3dee0-0fe8-4368-b43f-e7f8f30ead24@canonical.com>
+Subject: Re: [PATCH] target/riscv: Flush the TLB entry for the specified
+ address
+Content-Language: en-US
+To: wang.yechao255@zte.com.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20250930174849833XG1Q1ETbNvg66WU2UVBTV@zte.com.cn>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20250930174849833XG1Q1ETbNvg66WU2UVBTV@zte.com.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=188.40.203.114;
- envelope-from=ben.dooks@codethink.co.uk; helo=imap4.hz.codethink.co.uk
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,73 +102,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 30/09/2025 10:46, Heinrich Schuchardt wrote:
-> On 12/20/24 16:45, Roan Richmond wrote:
->> This is part of our project to investigate big endian on RISC-V.
->> The full information is documented on our gitlab[1] which includes
->> source repositories, build information and project documentation.
->>
->> We have a minimal buildroot, qemu and kernel working on QEMU.
->>
->> As this is a work in progress any review or help is appreciated.
->>
->> [1] https://gitlab.com/CodethinkLabs/riscv_bigendian
->>
->> Ben Dooks (2):
->>    target/riscv: Add big endian check for atomic ops
->>    taregt/riscv: Add big endian checks for pagetable
->>
->> Lawrence Hunter (3):
->>    target/riscv: Add SSTATUS_UBE
->>    target/riscv: Add sfence.vma for endian change
->>    target/riscv: Add big endian CPU target
+Hi,
+
+On 30/9/25 11:48, wang.yechao255@zte.com.cn wrote:
+> From: yechao-w <wang.yechao255@zte.com.cn>
 > 
-> The RISC-V specification explicitly allows for bi-endian cpus. Shouldn't 
-> we change the existing generic RISC-V cpus to allow starting low-endian 
-> and switching the endianness at runtime instead of adding a new CPU?
-
-I think the patch also allowed for building qemu for running by default
-big-endian. It might be worth adding an parameter for defaulting the
-CSRs at init time.
-
-> The switch to big-endian could occur at the entry-point of OpenSBI.
+> When the guest executes sfence/svinval with an address parameter,
+> invalidating only the specific TLB entry for that address rather
+> than the entire TLB enhances TCG performance.
 > 
-> Best add a cpu parameter to define a cpu as big-endian, low-endian, or 
-> bi-endian and default to low-endian only.
+> Signed-off-by: yechao-w <wang.yechao255@zte.com.cn>
+> ---
+>   target/riscv/helper.h                          | 2 +-
+>   target/riscv/insn_trans/trans_privileged.c.inc | 4 +++-
+>   target/riscv/insn_trans/trans_svinval.c.inc    | 4 +++-
+>   target/riscv/op_helper.c                       | 8 ++++++--
+>   4 files changed, 13 insertions(+), 5 deletions(-)
 
-The default is LE and the initial work used the CSRs to allow runtime
-endian. If you start the system BE you can still switch back to LE as
-it it was a default to set the CSR values to all modes being big on
-qemu initialisation.
 
-> Best regards
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 110292e84d..0fe5fcb3ac 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -555,7 +555,7 @@ void helper_wrs_nto(CPURISCVState *env)
+>       }
+>   }
 > 
-> Heinrich
-> 
->>
->> Roan Richmond (2):
->>    target/riscv: Add riscv MSTATUS_xBE CSR support
->>    target/riscv: Add riscv big endian data flag into DisasContext
->>
->>   target/riscv/cpu-qom.h                      |  1 +
->>   target/riscv/cpu.c                          |  8 +++++
->>   target/riscv/cpu.h                          |  2 ++
->>   target/riscv/cpu_bits.h                     |  3 ++
->>   target/riscv/cpu_helper.c                   | 34 ++++++++++++++++-----
->>   target/riscv/csr.c                          | 19 ++++++++++--
->>   target/riscv/insn_trans/trans_rva.c.inc     |  4 +++
->>   target/riscv/insn_trans/trans_rvi.c.inc     |  6 ++++
->>   target/riscv/insn_trans/trans_rvzacas.c.inc |  8 ++---
->>   target/riscv/translate.c                    |  5 +++
->>   10 files changed, 76 insertions(+), 14 deletions(-)
->>
-> 
-> 
+> -void helper_tlb_flush(CPURISCVState *env)
+> +void helper_tlb_flush(CPURISCVState *env, target_ulong addr)
+>   {
+>       CPUState *cs = env_cpu(env);
+>       if (!env->virt_enabled &&
+> @@ -566,7 +566,11 @@ void helper_tlb_flush(CPURISCVState *env)
+>                  (env->priv == PRV_U || get_field(env->hstatus, HSTATUS_VTVM))) {
+>           riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+>       } else {
+> -        tlb_flush(cs);
+> +        if (addr) {
+> +            tlb_flush_page(cs, addr);
 
+I suspect tlb_flush_page(cs, addr) is the right thing to do,
+even for addr=0.
 
--- 
-Ben Dooks				http://www.codethink.co.uk/
-Senior Engineer				Codethink - Providing Genius
+Can you point at the doc?
 
-https://www.codethink.co.uk/privacy.html
+> +        } else {
+> +            tlb_flush(cs);
+> +        }
+>       }
+>   }
+> 
 
