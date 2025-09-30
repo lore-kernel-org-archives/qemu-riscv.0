@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21AE8CAC5B9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Sep 2025 22:35:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 091B9CAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 01:03:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3MSd-0001nT-BD; Mon, 29 Sep 2025 18:35:11 -0400
+	id 1v3Ola-0001Pz-2C; Mon, 29 Sep 2025 21:02:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v3MSa-0001mq-Sd
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 18:35:09 -0400
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ id 1v3OlY-0001PS-HU
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 21:02:52 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v3MSU-0003Py-0G
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 18:35:08 -0400
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b3d196b7eeeso352608866b.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 15:34:58 -0700 (PDT)
+ id 1v3OlU-0002F0-42
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 21:02:52 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6349e3578adso10034584a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 18:02:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759185297; x=1759790097; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1759194161; x=1759798961; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Jtr24F54A7vAg6tDCIn3Tg59LbtqoA7RE5vVwINhI7M=;
- b=Ih03sHsWKsq2JJFgjUQwY6PotahvS7EVfCiIejRFO6mJpjc258SQ0kMtVk441OmnwI
- plPVJzA24aKHg22JEdqbrehzTVXqRQU7ZAHhG2MLNNMQgZVJ1PVfZJ3rRzWlqX/A4ycY
- Blc8RN+6mzxVmTEAt2UXkNtPuCjqqbfOeg51Hgqn3ME+iVi3jZwTfNyFkpKYK1Su9boh
- kHGG18BJrrlGRk45lHlwCpf/qkAYEEE+a1eRBjGshfrqaRFV/q1mf94A5IYN45c+TO7s
- giDelCFq9Zfkde+HrUB+EuhrQJBKqZZWjVo15rkop6SVUXU5oi4P/SmKybCAHQCGJkXW
- Yj6g==
+ bh=RhvAyZQ5ERnD8oAE8ihzrG/np29LdGY1xxujKzDU4Z8=;
+ b=KN+T5hlTy3tCBLmiJ5zd84IQXrYjRagB08giVLuIzZ0CQi7i9cTyCWG2+UAsOJbYVs
+ BYnOvkfmfcVTyAnRcMCb5F8LEXlyAW8BUZBcIf0SijpLIpS+QkjyKfQDoU+C+u2Asskc
+ DFqNX7MeqMWNyAK82855OekMZLQjpzWH3jqdJT9r5UdD2LfS4V8IO3qi4LjpnhpZ+f0G
+ 1LWcg8EP42OsYCsKI3fn80w448M6nJ6HAjb8mLXyJ31RgZHwdhsny0OKPei0Sh2GYPxg
+ 8A/j5+BI+S5Cxr80liTJviSqJi0fYiNfRtyNgUjxPMRFLo+5LqnFIBzwKhTUrQnBZVGN
+ 9OLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759185297; x=1759790097;
+ d=1e100.net; s=20230601; t=1759194161; x=1759798961;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Jtr24F54A7vAg6tDCIn3Tg59LbtqoA7RE5vVwINhI7M=;
- b=Eiz9wq5Ryv+jixsF9awhvP6xyBMPnwelQS+82vPrlzjwc3o8fcVUGrFlpDwxAm5N5c
- bJSTRj55e6hhtfsZjHynHRuexhJzjn6AIca0mCWmNz8BLbLLrGFpqJgccVJjxEQIOpH6
- dFaIwhjBWS7tXh1PUaIQXRjwzIIVncYFP/Q3++s81KdgnnjC/yROMsYL6fbseokO6RzQ
- HXuTLy+KQnVep46p9YB4UDB9OJoH8Do0NCukozkECqjF+8jwUIlarnR5epJGzLmgtTey
- MTj3WhqLwSOWYZQYNb6epBMcOS8Pjab8hJwT1HKvvJl66UUcr0k8xKwlS5ur/aWXU5uG
- iLjw==
+ bh=RhvAyZQ5ERnD8oAE8ihzrG/np29LdGY1xxujKzDU4Z8=;
+ b=W0kumOVBlzd+7RG+3B1uvjJZFwmwFoeclGsM6P1cDg00CWgTOjf1mUle4sXODryuoz
+ sXusN+YPm+mGhAgspRPIyd5oGTmKygZ/3Uj3PEZ3rOU3SohYn3YxEw+n0D4rZU6AUXbz
+ 9PEH12srg+kUCpFi707WQUGFBYncsPcKcJMewjHMNJnyDSHHO2duT3LEKqOU3M6Kcx3v
+ eFFKzBAW6IVMVekPaUvRuwTk7E4Ky08zzcoTqecs5NK3MejaGul/+J/cOuf5ajYeGQs+
+ nXDVDUxwKhn/uQRgvPRrZWQyKgz0ybPlNGe5armOi0iVmIR/X6UjpQZ3t6bKp2sh/xSy
+ B9lQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/5RlB8lkYzsCz5VGEjKvLtd9hojbiNw8E+2OxpZRObdhdOnNHpV0rTO8ncjqLyv3dtUY8DZOWLLbF@nongnu.org
-X-Gm-Message-State: AOJu0Yy7nLDFTgoqgE3ratiNXwl2Svx5aweeg66GR9F2eoL7gAmiVaFU
- gbmzdgaOqjQL1aScFRW/Z7qAGniFrpz8pq4gqrNY+bnonumVDpXZ6rxUk4i1tR/1zva5+Jpj0Pc
- pafkD68+4yksknN0hJqeNmPBkQOqTHnI=
-X-Gm-Gg: ASbGncsOHm8HE0BG2vTrCHZ+FEjXyI181e2J8dnsh+CTE3hkew8ir1zn475h7VvNyXm
- r5s3WEGbTCnX77f7XaSUgna2ce5XGVGVGDgGSvd4Dutjin7QLtg18RKIaftTZrEu2bAdlTyN/fk
- znpSgfYQXSle6wl97AB54GFVi7AXB6BOlHI+l+mba/07u1CGlPmHio3HcB9RKRtRJyd+WLkAwut
- LT42cWLd5npr6N23ax4Z0+oB44w2WHSaOa9+4SQ0OP2Fmjb
-X-Google-Smtp-Source: AGHT+IEEHNvUYHuehQKhkrw6kVKqMbGDXcfldvPoSyKSI6ViEv61yLp3J4mj+KKUDFONWU9J5R5r4JaRAgtYvJCiX7Y=
-X-Received: by 2002:a17:906:f049:b0:b40:b6a9:f704 with SMTP id
- a640c23a62f3a-b40b6a9fbbfmr303363566b.7.1759185296332; Mon, 29 Sep 2025
- 15:34:56 -0700 (PDT)
+ AJvYcCW255ggZsrIs4rE3rdNsoJMotQX6v2JyDnO9wra1PrJxgV2VTMNoXwiwNqkSehrzZXG6wRlTp7oz7pl@nongnu.org
+X-Gm-Message-State: AOJu0YysLPRGDigx+0iXxg55RQaSFlsf/8QB6hg3UvIyrsVK/h4sLORM
+ 5tcmpAhzl+oQa+A+hnO9FAoeh4Du2ragMGTIyV3eL/9Sx678hQMVwHjmi8P5uCA0YqA7SDxGadZ
+ T3HQ4qxSbQ55KnrDFt8HDtzn4zCQQHFk=
+X-Gm-Gg: ASbGncsdEEd2k+AquiPPwqwHHdO6BAHL7jkJeB59XPMijP0pZw36JT3midP4mT2Tcsl
+ yPjou7YjIemgqkL67P8nyTGB9mqy0hOAQJq4NdSvbEfCM4GvFKW3BRpivtTs21gAX3BjTrIBIOs
+ ECcJJrgPiRZaiVfJ0ld+iDZq7wYvOSyP2SWHdIfCpxC8iVGV0wA5a2evDg3/V5T44iXsNMqGE24
+ rMv4efSFgypF/8sgPiYZJBrB4DA6rCtMK88kV2yb86dnSDL
+X-Google-Smtp-Source: AGHT+IE7xJEk6h5qpBcAa90MPC1Lo4UaKO3hTwXrP8Omb0C0J/z9Ths3oa9wCR0JtYLZvE+wLuOk7eDlMhFlxtaZSiY=
+X-Received: by 2002:a17:907:3d93:b0:b3f:d9e9:baab with SMTP id
+ a640c23a62f3a-b3fd9e9cc5dmr535007666b.27.1759194161041; Mon, 29 Sep 2025
+ 18:02:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250811034454.189208-1-z_bajeer@yeah.net>
-In-Reply-To: <20250811034454.189208-1-z_bajeer@yeah.net>
+References: <20250924091746.1882125-1-djordje.todorovic@htecgroup.com>
+ <20250924091746.1882125-2-djordje.todorovic@htecgroup.com>
+In-Reply-To: <20250924091746.1882125-2-djordje.todorovic@htecgroup.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 30 Sep 2025 08:34:30 +1000
-X-Gm-Features: AS18NWDaqr6FiesPZK7c1z0Bv2ZO-poCfekApkDTmh4kr4qJK32swlpZ7bzhkKM
-Message-ID: <CAKmqyKN_asnf6Au8xN0XTdAgEGhUxR6Mi_CUopzDhTkeLYdO+g@mail.gmail.com>
-Subject: Re: [PATCH v2] aplic: fix mask for smsiaddrcfgh
-To: Yang Jialong <z_bajeer@yeah.net>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, yangjialong@rvcore.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Tue, 30 Sep 2025 11:02:14 +1000
+X-Gm-Features: AS18NWCR6IwXZ-P_1TZtmlnTHNM_c5IAqUYOKcmbEFQeqZ7Q1CZCmzev3eYTpww
+Message-ID: <CAKmqyKPZFWWKPvvGVMN6_A3pt-3wYWBDZiPyj-5T7JtxDB=U6Q@mail.gmail.com>
+Subject: Re: [PATCH v8 01/14] hw/intc: Allow gaps in hartids for aclint and
+ aplic
+To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
+Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+ "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>, 
+ "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>, 
+ "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>,
+ "philmd@linaro.org" <philmd@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x62f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -102,127 +104,113 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Aug 11, 2025 at 1:59=E2=80=AFPM Yang Jialong <z_bajeer@yeah.net> wr=
-ote:
+On Wed, Sep 24, 2025 at 7:19=E2=80=AFPM Djordje Todorovic
+<Djordje.Todorovic@htecgroup.com> wrote:
 >
-> 4.5.4. Supervisor MSI address configuration (smsiaddrcfg and
->   smsiaddrcfgh)
-> smsiaddrcfgh:
->         bits 22:20 LHXS(WARL)
->         bits 11:0  High Base PPN(WARL)
+> This is needed for riscv based CPUs by MIPS since those may have
+> sparse hart-ID layouts. ACLINT and APLIC still assume a dense
+> range, and if a hart is missing, this causes NULL derefs.
 >
-> Signed-off-by: Yang Jialong <z_bajeer@yeah.net>
+> Signed-off-by: Chao-ying Fu <cfu@mips.com>
+> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-This fails to build as there is still a APLIC_xMSICFGADDRH_VALID_MASK user
-
-../hw/intc/riscv_aplic.c: In function =E2=80=98riscv_aplic_set_kvm_msicfgad=
-dr=E2=80=99:
-../hw/intc/riscv_aplic.c:191:34: error:
-=E2=80=98APLIC_xMSICFGADDRH_VALID_MASK=E2=80=99 undeclared (first use in th=
-is
-function); did you mean =E2=80=98APLIC_MMSICFGADDRH_VALID_MASK=E2=80=99?
-191 | APLIC_xMSICFGADDRH_VALID_MASK;
-| ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| APLIC_MMSICFGADDRH_VALID_MASK
-../hw/intc/riscv_aplic.c:191:34: note: each undeclared identifier is
-reported only once for each function it appears in
-
-https://gitlab.com/alistair23/qemu/-/jobs/11528885170
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/intc/riscv_aplic.c | 27 +++++++++++++++++----------
->  1 file changed, 17 insertions(+), 10 deletions(-)
+>  hw/intc/riscv_aclint.c | 18 ++++++++++++++++--
+>  hw/intc/riscv_aplic.c  | 13 ++++++++++---
+>  2 files changed, 26 insertions(+), 5 deletions(-)
 >
-> v1 --> v2:
-> - fix calculation of MSI address.
-> - In Supervisor mode, lhxw/hhxs/hhxw fields are in mmsiaddrcfgh register.
-> - And lhxs field is in smsiaddrcfgh.
+> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+> index 4623cfa029..e3e019e605 100644
+> --- a/hw/intc/riscv_aclint.c
+> +++ b/hw/intc/riscv_aclint.c
+> @@ -297,7 +297,12 @@ static void riscv_aclint_mtimer_realize(DeviceState =
+*dev, Error **errp)
+>      s->timecmp =3D g_new0(uint64_t, s->num_harts);
+>      /* Claim timer interrupt bits */
+>      for (i =3D 0; i < s->num_harts; i++) {
+> -        RISCVCPU *cpu =3D RISCV_CPU(cpu_by_arch_id(s->hartid_base + i));
+> +        CPUState *cpu_by_hartid =3D cpu_by_arch_id(s->hartid_base + i);
+> +        if (cpu_by_hartid =3D=3D NULL) {
+> +            /* Valid for sparse hart layouts - skip this hart ID */
+> +            continue;
+> +        }
+> +        RISCVCPU *cpu =3D RISCV_CPU(cpu_by_hartid);
+>          if (riscv_cpu_claim_interrupts(cpu, MIP_MTIP) < 0) {
+>              error_report("MTIP already claimed");
+>              exit(1);
+> @@ -486,7 +491,12 @@ static void riscv_aclint_swi_realize(DeviceState *de=
+v, Error **errp)
 >
+>      /* Claim software interrupt bits */
+>      for (i =3D 0; i < swi->num_harts; i++) {
+> -        RISCVCPU *cpu =3D RISCV_CPU(qemu_get_cpu(swi->hartid_base + i));
+> +        CPUState *cpu_by_hartid =3D cpu_by_arch_id(swi->hartid_base + i)=
+;
+> +        if (cpu_by_hartid =3D=3D NULL) {
+> +            /* Valid for sparse hart layouts - skip this hart ID */
+> +            continue;
+> +        }
+> +        RISCVCPU *cpu =3D RISCV_CPU(cpu_by_hartid);
+>          /* We don't claim mip.SSIP because it is writable by software */
+>          if (riscv_cpu_claim_interrupts(cpu, swi->sswi ? 0 : MIP_MSIP) < =
+0) {
+>              error_report("MSIP already claimed");
+> @@ -550,6 +560,10 @@ DeviceState *riscv_aclint_swi_create(hwaddr addr, ui=
+nt32_t hartid_base,
+>
+>      for (i =3D 0; i < num_harts; i++) {
+>          CPUState *cpu =3D cpu_by_arch_id(hartid_base + i);
+> +        if (cpu =3D=3D NULL) {
+> +            /* Valid for sparse hart layouts - skip this hart ID */
+> +            continue;
+> +        }
+>          RISCVCPU *rvcpu =3D RISCV_CPU(cpu);
+>
+>          qdev_connect_gpio_out(dev, i,
 > diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index a1d9fa5085..2dd54cafaa 100644
+> index a1d9fa5085..77cec8ece9 100644
 > --- a/hw/intc/riscv_aplic.c
 > +++ b/hw/intc/riscv_aplic.c
-> @@ -96,7 +96,7 @@
->      (APLIC_xMSICFGADDR_PPN_HHX_MASK(__hhxw) << \
->       APLIC_xMSICFGADDR_PPN_HHX_SHIFT(__hhxs))
+> @@ -903,9 +903,12 @@ static void riscv_aplic_realize(DeviceState *dev, Er=
+ror **errp)
+>          if (!aplic->msimode) {
+>              /* Claim the CPU interrupt to be triggered by this APLIC */
+>              for (i =3D 0; i < aplic->num_harts; i++) {
+> -                RISCVCPU *cpu;
+> -
+> -                cpu =3D RISCV_CPU(cpu_by_arch_id(aplic->hartid_base + i)=
+);
+> +                CPUState *temp =3D cpu_by_arch_id(aplic->hartid_base + i=
+);
+> +                if (temp =3D=3D NULL) {
+> +                    /* Valid for sparse hart layouts - skip this hart ID=
+ */
+> +                    continue;
+> +                }
+> +                RISCVCPU *cpu =3D RISCV_CPU(temp);
+>                  if (riscv_cpu_claim_interrupts(cpu,
+>                      (aplic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
+>                      error_report("%s already claimed",
+> @@ -1088,6 +1091,10 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwadd=
+r size,
+>          if (!msimode) {
+>              for (i =3D 0; i < num_harts; i++) {
+>                  CPUState *cpu =3D cpu_by_arch_id(hartid_base + i);
+> +                if (cpu =3D=3D NULL) {
+> +                    /* Valid for sparse hart layouts - skip this hart ID=
+ */
+> +                    continue;
+> +                }
 >
-> -#define APLIC_xMSICFGADDRH_VALID_MASK   \
-> +#define APLIC_MMSICFGADDRH_VALID_MASK   \
->      (APLIC_xMSICFGADDRH_L | \
->       (APLIC_xMSICFGADDRH_HHXS_MASK << APLIC_xMSICFGADDRH_HHXS_SHIFT) | \
->       (APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
-> @@ -104,6 +104,10 @@
->       (APLIC_xMSICFGADDRH_LHXW_MASK << APLIC_xMSICFGADDRH_LHXW_SHIFT) | \
->       APLIC_xMSICFGADDRH_BAPPN_MASK)
->
-> +#define APLIC_SMSICFGADDRH_VALID_MASK   \
-> +    ((APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
-> +     APLIC_xMSICFGADDRH_BAPPN_MASK)
-> +
->  #define APLIC_SETIP_BASE               0x1c00
->  #define APLIC_SETIPNUM                 0x1cdc
->
-> @@ -409,13 +413,8 @@ static void riscv_aplic_msi_send(RISCVAPLICState *ap=
-lic,
->          msicfgaddr =3D aplic->kvm_msicfgaddr;
->          msicfgaddrH =3D ((uint64_t)aplic->kvm_msicfgaddrH << 32);
->      } else {
-> -        if (aplic->mmode) {
-> -            msicfgaddr =3D aplic_m->mmsicfgaddr;
-> -            msicfgaddrH =3D aplic_m->mmsicfgaddrH;
-> -        } else {
-> -            msicfgaddr =3D aplic_m->smsicfgaddr;
-> -            msicfgaddrH =3D aplic_m->smsicfgaddrH;
-> -        }
-> +        msicfgaddr =3D aplic_m->mmsicfgaddr;
-> +        msicfgaddrH =3D aplic_m->mmsicfgaddrH;
->      }
->
->      lhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
-> @@ -427,6 +426,14 @@ static void riscv_aplic_msi_send(RISCVAPLICState *ap=
-lic,
->      hhxw =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXW_SHIFT) &
->              APLIC_xMSICFGADDRH_HHXW_MASK;
->
-> +    if (!aplic->kvm_splitmode && !aplic->mmode) {
-> +        msicfgaddrH =3D aplic_m->smsicfgaddrH;
-> +        msicfgaddr =3D aplic_m->smsicfgaddr;
-> +
-> +        lhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
-> +            APLIC_xMSICFGADDRH_LHXS_MASK;
-> +    }
-> +
->      group_idx =3D hart_idx >> lhxw;
->
->      addr =3D msicfgaddr;
-> @@ -771,7 +778,7 @@ static void riscv_aplic_write(void *opaque, hwaddr ad=
-dr, uint64_t value,
->      } else if (aplic->mmode && aplic->msimode &&
->                 (addr =3D=3D APLIC_MMSICFGADDRH)) {
->          if (!(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-> -            aplic->mmsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
-K;
-> +            aplic->mmsicfgaddrH =3D value & APLIC_MMSICFGADDRH_VALID_MAS=
-K;
->          }
->      } else if (aplic->mmode && aplic->msimode &&
->                 (addr =3D=3D APLIC_SMSICFGADDR)) {
-> @@ -792,7 +799,7 @@ static void riscv_aplic_write(void *opaque, hwaddr ad=
-dr, uint64_t value,
->                 (addr =3D=3D APLIC_SMSICFGADDRH)) {
->          if (aplic->num_children &&
->              !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-> -            aplic->smsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
-K;
-> +            aplic->smsicfgaddrH =3D value & APLIC_SMSICFGADDRH_VALID_MAS=
-K;
->          }
->      } else if ((APLIC_SETIP_BASE <=3D addr) &&
->              (addr < (APLIC_SETIP_BASE + aplic->bitfield_words * 4))) {
+>                  qdev_connect_gpio_out_named(dev, NULL, i,
+>                                              qdev_get_gpio_in(DEVICE(cpu)=
+,
 > --
 > 2.34.1
->
 >
 
