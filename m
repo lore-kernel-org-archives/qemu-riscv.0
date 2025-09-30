@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D43CCCA468
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 13:09:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA20CCA468
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 13:12:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3a6S-0004mT-9E; Tue, 30 Sep 2025 09:09:13 -0400
+	id 1v3a9R-0006iV-2v; Tue, 30 Sep 2025 09:12:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
- id 1v3a6N-0004iT-Vq
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 09:09:08 -0400
+ id 1v3a9M-0006gw-K2
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 09:12:13 -0400
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
- id 1v3a6G-0001cP-1y
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 09:09:06 -0400
+ id 1v3a9H-00030p-Ac
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 09:12:10 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
  Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
  Message-ID:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
  List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QZJyEo4vJ1IiFmJ9FaESno3GE+juGAvv1aCPNN+mT1A=; b=HaGiJ0KQ86GGZDP/nlFIZ3Z2O7
- DS70/O+BM3TVoX4DFzvMQciuT/S2SroawjwohrBlJkyUnc6M2fWivFTuMdjRag8Hj/42aS2sK/qEu
- M+M88tj3L89jKRzZs3jFf3W8hy5LmiF6w9NQEQhQBqqUhoyQmVr6lqyHjhAMyc6zYG/9/X3NX1g15
- FjWieqzYkRiAChaOvGLnSX1EcHOBGcUS8cQ+fISEtBwMMr3JoGUDVIE3xjlQjM9JzioExJqAkKMFS
- KBH34zFCxDv4dnhcPADuUk+S4zUlNzePSpHKcaRR3ZRJZUEaEdU/ZrM2pw1R8i2zAA9RKrBL4KwiB
- 2prBCbug==;
+ bh=/ufYdFV0RysuxHztM/FPGJdBsa6khlQ18jxROUunM9Y=; b=uNeFIx61rvS/HeRWJZNiFc4zf/
+ witNoGjQpkdkwRaOPJCiC2nymEx0mCsOfKd/z5dIe5ax2vxcZ5L1jrZ4JJvorV+pOJrWQ7EI1GIAz
+ Q/z9+tITH/y9TqVJBJnnFeHJKxnn2quPuF3TdlknMbP/SHItiuJHuLqP3slFHkxFP8cPibc8u5DZM
+ D4az6d/aTsi7e5uFkIbWWpTEJ8G5FkAIvNdQq/uKO9JuwHDgbzjeLwOU3rUQW25ZZyjaGxltBd14d
+ uX0ZmVamC18+hmeKJKUy3E0UiKfMt1PaEI7aHvF/AGufYEg8kUl30DOX2C2rmqxIGLbOJo2/zx1Ze
+ 0XYBbuSw==;
 Received: from [63.135.74.212] (helo=[192.168.1.249])
  by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1v3a5z-004vra-GY; Tue, 30 Sep 2025 14:08:43 +0100
-Message-ID: <a9132064-4ce6-402b-8bff-795e95aa57cd@codethink.co.uk>
-Date: Tue, 30 Sep 2025 14:08:42 +0100
+ id 1v3a95-004vz7-Ix; Tue, 30 Sep 2025 14:11:55 +0100
+Message-ID: <b27529e8-91ba-4507-b645-dea4e3285dc0@codethink.co.uk>
+Date: Tue, 30 Sep 2025 14:11:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [RFC PATCH 0/7] Add RISCV big endian support
@@ -126,10 +126,10 @@ On 30/09/2025 12:47, Heinrich Schuchardt wrote:
 > determine endianness at runtime. Please, have a look at mo_endian(ctx) 
 > used by the MIPS architecture.
 
-Ok, so it looks like MO_TEUQ needs to be changed to MO_UQ and then orred 
-with the MO_BE or MO_LE.
-
-Seems to have worked for initial testing :/
+oops, forgot to follow up with the be_data field is probably mis-named
+and we should call it target_endian (basically we're keeping the value
+cached in the ctx, with mips having a function to return this at run
+time)
 
 -- 
 Ben Dooks				http://www.codethink.co.uk/
