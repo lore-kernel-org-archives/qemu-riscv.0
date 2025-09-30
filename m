@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE4C5CCA46F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 08:29:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49CADCAC5B8
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 08:34:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3Vhx-0008MB-Ri; Tue, 30 Sep 2025 04:27:38 -0400
+	id 1v3Voc-0006C8-Jn; Tue, 30 Sep 2025 04:34:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1v3Vhk-0008C9-Vc
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 04:27:25 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1v3VoT-00069l-38
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 04:34:21 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1v3VhX-0002cX-Vn
- for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 04:27:22 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-b551b040930so3782497a12.2
- for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 01:27:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1v3VoO-0004KG-8C
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 04:34:20 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-781010ff051so3901305b3a.0
+ for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 01:34:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759220815; x=1759825615; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0LNTdP/W0tNETzznAtplZaQ+bhPZSQ4LzCoij245COE=;
- b=lr9t9MmlHg1pycPVbT0VbEn7lCgXfZ9+JPULaqCuRGYG3pK2rLGqq+jyzk8JvEC6W2
- Mhj6iErVswyqylGDkA3o/dYZ5pe9JAJ4bgrmWsHuJW2rz1NL0zE25k/nZOXH8rXmnQLk
- ciwsyRVyNjVGWYZT+eNd3jD474JbJqKAs92otUlDCWCtV8eF2yox2lr/epmfPlObFDhA
- nBP9UEcgUjamNuYefBz6Gb6UQWp7nhE550ikTabBhcFCWmy1l0UnV1xnCJaAXZM8NvbV
- FN2giqX9reiRwALfO1Ty+dNTc0yVzMc99qtHuPCUWlqWO730DIDfrSsep04P9Ke58dFb
- u9RQ==
+ d=sifive.com; s=google; t=1759221246; x=1759826046; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ojkPsTQsaNQYLtTu/H71d9cy/NzlEBkDnjWPKYtb4T0=;
+ b=TtkJE6LqFJes8m9cS8yFId0rFRIraVNFfrYDA0e/aQZgugctnWv3SgxWkoVV4xuIdA
+ swE3Y6vaTu+s67L+YQAuX5pppYZtkMWSZxNts8PNQ85LtcoNqmd8hbWJ/iOQ+OBG2eI0
+ FP+CSWD6rCUMg2PYg0ydI4EJ2BkkOerhvLGl1bVDIjtYLozF3sFGSS5UsVQBgaHFyQLi
+ TsS0dQ9JYJymsC8nAgD8PQuRskwYfFJVcKtWIR/7euNl3KMylmeWukgW9rvPxVruHj0/
+ 7ITA+U9PzVrOssgYcmcN9DiAwfFhaa+QhFrbse20jcpIBQj/P6YWdN0GjByfdvV9dIbQ
+ mRnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759220815; x=1759825615;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1759221246; x=1759826046;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0LNTdP/W0tNETzznAtplZaQ+bhPZSQ4LzCoij245COE=;
- b=FjDSk4wzflQZE79mdPCWHoFPGh31mSZ4aQDK6zLjE1ROjM5sqFiriGgkYcYHn4TxqF
- vF8s32CoDPmWvcfM3xC6/uz0OmAJeslKRt/trvoG6eKACD7kao+ehpStN46/8n/jjFXY
- lhI49560cSWwz1hESk4NQDtZj+Kjc9w7ErKs17Muea1SioRdahzKg9mBzUnA7XGiwLvm
- 7t35BJplbFu1z7ZV9RgWMhXG7IJkNwAwSjayMJgdbYeKwX9Dgcnmw2o8fFDIz4GupgjT
- GLfLW9tJtBI7f9Dr7wZ+SHnQhOsibQ8BFqO2KRosnv50+mE2FL5jBUcZA/uuGfWEoGfo
- ZF9w==
+ bh=ojkPsTQsaNQYLtTu/H71d9cy/NzlEBkDnjWPKYtb4T0=;
+ b=PHtHTh3U6B8hzHJjFW7daXZUNVblKTVGphYQRlCLd+Vp/TSrrdhMJlJwmRCo2dLkdx
+ KoDcF9Hw6G+n+s0FXhe8/7a7SfXsOW2sdsV+NNmWkxwRND2FEq8zU8wCsrtfvwbNFJ0y
+ NiYwmj+3iydzWlVEdFGxTuW61BUQhvpKib3WAx2ba4BDbM9vLrd79xQVaEXEkULtb/2+
+ Oj/gKJr/RjLDkEMRInQNog4j6QLVxcgHjhSUAEfSvlxw3gyeioJr7iY24bqQ8hyAahUf
+ ookNOQeDa77Jqxyz70S06x511jshQwcXqsM2lrDbzCD4go4wDF+Ttqp/W/m4BZzwezrr
+ 9HhQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVw5Zc9Nf7a7PNn4c+x0N6mc0nP65UklfEiOyqtKuYuLnYOcGKaQJ8jpXrkswrnVrNDEoMtmq6HYf7b@nongnu.org
-X-Gm-Message-State: AOJu0YwmHNIE+Wb3hkce+NaTW26kcoUkp62EY4fu2PXeJhXe2JBAyt/m
- B58YTrYZoRMaQzWdt8crahHnmowxL942Pub4uZ3BJfKSBUuCUiQNrXurhS5ULCCC2grj8XyJ4hp
- RcbhtcPXaP4V6yrcR28vTAp4mXYE+/50=
-X-Gm-Gg: ASbGncveBaGbbQYRrkwpycJdyInRrgtz3fwA1UxSq4m/anHvHHPqi00dbYEvc5I5gKh
- aSzuwI4XgYhKWJ49nHeA188j/iIXdEKxIsek7qdX86lEFOk23j2l0eRzLF/ogkdprQZG9SYXwHU
- 8w6+E5jrSP10Sp80V6+sSInIA7vzOl33Zo2pCgLW4YBzD7MxovlyHjsROxAoKGEFVStMdNatB9f
- tx+MJX0RBB4EK6waVm2/SuA3R7RaB+2EAThTrtQukXWCyXORuceI6sBJZ0a
-X-Google-Smtp-Source: AGHT+IEMt0iYeVZJIWJjd7IGAp2dKKy4AHmDDeWo2l/e1R0qhw9u1GtnblAWPVBswIzwPmB87ng/d0auMno6CWc6/Js=
-X-Received: by 2002:a17:90b:3ccd:b0:30a:4874:5397 with SMTP id
- 98e67ed59e1d1-3342a24d0camr19521105a91.9.1759220814783; Tue, 30 Sep 2025
- 01:26:54 -0700 (PDT)
+ AJvYcCWxGlOUP9n+A5tkUha+AotP27t7M9v701VC5fqUdlBOUosv72X9F3Sm6cAKOxGHmCKEQxU+I9dPF9FJ@nongnu.org
+X-Gm-Message-State: AOJu0YzMBmqatNSMDrx6tsmqr2HHZwplNkCXF/DXntFU/zjkbsbUMad6
+ iBZt74AXyF2u9hX2UmTLcW5BF5TYyn5AbBNVu2MpptKyRa9X1QJ8IgSLPSpZhGIGt7c=
+X-Gm-Gg: ASbGncsoAsX5nLHPdTpIbX2xg7h2XtVnUkOV6Ngr0zDl46X+RfAWbP0jKNPXAmxJ5CA
+ ++Hki2AbrRXWIMxAursEK9dhhzgGmfe2zxCC10YXCu5/DXtnqXZL0BRS6HckBNJ6XN+MAu/NaRr
+ EZHmz/dsKPvO+5hhWIPG+ETkHF64LscW9IQ4RBtx9JaEcRDcWlkqd7zesTiGWAx63awV5IfJBYv
+ 9u2nMCPgXGGWm5cnZ4zl/IIPjtxpiA3oLLt8j6DjMpUDPa5SvpSVIl2qul5pZzpkI9x+tVjAqaE
+ lp3oAsjZNjTARH1kw/aXbN6IXu68Y6lqD+ojoMLKkhUUW0fHxBi7SXp1jh3icYVztQTiedtsobV
+ /xtCl+IGAGPDPURaYHXGMDElNrsb49fSiPE2fWisVDLOZBwrsO8/2oCQiuv+Ft6aYwa3OIKuo3e
+ w3ykFTmAscLA==
+X-Google-Smtp-Source: AGHT+IFJTWIawBn/P8oZRaHIFpBlkGnkrcjuQGHRqVvmykZ44WHMdjoVdtGIy/2hiQimh0HqPSA30A==
+X-Received: by 2002:a05:6a21:6d9d:b0:250:9175:96e3 with SMTP id
+ adf61e73a8af0-2e7d474b937mr22319644637.30.1759221245688; 
+ Tue, 30 Sep 2025 01:34:05 -0700 (PDT)
+Received: from jchang-1875.internal.sifive.com ([136.226.240.190])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b580bd86c4csm10340089a12.14.2025.09.30.01.34.03
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 30 Sep 2025 01:34:05 -0700 (PDT)
+From: Jay Chang <jay.chang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jay Chang <jay.chang@sifive.com>
+Subject: [PATCH 0/2] Make PMP granularity configurable
+Date: Tue, 30 Sep 2025 16:33:57 +0800
+Message-ID: <20250930083359.27637-1-jay.chang@sifive.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <cover.1756724464.git.ktokunaga.mail@gmail.com>
- <ba60c570-fff0-4ab8-b3bc-d191663d2912@linaro.org>
-In-Reply-To: <ba60c570-fff0-4ab8-b3bc-d191663d2912@linaro.org>
-From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-Date: Tue, 30 Sep 2025 17:26:42 +0900
-X-Gm-Features: AS18NWCjjxIHQvMmmukI1NEOUr46E_NLwrncNl350eI0CPjg-mhAw1-oVcOVRBI
-Message-ID: <CAEDrbUYAAbF5g4-HEvqDWZyycPzZQCJvqasJ355RkLOnfm0R3A@mail.gmail.com>
-Subject: Re: [PATCH v3 00/35] wasm: Add Wasm TCG backend based on wasm64
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
-Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- WANG Xuerui <git@xen0n.name>, Aurelien Jarno <aurelien@aurel32.net>, 
- Huacai Chen <chenhuacai@kernel.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Aleksandar Rikalo <arikalo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, Stefan Weil <sw@weilnetz.de>,
- qemu-arm@nongnu.org, 
- qemu-riscv@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>
-Content-Type: multipart/alternative; boundary="000000000000bf28cc0640008314"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pg1-x52a.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=jay.chang@sifive.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -106,44 +104,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000bf28cc0640008314
-Content-Type: text/plain; charset="UTF-8"
+This patch series enhances QEMU's RISC-V PMP support to conform with
+the RISC-V Privileged Specification regarding PMP granularity and WARL
+constraints.
 
-Hi Pierrick,
+Previously, QEMU always used a fixed minimum PMP granularity of 4 bytes.
+This series introduces a configurable "pmp-granularity" parameter, allowing
+platforms to specify larger granularity values. In addition, the handling of
+pmpcfg and pmpaddr CSRs has been updated to follow WARL constraints. For
+example, when NA4 is not valid due to a larger granularity, it is silently
+ignored. TOR and NAPOT address ranges are also properly aligned according to
+the configured granularity.
 
-Thank you for testing this patch.
+A new CPU parameter `pmp-granularity` is now available on the QEMU command
+line. For example:
 
-> * /builddeps/target/include/ffi.h:430:6: error: 'FFI_NATIVE_RAW_API' is
-> not defined, evaluates to 0 [-Werror,-Wundef]
-> * various "format specifies type 'long long' but the argument has type
-> 'long' [-Werror,-Wformat]"
+    -cpu rv64,g=true,c=true,pmp=true,pmp-granularity=1024
 
-On my side and also on the GitLab CI, these appear only as warnings and the
-build completes without errors[1]. I'm curious why -Werror is being
-triggered in your build. Have you applied additional configurations that
-enabled -Werror?
+If not provided, the default remains 4 bytes.
 
-[1] https://gitlab.com/ktock/qemu/-/jobs/11544442966#L7016
+---
 
-Regards,
-Kohei
+Patch summary:
 
---000000000000bf28cc0640008314
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+1. target/riscv: Make PMP granularity configurable
+   - Introduce CPU property `pmp-granularity` for platforms to configure
+     PMP granularity.
+   - Default remains 4 bytes if unspecified.
 
-<div dir=3D"ltr"><div dir=3D"ltr">Hi Pierrick,<br><br>Thank you for testing=
- this patch.<br><br>&gt; * /builddeps/target/include/ffi.h:430:6: error: &#=
-39;FFI_NATIVE_RAW_API&#39; is<br>&gt; not defined, evaluates to 0 [-Werror,=
--Wundef]<br>&gt; * various &quot;format specifies type &#39;long long&#39; =
-but the argument has type<br>&gt; &#39;long&#39; [-Werror,-Wformat]&quot;<b=
-r><br>On my side and also on the GitLab CI, these appear only as warnings a=
-nd the<br>build completes without errors[1]. I&#39;m curious why -Werror is=
- being<br>triggered in your build. Have you applied additional configuratio=
-ns that<br>enabled -Werror?<br><br>[1] <a href=3D"https://gitlab.com/ktock/=
-qemu/-/jobs/11544442966#L7016">https://gitlab.com/ktock/qemu/-/jobs/1154444=
-2966#L7016</a></div><div dir=3D"ltr"><br></div><div>Regards,</div><div>Kohe=
-i</div></div>
+2. target/riscv: Make PMP CSRs conform to WARL constraints
+   - Update pmpcfg and pmpaddr handling to follow WARL semantics.
+   - Align start and end addresses of TOR regions to PMP granularity.
+   - Ensure software can read back correct values per the spec.
 
---000000000000bf28cc0640008314--
+Jay Chang (2):
+  target/riscv: Make PMP granularity configurable
+  target/riscv: Make PMP CSRs conform to WARL constraints
+
+ target/riscv/cpu.c                | 39 ++++++++++++++++++++++++++
+ target/riscv/cpu.h                |  1 +
+ target/riscv/cpu_cfg_fields.h.inc |  1 +
+ target/riscv/pmp.c                | 46 +++++++++++++++++++++++++++++++
+ 4 files changed, 87 insertions(+)
+
+-- 
+2.48.1
+
 
