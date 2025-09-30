@@ -4,59 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 939CECCA470
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 14:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03D12CCA468
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 15:13:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3awM-0005PV-Ac; Tue, 30 Sep 2025 10:02:50 -0400
+	id 1v3c2x-0008V2-35; Tue, 30 Sep 2025 11:13:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fangyu.yu@linux.alibaba.com>)
- id 1v3a7H-0005SM-V9; Tue, 30 Sep 2025 09:10:05 -0400
-Received: from [115.124.30.118] (helo=out30-118.freemail.mail.aliyun.com)
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1v3c2u-0008Ug-9a
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 11:13:40 -0400
+Received: from smtp-relay-internal-1.canonical.com ([185.125.188.123])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fangyu.yu@linux.alibaba.com>)
- id 1v3a7B-0001nR-95; Tue, 30 Sep 2025 09:10:03 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1759237771; h=From:To:Subject:Date:Message-Id:MIME-Version:Content-Type;
- bh=BywjRjbTi2+324yl5WcDORCYjq+NxPQ5bGc+JBMtF64=;
- b=I4MSGY/LX4mbKaTVfaAVgOqGUYQMdUeRwmdWOaOzfhSn0Je934fD2Lu9eOtsFhnGb2NXmGfDUqUUgGhddW0lLnuCe5ESVGJiZ+7sZj3zu3+caXDxWUiWhwd64FhDOKdlkqtq5m98fhFe6O47rFD7rVp5lq/xFLD80MeoU0iu7Iw=
-Received: from localhost.localdomain(mailfrom:fangyu.yu@linux.alibaba.com
- fp:SMTPD_---0WpBU8QX_1759237447 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 30 Sep 2025 21:04:09 +0800
-From: fangyu.yu@linux.alibaba.com
-To: guoren@kernel.org
-Cc: alistair.francis@wdc.com, liujingqi@lanxincomputing.com,
- liwei1518@gmail.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- qemu-stable@nongnu.org, seb@rivosinc.com, tjeznach@rivosinc.com,
- zhiwei_liu@linux.alibaba.com,
- =?UTF-8?q?Fangyu=20Yu=C2=A0?= <fangyu.yu@linux.alibaba.com>
-Subject: Re: [PATCH V3] hw/riscv/riscv-iommu: Fixup PDT Nested Walk 
-Date: Tue, 30 Sep 2025 21:04:03 +0800
-Message-Id: <20250930130403.13349-1-fangyu.yu@linux.alibaba.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-146)
-In-Reply-To: <20250913041233.972870-1-guoren@kernel.org>
-References: <20250913041233.972870-1-guoren@kernel.org>
+ (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
+ id 1v3c2p-0001UF-4n
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 11:13:39 -0400
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 754CB3F918
+ for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 15:13:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1759245208;
+ bh=p02nvItW9oZQwXN3SFy/Iz6I0TO/ejjy/AxQYIc2Qpg=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=DthES46htL9FdebLF7TxeEyfpYsFgx8WuCNkLdetL+np71gK4FyNJAV65+Fu0xTkd
+ oRhNFeZG7osSxuLmJweGRCT3/1Fgr5XCWj1Sli2HLJcoPlfiPMNP4pjGdMLeX9rIIS
+ PJ5/OpnlacTskeIfaUcdrj3Y7Khl4KCUzzUVkmFUojjaI4iQYVlewGdbMvUDQeaV+D
+ 4tmxKein1fiYUd9ATXMiG+SZq+1te2uWt4tUNw5MTbQi+aRx07zlD3QKRTyhBJUFS9
+ TQ+GphDShFkego2H6N+w1QfVQ9ZoYV3o2S6tXaPK2xx+6DcUXav4iWzYDy2Ahy/24W
+ 3YDLXjl40b4Wg==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-46e36686ca1so47632715e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 30 Sep 2025 08:13:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759245208; x=1759850008;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=p02nvItW9oZQwXN3SFy/Iz6I0TO/ejjy/AxQYIc2Qpg=;
+ b=c/gzmqGxVRFjyh9jUZAx6FIN5+P105MVg9gckkux0BdBQQyMxbgIFp/95M6efTLtbL
+ 0GvNbhyr7xa+328Sn4T2i6IjoJUSfyUgIHhtlBClkpxw64ucuUUFuRZGVbPLgcXQjpbe
+ 0p0eK8lZtKZx6jZgIByWJPxnnEjTs4fZLCTYnDgvsOkn5tT2FvcIsecIfk0U9G0hmAFh
+ wbqju8W3gRHV8/C0QSx0gN1PASg5EUA9Z0xw6ikwr4bcRneqVghugpCCnLvrI2bho1aw
+ NT9wq6Naut1gm0eWu7wbM7Hya90V2V/+y4o38vZdm0RRAmEh0bRLTf7pdjnvBT0IZHeV
+ 0C2w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWCBTEnLedcOlN0ZCFhyV2sp54Qh+V5AS1HBiU/csMQOoHGWgdcAlNa1xCiAfd/QOOpq/LOi9l8zPzW@nongnu.org
+X-Gm-Message-State: AOJu0Ywfe20kKCTkZsvj3DcsPacHjfOadWCEhvbUVLvNlSewOd11QNIJ
+ ogC1lFprkmXX7ADomyLWhpkmT/3qTYGS3IYh2wixKbIL684s9Fye+LOOlBBTC5XKYLCsEI31rAg
+ W+fFFlv6Oymleue5B0u0ybODfElGuxW/oLd82HiMJeVvnl8jAANl5Cx21FGYEAw7+VqBnc3Bx
+X-Gm-Gg: ASbGncuDHRsAiSpcbmqmLbuPAJvnWfDlMmLxSI6LTtWa8/CDpMs3Dy3+oXKiBXsqMAJ
+ WFKqdateRyUzA97TuY6keh7GhlDPpnjpRpvzawLpTjRN/u7FysKNksVd+VLQHAQgbnhn9QcsInI
+ 2vbRQdrUjYXKv2e0WSGjy3fJmGcTIO+sjjiw5LbjQfaw9aL1o37TiE2Rjt5jINcgRWY92dYpfh1
+ /iUFRyaM2foWSlJobnRpmpAkR89ujX5E95dqr/m7bl0WG9LGzw/fJe9bVbzaObDNjyzfs//Hqd5
+ crJ6V4DQhk2czTt4sp01Ffgxdy69JnCbdO0q/e1LuhdxTAnDp7OLGHKoMibTx0EkyQpvP4l3A3L
+ 7vfJMHxGYMXZdf4wp5ckCQP9kVpW1v/82szwTOUw4Zb8=
+X-Received: by 2002:a05:600c:1f0d:b0:468:86e0:de40 with SMTP id
+ 5b1f17b1804b1-46e6125d25dmr1841205e9.4.1759245207980; 
+ Tue, 30 Sep 2025 08:13:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEom6aliWn1LATaYDc3Dl7n4RqfcX8VXgI5MiONgsnfDHZyK9hUNiqJ9KbsBbbdB3suODUtGQ==
+X-Received: by 2002:a05:600c:1f0d:b0:468:86e0:de40 with SMTP id
+ 5b1f17b1804b1-46e6125d25dmr1840955e9.4.1759245207510; 
+ Tue, 30 Sep 2025 08:13:27 -0700 (PDT)
+Received: from [192.168.103.116]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46e56f64849sm59832575e9.11.2025.09.30.08.13.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Sep 2025 08:13:26 -0700 (PDT)
+Message-ID: <47454c48-ae4f-475f-a4ba-f619fd80e0e0@canonical.com>
+Date: Tue, 30 Sep 2025 17:13:25 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 0/7] Add RISCV big endian support
+To: Ben Dooks <ben.dooks@codethink.co.uk>,
+ Roan Richmond <roan.richmond@codethink.co.uk>,
+ lawrence.hunter@codethink.co.uk
+Cc: felix.chong@codethink.co.uk, sagark@eecs.berkeley.edu, palmer@dabbet.com, 
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, qemu-riscv@nongnu.org
+References: <20241220154616.283933-1-roan.richmond@codethink.co.uk>
+ <6ad3dee0-0fe8-4368-b43f-e7f8f30ead24@canonical.com>
+ <13322f17-8826-4b60-b52c-e885bae91e52@codethink.co.uk>
+ <07683a05-baa0-463e-b153-28f8f3f31a28@canonical.com>
+ <b27529e8-91ba-4507-b645-dea4e3285dc0@codethink.co.uk>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <b27529e8-91ba-4507-b645-dea4e3285dc0@codethink.co.uk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.118 (deferred)
-Received-SPF: pass client-ip=115.124.30.118;
- envelope-from=fangyu.yu@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=185.125.188.123;
+ envelope-from=heinrich.schuchardt@canonical.com;
+ helo=smtp-relay-internal-1.canonical.com
+X-Spam_score_int: -47
+X-Spam_score: -4.8
+X-Spam_bar: ----
+X-Spam_report: (-4.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 30 Sep 2025 10:02:45 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,204 +123,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
->From: "Guo Ren (Alibaba DAMO Academy)" <guoren@kernel.org>
->
->Current implementation is wrong when iohgatp != bare. The RISC-V
->IOMMU specification has defined that the PDT is based on GPA, not
->SPA. So this patch fixes the problem, making PDT walk correctly
->when the G-stage table walk is enabled.
->
->Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
->Cc: qemu-stable@nongnu.org
->Cc: Sebastien Boeuf <seb@rivosinc.com>
->Cc: Tomasz Jeznach <tjeznach@rivosinc.com>
->Reviewed-by: Weiwei Li <liwei1518@gmail.com>
->Reviewed-by: Nutty Liu <liujingqi@lanxincomputing.com>
->Signed-off-by: Guo Ren (Alibaba DAMO Academy) <guoren@kernel.org>
->---
->Changes in V3:
-> - Fixup inner non-leaf walking for 4KB-align.
-> - Add two Reviewed-by tags.
->
->Changes in V2:
-> - Remove nested param to make patch clearer.
->---
-> hw/riscv/riscv-iommu.c | 141 ++++++++++++++++++++++++++++++++++++++++-
-> 1 file changed, 139 insertions(+), 2 deletions(-)
->
->diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
->index 96a7fbdefcf3..ddb5236f55d1 100644
->--- a/hw/riscv/riscv-iommu.c
->+++ b/hw/riscv/riscv-iommu.c
->@@ -866,6 +866,143 @@ static bool riscv_iommu_validate_process_ctx(RISCVIOMMUState *s,
->     return true;
-> }
+On 9/30/25 15:11, Ben Dooks wrote:
+> On 30/09/2025 12:47, Heinrich Schuchardt wrote:
+>> On 9/30/25 12:03, Ben Dooks wrote:
+>>> On 30/09/2025 10:46, Heinrich Schuchardt wrote:
+>>>> On 12/20/24 16:45, Roan Richmond wrote:
+>>>>> This is part of our project to investigate big endian on RISC-V.
+>>>>> The full information is documented on our gitlab[1] which includes
+>>>>> source repositories, build information and project documentation.
+>>>>>
+>>>>> We have a minimal buildroot, qemu and kernel working on QEMU.
+>>>>>
+>>>>> As this is a work in progress any review or help is appreciated.
+>>>>>
+>>>>> [1] https://gitlab.com/CodethinkLabs/riscv_bigendian
+>>>>>
+>>>>> Ben Dooks (2):
+>>>>>    target/riscv: Add big endian check for atomic ops
+>>>>>    taregt/riscv: Add big endian checks for pagetable
+>>>>>
+>>>>> Lawrence Hunter (3):
+>>>>>    target/riscv: Add SSTATUS_UBE
+>>>>>    target/riscv: Add sfence.vma for endian change
+>>>>>    target/riscv: Add big endian CPU target
+>>>>
+>>>> The RISC-V specification explicitly allows for bi-endian cpus. 
+>>>> Shouldn't we change the existing generic RISC-V cpus to allow 
+>>>> starting low-endian and switching the endianness at runtime instead 
+>>>> of adding a new CPU?
+>>>
+>>> I think the patch also allowed for building qemu for running by default
+>>> big-endian. It might be worth adding an parameter for defaulting the
+>>> CSRs at init time.
+>>>
+>>>> The switch to big-endian could occur at the entry-point of OpenSBI.
+>>>>
+>>>> Best add a cpu parameter to define a cpu as big-endian, low-endian, 
+>>>> or bi-endian and default to low-endian only.
+>>>
+>>> The default is LE and the initial work used the CSRs to allow runtime
+>>> endian. If you start the system BE you can still switch back to LE as
+>>> it it was a default to set the CSR values to all modes being big on
+>>> qemu initialisation.
+>>>
+>>
+>> MO_TEUQ used in patch 5/7 does not allow for bi-endianness. You need 
+>> to determine endianness at runtime. Please, have a look at 
+>> mo_endian(ctx) used by the MIPS architecture.
 > 
->+/**
->+ * pdt_memory_read: PDT wrapper of dma_memory_read.
->+ *
->+ * @s: IOMMU Device State
->+ * @ctx: Device Translation Context with devid and pasid set
->+ * @addr: address within that address space
->+ * @buf: buffer with the data transferred
->+ * @len: length of the data transferred
->+ * @attrs: memory transaction attributes
->+ */
->+static MemTxResult pdt_memory_read(RISCVIOMMUState *s,
->+                                   RISCVIOMMUContext *ctx,
->+                                   dma_addr_t addr,
->+                                   void *buf, dma_addr_t len,
->+                                   MemTxAttrs attrs)
->+{
->+    uint64_t gatp_mode, pte;
->+    struct {
->+        unsigned char step;
->+        unsigned char levels;
->+        unsigned char ptidxbits;
->+        unsigned char ptesize;
->+    } sc;
->+    MemTxResult ret;
->+    dma_addr_t base = addr;
->+
->+    /* G stages translation mode */
->+    gatp_mode = get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
->+    if (gatp_mode == RISCV_IOMMU_DC_IOHGATP_MODE_BARE)
->+        goto out;
->+
->+    /* G stages translation tables root pointer */
->+    base = PPN_PHYS(get_field(ctx->gatp, RISCV_IOMMU_ATP_PPN_FIELD));
->+
->+    /* Start at step 0 */
->+    sc.step = 0;
->+
->+    if (s->fctl & RISCV_IOMMU_FCTL_GXL) {
->+        /* 32bit mode for GXL == 1 */
->+        switch (gatp_mode) {
->+        case RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4:
->+            if (!(s->cap & RISCV_IOMMU_CAP_SV32X4)) {
->+                return MEMTX_ACCESS_ERROR;
->+            }
->+            sc.levels    = 2;
->+            sc.ptidxbits = 10;
->+            sc.ptesize   = 4;
->+            break;
->+        default:
->+            return MEMTX_ACCESS_ERROR;
->+        }
->+    } else {
->+        /* 64bit mode for GXL == 0 */
->+        switch (gatp_mode) {
->+        case RISCV_IOMMU_DC_IOHGATP_MODE_SV39X4:
->+            if (!(s->cap & RISCV_IOMMU_CAP_SV39X4)) {
->+                return MEMTX_ACCESS_ERROR;
->+            }
->+            sc.levels    = 3;
->+            sc.ptidxbits = 9;
->+            sc.ptesize   = 8;
->+            break;
->+        case RISCV_IOMMU_DC_IOHGATP_MODE_SV48X4:
->+            if (!(s->cap & RISCV_IOMMU_CAP_SV48X4)) {
->+                return MEMTX_ACCESS_ERROR;
->+            }
->+            sc.levels    = 4;
->+            sc.ptidxbits = 9;
->+            sc.ptesize   = 8;
->+            break;
->+        case RISCV_IOMMU_DC_IOHGATP_MODE_SV57X4:
->+            if (!(s->cap & RISCV_IOMMU_CAP_SV57X4)) {
->+                return MEMTX_ACCESS_ERROR;
->+            }
->+            sc.levels    = 5;
->+            sc.ptidxbits = 9;
->+            sc.ptesize   = 8;
->+            break;
->+        default:
->+            return MEMTX_ACCESS_ERROR;
->+        }
->+    }
->+
->+    do {
->+        const unsigned va_bits = (sc.step ? 0 : 2) + sc.ptidxbits;
->+        const unsigned va_skip = TARGET_PAGE_BITS + sc.ptidxbits *
->+                                 (sc.levels - 1 - sc.step);
->+        const unsigned idx = (addr >> va_skip) & ((1 << va_bits) - 1);
->+        const dma_addr_t pte_addr = base + idx * sc.ptesize;
->+
->+        /* Address range check before first level lookup */
->+        if (!sc.step) {
->+            const uint64_t va_mask = (1ULL << (va_skip + va_bits)) - 1;
->+            if ((addr & va_mask) != addr) {
->+                return MEMTX_ACCESS_ERROR;
->+            }
->+        }
->+
->+        /* Read page table entry */
->+        if (sc.ptesize == 4) {
->+            uint32_t pte32 = 0;
->+            ret = ldl_le_dma(s->target_as, pte_addr, &pte32, attrs);
->+            pte = pte32;
->+        } else {
->+            ret = ldq_le_dma(s->target_as, pte_addr, &pte, attrs);
->+        }
->+        if (ret != MEMTX_OK)
->+            return ret;
->+
->+        sc.step++;
->+        hwaddr ppn = pte >> PTE_PPN_SHIFT;
->+
->+        if (!(pte & PTE_V)) {
->+            return MEMTX_ACCESS_ERROR; /* Invalid PTE */
->+        } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
->+            base = PPN_PHYS(ppn); /* Inner PTE, continue walking */
->+        } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
->+            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W */
->+        } else if ((pte & (PTE_R | PTE_W | PTE_X)) == (PTE_W | PTE_X)) {
->+            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W + PTE_X */
->+        } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
->+            return MEMTX_ACCESS_ERROR; /* Misaligned PPN */
->+        } else {
->+            /* Leaf PTE, translation completed. */
->+            base = PPN_PHYS(ppn) | (addr & ((1ULL << va_skip) - 1));
->+            break;
->+        }
->+
->+        if (sc.step == sc.levels) {
->+            return MEMTX_ACCESS_ERROR; /* Can't find leaf PTE */
->+        }
->+    } while (1);
->+
->+out:
->+    return dma_memory_read(s->target_as, base, buf, len, attrs);
->+}
->+
-> /*
->  * RISC-V IOMMU Device Context Loopkup - Device Directory Tree Walk
->  *
->@@ -1038,7 +1175,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
->          */
->         const int split = depth * 9 + 8;
->         addr |= ((ctx->process_id >> split) << 3) & ~TARGET_PAGE_MASK;
->-        if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
->+        if (pdt_memory_read(s, ctx, addr, &de, sizeof(de),
->                             MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
->             return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
->         }
->@@ -1053,7 +1190,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
+> oops, forgot to follow up with the be_data field is probably mis-named
+> and we should call it target_endian (basically we're keeping the value
+> cached in the ctx, with mips having a function to return this at run
+> time)
 > 
->     /* Leaf entry in PDT */
->     addr |= (ctx->process_id << 4) & ~TARGET_PAGE_MASK;
->-    if (dma_memory_read(s->target_as, addr, &dc.ta, sizeof(uint64_t) * 2,
->+    if (pdt_memory_read(s, ctx, addr, &dc.ta, sizeof(uint64_t) * 2,
->                         MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
->         return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
->     }
->-- 
->2.40.1
 
-Enabled PDT in the VM and test this patch works correctly.
+QEMU is running on big-endian hosts like IBM S/390 and on low-endian 
+hosts like amd64.
 
-Tested-by: Fangyu Yu <fangyu.yu@linux.alibaba.com>
+The target endianness is not enough. You need to XOR target and host 
+endianness to know if bytes have to be swapped.
 
-Thanks,
-Fangyu
+Best regards
+
+Heinrich
+
 
