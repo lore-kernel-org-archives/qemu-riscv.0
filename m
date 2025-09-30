@@ -4,64 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03347CCA470
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 13:04:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D43CCCA468
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 13:09:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3a0Q-0001YC-2l; Tue, 30 Sep 2025 09:02:58 -0400
+	id 1v3a6S-0004mT-9E; Tue, 30 Sep 2025 09:09:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
- id 1v3WzA-00016p-DN; Tue, 30 Sep 2025 05:49:28 -0400
-Received: from mxct.zte.com.cn ([183.62.165.209])
+ (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
+ id 1v3a6N-0004iT-Vq
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 09:09:08 -0400
+Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
- id 1v3Wyz-0005Gg-Vf; Tue, 30 Sep 2025 05:49:28 -0400
-Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mxct.zte.com.cn (FangMail) with ESMTPS id 4cbYD92zqkz4xNtD;
- Tue, 30 Sep 2025 17:48:57 +0800 (CST)
-Received: from szxlzmapp02.zte.com.cn ([10.5.231.79])
- by mse-fl2.zte.com.cn with SMTP id 58U9ml0l059640;
- Tue, 30 Sep 2025 17:48:47 +0800 (+08)
- (envelope-from wang.yechao255@zte.com.cn)
-Received: from mapi (szxlzmapp02[null]) by mapi (Zmail) with MAPI id mid12;
- Tue, 30 Sep 2025 17:48:49 +0800 (CST)
-Date: Tue, 30 Sep 2025 17:48:49 +0800 (CST)
-X-Zmail-TransId: 2b0468dba7817bb-0a1c6
-X-Mailer: Zmail v1.0
-Message-ID: <20250930174849833XG1Q1ETbNvg66WU2UVBTV@zte.com.cn>
-Mime-Version: 1.0
-From: <wang.yechao255@zte.com.cn>
-To: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <liwei1518@gmail.com>,
- <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>
-Cc: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-Subject: =?UTF-8?B?W1BBVENIXSB0YXJnZXQvcmlzY3Y6IEZsdXNoIHRoZSBUTEIgZW50cnkgZm9yIHRoZSBzcGVjaWZpZWQgYWRkcmVzcw==?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL: mse-fl2.zte.com.cn 58U9ml0l059640
-X-TLS: YES
-X-SPF-DOMAIN: zte.com.cn
-X-ENVELOPE-SENDER: wang.yechao255@zte.com.cn
-X-SPF: None
-X-SOURCE-IP: 10.5.228.133 unknown Tue, 30 Sep 2025 17:48:57 +0800
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 68DBA789.000/4cbYD92zqkz4xNtD
-Received-SPF: pass client-ip=183.62.165.209;
- envelope-from=wang.yechao255@zte.com.cn; helo=mxct.zte.com.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
+ id 1v3a6G-0001cP-1y
+ for qemu-riscv@nongnu.org; Tue, 30 Sep 2025 09:09:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
+ Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+ Message-ID:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=QZJyEo4vJ1IiFmJ9FaESno3GE+juGAvv1aCPNN+mT1A=; b=HaGiJ0KQ86GGZDP/nlFIZ3Z2O7
+ DS70/O+BM3TVoX4DFzvMQciuT/S2SroawjwohrBlJkyUnc6M2fWivFTuMdjRag8Hj/42aS2sK/qEu
+ M+M88tj3L89jKRzZs3jFf3W8hy5LmiF6w9NQEQhQBqqUhoyQmVr6lqyHjhAMyc6zYG/9/X3NX1g15
+ FjWieqzYkRiAChaOvGLnSX1EcHOBGcUS8cQ+fISEtBwMMr3JoGUDVIE3xjlQjM9JzioExJqAkKMFS
+ KBH34zFCxDv4dnhcPADuUk+S4zUlNzePSpHKcaRR3ZRJZUEaEdU/ZrM2pw1R8i2zAA9RKrBL4KwiB
+ 2prBCbug==;
+Received: from [63.135.74.212] (helo=[192.168.1.249])
+ by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1v3a5z-004vra-GY; Tue, 30 Sep 2025 14:08:43 +0100
+Message-ID: <a9132064-4ce6-402b-8bff-795e95aa57cd@codethink.co.uk>
+Date: Tue, 30 Sep 2025 14:08:42 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 0/7] Add RISCV big endian support
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Roan Richmond <roan.richmond@codethink.co.uk>,
+ lawrence.hunter@codethink.co.uk
+Cc: felix.chong@codethink.co.uk, sagark@eecs.berkeley.edu, palmer@dabbet.com, 
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, qemu-riscv@nongnu.org
+References: <20241220154616.283933-1-roan.richmond@codethink.co.uk>
+ <6ad3dee0-0fe8-4368-b43f-e7f8f30ead24@canonical.com>
+ <13322f17-8826-4b60-b52c-e885bae91e52@codethink.co.uk>
+ <07683a05-baa0-463e-b153-28f8f3f31a28@canonical.com>
+Content-Language: en-GB
+From: Ben Dooks <ben.dooks@codethink.co.uk>
+Organization: Codethink Limited.
+In-Reply-To: <07683a05-baa0-463e-b153-28f8f3f31a28@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=188.40.203.114;
+ envelope-from=ben.dooks@codethink.co.uk; helo=imap4.hz.codethink.co.uk
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 30 Sep 2025 09:02:49 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,95 +79,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: yechao-w <wang.yechao255@zte.com.cn>
+On 30/09/2025 12:47, Heinrich Schuchardt wrote:
+> On 9/30/25 12:03, Ben Dooks wrote:
+>> On 30/09/2025 10:46, Heinrich Schuchardt wrote:
+>>> On 12/20/24 16:45, Roan Richmond wrote:
+>>>> This is part of our project to investigate big endian on RISC-V.
+>>>> The full information is documented on our gitlab[1] which includes
+>>>> source repositories, build information and project documentation.
+>>>>
+>>>> We have a minimal buildroot, qemu and kernel working on QEMU.
+>>>>
+>>>> As this is a work in progress any review or help is appreciated.
+>>>>
+>>>> [1] https://gitlab.com/CodethinkLabs/riscv_bigendian
+>>>>
+>>>> Ben Dooks (2):
+>>>>    target/riscv: Add big endian check for atomic ops
+>>>>    taregt/riscv: Add big endian checks for pagetable
+>>>>
+>>>> Lawrence Hunter (3):
+>>>>    target/riscv: Add SSTATUS_UBE
+>>>>    target/riscv: Add sfence.vma for endian change
+>>>>    target/riscv: Add big endian CPU target
+>>>
+>>> The RISC-V specification explicitly allows for bi-endian cpus. 
+>>> Shouldn't we change the existing generic RISC-V cpus to allow 
+>>> starting low-endian and switching the endianness at runtime instead 
+>>> of adding a new CPU?
+>>
+>> I think the patch also allowed for building qemu for running by default
+>> big-endian. It might be worth adding an parameter for defaulting the
+>> CSRs at init time.
+>>
+>>> The switch to big-endian could occur at the entry-point of OpenSBI.
+>>>
+>>> Best add a cpu parameter to define a cpu as big-endian, low-endian, 
+>>> or bi-endian and default to low-endian only.
+>>
+>> The default is LE and the initial work used the CSRs to allow runtime
+>> endian. If you start the system BE you can still switch back to LE as
+>> it it was a default to set the CSR values to all modes being big on
+>> qemu initialisation.
+>>
+> 
+> MO_TEUQ used in patch 5/7 does not allow for bi-endianness. You need to 
+> determine endianness at runtime. Please, have a look at mo_endian(ctx) 
+> used by the MIPS architecture.
 
-When the guest executes sfence/svinval with an address parameter,
-invalidating only the specific TLB entry for that address rather
-than the entire TLB enhances TCG performance.
+Ok, so it looks like MO_TEUQ needs to be changed to MO_UQ and then orred 
+with the MO_BE or MO_LE.
 
-Signed-off-by: yechao-w <wang.yechao255@zte.com.cn>
----
- target/riscv/helper.h                          | 2 +-
- target/riscv/insn_trans/trans_privileged.c.inc | 4 +++-
- target/riscv/insn_trans/trans_svinval.c.inc    | 4 +++-
- target/riscv/op_helper.c                       | 8 ++++++--
- 4 files changed, 13 insertions(+), 5 deletions(-)
-
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index f712b1c368..de3757fa75 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -135,7 +135,7 @@ DEF_HELPER_1(mnret, tl, env)
- DEF_HELPER_1(ctr_clear, void, env)
- DEF_HELPER_1(wfi, void, env)
- DEF_HELPER_1(wrs_nto, void, env)
--DEF_HELPER_1(tlb_flush, void, env)
-+DEF_HELPER_2(tlb_flush, void, env, tl)
- DEF_HELPER_1(tlb_flush_all, void, env)
- DEF_HELPER_4(ctr_add_entry, void, env, tl, tl, tl)
- /* Native Debug */
-diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
-index 8a62b4cfcd..b6865f51b2 100644
---- a/target/riscv/insn_trans/trans_privileged.c.inc
-+++ b/target/riscv/insn_trans/trans_privileged.c.inc
-@@ -154,8 +154,10 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
- static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
- {
- #ifndef CONFIG_USER_ONLY
-+    TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-     decode_save_opc(ctx, 0);
--    gen_helper_tlb_flush(tcg_env);
-+    gen_helper_tlb_flush(tcg_env, addr);
-     return true;
- #endif
-     return false;
-diff --git a/target/riscv/insn_trans/trans_svinval.c.inc b/target/riscv/insn_trans/trans_svinval.c.inc
-index a06c3b214f..1b1b932ac6 100644
---- a/target/riscv/insn_trans/trans_svinval.c.inc
-+++ b/target/riscv/insn_trans/trans_svinval.c.inc
-@@ -24,12 +24,14 @@
-
- static bool trans_sinval_vma(DisasContext *ctx, arg_sinval_vma *a)
- {
-+    TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-     REQUIRE_SVINVAL(ctx);
-     /* Do the same as sfence.vma currently */
-     REQUIRE_EXT(ctx, RVS);
- #ifndef CONFIG_USER_ONLY
-     decode_save_opc(ctx, 0);
--    gen_helper_tlb_flush(tcg_env);
-+    gen_helper_tlb_flush(tcg_env, addr);
-     return true;
- #endif
-     return false;
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 110292e84d..0fe5fcb3ac 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -555,7 +555,7 @@ void helper_wrs_nto(CPURISCVState *env)
-     }
- }
-
--void helper_tlb_flush(CPURISCVState *env)
-+void helper_tlb_flush(CPURISCVState *env, target_ulong addr)
- {
-     CPUState *cs = env_cpu(env);
-     if (!env->virt_enabled &&
-@@ -566,7 +566,11 @@ void helper_tlb_flush(CPURISCVState *env)
-                (env->priv == PRV_U || get_field(env->hstatus, HSTATUS_VTVM))) {
-         riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
-     } else {
--        tlb_flush(cs);
-+        if (addr) {
-+            tlb_flush_page(cs, addr);
-+        } else {
-+            tlb_flush(cs);
-+        }
-     }
- }
+Seems to have worked for initial testing :/
 
 -- 
-2.27.0
+Ben Dooks				http://www.codethink.co.uk/
+Senior Engineer				Codethink - Providing Genius
+
+https://www.codethink.co.uk/privacy.html
 
