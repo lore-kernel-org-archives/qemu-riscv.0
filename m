@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 091B9CAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 01:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD99CAC5B9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Sep 2025 01:07:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3Ola-0001Pz-2C; Mon, 29 Sep 2025 21:02:55 -0400
+	id 1v3Opf-0002St-Kb; Mon, 29 Sep 2025 21:07:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v3OlY-0001PS-HU
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 21:02:52 -0400
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ id 1v3Opd-0002SS-VD
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 21:07:06 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v3OlU-0002F0-42
- for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 21:02:52 -0400
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6349e3578adso10034584a12.1
- for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 18:02:44 -0700 (PDT)
+ id 1v3Opa-0002x6-FS
+ for qemu-riscv@nongnu.org; Mon, 29 Sep 2025 21:07:05 -0400
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b3727611c1bso975912566b.1
+ for <qemu-riscv@nongnu.org>; Mon, 29 Sep 2025 18:06:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759194161; x=1759798961; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1759194415; x=1759799215; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RhvAyZQ5ERnD8oAE8ihzrG/np29LdGY1xxujKzDU4Z8=;
- b=KN+T5hlTy3tCBLmiJ5zd84IQXrYjRagB08giVLuIzZ0CQi7i9cTyCWG2+UAsOJbYVs
- BYnOvkfmfcVTyAnRcMCb5F8LEXlyAW8BUZBcIf0SijpLIpS+QkjyKfQDoU+C+u2Asskc
- DFqNX7MeqMWNyAK82855OekMZLQjpzWH3jqdJT9r5UdD2LfS4V8IO3qi4LjpnhpZ+f0G
- 1LWcg8EP42OsYCsKI3fn80w448M6nJ6HAjb8mLXyJ31RgZHwdhsny0OKPei0Sh2GYPxg
- 8A/j5+BI+S5Cxr80liTJviSqJi0fYiNfRtyNgUjxPMRFLo+5LqnFIBzwKhTUrQnBZVGN
- 9OLQ==
+ bh=K3mG6W244bnzz9EUy52hWRP/ADiTXf4+4aOjIXtXRvA=;
+ b=XW6zb6Bj13B8m/UVGW0czv5pSH9rThubusF/mmoQ/llOQ5U/aYR5Awu0SsW6ggN27t
+ I75+PXYpzaTbGmn0+oFYXDq38oC+qvpV4P9rja7vDtNDBn1zHRPeiFhsAOLnBZeLIoKh
+ ErYEJH9p9tBz4lHbEycJOnk9xNQjuxZ0RSf6OOBlJ4Lyxg4mtg78ajnAPxDY6zA9W0A4
+ UgEmMF5gPIBiBNq6w29wQtvfZjPdYjMWtCpsi4iLbCAG2dv3iZyp+bnUQ+ZmaX6m/JwO
+ 1pdpC//VOZ4p6Cji7j8JzHIrk9kOUTblvyJzAP9mDyGqjPEdtEA+e4QOkmzOv6ZViGD2
+ TGwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759194161; x=1759798961;
+ d=1e100.net; s=20230601; t=1759194415; x=1759799215;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RhvAyZQ5ERnD8oAE8ihzrG/np29LdGY1xxujKzDU4Z8=;
- b=W0kumOVBlzd+7RG+3B1uvjJZFwmwFoeclGsM6P1cDg00CWgTOjf1mUle4sXODryuoz
- sXusN+YPm+mGhAgspRPIyd5oGTmKygZ/3Uj3PEZ3rOU3SohYn3YxEw+n0D4rZU6AUXbz
- 9PEH12srg+kUCpFi707WQUGFBYncsPcKcJMewjHMNJnyDSHHO2duT3LEKqOU3M6Kcx3v
- eFFKzBAW6IVMVekPaUvRuwTk7E4Ky08zzcoTqecs5NK3MejaGul/+J/cOuf5ajYeGQs+
- nXDVDUxwKhn/uQRgvPRrZWQyKgz0ybPlNGe5armOi0iVmIR/X6UjpQZ3t6bKp2sh/xSy
- B9lQ==
+ bh=K3mG6W244bnzz9EUy52hWRP/ADiTXf4+4aOjIXtXRvA=;
+ b=UIcXgvv7+w8jBTOUUd9Y/MdBt0cs4VAZjrdCmzZmmyd4bQrmVM54wqClE8dbnj2Xxd
+ 34gxdC9AukWjjsDoQR+Rwzqv78MIU0k1AXRmDMMMKGsijQBdtSf+f+6V7wZP+B8lfV0n
+ DrLSjsl6BnGaxOHA2VFTcXi2o23XzUs4ux0B4iS6Ch11Lgeta/Tk8ds1vxHXNfrPuffE
+ fJ9xeiZEP+uSMtXMrP7wKn9hmF6zKjXpd47PpmTAE7+nIbKKPsGhqLo8y2fGmOy8C4xr
+ lQPx34fnqaW18MIps0HENUGEIf4hW1SgxSnG2B2zEMH7U7aNugERq6t596ahlXe8qGCt
+ SelQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW255ggZsrIs4rE3rdNsoJMotQX6v2JyDnO9wra1PrJxgV2VTMNoXwiwNqkSehrzZXG6wRlTp7oz7pl@nongnu.org
-X-Gm-Message-State: AOJu0YysLPRGDigx+0iXxg55RQaSFlsf/8QB6hg3UvIyrsVK/h4sLORM
- 5tcmpAhzl+oQa+A+hnO9FAoeh4Du2ragMGTIyV3eL/9Sx678hQMVwHjmi8P5uCA0YqA7SDxGadZ
- T3HQ4qxSbQ55KnrDFt8HDtzn4zCQQHFk=
-X-Gm-Gg: ASbGncsdEEd2k+AquiPPwqwHHdO6BAHL7jkJeB59XPMijP0pZw36JT3midP4mT2Tcsl
- yPjou7YjIemgqkL67P8nyTGB9mqy0hOAQJq4NdSvbEfCM4GvFKW3BRpivtTs21gAX3BjTrIBIOs
- ECcJJrgPiRZaiVfJ0ld+iDZq7wYvOSyP2SWHdIfCpxC8iVGV0wA5a2evDg3/V5T44iXsNMqGE24
- rMv4efSFgypF/8sgPiYZJBrB4DA6rCtMK88kV2yb86dnSDL
-X-Google-Smtp-Source: AGHT+IE7xJEk6h5qpBcAa90MPC1Lo4UaKO3hTwXrP8Omb0C0J/z9Ths3oa9wCR0JtYLZvE+wLuOk7eDlMhFlxtaZSiY=
-X-Received: by 2002:a17:907:3d93:b0:b3f:d9e9:baab with SMTP id
- a640c23a62f3a-b3fd9e9cc5dmr535007666b.27.1759194161041; Mon, 29 Sep 2025
- 18:02:41 -0700 (PDT)
+ AJvYcCV1ObHmvicvTNMn19obP1C0pRkK5nsaw4QE+R0POrXG0P8VIf591Er8odcApLFon+4lizcH2aOqejdi@nongnu.org
+X-Gm-Message-State: AOJu0YysIhTbUUl9LhYky19VWJT5Ax1p/GAtC2BnT2N/8tHYBjKM+zG0
+ t3EF7z76f/H8kDCCF86WJhsdYPjzIjyPKjg533ggfeRPejo7lETovVcSGeoXtCVyJOkHdzsLJrO
+ jcHgmyniuO1oGNKfddU49XjJQ0+WPq/0=
+X-Gm-Gg: ASbGncukAURSPwRYneZ5n7QGrjdwhSYYxzJLE+ehvAHPJdcaGtsULcMciKFLD0C7y4Q
+ CFGo0VM6A/7ag4tV3ROPsH74X9rCjv3xuewO8xJJkBXQoAnXJM3PFiaoTOQ6Yb4kJaYxbk85rqa
+ 0gxHTR+ADCnADJmdEA1VNBfuku21hRz9l5MHzdArJIZyeTNQGeuf+1ZwcF9d593wCPvNkJqTDDL
+ SEj6cwlUWllWW4CvDBz/zHSvYZ72CaGwN9nfSrVTYulKlNp
+X-Google-Smtp-Source: AGHT+IGAwiUZ5hlLAGcwEUa5RhAPUgH0XSFEH0AhxlbMgpdmnbDJye1aqfQDFzhVychBVxnuu1uRnNgTxSv1A/rewf4=
+X-Received: by 2002:a17:907:6093:b0:b04:6a58:560b with SMTP id
+ a640c23a62f3a-b34ba93ce11mr2016409766b.39.1759194415187; Mon, 29 Sep 2025
+ 18:06:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250924091746.1882125-1-djordje.todorovic@htecgroup.com>
- <20250924091746.1882125-2-djordje.todorovic@htecgroup.com>
-In-Reply-To: <20250924091746.1882125-2-djordje.todorovic@htecgroup.com>
+ <20250924091746.1882125-3-djordje.todorovic@htecgroup.com>
+In-Reply-To: <20250924091746.1882125-3-djordje.todorovic@htecgroup.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 30 Sep 2025 11:02:14 +1000
-X-Gm-Features: AS18NWCR6IwXZ-P_1TZtmlnTHNM_c5IAqUYOKcmbEFQeqZ7Q1CZCmzev3eYTpww
-Message-ID: <CAKmqyKPZFWWKPvvGVMN6_A3pt-3wYWBDZiPyj-5T7JtxDB=U6Q@mail.gmail.com>
-Subject: Re: [PATCH v8 01/14] hw/intc: Allow gaps in hartids for aclint and
- aplic
+Date: Tue, 30 Sep 2025 11:06:29 +1000
+X-Gm-Features: AS18NWAJQ30Ys9wPN1UnsUW5EMJwv8AOBLKNvsw3jZwJFsfaVeALwaNPrPfiZQY
+Message-ID: <CAKmqyKM+FXe3EVR1Mzpq3pVCEFg_wG7qfgkrjFuQ1HiifdGyvA@mail.gmail.com>
+Subject: Re: [PATCH v8 02/14] target/riscv: Add cpu_set_exception_base
 To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
 Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
  "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
@@ -79,8 +78,8 @@ Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
  "philmd@linaro.org" <philmd@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x530.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x631.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -88,7 +87,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,112 +103,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Sep 24, 2025 at 7:19=E2=80=AFPM Djordje Todorovic
+On Wed, Sep 24, 2025 at 7:21=E2=80=AFPM Djordje Todorovic
 <Djordje.Todorovic@htecgroup.com> wrote:
 >
-> This is needed for riscv based CPUs by MIPS since those may have
-> sparse hart-ID layouts. ACLINT and APLIC still assume a dense
-> range, and if a hart is missing, this causes NULL derefs.
+> Add a new function, so we can change reset vector from platforms
+> during runtime.
+
+There is already a "resetvec" property, which hw/riscv/opentitan.c is
+using to set a custom resetvec. Why can't you use that?
+
+Alistair
+
 >
 > Signed-off-by: Chao-ying Fu <cfu@mips.com>
 > Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
 > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
 > ---
->  hw/intc/riscv_aclint.c | 18 ++++++++++++++++--
->  hw/intc/riscv_aplic.c  | 13 ++++++++++---
->  2 files changed, 26 insertions(+), 5 deletions(-)
+>  target/riscv/cpu.c | 14 ++++++++++++++
+>  target/riscv/cpu.h |  4 ++++
+>  2 files changed, 18 insertions(+)
 >
-> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-> index 4623cfa029..e3e019e605 100644
-> --- a/hw/intc/riscv_aclint.c
-> +++ b/hw/intc/riscv_aclint.c
-> @@ -297,7 +297,12 @@ static void riscv_aclint_mtimer_realize(DeviceState =
-*dev, Error **errp)
->      s->timecmp =3D g_new0(uint64_t, s->num_harts);
->      /* Claim timer interrupt bits */
->      for (i =3D 0; i < s->num_harts; i++) {
-> -        RISCVCPU *cpu =3D RISCV_CPU(cpu_by_arch_id(s->hartid_base + i));
-> +        CPUState *cpu_by_hartid =3D cpu_by_arch_id(s->hartid_base + i);
-> +        if (cpu_by_hartid =3D=3D NULL) {
-> +            /* Valid for sparse hart layouts - skip this hart ID */
-> +            continue;
-> +        }
-> +        RISCVCPU *cpu =3D RISCV_CPU(cpu_by_hartid);
->          if (riscv_cpu_claim_interrupts(cpu, MIP_MTIP) < 0) {
->              error_report("MTIP already claimed");
->              exit(1);
-> @@ -486,7 +491,12 @@ static void riscv_aclint_swi_realize(DeviceState *de=
-v, Error **errp)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d055ddf462..74728c5371 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -73,6 +73,20 @@ bool riscv_cpu_option_set(const char *optname)
+>      return g_hash_table_contains(general_user_opts, optname);
+>  }
 >
->      /* Claim software interrupt bits */
->      for (i =3D 0; i < swi->num_harts; i++) {
-> -        RISCVCPU *cpu =3D RISCV_CPU(qemu_get_cpu(swi->hartid_base + i));
-> +        CPUState *cpu_by_hartid =3D cpu_by_arch_id(swi->hartid_base + i)=
-;
-> +        if (cpu_by_hartid =3D=3D NULL) {
-> +            /* Valid for sparse hart layouts - skip this hart ID */
-> +            continue;
-> +        }
-> +        RISCVCPU *cpu =3D RISCV_CPU(cpu_by_hartid);
->          /* We don't claim mip.SSIP because it is writable by software */
->          if (riscv_cpu_claim_interrupts(cpu, swi->sswi ? 0 : MIP_MSIP) < =
-0) {
->              error_report("MSIP already claimed");
-> @@ -550,6 +560,10 @@ DeviceState *riscv_aclint_swi_create(hwaddr addr, ui=
-nt32_t hartid_base,
+> +#ifndef CONFIG_USER_ONLY
+> +void cpu_set_exception_base(int vp_index, target_ulong address)
+> +{
+> +    CPUState *cpu_state =3D qemu_get_cpu(vp_index);
+> +    if (cpu_state =3D=3D NULL) {
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "cpu_set_exception_base: invalid vp_index: %u",
+> +                      vp_index);
+> +    }
+> +    RISCVCPU *vp =3D RISCV_CPU(cpu_state);
+> +    vp->env.resetvec =3D address;
+> +}
+> +#endif
+> +
+>  static void riscv_cpu_cfg_merge(RISCVCPUConfig *dest, const RISCVCPUConf=
+ig *src)
+>  {
+>  #define BOOL_FIELD(x) dest->x |=3D src->x;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 4a862da615..34751bd414 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -672,6 +672,10 @@ G_NORETURN void riscv_raise_exception(CPURISCVState =
+*env,
+>  target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
+>  void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
 >
->      for (i =3D 0; i < num_harts; i++) {
->          CPUState *cpu =3D cpu_by_arch_id(hartid_base + i);
-> +        if (cpu =3D=3D NULL) {
-> +            /* Valid for sparse hart layouts - skip this hart ID */
-> +            continue;
-> +        }
->          RISCVCPU *rvcpu =3D RISCV_CPU(cpu);
->
->          qdev_connect_gpio_out(dev, i,
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index a1d9fa5085..77cec8ece9 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -903,9 +903,12 @@ static void riscv_aplic_realize(DeviceState *dev, Er=
-ror **errp)
->          if (!aplic->msimode) {
->              /* Claim the CPU interrupt to be triggered by this APLIC */
->              for (i =3D 0; i < aplic->num_harts; i++) {
-> -                RISCVCPU *cpu;
-> -
-> -                cpu =3D RISCV_CPU(cpu_by_arch_id(aplic->hartid_base + i)=
-);
-> +                CPUState *temp =3D cpu_by_arch_id(aplic->hartid_base + i=
-);
-> +                if (temp =3D=3D NULL) {
-> +                    /* Valid for sparse hart layouts - skip this hart ID=
- */
-> +                    continue;
-> +                }
-> +                RISCVCPU *cpu =3D RISCV_CPU(temp);
->                  if (riscv_cpu_claim_interrupts(cpu,
->                      (aplic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
->                      error_report("%s already claimed",
-> @@ -1088,6 +1091,10 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwadd=
-r size,
->          if (!msimode) {
->              for (i =3D 0; i < num_harts; i++) {
->                  CPUState *cpu =3D cpu_by_arch_id(hartid_base + i);
-> +                if (cpu =3D=3D NULL) {
-> +                    /* Valid for sparse hart layouts - skip this hart ID=
- */
-> +                    continue;
-> +                }
->
->                  qdev_connect_gpio_out_named(dev, NULL, i,
->                                              qdev_get_gpio_in(DEVICE(cpu)=
-,
+> +#ifndef CONFIG_USER_ONLY
+> +void cpu_set_exception_base(int vp_index, target_ulong address);
+> +#endif
+> +
+>  FIELD(TB_FLAGS, MEM_IDX, 0, 3)
+>  FIELD(TB_FLAGS, FS, 3, 2)
+>  /* Vector flags */
 > --
 > 2.34.1
 >
