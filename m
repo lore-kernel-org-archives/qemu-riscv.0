@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 017F4CAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:14:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C11DCCA472
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:15:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3yRn-00030C-Hh; Wed, 01 Oct 2025 11:08:51 -0400
+	id 1v3yQS-0001Lf-D7; Wed, 01 Oct 2025 11:07:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yRJ-0002HO-1T
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:08:22 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yPh-000119-M8
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:06:42 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yPr-0000mc-N5
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:08:20 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-46e52279279so27391445e9.3
- for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 08:06:45 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yP6-0000er-TO
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:06:39 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-46b303f7469so50908465e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 08:05:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759331203; x=1759936003; darn=nongnu.org;
+ d=linaro.org; s=google; t=1759331152; x=1759935952; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j+8g8rOsqAJiSBTC9ZjoJReHOLtdXImU2cZHmlNYY1E=;
- b=R7kiKo/ikCqWyHPuuDymC+THqFz9XRfhxVOEwWRStqTP/5CpCwb2IQmnrOBKPBlSKR
- axBn2IO7mN1q6imFATeTaNG10jtMgMJzB18JCfzisiIEA1t76BFpvoDh5X/OV2hGzn+2
- LPU1eVVjOlyhsxphFzWWrCGbc41aTcWAWkb9B+vwl9ZQcxNbAsNsSMaEogeyBBEM5mOf
- S7hvJeKFsZneX9KdMgIo/mFFJaGHW/wMirT2HdFOXII9WMwhz2+JoCqc52T1b0Gg+486
- PeEtp1vTA8xIcdEOfWetKQnLnGE3+XlaOOXhH85eGIOpFSC98SOXuLOvhWEExcArQ0UN
- Ok1Q==
+ bh=RzVIXRWuWGr9aTJxzc0zYs0L20Pybb+agvUMr6jmaGc=;
+ b=IFqIhhKLs0C16+ZcGsqHoYJLIZ/wEo4/wPj7HyJ15ZkzrlLm3vxflCBX02QVL8edSa
+ eEaAeAtYWc2Cy/oclB1osQv5j75XIATVcLhXhsY3N7fcQhUDdFGfez0J49MBJLdN4t6u
+ 8iu+HxXL+row7GHXZ9L0QuL4aim9gKHZVA4nTkINMO3L6qmGFr03rjJ7HwIJ94/rLGw3
+ vzzr8ZLe3gxLNuDDUyEkUVHvMgAHa5Q/Le1ficB7mF2PMxrTNvrM7DCZ6Ji5K+KLMcPw
+ t14Rf1ysM1xk9TybdZZaO2zTpMzEzTGUYz89x5qXMMVcHXCUu7n2yL0Rkj/JWilf3HvU
+ SzuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759331203; x=1759936003;
+ d=1e100.net; s=20230601; t=1759331152; x=1759935952;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j+8g8rOsqAJiSBTC9ZjoJReHOLtdXImU2cZHmlNYY1E=;
- b=XAikcLwfNFO06dgnZUIW4hiNLfxR1UVv1qVCMOln/IMJNdkHjUGJ5uOVG5nMf9aEAB
- 6/TaOkCqGmceQn5giUcr/YXc5En9kJoOBNTebpVQSX+RgG8+DozAmSw7dU8lmoKttr8o
- yasyVf6Qll3XyIqbq+RsD/beWeLtznR/jlPon1BUQ2lG3o14Q5Av39Rr8rQD+HCCAjm8
- curXPCyWoJVpFQAcyupnAkDDyo/Rv/N5VKEcLk+0bdi34nFBvBD2AhPeBPU6gM5SZZbm
- GFIhth0nKCbamchzRk/g4J/yyBTvAZDNLz+hdc6awGyzJ8TxWpnzJP2uSlPw6B4OmXpR
- ZMAQ==
+ bh=RzVIXRWuWGr9aTJxzc0zYs0L20Pybb+agvUMr6jmaGc=;
+ b=Mu/cCk5c41liMbvSC3ggx6e0duC7G7ll7F7Ma0isQdnIuNZiQt6uqnOe47V/sFZiDC
+ NN9dQg+L3UqBF8BJMkIl6DTQFag9y254VvrQdN2I+gSWY2TMZ7y9o4M15F+wQ1nrfpkN
+ RmbC0ieP0yIeEEYaFjKOsPN86veZ95x2YAH79u8lrp2oj0O5aiOHozZEUHqMlmLSgFv6
+ U7aLFCp5yBvGEs3g74boxkByVRytkwneWIhIKydTCdrhAug5CiZCTpnInOO8TkKM58J1
+ rR/yiYyvPGlkZer/9mmuCAUkcBuuGk5kr3lsnvMFYRZ+I43K9Eu7mSuTfxhr4gAkuJ/e
+ uuNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVKEK5WAxfDPCLuRGQ6woM9fOnxWl7Q4XAMLpv1e5QQlLn5G3T535O4G+ow1L2NuzItxxk0Pi+yE/35@nongnu.org
-X-Gm-Message-State: AOJu0YzC308OrVQbSajxo6ztly1UBEqUVeEtLekDZ4IWPid0uXIotfh2
- tajA6W3fuIxX/nXcGDbUH+WT7tHQWa8rWdZFQkUlwMWXlzeNGExhOh4l0Jz2KzJHYDg=
-X-Gm-Gg: ASbGncv8rBXkGyYsavA+Yt+5Gn4udaiGgRRVEuYaH/4sKL/NRCsgUkRpvAib8w4t8If
- WBXdUyMW9zV+OfgqSXdfzYn76niqSzzHSHy3PwugFKz1nrf46h53O8DVCaFco/hICMHLnqrRxNW
- MuwIcg0/843BZlcoaWS4QlI6OzDx+Bx7TPFcNCU2t7Rl+FHW9Fewzh00/ZWg5DLIsntHWlE7Wyo
- NweXsIMCKj0mEPpbqvNyhq2XMGRa1mAER6FIygyB9LqdYH+04y37QqUTFSXieAS3QkuMv60+TDV
- 7bYGbT7uduFz7sjAMiNa10rOfWgqFzSz9e2X60mvVFHmk2aaDUQUQVMgo8qgn7KxKGhkxJbQ2d3
- 5idv5yosQYbP1OW6byXF89YxKfy4bLQC/JB065Q/xYahMMFL4YxwjcgUIIwNzfzUo6fVtrLah7f
- 058BAnELEd30g/qzpZFskDXuiJkYmCuHk=
-X-Google-Smtp-Source: AGHT+IGEgI5iMsMDjY03NGn+HZxm+z7Pcynq4eCuhNpqJykpCKTIPoLHt3hnQEPmjweISU5ueU/0/g==
-X-Received: by 2002:a05:600c:8717:b0:468:7f92:5a80 with SMTP id
- 5b1f17b1804b1-46e61285691mr28349045e9.27.1759331203122; 
- Wed, 01 Oct 2025 08:06:43 -0700 (PDT)
+ AJvYcCWu1kUWremebjSUie+W1dna/pUEYNX7fOje96OBcylF35L1+nKYVdo3VY9UHAgwjam30JX0fbfSlXs7@nongnu.org
+X-Gm-Message-State: AOJu0YwDiw1AwXzn/IUTafxq2frED17/OlH9LeVd+djpagjROHbwW6/g
+ uQG0GLosWd8Uxdkha/h6xlpVv0rv+yfikq3WyYSMjDEvM4CQY7nXF4srXLBZ1XoL/cQ=
+X-Gm-Gg: ASbGncubmft5p3uwq7BFIn18+z7vRICpAFfufUAbcvOuEWFrzfncinVPpUzJmgpOR20
+ LHhBATw3lhhoK0oTprTXU5Y2Ph6DRpZ4OEe8iAMHcqaut6RPldnGjpwCqvCqOcttHzgSycCptDx
+ nAq614DEk4x8yp48uvzdSPdTAwa8VwLmusg9HNZYcp1e9JjWaHx5CAbeYzQstG7uXE7uuk781Lw
+ lE9u3QpcwuALYrU/WEehnuFozyNGlfKr182TP7LH02IpYNC5H/TJcgsrSjD6K83jrqAjRcZYHVx
+ LDqT8cFQxHnaq+2dRIqCgXVFlIuHGc2FX5XVoiftu2jxkr931x6wGKb/Nl9fc6Qwo7LZkMLrWkV
+ Di4ga/NVWwt+sPOdduGMJC5vc02/FY8Nu3XmL12zdOI2+xQc24ktW4S0sky4Z5ansvtSmfPLCZU
+ lnRsB06+sePO0B+BGR5hPe
+X-Google-Smtp-Source: AGHT+IFLHawgvzRRR9giVgia0mvWSnvz0hRd72bjATPATk4foHjp7wT3xHqdxQtb6jCh5XRxIdg0vA==
+X-Received: by 2002:a05:600c:3b08:b0:468:4350:c84d with SMTP id
+ 5b1f17b1804b1-46e6125ce14mr30601145e9.7.1759331152089; 
+ Wed, 01 Oct 2025 08:05:52 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e5c4afb3asm36603595e9.6.2025.10.01.08.06.41
+ 5b1f17b1804b1-46e5c4c0321sm36203765e9.8.2025.10.01.08.05.50
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 01 Oct 2025 08:06:42 -0700 (PDT)
+ Wed, 01 Oct 2025 08:05:51 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
@@ -74,19 +74,19 @@ Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Song Gao <gaosong@loongson.cn>
-Subject: [PATCH 14/22] target/loongarch: Get cpu first addr space with
+ Alistair Francis <alistair@alistair23.me>
+Subject: [PATCH 04/22] hw/core/loader: Get cpu first addr space with
  cpu_get_address_space()
-Date: Wed,  1 Oct 2025 17:05:19 +0200
-Message-ID: <20251001150529.14122-15-philmd@linaro.org>
+Date: Wed,  1 Oct 2025 17:05:09 +0200
+Message-ID: <20251001150529.14122-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251001150529.14122-1-philmd@linaro.org>
 References: <20251001150529.14122-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,84 +115,33 @@ helper.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/loongarch/cpu_helper.c     | 5 +++--
- target/loongarch/tcg/tlb_helper.c | 7 +++++--
- 2 files changed, 8 insertions(+), 4 deletions(-)
+ hw/core/generic-loader.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/target/loongarch/cpu_helper.c b/target/loongarch/cpu_helper.c
-index 4a9db3ea4c1..f2ee66d0d52 100644
---- a/target/loongarch/cpu_helper.c
-+++ b/target/loongarch/cpu_helper.c
-@@ -110,6 +110,7 @@ static TLBRet loongarch_page_table_walker(CPULoongArchState *env,
-                                           int access_type, int mmu_idx)
- {
-     CPUState *cs = env_cpu(env);
-+    AddressSpace *as = cpu_get_address_space(cs, 0);
-     target_ulong index, phys;
-     uint64_t dir_base, dir_width;
-     uint64_t base;
-@@ -134,7 +135,7 @@ static TLBRet loongarch_page_table_walker(CPULoongArchState *env,
-         /* get next level page directory */
-         index = (address >> dir_base) & ((1 << dir_width) - 1);
-         phys = base | index << 3;
--        base = ldq_phys(cs->as, phys) & TARGET_PHYS_MASK;
-+        base = ldq_phys(as, phys) & TARGET_PHYS_MASK;
-         if (FIELD_EX64(base, TLBENTRY, HUGE)) {
-             /* base is a huge pte */
-             break;
-@@ -155,7 +156,7 @@ static TLBRet loongarch_page_table_walker(CPULoongArchState *env,
-         get_dir_base_width(env, &dir_base, &dir_width, 0);
-         index = (address >> dir_base) & ((1 << dir_width) - 1);
-         phys = base | index << 3;
--        base = ldq_phys(cs->as, phys);
-+        base = ldq_phys(as, phys);
+diff --git a/hw/core/generic-loader.c b/hw/core/generic-loader.c
+index e72bbde2a23..cc8eacdf067 100644
+--- a/hw/core/generic-loader.c
++++ b/hw/core/generic-loader.c
+@@ -52,8 +52,9 @@ static void generic_loader_reset(void *opaque)
      }
  
-     context->ps = dir_base;
-diff --git a/target/loongarch/tcg/tlb_helper.c b/target/loongarch/tcg/tlb_helper.c
-index 8cfce48a297..5173e30b531 100644
---- a/target/loongarch/tcg/tlb_helper.c
-+++ b/target/loongarch/tcg/tlb_helper.c
-@@ -600,6 +600,7 @@ target_ulong helper_lddir(CPULoongArchState *env, target_ulong base,
-     CPUState *cs = env_cpu(env);
-     target_ulong badvaddr, index, phys;
-     uint64_t dir_base, dir_width;
-+    AddressSpace *as;
- 
-     if (unlikely((level == 0) || (level > 4))) {
-         qemu_log_mask(LOG_GUEST_ERROR,
-@@ -621,12 +622,13 @@ target_ulong helper_lddir(CPULoongArchState *env, target_ulong base,
-         }
+     if (s->data_len) {
++        AddressSpace *as = cpu_get_address_space(s->cpu, 0);
+         assert(s->data_len <= sizeof(s->data));
+-        dma_memory_write(s->cpu->as, s->addr, &s->data, s->data_len,
++        dma_memory_write(as, s->addr, &s->data, s->data_len,
+                          MEMTXATTRS_UNSPECIFIED);
      }
- 
-+    as = cpu_get_address_space(cs, 0);
-     badvaddr = env->CSR_TLBRBADV;
-     base = base & TARGET_PHYS_MASK;
-     get_dir_base_width(env, &dir_base, &dir_width, level);
-     index = (badvaddr >> dir_base) & ((1 << dir_width) - 1);
-     phys = base | index << 3;
--    return ldq_phys(cs->as, phys) & TARGET_PHYS_MASK;
-+    return ldq_phys(as, phys) & TARGET_PHYS_MASK;
  }
- 
- void helper_ldpte(CPULoongArchState *env, target_ulong base, target_ulong odd,
-@@ -680,6 +682,7 @@ void helper_ldpte(CPULoongArchState *env, target_ulong base, target_ulong odd,
-             return;
-         }
-     } else {
-+        AddressSpace *as = cpu_get_address_space(cs, 0);
-         badv = env->CSR_TLBRBADV;
- 
-         ptindex = (badv >> ptbase) & ((1 << ptwidth) - 1);
-@@ -687,7 +690,7 @@ void helper_ldpte(CPULoongArchState *env, target_ulong base, target_ulong odd,
-         ptoffset0 = ptindex << 3;
-         ptoffset1 = (ptindex + 1) << 3;
-         phys = base | (odd ? ptoffset1 : ptoffset0);
--        tmp0 = ldq_phys(cs->as, phys) & TARGET_PHYS_MASK;
-+        tmp0 = ldq_phys(as, phys) & TARGET_PHYS_MASK;
-         ps = ptbase;
+@@ -130,7 +131,7 @@ static void generic_loader_realize(DeviceState *dev, Error **errp)
      }
  
+     if (s->file) {
+-        AddressSpace *as = s->cpu ? s->cpu->as :  NULL;
++        AddressSpace *as = cpu_get_address_space(s->cpu, 0);
+ 
+         if (!s->force_raw) {
+             size = load_elf_as(s->file, NULL, NULL, NULL, &entry, NULL, NULL,
 -- 
 2.51.0
 
