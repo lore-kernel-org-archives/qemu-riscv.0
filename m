@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E222CCAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:12:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2D14CCA470
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:13:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3yRo-00035m-VV; Wed, 01 Oct 2025 11:08:53 -0400
+	id 1v3ySX-0004U8-C7; Wed, 01 Oct 2025 11:09:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yRC-000286-AM
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:08:15 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yST-0004Qo-Fd
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:09:33 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yPl-0000li-Bo
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:08:11 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-46e2c3b6d4cso56531435e9.3
- for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 08:06:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yQV-0000sQ-Nh
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:09:33 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-46e42fa08e4so47968115e9.3
+ for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 08:07:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759331198; x=1759935998; darn=nongnu.org;
+ d=linaro.org; s=google; t=1759331244; x=1759936044; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xKIJiurQy11fAb1+UubMdJKdkBS0bnFi1raQMLM9p9c=;
- b=AhH6UJyKzJ4WpArAUUL0U1vvEImeSuuIptLL2G+HK53UsIuyW0sYHTZaIFiFQSeh3Z
- z+fRb5fPBvaRCDJZgfAez62yhwxKSBsAvO9y7CR/vgr9zX+WKARq8y6J5/Jd7KVD6Lry
- cRJPOzHmfWHpKmEzgO6fHDlGwhg/EPQ2R9RMUEXYRQTAhZaenPRhTn8NICz6koEjAHmn
- TX1rkz35Inj4mPIDJ+6IA3RyCQ7fCEl4SmunH0mVPd/IolfGt/Si53Rcc796uffMMJWH
- 3dBIRKxNu1C4rRzKhy34unlLH4C5WMqQFRctZwjArlfcBnGnm0z8MRsPJuH0d2vr1zkz
- cY+A==
+ bh=F7o+nv06XBHGB51yxt1OEKJBgV9gHbisZFhpgcb1BqQ=;
+ b=YUVzAZRCiIkvBfFyTl8r3vmMvqXgpkn9m0laU+u/bmKA4r1IbzpciSeTdnQmc0Tskf
+ Ukzj7HaX9S+T9sILSe667G+FKJIuwojtlwtiR1SiUd17RL/YJZGm0Myp6RxTYGhZcSwM
+ gQSxVCZqTuolxlgc40nvSRP5QwLJQjb1N70nw2wYC1jxoFLf02F/V+90TeqYiJ1qMpvl
+ HN1Dheyn6fbBwBwy4IKdomzGXwIIbSAmZIHqP3Gi75Ze6KqESOb5/v/oCN911kfxLBzA
+ tU6aSq0UtD8Y1JTfKNirvraPcUXdvjaGiNTQkkpUpwV0CT0GcTdzwZb9vQOOH98bZjyp
+ C0tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759331198; x=1759935998;
+ d=1e100.net; s=20230601; t=1759331244; x=1759936044;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xKIJiurQy11fAb1+UubMdJKdkBS0bnFi1raQMLM9p9c=;
- b=Y+vj4hc8zDSt5ewGRHu38lhjOH1d/yLJylKy7RHIO4MdexqYAzBXKbhxWeQ7j2ksyq
- +4cEgQnZ7FFadAGErlSG/tECcmVkZQL1Y3rKoTaiD7raOYSRQt+EOtzkwgOtadmhPeqb
- c9KjKBIvACdQ4b8q9BeZj195p7+k6fwk4KPY4rhAy78CrxoLFHyUY3coIVzjC73OUBpk
- oPI98BT+k5310jEXc0C2NFRk0GbB2iando5JF6NkaEDIBTUpeQSE0D7ltltaC/UyXTc3
- YRn6P0osx70xPBiI8NxcXGoR14r5GP3mh1y4SvhakZP0M7LSJuRursbZVh6lwqE9LWdF
- US/A==
+ bh=F7o+nv06XBHGB51yxt1OEKJBgV9gHbisZFhpgcb1BqQ=;
+ b=upEsUlT2HvYDAhASw3iXNWjBTyDZLgtu5F5+hys4ouTDiLpJbeGGd4PRQeEgRoCaTM
+ bMXPhcYQgR7f8LrJeZjVnRCsZtBLvyA/x68UwfESRvX0WmDJ3a8gdUs0yJ9QDrBz6V0M
+ f+Ze/agNWtAep9TxRgasFxJUhIoout+auCw6JkCdrnaSNRWqQVPDCt8kkyehLQ5zhZHe
+ YpBXK6sw/vhqq1ST5Ujip9ZdbueeKxb8b46Vac/V81uWeDhMp3Xyh95H15iU6JpsEm3G
+ x4+ODbVwGUN/m5s9xkJ+qF9//R7KbZaiO2BCKj1gecyh6E8UuKcV0DAMi+17eFusxMh6
+ 4i5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXR6Zn1gl4O2nA/CADdxWpj2d6oWC4dEs/M7s8GAMadz1BJJfwDYn9LXvBwvG00QzeHVZIQNHzcdIkr@nongnu.org
-X-Gm-Message-State: AOJu0YzRvwrnHPE0YELXcvfVikd2ZZ4gS/jOpUAIuJFAKRzcephf0L0O
- 3s4olaMBs0yV3eZF09uyANVH8SIpMbuCouXOfdUznyqbL7CTTr1OgrcxIRKTvV69tKw=
-X-Gm-Gg: ASbGncs0PhYnz9Nbopua96AjXzLdDqrGnysdIfKHQoQ+/nziiBxn2h6ZUumk0dIy7LZ
- uiKcnC9wgFXdC5l9VgJttuC8DXSkrbCbxtmreYcH/+QYOFw7ie0/cept498rqDl9tWp5wXuqc5H
- LxJJrFxx1gQBcuU6tGAM7sIOmlKoQTi9tjnggTC3yQQR0Uk0WprDmoZblF8QQj3W0gcu0bX/VPo
- yBKRmfaJGRF1SDa9lQqt2mPT4NtUWdqb5vTODLDGD6oH/VuZJ0FSXZL28vcqFfP8lfSu7TLo+3p
- 4cOnl/QzgEH6eK/MAQjKn1dsE4eSXbmvbH3h81hHo9JB2rh/ryVnJImFeBqYq1YLj/TeriUPMDM
- VrB3M1Xbdpe99XB/4JtR83tlmekJCM2Q+9JDBytet/OuI2G4k10sEV191RAWPNZk+0cXR4sidoL
- AUU0ALoTB+UUeC0BkvfoiK
-X-Google-Smtp-Source: AGHT+IFyi3wB+ED6O52P0EVUdsoFZprWN7mLrwrybDjTk8VfikX41h8QHP87F214i0CStGpv2q5UhQ==
-X-Received: by 2002:a05:600c:6094:b0:45d:d88b:cca with SMTP id
- 5b1f17b1804b1-46e6125cf67mr30485905e9.1.1759331197898; 
- Wed, 01 Oct 2025 08:06:37 -0700 (PDT)
+ AJvYcCX2blwQcPNcmyLDJKB6vXfaWSral4toAptINwT9rMpRUobbiHuMZYKABzLVddl3tDv78IBBdKJp3T3c@nongnu.org
+X-Gm-Message-State: AOJu0YyAiINslHgFOisUEFVedTEaM//I9SFmRccqcPCbbae/wMw9S58/
+ +Uzq1EuTB7I6ZsacN0UmuofwdC88vCfVKWVnMnUKADx8jv0QkX1k/w/aSxBpe8nL38o=
+X-Gm-Gg: ASbGncvHCpUgoPhBFnHq4HRobbqiSo7bqV7JKV+y9TXAUKz9bS7HxhivPtnXejsLVhd
+ sbrwtBW1yVBjH4G+4yqCIPoanr5E01Lg27EdsNF8FgziffsgI/mxMvE8ko1OPw2xRbkjU77QdSH
+ Vd4Mkd7U3nHiAAg7bdnu1onlciuI5oHO34IHJiXRgw9tHM1BltIWp540mGWFQs4r9XDtE2D8/rp
+ gRbHNTt0Z3HNgYOBiaJ8ieahbIQngFnnI6pI4z+n8FJBIwX58u9S/HBfDNExJt/OtdrGmNtZERF
+ b9XNtgGmyHhX50bJDJbQJELydUphAsqDzr8GLbbywA6+oN+0g+RKFVvXu8rCfW7iDVzqbzxQtVa
+ Ciu6P6rRMNbGp5d0eZn1rZnngTRyu1SpXS7e1g9pyJE8U5IJtygKZJn5XU1SboaVyDat9k9wbTi
+ NvuWOab+eQFjz37hFbDWBmVMYQRsi8v4U=
+X-Google-Smtp-Source: AGHT+IFkQNGVq0nEvAqiHZde44QbZe8PBGEZKor8cq6aaYtJtyGE0kwMUg/fi8b17T+fFK2R+KPQFg==
+X-Received: by 2002:a05:600c:348a:b0:46e:3f6f:a8ee with SMTP id
+ 5b1f17b1804b1-46e67a5c7a0mr7124835e9.13.1759331243991; 
+ Wed, 01 Oct 2025 08:07:23 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e61a0241bsm41643575e9.11.2025.10.01.08.06.36
+ ffacd0b85a97d-40fc8aa0078sm27313031f8f.59.2025.10.01.08.07.22
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 01 Oct 2025 08:06:37 -0700 (PDT)
+ Wed, 01 Oct 2025 08:07:23 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
@@ -74,27 +74,19 @@ Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>
-Subject: [PATCH 13/22] target/i386: Get cpu first addr space with
- cpu_get_address_space()
-Date: Wed,  1 Oct 2025 17:05:18 +0200
-Message-ID: <20251001150529.14122-14-philmd@linaro.org>
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>
+Subject: [PATCH 22/22] target/sparc: Reduce inclusions of 'exec/cpu-common.h'
+Date: Wed,  1 Oct 2025 17:05:27 +0200
+Message-ID: <20251001150529.14122-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251001150529.14122-1-philmd@linaro.org>
 References: <20251001150529.14122-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
-X-Spam_action: no action
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,67 +101,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In order to remove the convenient CPUState::as field, access
-the vcpu first address space using the cpu_get_address_space()
-helper.
+Only 2 files require declarations from "exec/cpu-common.h".
+Include it there once, instead than polluting all files
+including "cpu.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/i386/arch_memory_mapping.c | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ target/sparc/cpu.h          | 1 -
+ target/sparc/helper.c       | 1 +
+ target/sparc/int64_helper.c | 1 +
+ 3 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/target/i386/arch_memory_mapping.c b/target/i386/arch_memory_mapping.c
-index 560f4689abc..809c4cb0298 100644
---- a/target/i386/arch_memory_mapping.c
-+++ b/target/i386/arch_memory_mapping.c
-@@ -273,12 +273,14 @@ bool x86_cpu_get_memory_mapping(CPUState *cs, MemoryMappingList *list,
-     X86CPU *cpu = X86_CPU(cs);
-     CPUX86State *env = &cpu->env;
-     int32_t a20_mask;
-+    AddressSpace *as;
+diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
+index 31cb3d97eb1..7169a502432 100644
+--- a/target/sparc/cpu.h
++++ b/target/sparc/cpu.h
+@@ -3,7 +3,6 @@
  
-     if (!cpu_paging_enabled(cs)) {
-         /* paging is disabled */
-         return true;
-     }
+ #include "qemu/bswap.h"
+ #include "cpu-qom.h"
+-#include "exec/cpu-common.h"
+ #include "exec/cpu-defs.h"
+ #include "exec/cpu-interrupt.h"
+ #include "qemu/cpu-float.h"
+diff --git a/target/sparc/helper.c b/target/sparc/helper.c
+index 9163b9d46ad..c5d88de37c9 100644
+--- a/target/sparc/helper.c
++++ b/target/sparc/helper.c
+@@ -21,6 +21,7 @@
+ #include "cpu.h"
+ #include "qemu/timer.h"
+ #include "qemu/host-utils.h"
++#include "exec/cpu-common.h"
+ #include "exec/helper-proto.h"
  
-+    as = cpu_get_address_space(cs, 0);
-     a20_mask = x86_get_a20_mask(env);
-     if (env->cr[4] & CR4_PAE_MASK) {
- #ifdef TARGET_X86_64
-@@ -287,12 +289,12 @@ bool x86_cpu_get_memory_mapping(CPUState *cs, MemoryMappingList *list,
-                 hwaddr pml5e_addr;
- 
-                 pml5e_addr = (env->cr[3] & PLM4_ADDR_MASK) & a20_mask;
--                walk_pml5e(list, cs->as, pml5e_addr, a20_mask);
-+                walk_pml5e(list, as, pml5e_addr, a20_mask);
-             } else {
-                 hwaddr pml4e_addr;
- 
-                 pml4e_addr = (env->cr[3] & PLM4_ADDR_MASK) & a20_mask;
--                walk_pml4e(list, cs->as, pml4e_addr, a20_mask,
-+                walk_pml4e(list, as, pml4e_addr, a20_mask,
-                         0xffffULL << 48);
-             }
-         } else
-@@ -301,7 +303,7 @@ bool x86_cpu_get_memory_mapping(CPUState *cs, MemoryMappingList *list,
-             hwaddr pdpe_addr;
- 
-             pdpe_addr = (env->cr[3] & ~0x1f) & a20_mask;
--            walk_pdpe2(list, cs->as, pdpe_addr, a20_mask);
-+            walk_pdpe2(list, as, pdpe_addr, a20_mask);
-         }
-     } else {
-         hwaddr pde_addr;
-@@ -309,7 +311,7 @@ bool x86_cpu_get_memory_mapping(CPUState *cs, MemoryMappingList *list,
- 
-         pde_addr = (env->cr[3] & ~0xfff) & a20_mask;
-         pse = !!(env->cr[4] & CR4_PSE_MASK);
--        walk_pde2(list, cs->as, pde_addr, a20_mask, pse);
-+        walk_pde2(list, as, pde_addr, a20_mask, pse);
-     }
- 
-     return true;
+ void cpu_raise_exception_ra(CPUSPARCState *env, int tt, uintptr_t ra)
+diff --git a/target/sparc/int64_helper.c b/target/sparc/int64_helper.c
+index 23adda4cad7..96ef81c26cd 100644
+--- a/target/sparc/int64_helper.c
++++ b/target/sparc/int64_helper.c
+@@ -20,6 +20,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/main-loop.h"
+ #include "cpu.h"
++#include "exec/cpu-common.h"
+ #include "exec/helper-proto.h"
+ #include "exec/log.h"
+ #include "trace.h"
 -- 
 2.51.0
 
