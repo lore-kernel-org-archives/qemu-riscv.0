@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7C6CAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 09:54:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62691CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 09:54:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3tTr-0004wL-EX; Wed, 01 Oct 2025 05:50:40 -0400
+	id 1v3tTX-0004hK-1I; Wed, 01 Oct 2025 05:50:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1v3tTJ-0004Wv-TX; Wed, 01 Oct 2025 05:50:07 -0400
-Received: from mail-francecentralazlp170130007.outbound.protection.outlook.com
- ([2a01:111:f403:c20a::7] helo=PA4PR04CU001.outbound.protection.outlook.com)
+ id 1v3tT9-0004U8-Ec; Wed, 01 Oct 2025 05:49:56 -0400
+Received: from mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ ([2a01:111:f403:c200::1] helo=DB3PR0202CU003.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1v3tTA-0004vh-75; Wed, 01 Oct 2025 05:50:03 -0400
+ id 1v3tSw-0004v0-8C; Wed, 01 Oct 2025 05:49:54 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fzOINeALdY/Rh6D17zNJ+cJOWRUiHCZbzv4opngQTYyjSHjoWFfMyrI0L7ssEaaFY/lVkugNnRr4Ea610/PmnvMbfobM6B4jK/9xV2QMn5O8ETU2XK9yWoVQiAuPpGKYkcWMQSsBfXsxil3KnRMq8xTG/HmNO9PyvAfqc1UESmaqMLfxe2GTogJkrxIBVb3RxTVF3xXhOMke21Ba6OxVzPru8Wrln0nKwAa4HWb/fcLmx8tPAcMfrFPXpXkLSt6Y4eD117Sw2KntuZgSERSMOY6f6zeK3uIyfU2dPxWoao+TDNOCtM+8AkBWPZFpdCn9wgC2iN6ACwN0sIdFpenlkA==
+ b=cYSqaGcLqB8mbFT2xQLzvdEV6Hf+BjwXlulO8/SjsQOTx4G1b4sot/1NsVQxZLcdqwsSnCVmrpfQbIJgJeYQZB4kD1xsSP0dRB1BHlcZGcX2ZbsVQfD54iRTTx9wwDq9IZHMJgRAXU71eAAibGkUKNU5AXdPwgpOpyCuerAvC5rhTG23hxxlQlneP98uy7fDOGWZ5ZwzSBbjW7eLIRGVwETHeVBuz6/zz6TQMwOwA3ylZtoLenqKpqfgdhtn9V7/soJARShEH5DuevIm3RH70YpNrxN7ZsMraoyJOV8Y7OlfZ/nZpFflRWuHf4zcPGa+942ebgG8NwGGKFEstqDSHg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hoMVtQpsQQqZejcupKOo5bqylRXpclr+hVRz/KIdUJE=;
- b=C9pPwrYr891s2omXeY71whplCeqSJrzA9OXrIlRCAvz6sa+asSOcYh6r3wyP7B8LnWRnZenDLToYi9P7yPJcbVVQNRE9iEcsTwfITli/OtFdhZPMmNfUcWTzOG6blHLbUOsBToWoLDqKmsYqzcyyHdzMUcZTLFaP0jhfy3ATD1MFsedFjyIKuGrfelJ1dgwgpclXtKzwGYZ/3jewxPall8LFzbOmA5L00RsKKSamQttIwrlG+xqgTWuZOpTsc2sK/9xp2Ft9ksJfZ/3yW2Jnux+kQXoj7JQmRUqO/4Gev1E6WfRVpIf6lAmzpee+6pRP7Iga8rN5z2DEOCNtztsqjw==
+ bh=XJFOVbEZ8nUj/Opg5ppkZ3jZU+zTWdAZu/lor0AO2wY=;
+ b=OA3UhEFAILRY2pZ50tVDUF4aId8nPHhngx3F269UbRd4bDtCPIQth2POZv29byrAjCOTZsNzfdOZpu+vXEwmEhHS7kPg9KG7v4czz3Rk2aaXIGCwEJ0AzFHTU+V9uvuZdFU6XV/TLwvkJNOUFrUm3BvsKdXk2OY0RU2loSLSWrkJi9J3IJWF8Rdg6XNmbilSkxi4O1TmRctzwBnRIpwKHOC4SRpA5YALgFGgjlxz6PTwHQP6ny0qbkhi7v50a6seBNDD5Aykl1PohbKg6yS4KqxRriDPS1DjZHS+n0+ybDtsXd4heA2bNGU8Htaskyo+znterjzgrkmgiB86DgPhMg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hoMVtQpsQQqZejcupKOo5bqylRXpclr+hVRz/KIdUJE=;
- b=Yd5uMYBiLqFO4PaRXHLAYHcDnksaRrm3CyCIRz8oJ2Bh2COPXKMsGw+u0W3kpgjWd+Un0yJ50SqXaRv/6133aY9X1HqcP0ekfJPt7+HdYLR6DpTrlnt1CG9zNauHfYMIkcNWx+u/irJqT1WrGcBBODupxU21fRS318ZiZA2W55ACgChGcbeTiCzkqQbl3qSmec/fDRJOVxVvxf43leKTNFobZxY6kH32BU3XiCMjRwfRmfm0MPsyA8c8yrN7/WKUJiT5cNeFYKgur1R5TqGEN/XunAhZ88xYts9fQGhWVKDyigaWYZmTrkSsdnKbLvUT89SwP8rs6800bF2tl/YfiA==
+ bh=XJFOVbEZ8nUj/Opg5ppkZ3jZU+zTWdAZu/lor0AO2wY=;
+ b=Nf2yIucmPrORW0L5qqkW84VX+TKuJuw634PF9PaLoJMDpD1w7D8Ac9Hh3/NsFc/rs6djnfjJYf1PJPOjHKLAdXwmqgN5pDR1HqcifLxwLs4CA1rjRKBnmkcfYZlHXswnb8TlhxOS8LKmg19TsDLJHJSwobU52um3aXG4wiUPPsdrZ4v8ZAasopyraUeHGpjZtBEpz62AQyCEfg0wsVtdVB3svv14udGYNMJaDlNEcugxp6C7gz5czSYKlccYJ15VdveqdNYjxXm6itS87uBvXSH8gWQmMOPwqMmKcUuPxE6fNTUMkZlW++L7HjOly1VHiiNICHCKPpxfYtgbfTjAVQ==
 Received: from AS4PR09MB6518.eurprd09.prod.outlook.com (2603:10a6:20b:4fb::5)
- by PA1PR09MB7820.eurprd09.prod.outlook.com (2603:10a6:102:44a::6)
+ by PA3PR09MB8279.eurprd09.prod.outlook.com (2603:10a6:102:4b9::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.17; Wed, 1 Oct
- 2025 09:49:14 +0000
+ 2025 09:49:10 +0000
 Received: from AS4PR09MB6518.eurprd09.prod.outlook.com
  ([fe80::ad50:891a:847c:580a]) by AS4PR09MB6518.eurprd09.prod.outlook.com
  ([fe80::ad50:891a:847c:580a%4]) with mapi id 15.20.9160.017; Wed, 1 Oct 2025
- 09:49:13 +0000
+ 09:49:10 +0000
 From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
 CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cfu@mips.com"
@@ -50,13 +50,13 @@ CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cfu@mips.com"
  "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
  "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>, "philmd@linaro.org"
  <philmd@linaro.org>, "alistair23@gmail.com" <alistair23@gmail.com>, Djordje
- Todorovic <Djordje.Todorovic@htecgroup.com>
-Subject: [PATCH v9 11/13] hw/riscv: Add support for MIPS Boston-aia board mode
-Thread-Topic: [PATCH v9 11/13] hw/riscv: Add support for MIPS Boston-aia board
- mode
-Thread-Index: AQHcMrikliFsCoupUkmoMvzwxSYE6w==
-Date: Wed, 1 Oct 2025 09:49:13 +0000
-Message-ID: <20251001094859.2030290-12-djordje.todorovic@htecgroup.com>
+ Todorovic <Djordje.Todorovic@htecgroup.com>, Alistair Francis
+ <alistair.francis@wdc.com>
+Subject: [PATCH v9 04/13] target/riscv: Add MIPS P8700 CSRs
+Thread-Topic: [PATCH v9 04/13] target/riscv: Add MIPS P8700 CSRs
+Thread-Index: AQHcMrijD4wkVu/m/0aDfxuRXDrcNA==
+Date: Wed, 1 Oct 2025 09:49:10 +0000
+Message-ID: <20251001094859.2030290-5-djordje.todorovic@htecgroup.com>
 References: <20251001094859.2030290-1-djordje.todorovic@htecgroup.com>
 In-Reply-To: <20251001094859.2030290-1-djordje.todorovic@htecgroup.com>
 Accept-Language: en-US
@@ -66,93 +66,93 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS4PR09MB6518:EE_|PA1PR09MB7820:EE_
-x-ms-office365-filtering-correlation-id: 8ea15fb3-d8f4-4bdf-fbb0-08de00cfc788
+x-ms-traffictypediagnostic: AS4PR09MB6518:EE_|PA3PR09MB8279:EE_
+x-ms-office365-filtering-correlation-id: 2dd398c2-94a2-40dd-bebd-08de00cfc5b8
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700021;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?DtxtQDbz82YJZ4VQZ+gIA+LQhMZ3VHFv1cgRjWxeCpXGR0b0suZ0eMrWEv?=
- =?iso-8859-1?Q?4MLnGjFJmbbdVNomEydjni1j7NscAEje5ZbSZUSEhHb5bbpEWfoQx9E1W8?=
- =?iso-8859-1?Q?SVxtWfqGBPw7pprOeM/6VnzNYVl9Gypm8r8lTXToEHyCm/HTvL8886obsT?=
- =?iso-8859-1?Q?HwnGTXdn2MLwMLVIVvzkDpr/wWnVlJa7/VBY4e0gRB/p9ckO68dgEzaHRJ?=
- =?iso-8859-1?Q?8B+UQwv4OSgpXr9/7ZTDIhom/LAg1mB71xnnT/tPo1aPl87bhBcKV+qYZq?=
- =?iso-8859-1?Q?5MD9nc7/kcVF/GkRUup5h7+Cm9MuvY6jXKr7IOim6+vxgspWG8DjT1CZ5O?=
- =?iso-8859-1?Q?6TWV3bcS9DnlQGHBoc58MQFHWCrdB536CWnymZdnVz3uUT2sVJdVsLHxRR?=
- =?iso-8859-1?Q?v1rJrHkJiDo86aScGhhW5236tHfY1W55Ybu9I0f5mZjJmQBI+EJ7V7mm1h?=
- =?iso-8859-1?Q?seyi3AOr7js8ctZvSiXty2uAsTGcuELE5c4erBojIBxNNOL5pcfayyyHF8?=
- =?iso-8859-1?Q?Es2ZIsqJ2bJqziHF0AV30adPXJCp9qE12FLdwysLerQ8nsCOZXJZoThxvc?=
- =?iso-8859-1?Q?4hSIz3qFMaVTo0JmsoVod7oQqn7CyG772YRqBV/gUBCFb2qMtVYIUXA6bs?=
- =?iso-8859-1?Q?a4TcE5VC10YEuXKrNqU8qQok9Bfxq+huSlHjCVOxI6XkTZeU+pROn5B1sS?=
- =?iso-8859-1?Q?izY8XDDjyNJZgZ7WWJkMTJt+Vmk7s7yV1GJxSE33Q8mS3B1X0OGa2+oCiO?=
- =?iso-8859-1?Q?zFkVSslILt2DYB3HD/Cr/FFBmRwOOsqSil0N2ve+gFFfaeen6puJdeRE23?=
- =?iso-8859-1?Q?qLL6vYBnS8QQ3TpoOp2PfMdlbKN03tI5fHIeiT2OFwAXIvmjZNAwu4vthI?=
- =?iso-8859-1?Q?OijaYV6XnsErU3n2LnID5ApMaOl9++ctPE32lEWzDbgGZ8N/xP/mSe+oSy?=
- =?iso-8859-1?Q?dFHBwqJy3KeHMRtCxPjAEIRQ9kUiUke7ykFg6QDH2d+q0tvSf0d+4ICAX4?=
- =?iso-8859-1?Q?7Qaa3kTXKHvFEMlC0s4KTkmVTmjDYK4KT2lXIfOqmcgITGVVgUe/KiABhM?=
- =?iso-8859-1?Q?vfzYZy167UME2AoEZzDU5BzvAKPwRNRx0FRssGrHxbBfK8SGDL+ORtw8c/?=
- =?iso-8859-1?Q?nFqLhhAkqQXrLchZ9L3ob5nOp/SBytXhFsHTjcsBJZYSIbxhh/VwvXFRH/?=
- =?iso-8859-1?Q?8TAD/XJxkyFzzi8zhO687RwQAwBewB0i68MdPG0dYXVKDe97kY5/yP6SJS?=
- =?iso-8859-1?Q?MsE0XvNh2pvvDnK/KMO+I0N/70Lut5wXqiJnv9lDrrpfVXJloiiGd/2hpW?=
- =?iso-8859-1?Q?q4BtbcMQhVoGRAM9pB4oNpp48Wku7ENEZ0hsADFoYgIWPEvw7NASooqAzB?=
- =?iso-8859-1?Q?sbacrGOdpGJd0vgdR0/nbW3py+Q1GvbndeseC4M9W9gLQH750GFotHPxtn?=
- =?iso-8859-1?Q?E7zM9d7Vka4lm0srxyPC0uNhGdevQWyj8auqrXKtsjeskZHjTw3cIJezy8?=
- =?iso-8859-1?Q?H9sUsMdwpCnYhsT6LPemO3ogG+G9chgj7AaUKzVpbCFJMQs9DPPebU8MT6?=
- =?iso-8859-1?Q?Va2Er5iqAYgkXDAGh7O93BChr7vK?=
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700021;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?sabJ6QbE7wUAm3jznD4m0i+0c0y2bJ7C6iOF2Sf06TCY3p9UxTox17ZGYA?=
+ =?iso-8859-1?Q?weS2afNpP0AKjpB1cse52O86Bg3Ov3/F9KVsX+pFeO30eyTStxh+/skDxy?=
+ =?iso-8859-1?Q?CFmu3HLxl0MQyhkZgR4RosXIxNpDpuRa0UGzU/f+/OBcfnFbR1dX03ZogK?=
+ =?iso-8859-1?Q?1IvLVY7fClFKHn8rqn4dix+5tAuiJV9IZ7blHl4GYXtWznnfcskeeJ46xz?=
+ =?iso-8859-1?Q?JP7k8FcY9mfoIJYDTlozSaxGi/72dOaVtM5i3eG0TxmiBi59mPOZfFaiNo?=
+ =?iso-8859-1?Q?ZKd2pjtkWIbjxnFMorF3RIBjYpuOYY6C3zbTeXZSMfpGURPL7kdIOTxF3b?=
+ =?iso-8859-1?Q?zcoSUvM0KNsDdCQYQfRsCFlOVyrY6Qaqq5PXKTb53z6RIAqz/kvT/dY8pm?=
+ =?iso-8859-1?Q?gj97whwUsGyGoyq4kwbOS2hVVvrVp6sQknF+yZqBRF8Iudv3PBSEKqTzu6?=
+ =?iso-8859-1?Q?IWvBzJtiqVquScxEiiXrRWu8ie8Ok+IJkL/4p1dkPyZ3x0diYoHPhXGKsI?=
+ =?iso-8859-1?Q?86W51s78fCv53aVNGfjBPJo8rpnd5zcYZe3zkHy+BQDC/GFHbGu3KuNsXs?=
+ =?iso-8859-1?Q?ypIGHyD0Cny9yFkTsc9gC6jdKzTYpdTZzkOPDXp5+BwyhRXZXBCAg7DmJd?=
+ =?iso-8859-1?Q?E7OEtevYr4WsEd6mYzoGdzwXJ3Yd6JKn4ThtM5E1LYfyYuDzKf5DIS1Gx+?=
+ =?iso-8859-1?Q?bmUD+5Defai5aD9fsoEQPta4nmnqqRYyjc+ANkhrnw1exHg/52TGe5IGpy?=
+ =?iso-8859-1?Q?4eA0yFJowQua400dE2+rE2yEOgloRJpZp7U6k6fvMCscvK/VORZ62dnO0V?=
+ =?iso-8859-1?Q?2sOjwEcPAZpRDuQ5cfoH4cqCbbkZ7FanPRu7dfKD8mHAigZ8CIUXKgSr6B?=
+ =?iso-8859-1?Q?bQ+/YBugtzZKWO4dHkcr4gFgHMn8DFCPVvChogckmbkxOwyWALk5ogMmVv?=
+ =?iso-8859-1?Q?OUEMIyLT1T0b0YNHlkVWMBnWf1SsI3GYI8VPPXCgKKiQADJggXxdn40QeO?=
+ =?iso-8859-1?Q?ueELf0b+a8Q/BB7lxfnV59FrRnHFbLEyfp6wACzncDlvn2ZTOugjIpM5Zz?=
+ =?iso-8859-1?Q?hrPHKgiZ0eQSRIsDkPE62qROwRIZgu2+3likOjtIuk/8kUxZRj4vK/S9Mg?=
+ =?iso-8859-1?Q?0tmNrMLloY56ozb/g6ZqSN/ufm6a4H46yDSvmb4P3ETaLCeycldchFFNZJ?=
+ =?iso-8859-1?Q?EExZ4w1NOTbX1atrZWOfcgP4hpIWOnC0ngrtafs+YSCfOma6vmB5eY2SvG?=
+ =?iso-8859-1?Q?Tv/nQApMv4x183eXVwm0GheXmtHpJjd0acbQTr0yypZRkGrNZzx5c4CObl?=
+ =?iso-8859-1?Q?aLGC2zK8viKeKvMPuPiHrqb13meor20GlgsXaNXEaYdUJDo/FH4U4EMBcC?=
+ =?iso-8859-1?Q?ZZcm/zdBi26vDjQQQZ6NDziO/wJlV6NyYMSosI0CFdXM/nL1c1gOTnzLX0?=
+ =?iso-8859-1?Q?n7igV1kuWgmcxsJgo8bz5cAvLEzvlQgKZWiwf1D09qjwH5V901uu6+LRC8?=
+ =?iso-8859-1?Q?d6zJSGk6BPEtnY0eF5dIJit0qQRMYimoCNF1za6tD7uhDpM95JxqrlCKOk?=
+ =?iso-8859-1?Q?+tzfXt9qs/3CEGiFcNDUOyIcxNau?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4PR09MB6518.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(38070700021); DIR:OUT; SFP:1102; 
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700021); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?LR+chxDRj/6kzdA0Mg9hbKBnD9SJx1xF+CCzPPRDvWx1raMq4oM8UGDwSX?=
- =?iso-8859-1?Q?eJWJBosngRuFWrov5XMT25Q0NEmUmBmJOLVHnJklNrRsp62rdu/wYeEyRA?=
- =?iso-8859-1?Q?9Xm9MIuq6rjIbTKdN1W6ieRE5mpmc0VpqD04BN0edlun69yOr32hAECBuC?=
- =?iso-8859-1?Q?Qkx7eu3zi7nBWBsSXR37Do9r3bra3Wv2/s4MoICj1n5f8VQu0fSHFp7ste?=
- =?iso-8859-1?Q?8zbDvkZTVMRQZYJpgJIhKaCUSUSK0egANnAMJaePPC6PkJVndtuRqUzciA?=
- =?iso-8859-1?Q?xd6C/NrbYrSIB1dgW8fGhuhbVvf+m9lID7qI1YEvEhSD8HxnV83IubWHBO?=
- =?iso-8859-1?Q?E8Q+Md05reWlTB3BQhUYcTBnQDzJOCdATN+1LR4ebBP7MFRTDUqUQ3l0eN?=
- =?iso-8859-1?Q?6Ym7Gbkr+uR9bElojT/33FeOTh53Aw7XIEmYGin3gqe0erfkynv0cHOqPE?=
- =?iso-8859-1?Q?8QxFbqetPAtarJuyw8CPzIDgR9Po7R/lbvCd1n1LyxYn7K1A/weYHKJmtg?=
- =?iso-8859-1?Q?aY31MIwtnAQUg+UO0skO2NF0WwN2TegEyuuu5fimUimzDtybwzINp/kgrP?=
- =?iso-8859-1?Q?r1lpjlFCqBvjb6Sqwoe29KXd32XYnHW5Psi4u3xvIbnEgoqYe1hsEslL+5?=
- =?iso-8859-1?Q?vXSQ8xJWzLq08buBWsMmeNWNGII+CpmnNpTr+YF+DMQl4NkqfCFOTacA69?=
- =?iso-8859-1?Q?iS0lrjeas3ospDZ9Wbwf22a7hjjnWc1UH5Fg+AvNtJ8jBln8/AhYNMA092?=
- =?iso-8859-1?Q?0RwvbxPcgDc9bYqDLpi7m0llYAHLtjVldzkYL4qdlEQcSviI4gP7ShV6kz?=
- =?iso-8859-1?Q?GvaSqYSj8arRUasrXo1XhkQ0+4A2oZZqU4K0M/DVD4K0fHJy2FaqLNnxJh?=
- =?iso-8859-1?Q?ylZwOC987c1GAgx8eWxJjvz0HGafkmCI8h/sV9F0taWXm7pfiMuoZX7oxW?=
- =?iso-8859-1?Q?pqEihTZOcDbhhjTf6/q8PtJYmBac7DusRPrIkoW/SmLqV81hMOXs8Mjnlx?=
- =?iso-8859-1?Q?ekmcof7OCxQkn0u639PNHN7QKMaIhWf1iopGcVnDLe7wNg7GQCzHBssIxD?=
- =?iso-8859-1?Q?Q3oqfh5wfQTfUo6Vx/ppR2lmNazF8YZkj0YHyPEvpVtmhcaj2EbRsfS+Gg?=
- =?iso-8859-1?Q?JwyPDxRRK38RiJ53GepMM9qW64yo3DVCw4qXhSB+I5y43v2vW6eqWPD5Eo?=
- =?iso-8859-1?Q?owL8zPjMOuCkrHRu4AgiNPcgubQ8SwQlW3igQLJNrlDxFWOYqq0yc5N1KH?=
- =?iso-8859-1?Q?8R27CU9JRJ47gDQbrHiTlORcf0r1GAcodjEtk8S4J2NJPi2RCLrdFJlz2m?=
- =?iso-8859-1?Q?t45jgmMmPT0SzR0NZjT5N9AqU/cPZmOEDmtnZmIvwukoIfxsZw0s675OgS?=
- =?iso-8859-1?Q?pq3CAORSW36vETCM6cIhS6IBGH9yTzT5COhC+LCmA1euLTdxe2d9EjRZPl?=
- =?iso-8859-1?Q?hkKjcB4Thr0WoH3Uw5YMz0LbtGkqi9NUEsL2MxYwqy7Q5FC1U10JIS56M6?=
- =?iso-8859-1?Q?BxrA426Cwcl+bnfFJw/zPpmJX/ZKHmNxZsPblc23LiET4EsyLh4spiXDLu?=
- =?iso-8859-1?Q?E8XVWis3+Rd+D4cz8wh0kpKZ08DpKA3ReRZkUHeXtW30jKQ4zT13+6KuDT?=
- =?iso-8859-1?Q?2HOS9Mgnvpyg1DjsJcTNRpmxjt/0jG+Qgpd//RIIgbXpds4BReWZvpyrjL?=
- =?iso-8859-1?Q?W+yNMojK1LAE6CcmwOU=3D?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?57rajKyZ5aOBfnwjmGZTKUvntuvWu0G6XpL6loBqvCigIwJTJcgx/JBk/E?=
+ =?iso-8859-1?Q?Ysfa4KoODlW3JsfGbMIUF7rbfZPhZ2P5JqClfkZFn2fWFEaodui8ZEju+G?=
+ =?iso-8859-1?Q?8xywiiqifzUv39V2z6m3E/d/GOXkRqw9PDOnl9ZZk5GpRoDy86F6yoPfj+?=
+ =?iso-8859-1?Q?fjiMYKh+VQYISTepwurFJQW+m3yhhHKUidLEt5lEASN8rHgFl8TsyJsUO4?=
+ =?iso-8859-1?Q?7yehLfQ79NR5bTMXT7gZssWr7DiK2EyakvHz7BMfZ1vqGqTEprY0FqGPU9?=
+ =?iso-8859-1?Q?wWBhiPmP3TA8iviNj4m725STCHu5wUj7BklEa8wRYhbl8zhL6ImcZX/wzS?=
+ =?iso-8859-1?Q?2T3W3zcd/snNK96CcGD45fHtdGhDvO3zGJ/YSSlbL6ANmvKLdXW4/dAfIi?=
+ =?iso-8859-1?Q?J1Fm2BORRVg33r6BC8NcguEgA+UO7HjmyY6ODCygWKmoolmFV2xd6nxZtm?=
+ =?iso-8859-1?Q?ekplPpoOdrTjg+a5gC+Jda8srJj9NAv7COxowySUMZiGzPi7CiVKYD4Zl+?=
+ =?iso-8859-1?Q?HZToMxPEtsAO6fIAMwxRJWTdolFAxGTSJrnL+aSrdKmXd99ydLptK7GqKy?=
+ =?iso-8859-1?Q?2SPLeub3RCisQPdyMFW/Wz/IBCXIZb1RjxT+25sOLco1HR80A/Lo4oGNnB?=
+ =?iso-8859-1?Q?Fnn4wEewITCT3ifg6y1MvFBt2+T49wszyzjFD41eLZImqvw24+E+JLcmMk?=
+ =?iso-8859-1?Q?R85b5vpLvnBwVt/w50+f88+XWOofsHQlPQfaniGQxx8sSYQYK45ckExX4D?=
+ =?iso-8859-1?Q?lVgOxwt1B/K1ClAHRxmctbET2MzdnUowYiHGdaITRLZdpY0SmjEItOqgse?=
+ =?iso-8859-1?Q?OMNL0Lm/EM/16/oSrezFRh2ArQeP0hl6OuCqydZHH3Hd1z0bSxLHx+Wb/Y?=
+ =?iso-8859-1?Q?SzYYuNOevURzpqkVPc/YUuCEj6P+JsKkjvgsuNX8MmwRANDEV+tLr19NoH?=
+ =?iso-8859-1?Q?W5CSZ86rYy97jmbLwh8y1M8TBRe7T8+wQGx+V02/Q4xK1wJrDLk+ycodmn?=
+ =?iso-8859-1?Q?8vOOysJEtK8e87oPXYW+1EoukbR7HOXpTSZ6p2JHvwLyLwRVUIrMV/PuOX?=
+ =?iso-8859-1?Q?vgj9EAy4k+XNFBllPcMRNClosURHyblxi17bPmsRAb6ZqQGC/WMkO9XumJ?=
+ =?iso-8859-1?Q?2wF6vnzjZqx6OSrqbWa7/voo5ViKm8+bwMaConlmKCt3C9S6Mys/k9DxiP?=
+ =?iso-8859-1?Q?1X6DXKy3a0JSElbQQXA7hTNrhf5k50fBNLqC9XlFuCyurG8XXa+dh4ZhsB?=
+ =?iso-8859-1?Q?k0snpwV5WqQg0rHKgtT6M8eyFVFVKTu1vQ9dS9Vwb6zvQLUnJREpspTLGk?=
+ =?iso-8859-1?Q?AEVJ29GORc+XX/UsGOFKZMm2+bkg4oqytb+0XrKb2DWWTQ1Cv8CjKUly0w?=
+ =?iso-8859-1?Q?F5BXv+LhA5wo/+LeEadgjD/eVTj3CAvLLtgyFOQDqrKQ6g7zQRcaakV9mh?=
+ =?iso-8859-1?Q?t8aKuezkyex6ZfxfaqifnogFhq6+YclDzHbD3eRyKLONrdxhqncGTTWsGP?=
+ =?iso-8859-1?Q?p6zbxob6cbYQj8OW2bUBeD56ER3r7QVtEFI6YTPbs0a5R/JMdg+e/F75P6?=
+ =?iso-8859-1?Q?A9+GwRb//l4F3cEwrU9ipFLDf5895bRcR5NI4dkUX7zmbuAGY6u1HfE2Dw?=
+ =?iso-8859-1?Q?l/MbhIrIJE8tZsswICJhwud595r/f1zIpcKZ55ZcXQQ0fXxycn5+issgKp?=
+ =?iso-8859-1?Q?QHZg8I/v1qCq7b3tnYo=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR09MB6518.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8ea15fb3-d8f4-4bdf-fbb0-08de00cfc788
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Oct 2025 09:49:13.5606 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2dd398c2-94a2-40dd-bebd-08de00cfc5b8
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Oct 2025 09:49:10.8550 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: HlTAGMBr2BQSrjssNypT1/m5dztF2EmFNFkt+5ngebnwv3UBMcwYCbKLZVaZRtiWNnc77aD+sbLGRuuJXk1jc1UzRI9200F8wo94HoZcIME=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR09MB7820
-Received-SPF: pass client-ip=2a01:111:f403:c20a::7;
+X-MS-Exchange-CrossTenant-userprincipalname: kuDr4Ia7cb05inmH9Kq5K0iVKloyVPrvXvgDnWOgaL7XaUu0TcRytohfk1O1JRC2kkxmKov5nE4CqmFIdmcUUPXvK3k7viCfoO1YDeppyZo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA3PR09MB8279
+Received-SPF: pass client-ip=2a01:111:f403:c200::1;
  envelope-from=Djordje.Todorovic@htecgroup.com;
- helo=PA4PR04CU001.outbound.protection.outlook.com
+ helo=DB3PR0202CU003.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -168,107 +168,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The board model supports up to 64 harts with MIPS CPS, MIPS GCR,
-MIPS CPC, AIA plic, and AIA clint devices. The model can create
-boot code, if there is no -bios parameter. We can specify -smp x,
-cores=3Dy,thread=3Dz.
-Ex: Use 4 cores and 2 threads with each core to
-have 8 smp cpus as follows.
-  qemu-system-riscv64 -cpu mips-p8700 \
-  -m 2G -M boston-aia \
-  -smp 8,cores=3D4,threads=3D2 -kernel fw_payload.bin \
-  -drive file=3Drootfs.ext2,format=3Draw -serial stdio
+Define MIPS CSRs used for P8700 CPU.
 
 Signed-off-by: Chao-ying Fu <cfu@mips.com>
 Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-Acked-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- configs/devices/riscv64-softmmu/default.mak |   1 +
- docs/system/riscv/mips.rst                  |  20 +
- docs/system/target-riscv.rst                |   1 +
- hw/riscv/Kconfig                            |   6 +
- hw/riscv/boston-aia.c                       | 472 ++++++++++++++++++++
- hw/riscv/meson.build                        |   1 +
- 6 files changed, 501 insertions(+)
- create mode 100644 docs/system/riscv/mips.rst
- create mode 100644 hw/riscv/boston-aia.c
+ target/riscv/cpu.c       |   3 +
+ target/riscv/cpu.h       |   3 +
+ target/riscv/meson.build |   1 +
+ target/riscv/mips_csr.c  | 217 +++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 224 insertions(+)
+ create mode 100644 target/riscv/mips_csr.c
 
-diff --git a/configs/devices/riscv64-softmmu/default.mak b/configs/devices/=
-riscv64-softmmu/default.mak
-index e485bbd1a3..a8e4d0ab33 100644
---- a/configs/devices/riscv64-softmmu/default.mak
-+++ b/configs/devices/riscv64-softmmu/default.mak
-@@ -12,3 +12,4 @@
- # CONFIG_MICROCHIP_PFSOC=3Dn
- # CONFIG_SHAKTI_C=3Dn
- # CONFIG_XIANGSHAN_KUNMINGHU=3Dn
-+# CONFIG_MIPS_BOSTON_AIA=3Dn
-diff --git a/docs/system/riscv/mips.rst b/docs/system/riscv/mips.rst
-new file mode 100644
-index 0000000000..97096421e1
---- /dev/null
-+++ b/docs/system/riscv/mips.rst
-@@ -0,0 +1,20 @@
-+Boards for RISC-V Processors by MIPS
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+
-+RISC-V processors developed by MIPS support Boston-aia board model. The bo=
-ard
-+model supports up to 64 harts with MIPS CPS, MIPS GCR, MIPS CPC, AIA plic,
-+and AIA clint devices. The model can create boot code, if there is no
-+```-bios``` parameter. Also, we can specify ```-smp x,cores=3Dy,thread=3Dz=
-```.
-+
-+Running Linux kernel
-+--------------------
-+
-+For example, to use 4 cores and 2 threads with each core to have 8 smp cpu=
-s,
-+that runs on the ```mips-p8700``` CPU, run qemu as follows:
-+
-+.. code-block:: bash
-+
-+   qemu-system-riscv64 -cpu mips-p8700 \
-+         -m 2G -M boston-aia \
-+         -smp 8,cores=3D4,threads=3D2 -kernel fw_payload.bin \
-+         -drive file=3Drootfs.ext2,format=3Draw -serial stdio
-diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-index 89b2cb732c..3ad5d1ddaf 100644
---- a/docs/system/target-riscv.rst
-+++ b/docs/system/target-riscv.rst
-@@ -68,6 +68,7 @@ undocumented; you can get a complete list by running
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6e0bd6b798..1a1ea7fe9a 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -3295,6 +3295,9 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+         .cfg.ext_zbb =3D true,
+         .cfg.marchid =3D 0x8000000000000201,
+         .cfg.mvendorid =3D MIPS_VENDOR_ID,
++#ifndef CONFIG_USER_ONLY
++        .custom_csrs =3D mips_csr_list,
++#endif
+     ),
 =20
-    riscv/microblaze-v-generic
-    riscv/microchip-icicle-kit
-+   riscv/mips
-    riscv/shakti-c
-    riscv/sifive_u
-    riscv/virt
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index fc9c35bd98..0222c93f87 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -128,3 +128,9 @@ config XIANGSHAN_KUNMINGHU
-     select RISCV_APLIC
-     select RISCV_IMSIC
-     select SERIAL_MM
+ #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 34751bd414..234210c6b6 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -987,5 +987,8 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_32=
+_bit);
+ /* In th_csr.c */
+ extern const RISCVCSR th_csr_list[];
+=20
++/* Implemented in mips_csr.c */
++extern const RISCVCSR mips_csr_list[];
 +
-+config MIPS_BOSTON_AIA
-+    bool
-+    default y
-+    select PCI_EXPRESS
-+    select PCI_EXPRESS_XILINX
-diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
+ const char *priv_spec_to_str(int priv_version);
+ #endif /* RISCV_CPU_H */
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index fdefe88ccd..25d59ef9f9 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -36,6 +36,7 @@ riscv_system_ss.add(files(
+   'debug.c',
+   'monitor.c',
+   'machine.c',
++  'mips_csr.c',
+   'pmu.c',
+   'th_csr.c',
+   'time_helper.c',
+diff --git a/target/riscv/mips_csr.c b/target/riscv/mips_csr.c
 new file mode 100644
-index 0000000000..f7c4bd0f85
+index 0000000000..822e25e346
 --- /dev/null
-+++ b/hw/riscv/boston-aia.c
-@@ -0,0 +1,472 @@
++++ b/target/riscv/mips_csr.c
+@@ -0,0 +1,217 @@
 +/*
-+ * MIPS Boston-aia development board emulation.
-+ *
-+ * Copyright (c) 2016 Imagination Technologies
++ * MIPS-specific CSRs.
 + *
 + * Copyright (c) 2025 MIPS
 + *
@@ -277,495 +238,241 @@ index 0000000000..f7c4bd0f85
 + */
 +
 +#include "qemu/osdep.h"
-+#include "qemu/units.h"
++#include "cpu.h"
++#include "cpu_vendorid.h"
 +
-+#include "hw/boards.h"
-+#include "hw/char/serial-mm.h"
-+#include "hw/ide/pci.h"
-+#include "hw/ide/ahci-pci.h"
-+#include "hw/loader.h"
-+#include "hw/riscv/cps.h"
-+#include "hw/pci-host/xilinx-pcie.h"
-+#include "hw/qdev-properties.h"
-+#include "qapi/error.h"
-+#include "qemu/error-report.h"
-+#include "qemu/log.h"
-+#include "chardev/char.h"
-+#include "system/address-spaces.h"
-+#include "system/device_tree.h"
-+#include "system/system.h"
-+#include "system/qtest.h"
-+#include "system/runstate.h"
++/* Static MIPS CSR state storage */
++static struct {
++    uint64_t tvec;
++    uint64_t config[12];
++    uint64_t pmacfg[16];
++} mips_csr_state;
 +
-+#include <libfdt.h>
-+#include "qom/object.h"
++/* MIPS CSR */
++#define CSR_MIPSTVEC        0x7c0
++#define CSR_MIPSCONFIG0     0x7d0
++#define CSR_MIPSCONFIG1     0x7d1
++#define CSR_MIPSCONFIG2     0x7d2
++#define CSR_MIPSCONFIG3     0x7d3
++#define CSR_MIPSCONFIG4     0x7d4
++#define CSR_MIPSCONFIG5     0x7d5
++#define CSR_MIPSCONFIG6     0x7d6
++#define CSR_MIPSCONFIG7     0x7d7
++#define CSR_MIPSCONFIG8     0x7d8
++#define CSR_MIPSCONFIG9     0x7d9
++#define CSR_MIPSCONFIG10    0x7da
++#define CSR_MIPSCONFIG11    0x7db
++#define CSR_MIPSPMACFG0     0x7e0
++#define CSR_MIPSPMACFG1     0x7e1
++#define CSR_MIPSPMACFG2     0x7e2
++#define CSR_MIPSPMACFG3     0x7e3
++#define CSR_MIPSPMACFG4     0x7e4
++#define CSR_MIPSPMACFG5     0x7e5
++#define CSR_MIPSPMACFG6     0x7e6
++#define CSR_MIPSPMACFG7     0x7e7
++#define CSR_MIPSPMACFG8     0x7e8
++#define CSR_MIPSPMACFG9     0x7e9
++#define CSR_MIPSPMACFG10    0x7ea
++#define CSR_MIPSPMACFG11    0x7eb
++#define CSR_MIPSPMACFG12    0x7ec
++#define CSR_MIPSPMACFG13    0x7ed
++#define CSR_MIPSPMACFG14    0x7ee
++#define CSR_MIPSPMACFG15    0x7ef
 +
-+#define TYPE_MIPS_BOSTON_AIA "mips-boston-aia"
-+typedef struct BostonState BostonState;
-+DECLARE_INSTANCE_CHECKER(BostonState, BOSTON,
-+                         TYPE_MIPS_BOSTON_AIA)
++static RISCVException any(CPURISCVState *env, int csrno)
++{
++    return RISCV_EXCP_NONE;
++}
 +
-+enum {
-+    BOSTON_PCIE2,
-+    BOSTON_PCIE2_MMIO,
-+    BOSTON_PLATREG,
-+    BOSTON_UART,
-+    BOSTON_LCD,
-+    BOSTON_FLASH,
-+    BOSTON_HIGHDDR,
++static RISCVException read_mipstvec(CPURISCVState *env, int csrno,
++                                    target_ulong *val)
++{
++    *val =3D mips_csr_state.tvec;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_mipstvec(CPURISCVState *env, int csrno,
++                                     target_ulong val, uintptr_t ra)
++{
++    mips_csr_state.tvec =3D val;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_mipsconfig(CPURISCVState *env, int csrno,
++                                      target_ulong *val)
++{
++    *val =3D mips_csr_state.config[csrno - CSR_MIPSCONFIG0];
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_mipsconfig(CPURISCVState *env, int csrno,
++                                       target_ulong val, uintptr_t ra)
++{
++    mips_csr_state.config[csrno - CSR_MIPSCONFIG0] =3D val;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_mipspmacfg(CPURISCVState *env, int csrno,
++                                      target_ulong *val)
++{
++    *val =3D mips_csr_state.pmacfg[csrno - CSR_MIPSPMACFG0];
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_mipspmacfg(CPURISCVState *env, int csrno,
++                                       target_ulong val, uintptr_t ra)
++{
++    mips_csr_state.pmacfg[csrno - CSR_MIPSPMACFG0] =3D val;
++    return RISCV_EXCP_NONE;
++}
++
++const RISCVCSR mips_csr_list[] =3D {
++    {
++        .csrno =3D CSR_MIPSTVEC,
++        .csr_ops =3D { "mipstvec", any, read_mipstvec, write_mipstvec }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG0,
++        .csr_ops =3D { "mipsconfig0", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG1,
++        .csr_ops =3D { "mipsconfig1", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG2,
++        .csr_ops =3D { "mipsconfig2", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG3,
++        .csr_ops =3D { "mipsconfig3", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG4,
++        .csr_ops =3D { "mipsconfig4", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG5,
++        .csr_ops =3D { "mipsconfig5", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG6,
++        .csr_ops =3D { "mipsconfig6", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG7,
++        .csr_ops =3D { "mipsconfig7", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG8,
++        .csr_ops =3D { "mipsconfig8", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG9,
++        .csr_ops =3D { "mipsconfig9", any, read_mipsconfig, write_mipsconf=
+ig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG10,
++        .csr_ops =3D { "mipsconfig10", any, read_mipsconfig, write_mipscon=
+fig }
++    },
++    {
++        .csrno =3D CSR_MIPSCONFIG11,
++        .csr_ops =3D { "mipsconfig11", any, read_mipsconfig, write_mipscon=
+fig }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG0,
++        .csr_ops =3D { "mipspmacfg0", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG1,
++        .csr_ops =3D { "mipspmacfg1", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG2,
++        .csr_ops =3D { "mipspmacfg2", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG3,
++        .csr_ops =3D { "mipspmacfg3", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG4,
++        .csr_ops =3D { "mipspmacfg4", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG5,
++        .csr_ops =3D { "mipspmacfg5", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG6,
++        .csr_ops =3D { "mipspmacfg6", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG7,
++        .csr_ops =3D { "mipspmacfg7", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG8,
++        .csr_ops =3D { "mipspmacfg8", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG9,
++        .csr_ops =3D { "mipspmacfg9", any, read_mipspmacfg, write_mipspmac=
+fg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG10,
++        .csr_ops =3D { "mipspmacfg10", any, read_mipspmacfg, write_mipspma=
+cfg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG11,
++        .csr_ops =3D { "mipspmacfg11", any, read_mipspmacfg, write_mipspma=
+cfg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG12,
++        .csr_ops =3D { "mipspmacfg12", any, read_mipspmacfg, write_mipspma=
+cfg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG13,
++        .csr_ops =3D { "mipspmacfg13", any, read_mipspmacfg, write_mipspma=
+cfg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG14,
++        .csr_ops =3D { "mipspmacfg14", any, read_mipspmacfg, write_mipspma=
+cfg }
++    },
++    {
++        .csrno =3D CSR_MIPSPMACFG15,
++        .csr_ops =3D { "mipspmacfg15", any, read_mipspmacfg, write_mipspma=
+cfg }
++    },
++    { },
 +};
-+
-+static const MemMapEntry boston_memmap[] =3D {
-+    [BOSTON_PCIE2] =3D      { 0x14000000,     0x2000000 },
-+    [BOSTON_PCIE2_MMIO] =3D { 0x16000000,      0x100000 },
-+    [BOSTON_PLATREG] =3D    { 0x17ffd000,        0x1000 },
-+    [BOSTON_UART] =3D       { 0x17ffe000,          0x20 },
-+    [BOSTON_LCD] =3D        { 0x17fff000,           0x8 },
-+    [BOSTON_FLASH] =3D      { 0x18000000,     0x8000000 },
-+    [BOSTON_HIGHDDR] =3D    { 0x80000000,           0x0 },
-+};
-+
-+/* Interrupt numbers for APLIC. */
-+#define UART_INT 4
-+#define PCIE2_INT 7
-+
-+struct BostonState {
-+    SysBusDevice parent_obj;
-+
-+    MachineState *mach;
-+    RISCVCPSState cps;
-+    SerialMM *uart;
-+
-+    CharBackend lcd_display;
-+    char lcd_content[8];
-+    bool lcd_inited;
-+};
-+
-+enum boston_plat_reg {
-+    PLAT_FPGA_BUILD     =3D 0x00,
-+    PLAT_CORE_CL        =3D 0x04,
-+    PLAT_WRAPPER_CL     =3D 0x08,
-+    PLAT_SYSCLK_STATUS  =3D 0x0c,
-+    PLAT_SOFTRST_CTL    =3D 0x10,
-+#define PLAT_SOFTRST_CTL_SYSRESET       (1 << 4)
-+    PLAT_DDR3_STATUS    =3D 0x14,
-+#define PLAT_DDR3_STATUS_LOCKED         (1 << 0)
-+#define PLAT_DDR3_STATUS_CALIBRATED     (1 << 2)
-+#define PLAT_DDR3_INTERFACE_RESET       (1 << 3)
-+    PLAT_PCIE_STATUS    =3D 0x18,
-+#define PLAT_PCIE_STATUS_PCIE0_LOCKED   (1 << 0)
-+#define PLAT_PCIE_STATUS_PCIE1_LOCKED   (1 << 8)
-+#define PLAT_PCIE_STATUS_PCIE2_LOCKED   (1 << 16)
-+    PLAT_FLASH_CTL      =3D 0x1c,
-+    PLAT_SPARE0         =3D 0x20,
-+    PLAT_SPARE1         =3D 0x24,
-+    PLAT_SPARE2         =3D 0x28,
-+    PLAT_SPARE3         =3D 0x2c,
-+    PLAT_MMCM_DIV       =3D 0x30,
-+#define PLAT_MMCM_DIV_CLK0DIV_SHIFT     0
-+#define PLAT_MMCM_DIV_INPUT_SHIFT       8
-+#define PLAT_MMCM_DIV_MUL_SHIFT         16
-+#define PLAT_MMCM_DIV_CLK1DIV_SHIFT     24
-+    PLAT_BUILD_CFG      =3D 0x34,
-+#define PLAT_BUILD_CFG_IOCU_EN          (1 << 0)
-+#define PLAT_BUILD_CFG_PCIE0_EN         (1 << 1)
-+#define PLAT_BUILD_CFG_PCIE1_EN         (1 << 2)
-+#define PLAT_BUILD_CFG_PCIE2_EN         (1 << 3)
-+    PLAT_DDR_CFG        =3D 0x38,
-+#define PLAT_DDR_CFG_SIZE               (0xf << 0)
-+#define PLAT_DDR_CFG_MHZ                (0xfff << 4)
-+    PLAT_NOC_PCIE0_ADDR =3D 0x3c,
-+    PLAT_NOC_PCIE1_ADDR =3D 0x40,
-+    PLAT_NOC_PCIE2_ADDR =3D 0x44,
-+    PLAT_SYS_CTL        =3D 0x48,
-+};
-+
-+static void boston_lcd_event(void *opaque, QEMUChrEvent event)
-+{
-+    BostonState *s =3D opaque;
-+    if (event =3D=3D CHR_EVENT_OPENED && !s->lcd_inited) {
-+        qemu_chr_fe_printf(&s->lcd_display, "        ");
-+        s->lcd_inited =3D true;
-+    }
-+}
-+
-+static uint64_t boston_lcd_read(void *opaque, hwaddr addr,
-+                                unsigned size)
-+{
-+    BostonState *s =3D opaque;
-+    uint64_t val =3D 0;
-+
-+    switch (size) {
-+    case 8:
-+        val |=3D (uint64_t)s->lcd_content[(addr + 7) & 0x7] << 56;
-+        val |=3D (uint64_t)s->lcd_content[(addr + 6) & 0x7] << 48;
-+        val |=3D (uint64_t)s->lcd_content[(addr + 5) & 0x7] << 40;
-+        val |=3D (uint64_t)s->lcd_content[(addr + 4) & 0x7] << 32;
-+        /* fall through */
-+    case 4:
-+        val |=3D (uint64_t)s->lcd_content[(addr + 3) & 0x7] << 24;
-+        val |=3D (uint64_t)s->lcd_content[(addr + 2) & 0x7] << 16;
-+        /* fall through */
-+    case 2:
-+        val |=3D (uint64_t)s->lcd_content[(addr + 1) & 0x7] << 8;
-+        /* fall through */
-+    case 1:
-+        val |=3D (uint64_t)s->lcd_content[(addr + 0) & 0x7];
-+        break;
-+    }
-+
-+    return val;
-+}
-+
-+static void boston_lcd_write(void *opaque, hwaddr addr,
-+                             uint64_t val, unsigned size)
-+{
-+    BostonState *s =3D opaque;
-+
-+    switch (size) {
-+    case 8:
-+        s->lcd_content[(addr + 7) & 0x7] =3D val >> 56;
-+        s->lcd_content[(addr + 6) & 0x7] =3D val >> 48;
-+        s->lcd_content[(addr + 5) & 0x7] =3D val >> 40;
-+        s->lcd_content[(addr + 4) & 0x7] =3D val >> 32;
-+        /* fall through */
-+    case 4:
-+        s->lcd_content[(addr + 3) & 0x7] =3D val >> 24;
-+        s->lcd_content[(addr + 2) & 0x7] =3D val >> 16;
-+        /* fall through */
-+    case 2:
-+        s->lcd_content[(addr + 1) & 0x7] =3D val >> 8;
-+        /* fall through */
-+    case 1:
-+        s->lcd_content[(addr + 0) & 0x7] =3D val;
-+        break;
-+    }
-+
-+    qemu_chr_fe_printf(&s->lcd_display,
-+                       "\r%-8.8s", s->lcd_content);
-+}
-+
-+static const MemoryRegionOps boston_lcd_ops =3D {
-+    .read =3D boston_lcd_read,
-+    .write =3D boston_lcd_write,
-+    .endianness =3D DEVICE_NATIVE_ENDIAN,
-+};
-+
-+static uint64_t boston_platreg_read(void *opaque, hwaddr addr,
-+                                    unsigned size)
-+{
-+    BostonState *s =3D opaque;
-+    uint32_t gic_freq, val;
-+
-+    if (size !=3D 4) {
-+        qemu_log_mask(LOG_UNIMP, "%uB platform register read\n", size);
-+        return 0;
-+    }
-+
-+    switch (addr & 0xffff) {
-+    case PLAT_FPGA_BUILD:
-+    case PLAT_CORE_CL:
-+    case PLAT_WRAPPER_CL:
-+        return 0;
-+    case PLAT_DDR3_STATUS:
-+        return PLAT_DDR3_STATUS_LOCKED | PLAT_DDR3_STATUS_CALIBRATED
-+               | PLAT_DDR3_INTERFACE_RESET;
-+    case PLAT_MMCM_DIV:
-+        gic_freq =3D 25000000 / 1000000;
-+        val =3D gic_freq << PLAT_MMCM_DIV_INPUT_SHIFT;
-+        val |=3D 1 << PLAT_MMCM_DIV_MUL_SHIFT;
-+        val |=3D 1 << PLAT_MMCM_DIV_CLK0DIV_SHIFT;
-+        val |=3D 1 << PLAT_MMCM_DIV_CLK1DIV_SHIFT;
-+        return val;
-+    case PLAT_BUILD_CFG:
-+        val =3D PLAT_BUILD_CFG_PCIE0_EN;
-+        val |=3D PLAT_BUILD_CFG_PCIE1_EN;
-+        val |=3D PLAT_BUILD_CFG_PCIE2_EN;
-+        return val;
-+    case PLAT_DDR_CFG:
-+        val =3D s->mach->ram_size / GiB;
-+        assert(!(val & ~PLAT_DDR_CFG_SIZE));
-+        val |=3D PLAT_DDR_CFG_MHZ;
-+        return val;
-+    default:
-+        qemu_log_mask(LOG_UNIMP, "Read platform register 0x%" HWADDR_PRIx =
-"\n",
-+                      addr & 0xffff);
-+        return 0;
-+    }
-+}
-+
-+static void boston_platreg_write(void *opaque, hwaddr addr,
-+                                 uint64_t val, unsigned size)
-+{
-+    if (size !=3D 4) {
-+        qemu_log_mask(LOG_UNIMP, "%uB platform register write\n", size);
-+        return;
-+    }
-+
-+    switch (addr & 0xffff) {
-+    case PLAT_FPGA_BUILD:
-+    case PLAT_CORE_CL:
-+    case PLAT_WRAPPER_CL:
-+    case PLAT_DDR3_STATUS:
-+    case PLAT_PCIE_STATUS:
-+    case PLAT_MMCM_DIV:
-+    case PLAT_BUILD_CFG:
-+    case PLAT_DDR_CFG:
-+        /* read only */
-+        break;
-+    case PLAT_SOFTRST_CTL:
-+        if (val & PLAT_SOFTRST_CTL_SYSRESET) {
-+            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
-+        }
-+        break;
-+    default:
-+        qemu_log_mask(LOG_UNIMP, "Write platform register 0x%" HWADDR_PRIx
-+                      " =3D 0x%" PRIx64 "\n", addr & 0xffff, val);
-+        break;
-+    }
-+}
-+
-+static const MemoryRegionOps boston_platreg_ops =3D {
-+    .read =3D boston_platreg_read,
-+    .write =3D boston_platreg_write,
-+    .endianness =3D DEVICE_NATIVE_ENDIAN,
-+};
-+
-+static const TypeInfo boston_device =3D {
-+    .name          =3D TYPE_MIPS_BOSTON_AIA,
-+    .parent        =3D TYPE_SYS_BUS_DEVICE,
-+    .instance_size =3D sizeof(BostonState),
-+};
-+
-+static void boston_register_types(void)
-+{
-+    type_register_static(&boston_device);
-+}
-+type_init(boston_register_types)
-+
-+#define NUM_INSNS 6
-+static void gen_firmware(uint32_t *p)
-+{
-+    int i;
-+    uint32_t reset_vec[NUM_INSNS] =3D {
-+           /* CM relocate */
-+           0x1fb802b7,     /* li   t0,0x1fb80000   */
-+           0x16100337,     /* li   t1,0x16100000   */
-+           0x0062b423,     /* sd   t1,8(t0)        */
-+           /* Jump to 0x80000000 */
-+           0x00100293,     /* li   t0,1            */
-+           0x01f29293,     /* slli t0,t0,1f        */
-+           0x00028067      /* jr   t0              */
-+    };
-+
-+    for (i =3D 0; i < NUM_INSNS; i++) {
-+        *p++ =3D reset_vec[i];
-+    }
-+}
-+
-+static inline XilinxPCIEHost *
-+xilinx_pcie_init(MemoryRegion *sys_mem, uint32_t bus_nr,
-+                 hwaddr cfg_base, uint64_t cfg_size,
-+                 hwaddr mmio_base, uint64_t mmio_size,
-+                 qemu_irq irq)
-+{
-+    DeviceState *dev;
-+    MemoryRegion *cfg, *mmio;
-+
-+    dev =3D qdev_new(TYPE_XILINX_PCIE_HOST);
-+
-+    qdev_prop_set_uint32(dev, "bus_nr", bus_nr);
-+    qdev_prop_set_uint64(dev, "cfg_base", cfg_base);
-+    qdev_prop_set_uint64(dev, "cfg_size", cfg_size);
-+    qdev_prop_set_uint64(dev, "mmio_base", mmio_base);
-+    qdev_prop_set_uint64(dev, "mmio_size", mmio_size);
-+
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+
-+    cfg =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
-+    memory_region_add_subregion_overlap(sys_mem, cfg_base, cfg, 0);
-+
-+    mmio =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
-+    memory_region_add_subregion_overlap(sys_mem, 0, mmio, 0);
-+
-+    qdev_connect_gpio_out_named(dev, "interrupt_out", 0, irq);
-+
-+    return XILINX_PCIE_HOST(dev);
-+}
-+
-+static void boston_mach_init(MachineState *machine)
-+{
-+    DeviceState *dev;
-+    BostonState *s;
-+    MemoryRegion *flash, *ddr_low_alias, *lcd, *platreg;
-+    MemoryRegion *sys_mem =3D get_system_memory();
-+    XilinxPCIEHost *pcie2;
-+    PCIDevice *pdev;
-+    AHCIPCIState *ich9;
-+    DriveInfo *hd[6];
-+    Chardev *chr;
-+    int fw_size;
-+
-+    if ((machine->ram_size % GiB) ||
-+        (machine->ram_size > (4 * GiB))) {
-+        error_report("Memory size must be 1GB, 2GB, 3GB, or 4GB");
-+        exit(1);
-+    }
-+
-+    if (machine->smp.cpus / machine->smp.cores / machine->smp.threads > 1)=
- {
-+        error_report(
-+            "Invalid -smp x,cores=3Dy,threads=3Dz. The max number of clust=
-ers "
-+            "supported is 1");
-+        exit(1);
-+    }
-+
-+    dev =3D qdev_new(TYPE_MIPS_BOSTON_AIA);
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+
-+    s =3D BOSTON(dev);
-+    s->mach =3D machine;
-+
-+    object_initialize_child(OBJECT(machine), "cps", &s->cps, TYPE_RISCV_CP=
-S);
-+    object_property_set_str(OBJECT(&s->cps), "cpu-type", machine->cpu_type=
-,
-+                            &error_fatal);
-+    object_property_set_uint(OBJECT(&s->cps), "num-vp", machine->smp.cpus,
-+                             &error_fatal);
-+    object_property_set_uint(OBJECT(&s->cps), "num-hart", machine->smp.thr=
-eads,
-+                             &error_fatal);
-+    object_property_set_uint(OBJECT(&s->cps), "num-core", machine->smp.cor=
-es,
-+                             &error_fatal);
-+    object_property_set_uint(OBJECT(&s->cps), "gcr-base", GCR_BASE_ADDR,
-+                             &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->cps), &error_fatal);
-+
-+    sysbus_mmio_map_overlap(SYS_BUS_DEVICE(&s->cps), 0, 0, 1);
-+
-+    flash =3D  g_new(MemoryRegion, 1);
-+    memory_region_init_rom(flash, NULL, "boston.flash",
-+                           boston_memmap[BOSTON_FLASH].size, &error_fatal)=
-;
-+    memory_region_add_subregion_overlap(sys_mem,
-+                                        boston_memmap[BOSTON_FLASH].base,
-+                                        flash, 0);
-+
-+    memory_region_add_subregion_overlap(sys_mem,
-+                                        boston_memmap[BOSTON_HIGHDDR].base=
-,
-+                                        machine->ram, 0);
-+
-+    ddr_low_alias =3D g_new(MemoryRegion, 1);
-+    memory_region_init_alias(ddr_low_alias, NULL, "boston_low.ddr",
-+                             machine->ram, 0,
-+                             MIN(machine->ram_size, (256 * MiB)));
-+    memory_region_add_subregion_overlap(sys_mem, 0, ddr_low_alias, 0);
-+
-+    pcie2 =3D xilinx_pcie_init(sys_mem, 2,
-+                             boston_memmap[BOSTON_PCIE2].base,
-+                             boston_memmap[BOSTON_PCIE2].size,
-+                             boston_memmap[BOSTON_PCIE2_MMIO].base,
-+                             boston_memmap[BOSTON_PCIE2_MMIO].size,
-+                             qdev_get_gpio_in(s->cps.aplic, PCIE2_INT));
-+
-+    platreg =3D g_new(MemoryRegion, 1);
-+    memory_region_init_io(platreg, NULL, &boston_platreg_ops, s,
-+                          "boston-platregs",
-+                          boston_memmap[BOSTON_PLATREG].size);
-+    memory_region_add_subregion_overlap(sys_mem,
-+                          boston_memmap[BOSTON_PLATREG].base, platreg, 0);
-+
-+    s->uart =3D serial_mm_init(sys_mem, boston_memmap[BOSTON_UART].base, 2=
-,
-+                             qdev_get_gpio_in(s->cps.aplic, UART_INT), 100=
-00000,
-+                             serial_hd(0), DEVICE_NATIVE_ENDIAN);
-+
-+    lcd =3D g_new(MemoryRegion, 1);
-+    memory_region_init_io(lcd, NULL, &boston_lcd_ops, s, "boston-lcd", 0x8=
-);
-+    memory_region_add_subregion_overlap(sys_mem,
-+                                        boston_memmap[BOSTON_LCD].base, lc=
-d, 0);
-+
-+    chr =3D qemu_chr_new("lcd", "vc:320x240", NULL);
-+    qemu_chr_fe_init(&s->lcd_display, chr, NULL);
-+    qemu_chr_fe_set_handlers(&s->lcd_display, NULL, NULL,
-+                             boston_lcd_event, NULL, s, NULL, true);
-+
-+    pdev =3D pci_create_simple_multifunction(&PCI_BRIDGE(&pcie2->root)->se=
-c_bus,
-+                                           PCI_DEVFN(0, 0), TYPE_ICH9_AHCI=
-);
-+    ich9 =3D ICH9_AHCI(pdev);
-+    g_assert(ARRAY_SIZE(hd) =3D=3D ich9->ahci.ports);
-+    ide_drive_get(hd, ich9->ahci.ports);
-+    ahci_ide_create_devs(&ich9->ahci, hd);
-+
-+    if (machine->firmware) {
-+        fw_size =3D load_image_targphys(machine->firmware,
-+                                      0x1fc00000, 4 * MiB);
-+        if (fw_size =3D=3D -1) {
-+            error_report("unable to load firmware image '%s'",
-+                          machine->firmware);
-+            exit(1);
-+        }
-+        if (machine->kernel_filename) {
-+                fw_size =3D load_image_targphys(machine->kernel_filename,
-+                                              0x80000000, 64 * MiB);
-+                if (fw_size =3D=3D -1) {
-+                    error_report("unable to load kernel image '%s'",
-+                                  machine->kernel_filename);
-+                    exit(1);
-+                }
-+        }
-+    } else if (machine->kernel_filename) {
-+        fw_size =3D load_image_targphys(machine->kernel_filename,
-+                                      0x80000000, 64 * MiB);
-+        if (fw_size =3D=3D -1) {
-+            error_report("unable to load kernel image '%s'",
-+                          machine->kernel_filename);
-+            exit(1);
-+        }
-+
-+        gen_firmware(memory_region_get_ram_ptr(flash) + 0x7c00000);
-+    } else if (!qtest_enabled()) {
-+        error_report("Please provide either a -kernel or -bios argument");
-+        exit(1);
-+    }
-+}
-+
-+static void boston_mach_class_init(MachineClass *mc)
-+{
-+    mc->desc =3D "MIPS Boston-aia";
-+    mc->init =3D boston_mach_init;
-+    mc->block_default_type =3D IF_IDE;
-+    mc->default_ram_size =3D 2 * GiB;
-+    mc->default_ram_id =3D "boston.ddr";
-+    mc->max_cpus =3D MAX_HARTS;
-+    mc->default_cpu_type =3D TYPE_RISCV_CPU_MIPS_P8700;
-+}
-+
-+DEFINE_MACHINE("boston-aia", boston_mach_class_init)
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 9023b80087..533472e22a 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -16,5 +16,6 @@ riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files(=
-'microblaze-v-generic.c
- riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan=
-_kmh.c'))
-=20
- riscv_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
-+riscv_ss.add(when: 'CONFIG_MIPS_BOSTON_AIA', if_true: files('boston-aia.c'=
-))
-=20
- hw_arch +=3D {'riscv': riscv_ss}
 --=20
 2.34.1
 
