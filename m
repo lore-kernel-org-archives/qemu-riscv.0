@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB815CCA474
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:15:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B75BCCAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:15:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3yRH-0002CF-EH; Wed, 01 Oct 2025 11:08:19 -0400
+	id 1v3ySC-00041u-Pi; Wed, 01 Oct 2025 11:09:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yQu-0001jz-64
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:07:56 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yRx-0003dX-Tw
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:09:02 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yPc-0000kV-BJ
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:07:54 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3f1aff41e7eso5518906f8f.0
- for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 08:06:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yQA-0000nl-Nf
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:09:00 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3fa528f127fso982221f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 08:06:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759331188; x=1759935988; darn=nongnu.org;
+ d=linaro.org; s=google; t=1759331213; x=1759936013; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HoIBFbfrsz0t0Xevzl+WovcI4TEmiT7XaJGhm9ak06U=;
- b=nlRfxxewELkEOoBWYOA6cRJ89bc1Z59JARKf3fadJUd/Ph/WL0EPsLYlsO1spmPER0
- yJ+trwz4rBlfLMd/aHhbNnzGrPq1gfW7EF0kRB4L5uehy7ciqhqRXjrjEeIrAvI9Yvtz
- h5sGzM98beDX1e5FiUhRZC4f/V+mRO05sbvgWxJ/mJ6hykC8tbvEs7TplkBJHAGCvaLT
- 4nJ2aGANSuliJWXHgiavbtgdYnOazKL10ga6ieuLpWFjxLUr/2bJDFL5VrWcxqBcjnch
- MavihMDuj8OvI3r9oVMkSZkbaaKS0IpUHTfeL6ExoXrbGxx4R9phWaMMl9kILfurr4eC
- rzrg==
+ bh=u2utxhkX+sqm/78vx0PLpcnsUSPgNTq+5sqtMIdFotg=;
+ b=gmTigabxhSUEiqAxFF041PIODyZBMpAZkqZ5qoF/N/9xO8f+7B3trs98mGZ2cVe8Dc
+ pQiaavG7YzIf4edTIvC8Q14Q8pin1bu3tol64yLfr0L0nXS9DpqIfj2h2hmUK9HxBXZl
+ fKviHNLALeoC1Xif2ZTEBVBzvga2B/4l9VluPb5vGHPQ04X31622XgEOjX4/NAjJc1h5
+ Qae5aRnPSne2xAYzncDFNY/CTU8tTiRNFpiS0jqLgiT5gp/TU7jFqtDg8i24TO+1Mt9O
+ cVv6RPqhIYN/+zyzmW2hj2YVNwtredrkbkPrVLJvt0YyP0aHm90Hm6C4GvCWGixiZ4Lu
+ tzag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759331188; x=1759935988;
+ d=1e100.net; s=20230601; t=1759331213; x=1759936013;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HoIBFbfrsz0t0Xevzl+WovcI4TEmiT7XaJGhm9ak06U=;
- b=d4N62UaaSeChHk0u2ewKIWSzdMBdu8mtnw0pC62/D7a0O0GcDmTSQuc6hyANj9TbFu
- ICbT9JscY3ZpsXBHvZnXc8wcYfMExBQWgUFN+yPVw4yOHr1dnIN1y9uPp9N3cXD80pxu
- 45SXVj1FlNW2VcCTAfz7eBo0Vuc7oc3Bwf56GQhKyJy46l93bcDDdb9WOlyoiU2L9GRr
- nyfICQGCFkxhIaOVVxq0X2AlRISK+cGOGFmSfgtDtUSsmynUq5ts5EYEf28XlRDJD7nK
- 4Ta2UCWQKo4Xuh8hMW6u6CezKdIaQBnScZxp5KpYJAqsRquMcuSFcXZ8xLp/XqOS8hO9
- /jgw==
+ bh=u2utxhkX+sqm/78vx0PLpcnsUSPgNTq+5sqtMIdFotg=;
+ b=iO0mWeuc6qGviq1EF25ewzrfk0TUUrw2n6ok0dTGfdVzvNC0ARlFYMADGEQvuamiWq
+ EVhUQb46ftC+UT/tfbFfeqQg3PMEZwXtyx5DyeTJUZSZe/QAK/h7l6YPBiIMFyqpuyVt
+ 2gU0+nEiImtf7PjFH1wQOwJgVE2MOeOYcLng2p4gNO5ohKJ1E9kMXZClseoJnhBMkYU+
+ rRcFBcSCIXqPlpkHBjbuFcI1F6u0OidP8zuD4sHROGeZju72AO7CYDzapGKB+hjg8GkA
+ wHDQT+NJHjCGkyQO7ohT93VjMWApGjyUWVzIk+dQfqRmr2IGaogHQiUL3GD5WQd9lArO
+ KQVA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2pe7SF/fWJS4tXV/ScfYCJ8avDueSPaKIvQhRcc6x+uRDjkeovYxOJJNhk0ZQzAwfivhE+lPzRlYw@nongnu.org
-X-Gm-Message-State: AOJu0YxK6KcCXxh9nT3/sh3gRnnD4ESZGNARwlsotXtMseGL/tfYHzJN
- vl/AXSt3AwyDoCbJyg0VlcbhZPnnCpAGIauicHrIedHeu2KTv4VGhkGmqwinQtCjZx0=
-X-Gm-Gg: ASbGncv+3+0aOrDj40GIvN8Oiqk5gk4c3AYjoRu4JKKoKCb4tOfY2Le45f2ktfiW9FM
- G+Wzk2PQpcLCh2RlCPuYGbcCpJtSgU/APYodhrZ4gtFJowCQHDHaJJT1Eq8HHZcm900dO3VO8z4
- osxORr+84f11hWFJhfg4oYNG+SbeyqeiihYrINP/7x1sa+NA4Pw0UNBuWiNMawTnYGvzDIn/BZa
- jHaxBo8fA8zGCsRI3PGYJGiOEKVxZb8a2+SK7cNWmNuGMla9ddt5O0QFH5dIL+2XY4AGv3VXYz8
- IOqCNRYt+1Q51IMD5on7ncui6Hpdcq2Byzx2Q8xRkI+TEMbF2xuctz9ByfiRyVq/jIZe5V3m7Bi
- 9TYCLDoypGDz+l3u6RHJAaAOnTE9qkrmeHotMC5l0GXhNkcVTdpxV2zTvAuwoYLkYfSZCh+PsT1
- 5eoR2uvS621ONL+eg7tdMD
-X-Google-Smtp-Source: AGHT+IEJ81qtfG04DHe/4mEazGBmhdqjREcWngyjsG2pu87Vb24G+7/Rah+ejZND5Mr0zO8mHcd6Fw==
-X-Received: by 2002:a05:6000:2907:b0:3e0:2a95:dc90 with SMTP id
- ffacd0b85a97d-4255780b9dfmr3190951f8f.35.1759331187866; 
- Wed, 01 Oct 2025 08:06:27 -0700 (PDT)
+ AJvYcCXwCpXkTIIJ6h64+AtLqP5dIEE4iHWgacgFNg7OWbllsSJ4kkLo/kUyKAA6gXaJ2ncW5sw9GdjkR6eI@nongnu.org
+X-Gm-Message-State: AOJu0Yxlg60LhxjRQZ3kaTKh1/ThwXVlhE57ybZP1N5s07v5hsMbzWkO
+ mJUlIcVX6ZiD12wA5a5fDSaPFTPxUUXyS2uIjHGkMnaojsbpKDwCz17gXoWU7kyf9H0=
+X-Gm-Gg: ASbGncuq9RwPpd22LNlW9XAtxGAbFBD74qk25ygjGbf7PcCDCrkm/pHEpYwD6xzb5nt
+ yU1dqZBIjMtk4BAck9x61d2A3BWJUFShHTEWb77d5QZa8vczFXApEc9pZmqy47Srl8x8NgWIWfm
+ xllc6iPivxdHesS9qMuNfEN29cLsTFudm/ghj4Ys2fmtY4jmVd1b9PAqQ0deVxXXdWYXle6tSj0
+ V3Hg7qdAqVuU0fBRn/aj2Eve4ahgh5JhbRI0geXl19KWuV44d9nSZVmkNWTbPxODNVklXf6PeFI
+ 9Yh+Krq5lq/Ar+LrJGGP6W6BTMLP2oPFtlOYTLI+R9Y8byBVYxg5EKGSJjwhaddm+m1grqE+E+m
+ VlzfmoUeAHh/khq84nL2dacXan6aYJSf1B1usu0I2hoObvpjz6e0jxzQt2mYsnQjzcyCjNwNMph
+ DlVuhqy4gf0HN1BPPFikML
+X-Google-Smtp-Source: AGHT+IHQlTiEIstk+7CUIQ9ughVxQI2O9HjYcxri7FE/tcqSvLzS7IOVOzvkQ6bzZxQnQnC8KmW1Tg==
+X-Received: by 2002:a05:6000:2282:b0:415:15eb:216f with SMTP id
+ ffacd0b85a97d-425577761d4mr3497423f8f.2.1759331213296; 
+ Wed, 01 Oct 2025 08:06:53 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fb9e1b665sm27390018f8f.27.2025.10.01.08.06.26
+ ffacd0b85a97d-40fb72fb017sm27360874f8f.3.2025.10.01.08.06.52
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 01 Oct 2025 08:06:27 -0700 (PDT)
+ Wed, 01 Oct 2025 08:06:52 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
@@ -73,19 +73,20 @@ Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Peter Xu <peterx@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 11/22] target/arm: Get cpu first addr space with
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+Subject: [PATCH 16/22] target/microblaze: Get cpu first addr space with
  cpu_get_address_space()
-Date: Wed,  1 Oct 2025 17:05:16 +0200
-Message-ID: <20251001150529.14122-12-philmd@linaro.org>
+Date: Wed,  1 Oct 2025 17:05:21 +0200
+Message-ID: <20251001150529.14122-17-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251001150529.14122-1-philmd@linaro.org>
 References: <20251001150529.14122-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -114,41 +115,35 @@ helper.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/arm/cpu.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ target/microblaze/op_helper.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 30e29fd3153..f781d1cfd80 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -371,6 +371,7 @@ static void arm_cpu_reset_hold(Object *obj, ResetType type)
- 
-     if (arm_feature(env, ARM_FEATURE_M)) {
- #ifndef CONFIG_USER_ONLY
-+        AddressSpace *as = cpu_get_address_space(cs, 0);
-         uint32_t initial_msp; /* Loaded from 0x0 */
-         uint32_t initial_pc; /* Loaded from 0x4 */
-         uint8_t *rom;
-@@ -439,7 +440,7 @@ static void arm_cpu_reset_hold(Object *obj, ResetType type)
- 
-         /* Load the initial SP and PC from offset 0 and 4 in the vector table */
-         vecbase = env->v7m.vecbase[env->v7m.secure];
--        rom = rom_ptr_for_as(cs->as, vecbase, 8);
-+        rom = rom_ptr_for_as(as, vecbase, 8);
-         if (rom) {
-             /* Address zero is covered by ROM which hasn't yet been
-              * copied into physical memory.
-@@ -452,8 +453,8 @@ static void arm_cpu_reset_hold(Object *obj, ResetType type)
-              * it got copied into memory. In the latter case, rom_ptr
-              * will return a NULL pointer and we should use ldl_phys instead.
-              */
--            initial_msp = ldl_phys(cs->as, vecbase);
--            initial_pc = ldl_phys(cs->as, vecbase + 4);
-+            initial_msp = ldl_phys(as, vecbase);
-+            initial_pc = ldl_phys(as, vecbase + 4);
-         }
- 
-         qemu_log_mask(CPU_LOG_INT,
+diff --git a/target/microblaze/op_helper.c b/target/microblaze/op_helper.c
+index b8365b3b1d2..f07d795bdf3 100644
+--- a/target/microblaze/op_helper.c
++++ b/target/microblaze/op_helper.c
+@@ -448,8 +448,9 @@ void mb_cpu_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
+ uint32_t HELPER(NAME)(CPUMBState *env, uint64_t ea)                     \
+ {                                                                       \
+     CPUState *cs = env_cpu(env);                                        \
++    AddressSpace *as = cpu_get_address_space(cs, 0);                    \
+     MemTxResult txres;                                                  \
+-    TYPE ret = FUNC(cs->as, ea, MEMTXATTRS_UNSPECIFIED, &txres);        \
++    TYPE ret = FUNC(as, ea, MEMTXATTRS_UNSPECIFIED, &txres);            \
+     if (unlikely(txres != MEMTX_OK)) {                                  \
+         mb_transaction_failed_internal(cs, ea, ea, sizeof(TYPE),        \
+                                        MMU_DATA_LOAD, GETPC());         \
+@@ -467,8 +468,9 @@ LD_EA(lwea_le, uint32_t, address_space_ldl_le)
+ void HELPER(NAME)(CPUMBState *env, uint32_t data, uint64_t ea)          \
+ {                                                                       \
+     CPUState *cs = env_cpu(env);                                        \
++    AddressSpace *as = cpu_get_address_space(cs, 0);                    \
+     MemTxResult txres;                                                  \
+-    FUNC(cs->as, ea, data, MEMTXATTRS_UNSPECIFIED, &txres);             \
++    FUNC(as, ea, data, MEMTXATTRS_UNSPECIFIED, &txres);                 \
+     if (unlikely(txres != MEMTX_OK)) {                                  \
+         mb_transaction_failed_internal(cs, ea, ea, sizeof(TYPE),        \
+                                        MMU_DATA_STORE, GETPC());        \
 -- 
 2.51.0
 
