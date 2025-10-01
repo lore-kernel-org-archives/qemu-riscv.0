@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19BA8CAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:09:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE92CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:09:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3yPh-000100-Mr; Wed, 01 Oct 2025 11:06:42 -0400
+	id 1v3yQQ-0001JQ-QF; Wed, 01 Oct 2025 11:07:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yPD-0000da-9D
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:06:15 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yQ9-00017J-Nx
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:07:10 -0400
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yOs-0000cW-C1
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:06:09 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3ee13baf2e1so5553260f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 08:05:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3yPD-0000gR-Jx
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 11:07:05 -0400
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-46e3a50bc0fso52632695e9.3
+ for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 08:06:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759331136; x=1759935936; darn=nongnu.org;
+ d=linaro.org; s=google; t=1759331163; x=1759935963; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HB6dVSAgijIf0OiELv3g9qeoA98aSmcrlxKCBFTg3Sc=;
- b=dDt+hfIMZ0sc+rZcPGKVt6HVTP4fLcsh8iDSbq/pO/XZFaezzJVGt4OQmADlPHPSFe
- w81litRMLE3YCdigViuIE8XH1T7IPJDVe4KCF8g5Z9/F+AjcL8w4eTr7w6KwNGs4U04g
- besoZBkgqcD09wcsHrjH8fQn7Yv5CWaQJNIncHHixORnkLys61t6nMKcfZ1qxMG/wrjD
- E+X3Mv0tKQk6mYYbp40y+k9oQvChHLp5g53wSCVB51u1FmK9xmlBiS5dluELabEXqGfP
- IA2iGibbTJZcwLGUp1YRtidgFVWMuRPUNfbftWZWmNZFb1bDI00DZAsFqAeyo080JjFs
- RoWg==
+ bh=euVgIeZJHIZBB4YFcdJbP7PY3/zoj3Ofxhi7NManz1g=;
+ b=cvb1udqPLK+uvqZW5Bcao+00jOPDaZ2WMsZm3dkoUlDn/iC+9aSX59aUYYP+PMax0+
+ jwjEIu7tEB1xLGRozPMdgWsy3hCX9WnOTIOnkOya3QdgJpqE1u8HBrAUR3vhuKGtFHFL
+ cMEsOVzMHA6AvsM5q8ejhGji7kAzFbRwTG+OjkwumeNUb7Nmb4GgRsd67vUQ6RLE3Hm6
+ IwOlivKXUYAdR2UTX4mZ9O7KSFVHGqrSPlOqK6CYa96Z3uv80fujlj1PYMz85ttXyVX1
+ qYJoNkCfDMjp4DOzbIpsvIhufxEC7Y0Q5/EaengJdAFzACXTpHMXP2X+/kchnCLM8mRu
+ mxFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759331136; x=1759935936;
+ d=1e100.net; s=20230601; t=1759331163; x=1759935963;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HB6dVSAgijIf0OiELv3g9qeoA98aSmcrlxKCBFTg3Sc=;
- b=BiFKHuqUKjvcFN1kju33BTOUqaJLPDmcvJpG15J7zlaSDQJgAhHIbz/uUD8Q3HyAaF
- t19unCpQwhdtSXCO/4hkXQ7/Pr74rCcnlToRs23OwR1EtawI1kGm+vjkyKjpOOeFiieM
- OfMYgjvLc2ZAGYmN8ss6dCDn0f8BShb60mb7g0k2TYa5aB5z+8jTpFQ8U86tK8jZNWvD
- UZSPn7WLFHVS1WuD7i1ogoVGIRI54Iaj9hfL6A0357ztwxD8dp9JugV0MASOKsou/b4D
- ybJzQykYEA/XVIcjL8A+jXAaSjcwgIuaqEE+8qEY1gTCNjHln2oVgrREyeNYor/kGGt/
- GoWw==
+ bh=euVgIeZJHIZBB4YFcdJbP7PY3/zoj3Ofxhi7NManz1g=;
+ b=rx0JqLZzX3v9vMJiGtGjlZQ1Hi6z6m6zdoV2bsaP1yolypB+ijUOCPq1WNU0aMx94s
+ m7fQarKslimKrlYG6tp4qBkRDklwesquyiwlBnm69TCMmR3fgr5SNrPfe4bTyqt3+H/1
+ S6z8kNFOS11dg/l5lrSEfutWY9WkRhg3/t3pHJYRqOhEpynWUGvrMJ5RAuYd/RVNblFP
+ fh8kfLVfVT+SxyermcQv45fXIQembor0vbjkZjK9rtqst+OyrqyD34u3/vNmdpCAspaG
+ iG2g5SrzvJwzVrKEpufcoFV/xcctWBgtyBsr8EkEZLF2bOsQn2Sb8fuOSbAwYDei4kpf
+ goAw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWEbOX7lAIcaCi5M0GRqhnGihfxYEilw4QjtjvR2s0SYgY16wLS1VbEVHNqGY4Yxs0cQ56brDtWXaiB@nongnu.org
-X-Gm-Message-State: AOJu0YwUWmlVyBuU+9JIxBSJ7cPvUT1mp42n9ZuyD5vbmvoJ4DZTknJH
- D7dTMXtwCRiczFuSBTpQ7HZfzWKC3z7dr5xnqDlpFpDeZdOBmdb0Y/1nXcVunlf/ehye8tp9Ymf
- 9GPl+hSzT2w==
-X-Gm-Gg: ASbGncsGt6LOdloLlgKICyKIjSmBh2PIqeYUTKA9erZwoTqarVgU5WPA5ZDLE1IOUjc
- 5auz6VOqKB0QyrEuu/5i4OuZsqwTYDl/dWrwLIc6y8G40u2XrQy2E7qvDdK7+SkblzbMXZpztVu
- RvVr/qr5vrgxDJ3sY/AO0Ll1XfjEaXLyC0/KUn+RmPB3I2WuyiXCCP7y+9VBjiVUxL+hXRXP/E6
- DGmdzgo/HKE8LYBtldPFaYk/siXQEMVz45g80//XesqIAQK6CzIxunt60PY6hlm5wyv+dOyWMTD
- x4fbl757GXMhJ3xllQdBcU8yFRdd/Z8Jh8MaTuGwusL8XCxzYNqlb7zochI+pC2WDlJmOueDh9S
- H5EMGKy9iYEQu5R1dv/u1tZJp+kkVj2w4uXgBHNrDsI1I4eXv4JNBF7J/lQ+DN6aKpQisqniv04
- GAbeiaE95gRFmqSfPIFn5H
-X-Google-Smtp-Source: AGHT+IHMeKsaMCTPkbyDKm1cHAid6xl1/LyR0T9qwd1oAigNnHGQhd446WAh/h5rHCLDc8v9yEJq4g==
-X-Received: by 2002:a05:6000:4007:b0:3ec:d78d:8fcc with SMTP id
- ffacd0b85a97d-425577f01acmr3250637f8f.14.1759331136240; 
- Wed, 01 Oct 2025 08:05:36 -0700 (PDT)
+ AJvYcCVfjd3pGBU9P5oXiXi+j64okcFvxcyblJH/FdOHlx9SJGbIXFjVFRi/ZCtwQgmhRPGq2e7penSBkkTU@nongnu.org
+X-Gm-Message-State: AOJu0YwNy0jEbXBwWknPq9JIT2sp5dWiKV+m6Z4aXumX7NvbZiXt/Vhf
+ psd75X4yDaAwfPrij+B3eGTc9coQw2648+QSstu/sGD4WoSw2SLYcH8K0iQXEnCycwo=
+X-Gm-Gg: ASbGncugeBzJyp5ylKCTmk3CRMi+YD7XZ0H8bdyet3RiXD3znKKyy/MBsJ1M8Gh9dTR
+ X3WK95o8M2umSTU7BK2Yw6XPQx4s6g/cfbLN0ge8SZeVONGo4BnpLkZf1ptA6UtsxDOhTqMg6y4
+ m7DcKwDiJAhPC+3RR4oBbOOaK4jEu38J9DiqACkKlBJp9qFeQ8Qtiz1zhn+XpGvUjIq9NzEPtKM
+ 2kWkm20pe4ty6tqXUYLQh9nbC0YnHyq3e+LjSkzGBgWI+/Ng7JsLZTSgAFSZNViOieoxYrbOEPg
+ MdlR/0tDOnRDC1D2sdGMDX3TVpq02KR3mZ4RpBqo+lnNvGl8wqCAJlrmcbT5BktT1EX34q/6lqG
+ KDSi91d/8dvh6YBGs9jSQfw/WoMfUCNBWYQ5qCESKMOTTvMXnKoCiJz9BBXUAM4W8Y3PbaH4vQH
+ TeZn8q5VngzdSUaNqK9rpL
+X-Google-Smtp-Source: AGHT+IGzXR0Dkt5MMU7ttnv9s9jwILY1OZIbTD4RyJ+s9yDyfL+98y3Pen4wfa8ji9b+co3j6DmrEA==
+X-Received: by 2002:a05:600c:8b2c:b0:46e:37af:f90e with SMTP id
+ 5b1f17b1804b1-46e6126245cmr38125115e9.6.1759331162740; 
+ Wed, 01 Oct 2025 08:06:02 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fc5602df0sm27633907f8f.36.2025.10.01.08.05.35
+ ffacd0b85a97d-40fb7203b8asm27682148f8f.9.2025.10.01.08.06.01
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 01 Oct 2025 08:05:35 -0700 (PDT)
+ Wed, 01 Oct 2025 08:06:02 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
@@ -75,25 +74,26 @@ Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>
-Subject: [PATCH 01/22] system/qtest: Use &address_space_memory for first vCPU
- address space
-Date: Wed,  1 Oct 2025 17:05:06 +0200
-Message-ID: <20251001150529.14122-2-philmd@linaro.org>
+ Thomas Huth <huth@tuxfamily.org>, Laurent Vivier <laurent@vivier.eu>
+Subject: [PATCH 06/22] hw/m86k: Get cpu first addr space with
+ cpu_get_address_space()
+Date: Wed,  1 Oct 2025 17:05:11 +0200
+Message-ID: <20251001150529.14122-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251001150529.14122-1-philmd@linaro.org>
 References: <20251001150529.14122-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, T_SPF_HELO_TEMPERROR=0.01,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,144 +109,128 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The QTest framework implementation of the read/write[bwlq]
-commands doesn't care about which address space is used.
-Historically it accessed the default address space of the
-first vCPU (although this is dubious since there is no vCPU
-within QTest).
-
-On all targets the first address space is &address_space_memory:
-
-* Only ARM and X86 call cpu_address_space_init() to set an AS,
-  and the index #0 is &address_space_memory:
-
-    target/arm/cpu.h:2505:    ARMASIdx_NS = 0,
-    target/arm/cpu.c:2162:    cpu_address_space_init(cs, ARMASIdx_NS, "cpu-memory", cs->memory);
-
-    target/i386/cpu.h:2578:    X86ASIdx_MEM = 0,
-    target/i386/kvm/kvm-cpu.c:102:    cpu_address_space_init(cs, X86ASIdx_MEM, "cpu-memory", cs->memory);
-    target/i386/tcg/system/tcg-cpu.c:77:    cpu_address_space_init(cs, X86ASIdx_MEM, "cpu-memory", cs->memory);
-
-* Other targets don't call cpu_address_space_init() so default
-  to &address_space_memory.
-
-Directly use '&address_space_memory' instead of first_cpu->as.
+In order to remove the convenient CPUState::as field, access
+the vcpu first address space using the cpu_get_address_space()
+helper.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- system/qtest.c | 27 ++++++++++++++-------------
- 1 file changed, 14 insertions(+), 13 deletions(-)
+ hw/m68k/mcf5208.c |  6 ++++--
+ hw/m68k/q800.c    | 17 ++++++++++-------
+ hw/m68k/virt.c    |  5 +++--
+ 3 files changed, 17 insertions(+), 11 deletions(-)
 
-diff --git a/system/qtest.c b/system/qtest.c
-index fa42c9f9215..62bb9120dc7 100644
---- a/system/qtest.c
-+++ b/system/qtest.c
-@@ -16,6 +16,7 @@
- #include "system/qtest.h"
- #include "system/runstate.h"
- #include "chardev/char-fe.h"
-+#include "system/address-spaces.h"
- #include "system/ioport.h"
- #include "system/memory.h"
- #include "exec/tswap.h"
-@@ -512,22 +513,22 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
- 
-         if (words[0][5] == 'b') {
-             uint8_t data = value;
--            address_space_write(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED,
-+            address_space_write(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-                                 &data, 1);
-         } else if (words[0][5] == 'w') {
-             uint16_t data = value;
-             tswap16s(&data);
--            address_space_write(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED,
-+            address_space_write(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-                                 &data, 2);
-         } else if (words[0][5] == 'l') {
-             uint32_t data = value;
-             tswap32s(&data);
--            address_space_write(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED,
-+            address_space_write(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-                                 &data, 4);
-         } else if (words[0][5] == 'q') {
-             uint64_t data = value;
-             tswap64s(&data);
--            address_space_write(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED,
-+            address_space_write(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-                                 &data, 8);
+diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
+index 75cc076f787..9354829e8a4 100644
+--- a/hw/m68k/mcf5208.c
++++ b/hw/m68k/mcf5208.c
+@@ -206,12 +206,14 @@ static void m5208_rcm_write(void *opaque, hwaddr addr,
+ {
+     M68kCPU *cpu = opaque;
+     CPUState *cs = CPU(cpu);
++    AddressSpace *as = cpu_get_address_space(cs, 0);
++
+     switch (addr) {
+     case 0x0: /* RCR */
+         if (value & RCR_SOFTRST) {
+             cpu_reset(cs);
+-            cpu->env.aregs[7] = ldl_phys(cs->as, 0);
+-            cpu->env.pc = ldl_phys(cs->as, 4);
++            cpu->env.aregs[7] = ldl_phys(as, 0);
++            cpu->env.pc = ldl_phys(as, 4);
          }
-         qtest_send(chr, "OK\n");
-@@ -545,21 +546,21 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
+         break;
+     default:
+diff --git a/hw/m68k/q800.c b/hw/m68k/q800.c
+index 793b23f8155..9ec7122a4f8 100644
+--- a/hw/m68k/q800.c
++++ b/hw/m68k/q800.c
+@@ -107,10 +107,11 @@ static void main_cpu_reset(void *opaque)
+ {
+     M68kCPU *cpu = opaque;
+     CPUState *cs = CPU(cpu);
++    AddressSpace *as = cpu_get_address_space(cs, 0);
  
-         if (words[0][4] == 'b') {
-             uint8_t data;
--            address_space_read(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED,
-+            address_space_read(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-                                &data, 1);
-             value = data;
-         } else if (words[0][4] == 'w') {
-             uint16_t data;
--            address_space_read(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED,
-+            address_space_read(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-                                &data, 2);
-             value = tswap16(data);
-         } else if (words[0][4] == 'l') {
-             uint32_t data;
--            address_space_read(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED,
-+            address_space_read(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-                                &data, 4);
-             value = tswap32(data);
-         } else if (words[0][4] == 'q') {
--            address_space_read(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED,
-+            address_space_read(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-                                &value, 8);
-             tswap64s(&value);
+     cpu_reset(cs);
+-    cpu->env.aregs[7] = ldl_phys(cs->as, 0);
+-    cpu->env.pc = ldl_phys(cs->as, 4);
++    cpu->env.aregs[7] = ldl_phys(as, 0);
++    cpu->env.pc = ldl_phys(as, 4);
+ }
+ 
+ static void rerandomize_rng_seed(void *opaque)
+@@ -263,6 +264,7 @@ static void q800_machine_init(MachineState *machine)
+     const char *bios_name = machine->firmware ?: MACROM_FILENAME;
+     hwaddr parameters_base;
+     CPUState *cs;
++    AddressSpace *cpu_as;
+     DeviceState *dev;
+     SysBusESPState *sysbus_esp;
+     ESPState *esp;
+@@ -573,6 +575,7 @@ static void q800_machine_init(MachineState *machine)
+     macfb_mode = (NUBUS_MACFB(dev)->macfb).mode;
+ 
+     cs = CPU(&m->cpu);
++    cpu_as = cpu_get_address_space(cs, 0);
+     if (linux_boot) {
+         uint64_t high;
+         void *param_blob, *param_ptr, *param_rng_seed;
+@@ -590,7 +593,7 @@ static void q800_machine_init(MachineState *machine)
+             error_report("could not load kernel '%s'", kernel_filename);
+             exit(1);
          }
-@@ -579,7 +580,7 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-         g_assert(len);
+-        stl_phys(cs->as, 4, elf_entry); /* reset initial PC */
++        stl_phys(cpu_as, 4, elf_entry); /* reset initial PC */
+         parameters_base = (high + 1) & ~1;
+         param_ptr = param_blob;
  
-         data = g_malloc(len);
--        address_space_read(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED, data,
-+        address_space_read(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED, data,
-                            len);
- 
-         enc = qemu_hexdump_line(NULL, data, len, 0, 0);
-@@ -600,7 +601,7 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-         g_assert(ret == 0);
- 
-         data = g_malloc(len);
--        address_space_read(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED, data,
-+        address_space_read(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED, data,
-                            len);
-         b64_data = g_base64_encode(data, len);
-         qtest_sendf(chr, "OK %s\n", b64_data);
-@@ -634,7 +635,7 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-                 data[i] = 0;
-             }
+@@ -647,9 +650,9 @@ static void q800_machine_init(MachineState *machine)
          }
--        address_space_write(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED, data,
-+        address_space_write(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED, data,
-                             len);
-         g_free(data);
+         BOOTINFO0(param_ptr, BI_LAST);
+         rom_add_blob_fixed_as("bootinfo", param_blob, param_ptr - param_blob,
+-                              parameters_base, cs->as);
++                              parameters_base, cpu_as);
+         qemu_register_reset_nosnapshotload(rerandomize_rng_seed,
+-                            rom_ptr_for_as(cs->as, parameters_base,
++                            rom_ptr_for_as(cpu_as, parameters_base,
+                                            param_ptr - param_blob) +
+                             (param_rng_seed - param_blob));
+         g_free(param_blob);
+@@ -683,8 +686,8 @@ static void q800_machine_init(MachineState *machine)
  
-@@ -656,7 +657,7 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-         if (len) {
-             data = g_malloc(len);
-             memset(data, pattern, len);
--            address_space_write(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED,
-+            address_space_write(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
-                                 data, len);
-             g_free(data);
+             ptr = rom_ptr(MACROM_ADDR, bios_size);
+             assert(ptr != NULL);
+-            stl_phys(cs->as, 0, ldl_be_p(ptr));    /* reset initial SP */
+-            stl_phys(cs->as, 4,
++            stl_phys(cpu_as, 0, ldl_be_p(ptr));    /* reset initial SP */
++            stl_phys(cpu_as, 4,
+                      MACROM_ADDR + ldl_be_p(ptr + 4)); /* reset initial PC */
          }
-@@ -689,7 +690,7 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-             out_len = MIN(out_len, len);
+     }
+diff --git a/hw/m68k/virt.c b/hw/m68k/virt.c
+index 98cfe43c73a..e5ce0c28878 100644
+--- a/hw/m68k/virt.c
++++ b/hw/m68k/virt.c
+@@ -219,6 +219,7 @@ static void virt_init(MachineState *machine)
+ 
+     if (kernel_filename) {
+         CPUState *cs = CPU(cpu);
++        AddressSpace *as = cpu_get_address_space(cs, 0);
+         uint64_t high;
+         void *param_blob, *param_ptr, *param_rng_seed;
+ 
+@@ -301,9 +302,9 @@ static void virt_init(MachineState *machine)
          }
- 
--        address_space_write(first_cpu->as, addr, MEMTXATTRS_UNSPECIFIED, data,
-+        address_space_write(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED, data,
-                             len);
- 
-         qtest_send(chr, "OK\n");
+         BOOTINFO0(param_ptr, BI_LAST);
+         rom_add_blob_fixed_as("bootinfo", param_blob, param_ptr - param_blob,
+-                              parameters_base, cs->as);
++                              parameters_base, as);
+         qemu_register_reset_nosnapshotload(rerandomize_rng_seed,
+-                            rom_ptr_for_as(cs->as, parameters_base,
++                            rom_ptr_for_as(as, parameters_base,
+                                            param_ptr - param_blob) +
+                             (param_rng_seed - param_blob));
+         g_free(param_blob);
 -- 
 2.51.0
 
