@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65EB5CAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:37:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84070CCA470
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 15:42:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3yrq-0005tu-R3; Wed, 01 Oct 2025 11:35:47 -0400
+	id 1v3yvs-0002Vp-DN; Wed, 01 Oct 2025 11:39:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1v3yrZ-0005bl-HR; Wed, 01 Oct 2025 11:35:33 -0400
+ id 1v3yvp-0002T0-2A; Wed, 01 Oct 2025 11:39:53 -0400
 Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1v3yr9-0006SL-OJ; Wed, 01 Oct 2025 11:35:25 -0400
+ id 1v3yva-0007Ck-IJ; Wed, 01 Oct 2025 11:39:49 -0400
 Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 5588D56F2FF;
- Wed, 01 Oct 2025 17:34:25 +0200 (CEST)
+ by zero.eik.bme.hu (Postfix) with ESMTP id 4009F56F320;
+ Wed, 01 Oct 2025 17:39:07 +0200 (CEST)
 X-Virus-Scanned: amavis at eik.bme.hu
 Received: from zero.eik.bme.hu ([127.0.0.1])
  by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
- id l6Eqi0KpxAaJ; Wed,  1 Oct 2025 17:34:23 +0200 (CEST)
+ id 9ZthWBj0VZB0; Wed,  1 Oct 2025 17:39:05 +0200 (CEST)
 Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id 4E6F456FD27; Wed, 01 Oct 2025 17:34:23 +0200 (CEST)
+ id 2D7FD56F30C; Wed, 01 Oct 2025 17:39:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 4C91656FD26;
- Wed, 01 Oct 2025 17:34:23 +0200 (CEST)
-Date: Wed, 1 Oct 2025 17:34:23 +0200 (CEST)
+ by zero.eik.bme.hu (Postfix) with ESMTP id 2810256F298;
+ Wed, 01 Oct 2025 17:39:05 +0200 (CEST)
+Date: Wed, 1 Oct 2025 17:39:05 +0200 (CEST)
 From: BALATON Zoltan <balaton@eik.bme.hu>
 To: =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>
 cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-s390x@nongnu.org, 
@@ -39,22 +39,20 @@ cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, 
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, 
  Peter Xu <peterx@redhat.com>
-Subject: Re: [PATCH 02/22] disas/disas-mon: Get cpu first addr space with
- cpu_get_address_space()
-In-Reply-To: <20251001150529.14122-3-philmd@linaro.org>
-Message-ID: <543b8aa4-0fc4-7988-943c-55c3a462d07a@eik.bme.hu>
+Subject: Re: [PATCH 00/22] hw/core/cpu: Remove @CPUState::as field
+In-Reply-To: <20251001150529.14122-1-philmd@linaro.org>
+Message-ID: <be95d6c7-2d1e-98cb-8235-9a1aac05fb50@eik.bme.hu>
 References: <20251001150529.14122-1-philmd@linaro.org>
- <20251001150529.14122-3-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/mixed;
- boundary="3866299591-462952728-1759332863=:37311"
+ boundary="3866299591-1200896199-1759333145=:37311"
 Received-SPF: pass client-ip=2001:738:2001:2001::2001;
  envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,42 +71,109 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
   This message is in MIME format.  The first part should be readable text,
   while the remaining parts are likely unreadable without MIME-aware tools.
 
---3866299591-462952728-1759332863=:37311
-Content-Type: text/plain; charset=UTF-8; format=flowed
+--3866299591-1200896199-1759333145=:37311
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8BIT
 
 On Wed, 1 Oct 2025, Philippe Mathieu-Daudé wrote:
-> In order to remove the convenient CPUState::as field, access
-> the vcpu first address space using the cpu_get_address_space()
-> helper.
->
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
-> disas/disas-mon.c | 3 ++-
-> 1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/disas/disas-mon.c b/disas/disas-mon.c
-> index 9c693618c27..f2e45d16021 100644
-> --- a/disas/disas-mon.c
-> +++ b/disas/disas-mon.c
-> @@ -29,9 +29,10 @@ physical_read_memory(bfd_vma memaddr, bfd_byte *myaddr, int length,
->                      struct disassemble_info *info)
-> {
->     CPUDebug *s = container_of(info, CPUDebug, info);
-> +    AddressSpace *as = cpu_get_address_space(s->cpu, 0);
->     MemTxResult res;
->
-> -    res = address_space_read(s->cpu->as, memaddr, MEMTXATTRS_UNSPECIFIED,
-> +    res = address_space_read(as, memaddr, MEMTXATTRS_UNSPECIFIED,
->                              myaddr, length);
+> Instead of using the convenient @CPUState::as shortcut, use
 
-Does this now fit on one line?
+I'm not sure convenient in English means what you meant here at least it's 
+not clear to me what you mean. Does this make it more inconvenient? Maybe 
+you need a different word here.
+
+> cpu_get_address_space(asidx=0) to get the vCPU first address
+
+Could you move cpu_get_address_space() to the header and make it inline? I 
+know you had another series to reduce inline functions but this is just 
+one line and won't be inlined by the compiler unless it's defined in the 
+header. I don't know if this is relevant but it keeps closer to the 
+current behaviour.
 
 Regards,
 BALATON Zoltan
 
->     return res == MEMTX_OK ? 0 : EIO;
-> }
+> space.
 >
---3866299591-462952728-1759332863=:37311--
+> The goal is to reduce the risk of AS mis-use for targets
+> that uses multiple ASes per vCPU.
+>
+> Based-on: <20251001082127.65741-1-philmd@linaro.org>
+>
+> Philippe Mathieu-Daudé (22):
+>  system/qtest: Use &address_space_memory for first vCPU address space
+>  disas/disas-mon: Get cpu first addr space with cpu_get_address_space()
+>  monitor/hmp-cmds: Get cpu first addr space with
+>    cpu_get_address_space()
+>  hw/core/loader: Get cpu first addr space with cpu_get_address_space()
+>  hw/ppc: Get cpu first addr space with cpu_get_address_space()
+>  hw/m86k: Get cpu first addr space with cpu_get_address_space()
+>  target/xtensa: Get cpu first addr space with cpu_get_address_space()
+>  target/riscv: Get cpu first addr space with cpu_get_address_space()
+>  semihosting: Get cpu first addr space with cpu_get_address_space()
+>  target/alpha: Get cpu first addr space with cpu_get_address_space()
+>  target/arm: Get cpu first addr space with cpu_get_address_space()
+>  target/hppa: Get cpu first addr space with cpu_get_address_space()
+>  target/i386: Get cpu first addr space with cpu_get_address_space()
+>  target/loongarch: Get cpu first addr space with
+>    cpu_get_address_space()
+>  target/m68k: Get cpu first addr space with cpu_get_address_space()
+>  target/microblaze: Get cpu first addr space with
+>    cpu_get_address_space()
+>  target/ppc: Get cpu first addr space with cpu_get_address_space()
+>  target/s390x: Get cpu first addr space with cpu_get_address_space()
+>  target/sparc: Get cpu first addr space with cpu_get_address_space()
+>  hw/core/cpu: Remove @CPUState::as field
+>  exec/cpu: Declare cpu_memory_rw_debug() in 'hw/core/cpu.h' and
+>    document
+>  target/sparc: Reduce inclusions of 'exec/cpu-common.h'
+>
+> include/exec/cpu-common.h         |  4 ---
+> include/hw/core/cpu.h             | 23 +++++++++++--
+> target/ppc/mmu-hash32.h           | 12 ++++---
+> target/sparc/cpu.h                |  1 -
+> disas/disas-mon.c                 |  3 +-
+> hw/core/cpu-common.c              |  1 -
+> hw/core/generic-loader.c          |  5 +--
+> hw/intc/spapr_xive.c              |  5 +--
+> hw/m68k/mcf5208.c                 |  6 ++--
+> hw/m68k/q800.c                    | 17 ++++++----
+> hw/m68k/virt.c                    |  5 +--
+> hw/ppc/pegasos2.c                 |  2 +-
+> hw/ppc/spapr.c                    | 12 +++----
+> hw/ppc/spapr_hcall.c              | 55 ++++++++++++++++---------------
+> hw/ppc/spapr_iommu.c              |  4 +--
+> hw/ppc/spapr_nested.c             | 43 +++++++++++++-----------
+> monitor/hmp-cmds-target.c         |  3 +-
+> semihosting/arm-compat-semi.c     |  4 ++-
+> system/cpus.c                     |  2 +-
+> system/physmem.c                  | 10 ------
+> system/qtest.c                    | 27 +++++++--------
+> target/alpha/helper.c             |  8 +++--
+> target/arm/cpu.c                  |  7 ++--
+> target/hppa/int_helper.c          |  3 +-
+> target/i386/arch_memory_mapping.c | 10 +++---
+> target/loongarch/cpu_helper.c     |  5 +--
+> target/loongarch/tcg/tlb_helper.c |  7 ++--
+> target/m68k/helper.c              | 28 ++++++++--------
+> target/microblaze/op_helper.c     |  6 ++--
+> target/ppc/excp_helper.c          |  4 +--
+> target/ppc/mmu-book3s-v3.c        |  5 +--
+> target/ppc/mmu-hash32.c           |  6 ++--
+> target/ppc/mmu-hash64.c           | 12 ++++---
+> target/ppc/mmu-radix64.c          | 13 ++++----
+> target/riscv/cpu_helper.c         |  7 ++--
+> target/s390x/cpu-system.c         |  4 ++-
+> target/s390x/mmu_helper.c         |  9 ++---
+> target/s390x/tcg/excp_helper.c    | 10 +++---
+> target/s390x/tcg/mem_helper.c     |  6 ++--
+> target/sparc/helper.c             |  1 +
+> target/sparc/int64_helper.c       |  1 +
+> target/sparc/ldst_helper.c        | 22 +++++++------
+> target/sparc/mmu_helper.c         | 21 +++++++-----
+> target/xtensa/mmu_helper.c        |  3 +-
+> 44 files changed, 253 insertions(+), 189 deletions(-)
+>
+>
+--3866299591-1200896199-1759333145=:37311--
 
