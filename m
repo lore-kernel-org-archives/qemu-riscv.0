@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B09B7CAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 16:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E7F8CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Oct 2025 16:36:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v3zcP-0000nK-JX; Wed, 01 Oct 2025 12:23:53 -0400
+	id 1v3zoG-00068H-HM; Wed, 01 Oct 2025 12:36:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3zcO-0000m9-4N
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 12:23:52 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1v3zo9-00065a-Gn
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 12:36:03 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v3zcC-0005kD-1Y
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 12:23:51 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-46e504975dbso30094605e9.1
- for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 09:23:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1v3znz-0007IS-0u
+ for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 12:36:00 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-78af9ebe337so94156b3a.1
+ for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 09:35:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759335811; x=1759940611; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
+ d=linaro.org; s=google; t=1759336545; x=1759941345; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=VsyErOj0C4qTR0dhaSEh2ia15dVXw2WZRvV5/OWw62I=;
- b=Rp2+eXDETiO4RXtuEAbadvQ3UXRjyTJFfKQVPCNChl14wpSgpURAoRyz+XvOdk5lng
- 8/UY0wy1fUA12ILNY9K3ZD8KC6N+83VeANd7CYUNLqc63I2X3VuuOPJEIyodq8XcAIGB
- sn/FHvWLTiUoGcIjE8lQVmZZ8TRGC6GQEV+1u55fxq2X7m5XlZhMn7Y5tGvdzqQQSKYU
- pJzXHllHcnTw/wyT2cYo0HBXxBCj2UGsXtLqkTbV2AMLf3l2Foa26ATIrxlqeRYrdH8X
- zA3Z4mkrzmIG02eP8IZjjpkBH5GGYChMZTrFsuQDC84YAlN1EiKhgpTEy+RO7dofHm04
- 5o6Q==
+ bh=Yj1etB7dz6B2SrykECpHpVFrBoe/dfGwOm0Zu2It1m8=;
+ b=GdRMxeF4DirErAoPG0Unu5ycSq9pHlU/sblSB3JYKZdoVmbSCi+4z0rYtALuciMLhB
+ R1ZNLljMU+E/lGF8ZPgn5Enk0Ykng446wqP9dZOzha1Ef9JBqwcrDFiCui87qawLrriN
+ jgFR1yTcpFngJFiNFX3nchkCd2pvj3/dnhDhhl8cQYDuoTFV6HFNxAK5jb7TtXimskmG
+ odhkcf0vUkHVRcfFXfo27dBR/WarykYHz6u/cXcQ2jnx4Jqm9YDTmnwBrO2K1Q1mDjMN
+ 1hPsjcYVwx8mYrV2fnWj5c7pHw83VdU6AwlH/L84DfFBHQjXI49ynEm399DwH8u9bnRG
+ PMCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759335811; x=1759940611;
- h=content-transfer-encoding:in-reply-to:from:content-language
+ d=1e100.net; s=20230601; t=1759336545; x=1759941345;
+ h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VsyErOj0C4qTR0dhaSEh2ia15dVXw2WZRvV5/OWw62I=;
- b=wa8WkILfKuXKc7KATcyfigdSw9EDHFktcVSsdaDAd+Lu9tti+BGhPsloE6aeiCu7uY
- +lZCPVnEByc1EdkJEqh3udXG3K6BzeZ0vGkXT7ec13xtYA/t2yUjTMSuIhEHIwIAhiny
- 3R2mDZCZfK8ItkQO1BzbBFpdA3RWgczROhnfe2sZewQj8sC7/PfmrBtHJTpTwVh6imHm
- eHWoFmtuIn05j8+NO4UuVAMdKPENMu8eJNGYHMwlAEySmksqYPxWrE9g9hs3+LwWH+GY
- hlabacKXcvDcu0rnWlQX7WLoFBgnPZL6PhJ9R6Vuxj2fJkQYIydBZbl8kRD2WBML73fC
- vXJA==
+ bh=Yj1etB7dz6B2SrykECpHpVFrBoe/dfGwOm0Zu2It1m8=;
+ b=T/PYkUVKtZq+tkJ2BC3JdM3GYd2pT6jx4j9qve4bMk/lbP4/RFKj8f6w2m9qWKSlqw
+ ioFSQLLfgA2i2MH+T5BrozytxVUB2DOgnVr7BOfm7633h+ynGyu4sA5JCh09ro2cqqX1
+ xDIBn3K0r3ULhKAhk+v55QLo6C4LNb9FW9K3UyStnJzchpbXyOXTL8ZMlWEXJg3blR3k
+ XCFfDxdOL1+0QEzH5re0qrDhq8GzrYiTADN8WFcx4+oMWNH5KgNqi6hFIsu0s9JUq7oz
+ CVl6ltdtQ2wV+PRHPCKQvy6l/yvhsu0Ieo65udzR/eD+Mk0HGOSGhgJW7tEDYwuL6ic2
+ Htyw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCyOfwr9hw2x8djt8Yof//hLJDT2rfAKWsHiakqayCIL7QmRbfBjODZGPyzQ3NLTor1i9Wfo1qAJtx@nongnu.org
-X-Gm-Message-State: AOJu0YxEnuxq1OsJKD/eV9lMReySyHLE0vp8a3FujGBo7Ej0VJy0OTLd
- fp74VG+Md6ol8xR7aQcqQ2eHWR2WBAqnkqCH64AMZNsbP7Qn+X7bo+seYhp46ybrzi8=
-X-Gm-Gg: ASbGncst8QQZg+CaHScuvBAZo5T8nW/RMAJGznfrWk3C86cFkj6Bh82YKSH4REExbe+
- zqCIsFLum+eaC65eFnPuDMvx4xIV2rPeA098Fs2iaJhF6pG1xIhh2bCDpw4hUOCtq9lGytU+0rw
- lpWPFi1x6YeeVdF4APop+QjiCtUdJUnUSivpD4WDcCdsKcykoTYUKH7LTXJIn0zLxwYxW4Vpd65
- qf6/ejtcT7imkUEuitUmjCTCQ1w9fqsNKOSGnr7qlvDYqaEPPlgJHuLTHuXgkA6GpAswIJCLO3b
- Loj0jdB4HbEMSjK2r817h/efnCU0CDSnGbLWn2l1cLU5VFndjwLmuYnXjL0DAFaCE8EZASAuCKX
- dUMOHe1flTkC23d3KfjgpoR4Xj6QzCkeU9DJet4qBQwizn4ZNbxw2gqrihADNy/3v0Sl5IblWsV
- Eiqz8NWT8wVN5xlw==
-X-Google-Smtp-Source: AGHT+IHeoZu0ymi8Pfk0X0YHUUowtYfUT6O7ZFYxwRepAEs318Ow0exFrX3Q4sJq+PIpUItFz2JAAg==
-X-Received: by 2002:a05:600c:c4a4:b0:46d:996b:826f with SMTP id
- 5b1f17b1804b1-46e612dcfd0mr38375745e9.25.1759335811038; 
- Wed, 01 Oct 2025 09:23:31 -0700 (PDT)
-Received: from [192.168.69.221] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e619b86e1sm44201225e9.5.2025.10.01.09.23.29
+ AJvYcCVXeKG3M99pb+LP0OfVsH7PGp3UxWsKB9uL7MaaR9LO01vdjwjRm0a60kY9m/Lu66iyCyD+t/SmdyCP@nongnu.org
+X-Gm-Message-State: AOJu0Yxu0jYBkJQSTyuT7xwQuBM/1CARtFIo7tKRque3/kNQNwd7UJfA
+ Bbhv3fRlQ0jCM96AKe9oGoOwY66cGGoJISXqfgO8NTBYC8WsMb3a7JwY6LJ4MgZmwYw=
+X-Gm-Gg: ASbGncuwplUc1WBhr6PhybJr7et7UnK9k0dEJoWaiUUQn4P257EHq0cwkj/d5vO7XH1
+ sduaCG2Xm2NBYjruxtA+FYLTb9Skz86oYz97MnRmyfbA9JAniIV3e0oMPy3RSVZus+VRXdbIais
+ oqUNaglnA818fpLT9hrYyoD3ZvuQiN7NixJE4I26M6d01vZSNTIVHI8Eo+4NHn9g6+2ZaEFChA7
+ 2FjdGsIAYR0cud6nG9D5cOxjC1btj3ZrLwl0qztiHHRFXGYfhFllDafcoBziV1tkqaN8PyeXrSI
+ P1Q5BoPVhXcvz0Dy85cOHfHFAWEClKzPLnnedwRhnPdpaU6nbs6Sm8SzdumVuI3deqXu3jxVDw1
+ bFYMBx1qVP89WilkXegdi0z9Vl/g1i3YmA4vKf/mxSz2A4BnG9HpGigsNgbn29IP61+5M4geTNO
+ x243rHgsUCg/mW930dsjaC5wLOjpPfVx8=
+X-Google-Smtp-Source: AGHT+IF3EPkkHdN3dGaDsrKnobA5Ss2WAYPrZ1tSjTgLyD62juadCZr4IcGU0Nj7qL7nrey5zB8ggw==
+X-Received: by 2002:a05:6a21:9210:b0:2cd:5403:ed9d with SMTP id
+ adf61e73a8af0-321e3edc7bfmr5900224637.33.1759336544767; 
+ Wed, 01 Oct 2025 09:35:44 -0700 (PDT)
+Received: from ?IPV6:2607:fb91:1ec5:27b9:1bec:2e21:cc45:2345?
+ ([2607:fb91:1ec5:27b9:1bec:2e21:cc45:2345])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b6099d4dec5sm1811a12.30.2025.10.01.09.35.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Oct 2025 09:23:30 -0700 (PDT)
-Message-ID: <0c60b6e7-9e87-49aa-b00b-751c038ab8fa@linaro.org>
-Date: Wed, 1 Oct 2025 18:23:29 +0200
+ Wed, 01 Oct 2025 09:35:43 -0700 (PDT)
+Message-ID: <b5280074-e87c-4838-b816-eb9e42dd090c@linaro.org>
+Date: Wed, 1 Oct 2025 09:35:40 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/22] monitor/hmp-cmds: Get cpu first addr space with
- cpu_get_address_space()
-To: BALATON Zoltan <balaton@eik.bme.hu>
+Subject: Re: [PATCH 00/22] hw/core/cpu: Remove @CPUState::as field
+To: Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, Peter Xu
- <peterx@redhat.com>, "Dr. David Alan Gilbert" <dave@treblig.org>
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, Peter Xu <peterx@redhat.com>
 References: <20251001150529.14122-1-philmd@linaro.org>
- <20251001150529.14122-4-philmd@linaro.org>
- <2b87c3ee-2b25-bea5-3f73-bd089848d19e@eik.bme.hu>
+ <CAFEAcA-daogqBPxt72qTM6BuMuD1wuw+vXZwxLUQftwY2FZk=w@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <2b87c3ee-2b25-bea5-3f73-bd089848d19e@eik.bme.hu>
+In-Reply-To: <CAFEAcA-daogqBPxt72qTM6BuMuD1wuw+vXZwxLUQftwY2FZk=w@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,49 +110,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 1/10/25 17:35, BALATON Zoltan wrote:
-> On Wed, 1 Oct 2025, Philippe Mathieu-Daudé wrote:
->> In order to remove the convenient CPUState::as field, access
->> the vcpu first address space using the cpu_get_address_space()
->> helper.
+On 10/1/25 09:08, Peter Maydell wrote:
+> On Wed, 1 Oct 2025 at 16:05, Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
 >>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
->> monitor/hmp-cmds-target.c | 3 ++-
->> 1 file changed, 2 insertions(+), 1 deletion(-)
+>> Instead of using the convenient @CPUState::as shortcut, use
+>> cpu_get_address_space(asidx=0) to get the vCPU first address
+>> space.
 >>
->> diff --git a/monitor/hmp-cmds-target.c b/monitor/hmp-cmds-target.c
->> index e9820611466..602af851328 100644
->> --- a/monitor/hmp-cmds-target.c
->> +++ b/monitor/hmp-cmds-target.c
->> @@ -128,6 +128,8 @@ static void memory_dump(Monitor *mon, int count, 
->> int format, int wsize,
->>     uint8_t buf[16];
->>     uint64_t v;
->>     CPUState *cs = mon_get_cpu(mon);
->> +    AddressSpace *as = cs ? cpu_get_address_space(cs, 0)
->> +                          : &address_space_memory;
+>> The goal is to reduce the risk of AS mis-use for targets
+>> that uses multiple ASes per vCPU.
 > 
-> Why move from local scope to an upper level?
-
-Out of the while() loop to call it once only.
-
+> I'm not sure I agree with this. The cpu->as is handy for
+> the large number of targets which only use one AddressSpace:
+> which is everything except arm and x86 right now.
 > 
-> Regards,
-> BALATON Zoltan
-> 
->>     if (!cs && (format == 'i' || !is_physical)) {
->>         monitor_printf(mon, "Can not dump without CPU\n");
->> @@ -174,7 +176,6 @@ static void memory_dump(Monitor *mon, int count, 
->> int format, int wsize,
->>         if (l > line_size)
->>             l = line_size;
->>         if (is_physical) {
->> -            AddressSpace *as = cs ? cs->as : &address_space_memory;
->>             MemTxResult r = address_space_read(as, addr,
->>                                                MEMTXATTRS_UNSPECIFIED, 
->> buf, l);
->>             if (r != MEMTX_OK) {
->>
+> Targets that use multiple address spaces need to be careful
+> about which AS they use by definition. Unless we have a
+> track record of code in those targets carelessly using
+> cpu->as when it should do something else, I'm not sure
+> that there's a benefit that makes it worth making the
+> "use the one and only AS this CPU will ever have" more awkward.
 
+I agree.
+
+Moreover, '0' as a default is just as bad as cpu->as, because you're giving no thought to 
+the selection.  Similarly using MEMATTRS_UNSPECIFIED.  When such things matter, we need 
+the real attributes and/or as piped down from the proper memory reference.
+
+
+r~
 
