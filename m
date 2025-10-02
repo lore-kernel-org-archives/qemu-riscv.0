@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8A37CAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 01:37:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 185FBCAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 05:09:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v48Fc-0007Fi-V7; Wed, 01 Oct 2025 21:36:57 -0400
+	id 1v4BYP-0006Zy-Pj; Thu, 02 Oct 2025 01:08:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v48Fb-0007F5-8Q
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 21:36:55 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ id 1v4BY7-0006ZD-FY
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 01:08:17 -0400
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v48FB-0004qx-AF
- for qemu-riscv@nongnu.org; Wed, 01 Oct 2025 21:36:54 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-62fca01f0d9so1110138a12.3
- for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 18:36:22 -0700 (PDT)
+ id 1v4BXy-0003kz-Cf
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 01:08:14 -0400
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-636255b92c9so973148a12.3
+ for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 22:07:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759368977; x=1759973777; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1759381677; x=1759986477; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bqAIYH4cUrViqday2x3lYOEBhswzh2kJNYw97qnFaoA=;
- b=ER9hJcs5tfIsr88F6Q5Ra8TDxqf8VhTSfCaPecNi9jcQyg2JoxCIVHjnN75ZEWiNaP
- NnM8rBNK5zV3zp29M3lmUL5NNA1rFaslPsygjvLOR8aZFXYYWSaIUNk2NxP/MB0jsBeI
- ziL7mrGWnJUWudYgVRsqo7iOOXtFFTasKAsPWQ7rr1SfozQ8Esj/LIGfTYytaE3aLeoR
- XcMMutqnBtyeyfzcsNzhEaRxUyEOkiwGQkGhdEzNS6FJ7VJoglrMrxcmQB3RBcQ9t3qB
- SS2uI5iv6EW4LbwGjHlkeoZ8r4768HCBkPj7fpjRa5VddI7xa22oHHmyY7YjeJc1dliW
- CMjA==
+ bh=cSOUcqp2IlrIvHA8jMOKMPae7kynR4QEp3SeGZrNH6w=;
+ b=dXovyZQQ5OprmJC0nnB0Qug5hGACccfST3vVQPCcIVWECxHdg3Pnb5BV//p5IgsWX3
+ In4seiS68wFtH5rc3HzUYiSHcaQSEFR/cUYluuSCi3YlxKwXn32ZHwtNgNfajQRM4PJj
+ OEhgyUt8OOzfXAxC3gcP1CKw1d3S1rCYIOYFqNGHVehnfiYj5HefDXE/vViVNaEJxupu
+ mvwS9PtPGMO+0950NmxHt6QeX7wPyE9G+Ck+qQ3+uAIJnbqKagB2Bs9Mi7616XTv5Lvy
+ 4He2KFfuHzc2UpOyQSqL4hIfZk4yMfoE/NNBGlJzBiDGWL72g1Airp5aT9Dcp9nFXpjn
+ UYRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759368977; x=1759973777;
+ d=1e100.net; s=20230601; t=1759381677; x=1759986477;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bqAIYH4cUrViqday2x3lYOEBhswzh2kJNYw97qnFaoA=;
- b=xDgOfBM5DC79xu9Oo0+s0e5WBQvOh0rFc3r7r+UCXj4R2fyvf1NFAf4S7EwUg1fAVJ
- mmu5POW6/GdyZ4+1FPeUbtLBbnSkp+svmqa25nWyROo57UNs4modcq98pVmwYDU/+NlJ
- mjNn13ErpYX5iVCyrHRWP9j1NwtFhUAWwxvBGCvqLxZkg+xD5/8LRdeP3Alrsb3Gpmej
- NV/0NvTxmY1+fToeje4VlHf/2nDmc6hM/NM8YpqCpj5asnAoINVFdNZ4bwfm/G4Wl3cZ
- Helw3wtNJtS+JbDOzi4nYx2FM/SraTufi9/UlQNdQiSO6lqcr+qSOLrmACXcz4x5pWGM
- J0xw==
+ bh=cSOUcqp2IlrIvHA8jMOKMPae7kynR4QEp3SeGZrNH6w=;
+ b=qCPx72PBxeO09mKt96Vi5WsjbAqjdoytI6Vzs4DMe8bROxzToLn0VJ0OqtvogeMajj
+ QLdNJ/U5nIYgvY1rIleHAk6vSivsyhJhb+9qsNVLqlUfqk7aS5preVa9ZYSqC0D34tgy
+ 0vZ+HDTJ2ToxYPLg+QhisOe6QQc0PiPb1kmZEvzA4zcUboJ8xk/WGFW+k17Omou4R4+Z
+ FO8p716JilYlK1fyvqRA+0AanCkaX1jXbqPAlS3OYKu9A8phfc61R2YdlvWe77jUMMe6
+ ob5Wk5lhR41V2YsZMkmBBwFsgUt6ijfZT8R8SMKHY03e78C7RKELCDdDY+i/CXpjx1o6
+ y+tg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXo6KsAChrfBmltCyVXtwstnfDpVz5DnqY35UjBn7hUh2ba+VRotyDnNm8UyT8lUtAk62mWJwc/8opR@nongnu.org
-X-Gm-Message-State: AOJu0YxVjhmIAqwee3EwnPQro2BQjpazzIr6OgQBkCilELQJVySA44zw
- GDV7d/2ZnUXX+/Tqt/vKfxKTAaghX7ACMPpvje40dKCUv+KQf1Qayldc3oiF1Tli/7ecV3gsP65
- E/xVF3B25WPu9KwjvRkIG40cYRPqGhq4rgA==
-X-Gm-Gg: ASbGncvSdpiM0Wvq5pw1KjdeL/UBtmxiIpscRRKQq8B+P89knNCGc0r4k3zXEClUT71
- cRfJeHKaxv/BSmpnaqzKyemWgTiZ8YiuPLyse7jQWZd3k/JY3JO8Gv2f7/4mogDjO92dEd9Sizc
- QNLcVG8C1dJW6b8e03/iAeaNhQosFaXCn9Qedmu0UBMGzhX4Ci/WVWm0qSlxchbj0saRAIY9KlP
- XQJkEDjOUx0Yo9r/NyaNXpbrT3llRsOp1cWFv0MylQoIQo56HYXR4HPDX0nmrFBM3KCl2CT
-X-Google-Smtp-Source: AGHT+IGNTGOljeUReoRwLdHjNnv8Q75IRA0DHI8O+XxXvsVxISvRkWn0ng+tBewHS5AhE5ExgxvcYT0w+WdqMdFy6GA=
-X-Received: by 2002:a17:907:7fa2:b0:b3e:9868:17b with SMTP id
- a640c23a62f3a-b46e516b5bfmr652721266b.19.1759368976565; Wed, 01 Oct 2025
- 18:36:16 -0700 (PDT)
+ AJvYcCWH3Q/4Xbp/Qn+2ZDqidls6Qg2EJ6ABVmWtXgT8NlFgNXq/ywOdv1x99TyYats/0aaoRPRTZ2nvvbPf@nongnu.org
+X-Gm-Message-State: AOJu0Yz7LTvX15nM7hIy1vKo0olQ/LVxU8jHkJNc4y+kOiftEa0TYUaU
+ K5rhpsd+iz2mplQNBwECYPss/nARUaG6SEFgpC0/Hdi4WtD+/f7e5hnjywefU6UJbeNSI2klWrC
+ 10nN/MQa4rOYHMOLNnDEghcWvsBSRnsk=
+X-Gm-Gg: ASbGncu9RM4tHsowJoOzYLD5CKlJVNY5gZTdB9rWLSYJV1I/AFkkmDq4WjKAK1vFOPo
+ V433doQ4DHWXEkL9s02eZjtN2RZ1mOg04BqO1X369Sur25y6bVyknI1fz2+FzQnMnMk1Y+rimp/
+ 0M7M9m0a1flkCP6+AvNqdtKXSykyrzTpLz8HQbImrX6GO+PQGl9d0hSZ9d9WnY8gwtY4l2qmjkU
+ h0ODa/dEHAdWBOm5pmZCZvGuIXDW74+ZdjTZhhJfjIppSjrISMJChhXSltp6w==
+X-Google-Smtp-Source: AGHT+IGbPbj4c0hWe6rckwwTwn4p9XtFbIOSiMHR+O74Jl7CyLyWE/cFBAXCXAcwNA1z6jnG/UR8LPnDKSqRCgE/vL8=
+X-Received: by 2002:a17:907:2d20:b0:b07:e3a8:5194 with SMTP id
+ a640c23a62f3a-b46e515e0a5mr678873866b.22.1759381676627; Wed, 01 Oct 2025
+ 22:07:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251001094859.2030290-1-djordje.todorovic@htecgroup.com>
- <20251001094859.2030290-8-djordje.todorovic@htecgroup.com>
-In-Reply-To: <20251001094859.2030290-8-djordje.todorovic@htecgroup.com>
+References: <20250913041233.972870-1-guoren@kernel.org>
+In-Reply-To: <20250913041233.972870-1-guoren@kernel.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Oct 2025 11:35:50 +1000
-X-Gm-Features: AS18NWCxKWisNbA3u6FVSmY5Rr0P7nxEB2vzHKKNWa6YM1ns8CmZQqduvdSmEjc
-Message-ID: <CAKmqyKM8XYqcxjSjtomX2kvqcQh6J9SigUjmOqHtbVD-Cc8k1w@mail.gmail.com>
-Subject: Re: [PATCH v9 07/13] target/riscv: Add Xmipslsp instructions
-To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
-Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
- "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>, 
- "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>, 
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>,
- "philmd@linaro.org" <philmd@linaro.org>
+Date: Thu, 2 Oct 2025 15:07:30 +1000
+X-Gm-Features: AS18NWAy2EuzbdPxno_KxqHV52AiiHglsi8I-G57995-DuZlLz-NrMvn4oHwLXQ
+Message-ID: <CAKmqyKOLjbAKFmJeb2MAznHES1=pn224i-8r9yKSC+-gu0UZug@mail.gmail.com>
+Subject: Re: [PATCH V3] hw/riscv/riscv-iommu: Fixup PDT Nested Walk
+To: guoren@kernel.org
+Cc: zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, 
+ alistair.francis@wdc.com, seb@rivosinc.com, tjeznach@rivosinc.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, qemu-stable@nongnu.org, 
+ Nutty Liu <liujingqi@lanxincomputing.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,225 +99,216 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 1, 2025 at 7:49=E2=80=AFPM Djordje Todorovic
-<Djordje.Todorovic@htecgroup.com> wrote:
+On Sat, Sep 13, 2025 at 2:15=E2=80=AFPM <guoren@kernel.org> wrote:
 >
-> Add MIPS P8700 ldp, lwp, sdp, swp instructions.
+> From: "Guo Ren (Alibaba DAMO Academy)" <guoren@kernel.org>
 >
-> Signed-off-by: Chao-ying Fu <cfu@mips.com>
-> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-> Acked-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Current implementation is wrong when iohgatp !=3D bare. The RISC-V
+> IOMMU specification has defined that the PDT is based on GPA, not
+> SPA. So this patch fixes the problem, making PDT walk correctly
+> when the G-stage table walk is enabled.
+>
+> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+> Cc: qemu-stable@nongnu.org
+> Cc: Sebastien Boeuf <seb@rivosinc.com>
+> Cc: Tomasz Jeznach <tjeznach@rivosinc.com>
+> Reviewed-by: Weiwei Li <liwei1518@gmail.com>
+> Reviewed-by: Nutty Liu <liujingqi@lanxincomputing.com>
+> Signed-off-by: Guo Ren (Alibaba DAMO Academy) <guoren@kernel.org>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  target/riscv/cpu.c                        |  3 +
->  target/riscv/cpu_cfg.h                    |  2 +-
->  target/riscv/cpu_cfg_fields.h.inc         |  1 +
->  target/riscv/insn_trans/trans_xmips.c.inc | 88 +++++++++++++++++++++++
->  target/riscv/xmips.decode                 | 23 ++++++
->  5 files changed, 116 insertions(+), 1 deletion(-)
+> Changes in V3:
+>  - Fixup inner non-leaf walking for 4KB-align.
+>  - Add two Reviewed-by tags.
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 87f9eb7ac4..964b995269 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -249,6 +249,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
->      ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
->      ISA_EXT_DATA_ENTRY(xmipscbop, PRIV_VERSION_1_12_0, ext_xmipscbop),
->      ISA_EXT_DATA_ENTRY(xmipscmov, PRIV_VERSION_1_12_0, ext_xmipscmov),
-> +    ISA_EXT_DATA_ENTRY(xmipslsp, PRIV_VERSION_1_12_0, ext_xmipslsp),
->      ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
->      ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
->      ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
-> @@ -1383,6 +1384,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[=
-] =3D {
->      MULTI_EXT_CFG_BOOL("xventanacondops", ext_XVentanaCondOps, false),
->      MULTI_EXT_CFG_BOOL("xmipscbop", ext_xmipscbop, false),
->      MULTI_EXT_CFG_BOOL("xmipscmov", ext_xmipscmov, false),
-> +    MULTI_EXT_CFG_BOOL("xmipslsp", ext_xmipslsp, false),
+> Changes in V2:
+>  - Remove nested param to make patch clearer.
+> ---
+>  hw/riscv/riscv-iommu.c | 141 ++++++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 139 insertions(+), 2 deletions(-)
 >
->      { },
->  };
-> @@ -3297,6 +3299,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
->          .cfg.pmp =3D true,
->          .cfg.ext_zba =3D true,
->          .cfg.ext_zbb =3D true,
-> +        .cfg.ext_xmipslsp =3D true,
->          .cfg.ext_xmipscbop =3D true,
->          .cfg.ext_xmipscmov =3D true,
->          .cfg.marchid =3D 0x8000000000000201,
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index e4d5039c49..cd1cba797c 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -38,7 +38,7 @@ static inline bool always_true_p(const RISCVCPUConfig *=
-cfg __attribute__((__unus
->
->  static inline bool has_xmips_p(const RISCVCPUConfig *cfg)
->  {
-> -    return cfg->ext_xmipscbop || cfg->ext_xmipscmov;
-> +    return cfg->ext_xmipscbop || cfg->ext_xmipscmov || cfg->ext_xmipslsp=
-;
->  }
->
->  static inline bool has_xthead_p(const RISCVCPUConfig *cfg)
-> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fie=
-lds.h.inc
-> index dd3ee7ba2b..7c624ab677 100644
-> --- a/target/riscv/cpu_cfg_fields.h.inc
-> +++ b/target/riscv/cpu_cfg_fields.h.inc
-> @@ -149,6 +149,7 @@ BOOL_FIELD(ext_xtheadsync)
->  BOOL_FIELD(ext_XVentanaCondOps)
->  BOOL_FIELD(ext_xmipscbop)
->  BOOL_FIELD(ext_xmipscmov)
-> +BOOL_FIELD(ext_xmipslsp)
->
->  BOOL_FIELD(mmu)
->  BOOL_FIELD(pmp)
-> diff --git a/target/riscv/insn_trans/trans_xmips.c.inc b/target/riscv/ins=
-n_trans/trans_xmips.c.inc
-> index bfe9046153..9a72f3392f 100644
-> --- a/target/riscv/insn_trans/trans_xmips.c.inc
-> +++ b/target/riscv/insn_trans/trans_xmips.c.inc
-> @@ -21,6 +21,12 @@
->      }                                            \
->  } while (0)
->
-> +#define REQUIRE_XMIPSLSP(ctx) do {               \
-> +    if (!ctx->cfg_ptr->ext_xmipslsp) {           \
-> +        return false;                            \
-> +    }                                            \
-> +} while (0)
-> +
->  /* Conditional move by MIPS. */
->  static bool trans_ccmov(DisasContext *ctx, arg_ccmov *a)
->  {
-> @@ -38,6 +44,88 @@ static bool trans_ccmov(DisasContext *ctx, arg_ccmov *=
-a)
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 96a7fbdefcf3..ddb5236f55d1 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -866,6 +866,143 @@ static bool riscv_iommu_validate_process_ctx(RISCVI=
+OMMUState *s,
 >      return true;
 >  }
 >
-> +/* Load Doubleword Pair. */
-> +static bool trans_ldp(DisasContext *ctx, arg_ldp *a)
+> +/**
+> + * pdt_memory_read: PDT wrapper of dma_memory_read.
+> + *
+> + * @s: IOMMU Device State
+> + * @ctx: Device Translation Context with devid and pasid set
+> + * @addr: address within that address space
+> + * @buf: buffer with the data transferred
+> + * @len: length of the data transferred
+> + * @attrs: memory transaction attributes
+> + */
+> +static MemTxResult pdt_memory_read(RISCVIOMMUState *s,
+> +                                   RISCVIOMMUContext *ctx,
+> +                                   dma_addr_t addr,
+> +                                   void *buf, dma_addr_t len,
+> +                                   MemTxAttrs attrs)
 > +{
-> +    REQUIRE_XMIPSLSP(ctx);
-> +    REQUIRE_64_OR_128BIT(ctx);
+> +    uint64_t gatp_mode, pte;
+> +    struct {
+> +        unsigned char step;
+> +        unsigned char levels;
+> +        unsigned char ptidxbits;
+> +        unsigned char ptesize;
+> +    } sc;
+> +    MemTxResult ret;
+> +    dma_addr_t base =3D addr;
 > +
-> +    TCGv src =3D get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv dest0 =3D dest_gpr(ctx, a->rd);
-> +    TCGv dest1 =3D dest_gpr(ctx, a->rs3);
-> +    TCGv addr =3D tcg_temp_new();
+> +    /* G stages translation mode */
+> +    gatp_mode =3D get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
+> +    if (gatp_mode =3D=3D RISCV_IOMMU_DC_IOHGATP_MODE_BARE)
+> +        goto out;
 > +
-> +    tcg_gen_addi_tl(addr, src, a->imm_y);
-> +    tcg_gen_qemu_ld_tl(dest0, addr, ctx->mem_idx, MO_TESQ);
-> +    gen_set_gpr(ctx, a->rd, dest0);
+> +    /* G stages translation tables root pointer */
+> +    base =3D PPN_PHYS(get_field(ctx->gatp, RISCV_IOMMU_ATP_PPN_FIELD));
 > +
-> +    tcg_gen_addi_tl(addr, addr, 8);
-> +    tcg_gen_qemu_ld_tl(dest1, addr, ctx->mem_idx, MO_TESQ);
-> +    gen_set_gpr(ctx, a->rs3, dest1);
+> +    /* Start at step 0 */
+> +    sc.step =3D 0;
 > +
-> +    return true;
+> +    if (s->fctl & RISCV_IOMMU_FCTL_GXL) {
+> +        /* 32bit mode for GXL =3D=3D 1 */
+> +        switch (gatp_mode) {
+> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4:
+> +            if (!(s->cap & RISCV_IOMMU_CAP_SV32X4)) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +            sc.levels    =3D 2;
+> +            sc.ptidxbits =3D 10;
+> +            sc.ptesize   =3D 4;
+> +            break;
+> +        default:
+> +            return MEMTX_ACCESS_ERROR;
+> +        }
+> +    } else {
+> +        /* 64bit mode for GXL =3D=3D 0 */
+> +        switch (gatp_mode) {
+> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV39X4:
+> +            if (!(s->cap & RISCV_IOMMU_CAP_SV39X4)) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +            sc.levels    =3D 3;
+> +            sc.ptidxbits =3D 9;
+> +            sc.ptesize   =3D 8;
+> +            break;
+> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV48X4:
+> +            if (!(s->cap & RISCV_IOMMU_CAP_SV48X4)) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +            sc.levels    =3D 4;
+> +            sc.ptidxbits =3D 9;
+> +            sc.ptesize   =3D 8;
+> +            break;
+> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV57X4:
+> +            if (!(s->cap & RISCV_IOMMU_CAP_SV57X4)) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +            sc.levels    =3D 5;
+> +            sc.ptidxbits =3D 9;
+> +            sc.ptesize   =3D 8;
+> +            break;
+> +        default:
+> +            return MEMTX_ACCESS_ERROR;
+> +        }
+> +    }
+> +
+> +    do {
+> +        const unsigned va_bits =3D (sc.step ? 0 : 2) + sc.ptidxbits;
+> +        const unsigned va_skip =3D TARGET_PAGE_BITS + sc.ptidxbits *
+> +                                 (sc.levels - 1 - sc.step);
+> +        const unsigned idx =3D (addr >> va_skip) & ((1 << va_bits) - 1);
+> +        const dma_addr_t pte_addr =3D base + idx * sc.ptesize;
+> +
+> +        /* Address range check before first level lookup */
+> +        if (!sc.step) {
+> +            const uint64_t va_mask =3D (1ULL << (va_skip + va_bits)) - 1=
+;
+> +            if ((addr & va_mask) !=3D addr) {
+> +                return MEMTX_ACCESS_ERROR;
+> +            }
+> +        }
+> +
+> +        /* Read page table entry */
+> +        if (sc.ptesize =3D=3D 4) {
+> +            uint32_t pte32 =3D 0;
+> +            ret =3D ldl_le_dma(s->target_as, pte_addr, &pte32, attrs);
+> +            pte =3D pte32;
+> +        } else {
+> +            ret =3D ldq_le_dma(s->target_as, pte_addr, &pte, attrs);
+> +        }
+> +        if (ret !=3D MEMTX_OK)
+> +            return ret;
+> +
+> +        sc.step++;
+> +        hwaddr ppn =3D pte >> PTE_PPN_SHIFT;
+> +
+> +        if (!(pte & PTE_V)) {
+> +            return MEMTX_ACCESS_ERROR; /* Invalid PTE */
+> +        } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+> +            base =3D PPN_PHYS(ppn); /* Inner PTE, continue walking */
+> +        } else if ((pte & (PTE_R | PTE_W | PTE_X)) =3D=3D PTE_W) {
+> +            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W=
+ */
+> +        } else if ((pte & (PTE_R | PTE_W | PTE_X)) =3D=3D (PTE_W | PTE_X=
+)) {
+> +            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W=
+ + PTE_X */
+> +        } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
+> +            return MEMTX_ACCESS_ERROR; /* Misaligned PPN */
+> +        } else {
+> +            /* Leaf PTE, translation completed. */
+> +            base =3D PPN_PHYS(ppn) | (addr & ((1ULL << va_skip) - 1));
+> +            break;
+> +        }
+> +
+> +        if (sc.step =3D=3D sc.levels) {
+> +            return MEMTX_ACCESS_ERROR; /* Can't find leaf PTE */
+> +        }
+> +    } while (1);
+> +
+> +out:
+> +    return dma_memory_read(s->target_as, base, buf, len, attrs);
 > +}
 > +
-> +/* Load Word Pair. */
-> +static bool trans_lwp(DisasContext *ctx, arg_lwp *a)
-> +{
-> +    REQUIRE_XMIPSLSP(ctx);
-> +
-> +    TCGv src =3D get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv dest0 =3D dest_gpr(ctx, a->rd);
-> +    TCGv dest1 =3D dest_gpr(ctx, a->rs3);
-> +    TCGv addr =3D tcg_temp_new();
-> +
-> +    tcg_gen_addi_tl(addr, src, a->imm_x);
-> +    tcg_gen_qemu_ld_tl(dest0, addr, ctx->mem_idx, MO_TESL);
-> +    gen_set_gpr(ctx, a->rd, dest0);
-> +
-> +    tcg_gen_addi_tl(addr, addr, 4);
-> +    tcg_gen_qemu_ld_tl(dest1, addr, ctx->mem_idx, MO_TESL);
-> +    gen_set_gpr(ctx, a->rs3, dest1);
-> +
-> +    return true;
-> +}
-> +
-> +/* Store Doubleword Pair. */
-> +static bool trans_sdp(DisasContext *ctx, arg_sdp *a)
-> +{
-> +    REQUIRE_XMIPSLSP(ctx);
-> +    REQUIRE_64_OR_128BIT(ctx);
-> +
-> +    TCGv src =3D get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv data0 =3D get_gpr(ctx, a->rs2, EXT_NONE);
-> +    TCGv data1 =3D get_gpr(ctx, a->rs3, EXT_NONE);
-> +    TCGv addr =3D tcg_temp_new();
-> +
-> +    tcg_gen_addi_tl(addr, src, a->imm_w);
-> +    tcg_gen_qemu_st_tl(data0, addr, ctx->mem_idx, MO_TEUQ);
-> +
-> +    tcg_gen_addi_tl(addr, addr, 8);
-> +    tcg_gen_qemu_st_tl(data1, addr, ctx->mem_idx, MO_TEUQ);
-> +
-> +    return true;
-> +}
-> +
-> +/* Store Word Pair. */
-> +static bool trans_swp(DisasContext *ctx, arg_swp *a)
-> +{
-> +    REQUIRE_XMIPSLSP(ctx);
-> +
-> +    TCGv src =3D get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv data0 =3D get_gpr(ctx, a->rs2, EXT_NONE);
-> +    TCGv data1 =3D get_gpr(ctx, a->rs3, EXT_NONE);
-> +    TCGv addr =3D tcg_temp_new();
-> +
-> +    tcg_gen_addi_tl(addr, src, a->imm_v);
-> +    tcg_gen_qemu_st_tl(data0, addr, ctx->mem_idx, MO_TESL);
-> +
-> +    tcg_gen_addi_tl(addr, addr, 4);
-> +    tcg_gen_qemu_st_tl(data1, addr, ctx->mem_idx, MO_TESL);
-> +
-> +    return true;
-> +}
-> +
->  /* Move data from memory into cache. */
->  static bool trans_pref(DisasContext *ctx, arg_pref *a)
->  {
-> diff --git a/target/riscv/xmips.decode b/target/riscv/xmips.decode
-> index 4215813b32..3174f17aa4 100644
-> --- a/target/riscv/xmips.decode
-> +++ b/target/riscv/xmips.decode
-> @@ -8,5 +8,28 @@
->  # Reference: MIPS P8700 instructions
->  #            (https://mips.com/products/hardware/p8700/)
+>  /*
+>   * RISC-V IOMMU Device Context Loopkup - Device Directory Tree Walk
+>   *
+> @@ -1038,7 +1175,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s=
+, RISCVIOMMUContext *ctx)
+>           */
+>          const int split =3D depth * 9 + 8;
+>          addr |=3D ((ctx->process_id >> split) << 3) & ~TARGET_PAGE_MASK;
+> -        if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
+> +        if (pdt_memory_read(s, ctx, addr, &de, sizeof(de),
+>                              MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {
+>              return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
+>          }
+> @@ -1053,7 +1190,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s=
+, RISCVIOMMUContext *ctx)
 >
-> +# Fields
-> +%rs3       27:5
-> +%rs2       20:5
-> +%rs1       15:5
-> +%rd        7:5
-> +%imm_9     20:9
-> +%imm_hint  7:5
-> +%imm_v     25:2 9:3               !function=3Dex_shift_2
-> +%imm_w     25:2 10:2              !function=3Dex_shift_3
-> +%imm_x     22:5                   !function=3Dex_shift_2
-> +%imm_y     23:4                   !function=3Dex_shift_3
-> +
-> +# Formats
-> +@r4_immv ..... .. ..... ..... ... ... .. ....... %rs2 %rs3 %imm_v %rs1
-> +@r4_immw ..... .. ..... ..... ... .. ... ....... %rs2 %rs3 %imm_w %rs1
-> +@r4_immx ..... .....  .. ..... ... ..... ....... %rs3 %imm_x %rs1 %rd
-> +@r4_immy ..... ....  ... ..... ... ..... ....... %rs3 %imm_y %rs1 %rd
-> +
-> +# *** RV64 MIPS Extension ***
->  ccmov          rs3:5 11 rs2:5 rs1:5 011 rd:5 0001011
->  pref        000 imm_9:9 rs1:5 000 imm_hint:5 0001011
-> +ldp         ..... .... 000 ..... 100 .....  0001011 @r4_immy
-> +lwp         ..... ..... 01 ..... 100 .....  0001011 @r4_immx
-> +sdp         ..... .. ..... ..... 101 ..  0000001011 @r4_immw
-> +swp         ..... .. ..... ..... 101 ...  010001011 @r4_immv
+>      /* Leaf entry in PDT */
+>      addr |=3D (ctx->process_id << 4) & ~TARGET_PAGE_MASK;
+> -    if (dma_memory_read(s->target_as, addr, &dc.ta, sizeof(uint64_t) * 2=
+,
+> +    if (pdt_memory_read(s, ctx, addr, &dc.ta, sizeof(uint64_t) * 2,
+>                          MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {
+>          return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
+>      }
 > --
-> 2.34.1
+> 2.40.1
+>
+>
 
