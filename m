@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7253BCAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 15:00:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF14ECAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 15:00:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4Kle-0007Rm-Lt; Thu, 02 Oct 2025 10:58:51 -0400
+	id 1v4KlP-0007N1-Gz; Thu, 02 Oct 2025 10:58:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4KlY-0007QA-Ih
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:46 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kl9-0007KH-Vs
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:20 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4KlD-0000Ra-77
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:43 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-42557c5cedcso668315f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 07:58:15 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kkw-0000HQ-U7
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:19 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-46e4473d7f6so7222595e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 07:58:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759417093; x=1760021893; darn=nongnu.org;
+ d=linaro.org; s=google; t=1759417078; x=1760021878; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F7o+nv06XBHGB51yxt1OEKJBgV9gHbisZFhpgcb1BqQ=;
- b=ILNAH/N+eJ89W46LJ28mzXRPxBkiTvXQehJSLabJj5HB8cvGREYVBhvBh0w+KekHnw
- atQCJvwjLiqXxgrdRdhZ9PnslbbIkS482Eph/aYSyOG/idDCRTj3gQLfLXan0guX2ymf
- yQK+N1va+aGRuKEuYWoVGxvY4K4CbsrM2ah/jYG0Wpwf5WXUcdP5Z13pSy6XfceerhbL
- ZcCuyFVhEczLY7Gv5riRB88ZVdjlWZaeslnCBaBiEQJTgWJej2lPVhWIZ4qM6WHqsWOv
- IUvDcXlHp0g3e8XcA9UmbBFC8hiaSF7j0Jc+uWZTB+4Uq2aQDnNq43t1OJxWDoZ2brL4
- PbTg==
+ bh=omJMsKofR3cX17dOR4xS+OkjOyOP0xrNLE6+JrjUrJA=;
+ b=Pa1f675BhOCF6ZPHgwzvpYvjOYpBhj6Qv7DTDX9YnA1rmlpVya7aRy3EXuunRoiBtu
+ +b8S4qgPkQwwCYFZOKjtTCGv2T7gMJIn4BbPUXqm3IEsOa08aS6PIoCrbo8hMneo8pRb
+ 3IenvyxLc5uCa5wGiTD5GfGo+xg8B9iNYwXIE/kh+Tpgfn/33/8cu3X6MRDnjbxaB5PO
+ Gp8b0IsZ7fAR2W595axDDRooFHebmhzrBK3fEPicqeCKQGeHtQZ2rxZ/lxpnzW6RRjW4
+ 8eQa0zA5bnJFyZUGv00SfB6zvnL7hzNH1gWV9jpLfoI4i6IZmz+60yxC+Ndb8B5c+qRD
+ Hi/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759417093; x=1760021893;
+ d=1e100.net; s=20230601; t=1759417078; x=1760021878;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=F7o+nv06XBHGB51yxt1OEKJBgV9gHbisZFhpgcb1BqQ=;
- b=SXQcEra65zAmM3hS7ebJT3ZtlyZ+p2tP62ldeTn7L1lxNBvNypoqHAMxTNBbrJHces
- Cm4eCZEVMFabh26yPA3zoGTMZZZK7y5aCyJLfArvQcf+dXJqIa72uJKfnIZOxUJUdKse
- v9Qcw60eNN5YkFJsoFuEKihmI2ZTW9b00ejrybsTpTOcssM6vfvKJy7bBJHl17+gBnrI
- dfTtlj7vvZ89VbzOmel2q6Te2mqa57GYpHfv7RDm8MBYIpcXyeFIoplGpISKqzYNcx3L
- inX55htBbdnfuptb0sqjp7K13iCJyMjZ5UvoZrIfCZZJaSO0DumK0riqpLHDG23QiQcu
- /CqA==
+ bh=omJMsKofR3cX17dOR4xS+OkjOyOP0xrNLE6+JrjUrJA=;
+ b=iYCuBIA6CaBEg3ttAftdLUmyMjl9IIiF2f4UiOnQrpgEFfZMYQrLzl7Fa6WZ0nhq9Z
+ m1sk/Y+CXgqTdD74b4ta5xVJKDtIZGI+AhdHfoYSmxz2QsPX7dh8BWSn4gl4DWSekrzh
+ JtxJIm3aO+8hCbL3ViALAsa4kut18Zh+AZNRtCu3Zm8BBpChnEwVscjMBNZlnMiZ9vsW
+ uw9upS74I8EMI0vNoXyThv/hOI8uuHAdV7rOc2pTsVXhAvqS4DvXmaYmMvwxLYbg/nsp
+ rKGOF9vnogMCu6+Ee4kRxlCr0MYZlHXW7aZHnDTCmCzjQ4TO6NUsd6u3QZ57hVQicVqq
+ uSJg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUII+iaOcVx+zDOql25Sz0qZgw2u9Ld+Rz9e73Kw7dYld1EZMRl4+3lrxO34pN2aStz6U+sPStPqOso@nongnu.org
-X-Gm-Message-State: AOJu0YwEdyWNpcIl8hMYw0mueYAp8OBfNL+F3af/K2lFZyUS/jJYQLdg
- syDLn7mOK4/kbBch4pSiToS9fEJLCn901YhkFKsUVLFOxKQd13WxPv+yN+iUtOGsWUk=
-X-Gm-Gg: ASbGncsyVl1vgzHVtrKLcFjX50IR/vFo3QyTzULXRkqPSvv6vG0QJ4njiJ3hT0ojhih
- bGiZfug97VWcZ41MCdMQy7zPB7B+2d7EYt5MT9ZgO+P7DXpdWp9+sc+p40y/PyUs7YKb/hNdmc0
- dwM297BYIGQAAvN22Kw/IlSHt8RTo/KNVqT0SJPd5qyzpR46PYn9KX5aJkLVmCiJDBuJOU+cNjy
- 0D4odz6Hn5kM+97Sn7i1aOjc4et+L/E2pAG9O3PqCG1Dj/BkxbXlKy7mjI5qXhWr2/pU9SJvCJQ
- Ip9OLYxzGWUyuJanXx3BHfl2moTcIhQWNX8dCQB4ShsypKpzOpcTHEwwL3+RFqcFRcMkAlJbRKS
- nC/lCliICYCGTjVFqmnsfg+yh0ZzMzbUyvJ12U2i6M1rrzCSsVrxqWL2cJOFiieLKep8Icel6EU
- cImgSOpB6cUZ9bO7MX/ormFzJz
-X-Google-Smtp-Source: AGHT+IGgcSiU0b9GBRqG6rfyaSqarD8ZqVsR1xf3ArEYrltLFBpTzsVHviFtOEZ6iKGZLx6xGRRuDw==
-X-Received: by 2002:a05:6000:2c10:b0:3e9:ee54:af54 with SMTP id
- ffacd0b85a97d-425577f51f7mr5180357f8f.21.1759417093270; 
- Thu, 02 Oct 2025 07:58:13 -0700 (PDT)
+ AJvYcCUxcUfikLPBXuJhbNrQeITqaV+shGJvahS4gL1/5Xji0woldQf/PDK67HshxZC75ddG9cHq6/3dmh0h@nongnu.org
+X-Gm-Message-State: AOJu0YzKqp4TElpC1FAWD+yBcl14IS4XRUt0+TG5WF6oYpC6PGmAwjv9
+ mk7nD2rdhPW33BDJmHQK37TNtdIZv1WXhwXKK6hzFt/u07cF3jJbbKey3jEGewxuyIQ=
+X-Gm-Gg: ASbGnctSDhZFEOTGhRwI7q0LUNSFKc7e7JFEFV+t0/g0A8c0udWaJVTX5Hjdj8uuL6n
+ 2iN/LmXlwCIulVje1gfWRl0xNGhn2gOyXc4FpwONEDxBfVZDjOe52M9VZeNrHG1ZZR6631XT9Cu
+ 6ByfgnR0BXgSE7MS4Gj6eU+B+2yfyh64oTLLrk5f7Wt4KOhSaCpXAlo17tDuRtgvyhl9T2eP2N3
+ 3nPrdYVGKF7wjB+dGJrMQ7cD4kEZUcPhlmgddAbtd4EJCeDks4l2dkpJvkCNPjN5zFeoAoFc9Rf
+ 3A7VR8C8oU3QL0ZSseGyVbpKkBZN88X2OFlncnlEjV26GPxWQxbQd6kGJMKtDofnfM8skJwz4VM
+ OGp4/1gE09f/yYOwe9LbNbrVTpRIgSY7fKlPi//zQbp9wMR8x8AKR0M9gXy56cxlJN1rtrjGTfy
+ YR6/kfko7zFQL1rY8/X5arcWYOzirhQcm14ZQ=
+X-Google-Smtp-Source: AGHT+IFZiGRObtfhcWfQ0V8vmwO0GuUgfaStXYQlBt4i/xBMuMEPLtjoeAOI9B8CLJidy3afz5IKSw==
+X-Received: by 2002:a05:600d:41d0:b0:46e:394b:4991 with SMTP id
+ 5b1f17b1804b1-46e6127a4f2mr57556625e9.11.1759417078609; 
+ Thu, 02 Oct 2025 07:57:58 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e6b23d4c5sm30631055e9.17.2025.10.02.07.58.12
+ 5b1f17b1804b1-46e6111c1f4sm47718395e9.0.2025.10.02.07.57.57
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 02 Oct 2025 07:58:12 -0700 (PDT)
+ Thu, 02 Oct 2025 07:57:58 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
@@ -76,24 +76,24 @@ Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 6/6] target/sparc: Reduce inclusions of 'exec/cpu-common.h'
-Date: Thu,  2 Oct 2025 16:57:41 +0200
-Message-ID: <20251002145742.75624-7-philmd@linaro.org>
+Subject: [PATCH 3/6] target/riscv/kvm: Replace legacy
+ cpu_physical_memory_read/write() calls
+Date: Thu,  2 Oct 2025 16:57:38 +0200
+Message-ID: <20251002145742.75624-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251002145742.75624-1-philmd@linaro.org>
 References: <20251002145742.75624-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,53 +109,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Only 2 files require declarations from "exec/cpu-common.h".
-Include it there once, instead than polluting all files
-including "cpu.h".
+Commit b7ecba0f6f6 ("docs/devel/loads-stores.rst: Document our
+various load and store APIs") mentioned cpu_physical_memory_*()
+methods are legacy, the replacement being address_space_*().
+
+Since the SBI DBCN is handled within a vCPU context, use its
+default address space. Replace using the address space API.
+As with the previous implementation, ignore whether the memory
+accesses succeeded or failed.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/sparc/cpu.h          | 1 -
- target/sparc/helper.c       | 1 +
- target/sparc/int64_helper.c | 1 +
- 3 files changed, 2 insertions(+), 1 deletion(-)
+ target/riscv/kvm/kvm-cpu.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
-index 31cb3d97eb1..7169a502432 100644
---- a/target/sparc/cpu.h
-+++ b/target/sparc/cpu.h
-@@ -3,7 +3,6 @@
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 5c19062c19b..0c2f21fd1a1 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -36,6 +36,7 @@
+ #include "hw/pci/pci.h"
+ #include "exec/memattrs.h"
+ #include "system/address-spaces.h"
++#include "system/memory.h"
+ #include "hw/boards.h"
+ #include "hw/irq.h"
+ #include "hw/intc/riscv_imsic.h"
+@@ -1564,6 +1565,7 @@ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
  
- #include "qemu/bswap.h"
- #include "cpu-qom.h"
--#include "exec/cpu-common.h"
- #include "exec/cpu-defs.h"
- #include "exec/cpu-interrupt.h"
- #include "qemu/cpu-float.h"
-diff --git a/target/sparc/helper.c b/target/sparc/helper.c
-index 9163b9d46ad..c5d88de37c9 100644
---- a/target/sparc/helper.c
-+++ b/target/sparc/helper.c
-@@ -21,6 +21,7 @@
- #include "cpu.h"
- #include "qemu/timer.h"
- #include "qemu/host-utils.h"
-+#include "exec/cpu-common.h"
- #include "exec/helper-proto.h"
+ static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
+ {
++    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+     g_autofree uint8_t *buf = NULL;
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     target_ulong num_bytes;
+@@ -1602,9 +1604,9 @@ static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
+                 exit(1);
+             }
  
- void cpu_raise_exception_ra(CPUSPARCState *env, int tt, uintptr_t ra)
-diff --git a/target/sparc/int64_helper.c b/target/sparc/int64_helper.c
-index 23adda4cad7..96ef81c26cd 100644
---- a/target/sparc/int64_helper.c
-+++ b/target/sparc/int64_helper.c
-@@ -20,6 +20,7 @@
- #include "qemu/osdep.h"
- #include "qemu/main-loop.h"
- #include "cpu.h"
-+#include "exec/cpu-common.h"
- #include "exec/helper-proto.h"
- #include "exec/log.h"
- #include "trace.h"
+-            cpu_physical_memory_write(addr, buf, ret);
++            address_space_write(cs->as, addr, attrs, buf, ret);
+         } else {
+-            cpu_physical_memory_read(addr, buf, num_bytes);
++            address_space_read(cs->as, addr, attrs, buf, num_bytes);
+ 
+             ret = qemu_chr_fe_write_all(serial_hd(0)->be, buf, num_bytes);
+             if (ret < 0) {
 -- 
 2.51.0
 
