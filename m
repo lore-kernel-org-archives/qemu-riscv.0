@@ -4,89 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59507CAC5B8
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 11:34:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49FDBCAC5B8
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 14:58:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4HZh-0006kv-PC; Thu, 02 Oct 2025 07:34:18 -0400
+	id 1v4Kkw-0007Dv-DA; Thu, 02 Oct 2025 10:58:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1v4HZf-0006kA-7M
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 07:34:15 -0400
-Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kkr-0007CV-VE
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:03 -0400
+Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1v4HZV-000085-RH
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 07:34:13 -0400
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-58de3ab1831so936489137.3
- for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 04:33:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kkh-0000Ch-HK
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:57:59 -0400
+Received: by mail-wm1-x343.google.com with SMTP id
+ 5b1f17b1804b1-46e42fa08e4so9901635e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 07:57:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1759404830; x=1760009630; darn=nongnu.org;
+ d=linaro.org; s=google; t=1759417064; x=1760021864; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/R5lzi/iXxvsb0xAjrue9SnyxZX/inc1472pC8H2YuE=;
- b=B3g40RCtKuSorUk88JKTvxrHnAkeOeJqbeY71IhhL6WnFy+tYjebfgILDtnAtTKiEn
- bpIBEXmDqwa42VLalBKO8Njx1S/IB0EDCpaNPLboOyoC7iUi3sPoMQ2rU6juHxpI5/Qr
- fgSU55WTu0qc7/YYrIwR279mitLI0pFkNQxm0wDqneE26yodC9p0Q7pzRcvKGg+v82WJ
- 9QktDHgfScKe+jd/2i8EgfoGO3ljc9gVtKUM1DQ1lpIhtInvc4Tc3wnAg3ARxuoTozOs
- MOi4iyK//0JG7TDwiBpY4om7EV6kFEVqAaOhochMM/FGMTDA08+MlmmY+ltcO9J3sfsF
- tBbw==
+ bh=WoTee1wY/4Z8UrgceMQOy/NZaOImNF83wByOYO4nupE=;
+ b=mM0s9g91nzp2DmUZtRCWARsMc1UiH4rDk0ogyS7vsS3xjHMNnLgEOmIKxmPjFpO7Cv
+ h+n4E/o6ahIc87sM7Lzk2uN0gs5vCpeQS26npzS9JHMr81Wh6T92/LUmD9URzEgqp3Lp
+ 56suICfx3RRT4EGmuq35kvMhian/cVuC1cZSb//nRPQ3JGzZr3QXhX7MT1+z8G0pbZHF
+ kEJNE9fWYR9V0jb+z44kbIoLFFRQGC73ceVCOXZXSrcYDj/iCkHKp6oE8vnEM775tmUd
+ V/jmWhIa6qwG2SVc1GAXlJio7u5BmEkM5aFN9MZH6zEX8slpoCtwC8mOzqTLSNZKZLn8
+ 179Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759404830; x=1760009630;
+ d=1e100.net; s=20230601; t=1759417064; x=1760021864;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/R5lzi/iXxvsb0xAjrue9SnyxZX/inc1472pC8H2YuE=;
- b=WbOXS6dPOkHi088zWQZUdjJZu8XZF5dgasAEJOnXFeskKY/zMFW87rC7KzRFovL7O6
- UE7UpoxiZR9AQi296ObSR000zWHaU5C/UEDXTL0fkOnGKgnI5uVsZzOjP5fgpm96CwFN
- Yh6YoPvgFFjPbA1MBz3wS8njcoQpqFsow8psKl1AT2JIFs4zFCNkNsSGG8ceJ3umJA3Y
- /emH7fN/68RwPhUNMdy+Iz92e2gCnc0AqCEoKQ1C2BAcgSpo0QSJ4bp1Mk2FBpDs59CA
- 9Da1ZNkwADwdgVg8gyRphiFHs/+tZPBpS+aCLFYwDphVt695RdFlLkEhhGDTrBVV2lww
- i5aw==
-X-Gm-Message-State: AOJu0YxYwGuGUa0IVUki9gsQVu0kVd6Od92nhG2DciU6hur+Pn9lZ7k0
- eyaUhVFBIy0tD3i82WEbmxp8aIeAkUIQyHvyranBSgbh/6qgfiAGowAnTeb/iVK2RD60nAkA/aW
- mxERZMyo=
-X-Gm-Gg: ASbGncu2EaVG97A1YP90qped2iOmUbVcrFYISgdxpfBIedCwMEPCqzrDUU0Yyc+YrTz
- nMu//lirKYzxuSO08SOXtslhBlHwrVNC87+szgeVIj7NJXzqCdS2qrxe+IY+wEPcn3FlpthLbw/
- bAkzTvwutA6W5JgoaHwSxs+EyL7h4XW7pNaqT++AjBEkM4OMG8ZSvyuMHYuWOhN8b8XqNBP2iUc
- BE6Btj9TzY6ZbiW54hT/RV+cAqM83dEnSSHN5dguRaN1AYlBGyNUBLgzggtVJPKQDtW4MK3ZcCT
- 2Vr7z8psAXyvjBgnoNcwE7Z2d5hzZH3gAQsbrY0FH7MsdZxuvPt71R1KSZ86nAoZNlEXabJqQ9n
- TwIb4SAYvYSOHZcVVNPQOFTHPiTido3iVk1/CaXw7IQDo/N5JznVgIhx+/s0myKCU/qpS2n51tp
- g=
-X-Google-Smtp-Source: AGHT+IFHZYxq8DsucnnzorQgJRxLIBlkNXYvwXz8tEn+QVV0D0bAuI+yZfbJOQLn839mWcaUOXeYvw==
-X-Received: by 2002:a05:690c:930c:10b0:749:bc9a:6498 with SMTP id
- 00721157ae682-77f6f1358c0mr91442007b3.1.1759404224116; 
- Thu, 02 Oct 2025 04:23:44 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com
- ([2804:7f0:bcc0:b174:a9af:8146:7deb:fbf3])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-77f81c068f6sm7331627b3.5.2025.10.02.04.23.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Oct 2025 04:23:43 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ bh=WoTee1wY/4Z8UrgceMQOy/NZaOImNF83wByOYO4nupE=;
+ b=BZ10lYwjgELaH9sYdY+Dqe3eZ+qSzr2cyM9y6jWkK5AZ/0aPVgz13lMIuOKaTYynby
+ 5zziyUwnh5waviAgLfBuvj+4H+4EcYI6+Vxk+EOEiiebZtg0zgMejFrRx6pniZWuUv52
+ 47rXW1rPGQPEmvGpyiiZzeCUfSdux7eFtdEvmoja5vewDECygwzPPkirGIQzUrGGh0pz
+ I6BRuw2y0AEWTMqHAjYcBN1iXs8g8WU9pwDLS36TaqcPVDZYHr1MSz1CxXstHZDmKcZi
+ 0sLD/QgPUTDGBgxRU5XOqt1sI/AsDPsl/Wv1ty2zhN/p08sujPLIgV4mfgOI5cwvP+JG
+ DjhQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUWx4dErDallsh3TSKK9odfmrrW5Y/f+CpIX5145EsCUbaIp07LVwH3uwGmoDruNZ2vFsMgE/YEGmlQ@nongnu.org
+X-Gm-Message-State: AOJu0Yw88SJbbB18t6yuPCb7+Txe3jDn5Njd8EOTomT9mZGfYCidkEYU
+ Amo7F3aOsgtpxF386M0NjsPXhHnfIfUO6BNYfq0OWDeH6dUyUoSe9e6+AiF4lUPbn2ggdjx6s9k
+ SzCA/+vqTAmpq
+X-Gm-Gg: ASbGncv0iZNBVPcXoItXMraPdOmf+duHfypTyaevMIb+gvW4pKW92/YGdMQmkdiiKCl
+ uFV3owh8kLxzf7dPvUfTeVOKlsAP3YPV08zE7vNIsBqnMdV+WPAKk331299hjcf3mRyM7z8+J3A
+ EPGIM0u+LEr/zUDlApZP4nfpJlfsIoKFA78DiEOoUCV2DZpNhCW25VCBp+RVsghi0XpFw38VJk+
+ qAzLON2f48uDY4U+ywtL3sqW86rqUoy9LeaZgYPPK/ymszlXWCoBsoBOXQLDbrHRB8pXtLswn/J
+ SqGv4BX0IsUYjqEYCOtfSz4DeRFm/1TguezIVYPjnSNgAuYeORsbePU7xqCr0JWNpVeUAXn6sPY
+ ivnl4QtS5d+WjKyMfnX8yh+XAElJUVHVy1e0yA2X6Xy+7QpMlF5dl7oTfo+kaCgmT5lHjw8L1Us
+ tBKPDcbLhLPELDi0s7mT8ReKsA
+X-Google-Smtp-Source: AGHT+IHWOX09FU0xZ+bjaszTfnvN7j2gcdt7xzYqHffyTzQkST2hqs52bHwu+grjhQTtk+Hp82G0MQ==
+X-Received: by 2002:a05:600c:a404:b0:46e:6339:79d1 with SMTP id
+ 5b1f17b1804b1-46e63397ae5mr53003735e9.5.1759417063905; 
+ Thu, 02 Oct 2025 07:57:43 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4255d8e9719sm4121462f8f.31.2025.10.02.07.57.42
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 02 Oct 2025 07:57:43 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- richard.henderson@linaro.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 00/17] hw/riscv, target/riscv: initial e-trace support
-Date: Thu,  2 Oct 2025 08:23:18 -0300
-Message-ID: <20251002112335.2374517-1-dbarboza@ventanamicro.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 0/6] target: Remove remnant legacy cpu_physical_memory_*()
+ calls
+Date: Thu,  2 Oct 2025 16:57:35 +0200
+Message-ID: <20251002145742.75624-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-vs1-xe35.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::343;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x343.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,99 +107,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+The cpu_physical_memory API is legacy (see commit b7ecba0f6f6):
 
-This series implements the Efficient Trace (e-trace) for RISC-V [1].
-This is a hardware level trace similar to what we found in other archs
-like ARM's CoreSight. The implementation is based on [1] and also on the
-RISC-V Trace Control Interface Specification [2].
+  ``cpu_physical_memory_*``
+  ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Only a subset of all available features are implemented in this work.
-The idea is to contribute it back and allow others to keep incrementing
-it on demand. 
+  These are convenience functions which are identical to
+  ``address_space_*`` but operate specifically on the system address space,
+  always pass a ``MEMTXATTRS_UNSPECIFIED`` set of memory attributes and
+  ignore whether the memory transaction succeeded or failed.
+  For new code they are better avoided:
+  ...
 
-The design implemented is the simplest topology allowed by the specs:
-one trace encoder/trace ram sink pair per CPU. This topology was added
-in the 'virt' machine. We took kernel side considerations when adding
-the FDT for these components. More info on patch 05.
+After converting the target/s390x [*], this series convert the
+remaining targets.
 
-A lot of design decisions/simplifications were made considering how the
-TCG emulation works. I attempted to justify them in the commit messages
-when relevant. 
+Based-on: <20251001175448.18933-1-philmd@linaro.org>
 
-Linux kernel driver support is available here:
+[*] https://lore.kernel.org/qemu-devel/20251002091132.65703-1-philmd@linaro.org/
 
-https://lore.kernel.org/linux-riscv/20251002060732.100213-1-apatel@ventanamicro.com/
+Philippe Mathieu-Daudé (6):
+  target/i386/monitor: Propagate CPU address space to 'info mem'
+    handlers
+  target/i386/monitor: Replace legacy cpu_physical_memory_read() calls
+  target/riscv/kvm: Replace legacy cpu_physical_memory_read/write()
+    calls
+  target/riscv/monitor: Replace legacy cpu_physical_memory_read() call
+  target/xtensa: Replace legacy cpu_physical_memory_[un]map() calls
+  target/sparc: Reduce inclusions of 'exec/cpu-common.h'
 
-It includes steps on how to test both the kernel and QEMU support in its
-cover letter. I'll add those steps in our own QEMU documentation,
-including the capabilities implemented, limitations and so on, in the
-following versions of this work. 
-
-
-@Richard: if you could take a look at patch 07 I appreciate it. We've
-run out of tb_flags in RISC-V DisasContext and I had to be "creative" to
-avoid calling trace helpers without a trace session opened.
-
-
-Patches based on alistair/riscv-to-apply.next. You can also find them
-here:
-
-https://gitlab.com/danielhb/qemu/-/tree/rv-etrace
-
-
-Daniel Henrique Barboza (16):
-  hw/riscv: Trace Encoder initial impl
-  hw/riscv: Trace RAM Sink initial impl
-  hw/riscv/trace-encoder: add trace start/stop logic
-  hw/riscv/virt.c: add trace encoders and trace ram sinks
-  hw/riscv: add e-trace message helpers
-  target/riscv: add initial trace instrumentation
-  hw/riscv/trace-encoder: write e-trace packets to RAM sink
-  test/qtest: add riscv-trace-test.c
-  hw/riscv/rv-trace-messages.c: add encoded trap message
-  hw/riscv, target/riscv: send trace trap messages
-  target/riscv, hw/riscv: send trace ppccd packets
-  hw/riscv/trace: add format2 msg helper
-  hw/riscv, target/riscv: send resync updiscon trace packets
-  hw/riscv/rv-trace-messages: add format 1 msgs with branch info
-  hw/riscv/trace-encoder: send branches info
-  hw/riscv/trace: update branch bit in sync messages
-
-Mayuresh Chitale (1):
-  hw/riscv/virt.c add trace encoder and ramsink fdt nodes
-
- hw/riscv/Kconfig                              |   5 +
- hw/riscv/meson.build                          |   2 +
- hw/riscv/rv-trace-messages.c                  | 373 +++++++++++
- hw/riscv/rv-trace-messages.h                  |  40 ++
- hw/riscv/trace-encoder.c                      | 609 ++++++++++++++++++
- hw/riscv/trace-encoder.h                      |  62 ++
- hw/riscv/trace-events                         |   9 +
- hw/riscv/trace-ram-sink.c                     | 263 ++++++++
- hw/riscv/trace-ram-sink.h                     |  83 +++
- hw/riscv/virt.c                               | 135 ++++
- include/hw/riscv/virt.h                       |   2 +
- target/riscv/cpu.h                            |  11 +
- target/riscv/cpu_helper.c                     |  26 +-
- target/riscv/helper.h                         |   6 +
- .../riscv/insn_trans/trans_privileged.c.inc   |  11 +
- target/riscv/insn_trans/trans_rvi.c.inc       |  15 +
- target/riscv/meson.build                      |   3 +-
- target/riscv/tcg/tcg-cpu.c                    |   5 +
- target/riscv/trace_helper.c                   |  62 ++
- target/riscv/translate.c                      |  21 +
- tests/qtest/meson.build                       |   2 +-
- tests/qtest/riscv-trace-test.c                | 120 ++++
- 22 files changed, 1862 insertions(+), 3 deletions(-)
- create mode 100644 hw/riscv/rv-trace-messages.c
- create mode 100644 hw/riscv/rv-trace-messages.h
- create mode 100644 hw/riscv/trace-encoder.c
- create mode 100644 hw/riscv/trace-encoder.h
- create mode 100644 hw/riscv/trace-ram-sink.c
- create mode 100644 hw/riscv/trace-ram-sink.h
- create mode 100644 target/riscv/trace_helper.c
- create mode 100644 tests/qtest/riscv-trace-test.c
+ target/sparc/cpu.h          |   1 -
+ target/i386/monitor.c       | 134 +++++++++++++++++-------------------
+ target/riscv/kvm/kvm-cpu.c  |   6 +-
+ target/riscv/monitor.c      |  12 ++--
+ target/sparc/helper.c       |   1 +
+ target/sparc/int64_helper.c |   1 +
+ target/xtensa/xtensa-semi.c |  11 +--
+ 7 files changed, 86 insertions(+), 80 deletions(-)
 
 -- 
 2.51.0
