@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49FDBCAC5B8
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 14:58:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A57C2CAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 14:58:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4Kkw-0007Dv-DA; Thu, 02 Oct 2025 10:58:06 -0400
+	id 1v4KlN-0007Ms-BN; Thu, 02 Oct 2025 10:58:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kkr-0007CV-VE
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:03 -0400
-Received: from mail-wm1-x343.google.com ([2a00:1450:4864:20::343])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4KlE-0007LC-H8
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:26 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kkh-0000Ch-HK
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:57:59 -0400
-Received: by mail-wm1-x343.google.com with SMTP id
- 5b1f17b1804b1-46e42fa08e4so9901635e9.3
- for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 07:57:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kl0-0000Kx-Fz
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:24 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-46e2c3b6d4cso9513245e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 07:58:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759417064; x=1760021864; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WoTee1wY/4Z8UrgceMQOy/NZaOImNF83wByOYO4nupE=;
- b=mM0s9g91nzp2DmUZtRCWARsMc1UiH4rDk0ogyS7vsS3xjHMNnLgEOmIKxmPjFpO7Cv
- h+n4E/o6ahIc87sM7Lzk2uN0gs5vCpeQS26npzS9JHMr81Wh6T92/LUmD9URzEgqp3Lp
- 56suICfx3RRT4EGmuq35kvMhian/cVuC1cZSb//nRPQ3JGzZr3QXhX7MT1+z8G0pbZHF
- kEJNE9fWYR9V0jb+z44kbIoLFFRQGC73ceVCOXZXSrcYDj/iCkHKp6oE8vnEM775tmUd
- V/jmWhIa6qwG2SVc1GAXlJio7u5BmEkM5aFN9MZH6zEX8slpoCtwC8mOzqTLSNZKZLn8
- 179Q==
+ d=linaro.org; s=google; t=1759417083; x=1760021883; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jPOBGEk/JkbJROHbpkshAw2ZS83wGDX/n50+XyqtzvY=;
+ b=unHShYyEG9tSzyBQW3zUmrf1ugjYqo6NSRefz8yqzaHNmewAv0QoW/mgHV5mC23opo
+ 0qIz3gZ3gg1wE3m41wuWaFH/9QDBS7HtJ5fwMV7q3gyTYlGsxWcUyaMRaeJAxFY7/d38
+ jKasS0pgqP8btG8DewEQr+VdWTxOIg2IB4b10+3tHReYmPtD9lnwO70qHH0/GqLidlFR
+ XDEGoIjOytSnDxLDzk0XTWb2B7CM/xxlcDLayRLKW3TW0lhg0Y+xPruQKiX+R2aJ19ef
+ 1VbdOJfj6DAbXwahPZntdVgnxuy4HulOLXG0ALiXc0StO2LBcsyb6bWR3zNHm17Wu9O5
+ XRZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759417064; x=1760021864;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WoTee1wY/4Z8UrgceMQOy/NZaOImNF83wByOYO4nupE=;
- b=BZ10lYwjgELaH9sYdY+Dqe3eZ+qSzr2cyM9y6jWkK5AZ/0aPVgz13lMIuOKaTYynby
- 5zziyUwnh5waviAgLfBuvj+4H+4EcYI6+Vxk+EOEiiebZtg0zgMejFrRx6pniZWuUv52
- 47rXW1rPGQPEmvGpyiiZzeCUfSdux7eFtdEvmoja5vewDECygwzPPkirGIQzUrGGh0pz
- I6BRuw2y0AEWTMqHAjYcBN1iXs8g8WU9pwDLS36TaqcPVDZYHr1MSz1CxXstHZDmKcZi
- 0sLD/QgPUTDGBgxRU5XOqt1sI/AsDPsl/Wv1ty2zhN/p08sujPLIgV4mfgOI5cwvP+JG
- DjhQ==
+ d=1e100.net; s=20230601; t=1759417083; x=1760021883;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jPOBGEk/JkbJROHbpkshAw2ZS83wGDX/n50+XyqtzvY=;
+ b=KAW66tlIAfAchC+arFsuOnbUFuCOa2GNA4TKXpqXqswJtHgXh+nPLJZFq70Xq3AQTY
+ j/2Qj6CLVF7WZusSmcCqEDCMrd+f80JKXBTbdffa9zUZLqeFsQvfapGC/+6e0f+WEUhD
+ B+Q1nhvxYSSti9K9O2ogYdQNI9GD/p2TlfUGMUvxBsUl+mvlfxXmybzVUv70wFGtXAe4
+ oVVE8rA/Dm8LjytkrbjotlCU25R5jA7GrRY07CbD/r+4MIgoUtQOCnzsaX1qlXiTXo87
+ T3Sod/lYkFgt/Fi3wkciRI9mHm/h5qsbd2GRxYVecUm8RU+XmB9oIAEK6QnB8PtR9hzi
+ 8IeQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWx4dErDallsh3TSKK9odfmrrW5Y/f+CpIX5145EsCUbaIp07LVwH3uwGmoDruNZ2vFsMgE/YEGmlQ@nongnu.org
-X-Gm-Message-State: AOJu0Yw88SJbbB18t6yuPCb7+Txe3jDn5Njd8EOTomT9mZGfYCidkEYU
- Amo7F3aOsgtpxF386M0NjsPXhHnfIfUO6BNYfq0OWDeH6dUyUoSe9e6+AiF4lUPbn2ggdjx6s9k
- SzCA/+vqTAmpq
-X-Gm-Gg: ASbGncv0iZNBVPcXoItXMraPdOmf+duHfypTyaevMIb+gvW4pKW92/YGdMQmkdiiKCl
- uFV3owh8kLxzf7dPvUfTeVOKlsAP3YPV08zE7vNIsBqnMdV+WPAKk331299hjcf3mRyM7z8+J3A
- EPGIM0u+LEr/zUDlApZP4nfpJlfsIoKFA78DiEOoUCV2DZpNhCW25VCBp+RVsghi0XpFw38VJk+
- qAzLON2f48uDY4U+ywtL3sqW86rqUoy9LeaZgYPPK/ymszlXWCoBsoBOXQLDbrHRB8pXtLswn/J
- SqGv4BX0IsUYjqEYCOtfSz4DeRFm/1TguezIVYPjnSNgAuYeORsbePU7xqCr0JWNpVeUAXn6sPY
- ivnl4QtS5d+WjKyMfnX8yh+XAElJUVHVy1e0yA2X6Xy+7QpMlF5dl7oTfo+kaCgmT5lHjw8L1Us
- tBKPDcbLhLPELDi0s7mT8ReKsA
-X-Google-Smtp-Source: AGHT+IHWOX09FU0xZ+bjaszTfnvN7j2gcdt7xzYqHffyTzQkST2hqs52bHwu+grjhQTtk+Hp82G0MQ==
-X-Received: by 2002:a05:600c:a404:b0:46e:6339:79d1 with SMTP id
- 5b1f17b1804b1-46e63397ae5mr53003735e9.5.1759417063905; 
- Thu, 02 Oct 2025 07:57:43 -0700 (PDT)
+ AJvYcCW25pu7SOUFeBcpLcHVLrAMI4Pjeb88X07wOKyIOqlcQVqluaPqYTSJp5Dd8TzdkXYhk3E5rV0Ps0aP@nongnu.org
+X-Gm-Message-State: AOJu0YyKJzfEynu/ZoBdyusqZNIx5vRGRzEG4RGZGfqfEkV/jvKjVdVx
+ iJV2XJlOjHu1GVX9YBTlUXf8tKwtxTMsnYh5+NPDctOuU4ITo4GBzzgfkWyQcrs5tHk=
+X-Gm-Gg: ASbGncs/fhG91NR3X3loD1Gh5i+69L065/IFleRCQMOGEOHeBF/r8T9FEe1Lf0whIqp
+ MQ//Sw+hVdy1QWlWpBRwk9WFMS7SlvSdqun+h31N7cJkJNeXP5r8zQZal99yIKKB78sTi4qhVIY
+ ABf35D8wr6wm+YrXJ/KdMJ/k0G4ADw0lCHCoCbAc34E7jeZtFM+ACfpmCocC64W+25TobpK/XC6
+ k2mXoe0lcqJPMVV/vlUFaeXclCG9bcqOeg8l/8x7P7ugZt2FrG/gDNLoQ0qZeBcek9TjPizMSZ7
+ GeszfIL9BMSsGDQHUcDcdF0x0WmYSD5Rj7+LCPZs2XNcjV17JMPlv+lMpRMTfogjEJSzn3qkGQf
+ xg+E4Mtrg+iC7aPMEd/v6LwPv+HHg9tsvWYhV53j24U64vpecDlufRW+QH+forsRsx6D7v68gbi
+ 54/TlkKXHJteRz44wW0VFC3vcH/Y4e02Oxch8=
+X-Google-Smtp-Source: AGHT+IEjzmN0XjhLdOPvaEBBVbNlhTlDJng2gvvPZFinAsHbstMKy8G/5GeCIAoHz3HU8ry0BH/Img==
+X-Received: by 2002:a05:600c:8b65:b0:46e:42fa:ffce with SMTP id
+ 5b1f17b1804b1-46e6125d025mr53455535e9.2.1759417083378; 
+ Thu, 02 Oct 2025 07:58:03 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8e9719sm4121462f8f.31.2025.10.02.07.57.42
+ 5b1f17b1804b1-46e61a25dbcsm91902285e9.19.2025.10.02.07.58.02
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 02 Oct 2025 07:57:43 -0700 (PDT)
+ Thu, 02 Oct 2025 07:58:02 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
@@ -76,22 +76,24 @@ Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 0/6] target: Remove remnant legacy cpu_physical_memory_*()
- calls
-Date: Thu,  2 Oct 2025 16:57:35 +0200
-Message-ID: <20251002145742.75624-1-philmd@linaro.org>
+Subject: [PATCH 4/6] target/riscv/monitor: Replace legacy
+ cpu_physical_memory_read() call
+Date: Thu,  2 Oct 2025 16:57:39 +0200
+Message-ID: <20251002145742.75624-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251002145742.75624-1-philmd@linaro.org>
+References: <20251002145742.75624-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::343;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x343.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,44 +109,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The cpu_physical_memory API is legacy (see commit b7ecba0f6f6):
+Commit b7ecba0f6f6 ("docs/devel/loads-stores.rst: Document our
+various load and store APIs") mentioned cpu_physical_memory_*()
+methods are legacy, the replacement being address_space_*().
 
-  ``cpu_physical_memory_*``
-  ~~~~~~~~~~~~~~~~~~~~~~~~~
+Propagate the address space to walk_pte(), then replace the
+cpu_physical_memory_read() by address_space_read(). Since the
+monitor command are run with a vCPU context, use its default
+address space. As with the previous implementation, ignore
+whether the memory read succeeded or failed.
 
-  These are convenience functions which are identical to
-  ``address_space_*`` but operate specifically on the system address space,
-  always pass a ``MEMTXATTRS_UNSPECIFIED`` set of memory attributes and
-  ignore whether the memory transaction succeeded or failed.
-  For new code they are better avoided:
-  ...
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/riscv/monitor.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-After converting the target/s390x [*], this series convert the
-remaining targets.
-
-Based-on: <20251001175448.18933-1-philmd@linaro.org>
-
-[*] https://lore.kernel.org/qemu-devel/20251002091132.65703-1-philmd@linaro.org/
-
-Philippe Mathieu-Daudé (6):
-  target/i386/monitor: Propagate CPU address space to 'info mem'
-    handlers
-  target/i386/monitor: Replace legacy cpu_physical_memory_read() calls
-  target/riscv/kvm: Replace legacy cpu_physical_memory_read/write()
-    calls
-  target/riscv/monitor: Replace legacy cpu_physical_memory_read() call
-  target/xtensa: Replace legacy cpu_physical_memory_[un]map() calls
-  target/sparc: Reduce inclusions of 'exec/cpu-common.h'
-
- target/sparc/cpu.h          |   1 -
- target/i386/monitor.c       | 134 +++++++++++++++++-------------------
- target/riscv/kvm/kvm-cpu.c  |   6 +-
- target/riscv/monitor.c      |  12 ++--
- target/sparc/helper.c       |   1 +
- target/sparc/int64_helper.c |   1 +
- target/xtensa/xtensa-semi.c |  11 +--
- 7 files changed, 86 insertions(+), 80 deletions(-)
-
+diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
+index 100005ea4e9..8a77476db93 100644
+--- a/target/riscv/monitor.c
++++ b/target/riscv/monitor.c
+@@ -23,6 +23,7 @@
+ #include "cpu_bits.h"
+ #include "monitor/monitor.h"
+ #include "monitor/hmp-target.h"
++#include "system/memory.h"
+ 
+ #ifdef TARGET_RISCV64
+ #define PTE_HEADER_FIELDS       "vaddr            paddr            "\
+@@ -77,11 +78,13 @@ static void print_pte(Monitor *mon, int va_bits, target_ulong vaddr,
+                    attr & PTE_D ? 'd' : '-');
+ }
+ 
+-static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
++static void walk_pte(Monitor *mon, AddressSpace *as,
++                     hwaddr base, target_ulong start,
+                      int level, int ptidxbits, int ptesize, int va_bits,
+                      target_ulong *vbase, hwaddr *pbase, hwaddr *last_paddr,
+                      target_ulong *last_size, int *last_attr)
+ {
++    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+     hwaddr pte_addr;
+     hwaddr paddr;
+     target_ulong last_start = -1;
+@@ -100,7 +103,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
+ 
+     for (idx = 0; idx < (1UL << ptidxbits); idx++) {
+         pte_addr = base + idx * ptesize;
+-        cpu_physical_memory_read(pte_addr, &pte, ptesize);
++        address_space_read(as, pte_addr, attrs, &pte, ptesize);
+ 
+         paddr = (hwaddr)(pte >> PTE_PPN_SHIFT) << PGSHIFT;
+         attr = pte & 0xff;
+@@ -132,7 +135,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
+                 *last_size = pgsize;
+             } else {
+                 /* pointer to the next level of the page table */
+-                walk_pte(mon, paddr, start, level - 1, ptidxbits, ptesize,
++                walk_pte(mon, as, paddr, start, level - 1, ptidxbits, ptesize,
+                          va_bits, vbase, pbase, last_paddr,
+                          last_size, last_attr);
+             }
+@@ -145,6 +148,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
+ 
+ static void mem_info_svxx(Monitor *mon, CPUArchState *env)
+ {
++    AddressSpace *as = env_cpu(env)->as;
+     int levels, ptidxbits, ptesize, vm, va_bits;
+     hwaddr base;
+     target_ulong vbase;
+@@ -199,7 +203,7 @@ static void mem_info_svxx(Monitor *mon, CPUArchState *env)
+     last_attr = 0;
+ 
+     /* walk page tables, starting from address 0 */
+-    walk_pte(mon, base, 0, levels - 1, ptidxbits, ptesize, va_bits,
++    walk_pte(mon, as, base, 0, levels - 1, ptidxbits, ptesize, va_bits,
+              &vbase, &pbase, &last_paddr, &last_size, &last_attr);
+ 
+     /* don't forget the last one */
 -- 
 2.51.0
 
