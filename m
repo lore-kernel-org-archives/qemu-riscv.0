@@ -4,86 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 185FBCAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 05:09:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72CB4CAC5B8
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 11:25:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4BYP-0006Zy-Pj; Thu, 02 Oct 2025 01:08:34 -0400
+	id 1v4HQ2-0005fD-OE; Thu, 02 Oct 2025 07:24:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v4BY7-0006ZD-FY
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 01:08:17 -0400
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1v4HPr-0005c7-Nh
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 07:24:07 -0400
+Received: from mail-yw1-x1130.google.com ([2607:f8b0:4864:20::1130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v4BXy-0003kz-Cf
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 01:08:14 -0400
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-636255b92c9so973148a12.3
- for <qemu-riscv@nongnu.org>; Wed, 01 Oct 2025 22:07:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1v4HPc-0005bq-SM
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 07:24:05 -0400
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-72e565bf2f0so10402187b3.3
+ for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 04:23:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759381677; x=1759986477; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=ventanamicro.com; s=google; t=1759404226; x=1760009026; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cSOUcqp2IlrIvHA8jMOKMPae7kynR4QEp3SeGZrNH6w=;
- b=dXovyZQQ5OprmJC0nnB0Qug5hGACccfST3vVQPCcIVWECxHdg3Pnb5BV//p5IgsWX3
- In4seiS68wFtH5rc3HzUYiSHcaQSEFR/cUYluuSCi3YlxKwXn32ZHwtNgNfajQRM4PJj
- OEhgyUt8OOzfXAxC3gcP1CKw1d3S1rCYIOYFqNGHVehnfiYj5HefDXE/vViVNaEJxupu
- mvwS9PtPGMO+0950NmxHt6QeX7wPyE9G+Ck+qQ3+uAIJnbqKagB2Bs9Mi7616XTv5Lvy
- 4He2KFfuHzc2UpOyQSqL4hIfZk4yMfoE/NNBGlJzBiDGWL72g1Airp5aT9Dcp9nFXpjn
- UYRA==
+ bh=Req9Bk9uVBsfKQ0cV3kuPNu4fJ5Mnp/PulkMsbISFUE=;
+ b=g0LnUqMdboBH5uWzbObU2NmIakiIgX5rF+3Dvl0XZeFgoOiKEQza6zx47TXZGs3UOq
+ kR5TZxUDhqcgErgxNNEuOgQMkDbo544UR37zABJGLWb+veFSfQDbNK88KDKS45RnAhCy
+ grVR2//sn08sem23HOpGGgK3DEbGbqdefwO+lYEBO82nR+Xfq2MD154SqtaNfPSKDDm6
+ VrHPHLD1QY67VEZCeOBLYcC6hdFAo7tu6t7QjVyfW0NIPYtlr35JLDqYbKaV0vTaf6pe
+ 1+cYrFaWSvrF4+QnyBLMgiXoT1Tf4L0lwvzxEur5x8yi0T9ZmPGz3Gq9SHPPxr2pmc8G
+ Fspg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759381677; x=1759986477;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1759404226; x=1760009026;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cSOUcqp2IlrIvHA8jMOKMPae7kynR4QEp3SeGZrNH6w=;
- b=qCPx72PBxeO09mKt96Vi5WsjbAqjdoytI6Vzs4DMe8bROxzToLn0VJ0OqtvogeMajj
- QLdNJ/U5nIYgvY1rIleHAk6vSivsyhJhb+9qsNVLqlUfqk7aS5preVa9ZYSqC0D34tgy
- 0vZ+HDTJ2ToxYPLg+QhisOe6QQc0PiPb1kmZEvzA4zcUboJ8xk/WGFW+k17Omou4R4+Z
- FO8p716JilYlK1fyvqRA+0AanCkaX1jXbqPAlS3OYKu9A8phfc61R2YdlvWe77jUMMe6
- ob5Wk5lhR41V2YsZMkmBBwFsgUt6ijfZT8R8SMKHY03e78C7RKELCDdDY+i/CXpjx1o6
- y+tg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWH3Q/4Xbp/Qn+2ZDqidls6Qg2EJ6ABVmWtXgT8NlFgNXq/ywOdv1x99TyYats/0aaoRPRTZ2nvvbPf@nongnu.org
-X-Gm-Message-State: AOJu0Yz7LTvX15nM7hIy1vKo0olQ/LVxU8jHkJNc4y+kOiftEa0TYUaU
- K5rhpsd+iz2mplQNBwECYPss/nARUaG6SEFgpC0/Hdi4WtD+/f7e5hnjywefU6UJbeNSI2klWrC
- 10nN/MQa4rOYHMOLNnDEghcWvsBSRnsk=
-X-Gm-Gg: ASbGncu9RM4tHsowJoOzYLD5CKlJVNY5gZTdB9rWLSYJV1I/AFkkmDq4WjKAK1vFOPo
- V433doQ4DHWXEkL9s02eZjtN2RZ1mOg04BqO1X369Sur25y6bVyknI1fz2+FzQnMnMk1Y+rimp/
- 0M7M9m0a1flkCP6+AvNqdtKXSykyrzTpLz8HQbImrX6GO+PQGl9d0hSZ9d9WnY8gwtY4l2qmjkU
- h0ODa/dEHAdWBOm5pmZCZvGuIXDW74+ZdjTZhhJfjIppSjrISMJChhXSltp6w==
-X-Google-Smtp-Source: AGHT+IGbPbj4c0hWe6rckwwTwn4p9XtFbIOSiMHR+O74Jl7CyLyWE/cFBAXCXAcwNA1z6jnG/UR8LPnDKSqRCgE/vL8=
-X-Received: by 2002:a17:907:2d20:b0:b07:e3a8:5194 with SMTP id
- a640c23a62f3a-b46e515e0a5mr678873866b.22.1759381676627; Wed, 01 Oct 2025
- 22:07:56 -0700 (PDT)
+ bh=Req9Bk9uVBsfKQ0cV3kuPNu4fJ5Mnp/PulkMsbISFUE=;
+ b=TLCMikEuRARw8TTA484PmMqB5kejv+pbcWXz9AzexPmJUF/fvjUpdB5XprAPIhcaFX
+ Hj+74hZ4Wdlu5PWca9JPwvuv7CNH/pcmo7JAGbFF7/FlhrEA0pI1B4X+ORNGaGFXQ70o
+ irpl6n4jKpce8BJE2d5T216swjy7iOSs4RXksKIS/YB4nNuHBud2Hnj6eRv78BTL3Q9D
+ zEtb9jNt8/i6I7znBgIGm2OyAs4uT69Ek/CEzJF4VCC773eAOGJGlabF9w23yNlhs/CU
+ Oz4gE9Sw/of62sNjjnnmuQzqTwlFxR370CtBT/sZn9ayKX1fAD7i3vuEFHlj6e8VKQih
+ oJng==
+X-Gm-Message-State: AOJu0YzgMmXg1B5csLTbpNfQC+dNtPvlRMHyIYT2lI8Nt0Nad52Pm+hl
+ oCrR14yLU4u8RU5wa2t9ysN4sRTrQL4hd/qEcBTRgJaIIfj/+4kSssjnkKBcwIsBnDe+Oauxeqe
+ r8DmyOW0=
+X-Gm-Gg: ASbGnct3VtUO2wPen2IYM/d4ZE9mkYDrFaD3P4cDADsroNUibGhJqKav42i207UiuXa
+ piqrUpj/pZi+fIZQu77LHEIaaNu/jUtLyt3bwEKsDJvM5xnjJRq10g5oxqSfi3Y7WhRKBPbQmwA
+ XoG89I2StjWphRjg4QDm17vACoJKfgyWl++Ed8UKEr80NuXDEBK79qv9pOquXCW7DkxWsDbyRmp
+ i/O5xHZC1zaFTOTLZGO/ZkOCPBtASOQjPLK6nhcXlLurDdHHw3/RguSEI2l75VOK9FS7uqVkHHm
+ OhcIhaHvybegQRlufS1L/E/OkNS6NZU+zYISWxhEzbPmcOSU9Lv6/Pt2JhWU0Wm0cvf9pbqesij
+ Z8Nha//iT7Yk/Pn704xwIfufnOLDw9ow2M1zildL1TkxOaOEkzKxPoe6JqwNy3q/X7PRpA6+C6N
+ 0=
+X-Google-Smtp-Source: AGHT+IGAHX5qNgGO7U59KO7FniU/pCWcw6e0bUx4PCU3IvawrynL+XaKGgQtUQRWN9R5SSvuAK7Yeg==
+X-Received: by 2002:a05:690c:4889:b0:748:5001:df62 with SMTP id
+ 00721157ae682-77f6f2e241dmr100948507b3.44.1759404226340; 
+ Thu, 02 Oct 2025 04:23:46 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com
+ ([2804:7f0:bcc0:b174:a9af:8146:7deb:fbf3])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-77f81c068f6sm7331627b3.5.2025.10.02.04.23.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Oct 2025 04:23:45 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
+ richard.henderson@linaro.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 01/17] hw/riscv: Trace Encoder initial impl
+Date: Thu,  2 Oct 2025 08:23:19 -0300
+Message-ID: <20251002112335.2374517-2-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251002112335.2374517-1-dbarboza@ventanamicro.com>
+References: <20251002112335.2374517-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-References: <20250913041233.972870-1-guoren@kernel.org>
-In-Reply-To: <20250913041233.972870-1-guoren@kernel.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Oct 2025 15:07:30 +1000
-X-Gm-Features: AS18NWAy2EuzbdPxno_KxqHV52AiiHglsi8I-G57995-DuZlLz-NrMvn4oHwLXQ
-Message-ID: <CAKmqyKOLjbAKFmJeb2MAznHES1=pn224i-8r9yKSC+-gu0UZug@mail.gmail.com>
-Subject: Re: [PATCH V3] hw/riscv/riscv-iommu: Fixup PDT Nested Walk
-To: guoren@kernel.org
-Cc: zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, 
- alistair.francis@wdc.com, seb@rivosinc.com, tjeznach@rivosinc.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, qemu-stable@nongnu.org, 
- Nutty Liu <liujingqi@lanxincomputing.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52a.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1130;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x1130.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,216 +104,362 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Sep 13, 2025 at 2:15=E2=80=AFPM <guoren@kernel.org> wrote:
->
-> From: "Guo Ren (Alibaba DAMO Academy)" <guoren@kernel.org>
->
-> Current implementation is wrong when iohgatp !=3D bare. The RISC-V
-> IOMMU specification has defined that the PDT is based on GPA, not
-> SPA. So this patch fixes the problem, making PDT walk correctly
-> when the G-stage table walk is enabled.
->
-> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-> Cc: qemu-stable@nongnu.org
-> Cc: Sebastien Boeuf <seb@rivosinc.com>
-> Cc: Tomasz Jeznach <tjeznach@rivosinc.com>
-> Reviewed-by: Weiwei Li <liwei1518@gmail.com>
-> Reviewed-by: Nutty Liu <liujingqi@lanxincomputing.com>
-> Signed-off-by: Guo Ren (Alibaba DAMO Academy) <guoren@kernel.org>
+The Trace Encoder is a hardware module that interacts with a CPU,
+gathering execution information (a.k.a instruction delta trace), and
+send it downstream to other storage components such as a RAM Sink (a RAM
+storage). This trace info can then be read via software (e.g. perf) to
+reproduce the behavior of a given binary that ran in the CPU.
 
-Thanks!
+This implementation is based on the Efficient Trace for RISC-V [1] and
+RISC-V Trace Control Interface Specification [2]. It's not intended to
+implement all spec features: the idea is to provide a base where we can
+add extra features on demand.
 
-Applied to riscv-to-apply.next
+We'll get back to the instruction delta trace and how we'll instrument
+TCG to produce it later. For now we'll set the minimal components to get
+the basic framework running.
 
-Alistair
+This Trace Encoder impl has just the minimal bits specified in [2],
+section "Minimal Implementation". RO and RSVP bits are taken verbatim
+from [2] without considering what we're actually going to support. The
+base impl is heavily inspired by the XLNZ-ZDMA device w.r.t the usage of
+the RegisterInfo and register.h framework.
 
-> ---
-> Changes in V3:
->  - Fixup inner non-leaf walking for 4KB-align.
->  - Add two Reviewed-by tags.
->
-> Changes in V2:
->  - Remove nested param to make patch clearer.
-> ---
->  hw/riscv/riscv-iommu.c | 141 ++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 139 insertions(+), 2 deletions(-)
->
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 96a7fbdefcf3..ddb5236f55d1 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -866,6 +866,143 @@ static bool riscv_iommu_validate_process_ctx(RISCVI=
-OMMUState *s,
->      return true;
->  }
->
-> +/**
-> + * pdt_memory_read: PDT wrapper of dma_memory_read.
-> + *
-> + * @s: IOMMU Device State
-> + * @ctx: Device Translation Context with devid and pasid set
-> + * @addr: address within that address space
-> + * @buf: buffer with the data transferred
-> + * @len: length of the data transferred
-> + * @attrs: memory transaction attributes
-> + */
-> +static MemTxResult pdt_memory_read(RISCVIOMMUState *s,
-> +                                   RISCVIOMMUContext *ctx,
-> +                                   dma_addr_t addr,
-> +                                   void *buf, dma_addr_t len,
-> +                                   MemTxAttrs attrs)
-> +{
-> +    uint64_t gatp_mode, pte;
-> +    struct {
-> +        unsigned char step;
-> +        unsigned char levels;
-> +        unsigned char ptidxbits;
-> +        unsigned char ptesize;
-> +    } sc;
-> +    MemTxResult ret;
-> +    dma_addr_t base =3D addr;
-> +
-> +    /* G stages translation mode */
-> +    gatp_mode =3D get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
-> +    if (gatp_mode =3D=3D RISCV_IOMMU_DC_IOHGATP_MODE_BARE)
-> +        goto out;
-> +
-> +    /* G stages translation tables root pointer */
-> +    base =3D PPN_PHYS(get_field(ctx->gatp, RISCV_IOMMU_ATP_PPN_FIELD));
-> +
-> +    /* Start at step 0 */
-> +    sc.step =3D 0;
-> +
-> +    if (s->fctl & RISCV_IOMMU_FCTL_GXL) {
-> +        /* 32bit mode for GXL =3D=3D 1 */
-> +        switch (gatp_mode) {
-> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4:
-> +            if (!(s->cap & RISCV_IOMMU_CAP_SV32X4)) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +            sc.levels    =3D 2;
-> +            sc.ptidxbits =3D 10;
-> +            sc.ptesize   =3D 4;
-> +            break;
-> +        default:
-> +            return MEMTX_ACCESS_ERROR;
-> +        }
-> +    } else {
-> +        /* 64bit mode for GXL =3D=3D 0 */
-> +        switch (gatp_mode) {
-> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV39X4:
-> +            if (!(s->cap & RISCV_IOMMU_CAP_SV39X4)) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +            sc.levels    =3D 3;
-> +            sc.ptidxbits =3D 9;
-> +            sc.ptesize   =3D 8;
-> +            break;
-> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV48X4:
-> +            if (!(s->cap & RISCV_IOMMU_CAP_SV48X4)) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +            sc.levels    =3D 4;
-> +            sc.ptidxbits =3D 9;
-> +            sc.ptesize   =3D 8;
-> +            break;
-> +        case RISCV_IOMMU_DC_IOHGATP_MODE_SV57X4:
-> +            if (!(s->cap & RISCV_IOMMU_CAP_SV57X4)) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +            sc.levels    =3D 5;
-> +            sc.ptidxbits =3D 9;
-> +            sc.ptesize   =3D 8;
-> +            break;
-> +        default:
-> +            return MEMTX_ACCESS_ERROR;
-> +        }
-> +    }
-> +
-> +    do {
-> +        const unsigned va_bits =3D (sc.step ? 0 : 2) + sc.ptidxbits;
-> +        const unsigned va_skip =3D TARGET_PAGE_BITS + sc.ptidxbits *
-> +                                 (sc.levels - 1 - sc.step);
-> +        const unsigned idx =3D (addr >> va_skip) & ((1 << va_bits) - 1);
-> +        const dma_addr_t pte_addr =3D base + idx * sc.ptesize;
-> +
-> +        /* Address range check before first level lookup */
-> +        if (!sc.step) {
-> +            const uint64_t va_mask =3D (1ULL << (va_skip + va_bits)) - 1=
-;
-> +            if ((addr & va_mask) !=3D addr) {
-> +                return MEMTX_ACCESS_ERROR;
-> +            }
-> +        }
-> +
-> +        /* Read page table entry */
-> +        if (sc.ptesize =3D=3D 4) {
-> +            uint32_t pte32 =3D 0;
-> +            ret =3D ldl_le_dma(s->target_as, pte_addr, &pte32, attrs);
-> +            pte =3D pte32;
-> +        } else {
-> +            ret =3D ldq_le_dma(s->target_as, pte_addr, &pte, attrs);
-> +        }
-> +        if (ret !=3D MEMTX_OK)
-> +            return ret;
-> +
-> +        sc.step++;
-> +        hwaddr ppn =3D pte >> PTE_PPN_SHIFT;
-> +
-> +        if (!(pte & PTE_V)) {
-> +            return MEMTX_ACCESS_ERROR; /* Invalid PTE */
-> +        } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
-> +            base =3D PPN_PHYS(ppn); /* Inner PTE, continue walking */
-> +        } else if ((pte & (PTE_R | PTE_W | PTE_X)) =3D=3D PTE_W) {
-> +            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W=
- */
-> +        } else if ((pte & (PTE_R | PTE_W | PTE_X)) =3D=3D (PTE_W | PTE_X=
-)) {
-> +            return MEMTX_ACCESS_ERROR; /* Reserved leaf PTE flags: PTE_W=
- + PTE_X */
-> +        } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
-> +            return MEMTX_ACCESS_ERROR; /* Misaligned PPN */
-> +        } else {
-> +            /* Leaf PTE, translation completed. */
-> +            base =3D PPN_PHYS(ppn) | (addr & ((1ULL << va_skip) - 1));
-> +            break;
-> +        }
-> +
-> +        if (sc.step =3D=3D sc.levels) {
-> +            return MEMTX_ACCESS_ERROR; /* Can't find leaf PTE */
-> +        }
-> +    } while (1);
-> +
-> +out:
-> +    return dma_memory_read(s->target_as, base, buf, len, attrs);
-> +}
-> +
->  /*
->   * RISC-V IOMMU Device Context Loopkup - Device Directory Tree Walk
->   *
-> @@ -1038,7 +1175,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s=
-, RISCVIOMMUContext *ctx)
->           */
->          const int split =3D depth * 9 + 8;
->          addr |=3D ((ctx->process_id >> split) << 3) & ~TARGET_PAGE_MASK;
-> -        if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
-> +        if (pdt_memory_read(s, ctx, addr, &de, sizeof(de),
->                              MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {
->              return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
->          }
-> @@ -1053,7 +1190,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s=
-, RISCVIOMMUContext *ctx)
->
->      /* Leaf entry in PDT */
->      addr |=3D (ctx->process_id << 4) & ~TARGET_PAGE_MASK;
-> -    if (dma_memory_read(s->target_as, addr, &dc.ta, sizeof(uint64_t) * 2=
-,
-> +    if (pdt_memory_read(s, ctx, addr, &dc.ta, sizeof(uint64_t) * 2,
->                          MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {
->          return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
->      }
-> --
-> 2.40.1
->
->
+Discovery of the Trace Encoder will be made via fdt, a single entry per
+CPU. We'll connect each Trace Encoder to its CPU in the 'virt' board
+later.
+
+[1] https://github.com/riscv-non-isa/riscv-trace-spec/releases/download/v2.0-20250616/riscv-trace-spec-asciidoc.pdf
+[2] https://github.com/riscv-non-isa/tg-nexus-trace/releases/download/1.0_Ratified/RISC-V-Trace-Control-Interface.pdf
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ hw/riscv/Kconfig         |   5 +
+ hw/riscv/meson.build     |   1 +
+ hw/riscv/trace-encoder.c | 216 +++++++++++++++++++++++++++++++++++++++
+ hw/riscv/trace-encoder.h |  42 ++++++++
+ hw/riscv/trace-events    |   4 +
+ 5 files changed, 268 insertions(+)
+ create mode 100644 hw/riscv/trace-encoder.c
+ create mode 100644 hw/riscv/trace-encoder.h
+
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index fc9c35bd98..2de0892496 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -7,6 +7,10 @@ config RISCV_NUMA
+ config IBEX
+     bool
+ 
++config RISCV_TRACE
++    bool
++    select REGISTER
++
+ # RISC-V machines in alphabetical order
+ 
+ config MICROCHIP_PFSOC
+@@ -68,6 +72,7 @@ config RISCV_VIRT
+     select PLATFORM_BUS
+     select ACPI
+     select ACPI_PCI
++    select RISCV_TRACE
+ 
+ config SHAKTI_C
+     bool
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index 2a8d5b136c..b4a9988a62 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -14,5 +14,6 @@ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
+ 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
+ riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
+ riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
++riscv_ss.add(when: 'CONFIG_RISCV_TRACE', if_true: files('trace-encoder.c'))
+ 
+ hw_arch += {'riscv': riscv_ss}
+diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
+new file mode 100644
+index 0000000000..21bf650a6a
+--- /dev/null
++++ b/hw/riscv/trace-encoder.c
+@@ -0,0 +1,216 @@
++/*
++ * Emulation of a RISC-V Trace Encoder
++ *
++ * Copyright (C) 2025 Ventana Micro Systems Inc.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++
++#include "trace-encoder.h"
++#include "hw/irq.h"
++#include "hw/qdev-properties.h"
++#include "migration/vmstate.h"
++#include "qemu/bitops.h"
++#include "qemu/log.h"
++#include "qemu/module.h"
++#include "qapi/error.h"
++#include "trace.h"
++#include "system/device_tree.h"
++#include "hw/register.h"
++#include "cpu.h"
++
++/*
++ * trTeControl register fields
++ */
++REG32(TR_TE_CONTROL, 0x0)
++    FIELD(TR_TE_CONTROL, ACTIVE, 0, 1)
++    FIELD(TR_TE_CONTROL, ENABLE, 1, 1)
++    FIELD(TR_TE_CONTROL, INST_TRACING, 2, 1)
++    FIELD(TR_TE_CONTROL, EMPTY, 3, 1)
++    FIELD(TR_TE_CONTROL, INST_MODE, 4, 3)
++    FIELD(TR_TE_CONTROL, INST_SYNC_MODE, 16, 2)
++    FIELD(TR_TE_CONTROL, FORMAT, 24, 3)
++    /* reserved bits */
++    FIELD(TR_TE_CONTROL, RSVP1, 7, 2)
++    FIELD(TR_TE_CONTROL, RSVP2, 10, 1)
++    FIELD(TR_TE_CONTROL, RSVP3, 14, 1)
++    FIELD(TR_TE_CONTROL, RSVP4, 18, 2)
++    FIELD(TR_TE_CONTROL, RSVP5, 27, 4)
++
++#define R_TR_TE_CONTROL_RSVP_BITS (MAKE_64BIT_MASK(32, 32) | \
++                                   R_TR_TE_CONTROL_RSVP1_MASK | \
++                                   R_TR_TE_CONTROL_RSVP2_MASK | \
++                                   R_TR_TE_CONTROL_RSVP3_MASK | \
++                                   R_TR_TE_CONTROL_RSVP4_MASK | \
++                                   R_TR_TE_CONTROL_RSVP5_MASK)
++
++/* trTeControlEmpty is the only RO field and reset value */
++#define R_TR_TE_CONTROL_RESET R_TR_TE_CONTROL_EMPTY_MASK
++#define R_TR_TE_CONTROL_RO_BITS R_TR_TE_CONTROL_EMPTY_MASK
++
++/*
++ * trTeImpl register fields
++ */
++REG32(TR_TE_IMPL, 0x4)
++    FIELD(TR_TE_IMPL, VER_MAJOR, 0, 4)
++    FIELD(TR_TE_IMPL, VER_MINOR, 4, 4)
++    FIELD(TR_TE_IMPL, COMP_TYPE, 8, 4)
++    FIELD(TR_TE_IMPL, PROTOCOL_MAJOR, 16, 4)
++    FIELD(TR_TE_IMPL, PROTOCOL_MINOR, 20, 4)
++    /* reserved bits */
++    FIELD(TR_TE_IMPL, RSVP1, 12, 4)
++    FIELD(TR_TE_IMPL, RSVP2, 24, 8)
++
++#define R_TR_TE_IMPL_RSVP_BITS (MAKE_64BIT_MASK(32, 32) | \
++                                R_TR_TE_IMPL_RSVP1_MASK | \
++                                R_TR_TE_IMPL_RSVP2_MASK)
++
++#define R_TR_TE_IMPL_RO_BITS (R_TR_TE_IMPL_VER_MAJOR_MASK | \
++                              R_TR_TE_IMPL_VER_MINOR_MASK | \
++                              R_TR_TE_IMPL_COMP_TYPE_MASK | \
++                              R_TR_TE_IMPL_PROTOCOL_MAJOR_MASK | \
++                              R_TR_TE_IMPL_PROTOCOL_MINOR_MASK)
++
++#define R_TR_TE_IMPL_RESET (BIT(0) | BIT(8))
++
++static RegisterAccessInfo trencoder_regs_info[] = {
++    {   .name = "TR_TE_CONTROL", .addr = A_TR_TE_CONTROL,
++        .rsvd = R_TR_TE_CONTROL_RSVP_BITS,
++        .reset = R_TR_TE_CONTROL_RESET,
++        .ro = R_TR_TE_CONTROL_RO_BITS,
++    },
++    {   .name = "TR_TE_IMPL", .addr = A_TR_TE_IMPL,
++        .rsvd = R_TR_TE_IMPL_RSVP_BITS,
++        .reset = R_TR_TE_IMPL_RESET,
++        .ro = R_TR_TE_IMPL_RO_BITS,
++    },
++};
++
++static uint64_t trencoder_read(void *opaque, hwaddr addr, unsigned size)
++{
++    TraceEncoder *te = TRACE_ENCODER(opaque);
++    RegisterInfo *r = &te->regs_info[addr / 4];
++
++    if (!r->data) {
++        trace_trencoder_read_error(addr);
++        return 0;
++    }
++
++    return register_read(r, ~0, NULL, false);
++}
++
++static void trencoder_write(void *opaque, hwaddr addr,
++                            uint64_t value, unsigned size)
++{
++    TraceEncoder *te = TRACE_ENCODER(opaque);
++    RegisterInfo *r = &te->regs_info[addr / 4];
++
++    if (!r->data) {
++        trace_trencoder_write_error(addr, value);
++        return;
++    }
++
++    register_write(r, value, ~0, NULL, false);
++}
++
++static const MemoryRegionOps trencoder_ops = {
++    .read = trencoder_read,
++    .write = trencoder_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .valid = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++};
++
++static void trencoder_reset(DeviceState *dev)
++{
++    TraceEncoder *te = TRACE_ENCODER(dev);
++
++    for (int i = 0; i < ARRAY_SIZE(te->regs_info); i++) {
++        register_reset(&te->regs_info[i]);
++    }
++}
++
++static void trencoder_realize(DeviceState *dev, Error **errp)
++{
++    TraceEncoder *te = TRACE_ENCODER(dev);
++
++    memory_region_init_io(&te->reg_mem, OBJECT(dev),
++                          &trencoder_ops, te,
++                          TYPE_TRACE_ENCODER,
++                          te->reg_mem_size);
++    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &te->reg_mem);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, te->baseaddr);
++
++    /* RegisterInfo init taken from hw/dma/xlnx-zdma.c */
++    for (int i = 0; i < ARRAY_SIZE(trencoder_regs_info); i++) {
++        uint32_t reg_idx = trencoder_regs_info[i].addr / 4;
++        RegisterInfo *r = &te->regs_info[reg_idx];
++
++        *r = (RegisterInfo) {
++            .data = (uint8_t *)&te->regs[reg_idx],
++            .data_size = sizeof(uint32_t),
++            .access = &trencoder_regs_info[i],
++            .opaque = te,
++        };
++    }
++}
++
++static const Property trencoder_props[] = {
++    /*
++     * We need a link to the associated CPU to
++     * enable/disable tracing.
++     */
++    DEFINE_PROP_LINK("cpu", TraceEncoder, cpu, TYPE_RISCV_CPU, RISCVCPU *),
++    DEFINE_PROP_UINT64("baseaddr", TraceEncoder, baseaddr, 0),
++    DEFINE_PROP_UINT64("dest-baseaddr", TraceEncoder, dest_baseaddr, 0),
++    DEFINE_PROP_UINT64("ramsink-ramstart", TraceEncoder,
++                       ramsink_ramstart, 0),
++    DEFINE_PROP_UINT64("ramsink-ramlimit", TraceEncoder,
++                       ramsink_ramlimit, 0),
++    DEFINE_PROP_UINT32("reg-mem-size", TraceEncoder,
++                       reg_mem_size, TRACE_R_MAX * 4),
++    DEFINE_PROP_INT32("cpu-id", TraceEncoder, cpu_id, 0),
++};
++
++static const VMStateDescription vmstate_trencoder = {
++    .name = TYPE_TRACE_ENCODER,
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (const VMStateField[]) {
++        VMSTATE_UINT32_ARRAY(regs, TraceEncoder, TRACE_R_MAX),
++        VMSTATE_UINT64(baseaddr, TraceEncoder),
++        VMSTATE_UINT64(dest_baseaddr, TraceEncoder),
++        VMSTATE_UINT64(ramsink_ramstart, TraceEncoder),
++        VMSTATE_UINT64(ramsink_ramlimit, TraceEncoder),
++        VMSTATE_INT32(cpu_id, TraceEncoder),
++        VMSTATE_END_OF_LIST(),
++    }
++};
++
++static void trencoder_class_init(ObjectClass *klass, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    device_class_set_legacy_reset(dc, trencoder_reset);
++    device_class_set_props(dc, trencoder_props);
++    dc->realize = trencoder_realize;
++    dc->vmsd = &vmstate_trencoder;
++}
++
++static const TypeInfo trencoder_info = {
++    .name          = TYPE_TRACE_ENCODER,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(TraceEncoder),
++    .class_init    = trencoder_class_init,
++};
++
++static void trencoder_register_types(void)
++{
++    type_register_static(&trencoder_info);
++}
++
++type_init(trencoder_register_types)
+diff --git a/hw/riscv/trace-encoder.h b/hw/riscv/trace-encoder.h
+new file mode 100644
+index 0000000000..71002f58a4
+--- /dev/null
++++ b/hw/riscv/trace-encoder.h
+@@ -0,0 +1,42 @@
++/*
++ * Emulation of a RISC-V Trace Encoder
++ *
++ * Copyright (C) 2025 Ventana Micro Systems Inc.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef RISCV_TRACE_ENCODER_H
++#define RISCV_TRACE_ENCODER_H
++
++#include "hw/sysbus.h"
++#include "hw/register.h"
++#include "system/dma.h"
++#include "qom/object.h"
++#include "cpu.h"
++
++#define TRACE_R_MAX (0xFFF / 4)
++
++struct TraceEncoder {
++    /*< private >*/
++    SysBusDevice parent_obj;
++
++    RISCVCPU *cpu;
++    int cpu_id;
++
++    MemoryRegion reg_mem;
++    uint32_t reg_mem_size;
++
++    hwaddr baseaddr;
++    hwaddr dest_baseaddr;
++    hwaddr ramsink_ramstart;
++    hwaddr ramsink_ramlimit;
++    uint32_t regs[TRACE_R_MAX];
++    RegisterInfo regs_info[TRACE_R_MAX];
++};
++
++#define TYPE_TRACE_ENCODER "trace-encoder"
++
++OBJECT_DECLARE_SIMPLE_TYPE(TraceEncoder, TRACE_ENCODER)
++
++#endif
+diff --git a/hw/riscv/trace-events b/hw/riscv/trace-events
+index b50b14a654..0cbf6ffcb6 100644
+--- a/hw/riscv/trace-events
++++ b/hw/riscv/trace-events
+@@ -24,3 +24,7 @@ riscv_iommu_hpm_incr_ctr(uint64_t cntr_val) "cntr_val 0x%"PRIx64
+ riscv_iommu_hpm_iocntinh_cy(bool prev_cy_inh) "prev_cy_inh %d"
+ riscv_iommu_hpm_cycle_write(uint32_t ovf, uint64_t val) "ovf 0x%x val 0x%"PRIx64
+ riscv_iommu_hpm_evt_write(uint32_t ctr_idx, uint32_t ovf, uint64_t val) "ctr_idx 0x%x ovf 0x%x val 0x%"PRIx64
++
++# trace-encoder.c
++trencoder_read_error(uint64_t addr) "addr 0x%" PRIx64
++trencoder_write_error(uint64_t addr, uint64_t value) "addr 0x%" PRIx64 " value 0x%" PRIx64
+-- 
+2.51.0
+
 
