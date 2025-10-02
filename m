@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD87FCAC5B8
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 14:59:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64830CAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 14:59:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4KlQ-0007OA-6C; Thu, 02 Oct 2025 10:58:39 -0400
+	id 1v4Kl7-0007Jb-VA; Thu, 02 Oct 2025 10:58:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4KlB-0007KU-BV
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:22 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kl3-0007Ip-UX
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:14 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kkt-0000E7-HF
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:19 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-46e3ea0445fso6273655e9.1
- for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 07:57:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kko-0000De-6p
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:11 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-46e61ebddd6so10615275e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 07:57:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759417074; x=1760021874; darn=nongnu.org;
+ d=linaro.org; s=google; t=1759417069; x=1760021869; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gJJmAmGdqYryK/ZlyEJKoFV0FxH0k6BYJeQSlZ3R4Yc=;
- b=K/2lZKdwCRirFdhDPkC8/OQwsmNl8cnc5MkM+rVD0aGWp02pDOOdW42snjgJtq5c0s
- tBOe8uHed5B8RzOXrB/6owChaFikpsZ5aveLJ011KGHtnfAQ/XgzsigOFD0D10dhTBO0
- nEo7xIM29buXvR0cUppWnvJFgyyI4Zx6kAXTuRrGt3NHenOcpksvvSGYtyD/KwP024oa
- Wj5KuwpNERot+NRwmJT55woGdmDLXFUNgmpsCDINyM2pplFRHoulAKlteL/RFmXnxjCG
- MZ+45l3RVHHG5P/nCr9wZOcWRzTYhEtDklManFHj9rbBRwTrFdVdhVkrGwsNNa7Jg/2T
- RLPQ==
+ bh=487RP0R+DawU3cowpH1ljYzt+o5Cuwu3G1Z8g9QHYus=;
+ b=OXSZoz5OQcKAwoqbWXZ6NpcfnUPg6+WSKa97EsrKnmc+/F7eB8cgh4XTy26GkpfZ4Y
+ 8ue+OkJ+//vA+xIHuQnE7VpAV0PkJabt+l0D0Qh7pJBSoSfIGfsfyEHBfYcuIyObkoIM
+ c6w0iWYnPUnvcFMMk5GS7+476Raszzy8xr9WxxGIBDn59CqdUGvbYnWx1Q6FPUF9K/Ym
+ CrVDoLzOM5P07/uiwGllfWQ5YMlF27q3EzZyTLeig/+2kt0GZJIg/F+rBjy7NLTVP4Uc
+ QLKE+OxGbsSAdPkaK1KY4C1jwojXx2b8ityICWXH2SGtBTg33yyGPTD6U6mg7ifs19La
+ t0mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759417074; x=1760021874;
+ d=1e100.net; s=20230601; t=1759417069; x=1760021869;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gJJmAmGdqYryK/ZlyEJKoFV0FxH0k6BYJeQSlZ3R4Yc=;
- b=UWLr3NY3aIFPOzhD1hddXelgPfvdGlJlpfUqIEB3cbl6zet/jtM5HUga4r0yC5fyRv
- 5OLep/FpFKQrx0w8Wrobkq7iYdoAtZDqI6FBQONH5lcQiiwgxhgI27uEyFzJjhxYFY19
- JYVxrSLXAawG3vrM1xl7TzjMSIa8hDDQTJy2FHHVzi2macORG8Z9TCyVnphT8EBbGPcn
- LJe1c2hBhKQ6jjh08zXxzgLVfURfUnfWNVwCzP8NOFe3M4aQfe8bPD5qH855+OhqS2YU
- jIG0O0N69vrIQDnDtq4TK1urA7t6dGDKankuRUBrdQUgAe6ftbeE0EbRxH19fSgzEcGB
- tWRQ==
+ bh=487RP0R+DawU3cowpH1ljYzt+o5Cuwu3G1Z8g9QHYus=;
+ b=nyQkgw9st8VjzQ7PrslVW3H7CVPcM/mxzUdgCJVnwvttvIf6Mm7Izqi/oD0wsoH47z
+ dWcmOlfpjCCqAdBrmMFgP1jkr4IG4qTI6cF4AlW4KJP2+prvvbfuK6hc5qbLB6OKda4j
+ 6up3yvVcAZFCxFLj0KJ0Zn7le9nt5tajxbdJNFwZXlYdqIEkB44LBYo9b1TwnKKFO0LD
+ frnY3fybgHsjRdt924fToVuC8OT0P5OaF74z3wJFYoOhFTAFEGaRlU0peTYdtl0+m57B
+ 8VdWuwJRPvLuhhkMW2Mlfbskp3K0Kj9TqBUAiFyBaB/jJERlk075ctOweiqDWotG7ioP
+ zuwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhYBuJBuH2bqoXWrWfN2oNJ7IyI8yE31nyrkH9Ba7HLMFlFBTqZXNPtEF0byOyp2+BO0HchbBZop/L@nongnu.org
-X-Gm-Message-State: AOJu0Yzt8lfDE1juEioVXZcCYKM2So4e2bXXRuTMi8HTTP3PxMfDkHwf
- hN7Me/iTHP9k81hKrqoOz1tdZG9prjMPQHGFxvcLLYBdNODu6tBbvOPC0bOpjdPbiGQ=
-X-Gm-Gg: ASbGnctoB78W2NfPdWtFFNbJZAEWzlJge80WyCWIgkdHbPl0h8r8W8q6FyMFOx0lAKq
- ssRSopFZMlskRTCgduWaVOuVkiezwcNXhAJ/ptEBg8k+VTYG078W9caMk62HImoYjvUj6JLffL6
- NUnVZobwOrLZN+WDAqYexpDExcxCUfZXOilyHD5Tek77542buT40sEOYFcyZ/dSxjl1Fel+alZ0
- LJ/rNHXlTNzpTbzPI+pL/TKEB56MdAQhEUEjxu41GzDS6ZQXOj6umQbWsbPmFl5rPZ7goTnRGU/
- Fb+0N57NDUBR43Xmz3Qk3KP+Hc6vurziALWZ37hu27HfR7dG5T4IjbJCJgWVo5qp5wcc5HLZSYL
- ymw88Iyzriu+93FaO72XeBVl3HTpC+sMI9wmLWvk/ZsyA7LmyMvTore0hOXE7oKxh95AFmUVy8j
- JzjNQ6yS8woiyiwgP5egi7CEu+
-X-Google-Smtp-Source: AGHT+IEcZRcyOhwdPwDE95ncgVk2kwKQw774g3pAMAqsNBLj53RH2mjubYvFhvF3SeT0CBCdgUZm+g==
-X-Received: by 2002:a05:600c:3d87:b0:46e:53cb:9e7f with SMTP id
- 5b1f17b1804b1-46e7060cc76mr625505e9.18.1759417073718; 
- Thu, 02 Oct 2025 07:57:53 -0700 (PDT)
+ AJvYcCUT34xFGxC5FZSb+Ga9pHtrnmOxYJ1HqQpQlvvxJljJbnaplYqlKu0ue81DJDmBbMMP+QbbuYV1sbyq@nongnu.org
+X-Gm-Message-State: AOJu0YwxCdIm0aMbg9TJbJvjw0qpLGBbjHEkD5lO7UTvFSlS1iVc6Smm
+ veeQ03vbS2eBATMjcA2OfNQc5GJNCH/GyxIzvx5FTmsTYq76DM1q8lnWPlW7Oha466zEvyruw4y
+ NXkuiYaMwHw==
+X-Gm-Gg: ASbGncvb+TeFgXcvBwG/zEq3P+33qGqb3rfmYNLu/Gg6Ik7/qTQpxhJOKI1PXRmMnm/
+ +5LGYosOqDompO3OCGxa4LoayXNzkVHZnBUfeZ4uIB1i2h9NobVHn1xt6/unFVycI11wxjRyBvH
+ QcvNUy2uThneRFruxROYA1N51fUF+YFrdLqIK2LduCEVIz4Wuv7GP89VbimAn0Z6iGkEEYVrgnJ
+ umioUZp724UixIO7AimBxLWNEFFTdhoEPog96MvzA4EfP0E30kq3dIsv57a4bfNqpICF5s4ZESV
+ Bm2o7ryjpRFxDMgNLYrAZ8ehGkwmEBaINk8KXOIgQtrD/rOnIDDEze7giNe3tLEliRen6kdTlTc
+ afSM2WaBJ2nRh71bMtcCydhtWkDnrgN/MvP+AzPiDZpNpRWAuoL/N30IDYluJmH+16+TPTrpRmZ
+ g43ebTcAXTWzk6cZNC/8mWmIfH
+X-Google-Smtp-Source: AGHT+IHhaoaDmiHVN4FNJv30tpvddcfE1r9Bn2+NXIH4AVmUw1py2n+Hz8AQhfurrAh2ShkbjjyIQA==
+X-Received: by 2002:a05:600c:5304:b0:46e:450d:e037 with SMTP id
+ 5b1f17b1804b1-46e6125d0fdmr63447485e9.5.1759417068833; 
+ Thu, 02 Oct 2025 07:57:48 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e5c40983asm60261665e9.3.2025.10.02.07.57.52
+ 5b1f17b1804b1-46e61a4161bsm92753965e9.16.2025.10.02.07.57.47
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 02 Oct 2025 07:57:53 -0700 (PDT)
+ Thu, 02 Oct 2025 07:57:48 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
@@ -76,24 +77,25 @@ Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 2/6] target/i386/monitor: Replace legacy
- cpu_physical_memory_read() calls
-Date: Thu,  2 Oct 2025 16:57:37 +0200
-Message-ID: <20251002145742.75624-3-philmd@linaro.org>
+Subject: [PATCH 1/6] target/i386/monitor: Propagate CPU address space to 'info
+ mem' handlers
+Date: Thu,  2 Oct 2025 16:57:36 +0200
+Message-ID: <20251002145742.75624-2-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251002145742.75624-1-philmd@linaro.org>
 References: <20251002145742.75624-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,337 +111,172 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Commit b7ecba0f6f6 ("docs/devel/loads-stores.rst: Document our
-various load and store APIs") mentioned cpu_physical_memory_*()
-methods are legacy, the replacement being address_space_*().
-
-Replace:
-
- - cpu_physical_memory_read(len=4) -> address_space_ldl()
- - cpu_physical_memory_read(len=8) -> address_space_ldq()
-
-inlining the little endianness conversion via the '_le' suffix.
-As with the previous implementation, ignore whether the memory
-read succeeded or failed.
+We want to replace the cpu_physical_memory_read() calls by
+address_space_read() equivalents. Since the latter requires
+an address space, and these commands are run in the context
+of a vCPU, propagate its first address space. Next commit
+will do the replacements.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/i386/monitor.c | 96 ++++++++++++++++++++-----------------------
- 1 file changed, 44 insertions(+), 52 deletions(-)
+ target/i386/monitor.c | 38 +++++++++++++++++++++-----------------
+ 1 file changed, 21 insertions(+), 17 deletions(-)
 
 diff --git a/target/i386/monitor.c b/target/i386/monitor.c
-index 7e7854e6c1b..d2bb873d494 100644
+index 3c9b6ca62f2..7e7854e6c1b 100644
 --- a/target/i386/monitor.c
 +++ b/target/i386/monitor.c
-@@ -30,6 +30,7 @@
- #include "qobject/qdict.h"
- #include "qapi/error.h"
- #include "qapi/qapi-commands-misc.h"
-+#include "system/memory.h"
+@@ -68,7 +68,7 @@ static void print_pte(Monitor *mon, CPUArchState *env, hwaddr addr,
+                    pte & PG_RW_MASK ? 'W' : '-');
+ }
  
- /* Perform linear address sign extension */
- static hwaddr addr_canonical(CPUArchState *env, hwaddr addr)
-@@ -70,21 +71,21 @@ static void print_pte(Monitor *mon, CPUArchState *env, hwaddr addr,
- 
- static void tlb_info_32(Monitor *mon, CPUArchState *env, AddressSpace *as)
+-static void tlb_info_32(Monitor *mon, CPUArchState *env)
++static void tlb_info_32(Monitor *mon, CPUArchState *env, AddressSpace *as)
  {
-+    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
      unsigned int l1, l2;
      uint32_t pgd, pde, pte;
+@@ -96,7 +96,7 @@ static void tlb_info_32(Monitor *mon, CPUArchState *env)
+     }
+ }
  
-     pgd = env->cr[3] & ~0xfff;
-     for(l1 = 0; l1 < 1024; l1++) {
--        cpu_physical_memory_read(pgd + l1 * 4, &pde, 4);
--        pde = le32_to_cpu(pde);
-+        pde = address_space_ldl_le(as, pgd + l1 * 4, attrs, NULL);
-         if (pde & PG_PRESENT_MASK) {
-             if ((pde & PG_PSE_MASK) && (env->cr[4] & CR4_PSE_MASK)) {
-                 /* 4M pages */
-                 print_pte(mon, env, (l1 << 22), pde, ~((1 << 21) - 1));
-             } else {
-                 for(l2 = 0; l2 < 1024; l2++) {
--                    cpu_physical_memory_read((pde & ~0xfff) + l2 * 4, &pte, 4);
--                    pte = le32_to_cpu(pte);
-+                    pte = address_space_ldl_le(as, (pde & ~0xfff) + l2 * 4,
-+                                               attrs, NULL);
-                     if (pte & PG_PRESENT_MASK) {
-                         print_pte(mon, env, (l1 << 22) + (l2 << 12),
-                                   pte & ~PG_PSE_MASK,
-@@ -98,19 +99,18 @@ static void tlb_info_32(Monitor *mon, CPUArchState *env, AddressSpace *as)
- 
- static void tlb_info_pae32(Monitor *mon, CPUArchState *env, AddressSpace *as)
+-static void tlb_info_pae32(Monitor *mon, CPUArchState *env)
++static void tlb_info_pae32(Monitor *mon, CPUArchState *env, AddressSpace *as)
  {
-+    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
      unsigned int l1, l2, l3;
      uint64_t pdpe, pde, pte;
-     uint64_t pdp_addr, pd_addr, pt_addr;
+@@ -136,7 +136,7 @@ static void tlb_info_pae32(Monitor *mon, CPUArchState *env)
+ }
  
-     pdp_addr = env->cr[3] & ~0x1f;
-     for (l1 = 0; l1 < 4; l1++) {
--        cpu_physical_memory_read(pdp_addr + l1 * 8, &pdpe, 8);
--        pdpe = le64_to_cpu(pdpe);
-+        pdpe = address_space_ldq_le(as, pdp_addr + l1 * 8, attrs, NULL);
-         if (pdpe & PG_PRESENT_MASK) {
-             pd_addr = pdpe & 0x3fffffffff000ULL;
-             for (l2 = 0; l2 < 512; l2++) {
--                cpu_physical_memory_read(pd_addr + l2 * 8, &pde, 8);
--                pde = le64_to_cpu(pde);
-+                pde = address_space_ldq_le(as, pd_addr + l2 * 8, attrs, NULL);
-                 if (pde & PG_PRESENT_MASK) {
-                     if (pde & PG_PSE_MASK) {
-                         /* 2M pages with PAE, CR4.PSE is ignored */
-@@ -119,8 +119,8 @@ static void tlb_info_pae32(Monitor *mon, CPUArchState *env, AddressSpace *as)
-                     } else {
-                         pt_addr = pde & 0x3fffffffff000ULL;
-                         for (l3 = 0; l3 < 512; l3++) {
--                            cpu_physical_memory_read(pt_addr + l3 * 8, &pte, 8);
--                            pte = le64_to_cpu(pte);
-+                            pte = address_space_ldq_le(as, pt_addr + l3 * 8,
-+                                                       attrs, NULL);
-                             if (pte & PG_PRESENT_MASK) {
-                                 print_pte(mon, env, (l1 << 30) + (l2 << 21)
-                                           + (l3 << 12),
-@@ -139,21 +139,20 @@ static void tlb_info_pae32(Monitor *mon, CPUArchState *env, AddressSpace *as)
- static void tlb_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as,
+ #ifdef TARGET_X86_64
+-static void tlb_info_la48(Monitor *mon, CPUArchState *env,
++static void tlb_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as,
          uint64_t l0, uint64_t pml4_addr)
  {
-+    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
      uint64_t l1, l2, l3, l4;
-     uint64_t pml4e, pdpe, pde, pte;
-     uint64_t pdp_addr, pd_addr, pt_addr;
+@@ -197,7 +197,7 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env,
+     }
+ }
  
-     for (l1 = 0; l1 < 512; l1++) {
--        cpu_physical_memory_read(pml4_addr + l1 * 8, &pml4e, 8);
--        pml4e = le64_to_cpu(pml4e);
-+        pml4e = address_space_ldq_le(as, pml4_addr + l1 * 8, attrs, NULL);
-         if (!(pml4e & PG_PRESENT_MASK)) {
-             continue;
-         }
- 
-         pdp_addr = pml4e & 0x3fffffffff000ULL;
-         for (l2 = 0; l2 < 512; l2++) {
--            cpu_physical_memory_read(pdp_addr + l2 * 8, &pdpe, 8);
--            pdpe = le64_to_cpu(pdpe);
-+            pdpe = address_space_ldq_le(as, pdp_addr + l2 * 8, attrs, NULL);
-             if (!(pdpe & PG_PRESENT_MASK)) {
-                 continue;
-             }
-@@ -167,8 +166,7 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as,
- 
-             pd_addr = pdpe & 0x3fffffffff000ULL;
-             for (l3 = 0; l3 < 512; l3++) {
--                cpu_physical_memory_read(pd_addr + l3 * 8, &pde, 8);
--                pde = le64_to_cpu(pde);
-+                pde = address_space_ldq_le(as, pd_addr + l3 * 8, attrs, NULL);
-                 if (!(pde & PG_PRESENT_MASK)) {
-                     continue;
-                 }
-@@ -182,10 +180,8 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as,
- 
-                 pt_addr = pde & 0x3fffffffff000ULL;
-                 for (l4 = 0; l4 < 512; l4++) {
--                    cpu_physical_memory_read(pt_addr
--                            + l4 * 8,
--                            &pte, 8);
--                    pte = le64_to_cpu(pte);
-+                    pte = address_space_ldq_le(as, pt_addr + l4 * 8,
-+                                               attrs, NULL);
-                     if (pte & PG_PRESENT_MASK) {
-                         print_pte(mon, env, (l0 << 48) + (l1 << 39) +
-                                 (l2 << 30) + (l3 << 21) + (l4 << 12),
-@@ -199,14 +195,14 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as,
- 
- static void tlb_info_la57(Monitor *mon, CPUArchState *env, AddressSpace *as)
+-static void tlb_info_la57(Monitor *mon, CPUArchState *env)
++static void tlb_info_la57(Monitor *mon, CPUArchState *env, AddressSpace *as)
  {
-+    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
      uint64_t l0;
      uint64_t pml5e;
-     uint64_t pml5_addr;
- 
-     pml5_addr = env->cr[3] & 0x3fffffffff000ULL;
-     for (l0 = 0; l0 < 512; l0++) {
--        cpu_physical_memory_read(pml5_addr + l0 * 8, &pml5e, 8);
--        pml5e = le64_to_cpu(pml5e);
-+        pml5e = address_space_ldq_le(as, pml5_addr + l0 * 8, attrs, NULL);
+@@ -208,7 +208,7 @@ static void tlb_info_la57(Monitor *mon, CPUArchState *env)
+         cpu_physical_memory_read(pml5_addr + l0 * 8, &pml5e, 8);
+         pml5e = le64_to_cpu(pml5e);
          if (pml5e & PG_PRESENT_MASK) {
-             tlb_info_la48(mon, env, as, l0, pml5e & 0x3fffffffff000ULL);
+-            tlb_info_la48(mon, env, l0, pml5e & 0x3fffffffff000ULL);
++            tlb_info_la48(mon, env, as, l0, pml5e & 0x3fffffffff000ULL);
          }
-@@ -275,6 +271,7 @@ static void mem_print(Monitor *mon, CPUArchState *env,
- 
- static void mem_info_32(Monitor *mon, CPUArchState *env, AddressSpace *as)
+     }
+ }
+@@ -217,6 +217,7 @@ static void tlb_info_la57(Monitor *mon, CPUArchState *env)
+ void hmp_info_tlb(Monitor *mon, const QDict *qdict)
  {
-+    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+     CPUArchState *env;
++    AddressSpace *as;
+ 
+     env = mon_get_cpu_env(mon);
+     if (!env) {
+@@ -228,21 +229,22 @@ void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+         monitor_printf(mon, "PG disabled\n");
+         return;
+     }
++    as = cpu_get_address_space(env_cpu(env), X86ASIdx_MEM);
+     if (env->cr[4] & CR4_PAE_MASK) {
+ #ifdef TARGET_X86_64
+         if (env->hflags & HF_LMA_MASK) {
+             if (env->cr[4] & CR4_LA57_MASK) {
+-                tlb_info_la57(mon, env);
++                tlb_info_la57(mon, env, as);
+             } else {
+-                tlb_info_la48(mon, env, 0, env->cr[3] & 0x3fffffffff000ULL);
++                tlb_info_la48(mon, env, as, 0, env->cr[3] & 0x3fffffffff000ULL);
+             }
+         } else
+ #endif
+         {
+-            tlb_info_pae32(mon, env);
++            tlb_info_pae32(mon, env, as);
+         }
+     } else {
+-        tlb_info_32(mon, env);
++        tlb_info_32(mon, env, as);
+     }
+ }
+ 
+@@ -271,7 +273,7 @@ static void mem_print(Monitor *mon, CPUArchState *env,
+     }
+ }
+ 
+-static void mem_info_32(Monitor *mon, CPUArchState *env)
++static void mem_info_32(Monitor *mon, CPUArchState *env, AddressSpace *as)
+ {
      unsigned int l1, l2;
      int prot, last_prot;
-     uint32_t pgd, pde, pte;
-@@ -284,8 +281,7 @@ static void mem_info_32(Monitor *mon, CPUArchState *env, AddressSpace *as)
-     last_prot = 0;
-     start = -1;
-     for(l1 = 0; l1 < 1024; l1++) {
--        cpu_physical_memory_read(pgd + l1 * 4, &pde, 4);
--        pde = le32_to_cpu(pde);
-+        pde = address_space_ldl_le(as, pgd + l1 * 4, attrs, NULL);
-         end = l1 << 22;
-         if (pde & PG_PRESENT_MASK) {
-             if ((pde & PG_PSE_MASK) && (env->cr[4] & CR4_PSE_MASK)) {
-@@ -293,8 +289,8 @@ static void mem_info_32(Monitor *mon, CPUArchState *env, AddressSpace *as)
-                 mem_print(mon, env, &start, &last_prot, end, prot);
-             } else {
-                 for(l2 = 0; l2 < 1024; l2++) {
--                    cpu_physical_memory_read((pde & ~0xfff) + l2 * 4, &pte, 4);
--                    pte = le32_to_cpu(pte);
-+                    pte = address_space_ldl_le(as, (pde & ~0xfff) + l2 * 4,
-+                                               attrs, NULL);
-                     end = (l1 << 22) + (l2 << 12);
-                     if (pte & PG_PRESENT_MASK) {
-                         prot = pte & pde &
-@@ -316,6 +312,7 @@ static void mem_info_32(Monitor *mon, CPUArchState *env, AddressSpace *as)
+@@ -312,7 +314,7 @@ static void mem_info_32(Monitor *mon, CPUArchState *env)
+     mem_print(mon, env, &start, &last_prot, (hwaddr)1 << 32, 0);
+ }
  
- static void mem_info_pae32(Monitor *mon, CPUArchState *env, AddressSpace *as)
+-static void mem_info_pae32(Monitor *mon, CPUArchState *env)
++static void mem_info_pae32(Monitor *mon, CPUArchState *env, AddressSpace *as)
  {
-+    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
      unsigned int l1, l2, l3;
      int prot, last_prot;
-     uint64_t pdpe, pde, pte;
-@@ -326,14 +323,12 @@ static void mem_info_pae32(Monitor *mon, CPUArchState *env, AddressSpace *as)
-     last_prot = 0;
-     start = -1;
-     for (l1 = 0; l1 < 4; l1++) {
--        cpu_physical_memory_read(pdp_addr + l1 * 8, &pdpe, 8);
--        pdpe = le64_to_cpu(pdpe);
-+        pdpe = address_space_ldq_le(as, pdp_addr + l1 * 8, attrs, NULL);
-         end = l1 << 30;
-         if (pdpe & PG_PRESENT_MASK) {
-             pd_addr = pdpe & 0x3fffffffff000ULL;
-             for (l2 = 0; l2 < 512; l2++) {
--                cpu_physical_memory_read(pd_addr + l2 * 8, &pde, 8);
--                pde = le64_to_cpu(pde);
-+                pde = address_space_ldq_le(as, pd_addr + l2 * 8, attrs, NULL);
-                 end = (l1 << 30) + (l2 << 21);
-                 if (pde & PG_PRESENT_MASK) {
-                     if (pde & PG_PSE_MASK) {
-@@ -343,8 +338,8 @@ static void mem_info_pae32(Monitor *mon, CPUArchState *env, AddressSpace *as)
-                     } else {
-                         pt_addr = pde & 0x3fffffffff000ULL;
-                         for (l3 = 0; l3 < 512; l3++) {
--                            cpu_physical_memory_read(pt_addr + l3 * 8, &pte, 8);
--                            pte = le64_to_cpu(pte);
-+                            pte = address_space_ldq_le(as, pt_addr + l3 * 8,
-+                                                       attrs, NULL);
-                             end = (l1 << 30) + (l2 << 21) + (l3 << 12);
-                             if (pte & PG_PRESENT_MASK) {
-                                 prot = pte & pde & (PG_USER_MASK | PG_RW_MASK |
-@@ -373,6 +368,7 @@ static void mem_info_pae32(Monitor *mon, CPUArchState *env, AddressSpace *as)
+@@ -369,7 +371,7 @@ static void mem_info_pae32(Monitor *mon, CPUArchState *env)
+ 
+ 
  #ifdef TARGET_X86_64
- static void mem_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as)
+-static void mem_info_la48(Monitor *mon, CPUArchState *env)
++static void mem_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as)
  {
-+    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
      int prot, last_prot;
      uint64_t l1, l2, l3, l4;
-     uint64_t pml4e, pdpe, pde, pte;
-@@ -382,14 +378,12 @@ static void mem_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as)
-     last_prot = 0;
-     start = -1;
-     for (l1 = 0; l1 < 512; l1++) {
--        cpu_physical_memory_read(pml4_addr + l1 * 8, &pml4e, 8);
--        pml4e = le64_to_cpu(pml4e);
-+        pml4e = address_space_ldq_le(as, pml4_addr + l1 * 8, attrs, NULL);
-         end = l1 << 39;
-         if (pml4e & PG_PRESENT_MASK) {
-             pdp_addr = pml4e & 0x3fffffffff000ULL;
-             for (l2 = 0; l2 < 512; l2++) {
--                cpu_physical_memory_read(pdp_addr + l2 * 8, &pdpe, 8);
--                pdpe = le64_to_cpu(pdpe);
-+                pdpe = address_space_ldq_le(as, pdp_addr + l2 * 8, attrs, NULL);
-                 end = (l1 << 39) + (l2 << 30);
-                 if (pdpe & PG_PRESENT_MASK) {
-                     if (pdpe & PG_PSE_MASK) {
-@@ -400,8 +394,8 @@ static void mem_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as)
-                     } else {
-                         pd_addr = pdpe & 0x3fffffffff000ULL;
-                         for (l3 = 0; l3 < 512; l3++) {
--                            cpu_physical_memory_read(pd_addr + l3 * 8, &pde, 8);
--                            pde = le64_to_cpu(pde);
-+                            pde = address_space_ldq_le(as, pd_addr + l3 * 8,
-+                                                       attrs, NULL);
-                             end = (l1 << 39) + (l2 << 30) + (l3 << 21);
-                             if (pde & PG_PRESENT_MASK) {
-                                 if (pde & PG_PSE_MASK) {
-@@ -413,10 +407,10 @@ static void mem_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as)
-                                 } else {
-                                     pt_addr = pde & 0x3fffffffff000ULL;
-                                     for (l4 = 0; l4 < 512; l4++) {
--                                        cpu_physical_memory_read(pt_addr
--                                                                 + l4 * 8,
--                                                                 &pte, 8);
--                                        pte = le64_to_cpu(pte);
-+                                        pte = address_space_ldq_le(as,
-+                                                                   pt_addr
-+                                                                   + l4 * 8,
-+                                                                   attrs, NULL);
-                                         end = (l1 << 39) + (l2 << 30) +
-                                             (l3 << 21) + (l4 << 12);
-                                         if (pte & PG_PRESENT_MASK) {
-@@ -453,6 +447,7 @@ static void mem_info_la48(Monitor *mon, CPUArchState *env, AddressSpace *as)
+@@ -449,7 +451,7 @@ static void mem_info_la48(Monitor *mon, CPUArchState *env)
+     mem_print(mon, env, &start, &last_prot, (hwaddr)1 << 48, 0);
+ }
  
- static void mem_info_la57(Monitor *mon, CPUArchState *env, AddressSpace *as)
+-static void mem_info_la57(Monitor *mon, CPUArchState *env)
++static void mem_info_la57(Monitor *mon, CPUArchState *env, AddressSpace *as)
  {
-+    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
      int prot, last_prot;
      uint64_t l0, l1, l2, l3, l4;
-     uint64_t pml5e, pml4e, pdpe, pde, pte;
-@@ -462,8 +457,7 @@ static void mem_info_la57(Monitor *mon, CPUArchState *env, AddressSpace *as)
-     last_prot = 0;
-     start = -1;
-     for (l0 = 0; l0 < 512; l0++) {
--        cpu_physical_memory_read(pml5_addr + l0 * 8, &pml5e, 8);
--        pml5e = le64_to_cpu(pml5e);
-+        pml5e = address_space_ldq_le(as, pml5_addr + l0 * 8, attrs, NULL);
-         end = l0 << 48;
-         if (!(pml5e & PG_PRESENT_MASK)) {
-             prot = 0;
-@@ -473,8 +467,7 @@ static void mem_info_la57(Monitor *mon, CPUArchState *env, AddressSpace *as)
+@@ -545,6 +547,7 @@ static void mem_info_la57(Monitor *mon, CPUArchState *env)
+ void hmp_info_mem(Monitor *mon, const QDict *qdict)
+ {
+     CPUArchState *env;
++    AddressSpace *as;
  
-         pml4_addr = pml5e & 0x3fffffffff000ULL;
-         for (l1 = 0; l1 < 512; l1++) {
--            cpu_physical_memory_read(pml4_addr + l1 * 8, &pml4e, 8);
--            pml4e = le64_to_cpu(pml4e);
-+            pml4e = address_space_ldq_le(as, pml4_addr + l1 * 8, attrs, NULL);
-             end = (l0 << 48) + (l1 << 39);
-             if (!(pml4e & PG_PRESENT_MASK)) {
-                 prot = 0;
-@@ -484,8 +477,7 @@ static void mem_info_la57(Monitor *mon, CPUArchState *env, AddressSpace *as)
+     env = mon_get_cpu_env(mon);
+     if (!env) {
+@@ -556,21 +559,22 @@ void hmp_info_mem(Monitor *mon, const QDict *qdict)
+         monitor_printf(mon, "PG disabled\n");
+         return;
+     }
++    as = cpu_get_address_space(env_cpu(env), X86ASIdx_MEM);
+     if (env->cr[4] & CR4_PAE_MASK) {
+ #ifdef TARGET_X86_64
+         if (env->hflags & HF_LMA_MASK) {
+             if (env->cr[4] & CR4_LA57_MASK) {
+-                mem_info_la57(mon, env);
++                mem_info_la57(mon, env, as);
+             } else {
+-                mem_info_la48(mon, env);
++                mem_info_la48(mon, env, as);
+             }
+         } else
+ #endif
+         {
+-            mem_info_pae32(mon, env);
++            mem_info_pae32(mon, env, as);
+         }
+     } else {
+-        mem_info_32(mon, env);
++        mem_info_32(mon, env, as);
+     }
+ }
  
-             pdp_addr = pml4e & 0x3fffffffff000ULL;
-             for (l2 = 0; l2 < 512; l2++) {
--                cpu_physical_memory_read(pdp_addr + l2 * 8, &pdpe, 8);
--                pdpe = le64_to_cpu(pdpe);
-+                pdpe = address_space_ldq_le(as, pdp_addr + l2 * 8, attrs, NULL);
-                 end = (l0 << 48) + (l1 << 39) + (l2 << 30);
-                 if (pdpe & PG_PRESENT_MASK) {
-                     prot = 0;
-@@ -503,8 +495,8 @@ static void mem_info_la57(Monitor *mon, CPUArchState *env, AddressSpace *as)
- 
-                 pd_addr = pdpe & 0x3fffffffff000ULL;
-                 for (l3 = 0; l3 < 512; l3++) {
--                    cpu_physical_memory_read(pd_addr + l3 * 8, &pde, 8);
--                    pde = le64_to_cpu(pde);
-+                    pde = address_space_ldq_le(as, pd_addr + l3 * 8,
-+                                               attrs, NULL);
-                     end = (l0 << 48) + (l1 << 39) + (l2 << 30) + (l3 << 21);
-                     if (pde & PG_PRESENT_MASK) {
-                         prot = 0;
-@@ -522,8 +514,8 @@ static void mem_info_la57(Monitor *mon, CPUArchState *env, AddressSpace *as)
- 
-                     pt_addr = pde & 0x3fffffffff000ULL;
-                     for (l4 = 0; l4 < 512; l4++) {
--                        cpu_physical_memory_read(pt_addr + l4 * 8, &pte, 8);
--                        pte = le64_to_cpu(pte);
-+                        pte = address_space_ldq_le(as, pt_addr + l4 * 8,
-+                                                   attrs, NULL);
-                         end = (l0 << 48) + (l1 << 39) + (l2 << 30) +
-                             (l3 << 21) + (l4 << 12);
-                         if (pte & PG_PRESENT_MASK) {
 -- 
 2.51.0
 
