@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1DA9CAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 11:32:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B4DCAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 11:32:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4HQK-0005lr-25; Thu, 02 Oct 2025 07:24:36 -0400
+	id 1v4HQX-0005pQ-8e; Thu, 02 Oct 2025 07:24:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1v4HQA-0005jB-Da
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 07:24:26 -0400
+ id 1v4HQR-0005ny-Dh
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 07:24:43 -0400
 Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1v4HPp-0005qe-7h
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 07:24:26 -0400
+ id 1v4HPz-0005rb-7Q
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 07:24:43 -0400
 Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-71d71bcab6fso10025667b3.0
- for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 04:23:59 -0700 (PDT)
+ 00721157ae682-71d603b674aso10462157b3.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 04:24:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1759404237; x=1760009037; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1759404243; x=1760009043; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rj9K7Fd4/ICuKm9d/eSoRj/Kqexm+sKHBoerBI9UwwQ=;
- b=bZDOFPaPjtRaATuPuNhBKhp6OK68nIhQHGAxrDhw4M7BjOsjOq4SQ/UXmtCzizypJY
- XK3OQalHhwf3hN3Z+ms1o/dEPF4+4TIKrW4S9AG9DANsIx6JxWPlvLlYXljek8eQJvzo
- YEaDbk601Z3puovB1ZD3UiCetNmOIqwoaOEZEc3KBd/R3+Rj8/nFP4QdAdOWmxGJAxA+
- mZ9LqJGu7Mr7xfw8NArzOhbnr6p8aNyh12hBsTXaDotJk86SUCKhAeGwftmcefu10FPJ
- PBlFxDLzsNiT7xrKJfOdolHSMXIIua9VB4Fk83DlMLTiMx86H/1xBOUgxr0Mos+AgICi
- 0EAA==
+ bh=NuMtNn4IEWqu0nSgd/Vpbd+blTbg4EbRmfmu7Dqn8lc=;
+ b=JjB6QjZvjvKNgD7Dj0UQK9G3T91BfAHOcm1bdfB2C7vtwEmmZA9X5nE4MyYClF0Tgh
+ jo1Dc+3g1VY75qCTIx+TIL8vQtxFc6W4hFeHu81NygTHmhBLXkdj5QBrGNOqSd57Yg9N
+ X7UATyJN+iYa1w2fmLxZLWPTdu8LmtXqFdHqTFUQj4bnpEfn/TAP0jP24U1XkddiFE8q
+ 07vGQ1Ig0CZfKvIQHMsVvGlESjUaI4vAvWvIa/jbpS//B05GRGRuL3g8yv720cGsfbs8
+ 7+eTgDAuU63bzrod7CkIn2mo6j2JuOZ9GP3LGBVeTnGZAPUfqxamxLTCU5RxykR8Spum
+ Ni8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759404237; x=1760009037;
+ d=1e100.net; s=20230601; t=1759404243; x=1760009043;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rj9K7Fd4/ICuKm9d/eSoRj/Kqexm+sKHBoerBI9UwwQ=;
- b=pzxHSl9R5rjo4hbdWL8b3eCkTQYe3hJN3ZkWxgo5XzEhmCL6K3MRhZzkCj9LWUhKc1
- 8Ohze7pw5x4VD+PfZkwtXxFDOd9ccW3bzuSKL0Nx8y41BVLwX+aFb7sSL2YAoGPVF9K8
- zW/FMr3/Ys6k+7dIixSRvC8vDroDCiXa6FCK8jJfnbBkdN0G5H6z4QCHacdnM6vg0lRS
- ywtrAQvlBKvzQJABFSHi2JDbv80VIy4wDKMSBBmik0aWVlUyree/9UaYPbID5jXhcpjB
- 1xVk43EBAaeJRQmQKHKY/UGOVUzrVz55wFwasv6iqdiLnQP26bQyRsV0m2VGYNm2QJEd
- FUnQ==
-X-Gm-Message-State: AOJu0YwA4hjy0IdlbqgRcEt2JVDZIPypfTzXjXyRe0HYM1SlPSdJ7RuY
- mJMYiNH6Rz3xNDKTuAfCEw+QwCdJ5k/g4bF/jBKQJEZy/FtB1TSE3wZYWePwR1Z4ZUc=
-X-Gm-Gg: ASbGncuQLW/KINj/FJ47gvaGwSExYIkHhKiwzAK2MFpoChRiyKgGqthlfUY/IXclDBF
- iNXCB+MEa0DLBwYe5zguX77UHu0dpvhN0k+vFOr10IUppQn5gIUyam+ImvnttSfHAPLliOWhy24
- bz6oe1vJWd1698xu1UGRc7ABLnEbcRIK/fptpGNZ66qE5DpNB6XHM82MJ2eXClp8N4+BBUDCu1Q
- XVwOL4EQecvJQleRSKYWPlIz6IGq5F3vyfKeOHlMUwa1kFNikZF34ewYxBgb2C+MCjyHdrXeGtf
- D9eLwYTQMBa3+vRMBF4ftigRdTM4k8r1iHvJIZ6I9o9dhO1KMj8HBbv95pvEJkwspMhilM1ZXZw
- 30DQ86PdvdVQGSQv4gBP7NRzyKqOFvA+58Wf96ghvFVSwVN2bwHKgPTdoUIsYT9KmJXdT4TRtF5
- M=
-X-Google-Smtp-Source: AGHT+IEzQKpVBJazzuTU2OIx44Qbip5MJoLuPqWKVgU2koX81saWvfQT6D3Au7a4g8vzEY/0ZoZnvQ==
-X-Received: by 2002:a05:690c:6c91:b0:76b:50dc:998a with SMTP id
- 00721157ae682-77f6f11539fmr97971637b3.19.1759404237083; 
- Thu, 02 Oct 2025 04:23:57 -0700 (PDT)
+ bh=NuMtNn4IEWqu0nSgd/Vpbd+blTbg4EbRmfmu7Dqn8lc=;
+ b=o+o8y2vVBTwLIBEIHP9A3wQ8Kqg6dYUNvjmrM4tYuBrXVPvm0rubCoicv4s5xH8FEO
+ 3CfMKkJulCIuVt5vcsfA7OcKurYWY9TwpNkG9WKy4AUjf+BtJPTasab/z0mLI/wsXk8g
+ VEPSpV1iMaNaVBQjW96yr/VgRiN3blbLj+z+7xBYz9M3CyAZsE4OP7yar/2Xzlf2er9e
+ MEcm1lY2f7+WKr4Hu45UFb2RCclOAFPeR+gkjv/f/GHV5pxC2DTd3IClgV9q/CykKt8a
+ ZX+WySPlD3fG3uX02lUePZSUN43lFVHjyQEGT+wlNfAljKy1Ri6k7X2z3ZSQbVSAG6ob
+ CdUA==
+X-Gm-Message-State: AOJu0YwWNYU2LyEymMWlyg81yfq1k+bPYc9TXCsmrduMuPgLpqa27gqr
+ VOawMyyoctxzQKQ7W7sBNTPbHHkEYIxP9jKhl5Ab43kOICA8/ScZJ3KuHqNSjWVYwVE=
+X-Gm-Gg: ASbGnctx83+3s9qGpStERqG6uOffcBYenHY6dy+ePAO2KXtrIPUTWABb0NvTTDNq29T
+ RRt1cPpNkaaFNNXPu7ouoqdF0o4/eniqGObtdEO0ZuiDeGhd5d7gssmD1HUgMoUO1np0aL3Szga
+ SBYZAnj8M168i4Ef+fwUgO4h02cKGTUiwoO1Ik06mwJHMc3kfm9pnm2ropNOVL8dnV7JUCr69PJ
+ hRslpayn7Y2ChhQDNgur4PF5/jV/5Mn/zxDIZh1QJT1ttUbs+ZofXHzLEhZKZdBv6WvIn5Js3Ql
+ pPkIPMKRMWkwhuxBLY140ovKY2e67E8BFZA4vqmHW59bO1JIAS1b5jA6icyk0gCAkfVxe+OmGuS
+ M1q/m4xu2r78oVmPMICSSgweMPtIbhnJHrKgdDMoMvfoQCz4qmqzr9XAXLNCeDi7dqnFEl2kyfd
+ 46FiKhgHOtyQ==
+X-Google-Smtp-Source: AGHT+IFrggn5mb3PMctRl7y8EHsMx+If0Wfhw6KS3IueJxHUN+cwlDwX3NN/+j3w9pXOWiyPLfZLoA==
+X-Received: by 2002:a05:690c:9981:b0:76c:9251:1a15 with SMTP id
+ 00721157ae682-77f6f35d337mr104781837b3.41.1759404243429; 
+ Thu, 02 Oct 2025 04:24:03 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com
  ([2804:7f0:bcc0:b174:a9af:8146:7deb:fbf3])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-77f81c068f6sm7331627b3.5.2025.10.02.04.23.55
+ 00721157ae682-77f81c068f6sm7331627b3.5.2025.10.02.04.24.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Oct 2025 04:23:56 -0700 (PDT)
+ Thu, 02 Oct 2025 04:24:03 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
  richard.henderson@linaro.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 06/17] hw/riscv: add e-trace message helpers
-Date: Thu,  2 Oct 2025 08:23:24 -0300
-Message-ID: <20251002112335.2374517-7-dbarboza@ventanamicro.com>
+Subject: [PATCH 09/17] test/qtest: add riscv-trace-test.c
+Date: Thu,  2 Oct 2025 08:23:27 -0300
+Message-ID: <20251002112335.2374517-10-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251002112335.2374517-1-dbarboza@ventanamicro.com>
 References: <20251002112335.2374517-1-dbarboza@ventanamicro.com>
@@ -88,7 +88,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,63 +104,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Before making the trace encoder writing into the RAM sink we need a way
-to encode the messages/packets. The encoding is LSB (least significant
-bit) based. The doc "Efficient Trace for RISC-V", Chapter 7, mentions:
-
-"The remainder of this section describes the contents of the payload
-portion which should be independent of the infrastructure. In each
-table, the fields are listed in transmission order: first field in
-the table is transmitted first, and multi-bit fields are transmitted
-LSB first."
-
-The "RISC-V Trace Control Interface Specification" docs, Chapter 7,
-states when talking about the Trace RAM Sink:
-
-"Trace data is placed in memory in LSB order (first byte of trace
-packet/data is placed on LSB)."
-
-This means that the LSB encoding must be used to write into the RAM Sink
-memory, which is our goal.
-
-The design we're going for is to have all these encoder helpers, along
-with the message formats, in a separated file. The trace encoder will
-make use of these helpers to blindly write a byte array with the packet
-desired, and then write it as is in the RAM Sink.
-
-We'll start by modeling the synchronisation packet first, adding more
-formats as we increment the Trace Encoder capabilities.
+Add a simple smoke test for the trace encoder/trace ram sink integration
+with the RISC-V 'virt' machine.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/riscv/meson.build         |  3 +-
- hw/riscv/rv-trace-messages.c | 94 ++++++++++++++++++++++++++++++++++++
- hw/riscv/rv-trace-messages.h | 25 ++++++++++
- 3 files changed, 121 insertions(+), 1 deletion(-)
- create mode 100644 hw/riscv/rv-trace-messages.c
- create mode 100644 hw/riscv/rv-trace-messages.h
+ hw/riscv/virt.c                |   2 +-
+ tests/qtest/meson.build        |   2 +-
+ tests/qtest/riscv-trace-test.c | 120 +++++++++++++++++++++++++++++++++
+ 3 files changed, 122 insertions(+), 2 deletions(-)
+ create mode 100644 tests/qtest/riscv-trace-test.c
 
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 2aadbe1e50..7d3576fcdf 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -14,6 +14,7 @@ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
- 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
- riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
- riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_TRACE', if_true: files('trace-encoder.c', 'trace-ram-sink.c'))
-+riscv_ss.add(when: 'CONFIG_RISCV_TRACE', if_true: files('trace-encoder.c',
-+        'trace-ram-sink.c', 'rv-trace-messages.c'))
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 7ab407d782..b701e1dcc6 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1711,7 +1711,7 @@ static void virt_machine_init(MachineState *machine)
+                                 hart_count, &error_abort);
+         sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
  
- hw_arch += {'riscv': riscv_ss}
-diff --git a/hw/riscv/rv-trace-messages.c b/hw/riscv/rv-trace-messages.c
+-        if (tcg_enabled()) {
++        if (tcg_enabled()  || qtest_enabled()) {
+             virt_init_socket_trace_hw(s, i);
+         }
+ 
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 669d07c06b..07663c4836 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -281,7 +281,7 @@ qtests_s390x = \
+ qtests_riscv32 = \
+   (config_all_devices.has_key('CONFIG_SIFIVE_E_AON') ? ['sifive-e-aon-watchdog-test'] : [])
+ 
+-qtests_riscv64 = ['riscv-csr-test'] + \
++qtests_riscv64 = ['riscv-csr-test', 'riscv-trace-test'] + \
+   (unpack_edk2_blobs ? ['bios-tables-test'] : [])
+ 
+ qos_test_ss = ss.source_set()
+diff --git a/tests/qtest/riscv-trace-test.c b/tests/qtest/riscv-trace-test.c
 new file mode 100644
-index 0000000000..215135dd47
+index 0000000000..e442f69286
 --- /dev/null
-+++ b/hw/riscv/rv-trace-messages.c
-@@ -0,0 +1,94 @@
++++ b/tests/qtest/riscv-trace-test.c
+@@ -0,0 +1,120 @@
 +/*
-+ * Helpers for RISC-V Trace Messages
++ * Testcase for RISC-V Trace framework
 + *
 + * Copyright (C) 2025 Ventana Micro Systems Inc.
 + *
@@ -169,121 +157,116 @@ index 0000000000..215135dd47
 +
 +#include "qemu/osdep.h"
 +
-+#include "rv-trace-messages.h"
++#include "qemu/timer.h"
 +#include "qemu/bitops.h"
-+#include "qemu/log.h"
-+#include "qemu/module.h"
-+#include "qapi/error.h"
-+#include "trace.h"
++#include "libqtest.h"
++#include "hw/registerfields.h"
 +
-+typedef struct RVTraceMessageHeader {
-+    uint8_t length:5;
-+    uint8_t flow:2;
-+    uint8_t extend:1;
-+} RVTraceMessageHeader;
-+#define HEADER_SIZE 1
++/* taken from virt machine memmap */
++#define TE_BASE   0x3020000
++#define TRAM_BASE 0x6000000
 +
-+/*
-+ * Format 3 subformat 0 without 'time' and 'context' fields
-+ */
-+typedef struct RVTraceSyncPayload {
-+    uint8_t format:2;
-+    uint8_t subformat:2;
-+    uint8_t branch:1;
-+    uint8_t privilege:3;
-+    uint32_t addressLow;
-+    uint32_t addressHigh;
-+} RVTraceSyncPayload;
-+#define SYNC_PAYLOAD_SIZE_64BITS 9
++REG32(TR_TE_CONTROL, 0x0)
++    FIELD(TR_TE_CONTROL, ACTIVE, 0, 1)
++    FIELD(TR_TE_CONTROL, ENABLE, 1, 1)
++    FIELD(TR_TE_CONTROL, INST_TRACING, 2, 1)
 +
-+static void rv_etrace_write_bits(uint8_t *bytes, uint32_t bit_pos,
-+                                 uint32_t num_bits, uint32_t val)
++REG32(TR_RAM_START_LOW, 0x010)
++    FIELD(TR_RAM_START_LOW, ADDR, 0, 32)
++REG32(TR_RAM_START_HIGH, 0x014)
++    FIELD(TR_RAM_START_HIGH, ADDR, 0, 32)
++
++REG32(TR_RAM_LIMIT_LOW, 0x018)
++    FIELD(TR_RAM_LIMIT_LOW, ADDR, 0, 32)
++REG32(TR_RAM_LIMIT_HIGH, 0x01C)
++    FIELD(TR_RAM_LIMIT_HIGH, ADDR, 0, 32)
++
++REG32(TR_RAM_WP_LOW, 0x020)
++    FIELD(TR_RAM_WP_LOW, WRAP, 0, 1)
++    FIELD(TR_RAM_WP_LOW, ADDR, 0, 32)
++REG32(TR_RAM_WP_HIGH, 0x024)
++    FIELD(TR_RAM_WP_HIGH, ADDR, 0, 32)
++
++static uint32_t test_read_te_control(QTestState *qts)
 +{
-+    uint32_t pos, byte_index, byte_pos, byte_bits = 0;
++    return qtest_readl(qts, TE_BASE + A_TR_TE_CONTROL);
++}
 +
-+    if (!num_bits || 32 < num_bits) {
-+        return;
++static void test_write_te_control(QTestState *qts, uint32_t val)
++{
++    qtest_writel(qts, TE_BASE + A_TR_TE_CONTROL, val);
++}
++
++static uint64_t test_read_tram_ramstart(QTestState *qts)
++{
++    uint64_t reg = qtest_readl(qts, TRAM_BASE + A_TR_RAM_START_HIGH);
++
++    reg <<= 32;
++    reg += qtest_readl(qts, TRAM_BASE + A_TR_RAM_START_LOW);
++    return reg;
++}
++
++static uint64_t test_read_tram_writep(QTestState *qts)
++{
++    uint64_t reg = qtest_readl(qts, TRAM_BASE + A_TR_RAM_WP_HIGH);
++
++    reg <<= 32;
++    reg += qtest_readl(qts, TRAM_BASE + A_TR_RAM_WP_LOW);
++    return reg;
++}
++
++static void test_trace_simple(void)
++{
++    QTestState *qts = qtest_init("-machine virt -accel tcg");
++    double timeout_sec = 0.5;
++    uint64_t reg_tram_start, reg_tram_writep;
++    uint32_t reg;
++
++    reg = test_read_te_control(qts);
++    reg = FIELD_DP32(reg, TR_TE_CONTROL, ACTIVE, 1);
++    test_write_te_control(qts, reg);
++    reg = test_read_te_control(qts);
++    g_assert(1 == FIELD_EX32(reg, TR_TE_CONTROL, ACTIVE));
++
++    reg = FIELD_DP32(reg, TR_TE_CONTROL, ENABLE, 1);
++    test_write_te_control(qts, reg);
++    reg = test_read_te_control(qts);
++    g_assert(1 == FIELD_EX32(reg, TR_TE_CONTROL, ENABLE));
++
++    /*
++     * Verify if RAM Sink write pointer is equal to
++     * ramstart before start tracing.
++     */
++    reg_tram_start = test_read_tram_ramstart(qts);
++    g_assert(reg_tram_start > 0);
++    reg_tram_writep = test_read_tram_writep(qts);
++    g_assert(reg_tram_writep == reg_tram_start);
++
++    reg = FIELD_DP32(reg, TR_TE_CONTROL, INST_TRACING, 1);
++    test_write_te_control(qts, reg);
++    reg = test_read_te_control(qts);
++    g_assert(1 == FIELD_EX32(reg, TR_TE_CONTROL, INST_TRACING));
++
++    g_test_timer_start();
++    for (;;) {
++        reg_tram_writep = test_read_tram_writep(qts);
++        if (reg_tram_writep > reg_tram_start) {
++            break;
++        }
++
++        g_assert(g_test_timer_elapsed() <= timeout_sec);
 +    }
 +
-+    for (pos = 0; pos < num_bits; pos += byte_bits) {
-+        byte_index = (bit_pos + pos) >> 3;
-+        byte_pos = (bit_pos + pos) & 0x7;
-+        byte_bits = (8 - byte_pos) < (num_bits - pos) ?
-+                    (8 - byte_pos) : (num_bits - pos);
-+        bytes[byte_index] &= ~(((1U << byte_bits) - 1) << byte_pos);
-+        bytes[byte_index] |= ((val >> pos) & ((1U << byte_bits) - 1)) << byte_pos;
-+    }
++    qtest_quit(qts);
 +}
 +
-+static void rv_etrace_write_header(uint8_t *buf, RVTraceMessageHeader header)
++int main(int argc, char *argv[])
 +{
-+    /* flow and extend are always zero, i.e just write length */
-+    rv_etrace_write_bits(buf, 0, 5, header.length);
++    g_test_init(&argc, &argv, NULL);
++    qtest_add_func("/riscv-trace-test/test-trace-simple",
++                   test_trace_simple);
++    return g_test_run();
 +}
-+
-+size_t rv_etrace_gen_encoded_sync_msg(uint8_t *buf, uint64_t pc,
-+                                      TracePrivLevel priv_level)
-+{
-+    RVTraceSyncPayload payload = {.format = 0b11,
-+                                  .subformat = 0b00,
-+                                  .branch = 1,
-+                                  .privilege = priv_level};
-+    RVTraceMessageHeader header = {.flow = 0, .extend = 0,
-+                                   .length = SYNC_PAYLOAD_SIZE_64BITS};
-+    uint8_t bit_pos;
-+
-+    payload.addressLow = extract64(pc, 0, 32);
-+    payload.addressHigh = extract64(pc, 32, 32);
-+
-+    rv_etrace_write_header(buf, header);
-+    bit_pos = 8;
-+
-+    rv_etrace_write_bits(buf, bit_pos, 2, payload.format);
-+    bit_pos += 2;
-+    rv_etrace_write_bits(buf, bit_pos, 2, payload.subformat);
-+    bit_pos += 2;
-+    rv_etrace_write_bits(buf, bit_pos, 1, payload.branch);
-+    bit_pos += 1;
-+    rv_etrace_write_bits(buf, bit_pos, 3, payload.privilege);
-+    bit_pos += 3;
-+
-+    rv_etrace_write_bits(buf, bit_pos, 32, payload.addressLow);
-+    bit_pos += 32;
-+    rv_etrace_write_bits(buf, bit_pos, 32, payload.addressHigh);
-+
-+    return HEADER_SIZE + SYNC_PAYLOAD_SIZE_64BITS;
-+}
-diff --git a/hw/riscv/rv-trace-messages.h b/hw/riscv/rv-trace-messages.h
-new file mode 100644
-index 0000000000..aeafea8849
---- /dev/null
-+++ b/hw/riscv/rv-trace-messages.h
-@@ -0,0 +1,25 @@
-+/*
-+ * Helpers for RISC-V Trace Messages
-+ *
-+ * Copyright (C) 2025 Ventana Micro Systems Inc.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef RISCV_RV_TRACE_MESSAGES_H
-+#define RISCV_RV_TRACE_MESSAGES_H
-+
-+typedef enum {
-+    U = 0,
-+    S_HS = 1,
-+    RESERVED = 2,
-+    M = 3,
-+    D = 4,
-+    VU = 5,
-+    VS = 6,
-+} TracePrivLevel;
-+
-+size_t rv_etrace_gen_encoded_sync_msg(uint8_t *buf, uint64_t pc,
-+                                      TracePrivLevel priv_level);
-+
-+#endif
 -- 
 2.51.0
 
