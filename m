@@ -4,97 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8F64CAC5B8
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Oct 2025 15:01:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAB3DCAC5B0
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Oct 2025 01:08:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4Kld-0007RZ-5s; Thu, 02 Oct 2025 10:58:49 -0400
+	id 1v4UGU-0008WP-8h; Thu, 02 Oct 2025 21:07:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4KlQ-0007OC-FG
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:37 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v4UGS-0008Vn-Mc
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 21:07:16 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v4Kl4-0000Lw-J9
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 10:58:34 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-46e6ba26c50so5239645e9.2
- for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 07:58:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v4UGH-0002VK-OI
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 21:07:15 -0400
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b48d8deaef9so200056866b.2
+ for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 18:07:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759417088; x=1760021888; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1759453616; x=1760058416; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0izgqgQPxEFUV3fbD9mNX/9Xd9YILFJwZ3Tpv0yfZhc=;
- b=YM1uv/8y4S1PtmoMt4L4jy3suO7qjsKkrVhWwcZh6+h0n1DHMKNVc5UjhjBUKnJdap
- sWS/BcJcjDP0eTpWXqZ8MUUDSjZWuOcIOln+ss38//JIeU4naftCBemqxmo0H3oioub2
- ErVttl3lH4CsIC2NLfBL0ZFrAuR3wMqkn9x9fSj1P995Fgikv9k1dFjJuVlFeXHfcYKc
- ORye/67C6+I+2YVCJ24inazcrAJbYUOlvu99E22kTymS9jD556qRaLfi/0q9E/oS3A+o
- 9wdx3QoAAYQ/AIVs/YnFM44MyvS4O2y1l1zpyBloViEbmMrRcQI11V1QS+EOZEmkxFF4
- rBBg==
+ bh=dUJ1G4B6gGG3DgKRIsukrEL70OmCxl2X+s7iaMTB1lM=;
+ b=G1S/AG2GMMR3FToFF5All3JPqCeWFhPqrKALU8RfFZZONbLYHX0MEvQsvmTQ2PJ83T
+ EP3/O5ULX1CPDUTFFH6QfEALYz0Jl/+CSRLIW/bIvrTZfKhknoyUJP/yOxEkREBi6BwC
+ VDLjfoLWyIoVezbD+22RMJCOg4zTC9yccAPMPtbAlgwDIfZc8vL03soLSkmnqjgDL8s1
+ 0epJsGF7SyAKahvdUCaEakXQ12cvP9YZ5ntThTzKuhVbTKY41At/RDzBtw8oErTEcqmg
+ 60TOIbJeLId5ofzXJG9GJF9Q2eIqXioq6mGyqK0BhqiMjRT9FeaFli50zWbMDwP+3X3H
+ rOgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759417088; x=1760021888;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1759453616; x=1760058416;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0izgqgQPxEFUV3fbD9mNX/9Xd9YILFJwZ3Tpv0yfZhc=;
- b=EjCjKHwUS9huXDCiLC+m8PAEK6hScv+xN4n4uWgE1IAJdo/lKj6gT77eI+d5+oDw49
- DGFU8TUCILFLWmvISAwH6J0SY1niqTNQlC2KeVVw8Ao3Ro42wGuX1OrDwcY5W9M6EzaM
- fdcMliLt8fcwJFvjZY84Dum6R/MvBOuMxvm956PLtc5Jdo8iMGaTT8+o+o8OrjKzuvar
- pZbnCfCuDqm69SSchVz2S9j1zCixytxiScBWLMlYbWrngCxCzJ3MQszj1o4p2YZM8urI
- RNw6YdrCSx1oSuQcxC6XOhVD4lr9FUEHGXc53+u3IMzwcIPHnrII5tDVZ0daBpPE+/2D
- T/7g==
+ bh=dUJ1G4B6gGG3DgKRIsukrEL70OmCxl2X+s7iaMTB1lM=;
+ b=NuCO/ixRpAJbwMHV2Mq67nGlXnxx+WmRZLZ3mv4c50Q103czCP7pbx53Cf9h4NuC2v
+ w3WNwkuQGqhtHNs9MS1zkg6t3rAHmIEVLU91Oi/oB30itGL0AQrNR+93PMpN9m3jsA+U
+ fc0WpWyEbX6/j2HEYk2AVwfKPVx6dUV9eJQ3Ml5/OS+R0dUcKrYR/Jx/xbLcS5538j05
+ NUjTxHHllawraort3LVAR9HANlgDY0Dp9h4LlYAYYS7WtSORWupiQivze41fMuPCoHtJ
+ LHu4066Enrz7riNjVO5U1ffpP8N7O6Yxasz5pCwZRuZEy7GLkjUw26vwiQAa6QXJPZnF
+ tMCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVY6UCwK1IsKozcZ5BMUaeViOzsVpQLLM43ahiQwwturYlU/lZgJpHLliWaUAKRPmuUMJwAaR8GEGBM@nongnu.org
-X-Gm-Message-State: AOJu0YxrHlIA0hsK6Ubmrf7JlmxyNsh9+sq2OERxExfRf5xx2FOpNiua
- w3FUz6W0PL657ngo6IFvrzEob4v0rin+pxAjwz2Bt9Ib5B5vxG5wqixeLdWVXkMyqOE=
-X-Gm-Gg: ASbGncsbE9qlmzLVsJw6y5uw0708Ep3mHaecVImNIGZCjPE0kov7KwT/FaX/f+yDWVJ
- V2M33BlTlT6JwS4cJnqu2PAKB2XpZ6SdcRttxG87cBYvmvB9UhEEINagWoe7+dDLwoRrLkfXzcw
- w4rK7xDyLVgN0Nm8jtz6NXLMNpuygaFRZMEOMj+4nIcNAEH3TTcEbwZevxu1NrRCt9seQkjo9sG
- XNO7EEzcWXvXg9NHOrdp7BB8oP7UQq4f/qmIMEYc5g8uwjUtv+597Jth5i3kF3yeEAXIoh1FHud
- JwaJRItTqET0s5lUNNkpKOFOOhakxsAHPGsW+kY9ACSRRexC61f8u0FCCex2wxgd5Pufo0sSgX9
- 9SvRGdV2jKYfWoDyzIhr+T2wp1qh13lnsoQh37ThrG2Y7DfcnaZGki9U0MykEXMM6B3uEVTcxNE
- xpeNzkw9hV57LuL9pIH5Qx9I3D
-X-Google-Smtp-Source: AGHT+IF6k7IasRkJZ6/byTlNsF0gw6uHMcWrt6aJ835DaIWYOqY74I6isesCnT6ffcFG6J+pVs2Afg==
-X-Received: by 2002:a05:600c:1d1e:b0:46e:1fc2:f9ac with SMTP id
- 5b1f17b1804b1-46e6a2e09aemr22076735e9.10.1759417088212; 
- Thu, 02 Oct 2025 07:58:08 -0700 (PDT)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e619c396esm85237665e9.8.2025.10.02.07.58.07
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 02 Oct 2025 07:58:07 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
- Max Filippov <jcmvbkbc@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
- Zhao Liu <zhao1.liu@intel.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 5/6] target/xtensa: Replace legacy
- cpu_physical_memory_[un]map() calls
-Date: Thu,  2 Oct 2025 16:57:40 +0200
-Message-ID: <20251002145742.75624-6-philmd@linaro.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251002145742.75624-1-philmd@linaro.org>
-References: <20251002145742.75624-1-philmd@linaro.org>
+ AJvYcCUIxEi8pyX6xJP2Eq2m4TMdSnQGH3MDDtVWCC6B5tjPoOhlHQAK0bG7Zf1/6WqrU9KbvOTHL2+lnaQ+@nongnu.org
+X-Gm-Message-State: AOJu0YzH8qGx3rSH+cqFqXmuqEwfoLo5ShU2YxWVH2nSqnOpWRkxdC5Z
+ Hz2pH30fu8jYrcLVaTRgbDSZ+HXyMQedHTEnMqpgM6QRzTiN5ITpCZqv5q3aood3EWvY2Z/nPrp
+ hi1KagJ12yIoLoowjNkJytrijP7lVcLQ=
+X-Gm-Gg: ASbGncsh4/SujLOyA8cNLTaA4t1hk6e8TB6qiwUK1S2xj93R9JGWmG8U1QFh8cuHXWX
+ j67jzNpVIYyynk4OAu+NNmRA0MUL+IKPO3llpeFwAR8MD37TZ7sX+UpL3VnHUvhqYPPite8z9ny
+ hFvh+KE5TiJTrjgR5zXqrHwlKoWL4z2dNuC6apA8pYynCSvKrBFKoXFahE1K8TEWsfEMXnSUwEb
+ 7iU3lhISa9/k6N759f7Ag4CxaLVd5Kuk+Adla1k0H5GOYfTC+rFP07J2fnGMA==
+X-Google-Smtp-Source: AGHT+IFM/7JOB2qMO+pYWbdlGCbGLMS41DxU6Chfnus8j2/3SPPHzhrmm1t2ipiWUOxY2ncUuL7HVeb3DC7BTHdks9Y=
+X-Received: by 2002:a17:907:944d:b0:b2e:e87e:ef2e with SMTP id
+ a640c23a62f3a-b49c34474b6mr151753766b.39.1759453616142; Thu, 02 Oct 2025
+ 18:06:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250929115543.1648157-1-valentin.haudiquet@canonical.com>
+In-Reply-To: <20250929115543.1648157-1-valentin.haudiquet@canonical.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 3 Oct 2025 11:06:28 +1000
+X-Gm-Features: AS18NWBuckVfcsWCLtP_skD8anng53scByzxab0cbxP61calpZ1B1PfLyIjMR5g
+Message-ID: <CAKmqyKNvBF5hRjDZKNp1Bs-GecDqCu3inh-1-tsRaA9iyCU0ZA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix endianness swap on compressed
+ instructions
+To: Valentin Haudiquet <valentin.haudiquet@canonical.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-trivial@nongnu.org, 
+ zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
+ alistair.francis@wdc.com, palmer@dabbelt.com, 
+ vhaudiquet <vhaudiquet343@hotmail.fr>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x631.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,73 +101,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Commit b7ecba0f6f6 ("docs/devel/loads-stores.rst: Document our
-various load and store APIs") mentioned cpu_physical_memory_*()
-methods are legacy, the replacement being address_space_*().
+On Mon, Sep 29, 2025 at 11:02=E2=80=AFPM Valentin Haudiquet
+<valentin.haudiquet@canonical.com> wrote:
+>
+> From: vhaudiquet <vhaudiquet343@hotmail.fr>
+>
+> Three instructions were not using the endianness swap flag, which resulte=
+d in a bug on big-endian architectures.
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/3131
+> Buglink: https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/2123828
+>
+> Signed-off-by: Valentin Haudiquet <valentin.haudiquet@canonical.com>
 
-Replace the *_map() / *_unmap() methods in the SIMCALL helper,
-using the vCPU default address space. No behavioral change expected.
+Thanks!
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/xtensa/xtensa-semi.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+Applied to riscv-to-apply.next
 
-diff --git a/target/xtensa/xtensa-semi.c b/target/xtensa/xtensa-semi.c
-index 636f421da2b..431c263dc57 100644
---- a/target/xtensa/xtensa-semi.c
-+++ b/target/xtensa/xtensa-semi.c
-@@ -32,6 +32,7 @@
- #include "exec/target_page.h"
- #include "semihosting/semihost.h"
- #include "semihosting/uaccess.h"
-+#include "system/memory.h"
- #include "qapi/error.h"
- #include "qemu/log.h"
- 
-@@ -192,7 +193,9 @@ void xtensa_sim_open_console(Chardev *chr)
- 
- void HELPER(simcall)(CPUXtensaState *env)
- {
-+    const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
-     CPUState *cs = env_cpu(env);
-+    AddressSpace *as = cs->as;
-     uint32_t *regs = env->regs;
- 
-     switch (regs[2]) {
-@@ -215,7 +218,7 @@ void HELPER(simcall)(CPUXtensaState *env)
-                     TARGET_PAGE_SIZE - (vaddr & (TARGET_PAGE_SIZE - 1));
-                 uint32_t io_sz = page_left < len ? page_left : len;
-                 hwaddr sz = io_sz;
--                void *buf = cpu_physical_memory_map(paddr, &sz, !is_write);
-+                void *buf = address_space_map(as, paddr, &sz, !is_write, attrs);
-                 uint32_t io_done;
-                 bool error = false;
- 
-@@ -261,7 +264,7 @@ void HELPER(simcall)(CPUXtensaState *env)
-                         error = true;
-                         io_done = 0;
-                     }
--                    cpu_physical_memory_unmap(buf, sz, !is_write, io_done);
-+                    address_space_unmap(as, buf, sz, !is_write, io_done);
-                 } else {
-                     error = true;
-                     regs[3] = TARGET_EINVAL;
-@@ -408,11 +411,11 @@ void HELPER(simcall)(CPUXtensaState *env)
- 
-             while (sz) {
-                 hwaddr len = sz;
--                void *buf = cpu_physical_memory_map(base, &len, 1);
-+                void *buf = address_space_map(as, base, &len, true, attrs);
- 
-                 if (buf && len) {
-                     memset(buf, regs[4], len);
--                    cpu_physical_memory_unmap(buf, len, 1, len);
-+                    address_space_unmap(as, buf, len, true, len);
-                 } else {
-                     len = 1;
-                 }
--- 
-2.51.0
+Alistair
 
+> ---
+>  target/riscv/insn_trans/trans_rvzce.c.inc | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/ins=
+n_trans/trans_rvzce.c.inc
+> index c77c2b927b..dd15af0f54 100644
+> --- a/target/riscv/insn_trans/trans_rvzce.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+> @@ -88,13 +88,13 @@ static bool trans_c_lbu(DisasContext *ctx, arg_c_lbu =
+*a)
+>  static bool trans_c_lhu(DisasContext *ctx, arg_c_lhu *a)
+>  {
+>      REQUIRE_ZCB(ctx);
+> -    return gen_load(ctx, a, MO_UW);
+> +    return gen_load(ctx, a, MO_TEUW);
+>  }
+>
+>  static bool trans_c_lh(DisasContext *ctx, arg_c_lh *a)
+>  {
+>      REQUIRE_ZCB(ctx);
+> -    return gen_load(ctx, a, MO_SW);
+> +    return gen_load(ctx, a, MO_TESW);
+>  }
+>
+>  static bool trans_c_sb(DisasContext *ctx, arg_c_sb *a)
+> @@ -106,7 +106,7 @@ static bool trans_c_sb(DisasContext *ctx, arg_c_sb *a=
+)
+>  static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
+>  {
+>      REQUIRE_ZCB(ctx);
+> -    return gen_store(ctx, a, MO_UW);
+> +    return gen_store(ctx, a, MO_TEUW);
+>  }
+>
+>  #define X_S0    8
+> --
+> 2.51.0
+>
+>
 
