@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C01CAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Oct 2025 01:19:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 894B9CAC5B8
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Oct 2025 01:27:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4URu-0002Km-NJ; Thu, 02 Oct 2025 21:19:07 -0400
+	id 1v4UZ9-0004xz-Ey; Thu, 02 Oct 2025 21:26:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v4URt-0002KI-Km
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 21:19:05 -0400
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ id 1v4UZ6-0004xq-6P
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 21:26:32 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v4URZ-00057K-R0
- for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 21:19:04 -0400
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b48d8deafaeso289626966b.1
- for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 18:18:36 -0700 (PDT)
+ id 1v4UYo-00072Q-Jo
+ for qemu-riscv@nongnu.org; Thu, 02 Oct 2025 21:26:31 -0400
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b48d8deafaeso290536366b.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Oct 2025 18:26:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759454309; x=1760059109; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1759454763; x=1760059563; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fgoOsYcjLPO1y5KGHbBQjfl76W/8XXJKWx0UoOFzido=;
- b=H462shA/Ut3FCPG1dR+mJXZEcv/SwPTNrHlkYd20AjaL6qnbpImVQZzBlhqSi23+H2
- TSbUQdRsprTKfySxmk8wFN8IRznbgn8oz5dUZuZTqcpdb21ulcJ+uYpGo+ff/HSVThhm
- WeiwKOm+P5XiGZsiLeTqCsKrfGWpBRxTKK4eUXbR27CWmGT368/Z7xLHm5xKVD5Jfh/j
- VOL+BHxCzCmtTg0hJRA2Hv7detv+km/QPvAyxKj5IjuP+Cpjv28Aq+I1WsvV+Dpbo3FP
- 5bpNR+gEcwZ7jNSh94TxTwL1q5LcsqDmpwwdcMxuUgW/8BgfBxKrJbPgR3wgEFIBn82z
- 4ICw==
+ bh=C/zC5TIK3S7iq04RpUYXiJfO/OyeaO+wflpBEUkxAgs=;
+ b=CbgIwRYj3iz15Gn8+RbuLuTlbMIQppBPAMHvwcoM715U/w2806UDzRvkjYZEWTk7yP
+ RTmJaSpk0PjAB/ECYRU/+oxFgNFvwEtbSJpUVhGBKDidk6emD16XVORBesgYBXTce09l
+ a3SBSmLPy4KluRz8/3DkS9cWUFBZaiAnh0Ljyjso+KISK777jbcPxAkFubB1/tSxaZ8h
+ +a8awf7Y1jMPENgZAqiaQb1ETLf0iBBkNHQHXcidIqt4b47Gd+Tub2BHdsz3HBfURSkP
+ muqi7pBc9stBwhreZcVpFNS5zY2loxn/aBC/4R47Sf3rhpzpqaxm1yQgJgzjVQrmGi+I
+ aEOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759454309; x=1760059109;
+ d=1e100.net; s=20230601; t=1759454763; x=1760059563;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fgoOsYcjLPO1y5KGHbBQjfl76W/8XXJKWx0UoOFzido=;
- b=js6DdzKZFWQr3CSawc/pstn5u8jul1JPeByVX+f6OF5bNim02NLL44FOCPIqre2Oel
- zzzViz+6Zk8oOZgSBspH9fFHxMVrpCQXD50lor/0qUMzoBXHXpQxOF6mld+V8w1L1HMF
- LbMrS8S8qdXd9TyWOBTdr6Jl3iQkwt4mf8d3TDANCOSOX2P0gTJfxVzU/xaKNw9ykh0F
- 2LYNmF6hlfvemRSEb5yo3gzCw/28VV36o7I3KjPrx4wjgd3PDLUh7R8PflS7VS1INn/s
- m2QsgE24gk8h3CIvRX/lu2hU3E2WSi2sekpiWh4vBhew02sqrweXY9dLyxCaPPZst0yZ
- FItg==
+ bh=C/zC5TIK3S7iq04RpUYXiJfO/OyeaO+wflpBEUkxAgs=;
+ b=A1LInlFTtoOvodXxd+Y1rMDDMC8ei5Pq2w9/+2ye5E8PK8Zea4j1mGIWIhyDzM6ZB3
+ q8o8tUqZYGJTvA+TE49ZbClABLSGC15LWeGgyAXvW2vu0uSSu9mJpjKLahtTbYLII1Bj
+ M0PToPQ2YOMrbm8MkQhtQZ0eE7PVnANg6xaf3euLvoARoHJ+JH4h7Rb1JYyUYvd0C13A
+ Yf8XI0LKt4pb2Zjra6NlD3GC+hBgiXNjPQOmOm97fKk7oFPs3u/3garTEa+x9X8d0VT/
+ /HGF9KM0HCsFnRWmpjZJhqtFSUrFEd2Bq5X7Qk7VFtlCm1VKAPgnLUrsmBRhNzEMcfEo
+ IAOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVnXF0wl3bZ9AzrnO9lKrK48piKGZ9W/Rm1WZ6CTPm1fbGjbtrwWwH3T8xCIuiHOrzseyXwQLC4mB8@nongnu.org
-X-Gm-Message-State: AOJu0Yw1Beg/9Ppx+DE2lPzVEn62XS4s4104aovhfDNeGxQ2wVw0Gcm/
- Aoz75A2XvV/UWhVjmJzIccs5NuhlrpqWBeIGuP4DIEj6xpRR72V3xpvV8YskYnYtfCeWq7mo1FZ
- oPKmb/90BabQ+xA8Mfn1s/TOr1rVSMGg=
-X-Gm-Gg: ASbGnct/uc9VaJTbG8N4zLGSaE+/hA0P5HtjnMgtC1EaLPCpJQytCQyJCf8l9rUC9Xj
- FdOV52GPTEDFMVae+Hlu/BEuHLZj64+MGv2YkJNDf4iUyHj9rrONX/LVMAqxJc+6t54aYHPBGtg
- t5PzPpTAjQVrLEPIxip009cLbe9drmPzbRF6Nqrl5+Dbd7K4haXAXdr3wTLIqw1gUisEZzn0EOT
- 358jzqi+C+sU1xX2hBaKS6n086nvEac/j1eaual/4dMpVhpta+RRUVgIJekQA==
-X-Google-Smtp-Source: AGHT+IF+zK5mHFI23v7Brrs8zwZyuTbIKUv0zvl+XpfRfDjzsnZ0CMyCOgUC/43mr2C6Se0sM5KeSVtHRvl6/NHDCCc=
-X-Received: by 2002:a17:907:a893:b0:b3c:4ebc:85e5 with SMTP id
- a640c23a62f3a-b49c525b3c2mr140579366b.59.1759454308610; Thu, 02 Oct 2025
- 18:18:28 -0700 (PDT)
+ AJvYcCWfa3x6Q4A3iZU5LwYj4dETSSJFDXcjjV9BkFGeS6spJArUpehfplqOpm1GiVAryeEJ3Y6jYIGg97/Z@nongnu.org
+X-Gm-Message-State: AOJu0YwG6v26Bca5+rmDKVTFVnCtp62p+jCWC6YaoWO2nmLTVnbC7BlS
+ 6oNVNIDUwko8ggXyk5+miblvpRjYDmcV4M1JJM2mSO62QyeptiPTbG9Szal1yTcB7LQvIT+QBN+
+ +3zZ42QSyg8PLD2L9zdJtArw7MXWA6Og=
+X-Gm-Gg: ASbGncuqerjxnMYtm4wERdr682wgegAJ1COritvxcIeNNOkbiJZhzgGcfC03Mox7tNM
+ HwWBmJ7GdPOJQomF/ZukyN82xEEw/yJurxRtRHA5K/Q9ua9VAm9c87YhBvIn5wmdFm7mTwBySBA
+ 8nX4CNiTdR/CFGQf/m2Ygv89IUHcS9Okr0Ra4pk6xtixTrRs30nVcWm9nmVNgjzQNHKIRwkjEny
+ HStHdQiFWRDX1GpAhDQGDfNbnwu67rJStpAfZcX82UdWePRfMTnz1TyivoV7A==
+X-Google-Smtp-Source: AGHT+IGiB2GGG1CBiPrVXlgk0M1rTpPEZiMLIvsfl7otIVstC3JsEP65XovX12VaIywNM12SL/IV67ASJXozT6IZnnk=
+X-Received: by 2002:a17:907:7283:b0:b40:cfe9:ed41 with SMTP id
+ a640c23a62f3a-b49c47abc02mr153579666b.34.1759454763146; Thu, 02 Oct 2025
+ 18:26:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250723113739751COZ5PkRzx6aXEuKzsHhm_@zte.com.cn>
 In-Reply-To: <20250723113739751COZ5PkRzx6aXEuKzsHhm_@zte.com.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 3 Oct 2025 11:18:02 +1000
-X-Gm-Features: AS18NWBNPae5B--RmlbFX7SWBEJy89SZpz9ScYVkYQK0ePemk_dIo2Bw25BawH8
-Message-ID: <CAKmqyKOD1d+Me5Wk5RJbMCxJXk_bUCa2hOtnXZ_NW_YO-SdpSw@mail.gmail.com>
+Date: Fri, 3 Oct 2025 11:25:36 +1000
+X-Gm-Features: AS18NWBNnXym9J1QvJP6KzhJbtz91lnlWihZQT-iPn-Rd_rNGHF84skm57ErZ9o
+Message-ID: <CAKmqyKOx52d-XBMus8XDZw3HBUba2bzsrABOj84u3TfJVw-pQw@mail.gmail.com>
 Subject: Re: [PATCH v3 RESEND] hw/riscv/virt: Add acpi ged and powerdown
  support
 To: liu.xuemei1@zte.com.cn
@@ -75,16 +75,16 @@ Cc: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  sunilvl@ventanamicro.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x62d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x631.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,11 +108,6 @@ On Wed, Jul 23, 2025 at 1:39=E2=80=AFPM <liu.xuemei1@zte.com.cn> wrote:
 >
 > Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
 > Co-authored-by: Bj=C3=B6rn T=C3=B6pel <bjorn@rivosinc.com>
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
 > ---
 > Changes in v3:
 > - Added missing param to virt_is_acpi_enabled
@@ -295,6 +290,27 @@ virt/DSDT
 >
 > delta 25
 > hcmaDTb4i-ZCD<k85-$S-lgdOcX(r!W8`W3y0sv*E2bcf=3D
+
+This fails checkpatch:
+
+ERROR: Do not add expected files together with tests, follow
+instructions in tests/qtest/bios-tables-test.c. Files
+
+ tests/data/acpi/riscv64/virt/DSDT
+
+and
+
+ include/hw/riscv/virt.h
+ hw/riscv/virt-acpi-build.c
+ hw/riscv/virt.c
+ hw/riscv/Kconfig
+
+found in the same patch
+
+total: 1 errors, 0 warnings, 123 lines checked
+
+Alistair
+
 >
 > --
 > 2.27.0
