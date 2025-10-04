@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 857A3CAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Sat,  4 Oct 2025 07:20:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E37E0CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Sat,  4 Oct 2025 07:29:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4wWS-0004C6-FT; Sat, 04 Oct 2025 03:17:40 -0400
+	id 1v4whq-0006uu-5T; Sat, 04 Oct 2025 03:29:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v4wVD-0002YL-Dq; Sat, 04 Oct 2025 03:16:26 -0400
+ id 1v4who-0006uQ-UN; Sat, 04 Oct 2025 03:29:24 -0400
 Received: from isrv.corpit.ru ([212.248.84.144])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v4wVB-0005Pa-6i; Sat, 04 Oct 2025 03:16:23 -0400
+ id 1v4whm-0007HY-VL; Sat, 04 Oct 2025 03:29:24 -0400
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id E9AB815A5D3;
- Sat, 04 Oct 2025 10:16:15 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id B3E6915A5FC;
+ Sat, 04 Oct 2025 10:29:17 +0300 (MSK)
 Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
- by tsrv.corpit.ru (Postfix) with ESMTP id 577D8298667;
- Sat,  4 Oct 2025 10:16:16 +0300 (MSK)
-Message-ID: <8b282db4-b49b-4199-94e9-35d7cc296b8b@tls.msk.ru>
-Date: Sat, 4 Oct 2025 10:16:15 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id 1744A298672;
+ Sat,  4 Oct 2025 10:29:13 +0300 (MSK)
+Message-ID: <b251b5bc-49a5-4f00-9703-9b2ebb0587c9@tls.msk.ru>
+Date: Sat, 4 Oct 2025 10:29:12 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/4] Fix RISC-V timer migration issues
-To: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- Peter Xu <peterx@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+Subject: Re: [PATCH] target/riscv: do not use translator_ldl in opcode_at
+To: Vladimir Isaev <vladimir.isaev@syntacore.com>,
+ richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  qemu-stable <qemu-stable@nongnu.org>
-References: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
+References: <20250815140633.86920-1-vladimir.isaev@syntacore.com>
 Content-Language: en-US, ru-RU
 From: Michael Tokarev <mjt@tls.msk.ru>
 Autocrypt: addr=mjt@tls.msk.ru; keydata=
@@ -82,7 +81,7 @@ Autocrypt: addr=mjt@tls.msk.ru; keydata=
  YPkzzso6HT7rlapB5nulYmplJZSZ4RmE1ATZKf+wUPocDu6N10LtBNbwHWTT5NLtxNJAJAvl
  ojis6H1kRWZE/n5buyPY2NYeyWfjjrerOYt3er55n4C1I88RSCTGeejVmXWuo65QD2epvzE6
  3GgKngeVm7shlp7+d3D3+fAAHTvulQQqV3jOodz+B4yzuZ7WljkNrmrWrH8aI4uA98c=
-In-Reply-To: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
+In-Reply-To: <20250815140633.86920-1-vladimir.isaev@syntacore.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
@@ -108,57 +107,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/11/25 12:56, TANG Tiancheng wrote:
-> This patch set fixes several timer-related migration issues in QEMU's
-> RISC-V implementation that cause timer events to be lost or behave
-> incorrectly after snapshot save/restore or live migration.
+On 8/15/25 17:06, Vladimir Isaev wrote:
+> opcode_at is used only in semihosting checks to match opcodes with expected pattern.
 > 
-> The problems addressed are:
+> This is not a translator and if we got following assert if page is not in TLB:
+> qemu-system-riscv64: ../accel/tcg/translator.c:363: record_save: Assertion `offset == db->record_start + db->record_len' failed.
 > 
-> 1. ACLINT mtimer time_delta not migrated: The time_delta field in
->     RISCVAclintMTimerState was missing from vmstate, causing incorrect
->     mtime values after snapshot restore. This resulted in guest time
->     appearing "frozen" until enough virtual time elapsed to compensate
->     for the offset error.
-> 
-> 2. ACLINT mtimer timers array not migrated: Active timer events
->     scheduled via riscv_aclint_mtimer_write_timecmp() were not being
->     migrated, causing pending timer interrupts to be lost after restore.
-> 
-> 3. CPU stimer/vstimer not migrated: The S-mode and VS-mode timer
->     pointers in CPURISCVState were missing from vmstate_riscv_cpu,
->     causing supervisor-level timer events to be lost.
-> 
-> The patch set introduces a new VMSTATE_TIMER_PTR_VARRAY macro to handle
-> migration of variable-length timer pointer arrays, and adds the missing
-> timer fields to the appropriate vmstate structures.
-> 
-> Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
-> ---
-> Changes in v3:
-> - Remove 'include/' of the subject at patch v2 2/4.
-> - Added Reviewed-by from Peter Xu.
-> - Link to v2: https://lore.kernel.org/qemu-devel/20250910-timers-v2-0-31359f1f6ee8@linux.alibaba.com
-> 
-> Changes in v2:
-> - Split VMSTATE_VARRAY_OF_POINTER_UINT32() into a separate patch,
->    and define VMSTATE_TIMER_PTR_VARRAY() in riscv_aclint.h.
-> - Added Reviewed-by from Daniel Henrique Barboza.
-> - Link to v1: https://lore.kernel.org/qemu-devel/20250909-timers-v1-0-7ee18a9d8f4b@linux.alibaba.com
-> 
-> ---
-> TANG Tiancheng (4):
->        hw/intc: Save time_delta in RISC-V mtimer VMState
->        migration: Add support for a variable-length array of UINT32 pointers
->        hw/intc: Save timers array in RISC-V mtimer VMState
->        target/riscv: Save stimer and vstimer in CPU vmstate
+> Fixes: 1f9c4462334f ("target/riscv: Use translator_ld* for everything")
+> Signed-off-by: Vladimir Isaev <vladimir.isaev@syntacore.com>
 
-Am I right this stuff is not back-portable to previous qemu
-stable releases, as it introduces new fields into the migration
-stream which, which can't be picked up by these releases?
-
- From the description it seems like all this stuff should be fixed
-in previous stable qemu releases too.
+This seems like a qemu-stable material (for 10.0.x and 10.1.x series).
+Please let me know if it is not.
 
 Thanks,
 
