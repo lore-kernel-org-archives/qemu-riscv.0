@@ -4,95 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A5F2CAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Sat,  4 Oct 2025 07:44:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24006CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Sat,  4 Oct 2025 20:02:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4wwM-0001fx-NU; Sat, 04 Oct 2025 03:44:27 -0400
+	id 1v58RX-00012C-8d; Sat, 04 Oct 2025 16:01:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v4wwJ-0001fg-Lc; Sat, 04 Oct 2025 03:44:23 -0400
-Received: from isrv.corpit.ru ([212.248.84.144])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v4wwH-0000GR-3k; Sat, 04 Oct 2025 03:44:23 -0400
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 599F315A604;
- Sat, 04 Oct 2025 10:44:13 +0300 (MSK)
-Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
- by tsrv.corpit.ru (Postfix) with ESMTP id DCFF5298682;
- Sat,  4 Oct 2025 10:44:13 +0300 (MSK)
-Message-ID: <19b1f55b-810c-46b8-a934-45ae2205f351@tls.msk.ru>
-Date: Sat, 4 Oct 2025 10:44:13 +0300
+ (Exim 4.90_1) (envelope-from <groeck7@gmail.com>) id 1v58RM-0000uf-N6
+ for qemu-riscv@nongnu.org; Sat, 04 Oct 2025 16:01:12 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <groeck7@gmail.com>) id 1v58RH-0006DJ-Ti
+ for qemu-riscv@nongnu.org; Sat, 04 Oct 2025 16:01:12 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-78a9793aa09so4152731b3a.0
+ for <qemu-riscv@nongnu.org>; Sat, 04 Oct 2025 13:01:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1759608062; x=1760212862; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=s89LU7o1ZyXNcRb/2leqwVIsfipruP3UJlVfpKF2qgY=;
+ b=Olyk0q1LofsYdRMAlI3eSQBZvPiN/MNrQrH1XzW2V1TxKuWmmgCibjcn0jZ5k+z305
+ 6s3ZzSpO/ZVmpSnYOJ7GLCIzbGONci7RjwZaKQDz+Js3mox64wtN94QdoI7L+I6Avlpq
+ EcEHYlUBF77M/s05PUVhzMN2NT5dao3fRjw6r4qlHdCA1/QimCE69WopFFKS0nVzXBzI
+ BSOk0SMHDJbBo8P/ukfIAWFKdHmf06//DTVUljUzJJdD+GFFPrXK/9EiLsqwh1yg4MU+
+ Gyxviupo1gDCZ3rFmGgINRFk/TX/QgKTe67zaNkOtn0gOLmMmEkCo19AyQPpzjXmRC4M
+ s/bg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759608062; x=1760212862;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=s89LU7o1ZyXNcRb/2leqwVIsfipruP3UJlVfpKF2qgY=;
+ b=k/Z5Ax9//3bIQAf5avIxws/TbmUyIhSi1LUHAzx7jCaQF/ncwsuaAe1yvEMwnq/eh3
+ a5t90iUf0+aBLnhKpZsS46otUQxzC3tridGNnPOBaPGOF5kxCjxc7JWGko/C+X4rZDSK
+ i4QzQn/i1dL+/q09A5bti66gX7YaRm+q3mN8bByMyiBndxsq+cAKh++35hrC3ZncTbsV
+ 0S8qGqgnZaE4eYxMv6Q6GM2RA6rqwCu37wuY8gkJw4T7DCqTFCAO+bnJi02O6d5r8BNB
+ adEksKlHSCyRpBJn5MUR2Kqbr1dB5yHGPEyx8dI5kWGGgUnUOKrlHi9Rj+hgTP6gfAbg
+ uLbQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUyXzAJs5W8eZ+oXkRsjeVMYqaavbPvfzov9jjbSMZpl52scGtOVDw1aHdjePlSHmJU3k+WCWvvCQ5m@nongnu.org
+X-Gm-Message-State: AOJu0Yy/F05BsyOYJZJ5S0YuE3E1GN1hzvrDinJKAtD7zE0LxekjQgAN
+ Mx4o+qikNwQmbT77IoMKtMYTHRvhF3ec0YGhfaUyBxnepSEHc2gfIWD0
+X-Gm-Gg: ASbGncu/IOWwOosNxN/PgqLw93K8XGqiL2ZaWv+o9Hog6JDF2ys45tBXIC2H5QfMmX3
+ nJ0vbKZc9AzyU82+48O1I714cksQecetES6hfZ/2RR7DbraRGmT9Kj9+E87V/HJBC9wPsmTkKfK
+ 1PcRwP9jV0QARWKbCQ69yeq0LWmjiORAkX9Wsxg7JHCMn1nRCL5a7zhlVy0MPj6kFe8RV0ATZr0
+ y1DshUx6CKFk9rtOOCwfQNoiQE8OuOxNyvwZFE4riXQP9b2bf7NBjgDvuesYbQfbRBMSGozukbH
+ U/7shoyLBidJz06YjX9WAGBpOAKMCmd9Qx3q9zZ2LzLuvnZ4Khw2f+DIu2EMt5UFB9wdP6Hbfuy
+ fn2EetmHTE2ip8lcn8EDohjextv7qeOSAtMZYnorfevGvVSCBJNV0pfUZFll4MHKSnpvPTW2el9
+ PMj9XP
+X-Google-Smtp-Source: AGHT+IHw8v/+jlqZ+OZxtkzgJ8jrGBYKxC8Djf49qos3QDGh7kPSXGhr8DHaEVXrjgttf285zb6STg==
+X-Received: by 2002:a05:6a20:7d9e:b0:2e9:d6ce:e125 with SMTP id
+ adf61e73a8af0-32b61dedc3dmr9689123637.5.1759608061728; 
+ Sat, 04 Oct 2025 13:01:01 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b6099f3b819sm7998413a12.26.2025.10.04.13.01.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 04 Oct 2025 13:01:01 -0700 (PDT)
+From: Guenter Roeck <linux@roeck-us.net>
+To: "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Peter Maydell <peter.maydell@linaro.org>
+Cc: Jason Wang <jasowang@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Guenter Roeck <linux@roeck-us.net>
+Subject: [PATCH 1/4] hw/net/cadence_gem: Support two Ethernet interfaces
+ connected to single MDIO bus
+Date: Sat,  4 Oct 2025 13:00:46 -0700
+Message-ID: <20251004200049.871646-2-linux@roeck-us.net>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20251004200049.871646-1-linux@roeck-us.net>
+References: <20251004200049.871646-1-linux@roeck-us.net>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/2] riscv: Modify minimum VLEN rule
-To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-stable <qemu-stable@nongnu.org>
-References: <20250923090729.1887406-1-max.chou@sifive.com>
-Content-Language: en-US, ru-RU
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- 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
-In-Reply-To: <20250923090729.1887406-1-max.chou@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=groeck7@gmail.com; helo=mail-pf1-x433.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,33 +106,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/23/25 12:07, Max Chou wrote:
-> According to the RISC-V unprivileged specification, the VLEN should be greater
-> or equal to the ELEN. This patchset provides following modifications:
-> 
-> * Replace the checkings of standard V with the checkings of Zve32x
-> * Introduces a check rule for VLEN and ELEN
-> * Modifies the minimum VLEN based on the vector extensions
-> 
-> Extension     Minimum VLEN
-> V                      128
-> Zve64[d|f|x]            64
-> Zve32[f|x]              32
-> 
-> v1: 20250627132156.440214-1-max.chou@sifive.com
-> - Rebase to riscv-to-apply.next branch
-> - Add patch 1 to replace checking RVV by checking Zve32x
-> 
-> Max Chou (2):
->    target/riscv: rvv: Replace checking V by checking Zve32x
->    target/riscv: rvv: Modify minimum VLEN according to enabled vector
->      extensions
+The Microchip PolarFire SoC Icicle Kit supports two Ethernet interfaces.
+The PHY on each may be connected to separate MDIO busses, or both may be
+connected on the same MDIO bus using different PHY addresses.
 
-Is this a qemu-stable material?
-(these changes does not apply directly to 10.1.x, probably the
-MonitorDef change in the first patch here can be dropped)
+To be able to support two PHY instances on a single MDIO bus, two properties
+are needed: First, there needs to be a flag indicating if the MDIO bus on
+a given Ethernet interface is connected. If not, attempts to read from this
+bus must always return 0xffff. Implement this property as phy-connected.
+Second, if the MDIO bus on an interface is active, it needs a link to the
+consumer interface to be able to provide PHY access for it. Implement this
+property as phy-consumer.
 
-Thanks,
+Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+---
+ hw/net/cadence_gem.c         | 24 ++++++++++++++++++------
+ include/hw/net/cadence_gem.h |  3 +++
+ 2 files changed, 21 insertions(+), 6 deletions(-)
 
-/mjt
+diff --git a/hw/net/cadence_gem.c b/hw/net/cadence_gem.c
+index 44446666de..520324adfd 100644
+--- a/hw/net/cadence_gem.c
++++ b/hw/net/cadence_gem.c
+@@ -1541,12 +1541,20 @@ static void gem_handle_phy_access(CadenceGEMState *s)
+ {
+     uint32_t val = s->regs[R_PHYMNTNC];
+     uint32_t phy_addr, reg_num;
++    CadenceGEMState *ps = s;
++    uint32_t op;
+ 
+     phy_addr = FIELD_EX32(val, PHYMNTNC, PHY_ADDR);
++    op = FIELD_EX32(val, PHYMNTNC, OP);
+ 
+-    if (phy_addr != s->phy_addr) {
+-        /* no phy at this address */
+-        if (FIELD_EX32(val, PHYMNTNC, OP) == MDIO_OP_READ) {
++    /* Switch phy to consumer interface if there is an address match */
++    if (s->phy_consumer && phy_addr == s->phy_consumer->phy_addr) {
++        ps = s->phy_consumer;
++    }
++
++    if (!s->phy_connected || phy_addr != ps->phy_addr) {
++        /* phy not connected or no phy at this address */
++        if (op == MDIO_OP_READ) {
+             s->regs[R_PHYMNTNC] = FIELD_DP32(val, PHYMNTNC, DATA, 0xffff);
+         }
+         return;
+@@ -1554,14 +1562,14 @@ static void gem_handle_phy_access(CadenceGEMState *s)
+ 
+     reg_num = FIELD_EX32(val, PHYMNTNC, REG_ADDR);
+ 
+-    switch (FIELD_EX32(val, PHYMNTNC, OP)) {
++    switch (op) {
+     case MDIO_OP_READ:
+         s->regs[R_PHYMNTNC] = FIELD_DP32(val, PHYMNTNC, DATA,
+-                                         gem_phy_read(s, reg_num));
++                                         gem_phy_read(ps, reg_num));
+         break;
+ 
+     case MDIO_OP_WRITE:
+-        gem_phy_write(s, reg_num, val);
++        gem_phy_write(ps, reg_num, val);
+         break;
+ 
+     default:
+@@ -1813,6 +1821,10 @@ static const Property gem_properties[] = {
+                       num_type2_screeners, 4),
+     DEFINE_PROP_UINT16("jumbo-max-len", CadenceGEMState,
+                        jumbo_max_len, 10240),
++    DEFINE_PROP_BOOL("phy-connected", CadenceGEMState, phy_connected, true),
++    DEFINE_PROP_LINK("phy-consumer", CadenceGEMState, phy_consumer,
++                     TYPE_CADENCE_GEM, CadenceGEMState *),
++
+     DEFINE_PROP_LINK("dma", CadenceGEMState, dma_mr,
+                      TYPE_MEMORY_REGION, MemoryRegion *),
+ };
+diff --git a/include/hw/net/cadence_gem.h b/include/hw/net/cadence_gem.h
+index 91ebb5c8ae..21e7319f53 100644
+--- a/include/hw/net/cadence_gem.h
++++ b/include/hw/net/cadence_gem.h
+@@ -81,6 +81,9 @@ struct CadenceGEMState {
+ 
+     uint8_t phy_loop; /* Are we in phy loopback? */
+ 
++    bool phy_connected; /* true if connected */
++    struct CadenceGEMState *phy_consumer;
++
+     /* The current DMA descriptor pointers */
+     uint32_t rx_desc_addr[MAX_PRIORITY_QUEUES];
+     uint32_t tx_desc_addr[MAX_PRIORITY_QUEUES];
+-- 
+2.45.2
+
 
