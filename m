@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A641CAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Sat,  4 Oct 2025 06:56:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BD41CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Sat,  4 Oct 2025 07:11:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v4wBq-0007wW-6I; Sat, 04 Oct 2025 02:56:22 -0400
+	id 1v4wPi-0002gh-V0; Sat, 04 Oct 2025 03:10:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v4wBc-0007pA-0e; Sat, 04 Oct 2025 02:56:09 -0400
+ id 1v4wPd-0002fI-DO; Sat, 04 Oct 2025 03:10:38 -0400
 Received: from isrv.corpit.ru ([212.248.84.144])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v4wBZ-0001eV-HI; Sat, 04 Oct 2025 02:56:07 -0400
+ id 1v4wPb-0004RG-BJ; Sat, 04 Oct 2025 03:10:37 -0400
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 2042315A5B2;
- Sat, 04 Oct 2025 09:55:59 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id C6E7015A5BF;
+ Sat, 04 Oct 2025 10:10:28 +0300 (MSK)
 Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
- by tsrv.corpit.ru (Postfix) with ESMTP id AB80529864E;
- Sat,  4 Oct 2025 09:55:59 +0300 (MSK)
-Message-ID: <98aa6625-90f3-4dab-ba55-3bf8978ad14d@tls.msk.ru>
-Date: Sat, 4 Oct 2025 09:55:58 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id AFC98298662;
+ Sat,  4 Oct 2025 10:10:29 +0300 (MSK)
+Message-ID: <37b2a118-823b-43b7-aaf4-0c855400aee4@tls.msk.ru>
+Date: Sat, 4 Oct 2025 10:10:28 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/riscv-iommu: Fix MSI table size limit
-To: Andrew Jones <ajones@ventanamicro.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, tjeznach@rivosinc.com,
+Subject: Re: [PATCH 0/4] Fix SiFive UART character drop issue and minor
+ refactors
+To: frank.chang@sifive.com, qemu-devel@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ "open list:SiFive Machines" <qemu-riscv@nongnu.org>,
  qemu-stable <qemu-stable@nongnu.org>
-References: <20250904132723.614507-2-ajones@ventanamicro.com>
+References: <20250911160647.5710-1-frank.chang@sifive.com>
 Content-Language: en-US, ru-RU
 From: Michael Tokarev <mjt@tls.msk.ru>
 Autocrypt: addr=mjt@tls.msk.ru; keydata=
@@ -80,7 +83,7 @@ Autocrypt: addr=mjt@tls.msk.ru; keydata=
  YPkzzso6HT7rlapB5nulYmplJZSZ4RmE1ATZKf+wUPocDu6N10LtBNbwHWTT5NLtxNJAJAvl
  ojis6H1kRWZE/n5buyPY2NYeyWfjjrerOYt3er55n4C1I88RSCTGeejVmXWuo65QD2epvzE6
  3GgKngeVm7shlp7+d3D3+fAAHTvulQQqV3jOodz+B4yzuZ7WljkNrmrWrH8aI4uA98c=
-In-Reply-To: <20250904132723.614507-2-ajones@ventanamicro.com>
+In-Reply-To: <20250911160647.5710-1-frank.chang@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
@@ -106,19 +109,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/4/25 16:27, Andrew Jones wrote:
-> The MSI table is not limited to 4k. The only constraint the table has
-> is that its base address must be aligned to its size, ensuring no
-> offsets of the table size will overrun when added to the base address
-> (see "8.5. MSI page tables" of the AIA spec).
+On 9/11/25 19:06, frank.chang@sifive.com wrote:
+> From: Frank Chang <frank.chang@sifive.com>
 > 
-> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
+> This patch set fixes the SiFive UART character drop issue introduced
+> after commit [1], which changed character printing from synchronous to
+> asynchronous.
+> 
+> Since UART now transmits characters asynchronously, it is possible for
+> the Tx FIFO to become full, causing new characters to be ignored and
+> dropped when running Linux. This happens because:
+> 
+>    1. The Linux SiFive UART driver sets the transmit watermark level to 1
+>       [2], meaning a transmit watermark interrupt is raised whenever a
+>       character is enqueued into the Tx FIFO.
+>    2. Upon receiving a transmit watermark interrupt, the Linux driver
+>       transfers up to a full Tx FIFO's worth of characters from the Linux
+>       serial transmit buffer [3], without checking the txdata.full flag
+>       before transferring multiple characters [4].
+> 
+> This patch set updates QEMU to honor the Tx/Rx watermark thresholds and
+> raise interrupts only when the Tx threshold is exceeded or the Rx
+> threshold is undercut.
 
-This one looks like a qemu-stable material.
-Please let me know if it is not.
+This change seems to be worth picking up for qemu-stable series
+(10.0 & 10.1).  Please let me know if it is not.
+
+> The remaining patches contain minor refactors, including removing an
+> outdated comment about the Tx FIFO.
+
+> [1] 53c1557b230986ab6320a58e1b2c26216ecd86d5
+> [2] https://github.com/torvalds/linux/blob/master/drivers/tty/serial/sifive.c#L1039
+> [3] https://github.com/torvalds/linux/blob/master/drivers/tty/serial/sifive.c#L538
+> [4] https://github.com/torvalds/linux/blob/master/drivers/tty/serial/sifive.c#L291
+> 
+> Frank Chang (4):
+>    hw/char: sifive_uart: Raise IRQ according to the Tx/Rx watermark
+>      thresholds
+>    hw/char: sifive_uart: Avoid pushing Tx FIFO when size is zero
+>    hw/char: sifive_uart: Remove outdated comment about Tx FIFO
+>    hw/char: sifive_uart: Add newline to error message
+> 
+>   hw/char/sifive_uart.c | 36 ++++++++++++++++--------------------
+>   1 file changed, 16 insertions(+), 20 deletions(-)
 
 Thanks,
 
 /mjt
+
+
 
