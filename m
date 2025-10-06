@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23555CAC5B0
-	for <qemu-riscv@archiver.kernel.org>; Sat,  4 Oct 2025 21:17:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E41ECCA471
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Oct 2025 05:14:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v59d6-0007Ei-T9; Sat, 04 Oct 2025 17:17:24 -0400
+	id 1v5dYW-00030f-B5; Mon, 06 Oct 2025 01:14:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <groeck7@gmail.com>) id 1v59d4-0007DM-IG
- for qemu-riscv@nongnu.org; Sat, 04 Oct 2025 17:17:22 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <groeck7@gmail.com>) id 1v59d2-0005hk-5D
- for qemu-riscv@nongnu.org; Sat, 04 Oct 2025 17:17:22 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-32e715cbad3so3692308a91.3
- for <qemu-riscv@nongnu.org>; Sat, 04 Oct 2025 14:17:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759612638; x=1760217438; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
- :reply-to; bh=VVc1jePNohYy0guFrZmYjVLuHzGyBrzbcZBMpLGimTk=;
- b=IuvLiT9T8MK4FuPrxYsvxIq5/STE0j1qg3APiUysouyjDoG72s3KsKWu84NlSVotHX
- YtFWgTlg6/gXCxj3IeriIsdhUjN+KAOozWVWlkU3fV8AtcDV+W6OFS9K9EfQPLQQFqnc
- aJVPRifDI97f16TAe7RIfS/vouGn3YN4Z42p7evQ3rAN9zqSWkCQN6xx1y0b3xB5sDcY
- PdP81UI+Y1NXNoXed18QktPhzMyvIEhV2BGYdaGOdeUuxJIbwD1IeT6Sdkd2AdGEZ1Hl
- I9M0Tvf7jpuarbF57hOzLVHPP8yR3gQvprL/pOzEahwheyIchxvVoPcTG8/xb0kcQDRQ
- 5SBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759612638; x=1760217438;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VVc1jePNohYy0guFrZmYjVLuHzGyBrzbcZBMpLGimTk=;
- b=jLF55QeN1QG7el/eD5nht3IerbemOlzFatbIKC4+CtAM0NNxLN9b91lBR+xiVVAdC2
- vnCtNBGLukourTgHof5WzVp7g/IQp+0hNYDSzsGhFhG+uw51DV4BpWaA7XP9cS5NKSJX
- QHwvfKdJniPepwFiY2KElAS8cnwE6DvflFKyZoglR8EkGHOeaFMJ+P4rKlZDDKDvNELu
- a4EOz0AVbVh8pgbcfvf4q03nXt9DlLQW7FaDGkZPyTEUa4h4KZXbvYFeIKcYO1RT7+4o
- WQS16gn5Zo7F/ceIQ0FxspNhfxNjl0sSPHNUfTSKSTXl3HCivWN2rTDEaHKomUtWPfM7
- VFqg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVN9y5pzNDIRADqU7tYEcgGo/muq4rOA7qsIjjMjqz7/uluuqbHqjnnvbciwdajMlPj2CnP4v4WOO//@nongnu.org
-X-Gm-Message-State: AOJu0YwWMIku7ZfjdiA7K9ZOlXUvezCfLIeQI8mYC5ycRHVunG/Md530
- SZg5rsAmkTibTsVtSQj7o7w8O6muSW8KoTg/24oEbAG6ki8RJDUqwhvdMZ2GvmpP
-X-Gm-Gg: ASbGncupbJTLbVEEEnYWzPjbyyR30yLwXn+xFKwQSVdtNlNhbEc1M/Da1lK4f7F/GJT
- ThOexhv05GZSFYYJi1X2nscTGAl+sSEhmg6L4LDfXpFG5l84XS/G0rvaR3n8dKogICT9GTPtcD/
- SvMe9Nt/b9I+7GTqqlfVCre2+a+ubYJndRgbkPwpA8ziK+3rb6rgD+xk6YtTDqBlerI5vDIlPrR
- 5bYTj8SSjljBP9+5WmmbmHU+s3cClbGIdsEwVpd1GNBQAwK3lZch5E5FoC8I8K5q6uMDeTukoKg
- feeIfkoJH+ep351VweY4/PEOMoIYxzjon9yAMhB1zSB0fChDP7OAGDpfLlqw/xNL1tV9QgLw0U5
- 75C2mZQYkRjhMxkyUCSOWOcEc0LdXoj2O/xXEjWCnP5YrGpttyzbJ2ApKkdg6YqFJeLHFpw==
-X-Google-Smtp-Source: AGHT+IHVDPuCtm4Mxh1NxzWmyupi/gENm2Ni6iLiFjmBzGTzWlxpff3OsbK7Pw5f1oSjYIXULQF4cw==
-X-Received: by 2002:a17:90b:4f82:b0:330:6edd:9cf with SMTP id
- 98e67ed59e1d1-339c27a56c4mr8068917a91.22.1759612637940; 
- Sat, 04 Oct 2025 14:17:17 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b6099afa6a3sm7974252a12.14.2025.10.04.14.17.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Oct 2025 14:17:17 -0700 (PDT)
-Date: Sat, 4 Oct 2025 14:17:15 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Sebastian Huber <sebastian.huber@embedded-brains.de>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <alistair23@gmail.com>,
+ (Exim 4.90_1) (envelope-from <sebastian.huber@embedded-brains.de>)
+ id 1v5dYR-000307-9H; Mon, 06 Oct 2025 01:14:35 -0400
+Received: from dedi548.your-server.de ([85.10.215.148])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <sebastian.huber@embedded-brains.de>)
+ id 1v5dYP-00030f-7J; Mon, 06 Oct 2025 01:14:35 -0400
+Received: from sslproxy04.your-server.de ([78.46.152.42])
+ by dedi548.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <sebastian.huber@embedded-brains.de>)
+ id 1v5dYI-0004HK-08; Mon, 06 Oct 2025 07:14:26 +0200
+Received: from localhost ([127.0.0.1])
+ by sslproxy04.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <sebastian.huber@embedded-brains.de>)
+ id 1v5dYH-0003GN-0t; Mon, 06 Oct 2025 07:14:25 +0200
+Received: from localhost (localhost [127.0.0.1])
+ by mail.embedded-brains.de (Postfix) with ESMTP id 1B84B480070;
+ Mon,  6 Oct 2025 07:14:25 +0200 (CEST)
+Received: from mail.embedded-brains.de ([127.0.0.1])
+ by localhost (zimbra.eb.localhost [127.0.0.1]) (amavis, port 10032)
+ with ESMTP id 1Ze5Pb0sXXbc; Mon,  6 Oct 2025 07:14:24 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.embedded-brains.de (Postfix) with ESMTP id A57F248015B;
+ Mon,  6 Oct 2025 07:14:24 +0200 (CEST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.embedded-brains.de A57F248015B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=embedded-brains.de;
+ s=34EE5404-8E36-11F0-B577-2ECCAB4968F5; t=1759727664;
+ bh=oO3MxNzGpSD1jswt80AueKKgDMQYKm93FKjyAjP8wuA=;
+ h=Date:From:To:Message-ID:MIME-Version;
+ b=F0h1JuYXwmCymUHB7X6pnqHwQ1pbf789bKVv2kuOtSfBXgC8ue86A0llL/cv+huIj
+ Rppr0yX6iLCslaPjz8/fwWbyMcIdKd5uLC3l+q17IHfQDq5um6LV4BbzBiHKgMBwwQ
+ 9NGTeUw3EAXGyySFRAZQwd03b1jE11iQTLNAavTn2EqAWl42Rohc+EPQAJGxUQcBKD
+ Kn3R4rSeJGyNPFAki4E/bU2HtBYmMEWwE492Z1wamHs+7iVpbyvC1AsoG4sqe7Dgk0
+ tZ/+c6io6LsaCWrbuDH8Tag+l2OBV7gdIMSbR7DVgvgASfKM/RBO9vA2JqGePGjgKT
+ n2/drqjIuAopw==
+X-Virus-Scanned: amavis at zimbra.eb.localhost
+Received: from mail.embedded-brains.de ([127.0.0.1])
+ by localhost (zimbra.eb.localhost [127.0.0.1]) (amavis, port 10026)
+ with ESMTP id 1OSCSeALYXlf; Mon,  6 Oct 2025 07:14:24 +0200 (CEST)
+Received: from zimbra.eb.localhost (zimbra.eb.localhost [192.168.96.204])
+ by mail.embedded-brains.de (Postfix) with ESMTP id 70530480070;
+ Mon,  6 Oct 2025 07:14:24 +0200 (CEST)
+Date: Mon, 6 Oct 2025 07:14:23 +0200 (CEST)
+From: Sebastian Huber <sebastian.huber@embedded-brains.de>
+To: Guenter Roeck <linux@roeck-us.net>
+Cc: qemu-devel <qemu-devel@nongnu.org>, qemu-riscv <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair23@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: Re: [PATCH v3 3/6] hw/riscv: Make FDT optional for MPFS
-Message-ID: <38528707-3d28-4be8-8b58-60269cb1db1b@roeck-us.net>
+Message-ID: <788527663.312.1759727663914.JavaMail.zimbra@embedded-brains.de>
+In-Reply-To: <38528707-3d28-4be8-8b58-60269cb1db1b@roeck-us.net>
 References: <20250319061342.26435-1-sebastian.huber@embedded-brains.de>
  <20250319061342.26435-4-sebastian.huber@embedded-brains.de>
+ <38528707-3d28-4be8-8b58-60269cb1db1b@roeck-us.net>
+Subject: Re: [PATCH v3 3/6] hw/riscv: Make FDT optional for MPFS
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250319061342.26435-4-sebastian.huber@embedded-brains.de>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=groeck7@gmail.com; helo=mail-pj1-x1031.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [192.168.96.204]
+X-Mailer: Zimbra 10.1.10_GA_4785 (ZimbraWebClient - FF140
+ (Linux)/10.1.10_GA_4785)
+Thread-Topic: hw/riscv: Make FDT optional for MPFS
+Thread-Index: 2YHcR+4M4s5iHHMa1HiiT5HMtKsMIw==
+X-DKIM-Status: pass [(embedded-brains.de) - 78.46.152.42]
+X-Virus-Scanned: Clear (ClamAV 1.0.9/27780/Thu Oct  2 04:58:32 2025)
+Received-SPF: pass client-ip=85.10.215.148;
+ envelope-from=sebastian.huber@embedded-brains.de; helo=dedi548.your-server.de
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,27 +99,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+Hello Guenter,
 
-On Wed, Mar 19, 2025 at 07:13:35AM +0100, Sebastian Huber wrote:
-> Real-time kernels such as RTEMS or Zephyr may use a static device tree
-> built into the kernel image.  Do not require to use the -dtb option if
-> -kernel is used for the microchip-icicle-kit machine.  Issue a warning
-> if no device tree is provided by the user since the machine does not
-> generate one.
-> 
-> Signed-off-by: Sebastian Huber <sebastian.huber@embedded-brains.de>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+thanks for the report. Do you have a Linux image and a Qemu command line so=
+ that I can test this?
 
-Starting with qemu v10.1.0, the command line is no longer passed to
-the kernel when booting Linux on the Icicle machine. Looking into the
-patch, the reason is quite obvious: The /chosen property is set in
-riscv_load_kernel(), which is now called before the devicetree is
-loaded.
+--=20
+embedded brains GmbH & Co. KG
+Herr Sebastian HUBER
+Dornierstr. 4
+82178 Puchheim
+Germany
+email: sebastian.huber@embedded-brains.de
+phone: +49-89-18 94 741 - 16
+fax:   +49-89-18 94 741 - 08
 
-I was unable to find a clean solution other than reverting this and the
-next patch of the series, so this is just to let people know about the
-problem.
-
-Guenter
+Registergericht: Amtsgericht M=C3=BCnchen
+Registernummer: HRB 157899
+Vertretungsberechtigte Gesch=C3=A4ftsf=C3=BChrer: Peter Rasmussen, Thomas D=
+=C3=B6rfler
+Unsere Datenschutzerkl=C3=A4rung finden Sie hier:
+https://embedded-brains.de/datenschutzerklaerung/
 
