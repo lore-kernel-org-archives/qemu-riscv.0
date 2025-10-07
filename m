@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D62CCA476
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Oct 2025 08:17:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4429BCCD184
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Oct 2025 08:17:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v62s7-0006sQ-Gf; Tue, 07 Oct 2025 04:16:35 -0400
+	id 1v62rv-0006mc-Mg; Tue, 07 Oct 2025 04:16:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v62s5-0006qp-DA
- for qemu-riscv@nongnu.org; Tue, 07 Oct 2025 04:16:33 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v62ru-0006kt-8U
+ for qemu-riscv@nongnu.org; Tue, 07 Oct 2025 04:16:22 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v62s3-00021a-EV
- for qemu-riscv@nongnu.org; Tue, 07 Oct 2025 04:16:33 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-46e33b260b9so56347375e9.2
- for <qemu-riscv@nongnu.org>; Tue, 07 Oct 2025 01:16:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v62rs-0001zf-Hq
+ for qemu-riscv@nongnu.org; Tue, 07 Oct 2025 04:16:22 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-46e2e6a708fso38701685e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 07 Oct 2025 01:16:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759824990; x=1760429790; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PSS/vO/urkPdDooJB2oeDa3yztjhJ4DM7WnJ6N8yGds=;
- b=PkHl96/USvcanLX7i2Kb6SS6JbhoMEv8OyIvET8IDMDpF+4mRmlgIdHaEv+X+onmPM
- MKmqHM2yvUPVEUKFpwOZX/J1i5QbU7PxMdMVaP49qIIQO5kl83jR8+by2du6zbmqYlvm
- /qbzhu3/tMXY8zonMsJ/b55F0QFtNV5N8j5gkylE50qGS55jdfEQ5pC0N+od4cqTI+cS
- I82nACRkZnRrN/DTKC7AQoJ/1B2OHeh4A4LqFgflN0Aw0hM/NX+FXK1IiaPPk0qFS5uA
- EAibNnCjwUXkcDhgljNLCd+ZXCklZQjpgIawZ3BpdOlsJFvApqpseEP1f/Z35MQ6mhIq
- CedQ==
+ d=linaro.org; s=google; t=1759824979; x=1760429779; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XK3NTl2B3zTpPA8Q4QoS/MR0UKSoTctc+BHX4wlh/xE=;
+ b=tVaoyCKAXb64eVCX7LeB/iADcnj7ohXbqEdPWo6sRaN35LIQjsXdVqojP8CHd8inDH
+ v6dEJYPcb8zdxRJxEbVXoOszbLxCDkrLRhQVu27ckSSuyOpmR3/9isjEnJzzJ3w9KT34
+ EUFMyJceW/11V8Zgj6KowB3CK2kp/VYndoiPikz3zf31bZXseL4ldrXBqRKiYa5c+Omb
+ HmcmgPNLlD42Upx+sw391QXqzjEplmdAHSkxBt0kH39UrIsoA1xM44/dYbyTdoh/knJe
+ fpVLvo0txUN0nIKDdXCVbVyHge0cvQkZFyaqvRqDvhMf1GadV2s9czefaBZ+ar6+cr+b
+ LxPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759824990; x=1760429790;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PSS/vO/urkPdDooJB2oeDa3yztjhJ4DM7WnJ6N8yGds=;
- b=eyDQOBsfWofW/g17L2+hTRCwSd6bQMHQCrzGMle2kDVa/6x5IBBknXlBKk5ycrFXHi
- 4Gm+kRl+5Rzs0LmJIAp7w7iZEqlh737zToADZWQtaaO5O/CflCKXDWYS+OQ5oO4VBf02
- lENUmQb+cgQvSEdWoQU40zyDuhamVS6E4kBnKujT3GDKgjrQdQJ+rjT476oULq/4FwZ/
- TNWE23S4QSA0CnZ+zTZnYZF+Y/ZrsVPbM0phslVPnLpc19NzErOzgfRxAdc0vj999xPP
- NsWJ5NA+GEVtt+/wnnw8AUVcV3HftJslZ/m66E90Hxun28orUQ4yu1YER1jd01fLYSxF
- ZGfQ==
+ d=1e100.net; s=20230601; t=1759824979; x=1760429779;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XK3NTl2B3zTpPA8Q4QoS/MR0UKSoTctc+BHX4wlh/xE=;
+ b=daY8OtpSD3K82qygUxFkUWBdmWVdL4+1fOhsg1abup0Y/twmqNf6h9r8t7h7s7uEHs
+ JW5smiNjoSx5bVDO753hLrKwcnBS9ry/oIixlvPqf+mGc3cDqjYIGC052iUPX7YvrtQN
+ w5D02mjP3AlvoVGsy0pGxNG1yfOKYGkzJFHcxKu/+xCyvELv9VWEnjdykcN02wT3+xHj
+ 1mj42EF+aSDtjbPTu6AcmRDynzAGQwpReTSDUw0XWJjj3VEjhFoGFAgFPECWGXBAo2zW
+ vp3Yst01JV96l8pWw+ov97zcmeVxbeu1rs+iizntPYrLVjKdNj0/q5l1M7m6ABak8qAk
+ hQUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWuj0MDhLAgRqBerjOnWKLaBs6UuRg6ahhHnnCiM3bu0c0koOAiYbfGqB6O6FXaoKgoaVb0YxUMtf3G@nongnu.org
-X-Gm-Message-State: AOJu0YztOz6ffdM5z3d8hbhTiHmkNPetlhMRZJwP2TAzIMsS4ZX1DfcX
- 5Ex2OumKU3efqVplmqMFcwB+D0hvaRSPbYIWyuIKk6v7vIpj6c+vV67WfyGjafpMAHc=
-X-Gm-Gg: ASbGncsV4oov6cEN+u0Oa88p6m6M9AE6afwaiTiSrja4qDiVaEBANVNwO8XanPLkCjV
- AP7zDHy4CrHwyEFjFb195AlLZ42eTurRDkRxZGaf4FTPNTvQYEgZr/X/PkvzBU5fdfPlpCSeEsy
- uuB/UK2vZz77GvQ3+BLNzY5/1I+mIekQCRgawBByYv4io3ZcngYILg4lrojs+YZcSvTZC6K5P/g
- MbGsR2FukgK73LWr9zEDLg6kqGcOyDHaBo1Xw/oTQJFG74hitrg1FNcrS9yRqURSdFcRtkp5Z4D
- iuSfIP5EXBGog6XPud666GNHNzDa601Ve4bja63tVZvLalxm1VLvsRnsvs9+7xYU1VtYybIfIN6
- pMJwYspkeccf6iz6VpJ/bCHnmioF+DzFQ7dFtTdcEAfiF0K39pU1FtBG4WP3mepGYPkHyRK5yn7
- dBJdk7icF0voq+EZK9v9NLpBlN
-X-Google-Smtp-Source: AGHT+IGRA6KPyvhxXtzYnOvTFtl5YLGs1n5NMaDQ4KBPLj2KKkceTTHa9sfY0JuyGZTIHGBzptzjJA==
-X-Received: by 2002:a05:6000:609:b0:401:70eb:eec7 with SMTP id
- ffacd0b85a97d-425671bc76amr9419782f8f.43.1759824989839; 
- Tue, 07 Oct 2025 01:16:29 -0700 (PDT)
+ AJvYcCV0E+Br07yKwzKKxne8W7eFk6/exnqINzGUhTikRzCgP9vkyGX+6oFiU0fQ9ZkNK4HQK1CKQyTW/URs@nongnu.org
+X-Gm-Message-State: AOJu0YyHOcdwCnVS1FaLb5YEjDgUdANnqxgK+ccLxFCZw/QTypGGqfYs
+ n9lIxAA+LlUFd/eXzM37oeJZ0fas4CI4qys8bSJr8c51ci5ivUlGn+UeP2Uxcmb99oY=
+X-Gm-Gg: ASbGnctEyWYz8uVr7u9hSBvYGnLTPKC4Z9+0SLjFNFKW+2RUO0Zg0rhVwbB1sBr6LBY
+ 9TYr6GgqQwLuM2IaQruve1u0PWKvDiPvUFAE/0/ijDr9jy95hPq42yQhAN5X5fQ8VJDxjxxEKNQ
+ gtIP1B7D8iBPuE4Esh9+sjrqOsQomjmgnFgkVFXhZQ88fjSCPF6lwck7UgQNJnGJrKuJY0QUK7p
+ Y9snpb7P6matCaKMPwQlIN8ZwoiEcKNd+ul/6ToLWpWVPTW4Ksdcek/FDHAG5UGZo1N29moCz7m
+ G+1nADlcclTLZHAyUCxtIOaOTwJ9TxFAW4W8lvGzE0dZZKk9dFsgzsbIxT8d45+1rnEVgGe6Pmw
+ NQLnRqJDSRAcUa+7P9hE8O1TXOVvS6xYCSQeJA+OCqPXmW6g8DwRNJpKgjJL+za4vURULdBUQat
+ B0xE/X9kzsAcWPhI/Xb95tIf7F
+X-Google-Smtp-Source: AGHT+IERVc3C2yNd3DcAeDNZ7zbSciuCigfwYIc8ze9WnpdAZv9l9FsjkHi9L+VcMIyxbope5cQePA==
+X-Received: by 2002:a05:600c:34ce:b0:45c:4470:271c with SMTP id
+ 5b1f17b1804b1-46e711408b5mr109040775e9.18.1759824978832; 
+ Tue, 07 Oct 2025 01:16:18 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8e97f0sm24090022f8f.27.2025.10.07.01.16.28
+ 5b1f17b1804b1-46e61a029a0sm289392805e9.13.2025.10.07.01.16.17
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 07 Oct 2025 01:16:29 -0700 (PDT)
+ Tue, 07 Oct 2025 01:16:18 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Weiwei Li <liwei1518@gmail.com>, David Hildenbrand <david@redhat.com>,
@@ -86,17 +85,15 @@ Cc: Weiwei Li <liwei1518@gmail.com>, David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: [PATCH 2/3] accel/kvm: Introduce KvmPutState enum
-Date: Tue,  7 Oct 2025 10:16:15 +0200
-Message-ID: <20251007081616.68442-3-philmd@linaro.org>
+Subject: [PATCH 0/3] accel/kvm: Cleanups around kvm_arch_put_registers()
+Date: Tue,  7 Oct 2025 10:16:13 +0200
+Message-ID: <20251007081616.68442-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251007081616.68442-1-philmd@linaro.org>
-References: <20251007081616.68442-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -119,170 +116,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Join the 3 KVM_PUT_*_STATE definitions in a single enum.
+Extracted from a bigger series aiming to make accelerator
+synchronization of vcpu state slightly clearer. Here KVM
+patches around kvm_arch_put_registers():
+- Move KVM_PUT_[RESET|RUNTIME|FULL]_STATE to an enum
+- Factor common code out of kvm_cpu_synchronize_post_*()
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- include/system/kvm.h       | 16 +++++++++-------
- target/i386/kvm/kvm.c      |  6 +++---
- target/loongarch/kvm/kvm.c |  4 ++--
- target/mips/kvm.c          |  6 +++---
+Philippe Mathieu-Daudé (3):
+  accel/kvm: Do not expect more then KVM_PUT_FULL_STATE
+  accel/kvm: Introduce KvmPutState enum
+  accel/kvm: Factor kvm_cpu_synchronize_put() out
+
+ include/system/kvm.h       | 16 +++++++------
+ accel/kvm/kvm-all.c        | 47 +++++++++++++++-----------------------
+ target/i386/kvm/kvm.c      |  6 ++---
+ target/loongarch/kvm/kvm.c |  8 +++----
+ target/mips/kvm.c          |  6 ++---
  target/ppc/kvm.c           |  2 +-
  target/riscv/kvm/kvm-cpu.c |  2 +-
  target/s390x/kvm/kvm.c     |  2 +-
- 7 files changed, 20 insertions(+), 18 deletions(-)
+ 8 files changed, 41 insertions(+), 48 deletions(-)
 
-diff --git a/include/system/kvm.h b/include/system/kvm.h
-index 4fc09e38910..8f9eecf044c 100644
---- a/include/system/kvm.h
-+++ b/include/system/kvm.h
-@@ -340,14 +340,16 @@ int kvm_arch_process_async_events(CPUState *cpu);
- 
- int kvm_arch_get_registers(CPUState *cpu, Error **errp);
- 
--/* state subset only touched by the VCPU itself during runtime */
--#define KVM_PUT_RUNTIME_STATE   1
--/* state subset modified during VCPU reset */
--#define KVM_PUT_RESET_STATE     2
--/* full state set, modified during initialization or on vmload */
--#define KVM_PUT_FULL_STATE      3
-+typedef enum kvm_put_state {
-+    /* state subset only touched by the VCPU itself during runtime */
-+    KVM_PUT_RUNTIME_STATE = 1,
-+    /* state subset modified during VCPU reset */
-+    KVM_PUT_RESET_STATE = 2,
-+    /* full state set, modified during initialization or on vmload */
-+    KVM_PUT_FULL_STATE = 3,
-+} KvmPutState;
- 
--int kvm_arch_put_registers(CPUState *cpu, int level, Error **errp);
-+int kvm_arch_put_registers(CPUState *cpu, KvmPutState level, Error **errp);
- 
- int kvm_arch_get_default_type(MachineState *ms);
- 
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 6a3a1c1ed8e..d06f55938cd 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -3911,7 +3911,7 @@ static void kvm_init_msrs(X86CPU *cpu)
-     assert(kvm_buf_set_msrs(cpu) == 0);
- }
- 
--static int kvm_put_msrs(X86CPU *cpu, int level)
-+static int kvm_put_msrs(X86CPU *cpu, KvmPutState level)
- {
-     CPUX86State *env = &cpu->env;
-     int i;
-@@ -5031,7 +5031,7 @@ static int kvm_get_apic(X86CPU *cpu)
-     return 0;
- }
- 
--static int kvm_put_vcpu_events(X86CPU *cpu, int level)
-+static int kvm_put_vcpu_events(X86CPU *cpu, KvmPutState level)
- {
-     CPUState *cs = CPU(cpu);
-     CPUX86State *env = &cpu->env;
-@@ -5274,7 +5274,7 @@ static int kvm_get_nested_state(X86CPU *cpu)
-     return ret;
- }
- 
--int kvm_arch_put_registers(CPUState *cpu, int level, Error **errp)
-+int kvm_arch_put_registers(CPUState *cpu, KvmPutState level, Error **errp)
- {
-     X86CPU *x86_cpu = X86_CPU(cpu);
-     int ret;
-diff --git a/target/loongarch/kvm/kvm.c b/target/loongarch/kvm/kvm.c
-index 45292edcb1c..32cd7c5d003 100644
---- a/target/loongarch/kvm/kvm.c
-+++ b/target/loongarch/kvm/kvm.c
-@@ -325,7 +325,7 @@ static int kvm_loongarch_get_csr(CPUState *cs)
-     return ret;
- }
- 
--static int kvm_loongarch_put_csr(CPUState *cs, int level)
-+static int kvm_loongarch_put_csr(CPUState *cs, KvmPutState level)
- {
-     int ret = 0;
-     CPULoongArchState *env = cpu_env(cs);
-@@ -763,7 +763,7 @@ int kvm_arch_get_registers(CPUState *cs, Error **errp)
-     return ret;
- }
- 
--int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
-+int kvm_arch_put_registers(CPUState *cs, KvmPutState level, Error **errp)
- {
-     int ret;
-     static int once;
-diff --git a/target/mips/kvm.c b/target/mips/kvm.c
-index 450947c3fa5..912cd5dfa0e 100644
---- a/target/mips/kvm.c
-+++ b/target/mips/kvm.c
-@@ -590,7 +590,7 @@ static void kvm_mips_update_state(void *opaque, bool running, RunState state)
-     }
- }
- 
--static int kvm_mips_put_fpu_registers(CPUState *cs, int level)
-+static int kvm_mips_put_fpu_registers(CPUState *cs, KvmPutState level)
- {
-     CPUMIPSState *env = cpu_env(cs);
-     int err, ret = 0;
-@@ -749,7 +749,7 @@ static int kvm_mips_get_fpu_registers(CPUState *cs)
- }
- 
- 
--static int kvm_mips_put_cp0_registers(CPUState *cs, int level)
-+static int kvm_mips_put_cp0_registers(CPUState *cs, KvmPutState level)
- {
-     CPUMIPSState *env = cpu_env(cs);
-     int err, ret = 0;
-@@ -1177,7 +1177,7 @@ static int kvm_mips_get_cp0_registers(CPUState *cs)
-     return ret;
- }
- 
--int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
-+int kvm_arch_put_registers(CPUState *cs, KvmPutState level, Error **errp)
- {
-     CPUMIPSState *env = cpu_env(cs);
-     struct kvm_regs regs;
-diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
-index 2521ff65c6c..cd60893a17d 100644
---- a/target/ppc/kvm.c
-+++ b/target/ppc/kvm.c
-@@ -907,7 +907,7 @@ int kvmppc_put_books_sregs(PowerPCCPU *cpu)
-     return kvm_vcpu_ioctl(CPU(cpu), KVM_SET_SREGS, &sregs);
- }
- 
--int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
-+int kvm_arch_put_registers(CPUState *cs, KvmPutState level, Error **errp)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 187c2c9501e..75ca3fb9fd9 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1369,7 +1369,7 @@ int kvm_riscv_sync_mpstate_to_kvm(RISCVCPU *cpu, int state)
-     return 0;
- }
- 
--int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
-+int kvm_arch_put_registers(CPUState *cs, KvmPutState level, Error **errp)
- {
-     int ret = 0;
- 
-diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
-index 491cc5f9756..916dac1f14e 100644
---- a/target/s390x/kvm/kvm.c
-+++ b/target/s390x/kvm/kvm.c
-@@ -468,7 +468,7 @@ static int can_sync_regs(CPUState *cs, int regs)
- #define KVM_SYNC_REQUIRED_REGS (KVM_SYNC_GPRS | KVM_SYNC_ACRS | \
-                                 KVM_SYNC_CRS | KVM_SYNC_PREFIX)
- 
--int kvm_arch_put_registers(CPUState *cs, int level, Error **errp)
-+int kvm_arch_put_registers(CPUState *cs, KvmPutState level, Error **errp)
- {
-     CPUS390XState *env = cpu_env(cs);
-     struct kvm_fpu fpu = {};
 -- 
 2.51.0
 
