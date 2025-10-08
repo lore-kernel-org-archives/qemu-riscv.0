@@ -4,96 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7832BCAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 07:13:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 979FCCAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 07:23:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v6OMu-0000wf-0d; Wed, 08 Oct 2025 03:13:48 -0400
+	id 1v6OVr-0003KI-RG; Wed, 08 Oct 2025 03:23:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v6OMp-0000vZ-65; Wed, 08 Oct 2025 03:13:43 -0400
-Received: from isrv.corpit.ru ([212.248.84.144])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1v6OMk-0008O1-BC; Wed, 08 Oct 2025 03:13:40 -0400
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 4B7BA15B794;
- Wed, 08 Oct 2025 10:13:16 +0300 (MSK)
-Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
- by tsrv.corpit.ru (Postfix) with ESMTP id 2921729B67E;
- Wed,  8 Oct 2025 10:13:24 +0300 (MSK)
-Message-ID: <98cc2ae8-0354-42d1-ac52-a26d09d89544@tls.msk.ru>
-Date: Wed, 8 Oct 2025 10:13:23 +0300
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1v6OVo-0003J8-Lt
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 03:23:01 -0400
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1v6OVl-0001EG-9u
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 03:23:00 -0400
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b456d2dc440so1127093766b.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 00:22:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1759908176; x=1760512976; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Qaa6i5k4E4jxW/Wwh36m97rJej5/fVxaqCUCYObJfSI=;
+ b=lh2XA5Hd33q20JkpjyvYFsKw8LCaRX2DZTFclXgLpMxRoP09CBvAasYA3rsnfAgz03
+ TTMUl1pBYAjNX8xJisFxjH+ASrMKOqcMWcR2nQZ4xel0GWLIoLuYJLJCZuHsdV++Sfe7
+ TcDcwAiIfVzOGHpxGFYFxng6OUq4f/SPZpySWAg8f159Iy/spys2rkwF8Gmcrc3hTh+b
+ Z0YKu2/l9UbzvP9UjgogAQtkvTIB4JUGh56IlWQ3h3jo9KBaRzfd4RDaepvODEVBnn+z
+ XIBdp0xS3WKDb5e42QdXx29G1fOA8ahpXuL8zZRO91D1tkG3HS3srSeMBuHZVJ2luW92
+ yzdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759908176; x=1760512976;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Qaa6i5k4E4jxW/Wwh36m97rJej5/fVxaqCUCYObJfSI=;
+ b=PjqN8Hr36KHt1toyP8/qVO8zvmGlXPfPEu6ez3YMQkIQHd5E3QblmeBbybzVdzOlQB
+ y5lu+7WC3vCkI3I1lMfb3aXddv3QuQ/jIJZsau9O5FFPopHjOK8L9aPJLSLDp3V2X81d
+ pUr3C48O5d1PWjyPZhe5+hnps4p3WRvPn39MEli4LqYRXioYDDcGTPxZsfVi7eZ58OQ5
+ /KGtf2uEJBsVf4ey5JKqrkVtSnUl2Va580ZLD08p9jkI9w1PnoA66TgeltVGI7f7caFF
+ C6vbhaD6UnDw6iioyJ9WTSLKbIUnvRSmu+6+kGvcmhNhQ+oBzXuFtNuDUiu31oPvs8bu
+ stEA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZBGWhlIbyYnCCiOHebZxNWbnA7mZ5lI9mxHg0GrL99/dR8YGBucpfEa8F5prLVKIiKHm2sFcLNv12@nongnu.org
+X-Gm-Message-State: AOJu0YwREYM92JAX7Uc6qSATTP8QXv8DuTme0XvKifS8u8W3c8fU4Yah
+ 0lKdqKEM2UKSyUMA5LToKQCRqfquSSsHXQnbRDKKINFkuuBqojFbzmle69T8670uezPScD+cGsb
+ 5mpHCGaqDieJVNaeIS06/hTEXmyBV5IIcr4yjoYuoKKEVgW518a60
+X-Gm-Gg: ASbGncthA2zm3uRxuR6zXMrSVsuhkvY1LMM5gWJnWiPRUPnLmeY7+QiMY2IMynMh4ik
+ mhX7Jq+gbPWy7W98h8Oew1CguA63yNfkHrLAVhkMhYeqR55GzyZ5mcDT44IHDw2HM9REescnAjG
+ y5Dh9MXH1eynE3bR8X6CjqKnxS9RNPfl5DnHN92on4aCygQANwaFSE0L3FIl0yrv7rK46DFS9kL
+ aIKm7NeanPBAvI6Ax2/9hgqv7515clSJg==
+X-Google-Smtp-Source: AGHT+IH2WUtQOem3n6q5hDDMUzU/Y6QRFggOiI5888IqTL0BXe2Sg1XknNcs6Ub0avFdUNmjvQuFlPzFWcGhiip/VU0=
+X-Received: by 2002:a17:907:5c8:b0:b04:1249:2b24 with SMTP id
+ a640c23a62f3a-b50abaaf824mr245217266b.37.1759908175547; Wed, 08 Oct 2025
+ 00:22:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/2] riscv: Modify minimum VLEN rule
-From: Michael Tokarev <mjt@tls.msk.ru>
-To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-stable <qemu-stable@nongnu.org>
-References: <20250923090729.1887406-1-max.chou@sifive.com>
- <19b1f55b-810c-46b8-a934-45ae2205f351@tls.msk.ru>
-Content-Language: en-US, ru-RU
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- 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
-In-Reply-To: <19b1f55b-810c-46b8-a934-45ae2205f351@tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20250417105249.18232-1-jim.shu@sifive.com>
+ <20250417105249.18232-7-jim.shu@sifive.com>
+ <a28a8a53-013f-4b47-86ac-4053aab1cdde@ventanamicro.com>
+In-Reply-To: <a28a8a53-013f-4b47-86ac-4053aab1cdde@ventanamicro.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Wed, 8 Oct 2025 15:22:43 +0800
+X-Gm-Features: AS18NWDm08PiktLFPteB32RibijesDpGh4rLMxAPjTjA0T5r22KeLnQqxJjndKc
+Message-ID: <CALw707qo8pjoVBaBYEQe7rfyGOh_mL7gdO+8228DMAuAKv=s7A@mail.gmail.com>
+Subject: Re: [PATCH v2 06/18] target/riscv: Add CPU options of WorldGuard CPU
+ extension
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>, 
+ Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Michael Rolnik <mrolnik@gmail.com>, 
+ Helge Deller <deller@gmx.de>, Song Gao <gaosong@loongson.cn>,
+ Laurent Vivier <laurent@vivier.eu>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
+ Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, 
+ "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
+ "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=jim.shu@sifive.com; helo=mail-ej1-x635.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,43 +122,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/4/25 10:44, Michael Tokarev wrote:
-> On 9/23/25 12:07, Max Chou wrote:
->> According to the RISC-V unprivileged specification, the VLEN should be 
->> greater
->> or equal to the ELEN. This patchset provides following modifications:
->>
->> * Replace the checkings of standard V with the checkings of Zve32x
->> * Introduces a check rule for VLEN and ELEN
->> * Modifies the minimum VLEN based on the vector extensions
->>
->> Extension     Minimum VLEN
->> V                      128
->> Zve64[d|f|x]            64
->> Zve32[f|x]              32
->>
->> v1: 20250627132156.440214-1-max.chou@sifive.com
->> - Rebase to riscv-to-apply.next branch
->> - Add patch 1 to replace checking RVV by checking Zve32x
->>
->> Max Chou (2):
->>    target/riscv: rvv: Replace checking V by checking Zve32x
->>    target/riscv: rvv: Modify minimum VLEN according to enabled vector
->>      extensions
-> 
-> Is this a qemu-stable material?
-> (these changes does not apply directly to 10.1.x, probably the
-> MonitorDef change in the first patch here can be dropped)
+I will send a v3 patch to fix it, thanks!
 
-Hi!
+- Jim
 
-I've picked this series for qemu-stable 10.0 and 10.1 series.
-I still haven't received any reply from y previous email asking
-about these, so I'm a bit uncomfortable by picking this up for
-stable.  But I'm releasing two stable releases today with these
-patches in.
-
-Thanks,
-
-/mjt
+On Sat, Aug 9, 2025 at 8:48=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+>
+>
+> On 4/17/25 7:52 AM, Jim Shu wrote:
+> > We define CPU options for WG CSR support in RISC-V CPUs which
+> > can be set by machine/device emulation. The RISC-V CSR emulation
+> > will also check this feature for emulating WG CSRs.
+> >
+> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> > ---
+> >   target/riscv/cpu.c         |  3 +++
+> >   target/riscv/cpu_cfg.h     |  3 +++
+> >   target/riscv/tcg/tcg-cpu.c | 11 +++++++++++
+> >   3 files changed, 17 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index 09ded6829a..a182e8c61f 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -236,6 +236,9 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+> >       ISA_EXT_DATA_ENTRY(xtheadmempair, PRIV_VERSION_1_11_0, ext_xthead=
+mempair),
+> >       ISA_EXT_DATA_ENTRY(xtheadsync, PRIV_VERSION_1_11_0, ext_xtheadsyn=
+c),
+> >       ISA_EXT_DATA_ENTRY(xventanacondops, PRIV_VERSION_1_12_0, ext_XVen=
+tanaCondOps),
+> > +    ISA_EXT_DATA_ENTRY(smwg, PRIV_VERSION_1_12_0, ext_smwg),
+> > +    ISA_EXT_DATA_ENTRY(smwgd, PRIV_VERSION_1_12_0, ext_smwgd),
+> > +    ISA_EXT_DATA_ENTRY(sswg, PRIV_VERSION_1_12_0, ext_sswg),
+>
+> We need to keep isa_edata_arr in order because we use it to create the ri=
+scv,isa DT:
+>
+>
+> $ git diff
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d055ddf462..714fff9c33 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -207,6 +207,8 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>       ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_13_0, ext_smmpm),
+>       ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_13_0, ext_smnpm),
+>       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+> +    ISA_EXT_DATA_ENTRY(smwg, PRIV_VERSION_1_12_0, ext_smwg),
+> +    ISA_EXT_DATA_ENTRY(smwgd, PRIV_VERSION_1_12_0, ext_smwgd),
+>       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+>       ISA_EXT_DATA_ENTRY(ssccfg, PRIV_VERSION_1_13_0, ext_ssccfg),
+>       ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
+> @@ -222,6 +224,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>       ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
+>       ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
+>       ISA_EXT_DATA_ENTRY(ssu64xl, PRIV_VERSION_1_12_0, has_priv_1_12),
+> +    ISA_EXT_DATA_ENTRY(sswg, PRIV_VERSION_1_12_0, ext_sswg),
+>       ISA_EXT_DATA_ENTRY(supm, PRIV_VERSION_1_13_0, ext_supm),
+>       ISA_EXT_DATA_ENTRY(svade, PRIV_VERSION_1_11_0, ext_svade),
+>
+>
+>
+> Thanks,
+>
+> Daniel
+>
+> >
+> >       { },
+> >   };
+> > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> > index 8a843482cc..a5b045aa2f 100644
+> > --- a/target/riscv/cpu_cfg.h
+> > +++ b/target/riscv/cpu_cfg.h
+> > @@ -143,6 +143,9 @@ struct RISCVCPUConfig {
+> >       bool ext_smmpm;
+> >       bool ext_sspm;
+> >       bool ext_supm;
+> > +    bool ext_smwg;
+> > +    bool ext_smwgd;
+> > +    bool ext_sswg;
+> >       bool rvv_ta_all_1s;
+> >       bool rvv_ma_all_1s;
+> >       bool rvv_vl_half_avl;
+> > diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> > index 5aef9eef36..343e46e698 100644
+> > --- a/target/riscv/tcg/tcg-cpu.c
+> > +++ b/target/riscv/tcg/tcg-cpu.c
+> > @@ -694,6 +694,17 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *c=
+pu, Error **errp)
+> >           cpu->cfg.ext_ssctr =3D false;
+> >       }
+> >
+> > +    /* RISC-V WorldGuard */
+> > +    if (cpu->cfg.ext_sswg && !cpu->cfg.ext_smwg) {
+> > +        error_setg(errp, "Sswg extension requires Smwg extension");
+> > +        return;
+> > +    }
+> > +
+> > +    if (cpu->cfg.ext_smwgd !=3D cpu->cfg.ext_sswg) {
+> > +        error_setg(errp, "Smwgd/Sswg extensions should be enabled toge=
+ther");
+> > +        return;
+> > +    }
+> > +
+> >       /*
+> >        * Disable isa extensions based on priv spec after we
+> >        * validated and set everything we need.
+>
 
