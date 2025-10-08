@@ -4,109 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0BE0CAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 07:24:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F3E8CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 09:49:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v6OWA-0003Oi-QB; Wed, 08 Oct 2025 03:23:22 -0400
+	id 1v6Qnh-0002Vq-I9; Wed, 08 Oct 2025 05:49:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1v6OW9-0003No-5p
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 03:23:21 -0400
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1v6Qnf-0002Vb-Sm
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 05:49:36 -0400
+Received: from mail-oo1-xc2c.google.com ([2607:f8b0:4864:20::c2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1v6OW5-0001GJ-UC
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 03:23:20 -0400
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-afcb7322da8so1479828766b.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 00:23:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1v6Qnd-0000XZ-V3
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 05:49:35 -0400
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-6500448067dso186525eaf.3
+ for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 02:49:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1759908196; x=1760512996; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KmTtfQn485dwI5VyrBNqFWBnPgTEl3i8e/JThGkX2tQ=;
- b=YzgrexsADpuquJt7lCVZG+GptIbl24SaxbxDUUW7OirD5g4FqiIKgoRW2Lylbo/sbX
- RFkFlcLfiSfuydSSfGJwaFo/i9HwvTLHdw4CfpeKCjlXtqx95e42YJ7CgIuEYZfn1FYT
- 1MEnO6VbxkUNa7E+aX2PwZddvDVZXI5Nkq2MHHRVr3ZME3i6KlqSJhMsHCINEM1rU1By
- 0Pe0RnTINHbKNMV72MTsKBaFujXPl5yA1lsQJ/1xFYtJy/Wrjak3km1hQcnEXUBDu2DS
- inoc9lo0UlxpQBLlSSW8C4ndMgHqkxp42ZdcayfuRHCBKOEjDdKjBeuN9+VT/O4VU/fL
- Vkxw==
+ d=sifive.com; s=google; t=1759916971; x=1760521771; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=h248Y39NaeoKPvczexRmiByL3fhpX1/s6ccZjvtD08s=;
+ b=f3tQPeLKJ68O21ka/eXISEjhPw1lrMGrhMkDLgXCtSSmdbeEUbwyzCVlUmh9YMwYlI
+ yUuwBCEZ2r4dqFRWiLAkkF827y7rMSUlLk5pgnhwxORJf2AvSz+VmbYtIjCiF+QgCbMe
+ U2VW23wtmYP0+ypOko4iPSue+p0gc/LFd0/i4MeLvhCISPOcIY7YI5keVliUKVHKabjz
+ y9mSfN0PrWSZvw0GvKbqdPInJ0zIZDXKwDOsdzn3jtEo9Iwoewl55iJdprGv91NkNNIP
+ qPL5/Njeq/KcssfvXQm+k2GMHPcWAolvYXS+oLeJWAOYwAJ9kBtukMhaFP9ZXSjdXM+5
+ GgQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759908196; x=1760512996;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KmTtfQn485dwI5VyrBNqFWBnPgTEl3i8e/JThGkX2tQ=;
- b=n0rSHqOFyQbftdgsg6X4JTeW+IID0lgxMsjjOCiel30gMBoudjp62xUfkoXzue28yW
- ZuEmRY8Is2sBsUw7M4kyM98dZUc4D7ppxnurBpKJ8C++kr02uefV42uByYbGDBotfo4n
- ikcW/3uXF+0t+UJNOxAehdP834EdsyV4YzG2LTw78ohfLnpuhD9hwSB1byMKIWjdclUa
- 9e6C4To46Q7uCf/CctLq3Yz4qFRBSu1HGGvFmXSWq4wAm6AWAOXn1tDSHLEXOVtOB0CS
- 3rc9ejzgBDALyM+XegFYMFdJ0/bNzHeDel9buJvG+31sLzmWuY3LCHxRYA+XYIPlTAVg
- qqyA==
+ d=1e100.net; s=20230601; t=1759916971; x=1760521771;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=h248Y39NaeoKPvczexRmiByL3fhpX1/s6ccZjvtD08s=;
+ b=SM4SNCxsaOB6VHcKANfoiHCb6ulpEznJ00gUhjUHvLtn33pDKppSgExNNHg0xP/dxb
+ lP5hla2erxomSFkkJ7YV6rhXlDVH/TVzg39sGKSBIbrso43iu3gEJb3tIzqJXp15y/tO
+ 5UCbQNmJdtXRDG+PuJeLjLeiX5aYflKWzBAy8aRo4UUynvQuhd2MHIpeecpyOZKAazUe
+ Ex7B4AMFtRoHp8XeKn0+Z1pJ75tfZfVlkZlpjaalB0wOo4/6Sczu0e4+LilIg9JojPVe
+ in2Mr4TeYGY6kFQ+MSb6fkJCoTLGRBLvUE9TR1aGLL1c4gUUf5lLlvZRY+PHtptoBAQS
+ xLww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUTX0wcE88cO4yVndo4oJYa9heqYtHoBdVeHurI7b2qKFsDkjj9R1ezTAeca2t4vhzf6K1PsfAQSTjd@nongnu.org
-X-Gm-Message-State: AOJu0Yyd+Fz9oleVORoL9Oji5fz1E09tsF8+LL0lljdh3zFZeshy6mM1
- kj2Rl3Zf7jyXX9WpiROVM4i48C1JYb755ki4x+W1CpI4u8nTEDbBeYmfAku/R/i/yZWMWPeK+Ck
- zhg7PSaXFoWmMq7K0dHwhngNgXQD/1TIzNY/MNZAkEQ==
-X-Gm-Gg: ASbGnctamnI8XI9rNrgy8MM9awVl8QVGCsCt3LwxRonMZFVCWo6BNhEryziule6tvJr
- u9ZIbnbMHUoiVw1psxZDYSZLYrNI3Q8j1mX2kKfQfSFDBIvWNvVsl/d+kqOdrNB7CBTyyDQeqVX
- ADKoXF0Pez6XrFiO6d80nyuhIUT7Sl1LTTCnRyfcF648cWomRrfAvNJIK7oNECRbI59jxVHy+Ak
- 1Ie7LIuEBOO6KsIJeo1GNj7d2wrq7Xrh+0encb6Ytjs
-X-Google-Smtp-Source: AGHT+IFbDKcBie8VUaWvi8UCHiyckWQHhFj/LPTpRBRFA+ODi0NLZAKWMJ7zKvzx+yBoRUoslPKWq3Pm79ipOLDpIlc=
-X-Received: by 2002:a17:906:ef04:b0:b3c:8b25:ab74 with SMTP id
- a640c23a62f3a-b50aa393c32mr275057166b.10.1759908195943; Wed, 08 Oct 2025
- 00:23:15 -0700 (PDT)
+ AJvYcCUw5Kxq2DM9jLkbKqUjb1hbMqlax/fMqUkPLw7AJXPiQHljr+CwSADtqmJ032D2HOgfsgYgVFJmDrAj@nongnu.org
+X-Gm-Message-State: AOJu0YwBlPVXI3+9c3YIcUrIBsce2vBplYPcKx7/rlOJxz9ur319V9cI
+ gGHdDrSPbSHNJG1AZi1BpoTy3w0OX1gBMXtsMSNt0DVPNHYnHQpHhiCBFPh0rz6JzGiyOKus79l
+ tgBj5N4sNPzbMF77JzCk9GPxjmRl26z07koT/ePDQQw==
+X-Gm-Gg: ASbGncvsy2IK3qm3dec/EN8e7t/zOU3CrIIWXylsCO4zE2Y/IRc6c+gnk9UDfX7DthK
+ CMfJDaMX9Ob+ZM//NZqVjhSXToHcP3/Fl0kILCBv3kFWRnRmjyEAYF+JqAebm17F0gxMWF9/fkV
+ HihHEPpyqo+zvqBdJP02mgls1f+FF6ib+Tq8avRQ2FTmSRD9ZHEC3Zmsbvx0jWCol3BkiSNiRDm
+ ILcn9pCJLzVt8yCgnO4x/6R4n8M9E1YJ2BaY/JdU9Nw
+X-Google-Smtp-Source: AGHT+IGuXILsKqAYNZqQC2bYuAi6pWYN7l6Gug2zKoXKTPmKUq9BcGZWni5mQSKPSQoapCwuY8rgvJ9RcjBf5arbp88=
+X-Received: by 2002:a05:6820:a01b:b0:621:cca4:d01b with SMTP id
+ 006d021491bc7-64fffc384b0mr1141915eaf.2.1759916971113; Wed, 08 Oct 2025
+ 02:49:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250417105249.18232-1-jim.shu@sifive.com>
- <20250417105249.18232-15-jim.shu@sifive.com>
- <efccad5e-d5a8-4ebe-b2ae-1b683239399d@ventanamicro.com>
-In-Reply-To: <efccad5e-d5a8-4ebe-b2ae-1b683239399d@ventanamicro.com>
-From: Jim Shu <jim.shu@sifive.com>
-Date: Wed, 8 Oct 2025 15:23:04 +0800
-X-Gm-Features: AS18NWDQ21OHt99vGJLCTGG-oO9s-4oWUiOwJF8CUPFHyOSUR5TJROXZeQFko00
-Message-ID: <CALw707pdRABgsz5b40tKo_G6uhD_2+okGg8fEtRdtfG4RshoAA@mail.gmail.com>
-Subject: Re: [PATCH v2 14/18] hw/misc: riscv_wgchecker: Implement RISC-V
- WorldGuard Checker
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+References: <20250923090729.1887406-1-max.chou@sifive.com>
+ <19b1f55b-810c-46b8-a934-45ae2205f351@tls.msk.ru>
+ <98cc2ae8-0354-42d1-ac52-a26d09d89544@tls.msk.ru>
+In-Reply-To: <98cc2ae8-0354-42d1-ac52-a26d09d89544@tls.msk.ru>
+From: Max Chou <max.chou@sifive.com>
+Date: Wed, 8 Oct 2025 17:49:20 +0800
+X-Gm-Features: AS18NWCXAATiSodcb4j0tTldINOUqZHTj6qNoBP0HQ_KqACuaSnPBdMAv1-nA5Y
+Message-ID: <CANiaA1vyhHCt1skA977+5ZLf=f5zYY=-dCT5vc3qH9VotyEbzg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] riscv: Modify minimum VLEN rule
+To: Michael Tokarev <mjt@tls.msk.ru>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>, 
- Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
- Michael Rolnik <mrolnik@gmail.com>, 
- Helge Deller <deller@gmx.de>, Song Gao <gaosong@loongson.cn>,
- Laurent Vivier <laurent@vivier.eu>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
- Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::633;
- envelope-from=jim.shu@sifive.com; helo=mail-ej1-x633.google.com
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-stable <qemu-stable@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000e5d0b00640a299b9"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2c;
+ envelope-from=max.chou@sifive.com; helo=mail-oo1-xc2c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,344 +101,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-I will send a v3 patch to fix it, thanks!
+--000000000000e5d0b00640a299b9
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-- Jim
+Hi Michael,
 
-On Sun, Aug 10, 2025 at 12:39=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
->
->
-> On 4/17/25 7:52 AM, Jim Shu wrote:
-> > Implement the RISC-V WorldGuard Checker, which sits in front of RAM or
-> > device MMIO and allow software to configure it to either pass through o=
-r
-> > reject transactions.
+Apologies for the delayed response to your question about qemu-stable.
+Yes, I believe this patchset is appropriate for qemu-stable material.
+The changes fix the VLEN minimum value to properly align with the RISC-V
+specification requirements (VLEN >=3D ELEN), which could affect the
+correctness of RISC-V vector extension behavior in QEMU.
+
+Thank you for picking this up for the stable 10.0 and 10.1 releases.
+This series is based on the riscv-to-apply.next branch (the VERSION file
+shows 10.1.50).
+
+Thanks,
+Max
+
+
+On Wed, Oct 8, 2025 at 3:13=E2=80=AFPM Michael Tokarev <mjt@tls.msk.ru> wro=
+te:
+
+> On 10/4/25 10:44, Michael Tokarev wrote:
+> > On 9/23/25 12:07, Max Chou wrote:
+> >> According to the RISC-V unprivileged specification, the VLEN should be
+> >> greater
+> >> or equal to the ELEN. This patchset provides following modifications:
+> >>
+> >> * Replace the checkings of standard V with the checkings of Zve32x
+> >> * Introduces a check rule for VLEN and ELEN
+> >> * Modifies the minimum VLEN based on the vector extensions
+> >>
+> >> Extension     Minimum VLEN
+> >> V                      128
+> >> Zve64[d|f|x]            64
+> >> Zve32[f|x]              32
+> >>
+> >> v1: 20250627132156.440214-1-max.chou@sifive.com
+> >> - Rebase to riscv-to-apply.next branch
+> >> - Add patch 1 to replace checking RVV by checking Zve32x
+> >>
+> >> Max Chou (2):
+> >>    target/riscv: rvv: Replace checking V by checking Zve32x
+> >>    target/riscv: rvv: Modify minimum VLEN according to enabled vector
+> >>      extensions
 > >
-> > We implement the wgChecker as a QEMU IOMMU, which will direct transacti=
-ons
-> > either through to the devices and memory behind it or to a special
-> > "never works" AddressSpace if they are blocked.
-> >
-> > This initial commit implements the skeleton of the device:
-> >   * it always permits accesses
-> >   * it doesn't implement wgChecker's slot registers
-> >   * it doesn't implement the interrupt or other behaviour
-> >     for blocked transactions
-> >
-> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> > ---
-> >   hw/misc/meson.build                |   2 +-
-> >   hw/misc/riscv_wgchecker.c          | 603 ++++++++++++++++++++++++++++=
-+
-> >   hw/misc/trace-events               |   8 +
-> >   include/hw/misc/riscv_worldguard.h |  63 +++
-> >   4 files changed, 675 insertions(+), 1 deletion(-)
-> >   create mode 100644 hw/misc/riscv_wgchecker.c
-> >
-> > diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-> > index 3d2f4bb6a3..73c11bc7c9 100644
-> > --- a/hw/misc/meson.build
-> > +++ b/hw/misc/meson.build
-> > @@ -34,7 +34,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: =
-files('sifive_e_prci.c'))
-> >   system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_a=
-on.c'))
-> >   system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_o=
-tp.c'))
-> >   system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_=
-prci.c'))
-> > -specific_ss.add(when: 'CONFIG_RISCV_WORLDGUARD', if_true: files('riscv=
-_worldguard.c'))
-> > +specific_ss.add(when: 'CONFIG_RISCV_WORLDGUARD', if_true: files('riscv=
-_worldguard.c', 'riscv_wgchecker.c'))
-> >
-> >   subdir('macio')
-> >
-> > diff --git a/hw/misc/riscv_wgchecker.c b/hw/misc/riscv_wgchecker.c
-> > new file mode 100644
-> > index 0000000000..ea50f4f53a
-> > --- /dev/null
-> > +++ b/hw/misc/riscv_wgchecker.c
-> > @@ -0,0 +1,603 @@
+> > Is this a qemu-stable material?
+> > (these changes does not apply directly to 10.1.x, probably the
+> > MonitorDef change in the first patch here can be dropped)
 >
-> (...)
+> Hi!
 >
-> > +
-> > +static void riscv_wgchecker_realize(DeviceState *dev, Error **errp)
-> > +{
-> > +    Object *obj =3D OBJECT(dev);
-> > +    RISCVWgCheckerState *s =3D RISCV_WGCHECKER(dev);
-> > +    uint64_t size;
-> > +
-> > +    if (worldguard_config =3D=3D NULL) {
-> > +        error_setg(errp, "Couldn't find global WorldGuard configs. "
-> > +                   "Please realize %s device at first.",
+> I've picked this series for qemu-stable 10.0 and 10.1 series.
+> I still haven't received any reply from y previous email asking
+> about these, so I'm a bit uncomfortable by picking this up for
+> stable.  But I'm releasing two stable releases today with these
+> patches in.
 >
-> Extra "at":  "Please realize %s device first."
+> Thanks,
 >
+> /mjt
 >
-> Everything else LGTM:
+
+--000000000000e5d0b00640a299b9
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi=C2=A0Michael,</div><div><br></div><div>Apologies f=
+or the delayed response to your question about qemu-stable.<br></div><div>Y=
+es, I believe this patchset is appropriate for qemu-stable material.</div><=
+div>The changes fix the VLEN minimum value to properly align with the RISC-=
+V specification requirements (VLEN &gt;=3D ELEN), which could affect the co=
+rrectness of RISC-V vector extension behavior in QEMU.<br></div><div><br></=
+div><div>Thank you for picking this up for the stable 10.0 and 10.1 release=
+s.<br></div><div>This series is based on the=C2=A0riscv-to-apply.next branc=
+h (the VERSION file shows 10.1.50).</div><div><br></div><div><div dir=3D"lt=
+r" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D=
+"ltr">Thanks,<br>Max</div></div></div><br></div><br><div class=3D"gmail_quo=
+te gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Oct=
+ 8, 2025 at 3:13=E2=80=AFPM Michael Tokarev &lt;<a href=3D"mailto:mjt@tls.m=
+sk.ru">mjt@tls.msk.ru</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-st=
+yle:solid;border-left-color:rgb(204,204,204);padding-left:1ex">On 10/4/25 1=
+0:44, Michael Tokarev wrote:<br>
+&gt; On 9/23/25 12:07, Max Chou wrote:<br>
+&gt;&gt; According to the RISC-V unprivileged specification, the VLEN shoul=
+d be <br>
+&gt;&gt; greater<br>
+&gt;&gt; or equal to the ELEN. This patchset provides following modificatio=
+ns:<br>
+&gt;&gt;<br>
+&gt;&gt; * Replace the checkings of standard V with the checkings of Zve32x=
+<br>
+&gt;&gt; * Introduces a check rule for VLEN and ELEN<br>
+&gt;&gt; * Modifies the minimum VLEN based on the vector extensions<br>
+&gt;&gt;<br>
+&gt;&gt; Extension=C2=A0=C2=A0=C2=A0=C2=A0 Minimum VLEN<br>
+&gt;&gt; V=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 128<br>
+&gt;&gt; Zve64[d|f|x]=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 64<br>
+&gt;&gt; Zve32[f|x]=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 32<br>
+&gt;&gt;<br>
+&gt;&gt; v1: <a href=3D"mailto:20250627132156.440214-1-max.chou@sifive.com"=
+ target=3D"_blank">20250627132156.440214-1-max.chou@sifive.com</a><br>
+&gt;&gt; - Rebase to riscv-to-apply.next branch<br>
+&gt;&gt; - Add patch 1 to replace checking RVV by checking Zve32x<br>
+&gt;&gt;<br>
+&gt;&gt; Max Chou (2):<br>
+&gt;&gt; =C2=A0=C2=A0 target/riscv: rvv: Replace checking V by checking Zve=
+32x<br>
+&gt;&gt; =C2=A0=C2=A0 target/riscv: rvv: Modify minimum VLEN according to e=
+nabled vector<br>
+&gt;&gt; =C2=A0=C2=A0=C2=A0=C2=A0 extensions<br>
+&gt; <br>
+&gt; Is this a qemu-stable material?<br>
+&gt; (these changes does not apply directly to 10.1.x, probably the<br>
+&gt; MonitorDef change in the first patch here can be dropped)<br>
+<br>
+Hi!<br>
+<br>
+I&#39;ve picked this series for qemu-stable 10.0 and 10.1 series.<br>
+I still haven&#39;t received any reply from y previous email asking<br>
+about these, so I&#39;m a bit uncomfortable by picking this up for<br>
+stable.=C2=A0 But I&#39;m releasing two stable releases today with these<br=
 >
->
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->
-> > +                   TYPE_RISCV_WORLDGUARD);
-> > +        return;
-> > +    }
-> > +
-> > +    if (s->slot_count =3D=3D 0) {
-> > +        error_setg(errp, "wgChecker slot-count couldn't be zero.");
-> > +        return;
-> > +    }
-> > +
-> > +    memory_region_init_io(&s->mmio, OBJECT(dev), &riscv_wgchecker_ops,=
- s,
-> > +                          TYPE_RISCV_WGCHECKER, s->mmio_size);
-> > +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> > +    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
-> > +
-> > +    /* Address range should be NAPOT alignment */
-> > +    address_range_align_napot(s);
-> > +
-> > +    for (int i=3D0; i<WGC_NUM_REGIONS; i++) {
-> > +        WgCheckerRegion *region =3D &s->mem_regions[i];
-> > +
-> > +        if (!region->downstream) {
-> > +            continue;
-> > +        }
-> > +        region->wgchecker =3D s;
-> > +
-> > +        const char *upstream_name =3D g_strdup_printf(
-> > +            "wgchecker-upstream-%"HWADDR_PRIx, region->region_offset);
-> > +        const char *downstream_name =3D g_strdup_printf(
-> > +            "wgchecker-downstream-%"HWADDR_PRIx, region->region_offset=
-);
-> > +
-> > +        size =3D memory_region_size(region->downstream);
-> > +        memory_region_init_iommu(&region->upstream, sizeof(region->ups=
-tream),
-> > +                                 TYPE_RISCV_WGC_IOMMU_MEMORY_REGION,
-> > +                                 obj, upstream_name, size);
-> > +
-> > +        /* upstream MRs are 2nd ~ (n+1)th MemoryRegion. */
-> > +        sysbus_init_mmio(SYS_BUS_DEVICE(dev), MEMORY_REGION(&region->u=
-pstream));
-> > +
-> > +        /*
-> > +         * This memory region is not exposed to users of this device a=
-s a
-> > +         * sysbus MMIO region, but is instead used internally as somet=
-hing
-> > +         * that our IOMMU translate function might direct accesses to.
-> > +         */
-> > +        memory_region_init_io(&region->blocked_io, obj, &riscv_wgc_mem=
-_blocked_ops,
-> > +                              region, "wgchecker-blocked-io", size);
-> > +
-> > +        address_space_init(&region->downstream_as, region->downstream,
-> > +                           downstream_name);
-> > +        address_space_init(&region->blocked_io_as, &region->blocked_io=
-,
-> > +                           "wgchecker-blocked-io");
-> > +    }
-> > +}
-> > +
-> > +static void riscv_wgchecker_unrealize(DeviceState *dev)
-> > +{
-> > +    RISCVWgCheckerState *s =3D RISCV_WGCHECKER(dev);
-> > +
-> > +    g_free(s->slots);
-> > +    if (s->num_default_slots && s->default_slots) {
-> > +        g_free(s->default_slots);
-> > +    }
-> > +}
-> > +
-> > +static void riscv_wgchecker_reset_enter(Object *obj, ResetType type)
-> > +{
-> > +    RISCVWgCheckerState *s =3D RISCV_WGCHECKER(obj);
-> > +    uint64_t start =3D s->addr_range_start;
-> > +    uint64_t end =3D s->addr_range_start + s->addr_range_size;
-> > +    int nslots =3D s->slot_count;
-> > +
-> > +    s->errcause =3D 0;
-> > +    s->erraddr =3D 0;
-> > +}
-> > +
-> > +static void riscv_wgchecker_class_init(ObjectClass *klass, void *data)
-> > +{
-> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> > +
-> > +    device_class_set_props(dc, riscv_wgchecker_properties);
-> > +    dc->user_creatable =3D true;
-> > +    dc->realize =3D riscv_wgchecker_realize;
-> > +    dc->unrealize =3D riscv_wgchecker_unrealize;
-> > +    ResettableClass *rc =3D RESETTABLE_CLASS(klass);
-> > +    rc->phases.enter =3D riscv_wgchecker_reset_enter;
-> > +}
-> > +
-> > +static void riscv_wgchecker_instance_init(Object *obj)
-> > +{
-> > +    RISCVWgCheckerState *s =3D RISCV_WGCHECKER(obj);
-> > +
-> > +    s->num_default_slots =3D 0;
-> > +}
-> > +
-> > +static const TypeInfo riscv_wgchecker_info =3D {
-> > +    .name          =3D TYPE_RISCV_WGCHECKER,
-> > +    .parent        =3D TYPE_SYS_BUS_DEVICE,
-> > +    .instance_init =3D riscv_wgchecker_instance_init,
-> > +    .instance_size =3D sizeof(RISCVWgCheckerState),
-> > +    .class_init    =3D riscv_wgchecker_class_init,
-> > +};
-> > +
-> > +static void riscv_wgchecker_register_types(void)
-> > +{
-> > +    type_register_static(&riscv_wgchecker_info);
-> > +    type_register_static(&riscv_wgc_iommu_memory_region_info);
-> > +}
-> > +
-> > +type_init(riscv_wgchecker_register_types)
-> > +
-> > +/*
-> > + * Create WgChecker device
-> > + */
-> > +DeviceState *riscv_wgchecker_create(hwaddr addr, uint32_t size,
-> > +                                    qemu_irq irq, uint32_t slot_count,
-> > +                                    uint64_t addr_range_start,
-> > +                                    uint64_t addr_range_size,
-> > +                                    uint32_t num_of_region,
-> > +                                    MemoryRegion **downstream,
-> > +                                    uint64_t *region_offset,
-> > +                                    uint32_t num_default_slots,
-> > +                                    WgCheckerSlot *default_slots)
-> > +{
-> > +    DeviceState *dev =3D qdev_new(TYPE_RISCV_WGCHECKER);
-> > +    RISCVWgCheckerState *s =3D RISCV_WGCHECKER(dev);
-> > +    char name_mr[32];
-> > +    char name_offset[32];
-> > +    int i;
-> > +
-> > +    qdev_prop_set_uint32(dev, "slot-count", slot_count);
-> > +    qdev_prop_set_uint32(dev, "mmio-size", size);
-> > +    qdev_prop_set_uint64(dev, "addr-range-start", addr_range_start);
-> > +    if (addr_range_size) {
-> > +        qdev_prop_set_uint64(dev, "addr-range-size", addr_range_size);
-> > +    }
-> > +
-> > +    g_assert(num_of_region <=3D WGC_NUM_REGIONS);
-> > +    for (i=3D0; i<num_of_region; i++) {
-> > +        snprintf(name_mr, 32, "downstream-mr[%d]", i);
-> > +        snprintf(name_offset, 32, "region-offset[%d]", i);
-> > +
-> > +        object_property_set_link(OBJECT(dev), name_mr,
-> > +                                 OBJECT(downstream[i]), &error_fatal);
-> > +        qdev_prop_set_uint64(dev, name_offset, region_offset[i]);
-> > +    }
-> > +
-> > +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> > +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> > +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq);
-> > +    return dev;
-> > +}
-> > diff --git a/hw/misc/trace-events b/hw/misc/trace-events
-> > index 4383808d7a..b1d8538220 100644
-> > --- a/hw/misc/trace-events
-> > +++ b/hw/misc/trace-events
-> > @@ -395,3 +395,11 @@ ivshmem_flat_interrupt_peer(uint16_t peer_id, uint=
-16_t vector_id) "Interrupting
-> >   i2c_echo_event(const char *id, const char *event) "%s: %s"
-> >   i2c_echo_recv(const char *id, uint8_t data) "%s: recv 0x%02" PRIx8
-> >   i2c_echo_send(const char *id, uint8_t data) "%s: send 0x%02" PRIx8
-> > +
-> > +# riscv_worldguard.c
-> > +riscv_wgchecker_mmio_read(uint64_t base, uint64_t offset, unsigned int=
- size) "base =3D 0x%"PRIx64", offset =3D 0x%"PRIx64", size =3D 0x%x"
-> > +riscv_wgchecker_mmio_write(uint64_t base, uint64_t offset, unsigned in=
-t size, uint64_t val) "base =3D 0x%"PRIx64", offset =3D 0x%"PRIx64", size =
-=3D 0x%x, val =3D 0x%"PRIx64
-> > +
-> > +riscv_wgc_mem_blocked_read(uint64_t addr, unsigned size, uint32_t wid)=
- "wgChecker blocked read: offset 0x%" PRIx64 " size %u wid %" PRIu32
-> > +riscv_wgc_mem_blocked_write(uint64_t addr, uint64_t data, unsigned siz=
-e, uint32_t wid) "wgChecker blocked write: offset 0x%" PRIx64 " data 0x%" P=
-RIx64 " size %u wid %" PRIu32
-> > +riscv_wgc_translate(uint64_t addr, int flags, int wid, const char *res=
-) "wgChecker translate: addr 0x%016" PRIx64 " flags 0x%x wid %d: %s"
-> > diff --git a/include/hw/misc/riscv_worldguard.h b/include/hw/misc/riscv=
-_worldguard.h
-> > index 211a72e438..7b5aae866a 100644
-> > --- a/include/hw/misc/riscv_worldguard.h
-> > +++ b/include/hw/misc/riscv_worldguard.h
-> > @@ -53,4 +53,67 @@ void riscv_worldguard_apply_cpu(uint32_t hartid);
-> >   uint32_t mem_attrs_to_wid(MemTxAttrs attrs);
-> >   bool could_access_wgblocks(MemTxAttrs attrs, const char *wgblock);
-> >
-> > +#define TYPE_RISCV_WGCHECKER  "riscv.wgchecker"
-> > +
-> > +typedef struct RISCVWgCheckerState RISCVWgCheckerState;
-> > +DECLARE_INSTANCE_CHECKER(RISCVWgCheckerState, RISCV_WGCHECKER,
-> > +                         TYPE_RISCV_WGCHECKER)
-> > +
-> > +#define TYPE_RISCV_WGC_IOMMU_MEMORY_REGION    "riscv-wgc-iommu-memory-=
-region"
-> > +
-> > +typedef struct WgCheckerSlot WgCheckerSlot;
-> > +struct WgCheckerSlot {
-> > +    uint64_t addr;
-> > +    uint64_t perm;
-> > +    uint32_t cfg;
-> > +};
-> > +
-> > +typedef struct WgCheckerRegion WgCheckerRegion;
-> > +struct WgCheckerRegion {
-> > +    MemoryRegion *downstream;
-> > +    uint64_t region_offset;
-> > +
-> > +    IOMMUMemoryRegion upstream;
-> > +    MemoryRegion blocked_io;
-> > +    AddressSpace downstream_as;
-> > +    AddressSpace blocked_io_as;
-> > +
-> > +    RISCVWgCheckerState *wgchecker;
-> > +};
-> > +
-> > +#define WGC_NUM_REGIONS     16
-> > +
-> > +struct RISCVWgCheckerState {
-> > +    /*< private >*/
-> > +    SysBusDevice parent_obj;
-> > +
-> > +    /*< public >*/
-> > +    MemoryRegion mmio;
-> > +    qemu_irq irq;
-> > +
-> > +    /* error reg */
-> > +    uint64_t errcause;
-> > +    uint64_t erraddr;
-> > +
-> > +    /* Memory regions protected by wgChecker */
-> > +    WgCheckerRegion mem_regions[WGC_NUM_REGIONS];
-> > +
-> > +    /* Property */
-> > +    uint32_t slot_count; /* nslots */
-> > +    uint32_t mmio_size;
-> > +    uint64_t addr_range_start;
-> > +    uint64_t addr_range_size;
-> > +    bool hw_bypass;
-> > +};
-> > +
-> > +DeviceState *riscv_wgchecker_create(hwaddr addr, uint32_t size,
-> > +                                    qemu_irq irq, uint32_t slot_count,
-> > +                                    uint64_t addr_range_start,
-> > +                                    uint64_t addr_range_size,
-> > +                                    uint32_t num_of_region,
-> > +                                    MemoryRegion **downstream,
-> > +                                    uint64_t *region_offset,
-> > +                                    uint32_t num_default_slots,
-> > +                                    WgCheckerSlot *default_slots);
-> > +
-> >   #endif
->
+patches in.<br>
+<br>
+Thanks,<br>
+<br>
+/mjt<br>
+</blockquote></div>
+
+--000000000000e5d0b00640a299b9--
 
