@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C47BCCA472
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 14:00:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45B57CCA472
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 14:01:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v6UhX-0002IT-N8; Wed, 08 Oct 2025 09:59:33 -0400
+	id 1v6UjF-0003No-Gc; Wed, 08 Oct 2025 10:01:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1v6UhS-0002IE-EX
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 09:59:26 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1v6UjD-0003H2-GK
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 10:01:15 -0400
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1v6UhF-0001mk-Ey
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 09:59:26 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-631df7b2dffso2289438a12.1
- for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 06:59:10 -0700 (PDT)
+ id 1v6Uix-0002AV-EV
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 10:01:15 -0400
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b50206773adso186835566b.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 07:00:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759931948; x=1760536748; darn=nongnu.org;
+ d=linaro.org; s=google; t=1759932055; x=1760536855; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mKZ2hImwlN1b+rqDZz6p6av73pHb6Oqe7unc9VE/QZc=;
- b=fxZLuzjcAr1WsLrd6BTsuCR3lQSVcz3iZkqpHhZeFuxgDgRwKuQRey+xeDKkjirjUL
- AQwT1TVxPgk5VoAh1wiZ4rxC0Rd9986CnQIY0duHIc7A/5bdX3eLlXiFBqGQn36zJ7N9
- WWwwO4XsXOWpUEgzeRCdyLKzavSJ8Zaejdj0XDv+GKB11lfh5tTp5lUhL1EW0XHXkl/T
- C8Xdg2qlodlKagbiN2oHKCrl+XuckKGKZ4UcKf5iTHfpTEgRTlZtuwbVePKOhPsPOnOf
- 5glmTqgBpLX8H523CvaZAYE+BM5eXtupYTuv/pe/6tPsMU4MJe7zJL0x9kZx/WH4woos
- hR6A==
+ bh=CvWOlddfwghaVSH+2JYyD0HHGY3kc4q9PORKPryKrbg=;
+ b=ZA/Pge/AfxqZXgEN38+mSX4Ui38N/dicATfI0+RQcG41XgZxsiWEOGnONIucQVAdcT
+ rYTMLA2nMyedYiCZNpNN0xjASvAHdGRgQNpcf3nznPBrsrK3uRAKCczbdswlYs59w2m8
+ Hwj1lXLMqgJhvI3k4BsOVkvXtErTTjmA6zKfVtLRdSN/fi94H4SXVQl4DMlYtGFzFRjC
+ 6BKTzOM40mkojJ3ojOH9Ho+/jCbRIsxjlzu0BS9N4HPbgPhL/YqBkqF6Knwo3xUqN2wH
+ 25azVbWJj4uI4FeWZxNbc27L7rtK9z+FuiYpvXhWZKvol0GFt28a3vJ4h+466ifYA8sJ
+ gmpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759931948; x=1760536748;
+ d=1e100.net; s=20230601; t=1759932055; x=1760536855;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mKZ2hImwlN1b+rqDZz6p6av73pHb6Oqe7unc9VE/QZc=;
- b=gbyxZF7Hrn0E/h5WoIncldg0hkGK4fCmCYIbMZMdvOEO/sDM03x5Ks7Gx6D4/Z/lxi
- PVAkdmz2lMZOOp93VZNINoJJRJTRURf6LU4G5mDk/eeQnIJoU+CBDIWIq5dotl7q6E4B
- 7K3rzf8dR/P2F+R3PWoCyfmE6JtQnCs7EElE0LNJ7qFbJwbC/qO5e1fXa2FKGm5pfASR
- X7PUrEhpU3abWqVEQ2VdJRZHFo8v4zETMWu1uAd6EEVdE3d1vF+PSdtmCFv+e9Hvz5AR
- O/Hw9jVmTD/bhwFPTVSN8RiIAdZFucAz3vaO33lqsGQ2RK7PNEiwdq+AsvwqJZuWkm5W
- BRqA==
+ bh=CvWOlddfwghaVSH+2JYyD0HHGY3kc4q9PORKPryKrbg=;
+ b=PylXcYjlvmxwTVoczUtxsOugR91v8f7AkO7A/kW7+Q9OLcwm1IKWhPlUmAetnziVQw
+ ziuOOFbkzERrhuTG8PTFqepKBnlSpvvsKwokgvcY6TADSJJqpG7uI97G3Y6IX2qJG83r
+ dOAf+GeGGuJRmOAHSZJKPo3sfRe+0P6OMcQ3MjhJKCsb8y7ZrxGsjSH3W9E82iO9RCMq
+ qciW09Lx2hRde/UvHPYv9y6ZZ5bkJCkxbIBwDiOBB0IHre7QzPwx4O5Cryzox3fb5ejj
+ ICnenvCyvNy2YsD8Sk3Di9UBLQjSeg+zqelR7lXNZaUZ48F48Bth3CoSYlagQ45jXEtB
+ wYZA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW63M1rrZh98jfcPzbgNcZKL/2IXFvAAh9g1qpnqd8vxlD3rzB8QxsrtPl2YBJDysokSFdR04u2yI2a@nongnu.org
-X-Gm-Message-State: AOJu0YyYLT2p/u22Y8GVJNZb6gAkO6oDapw1uf36Mnhgr6JmL6vTWWBh
- YRDV+Me58nHU9LytyRdKqfqtC3S4UmSksolftlx2F7gHQvISpTwGnoLEqwHs90ZUuKm5FhFLClr
- V1/9RgAk5ffeW1WA2OjQinYnqspBOMsDIN8zK6/LzRg==
-X-Gm-Gg: ASbGncvN+u+tB8Tmfq2tL/8P6H/R+ueWsC6cnvBOww6hzckaTiWK6g1m5EuVd+ZjO+N
- Ky974AMz8A6wvEBOW7+MSVeqY3IlHwRHSJuZGDxJDou7+FFBt+LoHdwRzdddgp8BVDsi1+GKxe8
- 2leix0cCMPnkmf+/yb0iUXSz72bVyQGM0MpDeMC2YIan9iRX1QDtZKI1nYGNbzRooyeScsywDgk
- cBb64bozu9qA1YDytKzYbYz9vvA4/r1
-X-Google-Smtp-Source: AGHT+IF4Ag1+92MGiUt9CKwt2oOGl2No9PF3vzFEfX9vnrqJSIyk+IOeXq0IJz2p0unitfFCUOW/Et2DDz7ObCbHuHA=
-X-Received: by 2002:a05:6402:354c:b0:61c:db49:aec0 with SMTP id
- 4fb4d7f45d1cf-639d5fd60a4mr3556203a12.5.1759931948084; Wed, 08 Oct 2025
- 06:59:08 -0700 (PDT)
+ AJvYcCUwGIjCQZ9rpD0V5jbs/ERJVbvNdv0T4GqN4G2lmHs4ys6hqGYra9XpSCpqmPgkv418Q43I4Nxqr8A2@nongnu.org
+X-Gm-Message-State: AOJu0YztqXJCTg3gBv03GBaLZ3CPvNVMi8MC0uCHvLrBzG8r9GgNpfC4
+ fwCE17SaEPENNfLPrSPjLmm5/q7FlD6t07tRtqhuUpGCW1myakSS6U1UYbzx+Ijn01e7emod+QL
+ KmTBVBtOC9y8wwe0aYvqep2xNPO1D4VtfW5rInYqdzmDfQaBmKtrqy0FsuA==
+X-Gm-Gg: ASbGncviPZZy2kQJ0neSFlYh8/3vxnCZHkzZJvaTKQRiOaazUzY4o+raBjHAaRhi9IS
+ 2ZI8Osdq5BKnqVanZjvQZE2YngxYTq2cs0sRqdeZ1fvO9KuRDdUO5o325kRq5+thVi/dEGiaSBD
+ CVfc7NW/eIAv0gVdqhxi4wpoO4dSGfYmnhjMySlr4p3vntMNnnmYYwFhrJobUVS2UI/Emg7oA6R
+ c1JiuCcjU1Uy5JBD6LTRMcWLa0y3PC3KNshVR6skJk=
+X-Google-Smtp-Source: AGHT+IHzbcvevwtiJmcSCyTnpSe6ZYqYf+ORpXPT2lt6T61tTXibD/ONxha3y1rZesbiXb2eB4p2ylYJ+00qrrJQErI=
+X-Received: by 2002:a17:907:18c6:b0:b54:2c82:40f1 with SMTP id
+ a640c23a62f3a-b542c8241bbmr94793066b.11.1759932054694; Wed, 08 Oct 2025
+ 07:00:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251002145742.75624-1-philmd@linaro.org>
- <20251002145742.75624-7-philmd@linaro.org>
-In-Reply-To: <20251002145742.75624-7-philmd@linaro.org>
+ <20251002145742.75624-5-philmd@linaro.org>
+In-Reply-To: <20251002145742.75624-5-philmd@linaro.org>
 From: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
-Date: Wed, 8 Oct 2025 16:58:41 +0300
-X-Gm-Features: AS18NWBlZBlQ_ooaz6BrC9frnCFGO2qn7kgdxIpU9ZAMjnkM6wf8LcP_f9u6EWw
-Message-ID: <CAAjaMXZo4NER2tjOZdZSbH0YfuBuuE8DGsFWm5jUXeP0D25fWw@mail.gmail.com>
-Subject: Re: [PATCH 6/6] target/sparc: Reduce inclusions of 'exec/cpu-common.h'
+Date: Wed, 8 Oct 2025 17:00:27 +0300
+X-Gm-Features: AS18NWC0r1CfGpCOlAndQZ9y5ukBp4J5WxxvLPUGkg2KvH2wUbjmqMI3mSNwSpk
+Message-ID: <CAAjaMXbZfGF2V5e=YRnXDTwNTk4b3iaJkaHE=EVxRVB=OZ8eRQ@mail.gmail.com>
+Subject: Re: [PATCH 4/6] target/riscv/monitor: Replace legacy
+ cpu_physical_memory_read() call
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  qemu-riscv@nongnu.org, 
@@ -80,15 +81,15 @@ Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=manos.pitsidianakis@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::634;
+ envelope-from=manos.pitsidianakis@linaro.org; helo=mail-ej1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,12 +108,19 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Thu, Oct 2, 2025 at 6:00=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <philmd@=
 linaro.org> wrote:
 >
-> Only 2 files require declarations from "exec/cpu-common.h".
-> Include it there once, instead than polluting all files
-> including "cpu.h".
+> Commit b7ecba0f6f6 ("docs/devel/loads-stores.rst: Document our
+> various load and store APIs") mentioned cpu_physical_memory_*()
+> methods are legacy, the replacement being address_space_*().
+>
+> Propagate the address space to walk_pte(), then replace the
+> cpu_physical_memory_read() by address_space_read(). Since the
+> monitor command are run with a vCPU context, use its default
+> address space. As with the previous implementation, ignore
+> whether the memory read succeeded or failed.
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
+
 
 Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
 
