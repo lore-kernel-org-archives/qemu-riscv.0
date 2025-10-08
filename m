@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF79FCCD183
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 14:03:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5988CCA472
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 14:04:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v6UkM-0003iy-En; Wed, 08 Oct 2025 10:02:26 -0400
+	id 1v6Um1-0004YB-Pb; Wed, 08 Oct 2025 10:04:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1v6UkD-0003iA-T5
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 10:02:19 -0400
+ id 1v6Ulv-0004VW-Jw
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 10:04:04 -0400
 Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1v6Ujv-0002FR-5D
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 10:02:16 -0400
+ id 1v6Ulg-0002QM-MU
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 10:04:01 -0400
 Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-631df7b2dffso2297727a12.1
- for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 07:01:57 -0700 (PDT)
+ 4fb4d7f45d1cf-63163a6556bso16137055a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 07:03:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759932115; x=1760536915; darn=nongnu.org;
+ d=linaro.org; s=google; t=1759932224; x=1760537024; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d10kDY2QyqMrSt0stL7AQX3Nak8ym6sbq2doRpi1vk4=;
- b=XuDZWmwLMG45hdXj5ZY8zHohOMWZZlNukE/LzVV+x2I9wuew9JVXXHkbBIGNo2XiMs
- 3HPUbapsunWumOf0Z02WrOkVk4tmwzRahCLhIIp5VBBonFmwRga9F9bQvQeGKJlEG0vb
- 3Kl7DdRuGrtWvL/SzNxDSHLUFXVlD1t6e9PUbKXLDySkDO/MRRMNN/3k1XrqbGBCWO6/
- uKFz365+AfLaOTAban8VdEw6QsR94OnF+CvbruUP56hw7DqlUjmxqDFiVcgk2/tpgF4C
- sspZWU0W9ThlhcIYHwyoZJh64VkV+sPYH2s9Vq9sYkZ7dOV6v1cdHNJ91cMxJQrnkCic
- CUAw==
+ bh=Z0olP/2AkIkCDMmo015JOmyflycM0in2cEbggeW9smg=;
+ b=aibz1kcSNWuMqoSPtrvsErqg6MXjWG/k2G0pas2S85u6r98/ROnmn+Fk0NFTY4q3Ie
+ 9lIwUPXBZiHosNnzYYs6ZVsYEsxRXWn5UKXKLESymr4QizcVZHsgQdThK//1dpZodiuI
+ l40T347M0fpJSmVXQvl6xfJaKNtUioVrIHvcymarVVUO96G2hRbMUQ+vqFNP6WDELw9H
+ cEVUR1cNs2TmP9rzz5P/D8omirT6MQ5OPGXYVhJuG8ZLzAflsgX/qRXW1oPa/Ja8TFU2
+ xyZsonp6eSqtOPpHXaWkjy0gwBhUSHMAZFfl8/GgSoiCQJOuPL2Zt62TKhP2X3w6rbz1
+ jGnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759932115; x=1760536915;
+ d=1e100.net; s=20230601; t=1759932224; x=1760537024;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d10kDY2QyqMrSt0stL7AQX3Nak8ym6sbq2doRpi1vk4=;
- b=KoObubzyJpDbOegJGJWaiMo6h+yJJW+F/8u+lXfBuxiylK+Wv13sDde2mNSMKv4n01
- 6YBjMuvt+l0zB+kXEGLYWE+eXiVWNyyhKjDFI2qKP1EqpT2VEQf0/i9CQJrfnACHmAkb
- CkO/qJ9ZfZIMVYFPOF0IViwizaieknSsNtFR5f/gWT3MTxoH6sGiWVYCBR/SY2DJeRtf
- +/2YSgSTNABNsIJ7vjL9BXYehpS/D+Wx3RGLP0uxy/wJoyiQlRoluUuBX92Du0YGObQF
- B09uhxNNqBSQdLxcdQcQA3MtYJ/HM3H0GNs9TXZK2+GVUNURRNlgBZyX8ZJodBt2fEAb
- GSGQ==
+ bh=Z0olP/2AkIkCDMmo015JOmyflycM0in2cEbggeW9smg=;
+ b=s7JKORInTZcApdnL/zE53DT8foiHEqK89EbUpgrFNFNhPNFeSp5uCSOiUla03/0l/w
+ T9w1FUZTuFx5ANTHyI7c/hoxGQJUfpPVyVqdpMPpgiPx3ZSOuPyut0j3yLhgyohPY7Kw
+ j3rSFzM6nVHMfCnUTKvf5QxSTmc1e1KeZ/VXjnqas6qHamfP6bXWC8ARdg5dq9/ihUk5
+ 6b7TqmA4di49Rd/f+i5E4CEpHGdKsZC6e2zgXHl+15cFKfnYV06lbUY03fStXzkl8NRA
+ xIaJ3QuukSI5ICAPq2OsQ0gskf27e4XdRgoXQu0ywYeJtgi1K1XeTE5TmEi26w2axsMi
+ /2kw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+LL719xTCTn2ctU9RTsIeQEAj2H0vqzObKXHAkfNeGGEvP159pcUk5H0x/vdAdqZldzAdgdIAX3xx@nongnu.org
-X-Gm-Message-State: AOJu0Yys1efMKRG3KbmiIwAWy5ud1nVKbIfkzjGoCi9dTXR2GfKX5zNj
- re9QzrlyAumUcyrzV5wU5XXqpQu1oBZEQjjK+s2ZiD0Atgyzz7Xvw3+QzElvhn1y4sfhojd1a5k
- xWwNTgDC3yda2c5TSVOpPxcMi9TY8THt8GYRbQX3vdg==
-X-Gm-Gg: ASbGncsFcdnGsq6xuwUDEVNddeuHnn6YwjnidIYz+YWkBtC1mrmY7tTSzspnFSZOJYX
- x2AWP0Bobyjvp5bwOfoDRtOpmwJcNI4krSM7yC8d2Dla+RoRR47sL+UwT/wB3FAlJ1v/2XdggBR
- W707tFgAvsk1csX5YFM4dctPs++4KTv+D4MyJ+uOCRSZ3hq2VZRpjYnho7Uw2h4RXzHuCPuQNuH
- z6f2z6usUiizmv6qxN/5bhpflqj85i4cSdYDD8owmI=
-X-Google-Smtp-Source: AGHT+IGGPQDm58OwiXOMaGn7ys4Kj1un9ZDX1h0/88Z82pj0QUvuV5oK4h7oJ/wu2tnOcZiHQR2YKMd+Q3CX6ztxgyw=
-X-Received: by 2002:a05:6402:50c6:b0:634:c377:e1ae with SMTP id
- 4fb4d7f45d1cf-639d615df4bmr3863732a12.14.1759932107509; Wed, 08 Oct 2025
- 07:01:47 -0700 (PDT)
+ AJvYcCUJt0XH7tKN4E0lVLkz3Fe1ChSSlxWiil8vey0yk/aUDDrFOsWgdHiQaaGtQORefjfkFt2cPqjSshFX@nongnu.org
+X-Gm-Message-State: AOJu0Yx2qbeLJ0frHEMKIxoG0ca0IVM1pjGNXVlkIPdNPm69+yYNm2Zs
+ STsaOOAU49b5KgQSOD799xLi83JkBGrHfhztVm9jOpZ9aNmA3trjWEReezUowPDZFaC24eyv0Zs
+ lFYR3ISV+zjN1gZXKWInB1ANo0i0oxosbSRboowTXlA==
+X-Gm-Gg: ASbGncsChYpYVh4m0KqIPcyb5b6tR/Zp0aZuuEF5tPC1/5rIzjuftJfbgu3deave0K0
+ 2bX1tsAqGVdQNvW4GRaJBY85AjnD/Ua0zB/m7QvSVO/x5i0p3ug9E0CcyRm7L7cw1mCQxvjkeYY
+ 7GZtYUuTIl4VwB2+/aYXDm8PPZyazjXOIFZ/gB2v4uSbYxUIKnIIXG8tknFvWHZ6Ffac2JiyF5N
+ rRWTKSBPjN2VJsF4F8iuBNtlVLmmcwG
+X-Google-Smtp-Source: AGHT+IET969eLX4reQPZNvdzkK62iF3KSCeI2CYxfVPVUF046E/jybKgqgDgNh8RA5mk6xUUocjg6SVW2lo30nq5ktg=
+X-Received: by 2002:a05:6402:1ed2:b0:639:d9de:3c59 with SMTP id
+ 4fb4d7f45d1cf-639d9de3ddamr2690009a12.5.1759932224120; Wed, 08 Oct 2025
+ 07:03:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251002145742.75624-1-philmd@linaro.org>
- <20251002145742.75624-4-philmd@linaro.org>
-In-Reply-To: <20251002145742.75624-4-philmd@linaro.org>
+ <20251002145742.75624-3-philmd@linaro.org>
+In-Reply-To: <20251002145742.75624-3-philmd@linaro.org>
 From: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
-Date: Wed, 8 Oct 2025 17:01:21 +0300
-X-Gm-Features: AS18NWAnN49isqZQsRSSRUNiEfxtfYZex54R-7BARcsPyfBpsRvIMQLQF_QMB8M
-Message-ID: <CAAjaMXYg6zpoj7Mp3MP0rYSUX+_RZQeamkxcyxqGqnfjG77PEw@mail.gmail.com>
-Subject: Re: [PATCH 3/6] target/riscv/kvm: Replace legacy
- cpu_physical_memory_read/write() calls
+Date: Wed, 8 Oct 2025 17:03:18 +0300
+X-Gm-Features: AS18NWD5b0CqjAHLEmoCaNuUxfgbmOMV-LNi6IphdCC3_xSvOrkzk5qMVdHYhfA
+Message-ID: <CAAjaMXbKbAv8EuXOnOp5rWCuYpsP-jZc7UrSFFufKXTg2vA1Kg@mail.gmail.com>
+Subject: Re: [PATCH 2/6] target/i386/monitor: Replace legacy
+ cpu_physical_memory_read() calls
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  qemu-riscv@nongnu.org, 
@@ -89,7 +89,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,10 +112,14 @@ linaro.org> wrote:
 > various load and store APIs") mentioned cpu_physical_memory_*()
 > methods are legacy, the replacement being address_space_*().
 >
-> Since the SBI DBCN is handled within a vCPU context, use its
-> default address space. Replace using the address space API.
+> Replace:
+>
+>  - cpu_physical_memory_read(len=3D4) -> address_space_ldl()
+>  - cpu_physical_memory_read(len=3D8) -> address_space_ldq()
+>
+> inlining the little endianness conversion via the '_le' suffix.
 > As with the previous implementation, ignore whether the memory
-> accesses succeeded or failed.
+> read succeeded or failed.
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
