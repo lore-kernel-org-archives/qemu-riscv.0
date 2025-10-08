@@ -4,92 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B1BECCA470
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 14:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 218B9CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 16:05:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v6UnT-000675-30; Wed, 08 Oct 2025 10:05:39 -0400
+	id 1v6WeM-0003xO-N6; Wed, 08 Oct 2025 12:04:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1v6UnR-00065z-FL
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 10:05:37 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <manos.pitsidianakis@linaro.org>)
- id 1v6UnH-0002lB-3N
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 10:05:37 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-631df7b2dffso2306402a12.1
- for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 07:05:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759932319; x=1760537119; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=P89cxlA77MATEenNkyZK5x3G6H8a1M3bZi4QmpYyUI8=;
- b=FU1qmlxYcxHiiq+T8SnDYknWs/8px74+N1Ijfk7cINfcm++VaQ2T8ROW42zT+N0xQ1
- XE0Wb8d7VvHcRLLTIeWDGWTSrgHwEAXJnEPVvc7nTv0+g13kpe8zjY7ROxYCnYh2SC9f
- zlr9bk4Fu9H1WdF7fmqPYordDIeYVja1srRTAyIDlKBA1Yw2vU2j0DpGgFGlDWvZ251C
- aVlNTMme0YB1cjdIbDTf9+7rtAj9QUIDUxgvfv3lQAHPiH3ShyGBdAX5p+HHhdTuBnoV
- ddWAmMU7YhYG0qPMcYXIZBmzJv8fe2Evi/x+0R3Xq9WE3p2uVYgWJ9OKZo5FfzUR+0/i
- 5kuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759932319; x=1760537119;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=P89cxlA77MATEenNkyZK5x3G6H8a1M3bZi4QmpYyUI8=;
- b=ldPY8WKjk9T4N+G4WmQE02VlJ3pUP9Ucu1Hiz5BSDg3fm89DTb6KeX332An9bciXSJ
- UVpZV2GthK3uUCzb6fkmnfoPa0YVwHaUdroAVqDED20ynyDJXFeqTUxjhfgGK53LqK0l
- LZ2On/TWWOe3JlO2OyikaA2Yy/i8oiRkUpEB9NKAwRf66O2S1LqKA1gD16NHCApC4rR9
- t1q4wCK1O2L+1obWSX3nYs/vg0g4W/h2Hhzms90nqY8lN3IyZhKTlk16RNdmKD2DFwT3
- EmdlqryN6s9z/FF8Ch0JJz/cPvDlO4ELHx2C1NTfgcP/nhwCSl1n07IVeor2lq2yv+A1
- T4Zw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX5xIcp3OsTO5aJsjeCUHzHhwy4kjQATgcOEHy1Mi4UCAEfYkkPoK3AbmlbbmfDEQKwbf5USdl1DFMn@nongnu.org
-X-Gm-Message-State: AOJu0YwdifW9rur9FFTZcqqVZAFqj7PQPxjRvhYjgG4Y74J7h++QnC/A
- vJzibbjQVyS96CF4be2cPwRdC4554uncw71942n5kfdCb4d+FFWvZCqBEWJ1K1RT7peLSXKNz6B
- SmQ+tTQ7arMYjmWVr85TkzdbMc/pUc0AAn8dDF/ceYA==
-X-Gm-Gg: ASbGncuQ6ZoM1TNx/kP+Pt6hd9EK8XGxaa+IvbAk0ceQIeItLrM9j5oqbM4ucKmT+ND
- 9JTCZuUsboztNgFjI1aG/CJAynX6wYyeLa34LjYv1kw2q6EZ4NvSAlvahNwownKd6HbR0ApgNI7
- YIf/KrIU3K7Et/yBqeXMMDbbgvc72EO8ozBq7oiGxJKs7Y3AS9YyoHk3vzPSJluXIN69VpnR/j+
- lHC7p9xZcnnyY1SEHC5CSCH3P+duCEOM2ec48y/3Jk=
-X-Google-Smtp-Source: AGHT+IH0MXTsk0fH6+bAbSMBxQemeTj05+vAQ+WHjQ/s0L2VhsLkelz+1BKEkWLCKTDFNrxDZT4M4BviCbPNHBqF60Y=
-X-Received: by 2002:a05:6402:1a4d:b0:639:db35:62df with SMTP id
- 4fb4d7f45d1cf-639db35684emr2199481a12.3.1759932319199; Wed, 08 Oct 2025
- 07:05:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1v6We6-0003mU-Hq; Wed, 08 Oct 2025 12:04:07 -0400
+Received: from mgamail.intel.com ([198.175.65.10])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1v6WdO-0002YB-DI; Wed, 08 Oct 2025 12:04:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1759939402; x=1791475402;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=e55a8QXCQGSYqbY/djQCfDfsHqvtC7EocpTiLBH3zI8=;
+ b=lVseb1qxq5FKKsHzaOyAas+7rG7he0vtvoyCRuIEH2NcplV9N5Gsbdy5
+ g+4XwJefKcAwJvrTWQX+uJPtvhtbxkguSyVDBiXVRlnVsyjSV8V0MeQYY
+ 9esrc83x6s+Tqak2QywWK79grb5FiYAHVuGkBhXzMN2U3fCG66Ms7/p9Y
+ Ke2o0GC3TWvX5A99VckDO8cKND6tC+F8n9MJwBiXVdS2jf+okABXyUVP2
+ tJ99QYyUEuDD59hDc9rD88eCDJkVkH0FdRGfA4Y8ZZClxz68eP4tBNDc3
+ HqPWmfB/27XWTrNZo9xxNpKvuc1NR2eUiY3WeF3povMXdeyS2GVLwLjVZ g==;
+X-CSE-ConnectionGUID: YSOcSwYCTtGUUDl9Cw/0CA==
+X-CSE-MsgGUID: p9vvBNSsT+OIpD3hu9/uXA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11576"; a="79575313"
+X-IronPort-AV: E=Sophos;i="6.19,213,1754982000"; d="scan'208";a="79575313"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Oct 2025 09:03:05 -0700
+X-CSE-ConnectionGUID: 7IzIit4qTxCpOSXBMBV8jw==
+X-CSE-MsgGUID: /UlXEHqPQ/S5JIefN/FRnw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,213,1754982000"; d="scan'208";a="179600673"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.39])
+ by orviesa006.jf.intel.com with ESMTP; 08 Oct 2025 09:03:02 -0700
+Date: Thu, 9 Oct 2025 00:25:05 +0800
+From: Zhao Liu <zhao1.liu@intel.com>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Peter Xu <peterx@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>
+Subject: Re: [PATCH 21/22] exec/cpu: Declare cpu_memory_rw_debug() in
+ 'hw/core/cpu.h' and document
+Message-ID: <aOaQYd12ShXmDw0V@intel.com>
+References: <20251001150529.14122-1-philmd@linaro.org>
+ <20251001150529.14122-22-philmd@linaro.org>
 MIME-Version: 1.0
-References: <20251002145742.75624-1-philmd@linaro.org>
- <20251002145742.75624-2-philmd@linaro.org>
-In-Reply-To: <20251002145742.75624-2-philmd@linaro.org>
-From: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
-Date: Wed, 8 Oct 2025 17:04:53 +0300
-X-Gm-Features: AS18NWA_LsS05ve41Qv5r7SlMFJLS5-r5qHjMvyQyMIaZwBAeBuUvtmRInf_-Bg
-Message-ID: <CAAjaMXa70ZosRzVz0OMQDhYCWOM45wbbsUmwRCuCfMejivJ3DA@mail.gmail.com>
-Subject: Re: [PATCH 1/6] target/i386/monitor: Propagate CPU address space to
- 'info mem' handlers
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- qemu-riscv@nongnu.org, 
- Max Filippov <jcmvbkbc@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Artyom Tarasenko <atar4qemu@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=manos.pitsidianakis@linaro.org; helo=mail-ed1-x531.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20251001150529.14122-22-philmd@linaro.org>
+Received-SPF: pass client-ip=198.175.65.10; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -47
+X-Spam_score: -4.8
+X-Spam_bar: ----
+X-Spam_report: (-4.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.442,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,17 +90,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 2, 2025 at 6:01=E2=80=AFPM Philippe Mathieu-Daud=C3=A9 <philmd@=
-linaro.org> wrote:
->
-> We want to replace the cpu_physical_memory_read() calls by
-> address_space_read() equivalents. Since the latter requires
-> an address space, and these commands are run in the context
-> of a vCPU, propagate its first address space. Next commit
-> will do the replacements.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+On Wed, Oct 01, 2025 at 05:05:26PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Wed,  1 Oct 2025 17:05:26 +0200
+> From: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Subject: [PATCH 21/22] exec/cpu: Declare cpu_memory_rw_debug() in
+>  'hw/core/cpu.h' and document
+> X-Mailer: git-send-email 2.51.0
+> 
+> cpu_memory_rw_debug() dispatches to CPUClass::memory_rw_debug(),
+> move its declaration closer to the CPU API. Document.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
+>  include/exec/cpu-common.h |  4 ----
+>  include/hw/core/cpu.h     | 20 ++++++++++++++++++++
+>  2 files changed, 20 insertions(+), 4 deletions(-)
 
-Reviewed-by: Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+
 
