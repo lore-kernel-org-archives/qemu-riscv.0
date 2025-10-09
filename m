@@ -4,105 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32F7CCAC5BB
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Oct 2025 16:30:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 634E4CAC5BB
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Oct 2025 02:38:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v6X2l-0007Yh-Fk; Wed, 08 Oct 2025 12:29:35 -0400
+	id 1v6gWP-00037H-SI; Wed, 08 Oct 2025 22:36:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1v6X2e-0007Xc-5Q
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 12:29:28 -0400
-Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v6gW9-00031c-RB
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 22:36:34 -0400
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1v6X2U-0007SW-LR
- for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 12:29:27 -0400
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-42f8e93c54eso136925ab.1
- for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 09:29:12 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v6gW5-00081m-2N
+ for qemu-riscv@nongnu.org; Wed, 08 Oct 2025 22:36:33 -0400
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-62ecd3c21d3so705346a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Oct 2025 19:36:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1759940951; x=1760545751; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=SGCrKoZ3SyWimYoZQ8dNyyH+rUrdr46H9MVfr0Ark48=;
- b=V1VB2Oc7kMyfB1mB5DqSSX/hp90+YgHBA0Xwh5m8B5x6Ryy+ZMKQkg1BVwZbQJhGsz
- s1SCr8ePJiC53wSZXrNSLd8c08TAAGjQQHYoOXNI/x3Ibv8zxQl2yyqeiiSHxSMckjQa
- R/c0ihV4ohM6JYUE50qUpg8hkofRkOTyGSo/Jax1Xw7If9Of5SDDLWKy07JYQed68lZB
- VxkopAjAhZHZ15duvwJfZHJ4w9X3b5F1p99FtCKjhOcrzp/5RH8brb2ewu3tmshJh17k
- o8ceQII3kNvprqooCcmfEfPLAhbFCrEAehnUrlRjYLoFjM9EDd3ln2NmkEniJwI4UbKV
- hKaQ==
+ d=gmail.com; s=20230601; t=1759977382; x=1760582182; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UETsUmCDWDud5d1hzPTaPIGH31yXBsuYA41Kk+ARFNU=;
+ b=kgDJKADWRP2QxCZ/RJYUPnNDqfMn2W/6nYlpzCfxw+XItriAJO6jtrNsowwjV1Z7jg
+ nzO2wVPGoQRabMVFrnaDL/xGDH5snGB24/qYIm3tdVaY8aINZofW0pgVQTKhFdtKTAQ/
+ i5Jj5q0Vo8Z9kp3tJq+eS1p9RyvOwM+mFhChZNAEXMb1EdEEWXt2VP9E/FEF2WfqFiN/
+ 2OmM4SAmdMK5UcSJLOvwKZhwdMLto8czAYT/Qno8UMZCE/vvDu7QyTvhAAzTE3wLYs3p
+ 6yzNl8pMSvhRy8EvwjDuUgUhWEx1cBZSMW/uZKf8OdvX5K8YKibgfaDTzsXKk/266g3i
+ NDEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759940951; x=1760545751;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SGCrKoZ3SyWimYoZQ8dNyyH+rUrdr46H9MVfr0Ark48=;
- b=BvjF05oqpImzybqrej0LlTFDzwcOoRFwtr1dZFy4Wbf8y1FJWYjCBrk+2abMG4T1CE
- RLNL51GgSxF7mLAPqy0xFiHjmq9RIv1BFzyEQcdTqR0uUowuPraUiXepVq6GZ6N4AdfV
- nhib9c3csTzGFWs4Cvk+ujxbW443b/zKyBfG0C5H/guIEsK4JPSFTdt5oeGaELvRjyK9
- T3EoMUBITWOioCjCjAj+1YvuL8k3tODyD99IGOimMZgIezD4hqTTJwbPkJ9sNjxsxd1y
- sfi32hiZOIDUuWcmqGnffLgFj2/alIy88onXTGuZuLDTapfcWlU1WQXQ9Gb6dUnN11ys
- BPPg==
+ d=1e100.net; s=20230601; t=1759977382; x=1760582182;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UETsUmCDWDud5d1hzPTaPIGH31yXBsuYA41Kk+ARFNU=;
+ b=wVnjHZPylj6K2rvdzHI+yiQBXD1ARXKl+peNUz9XGIFpivhSVt8vGst3opOh5sP4le
+ C19jDb8ofLmN+AoCOpqKUv9DORIpC51SjNSTaRj5AB5zp0zPnTDjUZXii0aa+7crL7zx
+ gAMTdmxdCunF0utD+5LtuQsbynJ2bgZt687PWCaydq9LNgJyoKmcAac6l1CihtITXX7M
+ 8awXpLuPZgbnCWvJk9g9MnedS/Fxex0flrJtNU4RPKCyUNslCs53WFqcEzKXAH0S/h6E
+ uNJC1C1cQru5o7ikAXy805gNEkS7qWLYReCmtmOz44ginYskP1KrXAjD4PdTcZTN8eJI
+ PYtQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWlNFLR8e/4Be7GezgY+E9gT91RH3K9QAAr/bpLQm3OcHkJNDaWhibDjTcHusbsFfXKLRJLoX4q0iJR@nongnu.org
-X-Gm-Message-State: AOJu0YyXANpehNLB4N9AiyTepw8au9MuHEj7vly0UJhwoiEtGcRUOG5r
- aiONdrIuM15qVtGSqIG3PE3yjwxPPXJ6IR/bEHBfbw3g48cCLpsBk6Q8PqmzY6XkksQ=
-X-Gm-Gg: ASbGncuK+bwLjW5mRvCq9J5cdYqMQBWZzvfaIZ+kEDRvkL04PyjWQCUhdyoMkizmiV1
- zbbIUQqMC2yI7Rht8/886zXBQalfDadZBwnyQPH8jL6AcAevOqPKgvysD8TYtnO/XpWMZYhUIR+
- 6G2a5eZeeSBHmQLtV0Zd3i0NjpGPB4a/K/Sq/XgjilVZCSUrMBsvA1krV3GkxTFCGwXmHSa1snh
- ubQjFwcGcjF/R40Gdanc1bTwmRrcI6AZYjSsDy77+7xBXDn0pXRSvghqfFAdgS3xmMw2Bm0F3H6
- ZlGqH7ibM5CsAHIcpCM1b0/D2OxsUwgJH51MJa3o6hMmthNA3ofobkCdpRycC/yTcPgvxf+w7xg
- dmN60h7A0EGGhXFXDCycSZlGRATdAHiLwApkGenFvWjo+6JUx
-X-Google-Smtp-Source: AGHT+IFnNVr7p4Ri2YprEd6Qzm6yZMtzB1axGPgJVrk5CTzM+uM6dsNRed2Gw/60wJdbFLsVj5viYg==
-X-Received: by 2002:a05:6e02:178f:b0:42f:8da6:86c3 with SMTP id
- e9e14a558f8ab-42f8da68abamr17812185ab.2.1759940950779; 
- Wed, 08 Oct 2025 09:29:10 -0700 (PDT)
-Received: from localhost ([140.82.166.162]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-57b5ea300f7sm7148800173.16.2025.10.08.09.29.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 09:29:10 -0700 (PDT)
-Date: Wed, 8 Oct 2025 11:29:09 -0500
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, kvm@vger.kernel.org, 
- Aleksandar Rikalo <arikalo@gmail.com>, Chinmay Rath <rathc@linux.ibm.com>, 
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
- David Hildenbrand <david@redhat.com>, 
- Marcelo Tosatti <mtosatti@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Thomas Huth <thuth@redhat.com>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>, 
- Aurelien Jarno <aurelien@aurel32.net>, Song Gao <gaosong@loongson.cn>,
- Weiwei Li <liwei1518@gmail.com>, 
- qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>, 
- Eric Farman <farman@linux.ibm.com>
-Subject: Re: [PATCH v2 0/3] accel/kvm: Cleanups around kvm_arch_put_registers()
-Message-ID: <20251008-3120f4e8a25446b5a05aaa7d@orel>
-References: <20251008040715.81513-1-philmd@linaro.org>
+ AJvYcCWn0N5I4AlCCfE19rqBS6CaMgWoMHq7khg98EAyehMtHTvBDuUld380kWJs4uGw1WlJKczDmOH8WYVy@nongnu.org
+X-Gm-Message-State: AOJu0YyNty3Vx47KtKi6luPWHzEWnl3FQBROse9nXraCN8Ea0BFAoImk
+ 6i0oSXGnCMpkuWP/W7pqHOK1J6Bsc5pL8ZwjRI1Gmy503ZNqHAHCKygCWTaJ/VEFrE9HAjllVvH
+ 5fh0Mfh8igNPRXuioARuhll67zPqCyUc=
+X-Gm-Gg: ASbGncuTnRiApY8fsn5xthZYHeRmEYN62VVx/wYy5K00UnUnwp5PzJ5KgqMH+PHIwGM
+ yODYIMq7+a3cWGYahfPxHt0J23ncR+e/jhhjtepFyo1zH8hi4dJr31hYp7j2nJnG+ahJPzlYES9
+ GM12jszOgtjPPV5uPCr312yq+auMrJdDWKW2a4Hm6BwP8u2+P/jmEp1T+md3T+ovEwNonVT5FyY
+ iWdbIWOHO6V0CpqdcyzoNFWEK4JiboLmbE78YWHCM/aUuCCGn7otQw00ijBzGdm8eWtXYJE
+X-Google-Smtp-Source: AGHT+IFKNpfeQwiA34dne45x9N494UKYJX/v5QJlmIbEWfU83OtP5xPqV5OMysBad41vNI9HMpPYhF63fU+WSQknjSM=
+X-Received: by 2002:a05:6402:35ce:b0:634:c377:e188 with SMTP id
+ 4fb4d7f45d1cf-639d5b57b06mr5528563a12.6.1759977381489; Wed, 08 Oct 2025
+ 19:36:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20251008040715.81513-1-philmd@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
- envelope-from=ajones@ventanamicro.com; helo=mail-il1-x12d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250911-timers-v3-0-60508f640050@linux.alibaba.com>
+ <8b282db4-b49b-4199-94e9-35d7cc296b8b@tls.msk.ru>
+In-Reply-To: <8b282db4-b49b-4199-94e9-35d7cc296b8b@tls.msk.ru>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 9 Oct 2025 12:35:55 +1000
+X-Gm-Features: AS18NWDB6WnlsCYd_SqqwzB7sCGutQeAHdfo1eS10rP8wa3KJfXaPqwVHrJoqYE
+Message-ID: <CAKmqyKMz+b+MUxRLSuDRM=cDH9XMiJs1+PF5WxTnXNQgS3nnAw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/4] Fix RISC-V timer migration issues
+To: Michael Tokarev <mjt@tls.msk.ru>
+Cc: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
+ Peter Xu <peterx@redhat.com>, Fabiano Rosas <farosas@suse.de>, 
+ qemu-stable <qemu-stable@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x533.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -120,34 +105,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 08, 2025 at 06:07:11AM +0200, Philippe Mathieu-Daudé wrote:
-> Extracted from a bigger series aiming to make accelerator
-> synchronization of vcpu state slightly clearer. Here KVM
-> patches around kvm_arch_put_registers():
-> - Move KVM_PUT_[RESET|RUNTIME|FULL]_STATE to an enum
-> - Factor common code out of kvm_cpu_synchronize_post_*()
-> 
-> Philippe Mathieu-Daudé (3):
->   accel/kvm: Do not expect more then KVM_PUT_FULL_STATE
->   accel/kvm: Introduce KvmPutState enum
->   accel/kvm: Factor kvm_cpu_synchronize_put() out
-> 
->  include/system/kvm.h       | 16 +++++++------
->  accel/kvm/kvm-all.c        | 47 +++++++++++++++-----------------------
->  target/i386/kvm/kvm.c      |  6 ++---
->  target/loongarch/kvm/kvm.c |  8 +++----
->  target/mips/kvm.c          |  6 ++---
->  target/ppc/kvm.c           |  2 +-
->  target/riscv/kvm/kvm-cpu.c |  2 +-
->  target/s390x/kvm/kvm.c     |  2 +-
->  8 files changed, 41 insertions(+), 48 deletions(-)
-> 
-> -- 
-> 2.51.0
-> 
+On Sat, Oct 4, 2025 at 5:19=E2=80=AFPM Michael Tokarev <mjt@tls.msk.ru> wro=
+te:
 >
+> On 9/11/25 12:56, TANG Tiancheng wrote:
+> > This patch set fixes several timer-related migration issues in QEMU's
+> > RISC-V implementation that cause timer events to be lost or behave
+> > incorrectly after snapshot save/restore or live migration.
+> >
+> > The problems addressed are:
+> >
+> > 1. ACLINT mtimer time_delta not migrated: The time_delta field in
+> >     RISCVAclintMTimerState was missing from vmstate, causing incorrect
+> >     mtime values after snapshot restore. This resulted in guest time
+> >     appearing "frozen" until enough virtual time elapsed to compensate
+> >     for the offset error.
+> >
+> > 2. ACLINT mtimer timers array not migrated: Active timer events
+> >     scheduled via riscv_aclint_mtimer_write_timecmp() were not being
+> >     migrated, causing pending timer interrupts to be lost after restore=
+.
+> >
+> > 3. CPU stimer/vstimer not migrated: The S-mode and VS-mode timer
+> >     pointers in CPURISCVState were missing from vmstate_riscv_cpu,
+> >     causing supervisor-level timer events to be lost.
+> >
+> > The patch set introduces a new VMSTATE_TIMER_PTR_VARRAY macro to handle
+> > migration of variable-length timer pointer arrays, and adds the missing
+> > timer fields to the appropriate vmstate structures.
+> >
+> > Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+> > ---
+> > Changes in v3:
+> > - Remove 'include/' of the subject at patch v2 2/4.
+> > - Added Reviewed-by from Peter Xu.
+> > - Link to v2: https://lore.kernel.org/qemu-devel/20250910-timers-v2-0-3=
+1359f1f6ee8@linux.alibaba.com
+> >
+> > Changes in v2:
+> > - Split VMSTATE_VARRAY_OF_POINTER_UINT32() into a separate patch,
+> >    and define VMSTATE_TIMER_PTR_VARRAY() in riscv_aclint.h.
+> > - Added Reviewed-by from Daniel Henrique Barboza.
+> > - Link to v1: https://lore.kernel.org/qemu-devel/20250909-timers-v1-0-7=
+ee18a9d8f4b@linux.alibaba.com
+> >
+> > ---
+> > TANG Tiancheng (4):
+> >        hw/intc: Save time_delta in RISC-V mtimer VMState
+> >        migration: Add support for a variable-length array of UINT32 poi=
+nters
+> >        hw/intc: Save timers array in RISC-V mtimer VMState
+> >        target/riscv: Save stimer and vstimer in CPU vmstate
+>
+> Am I right this stuff is not back-portable to previous qemu
+> stable releases, as it introduces new fields into the migration
+> stream which, which can't be picked up by these releases?
 
-For the series,
+Yes, I don't think this should be backported as it'stargetting migration.
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Alistair
+
+>
+>  From the description it seems like all this stuff should be fixed
+> in previous stable qemu releases too.
+>
+> Thanks,
+>
+> /mjt
+>
 
