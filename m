@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F62CCD18F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 15:53:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49C30CCA476
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 15:53:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v7FPL-0004DN-2m; Fri, 10 Oct 2025 11:51:51 -0400
+	id 1v7FOu-00045Q-7Z; Fri, 10 Oct 2025 11:51:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7FPG-0004Cg-Ki
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:51:47 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7FOs-00043g-CC
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:51:22 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7FPA-0002c4-G5
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:51:45 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-46e2c3b6d4cso16366165e9.3
- for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 08:51:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7FOg-0002L7-87
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:51:20 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-46e34052bb7so26301585e9.2
+ for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 08:51:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760111492; x=1760716292; darn=nongnu.org;
+ d=linaro.org; s=google; t=1760111462; x=1760716262; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/UOAMuWHFSXqGALj87y4eMXTkQjeecfZopjSv8ekkA0=;
- b=C2dl8uqVBkRhBorYUhl3RzoLheI2Yh7NWl5UzqL5dbnrl/IZuUdHSkO6zeLIYAnhlB
- s5x6VscTQ6/zBpcwMvRYo9WWuayimMNK6KMwbnUgpagDpy9LjcqzLWOtTBkSK1quFLe1
- ea4+bXgsBrmITMdMVGRgR+wcXB3eWqH6/nHq5lh867M5C6uF5cmVKqBcyEedvQLmKYtQ
- 1fkRoYD2+QqTRr89oZSNwOnJzUxI2pQvEcF4tGblUL4QTIXWT/ef/0bsUxT1zmLEswGF
- njnMFEgiZXrqpnZOHygrWj2sVe8GUtTiqXL3Q/HTOttqjnLE3fdlOZIeirR0M4U/gipo
- 8+Ow==
+ bh=lOgvEperfmmhjYR9nWj6nkwOWDN1Ec965EjpgT7isgU=;
+ b=JRNkYdA9yGV0mg1S6NF/w0F4BVWsiybCwJo/NmG3D7gL65amWnJ5ZrUfWZhEbI18gM
+ /7cbaXDqVP/FzpaDr0LCgF8QjFpXDx4Ur9uz2x6hQyZBQIdeSu05qqS7REi5V4NEv8Us
+ XHFn584BM3YejF7RzwB6HY/ar+/khEZcP+nJSALZURZCKdSTT9lXr08npDe/Is9TN8NI
+ FV6cswM162+Ls0Xp0ktSuuNU1ENkY423Nhvsnf8oZk9D4rqPBakAyxq04vgnUmbXBND/
+ L2rNJu41s/m6J1LpyvYG76z5dEG0GN77Gs+VoC7iknwiVWLhxI9xLc3UMvBHUsI9z/uW
+ ofLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760111492; x=1760716292;
+ d=1e100.net; s=20230601; t=1760111462; x=1760716262;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/UOAMuWHFSXqGALj87y4eMXTkQjeecfZopjSv8ekkA0=;
- b=AlEb1SxsUlAaMhpWZYVkXBeFWhx5MNpkP2LyNGtvEgVrVKar8UEjzSf2L90tfQQOTc
- k2cGgI+Wa6Ife1InZaqjU88PeFyXHOjLcnrAyjznGEaZdckYykF434wIY86lBuuePIpI
- 860QobloHro9NopS5Q2oSoUgtk91GkUUTq/mHjmRP3Vd4lIuM5SSgoa5dOizBJGZmNAx
- YVt4URgDCDiF52mI4hFhCyz3Z/NqMRttAsdgnJZjvqMJn98jkfB6sWbJ4CdgxecY4KJL
- Mz+dS4Ac1vkBP4lG7pJFgx3ri8KnfFPyBo5zvKdfpSDDrxg5fM9hRT0HOEVbJfv/1Blv
- 3aBA==
+ bh=lOgvEperfmmhjYR9nWj6nkwOWDN1Ec965EjpgT7isgU=;
+ b=CFDVlGI1uGwAUjpfDStN+WvRed+F99AIObzih2AyJ6jNoZCh+t8JJt2RBEVA93izUq
+ 4SfGxpVfiEWUZLD54WJ6zOmITDSUzLbFcIEo6cBdMGXT29n2z52tfghOdTqu/RcgOdTB
+ I8gAC/6RHKZIpdr+KkU3UhJh6wWZcLdHoCtHSGCzL1h1cUVeeKkOUP9H2Pxu8MFsi9cY
+ BEgweJaNBvh1h48VT1dO2zogqqwYI7J+S2ha61e9P4Af393noB3tKpKRUAXvlgQ5Mz8F
+ DKWyCReC5wSuYgwrHUTVsMW8MaywYiVOkAi40SIMt5IsDEg3pNGRtBxasp/lhtqNxlIh
+ 829Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVXyicClErwut9BuB0DTRibmDemRHl8oZ4mrgLbZYFpNTv336oUwFKrOupjaAWO0BqqwXd5SpwTBcSv@nongnu.org
-X-Gm-Message-State: AOJu0YxNOCqpzuzqLSTVsRHSl+gRFERXhYY78/ZIDWPG1DhMJDjGWZaA
- bYP58UES3VBczi+9NuL1sWSMzUVo736TDSt2kVS6QSwyebjcWdxvAB19/chAWvgjXDs=
-X-Gm-Gg: ASbGncvM16J/O3ZLfG0f+vsWdeWNPb9H8V/nk152BENivYKh5Z8QYa3aAEtsEk7ndUO
- GR9f6MDqaGPmzQPqsDz/QdmeRmTaVgaX2r8cIe7kbQ+0/orGHPaJ9DuiCLXEsKYBWX9y5Xz08BA
- 9/hzjcpvnBuIIrVhvfNhWBjeDwcVsd4UGqZbRep+fzF5CGYuSXRWQmVRaSRi3T8kDqf80vXxHHO
- Mjud9fAcwUPZrrmGc6rGOo+eWXt18jqfmauR1S7NsU8MHkqXcoG8AdSUp5ejMpR6Din8Twzjk6X
- Wz4CGwQoZXc/NP6J1AGpMdP5hMDDzr6Al4kbDJvpqxerbOY7UlZBW6M1p2EUTqYBqFqy8E23K6B
- +V62Hn7hmAYx60EAXETvG80lX54spz+7XzJdHnzAz6MQWmXxPLeStOK9HSBmTO5iLO0gttxFWNn
- RianAGzG0jcYcesPahPEQ=
-X-Google-Smtp-Source: AGHT+IHDyN6MU4HwLRTS0l4dOb6E5huCUFW4mK9urBDTrxZ9KU8uRu7FSltR0041qcX6du6mQ08FSA==
-X-Received: by 2002:a05:600c:8487:b0:45b:79fd:cb3d with SMTP id
- 5b1f17b1804b1-46fa9b13ab7mr88850395e9.36.1760111492268; 
- Fri, 10 Oct 2025 08:51:32 -0700 (PDT)
+ AJvYcCV6ODA9CP15oHXZR157n8JY3eIez7iGv5adJwPycnZjW58TKET2wwbRJ8p+SH9TAD0nATT496IqtIyu@nongnu.org
+X-Gm-Message-State: AOJu0YyE2QRhf0ccNrJ8PfJrx+O+2B4k9BCdAcP77FlF5z7+gMCLfFo3
+ 1pXtHhuSy5xU6VSbeW84vXAhXcxb8ajz/6xxVGFLvSUyqV4IuISZErzI+7h0A1BP7Lc=
+X-Gm-Gg: ASbGncvemwl6sYHlV0Sy4U1EGVBvqh2DhdljDJ44wS0VZBOcYQpiasEUrV9q872YrJ7
+ 9mEltr6KpbRjEhqGxs/uw9l8fERrRhW93Mi0+yTbt1mijp7V7yxQUT2UHk+vz2Lc6LTc2loE2Bn
+ 1s8B+Yr69xeGgUOV2DdABcUYXIJGZpC+V3IlpwB9QYrbjW/g67c/EAXj0OfLBFhTtnIFubB/pEB
+ D1rmuk9WesiRJYndYNUdZVst9OqFUXMzFN6ICELnhAFa8iocicm3kBDDnHr37VDWt6W8LotkvYU
+ WfE+Ooascx78x2pEF0ZFzHnVVgiKrLHqJWFMYdxRFpg16+b3j42Trk3lQ9CSpqiL8n+qRsXKMmU
+ gIPBcx7ylTpPbV74saou480TNaT4JXCKbdKXMrskyvhTTFlk+nSoVTaq5bzgW2/akGCEpAT27uQ
+ N/uImqwYuELDQ1aBxNSr39/LgB+7ESvA==
+X-Google-Smtp-Source: AGHT+IHIsPjK9jj9sn681SRgOd5WmHBVonNYlP+5Z5ZkdjFFPAE5vJ6AIjx/WJhjnrN1lzAgrKmvZw==
+X-Received: by 2002:a05:600c:528b:b0:46e:5cb5:8ca5 with SMTP id
+ 5b1f17b1804b1-46fa9b164edmr92043975e9.35.1760111462547; 
+ Fri, 10 Oct 2025 08:51:02 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46fb483bcf9sm53312185e9.6.2025.10.10.08.51.31
+ 5b1f17b1804b1-46fb49c4027sm50904555e9.17.2025.10.10.08.51.01
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 10 Oct 2025 08:51:31 -0700 (PDT)
+ Fri, 10 Oct 2025 08:51:02 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
@@ -77,24 +77,24 @@ Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
  Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 09/13] target/riscv: Conceal MO_TE within gen_cmpxchg*()
-Date: Fri, 10 Oct 2025 17:50:40 +0200
-Message-ID: <20251010155045.78220-10-philmd@linaro.org>
+Subject: [PATCH 03/13] target/riscv: Conceal MO_TE within gen_amo()
+Date: Fri, 10 Oct 2025 17:50:34 +0200
+Message-ID: <20251010155045.78220-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010155045.78220-1-philmd@linaro.org>
 References: <20251010155045.78220-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,73 +110,237 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All callers of gen_cmpxchg() / gen_cmpxchg64() set the MO_TE flag.
-Set it once in the callees.
+All callers of gen_amo() set the MO_TE flag. Set it once in
+the callee.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/riscv/translate.c                    | 1 +
- target/riscv/insn_trans/trans_rvzabha.c.inc | 2 +-
- target/riscv/insn_trans/trans_rvzacas.c.inc | 7 ++++---
- 3 files changed, 6 insertions(+), 4 deletions(-)
+ target/riscv/translate.c                    |  1 +
+ target/riscv/insn_trans/trans_rva.c.inc     | 36 ++++++++++-----------
+ target/riscv/insn_trans/trans_rvzabha.c.inc | 18 +++++------
+ 3 files changed, 28 insertions(+), 27 deletions(-)
 
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 94af9853cfe..2e6f39aa02d 100644
+index 9a53aecbfe9..94af9853cfe 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -1156,6 +1156,7 @@ static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     TCGv src1 = get_address(ctx, a->rs1, 0);
-     TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+@@ -1135,6 +1135,7 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
+     TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+     MemOp size = mop & MO_SIZE;
  
 +    mop |= MO_TE;
-     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
-     tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop);
+     if (ctx->cfg_ptr->ext_zama16b && size >= MO_32) {
+         mop |= MO_ATOM_WITHIN16;
+     } else {
+diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
+index 10e4c55efda..e0fbfafdde4 100644
+--- a/target/riscv/insn_trans/trans_rva.c.inc
++++ b/target/riscv/insn_trans/trans_rva.c.inc
+@@ -111,55 +111,55 @@ static bool trans_sc_w(DisasContext *ctx, arg_sc_w *a)
+ static bool trans_amoswap_w(DisasContext *ctx, arg_amoswap_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TE | MO_SL);
++    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_SL);
+ }
  
+ static bool trans_amoadd_w(DisasContext *ctx, arg_amoadd_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_TE | MO_SL);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_SL);
+ }
+ 
+ static bool trans_amoxor_w(DisasContext *ctx, arg_amoxor_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_TE | MO_SL);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_SL);
+ }
+ 
+ static bool trans_amoand_w(DisasContext *ctx, arg_amoand_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_TE | MO_SL);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_SL);
+ }
+ 
+ static bool trans_amoor_w(DisasContext *ctx, arg_amoor_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_TE | MO_SL);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_SL);
+ }
+ 
+ static bool trans_amomin_w(DisasContext *ctx, arg_amomin_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_TE | MO_SL);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_SL);
+ }
+ 
+ static bool trans_amomax_w(DisasContext *ctx, arg_amomax_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_TE | MO_SL);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_SL);
+ }
+ 
+ static bool trans_amominu_w(DisasContext *ctx, arg_amominu_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_TE | MO_SL);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_SL);
+ }
+ 
+ static bool trans_amomaxu_w(DisasContext *ctx, arg_amomaxu_w *a)
+ {
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_TE | MO_SL);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_SL);
+ }
+ 
+ static bool trans_lr_d(DisasContext *ctx, arg_lr_d *a)
+@@ -180,61 +180,61 @@ static bool trans_amoswap_d(DisasContext *ctx, arg_amoswap_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TE | MO_UQ);
++    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_UQ);
+ }
+ 
+ static bool trans_amoadd_d(DisasContext *ctx, arg_amoadd_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_TE | MO_UQ);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_UQ);
+ }
+ 
+ static bool trans_amoxor_d(DisasContext *ctx, arg_amoxor_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_TE | MO_UQ);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_UQ);
+ }
+ 
+ static bool trans_amoand_d(DisasContext *ctx, arg_amoand_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_TE | MO_UQ);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_UQ);
+ }
+ 
+ static bool trans_amoor_d(DisasContext *ctx, arg_amoor_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_TE | MO_UQ);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_UQ);
+ }
+ 
+ static bool trans_amomin_d(DisasContext *ctx, arg_amomin_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_TE | MO_UQ);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_UQ);
+ }
+ 
+ static bool trans_amomax_d(DisasContext *ctx, arg_amomax_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_TE | MO_UQ);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_UQ);
+ }
+ 
+ static bool trans_amominu_d(DisasContext *ctx, arg_amominu_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_TE | MO_UQ);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_UQ);
+ }
+ 
+ static bool trans_amomaxu_d(DisasContext *ctx, arg_amomaxu_d *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_A_OR_ZAAMO(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_TE | MO_UQ);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_UQ);
+ }
 diff --git a/target/riscv/insn_trans/trans_rvzabha.c.inc b/target/riscv/insn_trans/trans_rvzabha.c.inc
-index c1f99b65f09..302c63f2a3d 100644
+index 25db42d24cd..c1f99b65f09 100644
 --- a/target/riscv/insn_trans/trans_rvzabha.c.inc
 +++ b/target/riscv/insn_trans/trans_rvzabha.c.inc
-@@ -141,5 +141,5 @@ static bool trans_amocas_h(DisasContext *ctx, arg_amocas_h *a)
+@@ -79,55 +79,55 @@ static bool trans_amomaxu_b(DisasContext *ctx, arg_amomaxu_b *a)
+ static bool trans_amoswap_h(DisasContext *ctx, arg_amoswap_h *a)
  {
-     REQUIRE_ZACAS(ctx);
      REQUIRE_ZABHA(ctx);
--    return gen_cmpxchg(ctx, a, MO_ALIGN | MO_TE | MO_SW);
-+    return gen_cmpxchg(ctx, a, MO_ALIGN | MO_SW);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TE | MO_SW);
++    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_SW);
  }
-diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc b/target/riscv/insn_trans/trans_rvzacas.c.inc
-index 5e7c7c92b72..d850b142642 100644
---- a/target/riscv/insn_trans/trans_rvzacas.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzacas.c.inc
-@@ -25,7 +25,7 @@
- static bool trans_amocas_w(DisasContext *ctx, arg_amocas_w *a)
+ 
+ static bool trans_amoadd_h(DisasContext *ctx, arg_amoadd_h *a)
  {
-     REQUIRE_ZACAS(ctx);
--    return gen_cmpxchg(ctx, a, MO_ALIGN | MO_TE | MO_SL);
-+    return gen_cmpxchg(ctx, a, MO_ALIGN | MO_SL);
+     REQUIRE_ZABHA(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_TE | MO_SW);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_SW);
  }
  
- static TCGv_i64 get_gpr_pair(DisasContext *ctx, int reg_num)
-@@ -76,6 +76,7 @@ static bool gen_cmpxchg64(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     TCGv src1 = get_address(ctx, a->rs1, 0);
-     TCGv_i64 src2 = get_gpr_pair(ctx, a->rs2);
+ static bool trans_amoxor_h(DisasContext *ctx, arg_amoxor_h *a)
+ {
+     REQUIRE_ZABHA(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_TE | MO_SW);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_SW);
+ }
  
-+    mop |= MO_TE;
-     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
-     tcg_gen_atomic_cmpxchg_i64(dest, src1, dest, src2, ctx->mem_idx, mop);
+ static bool trans_amoand_h(DisasContext *ctx, arg_amoand_h *a)
+ {
+     REQUIRE_ZABHA(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_TE | MO_SW);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_SW);
+ }
  
-@@ -88,10 +89,10 @@ static bool trans_amocas_d(DisasContext *ctx, arg_amocas_d *a)
-     REQUIRE_ZACAS(ctx);
-     switch (get_ol(ctx)) {
-     case MXL_RV32:
--        return gen_cmpxchg64(ctx, a, MO_ALIGN | MO_TE | MO_UQ);
-+        return gen_cmpxchg64(ctx, a, MO_ALIGN | MO_UQ);
-     case MXL_RV64:
-     case MXL_RV128:
--        return gen_cmpxchg(ctx, a, MO_ALIGN | MO_TE | MO_UQ);
-+        return gen_cmpxchg(ctx, a, MO_ALIGN | MO_UQ);
-     default:
-         g_assert_not_reached();
-     }
+ static bool trans_amoor_h(DisasContext *ctx, arg_amoor_h *a)
+ {
+     REQUIRE_ZABHA(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_TE | MO_SW);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_SW);
+ }
+ 
+ static bool trans_amomin_h(DisasContext *ctx, arg_amomin_h *a)
+ {
+     REQUIRE_ZABHA(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_TE | MO_SW);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_SW);
+ }
+ 
+ static bool trans_amomax_h(DisasContext *ctx, arg_amomax_h *a)
+ {
+     REQUIRE_ZABHA(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_TE | MO_SW);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_SW);
+ }
+ 
+ static bool trans_amominu_h(DisasContext *ctx, arg_amominu_h *a)
+ {
+     REQUIRE_ZABHA(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_TE | MO_SW);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_SW);
+ }
+ 
+ static bool trans_amomaxu_h(DisasContext *ctx, arg_amomaxu_h *a)
+ {
+     REQUIRE_ZABHA(ctx);
+-    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_TE | MO_SW);
++    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_SW);
+ }
+ 
+ static bool trans_amocas_b(DisasContext *ctx, arg_amocas_b *a)
 -- 
 2.51.0
 
