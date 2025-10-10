@@ -4,73 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93029CCD184
-	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Oct 2025 16:26:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DEFBCCA476
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 13:43:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v6tT5-00014y-Vk; Thu, 09 Oct 2025 12:26:16 -0400
+	id 1v7DOk-00028X-Fo; Fri, 10 Oct 2025 09:43:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rjones@redhat.com>) id 1v6tT3-00013I-Qr
- for qemu-riscv@nongnu.org; Thu, 09 Oct 2025 12:26:13 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rjones@redhat.com>) id 1v6tSv-0001mU-J3
- for qemu-riscv@nongnu.org; Thu, 09 Oct 2025 12:26:13 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1760027161;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=wVHBKHd8ctKlMm/6J+16ORuNlJYlN/p0wWwUE7aRsTY=;
- b=ch/YMNDk3AcnfFkKDUEosw/9lZpiaQ5YXkwSr/kRJQMG0l8sSmv6VdM/yGm3hN5i0NMaIm
- yeYBpqCggbqT83NUcWkLDDQtvL6yuhgLzklo6QhGrGNddItBvjgP8bwdCEPTpa/lDbCYCY
- NOgOXR7wnbAfk6xgZG/18MVfXaATcbE=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-500-4uhHt4YUPAOvON3BSchYFg-1; Thu,
- 09 Oct 2025 12:25:59 -0400
-X-MC-Unique: 4uhHt4YUPAOvON3BSchYFg-1
-X-Mimecast-MFC-AGG-ID: 4uhHt4YUPAOvON3BSchYFg_1760027158
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 55FAF180034A
- for <qemu-riscv@nongnu.org>; Thu,  9 Oct 2025 16:25:58 +0000 (UTC)
-Received: from localhost (unknown [10.45.224.22])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id C36131800578
- for <qemu-riscv@nongnu.org>; Thu,  9 Oct 2025 16:25:57 +0000 (UTC)
-Date: Thu, 9 Oct 2025 17:25:56 +0100
-From: "Richard W.M. Jones" <rjones@redhat.com>
-To: qemu-riscv@nongnu.org
-Subject: target/riscv: warning on current master: writing 8 bytes into a
- region of size 4
-Message-ID: <20251009162556.GC5720@redhat.com>
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DOS-00026I-Ke
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:42:50 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DOC-0007gZ-MU
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:42:46 -0400
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3fc36b99e92so2306324f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 06:42:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1760103748; x=1760708548; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wOPl/nrAi0ixH4lZrdaPSGiz7HUM8lbVEHaB1k/Dl1M=;
+ b=eS/lSaRYaNKKaW8M/FhZGoZLyZJ8BSLKVtMsbzquuoJPqsGvW3BWjWTS1Bwrf7L2TR
+ MxRlh8bL9KR1Q/WysY53OFLCf3iREKX/hoe5Gpbh4SjLU8FBsaACLA/v5OE7MSp3ZX5/
+ q5/bfo5M57bnbq10WfStwRX2SPRJovXK4V2zANT0mfP69yIrHp+OMKkgqqPL9tEiYB7p
+ TOREqCQ67PVkYcvWNhQxNDGGSEujc3+agErI39BdRf2aARNJ19j4mW9uREqPjn88qgEY
+ DtOEOAgEQthJgkPKsIuGkq3S6FxfZKaq0wVsrRRwUYZ5etlMwY+wfNfrBGqPycMWP2EF
+ 5jqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760103748; x=1760708548;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wOPl/nrAi0ixH4lZrdaPSGiz7HUM8lbVEHaB1k/Dl1M=;
+ b=gJzi5Vh6RfnParzRigXm/MO4XvvgKlu/1l5RSfbcXSfoXPtCzG7jNiU741Ra30L0ZJ
+ 1QzYIbdBj6keR2NGvVIF2CXwJWLxSTb2au+QbLW32Kl/I3nHr+ZmomUS+evhwK+QEO+/
+ KYFryEPUy5+mxHBJjWFpGpaWubn4zXA9KDIrZw24evcT/vny3teBLyldpNQQNGO1ebcf
+ hYtTs6qy4WSVwHp/dS5EhCnQfn4lhSbVMBeEYQYNCsmuGZzp1oLSBgVE8IcRDfzBGLCA
+ LzOlmH17klEF/nPfzetxNAMLi75pacwf2dNzc1BU0OskkxSauUtlFY7XADgOufXfMECK
+ hGRQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVYOHmHY+geg2je5r0naSjUgahWVriIMLRiFdJlj9i+M3glklTLTejgpUaDs2vLdpYsRDPkKXpymvZc@nongnu.org
+X-Gm-Message-State: AOJu0YzYZTLrOtNwhgDALKRCi5DOiXBpfbWJ4bNn8J3Rn2wEdJeJ2/tg
+ kR14Ii4N7b+jbtQzZczlOMa1e+JpEQYUB1oHzP0nD0W9La3qf4NJQosocGQ0UgCWIE0=
+X-Gm-Gg: ASbGncu/KmyIH5pIIDuo3Wd/MSuuqdOVruEc3fVHXUaSc/hKzq4r65AN8jXRSr9BnKr
+ E3OkUWgjwqRoTm6w/4m+UBb0uByRP1szdqLggYnKa3i44jteYm7nWZ/JWQ/y1L+hr95AvpkPtEr
+ lGfLvYEAhMcV2kXw6KPKapWjsgFAw7JuYpn8ps156VU8B3CCezGuy+nLd4YZS7uQBJVj38bMNoH
+ 8YJFxhja33BfBs+qDsJkMIEUGQ/vQKyv0AQ3S0idmOpb5tqXAhQCzudhSxQNgknT9k/e0FBuIdT
+ YdINJ7F19XqnWhZgoDKQtOW2prVxvB77Ho4EOi0yL77hkhdNakw9JPuCD0xPqGPIqgrdvzE9VEo
+ UDgYmXNGr6of6MYKDY0aBKOpxqoELbAZMktA7Ryawwj7q7ekvcnj226o9EustjxtSrwu23O+P8M
+ eftAmKyFJotEDlYNj9LSM=
+X-Google-Smtp-Source: AGHT+IE9Xse/TMz9zXvsaEJIYNMbgxnXqwWpoHcfcvrcXhGLo97dN4HXchfSpA412NSEcUNe5pY/qA==
+X-Received: by 2002:a05:6000:4027:b0:401:2cbf:ccad with SMTP id
+ ffacd0b85a97d-425829e78e9mr11277587f8f.17.1760103748337; 
+ Fri, 10 Oct 2025 06:42:28 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-426ce5e83e1sm4395867f8f.51.2025.10.10.06.42.27
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 10 Oct 2025 06:42:27 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 00/16] overall: Replace HOST_BIG_ENDIAN #ifdef with runtime
+ if() check
+Date: Fri, 10 Oct 2025 15:42:09 +0200
+Message-ID: <20251010134226.72221-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: qgYPOJPXo_o-z6vLQ_zXm7ujjNsokg62HzJECrZSf_0_1760027158
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=rjones@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SUSPICIOUS_RECIPS=2.51,
+ T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,39 +101,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When compiling the latest master branch, CONFIG_ATOMIC64 is defined,
-and I get this warning:
+Replace compile-time #ifdef with a runtime check to ensure all code
+paths are built and tested. This reduces build-time configuration
+complexity and improves maintainability.
 
-----
-In function ‘stq_he_p’,
-    inlined from ‘translator_ld’ at ../accel/tcg/translator.c:359:13,
-    inlined from ‘translator_ldl_end’ at ../accel/tcg/translator.c:491:10,
-    inlined from ‘translator_ldl’ at /home/rjones/d/qemu/include/exec/translator.h:201:12,
-    inlined from ‘decode_opc’ at ../target/riscv/translate.c:1236:18,
-    inlined from ‘riscv_tr_translate_insn’ at ../target/riscv/translate.c:1348:5:
-/home/rjones/d/qemu/include/qemu/bswap.h:295:5: warning: writing 8 bytes into a region of size 4 [-Wstringop-overflow=]
-  295 |     __builtin_memcpy(ptr, &v, sizeof(v));
-      |     ^
-../accel/tcg/translator.c: In function ‘riscv_tr_translate_insn’:
-../accel/tcg/translator.c:489:14: note: destination object ‘val’ of size 4
-  489 |     uint32_t val;
-      |              ^
-../accel/tcg/translator.c:489:14: note: at offset [1, 4] into destination object ‘val’ of size 4
-----
+No functional change intended.
 
-Looking at the code I can see why it's happening.  However I don't see
-a simple fix.
+Philippe Mathieu-Daudé (16):
+  linux-user/arm: Checkpatch style cleanups
+  linux-user/arm: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  ui: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  net: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  disas: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  hw/core/loader: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  hw/display: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  hw/virtio: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  target/alpha: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  target/arm: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  target/mips: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  target/ppc: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  target/riscv: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  target/s390x: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  target/sparc: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+  util/bitmap: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
 
-The function 'translator_ldl_end' really wants a 32 bit result, and it
-seems like the 64 bit case would never be called, although I'm not
-sure ...
-
-Rich.
+ include/hw/virtio/virtio-access.h       |   6 +-
+ include/hw/virtio/virtio-gpu-bswap.h    |   6 +-
+ target/arm/cpu.h                        |   8 +-
+ target/arm/tcg/translate-a64.h          |   5 +-
+ disas/disas-host.c                      |   6 +-
+ hw/core/loader.c                        |   5 +-
+ hw/display/artist.c                     |  12 +-
+ hw/display/vga.c                        |  20 +-
+ hw/display/virtio-gpu-gl.c              |   8 +-
+ hw/display/virtio-gpu-rutabaga.c        |   8 +-
+ hw/virtio/vhost.c                       |   7 +-
+ linux-user/arm/nwfpe/double_cpdo.c      |  12 +-
+ linux-user/arm/nwfpe/fpa11_cpdt.c       |  77 +-
+ net/net.c                               |  14 +-
+ target/alpha/translate.c                |  11 +-
+ target/arm/tcg/sve_helper.c             |  10 +-
+ target/arm/tcg/translate-sve.c          |  22 +-
+ target/arm/tcg/translate-vfp.c          |   8 +-
+ target/arm/tcg/translate.c              |   6 +-
+ target/mips/tcg/msa_helper.c            | 889 ++++++++++++------------
+ target/ppc/arch_dump.c                  |   9 +-
+ target/ppc/int_helper.c                 |  28 +-
+ target/ppc/kvm.c                        |  25 +-
+ target/riscv/vector_helper.c            |  32 +-
+ target/s390x/tcg/translate.c            |   6 +-
+ target/sparc/vis_helper.c               |  18 +-
+ ui/vdagent.c                            |  16 +-
+ ui/vnc.c                                |   6 +-
+ util/bitmap.c                           |  19 +-
+ target/ppc/translate/vmx-impl.c.inc     |  14 +-
+ target/ppc/translate/vsx-impl.c.inc     |   6 +-
+ target/riscv/insn_trans/trans_rvv.c.inc |  16 +-
+ target/s390x/tcg/translate_vx.c.inc     |   6 +-
+ tcg/ppc/tcg-target.c.inc                |  24 +-
+ 34 files changed, 656 insertions(+), 709 deletions(-)
 
 -- 
-Richard Jones, Virtualization Group, Red Hat http://people.redhat.com/~rjones
-Read my programming and virtualization blog: http://rwmj.wordpress.com
-nbdkit - Flexible, fast NBD server with plugins
-https://gitlab.com/nbdkit/nbdkit
+2.51.0
 
 
