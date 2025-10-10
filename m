@@ -4,88 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DEFBCCA476
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 13:43:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5633CCD185
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 13:43:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v7DOk-00028X-Fo; Fri, 10 Oct 2025 09:43:06 -0400
+	id 1v7DPB-0002GY-Er; Fri, 10 Oct 2025 09:43:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DOS-00026I-Ke
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:42:50 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DP2-0002FV-O2
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:43:26 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DOC-0007gZ-MU
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:42:46 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3fc36b99e92so2306324f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 06:42:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DOW-0007sI-1l
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:43:23 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-46e3a50bc0fso16388395e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 06:42:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760103748; x=1760708548; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wOPl/nrAi0ixH4lZrdaPSGiz7HUM8lbVEHaB1k/Dl1M=;
- b=eS/lSaRYaNKKaW8M/FhZGoZLyZJ8BSLKVtMsbzquuoJPqsGvW3BWjWTS1Bwrf7L2TR
- MxRlh8bL9KR1Q/WysY53OFLCf3iREKX/hoe5Gpbh4SjLU8FBsaACLA/v5OE7MSp3ZX5/
- q5/bfo5M57bnbq10WfStwRX2SPRJovXK4V2zANT0mfP69yIrHp+OMKkgqqPL9tEiYB7p
- TOREqCQ67PVkYcvWNhQxNDGGSEujc3+agErI39BdRf2aARNJ19j4mW9uREqPjn88qgEY
- DtOEOAgEQthJgkPKsIuGkq3S6FxfZKaq0wVsrRRwUYZ5etlMwY+wfNfrBGqPycMWP2EF
- 5jqg==
+ d=linaro.org; s=google; t=1760103766; x=1760708566; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=61NQQUfc5AHH6sOajFhd3xe+bOM3Liy2MIqh9GGhkaQ=;
+ b=blXreB/V8dK5HYLUa7/X02sv/fssOGeMRXB+QnSf28A2WZxhISeZ9HlSDuq/34HgsO
+ yF6dgPCxCcbXGRiJ2hx6RgwDIJq6STqNICbNnnRtPNZJoVodbjBpLXabAWjKHDUqxPFK
+ JkH8Rkl4Rep/GCGrdU/2v2Z8v7A73VJ+NfXbhsJvad+TovJWU4e2doZa1GFwn5QF4Rf7
+ FPzCJWJpjWXc1K1EUArhttc8N5T5AIM/QhX3IeWbuw3+o4k2wu2r1oqTJvHRXYW4Csgy
+ t9VQxNAsPRvzl1zEPIABrllqN3SMwnbfgAMpH9mQXyP4RV+j2K/T2jhovh+HLzFFbGX7
+ n7GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760103748; x=1760708548;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wOPl/nrAi0ixH4lZrdaPSGiz7HUM8lbVEHaB1k/Dl1M=;
- b=gJzi5Vh6RfnParzRigXm/MO4XvvgKlu/1l5RSfbcXSfoXPtCzG7jNiU741Ra30L0ZJ
- 1QzYIbdBj6keR2NGvVIF2CXwJWLxSTb2au+QbLW32Kl/I3nHr+ZmomUS+evhwK+QEO+/
- KYFryEPUy5+mxHBJjWFpGpaWubn4zXA9KDIrZw24evcT/vny3teBLyldpNQQNGO1ebcf
- hYtTs6qy4WSVwHp/dS5EhCnQfn4lhSbVMBeEYQYNCsmuGZzp1oLSBgVE8IcRDfzBGLCA
- LzOlmH17klEF/nPfzetxNAMLi75pacwf2dNzc1BU0OskkxSauUtlFY7XADgOufXfMECK
- hGRQ==
+ d=1e100.net; s=20230601; t=1760103766; x=1760708566;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=61NQQUfc5AHH6sOajFhd3xe+bOM3Liy2MIqh9GGhkaQ=;
+ b=tHfTW6n+3Ts5iLuPEAI/24Oi5MCVw/fVnVA9qRh6GmAlkjGL5qGk62Wrdp4B1e+ywu
+ fI1T1PiennN4jcP3F+/J5vWIgAuQwHZ4ILlxbgF1LWG/2GRLfPmEfJbO1tYEdrJCJxHp
+ M2x11hBaNuZSc2hk4pV6hWyZRxIl7DHIBy+Bu0MLKrrKwUaNpGamlqmrgnf7+9gPf/gk
+ ye0YpYCyXP9M5zi6DyVnPFVL3tHfqVFHDuK08jqrWm/H9zRTUCZTQVCo3rusxQIZTyfp
+ b6S64+K/4M2ra8X0xTa6v0VN357PG2UuBCLXL6EArV/Y/fKBaKYEh8Rj7BkW2rFoYAmI
+ ZEEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVYOHmHY+geg2je5r0naSjUgahWVriIMLRiFdJlj9i+M3glklTLTejgpUaDs2vLdpYsRDPkKXpymvZc@nongnu.org
-X-Gm-Message-State: AOJu0YzYZTLrOtNwhgDALKRCi5DOiXBpfbWJ4bNn8J3Rn2wEdJeJ2/tg
- kR14Ii4N7b+jbtQzZczlOMa1e+JpEQYUB1oHzP0nD0W9La3qf4NJQosocGQ0UgCWIE0=
-X-Gm-Gg: ASbGncu/KmyIH5pIIDuo3Wd/MSuuqdOVruEc3fVHXUaSc/hKzq4r65AN8jXRSr9BnKr
- E3OkUWgjwqRoTm6w/4m+UBb0uByRP1szdqLggYnKa3i44jteYm7nWZ/JWQ/y1L+hr95AvpkPtEr
- lGfLvYEAhMcV2kXw6KPKapWjsgFAw7JuYpn8ps156VU8B3CCezGuy+nLd4YZS7uQBJVj38bMNoH
- 8YJFxhja33BfBs+qDsJkMIEUGQ/vQKyv0AQ3S0idmOpb5tqXAhQCzudhSxQNgknT9k/e0FBuIdT
- YdINJ7F19XqnWhZgoDKQtOW2prVxvB77Ho4EOi0yL77hkhdNakw9JPuCD0xPqGPIqgrdvzE9VEo
- UDgYmXNGr6of6MYKDY0aBKOpxqoELbAZMktA7Ryawwj7q7ekvcnj226o9EustjxtSrwu23O+P8M
- eftAmKyFJotEDlYNj9LSM=
-X-Google-Smtp-Source: AGHT+IE9Xse/TMz9zXvsaEJIYNMbgxnXqwWpoHcfcvrcXhGLo97dN4HXchfSpA412NSEcUNe5pY/qA==
-X-Received: by 2002:a05:6000:4027:b0:401:2cbf:ccad with SMTP id
- ffacd0b85a97d-425829e78e9mr11277587f8f.17.1760103748337; 
- Fri, 10 Oct 2025 06:42:28 -0700 (PDT)
+ AJvYcCUDUtmoill60oe9MASSW6Rry6Lle5A7tNg8n8zcvaksSjDxo8qBf9KBAMUFjcXPil+RcDLILtJgMOZO@nongnu.org
+X-Gm-Message-State: AOJu0Ywfm6h5pVZvAu+pxKsXCHOZeFP7W2XTcrFTcoHBp/+6hmRMrmXT
+ qgIVFqrUwCJpPSV76p0H4DIiCyZFyMQ5h6OSp0nL09QJSLk0YmgOiDpqlvCTyWmbJ6k=
+X-Gm-Gg: ASbGncvlSvPhlH/IzK+3l3hqBarDT4ElIAUHnJjFC38VkXYg+lmtDl8YzzhEoKaICUr
+ kjt7jkp7UNMtssy2Mwtl3uGmuy+X47AD858fvk4OaX6JIm8qy/TaWOz9ilWcuidMcvu5t/mMOKA
+ dKparFgawMGWJ0hLUPB+GYa0Eib0VfF3CFkmoeRwUwplokCPq6fmr2M0aXur2+MVm6r0giA4hmw
+ 8ZDfluB50F/ZvpfWU3ja6UMjeDxqpjCoheqwA1uus/ZSansVttxRfpTkLfPgN18hOurkZwR/VB/
+ e8xA0gTkLhx++PcrAym3WeRyS1EHOBs3jh4cqgkxxjsRqPn3BPm+lrvxNHRlFq7vRVvMo3d9r7M
+ 4omcn93jnayGG8CDyC+3cj6Y2kRJJ6XW8dpbR1k+FCmv6Zy74OinYhWReNTFkhulCjg0Nt9ZtSC
+ e432MwReIqF0rfyrq3NclnPsYTOSVHbQ==
+X-Google-Smtp-Source: AGHT+IEL530wYI6ec2dvGV8IhPhoS7pJXv2tYfyowgqvyrI+XiBgK9StQAaWW4IwhCKK6t2MFVEECw==
+X-Received: by 2002:a05:600d:4203:b0:46e:6af4:ed83 with SMTP id
+ 5b1f17b1804b1-46fa9af9099mr85429505e9.23.1760103765671; 
+ Fri, 10 Oct 2025 06:42:45 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-426ce5e83e1sm4395867f8f.51.2025.10.10.06.42.27
+ 5b1f17b1804b1-46fb48a60b8sm47789695e9.19.2025.10.10.06.42.42
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 10 Oct 2025 06:42:27 -0700 (PDT)
+ Fri, 10 Oct 2025 06:42:42 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 00/16] overall: Replace HOST_BIG_ENDIAN #ifdef with runtime
- if() check
-Date: Fri, 10 Oct 2025 15:42:09 +0200
-Message-ID: <20251010134226.72221-1-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>
+Subject: [PATCH 03/16] ui: Replace HOST_BIG_ENDIAN #ifdef with runtime if()
+ check
+Date: Fri, 10 Oct 2025 15:42:12 +0200
+Message-ID: <20251010134226.72221-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251010134226.72221-1-philmd@linaro.org>
+References: <20251010134226.72221-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
-X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SUSPICIOUS_RECIPS=2.51,
- T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,60 +111,56 @@ complexity and improves maintainability.
 
 No functional change intended.
 
-Philippe Mathieu-Daudé (16):
-  linux-user/arm: Checkpatch style cleanups
-  linux-user/arm: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  ui: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  net: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  disas: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  hw/core/loader: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  hw/display: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  hw/virtio: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  target/alpha: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  target/arm: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  target/mips: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  target/ppc: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  target/riscv: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  target/s390x: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  target/sparc: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
-  util/bitmap: Replace HOST_BIG_ENDIAN #ifdef with runtime if() check
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ ui/vdagent.c | 16 ++++++++--------
+ ui/vnc.c     |  6 +-----
+ 2 files changed, 9 insertions(+), 13 deletions(-)
 
- include/hw/virtio/virtio-access.h       |   6 +-
- include/hw/virtio/virtio-gpu-bswap.h    |   6 +-
- target/arm/cpu.h                        |   8 +-
- target/arm/tcg/translate-a64.h          |   5 +-
- disas/disas-host.c                      |   6 +-
- hw/core/loader.c                        |   5 +-
- hw/display/artist.c                     |  12 +-
- hw/display/vga.c                        |  20 +-
- hw/display/virtio-gpu-gl.c              |   8 +-
- hw/display/virtio-gpu-rutabaga.c        |   8 +-
- hw/virtio/vhost.c                       |   7 +-
- linux-user/arm/nwfpe/double_cpdo.c      |  12 +-
- linux-user/arm/nwfpe/fpa11_cpdt.c       |  77 +-
- net/net.c                               |  14 +-
- target/alpha/translate.c                |  11 +-
- target/arm/tcg/sve_helper.c             |  10 +-
- target/arm/tcg/translate-sve.c          |  22 +-
- target/arm/tcg/translate-vfp.c          |   8 +-
- target/arm/tcg/translate.c              |   6 +-
- target/mips/tcg/msa_helper.c            | 889 ++++++++++++------------
- target/ppc/arch_dump.c                  |   9 +-
- target/ppc/int_helper.c                 |  28 +-
- target/ppc/kvm.c                        |  25 +-
- target/riscv/vector_helper.c            |  32 +-
- target/s390x/tcg/translate.c            |   6 +-
- target/sparc/vis_helper.c               |  18 +-
- ui/vdagent.c                            |  16 +-
- ui/vnc.c                                |   6 +-
- util/bitmap.c                           |  19 +-
- target/ppc/translate/vmx-impl.c.inc     |  14 +-
- target/ppc/translate/vsx-impl.c.inc     |   6 +-
- target/riscv/insn_trans/trans_rvv.c.inc |  16 +-
- target/s390x/tcg/translate_vx.c.inc     |   6 +-
- tcg/ppc/tcg-target.c.inc                |  24 +-
- 34 files changed, 656 insertions(+), 709 deletions(-)
-
+diff --git a/ui/vdagent.c b/ui/vdagent.c
+index ddb91e75c64..66dc33567df 100644
+--- a/ui/vdagent.c
++++ b/ui/vdagent.c
+@@ -660,14 +660,14 @@ static void vdagent_chr_open(Chardev *chr,
+     VDAgentChardev *vd = QEMU_VDAGENT_CHARDEV(chr);
+     ChardevQemuVDAgent *cfg = backend->u.qemu_vdagent.data;
+ 
+-#if HOST_BIG_ENDIAN
+-    /*
+-     * TODO: vdagent protocol is defined to be LE,
+-     * so we have to byteswap everything on BE hosts.
+-     */
+-    error_setg(errp, "vdagent is not supported on bigendian hosts");
+-    return;
+-#endif
++    if (HOST_BIG_ENDIAN) {
++        /*
++         * TODO: vdagent protocol is defined to be LE,
++         * so we have to byteswap everything on BE hosts.
++         */
++        error_setg(errp, "vdagent is not supported on bigendian hosts");
++        return;
++    }
+ 
+     vd->mouse = VDAGENT_MOUSE_DEFAULT;
+     if (cfg->has_mouse) {
+diff --git a/ui/vnc.c b/ui/vnc.c
+index 77c823bf2e8..e93b5335690 100644
+--- a/ui/vnc.c
++++ b/ui/vnc.c
+@@ -2348,11 +2348,7 @@ static void pixel_format_message (VncState *vs) {
+     vnc_write_u8(vs, vs->client_pf.bits_per_pixel); /* bits-per-pixel */
+     vnc_write_u8(vs, vs->client_pf.depth); /* depth */
+ 
+-#if HOST_BIG_ENDIAN
+-    vnc_write_u8(vs, 1);             /* big-endian-flag */
+-#else
+-    vnc_write_u8(vs, 0);             /* big-endian-flag */
+-#endif
++    vnc_write_u8(vs, HOST_BIG_ENDIAN);         /* big-endian-flag */
+     vnc_write_u8(vs, 1);             /* true-color-flag */
+     vnc_write_u16(vs, vs->client_pf.rmax);     /* red-max */
+     vnc_write_u16(vs, vs->client_pf.gmax);     /* green-max */
 -- 
 2.51.0
 
