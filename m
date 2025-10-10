@@ -4,94 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D976CCA476
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 13:46:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7ACBCCD185
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 13:46:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v7DR0-0003sA-Jb; Fri, 10 Oct 2025 09:45:26 -0400
+	id 1v7DQ0-0002eu-FR; Fri, 10 Oct 2025 09:44:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DQc-0003Kp-KQ
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:45:02 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DPo-0002X6-FE
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:44:12 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DPS-0008HR-J6
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:45:02 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3f0308469a4so1272757f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 06:43:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7DP2-0008DC-7m
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 09:44:10 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-46faa5b0372so13331825e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 06:43:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760103824; x=1760708624; darn=nongnu.org;
+ d=linaro.org; s=google; t=1760103798; x=1760708598; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r4HGgiMv15db038MKi02IiRG5N36n+u7KrBeSKqnYB8=;
- b=Wud4NyLONgRfkVQ11XqFFCRUIi2lgEX73SFrzObShxW2rBbxZoA6O0BUqstKGzBLit
- dwa3aLJHCt4WDNCV36IrZCgWnnsTM6P09EmmAkK1iT9+pxXgE9d871YvZ/LSiMR799ND
- LzLAhGhC1Eiw2ysv1ej52nrty1Bbgr4fKz36vQX0kbny8BDq99mfKhGdvZlJCUjamxfF
- lo3JQXuuRkrpCcPJdVG+CR3XFfx7BPF2OVKtq+Fcz/uGueZ1sJPf2mIsEGSfCJEk3XQ1
- CqWLDpCqLVv2yGVbjmklKZzWdMnELepJnJ2MgPCREk6EFS2XrL3h89AXOELYy5rzhJJb
- XkIw==
+ bh=fQ1xy8T+SXo1JHTBucWTk/aOP1Ac+xvM/ygDmheTPxE=;
+ b=m5w//XjQlm2YmAwHdnjSLtZZfmwSjmFXltxEjVwfgPnIQT6t1sSdvSd0153IH4PbQZ
+ p+pgGHBwvTHT191v2USp9WK78d/ObrCRCoGc34LXVSOn2ukW4BRhe+0ORKRmxYOxy60Q
+ kdAFjCsICKQFjLqsCLY7E6wQQtTCnkGOjwrhH09CCIZkSirHQiU3ttRz+Ax5li4eXJ+i
+ jLHtPvBqCvFrkYGTqBo7KDkPh/yVYWUSwq78cI1TW/dZPRQP4ZBrzq4a7FdW8vNUwT2H
+ 0WWxix/q0b1e9zaZhOq7mvg+zNdX7RWiZTP3X+OtLMIH+eQrKf8ZGCb057un/SUeWkt2
+ ih9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760103824; x=1760708624;
+ d=1e100.net; s=20230601; t=1760103798; x=1760708598;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r4HGgiMv15db038MKi02IiRG5N36n+u7KrBeSKqnYB8=;
- b=pyRhmyiWOngsajItsZuicBbc4PWAB9/ilrAQeqpKIn6wcbzvsppQUkuIg93fYA0085
- rG/i6oK5GyI7+e35mBcdqcTNWshIHjxegxeyMTWh6n3z7FAy93xl2QhQWNwQPb9ug7Gd
- yxw13BL49nAw6ImX+1WVg8eVl6/udpvhBX/aQRNpoYGG1lybJTUuXXKzOWFm4dExQYjy
- Ve5m96nxCqrPGuzToViFuvP0eUtgtiXrmMlzkxG8Va8GhQt9DnCeEZC2rfRynOK0eQby
- Jexm18UIpX7Pr75/mniuHVdRA7k+bL9EVO2iW8qv0tR4BDl84Ocn0A3AX/5pP9mAmcb7
- YUVw==
+ bh=fQ1xy8T+SXo1JHTBucWTk/aOP1Ac+xvM/ygDmheTPxE=;
+ b=g4PwUvvBBX8ZVDI2V0626850Po8prbv4R1tF9MDAKdd53eGWxjUJ0KaAjte6eLD0dT
+ 5LRRVqW/wcJguD7M8BicZ6Wrez42qVovR7KWYWtcLvMq5d9s6Xt56zDb4NAS5vv6vLXo
+ Qpolxtq5sT9ekZJeQH+ln1pf3aAKa06ClQWAUrx0zOAqSIny4gjb3Kn3fcZWT461m5sB
+ 1CdLpvGJ1Z6VTYl/qjdwzWdDEKz13xpGSjPNZlbeai6eGZG8rTzWWDPyJRWmHov55LWs
+ 3nagItDqyPtdDQ+w1gIV+zzFHG6M6wur6ZALJzliE3h+2fUhtriMP8KCIuMtHILpu3XG
+ iw2w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVyY1l2/A59IjacFFtwcHFZz8tRzZn5taNnl3ZcEk7oMtKzEO5EQqJMHwYj1ibqDQk/cMVH8lj+Hs1r@nongnu.org
-X-Gm-Message-State: AOJu0YzvCo8UgRKbbUWZMLt9tCzQNm/6xE+zx9NF6LDmRzktCo1F/ZkO
- Pa2OpMpXCR+yGkV9aHXeZY/q/dMmgPDIKEwHEOCd7jPmum1XcrknzXryeYNwAR4J7Z8=
-X-Gm-Gg: ASbGncub0D+s+PHMAAFD771I9Op3wg7DLOpcaD0ggwxiotj+98PpGR3sh5HHEhlTCUS
- V1iuiR8MWw0w+/huJRbBGI9UlYHgwvwqIBt0gR3Eumb4R8sKGkvuLe3tmzCBBEk1Cr2n6aqScDG
- Q0hii1667HL1mMajBDeqy2F7sv0dkREWqxMRHul9rglAR+DdyO9Tyuq5G/uu2ADNRH4EhmiCq/Q
- tl+uaMyykqknYkqP8Y5fkLPoFbs/UDCVdIKFx82pzK6EY8j9Jcp9XILmkTe+kT3JfsbsxUv68+K
- 6JKEa4piYlOEnJ/7m+JYUejvjMe0AUrbs+AKq50wW2tLcJxDaRCTHoGDLTslV/6UBiQMqeosiCr
- mw3XHmqn8mimC21Yf1wHhL2fI7x6buE/uByUwoiMlsZy3Ba1LR4Kfu7u0OOm3+QZGdTcDU9nqfF
- tmjbJe9jzxp5ogv5UqjBM=
-X-Google-Smtp-Source: AGHT+IHEvlUtvA1b47Zvxo/zoUXjFDcn/NFvuh+N6pNi1JzgwJ6dpmrR/Ll2gcdeH1ymCCVWKFtYgQ==
-X-Received: by 2002:a05:6000:1ac8:b0:3f7:b7ac:f3d4 with SMTP id
- ffacd0b85a97d-42666abbbc1mr9120199f8f.5.1760103824459; 
- Fri, 10 Oct 2025 06:43:44 -0700 (PDT)
+ AJvYcCUVnMzoNJjTeKGcPUN1wkuTxaYPRuP4tm81G9K1nDMZoIQnV1C6SkbiopSaMrI0WJU9dE24LVf4R62M@nongnu.org
+X-Gm-Message-State: AOJu0Yx55jKyXcGcWaelTYrPqkMtPQbflOgnUUdtjjcggPqnbxbwCYLS
+ j/JLoUBH+PFNcO98oE7TnnFVRVm2WNx1E0c5OhNFoPiV/NggzfNWVYGehIPi9PUfPpg=
+X-Gm-Gg: ASbGncsiiMWl6gSBCH46pK7DAJ0SVxYCO3bt+DJu6MDX0G53IgapbYbx/QMQEmCfuQD
+ b5osk/t9fxBcmgk7ACG20UXQ8fJa1TDaGNjmB/9BnHJ4IK5ljSXUGVobBPcOs1WmJCQQHw+JNkf
+ BCx9RIHE5RgYkIhvgePiJcP5DnMUdcXu4j2TkO30Z1k3SgVtKjALzmP2khDfsHITJXOt/54u91j
+ hngWENNyVtGNG4IsH8tz9OL9kkL3AG9jvnDEVVTV5SIsFsmAtfW0gVq36BSXf10kGZu8ijfMMaO
+ UArjlXgrAE7p1ohWGOupZreWjsGkWgKV0/1Jj5nBO1AzKOm4EUYWcaBx7vLgRhMAdredVFvU8LS
+ NMVuB9H+kAvHAjSbCEphrtu9qAkWMoN2ImXX0e29A5B/VDEsoj7aNMJnsJ4607t1vSCLJMCx+wh
+ 54Yt4wBuobmHvpUPtG4KgYXRBUAbH0aw==
+X-Google-Smtp-Source: AGHT+IFIPOzsMbnQa1BO9UiaMqXHUl6fRwbyBMETY9o6Uiq0UhksFIKSO4ECCTsdlFGZdCkYMwb9Ag==
+X-Received: by 2002:a05:600c:a43:b0:46f:b32e:5094 with SMTP id
+ 5b1f17b1804b1-46fb32e50fcmr47908965e9.32.1760103797977; 
+ Fri, 10 Oct 2025 06:43:17 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-426ce583424sm4269124f8f.21.2025.10.10.06.43.43
+ 5b1f17b1804b1-46fb482ba41sm49073145e9.4.2025.10.10.06.43.16
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 10 Oct 2025 06:43:43 -0700 (PDT)
+ Fri, 10 Oct 2025 06:43:17 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>
-Subject: [PATCH 14/16] target/s390x: Replace HOST_BIG_ENDIAN #ifdef with
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH 09/16] target/alpha: Replace HOST_BIG_ENDIAN #ifdef with
  runtime if() check
-Date: Fri, 10 Oct 2025 15:42:23 +0200
-Message-ID: <20251010134226.72221-15-philmd@linaro.org>
+Date: Fri, 10 Oct 2025 15:42:18 +0200
+Message-ID: <20251010134226.72221-10-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010134226.72221-1-philmd@linaro.org>
 References: <20251010134226.72221-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,44 +113,31 @@ No functional change intended.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/s390x/tcg/translate.c        | 6 +++---
- target/s390x/tcg/translate_vx.c.inc | 6 +++---
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ target/alpha/translate.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/target/s390x/tcg/translate.c b/target/s390x/tcg/translate.c
-index c7e8574438c..ec9e5a07516 100644
---- a/target/s390x/tcg/translate.c
-+++ b/target/s390x/tcg/translate.c
-@@ -258,9 +258,9 @@ static inline int vec_reg_offset(uint8_t reg, uint8_t enr, MemOp es)
-      * 16 byte operations to handle it in a special way.
-      */
-     g_assert(es <= MO_64);
--#if !HOST_BIG_ENDIAN
--    offs ^= (8 - bytes);
+diff --git a/target/alpha/translate.c b/target/alpha/translate.c
+index a492520075e..b93cbe3b61f 100644
+--- a/target/alpha/translate.c
++++ b/target/alpha/translate.c
+@@ -235,11 +235,12 @@ static TCGv dest_fpr(DisasContext *ctx, unsigned reg)
+ static int get_flag_ofs(unsigned shift)
+ {
+     int ofs = offsetof(CPUAlphaState, flags);
+-#if HOST_BIG_ENDIAN
+-    ofs += 3 - (shift / 8);
+-#else
+-    ofs += shift / 8;
 -#endif
-+    if (!HOST_BIG_ENDIAN) {
-+        offs ^= (8 - bytes);
++
++    if (HOST_BIG_ENDIAN) {
++        ofs += 3 - (shift / 8);
++    } else {
++        ofs += shift / 8;
 +    }
-     return offs + vec_full_reg_offset(reg);
+     return ofs;
  }
  
-diff --git a/target/s390x/tcg/translate_vx.c.inc b/target/s390x/tcg/translate_vx.c.inc
-index e073e5ad3aa..f3b4b48ab7b 100644
---- a/target/s390x/tcg/translate_vx.c.inc
-+++ b/target/s390x/tcg/translate_vx.c.inc
-@@ -175,9 +175,9 @@ static void get_vec_element_ptr_i64(TCGv_ptr ptr, uint8_t reg, TCGv_i64 enr,
- 
-     /* convert it to an element offset relative to tcg_env (vec_reg_offset() */
-     tcg_gen_shli_i64(tmp, tmp, es);
--#if !HOST_BIG_ENDIAN
--    tcg_gen_xori_i64(tmp, tmp, 8 - NUM_VEC_ELEMENT_BYTES(es));
--#endif
-+    if (!HOST_BIG_ENDIAN) {
-+        tcg_gen_xori_i64(tmp, tmp, 8 - NUM_VEC_ELEMENT_BYTES(es));
-+    }
-     tcg_gen_addi_i64(tmp, tmp, vec_full_reg_offset(reg));
- 
-     /* generate the final ptr by adding tcg_env */
 -- 
 2.51.0
 
