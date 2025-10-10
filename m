@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49C30CCA476
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 15:53:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92BCDCCA476
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 15:54:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v7FOu-00045Q-7Z; Fri, 10 Oct 2025 11:51:24 -0400
+	id 1v7FPt-0004aU-Sv; Fri, 10 Oct 2025 11:52:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7FOs-00043g-CC
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:51:22 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7FPs-0004Z8-1J
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:52:24 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7FOg-0002L7-87
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:51:20 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-46e34052bb7so26301585e9.2
- for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 08:51:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7FPV-0002jM-Qa
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:52:21 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-46e4473d7f6so14142265e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 08:51:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760111462; x=1760716262; darn=nongnu.org;
+ d=linaro.org; s=google; t=1760111507; x=1760716307; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lOgvEperfmmhjYR9nWj6nkwOWDN1Ec965EjpgT7isgU=;
- b=JRNkYdA9yGV0mg1S6NF/w0F4BVWsiybCwJo/NmG3D7gL65amWnJ5ZrUfWZhEbI18gM
- /7cbaXDqVP/FzpaDr0LCgF8QjFpXDx4Ur9uz2x6hQyZBQIdeSu05qqS7REi5V4NEv8Us
- XHFn584BM3YejF7RzwB6HY/ar+/khEZcP+nJSALZURZCKdSTT9lXr08npDe/Is9TN8NI
- FV6cswM162+Ls0Xp0ktSuuNU1ENkY423Nhvsnf8oZk9D4rqPBakAyxq04vgnUmbXBND/
- L2rNJu41s/m6J1LpyvYG76z5dEG0GN77Gs+VoC7iknwiVWLhxI9xLc3UMvBHUsI9z/uW
- ofLA==
+ bh=SLq9M+fZuGGceO7A52XDLm8m6ul3UUzP/+1nnTCx2wQ=;
+ b=r0/VNWJYjm7b5tzO343RA7L/V3iOyfvnIgwH5ebpAAVFtPC13Wnz6Km+wux2wytu2Q
+ SAbtA2/HYw6u8opcBPP1rrkwR3ae44dmHr00PaNeTn+QcXiqH+ZieRv3NOL3dq622Wdl
+ INHWfJDIYHrq0wg5eihphobddtfWFjs93EumwGAwZqfFBJC4aFW6bTuyc2284532QGUv
+ wsbb4pGQ+BuItCxfL1iDsQFZYHU3n2IojRAU4iuHu2e8NEYQVBYgtZfcWqQ9QV7D7jDX
+ mbjUnFcW7Ig7QA/2qXoN7BLMOgIPx68r1nLxEyB/BlneiksVC6Xrcrc9IVXyPQx8qQvm
+ otvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760111462; x=1760716262;
+ d=1e100.net; s=20230601; t=1760111507; x=1760716307;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lOgvEperfmmhjYR9nWj6nkwOWDN1Ec965EjpgT7isgU=;
- b=CFDVlGI1uGwAUjpfDStN+WvRed+F99AIObzih2AyJ6jNoZCh+t8JJt2RBEVA93izUq
- 4SfGxpVfiEWUZLD54WJ6zOmITDSUzLbFcIEo6cBdMGXT29n2z52tfghOdTqu/RcgOdTB
- I8gAC/6RHKZIpdr+KkU3UhJh6wWZcLdHoCtHSGCzL1h1cUVeeKkOUP9H2Pxu8MFsi9cY
- BEgweJaNBvh1h48VT1dO2zogqqwYI7J+S2ha61e9P4Af393noB3tKpKRUAXvlgQ5Mz8F
- DKWyCReC5wSuYgwrHUTVsMW8MaywYiVOkAi40SIMt5IsDEg3pNGRtBxasp/lhtqNxlIh
- 829Q==
+ bh=SLq9M+fZuGGceO7A52XDLm8m6ul3UUzP/+1nnTCx2wQ=;
+ b=HUJJ1ucmCNrBiyn7bmsfB5IdBlTAoPyTxebejJLm3gjbGhoqL2siCkfcoEoUHJnRox
+ izlJDE0fpdISbti22lUE4LAKRRgsK9Jlbf2Ep0zbHxS3Sw9uvIwg+mcV5Z4T+UpZu8Z1
+ 2Ox5Zcoi0BQdhWLNcAH82Nh4M4sVEvigtNL82CuLNth9qjmfYvrOapQICFQG+9EzOWj2
+ NnPAUZQfMqjJZr7h5aLa44ICc+UAkf0vUr5zSl5FgDsMiXJfBfog9uoF8qQ5Itl/Bx30
+ Y5iaKWCoYk6xZO1epCsGDcQ7NcOkJDADsCzNH1jaN0MK0C2DaRjZDCAPNWQ4Gkd4Nvlb
+ px5g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6ODA9CP15oHXZR157n8JY3eIez7iGv5adJwPycnZjW58TKET2wwbRJ8p+SH9TAD0nATT496IqtIyu@nongnu.org
-X-Gm-Message-State: AOJu0YyE2QRhf0ccNrJ8PfJrx+O+2B4k9BCdAcP77FlF5z7+gMCLfFo3
- 1pXtHhuSy5xU6VSbeW84vXAhXcxb8ajz/6xxVGFLvSUyqV4IuISZErzI+7h0A1BP7Lc=
-X-Gm-Gg: ASbGncvemwl6sYHlV0Sy4U1EGVBvqh2DhdljDJ44wS0VZBOcYQpiasEUrV9q872YrJ7
- 9mEltr6KpbRjEhqGxs/uw9l8fERrRhW93Mi0+yTbt1mijp7V7yxQUT2UHk+vz2Lc6LTc2loE2Bn
- 1s8B+Yr69xeGgUOV2DdABcUYXIJGZpC+V3IlpwB9QYrbjW/g67c/EAXj0OfLBFhTtnIFubB/pEB
- D1rmuk9WesiRJYndYNUdZVst9OqFUXMzFN6ICELnhAFa8iocicm3kBDDnHr37VDWt6W8LotkvYU
- WfE+Ooascx78x2pEF0ZFzHnVVgiKrLHqJWFMYdxRFpg16+b3j42Trk3lQ9CSpqiL8n+qRsXKMmU
- gIPBcx7ylTpPbV74saou480TNaT4JXCKbdKXMrskyvhTTFlk+nSoVTaq5bzgW2/akGCEpAT27uQ
- N/uImqwYuELDQ1aBxNSr39/LgB+7ESvA==
-X-Google-Smtp-Source: AGHT+IHIsPjK9jj9sn681SRgOd5WmHBVonNYlP+5Z5ZkdjFFPAE5vJ6AIjx/WJhjnrN1lzAgrKmvZw==
-X-Received: by 2002:a05:600c:528b:b0:46e:5cb5:8ca5 with SMTP id
- 5b1f17b1804b1-46fa9b164edmr92043975e9.35.1760111462547; 
- Fri, 10 Oct 2025 08:51:02 -0700 (PDT)
+ AJvYcCUWmufPlB5pXL3el1s0i7ZIFSWtrKA80aw286jBDAYVmfiRbUmPAgQm4crmaZdkhoU/EL+405MjMCiy@nongnu.org
+X-Gm-Message-State: AOJu0Yz40GMx2w67Lv/pjKIF7MoXBO6dKxlufCZgaood9n9oNiAF8A3n
+ S3eATJZDIAJeSTIDNSJcozH7Jc1wwDsvkRGjZONSW1SmBq86hkWppjHqlaYx27j0G3Y=
+X-Gm-Gg: ASbGncsjFzMwPIV0Ia8cp6IhNUAiT9HC0fCYX/u7wMCbxM7m1Br3WiNziukg4k9BKsd
+ dwCG0qSbU150r99XhJ16/KZat1dzodb3RO9tFKApqmDTAPxtsMtRmADDIUMR1FaqWtT3Ew+i6GD
+ aLp0fNe2uD30dEoY8m0vI+GFn0xKdOAWodxcwiCzMxntuXeDWdbpIbN5tORAhp/NMhsyiBhAyhK
+ PywT7IZ8FqJT+K9Xz4LETS+AhQsnoq+YyBai8YvR/NT77T/2j65jv+XyfbVjckVtybC8vZXEWsk
+ Vtioutd1F80uriMmW1TjJAZq1MvX/zkUnVYdwaDqHs8IU/TfkKgAuBwl7GzoQs4KNZD/Z/SfeZl
+ Oal7N5SBAyfWOlBI/pihBSJQidXBz+SCZqMRKdlc4+3T1FJlZnD/r0mebrz8gsBCULRbetRH4w8
+ 465qd25Mabs9n/JmHNMRs0PnaqiGeJlw==
+X-Google-Smtp-Source: AGHT+IEBYBepm63NYFsOjKb5FAtR/PLnhnH7bGZ3U6TrGeZIcSg8unifE1rPzEHyT6FZ2Uu+8FxNhA==
+X-Received: by 2002:a05:600c:4e01:b0:46e:37fe:f0e6 with SMTP id
+ 5b1f17b1804b1-46fa9b090d0mr95542785e9.30.1760111507327; 
+ Fri, 10 Oct 2025 08:51:47 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46fb49c4027sm50904555e9.17.2025.10.10.08.51.01
+ 5b1f17b1804b1-46fb49c3eeasm51008135e9.14.2025.10.10.08.51.46
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 10 Oct 2025 08:51:02 -0700 (PDT)
+ Fri, 10 Oct 2025 08:51:46 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
@@ -77,24 +77,24 @@ Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
  Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 03/13] target/riscv: Conceal MO_TE within gen_amo()
-Date: Fri, 10 Oct 2025 17:50:34 +0200
-Message-ID: <20251010155045.78220-4-philmd@linaro.org>
+Subject: [PATCH 12/13] target/riscv: Introduce mo_endian() helper
+Date: Fri, 10 Oct 2025 17:50:43 +0200
+Message-ID: <20251010155045.78220-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010155045.78220-1-philmd@linaro.org>
 References: <20251010155045.78220-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,237 +110,324 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All callers of gen_amo() set the MO_TE flag. Set it once in
-the callee.
+mo_endian() returns the target endianness from DisasContext.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/riscv/translate.c                    |  1 +
- target/riscv/insn_trans/trans_rva.c.inc     | 36 ++++++++++-----------
- target/riscv/insn_trans/trans_rvzabha.c.inc | 18 +++++------
- 3 files changed, 28 insertions(+), 27 deletions(-)
+ target/riscv/translate.c                      | 18 +++++++++++++++---
+ target/riscv/insn_trans/trans_rva.c.inc       |  4 ++--
+ target/riscv/insn_trans/trans_rvd.c.inc       |  4 ++--
+ target/riscv/insn_trans/trans_rvf.c.inc       |  4 ++--
+ target/riscv/insn_trans/trans_rvi.c.inc       |  4 ++--
+ target/riscv/insn_trans/trans_rvzacas.c.inc   |  4 ++--
+ target/riscv/insn_trans/trans_rvzce.c.inc     |  4 ++--
+ target/riscv/insn_trans/trans_rvzfh.c.inc     |  4 ++--
+ target/riscv/insn_trans/trans_rvzicfiss.c.inc |  4 ++--
+ target/riscv/insn_trans/trans_xthead.c.inc    | 16 ++++++++--------
+ 10 files changed, 39 insertions(+), 27 deletions(-)
 
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 9a53aecbfe9..94af9853cfe 100644
+index 2e6f39aa02d..e1f4dc5ffd0 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -1135,6 +1135,7 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
+@@ -126,6 +126,18 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+     return ctx->misa_ext & ext;
+ }
+ 
++static inline MemOp mo_endian(DisasContext *ctx)
++{
++    /*
++     * A couple of bits in MSTATUS set the endianness:
++     *  - MSTATUS_UBE (User-mode),
++     *  - MSTATUS_SBE (Supervisor-mode),
++     *  - MSTATUS_MBE (Machine-mode)
++     * but we don't implement that yet.
++     */
++    return MO_TE;
++}
++
+ #ifdef TARGET_RISCV32
+ #define get_xl(ctx)    MXL_RV32
+ #elif defined(CONFIG_USER_ONLY)
+@@ -142,7 +154,7 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+ #define get_address_xl(ctx)    ((ctx)->address_xl)
+ #endif
+ 
+-#define mxl_memop(ctx) ((get_xl(ctx) + 1) | MO_TE)
++#define mxl_memop(ctx) ((get_xl(ctx) + 1) | mo_endian(ctx))
+ 
+ /* The word size for this machine mode. */
+ static inline int __attribute__((unused)) get_xlen(DisasContext *ctx)
+@@ -1135,7 +1147,7 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
      TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
      MemOp size = mop & MO_SIZE;
  
-+    mop |= MO_TE;
+-    mop |= MO_TE;
++    mop |= mo_endian(ctx);
      if (ctx->cfg_ptr->ext_zama16b && size >= MO_32) {
          mop |= MO_ATOM_WITHIN16;
      } else {
+@@ -1156,7 +1168,7 @@ static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     TCGv src1 = get_address(ctx, a->rs1, 0);
+     TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+ 
+-    mop |= MO_TE;
++    mop |= mo_endian(ctx);
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+     tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop);
+ 
 diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-index 10e4c55efda..e0fbfafdde4 100644
+index 8737e8d60d1..a7a3278d242 100644
 --- a/target/riscv/insn_trans/trans_rva.c.inc
 +++ b/target/riscv/insn_trans/trans_rva.c.inc
-@@ -111,55 +111,55 @@ static bool trans_sc_w(DisasContext *ctx, arg_sc_w *a)
- static bool trans_amoswap_w(DisasContext *ctx, arg_amoswap_w *a)
- {
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TE | MO_SL);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_SL);
- }
+@@ -35,7 +35,7 @@ static bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     TCGv src1;
  
- static bool trans_amoadd_w(DisasContext *ctx, arg_amoadd_w *a)
- {
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_TE | MO_SL);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_SL);
- }
+     mop |= MO_ALIGN;
+-    mop |= MO_TE;
++    mop |= mo_endian(ctx);
  
- static bool trans_amoxor_w(DisasContext *ctx, arg_amoxor_w *a)
- {
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_TE | MO_SL);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_SL);
- }
+     decode_save_opc(ctx, 0);
+     src1 = get_address(ctx, a->rs1, 0);
+@@ -65,7 +65,7 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     TCGLabel *l2 = gen_new_label();
  
- static bool trans_amoand_w(DisasContext *ctx, arg_amoand_w *a)
- {
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_TE | MO_SL);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_SL);
- }
+     mop |= MO_ALIGN;
+-    mop |= MO_TE;
++    mop |= mo_endian(ctx);
  
- static bool trans_amoor_w(DisasContext *ctx, arg_amoor_w *a)
- {
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_TE | MO_SL);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_SL);
- }
+     decode_save_opc(ctx, 0);
+     src1 = get_address(ctx, a->rs1, 0);
+diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+index 62b75358158..ffea0c2a1f9 100644
+--- a/target/riscv/insn_trans/trans_rvd.c.inc
++++ b/target/riscv/insn_trans/trans_rvd.c.inc
+@@ -60,7 +60,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
+     } else {
+         memop |= MO_ATOM_IFALIGN;
+     }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
  
- static bool trans_amomin_w(DisasContext *ctx, arg_amomin_w *a)
- {
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_TE | MO_SL);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_SL);
- }
+     decode_save_opc(ctx, 0);
+     addr = get_address(ctx, a->rs1, a->imm);
+@@ -85,7 +85,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
+     } else {
+         memop |= MO_ATOM_IFALIGN;
+     }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
  
- static bool trans_amomax_w(DisasContext *ctx, arg_amomax_w *a)
- {
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_TE | MO_SL);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_SL);
- }
+     decode_save_opc(ctx, 0);
+     addr = get_address(ctx, a->rs1, a->imm);
+diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+index 878417eae92..89fb0f604ad 100644
+--- a/target/riscv/insn_trans/trans_rvf.c.inc
++++ b/target/riscv/insn_trans/trans_rvf.c.inc
+@@ -48,7 +48,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVF);
  
- static bool trans_amominu_w(DisasContext *ctx, arg_amominu_w *a)
- {
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_TE | MO_SL);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_SL);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     if (ctx->cfg_ptr->ext_zama16b) {
+         memop |= MO_ATOM_WITHIN16;
+     }
+@@ -71,7 +71,7 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVF);
  
- static bool trans_amomaxu_w(DisasContext *ctx, arg_amomaxu_w *a)
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     if (ctx->cfg_ptr->ext_zama16b) {
+         memop |= MO_ATOM_WITHIN16;
+     }
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index 8db3e78baab..a6fe912b30c 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -404,7 +404,7 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
  {
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_TE | MO_SL);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_SL);
- }
+     bool out;
  
- static bool trans_lr_d(DisasContext *ctx, arg_lr_d *a)
-@@ -180,61 +180,61 @@ static bool trans_amoswap_d(DisasContext *ctx, arg_amoswap_d *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TE | MO_UQ);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_UQ);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     if (ctx->cfg_ptr->ext_zama16b) {
+         memop |= MO_ATOM_WITHIN16;
+     }
+@@ -508,7 +508,7 @@ static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
  
- static bool trans_amoadd_d(DisasContext *ctx, arg_amoadd_d *a)
+ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
  {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_TE | MO_UQ);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_UQ);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     if (ctx->cfg_ptr->ext_zama16b) {
+         memop |= MO_ATOM_WITHIN16;
+     }
+diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc b/target/riscv/insn_trans/trans_rvzacas.c.inc
+index 6458ac4f241..8d94b83ce94 100644
+--- a/target/riscv/insn_trans/trans_rvzacas.c.inc
++++ b/target/riscv/insn_trans/trans_rvzacas.c.inc
+@@ -76,7 +76,7 @@ static bool gen_cmpxchg64(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     TCGv src1 = get_address(ctx, a->rs1, 0);
+     TCGv_i64 src2 = get_gpr_pair(ctx, a->rs2);
  
- static bool trans_amoxor_d(DisasContext *ctx, arg_amoxor_d *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_TE | MO_UQ);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_UQ);
- }
+-    mop |= MO_TE;
++    mop |= mo_endian(ctx);
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+     tcg_gen_atomic_cmpxchg_i64(dest, src1, dest, src2, ctx->mem_idx, mop);
  
- static bool trans_amoand_d(DisasContext *ctx, arg_amoand_d *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_TE | MO_UQ);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_UQ);
- }
+@@ -121,7 +121,7 @@ static bool trans_amocas_q(DisasContext *ctx, arg_amocas_q *a)
+     TCGv_i64 desth = get_gpr(ctx, a->rd == 0 ? 0 : a->rd + 1, EXT_NONE);
+     MemOp memop = MO_ALIGN | MO_UO;
  
- static bool trans_amoor_d(DisasContext *ctx, arg_amoor_d *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_TE | MO_UQ);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_UQ);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_concat_i64_i128(src2, src2l, src2h);
+     tcg_gen_concat_i64_i128(dest, destl, desth);
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+index 172c2c19c17..0d3ba40e52a 100644
+--- a/target/riscv/insn_trans/trans_rvzce.c.inc
++++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+@@ -185,7 +185,7 @@ static bool gen_pop(DisasContext *ctx, arg_cmpp *a, bool ret, bool ret_val)
  
- static bool trans_amomin_d(DisasContext *ctx, arg_amomin_d *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_TE | MO_UQ);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_UQ);
- }
+     tcg_gen_addi_tl(addr, sp, stack_adj - reg_size);
  
- static bool trans_amomax_d(DisasContext *ctx, arg_amomax_d *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_TE | MO_UQ);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_UQ);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     for (i = X_Sn + 11; i >= 0; i--) {
+         if (reg_bitmap & (1 << i)) {
+             TCGv dest = dest_gpr(ctx, i);
+@@ -239,7 +239,7 @@ static bool trans_cm_push(DisasContext *ctx, arg_cm_push *a)
  
- static bool trans_amominu_d(DisasContext *ctx, arg_amominu_d *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_TE | MO_UQ);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_UQ);
- }
+     tcg_gen_subi_tl(addr, sp, reg_size);
  
- static bool trans_amomaxu_d(DisasContext *ctx, arg_amomaxu_d *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_TE | MO_UQ);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_UQ);
- }
-diff --git a/target/riscv/insn_trans/trans_rvzabha.c.inc b/target/riscv/insn_trans/trans_rvzabha.c.inc
-index 25db42d24cd..c1f99b65f09 100644
---- a/target/riscv/insn_trans/trans_rvzabha.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzabha.c.inc
-@@ -79,55 +79,55 @@ static bool trans_amomaxu_b(DisasContext *ctx, arg_amomaxu_b *a)
- static bool trans_amoswap_h(DisasContext *ctx, arg_amoswap_h *a)
- {
-     REQUIRE_ZABHA(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_TE | MO_SW);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_xchg_tl, MO_SW);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     for (i = X_Sn + 11; i >= 0; i--) {
+         if (reg_bitmap & (1 << i)) {
+             TCGv val = get_gpr(ctx, i, EXT_NONE);
+diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
+index 5355cd46c3d..791ee51f652 100644
+--- a/target/riscv/insn_trans/trans_rvzfh.c.inc
++++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
+@@ -49,7 +49,7 @@ static bool trans_flh(DisasContext *ctx, arg_flh *a)
+     REQUIRE_FPU;
+     REQUIRE_ZFHMIN_OR_ZFBFMIN(ctx);
  
- static bool trans_amoadd_h(DisasContext *ctx, arg_amoadd_h *a)
- {
-     REQUIRE_ZABHA(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_TE | MO_SW);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_add_tl, MO_SW);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     decode_save_opc(ctx, 0);
+     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
+     if (a->imm) {
+@@ -74,7 +74,7 @@ static bool trans_fsh(DisasContext *ctx, arg_fsh *a)
+     REQUIRE_FPU;
+     REQUIRE_ZFHMIN_OR_ZFBFMIN(ctx);
  
- static bool trans_amoxor_h(DisasContext *ctx, arg_amoxor_h *a)
- {
-     REQUIRE_ZABHA(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_TE | MO_SW);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_xor_tl, MO_SW);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     decode_save_opc(ctx, 0);
+     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
+     if (a->imm) {
+diff --git a/target/riscv/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+index 89eed007587..0b6ad57965c 100644
+--- a/target/riscv/insn_trans/trans_rvzicfiss.c.inc
++++ b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
+@@ -105,7 +105,7 @@ static bool trans_ssamoswap_w(DisasContext *ctx, arg_amoswap_w *a)
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+     src1 = get_address(ctx, a->rs1, 0);
  
- static bool trans_amoand_h(DisasContext *ctx, arg_amoand_h *a)
- {
-     REQUIRE_ZABHA(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_TE | MO_SW);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_and_tl, MO_SW);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_atomic_xchg_tl(dest, src1, src2, SS_MMU_INDEX(ctx), memop);
+     gen_set_gpr(ctx, a->rd, dest);
+     return true;
+@@ -135,7 +135,7 @@ static bool trans_ssamoswap_d(DisasContext *ctx, arg_amoswap_w *a)
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+     src1 = get_address(ctx, a->rs1, 0);
  
- static bool trans_amoor_h(DisasContext *ctx, arg_amoor_h *a)
- {
-     REQUIRE_ZABHA(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_TE | MO_SW);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_or_tl, MO_SW);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_atomic_xchg_tl(dest, src1, src2, SS_MMU_INDEX(ctx), memop);
+     gen_set_gpr(ctx, a->rd, dest);
+     return true;
+diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
+index 2f31842791e..f8b95c6498b 100644
+--- a/target/riscv/insn_trans/trans_xthead.c.inc
++++ b/target/riscv/insn_trans/trans_xthead.c.inc
+@@ -349,7 +349,7 @@ static bool gen_fload_idx(DisasContext *ctx, arg_th_memidx *a, MemOp memop,
+     TCGv_i64 rd = cpu_fpr[a->rd];
+     TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, zext_offs);
  
- static bool trans_amomin_h(DisasContext *ctx, arg_amomin_h *a)
- {
-     REQUIRE_ZABHA(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_TE | MO_SW);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smin_tl, MO_SW);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_qemu_ld_i64(rd, addr, ctx->mem_idx, memop);
+     if ((memop & MO_SIZE) == MO_32) {
+         gen_nanbox_s(rd, rd);
+@@ -370,7 +370,7 @@ static bool gen_fstore_idx(DisasContext *ctx, arg_th_memidx *a, MemOp memop,
+     TCGv_i64 rd = cpu_fpr[a->rd];
+     TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, zext_offs);
  
- static bool trans_amomax_h(DisasContext *ctx, arg_amomax_h *a)
- {
-     REQUIRE_ZABHA(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_TE | MO_SW);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_smax_tl, MO_SW);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_qemu_st_i64(rd, addr, ctx->mem_idx, memop);
  
- static bool trans_amominu_h(DisasContext *ctx, arg_amominu_h *a)
- {
-     REQUIRE_ZABHA(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_TE | MO_SW);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umin_tl, MO_SW);
- }
+     return true;
+@@ -570,7 +570,7 @@ static bool gen_load_inc(DisasContext *ctx, arg_th_meminc *a, MemOp memop,
+     TCGv rd = dest_gpr(ctx, a->rd);
+     TCGv rs1 = get_gpr(ctx, a->rs1, EXT_NONE);
  
- static bool trans_amomaxu_h(DisasContext *ctx, arg_amomaxu_h *a)
- {
-     REQUIRE_ZABHA(ctx);
--    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_TE | MO_SW);
-+    return gen_amo(ctx, a, &tcg_gen_atomic_fetch_umax_tl, MO_SW);
- }
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
+     tcg_gen_addi_tl(rs1, rs1, imm);
+     gen_set_gpr(ctx, a->rd, rd);
+@@ -591,7 +591,7 @@ static bool gen_store_inc(DisasContext *ctx, arg_th_meminc *a, MemOp memop,
+     TCGv data = get_gpr(ctx, a->rd, EXT_NONE);
+     TCGv rs1 = get_gpr(ctx, a->rs1, EXT_NONE);
  
- static bool trans_amocas_b(DisasContext *ctx, arg_amocas_b *a)
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
+     tcg_gen_addi_tl(rs1, rs1, imm);
+     gen_set_gpr(ctx, a->rs1, rs1);
+@@ -747,7 +747,7 @@ static bool gen_load_idx(DisasContext *ctx, arg_th_memidx *a, MemOp memop,
+     TCGv rd = dest_gpr(ctx, a->rd);
+     TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, zext_offs);
+ 
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
+     gen_set_gpr(ctx, a->rd, rd);
+ 
+@@ -765,7 +765,7 @@ static bool gen_store_idx(DisasContext *ctx, arg_th_memidx *a, MemOp memop,
+     TCGv data = get_gpr(ctx, a->rd, EXT_NONE);
+     TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, zext_offs);
+ 
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
+ 
+     return true;
+@@ -926,7 +926,7 @@ static bool gen_loadpair_tl(DisasContext *ctx, arg_th_pair *a, MemOp memop,
+     addr1 = get_address(ctx, a->rs, imm);
+     addr2 = get_address(ctx, a->rs, memop_size(memop) + imm);
+ 
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_qemu_ld_tl(t1, addr1, ctx->mem_idx, memop);
+     tcg_gen_qemu_ld_tl(t2, addr2, ctx->mem_idx, memop);
+     gen_set_gpr(ctx, a->rd1, t1);
+@@ -965,7 +965,7 @@ static bool gen_storepair_tl(DisasContext *ctx, arg_th_pair *a, MemOp memop,
+     addr1 = get_address(ctx, a->rs, imm);
+     addr2 = get_address(ctx, a->rs, memop_size(memop) + imm);
+ 
+-    memop |= MO_TE;
++    memop |= mo_endian(ctx);
+     tcg_gen_qemu_st_tl(data1, addr1, ctx->mem_idx, memop);
+     tcg_gen_qemu_st_tl(data2, addr2, ctx->mem_idx, memop);
+     return true;
 -- 
 2.51.0
 
