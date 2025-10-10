@@ -4,61 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E5E8CCD185
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 14:58:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6BF0CCA476
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 15:06:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v7EYo-0001on-SH; Fri, 10 Oct 2025 10:57:34 -0400
+	id 1v7Eh3-0005QD-5z; Fri, 10 Oct 2025 11:06:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
- id 1v7EYY-0001ng-Dw; Fri, 10 Oct 2025 10:57:20 -0400
-Received: from mail-m16.yeah.net ([1.95.21.15])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <z_bajeer@yeah.net>)
- id 1v7EYL-0007ub-8h; Fri, 10 Oct 2025 10:57:18 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=BX
- YGifCienPI1jzoyndm7T5P3SXtXv5rKB4Tlv/TCMs=; b=ABUX6vsZTJ5gtBOXOl
- bSB8LPALeJkfYjWH2wvWiRFRPM2Z8sbgGH27VIKzjxQycL4nn0sLlfgRyilpLmfJ
- Pi4Ty9kTLgFZgioqcLbQT0pixpaAaFPuycxbS3o95KEkujFSNjLXF7EGpcD/NdSE
- jJFYH+ZMkG7g75+Dwd9HVFOmY=
-Received: from well.lan (unknown [])
- by gzsmtp1 (Coremail) with SMTP id Mc8vCgBnbbGWHulo9wpFBg--.17191S2;
- Fri, 10 Oct 2025 22:56:26 +0800 (CST)
-From: Jialong Yang <z_bajeer@yeah.net>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: jialong.yang@barrietech.com, Jialong Yang <z_bajeer@yeah.net>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v3] aplic: fix mask for smsiaddrcfgh
-Date: Fri, 10 Oct 2025 22:56:21 +0800
-Message-ID: <20251010145621.24961-1-z_bajeer@yeah.net>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7Eh0-0005Pq-LX
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:06:02 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v7Egr-0003CU-PW
+ for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 11:06:01 -0400
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3ee130237a8so1778312f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 08:05:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1760108748; x=1760713548; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Nn0zR8GqP18BMIkZcNmLNoITloyNSGQRERm8oHWHeRs=;
+ b=lC6OrAK7Fb8vjegyltVXUO9x3NAd+8dNN4nyWFqrJituX4y0/i965+s0chCUaC5Yew
+ iL1R6f/40RXvcjgZ8ijOwSNQVK235U3v8RXb5kXzQi4JvCS+PfRP+WTrUIxJ2uQDi5I0
+ XrM1TVsG9a/mo+s+Z8FzcOTHKgcvCLVo4pRxWsxUIndJK0BrN7qcDZ1JihDuGtJ3WukX
+ 0wkkaHjAjfTv8fD7zPJ4FXQKvOk0Mmka1d41KC+FV0kBW1VeYLDwQtmMH7JC29NqLCpE
+ F//PMqBj7dSGVxg4JE/EFWTHbud8/PNmo0nxjW7wzIESwoHQTbY6FHkKSnxXdsJ/iNCj
+ q2kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760108748; x=1760713548;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nn0zR8GqP18BMIkZcNmLNoITloyNSGQRERm8oHWHeRs=;
+ b=Get8A6hptPsS2DtH1FrtiLjq/yF9tKoDRCLxe1lQ32tI8sgcTUiWq3rE4DE7I5fRxW
+ j6SncCYT6y8Oqn09t6uCXQvxafiMP6URmRe1UekwUDcROXADi//vMQ05ezYBVDDlsSG/
+ OkU50sQTqNK9WCSWVEzDc0v2djowTBvylXxTtl7BD0lwz1MfkoTrfFHqyV6jwMfJN7o8
+ XtWrh1076hoMYZf9yoKSzjTeoyeIALK/BGzkAJSbf5257bSWkioNet22E7AEc0ii1EXU
+ LbKjbyLPUh6UEXn3glc6gB6zIP0ql7O58TbWFtqbBVQbAK5yr158jb9KNWTg77QbPY9B
+ u1JQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVnce2aV/p5f7c0nDDaT4QVNQXW0dCeirrd34L/Os5Z9AqgqF66LYwAQ+htN9kePjTDeBRgshENmweF@nongnu.org
+X-Gm-Message-State: AOJu0YyWbiD7OmsBlw2RbP1OVGCBdm1ke6eeAGjYMxhjBG3Io5O2qo+D
+ XOavYhcXaSP4sxURydjWwtu+VzAxFd8mrWBV3FShu1zXWWSKpsKP8vApgIhbeVJFKks=
+X-Gm-Gg: ASbGncvV7DrsdvuGAtxyIQ4qrT4YycFcTpdzaL8fUiqTjgWMfvghY6DQED415bd3J69
+ w/Wu56br6o1GAGJdQE8+tmkIS1mFuaZTxvgFFHXBjj+uHuGOk/K5QUmHNW3IfUoEO04/Ch6qdHt
+ xWtVUKEWQajSZ27vWiJT/EZypKZ1vX9luhcR9k6vIjBRQD7wCnvbzi8QtD2OAQxiBPZUmCostfZ
+ 06GhwZmvyl+dqRQiUzstLZE9IEH56EThCDI5VxqrCx09a9HsL9bLC3lGe4scnGFsEZioM6XKLSk
+ RpHWMMrxDh/SYpeZvEx8SiVvX0n180QxY6gcAqGwaGK4CrT9re3rAdF0WkVtCmy3AbRszjcz5vG
+ 4xfSbs5NMSStIE0YDn4mS2UHZdDX+3gRDYWW19etATe0yhecipM1xC9BlTST5z8aVBU83LuOYcj
+ f2p+LwJ4mqcZUl
+X-Google-Smtp-Source: AGHT+IElAYqLkkLd+2OyA1l6T9c1VqvgzMY9oaJGkhizEv0M3tE6cw7ONXIpeVQzzr4wbZ7tL7xgzw==
+X-Received: by 2002:a05:6000:1a8b:b0:425:8bd1:fbb4 with SMTP id
+ ffacd0b85a97d-4266e7df95cmr8024279f8f.50.1760108748202; 
+ Fri, 10 Oct 2025 08:05:48 -0700 (PDT)
+Received: from [192.168.69.221] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-426ce5e83e1sm4717821f8f.51.2025.10.10.08.05.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 Oct 2025 08:05:47 -0700 (PDT)
+Message-ID: <39bc0cef-cda7-43f7-8d9c-870599a6e91d@linaro.org>
+Date: Fri, 10 Oct 2025 17:05:46 +0200
 MIME-Version: 1.0
-smsiaddrcfgh: bits 22:20 LHXS(WARL) bits 11:0  High Base PPN(WARL)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 09/18] target/riscv: accessors to registers upper part
+ and 128-bit load/store
+Content-Language: en-US
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: bin.meng@windriver.com, richard.henderson@linaro.org, palmer@dabbelt.com, 
+ fabien.portas@grenoble-inp.org, alistair.francis@wdc.com
+References: <20220106210108.138226-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20220106210108.138226-10-frederic.petrot@univ-grenoble-alpes.fr>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20220106210108.138226-10-frederic.petrot@univ-grenoble-alpes.fr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: Mc8vCgBnbbGWHulo9wpFBg--.17191S2
-X-Coremail-Antispam: 1Uf129KBjvJXoWxZFWDJr1DJryktw43Cry5XFb_yoW5KrWDpF
- 4kGwsxKF45Jr1xKanay3ZrJry3JrykAr9Fyr1DW3409F1kZr4q934ktayq9r15JryfWr15
- Aw4FqF1DWFsxA37anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0ziKLvtUUUUU=
-X-Originating-IP: [223.160.231.226]
-X-CM-SenderInfo: p2betyxhhuq5hhdkh0dhw/1tbiCQviI2jo5st87gAAs8
-Received-SPF: pass client-ip=1.95.21.15; envelope-from=z_bajeer@yeah.net;
- helo=mail-m16.yeah.net
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,102 +107,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Jialong Yang <z_bajeer@yeah.net>
----
- hw/intc/riscv_aplic.c | 29 ++++++++++++++++++-----------
- 1 file changed, 18 insertions(+), 11 deletions(-)
+Hi Frédéric,
 
-v1 --> v2:
-- fix calculation of MSI address.
-- In Supervisor mode, lhxw/hhxs/hhxw fields are in mmsiaddrcfgh register.
-- And lhxs field is in smsiaddrcfgh.
+(old patch merged as commit a2f827ff4f44)
 
-v2 --> v3:
-- Fix compile error when enable kvm.
+On 6/1/22 22:00, Frédéric Pétrot wrote:
+> Get function to retrieve the 64 top bits of a register, stored in the gprh
+> field of the cpu state. Set function that writes the 128-bit value at once.
+> The access to the gprh field can not be protected at compile time to make
+> sure it is accessed only in the 128-bit version of the processor because we
+> have no way to indicate that the misa_mxl_max field is const.
+> 
+> The 128-bit ISA adds ldu, lq and sq. We provide support for these
+> instructions. Note that (a) we compute only 64-bit addresses to actually
+> access memory, cowardly utilizing the existing address translation mechanism
+> of QEMU, and (b) we assume for now little-endian memory accesses.
+> 
+> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>   target/riscv/insn16.decode              |  27 ++++++-
+>   target/riscv/insn32.decode              |   5 ++
+>   target/riscv/translate.c                |  41 ++++++++++
+>   target/riscv/insn_trans/trans_rvi.c.inc | 100 ++++++++++++++++++++++--
+>   4 files changed, 163 insertions(+), 10 deletions(-)
 
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index a1d9fa5085..6dccca73af 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -96,7 +96,7 @@
-     (APLIC_xMSICFGADDR_PPN_HHX_MASK(__hhxw) << \
-      APLIC_xMSICFGADDR_PPN_HHX_SHIFT(__hhxs))
- 
--#define APLIC_xMSICFGADDRH_VALID_MASK   \
-+#define APLIC_MMSICFGADDRH_VALID_MASK   \
-     (APLIC_xMSICFGADDRH_L | \
-      (APLIC_xMSICFGADDRH_HHXS_MASK << APLIC_xMSICFGADDRH_HHXS_SHIFT) | \
-      (APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
-@@ -104,6 +104,10 @@
-      (APLIC_xMSICFGADDRH_LHXW_MASK << APLIC_xMSICFGADDRH_LHXW_SHIFT) | \
-      APLIC_xMSICFGADDRH_BAPPN_MASK)
- 
-+#define APLIC_SMSICFGADDRH_VALID_MASK   \
-+    ((APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
-+     APLIC_xMSICFGADDRH_BAPPN_MASK)
-+
- #define APLIC_SETIP_BASE               0x1c00
- #define APLIC_SETIPNUM                 0x1cdc
- 
-@@ -184,7 +188,7 @@ void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr)
-         addr >>= APLIC_xMSICFGADDR_PPN_SHIFT;
-         aplic->kvm_msicfgaddr = extract64(addr, 0, 32);
-         aplic->kvm_msicfgaddrH = extract64(addr, 32, 32) &
--                                 APLIC_xMSICFGADDRH_VALID_MASK;
-+                                 APLIC_MMSICFGADDRH_VALID_MASK;
-     }
- #endif
- }
-@@ -409,13 +413,8 @@ static void riscv_aplic_msi_send(RISCVAPLICState *aplic,
-         msicfgaddr = aplic->kvm_msicfgaddr;
-         msicfgaddrH = ((uint64_t)aplic->kvm_msicfgaddrH << 32);
-     } else {
--        if (aplic->mmode) {
--            msicfgaddr = aplic_m->mmsicfgaddr;
--            msicfgaddrH = aplic_m->mmsicfgaddrH;
--        } else {
--            msicfgaddr = aplic_m->smsicfgaddr;
--            msicfgaddrH = aplic_m->smsicfgaddrH;
--        }
-+        msicfgaddr = aplic_m->mmsicfgaddr;
-+        msicfgaddrH = aplic_m->mmsicfgaddrH;
-     }
- 
-     lhxs = (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
-@@ -427,6 +426,14 @@ static void riscv_aplic_msi_send(RISCVAPLICState *aplic,
-     hhxw = (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXW_SHIFT) &
-             APLIC_xMSICFGADDRH_HHXW_MASK;
- 
-+    if (!aplic->kvm_splitmode && !aplic->mmode) {
-+        msicfgaddrH = aplic_m->smsicfgaddrH;
-+        msicfgaddr = aplic_m->smsicfgaddr;
-+
-+        lhxs = (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
-+            APLIC_xMSICFGADDRH_LHXS_MASK;
-+    }
-+
-     group_idx = hart_idx >> lhxw;
- 
-     addr = msicfgaddr;
-@@ -771,7 +778,7 @@ static void riscv_aplic_write(void *opaque, hwaddr addr, uint64_t value,
-     } else if (aplic->mmode && aplic->msimode &&
-                (addr == APLIC_MMSICFGADDRH)) {
-         if (!(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
--            aplic->mmsicfgaddrH = value & APLIC_xMSICFGADDRH_VALID_MASK;
-+            aplic->mmsicfgaddrH = value & APLIC_MMSICFGADDRH_VALID_MASK;
-         }
-     } else if (aplic->mmode && aplic->msimode &&
-                (addr == APLIC_SMSICFGADDR)) {
-@@ -792,7 +799,7 @@ static void riscv_aplic_write(void *opaque, hwaddr addr, uint64_t value,
-                (addr == APLIC_SMSICFGADDRH)) {
-         if (aplic->num_children &&
-             !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
--            aplic->smsicfgaddrH = value & APLIC_xMSICFGADDRH_VALID_MASK;
-+            aplic->smsicfgaddrH = value & APLIC_SMSICFGADDRH_VALID_MASK;
-         }
-     } else if ((APLIC_SETIP_BASE <= addr) &&
-             (addr < (APLIC_SETIP_BASE + aplic->bitfield_words * 4))) {
--- 
-2.43.0
+
+> +/* Compute only 64-bit addresses to use the address translation mechanism */
+> +static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
+> +{
+> +    TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
+> +    TCGv destl = dest_gpr(ctx, a->rd);
+> +    TCGv desth = dest_gprh(ctx, a->rd);
+> +    TCGv addrl = tcg_temp_new();
+> +
+> +    tcg_gen_addi_tl(addrl, src1l, a->imm);
+> +
+> +    if ((memop & MO_SIZE) <= MO_64) {
+> +        tcg_gen_qemu_ld_tl(destl, addrl, ctx->mem_idx, memop);
+> +        if (memop & MO_SIGN) {
+> +            tcg_gen_sari_tl(desth, destl, 63);
+> +        } else {
+> +            tcg_gen_movi_tl(desth, 0);
+> +        }
+> +    } else {
+> +        /* assume little-endian memory access for now */
+> +        tcg_gen_qemu_ld_tl(destl, addrl, ctx->mem_idx, MO_TEUQ);
+> +        tcg_gen_addi_tl(addrl, addrl, 8);
+> +        tcg_gen_qemu_ld_tl(desth, addrl, ctx->mem_idx, MO_TEUQ);
+
+I am confused by this "assume little-endian access" comment, since
+you set the MO_TE flag (target endianness). I suppose you added the
+comment since the @memop argument is ignored in this code path.
+Maybe you want 'MO_LEUQ' here instead, to select little endianness?
+
+> +    }
+> +
+> +    gen_set_gpr128(ctx, a->rd, destl, desth);
+> +
+> +    tcg_temp_free(addrl);
+> +    return true;
+> +}
+> +
+> +static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
+> +{
+> +    if (get_xl(ctx) == MXL_RV128) {
+> +        return gen_load_i128(ctx, a, memop);
+> +    } else {
+> +        return gen_load_tl(ctx, a, memop);
+> +    }
+> +}
 
 
