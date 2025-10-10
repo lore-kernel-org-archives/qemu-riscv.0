@@ -4,100 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A1CCCD185
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 18:53:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2843DCCD185
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Oct 2025 21:37:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v7IEc-0004dD-2z; Fri, 10 Oct 2025 14:52:58 -0400
+	id 1v7KnO-0001an-8g; Fri, 10 Oct 2025 17:37:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1v7IEa-0004b2-Jj
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 14:52:56 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1v7IEX-0003P1-Ao
- for qemu-riscv@nongnu.org; Fri, 10 Oct 2025 14:52:55 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2698d47e776so18154175ad.1
- for <qemu-riscv@nongnu.org>; Fri, 10 Oct 2025 11:52:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760122367; x=1760727167; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=begoUp0oBV8mpS+yptjnrr4rI9lBPYiXV+KmzPfLRAA=;
- b=aVPo96br8E/hHbAQIkpUOPFXLM5T7cZoFlqhcTvB1/dvajWAaYodt8kMZ4VQ1+Gi/Y
- Xs4lm2P8whwiUZdQ0KGQgLv51HquvSa+R7kqnsKDjE8vaCzu0PjgPtxKVurYiEVBk7ba
- 5HM8Ch/KJNuIlrwNr0t7TIfCIlE/KD9TtSo5H4dDzYZjG/ywHgRmW5b5ulK5zAs4/4XP
- xBwiMvgS4D1jfGJLJLCbjpdhMqpaSnLvZ7WSsVcEJJQM4+vlAPvCUE7cQxoj52yVGssK
- UnT3026mwEala/L7/N81SIIJHTubo0X0qpPzQHwxQJbEBIrfH4k11bsyvMBEaX6yJ6/q
- al6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760122367; x=1760727167;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=begoUp0oBV8mpS+yptjnrr4rI9lBPYiXV+KmzPfLRAA=;
- b=YCCJbpvzW/fdVPd0Cs+g6oJ8DrUc6sO+bm06LykTArJpPE9e+K+gPyd7Pqg0Dhgx4q
- OlzIiI25HcWIf2GJSYZPEyCrytPDrvD6uaGetbkHtLWPeQ1/KKTjxqGHTYm3ZH7TVCCc
- tEofRW+Rse81EIvUEjrAvqTgzMzj5jD10BtIau+B6cgvCj+MlVMj71bDCnM54VGZA7E3
- ZFXxs6jaaTOrKXv4Yqwi3aQ0pEK3J1KDmnC9qelTbKKfh7ANeEplVAPguv5Xrl40/W34
- L8paz7YH8yxxOq1Q8V/m4YRPjNamlhJb5nC83JHottKFa/OINqSbyjmjkSWOa0DO01Et
- hq7w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUOJakLYAQERh3a1MdbTIkTT4/43jwMKrUVHkCtPZ/8q+AU8fiOaxOPnXfQvtgn6dZCRhKVhP2+pp1F@nongnu.org
-X-Gm-Message-State: AOJu0YwmHzlkssu6c90UGrvmx2vhxl21Ypu9oy912e+vXMCFizc6/xuo
- 3yzjhVUMY+N4qYcjvthX3JRNSzR6fY+QF9HhH2fxrr6Y7/dLsmtXQPQDFfjA/0UQjYY=
-X-Gm-Gg: ASbGncvEbvymCJE9W8p1sp1BTGiHa0A7PrcM+cv8Spuh64G6N+gR2HjXXPw+HPfpuyB
- 7aU3+SKa3F3oyhw7AAkWcoupNCyj7P03GGZfkcHJzRwVBBGjigrNEGivcrt7oqlxuiEkGbe0HTP
- QpAVet0VwPnb/Th/K83Q1yARfBkCRrtCE5qNBuX5nH7O1liDLRFj/904GQCVOhaKzpoelL85P1a
- tM4s3KQg9/0HxGJOzhZt/ImnwOrmf1KGJLIIsTZATIy/wJugb8HqoarXul+C0AIbtdteEWV4sXP
- YDS+EIoAyhlLhPPyHi4gcLCbYBWLRI3+HoYimrXQY1WzY/DYivitn153KGfC46HTe97JwstuXxF
- hLi4w7Z4OTYpsaMjZ4rjWy99QyJ9c+t1jzn21dpx+G4kdy8Jqefgfrmxiw34=
-X-Google-Smtp-Source: AGHT+IFfo0U7WIH0emhwkwA7of07IN4JrwB/W5cyscaQuQayoeEX/oVz/AthJgh7WHEKnKYwRZs9gQ==
-X-Received: by 2002:a17:903:1aa3:b0:269:9adf:839 with SMTP id
- d9443c01a7336-290272b3357mr162622405ad.19.1760122366903; 
- Fri, 10 Oct 2025 11:52:46 -0700 (PDT)
-Received: from [192.168.0.4] ([71.212.157.132])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29034f56c04sm63704165ad.110.2025.10.10.11.52.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Oct 2025 11:52:46 -0700 (PDT)
-Message-ID: <7a504cd1-4935-4801-b473-88bdf10312d6@linaro.org>
-Date: Fri, 10 Oct 2025 11:52:44 -0700
+ (Exim 4.90_1) (envelope-from <alifm@linux.ibm.com>)
+ id 1v7Ihw-0004tk-3Y; Fri, 10 Oct 2025 15:23:16 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alifm@linux.ibm.com>)
+ id 1v7Ihs-0005Gm-F0; Fri, 10 Oct 2025 15:23:15 -0400
+Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59AJ7rDp030370;
+ Fri, 10 Oct 2025 19:23:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=pp1; bh=NRBq7J
+ ootIq6vpayYi7d4ham5tvzRFYMomQU++yEAaE=; b=QSpmpXo6jy0UyDn+GEaJ59
+ ZU4W4bQqAlMXs3Z6qiBkLAosoNIidyYe6ab65lp51jf6CAYrLy9bC1zbd3+txovM
+ lHdGgOjg7TWksW16WEQ3zV2X/C2cGE6WB0s1HDW3fdhdErzcDUTTiYTSpGVL3LOk
+ Ide7N71GpcRjmznjts8veala8T2Sg3y/rtAYKy/EKn8jyCgwIDadkt5iraQPZSIB
+ qc2uCkskTTzA0zMMQS7LwtKZbAPurV5R5lzuVw5pDBlk9+g1EC3twN6J1t280+bR
+ paHFWpXgmcPCGiSyKW+x8SurDeCId6AwNKmlx8i87iY5FlFiUtKcAHlGqE+0ARzQ
+ ==
+Received: from ppma21.wdc07v.mail.ibm.com
+ (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 49nv81var2-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Oct 2025 19:23:06 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma21.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 59AG0HRL022784;
+ Fri, 10 Oct 2025 19:23:05 GMT
+Received: from smtprelay04.dal12v.mail.ibm.com ([172.16.1.6])
+ by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 49nv8vkd49-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Oct 2025 19:23:05 +0000
+Received: from smtpav06.dal12v.mail.ibm.com (smtpav06.dal12v.mail.ibm.com
+ [10.241.53.105])
+ by smtprelay04.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 59AJN4fO31916608
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 10 Oct 2025 19:23:04 GMT
+Received: from smtpav06.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id B893D58055;
+ Fri, 10 Oct 2025 19:23:04 +0000 (GMT)
+Received: from smtpav06.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 2176858043;
+ Fri, 10 Oct 2025 19:23:04 +0000 (GMT)
+Received: from [9.61.240.77] (unknown [9.61.240.77])
+ by smtpav06.dal12v.mail.ibm.com (Postfix) with ESMTP;
+ Fri, 10 Oct 2025 19:23:04 +0000 (GMT)
+Message-ID: <781a3494-453e-47ea-ab10-48d0f5315f4f@linux.ibm.com>
+Date: Fri, 10 Oct 2025 12:23:02 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 12/13] target/riscv: Introduce mo_endian() helper
+Subject: Re: [PATCH 08/16] hw/virtio: Replace HOST_BIG_ENDIAN #ifdef with
+ runtime if() check
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
-Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Anton Johansson <anjo@rev.ng>,
- Valentin Haudiquet <valentin.haudiquet@canonical.com>,
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-References: <20251010155045.78220-1-philmd@linaro.org>
- <20251010155045.78220-13-philmd@linaro.org>
-From: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ Stefano Garzarella <sgarzare@redhat.com>
+References: <20251010134226.72221-1-philmd@linaro.org>
+ <20251010134226.72221-9-philmd@linaro.org>
 Content-Language: en-US
-In-Reply-To: <20251010155045.78220-13-philmd@linaro.org>
+From: Farhan Ali <alifm@linux.ibm.com>
+In-Reply-To: <20251010134226.72221-9-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: s2u-wFbhSy_GG8Jlq6RS0m6EsNyeNEbr
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDA4MDEyMSBTYWx0ZWRfX9pVjrzgqH6vZ
+ OVlLI+rUhuG3mBaS4lcmFNhJbzBjYBM/Y+poeTX1Pyd9vxbKZ9OBbAPz56Y0f/yEKEcpDrA0LWt
+ psdEwPh3b+C1yXg6KUDrA2PujABBo7FvN3qb7PDzgNjvldvmwp95Hj3P8+AlTmpim3UlHHuAeYM
+ 9pYvy635oiT7/00oKyt05jKr0Ah3CfCrrrYHUedSzLRR4AtBY0uc6LAwHumm4ggsPYe1m1YE8tU
+ BZ/PniR6M76CvYdbjBwsbPrrHbAeL39wu2VhX8q2B3U8z9nacJGFU9iF4pVUo48fDzkvyz4eRZp
+ jKII9aVpcDdsY41tTW+6OIbH/xHeyjRhyj2BU/kxoneVTlEu3CwJDDpnhwhVhCMhgK6dTsMpl0W
+ z8kBFgoobbvisaJhX0hj6raSdTa24g==
+X-Authority-Analysis: v=2.4 cv=cKntc1eN c=1 sm=1 tr=0 ts=68e95d1a cx=c_pps
+ a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
+ a=IkcTkHD0fZMA:10 a=x6icFKpwvdMA:10 a=KKAkSRfTAAAA:8 a=1dBT-wlmzmzewUka4SAA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=cvBusfyB2V15izCimMoJ:22
+ a=cPQSjfK2_nFv0Q5t_7PE:22
+X-Proofpoint-GUID: s2u-wFbhSy_GG8Jlq6RS0m6EsNyeNEbr
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-10_05,2025-10-06_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 impostorscore=0 adultscore=0 lowpriorityscore=0 malwarescore=0
+ suspectscore=0 bulkscore=0 phishscore=0 spamscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2510020000 definitions=main-2510080121
+Received-SPF: pass client-ip=148.163.158.5; envelope-from=alifm@linux.ibm.com;
+ helo=mx0b-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 10 Oct 2025 17:37:00 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,24 +125,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/10/25 08:50, Philippe Mathieu-Daudé wrote:
-> mo_endian() returns the target endianness from DisasContext.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+
+On 10/10/2025 6:42 AM, Philippe Mathieu-Daudé wrote:
+> Replace compile-time #ifdef with a runtime check to ensure all code
+> paths are built and tested. This reduces build-time configuration
+> complexity and improves maintainability.
+>
+> No functional change intended.
+>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/riscv/translate.c                      | 18 +++++++++++++++---
->   target/riscv/insn_trans/trans_rva.c.inc       |  4 ++--
->   target/riscv/insn_trans/trans_rvd.c.inc       |  4 ++--
->   target/riscv/insn_trans/trans_rvf.c.inc       |  4 ++--
->   target/riscv/insn_trans/trans_rvi.c.inc       |  4 ++--
->   target/riscv/insn_trans/trans_rvzacas.c.inc   |  4 ++--
->   target/riscv/insn_trans/trans_rvzce.c.inc     |  4 ++--
->   target/riscv/insn_trans/trans_rvzfh.c.inc     |  4 ++--
->   target/riscv/insn_trans/trans_rvzicfiss.c.inc |  4 ++--
->   target/riscv/insn_trans/trans_xthead.c.inc    | 16 ++++++++--------
->   10 files changed, 39 insertions(+), 27 deletions(-)
+>   include/hw/virtio/virtio-access.h | 6 +-----
+>   hw/virtio/vhost.c                 | 7 +++----
+>   2 files changed, 4 insertions(+), 9 deletions(-)
+>
+> diff --git a/include/hw/virtio/virtio-access.h b/include/hw/virtio/virtio-access.h
+> index 07aae69042a..80328912ad3 100644
+> --- a/include/hw/virtio/virtio-access.h
+> +++ b/include/hw/virtio/virtio-access.h
+> @@ -149,11 +149,7 @@ static inline uint64_t virtio_ldq_p(VirtIODevice *vdev, const void *ptr)
+>   
+>   static inline uint16_t virtio_tswap16(VirtIODevice *vdev, uint16_t s)
+>   {
+> -#if HOST_BIG_ENDIAN
+> -    return virtio_access_is_big_endian(vdev) ? s : bswap16(s);
+> -#else
+> -    return virtio_access_is_big_endian(vdev) ? bswap16(s) : s;
+> -#endif
+> +    return HOST_BIG_ENDIAN ^ virtio_access_is_big_endian(vdev) ? s : bswap16(s);
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+This patch breaks virtio devices(at least input/net devices) on s390x. I 
+am not sure if ^ is the right check here? Changing the logic back to how 
+it was fixes it for me.
 
-r~
+Thanks
+
+Farhan
+
+>   }
+>   
+>   static inline uint16_t virtio_lduw_phys_cached(VirtIODevice *vdev,
+> diff --git a/hw/virtio/vhost.c b/hw/virtio/vhost.c
+> index 266a11514a1..6343477b42f 100644
+> --- a/hw/virtio/vhost.c
+> +++ b/hw/virtio/vhost.c
+> @@ -1168,11 +1168,10 @@ static inline bool vhost_needs_vring_endian(VirtIODevice *vdev)
+>       if (virtio_vdev_has_feature(vdev, VIRTIO_F_VERSION_1)) {
+>           return false;
+>       }
+> -#if HOST_BIG_ENDIAN
+> -    return vdev->device_endian == VIRTIO_DEVICE_ENDIAN_LITTLE;
+> -#else
+> +    if (HOST_BIG_ENDIAN) {
+> +        return vdev->device_endian == VIRTIO_DEVICE_ENDIAN_LITTLE;
+> +    }
+>       return vdev->device_endian == VIRTIO_DEVICE_ENDIAN_BIG;
+> -#endif
+>   }
+>   
+>   static int vhost_virtqueue_set_vring_endian_legacy(struct vhost_dev *dev,
 
