@@ -4,102 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DEF0CCA476
-	for <qemu-riscv@archiver.kernel.org>; Sat, 11 Oct 2025 12:59:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59905CCD184
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Oct 2025 17:28:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v7ZAp-0000i1-8l; Sat, 11 Oct 2025 08:58:11 -0400
+	id 1v7zrO-0001ff-5O; Sun, 12 Oct 2025 13:27:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <leiyang@redhat.com>)
- id 1v7Ubc-0005ht-5A
- for qemu-riscv@nongnu.org; Sat, 11 Oct 2025 04:05:32 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <leiyang@redhat.com>)
- id 1v7UbW-0003Rt-1b
- for qemu-riscv@nongnu.org; Sat, 11 Oct 2025 04:05:31 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1760169920;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=D2LjMu1SmBW0Il/Ad5mkR+kmEwLtrYj43T8cQppTZxI=;
- b=J0VgOmcNbN9GkL082eU3xQE0uHaJGnFTQ44D2i1bNV6DUOgsvrGWS+68mKnztbH/XZfJ4C
- UDcz6Cx9z/y3NoUtY5fXx2qKCfn2nLQzmFuG5vJJuKGw2A+xELkaj4NOmjyVIOL7bZWjot
- a+oSJ0XTJm74FHkrJhjuOsH7rYLuDMw=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-605-TRaeC6GCM328nnaMn-tRDg-1; Sat, 11 Oct 2025 04:05:19 -0400
-X-MC-Unique: TRaeC6GCM328nnaMn-tRDg-1
-X-Mimecast-MFC-AGG-ID: TRaeC6GCM328nnaMn-tRDg_1760169918
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-aff0df4c4abso310039566b.1
- for <qemu-riscv@nongnu.org>; Sat, 11 Oct 2025 01:05:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1v7zrE-0001f0-K3
+ for qemu-riscv@nongnu.org; Sun, 12 Oct 2025 13:27:45 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1v7zr8-0000xy-Vw
+ for qemu-riscv@nongnu.org; Sun, 12 Oct 2025 13:27:44 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-76e2ea933b7so3270201b3a.1
+ for <qemu-riscv@nongnu.org>; Sun, 12 Oct 2025 10:27:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1760290056; x=1760894856; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=menZGbMwGQhVVtUpTET8LzZzVf4ElkNKHpE2z/fixN0=;
+ b=LxtpFZmOUHfUP855BGO/V1EB99PJsD0UkffLgYMYYfvunnFq0ISMqbhySNLAY78+uW
+ knLvnwSwRVfztL+v6vypGVUgudQMATu7TilbMyl6UCHFPlWwiySS/Nzwj2w+NvpQ+Y8l
+ yez5fMwNfl7dX/2EVX2a+1ta/UoDtInYuGlfjfhjPSBRjht+K9DAuF+t+C5mMWb3JpP9
+ 8RTWusdp5mV0CwAehK9BRkGNUEH5ugRShfVuXdTsWS3azHUUwa5B3h2cUJEgnc3iJF1R
+ nPS3bLNQaMCNHn8B6xkUWT5dsuoqJ82UW6go6ddJe5MGHdiEbX12qn//dGeQjeoKWo2x
+ RBiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760169918; x=1760774718;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=D2LjMu1SmBW0Il/Ad5mkR+kmEwLtrYj43T8cQppTZxI=;
- b=JB+0o07x/0VJDGhu7LdG9H85Fqs9IXpSFhUmhuXfZeX7xlnE3M+f/3QDSarHVZlOiP
- uryJWc/86IqwibUl+t2yjuZR/vFXm7ThhJoNeQez5qAgKhbINizfjiHXtHjshigZ9pKL
- BoPUy69KJAjkkoIwRWVDN8zfSWXtwx5SfSTuwI7sDKos/O/EyRa6+oGQUdHSkFOM+Pg4
- EOdIJXeOIiBfDOKxgilNnlw0kbC2mNoS4IMdLbHxHLCxIwvJC6OmNlK/tKyn15PHNjrN
- eIqAMzLBmnTwW31LXE+8VVC+rrPwcaPYSCOG2zev90wGgt0EuP94RE9i3xGjDFCdHSFD
- d2/g==
+ d=1e100.net; s=20230601; t=1760290056; x=1760894856;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=menZGbMwGQhVVtUpTET8LzZzVf4ElkNKHpE2z/fixN0=;
+ b=iTm1EM5kqGN1zyRWLJ9sh+byYgftqqdtnOlaIsNUVQwj7yP5cz4NCPA9BcxFO9E0X0
+ cEFQrt+ePQPKAHUAV6KBW2LO+CduHjWh1bDefLDLaZwztbtvJTGBC0rbTpCYbhH/izBj
+ sjZxDygRXyZY5Wy7N5N96ZMonru5ZJJCsED5dojF+Tw+BDXIXzqrlPkfae+YOJlyI4+x
+ /QzN7eDVIaA+jTEFBScDoVbzTwHs2Osx3uc2NYgfoJe0CI3+unTBHRnp6De+Xl4Hk25X
+ xzmJbB+IxLmrZpvOrprv+DuMGt/TTYsQ89BBDedYZ9O4iOT9tP49Rbr7Ur2ozLPmKXpz
+ KepA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVjUJ6qeo3LMQ2HnLvjOkDsJXOKlr1Fjysb6YDBKDjSe7pl3apGM9e1kmpJCPeoPpPuzS2Ywbxd39zT@nongnu.org
-X-Gm-Message-State: AOJu0YySubxobuUlgDa43Ou/bVULpB8gH/DQJOS0Z+gcCCZ6UKiouHe8
- JxEmxlYcTNPG2P+/DLul6cAQQM4HNosN59ikNm1wSUE6p9BX9UGjV7j72h7r7Pu0KE4SOaHaqiX
- LagnylY9DW873Iz/qDBml7cK45qpqISvJRnFwQ6T8HqRlQ5auy4p+PevO9nRiWOkFeIpyycYGEE
- sC10yE/al7+ECFTScWnPmWRpgVt+iGpM4=
-X-Gm-Gg: ASbGnct64P5CnoS8StksholgatvE6VJwKjMpYjNZckVjBBp3B++scVtWGF4+Sm73lcI
- 7AkxftgR2Nk9nv/c7aSsWomF75PACxa8iVmk8zu3HBeIiYUS0UlA//TNCXDZviCcp2fS3XgI2A/
- MmYC3zgdWgymhVji/aPnaLpA==
-X-Received: by 2002:a17:907:7ea6:b0:b3f:a16d:da7b with SMTP id
- a640c23a62f3a-b50aa393bf8mr1491208766b.8.1760169918178; 
- Sat, 11 Oct 2025 01:05:18 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFE3DyyiMDaaMTBg3JoQbRijruVINFfLcc173mHEsJip29dDI1C5WEjLBpdu++FotS9yq9T+mFf4vy6pyxKH1c=
-X-Received: by 2002:a17:907:7ea6:b0:b3f:a16d:da7b with SMTP id
- a640c23a62f3a-b50aa393bf8mr1491206166b.8.1760169917752; Sat, 11 Oct 2025
- 01:05:17 -0700 (PDT)
+ AJvYcCUmMpM/NjpQtFSZcUl/JEJTfL05FdTq6dHa1IKtKFOv6PHjyzLbV5mtNNGHFi7TLv5lpSBR0/50nLXu@nongnu.org
+X-Gm-Message-State: AOJu0YwP9BHwTZOrLBf3MeAh7/VBj8kSpLh9eELdMqzNPWu7i5qJhAHD
+ 7SEl/6gyc9YBht2sNCwkC5AGTuAX089NJn6Yhx1KNmocksNeTe3/4DMfgCaf1vdoLK8=
+X-Gm-Gg: ASbGncvTaDCwug9udj1uvyaMPbGskz4p0tML0e7KKX80DLjJU+3llcbCpsxsHKFDrrN
+ 9S8z2F0RwSt7ABJh+1D9GAWyMo2fCabbSeldBRdxsNbTx9xWMaV0rZWnx9VnS142z0OzCyI1TrT
+ ooAIY9HEfw3UsOzfc7sq+ewqsehrSny4DmLX89J4NYmZzwEeG4xd52GEfBrvBql0hmK+07iFmXf
+ eLIeo0GWdhqA+EQvokMY8FRuDgL8hDpfHeeeCAuT1ALZWwiOaw8KeZEKUjiHh927mpbCRyXwrap
+ lpyuxdXbnm4ADX4eQ2jgVDxm+uzvHJ5DyMltH1m+QiZrm0/Wb0Fkr7oB43Ro5mYTRy8MWB8373D
+ gD9qdCHpxjzFqWfyvwKfQ5ldkGLzmp/CtnLNSb9GJOIY3feak8oeiUHXlafnfx7YCKck=
+X-Google-Smtp-Source: AGHT+IGH0XFozbxVPAgoHcr1nufXX21gsd2uUMK9wxk9yDS94JHYvLyd0omtY50nniXhHH/sJhW6gg==
+X-Received: by 2002:a05:6a00:1404:b0:781:1f58:ce6e with SMTP id
+ d2e1a72fcca58-7939753d114mr21496130b3a.4.1760290055756; 
+ Sun, 12 Oct 2025 10:27:35 -0700 (PDT)
+Received: from [192.168.68.110] ([152.234.122.223])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7992d0e2ab3sm8889161b3a.64.2025.10.12.10.27.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 12 Oct 2025 10:27:35 -0700 (PDT)
+Message-ID: <125b7913-c8c0-448b-9f3f-3b893436b901@ventanamicro.com>
+Date: Sun, 12 Oct 2025 14:27:24 -0300
 MIME-Version: 1.0
-References: <20251010134226.72221-1-philmd@linaro.org>
- <20251010134226.72221-9-philmd@linaro.org>
- <781a3494-453e-47ea-ab10-48d0f5315f4f@linux.ibm.com>
-In-Reply-To: <781a3494-453e-47ea-ab10-48d0f5315f4f@linux.ibm.com>
-From: Lei Yang <leiyang@redhat.com>
-Date: Sat, 11 Oct 2025 16:04:41 +0800
-X-Gm-Features: AS18NWCycbECoPyr2kFT74R6nWLh2fUh6yKnVk1kvhSdqRWs7AAghWVGIfWo-wI
-Message-ID: <CAPpAL=zqm5NqdC7Zeb0x5W-exK2TkeNJ_Qd0RWAAwFb4RZVA2g@mail.gmail.com>
-Subject: Re: [PATCH 08/16] hw/virtio: Replace HOST_BIG_ENDIAN #ifdef with
- runtime if() check
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org, 
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, 
- "Michael S. Tsirkin" <mst@redhat.com>, Stefano Garzarella <sgarzare@redhat.com>,
- Farhan Ali <alifm@linux.ibm.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Kndml1p8xLxFunyfnzn5n4NyJcuOUMmF47NlMB9GlTo_1760169918
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=leiyang@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -24
-X-Spam_score: -2.5
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 04/18] exec: Add RISC-V WorldGuard WID to MemTxAttrs
+To: Jim Shu <jim.shu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Michael Rolnik <mrolnik@gmail.com>, Helge Deller <deller@gmx.de>,
+ Song Gao <gaosong@loongson.cn>, Laurent Vivier <laurent@vivier.eu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>,
+ Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
+ "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
+References: <20250417105249.18232-1-jim.shu@sifive.com>
+ <20250417105249.18232-5-jim.shu@sifive.com>
+ <e7616702-8a7b-4617-8433-236a1086bdf9@ventanamicro.com>
+ <CALw707rstv76_oESKHzbeuPakSesWNBXogQoCJN4pHMj_wz7eg@mail.gmail.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <CALw707rstv76_oESKHzbeuPakSesWNBXogQoCJN4pHMj_wz7eg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.441,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Oct 2025 08:58:08 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -114,92 +128,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Philippe Mathieu-Daud=C3=A9
 
-According to my test result this change introduced a minor bug, qemu
-output error messages "qemu-system-x86_64: virtio-blk missing headers"
-reproduced command:
-/usr/local/bin/qemu-system-x86_64 -M q35 -m 8G -smp 8 -cpu host
--enable-kvm -device VGA,bus=3Dpcie.0,addr=3D0x2 -drive
-file=3D///home/fedora-40.qcow2,media=3Ddisk,if=3Dvirtio -device
-virtio-net-pci,mac=3D00:11:22:33:44:00,netdev=3Dnetdev1,id=3Dnet1,bus=3Dpci=
-e.0,addr=3D0x7
- -netdev tap,id=3Dnetdev1,script=3D/etc/qemu-ifup,downscript=3D/etc/qemu-if=
-down
--vnc :0  -monitor stdio
-QEMU 10.1.50 monitor - type 'help' for more information
-(qemu) qemu-system-x86_64: virtio-blk missing headers
 
-Thanks
-Lei
+On 10/8/25 2:54 AM, Jim Shu wrote:
+> Hi Daniel,
+> 
+> Both '_reserved1' and '_reserved2' fields are only for padding
+> MemTxAttrs struct to be 8-byte [1], so I remove a 1-byte reserved
+> field when adding 'world_id' field to it.
+> Is it ok for you? Or you think it is better to separate them.
 
-On Sat, Oct 11, 2025 at 3:25=E2=80=AFAM Farhan Ali <alifm@linux.ibm.com> wr=
-ote:
->
->
-> On 10/10/2025 6:42 AM, Philippe Mathieu-Daud=C3=A9 wrote:
-> > Replace compile-time #ifdef with a runtime check to ensure all code
-> > paths are built and tested. This reduces build-time configuration
-> > complexity and improves maintainability.
-> >
-> > No functional change intended.
-> >
-> > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> > ---
-> >   include/hw/virtio/virtio-access.h | 6 +-----
-> >   hw/virtio/vhost.c                 | 7 +++----
-> >   2 files changed, 4 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/include/hw/virtio/virtio-access.h b/include/hw/virtio/virt=
-io-access.h
-> > index 07aae69042a..80328912ad3 100644
-> > --- a/include/hw/virtio/virtio-access.h
-> > +++ b/include/hw/virtio/virtio-access.h
-> > @@ -149,11 +149,7 @@ static inline uint64_t virtio_ldq_p(VirtIODevice *=
-vdev, const void *ptr)
-> >
-> >   static inline uint16_t virtio_tswap16(VirtIODevice *vdev, uint16_t s)
-> >   {
-> > -#if HOST_BIG_ENDIAN
-> > -    return virtio_access_is_big_endian(vdev) ? s : bswap16(s);
-> > -#else
-> > -    return virtio_access_is_big_endian(vdev) ? bswap16(s) : s;
-> > -#endif
-> > +    return HOST_BIG_ENDIAN ^ virtio_access_is_big_endian(vdev) ? s : b=
-swap16(s);
->
-> This patch breaks virtio devices(at least input/net devices) on s390x. I
-> am not sure if ^ is the right check here? Changing the logic back to how
-> it was fixes it for me.
->
-> Thanks
->
-> Farhan
->
-> >   }
-> >
-> >   static inline uint16_t virtio_lduw_phys_cached(VirtIODevice *vdev,
-> > diff --git a/hw/virtio/vhost.c b/hw/virtio/vhost.c
-> > index 266a11514a1..6343477b42f 100644
-> > --- a/hw/virtio/vhost.c
-> > +++ b/hw/virtio/vhost.c
-> > @@ -1168,11 +1168,10 @@ static inline bool vhost_needs_vring_endian(Vir=
-tIODevice *vdev)
-> >       if (virtio_vdev_has_feature(vdev, VIRTIO_F_VERSION_1)) {
-> >           return false;
-> >       }
-> > -#if HOST_BIG_ENDIAN
-> > -    return vdev->device_endian =3D=3D VIRTIO_DEVICE_ENDIAN_LITTLE;
-> > -#else
-> > +    if (HOST_BIG_ENDIAN) {
-> > +        return vdev->device_endian =3D=3D VIRTIO_DEVICE_ENDIAN_LITTLE;
-> > +    }
-> >       return vdev->device_endian =3D=3D VIRTIO_DEVICE_ENDIAN_BIG;
-> > -#endif
-> >   }
-> >
-> >   static int vhost_virtqueue_set_vring_endian_legacy(struct vhost_dev *=
-dev,
->
+It's fine. I suggest adding this explanation in the commit msg to avoid
+further questions about it.
+
+
+Thanks,
+
+Daniel
+
+> 
+> 
+> [1]
+> commit 5014e33b1e00d330f13df33c09a3932ac88f8d94
+> Link: https://lore.kernel.org/r/20250121151322.171832-2-zhao1.liu@intel.com
+> 
+> Thanks!
+> 
+> On Sat, Aug 9, 2025 at 8:34 PM Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+>>
+>>
+>>
+>> On 4/17/25 7:52 AM, Jim Shu wrote:
+>>> RISC-V WorldGuard will add 5-bit world_id (WID) to the each memory
+>>> transaction on the bus. The wgChecker in front of RAM or peripherals
+>>> MMIO could do the access control based on the WID. It is similar to ARM
+>>> TrustZone NS bit, but the WID is 5-bit.
+>>>
+>>> The common implementation of WID is AXI4 AxUSER signal.
+>>>
+>>> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+>>> ---
+>>>    include/exec/memattrs.h | 8 ++++++--
+>>>    1 file changed, 6 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
+>>> index 8db1d30464..7a6866fa41 100644
+>>> --- a/include/exec/memattrs.h
+>>> +++ b/include/exec/memattrs.h
+>>> @@ -54,6 +54,11 @@ typedef struct MemTxAttrs {
+>>>         */
+>>>        unsigned int pid:8;
+>>>
+>>> +    /*
+>>> +     * RISC-V WorldGuard: the 5-bit WID field of memory access.
+>>> +     */
+>>> +    unsigned int world_id:5;
+>>> +
+>>>        /*
+>>>         * Bus masters which don't specify any attributes will get this
+>>>         * (via the MEMTXATTRS_UNSPECIFIED constant), so that we can
+>>> @@ -63,8 +68,7 @@ typedef struct MemTxAttrs {
+>>>         */
+>>>        bool unspecified;
+>>>
+>>> -    uint8_t _reserved1;
+>>> -    uint16_t _reserved2;
+>>> +    uint16_t _reserved1;
+>>
+>> Is 'reserved2' unused? Not sure why you ended up removing it in this patch.
+>>
+>> If it's really unused it's ok to remove it but this should be done in separate.
+>>
+>>
+>> Thanks,
+>>
+>> Daniel
+>>
+>>
+>>>    } MemTxAttrs;
+>>>
+>>>    QEMU_BUILD_BUG_ON(sizeof(MemTxAttrs) > 8);
+>>
 
 
