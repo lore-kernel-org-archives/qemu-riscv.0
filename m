@@ -4,108 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59905CCD184
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Oct 2025 17:28:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9FB8CCD187
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Oct 2025 17:33:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v7zrO-0001ff-5O; Sun, 12 Oct 2025 13:27:54 -0400
+	id 1v7zwC-0002fY-E3; Sun, 12 Oct 2025 13:32:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1v7zrE-0001f0-K3
- for qemu-riscv@nongnu.org; Sun, 12 Oct 2025 13:27:45 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1v7zwA-0002fH-OH
+ for qemu-riscv@nongnu.org; Sun, 12 Oct 2025 13:32:50 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1v7zr8-0000xy-Vw
- for qemu-riscv@nongnu.org; Sun, 12 Oct 2025 13:27:44 -0400
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-76e2ea933b7so3270201b3a.1
- for <qemu-riscv@nongnu.org>; Sun, 12 Oct 2025 10:27:37 -0700 (PDT)
+ id 1v7zw7-0001oE-8A
+ for qemu-riscv@nongnu.org; Sun, 12 Oct 2025 13:32:50 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-27d4d6b7ab5so49026105ad.2
+ for <qemu-riscv@nongnu.org>; Sun, 12 Oct 2025 10:32:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1760290056; x=1760894856; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1760290365; x=1760895165; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=menZGbMwGQhVVtUpTET8LzZzVf4ElkNKHpE2z/fixN0=;
- b=LxtpFZmOUHfUP855BGO/V1EB99PJsD0UkffLgYMYYfvunnFq0ISMqbhySNLAY78+uW
- knLvnwSwRVfztL+v6vypGVUgudQMATu7TilbMyl6UCHFPlWwiySS/Nzwj2w+NvpQ+Y8l
- yez5fMwNfl7dX/2EVX2a+1ta/UoDtInYuGlfjfhjPSBRjht+K9DAuF+t+C5mMWb3JpP9
- 8RTWusdp5mV0CwAehK9BRkGNUEH5ugRShfVuXdTsWS3azHUUwa5B3h2cUJEgnc3iJF1R
- nPS3bLNQaMCNHn8B6xkUWT5dsuoqJ82UW6go6ddJe5MGHdiEbX12qn//dGeQjeoKWo2x
- RBiQ==
+ bh=z7F/r1mGKoFNRQEl8vPP8Ch0jSyFFee0pGdrTXyJaxw=;
+ b=jhHohiVbsA5SYvVL4k/CiE2OLtOQ80q63TFrNd57pBNeMW8AR2JFBs771Z7GGZ/zxj
+ vztkOzefgKBl0S71LRpKft7GUbDA4myt11YZ0zbZTCKOkBiANmeUaNfKb+H8yauca+gW
+ tXKE1koAX+5AHzd/I3Jjohvb9qo8L+82Qwb1g0YeKXLZBdUWwmeaxFkPt77fHDnzdmh3
+ VfDdDN/ojZqSdenj2S+yn1cCTiGGIbaISdULURZtZEBXrkMIU+FJNU0ly05oN69ESFPF
+ VYIrq3yyJeOwxGRc461MNU2ztf3Tyz6OaRhdF6T8i/yICsSJeJ1OhyDgTKEu7SJVdcsI
+ BbWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760290056; x=1760894856;
+ d=1e100.net; s=20230601; t=1760290365; x=1760895165;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=menZGbMwGQhVVtUpTET8LzZzVf4ElkNKHpE2z/fixN0=;
- b=iTm1EM5kqGN1zyRWLJ9sh+byYgftqqdtnOlaIsNUVQwj7yP5cz4NCPA9BcxFO9E0X0
- cEFQrt+ePQPKAHUAV6KBW2LO+CduHjWh1bDefLDLaZwztbtvJTGBC0rbTpCYbhH/izBj
- sjZxDygRXyZY5Wy7N5N96ZMonru5ZJJCsED5dojF+Tw+BDXIXzqrlPkfae+YOJlyI4+x
- /QzN7eDVIaA+jTEFBScDoVbzTwHs2Osx3uc2NYgfoJe0CI3+unTBHRnp6De+Xl4Hk25X
- xzmJbB+IxLmrZpvOrprv+DuMGt/TTYsQ89BBDedYZ9O4iOT9tP49Rbr7Ur2ozLPmKXpz
- KepA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUmMpM/NjpQtFSZcUl/JEJTfL05FdTq6dHa1IKtKFOv6PHjyzLbV5mtNNGHFi7TLv5lpSBR0/50nLXu@nongnu.org
-X-Gm-Message-State: AOJu0YwP9BHwTZOrLBf3MeAh7/VBj8kSpLh9eELdMqzNPWu7i5qJhAHD
- 7SEl/6gyc9YBht2sNCwkC5AGTuAX089NJn6Yhx1KNmocksNeTe3/4DMfgCaf1vdoLK8=
-X-Gm-Gg: ASbGncvTaDCwug9udj1uvyaMPbGskz4p0tML0e7KKX80DLjJU+3llcbCpsxsHKFDrrN
- 9S8z2F0RwSt7ABJh+1D9GAWyMo2fCabbSeldBRdxsNbTx9xWMaV0rZWnx9VnS142z0OzCyI1TrT
- ooAIY9HEfw3UsOzfc7sq+ewqsehrSny4DmLX89J4NYmZzwEeG4xd52GEfBrvBql0hmK+07iFmXf
- eLIeo0GWdhqA+EQvokMY8FRuDgL8hDpfHeeeCAuT1ALZWwiOaw8KeZEKUjiHh927mpbCRyXwrap
- lpyuxdXbnm4ADX4eQ2jgVDxm+uzvHJ5DyMltH1m+QiZrm0/Wb0Fkr7oB43Ro5mYTRy8MWB8373D
- gD9qdCHpxjzFqWfyvwKfQ5ldkGLzmp/CtnLNSb9GJOIY3feak8oeiUHXlafnfx7YCKck=
-X-Google-Smtp-Source: AGHT+IGH0XFozbxVPAgoHcr1nufXX21gsd2uUMK9wxk9yDS94JHYvLyd0omtY50nniXhHH/sJhW6gg==
-X-Received: by 2002:a05:6a00:1404:b0:781:1f58:ce6e with SMTP id
- d2e1a72fcca58-7939753d114mr21496130b3a.4.1760290055756; 
- Sun, 12 Oct 2025 10:27:35 -0700 (PDT)
+ bh=z7F/r1mGKoFNRQEl8vPP8Ch0jSyFFee0pGdrTXyJaxw=;
+ b=w0EJ/Z8MRgaiXWAfImQXttSZbdoSZzQ803X1GX9+7zVz080uDkVEiYVK3s/30xp6v7
+ R8L7NQdWp2eMgd0xhDHMe6f1zIhsprMdUaZLKoIVMMGskMm6xPmPM4Xxi9hgz0IzEukE
+ KX9z2gz0Afsk4piLJM47am9FVpfwLwvpPZ+btjmRwd7cFq9g1QN6yB787nI+lN8V74OE
+ hUuBREK1JPgi1GR/R5NVm6gFIVG5WjeV9ia2U6Zc/ZjMijZ4ahB7pjs0IvVLcyctl0Qg
+ MYcoaGMi91K1KFS1lw9F0X+aksh3woDDs3+RbW92/sreozBSee2psjDt9rtiizSIZOuc
+ y7lQ==
+X-Gm-Message-State: AOJu0YwY0XVnZHNlf9E7MJhATVCEWFY1E244KqeKWkj28nKJAW9T6xTo
+ DiMaYq+Ngke/YGF3SX3M+0R3J5AtBmrYl0TUJ0tfRQ621ZslV+1YLKgJ6mRoVsHMOjk=
+X-Gm-Gg: ASbGnctxrqq7HH35c3ZVDiREdgG+gfHM3Zwe8TIlj+pZZeCKwnLzaQCmKfvKcwW/or9
+ lySrv0CGVeb5uIhptlSlSyStXWwiv9hlot74iZeadostrtw/DoYLkAWTVFV85dXem7Uio4N5YJ6
+ kIwq+LCq2AHIXlJ+jfzzgcb/DePdB5pfopmDJkg6e/lHjFDmrslAbUOs3XMv+cHSM4qOdbiT5CH
+ +/hiY0LZSzR0+3rGS49PhhxlKJlbrUckrCO+qEwtekI+laaGRAuPjSpgKnlM4uW2ftlPh94g868
+ uEe8sSbxwH4kfYyBsCxvghZZuW69ezCTF/cco91lyMYBel1KgZ4LPTmcmLhJNaaroT0FoE2ExFm
+ GDTrl/F2P2AshvDluDnTTZqOjHe//Q5oK5Bvl15mtnPg4sJTdEHyGHx2Yj/vG+UAIlsU=
+X-Google-Smtp-Source: AGHT+IFzE8liKt2SvSBBQp2GTw1IgxsO7IJrJiYsmLQNEL5ry/C/7HPVjZSF6+WQadaIYEsCE9TAlQ==
+X-Received: by 2002:a17:902:e786:b0:26e:7468:8a99 with SMTP id
+ d9443c01a7336-290272c18e1mr228655645ad.36.1760290365534; 
+ Sun, 12 Oct 2025 10:32:45 -0700 (PDT)
 Received: from [192.168.68.110] ([152.234.122.223])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7992d0e2ab3sm8889161b3a.64.2025.10.12.10.27.28
+ d9443c01a7336-29034f93e06sm111085775ad.115.2025.10.12.10.32.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 12 Oct 2025 10:27:35 -0700 (PDT)
-Message-ID: <125b7913-c8c0-448b-9f3f-3b893436b901@ventanamicro.com>
-Date: Sun, 12 Oct 2025 14:27:24 -0300
+ Sun, 12 Oct 2025 10:32:45 -0700 (PDT)
+Message-ID: <6ed2b204-6df4-4341-a0e0-6354c8800c57@ventanamicro.com>
+Date: Sun, 12 Oct 2025 14:32:41 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 04/18] exec: Add RISC-V WorldGuard WID to MemTxAttrs
-To: Jim Shu <jim.shu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>,
- Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
- Michael Rolnik <mrolnik@gmail.com>, Helge Deller <deller@gmx.de>,
- Song Gao <gaosong@loongson.cn>, Laurent Vivier <laurent@vivier.eu>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>,
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
-References: <20250417105249.18232-1-jim.shu@sifive.com>
- <20250417105249.18232-5-jim.shu@sifive.com>
- <e7616702-8a7b-4617-8433-236a1086bdf9@ventanamicro.com>
- <CALw707rstv76_oESKHzbeuPakSesWNBXogQoCJN4pHMj_wz7eg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/6] target/riscv: Add basic definitions and CSRs for
+ SMMPT
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, Huang Tao <eric.huang@linux.alibaba.com>,
+ TANG Tiancheng <lyndra@linux.alibaba.com>
+References: <20250918061911.904-1-zhiwei_liu@linux.alibaba.com>
+ <20250918061911.904-2-zhiwei_liu@linux.alibaba.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <CALw707rstv76_oESKHzbeuPakSesWNBXogQoCJN4pHMj_wz7eg@mail.gmail.com>
+In-Reply-To: <20250918061911.904-2-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -130,85 +107,266 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 10/8/25 2:54 AM, Jim Shu wrote:
-> Hi Daniel,
+On 9/18/25 3:19 AM, LIU Zhiwei wrote:
+> This patch lays the groundwork for the SMMPT (Supervisor Domains Access
+> Protection) extension by introducing its fundamental components.
 > 
-> Both '_reserved1' and '_reserved2' fields are only for padding
-> MemTxAttrs struct to be 8-byte [1], so I remove a 1-byte reserved
-> field when adding 'world_id' field to it.
-> Is it ok for you? Or you think it is better to separate them.
-
-It's fine. I suggest adding this explanation in the commit msg to avoid
-further questions about it.
-
-
-Thanks,
-
-Daniel
-
+> It adds:
+> - New CPU configuration flags, `ext_smmpt` and `ext_smsdid`, to enable
+>    the extension.
+> - Bit-field definitions for the `mmpt` CSR in `cpu_bits.h`.
+> - The `mmpt` and `msdcfg` CSR numbers and their read/write handlers in
+>    `csr.c`.
+> - New fields in `CPUArchState` to store the state of these new CSRs.
+> - A new translation failure reason `TRANSLATE_MPT_FAIL`.
 > 
+> This provides the necessary infrastructure for the core MPT logic and
+> MMU integration that will follow.
 > 
-> [1]
-> commit 5014e33b1e00d330f13df33c09a3932ac88f8d94
-> Link: https://lore.kernel.org/r/20250121151322.171832-2-zhao1.liu@intel.com
+> Co-authored-by: Huang Tao <eric.huang@linux.alibaba.com>
+> Co-authored-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/cpu.h                |  9 ++-
+>   target/riscv/cpu_bits.h           | 27 +++++++++
+>   target/riscv/cpu_cfg_fields.h.inc |  2 +
+>   target/riscv/csr.c                | 95 +++++++++++++++++++++++++++++++
+>   target/riscv/riscv_smmpt.h        | 21 +++++++
+>   5 files changed, 153 insertions(+), 1 deletion(-)
+>   create mode 100644 target/riscv/riscv_smmpt.h
 > 
-> Thanks!
-> 
-> On Sat, Aug 9, 2025 at 8:34 PM Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
->>
->>
->>
->> On 4/17/25 7:52 AM, Jim Shu wrote:
->>> RISC-V WorldGuard will add 5-bit world_id (WID) to the each memory
->>> transaction on the bus. The wgChecker in front of RAM or peripherals
->>> MMIO could do the access control based on the WID. It is similar to ARM
->>> TrustZone NS bit, but the WID is 5-bit.
->>>
->>> The common implementation of WID is AXI4 AxUSER signal.
->>>
->>> Signed-off-by: Jim Shu <jim.shu@sifive.com>
->>> ---
->>>    include/exec/memattrs.h | 8 ++++++--
->>>    1 file changed, 6 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
->>> index 8db1d30464..7a6866fa41 100644
->>> --- a/include/exec/memattrs.h
->>> +++ b/include/exec/memattrs.h
->>> @@ -54,6 +54,11 @@ typedef struct MemTxAttrs {
->>>         */
->>>        unsigned int pid:8;
->>>
->>> +    /*
->>> +     * RISC-V WorldGuard: the 5-bit WID field of memory access.
->>> +     */
->>> +    unsigned int world_id:5;
->>> +
->>>        /*
->>>         * Bus masters which don't specify any attributes will get this
->>>         * (via the MEMTXATTRS_UNSPECIFIED constant), so that we can
->>> @@ -63,8 +68,7 @@ typedef struct MemTxAttrs {
->>>         */
->>>        bool unspecified;
->>>
->>> -    uint8_t _reserved1;
->>> -    uint16_t _reserved2;
->>> +    uint16_t _reserved1;
->>
->> Is 'reserved2' unused? Not sure why you ended up removing it in this patch.
->>
->> If it's really unused it's ok to remove it but this should be done in separate.
->>
->>
->> Thanks,
->>
->> Daniel
->>
->>
->>>    } MemTxAttrs;
->>>
->>>    QEMU_BUILD_BUG_ON(sizeof(MemTxAttrs) > 8);
->>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 4a862da615..fa7b804cb3 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -130,7 +130,8 @@ enum {
+>       TRANSLATE_SUCCESS,
+>       TRANSLATE_FAIL,
+>       TRANSLATE_PMP_FAIL,
+> -    TRANSLATE_G_STAGE_FAIL
+> +    TRANSLATE_G_STAGE_FAIL,
+> +    TRANSLATE_MPT_FAIL
+>   };
+>   
+>   /* Extension context status */
+> @@ -180,6 +181,7 @@ extern RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[];
+>   #if !defined(CONFIG_USER_ONLY)
+>   #include "pmp.h"
+>   #include "debug.h"
+> +#include "riscv_smmpt.h"
+>   #endif
+>   
+>   #define RV_VLEN_MAX 1024
+> @@ -486,6 +488,11 @@ struct CPUArchState {
+>       uint64_t hstateen[SMSTATEEN_MAX_COUNT];
+>       uint64_t sstateen[SMSTATEEN_MAX_COUNT];
+>       uint64_t henvcfg;
+> +    /* Smsdid */
+> +    uint32_t mptmode;
+> +    uint32_t sdid;
+> +    uint64_t mptppn;
+> +    uint32_t msdcfg;
+>   #endif
+>   
+>       /* Fields from here on are preserved across CPU reset. */
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index b62dd82fe7..c6a34863d1 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -1164,4 +1164,31 @@ typedef enum CTRType {
+>   #define MCONTEXT64                         0x0000000000001FFFULL
+>   #define MCONTEXT32_HCONTEXT                0x0000007F
+>   #define MCONTEXT64_HCONTEXT                0x0000000000003FFFULL
+> +
+> +/* Smsdid */
+> +#define CSR_MMPT        0xbc0
+> +#define CSR_MSDCFG      0xbd1
+> +
+> +#define MMPT_MODE_MASK_32   0xC0000000
+> +#define MMPT_SDID_MASK_32   0x3F000000
+> +#define MMPT_PPN_MASK_32    0x003FFFFF
+> +
+> +#define MMPT_MODE_SHIFT_32  30
+> +#define MMPT_SDID_SHIFT_32  24
+> +
+> +#define MMPT_MODE_MASK_64   0xF000000000000000ULL
+> +#define MMPT_SDID_MASK_64   0x0FC0000000000000ULL
+> +#define MMPT_PPN_MASK_64    0x000FFFFFFFFFFFFFULL
+> +
+> +#define MPTE_L3_VALID       0x0000100000000000ULL
+> +#define MPTE_L3_RESERVED    0xFFFFE00000000000ULL
+> +
+> +#define MPTE_L2_RESERVED_64    0xFFFF800000000000ULL
+> +#define MPTE_L2_RESERVED_32    0xFE000000
+> +
+> +#define MPTE_L1_RESERVED_64    0xFFFFFFFF00000000ULL
+> +#define MPTE_L1_RESERVED_32    0xFFFF0000
+> +
+> +#define MMPT_MODE_SHIFT_64  60
+> +#define MMPT_SDID_SHIFT_64  54
+>   #endif
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+> index e2d116f0df..8c8a4ac236 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -60,6 +60,8 @@ BOOL_FIELD(ext_svpbmt)
+>   BOOL_FIELD(ext_svrsw60t59b)
+>   BOOL_FIELD(ext_svvptc)
+>   BOOL_FIELD(ext_svukte)
+> +BOOL_FIELD(ext_smmpt)
+> +BOOL_FIELD(ext_smsdid)
+>   BOOL_FIELD(ext_zdinx)
+>   BOOL_FIELD(ext_zaamo)
+>   BOOL_FIELD(ext_zacas)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 8842e07a73..e7e85b4310 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -793,6 +793,15 @@ static RISCVException rnmi(CPURISCVState *env, int csrno)
+>   
+>       return RISCV_EXCP_ILLEGAL_INST;
+>   }
+> +
+> +static RISCVException smsdid(CPURISCVState *env, int csrno)
+> +{
+> +    if (riscv_cpu_cfg(env)->ext_smsdid) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +
+> +    return RISCV_EXCP_ILLEGAL_INST;
+> +}
+>   #endif
+>   
+>   static RISCVException seed(CPURISCVState *env, int csrno)
+> @@ -5470,6 +5479,89 @@ static RISCVException write_mnstatus(CPURISCVState *env, int csrno,
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> +static RISCVException read_mmpt(CPURISCVState *env, int csrno,
+> +                                target_ulong *val)
+> +{
+> +    if (riscv_cpu_xlen(env) == 32) {
+> +        uint32_t value = 0;
+> +        value |= env->mptmode << MMPT_MODE_SHIFT_32;
+> +        value |= (env->sdid << MMPT_SDID_SHIFT_32) & MMPT_SDID_MASK_32;
+> +        value |= env->mptppn & MMPT_PPN_MASK_32;
+> +        *val = value;
+> +    } else if (riscv_cpu_xlen(env) == 64) {
+> +        uint64_t value_64 = 0;
+> +        uint32_t mode_value = env->mptmode;
+> +        /* mpt_mode_t convert to mmpt.mode value */
+> +        if (mode_value) {
+> +            mode_value -= SMMPT43 - SMMPT34;
+> +        }
+> +        value_64 |= (uint64_t)mode_value << MMPT_MODE_SHIFT_64;
+> +        value_64 |= ((uint64_t)env->sdid << MMPT_SDID_SHIFT_64)
+> +                    & MMPT_SDID_MASK_64;
+> +        value_64 |= (uint64_t)env->mptppn & MMPT_PPN_MASK_64;
+> +        *val = value_64;
+> +    } else {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_mmpt(CPURISCVState *env, int csrno,
+> +                                 target_ulong val, uintptr_t ra)
+> +{
+> +    uint32_t mode_value = 0;
+> +    if (!riscv_cpu_cfg(env)->ext_smmpt) {
+> +        goto set_remaining_fields_zero;
+> +    }
+> +
+> +    if (riscv_cpu_xlen(env) == 32) {
+> +        mode_value = (val & MMPT_MODE_MASK_32) >> MMPT_MODE_SHIFT_32;
+> +        /* If mode is bare, the remaining fields in mmpt must be zero */
+> +        if (mode_value == SMMPTBARE) {
+> +            goto set_remaining_fields_zero;
+> +        } else if (mode_value <= SMMPT34) {
+> +            /* Only write the legal value */
+> +            env->mptmode = mode_value;
+> +        }
+> +        env->sdid = (val & MMPT_SDID_MASK_32) >> MMPT_SDID_SHIFT_32;
+> +        env->mptppn = val & MMPT_PPN_MASK_32;
+> +    } else if (riscv_cpu_xlen(env) == 64) {
+> +        mode_value = (val & MMPT_MODE_MASK_64) >> MMPT_MODE_SHIFT_64;
+> +        if (mode_value == SMMPTBARE) {
+> +            goto set_remaining_fields_zero;
+> +        } else if (mode_value < SMMPTMAX) {
+> +            /* convert to mpt_mode_t */
+> +            mode_value += SMMPT43 - SMMPT34;
+> +            env->mptmode = mode_value;
+> +        }
+> +        env->sdid = (val & MMPT_SDID_MASK_64) >> MMPT_SDID_SHIFT_64;
+> +        env->mptppn = val & MMPT_PPN_MASK_64;
+> +    } else {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +    return RISCV_EXCP_NONE;
+> +
+> +set_remaining_fields_zero:
+> +    env->sdid = 0;
+> +    env->mptmode = SMMPTBARE;
+> +    env->mptppn = 0;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_msdcfg(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    *val = env->msdcfg;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_msdcfg(CPURISCVState *env, int csrno,
+> +                                    target_ulong val, uintptr_t ra)
+> +{
+> +    env->msdcfg = val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>   #endif
+>   
+>   /* Crypto Extension */
+> @@ -6666,6 +6758,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>                                write_mhpmcounterh                         },
+>       [CSR_SCOUNTOVF]      = { "scountovf", sscofpmf,  read_scountovf,
+>                                .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +    /* Supervisor Domain Identifier and Protection Registers */
+> +    [CSR_MMPT] =    { "mmpt",   smsdid,  read_mmpt,   write_mmpt   },
+> +    [CSR_MSDCFG] =  { "msdcfg", smsdid,  read_msdcfg, write_msdcfg },
+>   
+>   #endif /* !CONFIG_USER_ONLY */
+>   };
+> diff --git a/target/riscv/riscv_smmpt.h b/target/riscv/riscv_smmpt.h
+> new file mode 100644
+> index 0000000000..74dcccf4be
+> --- /dev/null
+> +++ b/target/riscv/riscv_smmpt.h
+> @@ -0,0 +1,21 @@
+> +/*
+> + * QEMU RISC-V Smmpt (Memory Protection Table)
+> + *
+> + * Copyright (c) 2024 Alibaba Group. All rights reserved.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +
+> +#ifndef RISCV_SMMPT_H
+> +#define RISCV_SMMPT_H
+> +
+> +typedef enum {
+> +    SMMPTBARE = 0,
+> +    SMMPT34   = 1,
+> +    SMMPT43   = 2,
+> +    SMMPT52   = 3,
+> +    SMMPT64   = 4,
+> +    SMMPTMAX
+> +} mpt_mode_t;
+> +
+> +#endif
 
 
