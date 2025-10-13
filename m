@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B75FECCD18D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Oct 2025 15:44:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 911B9CCD183
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Oct 2025 16:17:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v8KiJ-000718-R8; Mon, 13 Oct 2025 11:43:55 -0400
+	id 1v8LEQ-0001bu-EO; Mon, 13 Oct 2025 12:17:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jelly.zhao.42@gmail.com>)
- id 1v8KiH-00070h-Ak
- for qemu-riscv@nongnu.org; Mon, 13 Oct 2025 11:43:53 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1v8LE2-0001ai-Fz
+ for qemu-riscv@nongnu.org; Mon, 13 Oct 2025 12:16:42 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jelly.zhao.42@gmail.com>)
- id 1v8KiE-00079F-KW
- for qemu-riscv@nongnu.org; Mon, 13 Oct 2025 11:43:53 -0400
-Received: by mail-pg1-x544.google.com with SMTP id
- 41be03b00d2f7-b550a522a49so3604274a12.2
- for <qemu-riscv@nongnu.org>; Mon, 13 Oct 2025 08:43:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1v8LDz-0003fE-RB
+ for qemu-riscv@nongnu.org; Mon, 13 Oct 2025 12:16:42 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-3305c08d9f6so3568216a91.1
+ for <qemu-riscv@nongnu.org>; Mon, 13 Oct 2025 09:16:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760370227; x=1760975027; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vrXMV/TPclJ2oNHwrYzf/NqliMCZdXD+QzV31j52NQ8=;
- b=C4KILe/uTX0Hh4v7u4HT9pZwUfMVlIGBZCag3KYd8mR+pvfmrXH48IS/II10EPvbjs
- XmJ/QwZuQhBi7pA00icnnlYtN473zg5m2TZ1An6zIpKFbZCyuPIbHZx6wMKywHIJ0/70
- zWrgfi0bpNyL0d5cHhQkTaKuYdXbM6u3iD06o2PMQi0SpA2TEe3xxaokU5FTHnlPHib6
- dDu1jz4it1h6xcfTE8UHZZrtYNefF6ke6wtdPcN3X74+afVJfSMIvA21BtVFvSny/DHt
- ZKjEE+KIlz4/JMypn1Wosod6vcTSwG7VDnyt5TvyjPnMDSqq/V2XN0D9vZnpouvLN8Iz
- KKAQ==
+ d=ventanamicro.com; s=google; t=1760372196; x=1760976996; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9dZy99F3XbHoMbsjvVjG5DZIQxjYvKcEwYXiFA5K6Mo=;
+ b=Yh8jHDMI5GqwKYD9Tv4NsDNkYvnn0DhMYt6Wrc81O4vFyX/yaj2L3uQ9VpECnWzlQs
+ zM5wJBAM4sP0dbVg0KhuSUNhuwPXQXr6lRRTfi62Ku3B+5Km2DGju3TMqNTgNAmZQBJn
+ yKEv4Ge/gKRf0lUzg5RwdP4n/Sn1IsFDeFzKCF/0IsRQUYoHPps3PCRl8+S1qiSEZtWd
+ ZDPFG5usiyCrpPC06LR6Y0NLuJMnOSQsXcFVmu/FK7C5pnJDIvAp4wWQxZairLVR9B+r
+ IHOY83/w1hc/rCi3EIuLrHFkdIbV4htyeefenRrq0W2JuBtTsdHjtOM/tm8I7K645zIr
+ hJxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760370227; x=1760975027;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vrXMV/TPclJ2oNHwrYzf/NqliMCZdXD+QzV31j52NQ8=;
- b=DY/abme6BIXTBQfaJ1B1Zh8Y0YLTzPn+bJdu0zQq50hCnGruIkhfiepDKL1zoWAsGc
- ddz6RW3QDkaScsjwNenLFIZLjKYk6xA4aZ3GJG9lUu7/Q9j7234Xgjj+1kguE1W13IxK
- 9f+1es4vNbbsXMFO8B1WoYuYV2ZhPImRPDkFnVzDSCJTtwWtt0p1kp6q4Ek+QPnmhw6t
- Wwni3o8rDX8WMJWU6/1kb2WgeMUJJG5pVcfd4kDcslGaVE9+mkaYihJpjMlJEjKhDTW+
- PHmgCrpFIMssSdFo/5HmG9I59qEEix3OcbM7YbVuzKd4JiMqWk82TYBf66MjLUX4bdou
- R37w==
+ d=1e100.net; s=20230601; t=1760372196; x=1760976996;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9dZy99F3XbHoMbsjvVjG5DZIQxjYvKcEwYXiFA5K6Mo=;
+ b=dNO/VhGImUYBwJTMtTyuOlkuKiQDqO3oW69uu4PnOhI4iae5t4j4PzefaE3VdfcBJh
+ JdbAv2hkgZ3bcuy2Gul3mFFNu4bUCKuQfwBIFmdCku/R+sSBYYsIIuzOwKup1gv7PRmV
+ 5x+HP1OIRMoTYZvNBlBX1wYPa15oDWQCyzOxjoOhZLYo+T9Uzid61X/Ym1s5RMXP1Gtv
+ Dw69ibsCFVJ50R9Knpbcv6vjJJ4EIImQ8rSp3Wq0gxA+Lxg/gnl7ISmJbm9qPuUCuVST
+ rVk+5NT7K0x/BEWKTbObQtQGzon6uBX+vK2Q31oF9us2AI5rMe2aHmlF2vZeU+cDx75W
+ eV+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJzkVd7zcgdPVTlWmwZtLpkmvwbdQzkNuMvphiPo0B3YipwDNOaUm+jGW6UIbWOI6CyfdjfggXXKqw@nongnu.org
-X-Gm-Message-State: AOJu0YyBRWkOJkKv7xqYgMDt8cZqgNOGWCUtqUEqYpnweByY4JHwBbr6
- K3c4TvIxwC1SauFajXGN1/GMuxOGZwh8XkyGUsYh82Rol5rWpHmEoUkN
-X-Gm-Gg: ASbGnct4fmWe7YV4bvTH6i1KgJAtt65VtNyb9iZNEFGNnjzKhA35EwgqMtN4tjr1mJa
- TXzGHlirYOhtVeubrt0j+s+Sho/I/9nVrDCqdJ3CF0YE1y32ZbTUX2reIpD65MSN4FwB1LtcCcM
- ExGyZ6ZFfTC5YKW/hiKinWswSCRGAQE0TItCxJAhPdEVnLbGXZKjT+K9wVKvbFnU/8RReSXF3Pz
- EiikR9XDt1F5zsD0u6nQY8fXfEK5jDOab1Km2EE106s5Av9q8nTZzfWuHf3nrmf8XLEw1EBdHZu
- VjsjZLWaKCJZ7WNmMYKWQ9slAP5ck8jJNXea+/MzV93X1mXN5u7NPu2o5oStkXCPD0Y2FF3wTgk
- q3pMsw1PqpVEcdnAjoobRYuvzcuWXSH8+3dbjtqrMQbhJT3iAPUxMGA5WJ2cFJrKVJFnZ/ZWlG1
- rxqI/M
-X-Google-Smtp-Source: AGHT+IFia7eMzum+06Q7CowkYvu7/z2nQvX9Ip+9NuY4N1HVgIZHsomGjFFrMYugkKa7QTdg5lcOtg==
-X-Received: by 2002:a17:903:4b46:b0:27d:6f49:febc with SMTP id
- d9443c01a7336-290272159d1mr282145305ad.1.1760370227425; 
- Mon, 13 Oct 2025 08:43:47 -0700 (PDT)
-Received: from localhost.localdomain ([103.116.72.131])
+ AJvYcCUdP65vaKP+OsnarfI4o1lbC7bh6jSEQv/nrHxhNSYSPC8pdf73DKTELcT6x7EQ+qeq6w/YhdPup2k0@nongnu.org
+X-Gm-Message-State: AOJu0YymZF450qdzoZyiRa1Us1Ju66fN5iDp8c0WIRjN7G1Qys6ZXGVW
+ 3vhcSPhKEedSJbVxb9tYCzV/UkOL2O4SDIQEdm3h7vLWOiXRhw9X0kKtBmJmFhL/k2I=
+X-Gm-Gg: ASbGncuas1VuE87j+O/KxeRNW2oRcVuv8hIXDuKmEN7u/m2HTTk6+SgNOrW43XR47NV
+ enoLW2NaZFhOdl/PqdDO5B4UBrnnKv/76O93ELl/X1NJ60bdtIoJuHtLxeAnKO5cpHa+DIooK0Q
+ Ky/lTTiiiZFuZ207mW/kWEKrW0y95QE216FChuEpLljCoeFQE7dGiUSPUrRlwjDMlwPxXEslL1u
+ MDYdG311VUWhTe5qJc62pWaDDPkgNJ/X1cEObyKBxPRGe9kXw+eFIEl2efq+qNcaTKRomYx2WW2
+ 2mjNpUP00RtRra0UfdU7m4a2WNksvP+WKbWyMOciitSY2z6RZJD42WyH5WQDA5TwCWnx8rksMMN
+ VQAwOcTXPMy4b0cBRKDLS/t/TAnzFmGDKhKyDL8r4EhrjxCCIchcG1v1v
+X-Google-Smtp-Source: AGHT+IGIQOP+sSZTRNKQa9mzZPqTFtaWMGEgHnKQ44+L3lH8dEchvF4A/4ZGrUoIE5Is57Kzn4SMEA==
+X-Received: by 2002:a17:90b:164b:b0:32e:3592:581a with SMTP id
+ 98e67ed59e1d1-33b51734ce5mr29355866a91.17.1760372196174; 
+ Mon, 13 Oct 2025 09:16:36 -0700 (PDT)
+Received: from [192.168.68.110] ([152.234.122.223])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-33b529cec1esm10041015a91.3.2025.10.13.08.43.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Oct 2025 08:43:46 -0700 (PDT)
-From: Zejun Zhao <jelly.zhao.42@gmail.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+ 98e67ed59e1d1-33b626e8f80sm12599059a91.22.2025.10.13.09.16.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Oct 2025 09:16:35 -0700 (PDT)
+Message-ID: <64b0434a-d0f2-457b-9301-968239dfe504@ventanamicro.com>
+Date: Mon, 13 Oct 2025 13:16:32 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] hw/riscv: Correct mmu-type property of sifive_u harts in
+ device tree
+To: Zejun Zhao <jelly.zhao.42@gmail.com>, qemu-devel@nongnu.org
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
  Max Chou <max.chou@sifive.com>
-Subject: Re: [PATCH] hw/riscv: Correct mmu-type property of sifive_u harts in
- device tree
-Date: Mon, 13 Oct 2025 23:43:35 +0800
-Message-ID: <20251013154340.1989427-1-jelly.zhao.42@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cca1b0f7-8063-4d53-88f7-a56eb56b3eca@ventanamicro.com>
 References: <cca1b0f7-8063-4d53-88f7-a56eb56b3eca@ventanamicro.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+ <20251013154340.1989427-1-jelly.zhao.42@gmail.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <20251013154340.1989427-1-jelly.zhao.42@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
- envelope-from=jelly.zhao.42@gmail.com; helo=mail-pg1-x544.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -108,26 +108,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 13 Oct 2025 11:38:48 -0300, Daniel wrote:
-> But the documentation I found [1] seems to indicate that it should
-> support sv48.
 
-The second paragraph after the referenced Table 9 from [1] states:
-> For RV64 architectures on SiFive designs,satp.MODE=8 is used for Sv39
-> virtual addressing, and no other modes are currently supported.
 
-And here is the same statement from [1]:
-> The U5 has support for virtual memory through the use of a Memory
-> Management Unit (MMU). The MMU supports the Bare and Sv39 modes as
-> described inThe RISC‑V Instruction Set Man-ual, Volume II: Privileged
-> Architecture, Version 1.10.
+On 10/13/25 12:43 PM, Zejun Zhao wrote:
+> On Mon, 13 Oct 2025 11:38:48 -0300, Daniel wrote:
+>> But the documentation I found [1] seems to indicate that it should
+>> support sv48.
+> 
+> The second paragraph after the referenced Table 9 from [1] states:
+>> For RV64 architectures on SiFive designs,satp.MODE=8 is used for Sv39
+>> virtual addressing, and no other modes are currently supported.
+> 
+> And here is the same statement from [1]:
+>> The U5 has support for virtual memory through the use of a Memory
+>> Management Unit (MMU). The MMU supports the Bare and Sv39 modes as
+>> described inThe RISC‑V Instruction Set Man-ual, Volume II: Privileged
+>> Architecture, Version 1.10.
+> 
+> So I believe we should not try to support Sv48 for this hart. Hardcoding
+> it to Sv39 should be fine and correct.
 
-So I believe we should not try to support Sv48 for this hart. Hardcoding
-it to Sv39 should be fine and correct.
 
-Regards,
+Makes sense. I believe we can proceed with the changes then.
 
-Zejun
 
-[1] https://starfivetech.com/uploads/u54_core_complex_manual_21G1.pdf
+Thanks,
+
+Daniel
+
+
+> 
+> Regards,
+> 
+> Zejun
+> 
+> [1] https://starfivetech.com/uploads/u54_core_complex_manual_21G1.pdf
+
 
