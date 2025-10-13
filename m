@@ -4,171 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38240CCD185
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Oct 2025 06:42:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51645CCD183
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Oct 2025 10:40:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v8CFy-0005PO-GB; Mon, 13 Oct 2025 02:42:06 -0400
+	id 1v8Fyz-0001fN-8V; Mon, 13 Oct 2025 06:40:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1v8CFw-0005PC-Q4; Mon, 13 Oct 2025 02:42:05 -0400
-Received: from mail-francecentralazlp170130007.outbound.protection.outlook.com
- ([2a01:111:f403:c20a::7] helo=PA4PR04CU001.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1v8CFu-0000Lq-D5; Mon, 13 Oct 2025 02:42:04 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BlnBJgI+RAHmti6JSmfWsazzzl4Kk6KzhmspEA7nw8yZTbnoZgjmNgT1T0QKFAckaBsS/NA91G7lp8kjb8itIG+3kYeIeqNH+H1g3+A3tzHbC8KCdmd21hHlWGYwiWOhpaAC18YdblkywQX3OlWoMcihGp2CMJi0d0a/b7Qza/11ZhvVpfI8osKj7xZaOMOHK3Zi5258AtL/vzfAc/hQGs790aK5AV/aIARUlN9IUYeLL9Ncrgy+WMZB56vHig9k5g595LwztOhhoNmo7EXXaG6OO7Wy2EqxC9JWVoBRTuPDWIwdNr+WbFHJHWu0x7yDQ1P0lSQd8Vyu+7u63lg+dw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dDJtd71t5IUnVgGcyBSZTHlwZeIvyiAwp07jQ5+09Sk=;
- b=RfaQ7vT0Gb7JwdrA9VMr8Lj8szvT80yDMSCOWIbcpVFtHKzT3n3GOYoKO194NrWHFD80igF2PuAoPabWwhyVBau/+BfsetRLKzvBXmKS6XSY+i+XtJ3fnxhwkdW655vjDdmoN6cXtKNGDbH8YLnfxy6q0rhPnoCqi9V1Zr+IEitb9Cz8t+bv4LEsbz7ARoi5vOINBePAjy/3OUKPApMgys9qjVeWx0enuH/GtXYbV7NltoX8sgJi7lnoEgmLq4VatF5O7G07b8QJnlGO+5noEl15LSY7Xb5X1S7dSHKqCCFfIME6Crp0LmEGNhmSBAEh09IRTTXiv27n+IH+/PdJ/A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=htecgroup.com; dmarc=pass action=none
- header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dDJtd71t5IUnVgGcyBSZTHlwZeIvyiAwp07jQ5+09Sk=;
- b=Gf+g5n1L4KsEFdEgItelcHL/fJgRhnKzML/Bln5hwZiJm9aA1SGMCAFK39x/q7k7PVWtJGj9Wgm8V/MIXOixFQd+zt4Zqpl5riP0YVgSkNZLg+CkvXsw26NtQHNR6KpTLCWQ57lGjsRNaDp/q0DQ/li+tvTo50ZfuM13kW414/KqRLdcLIqCnwRyPRzWnZpBhoCVo8gfUTmRPo8BWDQB0mqxUsHmpO6jhWbh5KRb3oSBkimlgdJgFXbznQYsvWz/kEiGTrSGZd1h12NuZYuc5epSxfQ0G/kXA+vdevOimhDxl1VuEHIH1l/b9kdjH7pVT/fYVFy2llVHeCBchIR8PA==
-Received: from AS4PR09MB6518.eurprd09.prod.outlook.com (2603:10a6:20b:4fb::5)
- by AS8PR09MB5301.eurprd09.prod.outlook.com (2603:10a6:20b:372::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.11; Mon, 13 Oct
- 2025 06:41:56 +0000
-Received: from AS4PR09MB6518.eurprd09.prod.outlook.com
- ([fe80::ad50:891a:847c:580a]) by AS4PR09MB6518.eurprd09.prod.outlook.com
- ([fe80::ad50:891a:847c:580a%4]) with mapi id 15.20.9203.009; Mon, 13 Oct 2025
- 06:41:55 +0000
-From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cfu@mips.com"
- <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>,
- "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>, "philmd@linaro.org"
- <philmd@linaro.org>, "alistair23@gmail.com" <alistair23@gmail.com>,
- "thuth@redhat.com" <thuth@redhat.com>
-Subject: Re: [PATCH v10 00/13] riscv: Add support for MIPS P8700 CPU
-Thread-Topic: [PATCH v10 00/13] riscv: Add support for MIPS P8700 CPU
-Thread-Index: AQHcNFLPBgrPC/ey2EWWlLi3ONa6A7S/sEiA
-Date: Mon, 13 Oct 2025 06:41:54 +0000
-Message-ID: <dc602c2c-d531-4a3d-91cd-cd9969aaa785@htecgroup.com>
-References: <20251003104443.51501-1-djordje.todorovic@htecgroup.com>
-In-Reply-To: <20251003104443.51501-1-djordje.todorovic@htecgroup.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla Thunderbird
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=htecgroup.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS4PR09MB6518:EE_|AS8PR09MB5301:EE_
-x-ms-office365-filtering-correlation-id: 491c42e5-dcea-4214-4204-08de0a2399c5
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700021;
-x-microsoft-antispam-message-info: =?utf-8?B?QXByaHR5cFFMSElJTmFIMUg0Sy9rTHRzSDlwbCtXRDVQWEZRNEFTWDk3T3NX?=
- =?utf-8?B?OEo1S1YwZmpsM3U0WkpUZU5wU1JqK0hDYnlhMHZyZExTVHBwMWVGd0dscmRH?=
- =?utf-8?B?UWkzWkJCbGRjS0FpaFZycE1nSG5nNkRQZ1U4SXRFMzVWQU5jWDdNbHFXVVo4?=
- =?utf-8?B?YmJLVDJWOThoSzN5c2Q3QlZnbHBOUVhhNGVyNm15dVplRis5WllNOFFoVVZP?=
- =?utf-8?B?VTMxMVhrUEF1blA2Ym1XL1BFandzNmpQNnpUMnFHVmQrOVZzbkFWc0tRQ0RZ?=
- =?utf-8?B?UHRDVUljSllLOWpJbndMaFVsU0ZmUFVQYXl6b3NRdU1QNTk1T2gzb21FR2NM?=
- =?utf-8?B?VjMrR1MxSVJoM0luZHp0Z09rL3pyaCsyUzZCSHp2Vjc4b1k5RzBFcmlSZTRT?=
- =?utf-8?B?NHljWXdGU1VmZXZEa09WQ2dPK3hPZXhuOGdCSGxZNktsUTVGSWJsWlJXcWx1?=
- =?utf-8?B?UGx2OHd5Q1RIZk01bGZ4VDAxMlJLMnEwRWYzajJnUXdHQitWT3NrMGJDRnJB?=
- =?utf-8?B?TlI3d0xHZWtMOVFKS1FqQ0pCWkhJRFlQYllLTHRvOGFpSFovd1hXeGMzZXQy?=
- =?utf-8?B?b2M4eTVhb0IxY2dWejJWNmlDVXpRYW1vUFVkd1JSODBjUGJmZHdydlovbHIy?=
- =?utf-8?B?TmRmbkR6ZEtNTC9seHdqMk1EbmZXcGoyYlFwZS90NjZheUxROVZ4U2JYc2k4?=
- =?utf-8?B?azcrM1M4Skt6MnNYYmFRd0pCRGVmQzRFNm5TTG5lYmoxazJlNUJYbHV6MUlX?=
- =?utf-8?B?SVM3RUVBQ3RwMXRMeTJwTi9rNXpkYnJLajBFSnJoS1V1MTMyZVlaQXBwd05U?=
- =?utf-8?B?U2RKVWlTZDA2TENLd3BDQlZtQlBjbGZsZ0VRbkJQOGI4STFqV3lxUzlVZ1dh?=
- =?utf-8?B?MitMeHUrelp5dlNEUDRPa3F6UVNqOVJEZnA4bG54bTJabStsYnZ6Rzg3dUhJ?=
- =?utf-8?B?Ymg0SXNodThRcTZCb1FDUU85bmJOWFFhRVQvWUZkK0l5SmNNSUhQcUVZSzhy?=
- =?utf-8?B?TFNNeGhWRVh3UWplK1dnNmt6Z0N0MDJSYjhZZEYwZWRCRGFrdEt6MG8ybFJl?=
- =?utf-8?B?VFFHQlM3bWk3SUZ4clRrUlVQN21DM3F6SDBKeG9qaTBNY011L1M4VWtUbXht?=
- =?utf-8?B?R3ZwQVh6bGI4T3JMamxmcmNyZ3VjT2ZVU2FkVFIxOFVFSzUvVm1SMjdTSHdo?=
- =?utf-8?B?d2JuSjVuYWpqVHlJRTh6d0R0Y0NtTi8wMnUvZzNzWUNjWkNMcGtySVd5aVFS?=
- =?utf-8?B?V1BHMFdGK0syVmsxVFRUYjFTVERhUFBJSDZxamtlMHRHSFJWcEFORmkzcnVz?=
- =?utf-8?B?Wnp2R0dMd3B6MFdjSlpFK0IvZk1VajRSZVhMYkExdFVnSnJFMXVPSXM3Z1Vw?=
- =?utf-8?B?SExMbTJTcVdHSk1Ca2FzUjYzc0hQMG5RUGJvM3JWSEdtWEZQdVg0REE5UWJK?=
- =?utf-8?B?U3BSMTRnZi9XUTg3UVJaOVI3VGRRaEJHWktCWHBwelFGL1lRTHFJZFBPRURh?=
- =?utf-8?B?amJhRC9xaU5vYS9BR3dXZnVDNUw1dlY1eUd1SXVqWi95NFc4TjE2RmtaTno3?=
- =?utf-8?B?V3pmait0ckRzK3k2TjZMM2xoQkhIYThOV3RMQ3FMTlNsVm1qSFZ6VTF6eHNY?=
- =?utf-8?B?Y2s5b1hkWWovQy80NW9kRWFxd1BpdGhKOXBhdk5NLytPL0M5VkNuZDEwYVMz?=
- =?utf-8?B?VmdHZExGTTVIckRoVmRQUnFhZ2xWVFN6WUF3SlpLaDV6QjhOZTBhV1Vqay9x?=
- =?utf-8?B?SjM5ZDNtT1VkNFZSUHZDdXlqM1BIOVRBdHRZanB4UGRyN0dWZURnN0czMzJC?=
- =?utf-8?B?VHR5Wm1Gdm1sWU0xSXlKanp1c1REbE1rR3FGVkgra1RRMUxkOXZQWktEOE9V?=
- =?utf-8?B?cDdsNG9MWG03aG8vYStsLzhBcTJ1Y3Ayd3cwUjZ1TmZjWTc2d2NaLzZ4c3VI?=
- =?utf-8?B?UVBzenVjUHFlUWtObi9FQnQ0d0JqUU1HR0VwUWlCeDFJOVJlYVoxcjlnOGJQ?=
- =?utf-8?Q?Q3DUUseTo6j15RGCzF8TCrw2pWTuiA=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR09MB6518.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(38070700021); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?YUd6VVQxbEpnNGVzdG5pTXVYcUZXTS96RzlrNUxuMllPME1Ic3FPZkpuS0oz?=
- =?utf-8?B?Y205OFcyanN0eXFtM0o2djZCaUlqRkRUeExZYUwzc1FUTWwxZ0FwblVPNlU0?=
- =?utf-8?B?VWJET0lHelplcDAxUnZzdVdxWHhsY0dtb1ZpWWhIZlBIb2taNU4wY3ZsQVFF?=
- =?utf-8?B?VEhYZS9MdWQ2YlQ0K1gybzltdS9wbStnTXJiOXFpVDIrMXA1dVdQeGs0cTlG?=
- =?utf-8?B?bGY2aW9MaExUVGx2UnZrMG5JWmxZSHdNT29KdGNiTldOU0ZHdGtMM25hcnN0?=
- =?utf-8?B?MnBZMCtFcTdmU0grMXQ4UzRVWHlobEtzS3R4SWFia0k5T0NOK0oyeFEwZ3JC?=
- =?utf-8?B?ek9kY3MxUmN5eHV0VytzUG9yaDJMQ1NwbjFKcVpEVlNTZmN5UUZXWWVxWjVy?=
- =?utf-8?B?QjdyTWZpa3dCcVBxWEN1MjBhd1doR3l4T00xTnpzam5tanBJcmE0MTd6OVpl?=
- =?utf-8?B?YyswMDlDOFV0UVYrZVBNNW45bEU4ZzlSYlB0YWJFbXdnTTQ0UktxSHpKUENY?=
- =?utf-8?B?YlYzT0dzRWVEeEVyUkZQSDMxT3ljUDJxZjlMUEd6TlZlc2N5WE9UZkpVbk1x?=
- =?utf-8?B?NXBPb05GOUdhQ3hDYjF1djBhQ2ZoTElTV0RoVjZmVXVESXFzZHVnNGhXOGxo?=
- =?utf-8?B?eVJ3M09wbXhHQWFNaHA4aVhxaVB4bkRkUzU5UWUwQS96cDh1cFZtYnRqVldo?=
- =?utf-8?B?UGwxbnFJa0t1V2RSdGFjb1J4ejd4RE8xN05pb2F0QXAySmxaNUl2NUZOQk5Y?=
- =?utf-8?B?QVcvQWpwWTU4VzRjajVBcjNKT2FDS2s4a1RGODlFemo4WGVZODdsay8xRXNV?=
- =?utf-8?B?QnI2R0RTY01OMDY5T1U3YzNqMFZZcjZLQ1R6TUkrbWhydDU2MFdjSzVEVmpG?=
- =?utf-8?B?b00wTjlmd3U5RnRzdE5ZRFU0cVlBL25qZmhsRWViT24wMUpQcjVGWXFJR3pU?=
- =?utf-8?B?Y0U4cTg4T0hqd0tUb1pzbGhyZ05UcWU5QnRyRUVRTVRGR1R3dml2WTdJUm5W?=
- =?utf-8?B?aXFwbEgvYUxLbldyV0Q5TUZ4NXN4REQ4MHdwVTMyWUxVdHBSclFHUE5ic0dY?=
- =?utf-8?B?M3RlSTVrSFZMT0VCNTZ0clhEYjFCM28zdFlMeEt2b0xmTXFRS0Fob1ZsbG5w?=
- =?utf-8?B?WWs5OVpVa295S0R1RFhJcXBSdys1RVU2TG9FaXYvMG9nVnFWTHVXQjJ6WG9v?=
- =?utf-8?B?Q0haVExRb3RvVzk3N0xpTlJXOHF3RExqVXphWkk3NjNjcGE3TnZhUk5aSWcr?=
- =?utf-8?B?L1JIRGdHN051NWhaMTMwTmxvVHdYNGJtbWRmaWlNbk5aTDhQZm5sTVRQd2kz?=
- =?utf-8?B?Q1NYR3JISElxVXV6OFAyWTNkMmxRNlNBeml3UHYwa05OYjI3bWtiTDNKeTMv?=
- =?utf-8?B?WTIvMGcwQ3lDRlNyQndrTzdNM1lYNjRqNldyRy9TcEpJZEpheWJCVEYySmhn?=
- =?utf-8?B?S0NmVGIydzJCaFlFNHFrUm94YUcveUIwanFNQ2Fsd1ZRRGhHN1ViK29kZ0ZK?=
- =?utf-8?B?R0FFQ2IwVUlsdFRvcUhzYnROTVRyQ0hFYU9rRnllZFdGVWZmV2FCRk8rcW1m?=
- =?utf-8?B?dEJzaDZpUTlJODRTTDNxRWdZcWY1RUNvRWs0MmFROXRiNDFmL0E0VUxXUm5l?=
- =?utf-8?B?bkN0WlVydnFNNmJ3ZEVISE0zSXVTNy9yamVxa1kxOENjNkVDaVMyNlJKbnov?=
- =?utf-8?B?bjRaTGhlL3RydXJDWmZidUdRTmQ2RCtGVFpVbDluSk5kLzZXb2ZFV0d3SC82?=
- =?utf-8?B?Q0QwK0JiSEIyaUlGZ2RKWkpES0YvZ2Nsd0E3R0djNndtMVgwamxkcDAwNXNF?=
- =?utf-8?B?eEhMNWdlQWFIWUp0M2V4NWYyUjdPNFp3cnQxWE5FUDFjQmE1c2pnN0JWTVRE?=
- =?utf-8?B?K2toMURocllOdkFqVzRJNEE2OWQyOXpIVzJ1bndER3lLSlhMeXVIeGtiMnAx?=
- =?utf-8?B?TVNPNEErZ0ZpYm9OY252TVFnV0xaWFNqODBjSVVpUDMzdGo5K1NISWNOdzkz?=
- =?utf-8?B?VjN5bGpvdkF0Mm1vckhtQnJQRTRwQVhYQlhlQjExZ1RoNUNFNmxDZGpjYjUx?=
- =?utf-8?B?QTQ0K3VyeVFjclZqaHpxMU13bnp0SE9pWktKQ05INVBWVk9OeVpzNE0rRVV4?=
- =?utf-8?B?M2NWanBqeGVnUUtreDRWdUJvV1hQWk9hT0RpU1dHbzJwRTFVdE9OeHZFN3RI?=
- =?utf-8?Q?ixaAhBb63a3yNo204YNrWDM=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <BB3924E11F617043A1C072807E10F6BA@eurprd09.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1v8Fyy-0001f8-1Z
+ for qemu-riscv@nongnu.org; Mon, 13 Oct 2025 06:40:48 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1v8Fyt-0007Cc-Tb
+ for qemu-riscv@nongnu.org; Mon, 13 Oct 2025 06:40:47 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3ed20bdfdffso3569960f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 13 Oct 2025 03:40:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760352038; x=1760956838; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=M7rjDlVmUfZdLPTVDi7Qx47Ou5H/phUo1jMSqY/mGY8=;
+ b=EYGVPQpQc4QV/tv7Iw2dJc0SELpHDXtMYdXcAygmDaEQl+b3KDkHszDpmn4DXY6bv2
+ PF5/F9n9i1LTXylG5sDJzQ9TC8MeMeh0RPOsj8aOeaOyQYFMFULTELu57YtOvEUN0aA7
+ hW8xZMzLSum3Kbg45WzgwDRVZYD/ZZ7MGOud/TrdGcomoUPpMI7DpUnPX5+593gHVdYi
+ rXkgUG0rf+QdWDZjNa0cqoqVIWTZaR0PCf0kUier8aEAXWoqRW5bu4S9uHMdyKB9XPcY
+ /nzTyjZlb2iK/KlAOH0X3E1+j6Z+p02bBZN1xhXFf65VvFMtaqTBwNbiIR3vmvzk+LQD
+ b4Cg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760352038; x=1760956838;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=M7rjDlVmUfZdLPTVDi7Qx47Ou5H/phUo1jMSqY/mGY8=;
+ b=XdVIipxpu9zmXrEUPDfZYMqGtFaTYzRBF1kErk1Ape2yp5P91Wx2tGHew5N8Eibb7L
+ FKIip9AwMpw0mkLIG7UYkuwJX2Ns9PPFKBXVPmZhcfsMBoefhxotYomf9v9VwCGhG/Bw
+ 8efh01FhwjDj6jfUbvIBRilSl4k6BBTR53ScgKkg4IChNiIQ0cZHM4p3USV5lQlQ1gJj
+ DoarzQSnOWlJZXJfbPszy5HI9KmPMBLXoW35OGbXCzsknBY6eRUhKu5HUUOcWaU+INv2
+ sNDFO1EG389vmIhu9gulFFp2Jx4mLlKf7ScEDyNegfg+jHFh5CQr/Z5ulLcueRzCBIx5
+ ZAwA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVqV4GnWtVu9AlU+7nimHgTYh+vqo55zJk6fYAgIyX0JMVRKiM/XQ9U/gOJFHpfHSoaqjaVEUUotcgp@nongnu.org
+X-Gm-Message-State: AOJu0YyC1y0Ct/MMxawhe7rSpndhYFKL9jf9sZYtOohjmH/IqW3LGJzb
+ kl+OvlKUkTr0MvMzU8c6ch3oB16dqL/+mLoNrL0gG6GQKTFSXbYorJcO
+X-Gm-Gg: ASbGncuDbmciER69wMJWuwTOTZ6cc71YC6x/ySUX1t8EBN71gqp/jFa/VjXFkwYermV
+ 0TdMFT9eyjRGLoBJpBdGVGcEKP4C69iBp/1LmndbUnqy7BDeTKjrK5Tut2FEUj/xZUao4eX5Ed0
+ xJqcFooRaZA9qbzK+cCsDaH6PO1FUXkK4aEXSCP+RAhtnrJvO4bjx/f0b9R9XoflxjbMObBUBAp
+ /AujS3OzYjsviK+4pV7HseUALgWy5EFk4cflzN+s/tjw3RK8UxdyvVdU71vFVxhMpxUaJQTqpAF
+ 7wYxrKq186Q0MD5CewWs9pcjmLZ6uBz8/0/aLXWtYyyvZExiI9MGPGbpJgmBEpaStxZ1n6opfob
+ ozRCStOfVCswd0P9RMuApzFT5+a7mGFX9ykYAXKyu5RkcCm6UDxTpE++xva6xNmpy4e3D5qogkk
+ cIQrBa4VHOj6TYFizTOExP4WKI81PPgjLFTRUS183Y0S2Let0S
+X-Google-Smtp-Source: AGHT+IFPVhr7fnoczXLCRNb6LwQBSyPKZNDA9JKVJp9dGBkL5p30KO9p7NF8acWRbOPcfnJZvH5XtA==
+X-Received: by 2002:a05:6000:4304:b0:3e7:6268:71fd with SMTP id
+ ffacd0b85a97d-4266e8d93b2mr14112114f8f.52.1760352038054; 
+ Mon, 13 Oct 2025 03:40:38 -0700 (PDT)
+Received: from ehlo.thunderbird.net
+ (p200300faaf271400a0afdc243fcb5392.dip0.t-ipconnect.de.
+ [2003:fa:af27:1400:a0af:dc24:3fcb:5392])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-426ce57d4bbsm17875064f8f.2.2025.10.13.03.40.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Oct 2025 03:40:37 -0700 (PDT)
+Date: Mon, 13 Oct 2025 10:40:36 +0000
+From: Bernhard Beschow <shentey@gmail.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>
+CC: qemu-devel@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>,
+ Thomas Huth <thuth@redhat.com>,
+ =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>,
+ qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
+Subject: =?US-ASCII?Q?Re=3A_=5BRFC_PATCH=5D_docs/system/security=3A_Restrict?=
+ =?US-ASCII?Q?_=22virtualization_use_case=22_to_specific_machines?=
+In-Reply-To: <20250908104125-mutt-send-email-mst@kernel.org>
+References: <20250908125058.220973-1-peter.maydell@linaro.org>
+ <20250908104125-mutt-send-email-mst@kernel.org>
+Message-ID: <46AA9C03-CA7E-4C4B-AD05-A9053666BA52@gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: htecgroup.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR09MB6518.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 491c42e5-dcea-4214-4204-08de0a2399c5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Oct 2025 06:41:54.7223 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 5vmJHucn4SIl6N5qyrT4FupnaS3msYecKK7L4q9tjUkHtgduu2uEnsIxyynn8V+WDJ17pWLIAJzNGukESR5rnG/WJknICNPh9/Clox7a5vE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR09MB5301
-Received-SPF: pass client-ip=2a01:111:f403:c20a::7;
- envelope-from=Djordje.Todorovic@htecgroup.com;
- helo=PA4PR04CU001.outbound.protection.outlook.com
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=shentey@gmail.com; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -184,64 +116,164 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-SGksDQoNCklzIHRoZXJlIGFueSBhZGRpdGlvbmFsIGNvbW1lbnQgb24gdGhpcz8gOikNCg0KQmVz
-dCByZWdhcmRzLA0KRGpvcmRqZQ0KDQoNCk9uIDMuIDEwLiAyNS4gMTI6NDUsIERqb3JkamUgVG9k
-b3JvdmljIHdyb3RlOg0KPiBJbiB0aGlzIHZlcnNpb24gb2YgcGF0Y2hzZXQgSSBoYXZlIGFkZHJl
-c3NlZCBjb21tZW50cw0KPiByZWdhcmRpbmcgdGhlIHRlc3QgY2FzZSBhbmQgYWRkZWQgb25lIGNv
-bW1lbnQgZm9yIHRoZQ0KPiBjcHVfc2V0X2V4Y2VwdGlvbl9iYXNlIGZ1bmN0aW9uIHdlIGFkZGVk
-Lg0KPg0KPiBEam9yZGplIFRvZG9yb3ZpYyAoMTMpOg0KPiAgICBody9pbnRjOiBBbGxvdyBnYXBz
-IGluIGhhcnRpZHMgZm9yIGFjbGludCBhbmQgYXBsaWMNCj4gICAgdGFyZ2V0L3Jpc2N2OiBBZGQg
-Y3B1X3NldF9leGNlcHRpb25fYmFzZQ0KPiAgICB0YXJnZXQvcmlzY3Y6IEFkZCBNSVBTIFA4NzAw
-IENQVQ0KPiAgICB0YXJnZXQvcmlzY3Y6IEFkZCBNSVBTIFA4NzAwIENTUnMNCj4gICAgdGFyZ2V0
-L3Jpc2N2OiBBZGQgbWlwcy5jY21vdiBpbnN0cnVjdGlvbg0KPiAgICB0YXJnZXQvcmlzY3Y6IEFk
-ZCBtaXBzLnByZWYgaW5zdHJ1Y3Rpb24NCj4gICAgdGFyZ2V0L3Jpc2N2OiBBZGQgWG1pcHNsc3Ag
-aW5zdHJ1Y3Rpb25zDQo+ICAgIGh3L21pc2M6IEFkZCBSSVNDLVYgQ01HQ1IgZGV2aWNlIGltcGxl
-bWVudGF0aW9uDQo+ICAgIGh3L21pc2M6IEFkZCBSSVNDLVYgQ1BDIGRldmljZSBpbXBsZW1lbnRh
-dGlvbg0KPiAgICBody9yaXNjdjogQWRkIHN1cHBvcnQgZm9yIFJJU0NWIENQUw0KPiAgICBody9y
-aXNjdjogQWRkIHN1cHBvcnQgZm9yIE1JUFMgQm9zdG9uLWFpYSBib2FyZCBtb2RlDQo+ICAgIHJp
-c2N2L2Jvc3Rvbi1haWE6IEFkZCBhbiBlMTAwMGUgTklDIGluIHNsb3QgMCBmdW5jIDENCj4gICAg
-dGVzdC9mdW5jdGlvbmFsOiBBZGQgdGVzdCBmb3IgYm9zdG9uLWFpYSBib2FyZA0KPg0KPiAgIGNv
-bmZpZ3MvZGV2aWNlcy9yaXNjdjY0LXNvZnRtbXUvZGVmYXVsdC5tYWsgICB8ICAgMSArDQo+ICAg
-ZG9jcy9zeXN0ZW0vcmlzY3YvbWlwcy5yc3QgICAgICAgICAgICAgICAgICAgIHwgIDIwICsNCj4g
-ICBkb2NzL3N5c3RlbS90YXJnZXQtcmlzY3YucnN0ICAgICAgICAgICAgICAgICAgfCAgIDEgKw0K
-PiAgIGh3L2ludGMvcmlzY3ZfYWNsaW50LmMgICAgICAgICAgICAgICAgICAgICAgICB8ICAxOCAr
-LQ0KPiAgIGh3L2ludGMvcmlzY3ZfYXBsaWMuYyAgICAgICAgICAgICAgICAgICAgICAgICB8ICAx
-MyArLQ0KPiAgIGh3L21pc2MvS2NvbmZpZyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8
-ICAxNyArDQo+ICAgaHcvbWlzYy9tZXNvbi5idWlsZCAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHwgICAzICsNCj4gICBody9taXNjL3Jpc2N2X2NtZ2NyLmMgICAgICAgICAgICAgICAgICAgICAg
-ICAgfCAyNDggKysrKysrKysrDQo+ICAgaHcvbWlzYy9yaXNjdl9jcGMuYyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHwgMjY1ICsrKysrKysrKysNCj4gICBody9yaXNjdi9LY29uZmlnICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDYgKw0KPiAgIGh3L3Jpc2N2L2Jvc3Rvbi1haWEu
-YyAgICAgICAgICAgICAgICAgICAgICAgICB8IDQ3NyArKysrKysrKysrKysrKysrKysNCj4gICBo
-dy9yaXNjdi9jcHMuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAxOTYgKysrKysr
-Kw0KPiAgIGh3L3Jpc2N2L21lc29uLmJ1aWxkICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAg
-MyArDQo+ICAgaW5jbHVkZS9ody9taXNjL3Jpc2N2X2NtZ2NyLmggICAgICAgICAgICAgICAgIHwg
-IDUwICsrDQo+ICAgaW5jbHVkZS9ody9taXNjL3Jpc2N2X2NwYy5oICAgICAgICAgICAgICAgICAg
-IHwgIDY0ICsrKw0KPiAgIGluY2x1ZGUvaHcvcmlzY3YvY3BzLmggICAgICAgICAgICAgICAgICAg
-ICAgICB8ICA2NiArKysNCj4gICB0YXJnZXQvcmlzY3YvY3B1LXFvbS5oICAgICAgICAgICAgICAg
-ICAgICAgICAgfCAgIDEgKw0KPiAgIHRhcmdldC9yaXNjdi9jcHUuYyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICB8ICA0MyArKw0KPiAgIHRhcmdldC9yaXNjdi9jcHUuaCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICB8ICAgNyArDQo+ICAgdGFyZ2V0L3Jpc2N2L2NwdV9jZmcuaCAgICAgICAg
-ICAgICAgICAgICAgICAgIHwgICA1ICsNCj4gICB0YXJnZXQvcmlzY3YvY3B1X2NmZ19maWVsZHMu
-aC5pbmMgICAgICAgICAgICAgfCAgIDMgKw0KPiAgIHRhcmdldC9yaXNjdi9jcHVfdmVuZG9yaWQu
-aCAgICAgICAgICAgICAgICAgICB8ICAgMSArDQo+ICAgdGFyZ2V0L3Jpc2N2L2luc25fdHJhbnMv
-dHJhbnNfeG1pcHMuYy5pbmMgICAgIHwgMTM2ICsrKysrDQo+ICAgdGFyZ2V0L3Jpc2N2L21lc29u
-LmJ1aWxkICAgICAgICAgICAgICAgICAgICAgIHwgICAyICsNCj4gICB0YXJnZXQvcmlzY3YvbWlw
-c19jc3IuYyAgICAgICAgICAgICAgICAgICAgICAgfCAyMTcgKysrKysrKysNCj4gICB0YXJnZXQv
-cmlzY3YvdHJhbnNsYXRlLmMgICAgICAgICAgICAgICAgICAgICAgfCAgIDMgKw0KPiAgIHRhcmdl
-dC9yaXNjdi94bWlwcy5kZWNvZGUgICAgICAgICAgICAgICAgICAgICB8ICAzNSArKw0KPiAgIHRl
-c3RzL2Z1bmN0aW9uYWwvcmlzY3Y2NC9tZXNvbi5idWlsZCAgICAgICAgICB8ICAgMiArDQo+ICAg
-Li4uL2Z1bmN0aW9uYWwvcmlzY3Y2NC90ZXN0X3Jpc2N2NjRfYm9zdG9uLnB5IHwgMTI0ICsrKysr
-DQo+ICAgMjkgZmlsZXMgY2hhbmdlZCwgMjAyMiBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygt
-KQ0KPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkb2NzL3N5c3RlbS9yaXNjdi9taXBzLnJzdA0KPiAg
-IGNyZWF0ZSBtb2RlIDEwMDY0NCBody9taXNjL3Jpc2N2X2NtZ2NyLmMNCj4gICBjcmVhdGUgbW9k
-ZSAxMDA2NDQgaHcvbWlzYy9yaXNjdl9jcGMuYw0KPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBody9y
-aXNjdi9ib3N0b24tYWlhLmMNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgaHcvcmlzY3YvY3BzLmMN
-Cj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS9ody9taXNjL3Jpc2N2X2NtZ2NyLmgNCj4g
-ICBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS9ody9taXNjL3Jpc2N2X2NwYy5oDQo+ICAgY3Jl
-YXRlIG1vZGUgMTAwNjQ0IGluY2x1ZGUvaHcvcmlzY3YvY3BzLmgNCj4gICBjcmVhdGUgbW9kZSAx
-MDA2NDQgdGFyZ2V0L3Jpc2N2L2luc25fdHJhbnMvdHJhbnNfeG1pcHMuYy5pbmMNCj4gICBjcmVh
-dGUgbW9kZSAxMDA2NDQgdGFyZ2V0L3Jpc2N2L21pcHNfY3NyLmMNCj4gICBjcmVhdGUgbW9kZSAx
-MDA2NDQgdGFyZ2V0L3Jpc2N2L3htaXBzLmRlY29kZQ0KPiAgIGNyZWF0ZSBtb2RlIDEwMDc1NSB0
-ZXN0cy9mdW5jdGlvbmFsL3Jpc2N2NjQvdGVzdF9yaXNjdjY0X2Jvc3Rvbi5weQ0KPg==
+
+
+Am 8=2E September 2025 14:45:40 UTC schrieb "Michael S=2E Tsirkin" <mst@re=
+dhat=2Ecom>:
+>On Mon, Sep 08, 2025 at 01:50:57PM +0100, Peter Maydell wrote:
+>> Currently our security policy defines a "virtualization use case"
+>> where we consider bugs to be security issues, and a
+>> "non-virtualization use case" where we do not make any security
+>> guarantees and don't consider bugs to be security issues=2E
+>>=20
+>> The rationale for this split is that much code in QEMU is older and
+>> was not written with malicious guests in mind, and we don't have the
+>> resources to audit, fix and defend it=2E  So instead we inform users
+>> about what the can in practice rely on as a security barrier, and
+>> what they can't=2E
+>>=20
+>> We don't currently restrict the "virtualization use case" to any
+>> particular set of machine types=2E  This means that we have effectively
+>> barred ourselves from adding KVM support to any machine type that we
+>> don't want to put into the "bugs are security issues" category, even
+>> if it would be useful for users to be able to get better performance
+>> with a trusted guest by enabling KVM=2E This seems an unnecessary
+>> restriction, and in practice the set of machine types it makes
+>> sense to use for untrusted-guest virtualization is quite small=2E
+>>=20
+>> Specifically, we would like to be able to enable the use of
+>> KVM with the imx8 development board machine types, but we don't
+>> want to commit ourselves to having to support those SoC models
+>> and device models as part of QEMU's security boundary:
+>> https://lore=2Ekernel=2Eorg/qemu-devel/20250629204851=2E1778-3-shentey@=
+gmail=2Ecom/
+>>=20
+>> This patch updates the security policy to explicitly list the
+>> machine types we consider to be useful for the "virtualization
+>> use case"=2E
+>
+>This use-case sounds reasonable to me=2E I also imagine that
+>some machines can get fixed down the road perhaps to
+>the point where they enter the "virtualization use case"=2E
+>
+>However, since we are
+>getting this elaborate, would my old idea of a runtime flag
+>make sense now?
+>
+>To recap, the idea was to add a "-virt" flag that will
+>block any machines, devices and so on not considered
+>part of the "virtualization use case"=2E
+>
+>We could also create a mechanism for downstreams to
+>tweak this as they see fit=2E
+
+Hi Michael,
+
+Thanks for confirming that the use case seems reasonable=2E
+
+For now, we'd like to sharpen the term "virtualization use case" to allow =
+for KVM to be usable in machines that aren't inside the security boundary a=
+nd where maintenance commitment is unrealistic=2E The current approach is t=
+o adjust the policy and to spell out the machines where these commitments a=
+re made=2E
+
+The trigger for this RFC was to be able to add KVM support to the imx8mp-e=
+vk machine=2E I have it working but can't currently upstream it due to our =
+policy=2E It asks for unreasonable work and commitment which adds an unjust=
+ifyable burden on the maintainers=2E
+
+I do see a need for further enhancements on the broader topic like adding =
+a -virt switch etc=2E Maybe we should come up with a different term than "v=
+irtualization use case" which appears to leave a lot of room for interpreta=
+tion=2E I propose these topics to be addressed separately=2E
+
+What is missing for your R-b?
+
+Thanks,
+Bernhard
+
+>
+>
+>
+>
+>> This is an RFC partly to see if we have consensus that this change
+>> makes sense, and partly because I was only able to identify the
+>> machine types we want to cover for some of our target architectures=2E
+>> If maintainers for the other architectures could clarify which
+>> machine types work with KVM that would be helpful=2E
+>>=20
+>> Notes on the listed machine types:
+>>=20
+>> architectures I'm pretty sure about:
+>>=20
+>> aarch64:
+>>  -- virt is definitely the only supported one
+>> s390x:
+>>  -- s390-ccw-virtio is the only machine type for this architecture
+>> loongarch64:
+>>  -- virt is the only machine type for this architecture
+>>=20
+>> architectures where I've made a guess:
+>>=20
+>> i386, x86_64:
+>>  -- I have assumed that all machine types except the "experimental"
+>>     x-remote are supported
+>>=20
+>> architectures I don't know:
+>>=20
+>> mips, mips64
+>> riscv32, riscv64
+>> ppc, ppc64
+>>=20
+>> Signed-off-by: Peter Maydell <peter=2Emaydell@linaro=2Eorg>
+>> ---
+>>  docs/system/security=2Erst | 28 ++++++++++++++++++++++++++++
+>>  1 file changed, 28 insertions(+)
+>>=20
+>> diff --git a/docs/system/security=2Erst b/docs/system/security=2Erst
+>> index f2092c8768b=2E=2E395c2d7fb88 100644
+>> --- a/docs/system/security=2Erst
+>> +++ b/docs/system/security=2Erst
+>> @@ -35,6 +35,34 @@ malicious:
+>>  Bugs affecting these entities are evaluated on whether they can cause =
+damage in
+>>  real-world use cases and treated as security bugs if this is the case=
+=2E
+>> =20
+>> +To be covered by this security support policy you must:
+>> +
+>> +- use a virtualization accelerator like KVM or HVF
+>> +- use one of the machine types listed below
+>> +
+>> +It may be possible to use other machine types with a virtualization
+>> +accelerator to provide improved performance with a trusted guest
+>> +workload, but any machine type not listed here should not be
+>> +considered to be providing guest isolation or security guarantees,
+>> +and falls under the "non-virtualization use case"=2E
+>> +
+>> +Supported machine types for the virtualization use case, by target arc=
+hitecture:
+>> +
+>> +aarch64
+>> +  ``virt``
+>> +i386, x86_64
+>> +  ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``, ``pc``, ``q35``, ``is=
+apc``
+>> +s390x
+>> +  ``s390-ccw-virtio``
+>> +loongarch64:
+>> +  ``virt``
+>> +ppc, ppc64:
+>> +  TODO
+>> +mips, mips64:
+>> +  TODO
+>> +riscv32, riscv64:
+>> +  TODO
+>> +
+>>  Non-virtualization Use Case
+>>  '''''''''''''''''''''''''''
+>> =20
+>> --=20
+>> 2=2E43=2E0
+>
 
