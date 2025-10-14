@@ -4,91 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E601CCD192
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Oct 2025 13:23:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1118CCD184
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Oct 2025 13:25:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v8ezZ-0003mL-MS; Tue, 14 Oct 2025 09:23:06 -0400
+	id 1v8f1C-0004tK-Lo; Tue, 14 Oct 2025 09:24:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1v8ezY-0003lW-92
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 09:23:04 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1v8ezR-0007Qs-FE
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 09:23:02 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1760448173;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=XZeAe0W2caL9CflAGkea4mBkhMtjIgXKl2UU112ofOw=;
- b=AHnU6Yyn6regajuihR2KI2P1co24JOPHSqygQlEdMIQTAwREOM6DVHHF+nXLdLJ9/P+aG+
- 6i7yjsrMOZos7f5qnzjgbTo2NBQYyxYlBi7PGQYtz3cZH79KtK2EOCOv45BS/5wuzd4Oba
- bM6eQE8vvGsflVG9XDxBKVcOwllk0C4=
-Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-310-EeCLxSfyOrWfltLtTa2Zng-1; Tue,
- 14 Oct 2025 09:22:49 -0400
-X-MC-Unique: EeCLxSfyOrWfltLtTa2Zng-1
-X-Mimecast-MFC-AGG-ID: EeCLxSfyOrWfltLtTa2Zng_1760448167
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 949E81954102; Tue, 14 Oct 2025 13:22:46 +0000 (UTC)
-Received: from redhat.com (unknown [10.42.28.198])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 51BC71801AD9; Tue, 14 Oct 2025 13:22:40 +0000 (UTC)
-Date: Tue, 14 Oct 2025 14:22:37 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
- Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org,
- Stefan Hajnoczi <stefanha@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>,
- qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
-Subject: Re: [RFC PATCH] docs/system/security: Restrict "virtualization use
- case" to specific machines
-Message-ID: <aO5OndKoyP4Tk8Rw@redhat.com>
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1v8f19-0004rs-1Y
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 09:24:43 -0400
+Received: from mail-yw1-x1136.google.com ([2607:f8b0:4864:20::1136])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1v8f12-0007Y0-C9
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 09:24:42 -0400
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-78142734156so16970537b3.2
+ for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 06:24:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1760448274; x=1761053074; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=G8jDXamh0GAjhaOOyUbM/zxBl3+EgMCzhSCMLTGd7MM=;
+ b=Kydw+eXXA4hMSPzxUjV9HI5oaP6PuGMeePHeDqJQlt9j6sVGp5YLRCkK40Mx7nTFv3
+ bhJItSOXd3EFNK10ub6g0n4MZHG0wSikjJt5/wScnvszYN/2dX/01pcXVlpsIcXKsNK9
+ E/CpHL0dQ9w09I1AOo+iuaSMgomHFZD04URVri9zfRaQhye5UIurtb0BJFRoX5hA9KkN
+ h6Ks0bz0FeGt/fhEJyxIZBqUMrTb1hjejC2UwWy4t2r2CgftPRf5VuTpwnmyZsIJzeNL
+ LxMogncCfhR5vVQ1RZmZ4PUSs0E0Dbb/1L3G15J8EQUwrRJOa0lHNiy6hLPMRvQmahi8
+ /44w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760448274; x=1761053074;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=G8jDXamh0GAjhaOOyUbM/zxBl3+EgMCzhSCMLTGd7MM=;
+ b=CGIrTJPAEp27wG7aC143Mqn8pHvkONSC3bnyTGERf52nMelIAGzaLp7yX4tfRiLrng
+ kRmEn/9e9RSYGpcoLBmsxTxe3Pj2n8yOQ67y/FC17STOcUlka2eeqkFV0zrT5YSzfXD9
+ NTQNcttHKJU69HTBSfXV9LapgsUixsxWXlxq5rA1yvX2qMmWIe2Zq2a+Iti+5D7t9/zs
+ SPC+DxJLhO+SElVtvFknoWQsJe8am/mSNsYGIvphlCucVKQ8O8QSHyrhsFlWQCcZ3xgs
+ tJ8yZhoxg2lfnXdL3NQzDcXrH6d9646hJvEs+tIfBh+z1CP5MWCNSwpFYWcsVD9Bvk92
+ hslQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXso5Avi+Rwrsl3CRWrd/+0AUoY+15FwR3KJaAjEy5uDFmGgq7EQUVTn8R3AopIhYwvsfPUq1IBtHnG@nongnu.org
+X-Gm-Message-State: AOJu0YwU1F1tNWI0Dzbd0YXyFyZZkEPKP7l5GQiQUdORzH1FiLLpCkIc
+ zfQbQqEZPZZG9wjrdu2LyVaphiK0i6z65jCAZzGl1TUwDqwQz8S34AsgQQhki7JmzwxPzlQ998l
+ on60PRBtgQNLwgiCw2vW9HHU2Jw1LGbso4A9dBYwqOA==
+X-Gm-Gg: ASbGnctaYKl2dR9+nUm+/bUmOiazfYdt/Ymx8LJnNVqpj5cC6S+B/Nq4X/u/pFII6nO
+ HqO9USsmD23h6gTwpVA6NIUnq+qS4OAJG96grJq+1IKKNKM0XQoQg+Uck8kQEdskrraFaOCSMzv
+ qOxWuH5jamXbjEhyFTXCRdVjFIwkLTarg2pR0+D1iyiZAd/aj1y/0TJ+jGnZ07kgwkLUNgv4OSW
+ uPrzX7Ec6amJmBsfqExmYn9YlaUYMtlBTEIDMNMnw==
+X-Google-Smtp-Source: AGHT+IHaFc3RRuDEiqeYSwnBo4u9QB+QqXv4aFN8eskYGje4t8Ipu4fV5lIW2GG8Dvb+kXgxpAr3wSK39vx2ipeuRE8=
+X-Received: by 2002:a53:be0a:0:b0:63c:f5a7:3fc with SMTP id
+ 956f58d0204a3-63cf5a70a2emr7600436d50.64.1760448273771; Tue, 14 Oct 2025
+ 06:24:33 -0700 (PDT)
+MIME-Version: 1.0
 References: <20250908125058.220973-1-peter.maydell@linaro.org>
  <20250908104125-mutt-send-email-mst@kernel.org>
  <46AA9C03-CA7E-4C4B-AD05-A9053666BA52@gmail.com>
- <20251013070945-mutt-send-email-mst@kernel.org>
- <aOzm2ukHfkPF-zhT@redhat.com>
+ <20251013070945-mutt-send-email-mst@kernel.org> <aOzm2ukHfkPF-zhT@redhat.com>
  <CAFEAcA9p51aPGhHgUPishEJ9TE60dm83ofKr5Wa-qM_1SqJ67w@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFEAcA9p51aPGhHgUPishEJ9TE60dm83ofKr5Wa-qM_1SqJ67w@mail.gmail.com>
-User-Agent: Mutt/2.2.14 (2025-02-20)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+ <aO5OndKoyP4Tk8Rw@redhat.com>
+In-Reply-To: <aO5OndKoyP4Tk8Rw@redhat.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 14 Oct 2025 14:24:22 +0100
+X-Gm-Features: AS18NWBEgp9rF0la74221YIrfcgrObUAY4l2alirlrVCyAB-5MtRwOFxwpklcIk
+Message-ID: <CAFEAcA-K8=4O+rohY062YGQLLBpQP=knCgJMsJSoGTNsZHeLeA@mail.gmail.com>
+Subject: Re: [RFC PATCH] docs/system/security: Restrict "virtualization use
+ case" to specific machines
+To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Bernhard Beschow <shentey@gmail.com>,
+ qemu-devel@nongnu.org, 
+ Stefan Hajnoczi <stefanha@redhat.com>, Thomas Huth <thuth@redhat.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ Huacai Chen <chenhuacai@kernel.org>, qemu-s390x@nongnu.org, 
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1136;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1136.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,99 +110,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Oct 14, 2025 at 01:20:07PM +0100, Peter Maydell wrote:
-> On Mon, 13 Oct 2025 at 12:47, Daniel P. Berrangé <berrange@redhat.com> wrote:
-> > With a very minimal wording tweak our current defined policy could
-> > avoid being a blocker for enabling KVM in imx8mp-evk. In
+On Tue, 14 Oct 2025 at 14:22, Daniel P. Berrang=C3=A9 <berrange@redhat.com>=
+ wrote:
+>
+> On Tue, Oct 14, 2025 at 01:20:07PM +0100, Peter Maydell wrote:
+> > On Mon, 13 Oct 2025 at 12:47, Daniel P. Berrang=C3=A9 <berrange@redhat.=
+com> wrote:
+> > > With a very minimal wording tweak our current defined policy could
+> > > avoid being a blocker for enabling KVM in imx8mp-evk. In
+> > >
+> > >   https://www.qemu.org/docs/master/system/security.html
+> > >
+> > > where it describes the "virtualization use case", we could simply
+> > > tweak it to always require a versioned machine type
+> > >
+> > > Change
+> > >
+> > >   "These use cases rely on hardware virtualization extensions
+> > >    to execute guest code safely on the physical CPU at close-
+> > >    to-native speed."
+> > >
+> > > To say
+> > >
+> > >   "These use cases apply to versioned machine types when used
+> > >    in combination with hardware virtualization extensions
+> > >    to execute guest code safely on the physical CPU at close-
+> > >    to-native speed"
 > >
-> >   https://www.qemu.org/docs/master/system/security.html
+> > With the suggested changes listed elsewhere in this
+> > thread, my current manually curated list of machines is:
 > >
-> > where it describes the "virtualization use case", we could simply
-> > tweak it to always require a versioned machine type
+> > aarch64
+> >   ``virt``
+> > i386, x86_64
+> >   ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``, ``pc``, ``q35``
+> > s390x
+> >   ``s390-ccw-virtio``
+> > loongarch64:
+> >   ``virt``
+> > ppc64:
+> >   ``pseries``
+> > riscv32, riscv64:
+> >   ``virt``
 > >
-> > Change
+> > If we say "versioned machine type", that puts these machines
+> > outside the "supported" boundary:
 > >
-> >   "These use cases rely on hardware virtualization extensions
-> >    to execute guest code safely on the physical CPU at close-
-> >    to-native speed."
+> > i386, x86_64
+> >   ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``
+> > loongarch64:
+> >   ``virt``
+> > riscv32, riscv64:
+> >   ``virt``
 > >
-> > To say
-> >
-> >   "These use cases apply to versioned machine types when used
-> >    in combination with hardware virtualization extensions
-> >    to execute guest code safely on the physical CPU at close-
-> >    to-native speed"
-> 
-> With the suggested changes listed elsewhere in this
-> thread, my current manually curated list of machines is:
-> 
-> aarch64
->   ``virt``
-> i386, x86_64
->   ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``, ``pc``, ``q35``
-> s390x
->   ``s390-ccw-virtio``
-> loongarch64:
->   ``virt``
-> ppc64:
->   ``pseries``
-> riscv32, riscv64:
->   ``virt``
-> 
-> If we say "versioned machine type", that puts these machines
-> outside the "supported" boundary:
-> 
-> i386, x86_64
->   ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``
-> loongarch64:
->   ``virt``
-> riscv32, riscv64:
->   ``virt``
-> 
-> I can certainly see the argument for loongarch64
-> and maybe even riscv[*] still being "not supported for
-> production security-boundary stuff", but do we really
-> want to say that the Xen machine types and microvm
-> aren't suitable for VM use ?
+> > I can certainly see the argument for loongarch64
+> > and maybe even riscv[*] still being "not supported for
+> > production security-boundary stuff", but do we really
+> > want to say that the Xen machine types and microvm
+> > aren't suitable for VM use ?
+>
+> No, that would be wrong. How about this alternative
+>
+>   @@ -21,7 +21,9 @@ Virtualization Use Case
+>    The virtualization use case covers cloud and virtual private server (V=
+PS)
+>    hosting, as well as traditional data center and desktop virtualization=
+.  These
+>    use cases rely on hardware virtualization extensions to execute guest =
+code
+>   -safely on the physical CPU at close-to-native speed.
+>   +safely on the physical CPU at close-to-native speed.  This use case is=
+ limited
+>   +to the use of versioned machine types, or machine types designed exclu=
+sively
+>   +for virtualization.
+>
+>  The following entities are untrusted, meaning that they may be buggy or
+>  malicious:
+>
+> that wording would bring xen* and microvm into the scope, and so match
+> your manually curated list.
 
-No, that would be wrong. How about this alternative
+I think that it's simpler for users if we explicitly list the
+machines, rather than making them guess whether a machine
+is "designed exclusively for virtualization".
 
-  @@ -21,7 +21,9 @@ Virtualization Use Case
-   The virtualization use case covers cloud and virtual private server (VPS)
-   hosting, as well as traditional data center and desktop virtualization.  These
-   use cases rely on hardware virtualization extensions to execute guest code
-  -safely on the physical CPU at close-to-native speed.
-  +safely on the physical CPU at close-to-native speed.  This use case is limited
-  +to the use of versioned machine types, or machine types designed exclusively
-  +for virtualization.
- 
- The following entities are untrusted, meaning that they may be buggy or
- malicious:
-
-that wording would bring xen* and microvm into the scope, and so match
-your manually curated list.
-
-
-> [*] Could somebody from riscv or loongarch maintainers
-> say whether they think these machines should be on the
-> "security supported" list or not yet ?
-
-As 'virt' machines even if they're not quite there today, they are heading
-in that direction. So it would make sense to consider them in scope for
-the virtualization use case security handling. Even with this classification
-we still have the flexibility to make bugs public immediately with no embargo
-if we consider the real world impact to be low, so the burden is not large.
-
-
-With regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
-
+thanks
+-- PMM
 
