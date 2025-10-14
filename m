@@ -4,73 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 835AACCD184
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Oct 2025 14:21:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD91CCD184
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Oct 2025 19:44:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v8ftN-0006mK-Sr; Tue, 14 Oct 2025 10:20:45 -0400
+	id 1v8kwN-0006V8-NO; Tue, 14 Oct 2025 15:44:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1v8ftK-0006m9-Pp
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 10:20:43 -0400
-Received: from mailgate01.uberspace.is ([95.143.172.20])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v8kwJ-0006Uj-IX
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 15:44:09 -0400
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1v8ft9-0006YV-Gc
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 10:20:42 -0400
-Received: from skiff.uberspace.de (skiff.uberspace.de [185.26.156.131])
- by mailgate01.uberspace.is (Postfix) with ESMTPS id 4EE6A60C0D
- for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 16:17:19 +0200 (CEST)
-Received: (qmail 17755 invoked by uid 990); 14 Oct 2025 14:17:19 -0000
-Authentication-Results: skiff.uberspace.de;
-	auth=pass (plain)
-Received: from unknown (HELO unkown) (::1)
- by skiff.uberspace.de (Haraka/3.0.1) with ESMTPSA;
- Tue, 14 Oct 2025 16:17:19 +0200
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v8kwG-0002Gl-0f
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 15:44:07 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-46e33b260b9so46447685e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 12:44:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1760471040; x=1761075840; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=SOeurXAkir1Ea8+e0dMMj0YaDS6oMfJTkfGBcNEy7fA=;
+ b=nCw0hyQqcXmkj2rNxGaKcV4GjEGSUw6vvbnMWnjXWKi41YjpJ3yLbWMx9DQiYZjVvu
+ fVg/1zCZCZojn0g6mC4MQIhjMscQgtcGM2iMWMIuNXb0XIADnNEXzvoT4cvocWXMmOsf
+ Iaa7dxO6aBsrb2HIK1IchLenpKEMy+9toLABoD1uweD/qWXMKHUIyadUeha4sTz76DRc
+ vVjkb7qhFUh4zmQOWvkD0IdhAjAb8QJn0RxFrWTQa4FlojF4xiRCW6bg3LSVF2eIFZ8C
+ x6iI1RldwquAlJ0UAy/HzJjVdje1Bi9rc46cLsPW0DJ8/zzHjuFdUG4+QI8xmSBCL734
+ XE+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760471040; x=1761075840;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SOeurXAkir1Ea8+e0dMMj0YaDS6oMfJTkfGBcNEy7fA=;
+ b=TqK3W78Px9qXevZnAEbJbhM8PCqCeosY2YTK4UtU0TjFQ8D2s+57zm2xfCpeX3+wtj
+ Rr2YCG5wglGFkESVoD9CuIsNwEwkLnFshOaDK6TE1mvscP6B820VFZ2oKYOPPiop+tlc
+ CAch2EAgw4vPX0bQCsywSTcqvwLlHJeSbGyU4DLth84xgtWhngjGTb5TlLu+oK/A4dSa
+ nQh5mtYL7gvNjMgrFBc1KTJK8TY6Pp+uiU7a+Csjr4kaSThR0Rl2VB0P1taARX5wkr5D
+ zVUWR4Ju4tJ5nroL3sQNQlJ+xNW2iT5dp4QIfp4Iovu4TihmpbcAsQn7oKEYE2v1xWKZ
+ G/vA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmVdoD+OXGzVtd4rsSy6RIjHP3GYLNoYT37x6xx3HKY2fay9RQysku2tOCyLg39I49d6wE1EJMl1Cf@nongnu.org
+X-Gm-Message-State: AOJu0YwqhAfQ/yi3XS4ZclRqqfaVER2+aWt7p94RmBQYM/5vDredixof
+ ShqYze53uG5C/3272Qq8WQ7uf7WJaPLvbUZxzkswF1Qsjd4bO7BgZXd4qxn0xhWneA0=
+X-Gm-Gg: ASbGncsiGhPH0LDUUgbnyk9N3bdzo4rlimHiG/cGUiKjCrMbn9oBpDhfbvUzL2NYs4J
+ nW0TuvYvgQJvwqz+VZW4c8wNH7kkHwqbwfC8m/GmgFoOKZpZVfpjkuEyzmISmCPP24AfiF2KGWW
+ 6zQ1Y1zTa2O8NefjIbB7cQ7E48Gnq2L8KZlVkDkAz2tzXu2wZ3qMQHk6G6XE4gSb0tnkZpRqbfv
+ 0xG674bFfB/15pITNhIWZj6tMUfxnME1i0tyDu7POyfMLMWHGAztFmL5g1mbFm+QtUAd/97+iik
+ oJdXjWt1/aZ+n1kgd3N4nX+1fmz9DmbEmJAYX3au8PDmzW3zjRixdooW8FoATu1LAt9ePw8ayE6
+ SdVh/GvtYpN4o5sWEf50Jlzb2ThpJpn+LplR46SzMwLjFu1o/aCg+mQl1K5Z2Smn+DWH5Vb+5Zp
+ pLxbhZnv9N/q3v
+X-Google-Smtp-Source: AGHT+IH0KXm/oOSnLKkVen6OrIIr+1/i3BdcWdM8D6/ziR1qguuFgTqujZCmgt8AmNHNaH8kIiMGyA==
+X-Received: by 2002:a05:600c:1e87:b0:46e:4b89:13d9 with SMTP id
+ 5b1f17b1804b1-46fa9a22e67mr180653425e9.0.1760471040474; 
+ Tue, 14 Oct 2025 12:44:00 -0700 (PDT)
+Received: from [192.168.69.221] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46fc57530b3sm139481005e9.12.2025.10.14.12.43.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Oct 2025 12:43:59 -0700 (PDT)
+Message-ID: <0e246345-6296-4df2-8f1e-4c8beb9532f0@linaro.org>
+Date: Tue, 14 Oct 2025 21:43:58 +0200
 MIME-Version: 1.0
-Date: Tue, 14 Oct 2025 14:17:18 +0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-From: "Julian Ganz" <neither@nut.email>
-Message-ID: <0f109e7dc2c365666073ea4a0a766cc9f5c64558@nut.email>
-TLS-Required: No
-Subject: Re: [PATCH v7 25/25] tests: add test with interrupted memory
- accesses on rv64
-To: "=?utf-8?B?QWxleCBCZW5uw6ll?=" <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, "Daniel Henrique Barboza"
- <dbarboza@ventanamicro.com>, "Palmer Dabbelt" <palmer@dabbelt.com>,
- "Alistair Francis" <alistair.francis@wdc.com>, "Weiwei Li"
- <liwei1518@gmail.com>, "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org
-In-Reply-To: <87frbllkex.fsf@draig.linaro.org>
-References: <cover.1759744337.git.neither@nut.email>
- <729c8db0f4b61033f5a460747ea50fced9dabc1e.1759744337.git.neither@nut.email>
- <87frbllkex.fsf@draig.linaro.org>
-X-Rspamd-Bar: -
-X-Rspamd-Report: BAYES_HAM(-1.741587) MIME_GOOD(-0.1)
-X-Rspamd-Score: -1.841587
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nut.email; s=uberspace;
- h=from:to:cc:subject:date;
- bh=a9QiFizIzGO8/btMhOZAu5BFFy7jZtVnmMctjKiLLIU=;
- b=Y4RFNMmhuOapY1wcqkqQ1GlMGeVaZSh30nt1rOFqj72vENbFG1VBfrSz73WGs3fJsAdfU7vm2v
- bQFPb+gFFj8H4BtxvOv1gOGyxx1EYme5r2kLqvwGxmfIL/zHaFlSfK+PQzEQ/Glkx+msqgBDK8jH
- J4NOAckZwJ5IHZ+eT59BrjxXDM/pLbP1GfVORvbZv8/qxbiRmQ8KoGsH8SgP3nP8pLIF/uM8jUfl
- V3Jp0Zaw4wEH+QpvHP8u+PsST7UIHX0hqxcZGW6VcIo2wxI9Tt0vOjVkh3LDt1QcMrtUYEZzhKh4
- 9LksUG5gvIsGE36+Z5ozRFJNNU/K5wk6F6XZTQ1diEbkiKzDhaxBGKBCEU26WrI+n5TTmzcNgHl+
- lzjhh37vFLls4i7QCURRkrzlMNRAghdHd6WPnPUzVgO3qot10qXhAQjQoO7NgVz9mOqmoWtYnqjZ
- shJ7D7ZPISIFbpFztm2GLBw5iOT2vGGOQhRq0JV+sjv1306Mc1VBAJQqZvQnJb1f2t/GMA0NPPjz
- lVzSOMeMilK6mUFsutkNdfq1AyDKIwWoTM7I7p2Trd3e1bKOVAf2Oce/F5VJl52EIhdDU2kbXAqh
- LghuCarGurUE9UT6nnjRByVaeJQvG10+zlOfV1RrJGdPU6xrih28hYG/Rjz/2fZ+7tSpec3eYUCu
- w=
-Received-SPF: pass client-ip=95.143.172.20; envelope-from=neither@nut.email;
- helo=mailgate01.uberspace.is
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/13] target/riscv: Centralize MO_TE uses in a pair of
+ helpers
+Content-Language: en-US
+To: qemu-devel@nongnu.org
+Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Anton Johansson <anjo@rev.ng>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Valentin Haudiquet <valentin.haudiquet@canonical.com>,
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+References: <20251010155045.78220-1-philmd@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20251010155045.78220-1-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,117 +111,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Alex,
+Hi Alistair,
 
-October 14, 2025 at 2:47 PM, "Alex Benn=C3=A9e" wrote:
-> Julian Ganz <neither@nut.email> writes:
->=20
->=20>=20
->=20> This test aims at catching API misbehaviour w.r.t. the interaction
-> >  between interrupts and memory accesses, such as the bug fixed in
-> >=20
->=20>  27f347e6a1d269c533633c812321cabb249eada8
-> >=20
->=20Even better the abbrev with title:
->=20
->=20 27f347e6a1d (accel/tcg: also suppress asynchronous IRQs for cpu_io_r=
-ecompile)
+On 10/10/25 17:50, Philippe Mathieu-Daudé wrote:
+> In preparation of having RISC-V cores changing their endianness
+> at runtime, centralize the MO_TE uses to a pair of methods.
+> 
+> Except the 128-bit LD/ST change (first patch), no further
+> functional changes intended.
+> 
+> Philippe Mathieu-Daudé (13):
+>    target/riscv: Really use little endianness for 128-bit loads/stores
 
-Will do.
+Are you OK to queue reviewed patches 2-13 (independent of patch #1)?
 
-> > Because the condition for triggering misbehaviour may not be
-> >  deterministic and the cross-section between memory accesses and
-> >  interrupt handlers may be small, we have to place our trust in large
-> >  numbers. Instead of guessing/trying an arbitrary, fixed loop-bound, =
-we
-> >  decided to loop for a fixed amount of real-time. This avoids the tes=
-t
-> >  running into a time-out on slower machines while enabling a high num=
-ber
-> >  of possible interactions on faster machines.
-> >=20
->=20>  Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> >  Signed-off-by: Julian Ganz <neither@nut.email>
-> >  ---
-> >  tests/tcg/riscv64/Makefile.softmmu-target | 6 ++
-> >  tests/tcg/riscv64/interruptedmemory.S | 67 +++++++++++++++++++++++
-> >  2 files changed, 73 insertions(+)
-> >  create mode 100644 tests/tcg/riscv64/interruptedmemory.S
-> >=20
->=20>  diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg=
-/riscv64/Makefile.softmmu-target
-> >  index 1a71a78653..d8f92b8e61 100644
-> >  --- a/tests/tcg/riscv64/Makefile.softmmu-target
-> >  +++ b/tests/tcg/riscv64/Makefile.softmmu-target
-> >  @@ -30,5 +30,11 @@ run-plugin-doubletrap: doubletrap
-> >  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
-> >  $(QEMU_OPTS)$<)
-> >=20=20
->=20>  +EXTRA_RUNS +=3D run-plugin-interruptedmemory
-> >  +run-plugin-interruptedmemory: interruptedmemory
-> >  + $(call run-test, $<, \
-> >  + $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
-> >  + $(QEMU_OPTS)$<)
-> >=20
->=20Something went wrong with substitutions there because I see:
->=20
->=20 timeout -s KILL --foreground 120 /home/alex/lsrc/qemu.git/builds/all=
-/qemu-system-riscv64 -plugin ../plugins/libdiscons.so -d plugin -D .pout =
--M virt -display none -semihosting -device loader,file=3Dinterruptedmemor=
-y
-
-I fail to see the issue right now. I'll have to dig a bit and compare
-this to other tests.
-
-> There doesn't seem to be any output either when I run it manually -
-> should we be checking the output and at least confirming we are
-> detecting the right sort of events?
-
-The test currently only communicates success and failure via the return
-value (via semihosting). I can add additional output. Printing at least
-the final result is probably a good idea.
-
-> > +
-> >  # We don't currently support the multiarch system tests
-> >  undefine MULTIARCH_TESTS
-> >  diff --git a/tests/tcg/riscv64/interruptedmemory.S b/tests/tcg/riscv=
-64/interruptedmemory.S
-> >  new file mode 100644
-> >  index 0000000000..a32d672849
-> >  --- /dev/null
-> >  +++ b/tests/tcg/riscv64/interruptedmemory.S
-> >  @@ -0,0 +1,67 @@
-> >  + .option norvc
-> >  +
-> >  + .text
-> >  + .global _start
-> >  +_start:
-> >  + # Set up trap vector
-> >  + lla t0, trap
-> >  + csrw mtvec, t0
-> >  +
-> >  + # Set up timer
-> >  + lui t1, 0x02004
-> >  + sd zero, 0(t1) # MTIMECMP0
-> >  +
-> >  + # Enable timer interrupts
-> >  + li t0, 0x80
-> >  + csrrs zero, mie, t0
-> >  + csrrsi zero, mstatus, 0x8
-> >  +
-> >  + # Find out when to stop
-> >  + call rtc_get
-> >  + li t0, 60
-> >  + slli t0, t0, 30 # Approx. 10e9 ns
-> >  + add t0, t0, a0
-> >=20
->=20The runtime of 60s seems quite long for a tcg test. Can we not show
-> stuff happening in a shorter period of time?
-
-I can simply reduce the time, e.g. to 30s. I can also add some output
-every X iteratins or every second (with the number of iterations) so we
-get an idea how many chances we had to trigger the regression.
-
+>    target/riscv: Explode MO_TExx -> MO_TE | MO_xx
+>    target/riscv: Conceal MO_TE within gen_amo()
+>    target/riscv: Conceal MO_TE within gen_inc()
+>    target/riscv: Conceal MO_TE within gen_load() / gen_store()
+>    target/riscv: Conceal MO_TE within gen_load_idx() / gen_store_idx()
+>    target/riscv: Conceal MO_TE within gen_fload_idx() / gen_fstore_idx()
+>    target/riscv: Conceal MO_TE within gen_storepair_tl()
+>    target/riscv: Conceal MO_TE within gen_cmpxchg*()
+>    target/riscv: Conceal MO_TE|MO_ALIGN within gen_lr() / gen_sc()
+>    target/riscv: Factor MemOp variable out when MO_TE is set
+>    target/riscv: Introduce mo_endian() helper
+>    target/riscv: Introduce mo_endian_env() helper
 Regards,
-Julian
+Phil.
 
