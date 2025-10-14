@@ -4,100 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1118CCD184
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Oct 2025 13:25:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 835AACCD184
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Oct 2025 14:21:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v8f1C-0004tK-Lo; Tue, 14 Oct 2025 09:24:46 -0400
+	id 1v8ftN-0006mK-Sr; Tue, 14 Oct 2025 10:20:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1v8f19-0004rs-1Y
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 09:24:43 -0400
-Received: from mail-yw1-x1136.google.com ([2607:f8b0:4864:20::1136])
+ (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1v8ftK-0006m9-Pp
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 10:20:43 -0400
+Received: from mailgate01.uberspace.is ([95.143.172.20])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1v8f12-0007Y0-C9
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 09:24:42 -0400
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-78142734156so16970537b3.2
- for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 06:24:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760448274; x=1761053074; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G8jDXamh0GAjhaOOyUbM/zxBl3+EgMCzhSCMLTGd7MM=;
- b=Kydw+eXXA4hMSPzxUjV9HI5oaP6PuGMeePHeDqJQlt9j6sVGp5YLRCkK40Mx7nTFv3
- bhJItSOXd3EFNK10ub6g0n4MZHG0wSikjJt5/wScnvszYN/2dX/01pcXVlpsIcXKsNK9
- E/CpHL0dQ9w09I1AOo+iuaSMgomHFZD04URVri9zfRaQhye5UIurtb0BJFRoX5hA9KkN
- h6Ks0bz0FeGt/fhEJyxIZBqUMrTb1hjejC2UwWy4t2r2CgftPRf5VuTpwnmyZsIJzeNL
- LxMogncCfhR5vVQ1RZmZ4PUSs0E0Dbb/1L3G15J8EQUwrRJOa0lHNiy6hLPMRvQmahi8
- /44w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760448274; x=1761053074;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=G8jDXamh0GAjhaOOyUbM/zxBl3+EgMCzhSCMLTGd7MM=;
- b=CGIrTJPAEp27wG7aC143Mqn8pHvkONSC3bnyTGERf52nMelIAGzaLp7yX4tfRiLrng
- kRmEn/9e9RSYGpcoLBmsxTxe3Pj2n8yOQ67y/FC17STOcUlka2eeqkFV0zrT5YSzfXD9
- NTQNcttHKJU69HTBSfXV9LapgsUixsxWXlxq5rA1yvX2qMmWIe2Zq2a+Iti+5D7t9/zs
- SPC+DxJLhO+SElVtvFknoWQsJe8am/mSNsYGIvphlCucVKQ8O8QSHyrhsFlWQCcZ3xgs
- tJ8yZhoxg2lfnXdL3NQzDcXrH6d9646hJvEs+tIfBh+z1CP5MWCNSwpFYWcsVD9Bvk92
- hslQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXso5Avi+Rwrsl3CRWrd/+0AUoY+15FwR3KJaAjEy5uDFmGgq7EQUVTn8R3AopIhYwvsfPUq1IBtHnG@nongnu.org
-X-Gm-Message-State: AOJu0YwU1F1tNWI0Dzbd0YXyFyZZkEPKP7l5GQiQUdORzH1FiLLpCkIc
- zfQbQqEZPZZG9wjrdu2LyVaphiK0i6z65jCAZzGl1TUwDqwQz8S34AsgQQhki7JmzwxPzlQ998l
- on60PRBtgQNLwgiCw2vW9HHU2Jw1LGbso4A9dBYwqOA==
-X-Gm-Gg: ASbGnctaYKl2dR9+nUm+/bUmOiazfYdt/Ymx8LJnNVqpj5cC6S+B/Nq4X/u/pFII6nO
- HqO9USsmD23h6gTwpVA6NIUnq+qS4OAJG96grJq+1IKKNKM0XQoQg+Uck8kQEdskrraFaOCSMzv
- qOxWuH5jamXbjEhyFTXCRdVjFIwkLTarg2pR0+D1iyiZAd/aj1y/0TJ+jGnZ07kgwkLUNgv4OSW
- uPrzX7Ec6amJmBsfqExmYn9YlaUYMtlBTEIDMNMnw==
-X-Google-Smtp-Source: AGHT+IHaFc3RRuDEiqeYSwnBo4u9QB+QqXv4aFN8eskYGje4t8Ipu4fV5lIW2GG8Dvb+kXgxpAr3wSK39vx2ipeuRE8=
-X-Received: by 2002:a53:be0a:0:b0:63c:f5a7:3fc with SMTP id
- 956f58d0204a3-63cf5a70a2emr7600436d50.64.1760448273771; Tue, 14 Oct 2025
- 06:24:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1v8ft9-0006YV-Gc
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 10:20:42 -0400
+Received: from skiff.uberspace.de (skiff.uberspace.de [185.26.156.131])
+ by mailgate01.uberspace.is (Postfix) with ESMTPS id 4EE6A60C0D
+ for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 16:17:19 +0200 (CEST)
+Received: (qmail 17755 invoked by uid 990); 14 Oct 2025 14:17:19 -0000
+Authentication-Results: skiff.uberspace.de;
+	auth=pass (plain)
+Received: from unknown (HELO unkown) (::1)
+ by skiff.uberspace.de (Haraka/3.0.1) with ESMTPSA;
+ Tue, 14 Oct 2025 16:17:19 +0200
 MIME-Version: 1.0
-References: <20250908125058.220973-1-peter.maydell@linaro.org>
- <20250908104125-mutt-send-email-mst@kernel.org>
- <46AA9C03-CA7E-4C4B-AD05-A9053666BA52@gmail.com>
- <20251013070945-mutt-send-email-mst@kernel.org> <aOzm2ukHfkPF-zhT@redhat.com>
- <CAFEAcA9p51aPGhHgUPishEJ9TE60dm83ofKr5Wa-qM_1SqJ67w@mail.gmail.com>
- <aO5OndKoyP4Tk8Rw@redhat.com>
-In-Reply-To: <aO5OndKoyP4Tk8Rw@redhat.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 14 Oct 2025 14:24:22 +0100
-X-Gm-Features: AS18NWBEgp9rF0la74221YIrfcgrObUAY4l2alirlrVCyAB-5MtRwOFxwpklcIk
-Message-ID: <CAFEAcA-K8=4O+rohY062YGQLLBpQP=knCgJMsJSoGTNsZHeLeA@mail.gmail.com>
-Subject: Re: [RFC PATCH] docs/system/security: Restrict "virtualization use
- case" to specific machines
-To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Bernhard Beschow <shentey@gmail.com>,
- qemu-devel@nongnu.org, 
- Stefan Hajnoczi <stefanha@redhat.com>, Thomas Huth <thuth@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- Huacai Chen <chenhuacai@kernel.org>, qemu-s390x@nongnu.org, 
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>, 
- Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
-Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 14 Oct 2025 14:17:18 +0000
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1136;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1136.google.com
+From: "Julian Ganz" <neither@nut.email>
+Message-ID: <0f109e7dc2c365666073ea4a0a766cc9f5c64558@nut.email>
+TLS-Required: No
+Subject: Re: [PATCH v7 25/25] tests: add test with interrupted memory
+ accesses on rv64
+To: "=?utf-8?B?QWxleCBCZW5uw6ll?=" <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, "Daniel Henrique Barboza"
+ <dbarboza@ventanamicro.com>, "Palmer Dabbelt" <palmer@dabbelt.com>,
+ "Alistair Francis" <alistair.francis@wdc.com>, "Weiwei Li"
+ <liwei1518@gmail.com>, "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org
+In-Reply-To: <87frbllkex.fsf@draig.linaro.org>
+References: <cover.1759744337.git.neither@nut.email>
+ <729c8db0f4b61033f5a460747ea50fced9dabc1e.1759744337.git.neither@nut.email>
+ <87frbllkex.fsf@draig.linaro.org>
+X-Rspamd-Bar: -
+X-Rspamd-Report: BAYES_HAM(-1.741587) MIME_GOOD(-0.1)
+X-Rspamd-Score: -1.841587
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nut.email; s=uberspace;
+ h=from:to:cc:subject:date;
+ bh=a9QiFizIzGO8/btMhOZAu5BFFy7jZtVnmMctjKiLLIU=;
+ b=Y4RFNMmhuOapY1wcqkqQ1GlMGeVaZSh30nt1rOFqj72vENbFG1VBfrSz73WGs3fJsAdfU7vm2v
+ bQFPb+gFFj8H4BtxvOv1gOGyxx1EYme5r2kLqvwGxmfIL/zHaFlSfK+PQzEQ/Glkx+msqgBDK8jH
+ J4NOAckZwJ5IHZ+eT59BrjxXDM/pLbP1GfVORvbZv8/qxbiRmQ8KoGsH8SgP3nP8pLIF/uM8jUfl
+ V3Jp0Zaw4wEH+QpvHP8u+PsST7UIHX0hqxcZGW6VcIo2wxI9Tt0vOjVkh3LDt1QcMrtUYEZzhKh4
+ 9LksUG5gvIsGE36+Z5ozRFJNNU/K5wk6F6XZTQ1diEbkiKzDhaxBGKBCEU26WrI+n5TTmzcNgHl+
+ lzjhh37vFLls4i7QCURRkrzlMNRAghdHd6WPnPUzVgO3qot10qXhAQjQoO7NgVz9mOqmoWtYnqjZ
+ shJ7D7ZPISIFbpFztm2GLBw5iOT2vGGOQhRq0JV+sjv1306Mc1VBAJQqZvQnJb1f2t/GMA0NPPjz
+ lVzSOMeMilK6mUFsutkNdfq1AyDKIwWoTM7I7p2Trd3e1bKOVAf2Oce/F5VJl52EIhdDU2kbXAqh
+ LghuCarGurUE9UT6nnjRByVaeJQvG10+zlOfV1RrJGdPU6xrih28hYG/Rjz/2fZ+7tSpec3eYUCu
+ w=
+Received-SPF: pass client-ip=95.143.172.20; envelope-from=neither@nut.email;
+ helo=mailgate01.uberspace.is
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,91 +86,117 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 14 Oct 2025 at 14:22, Daniel P. Berrang=C3=A9 <berrange@redhat.com>=
- wrote:
->
-> On Tue, Oct 14, 2025 at 01:20:07PM +0100, Peter Maydell wrote:
-> > On Mon, 13 Oct 2025 at 12:47, Daniel P. Berrang=C3=A9 <berrange@redhat.=
-com> wrote:
-> > > With a very minimal wording tweak our current defined policy could
-> > > avoid being a blocker for enabling KVM in imx8mp-evk. In
-> > >
-> > >   https://www.qemu.org/docs/master/system/security.html
-> > >
-> > > where it describes the "virtualization use case", we could simply
-> > > tweak it to always require a versioned machine type
-> > >
-> > > Change
-> > >
-> > >   "These use cases rely on hardware virtualization extensions
-> > >    to execute guest code safely on the physical CPU at close-
-> > >    to-native speed."
-> > >
-> > > To say
-> > >
-> > >   "These use cases apply to versioned machine types when used
-> > >    in combination with hardware virtualization extensions
-> > >    to execute guest code safely on the physical CPU at close-
-> > >    to-native speed"
-> >
-> > With the suggested changes listed elsewhere in this
-> > thread, my current manually curated list of machines is:
-> >
-> > aarch64
-> >   ``virt``
-> > i386, x86_64
-> >   ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``, ``pc``, ``q35``
-> > s390x
-> >   ``s390-ccw-virtio``
-> > loongarch64:
-> >   ``virt``
-> > ppc64:
-> >   ``pseries``
-> > riscv32, riscv64:
-> >   ``virt``
-> >
-> > If we say "versioned machine type", that puts these machines
-> > outside the "supported" boundary:
-> >
-> > i386, x86_64
-> >   ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``
-> > loongarch64:
-> >   ``virt``
-> > riscv32, riscv64:
-> >   ``virt``
-> >
-> > I can certainly see the argument for loongarch64
-> > and maybe even riscv[*] still being "not supported for
-> > production security-boundary stuff", but do we really
-> > want to say that the Xen machine types and microvm
-> > aren't suitable for VM use ?
->
-> No, that would be wrong. How about this alternative
->
->   @@ -21,7 +21,9 @@ Virtualization Use Case
->    The virtualization use case covers cloud and virtual private server (V=
-PS)
->    hosting, as well as traditional data center and desktop virtualization=
-.  These
->    use cases rely on hardware virtualization extensions to execute guest =
-code
->   -safely on the physical CPU at close-to-native speed.
->   +safely on the physical CPU at close-to-native speed.  This use case is=
- limited
->   +to the use of versioned machine types, or machine types designed exclu=
-sively
->   +for virtualization.
->
->  The following entities are untrusted, meaning that they may be buggy or
->  malicious:
->
-> that wording would bring xen* and microvm into the scope, and so match
-> your manually curated list.
+Hi Alex,
 
-I think that it's simpler for users if we explicitly list the
-machines, rather than making them guess whether a machine
-is "designed exclusively for virtualization".
+October 14, 2025 at 2:47 PM, "Alex Benn=C3=A9e" wrote:
+> Julian Ganz <neither@nut.email> writes:
+>=20
+>=20>=20
+>=20> This test aims at catching API misbehaviour w.r.t. the interaction
+> >  between interrupts and memory accesses, such as the bug fixed in
+> >=20
+>=20>  27f347e6a1d269c533633c812321cabb249eada8
+> >=20
+>=20Even better the abbrev with title:
+>=20
+>=20 27f347e6a1d (accel/tcg: also suppress asynchronous IRQs for cpu_io_r=
+ecompile)
 
-thanks
--- PMM
+Will do.
+
+> > Because the condition for triggering misbehaviour may not be
+> >  deterministic and the cross-section between memory accesses and
+> >  interrupt handlers may be small, we have to place our trust in large
+> >  numbers. Instead of guessing/trying an arbitrary, fixed loop-bound, =
+we
+> >  decided to loop for a fixed amount of real-time. This avoids the tes=
+t
+> >  running into a time-out on slower machines while enabling a high num=
+ber
+> >  of possible interactions on faster machines.
+> >=20
+>=20>  Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> >  Signed-off-by: Julian Ganz <neither@nut.email>
+> >  ---
+> >  tests/tcg/riscv64/Makefile.softmmu-target | 6 ++
+> >  tests/tcg/riscv64/interruptedmemory.S | 67 +++++++++++++++++++++++
+> >  2 files changed, 73 insertions(+)
+> >  create mode 100644 tests/tcg/riscv64/interruptedmemory.S
+> >=20
+>=20>  diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg=
+/riscv64/Makefile.softmmu-target
+> >  index 1a71a78653..d8f92b8e61 100644
+> >  --- a/tests/tcg/riscv64/Makefile.softmmu-target
+> >  +++ b/tests/tcg/riscv64/Makefile.softmmu-target
+> >  @@ -30,5 +30,11 @@ run-plugin-doubletrap: doubletrap
+> >  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
+> >  $(QEMU_OPTS)$<)
+> >=20=20
+>=20>  +EXTRA_RUNS +=3D run-plugin-interruptedmemory
+> >  +run-plugin-interruptedmemory: interruptedmemory
+> >  + $(call run-test, $<, \
+> >  + $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
+> >  + $(QEMU_OPTS)$<)
+> >=20
+>=20Something went wrong with substitutions there because I see:
+>=20
+>=20 timeout -s KILL --foreground 120 /home/alex/lsrc/qemu.git/builds/all=
+/qemu-system-riscv64 -plugin ../plugins/libdiscons.so -d plugin -D .pout =
+-M virt -display none -semihosting -device loader,file=3Dinterruptedmemor=
+y
+
+I fail to see the issue right now. I'll have to dig a bit and compare
+this to other tests.
+
+> There doesn't seem to be any output either when I run it manually -
+> should we be checking the output and at least confirming we are
+> detecting the right sort of events?
+
+The test currently only communicates success and failure via the return
+value (via semihosting). I can add additional output. Printing at least
+the final result is probably a good idea.
+
+> > +
+> >  # We don't currently support the multiarch system tests
+> >  undefine MULTIARCH_TESTS
+> >  diff --git a/tests/tcg/riscv64/interruptedmemory.S b/tests/tcg/riscv=
+64/interruptedmemory.S
+> >  new file mode 100644
+> >  index 0000000000..a32d672849
+> >  --- /dev/null
+> >  +++ b/tests/tcg/riscv64/interruptedmemory.S
+> >  @@ -0,0 +1,67 @@
+> >  + .option norvc
+> >  +
+> >  + .text
+> >  + .global _start
+> >  +_start:
+> >  + # Set up trap vector
+> >  + lla t0, trap
+> >  + csrw mtvec, t0
+> >  +
+> >  + # Set up timer
+> >  + lui t1, 0x02004
+> >  + sd zero, 0(t1) # MTIMECMP0
+> >  +
+> >  + # Enable timer interrupts
+> >  + li t0, 0x80
+> >  + csrrs zero, mie, t0
+> >  + csrrsi zero, mstatus, 0x8
+> >  +
+> >  + # Find out when to stop
+> >  + call rtc_get
+> >  + li t0, 60
+> >  + slli t0, t0, 30 # Approx. 10e9 ns
+> >  + add t0, t0, a0
+> >=20
+>=20The runtime of 60s seems quite long for a tcg test. Can we not show
+> stuff happening in a shorter period of time?
+
+I can simply reduce the time, e.g. to 30s. I can also add some output
+every X iteratins or every second (with the number of iterations) so we
+get an idea how many chances we had to trigger the regression.
+
+Regards,
+Julian
 
