@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A14CCD184
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Oct 2025 02:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06042CCD184
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Oct 2025 02:24:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v8r89-0003KZ-Dv; Tue, 14 Oct 2025 22:20:45 -0400
+	id 1v8rBM-0004op-GR; Tue, 14 Oct 2025 22:24:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v8r87-0003Db-Ob
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 22:20:43 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ id 1v8rBK-0004oZ-UX
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 22:24:02 -0400
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v8r82-0003LD-Np
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 22:20:41 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-62fca01f0d9so12284670a12.3
- for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 19:20:38 -0700 (PDT)
+ id 1v8rBC-0003rK-I5
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 22:24:02 -0400
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-63bc12a5608so3539380a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 19:23:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760494836; x=1761099636; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1760495030; x=1761099830; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AMb51Wr2DZY/rVJCxhqogBRYio86jS8/Gojx8HlDlo0=;
- b=lxRjASPWuIVqHtJAq6WJDBiXF94+oeHWQQ1Z7wjF1lZkvTutlhkFhCBmOOywLDFIVc
- yfLrAaBj+RThX42Rtc1IoAc1UR8aXDmJVzd68XW/U44XgkmFtBlpj/e9LR6vSlbZFmDm
- itblx/xZBVWSVsV73ri8lG6fazpBu0OgO2fiDP1Auhxb3KLaDhPT9ii05PNE++non75d
- L/MOxY13mHcxQnNRQQlnkC79bbcDhy7KhfghOGHNbP1n+PLCgCfwGXm8pb033f2MM22t
- GxkNRR2e1NCYSq2U76uPgAm2rX1KhjBYFeebk37U2T7eZ3w8/uW07pgRAt7dBJawdBdN
- dZpw==
+ bh=8Fy2DzKv5ocTuVCF4u1TR+Cq+6ExdELyYXIxCr1MuYA=;
+ b=PN9E2aHC3/yWJWeg3IrAj/yd8Mbq5XiCvtYJIsmQqDTJj4vENVVj35meAmIfc8S67A
+ 7ziwTti3Nyvzya0rrdHO0a6q7Lb2v460q3bzth9nf2EAZmoVBKtnE6ToPO12ZkoFPrAT
+ KHdo5RvCAuNZnPxmSrnzgSX/3hFOatwR7vmsQ8jX00Lm7DGug0WNVXeZeR3808lPiOil
+ 6/c7LuNuHaqrP2326zyfkOI65LxWyShpw1W6r/h6iUfN6io0z/aaLDNUob5s0qvKk63R
+ EJ53EoFxmUaHpj0cpDG4sF5Obsy8ivRXAkqbzBKikrGVksOQGHuegQ6TX1gO43I9oKyT
+ d32Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760494836; x=1761099636;
+ d=1e100.net; s=20230601; t=1760495030; x=1761099830;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AMb51Wr2DZY/rVJCxhqogBRYio86jS8/Gojx8HlDlo0=;
- b=F1Mkp5bBsod10BZGMejBSQiL6fajKUQ1Ss8UoDDgeurz/ikaKoZztG5guOW7VJw03V
- ojRaFGJh1jnzvsgOpZy82WCv33NlAWa5ToEdWlas5TroxB3ecGAB6mkt+7EXAEnELarI
- CrEiaTcveuPqt+yZ9up6d54rs/2DEaQ2pDF/gKqnUjr3qL+FGWAkmxK/G2e9nz3RkxuF
- sGKmGBgwNsUPp1WhzeOaxiSpU6BkMWPOLcx+L/c2/uNaKp+gWEnA/E/eiyPyRMbSaoD5
- Ux82WLSlEDyoD0CLo65WgzVNmTYEOL9m4Z5bMVOPn1tFB6jKrHlhRHmOLh21OpbarSME
- /N5A==
+ bh=8Fy2DzKv5ocTuVCF4u1TR+Cq+6ExdELyYXIxCr1MuYA=;
+ b=NYopztNJEB8AdXj1vVW+Uv70vs8XKRuqPHlATWpjf5kd4e2QBtFOpnC5PZ5ZGewKMg
+ SjAhhgl+kPW3ic1YHC0elaiTSEMeurbCjiklahUZqilf6V6H5VxoZsuFJ3oRgALjSKfq
+ RGa8uQG6LVmZ1+ayYvO8X+sPKGCy2bGOxFvDsdIS6XIeFsbgGj7EgPesUeSz4bdlpag1
+ MWASEBlpE4OHxgcIYPSYZHRypKji9mOek2Q7sOFFASJ22KqkPuGUYH/nQY4AgxqgcAg5
+ 90kLmBLaXC7+vIS/lpzE2827cKhtGkPV/O84jJr78fktu4XIlWU6SxZU4RkmG/lo/cct
+ 72Ww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXLc9+WHsWka8y12oFxhinj++HoPawIuz2yiGeHjjfkR8+esnKmJnoXuHRo3wKsJwsS4bHn+4bYbaK3@nongnu.org
-X-Gm-Message-State: AOJu0YxTz2vN7XF6Wq60wV2XmmWEo2jau+Ak4guxWmEs3dKjQrX9Vhfc
- sOzXxaiXBXNz+HAvMGF7IG4OjVWWUxkIvFbohaXLk5YwX1VrbjbsIqUU7s79+NpaRiqxkXVFWdh
- V8gm0jHW5hI6BX+R00jY5xcqKLwU4Rfs=
-X-Gm-Gg: ASbGncvSfQLeqqFnHujLH1HdIky9455jGh03GpTuvyGnAe1BtAQ3OfVWhwdzEvRoVil
- /WAMoGvYNxe//PquS32j0PkNHmYo7u0SMM1zbzD9ui/9/2C2DXfMM+zanTilC5Y1LjDziYnt3F5
- LxMJORUZFrZ1hkBIkiW6D0PczAxSz+CK5eB93glBJGqd65O5W2ic3LC70jJrWajem5Pp8o2hKt8
- S6pD7OJCwXcxORuXF4nOx4WNFcFe7Q+kNaSiQZA89dk95VDIM1yxVgmh3LJQqlg2Yr/TYEY9Cx6
- uw==
-X-Google-Smtp-Source: AGHT+IGz2RKOMGOI7dax0JZxImXRMMaHnX2REmv0gNrPW+eLFD/tiCWHzMK00HMlxPWpVnz5Lhk+ns0FYUMGYkRcY8k=
-X-Received: by 2002:a05:6402:50ce:b0:62f:50ff:b675 with SMTP id
- 4fb4d7f45d1cf-639d5c74d05mr23793900a12.33.1760494835755; Tue, 14 Oct 2025
- 19:20:35 -0700 (PDT)
+ AJvYcCUgkG5zfi4RuBO4PTcRYpfqQt7Umx21m1RQEevHuznoPKW5oEAX1JJ3lLzjbcaxlZwK8dhvjI1VI1F5@nongnu.org
+X-Gm-Message-State: AOJu0Yx0KC3P+/Yb4g4Y7HjjbEy6WqMDD6xSnrzs+RXBir4rL10j7Lol
+ Z4IOj4+Wub+k6snD3JNHRPmU1uIL1hqItNTt4C/5S0eAXUjjXsIe1HXONWIV/MUTVmmTOvNi+hN
+ dc7Fbw5xsIdAYVl7uPIzwDJukSa1wF1k=
+X-Gm-Gg: ASbGncvDThFL8d1qVojmYtgag9hb9CKwMjIpfiHDtFEnS12JPxkpASSmX79QpcTPnPp
+ 1dYNwYcWDG/KSjVpiT85K8iSeqfFUZLcR0GDV6al4nfOhOJ3703DJRwMN6YGDdiWwHZ5VSiuIyK
+ z8XqvrE44fwJiz7gjKymvBur5USG8AJEdiUda9XiniZ9lNzkoExBs7BDwIwpGeHll+mlM2nB7I9
+ C0YWKFSgB3N76RW2U2cUaPkAepQgYfg0KvrZR7xXXjbh6owTJClU+qhJ23zNkJHof0=
+X-Google-Smtp-Source: AGHT+IGrg9ABMKG27JCwmA000Ud2iktGvzAnc4Q+3gUta/+RHr0bUnhmFwdWCcRbea7ZdR7Oji15BlFVmF995X8cGHg=
+X-Received: by 2002:a05:6402:35ce:b0:634:c377:e188 with SMTP id
+ 4fb4d7f45d1cf-639d5b57b06mr27140186a12.6.1760495030257; Tue, 14 Oct 2025
+ 19:23:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251004200049.871646-1-linux@roeck-us.net>
- <20251004200049.871646-3-linux@roeck-us.net>
-In-Reply-To: <20251004200049.871646-3-linux@roeck-us.net>
+ <20251004200049.871646-4-linux@roeck-us.net>
+In-Reply-To: <20251004200049.871646-4-linux@roeck-us.net>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 15 Oct 2025 12:20:07 +1000
-X-Gm-Features: AS18NWAwWGeei24tH5famsMohy6AKE_W5AYTGmevAG6BRkhHXmyea3hzgegwpEc
-Message-ID: <CAKmqyKNrOSbxPotadvOcaNYnvEdZY75k0pkmO4Pv9gVsTxG4qg@mail.gmail.com>
-Subject: Re: [PATCH 2/4] hw/riscv: microchip_pfsoc: Connect Ethernet PHY
- channels
+Date: Wed, 15 Oct 2025 12:23:24 +1000
+X-Gm-Features: AS18NWBKVEuQQqj9cieP6rq05dD3n3W2YoTdkavY3oDi9G7Mkcr5482jzCL6-fU
+Message-ID: <CAKmqyKNX6TEdj9CVmXEy+sxXU9rwbeo-wL44a66Z0v3XjoNmdw@mail.gmail.com>
+Subject: Re: [PATCH 3/4] hw/net/cadence_gem: Add pcs-enabled property
 To: Guenter Roeck <linux@roeck-us.net>
 Cc: "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
  Alistair Francis <alistair@alistair23.me>, 
@@ -79,8 +77,8 @@ Cc: "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -107,6 +105,17 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Sun, Oct 5, 2025 at 6:03=E2=80=AFAM Guenter Roeck <linux@roeck-us.net> w=
 rote:
 >
+> The Linux kernel checks the PCS disabled bit in the R_DESCONF register
+> to determine if SGMII is supported. If the bit is set, SGMII support is
+> disabled. Since the Microchip Icicle devicetree file configures SGMII
+> interface mode, enabling the Ethernet interfaces fails when booting
+> the Linux kernel.
+>
+> Add pcs-enabled property to to let the driver know if PCS should be
+> enabled. Set the flag to false by default (indicating that PCS is disable=
+d)
+> to match the exiting code.
+>
 > Signed-off-by: Guenter Roeck <linux@roeck-us.net>
 
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
@@ -114,36 +123,48 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/microchip_pfsoc.c | 4 ++++
->  1 file changed, 4 insertions(+)
+>  hw/net/cadence_gem.c         | 7 ++++++-
+>  include/hw/net/cadence_gem.h | 1 +
+>  2 files changed, 7 insertions(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index ba1d090d9b..6e2a6e721b 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -414,6 +414,8 @@ static void microchip_pfsoc_soc_realize(DeviceState *=
-dev, Error **errp)
+> diff --git a/hw/net/cadence_gem.c b/hw/net/cadence_gem.c
+> index 520324adfd..44896f1801 100644
+> --- a/hw/net/cadence_gem.c
+> +++ b/hw/net/cadence_gem.c
+> @@ -1477,7 +1477,10 @@ static void gem_reset(DeviceState *d)
+>      s->regs[R_TXPARTIALSF] =3D 0x000003ff;
+>      s->regs[R_RXPARTIALSF] =3D 0x000003ff;
+>      s->regs[R_MODID] =3D s->revision;
+> -    s->regs[R_DESCONF] =3D 0x02D00111;
+> +    s->regs[R_DESCONF] =3D 0x02D00110;
+> +    if (!s->pcs_enabled) {
+> +        s->regs[R_DESCONF] |=3D 0x00000001;
+> +    }
+>      s->regs[R_DESCONF2] =3D 0x2ab10000 | s->jumbo_max_len;
+>      s->regs[R_DESCONF5] =3D 0x002f2045;
+>      s->regs[R_DESCONF6] =3D R_DESCONF6_DMA_ADDR_64B_MASK;
+> @@ -1821,6 +1824,8 @@ static const Property gem_properties[] =3D {
+>                        num_type2_screeners, 4),
+>      DEFINE_PROP_UINT16("jumbo-max-len", CadenceGEMState,
+>                         jumbo_max_len, 10240),
+> +    DEFINE_PROP_BOOL("pcs-enabled", CadenceGEMState,
+> +                       pcs_enabled, false),
+>      DEFINE_PROP_BOOL("phy-connected", CadenceGEMState, phy_connected, tr=
+ue),
+>      DEFINE_PROP_LINK("phy-consumer", CadenceGEMState, phy_consumer,
+>                       TYPE_CADENCE_GEM, CadenceGEMState *),
+> diff --git a/include/hw/net/cadence_gem.h b/include/hw/net/cadence_gem.h
+> index 21e7319f53..e63941f18f 100644
+> --- a/include/hw/net/cadence_gem.h
+> +++ b/include/hw/net/cadence_gem.h
+> @@ -62,6 +62,7 @@ struct CadenceGEMState {
+>      uint8_t num_type2_screeners;
+>      uint32_t revision;
+>      uint16_t jumbo_max_len;
+> +    bool pcs_enabled;
 >
->      object_property_set_int(OBJECT(&s->gem0), "revision", GEM_REVISION, =
-errp);
->      object_property_set_int(OBJECT(&s->gem0), "phy-addr", 8, errp);
-> +    object_property_set_bool(OBJECT(&s->gem0), "phy-connected", false, e=
-rrp);
-> +
->      sysbus_realize(SYS_BUS_DEVICE(&s->gem0), errp);
->      sysbus_mmio_map(SYS_BUS_DEVICE(&s->gem0), 0,
->                      memmap[MICROCHIP_PFSOC_GEM0].base);
-> @@ -422,6 +424,8 @@ static void microchip_pfsoc_soc_realize(DeviceState *=
-dev, Error **errp)
->
->      object_property_set_int(OBJECT(&s->gem1), "revision", GEM_REVISION, =
-errp);
->      object_property_set_int(OBJECT(&s->gem1), "phy-addr", 9, errp);
-> +    object_property_set_link(OBJECT(&s->gem1), "phy-consumer",
-> +                             OBJECT(&s->gem0), errp);
->      sysbus_realize(SYS_BUS_DEVICE(&s->gem1), errp);
->      sysbus_mmio_map(SYS_BUS_DEVICE(&s->gem1), 0,
->                      memmap[MICROCHIP_PFSOC_GEM1].base);
+>      /* GEM registers backing store */
+>      uint32_t regs[CADENCE_GEM_MAXREG];
 > --
 > 2.45.2
 >
