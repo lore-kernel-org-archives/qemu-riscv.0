@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B0F5CCD18E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Oct 2025 03:35:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF2ECCD184
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Oct 2025 03:37:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v8sHT-0005hA-6E; Tue, 14 Oct 2025 23:34:27 -0400
+	id 1v8sJu-0006Rl-6L; Tue, 14 Oct 2025 23:36:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v8sHR-0005gx-Uj
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 23:34:25 -0400
-Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e])
+ id 1v8sJs-0006RG-Nh
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 23:36:56 -0400
+Received: from mail-yx1-xb136.google.com ([2607:f8b0:4864:20::b136])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v8sHO-0003xE-7a
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 23:34:25 -0400
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-7815092cd2fso13518497b3.0
- for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 20:34:20 -0700 (PDT)
+ id 1v8sJq-0004XE-GK
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 23:36:56 -0400
+Received: by mail-yx1-xb136.google.com with SMTP id
+ 956f58d0204a3-6353e91a04aso6417134d50.2
+ for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 20:36:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760499258; x=1761104058; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1760499410; x=1761104210; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+ssXvmeot63i3xSe1WTGclI/2ejGLxy6Q2So2aownM4=;
- b=lZeY0DuqMsglWAEC13dBpV8ChcV6sRrqN4J6bgxWV8QFw0Vz66NsLK4P5+CV7MgXLG
- pcNyEn+pQc/EA+z3vc5tedyKGaVFPJPC3gAEkyMGRXumskanHG6PNvFW4maDgmc+LHeg
- rrRwMOKMdAmcxfOGwtuYOOFD6LpLvl1Kt0yrpjyhdymoUOQ1+Iq+qmRGF40umOP6CJTN
- /YrmXbmqnXpbomfU1OBTGaQcAQSJEDPk1Td5W+8QLTkWyo+Jv5CUu20WTDqONxTr4LoC
- xOaa2f0R1PPErIoAi+DTyhoxo+X8jG508KqH/IGJJTdEYz6BoX/OGsHLi87pWNE2foBX
- +2Rw==
+ bh=dOJa5dAemTev4Uz8NZdQRrOF0mfQI5ZIzajG1m3vCNk=;
+ b=Q+1GOPSDollrPPx/xgV7N5hFBe1TN9Mp6Bwc8fSzmgWbxcTt/LRuUv45PlR8Go7dLv
+ juioaHv0i03gv9MjkPBGBoEECE0s6iQw5LmqTsZfAXJe5nllEv+6ijeayCbkiiioQMoV
+ Cay/9917LGJC3snyx1zWcAcluDIR24pYaxsuNutnwu3s2vVGzKYH73QePfPcp7XiZXPM
+ gc4oV+mfec6RVo5tKfs93nbX54Yn2D3d5wDFqusXE8a2axUYNRQKf/Q8iQ10RoPSDvgM
+ BsCI32xQdydQYMsde54h04cYlXNlv9jOIvRt2OE7ci+S8/GAIPQY8U7zB44h8SnBGbxF
+ fDfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760499258; x=1761104058;
+ d=1e100.net; s=20230601; t=1760499410; x=1761104210;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+ssXvmeot63i3xSe1WTGclI/2ejGLxy6Q2So2aownM4=;
- b=Qc1x4s6P1MlleOih6SA+FWbhlVP1ey62EVR+TQPRdAyPPk6hgpWi+DnTib6oQh7LwQ
- EVADTvtUuVd+yoW0B8VFiUJzNJJJgRQARtMXaOYkdSUih6IxSHC/VSludwWhQBZcSTIQ
- u4MIZfBE7+iOjFrxLUdIAAV8tkm8BuezRlf4eHGu5mZyqPBqTunQdCGu5StUbZZjpgW1
- TJScBNme+LJU0A7QvEkB6eiuPtGx9hxMPs5Rvo4PzyJ832wv9pA3Lw31En+wHNPuxB+W
- uZU6v/akR6krjD1GFjFu/3D1I7mhE47/SDYNN8JlLgjRWuWZkNQH3jT6zvrnd0lXIVmA
- 1eyw==
+ bh=dOJa5dAemTev4Uz8NZdQRrOF0mfQI5ZIzajG1m3vCNk=;
+ b=kpZ0QbimZBHOPPOvH1zFSmy8DRTu+a3xN1wT6U17YWOi9HHukQ5e8RTxfW9d1+9diZ
+ oq7Mhjy/uwGhq/XWiDKALMG8xUIxQqNhoDbTVIVoMF7x5D9JoBla0h6a6piKP+bbeMH4
+ 1OAthFZ6pxNytkVzsYfobwJFekwWtG7aDG7HXWPxsrWl78UBxSF4QEfdQy/qNkVZcskN
+ ocyHnS/BikIjMHI5JyuNC396C24pSlk8oqjfZih8ncZcIxNRml6WF3wM6tdQ8NZAfQjT
+ 40AZW+RlHZCAqIfQ+U8AEBiMw4EPRXFJ8mxqskWjONhWitKZPxJ2CFNepuiFo8QRJQfg
+ 3Skg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/TyrO1+CxHNERfETdhPaSQK7OJR89wEzchGq+0lMERv/XQbxDnVlAX0qpPAUwYp2a6vc46/0ILi/T@nongnu.org
-X-Gm-Message-State: AOJu0YzPoX2naJu0a21InKSDQqkeOdhijqFb4vwyI8VO5hH698VVGY+i
- wQqET+rpRR5HIfsNNw2e6JMFVJYUex0E1av1NXIrxos7WVy7bHZcLnr+FEFC+vyOX4C+g25d1YA
- yVLARmheddxB55Yvy82f6bcDKLGL5Jq4=
-X-Gm-Gg: ASbGnctmxjE3ZoYNMMM5RBwLVeNPsSKzsvpt6Qr2pto+4lYflmiUBLGGcd8ZD/+fskt
- 1z+GFi5aDVr3MMeXQvH4nY4ug5HICnQeN700joxOLkcGcEMdtSOQrGricvKzFcGBOBEw0RScgzq
- lgQZ2qVbdVP5JaeRuZkdoQT47lJgrOZRcipiSZJxeMCDkoMVAEo/9ofEnrI4aAA20DYdW7Ljgzz
- sp19OKRfo8892zd1Djjb1EiBnZH8rpCR35/1+nA6oO1YVnJYwFLj9nAjoNXwEmtofE=
-X-Google-Smtp-Source: AGHT+IG284Ok8pngfiPjNwICEI69MC3olbwD3c1Rvxr/721ARhtDIuBebwZixwAn10n4bzibHW1e0cWdde/M1vpUquo=
-X-Received: by 2002:a53:b852:0:b0:636:1985:56c0 with SMTP id
- 956f58d0204a3-63ccb90be31mr16683966d50.39.1760499258413; Tue, 14 Oct 2025
- 20:34:18 -0700 (PDT)
+ AJvYcCWKblzFiADT7Mvm7JHjy69doEEQdWjqgSfY/9jV3qSWXBi3HtDtyUXvJ1kpZncDbBLPYdVj7hiZADC8@nongnu.org
+X-Gm-Message-State: AOJu0YwmsCqwtfjWCkNUp4ba6GConESfjZ5/IPfJeBdKLk3emVchWn4G
+ cwrI7V2k6lRFYwBZFDCghSldVWIDsjsI6tNv0jGKOBUUj7WuOHGKoY9ZssFlgHOuQxuVmzuzpZ4
+ BzQwj2nRDZ8EnaFvUUaaMOLWydbI63cs=
+X-Gm-Gg: ASbGncucmxeb4OU6dEL+CsuVx+3wKJmIA4TlwjBV0d0Zk93JCj58YNfFOaIXv7Vh5/Q
+ gjuazop/MaAomchAtAdrLdRjwyubVVhwTHAd0EqF4ja0JF98SSfHoz1K/NpMpKQ/v9UQDSFW2BR
+ xAwf/3Y9xCEuSiaPv2ay+H6im6skZpQzZ5i93IrAd/Tei/f8L1MKQZm8S9TQ9sIhcP4bWdlH45X
+ ULrxLuOLlqTExB5nK8Rf9V0YlEB+Fsdk1BZwd+/P4RWNFkKCaRvfiUNizmuJ9Z9ClU=
+X-Google-Smtp-Source: AGHT+IGrENmNmtwm/dX35G+69kFX8oAz+K1GXYcJwY5O/bYdnEdog9y4N4ca9pql9fn4mhA58KHyR8pXdRtkPAuD/CI=
+X-Received: by 2002:a05:690c:4a0c:b0:780:fdbb:5265 with SMTP id
+ 00721157ae682-780fdbb5de0mr334804317b3.19.1760499409821; Tue, 14 Oct 2025
+ 20:36:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251003104443.51501-1-djordje.todorovic@htecgroup.com>
- <20251003104443.51501-14-djordje.todorovic@htecgroup.com>
-In-Reply-To: <20251003104443.51501-14-djordje.todorovic@htecgroup.com>
+ <20251003104443.51501-3-djordje.todorovic@htecgroup.com>
+In-Reply-To: <20251003104443.51501-3-djordje.todorovic@htecgroup.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 15 Oct 2025 13:33:51 +1000
-X-Gm-Features: AS18NWDSSyl73eSGCtSkCtxXblZLtcIrlDOQX9xNEr01RmuISkceMoCjmu3JWOA
-Message-ID: <CAKmqyKMv48x1jo0ows+TBcB=WqxQ0aN-ZjCeuH5iX6JDoC7Diw@mail.gmail.com>
-Subject: Re: [PATCH v10 13/13] test/functional: Add test for boston-aia board
+Date: Wed, 15 Oct 2025 13:36:22 +1000
+X-Gm-Features: AS18NWD2d44Au1cj75AIooclTBgZYYwmHAqWXsRgvExNey_bq4wwlpXSxWZIMhg
+Message-ID: <CAKmqyKP=Lu_1kq98LzuykGC=FK0-28OKtR=Pwixqg034NR3wLQ@mail.gmail.com>
+Subject: Re: [PATCH v10 02/13] target/riscv: Add cpu_set_exception_base
 To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
 Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
  "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
@@ -79,8 +79,8 @@ Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
  "thuth@redhat.com" <thuth@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
- envelope-from=alistair23@gmail.com; helo=mail-yw1-x112e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b136;
+ envelope-from=alistair23@gmail.com; helo=mail-yx1-xb136.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -107,182 +107,73 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Fri, Oct 3, 2025 at 8:45=E2=80=AFPM Djordje Todorovic
 <Djordje.Todorovic@htecgroup.com> wrote:
 >
-> Add functional test for Boston AIA board. The P8700 RISC-V based
-> CPU by MIPS supports it at the moment.
+> Add a new function, so we can change reset vector from platforms
+> during runtime.
 >
 > Signed-off-by: Chao-ying Fu <cfu@mips.com>
 > Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c | 15 +++++++++++++++
+>  target/riscv/cpu.h |  4 ++++
+>  2 files changed, 19 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d055ddf462..d42cf9d70e 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -73,6 +73,21 @@ bool riscv_cpu_option_set(const char *optname)
+>      return g_hash_table_contains(general_user_opts, optname);
+>  }
+>
+> +#ifndef CONFIG_USER_ONLY
+> +/* This is used in runtime only. */
+> +void cpu_set_exception_base(int vp_index, target_ulong address)
+> +{
+> +    CPUState *cpu_state =3D qemu_get_cpu(vp_index);
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+We usually use `CPUState *cs` in QEMU
+
+> +    if (cpu_state =3D=3D NULL) {
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "cpu_set_exception_base: invalid vp_index: %u",
+> +                      vp_index);
+> +    }
+> +    RISCVCPU *vp =3D RISCV_CPU(cpu_state);
+
+This should be `RISCVCPU *cpu` and should be defined at the top of the func=
+tion
+
+Otherwise
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> ---
->  tests/functional/riscv64/meson.build          |   2 +
->  .../functional/riscv64/test_riscv64_boston.py | 124 ++++++++++++++++++
->  2 files changed, 126 insertions(+)
->  create mode 100755 tests/functional/riscv64/test_riscv64_boston.py
+> +    vp->env.resetvec =3D address;
+> +}
+> +#endif
+> +
+>  static void riscv_cpu_cfg_merge(RISCVCPUConfig *dest, const RISCVCPUConf=
+ig *src)
+>  {
+>  #define BOOL_FIELD(x) dest->x |=3D src->x;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 4a862da615..34751bd414 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -672,6 +672,10 @@ G_NORETURN void riscv_raise_exception(CPURISCVState =
+*env,
+>  target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
+>  void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
 >
-> diff --git a/tests/functional/riscv64/meson.build b/tests/functional/risc=
-v64/meson.build
-> index c1704d9275..58d541f8c2 100644
-> --- a/tests/functional/riscv64/meson.build
-> +++ b/tests/functional/riscv64/meson.build
-> @@ -1,12 +1,14 @@
->  # SPDX-License-Identifier: GPL-2.0-or-later
->
->  test_riscv64_timeouts =3D {
-> +  'riscv64_boston' : 120,
->    'tuxrun' : 120,
->  }
->
->  tests_riscv64_system_quick =3D [
->    'migration',
->    'opensbi',
-> +  'riscv64_boston',
->  ]
->
->  tests_riscv64_system_thorough =3D [
-> diff --git a/tests/functional/riscv64/test_riscv64_boston.py b/tests/func=
-tional/riscv64/test_riscv64_boston.py
-> new file mode 100755
-> index 0000000000..d450f7eaf5
-> --- /dev/null
-> +++ b/tests/functional/riscv64/test_riscv64_boston.py
-> @@ -0,0 +1,124 @@
-> +#!/usr/bin/env python3
-> +#
-> +# Boston board test for RISC-V P8700 processor by MIPS
-> +#
-> +# Copyright (c) 2025 MIPS
-> +#
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +#
+> +#ifndef CONFIG_USER_ONLY
+> +void cpu_set_exception_base(int vp_index, target_ulong address);
+> +#endif
 > +
-> +import os
-> +from qemu_test import QemuSystemTest, Asset
-> +from qemu_test import wait_for_console_pattern
-> +
-> +
-> +class RiscvBostonTest(QemuSystemTest):
-> +    """
-> +    Test the boston-aia board with P8700 processor
-> +    """
-> +
-> +    ASSET_FW_PAYLOAD =3D Asset(
-> +        'https://github.com/MIPS/linux-test-downloads/raw/main/p8700/fw_=
-payload.bin',
-> +        'd6f4ae14d0c178c1d0bb38ddf64557536ca8602a588b220729a8aa17caa383a=
-a')
-> +
-> +    ASSET_ROOTFS =3D Asset(
-> +        'https://github.com/MIPS/linux-test-downloads/raw/main/p8700/roo=
-tfs.ext2',
-> +        'f937e21b588f0d1d17d10a063053979686897bbbbc5e9617a5582f7c1f48e56=
-5')
-> +
-> +    def _boot_linux_test(self, smp_count):
-> +        """Common setup and boot test for Linux on Boston board
-> +
-> +        Args:
-> +            smp_count: Number of CPUs to use for SMP
-> +        """
-> +        self.set_machine('boston-aia')
-> +        fw_payload_path =3D self.ASSET_FW_PAYLOAD.fetch()
-> +        rootfs_path =3D self.ASSET_ROOTFS.fetch()
-> +
-> +        self.vm.add_args('-cpu', 'mips-p8700')
-> +        self.vm.add_args('-m', '2G')
-> +        self.vm.add_args('-smp', str(smp_count))
-> +        self.vm.add_args('-kernel', fw_payload_path)
-> +        self.vm.add_args('-drive', f'file=3D{rootfs_path},format=3Draw,s=
-napshot=3Don')
-> +
-> +        self.vm.set_console()
-> +        self.vm.launch()
-> +
-> +        # Wait for OpenSBI
-> +        wait_for_console_pattern(self, 'OpenSBI')
-> +
-> +        # Wait for Linux kernel boot
-> +        wait_for_console_pattern(self, 'Linux version')
-> +        wait_for_console_pattern(self, 'Machine model: MIPS P8700')
-> +
-> +        # Test e1000e network card functionality
-> +        wait_for_console_pattern(self, 'e1000e')
-> +        wait_for_console_pattern(self, 'Network Connection')
-> +
-> +        # Wait for boot to complete - system reaches login prompt
-> +        wait_for_console_pattern(self, 'Run /sbin/init as init process')
-> +
-> +    def test_boston_boot_linux_min_cpus(self):
-> +        """
-> +        Test Linux kernel boot with minimum CPU count (2)
-> +        """
-> +        self._boot_linux_test(smp_count=3D2)
-> +
-> +    def test_boston_boot_linux_7_cpus(self):
-> +        """
-> +        Test Linux kernel boot with 7 CPUs
-> +
-> +        7 CPUs is a special configuration that tests odd CPU count
-> +        handling and ensures proper core distribution across clusters.
-> +        """
-> +        self._boot_linux_test(smp_count=3D7)
-> +
-> +    def test_boston_boot_linux_35_cpus(self):
-> +        """
-> +        Test Linux kernel boot with 35 CPUs
-> +
-> +        35 CPUs is a special configuration that tests a non-power-of-2
-> +        CPU count above 32, validating proper handling of larger
-> +        asymmetric SMP configurations.
-> +        """
-> +        self._boot_linux_test(smp_count=3D35)
-> +
-> +    def test_boston_boot_linux_max_cpus(self):
-> +        """
-> +        Test Linux kernel boot with maximum supported CPU count (64)
-> +        """
-> +        self._boot_linux_test(smp_count=3D64)
-> +
-> +    def test_boston_invalid_cpu_count(self):
-> +        """
-> +        Test that 65 CPUs is rejected as invalid (negative test case)
-> +        """
-> +        from subprocess import run, PIPE
-> +
-> +        fw_payload_path =3D self.ASSET_FW_PAYLOAD.fetch()
-> +        rootfs_path =3D self.ASSET_ROOTFS.fetch()
-> +
-> +        cmd =3D [
-> +            self.qemu_bin,
-> +            '-M', 'boston-aia',
-> +            '-cpu', 'mips-p8700',
-> +            '-m', '2G',
-> +            '-smp', '65',
-> +            '-kernel', fw_payload_path,
-> +            '-drive', f'file=3D{rootfs_path},format=3Draw,snapshot=3Don'=
-,
-> +            '-nographic'
-> +        ]
-> +
-> +        # Run QEMU and expect it to fail immediately.
-> +        result =3D run(cmd, capture_output=3DTrue, text=3DTrue, timeout=
-=3D5)
-> +
-> +        # Check that QEMU exited with error code 1
-> +        self.assertEqual(result.returncode, 1,
-> +                         "QEMU should exit with code 1 for invalid SMP c=
-ount")
-> +
-> +        # Check error message
-> +        self.assertIn('Invalid SMP CPUs 65', result.stderr,
-> +                      "Error message should indicate invalid SMP CPU cou=
-nt")
-> +
-> +if __name__ =3D=3D '__main__':
-> +    QemuSystemTest.main()
+>  FIELD(TB_FLAGS, MEM_IDX, 0, 3)
+>  FIELD(TB_FLAGS, FS, 3, 2)
+>  /* Vector flags */
 > --
 > 2.34.1
 
