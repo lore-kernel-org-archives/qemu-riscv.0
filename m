@@ -4,93 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 706A0CCD184
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Oct 2025 02:50:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00B1CCD184
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Oct 2025 02:52:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v8raJ-0001rU-OU; Tue, 14 Oct 2025 22:49:51 -0400
+	id 1v8rci-00034g-5p; Tue, 14 Oct 2025 22:52:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v8raD-0001qz-Oi
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 22:49:47 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ id 1v8rcf-00034N-2y
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 22:52:17 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v8ra2-0006LI-Sr
- for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 22:49:45 -0400
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-63163a6556bso11937659a12.1
- for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 19:49:28 -0700 (PDT)
+ id 1v8rcU-0006j0-Jx
+ for qemu-riscv@nongnu.org; Tue, 14 Oct 2025 22:52:16 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6364eb29e74so10552050a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 14 Oct 2025 19:52:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760496565; x=1761101365; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1760496722; x=1761101522; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n6qjZYlED9cI5ZqDFGB24BCtY1bwwgj+Qp3FAx8995M=;
- b=GS8BBr2cjTBvdO1DaoUBw0hsO98/wLjBCI1UbMNnQgGzZv+sUt7VDovt1wI0SxkIFR
- u27H6I7bS4qYfHoIEScDYbf2xYIfuaSg1GKxlwIS6/usNIukTigf1xGAXxPe7ZYYSjKV
- 7LKWjDOHgPTFQobJqLYxHNqgNXXUzj4ClCihul6JDnkN+x6oxxL92EXUjtnE9IftZrXZ
- Wi7XN+BSSnke7gI33fYIA9n91Al55j3AXIL/wfD97pMyttsaFu8bU4l8UNO0I3cCNEBE
- jkruP0Ac+oa/kqEcnJdZyJlupDmLZwChq8tqzhqH6UXFixkHWra9hr5sgP0M/8bgL+Pu
- siYg==
+ bh=yrYATmWBAX2GR6ZMhMA7RmRp8c2zVgLxLVX3yrwBUEU=;
+ b=JPMlEsS1FIv6YW1EhtHIV8Nmwko+ve8fISn5p+u3f9d4UAbeaH5fSQJ/Y15+2byUWx
+ bkoUXCCVeLl7lm+bSrycjrzIrtk4vn0ep3PpfgOx3d9Fipn1A8VSDaOaV7TKpyLUan9/
+ gHxCjgCjAXR9xSC7A5+GxZb8gFQH6rA+kQgGKks9ONN2no6Lq8WvxKYiaelEG9xOXUZZ
+ uOVUMnzzclpcvznU+MTRrP3SeIrMO16XT50f7hq1QTTjEgCiS6yqaheny7eTf56Z/6Gy
+ D4Sug9TZWcWq9PXzHq/ztjqulCHqvlTgyQiKujvcXg4OnLD23geoL887MzuGjYh4h/WB
+ UtuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760496565; x=1761101365;
+ d=1e100.net; s=20230601; t=1760496722; x=1761101522;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n6qjZYlED9cI5ZqDFGB24BCtY1bwwgj+Qp3FAx8995M=;
- b=gI4IVpi5vrqPS4L1HL8J1HJ0zKDgTWc+xio3RIuahC9unBNLNdhvsed8t+42FXthBr
- poqnUiq4Vtff+EPOGhq63yq9EwTgTFHWhCnXubNi8tsfzjC7VIyawYbpCKvROBcwGtOG
- 4XhC6ICqCxtP4AFmhNVCsGWKC6McGL3EbVadRjBsYnNnP7BH3r4HDsJjWugBHoKQW913
- iy1S4UrZdhYcgTD5zI5hV0GHs7Xbf79ZoEYasinJ3ZLPjQQhHFbvX4rspwu3iREaijAR
- ui1GsYxp621pgZi+1ffrhGWR3G121cpLTN40tA/P+8bjyeH0f9PpTYlirY4uU6ccYcB4
- uSFw==
+ bh=yrYATmWBAX2GR6ZMhMA7RmRp8c2zVgLxLVX3yrwBUEU=;
+ b=e2Nam+y6PJ4zTJ9N/k9UPcxFexWRRs/phVc2+zPGTOlAB//Juufeu2og3QI0wvWeDM
+ fSDKVURsTfjsNFTJfukY1+N0eqfoZmzXQEzMvhGIta2RnjPASvH/nTJWC36AxkaJyhFR
+ 3lILQ1Xre4/7L8nTYmOeRHgzzCO+m5LzOmDU0cDuUrr7i3EzsSCDdGHwiYe1N3kgPdoi
+ hPvsE6rCboOFjtm02zo+hjarTU/R5FvFkW/24duXzFrJcbo0uIiyAUO3/UkEg5Zv9Hb+
+ UaxQ7AYCHU1Bv1cP+1j7m7g2aEJPw2hqZzJQxOTUGUKKin4PiivVTZ2/1I4oIE2gwHXv
+ 8laQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCq/gza53unSpFqDLKCI531Ga8zz3QILZeLTo4vJXm+nBsCA6JbUV+B8ODv07fKjOXjprJAioH3M3C@nongnu.org
-X-Gm-Message-State: AOJu0YzKey2BsYnbRbObK9/ND/H/SY8ToAuNEtKXX1hkvC8FdmGBvpxK
- GFqwVd7rl1tnVS4LAS3YMBhJtLTA4XEXm0p2EzDzravbWqd9AOoUll992eXBkQ2sxL5AiBJnCU7
- BS1myeTr2EkclIPjKUD+Za6vQL22opG0=
-X-Gm-Gg: ASbGncuf30/1zmUy/rZPmdmYcd1VCeVEl9bjwtkjDz9F9S/XSgxgozd5A1Pso73lqDf
- bpee31UO9ZTPA2kw6tQg4WTOOfjEw14Ou78T5+guFF32h4PyzFBCN7ZfcDdmusOfQFuDci/IBi8
- zKRky1LEoyoIGc8iQPWQhUJW3Ef8biLLYPXJnkQg7pdWMwaV6o5VDXgSMELF/yd/g89ksHepdML
- mUf/5LGWVxH+o4nJGiX3urEK5uuUq7cnDoSjEu2VG/ODIXujNpVM3/Pqibm1oSITG1+cJM/PL+I
- OQ==
-X-Google-Smtp-Source: AGHT+IHHaTUvHcpDViXjqVRzXZIChBsVG8+g6HvIsqXs0iFGU8jo4cyVPt7J9fyPy0gRtb4fHY1J/0d1mKHNouTFWuw=
-X-Received: by 2002:a05:6402:d09:b0:62f:3721:fc8c with SMTP id
- 4fb4d7f45d1cf-639d5c7019fmr22465706a12.37.1760496564567; Tue, 14 Oct 2025
- 19:49:24 -0700 (PDT)
+ AJvYcCUqq88Ey5pd4Vli3c344ESBqwFJ1KYW7a4hqwVEmyuoqNcUdL3dTN+NOgrEla8x0ChvEpTg0sSIRqhL@nongnu.org
+X-Gm-Message-State: AOJu0YylnDnRisZyxEGmFICLPBubkyriWUQ3ft67ujoBgiQd46K4z9Rr
+ UaHk1UUHDyz/lnTLPSq64FTkpTU2pvqNXQx+WoyZXbUrt8X7cmsNhlXWh9LUHHxNXTCJ9vrps4q
+ JeQOki7bdwxerwKPx47sSEOQ4pnQdao8=
+X-Gm-Gg: ASbGncuhKiCBCiBlfrP1emlAxnasgt/mPwMZTCOz/sHsl/xjYlpIlNcqNcYGPXnP3BH
+ iR1GJY8qpKUraZet4MFyeFLgjJ2uCJVzEoR2z+Z2whRCR/6AAKqxS69exGl0NaawDkIBaRprXuc
+ 1McI99BxwJ/OfM4hCRsK+PA2H6Y48WrnB7t62RysTL9JZ3KcBthSNTyH7NH7sEbV8UpA8b+Dkt9
+ iiNwhmRnZIzZS4RayWj+xNUhQ+n/kvzeRhprmxqfLO3sAPsQ3v4qNQr
+X-Google-Smtp-Source: AGHT+IHfdiazKAbx3IzJ0+Yac/K58inmUv1XsIBrE0OCc+SfRlMNaRiS7aEv5XbNypPb0qc6WRbYd9uawaSR9g5s9FQ=
+X-Received: by 2002:a05:6402:2789:b0:63b:ee26:546d with SMTP id
+ 4fb4d7f45d1cf-63bee265665mr584877a12.12.1760496721892; Tue, 14 Oct 2025
+ 19:52:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251010155045.78220-1-philmd@linaro.org>
- <0e246345-6296-4df2-8f1e-4c8beb9532f0@linaro.org>
-In-Reply-To: <0e246345-6296-4df2-8f1e-4c8beb9532f0@linaro.org>
+References: <20251010134226.72221-1-philmd@linaro.org>
+ <20251010134226.72221-14-philmd@linaro.org>
+In-Reply-To: <20251010134226.72221-14-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 15 Oct 2025 12:48:57 +1000
-X-Gm-Features: AS18NWAFuRVyghTm2mNAFC5jlzxFOrOYfpqSLYMxn-jYT2ljz4Uj2CJyWxwcDkM
-Message-ID: <CAKmqyKPZpUaXd7K6qfu-q4xSmGF-mmPA+p14ROi85KE76aW0RA@mail.gmail.com>
-Subject: Re: [PATCH 00/13] target/riscv: Centralize MO_TE uses in a pair of
- helpers
+Date: Wed, 15 Oct 2025 12:51:34 +1000
+X-Gm-Features: AS18NWBwVRqB-drBRL_aG1NiBUYL6uW6v4KzuNNNosV6WccScC7pzNA2dGBiVuE
+Message-ID: <CAKmqyKPtjuAa=-fTukwE0-x5Ds5YLLotCHzxk=_TJaqzxuGwqA@mail.gmail.com>
+Subject: Re: [PATCH 13/16] target/riscv: Replace HOST_BIG_ENDIAN #ifdef with
+ runtime if() check
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Christoph Muellner <christoph.muellner@vrull.eu>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Anton Johansson <anjo@rev.ng>, Richard Henderson <richard.henderson@linaro.org>,
- Valentin Haudiquet <valentin.haudiquet@canonical.com>,
- Weiwei Li <liwei1518@gmail.com>, 
- qemu-riscv@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org, 
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x532.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -107,46 +105,111 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 15, 2025 at 5:45=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
+On Fri, Oct 10, 2025 at 11:52=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
 <philmd@linaro.org> wrote:
 >
-> Hi Alistair,
+> Replace compile-time #ifdef with a runtime check to ensure all code
+> paths are built and tested. This reduces build-time configuration
+> complexity and improves maintainability.
 >
-> On 10/10/25 17:50, Philippe Mathieu-Daud=C3=A9 wrote:
-> > In preparation of having RISC-V cores changing their endianness
-> > at runtime, centralize the MO_TE uses to a pair of methods.
-> >
-> > Except the 128-bit LD/ST change (first patch), no further
-> > functional changes intended.
-> >
-> > Philippe Mathieu-Daud=C3=A9 (13):
-> >    target/riscv: Really use little endianness for 128-bit loads/stores
+> No functional change intended.
 >
-> Are you OK to queue reviewed patches 2-13 (independent of patch #1)?
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
-Yep
-
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/vector_helper.c            | 32 ++++++++++++-------------
+>  target/riscv/insn_trans/trans_rvv.c.inc | 16 ++++++-------
+>  2 files changed, 24 insertions(+), 24 deletions(-)
 >
-> >    target/riscv: Explode MO_TExx -> MO_TE | MO_xx
-> >    target/riscv: Conceal MO_TE within gen_amo()
-> >    target/riscv: Conceal MO_TE within gen_inc()
-> >    target/riscv: Conceal MO_TE within gen_load() / gen_store()
-> >    target/riscv: Conceal MO_TE within gen_load_idx() / gen_store_idx()
-> >    target/riscv: Conceal MO_TE within gen_fload_idx() / gen_fstore_idx(=
-)
-> >    target/riscv: Conceal MO_TE within gen_storepair_tl()
-> >    target/riscv: Conceal MO_TE within gen_cmpxchg*()
-> >    target/riscv: Conceal MO_TE|MO_ALIGN within gen_lr() / gen_sc()
-> >    target/riscv: Factor MemOp variable out when MO_TE is set
-> >    target/riscv: Introduce mo_endian() helper
-> >    target/riscv: Introduce mo_endian_env() helper
-> Regards,
-> Phil.
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 41ea2231067..2de3358ee86 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -235,26 +235,26 @@ vext_continuous_ldst_host(CPURISCVState *env, vext_=
+ldst_elem_fn_host *ldst_host,
+>                          void *vd, uint32_t evl, uint32_t reg_start, void=
+ *host,
+>                          uint32_t esz, bool is_load)
+>  {
+> -#if HOST_BIG_ENDIAN
+> -    for (; reg_start < evl; reg_start++, host +=3D esz) {
+> -        ldst_host(vd, reg_start, host);
+> -    }
+> -#else
+> -    if (esz =3D=3D 1) {
+> -        uint32_t byte_offset =3D reg_start * esz;
+> -        uint32_t size =3D (evl - reg_start) * esz;
+> -
+> -        if (is_load) {
+> -            memcpy(vd + byte_offset, host, size);
+> -        } else {
+> -            memcpy(host, vd + byte_offset, size);
+> -        }
+> -    } else {
+> +    if (HOST_BIG_ENDIAN) {
+>          for (; reg_start < evl; reg_start++, host +=3D esz) {
+>              ldst_host(vd, reg_start, host);
+>          }
+> +    } else {
+> +        if (esz =3D=3D 1) {
+> +            uint32_t byte_offset =3D reg_start * esz;
+> +            uint32_t size =3D (evl - reg_start) * esz;
+> +
+> +            if (is_load) {
+> +                memcpy(vd + byte_offset, host, size);
+> +            } else {
+> +                memcpy(host, vd + byte_offset, size);
+> +            }
+> +        } else {
+> +            for (; reg_start < evl; reg_start++, host +=3D esz) {
+> +                ldst_host(vd, reg_start, host);
+> +            }
+> +        }
+>      }
+> -#endif
+>  }
+>
+>  static void vext_set_tail_elems_1s(target_ulong vl, void *vd,
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+> index f4b5460340e..2a487179f63 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -3351,19 +3351,19 @@ static void load_element(TCGv_i64 dest, TCGv_ptr =
+base,
+>  /* offset of the idx element with base register r */
+>  static uint32_t endian_ofs(DisasContext *s, int r, int idx)
+>  {
+> -#if HOST_BIG_ENDIAN
+> -    return vreg_ofs(s, r) + ((idx ^ (7 >> s->sew)) << s->sew);
+> -#else
+> -    return vreg_ofs(s, r) + (idx << s->sew);
+> -#endif
+> +    if (HOST_BIG_ENDIAN) {
+> +        return vreg_ofs(s, r) + ((idx ^ (7 >> s->sew)) << s->sew);
+> +    } else {
+> +        return vreg_ofs(s, r) + (idx << s->sew);
+> +    }
+>  }
+>
+>  /* adjust the index according to the endian */
+>  static void endian_adjust(TCGv_i32 ofs, int sew)
+>  {
+> -#if HOST_BIG_ENDIAN
+> -    tcg_gen_xori_i32(ofs, ofs, 7 >> sew);
+> -#endif
+> +    if (HOST_BIG_ENDIAN) {
+> +        tcg_gen_xori_i32(ofs, ofs, 7 >> sew);
+> +    }
+>  }
+>
+>  /* Load idx >=3D VLMAX ? 0 : vreg[idx] */
+> --
+> 2.51.0
+>
 >
 
