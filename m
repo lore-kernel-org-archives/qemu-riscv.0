@@ -4,171 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F9C0CCD18E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Oct 2025 13:05:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D55D7CCD18E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Oct 2025 13:08:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v91Bm-0002Yj-QW; Wed, 15 Oct 2025 09:05:10 -0400
+	id 1v91Ea-0003Qw-RU; Wed, 15 Oct 2025 09:08:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1v91Bi-0002XW-Nb; Wed, 15 Oct 2025 09:05:06 -0400
-Received: from mail-norwayeastazlp170130007.outbound.protection.outlook.com
- ([2a01:111:f403:c20f::7] helo=OSPPR02CU001.outbound.protection.outlook.com)
+ id 1v91EX-0003Pn-Sa; Wed, 15 Oct 2025 09:08:02 -0400
+Received: from mail-francesouthazlp170110003.outbound.protection.outlook.com
+ ([2a01:111:f403:c207::3] helo=MRWPR03CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1v91Ba-0000SH-Qk; Wed, 15 Oct 2025 09:05:06 -0400
+ id 1v91EU-0000nK-0Y; Wed, 15 Oct 2025 09:08:01 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XSaA90rZ44W+k2oVKHV7fOmZt4KgawJrfcnlg9z5kKLFeF/5pjLRKdyIHuTerEfB4MReySpdMSCXOCTwNIh+TCOqDXoiacPLFe4ju19eF/GlIQxjkcszTL/qYo+rTxukr4brNygyh1TDKPehiCesVi7xUMN1R0de5mlkihyLvuRgA/pjUGgppKNM6+8XQvK3urwtUZLTg4s2eJsRoyCsMEPo3Vc45sDjm1bFClhtS5eWn+WBERoGn+PMQOnd4EOyUOlJMJ0cOADzJL9t77s85FTLEMCzM7jXVpCFLseI4iYiY1fvyouf9F02rVMqTk7of+JS7/mOc/HpeE3nd5XYuA==
+ b=S6iWJSGa0QiIxvE4FUds/xEEF0zjq0Ixw1nUg3fB2j00RAfzjmmRysqD9qpyKSXxs3CXUL8n4Wi1drCi42JjjC8vs6VH6J+iujtC663Sky6vSHbFRzTH8wYUF3bC28KX2PL4hexQFvVdk5YhoFRNrt/v57xPUr07WwPMVG38SmGkrUfbs2X8Yg5lLAtrfaxw1sVtvXrNnPYOggNgnYgi0C8UwWdwooJkA1/SMP/Y3Yz77+EkWzmB+HSf+8yWJCPMoDYADCsxDfZ97mdBsgVy+7kC1jcCZR9HiY7M808h0PnpLLjrdMXs6/QRu/vmweTlYJhkpUZvdjjL3ZPHqYhSzA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KBb1LxfP4+RWjz6Xf9IT1jvK6DWAx9DJuo4Q5FyvCqI=;
- b=gbPVnv4X5KvDAxu0wi4vNK2qZGPX/1dSkiYz4I6YiP1WRAq4k9gEdOZwwOJswM9cUeP9GNPNQcN3R5gQOWMgpGskRifSVgwLmdgQWEb8Sqr7IdDERC5x8+ubalPidTMgM4WJbm3SjzCBzcIpF9xu2AaI/HnSB4oDYs7j11odDoyCMz1AQai6nyurcC659IcQx9jEw7+GDwQkX6SlxyyQeuiMiHdUqgqiPuzp9rmuYd1jrF6vCMCdZgjiYi5rOdyqod4jR2vceocNF8d53rSizm+83Tq7DC8Rn5raWKRnat/JlN8tn2xKyWUKfqFVmWKQafOWdmrkRGl9Y6fq1J4Agw==
+ bh=UlMsA/MEhKVlYqorsoIGEZeCEH5EmohMbuJcJ+fqK2E=;
+ b=VcgUJT2+i8+CciA47eznXNiPkqZ3vst4oaZjqnWy51zFRBeg45Q+BxBoK+VvLhYGkx6ps6hpB8a2eJx2EBvFV3WZ+NjMehhhH9feqWbqp3yrP2IakmhYz0jBmfGBwdGUVdeVjeMpmflxH8o24WifI/FklymM2Y5UUgFom43veBDKOxS1b4UjeF7BoSz+4pL+8oJGTGgKtJ9lRCwPsl4btwXhYJGvH7hKcnnxnPtgXT4pmEy5rW7ZwQk7S9HvzXKDtaepz85q1KD63qxnGiEHY/BdDM2md3Tn0Dgahweqoa4uWwP0L5rRxSL6LQjRFHossSvH1W1+I3MscYtojPVxmg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KBb1LxfP4+RWjz6Xf9IT1jvK6DWAx9DJuo4Q5FyvCqI=;
- b=IoFhgeMZBnGAJAEulTWJ1KvBf1oSXTCIra2zhtDTzoexfu4S1cnpp3rstgLuX0Ntxz7PDcFcekJl2G+kKQ/U6zAy0jglPDRWc40MMMHIpnJQkdoPxnDPeBS+OmGIgW8//nM+5uHHotpii8qyKDU//QJKJVSqgMqJHZFB5igsldNq6zhCragHnnijFRkrkyAK64q3ZEZ4CO37aQ71XcLNZsdhuQ95Y0aueQVjEai/eDFODVePn2818Orduc9nQaaCzDIBGWfnukSu1mF3MF2zBqOIwJ5QDyHZkeYN2eyi4ri9s80RUHxTfKk9br+MZEX41gAdLmTbFsShcR1Xm8/f3Q==
+ bh=UlMsA/MEhKVlYqorsoIGEZeCEH5EmohMbuJcJ+fqK2E=;
+ b=Lbbt8TxuY1furqasWjcMe00bPIEQWuDndI8Xsld0Y7iGs3T4TvuW5q7iQjBrdDY3llJkoHyERGw0LWIykztdA629Lvs8Odb38vTznpUw20fCJ5eUfX79SGsao6KnU3wzngM79CRpTGJ5BkUqIRNUX8auHlIs/vF9beuiiC1w2JDoy4mTVr+gWeBwAxQyVXUYCdXfLRkFAkoWOaVAXGjGjIjMCuQUA9xdzPJcuuJcEfeS6FcR+mn1E/kxby/9Ot50TxMpSMr65oD3+VLsGtFmr8zfd8bvuKxa+k+COdyxWcHgazKq8JcPsR3cbRR9E4a89Rp102hvWTnHnZXs5HgfWg==
 Received: from AS4PR09MB6518.eurprd09.prod.outlook.com (2603:10a6:20b:4fb::5)
- by DB9PR09MB6839.eurprd09.prod.outlook.com (2603:10a6:10:4c6::17)
+ by DB9PR09MB6057.eurprd09.prod.outlook.com (2603:10a6:10:3da::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.11; Wed, 15 Oct
- 2025 13:04:50 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.13; Wed, 15 Oct
+ 2025 13:07:07 +0000
 Received: from AS4PR09MB6518.eurprd09.prod.outlook.com
  ([fe80::ad50:891a:847c:580a]) by AS4PR09MB6518.eurprd09.prod.outlook.com
  ([fe80::ad50:891a:847c:580a%4]) with mapi id 15.20.9203.009; Wed, 15 Oct 2025
- 13:04:49 +0000
+ 13:07:07 +0000
 From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
-To: Thomas Huth <thuth@redhat.com>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>
+To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
 CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cfu@mips.com"
  <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>,
  "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
  "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>, "philmd@linaro.org"
- <philmd@linaro.org>, "alistair23@gmail.com" <alistair23@gmail.com>, Alistair
- Francis <alistair.francis@wdc.com>
-Subject: Re: [PATCH v11 13/13] test/functional: Add test for boston-aia board
-Thread-Topic: [PATCH v11 13/13] test/functional: Add test for boston-aia board
-Thread-Index: AQHcPcr/V884dcgMMUSrxyaIyX0U7rTDJoGAgAAGegA=
-Date: Wed, 15 Oct 2025 13:04:49 +0000
-Message-ID: <2a3f6bc1-fe2b-4fa9-a81f-75b6517cf866@htecgroup.com>
-References: <20251015115743.487361-1-djordje.todorovic@htecgroup.com>
- <20251015115743.487361-14-djordje.todorovic@htecgroup.com>
- <b55bb00b-4f2a-471c-9be2-a8f736e7af6a@redhat.com>
-In-Reply-To: <b55bb00b-4f2a-471c-9be2-a8f736e7af6a@redhat.com>
+ <philmd@linaro.org>, "alistair23@gmail.com" <alistair23@gmail.com>,
+ "thuth@redhat.com" <thuth@redhat.com>, Djordje Todorovic
+ <Djordje.Todorovic@htecgroup.com>, Alistair Francis
+ <alistair.francis@wdc.com>
+Subject: [PATCH v12 11/13] hw/riscv: Add support for MIPS Boston-aia board mode
+Thread-Topic: [PATCH v12 11/13] hw/riscv: Add support for MIPS Boston-aia
+ board mode
+Thread-Index: AQHcPdScuTTaCWIAo0e+TkipSUt3oQ==
+Date: Wed, 15 Oct 2025 13:07:07 +0000
+Message-ID: <20251015130657.571756-12-djordje.todorovic@htecgroup.com>
+References: <20251015130657.571756-1-djordje.todorovic@htecgroup.com>
+In-Reply-To: <20251015130657.571756-1-djordje.todorovic@htecgroup.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-user-agent: Mozilla Thunderbird
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS4PR09MB6518:EE_|DB9PR09MB6839:EE_
-x-ms-office365-filtering-correlation-id: 3d85a20a-5202-4f0d-09db-08de0beb6c58
+x-ms-traffictypediagnostic: AS4PR09MB6518:EE_|DB9PR09MB6057:EE_
+x-ms-office365-filtering-correlation-id: 824100b7-888e-4e32-5064-08de0bebbeb7
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|376014|1800799024|366016|38070700021; 
-x-microsoft-antispam-message-info: =?utf-8?B?M0gvWDBicVZjbksrQkN3Mis5cUdRTXd1S1h6Sis2dDVkT3FXblAreTdyVExr?=
- =?utf-8?B?R3dLZ21Wa3E3UDk3Z2JoZEZOQTZOWUJBaDdWWXVMSllnS0VYMnlQa0VwY25w?=
- =?utf-8?B?SUF4K2tOak5xallUeGVZUVhYcVhPNDMyb0pjTHpiOURzZ05WeUxvRHQ1WkZW?=
- =?utf-8?B?QTZEcVVaQUx1ZGRndVRKNWI2aDZ5VjFjNmFCN2plQkZYNHhFTUh5WjZtSHY2?=
- =?utf-8?B?Q1FhT2ljS2prUzUzczhFZFRsQUF1NDJockw4QVhlbU15UmlmVUZ3OEozQkxR?=
- =?utf-8?B?S09tWjl2VTBpdjlIeW1WTCtXdnZjd1VLNy9TR2pML1NmTkFaa2RzZ1FpMkpV?=
- =?utf-8?B?NG9WVzdHcnNwSU8zUmdxc2ZjeFZZeHVtRUg0Sm80R1MxWis1aDhpVnFlZ0ZT?=
- =?utf-8?B?V3h5bVNsY3U5WURIOHM1Q0Y3TnJsNTh2cEFrTWpLVVFSVk1jSGo5UU95OXdp?=
- =?utf-8?B?cDRtNlVWYlN2WVZnSUx2bjM5dnFoT09UOVJpKzJlSmxrVHFMLzk5Ulk0aGJI?=
- =?utf-8?B?U2tzeW0yaWRKdDlsVDRuYWNENFlXMktMUEtKcUViY2lLWW9NbjlQN3VYVEtn?=
- =?utf-8?B?TkdHQnI4VkpQN0JVckg0cG80Y2FDUTh5dnVmVFEwV3R6MC9NVVZieHJ2ZHZ4?=
- =?utf-8?B?V0RsR0ZwQXNWWnFQVFdUL3ZvUUZHdG51VHluZGJzMnB5UGNkbm83Q3ZxdEtr?=
- =?utf-8?B?aXkxYzIrSmtpL0VObUNhMWU0S2FPdXIvUjMvQ1B4UCtjQ2RiRU85VHBwa2t6?=
- =?utf-8?B?UTZtZlB5ODcyTmorSlB0WUdOZC9GeGR5RUJCaUJXeUVjaXcwSUw0aUZCalV6?=
- =?utf-8?B?bjd0QnM5QndnNkVFZ05EUUZENXVmM3FucnpzK1BoYmtLNXJzdndqZ3Btd01n?=
- =?utf-8?B?RUVNbVFrRkdtM0xsUjZBb3FxK1BQNUwrbUNXQUszS3Zxd2hLekhNa0RMZFpR?=
- =?utf-8?B?MnZpb1llQWZWa1R0TEJNWTV4YXhwL3gyMnJCNjdTYkZ5aFc4bDF4ZnluMitR?=
- =?utf-8?B?TXFQYUdRMWxackZuWVMvNUVrQTYzVkxwb0dCcitZa3NlSDVNbER1QnJsQktC?=
- =?utf-8?B?aWZ3YU40aWhqWGZQOHV6RWwwd05UaDY0VmxDaUVGU0pVd0RsWis3ajFZOFBa?=
- =?utf-8?B?azZhYWgwSDA2aFVPRXdHQ3pNTy96Zk5saFJ5TytDYlYvY0pwaXhFeWs2ZVVO?=
- =?utf-8?B?Z0FuRGJsWm01RjU5Wi90VnVlbFJBR0dpMW5lbjdsL0FWN2xQOFhTYlM4Znp6?=
- =?utf-8?B?eFJsQ05WOEcvTzZCbm1OVVVxUmsrOStRZTROUkI1bzRWL3E4V3dYSExHYkEw?=
- =?utf-8?B?cGVZVEpubWh4RTRRbU80VWFoTjgzaGd1QitBbXpONG95RWlDd20zUUdLbHpS?=
- =?utf-8?B?UDVSL3dQMGV0alJ5NVJjVExHWUdZZzZYRlVVRzY3elptMFBYclV3V09DLzZG?=
- =?utf-8?B?ZEZYQkNMSm0vVUhHV3dYZGFrVmxHcWNveUd2MzVMenA2RFkxSmUyMzNabWY4?=
- =?utf-8?B?djlQazB6UGZIUGF5ejZXUWNiVDEzci9VUUJ1RkppS0tLY0t5TEhoMVBHc2hq?=
- =?utf-8?B?bmFRNm1DSGpEVUtnUWdYTlNYR3NIWTRZMVAxeU5qZVFaYmo4cjA4SU5MMWVt?=
- =?utf-8?B?S3d5MzN0bS9PdFIzWFB3SkRsY2dra2NEb1dHb3dRV21SUGhQem9jc2JoaTE1?=
- =?utf-8?B?dGJVMVk0UlVscFF5RVlWL24xanRkb0NobU5UUjV5VWlhc1RJbXcvTC9IdGhC?=
- =?utf-8?B?SCtuckRidUlOVTVwWDVWZm9Ra3RHeXAxUzJwak5oRnpkeFZmdUVFQ2p2Nncv?=
- =?utf-8?B?b3NxSDBIcHRhSms4aDNYdTVML2NXa1Q1VkRaWVZjMHBBbjZGNGZNRUVLWjJy?=
- =?utf-8?B?RERkMTRmVHMxOWxnSjJmMXM0SzhwV0xCK0JhOSt2MTVPTUh3dmw0RGtEKzIy?=
- =?utf-8?B?UTMxeWZlTXl2VFVSdk45Qk02VTBQS0gvQndCY09XT1BHSGV5TFg4eE10QWVQ?=
- =?utf-8?B?dGw2eVdyZzF3aDFFRHZkeDViTXliemdFQ2hjT05Nd0hiZVI0TGswalljcDhF?=
- =?utf-8?Q?t2rxfV?=
+ ARA:13230040|1800799024|376014|7416014|366016|38070700021; 
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?hq3z8BdoOLxnF+SvbmSvfxEg/2z9miBMR/j8rTKSRlpa4bq2yUwqzoQXRH?=
+ =?iso-8859-1?Q?yH933doP52AP9ZG/UdgDDaETbEbmrdK0TsBGXA4+NjPuPnxvKdEOmwpzsu?=
+ =?iso-8859-1?Q?0drNEFTzKW96YVrcHdbIDgh8TeOAF/jO+nMwvhTja+cVVNgyI52bcoQNZw?=
+ =?iso-8859-1?Q?UznE6tnSp1dmWloIMp8P2KqepGc7+zAfrtrlSTocX3cavJY0baPDNxxoN5?=
+ =?iso-8859-1?Q?uxaQNC5YUe+nOyGHO3GhnCICYadI2u8HReHjgKeyZHGJL076nuPRSy8lnL?=
+ =?iso-8859-1?Q?x1FIGVUTs+oikJ0O8nlP6lSt5ZTQ+oG4DyzxINdT5MNyuIOCVHuMtP4ddw?=
+ =?iso-8859-1?Q?/p6MUnU30HyHrTNf82laB4kEj0ebf9WkB+RzKDwNJqS6BwuYAnCVTsyLDp?=
+ =?iso-8859-1?Q?cI9sXGKZJO4PN6/RhPOxWS6gaHeHUo5nrLJJl5Fs2VVtbxoLdN0q7UknBq?=
+ =?iso-8859-1?Q?4XTNP/KrwBuzArZ6Ce/fc2wNwZjqmnWaYilndlTSoXMFuCZaJ//BJYM2Sr?=
+ =?iso-8859-1?Q?EEA5kDwvtzRzfW6livOer/WXam0PYl69xpErj0GtzDq685mjXKT9wK9K4U?=
+ =?iso-8859-1?Q?fmF+X8UqOyqANsVWPiR8Kq6ylZL39zzRW/83oMvohHTUq4zBBrFUUQ4IMH?=
+ =?iso-8859-1?Q?ENgTs3tddPftyzgF3Zkw1ztjia4ua0zU9znmQLP6/OOm//xOCzQqXUf7mO?=
+ =?iso-8859-1?Q?Bm5y3z+yNFqGAJ5gEs+0SgPOzJTJ+PayaWtbkDGI6TlrpCPpMIepjK42hw?=
+ =?iso-8859-1?Q?Qb+Kdz0pZEzyJVuFk1Fcz/X1fDVQI5CgfXH9k+JiUqxmFxZ0EpqDAUXF2j?=
+ =?iso-8859-1?Q?h+3eUX6B0+hsCEvv+IJ5RndNaCV1ww1rxFCRpo83QrrneZZVI9dloIWjsi?=
+ =?iso-8859-1?Q?3CQbIY9aBE64K9H9cb/7KfQgd+gCEo47EuQ6oetyqRAzwLPV4OE/+Z5le7?=
+ =?iso-8859-1?Q?IgVnpIrgk22CKHGILJkU8SoM6MXFdPQN+VntRw/5OLxapAyyZjNskmrFiI?=
+ =?iso-8859-1?Q?W5lPAQ1jrDqmtBYNYLW1AiZwRyBQxkrmOBNbuhSmbLoGk5hFvkIgzDVyT+?=
+ =?iso-8859-1?Q?Lm0DlpsNBaYn22am4YtwaM9EKIBjyZ4mGh7kBM5rRuUhTdpQeXMEYBz3Yq?=
+ =?iso-8859-1?Q?lHfQ29IR8oLjz7okztwHi+y36k/GuNxnqss97gf4Q8mR+z64RqvQqbcb9Q?=
+ =?iso-8859-1?Q?k+cH3rNGd1uvkRz/Wc0/WSJh13EthplHEpbTXVTodrt4J7cRJMD0I2p9s4?=
+ =?iso-8859-1?Q?exMFcl2V/QXYkPH0FBU0Rd0fjuxClypxUopE2x9G/HimVvBG1ravxmAZ+z?=
+ =?iso-8859-1?Q?DsDGEruDiSVSNJzFceUB5W2BX8kzduk19+2GgVIqnX4sMEdZp6J2UJwMck?=
+ =?iso-8859-1?Q?K49GfoTiLCFI85A7aiT1LKCHN4YhNQ6J1al9d8NzfE0/+9Ug1NZ4Znd81J?=
+ =?iso-8859-1?Q?QaG23Ddz+pNHWFLAmXaMuZoumVMPK5CbeSe5sz9dGBn2UiPBMZO5tDjGtJ?=
+ =?iso-8859-1?Q?l5Gp5awLhkSdHerHZCJzfPL8vCQK9vb/yMo1wB2ErFsYuSyCvfIgSFb84S?=
+ =?iso-8859-1?Q?zU4ovy0ALq7zbN30EnOIlttUuEkV?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4PR09MB6518.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(1800799024)(366016)(38070700021); DIR:OUT;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016)(38070700021); DIR:OUT;
  SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?VElqQlVRTVR0UzEvaEx0ZWdOTGFwbVAvb1FBTjczdS9wdWNScklkblllVHdP?=
- =?utf-8?B?Ny9aZzIvL2djY3owb0FEdmtHWjJ4MnRpNVh5Z0JsZ25WMVJrUUdJRlNPNFFx?=
- =?utf-8?B?TGdiSFBvOExPYVRua0VpQmxCUkNyUm1pMXBEOCtnYytEU0VpRHBaZVY1b0NH?=
- =?utf-8?B?cXVrVWVyZitXK29FMVNSbWsvVkxjallzemVRd2xUWCtrZWVBNnRGSWs0c2V4?=
- =?utf-8?B?bE40VmZtSFRrRnJvK1FTMEJOeEpXdnJtT0lyNmxadjRBNU5FbGlETEs4cVlQ?=
- =?utf-8?B?a2NuM2pKdC9ZdHdrN3hNVGtvdGo0ekxuTkNaUXNmOTBoQkxBeXhjaUpCSWRZ?=
- =?utf-8?B?Z2QwNXkzT2I5ZGE1NkM0ck4rL3NwZ0dBQTZLV0tweHVHVzVCWmdCOFNhZXdt?=
- =?utf-8?B?eW1ZU2pzZ2JYamxvSmlGWXVQYXprYjlkTzZ5cm82MVlsQUlYZHJZYjB4SVJu?=
- =?utf-8?B?RUh2djA1b3h2SFl3Mk5jdzdXQWl1RXV6SlZaWjBIZW5lSFc3eUxSTXFHdDlm?=
- =?utf-8?B?RzNMYWNyUGZDd2pSSGllQUFCaTE2V0hWdWhoNDIvelY3OExCdXlncmc5Y2Rs?=
- =?utf-8?B?UFkvUTdjVDd6eCtocDNhMkZ6SkNTcDFieTgvd3oySVNUUHdRejR5bmhWK3Fp?=
- =?utf-8?B?and4aXFUKzkwMENkWDNsd1FObjVRUzk0c2VqQXZYQ01MeFVPUFdiZWcwNFRo?=
- =?utf-8?B?dXI4eXltQjdobVBQWmQrR1B6V01FeHpKMGVnYW1LbGg2Szc0ZjZNaHliY1Jw?=
- =?utf-8?B?cDdXUUxidUxQZFYzVmI3a0tCR1lZVjRIRmZOOFQ1RVdaN0FFck1rVUdxQURZ?=
- =?utf-8?B?OGZ3U3Q3clMxWEE3QkR3OWRYQkt6V1RJSEVpVVBORzNlc1Y5YlBwWmpDTEc4?=
- =?utf-8?B?Mm8rd08zMUk0YW4wUWZhV2srbWZTc2RxeUVQMXE4aThOQ0QvMXRhVG11N3lX?=
- =?utf-8?B?UzhNS0l0WktVZTNwaGdFWW91OTh2NzJNRE9Ua3RXK1ZuaDIxbGlCWHh5aUJV?=
- =?utf-8?B?S1BkVGRrTDczQklkT1JhSUxORnhLUlhoNE5TMVN5QUNwckNxOExTUTlnSDB5?=
- =?utf-8?B?aksxS1gvMzhmVGNIN0JQRFg3bEVtUURlTlhUSmRUYzFONGNJM2x1REZWY1pR?=
- =?utf-8?B?amMxNzNOTURhcDhFUUM0bVQ5TXFUT0NIRU1PaEUyL1d0Yi9lbGh3dUFEbUFG?=
- =?utf-8?B?UGlSZlBYU1pBWHNZanJmdy8rU3hza2FheHE2WGxxSFRHSmpqcU9oaUFYK2xw?=
- =?utf-8?B?WEVOMWhmdnBkUks5dW02ZGUvZk9mTkFLK09GTGNVTC9YdnJINVphM1NYMlNR?=
- =?utf-8?B?ZEdFWkdwZzg4c2ZJbEllazBwRzdZVUVtWlZGeTVJVUdYZkoyd0pGNUhBTHBi?=
- =?utf-8?B?YU5zNzVtYjNjbko3T2VYbFhsZlJCNWsrTlVQM0RCUktjV29mZFhPWGMweUYy?=
- =?utf-8?B?U0RoanFyWWllWkRCK0RlaC9oM3pQWVYyT09ubGc3dHRRNmxXd0wrWS9wSmZz?=
- =?utf-8?B?ZTVacGYvVE1oUXZ2eFNJTGs3N2ttNzE5YmJadzRmdWsvcTJ6N2lPeFh4QzYz?=
- =?utf-8?B?RFlLVkluaDZIZ1ozMXZPWDZYY2JlT0FSdUMwMUZ4KzFqRkNUYnNFWTdSVHJy?=
- =?utf-8?B?TlZaNGRNOHU2a1NtZSs5R0FWbVF0bmRKRE9CM0U1NUhhc2tERHZKL29CR3hk?=
- =?utf-8?B?Lzlhak5nR2xLcWtaN29VNnpmWks5YlpyaW0rL2txQXZ0RWVIQ1lIN0Ntd3Qv?=
- =?utf-8?B?dDRLa1A5ZXU0eDF1dkVwdXVORHpkd0NCQUpvNTNXWkFRdFZyTkJia1ovWEVL?=
- =?utf-8?B?bHZ2K3lVMjZTV1QyMVZ2azNQKytRbmpTNjl5T0pHUFRIcENFS3orNGNDTGxD?=
- =?utf-8?B?a2daUlhjcjVFaEZRUzdtNkhWZXYxYnZaZ1lxSVZacDZLZTdKaFdBT2Zkd2k5?=
- =?utf-8?B?dFloZExOa0VZaUY4elp6T2RzOVF4RndlOW9WSEpUQU5leUQrbDhIK3dPZUNB?=
- =?utf-8?B?WlpOQkdYZ1owVS9jZFYwRVZBVG51Zm8xU0RnM2JnbmlVVEo5VjRTQkNPVXRE?=
- =?utf-8?B?dG5pc2NlSzlIakVzdnNJOUQyN3JoMmtwWXk0cGRadXB5dm1ua0hXUDVZdTg1?=
- =?utf-8?B?cXRXTkxRMithT24rNU4vSkFMVVN6YXNGYnlrajNPcDJNQ2VXa1JDUWExSnFl?=
- =?utf-8?Q?x4dE/UXIhgUeVU/zWqbUwDA=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <620E37BAD6BB0647B639BD0F7618E799@eurprd09.prod.outlook.com>
-Content-Transfer-Encoding: base64
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?GFiNXe57zdMho7vIXPFGluL4dj1mgj5cd1BLws/lfZRcZPAUQS0nRO+1th?=
+ =?iso-8859-1?Q?ea1ong0NZemm5JaEyFZ9/AS9KsE0GO3trC+fAtqYqkQ2km3fQfqgSI7rb7?=
+ =?iso-8859-1?Q?S0Qn3mzoB9nEc6aenj01QAPQV1R/ARlN8xW18Uv8QzYFSe1Pb84IXBZIAl?=
+ =?iso-8859-1?Q?WYAOVe/DYppB+gqTt6zsJmo1JHsIMn6PfedxzS62KvOzyMjqcgcTeKHZKz?=
+ =?iso-8859-1?Q?oNlH97K9g1vkXpV8ME1ustfONUiKxmABVuuQ06moginSr/1tfJMOA0rGQ6?=
+ =?iso-8859-1?Q?YZVit/4ma+Bh1f4/tmESJOLmCJ4JGCjmESBINkzmYleOGSdYNCEGevIw7V?=
+ =?iso-8859-1?Q?Xg4k1qRfjqmn45OWpXDuERUYkysYNjDvmIAKYiyFJGxfbo5o5JFhBOVcx1?=
+ =?iso-8859-1?Q?M2wQfCcQ1KVPIWsqO4UQgxQKdsQJYcKZZTJMMyWrLwzfLDHAiYpmEkWxL8?=
+ =?iso-8859-1?Q?eLldsrraU/rrv7iKHskuPfe0GmmqRAIXy/TCkmnl9rsQpudh5/XQ4YlkQv?=
+ =?iso-8859-1?Q?XjoJt8fGM2emjQ57Or5y8X7JV/r1pubqsisJMsE0nSQjK6/4cgzF0Te8qD?=
+ =?iso-8859-1?Q?JgNf7k5vFfQtWLK7cZpj/9jHumt/nAEztWVOjiWK3jL8Hlb51rFzk7qmA3?=
+ =?iso-8859-1?Q?nyh3Ftph15B3rvGy8dUh1U6qL8r1XV86XM6fxBB3dhW75lOymSxVCE9wBb?=
+ =?iso-8859-1?Q?xsVHKIghLB6EM5APAPFjZM1/0o9Aa70seFLfvnvCGycuiPWA3ajQIKnsl6?=
+ =?iso-8859-1?Q?61447rqDUjhkbxM7zjarWDp1dRN6vj8GgayTvQ0fsFNpbiBaDebKvbitGz?=
+ =?iso-8859-1?Q?7cdTkXb6KFJ69KW9PMc6W5lUQuoI70fnXSUzbEE7YHx6vinhYQJRGqiinf?=
+ =?iso-8859-1?Q?+Zdwf+evokxknilrlGHmOlIc7bOQ2WYxzGu+TN++cGzbtPXRsB78whE87y?=
+ =?iso-8859-1?Q?dIusNj0VTAC7sv0sI1+SKPPG8kV0fm3hC0FkLwbEOzKJYTPl5ZyO/p7GbH?=
+ =?iso-8859-1?Q?TQnC5TqegRAQPjEZoON8UluDfYd5s46ds+4mAaHI8+J8nqqADGiPgVvIxz?=
+ =?iso-8859-1?Q?ZZM9cFQ9nPLYP/C95LF2jZ13hMVgi2D+imUdg/j+WsPj7mYEtBvWjEMuIJ?=
+ =?iso-8859-1?Q?BTc+Q6VSbxFLmtHb/2AuQHLfUatjd8To5FWgD6coIjmjh3Q4MEMwgH8Xal?=
+ =?iso-8859-1?Q?ZWmZ2HCOnlv1SZw7V714YJZEwgzvihy1xDBaV8nM2ximcFV7Xgpq3lB5G2?=
+ =?iso-8859-1?Q?otsYzVWRHt1uObyfCRuxwz+y5Nh0LWuc7jgf/atYSYaLqeDjZgik3ypB2+?=
+ =?iso-8859-1?Q?9fShu78iE/LHnQQBBu5mlv2N7A7Ol31zFJ0s8etaYEVcpfOs4GdnlPuwbJ?=
+ =?iso-8859-1?Q?+x0AdbjJWfmpuWo5/gQmmpqKzERrR0+r5EMANkdfkQaud5YmE06nJALafP?=
+ =?iso-8859-1?Q?h1urEcgkehFEIRyP1nozWVc2f7AOuV4CZXkqQ8hw7TZ9M+Edmx60MCoEhu?=
+ =?iso-8859-1?Q?laIFM8d8Yht8L+mGeGilQjpSQTU/ywVKVxRq+Rqj809EGawFSgJzR25Kr4?=
+ =?iso-8859-1?Q?Afd+QqDXhnxKy7QYkY7cAmV0QBzwQ4Njb9nHrYFKAIPgms6WOkGNwsfH3k?=
+ =?iso-8859-1?Q?e3RHAxqgu1vDiq7mzE1HngdkfOc20HqGvVo5z8BrVfjKRm/7LWhQgdhsXk?=
+ =?iso-8859-1?Q?ToZ5Pj9kae/ct0X+2TI=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR09MB6518.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d85a20a-5202-4f0d-09db-08de0beb6c58
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Oct 2025 13:04:49.5543 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 824100b7-888e-4e32-5064-08de0bebbeb7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Oct 2025 13:07:07.6852 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: OfniyOPIeeLLMOT410PUu7FI0Robxd8oseW4GoyNgNz6A/dfkTawPStrN8CsHAahFGIPenjABBJbJ9HqpcRi06mzMfyYZPxvVaUvGcARW+A=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR09MB6839
-Received-SPF: pass client-ip=2a01:111:f403:c20f::7;
+X-MS-Exchange-CrossTenant-userprincipalname: Y9aNPDVsdWzuu2FT9DSlJqnj6kcPDFgV6QrwCmKwuU9BPUdCjTs2rV0N49+7PYrGFFNUSDPvCRb0lLbVpSQKWn5xogV/MvpefWh+vHihY+U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR09MB6057
+Received-SPF: pass client-ip=2a01:111:f403:c207::3;
  envelope-from=Djordje.Todorovic@htecgroup.com;
- helo=OSPPR02CU001.outbound.protection.outlook.com
+ helo=MRWPR03CU001.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -190,134 +172,604 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-DQpPbiAxNS4gMTAuIDI1LiAxNDo0MSwgVGhvbWFzIEh1dGggd3JvdGU6DQo+IENBVVRJT046IFRo
-aXMgZW1haWwgb3JpZ2luYXRlZCBmcm9tIG91dHNpZGUgb2YgdGhlIG9yZ2FuaXphdGlvbi4gRG8g
-DQo+IG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVubGVzcyB5b3UgcmVjb2du
-aXplIHRoZSBzZW5kZXIgDQo+IGFuZCBrbm93IHRoZSBjb250ZW50IGlzIHNhZmUuDQo+DQo+DQo+
-IE9uIDE1LzEwLzIwMjUgMTMuNTgsIERqb3JkamUgVG9kb3JvdmljIHdyb3RlOg0KPj4gQWRkIGZ1
-bmN0aW9uYWwgdGVzdCBmb3IgQm9zdG9uIEFJQSBib2FyZC4gVGhlIFA4NzAwIFJJU0MtViBiYXNl
-ZA0KPj4gQ1BVIGJ5IE1JUFMgc3VwcG9ydHMgaXQgYXQgdGhlIG1vbWVudC4NCj4+DQo+PiBTaWdu
-ZWQtb2ZmLWJ5OiBDaGFvLXlpbmcgRnUgPGNmdUBtaXBzLmNvbT4NCj4+IFNpZ25lZC1vZmYtYnk6
-IERqb3JkamUgVG9kb3JvdmljIDxkam9yZGplLnRvZG9yb3ZpY0BodGVjZ3JvdXAuY29tPg0KPj4g
-QWNrZWQtYnk6IEFsaXN0YWlyIEZyYW5jaXMgPGFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbT4NCj4+
-IC0tLQ0KPj4gwqAgdGVzdHMvZnVuY3Rpb25hbC9yaXNjdjY0L21lc29uLmJ1aWxkwqDCoMKgwqDC
-oMKgwqDCoMKgIHzCoMKgIDIgKw0KPj4gwqAgLi4uL2Z1bmN0aW9uYWwvcmlzY3Y2NC90ZXN0X3Jp
-c2N2NjRfYm9zdG9uLnB5IHwgMTI0ICsrKysrKysrKysrKysrKysrKw0KPj4gwqAgMiBmaWxlcyBj
-aGFuZ2VkLCAxMjYgaW5zZXJ0aW9ucygrKQ0KPj4gwqAgY3JlYXRlIG1vZGUgMTAwNzU1IHRlc3Rz
-L2Z1bmN0aW9uYWwvcmlzY3Y2NC90ZXN0X3Jpc2N2NjRfYm9zdG9uLnB5DQo+Pg0KPj4gZGlmZiAt
-LWdpdCBhL3Rlc3RzL2Z1bmN0aW9uYWwvcmlzY3Y2NC9tZXNvbi5idWlsZCANCj4+IGIvdGVzdHMv
-ZnVuY3Rpb25hbC9yaXNjdjY0L21lc29uLmJ1aWxkDQo+PiBpbmRleCBjMTcwNGQ5Mjc1Li41OGQ1
-NDFmOGMyIDEwMDY0NA0KPj4gLS0tIGEvdGVzdHMvZnVuY3Rpb25hbC9yaXNjdjY0L21lc29uLmJ1
-aWxkDQo+PiArKysgYi90ZXN0cy9mdW5jdGlvbmFsL3Jpc2N2NjQvbWVzb24uYnVpbGQNCj4+IEBA
-IC0xLDEyICsxLDE0IEBADQo+PiDCoCAjIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4w
-LW9yLWxhdGVyDQo+Pg0KPj4gwqAgdGVzdF9yaXNjdjY0X3RpbWVvdXRzID0gew0KPj4gK8KgICdy
-aXNjdjY0X2Jvc3RvbicgOiAxMjAsDQo+PiDCoMKgwqAgJ3R1eHJ1bicgOiAxMjAsDQo+PiDCoCB9
-DQo+Pg0KPj4gwqAgdGVzdHNfcmlzY3Y2NF9zeXN0ZW1fcXVpY2sgPSBbDQo+PiDCoMKgwqAgJ21p
-Z3JhdGlvbicsDQo+PiDCoMKgwqAgJ29wZW5zYmknLA0KPj4gK8KgICdyaXNjdjY0X2Jvc3Rvbics
-DQo+PiDCoCBdDQo+Pg0KPj4gwqAgdGVzdHNfcmlzY3Y2NF9zeXN0ZW1fdGhvcm91Z2ggPSBbDQo+
-PiBkaWZmIC0tZ2l0IGEvdGVzdHMvZnVuY3Rpb25hbC9yaXNjdjY0L3Rlc3RfcmlzY3Y2NF9ib3N0
-b24ucHkgDQo+PiBiL3Rlc3RzL2Z1bmN0aW9uYWwvcmlzY3Y2NC90ZXN0X3Jpc2N2NjRfYm9zdG9u
-LnB5DQo+PiBuZXcgZmlsZSBtb2RlIDEwMDc1NQ0KPj4gaW5kZXggMDAwMDAwMDAwMC4uZDQ1MGY3
-ZWFmNQ0KPj4gLS0tIC9kZXYvbnVsbA0KPj4gKysrIGIvdGVzdHMvZnVuY3Rpb25hbC9yaXNjdjY0
-L3Rlc3RfcmlzY3Y2NF9ib3N0b24ucHkNCj4NCj4gSW4gY2FzZSB5b3UgcmVzcGluOiBQbGVhc2Ug
-ZHJvcCB0aGUgInJpc2N2NjQiIGluIHRoZSBmaWxlIG5hbWUuIFNpbmNlIHRoZQ0KPiB0ZXN0cyBh
-cmUgbm93IHN0b3JlZCBpbiBhICJyaXNjdjY0IiBmb2xkZXIsIHRoZSB0YXJnZXQgbmFtZSBpbiB0
-aGUgDQo+IGZpbGUgbmFtZQ0KPiBpcyBub3QgbmVjZXNzYXJ5IGFueW1vcmUuDQo+DQo+PiBAQCAt
-MCwwICsxLDEyNCBAQA0KPj4gKyMhL3Vzci9iaW4vZW52IHB5dGhvbjMNCj4+ICsjDQo+PiArIyBC
-b3N0b24gYm9hcmQgdGVzdCBmb3IgUklTQy1WIFA4NzAwIHByb2Nlc3NvciBieSBNSVBTDQo+PiAr
-Iw0KPj4gKyMgQ29weXJpZ2h0IChjKSAyMDI1IE1JUFMNCj4+ICsjDQo+PiArIyBTUERYLUxpY2Vu
-c2UtSWRlbnRpZmllcjogR1BMLTIuMC1vci1sYXRlcg0KPj4gKyMNCj4+ICsNCj4+ICtpbXBvcnQg
-b3MNCj4NCj4gImltcG9ydCBvcyIgc2VlbXMgdG8gYmUgdW51c2VkLCBJIHRoaW5rIHlvdSBjb3Vs
-ZCBkcm9wIGl0Lg0KPg0KPiBBcGFydCBmcm9tIHRoYXQsIHRoZSB0ZXN0IGxvb2tzIGZpbmUgdG8g
-bWUgbm93LCB0aGFua3MhDQo+DQo+IMKgVGhvbWFzDQo+DQoNCkhpIFRob21hcywNCg0KVGhhbmtz
-IGEgbG90IGZvciB5b3VyIHJldmlldyENCkkgYW0gYWRkcmVzc2luZyB0aGlzIGluIHYxMi4NCg0K
-QmVzdCwNCkRqb3JkamUNCg0KDQo+PiArZnJvbSBxZW11X3Rlc3QgaW1wb3J0IFFlbXVTeXN0ZW1U
-ZXN0LCBBc3NldA0KPj4gK2Zyb20gcWVtdV90ZXN0IGltcG9ydCB3YWl0X2Zvcl9jb25zb2xlX3Bh
-dHRlcm4NCj4+ICsNCj4+ICsNCj4+ICtjbGFzcyBSaXNjdkJvc3RvblRlc3QoUWVtdVN5c3RlbVRl
-c3QpOg0KPj4gK8KgwqDCoCAiIiINCj4+ICvCoMKgwqAgVGVzdCB0aGUgYm9zdG9uLWFpYSBib2Fy
-ZCB3aXRoIFA4NzAwIHByb2Nlc3Nvcg0KPj4gK8KgwqDCoCAiIiINCj4+ICsNCj4+ICvCoMKgwqAg
-QVNTRVRfRldfUEFZTE9BRCA9IEFzc2V0KA0KPj4gKyANCj4+ICdodHRwczovL2dpdGh1Yi5jb20v
-TUlQUy9saW51eC10ZXN0LWRvd25sb2Fkcy9yYXcvbWFpbi9wODcwMC9md19wYXlsb2FkLmJpbics
-DQo+PiArICdkNmY0YWUxNGQwYzE3OGMxZDBiYjM4ZGRmNjQ1NTc1MzZjYTg2MDJhNTg4YjIyMDcy
-OWE4YWExN2NhYTM4M2FhJykNCj4+ICsNCj4+ICvCoMKgwqAgQVNTRVRfUk9PVEZTID0gQXNzZXQo
-DQo+PiArIA0KPj4gJ2h0dHBzOi8vZ2l0aHViLmNvbS9NSVBTL2xpbnV4LXRlc3QtZG93bmxvYWRz
-L3Jhdy9tYWluL3A4NzAwL3Jvb3Rmcy5leHQyJywNCj4+ICsgJ2Y5MzdlMjFiNTg4ZjBkMWQxN2Qx
-MGEwNjMwNTM5Nzk2ODY4OTdiYmJiYzVlOTYxN2E1NTgyZjdjMWY0OGU1NjUnKQ0KPj4gKw0KPj4g
-K8KgwqDCoCBkZWYgX2Jvb3RfbGludXhfdGVzdChzZWxmLCBzbXBfY291bnQpOg0KPj4gK8KgwqDC
-oMKgwqDCoMKgICIiIkNvbW1vbiBzZXR1cCBhbmQgYm9vdCB0ZXN0IGZvciBMaW51eCBvbiBCb3N0
-b24gYm9hcmQNCj4+ICsNCj4+ICvCoMKgwqDCoMKgwqDCoCBBcmdzOg0KPj4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgc21wX2NvdW50OiBOdW1iZXIgb2YgQ1BVcyB0byB1c2UgZm9yIFNNUA0KPj4g
-K8KgwqDCoMKgwqDCoMKgICIiIg0KPj4gK8KgwqDCoMKgwqDCoMKgIHNlbGYuc2V0X21hY2hpbmUo
-J2Jvc3Rvbi1haWEnKQ0KPj4gK8KgwqDCoMKgwqDCoMKgIGZ3X3BheWxvYWRfcGF0aCA9IHNlbGYu
-QVNTRVRfRldfUEFZTE9BRC5mZXRjaCgpDQo+PiArwqDCoMKgwqDCoMKgwqAgcm9vdGZzX3BhdGgg
-PSBzZWxmLkFTU0VUX1JPT1RGUy5mZXRjaCgpDQo+PiArDQo+PiArwqDCoMKgwqDCoMKgwqAgc2Vs
-Zi52bS5hZGRfYXJncygnLWNwdScsICdtaXBzLXA4NzAwJykNCj4+ICvCoMKgwqDCoMKgwqDCoCBz
-ZWxmLnZtLmFkZF9hcmdzKCctbScsICcyRycpDQo+PiArwqDCoMKgwqDCoMKgwqAgc2VsZi52bS5h
-ZGRfYXJncygnLXNtcCcsIHN0cihzbXBfY291bnQpKQ0KPj4gK8KgwqDCoMKgwqDCoMKgIHNlbGYu
-dm0uYWRkX2FyZ3MoJy1rZXJuZWwnLCBmd19wYXlsb2FkX3BhdGgpDQo+PiArwqDCoMKgwqDCoMKg
-wqAgc2VsZi52bS5hZGRfYXJncygnLWRyaXZlJywgDQo+PiBmJ2ZpbGU9e3Jvb3Rmc19wYXRofSxm
-b3JtYXQ9cmF3LHNuYXBzaG90PW9uJykNCj4+ICsNCj4+ICvCoMKgwqDCoMKgwqDCoCBzZWxmLnZt
-LnNldF9jb25zb2xlKCkNCj4+ICvCoMKgwqDCoMKgwqDCoCBzZWxmLnZtLmxhdW5jaCgpDQo+PiAr
-DQo+PiArwqDCoMKgwqDCoMKgwqAgIyBXYWl0IGZvciBPcGVuU0JJDQo+PiArwqDCoMKgwqDCoMKg
-wqAgd2FpdF9mb3JfY29uc29sZV9wYXR0ZXJuKHNlbGYsICdPcGVuU0JJJykNCj4+ICsNCj4+ICvC
-oMKgwqDCoMKgwqDCoCAjIFdhaXQgZm9yIExpbnV4IGtlcm5lbCBib290DQo+PiArwqDCoMKgwqDC
-oMKgwqAgd2FpdF9mb3JfY29uc29sZV9wYXR0ZXJuKHNlbGYsICdMaW51eCB2ZXJzaW9uJykNCj4+
-ICvCoMKgwqDCoMKgwqDCoCB3YWl0X2Zvcl9jb25zb2xlX3BhdHRlcm4oc2VsZiwgJ01hY2hpbmUg
-bW9kZWw6IE1JUFMgUDg3MDAnKQ0KPj4gKw0KPj4gK8KgwqDCoMKgwqDCoMKgICMgVGVzdCBlMTAw
-MGUgbmV0d29yayBjYXJkIGZ1bmN0aW9uYWxpdHkNCj4+ICvCoMKgwqDCoMKgwqDCoCB3YWl0X2Zv
-cl9jb25zb2xlX3BhdHRlcm4oc2VsZiwgJ2UxMDAwZScpDQo+PiArwqDCoMKgwqDCoMKgwqAgd2Fp
-dF9mb3JfY29uc29sZV9wYXR0ZXJuKHNlbGYsICdOZXR3b3JrIENvbm5lY3Rpb24nKQ0KPj4gKw0K
-Pj4gK8KgwqDCoMKgwqDCoMKgICMgV2FpdCBmb3IgYm9vdCB0byBjb21wbGV0ZSAtIHN5c3RlbSBy
-ZWFjaGVzIGxvZ2luIHByb21wdA0KPj4gK8KgwqDCoMKgwqDCoMKgIHdhaXRfZm9yX2NvbnNvbGVf
-cGF0dGVybihzZWxmLCAnUnVuIC9zYmluL2luaXQgYXMgaW5pdCANCj4+IHByb2Nlc3MnKQ0KPj4g
-Kw0KPj4gK8KgwqDCoCBkZWYgdGVzdF9ib3N0b25fYm9vdF9saW51eF9taW5fY3B1cyhzZWxmKToN
-Cj4+ICvCoMKgwqDCoMKgwqDCoCAiIiINCj4+ICvCoMKgwqDCoMKgwqDCoCBUZXN0IExpbnV4IGtl
-cm5lbCBib290IHdpdGggbWluaW11bSBDUFUgY291bnQgKDIpDQo+PiArwqDCoMKgwqDCoMKgwqAg
-IiIiDQo+PiArwqDCoMKgwqDCoMKgwqAgc2VsZi5fYm9vdF9saW51eF90ZXN0KHNtcF9jb3VudD0y
-KQ0KPj4gKw0KPj4gK8KgwqDCoCBkZWYgdGVzdF9ib3N0b25fYm9vdF9saW51eF83X2NwdXMoc2Vs
-Zik6DQo+PiArwqDCoMKgwqDCoMKgwqAgIiIiDQo+PiArwqDCoMKgwqDCoMKgwqAgVGVzdCBMaW51
-eCBrZXJuZWwgYm9vdCB3aXRoIDcgQ1BVcw0KPj4gKw0KPj4gK8KgwqDCoMKgwqDCoMKgIDcgQ1BV
-cyBpcyBhIHNwZWNpYWwgY29uZmlndXJhdGlvbiB0aGF0IHRlc3RzIG9kZCBDUFUgY291bnQNCj4+
-ICvCoMKgwqDCoMKgwqDCoCBoYW5kbGluZyBhbmQgZW5zdXJlcyBwcm9wZXIgY29yZSBkaXN0cmli
-dXRpb24gYWNyb3NzIGNsdXN0ZXJzLg0KPj4gK8KgwqDCoMKgwqDCoMKgICIiIg0KPj4gK8KgwqDC
-oMKgwqDCoMKgIHNlbGYuX2Jvb3RfbGludXhfdGVzdChzbXBfY291bnQ9NykNCj4+ICsNCj4+ICvC
-oMKgwqAgZGVmIHRlc3RfYm9zdG9uX2Jvb3RfbGludXhfMzVfY3B1cyhzZWxmKToNCj4+ICvCoMKg
-wqDCoMKgwqDCoCAiIiINCj4+ICvCoMKgwqDCoMKgwqDCoCBUZXN0IExpbnV4IGtlcm5lbCBib290
-IHdpdGggMzUgQ1BVcw0KPj4gKw0KPj4gK8KgwqDCoMKgwqDCoMKgIDM1IENQVXMgaXMgYSBzcGVj
-aWFsIGNvbmZpZ3VyYXRpb24gdGhhdCB0ZXN0cyBhIG5vbi1wb3dlci1vZi0yDQo+PiArwqDCoMKg
-wqDCoMKgwqAgQ1BVIGNvdW50IGFib3ZlIDMyLCB2YWxpZGF0aW5nIHByb3BlciBoYW5kbGluZyBv
-ZiBsYXJnZXINCj4+ICvCoMKgwqDCoMKgwqDCoCBhc3ltbWV0cmljIFNNUCBjb25maWd1cmF0aW9u
-cy4NCj4+ICvCoMKgwqDCoMKgwqDCoCAiIiINCj4+ICvCoMKgwqDCoMKgwqDCoCBzZWxmLl9ib290
-X2xpbnV4X3Rlc3Qoc21wX2NvdW50PTM1KQ0KPj4gKw0KPj4gK8KgwqDCoCBkZWYgdGVzdF9ib3N0
-b25fYm9vdF9saW51eF9tYXhfY3B1cyhzZWxmKToNCj4+ICvCoMKgwqDCoMKgwqDCoCAiIiINCj4+
-ICvCoMKgwqDCoMKgwqDCoCBUZXN0IExpbnV4IGtlcm5lbCBib290IHdpdGggbWF4aW11bSBzdXBw
-b3J0ZWQgQ1BVIGNvdW50ICg2NCkNCj4+ICvCoMKgwqDCoMKgwqDCoCAiIiINCj4+ICvCoMKgwqDC
-oMKgwqDCoCBzZWxmLl9ib290X2xpbnV4X3Rlc3Qoc21wX2NvdW50PTY0KQ0KPj4gKw0KPj4gK8Kg
-wqDCoCBkZWYgdGVzdF9ib3N0b25faW52YWxpZF9jcHVfY291bnQoc2VsZik6DQo+PiArwqDCoMKg
-wqDCoMKgwqAgIiIiDQo+PiArwqDCoMKgwqDCoMKgwqAgVGVzdCB0aGF0IDY1IENQVXMgaXMgcmVq
-ZWN0ZWQgYXMgaW52YWxpZCAobmVnYXRpdmUgdGVzdCBjYXNlKQ0KPj4gK8KgwqDCoMKgwqDCoMKg
-ICIiIg0KPj4gK8KgwqDCoMKgwqDCoMKgIGZyb20gc3VicHJvY2VzcyBpbXBvcnQgcnVuLCBQSVBF
-DQo+PiArDQo+PiArwqDCoMKgwqDCoMKgwqAgZndfcGF5bG9hZF9wYXRoID0gc2VsZi5BU1NFVF9G
-V19QQVlMT0FELmZldGNoKCkNCj4+ICvCoMKgwqDCoMKgwqDCoCByb290ZnNfcGF0aCA9IHNlbGYu
-QVNTRVRfUk9PVEZTLmZldGNoKCkNCj4+ICsNCj4+ICvCoMKgwqDCoMKgwqDCoCBjbWQgPSBbDQo+
-PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzZWxmLnFlbXVfYmluLA0KPj4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgJy1NJywgJ2Jvc3Rvbi1haWEnLA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgJy1jcHUnLCAnbWlwcy1wODcwMCcsDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAnLW0n
-LCAnMkcnLA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgJy1zbXAnLCAnNjUnLA0KPj4gK8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgJy1rZXJuZWwnLCBmd19wYXlsb2FkX3BhdGgsDQo+PiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCAnLWRyaXZlJywgZidmaWxlPXtyb290ZnNfcGF0aH0sZm9ybWF0
-PXJhdyxzbmFwc2hvdD1vbicsDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAnLW5vZ3JhcGhp
-YycNCj4+ICvCoMKgwqDCoMKgwqDCoCBdDQo+PiArDQo+PiArwqDCoMKgwqDCoMKgwqAgIyBSdW4g
-UUVNVSBhbmQgZXhwZWN0IGl0IHRvIGZhaWwgaW1tZWRpYXRlbHkuDQo+PiArwqDCoMKgwqDCoMKg
-wqAgcmVzdWx0ID0gcnVuKGNtZCwgY2FwdHVyZV9vdXRwdXQ9VHJ1ZSwgdGV4dD1UcnVlLCB0aW1l
-b3V0PTUpDQo+PiArDQo+PiArwqDCoMKgwqDCoMKgwqAgIyBDaGVjayB0aGF0IFFFTVUgZXhpdGVk
-IHdpdGggZXJyb3IgY29kZSAxDQo+PiArwqDCoMKgwqDCoMKgwqAgc2VsZi5hc3NlcnRFcXVhbChy
-ZXN1bHQucmV0dXJuY29kZSwgMSwNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgIlFFTVUgc2hvdWxkIGV4aXQgd2l0aCBjb2RlIDEgZm9yIGludmFs
-aWQgDQo+PiBTTVAgY291bnQiKQ0KPj4gKw0KPj4gK8KgwqDCoMKgwqDCoMKgICMgQ2hlY2sgZXJy
-b3IgbWVzc2FnZQ0KPj4gK8KgwqDCoMKgwqDCoMKgIHNlbGYuYXNzZXJ0SW4oJ0ludmFsaWQgU01Q
-IENQVXMgNjUnLCByZXN1bHQuc3RkZXJyLA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCAiRXJyb3IgbWVzc2FnZSBzaG91bGQgaW5kaWNhdGUgaW52YWxpZCBT
-TVAgQ1BVIA0KPj4gY291bnQiKQ0KPj4gKw0KPj4gK2lmIF9fbmFtZV9fID09ICdfX21haW5fXyc6
-DQo+PiArwqDCoMKgIFFlbXVTeXN0ZW1UZXN0Lm1haW4oKQ0KPg==
+The board model supports up to 64 harts with MIPS CPS, MIPS GCR,
+MIPS CPC, AIA plic, and AIA clint devices. The model can create
+boot code, if there is no -bios parameter. We can specify -smp x,
+cores=3Dy,thread=3Dz.
+Ex: Use 4 cores and 2 threads with each core to
+have 8 smp cpus as follows.
+  qemu-system-riscv64 -cpu mips-p8700 \
+  -m 2G -M boston-aia \
+  -smp 8,cores=3D4,threads=3D2 -kernel fw_payload.bin \
+  -drive file=3Drootfs.ext2,format=3Draw -serial stdio
+
+Signed-off-by: Chao-ying Fu <cfu@mips.com>
+Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
+Acked-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ configs/devices/riscv64-softmmu/default.mak |   1 +
+ docs/system/riscv/mips.rst                  |  20 +
+ docs/system/target-riscv.rst                |   1 +
+ hw/riscv/Kconfig                            |   6 +
+ hw/riscv/boston-aia.c                       | 471 ++++++++++++++++++++
+ hw/riscv/meson.build                        |   1 +
+ 6 files changed, 500 insertions(+)
+ create mode 100644 docs/system/riscv/mips.rst
+ create mode 100644 hw/riscv/boston-aia.c
+
+diff --git a/configs/devices/riscv64-softmmu/default.mak b/configs/devices/=
+riscv64-softmmu/default.mak
+index e485bbd1a3..a8e4d0ab33 100644
+--- a/configs/devices/riscv64-softmmu/default.mak
++++ b/configs/devices/riscv64-softmmu/default.mak
+@@ -12,3 +12,4 @@
+ # CONFIG_MICROCHIP_PFSOC=3Dn
+ # CONFIG_SHAKTI_C=3Dn
+ # CONFIG_XIANGSHAN_KUNMINGHU=3Dn
++# CONFIG_MIPS_BOSTON_AIA=3Dn
+diff --git a/docs/system/riscv/mips.rst b/docs/system/riscv/mips.rst
+new file mode 100644
+index 0000000000..97096421e1
+--- /dev/null
++++ b/docs/system/riscv/mips.rst
+@@ -0,0 +1,20 @@
++Boards for RISC-V Processors by MIPS
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++
++RISC-V processors developed by MIPS support Boston-aia board model. The bo=
+ard
++model supports up to 64 harts with MIPS CPS, MIPS GCR, MIPS CPC, AIA plic,
++and AIA clint devices. The model can create boot code, if there is no
++```-bios``` parameter. Also, we can specify ```-smp x,cores=3Dy,thread=3Dz=
+```.
++
++Running Linux kernel
++--------------------
++
++For example, to use 4 cores and 2 threads with each core to have 8 smp cpu=
+s,
++that runs on the ```mips-p8700``` CPU, run qemu as follows:
++
++.. code-block:: bash
++
++   qemu-system-riscv64 -cpu mips-p8700 \
++         -m 2G -M boston-aia \
++         -smp 8,cores=3D4,threads=3D2 -kernel fw_payload.bin \
++         -drive file=3Drootfs.ext2,format=3Draw -serial stdio
+diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+index 89b2cb732c..3ad5d1ddaf 100644
+--- a/docs/system/target-riscv.rst
++++ b/docs/system/target-riscv.rst
+@@ -68,6 +68,7 @@ undocumented; you can get a complete list by running
+=20
+    riscv/microblaze-v-generic
+    riscv/microchip-icicle-kit
++   riscv/mips
+    riscv/shakti-c
+    riscv/sifive_u
+    riscv/virt
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index fc9c35bd98..0222c93f87 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -128,3 +128,9 @@ config XIANGSHAN_KUNMINGHU
+     select RISCV_APLIC
+     select RISCV_IMSIC
+     select SERIAL_MM
++
++config MIPS_BOSTON_AIA
++    bool
++    default y
++    select PCI_EXPRESS
++    select PCI_EXPRESS_XILINX
+diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
+new file mode 100644
+index 0000000000..7d8b91ef04
+--- /dev/null
++++ b/hw/riscv/boston-aia.c
+@@ -0,0 +1,471 @@
++/*
++ * MIPS Boston-aia development board emulation.
++ *
++ * Copyright (c) 2016 Imagination Technologies
++ *
++ * Copyright (c) 2025 MIPS
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/units.h"
++
++#include "hw/boards.h"
++#include "hw/char/serial-mm.h"
++#include "hw/ide/pci.h"
++#include "hw/ide/ahci-pci.h"
++#include "hw/loader.h"
++#include "hw/riscv/cps.h"
++#include "hw/pci-host/xilinx-pcie.h"
++#include "hw/qdev-properties.h"
++#include "qapi/error.h"
++#include "qemu/error-report.h"
++#include "qemu/log.h"
++#include "chardev/char.h"
++#include "system/address-spaces.h"
++#include "system/device_tree.h"
++#include "system/system.h"
++#include "system/qtest.h"
++#include "system/runstate.h"
++
++#include <libfdt.h>
++#include "qom/object.h"
++
++#define TYPE_MIPS_BOSTON_AIA "mips-boston-aia"
++typedef struct BostonState BostonState;
++DECLARE_INSTANCE_CHECKER(BostonState, BOSTON,
++                         TYPE_MIPS_BOSTON_AIA)
++
++enum {
++    BOSTON_PCIE2,
++    BOSTON_PCIE2_MMIO,
++    BOSTON_PLATREG,
++    BOSTON_UART,
++    BOSTON_LCD,
++    BOSTON_FLASH,
++    BOSTON_HIGHDDR,
++};
++
++static const MemMapEntry boston_memmap[] =3D {
++    [BOSTON_PCIE2] =3D      { 0x14000000,     0x2000000 },
++    [BOSTON_PCIE2_MMIO] =3D { 0x16000000,      0x100000 },
++    [BOSTON_PLATREG] =3D    { 0x17ffd000,        0x1000 },
++    [BOSTON_UART] =3D       { 0x17ffe000,          0x20 },
++    [BOSTON_LCD] =3D        { 0x17fff000,           0x8 },
++    [BOSTON_FLASH] =3D      { 0x18000000,     0x8000000 },
++    [BOSTON_HIGHDDR] =3D    { 0x80000000,           0x0 },
++};
++
++/* Interrupt numbers for APLIC. */
++#define UART_INT 4
++#define PCIE2_INT 7
++
++struct BostonState {
++    SysBusDevice parent_obj;
++
++    MachineState *mach;
++    RISCVCPSState cps;
++    SerialMM *uart;
++
++    CharBackend lcd_display;
++    char lcd_content[8];
++    bool lcd_inited;
++};
++
++enum boston_plat_reg {
++    PLAT_FPGA_BUILD     =3D 0x00,
++    PLAT_CORE_CL        =3D 0x04,
++    PLAT_WRAPPER_CL     =3D 0x08,
++    PLAT_SYSCLK_STATUS  =3D 0x0c,
++    PLAT_SOFTRST_CTL    =3D 0x10,
++#define PLAT_SOFTRST_CTL_SYSRESET       (1 << 4)
++    PLAT_DDR3_STATUS    =3D 0x14,
++#define PLAT_DDR3_STATUS_LOCKED         (1 << 0)
++#define PLAT_DDR3_STATUS_CALIBRATED     (1 << 2)
++#define PLAT_DDR3_INTERFACE_RESET       (1 << 3)
++    PLAT_PCIE_STATUS    =3D 0x18,
++#define PLAT_PCIE_STATUS_PCIE0_LOCKED   (1 << 0)
++#define PLAT_PCIE_STATUS_PCIE1_LOCKED   (1 << 8)
++#define PLAT_PCIE_STATUS_PCIE2_LOCKED   (1 << 16)
++    PLAT_FLASH_CTL      =3D 0x1c,
++    PLAT_SPARE0         =3D 0x20,
++    PLAT_SPARE1         =3D 0x24,
++    PLAT_SPARE2         =3D 0x28,
++    PLAT_SPARE3         =3D 0x2c,
++    PLAT_MMCM_DIV       =3D 0x30,
++#define PLAT_MMCM_DIV_CLK0DIV_SHIFT     0
++#define PLAT_MMCM_DIV_INPUT_SHIFT       8
++#define PLAT_MMCM_DIV_MUL_SHIFT         16
++#define PLAT_MMCM_DIV_CLK1DIV_SHIFT     24
++    PLAT_BUILD_CFG      =3D 0x34,
++#define PLAT_BUILD_CFG_IOCU_EN          (1 << 0)
++#define PLAT_BUILD_CFG_PCIE0_EN         (1 << 1)
++#define PLAT_BUILD_CFG_PCIE1_EN         (1 << 2)
++#define PLAT_BUILD_CFG_PCIE2_EN         (1 << 3)
++    PLAT_DDR_CFG        =3D 0x38,
++#define PLAT_DDR_CFG_SIZE               (0xf << 0)
++#define PLAT_DDR_CFG_MHZ                (0xfff << 4)
++    PLAT_NOC_PCIE0_ADDR =3D 0x3c,
++    PLAT_NOC_PCIE1_ADDR =3D 0x40,
++    PLAT_NOC_PCIE2_ADDR =3D 0x44,
++    PLAT_SYS_CTL        =3D 0x48,
++};
++
++static void boston_lcd_event(void *opaque, QEMUChrEvent event)
++{
++    BostonState *s =3D opaque;
++    if (event =3D=3D CHR_EVENT_OPENED && !s->lcd_inited) {
++        qemu_chr_fe_printf(&s->lcd_display, "        ");
++        s->lcd_inited =3D true;
++    }
++}
++
++static uint64_t boston_lcd_read(void *opaque, hwaddr addr,
++                                unsigned size)
++{
++    BostonState *s =3D opaque;
++    uint64_t val =3D 0;
++
++    switch (size) {
++    case 8:
++        val |=3D (uint64_t)s->lcd_content[(addr + 7) & 0x7] << 56;
++        val |=3D (uint64_t)s->lcd_content[(addr + 6) & 0x7] << 48;
++        val |=3D (uint64_t)s->lcd_content[(addr + 5) & 0x7] << 40;
++        val |=3D (uint64_t)s->lcd_content[(addr + 4) & 0x7] << 32;
++        /* fall through */
++    case 4:
++        val |=3D (uint64_t)s->lcd_content[(addr + 3) & 0x7] << 24;
++        val |=3D (uint64_t)s->lcd_content[(addr + 2) & 0x7] << 16;
++        /* fall through */
++    case 2:
++        val |=3D (uint64_t)s->lcd_content[(addr + 1) & 0x7] << 8;
++        /* fall through */
++    case 1:
++        val |=3D (uint64_t)s->lcd_content[(addr + 0) & 0x7];
++        break;
++    }
++
++    return val;
++}
++
++static void boston_lcd_write(void *opaque, hwaddr addr,
++                             uint64_t val, unsigned size)
++{
++    BostonState *s =3D opaque;
++
++    switch (size) {
++    case 8:
++        s->lcd_content[(addr + 7) & 0x7] =3D val >> 56;
++        s->lcd_content[(addr + 6) & 0x7] =3D val >> 48;
++        s->lcd_content[(addr + 5) & 0x7] =3D val >> 40;
++        s->lcd_content[(addr + 4) & 0x7] =3D val >> 32;
++        /* fall through */
++    case 4:
++        s->lcd_content[(addr + 3) & 0x7] =3D val >> 24;
++        s->lcd_content[(addr + 2) & 0x7] =3D val >> 16;
++        /* fall through */
++    case 2:
++        s->lcd_content[(addr + 1) & 0x7] =3D val >> 8;
++        /* fall through */
++    case 1:
++        s->lcd_content[(addr + 0) & 0x7] =3D val;
++        break;
++    }
++
++    qemu_chr_fe_printf(&s->lcd_display,
++                       "\r%-8.8s", s->lcd_content);
++}
++
++static const MemoryRegionOps boston_lcd_ops =3D {
++    .read =3D boston_lcd_read,
++    .write =3D boston_lcd_write,
++    .endianness =3D DEVICE_NATIVE_ENDIAN,
++};
++
++static uint64_t boston_platreg_read(void *opaque, hwaddr addr,
++                                    unsigned size)
++{
++    BostonState *s =3D opaque;
++    uint32_t gic_freq, val;
++
++    switch (addr & 0xffff) {
++    case PLAT_FPGA_BUILD:
++    case PLAT_CORE_CL:
++    case PLAT_WRAPPER_CL:
++        return 0;
++    case PLAT_DDR3_STATUS:
++        return PLAT_DDR3_STATUS_LOCKED | PLAT_DDR3_STATUS_CALIBRATED
++               | PLAT_DDR3_INTERFACE_RESET;
++    case PLAT_MMCM_DIV:
++        gic_freq =3D 25000000 / 1000000;
++        val =3D gic_freq << PLAT_MMCM_DIV_INPUT_SHIFT;
++        val |=3D 1 << PLAT_MMCM_DIV_MUL_SHIFT;
++        val |=3D 1 << PLAT_MMCM_DIV_CLK0DIV_SHIFT;
++        val |=3D 1 << PLAT_MMCM_DIV_CLK1DIV_SHIFT;
++        return val;
++    case PLAT_BUILD_CFG:
++        val =3D PLAT_BUILD_CFG_PCIE0_EN;
++        val |=3D PLAT_BUILD_CFG_PCIE1_EN;
++        val |=3D PLAT_BUILD_CFG_PCIE2_EN;
++        return val;
++    case PLAT_DDR_CFG:
++        val =3D s->mach->ram_size / GiB;
++        assert(!(val & ~PLAT_DDR_CFG_SIZE));
++        val |=3D PLAT_DDR_CFG_MHZ;
++        return val;
++    default:
++        qemu_log_mask(LOG_UNIMP, "Read platform register 0x%" HWADDR_PRIx =
+"\n",
++                      addr & 0xffff);
++        return 0;
++    }
++}
++
++static void boston_platreg_write(void *opaque, hwaddr addr,
++                                 uint64_t val, unsigned size)
++{
++    if (size !=3D 4) {
++        qemu_log_mask(LOG_UNIMP, "%uB platform register write\n", size);
++        return;
++    }
++
++    switch (addr & 0xffff) {
++    case PLAT_FPGA_BUILD:
++    case PLAT_CORE_CL:
++    case PLAT_WRAPPER_CL:
++    case PLAT_DDR3_STATUS:
++    case PLAT_PCIE_STATUS:
++    case PLAT_MMCM_DIV:
++    case PLAT_BUILD_CFG:
++    case PLAT_DDR_CFG:
++        /* read only */
++        break;
++    case PLAT_SOFTRST_CTL:
++        if (val & PLAT_SOFTRST_CTL_SYSRESET) {
++            qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
++        }
++        break;
++    default:
++        qemu_log_mask(LOG_UNIMP, "Write platform register 0x%" HWADDR_PRIx
++                      " =3D 0x%" PRIx64 "\n", addr & 0xffff, val);
++        break;
++    }
++}
++
++static const MemoryRegionOps boston_platreg_ops =3D {
++    .read =3D boston_platreg_read,
++    .write =3D boston_platreg_write,
++    .endianness =3D DEVICE_NATIVE_ENDIAN,
++    .impl =3D {
++        .min_access_size =3D 4,
++        .max_access_size =3D 4,
++    },
++};
++
++static const TypeInfo boston_device =3D {
++    .name          =3D TYPE_MIPS_BOSTON_AIA,
++    .parent        =3D TYPE_SYS_BUS_DEVICE,
++    .instance_size =3D sizeof(BostonState),
++};
++
++static void boston_register_types(void)
++{
++    type_register_static(&boston_device);
++}
++type_init(boston_register_types)
++
++#define NUM_INSNS 6
++static void gen_firmware(uint32_t *p)
++{
++    int i;
++    uint32_t reset_vec[NUM_INSNS] =3D {
++           /* CM relocate */
++           0x1fb802b7,     /* li   t0,0x1fb80000   */
++           0x16100337,     /* li   t1,0x16100000   */
++           0x0062b423,     /* sd   t1,8(t0)        */
++           /* Jump to 0x80000000 */
++           0x00100293,     /* li   t0,1            */
++           0x01f29293,     /* slli t0,t0,1f        */
++           0x00028067      /* jr   t0              */
++    };
++
++    for (i =3D 0; i < NUM_INSNS; i++) {
++        *p++ =3D reset_vec[i];
++    }
++}
++
++static inline XilinxPCIEHost *
++xilinx_pcie_init(MemoryRegion *sys_mem, uint32_t bus_nr,
++                 hwaddr cfg_base, uint64_t cfg_size,
++                 hwaddr mmio_base, uint64_t mmio_size,
++                 qemu_irq irq)
++{
++    DeviceState *dev;
++    MemoryRegion *cfg, *mmio;
++
++    dev =3D qdev_new(TYPE_XILINX_PCIE_HOST);
++
++    qdev_prop_set_uint32(dev, "bus_nr", bus_nr);
++    qdev_prop_set_uint64(dev, "cfg_base", cfg_base);
++    qdev_prop_set_uint64(dev, "cfg_size", cfg_size);
++    qdev_prop_set_uint64(dev, "mmio_base", mmio_base);
++    qdev_prop_set_uint64(dev, "mmio_size", mmio_size);
++
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++
++    cfg =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
++    memory_region_add_subregion_overlap(sys_mem, cfg_base, cfg, 0);
++
++    mmio =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
++    memory_region_add_subregion_overlap(sys_mem, 0, mmio, 0);
++
++    qdev_connect_gpio_out_named(dev, "interrupt_out", 0, irq);
++
++    return XILINX_PCIE_HOST(dev);
++}
++
++static void boston_mach_init(MachineState *machine)
++{
++    DeviceState *dev;
++    BostonState *s;
++    MemoryRegion *flash, *ddr_low_alias, *lcd, *platreg;
++    MemoryRegion *sys_mem =3D get_system_memory();
++    XilinxPCIEHost *pcie2;
++    PCIDevice *pdev;
++    AHCIPCIState *ich9;
++    DriveInfo *hd[6];
++    Chardev *chr;
++    int fw_size;
++
++    if ((machine->ram_size % GiB) ||
++        (machine->ram_size > (4 * GiB))) {
++        error_report("Memory size must be 1GB, 2GB, 3GB, or 4GB");
++        exit(1);
++    }
++
++    if (machine->smp.cpus / machine->smp.cores / machine->smp.threads > 1)=
+ {
++        error_report(
++            "Invalid -smp x,cores=3Dy,threads=3Dz. The max number of clust=
+ers "
++            "supported is 1");
++        exit(1);
++    }
++
++    dev =3D qdev_new(TYPE_MIPS_BOSTON_AIA);
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++
++    s =3D BOSTON(dev);
++    s->mach =3D machine;
++
++    object_initialize_child(OBJECT(machine), "cps", &s->cps, TYPE_RISCV_CP=
+S);
++    object_property_set_str(OBJECT(&s->cps), "cpu-type", machine->cpu_type=
+,
++                            &error_fatal);
++    object_property_set_uint(OBJECT(&s->cps), "num-vp", machine->smp.cpus,
++                             &error_fatal);
++    object_property_set_uint(OBJECT(&s->cps), "num-hart", machine->smp.thr=
+eads,
++                             &error_fatal);
++    object_property_set_uint(OBJECT(&s->cps), "num-core", machine->smp.cor=
+es,
++                             &error_fatal);
++    object_property_set_uint(OBJECT(&s->cps), "gcr-base", GCR_BASE_ADDR,
++                             &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(&s->cps), &error_fatal);
++
++    sysbus_mmio_map_overlap(SYS_BUS_DEVICE(&s->cps), 0, 0, 1);
++
++    flash =3D  g_new(MemoryRegion, 1);
++    memory_region_init_rom(flash, NULL, "boston.flash",
++                           boston_memmap[BOSTON_FLASH].size, &error_fatal)=
+;
++    memory_region_add_subregion_overlap(sys_mem,
++                                        boston_memmap[BOSTON_FLASH].base,
++                                        flash, 0);
++
++    memory_region_add_subregion_overlap(sys_mem,
++                                        boston_memmap[BOSTON_HIGHDDR].base=
+,
++                                        machine->ram, 0);
++
++    ddr_low_alias =3D g_new(MemoryRegion, 1);
++    memory_region_init_alias(ddr_low_alias, NULL, "boston_low.ddr",
++                             machine->ram, 0,
++                             MIN(machine->ram_size, (256 * MiB)));
++    memory_region_add_subregion_overlap(sys_mem, 0, ddr_low_alias, 0);
++
++    pcie2 =3D xilinx_pcie_init(sys_mem, 2,
++                             boston_memmap[BOSTON_PCIE2].base,
++                             boston_memmap[BOSTON_PCIE2].size,
++                             boston_memmap[BOSTON_PCIE2_MMIO].base,
++                             boston_memmap[BOSTON_PCIE2_MMIO].size,
++                             qdev_get_gpio_in(s->cps.aplic, PCIE2_INT));
++
++    platreg =3D g_new(MemoryRegion, 1);
++    memory_region_init_io(platreg, NULL, &boston_platreg_ops, s,
++                          "boston-platregs",
++                          boston_memmap[BOSTON_PLATREG].size);
++    memory_region_add_subregion_overlap(sys_mem,
++                          boston_memmap[BOSTON_PLATREG].base, platreg, 0);
++
++    s->uart =3D serial_mm_init(sys_mem, boston_memmap[BOSTON_UART].base, 2=
+,
++                             qdev_get_gpio_in(s->cps.aplic, UART_INT), 100=
+00000,
++                             serial_hd(0), DEVICE_NATIVE_ENDIAN);
++
++    lcd =3D g_new(MemoryRegion, 1);
++    memory_region_init_io(lcd, NULL, &boston_lcd_ops, s, "boston-lcd", 0x8=
+);
++    memory_region_add_subregion_overlap(sys_mem,
++                                        boston_memmap[BOSTON_LCD].base, lc=
+d, 0);
++
++    chr =3D qemu_chr_new("lcd", "vc:320x240", NULL);
++    qemu_chr_fe_init(&s->lcd_display, chr, NULL);
++    qemu_chr_fe_set_handlers(&s->lcd_display, NULL, NULL,
++                             boston_lcd_event, NULL, s, NULL, true);
++
++    pdev =3D pci_create_simple_multifunction(&PCI_BRIDGE(&pcie2->root)->se=
+c_bus,
++                                           PCI_DEVFN(0, 0), TYPE_ICH9_AHCI=
+);
++    ich9 =3D ICH9_AHCI(pdev);
++    g_assert(ARRAY_SIZE(hd) =3D=3D ich9->ahci.ports);
++    ide_drive_get(hd, ich9->ahci.ports);
++    ahci_ide_create_devs(&ich9->ahci, hd);
++
++    if (machine->firmware) {
++        fw_size =3D load_image_targphys(machine->firmware,
++                                      0x1fc00000, 4 * MiB);
++        if (fw_size =3D=3D -1) {
++            error_report("unable to load firmware image '%s'",
++                          machine->firmware);
++            exit(1);
++        }
++        if (machine->kernel_filename) {
++                fw_size =3D load_image_targphys(machine->kernel_filename,
++                                              0x80000000, 64 * MiB);
++                if (fw_size =3D=3D -1) {
++                    error_report("unable to load kernel image '%s'",
++                                  machine->kernel_filename);
++                    exit(1);
++                }
++        }
++    } else if (machine->kernel_filename) {
++        fw_size =3D load_image_targphys(machine->kernel_filename,
++                                      0x80000000, 64 * MiB);
++        if (fw_size =3D=3D -1) {
++            error_report("unable to load kernel image '%s'",
++                          machine->kernel_filename);
++            exit(1);
++        }
++
++        gen_firmware(memory_region_get_ram_ptr(flash) + 0x7c00000);
++    } else if (!qtest_enabled()) {
++        error_report("Please provide either a -kernel or -bios argument");
++        exit(1);
++    }
++}
++
++static void boston_mach_class_init(MachineClass *mc)
++{
++    mc->desc =3D "MIPS Boston-aia";
++    mc->init =3D boston_mach_init;
++    mc->block_default_type =3D IF_IDE;
++    mc->default_ram_size =3D 2 * GiB;
++    mc->default_ram_id =3D "boston.ddr";
++    mc->max_cpus =3D MAX_HARTS;
++    mc->default_cpu_type =3D TYPE_RISCV_CPU_MIPS_P8700;
++}
++
++DEFINE_MACHINE("boston-aia", boston_mach_class_init)
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index 9023b80087..533472e22a 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -16,5 +16,6 @@ riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files(=
+'microblaze-v-generic.c
+ riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan=
+_kmh.c'))
+=20
+ riscv_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
++riscv_ss.add(when: 'CONFIG_MIPS_BOSTON_AIA', if_true: files('boston-aia.c'=
+))
+=20
+ hw_arch +=3D {'riscv': riscv_ss}
+--=20
+2.34.1
 
