@@ -4,110 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA44CCD185
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Oct 2025 03:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93950CCD194
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Oct 2025 12:08:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v9Eju-00064g-9P; Wed, 15 Oct 2025 23:33:18 -0400
+	id 1v9Mle-0007x9-Jg; Thu, 16 Oct 2025 08:07:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1v9Ejs-00064F-JY
- for qemu-riscv@nongnu.org; Wed, 15 Oct 2025 23:33:16 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v9MlZ-0007wI-Hz
+ for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 08:07:34 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1v9Ejq-0006Zv-Hn
- for qemu-riscv@nongnu.org; Wed, 15 Oct 2025 23:33:16 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-62fca01f0d9so509627a12.3
- for <qemu-riscv@nongnu.org>; Wed, 15 Oct 2025 20:33:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1v9MlQ-0006po-QE
+ for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 08:07:33 -0400
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-426fc536b5dso343324f8f.3
+ for <qemu-riscv@nongnu.org>; Thu, 16 Oct 2025 05:07:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1760585592; x=1761190392; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zDx4vUBTXYtsKZguPSMTeW4z2LPKCHzenwLZ1f4KAqs=;
- b=XaU6jKDeQMkRHo/ZqzXwb86PkXx14qF6j9/+lknRaeQRd9HQHkdKFDU5zcZG67V0nM
- Z6KWw9PjDyG9SWno9cuPDGqLAH/HnlY/p1c3SbgR0w5V6jUKwAWTqSnrmlDAxB4hNUPY
- /DShG3S2pimpHPD5Q9vI/7mb2ejcmni6BVGrIS64AiWQnN3ymEsC+cKw6UPv0X/z2Xs6
- EudEGWO2RFxBWedNBR41gn53Nq4MZxNWZ6+PInq76HOIMeo948HuCSgkYyNj6b8YwY9A
- ctYs251/tgPOIjN9D1/6WEkSFsQQN++JJ9je4iSOUn02XUFJ8/kwpxzvtzNvzRY+otuk
- Jd3g==
+ d=linaro.org; s=google; t=1760616438; x=1761221238; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8nl8+aCVc6MnHi449xOsXy7u+daf8qJov2bS5j31z5E=;
+ b=iBSIjEheruCM2mc7EXJ5p8gAg7jutqV5cQepdK1cFuL0YSXGc2KIUTenBAbdiUinea
+ fNO+U3IX+UU37x2uuR7v6mPeIgLiffiPOJbQ0CEnlTbDxldYZN2Wtfie8SE2+pP/Ywe3
+ CKcxW8C63D+SF1RThJkSUXMzWQpdRsbmLUZ/BqVX1kV6jVM6jMsFS0Ns5q45NcSKPaF4
+ PQkXiu+rH0X1mjQZTuEdNZs8rNqBNbUTHrzEy5cCiOeYNhNnUwGONzicVcXcLId5KNaI
+ z1C0rpJK/rxDiTJ1EjqLTvOVO9BsZ+ygOhkkVuE816fpX18X8X6YV4SzFKTQksNCcBU1
+ MvRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760585592; x=1761190392;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zDx4vUBTXYtsKZguPSMTeW4z2LPKCHzenwLZ1f4KAqs=;
- b=Dm3DjM3NPlP95V0JajrYSgblsfZ946Z8IQz1LQQ6pof+IWFDsYiCs3zK4by/8cuTYa
- q+nMyu33+L8rW/nXHhyQTQmwhM/ajC30RIsgk9efvmm9G/Pq50UikMV9xlvfItKNTXvn
- Itaqpgh8L9f7ClVga6QV/E2ALUSyc3jv0JctYTNEF+V0HjLs9rfOxGFd0D/1wLpEEsGh
- IXG7P+BxyCP1Yc5OjDxSCHoCEWsTgjz4IGeTGn6GZY5z5qD87fGc0z6Sj3DvPuGZr/9D
- r2FWIuWu4y64EtWY5cCyTZGJMuVJQDBX61jkK2Oj1eC7OQ/U+Ft6rfPbnpIjvhDV9Gxa
- BLZA==
+ d=1e100.net; s=20230601; t=1760616438; x=1761221238;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8nl8+aCVc6MnHi449xOsXy7u+daf8qJov2bS5j31z5E=;
+ b=jsTFNFu0pklUb2sUgSxJhdCLuIp5F0WA6HCrrj9H7D7WseJCYeRt3CD5wefkAAXx0E
+ KkJuyAGxJNCGnfKiug4FXoLxqXhVWibYM8tUAeCM2LW85wguTyKybseJtQqmCB46O+uN
+ hLYo1paC1KLSCfGbw85F9OSSJWABEg6A/y6IZa0FhkPvBYzumZy05gmfUiCRoBjFh6/D
+ uDPjby65w4dTRElizq1xsbIkvxBCSE1tT9w+E1KNTjc92e9NH3UrKRfEF7LLeE49vaN6
+ 6WAt+EihEoUYIDqUTOf4szsvpGb0cwkDP1/c7RmQ9gEAs/XDLZjx84vAE3TylceM3h3B
+ bNfA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXw2nK6wS7R70X3yg+FNslCfsCUbmLb28IxK75zyx08BH4S50NSHThK31xSSqn4j8nT/JduLXptTcs6@nongnu.org
-X-Gm-Message-State: AOJu0YxviSt0eKSls2jQVlmZE+T5blBHtQ5vV8WuBBenpGaDS4WR47eT
- Eb1aYntzan0e2tV+UUl8otvesaplRCHerOPKaXeeS/rmKEU0temUBnr34l6lWnnnFLK0dnWT3Sv
- 6cjsDIGvZBZ3Fw7gfGQvvc8PeplcFHoPpFM3aD0k54A==
-X-Gm-Gg: ASbGncveAHrdTvhgrtvJk+CUmqBPRvea1GlpcQ6KvluKT1j+uTC2pUB+VGWOwG3Ie1b
- ntCb6vl8/PxHQxqYbUX5r5e5TD1mcAKi3GR7J4AEITJrYtbV5rP87KropfnsO3V0cjORbXy3hfd
- qxb+VE/KcqjlLE91gcxYTay+1If8sa4Q99+WA8IYi+TFMEN80pAnmbNgzDV0intl6XrS+3ri6cP
- 2D9k1U6FaWujXgwTr1nY84v7wNjB+qK7Wn/Jf1dxxrS2QmGfQoYpY00OlN5jgkDQxFmgrC+fQ==
-X-Google-Smtp-Source: AGHT+IFNR/dqk2CasjiAn0KLZAiGx7xDLkCVH3uRAftR/yiY8CdCTNrYgybdPcB+mDBG7egGKEqijznpJZsOEfSVEGc=
-X-Received: by 2002:a05:6402:847:b0:637:8faa:9df7 with SMTP id
- 4fb4d7f45d1cf-639d5c59ca3mr28678606a12.29.1760585591629; Wed, 15 Oct 2025
- 20:33:11 -0700 (PDT)
+ AJvYcCVk/c8RJ0S2GM5D5rOrmJoMKB9zp5V2Wzqd9/yPUGS273LGVypjHx6M2kOooRr3vVILqSVGX47aNuhS@nongnu.org
+X-Gm-Message-State: AOJu0YybH15bexUoAyFayrA5JcR7fQUSltKriPoT2P0KuydN8CPGyn8a
+ pPO4QN7mvBo3vbdn03t2NOTyhiskyYRV4E4Bd/iZkCBDGIRWNm4xX4WxsqL/3cDnHz4=
+X-Gm-Gg: ASbGncu22Q4PlMWwsRm8dbBgZ7RAQgd7haIEL8286ukvyk2QJVI4OiCJAzvnmwO3oZV
+ H7rx109iJqRpjM6dFDEaMZwQindu5LVcB1BU+52FiogTrFoqIpMdm/iwLy+JiHyL4bEkE7s9wrQ
+ zcBMTyg5gGHKbi0Eq0Ci+1C7vEajInOPgQy5vi/8Cp8hIfzlumnmUsQoQIj3+iLuZt2ya1QyKrw
+ ns5qDzSgFM5JT97z6pG8N2uZYlGqMXGEGl6p0O3AOXoJYCh2Fe4OX9DlqBl9MjdRYbdjjzvmBQK
+ nGX1JKhYMFKY9BRIr9+6EMpjRUJqne9dsyJ55wXgJxNLmJqAMJb+vlKyJ4B6JD6s+R9SmlYZKUr
+ z6a9lCZ9xoL9LCbbzPd3oun6tueUOxDePYOhSwijsoyswaAt58SCW/kn/fciCD+1qt2VV5hFjXx
+ GJJzCARJIECcH0lMJCNUk0TfJ6YttZA0erSCEF/vxnwYVBUtPyz1tcWeniXw==
+X-Google-Smtp-Source: AGHT+IF+gUKvX2um9gIt2ygqlGKR3ctLIlBvcTtGe0sYSWZWeLQvlmodCoil7b1kYlwpX7W7wYLRgw==
+X-Received: by 2002:a05:6000:2010:b0:402:4142:c7a7 with SMTP id
+ ffacd0b85a97d-42666ac6f35mr23553877f8f.16.1760616437597; 
+ Thu, 16 Oct 2025 05:07:17 -0700 (PDT)
+Received: from [192.168.69.221] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-426ce5cfe74sm33816743f8f.35.2025.10.16.05.07.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Oct 2025 05:07:16 -0700 (PDT)
+Message-ID: <7b263ac1-b8a8-475c-a59a-23b8d419f6e6@linaro.org>
+Date: Thu, 16 Oct 2025 14:07:15 +0200
 MIME-Version: 1.0
-References: <20250417105249.18232-1-jim.shu@sifive.com>
- <20250417105249.18232-5-jim.shu@sifive.com>
- <e7616702-8a7b-4617-8433-236a1086bdf9@ventanamicro.com>
- <CALw707rstv76_oESKHzbeuPakSesWNBXogQoCJN4pHMj_wz7eg@mail.gmail.com>
- <125b7913-c8c0-448b-9f3f-3b893436b901@ventanamicro.com>
-In-Reply-To: <125b7913-c8c0-448b-9f3f-3b893436b901@ventanamicro.com>
-From: Jim Shu <jim.shu@sifive.com>
-Date: Thu, 16 Oct 2025 11:33:00 +0800
-X-Gm-Features: AS18NWA5bA5jEA-tEDP_afI62he9vjOlSwWxHC7oCalyWi0_exQBl7o125tVLJQ
-Message-ID: <CALw707pE=oXYWrYndA8jaxeqxD-vM1bcqSMV_U8_vfYuGy-ZUg@mail.gmail.com>
-Subject: Re: [PATCH v2 04/18] exec: Add RISC-V WorldGuard WID to MemTxAttrs
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>, 
- Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
- Michael Rolnik <mrolnik@gmail.com>, 
- Helge Deller <deller@gmx.de>, Song Gao <gaosong@loongson.cn>,
- Laurent Vivier <laurent@vivier.eu>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
- Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=jim.shu@sifive.com; helo=mail-ed1-x531.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/16] overall: Replace HOST_BIG_ENDIAN #ifdef with
+ runtime if() check
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org
+References: <20251010134226.72221-1-philmd@linaro.org>
+ <5e4d3a1a-ee13-40c3-b470-d68f5b6b4ad1@redhat.com>
+ <614c4af0-1fea-4d48-bb52-a1ef60302b9a@linaro.org>
+In-Reply-To: <614c4af0-1fea-4d48-bb52-a1ef60302b9a@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SUSPICIOUS_RECIPS=2.51,
+ T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,101 +106,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
+On 10/10/25 16:37, Philippe Mathieu-Daudé wrote:
+> On 10/10/25 15:51, Paolo Bonzini wrote:
+>> On 10/10/25 15:42, Philippe Mathieu-Daudé wrote:
+>>> Replace compile-time #ifdef with a runtime check to ensure all code
+>>> paths are built and tested. This reduces build-time configuration
+>>> complexity and improves maintainability.
+>>>
+>>> No functional change intended.
+>>
+>> No need to repost (and I didn't review), but please change throughout 
+>> the commit message to mention a *compile-time* if() check.  The code 
+>> for the wrong endianness will not make it past compilation, and 
+>> mentioning runtime checks left me wondering if you had mistaken HOST 
+>> for TARGET.
+> 
+> I want HOST, and hope the changes are correct: I meant to express the
+> code is elided by the compiler, indeed not at *runtime* 🤦 I'll reword
+> the commit description. Thanks for catching this.
 
-Thanks for the suggestion. I will add it in the v3 patches.
+What about:
 
-- Jim
+   Replace preprocessor-time #ifdef with a compile-time check
+   to ensure all code paths are built and tested. This reduces
+   build-time configuration complexity and simplifies code
+   maintainability.
 
-On Mon, Oct 13, 2025 at 1:27=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
->
->
-> On 10/8/25 2:54 AM, Jim Shu wrote:
-> > Hi Daniel,
-> >
-> > Both '_reserved1' and '_reserved2' fields are only for padding
-> > MemTxAttrs struct to be 8-byte [1], so I remove a 1-byte reserved
-> > field when adding 'world_id' field to it.
-> > Is it ok for you? Or you think it is better to separate them.
->
-> It's fine. I suggest adding this explanation in the commit msg to avoid
-> further questions about it.
->
->
-> Thanks,
->
-> Daniel
->
-> >
-> >
-> > [1]
-> > commit 5014e33b1e00d330f13df33c09a3932ac88f8d94
-> > Link: https://lore.kernel.org/r/20250121151322.171832-2-zhao1.liu@intel=
-.com
-> >
-> > Thanks!
-> >
-> > On Sat, Aug 9, 2025 at 8:34=E2=80=AFPM Daniel Henrique Barboza
-> > <dbarboza@ventanamicro.com> wrote:
-> >>
-> >>
-> >>
-> >> On 4/17/25 7:52 AM, Jim Shu wrote:
-> >>> RISC-V WorldGuard will add 5-bit world_id (WID) to the each memory
-> >>> transaction on the bus. The wgChecker in front of RAM or peripherals
-> >>> MMIO could do the access control based on the WID. It is similar to A=
-RM
-> >>> TrustZone NS bit, but the WID is 5-bit.
-> >>>
-> >>> The common implementation of WID is AXI4 AxUSER signal.
-> >>>
-> >>> Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> >>> ---
-> >>>    include/exec/memattrs.h | 8 ++++++--
-> >>>    1 file changed, 6 insertions(+), 2 deletions(-)
-> >>>
-> >>> diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
-> >>> index 8db1d30464..7a6866fa41 100644
-> >>> --- a/include/exec/memattrs.h
-> >>> +++ b/include/exec/memattrs.h
-> >>> @@ -54,6 +54,11 @@ typedef struct MemTxAttrs {
-> >>>         */
-> >>>        unsigned int pid:8;
-> >>>
-> >>> +    /*
-> >>> +     * RISC-V WorldGuard: the 5-bit WID field of memory access.
-> >>> +     */
-> >>> +    unsigned int world_id:5;
-> >>> +
-> >>>        /*
-> >>>         * Bus masters which don't specify any attributes will get thi=
-s
-> >>>         * (via the MEMTXATTRS_UNSPECIFIED constant), so that we can
-> >>> @@ -63,8 +68,7 @@ typedef struct MemTxAttrs {
-> >>>         */
-> >>>        bool unspecified;
-> >>>
-> >>> -    uint8_t _reserved1;
-> >>> -    uint16_t _reserved2;
-> >>> +    uint16_t _reserved1;
-> >>
-> >> Is 'reserved2' unused? Not sure why you ended up removing it in this p=
-atch.
-> >>
-> >> If it's really unused it's ok to remove it but this should be done in =
-separate.
-> >>
-> >>
-> >> Thanks,
-> >>
-> >> Daniel
-> >>
-> >>
-> >>>    } MemTxAttrs;
-> >>>
-> >>>    QEMU_BUILD_BUG_ON(sizeof(MemTxAttrs) > 8);
-> >>
->
+?
 
