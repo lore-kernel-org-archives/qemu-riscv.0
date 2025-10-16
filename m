@@ -4,158 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C35CCD192
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Oct 2025 13:12:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA44CCD185
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Oct 2025 03:33:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v91EP-0003Nf-H3; Wed, 15 Oct 2025 09:07:53 -0400
+	id 1v9Eju-00064g-9P; Wed, 15 Oct 2025 23:33:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1v91EK-0003LG-1l; Wed, 15 Oct 2025 09:07:48 -0400
-Received: from mail-francesouthazlp170110003.outbound.protection.outlook.com
- ([2a01:111:f403:c207::3] helo=MRWPR03CU001.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1v91EF-0000nK-7P; Wed, 15 Oct 2025 09:07:45 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kEztOYoVGPMCNBNkOi+EmnyoavtvyaAPU5ZN0Uepd50ADaNnnn2F3Z/rtc3matyFGgBgmubyyDc7JAfgDnNt0OZKSorpFJmKik0HLCCNr5DrOMvdRXg1DNbFC8YHTXn95yr281ZiynLwuwsgLte9kGAPUAVB56GnvLmk1DnUO+J519IcHtvoh2PNyNT/Cfk6FWJprj4cF7jqbFKehe5QIWiwxABPuDKTuecc0GOsuqpf2dPTo95bzbRDbv5yQn+pm8l5dLeNf1jGs6RnvVdVLnKvyYf824O3Snt6K3gVz06sAw9T/PsHy0OLaQL5bOZGxpVuitoougIOdJADcv3JxA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tckR7EAHvGngm2H8QuXDOk3uSFLNo9c0HQIWueNfNzU=;
- b=ns7nO/XHbIvCN0vJT1Toi8KquLD+fITFbIEulBbHSgMwnRDS6kIpU3Lwol9IEg82NLJ8QXkyWObRGwIOnjIwd0TRZKSYQoS/K0F5xAjE3zNZcu31JrTJyi8xPfEkAIrQSqR+vbmaVae5+GMpjyWSfW85egMExFAa2HStDzJsEWidJqhiaebpxB9Gbwld6U5NdJA1r288ETyoJpsPTE7c1XJrKWJzFPwV7C8na5K+nTVSKxgS3cB2eBVKj80+hWftvmltUOACftgEosKaMtEXLPBHq6ZZzotjBthAc6TOhw92qBDc028fff1kwDyi/cYYlCoYj4BpNdQTNvtCXTCwIg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=htecgroup.com; dmarc=pass action=none
- header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tckR7EAHvGngm2H8QuXDOk3uSFLNo9c0HQIWueNfNzU=;
- b=E7KqrkLVfKFiottb4GncKotsBT9J1F3mj/gceNVd9z8La5Hn4kEirZczwGUc52PEoR+xAaFdVruM+fHdrn/oezy09lCKvOq+xhA89q6HLQebA2DtTXyMTjSZZfe3Afje/5d1SyIOBJ/w83wQ4S3WWsTzaSrujj4xM4f9tpjb4tmxX8dx12e6VoEsurXLRh4O93gfZKASjrip95Qo+i90rMeySz9YgodCQMzJyErssF0XYo22K2DC0alCmGvstVnmvZEselTLLrEKDj8ZL+7K/44WJ8NUBpvxh/LKyKj98z7ELu4BS/xE2GpXEekUqs6TV0tBoimgKwW0pqzYZkod/A==
-Received: from AS4PR09MB6518.eurprd09.prod.outlook.com (2603:10a6:20b:4fb::5)
- by DB9PR09MB6057.eurprd09.prod.outlook.com (2603:10a6:10:3da::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.13; Wed, 15 Oct
- 2025 13:07:06 +0000
-Received: from AS4PR09MB6518.eurprd09.prod.outlook.com
- ([fe80::ad50:891a:847c:580a]) by AS4PR09MB6518.eurprd09.prod.outlook.com
- ([fe80::ad50:891a:847c:580a%4]) with mapi id 15.20.9203.009; Wed, 15 Oct 2025
- 13:07:05 +0000
-From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cfu@mips.com"
- <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>,
- "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>, "philmd@linaro.org"
- <philmd@linaro.org>, "alistair23@gmail.com" <alistair23@gmail.com>,
- "thuth@redhat.com" <thuth@redhat.com>, Djordje Todorovic
- <Djordje.Todorovic@htecgroup.com>, Alistair Francis
- <alistair.francis@wdc.com>
-Subject: [PATCH v12 06/13] target/riscv: Add mips.pref instruction
-Thread-Topic: [PATCH v12 06/13] target/riscv: Add mips.pref instruction
-Thread-Index: AQHcPdSah4DMQ4Hf1kuuyf2Oa+X4Tg==
-Date: Wed, 15 Oct 2025 13:07:05 +0000
-Message-ID: <20251015130657.571756-7-djordje.todorovic@htecgroup.com>
-References: <20251015130657.571756-1-djordje.todorovic@htecgroup.com>
-In-Reply-To: <20251015130657.571756-1-djordje.todorovic@htecgroup.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=htecgroup.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS4PR09MB6518:EE_|DB9PR09MB6057:EE_
-x-ms-office365-filtering-correlation-id: d5fcfbea-a1a2-4f68-859d-08de0bebbd91
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|376014|7416014|366016|38070700021|13003099007; 
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?mXssCH76Nj71sNcBTZCSfbica5VvioRW1Z4PM1fRObMN0QHRpq7mkSnH+c?=
- =?iso-8859-1?Q?/DV8RA56rD0HKmbTgVs08EEM57d7VOnp6IPmWBi3TCPK1sKKS1h/xpJYdm?=
- =?iso-8859-1?Q?lVOb+edRqwf++FXsIcZ7U9wTitfryGGSuMixAFDgQPxYCVW5VUfHX5K5Du?=
- =?iso-8859-1?Q?XpOGuJRrM3rYykug8GXHlU5jxXyS3bYCapRsj9PZn5lMrQ7tA9qIR4FVtl?=
- =?iso-8859-1?Q?f/Y7UL5AgwDGllFi4dcXdO72F1SCGb7mNx8+kq2dPXHAQqlRpah8lEz0Oz?=
- =?iso-8859-1?Q?uYPa6/64CViGzD0FHD5IDGELZUPNmzRemjUa/3rBuX4Zt/fDghPjjzPBWt?=
- =?iso-8859-1?Q?6hCY0CJ3fYalqOs+fEugUXvs15aGcPTCa/Eq75frZDNTiBmyGx+cNu0FZ1?=
- =?iso-8859-1?Q?AOMRUyNk0uR3HtBEtKD0daJ1JO1T8QU9ymSCzkPjUidIFwf3f/3EzjOD4u?=
- =?iso-8859-1?Q?FU4DlLTcfF12zGl5R23gaAmY/m4CyqkAVMKh6JdSUyT4rTAE0LvPW+nDL1?=
- =?iso-8859-1?Q?nUrl/OQWRPsDAb0c7z1pKz1DUOKMuQh7sl8LretuhaSWkPZE7bf+8rXqag?=
- =?iso-8859-1?Q?cF+DuVDuUD5/AcfqCEr/HjWyQzsKCAJlD3Ni3CcXqM6eude0zLS9LX/lce?=
- =?iso-8859-1?Q?dm30Betkv7xZCmxPz+ccKCDnASOd1VmW9KKwJ5f+OtIRN8eb8AQrcjeFyQ?=
- =?iso-8859-1?Q?yGHowPoBEhVLdmLd69Mh74rw+PveuyyF6fvmnJy0J4+Ey00Z1oxwBYYr3z?=
- =?iso-8859-1?Q?JsLg0cWcx1yMA7EtPl5s4Gqzx+6QSRV1WLxP4MHANX4enDku80guis+fPY?=
- =?iso-8859-1?Q?jDZekKl1knCncXceciHMJSmXfwnitHn5gH4goKzLc0sHnBAWtTHQs6bnwb?=
- =?iso-8859-1?Q?ey+vptGNaGjhm6caMkY6qlOy/eYr457wo45LbyFfRwJ/C5ekdpQFlk+YEb?=
- =?iso-8859-1?Q?VJ0Ru3muDZtg2vdnmtRJCQMYa/tGOvQOmes5HjDGSeDV9MIsOhKL0oaUFc?=
- =?iso-8859-1?Q?qhs48wxWmdVChkeXfjPfB8kz+3u84P/KYvAMP15AGjSqxk0jSfr7Eg4rZT?=
- =?iso-8859-1?Q?GpplHizGraucs90fes2qW+6u7BttN7HIDYe93bSkiy6EtHPC0Fiy0hU5un?=
- =?iso-8859-1?Q?Q+QslhggGbvB+qMEH/2QSIP0C5WVxuPnwNeUdfxIWbaGZqwxpkbwjnn00f?=
- =?iso-8859-1?Q?MNpJwFfNaz9fUDbfrScBXSqQOLnVZ1ClPuzZLzKAxhPGA4pSuoBrMqTaBa?=
- =?iso-8859-1?Q?yO/eVZrbwMts4mR1naplP7WwhLxn86Ukauqbd+RcoAKpi0YgdmM6MOfyF1?=
- =?iso-8859-1?Q?pO9cne2poCQ+34lQm2GjZtlM6XgkWP9+QYlMGx0rnkrX/qRs26xMqduNNZ?=
- =?iso-8859-1?Q?mTa/4kR46h+AW8gQWSUW4xItx5dlzSMOC2qrBJ2nEX+lDMDiNN4Sp7rKb/?=
- =?iso-8859-1?Q?W8XV0UqeJz+hYO2BaxiKJnuECJQhm5DaZPhAMnozEX7e2kALTkEnJwkq+N?=
- =?iso-8859-1?Q?vsE+pE44tbDNU+HWEQR1vTUQvsiOnQOn36vDg4VAlB7yXc6oF+K0OgSuTk?=
- =?iso-8859-1?Q?5rUoXxCpMiJp+xQ/uYmHP9kb+7gx?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR09MB6518.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(366016)(38070700021)(13003099007);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?OH2oObirB96sqiTPuRM5thxfoM5kgBiEAujZbiXOu/fVaPoJCiO1GKgUg9?=
- =?iso-8859-1?Q?53NzNAbOWLFf0d7RzAEBBzDYu2WVmTl/ADkLNrSpoiiWv+jLYgda/PWRp2?=
- =?iso-8859-1?Q?WJeqcm9DEPE7d2Xdx9ShCOzhqgY0iq/wq/NR8Gg2QnJ4dpUL4I3PS1g6O3?=
- =?iso-8859-1?Q?zOC0vhewltI28dq/RRhevB3TI4yOnpxBnSZmiOwjKviLxzh54SAirnw9hn?=
- =?iso-8859-1?Q?oVLFvrcTPUsYEgiKwcvb7XXqKlPOKCoO956148WU2iFRdnbzeLkvWCXBr/?=
- =?iso-8859-1?Q?qgZ8BE1y55HSSNmeYTHMJ9QqCtXzlm0yC+Jdspu7IJQuYOIsHV0dQ/4RG4?=
- =?iso-8859-1?Q?y1Q3z8zmGE4zhgQqOoCyBd9CyHaTfJCwCKUoL0yOI87iaZ+O8BEgFGAU8s?=
- =?iso-8859-1?Q?aye73HhSPXlUrMnjvhcuiBWV4+5ll52/RulhnCtHOTkht0ZrzwmFUX8Ecu?=
- =?iso-8859-1?Q?LSkkt1QkXJ1kvC4/9JvBErc96HeKOK6mXof7weAigjPM9IMvfMmnkUg0at?=
- =?iso-8859-1?Q?LhNvhdqN/IlBqODjgz6mj3m3hd3j+Wj/ZGbLju04SsP4e3shmYiOUBT2qC?=
- =?iso-8859-1?Q?WQqRM+N/jn7kU8TQWcsTBiVd4KTNopzN3L1QtqZ+D5DwMmO8hlbhWO/Ha0?=
- =?iso-8859-1?Q?ti2houkFwTuAAJJD15AgC8dKIyEZa1qqM8uJG5nEGomatnk/AlmI77a4G/?=
- =?iso-8859-1?Q?RhQlpFRgqawL52yutpl0mHcwHP42JG6YCQ6DfUPvo9CGqQu2iTyxn5TV79?=
- =?iso-8859-1?Q?kC80EURtr1+obfMm5OOb6aLAvRwcdCq4W0DWJ6fexFzcYkDcLh9Uufvthx?=
- =?iso-8859-1?Q?lqsSik9rbHZaSgDafd71XbRGuWbp2TKWlAmkoKUpjo5efO4vnvaxdAxGPI?=
- =?iso-8859-1?Q?2pFwIbzsLiLhlDC7eX1M0mwDsLutzdZfaOf2brL4ON2EtzWRn5JIiRjSxi?=
- =?iso-8859-1?Q?8p+7jbtqkkz4GBrE1MKhgrB/cYNAoLS+QGn27auHq8D3y8+jDzO9jz7PYG?=
- =?iso-8859-1?Q?PguUki8C5+OId1U5RHgf41BYEZm2vh+FtZ1AcM6dkPtznIXe/NyE4yeQ4E?=
- =?iso-8859-1?Q?h51OhBaABnipdEbKk9K/G1GX9ltY8mvLhE4Rav8E6Os7sZt49GZY/dVmMx?=
- =?iso-8859-1?Q?fHX8NlyEqEs3qep5iGHY/ZlwrWo5SrP6TXDqVV1vqk51ewRHFsXmYmoVKs?=
- =?iso-8859-1?Q?6rUaTd2xh80VBdu0tQOq+br+bb9fFcRidO+oB4jgs39OTse4y/QDvUHmjQ?=
- =?iso-8859-1?Q?ODdaB2K7t6FP0UY0QWB/J9xWfh9daWHcdu3jKcIiVr/RAkvbTQ9xrIULJu?=
- =?iso-8859-1?Q?4rxI3Xb8yeNKzZV6dAL9e2Zdvw7j46U3QRxDzzfZ5L8X07zbDP8LjK2WaL?=
- =?iso-8859-1?Q?UUiylPbzpDP8lRJ3NPL5/a7igIDrjxrge3pUxuHB/G+eAFlJ//qxUCFMuu?=
- =?iso-8859-1?Q?Ewvcksp2zfl7xy8bX2I8XEv5QPnDnX/Ht8Fun221dNgmbFb6YaUdSqV5Zb?=
- =?iso-8859-1?Q?ph/ZvIZwG6vMwGOf5PVTf4cHA0ialeQD15iG+EAp/eQ2X2kRKloQqvs+5h?=
- =?iso-8859-1?Q?cZDVLZ6Y8Ra7nsz7xSFOyu/0k4Qsnz5zZv69k0OukMufeO4TPotSJTsBKO?=
- =?iso-8859-1?Q?mDen3rhETPuY3Ujrx/FW7vB1ibghXD1XbcMLslzAyX44iXBMaEoCq9BuIV?=
- =?iso-8859-1?Q?7LFe/XmvzNX4Bdws1lQ=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1v9Ejs-00064F-JY
+ for qemu-riscv@nongnu.org; Wed, 15 Oct 2025 23:33:16 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1v9Ejq-0006Zv-Hn
+ for qemu-riscv@nongnu.org; Wed, 15 Oct 2025 23:33:16 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-62fca01f0d9so509627a12.3
+ for <qemu-riscv@nongnu.org>; Wed, 15 Oct 2025 20:33:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1760585592; x=1761190392; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zDx4vUBTXYtsKZguPSMTeW4z2LPKCHzenwLZ1f4KAqs=;
+ b=XaU6jKDeQMkRHo/ZqzXwb86PkXx14qF6j9/+lknRaeQRd9HQHkdKFDU5zcZG67V0nM
+ Z6KWw9PjDyG9SWno9cuPDGqLAH/HnlY/p1c3SbgR0w5V6jUKwAWTqSnrmlDAxB4hNUPY
+ /DShG3S2pimpHPD5Q9vI/7mb2ejcmni6BVGrIS64AiWQnN3ymEsC+cKw6UPv0X/z2Xs6
+ EudEGWO2RFxBWedNBR41gn53Nq4MZxNWZ6+PInq76HOIMeo948HuCSgkYyNj6b8YwY9A
+ ctYs251/tgPOIjN9D1/6WEkSFsQQN++JJ9je4iSOUn02XUFJ8/kwpxzvtzNvzRY+otuk
+ Jd3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760585592; x=1761190392;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zDx4vUBTXYtsKZguPSMTeW4z2LPKCHzenwLZ1f4KAqs=;
+ b=Dm3DjM3NPlP95V0JajrYSgblsfZ946Z8IQz1LQQ6pof+IWFDsYiCs3zK4by/8cuTYa
+ q+nMyu33+L8rW/nXHhyQTQmwhM/ajC30RIsgk9efvmm9G/Pq50UikMV9xlvfItKNTXvn
+ Itaqpgh8L9f7ClVga6QV/E2ALUSyc3jv0JctYTNEF+V0HjLs9rfOxGFd0D/1wLpEEsGh
+ IXG7P+BxyCP1Yc5OjDxSCHoCEWsTgjz4IGeTGn6GZY5z5qD87fGc0z6Sj3DvPuGZr/9D
+ r2FWIuWu4y64EtWY5cCyTZGJMuVJQDBX61jkK2Oj1eC7OQ/U+Ft6rfPbnpIjvhDV9Gxa
+ BLZA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXw2nK6wS7R70X3yg+FNslCfsCUbmLb28IxK75zyx08BH4S50NSHThK31xSSqn4j8nT/JduLXptTcs6@nongnu.org
+X-Gm-Message-State: AOJu0YxviSt0eKSls2jQVlmZE+T5blBHtQ5vV8WuBBenpGaDS4WR47eT
+ Eb1aYntzan0e2tV+UUl8otvesaplRCHerOPKaXeeS/rmKEU0temUBnr34l6lWnnnFLK0dnWT3Sv
+ 6cjsDIGvZBZ3Fw7gfGQvvc8PeplcFHoPpFM3aD0k54A==
+X-Gm-Gg: ASbGncveAHrdTvhgrtvJk+CUmqBPRvea1GlpcQ6KvluKT1j+uTC2pUB+VGWOwG3Ie1b
+ ntCb6vl8/PxHQxqYbUX5r5e5TD1mcAKi3GR7J4AEITJrYtbV5rP87KropfnsO3V0cjORbXy3hfd
+ qxb+VE/KcqjlLE91gcxYTay+1If8sa4Q99+WA8IYi+TFMEN80pAnmbNgzDV0intl6XrS+3ri6cP
+ 2D9k1U6FaWujXgwTr1nY84v7wNjB+qK7Wn/Jf1dxxrS2QmGfQoYpY00OlN5jgkDQxFmgrC+fQ==
+X-Google-Smtp-Source: AGHT+IFNR/dqk2CasjiAn0KLZAiGx7xDLkCVH3uRAftR/yiY8CdCTNrYgybdPcB+mDBG7egGKEqijznpJZsOEfSVEGc=
+X-Received: by 2002:a05:6402:847:b0:637:8faa:9df7 with SMTP id
+ 4fb4d7f45d1cf-639d5c59ca3mr28678606a12.29.1760585591629; Wed, 15 Oct 2025
+ 20:33:11 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: htecgroup.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR09MB6518.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d5fcfbea-a1a2-4f68-859d-08de0bebbd91
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Oct 2025 13:07:05.5660 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: eG8smB2nkgN7VhBmJ6en/rO4gyX91DzWOG8Kq13948inrAuUsxcJ2jGmV7f4gcPbSV8s/CEI1D3LMiQ5mKk/vZBq/Xy98Ceg1gMx1E12sSA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR09MB6057
-Received-SPF: pass client-ip=2a01:111:f403:c207::3;
- envelope-from=Djordje.Todorovic@htecgroup.com;
- helo=MRWPR03CU001.outbound.protection.outlook.com
+References: <20250417105249.18232-1-jim.shu@sifive.com>
+ <20250417105249.18232-5-jim.shu@sifive.com>
+ <e7616702-8a7b-4617-8433-236a1086bdf9@ventanamicro.com>
+ <CALw707rstv76_oESKHzbeuPakSesWNBXogQoCJN4pHMj_wz7eg@mail.gmail.com>
+ <125b7913-c8c0-448b-9f3f-3b893436b901@ventanamicro.com>
+In-Reply-To: <125b7913-c8c0-448b-9f3f-3b893436b901@ventanamicro.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Thu, 16 Oct 2025 11:33:00 +0800
+X-Gm-Features: AS18NWA5bA5jEA-tEDP_afI62he9vjOlSwWxHC7oCalyWi0_exQBl7o125tVLJQ
+Message-ID: <CALw707pE=oXYWrYndA8jaxeqxD-vM1bcqSMV_U8_vfYuGy-ZUg@mail.gmail.com>
+Subject: Re: [PATCH v2 04/18] exec: Add RISC-V WorldGuard WID to MemTxAttrs
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>, 
+ Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Michael Rolnik <mrolnik@gmail.com>, 
+ Helge Deller <deller@gmx.de>, Song Gao <gaosong@loongson.cn>,
+ Laurent Vivier <laurent@vivier.eu>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
+ Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, 
+ "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
+ "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=jim.shu@sifive.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -171,116 +123,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add MIPS P8700 prefetch instruction defined by Xmipscbop.
+Hi Daniel,
 
-Signed-off-by: Chao-ying Fu <cfu@mips.com>
-Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c                        |  3 +++
- target/riscv/cpu_cfg.h                    |  2 +-
- target/riscv/cpu_cfg_fields.h.inc         |  1 +
- target/riscv/insn_trans/trans_xmips.c.inc | 15 +++++++++++++++
- target/riscv/xmips.decode                 |  1 +
- 5 files changed, 21 insertions(+), 1 deletion(-)
+Thanks for the suggestion. I will add it in the v3 patches.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 87cb367676..9fda450683 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -249,6 +249,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
-     ISA_EXT_DATA_ENTRY(svrsw60t59b, PRIV_VERSION_1_13_0, ext_svrsw60t59b),
-     ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
-     ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
-+    ISA_EXT_DATA_ENTRY(xmipscbop, PRIV_VERSION_1_12_0, ext_xmipscbop),
-     ISA_EXT_DATA_ENTRY(xmipscmov, PRIV_VERSION_1_12_0, ext_xmipscmov),
-     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
-     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
-@@ -1382,6 +1383,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] =
-=3D {
-     MULTI_EXT_CFG_BOOL("xtheadmempair", ext_xtheadmempair, false),
-     MULTI_EXT_CFG_BOOL("xtheadsync", ext_xtheadsync, false),
-     MULTI_EXT_CFG_BOOL("xventanacondops", ext_XVentanaCondOps, false),
-+    MULTI_EXT_CFG_BOOL("xmipscbop", ext_xmipscbop, false),
-     MULTI_EXT_CFG_BOOL("xmipscmov", ext_xmipscmov, false),
-=20
-     { },
-@@ -3297,6 +3299,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
-         .cfg.pmp =3D true,
-         .cfg.ext_zba =3D true,
-         .cfg.ext_zbb =3D true,
-+        .cfg.ext_xmipscbop =3D true,
-         .cfg.ext_xmipscmov =3D true,
-         .cfg.marchid =3D 0x8000000000000201,
-         .cfg.mvendorid =3D MIPS_VENDOR_ID,
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 2db471ad17..e4d5039c49 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -38,7 +38,7 @@ static inline bool always_true_p(const RISCVCPUConfig *cf=
-g __attribute__((__unus
-=20
- static inline bool has_xmips_p(const RISCVCPUConfig *cfg)
- {
--    return cfg->ext_xmipscmov;
-+    return cfg->ext_xmipscbop || cfg->ext_xmipscmov;
- }
-=20
- static inline bool has_xthead_p(const RISCVCPUConfig *cfg)
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_field=
-s.h.inc
-index a290303ee7..dd3ee7ba2b 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -147,6 +147,7 @@ BOOL_FIELD(ext_xtheadmemidx)
- BOOL_FIELD(ext_xtheadmempair)
- BOOL_FIELD(ext_xtheadsync)
- BOOL_FIELD(ext_XVentanaCondOps)
-+BOOL_FIELD(ext_xmipscbop)
- BOOL_FIELD(ext_xmipscmov)
-=20
- BOOL_FIELD(mmu)
-diff --git a/target/riscv/insn_trans/trans_xmips.c.inc b/target/riscv/insn_=
-trans/trans_xmips.c.inc
-index 3202fd9cc0..bfe9046153 100644
---- a/target/riscv/insn_trans/trans_xmips.c.inc
-+++ b/target/riscv/insn_trans/trans_xmips.c.inc
-@@ -9,6 +9,12 @@
-  *            (https://mips.com/products/hardware/p8700/)
-  */
-=20
-+#define REQUIRE_XMIPSCBOP(ctx) do {              \
-+    if (!ctx->cfg_ptr->ext_xmipscbop) {          \
-+        return false;                            \
-+    }                                            \
-+} while (0)
-+
- #define REQUIRE_XMIPSCMOV(ctx) do {              \
-     if (!ctx->cfg_ptr->ext_xmipscmov) {          \
-         return false;                            \
-@@ -31,3 +37,12 @@ static bool trans_ccmov(DisasContext *ctx, arg_ccmov *a)
-=20
-     return true;
- }
-+
-+/* Move data from memory into cache. */
-+static bool trans_pref(DisasContext *ctx, arg_pref *a)
-+{
-+    REQUIRE_XMIPSCBOP(ctx);
-+
-+    /* Nop */
-+    return true;
-+}
-diff --git a/target/riscv/xmips.decode b/target/riscv/xmips.decode
-index fadcb78470..4215813b32 100644
---- a/target/riscv/xmips.decode
-+++ b/target/riscv/xmips.decode
-@@ -9,3 +9,4 @@
- #            (https://mips.com/products/hardware/p8700/)
-=20
- ccmov          rs3:5 11 rs2:5 rs1:5 011 rd:5 0001011
-+pref        000 imm_9:9 rs1:5 000 imm_hint:5 0001011
---=20
-2.34.1
+- Jim
+
+On Mon, Oct 13, 2025 at 1:27=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+>
+>
+> On 10/8/25 2:54 AM, Jim Shu wrote:
+> > Hi Daniel,
+> >
+> > Both '_reserved1' and '_reserved2' fields are only for padding
+> > MemTxAttrs struct to be 8-byte [1], so I remove a 1-byte reserved
+> > field when adding 'world_id' field to it.
+> > Is it ok for you? Or you think it is better to separate them.
+>
+> It's fine. I suggest adding this explanation in the commit msg to avoid
+> further questions about it.
+>
+>
+> Thanks,
+>
+> Daniel
+>
+> >
+> >
+> > [1]
+> > commit 5014e33b1e00d330f13df33c09a3932ac88f8d94
+> > Link: https://lore.kernel.org/r/20250121151322.171832-2-zhao1.liu@intel=
+.com
+> >
+> > Thanks!
+> >
+> > On Sat, Aug 9, 2025 at 8:34=E2=80=AFPM Daniel Henrique Barboza
+> > <dbarboza@ventanamicro.com> wrote:
+> >>
+> >>
+> >>
+> >> On 4/17/25 7:52 AM, Jim Shu wrote:
+> >>> RISC-V WorldGuard will add 5-bit world_id (WID) to the each memory
+> >>> transaction on the bus. The wgChecker in front of RAM or peripherals
+> >>> MMIO could do the access control based on the WID. It is similar to A=
+RM
+> >>> TrustZone NS bit, but the WID is 5-bit.
+> >>>
+> >>> The common implementation of WID is AXI4 AxUSER signal.
+> >>>
+> >>> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> >>> ---
+> >>>    include/exec/memattrs.h | 8 ++++++--
+> >>>    1 file changed, 6 insertions(+), 2 deletions(-)
+> >>>
+> >>> diff --git a/include/exec/memattrs.h b/include/exec/memattrs.h
+> >>> index 8db1d30464..7a6866fa41 100644
+> >>> --- a/include/exec/memattrs.h
+> >>> +++ b/include/exec/memattrs.h
+> >>> @@ -54,6 +54,11 @@ typedef struct MemTxAttrs {
+> >>>         */
+> >>>        unsigned int pid:8;
+> >>>
+> >>> +    /*
+> >>> +     * RISC-V WorldGuard: the 5-bit WID field of memory access.
+> >>> +     */
+> >>> +    unsigned int world_id:5;
+> >>> +
+> >>>        /*
+> >>>         * Bus masters which don't specify any attributes will get thi=
+s
+> >>>         * (via the MEMTXATTRS_UNSPECIFIED constant), so that we can
+> >>> @@ -63,8 +68,7 @@ typedef struct MemTxAttrs {
+> >>>         */
+> >>>        bool unspecified;
+> >>>
+> >>> -    uint8_t _reserved1;
+> >>> -    uint16_t _reserved2;
+> >>> +    uint16_t _reserved1;
+> >>
+> >> Is 'reserved2' unused? Not sure why you ended up removing it in this p=
+atch.
+> >>
+> >> If it's really unused it's ok to remove it but this should be done in =
+separate.
+> >>
+> >>
+> >> Thanks,
+> >>
+> >> Daniel
+> >>
+> >>
+> >>>    } MemTxAttrs;
+> >>>
+> >>>    QEMU_BUILD_BUG_ON(sizeof(MemTxAttrs) > 8);
+> >>
+>
 
