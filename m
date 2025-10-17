@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F02CCD199
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Oct 2025 00:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5124DCCD199
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Oct 2025 00:58:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v9YkO-0001YZ-4u; Thu, 16 Oct 2025 20:55:08 -0400
+	id 1v9Ymg-0002EZ-0Q; Thu, 16 Oct 2025 20:57:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v9YkH-0001Sr-UQ
- for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 20:55:03 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ id 1v9Yme-0002E6-1v
+ for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 20:57:28 -0400
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v9YkD-0002kh-Vr
- for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 20:55:01 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-63c1413dbeeso1640726a12.0
- for <qemu-riscv@nongnu.org>; Thu, 16 Oct 2025 17:54:57 -0700 (PDT)
+ id 1v9Ymb-00034G-C4
+ for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 20:57:27 -0400
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-63b6dfd85d4so2585827a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 16 Oct 2025 17:57:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760662495; x=1761267295; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1760662642; x=1761267442; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vqqychwgb2Pzx8ys2y2WWc8aF93FGZl0ENVVCYrMpFE=;
- b=Ze7+/eoteS7MZ+C2INaZv32res8IvDm2f29aXHga4BHdZwKXpMGWPG7sg/TMiRCFBD
- PnqEcjjfTV3Cnbj0VK126rZQ65e4ILW40Y9UQodTLv2DFs4NLSezhsGt38G0huu4ha/1
- qwYwmbE9XVQFnPPwSYhLx/O2TZY4M5PR6BpPTcr3qzxseGIeuOPr3akob0vl7mFTuhtT
- AbKYqj501dVlRupVYhE3qidYj/OzXaktmYd9Qyb1AtwqGQXSRlFm57ICzUqeamFK8zK7
- k0m3e5RWjXbN+Y0RIXAkNxHJ4trj7up37HINimLFPrP4fNsMpS/q5i5jRxZWTWxTHtkl
- Jbaw==
+ bh=zZxxCwQlh4/wCfvXiaSjCJ1VONonE5JLgcJLPGPeCQY=;
+ b=dVQGYiTRh2K5KYKVw4jKQ5H0Gykds8yhK7RzggqofGjDMmV2yiNIDqR/USFv/4D7a7
+ 1IRJ6Ih2dSMi2peTuRuTcnZoGk6cvpXqo+upSjpoiHXAEADI5NFhb/fZknxnXj1slFVq
+ +0M2siYYoS2GloTQL/JHJRLdGt1r+pFqLVg7uOPNTDpbybS+q+vBgXLOQsYfG0FjZDsg
+ g1F04K5ZGdLZv7xirg84MfjAXPX42vxiCBOm4ocs4K3icNOakbIopJLP0LNV49VwwftH
+ OiZKte+TI7hf0uAwAiPc+PSC60liOjVs6xq7qgtZqkIPjCyhK0BraMF6tu6AsQL9n9uy
+ ol8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760662495; x=1761267295;
+ d=1e100.net; s=20230601; t=1760662642; x=1761267442;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Vqqychwgb2Pzx8ys2y2WWc8aF93FGZl0ENVVCYrMpFE=;
- b=qi2wHx47rymGP0+Swyvy5UDrKxT2plFfPAq3D/c8p49E6e8t9/pulP1uC3I5bE3+NC
- 2ATO6v4A9U9zSwKM3aR4glByd69pi/V42rcbIXjK/qi52BE+zx8wRWEKZ2FVjrsxPr0d
- 8xDE4/Mp2tiO2t9hK73OTuN51FIg2ij+Ag8RrKiZn6WpsZ8V85SFYyiRf0s14J7L1y8v
- +iO96Uf7vVf+iMHK9BOaeCN+qOBCKSFXjWVjewt4VuMfAluS6TbsYjWwGYrZUqDn5eQN
- MMFv/6bm6uHzAel6gwsETB9LLdWnxzMGkZVOJYuF3gpTbvXWkeVTNrqCu7hkygE083st
- G5FA==
+ bh=zZxxCwQlh4/wCfvXiaSjCJ1VONonE5JLgcJLPGPeCQY=;
+ b=ZFTIEE3q3mVRNKqr26vbCldU6Foh6+G0H5fXel3t+BjqipwfxtdGZY3tspReTBn/MG
+ qHGDK4yYHGlo/MlJzPxc8nkuU2T/GIuXJ6H9xpEHwLADA1ZoClG0biN4e85Nt10K6lSY
+ yscS2wpQd87OMT/vXifbbULJ3YzPoIUwJL7xlOawoQGBt+JkJaHjdKK/RLRdhqkmkGsc
+ OHSCCBMH5XqhxbKcBTlPfX+fl5ulFmMpDWs6lIPM4Th6BIvGuLFFY4yivkpzbnhORjqi
+ cF4VDn5VxyQQXI9AM5fkz7LlEakx368OJbOy6fDoDR7tWi3CYyeKmKt+HmAp3klJUdHb
+ 0tIA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXq36/K8o4+gtEs7JwYGeYdlVFSfjSTLdqfwmXW0FLlzdzaM0xxUp1yjYMx0XnlDHA0duYxW0apTtgJ@nongnu.org
-X-Gm-Message-State: AOJu0YxHv5B4pIkh/Ukd4/Yg5uhIwu2wBLwE7RltGEbUxnxMn51yAZDT
- 8L0g/vnCzPF2MrHI5ROMruP0Q8DOMgEIYnVrYomcx1y/iQwS1TyfD+F9y/rAMlKFoQZFzp7z7nE
- s63C+jC2n4IXRl2UraJYXnIq21SFdYa0=
-X-Gm-Gg: ASbGncuU0OQI+TchHu071HQR4MTg4dAC4Mb7LXO6AdskJCjd0Y0ropE9GbPXh5qA0xz
- HUJbQNvoBjLJYITYGGrgwh0WgyWJew/U/MHtim5PV1py9Ta5DZdVMRoHPqrCMlojHy8ERNr29mP
- viDrTZGf5cFQ5wUvOY27XjqX2jigK1PwQFwd6/guvZ9NFXd4TVZHHovKEItp0s+lnNNGhZmcAky
- iB+y1HbWDF2fkbFpgBihUgpHxcfAdCBY8f6SlYwIhhY+p+9Gh6wNrc8UH6MiCTjcDasYiRdYKVg
- sI+hgh+8joGycdQ=
-X-Google-Smtp-Source: AGHT+IHqkCOI0Dzpboro1NXxyrBynEKVMiAHmMBnntjYx4ReCKPxwAJ1b1AAZ2Iu/Z4mXne+D/EZVUDnJEkBeXAGUQs=
-X-Received: by 2002:a05:6402:5186:b0:634:5db4:8fab with SMTP id
- 4fb4d7f45d1cf-63c1f628d92mr1676722a12.6.1760662495419; Thu, 16 Oct 2025
- 17:54:55 -0700 (PDT)
+ AJvYcCXE9fZ5YEA5+3qgHtpH5Wl9Hy+NnAAs5VTXinTQvFuPlJ3F/1s/hyZLAmA++rbMu5WJ2J7FGET0DJ+6@nongnu.org
+X-Gm-Message-State: AOJu0YyE8p+/YaQRgU3hl+Ph0i8bDjvi99VWkCSFqzuMt22aKLPZJBSm
+ FrezNJXwDvUFz5+8F1EVpv/SrJF2W+cJiaOfTGSLq75BFV8mtBW5NJCke+hdREZ4alf+rTmLnuj
+ IB22zx3W8pT8jqFMo+UiXDGGtmU1Uak8=
+X-Gm-Gg: ASbGnct/Ynoop8az9JCfAHtu03kFBaXVPZlSjluPAVkRFZg+gNUD36R1j93/xkinakO
+ bI1VpRCsrb/Tr93gdNAwbxSNezixnW1IlueRE8uvK15wkSQmWEj1nnena/uH3cCvS1sKF2U9NQZ
+ JG5lSJkh3kayx4VLJ4HcYvi4I8klMcDazj7Fji8D0iZ50mkby85pUoD0b4tcR2hA2l+oUlFCOwq
+ 2QXXKbktd8jyNM5xpjnp2xPRnzS2oN7HOzqByhvJkXTQVJedCFCdHtFFbp+NcZzAQB6NRAYOqMS
+ SJbEiyehVQggcXY=
+X-Google-Smtp-Source: AGHT+IHGBuXHeKqZEaPWtb9FcCqab3rYD1TsmxLBKrBCFGO6nrWYBT4KN0oG5n45geKfjekI4f3xw4ZqWUVW0Y/srCE=
+X-Received: by 2002:a05:6402:13ca:b0:634:5297:e3bc with SMTP id
+ 4fb4d7f45d1cf-63c1f629a40mr1810771a12.6.1760662641992; Thu, 16 Oct 2025
+ 17:57:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251015130657.571756-1-djordje.todorovic@htecgroup.com>
-In-Reply-To: <20251015130657.571756-1-djordje.todorovic@htecgroup.com>
+References: <20251014082338.87618-1-jay.chang@sifive.com>
+ <20251014082338.87618-2-jay.chang@sifive.com>
+In-Reply-To: <20251014082338.87618-2-jay.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 17 Oct 2025 10:54:29 +1000
-X-Gm-Features: AS18NWBXQeo_sOvHiiiDgzDYBELX14czc25-HmaorqgD8h8uA4UlJTCXCGj6ZWs
-Message-ID: <CAKmqyKNCNhRqS+5=sZ0Cg7PcV-ciqxWD4OxJgq1M0RaX8zbgrQ@mail.gmail.com>
-Subject: Re: [PATCH v12 00/13] riscv: Add support for MIPS P8700 CPU
-To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
-Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
- "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>, 
- "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>, 
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>,
- "philmd@linaro.org" <philmd@linaro.org>, 
- "thuth@redhat.com" <thuth@redhat.com>
+Date: Fri, 17 Oct 2025 10:56:55 +1000
+X-Gm-Features: AS18NWBYXHQBgmcrnr--WpBDC2j1TqcC9wZm63dMBTUGDTAx8kO408kuY2TX5V8
+Message-ID: <CAKmqyKNoEqnnySGArCpY0JFLM+B04mRnHawPNErrDFUQ4-dFXw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] target/riscv: Make PMP granularity configurable
+To: Jay Chang <jay.chang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Frank Chang <frank.chang@sifive.com>,
+ Jim Shu <jim.shu@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::536;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x536.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -104,80 +105,131 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 15, 2025 at 11:07=E2=80=AFPM Djordje Todorovic
-<Djordje.Todorovic@htecgroup.com> wrote:
+On Tue, Oct 14, 2025 at 6:24=E2=80=AFPM Jay Chang <jay.chang@sifive.com> wr=
+ote:
 >
-> In this version I renamed:
->   tests/functional/riscv64/test_riscv64_boston.py
->   -->
->   tests/functional/riscv64/test_boston.py
+> Previously, the PMP granularity in qemu always used a minimum
+> granularity of 4 bytes, this patch add pmp-granularity to allow
+> platforms to configure the value.
+>
+> A new CPU parameter pmp-granularity has been introduced to the QEMU
+> command line. For example:
+>
+>         -cpu rv64, g=3Dtrue, c=3Dtrue, pmp=3Dtrue, pmp-granularity=3D1024
+>
+> If no specific value is provided, the default value is 4 bytes.
+>
+> Signed-off-by: Jay Chang <jay.chang@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Jim Shu <jim.shu@sifive.com>
 
-I get an error when building:
-
-../tests/functional/meson.build:102:45: ERROR: File
-qemu/tests/functional/riscv64/test_riscv64_boston.py does not exist.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu.c                | 39 +++++++++++++++++++++++++++++++
+>  target/riscv/cpu.h                |  1 +
+>  target/riscv/cpu_cfg_fields.h.inc |  1 +
+>  3 files changed, 41 insertions(+)
 >
-> Djordje Todorovic (13):
->   hw/intc: Allow gaps in hartids for aclint and aplic
->   target/riscv: Add cpu_set_exception_base
->   target/riscv: Add MIPS P8700 CPU
->   target/riscv: Add MIPS P8700 CSRs
->   target/riscv: Add mips.ccmov instruction
->   target/riscv: Add mips.pref instruction
->   target/riscv: Add Xmipslsp instructions
->   hw/misc: Add RISC-V CMGCR device implementation
->   hw/misc: Add RISC-V CPC device implementation
->   hw/riscv: Add support for RISCV CPS
->   hw/riscv: Add support for MIPS Boston-aia board mode
->   riscv/boston-aia: Add an e1000e NIC in slot 0 func 1
->   test/functional: Add test for boston-aia board
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a877018ab0..73d4280d7c 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1121,6 +1121,7 @@ static void riscv_cpu_init(Object *obj)
+>      cpu->cfg.cbop_blocksize =3D 64;
+>      cpu->cfg.cboz_blocksize =3D 64;
+>      cpu->cfg.pmp_regions =3D 16;
+> +    cpu->cfg.pmp_granularity =3D MIN_RISCV_PMP_GRANULARITY;
+>      cpu->env.vext_ver =3D VEXT_VERSION_1_00_0;
+>      cpu->cfg.max_satp_mode =3D -1;
 >
->  configs/devices/riscv64-softmmu/default.mak |   1 +
->  docs/system/riscv/mips.rst                  |  20 +
->  docs/system/target-riscv.rst                |   1 +
->  hw/intc/riscv_aclint.c                      |  18 +-
->  hw/intc/riscv_aplic.c                       |  13 +-
->  hw/misc/Kconfig                             |  17 +
->  hw/misc/meson.build                         |   3 +
->  hw/misc/riscv_cmgcr.c                       | 248 ++++++++++
->  hw/misc/riscv_cpc.c                         | 265 +++++++++++
->  hw/riscv/Kconfig                            |   6 +
->  hw/riscv/boston-aia.c                       | 476 ++++++++++++++++++++
->  hw/riscv/cps.c                              | 196 ++++++++
->  hw/riscv/meson.build                        |   3 +
->  include/hw/misc/riscv_cmgcr.h               |  50 ++
->  include/hw/misc/riscv_cpc.h                 |  64 +++
->  include/hw/riscv/cps.h                      |  66 +++
->  target/riscv/cpu-qom.h                      |   1 +
->  target/riscv/cpu.c                          |  44 ++
->  target/riscv/cpu.h                          |   7 +
->  target/riscv/cpu_cfg.h                      |   5 +
->  target/riscv/cpu_cfg_fields.h.inc           |   3 +
->  target/riscv/cpu_vendorid.h                 |   1 +
->  target/riscv/insn_trans/trans_xmips.c.inc   | 136 ++++++
->  target/riscv/meson.build                    |   2 +
->  target/riscv/mips_csr.c                     | 217 +++++++++
->  target/riscv/translate.c                    |   3 +
->  target/riscv/xmips.decode                   |  35 ++
->  tests/functional/riscv64/meson.build        |   2 +
->  tests/functional/riscv64/test_boston.py     | 123 +++++
->  29 files changed, 2021 insertions(+), 5 deletions(-)
->  create mode 100644 docs/system/riscv/mips.rst
->  create mode 100644 hw/misc/riscv_cmgcr.c
->  create mode 100644 hw/misc/riscv_cpc.c
->  create mode 100644 hw/riscv/boston-aia.c
->  create mode 100644 hw/riscv/cps.c
->  create mode 100644 include/hw/misc/riscv_cmgcr.h
->  create mode 100644 include/hw/misc/riscv_cpc.h
->  create mode 100644 include/hw/riscv/cps.h
->  create mode 100644 target/riscv/insn_trans/trans_xmips.c.inc
->  create mode 100644 target/riscv/mips_csr.c
->  create mode 100644 target/riscv/xmips.decode
->  create mode 100755 tests/functional/riscv64/test_boston.py
+> @@ -1606,6 +1607,43 @@ static const PropertyInfo prop_num_pmp_regions =3D=
+ {
+>      .set =3D prop_num_pmp_regions_set,
+>  };
+>
+> +static void prop_pmp_granularity_set(Object *obj, Visitor *v, const char=
+ *name,
+> +                                     void *opaque, Error **errp)
+> +{
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +    uint32_t value;
+> +
+> +    visit_type_uint32(v, name, &value, errp);
+> +
+> +    if ((value < MIN_RISCV_PMP_GRANULARITY) && (value & (value - 1))) {
+> +        error_setg(errp, "PMP granularity must be a power of 2 and at le=
+ast %d",
+> +                   MIN_RISCV_PMP_GRANULARITY);
+> +        return;
+> +    }
+> +
+> +    if (cpu->cfg.pmp_granularity !=3D value && riscv_cpu_is_vendor(obj))=
+ {
+> +        cpu_set_prop_err(cpu, name, errp);
+> +        return;
+> +    }
+> +
+> +    cpu_option_add_user_setting(name, value);
+> +    cpu->cfg.pmp_granularity =3D value;
+> +}
+> +
+> +static void prop_pmp_granularity_get(Object *obj, Visitor *v, const char=
+ *name,
+> +                                     void *opaque, Error **errp)
+> +{
+> +    uint32_t value =3D RISCV_CPU(obj)->cfg.pmp_granularity;
+> +
+> +    visit_type_uint32(v, name, &value, errp);
+> +}
+> +
+> +static const PropertyInfo prop_pmp_granularity =3D {
+> +    .description =3D "pmp-granularity",
+> +    .get =3D prop_pmp_granularity_get,
+> +    .set =3D prop_pmp_granularity_set,
+> +};
+> +
+>  static int priv_spec_from_str(const char *priv_spec_str)
+>  {
+>      int priv_version =3D -1;
+> @@ -2606,6 +2644,7 @@ static const Property riscv_cpu_properties[] =3D {
+>      {.name =3D "mmu", .info =3D &prop_mmu},
+>      {.name =3D "pmp", .info =3D &prop_pmp},
+>      {.name =3D "num-pmp-regions", .info =3D &prop_num_pmp_regions},
+> +    {.name =3D "pmp-granularity", .info =3D &prop_pmp_granularity},
+>
+>      {.name =3D "priv_spec", .info =3D &prop_priv_spec},
+>      {.name =3D "vext_spec", .info =3D &prop_vext_spec},
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 2c2266415e..04711f93a2 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -176,6 +176,7 @@ extern RISCVCPUImpliedExtsRule *riscv_multi_ext_impli=
+ed_rules[];
+>
+>  #define MAX_RISCV_PMPS (64)
+>  #define OLD_MAX_RISCV_PMPS (16)
+> +#define MIN_RISCV_PMP_GRANULARITY 4
+>
+>  #if !defined(CONFIG_USER_ONLY)
+>  #include "pmp.h"
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fie=
+lds.h.inc
+> index e2d116f0df..a154ecdc79 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -166,6 +166,7 @@ TYPED_FIELD(uint16_t, cbom_blocksize, 0)
+>  TYPED_FIELD(uint16_t, cbop_blocksize, 0)
+>  TYPED_FIELD(uint16_t, cboz_blocksize, 0)
+>  TYPED_FIELD(uint8_t,  pmp_regions, 0)
+> +TYPED_FIELD(uint32_t, pmp_granularity, 0)
+>
+>  TYPED_FIELD(int8_t, max_satp_mode, -1)
 >
 > --
-> 2.34.1
+> 2.48.1
+>
+>
 
