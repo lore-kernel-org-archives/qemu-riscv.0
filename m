@@ -4,126 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C9FCCCD183
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Oct 2025 20:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F02CCD199
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Oct 2025 00:55:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v9U8O-0005H9-8c; Thu, 16 Oct 2025 15:59:36 -0400
+	id 1v9YkO-0001YZ-4u; Thu, 16 Oct 2025 20:55:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <borntraeger@linux.ibm.com>)
- id 1v9U57-0003Ma-H7; Thu, 16 Oct 2025 15:56:13 -0400
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <borntraeger@linux.ibm.com>)
- id 1v9U52-0005Co-GZ; Thu, 16 Oct 2025 15:56:13 -0400
-Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59GJUsm8021066;
- Thu, 16 Oct 2025 19:55:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=OFRUe+
- KQLx1qH7G6gwBkYLooMFYglCx8Q6DJSdtJOo4=; b=cXAPqsTRVvP0QiYndWtCti
- 9+yYBiIl4LFfwzOIHqhVJnXh4snYYkUZW4dN77GTxkxwL907kdesFpFdffCkG5tR
- 5u+vMB2bcFOCtXuX0WgES34T/EFAIUvJARJ51IcLo6rDXl8GKiof096zPKkGmgzP
- uQ3CogAR7tlAjdvURbf5STKwA5L2Mz/Ph3n7jlTSMZZdyDzfDbOJySJZtSk5UflT
- YCv5kUEyVdiD4X5o9zuFu1r+04TbzW2sOHyHF2kwBzM7atkYtysxQ9TtWU1Pi7r4
- mTqmr8JFYhHLUwwDFxP6s7rz7UhalyIWEA35YSgWM21gVcNTmuu1gyuBpRflxx5A
- ==
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 49qew0bnjp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 16 Oct 2025 19:55:53 +0000 (GMT)
-Received: from m0360072.ppops.net (m0360072.ppops.net [127.0.0.1])
- by pps.reinject (8.18.1.12/8.18.0.8) with ESMTP id 59GJt3r7026270;
- Thu, 16 Oct 2025 19:55:52 GMT
-Received: from ppma23.wdc07v.mail.ibm.com
- (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 49qew0bnjj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 16 Oct 2025 19:55:52 +0000 (GMT)
-Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 59GHHp9X016996;
- Thu, 16 Oct 2025 19:55:51 GMT
-Received: from smtprelay04.fra02v.mail.ibm.com ([9.218.2.228])
- by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 49r32k7j01-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 16 Oct 2025 19:55:51 +0000
-Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com
- [10.20.54.104])
- by smtprelay04.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 59GJtn5918088256
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 16 Oct 2025 19:55:49 GMT
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id B807E20396;
- Thu, 16 Oct 2025 19:55:49 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id E0B0B20395;
- Thu, 16 Oct 2025 19:55:48 +0000 (GMT)
-Received: from [9.87.132.104] (unknown [9.87.132.104])
- by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTP;
- Thu, 16 Oct 2025 19:55:48 +0000 (GMT)
-Message-ID: <40098bb1-c18c-426f-8f54-c96eb2f2a6ec@linux.ibm.com>
-Date: Thu, 16 Oct 2025 21:55:48 +0200
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v9YkH-0001Sr-UQ
+ for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 20:55:03 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1v9YkD-0002kh-Vr
+ for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 20:55:01 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-63c1413dbeeso1640726a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 16 Oct 2025 17:54:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760662495; x=1761267295; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Vqqychwgb2Pzx8ys2y2WWc8aF93FGZl0ENVVCYrMpFE=;
+ b=Ze7+/eoteS7MZ+C2INaZv32res8IvDm2f29aXHga4BHdZwKXpMGWPG7sg/TMiRCFBD
+ PnqEcjjfTV3Cnbj0VK126rZQ65e4ILW40Y9UQodTLv2DFs4NLSezhsGt38G0huu4ha/1
+ qwYwmbE9XVQFnPPwSYhLx/O2TZY4M5PR6BpPTcr3qzxseGIeuOPr3akob0vl7mFTuhtT
+ AbKYqj501dVlRupVYhE3qidYj/OzXaktmYd9Qyb1AtwqGQXSRlFm57ICzUqeamFK8zK7
+ k0m3e5RWjXbN+Y0RIXAkNxHJ4trj7up37HINimLFPrP4fNsMpS/q5i5jRxZWTWxTHtkl
+ Jbaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760662495; x=1761267295;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Vqqychwgb2Pzx8ys2y2WWc8aF93FGZl0ENVVCYrMpFE=;
+ b=qi2wHx47rymGP0+Swyvy5UDrKxT2plFfPAq3D/c8p49E6e8t9/pulP1uC3I5bE3+NC
+ 2ATO6v4A9U9zSwKM3aR4glByd69pi/V42rcbIXjK/qi52BE+zx8wRWEKZ2FVjrsxPr0d
+ 8xDE4/Mp2tiO2t9hK73OTuN51FIg2ij+Ag8RrKiZn6WpsZ8V85SFYyiRf0s14J7L1y8v
+ +iO96Uf7vVf+iMHK9BOaeCN+qOBCKSFXjWVjewt4VuMfAluS6TbsYjWwGYrZUqDn5eQN
+ MMFv/6bm6uHzAel6gwsETB9LLdWnxzMGkZVOJYuF3gpTbvXWkeVTNrqCu7hkygE083st
+ G5FA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXq36/K8o4+gtEs7JwYGeYdlVFSfjSTLdqfwmXW0FLlzdzaM0xxUp1yjYMx0XnlDHA0duYxW0apTtgJ@nongnu.org
+X-Gm-Message-State: AOJu0YxHv5B4pIkh/Ukd4/Yg5uhIwu2wBLwE7RltGEbUxnxMn51yAZDT
+ 8L0g/vnCzPF2MrHI5ROMruP0Q8DOMgEIYnVrYomcx1y/iQwS1TyfD+F9y/rAMlKFoQZFzp7z7nE
+ s63C+jC2n4IXRl2UraJYXnIq21SFdYa0=
+X-Gm-Gg: ASbGncuU0OQI+TchHu071HQR4MTg4dAC4Mb7LXO6AdskJCjd0Y0ropE9GbPXh5qA0xz
+ HUJbQNvoBjLJYITYGGrgwh0WgyWJew/U/MHtim5PV1py9Ta5DZdVMRoHPqrCMlojHy8ERNr29mP
+ viDrTZGf5cFQ5wUvOY27XjqX2jigK1PwQFwd6/guvZ9NFXd4TVZHHovKEItp0s+lnNNGhZmcAky
+ iB+y1HbWDF2fkbFpgBihUgpHxcfAdCBY8f6SlYwIhhY+p+9Gh6wNrc8UH6MiCTjcDasYiRdYKVg
+ sI+hgh+8joGycdQ=
+X-Google-Smtp-Source: AGHT+IHqkCOI0Dzpboro1NXxyrBynEKVMiAHmMBnntjYx4ReCKPxwAJ1b1AAZ2Iu/Z4mXne+D/EZVUDnJEkBeXAGUQs=
+X-Received: by 2002:a05:6402:5186:b0:634:5db4:8fab with SMTP id
+ 4fb4d7f45d1cf-63c1f628d92mr1676722a12.6.1760662495419; Thu, 16 Oct 2025
+ 17:54:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] docs/system/security: Restrict "virtualization use
- case" to specific machines
-To: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org
-Cc: Stefan Hajnoczi <stefanha@redhat.com>,
- Bernhard Beschow <shentey@gmail.com>, Thomas Huth <thuth@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>,
- qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
- Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
-References: <20251016131159.750480-1-peter.maydell@linaro.org>
-Content-Language: en-US
-From: Christian Borntraeger <borntraeger@linux.ibm.com>
-In-Reply-To: <20251016131159.750480-1-peter.maydell@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: XgqHhEQunIwWbHzOi09u1_iefJvJ9vnZ
-X-Authority-Analysis: v=2.4 cv=eJkeTXp1 c=1 sm=1 tr=0 ts=68f14dc9 cx=c_pps
- a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
- a=IkcTkHD0fZMA:10 a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=VnNF1IyMAAAA:8 a=hpkoLDSOn8IH4pMs9ZkA:9 a=QEXdDO2ut3YA:10
- a=cPQSjfK2_nFv0Q5t_7PE:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDExMDAxNCBTYWx0ZWRfXxDxr04yJED2n
- RggN8pDsgl6ncqcktP9QV3r801bqqRRecVxASYE0tMfJy/FkIyGkhNoy9+/Rw9DYOLN9ZFA3/7Z
- t/12AUk0O3p3QQROC1ncJrAr/BFCwVmmMRAZxNojnbsI41hDLCqXG+x4/s3/sDyf23mqwhrdzr3
- 1ek4BhVrKl74SNbC+zFiOI3LKK+zn9+fdN12mtk+sW1qbkH7r63bFoQ3DQi054ZBNkm9D9FI4Hs
- bMKLRLUd+n2xJizZV5ak7Af7keHlJhZyAF7R6jq7FeKFNyObl4r5zq+Pdib5dJibRh3aGplSJFk
- K24adEq/1yjPQUCgO/FGK3i2V3+np4d/HsgScrPl/hvWY+vKaNxIDQ11AYyVwvds7t1k5pO21HX
- opLnVNRv4Gn/9pjem3Zk/3E4ZcFzZQ==
-X-Proofpoint-GUID: cKb9Iw_uv-SgysYy0v7VcGYaU1CHOUKt
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-16_04,2025-10-13_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 spamscore=0 clxscore=1011 impostorscore=0
- phishscore=0 malwarescore=0 adultscore=0 priorityscore=1501 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.19.0-2510020000 definitions=main-2510110014
-Received-SPF: pass client-ip=148.163.158.5;
- envelope-from=borntraeger@linux.ibm.com; helo=mx0b-001b2d01.pphosted.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
-X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20251015130657.571756-1-djordje.todorovic@htecgroup.com>
+In-Reply-To: <20251015130657.571756-1-djordje.todorovic@htecgroup.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 17 Oct 2025 10:54:29 +1000
+X-Gm-Features: AS18NWBXQeo_sOvHiiiDgzDYBELX14czc25-HmaorqgD8h8uA4UlJTCXCGj6ZWs
+Message-ID: <CAKmqyKNCNhRqS+5=sZ0Cg7PcV-ciqxWD4OxJgq1M0RaX8zbgrQ@mail.gmail.com>
+Subject: Re: [PATCH v12 00/13] riscv: Add support for MIPS P8700 CPU
+To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
+Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
+ "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com" <mst@redhat.com>, 
+ "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>, 
+ "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>,
+ "philmd@linaro.org" <philmd@linaro.org>, 
+ "thuth@redhat.com" <thuth@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52d.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 16 Oct 2025 15:59:35 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -138,18 +104,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Am 16.10.25 um 15:11 schrieb Peter Maydell:
-[...]
-> +Supported machine types for the virtualization use case, by target architecture:
-> +
-> +aarch64
-> +  ``virt``
-> +i386, x86_64
-> +  ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``, ``pc``, ``q35``
-> +s390x
-> +  ``s390-ccw-virtio``
+On Wed, Oct 15, 2025 at 11:07=E2=80=AFPM Djordje Todorovic
+<Djordje.Todorovic@htecgroup.com> wrote:
+>
+> In this version I renamed:
+>   tests/functional/riscv64/test_riscv64_boston.py
+>   -->
+>   tests/functional/riscv64/test_boston.py
 
-Makes sense for the s390x case.
-Acked-by: Christian Borntraeger <borntraeger@linux.ibm.com>
+I get an error when building:
 
+../tests/functional/meson.build:102:45: ERROR: File
+qemu/tests/functional/riscv64/test_riscv64_boston.py does not exist.
+
+Alistair
+
+>
+> Djordje Todorovic (13):
+>   hw/intc: Allow gaps in hartids for aclint and aplic
+>   target/riscv: Add cpu_set_exception_base
+>   target/riscv: Add MIPS P8700 CPU
+>   target/riscv: Add MIPS P8700 CSRs
+>   target/riscv: Add mips.ccmov instruction
+>   target/riscv: Add mips.pref instruction
+>   target/riscv: Add Xmipslsp instructions
+>   hw/misc: Add RISC-V CMGCR device implementation
+>   hw/misc: Add RISC-V CPC device implementation
+>   hw/riscv: Add support for RISCV CPS
+>   hw/riscv: Add support for MIPS Boston-aia board mode
+>   riscv/boston-aia: Add an e1000e NIC in slot 0 func 1
+>   test/functional: Add test for boston-aia board
+>
+>  configs/devices/riscv64-softmmu/default.mak |   1 +
+>  docs/system/riscv/mips.rst                  |  20 +
+>  docs/system/target-riscv.rst                |   1 +
+>  hw/intc/riscv_aclint.c                      |  18 +-
+>  hw/intc/riscv_aplic.c                       |  13 +-
+>  hw/misc/Kconfig                             |  17 +
+>  hw/misc/meson.build                         |   3 +
+>  hw/misc/riscv_cmgcr.c                       | 248 ++++++++++
+>  hw/misc/riscv_cpc.c                         | 265 +++++++++++
+>  hw/riscv/Kconfig                            |   6 +
+>  hw/riscv/boston-aia.c                       | 476 ++++++++++++++++++++
+>  hw/riscv/cps.c                              | 196 ++++++++
+>  hw/riscv/meson.build                        |   3 +
+>  include/hw/misc/riscv_cmgcr.h               |  50 ++
+>  include/hw/misc/riscv_cpc.h                 |  64 +++
+>  include/hw/riscv/cps.h                      |  66 +++
+>  target/riscv/cpu-qom.h                      |   1 +
+>  target/riscv/cpu.c                          |  44 ++
+>  target/riscv/cpu.h                          |   7 +
+>  target/riscv/cpu_cfg.h                      |   5 +
+>  target/riscv/cpu_cfg_fields.h.inc           |   3 +
+>  target/riscv/cpu_vendorid.h                 |   1 +
+>  target/riscv/insn_trans/trans_xmips.c.inc   | 136 ++++++
+>  target/riscv/meson.build                    |   2 +
+>  target/riscv/mips_csr.c                     | 217 +++++++++
+>  target/riscv/translate.c                    |   3 +
+>  target/riscv/xmips.decode                   |  35 ++
+>  tests/functional/riscv64/meson.build        |   2 +
+>  tests/functional/riscv64/test_boston.py     | 123 +++++
+>  29 files changed, 2021 insertions(+), 5 deletions(-)
+>  create mode 100644 docs/system/riscv/mips.rst
+>  create mode 100644 hw/misc/riscv_cmgcr.c
+>  create mode 100644 hw/misc/riscv_cpc.c
+>  create mode 100644 hw/riscv/boston-aia.c
+>  create mode 100644 hw/riscv/cps.c
+>  create mode 100644 include/hw/misc/riscv_cmgcr.h
+>  create mode 100644 include/hw/misc/riscv_cpc.h
+>  create mode 100644 include/hw/riscv/cps.h
+>  create mode 100644 target/riscv/insn_trans/trans_xmips.c.inc
+>  create mode 100644 target/riscv/mips_csr.c
+>  create mode 100644 target/riscv/xmips.decode
+>  create mode 100755 tests/functional/riscv64/test_boston.py
+>
+> --
+> 2.34.1
 
