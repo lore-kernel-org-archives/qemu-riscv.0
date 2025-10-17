@@ -4,90 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A4B5CCD183
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Oct 2025 03:00:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF4B8CCD195
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Oct 2025 07:07:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v9ahh-0005js-6a; Thu, 16 Oct 2025 23:00:29 -0400
+	id 1v9eYP-0006v7-1V; Fri, 17 Oct 2025 03:07:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v9ahf-0005ia-FS
- for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 23:00:27 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1v9ahY-0003GN-Vk
- for qemu-riscv@nongnu.org; Thu, 16 Oct 2025 23:00:27 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-636de696e18so2812317a12.3
- for <qemu-riscv@nongnu.org>; Thu, 16 Oct 2025 20:00:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760670017; x=1761274817; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d6oqH2j7tTArZn8KsVhidwMrff2L6PcKwC/ZCSJOMhI=;
- b=B9y1OjMdQ5QLirNjJ8O7PGTUZk8Tp1DACnuyKz5Q8KVvCaUTbdaWhhXeEFFWUVoSj2
- xUBfgLtyFLlxu23hmlWT+owA3N5yvtZbta2YSutlV7qFxqRg2ig7cmJJfnx2tfrMuFBi
- PgaqbBbkW4t0hY5TSBbI35eVlH3TM4oa1f2+bDrhMLwkQiHDai2btMK6k49LHdWiLV37
- +BIAEgyliNGzKz2i9H9q9MFHGHqIPC+jhieN0+pRpwxBA1lAzKjsiOtQvPxK+PdLoDlO
- zQobV3zBNlUjFvE/YiuhHdTLHUiEiSsYsCdbD/Jze7gaR/E2x0HXHL5yZTT1uiOYxn2t
- hk6Q==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1v9eYN-0006uM-0Q
+ for qemu-riscv@nongnu.org; Fri, 17 Oct 2025 03:07:07 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1v9eYG-0006dl-T9
+ for qemu-riscv@nongnu.org; Fri, 17 Oct 2025 03:07:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1760684817;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=JrVoIejruhskipD3vPDcUrVd7qwR3pPHBdPh8hMLd2E=;
+ b=S5kP24SLig87QVDcT59Ilxx3V99Le2K1eYd5N2whwZCdxcInzRqVOYlL1eZxOkj9Bk/tyi
+ NqYLh36PXd4vCeib2EpDpAxjixStGboS1xhpOC4y+/HicWVe2E1bjO09IFAeCHwFlBHX44
+ If+PBqHjR5iUEWeHbwoSxX8AyssOikQ=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-463-6SdU0ZMmNpS_-tydoy6qIw-1; Fri, 17 Oct 2025 03:06:56 -0400
+X-MC-Unique: 6SdU0ZMmNpS_-tydoy6qIw-1
+X-Mimecast-MFC-AGG-ID: 6SdU0ZMmNpS_-tydoy6qIw_1760684815
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-401dbafbcfaso1300547f8f.1
+ for <qemu-riscv@nongnu.org>; Fri, 17 Oct 2025 00:06:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760670017; x=1761274817;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=d6oqH2j7tTArZn8KsVhidwMrff2L6PcKwC/ZCSJOMhI=;
- b=KfsMY+X26t5vOQkyurYyDQhRiimD3gheJBBETEvQBe0POIBZbY2SWG1tJQkV3bNwEN
- JKTewnLXJM85SI1EnrZCIpwiGugVv1ZdJ9/0cYdEjo0V6VM54StZG+AXfbly0aDD0UtH
- 9poMnglsA8A7AJtrrJsMavZ0P0I7JuCSeqjaUVb1UPgSGAPJaQjsbk6Cu9iEBOqgY6zX
- 7EJnSdDfOvLncBi1flPygAkXzPoFNcmmDW445DHF+Rj/tHNrxb437b5Njq/4hwdxwFqw
- N1ozV668A6OUHL3P5bBUhUWv6gbprwk7HbqoazXtUNrO1wJG58i/8oHrDgRRS48yRyzU
- DOLw==
+ d=1e100.net; s=20230601; t=1760684815; x=1761289615;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JrVoIejruhskipD3vPDcUrVd7qwR3pPHBdPh8hMLd2E=;
+ b=xSLuTrP+ticleZ18C+MrmBGkAdzDi9Fu1XPCiFEnDzlSFXrOYfUNu+uCQ9DKrkTYkO
+ e/iOH1WXtXP3jrE5mFMxbdUvOguniu1kFQ5mj7cuW7+kb4cEoqcSJZYtd95nLsq2dmKX
+ SMlzlWPs/UrIy/wd/IEt5gRJjzDbvifvpZOSWpj1vjfu9fQ7fxtlmQzU9whjMCMcqzka
+ GZCcZFlSEaMtnTLHL1yPmDQuQ+yR5QRX5zraiMbu+EwK7ZM18geYtFchvOd6vcEaVjag
+ EO7YMGqyefhaHuq56QsYEQ7VR2XOORUSGKkoYiKJ17ubRzKJ62WqXBWs9o5RdnKIq4qC
+ 3RZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWzCyEh92X9dxebLWxmjZ+1/+blGgZc/nVcWWdoGs6pj9GTe6fbL1ocEJVS46ymyUSrmq/YUrmRE+Iq@nongnu.org
-X-Gm-Message-State: AOJu0YyYiXhW1zCc/pOmYDS+7FnGv9getqg5gF800gviTtl17/aJlBd0
- A+ObmK5+EDp7AGV6pDJ4Oo8C8Sq0515Q1P7lKqZaNlon9tiesCpuXBa1khfek1FB5ETJdf30elo
- jatkN37Hy0b3+i29ptKxUuW2X2GPWftg=
-X-Gm-Gg: ASbGncsi+eg5kXFuEAtWkMZfWYxfSEz+iVt4aopEb/1hQMz/pgbF06eXq/OWrPokC4o
- +WqcK3DFQ7cifXLpJaSgQcWmEmGBbSTe6JYAMtx4p/Mg0+UOKdcAlLsI287SBU5D+p8Dh7rbpyn
- 19ueRfoSiWwDGy0GjdyJUVKWVy7pKj1//EvedriiREqFTEtz3IeKDYrPguoACmwZgpWewlKM/4Z
- Lfn2g5unIpHhQjKY/ybgEzJb/LKgcyoQ2Vp6A3QtgCSc2BgZAIiTIcx7L1HxiPoo6f60Opi+MQn
- fahiSTxCvTdhbsi5XOFLK8jeeg==
-X-Google-Smtp-Source: AGHT+IEoMl5Kokb+3xHt/0QhnYB0pRmSXSb75XJLKfRIcVjeR8mCw0o9yIah4NOnwNsbrgcmpp/9CGMj4sKPUPL4jGc=
-X-Received: by 2002:a17:907:9303:b0:b2b:3481:93c8 with SMTP id
- a640c23a62f3a-b647304ae3fmr200587166b.19.1760670016507; Thu, 16 Oct 2025
- 20:00:16 -0700 (PDT)
+ AJvYcCW7STTztY+WNfFcuxKeJ8eGbJyAWGIy09aW/ZAXt+QhaeejWP2icz1PVjQ7TScP9ObVbUayMNvlGPFb@nongnu.org
+X-Gm-Message-State: AOJu0YztTF86WlsTW1DNdQi7KsERSxpuZ119DBtHjENAiFj/85K6YSlk
+ Dy1LFZ8uEajZWxI/aWEfztjiRfjwoCOy+luah8Fewb8ydxRK63e6ARdIyMVg52LomclWPnWhRGn
+ ppDA6pW2alXVbFctlDbaCMShLFDlm4JjGCYJdlHkSs1eFYxNIxViMfxot
+X-Gm-Gg: ASbGncvkabO8vdbKqRmxqRoyan7FMQShpAKWIaBRumvdKo66UIXqe96MSdelkC9N/UV
+ jZYQXPACvK+YeBu1b27UZWvPTtvVe0PrtQTtdDO6QyCVeq+/U4He64wsULBL9mLyPzIUYpNbjQe
+ bHK3ZCr6bHBo7A/QnWZ9yT3B43eogoj4Bf7eilHKLk67auG3t3n+VsuBhDu76V9pWZ6lZBs23E3
+ 0WtME+afUuLEu167Vh4HUEHtW9Qhu2W8V3PiDatD0gxVIrOFO2ibgf7FzWXE1xAP2to6ySgUrtj
+ O+LBoavb7YkcFfuQ6FkIlM4gzJD8sk4ZKY1DAzI23QR7Fpn1PQ8G8E3/KsEb/Kw2fU5VipRXzlK
+ vboyeAFTwYB0eD+20wpPwv4T9BZWHHb3vgQkXRPd5
+X-Received: by 2002:a05:6000:186d:b0:425:76e3:81c5 with SMTP id
+ ffacd0b85a97d-42704d86bb1mr1734805f8f.17.1760684814789; 
+ Fri, 17 Oct 2025 00:06:54 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHQPeNBFSHOmcRkJ4c2fikclxE4T8sgFRB2XdOjrWWXUi+tz/Hd5p729fL+he6VdISzPVpr9g==
+X-Received: by 2002:a05:6000:186d:b0:425:76e3:81c5 with SMTP id
+ ffacd0b85a97d-42704d86bb1mr1734787f8f.17.1760684814359; 
+ Fri, 17 Oct 2025 00:06:54 -0700 (PDT)
+Received: from [192.168.0.7] (ltea-047-064-114-135.pools.arcor-ip.net.
+ [47.64.114.135]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-426ce5e10e8sm39171975f8f.39.2025.10.17.00.06.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 Oct 2025 00:06:53 -0700 (PDT)
+Message-ID: <ccb41d4e-c6e7-49c1-b3db-c09034f95d61@redhat.com>
+Date: Fri, 17 Oct 2025 09:06:51 +0200
 MIME-Version: 1.0
-References: <20251010145621.24961-1-z_bajeer@yeah.net>
-In-Reply-To: <20251010145621.24961-1-z_bajeer@yeah.net>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 17 Oct 2025 12:59:49 +1000
-X-Gm-Features: AS18NWDbAUN--_zlw_XP7JrjhhjL60h7vp4kW6MHN-LmDPr3fAm3JzD2AmGzeog
-Message-ID: <CAKmqyKPbcv0tio3KgW1AG-MW7d4wVO2a28jUgV+683j3g=B6pw@mail.gmail.com>
-Subject: Re: [PATCH v3] aplic: fix mask for smsiaddrcfgh
-To: Jialong Yang <z_bajeer@yeah.net>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, jialong.yang@barrietech.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x535.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] docs/system/security: Restrict "virtualization use
+ case" to specific machines
+To: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org
+Cc: Stefan Hajnoczi <stefanha@redhat.com>,
+ Bernhard Beschow <shentey@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>,
+ qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
+References: <20251016131159.750480-1-peter.maydell@linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <20251016131159.750480-1-peter.maydell@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: vSxOpkJBcdtJvDCTdIazpNAcKxcCVcE1X-QA17JsLm4_1760684815
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,122 +168,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Oct 11, 2025 at 1:00=E2=80=AFAM Jialong Yang <z_bajeer@yeah.net> wr=
-ote:
->
-> Signed-off-by: Jialong Yang <z_bajeer@yeah.net>
+On 16/10/2025 15.11, Peter Maydell wrote:
+> Currently our security policy defines a "virtualization use case"
+> where we consider bugs to be security issues, and a
+> "non-virtualization use case" where we do not make any security
+> guarantees and don't consider bugs to be security issues.
+> 
+> The rationale for this split is that much code in QEMU is older and
+> was not written with malicious guests in mind, and we don't have the
+> resources to audit, fix and defend it.  So instead we inform users
+> about what the can in practice rely on as a security barrier, and
+> what they can't.
+> 
+> We don't currently restrict the "virtualization use case" to any
+> particular set of machine types.  This means that we have effectively
+> barred ourselves from adding KVM support to any machine type that we
+> don't want to put into the "bugs are security issues" category, even
+> if it would be useful for users to be able to get better performance
+> with a trusted guest by enabling KVM. This seems an unnecessary
+> restriction, and in practice the set of machine types it makes
+> sense to use for untrusted-guest virtualization is quite small.
+> 
+> Specifically, we would like to be able to enable the use of
+> KVM with the imx8 development board machine types, but we don't
+> want to commit ourselves to having to support those SoC models
+> and device models as part of QEMU's security boundary:
+> https://lore.kernel.org/qemu-devel/20250629204851.1778-3-shentey@gmail.com/
 
-Thanks!
+(FWIW, I think this was already a ambiguous on ppc where some of the other 
+old machine types like mac99 or ppce500 could be used with KVM, too, so it's 
+good that we finally get some proper wording here)
 
-Applied to riscv-to-apply.next
-
-Alistair
-
+> This patch updates the security policy to explicitly list the
+> machine types we consider to be useful for the "virtualization
+> use case".
+> 
+> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
 > ---
->  hw/intc/riscv_aplic.c | 29 ++++++++++++++++++-----------
->  1 file changed, 18 insertions(+), 11 deletions(-)
->
-> v1 --> v2:
-> - fix calculation of MSI address.
-> - In Supervisor mode, lhxw/hhxs/hhxw fields are in mmsiaddrcfgh register.
-> - And lhxs field is in smsiaddrcfgh.
->
-> v2 --> v3:
-> - Fix compile error when enable kvm.
->
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index a1d9fa5085..6dccca73af 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -96,7 +96,7 @@
->      (APLIC_xMSICFGADDR_PPN_HHX_MASK(__hhxw) << \
->       APLIC_xMSICFGADDR_PPN_HHX_SHIFT(__hhxs))
->
-> -#define APLIC_xMSICFGADDRH_VALID_MASK   \
-> +#define APLIC_MMSICFGADDRH_VALID_MASK   \
->      (APLIC_xMSICFGADDRH_L | \
->       (APLIC_xMSICFGADDRH_HHXS_MASK << APLIC_xMSICFGADDRH_HHXS_SHIFT) | \
->       (APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
-> @@ -104,6 +104,10 @@
->       (APLIC_xMSICFGADDRH_LHXW_MASK << APLIC_xMSICFGADDRH_LHXW_SHIFT) | \
->       APLIC_xMSICFGADDRH_BAPPN_MASK)
->
-> +#define APLIC_SMSICFGADDRH_VALID_MASK   \
-> +    ((APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
-> +     APLIC_xMSICFGADDRH_BAPPN_MASK)
-> +
->  #define APLIC_SETIP_BASE               0x1c00
->  #define APLIC_SETIPNUM                 0x1cdc
->
-> @@ -184,7 +188,7 @@ void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *=
-aplic, hwaddr addr)
->          addr >>=3D APLIC_xMSICFGADDR_PPN_SHIFT;
->          aplic->kvm_msicfgaddr =3D extract64(addr, 0, 32);
->          aplic->kvm_msicfgaddrH =3D extract64(addr, 32, 32) &
-> -                                 APLIC_xMSICFGADDRH_VALID_MASK;
-> +                                 APLIC_MMSICFGADDRH_VALID_MASK;
->      }
->  #endif
->  }
-> @@ -409,13 +413,8 @@ static void riscv_aplic_msi_send(RISCVAPLICState *ap=
-lic,
->          msicfgaddr =3D aplic->kvm_msicfgaddr;
->          msicfgaddrH =3D ((uint64_t)aplic->kvm_msicfgaddrH << 32);
->      } else {
-> -        if (aplic->mmode) {
-> -            msicfgaddr =3D aplic_m->mmsicfgaddr;
-> -            msicfgaddrH =3D aplic_m->mmsicfgaddrH;
-> -        } else {
-> -            msicfgaddr =3D aplic_m->smsicfgaddr;
-> -            msicfgaddrH =3D aplic_m->smsicfgaddrH;
-> -        }
-> +        msicfgaddr =3D aplic_m->mmsicfgaddr;
-> +        msicfgaddrH =3D aplic_m->mmsicfgaddrH;
->      }
->
->      lhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
-> @@ -427,6 +426,14 @@ static void riscv_aplic_msi_send(RISCVAPLICState *ap=
-lic,
->      hhxw =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXW_SHIFT) &
->              APLIC_xMSICFGADDRH_HHXW_MASK;
->
-> +    if (!aplic->kvm_splitmode && !aplic->mmode) {
-> +        msicfgaddrH =3D aplic_m->smsicfgaddrH;
-> +        msicfgaddr =3D aplic_m->smsicfgaddr;
-> +
-> +        lhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
-> +            APLIC_xMSICFGADDRH_LHXS_MASK;
-> +    }
-> +
->      group_idx =3D hart_idx >> lhxw;
->
->      addr =3D msicfgaddr;
-> @@ -771,7 +778,7 @@ static void riscv_aplic_write(void *opaque, hwaddr ad=
-dr, uint64_t value,
->      } else if (aplic->mmode && aplic->msimode &&
->                 (addr =3D=3D APLIC_MMSICFGADDRH)) {
->          if (!(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-> -            aplic->mmsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
-K;
-> +            aplic->mmsicfgaddrH =3D value & APLIC_MMSICFGADDRH_VALID_MAS=
-K;
->          }
->      } else if (aplic->mmode && aplic->msimode &&
->                 (addr =3D=3D APLIC_SMSICFGADDR)) {
-> @@ -792,7 +799,7 @@ static void riscv_aplic_write(void *opaque, hwaddr ad=
-dr, uint64_t value,
->                 (addr =3D=3D APLIC_SMSICFGADDRH)) {
->          if (aplic->num_children &&
->              !(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-> -            aplic->smsicfgaddrH =3D value & APLIC_xMSICFGADDRH_VALID_MAS=
-K;
-> +            aplic->smsicfgaddrH =3D value & APLIC_SMSICFGADDRH_VALID_MAS=
-K;
->          }
->      } else if ((APLIC_SETIP_BASE <=3D addr) &&
->              (addr < (APLIC_SETIP_BASE + aplic->bitfield_words * 4))) {
-> --
-> 2.43.0
->
->
+> changes v1->v2: updated the list:
+>   * remove isapc
+>   * remove ppc, mips, mips64 (no machines supported)
+>   * list pseries as only supported ppc64 machine
+>   * list virt as only supported riscv32, riscv64 machine
+> 
+> I believe the list to now be correct, and I think we generally
+> had some consensus about the idea on the v1 patch discussion, so
+> this one is a non-RFC patch.
+
+Looks good to me now, thanks for tackling this!
+
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+
 
