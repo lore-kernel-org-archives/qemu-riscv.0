@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF4B8CCD195
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Oct 2025 07:07:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BBC9CCD195
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Oct 2025 09:16:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v9eYP-0006v7-1V; Fri, 17 Oct 2025 03:07:09 -0400
+	id 1v9gZI-0004dq-7B; Fri, 17 Oct 2025 05:16:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1v9eYN-0006uM-0Q
- for qemu-riscv@nongnu.org; Fri, 17 Oct 2025 03:07:07 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <harshpb@linux.ibm.com>)
+ id 1v9gZE-0004XW-K5; Fri, 17 Oct 2025 05:16:08 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1v9eYG-0006dl-T9
- for qemu-riscv@nongnu.org; Fri, 17 Oct 2025 03:07:06 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1760684817;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=JrVoIejruhskipD3vPDcUrVd7qwR3pPHBdPh8hMLd2E=;
- b=S5kP24SLig87QVDcT59Ilxx3V99Le2K1eYd5N2whwZCdxcInzRqVOYlL1eZxOkj9Bk/tyi
- NqYLh36PXd4vCeib2EpDpAxjixStGboS1xhpOC4y+/HicWVe2E1bjO09IFAeCHwFlBHX44
- If+PBqHjR5iUEWeHbwoSxX8AyssOikQ=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-463-6SdU0ZMmNpS_-tydoy6qIw-1; Fri, 17 Oct 2025 03:06:56 -0400
-X-MC-Unique: 6SdU0ZMmNpS_-tydoy6qIw-1
-X-Mimecast-MFC-AGG-ID: 6SdU0ZMmNpS_-tydoy6qIw_1760684815
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-401dbafbcfaso1300547f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 17 Oct 2025 00:06:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760684815; x=1761289615;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JrVoIejruhskipD3vPDcUrVd7qwR3pPHBdPh8hMLd2E=;
- b=xSLuTrP+ticleZ18C+MrmBGkAdzDi9Fu1XPCiFEnDzlSFXrOYfUNu+uCQ9DKrkTYkO
- e/iOH1WXtXP3jrE5mFMxbdUvOguniu1kFQ5mj7cuW7+kb4cEoqcSJZYtd95nLsq2dmKX
- SMlzlWPs/UrIy/wd/IEt5gRJjzDbvifvpZOSWpj1vjfu9fQ7fxtlmQzU9whjMCMcqzka
- GZCcZFlSEaMtnTLHL1yPmDQuQ+yR5QRX5zraiMbu+EwK7ZM18geYtFchvOd6vcEaVjag
- EO7YMGqyefhaHuq56QsYEQ7VR2XOORUSGKkoYiKJ17ubRzKJ62WqXBWs9o5RdnKIq4qC
- 3RZQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW7STTztY+WNfFcuxKeJ8eGbJyAWGIy09aW/ZAXt+QhaeejWP2icz1PVjQ7TScP9ObVbUayMNvlGPFb@nongnu.org
-X-Gm-Message-State: AOJu0YztTF86WlsTW1DNdQi7KsERSxpuZ119DBtHjENAiFj/85K6YSlk
- Dy1LFZ8uEajZWxI/aWEfztjiRfjwoCOy+luah8Fewb8ydxRK63e6ARdIyMVg52LomclWPnWhRGn
- ppDA6pW2alXVbFctlDbaCMShLFDlm4JjGCYJdlHkSs1eFYxNIxViMfxot
-X-Gm-Gg: ASbGncvkabO8vdbKqRmxqRoyan7FMQShpAKWIaBRumvdKo66UIXqe96MSdelkC9N/UV
- jZYQXPACvK+YeBu1b27UZWvPTtvVe0PrtQTtdDO6QyCVeq+/U4He64wsULBL9mLyPzIUYpNbjQe
- bHK3ZCr6bHBo7A/QnWZ9yT3B43eogoj4Bf7eilHKLk67auG3t3n+VsuBhDu76V9pWZ6lZBs23E3
- 0WtME+afUuLEu167Vh4HUEHtW9Qhu2W8V3PiDatD0gxVIrOFO2ibgf7FzWXE1xAP2to6ySgUrtj
- O+LBoavb7YkcFfuQ6FkIlM4gzJD8sk4ZKY1DAzI23QR7Fpn1PQ8G8E3/KsEb/Kw2fU5VipRXzlK
- vboyeAFTwYB0eD+20wpPwv4T9BZWHHb3vgQkXRPd5
-X-Received: by 2002:a05:6000:186d:b0:425:76e3:81c5 with SMTP id
- ffacd0b85a97d-42704d86bb1mr1734805f8f.17.1760684814789; 
- Fri, 17 Oct 2025 00:06:54 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHQPeNBFSHOmcRkJ4c2fikclxE4T8sgFRB2XdOjrWWXUi+tz/Hd5p729fL+he6VdISzPVpr9g==
-X-Received: by 2002:a05:6000:186d:b0:425:76e3:81c5 with SMTP id
- ffacd0b85a97d-42704d86bb1mr1734787f8f.17.1760684814359; 
- Fri, 17 Oct 2025 00:06:54 -0700 (PDT)
-Received: from [192.168.0.7] (ltea-047-064-114-135.pools.arcor-ip.net.
- [47.64.114.135]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-426ce5e10e8sm39171975f8f.39.2025.10.17.00.06.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Oct 2025 00:06:53 -0700 (PDT)
-Message-ID: <ccb41d4e-c6e7-49c1-b3db-c09034f95d61@redhat.com>
-Date: Fri, 17 Oct 2025 09:06:51 +0200
+ (Exim 4.90_1) (envelope-from <harshpb@linux.ibm.com>)
+ id 1v9gZ9-0001x1-OB; Fri, 17 Oct 2025 05:16:08 -0400
+Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59H8rvET001283;
+ Fri, 17 Oct 2025 09:15:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=pp1; bh=85T4/z
+ IhtbpqUbW0+/zwsZHL0FaAv+MH/SZ5cJdr/qI=; b=lIxmOnRp35FtAa87Wy0oEr
+ 6OqTZkrdAQKlQhQtwqNtZdZAvjgNnnMU6/z0uH6D3xSx4Vx34y9xZXGBigPJ6WE+
+ uqND0zAwrnfrOPrExq/0oo7e0JSEe0fLeAx3sPtRwHckybUrCGJYnO7CEH9jn4kw
+ 8Zg4FjS3qiM8x64HiVLx206N9oOlrNTBo3zWJZQ7CDn3X7zvGEIlGl20x0G1N1RF
+ pRuRwuUgZOib1MmpdkaTTf7lA4c91UyTIXQ+SE+7NNLdyx65p/2c5qPokzRfNho1
+ X8II6APFKrcwksPxbCLsMF6yGP4BUMJ/nARyP/ndHnoe0/fPkwbBYmA44TwyzOxg
+ ==
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 49rfp8c89y-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 17 Oct 2025 09:15:36 +0000 (GMT)
+Received: from m0360083.ppops.net (m0360083.ppops.net [127.0.0.1])
+ by pps.reinject (8.18.1.12/8.18.0.8) with ESMTP id 59H9FZ3F027973;
+ Fri, 17 Oct 2025 09:15:35 GMT
+Received: from ppma23.wdc07v.mail.ibm.com
+ (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 49rfp8c899-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 17 Oct 2025 09:15:35 +0000 (GMT)
+Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 59H8ujoS016967;
+ Fri, 17 Oct 2025 09:15:34 GMT
+Received: from smtprelay07.wdc07v.mail.ibm.com ([172.16.1.74])
+ by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 49r32kbyfp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 17 Oct 2025 09:15:34 +0000
+Received: from smtpav02.dal12v.mail.ibm.com (smtpav02.dal12v.mail.ibm.com
+ [10.241.53.101])
+ by smtprelay07.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 59H9FWdS9306706
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 17 Oct 2025 09:15:33 GMT
+Received: from smtpav02.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 9E52158075;
+ Fri, 17 Oct 2025 09:15:32 +0000 (GMT)
+Received: from smtpav02.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 9F9D95805A;
+ Fri, 17 Oct 2025 09:15:26 +0000 (GMT)
+Received: from [9.39.26.64] (unknown [9.39.26.64])
+ by smtpav02.dal12v.mail.ibm.com (Postfix) with ESMTP;
+ Fri, 17 Oct 2025 09:15:26 +0000 (GMT)
+Message-ID: <95e1cffb-30c6-45a8-910e-79f1d5b2602f@linux.ibm.com>
+Date: Fri, 17 Oct 2025 14:45:24 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2] docs/system/security: Restrict "virtualization use
  case" to specific machines
 To: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org
 Cc: Stefan Hajnoczi <stefanha@redhat.com>,
- Bernhard Beschow <shentey@gmail.com>,
+ Bernhard Beschow <shentey@gmail.com>, Thomas Huth <thuth@redhat.com>,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>,
  "Michael S . Tsirkin" <mst@redhat.com>,
@@ -93,66 +85,46 @@ Cc: Stefan Hajnoczi <stefanha@redhat.com>,
  Christian Borntraeger <borntraeger@linux.ibm.com>,
  Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
 References: <20251016131159.750480-1-peter.maydell@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20251016131159.750480-1-peter.maydell@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: vSxOpkJBcdtJvDCTdIazpNAcKxcCVcE1X-QA17JsLm4_1760684815
-X-Mimecast-Originator: redhat.com
 Content-Language: en-US
+From: Harsh Prateek Bora <harshpb@linux.ibm.com>
+In-Reply-To: <20251016131159.750480-1-peter.maydell@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
- RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: mOBILxKxDXHE0ovow_jl3z8Ccevx9Sis
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDEyMDA4NCBTYWx0ZWRfX3/plEuKjV0+B
+ MscHQwTRXd16jUjaC+OljDSO92iRTirYQxIRlw/VhBEzXXSoqDAZrJmcwCOnavk91HoEPmbytK3
+ TQ7gAUbH0v15ir2aGfB9HMpwjjcLG3rnIL1pxj1dlePWQTlSvCMSvbg4WAHipnaR1gU7C9rN5s6
+ N6jwAYkqrXD/QSiXHdxckDHdJHPhk8Towyb3iGv6Lr6QYwr+4qvee/8IGJMHnGc/HPLXLyaBx00
+ NORvRUreWG20V6akXq9dm1R89CurAUiXIaDtYqSNIp0nRQ911VyUG/XOfIqgl2Kh7nUbfLkIGic
+ EvXaBVWC1J9GKBhMkd4wnk3tXT994WpROtfRQKpgFbN3FrVRzVK57Y+ZGuIri0k8ZkyzBGZyQsO
+ qWBP8Vuxf8Yus5yXZaBBp/OZV4r3wA==
+X-Proofpoint-GUID: 4wUJMb03kLA-4p-4TNJ5TcQwNy2UA8ql
+X-Authority-Analysis: v=2.4 cv=af5sXBot c=1 sm=1 tr=0 ts=68f20938 cx=c_pps
+ a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
+ a=IkcTkHD0fZMA:10 a=x6icFKpwvdMA:10 a=f7IdgyKtn90A:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=KKAkSRfTAAAA:8
+ a=VnNF1IyMAAAA:8 a=1eYIXUnFdi7DqYaC8d4A:9 a=QEXdDO2ut3YA:10
+ a=cvBusfyB2V15izCimMoJ:22 a=oH34dK2VZjykjzsv8OSz:22 a=cPQSjfK2_nFv0Q5t_7PE:22
+ a=Z5ABNNGmrOfJ6cZ5bIyy:22 a=jd6J4Gguk5HxikPWLKER:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-17_03,2025-10-13_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 priorityscore=1501 spamscore=0 adultscore=0 suspectscore=0
+ bulkscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2510020000 definitions=main-2510120084
+Received-SPF: pass client-ip=148.163.156.1; envelope-from=harshpb@linux.ibm.com;
+ helo=mx0a-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
+X-Spam_bar: --
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -168,7 +140,9 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 16/10/2025 15.11, Peter Maydell wrote:
+
+
+On 10/16/25 18:41, Peter Maydell wrote:
 > Currently our security policy defines a "virtualization use case"
 > where we consider bugs to be security issues, and a
 > "non-virtualization use case" where we do not make any security
@@ -194,11 +168,7 @@ On 16/10/2025 15.11, Peter Maydell wrote:
 > want to commit ourselves to having to support those SoC models
 > and device models as part of QEMU's security boundary:
 > https://lore.kernel.org/qemu-devel/20250629204851.1778-3-shentey@gmail.com/
-
-(FWIW, I think this was already a ambiguous on ppc where some of the other 
-old machine types like mac99 or ppce500 could be used with KVM, too, so it's 
-good that we finally get some proper wording here)
-
+> 
 > This patch updates the security policy to explicitly list the
 > machine types we consider to be useful for the "virtualization
 > use case".
@@ -214,9 +184,51 @@ good that we finally get some proper wording here)
 > I believe the list to now be correct, and I think we generally
 > had some consensus about the idea on the v1 patch discussion, so
 > this one is a non-RFC patch.
+> 
+> ---
+>   docs/system/security.rst | 26 ++++++++++++++++++++++++++
+>   1 file changed, 26 insertions(+)
+> 
+> diff --git a/docs/system/security.rst b/docs/system/security.rst
+> index f2092c8768b..53992048e65 100644
+> --- a/docs/system/security.rst
+> +++ b/docs/system/security.rst
+> @@ -35,6 +35,32 @@ malicious:
+>   Bugs affecting these entities are evaluated on whether they can cause damage in
+>   real-world use cases and treated as security bugs if this is the case.
+>   
+> +To be covered by this security support policy you must:
+> +
+> +- use a virtualization accelerator like KVM or HVF
+> +- use one of the machine types listed below
+> +
+> +It may be possible to use other machine types with a virtualization
+> +accelerator to provide improved performance with a trusted guest
+> +workload, but any machine type not listed here should not be
+> +considered to be providing guest isolation or security guarantees,
+> +and falls under the "non-virtualization use case".
+> +
+> +Supported machine types for the virtualization use case, by target architecture:
+> +
+> +aarch64
+> +  ``virt``
+> +i386, x86_64
+> +  ``microvm``, ``xenfv``, ``xenpv``, ``xenpvh``, ``pc``, ``q35``
+> +s390x
+> +  ``s390-ccw-virtio``
+> +loongarch64:
+> +  ``virt``
+> +ppc64:
+> +  ``pseries``
 
-Looks good to me now, thanks for tackling this!
+LGTM.
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+Reviewed-by: Harsh Prateek Bora <harshpb@linux.ibm.com>
 
+> +riscv32, riscv64:
+> +  ``virt``
+> +
+>   Non-virtualization Use Case
+>   '''''''''''''''''''''''''''
+>   
 
