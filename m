@@ -4,66 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8443ECCD195
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Oct 2025 12:51:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA2C4CCD195
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Oct 2025 16:58:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1v9jvc-0004lN-0Y; Fri, 17 Oct 2025 08:51:28 -0400
+	id 1v9nll-0007uI-MP; Fri, 17 Oct 2025 12:57:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
- id 1v9jvX-0004fm-N0; Fri, 17 Oct 2025 08:51:24 -0400
-Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
+ (Exim 4.90_1) (envelope-from <k.semichastnov@syntacore.com>)
+ id 1v9m1v-000436-DG; Fri, 17 Oct 2025 11:06:08 -0400
+Received: from m.syntacore.com ([178.249.69.228])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
- id 1v9jvR-0001i5-0A; Fri, 17 Oct 2025 08:51:23 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
- Reply-To; bh=0zZ44BdMh4VxGDGkq0F4k8Qf4DpXWOQQvGfD3lPSN/4=; b=p2zYvkfrN/jxZ3A7
- foYwqAuURvMPxFwE0NaE05f+IhD9mEGJrSCDW6GA2nTfdPTg0lt7OnqUOqLvZNu91Aj/xo0yCuD7G
- lhrPAqKaeC54kCWBmIFSExh6iwbEJmXn4iK43AbKwqs468MTVEyL8OVsHlfSfbj52Lb5O7P/a8DqG
- VrRBXR6rnDNtjEEhOmt7TVn1QdAMbrdaDJ33kRUmIEu3J26uS+L0xfSHN5l9cwi5eymbOTvAN8yjP
- S6G4U1x0OrgDjCYiVVCN9C3ZPTQ8mpyIPe60FqQR9NpWmT6yXDXsw6x0xRB2b2tOxENBwq6ph+yN1
- 1Ebu9nehH718c5eu7Q==;
-Received: from [167.98.27.226] (helo=[10.35.6.194])
- by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1v9jv5-00FRI9-54; Fri, 17 Oct 2025 13:50:55 +0100
-Message-ID: <6f824b82-e582-417d-a3a3-64191efd0d87@codethink.co.uk>
-Date: Fri, 17 Oct 2025 13:50:54 +0100
+ (Exim 4.90_1) (envelope-from <k.semichastnov@syntacore.com>)
+ id 1v9m1i-0005Nu-6A; Fri, 17 Oct 2025 11:06:04 -0400
+Received: from MRN-SC-KSMG-01.corp.syntacore.com (localhost [127.0.0.1])
+ by m.syntacore.com (Postfix) with ESMTP id 3EB2A1A0004;
+ Fri, 17 Oct 2025 15:05:40 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 m.syntacore.com 3EB2A1A0004
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com; s=m;
+ t=1760713540; bh=DTFS90AP3/VP9hxdygjMUjRKJkCvMbeeSBjLdW57QCY=;
+ h=Content-Type:Message-ID:Date:MIME-Version:Subject:To:From:From;
+ b=ABekka0eDqG7RGDc3KtFHQd5cRmjK8tPCRUBBIV3tLr0aze+qiyxs/q4EOrUhW4Ug
+ Ll5GW9WJpPfOzozlmalKWA5MNOxptyFpL8CIk57JBcShdLWFBoVKim3zQKOKVuCST3
+ RnrTu9f1gPIdI/mKKzeDQNBTRtCJvmsIyryytyayyproMIJi4PTIBBxCNNnBtk40/a
+ qWAUvFHbEaHRZNWhs9XJGprOnqb8q81dXqqBq+vSs03uh4oJM/88DE6fv8LtBR7Y3i
+ /Q67CUsJLbvgPUbdIyvmXcotI9BacBYolgVXfBJNxwO1DL8E74HqiF7VfXBJ5XlOsV
+ rQzi2ahI8rPUQ==
+Received: from S-SC-EXCH-01.corp.syntacore.com (exchange.syntacore.com
+ [10.76.202.20])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by m.syntacore.com (Postfix) with ESMTPS;
+ Fri, 17 Oct 2025 15:05:39 +0000 (UTC)
+Received: from [172.17.56.115] (172.17.56.115) by
+ S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Fri, 17 Oct 2025 18:04:46 +0300
+Content-Type: multipart/alternative;
+ boundary="------------SL4Gut365lzvxhHNVneUq4uM"
+Message-ID: <2e7ac207-5aee-4941-9fe8-91456e1c7ea9@syntacore.com>
+Date: Fri, 17 Oct 2025 18:05:38 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 12/13] target/riscv: Introduce mo_endian() helper
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Anton Johansson <anjo@rev.ng>,
- Richard Henderson <richard.henderson@linaro.org>,
- Valentin Haudiquet <valentin.haudiquet@canonical.com>,
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-References: <20251010155045.78220-1-philmd@linaro.org>
- <20251010155045.78220-13-philmd@linaro.org>
- <911ff888-2188-48c7-b347-9705d859e2c3@canonical.com>
-Content-Language: en-GB
-From: Ben Dooks <ben.dooks@codethink.co.uk>
-Organization: Codethink Limited.
-In-Reply-To: <911ff888-2188-48c7-b347-9705d859e2c3@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=188.40.203.114;
- envelope-from=ben.dooks@codethink.co.uk; helo=imap4.hz.codethink.co.uk
+Subject: Re: [PATCH 14/17] hw/riscv, target/riscv: send resync updiscon trace
+ packets
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ <qemu-devel@nongnu.org>
+CC: <qemu-riscv@nongnu.org>, <alistair.francis@wdc.com>, <liwei1518@gmail.com>,
+ <zhiwei_liu@linux.alibaba.com>, <palmer@dabbelt.com>,
+ <richard.henderson@linaro.org>, <k.semichastnov@syntacore.com>
+References: <20251002112335.2374517-1-dbarboza@ventanamicro.com><20251002112335.2374517-15-dbarboza@ventanamicro.com>
+Content-Language: en-US
+From: Konstantin Semichastnov <k.semichastnov@syntacore.com>
+In-Reply-To: <20251002112335.2374517-15-dbarboza@ventanamicro.com>
+X-Originating-IP: [172.17.56.115]
+X-ClientProxiedBy: S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) To
+ S-SC-EXCH-01.corp.syntacore.com (10.76.202.20)
+X-KSMG-AntiPhishing: not scanned, disabled by settings
+X-KSMG-AntiSpam-Interceptor-Info: not scanned
+X-KSMG-AntiSpam-Status: not scanned, disabled by settings
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.1.1.8310,
+ bases: 2025/10/17 13:40:00 #27882168
+X-KSMG-LinksScanning: NotDetected, bases: 2025/10/17 14:34:00
+X-KSMG-Message-Action: skipped
+X-KSMG-Rule-ID: 5
+Received-SPF: pass client-ip=178.249.69.228;
+ envelope-from=k.semichastnov@syntacore.com; helo=m.syntacore.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 17 Oct 2025 12:57:27 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,345 +94,540 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/10/2025 17:35, Heinrich Schuchardt wrote:
-> On 10/10/25 17:50, Philippe Mathieu-Daudé wrote:
->> mo_endian() returns the target endianness from DisasContext.
->>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
->>   target/riscv/translate.c                      | 18 +++++++++++++++---
->>   target/riscv/insn_trans/trans_rva.c.inc       |  4 ++--
->>   target/riscv/insn_trans/trans_rvd.c.inc       |  4 ++--
->>   target/riscv/insn_trans/trans_rvf.c.inc       |  4 ++--
->>   target/riscv/insn_trans/trans_rvi.c.inc       |  4 ++--
->>   target/riscv/insn_trans/trans_rvzacas.c.inc   |  4 ++--
->>   target/riscv/insn_trans/trans_rvzce.c.inc     |  4 ++--
->>   target/riscv/insn_trans/trans_rvzfh.c.inc     |  4 ++--
->>   target/riscv/insn_trans/trans_rvzicfiss.c.inc |  4 ++--
->>   target/riscv/insn_trans/trans_xthead.c.inc    | 16 ++++++++--------
->>   10 files changed, 39 insertions(+), 27 deletions(-)
->>
->> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
->> index 2e6f39aa02d..e1f4dc5ffd0 100644
->> --- a/target/riscv/translate.c
->> +++ b/target/riscv/translate.c
->> @@ -126,6 +126,18 @@ static inline bool has_ext(DisasContext *ctx, 
->> uint32_t ext)
->>       return ctx->misa_ext & ext;
->>   }
->> +static inline MemOp mo_endian(DisasContext *ctx)
->> +{
->> +    /*
->> +     * A couple of bits in MSTATUS set the endianness:
->> +     *  - MSTATUS_UBE (User-mode),
->> +     *  - MSTATUS_SBE (Supervisor-mode),
->> +     *  - MSTATUS_MBE (Machine-mode)
->> +     * but we don't implement that yet.
-> 
-> CCing Ben as he is interested in big-endian RISC-V emulation.
-> 
-> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-
-I missed this as it got pushed into my qemu folder which is now far
-too big to read.
-
-I'm assuming this is going to land and if so I'll have to go sort
-out our qemu-riscv-be patch-set for this. I didn't see it in main
-yet, are there plans to merge this soon?
-
->> +     */
->> +    return MO_TE;
->> +}
->> +
->>   #ifdef TARGET_RISCV32
->>   #define get_xl(ctx)    MXL_RV32
->>   #elif defined(CONFIG_USER_ONLY)
->> @@ -142,7 +154,7 @@ static inline bool has_ext(DisasContext *ctx, 
->> uint32_t ext)
->>   #define get_address_xl(ctx)    ((ctx)->address_xl)
->>   #endif
->> -#define mxl_memop(ctx) ((get_xl(ctx) + 1) | MO_TE)
->> +#define mxl_memop(ctx) ((get_xl(ctx) + 1) | mo_endian(ctx))
->>   /* The word size for this machine mode. */
->>   static inline int __attribute__((unused)) get_xlen(DisasContext *ctx)
->> @@ -1135,7 +1147,7 @@ static bool gen_amo(DisasContext *ctx, 
->> arg_atomic *a,
->>       TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
->>       MemOp size = mop & MO_SIZE;
->> -    mop |= MO_TE;
->> +    mop |= mo_endian(ctx);
->>       if (ctx->cfg_ptr->ext_zama16b && size >= MO_32) {
->>           mop |= MO_ATOM_WITHIN16;
->>       } else {
->> @@ -1156,7 +1168,7 @@ static bool gen_cmpxchg(DisasContext *ctx, 
->> arg_atomic *a, MemOp mop)
->>       TCGv src1 = get_address(ctx, a->rs1, 0);
->>       TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
->> -    mop |= MO_TE;
->> +    mop |= mo_endian(ctx);
->>       decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
->>       tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, 
->> mop);
->> diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/ 
->> insn_trans/trans_rva.c.inc
->> index 8737e8d60d1..a7a3278d242 100644
->> --- a/target/riscv/insn_trans/trans_rva.c.inc
->> +++ b/target/riscv/insn_trans/trans_rva.c.inc
->> @@ -35,7 +35,7 @@ static bool gen_lr(DisasContext *ctx, arg_atomic *a, 
->> MemOp mop)
->>       TCGv src1;
->>       mop |= MO_ALIGN;
->> -    mop |= MO_TE;
->> +    mop |= mo_endian(ctx);
->>       decode_save_opc(ctx, 0);
->>       src1 = get_address(ctx, a->rs1, 0);
->> @@ -65,7 +65,7 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, 
->> MemOp mop)
->>       TCGLabel *l2 = gen_new_label();
->>       mop |= MO_ALIGN;
->> -    mop |= MO_TE;
->> +    mop |= mo_endian(ctx);
->>       decode_save_opc(ctx, 0);
->>       src1 = get_address(ctx, a->rs1, 0);
->> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/ 
->> insn_trans/trans_rvd.c.inc
->> index 62b75358158..ffea0c2a1f9 100644
->> --- a/target/riscv/insn_trans/trans_rvd.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
->> @@ -60,7 +60,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
->>       } else {
->>           memop |= MO_ATOM_IFALIGN;
->>       }
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       decode_save_opc(ctx, 0);
->>       addr = get_address(ctx, a->rs1, a->imm);
->> @@ -85,7 +85,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
->>       } else {
->>           memop |= MO_ATOM_IFALIGN;
->>       }
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       decode_save_opc(ctx, 0);
->>       addr = get_address(ctx, a->rs1, a->imm);
->> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/ 
->> insn_trans/trans_rvf.c.inc
->> index 878417eae92..89fb0f604ad 100644
->> --- a/target/riscv/insn_trans/trans_rvf.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
->> @@ -48,7 +48,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
->>       REQUIRE_FPU;
->>       REQUIRE_EXT(ctx, RVF);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       if (ctx->cfg_ptr->ext_zama16b) {
->>           memop |= MO_ATOM_WITHIN16;
->>       }
->> @@ -71,7 +71,7 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
->>       REQUIRE_FPU;
->>       REQUIRE_EXT(ctx, RVF);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       if (ctx->cfg_ptr->ext_zama16b) {
->>           memop |= MO_ATOM_WITHIN16;
->>       }
->> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/ 
->> insn_trans/trans_rvi.c.inc
->> index 8db3e78baab..a6fe912b30c 100644
->> --- a/target/riscv/insn_trans/trans_rvi.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
->> @@ -404,7 +404,7 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, 
->> MemOp memop)
->>   {
->>       bool out;
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       if (ctx->cfg_ptr->ext_zama16b) {
->>           memop |= MO_ATOM_WITHIN16;
->>       }
->> @@ -508,7 +508,7 @@ static bool gen_store_i128(DisasContext *ctx, 
->> arg_sb *a, MemOp memop)
->>   static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
->>   {
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       if (ctx->cfg_ptr->ext_zama16b) {
->>           memop |= MO_ATOM_WITHIN16;
->>       }
->> diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc b/target/ 
->> riscv/insn_trans/trans_rvzacas.c.inc
->> index 6458ac4f241..8d94b83ce94 100644
->> --- a/target/riscv/insn_trans/trans_rvzacas.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvzacas.c.inc
->> @@ -76,7 +76,7 @@ static bool gen_cmpxchg64(DisasContext *ctx, 
->> arg_atomic *a, MemOp mop)
->>       TCGv src1 = get_address(ctx, a->rs1, 0);
->>       TCGv_i64 src2 = get_gpr_pair(ctx, a->rs2);
->> -    mop |= MO_TE;
->> +    mop |= mo_endian(ctx);
->>       decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
->>       tcg_gen_atomic_cmpxchg_i64(dest, src1, dest, src2, ctx->mem_idx, 
->> mop);
->> @@ -121,7 +121,7 @@ static bool trans_amocas_q(DisasContext *ctx, 
->> arg_amocas_q *a)
->>       TCGv_i64 desth = get_gpr(ctx, a->rd == 0 ? 0 : a->rd + 1, 
->> EXT_NONE);
->>       MemOp memop = MO_ALIGN | MO_UO;
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_concat_i64_i128(src2, src2l, src2h);
->>       tcg_gen_concat_i64_i128(dest, destl, desth);
->>       decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
->> diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/ 
->> insn_trans/trans_rvzce.c.inc
->> index 172c2c19c17..0d3ba40e52a 100644
->> --- a/target/riscv/insn_trans/trans_rvzce.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvzce.c.inc
->> @@ -185,7 +185,7 @@ static bool gen_pop(DisasContext *ctx, arg_cmpp 
->> *a, bool ret, bool ret_val)
->>       tcg_gen_addi_tl(addr, sp, stack_adj - reg_size);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       for (i = X_Sn + 11; i >= 0; i--) {
->>           if (reg_bitmap & (1 << i)) {
->>               TCGv dest = dest_gpr(ctx, i);
->> @@ -239,7 +239,7 @@ static bool trans_cm_push(DisasContext *ctx, 
->> arg_cm_push *a)
->>       tcg_gen_subi_tl(addr, sp, reg_size);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       for (i = X_Sn + 11; i >= 0; i--) {
->>           if (reg_bitmap & (1 << i)) {
->>               TCGv val = get_gpr(ctx, i, EXT_NONE);
->> diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/ 
->> insn_trans/trans_rvzfh.c.inc
->> index 5355cd46c3d..791ee51f652 100644
->> --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
->> @@ -49,7 +49,7 @@ static bool trans_flh(DisasContext *ctx, arg_flh *a)
->>       REQUIRE_FPU;
->>       REQUIRE_ZFHMIN_OR_ZFBFMIN(ctx);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       decode_save_opc(ctx, 0);
->>       t0 = get_gpr(ctx, a->rs1, EXT_NONE);
->>       if (a->imm) {
->> @@ -74,7 +74,7 @@ static bool trans_fsh(DisasContext *ctx, arg_fsh *a)
->>       REQUIRE_FPU;
->>       REQUIRE_ZFHMIN_OR_ZFBFMIN(ctx);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       decode_save_opc(ctx, 0);
->>       t0 = get_gpr(ctx, a->rs1, EXT_NONE);
->>       if (a->imm) {
->> diff --git a/target/riscv/insn_trans/trans_rvzicfiss.c.inc b/target/ 
->> riscv/insn_trans/trans_rvzicfiss.c.inc
->> index 89eed007587..0b6ad57965c 100644
->> --- a/target/riscv/insn_trans/trans_rvzicfiss.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
->> @@ -105,7 +105,7 @@ static bool trans_ssamoswap_w(DisasContext *ctx, 
->> arg_amoswap_w *a)
->>       decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
->>       src1 = get_address(ctx, a->rs1, 0);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_atomic_xchg_tl(dest, src1, src2, SS_MMU_INDEX(ctx), memop);
->>       gen_set_gpr(ctx, a->rd, dest);
->>       return true;
->> @@ -135,7 +135,7 @@ static bool trans_ssamoswap_d(DisasContext *ctx, 
->> arg_amoswap_w *a)
->>       decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
->>       src1 = get_address(ctx, a->rs1, 0);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_atomic_xchg_tl(dest, src1, src2, SS_MMU_INDEX(ctx), memop);
->>       gen_set_gpr(ctx, a->rd, dest);
->>       return true;
->> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/ 
->> riscv/insn_trans/trans_xthead.c.inc
->> index 2f31842791e..f8b95c6498b 100644
->> --- a/target/riscv/insn_trans/trans_xthead.c.inc
->> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
->> @@ -349,7 +349,7 @@ static bool gen_fload_idx(DisasContext *ctx, 
->> arg_th_memidx *a, MemOp memop,
->>       TCGv_i64 rd = cpu_fpr[a->rd];
->>       TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, 
->> zext_offs);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_qemu_ld_i64(rd, addr, ctx->mem_idx, memop);
->>       if ((memop & MO_SIZE) == MO_32) {
->>           gen_nanbox_s(rd, rd);
->> @@ -370,7 +370,7 @@ static bool gen_fstore_idx(DisasContext *ctx, 
->> arg_th_memidx *a, MemOp memop,
->>       TCGv_i64 rd = cpu_fpr[a->rd];
->>       TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, 
->> zext_offs);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_qemu_st_i64(rd, addr, ctx->mem_idx, memop);
->>       return true;
->> @@ -570,7 +570,7 @@ static bool gen_load_inc(DisasContext *ctx, 
->> arg_th_meminc *a, MemOp memop,
->>       TCGv rd = dest_gpr(ctx, a->rd);
->>       TCGv rs1 = get_gpr(ctx, a->rs1, EXT_NONE);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
->>       tcg_gen_addi_tl(rs1, rs1, imm);
->>       gen_set_gpr(ctx, a->rd, rd);
->> @@ -591,7 +591,7 @@ static bool gen_store_inc(DisasContext *ctx, 
->> arg_th_meminc *a, MemOp memop,
->>       TCGv data = get_gpr(ctx, a->rd, EXT_NONE);
->>       TCGv rs1 = get_gpr(ctx, a->rs1, EXT_NONE);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
->>       tcg_gen_addi_tl(rs1, rs1, imm);
->>       gen_set_gpr(ctx, a->rs1, rs1);
->> @@ -747,7 +747,7 @@ static bool gen_load_idx(DisasContext *ctx, 
->> arg_th_memidx *a, MemOp memop,
->>       TCGv rd = dest_gpr(ctx, a->rd);
->>       TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, 
->> zext_offs);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
->>       gen_set_gpr(ctx, a->rd, rd);
->> @@ -765,7 +765,7 @@ static bool gen_store_idx(DisasContext *ctx, 
->> arg_th_memidx *a, MemOp memop,
->>       TCGv data = get_gpr(ctx, a->rd, EXT_NONE);
->>       TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, 
->> zext_offs);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
->>       return true;
->> @@ -926,7 +926,7 @@ static bool gen_loadpair_tl(DisasContext *ctx, 
->> arg_th_pair *a, MemOp memop,
->>       addr1 = get_address(ctx, a->rs, imm);
->>       addr2 = get_address(ctx, a->rs, memop_size(memop) + imm);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_qemu_ld_tl(t1, addr1, ctx->mem_idx, memop);
->>       tcg_gen_qemu_ld_tl(t2, addr2, ctx->mem_idx, memop);
->>       gen_set_gpr(ctx, a->rd1, t1);
->> @@ -965,7 +965,7 @@ static bool gen_storepair_tl(DisasContext *ctx, 
->> arg_th_pair *a, MemOp memop,
->>       addr1 = get_address(ctx, a->rs, imm);
->>       addr2 = get_address(ctx, a->rs, memop_size(memop) + imm);
->> -    memop |= MO_TE;
->> +    memop |= mo_endian(ctx);
->>       tcg_gen_qemu_st_tl(data1, addr1, ctx->mem_idx, memop);
->>       tcg_gen_qemu_st_tl(data2, addr2, ctx->mem_idx, memop);
->>       return true;
-> 
-> 
+--------------SL4Gut365lzvxhHNVneUq4uM
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
--- 
-Ben Dooks				http://www.codethink.co.uk/
-Senior Engineer				Codethink - Providing Genius
+On 02.10.2025 14:23, Daniel Henrique Barboza wrote:
+> Send updiscon packets based on the constraints already discussed in the
+> previous patch:
+>
+> - We do not implement any form of call/return prediction in the encoder,
+>    and TCG will always retire a single insn per cycle, e.g. irreport will
+>    always be equal to updiscon;
+>
+> - irdepth is not implemented since we'll always return a  package where
+>    irreport == updiscon.
+>
+> Note that we're sending an updiscon packet if the 'updiscon_pending'
+> flag is set when we're about the send a resync or a trap packet. The TCG
+> helper in this case is just setting the trace encoder flags instead of
+> actually triggering a RAM sink SMEM write.
+>
+> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
+> ---
+>   hw/riscv/trace-encoder.c                      | 37 +++++++++++++++++++
+>   hw/riscv/trace-encoder.h                      |  3 ++
+>   target/riscv/helper.h                         |  1 +
+>   .../riscv/insn_trans/trans_privileged.c.inc   | 11 ++++++
+>   target/riscv/insn_trans/trans_rvi.c.inc       |  2 +
+>   target/riscv/trace_helper.c                   | 14 +++++++
+>   target/riscv/translate.c                      | 11 ++++++
+>   7 files changed, 79 insertions(+)
+>
+> diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
+> index 9a4530bbea..5572483d26 100644
+> --- a/hw/riscv/trace-encoder.c
+> +++ b/hw/riscv/trace-encoder.c
+> @@ -402,6 +402,22 @@ static void trencoder_send_sync_msg(Object *trencoder_obj, uint64_t pc)
+>       trencoder_send_message_smem(trencoder, msg, msg_size);
+>   }
+>   
+> +static void trencoder_send_updiscon(TraceEncoder *trencoder, uint64_t pc)
+> +{
+> +    g_autofree uint8_t *format2_msg = g_malloc0(TRACE_MSG_MAX_SIZE);
+> +    uint8_t addr_msb = extract64(pc, 31, 1);
+> +    bool notify = addr_msb;
+> +    bool updiscon = !notify;
+> +    uint8_t msg_size;
+> +
+> +    msg_size = rv_etrace_gen_encoded_format2_msg(format2_msg, pc,
+> +                                                 notify,
+> +                                                 updiscon);
+> +    trencoder_send_message_smem(trencoder, format2_msg, msg_size);
+> +
+> +    trencoder->updiscon_pending = false;
+> +}
+> +
+>   void trencoder_set_first_trace_insn(Object *trencoder_obj, uint64_t pc)
+>   {
+>       TraceEncoder *trencoder = TRACE_ENCODER(trencoder_obj);
+> @@ -409,6 +425,10 @@ void trencoder_set_first_trace_insn(Object *trencoder_obj, uint64_t pc)
+>       g_autofree uint8_t *msg = g_malloc0(TRACE_MSG_MAX_SIZE);
+>       uint8_t msg_size;
+>   
+> +    if (trencoder->updiscon_pending) {
+> +        trencoder_send_updiscon(trencoder, pc);
+> +    }
+> +
+>       trencoder->first_pc = pc;
+>       trace_trencoder_first_trace_insn(pc);
+>       msg_size = rv_etrace_gen_encoded_sync_msg(msg, pc, priv);
+> @@ -426,6 +446,10 @@ void trencoder_trace_trap_insn(Object *trencoder_obj,
+>       g_autofree uint8_t *msg = g_malloc0(TRACE_MSG_MAX_SIZE);
+>       uint8_t msg_size;
+>   
+> +    if (trencoder->updiscon_pending) {
+> +        trencoder_send_updiscon(trencoder, pc);
+> +    }
+> +
+>       msg_size = rv_etrace_gen_encoded_trap_msg(msg, pc, priv,
+>                                                 ecause, is_interrupt,
+>                                                 tval);
+> @@ -435,9 +459,22 @@ void trencoder_trace_trap_insn(Object *trencoder_obj,
+>   
+>   void trencoder_trace_ppccd(Object *trencoder_obj, uint64_t pc)
+>   {
+> +    TraceEncoder *trencoder = TRACE_ENCODER(trencoder_obj);
+> +
+> +    if (trencoder->updiscon_pending) {
+> +        trencoder_send_updiscon(trencoder, pc);
+> +    }
+> +
+>       trencoder_send_sync_msg(trencoder_obj, pc);
+>   }
+>   
+> +void trencoder_report_updiscon(Object *trencoder_obj)
+> +{
+> +    TraceEncoder *trencoder = TRACE_ENCODER(trencoder_obj);
+> +
+> +    trencoder->updiscon_pending = true;
+> +}
+> +
+>   static const Property trencoder_props[] = {
+>       /*
+>        * We need a link to the associated CPU to
+> diff --git a/hw/riscv/trace-encoder.h b/hw/riscv/trace-encoder.h
+> index 2bf07c01f6..0c44092ccb 100644
+> --- a/hw/riscv/trace-encoder.h
+> +++ b/hw/riscv/trace-encoder.h
+> @@ -36,6 +36,8 @@ struct TraceEncoder {
+>       uint32_t regs[TRACE_R_MAX];
+>       RegisterInfo regs_info[TRACE_R_MAX];
+>   
+> +    bool updiscon_pending;
+> +
+>       bool enabled;
+>       bool trace_running;
+>       bool trace_next_insn;
+> @@ -51,5 +53,6 @@ void trencoder_trace_trap_insn(Object *trencoder_obj,
+>                                  bool is_interrupt,
+>                                  uint64_t tval);
+>   void trencoder_trace_ppccd(Object *trencoder_obj, uint64_t pc);
+> +void trencoder_report_updiscon(Object *trencoder_obj);
+>   
+>   #endif
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index e80320ad16..f27ff319e9 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -131,6 +131,7 @@ DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
+>   
+>   /* Trace helpers (should be put inside ifdef) */
+>   DEF_HELPER_2(trace_insn, void, env, i64)
+> +DEF_HELPER_1(trace_updiscon, void, env)
+>   
+>   #ifndef CONFIG_USER_ONLY
+>   DEF_HELPER_1(sret, tl, env)
+> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+> index 8a62b4cfcd..28089539d5 100644
+> --- a/target/riscv/insn_trans/trans_privileged.c.inc
+> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
+> @@ -26,6 +26,8 @@
+>   
+>   static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
+>   {
+> +    gen_trace_updiscon();
+> +
+>       /* always generates U-level ECALL, fixed in do_interrupt handler */
+>       generate_exception(ctx, RISCV_EXCP_U_ECALL);
+>       return true;
+> @@ -40,6 +42,8 @@ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
+>       uint32_t ebreak = 0;
+>       uint32_t post   = 0;
+>   
+> +    gen_trace_updiscon();
+> +
+>       /*
+>        * The RISC-V semihosting spec specifies the following
+>        * three-instruction sequence to flag a semihosting call:
+> @@ -95,6 +99,8 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+>   {
+>   #ifndef CONFIG_USER_ONLY
+>       if (has_ext(ctx, RVS)) {
+> +        gen_trace_updiscon();
+> +
+>           decode_save_opc(ctx, 0);
+>           translator_io_start(&ctx->base);
+>           gen_update_pc(ctx, 0);
+> @@ -113,6 +119,8 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+>   static bool trans_mret(DisasContext *ctx, arg_mret *a)
+>   {
+>   #ifndef CONFIG_USER_ONLY
+> +    gen_trace_updiscon();
+> +
+>       decode_save_opc(ctx, 0);
+>       translator_io_start(&ctx->base);
+>       gen_update_pc(ctx, 0);
+> @@ -129,6 +137,9 @@ static bool trans_mnret(DisasContext *ctx, arg_mnret *a)
+>   {
+>   #ifndef CONFIG_USER_ONLY
+>       REQUIRE_SMRNMI(ctx);
+> +
+> +    gen_trace_updiscon();
+> +
+>       decode_save_opc(ctx, 0);
+>       gen_helper_mnret(cpu_pc, tcg_env);
+>       tcg_gen_exit_tb(NULL, 0); /* no chaining */
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+> index b9c7160468..adda6b5bd8 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -183,6 +183,8 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+>           }
+>       }
+>   
+> +    gen_trace_updiscon();
+> +
+>       lookup_and_goto_ptr(ctx);
+>   
+>       if (misaligned) {
+> diff --git a/target/riscv/trace_helper.c b/target/riscv/trace_helper.c
+> index ed84e6f79a..4b2b645f04 100644
+> --- a/target/riscv/trace_helper.c
+> +++ b/target/riscv/trace_helper.c
+> @@ -28,9 +28,23 @@ void helper_trace_insn(CPURISCVState *env, uint64_t pc)
+>           te->trace_next_insn = false;
+>       }
+>   }
+> +
+> +void helper_trace_updiscon(CPURISCVState *env)
+> +{
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +    TraceEncoder *te = TRACE_ENCODER(cpu->trencoder);
+> +
+> +    te->updiscon_pending = true;
+> +    te->trace_next_insn = true;
+> +}
+>   #else /* #ifndef CONFIG_USER_ONLY */
+>   void helper_trace_insn(CPURISCVState *env, uint64_t pc)
+>   {
+>       return;
+>   }
+> +
+> +void helper_trace_updiscon(CPURISCVState *env)
+> +{
+> +    return;
+> +}
+>   #endif /* #ifndef CONFIG_USER_ONLY*/
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 75348480e6..17a6174899 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -604,6 +604,15 @@ static void gen_ctr_jal(DisasContext *ctx, int rd, target_ulong imm)
+>   }
+>   #endif
+>   
+> +static void gen_trace_updiscon(void)
+> +{
+> +    TCGLabel *skip = gen_new_label();
+> +
+> +    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_trace_running, 0, skip);
+> +    gen_helper_trace_updiscon(tcg_env);
+> +    gen_set_label(skip);
+> +}
+> +
+>   static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+>   {
+>       TCGv succ_pc = dest_gpr(ctx, rd);
+> @@ -629,6 +638,8 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+>       gen_pc_plus_diff(succ_pc, ctx, ctx->cur_insn_len);
+>       gen_set_gpr(ctx, rd, succ_pc);
+>   
+> +    gen_trace_updiscon();
+I have a question about this line. Why have you added the generation of 
+an updiscon message if the JAL instruction is an inferable jump?
+> +
+>       gen_goto_tb(ctx, 0, imm); /* must use this for safety */
+>       ctx->base.is_jmp = DISAS_NORETURN;
+>   }
+--------------SL4Gut365lzvxhHNVneUq4uM
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-https://www.codethink.co.uk/privacy.html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 02.10.2025 14:23, Daniel Henrique
+      Barboza wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:20251002112335.2374517-15-dbarboza@ventanamicro.com">
+      <pre wrap="" class="moz-quote-pre">Send updiscon packets based on the constraints already discussed in the
+previous patch:
+
+- We do not implement any form of call/return prediction in the encoder,
+  and TCG will always retire a single insn per cycle, e.g. irreport will
+  always be equal to updiscon;
+
+- irdepth is not implemented since we'll always return a  package where
+  irreport == updiscon.
+
+Note that we're sending an updiscon packet if the 'updiscon_pending'
+flag is set when we're about the send a resync or a trap packet. The TCG
+helper in this case is just setting the trace encoder flags instead of
+actually triggering a RAM sink SMEM write.
+
+Signed-off-by: Daniel Henrique Barboza <a class="moz-txt-link-rfc2396E" href="mailto:dbarboza@ventanamicro.com">&lt;dbarboza@ventanamicro.com&gt;</a>
+---
+ hw/riscv/trace-encoder.c                      | 37 +++++++++++++++++++
+ hw/riscv/trace-encoder.h                      |  3 ++
+ target/riscv/helper.h                         |  1 +
+ .../riscv/insn_trans/trans_privileged.c.inc   | 11 ++++++
+ target/riscv/insn_trans/trans_rvi.c.inc       |  2 +
+ target/riscv/trace_helper.c                   | 14 +++++++
+ target/riscv/translate.c                      | 11 ++++++
+ 7 files changed, 79 insertions(+)
+
+diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
+index 9a4530bbea..5572483d26 100644
+--- a/hw/riscv/trace-encoder.c
++++ b/hw/riscv/trace-encoder.c
+@@ -402,6 +402,22 @@ static void trencoder_send_sync_msg(Object *trencoder_obj, uint64_t pc)
+     trencoder_send_message_smem(trencoder, msg, msg_size);
+ }
+ 
++static void trencoder_send_updiscon(TraceEncoder *trencoder, uint64_t pc)
++{
++    g_autofree uint8_t *format2_msg = g_malloc0(TRACE_MSG_MAX_SIZE);
++    uint8_t addr_msb = extract64(pc, 31, 1);
++    bool notify = addr_msb;
++    bool updiscon = !notify;
++    uint8_t msg_size;
++
++    msg_size = rv_etrace_gen_encoded_format2_msg(format2_msg, pc,
++                                                 notify,
++                                                 updiscon);
++    trencoder_send_message_smem(trencoder, format2_msg, msg_size);
++
++    trencoder-&gt;updiscon_pending = false;
++}
++
+ void trencoder_set_first_trace_insn(Object *trencoder_obj, uint64_t pc)
+ {
+     TraceEncoder *trencoder = TRACE_ENCODER(trencoder_obj);
+@@ -409,6 +425,10 @@ void trencoder_set_first_trace_insn(Object *trencoder_obj, uint64_t pc)
+     g_autofree uint8_t *msg = g_malloc0(TRACE_MSG_MAX_SIZE);
+     uint8_t msg_size;
+ 
++    if (trencoder-&gt;updiscon_pending) {
++        trencoder_send_updiscon(trencoder, pc);
++    }
++
+     trencoder-&gt;first_pc = pc;
+     trace_trencoder_first_trace_insn(pc);
+     msg_size = rv_etrace_gen_encoded_sync_msg(msg, pc, priv);
+@@ -426,6 +446,10 @@ void trencoder_trace_trap_insn(Object *trencoder_obj,
+     g_autofree uint8_t *msg = g_malloc0(TRACE_MSG_MAX_SIZE);
+     uint8_t msg_size;
+ 
++    if (trencoder-&gt;updiscon_pending) {
++        trencoder_send_updiscon(trencoder, pc);
++    }
++
+     msg_size = rv_etrace_gen_encoded_trap_msg(msg, pc, priv,
+                                               ecause, is_interrupt,
+                                               tval);
+@@ -435,9 +459,22 @@ void trencoder_trace_trap_insn(Object *trencoder_obj,
+ 
+ void trencoder_trace_ppccd(Object *trencoder_obj, uint64_t pc)
+ {
++    TraceEncoder *trencoder = TRACE_ENCODER(trencoder_obj);
++
++    if (trencoder-&gt;updiscon_pending) {
++        trencoder_send_updiscon(trencoder, pc);
++    }
++
+     trencoder_send_sync_msg(trencoder_obj, pc);
+ }
+ 
++void trencoder_report_updiscon(Object *trencoder_obj)
++{
++    TraceEncoder *trencoder = TRACE_ENCODER(trencoder_obj);
++
++    trencoder-&gt;updiscon_pending = true;
++}
++
+ static const Property trencoder_props[] = {
+     /*
+      * We need a link to the associated CPU to
+diff --git a/hw/riscv/trace-encoder.h b/hw/riscv/trace-encoder.h
+index 2bf07c01f6..0c44092ccb 100644
+--- a/hw/riscv/trace-encoder.h
++++ b/hw/riscv/trace-encoder.h
+@@ -36,6 +36,8 @@ struct TraceEncoder {
+     uint32_t regs[TRACE_R_MAX];
+     RegisterInfo regs_info[TRACE_R_MAX];
+ 
++    bool updiscon_pending;
++
+     bool enabled;
+     bool trace_running;
+     bool trace_next_insn;
+@@ -51,5 +53,6 @@ void trencoder_trace_trap_insn(Object *trencoder_obj,
+                                bool is_interrupt,
+                                uint64_t tval);
+ void trencoder_trace_ppccd(Object *trencoder_obj, uint64_t pc);
++void trencoder_report_updiscon(Object *trencoder_obj);
+ 
+ #endif
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index e80320ad16..f27ff319e9 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -131,6 +131,7 @@ DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
+ 
+ /* Trace helpers (should be put inside ifdef) */
+ DEF_HELPER_2(trace_insn, void, env, i64)
++DEF_HELPER_1(trace_updiscon, void, env)
+ 
+ #ifndef CONFIG_USER_ONLY
+ DEF_HELPER_1(sret, tl, env)
+diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+index 8a62b4cfcd..28089539d5 100644
+--- a/target/riscv/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/insn_trans/trans_privileged.c.inc
+@@ -26,6 +26,8 @@
+ 
+ static bool trans_ecall(DisasContext *ctx, arg_ecall *a)
+ {
++    gen_trace_updiscon();
++
+     /* always generates U-level ECALL, fixed in do_interrupt handler */
+     generate_exception(ctx, RISCV_EXCP_U_ECALL);
+     return true;
+@@ -40,6 +42,8 @@ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
+     uint32_t ebreak = 0;
+     uint32_t post   = 0;
+ 
++    gen_trace_updiscon();
++
+     /*
+      * The RISC-V semihosting spec specifies the following
+      * three-instruction sequence to flag a semihosting call:
+@@ -95,6 +99,8 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+     if (has_ext(ctx, RVS)) {
++        gen_trace_updiscon();
++
+         decode_save_opc(ctx, 0);
+         translator_io_start(&amp;ctx-&gt;base);
+         gen_update_pc(ctx, 0);
+@@ -113,6 +119,8 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ {
+ #ifndef CONFIG_USER_ONLY
++    gen_trace_updiscon();
++
+     decode_save_opc(ctx, 0);
+     translator_io_start(&amp;ctx-&gt;base);
+     gen_update_pc(ctx, 0);
+@@ -129,6 +137,9 @@ static bool trans_mnret(DisasContext *ctx, arg_mnret *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+     REQUIRE_SMRNMI(ctx);
++
++    gen_trace_updiscon();
++
+     decode_save_opc(ctx, 0);
+     gen_helper_mnret(cpu_pc, tcg_env);
+     tcg_gen_exit_tb(NULL, 0); /* no chaining */
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index b9c7160468..adda6b5bd8 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -183,6 +183,8 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+         }
+     }
+ 
++    gen_trace_updiscon();
++
+     lookup_and_goto_ptr(ctx);
+ 
+     if (misaligned) {
+diff --git a/target/riscv/trace_helper.c b/target/riscv/trace_helper.c
+index ed84e6f79a..4b2b645f04 100644
+--- a/target/riscv/trace_helper.c
++++ b/target/riscv/trace_helper.c
+@@ -28,9 +28,23 @@ void helper_trace_insn(CPURISCVState *env, uint64_t pc)
+         te-&gt;trace_next_insn = false;
+     }
+ }
++
++void helper_trace_updiscon(CPURISCVState *env)
++{
++    RISCVCPU *cpu = env_archcpu(env);
++    TraceEncoder *te = TRACE_ENCODER(cpu-&gt;trencoder);
++
++    te-&gt;updiscon_pending = true;
++    te-&gt;trace_next_insn = true;
++}
+ #else /* #ifndef CONFIG_USER_ONLY */
+ void helper_trace_insn(CPURISCVState *env, uint64_t pc)
+ {
+     return;
+ }
++
++void helper_trace_updiscon(CPURISCVState *env)
++{
++    return;
++}
+ #endif /* #ifndef CONFIG_USER_ONLY*/
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 75348480e6..17a6174899 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -604,6 +604,15 @@ static void gen_ctr_jal(DisasContext *ctx, int rd, target_ulong imm)
+ }
+ #endif
+ 
++static void gen_trace_updiscon(void)
++{
++    TCGLabel *skip = gen_new_label();
++
++    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_trace_running, 0, skip);
++    gen_helper_trace_updiscon(tcg_env);
++    gen_set_label(skip);
++}
++
+ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+ {
+     TCGv succ_pc = dest_gpr(ctx, rd);
+@@ -629,6 +638,8 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+     gen_pc_plus_diff(succ_pc, ctx, ctx-&gt;cur_insn_len);
+     gen_set_gpr(ctx, rd, succ_pc);
+ 
++    gen_trace_updiscon();</pre>
+    </blockquote>
+    <span style="white-space: pre-wrap;">I have a question about this line. Why have you added the generation of an updiscon message if the JAL instruction is an inferable jump?</span>
+    <blockquote type="cite"
+      cite="mid:20251002112335.2374517-15-dbarboza@ventanamicro.com">
+      <pre wrap="" class="moz-quote-pre">
++
+     gen_goto_tb(ctx, 0, imm); /* must use this for safety */
+     ctx-&gt;base.is_jmp = DISAS_NORETURN;
+ }
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------SL4Gut365lzvxhHNVneUq4uM--
 
