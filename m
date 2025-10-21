@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E56CCCD1A7
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Oct 2025 16:00:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE4C3CCD1A7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Oct 2025 16:14:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBEj3-00013x-6e; Tue, 21 Oct 2025 11:56:41 -0400
+	id 1vBEzf-0004Ej-CV; Tue, 21 Oct 2025 12:13:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1vBEiw-00010t-K4
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:34 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1vBEzW-0004D8-Uh
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 12:13:45 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1vBEiq-0007nk-M1
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:33 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-33d463e79ddso4895646a91.0
- for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 08:56:28 -0700 (PDT)
+ id 1vBEzT-0001aL-Lu
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 12:13:42 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-782023ca359so5735430b3a.2
+ for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 09:13:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1761062187; x=1761666987; darn=nongnu.org;
+ d=sifive.com; s=google; t=1761063214; x=1761668014; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GY9PGMdFzEQRlghTOzCeBl7G03PRuXs1m7DET48CoN0=;
- b=KP224jKXNV1VWNgHzTXph3qaIzTHYR1seBF5C1IHX2C3nHGRPs2z5pH90dnhCAhuLI
- q0lsuGOQKT6N2q4GT3zBbkWSI5rdl9so8Lwn7nA+Adnc/4Ymj6JbwQyNOTtbI5aPgNpK
- XqqfASZeX0TyZ16KODsrI5orV+Y+aycDVAuEE/DZ3OTx2zCblpidbM7hkxiS1iljukp7
- 8S29gAq4IQWpdfyFkdAEejEHsLwF6NUXPgZoQBX+Qh7jgLmdPdI7jqVbT2qUNEGG9ohw
- kqp/ypuuNe3aV2poWhSP1dbMbxF9pctIBp8cimieyCrj2A4hzu9SzPQ1iq37S1UgROTA
- OCSg==
+ bh=4Y13V29TyEhcjAwL5nFeY1ayHUoKW0GaN/z1B8E1GJk=;
+ b=BH2s6czxmEeJpK+RvLMufp5M45SjCcoVqlxEVbrevUxCBvIVOu7rL+0kEso4G/DB6F
+ wbIzl13Y1z729JOs5PXZtYeLzKyGprrPZSDL8dioU40nsgCs4BVM0m0W54Z00coCIQ6T
+ cwEK55zy7vYk8r4/OTQ0le1u/i04NShM5LpPqQijUYvFv/HZuWc6Nm4gY/AAb2oG5V50
+ bc8WrNSkVH/W9PeRl3s2R0rr4pYP+iQZrf0Sj9nlQkfpCiwVUNFX8FkxRFwcMqQkE2hA
+ yKVaVKEpnEuCJu85plNdFSZfAIlxuVmaYHycVHiUfu0n68aVR/XkaspVfz871+AqRuRk
+ s7Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761062187; x=1761666987;
+ d=1e100.net; s=20230601; t=1761063214; x=1761668014;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GY9PGMdFzEQRlghTOzCeBl7G03PRuXs1m7DET48CoN0=;
- b=NMA+wfIE1S7+e0WS8mp2aKc+cj2OSBzz0TNE847jJilpO3RfCE0vIS9bK17LUbx0dF
- U/iXtPasxqg/n8XSvxZPpBOTFbBRDU9k78lq2M9ARcD/Uth7yIYO34TP+hrbJTvtjZLs
- blSc/sDQYBO6DlAhrgmPLVL39z9PtCgpspTKnygP33bdlvP1OWpXNHzgy2UDiEaip9rR
- X5s4HPZ2zehEz3+jKRFzAHQSs2qod7HskLx+zegfHs4fI05ExsVmXIVM/iz4azv08b09
- 140HzsdTSWMOpIhOVwldPQ4bA2uo+vHTqZTqD/olZJTRRsEmYq/mM41EMXPgZWYUhrvf
- N5SA==
+ bh=4Y13V29TyEhcjAwL5nFeY1ayHUoKW0GaN/z1B8E1GJk=;
+ b=L/4bR452QSfjWP8ztihH6K8UMZ0FE0CIev+cKXGLsx+mVHxENBWAk0RUQTpte5b1C8
+ iHGke0zzsD1eLp0YoE5wnph/waUXixYvjwvYdAzQ9xIcTqD8pR3zU8S6GXiwdovX75y0
+ 39Q2zYAV4+hcFI8ZRP0UqKiZCz9kxrO/Nf92vJkQxwOTC7QTQRBWgSJO1EnD4eB1pmnd
+ DverU6IfrMQplI6yB93TMCFEF4zAfjRH5zz6mVblGCpEwOdd9tY6pX89rjU5NFV7vGLM
+ SYSgtkWSB3s+BAl+ek58mzG8HPMauCqRz+LM3VzgjGtnmF0wAyn7+sswFWFVNkMG27tr
+ GHKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXHr43xVXL8R8yjLp6blG+aby8GeCmscV0FkvPN6s5Xz7RL4AbbzsSP1BfSTsFhs4OgkmRyvxhgWcTc@nongnu.org
-X-Gm-Message-State: AOJu0YwMozFFPuP1Ff0VsuVENBiYmkowKAgDnmr8yRyAJk1/W28OKDO6
- 4rY13QJCzdWB7WXt1rPMQXIbjf52R4Tyybz7LaPG5Oif4FvIOw5flo6HG59KGZGZ6mw=
-X-Gm-Gg: ASbGncuPfUkprqmlwlhlO6JpkvFRm+Iu1ozk5ficLvs9LwKRLKYjiqX7Sso2PeAz3eq
- q27K6UZcl/aUFYeWROiFps0cbeyC0nLgvk38qiakeEQCfIhpTgqtVrqu0LPXaxRZWyNQUl3r7Wx
- S35S8J1cQs6xLlk9IesORwPaiUahfQOziUxHLD3qsbPJZMb10/v/IgsAXZxwqDTk5/6MU/dZUml
- E8VqRiyrEEJcVO6JsseEARntUr7tfgeUVaueg+cTMPxvUcOOfPQurQWUkSsNfn37fIVssIMGer1
- B7QByY9WekGiQqQ5iPDcL2yTWQRcpEISua+kRKgdAzgB6JUyLw2YoyPX0ff9S680bIioO2uh6Wk
- YUFcSk59CSEbsuEMRamIWDNRN10C4fnNzdtuYsJzKDcA18pYcqZPNnG7jDvn/jgBwUXE7+spr4i
- rsFizxprf1RzHRukjXUT3S7ESkxDmtFQQf
-X-Google-Smtp-Source: AGHT+IFvxjuyQ6KypntX7BYav7ZYE0DcCPs/GqeUQUAFmqaHWW8T+XrZaFKcZZDsOY83GxRm9PjDAw==
-X-Received: by 2002:a17:90b:4b09:b0:32e:d600:4fe9 with SMTP id
- 98e67ed59e1d1-33bcf85ceacmr25366723a91.4.1761062186890; 
- Tue, 21 Oct 2025 08:56:26 -0700 (PDT)
+ AJvYcCW2kYCPbdObjBL+H4hyHJZdVEEEaTjaiORMaWvj85TdST3ZhjlmpGi0ux7bqedsCoarM9WxOcxe6SPe@nongnu.org
+X-Gm-Message-State: AOJu0Yx8oHQj2jkf91AUWBr/cDfQoCJnDXdrUzqqB5i4nB1dAZQ7o3XM
+ SHDOvZdQAgVp46y/DuC0qQ19Drr+ly30K67ek0yPqT7nqA1/53FMV1LyZrwuRextJaM=
+X-Gm-Gg: ASbGncsB86cmn3vpMUjRxtAbwMM9CrCtzSuMimAHSS5O6b87wGi4HZYa34mEXgiZwul
+ Cmhd+l+LFejEyEGu0SBcI073PSsPsxBEV7ab/7frRKKAq9L0Jm+CH9gSyf5my0YrrYGgjoi0npJ
+ pt8kxHBe1Y/FWNf3FRImWNO5EZrjcxhnVHb47cUPqJ6UrbK4geAQ8x9a7di6AYwk4543nrp2emu
+ TrQZ4Gf8Ty8kjzIUkxxHo+vvVyL3jUqmMMqZsBXwlauvUGvAyLaZWiqVk4BnJvZygUw5UFTi0Df
+ vubz6jkfva3+FBHlHNTaagjamhUymlR4n1kV6z7YUj+wOwE6DFGmvhJKt43Km0+GzO/YwOI1q1r
+ PDjUHyhhvNuv0FZ2Rd7OvkxLvVyoRc2JaBDHA8pBO1gSmwYuh4guu3BCFTn4qQjulL7J3fcwygg
+ T56tOCnF8U582UHfxPHAin1g==
+X-Google-Smtp-Source: AGHT+IESq+Wree+qpeUxnR7Xwrl5wv4lQYZ/VsJBAAZNIYY2fKNL9WpYZZTIkByfOojT6r4EGL3dvw==
+X-Received: by 2002:a05:6a00:94c2:b0:79a:f5eb:3dce with SMTP id
+ d2e1a72fcca58-7a220d5792amr20550258b3a.31.1761063214459; 
+ Tue, 21 Oct 2025 09:13:34 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-33d5de11392sm11490177a91.7.2025.10.21.08.56.21
+ d2e1a72fcca58-7a23010f7c7sm11731157b3a.54.2025.10.21.09.13.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 08:56:26 -0700 (PDT)
+ Tue, 21 Oct 2025 09:13:34 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -96,24 +96,23 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  qemu-ppc@nongnu.org (open list:PowerPC TCG CPUs),
  qemu-s390x@nongnu.org (open list:S390 TCG CPUs),
  Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v3 05/18] hw/misc: riscv_worldguard: Add RISC-V WorldGuard
- global config
-Date: Tue, 21 Oct 2025 23:55:35 +0800
-Message-ID: <20251021155548.584543-6-jim.shu@sifive.com>
+Subject: [PATCH v3 08/18] target/riscv: Add defines for WorldGuard CSRs
+Date: Wed, 22 Oct 2025 00:13:14 +0800
+Message-ID: <20251021161325.585278-1-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251021155548.584543-1-jim.shu@sifive.com>
 References: <20251021155548.584543-1-jim.shu@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=jim.shu@sifive.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=jim.shu@sifive.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,296 +128,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a device for RISCV WG global config, which contains the number of
-worlds, reset value, and trusted WID ... etc.
-
-This global config is used by both CPU WG extension and wgChecker devices.
+Add CSRs for 3 WG extensions: Smwg, Smwgd, and Sswg.
 
 Signed-off-by: Jim Shu <jim.shu@sifive.com>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/misc/Kconfig                    |   3 +
- hw/misc/meson.build                |   1 +
- hw/misc/riscv_worldguard.c         | 182 +++++++++++++++++++++++++++++
- include/hw/misc/riscv_worldguard.h |  56 +++++++++
- 4 files changed, 242 insertions(+)
- create mode 100644 hw/misc/riscv_worldguard.c
- create mode 100644 include/hw/misc/riscv_worldguard.h
+ target/riscv/cpu_bits.h | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-index 4e35657468..bee8824868 100644
---- a/hw/misc/Kconfig
-+++ b/hw/misc/Kconfig
-@@ -235,4 +235,7 @@ config IOSB
- config XLNX_VERSAL_TRNG
-     bool
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index b62dd82fe7..a546545ff3 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -468,6 +468,11 @@
+ #define CSR_DPC             0x7b1
+ #define CSR_DSCRATCH        0x7b2
  
-+config RISCV_WORLDGUARD
-+    bool
++/* RISC-V WorldGuard */
++#define CSR_MLWID           0x390
++#define CSR_SLWID           0x190
++#define CSR_MWIDDELEG       0x748
 +
- source macio/Kconfig
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index b1d8d8e5d2..200ccc96c0 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -34,6 +34,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
-+specific_ss.add(when: 'CONFIG_RISCV_WORLDGUARD', if_true: files('riscv_worldguard.c'))
- 
- subdir('macio')
- 
-diff --git a/hw/misc/riscv_worldguard.c b/hw/misc/riscv_worldguard.c
-new file mode 100644
-index 0000000000..588c16ae9a
---- /dev/null
-+++ b/hw/misc/riscv_worldguard.c
-@@ -0,0 +1,182 @@
-+/*
-+ * RISC-V WorldGuard Device
-+ *
-+ * Copyright (c) 2022 SiFive, Inc.
-+ *
-+ * This provides WorldGuard global config.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "qemu/log.h"
-+#include "exec/hwaddr.h"
-+#include "hw/registerfields.h"
-+#include "hw/sysbus.h"
-+#include "hw/hw.h"
-+#include "hw/qdev-properties.h"
-+#include "hw/misc/riscv_worldguard.h"
-+#include "hw/core/cpu.h"
-+#include "target/riscv/cpu.h"
-+#include "trace.h"
-+
-+/*
-+ * WorldGuard global config:
-+ * List the global setting of WG, like num-of-worlds. It is unique in the machine.
-+ * All CPUs with WG extension and wgChecker devices will use it.
-+ */
-+struct RISCVWorldGuardState *worldguard_config;
-+
-+static Property riscv_worldguard_properties[] = {
-+    DEFINE_PROP_UINT32("nworlds", RISCVWorldGuardState, nworlds, 0),
-+
-+    /* Only Trusted WID could access wgCheckers if it is enabled. */
-+    DEFINE_PROP_UINT32("trustedwid", RISCVWorldGuardState, trustedwid, NO_TRUSTEDWID),
-+
-+    /*
-+     * WG reset value is bypass mode in HW. All WG permission checkings are
-+     * pass by default, so SW could correctly run on the machine w/o any WG
-+     * programming.
-+     */
-+    DEFINE_PROP_BOOL("hw-bypass", RISCVWorldGuardState, hw_bypass, false),
-+
-+    /*
-+     * TrustZone compatible mode:
-+     * This mode is only supported in 2 worlds system. It converts WorldGuard
-+     * WID to TZ NS signal on the bus so WG could be cooperated with
-+     * TZ components. In QEMU, it converts WID to 'MemTxAttrs.secure' bit used
-+     * by TZ.
-+     */
-+    DEFINE_PROP_BOOL("tz-compat", RISCVWorldGuardState, tz_compat, false),
-+};
-+
-+/* WID to MemTxAttrs converter */
-+void wid_to_mem_attrs(MemTxAttrs *attrs, uint32_t wid)
-+{
-+    g_assert(wid < worldguard_config->nworlds);
-+
-+    attrs->unspecified = 0;
-+    if (worldguard_config->tz_compat) {
-+        attrs->secure = wid;
-+    } else {
-+        attrs->world_id = wid;
-+    }
-+}
-+
-+/* MemTxAttrs to WID converter */
-+uint32_t mem_attrs_to_wid(MemTxAttrs attrs)
-+{
-+    if (attrs.unspecified) {
-+        if (worldguard_config->trustedwid != NO_TRUSTEDWID) {
-+            return worldguard_config->trustedwid;
-+        } else {
-+            return worldguard_config->nworlds - 1;
-+        }
-+    }
-+
-+    if (worldguard_config->tz_compat) {
-+        return attrs.secure;
-+    } else {
-+        return attrs.world_id;
-+    }
-+}
-+
-+bool could_access_wgblocks(MemTxAttrs attrs, const char *wgblock)
-+{
-+    uint32_t wid = mem_attrs_to_wid(attrs);
-+    uint32_t trustedwid = worldguard_config->trustedwid;
-+
-+    if ((trustedwid == NO_TRUSTEDWID) || (wid == trustedwid)) {
-+        return true;
-+    } else {
-+        /*
-+         * Only Trusted WID could access WG blocks if having it.
-+         * Access them from other WIDs will get failed.
-+         */
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Invalid access to %s from non-trusted WID %d\n",
-+                      __func__, wgblock, wid);
-+
-+        return false;
-+    }
-+}
-+
-+static void riscv_worldguard_realize(DeviceState *dev, Error **errp)
-+{
-+    RISCVWorldGuardState *s = RISCV_WORLDGUARD(dev);
-+
-+    if (worldguard_config != NULL) {
-+        error_setg(errp, "Couldn't realize multiple global WorldGuard configs.");
-+        return;
-+    }
-+
-+    if ((s->nworlds) & (s->nworlds - 1)) {
-+        error_setg(errp, "Current implementation only support power-of-2 NWorld.");
-+        return;
-+    }
-+
-+    if ((s->trustedwid != NO_TRUSTEDWID) && (s->trustedwid >= s->nworlds)) {
-+        error_setg(errp, "Trusted WID must be less than the number of world.");
-+        return;
-+    }
-+
-+    if ((s->nworlds != 2) && (s->tz_compat)) {
-+        error_setg(errp, "Only 2 worlds system could use TrustZone compatible mode.");
-+        return;
-+    }
-+
-+    /* Register WG global config */
-+    worldguard_config = s;
-+
-+    /* Initialize global data for wgChecker */
-+    wgc_slot_perm_mask = MAKE_64BIT_MASK(0, 2 * worldguard_config->nworlds);
-+}
-+
-+static void riscv_worldguard_class_init(ObjectClass *klass, const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    device_class_set_props(dc, riscv_worldguard_properties);
-+    dc->user_creatable = true;
-+    dc->realize = riscv_worldguard_realize;
-+}
-+
-+static const TypeInfo riscv_worldguard_info = {
-+    .name          = TYPE_RISCV_WORLDGUARD,
-+    .parent        = TYPE_DEVICE,
-+    .instance_size = sizeof(RISCVWorldGuardState),
-+    .class_init    = riscv_worldguard_class_init,
-+};
-+
-+/*
-+ * Create WorldGuard global config
-+ */
-+DeviceState *riscv_worldguard_create(uint32_t nworlds, uint32_t trustedwid,
-+                                     bool hw_bypass, bool tz_compat)
-+{
-+    DeviceState *dev = qdev_new(TYPE_RISCV_WORLDGUARD);
-+    qdev_prop_set_uint32(dev, "nworlds", nworlds);
-+    qdev_prop_set_uint32(dev, "trustedwid", trustedwid);
-+    qdev_prop_set_bit(dev, "hw-bypass", hw_bypass);
-+    qdev_prop_set_bit(dev, "tz-compat", tz_compat);
-+    qdev_realize(DEVICE(dev), NULL, &error_fatal);
-+    return dev;
-+}
-+
-+static void riscv_worldguard_register_types(void)
-+{
-+    type_register_static(&riscv_worldguard_info);
-+}
-+
-+type_init(riscv_worldguard_register_types)
-diff --git a/include/hw/misc/riscv_worldguard.h b/include/hw/misc/riscv_worldguard.h
-new file mode 100644
-index 0000000000..bb276e59b8
---- /dev/null
-+++ b/include/hw/misc/riscv_worldguard.h
-@@ -0,0 +1,56 @@
-+/*
-+ * RISC-V WorldGuard Devices
-+ *
-+ * Copyright (c) 2022 RISCV, Inc.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef HW_RISCV_WORLDGUARD_H
-+#define HW_RISCV_WORLDGUARD_H
-+
-+#include "qom/object.h"
-+#include "hw/sysbus.h"
-+#include "exec/hwaddr.h"
-+
-+#define TYPE_RISCV_WORLDGUARD "riscv.worldguard"
-+
-+#define NO_TRUSTEDWID           UINT32_MAX
-+
-+typedef struct RISCVWorldGuardState RISCVWorldGuardState;
-+DECLARE_INSTANCE_CHECKER(RISCVWorldGuardState, RISCV_WORLDGUARD,
-+                         TYPE_RISCV_WORLDGUARD)
-+
-+struct RISCVWorldGuardState {
-+    /*< private >*/
-+    DeviceState parent_obj;
-+
-+    /*< public >*/
-+
-+    /* Property */
-+    uint32_t nworlds;
-+    uint32_t trustedwid;
-+    bool hw_bypass;
-+    bool tz_compat;
-+};
-+
-+extern struct RISCVWorldGuardState *worldguard_config;
-+
-+DeviceState *riscv_worldguard_create(uint32_t nworlds, uint32_t trustedwid,
-+                                     bool hw_bypass, bool tz_compat);
-+
-+void wid_to_mem_attrs(MemTxAttrs *attrs, uint32_t wid);
-+uint32_t mem_attrs_to_wid(MemTxAttrs attrs);
-+bool could_access_wgblocks(MemTxAttrs attrs, const char *wgblock);
-+
-+#endif
+ /* Performance Counters */
+ #define CSR_MHPMCOUNTER3    0xb03
+ #define CSR_MHPMCOUNTER4    0xb04
 -- 
 2.43.0
 
