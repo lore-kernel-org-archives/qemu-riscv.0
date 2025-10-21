@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3F8FCCD184
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Oct 2025 15:57:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E7D8CCD184
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Oct 2025 15:57:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBEiY-0000p3-Rc; Tue, 21 Oct 2025 11:56:10 -0400
+	id 1vBEil-0000rr-3q; Tue, 21 Oct 2025 11:56:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1vBEiW-0000nk-JQ
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:08 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1vBEib-0000pf-LU
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:17 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1vBEiQ-0007jA-0z
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:08 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-33ba37b3ff7so17947a91.1
- for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 08:56:00 -0700 (PDT)
+ id 1vBEiZ-0007kx-LS
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:13 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-77f67ba775aso7486363b3a.3
+ for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 08:56:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1761062158; x=1761666958; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NjEoBN1DTzgzuVVkcp74eBzxIq+NAevdzIp3vJ9UjWw=;
- b=KKeoaRBvixBvM4g2qX3gvam6UyQQiogzamGkMBeJuDpFGZlPHD8kA/F9Qw07tB9M4Z
- rhjhFAe8m0XSLwEKmEY/QEMEoYOdJMbk+/OoqnAIxpFNDusY9M2UwSgNv1xretyo43Vw
- tQNs1jQbs9ZcpcRiNdhgnAcBlTXoVBoWa5m30JN6nh1T/Lf/Okhm5/kmNkHIqhwwBXEw
- vGNeR0/cSybct8FgZzTlcosFv1VvF6o6/sPR1epvEDk/0UKYRWAMA9xohsyA80WxQEHZ
- asyfeKXLmQm7tpw6Gx9PUzPSQQFQKIcWhTCzyOLdpBmTCQBPHO6qEI3X2nAYuz6xjX9V
- XxjQ==
+ d=sifive.com; s=google; t=1761062170; x=1761666970; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ItEDascWURdtiJBIFOxPqFxdsposkPVgAOSmqvZV7F4=;
+ b=VZGkaLV7jqRVLYo7QXIMCTZ34wg0JdWFhmfdkcVggYH6gDbZXau1MDyIXdBNo3W9/S
+ lf/vKTnunIWw5jkVsqgmaWGhJutaEEc6p9PGrpoCqZIItNKMklYbXVtGiAwoOYv12M4i
+ N52tZLNAvg8Xby8zj8EUARr5Uf3WaYmCwJ+7lCp/b3+EGtn+syQCjo0KX/SDbZyJ2Vkh
+ hc3X8ZMOq2/EzAVXF9oYDoc7Nlfs0PrVSaN9YCRa7AZn9YI6+Z7c9HeV4I9E92cfcyo+
+ V1qpB/SESY9G10x7Z8VqCgVPNCIXn5rd6ALWaGzBHzFIw85vxqfpjvM/tN2nBF+iWhip
+ WaTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761062158; x=1761666958;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NjEoBN1DTzgzuVVkcp74eBzxIq+NAevdzIp3vJ9UjWw=;
- b=d3OGAlw4rG14V5hChD4qQWF+YP0E5vpzv214UpQzxdc2NjzOimTATt9vw6Ls/tpxoV
- cYB5qyZZe1B28KtFR9Oau8ZgoDv66deLtrk2zHiLhvRn6By/m2kMdtwJ1k2A6YZLwsj8
- bYF2R6wJnxZ58uUjat+JPoMAil6KZCUp389VVk7JWlc6xxXhaZAfItfZRAb3dysoyxxC
- v1D7qvi+t8Plo2mVWObR0dHPQqfaTMUHHKBtiFfGUoDDJvmJPIpRm3SuoqzTzdQteMz4
- zfjkm3/EUGvQIYdTiGFgwe+7Bc/7+S+c+cDELakCsaJNZ7OtA5cj3szo99g+BnKSQgw5
- 0MNw==
+ d=1e100.net; s=20230601; t=1761062170; x=1761666970;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ItEDascWURdtiJBIFOxPqFxdsposkPVgAOSmqvZV7F4=;
+ b=g9QueyI/tPx6Uy3iD/yHlQSzcXy/1Usf70CIXTARnFk9NBNIIrDvQQNy+QyjPo5/J/
+ nll+D+GErHPtDcLzk6RU7OJNnjliUy4vUoDnO5CtPuyjl5bY+nX4daUthI3+HgrvfBSb
+ oZuRHq+pyvOnjRpz8K7aK0YlekNhBWBiZCRcgM/0zRMp0kYiJExqMEXACyxmiYsBpobI
+ 0NV61ql4FLA7NzuJfBUl4Ld2967p7oUaevFrWqWe/NaKu5J5pYP6rcuus3OqL6IjEQru
+ KLSEr0j8Tq+bSoQ4w27R3Vx1VYo64hN8AbIh+bM9AxFrVKtzchdd9Easgu3xBtDCBq7s
+ ys2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBHeb7Iz+eHbyVQPSPDmDiVmrjNRvlzIXJt8PXsh4F+YYdczyk8he31Zg+e2ORgMIfwNcvNRlmug9U@nongnu.org
-X-Gm-Message-State: AOJu0YwKZIvxIiI0GTaFpmtg/kzror5dLgwZu0QCzbN7RZghCDmlJjVG
- lmsQKKQTT1kU27cU5jgZbHWgfFbx3norPcc3NfTKUXjsxlZFzN9nfFnzkyV6ndCuO7U=
-X-Gm-Gg: ASbGncvOITZhmn/Yzt9muvVvaQI63nQJfbGYn5n+DgUDO38F70nU4XHRn443CxHQHgU
- XRLi4onzy0reCertnNPrEHmvkxxDfAYMc9TEZwZJGWtitK4jxwuYKXMdJenfeEn8XwKrVOYMRza
- k6iIZ1v0x9nsD8PtvlB3VdIyxAFPkr1Y2Mihh8VyrXSQAO3py/EEXKAPFMTPFcGJH77RRX1oGeK
- zDUCku5JKqZNbL3tFNldYNYIci17HeZZCYvir1EOFwEXX0zWLKzaqPRLxeciZ0VnML+r76DF71s
- Igj8UlJq012NqZJyp9eX3XMMgIZjINkW2XhACo8qUymVCXKtmWh3tlye31zxvNxuRs3qWkCnO3W
- +Cwf+BZcTM9TU4E980jhLevtgPmAaJZmZDUBIpGl/602ECsb8n6NJFyc+0K/78SlUJo9EQtpexk
- /Ha2XavMG1XJnnNSiK81bUIQ==
-X-Google-Smtp-Source: AGHT+IF5iBeslKPUmm8kYDD8jZdc1Vf7lPHkZKo061V/Rwv44G4bttpUR7xNweajeAjUnsdc38R+Gg==
-X-Received: by 2002:a17:90b:570e:b0:335:2d25:7a7a with SMTP id
- 98e67ed59e1d1-33e21d8d38emr388409a91.10.1761062158403; 
- Tue, 21 Oct 2025 08:55:58 -0700 (PDT)
+ AJvYcCUuxpDo7/UEUuqwfcpcR1R2ubbMGIFUWiD+4k9O20bXcygBUoz/zsVTS2xVcwJNbzEe2jtoHW2UDdKE@nongnu.org
+X-Gm-Message-State: AOJu0Yy/xHc7Sq6t/z/myShU5NdytRgiLVd4xSRZ/PH5P6kyt1JGzyqh
+ MxgHiUJkSuWUu7hlSqRucUd0nr0XwHwYYYbQY9TX4VheQnxrEwymMr9sd8+VAP/trgE=
+X-Gm-Gg: ASbGnctjE0lDVG9Snr7f6gjVRLg/ixEM2+mDduZsT5SgyrrVr3xBkuQNl9S/Skn+l/V
+ OkPNtW2pbqHmh39dYsZmje/4ShOYw9p9W55KUvhlxLjySwDpk2mJFvi+9Y0coq6mdxvE75+0vzC
+ qqlZiZ4EDTVmOTO9TeVCoBgbIAmM7ZDp13XanTdQC6U18vXOXuPx9EZWHsGZGf/cE51qAg0U9mq
+ BhZIzEK1IdkLVGNlIcY1UgeK434DL6+3P5Nk2hoS4LJhWpe74SLOGJ9q9XIQkHfvT3HkQTw4Bny
+ Rj5KebmYiGzjBmPs9muzgxL1Dffn1uIJpJs1zXL9HrXexyZTg63vtS09VEJugxTCijqfFXmGYpk
+ 3NfqQ4n4ZgLCXD3a8LfOtRBNhZCrK10acelOw1Af/djjfMNGzJ4aaYFSIZbwsHjcpd6VvBkr+Ca
+ tD3nbWA0RJP/ZMBk34l2JUyYCgEKn1gwig
+X-Google-Smtp-Source: AGHT+IEn0Qt6Oo+4e0ngsjIqW8GIuRuTZTtXWnxt3lGQr7smV5xgsnGddwfD17jHYxwNbaGUbIg5Ag==
+X-Received: by 2002:a05:6a20:158a:b0:2e5:655c:7f93 with SMTP id
+ adf61e73a8af0-334a8616c19mr24469072637.33.1761062169916; 
+ Tue, 21 Oct 2025 08:56:09 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-33d5de11392sm11490177a91.7.2025.10.21.08.55.52
+ 98e67ed59e1d1-33d5de11392sm11490177a91.7.2025.10.21.08.56.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 08:55:57 -0700 (PDT)
+ Tue, 21 Oct 2025 08:56:09 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -95,21 +96,24 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  qemu-ppc@nongnu.org (open list:PowerPC TCG CPUs),
  qemu-s390x@nongnu.org (open list:S390 TCG CPUs),
  Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v3 00/18] Implements RISC-V WorldGuard extension v0.4
-Date: Tue, 21 Oct 2025 23:55:30 +0800
-Message-ID: <20251021155548.584543-1-jim.shu@sifive.com>
+Subject: [PATCH v3 02/18] system/physmem: Remove the assertion of page-aligned
+ section number
+Date: Tue, 21 Oct 2025 23:55:32 +0800
+Message-ID: <20251021155548.584543-3-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251021155548.584543-1-jim.shu@sifive.com>
+References: <20251021155548.584543-1-jim.shu@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=jim.shu@sifive.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=jim.shu@sifive.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,119 +129,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patchset implements Smwg/Smwgd/Sswg CPU extension and wgChecker
-device defined in WorldGuard spec v0.4.
+The physical section number is no longer ORed into the IOTLB entries
+together with a page-aligned pointer, so it no longer needs to be
+page-aligned.
 
-The WG v0.4 spec could be found here:
-https://lists.riscv.org/g/security/attachment/711/0/worldguard_rvia_spec-v0.4.pdf
+Signed-off-by: Jim Shu <jim.shu@sifive.com>
+---
+ system/physmem.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-To enable WG in QEMU, pass "wg=on" as machine parameter to virt machine.
-It enables both WG CPU CSRs to apply WID of CPU and wgCheckers on
-the DRAM, FLASH, and UART to protect these resources.
-
-This patchset contains 5 parts:
-
-1. Commit  1 ~ 2: Bugfix of IOMMUMemoryRegion
-2. Commit  3 ~ 4: Extend IOMMUMemoryRegion and MemTxAttr for WG support
-3. Commit  5 ~ 13: Add WG global device and CPU extensions
-4. Commit 14 ~ 17: Add WG checker device
-5. Commit 18: Add WG support to the virt machine
-
-QEMU code can be found at [1]
-
-[1] https://github.com/cwshu/qemu/tree/riscv-wg-v3
-
-Changed since v2:
-- Fix the issues in v2 series as suggested by Daniel Henrique Barboza
-  - Explain the changes of 'reserved' fields in MemTxAttr
-  - Make isa_edata_arr in order
-  - Replace qemu_get_cpu() with cpu_by_arch_id(). Do the clean exit when
-    return NULL.
-  - Simplify the machine option checking via 'object_property_get_bool'
-
-- Add the minor fixes and improvements to the wgChecker:
-  - Increase the maximum number of region of a wgchecker from 16 to 64
-  - Clear the IRQ pending of wgchecker when writing to `errcause.ip`
-  - Do the TLB flush when resetting the wgchecker
-  - Improve the trace message
-
-Changed since v1:
-- Remove the assertion of 4k sections limitation. Remove
-  iotlb_to_section() and rename 'xlat_section' to 'xlat'.
-- Fix RST issue and typo in virt machine doc
-
-Changed since RFCv1:
-- Rebase to latest QEMU (v10.0.0-rc3)
-- Add the description of HW config and CPU option of WG in the
-  virt machine documentation
-- Expose CPU options of WG after WG CPU code has been implemented
-- Change 'mwid' and 'mwidlist' options to experimental options
-- Change 'world_id' to unsigned int type + bit field.
-
-Jim Shu (18):
-  accel/tcg: Store section pointer in CPUTLBEntryFull
-  system/physmem: Remove the assertion of page-aligned section number
-  accel/tcg: memory access from CPU will pass access_type to IOMMU
-  exec: Add RISC-V WorldGuard WID to MemTxAttrs
-  hw/misc: riscv_worldguard: Add RISC-V WorldGuard global config
-  target/riscv: Add CPU options of WorldGuard CPU extension
-  target/riscv: Add hard-coded CPU state of WG extension
-  target/riscv: Add defines for WorldGuard CSRs
-  target/riscv: Allow global WG config to set WG CPU callbacks
-  target/riscv: Implement WorldGuard CSRs
-  target/riscv: Add WID to MemTxAttrs of CPU memory transactions
-  target/riscv: Expose CPU options of WorldGuard
-  hw/misc: riscv_worldguard: Add API to enable WG extension of CPU
-  hw/misc: riscv_wgchecker: Implement RISC-V WorldGuard Checker
-  hw/misc: riscv_wgchecker: Implement wgchecker slot registers
-  hw/misc: riscv_wgchecker: Implement correct block-access behavior
-  hw/misc: riscv_wgchecker: Check the slot settings in translate
-  hw/riscv: virt: Add WorldGuard support
-
- accel/tcg/cputlb.c                   |   49 +-
- docs/system/riscv/virt.rst           |   20 +
- hw/misc/Kconfig                      |    3 +
- hw/misc/meson.build                  |    1 +
- hw/misc/riscv_wgchecker.c            | 1190 ++++++++++++++++++++++++++
- hw/misc/riscv_worldguard.c           |  277 ++++++
- hw/misc/trace-events                 |    9 +
- hw/riscv/Kconfig                     |    1 +
- hw/riscv/virt.c                      |  163 +++-
- include/accel/tcg/iommu.h            |   18 +-
- include/exec/cputlb.h                |   13 +-
- include/exec/memattrs.h              |    8 +-
- include/hw/core/cpu.h                |   12 +-
- include/hw/misc/riscv_worldguard.h   |  124 +++
- include/hw/riscv/virt.h              |   15 +-
- system/physmem.c                     |   47 +-
- target/alpha/helper.c                |    2 +-
- target/avr/helper.c                  |    2 +-
- target/hppa/mem_helper.c             |    1 -
- target/i386/tcg/system/excp_helper.c |    3 +-
- target/loongarch/tcg/tlb_helper.c    |    2 +-
- target/m68k/helper.c                 |   10 +-
- target/microblaze/helper.c           |    8 +-
- target/mips/tcg/system/tlb_helper.c  |    4 +-
- target/openrisc/mmu.c                |    2 +-
- target/ppc/mmu_helper.c              |    2 +-
- target/riscv/cpu.c                   |   17 +-
- target/riscv/cpu.h                   |   12 +
- target/riscv/cpu_bits.h              |    5 +
- target/riscv/cpu_cfg_fields.h.inc    |    6 +
- target/riscv/cpu_helper.c            |   69 +-
- target/riscv/csr.c                   |  107 +++
- target/riscv/tcg/tcg-cpu.c           |   11 +
- target/rx/cpu.c                      |    3 +-
- target/s390x/tcg/excp_helper.c       |    2 +-
- target/sh4/helper.c                  |    2 +-
- target/sparc/mmu_helper.c            |    6 +-
- target/tricore/helper.c              |    2 +-
- target/xtensa/helper.c               |    3 +-
- 39 files changed, 2111 insertions(+), 120 deletions(-)
- create mode 100644 hw/misc/riscv_wgchecker.c
- create mode 100644 hw/misc/riscv_worldguard.c
- create mode 100644 include/hw/misc/riscv_worldguard.h
-
+diff --git a/system/physmem.c b/system/physmem.c
+index c163d6b856..23d9b92954 100644
+--- a/system/physmem.c
++++ b/system/physmem.c
+@@ -1305,12 +1305,6 @@ static subpage_t *subpage_init(FlatView *fv, hwaddr base);
+ static uint16_t phys_section_add(PhysPageMap *map,
+                                  MemoryRegionSection *section)
+ {
+-    /* The physical section number is ORed with a page-aligned
+-     * pointer to produce the iotlb entries.  Thus it should
+-     * never overflow into the page-aligned value.
+-     */
+-    assert(map->sections_nb < TARGET_PAGE_SIZE);
+-
+     if (map->sections_nb == map->sections_nb_alloc) {
+         map->sections_nb_alloc = MAX(map->sections_nb_alloc * 2, 16);
+         map->sections = g_renew(MemoryRegionSection, map->sections,
 -- 
 2.43.0
 
