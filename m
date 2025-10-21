@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDCCECCD184
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Oct 2025 15:56:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DBE7CCD1A7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Oct 2025 15:57:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBEir-0000xq-K1; Tue, 21 Oct 2025 11:56:29 -0400
+	id 1vBEib-0000pD-9Y; Tue, 21 Oct 2025 11:56:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1vBEim-0000sn-9N
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:25 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ id 1vBEiX-0000o8-OU
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:09 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1vBEif-0007m1-HK
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:22 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-78af743c232so4552000b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 08:56:17 -0700 (PDT)
+ id 1vBEiU-0007jg-Ia
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 11:56:09 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-273a0aeed57so139435ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 08:56:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1761062176; x=1761666976; darn=nongnu.org;
+ d=sifive.com; s=google; t=1761062164; x=1761666964; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p2IL9rBkWrTjdCHMqqTwPGOmEmX+DIgC22nY+xhrzm0=;
- b=goABQsk6GIHV3EWALGGfzAHGjmioarlrJ4qGligtUSLycVMQU3Kx/6UdphkTmov18r
- 9mIKh0n5QXwS3rCBWn3xWoKVR9orhquHbbnjJCVecA/1QHy406DgyUKlrxkhWuXCMK/f
- bGsQZlvtzrV63dR9rqDgj4mqPwSP0D88xS/LNzTHgtOtVkP/HZAg3DquM0yBJ4SMkyWv
- nPYsqu4SA7LQ+vUG4omi+feDUMa+zKZiuBCoiSF8zurGww3BgaTHj3UJ0BmPLgCNAI55
- q/BVtVoLXpgWikVH1EoBEYFBukGmEGzE7v7UPDzCKl54DHKYZ8b13nA42crbq8VULvoU
- cdrA==
+ bh=ZVkMXGiRK6D7lGy5hWttf9DjSzSeLTnX/sMNxqBSunI=;
+ b=dDT7MxjMnyWwSWWbR0HOYZ9Nw6EKOmAFkiTEL4L2W8MJq45xPrvxEIbRTQdtIWgw2e
+ IMxVSAQrurVTBBnWXJg1x1S0Hjaa6Be2Z47zo46C+FFq0KfEck6NNAIBrHlo+cpqdVFE
+ 2q4Y8K+dAtWh7InlFoFNgllfHvMUqqwRFmNyu6jgTFeYt7Ca4KsCRgMwIITj0VBO2dH/
+ wLizWWpKdzQ3KzdhWWw+Mg5XsSfaYDi+f+5IKXV89OzuqLMD8dizNblw8omsW3HaKjUj
+ ml2mprXkfEZr6KQuWXE5Lq8hlTCVuOdxcKY9WeRyocveUUvpEFl1oFcxgaosPb35JGyX
+ i9qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761062176; x=1761666976;
+ d=1e100.net; s=20230601; t=1761062164; x=1761666964;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p2IL9rBkWrTjdCHMqqTwPGOmEmX+DIgC22nY+xhrzm0=;
- b=NokoBxwkV+mp341hGgO9/petAfvQHwX3LfVXRF0A4OgHmODsT+PpFXQcPLai0oA/M1
- oG+VrFixJUjTToYQp043W/gBe4+O4iqn2IvQqNXmSP2AmhTIEedkoj6JrtHxfH77tatT
- U4B4JbxwA9yCUHEHWpGZRggy1w+j589b4BOHjChnCT+u+8zyUnVd/mRFnsvwsdjfuTYg
- Z2wBoJ48HIlzMkh4IZUQsjukEJsj30MeU96dJigP4+zl01tFjcjP/joaYeEKbrVHmsWU
- JJvX95/PYw2GKEzMSodefUTDbchIIaPg+umAiKro2H9tbEuk6z6rWp6+LSqS8rryt1Xp
- sXSA==
+ bh=ZVkMXGiRK6D7lGy5hWttf9DjSzSeLTnX/sMNxqBSunI=;
+ b=FI6RXBM+yuy/L1XVHzjnaETj2Y22kGytctmPbdfDyBLmCZH6YeW7megOTxmefVFb2c
+ cE3ZI9TtkmWkD7q9RlEKLFxFRGIv/zVrQmfm707SVBEMp2GRsmyS94yMHqgc0URbTuJx
+ DclZL5C0WDRYyqZzs32+lLabQbHsu4Clgg1NsYiDwJJFCToSf8RbbmkYBhEHMm2MwW/b
+ 3A8ZwJJ3oGqLte+1HThqQmj82kuX7vy2DD5YaNNGbaNCuD59WHElht/AsSUj0NZRAmYB
+ tjXdHwTDf9jAgeDK+lDHJjy1UeNg0JNfS73L7lpTiJ+6EfYvi5gK5yv6jomSg5BuwtnT
+ 7B6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUTRG0rzvmNwQ1dqGk1fvD6nBY4nJRTxS3+sF+6bBiKEaM3KIDgnyYs+fl9k7NoOILAzRI9XpwwqTO6@nongnu.org
-X-Gm-Message-State: AOJu0Yy3faQtXQ4EqBEAWLIH9tCvW/GT2x+2LAbaDK3jlVDSymdp4RlV
- zDJPyOGO/HNYOJrNqYpIQ+mtspfxGiXKbDhyPsYNIo5FVZ2MoDqqtql4MCfgWrJIXLY=
-X-Gm-Gg: ASbGncvNomzHGO2xa5QafmWsG7OF21v7FeuY0E2GTMRj3adxvXTgqMZGdG3cpRubpR/
- Fo6ZIBjs8aNFCyhsCiXF/rDdjlfyeQfv91R/r1r3IGEonmV1bBfgzRxL7FAIk8l8HFbJvNg8PrD
- hcJ7MoTrT9XSgkKJARQ+1yydN2qPBuuGefJEQ4pTHW6WcXF5LCudHLe1XfXi5nxSIV/U8gVhAJI
- 96U5Du8UfwrpviS/qWSRmeADTX2dEzD44mjqbEG/K08k3F9XmWmeRo87zEU0rAfwvkKaAEhDWt5
- eDpQ/JudR/lBnTSfb5326SGe70ez5rktV/3fzF4/E8sruCFLBpshbr3RTHzWuk6/D9cpow8t/B7
- Xz6/kVdQRVCuGZGg2+/mAuc3oTqEp4XatSTK71LgClYgr5Zfdij0CudwCzq1v0VhxD6EYlXgDW1
- AGzkQTKIBNsV99x7z8g1j0tA==
-X-Google-Smtp-Source: AGHT+IEOHRAHi/kThU8XcZm++uy21KLqveTvhsLOCWDtxbRW0wTlgzGaCXCfsmK8fZg7ypHpHFvltQ==
-X-Received: by 2002:a05:6a20:42a3:b0:334:8f45:8e99 with SMTP id
- adf61e73a8af0-334a85fd3b4mr22173301637.35.1761062175552; 
- Tue, 21 Oct 2025 08:56:15 -0700 (PDT)
+ AJvYcCWKNEMB81mIpG8x0g73aC+skJtL6pJgcKXseSZvPEl6D65BMiSBpQTyFnKXGXI6dfPMK0B+QGs/bggw@nongnu.org
+X-Gm-Message-State: AOJu0Ywd4ukZouW6TKANIw4WLcDg+KNtnrxwDbj4zQzN5l+lGBGckTcW
+ 8fYJKXbNYlR2Ng38b1s523qIJRFJ/Jx9gd4HX59epRfZsm3Q9til6P7jgUc0E6vt4K4=
+X-Gm-Gg: ASbGnctqj6+HuG5Hj6GTSuS4eDrDS4L41r/meTVUStA5d8SlaFKLjmkZaxW0a3KzsfY
+ V2c0tt8CWjowSjSWTvl6GP1o5LO3XJr3frvDqiEaX818l4G34MaiGUQ5X1gAOt3mA/RBTH9MqTJ
+ rByvP+FfHrEEay6dKJXiDFdQ71qF1SfHRtZoJpAdJDsFI+3i74R+ml5YO/14vxvX4Jh1J2hgfcX
+ /XlYX804IKJfB9bOlZva7gj/agW2QjonoPSDSrS9jbiWkjS5rEylAPkdSeSmEgyeg36pgjJsjCs
+ szvkA1jBGECKdsvR/7KSKAEJ7IXUT+teT2NId4FEzWDTLRyeZIFZhpDBvpuxTBRS/fefVFtBMJ3
+ LgTfhTUjfS/wyMTc4jrycRh7xLwIfXACPQ0+R8JgYs56PV4puZLS07KrvB9MVARLFOpP2tDKV02
+ XGvDw9+rdpvLApEVwqa64vJ7P1lZ3TlRJy
+X-Google-Smtp-Source: AGHT+IGEYAekfWzfzI91SijeLYYBI9MEWoiPZYFokqJmySWO/bQ/8JmTOUXjTlc5Ar+ACZ1mlIrj2g==
+X-Received: by 2002:a17:902:f789:b0:266:57f7:25f5 with SMTP id
+ d9443c01a7336-292ff8169c9mr3182655ad.7.1761062164201; 
+ Tue, 21 Oct 2025 08:56:04 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-33d5de11392sm11490177a91.7.2025.10.21.08.56.10
+ 98e67ed59e1d1-33d5de11392sm11490177a91.7.2025.10.21.08.55.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 08:56:15 -0700 (PDT)
+ Tue, 21 Oct 2025 08:56:03 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -96,17 +96,16 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  qemu-ppc@nongnu.org (open list:PowerPC TCG CPUs),
  qemu-s390x@nongnu.org (open list:S390 TCG CPUs),
  Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v3 03/18] accel/tcg: memory access from CPU will pass
- access_type to IOMMU
-Date: Tue, 21 Oct 2025 23:55:33 +0800
-Message-ID: <20251021155548.584543-4-jim.shu@sifive.com>
+Subject: [PATCH v3 01/18] accel/tcg: Store section pointer in CPUTLBEntryFull
+Date: Tue, 21 Oct 2025 23:55:31 +0800
+Message-ID: <20251021155548.584543-2-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251021155548.584543-1-jim.shu@sifive.com>
 References: <20251021155548.584543-1-jim.shu@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=jim.shu@sifive.com; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=jim.shu@sifive.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,506 +128,261 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-It is the preparation patch for upcoming RISC-V wgChecker device.
+To fix the bug of iotlb_to_section(), store complete MemoryRegionSection
+pointer in CPUTLBEntryFull to replace the section_index in xlat_section.
+Rename 'xlat_section' to 'xlat' as we remove last 12 bits section_index
+inside. Also, since we directly use section pointer in the
+CPUTLBEntryFull (full->section), we can remove the unused functions:
+iotlb_to_section(), memory_region_section_get_iotlb().
 
-Since RISC-V wgChecker could permit access in RO/WO permission, the
-IOMMUMemoryRegion could return different section for read & write
-access. The memory access from CPU should also pass the access_type to
-IOMMU translate function so that IOMMU could return the correct section
-of specified access_type.
+iotlb_to_section() bug description:
+'CPUTLBEntryFull.xlat_section' stores section_index in last 12 bits to
+find the correct section when CPU access the IO region over the IOTLB.
+However, section_index is only unique inside single AddressSpace. If
+address space translation is over IOMMUMemoryRegion, it could return
+section from other AddressSpace. 'iotlb_to_section()' API only finds the
+sections from CPU's AddressSpace so that it couldn't find section in
+other AddressSpace. Thus, using 'iotlb_to_section()' API will find the
+wrong section and QEMU will have wrong load/store access.
+
+This bug occurs only when
+(1) IOMMUMemoryRegion is in the path of CPU access.
+(2) IOMMUMemoryRegion returns different target_as and the section is in
+the IO region.
+
+Common IOMMU devices don't have this issue since they are only in the
+path of DMA access. Currently, the bug only occurs when ARM MPC device
+(hw/misc/tz-mpc.c) returns 'blocked_io_as' to emulate blocked access
+handling. Upcoming RISC-V wgChecker device is also affected by this bug.
 
 Signed-off-by: Jim Shu <jim.shu@sifive.com>
 ---
- accel/tcg/cputlb.c                   | 17 ++++++++++-------
- include/accel/tcg/iommu.h            |  3 ++-
- include/exec/cputlb.h                | 11 +++++++----
- system/physmem.c                     | 16 +++++++++++-----
- target/alpha/helper.c                |  2 +-
- target/avr/helper.c                  |  2 +-
- target/hppa/mem_helper.c             |  1 -
- target/i386/tcg/system/excp_helper.c |  3 ++-
- target/loongarch/tcg/tlb_helper.c    |  2 +-
- target/m68k/helper.c                 | 10 +++++++---
- target/microblaze/helper.c           |  8 ++++----
- target/mips/tcg/system/tlb_helper.c  |  4 ++--
- target/openrisc/mmu.c                |  2 +-
- target/ppc/mmu_helper.c              |  2 +-
- target/riscv/cpu_helper.c            |  2 +-
- target/rx/cpu.c                      |  3 ++-
- target/s390x/tcg/excp_helper.c       |  2 +-
- target/sh4/helper.c                  |  2 +-
- target/sparc/mmu_helper.c            |  6 +++---
- target/tricore/helper.c              |  2 +-
- target/xtensa/helper.c               |  3 ++-
- 21 files changed, 61 insertions(+), 42 deletions(-)
+ accel/tcg/cputlb.c        | 32 +++++++++++++++-----------------
+ include/accel/tcg/iommu.h | 15 ---------------
+ include/exec/cputlb.h     |  2 +-
+ include/hw/core/cpu.h     | 12 +++++++-----
+ system/physmem.c          | 25 -------------------------
+ 5 files changed, 23 insertions(+), 63 deletions(-)
 
 diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index b3ed5d2b9c..a906241b1b 100644
+index 631f1fe135..b3ed5d2b9c 100644
 --- a/accel/tcg/cputlb.c
 +++ b/accel/tcg/cputlb.c
-@@ -1021,7 +1021,8 @@ static inline void tlb_set_compare(CPUTLBEntryFull *full, CPUTLBEntry *ent,
-  * critical section.
-  */
- void tlb_set_page_full(CPUState *cpu, int mmu_idx,
--                       vaddr addr, CPUTLBEntryFull *full)
-+                       vaddr addr, MMUAccessType access_type,
-+                       CPUTLBEntryFull *full)
- {
-     CPUTLB *tlb = &cpu->neg.tlb;
-     CPUTLBDesc *desc = &tlb->d[mmu_idx];
-@@ -1048,7 +1049,8 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
-     prot = full->prot;
-     asidx = cpu_asidx_from_attrs(cpu, full->attrs);
-     section = address_space_translate_for_iotlb(cpu, asidx, paddr_page,
--                                                &xlat, &sz, full->attrs, &prot);
-+                                                &xlat, &sz, full->attrs, &prot,
-+                                                access_type);
-     assert(sz >= TARGET_PAGE_SIZE);
- 
-     tlb_debug("vaddr=%016" VADDR_PRIx " paddr=0x" HWADDR_FMT_plx
-@@ -1184,7 +1186,8 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
- 
- void tlb_set_page_with_attrs(CPUState *cpu, vaddr addr,
-                              hwaddr paddr, MemTxAttrs attrs, int prot,
--                             int mmu_idx, vaddr size)
-+                             MMUAccessType access_type, int mmu_idx,
-+                             vaddr size)
- {
-     CPUTLBEntryFull full = {
-         .phys_addr = paddr,
-@@ -1194,15 +1197,15 @@ void tlb_set_page_with_attrs(CPUState *cpu, vaddr addr,
-     };
- 
-     assert(is_power_of_2(size));
--    tlb_set_page_full(cpu, mmu_idx, addr, &full);
-+    tlb_set_page_full(cpu, mmu_idx, addr, access_type, &full);
- }
- 
- void tlb_set_page(CPUState *cpu, vaddr addr,
--                  hwaddr paddr, int prot,
-+                  hwaddr paddr, int prot, MMUAccessType access_type,
-                   int mmu_idx, vaddr size)
- {
-     tlb_set_page_with_attrs(cpu, addr, paddr, MEMTXATTRS_UNSPECIFIED,
--                            prot, mmu_idx, size);
-+                            prot, access_type, mmu_idx, size);
- }
- 
- /**
-@@ -1244,7 +1247,7 @@ static bool tlb_fill_align(CPUState *cpu, vaddr addr, MMUAccessType type,
-     if (ops->tlb_fill_align) {
-         if (ops->tlb_fill_align(cpu, &full, addr, type, mmu_idx,
-                                 memop, size, probe, ra)) {
--            tlb_set_page_full(cpu, mmu_idx, addr, &full);
-+            tlb_set_page_full(cpu, mmu_idx, addr, type, &full);
-             return true;
+@@ -1089,7 +1089,7 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
          }
      } else {
+         /* I/O or ROMD */
+-        iotlb = memory_region_section_get_iotlb(cpu, section) + xlat;
++        iotlb = xlat;
+         /*
+          * Writes to romd devices must go through MMIO to enable write.
+          * Reads to romd devices go through the ram_ptr found above,
+@@ -1140,10 +1140,9 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
+     /*
+      * When memory region is ram, iotlb contains a TARGET_PAGE_BITS
+      * aligned ram_addr_t of the page base of the target RAM.
+-     * Otherwise, iotlb contains
+-     *  - a physical section number in the lower TARGET_PAGE_BITS
+-     *  - the offset within section->mr of the page base (I/O, ROMD) with the
+-     *    TARGET_PAGE_BITS masked off.
++     * Otherwise, iotlb contains a TARGET_PAGE_BITS aligned
++     * offset within section->mr of the page base (I/O, ROMD)
++     *
+      * We subtract addr_page (which is page aligned and thus won't
+      * disturb the low bits) to give an offset which can be added to the
+      * (non-page-aligned) vaddr of the eventual memory access to get
+@@ -1153,7 +1152,8 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
+      */
+     desc->fulltlb[index] = *full;
+     full = &desc->fulltlb[index];
+-    full->xlat_section = iotlb - addr_page;
++    full->xlat = iotlb - addr_page;
++    full->section = section;
+     full->phys_addr = paddr_page;
+ 
+     /* Now calculate the new entry */
+@@ -1269,14 +1269,14 @@ static inline void cpu_unaligned_access(CPUState *cpu, vaddr addr,
+ }
+ 
+ static MemoryRegionSection *
+-io_prepare(hwaddr *out_offset, CPUState *cpu, hwaddr xlat,
++io_prepare(hwaddr *out_offset, CPUState *cpu, CPUTLBEntryFull *full,
+            MemTxAttrs attrs, vaddr addr, uintptr_t retaddr)
+ {
+     MemoryRegionSection *section;
+     hwaddr mr_offset;
+ 
+-    section = iotlb_to_section(cpu, xlat, attrs);
+-    mr_offset = (xlat & TARGET_PAGE_MASK) + addr;
++    section = full->section;
++    mr_offset = full->xlat + addr;
+     cpu->mem_io_pc = retaddr;
+     if (!cpu->neg.can_do_io) {
+         cpu_io_recompile(cpu, retaddr);
+@@ -1335,7 +1335,7 @@ static bool victim_tlb_hit(CPUState *cpu, size_t mmu_idx, size_t index,
+ static void notdirty_write(CPUState *cpu, vaddr mem_vaddr, unsigned size,
+                            CPUTLBEntryFull *full, uintptr_t retaddr)
+ {
+-    ram_addr_t ram_addr = mem_vaddr + full->xlat_section;
++    ram_addr_t ram_addr = mem_vaddr + full->xlat;
+ 
+     trace_memory_notdirty_write_access(mem_vaddr, ram_addr, size);
+ 
+@@ -1592,9 +1592,7 @@ bool tlb_plugin_lookup(CPUState *cpu, vaddr addr, int mmu_idx,
+ 
+     /* We must have an iotlb entry for MMIO */
+     if (tlb_addr & TLB_MMIO) {
+-        MemoryRegionSection *section =
+-            iotlb_to_section(cpu, full->xlat_section & ~TARGET_PAGE_MASK,
+-                             full->attrs);
++        MemoryRegionSection *section = full->section;
+         data->is_io = true;
+         data->mr = section->mr;
+     } else {
+@@ -1991,7 +1989,7 @@ static uint64_t do_ld_mmio_beN(CPUState *cpu, CPUTLBEntryFull *full,
+     tcg_debug_assert(size > 0 && size <= 8);
+ 
+     attrs = full->attrs;
+-    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
++    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+     mr = section->mr;
+ 
+     BQL_LOCK_GUARD();
+@@ -2012,7 +2010,7 @@ static Int128 do_ld16_mmio_beN(CPUState *cpu, CPUTLBEntryFull *full,
+     tcg_debug_assert(size > 8 && size <= 16);
+ 
+     attrs = full->attrs;
+-    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
++    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+     mr = section->mr;
+ 
+     BQL_LOCK_GUARD();
+@@ -2532,7 +2530,7 @@ static uint64_t do_st_mmio_leN(CPUState *cpu, CPUTLBEntryFull *full,
+     tcg_debug_assert(size > 0 && size <= 8);
+ 
+     attrs = full->attrs;
+-    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
++    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+     mr = section->mr;
+ 
+     BQL_LOCK_GUARD();
+@@ -2552,7 +2550,7 @@ static uint64_t do_st16_mmio_leN(CPUState *cpu, CPUTLBEntryFull *full,
+     tcg_debug_assert(size > 8 && size <= 16);
+ 
+     attrs = full->attrs;
+-    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
++    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+     mr = section->mr;
+ 
+     BQL_LOCK_GUARD();
 diff --git a/include/accel/tcg/iommu.h b/include/accel/tcg/iommu.h
-index 547f8ea0ef..2a79f85983 100644
+index 90cfd6c0ed..547f8ea0ef 100644
 --- a/include/accel/tcg/iommu.h
 +++ b/include/accel/tcg/iommu.h
-@@ -20,7 +20,8 @@ MemoryRegionSection *address_space_translate_for_iotlb(CPUState *cpu,
-                                                        hwaddr *xlat,
-                                                        hwaddr *plen,
-                                                        MemTxAttrs attrs,
--                                                       int *prot);
-+                                                       int *prot,
-+                                                       MMUAccessType access_type);
+@@ -14,18 +14,6 @@
+ #include "exec/hwaddr.h"
+ #include "exec/memattrs.h"
  
+-/**
+- * iotlb_to_section:
+- * @cpu: CPU performing the access
+- * @index: TCG CPU IOTLB entry
+- *
+- * Given a TCG CPU IOTLB entry, return the MemoryRegionSection that
+- * it refers to. @index will have been initially created and returned
+- * by memory_region_section_get_iotlb().
+- */
+-MemoryRegionSection *iotlb_to_section(CPUState *cpu,
+-                                      hwaddr index, MemTxAttrs attrs);
+-
+ MemoryRegionSection *address_space_translate_for_iotlb(CPUState *cpu,
+                                                        int asidx,
+                                                        hwaddr addr,
+@@ -34,8 +22,5 @@ MemoryRegionSection *address_space_translate_for_iotlb(CPUState *cpu,
+                                                        MemTxAttrs attrs,
+                                                        int *prot);
+ 
+-hwaddr memory_region_section_get_iotlb(CPUState *cpu,
+-                                       MemoryRegionSection *section);
+-
  #endif
  
 diff --git a/include/exec/cputlb.h b/include/exec/cputlb.h
-index c0ca7ad77b..b5230e70b9 100644
+index 9bec0e7890..c0ca7ad77b 100644
 --- a/include/exec/cputlb.h
 +++ b/include/exec/cputlb.h
-@@ -40,6 +40,7 @@ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
-  * @cpu: CPU context
-  * @mmu_idx: mmu index of the tlb to modify
-  * @addr: virtual address of the entry to add
-+ * @access_type: access was read/write/execute
+@@ -43,7 +43,7 @@ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
   * @full: the details of the tlb entry
   *
   * Add an entry to @cpu tlb index @mmu_idx.  All of the fields of
-@@ -55,6 +56,7 @@ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
-  * used by tlb_flush_page.
-  */
- void tlb_set_page_full(CPUState *cpu, int mmu_idx, vaddr addr,
-+                       MMUAccessType access_type,
-                        CPUTLBEntryFull *full);
- 
- /**
-@@ -64,6 +66,7 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx, vaddr addr,
-  * @paddr: physical address of the page
-  * @attrs: memory transaction attributes
-  * @prot: access permissions (PAGE_READ/PAGE_WRITE/PAGE_EXEC bits)
-+ * @access_type: access was read/write/execute
-  * @mmu_idx: MMU index to insert TLB entry for
-  * @size: size of the page in bytes
+- * @full must be filled, except for xlat_section, and constitute
++ * @full must be filled, except for xlat, and constitute
+  * the complete description of the translated page.
   *
-@@ -80,9 +83,9 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx, vaddr addr,
-  * used by tlb_flush_page.
+  * This is generally called by the target tlb_fill function after
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index e79e8e0a8e..cce3f16198 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -214,15 +214,17 @@ typedef uint32_t MMUIdxMap;
   */
- void tlb_set_page_with_attrs(CPUState *cpu, vaddr addr,
--                             hwaddr paddr, MemTxAttrs attrs,
--                             int prot, int mmu_idx, vaddr size);
--
-+                             hwaddr paddr, MemTxAttrs attrs, int prot,
-+                             MMUAccessType access_type, int mmu_idx,
-+                             vaddr size);
- /**
-  * tlb_set_page:
-  *
-@@ -91,7 +94,7 @@ void tlb_set_page_with_attrs(CPUState *cpu, vaddr addr,
-  * as a convenience for CPUs which don't use memory transaction attributes.
-  */
- void tlb_set_page(CPUState *cpu, vaddr addr,
--                  hwaddr paddr, int prot,
-+                  hwaddr paddr, int prot, MMUAccessType access_type,
-                   int mmu_idx, vaddr size);
+ struct CPUTLBEntryFull {
+     /*
+-     * @xlat_section contains:
+-     *  - in the lower TARGET_PAGE_BITS, a physical section number
+-     *  - with the lower TARGET_PAGE_BITS masked off, an offset which
+-     *    must be added to the virtual address to obtain:
++     * @xlat contains:
++     *  - a TARGET_PAGE_BITS aligned offset which must be added to
++     *    the virtual address to obtain:
+      *     + the ram_addr_t of the target RAM (if the physical section
+      *       number is PHYS_SECTION_NOTDIRTY or PHYS_SECTION_ROM)
+      *     + the offset within the target MemoryRegion (otherwise)
+      */
+-    hwaddr xlat_section;
++    hwaddr xlat;
++
++    /* @section contains physical section. */
++    MemoryRegionSection *section;
  
- #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+     /*
+      * @phys_addr contains the physical address in the address space
 diff --git a/system/physmem.c b/system/physmem.c
-index 23d9b92954..f57e1a97d5 100644
+index a340ca3e61..c163d6b856 100644
 --- a/system/physmem.c
 +++ b/system/physmem.c
-@@ -684,12 +684,14 @@ void tcg_iommu_init_notifier_list(CPUState *cpu)
- MemoryRegionSection *
- address_space_translate_for_iotlb(CPUState *cpu, int asidx, hwaddr orig_addr,
-                                   hwaddr *xlat, hwaddr *plen,
--                                  MemTxAttrs attrs, int *prot)
-+                                  MemTxAttrs attrs, int *prot,
-+                                  MMUAccessType access_type)
- {
-     MemoryRegionSection *section;
-     IOMMUMemoryRegion *iommu_mr;
-     IOMMUMemoryRegionClass *imrc;
-     IOMMUTLBEntry iotlb;
-+    IOMMUAccessFlags iommu_flags;
-     int iommu_idx;
-     hwaddr addr = orig_addr;
-     AddressSpaceDispatch *d = address_space_to_dispatch(cpu->cpu_ases[asidx].as);
-@@ -706,10 +708,14 @@ address_space_translate_for_iotlb(CPUState *cpu, int asidx, hwaddr orig_addr,
- 
-         iommu_idx = imrc->attrs_to_index(iommu_mr, attrs);
-         tcg_register_iommu_notifier(cpu, iommu_mr, iommu_idx);
--        /* We need all the permissions, so pass IOMMU_NONE so the IOMMU
--         * doesn't short-cut its translation table walk.
--         */
--        iotlb = imrc->translate(iommu_mr, addr, IOMMU_NONE, iommu_idx);
-+
-+        if (access_type == MMU_DATA_STORE) {
-+            iommu_flags = IOMMU_WO;
-+        } else {
-+            iommu_flags = IOMMU_RO;
-+        }
-+
-+        iotlb = imrc->translate(iommu_mr, addr, iommu_flags, iommu_idx);
-         addr = ((iotlb.translated_addr & ~iotlb.addr_mask)
-                 | (addr & iotlb.addr_mask));
-         /* Update the caller's prot bits to remove permissions the IOMMU
-diff --git a/target/alpha/helper.c b/target/alpha/helper.c
-index 096eac3445..dd5cba740b 100644
---- a/target/alpha/helper.c
-+++ b/target/alpha/helper.c
-@@ -320,7 +320,7 @@ bool alpha_cpu_tlb_fill(CPUState *cs, vaddr addr, int size,
-     }
- 
-     tlb_set_page(cs, addr & TARGET_PAGE_MASK, phys & TARGET_PAGE_MASK,
--                 prot, mmu_idx, TARGET_PAGE_SIZE);
-+                 prot, access_type, mmu_idx, TARGET_PAGE_SIZE);
-     return true;
+@@ -748,31 +748,6 @@ translate_fail:
+     return &d->map.sections[PHYS_SECTION_UNASSIGNED];
  }
  
-diff --git a/target/avr/helper.c b/target/avr/helper.c
-index 4b29ab3526..fd147e00e3 100644
---- a/target/avr/helper.c
-+++ b/target/avr/helper.c
-@@ -140,7 +140,7 @@ bool avr_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         prot = PAGE_READ | PAGE_WRITE;
-     }
- 
--    tlb_set_page(cs, address, paddr, prot, mmu_idx, TARGET_PAGE_SIZE);
-+    tlb_set_page(cs, address, paddr, prot, access_type, mmu_idx, TARGET_PAGE_SIZE);
-     return true;
- }
- 
-diff --git a/target/hppa/mem_helper.c b/target/hppa/mem_helper.c
-index cce82e6599..710259b3cd 100644
---- a/target/hppa/mem_helper.c
-+++ b/target/hppa/mem_helper.c
-@@ -475,7 +475,6 @@ bool hppa_cpu_tlb_fill_align(CPUState *cs, CPUTLBEntryFull *out, vaddr addr,
-     out->prot = prot;
-     out->attrs = MEMTXATTRS_UNSPECIFIED;
-     out->lg_page_size = TARGET_PAGE_BITS;
+-MemoryRegionSection *iotlb_to_section(CPUState *cpu,
+-                                      hwaddr index, MemTxAttrs attrs)
+-{
+-    int asidx = cpu_asidx_from_attrs(cpu, attrs);
+-    CPUAddressSpace *cpuas = &cpu->cpu_ases[asidx];
+-    AddressSpaceDispatch *d = address_space_to_dispatch(cpuas->as);
+-    int section_index = index & ~TARGET_PAGE_MASK;
+-    MemoryRegionSection *ret;
 -
-     return true;
- }
+-    assert(section_index < d->map.sections_nb);
+-    ret = d->map.sections + section_index;
+-    assert(ret->mr);
+-    assert(ret->mr->ops);
+-
+-    return ret;
+-}
+-
+-/* Called from RCU critical section */
+-hwaddr memory_region_section_get_iotlb(CPUState *cpu,
+-                                       MemoryRegionSection *section)
+-{
+-    AddressSpaceDispatch *d = flatview_to_dispatch(section->fv);
+-    return section - d->map.sections;
+-}
+-
+ #endif /* CONFIG_TCG */
  
-diff --git a/target/i386/tcg/system/excp_helper.c b/target/i386/tcg/system/excp_helper.c
-index f622b5d588..ac24c1ca98 100644
---- a/target/i386/tcg/system/excp_helper.c
-+++ b/target/i386/tcg/system/excp_helper.c
-@@ -628,7 +628,8 @@ bool x86_cpu_tlb_fill(CPUState *cs, vaddr addr, int size,
-         tlb_set_page_with_attrs(cs, addr & TARGET_PAGE_MASK,
-                                 out.paddr & TARGET_PAGE_MASK,
-                                 cpu_get_mem_attrs(env),
--                                out.prot, mmu_idx, out.page_size);
-+                                out.prot, access_type, mmu_idx,
-+                                out.page_size);
-         return true;
-     }
- 
-diff --git a/target/loongarch/tcg/tlb_helper.c b/target/loongarch/tcg/tlb_helper.c
-index e119f78d92..09d1f6f60e 100644
---- a/target/loongarch/tcg/tlb_helper.c
-+++ b/target/loongarch/tcg/tlb_helper.c
-@@ -581,7 +581,7 @@ bool loongarch_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         prot = context.prot;
-         tlb_set_page(cs, address & TARGET_PAGE_MASK,
-                      physical & TARGET_PAGE_MASK, prot,
--                     mmu_idx, TARGET_PAGE_SIZE);
-+                     access_type, mmu_idx, TARGET_PAGE_SIZE);
-         qemu_log_mask(CPU_LOG_MMU,
-                       "%s address=%" VADDR_PRIx " physical " HWADDR_FMT_plx
-                       " prot %d\n", __func__, address, physical, prot);
-diff --git a/target/m68k/helper.c b/target/m68k/helper.c
-index 15f110fa7a..aab2ea8d19 100644
---- a/target/m68k/helper.c
-+++ b/target/m68k/helper.c
-@@ -969,7 +969,7 @@ bool m68k_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         tlb_set_page(cs, address & TARGET_PAGE_MASK,
-                      address & TARGET_PAGE_MASK,
-                      PAGE_READ | PAGE_WRITE | PAGE_EXEC,
--                     mmu_idx, TARGET_PAGE_SIZE);
-+                     qemu_access_type, mmu_idx, TARGET_PAGE_SIZE);
-         return true;
-     }
- 
-@@ -989,7 +989,8 @@ bool m68k_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                                address, access_type, &page_size);
-     if (likely(ret == 0)) {
-         tlb_set_page(cs, address & TARGET_PAGE_MASK,
--                     physical & TARGET_PAGE_MASK, prot, mmu_idx, page_size);
-+                     physical & TARGET_PAGE_MASK, prot, qemu_access_type,
-+                     mmu_idx, page_size);
-         return true;
-     }
- 
-@@ -1461,6 +1462,7 @@ void HELPER(ptest)(CPUM68KState *env, uint32_t addr, uint32_t is_read)
-     int prot;
-     int ret;
-     target_ulong page_size;
-+    MMUAccessType qemu_access_type;
- 
-     access_type = ACCESS_PTEST;
-     if (env->dfc & 4) {
-@@ -1468,9 +1470,11 @@ void HELPER(ptest)(CPUM68KState *env, uint32_t addr, uint32_t is_read)
-     }
-     if ((env->dfc & 3) == 2) {
-         access_type |= ACCESS_CODE;
-+        qemu_access_type = MMU_INST_FETCH;
-     }
-     if (!is_read) {
-         access_type |= ACCESS_STORE;
-+        qemu_access_type = MMU_DATA_STORE;
-     }
- 
-     env->mmu.mmusr = 0;
-@@ -1480,7 +1484,7 @@ void HELPER(ptest)(CPUM68KState *env, uint32_t addr, uint32_t is_read)
-     if (ret == 0) {
-         tlb_set_page(env_cpu(env), addr & TARGET_PAGE_MASK,
-                      physical & TARGET_PAGE_MASK,
--                     prot, access_type & ACCESS_SUPER ?
-+                     prot, qemu_access_type, access_type & ACCESS_SUPER ?
-                      MMU_KERNEL_IDX : MMU_USER_IDX, page_size);
-     }
- }
-diff --git a/target/microblaze/helper.c b/target/microblaze/helper.c
-index cf577a7226..6d0ec55c13 100644
---- a/target/microblaze/helper.c
-+++ b/target/microblaze/helper.c
-@@ -98,8 +98,8 @@ bool mb_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         /* MMU disabled or not available.  */
-         address &= TARGET_PAGE_MASK;
-         prot = PAGE_RWX;
--        tlb_set_page_with_attrs(cs, address, address, attrs, prot, mmu_idx,
--                                TARGET_PAGE_SIZE);
-+        tlb_set_page_with_attrs(cs, address, address, attrs, prot, access_type,
-+                                mmu_idx, TARGET_PAGE_SIZE);
-         return true;
-     }
- 
-@@ -110,8 +110,8 @@ bool mb_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
- 
-         qemu_log_mask(CPU_LOG_MMU, "MMU map mmu=%d v=%x p=%x prot=%x\n",
-                       mmu_idx, vaddr, paddr, lu.prot);
--        tlb_set_page_with_attrs(cs, vaddr, paddr, attrs, lu.prot, mmu_idx,
--                                TARGET_PAGE_SIZE);
-+        tlb_set_page_with_attrs(cs, vaddr, paddr, attrs, lu.prot, access_type,
-+                                mmu_idx, TARGET_PAGE_SIZE);
-         return true;
-     }
- 
-diff --git a/target/mips/tcg/system/tlb_helper.c b/target/mips/tcg/system/tlb_helper.c
-index 1e8901556d..0d087aadf6 100644
---- a/target/mips/tcg/system/tlb_helper.c
-+++ b/target/mips/tcg/system/tlb_helper.c
-@@ -933,7 +933,7 @@ bool mips_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     if (ret == TLBRET_MATCH) {
-         tlb_set_page(cs, address & TARGET_PAGE_MASK,
-                      physical & TARGET_PAGE_MASK, prot,
--                     mmu_idx, TARGET_PAGE_SIZE);
-+                     access_type, mmu_idx, TARGET_PAGE_SIZE);
-         return true;
-     }
- #if !defined(TARGET_MIPS64)
-@@ -951,7 +951,7 @@ bool mips_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-             if (ret == TLBRET_MATCH) {
-                 tlb_set_page(cs, address & TARGET_PAGE_MASK,
-                              physical & TARGET_PAGE_MASK, prot,
--                             mmu_idx, TARGET_PAGE_SIZE);
-+                             access_type, mmu_idx, TARGET_PAGE_SIZE);
-                 return true;
-             }
-         }
-diff --git a/target/openrisc/mmu.c b/target/openrisc/mmu.c
-index ffb732e0d1..8c43d8350f 100644
---- a/target/openrisc/mmu.c
-+++ b/target/openrisc/mmu.c
-@@ -128,7 +128,7 @@ bool openrisc_cpu_tlb_fill(CPUState *cs, vaddr addr, int size,
-     if (likely(excp == 0)) {
-         tlb_set_page(cs, addr & TARGET_PAGE_MASK,
-                      phys_addr & TARGET_PAGE_MASK, prot,
--                     mmu_idx, TARGET_PAGE_SIZE);
-+                     access_type, mmu_idx, TARGET_PAGE_SIZE);
-         return true;
-     }
-     if (probe) {
-diff --git a/target/ppc/mmu_helper.c b/target/ppc/mmu_helper.c
-index ac60705402..8b55a9e4dd 100644
---- a/target/ppc/mmu_helper.c
-+++ b/target/ppc/mmu_helper.c
-@@ -1369,7 +1369,7 @@ bool ppc_cpu_tlb_fill(CPUState *cs, vaddr eaddr, int size,
-     if (ppc_xlate(cpu, eaddr, access_type, &raddr,
-                   &page_size, &prot, mmu_idx, !probe)) {
-         tlb_set_page(cs, eaddr & TARGET_PAGE_MASK, raddr & TARGET_PAGE_MASK,
--                     prot, mmu_idx, 1UL << page_size);
-+                     prot, access_type, mmu_idx, 1UL << page_size);
-         return true;
-     }
-     if (probe) {
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 3479a62cc7..63acd70543 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1874,7 +1874,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
- 
-     if (ret == TRANSLATE_SUCCESS) {
-         tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
--                     prot, mmu_idx, tlb_size);
-+                     prot, access_type, mmu_idx, tlb_size);
-         return true;
-     } else if (probe) {
-         return false;
-diff --git a/target/rx/cpu.c b/target/rx/cpu.c
-index da02ae7bf8..ee2594aa1e 100644
---- a/target/rx/cpu.c
-+++ b/target/rx/cpu.c
-@@ -194,7 +194,8 @@ static bool rx_cpu_tlb_fill(CPUState *cs, vaddr addr, int size,
-     /* Linear mapping */
-     address = physical = addr & TARGET_PAGE_MASK;
-     prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
--    tlb_set_page(cs, address, physical, prot, mmu_idx, TARGET_PAGE_SIZE);
-+    tlb_set_page(cs, address, physical, prot, access_type,
-+                 mmu_idx, TARGET_PAGE_SIZE);
-     return true;
- }
- 
-diff --git a/target/s390x/tcg/excp_helper.c b/target/s390x/tcg/excp_helper.c
-index 0ae4e26606..81e180f9f6 100644
---- a/target/s390x/tcg/excp_helper.c
-+++ b/target/s390x/tcg/excp_helper.c
-@@ -181,7 +181,7 @@ bool s390_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                       "%s: set tlb %" PRIx64 " -> %" PRIx64 " (%x)\n",
-                       __func__, (uint64_t)vaddr, (uint64_t)raddr, prot);
-         tlb_set_page(cs, address & TARGET_PAGE_MASK, raddr, prot,
--                     mmu_idx, TARGET_PAGE_SIZE);
-+                     access_type, mmu_idx, TARGET_PAGE_SIZE);
-         return true;
-     }
-     if (probe) {
-diff --git a/target/sh4/helper.c b/target/sh4/helper.c
-index 3b18a320b8..1a908ce7d5 100644
---- a/target/sh4/helper.c
-+++ b/target/sh4/helper.c
-@@ -808,7 +808,7 @@ bool superh_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     if (ret == MMU_OK) {
-         address &= TARGET_PAGE_MASK;
-         physical &= TARGET_PAGE_MASK;
--        tlb_set_page(cs, address, physical, prot, mmu_idx, TARGET_PAGE_SIZE);
-+        tlb_set_page(cs, address, physical, prot, access_type, mmu_idx, TARGET_PAGE_SIZE);
-         return true;
-     }
-     if (probe) {
-diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
-index 217580a4d8..a4a47e2ca7 100644
---- a/target/sparc/mmu_helper.c
-+++ b/target/sparc/mmu_helper.c
-@@ -233,7 +233,7 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                       "Translate at %" VADDR_PRIx " -> "
-                       HWADDR_FMT_plx ", vaddr " TARGET_FMT_lx "\n",
-                       address, full.phys_addr, vaddr);
--        tlb_set_page_full(cs, mmu_idx, vaddr, &full);
-+        tlb_set_page_full(cs, mmu_idx, vaddr, access_type, &full);
-         return true;
-     }
- 
-@@ -249,7 +249,7 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-            neverland. Fake/overridden mappings will be flushed when
-            switching to normal mode. */
-         full.prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
--        tlb_set_page_full(cs, mmu_idx, vaddr, &full);
-+        tlb_set_page_full(cs, mmu_idx, vaddr, access_type, &full);
-         return true;
-     } else {
-         if (access_type == MMU_INST_FETCH) {
-@@ -773,7 +773,7 @@ bool sparc_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         trace_mmu_helper_mmu_fault(address, full.phys_addr, mmu_idx, env->tl,
-                                    env->dmmu.mmu_primary_context,
-                                    env->dmmu.mmu_secondary_context);
--        tlb_set_page_full(cs, mmu_idx, address, &full);
-+        tlb_set_page_full(cs, mmu_idx, address, access_type, &full);
-         return true;
-     }
-     if (probe) {
-diff --git a/target/tricore/helper.c b/target/tricore/helper.c
-index 7574111c87..ad0c8b11d3 100644
---- a/target/tricore/helper.c
-+++ b/target/tricore/helper.c
-@@ -86,7 +86,7 @@ bool tricore_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     if (ret == TLBRET_MATCH) {
-         tlb_set_page(cs, address & TARGET_PAGE_MASK,
-                      physical & TARGET_PAGE_MASK, prot | PAGE_EXEC,
--                     mmu_idx, TARGET_PAGE_SIZE);
-+                     rw, mmu_idx, TARGET_PAGE_SIZE);
-         return true;
-     } else {
-         assert(ret < 0);
-diff --git a/target/xtensa/helper.c b/target/xtensa/helper.c
-index 2d93b45036..2cd51ba0cb 100644
---- a/target/xtensa/helper.c
-+++ b/target/xtensa/helper.c
-@@ -282,7 +282,8 @@ bool xtensa_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         tlb_set_page(cs,
-                      address & TARGET_PAGE_MASK,
-                      paddr & TARGET_PAGE_MASK,
--                     access, mmu_idx, page_size);
-+                     access, access_type, mmu_idx,
-+                     page_size);
-         return true;
-     } else if (probe) {
-         return false;
+ void cpu_address_space_init(CPUState *cpu, int asidx,
 -- 
 2.43.0
 
