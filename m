@@ -4,146 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B32ECCD1A7
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Oct 2025 13:36:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 951E3CCD1A7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Oct 2025 13:36:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBCVi-0005Oj-Qs; Tue, 21 Oct 2025 09:34:47 -0400
+	id 1vBCW0-0005Yh-D1; Tue, 21 Oct 2025 09:35:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mlureau@redhat.com>)
- id 1vBCVX-0005MU-9Q
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 09:34:37 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1vBCVx-0005WE-7g; Tue, 21 Oct 2025 09:35:01 -0400
+Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mlureau@redhat.com>)
- id 1vBCV3-0003nQ-2Q
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 09:34:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1761053434;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Q8G6fSfFVaONhcxA1DHI9VcxajpmfGw7mPN/aSeM7JQ=;
- b=TNmu0DTlvL778nnZni5kfWR02bqdOtBWdoGZJo2C+cg1tI+IqNTq3mpx5TU3hhA4y5I6iq
- AXdrtEtMmRXOLc+KLN8aZJ3MZae+gbEJ4c6nxnrqt3jhbmZe5rXCNg16nKsh1EJPi50rlQ
- fZmu5JBACe3z8ik9rtsTCx2b/BuauIU=
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-427-Gi7hUbNsMWu40WD9GTtQQg-1; Tue, 21 Oct 2025 09:30:31 -0400
-X-MC-Unique: Gi7hUbNsMWu40WD9GTtQQg-1
-X-Mimecast-MFC-AGG-ID: Gi7hUbNsMWu40WD9GTtQQg_1761053431
-Received: by mail-pj1-f72.google.com with SMTP id
- 98e67ed59e1d1-32edda89a37so4965522a91.1
- for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 06:30:31 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761053430; x=1761658230;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Q8G6fSfFVaONhcxA1DHI9VcxajpmfGw7mPN/aSeM7JQ=;
- b=JWFuFSvsBkVW+hJGO9GjRW6lLnL1yhe/pdgN28aOVtjhAdpecx3jZCIa1UdRJ9vT/I
- R5cbl9320l5jZcrhvwBm8wjuhTvhhkA78LFBKxhHBcQ+RLFAh8jEjIeD9Obce446ehd4
- BmeLZfVLTMASz2QfZYFAxDhuJ5yfzMjcJNIj8itQSQN44kDLYpqM1vlGL9/SBYZeO5rZ
- w6J1KC0exnUVsJ5vJYtbNZux3oJzr5b7fRi3opSmkfAmgMPB0R61lmhllIfGLE6TtzPF
- S/CjXNC420YDM7ctjmuuqsTjHfkirD9LRl3Bg5Gg6J5dWxeHhokQ/k9plKKkIBuTxeoq
- SsIQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVxZG59f6LtR4uVDw/E344QbM7ilhGt3mZcPoO9y6BAdD8uVCN69lJ67p6cPWcpRp1uka5Al6K1tDyv@nongnu.org
-X-Gm-Message-State: AOJu0YzahayHmYl1WOwaO83ZxIXuFMzuemcKst7JLYXJTkMfgUbv87TI
- rs9i2vDtRFXE4Kli4lGzvRevbfiV7i0yBo/zhi9JqW1xVW45/Y0VqAFideHmHae66xHPlir12bR
- MMGJ3b/d6JW64rdJWZbOdETk7mRkFeqqRZq2JgHgjfNRxLE0rDpOsKybqeRSPvSz69y2jZxTaoZ
- Qim6l3EA5lgJtSjjKxYOPr6mLNXkAN8T0=
-X-Gm-Gg: ASbGnctPfNKtDBtH/hzXS8JLgxSm9eU++m9byaXSn7T4O3IS4erSG3zMZYkogUTeg/q
- cdxH749GoLoHvxR/qxFQI2nhUbeJf1IEDlLFtWlZs7p5tl7POTC8j0VyeZ1ejWlmwqsnrcM+XlY
- cgEDFbvaU5/isrnkxYzvrAyY4fJo5SXIsE5oNPULMsaE2PDP4vDdchEgbZt+ECsdBm9Hv8121M7
- En17x456ZZC4d0=
-X-Received: by 2002:a17:90b:3ec6:b0:339:ef05:3575 with SMTP id
- 98e67ed59e1d1-33bcf8f94c3mr25685578a91.26.1761053430046; 
- Tue, 21 Oct 2025 06:30:30 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGrcrzdwZmuF2cCRqH2vToyJMLy2bHoJ+Kx9jzECaxXzAzohnouc6v8JutWnCy0AcLWb81s8PtUoo7SVr1fd6U=
-X-Received: by 2002:a17:90b:3ec6:b0:339:ef05:3575 with SMTP id
- 98e67ed59e1d1-33bcf8f94c3mr25685486a91.26.1761053429385; Tue, 21 Oct 2025
- 06:30:29 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251021122533.721467-1-marcandre.lureau@redhat.com>
- <01a51fe7-4414-e787-ddf5-5ede0c1e1e74@eik.bme.hu>
-In-Reply-To: <01a51fe7-4414-e787-ddf5-5ede0c1e1e74@eik.bme.hu>
-From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
-Date: Tue, 21 Oct 2025 17:30:18 +0400
-X-Gm-Features: AS18NWC-i6fdjk32NEoXZbM96aNPF-p1sZDoFKybRPcKVdB4OOANWfiaSgrGQ2I
-Message-ID: <CAMxuvaz8GueSp-vPHFWnbv+Odcy63Cz_hZHd3NzReWXp3pnsqg@mail.gmail.com>
-Subject: Re: [PATCH] char: rename CharBackend->CharFrontend
-To: BALATON Zoltan <balaton@eik.bme.hu>
-Cc: qemu-devel@nongnu.org, pbonzini@redhat.com, 
- "Michael S. Tsirkin" <mst@redhat.com>, Stefano Garzarella <sgarzare@redhat.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- Zhenwei Pi <pizhenwei@bytedance.com>, 
- Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>, 
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Peter Maydell <peter.maydell@linaro.org>,
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1vBCV8-0003mR-5c; Tue, 21 Oct 2025 09:35:00 -0400
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 832FD5972E3;
+ Tue, 21 Oct 2025 15:25:07 +0200 (CEST)
+X-Virus-Scanned: amavis at eik.bme.hu
+Received: from zero.eik.bme.hu ([127.0.0.1])
+ by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
+ id Gg8qekahyVnk; Tue, 21 Oct 2025 15:25:05 +0200 (CEST)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id 25D775972E4; Tue, 21 Oct 2025 15:25:05 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 218E05972E1;
+ Tue, 21 Oct 2025 15:25:05 +0200 (CEST)
+Date: Tue, 21 Oct 2025 15:25:05 +0200 (CEST)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: =?ISO-8859-15?Q?Marc-Andr=E9_Lureau?= <marcandre.lureau@redhat.com>
+cc: qemu-devel@nongnu.org, pbonzini@redhat.com, 
+ "Michael S. Tsirkin" <mst@redhat.com>, 
+ Stefano Garzarella <sgarzare@redhat.com>, 
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>, 
+ Zhenwei Pi <pizhenwei@bytedance.com>, Laurent Vivier <lvivier@redhat.com>, 
+ Amit Shah <amit@kernel.org>, Stefan Berger <stefanb@linux.vnet.ibm.com>, 
+ =?ISO-8859-15?Q?Alex_Benn=E9e?= <alex.bennee@linaro.org>, 
+ =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
  Igor Mitsyanko <i.mitsyanko@gmail.com>, 
- =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>, 
- Frederic Konrad <konrad.frederic@yahoo.fr>, Alberto Garcia <berto@igalia.com>, 
- Thomas Huth <huth@tuxfamily.org>, Halil Pasic <pasic@linux.ibm.com>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>,
+ =?ISO-8859-15?Q?Cl=E9ment_Chigot?= <chigot@adacore.com>, 
+ Frederic Konrad <konrad.frederic@yahoo.fr>, 
+ Alberto Garcia <berto@igalia.com>, Thomas Huth <huth@tuxfamily.org>, 
+ Halil Pasic <pasic@linux.ibm.com>, 
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
  Jason Herne <jjherne@linux.ibm.com>, 
- Yoshinori Sato <yoshinori.sato@nifty.com>, Magnus Damm <magnus.damm@gmail.com>,
- Nicholas Piggin <npiggin@gmail.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
- "Collin L. Walling" <walling@linux.ibm.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>, 
+ Magnus Damm <magnus.damm@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ "Collin L. Walling" <walling@linux.ibm.com>, 
  Stefano Stabellini <sstabellini@kernel.org>, 
  Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
  Alistair Francis <alistair@alistair23.me>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ =?ISO-8859-15?Q?Daniel_P=2E_Berrang=E9?= <berrange@redhat.com>, 
  Eduardo Habkost <eduardo@habkost.net>, Corey Minyard <minyard@acm.org>, 
  Paul Burton <paulburton@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>, 
  Aurelien Jarno <aurelien@aurel32.net>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Weiwei Li <liwei1518@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>, 
  Michael Rolnik <mrolnik@gmail.com>, 
  Antony Pavlov <antonynpavlov@gmail.com>, Joel Stanley <joel@jms.id.au>, 
  Vijai Kumar K <vijai@behindbytes.com>, Samuel Tardieu <sam@rfc1149.net>, 
- Gustavo Romero <gustavo.romero@linaro.org>,
+ Gustavo Romero <gustavo.romero@linaro.org>, 
  Raphael Norwitz <raphael@enfabrica.net>, 
- Stefan Hajnoczi <stefanha@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, 
  "reviewer:vhost-user-scmi" <mzamazal@redhat.com>, 
  Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>, 
- Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>,
- "Dr. David Alan Gilbert" <dave@treblig.org>, Zhang Chen <zhangckid@gmail.com>,
- Li Zhijian <lizhijian@fujitsu.com>, Jason Wang <jasowang@redhat.com>, 
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>, 
+ Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>, 
+ "Dr. David Alan Gilbert" <dave@treblig.org>, 
+ Zhang Chen <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>, 
+ Jason Wang <jasowang@redhat.com>, 
  Manos Pitsidianakis <manos.pitsidianakis@linaro.org>, 
- Richard Henderson <richard.henderson@linaro.org>, Helge Deller <deller@gmx.de>,
- Max Filippov <jcmvbkbc@gmail.com>, Lukas Straub <lukasstraub2@web.de>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Helge Deller <deller@gmx.de>, Max Filippov <jcmvbkbc@gmail.com>, 
+ Lukas Straub <lukasstraub2@web.de>, 
  "open list:Sharp SL-5500 Co..." <qemu-arm@nongnu.org>, 
- "open list:S390 SCLP-backed..." <qemu-s390x@nongnu.org>,
+ "open list:S390 SCLP-backed..." <qemu-s390x@nongnu.org>, 
  "open list:sPAPR (pseries)" <qemu-ppc@nongnu.org>, 
  "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, 
  "open list:virtiofs" <virtio-fs@lists.linux.dev>, 
  "open list:Rust-related patc..." <qemu-rust@nongnu.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: _JiLeU0-M6mO0z3lV-Cc3vGE4H3be26yYSUwzrVfdsI_1761053431
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="00000000000016e15b0641ab341a"
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mlureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
- RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Subject: Re: [PATCH] char: rename CharBackend->CharFrontend
+In-Reply-To: <20251021122533.721467-1-marcandre.lureau@redhat.com>
+Message-ID: <01a51fe7-4414-e787-ddf5-5ede0c1e1e74@eik.bme.hu>
+References: <20251021122533.721467-1-marcandre.lureau@redhat.com>
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+ boundary="3866299591-1500696156-1761053105=:49605"
+Received-SPF: pass client-ip=2001:738:2001:2001::2001;
+ envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -159,58 +118,162 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000016e15b0641ab341a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Hi
+--3866299591-1500696156-1761053105=:49605
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8BIT
 
-On Tue, Oct 21, 2025 at 5:25=E2=80=AFPM BALATON Zoltan <balaton@eik.bme.hu>=
- wrote:
-
-> On Tue, 21 Oct 2025, marcandre.lureau@redhat.com wrote:
-> > From: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> >
-> > /**
-> > - * struct CharBackend - back end as seen by front end
-> > + * struct CharFrontend - back end as seen by front end
+On Tue, 21 Oct 2025, marcandre.lureau@redhat.com wrote:
+> From: Marc-André Lureau <marcandre.lureau@redhat.com>
 >
-> I stopped here, haven't read the rest of the patch but the above comment
-> seems to become inconsistent. Which is the front end and back end now?
+> The actual backend is "Chardev", CharBackend is the frontend side of it,
+> let's rename it for readability.
 >
+> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> ---
+> chardev/chardev-internal.h           |  12 +-
+> include/chardev/char-fe.h            |  67 +++++----
+> include/chardev/char.h               |   4 +-
+> include/hw/char/avr_usart.h          |   2 +-
+> include/hw/char/bcm2835_aux.h        |   2 +-
+> include/hw/char/cadence_uart.h       |   2 +-
+> include/hw/char/cmsdk-apb-uart.h     |   2 +-
+> include/hw/char/digic-uart.h         |   2 +-
+> include/hw/char/escc.h               |   2 +-
+> include/hw/char/goldfish_tty.h       |   2 +-
+> include/hw/char/ibex_uart.h          |   2 +-
+> include/hw/char/imx_serial.h         |   2 +-
+> include/hw/char/max78000_uart.h      |   2 +-
+> include/hw/char/nrf51_uart.h         |   2 +-
+> include/hw/char/parallel.h           |   2 +-
+> include/hw/char/pl011.h              |   2 +-
+> include/hw/char/renesas_sci.h        |   2 +-
+> include/hw/char/riscv_htif.h         |   2 +-
+> include/hw/char/serial.h             |   2 +-
+> include/hw/char/shakti_uart.h        |   2 +-
+> include/hw/char/sifive_uart.h        |   2 +-
+> include/hw/char/stm32f2xx_usart.h    |   2 +-
+> include/hw/char/stm32l4x5_usart.h    |   2 +-
+> include/hw/misc/ivshmem-flat.h       |   2 +-
+> include/hw/qdev-properties-system.h  |   2 +-
+> include/hw/virtio/vhost-user-base.h  |   2 +-
+> include/hw/virtio/vhost-user-blk.h   |   2 +-
+> include/hw/virtio/vhost-user-fs.h    |   2 +-
+> include/hw/virtio/vhost-user-scmi.h  |   2 +-
+> include/hw/virtio/vhost-user-vsock.h |   2 +-
+> include/hw/virtio/vhost-user.h       |   8 +-
+> include/hw/virtio/virtio-gpu.h       |   2 +-
+> include/hw/virtio/virtio-scsi.h      |   2 +-
+> include/system/qtest.h               |   4 +-
+> include/system/vhost-user-backend.h  |   2 +-
+> monitor/monitor-internal.h           |   2 +-
+> backends/cryptodev-vhost-user.c      |   2 +-
+> backends/rng-egd.c                   |   2 +-
+> backends/tpm/tpm_emulator.c          |   4 +-
+> chardev/char-fe.c                    | 142 +++++++++----------
+> chardev/char-hub.c                   |  18 +--
+> chardev/char-mux.c                   |  40 +++---
+> chardev/char.c                       |   8 +-
+> gdbstub/system.c                     |   2 +-
+> hw/arm/strongarm.c                   |   2 +-
+> hw/char/debugcon.c                   |   2 +-
+> hw/char/exynos4210_uart.c            |   2 +-
+> hw/char/grlib_apbuart.c              |   2 +-
+> hw/char/ipoctal232.c                 |   2 +-
+> hw/char/mcf_uart.c                   |   2 +-
+> hw/char/sclpconsole-lm.c             |   2 +-
+> hw/char/sclpconsole.c                |   2 +-
+> hw/char/sh_serial.c                  |   2 +-
+> hw/char/spapr_vty.c                  |   2 +-
+> hw/char/terminal3270.c               |   2 +-
+> hw/char/virtio-console.c             |   2 +-
+> hw/char/xen_console.c                |   2 +-
+> hw/char/xilinx_uartlite.c            |   2 +-
+> hw/core/qdev-properties-system.c     |  16 +--
+> hw/ipmi/ipmi_bmc_extern.c            |   2 +-
+> hw/mips/boston.c                     |   2 +-
+> hw/mips/malta.c                      |   2 +-
+> hw/misc/ivshmem-pci.c                |   2 +-
+> hw/ppc/spapr_rtas.c                  |   2 +-
+> hw/riscv/riscv_hart.c                |   2 +-
+> hw/usb/ccid-card-passthru.c          |   2 +-
+> hw/usb/dev-serial.c                  |   2 +-
+> hw/usb/redirect.c                    |   2 +-
+> hw/virtio/vhost-stub.c               |   2 +-
+> hw/virtio/vhost-user.c               |  20 +--
+> net/colo-compare.c                   |  10 +-
+> net/filter-mirror.c                  |   4 +-
+> net/passt.c                          |   2 +-
+> net/slirp.c                          |   2 +-
+> net/vhost-user.c                     |   2 +-
+> semihosting/console.c                |   6 +-
+> system/qtest.c                       |  20 +--
+> target/hppa/sys_helper.c             |   2 +-
+> target/xtensa/xtensa-semi.c          |   2 +-
+> tests/qtest/vhost-user-test.c        |  16 +--
+> tests/unit/test-char.c               | 198 +++++++++++++--------------
+> tests/unit/test-yank.c               |  12 +-
+> rust/bindings/src/lib.rs             |   4 +-
+> rust/chardev/src/bindings.rs         |   6 +-
+> rust/chardev/src/chardev.rs          |  26 ++--
+> rust/hw/char/pl011/src/device.rs     |  12 +-
+> rust/hw/core/src/qdev.rs             |   2 +-
+> 87 files changed, 392 insertions(+), 393 deletions(-)
 >
-It's the "frontend side" of a chardev "backend". Naming it CharBackend has
-always been the source of confusion, since the actual backend is Chardev.
-There was earlier attempt to rename it and various complains. I believe
-this is is long overdue.
-
---00000000000016e15b0641ab341a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">Hi</div><br><div class=3D"gmail_quote gma=
-il_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Oct 21, 2=
-025 at 5:25=E2=80=AFPM BALATON Zoltan &lt;<a href=3D"mailto:balaton@eik.bme=
-.hu">balaton@eik.bme.hu</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">On Tue, 21 Oct 2025, <a href=3D"mailto:marcandre.lur=
-eau@redhat.com" target=3D"_blank">marcandre.lureau@redhat.com</a> wrote:<br=
+> diff --git a/chardev/chardev-internal.h b/chardev/chardev-internal.h
+> index 9752dd75f7..8ea10414ab 100644
+> --- a/chardev/chardev-internal.h
+> +++ b/chardev/chardev-internal.h
+> @@ -37,9 +37,9 @@
+> struct MuxChardev {
+>     Chardev parent;
+>     /* Linked frontends */
+> -    CharBackend *backends[MAX_MUX];
+> -    /* Linked backend */
+> -    CharBackend chr;
+> +    CharFrontend *frontends[MAX_MUX];
+> +    /* frontend of the underlying muxed chardev */
+> +    CharFrontend chr;
+>     unsigned long mux_bitset;
+>     int focus;
+>     bool term_got_escape;
+> @@ -64,8 +64,8 @@ typedef struct HubCharBackend HubCharBackend;
+>  * `hub->backends` array
+>  */
+> struct HubCharBackend {
+> -    HubChardev   *hub;
+> -    CharBackend  be;
+> +    HubChardev *hub;
+> +    CharFrontend fe;
+>     unsigned int be_ind;
+> };
 >
-&gt; From: Marc-Andr=C3=A9 Lureau &lt;<a href=3D"mailto:marcandre.lureau@re=
-dhat.com" target=3D"_blank">marcandre.lureau@redhat.com</a>&gt;<br>&gt;<br>
-&gt; /**<br>
-&gt; - * struct CharBackend - back end as seen by front end<br>
-&gt; + * struct CharFrontend - back end as seen by front end<br>
-<br>
-I stopped here, haven&#39;t read the rest of the patch but the above commen=
-t <br>
-seems to become inconsistent. Which is the front end and back end now?<br><=
-br></blockquote><div><br></div><div>It&#39;s the &quot;frontend side&quot; =
-of a chardev &quot;backend&quot;. Naming it CharBackend has always been the=
- source of confusion, since the actual backend is Chardev. There was earlie=
-r attempt to rename it and various complains. I believe this is is long ove=
-rdue.</div></div></div>
+> @@ -108,7 +108,7 @@ DECLARE_INSTANCE_CHECKER(HubChardev, HUB_CHARDEV,
+> #define CHARDEV_IS_HUB(chr)                                \
+>     object_dynamic_cast(OBJECT(chr), TYPE_CHARDEV_HUB)
+>
+> -bool mux_chr_attach_frontend(MuxChardev *d, CharBackend *b,
+> +bool mux_chr_attach_frontend(MuxChardev *d, CharFrontend *c,
+>                              unsigned int *tag, Error **errp);
+> bool mux_chr_detach_frontend(MuxChardev *d, unsigned int tag);
+> void mux_set_focus(Chardev *chr, unsigned int focus);
+> diff --git a/include/chardev/char-fe.h b/include/chardev/char-fe.h
+> index 8ef05b3dd0..cb28692f38 100644
+> --- a/include/chardev/char-fe.h
+> +++ b/include/chardev/char-fe.h
+> @@ -8,12 +8,12 @@ typedef void IOEventHandler(void *opaque, QEMUChrEvent event);
+> typedef int BackendChangeHandler(void *opaque);
+>
+> /**
+> - * struct CharBackend - back end as seen by front end
+> + * struct CharFrontend - back end as seen by front end
 
---00000000000016e15b0641ab341a--
+I stopped here, haven't read the rest of the patch but the above comment 
+seems to become inconsistent. Which is the front end and back end now?
 
+Regards,
+BALATON Zoltan
+--3866299591-1500696156-1761053105=:49605--
 
