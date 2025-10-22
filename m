@@ -4,84 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CA3ACCD1AB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Oct 2025 02:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4787DCCD1A5
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Oct 2025 02:42:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBOi0-0002Rc-5i; Tue, 21 Oct 2025 22:36:17 -0400
+	id 1vBOnU-0003Pq-Jl; Tue, 21 Oct 2025 22:41:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1vBOhx-0002RB-Uf
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 22:36:13 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
+ id 1vBOnS-0003PB-VT
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 22:41:54 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1vBOhv-0001qz-KJ
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 22:36:13 -0400
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-b6271ea3a6fso4227289a12.0
- for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 19:36:10 -0700 (PDT)
+ id 1vBOnQ-0002JK-Jc
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 22:41:54 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-27d3540a43fso66612805ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 19:41:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1761100569; x=1761705369; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NbC/Dg6egHpHrsXeagZ1FMj4cmx4er7JR2DfdlsDB/w=;
- b=PBPK2o/Oo0eMtys3KWvriS4/hWi5t/pKFOtlyLlOTZy+w3LGP4TWElIfUP0omGJ2mE
- RuwuIyt4P05VV33WdjN4QgatOuVGFAG1SKQiN487qT9sEpLerDJ3aQEYE4FI+72EKyEl
- 78OQd8RkuhaDCLHDbbjD3bYzi2706xxFt6xc3Or4Q5+XP4LoQXlL6dISufV/Y4v4+YXR
- 8U+F5lQEN+3nerF6Tw6Np/I9vYIH7yZjlylIQfCkR2wUe++VmDx1SuPQ8kXYt4dhel/e
- oiA9osWWwsL2mSdCWYO9kzcTtmIZd/akT/eWtDvcc+lMiUNmR+B9QTaRa92/kbfYaVs0
- UGng==
+ d=sifive.com; s=google; t=1761100911; x=1761705711; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bYWfU3Ybv8UMfXDoLYIZExvngPG0XH9qkihRnX+Zfvs=;
+ b=GhRFt3/ytNFuDG/zI9MECKYTKCl5YiSwCeLCwQ4v5Lh0oOLZ7sbD1rSKNxFaCMqb8O
+ nM5oT2puD6tLVXOeDw3Lm362S/abg6uIlmbcMGYmu6OY227Y9pVZeftBQ+xgaUnqgwcF
+ dI4siNcU7IKttVCKcr/ArGD15ftULk4GVXGOZ241ZS8AyG+LbKdtiru2m8lcO58Trbx9
+ ezKzIIqLV1ZOO6ali1tspIzHAfGf4YOMOclfUb9JPoMU5+PyNC+8jR6kWMv4vmLeEWPM
+ gwzNO/o++is4Vqxrb0NZBtYDMz0G02lCe7ZQBamJXjGiX9IGek1oV6St/L2veEqBMwJz
+ 1Prg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761100569; x=1761705369;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NbC/Dg6egHpHrsXeagZ1FMj4cmx4er7JR2DfdlsDB/w=;
- b=PoMbje1JZChBpYJ/a7kmLq5FMZJ+R343joXXqbWqbAx+DxqR+Y0pAcLqjgrJghVnM5
- 5BCWo2o6CXN3R6yElJjlilqmpus9wFRU8B+BRrFo75904s5Fb4X0mssuZpkLj5B4UttS
- Syc6dtTHK4iySZwIVRBUT735fefXl0p+hj5C4l4ZkdtBR4OcB6AL3mj9JxbGq+9Jw3FV
- 9WgpBqX4U60amESBWG2fCVf1fDH/srllR09IdHXJFd8lYat7bF+GL/kBPsCp38iN0Ic/
- ayK3ct7XojJvBe1ryfJd3CRtnaCJeVUioZw9s+eZGFi5SO+BuazCPA1Ie6zUkgomeEfr
- RO3g==
+ d=1e100.net; s=20230601; t=1761100911; x=1761705711;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bYWfU3Ybv8UMfXDoLYIZExvngPG0XH9qkihRnX+Zfvs=;
+ b=RsODq6Fy9NLXK0cDwph5rSW6z7teXjIag/tIlzA+ONIo/VhVZOqR3YK/CxatwZ5AHO
+ JP15hzBYy/JlemeYaE+drg3FIAiBp+ATt850f5xyrXeRzSTgRGIW1qyy8G8wD9yBRpDY
+ ug2nqBLL5PlmNxEpSa3CoQlGQSSR9NpXW4yF8pPACkGp4TONMsNRbo9KcJPDJv64qAR/
+ 9kMp28o2rSgaFe7xrOASDq1rybXVWIGZgc4rLNKPC9JlmM7In7LwO4JEVarscMiP/vxk
+ fAGvLcvnuj1zOla8YRCZdYzmC7AX0zqL8rd6XD06Ija2CHIDACPJkfo06kRdlb7jV5Tx
+ aNJw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWEgE/87L8ujpAKRmRqKDC+3pLuedKGpFqnee7kfjuCiZA9WKdXuo2lkCW2YyYE6++WKLVXPgVWU52X@nongnu.org
-X-Gm-Message-State: AOJu0Ywx79RUVlOu9mQDCgNPfEwvFNRMh2dt7ZKlomvy2deQLC1Nf6fq
- sXsP9oNVGgy89oApCKaU52ig0P0GVpb7q9bZiSeoph51C+4qiKxO3scQR/tDrEf1B3Xfw9I2+Vn
- GV19lMBqOnezqeTMDT47Y4dAh+0BSaj9y0sOs/NrUaA==
-X-Gm-Gg: ASbGncsdeswlYQ0g5pWKWDRHpV6s9v6sGO6pXnmGfEjP/FuS2EALhUVecmNCg67nWou
- 7SaRVmOzy0fFo/p8GvaggiwGKHOAfyUVeqJrUb3E52ayQh+jC4QIq6GukOSe2OsivRXu043vDjB
- QFiPy345Wakx2bV3Ems4v/zopxzbpD1gjxMN+gVgYvZXFUkdIpzgUMgca10tmE+Lrc3DKk6mU5r
- 7Eqe+MhylECdL2YNLOS9L7yR6nJs2Y3kd7P7+JZQbOx6mPMm6FEL/ER7AZ/ioc=
-X-Google-Smtp-Source: AGHT+IHtf6EbA8qH6Nv7Z/MiKeW5tns03M+Bo8/g89qXcHRWuy10o0drAVo/DElWri9vGyH1Xuq6F6Spaxu8LWxTGAE=
-X-Received: by 2002:a17:902:c950:b0:292:fc65:3584 with SMTP id
- d9443c01a7336-292fc6538acmr29816965ad.50.1761100569434; Tue, 21 Oct 2025
- 19:36:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251022022628.41307-1-jay.chang@sifive.com>
- <20251022022628.41307-4-jay.chang@sifive.com>
-In-Reply-To: <20251022022628.41307-4-jay.chang@sifive.com>
+ AJvYcCWl7UrAnpgbwjIhEig9eX/7MYOA7gl+zC19OlLty7tfeuNUn5vDvXx95dttgKlYBZgDJcBtIE1xehDu@nongnu.org
+X-Gm-Message-State: AOJu0YwZZ/YnuQ7j8Seyg7hI0zAv8OW4uEZYLwqKXl8KRb3ILbtW02v/
+ kNYaR8+fLYa7p/TUwjPYSq+p43o9UdJ2zlpALAk/H/Ud5ZFWnJGf0Hjr981Wzmo/Bco=
+X-Gm-Gg: ASbGncvk/46geHKHK2PYMfQ3RELdjgosHdj415gXZT3YjkaSx8hmYn94ULS1P8Z1Ws7
+ +14UFxxkqnxPz8H/4fP/zyoJY/9yCE9OoiLRtplyg34IpnCDqap/qjXcwqMijbe6Lth3SjkDhG6
+ e0xtMS1EblqtNGbIGRZz8C3sjvmh5B8jc41wrs12GELLIitvD6bmojHwRyPois0Xki7DFVmC2nH
+ gAr9c9oHjVJedwJuJNoCOoFUQ0YMS64oFgZ71LQtMC5PCBdvd0FcgqpeyFfSRYBaoQFWYNTGtZo
+ B+GphFuKbvD9I+4BkuWF0cUBGONddn6CEapcC0LMPO0cYoCtNK8hsDnMFuW+p5I0a5gb/++ACXK
+ 9H1lsAs9ezH0FGfcXMhnAmOIRMaBQ6OK7NpMDvVzBIWHhduruuOxF9y9szqX5v4SHzHqHaVyJa2
+ kkLcgkOH/zOfhjdBTQnlQEJdI4nB6mT8/HQVIyhXA=
+X-Google-Smtp-Source: AGHT+IFb6J9Io8exj8o+qJbFf40aUI1cA8t55wtn/Hd08ZlcuC9kSYk+0HWZPNgXyYDpBWR7f1mWXw==
+X-Received: by 2002:a17:902:e5c2:b0:26d:72f8:8d0a with SMTP id
+ d9443c01a7336-290c9c8c7c2mr246464205ad.12.1761100910803; 
+ Tue, 21 Oct 2025 19:41:50 -0700 (PDT)
+Received: from jchang-1875.internal.sifive.com ([136.226.240.196])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7a22ff1591dsm13204731b3a.7.2025.10.21.19.41.48
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 21 Oct 2025 19:41:50 -0700 (PDT)
 From: Jay Chang <jay.chang@sifive.com>
-Date: Wed, 22 Oct 2025 10:35:57 +0800
-X-Gm-Features: AS18NWAqcIFfGg8-E53Sl1CUOD7Hxh-jewZ9WNVCnx6eRriPYYE6V2lxsN2SoHQ
-Message-ID: <CACNNAjNkQssbwxwhnLjLQKQO=zaboEwnc=3aW4a98NqTvcANsg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] Make PMP granularity configurable
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: multipart/alternative; boundary="000000000000daeafa0641b62dde"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=jay.chang@sifive.com; helo=mail-pg1-x530.google.com
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Jay Chang <jay.chang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
+ Jim Shu <jim.shu@sifive.com>
+Subject: [PATCH v3 1/2] target/riscv: Make PMP granularity configurable
+Date: Wed, 22 Oct 2025 10:41:40 +0800
+Message-ID: <20251022024141.42178-2-jay.chang@sifive.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20251022024141.42178-1-jay.chang@sifive.com>
+References: <20251022024141.42178-1-jay.chang@sifive.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=jay.chang@sifive.com; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -99,149 +109,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000daeafa0641b62dde
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Previously, the PMP granularity in qemu always used a minimum
+granularity of 4 bytes, this patch add pmp-granularity to allow
+platforms to configure the value.
 
-Sorry for the error version,  please ignore it.
+A new CPU parameter pmp-granularity has been introduced to the QEMU
+command line. For example:
 
-Thanks & Regards
+        -cpu rv64, g=true, c=true, pmp=true, pmp-granularity=1024
 
-On Wed, Oct 22, 2025 at 10:26=E2=80=AFAM Jay Chang <jay.chang@sifive.com> w=
-rote:
+If no specific value is provided, the default value is 4 bytes.
 
-> This patch series enhances QEMU's RISC-V PMP support to conform with
-> the RISC-V Privileged Specification regarding PMP granularity and WARL
-> constraints.
->
-> Previously, QEMU always used a fixed minimum PMP granularity of 4 bytes.
-> This series introduces a configurable "pmp-granularity" parameter, allowi=
-ng
-> platforms to specify larger granularity values. In addition, the handling
-> of
-> pmpcfg and pmpaddr CSRs has been updated to follow WARL constraints. For
-> example, when NA4 is not valid due to a larger granularity, it is silentl=
-y
-> ignored. TOR and NAPOT address ranges are also properly aligned according
-> to
-> the configured granularity.
->
-> A new CPU parameter `pmp-granularity` is now available on the QEMU comman=
-d
-> line. For example:
->
->     -cpu rv64,g=3Dtrue,c=3Dtrue,pmp=3Dtrue,pmp-granularity=3D1024
->
-> If not provided, the default remains 4 bytes.
->
-> ---
->
-> Patch summary:
->
-> 1. target/riscv: Make PMP granularity configurable
->    - Introduce CPU property `pmp-granularity` for platforms to configure
->      PMP granularity.
->    - Default remains 4 bytes if unspecified.
->
-> 2. target/riscv: Make PMP CSRs conform to WARL constraints
->    - Update pmpcfg and pmpaddr handling to follow WARL semantics.
->    - Align start and end addresses of TOR regions to PMP granularity.
->    - Ensure software can read back correct values per the spec.
->
-> PATCH v2 update
-> Change UL type to ULL to prevent bit-width errors.
->
-> Jay Chang (2):
->   target/riscv: Make PMP granularity configurable
->   target/riscv: Make PMP CSRs conform to WARL constraints
->
->  target/riscv/cpu.c                | 39 ++++++++++++++++++++++++++
->  target/riscv/cpu.h                |  1 +
->  target/riscv/cpu_cfg_fields.h.inc |  1 +
->  target/riscv/pmp.c                | 46 +++++++++++++++++++++++++++++++
->  4 files changed, 87 insertions(+)
->
-> --
-> 2.48.1
->
->
+Signed-off-by: Jay Chang <jay.chang@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
+---
+ target/riscv/cpu.c                | 39 +++++++++++++++++++++++++++++++
+ target/riscv/cpu.h                |  1 +
+ target/riscv/cpu_cfg_fields.h.inc |  1 +
+ 3 files changed, 41 insertions(+)
 
---000000000000daeafa0641b62dde
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index a877018ab0..73d4280d7c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1121,6 +1121,7 @@ static void riscv_cpu_init(Object *obj)
+     cpu->cfg.cbop_blocksize = 64;
+     cpu->cfg.cboz_blocksize = 64;
+     cpu->cfg.pmp_regions = 16;
++    cpu->cfg.pmp_granularity = MIN_RISCV_PMP_GRANULARITY;
+     cpu->env.vext_ver = VEXT_VERSION_1_00_0;
+     cpu->cfg.max_satp_mode = -1;
+ 
+@@ -1606,6 +1607,43 @@ static const PropertyInfo prop_num_pmp_regions = {
+     .set = prop_num_pmp_regions_set,
+ };
+ 
++static void prop_pmp_granularity_set(Object *obj, Visitor *v, const char *name,
++                                     void *opaque, Error **errp)
++{
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    uint32_t value;
++
++    visit_type_uint32(v, name, &value, errp);
++
++    if ((value < MIN_RISCV_PMP_GRANULARITY) && (value & (value - 1))) {
++        error_setg(errp, "PMP granularity must be a power of 2 and at least %d",
++                   MIN_RISCV_PMP_GRANULARITY);
++        return;
++    }
++
++    if (cpu->cfg.pmp_granularity != value && riscv_cpu_is_vendor(obj)) {
++        cpu_set_prop_err(cpu, name, errp);
++        return;
++    }
++
++    cpu_option_add_user_setting(name, value);
++    cpu->cfg.pmp_granularity = value;
++}
++
++static void prop_pmp_granularity_get(Object *obj, Visitor *v, const char *name,
++                                     void *opaque, Error **errp)
++{
++    uint32_t value = RISCV_CPU(obj)->cfg.pmp_granularity;
++
++    visit_type_uint32(v, name, &value, errp);
++}
++
++static const PropertyInfo prop_pmp_granularity = {
++    .description = "pmp-granularity",
++    .get = prop_pmp_granularity_get,
++    .set = prop_pmp_granularity_set,
++};
++
+ static int priv_spec_from_str(const char *priv_spec_str)
+ {
+     int priv_version = -1;
+@@ -2606,6 +2644,7 @@ static const Property riscv_cpu_properties[] = {
+     {.name = "mmu", .info = &prop_mmu},
+     {.name = "pmp", .info = &prop_pmp},
+     {.name = "num-pmp-regions", .info = &prop_num_pmp_regions},
++    {.name = "pmp-granularity", .info = &prop_pmp_granularity},
+ 
+     {.name = "priv_spec", .info = &prop_priv_spec},
+     {.name = "vext_spec", .info = &prop_vext_spec},
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 2c2266415e..04711f93a2 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -176,6 +176,7 @@ extern RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[];
+ 
+ #define MAX_RISCV_PMPS (64)
+ #define OLD_MAX_RISCV_PMPS (16)
++#define MIN_RISCV_PMP_GRANULARITY 4
+ 
+ #if !defined(CONFIG_USER_ONLY)
+ #include "pmp.h"
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+index e2d116f0df..a154ecdc79 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -166,6 +166,7 @@ TYPED_FIELD(uint16_t, cbom_blocksize, 0)
+ TYPED_FIELD(uint16_t, cbop_blocksize, 0)
+ TYPED_FIELD(uint16_t, cboz_blocksize, 0)
+ TYPED_FIELD(uint8_t,  pmp_regions, 0)
++TYPED_FIELD(uint32_t, pmp_granularity, 0)
+ 
+ TYPED_FIELD(int8_t, max_satp_mode, -1)
+ 
+-- 
+2.48.1
 
-<div dir=3D"ltr">Sorry for the error version,=C2=A0 please ignore it.=C2=A0=
-<br><br>Thanks &amp; Regards</div><br><div class=3D"gmail_quote"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Wed, Oct 22, 2025 at 10:26=E2=80=AFAM Jay =
-Chang &lt;<a href=3D"mailto:jay.chang@sifive.com" target=3D"_blank">jay.cha=
-ng@sifive.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddi=
-ng-left:1ex">This patch series enhances QEMU&#39;s RISC-V PMP support to co=
-nform with<br>
-the RISC-V Privileged Specification regarding PMP granularity and WARL<br>
-constraints.<br>
-<br>
-Previously, QEMU always used a fixed minimum PMP granularity of 4 bytes.<br=
->
-This series introduces a configurable &quot;pmp-granularity&quot; parameter=
-, allowing<br>
-platforms to specify larger granularity values. In addition, the handling o=
-f<br>
-pmpcfg and pmpaddr CSRs has been updated to follow WARL constraints. For<br=
->
-example, when NA4 is not valid due to a larger granularity, it is silently<=
-br>
-ignored. TOR and NAPOT address ranges are also properly aligned according t=
-o<br>
-the configured granularity.<br>
-<br>
-A new CPU parameter `pmp-granularity` is now available on the QEMU command<=
-br>
-line. For example:<br>
-<br>
-=C2=A0 =C2=A0 -cpu rv64,g=3Dtrue,c=3Dtrue,pmp=3Dtrue,pmp-granularity=3D1024=
-<br>
-<br>
-If not provided, the default remains 4 bytes.<br>
-<br>
----<br>
-<br>
-Patch summary:<br>
-<br>
-1. target/riscv: Make PMP granularity configurable<br>
-=C2=A0 =C2=A0- Introduce CPU property `pmp-granularity` for platforms to co=
-nfigure<br>
-=C2=A0 =C2=A0 =C2=A0PMP granularity.<br>
-=C2=A0 =C2=A0- Default remains 4 bytes if unspecified.<br>
-<br>
-2. target/riscv: Make PMP CSRs conform to WARL constraints<br>
-=C2=A0 =C2=A0- Update pmpcfg and pmpaddr handling to follow WARL semantics.=
-<br>
-=C2=A0 =C2=A0- Align start and end addresses of TOR regions to PMP granular=
-ity.<br>
-=C2=A0 =C2=A0- Ensure software can read back correct values per the spec.<b=
-r>
-<br>
-PATCH v2 update<br>
-Change UL type to ULL to prevent bit-width errors.<br>
-<br>
-Jay Chang (2):<br>
-=C2=A0 target/riscv: Make PMP granularity configurable<br>
-=C2=A0 target/riscv: Make PMP CSRs conform to WARL constraints<br>
-<br>
-=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 | 39 ++++++++++++++++++++++++++<br>
-=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 |=C2=A0 1 +<br>
-=C2=A0target/riscv/cpu_cfg_fields.h.inc |=C2=A0 1 +<br>
-=C2=A0target/riscv/pmp.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 | 46 +++++++++++++++++++++++++++++++<br>
-=C2=A04 files changed, 87 insertions(+)<br>
-<br>
--- <br>
-2.48.1<br>
-<br>
-</blockquote></div>
-
---000000000000daeafa0641b62dde--
 
