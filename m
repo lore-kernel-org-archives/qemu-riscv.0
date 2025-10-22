@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D078FCCD1AF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Oct 2025 16:23:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57913CCD1AB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Oct 2025 02:27:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBF7T-0004Rq-RI; Tue, 21 Oct 2025 12:21:55 -0400
+	id 1vBOYn-00072M-PS; Tue, 21 Oct 2025 22:26:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1vBF7A-0004Ma-G4
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 12:21:38 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1vBOYl-00071W-BO
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 22:26:43 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1vBF6z-0002YL-Cl
- for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 12:21:27 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-782a77b5ec7so5379464b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 09:21:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1vBOYj-0000we-6I
+ for qemu-riscv@nongnu.org; Tue, 21 Oct 2025 22:26:43 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-269639879c3so59659245ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 21 Oct 2025 19:26:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1761063682; x=1761668482; darn=nongnu.org;
+ d=sifive.com; s=google; t=1761099999; x=1761704799; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eC9YC8UsMk4PwW0SP0X/PECmIUNXr4CBp0Q0dpINKAA=;
- b=ItDYrTg5bDPnFOOQMrCzQ6TXmBmAlfygfNDlXvm1isxRFm+q/dYwJIOl4yT3wL1Jq9
- akmcN4JcgdpB+ygRUvrvlLiSQdfkbAtZ6ZjThucOfRXknv/0Vth+H44slQDAO2ihRwsY
- gjsNsdGbkh+5M1zYgXd0j+GAs8qXImdeWG+RZGbslTt3JnTUwOlD5Evbn5Vc9NkpAMVq
- hPBwXmtAEE1Dmk1/AtWvdq9CwpNDlJYbdy9r2hFc5zeZheb93Ym56vewkMW/9ckux2xq
- G1jNSwkJS/3q/I8fxuhJBrQrvhJDmwY35JolyjH58LcE9+K4LXs/ybZRLe0D+vBwtS/g
- gYMA==
+ bh=bYWfU3Ybv8UMfXDoLYIZExvngPG0XH9qkihRnX+Zfvs=;
+ b=mFQ42KHDaMe0xQom01hozNjHKp9QvEYY/EKRJCr2QdhMVUu4AXL1o2gVhc96Xz9SbC
+ tKoaLfsGyW0oMgWLnQ6eknhQnzCgCyqWptd7bnkROkBIg43U5/ECNn8eg7FfHHiRIAFT
+ JDOLJExaOhbf5wQOA5tf8Q0wGMLjDEFukZpap/LSnEi4a80MP/wZSddWH5Ck8bsDDeDY
+ +Ht8Pm4K3Doiuy5KIkxdx50ZvHwdz0aI9kDv31dLzoK9ih9bSkIKHPA5YhZOEqNUDoZb
+ ky9FvOvm1VWbx/He2ifZIkQt8D25u0rpTJdrzBy/fuD/KtFWn/jNezQwbX/oY7uXXo5y
+ wdmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761063682; x=1761668482;
+ d=1e100.net; s=20230601; t=1761099999; x=1761704799;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eC9YC8UsMk4PwW0SP0X/PECmIUNXr4CBp0Q0dpINKAA=;
- b=UpyKni5xjJ5HVgz2ho5Lsd+9Zz5YnQs8LJY2lXqav8bmN9YHh9XWGaYK/Elsg51Rdc
- aMkLathCN4MdNFWSjB4rvg/F40i5QGLEddX0IedJ7L3xCuY4ankyJUgCPqeWauMiUYfP
- FR+OkAvF1iq0ag5Zlydv3UBMUcnJ0eGwaH0gs3LlGhGcoRAN48pyCnqLtA3HHpF7X8G/
- kN43q0PNq4Ss4C0qPlE8LVReAcgr0Ezw6EG5gjI8Mh0SCfmiG7Qsrx3oFYmI/rpp1sz8
- CI8/gFTHp1VgTY1oT5xR3DoGCM1aIvz6oUl40EDJNbI/ayR8yKFTVV1j/COX21xpwqj7
- xywQ==
+ bh=bYWfU3Ybv8UMfXDoLYIZExvngPG0XH9qkihRnX+Zfvs=;
+ b=gZYpNDoyde1KIIcHi4mmrr6zluxhcAGkwNEqM5xTaTYt0a0pM9T+lcnAReVd+t4yE+
+ Oc6tEQpzKXgpdYJqDbdPxdxKXQD3V41kIviR3Tu+aUJoxop4Y+37o4CVjWBFRo74AsU8
+ QROsVNLn8nWORVBftZQt3hsARCiiIlvPqs7qpUXtX2Wpssns1gWFFWJo5WsZvP5bp8fK
+ yE3P16lTeWUkpg07o/ezq10SxiHNIoxq/CRnrOpesg35PNTWpbcZaOFGpkQMgERjuMdL
+ YUrldURgjAiYkIOQkMm28AFOy5qI1K7b6VORsFqj6WYgDRHueb9vFR3UXbvpQKDq4CTt
+ jfIw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZ2T9QgD1lF0apXyYu3yMG4XLJivorOPqpV8gDX6KpVq0EE0C3HrNSstdooiAR2WISrkIogtn+zHrL@nongnu.org
-X-Gm-Message-State: AOJu0Yx2WOwOAEVj2K/UuYAwAyDG3XqVtjoxcPaeuNDacWMK4SyC4ju4
- R++bMTQql7yn9rQEDSRaeKCnBsyn0kTNLnlzc8j6/rmf8++tapZvoPyUB/EIPoyy8hA=
-X-Gm-Gg: ASbGnctP+HI/K+cHT0kyJ0nU3EEp3IYCripKay4cQYOiPKb8ojDErCkvZalWgPUXSI3
- kGl0ktiM5nIceOrNDFiT8Sw1liaQ0UyRdAsgluihujoeys9YYalGLxLSuDtXJSVWS0gi/qICahm
- eedo8E47KlyFKPptLs1OUJf7SMMZGyqk11pxBAWJ8vbZOsahh8mcYqz45cSBcNhCbpPv7GaWKXF
- w5PBbSEVfx2alwC+OjyKsGN35/cqILCDSR4AbGlmLM+oW3+HC/o5yY32wnet4Z6TatJw1BIpYgX
- OZD0zzSay/9o+idmTh3fTAK7Ob9u2rx4hE5BRTclVdXeTMYN+Mz6jiA+KxlaAw2GMrI0GOtbgWb
- DgP2fb7SCzVHuFipoEDc7LDia3jv8z2zLkY+Eeu5DahQ874pL1J9kDcSnT8LZzzg9g5Sx0VKevd
- pFoJCwd0PCmI0rC9+AHre9Kg==
-X-Google-Smtp-Source: AGHT+IH+zFQ5lzpqAqaMbs0TXG30X3bygXGYGISXE3B3C0r5eD94gFVNBIlKnzB9yExBvMUtp1+YNw==
-X-Received: by 2002:a05:6a21:3290:b0:32d:a6d1:22b2 with SMTP id
- adf61e73a8af0-334a85047a0mr24997564637.10.1761063682008; 
- Tue, 21 Oct 2025 09:21:22 -0700 (PDT)
-Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
+ AJvYcCVXyCPB0QAvaD1FlTONtO4qfrY2+zizZ7QmdhaLzUpZPnCBN+SxSEN5MsYoXBrKFbMPcMzivVXJkT72@nongnu.org
+X-Gm-Message-State: AOJu0Ywr008gRp5JgqKV38XeS4P+VGYQUk0IEk/PMTFcU13Q64+8m+AN
+ kL3cIpjkdI2sTIRHv9U9AHWoff4G6hy/QjfnL1kCteoRyqePtzCOUeOx7uhvbQQ1uYk=
+X-Gm-Gg: ASbGncsSvbMUfZYMK5I64k59gw8MaTv61AMsF9kncG2Hcj+EE01S//jAWXMNnTxKMkN
+ GT0eVl3xL4SiDDo6BRE2Nu2kWPHjJy0SSSgKJuBGduMii78pkepZBDBjAAOH8r+OT/H6MtF8YEl
+ erkrj3tn9NGUxpbIriAHChoeklf7Vjs7MEUpPNFrLoP+cOsn9OfIL+UNK9uPNrynsGGfBgQWbjP
+ XMKiVe1Gq4YUTLTamA+x+aeVoq+2iSilFnknBz7Eay2Wqgp0S9b6qSWVHHbwRoEZUdF2SibOzy5
+ 8KONme55ORGqFC1UmMr/CT8vJG5WHkthT1hW0SxwlmQmUljs1zlwhky5PUMnUeUK3HhRpHJ4sh0
+ vxudvzpkp/YlneyxQ3LYLrPXa+0/OiKOFRfuqkgUuHCFqAV6adT+59DXRm36u6looYWg6cJAV5v
+ AErE9jJtFepPHijPAb4qcFRjqJb5u1alWQzgUb5oLqZGp281w5tBwq0EbZ5Sky
+X-Google-Smtp-Source: AGHT+IHrnWkZFh02KcWnwFZ6SA0AevY3gArLXrkmpSsvhFAFWPgLULqpv20TSwEPyQQxl+Ph3vdVyQ==
+X-Received: by 2002:a17:902:ce12:b0:26b:da03:60db with SMTP id
+ d9443c01a7336-290c9ca6b1cmr238723685ad.13.1761099999416; 
+ Tue, 21 Oct 2025 19:26:39 -0700 (PDT)
+Received: from jchang-1875.internal.sifive.com ([136.226.240.196])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7a23011088fsm11720280b3a.65.2025.10.21.09.21.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 09:21:21 -0700 (PDT)
-From: Jim Shu <jim.shu@sifive.com>
+ d9443c01a7336-2930340092dsm4673545ad.42.2025.10.21.19.26.37
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 21 Oct 2025 19:26:39 -0700 (PDT)
+From: Jay Chang <jay.chang@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Jay Chang <jay.chang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
  Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v3 17/18] hw/misc: riscv_wgchecker: Check the slot settings in
- translate
-Date: Wed, 22 Oct 2025 00:21:07 +0800
-Message-ID: <20251021162108.585468-3-jim.shu@sifive.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251021155548.584543-1-jim.shu@sifive.com>
-References: <20251021155548.584543-1-jim.shu@sifive.com>
+Subject: [PATCH v1 1/2] target/riscv: Make PMP granularity configurable
+Date: Wed, 22 Oct 2025 10:26:24 +0800
+Message-ID: <20251022022628.41307-2-jay.chang@sifive.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20251022022628.41307-1-jay.chang@sifive.com>
+References: <20251022022628.41307-1-jay.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=jim.shu@sifive.com; helo=mail-pf1-x42d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=jay.chang@sifive.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,153 +109,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The final part of wgChecker we need to implement is actually using the
-wgChecker slots programmed by guest to determine whether to block the
-transaction or not.
+Previously, the PMP granularity in qemu always used a minimum
+granularity of 4 bytes, this patch add pmp-granularity to allow
+platforms to configure the value.
 
-Since this means we now change transaction mappings when
-the guest writes to wgChecker slots, we must also call the IOMMU
-notifiers at that point.
+A new CPU parameter pmp-granularity has been introduced to the QEMU
+command line. For example:
 
-One tricky part here is that the perm of 'blocked_io_as' is the
-condition of deny access. For example, if wgChecker only permits RO
-access, the perm of 'downstream_as' will be IOMMU_RO and the perm of
-'blocked_io_as' will be IOMMU_WO.
+        -cpu rv64, g=true, c=true, pmp=true, pmp-granularity=1024
 
-Signed-off-by: Jim Shu <jim.shu@sifive.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+If no specific value is provided, the default value is 4 bytes.
+
+Signed-off-by: Jay Chang <jay.chang@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
 ---
- hw/misc/riscv_wgchecker.c | 70 ++++++++++++++++++++++++++++++++++++---
- hw/misc/trace-events      |  1 +
- 2 files changed, 67 insertions(+), 4 deletions(-)
+ target/riscv/cpu.c                | 39 +++++++++++++++++++++++++++++++
+ target/riscv/cpu.h                |  1 +
+ target/riscv/cpu_cfg_fields.h.inc |  1 +
+ 3 files changed, 41 insertions(+)
 
-diff --git a/hw/misc/riscv_wgchecker.c b/hw/misc/riscv_wgchecker.c
-index b4acdaa294..c23b076b1c 100644
---- a/hw/misc/riscv_wgchecker.c
-+++ b/hw/misc/riscv_wgchecker.c
-@@ -99,6 +99,52 @@ REG32(SLOT_CFG,             0x010)
- #define P_READ                  (1 << 0)
- #define P_WRITE                 (1 << 1)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index a877018ab0..73d4280d7c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1121,6 +1121,7 @@ static void riscv_cpu_init(Object *obj)
+     cpu->cfg.cbop_blocksize = 64;
+     cpu->cfg.cboz_blocksize = 64;
+     cpu->cfg.pmp_regions = 16;
++    cpu->cfg.pmp_granularity = MIN_RISCV_PMP_GRANULARITY;
+     cpu->env.vext_ver = VEXT_VERSION_1_00_0;
+     cpu->cfg.max_satp_mode = -1;
  
-+static IOMMUAccessFlags wgc_perm_to_iommu_flags(int wgc_perm)
+@@ -1606,6 +1607,43 @@ static const PropertyInfo prop_num_pmp_regions = {
+     .set = prop_num_pmp_regions_set,
+ };
+ 
++static void prop_pmp_granularity_set(Object *obj, Visitor *v, const char *name,
++                                     void *opaque, Error **errp)
 +{
-+    if (wgc_perm == (P_READ | P_WRITE)) {
-+        return IOMMU_RW;
-+    } else if (wgc_perm & P_WRITE) {
-+        return IOMMU_WO;
-+    } else if (wgc_perm & P_READ) {
-+        return IOMMU_RO;
-+    } else {
-+        return IOMMU_NONE;
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    uint32_t value;
++
++    visit_type_uint32(v, name, &value, errp);
++
++    if ((value < MIN_RISCV_PMP_GRANULARITY) && (value & (value - 1))) {
++        error_setg(errp, "PMP granularity must be a power of 2 and at least %d",
++                   MIN_RISCV_PMP_GRANULARITY);
++        return;
 +    }
++
++    if (cpu->cfg.pmp_granularity != value && riscv_cpu_is_vendor(obj)) {
++        cpu_set_prop_err(cpu, name, errp);
++        return;
++    }
++
++    cpu_option_add_user_setting(name, value);
++    cpu->cfg.pmp_granularity = value;
 +}
 +
-+static void wgchecker_iommu_notify_all(RISCVWgCheckerState *s)
++static void prop_pmp_granularity_get(Object *obj, Visitor *v, const char *name,
++                                     void *opaque, Error **errp)
 +{
-+    /*
-+     * Do tlb_flush() to whole address space via memory_region_notify_iommu()
-+     * when wgChecker changes it's config.
-+     */
++    uint32_t value = RISCV_CPU(obj)->cfg.pmp_granularity;
 +
-+    IOMMUTLBEvent event = {
-+        .entry = {
-+            .addr_mask = -1ULL,
-+        }
-+    };
-+
-+    trace_riscv_wgchecker_iommu_notify_all();
-+
-+    for (int i = 0; i < WGC_NUM_REGIONS; i++) {
-+        WgCheckerRegion *region = &s->mem_regions[i];
-+        uint32_t nworlds = worldguard_config->nworlds;
-+
-+        if (!region->downstream) {
-+            continue;
-+        }
-+        event.entry.iova = 0;
-+        event.entry.translated_addr = 0;
-+        event.type = IOMMU_NOTIFIER_UNMAP;
-+        event.entry.perm = IOMMU_NONE;
-+
-+        for (int wid = 0; wid < nworlds; wid++) {
-+            memory_region_notify_iommu(&region->upstream, wid, event);
-+        }
-+    }
++    visit_type_uint32(v, name, &value, errp);
 +}
 +
- static void decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)
++static const PropertyInfo prop_pmp_granularity = {
++    .description = "pmp-granularity",
++    .get = prop_pmp_granularity_get,
++    .set = prop_pmp_granularity_set,
++};
++
+ static int priv_spec_from_str(const char *priv_spec_str)
  {
-     /*
-@@ -317,6 +363,9 @@ static IOMMUTLBEntry riscv_wgc_translate(IOMMUMemoryRegion *iommu,
- {
-     WgCheckerRegion *region = container_of(iommu, WgCheckerRegion, upstream);
-     RISCVWgCheckerState *s = RISCV_WGCHECKER(region->wgchecker);
-+    bool is_write;
-+    WgAccessResult result;
-+    int wgc_perm;
-     hwaddr phys_addr;
-     uint64_t region_size;
+     int priv_version = -1;
+@@ -2606,6 +2644,7 @@ static const Property riscv_cpu_properties[] = {
+     {.name = "mmu", .info = &prop_mmu},
+     {.name = "pmp", .info = &prop_pmp},
+     {.name = "num-pmp-regions", .info = &prop_num_pmp_regions},
++    {.name = "pmp-granularity", .info = &prop_pmp_granularity},
  
-@@ -335,18 +384,25 @@ static IOMMUTLBEntry riscv_wgc_translate(IOMMUMemoryRegion *iommu,
-      * Look at the wgChecker configuration for this address, and
-      * return a TLB entry directing the transaction at either
-      * downstream_as or blocked_io_as, as appropriate.
--     * For the moment, always permit accesses.
-      */
+     {.name = "priv_spec", .info = &prop_priv_spec},
+     {.name = "vext_spec", .info = &prop_vext_spec},
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 2c2266415e..04711f93a2 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -176,6 +176,7 @@ extern RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[];
  
-     /* Use physical address instead of offset */
-     phys_addr = addr + region->region_offset;
-+    is_write = (flags == IOMMU_WO);
+ #define MAX_RISCV_PMPS (64)
+ #define OLD_MAX_RISCV_PMPS (16)
++#define MIN_RISCV_PMP_GRANULARITY 4
  
--    is_success = true;
-+    result = wgc_check_access(s, phys_addr, iommu_idx, is_write);
+ #if !defined(CONFIG_USER_ONLY)
+ #include "pmp.h"
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+index e2d116f0df..a154ecdc79 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -166,6 +166,7 @@ TYPED_FIELD(uint16_t, cbom_blocksize, 0)
+ TYPED_FIELD(uint16_t, cbop_blocksize, 0)
+ TYPED_FIELD(uint16_t, cboz_blocksize, 0)
+ TYPED_FIELD(uint8_t,  pmp_regions, 0)
++TYPED_FIELD(uint32_t, pmp_granularity, 0)
  
-     trace_riscv_wgchecker_translate(phys_addr, flags,
--        iommu_idx, is_success ? "pass" : "block");
-+        iommu_idx, result.is_success ? "pass" : "block");
+ TYPED_FIELD(int8_t, max_satp_mode, -1)
  
--    ret.target_as = is_success ? &region->downstream_as : &region->blocked_io_as;
-+    wgc_perm = result.perm;
-+    if (!result.is_success) {
-+        /* if target_as is blocked_io_as, the perm is the condition of deny access. */
-+        wgc_perm ^= (P_READ | P_WRITE);
-+    }
-+    ret.perm = wgc_perm_to_iommu_flags(wgc_perm);
-+
-+    ret.target_as = result.is_success ? &region->downstream_as : &region->blocked_io_as;
-     return ret;
- }
- 
-@@ -612,6 +668,9 @@ static void riscv_wgchecker_writeq(void *opaque, hwaddr addr,
-             break;
-         }
- 
-+        /* Flush softmmu TLB when wgChecker changes config. */
-+        wgchecker_iommu_notify_all(s);
-+
-         return;
-     }
- 
-@@ -708,6 +767,9 @@ static void riscv_wgchecker_writel(void *opaque, hwaddr addr,
-             break;
-         }
- 
-+        /* Flush softmmu TLB when wgChecker changes config. */
-+        wgchecker_iommu_notify_all(s);
-+
-         return;
-     }
- 
-diff --git a/hw/misc/trace-events b/hw/misc/trace-events
-index 7617b8843f..8505a9f964 100644
---- a/hw/misc/trace-events
-+++ b/hw/misc/trace-events
-@@ -417,3 +417,4 @@ riscv_wgchecker_mmio_write(uint64_t base, uint64_t offset, unsigned int size, ui
- riscv_wgchecker_mem_blocked_read(uint64_t phys_addr, unsigned size, uint32_t wid) "phys_addr = 0x%" PRIx64 ", size = %u, wid = %" PRIu32
- riscv_wgchecker_mem_blocked_write(uint64_t phys_addr, uint64_t data, unsigned size, uint32_t wid) "phys_addr = 0x%" PRIx64 ", data = 0x%" PRIx64 ", size = %u, wid = %" PRIu32
- riscv_wgchecker_translate(uint64_t addr, int flags, int wid, const char *res) "addr = 0x%016" PRIx64 ", flags = 0x%x, wid = %d: %s"
-+riscv_wgchecker_iommu_notify_all(void) "notifying UNMAP for all"
 -- 
-2.43.0
+2.48.1
 
 
