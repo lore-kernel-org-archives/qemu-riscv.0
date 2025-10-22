@@ -4,133 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E8F4CCD195
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Oct 2025 08:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4A9CCD195
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Oct 2025 11:05:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBTuu-0000kr-35; Wed, 22 Oct 2025 04:09:56 -0400
+	id 1vBWf6-0005c0-PG; Wed, 22 Oct 2025 07:05:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vBTuo-0000Zr-JB
- for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 04:09:50 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vBWf3-0005aw-Ql
+ for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 07:05:45 -0400
+Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vBTuk-00025s-Iu
- for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 04:09:50 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-47112a73785so49503845e9.3
- for <qemu-riscv@nongnu.org>; Wed, 22 Oct 2025 01:09:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vBWez-0006dT-UA
+ for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 07:05:44 -0400
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-b6cdcc27fb8so680009a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Oct 2025 04:05:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761120585; x=1761725385; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=r5W3vw0dKWSTSqpjqiTpD1sBd7qgaB5sDy0DD3Bgxoo=;
- b=RE9D3i1aUxKs9ENlAdpfWxgLCOxkodNGSaeBAFd2aQ5kyq0tjo9LkmRd3TvFdVG7OX
- Q+faih/pIqP/MKDzYnG6xRIglQ6GQdY2LxTL9knV1b8KtodVMs3CU9c3geS6sLgZUn1q
- zJmN0F+7VAELztdwJdWSl9iOVsdExf3STQxrUjpYak/zxGYE6W42SdK8/jzP2vR5tKwc
- a1MxW/5lnfrty4igGCfv+6nO6CIhtcNwbiSY1CtYRChOAKcel17q7tMAZiqXSseOokVq
- buLdVo++gflIcWKQxGK6uuffWiuBzXpvx+6lm772ZgcD1crAPpkux28dcknOy1+kZoRo
- ctgA==
+ d=ventanamicro.com; s=google; t=1761131139; x=1761735939; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=FUOfyFuvAmLFwE8+R36LTL7/r9hMJZoegojkEohliwU=;
+ b=aJkyRifhrBCSoHAZNB6jES6HNGbAuDmGbisemd+xZugZns2yRuqT0JgeZ3COv6fMr4
+ r+uui4pmtQlEbiZA/kM6/HQqEgQ89GrWUh7Ng7VPNSv6biAdXev8vsJzEKt7j1oFLbNT
+ jNzxBfyLZcQAHp6u3MWp83oFVxrB4pVSfACGr7QTYRDA6+S3OeSF70hdRI0xOOuO/05R
+ 151ji58Ies8p579/FiZ+67nTcugJV1yoU3NgD76myg3F5aG9F48Ve7X5ajFcwSj3k+zJ
+ BkcwuwcSN6Bi6B5M/f6Mbh+MGSecyOktxZrf6FQ47X2LhaJYBOJXJdzLGBQwijfGMgi+
+ UeLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761120585; x=1761725385;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=r5W3vw0dKWSTSqpjqiTpD1sBd7qgaB5sDy0DD3Bgxoo=;
- b=ml/zyLbi976jjJVlOJ3GXUveoQ4fcBq4891+Qj0IRSWIJYe5yENQ5cXNX852hHWZv7
- gFjxCow39RgelLulncZNiC8xjSYPp4gum1SdDdnUG55mfgUM6iMz7Y0ccvdXE+mBSwMg
- FSrhNDsfZaAEZHxYfHA0mGkqCSof/Hj+IDDeoIj42/GhyzQTVBvGs/4u+2+Blm+7YMlw
- syBT02dCXrHpw6/B4fI9L66URL7MEV1gZyYUQkes0B0NaoDo6eqW+hN2CUkiJW/6pJUv
- 2KHCfcTmFRy4zF04vSUR8AhBAS32Jb5nJvOSw/ye47cpL3UeEHgg92oxw7hjIS+wisdQ
- MtGA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUeeSy6KjWe1HiNBfrVEfiRewHTu9jKu0hUgqKHsE4hqh3U+iPPcDmXml/R1F7z4umVqsiXNrSDq3rz@nongnu.org
-X-Gm-Message-State: AOJu0YwE1rm7FJ0O3LcoI4sbLx/96YUQ/H70J1u/tm1PLTkLGcUNfwX/
- bKZKu4SE4PPYO+/WktqlWegOtKAJ3Qg5G2s7thx++O0JtLo/L1tMPh9VcQT752K9rVk=
-X-Gm-Gg: ASbGncvKL7X/Kzp7J1Y105I7+TuQ+xBstmgdguGUwP0sPga2lluZCdXLBAtE5sWZjlr
- gaeUldiVXvrVxlNDbJpNY2bV6SstbudNWbCCuhUWiF/L+ZsE0aNn715PrZ4bKOSsbpjqS7EsSph
- VyS/EHSu8Qn6+wbDsd1ITYLAa4trOgizR95Wr9TE9pYnb+HT3TEHd/XIRGMYz30fS/LVqa/JQxr
- b8LDSj9LwBG6pmgHfCncsHpvK7S5NVABA/D7Bm0EZpTPnyG97NHNe7qQ6p2DekGjiP9xCCov30K
- fgivpwTaO15UNek/1nx0cn58SGof5EMEQHKrYuj2jLt86/Ni9aGoFG3RFtFwAJQacqqIn24DPJn
- 2pSe9KQWPiinGJTPJ82b1TaN4GHGYTxyD3iEiKuVjKmN914OsGT3Jm+eKLoeaq5QZIi8dqPRn/y
- /ryLPm9UJlxJLo3oGdSUMTMnNXOZtQgP7KHbw6ihZyFAtL3O9QcM52TZDhxfqXyhMg
-X-Google-Smtp-Source: AGHT+IG5BpeXiJ6nHMocdx8fLCUYDlkFMY0PuWuFCGQMHFAZ8n3dQ7nToTymecUtEebWDB9IZS4Cfw==
-X-Received: by 2002:a05:600c:3149:b0:470:bcc4:b0a0 with SMTP id
- 5b1f17b1804b1-47117925919mr168171395e9.34.1761120584565; 
- Wed, 22 Oct 2025 01:09:44 -0700 (PDT)
-Received: from [192.168.69.221] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-427f00b985esm24733044f8f.34.2025.10.22.01.09.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Oct 2025 01:09:43 -0700 (PDT)
-Message-ID: <36b8e200-10ab-48b0-beda-9ca2c42f2b48@linaro.org>
-Date: Wed, 22 Oct 2025 10:09:40 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] char: rename CharBackend->CharFrontend
-Content-Language: en-US
-To: marcandre.lureau@redhat.com, qemu-devel@nongnu.org
-Cc: "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- Zhenwei Pi <pizhenwei@bytedance.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Stefano Garzarella <sgarzare@redhat.com>, Laurent Vivier
- <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, Peter Maydell <peter.maydell@linaro.org>,
- Igor Mitsyanko <i.mitsyanko@gmail.com>, =?UTF-8?Q?Cl=C3=A9ment_Chigot?=
- <chigot@adacore.com>, Frederic Konrad <konrad.frederic@yahoo.fr>,
- Alberto Garcia <berto@igalia.com>, Thomas Huth <huth@tuxfamily.org>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Jason Herne <jjherne@linux.ibm.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Magnus Damm <magnus.damm@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- "Collin L. Walling" <walling@linux.ibm.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Richard Henderson <richard.henderson@linaro.org>,
- Helge Deller <deller@gmx.de>, Corey Minyard <minyard@acm.org>,
- Paul Burton <paulburton@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>,
+ d=1e100.net; s=20230601; t=1761131139; x=1761735939;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FUOfyFuvAmLFwE8+R36LTL7/r9hMJZoegojkEohliwU=;
+ b=uaQe4SZQJac5L/y9bXnFXvwzPtJHJ9H9j6/tWTcw9HSjMedLgNgt3cwHOdP1GuKooS
+ QvKp/NUW5udaxwKEIZSrnTzgxVVoMtMI26vz4LJTz6940/Cf0nGID2rTjGMl4PRLY9Z3
+ NvEOUbqsLl5wqez0RaewDNTAbj6LgV9k+6LtwMqVg0Ua3l+wGg0oIVCG0f6f1jk7RVss
+ GS/fDBPp4S9Dv0+RgOezkyJPiXGDtRtU9+iV/2E+oo8Iy2KPlK/W63X+FFnL7bs60zrg
+ 2bLrrJfezrH4FUK5NxpGEdmfP8TjEAXwqNoGU5fipQ0a58kxpcWQ8gWFMhaF3POw+FWw
+ tjMw==
+X-Gm-Message-State: AOJu0Yw10/3vyxMOcp7pDdYw5+TotJF/hLFLDF6Bn1ktFjjUTtpyPCCB
+ J2aEv9uM7BcScR/SVpomW6xXOlrM/9alK/RGNIQZLFGw7fMgiZiEJ+vGjPnH/67UE9s=
+X-Gm-Gg: ASbGncsiXuCjougnR/Cc2ZxI3it5FNH/GFJz+33wNI7dm9/Uye1vGSexwQ1hbhUrAyM
+ SVEhYX2Qb5ZCREYxWUQSb/Ca7OYBgOGlQteYNxWU4dabfFS7pjm3YIpTOJii1Dh+SZbuAK7dM5j
+ d8c2G3vZ4wwRqjBwqlulGSoICjvkFP18fEnkdTOVEYt1e3SdhT44Y97v77jfoTcI4jpENFDb0LR
+ /E4BtZTCvuYzDMCTLXgGqZ0rW6j4uB+1ppREjQ0Lh/M8Vm4SoXxGARiFDPw73Y79X/Hz1/W0Kl2
+ SXyUxyOgC6PScy/c6QPvJdPEFw7QREnh/GguFDRuqsTNXHpjkHwwkn+MUq0KRWSaFkhr/tnIbm0
+ ZkDavuB+ztt+AMXtMTxws+nVXdmvcXnaYF44QxMvcUv9vO+30gQjVBeCuoZnxyldoRSmHrxu8P3
+ EumVx8Nn9CeAIasKkcDlyo5Wd6GYZEG3sk/OTt6HX6XdB/0zH2Ag==
+X-Google-Smtp-Source: AGHT+IENB2ljRQaNH8NbAiDcnjF9tBRKeEUswLVM0gEf8GUbCVe18uSwQ6EuoeYwduOieQIjfBosSg==
+X-Received: by 2002:a17:903:244f:b0:261:e1c0:1c44 with SMTP id
+ d9443c01a7336-290cc2f83a5mr268514345ad.40.1761131138952; 
+ Wed, 22 Oct 2025 04:05:38 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com
+ ([2804:7f0:bcc1:92d3:4170:1cad:ed8e:78ba])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2930340092dsm16897975ad.42.2025.10.22.04.05.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Oct 2025 04:05:38 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, qemu-stable@nongnu.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
- Michael Rolnik <mrolnik@gmail.com>, Antony Pavlov <antonynpavlov@gmail.com>,
- Joel Stanley <joel@jms.id.au>, Vijai Kumar K <vijai@behindbytes.com>,
- Samuel Tardieu <sam@rfc1149.net>, Gustavo Romero
- <gustavo.romero@linaro.org>, Raphael Norwitz <raphael@enfabrica.net>,
- Stefan Hajnoczi <stefanha@redhat.com>,
- "reviewer:vhost-user-scmi" <mzamazal@redhat.com>,
- Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>,
- Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>,
- "Dr. David Alan Gilbert" <dave@treblig.org>, Zhang Chen
- <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>,
- Jason Wang <jasowang@redhat.com>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Max Filippov <jcmvbkbc@gmail.com>, Lukas Straub <lukasstraub2@web.de>,
- "open list:Sharp SL-5500 Co..." <qemu-arm@nongnu.org>,
- "open list:S390 SCLP-backed..." <qemu-s390x@nongnu.org>,
- "open list:sPAPR (pseries)" <qemu-ppc@nongnu.org>,
- "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- "open list:virtiofs" <virtio-fs@lists.linux.dev>,
- "open list:Rust-related patc..." <qemu-rust@nongnu.org>
-References: <20251022074612.1258413-1-marcandre.lureau@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20251022074612.1258413-1-marcandre.lureau@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Peter Maydell <peter.maydell@linaro.org>
+Subject: [PATCH] target/riscv/riscv-qmp-cmds.c: coverity-related fixes
+Date: Wed, 22 Oct 2025 08:05:24 -0300
+Message-ID: <20251022110524.483588-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.51.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -153,112 +101,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 22/10/25 09:46, marcandre.lureau@redhat.com wrote:
-> From: Marc-André Lureau <marcandre.lureau@redhat.com>
-> 
-> The actual backend is "Chardev", CharBackend is the frontend side of
-> it (whatever talks to the backend), let's rename it for readability.
-> 
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-> ---
->   chardev/chardev-internal.h           |  12 +-
->   include/chardev/char-fe.h            |  67 +++++----
->   include/chardev/char.h               |   4 +-
-...
+Coverity CID 1641401 reports that, in reg_is_ulong_integer(), we're
+dereferencing a NULL pointer in "reg1" when using it in strcasecmp()
+call. A similar case is reported with CID 1641393.
 
-> diff --git a/chardev/chardev-internal.h b/chardev/chardev-internal.h
-> index 9752dd75f7..8ea10414ab 100644
-> --- a/chardev/chardev-internal.h
-> +++ b/chardev/chardev-internal.h
-> @@ -37,9 +37,9 @@
->   struct MuxChardev {
->       Chardev parent;
->       /* Linked frontends */
-> -    CharBackend *backends[MAX_MUX];
-> -    /* Linked backend */
-> -    CharBackend chr;
-> +    CharFrontend *frontends[MAX_MUX];
-> +    /* frontend of the underlying muxed chardev */
-> +    CharFrontend chr;
->       unsigned long mux_bitset;
->       int focus;
->       bool term_got_escape;
-> diff --git a/include/chardev/char-fe.h b/include/chardev/char-fe.h
-> index 8ef05b3dd0..7901856f95 100644
-> --- a/include/chardev/char-fe.h
-> +++ b/include/chardev/char-fe.h
-> @@ -8,12 +8,12 @@ typedef void IOEventHandler(void *opaque, QEMUChrEvent event);
->   typedef int BackendChangeHandler(void *opaque);
->   
->   /**
-> - * struct CharBackend - back end as seen by front end
-> + * struct CharFrontend - Chardev as seen by front end
->    * @fe_is_open: the front end is ready for IO
->    *
->    * The actual backend is Chardev
->    */
-> -struct CharBackend {
-> +struct CharFrontend {
->       Chardev *chr;
->       IOEventHandler *chr_event;
->       IOCanReadHandler *chr_can_read;
-> @@ -27,53 +27,52 @@ struct CharBackend {
->   /**
->    * qemu_chr_fe_init:
->    *
-> - * Initializes a front end for the given CharBackend and
-> - * Chardev. Call qemu_chr_fe_deinit() to remove the association and
-> - * release the driver.
-> + * Initializes the frontend @c for the given Chardev backend @s. Call
-> + * qemu_chr_fe_deinit() to remove the association and release the backend.
->    *
->    * Returns: false on error.
->    */
-> -bool qemu_chr_fe_init(CharBackend *b, Chardev *s, Error **errp);
-> +bool qemu_chr_fe_init(CharFrontend *c, Chardev *s, Error **errp);
+In theory that will never happen - it's guaranteed that both "reg1" and
+"reg2" is non-NULL because we're retrieving them in compile-time from
+static arrays. Coverity doesn't know that though.
 
-IMO even clearer for this API would be to use:
+To make Coverity happier and add a bit more clarity in the code,
+g_assert() each token to make it clear that those 2 values aren't
+supposed to be NULL ever. Do that in both reg_is_ulong_integer() and
+reg_is_u64_fpu().
 
-   bool qemu_chr_fe_init(CharFrontend *fe, Chardev *be, Error **errp);
+We're also taking the opportunity to implement suggestions made by Peter
+in [1] in both functions:
 
-and update documentation accordingly.
+- use g_strsplit() instead of strtok();
+- use g_ascii_strcasecmp() instead of strcasecmp().
 
->   
->   /**
->    * qemu_chr_fe_deinit:
-> - * @b: a CharBackend
-> + * @c: a CharFrontend
->    * @del: if true, delete the chardev backend
->   *
-> - * Dissociate the CharBackend from the Chardev.
-> + * Dissociate the CharFrontend from the Chardev.
->    *
->    * Safe to call without associated Chardev.
->    */
-> -void qemu_chr_fe_deinit(CharBackend *b, bool del);
-> +void qemu_chr_fe_deinit(CharFrontend *c, bool del);
->   
->   /**
->    * qemu_chr_fe_get_driver:
->    *
-> - * Returns: the driver associated with a CharBackend or NULL if no
-> + * Returns: the driver associated with a CharFrontend or NULL if no
->    * associated Chardev.
->    * Note: avoid this function as the driver should never be accessed directly,
->    *       especially by the frontends that support chardevice hotswap.
->    *       Consider qemu_chr_fe_backend_connected() to check for driver existence
->    */
-> -Chardev *qemu_chr_fe_get_driver(CharBackend *be);
-> +Chardev *qemu_chr_fe_get_driver(CharFrontend *c);
->   
->   /**
->    * qemu_chr_fe_backend_connected:
->    *
-> - * Returns: true if there is a chardevice associated with @be.
-> + * Returns: true if there is a backend associated with @c.
->    */
-> -bool qemu_chr_fe_backend_connected(CharBackend *be);
-> +bool qemu_chr_fe_backend_connected(CharFrontend *c);
+[1] https://lore.kernel.org/qemu-devel/CAFEAcA_y4bwd9GANbXnpTy2mv80Vg_jp+A-VkQS5V6f0+BFRAA@mail.gmail.com/
 
-LGTM otherwise!
+Coverity: CID 1641393, 1641401
+Fixes: e06d209aa6 ("target/riscv: implement MonitorDef HMP API")
+Suggested-by: Peter Maydell <peter.maydell@linaro.org>
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/riscv-qmp-cmds.c | 22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
+
+diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
+index c499f9b9a7..7bde7090ab 100644
+--- a/target/riscv/riscv-qmp-cmds.c
++++ b/target/riscv/riscv-qmp-cmds.c
+@@ -273,12 +273,13 @@ static bool reg_is_ulong_integer(CPURISCVState *env, const char *name,
+     }
+ 
+     for (int i = 0; i < 32; i++) {
+-        g_autofree char *reg_name = g_strdup(reg_names[i]);
+-        char *reg1 = strtok(reg_name, "/");
+-        char *reg2 = strtok(NULL, "/");
++        g_autofree char **reg_name = g_strsplit(reg_names[i], "/", 2);
+ 
+-        if (strcasecmp(reg1, name) == 0 ||
+-            (reg2 && strcasecmp(reg2, name) == 0)) {
++        g_assert(reg_name[0]);
++        g_assert(reg_name[1]);
++
++        if (g_ascii_strcasecmp(reg_name[0], name) == 0 ||
++            g_ascii_strcasecmp(reg_name[1], name) == 0) {
+             *val = vals[i];
+             return true;
+         }
+@@ -294,12 +295,13 @@ static bool reg_is_u64_fpu(CPURISCVState *env, const char *name, uint64_t *val)
+     }
+ 
+     for (int i = 0; i < 32; i++) {
+-        g_autofree char *reg_name = g_strdup(riscv_fpr_regnames[i]);
+-        char *reg1 = strtok(reg_name, "/");
+-        char *reg2 = strtok(NULL, "/");
++        g_autofree char **reg_name = g_strsplit(riscv_fpr_regnames[i], "/", 2);
++
++        g_assert(reg_name[0]);
++        g_assert(reg_name[1]);
+ 
+-        if (strcasecmp(reg1, name) == 0 ||
+-            (reg2 && strcasecmp(reg2, name) == 0)) {
++        if (g_ascii_strcasecmp(reg_name[0], name) == 0 ||
++            g_ascii_strcasecmp(reg_name[1], name) == 0) {
+             *val = env->fpr[i];
+             return true;
+         }
+-- 
+2.51.0
+
 
