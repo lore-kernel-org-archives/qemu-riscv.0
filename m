@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA9C2CCD195
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Oct 2025 11:11:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5E1ECCD1AB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Oct 2025 11:47:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBWkS-00087F-Fs; Wed, 22 Oct 2025 07:11:20 -0400
+	id 1vBXJB-00064f-PJ; Wed, 22 Oct 2025 07:47:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vBWkO-000856-Rb
- for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 07:11:16 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
+ id 1vBXJ9-00063o-LT
+ for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 07:47:11 -0400
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vBWkM-0007dP-Qj
- for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 07:11:16 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-b58445361e8so750438a12.0
- for <qemu-riscv@nongnu.org>; Wed, 22 Oct 2025 04:11:14 -0700 (PDT)
+ id 1vBXJ6-0003OR-Ua
+ for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 07:47:11 -0400
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-7a26b9a936aso243345b3a.0
+ for <qemu-riscv@nongnu.org>; Wed, 22 Oct 2025 04:47:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1761131473; x=1761736273; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mbyA/LiI1lhWjIzquLDGeFGiPJ0qcFYc5ZQP/Jy2ZhU=;
- b=Um39HYyMBtRsflQw3WHbMpP+qCptOJY32FjH9PFXZiRUZ3+05fCEPPoZ5wp+KtWJQB
- bOOFj/gVbBho8DHaii2ERd50xAIsV0S7JhFpeWOGmlL7muKgIqkv6OTPPx7JHN0nPs5m
- r7TOkt7gNuSW/hd5cjke36u+mcEJgcyjl7ovV3TsH5tqq7B2FGd2FnhtWVIIREIhLb29
- tJTdBRjNsAO51fXTw7SNVc5vvtXHpWDGJwX8q4JNGsyD6n6qAZb9AorPP02X4+TCXoRY
- 0a6+FPvgjnkRORrMwT4wHUSus0ZxJiQmsU8f/n7xEFjcekv55E+ZL4WzX5DzzkSPWR5r
- S4Wg==
+ d=ventanamicro.com; s=google; t=1761133626; x=1761738426; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zFNl5bdI3wCBFYAkTWXOcIHimTRkmbNifGN0z9h66ZY=;
+ b=PUJrZyD39fTFM/y72YJPFZjiRkZnmE8HMzTGL8c9YPCwm3y6BAExFEvLRLrMn9TxzB
+ nd3XvGpX7kwXlrEljJqqJzdFlFnNWFDeRL2e6ZVUyo9WdfBhjv9W6dbcw0Tf70012lSN
+ YgUzYPztsN2TXr1gDt1f9sL6K1F7o1seK+6/2UdZCZdHOhRZ6AY+UwlaJZsaIP9ne0VE
+ iw7AymXjPBUqq/vw07IekPibLbDhfJN+COGEYg/kd2oM6YVRJtNEp0vsfhFIr082vY/G
+ oKRrIhGz1C5iW0E8fa72uauN/A63lgSGe943L9VrE6ZxFBQAZW5Z5cRjYHIcyFIXNhS3
+ MLzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761131473; x=1761736273;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mbyA/LiI1lhWjIzquLDGeFGiPJ0qcFYc5ZQP/Jy2ZhU=;
- b=X1RsFmz7SShrQfSiOT3NBpWj30QwCJadVAUC4XHdhN0Lx8XFHgFTg7ttAcUW3qZwsE
- gpXPxx4dBTVxJqxBt7SteyHFLz8VlKtTJiMINg9njmGx1f4+V4eJSSRBqT23VXQIXdiL
- Z0TtkotBixte4ykSWEhVAjPvevnSu9pA1WHc5pD8oO6g3CjhS827nnQNLSoHfSHftmpR
- C1hAcO2DhMF48tYNsrUyuSBLfUHgHE7V+L87vVTv/+GHBuCc0pgQ0Ufc8kGRL/7HBKT4
- JchQisqqKk+nfk302b2ECcV6ehurmI/k/TsG6GpcaFOs1AzAsas7fi+DNaXRkzVrwk0P
- VekQ==
-X-Gm-Message-State: AOJu0YwXpUHlf0cU9RdvyK9VkB6rQqQucXQQBX0E0vURqffwlnCHqpi/
- FcG0YKFSJFZc9OvEdu+Q5gP9zBCjd573osmXW2FOMG4TPQ+DuObB4pNXo63f4ohUu3U=
-X-Gm-Gg: ASbGncvqfCjAwmDTbYmwrJkHqcCYaghQEj5vlkJA92521GGDy/92YRuICcLi7PLnqh7
- Ji40Jq2613bwNaKiegTr3Ft3qlUx6fU7GtjAP3zHJdAA+wO/OpjMiih/HbGWS0VVcoNXIcpEZ28
- WO6Eq1sChDmnnLeRxgPpsJInucxBRZ84uKwjcBPPGgrxKa2KZqbeyoP57dZg+dcC5yVWQSXemyo
- g8UTqfVqK+3wPTOD/50f205EtWb//jS3zPZjbegD/ntCcX/J7nnugl6ekbAILgJJ1j7+rlRgpyu
- JywLLPL4lIALd6t/UXGDyGJ2aRAXxLLr4twS0rQu9kdmkEIKKrhxc9kl8S7itIz6AoSPHOoT3c1
- 9W6s1z68ZPG22TOYk3mzAXdoyA/2BOoVVyrrvk8Xikbe4llL5MnXcCSInX2pqDXzihGnhkSBn+a
- t+ZkgEUg/rhZklfj6xSz35l9Pk46OD
-X-Google-Smtp-Source: AGHT+IGpnQ1WUR2JlEHnERhpXDlvfDqcMy6x6gUIqfA7lpXUxIQC/jCHDqNObfEk1+rw0RO0UhC4Xw==
-X-Received: by 2002:a17:903:186:b0:274:506d:7fcc with SMTP id
- d9443c01a7336-2935dff65a7mr15558835ad.6.1761131473104; 
- Wed, 22 Oct 2025 04:11:13 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com
+ d=1e100.net; s=20230601; t=1761133626; x=1761738426;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zFNl5bdI3wCBFYAkTWXOcIHimTRkmbNifGN0z9h66ZY=;
+ b=nXucr6W0d/VWCGqd4bvLVSKMwMZqqCX2PiyKZLpKiW/EOFNhqjT2OKWSJrJtykTV2d
+ /FpKe71TGgRw7cmmNA+X46L9xv1RYuIbJdnXcyCENcp3k0rrIRWSZ9PZqcKr/4/Yib54
+ UQTwBIPNXbE6AU3ZhUPm1pQ+Yu/GC/hzGEU9WZdiq1E0uGGXsCMh42NVfbG59+0EszuF
+ +clJteuuLvCgtI8RfQbjV8NHuwd9Q6uhSdLnpAsWUSufwG/uMWoj1MYY5S2YgloTQKXU
+ pjgdSPT1nSQjAyGVqFCRS96GvvXzn+vL0TaVhwgra6Q06u9rVk+VSeOSyb+Fnl/py+Dj
+ fxfg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXEOCi1jvRJV01kQmokm0myW/vfOH2E0fWXqQHQTTZ0AgdcEEaHNvHga3e7SRAIWpNVH4ZPYabtL94z@nongnu.org
+X-Gm-Message-State: AOJu0YztF0AMIpNn1x6a78OSDilYl0jzW+NigPQ1bLGKYe6kiksFvCFR
+ pd/T8ZoFk7hW5xjcZlk1eT5gF31YzsdEHBF62unYQJWMMKfQx98v+NNkOBq666Sqy9I=
+X-Gm-Gg: ASbGncsZJxLZ0+u1AVxAL1U2u093hQEroPRWNEsG7ICg/ov4YYuLPwmR2IUcfFrRl1q
+ t0U1DpgavSsHVWrbUhd4n7ld5gI4Px59krCmsWvwMNhc8fYg7V7Ip39WHCH59nBOeY3g9MnsWv1
+ p8Vd+pTEZtwZ4t/C8a53ucQarh/BhdhisuSdgl/DRRorZy4/EatsOgKB/tKwVmxf148c7tYGZvO
+ bhy3r3DmOdmOUdy4z1IZRnSgCOfY2jkO3HGCm1CWqGe5XHx4zR23lr7vUkB0LVfps07AHMEw6pn
+ z2MOi1KPQZOQADBsXUILQVt7hJ/pAuBRQiDPyQUTnFuqBrBvpbbuC7SNfbOJb55VjyTnEvY2mOF
+ G3lejpw87NzULHdzSQ3pWnE1KDE2Erw2HeYoyHh5Y3cKUrVPQEdcTyQrhYxztg2nSQPWUHLKnG9
+ 5PIK8CjJOBRxI02Uiequb7rrk1q9H+Hark2EbTL1GSJtmRYpeXtXzRn4HIYW86VQv4
+X-Google-Smtp-Source: AGHT+IFUuRBQl3mzOmZOEfoU/EHxL0JpA33Luyw5hSi/48Xwu4qitDuUnUlx5BG2lqpwRloa6LneoQ==
+X-Received: by 2002:a17:902:c942:b0:293:623:3241 with SMTP id
+ d9443c01a7336-293062336a1mr24381445ad.58.1761133625723; 
+ Wed, 22 Oct 2025 04:47:05 -0700 (PDT)
+Received: from ?IPV6:2804:7f0:bcc1:92d3:4170:1cad:ed8e:78ba?
  ([2804:7f0:bcc1:92d3:4170:1cad:ed8e:78ba])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29246ebcf88sm137457155ad.2.2025.10.22.04.11.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Oct 2025 04:11:12 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-stable@nongnu.org
-Subject: [PATCH] target/riscv/kvm: fix env->priv setting in reset_regs_csr()
-Date: Wed, 22 Oct 2025 08:11:05 -0300
-Message-ID: <20251022111105.483992-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.51.0
+ 98e67ed59e1d1-33dfb1db6aasm2554541a91.0.2025.10.22.04.47.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Oct 2025 04:47:04 -0700 (PDT)
+Message-ID: <1c891573-794e-4650-9fa5-129824f96497@ventanamicro.com>
+Date: Wed, 22 Oct 2025 08:47:00 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 1/2] Set KVM initial privilege mode and mp_state
+To: Xie Bo <xb@ultrarisc.com>, qemu-devel@nongnu.org
+Cc: ajones@ventanamicro.com, qemu-riscv@nongnu.org, alistair23@gmail.com,
+ pbonzini@redhat.com, anup@brainfault.org, alistair.francis@wdc.com,
+ rkrcmar@ventanamicro.com, palmer@dabbelt.com, xiamy@ultrarisc.com
+References: <20250915070811.3422578-1-xb@ultrarisc.com>
+ <20250915070811.3422578-2-xb@ultrarisc.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <20250915070811.3422578-2-xb@ultrarisc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,46 +108,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch was originally made by Gitlab user Bo Gan (@ganboing) 4
-months ago in the context of issue [1]. I asked the author to send a
-patch to the mailing list ~3 months ago and got no reply. I'm sending
-the patch myself because we already missed 10.1 without this fix.
+Hi,
 
-I'll also just post verbatim Bo Gan comment in the commit msg:
+On 9/15/25 4:08 AM, Xie Bo wrote:
+> For KVM mode, the privilege mode should not include M-mode, and the
+> initial value should be set to S-mode. Additionally, a following patch
+> adds the implementation of putting the vCPU privilege mode to KVM.
+> When the vCPU runs for the first time, QEMU will first put the privilege
+> state to KVM. If the initial value is set to M-mode, KVM will encounter
+> an error.
+> 
+> In addition, this patch introduces the 'mp_state' field to RISC-V
+> vCPUs, following the convention used by KVM on x86. The 'mp_state'
+> reflects the multiprocessor state of a vCPU, and is used to control
+> whether the vCPU is runnable by KVM. Randomly select one CPU as the
+> boot CPU. Since each CPU executes the riscv_cpu_reset_hold() function
+> and CPU0 executes first, only CPU0 randomly selects the boot CPU.
+> 
+> Signed-off-by: Xie Bo <xb@ultrarisc.com>
+> ---
+>   target/riscv/cpu.c | 17 ++++++++++++++++-
+>   target/riscv/cpu.h |  2 ++
+>   2 files changed, 18 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d055ddf462..55892a2fc7 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -37,6 +37,7 @@
+>   #include "kvm/kvm_riscv.h"
+>   #include "tcg/tcg-cpu.h"
+>   #include "tcg/tcg.h"
+> +#include "hw/boards.h"
+>   
+>   /* RISC-V CPU definitions */
+>   static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
+> @@ -685,18 +686,32 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>   #ifndef CONFIG_USER_ONLY
+>       uint8_t iprio;
+>       int i, irq, rdzero;
+> +    static int boot_cpu_index;
+>   #endif
+>       CPUState *cs = CPU(obj);
+>       RISCVCPU *cpu = RISCV_CPU(cs);
+>       RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(obj);
+>       CPURISCVState *env = &cpu->env;
+> +    MachineState *ms = MACHINE(qdev_get_machine());
+>   
+>       if (mcc->parent_phases.hold) {
+>           mcc->parent_phases.hold(obj, type);
+>       }
+>   #ifndef CONFIG_USER_ONLY
+>       env->misa_mxl = mcc->def->misa_mxl_max;
+> -    env->priv = PRV_M;
+> +    if (kvm_enabled()) {
+> +        env->priv = PRV_S;
+> +    } else {
+> +        env->priv = PRV_M;
+> +    }
 
-"In RISCV Linux with KVM enabled, gdbstub is broken. The
-get_physical_address isn't able to page-walk correctly and resolve the
-physical page. This is due to that the vcpu is being treated as starting
-in M mode even if KVM enabled. However, with KVM, the vcpu is actually
-started in S mode. The mmu_idx will give 3 (M), instead of 1 (S),
-resulting in Guest PA == VA (wrong)!"
+Sorry for the late v9 review. riscv_cpu_reset_hold() is reserved for TCG initialization
+only. All kvm specific initialization is done in kvm_riscv_reset_vcpu(), called in the
+end of this function:
 
-Set env->priv to PRV_S in kvm_riscv_reset_regs_csr() since the VCPU is
-always started in S-mode for KVM.
+     if (kvm_enabled()) {
+         kvm_riscv_reset_vcpu(cpu);
+     }
 
-[1] https://gitlab.com/qemu-project/qemu/-/issues/2991
+Everything that is KVM specific should be put in kvm_riscv_reset_vcpu() and other KVM
+related helpers in target/riscv/kvm/kvm-cpu.c.
 
-Cc: qemu-stable@nongnu.org
-Closes: https://gitlab.com/qemu-project/qemu/-/issues/2991
-Originally-by: Bo Gan (@ganboing in Gitlab)
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/kvm/kvm-cpu.c | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 0dd0d59d41..000e44b2b7 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -705,6 +705,7 @@ static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
-     env->satp = 0;
-     env->scounteren = 0;
-     env->senvcfg = 0;
-+    env->priv = PRV_S;
- }
- 
- static int kvm_riscv_get_regs_fp(CPUState *cs)
--- 
-2.51.0
+As for the except above, I just sent a patch that is fixing it inside kvm_riscv_reset_regs_csr():
+
+("[PATCH] target/riscv/kvm: fix env->priv setting in reset_regs_csr()")
+https://lore.kernel.org/qemu-riscv/20251022111105.483992-1-dbarboza@ventanamicro.com/
+
+
+The reason I went ahead with that patch is because it is related to an opened Gitlab
+issue (https://gitlab.com/qemu-project/qemu/-/issues/2991) and we already missed the
+window for 10.1 to fix it.
+
+In case you send another version of this series you can either drop this particular
+change or move it to kvm_riscv_reset_regs_csr(). We'll keep whatever is merged first.
+
+
+Thanks,
+
+Daniel
+
+
+
+> +    if (cs->cpu_index == 0) {
+> +        boot_cpu_index = g_random_int_range(0, ms->smp.cpus);
+> +    }
+> +    if (cs->cpu_index == boot_cpu_index) {
+> +        env->mp_state = KVM_MP_STATE_RUNNABLE;
+> +    } else {
+> +        env->mp_state = KVM_MP_STATE_STOPPED;
+> +    }
+>       env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+>       if (env->misa_mxl > MXL_RV32) {
+>           /*
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 738e68fa6e..7ea4859de7 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -269,6 +269,8 @@ struct CPUArchState {
+>   #endif
+>   
+>       target_ulong priv;
+> +    /* Current multiprocessor state of this vCPU. */
+> +    uint32_t mp_state;
+>       /* CSRs for execution environment configuration */
+>       uint64_t menvcfg;
+>       target_ulong senvcfg;
 
 
