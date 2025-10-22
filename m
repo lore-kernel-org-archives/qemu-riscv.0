@@ -4,91 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50C6ECCD1AB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Oct 2025 02:38:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D975CCD193
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Oct 2025 04:49:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBlDU-00067K-D3; Wed, 22 Oct 2025 22:38:16 -0400
+	id 1vBnG7-0005iI-Si; Thu, 23 Oct 2025 00:49:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vBlDQ-00066Y-RH
- for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 22:38:12 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vBlDP-0005h4-0D
- for qemu-riscv@nongnu.org; Wed, 22 Oct 2025 22:38:12 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-637e9f9f9fbso506675a12.0
- for <qemu-riscv@nongnu.org>; Wed, 22 Oct 2025 19:38:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761187088; x=1761791888; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tZ1Li+zQnOnMqkypzcF/DnB9F+kM/ZRRwvZgQTomdNk=;
- b=XRvrbqdpeQZwb410xrA3zMmxXbOy8clN27Qa3DT/7Rc9cxTGKS8MZn+bF7sgT5Xoa0
- j8XjdBrQuMhINNBg3MEshIyjlOpi1CRvO9OQT5mEYEzS2Y2yo9YCiWCgu6FV432voZcf
- xs5Q+bZd+1zr9RFHaAnwfQSRUy2RooS9FdpGx0rssc50ch+R+sPDLN5Nez0Gl6PrVEkd
- KwRDsevz4/ZI7nQuXRAq0tXQxUg0Htu+9nYQm59E+ChvJ0gOJyT3tUiUIbVKXq70GnKU
- ZOW01etr2BHhcZAP8MfDxBpVd9yte9F3gKG72+jiysKmRxH4yVoTHteuAS0vMB0LVXka
- ZJ0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761187088; x=1761791888;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tZ1Li+zQnOnMqkypzcF/DnB9F+kM/ZRRwvZgQTomdNk=;
- b=vsKVjaj81ihHd1J3SPLpc697tLm7/n30nC3f9MXsRtu961tEKcJKogueruuwgvHZ4z
- 694Gj6TgBpGvUg+3hDlP9JswFsAD9PehQh2BMquvzhiC7FkTMNSIAWlh5sW3JPOscc0P
- XSbIIaoCrBDh5LQgong/47p4xziYtfOz0mEYe6MttkrFbuvCKpgPxq8tigbKIB7mHDYC
- JRkJXKli32n4QtaEPvMp3x5AzdlEA+b7/jKc6d3eckJwYBUBGD5VWUc7LecI5dFZoolp
- QbWlJGqjjwNOSFYztKrphQaEwNTyR2PxY/9YBBuYkCg+XWMXrJNMo9zB6YoE4Ni/FQst
- uJLA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/BoF9PxpZTiBkV55Ke1VMalXcWkefa0nzdyLMSjxiX/Gd1kDWzz2LTTk1fgAQNmNoE7OaO9csKn6e@nongnu.org
-X-Gm-Message-State: AOJu0YwikHfcFosC3UPofKEAw1McldTy2dT4mhAn4jhi0a2YEYIdhvL9
- 8AaTw1ceR7zsJ579vdAZBFZsnL869CAa4/oXJmwNBg+6I0ny2cTkbhOvX8V81aCDdKXSHCyqOKF
- z6jX1o3+AWX+FBk/iBEjD12p7cFJasgQ=
-X-Gm-Gg: ASbGncuNd9t3iBRFuQU4lLIQpEnYMuWMfxRLpHMYeqym4dKEGg4blFipz0RG+TUykms
- /GsIKOUpVZAIp8QQBj0UTfvjqCkxDaUyBMwd1ReK3VLFkt3PsH5aQel8g5XUC3JHuBqqr3A1Xtk
- vZDZgJzwzpRcUyfnfu8zGCZoIvsDbXnj0Mnt6/f+6K/MsGFGGBd5JAjN1vnYpVYqCtSOd0G43ET
- THHWyW2gzS662GHHvt1m3t9k1am6Mq0wFYxIigzJqDINQh63ZBRcj2Yhmf9HmB6g5LwxYVZK8KJ
- iGqr5309QLMwhi/mOfjPcf2ymg==
-X-Google-Smtp-Source: AGHT+IF/R3rsoj8+SzDwYHQzXDZKgOw6k+F2OmdxvFmpd8r04zcfm5TwqDf2gTMZqn6SRhvk7zebi3LDeQEROPZkqf4=
-X-Received: by 2002:a05:6402:40c8:b0:63e:1354:d9ab with SMTP id
- 4fb4d7f45d1cf-63e3dff6f32mr960540a12.8.1761187087957; Wed, 22 Oct 2025
- 19:38:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <nnovikov@NB-7271.syntacore.com>)
+ id 1vBehX-0005Mu-PB; Wed, 22 Oct 2025 15:40:52 -0400
+Received: from ppp91-77-168-124.pppoe.mtu-net.ru ([91.77.168.124]
+ helo=NB-7271.syntacore.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <nnovikov@NB-7271.syntacore.com>)
+ id 1vBehU-0003O2-VE; Wed, 22 Oct 2025 15:40:51 -0400
+Received: from NB-7271.syntacore.com (localhost [127.0.0.1])
+ by NB-7271.syntacore.com (8.18.1/8.18.1) with ESMTP id 59MJAiER038149;
+ Wed, 22 Oct 2025 22:10:44 +0300
+Received: (from nnovikov@localhost)
+ by NB-7271 (8.18.1/8.18.1/Submit) id 59MJ0AOp035115;
+ Wed, 22 Oct 2025 22:00:10 +0300
+Date: Wed, 22 Oct 2025 21:59:09 +0300
+From: Nikita Novikov <nnovikov@NB-7271.syntacore.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: n.novikov@syntacore.com, pbonzini@redhat.com, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: Re: [PATCH] accel/tcg: Pass actual memop_size to tlb_fill instead of 0
+Message-ID: <busf3stsde5y7hq7zslr2kfyibp5ve2wrvrrawik3xbfpmsr7f@2nr5m4kdlltn>
+References: <20251022115213.91457-1-n.novikov@syntacore.com>
+ <79beaf9a-9558-40e7-a01d-5f80d8931eba@linaro.org>
 MIME-Version: 1.0
-References: <20251022024141.42178-1-jay.chang@sifive.com>
-In-Reply-To: <20251022024141.42178-1-jay.chang@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 23 Oct 2025 12:37:40 +1000
-X-Gm-Features: AS18NWDtuopmd2qokXK6qlDe9gMrNQpJ_2-MDEDnWQj9SQCyLakiecmbviHzYto
-Message-ID: <CAKmqyKNY1W6K1E=9Y98Ou24qOn5tn00VmdWs9orE9MgAQeSJsg@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] Make PMP granularity configurable
-To: Jay Chang <jay.chang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x535.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <79beaf9a-9558-40e7-a01d-5f80d8931eba@linaro.org>
+Received-SPF: none client-ip=91.77.168.124;
+ envelope-from=nnovikov@NB-7271.syntacore.com; helo=NB-7271.syntacore.com
+X-Spam_score_int: 37
+X-Spam_score: 3.7
+X-Spam_bar: +++
+X-Spam_report: (3.7 / 5.0 requ) BAYES_00=-1.9, DKIM_ADSP_NXDOMAIN=0.9,
+ KHOP_HELO_FCRDNS=0.399, NO_DNS_FOR_FROM=0.001, RCVD_IN_PBL=3.335,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 23 Oct 2025 00:49:07 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,69 +65,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 22, 2025 at 12:43=E2=80=AFPM Jay Chang <jay.chang@sifive.com> w=
-rote:
->
-> This patch series enhances QEMU's RISC-V PMP support to conform with
-> the RISC-V Privileged Specification regarding PMP granularity and WARL
-> constraints.
->
-> Previously, QEMU always used a fixed minimum PMP granularity of 4 bytes.
-> This series introduces a configurable "pmp-granularity" parameter, allowi=
-ng
-> platforms to specify larger granularity values. In addition, the handling=
- of
-> pmpcfg and pmpaddr CSRs has been updated to follow WARL constraints. For
-> example, when NA4 is not valid due to a larger granularity, it is silentl=
-y
-> ignored. TOR and NAPOT address ranges are also properly aligned according=
- to
-> the configured granularity.
->
-> A new CPU parameter `pmp-granularity` is now available on the QEMU comman=
-d
-> line. For example:
->
->     -cpu rv64,g=3Dtrue,c=3Dtrue,pmp=3Dtrue,pmp-granularity=3D1024
->
-> If not provided, the default remains 4 bytes.
->
-> ---
->
-> Patch summary:
->
-> 1. target/riscv: Make PMP granularity configurable
->    - Introduce CPU property `pmp-granularity` for platforms to configure
->      PMP granularity.
->    - Default remains 4 bytes if unspecified.
->
-> 2. target/riscv: Make PMP CSRs conform to WARL constraints
->    - Update pmpcfg and pmpaddr handling to follow WARL semantics.
->    - Align start and end addresses of TOR regions to PMP granularity.
->    - Ensure software can read back correct values per the spec.
->
-> PATCH v3 update
-> Change UL type to ULL to prevent bit-width errors.
->
-> Jay Chang (2):
->   target/riscv: Make PMP granularity configurable
->   target/riscv: Make PMP CSRs conform to WARL constraints
-
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
->
->  target/riscv/cpu.c                | 39 ++++++++++++++++++++++++++
->  target/riscv/cpu.h                |  1 +
->  target/riscv/cpu_cfg_fields.h.inc |  1 +
->  target/riscv/pmp.c                | 46 +++++++++++++++++++++++++++++++
->  4 files changed, 87 insertions(+)
->
-> --
-> 2.48.1
->
->
+On Wed, Oct 22, 2025 at 10:32:31AM -0500, Richard Henderson wrote:
+> On 10/22/25 06:52, Nikita Novikov wrote:
+> > Recent debugging of misaligned access handling on RISC-V revealed that we
+> > always call `tlb_fill` with `memop_size == 0`. This behavior effectively
+> > disables natural alignment checks in `riscv_tlb_fill_align()`, because we
+> > have to fall back from `memop_size` to `size` when computing the alignment bits.
+> > 
+> > With `memop_size == 0`, misaligned cross-page stores end up reported as
+> > `store access fault` (AF, cause=7) instead of the expected
+> > `store page fault` (PF, cause=15), since the “misalign” path triggers before
+> > the second page translation can fault. This breaks misaligned accesses at
+> > page boundaries.
+> > 
+> > After switching to pass the real `l->memop` into `tlb_fill`, the cross-page
+> > faults are no longer mis-classified as AF.
+> > 
+> > Fixes: ec03dd972378 ("accel/tcg: Hoist first page lookup above pointer_wrap")
+> > 
+> > Signed-off-by: Nikita Novikov <n.novikov@syntacore.com>
+> > ---
+> >   accel/tcg/cputlb.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+> > index 631f1fe135..271c061be1 100644
+> > --- a/accel/tcg/cputlb.c
+> > +++ b/accel/tcg/cputlb.c
+> > @@ -1782,7 +1782,7 @@ static bool mmu_lookup(CPUState *cpu, vaddr addr, MemOpIdx oi,
+> >            * If the lookup potentially resized the table, refresh the
+> >            * first CPUTLBEntryFull pointer.
+> >            */
+> > -        if (mmu_lookup1(cpu, &l->page[1], 0, l->mmu_idx, type, ra)) {
+> > +        if (mmu_lookup1(cpu, &l->page[1], l->memop, l->mmu_idx, type, ra)) {
+> >               uintptr_t index = tlb_index(cpu, l->mmu_idx, addr);
+> >               l->page[0].full = &cpu->neg.tlb.d[l->mmu_idx].fulltlb[index];
+> >           }
+> 
+> How is the memop really applicable to the second half of a split-page operation?
+> 
+Because the second half is still part of the same guest memory operation. It must obey
+the same size, alignment, and atomicity rules. Passing the real memop ensures correct
+alignment and atomic checks even if the access crosses a page boundary.
+> 
+> r~
+> 
 
