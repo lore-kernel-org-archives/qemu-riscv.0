@@ -4,111 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA0ECCD193
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Oct 2025 05:00:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11B0ACCD1BC
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Oct 2025 06:39:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBnQU-0008S9-K0; Thu, 23 Oct 2025 00:59:52 -0400
+	id 1vBoyX-0004Lp-UY; Thu, 23 Oct 2025 02:39:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1vBnQQ-0008RJ-V7; Thu, 23 Oct 2025 00:59:47 -0400
-Received: from www3579.sakura.ne.jp ([49.212.243.89])
+ (Exim 4.90_1) (envelope-from <n.novikov@syntacore.com>)
+ id 1vBoyV-0004Kl-Lc; Thu, 23 Oct 2025 02:39:03 -0400
+Received: from m.syntacore.com ([178.249.69.228])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1vBnQN-0004Cx-T1; Thu, 23 Oct 2025 00:59:46 -0400
-Received: from [133.11.54.205] (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
- (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 59N4q3NC011817
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 23 Oct 2025 13:52:03 +0900 (JST)
- (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=9xxZpM2nB0o+d7uobfPXc5xWQTeCnn5dD9HEOV+8JfY=; 
- c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
- h=Message-ID:Date:Subject:To:From;
- s=rs20250326; t=1761195124; v=1;
- b=jF3ibRwZ1YpqgeWufdnW0Y13nquI1Pea9esn0iH0zkCtqnmwPs1Eo+EIEzahu4CA
- WSZw53qbYxw0m3aVhmM+IPEFlo3TK+WItwGjAu0w7UJBltEaTmKC/DBhm09vQrLP
- dQ60t2nVw4sKFpv0ZPMZgjsDXfh3C2YvmsortOrOECMXVacOfWd1lT1uiVuqJNw2
- CSo6ZLtKggBnJn9SwpJYLxiv2CdD41GR2cHL3JnOehfoid2t0C2gwIkAicEOk0Z9
- nLwg0jqOUASUxIa5ejAJzD0x32S4I5/GL0PnYUXui+XlkKiJeSOQBLhxxCFKomD3
- GRrKSSfXhFwFh2hp75ZadQ==
-Message-ID: <f4547020-0df2-40a7-a625-7628ae36db02@rsg.ci.i.u-tokyo.ac.jp>
-Date: Thu, 23 Oct 2025 13:52:02 +0900
+ (Exim 4.90_1) (envelope-from <n.novikov@syntacore.com>)
+ id 1vBoyT-0001w4-HV; Thu, 23 Oct 2025 02:39:03 -0400
+Received: from MRN-SC-KSMG-01.corp.syntacore.com (localhost [127.0.0.1])
+ by m.syntacore.com (Postfix) with ESMTP id 779051A0007;
+ Thu, 23 Oct 2025 06:38:54 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 m.syntacore.com 779051A0007
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com; s=m;
+ t=1761201534; bh=z5dsFJFmgtnobo0SAehP4cpu/9uSPkmGC+VeE6JleII=;
+ h=Message-ID:Date:MIME-Version:From:Subject:To:Content-Type:From;
+ b=WoeHuurGuKSyjnIoKYxXknpULChvrxKtZSzUPVh4heP79hn1Rea+ZW6l6Y+Fu4KKY
+ 87XGLAAxjzFDI61kXSJmLXPusx12hdk7Esc3xYveSirKgUIQ1ss4pmXU/ZZ2W5WlC2
+ +6S9X9bNncak2b+O25Q5SmkqQldkiEOjVI1zOOY4LKSdSS6UINdilHvBseFoTu9SBm
+ QNABfFqyJl0OEgO/yFVZfvvC+pPc/YhxBqx1IWs7s8TRZ+ZrrWGsetuoOg8SlziN+e
+ 9f/itOXaj7cnktyYiGXlcHI9PITgB7Vc4Ho2332rFAh4EplYJnGSfGx2e4eg7n3qdp
+ iQ/9dal6ohMUA==
+Received: from S-SC-EXCH-01.corp.syntacore.com (exchange.syntacore.com
+ [10.76.202.20])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by m.syntacore.com (Postfix) with ESMTPS;
+ Thu, 23 Oct 2025 06:38:53 +0000 (UTC)
+Received: from [10.30.30.254] (10.30.30.254) by
+ S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Thu, 23 Oct 2025 09:38:25 +0300
+Message-ID: <e9f0bb8a-6512-4ed2-a1a4-deed8b47d125@syntacore.com>
+Date: Thu, 23 Oct 2025 09:38:53 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] char: rename CharBackend->CharFrontend
-To: marcandre.lureau@redhat.com, qemu-devel@nongnu.org
-Cc: "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- Zhenwei Pi <pizhenwei@bytedance.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Stefano Garzarella <sgarzare@redhat.com>, Laurent Vivier
- <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>, Peter Maydell <peter.maydell@linaro.org>,
- Igor Mitsyanko <i.mitsyanko@gmail.com>, =?UTF-8?Q?Cl=C3=A9ment_Chigot?=
- <chigot@adacore.com>, Frederic Konrad <konrad.frederic@yahoo.fr>,
- Alberto Garcia <berto@igalia.com>, Thomas Huth <huth@tuxfamily.org>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Jason Herne <jjherne@linux.ibm.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>,
- Magnus Damm <magnus.damm@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- "Collin L. Walling" <walling@linux.ibm.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Richard Henderson <richard.henderson@linaro.org>,
- Helge Deller <deller@gmx.de>, Corey Minyard <minyard@acm.org>,
- Paul Burton <paulburton@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
- Michael Rolnik <mrolnik@gmail.com>,
- Antony Pavlov <antonynpavlov@gmail.com>, Joel Stanley <joel@jms.id.au>,
- Vijai Kumar K <vijai@behindbytes.com>, Samuel Tardieu <sam@rfc1149.net>,
- Gustavo Romero <gustavo.romero@linaro.org>,
- Raphael Norwitz <raphael@enfabrica.net>,
- Stefan Hajnoczi <stefanha@redhat.com>,
- "reviewer:vhost-user-scmi" <mzamazal@redhat.com>,
- Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>,
- "Dr. David Alan Gilbert" <dave@treblig.org>, Zhang Chen
- <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>,
- Jason Wang <jasowang@redhat.com>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Max Filippov <jcmvbkbc@gmail.com>, Lukas Straub <lukasstraub2@web.de>,
- "open list:Sharp SL-5500 Co..." <qemu-arm@nongnu.org>,
- "open list:S390 SCLP-backed..." <qemu-s390x@nongnu.org>,
- "open list:sPAPR (pseries)" <qemu-ppc@nongnu.org>,
- "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- "open list:virtiofs" <virtio-fs@lists.linux.dev>,
- "open list:Rust-related patc..." <qemu-rust@nongnu.org>
-References: <20251022074612.1258413-1-marcandre.lureau@redhat.com>
+From: Nikita Novikov <n.novikov@syntacore.com>
+Subject: Re: [PATCH] accel/tcg: Pass actual memop_size to tlb_fill instead of 0
+To: Richard Henderson <richard.henderson@linaro.org>
+CC: <pbonzini@redhat.com>, <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>,
+ <n.novikov@syntacore.com>
+References: <20251022115213.91457-1-n.novikov@syntacore.com>
+ <79beaf9a-9558-40e7-a01d-5f80d8931eba@linaro.org>
+ <busf3stsde5y7hq7zslr2kfyibp5ve2wrvrrawik3xbfpmsr7f@2nr5m4kdlltn>
+ <6083717e-a013-4089-a54f-4c2ecc98a351@linaro.org>
 Content-Language: en-US
-From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-In-Reply-To: <20251022074612.1258413-1-marcandre.lureau@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <6083717e-a013-4089-a54f-4c2ecc98a351@linaro.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=49.212.243.89;
- envelope-from=odaki@rsg.ci.i.u-tokyo.ac.jp; helo=www3579.sakura.ne.jp
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Originating-IP: [10.30.30.254]
+X-ClientProxiedBy: S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) To
+ S-SC-EXCH-01.corp.syntacore.com (10.76.202.20)
+X-KSMG-AntiPhishing: not scanned, disabled by settings
+X-KSMG-AntiSpam-Interceptor-Info: not scanned
+X-KSMG-AntiSpam-Status: not scanned, disabled by settings
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.1.1.8310,
+ bases: 2025/10/23 02:56:00 #27792171
+X-KSMG-AntiVirus-Status: NotDetected, skipped
+X-KSMG-LinksScanning: NotDetected
+X-KSMG-Message-Action: skipped
+X-KSMG-Rule-ID: 5
+Received-SPF: pass client-ip=178.249.69.228;
+ envelope-from=n.novikov@syntacore.com; helo=m.syntacore.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,13 +94,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2025/10/22 16:46, marcandre.lureau@redhat.com wrote:
-> From: Marc-André Lureau <marcandre.lureau@redhat.com>
-> 
-> The actual backend is "Chardev", CharBackend is the frontend side of
-> it (whatever talks to the backend), let's rename it for readability.
-> 
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 
-Reviewed-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+On 22/10/2025 22:20, Richard Henderson wrote:
+> On 10/22/25 13:59, Nikita Novikov wrote:
+>>>> Fixes: ec03dd972378 ("accel/tcg: Hoist first page lookup above 
+>>>> pointer_wrap")
+>
+> This cannot be true, btw, because ...
+>
+>>>> -        if (mmu_lookup1(cpu, &l->page[1], 0, l->mmu_idx, type, ra)) {
+>>>> +        if (mmu_lookup1(cpu, &l->page[1], l->memop, l->mmu_idx, 
+>>>> type, ra)) {
+>
+> ... this line did not change with that patch.
+My bad, sorry. I suggest it will be better to use  `Related-to`, because 
+actually this patch makes both halves of a split-page access consistent 
+or did I misunderstand you?
+>>>>                uintptr_t index = tlb_index(cpu, l->mmu_idx, addr);
+>>>>                l->page[0].full = 
+>>>> &cpu->neg.tlb.d[l->mmu_idx].fulltlb[index];
+>>>>            }
+>>>
+>>> How is the memop really applicable to the second half of a 
+>>> split-page operation?
+>>>
+>> Because the second half is still part of the same guest memory 
+>> operation. It must obey
+>> the same size, alignment, and atomicity rules. Passing the real memop 
+>> ensures correct
+>> alignment and atomic checks even if the access crosses a page boundary.
+>
+> How?
+>
+> Let's use a concrete example: Access MO_64 | MO_UNALN at 0x1fffd.
+>
+> The first tlb_fill gets to see the start address 0x1fffd, and the 
+> length 3 (and also the memop).
+>
+> The second tlb_fill gets to see the second page address 0x20000 and 
+> the length 5 (but not the memop).
+>
+> Exactly what is the second tlb_fill going to do with 0x20000 and MO_64 
+> | MO_UNALN?
+>
+The guest does a 64-bit access with flags MO_64 | MO_UNALN at address 
+0x1fffd. The first `tlb_fill` handles bytes from 0x1fffd-0x1ffff with 
+length 3, and sees the real `memop`, so it knows the access is unaligned 
+but allowed. The second `tlb_fill` handles bytes 0x20000-0x20004 with 
+length 5. If it gets `memop == 0`, it loses information about the access 
+type, alignment and atomicity. With the real memop it stays consistent 
+with the first half, because it knows this is part of one 64-bit 
+unaligned access, not a separate normal one. For `MO_UNALN` it changes 
+nothing, but for atomic or alignment-restricted cases it prevents the 
+second page from being treated incorrectly as a normal split access.  
+Also it does not raise an alignment fault, and sets the same slow-path 
+flags (ex. `TLB_CHECK_ALIGNED`) and region checks.
+
+I faced with this bug while debugging a case where `memop_size == 1`, 
+because `memop_size(0) == 1`. According to the code it means the second 
+half doesn’t carry any valid access information, but it's not true.
+
+>
+> r~
 
