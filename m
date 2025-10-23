@@ -4,53 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D975CCD193
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Oct 2025 04:49:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA0ECCD193
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Oct 2025 05:00:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBnG7-0005iI-Si; Thu, 23 Oct 2025 00:49:07 -0400
+	id 1vBnQU-0008S9-K0; Thu, 23 Oct 2025 00:59:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nnovikov@NB-7271.syntacore.com>)
- id 1vBehX-0005Mu-PB; Wed, 22 Oct 2025 15:40:52 -0400
-Received: from ppp91-77-168-124.pppoe.mtu-net.ru ([91.77.168.124]
- helo=NB-7271.syntacore.com)
+ (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
+ id 1vBnQQ-0008RJ-V7; Thu, 23 Oct 2025 00:59:47 -0400
+Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nnovikov@NB-7271.syntacore.com>)
- id 1vBehU-0003O2-VE; Wed, 22 Oct 2025 15:40:51 -0400
-Received: from NB-7271.syntacore.com (localhost [127.0.0.1])
- by NB-7271.syntacore.com (8.18.1/8.18.1) with ESMTP id 59MJAiER038149;
- Wed, 22 Oct 2025 22:10:44 +0300
-Received: (from nnovikov@localhost)
- by NB-7271 (8.18.1/8.18.1/Submit) id 59MJ0AOp035115;
- Wed, 22 Oct 2025 22:00:10 +0300
-Date: Wed, 22 Oct 2025 21:59:09 +0300
-From: Nikita Novikov <nnovikov@NB-7271.syntacore.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: n.novikov@syntacore.com, pbonzini@redhat.com, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: Re: [PATCH] accel/tcg: Pass actual memop_size to tlb_fill instead of 0
-Message-ID: <busf3stsde5y7hq7zslr2kfyibp5ve2wrvrrawik3xbfpmsr7f@2nr5m4kdlltn>
-References: <20251022115213.91457-1-n.novikov@syntacore.com>
- <79beaf9a-9558-40e7-a01d-5f80d8931eba@linaro.org>
+ (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
+ id 1vBnQN-0004Cx-T1; Thu, 23 Oct 2025 00:59:46 -0400
+Received: from [133.11.54.205] (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
+ (authenticated bits=0)
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 59N4q3NC011817
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Thu, 23 Oct 2025 13:52:03 +0900 (JST)
+ (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=9xxZpM2nB0o+d7uobfPXc5xWQTeCnn5dD9HEOV+8JfY=; 
+ c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+ h=Message-ID:Date:Subject:To:From;
+ s=rs20250326; t=1761195124; v=1;
+ b=jF3ibRwZ1YpqgeWufdnW0Y13nquI1Pea9esn0iH0zkCtqnmwPs1Eo+EIEzahu4CA
+ WSZw53qbYxw0m3aVhmM+IPEFlo3TK+WItwGjAu0w7UJBltEaTmKC/DBhm09vQrLP
+ dQ60t2nVw4sKFpv0ZPMZgjsDXfh3C2YvmsortOrOECMXVacOfWd1lT1uiVuqJNw2
+ CSo6ZLtKggBnJn9SwpJYLxiv2CdD41GR2cHL3JnOehfoid2t0C2gwIkAicEOk0Z9
+ nLwg0jqOUASUxIa5ejAJzD0x32S4I5/GL0PnYUXui+XlkKiJeSOQBLhxxCFKomD3
+ GRrKSSfXhFwFh2hp75ZadQ==
+Message-ID: <f4547020-0df2-40a7-a625-7628ae36db02@rsg.ci.i.u-tokyo.ac.jp>
+Date: Thu, 23 Oct 2025 13:52:02 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] char: rename CharBackend->CharFrontend
+To: marcandre.lureau@redhat.com, qemu-devel@nongnu.org
+Cc: "Gonglei (Arei)" <arei.gonglei@huawei.com>,
+ Zhenwei Pi <pizhenwei@bytedance.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Stefano Garzarella <sgarzare@redhat.com>, Laurent Vivier
+ <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
+ Stefan Berger <stefanb@linux.vnet.ibm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>, Peter Maydell <peter.maydell@linaro.org>,
+ Igor Mitsyanko <i.mitsyanko@gmail.com>, =?UTF-8?Q?Cl=C3=A9ment_Chigot?=
+ <chigot@adacore.com>, Frederic Konrad <konrad.frederic@yahoo.fr>,
+ Alberto Garcia <berto@igalia.com>, Thomas Huth <huth@tuxfamily.org>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Jason Herne <jjherne@linux.ibm.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Magnus Damm <magnus.damm@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ "Collin L. Walling" <walling@linux.ibm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Helge Deller <deller@gmx.de>, Corey Minyard <minyard@acm.org>,
+ Paul Burton <paulburton@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Antony Pavlov <antonynpavlov@gmail.com>, Joel Stanley <joel@jms.id.au>,
+ Vijai Kumar K <vijai@behindbytes.com>, Samuel Tardieu <sam@rfc1149.net>,
+ Gustavo Romero <gustavo.romero@linaro.org>,
+ Raphael Norwitz <raphael@enfabrica.net>,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ "reviewer:vhost-user-scmi" <mzamazal@redhat.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>,
+ "Dr. David Alan Gilbert" <dave@treblig.org>, Zhang Chen
+ <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>,
+ Jason Wang <jasowang@redhat.com>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Lukas Straub <lukasstraub2@web.de>,
+ "open list:Sharp SL-5500 Co..." <qemu-arm@nongnu.org>,
+ "open list:S390 SCLP-backed..." <qemu-s390x@nongnu.org>,
+ "open list:sPAPR (pseries)" <qemu-ppc@nongnu.org>,
+ "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ "open list:virtiofs" <virtio-fs@lists.linux.dev>,
+ "open list:Rust-related patc..." <qemu-rust@nongnu.org>
+References: <20251022074612.1258413-1-marcandre.lureau@redhat.com>
+Content-Language: en-US
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <20251022074612.1258413-1-marcandre.lureau@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <79beaf9a-9558-40e7-a01d-5f80d8931eba@linaro.org>
-Received-SPF: none client-ip=91.77.168.124;
- envelope-from=nnovikov@NB-7271.syntacore.com; helo=NB-7271.syntacore.com
-X-Spam_score_int: 37
-X-Spam_score: 3.7
-X-Spam_bar: +++
-X-Spam_report: (3.7 / 5.0 requ) BAYES_00=-1.9, DKIM_ADSP_NXDOMAIN=0.9,
- KHOP_HELO_FCRDNS=0.399, NO_DNS_FOR_FROM=0.001, RCVD_IN_PBL=3.335,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=49.212.243.89;
+ envelope-from=odaki@rsg.ci.i.u-tokyo.ac.jp; helo=www3579.sakura.ne.jp
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 23 Oct 2025 00:49:07 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,49 +124,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 22, 2025 at 10:32:31AM -0500, Richard Henderson wrote:
-> On 10/22/25 06:52, Nikita Novikov wrote:
-> > Recent debugging of misaligned access handling on RISC-V revealed that we
-> > always call `tlb_fill` with `memop_size == 0`. This behavior effectively
-> > disables natural alignment checks in `riscv_tlb_fill_align()`, because we
-> > have to fall back from `memop_size` to `size` when computing the alignment bits.
-> > 
-> > With `memop_size == 0`, misaligned cross-page stores end up reported as
-> > `store access fault` (AF, cause=7) instead of the expected
-> > `store page fault` (PF, cause=15), since the “misalign” path triggers before
-> > the second page translation can fault. This breaks misaligned accesses at
-> > page boundaries.
-> > 
-> > After switching to pass the real `l->memop` into `tlb_fill`, the cross-page
-> > faults are no longer mis-classified as AF.
-> > 
-> > Fixes: ec03dd972378 ("accel/tcg: Hoist first page lookup above pointer_wrap")
-> > 
-> > Signed-off-by: Nikita Novikov <n.novikov@syntacore.com>
-> > ---
-> >   accel/tcg/cputlb.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-> > index 631f1fe135..271c061be1 100644
-> > --- a/accel/tcg/cputlb.c
-> > +++ b/accel/tcg/cputlb.c
-> > @@ -1782,7 +1782,7 @@ static bool mmu_lookup(CPUState *cpu, vaddr addr, MemOpIdx oi,
-> >            * If the lookup potentially resized the table, refresh the
-> >            * first CPUTLBEntryFull pointer.
-> >            */
-> > -        if (mmu_lookup1(cpu, &l->page[1], 0, l->mmu_idx, type, ra)) {
-> > +        if (mmu_lookup1(cpu, &l->page[1], l->memop, l->mmu_idx, type, ra)) {
-> >               uintptr_t index = tlb_index(cpu, l->mmu_idx, addr);
-> >               l->page[0].full = &cpu->neg.tlb.d[l->mmu_idx].fulltlb[index];
-> >           }
+On 2025/10/22 16:46, marcandre.lureau@redhat.com wrote:
+> From: Marc-André Lureau <marcandre.lureau@redhat.com>
 > 
-> How is the memop really applicable to the second half of a split-page operation?
+> The actual backend is "Chardev", CharBackend is the frontend side of
+> it (whatever talks to the backend), let's rename it for readability.
 > 
-Because the second half is still part of the same guest memory operation. It must obey
-the same size, alignment, and atomicity rules. Passing the real memop ensures correct
-alignment and atomic checks even if the access crosses a page boundary.
-> 
-> r~
-> 
+> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+
+Reviewed-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 
