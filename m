@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 802A0CCF9E0
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Oct 2025 19:31:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC153CCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Oct 2025 19:32:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vCNUx-0008IY-0h; Fri, 24 Oct 2025 15:30:51 -0400
+	id 1vCNWN-0000l0-IR; Fri, 24 Oct 2025 15:32:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCNUp-0008Hq-Hr
- for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:30:44 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCNWI-0000jR-RO
+ for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:32:14 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCNUn-0001By-5p
- for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:30:43 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-46fcf9f63b6so14629985e9.2
- for <qemu-riscv@nongnu.org>; Fri, 24 Oct 2025 12:30:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCNWG-0001KP-Ss
+ for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:32:14 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-471193a9d9eso27275065e9.2
+ for <qemu-riscv@nongnu.org>; Fri, 24 Oct 2025 12:32:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761334239; x=1761939039; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761334331; x=1761939131; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aGzJrcygtK07BMsaHC12W4FKVVudp6KCMI+Hev9pyzM=;
- b=wNIGNsdagXbgu3xdWqM1kuUbn7q6hGeZ+H3vxXzlIgQoEeoczNwGQpAHIypo0TD4nm
- PsSdo2azHunDYWacHLsDMHwFPm1ZwcLa6nuPQGBy86terGjqxKjNpbjvOpfw0ZvD/gyb
- 7TWng+1RoEcwwuYUVKvXnYyRaeIACqt48CMV5Zpj+w9DXLWknVgjGihJQGvtWL6gx7ki
- wpcg2u1R3extdcnVvJzpUQMN1C/JXEFQ7tkuuYucERiGvmjv1X8CyX9OTT2WAzpwaEXN
- T60yZ/YzxO/DtknqXsXY0gJ0NaDfSgoXYVqiuRLUzggkublN2Kwzu8FRfDKC8m3phuSl
- E6kg==
+ bh=5PQvFv3KYt9affpbRt+SdFadtQ6SLXOOKaJGxhZMFw4=;
+ b=ltc9ljk0XhRbxFnG6VvaG4Vh6EmkAH1iqLpMWLqiSqEx0GOPAcwFs6rE3ZPaWRl/lD
+ iQFISzv2a413k2ZjHpzEI9hK33Nf1Z4l7oXSK8iIuU6QQ7ViQe+g1KKPBDflKI2FWrLW
+ ReKl61948B4D4nzynlcOkB66qKDeIxl6bLsGs36fg0mGJlUbM18WSIga/f6BZCUdJkIx
+ tOfJJFsFojTUzC2lEv4/LGc8EA737llDfU6x1TuQQkQT4Ne6m0UlaEU7bIIBDGjfxTHh
+ ST/98SfZSdlVhAnMJUyXkrFilRiqR12Huj7lYR+aTXFQCRWQEqT8ov+/tMxqpWUjsjjy
+ IP0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761334239; x=1761939039;
+ d=1e100.net; s=20230601; t=1761334331; x=1761939131;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aGzJrcygtK07BMsaHC12W4FKVVudp6KCMI+Hev9pyzM=;
- b=V8XjNGXr30EmhP4KmVNvHItRN/YQ8M4qo/SFI8JD6dIwn3eQnYWCE43SrZA5VgFSlB
- g27+uNL9fDeDSXj2mfA+V5Y2zTTFC2uvUhzdGUdkMj4rMYVghka0nL14wAOsQU+BR5Cp
- Yv4SBSZSDiWp/E9vhM16D7VRxwGMvu01dLYlgrYYCuKPlWaXak6gWGyT1t9+i245S7Em
- gP898sSgBXTSa98yE5TuX7g6aduoZ7FTj8fubuAYbqxgmy3TraIZnhkE2xAJRZkxGXKa
- 73VjFnOmmbqYBL9z5PSOYYVTQAvdh5egaSE80p/RHrU3cOOvFM9YRRf3q9HOizJPNCqy
- UQ8g==
+ bh=5PQvFv3KYt9affpbRt+SdFadtQ6SLXOOKaJGxhZMFw4=;
+ b=Q2czRKE/3fqUjfOhgAlyT6fN+SHiGJqbEe70YPn7OnxjxRXbgcf797RjJJHnqQHgRH
+ lVIRNOquUw6T1EMJz94dLXgKCs/KDPIB35o/gpkLodpmZ8V+HmFK4liZCSeeTlagIEAq
+ DR8kp15hMkm6tnRlBNBfjVJ8OBTxO16njRNLGgjjfQyeGfOZuIHcPbxok9wOhLpv9/Xc
+ wMGT8WWeqQPlWgg59FZ7E3VGzjtpVRgVtMz/+df4+SfrnK8nBFtz2gP5E5cDN5qF9JEz
+ 0bi85BAvmGl4kcMBynStCzkznvuh86TtjHqlr3iU/H7IYHP9K3fAyJ2I+XvYTQphdU02
+ cxEw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWyso6RQvr3sO5zdiadKwRPDWBlf/O2gBRSto8OWegTbNzB3PRmLfiSycJN66wQKh1/RdeJg4LaB5aG@nongnu.org
-X-Gm-Message-State: AOJu0YylvAt/wFVOB35fm37rLJd/+P6aQz2QFOpI6hf5S+mzSP2RcxY9
- wqR7f4XEm+AoPSIoXEaHTZ3cNQArINwbPOThGvWT2y1Ro2o9QEceY+TWj4wgiZhAD5M=
-X-Gm-Gg: ASbGnctQ3xd1NmETN8pP9VWdxNg/FP4kWSsDYGfrpCOj8S8Idb0KBz3zolJWbXW9Gcu
- GPdRq9SlU+yycm5dPn0DtWfnxGOi5XRbT+cYFYVL8gp6EUkBsKmTXl+htSYvHYi8Ecm1mV9FJQs
- 50RK5Pn6sicqWmEu0q0HM/GWIG2I0fpqSBW+C4jVSbxofo2cYXsw3havTPbus1kL8bCxitFlDzd
- LVmcOTYKz0AxbBDkLVAJdkEnJPRtngI51g1EFlT2Tu0x7qRhj3+5T2VsNKpLCXnyggX+3ACoDIT
- soI3ZcauxvWoezOfFh6iqEyZlMiH1u9W9HwEEzavgpFx/HN2prPaagiyrsnAbBRzoN7RMoY2du8
- yF3b+Ids8jyRQI0nJpbfS4eSRPx4Fp+bIWO77CiMIZMVGenxvHvnoK8X8gU9rjqwYVn5NJf96jN
- iYtW+ARPiOOMLs11UWKMJhU9sq7W3cgoowNSGq6ePNOoLIBRzdnNKNkB9GNEMA
-X-Google-Smtp-Source: AGHT+IHeUYsa+S4os0Sq093WpujmYJvXDYDlO0YQqlbbf1owcSqiCMQcX5+5X6h29uWYt8XZBWsQBA==
-X-Received: by 2002:a05:600c:458b:b0:46e:4246:c90d with SMTP id
- 5b1f17b1804b1-471178774bfmr208206745e9.11.1761334238713; 
- Fri, 24 Oct 2025 12:30:38 -0700 (PDT)
+ AJvYcCXoN5BGYlldLEdvO31iykzDytZPa4neK7J+YonJt8YE78bRjMCcjIYkfsKfzoeDZBpxC5Y56ubr62ef@nongnu.org
+X-Gm-Message-State: AOJu0YwQTbcVQBZ2gYwYDYRxGkYmoQXQvLx0i9yTXL0WkByBVI8lQlJQ
+ KschHSpxkDXH8Cj3WHXN4xey0IKDYMt4N5nGJT2N/Q2q7YsYlRQ2Breuon0gmA0Q3T8=
+X-Gm-Gg: ASbGncsdZLqq7ESMPwSnLZcWT8rYAh79DVSllxH4qWboOh0xWCgqcyVyZSxh1+mEVUl
+ FtQv/6wJhhbTG8cAhiw0L/+hY1B5WTmQj1BGYYHwqXYcnhxz4hhPaNSiW8RpPi+DWKPhqvejKD5
+ a5Cjlj0Y4DkP0zv4J1CieW58RYiAEGsc7XyB+wDlAqxsmBp9zxdASuAOFY6EETFA8yRnaWNe8oW
+ zZHVxCKsoX7RX1PikFPmSYk+q7yYGtypAREgCnCWVRDFwbEbmaSIh/fPNgSggkZJZfOA/U5j486
+ FGni5IcY9T+csbGIcjVCOGWhIxogXbuYothxbzRmmcPauTJ2jFWRCsF7zh3RxrThiSqXKGfli4U
+ 7HM8UVZvnh3loiIn66EdSMeLx9L4vZr8nvitMuwm2w4mUo1HzGbMAzfjTRwfI9gJV0zStxlg/aX
+ QZiPpdPXc+YIm3WHjp8OSQOdC94LQ1IX9G4q9p03JJzJhmaXuM3Q==
+X-Google-Smtp-Source: AGHT+IHzBFBxTwcnx5jxUEP6XJQmCf6wUV3hwfL9BoJ/otuH7ZCqfcBQTrLP8ONMEFAiO3sZ94W1hQ==
+X-Received: by 2002:a05:600c:4510:b0:46e:1fb7:a1b3 with SMTP id
+ 5b1f17b1804b1-475d2ec5729mr30808125e9.23.1761334331350; 
+ Fri, 24 Oct 2025 12:32:11 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-475dc0d1fb4sm1082595e9.2.2025.10.24.12.30.37
+ ffacd0b85a97d-429952b79cbsm18173f8f.4.2025.10.24.12.32.10
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 24 Oct 2025 12:30:37 -0700 (PDT)
+ Fri, 24 Oct 2025 12:32:10 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Michael Rolnik <mrolnik@gmail.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH 17/27] hw/avr: Include missing 'system/memory.h' header
-Date: Fri, 24 Oct 2025 21:04:04 +0200
-Message-ID: <20251024190416.8803-18-philmd@linaro.org>
+ Richard Henderson <richard.henderson@linaro.org>,
+ Helge Deller <deller@gmx.de>
+Subject: [PATCH 18/27] hw/input/lassi: Include missing 'system/memory.h' header
+Date: Fri, 24 Oct 2025 21:04:05 +0200
+Message-ID: <20251024190416.8803-19-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251024190416.8803-1-philmd@linaro.org>
 References: <20251024190416.8803-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,65 +107,41 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 "system/memory.h" header is indirectly pulled by "hw/sysbus.h".
 Include it explicitly to avoid when refactoring the latter:
 
-  In file included from ../../hw/misc/avr_power.c:26:
-  include/hw/misc/avr_power.h:40:18: error: field has incomplete type 'MemoryRegion' (aka 'struct MemoryRegion')
-     40 |     MemoryRegion iomem;
+  In file included from ../../hw/input/lasips2.c:29:
+  include/hw/input/lasips2.h:41:18: error: field has incomplete type 'MemoryRegion' (aka 'struct MemoryRegion')
+     41 |     MemoryRegion reg;
         |                  ^
-  In file included from ../../hw/timer/avr_timer16.c:39:
-  include/hw/timer/avr_timer16.h:51:18: error: field has incomplete type 'MemoryRegion' (aka 'struct MemoryRegion')
-     51 |     MemoryRegion iomem;
-        |                  ^
-  In file included from ../../hw/char/avr_usart.c:23:
-  include/hw/char/avr_usart.h:67:18: error: field has incomplete type 'MemoryRegion' (aka 'struct MemoryRegion')
-     67 |     MemoryRegion mmio;
-        |                  ^
-  include/qemu/typedefs.h:68:16: note: forward declaration of 'struct MemoryRegion'
-     68 | typedef struct MemoryRegion MemoryRegion;
-        |                ^
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/char/avr_usart.h    | 1 +
- include/hw/misc/avr_power.h    | 1 +
- include/hw/timer/avr_timer16.h | 1 +
- 3 files changed, 3 insertions(+)
+ include/hw/input/lasips2.h | 1 +
+ include/hw/misc/lasi.h     | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/include/hw/char/avr_usart.h b/include/hw/char/avr_usart.h
-index 0cc599e9b15..2d2fc0669f2 100644
---- a/include/hw/char/avr_usart.h
-+++ b/include/hw/char/avr_usart.h
-@@ -25,6 +25,7 @@
+diff --git a/include/hw/input/lasips2.h b/include/hw/input/lasips2.h
+index 01911c50f9b..3510216effd 100644
+--- a/include/hw/input/lasips2.h
++++ b/include/hw/input/lasips2.h
+@@ -22,6 +22,7 @@
+ #include "exec/hwaddr.h"
  #include "hw/sysbus.h"
- #include "chardev/char-fe.h"
- #include "qom/object.h"
+ #include "hw/input/ps2.h"
 +#include "system/memory.h"
  
- /* Offsets of registers. */
- #define USART_DR   0x06
-diff --git a/include/hw/misc/avr_power.h b/include/hw/misc/avr_power.h
-index 388e421aa7b..a3d3d1de878 100644
---- a/include/hw/misc/avr_power.h
-+++ b/include/hw/misc/avr_power.h
-@@ -27,6 +27,7 @@
- 
- #include "hw/sysbus.h"
- #include "qom/object.h"
+ #define TYPE_LASIPS2_PORT "lasips2-port"
+ OBJECT_DECLARE_TYPE(LASIPS2Port, LASIPS2PortDeviceClass, LASIPS2_PORT)
+diff --git a/include/hw/misc/lasi.h b/include/hw/misc/lasi.h
+index 0bdfb11b501..70c99fc017e 100644
+--- a/include/hw/misc/lasi.h
++++ b/include/hw/misc/lasi.h
+@@ -15,6 +15,7 @@
+ #include "system/address-spaces.h"
+ #include "hw/pci/pci_host.h"
+ #include "hw/boards.h"
 +#include "system/memory.h"
  
- 
- #define TYPE_AVR_MASK "avr-power"
-diff --git a/include/hw/timer/avr_timer16.h b/include/hw/timer/avr_timer16.h
-index a1a032a24dc..c08288d6227 100644
---- a/include/hw/timer/avr_timer16.h
-+++ b/include/hw/timer/avr_timer16.h
-@@ -31,6 +31,7 @@
- #include "hw/sysbus.h"
- #include "qemu/timer.h"
- #include "qom/object.h"
-+#include "system/memory.h"
- 
- enum NextInterrupt {
-     OVERFLOW,
+ #define TYPE_LASI_CHIP "lasi-chip"
+ OBJECT_DECLARE_SIMPLE_TYPE(LasiState, LASI_CHIP)
 -- 
 2.51.0
 
