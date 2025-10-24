@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C291CCD1BE
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Oct 2025 15:37:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC0ECCCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Oct 2025 19:05:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vBxMt-0007QA-H0; Thu, 23 Oct 2025 11:36:48 -0400
+	id 1vCN5M-0000tz-A0; Fri, 24 Oct 2025 15:04:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1vBxMi-0007OP-Gs
- for qemu-riscv@nongnu.org; Thu, 23 Oct 2025 11:36:40 -0400
-Received: from mail-yw1-x112d.google.com ([2607:f8b0:4864:20::112d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCN5K-0000tJ-WA
+ for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:04:23 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1vBxMg-000399-S8
- for qemu-riscv@nongnu.org; Thu, 23 Oct 2025 11:36:36 -0400
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-784966ad073so12407457b3.1
- for <qemu-riscv@nongnu.org>; Thu, 23 Oct 2025 08:36:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCN5I-0004zn-QG
+ for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:04:22 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-47118259fd8so17165975e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 24 Oct 2025 12:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761233792; x=1761838592; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R7Bu0evPT10yGWWc46+/Sxv8lt3PFMq2HvV0YKepJ3o=;
- b=JxzMdtxsN+UnwXuFW+9/nLbE3GSI+l8jx+31nuKlb8qBUoHa55HuCMOW8I4Mz1Q2JY
- 77ylyx/YzCwhY+j+gn1/rupgU5GWFvfijfVY6yb9YgOoLFp8DfSyEEgFTfODuCNpN0cd
- texcGmXtjMzh4K8ZytxaaTqq5/GuRRHobSna/hQyClnASVqsxRuIGyBN365Pu/kQeaQ/
- 9TLL5nYz+sQKt3K2sq7KdFpf45VoptDTrhxXHavGYKi3Ze93If/c/QYSKdsFtiCwPudX
- XTQEZgjQ3WX7cqwtPjm54vYf7oWl0K8x3xbFEA0Sy04KSzKPH96MYn/Z9fflScCNPcmY
- WUJA==
+ d=linaro.org; s=google; t=1761332658; x=1761937458; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DI4urzwiBkpvf6sSaNyHt9E181h3FLTAu5FO96TNJJo=;
+ b=GwMmGgEak/WOwFj9r5E7CxWN8Mc2vMMqVTgBhV1xqatu3SfqmJEhqVCMEXmhb+xGRD
+ eVAF3ALaW1WCHSc5bTXfKhua3hl1aCmKtUpaOGmUAJxelkerh/9Jz0rAddlD8tzJ8FnZ
+ GNTz3300Zx/EFTiAGnmuMO2Gk07wwcuLV20afE6uZnjfAa4yawrKIOusUMhZG0ZA7C+M
+ 7YpSTBpYHS/rXBRr2OiQgKjIbIjxjsJHro0gm3XBRCcMA6NmqQUf+F2pLjXlG7aUBBgP
+ /pf+zeIanUPmd9vpTLeB/efCISt6XOrbI9GyhW2l/XaRJFmI0EUk5871qWBknA6C951Q
+ brHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761233792; x=1761838592;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1761332658; x=1761937458;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=R7Bu0evPT10yGWWc46+/Sxv8lt3PFMq2HvV0YKepJ3o=;
- b=F8DagYjF6u0A9G9pTLHpyjpl56kn7VrmwB/tZMd1G/1+hyCL6o5aYZYbXueq14TGq5
- 4MV6Ug1c/KY78DvKAhLU8TsJa0CZyqc3GvKtXN8Ml2jo7Fzh9hn6jS3vmydu3hO94z9S
- yLcFACEwN+mcG5EjK0HOCCMuUa98SEUQ5lS8q4oAYVG8RSrbGR9Wvaxj8CjQiQ8VevTM
- ghxvB8vPDSQ/YS4HMI984fTMCcUaKeI+IaQvPGXSJeQNyYEeexSRFbl13br4Jqn2SvOf
- mL+S5Ua0cUwfGlB9+GWh2E/dTrkhL0M0WSuYbrLFRfeU1lAFUaciGqYwuL0MBMXS9nbn
- p+6A==
+ bh=DI4urzwiBkpvf6sSaNyHt9E181h3FLTAu5FO96TNJJo=;
+ b=MN2YaKffWhq1zNUwEcHSDR8PK/DQ4U3GgGwXMYH0M1Mg71uoWFN7scTXq/5Ws7CzW0
+ FKYOINysUYV0ffuGBux7tbdD2OGzXwjv9F4O4JIc8b+fcYxuYUfVUY1opp8EgWhi7r0u
+ cIJC2h+xvifiPclP+rpJQ0cfNWqImZBH+HhcMb2AOgrr8rXKU9K1d8xQmxX+HPjOw0xr
+ g4x3+eh0wFjETuGAtG3D50LSPCySNX+enRLZaOZfQnrCJClwJC8mdf5VbomNIYuOhoLB
+ TEv3c8c2u7zvEw1VOX1sEzSjzEdolb1zkPuCr0iiNy778BLO7NPFWx76IBWvqUvwInQo
+ 8dMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhSxstY5R65D2bAzpqV4Aul8703UpFvWQUU5N5BtIADAFxFiYRLL0Dxxt6+nQGfgP/98nR+3VcuhUM@nongnu.org
-X-Gm-Message-State: AOJu0YzTeYy40+7gAI6ggHDezZW1e/WOmvc1R93dg8soJNtR16fXHDKp
- 2TDLSNghbvwn/X619H/o+fa/f7dTQTqwCJ0VcSq6UdH2eylRROPubiOCir1TwUO7oK744iSZzr+
- OaJ6zpWXiJhmXEheMrCJZVeZDMHs/jMl1FEa0aPjOZg==
-X-Gm-Gg: ASbGncvGF+B4R/gy9hLBaWrnAPwgJSQZj8xKuaKzQGobdOVZvWk+sSMXYbg2teImpYe
- HQjloaVaBEypWC2Dpk/Mh98qjofw7v7oDMKIKxYFN/d2W1yy+rE901SlTaZ+S8RH3PofYZ6bTWQ
- QGV7NhtTDiC26/GWM4mP2f1AkTyRR5HL5/VmRNOKHOjzOpEKXRj0Vx6jVpB0XO1HIx2Jx6hGuZN
- mb/WPWXaJxmZeBmvb04Og/6BXsar18OH/vntz1S/MmnObvnPhDmu2BhzMPZgjzc2O+Od2H1
-X-Google-Smtp-Source: AGHT+IG1znZmh00ANSnKnoDmuuju/L1QBXZOYYFNIxsERl38+x0oWodGpZUqwW4HlkqiKRp1fKL9tmQEB4+JCOtGLV8=
-X-Received: by 2002:a05:690c:3605:b0:783:71ee:8977 with SMTP id
- 00721157ae682-78371ee8b09mr229716667b3.11.1761233792347; Thu, 23 Oct 2025
- 08:36:32 -0700 (PDT)
+ AJvYcCXjBea0ZKe6u6shd3PMMJnr6hMEiiSXBE2XcI33PArlUw4HGDgPDK2APpAEZF52jDiGU2P6nwtOIVv9@nongnu.org
+X-Gm-Message-State: AOJu0YxpNrizVm5sVnRkmhn0n+8h4Hf6W+wtgYY0SAudibPGf59etATa
+ AN+x3oubkBVzaeKvTwQv5bu/ZywHRpoTdI1h9xgKZOIlvkZwJNKG4uNU+WaAHn7jPwg=
+X-Gm-Gg: ASbGnctUUo+mWg95lAyhiuhO8FIK1NC0B0HUmoZfc4qh8ietN376aYRH0DzRYQJroaf
+ afmeiuI5FT4b8j8sHd0z0eDcLCQVpKFh6akIXn6ZG9EUtGqQsF9U4V/JwbM64SjTd2W0frsh8tC
+ KGvjN0QZrqf/dXHC3xqcaPVnyHLMIreNrRZfJ8tLkSebmjoc2gKEqTI+yVpQJF8m6ohiByp8Brl
+ yjoi/OjyEOUuGWqboU0MjcK8J6Y9WPWeUT3tIX/7jlcVggcb8YCKixJq3C14tUSvJL7EhI+Ndd0
+ QgNhYOqyKDBXMyV7mtpV9lSf8gdncvSs4PPjSLUky+Eay4kygzAYrjwQdpkrWl4Eq5emTW3zZpS
+ ctPqsdBYSDiwYY6Zl7cUdEbEAV25Co9T4dG8daVKEOViv24/Z/dSxqiWKuHc7HfF8D7WywqEeus
+ UlnrbtUa1OTuLyvVG3Me2yuV/zLACHqyeJgwe8uplZmcOwl+FFHw==
+X-Google-Smtp-Source: AGHT+IHRTgCZhtm+u8RTYICAZZr5sSX1RA/Uh2bvpsX7iZwxYT/r4c1t3Oq+vhjlWWoItp1FMGaGDg==
+X-Received: by 2002:a05:600c:474b:b0:46e:4e6d:79f4 with SMTP id
+ 5b1f17b1804b1-47117877525mr210287255e9.15.1761332658488; 
+ Fri, 24 Oct 2025 12:04:18 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-475caf15416sm105328485e9.10.2025.10.24.12.04.17
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 24 Oct 2025 12:04:17 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-block@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 00/27] hw/sysbus: Spring cleanups (part 1)
+Date: Fri, 24 Oct 2025 21:03:47 +0200
+Message-ID: <20251024190416.8803-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251022110524.483588-1-dbarboza@ventanamicro.com>
- <CAFEAcA-gF4himAj7k03cES2-USbE-xs7f5LZEPQaCqHhDieiEA@mail.gmail.com>
- <06684337-601b-47d3-925f-b5a693aef244@ventanamicro.com>
-In-Reply-To: <06684337-601b-47d3-925f-b5a693aef244@ventanamicro.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 23 Oct 2025 16:36:20 +0100
-X-Gm-Features: AS18NWD43brInKiX4K_0k2Z68WeBtLuCdwqQbOafpyOHu9aPWRRAeJleyIZYHU8
-Message-ID: <CAFEAcA-5wCL7b2Vc_4NXHNUqOn6SsY8+RD0-mZo7rh_jw74BFA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/riscv-qmp-cmds.c: coverity-related fixes
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
- qemu-stable@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112d;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x112d.google.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,37 +99,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 22 Oct 2025 at 13:39, Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
-> On 10/22/25 8:59 AM, Peter Maydell wrote:
-> > g_autofree frees with g_free(), which isn't the right thing for
-> > freeing an array of pointers. To do autofree here we need
-> >
-> >   g_auto(GStrv) reg_name = g_strsplit(...);
-> >
-> > (GStrv is the glib type for gchar**; the headers give it an
-> > auto-free mechanism that calls g_strfreev().)
->
-> I saw some instances of "g_autofree char **" and figured that it was ok to use
-> g_autofree in this case too (just git grepping, didn't dive deeper to figure
-> out context and so on).
+- Constify SysBusDevice argument
+- Add sysbus_has_pio() and sysbus_pio_get_address()
+- Use proper SysBus accessors
+- Include missing 'exec/cpu-common.h' and 'system/memory.h' headers
 
-There might be some lurking bugs here -- it's an easy
-mistake to make. I did a quick audit on the results of
- git grep 'g_autofree.*\*\*'
+Philippe Mathieu-Daudé (27):
+  hw/qdev: Have qdev_get_gpio_out_connector() take const DeviceState arg
+  hw/sysbus: Have various helpers take a const SysBusDevice argument
+  hw/sysbus: Use memory_region_name()
+  hw/i386/microvm: Use proper SysBus accessors
+  hw/timer/hpet: Use proper SysBus accessors
+  hw/acpi/cxl: Use proper SysBus accessors
+  hw/sysbus: Add sysbus_has_pio() and sysbus_pio_get_address()
+  hw/pci-bridge/pci_expander_bridge: Use proper SysBus accessors
+  hw/platform-bus: Include missing 'system/memory.h' header
+  hw/block/pflash: Include missing 'system/memory.h' header
+  hw/misc/unimp: Include missing 'system/memory.h' header
+  hw/misc/empty_slot: Include missing 'system/memory.h' header
+  hw/uefi: Include missing 'system/memory.h' header
+  hw/usb/imx: Include missing 'system/memory.h' header
+  hw/pci/pcihost: Include missing 'system/memory.h' header
+  hw/scsi/esp: Include missing 'system/memory.h' header
+  hw/avr: Include missing 'system/memory.h' header
+  hw/input/lassi: Include missing 'system/memory.h' header
+  hw/tricore: Include missing 'system/memory.h' header
+  hw/int/loongarch: Include missing 'system/memory.h' header
+  hw/rtc/m48t59: Include missing 'system/memory.h' header
+  hw/rtc/sun: Include 'exec/cpu-common.h' and 'system/memory.h' headers
+  hw/xilinx: Include 'exec/cpu-common.h' and 'system/memory.h' headers
+  hw/mips: Include missing 'system/memory.h' header
+  hw/sparc: Include missing 'system/memory.h' header
+  hw/riscv: Include missing 'system/memory.h' header
+  hw/rx: Include missing 'system/memory.h' header
 
-It looks like migration/migration-hmp-cmds.c:hmp_migrate_set_parameter()
-does the wrong thing when it calls g_shell_parse_argv(),
-because that function documents that the vector should
-be freed with g_strfreev().
+ hw/rtc/m48t59-internal.h                  |  2 ++
+ include/hw/char/avr_usart.h               |  1 +
+ include/hw/char/cadence_uart.h            |  1 +
+ include/hw/char/ibex_uart.h               |  1 +
+ include/hw/char/renesas_sci.h             |  1 +
+ include/hw/char/shakti_uart.h             |  1 +
+ include/hw/char/sifive_uart.h             |  1 +
+ include/hw/gpio/sifive_gpio.h             |  1 +
+ include/hw/input/lasips2.h                |  1 +
+ include/hw/intc/loongarch_dintc.h         |  2 +-
+ include/hw/intc/loongarch_extioi_common.h |  1 +
+ include/hw/intc/loongarch_pch_msi.h       |  1 +
+ include/hw/intc/loongarch_pic_common.h    |  1 +
+ include/hw/intc/loongson_ipi_common.h     |  2 ++
+ include/hw/intc/riscv_aclint.h            |  1 +
+ include/hw/intc/riscv_aplic.h             |  1 +
+ include/hw/intc/riscv_imsic.h             |  1 +
+ include/hw/intc/rx_icu.h                  |  1 +
+ include/hw/intc/sifive_plic.h             |  1 +
+ include/hw/misc/avr_power.h               |  1 +
+ include/hw/misc/lasi.h                    |  1 +
+ include/hw/misc/mchp_pfsoc_dmc.h          |  1 +
+ include/hw/misc/mchp_pfsoc_ioscb.h        |  1 +
+ include/hw/misc/mchp_pfsoc_sysreg.h       |  1 +
+ include/hw/misc/mips_cmgcr.h              |  1 +
+ include/hw/misc/mips_itu.h                |  1 +
+ include/hw/misc/sifive_e_aon.h            |  1 +
+ include/hw/misc/sifive_e_prci.h           |  1 +
+ include/hw/misc/sifive_test.h             |  1 +
+ include/hw/misc/sifive_u_otp.h            |  1 +
+ include/hw/misc/sifive_u_prci.h           |  1 +
+ include/hw/misc/unimp.h                   |  1 +
+ include/hw/net/cadence_gem.h              |  1 +
+ include/hw/pci/pci_host.h                 |  1 +
+ include/hw/platform-bus.h                 |  1 +
+ include/hw/qdev-core.h                    |  3 ++-
+ include/hw/riscv/opentitan.h              |  1 +
+ include/hw/riscv/shakti_c.h               |  1 +
+ include/hw/riscv/sifive_e.h               |  1 +
+ include/hw/riscv/xiangshan_kmh.h          |  1 +
+ include/hw/rtc/goldfish_rtc.h             |  1 +
+ include/hw/scsi/esp.h                     |  1 +
+ include/hw/sparc/sparc32_dma.h            |  1 +
+ include/hw/sparc/sun4m_iommu.h            |  1 +
+ include/hw/sparc/sun4u_iommu.h            |  1 +
+ include/hw/ssi/ibex_spi_host.h            |  1 +
+ include/hw/ssi/sifive_spi.h               |  1 +
+ include/hw/sysbus.h                       | 12 +++++++-----
+ include/hw/timer/avr_timer16.h            |  1 +
+ include/hw/timer/cadence_ttc.h            |  1 +
+ include/hw/timer/ibex_timer.h             |  1 +
+ include/hw/timer/renesas_cmt.h            |  1 +
+ include/hw/timer/renesas_tmr.h            |  1 +
+ include/hw/timer/sifive_pwm.h             |  1 +
+ include/hw/tricore/tc27x_soc.h            |  1 +
+ include/hw/tricore/tricore_testdevice.h   |  1 +
+ include/hw/uefi/var-service.h             |  1 +
+ include/hw/usb/imx-usb-phy.h              |  1 +
+ hw/acpi/cxl.c                             |  2 +-
+ hw/block/pflash_cfi01.c                   |  1 +
+ hw/block/pflash_cfi02.c                   |  1 +
+ hw/char/xilinx_uartlite.c                 |  2 ++
+ hw/core/gpio.c                            |  3 ++-
+ hw/core/sysbus.c                          | 23 +++++++++++++++++------
+ hw/i386/microvm-dt.c                      |  6 ++++--
+ hw/intc/xilinx_intc.c                     |  2 ++
+ hw/misc/empty_slot.c                      |  1 +
+ hw/net/xilinx_axienet.c                   |  2 ++
+ hw/pci-bridge/pci_expander_bridge.c       | 12 ++++++------
+ hw/rtc/sun4v-rtc.c                        |  2 ++
+ hw/ssi/xilinx_spi.c                       |  2 ++
+ hw/timer/hpet.c                           |  3 ++-
+ hw/timer/xilinx_timer.c                   |  2 ++
+ 73 files changed, 114 insertions(+), 24 deletions(-)
 
-All the others are OK, because the elements of the
-array are either manually dereffed or else remain
-the ownership of something else and shouldn't be freed.
+-- 
+2.51.0
 
-The migration one is a recent addition so I'll follow
-up to the patch where it got added to the codebase.
-
-thanks
--- PMM
 
