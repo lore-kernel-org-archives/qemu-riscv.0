@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64E9FCCF9E0
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Oct 2025 19:26:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45D31CCD1BF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Oct 2025 19:27:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vCNQM-0005B0-V7; Fri, 24 Oct 2025 15:26:06 -0400
+	id 1vCNRp-00060c-08; Fri, 24 Oct 2025 15:27:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCNQM-0005AX-2q
- for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:26:06 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCNRn-00060Q-Ox
+ for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:27:35 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCNQI-0000fk-5Q
- for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:26:04 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-47117f92e32so22778075e9.1
- for <qemu-riscv@nongnu.org>; Fri, 24 Oct 2025 12:26:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vCNRm-0000kM-3s
+ for qemu-riscv@nongnu.org; Fri, 24 Oct 2025 15:27:35 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-475dbb524e4so621295e9.2
+ for <qemu-riscv@nongnu.org>; Fri, 24 Oct 2025 12:27:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761333960; x=1761938760; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761334052; x=1761938852; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GwqgehZVsbFB79GaS98pbRrXCd0QXF8i259SKWhblxM=;
- b=XYRepmdlGkijcOWBIfqpPxWxLb12s/vIWQPLqKDdKaqe2ZjZa2L6yuAutIpItVwap4
- 1iuCRgAjSwrSoguNJVwUi7CbovCLZJmKPMKFb6XeHtfVf/eFw0BE94eLsFQqNWxGP+k3
- hdYFTcrrlNzoaJVJO9SsCNi1gl0Lvd/RbxVMUuTjhNAihIhewRVfN+CNytnHwWM3oVQV
- 9O46uP2BX7FEJiOy0Jd4Jt7Wjy6bnRLpBCagxS34LHH3ZxFqzr2pQpvqLQMOa6dlI6PA
- B9XMW+9EProQ0IXJBdyP7H5f6zSpXbpAyv9OIzM5s1zgHY0A2aJTfW2uYLQndsELIxTb
- qEQw==
+ bh=BRr6s/NgJvS1YxYxcoI/3ZRoDWUxn4NQSax9XkT8Jh0=;
+ b=yr68Feu6nxvOjRVtK+m88hS3PWu+sbnJXzK6hQrmOGYsmkh38g3HPQhOH0uGF1zWxV
+ cP1oNmChZzhrcZL2/rcir48SGaG2iSYUC8dv7RaI+FYeE74zPBDe+s1jQnN7ub3KU1VR
+ 2vb9a29r56xb5xx3/y2Bykxfnb/Eg+oK6mB/uEKbzpB9XYTIh9cUrrE6m2rsYu3RV9RO
+ szzcg3ghtUQJ5XkGG5hU9LArtXXqAn4azNMarsOrRV+WNK1lQBxeaPYttGnWRq/GRMUK
+ HtaSdQN3ncq332Div7iIq2t0vVg9B24GiZIygYgObVC4EnU9AuPnTEH0is8iaqoKSWkc
+ OjUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761333960; x=1761938760;
+ d=1e100.net; s=20230601; t=1761334052; x=1761938852;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GwqgehZVsbFB79GaS98pbRrXCd0QXF8i259SKWhblxM=;
- b=GBaxm7a2xdvgjiz893wJ4bYI8iK85EVcllsFrzLaXkRxWn6qxvvSSQT+hApQCP+lJ0
- zM+2nP7PEZJYbscNUmtBvCzN09au9jCaxymcqviQWoHAN7UC/uIFOdNK9V88fgJq9/kg
- V00Uu0qpJeE2FPOoWgt2a1Rc4qctqd200CGNoZQxHg9Fp1fEuPe5fUsaxsEsolhxl0un
- I4AUtdzzSIhOhi2MBGwgMKgKtLcGY9mp2pXLyXC1l7mzKPN9WY+hr2OE3n5sZ0HdVOdr
- ZgFo01RR8ikVi8jo8oHWLrg1XD0zJA+nlxNEEfQWNK5a08mal6oDgzQFZze3R8Ms8a/C
- uhtw==
+ bh=BRr6s/NgJvS1YxYxcoI/3ZRoDWUxn4NQSax9XkT8Jh0=;
+ b=LA472I24yc2IdmhbpIfuz142CfDz50zemAmf0p+AmSgEUgfaMSvnPu/L5nQEV2qTcG
+ +ueriO3qxo9pVGepTvCJuUd2ucWSvGxCaeM+0+LSVGaJEkIpZ/ETwoHPr3H8D95xoIYR
+ WY/jfDu1MxhOFP3rvE6hn1oXHoSyy0tfqcL8atlS238uNsxwQhESqKapO0zBW31Zij/p
+ 5VO7Q6xol2BkJj93d88f5klS/wlXzCC02SAqfYFd+JSinRTOYinEMZ2edrFvs5VZlnYN
+ EcpvPOZDQ233UP7RrrVO41nPM8+ejxrDGiBcqiXLP6S+/73+9fGYfbGtUrfn0Fc2mx+j
+ iKEg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXo+vUCK83mIrExF4f3xyY7+NCBDRswjOm7AE4VBrImcXOCM8GbP70hJ9d4O+qH1q14EJroioWdn+lW@nongnu.org
-X-Gm-Message-State: AOJu0YwFE8YdoGn5ZdVhB4wK/oD/hluCXPfjNrjGALxB52iIv2eEzag1
- Kmgq1v+WPXhRgs6oMwoyK588UgjX+q9vKYD1/pVR05PC662mXSXmDN2XMS6wxCMs2ks=
-X-Gm-Gg: ASbGncu6iVDjl8kIVmIcmkffa/oiIjNOkxb2fBSPj4Jk5uwOgemhENiwoG60Wa01PSm
- Zpu1ZxV0PmVmklcNe091QkEHvfzDjcAlburHNKl62ZKeaguu8SnW4C4Bq9kugQz3Jc0AgwUG2MC
- vjuPgEsdkoFwikqwdyGVV+WM959uiQLKtSX1l8K0KyW3pqgIbhWf9/sVR46QIV3BSv1uW4E2s0P
- x5z3lukhtf+T/NeMYcsbXJwjFRnz0DNQltPVyc0lDVXpLpK4i9mH8Oq7gZY/zuIgZsw9uQZJMxk
- q7DOUtDdObdLNIHy4yprj5GdaeQUdVkHzVJBqGGnjDBBT5VOo9c+5G1AskpNow7wjgPJDUJ3Jkh
- l3ZS4bmX8FAlxAooXvQGNPuchC/R8T8YfHH59diqoA7vRJlBRoK9GK1Tv5+cHUH45ltwOv7A49B
- 8JU67Ogs5VAxDYRbSF6VMaAnTyTOfkkazvRI53GNzgO30QGn+0d/+TPjgp9EYd
-X-Google-Smtp-Source: AGHT+IFv2AKaZqiIcY9hzI5VLODEXV7jQcDdGTX1gQrQKLDL7Dwnu/U9sRqTvNe4mwY4DfrAuB5tAQ==
-X-Received: by 2002:a05:600c:3e07:b0:471:13fc:e356 with SMTP id
- 5b1f17b1804b1-471178760f8mr225087775e9.3.1761333960082; 
- Fri, 24 Oct 2025 12:26:00 -0700 (PDT)
+ AJvYcCVHS82kI6WEWU8tHhoGamvjwaBqtkOABalnlqRyD3OSe6CqCDz1ve964IHm7NsB6sbRFpxTPiyzhMaA@nongnu.org
+X-Gm-Message-State: AOJu0YxF7+IUa2VX2bKcgWThgXXmidsBU6eTsZWQ5h3jwq32snosixsO
+ UjcE8GagDdzQV3Pjorsq7TX8tCveYwPbOxLeqRhdoRTf9cVopSu4knLSSSAqRqj9U/1nIRJ3WXs
+ ogEksym4=
+X-Gm-Gg: ASbGncsU/STKSSg5+pAQbRnOR+aocH73fg2FP0m9nDpHvjQXvFUxI2zKMkBFRP/uRvp
+ N8uniw1/y1Kr+A+gll/TUgydoDHdExxOz+7i5NTHvOwZHsFkBxY3wZ5QYMyq4dlVzntxuZGC8cG
+ n/0CJyACcjX5lgjXlGmJlBonfStLt0jhqDyF2TQ2wdNlHXk9CSWJMjUg7JQU4zx45hGVJoaEJzX
+ I1lJL0jU0hPUqY6gpwHiWFd/5AjjUCW1Ziox6bMc2RxHEsmD0E2GKqcgs6z1tr+PEvz/gm2Y3pG
+ XOFqOQuShEAHI5tF2PPAmvOd635E2BD3ItlWA7IuVYXZz2m8oxpSghADJ2Wfp+QJWyiBp/7rpNh
+ 4mjOwO2oAYO6LVkM4ZcUj2WezKvdG0+c9enwcgvifzTMn7D02D2m9u/A/cE8FqbxM0rQje/DDlD
+ nLmrvM63HBMJWEjpraMKNPYH9OCkSz0DFgaj2XcKW4403Br63+aw==
+X-Google-Smtp-Source: AGHT+IEJH9HIK6kSBuDnnvRqluhCJafija2xTj0gjgv2ujNy5AGIoNYwoO1veDzcJF6EF7ylgaCN8w==
+X-Received: by 2002:a05:600d:4392:b0:475:d8f3:71c1 with SMTP id
+ 5b1f17b1804b1-475d8f37463mr11574525e9.27.1761334052556; 
+ Fri, 24 Oct 2025 12:27:32 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429930e35casm1914582f8f.30.2025.10.24.12.25.58
+ 5b1f17b1804b1-475c43900e1sm195951725e9.17.2025.10.24.12.27.31
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 24 Oct 2025 12:25:59 -0700 (PDT)
+ Fri, 24 Oct 2025 12:27:31 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jean-Christophe Dubois <jcd@tribudubois.net>
-Subject: [PATCH 14/27] hw/usb/imx: Include missing 'system/memory.h' header
-Date: Fri, 24 Oct 2025 21:04:01 +0200
-Message-ID: <20251024190416.8803-15-philmd@linaro.org>
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Subject: [PATCH 15/27] hw/pci/pcihost: Include missing 'system/memory.h' header
+Date: Fri, 24 Oct 2025 21:04:02 +0200
+Message-ID: <20251024190416.8803-16-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251024190416.8803-1-philmd@linaro.org>
 References: <20251024190416.8803-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,27 +108,27 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 "system/memory.h" header is indirectly pulled by "hw/sysbus.h".
 Include it explicitly to avoid when refactoring the latter:
 
-  include/hw/usb/imx-usb-phy.h:49:18: error: field has incomplete type 'MemoryRegion' (aka 'struct MemoryRegion')
-     49 |     MemoryRegion iomem;
+  include/hw/pci/pci_host.h:42:18: error: field has incomplete type 'MemoryRegion' (aka 'struct MemoryRegion')
+     42 |     MemoryRegion conf_mem;
         |                  ^
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/usb/imx-usb-phy.h | 1 +
+ include/hw/pci/pci_host.h | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/include/hw/usb/imx-usb-phy.h b/include/hw/usb/imx-usb-phy.h
-index d1e867b77a3..a267c03c7e1 100644
---- a/include/hw/usb/imx-usb-phy.h
-+++ b/include/hw/usb/imx-usb-phy.h
-@@ -4,6 +4,7 @@
- #include "hw/sysbus.h"
- #include "qemu/bitops.h"
- #include "qom/object.h"
-+#include "system/memory.h"
+diff --git a/include/hw/pci/pci_host.h b/include/hw/pci/pci_host.h
+index 954dd446fa4..d06d64f6cad 100644
+--- a/include/hw/pci/pci_host.h
++++ b/include/hw/pci/pci_host.h
+@@ -29,6 +29,7 @@
+ #define PCI_HOST_H
  
- enum IMXUsbPhyRegisters {
-     USBPHY_PWD,
+ #include "hw/sysbus.h"
++#include "system/memory.h"
+ #include "qom/object.h"
+ 
+ #define PCI_HOST_BYPASS_IOMMU "bypass-iommu"
 -- 
 2.51.0
 
