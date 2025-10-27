@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8193CCF9E0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:19:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A730CCF9EA
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:19:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDL9O-0005lT-2r; Mon, 27 Oct 2025 07:12:34 -0400
+	id 1vDL9X-0006B3-AC; Mon, 27 Oct 2025 07:12:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL9D-0005JM-B9
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:12:23 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ id 1vDL9K-0005iU-Mt
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:12:31 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL94-0007aT-5Z
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:12:20 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-63c489f1e6cso7228065a12.1
- for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:12:12 -0700 (PDT)
+ id 1vDL98-0007c2-IV
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:12:29 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-63bea08a326so6450067a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:12:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761563530; x=1762168330; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761563534; x=1762168334; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3K5oRo7LWMzZl+QpfA7sUsVfS53Gw1PvvtIAKjntjao=;
- b=gXgWuVMU/FI2ra3vVJZPW5fa5VnBGpIDFbMV/o191w87/CZ4MObZHSSpHmPBRCAKDo
- uA2MINhFLbIa+g6hUs3qFC8g85f9QBhDZqQEU0PO9G3IBMqDY/xL6kwcOLXsIAlFDGCj
- qHe5frxXa7Q+HHqdyfGTtloMBNOKOeELhRxbJmylO/lNirFtk3C7q+uXXn6SOPwRyoB5
- jWKdpoMQ5DWiACPKcLd1AAINNzPzYlnnOMZEHniCEmK3Rak6qGILODiOfbZ3whYik40t
- hAAZr2mjNO9D9InGATr1ENUeLiyAfmj1CvKuK4ph8o5YwPgpj+MbyGS4DGcGSBOtAgSy
- CVOw==
+ bh=MOIWat0zdvoLqu/dm2Cji7uUG0JRvbRh67vkFVnoxR0=;
+ b=iW9VegSAwyykgu1vq5W01FUJ+YhkX1BGgNjBs5vO+zMsZ8rdB22gmk5TSYHQKl6T/f
+ eQCsfRpQ3j7FDGy5IE9SCKTCDEHagDVfOZ5VqrGIn3YbMaruOIqv9zSZ4BzXsXZnNljt
+ WBOwU1O7agn7NLuOZkOcrknciSyHMIP9thIv8mrO9uKrgI8BWRbD47L83bJ/e/gdMlJE
+ 8U6CfdNp4PRMAKcsbpkV3HMLFkJRMJ+X3FD33Tn/QeIP1QpCWM7DQID1Ronhj6FqV/2S
+ SsVu4PR1BPNJBF//UxJic9HKvzb7XsrLw4KAm4RNX2Tn9xF81x487ICYlV8KH12IrIZh
+ 5ggQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761563530; x=1762168330;
+ d=1e100.net; s=20230601; t=1761563534; x=1762168334;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3K5oRo7LWMzZl+QpfA7sUsVfS53Gw1PvvtIAKjntjao=;
- b=Q1MXDQcZFGK3z15XeVbE1ImCi5aiCnm+PQgR5E6SPnoNERPS7exKxZZJVPeDGCd02O
- Dsk8zbSpnOLAj7c5Sxm9rVqdheDjK5qoYDqkyKDscClwRJRK8JU0qMqjpPgDuosdYsnN
- 25fORE8+FxYq+C9eyMo+DUftw/+V5nGjuhktPYhmJdQXnS7zi7JhTs7uQeWgb1dPaiRL
- cv0tWA9UgsL2rgnffVpzmQLFR1mga/pvMAKX7xcSxbXRsltR89AeAlipcLtgv7odVfGc
- LqSBcDyKUUpCHwJ6YV2ry9SAY6bVY++edUzFDqSv7LETkQYPkPvzzEBSEhOjWp2W02Yh
- RqzA==
+ bh=MOIWat0zdvoLqu/dm2Cji7uUG0JRvbRh67vkFVnoxR0=;
+ b=abUuak85oFDHLViuuhOmSvC1mDyhw3Zscwj8XlvGldjl2xhp3/4FVMKmolK7SIZy6g
+ +WeqVNAoqS9LSC23/bRJspB733nXdjFTtOcWDTpIlenIPZOnvRksmrtgksnI/wlz0S5F
+ cSsEyC+JZynmiD/zXHsKzfzB7G56zZxpk9XnHl9XQcgokg3oksgIBV6o9AisUazO6rF8
+ IquSVckmCrSRVN/s9t9eEbSXG5RyeQG8I/S8nCqhvZHS3Ddu+lPMagbmJSl3ViYRtCYr
+ HYmhfCZ06UVagZawb7bVIcix9DE+2G9SkitWqWslUYl1lX8dY0YrsAiuxFv7lIdCZjOp
+ 0F+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVFU3rgnJILJ+COvj2iXvr3G05/Gr4IGFQ6H/DdGkvu3blhsUwNF7Yo3noZFm4WhPFdoc2iH6CNEkfj@nongnu.org
-X-Gm-Message-State: AOJu0YxyYH/FPLTpdqPGmk+VPpHmfAHN085NzLXI6iTgEYkBUypPE7Em
- nLRHYvKDvso25LUvXd3zrVzOqOXrSsqTnpHhgdUWpFgvf46fqkuQtkPc6WRF5z05wVI=
-X-Gm-Gg: ASbGnctJnIYISavC9aVKo9eDYs/VwjNHK4ZhdvVQ/twDoxQB4+hI5UBr3pVn1MpK7Vn
- vEd4n/cpztroxDKaHnUyBLOJT8M/vsPf2WmDwiAC73nTaOEqU1WLDT6P/jhMgCgJgZEu2V+JDvP
- giH9y0T2AirWVSsD11cRtQdJDofyMSmZGgqkg4UvcuZaNGJLRgl7LerMvg/B5QdBg84DC6Th6KM
- S5x4y9vbbi+2Lx3FXDzljj0ebsyLaRKyHdq6Rx+3sKQe732ZfxQef8IIrAahsyZVdmMR1pFD8BQ
- 3TBiOQL9UhoXqLygFEh1hy1Z8xi7WqWrdFTGfqzfgNAaam2GAeYbnMXmBUOYb1UUjzPOva3k5BJ
- Wk/ms9MnORGiTs7K6eUXvJkh5M1EXOk9TtYUi27HIARNktvXYNYef8Sn7KV/Tv2E2WfJNEC3iI4
- sMrKnF5ovRTtw=
-X-Google-Smtp-Source: AGHT+IGRNtHaeBs6dkf1tkgtMQn/OMS4FTT0K2dUS+olDng6buVSaegQ/gjnJk3ecwVpMDLXGGR0GQ==
-X-Received: by 2002:a05:6402:51cb:b0:62d:6601:a6cf with SMTP id
- 4fb4d7f45d1cf-63e5eb18e5cmr10018586a12.9.1761563530082; 
- Mon, 27 Oct 2025 04:12:10 -0700 (PDT)
+ AJvYcCXfPZQdrRMcg7nxYaamqcsJR0/7TYOQmrj9yF9o5yIlhoNAI9QKrmyaP2SEwnbIziZCE2Ryd6ge1Aw2@nongnu.org
+X-Gm-Message-State: AOJu0Yy6ahdNE7ph33DyTNoWasBOhCPWTgH8SasU5IDdIIfCT/FZ8cRF
+ hb2h3I5GzIzWhV+OP5vkSf6EvG7iEgXHv42DS0zg0y+qcpjgIZkcP3DqCO6+Ah7/Dxo=
+X-Gm-Gg: ASbGncs3RryUh49Te9zar9rkJDM2S5/LhpYDwkhWnD+jHf545M5mCchzrQE4Ez3Z06V
+ SJ6YPHX/W1a5d/60lC33iD0wrOiW3IIZ8IeXCaryJ++57Qih1IKJVk+iJRv9yAQGdq4KZ1zt7By
+ MEFzhWm7veGBbM0b8nWJQalARW0Am8ufkH7i/XLLEjV/ZEcDKJw0hMoJMQxo198q1qi5R0ckOp+
+ Gkcgn3+5DD5uho/Im1oEa3KsUYd9geBxl4PgES9lepjOHcHomJHzeSLf88alYCycfj7BKfn6IXc
+ D9yjn/wgzuuvZ+BcvnO+lroyFb9Nw7cFfq3EsYVNwxusvanWtckvB+dch7p4qaccvMGdhC9nsdv
+ vUBNRVg/UtrsrIbjS+E0+XbP4xRYAAsnTdnxL0SyGuTbbanLZpVhEXWvyYmebGxBgdAyzLyDUwN
+ yHZWmZzCmsNSQ=
+X-Google-Smtp-Source: AGHT+IG7xohgDbdCZpEaQql0WKu05/9DRCJ7c6eaYimOVb8vqucvzuXNIHI9wIYvrcQfxrfUbcLyJw==
+X-Received: by 2002:a05:6402:4504:b0:634:ab34:ed40 with SMTP id
+ 4fb4d7f45d1cf-63c1f580cf2mr34888236a12.0.1761563533781; 
+ Mon, 27 Oct 2025 04:12:13 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-63e7ef95cb9sm6162656a12.17.2025.10.27.04.12.08
+ 4fb4d7f45d1cf-63e7ef95cb9sm6162733a12.17.2025.10.27.04.12.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 04:12:08 -0700 (PDT)
+ Mon, 27 Oct 2025 04:12:12 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 2C36161528;
- Mon, 27 Oct 2025 11:03:47 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id BC74960CB8;
+ Mon, 27 Oct 2025 11:03:45 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -96,25 +96,25 @@ Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Michael Rolnik <mrolnik@gmail.com>,
  Song Gao <gaosong@loongson.cn>, qemu-riscv@nongnu.org,
- Aleksandar Rikalo <arikalo@gmail.com>
-Subject: [PATCH 32/35] plugins/core: add missing QEMU_DISABLE_CFI annotations
-Date: Mon, 27 Oct 2025 11:03:39 +0000
-Message-ID: <20251027110344.2289945-33-alex.bennee@linaro.org>
+ Aleksandar Rikalo <arikalo@gmail.com>, Julian Ganz <neither@nut.email>
+Subject: [PATCH 18/35] target/microblaze: call plugin trap callbacks
+Date: Mon, 27 Oct 2025 11:03:25 +0000
+Message-ID: <20251027110344.2289945-19-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251027110344.2289945-1-alex.bennee@linaro.org>
 References: <20251027110344.2289945-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x535.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,48 +130,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Most of the memory callbacks come directly from the generated code
-however we have do have a a direct from C callback for the slow-path
-and memory helpers.
+From: Julian Ganz <neither@nut.email>
 
-There is also a reset callback that calls out to plugins.
+We recently introduced API for registering callbacks for trap related
+events as well as the corresponding hook functions. Due to differences
+between architectures, the latter need to be called from target specific
+code.
 
-Like the other plugin points we need to disable CFI as we are making
-function calls to dynamically linked libraries.
+This change places the hook for MicroBlaze targets. This architecture
+has one special "exception" for interrupts and no host calls.
 
-Fixes: https://gitlab.com/qemu-project/qemu/-/issues/3175
-Reported-by: Peter Maydell <peter.maydell@linaro.org>
+Signed-off-by: Julian Ganz <neither@nut.email>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- plugins/core.c   | 1 +
- plugins/loader.c | 1 +
- 2 files changed, 2 insertions(+)
+ target/microblaze/helper.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/plugins/core.c b/plugins/core.c
-index 35a252d2729..8f8bc7219c2 100644
---- a/plugins/core.c
-+++ b/plugins/core.c
-@@ -668,6 +668,7 @@ void exec_inline_op(enum plugin_dyn_cb_type type,
-     }
+diff --git a/target/microblaze/helper.c b/target/microblaze/helper.c
+index cf577a72268..a1857b72172 100644
+--- a/target/microblaze/helper.c
++++ b/target/microblaze/helper.c
+@@ -27,6 +27,7 @@
+ #include "qemu/host-utils.h"
+ #include "exec/log.h"
+ #include "exec/helper-proto.h"
++#include "qemu/plugin.h"
+ 
+ 
+ G_NORETURN
+@@ -35,6 +36,7 @@ static void mb_unaligned_access_internal(CPUState *cs, uint64_t addr,
+ {
+     CPUMBState *env = cpu_env(cs);
+     uint32_t esr, iflags;
++    uint64_t last_pc = env->pc;
+ 
+     /* Recover the pc and iflags from the corresponding insn_start.  */
+     cpu_restore_state(cs, retaddr);
+@@ -54,6 +56,7 @@ static void mb_unaligned_access_internal(CPUState *cs, uint64_t addr,
+     env->ear = addr;
+     env->esr = esr;
+     cs->exception_index = EXCP_HW_EXCP;
++    qemu_plugin_vcpu_exception_cb(cs, last_pc);
+     cpu_loop_exit(cs);
  }
  
-+QEMU_DISABLE_CFI
- void qemu_plugin_vcpu_mem_cb(CPUState *cpu, uint64_t vaddr,
-                              uint64_t value_low,
-                              uint64_t value_high,
-diff --git a/plugins/loader.c b/plugins/loader.c
-index ba10ebac993..0dbe7bea263 100644
---- a/plugins/loader.c
-+++ b/plugins/loader.c
-@@ -318,6 +318,7 @@ struct qemu_plugin_reset_data {
-     bool reset;
- };
+@@ -152,6 +155,7 @@ void mb_cpu_do_interrupt(CPUState *cs)
+     CPUMBState *env = &cpu->env;
+     uint32_t t, msr = mb_cpu_read_msr(env);
+     bool set_esr;
++    uint64_t last_pc = env->pc;
  
-+QEMU_DISABLE_CFI
- static void plugin_reset_destroy__locked(struct qemu_plugin_reset_data *data)
- {
-     struct qemu_plugin_ctx *ctx = data->ctx;
+     /* IMM flag cannot propagate across a branch and into the dslot.  */
+     assert((env->iflags & (D_FLAG | IMM_FLAG)) != (D_FLAG | IMM_FLAG));
+@@ -256,6 +260,12 @@ void mb_cpu_do_interrupt(CPUState *cs)
+     env->res_addr = RES_ADDR_NONE;
+     env->iflags = 0;
+ 
++    if (cs->exception_index == EXCP_IRQ) {
++        qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
++    } else {
++        qemu_plugin_vcpu_exception_cb(cs, last_pc);
++    }
++
+     if (!set_esr) {
+         qemu_log_mask(CPU_LOG_INT,
+                       "         to pc=%08x msr=%08x\n", env->pc, msr);
 -- 
 2.47.3
 
