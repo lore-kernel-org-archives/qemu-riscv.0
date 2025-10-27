@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C83F4CCF9EA
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:07:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72046CCF9EA
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:07:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDL1z-00010b-5y; Mon, 27 Oct 2025 07:04:55 -0400
+	id 1vDL2N-0001dY-UT; Mon, 27 Oct 2025 07:05:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL1O-0000cy-Un
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:04:19 -0400
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ id 1vDL2M-0001cE-NM
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:18 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL1I-0005i4-8u
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:04:15 -0400
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b6d855ca585so469894566b.0
- for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:04:03 -0700 (PDT)
+ id 1vDL1a-0005iF-KL
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:18 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b6d53684cfdso1009262066b.0
+ for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:04:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761563041; x=1762167841; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761563042; x=1762167842; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UQ3rv8bxHo1Z+FZ1pDBdGd57of56T+KuUG/sJxnyepk=;
- b=E8QbNApzRX87R78v1piAbPnvtoTxUKUGfY8RstoqmhbHAMq7zG4Y7GWcK5BXww0wBV
- u2m1G7AMGjM+Qd+TWeYyFDNHLyK9r63fH5ia3NoLkxpFs60ugkHqcy9Eh4Z74tcGtjdw
- 06qClOnqQMXIbvxN7qr599xGW8DP5N6x0ftSTJV+oMmTeUfWc74XjdOaf5+uwWFsSJln
- NXKqTanJ8MnCABoIQpY043+dZD1JRc/qPtO2NiU+dccz3P5xvGKoNTmiWyOM8IGrnSp4
- KqZb4OMfMNb2PZfT9MPThVMaObS2eUU06XXZCIwoeTKSs6cDw+SVhxa3hvQgUCEnkDm/
- q++A==
+ bh=67CkZCuN3cp9w2dJxnK8m/N1W6WVM4gtmx6Huv90J+s=;
+ b=gmvpzK1uGmljiKgapt1i9oSAA7nescFn9+c9lKqBpYUBAzUOok8MGdGRa1CjKbCOqw
+ ahwUUqU5Qr8l+6gN6xo2wp1z72q0q2px3E3iG53LBuqXg+fZZkfwXN4J0IXOW8nBzaWS
+ sYp+jIiTuA4OpxtWqZnFxrYU8ee3rH1BeTZI+Rfyw8Twy1AypFAE+zB5y5WcSQxEIP3/
+ eQnaoIg0rAX/3IoozilZiEE6DgyT6WIfk8mafwP2t5DeJLARcW9Z9Jfs9VatjP2ztZCw
+ ihE081alPpzSGQIi0ewvYUHULhHvBc7yuZ46jkmjWdrW61vYLf8E7wAGnJ+RDruDpebk
+ KJWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761563041; x=1762167841;
+ d=1e100.net; s=20230601; t=1761563042; x=1762167842;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UQ3rv8bxHo1Z+FZ1pDBdGd57of56T+KuUG/sJxnyepk=;
- b=WpmBSMdxZCDwtF12Zs75o9e72t0RmIlE6UyHmdGUgEE6SqbpKE4dq3Oh460N23Jymz
- 2wvpUVLvA4p/oCj3cuMUrkvYAYYdIapPzCxUKD9TAeBKsaaPxRn0hSbvrjQBCRh96DuA
- rP1cnc7PzWO38xHytdARWOcxpB1mQEzpggOm9jOvHXuqkL2/ljcGH6SqjRyje+I22Q0q
- gBM4kazKONGn0Sjgl00hfu/A9LmZGXOQhPlJUax8EB4gAwUOTk9D3n1kiNYfOSOZSJRw
- e8zZo0SskgtTRx/BFz0l2AMy7g94LpSic99o7xcEvfji1Lnd584sJU5iecwodDCIhd1N
- xGew==
+ bh=67CkZCuN3cp9w2dJxnK8m/N1W6WVM4gtmx6Huv90J+s=;
+ b=njmwdQF/rxQ6wDddmOutGZJnQ0j9V2vB45mAFDZEORo0NtxB0scHEO/hLgIwZUVD6z
+ g52zcGYdTOzwqUR2cl6RCEuq6PlSYlh71uxGlf4CdHj3ADZGl0GIrRkU2I7Mfoxm39e8
+ ffnMipQ5lCm7u5S1iq6NVRsh83/0ektYQKZ7qtl1ZO8FdVfiWOPuNK8N6rhLbovOh2t7
+ 29YTAuaKUi4ZScsPWaQhpIk8yBZM2RFW1L8J5EmsJFNJSO6eqjv60RuWXngj2ebhYs+n
+ hEYPF9OCOrka+jSv8KkeUUr1Y8XjCjMoD3xKGidkuA1gUSz0AAewa7D+zQLvf3XwDbSE
+ AgIQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvl0yI6wBT/AcCPbxYAX5+HGBuy0LavyJLbrqc9PtbYzKC6hCycG0o5xbAiPh+fxLn8JIMljUy9DMw@nongnu.org
-X-Gm-Message-State: AOJu0YyveoFbUbiqT+Z3RWzTsYQzHMnAIFKH5dqF8UbXuwhBIg61lEiV
- S60iA+RND2bukDykRf9bORILvAlgZ2LymEpRREwnxmAAr6f+GrdR5KVRwgx3in1aTFc=
-X-Gm-Gg: ASbGncsajViotkb155okrU7zo5UTTDO3eTp78DE5jam1f9iRw7xVS7Xop+1VCykirx+
- hvR8yCOrVLsU0I7JHCdRZJsCVUL4StYvl9+rklLYxH/t6tuTE/DHN8y7kVdmUTvZrGUEeXvmmVb
- c62BS+/mAGvzS+iR5hEVti4WWmFb5waBO6x5Yv+SCenxhOUVrAiQeM6CK9qxw8z5jGFKEuYlDBE
- Cp9tDk+6bF3wBfjryPGOubvGWtfwZnQjCodfHLKcvMZkUlhAszreE4z9GlatRhpbAB9Ulec9aZR
- qpF2rSPq6E/o+kaUhVKZJjDAu2r+XJ3zshkmHGbxOE87AFgT35wCfIu7BgU8Pm5xVkR6eWeKGGq
- OXVkqAQ/3bpPiUs99Dp/j4Lsk4elNk2Bi80Re69sIzhtgI/KsP0PbcneKPgbOabmW0rYAAWUgOk
- N/
-X-Google-Smtp-Source: AGHT+IF46Qy8yzQvt49lqS+UxN4daAAklNmAku3KZC2fFz2V0BgNH+izSW10LphrAJD0r0NqE/Josg==
-X-Received: by 2002:a17:907:d1e:b0:b3e:8252:cd53 with SMTP id
- a640c23a62f3a-b64725705e5mr4937210966b.27.1761563041013; 
- Mon, 27 Oct 2025 04:04:01 -0700 (PDT)
+ AJvYcCXXWpWpXNC41FOiGx2KBOjMbPF3WDRKDdH6ptplbdy3kI0d5yI8ncD6GTIdNWb4upR7jQh/sMR4CKeG@nongnu.org
+X-Gm-Message-State: AOJu0Yw0oxC3jFxYNh0uR0YxP4JPrV7iB1qM3fni6V+R9VO3FrHb1nGF
+ tIBeNXPaUoubEOygmg9zc0NExlLRwTor7E1wYyuser2Zzv6VCLD7leXtxlbJwN4hpas=
+X-Gm-Gg: ASbGncumWpMo35vbstt0IoWuCb8LQuLrmJC/QIUHFzg9CQSYGolEFxjuETZ5GNyOy/S
+ RE/8Ebm38kP5/1TapU/TT+sgwfKuvk+hHwFKFz7rDjQhZnRtOWNBjcQd57ixM34k0bI/wYzjK9K
+ F1DDyydHpHlEoN9NRPvyikY9A4VDYvLz2Jl7XlntW37Vlg7y5LWB3tB8n5EEkDXdVtpCFbQwA35
+ HHIYfYnEF+Gy2XdvFzv8QuKzcU+jBWOzwq5Wlgqa76soajkt0vRhU3aKPqvwhvinZgIp/CcznQ9
+ Ztgp8k23or7tPrdDQLq/5ut7W+qRAGH+mjeGJA7umiMDU0fSQqkEMFuNv6MCq9EscPAxs1u01Ud
+ +cpaBxXJ9M++KgSHmt8H92N+GIZoyJzRCbRriQOdgGOk1YYnH9dVTjhIPmLS1NmZ/k4ATyh0oxg
+ aJnLdURJZoA6UTSFmP+L5fVA==
+X-Google-Smtp-Source: AGHT+IFAymNmJTdejyHUdyfAt8q8b+EN6fltsBo84Abf5ft1cxc9OuxCZfv2BkJqjWbVt1OZ6HI0Ww==
+X-Received: by 2002:a17:906:fe4c:b0:b55:c30d:c9fc with SMTP id
+ a640c23a62f3a-b6472b628a4mr4160361366b.11.1761563042192; 
+ Mon, 27 Oct 2025 04:04:02 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b6d8535974asm716499266b.25.2025.10.27.04.03.53
+ a640c23a62f3a-b6d85369697sm757975966b.26.2025.10.27.04.03.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 27 Oct 2025 04:03:54 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 1268D6150B;
- Mon, 27 Oct 2025 11:03:47 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id BD79360F82;
+ Mon, 27 Oct 2025 11:03:46 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -97,24 +97,24 @@ Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Michael Rolnik <mrolnik@gmail.com>,
  Song Gao <gaosong@loongson.cn>, qemu-riscv@nongnu.org,
  Aleksandar Rikalo <arikalo@gmail.com>, Julian Ganz <neither@nut.email>
-Subject: [PATCH 31/35] tests: add test with interrupted memory accesses on rv64
-Date: Mon, 27 Oct 2025 11:03:38 +0000
-Message-ID: <20251027110344.2289945-32-alex.bennee@linaro.org>
+Subject: [PATCH 28/35] target/xtensa: call plugin trap callbacks
+Date: Mon, 27 Oct 2025 11:03:35 +0000
+Message-ID: <20251027110344.2289945-29-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251027110344.2289945-1-alex.bennee@linaro.org>
 References: <20251027110344.2289945-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,152 +132,89 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Julian Ganz <neither@nut.email>
 
-This test aims at catching API misbehaviour w.r.t. the interaction
-between interrupts and memory accesses, such as the bug fixed in
+We recently introduced API for registering callbacks for trap related
+events as well as the corresponding hook functions. Due to differences
+between architectures, the latter need to be called from target specific
+code.
 
-    27f347e6a1d269c533633c812321cabb249eada8
-    (accel/tcg: also suppress asynchronous IRQs for cpu_io_recompile)
+This change places hooks for xtensa targets.
 
-Because the condition for triggering misbehaviour may not be
-deterministic and the cross-section between memory accesses and
-interrupt handlers may be small, we have to place our trust in large
-numbers. Instead of guessing/trying an arbitrary, fixed loop-bound, we
-decided to loop for a fixed amount of real-time. This avoids the test
-running into a time-out on slower machines while enabling a high number
-of possible interactions on faster machines.
-
-The test program sends a single '.' per 1000000 loads/stores over the
-serial. This output is not captured, but may be used by developers to
-gauge the number of possible interactions.
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Max Filippov <jcmvbkbc@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Julian Ganz <neither@nut.email>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/tcg/riscv64/Makefile.softmmu-target |  6 ++
- tests/tcg/riscv64/interruptedmemory.S     | 97 +++++++++++++++++++++++
- 2 files changed, 103 insertions(+)
- create mode 100644 tests/tcg/riscv64/interruptedmemory.S
+ target/xtensa/exc_helper.c  | 6 ++++++
+ target/xtensa/xtensa-semi.c | 3 +++
+ 2 files changed, 9 insertions(+)
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index d9c0036eb4b..eb1ce6504a0 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -30,5 +30,11 @@ run-plugin-doubletrap: doubletrap
- 	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $<.pout \
- 	  $(QEMU_OPTS)$<)
+diff --git a/target/xtensa/exc_helper.c b/target/xtensa/exc_helper.c
+index b611c9bf97c..fdc522698dc 100644
+--- a/target/xtensa/exc_helper.c
++++ b/target/xtensa/exc_helper.c
+@@ -32,6 +32,7 @@
+ #include "exec/helper-proto.h"
+ #include "qemu/host-utils.h"
+ #include "qemu/atomic.h"
++#include "qemu/plugin.h"
  
-+EXTRA_RUNS += run-plugin-interruptedmemory
-+run-plugin-interruptedmemory: interruptedmemory
-+	$(call run-test, $<, \
-+	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $<.pout \
-+	  $(QEMU_OPTS)$<)
+ void HELPER(exception)(CPUXtensaState *env, uint32_t excp)
+ {
+@@ -207,6 +208,8 @@ void xtensa_cpu_do_interrupt(CPUState *cs)
+     CPUXtensaState *env = cpu_env(cs);
+ 
+     if (cs->exception_index == EXC_IRQ) {
++        uint64_t last_pc = env->pc;
 +
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/interruptedmemory.S b/tests/tcg/riscv64/interruptedmemory.S
-new file mode 100644
-index 00000000000..cd9073ee314
---- /dev/null
-+++ b/tests/tcg/riscv64/interruptedmemory.S
-@@ -0,0 +1,97 @@
-+	.option norvc
-+
-+	.text
-+	.global _start
-+_start:
-+	# Set up trap vector
-+	lla	t0, trap
-+	csrw	mtvec, t0
-+
-+	# Set up timer
-+	lui	t1, 0x02004
-+	sd	zero, 0(t1) # MTIMECMP0
-+
-+	# Enable timer interrupts
-+	li	t0, 0x80
-+	csrrs	zero, mie, t0
-+	csrrsi	zero, mstatus, 0x8
-+
-+	# Set up UART
-+	lui	t1, 0x10000
-+	li	a0, 0x80	# DLAB=1
-+	sb	a0, 3(t1)
-+	li	a0, 1		# Full speed
-+	sw	a0, 0(t1)
-+	li	a0, 0x03	# 8N1, DLAB=0
-+	sb	a0, 3(t1)
-+
-+	# Run test for around 60s
-+	call	rtc_get
-+	li	t0, 30
-+	slli	t0, t0, 30 # Approx. 10e9 ns
-+	add	t0, t0, a0
-+0:
-+	# Tight loop with memory accesses
-+	li	a1, 1000000
-+	la	a2, semiargs
-+1:
-+	ld	a0, 0(a2)
-+	sd	a0, 0(a2)
-+	addi	a1, a1, -1
-+	bnez	a1, 1b
-+
-+	li	a0, '.'
-+	call	send_byte
-+	call	rtc_get
-+	bltu	a0, t0, 0b
-+
-+	li	a0, '\n'
-+	call	send_byte
-+
-+	# Exit
-+	li	a0, 0
-+	lla	a1, semiargs
-+	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
-+
-+	# Semihosting call sequence
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+
-+	j	.
-+
-+rtc_get:
-+	# Get current time from the goldfish RTC
-+	lui	t3, 0x0101
-+	lw	a0, 0(t3)
-+	lw	t3, 4(t3)
-+	slli	t3, t3, 32
-+	add	a0, a0, t3
-+	ret
-+
-+send_byte:
-+	# Send a single byte over the serial
-+	lui	t3, 0x10000
-+	lb	a1, 5(t3)
-+	andi	a1, a1, 0x20
-+	beqz	a1, send_byte
-+	sb	a0, 0(t3)
-+	ret
-+
-+	.balign 4
-+trap:
-+	lui	t5, 0x0200c
-+	ld	t6, -0x8(t5) # MTIME
-+	addi	t6, t6, 100
-+	lui	t5, 0x02004
-+	sd	t6, 0(t5) # MTIMECMP
-+	mret
-+
-+	.data
-+	.balign	16
-+semiargs:
-+	.space	16
+         qemu_log_mask(CPU_LOG_INT,
+                       "%s(EXC_IRQ) level = %d, cintlevel = %d, "
+                       "pc = %08x, a0 = %08x, ps = %08x, "
+@@ -218,6 +221,7 @@ void xtensa_cpu_do_interrupt(CPUState *cs)
+                       env->sregs[INTSET], env->sregs[INTENABLE],
+                       env->sregs[CCOUNT]);
+         handle_interrupt(env);
++        qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
+     }
+ 
+     switch (cs->exception_index) {
+@@ -238,9 +242,11 @@ void xtensa_cpu_do_interrupt(CPUState *cs)
+                       env->sregs[CCOUNT]);
+         if (env->config->exception_vector[cs->exception_index]) {
+             uint32_t vector;
++            uint64_t last_pc = env->pc;
+ 
+             vector = env->config->exception_vector[cs->exception_index];
+             env->pc = relocated_vector(env, vector);
++            qemu_plugin_vcpu_exception_cb(cs, last_pc);
+         } else {
+             qemu_log_mask(CPU_LOG_INT,
+                           "%s(pc = %08x) bad exception_index: %d\n",
+diff --git a/target/xtensa/xtensa-semi.c b/target/xtensa/xtensa-semi.c
+index 431c263dc57..9d9c6254a30 100644
+--- a/target/xtensa/xtensa-semi.c
++++ b/target/xtensa/xtensa-semi.c
+@@ -35,6 +35,7 @@
+ #include "system/memory.h"
+ #include "qapi/error.h"
+ #include "qemu/log.h"
++#include "qemu/plugin.h"
+ 
+ enum {
+     TARGET_SYS_exit = 1,
+@@ -197,6 +198,7 @@ void HELPER(simcall)(CPUXtensaState *env)
+     CPUState *cs = env_cpu(env);
+     AddressSpace *as = cs->as;
+     uint32_t *regs = env->regs;
++    uint64_t last_pc = env->pc;
+ 
+     switch (regs[2]) {
+     case TARGET_SYS_exit:
+@@ -433,4 +435,5 @@ void HELPER(simcall)(CPUXtensaState *env)
+         regs[3] = TARGET_ENOSYS;
+         break;
+     }
++    qemu_plugin_vcpu_hostcall_cb(cs, last_pc);
+ }
 -- 
 2.47.3
 
