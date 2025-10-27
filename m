@@ -4,72 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7A1CCCF9E5
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 02:52:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2B46CCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 05:38:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDDL3-0000xc-Kx; Sun, 26 Oct 2025 22:52:05 -0400
+	id 1vDFvT-0003is-7X; Mon, 27 Oct 2025 01:37:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <maobibo@loongson.cn>)
- id 1vDDL1-0000wu-Su; Sun, 26 Oct 2025 22:52:03 -0400
-Received: from mail.loongson.cn ([114.242.206.163])
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <maobibo@loongson.cn>)
- id 1vDDKz-0004cJ-FA; Sun, 26 Oct 2025 22:52:03 -0400
-Received: from loongson.cn (unknown [10.20.42.62])
- by gateway (Coremail) with SMTP id _____8Bxnr9L3v5or+gaAA--.56573S3;
- Mon, 27 Oct 2025 10:51:55 +0800 (CST)
-Received: from [10.20.42.62] (unknown [10.20.42.62])
- by front1 (Coremail) with SMTP id qMiowJAxvsFA3v5oOKYPAQ--.25786S3;
- Mon, 27 Oct 2025 10:51:46 +0800 (CST)
-Subject: Re: [PATCH 20/27] hw/int/loongarch: Include missing 'system/memory.h'
- header
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-block@nongnu.org,
- Song Gao <gaosong@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Huacai Chen <chenhuacai@kernel.org>
-References: <20251024190416.8803-1-philmd@linaro.org>
- <20251024190416.8803-21-philmd@linaro.org>
-From: Bibo Mao <maobibo@loongson.cn>
-Message-ID: <f37161a7-875d-ed91-51a0-a056579ccff2@loongson.cn>
-Date: Mon, 27 Oct 2025 10:49:25 +0800
-User-Agent: Mozilla/5.0 (X11; Linux loongarch64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
+ id 1vDFvQ-0003i3-Fs; Mon, 27 Oct 2025 01:37:48 -0400
+Received: from www3579.sakura.ne.jp ([49.212.243.89])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
+ id 1vDFvL-00008M-Lj; Mon, 27 Oct 2025 01:37:48 -0400
+Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp
+ [133.11.54.205]) (authenticated bits=0)
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 59R5bH71033765
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Mon, 27 Oct 2025 14:37:25 +0900 (JST)
+ (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=aQ0YFvC+yD29+uU/aJMOtWExs+FRx9FzU5ZSO1Zimyw=; 
+ c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+ h=From:Date:Subject:Message-Id:To;
+ s=rs20250326; t=1761543445; v=1;
+ b=XsyNz6r9aGBrE6s+GADRBPcLvmbvI+h6sz0ID6NwF5uRf1gHRlRAXIC69dAx9Eo7
+ 7/flUUb8QjHCCyvVHA7lJgySAJbHE4hNml3WugWpI95Jw4RG71KWY5T4/dO+4Uoh
+ YXfmbyaZnzaO+Un+Q7F5hCvdiv7hflti8N1ETkwKUALRKT9yafaR0Oz2n2O5ZgS4
+ cyrhdxAcACJNN9BqKkHKAPonVQm8I3JMOXCUyt+VBlZxG6cEaPgsqx4Mx/o+cCiq
+ Xsdw7rdXxR+eJ47sTsHY8kIsujT6zni5MArwNKQyNI61gjfKHqcSF/6/NLFfWuH2
+ K9PZqsfySQKWzogcQOdLKA==
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+Date: Mon, 27 Oct 2025 14:37:14 +0900
+Subject: [PATCH] hw/riscv/riscv-iommu: Fix MemoryRegion owner
 MIME-Version: 1.0
-In-Reply-To: <20251024190416.8803-21-philmd@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qMiowJAxvsFA3v5oOKYPAQ--.25786S3
-X-CM-SenderInfo: xpdruxter6z05rqj20fqof0/
-X-Coremail-Antispam: 1Uk129KBj93XoWxGFWrJrW8Wr48Zr15ZF4DWrX_yoW5Zw15pF
- nrCr1agr4DGryUWa4v93WaqFWUJan7ur129Fya9Fy8Ar43tr10vw4ktwnruFy8G390qryq
- 9ryfKr4rXa1UXrcCm3ZEXasCq-sJn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7KY7ZEXa
- sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
- 0xBIdaVrnRJUUUv2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
- IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
- e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
- 0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
- xVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx
- 1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv
- 67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7I2V7IY0VAS07
- AlzVAYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
- F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
- ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7Cj
- xVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
- 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7IU8zw
- Z7UUUUU==
-Received-SPF: pass client-ip=114.242.206.163; envelope-from=maobibo@loongson.cn;
- helo=mail.loongson.cn
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.188,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251027-iommu-v1-1-0fc52a02a273@rsg.ci.i.u-tokyo.ac.jp>
+X-B4-Tracking: v=1; b=H4sIAAoF/2gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDAyNz3cz83NxSXUuTFDOLVPNEC9MUIyWg2oKi1LTMCrA50bG1tQDRtn/
+ qVwAAAA==
+X-Change-ID: 20251027-iommu-94d68e7a85d2
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+X-Mailer: b4 0.15-dev-179e8
+Received-SPF: pass client-ip=49.212.243.89;
+ envelope-from=odaki@rsg.ci.i.u-tokyo.ac.jp; helo=www3579.sakura.ne.jp
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,93 +77,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+as points to the MemoryRegion itself. s is the device that owns the
+MemoryRegion.
 
+Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+---
+ hw/riscv/riscv-iommu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 2025/10/25 上午3:04, Philippe Mathieu-Daudé wrote:
-> "system/memory.h" header is indirectly pulled by "hw/sysbus.h".
-> Include it explicitly to avoid when refactoring the latter:
-> 
->    In file included from ../../hw/intc/loongson_ipi.c:9:
->    In file included from /Users/philmd/source/qemu/include/hw/intc/loongson_ipi.h:12:
->    include/hw/intc/loongson_ipi_common.h:37:18: error: field has incomplete type 'MemoryRegion' (aka 'struct MemoryRegion')
->       37 |     MemoryRegion ipi_iocsr_mem;
->          |                  ^
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   include/hw/intc/loongarch_dintc.h         | 2 +-
->   include/hw/intc/loongarch_extioi_common.h | 1 +
->   include/hw/intc/loongarch_pch_msi.h       | 1 +
->   include/hw/intc/loongarch_pic_common.h    | 1 +
->   include/hw/intc/loongson_ipi_common.h     | 2 ++
->   5 files changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/include/hw/intc/loongarch_dintc.h b/include/hw/intc/loongarch_dintc.h
-> index 0b0b5347b2c..01bb1e465cb 100644
-> --- a/include/hw/intc/loongarch_dintc.h
-> +++ b/include/hw/intc/loongarch_dintc.h
-> @@ -8,7 +8,7 @@
->   #include "qom/object.h"
->   #include "hw/sysbus.h"
->   #include "hw/loongarch/virt.h"
-> -
-> +#include "system/memory.h"
->   
->   #define NR_VECTORS     256
->   
-> diff --git a/include/hw/intc/loongarch_extioi_common.h b/include/hw/intc/loongarch_extioi_common.h
-> index c021ccee0fa..1bd2bfa07fc 100644
-> --- a/include/hw/intc/loongarch_extioi_common.h
-> +++ b/include/hw/intc/loongarch_extioi_common.h
-> @@ -10,6 +10,7 @@
->   #include "qom/object.h"
->   #include "hw/sysbus.h"
->   #include "hw/loongarch/virt.h"
-> +#include "system/memory.h"
->   
->   #define LS3A_INTC_IP                 8
->   #define EXTIOI_IRQS                  (256)
-> diff --git a/include/hw/intc/loongarch_pch_msi.h b/include/hw/intc/loongarch_pch_msi.h
-> index b8586fb3b6f..ef4ec4fdeb8 100644
-> --- a/include/hw/intc/loongarch_pch_msi.h
-> +++ b/include/hw/intc/loongarch_pch_msi.h
-> @@ -6,6 +6,7 @@
->    */
->   
->   #include "hw/sysbus.h"
-> +#include "system/memory.h"
->   
->   #define TYPE_LOONGARCH_PCH_MSI "loongarch_pch_msi"
->   OBJECT_DECLARE_SIMPLE_TYPE(LoongArchPCHMSI, LOONGARCH_PCH_MSI)
-> diff --git a/include/hw/intc/loongarch_pic_common.h b/include/hw/intc/loongarch_pic_common.h
-> index 675ba96e64e..179361eb567 100644
-> --- a/include/hw/intc/loongarch_pic_common.h
-> +++ b/include/hw/intc/loongarch_pic_common.h
-> @@ -9,6 +9,7 @@
->   
->   #include "hw/loongarch/virt.h"
->   #include "hw/sysbus.h"
-> +#include "system/memory.h"
->   
->   #define PCH_PIC_INT_ID                  0x00
->   #define  PCH_PIC_INT_ID_VAL             0x7
-> diff --git a/include/hw/intc/loongson_ipi_common.h b/include/hw/intc/loongson_ipi_common.h
-> index e58ce2aa1c4..8b51af83e8b 100644
-> --- a/include/hw/intc/loongson_ipi_common.h
-> +++ b/include/hw/intc/loongson_ipi_common.h
-> @@ -11,6 +11,8 @@
->   #include "qom/object.h"
->   #include "hw/sysbus.h"
->   #include "exec/memattrs.h"
-> +#include "system/memory.h"
-> +#include "system/memory.h"
-one small nit for duplicated including here :)
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index b33c7fe3259e..51c28d4f8c57 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -1362,7 +1362,7 @@ static AddressSpace *riscv_iommu_space(RISCVIOMMUState *s, uint32_t devid)
+         /* IOVA address space, untranslated addresses */
+         memory_region_init_iommu(&as->iova_mr, sizeof(as->iova_mr),
+             TYPE_RISCV_IOMMU_MEMORY_REGION,
+-            OBJECT(as), "riscv_iommu", UINT64_MAX);
++            OBJECT(s), "riscv_iommu", UINT64_MAX);
+         address_space_init(&as->iova_as, MEMORY_REGION(&as->iova_mr), name);
+ 
+         QLIST_INSERT_HEAD(&s->spaces, as, list);
 
-Otherwise
-Reviewed-by: Bibo Mao <maobibo@loongson.cn>
->   
->   #define IPI_MBX_NUM           4
->   
-> 
+---
+base-commit: 36076d24f04ea9dc3357c0fbe7bb14917375819c
+change-id: 20251027-iommu-94d68e7a85d2
+
+Best regards,
+--  
+Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 
 
