@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9068ECCF9E0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:07:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CDA7CCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:07:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDL2I-0001Wq-26; Mon, 27 Oct 2025 07:05:14 -0400
+	id 1vDL21-00014W-0j; Mon, 27 Oct 2025 07:04:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL27-0001E7-KH
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:03 -0400
+ id 1vDL1Z-0000gy-3j
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:04:30 -0400
 Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL1Z-0005e5-03
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:03 -0400
+ id 1vDL1I-0005b5-Nh
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:04:22 -0400
 Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-63c3c7d3d53so6839650a12.2
- for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:03:54 -0700 (PDT)
+ 4fb4d7f45d1cf-63c0eb94ac3so7997589a12.2
+ for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:03:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761563033; x=1762167833; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761563028; x=1762167828; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RbvPrANYvJj3gNO97dH7gcz+uNRb8G5R8cbjz6SvgpA=;
- b=wRK/WRiWjNekM6KHFoSK3HItdhVpi7y5gpnTlQtaCvnOrB1wvKXxM/tgQSm98aWeM/
- VIsUCpZP3fe72O7AD+ZCWnXj73EwvDXWUN7tcdKAPBNSFY+ohEL06Zujqa2grjK+PkCv
- giS4BqgbzUMxgcNa8fef0nS1rwzf2GrHk4WXw+Ry3A1Nz67AkAVWTsYclrX8yQPy9FxA
- lN22VQM27woLbeNyYSqdzyMC31Bsh9Bh+4JtbvTsEB9syufUvQsk9WavYP3Vwb/AK/Gu
- HeukaiVfmO3Y3LGSsx4t1Y5bHMxj/u8X6Ct70KprzvG/jonbgpWc9cUPSpGrj0q3uywa
- Kr6Q==
+ bh=XBaCUU+RDMe8Fm+rMDPlvgrTnuTfYc8fUoPcpfBGUms=;
+ b=ZDl8/9Qt7Y+doaQTj+12ng6xydqfPt/krMdiLGH2c8sRHW2/MR1d6UTHR+Cw1U3zgs
+ ytFzHernRvt56Q1+3L4GfLVrV+biOnyJc+IDJ0e+Vus4wl5nKcCmgkph6qq5cZk8Za0x
+ QJ7rIe9MUw9sR3hKbh+Recs+jIu3lkRmixHU6n/XGgg0kMMAIIrc+khWrC+Je3dKfVVy
+ Xm/0NKmCoQB4WRDxMtPJtRfAoyJCXE7o0c32zfGTXJVUKnBuDOvwyebuAwPubIwOHWoa
+ hcsAaA3Ca4oYkmqryKkUVk1LMnw7+5xnyJscPWQRUHplnSTox51jdVGmyILpRUUzFY6D
+ vw5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761563033; x=1762167833;
+ d=1e100.net; s=20230601; t=1761563028; x=1762167828;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RbvPrANYvJj3gNO97dH7gcz+uNRb8G5R8cbjz6SvgpA=;
- b=inqsFcWaE5387oJLQCQcoW5AVoX4gToVvFbs6ZJdys7CMu2F8G9qR+37jt4VVM20rZ
- BpQNH8HtWHVH7/GPthlW337UN4KnfvKH5DRQaJjtmsxUIv0Ym0SoM0s3Vn692Xtxpb4k
- 8ustCrNAAqaHiNUfjLzuGYIc8fMbVWHbKiYbA/D5cbEcTVH4cuExQ2Tw4rZCp/FTOGyK
- 2+NLTX/OJ5aTB7dTRFYoBx4gP5iVb0qq5JOCJ7ytuatwdHjGDpQ2xZdpVDc9dHE6lfdu
- IIaXUb/jE0zFuzqrM4VU6o/DVlAznbMuHEtgZWGhRK4iBOAy6Bavgsz9AIjPS6WcmWk0
- lFBQ==
+ bh=XBaCUU+RDMe8Fm+rMDPlvgrTnuTfYc8fUoPcpfBGUms=;
+ b=kFjM04XOhwSFR8bUST9xSAAFyCrNQAZtm2H++N6d2lhzoFINhxOYMZP0ZncBQp9p+j
+ mnxrtk5SQ4gsVFpI7q6xXaQn0Cf0XTDXVg9GPJ6C859/+Vmu+S8Kgo+DHaydhyFZ0xJx
+ wfua9kteYEEjVOVbh9JMfBDggpiVJF2GacRZQolBPqXzNY6Ohqabnj+R15FGV24d0Zkw
+ 0T46M5tRPu3OegBuDj4fKHJUgfcRht1UAI+/f/Qs68wZHZxiKUpo/eWWwMzPwbEGNbO8
+ 9aUf7oHiAlqgnvtJwJlIIH3J7Soe9V5Nn7QS/1AAmVjLEJ1tG+1JCcg5t9SEIC4mjWrk
+ vLMA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkCskcnI7ZNuC1IRp88rUi9f6wRaJCTHj1BG19iUiO5uGTb9WiuzRd2m3jRZAP6sy2vSfgzWEhd9i4@nongnu.org
-X-Gm-Message-State: AOJu0Yy5cwzNDa2NXMENBlBcLYUj3+K/y4C9OyGH4v6jlEPCmbFfNUhr
- yRGLykIQfRlpMmuLXbqeNRcBSCe5z4+W4+x0XihLncDR/5q0qhrcIFiOH8cDr+qNWMg=
-X-Gm-Gg: ASbGncscAetO6CX/BoCq33soBM0sFo01KQGIt4MneKBBKWmH2voEjKBdeCB/nYNwO1X
- aNrn2+XBDH8seiLsBZLHG9MXDJyGUuA2b6Tjd9xbxrgBwRTKZYW8TIyCkWz3UxmdQscmsbyfAdo
- X2QWE2N5dQv+xkXIxuV0YY5Grakm57E7BQmG4HurBUBD+jJpXJKPQBtONrtcrKDh9H+kixW0LUS
- QpdqpkZLeW/bmpdpg3rBLNXo7znTspZh8ZoTtRhXgUicXai/qQSb8RZh2wEWgbMTgnU2pTEx/i+
- rqQ415Q9sRBGQ+98aoaS0LipIta5EZVWq8FXY47uopnu39nI6I9Fh9LJ0Von11W65VMEJ1EtT+U
- v3bnjng79owbEFvFpnJU8weo1/pufZDN/QVHFCstLGCzWJvxAUb0VSHIO4BAnpyFLcaeg81sTKQ
- yR
-X-Google-Smtp-Source: AGHT+IEgl+c4dRH+StKwomTRbDfEq8j/zmTZSSPAaJlwzgoFWODFr2XsptD7H1CqAq3BBX3xhzNDKw==
-X-Received: by 2002:a05:6402:27d1:b0:639:f54d:9274 with SMTP id
- 4fb4d7f45d1cf-63e60003a6dmr9269873a12.2.1761563032820; 
- Mon, 27 Oct 2025 04:03:52 -0700 (PDT)
+ AJvYcCXkrqNShJBb3WNqaGy9EelxZD5GUk2zJgfCdOACm+wnaBplUzVwS/G1dHYelXsAx602Z2Vc0VxkxKe5@nongnu.org
+X-Gm-Message-State: AOJu0YywY0pPg/1mQ0aHJCe6aLcS2wtgkGrhybvDIDz0ikVajAMcwgMg
+ qCw/40545uW4NNv50atW7z36LC/XCBR2eO23Jcq9RRcYwtOyodWC33X6YkGQxdpDbos=
+X-Gm-Gg: ASbGncsbxBn+b8mOwQ3flArMEiDpoDZHSucK4D+Hgp5O3itA9nC1NaWIR2BOOduHqwN
+ 7CIE0+Me6mDdqagmg4sn/+jhB9aQwUP6i/evvLf3Xy+YnVzZ3oI+FKvaeiQeZp50qqVDNN7obC8
+ KGQQMeExKFmSJ8sUACfsFfyGp3XGQW/DFNy0bl6ISLk7kgohnNrdLPFrNmVhCY5kZQtPnubYhUc
+ c9lKxUIJldzmjSgTTnr8tA6VBQ9l9MxlORMZR3nAuPy+oRSzRlZsqoCHvsDXNzz3D6L2ejgwgP4
+ pSByrOqkuVmrRUOGgwaHaJWaHucODZyMjXbd2EQvUSBvBN2p8VXDyYmUmvCI8EszEiXx+w7pi/u
+ 7skjtDl1s3mRJJTwxI7w42FyJNi10m/zRZlgWrk51G9oxjK7y48IJ6YLlScvrPkrJ8Ti/7Fhfsq
+ Ph4I6ffB43rnY=
+X-Google-Smtp-Source: AGHT+IFkfptHR6PlFDi2agbOhG8NdwOZDW+TmaYBSdpTlkdykfX5dwUJ7HJhZgUkUyvlt6G3flbptw==
+X-Received: by 2002:a50:c88b:0:b0:63c:ea6:5608 with SMTP id
+ 4fb4d7f45d1cf-63c1f6dfc77mr24049039a12.36.1761563027728; 
+ Mon, 27 Oct 2025 04:03:47 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-63e7efd0bc5sm6013871a12.32.2025.10.27.04.03.48
+ 4fb4d7f45d1cf-63e7efb97cbsm6176732a12.26.2025.10.27.04.03.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 04:03:49 -0700 (PDT)
+ Mon, 27 Oct 2025 04:03:45 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 277AE609B7;
- Mon, 27 Oct 2025 11:03:45 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 62C4F5F92F;
+ Mon, 27 Oct 2025 11:03:44 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -96,10 +96,10 @@ Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Michael Rolnik <mrolnik@gmail.com>,
  Song Gao <gaosong@loongson.cn>, qemu-riscv@nongnu.org,
- Aleksandar Rikalo <arikalo@gmail.com>, Julian Ganz <neither@nut.email>
-Subject: [PATCH 11/35] target/alpha: call plugin trap callbacks
-Date: Mon, 27 Oct 2025 11:03:18 +0000
-Message-ID: <20251027110344.2289945-12-alex.bennee@linaro.org>
+ Aleksandar Rikalo <arikalo@gmail.com>
+Subject: [PATCH 03/35] scripts/ci: move build-environment.yaml up a level
+Date: Mon, 27 Oct 2025 11:03:10 +0000
+Message-ID: <20251027110344.2289945-4-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251027110344.2289945-1-alex.bennee@linaro.org>
 References: <20251027110344.2289945-1-alex.bennee@linaro.org>
@@ -114,7 +114,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,60 +130,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Julian Ganz <neither@nut.email>
+We can share the setup of the build environment with multiple
+operating systems as we just need to check the YAML for each env is
+present in the directory structure.
 
-We recently introduced API for registering callbacks for trap related
-events as well as the corresponding hook functions. Due to differences
-between architectures, the latter need to be called from target specific
-code.
-
-This change places hooks for Alpha targets.
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Julian Ganz <neither@nut.email>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/alpha/helper.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ .../ci/setup/{ubuntu => }/build-environment.yml  | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+ rename scripts/ci/setup/{ubuntu => }/build-environment.yml (81%)
 
-diff --git a/target/alpha/helper.c b/target/alpha/helper.c
-index 096eac34458..a9af52a928f 100644
---- a/target/alpha/helper.c
-+++ b/target/alpha/helper.c
-@@ -27,6 +27,7 @@
- #include "exec/helper-proto.h"
- #include "qemu/qemu-print.h"
- #include "system/memory.h"
-+#include "qemu/plugin.h"
+diff --git a/scripts/ci/setup/ubuntu/build-environment.yml b/scripts/ci/setup/build-environment.yml
+similarity index 81%
+rename from scripts/ci/setup/ubuntu/build-environment.yml
+rename to scripts/ci/setup/build-environment.yml
+index 1c517c74f74..66bde188755 100644
+--- a/scripts/ci/setup/ubuntu/build-environment.yml
++++ b/scripts/ci/setup/build-environment.yml
+@@ -27,18 +27,24 @@
+         - ansible_facts['distribution'] == 'Ubuntu'
  
+     # the package lists are updated by "make lcitool-refresh"
+-    - name: Include package lists based on OS and architecture
+-      include_vars:
+-        file: "ubuntu-2404-{{ ansible_facts['architecture'] }}.yaml"
++    - name: Define package list file path
++      set_fact:
++        package_file: "ubuntu/ubuntu-2404-{{ ansible_facts['architecture'] }}.yaml"
+       when:
+         - ansible_facts['distribution'] == 'Ubuntu'
+         - ansible_facts['distribution_version'] == '24.04'
  
- #define CONVERT_BIT(X, SRC, DST) \
-@@ -328,6 +329,7 @@ void alpha_cpu_do_interrupt(CPUState *cs)
- {
-     CPUAlphaState *env = cpu_env(cs);
-     int i = cs->exception_index;
-+    uint64_t last_pc = env->pc;
- 
-     if (qemu_loglevel_mask(CPU_LOG_INT)) {
-         static int count;
-@@ -431,6 +433,17 @@ void alpha_cpu_do_interrupt(CPUState *cs)
- 
-     /* Switch to PALmode.  */
-     env->flags |= ENV_FLAG_PAL_MODE;
++    - name: Include package lists based on OS and architecture
++      include_vars:
++        file: "{{ package_file }}"
++      when:
++        - package_file is exists
 +
-+    switch (i) {
-+    case EXCP_SMP_INTERRUPT:
-+    case EXCP_CLK_INTERRUPT:
-+    case EXCP_DEV_INTERRUPT:
-+        qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
-+        break;
-+    default:
-+        qemu_plugin_vcpu_exception_cb(cs, last_pc);
-+        break;
-+    }
- }
+     - name: Install packages for QEMU on Ubuntu 24.04
+       package:
+         name: "{{ packages }}"
+       when:
+-        - ansible_facts['distribution'] == 'Ubuntu'
+-        - ansible_facts['distribution_version'] == '24.04'
++        - package_file is exists
++        - packages is defined
  
- bool alpha_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ 
 -- 
 2.47.3
 
