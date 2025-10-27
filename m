@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E7ECCF9EA
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:07:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9068ECCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:07:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDL2R-0001h4-OG; Mon, 27 Oct 2025 07:05:23 -0400
+	id 1vDL2I-0001Wq-26; Mon, 27 Oct 2025 07:05:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL2P-0001er-FD
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:22 -0400
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1vDL27-0001E7-KH
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:03 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL1a-0005gN-GL
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:21 -0400
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-63e076e24f2so489062a12.3
- for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:03:59 -0700 (PDT)
+ id 1vDL1Z-0005e5-03
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:03 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-63c3c7d3d53so6839650a12.2
+ for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:03:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761563037; x=1762167837; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761563033; x=1762167833; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S+B5t2CS/T8KjhtvrkR91LD1xXhHenjI0bMGIecipr8=;
- b=GgXLmexawwlsv/1igkmwbYEFBzAoXdecLpStTG1L3LsljiasGqe4uPKBmgV1kbQuQE
- G0ThAwNrXqXtm9ncpITlV0XBqnIlacEhBhjCmvc/BgQIYNfb9ofYmYZRwO7cgJTHda0d
- yzvd3C/Y3AJD0tJOgh73/Jx4TRFecgWg9htWO4P7e3OZZE930pXN8HMFNLV1pNMt9CoS
- dLX9ciEgX9a7lVjKQ1F+aujPJC7Ot0jk3Ou4XpnyQNJHr+wTEOU6jmIZdSkLBLdWLTR5
- DrDwId+mZ8hXcWSQIrwj1/ZgHb896cMKEvPGIBJxsJthEuYNanQObj3K/id5odYZF4mo
- X/eg==
+ bh=RbvPrANYvJj3gNO97dH7gcz+uNRb8G5R8cbjz6SvgpA=;
+ b=wRK/WRiWjNekM6KHFoSK3HItdhVpi7y5gpnTlQtaCvnOrB1wvKXxM/tgQSm98aWeM/
+ VIsUCpZP3fe72O7AD+ZCWnXj73EwvDXWUN7tcdKAPBNSFY+ohEL06Zujqa2grjK+PkCv
+ giS4BqgbzUMxgcNa8fef0nS1rwzf2GrHk4WXw+Ry3A1Nz67AkAVWTsYclrX8yQPy9FxA
+ lN22VQM27woLbeNyYSqdzyMC31Bsh9Bh+4JtbvTsEB9syufUvQsk9WavYP3Vwb/AK/Gu
+ HeukaiVfmO3Y3LGSsx4t1Y5bHMxj/u8X6Ct70KprzvG/jonbgpWc9cUPSpGrj0q3uywa
+ Kr6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761563037; x=1762167837;
+ d=1e100.net; s=20230601; t=1761563033; x=1762167833;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=S+B5t2CS/T8KjhtvrkR91LD1xXhHenjI0bMGIecipr8=;
- b=C8jEOpoKky4SQWcOIxmgYIyZyxuh/06LTTAA/dtkT8YnU+qhhFsFY52SJcnrdlPexG
- njIt5tcET9XCZJN6bKFBsBhaWVSmvLtOe6fxIxNQvbw3kT8+qUfUcRBQxSod4LqYzqGQ
- PZ8ofLyqIQNsg8CPoMq7niQoQ/GA+N2Z0m9JOqt7vqtaaJdVkPmeXOMI050y+Bs9YWXO
- Sk1jGcXF/JGVGZDgbmvRJKugg8a2/wisMUWqxug68hBFk9oAabQ/a/w69sv0hbpQaSjd
- fep/h8GM0o1qn/O6kr1dEQyPsL6ptULDU6sftMHa29GOa25SdondehlDASDmI6o/PCeY
- 5IHg==
+ bh=RbvPrANYvJj3gNO97dH7gcz+uNRb8G5R8cbjz6SvgpA=;
+ b=inqsFcWaE5387oJLQCQcoW5AVoX4gToVvFbs6ZJdys7CMu2F8G9qR+37jt4VVM20rZ
+ BpQNH8HtWHVH7/GPthlW337UN4KnfvKH5DRQaJjtmsxUIv0Ym0SoM0s3Vn692Xtxpb4k
+ 8ustCrNAAqaHiNUfjLzuGYIc8fMbVWHbKiYbA/D5cbEcTVH4cuExQ2Tw4rZCp/FTOGyK
+ 2+NLTX/OJ5aTB7dTRFYoBx4gP5iVb0qq5JOCJ7ytuatwdHjGDpQ2xZdpVDc9dHE6lfdu
+ IIaXUb/jE0zFuzqrM4VU6o/DVlAznbMuHEtgZWGhRK4iBOAy6Bavgsz9AIjPS6WcmWk0
+ lFBQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVLVBaBaWYa+RrezpB9p8mmVaIgjgBkm0w441LHhzXycas0naBBpmYSAphXXLZODhomztvwLRi0LPlE@nongnu.org
-X-Gm-Message-State: AOJu0YwuSmDnQXLBczoUTi87u86EqlUhumiXZTZMHSpRI/zpdiQQBFcr
- Md/ME5RqNqNCgSqQsNrgP1BGPpZB/PZDMty6wKcRMrX2VmXgDuB1k3zpmat6RH3RKOw=
-X-Gm-Gg: ASbGncv60/KG/n/mQh4jt4P/SIMjQhfaKHPbR2LBWXvGQzx3Y6bRmHjhdeViD2nXBBX
- AouWtLAETB1i7zL5ZoN7THzlxNDWzWrZuroBJ3lJfu7oOCNfcXNnOmltwbLJj54ZxqWnKOEUzz+
- /oXq0y73CQW639Fu+GrYFT6ftCyzrrbTb+soXNRvxFcjIsI0RcDzik19LCVM3DXYkg80YUmiV+H
- E43ZLPzvT/7Wyix/CLLJoLmXvMx8kfzmt5nlG9pxeF+Bkecvn5/GqWO4yqe6WRCRc9u2TSmdpgz
- RefimMvcPZQAftTmo5rOJK9CFIlB3aP8m5PNhzUutiQ2a5z8fVpe6EftImlTXcg5kt7p3ELdk3K
- BkV7jb5Y7gNZ3k8VkbdnNtD+npAGSzpD+9PmfKRgyQ85R5gQcpVN7wYtQHwSZvngpyzFQvpogZ1
- DiXgBFzIZt8Xs=
-X-Google-Smtp-Source: AGHT+IFOqsFhi++XSrIN3tvwX7vv/Rng/GC5ur0yItPZWJFnvIrwnw8USTNuYmK9pTg/cUeHEl2iog==
-X-Received: by 2002:a05:6402:5650:b0:636:6801:eed7 with SMTP id
- 4fb4d7f45d1cf-63c1f6d05b1mr25599778a12.32.1761563037184; 
- Mon, 27 Oct 2025 04:03:57 -0700 (PDT)
+ AJvYcCUkCskcnI7ZNuC1IRp88rUi9f6wRaJCTHj1BG19iUiO5uGTb9WiuzRd2m3jRZAP6sy2vSfgzWEhd9i4@nongnu.org
+X-Gm-Message-State: AOJu0Yy5cwzNDa2NXMENBlBcLYUj3+K/y4C9OyGH4v6jlEPCmbFfNUhr
+ yRGLykIQfRlpMmuLXbqeNRcBSCe5z4+W4+x0XihLncDR/5q0qhrcIFiOH8cDr+qNWMg=
+X-Gm-Gg: ASbGncscAetO6CX/BoCq33soBM0sFo01KQGIt4MneKBBKWmH2voEjKBdeCB/nYNwO1X
+ aNrn2+XBDH8seiLsBZLHG9MXDJyGUuA2b6Tjd9xbxrgBwRTKZYW8TIyCkWz3UxmdQscmsbyfAdo
+ X2QWE2N5dQv+xkXIxuV0YY5Grakm57E7BQmG4HurBUBD+jJpXJKPQBtONrtcrKDh9H+kixW0LUS
+ QpdqpkZLeW/bmpdpg3rBLNXo7znTspZh8ZoTtRhXgUicXai/qQSb8RZh2wEWgbMTgnU2pTEx/i+
+ rqQ415Q9sRBGQ+98aoaS0LipIta5EZVWq8FXY47uopnu39nI6I9Fh9LJ0Von11W65VMEJ1EtT+U
+ v3bnjng79owbEFvFpnJU8weo1/pufZDN/QVHFCstLGCzWJvxAUb0VSHIO4BAnpyFLcaeg81sTKQ
+ yR
+X-Google-Smtp-Source: AGHT+IEgl+c4dRH+StKwomTRbDfEq8j/zmTZSSPAaJlwzgoFWODFr2XsptD7H1CqAq3BBX3xhzNDKw==
+X-Received: by 2002:a05:6402:27d1:b0:639:f54d:9274 with SMTP id
+ 4fb4d7f45d1cf-63e60003a6dmr9269873a12.2.1761563032820; 
+ Mon, 27 Oct 2025 04:03:52 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-63e7efb97b3sm5942298a12.30.2025.10.27.04.03.50
+ 4fb4d7f45d1cf-63e7efd0bc5sm6013871a12.32.2025.10.27.04.03.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 04:03:53 -0700 (PDT)
+ Mon, 27 Oct 2025 04:03:49 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id A56E160C1B;
+ by draig.lan (Postfix) with ESMTP id 277AE609B7;
  Mon, 27 Oct 2025 11:03:45 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -97,17 +97,17 @@ Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Michael Rolnik <mrolnik@gmail.com>,
  Song Gao <gaosong@loongson.cn>, qemu-riscv@nongnu.org,
  Aleksandar Rikalo <arikalo@gmail.com>, Julian Ganz <neither@nut.email>
-Subject: [PATCH 17/35] target/m68k: call plugin trap callbacks
-Date: Mon, 27 Oct 2025 11:03:24 +0000
-Message-ID: <20251027110344.2289945-18-alex.bennee@linaro.org>
+Subject: [PATCH 11/35] target/alpha: call plugin trap callbacks
+Date: Mon, 27 Oct 2025 11:03:18 +0000
+Message-ID: <20251027110344.2289945-12-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251027110344.2289945-1-alex.bennee@linaro.org>
 References: <20251027110344.2289945-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x536.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -137,83 +137,53 @@ events as well as the corresponding hook functions. Due to differences
 between architectures, the latter need to be called from target specific
 code.
 
-This change places hooks for Motorola 68000 targets.
+This change places hooks for Alpha targets.
 
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Julian Ganz <neither@nut.email>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/m68k/op_helper.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ target/alpha/helper.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/target/m68k/op_helper.c b/target/m68k/op_helper.c
-index f29ae12af84..e9c20a8e032 100644
---- a/target/m68k/op_helper.c
-+++ b/target/m68k/op_helper.c
-@@ -22,6 +22,7 @@
+diff --git a/target/alpha/helper.c b/target/alpha/helper.c
+index 096eac34458..a9af52a928f 100644
+--- a/target/alpha/helper.c
++++ b/target/alpha/helper.c
+@@ -27,6 +27,7 @@
  #include "exec/helper-proto.h"
- #include "accel/tcg/cpu-ldst.h"
- #include "semihosting/semihost.h"
+ #include "qemu/qemu-print.h"
+ #include "system/memory.h"
 +#include "qemu/plugin.h"
  
- #if !defined(CONFIG_USER_ONLY)
  
-@@ -183,6 +184,21 @@ static const char *m68k_exception_name(int index)
-     return "Unassigned";
- }
- 
-+static void do_plugin_vcpu_interrupt_cb(CPUState *cs, uint64_t from)
-+{
-+    switch (cs->exception_index) {
-+    case EXCP_SPURIOUS ... EXCP_INT_LEVEL_7:
-+        qemu_plugin_vcpu_interrupt_cb(cs, from);
-+        break;
-+    case EXCP_SEMIHOSTING:
-+        qemu_plugin_vcpu_hostcall_cb(cs, from);
-+        break;
-+    default:
-+        qemu_plugin_vcpu_exception_cb(cs, from);
-+        break;
-+    }
-+}
-+
- static void cf_interrupt_all(CPUM68KState *env, int is_hw)
+ #define CONVERT_BIT(X, SRC, DST) \
+@@ -328,6 +329,7 @@ void alpha_cpu_do_interrupt(CPUState *cs)
  {
-     CPUState *cs = env_cpu(env);
-@@ -203,6 +219,7 @@ static void cf_interrupt_all(CPUM68KState *env, int is_hw)
-             return;
-         case EXCP_SEMIHOSTING:
-             do_m68k_semihosting(env, env->dregs[0]);
-+            qemu_plugin_vcpu_hostcall_cb(cs, retaddr);
-             return;
-         }
-     }
-@@ -239,6 +256,8 @@ static void cf_interrupt_all(CPUM68KState *env, int is_hw)
-     env->aregs[7] = sp;
-     /* Jump to vector.  */
-     env->pc = cpu_ldl_mmuidx_ra(env, env->vbr + vector, MMU_KERNEL_IDX, 0);
-+
-+    do_plugin_vcpu_interrupt_cb(cs, retaddr);
- }
- 
- static inline void do_stack_frame(CPUM68KState *env, uint32_t *sp,
-@@ -277,6 +296,7 @@ static void m68k_interrupt_all(CPUM68KState *env, int is_hw)
-     uint32_t sp;
-     uint32_t vector;
-     uint16_t sr, oldsr;
+     CPUAlphaState *env = cpu_env(cs);
+     int i = cs->exception_index;
 +    uint64_t last_pc = env->pc;
  
-     if (!is_hw) {
-         switch (cs->exception_index) {
-@@ -417,6 +437,8 @@ static void m68k_interrupt_all(CPUM68KState *env, int is_hw)
-     env->aregs[7] = sp;
-     /* Jump to vector.  */
-     env->pc = cpu_ldl_mmuidx_ra(env, env->vbr + vector, MMU_KERNEL_IDX, 0);
+     if (qemu_loglevel_mask(CPU_LOG_INT)) {
+         static int count;
+@@ -431,6 +433,17 @@ void alpha_cpu_do_interrupt(CPUState *cs)
+ 
+     /* Switch to PALmode.  */
+     env->flags |= ENV_FLAG_PAL_MODE;
 +
-+    do_plugin_vcpu_interrupt_cb(cs, last_pc);
++    switch (i) {
++    case EXCP_SMP_INTERRUPT:
++    case EXCP_CLK_INTERRUPT:
++    case EXCP_DEV_INTERRUPT:
++        qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
++        break;
++    default:
++        qemu_plugin_vcpu_exception_cb(cs, last_pc);
++        break;
++    }
  }
  
- static void do_interrupt_all(CPUM68KState *env, int is_hw)
+ bool alpha_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
 -- 
 2.47.3
 
