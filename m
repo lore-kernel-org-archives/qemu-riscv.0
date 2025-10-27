@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76475CCF9E5
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 12:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82C71CCF9E5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 13:21:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDMer-0006E2-0P; Mon, 27 Oct 2025 08:49:09 -0400
+	id 1vDNA1-00010I-Cg; Mon, 27 Oct 2025 09:21:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1vDMef-00067w-88
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 08:49:00 -0400
-Received: from mail-yw1-x112f.google.com ([2607:f8b0:4864:20::112f])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vDN9z-0000xl-C2
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 09:21:19 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1vDMeT-0000KB-5E
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 08:48:56 -0400
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-7829fc3b7deso34506887b3.3
- for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 05:48:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vDN9i-00054X-CL
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 09:21:18 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-78af743c232so4139571b3a.1
+ for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 06:20:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761569321; x=1762174121; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t4zyEMRcnSg6ZZFupcnqm9G8YRu9xpKxN+WWw0OX9pQ=;
- b=Nd4P0sBjH5yLMIagbks3cUBJz8QgC5V0EhnL2gL6TxOJ4Y8qyAnabD6zqkJWD7ALlY
- VDx6rFcrYQdtLUqfsJi2mv00S3qzWOnROkNOvQeeYA46a+m/qllJ0FzaDdE+4aBXZ/NW
- mflXXfb4jvr3KmWPqMu00C5kCEr3/0k7veQ5/eUmI0GMDpVpSgWg1W9AFHGat/ldZGBG
- gGtsyJkkiyf7ZVghvU548zToJCtYhOmkR6QM3DO3Xh8R8k1nImHVVpSKAyMSBioN/RWY
- C4kzj0IzsYGjE5K54Jj9/ehDGpGUEK9hMKeYnByofdZjrxcwccbAXiJBE99rlbt2josd
- vlJg==
+ d=ventanamicro.com; s=google; t=1761571256; x=1762176056; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=g8Q/30bUWm2O2CU+TjmYKHZVjlU36Cumj5zQfUBgl38=;
+ b=fQS0Jr4vzFEo0OO9/bKhpOJBQW4jEz4XDaueUG3prMrSSirlnQJ0zbPmgzAP0OQ3lu
+ Uyoe2RPfJriVO2ntnbZ5Gyt71MsayFSY7hIE4t76KN5pgki+0ntho9LIKlTMlwKS5V56
+ JvQq7GAlXHaQyVo/hqL9QFBA+U88pqpcfLJenTcmbWGaxKpmaASwZ0oGLYoFdTFQApeY
+ NodDZ8TZw7qZjJINrsktXU/lCkJkK3ud+UHw0/DqQUdYVKfbTQLRe+jG464/RvKLFPHs
+ airUOTw2lIcKliuxB/5gPchrWPucAJYgJdNncLfuR7o4BtmMX2UQlEYPgwFaB5sTkt9C
+ lFVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761569321; x=1762174121;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t4zyEMRcnSg6ZZFupcnqm9G8YRu9xpKxN+WWw0OX9pQ=;
- b=lXwH6ZIU26cXoKGr0U35eDmxVMqcdeUSUigoMpYx+cNPv/E3o007VMWF139q/aIwLk
- GL8QuVAvqnTUtq6bw6AsI/BlIJZNkk7xlFck+pENzlukAUqglsoC4gFol9mH4n2blq2u
- AywRRwLC0IMhhZofYmklS5USEZQEpYqbsX8URc7jCl6Lc4H2ntlmMb6hzaDEUldwzWaQ
- fFw/v4qPEwAHAUtrVgx5dTuKj0f8jxATYGAhu36CiCR3QGf+bZ/oGWWno2zZEhLH3l4Y
- aoByar+0KGXL91uFa3tSd7qmIWNUdCi/ArIPaSDl3dI7CNsx7BYhYZxA1det6jFWVgkK
- vLmw==
+ d=1e100.net; s=20230601; t=1761571256; x=1762176056;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=g8Q/30bUWm2O2CU+TjmYKHZVjlU36Cumj5zQfUBgl38=;
+ b=ZYrcvj0Ce+99lpU6ZEWOsTn7biLDQOlRTARbjhCNUdxzqdyI7JivBhNUAgigWhhl+I
+ SmTlWvrYjng7ShjCwC3OUeW4jeCZbYvcXeGmZo21uEkmk4bzB9Yj25E1aulrvQeHJxb4
+ o367/9POjAYS7YNxRpOUapmAgdvXQ19uoH0c+/6iD+z5teusCRfr1oLA+K34YdKaGnUu
+ gXW8kkLUu/DCgQKb4tumq3P6wY0mXE+QS/GXoRODIYwCRDOoVaUJdqeSXruqNRgNN7lu
+ BKmJx0esJrLR2KAkEHuxa8WfkBflnuybXsmqJnplV9NGABhQenBsq52lqCM+G+lueD51
+ 7bjg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLEwiYy7RptawUXLHbRD2FwJsw//6+gUalRom8MdD7122iVKKM5WOpu2cNmic3v1rGeCogMuMizIRG@nongnu.org
-X-Gm-Message-State: AOJu0YwLmfGVf1/o4Gcy5bUU+XyF6eBKM+jARvHCHJn5g87gYADcwVE+
- VUVudHLoEWNULFZ7Ch7aJ1CAd55ptjzDJgoQcKksa6EPtsQyK6uvRCa1ntfhUxhHALunS3htMUj
- T37vuQb5VEY2+0FkYnlWHXESt9CywpFY9sDdYhGJ12A==
-X-Gm-Gg: ASbGnctzrd5JHCnx7fkgs7TabpxNHwgiPd+3D3BhDGRammDPwTynqjoADAp623eMH1C
- UfiHmUok69M16OiPZ5oerzsWoPvAqMdSfNJnn257nfiPWgkx4LIre5d+t6tBeaW4gc7753whlaB
- oT7uZeM/JGsgbNbt3sWtQQvifr/5B7pZjWfYBOdh+ONWfW5QKs0E/zNwIRNKycmY8xB68oCVnAB
- bbRBbV54pmZw7kyqf11D3H6ay8GrjnUOpamfbSo9ITgvFEE/b45OSOmvHK3iY4WkjfLYZHI
-X-Google-Smtp-Source: AGHT+IGpaAMSKJKO1jUD3h/ZsQJ68Eho5HHfARfiSEeuB2/2crqps4P6t9R8tfq3HIjl75KTHGZeHlOWyibXHsvDaC8=
-X-Received: by 2002:a05:690e:dce:b0:63f:5642:74bf with SMTP id
- 956f58d0204a3-63f5642771bmr4042113d50.15.1761569320852; Mon, 27 Oct 2025
- 05:48:40 -0700 (PDT)
+ AJvYcCVBnchI/2iNgCqmY/HSqBauaUWBC2Jk+ZSdJAt8cjKf49Kwr/MavkaQ292XhyX8pR+QbFyeAjJ8wIrc@nongnu.org
+X-Gm-Message-State: AOJu0YwtIJiJBe8pMMw6oJRUuCPIXeDWH15YJadDijG0gjiSfQhZwiee
+ 1+DQuX1/3Pj5sYvXg42IdyfEr05CyiGhMdH0Tk5MD4UmhJSrasDeIzEt1hpGptZbiVo=
+X-Gm-Gg: ASbGnctlNP7IF0lfpCSmUitSe/GTHSoKP+eSRSW3kN7KkMaYRpoz/qgf/HZbhGYicdB
+ eWLPlnERz/DKbaWj+KRFEn5i+9fg/5sLE/L6QdtGqsNfW63pVSed7GgZ6HDiMcpmeuA3z8DuGd/
+ e+dHkQZPrriGlC0B/WCQhRhAtZ4dL2exfdK88M12ItmSUdcI//uuZ/UU1fnM6MXOsOsIbuCzWBo
+ iT3g9N2dQnirrt+RWhnCmpNTb5UGnWGuVYwCpg7qxDzaUfzs5h9B8fYDd1IYvVRkEvkabbjcQnx
+ UiG9SCd96UYShDOqvWZO2sU+Vg+4ItNS7GnG4KKcOwwre3B062N4a7q9pGIU9D1neS0VL+b4Wur
+ pnITOrVQ6PIon1L9mNltNfHj1P6sR1gGxc/ussSeW1gvhw6+u2/Pcir7ycgYTK0OfzEiJGBSfsT
+ oBmzEsOZcKG2XP/01uQdLg0ig=
+X-Google-Smtp-Source: AGHT+IEFaUsLRDHzdFEW1FTVJTg6Zu8WHr5LIy4QXPlo5vm2eWFv+tazkRop8FO5HtkxIBUgO4B9aw==
+X-Received: by 2002:a05:6a00:228a:b0:7a2:7610:364f with SMTP id
+ d2e1a72fcca58-7a28688190cmr13165060b3a.29.1761571255978; 
+ Mon, 27 Oct 2025 06:20:55 -0700 (PDT)
+Received: from [192.168.68.110] ([189.38.141.22])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7a414012c40sm8347826b3a.6.2025.10.27.06.20.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 Oct 2025 06:20:55 -0700 (PDT)
+Message-ID: <934bc46a-6a86-4cab-8cbf-c98a4cc92ed1@ventanamicro.com>
+Date: Mon, 27 Oct 2025 10:20:49 -0300
 MIME-Version: 1.0
-References: <20251016131159.750480-1-peter.maydell@linaro.org>
-In-Reply-To: <20251016131159.750480-1-peter.maydell@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 27 Oct 2025 12:48:29 +0000
-X-Gm-Features: AWmQ_bmRaalBI0ZMlLkXylUAg8iNr7aeDyXaHbdMVHZLDDE3VIOOwKVGTzDaIfM
-Message-ID: <CAFEAcA8RaZOXpav64E5-0CDhB66zQXRuLaFuz22GiyPGwGVQJw@mail.gmail.com>
-Subject: Re: [PATCH v2] docs/system/security: Restrict "virtualization use
- case" to specific machines
-To: qemu-devel@nongnu.org
-Cc: Stefan Hajnoczi <stefanha@redhat.com>, Bernhard Beschow <shentey@gmail.com>,
- Thomas Huth <thuth@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- "Michael S . Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org, 
- qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>, qemu-s390x@nongnu.org,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>, 
- Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112f;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x112f.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tests/functional/riscv64/test_sifive_u: Remove unused
+ import statement
+To: Thomas Huth <thuth@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20251027112803.54564-1-thuth@redhat.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <20251027112803.54564-1-thuth@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,55 +107,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 16 Oct 2025 at 14:12, Peter Maydell <peter.maydell@linaro.org> wrote:
->
-> Currently our security policy defines a "virtualization use case"
-> where we consider bugs to be security issues, and a
-> "non-virtualization use case" where we do not make any security
-> guarantees and don't consider bugs to be security issues.
->
-> The rationale for this split is that much code in QEMU is older and
-> was not written with malicious guests in mind, and we don't have the
-> resources to audit, fix and defend it.  So instead we inform users
-> about what the can in practice rely on as a security barrier, and
-> what they can't.
->
-> We don't currently restrict the "virtualization use case" to any
-> particular set of machine types.  This means that we have effectively
-> barred ourselves from adding KVM support to any machine type that we
-> don't want to put into the "bugs are security issues" category, even
-> if it would be useful for users to be able to get better performance
-> with a trusted guest by enabling KVM. This seems an unnecessary
-> restriction, and in practice the set of machine types it makes
-> sense to use for untrusted-guest virtualization is quite small.
->
-> Specifically, we would like to be able to enable the use of
-> KVM with the imx8 development board machine types, but we don't
-> want to commit ourselves to having to support those SoC models
-> and device models as part of QEMU's security boundary:
-> https://lore.kernel.org/qemu-devel/20250629204851.1778-3-shentey@gmail.com/
->
-> This patch updates the security policy to explicitly list the
-> machine types we consider to be useful for the "virtualization
-> use case".
->
-> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+
+
+On 10/27/25 8:28 AM, Thomas Huth wrote:
+> From: Thomas Huth <thuth@redhat.com>
+> 
+> skipIfMissingCommands is not used here, remove the import to silence
+> a pylint warning for this file.
+> 
+> Signed-off-by: Thomas Huth <thuth@redhat.com>
 > ---
-> changes v1->v2: updated the list:
->  * remove isapc
->  * remove ppc, mips, mips64 (no machines supported)
->  * list pseries as only supported ppc64 machine
->  * list virt as only supported riscv32, riscv64 machine
->
-> I believe the list to now be correct, and I think we generally
-> had some consensus about the idea on the v1 patch discussion, so
-> this one is a non-RFC patch.
 
-This has now had various reviews and acks, and no
-suggestions for further revision. I propose to take
-this via target-arm.next, unless anybody has any
-objections.
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-thanks
--- PMM
+>   tests/functional/riscv64/test_sifive_u.py | 1 -
+>   1 file changed, 1 deletion(-)
+> 
+> diff --git a/tests/functional/riscv64/test_sifive_u.py b/tests/functional/riscv64/test_sifive_u.py
+> index 358ff0d1f60..847f709da12 100755
+> --- a/tests/functional/riscv64/test_sifive_u.py
+> +++ b/tests/functional/riscv64/test_sifive_u.py
+> @@ -13,7 +13,6 @@
+>   import os
+>   
+>   from qemu_test import Asset, LinuxKernelTest
+> -from qemu_test import skipIfMissingCommands
+>   
+>   
+>   class SifiveU(LinuxKernelTest):
+
 
