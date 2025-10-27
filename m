@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A730CCF9EA
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:19:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18C88CCF9EA
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:19:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDL9X-0006B3-AC; Mon, 27 Oct 2025 07:12:43 -0400
+	id 1vDL9X-0006DW-GG; Mon, 27 Oct 2025 07:12:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL9K-0005iU-Mt
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:12:31 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ id 1vDL9O-0005pA-9B
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:12:34 -0400
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL98-0007c2-IV
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:12:29 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-63bea08a326so6450067a12.3
- for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:12:15 -0700 (PDT)
+ id 1vDL98-0007b3-Jd
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:12:33 -0400
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b6d83bf1077so494851166b.3
+ for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:12:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761563534; x=1762168334; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761563532; x=1762168332; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MOIWat0zdvoLqu/dm2Cji7uUG0JRvbRh67vkFVnoxR0=;
- b=iW9VegSAwyykgu1vq5W01FUJ+YhkX1BGgNjBs5vO+zMsZ8rdB22gmk5TSYHQKl6T/f
- eQCsfRpQ3j7FDGy5IE9SCKTCDEHagDVfOZ5VqrGIn3YbMaruOIqv9zSZ4BzXsXZnNljt
- WBOwU1O7agn7NLuOZkOcrknciSyHMIP9thIv8mrO9uKrgI8BWRbD47L83bJ/e/gdMlJE
- 8U6CfdNp4PRMAKcsbpkV3HMLFkJRMJ+X3FD33Tn/QeIP1QpCWM7DQID1Ronhj6FqV/2S
- SsVu4PR1BPNJBF//UxJic9HKvzb7XsrLw4KAm4RNX2Tn9xF81x487ICYlV8KH12IrIZh
- 5ggQ==
+ bh=k1b44YiDbKt04f0+TC89kYzcy4R8hkZYmp3ahyMwERI=;
+ b=cOR0NhyDC76wMgHiQ89Z/nud3Mk1b+/PN1J2RxxRBBDlSZngH839cQCVVoZRdX/SRR
+ B/1cf5EWM5RzfOUztngSxjYGJSfA3xy91jkmqpnv+k3m58pBWafFSyJQC/1DHuQRILIx
+ 3bv2sQ3TqQBiIinufiim+czLqvZ+puTfoEKvPHcVl2AXnAg7C5VWdCvoXBkQ9Zh2YpGT
+ /9Yc5BJd2OZ/c7svzuAxvlRrTY0+khnYeeGZ0tdfLlpS4MX4z/0C2aHc+wqc2Zkzf/gY
+ BHlezFcxeA40cRPW5WlsMoYRpJtg2FtPk/RVcWK/fYPzNFqHRFUkHGp6VWnN49i+uatT
+ p1Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761563534; x=1762168334;
+ d=1e100.net; s=20230601; t=1761563532; x=1762168332;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MOIWat0zdvoLqu/dm2Cji7uUG0JRvbRh67vkFVnoxR0=;
- b=abUuak85oFDHLViuuhOmSvC1mDyhw3Zscwj8XlvGldjl2xhp3/4FVMKmolK7SIZy6g
- +WeqVNAoqS9LSC23/bRJspB733nXdjFTtOcWDTpIlenIPZOnvRksmrtgksnI/wlz0S5F
- cSsEyC+JZynmiD/zXHsKzfzB7G56zZxpk9XnHl9XQcgokg3oksgIBV6o9AisUazO6rF8
- IquSVckmCrSRVN/s9t9eEbSXG5RyeQG8I/S8nCqhvZHS3Ddu+lPMagbmJSl3ViYRtCYr
- HYmhfCZ06UVagZawb7bVIcix9DE+2G9SkitWqWslUYl1lX8dY0YrsAiuxFv7lIdCZjOp
- 0F+Q==
+ bh=k1b44YiDbKt04f0+TC89kYzcy4R8hkZYmp3ahyMwERI=;
+ b=K0QNmtR1AnFO6UePv2p2ldvM3UmjKC8Cscyjcplu8LOLk0P2K0FG08jAiODLieP2zO
+ /4EE48aXF8lHECREWKjnYSeB3PXqim7BhzDBySYIb8hom1nckCyCAq84oUoqDo4slX1O
+ DTOQzsMJu5Hs0TWWMzmqw3nMhN26/IH778rBdw1H8H+phBdLxRzceLRovbEw99PvK0VG
+ DWttGSbrLwhNF9IesLvwR0tv6gUQOzavYQM2g9swJzQpW2QhRA34cVq2yJSHEqxochAE
+ 4/gNb9McP0UQQpOLwCI77yLPArTB7KqXUDfgckW6CWNTv3ITbMt9q6nKbOza1llMJQT3
+ xMXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXfPZQdrRMcg7nxYaamqcsJR0/7TYOQmrj9yF9o5yIlhoNAI9QKrmyaP2SEwnbIziZCE2Ryd6ge1Aw2@nongnu.org
-X-Gm-Message-State: AOJu0Yy6ahdNE7ph33DyTNoWasBOhCPWTgH8SasU5IDdIIfCT/FZ8cRF
- hb2h3I5GzIzWhV+OP5vkSf6EvG7iEgXHv42DS0zg0y+qcpjgIZkcP3DqCO6+Ah7/Dxo=
-X-Gm-Gg: ASbGncs3RryUh49Te9zar9rkJDM2S5/LhpYDwkhWnD+jHf545M5mCchzrQE4Ez3Z06V
- SJ6YPHX/W1a5d/60lC33iD0wrOiW3IIZ8IeXCaryJ++57Qih1IKJVk+iJRv9yAQGdq4KZ1zt7By
- MEFzhWm7veGBbM0b8nWJQalARW0Am8ufkH7i/XLLEjV/ZEcDKJw0hMoJMQxo198q1qi5R0ckOp+
- Gkcgn3+5DD5uho/Im1oEa3KsUYd9geBxl4PgES9lepjOHcHomJHzeSLf88alYCycfj7BKfn6IXc
- D9yjn/wgzuuvZ+BcvnO+lroyFb9Nw7cFfq3EsYVNwxusvanWtckvB+dch7p4qaccvMGdhC9nsdv
- vUBNRVg/UtrsrIbjS+E0+XbP4xRYAAsnTdnxL0SyGuTbbanLZpVhEXWvyYmebGxBgdAyzLyDUwN
- yHZWmZzCmsNSQ=
-X-Google-Smtp-Source: AGHT+IG7xohgDbdCZpEaQql0WKu05/9DRCJ7c6eaYimOVb8vqucvzuXNIHI9wIYvrcQfxrfUbcLyJw==
-X-Received: by 2002:a05:6402:4504:b0:634:ab34:ed40 with SMTP id
- 4fb4d7f45d1cf-63c1f580cf2mr34888236a12.0.1761563533781; 
- Mon, 27 Oct 2025 04:12:13 -0700 (PDT)
+ AJvYcCVgEi0TBy+AHFakkFA58nUuwLLT//T4HQuyUxQG2lWBi06/jX0CV6Vw+fm/O8Z7djjOcDspGi+wmV+O@nongnu.org
+X-Gm-Message-State: AOJu0YwN8amq6VAfTIFMB4R6E1eBof07mkS9egoLhJ/2QLtAEM6/pxls
+ YPiCsglKhzAlDmLLXvoJVxpWCj/2IMNUFWeRdoWDXSS3P/YOuTpShbZxYsLy838EnG4=
+X-Gm-Gg: ASbGncuCHmlj2baK5Eoe017UeATo3ko+VMofXbayOXVhwX4NunPluWCuegL4obsUpvs
+ bTJ70ClIZ4ty1ftaGPDVMMngDvShCA0t3gCr64MzveKp0yYxlRk0zQLtAs+KiuOBsl534l34qF9
+ BVFk+VIRuNTJBFEBJzrIlk2JEL6z6SLm+g7z4TKkH6nlMkTznUlZbZim7X3X9dlUI9vEBiwaArr
+ rGJM5pKJmfNS0bju1gk4386C1EIx343te5FTvlunrUaRWakPtLijRagoKsqyfiWjwcqX+iGdeKG
+ mu9KAVzBE5/MhSuYQp2Wq9nyWptOV66+Z3/Tv5jzRxZl/cmUgW081LXg/hb/HBRPWqc65vL79p7
+ gOnz89D7znfr54dkM5RXtWRW2rO1aTwAP3vJq2JvF8qktWTjTS27Kii+xqph+/Vj0PYQTF1vnJI
+ Tp
+X-Google-Smtp-Source: AGHT+IFAV+BoEUvv3MUqiX7rf+U8AhNUN79l2kx30OOeXcgUQBGUQGIdMqmuudNqjd0S8ZvzpH+5Eg==
+X-Received: by 2002:a17:907:7e8e:b0:b41:4e72:309f with SMTP id
+ a640c23a62f3a-b6473f4543fmr4224357866b.50.1761563531615; 
+ Mon, 27 Oct 2025 04:12:11 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-63e7ef95cb9sm6162733a12.17.2025.10.27.04.12.10
+ a640c23a62f3a-b6d853c5c0dsm730859166b.40.2025.10.27.04.12.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 04:12:12 -0700 (PDT)
+ Mon, 27 Oct 2025 04:12:08 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id BC74960CB8;
- Mon, 27 Oct 2025 11:03:45 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 0F3D060D95;
+ Mon, 27 Oct 2025 11:03:46 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -97,24 +97,24 @@ Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Michael Rolnik <mrolnik@gmail.com>,
  Song Gao <gaosong@loongson.cn>, qemu-riscv@nongnu.org,
  Aleksandar Rikalo <arikalo@gmail.com>, Julian Ganz <neither@nut.email>
-Subject: [PATCH 18/35] target/microblaze: call plugin trap callbacks
-Date: Mon, 27 Oct 2025 11:03:25 +0000
-Message-ID: <20251027110344.2289945-19-alex.bennee@linaro.org>
+Subject: [PATCH 21/35] target/ppc: call plugin trap callbacks
+Date: Mon, 27 Oct 2025 11:03:28 +0000
+Message-ID: <20251027110344.2289945-22-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251027110344.2289945-1-alex.bennee@linaro.org>
 References: <20251027110344.2289945-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x529.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::630;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -137,65 +137,215 @@ events as well as the corresponding hook functions. Due to differences
 between architectures, the latter need to be called from target specific
 code.
 
-This change places the hook for MicroBlaze targets. This architecture
-has one special "exception" for interrupts and no host calls.
+This change places hooks for Power PC targets.
 
 Signed-off-by: Julian Ganz <neither@nut.email>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/microblaze/helper.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ target/ppc/excp_helper.c | 41 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
 
-diff --git a/target/microblaze/helper.c b/target/microblaze/helper.c
-index cf577a72268..a1857b72172 100644
---- a/target/microblaze/helper.c
-+++ b/target/microblaze/helper.c
+diff --git a/target/ppc/excp_helper.c b/target/ppc/excp_helper.c
+index d8bca19fff5..6d05b865058 100644
+--- a/target/ppc/excp_helper.c
++++ b/target/ppc/excp_helper.c
 @@ -27,6 +27,7 @@
- #include "qemu/host-utils.h"
- #include "exec/log.h"
- #include "exec/helper-proto.h"
+ #include "internal.h"
+ #include "helper_regs.h"
+ #include "hw/ppc/ppc.h"
 +#include "qemu/plugin.h"
  
+ #include "trace.h"
  
- G_NORETURN
-@@ -35,6 +36,7 @@ static void mb_unaligned_access_internal(CPUState *cs, uint64_t addr,
- {
-     CPUMBState *env = cpu_env(cs);
-     uint32_t esr, iflags;
-+    uint64_t last_pc = env->pc;
- 
-     /* Recover the pc and iflags from the corresponding insn_start.  */
-     cpu_restore_state(cs, retaddr);
-@@ -54,6 +56,7 @@ static void mb_unaligned_access_internal(CPUState *cs, uint64_t addr,
-     env->ear = addr;
-     env->esr = esr;
-     cs->exception_index = EXCP_HW_EXCP;
-+    qemu_plugin_vcpu_exception_cb(cs, last_pc);
-     cpu_loop_exit(cs);
+@@ -404,11 +405,31 @@ static void powerpc_mcheck_checkstop(CPUPPCState *env)
+     powerpc_checkstop(env, "machine check with MSR[ME]=0");
  }
  
-@@ -152,6 +155,7 @@ void mb_cpu_do_interrupt(CPUState *cs)
-     CPUMBState *env = &cpu->env;
-     uint32_t t, msr = mb_cpu_read_msr(env);
-     bool set_esr;
-+    uint64_t last_pc = env->pc;
- 
-     /* IMM flag cannot propagate across a branch and into the dslot.  */
-     assert((env->iflags & (D_FLAG | IMM_FLAG)) != (D_FLAG | IMM_FLAG));
-@@ -256,6 +260,12 @@ void mb_cpu_do_interrupt(CPUState *cs)
-     env->res_addr = RES_ADDR_NONE;
-     env->iflags = 0;
- 
-+    if (cs->exception_index == EXCP_IRQ) {
-+        qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
-+    } else {
-+        qemu_plugin_vcpu_exception_cb(cs, last_pc);
++static void powerpc_do_plugin_vcpu_interrupt_cb(CPUState *cs, int excp,
++                                                uint64_t from)
++{
++    switch (excp) {
++    case POWERPC_EXCP_NONE:
++        break;
++    case POWERPC_EXCP_FIT:
++    case POWERPC_EXCP_WDT:
++    case POWERPC_EXCP_PIT:
++    case POWERPC_EXCP_SMI:
++    case POWERPC_EXCP_PERFM:
++    case POWERPC_EXCP_THERM:
++        qemu_plugin_vcpu_interrupt_cb(cs, from);
++        break;
++    default:
++        qemu_plugin_vcpu_exception_cb(cs, from);
 +    }
++}
 +
-     if (!set_esr) {
-         qemu_log_mask(CPU_LOG_INT,
-                       "         to pc=%08x msr=%08x\n", env->pc, msr);
+ static void powerpc_excp_40x(PowerPCCPU *cpu, int excp)
+ {
+     CPUPPCState *env = &cpu->env;
+     target_ulong msr, new_msr, vector;
+     int srr0 = SPR_SRR0, srr1 = SPR_SRR1;
++    uint64_t last_pc = env->nip;
+ 
+     /* new srr1 value excluding must-be-zero bits */
+     msr = env->msr & ~0x783f0000ULL;
+@@ -456,6 +477,7 @@ static void powerpc_excp_40x(PowerPCCPU *cpu, int excp)
+             if (!FIELD_EX64_FE(env->msr) || !FIELD_EX64(env->msr, MSR, FP)) {
+                 trace_ppc_excp_fp_ignore();
+                 powerpc_reset_excp_state(cpu);
++                qemu_plugin_vcpu_exception_cb(env_cpu(env), last_pc);
+                 return;
+             }
+             env->spr[SPR_40x_ESR] = ESR_FP;
+@@ -510,12 +532,14 @@ static void powerpc_excp_40x(PowerPCCPU *cpu, int excp)
+     env->spr[srr0] = env->nip;
+     env->spr[srr1] = msr;
+     powerpc_set_excp_state(cpu, vector, new_msr);
++    powerpc_do_plugin_vcpu_interrupt_cb(env_cpu(env), excp, last_pc);
+ }
+ 
+ static void powerpc_excp_6xx(PowerPCCPU *cpu, int excp)
+ {
+     CPUPPCState *env = &cpu->env;
+     target_ulong msr, new_msr, vector;
++    uint64_t last_pc = env->nip;
+ 
+     /* new srr1 value excluding must-be-zero bits */
+     msr = env->msr & ~0x783f0000ULL;
+@@ -567,6 +591,7 @@ static void powerpc_excp_6xx(PowerPCCPU *cpu, int excp)
+             if (!FIELD_EX64_FE(env->msr) || !FIELD_EX64(env->msr, MSR, FP)) {
+                 trace_ppc_excp_fp_ignore();
+                 powerpc_reset_excp_state(cpu);
++                qemu_plugin_vcpu_exception_cb(env_cpu(env), last_pc);
+                 return;
+             }
+             /*
+@@ -653,12 +678,14 @@ static void powerpc_excp_6xx(PowerPCCPU *cpu, int excp)
+     env->spr[SPR_SRR0] = env->nip;
+     env->spr[SPR_SRR1] = msr;
+     powerpc_set_excp_state(cpu, vector, new_msr);
++    powerpc_do_plugin_vcpu_interrupt_cb(env_cpu(env), excp, last_pc);
+ }
+ 
+ static void powerpc_excp_7xx(PowerPCCPU *cpu, int excp)
+ {
+     CPUPPCState *env = &cpu->env;
+     target_ulong msr, new_msr, vector;
++    uint64_t last_pc = env->nip;
+ 
+     /* new srr1 value excluding must-be-zero bits */
+     msr = env->msr & ~0x783f0000ULL;
+@@ -708,6 +735,7 @@ static void powerpc_excp_7xx(PowerPCCPU *cpu, int excp)
+             if (!FIELD_EX64_FE(env->msr) || !FIELD_EX64(env->msr, MSR, FP)) {
+                 trace_ppc_excp_fp_ignore();
+                 powerpc_reset_excp_state(cpu);
++                qemu_plugin_vcpu_exception_cb(env_cpu(env), last_pc);
+                 return;
+             }
+             /*
+@@ -758,6 +786,7 @@ static void powerpc_excp_7xx(PowerPCCPU *cpu, int excp)
+         if (lev == 1 && cpu->vhyp) {
+             cpu->vhyp_class->hypercall(cpu->vhyp, cpu);
+             powerpc_reset_excp_state(cpu);
++            qemu_plugin_vcpu_hostcall_cb(env_cpu(env), last_pc);
+             return;
+         }
+ 
+@@ -803,12 +832,14 @@ static void powerpc_excp_7xx(PowerPCCPU *cpu, int excp)
+     env->spr[SPR_SRR0] = env->nip;
+     env->spr[SPR_SRR1] = msr;
+     powerpc_set_excp_state(cpu, vector, new_msr);
++    powerpc_do_plugin_vcpu_interrupt_cb(env_cpu(env), excp, last_pc);
+ }
+ 
+ static void powerpc_excp_74xx(PowerPCCPU *cpu, int excp)
+ {
+     CPUPPCState *env = &cpu->env;
+     target_ulong msr, new_msr, vector;
++    uint64_t last_pc = env->nip;
+ 
+     /* new srr1 value excluding must-be-zero bits */
+     msr = env->msr & ~0x783f0000ULL;
+@@ -858,6 +889,7 @@ static void powerpc_excp_74xx(PowerPCCPU *cpu, int excp)
+             if (!FIELD_EX64_FE(env->msr) || !FIELD_EX64(env->msr, MSR, FP)) {
+                 trace_ppc_excp_fp_ignore();
+                 powerpc_reset_excp_state(cpu);
++                qemu_plugin_vcpu_exception_cb(env_cpu(env), last_pc);
+                 return;
+             }
+             /*
+@@ -908,6 +940,7 @@ static void powerpc_excp_74xx(PowerPCCPU *cpu, int excp)
+         if (lev == 1 && cpu->vhyp) {
+             cpu->vhyp_class->hypercall(cpu->vhyp, cpu);
+             powerpc_reset_excp_state(cpu);
++            qemu_plugin_vcpu_hostcall_cb(env_cpu(env), last_pc);
+             return;
+         }
+ 
+@@ -947,6 +980,7 @@ static void powerpc_excp_74xx(PowerPCCPU *cpu, int excp)
+     env->spr[SPR_SRR0] = env->nip;
+     env->spr[SPR_SRR1] = msr;
+     powerpc_set_excp_state(cpu, vector, new_msr);
++    powerpc_do_plugin_vcpu_interrupt_cb(env_cpu(env), excp, last_pc);
+ }
+ 
+ static void powerpc_excp_ppe42(PowerPCCPU *cpu, int excp)
+@@ -1073,6 +1107,7 @@ static void powerpc_excp_booke(PowerPCCPU *cpu, int excp)
+     CPUPPCState *env = &cpu->env;
+     target_ulong msr, new_msr, vector;
+     int srr0 = SPR_SRR0, srr1 = SPR_SRR1;
++    uint64_t last_pc = env->nip;
+ 
+     /*
+      * Book E does not play games with certain bits of xSRR1 being MSR save
+@@ -1144,6 +1179,7 @@ static void powerpc_excp_booke(PowerPCCPU *cpu, int excp)
+             if (!FIELD_EX64_FE(env->msr) || !FIELD_EX64(env->msr, MSR, FP)) {
+                 trace_ppc_excp_fp_ignore();
+                 powerpc_reset_excp_state(cpu);
++                qemu_plugin_vcpu_exception_cb(env_cpu(env), last_pc);
+                 return;
+             }
+             /*
+@@ -1252,6 +1288,7 @@ static void powerpc_excp_booke(PowerPCCPU *cpu, int excp)
+     env->spr[srr0] = env->nip;
+     env->spr[srr1] = msr;
+     powerpc_set_excp_state(cpu, vector, new_msr);
++    powerpc_do_plugin_vcpu_interrupt_cb(env_cpu(env), excp, last_pc);
+ }
+ 
+ /*
+@@ -1373,6 +1410,7 @@ static void powerpc_excp_books(PowerPCCPU *cpu, int excp)
+     CPUPPCState *env = &cpu->env;
+     target_ulong msr, new_msr, vector;
+     int srr0 = SPR_SRR0, srr1 = SPR_SRR1, lev = -1;
++    uint64_t last_pc = env->nip;
+ 
+     /* new srr1 value excluding must-be-zero bits */
+     msr = env->msr & ~0x783f0000ULL;
+@@ -1472,6 +1510,7 @@ static void powerpc_excp_books(PowerPCCPU *cpu, int excp)
+             if (!FIELD_EX64_FE(env->msr) || !FIELD_EX64(env->msr, MSR, FP)) {
+                 trace_ppc_excp_fp_ignore();
+                 powerpc_reset_excp_state(cpu);
++                qemu_plugin_vcpu_exception_cb(env_cpu(env), last_pc);
+                 return;
+             }
+             /*
+@@ -1516,6 +1555,7 @@ static void powerpc_excp_books(PowerPCCPU *cpu, int excp)
+         if (lev == 1 && books_vhyp_handles_hcall(cpu)) {
+             cpu->vhyp_class->hypercall(cpu->vhyp, cpu);
+             powerpc_reset_excp_state(cpu);
++            qemu_plugin_vcpu_hostcall_cb(env_cpu(env), last_pc);
+             return;
+         }
+         if (env->insns_flags2 & PPC2_ISA310) {
+@@ -1662,6 +1702,7 @@ static void powerpc_excp_books(PowerPCCPU *cpu, int excp)
+         ppc_excp_apply_ail(cpu, excp, msr, &new_msr, &vector);
+         powerpc_set_excp_state(cpu, vector, new_msr);
+     }
++    powerpc_do_plugin_vcpu_interrupt_cb(env_cpu(env), excp, last_pc);
+ }
+ #else
+ static inline void powerpc_excp_books(PowerPCCPU *cpu, int excp)
 -- 
 2.47.3
 
