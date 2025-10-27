@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CFADCCF9E0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFEF3CCF9EA
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:15:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDL2d-0001vG-Kq; Mon, 27 Oct 2025 07:05:35 -0400
+	id 1vDL2P-0001eE-6v; Mon, 27 Oct 2025 07:05:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL2b-0001sc-Kg
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:33 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ id 1vDL29-0001GQ-ER
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:05 -0400
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL1c-0005ac-Gk
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:32 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-61feb87fe26so7826408a12.1
- for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:03:49 -0700 (PDT)
+ id 1vDL1Z-0005g7-2C
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:05 -0400
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-63bdfd73e6eso10284694a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:03:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761563026; x=1762167826; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CZxOmv1h9X+NtE8CrFVjihKiw1E4S/yG+7YAk6GJ2BI=;
- b=ux+8I8pEsCSkzMAI/oEQ1jFvolUvgt/AuUBDJSPwsiVRq+WgnZykTGJEVxTa2b5SDb
- RZPIaXwInKY6WPAobmJwn+YWnevKVhW9EbNdFewOiP894mkoHuC4LzokPoiCsGjzAUeu
- ViMft+y+k8riXU5J8++/l/C2aCetmFcA2w4IRmLLkuNi7rTy0mEp/PfGqKVTK2NEY3fh
- 9l8t7+nfZSQiyXpj6c2iQw+a884sQYjgOcwBnkl7Yi/Ttkol4Vs4rISQhMa20iXxRhXe
- QGiQ4D6dwhA3KzZwR2/yyRoiQoVmVcV5zewR/r+Tl/XTRbyixv5fIk9rySp1nhcFBecP
- FolQ==
+ d=linaro.org; s=google; t=1761563036; x=1762167836; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6tc/ncHQ43H5RAM4g98aEerDqB5nJ7XC9XRTlxHTgjE=;
+ b=RC6W0lZoe2DPpgJuvPbnkpvI2CHFJov4P0RbMXSvPm5HiBQeFPMU0tGjvk1zxiVRET
+ jhJMbdR6idwvZX3aHQREyEDAHhx085ycv1byqAWs4uwawbAMwPjmT/otbcOOTBZccD7M
+ EV4FqvKtJ/oOV5gbVkR/QKr722By5jaOjkaTmB3iF4320yERYvkYadfvKwJjIdR3qL5f
+ NQo1t+HspSB+QYfao4l82rlR01T8yr4hz12E5phYJbNQUQvu/qnx7GWKtKhujEt4hoSu
+ lOULW40XFfd5detS3bPn73JF88QKM4rFezPilpqVPGhhJ91Ljcc/hRxMpkMuMQ0mmeOo
+ Trkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761563026; x=1762167826;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CZxOmv1h9X+NtE8CrFVjihKiw1E4S/yG+7YAk6GJ2BI=;
- b=Poq8Te2Z/VLul6PaSxbhlMNFgchJPmrqFDhfpjm7+CacVxbBHym2g7eukhMbIKY9a+
- UOE5n6+YzzUzOGXiSdKxave+l5gO6gWnJ2HssBhUc8MHPwQeq9EepnqZIh1buKgzSetM
- zVy9skzkg3n7WQ+KWVH96tFWrfSIoKikoHbjDWi00HGH0G/kPw0AIyQ4HnztbUlT+WAN
- uhwVvnFssUS2ie4bFbbcxHJlQbKAabeSpfuZHuy2OJX9UhVcCdzvNYQ797X2jRS0RDd8
- mbJX1fRpgqi3Skj3p/V8SMZtzuBFhFY8w7jKVXCMMlP49MJw/kWlrKUq+b894NHjXtjZ
- GqHw==
+ d=1e100.net; s=20230601; t=1761563036; x=1762167836;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6tc/ncHQ43H5RAM4g98aEerDqB5nJ7XC9XRTlxHTgjE=;
+ b=wvi/USm+uGoPjjqpb6JxuEXVsKyDBZa96ugm7SBh7K6RS+DiPi3dYgqNGAQ8zun0yL
+ lVns9CBfd0VgydQbRtpg8JLD11qxBAS5v5fQBrJe2lxjrINOp+rbWVJIhQHCaHB7c/VV
+ bIEqqumom7wg2ZJqJMuu/dCG7JIIe3UrnVWbf7ImCrceUjcWfaR9wc2NOiSfRQo0Ultt
+ 9yBp/qzp2IhSCUZpzQttjlDAfyNHnWvWcShNFv/Y5vw0LSvZ1pOsLqJLVUzGG4gptipC
+ 8IVn6oc8I4SORtzTZ7tQzg6x+M5tt3YoVgnl/Cbz5+0eo1M9ZAdZ4L84t0pcBe3XB7co
+ 91pw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUlbkEdoiG00gu/7ZsfjhendldqEm6Fpp7E1wQpImRf2HPXRVBvWB08aIBxqFErluFLRqkrcyOZeO1C@nongnu.org
-X-Gm-Message-State: AOJu0YxeE1mpgveMT1zq2CHPVMj8z7cD6XylItgb0Gj3nhRIbbajhINf
- sxhVHrclDBLrd0aLDvG+cZ1pjjIvJORlQrgjVaqGpYp3CZ0NI5Vm3uJDsKnRIIYQbW8=
-X-Gm-Gg: ASbGncssBA+af4pppDGBuIy9ZvdgLDLEPrYNx2A1CIjBCmlEzdRLs9IGqkCHBCKmBru
- PxPLSmVKCCPlV6Ke/9ScrKAv2simi3d7WvXCBQ1sGo2JHruZmbpPDypbb8XYI7iRYbD3N/fKqaj
- B9S9r8h6yYErNjX/d+hvLHqA49d3jJHa3fmARk/74bZhzjVCpKVoHQ5VZP/9o6aZ1SrH1MCLpff
- u+Ka+EWuYKC4JcRNlUqOHw7bVmkR/ar+cxhYlkgQctwWNo2RidWou8DUfln1yYi0UmgDkG2Zu7q
- XQwfURJ//23zbM2dZV+vD/3cn2KQ+G9bW4bAP5kJ0W3i33RJ7ZGxSZSU55bJhSgGfC13rSKhFGX
- voTS1VtX5otM/mDzKdq8iH5EghwrKAPqY0cWTB6Vr5511YsAd79zVNY9xkEOvpEYF82YM6qMqM7
- M0
-X-Google-Smtp-Source: AGHT+IEjdh5wekeDnj/JN/hpImq3PiBtRv+N6Y50dWW99nPrapeBSLqmnoWMTqOiYMColqDL85c1Jg==
-X-Received: by 2002:a05:6402:34d1:b0:636:7e05:b6c0 with SMTP id
- 4fb4d7f45d1cf-63e5fa7473amr9185535a12.0.1761563025832; 
- Mon, 27 Oct 2025 04:03:45 -0700 (PDT)
+ AJvYcCX+Y/wyU01ld8HLsUerxuYpGkAhszb+LvxvBh7l1VXWrH4qfrnYnVud10hGeQVWpAmE331Z95o0LII9@nongnu.org
+X-Gm-Message-State: AOJu0YyuTR1pubymiCpXwTqypVKKjc6K685p6hc5eL/uMHvE4OEpbmC2
+ VkhpGg+ten9rSLIg0EGGuf62Z/gptxIqEMzPlYfUnTNUSvcscfTizS8kYBBo13ejh5c=
+X-Gm-Gg: ASbGnctNJCh4jKhCm3CTWldW5inzZhvR//JB8XZRxdpcEwbNZWfYD3HGtNDT5pJjjFa
+ QV9v0+JkIua4MaAmKJSseXMfbZpvZ53XyWYb4wJXXML5ZJ64GzPCubd7oFTnuSgHY+B75KfHrdG
+ K5t4w1NpxaUmghVO6h5dz+GlGXVcoTxtyIYFEEB/I5k1aSWiDr9YI7m1rFUeqRemDIAMhyyHpJQ
+ zYXzFQ8lxc3EnAJnRXPdMPFbRwHfR+albNBZiCD4z0+63EWGoMmM0hQJYq6zArAHFzldYHJj/Qy
+ baRqYDypbVyfruZNkTVaA6q36lC8TjCrNWPGwMwvUeRqBTTpdm39gvBC+yTxBSCQSeEjxW8vdIz
+ LhrXizrcVz85O1tWVWspLQJnD/qMesRrjejn5VDLhK8GRl1d6dKPnQpSzBhBz/2L94OPjAmo0oY
+ 4G9jpkJkrIFqs=
+X-Google-Smtp-Source: AGHT+IERY0LRDtAh/P/JnbkEdSaGPZN26CjXuTfwQxfSVQ5HKYkzM6nMMAvqidpDE39wy9t9gsU+wA==
+X-Received: by 2002:aa7:cf0a:0:b0:63e:6f85:1ef3 with SMTP id
+ 4fb4d7f45d1cf-63e6f851f34mr5947239a12.12.1761563036495; 
+ Mon, 27 Oct 2025 04:03:56 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-63e8036cdd4sm5887848a12.22.2025.10.27.04.03.44
+ 4fb4d7f45d1cf-63e7efb950csm6163591a12.28.2025.10.27.04.03.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 04:03:45 -0700 (PDT)
+ Mon, 27 Oct 2025 04:03:53 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 1DCEB5F8CD;
- Mon, 27 Oct 2025 11:03:44 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 7AA5F60A94;
+ Mon, 27 Oct 2025 11:03:45 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -95,17 +96,18 @@ Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Michael Rolnik <mrolnik@gmail.com>,
  Song Gao <gaosong@loongson.cn>, qemu-riscv@nongnu.org,
- Aleksandar Rikalo <arikalo@gmail.com>
-Subject: [PATCH 00/35] maintainer updates for 8.2 softfeeeze (ci, plugins,
- semihosting) pre-PR
-Date: Mon, 27 Oct 2025 11:03:07 +0000
-Message-ID: <20251027110344.2289945-1-alex.bennee@linaro.org>
+ Aleksandar Rikalo <arikalo@gmail.com>, Julian Ganz <neither@nut.email>
+Subject: [PATCH 15/35] target/i386: call plugin trap callbacks
+Date: Mon, 27 Oct 2025 11:03:22 +0000
+Message-ID: <20251027110344.2289945-16-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20251027110344.2289945-1-alex.bennee@linaro.org>
+References: <20251027110344.2289945-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x531.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,131 +130,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+From: Julian Ganz <neither@nut.email>
 
-This should be my final pull-request before softfreeze on the 4th of
-November. As I'll be travelling I intend to send it out by the end of
-the week.
+We recently introduced API for registering callbacks for trap related
+events as well as the corresponding hook functions. Due to differences
+between architectures, the latter need to be called from target specific
+code.
 
-The CI changes are mostly cleanups for the ansible scripts. I've
-dropped the final testing/next patch which enables the ppc64le custom
-runner as I don't think I'll have time to debug that before the
-freeze.
+This change places the hook for x86 targets.
 
-The plugin updates are already well reviewed and should make more
-richer plugins giving semantic info on the type of discontinuities you
-can see.
+Signed-off-by: Julian Ganz <neither@nut.email>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ target/i386/tcg/excp_helper.c | 3 +++
+ target/i386/tcg/seg_helper.c  | 4 ++++
+ 2 files changed, 7 insertions(+)
 
-There are a few other minor fixes including come missing CFI tags for
-some plugin callbacks and fixing the minimal -no-tcg build.
-
-The following still need review:
-
-  scripts/ci: modify gitlab runner deb setup
-  tests/lcitool: generate a yaml file for the ppc64le runner
-  scripts/ci: allow both Ubuntu or Debian to run upgrade
-  scripts/ci: move build-environment.yaml up a level
-  scripts/ci/setup: regenerate yaml
-  ci: clean-up remaining bits of armhf builds.
-
-Alex.
-
-Alex Bennée (8):
-  ci: clean-up remaining bits of armhf builds.
-  scripts/ci/setup: regenerate yaml
-  scripts/ci: move build-environment.yaml up a level
-  scripts/ci: allow both Ubuntu or Debian to run upgrade
-  tests/lcitool: generate a yaml file for the ppc64le runner
-  scripts/ci: modify gitlab runner deb setup
-  plugins/core: add missing QEMU_DISABLE_CFI annotations
-  configs: drop SBSA_REF from minimal specification
-
-Julian Ganz (25):
-  plugins: add types for callbacks related to certain discontinuities
-  plugins: add API for registering discontinuity callbacks
-  plugins: add hooks for new discontinuity related callbacks
-  contrib/plugins: add plugin showcasing new dicontinuity related API
-  target/alpha: call plugin trap callbacks
-  target/arm: call plugin trap callbacks
-  target/avr: call plugin trap callbacks
-  target/hppa: call plugin trap callbacks
-  target/i386: call plugin trap callbacks
-  target/loongarch: call plugin trap callbacks
-  target/m68k: call plugin trap callbacks
-  target/microblaze: call plugin trap callbacks
-  target/mips: call plugin trap callbacks
-  target/openrisc: call plugin trap callbacks
-  target/ppc: call plugin trap callbacks
-  target/riscv: call plugin trap callbacks
-  target/rx: call plugin trap callbacks
-  target/s390x: call plugin trap callbacks
-  target/sh4: call plugin trap callbacks
-  target/sparc: call plugin trap callbacks
-  target/tricore: call plugin trap callbacks
-  target/xtensa: call plugin trap callbacks
-  tests: add plugin asserting correctness of discon event's to_pc
-  tests: add test for double-traps on rv64
-  tests: add test with interrupted memory accesses on rv64
-
-Sean Anderson (2):
-  gdbstub: Fix %s formatting
-  semihosting: Fix GDB File-I/O FLEN
-
- docs/about/emulation.rst                      |   8 +
- docs/devel/testing/ci-jobs.rst.inc            |   7 -
- configs/devices/aarch64-softmmu/minimal.mak   |   1 -
- include/qemu/plugin-event.h                   |   3 +
- include/qemu/plugin.h                         |  13 ++
- include/qemu/qemu-plugin.h                    |  60 +++++
- target/arm/internals.h                        |   1 +
- contrib/plugins/traps.c                       |  83 +++++++
- gdbstub/syscalls.c                            |   2 +-
- plugins/core.c                                |  58 +++++
- plugins/loader.c                              |   1 +
- semihosting/arm-compat-semi.c                 |   5 +-
- target/alpha/helper.c                         |  13 ++
- target/arm/helper.c                           |  24 ++
- target/arm/tcg/m_helper.c                     |   5 +
- target/avr/helper.c                           |   3 +
- target/hppa/int_helper.c                      |  17 ++
- target/i386/tcg/excp_helper.c                 |   3 +
- target/i386/tcg/seg_helper.c                  |   4 +
- target/loongarch/tcg/tcg_cpu.c                |   4 +
- target/m68k/op_helper.c                       |  22 ++
- target/microblaze/helper.c                    |  10 +
- target/mips/tcg/system/tlb_helper.c           |  11 +
- target/openrisc/interrupt.c                   |  15 ++
- target/ppc/excp_helper.c                      |  41 ++++
- target/riscv/cpu_helper.c                     |   9 +
- target/rx/helper.c                            |  12 +
- target/s390x/tcg/excp_helper.c                |   8 +
- target/sh4/helper.c                           |   4 +
- target/sparc/int32_helper.c                   |   7 +
- target/sparc/int64_helper.c                   |  10 +
- target/tricore/op_helper.c                    |   5 +
- target/xtensa/exc_helper.c                    |   6 +
- target/xtensa/xtensa-semi.c                   |   3 +
- tests/tcg/plugins/discons.c                   | 221 ++++++++++++++++++
- .../custom-runners/ubuntu-24.04-aarch64.yml   |   2 -
- contrib/plugins/meson.build                   |   2 +-
- .../setup/{ubuntu => }/build-environment.yml  |  32 +--
- .../ci/setup/debian/debian-13-ppc64le.yaml    | 134 +++++++++++
- scripts/ci/setup/gitlab-runner.yml            |   6 +-
- .../ci/setup/ubuntu/ubuntu-2404-aarch64.yaml  |   4 +-
- .../ci/setup/ubuntu/ubuntu-2404-s390x.yaml    |   4 +-
- tests/lcitool/refresh                         |   1 +
- tests/tcg/plugins/meson.build                 |   2 +-
- tests/tcg/riscv64/Makefile.softmmu-target     |  12 +
- tests/tcg/riscv64/doubletrap.S                |  73 ++++++
- tests/tcg/riscv64/interruptedmemory.S         |  97 ++++++++
- 47 files changed, 1031 insertions(+), 37 deletions(-)
- create mode 100644 contrib/plugins/traps.c
- create mode 100644 tests/tcg/plugins/discons.c
- rename scripts/ci/setup/{ubuntu => }/build-environment.yml (63%)
- create mode 100644 scripts/ci/setup/debian/debian-13-ppc64le.yaml
- create mode 100644 tests/tcg/riscv64/doubletrap.S
- create mode 100644 tests/tcg/riscv64/interruptedmemory.S
-
+diff --git a/target/i386/tcg/excp_helper.c b/target/i386/tcg/excp_helper.c
+index 6fb8036d988..32f2784e923 100644
+--- a/target/i386/tcg/excp_helper.c
++++ b/target/i386/tcg/excp_helper.c
+@@ -23,6 +23,7 @@
+ #include "system/runstate.h"
+ #include "exec/helper-proto.h"
+ #include "helper-tcg.h"
++#include "qemu/plugin.h"
+ 
+ G_NORETURN void helper_raise_interrupt(CPUX86State *env, int intno,
+                                           int next_eip_addend)
+@@ -93,6 +94,7 @@ void raise_interrupt2(CPUX86State *env, int intno,
+                       uintptr_t retaddr)
+ {
+     CPUState *cs = env_cpu(env);
++    uint64_t last_pc = env->eip + env->segs[R_CS].base;
+ 
+     if (!is_int) {
+         cpu_svm_check_intercept_param(env, SVM_EXIT_EXCP_BASE + intno,
+@@ -106,6 +108,7 @@ void raise_interrupt2(CPUX86State *env, int intno,
+     env->error_code = error_code;
+     env->exception_is_int = is_int;
+     env->exception_next_eip = env->eip + next_eip_addend;
++    qemu_plugin_vcpu_exception_cb(cs, last_pc);
+     cpu_loop_exit_restore(cs, retaddr);
+ }
+ 
+diff --git a/target/i386/tcg/seg_helper.c b/target/i386/tcg/seg_helper.c
+index f49fe851cdf..667b1c38696 100644
+--- a/target/i386/tcg/seg_helper.c
++++ b/target/i386/tcg/seg_helper.c
+@@ -29,6 +29,7 @@
+ #include "seg_helper.h"
+ #include "access.h"
+ #include "tcg-cpu.h"
++#include "qemu/plugin.h"
+ 
+ #ifdef TARGET_X86_64
+ #define SET_ESP(val, sp_mask)                                   \
+@@ -1192,6 +1193,7 @@ void do_interrupt_all(X86CPU *cpu, int intno, int is_int,
+                       int error_code, target_ulong next_eip, int is_hw)
+ {
+     CPUX86State *env = &cpu->env;
++    uint64_t last_pc = env->eip + env->segs[R_CS].base;
+ 
+     if (qemu_loglevel_mask(CPU_LOG_INT)) {
+         if ((env->cr[0] & CR0_PE_MASK)) {
+@@ -1263,6 +1265,8 @@ void do_interrupt_all(X86CPU *cpu, int intno, int is_int,
+                  event_inj & ~SVM_EVTINJ_VALID);
+     }
+ #endif
++
++    qemu_plugin_vcpu_interrupt_cb(CPU(cpu), last_pc);
+ }
+ 
+ void do_interrupt_x86_hardirq(CPUX86State *env, int intno, int is_hw)
 -- 
 2.47.3
 
