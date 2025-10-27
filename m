@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17639CCF9E0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:09:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 366E2CCF9EC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 11:10:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDL1x-0000zB-7M; Mon, 27 Oct 2025 07:04:53 -0400
+	id 1vDL2M-0001cB-Cy; Mon, 27 Oct 2025 07:05:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL1Z-0000h0-6d
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:04:30 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ id 1vDL2I-0001Xa-J8
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:14 -0400
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1vDL1J-0005dp-4s
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:04:23 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-63c0c9a408aso7200449a12.3
- for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:03:53 -0700 (PDT)
+ id 1vDL1a-0005bn-GI
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 07:05:14 -0400
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b5b823b4f3dso563514266b.3
+ for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 04:03:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761563032; x=1762167832; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761563030; x=1762167830; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FdYYc9UfPJiJOmUk4OWh6nheP5mSB2HOK4r3KtorV48=;
- b=iizFSWCne8dtm4AE8rAmqRWuFEYhpe7lTw/Fubft+FpBsD35TdVMUjHAkPmqX5LaGV
- xp/QOmMyPa2lFgTqnxaL7ck6WHWFzw3vbG8KiRcB74UobMCPLe31xWSv2Oj8O+CiS19T
- lBHluuZc4ZMw0JXGQSNr34koFzqJwtAmSIzKr8HxMu2vZXRSxLkSqWyOkEsFAC+a0nT2
- 7TgU2OLerF4y6wJ5IcI1ffD/3HsV4yvwJaHXLOQosxyPYH7mMJzWvQ23NnqV3I6RMWYJ
- x/dulghvbgw2dJgteam8D9pYTaDBdnU9+vIIEv84uM15VjVzrGIte6a5JjNlAtiWKkrF
- WPtg==
+ bh=XeRSVxV/a/+cXLwVgc+XC0DpKFA3aVxT1tt4Uj60OQ8=;
+ b=wWD9G/qJHJV+g3P9eISyRZZS2+K1MzOHe6L9jminNsfavdvHYfvPEM+AHjebDnuU7L
+ +mvu/ONdLQGDyaYEqNDzYHMWgQC2/PaJCQ7TmLIAP89OSgotaA+2iuTOKWFrvEgjx9Rl
+ ETOkTqZb7vZ3Bc+MetDp14GEqsOSr5nlZrbliQKTbM7Tlm78pjpa4vIkYEcwgkk4Cpjv
+ X57VVGVVNtTfDneg+bEvQapDd+O+o54FYbHsnuR1Y4ZoISc/82bAyM13C9cz8XHiHFbW
+ s5TJPXMSUFBcYGXR1JesyhNXJXYfFZDEmsJVRkoVIsPB/l7pvH43C1ZCz36i7f25MpIq
+ 9Odw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761563032; x=1762167832;
+ d=1e100.net; s=20230601; t=1761563030; x=1762167830;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FdYYc9UfPJiJOmUk4OWh6nheP5mSB2HOK4r3KtorV48=;
- b=I3uFJhL37AiJrdPtHtrSQeqaDyI4lEaCQX2XCdAfO915dzOIZKME5PzKDtY/Pjjb2B
- NJzjnM51usBktf7UU1zGh78EwOtmhVdn6g6Khh3D8Gle91nKCiLrlEjOBW6mAZF/0jit
- OleNG2hG7MIUHHdOScTyUFk0Ad3aetvJTICCrh1YgvDjQkvSpHPa5TH9QzpNgfEYyY9d
- GGPZrQghW4BniEYXUIkZz65ngNwq/3kLKVEzMJdFXFFTZBmLtlW9C0LpZoc/a92GI9Yd
- AdAaMvzQ2j/N8julgc9bzvieiU5apuRRcnIwAojtQUKxP5+IBysTH11/1YMAM0TsXNoU
- A5/w==
+ bh=XeRSVxV/a/+cXLwVgc+XC0DpKFA3aVxT1tt4Uj60OQ8=;
+ b=gG3fyNHvYpDiL71crSwaMYNo1PD3Uxjek3WmnJ/rLDm4Y0tdWhRwBgQS1UvHy4w3H0
+ OMiPmeoeDj5+acM/8G3+FP3rY8S2BHCvnSMXb/aw22/ZDhfoa1eRw+HryUrpj0lfA3hC
+ Yb0HmIqxOiied0jk5eQ+8OIpItfug8ys8DVYRLif7/7/Qv0JHVfYLsTwF863vNqi/2e9
+ 7nnUP2sc5XlANywLtME7OfIvRe3+o3pibU98H0MKeS1dVGiPJY6Tycr2oT50qzg+flI9
+ PkYEg0n3vaKabqidw0m04mGIfKlalthu+/KFlpX8Woot/i7Cj2qmFQsZt9UiPZQ1lF7c
+ ec4w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXC/yXMvznxIKM7/WJZySdA7qZ6gu3UZahwfOZD5JSN98Sfg8buJDSE5UDav/+4v/esyXay8PFhiKJ0@nongnu.org
-X-Gm-Message-State: AOJu0YwnBjIbYcADnVxy6zA/VfX4YuRu9rFMsKrbpslYsBeNT95dXfoa
- zyeLhPv0l0Ij5CgqVCHYGsekcgCowMVsjjYr3yM4eebvdGYrSaRmC0JMfoNer0BIMw8=
-X-Gm-Gg: ASbGncuFW5Wi/iXCzh/sEhrB1cSHAabVGMkf9A2GxJd5JhWYfgz+OGtJ6NCx+fyA190
- cZAer+0wqL+1qyphonE7V+JHWoSQC7EHIURGwiVJ8ac1HiUUarUL/toY//0kkTpcLpZ0I/PKfJC
- tNFquOCLlUU8WNEB2j6XJqebmzE0QlbZ+0GIrh+XnZ9e+tRx1k090XeGP2vYOthyAVCwj2Ch4Tf
- eF4E66u6lqjIVN9swF2r6wIharzduLW/ffKs0NjdHYRNlPDfhdVDMGjpMgJYkRzacoCNye8ZvJM
- Ljalau/lzNbBQf4Z2c7ckjhRRvmwJFNhgCznekqh303kiG0wp9XqfJ560d5GAOffZo4406st1Xc
- Eo82V5HjWxcNjlg7wEpORrsLkWb8TKYf3K/ZOY4accm+gHbAO7Tk60/b2TP9WFmeOz5Lt0uxiTq
- ugKYGMWV7thP0=
-X-Google-Smtp-Source: AGHT+IE146XaimMpIxyppkc5SJJoPLUyMmLDLovFokulHH30KUzEQB5Xf7fiUrkKHn734LTDcCF5qA==
-X-Received: by 2002:a05:6402:51d1:b0:63c:3efe:d996 with SMTP id
- 4fb4d7f45d1cf-63c3efeee79mr31902705a12.20.1761563032280; 
- Mon, 27 Oct 2025 04:03:52 -0700 (PDT)
+ AJvYcCXydYca8/TNQq3XjsPx5/MlNo4ZH1gsF8U9n49PDnRXZj0lL6lDua3cYaux84f/kGoQfVcDZmgl438J@nongnu.org
+X-Gm-Message-State: AOJu0YymWosEEhAQhwXJSwXZLkce9cLIfJlrJLd477r0Bo9brgjsEmZc
+ xvt4O6Woll8Cd9ph0laI4KMAZy2X7slcbvmnVMG8S1Mw3LiAtfDJWh2aZszAYwIrC58=
+X-Gm-Gg: ASbGncsR9rN/jNPtBXbb6UTVKZJcOQ3mnqotgDgd491ObNFlRTP6okhBOOCIGwZ+BQj
+ AVjDeU3RU54/Lp9w3lwcKbPD8QJ7bQJw4pBBx+Hu+8hIdUMnE9lG36DIVtBmjCqtpzFXkBiCMMC
+ 76RkTwoRB1rWmsdbzh4j/h17Zb0chk4gkSeQA4FWBtbI02IKXhiGHPP12iqhnWuScBa9iFoafNh
+ 8wUWGjZrKeXrRPv39AlmxvV5v3Cjrwi9HkMF3mBTNTQZ1IybZcF3N1R6lLpH2eF6stQqF3SxzCM
+ N/t/6H+UmRdSlsHjfdQjj/rs6vXe32cAEpR80O/9xKIJY6N1maCoS1IIjxDYJR2ePLTOhmXRfpp
+ X0UkApKLH0bxcsT0d3K5kCr5w3Q+sPKWyipzWNqQYSlJKZzEMkOW7CzcLUSBoBx3AJy8EAvHV93
+ NYSY/4DNhWFKg=
+X-Google-Smtp-Source: AGHT+IGVeVAd9SOhpQydD1C6iIU4n4tkewdKGA2QFdCIbJrrSlQ45g2gAXLS0i8sKETvZQ5il8jl6g==
+X-Received: by 2002:a17:906:794f:b0:b6d:80e6:cf with SMTP id
+ a640c23a62f3a-b6d80e6068cmr742975766b.44.1761563029639; 
+ Mon, 27 Oct 2025 04:03:49 -0700 (PDT)
 Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-63ecf3686c5sm356035a12.36.2025.10.27.04.03.47
+ a640c23a62f3a-b6d853077c7sm733658066b.7.2025.10.27.04.03.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 27 Oct 2025 04:03:49 -0700 (PDT)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 13AD460915;
- Mon, 27 Oct 2025 11:03:45 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 94EBF5FA07;
+ Mon, 27 Oct 2025 11:03:44 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -96,26 +96,26 @@ Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Michael Rolnik <mrolnik@gmail.com>,
  Song Gao <gaosong@loongson.cn>, qemu-riscv@nongnu.org,
- Aleksandar Rikalo <arikalo@gmail.com>, Julian Ganz <neither@nut.email>
-Subject: [PATCH 10/35] contrib/plugins: add plugin showcasing new dicontinuity
- related API
-Date: Mon, 27 Oct 2025 11:03:17 +0000
-Message-ID: <20251027110344.2289945-11-alex.bennee@linaro.org>
+ Aleksandar Rikalo <arikalo@gmail.com>
+Subject: [PATCH 05/35] tests/lcitool: generate a yaml file for the ppc64le
+ runner
+Date: Mon, 27 Oct 2025 11:03:12 +0000
+Message-ID: <20251027110344.2289945-6-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251027110344.2289945-1-alex.bennee@linaro.org>
 References: <20251027110344.2289945-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x535.google.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NEW_PRODUCTS=1.249,
+Received-SPF: pass client-ip=2a00:1450:4864:20::634;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x634.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,144 +131,203 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Julian Ganz <neither@nut.email>
+Unlike the Aarch64 runners this comes with pure Debian out of the box.
+We need a minor tweak to build-environment to deal with the
+differences in naming convention.
 
-We recently introduced new plugin API for registration of discontinuity
-related callbacks. This change introduces a minimal plugin showcasing
-the new API. It simply counts the occurances of interrupts, exceptions
-and host calls per CPU and reports the counts when exitting.
-
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Signed-off-by: Julian Ganz <neither@nut.email>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- docs/about/emulation.rst    |  8 ++++
- contrib/plugins/traps.c     | 83 +++++++++++++++++++++++++++++++++++++
- contrib/plugins/meson.build |  2 +-
- 3 files changed, 92 insertions(+), 1 deletion(-)
- create mode 100644 contrib/plugins/traps.c
+ scripts/ci/setup/build-environment.yml        |  10 +-
+ .../ci/setup/debian/debian-13-ppc64le.yaml    | 134 ++++++++++++++++++
+ tests/lcitool/refresh                         |   1 +
+ 3 files changed, 143 insertions(+), 2 deletions(-)
+ create mode 100644 scripts/ci/setup/debian/debian-13-ppc64le.yaml
 
-diff --git a/docs/about/emulation.rst b/docs/about/emulation.rst
-index 8a5e128f677..92c219119e8 100644
---- a/docs/about/emulation.rst
-+++ b/docs/about/emulation.rst
-@@ -1015,6 +1015,14 @@ interesting to generate them around a particular point of execution::
-     # generate trace around init execution (2 seconds):
-     $ uftrace dump --chrome --time-range=1753122320~1753122322 > init.json
+diff --git a/scripts/ci/setup/build-environment.yml b/scripts/ci/setup/build-environment.yml
+index 253d0b759bc..528150dce78 100644
+--- a/scripts/ci/setup/build-environment.yml
++++ b/scripts/ci/setup/build-environment.yml
+@@ -27,20 +27,26 @@
+         - ansible_facts['distribution'] in ['Ubuntu', 'Debian']
  
-+Count traps
-+...........
-+
-+``contrib/plugins/traps.c``
-+
-+This plugin counts the number of interrupts (asyncronous events), exceptions
-+(synchronous events) and host calls (e.g. semihosting) per cpu.
-+
- Other emulation features
- ------------------------
+     # the package lists are updated by "make lcitool-refresh"
+-    - name: Define package list file path
++    - name: Define package list file path for Ubuntu
+       set_fact:
+         package_file: "ubuntu/ubuntu-2404-{{ ansible_facts['architecture'] }}.yaml"
+       when:
+         - ansible_facts['distribution'] == 'Ubuntu'
+         - ansible_facts['distribution_version'] == '24.04'
  
-diff --git a/contrib/plugins/traps.c b/contrib/plugins/traps.c
++    - name: Define package list file path for Debian
++      set_fact:
++        package_file: "debian/debian-{{ ansible_facts['distribution_major_version'] }}-{{ ansible_facts['architecture'] }}.yaml"
++      when:
++        - ansible_facts['distribution'] == 'Debian'
++
+     - name: Include package lists based on OS and architecture
+       include_vars:
+         file: "{{ package_file }}"
+       when:
+         - package_file is exists
+ 
+-    - name: Install packages for QEMU on Ubuntu 24.04
++    - name: Install packages for QEMU on Ubuntu/Debian
+       package:
+         name: "{{ packages }}"
+       when:
+diff --git a/scripts/ci/setup/debian/debian-13-ppc64le.yaml b/scripts/ci/setup/debian/debian-13-ppc64le.yaml
 new file mode 100644
-index 00000000000..d5ddc0f3dd6
+index 00000000000..e29c9c18403
 --- /dev/null
-+++ b/contrib/plugins/traps.c
-@@ -0,0 +1,83 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ * Copyright (C) 2025, Julian Ganz <neither@nut.email>
-+ *
-+ * Traps - count traps
-+ *
-+ * Count the number of interrupts (asyncronous events), exceptions (synchronous
-+ * events) and host calls (e.g. semihosting) per cpu and report those counts on
-+ * exit.
-+ */
++++ b/scripts/ci/setup/debian/debian-13-ppc64le.yaml
+@@ -0,0 +1,134 @@
++# THIS FILE WAS AUTO-GENERATED
++#
++#  $ lcitool variables --host-arch ppc64le debian-13 qemu
++#
++# https://gitlab.com/libvirt/libvirt-ci
 +
-+#include <stdio.h>
++packages:
++  - bash
++  - bc
++  - bindgen
++  - bison
++  - bsdextrautils
++  - bzip2
++  - ca-certificates
++  - ccache
++  - clang
++  - dbus
++  - debianutils
++  - diffutils
++  - exuberant-ctags
++  - findutils
++  - flex
++  - gcc
++  - gcovr
++  - gettext
++  - git
++  - hostname
++  - libaio-dev
++  - libasan8
++  - libasound2-dev
++  - libattr1-dev
++  - libbpf-dev
++  - libbrlapi-dev
++  - libbz2-dev
++  - libc6-dev
++  - libcacard-dev
++  - libcap-ng-dev
++  - libcapstone-dev
++  - libcbor-dev
++  - libclang-rt-dev
++  - libcmocka-dev
++  - libcurl4-gnutls-dev
++  - libdaxctl-dev
++  - libdrm-dev
++  - libepoxy-dev
++  - libfdt-dev
++  - libffi-dev
++  - libfuse3-dev
++  - libgbm-dev
++  - libgcrypt20-dev
++  - libglib2.0-dev
++  - libglusterfs-dev
++  - libgnutls28-dev
++  - libgtk-3-dev
++  - libgtk-vnc-2.0-dev
++  - libibverbs-dev
++  - libiscsi-dev
++  - libjemalloc-dev
++  - libjpeg62-turbo-dev
++  - libjson-c-dev
++  - liblttng-ust-dev
++  - liblzo2-dev
++  - libncursesw5-dev
++  - libnfs-dev
++  - libnuma-dev
++  - libpam0g-dev
++  - libpcre2-dev
++  - libpipewire-0.3-dev
++  - libpixman-1-dev
++  - libpng-dev
++  - libpulse-dev
++  - librbd-dev
++  - librdmacm-dev
++  - libsasl2-dev
++  - libsdl2-dev
++  - libsdl2-image-dev
++  - libseccomp-dev
++  - libselinux1-dev
++  - libslirp-dev
++  - libsnappy-dev
++  - libsndio-dev
++  - libspice-protocol-dev
++  - libspice-server-dev
++  - libssh-dev
++  - libstd-rust-dev
++  - libsystemd-dev
++  - libtasn1-6-dev
++  - libubsan1
++  - libudev-dev
++  - liburing-dev
++  - libusb-1.0-0-dev
++  - libusbredirhost-dev
++  - libvdeplug-dev
++  - libvirglrenderer-dev
++  - libvte-2.91-dev
++  - libxdp-dev
++  - libzstd-dev
++  - llvm
++  - locales
++  - make
++  - mtools
++  - multipath-tools
++  - ncat
++  - nettle-dev
++  - ninja-build
++  - openssh-client
++  - pkgconf
++  - python3
++  - python3-numpy
++  - python3-opencv
++  - python3-pillow
++  - python3-pip
++  - python3-setuptools
++  - python3-sphinx
++  - python3-sphinx-rtd-theme
++  - python3-tomli
++  - python3-venv
++  - python3-wheel
++  - python3-yaml
++  - rpm2cpio
++  - rustc
++  - sed
++  - socat
++  - sparse
++  - swtpm
++  - systemtap-sdt-dev
++  - tar
++  - tesseract-ocr
++  - tesseract-ocr-eng
++  - vulkan-tools
++  - xorriso
++  - zlib1g-dev
++  - zstd
 +
-+#include <qemu-plugin.h>
-+
-+QEMU_PLUGIN_EXPORT int qemu_plugin_version = QEMU_PLUGIN_VERSION;
-+
-+typedef struct {
-+    uint64_t interrupts;
-+    uint64_t exceptions;
-+    uint64_t hostcalls;
-+} TrapCounters;
-+
-+static struct qemu_plugin_scoreboard *traps;
-+
-+static void vcpu_discon(qemu_plugin_id_t id, unsigned int vcpu_index,
-+                        enum qemu_plugin_discon_type type, uint64_t from_pc,
-+                        uint64_t to_pc)
-+{
-+    TrapCounters *rec = qemu_plugin_scoreboard_find(traps, vcpu_index);
-+    switch (type) {
-+    case QEMU_PLUGIN_DISCON_INTERRUPT:
-+        rec->interrupts++;
-+        break;
-+    case QEMU_PLUGIN_DISCON_EXCEPTION:
-+        rec->exceptions++;
-+        break;
-+    case QEMU_PLUGIN_DISCON_HOSTCALL:
-+        rec->hostcalls++;
-+        break;
-+    default:
-+        g_assert_not_reached();
-+        break;
-+    }
-+}
-+
-+static void plugin_exit(qemu_plugin_id_t id, void *p)
-+{
-+    g_autoptr(GString) report;
-+    report = g_string_new("VCPU, interrupts, exceptions, hostcalls\n");
-+    int max_vcpus = qemu_plugin_num_vcpus();
-+    int vcpu;
-+
-+    for (vcpu = 0; vcpu < max_vcpus; vcpu++) {
-+        TrapCounters *rec = qemu_plugin_scoreboard_find(traps, vcpu);
-+        g_string_append_printf(report,
-+                               "% 4d, % 10"PRId64", % 10"PRId64", % 10"PRId64
-+                               "\n", vcpu, rec->interrupts, rec->exceptions,
-+                               rec->hostcalls);
-+    }
-+
-+    qemu_plugin_outs(report->str);
-+    qemu_plugin_scoreboard_free(traps);
-+}
-+
-+QEMU_PLUGIN_EXPORT
-+int qemu_plugin_install(qemu_plugin_id_t id, const qemu_info_t *info,
-+                        int argc, char **argv)
-+{
-+    if (!info->system_emulation) {
-+        qemu_plugin_outs("Note: interrupts are only reported in system"
-+                         " emulation mode.");
-+    }
-+
-+    traps = qemu_plugin_scoreboard_new(sizeof(TrapCounters));
-+
-+    qemu_plugin_register_vcpu_discon_cb(id, QEMU_PLUGIN_DISCON_ALL,
-+                                        vcpu_discon);
-+
-+    qemu_plugin_register_atexit_cb(id, plugin_exit, NULL);
-+
-+    return 0;
-+}
-diff --git a/contrib/plugins/meson.build b/contrib/plugins/meson.build
-index 7eb3629c95d..eb944b5159a 100644
---- a/contrib/plugins/meson.build
-+++ b/contrib/plugins/meson.build
-@@ -1,6 +1,6 @@
- contrib_plugins = ['bbv', 'cache', 'cflow', 'drcov', 'execlog', 'hotblocks',
-                    'hotpages', 'howvec', 'hwprofile', 'ips', 'stoptrigger',
--                   'uftrace']
-+                   'traps', 'uftrace']
- if host_os != 'windows'
-   # lockstep uses socket.h
-   contrib_plugins += 'lockstep'
+diff --git a/tests/lcitool/refresh b/tests/lcitool/refresh
+index 056cfb6e9d7..7fbdf6f340b 100755
+--- a/tests/lcitool/refresh
++++ b/tests/lcitool/refresh
+@@ -272,6 +272,7 @@ try:
+     #
+     generate_yaml("ubuntu", "ubuntu-2404", "aarch64")
+     generate_yaml("ubuntu", "ubuntu-2404", "s390x")
++    generate_yaml("debian", "debian-13", "ppc64le")
+ 
+ 
+     sys.exit(0)
 -- 
 2.47.3
 
