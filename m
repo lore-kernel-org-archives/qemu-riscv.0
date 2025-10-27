@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9405BCCF9EA
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 12:04:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76475CCF9E5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Oct 2025 12:49:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDLx4-0005kY-0c; Mon, 27 Oct 2025 08:03:54 -0400
+	id 1vDMer-0006E2-0P; Mon, 27 Oct 2025 08:49:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDLv8-0004X4-LB
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 08:01:58 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1vDMef-00067w-88
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 08:49:00 -0400
+Received: from mail-yw1-x112f.google.com ([2607:f8b0:4864:20::112f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDLv3-0000Pe-PH
- for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 08:01:54 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3f0ae439bc3so2950131f8f.1
- for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 05:01:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1vDMeT-0000KB-5E
+ for qemu-riscv@nongnu.org; Mon, 27 Oct 2025 08:48:56 -0400
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-7829fc3b7deso34506887b3.3
+ for <qemu-riscv@nongnu.org>; Mon, 27 Oct 2025 05:48:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761566506; x=1762171306; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=PLGcLctG7Za4dYWV4ICZwURdQTbZRIsw0zDlM3v5vho=;
- b=A1ZlwAIEa5BMe4OC8bUqtL0jrxVxEGl4t3Se5PaH0l3tcgwj77S3QeRReRVCnj7j08
- IinDPFf8XHPDe23OtbQwe1Nv3oT0RHT3zQTGCu0tv934RaIV7IJ66tCl+qwMSrFt5XIv
- 64+0hTur3yzjdRSfVZOocP6EgRmgsaamtn2K8PQzZmQhGwY46YlRdA+6xu8GWBbwO7gf
- c+7LCSubcoAkk7KKib44xQuG6kRq4hoRhKNmEkhicRQAe6s4enZQipHET3CCWtdyVHmx
- W/F6h6ZQ4vcGyd3boA4ETLv3K63bUk27R6h+kuGIs6tjCSDV33YMM7GS2lcLnZgjOueP
- FtgA==
+ d=linaro.org; s=google; t=1761569321; x=1762174121; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=t4zyEMRcnSg6ZZFupcnqm9G8YRu9xpKxN+WWw0OX9pQ=;
+ b=Nd4P0sBjH5yLMIagbks3cUBJz8QgC5V0EhnL2gL6TxOJ4Y8qyAnabD6zqkJWD7ALlY
+ VDx6rFcrYQdtLUqfsJi2mv00S3qzWOnROkNOvQeeYA46a+m/qllJ0FzaDdE+4aBXZ/NW
+ mflXXfb4jvr3KmWPqMu00C5kCEr3/0k7veQ5/eUmI0GMDpVpSgWg1W9AFHGat/ldZGBG
+ gGtsyJkkiyf7ZVghvU548zToJCtYhOmkR6QM3DO3Xh8R8k1nImHVVpSKAyMSBioN/RWY
+ C4kzj0IzsYGjE5K54Jj9/ehDGpGUEK9hMKeYnByofdZjrxcwccbAXiJBE99rlbt2josd
+ vlJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761566506; x=1762171306;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PLGcLctG7Za4dYWV4ICZwURdQTbZRIsw0zDlM3v5vho=;
- b=cio0guppU5mgjDjLKGUGqGdAUJaCMcEh9puGXfmp6a7xXX4j/9asdZyGaW0IHm+exw
- JpGXQ8Nz+ZFfLkzZiyEMJWnOJZYyIh+7bjHQ/0F/ASLLNjms8kcvvEj19dzB2w1IaOn6
- I7pNPh7nRoPVQ+EV8NSWKUD4I7nZtOsO9rQkInbmVdVEsdKi+BeEbudWxjRDYT66VCor
- fbOt3Ai2ukae/AZF6qt7PzPCVAeO61w9W90mKbDcvZUVfM+pGVoTNHQ/4TEmPjHTcoYe
- uRZhomIMzn85ZHxFyhGDABpKjrdTKChPqiuynInJrP1CprKJ9fbjKz2qoCXmYwVBUIUs
- Qm0w==
+ d=1e100.net; s=20230601; t=1761569321; x=1762174121;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t4zyEMRcnSg6ZZFupcnqm9G8YRu9xpKxN+WWw0OX9pQ=;
+ b=lXwH6ZIU26cXoKGr0U35eDmxVMqcdeUSUigoMpYx+cNPv/E3o007VMWF139q/aIwLk
+ GL8QuVAvqnTUtq6bw6AsI/BlIJZNkk7xlFck+pENzlukAUqglsoC4gFol9mH4n2blq2u
+ AywRRwLC0IMhhZofYmklS5USEZQEpYqbsX8URc7jCl6Lc4H2ntlmMb6hzaDEUldwzWaQ
+ fFw/v4qPEwAHAUtrVgx5dTuKj0f8jxATYGAhu36CiCR3QGf+bZ/oGWWno2zZEhLH3l4Y
+ aoByar+0KGXL91uFa3tSd7qmIWNUdCi/ArIPaSDl3dI7CNsx7BYhYZxA1det6jFWVgkK
+ vLmw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXaJvT7M3jgBRv5CG3jsa5Nvyv/GlBPuzSTxcPzfJJqupd/9uj9vK12hqUgDhTyjK/2HGwTXAaHE2w6@nongnu.org
-X-Gm-Message-State: AOJu0YzIqOQXKH2t/RPsfHVQAsL8z3asf/RKp52utlMFwV1nOXlE/x/Q
- MRtjajTm1pmTzW2o65wingi5TtFNPLULOGlVtx0LpCzF32lgIP87eSSwKfzhLpE3GLo=
-X-Gm-Gg: ASbGncv13l5GWZzf/tR5RlDt+0Pj4LL/m4qVYIke9J8m0LGY/Y3EL2L4WLHpc6e7Frg
- xyJgEsgRtcCSso+p5PlBpvAoFciIM3YN6DLXgENpcojVqI0GVKc/CxWDlHJUJle3W8moX7XYWef
- LU7XNgIGb75cgqFjFB42lciUhFLTV17eq5/c2M9RANpIXx/CB1FnJqvRCiLVIQZQq9TSDxSaNpP
- sUzaXzx1fxswzMXbemz3hrHnIGd2Ve5z+FNAZzdIq06KUW0MsXFb256hjFuEYtTRvLwuqrN/99W
- E/b74Cnwf2vkZRS36PlFNV7/36ZHt/sZAAQ0Kc8yYNu9MqnmdKvUpgjJXy+kKW4ng+YM1QfHM8c
- +iEitkwe15xxDpLWMPuRTMSLlhoPxaMQGFcLZc8ssvMpeveWRcOOXTz2PvIfmhxqTdIxQ+3cDDV
- N8M1h00JmvdyEZyxES05W67wyOyXOTI8oo93UbbS87tjr8HZvExNck6mxKVcEzJz7a
-X-Google-Smtp-Source: AGHT+IFA5lQdG3wEcpUVDcxHr0YznpdNBH1fOJhn4oLYLiZia3GVWBWl7OHntj9GSjgdsqgHj61wLA==
-X-Received: by 2002:a05:6000:2282:b0:3e5:394d:10bb with SMTP id
- ffacd0b85a97d-4299072c109mr8362370f8f.41.1761566505883; 
- Mon, 27 Oct 2025 05:01:45 -0700 (PDT)
-Received: from [192.168.69.201] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952d5985sm13766651f8f.25.2025.10.27.05.01.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Oct 2025 05:01:45 -0700 (PDT)
-Message-ID: <85355b5e-6c8d-440d-8a82-5bae8228f078@linaro.org>
-Date: Mon, 27 Oct 2025 13:01:44 +0100
+ AJvYcCWLEwiYy7RptawUXLHbRD2FwJsw//6+gUalRom8MdD7122iVKKM5WOpu2cNmic3v1rGeCogMuMizIRG@nongnu.org
+X-Gm-Message-State: AOJu0YwLmfGVf1/o4Gcy5bUU+XyF6eBKM+jARvHCHJn5g87gYADcwVE+
+ VUVudHLoEWNULFZ7Ch7aJ1CAd55ptjzDJgoQcKksa6EPtsQyK6uvRCa1ntfhUxhHALunS3htMUj
+ T37vuQb5VEY2+0FkYnlWHXESt9CywpFY9sDdYhGJ12A==
+X-Gm-Gg: ASbGnctzrd5JHCnx7fkgs7TabpxNHwgiPd+3D3BhDGRammDPwTynqjoADAp623eMH1C
+ UfiHmUok69M16OiPZ5oerzsWoPvAqMdSfNJnn257nfiPWgkx4LIre5d+t6tBeaW4gc7753whlaB
+ oT7uZeM/JGsgbNbt3sWtQQvifr/5B7pZjWfYBOdh+ONWfW5QKs0E/zNwIRNKycmY8xB68oCVnAB
+ bbRBbV54pmZw7kyqf11D3H6ay8GrjnUOpamfbSo9ITgvFEE/b45OSOmvHK3iY4WkjfLYZHI
+X-Google-Smtp-Source: AGHT+IGpaAMSKJKO1jUD3h/ZsQJ68Eho5HHfARfiSEeuB2/2crqps4P6t9R8tfq3HIjl75KTHGZeHlOWyibXHsvDaC8=
+X-Received: by 2002:a05:690e:dce:b0:63f:5642:74bf with SMTP id
+ 956f58d0204a3-63f5642771bmr4042113d50.15.1761569320852; Mon, 27 Oct 2025
+ 05:48:40 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] tests/functional/riscv64/test_sifive_u: Remove unused
- import statement
-Content-Language: en-US
-To: Thomas Huth <thuth@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-References: <20251027112803.54564-1-thuth@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20251027112803.54564-1-thuth@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+References: <20251016131159.750480-1-peter.maydell@linaro.org>
+In-Reply-To: <20251016131159.750480-1-peter.maydell@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 27 Oct 2025 12:48:29 +0000
+X-Gm-Features: AWmQ_bmRaalBI0ZMlLkXylUAg8iNr7aeDyXaHbdMVHZLDDE3VIOOwKVGTzDaIfM
+Message-ID: <CAFEAcA8RaZOXpav64E5-0CDhB66zQXRuLaFuz22GiyPGwGVQJw@mail.gmail.com>
+Subject: Re: [PATCH v2] docs/system/security: Restrict "virtualization use
+ case" to specific machines
+To: qemu-devel@nongnu.org
+Cc: Stefan Hajnoczi <stefanha@redhat.com>, Bernhard Beschow <shentey@gmail.com>,
+ Thomas Huth <thuth@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org, 
+ qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>, qemu-s390x@nongnu.org,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112f;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x112f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,17 +106,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 27/10/25 12:28, Thomas Huth wrote:
-> From: Thomas Huth <thuth@redhat.com>
-> 
-> skipIfMissingCommands is not used here, remove the import to silence
-> a pylint warning for this file.
-> 
-> Signed-off-by: Thomas Huth <thuth@redhat.com>
+On Thu, 16 Oct 2025 at 14:12, Peter Maydell <peter.maydell@linaro.org> wrote:
+>
+> Currently our security policy defines a "virtualization use case"
+> where we consider bugs to be security issues, and a
+> "non-virtualization use case" where we do not make any security
+> guarantees and don't consider bugs to be security issues.
+>
+> The rationale for this split is that much code in QEMU is older and
+> was not written with malicious guests in mind, and we don't have the
+> resources to audit, fix and defend it.  So instead we inform users
+> about what the can in practice rely on as a security barrier, and
+> what they can't.
+>
+> We don't currently restrict the "virtualization use case" to any
+> particular set of machine types.  This means that we have effectively
+> barred ourselves from adding KVM support to any machine type that we
+> don't want to put into the "bugs are security issues" category, even
+> if it would be useful for users to be able to get better performance
+> with a trusted guest by enabling KVM. This seems an unnecessary
+> restriction, and in practice the set of machine types it makes
+> sense to use for untrusted-guest virtualization is quite small.
+>
+> Specifically, we would like to be able to enable the use of
+> KVM with the imx8 development board machine types, but we don't
+> want to commit ourselves to having to support those SoC models
+> and device models as part of QEMU's security boundary:
+> https://lore.kernel.org/qemu-devel/20250629204851.1778-3-shentey@gmail.com/
+>
+> This patch updates the security policy to explicitly list the
+> machine types we consider to be useful for the "virtualization
+> use case".
+>
+> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
 > ---
->   tests/functional/riscv64/test_sifive_u.py | 1 -
->   1 file changed, 1 deletion(-)
+> changes v1->v2: updated the list:
+>  * remove isapc
+>  * remove ppc, mips, mips64 (no machines supported)
+>  * list pseries as only supported ppc64 machine
+>  * list virt as only supported riscv32, riscv64 machine
+>
+> I believe the list to now be correct, and I think we generally
+> had some consensus about the idea on the v1 patch discussion, so
+> this one is a non-RFC patch.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+This has now had various reviews and acks, and no
+suggestions for further revision. I propose to take
+this via target-arm.next, unless anybody has any
+objections.
 
+thanks
+-- PMM
 
