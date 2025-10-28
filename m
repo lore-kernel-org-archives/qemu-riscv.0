@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B05CCF9E0
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 14:08:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D509CCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:14:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDkMr-00049M-Jb; Tue, 28 Oct 2025 10:08:11 -0400
+	id 1vDoCI-0006Vg-KK; Tue, 28 Oct 2025 14:13:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
- id 1vDkMh-00048H-K2
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 10:08:00 -0400
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoC9-0006Rv-6c
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:13:22 -0400
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
- id 1vDkMb-0000H4-2p
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 10:07:59 -0400
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-63c31c20b64so9499097a12.1
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 07:07:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoBy-0001X3-6d
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:13:20 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-475dc6029b6so35361215e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:13:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761660468; x=1762265268; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mK13dtNUKMe3sBuR1CpQvoFF/+SWWjIIEVhHxpC/f/U=;
- b=LdBKlFnRck8duH4DSHyjh57bLH8ZbWH8DWnrHJb49N2+hmalbKpe34oz4r4hmj01ct
- ZCjvcpuihSRvsGt65+6v7QrlViCq4zYrBhTXcnm3KbbCdgv27S9sLIN3x0CPCYjcoizI
- zWvhg89g5QJ6CQZNqZKCUB/fbBLQIBe5sBIFII40PFTXk1Yc35vfgN4iec6mMzEQz0AO
- U+5A6TIuWyLIvXUeKk2+641T6/oWsx5wQxMkzLJWqn78xeHcKuzS5EBIjyJn3DxoFsnP
- LFPs7t3gREvI/gaYzlOvFOphQka5uvgRCBG8h7Mza9/wkkiBm81ebzBc0e43yFP4Jzls
- twPw==
+ d=linaro.org; s=google; t=1761675183; x=1762279983; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=O0GGiZXrm4OzHdOc+19/N23vVvY3UXsMWqAq/zS3aok=;
+ b=qajfihQZ3lc8367o1KJYvf8AnhMbt5b81oJBI9h4ArZBTmt+miX1zJVgTLrDj3dGNr
+ vCeCuq+UV+ZpcXcV5av7cX4DQ0TfI36WQmU7rLHGO1IoKlbSsYEWYBiRzenyqDmod9CY
+ a66G5T0aB9q/RvdjNuqPs1QmVsgOUaLliZ75G5BC/yCQYxiRn/y0lCR1DEFrpKQH4IXm
+ TsZNOucR9LfNsAAnZKwh4on+MSdQuwJVVIWYiLnXi/Ezj44q9LqKLQ5P2iqj3bxJW3QM
+ SOUgAr5eLH4l5T/BPaP/Kgcpqj5UwVAmg6TC0vsmKJGG8xxOzo9MgVSDHOQSWMkwsJLU
+ nKFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761660468; x=1762265268;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mK13dtNUKMe3sBuR1CpQvoFF/+SWWjIIEVhHxpC/f/U=;
- b=EPaevTUf1xa0Xi7t/xJizMG+WRvZpeOspM+6PlcNGFv9uswRtN/DSpvtdt584Pb0IV
- Hf6cCW6w+LRmrvS23EyrDZIv9sayh0xfmU3Os3mLab/zPWFpoiwKwLqursWOu273c2l5
- JUJKLnAWCN4kw1n6W42ikUf46AwqIkcIoglCCJcjYNguG7+Wjp4FOVgfT8a2355B61RX
- Q+QFAmiOe7wa1lxHF+BXH3/4F8vV2dfgmHbtIFtvG80DoshZsxqlJzjfz6L7d9fF9YfJ
- 3DTQCrZjIsXXt8xZBU6t76pF3c6sWc4INizWdXB53uKIy0xRq+/argEpXo7YyxeCxQtE
- gXCQ==
+ d=1e100.net; s=20230601; t=1761675183; x=1762279983;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=O0GGiZXrm4OzHdOc+19/N23vVvY3UXsMWqAq/zS3aok=;
+ b=SDpJCJ7fIK93foVw+/sRbQgJhBT+IRfnOKk1fNu2GRDhMT0QtaJbmB57c9N7lbxt8A
+ 3mjA+W6tS3l7ZUcoBezoRHIISL+av0C7gDp3gpeemaUX1XGG5CGvODWXCf4REprCXqNV
+ 8/TCJT6tgmgik0tH+aGp92hW2ZErDYUy4VepkibyNgeHwmZJGP/OI66gtOKDXMx4qVQR
+ ZSr8Ff3YX/BWW57JpECkOSGVaMRw46kDAdh+LLz6tkfp6ivGblF9qUky2Cy2ImJm181L
+ FFJVlSRXR+mtNAhERYy2rTi11F0GoVbisZ0Oa16Z1numaN6RbYCMghVSbs4qRBKQVC1X
+ TJYg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3SBwW01T6mupX7lwzglKV3QDTsZhrouNps/fO5wPk5lsYVJ63cqdNMHaSWp/W3uipCae95k9jHd2e@nongnu.org
-X-Gm-Message-State: AOJu0YyxqsND+pzzUovO10atme+DzcPdl2REqtjWsayio9fMOMKPwm+0
- sTEbL+lXuxQYz0mYZMlZNl3jDQ/NHTlCB2eiGknaG3NsToOZJvoXz5aveDhCI1oVv4H+PVdvb9K
- b8e64znN+PlBSPPux3oqw+lG29wAqtAw=
-X-Gm-Gg: ASbGnctAHr430foRhYJnLBxQxuFAzBWAk+1KyOf+eaxaDAaEzpoYXWM1BTnz6WBdOV9
- 3Wzk4fYRiTDFWIZTlg5OIGY4V1Qqw9iq2X5d+HvNZ7+JpFoDfwQtGm6OIalpYuauDIlil3HeGNx
- SZ7Mjm2o5V1L61Nvmc+KsxR58+meECuk/K4VkVDUCbRD8c5VrcQlNIPu+rKX7FRIY44bZ1PRejY
- Tt/LtvdM7iLniSiFiWdfNQ5g8RVLcpX3D0HAL/flUDuD/Nj0TFlEBz2yrpKWTjYm+E38y3xiwPm
- /enAI1OxaPCfSKYa
-X-Google-Smtp-Source: AGHT+IGf16F9eKegOpasY567xfaafFk1wYxKgnCqGncrvU65pPKMW0vOauzmE5t52M57ZtFcjZ3qp+vMLm5rAlOK+QA=
-X-Received: by 2002:a17:907:7211:b0:b6d:2f32:844a with SMTP id
- a640c23a62f3a-b6dba497381mr384562666b.22.1761660467828; Tue, 28 Oct 2025
- 07:07:47 -0700 (PDT)
+ AJvYcCV0Ren2RJPr6cof0NfykQ5qjzfVJOfiwlBkyi11eAQD/Jrgjn0jRMcIlteyOBJYcaNsQ0vbXXytrvd3@nongnu.org
+X-Gm-Message-State: AOJu0YxDNJoEvfn9waecSEco3p2mJfqiaVwifgjMjsnJRMmdXNrKMCRi
+ TkutbL88hWaWnXbv6uqetgxX/gVoD4RYrFKzVrHOPtevLaLw9vl+kzaIwqJu/Wyj7Us=
+X-Gm-Gg: ASbGncuL73pR2TWC2fFI8q9+wDC0MzvRC/rxaOIKw2HB2vAjfWzW9VUCLLzdR6rWA0b
+ In9JVFXewv1aso1UIEOmSWQHRBByWNOBZYGm435Ok3bGiUZot0qg2ZxOxD/0Rr+QzUAUA+u1fvZ
+ P33/qTUYYRj4bDQT7phoOew5T3uS9XLXqstyeEP+EL3QbU4Q6ErVnGge5VsdFmFAhT9U9MsHAZp
+ ueKnv3ON3x0w2J/hdz5J59Rvrz28vCTsm9EdEDoeuXdI3caCISEcwefF6qYXUdwqDav1Y2tL7Uy
+ wxEQOp+di+Vxp9t/D/SItwrk0VE2+hLGMej2zMTYc1UHqIXtmOsQ6xm2YQzGZjQKYFvpD9MHGYr
+ 7Dao2SMFn6kxuIp0NK8hZsGTGW9sUFAuQqFdoIu3tehUg7yMt4ttDAfXXRta7822Z5an2Xcozja
+ MqSJi6TP0e0c1YitmLTSMTX0QPkA5qH0XemD9JemJg20TZBLufeQ==
+X-Google-Smtp-Source: AGHT+IFjK2ci8BodYlqQsw4T7KtvfGXcZAulUk9EPCLZXihdGhzOdLZjWG//I7VzhVMwGc/dq8M4Qg==
+X-Received: by 2002:a05:600c:3b23:b0:475:de12:d3b5 with SMTP id
+ 5b1f17b1804b1-4771e1e3abemr4503435e9.34.1761675182854; 
+ Tue, 28 Oct 2025 11:13:02 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4771e387aa9sm3683645e9.4.2025.10.28.11.13.01
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 28 Oct 2025 11:13:02 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-block@nongnu.org,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v3 00/25] hw/sysbus: Spring cleanups (part 1)
+Date: Tue, 28 Oct 2025 19:12:34 +0100
+Message-ID: <20251028181300.41475-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251022150743.78183-1-philmd@linaro.org>
- <20251022150743.78183-10-philmd@linaro.org>
-In-Reply-To: <20251022150743.78183-10-philmd@linaro.org>
-From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
-Date: Tue, 28 Oct 2025 18:07:32 +0400
-X-Gm-Features: AWmQ_bkQtvXtJZmEVgmbzfp-np6u9cmxS0sxxTGITj5rqJ0rvzFkVB4nOh9gsQ4
-Message-ID: <CAJ+F1CLUW7xpcLJPWuSP0raazX9gq9tXBeP6bFju5XowL3eYsw@mail.gmail.com>
-Subject: Re: [PATCH v2 9/9] hw/char: Simplify when qemu_chr_fe_write() could
- not write
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Paolo Bonzini <pbonzini@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Alistair Francis <alistair@alistair23.me>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
- envelope-from=marcandre.lureau@gmail.com; helo=mail-ed1-x52b.google.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,70 +102,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 22, 2025 at 7:10=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
->
-> If no chars were written, avoid to access the FIFO.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+- Use sysbus_mmio_get_region() instead of SysBusDevice::mmio[].memory
+- Use memory_region_name() instead of MemoryRegion::name
+- Use memory_region_size() instead of int128_get64(MemoryRegion::size)
+- Add memory_region_get_address()
+- Use memory_region_get_address() instead of MemoryRegion::addr
+- Remove SysBusDevice::mmio[].addr
+- Simplify SysBusDevice::mmio[]
 
-Reviewed-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+Philippe Mathieu-Daudé (25):
+  hw/i386/microvm: Use proper SysBus accessors
+  hw/i386/ioapic: Use proper SysBus accessors
+  hw/timer/hpet: Use proper SysBus accessors
+  hw/acpi/cxl: Use proper SysBus accessors
+  hw/ppc/e500: Use proper SysBus accessors
+  hw/pci-bridge: Use proper SysBus accessors
+  hw/sysbus: Use memory_region_name()
+  hw/nvme/ctrl: Use memory_region_size()
+  hw/s390x: Use memory_region_size()
+  system/memory: Have memory_region_size() take a const argument
+  system/memory: Introduce memory_region_get_address()
+  migration/ram: Use memory_region_get_address()
+  hw/acpi: Use memory_region_get_address()
+  hw/fdt: Use memory_region_get_address()
+  hw/nvme: Use memory_region_get_address()
+  hw/s390x: Use memory_region_get_address()
+  hw/timer/hpet: Use memory_region_get_address()
+  hw/watchdog/aspeed: Use memory_region_get_address()
+  hw/pci-bridge: Use memory_region_get_address()
+  system/ioport: Use memory_region_get_address()
+  hw/sysbus: Use memory_region_get_address()
+  hw/sysbus: Hoist MemoryRegion in sysbus_mmio_map_common()
+  hw/sysbus: Remove sysbus_mmio_map_common() @may_overlap argument
+  hw/sysbus: Use memory_region_is_mapped() to check for mapped region
+  hw/sysbus: Simplify SysBusDevice::mmio
 
-> ---
->  hw/char/cadence_uart.c | 2 +-
->  hw/char/ibex_uart.c    | 2 +-
->  hw/char/sifive_uart.c  | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/hw/char/cadence_uart.c b/hw/char/cadence_uart.c
-> index 0dfa356b6d0..8908ebbe34a 100644
-> --- a/hw/char/cadence_uart.c
-> +++ b/hw/char/cadence_uart.c
-> @@ -316,7 +316,7 @@ static gboolean cadence_uart_xmit(void *do_not_use, G=
-IOCondition cond,
->
->      ret =3D qemu_chr_fe_write(&s->chr, s->tx_fifo, s->tx_count);
->
-> -    if (ret >=3D 0) {
-> +    if (ret > 0) {
->          s->tx_count -=3D ret;
->          memmove(s->tx_fifo, s->tx_fifo + ret, s->tx_count);
->      }
-> diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
-> index d6f0d18c777..b7843c7a741 100644
-> --- a/hw/char/ibex_uart.c
-> +++ b/hw/char/ibex_uart.c
-> @@ -161,7 +161,7 @@ static gboolean ibex_uart_xmit(void *do_not_use, GIOC=
-ondition cond,
->
->      ret =3D qemu_chr_fe_write(&s->chr, s->tx_fifo, s->tx_level);
->
-> -    if (ret >=3D 0) {
-> +    if (ret > 0) {
->          s->tx_level -=3D ret;
->          memmove(s->tx_fifo, s->tx_fifo + ret, s->tx_level);
->      }
-> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-> index e7357d585a1..e5b381425a9 100644
-> --- a/hw/char/sifive_uart.c
-> +++ b/hw/char/sifive_uart.c
-> @@ -83,7 +83,7 @@ static gboolean sifive_uart_xmit(void *do_not_use, GIOC=
-ondition cond,
->                                     fifo8_num_used(&s->tx_fifo), &numptr)=
-;
->      ret =3D qemu_chr_fe_write(&s->chr, characters, numptr);
->
-> -    if (ret >=3D 0) {
-> +    if (ret > 0) {
->          /* We wrote the data, actually pop the fifo */
->          fifo8_pop_bufptr(&s->tx_fifo, ret, NULL);
->      }
-> --
-> 2.51.0
->
->
+ include/hw/sysbus.h                 |  5 +--
+ include/system/memory.h             |  9 ++++-
+ hw/acpi/cxl.c                       | 10 +++--
+ hw/core/sysbus.c                    | 57 ++++++++++++-----------------
+ hw/i386/acpi-build.c                |  8 ++--
+ hw/i386/kvm/ioapic.c                |  3 +-
+ hw/i386/microvm-dt.c                |  6 ++-
+ hw/loongarch/virt-acpi-build.c      |  4 +-
+ hw/loongarch/virt-fdt-build.c       |  4 +-
+ hw/nvme/ctrl.c                      | 15 +++++---
+ hw/pci-bridge/pci_expander_bridge.c |  6 ++-
+ hw/ppc/e500.c                       |  2 +-
+ hw/s390x/s390-pci-inst.c            | 23 ++++++++----
+ hw/timer/hpet.c                     |  4 +-
+ hw/watchdog/wdt_aspeed.c            |  2 +-
+ migration/ram.c                     | 11 +++---
+ system/ioport.c                     | 21 +++++++----
+ system/memory.c                     |  7 +++-
+ 18 files changed, 113 insertions(+), 84 deletions(-)
 
+-- 
+2.51.0
 
---=20
-Marc-Andr=C3=A9 Lureau
 
