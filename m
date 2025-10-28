@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF0C0CCD1BF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:34:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBBC1CCD1BF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:34:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDoWT-0006pM-90; Tue, 28 Oct 2025 14:34:21 -0400
+	id 1vDoWg-0007B1-7K; Tue, 28 Oct 2025 14:34:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoUX-0005vB-9T
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:32:34 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoWY-00072b-D0
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:34:26 -0400
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoUL-00044h-8W
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:32:19 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-471191ac79dso66772005e9.3
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:32:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoWO-0004IP-Mm
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:34:24 -0400
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3ee15b5435bso4765417f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:34:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761676323; x=1762281123; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761676448; x=1762281248; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IaTjF09SMgISnzDEeFqSTFyM00Tszf9mX6IdYxJoDH0=;
- b=albqiIAmyTsoZqMcLCX4yCZHpvnaxuCbScltHjjLppfShOMUxhSj2t1AVbPJbPMEGO
- Q5qmOy10hBn+o+4lFyJEzQasmnUtBrj+OjDl5TqoDAwOuHqz+dtDqxsyNCpLhvjAJQLy
- zasXs8imyHfU9KOpvcDRGpikibe25SqTDmXyyRqZTJfNtkfv6kGaqV+Lh9TpwgvuDBCO
- fFbDDMnOZWaKJUN63rxmdn+bnewPGH3F79RqFDikX0dj55Jv4niX91HLCFWIxsP1TpOZ
- BnE3X+gctoS7a55jAJVWitemWi2Gvodvqv7ZpYwGks/262ZAfBZ+mS6xWfM5zBhChwFW
- CY+w==
+ bh=5DmeGIOtnQgeitCackLcdl7/cs7kVLgAOODhMbDoGJI=;
+ b=dlz//2b/LqJ9+l44emJzfc7Ki0c2Rt+fLe1uIMudzuhcnHcKiOB8+KeU+peYtwkR2o
+ kw3RgIUWwBd81ellbWlWVhAz+xwr9zIFOqjNftHEkbUEEFNwsXFIrq9TU5ngrDYaztXd
+ /YaxG1MvMULNR+6oOBHG4R7+pJqyixrWBOBSZEEAK7UrChBbLmx1N7BkzZtHr8YSA/Cz
+ X5AuoAlGm99hknm7ODnyfCqU4q0N2b5c69FOVF/xLsCJdC87R7oO1lG4ZgD408IwpOMW
+ nNDI5IYWhY8iwfzCxhhpWOtBeGGoHs5WDCs2+HUmxDMB8CYiNwEt7F3EmVy1HXsiMTBh
+ iLdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761676323; x=1762281123;
+ d=1e100.net; s=20230601; t=1761676448; x=1762281248;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IaTjF09SMgISnzDEeFqSTFyM00Tszf9mX6IdYxJoDH0=;
- b=vfHvR8UayzU3okAnmK9AVF1mBKArY+gM0p78gq4JoXgQGxBFuKclgJOiL4Pb+TyEat
- muZP67U1L8XUxdlWlSLo5rKCSuSz1ul0NbypIIlvmovDRPMi/E/vDiVPqlJlEtUPZjF/
- 29w30Xr8RznyaCuFPUg53828Tlg5XqPfxiHGLlDYOHiKgU7mL4x0jTEZ5hJDlcmz7AF9
- PlQifccmHzj0AgYf3ENeh3wQtW02VYtOdRWoiHe1tCqUV6/2wKo5WYdcmErDWz5iOqH+
- FTlb1Ey2zTNwOUALewd7HmZ8g1TEPME1VBu8V24B3FvtMbSx1XlbvgVy7kNtDaxwL6iD
- VMng==
+ bh=5DmeGIOtnQgeitCackLcdl7/cs7kVLgAOODhMbDoGJI=;
+ b=XqBfAcg6hp2ThxdlXvlxCmrKF+slP0279pTWgbkrlo4SkwaOihE9DOhzU8pH7QxXjo
+ 2yV7qZXX8XyyFGnhbBBvLAVRXJnQTzRrcMAvHDhKx8cX2Ghg5n+epIcG4EEsLI9/PkV0
+ Ic0oqd5bhHWPaZu+QTqAf3w5urmNkYcnA1P64s3oLe6drbE1INapuXQt7fzzaW7rqWYj
+ ApKqW4zq5/CsgxzRHlvX3XDDi/t/ocYg6aRoKG3GyjPQumZ9Ju4cqfxbzKMSkRZ6H3ai
+ W6zG4AlLySLits2CBUT6YmWM5O+ChaA7IYTMIR2f+fKxiv/mLgZZDFQGFrcaAmnR9VTR
+ yk4A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUosFkYQN8epj6KZ9+YZN+rQ4uM+XQtFQTZ7B0BsSHQb7MM8oQUECrnjcqeeV9QxWvWdkaiZjs1VFCW@nongnu.org
-X-Gm-Message-State: AOJu0Yxjnd8NxiywSHnExSq8JWz9xQwQzKoh0KuWMCXM0kTQp7uQ5IFn
- Bgd+21GRYLVirzRZL8BQIQvaMXoYMGCBi/3HI1STOm3TQerDulZnmhtkK6f1g8KLs0s=
-X-Gm-Gg: ASbGncvPK5RtMBASUT+lZn4VbMXbpGNroGUJEnHZ7Urs0irGJIcJtFAAFQH1u62QPoW
- 5oC51GQiHhAxMo9//Us9HlzB2xUp4ROUzgbG2u53f1yN+yQmLUeF3Br2W3MBS2IFMFnj1wwfLNp
- XnUq0KuIIk5RIpLaxnJERLvog4imWkb2IKJPt2XS72JNGnTFaVvAekJy9l0URowPpzSgvGZu8RG
- pQgZmEJljv3Y3+j4AMw4fspfKAIh+rseiz1WLCpsVkZBs3IaV+sTiwBWTJ7jTee5YlhokrNKpEc
- TawxkkPZV3g+XiuR23zxAMyjsTudxpc6C5VdhvP1YgPg7P32xc5UYgyPxOif9AMThICu+3dIill
- uRZymnY2zUl57XVydGT8r9vIpFkZLF9OQ5Rcf4d2vchi6Ti74bqYhJkvLGbN9OiX4bJ/+AMklt5
- 5DSmzmPC1ml3JUJXr0LkNMG+RXyynun+eaCmIEo9OiVl/1wLT/Xw==
-X-Google-Smtp-Source: AGHT+IGNoilMZftYdlFoABEz7HqlIZBlWvUUKsoIyM+4ZJE0nhNjCJZlyq17dqhndnBKugd6FhWXWQ==
-X-Received: by 2002:a05:600c:4ec6:b0:475:df91:ddf0 with SMTP id
- 5b1f17b1804b1-4771e1f0f49mr4024465e9.33.1761676323157; 
- Tue, 28 Oct 2025 11:32:03 -0700 (PDT)
+ AJvYcCXBDGfSWMT9NYQNSzDH33tg3ctvgj3v6Upqr1novJYziSbmoFQUm/4G5Yp814Kf9jzUEsDY0Za/9HMu@nongnu.org
+X-Gm-Message-State: AOJu0YxJnkf4XeOof4Hf0WNZ86TAu+w4HJFQ8EmigvxF/PIbdPOuNOgg
+ o1Sen+MH4Q7oJoXojMjrdLB0hDatoc3+IBOvuou8vnTQekof69Mb4J2/MwuX3N91z+Q=
+X-Gm-Gg: ASbGncuZzRRb9upIfXqM5KDCUv40/Tmf2wSnKfxktIzKh/HOhoKBBGBIjCBoCsDWKDf
+ t8EfqDevolVN8A8gCERUqlj5gkMRSTJeGbjSFf0oFQg8vQMoyHSY0yjYMPG6RFY/aQHwzN5HKf/
+ LzvhYT+v2PHcMDqmDTe0ifu6O7X2jxxiqhbBuSMkigPEt8w7Aj/noZbkRw0k4oa3qlyPWXj9fKj
+ Qa0nOVkQaIWrbwEPhIZtE3OuIRjooUFVLWExBRsXhQl7pq9YmoWcE9k4EjFJdxm1+xO4PR+qJxi
+ YpM+fJ4b5eRCL0geY9pT5r+l9h4z9zTO69nTKIy8Y6F3Am8N2pTsi2XR4vtJLZAOXMjA+UEQSjI
+ W7WSjubDoXZD5pjBz+bJ4VbUSOw3I1WSfF1al5dg0jb97dfq+2XLBcI4fEy2Fug6Y2x8E72IaG5
+ vzVUI+jV5l4jvcN4rmwTi364vjzI4WvMhnHEN8ZILhhyQLkX55JA==
+X-Google-Smtp-Source: AGHT+IHsIum+c9nT7pG2emhzPJVq5xAQ7ZBeEj43AMtw4RcW7IdMZOY2egDdd/SBNbjY67+SkP8JZw==
+X-Received: by 2002:a05:6000:2512:b0:427:6a4:93da with SMTP id
+ ffacd0b85a97d-429aefbe0c0mr45031f8f.49.1761676448174; 
+ Tue, 28 Oct 2025 11:34:08 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952d5773sm23558062f8f.27.2025.10.28.11.32.01
+ ffacd0b85a97d-429952cbb2bsm22064803f8f.13.2025.10.28.11.34.06
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 28 Oct 2025 11:32:02 -0700 (PDT)
+ Tue, 28 Oct 2025 11:34:07 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
@@ -72,30 +72,29 @@ Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH v3 16/25] hw/s390x: Use memory_region_get_address()
-Date: Tue, 28 Oct 2025 19:12:50 +0100
-Message-ID: <20251028181300.41475-17-philmd@linaro.org>
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>,
+ Jamin Lin <jamin_lin@aspeedtech.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>
+Subject: [PATCH v3 18/25] hw/watchdog/aspeed: Use memory_region_get_address()
+Date: Tue, 28 Oct 2025 19:12:52 +0100
+Message-ID: <20251028181300.41475-19-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251028181300.41475-1-philmd@linaro.org>
 References: <20251028181300.41475-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,78 +115,22 @@ memory_region_get_address() to access it.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/s390x/s390-pci-inst.c | 21 ++++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
+ hw/watchdog/wdt_aspeed.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/s390x/s390-pci-inst.c b/hw/s390x/s390-pci-inst.c
-index 5841dfc4fec..d4adf782ca1 100644
---- a/hw/s390x/s390-pci-inst.c
-+++ b/hw/s390x/s390-pci-inst.c
-@@ -394,11 +394,14 @@ static MemoryRegion *s390_get_subregion(MemoryRegion *mr, uint64_t offset,
- {
-     MemoryRegion *subregion;
-     uint64_t subregion_size;
-+    hwaddr subregion_addr;
+diff --git a/hw/watchdog/wdt_aspeed.c b/hw/watchdog/wdt_aspeed.c
+index 30226435efc..f842d8e973a 100644
+--- a/hw/watchdog/wdt_aspeed.c
++++ b/hw/watchdog/wdt_aspeed.c
+@@ -274,7 +274,7 @@ static void aspeed_wdt_timer_expired(void *dev)
+     }
  
-     QTAILQ_FOREACH(subregion, &mr->subregions, subregions_link) {
-         subregion_size = memory_region_size(subregion);
--        if ((offset >= subregion->addr) &&
--            (offset + len) <= (subregion->addr + subregion_size)) {
-+        subregion_addr = memory_region_get_address(subregion);
-+
-+        if ((offset >= subregion_addr) &&
-+            (offset + len) <= (subregion_addr + subregion_size)) {
-             mr = subregion;
-             break;
-         }
-@@ -410,11 +413,12 @@ static MemTxResult zpci_read_bar(S390PCIBusDevice *pbdev, uint8_t pcias,
-                                  uint64_t offset, uint64_t *data, uint8_t len)
- {
-     MemoryRegion *mr;
-+    hwaddr subregion_base_addr;
- 
-     mr = pbdev->pdev->io_regions[pcias].memory;
-     mr = s390_get_subregion(mr, offset, len);
--    offset -= mr->addr;
--    return memory_region_dispatch_read(mr, offset, data,
-+    subregion_base_addr = memory_region_get_address(mr);
-+    return memory_region_dispatch_read(mr, offset - subregion_base_addr, data,
-                                        size_memop(len) | MO_BE,
-                                        MEMTXATTRS_UNSPECIFIED);
+     qemu_log_mask(CPU_LOG_RESET, "Watchdog timer %" HWADDR_PRIx " expired.\n",
+-                  s->iomem.addr);
++                  memory_region_get_address(&s->iomem));
+     watchdog_perform_action();
+     timer_del(s->timer);
  }
-@@ -510,11 +514,12 @@ static MemTxResult zpci_write_bar(S390PCIBusDevice *pbdev, uint8_t pcias,
-                                   uint64_t offset, uint64_t data, uint8_t len)
- {
-     MemoryRegion *mr;
-+    hwaddr subregion_base_addr;
- 
-     mr = pbdev->pdev->io_regions[pcias].memory;
-     mr = s390_get_subregion(mr, offset, len);
--    offset -= mr->addr;
--    return memory_region_dispatch_write(mr, offset, data,
-+    subregion_base_addr = memory_region_get_address(mr);
-+    return memory_region_dispatch_write(mr, offset - subregion_base_addr, data,
-                                         size_memop(len) | MO_BE,
-                                         MEMTXATTRS_UNSPECIFIED);
- }
-@@ -832,6 +837,7 @@ int pcistb_service_call(S390CPU *cpu, uint8_t r1, uint8_t r3, uint64_t gaddr,
-     S390PCIBusDevice *pbdev;
-     MemoryRegion *mr;
-     MemTxResult result;
-+    hwaddr subregion_base_addr;
-     uint64_t offset;
-     int i;
-     uint32_t fh;
-@@ -900,7 +906,8 @@ int pcistb_service_call(S390CPU *cpu, uint8_t r1, uint8_t r3, uint64_t gaddr,
- 
-     mr = pbdev->pdev->io_regions[pcias].memory;
-     mr = s390_get_subregion(mr, offset, len);
--    offset -= mr->addr;
-+    subregion_base_addr = memory_region_get_address(mr);
-+    offset -= subregion_base_addr;
- 
-     for (i = 0; i < len; i += 8) {
-         if (!memory_region_access_valid(mr, offset + i, 8, true,
 -- 
 2.51.0
 
