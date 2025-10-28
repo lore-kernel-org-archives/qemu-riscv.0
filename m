@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDBD7CCD1BF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:24:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43C2ACCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:26:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDoN6-0008HS-Ne; Tue, 28 Oct 2025 14:24:40 -0400
+	id 1vDoOe-0000wf-NM; Tue, 28 Oct 2025 14:26:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoN3-0008D0-0N
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:24:37 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoOG-0000kZ-NP
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:25:55 -0400
 Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoN0-0002zX-1B
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:24:36 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoO2-0003G5-Gz
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:25:47 -0400
 Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4711b95226dso79787895e9.0
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:24:33 -0700 (PDT)
+ 5b1f17b1804b1-4711810948aso47298165e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:25:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761675870; x=1762280670; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761675933; x=1762280733; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Bb8ct1msdop66cfNc5jZbjnVVPLBi3asYT3AOca3j1U=;
- b=nFVDC9ORWdMuMwYyt+KPwMjVwQ6c46l6pCu+M7fUW0/dkIuwxKhwa16anwWBBbVAHK
- zf9SN/k/Tw/ZOLwtUPOlmjK8kkwBBE7kZ1m0DnjQXEjjAud8CwNyhGoGSFYiWxd3Eh4a
- Gc1eDdXSAb66vvT6xd/FzZN5FVijLinkgg7b1fZ6n+3OUNgFUjWs5sZGiBBkr0hXt3o5
- t3229y8OKIFbPNFYtu0Hbt7gjZmVLbkBBBiqiRca8N5hJO/17rK1wwKDZk1Dx4dJ38AY
- 9/mgVMnmxrwUn2S/AP624bMi8PfOwnaX4BDXXVVg1zVyITJsXA0TL3qjLmcscWoqJtyJ
- rDUg==
+ bh=tn83gNQMZpvVjlvYJUMJlHBXZNHdMQkO0M/7A+q+76Y=;
+ b=CPEgcorJWuh5w4SU7dv13EhD9PMppxLRyO8RNI3Qt5sOY3iOmnhpQLv6TjtXG6E9Dp
+ eMkcUw/TEVmMsZxwKb7lirnboaor1hdLYeu+5W1TPSfsDeG1eQd290GNgiXrDSBgm3cn
+ pnQ1kCowibm3a41sY2i3sxRGx+6M2IScZauZhdjD+YthxbRd/y679TfuaasEYZNmMIK6
+ Ba0hYYCutEfQEb5OWUrnCKsDD63PaLP1qJD3Ucl38j0LYAagPBR2576A4m6mR08nF04A
+ e8y1BYzfHa7OfKKwDtgWAIBmjrlefZeOmNeOH2JWw8DijauR322hayi/hpAkcRr5chNF
+ rVTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761675870; x=1762280670;
+ d=1e100.net; s=20230601; t=1761675933; x=1762280733;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Bb8ct1msdop66cfNc5jZbjnVVPLBi3asYT3AOca3j1U=;
- b=B06zM1horulbaDIXgMSVoZHinLsCPFDL/Ds7mXaCEwTdOj+fIjpvVua4UI2Xg6KTY+
- rqZKMOIVYw+Rw9hXEPTb8mvHnQ+Vnzw5VS5z705HNWRmUKgoWI3AyS1dYsdnF9UibYON
- FWUcYKn0doKJHxMxpmCmMVvOpuEyiwLs09RMJMxpEEC7gKzlLzhtSt8J0LvktfxzTAoD
- KWCv4VseWwRczeOH1Env8RfSBON0gMJcOs2YJFEUdVeO7aVwByAxwqoJDYSp6g5TOy/S
- jGHKM8/sNOtstQWXmScAF89p0D1rqbcEt7AbXbmOReQY0wQ3VI5EI+pAbuSMeooDAgBI
- IzYg==
+ bh=tn83gNQMZpvVjlvYJUMJlHBXZNHdMQkO0M/7A+q+76Y=;
+ b=JOXEcr5ov2sqpN1FabXFS6qIMLcu0P7ovlwsn0dlszS8tsRUHNo1omgOvVXc+lE3Id
+ z5FK6EpEuyC7r3W7aKtwNjlTEIj40BwR4HDQmCf/rQaa6I4ug/S5sbWPeNYlNX7dShOs
+ abAVi4zLKYv8qtJ4zZ6Y/HIdGLP/RkCGqzZmAN9wjghB3rvsMNTgCR6YOK8TvLK7THuH
+ /DhY/06TF2JWY37JoVYfCZ57sXbQMBwlodYP9LEARw6sc66YvRVPU3Emp7BKxPMGhw08
+ Pr1HBJoqTFtSV9Uv2IWdDgSh7HFR1oBjYbyafDzjdgnbz6JR8exkVAO7CYx24eAlunCU
+ 3xUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX8hiAmpasFycONb7vMU5uXoGoXV7vmgoMw5K0vJf8pZPpw3i5fBlWa6jRo199nuYA+aLWMvUrlzUay@nongnu.org
-X-Gm-Message-State: AOJu0YwSWXv6xnb/677ChHi4vD5/hSiiSyLAsuCfG81uSmnDGLHbhkSt
- 41cohQq2p/R2KqStNOvdXg18efuqaGmy0JF8gjiy8mURRPSmye+BYpYDMRseswR/k24=
-X-Gm-Gg: ASbGnct+Rrnc9tadl9HL3xuaEeFc3z76HWVb+veQzSghjF0vO4nX7M+ei1AZIL20FZ/
- du8rIeYx5LVtmOma4xqDEaLffIZk7w7KD7mMLBgAUCVoZBunrhophw5ZzETXxAKHkHwY2cb8pBb
- fI8dvwt2hw+DCqXq/jcTByFnVc2WDnM/HJBx/mUC1u+DPKIsksLmnd6wIIjfMsjz6qrn/BP6hlh
- znw3kz4yOiFQXr8D99m77Lr6wQEIkki4WFQ6pPjzcI/YHZVjIu6fcfOEVwVju/bUPjcfoJDdr4L
- g4WLDU4y9QgIYkoJcYv0seFtRJFI3dlLw9PQWn6TSKKoZ6slK6XkXo+NOBtXGFs9ZRQUltUjwJ/
- gh2mCBQJPZsZDkm73IjWsm2Iug9efSoBua/gkiQRoJKvB6MG3pteurH02LKgHE+fU7acWrOGrqr
- So1GWzn8PirnZ5lQBPmKMG812TfLOmOH4HxcX27DBecLY6DzEjvA==
-X-Google-Smtp-Source: AGHT+IHGtrcGFoBqbOWM/Z4ZKtNkpIoAicr60V8rp7HbelNRNEGwujVNu0ILye4Zuu0pu6nn0bXufg==
-X-Received: by 2002:a05:6000:2507:b0:3eb:d906:e553 with SMTP id
- ffacd0b85a97d-429aefda844mr13371f8f.55.1761675870517; 
- Tue, 28 Oct 2025 11:24:30 -0700 (PDT)
+ AJvYcCXCuQsyewXFHNLcUdsHDX0j3NnLcBhCgkHASQDP7wzWSEkDTmouVitytqW47yHQNPeSdzE381JzIl9p@nongnu.org
+X-Gm-Message-State: AOJu0YwjloKqOOWMNHwzx0lD/FouYodrhRX7I1DDa75UmPVyu5ppNkIo
+ iPYVlmn6zM24Ra431DeO0uGPmlsTWQro4vr8jRFTKNyQotsWLt06jAT0GFOgwdld9SM=
+X-Gm-Gg: ASbGnctRF0zQx0kTE7VMxciTMwannEsfuLVupJkXh3tXSkp1sbLDP3RvewOk45sPmrG
+ rvdQ20vIchUPgN16H6uLbscTbLlZH9Z1MIywI5aPe2ayWrtLqbS0PYBRH+4gXGS2IgWshGY3TaT
+ Nq8DU8oC6xvmA9DUW9whyQC9vzD9K50VF0RbTcsaDRnkZfMZqsLxgvmJjIIMFnkF7xovx+ix1Jo
+ TNcvgYqBQ5BRu0ohTg0M8NaP/7dw2XThfynCLMCLVqwH3+vgM3AGsFd1ET0RIwCjCdVDmEIx6fo
+ ems5pX6vL2VNESiM4Qe1upWt1uNjDDFo/AcE+iu3gQk9JDroMdhgTBfKDR2Pj/yWbF8nDJL1IX0
+ LRbNCjYS5lPc2S16IYeqOxFm3ok/Sn7deR0cfMufpHDPCv8iHSZBH1ZIudqHvZyj/Uxri5omAPX
+ NVtQzEskxkMpkxXHeh96Kv41lGgMFP3FFr7jNQ0Pn9VXL5BzJ5bQ==
+X-Google-Smtp-Source: AGHT+IH1ugfFe0oxceS0sC4ktUe81XxAtBXaff6IVRGZbXQOpQBQXV+FUBM+u54B1peIOrlXSRWN6w==
+X-Received: by 2002:a05:600c:4683:b0:46e:4883:27d with SMTP id
+ 5b1f17b1804b1-4771e3aca51mr3030645e9.30.1761675933009; 
+ Tue, 28 Oct 2025 11:25:33 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952da645sm20772209f8f.30.2025.10.28.11.24.29
+ 5b1f17b1804b1-4771e3c878fsm4355455e9.17.2025.10.28.11.25.31
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 28 Oct 2025 11:24:30 -0700 (PDT)
+ Tue, 28 Oct 2025 11:25:32 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
@@ -72,12 +72,10 @@ Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Peter Xu <peterx@redhat.com>,
- David Hildenbrand <david@redhat.com>
-Subject: [PATCH v3 11/25] system/memory: Introduce memory_region_get_address()
-Date: Tue, 28 Oct 2025 19:12:45 +0100
-Message-ID: <20251028181300.41475-12-philmd@linaro.org>
+ Peter Xu <peterx@redhat.com>, Fabiano Rosas <farosas@suse.de>
+Subject: [PATCH v3 12/25] migration/ram: Use memory_region_get_address()
+Date: Tue, 28 Oct 2025 19:12:46 +0100
+Message-ID: <20251028181300.41475-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251028181300.41475-1-philmd@linaro.org>
 References: <20251028181300.41475-1-philmd@linaro.org>
@@ -92,7 +90,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,51 +106,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-MemoryRegion::addr is private data of MemoryRegion.
-Introduce memory_region_get_address() to get it,
-similar to memory_region_set_address() to set it.
+MemoryRegion::addr is private data of MemoryRegion, use
+memory_region_get_address() to access it.
 
-Suggested-by: Peter Maydell <peter.maydell@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/system/memory.h | 7 +++++++
- system/memory.c         | 5 +++++
- 2 files changed, 12 insertions(+)
+ migration/ram.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/include/system/memory.h b/include/system/memory.h
-index 45de6946812..d2a5850a360 100644
---- a/include/system/memory.h
-+++ b/include/system/memory.h
-@@ -2481,6 +2481,13 @@ void memory_region_set_enabled(MemoryRegion *mr, bool enabled);
-  */
- void memory_region_set_address(MemoryRegion *mr, hwaddr addr);
+diff --git a/migration/ram.c b/migration/ram.c
+index 5eef2efc781..3330c102977 100644
+--- a/migration/ram.c
++++ b/migration/ram.c
+@@ -3144,7 +3144,7 @@ static int ram_save_setup(QEMUFile *f, void *opaque, Error **errp)
+                 qemu_put_be64(f, block->page_size);
+             }
+             if (migrate_ignore_shared()) {
+-                qemu_put_be64(f, block->mr->addr);
++                qemu_put_be64(f, memory_region_get_address(block->mr));
+             }
  
-+/**
-+ * memory_region_get_address: Get the base address of a memory region
-+ *
-+ * @mr: the region to be queried
-+ */
-+hwaddr memory_region_get_address(const MemoryRegion *mr);
-+
- /*
-  * memory_region_set_size: dynamically update the size of a region.
-  *
-diff --git a/system/memory.c b/system/memory.c
-index d1c060b2b50..f48b586122d 100644
---- a/system/memory.c
-+++ b/system/memory.c
-@@ -2777,6 +2777,11 @@ void memory_region_set_address(MemoryRegion *mr, hwaddr addr)
+             if (migrate_mapped_ram()) {
+@@ -4190,11 +4190,12 @@ static int parse_ramblock(QEMUFile *f, RAMBlock *block, ram_addr_t length)
      }
- }
- 
-+hwaddr memory_region_get_address(const MemoryRegion *mr)
-+{
-+    return mr->addr;
-+}
+     if (migrate_ignore_shared()) {
+         hwaddr addr = qemu_get_be64(f);
+-        if (migrate_ram_is_ignored(block) &&
+-            block->mr->addr != addr) {
++        hwaddr block_addr = memory_region_get_address(block->mr);
 +
- void memory_region_set_alias_offset(MemoryRegion *mr, hwaddr offset)
- {
-     assert(mr->alias);
++        if (migrate_ram_is_ignored(block) && block_addr != addr) {
+             error_report("Mismatched GPAs for block %s "
+-                         "%" PRId64 "!= %" PRId64, block->idstr,
+-                         (uint64_t)addr, (uint64_t)block->mr->addr);
++                         "0x" HWADDR_FMT_plx "!= 0x" HWADDR_FMT_plx,
++                         block->idstr, addr, block_addr);
+             return -EINVAL;
+         }
+     }
 -- 
 2.51.0
 
