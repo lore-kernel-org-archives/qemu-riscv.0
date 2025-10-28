@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A04CCCCF9EB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 126BACCD1BF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:31:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDoSo-0004XG-Jr; Tue, 28 Oct 2025 14:30:48 -0400
+	id 1vDoTl-0005FL-81; Tue, 28 Oct 2025 14:31:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoSO-0004M0-HQ
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:30:10 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoTQ-0004rS-FZ
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:31:15 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoSI-0003gK-Tr
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:30:08 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-47103b6058fso1382135e9.1
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:30:00 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoTJ-0003xo-IE
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:31:12 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-475dbc3c9efso27264885e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:31:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761676198; x=1762280998; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761676260; x=1762281060; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HL7ij399tVGkPj9RDTG8sqr6pEwl1ZnFEvIaoIEp9eA=;
- b=SZQlqVPnwwzM/P1jLSUNQMXhMyhLjrYztVVsHIBXyP5Tv4mjXFrcsTM8pbicF5n50J
- 8wAC0uNwl8wfr3wwcHKlUDHPgcIB6C5k/bUbyzHe8SpnfNni5okmCCoF225pw5FHs1Ip
- kc2ph8roKx8XyD8RDk9KYrdEQzVK2XbTO/fH7Z/PFkAqeNEin12fvYwqfiO3xNUp7gwr
- VcxCSONvCIPqyIhlWgVEfvWzou3l8aJL+aVD8YMjctG19OqortPrPz0NPXRFp8nnVDi7
- XL3VgHXJRb7/yUGPYl3e8J1fdXuoQoaffTP1pHCwjISW7oh16Rvn9cy2Nq45LsKbOqDf
- CxrQ==
+ bh=fermtkBdaDZXNajdjB6zA0OKZzLVtlqaDe4tnQa95wQ=;
+ b=vCf0zEE5whdPAXxSBMXnQEZaUwkA/TX7GdNiMMRtNpZF4Olxm1uSvP1An4v+xRuN9a
+ k8UytmH/tJqe+NHZloTzA1BxiVAEDnqdQ1MA9FodbmleelD+eZ79i8+1E/huUqe4HzVa
+ 76jWdhbW6gGAoIhTA5CHmCthYeQr7lGGmnSEmTOd/2gAnoZmEB+59tyyWqEXZ+T7oQYC
+ CKAqz5qLnm1Zh+IhIkVJ2w1qIkw6fkl7WUtb+E2sQd5zE3/jvMat4CgPuLE8c0W/Gutk
+ LZYBzWtHb7bwQREUnIw2uV6xte0atqGkZpqs7bwRby4gvpET3Eng8B6bBbdaQ2Wt+sek
+ iKog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761676198; x=1762280998;
+ d=1e100.net; s=20230601; t=1761676260; x=1762281060;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HL7ij399tVGkPj9RDTG8sqr6pEwl1ZnFEvIaoIEp9eA=;
- b=gVD6DuMT7TzGzSBheOfqaHhZbZTeqELu12AEwWKkZHO8SbUejTRgt6l8ubzwyInvdC
- zzAjNNuZo51/xFgCDn53hvwgpjgp9QXEe1XCSyMkW618ryaFT4XTfrIh3lNNObtSV56I
- 2ju3bVDFiDp4sWR3wg4502+63MwH2CaKGvzc3ho7qXyDF/VbdGzX6WPoLAo5S5YiMlzp
- 2lVWFDxwONma+7PZgZQN5z/mow6k0QEw5PHVOvVCXRe346ZOlz5u+8hYs5JIHtU+pVuP
- LvbIuk7om1SRNuKEpH0YdrfqEqfJyMco/L0H8vg9nSP16Q/8WN7qyxxh/utkQw0enmkw
- Uigg==
+ bh=fermtkBdaDZXNajdjB6zA0OKZzLVtlqaDe4tnQa95wQ=;
+ b=gNqhknMXmkAhHcHcxvuj5+5KcnneoTtG3/GzL4cMLyDi9MJwhB+9UiScxfnIQuck+o
+ MAfwxuY8fB1cdmLJC7U89+u8vaCm9WFTJ+XwBxkZM1SI63MjMzC+wjLcDov+z9TUu4zN
+ QVj3/VxMRUJUdFu2MWcPTcYOkArp1LrdjNyY0Qzk4QlvChg7zgemZUrZffedl4Y5nlAK
+ iwt1CA/YMAsONwq9+b/3U2ist+hd++XI+88AUfPCIehmmvio+ghdp5d1HnZlzCWYvY/p
+ fzWMuyoSVFSztSQ6kLujHdWQfqqIEaimEAvUCYjVh//agfWvth2If68ndaBdsdtA5zXr
+ ol9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURbHZqyM6UQaiWm9QIkDww0InGporwu742deoFbdJV6dNApHmb3mAHCa/Ow03we3k6IbdUF+w/Z+56@nongnu.org
-X-Gm-Message-State: AOJu0YyysJdUMTJoq/OKGP3SLkZF5GkDAl3O+gmlWf2ayqjBh4VkIjoQ
- HW8PwXM/Y9bN1Z0reYaQZ59R4gD6MMW7Ku37UAY9ML8sPnVtFMm4iyZwmf+3Ubke+MU=
-X-Gm-Gg: ASbGnctFB7yvZcvVnpLCEudVxFuSiXHP/bYmhzHwom5UiI3m4yOYLMgzdDtOrcBEHIo
- Q0i1FHVSzBFOMIU1T64n1Fsebq/fVySQghPL0e0fMWwxBc7q3/xbdULnI31bOB+Qp4VzCp3QjA9
- FeERHT5tknz56HYA5fS6ADAjYJJIm1jw+nlMIeHrOc3K41BIHHy1CmNOP5Hn0iwijpnAWMP0h+k
- hiZ6jh//AHjAqxPwSxwmkA9uNz6aLBeihtqlVsmYggOqIH5E/nEZtyo9LpEDG84DXSEbij0nzLT
- PEzeXAupIVbGN88fwKZ2Z49WRmnbFVUcyZVhjn3QOBuYXSMPeI4kAi6UpDamgxNUPxDtsQeyJc0
- dZWOaJPsVUx9b8d9QPhtl1c5dhw5CVubknfta1utXeCJuazyBKapZV0/H61KCvDB9t72de1QZAo
- OlI11Q6DArQhD8UZFvhfXZvAAstxDCs+AHjWkE00C1LHOI6nFPGQ==
-X-Google-Smtp-Source: AGHT+IG97QAQdAzX9j2A8+XMHl21id0uAywezIfpohf6gPFZ5+SmTTd/0RziLpMJdteJH8UW8U3PBQ==
-X-Received: by 2002:a05:600c:8518:b0:45f:29eb:2148 with SMTP id
- 5b1f17b1804b1-4771e5ec5b3mr2070435e9.7.1761676197953; 
- Tue, 28 Oct 2025 11:29:57 -0700 (PDT)
+ AJvYcCUvD24poS9Rns6WDZ+ieUCvawDxTnFwMNhmE7ykVwedhovAm1Xy8NatFJOIa1YijWeIcAhjp+0fgo6m@nongnu.org
+X-Gm-Message-State: AOJu0Yxo847Tj++M76XuanSrMJQpPd+vtwMmHkdT7D0gTczxg6Hojr1k
+ Uin4st1KxMXR3qEJ8QQXNTSSZNl/2dTGbklXpswAlY7bTBPyvmER3YgJyCqh1V0S4xU=
+X-Gm-Gg: ASbGncsvxJZmnjiOaVugxk8VFYNjLbIm/bOxDPN14iwcpw87KRRZETmQrzwSS7Nkwmy
+ 7BJRNdjGYh3PAfaSl0dWGNT9FsOJWj9+0vjPa5fjNs1y9o6H6MLpmRpOsnsgasboK5hkunLhUuo
+ 6RsR42237AVclEcRvso4yYoeWHgkGwGLA6mwIeqIUhwRLziV8+G89DnzrCHGZeZsXYZrJHg8fsz
+ 3VLO1pb7sfAiYEtDv8Wu9LDxBfR5nygaZmoYTU9QyoxzwbnQEQV3J1kZRijR8niwE7CCDnEEWYv
+ /p2CzKHbmAOn+gT+yj7cdAaEHkXuHuGWocsvxNmHkOaiy3aGJGLuQanfowZFagS7IUGS+PS90a1
+ qr4PP/vrC2NShk3FVG8qKq/gt5xJnqmkNnfXr7bMWS2y4/6pK8zByW7YgEgif9Zh1iE/mjeyHf+
+ 3EQOwcHgyZ+l7UmBPpuFJJWksipJP3G5Bo5T2IIaGFNGLfuT9PhA==
+X-Google-Smtp-Source: AGHT+IEZrBqet2EhgHnX4L/FSECsKa8z/HIEet5qdiAHu/FmoGeAFC0bJdCuXELcszN40D53pYxkaA==
+X-Received: by 2002:a05:600c:3b1a:b0:477:58:7d04 with SMTP id
+ 5b1f17b1804b1-4771e1abf88mr4154275e9.9.1761676260305; 
+ Tue, 28 Oct 2025 11:31:00 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4771e20205esm5286525e9.12.2025.10.28.11.29.56
+ 5b1f17b1804b1-4771e235ae1sm7425275e9.17.2025.10.28.11.30.59
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 28 Oct 2025 11:29:57 -0700 (PDT)
+ Tue, 28 Oct 2025 11:30:59 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
@@ -72,23 +72,19 @@ Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>, Song Gao <gaosong@loongson.cn>,
- Bibo Mao <maobibo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: [PATCH v3 14/25] hw/fdt: Use memory_region_get_address()
-Date: Tue, 28 Oct 2025 19:12:48 +0100
-Message-ID: <20251028181300.41475-15-philmd@linaro.org>
+ Keith Busch <kbusch@kernel.org>, Klaus Jensen <its@irrelevant.dk>,
+ Jesper Devantier <foss@defmacro.it>
+Subject: [PATCH v3 15/25] hw/nvme: Use memory_region_get_address()
+Date: Tue, 28 Oct 2025 19:12:49 +0100
+Message-ID: <20251028181300.41475-16-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251028181300.41475-1-philmd@linaro.org>
 References: <20251028181300.41475-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -116,50 +112,41 @@ memory_region_get_address() to access it.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/i386/microvm-dt.c          | 4 ++--
- hw/loongarch/virt-fdt-build.c | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ hw/nvme/ctrl.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/hw/i386/microvm-dt.c b/hw/i386/microvm-dt.c
-index d7f49bc1b5f..5b64f5b7f30 100644
---- a/hw/i386/microvm-dt.c
-+++ b/hw/i386/microvm-dt.c
-@@ -72,7 +72,7 @@ static void dt_add_virtio(MicrovmMachineState *mms, VirtIOMMIOProxy *mmio)
+diff --git a/hw/nvme/ctrl.c b/hw/nvme/ctrl.c
+index 9505f291f62..65cc1c8ee52 100644
+--- a/hw/nvme/ctrl.c
++++ b/hw/nvme/ctrl.c
+@@ -522,7 +522,7 @@ static bool nvme_addr_is_cmb(NvmeCtrl *n, hwaddr addr)
      }
  
-     MemoryRegion *mr = sysbus_mmio_get_region(dev, 0);
--    hwaddr base = mr->addr;
-+    hwaddr base = memory_region_get_address(mr);
-     hwaddr size = 512;
-     unsigned index = (base - VIRTIO_MMIO_BASE) / size;
-     uint32_t irq = mms->virtio_irq_base + index;
-@@ -152,7 +152,7 @@ static void dt_add_pcie(MicrovmMachineState *mms)
- static void dt_add_ioapic(MicrovmMachineState *mms, SysBusDevice *dev)
+     mr = &n->cmb.mem;
+-    lo = n->params.legacy_cmb ? n->cmb.mem.addr : n->cmb.cba;
++    lo = n->params.legacy_cmb ? memory_region_get_address(mr) : n->cmb.cba;
+     hi = lo + memory_region_size(mr);
+ 
+     return addr >= lo && addr < hi;
+@@ -530,7 +530,8 @@ static bool nvme_addr_is_cmb(NvmeCtrl *n, hwaddr addr)
+ 
+ static inline void *nvme_addr_to_cmb(NvmeCtrl *n, hwaddr addr)
  {
-     MemoryRegion *mr = sysbus_mmio_get_region(dev, 0);
--    hwaddr base = mr->addr;
-+    hwaddr base = memory_region_get_address(mr);
-     char *nodename;
-     uint32_t ph;
-     int index;
-diff --git a/hw/loongarch/virt-fdt-build.c b/hw/loongarch/virt-fdt-build.c
-index 1f0ba01f711..54524e5aca9 100644
---- a/hw/loongarch/virt-fdt-build.c
-+++ b/hw/loongarch/virt-fdt-build.c
-@@ -195,11 +195,11 @@ static void fdt_add_flash_node(LoongArchVirtMachineState *lvms)
-     hwaddr flash1_size;
+-    hwaddr base = n->params.legacy_cmb ? n->cmb.mem.addr : n->cmb.cba;
++    hwaddr base = n->params.legacy_cmb ? memory_region_get_address(&n->cmb.mem)
++                                       : n->cmb.cba;
+     return &n->cmb.buf[addr - base];
+ }
  
-     flash_mem = pflash_cfi01_get_memory(lvms->flash[0]);
--    flash0_base = flash_mem->addr;
-+    flash0_base = memory_region_get_address(flash_mem);
-     flash0_size = memory_region_size(flash_mem);
+@@ -564,7 +565,7 @@ static inline bool nvme_addr_is_iomem(NvmeCtrl *n, hwaddr addr)
+      * that if the device model is ever changed to allow the CMB to be located
+      * in BAR0 as well, then this must be changed.
+      */
+-    lo = n->bar0.addr;
++    lo = memory_region_get_address(&n->bar0);
+     hi = lo + memory_region_size(&n->bar0);
  
-     flash_mem = pflash_cfi01_get_memory(lvms->flash[1]);
--    flash1_base = flash_mem->addr;
-+    flash1_base = memory_region_get_address(flash_mem);
-     flash1_size = memory_region_size(flash_mem);
- 
-     nodename = g_strdup_printf("/flash@%" PRIx64, flash0_base);
+     return addr >= lo && addr < hi;
 -- 
 2.51.0
 
