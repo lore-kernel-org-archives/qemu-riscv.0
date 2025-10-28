@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4352CCD1BF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:37:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87C74CCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:39:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDoZU-0001wk-93; Tue, 28 Oct 2025 14:37:28 -0400
+	id 1vDoaT-0002tZ-Lr; Tue, 28 Oct 2025 14:38:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoZS-0001rx-DG
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:37:26 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoaQ-0002tD-Qx
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:38:27 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoZK-0004zg-GY
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:37:25 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-475dd559b0bso49398195e9.1
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:37:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoaK-0005Dc-7z
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:38:26 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4710665e7deso33705835e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:38:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761676635; x=1762281435; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761676697; x=1762281497; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=da20sap9SAei7iAOsl6G96LauqZxiVssKlSk19y/1Tk=;
- b=XELCyF9cVUcKv2F0ges/gg8zm0dId+/iDI3HEDKKSurDbnJZe0ehGxc+gvsw6S3yJL
- EzwWeq2Cd7RB8NncsRv2LQuTbghnsN8cjO6bPn3jUR8L2zM5c5klRofJwbVmhHfFi7s1
- JGYjdqCXDxv9WFj2sGVX9Xz2wQdRxoAnTCgfCp6fMIvRmS4rfeWnsYR5kiqYZfTVAiPX
- 8xtl4n7mY8eb4TgRX0wTkgokXT2V6NYjyaJ0sjZxpJ5y+rsnoIPGrsuUG5bcrBtzG1Bp
- JpfOpBfs1HvXT/39nmH/9aZ7eyYUqaKVPm6ZfyAO7YVrgKNIhbz+mbVaOAN0au2/Azcs
- CLng==
+ bh=3LiVkULu7cpH5vHA/z/rbLa6gWXf0joU93uS+b0AUFI=;
+ b=W2o/QHE9Pbnv7kcpIVuc56Rr4SwyeHGHsEhkTM6qc3+1qSzIqvCu3Im9paA7EdQcJs
+ /SN6tmfrc4z7lXGjpEGTf5HccKnS7uOH2FPUFirNrG1u/BdO83XYApV+Z4pmzSgHr7RP
+ tNPPwyvd1ATc9aD2EqF9FWsxgWdoTu4Gi+8dHnWtfE/mD93OxHvj8bjTwZVGYtPHCCXN
+ MZh/K35hs1tMMWfsnMnJQQnirYF0ddPs+97w+INPX7yCtuF2YXQGpO1f7kMM4Om89XiY
+ ark42+layZZ3czw2Hur6BtmuZJxdWLXzgGao5gmggfxwzCBnVZX+ov6aELqLqk7pdmcz
+ CQKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761676635; x=1762281435;
+ d=1e100.net; s=20230601; t=1761676697; x=1762281497;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=da20sap9SAei7iAOsl6G96LauqZxiVssKlSk19y/1Tk=;
- b=dyao7yF2Qq6dPTfeIage681SdKZL1VZTLQeNhaecdBZq94jmKT+bfWRv+dKYIC/jtJ
- nfRrco6HKU3gRltAbA8urBUenDejlPZEzIc10qX25AE4v9IlUSJC8v7uY3uiWSd+I1DU
- bBVJccOYiMdIwgLOjYi9bk2iObcNAE8bvrdViJcilDMXm1I3W8iBFTMTv2xLWk9BEw1q
- p/+yDd8LSdwfuNH3yTW0ntKQTv7KC1N7ibzmZU3HPCjEbgjCjS6P2AocRxsefjIhP9NV
- TaNCUtQ/XAfRUo221vy6BqecLTg4nW+cRm4Qr23vOdMKERMazTpomwQxUfSFe1wsA6JT
- 5iNA==
+ bh=3LiVkULu7cpH5vHA/z/rbLa6gWXf0joU93uS+b0AUFI=;
+ b=oFuHih+T+q5U26Ni9p89XRv3nrQtUnpKYVeh39FcGu6HWxkMiNeXCAM01bZCbQc2cu
+ OamOhW+IFRr2JTvr6LK4N1OZkj27fw31xSPpbMQC0c9IAV+t0lv9zTVFfXcbG8gVQ+DM
+ LjsGM92kFvFVumZXOPtgJKx4ry9/Un7+d7j5Aj7lq3uJyyoJGndnsRiFS7Dizknhi1w4
+ wem3icWMjFmBSVI6LD9o2ylWEDMZ1OnFUU0hlSG27qh1Z/8u1X2UxLKje3feIBtfdt48
+ 6XXCXHhs5oKk4zjkwyxN0/7ryoBtnjC4LpdvMjQY2iwRDUGvNSnRzv+ERPg7qb+Iub2i
+ dFMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7waWk8j1+lMkKtxJww+MCloNC8+9pgifRHtf4rYurzqIdFdjrp9T/6CYn5CxZTOb3HSbWqu/HNe8l@nongnu.org
-X-Gm-Message-State: AOJu0YwsaiF+YnqnKX6CxrgSQu+3UjUCwVUXarIAdCjrZmp/THT20hAp
- OsWwYIkxg/gztWz9c4JY3mxHgceOfOrFAIZBKo7t01OjM7tkT7QQl3D+SEU016N6C08=
-X-Gm-Gg: ASbGncuV/yJFdUnc0uUo0dyMk6Tx8hvKQSp1kV7GHjMsKAkOoHwp//4tD2QnomEOgcQ
- AzbIOt+Ec4HRjedjgFPx9lbUnnPyxlJo1KGfjXYCwJh9B+89kbCWlmkAh3ZRjn3qk0liwVoGcbv
- 8b/m33zguesaS40hwEbpOXyWQTNq/aNay4mCnNtHPz+jJtLp3vTtAQfBKAOQWAkQuF0FQQXRTt6
- utuHt6E5cZrDIVny3bZcocBokszsFrFApqmsLgeh2QYsdGFM8MTr5C0ggIegFmNmKobQeM3Ezek
- iUEfj0mh81m7FGQLmjL1+kV39bYmfPwwEgE4YEeHiF41QVV+iC1u64eRz5zpWF+5SiZtSKmnFF5
- q1JuX8PumGIHXWE6jhaR3YObihXcvPdFCMkfUJfPuAPhODLzmWsINlhUahSnphAN9IIHZXYB0WC
- PYehXxlAvVrTZ9r4VF8/YVCfAR1qoQ0uZN0vgZgHNWKjH48KmKgw==
-X-Google-Smtp-Source: AGHT+IFapD6B1mwLK5l5mb2JHMsdWVzmVKw4vmGK+atso96F/zVqkutbGq8wyv3L0Md4xYfeUTvgrw==
-X-Received: by 2002:a05:600c:5197:b0:46e:2e93:589f with SMTP id
- 5b1f17b1804b1-4771e17ef8cmr3841085e9.14.1761676634843; 
- Tue, 28 Oct 2025 11:37:14 -0700 (PDT)
+ AJvYcCVDY7O7TmFvyidqX3g3xUE8R0F2FwlS/UCwxoYDr2xdKzXWG33Nm7zE76mu/QC8sd0brsY6rQfZVLMH@nongnu.org
+X-Gm-Message-State: AOJu0YxlV21BDvtIX8aSNwd+OSei1GscpJZYfQNxlEeTJ26S9VKudw2b
+ UcappEOcPe/ih7n0x8mvUADMPdMpH/4KT1+N56Mgi7LTqZPBmBFeHbwYHGr1E0AK7l4=
+X-Gm-Gg: ASbGncu6vAlba7MMmrfhKe389fbpY4Cwsjmdmxgh44YDPtQ7RXDy8XiflGAqLV31Ua8
+ DIIrn0g9F+ijIS53UzndKvD5/P3D4EZ3pcmIcM3h+gQsT/qbXFqZOdB9WdkFkmThVZ3MXHupjAz
+ nzdkTbxcq2wYQYoqcmXBD/n9dhwONDQbcCw/WSWotG9f75uv7CxGBNZtIQrJXx8fs43ZzL6jhuR
+ wBrC2YoqP1WAvVAlIp35ke3uRQ15/Adjb/6r8aT8+IkAXrqxWhWUxDqiznahSy97LULi1p84zT5
+ B+NhLak14wTg71aQKulpK62pkfLskUKRL8q+ZFFW8rFRsQKhvJARlKzSI/XbyjSGnLH5dXz11gk
+ 1A8gXYAakbTNh9nSbY5Hb7v/QaoXHgq1LK3fKA5GMfn7QqtPI1PPEECXqttwca8GaUf11G2hwSA
+ hyMsU3nCIRT7jjXQa5IclV+KU9Zk93AG3roSNVjgek3lgd8HuK/Q==
+X-Google-Smtp-Source: AGHT+IHlAKKbu1BvepCk2+xKmeMgOIpCiIa0/Yll5w1gh4uX8422ccZ4n4jMUDX3DYA0RYB95NOTig==
+X-Received: by 2002:a05:600c:198f:b0:46e:32dd:1b1a with SMTP id
+ 5b1f17b1804b1-4771e165903mr5014625e9.7.1761676697458; 
+ Tue, 28 Oct 2025 11:38:17 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4771e372a2asm4969435e9.1.2025.10.28.11.37.13
+ 5b1f17b1804b1-4771e202093sm6130775e9.11.2025.10.28.11.38.15
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 28 Oct 2025 11:37:14 -0700 (PDT)
+ Tue, 28 Oct 2025 11:38:16 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
@@ -75,17 +75,18 @@ Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>
-Subject: [PATCH v3 21/25] hw/sysbus: Use memory_region_get_address()
-Date: Tue, 28 Oct 2025 19:12:55 +0100
-Message-ID: <20251028181300.41475-22-philmd@linaro.org>
+Subject: [PATCH v3 22/25] hw/sysbus: Hoist MemoryRegion in
+ sysbus_mmio_map_common()
+Date: Tue, 28 Oct 2025 19:12:56 +0100
+Message-ID: <20251028181300.41475-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251028181300.41475-1-philmd@linaro.org>
 References: <20251028181300.41475-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,51 +109,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-MemoryRegion::addr is private data of MemoryRegion, use
-memory_region_get_address() to access it.
+In order to make the next commit easier to review,
+use the local @mr variable in sysbus_mmio_map_common().
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/core/sysbus.c | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+ hw/core/sysbus.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
-index d33be6b2b52..414b3f806d1 100644
+index 414b3f806d1..dca6e67a92d 100644
 --- a/hw/core/sysbus.c
 +++ b/hw/core/sysbus.c
-@@ -257,13 +257,14 @@ bool sysbus_realize_and_unref(SysBusDevice *dev, Error **errp)
- static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent)
+@@ -122,7 +122,10 @@ bool sysbus_has_mmio(const SysBusDevice *dev, unsigned int n)
+ static void sysbus_mmio_map_common(SysBusDevice *dev, int n, hwaddr addr,
+                                    bool may_overlap, int priority)
  {
-     SysBusDevice *s = SYS_BUS_DEVICE(dev);
--    hwaddr size;
--    int i;
- 
--    for (i = 0; i < s->num_mmio; i++) {
--        size = memory_region_size(s->mmio[i].memory);
--        monitor_printf(mon, "%*smmio " HWADDR_FMT_plx "/" HWADDR_FMT_plx "\n",
--                       indent, "", s->mmio[i].addr, size);
-+    for (int i = 0; i < s->num_mmio; i++) {
-+        MemoryRegion *mr = sysbus_mmio_get_region(s, i);
-+        hwaddr addr = memory_region_get_address(mr);
-+        uint64_t size = memory_region_size(mr);
++    MemoryRegion *mr;
 +
-+        monitor_printf(mon, "%*smmio " HWADDR_FMT_plx "/%016" PRIx64 "\n",
-+                       indent, "", addr, size);
-     }
- }
+     assert(n >= 0 && n < dev->num_mmio);
++    mr = dev->mmio[n].memory;
  
-@@ -282,8 +283,10 @@ static char *sysbus_get_fw_dev_path(DeviceState *dev)
-         }
+     if (dev->mmio[n].addr == addr) {
+         /* ??? region already mapped here.  */
+@@ -130,13 +133,13 @@ static void sysbus_mmio_map_common(SysBusDevice *dev, int n, hwaddr addr,
      }
-     if (s->num_mmio) {
-+        MemoryRegion *mr = sysbus_mmio_get_region(s, 0);
-+
-         return g_strdup_printf("%s@" HWADDR_FMT_plx, qdev_fw_name(dev),
--                               s->mmio[0].addr);
-+                               memory_region_get_address(mr));
+     if (dev->mmio[n].addr != (hwaddr)-1) {
+         /* Unregister previous mapping.  */
+-        memory_region_del_subregion(get_system_memory(), dev->mmio[n].memory);
++        memory_region_del_subregion(get_system_memory(), mr);
      }
-     if (s->num_pio) {
-         return g_strdup_printf("%s@i%04x", qdev_fw_name(dev), s->pio[0]);
+     dev->mmio[n].addr = addr;
+     if (may_overlap) {
+         memory_region_add_subregion_overlap(get_system_memory(),
+                                             addr,
+-                                            dev->mmio[n].memory,
++                                            mr,
+                                             priority);
+     }
+     else {
 -- 
 2.51.0
 
