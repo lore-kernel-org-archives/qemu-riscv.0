@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F8FCCF9E0
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:37:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4352CCD1BF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 18:37:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDoZ3-0001Ua-2t; Tue, 28 Oct 2025 14:37:02 -0400
+	id 1vDoZU-0001wk-93; Tue, 28 Oct 2025 14:37:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoYY-0001Bp-6x
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:36:40 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoZS-0001rx-DG
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:37:26 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoYN-0004m8-0z
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:36:28 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-475dc6029b6so35562645e9.0
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:36:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDoZK-0004zg-GY
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 14:37:25 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-475dd559b0bso49398195e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 11:37:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761676572; x=1762281372; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761676635; x=1762281435; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tDDIpY5DBZefLzt1zYAEWbfOSaDV/iJd8y/kxVHu9fE=;
- b=iXdrD0KzpeskL7GUL+WFhInBsjK7TOjCVQ2nqxAvSw1YEAlr9ZabssbPr6i+fobDqz
- sZr4TAqGYt64YJQlrXHsBI1TC35M2D5n69mSmF1sYVWETE38xKw3fTE+Dq35gs0OmT00
- Smk6Q7PTa390DwQF7z5IUsdCI273HicECuYjcM8LBp7ZNBTNbr2K/JVjhDR6oiWbaqgi
- QASNQfOFIWJ2jrM+AcSL8cCLT1UqbpV7dn5VGRKn/iKHSI/6KorgFvsfQyxrIhd6yvNW
- 1wS8kMULWQwfuAoltr3BsUujCoYQN68Y2dWmTa59DfnMixmaJH6e1mRh1g9XydJLI0Zc
- CDrg==
+ bh=da20sap9SAei7iAOsl6G96LauqZxiVssKlSk19y/1Tk=;
+ b=XELCyF9cVUcKv2F0ges/gg8zm0dId+/iDI3HEDKKSurDbnJZe0ehGxc+gvsw6S3yJL
+ EzwWeq2Cd7RB8NncsRv2LQuTbghnsN8cjO6bPn3jUR8L2zM5c5klRofJwbVmhHfFi7s1
+ JGYjdqCXDxv9WFj2sGVX9Xz2wQdRxoAnTCgfCp6fMIvRmS4rfeWnsYR5kiqYZfTVAiPX
+ 8xtl4n7mY8eb4TgRX0wTkgokXT2V6NYjyaJ0sjZxpJ5y+rsnoIPGrsuUG5bcrBtzG1Bp
+ JpfOpBfs1HvXT/39nmH/9aZ7eyYUqaKVPm6ZfyAO7YVrgKNIhbz+mbVaOAN0au2/Azcs
+ CLng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761676572; x=1762281372;
+ d=1e100.net; s=20230601; t=1761676635; x=1762281435;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tDDIpY5DBZefLzt1zYAEWbfOSaDV/iJd8y/kxVHu9fE=;
- b=qHqk7OxDl5YewU6R8DXZzLj9ds3g/MLEO4unzkNi3aBYliXuU6SaWFo6ipgK6ldJzq
- mB0Z+H2qLUQo55t6QGdLBgFYsEJ5oPtpxY0LYmoh60ghs/XQHbwls1FzyDcvFc0YV31I
- yYVKBOlNYlqu27bbsmAoLYgnrDuK/Y6d7p7i0+5F9f/16t0YBfeaoA6lepqv1t2z1r5y
- pBOQ+80iMUKmVH/cbILrac296bxQLQ/dkHQgRh37Qrns8YjXOYz9anfuNEeN/VjIjmk3
- /xrN8FZbbW8JHOL+dznTxJ2eP236Frn6TMcGYD7OA95hKOhO+R+mgiYOsILoqjcAymhh
- Ejuw==
+ bh=da20sap9SAei7iAOsl6G96LauqZxiVssKlSk19y/1Tk=;
+ b=dyao7yF2Qq6dPTfeIage681SdKZL1VZTLQeNhaecdBZq94jmKT+bfWRv+dKYIC/jtJ
+ nfRrco6HKU3gRltAbA8urBUenDejlPZEzIc10qX25AE4v9IlUSJC8v7uY3uiWSd+I1DU
+ bBVJccOYiMdIwgLOjYi9bk2iObcNAE8bvrdViJcilDMXm1I3W8iBFTMTv2xLWk9BEw1q
+ p/+yDd8LSdwfuNH3yTW0ntKQTv7KC1N7ibzmZU3HPCjEbgjCjS6P2AocRxsefjIhP9NV
+ TaNCUtQ/XAfRUo221vy6BqecLTg4nW+cRm4Qr23vOdMKERMazTpomwQxUfSFe1wsA6JT
+ 5iNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3Z13AV614rXM0rcze8OAcEeCm6kw+7g2OJgFtGyV7XTT0V6+yqZVRUZnFYPRpAX/hbPV6obL69Yis@nongnu.org
-X-Gm-Message-State: AOJu0YwE/eqBxxp419IFprAGxrtz8dQ3glqJp/ff44afptfutVQVANkZ
- 9X4BZptlkYyQnodguqJjGGJyvFjmTIqcviqjnSFQbH9Ce9dqPCoN4iMfhthQJhANmRw=
-X-Gm-Gg: ASbGncveawxB3OpZJ6bW4fYP2RkDYTI3XPE5pN1dpg3XUNxOGkIQILHD2sHHCDoXyq/
- Gf5rVhHqA/I4eBbhl55r0vzWFD3mlOHdP/+ZctePLqiYhdldxhPuBjVcHKj/HTaaM4w+2X8Zm12
- dg5SqTPdF4wGPVLKpJY9g05lgjz0sTlUQfFcK05rsYI1Ila86JcWg0Q21O5hJ2B09kqiDC4lccV
- ed6AbuJur5ZASMzF7WOkhFkJbA0GqwZYj6yXWoaQl50Ic7a//Q19cv1dSoVIb628DQXYgja5Q1I
- iHgsMsyO0NjMS6+G9RBLFrCRSmuxx9c0v8r3WnV6jAy2a43pJmbI8+OXwb8Kj/3pL8sbtHuLVkB
- TReb9ExtxG3kMI9CkOT9O9Ce74TH02NcCiIJF4D5mxz1tZIxD/gndmBzEB2LPjN9MFWFRTzUVYf
- 1yZDqjWigyMCZBZWpMMjQflwxh6TtIwfP+bBXI/H5qseH+vUdiiA==
-X-Google-Smtp-Source: AGHT+IEQHBby75ghyQxhJs2H+uO0E2xg04ykfY1VExJwXzc1JWKcrYMUPxFAIHU+uZPdSQ4Ux37r3Q==
-X-Received: by 2002:a05:600c:820c:b0:477:e70:592b with SMTP id
- 5b1f17b1804b1-4771e16e792mr5356505e9.2.1761676572454; 
- Tue, 28 Oct 2025 11:36:12 -0700 (PDT)
+ AJvYcCV7waWk8j1+lMkKtxJww+MCloNC8+9pgifRHtf4rYurzqIdFdjrp9T/6CYn5CxZTOb3HSbWqu/HNe8l@nongnu.org
+X-Gm-Message-State: AOJu0YwsaiF+YnqnKX6CxrgSQu+3UjUCwVUXarIAdCjrZmp/THT20hAp
+ OsWwYIkxg/gztWz9c4JY3mxHgceOfOrFAIZBKo7t01OjM7tkT7QQl3D+SEU016N6C08=
+X-Gm-Gg: ASbGncuV/yJFdUnc0uUo0dyMk6Tx8hvKQSp1kV7GHjMsKAkOoHwp//4tD2QnomEOgcQ
+ AzbIOt+Ec4HRjedjgFPx9lbUnnPyxlJo1KGfjXYCwJh9B+89kbCWlmkAh3ZRjn3qk0liwVoGcbv
+ 8b/m33zguesaS40hwEbpOXyWQTNq/aNay4mCnNtHPz+jJtLp3vTtAQfBKAOQWAkQuF0FQQXRTt6
+ utuHt6E5cZrDIVny3bZcocBokszsFrFApqmsLgeh2QYsdGFM8MTr5C0ggIegFmNmKobQeM3Ezek
+ iUEfj0mh81m7FGQLmjL1+kV39bYmfPwwEgE4YEeHiF41QVV+iC1u64eRz5zpWF+5SiZtSKmnFF5
+ q1JuX8PumGIHXWE6jhaR3YObihXcvPdFCMkfUJfPuAPhODLzmWsINlhUahSnphAN9IIHZXYB0WC
+ PYehXxlAvVrTZ9r4VF8/YVCfAR1qoQ0uZN0vgZgHNWKjH48KmKgw==
+X-Google-Smtp-Source: AGHT+IFapD6B1mwLK5l5mb2JHMsdWVzmVKw4vmGK+atso96F/zVqkutbGq8wyv3L0Md4xYfeUTvgrw==
+X-Received: by 2002:a05:600c:5197:b0:46e:2e93:589f with SMTP id
+ 5b1f17b1804b1-4771e17ef8cmr3841085e9.14.1761676634843; 
+ Tue, 28 Oct 2025 11:37:14 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4771e3b9994sm4335315e9.16.2025.10.28.11.36.11
+ 5b1f17b1804b1-4771e372a2asm4969435e9.1.2025.10.28.11.37.13
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 28 Oct 2025 11:36:11 -0700 (PDT)
+ Tue, 28 Oct 2025 11:37:14 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
@@ -72,26 +72,27 @@ Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Peter Xu <peterx@redhat.com>,
- David Hildenbrand <david@redhat.com>
-Subject: [PATCH v3 20/25] system/ioport: Use memory_region_get_address()
-Date: Tue, 28 Oct 2025 19:12:54 +0100
-Message-ID: <20251028181300.41475-21-philmd@linaro.org>
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>
+Subject: [PATCH v3 21/25] hw/sysbus: Use memory_region_get_address()
+Date: Tue, 28 Oct 2025 19:12:55 +0100
+Message-ID: <20251028181300.41475-22-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251028181300.41475-1-philmd@linaro.org>
 References: <20251028181300.41475-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,74 +113,46 @@ memory_region_get_address() to access it.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- system/ioport.c | 21 ++++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
+ hw/core/sysbus.c | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
 
-diff --git a/system/ioport.c b/system/ioport.c
-index 4f96e9119fc..9bb8df5e757 100644
---- a/system/ioport.c
-+++ b/system/ioport.c
-@@ -177,17 +177,19 @@ static uint64_t portio_read(void *opaque, hwaddr addr, unsigned size)
+diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
+index d33be6b2b52..414b3f806d1 100644
+--- a/hw/core/sysbus.c
++++ b/hw/core/sysbus.c
+@@ -257,13 +257,14 @@ bool sysbus_realize_and_unref(SysBusDevice *dev, Error **errp)
+ static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent)
  {
-     MemoryRegionPortioList *mrpio = opaque;
-     const MemoryRegionPortio *mrp = find_portio(mrpio, addr, size, false);
-+    hwaddr pio_base_addr = memory_region_get_address(&mrpio->mr);
-     uint64_t data;
+     SysBusDevice *s = SYS_BUS_DEVICE(dev);
+-    hwaddr size;
+-    int i;
  
-     data = ((uint64_t)1 << (size * 8)) - 1;
-     if (mrp) {
--        data = mrp->read(mrpio->portio_opaque, mrpio->mr.addr + addr);
-+        data = mrp->read(mrpio->portio_opaque, pio_base_addr + addr);
-     } else if (size == 2) {
-         mrp = find_portio(mrpio, addr, 1, false);
-         if (mrp) {
--            data = mrp->read(mrpio->portio_opaque, mrpio->mr.addr + addr);
-+            data = mrp->read(mrpio->portio_opaque, pio_base_addr + addr);
-             if (addr + 1 < mrp->offset + mrp->len) {
--                data |= mrp->read(mrpio->portio_opaque, mrpio->mr.addr + addr + 1) << 8;
-+                data |= mrp->read(mrpio->portio_opaque,
-+                                  pio_base_addr + addr + 1) << 8;
-             } else {
-                 data |= 0xff00;
-             }
-@@ -201,15 +203,17 @@ static void portio_write(void *opaque, hwaddr addr, uint64_t data,
- {
-     MemoryRegionPortioList *mrpio = opaque;
-     const MemoryRegionPortio *mrp = find_portio(mrpio, addr, size, true);
-+    hwaddr pio_base_addr = memory_region_get_address(&mrpio->mr);
+-    for (i = 0; i < s->num_mmio; i++) {
+-        size = memory_region_size(s->mmio[i].memory);
+-        monitor_printf(mon, "%*smmio " HWADDR_FMT_plx "/" HWADDR_FMT_plx "\n",
+-                       indent, "", s->mmio[i].addr, size);
++    for (int i = 0; i < s->num_mmio; i++) {
++        MemoryRegion *mr = sysbus_mmio_get_region(s, i);
++        hwaddr addr = memory_region_get_address(mr);
++        uint64_t size = memory_region_size(mr);
++
++        monitor_printf(mon, "%*smmio " HWADDR_FMT_plx "/%016" PRIx64 "\n",
++                       indent, "", addr, size);
+     }
+ }
  
-     if (mrp) {
--        mrp->write(mrpio->portio_opaque, mrpio->mr.addr + addr, data);
-+        mrp->write(mrpio->portio_opaque, pio_base_addr + addr, data);
-     } else if (size == 2) {
-         mrp = find_portio(mrpio, addr, 1, true);
-         if (mrp) {
--            mrp->write(mrpio->portio_opaque, mrpio->mr.addr + addr, data & 0xff);
-+            mrp->write(mrpio->portio_opaque, pio_base_addr + addr, data & 0xff);
-             if (addr + 1 < mrp->offset + mrp->len) {
--                mrp->write(mrpio->portio_opaque, mrpio->mr.addr + addr + 1, data >> 8);
-+                mrp->write(mrpio->portio_opaque,
-+                           pio_base_addr + addr + 1, data >> 8);
-             }
+@@ -282,8 +283,10 @@ static char *sysbus_get_fw_dev_path(DeviceState *dev)
          }
      }
-@@ -335,12 +339,15 @@ void portio_list_set_enabled(PortioList *piolist, bool enabled)
- void portio_list_set_address(PortioList *piolist, uint32_t addr)
- {
-     MemoryRegionPortioList *mrpio;
-+    hwaddr pio_base_addr;
-     unsigned i, j;
- 
-     for (i = 0; i < piolist->nr; ++i) {
-         mrpio = container_of(piolist->regions[i], MemoryRegionPortioList, mr);
-+        pio_base_addr = memory_region_get_address(&mrpio->mr);
+     if (s->num_mmio) {
++        MemoryRegion *mr = sysbus_mmio_get_region(s, 0);
 +
-         memory_region_set_address(&mrpio->mr,
--                                  mrpio->mr.addr - piolist->addr + addr);
-+                                  pio_base_addr - piolist->addr + addr);
-         for (j = 0; mrpio->ports[j].size; ++j) {
-             mrpio->ports[j].offset += addr - piolist->addr;
-         }
+         return g_strdup_printf("%s@" HWADDR_FMT_plx, qdev_fw_name(dev),
+-                               s->mmio[0].addr);
++                               memory_region_get_address(mr));
+     }
+     if (s->num_pio) {
+         return g_strdup_printf("%s@i%04x", qdev_fw_name(dev), s->pio[0]);
 -- 
 2.51.0
 
