@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A094BCCD1BF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 08:04:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83E39CCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 08:06:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDeg1-00061C-N9; Tue, 28 Oct 2025 04:03:34 -0400
+	id 1vDeh2-0007Fm-6D; Tue, 28 Oct 2025 04:04:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDefy-0005zz-Su
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:03:30 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDeh0-0007CT-Ls
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:04:35 -0400
 Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDefv-0000o8-6R
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:03:30 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDegw-0000tV-Nu
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:04:34 -0400
 Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-47109187c32so30443265e9.2
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 01:03:25 -0700 (PDT)
+ 5b1f17b1804b1-475d9de970eso28121835e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 01:04:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761638602; x=1762243402; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761638668; x=1762243468; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0bJEm1B8ks9h5HyZDKkIUNIPRZdg3XjuMbaxmF/lz1I=;
- b=UMfETVQOdyLejXM+bn0lXHRmLNYaPXRrl0gur2oUg0/hF+y80ManCvk1IsOGtf5PkJ
- fZCoBPMIYF+cz9HgADD6p8hqL17vHeD39aQXT0fANz2gAHXQpt9NNm2/czGSp73TB5YV
- UDLq2vis7IknDPMHwZsQtGqVl8smFHtgo5lXQ4cJuFi6fwzw0ehn/J76J3Nz4vSMQ77b
- HDAEwa4qZnERoYQ5EOClX/ZtQ7YZyYrjD7y856lf232PvUXO75r17ZtEV8ZzQY8AO725
- du08puqQ4h9FLEFIaYJGT/YR4C3WM2r92i+UlWjWScIRaaj+eyfLNTqSUl2zPPVo1r3Z
- sa3g==
+ bh=khQ4f+JLpb7fh8Bk0A11QSSL3qpoF8Qk2ODQYUaP4ck=;
+ b=zkuuk7rZoAjECDh55GKh+1gdt5keehE1DPz4jNyoDUSwW3Bc/k6gkvz26qonP5J53c
+ Fhpkv6BdO+nPao7rRphEtnpHXf8gxxkLCq5vXkzp2kZyq7M7s3DCaW0/QA4aqEZ2yYqi
+ ksIecl4wwqymzOd+kRpeLpMFYb3fkTCUHQHHzmVkHYYr2J1e7Q72dr0jEDJOaL9+TQZw
+ NHRW2CC+yPGrxhpfT9L/ENB6iMVGn2a34AMnHC4bg246zTptAlTEWgkyLkjm8N4b8g3J
+ 7yPxA/O5U3Qq/lF6QN0W8wslrAXfRvugNbb688AfG+ps8FNA6OWhA9MhG5bps7xPIuyk
+ Gi5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761638602; x=1762243402;
+ d=1e100.net; s=20230601; t=1761638668; x=1762243468;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0bJEm1B8ks9h5HyZDKkIUNIPRZdg3XjuMbaxmF/lz1I=;
- b=eoVALUPe2paCsGZBPOIMtKvkxXCUPy+Lh9PcDPTnWVuzSmYh1BjmrdcRmHGzK+n6Bi
- oRIl8h5AsDmRfXgLtVtQ7TEEtUyHdkW9y38xDOAIsoxytN48MXBCkHXj1bF6pjPK5FAi
- 5zeUtHsMBFCRq4nAjNi/JWq3+ijGQEvo2CFI8x0wmcRTOoQoBk2H/4BVUVCmYbHbrhaj
- AMEKHeo7RVemY2pxpzG9fTA/MaHvZT7D5mr8F/nzlGcXRHXqE3PWro9FNF1FzLSfCEwY
- gxHpyHrD6jkKftSqbWStat/j3jNL/EbtfosG+sOcI0UJkgjmYGV050+89EADNa3Ea/z5
- 1wwA==
+ bh=khQ4f+JLpb7fh8Bk0A11QSSL3qpoF8Qk2ODQYUaP4ck=;
+ b=pQmE96lPfEThgVpRtN77kh1fvwpCKGEr+6/xMshCnkKRDaRdzih7F7X3mXjXr/1v4o
+ qYxyCMCqTLmDmH0QnW9kfZQxwjX7W74qZTVkpXPJnpQdk5bphLCJWqGnblIIRa8UQ/Xh
+ Tnqeti2S7dK4EJmk6XB9RGYovgzpRI+u5sK9AShrCXlg2ybkba+zgIsfuSwfHtDyltxl
+ q4XuzPihblkZSC9X2qOxx0LBDzcLqH2+SfYZtLdszVIvAFvCf06bQnwc4bR1CvQQbglD
+ iC8sYVQDqGObt0s7CVbuTXCRjyfzjbowviOva0UMePIQYBg9POzCUq0qP02FGuL2QYVQ
+ bPng==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbHSiz/XpGVs4dcBVYrNyghsqetJQt3MsLdwGVVEOSfNHylA1Nn0DVB1azMl/G/z+lDLYi3OmwdSe9@nongnu.org
-X-Gm-Message-State: AOJu0YzJfqUenq9vMPwpOFC6aYWzlzwg9rF+gpOTpLwow7ei2IxyzuVz
- Ac7NfleA1JM+8KVoufm4dDXmf4sM2FNkULpTxB+E9L06mlpdI3pjPi2W/WyhJ+2br/o=
-X-Gm-Gg: ASbGnctyREAh7IpFyWwlT4wb1PWQsLt6pJCCZxw/zeCW+fSlOtenxd120de378mc7JB
- JdWk1HD4EIRQzGSJOxXLGaI4N+kKTj4zCKYGJeh0toROu5uOcvdJXQZCaD9GVmQEP55VS5toYr3
- 0g9QLC7gMz9KcWeFqJlgISO2XdBSMa5ddfIKt8OM7N/9FnZnLW0dxNSKZc5Mrw4SubPkIaJDWc7
- JkWM6QtDrQRDime8mICyy1YKU/AKSGGcJyRV9vSDoWrPl+Vdr1f6wbe+e5f+wHgePmvAWaIMSoP
- +d/XarS3xXTtRPGpQcVnUunqRgdRqwLxN/EtK5c98RjeoEoASihxHiuVh92qFAHvpqTJ9UQFSlP
- M9i0SwiHNWKzhmNPXj5Y4wn1egNNemidhMOIciBSDW+km8fyLXe4Hc6red1vgWjnR+REqDek/2w
- wyGwYGvA0oQXc/68RScJOfIzUjCDQ5+e2tCdjLTOroJDHVHj0RcYxbHEs=
-X-Google-Smtp-Source: AGHT+IGu8tAz7QNSfENwh5DhebxcpB0Uf+T7MY5mWmoV8QBJEMMaI05N0PzFr/4r9vD0c/yed5mTVw==
-X-Received: by 2002:a05:600c:1554:b0:470:ffd1:782d with SMTP id
- 5b1f17b1804b1-47717df6c74mr21252585e9.6.1761638602070; 
- Tue, 28 Oct 2025 01:03:22 -0700 (PDT)
+ AJvYcCVKKyiZmmLQctqJNQFKwmlTtq7WMBAgfsakYzYSMKYht8tbNxMBuP3Lnc2A9NUYG9xnsmFUbRfGXYtP@nongnu.org
+X-Gm-Message-State: AOJu0YzTRAsklMOkTrkwAEc1TXfWQFKGGA3fhRWXhdXQIov7r2Fmp86+
+ 9M4ENANkNogfelcKuZpFqpAF6LpU9z8K2BpuZQ9FUeGuwAoz9TJXc7evR2jaDdOHDX8=
+X-Gm-Gg: ASbGncuzHuU2QDUN3hDqYvDAAhzznImLTegTOpGFM7/5X99IlQmFcyV+m8GQpOS4uAo
+ L0BB3R6gRlMOVrkn6uXl3HKF/dMBAp9HqfSOKMWmTxVtnX7Wxlzp86I9J9FhytxrdmYal6EsGYr
+ I6gPCyVsFU6FU8OEiO1H1MnekoYdNzGjLnUndgoGKqllK8yFvwnBOg+gZsV11DW+n/58SHAbHYw
+ 3WRvN2Pw0JqYrIoyS7eybs21TVu1rXTg7AZDbf/ZU1rh4QF4FWzLKMev1eOPlTQNGx2UAi88xEE
+ I1Qi068xNoLX7QeTkuucfxvBghiXF86I06zDYEMhQflv6seuciQ5gVZcF6g57rcpaY14gBSBkrC
+ AKG9VMy1MuRdnLOmP7RoeW+qiAQzdlOKR0gQNpCsjQSqnN9XhLZbOEKuu9/goJLlej3kR/b6X2r
+ LZ82c9hRaYNxyhrAwI73kKl15WZBW5QuVr5xtAXVPxFUqsZQbgVibQUgk=
+X-Google-Smtp-Source: AGHT+IH1wWc1POY3IlDrRidKTdwgtpTWr8O8xuTBDKg1cdXSQD1kcxB/k214JvO/0FfhxYoR6eTTJQ==
+X-Received: by 2002:a05:600c:6303:b0:477:fad:acd9 with SMTP id
+ 5b1f17b1804b1-47717e40960mr25113255e9.34.1761638667885; 
+ Tue, 28 Oct 2025 01:04:27 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-475dd035dc2sm184181795e9.5.2025.10.28.01.03.21
+ 5b1f17b1804b1-475dd4cc596sm184858365e9.15.2025.10.28.01.04.26
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 28 Oct 2025 01:03:21 -0700 (PDT)
+ Tue, 28 Oct 2025 01:04:27 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
@@ -72,12 +72,10 @@ Cc: qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
  qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>
-Subject: [PATCH v2 1/7] hw/sysbus: Use memory_region_name()
-Date: Tue, 28 Oct 2025 09:02:51 +0100
-Message-ID: <20251028080258.23309-2-philmd@linaro.org>
+ "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+Subject: [PATCH v2 4/7] hw/timer/hpet: Use proper SysBus accessors
+Date: Tue, 28 Oct 2025 09:02:54 +0100
+Message-ID: <20251028080258.23309-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251028080258.23309-1-philmd@linaro.org>
 References: <20251028080258.23309-1-philmd@linaro.org>
@@ -108,28 +106,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-MemoryRegion::name is kind of internal. Use the proper
-memory_region_name() accessor, which might return a different
-name.
+SysBusDevice::mmio[] is kind of internal. Use the proper
+sysbus_mmio_get_region() accessor.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/core/sysbus.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/timer/hpet.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
-index ae447c1196a..d33be6b2b52 100644
---- a/hw/core/sysbus.c
-+++ b/hw/core/sysbus.c
-@@ -154,7 +154,7 @@ void sysbus_mmio_map(SysBusDevice *dev, int n, hwaddr addr)
- int sysbus_mmio_map_name(SysBusDevice *dev, const char *name, hwaddr addr)
+diff --git a/hw/timer/hpet.c b/hw/timer/hpet.c
+index 1acba4fa9db..4ed79d72620 100644
+--- a/hw/timer/hpet.c
++++ b/hw/timer/hpet.c
+@@ -655,6 +655,7 @@ static void hpet_reset(DeviceState *d)
  {
-     for (int i = 0; i < dev->num_mmio; i++) {
--        if (!strcmp(dev->mmio[i].memory->name, name)) {
-+        if (!strcmp(memory_region_name(dev->mmio[i].memory), name)) {
-             sysbus_mmio_map(dev, i, addr);
-             return i;
-         }
+     HPETState *s = HPET(d);
+     SysBusDevice *sbd = SYS_BUS_DEVICE(d);
++    MemoryRegion *mr = sysbus_mmio_get_region(sbd, 0);
+     int i;
+ 
+     for (i = 0; i < s->num_timers; i++) {
+@@ -677,7 +678,7 @@ static void hpet_reset(DeviceState *d)
+     s->hpet_offset = 0ULL;
+     s->config = 0ULL;
+     hpet_fw_cfg.hpet[s->hpet_id].event_timer_block_id = (uint32_t)s->capability;
+-    hpet_fw_cfg.hpet[s->hpet_id].address = sbd->mmio[0].addr;
++    hpet_fw_cfg.hpet[s->hpet_id].address = mr->addr;
+ 
+     /* to document that the RTC lowers its output on reset as well */
+     s->rtc_irq_level = 0;
 -- 
 2.51.0
 
