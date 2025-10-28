@@ -4,86 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03781CCD1BF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 08:47:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 017A2CCD1BF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 08:49:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDfMh-0004OZ-DS; Tue, 28 Oct 2025 04:47:39 -0400
+	id 1vDfO4-0005mw-N5; Tue, 28 Oct 2025 04:49:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vDfLp-0004CQ-Kb
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:46:45 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1vDfNu-0005mL-B6
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:48:54 -0400
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vDfLi-0006Su-Og
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:46:45 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-33d962c0e9aso4799077a91.0
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 01:46:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1vDfNr-0006d3-22
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:48:53 -0400
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4710683a644so47310335e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 01:48:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1761641194; x=1762245994; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NcmS5eSVVHZBTH578A5sV7MzSCEtEH7mlQHouzUnnQ8=;
- b=XhL/jBhPNCmAzEqMnLAjCLUejbr4KfDY757oYrZxVzlS/1L0LFfa02w42PNG1IaUNW
- a2huHAT7Ut8EGmHnO4e1M8cwUQpRT2l4ullqkqsAAA/5i+bwuQ5JnLxU/E5YYUqDf4hr
- O+ocuyRQqoCplnueJWTBuYbTvISOg/3aaV5q8KGtgXm/xdu9k27akGMLkqC+dM/kJ94M
- T9QppWEO0EVzs9KsOdN2sDFqGkJdDZWoHH1L36UEmiCsZIvyrovOdmgzF5WMQGqWiXMc
- +3GnKhyCZhlEUSQgqO0A4mauIBnOPfV1f4Mt+pBg991YPF1BXHGOI8ZaUhptXkzosfKE
- AKFw==
+ d=gmail.com; s=20230601; t=1761641325; x=1762246125; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WQv72y0FXMxHo4R1brH6PeUUPynEY6XFnnx0SFP9c3o=;
+ b=QRmc8TFXd9poPGwvEsqBU+4mvh6YaikEDoQRHvIKfapfPi3E38TqLEa1jpBRrCYPbE
+ sykBjfCuoESVxTtVSRNTqXwsl3XG4EYzCr+OaXnssC2sA6MihkIsh9RM7oTNMx/gLKld
+ n8JNId29ysgRhgUEEa/kneZ/AGmBaIIfwQ+aCdWHTpCmHPSiy9h9tJvL05Gosr7QGwjl
+ wc4oWHJFAnlhv1NIdy+dA154FfB12P29S1uxWIn7lyQuk/uVOr//tMDe5vHBPTjFEvw1
+ CzuHPwo3Hg/0joLhJdD80ZJyVXZv/ZDN6MnESIS+ULDoI0tj3QEWfrP0FiF7iK+FJ3Y4
+ S5FA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761641194; x=1762245994;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NcmS5eSVVHZBTH578A5sV7MzSCEtEH7mlQHouzUnnQ8=;
- b=e3JYNu3SSdNWef++DM8dFCOZq10ZIjDP6TvylF3Uw30lgKHvJUiLGkgiLMhxgWcMGo
- UBtHjsiBnHQTy4J3U/Mx/kyhYtoSHUdvTU7eE1q1ZH2kFZyzkT/PEuwo6KNrCq9GFj0R
- 1MrG0RWmi3baYp+rUchPwdc2JFTzKDUoGfEw55qZ+fM2DnMPLETkF7CyiWbxgGZWOlYS
- W5p35IvbAl2/FzFYKuYdSVI8V+iDmpupQsF8MjG8FKkn0vSe8/S1az9EfYao3lauvpSS
- zjNsyydWq/NGoOvFNubKY7v1jT2me9m8VM8npxeG53w988gcw4pyaouX/gdYuifcchd7
- +uCA==
-X-Gm-Message-State: AOJu0YxLG/HGJEb3nqtdd//c1LTEZ8FbfJhmHI59ZVfcHQ3G/SoHUIE6
- GHeY8GRXVqxFcLijbbbadaCiM4+D+2c5W3yJnK1dmxvpTH4QlypfjSofHxKBQrtDJWg=
-X-Gm-Gg: ASbGncvA+30nOiizqJlLO6L3V/a/Eam7nrfNOW2S/mjr79A23EU2CZkTEfGgyUdLUZn
- VN3ELkveNUSpuV2xzONEg3HdgC/3v8ApZoXf+MQnVgnpFdDjTuOytMyc36/RcsAHweOWO1gy8M7
- SD+nuYpLkLorWkD0aDQKxZaMMthq0NfvH4UeNNQZeuT4GN9MMEdZ1RpOLL/Wv9ZBUSjfGh7QSTz
- R9BsvuX7GzyhxJfA0Y70rE8aFvc0h5GfFzIinY2ejwoCBEWV8kcGekjFpS3vxgFaYrqT8QnHgiH
- aDvHQwnLTuzVAyK+SRHqBxJ5rSm91D29pg7uFVEqM0Aluwnm7rhQLDFDwkMVpD9etzBzhLkJmXE
- +0D09OjbrAvyuBjjkVn02xFLFLaMz5Mi9NjMskQS4ZIuc3miKB7R7z55fzS3ycEY9dzEkCK7lf4
- GqspeH3MSCOPiQQc4xq0xv8csycw==
-X-Google-Smtp-Source: AGHT+IG/3xDOEkCqPLEful9dpkqv84BRHwAiR1n0BvreEcJXi0pCvJnT+DBV3hrwyuT2NkBo6IWd5w==
-X-Received: by 2002:a17:90b:38cf:b0:33d:a6a6:2e26 with SMTP id
- 98e67ed59e1d1-34028989872mr3220349a91.13.1761641194289; 
- Tue, 28 Oct 2025 01:46:34 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([189.38.141.22])
+ d=1e100.net; s=20230601; t=1761641325; x=1762246125;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WQv72y0FXMxHo4R1brH6PeUUPynEY6XFnnx0SFP9c3o=;
+ b=Ncn8ICgyfqx8gHt4ufAIzcckzzfAaHoog0H++cqf0vBplQ+2g09ugco2mXtBDf5Nr/
+ yptInXwcJfYnEBhRYlThGx8tjoxt7s17j9RsbFV7oE5vnzIF2t5DfMyBjNR1oqpGB5KW
+ 5Ee1MKMYvldbtDhrwf+8Vu2x3G1S0T8bu4zoRSBPJt+5w2fxJnaT4bUagNeXmixohS0v
+ ExOCJi8S2y1ASggNO7foZJVV7zA2H/KjrkGFOrbQUKz4ubr9Dv8GcFAj7BJnXaHB6tZ7
+ CbMtxLsaE52le4y3hUy21KDrO7n5H+u9cny9JK21gXXpmO4H+AtBSe14m3B4t6UYq0KB
+ gLBA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWIj3rOJmg9D0s2x5iEVL7kAKFLprwc48KZHKUbJYLFGXtSBR6/qn2vutpMJ7JbjLc4n18MzdW7aBZQ@nongnu.org
+X-Gm-Message-State: AOJu0Yz9Hjf/KUWN5p9PJBeJa6NgDGQVaLNBd70C12VoxqcHmYp4e01j
+ QCd+HNvzFnXTkUtVuNLbvw2bXFD/NvQgXNwIeBIkwszaxDqzY75FSpzr
+X-Gm-Gg: ASbGncuxDLMih2KA7gEq6vZQ6FYpN+vV1YmYAX4vfh4l1wuMzf84NbdWJxjZjrblXg7
+ BGfPJMzUkjmaE5ktTEnfhwC9xbnuasnf2Kca8i6Q0VH6ZGad+JZTd64zWrLifGwoRiMESzhWNcI
+ lytIigXtC+Az22b9JAzRlzXK+12voKLsB1uqPYDbcNj71x65JIfBWKjdAG1KeBg4L4u88ID3HYH
+ 8uCrPthyTJJei01q3to+t7i/jEpP/MuL/4hu0PnAxpvlGpJIDuYsmgEylUfVV3LLcExXI+ZVo4j
+ GnmmCOiC01+5L/C9c7RdN4QVtj9H/aj2A9nQ+4gDIVFp44S7EfARnhwvxscTolshn8D1XpmfDHs
+ RYuzENJdsGvs2qJvCBmHsELuhQP1tSuo1+Wkei0xhCDE3cb8jK0X3z4UEcd63Yh8fFh8qA75GwH
+ wYoVQoVWYkx6A3wqkvaBzJo7hTB5irCHM7XcjnqvhinBzyapI//SD+EVZmY9zmnHLNyN8JcFQbF
+ usnpNWw0ts=
+X-Google-Smtp-Source: AGHT+IF+bXKN0eXZjcdzIcJXWHAZ7wGiGx2tI03419aHzTho2s/tQpQ7tWzG4kowPpu3mN+qokjMJA==
+X-Received: by 2002:a05:600d:830f:b0:475:d91d:28fb with SMTP id
+ 5b1f17b1804b1-477180f3b54mr13453825e9.4.1761641325284; 
+ Tue, 28 Oct 2025 01:48:45 -0700 (PDT)
+Received: from ehlo.thunderbird.net
+ (p200300faaf271400c439911fd9f45c3c.dip0.t-ipconnect.de.
+ [2003:fa:af27:1400:c439:911f:d9f4:5c3c])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-33fed81c8e0sm11343909a91.18.2025.10.28.01.46.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Oct 2025 01:46:33 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH] docs/specs/riscv-aia.rst: add 'riscv-aia' accel prop info
-Date: Tue, 28 Oct 2025 05:46:22 -0300
-Message-ID: <20251028084622.1177574-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.51.0
+ 5b1f17b1804b1-475dd478202sm182509315e9.14.2025.10.28.01.48.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Oct 2025 01:48:44 -0700 (PDT)
+Date: Tue, 28 Oct 2025 08:48:42 +0000
+From: Bernhard Beschow <shentey@gmail.com>
+To: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org
+CC: Stefan Hajnoczi <stefanha@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ qemu-ppc@nongnu.org, Huacai Chen <chenhuacai@kernel.org>,
+ qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2=5D_docs/system/security=3A_Restrict_?=
+ =?US-ASCII?Q?=22virtualization_use_case=22_to_specific_machines?=
+In-Reply-To: <CAFEAcA8RaZOXpav64E5-0CDhB66zQXRuLaFuz22GiyPGwGVQJw@mail.gmail.com>
+References: <20251016131159.750480-1-peter.maydell@linaro.org>
+ <CAFEAcA8RaZOXpav64E5-0CDhB66zQXRuLaFuz22GiyPGwGVQJw@mail.gmail.com>
+Message-ID: <000E4FA1-EE4A-476B-8CAE-680FC068BCAA@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102c.google.com
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=shentey@gmail.com; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,76 +116,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a small section talking about the 'riscv-aia' KVM setting we
-implement and how it affects the provisioning of the IMSIC s-mode
-in-kernel controller.
 
-While we're at it, fix the formatting of the AIA bullet list.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- docs/specs/riscv-aia.rst | 43 ++++++++++++++++++++++++++++++++++++----
- 1 file changed, 39 insertions(+), 4 deletions(-)
+Am 27=2E Oktober 2025 12:48:29 UTC schrieb Peter Maydell <peter=2Emaydell@=
+linaro=2Eorg>:
+>On Thu, 16 Oct 2025 at 14:12, Peter Maydell <peter=2Emaydell@linaro=2Eorg=
+> wrote:
+>>
+>> Currently our security policy defines a "virtualization use case"
+>> where we consider bugs to be security issues, and a
+>> "non-virtualization use case" where we do not make any security
+>> guarantees and don't consider bugs to be security issues=2E
+>>
+>> The rationale for this split is that much code in QEMU is older and
+>> was not written with malicious guests in mind, and we don't have the
+>> resources to audit, fix and defend it=2E  So instead we inform users
+>> about what the can in practice rely on as a security barrier, and
+>> what they can't=2E
+>>
+>> We don't currently restrict the "virtualization use case" to any
+>> particular set of machine types=2E  This means that we have effectively
+>> barred ourselves from adding KVM support to any machine type that we
+>> don't want to put into the "bugs are security issues" category, even
+>> if it would be useful for users to be able to get better performance
+>> with a trusted guest by enabling KVM=2E This seems an unnecessary
+>> restriction, and in practice the set of machine types it makes
+>> sense to use for untrusted-guest virtualization is quite small=2E
+>>
+>> Specifically, we would like to be able to enable the use of
+>> KVM with the imx8 development board machine types, but we don't
+>> want to commit ourselves to having to support those SoC models
+>> and device models as part of QEMU's security boundary:
+>> https://lore=2Ekernel=2Eorg/qemu-devel/20250629204851=2E1778-3-shentey@=
+gmail=2Ecom/
+>>
+>> This patch updates the security policy to explicitly list the
+>> machine types we consider to be useful for the "virtualization
+>> use case"=2E
+>>
+>> Signed-off-by: Peter Maydell <peter=2Emaydell@linaro=2Eorg>
+>> ---
+>> changes v1->v2: updated the list:
+>>  * remove isapc
+>>  * remove ppc, mips, mips64 (no machines supported)
+>>  * list pseries as only supported ppc64 machine
+>>  * list virt as only supported riscv32, riscv64 machine
+>>
+>> I believe the list to now be correct, and I think we generally
+>> had some consensus about the idea on the v1 patch discussion, so
+>> this one is a non-RFC patch=2E
+>
+>This has now had various reviews and acks, and no
+>suggestions for further revision=2E I propose to take
+>this via target-arm=2Enext, unless anybody has any
+>objections=2E
 
-diff --git a/docs/specs/riscv-aia.rst b/docs/specs/riscv-aia.rst
-index 8097e2f897..f3c6ab7fcb 100644
---- a/docs/specs/riscv-aia.rst
-+++ b/docs/specs/riscv-aia.rst
-@@ -8,10 +8,8 @@ RISC-V machine for TCG and KVM accelerators.
- 
- The support consists of two main modes:
- 
--- "aia=aplic": adds one or more APLIC (Advanced Platform Level Interrupt Controller)
--  devices
--- "aia=aplic-imsic": adds one or more APLIC device and an IMSIC (Incoming MSI
--   Controller) device for each CPU
-+- *aia=aplic*: adds one or more APLIC (Advanced Platform Level Interrupt Controller) devices
-+- *aia=aplic-imsic*: adds one or more APLIC device and an IMSIC (Incoming MSI Controller) device for each CPU
- 
- From an user standpoint, these modes will behave the same regardless of the accelerator
- used.  From a developer standpoint the accelerator settings will change what it being
-@@ -81,3 +79,40 @@ we will emulate in userspace:
-      - n/a
-      - emul
-      - in-kernel
-+
-+
-+KVM accel option 'riscv-aia'
-+----------------------------
-+
-+The KVM accelerator property 'riscv-aia' interacts with the "aia=aplic-imsic"
-+to determine how the host KVM module will provide the in-kernel IMSIC s-mode
-+controller.  The 'kernel-irqchip' setting has no impact in 'riscv-aia' given
-+that any available 'kernel-irqchip' setting will always have an in-kernel
-+IMSIC s-mode.  'riscv-aia' has no impact in APLIC m-mode/s-mode and
-+IMSIC m-mode settings.
-+
-+
-+.. list-table:: How 'riscv-aia' changes in-kernel IMSIC s-mode provisioning
-+   :widths: 25 25 25 25
-+   :header-rows: 1
-+
-+   * - Accel
-+     - KVM riscv-aia
-+     - AIA type
-+     - IMSIC s-mode
-+   * - kvm
-+     - none
-+     - aplic-imsic
-+     - in-kernel, default to 'auto'
-+   * - kvm
-+     - auto
-+     - aplic-imsic
-+     - in-kernel, hwaccel if available, emul otherwise
-+   * - kvm
-+     - hwaccel
-+     - aplic-imsic
-+     - in-kernel, use IMSIC controller from guest hardware
-+   * - kvm
-+     - emul
-+     - aplic-imsic
-+     - in-kernel, IMSIC is emulated by KVM
--- 
-2.51.0
+Sounds good, I'm looking forward to it=2E
 
+Maybe we could then also merge https://lore=2Ekernel=2Eorg/qemu-devel/2025=
+0629204851=2E1778-3-shentey@gmail=2Ecom/ which had some technical comments =
+and no follow-up=2E
+
+Best regards,
+Bernhard
+
+>
+>thanks
+>-- PMM
 
