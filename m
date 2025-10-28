@@ -4,120 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A847ACCD1BF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 07:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2436CCF9E0
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 07:56:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDeTS-0000kR-4z; Tue, 28 Oct 2025 03:50:34 -0400
+	id 1vDeXg-0007U7-9L; Tue, 28 Oct 2025 03:54:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDeT7-0000Xw-14
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 03:50:13 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDeXX-0007Gh-8H
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 03:54:47 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDeSm-00075h-RQ
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 03:50:12 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-474975af41dso38319745e9.2
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 00:49:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vDeXM-0007po-NC
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 03:54:46 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-42966ce6dbdso4078265f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 00:54:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761637789; x=1762242589; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761638074; x=1762242874; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TMp5SEiL/DqxiivezHK1UHyuC2K2nMhieBEi0DJq2ls=;
- b=VXnBT1LIMEm/zGdAG7JnGEx1vyym3uLCiGuNuf5ZuH+ehxQcVFAWHA35BIayVFqPmI
- R8+gugfqBI6ESY56wQzFiQ24I5DgHMyd0vBtkntNCLBbqT47siBe1lYt9fK255nEd97Y
- CSNnrgK5iet/f3qsTalWJRMzSiK/Dx2SxB5k9cPzFsEtQSSb6tkYsJmCFNB73o4N3Zvh
- 9e7e7HKm3s6K2Lf7t7JWzyECjGfKh+YwtQLbjOUD9lD1poyK/8UTjq4eJXjf1FC/U7/R
- J9AMGKMRMRlJiLgqV4dXzu9SZLPiMQbnorHJ12dONjYYtRzzetVVU5R/DDq6X5P26aUI
- tXEA==
+ bh=iEXf1iTNvju/0qCkmlIbqPXceBSmDEb0O/+ERD/Eqbk=;
+ b=mPVGqusQ/fZP5WIFHoFOQggtP1F2/FSQak0WJDUuOMxnASoEL09c/rhyaUT0BdaeJp
+ 1TNS/0xCqErqIOHGtme0nZvO62kNp9MqSFUv8o7Uy59c60v+CFbHStt76NEGKKb1vLTE
+ x+92tWPCUHIQnzZeKPBp/gLcy8Z2fbULiScVD9i1TR4joadmhROHnWCmYyJ9Dyc4eWag
+ 16aKjwaUWt6bADok9xc6S4KNuouqRZTztafDujKqiszI06zAeMw5e7FTIRDP8E7arhr3
+ nX4PrDlr3YQZdRTdeuguUfIotSQGdC3mAuqWd5jVgmSlGBfuPGUWSSq5ihAZ057aJwPU
+ 3QDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761637789; x=1762242589;
+ d=1e100.net; s=20230601; t=1761638074; x=1762242874;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TMp5SEiL/DqxiivezHK1UHyuC2K2nMhieBEi0DJq2ls=;
- b=oLj4R5fOhsMvgwde4i1FhPK4zPvG/rHqaL5wbygHbsRZ0Jk2Vi/bzMsT2Pia8DIBTm
- ja9V4F7oXxsL38qyl/bpMKYwFx2HUCxaO1VH2DYKCOSd1YRo4KQWp0Kq4zW0u5hm7Sk3
- Cf95G4yd8KCiug5ZNzA3E5iLCdyig3TK/C4YFvan+QBCUMlSFycwajxOeNPzb5M9yFYn
- +fRelhRjtWi4CPyqHL4j+PR/vdXoEI+cyo1yYEZEgiwzHguD4zA+oGWg4CTXWdQtYpCL
- NgyanNAW5hvDYGx+ilOSAit2cO0Si2evNJKQFVduSPlbuAAGN+L96EdpSOoYivo93j1W
- LnpA==
+ bh=iEXf1iTNvju/0qCkmlIbqPXceBSmDEb0O/+ERD/Eqbk=;
+ b=c51hlCqlbJlUpM4ZsYCAfif2Bn4dMa5gT8bZH+B+xKFTWGLyrKa2qjQJHpvKIcCIwD
+ 4iYW7MIjK9IXTu6u8sf+xR5jyq6p89zrLXrSs0oe01K4avXeWBmnVnjRmQpQmPSMhe7P
+ yM1o1xzgxpsMNoFjDUzWzZdg+1o7x5Y1Jhg8w2YWvB/HNQdkFuOgvkc2pIX3U33r7ADL
+ P/PbG1HisA3boavLxzANiWYywldDjCumaEODb2KSS8CYso+GsnQTasE7HY7lrbjRgogF
+ M+8s1sWb/eV6DUmibj9AHv2wFQZhBELWgUmPhqvfdBAbcsULYGcthyCR3x2uEhD6uL2O
+ rgKw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNzDzT+WuO4hVXji+wBrBtoiLZmFQYSOo9aCkKrJiNDJDumY6yMp7ueeM4LoINQmvmmnsahk3Wftmg@nongnu.org
-X-Gm-Message-State: AOJu0YxQNel98MzMNnKSJocfPshDAEuraPxkFL6mflh6TB7Powvots1E
- +DRTUVH17Q/dCP7m9ViXKVnV/n9dEztnE/aaA27oww45QKnOPmH3tlqjsZg43Z+APFM=
-X-Gm-Gg: ASbGncu3d0q/Q70pe2BA+3lA/ZfN4P8CAmqNh5eSIJc5RevFkjWU6tAQw+TLiKtfB+i
- G0O133/X+JLGGNT9heTe+nkO15nVYSLwIdYKbjzE52Cd5f+xt6fZPZQEr5K1y5zBlNkw+Zc7k51
- Unkj6S/ib8EtH/XxLH/VJG+dlt44K16PdyDrIfVhOVXon9fjrbfhkjR/oiW08hTEoegySRAjjfq
- SIyFsqYI49za5Gg5drg+mlWBa/kmkAcyQbOwyMy2LjzY0rEvcjgx+PSV0CZW+OUIWZh5OdvVKwE
- O1VcEvyrhrvG2WV28xLoaIyVZ4o6DbYXzqvg6Hv0n+Nig+JovsGTXawj6TrLkKU0D4fZPJVVeO6
- HqBHpj9NQv4Zo0lm6jX4sRTYreWYURRYkNzcVW+REP4yKSEbY3p8elMJ4SYzUQbMUvxhkxFaWT6
- uYIPgYrzOFS4XGmomG6+NuABy4Xf3V9EABmEF4e8jyPRplWCcZTJqpzz4=
-X-Google-Smtp-Source: AGHT+IGtSEp433uC9qYma6kcQhFndenHMDLlZHsVpPwY2AHuor/xOMzhjJXK+9YHS53maFAvpXsY2A==
-X-Received: by 2002:a05:6000:144d:b0:3f9:bc33:2fab with SMTP id
- ffacd0b85a97d-429a7e86d73mr2097883f8f.60.1761637789106; 
- Tue, 28 Oct 2025 00:49:49 -0700 (PDT)
+ AJvYcCWR0DzgcympcjNlo2ZzWKu+a8tUtPo8Up5Szg3X94WDrzFDY/EjcKXAtzjuAI7zdAy3kyn9noe3/F/h@nongnu.org
+X-Gm-Message-State: AOJu0Yz9UBiDghzr33qio8gS8MBMZIodpOWI2wgZW0bWuA3sikIQWnd/
+ 4gzgyUkL3/akBQk7tcUDLBv+rFa/jXw/fPZE9sYK99jVECL7Jt/0GW0zeUzoEvpG44g=
+X-Gm-Gg: ASbGncshCb47TTclHkL75lviuIynmHGipOfrZuFoELSxfxJdjV7l17AA2/EA2mZs+ft
+ Xk2dNmHXrDHmbWU7NWfvHnVr10aWcg3e07JvepgShshIsd5oJ4+cbyFaCuCyf9ftuHw4uTjmFbn
+ nby5HtVyH1D2Y29mMmNUdsvXw0fOo18MBx0l2x8lDVA/vUJAag5+ROwxGGzFOOV6/jmB7UfkFgc
+ CUGdpfsp8QaZNbFYMEI7xPEjysB/SAbMQT7B1cfo+rrueWCpaJWVia68JIvmRPUdRvNYqvm/Y8a
+ nqifX6AXGFL+a/iT2vNHs0Po6CAtWF40YKH0XP3m+Puz2hT+vyxe+YKor2eezwZCChf1L6NjjWC
+ XF0k9c4XvlW4LlPQCeYxZOP0FMpVNYvjuAgXbHyu6oPGXRc7omyBGuXKwo1CylcZjbHuGjdwHJ2
+ 1ahpSi4uT5kALOXsppMtMMcV0Gt/fGCInYNfKvZYT3fyrfINdRhpxdFSU=
+X-Google-Smtp-Source: AGHT+IFf13OU1ZPusAWSPVHihsiwy391vLPhdFrs6JeMIwxTttzkkwHZp/kMhWxFQJCzm2Y24v+pZQ==
+X-Received: by 2002:a05:6000:2406:b0:427:847:9d59 with SMTP id
+ ffacd0b85a97d-429a7e7a6c4mr2205809f8f.45.1761638073322; 
+ Tue, 28 Oct 2025 00:54:33 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952b7b43sm19118976f8f.6.2025.10.28.00.49.46
+ ffacd0b85a97d-429952d5c9dsm19503426f8f.26.2025.10.28.00.54.30
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 28 Oct 2025 00:49:48 -0700 (PDT)
+ Tue, 28 Oct 2025 00:54:32 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: Nguyen Dinh Phi <phind.uet@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,
- Zhenwei Pi <pizhenwei@bytedance.com>, Alberto Garcia <berto@igalia.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>, Paul Durrant <paul@xen.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+Cc: Vishal Chourasia <vishalc@linux.ibm.com>,
  Peter Maydell <peter.maydell@linaro.org>,
- Bernhard Beschow <shentey@gmail.com>, Jason Wang <jasowang@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Aditya Gupta <adityag@linux.ibm.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Helge Deller <deller@gmx.de>, Tyrone Ting <kfting@nuvoton.com>,
- Hao Wu <wuhaotsh@google.com>, Aditya Gupta <adityag@linux.ibm.com>,
- Glenn Miles <milesg@linux.ibm.com>,
+ Antony Pavlov <antonynpavlov@gmail.com>, Rob Herring <robh@kernel.org>,
+ Alistair Francis <alistair@alistair23.me>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Helge Deller <deller@gmx.de>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Corey Minyard <minyard@acm.org>, Song Gao <gaosong@loongson.cn>,
+ Bibo Mao <maobibo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Thomas Huth <huth@tuxfamily.org>, Laurent Vivier <laurent@vivier.eu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Paul Burton <paulburton@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>,
+ Huacai Chen <chenhuacai@kernel.org>,
+ =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
+ Aurelien Jarno <aurelien@aurel32.net>, Stafford Horne <shorne@gmail.com>,
+ BALATON Zoltan <balaton@eik.bme.hu>, Bernhard Beschow <shentey@gmail.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Glenn Miles <milesg@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Fam Zheng <fam@euphon.net>,
- Alex Williamson <alex@shazbot.org>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Pavel Pisa <pisa@cmp.felk.cvut.cz>,
- Francisco Iglesias <francisco.iglesias@amd.com>,
- Vikram Garhwal <vikram.garhwal@bytedance.com>,
- xen-devel@lists.xenproject.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PULL 02/23] qom: remove redundant typedef when use
- OBJECT_DECLARE_SIMPLE_TYPE
-Date: Tue, 28 Oct 2025 08:48:38 +0100
-Message-ID: <20251028074901.22062-3-philmd@linaro.org>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Jared Rossi <jrossi@linux.ibm.com>, Zhuoying Cai <zycai@linux.ibm.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Eric Farman <farman@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Magnus Damm <magnus.damm@gmail.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>,
+ =?UTF-8?q?Cl=C3=A9ment=20Chigot?= <chigot@adacore.com>,
+ Frederic Konrad <konrad.frederic@yahoo.fr>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Subject: [PULL 15/23] hw/core/loader: capture Error from load_image_targphys
+Date: Tue, 28 Oct 2025 08:48:51 +0100
+Message-ID: <20251028074901.22062-16-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251028074901.22062-1-philmd@linaro.org>
 References: <20251028074901.22062-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -133,536 +139,1219 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Nguyen Dinh Phi <phind.uet@gmail.com>
+From: Vishal Chourasia <vishalc@linux.ibm.com>
 
-When OBJECT_DECLARE_SIMPLE_TYPE is used, it automatically provides
-the typedef, so we don’t have to define it ourselves.
+Add Error **errp parameter to load_image_targphys(),
+load_image_targphys_as(), and get_image_size() to enable better
+error reporting when image loading fails.
 
-Signed-off-by: Nguyen Dinh Phi <phind.uet@gmail.com>
+Pass NULL for errp in all existing call sites to maintain current
+behavior. No functional change intended in this patch.
+
+Suggested-by: Peter Maydell <peter.maydell@linaro.org>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-ID: <20251023063429.1400398-1-phind.uet@gmail.com>
+Reviewed-by: Aditya Gupta <adityag@linux.ibm.com>
+Tested-by: Aditya Gupta <adityag@linux.ibm.com>
+Signed-off-by: Vishal Chourasia <vishalc@linux.ibm.com>
+Message-ID: <20251024130556.1942835-6-vishalc@linux.ibm.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/net/fsl_etsec/etsec.h                | 1 -
- include/hw/char/serial.h                | 1 -
- include/hw/input/lasips2.h              | 6 ++----
- include/hw/misc/auxbus.h                | 7 +++----
- include/hw/misc/bcm2835_mphi.h          | 7 ++-----
- include/hw/misc/npcm7xx_pwm.h           | 7 ++-----
- include/hw/pci-host/pnv_phb3.h          | 6 ++----
- include/hw/pci-host/pnv_phb4.h          | 8 ++++----
- include/hw/ppc/mac_dbdma.h              | 7 +++----
- include/hw/riscv/iommu.h                | 3 ---
- include/hw/scsi/scsi.h                  | 7 +++----
- include/hw/vfio/vfio-container-legacy.h | 5 ++---
- include/hw/virtio/virtio-serial.h       | 5 ++---
- include/net/can_emu.h                   | 7 +++----
- backends/cryptodev-lkcf.c               | 1 -
- hw/char/ipoctal232.c                    | 9 ++++-----
- hw/char/xen_console.c                   | 1 -
- hw/dma/pl330.c                          | 6 ++----
- hw/net/xen_nic.c                        | 2 --
- hw/pci-host/bonito.c                    | 7 +++----
- hw/ppc/pef.c                            | 1 -
- hw/usb/dev-mtp.c                        | 7 +++----
- hw/usb/dev-uas.c                        | 7 +++----
- 23 files changed, 43 insertions(+), 75 deletions(-)
+ include/hw/loader.h      |  8 +++++---
+ hw/alpha/dp264.c         |  4 ++--
+ hw/arm/armv7m.c          |  2 +-
+ hw/arm/boot.c            |  5 +++--
+ hw/arm/digic_boards.c    |  2 +-
+ hw/arm/highbank.c        |  3 ++-
+ hw/arm/raspi.c           |  2 +-
+ hw/arm/vexpress.c        |  2 +-
+ hw/core/generic-loader.c |  3 ++-
+ hw/core/guest-loader.c   |  2 +-
+ hw/core/loader.c         | 16 +++++++++-------
+ hw/hppa/machine.c        |  5 +++--
+ hw/i386/multiboot.c      |  2 +-
+ hw/i386/x86-common.c     |  4 ++--
+ hw/ipmi/ipmi_bmc_sim.c   |  2 +-
+ hw/loongarch/boot.c      |  5 ++---
+ hw/m68k/an5206.c         |  2 +-
+ hw/m68k/mcf5208.c        |  4 ++--
+ hw/m68k/next-cube.c      |  2 +-
+ hw/m68k/q800.c           |  7 ++++---
+ hw/m68k/virt.c           |  4 ++--
+ hw/microblaze/boot.c     |  5 +++--
+ hw/mips/boston.c         |  2 +-
+ hw/mips/fuloong2e.c      |  9 +++++----
+ hw/mips/jazz.c           |  2 +-
+ hw/mips/loongson3_virt.c | 10 ++++++----
+ hw/mips/malta.c          |  9 +++++----
+ hw/nubus/nubus-device.c  |  2 +-
+ hw/openrisc/boot.c       |  5 +++--
+ hw/pci/pci.c             |  2 +-
+ hw/ppc/amigaone.c        |  4 ++--
+ hw/ppc/e500.c            |  5 +++--
+ hw/ppc/mac_newworld.c    |  9 ++++++---
+ hw/ppc/mac_oldworld.c    |  9 ++++++---
+ hw/ppc/pegasos2.c        |  5 +++--
+ hw/ppc/pnv.c             |  9 ++++++---
+ hw/ppc/ppc440_bamboo.c   |  3 ++-
+ hw/ppc/prep.c            |  8 +++++---
+ hw/ppc/sam460ex.c        |  3 ++-
+ hw/ppc/spapr.c           |  8 ++++----
+ hw/ppc/virtex_ml507.c    |  5 +++--
+ hw/riscv/boot.c          |  7 ++++---
+ hw/rx/rx-gdbsim.c        |  2 +-
+ hw/s390x/ipl.c           |  8 +++++---
+ hw/sh4/r2d.c             |  8 +++++---
+ hw/smbios/smbios.c       |  2 +-
+ hw/sparc/leon3.c         |  4 ++--
+ hw/sparc/sun4m.c         |  8 +++++---
+ hw/sparc64/sun4u.c       |  7 ++++---
+ hw/xtensa/xtfpga.c       |  3 ++-
+ system/device_tree.c     |  2 +-
+ 51 files changed, 145 insertions(+), 106 deletions(-)
 
-diff --git a/hw/net/fsl_etsec/etsec.h b/hw/net/fsl_etsec/etsec.h
-index 3860864a3f5..bd2de3f99c7 100644
---- a/hw/net/fsl_etsec/etsec.h
-+++ b/hw/net/fsl_etsec/etsec.h
-@@ -130,7 +130,6 @@ struct eTSEC {
-     /* Whether we should flush the rx queue when buffer becomes available. */
-     bool need_flush;
- };
--typedef struct eTSEC eTSEC;
+diff --git a/include/hw/loader.h b/include/hw/loader.h
+index c96b5e141c6..d035e72748a 100644
+--- a/include/hw/loader.h
++++ b/include/hw/loader.h
+@@ -1,6 +1,7 @@
+ #ifndef LOADER_H
+ #define LOADER_H
+ #include "hw/nvram/fw_cfg.h"
++#include "qemu/typedefs.h"
  
- #define TYPE_ETSEC_COMMON "eTSEC"
- OBJECT_DECLARE_SIMPLE_TYPE(eTSEC, ETSEC_COMMON)
-diff --git a/include/hw/char/serial.h b/include/hw/char/serial.h
-index 4bf90a46f3c..2cfeaed7fb9 100644
---- a/include/hw/char/serial.h
-+++ b/include/hw/char/serial.h
-@@ -77,7 +77,6 @@ struct SerialState {
-     QEMUTimer *modem_status_poll;
-     MemoryRegion io;
- };
--typedef struct SerialState SerialState;
- 
- extern const VMStateDescription vmstate_serial;
- extern const MemoryRegionOps serial_io_ops;
-diff --git a/include/hw/input/lasips2.h b/include/hw/input/lasips2.h
-index 01911c50f9b..fd74883073b 100644
---- a/include/hw/input/lasips2.h
-+++ b/include/hw/input/lasips2.h
-@@ -32,7 +32,8 @@ struct LASIPS2PortDeviceClass {
-     DeviceRealize parent_realize;
- };
- 
--typedef struct LASIPS2State LASIPS2State;
-+#define TYPE_LASIPS2 "lasips2"
-+OBJECT_DECLARE_SIMPLE_TYPE(LASIPS2State, LASIPS2)
- 
- struct LASIPS2Port {
-     DeviceState parent_obj;
-@@ -74,7 +75,4 @@ struct LASIPS2State {
-     qemu_irq irq;
- };
- 
--#define TYPE_LASIPS2 "lasips2"
--OBJECT_DECLARE_SIMPLE_TYPE(LASIPS2State, LASIPS2)
--
- #endif /* HW_INPUT_LASIPS2_H */
-diff --git a/include/hw/misc/auxbus.h b/include/hw/misc/auxbus.h
-index ccd18ce2095..0051e039471 100644
---- a/include/hw/misc/auxbus.h
-+++ b/include/hw/misc/auxbus.h
-@@ -29,13 +29,15 @@
- #include "hw/qdev-core.h"
- #include "qom/object.h"
- 
--typedef struct AUXSlave AUXSlave;
- typedef enum AUXCommand AUXCommand;
- typedef enum AUXReply AUXReply;
- 
- #define TYPE_AUXTOI2C "aux-to-i2c-bridge"
- OBJECT_DECLARE_SIMPLE_TYPE(AUXTOI2CState, AUXTOI2C)
- 
-+#define TYPE_AUX_SLAVE "aux-slave"
-+OBJECT_DECLARE_SIMPLE_TYPE(AUXSlave, AUX_SLAVE)
-+
- enum AUXCommand {
-     WRITE_I2C = 0,
-     READ_I2C = 1,
-@@ -73,9 +75,6 @@ struct AUXBus {
-     AddressSpace aux_addr_space;
- };
- 
--#define TYPE_AUX_SLAVE "aux-slave"
--OBJECT_DECLARE_SIMPLE_TYPE(AUXSlave, AUX_SLAVE)
--
- struct AUXSlave {
-     /* < private > */
-     DeviceState parent_obj;
-diff --git a/include/hw/misc/bcm2835_mphi.h b/include/hw/misc/bcm2835_mphi.h
-index 751363f496c..3f1997e5f24 100644
---- a/include/hw/misc/bcm2835_mphi.h
-+++ b/include/hw/misc/bcm2835_mphi.h
-@@ -23,7 +23,8 @@
- 
- #define MPHI_MMIO_SIZE      0x1000
- 
--typedef struct BCM2835MphiState BCM2835MphiState;
-+#define TYPE_BCM2835_MPHI   "bcm2835-mphi"
-+OBJECT_DECLARE_SIMPLE_TYPE(BCM2835MphiState, BCM2835_MPHI)
- 
- struct BCM2835MphiState {
-     SysBusDevice parent_obj;
-@@ -37,8 +38,4 @@ struct BCM2835MphiState {
-     uint32_t swirq;
- };
- 
--#define TYPE_BCM2835_MPHI   "bcm2835-mphi"
--
--OBJECT_DECLARE_SIMPLE_TYPE(BCM2835MphiState, BCM2835_MPHI)
--
- #endif
-diff --git a/include/hw/misc/npcm7xx_pwm.h b/include/hw/misc/npcm7xx_pwm.h
-index bf953440acc..df927266209 100644
---- a/include/hw/misc/npcm7xx_pwm.h
-+++ b/include/hw/misc/npcm7xx_pwm.h
-@@ -35,8 +35,8 @@
-  * value of 100,000 the duty cycle for that PWM is 10%.
+ /* loader.c */
+ /**
+@@ -10,7 +11,7 @@
+  * Returns the size of the image file on success, -1 otherwise.
+  * On error, errno is also set as appropriate.
   */
- #define NPCM7XX_PWM_MAX_DUTY 1000000
--
--typedef struct NPCM7xxPWMState NPCM7xxPWMState;
-+#define TYPE_NPCM7XX_PWM "npcm7xx-pwm"
-+OBJECT_DECLARE_SIMPLE_TYPE(NPCM7xxPWMState, NPCM7XX_PWM)
+-int64_t get_image_size(const char *filename);
++int64_t get_image_size(const char *filename, Error **errp);
+ /**
+  * load_image_size: load an image file into specified buffer
+  * @filename: Path to the image file
+@@ -41,7 +42,8 @@ ssize_t load_image_size(const char *filename, void *addr, size_t size);
+  * Returns the size of the loaded image on success, -1 otherwise.
+  */
+ ssize_t load_image_targphys_as(const char *filename,
+-                               hwaddr addr, uint64_t max_sz, AddressSpace *as);
++                               hwaddr addr, uint64_t max_sz, AddressSpace *as,
++                               Error **errp);
+ 
+ /**load_targphys_hex_as:
+  * @filename: Path to the .hex file
+@@ -61,7 +63,7 @@ ssize_t load_targphys_hex_as(const char *filename, hwaddr *entry,
+  * an AddressSpace.
+  */
+ ssize_t load_image_targphys(const char *filename, hwaddr,
+-                            uint64_t max_sz);
++                            uint64_t max_sz, Error **errp);
  
  /**
-  * struct NPCM7xxPWM - The state of a single PWM channel.
-@@ -100,7 +100,4 @@ struct NPCM7xxPWMState {
-     uint32_t    piir;
- };
+  * load_image_mr: load an image into a memory region
+diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
+index 19562b59674..b6155646ef7 100644
+--- a/hw/alpha/dp264.c
++++ b/hw/alpha/dp264.c
+@@ -182,7 +182,7 @@ static void clipper_init(MachineState *machine)
+             long initrd_base;
+             int64_t initrd_size;
  
--#define TYPE_NPCM7XX_PWM "npcm7xx-pwm"
--OBJECT_DECLARE_SIMPLE_TYPE(NPCM7xxPWMState, NPCM7XX_PWM)
--
- #endif /* NPCM7XX_PWM_H */
-diff --git a/include/hw/pci-host/pnv_phb3.h b/include/hw/pci-host/pnv_phb3.h
-index 24ca3dddaa9..682f62a638f 100644
---- a/include/hw/pci-host/pnv_phb3.h
-+++ b/include/hw/pci-host/pnv_phb3.h
-@@ -14,7 +14,8 @@
- #include "qom/object.h"
- #include "hw/pci-host/pnv_phb.h"
+-            initrd_size = get_image_size(initrd_filename);
++            initrd_size = get_image_size(initrd_filename, NULL);
+             if (initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              initrd_filename);
+@@ -192,7 +192,7 @@ static void clipper_init(MachineState *machine)
+             /* Put the initrd image as high in memory as possible.  */
+             initrd_base = (ram_size - initrd_size) & TARGET_PAGE_MASK;
+             load_image_targphys(initrd_filename, initrd_base,
+-                                ram_size - initrd_base);
++                                ram_size - initrd_base, NULL);
  
--typedef struct PnvPHB3 PnvPHB3;
-+#define TYPE_PNV_PHB3 "pnv-phb3"
-+OBJECT_DECLARE_SIMPLE_TYPE(PnvPHB3, PNV_PHB3)
+             address_space_stq(&address_space_memory, param_offset + 0x100,
+                               initrd_base + 0xfffffc0000000000ULL,
+diff --git a/hw/arm/armv7m.c b/hw/arm/armv7m.c
+index cea3eb49ee5..c4a9c3ac529 100644
+--- a/hw/arm/armv7m.c
++++ b/hw/arm/armv7m.c
+@@ -611,7 +611,7 @@ void armv7m_load_kernel(ARMCPU *cpu, const char *kernel_filename,
+                                  NULL, ELFDATA2LSB, EM_ARM, 1, 0, as);
+         if (image_size < 0) {
+             image_size = load_image_targphys_as(kernel_filename, mem_base,
+-                                                mem_size, as);
++                                                mem_size, as, NULL);
+         }
+         if (image_size < 0) {
+             error_report("Could not load kernel '%s'", kernel_filename);
+diff --git a/hw/arm/boot.c b/hw/arm/boot.c
+index e77d8679d88..b91660208f5 100644
+--- a/hw/arm/boot.c
++++ b/hw/arm/boot.c
+@@ -964,7 +964,8 @@ static void arm_setup_direct_kernel_boot(ARMCPU *cpu,
+         /* 32-bit ARM */
+         entry = info->loader_start + KERNEL_LOAD_ADDR;
+         kernel_size = load_image_targphys_as(info->kernel_filename, entry,
+-                                             ram_end - KERNEL_LOAD_ADDR, as);
++                                             ram_end - KERNEL_LOAD_ADDR, as,
++                                             NULL);
+         is_linux = 1;
+         if (kernel_size >= 0) {
+             image_low_addr = entry;
+@@ -1025,7 +1026,7 @@ static void arm_setup_direct_kernel_boot(ARMCPU *cpu,
+                                                      info->initrd_start,
+                                                      ram_end -
+                                                      info->initrd_start,
+-                                                     as);
++                                                     as, NULL);
+             }
+             if (initrd_size < 0) {
+                 error_report("could not load initrd '%s'",
+diff --git a/hw/arm/digic_boards.c b/hw/arm/digic_boards.c
+index 466b8b84c0e..de56991baca 100644
+--- a/hw/arm/digic_boards.c
++++ b/hw/arm/digic_boards.c
+@@ -97,7 +97,7 @@ static void digic_load_rom(DigicState *s, hwaddr addr,
+             exit(1);
+         }
  
- /*
-  * PHB3 XICS Source for MSIs
-@@ -115,9 +116,6 @@ OBJECT_DECLARE_SIMPLE_TYPE(PnvPHB3RootBus, PNV_PHB3_ROOT_BUS)
- /*
-  * PHB3 PCIe Host Bridge for PowerNV machines (POWER8)
-  */
--#define TYPE_PNV_PHB3 "pnv-phb3"
--OBJECT_DECLARE_SIMPLE_TYPE(PnvPHB3, PNV_PHB3)
--
- #define PNV_PHB3_NUM_M64      16
- #define PNV_PHB3_NUM_REGS     (0x1000 >> 3)
- #define PNV_PHB3_NUM_LSI      8
-diff --git a/include/hw/pci-host/pnv_phb4.h b/include/hw/pci-host/pnv_phb4.h
-index 8a80c0c667a..de996e718b0 100644
---- a/include/hw/pci-host/pnv_phb4.h
-+++ b/include/hw/pci-host/pnv_phb4.h
-@@ -17,8 +17,11 @@
- #include "hw/ppc/xive.h"
- #include "qom/object.h"
+-        rom_size = load_image_targphys(fn, addr, max_size);
++        rom_size = load_image_targphys(fn, addr, max_size, NULL);
+         if (rom_size < 0 || rom_size > max_size) {
+             error_report("Couldn't load rom image '%s'.", filename);
+             exit(1);
+diff --git a/hw/arm/highbank.c b/hw/arm/highbank.c
+index 165c0b741a5..ff987467a99 100644
+--- a/hw/arm/highbank.c
++++ b/hw/arm/highbank.c
+@@ -235,7 +235,8 @@ static void calxeda_init(MachineState *machine, enum cxmachines machine_id)
+     if (machine->firmware != NULL) {
+         sysboot_filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, machine->firmware);
+         if (sysboot_filename != NULL) {
+-            if (load_image_targphys(sysboot_filename, 0xfff88000, 0x8000) < 0) {
++            if (load_image_targphys(sysboot_filename, 0xfff88000, 0x8000,
++                                    NULL) < 0) {
+                 error_report("Unable to load %s", machine->firmware);
+                 exit(1);
+             }
+diff --git a/hw/arm/raspi.c b/hw/arm/raspi.c
+index 9d9af63d654..fbf3e09c030 100644
+--- a/hw/arm/raspi.c
++++ b/hw/arm/raspi.c
+@@ -230,7 +230,7 @@ static void setup_boot(MachineState *machine, ARMCPU *cpu,
+                              ? FIRMWARE_ADDR_2 : FIRMWARE_ADDR_3;
+         /* load the firmware image (typically kernel.img) */
+         r = load_image_targphys(machine->firmware, firmware_addr,
+-                                ram_size - firmware_addr);
++                                ram_size - firmware_addr, NULL);
+         if (r < 0) {
+             error_report("Failed to load firmware from %s", machine->firmware);
+             exit(1);
+diff --git a/hw/arm/vexpress.c b/hw/arm/vexpress.c
+index 35f8d05ea17..60cd375fe75 100644
+--- a/hw/arm/vexpress.c
++++ b/hw/arm/vexpress.c
+@@ -578,7 +578,7 @@ static void vexpress_common_init(MachineState *machine)
+             exit(1);
+         }
+         image_size = load_image_targphys(fn, map[VE_NORFLASH0],
+-                                         VEXPRESS_FLASH_SIZE);
++                                         VEXPRESS_FLASH_SIZE, NULL);
+         g_free(fn);
+         if (image_size < 0) {
+             error_report("Could not load ROM image '%s'", machine->firmware);
+diff --git a/hw/core/generic-loader.c b/hw/core/generic-loader.c
+index e72bbde2a23..6689847c33f 100644
+--- a/hw/core/generic-loader.c
++++ b/hw/core/generic-loader.c
+@@ -148,7 +148,8 @@ static void generic_loader_realize(DeviceState *dev, Error **errp)
  
-+
-+#define TYPE_PNV_PHB4 "pnv-phb4"
-+OBJECT_DECLARE_SIMPLE_TYPE(PnvPHB4, PNV_PHB4)
-+
- typedef struct PnvPhb4PecStack PnvPhb4PecStack;
--typedef struct PnvPHB4 PnvPHB4;
+         if (size < 0 || s->force_raw) {
+             /* Default to the maximum size being the machine's ram size */
+-            size = load_image_targphys_as(s->file, s->addr, current_machine->ram_size, as);
++            size = load_image_targphys_as(s->file, s->addr,
++                    current_machine->ram_size, as, NULL);
+         } else {
+             s->addr = entry;
+         }
+diff --git a/hw/core/guest-loader.c b/hw/core/guest-loader.c
+index 3db89d7a2e1..59f325ad9c5 100644
+--- a/hw/core/guest-loader.c
++++ b/hw/core/guest-loader.c
+@@ -101,7 +101,7 @@ static void guest_loader_realize(DeviceState *dev, Error **errp)
  
- /*
-  * We have one such address space wrapper per possible device under
-@@ -59,9 +62,6 @@ OBJECT_DECLARE_SIMPLE_TYPE(PnvPHB4RootBus, PNV_PHB4_ROOT_BUS)
- /*
-  * PHB4 PCIe Host Bridge for PowerNV machines (POWER9)
-  */
--#define TYPE_PNV_PHB4 "pnv-phb4"
--OBJECT_DECLARE_SIMPLE_TYPE(PnvPHB4, PNV_PHB4)
--
- #define PNV_PHB4_MAX_LSIs          8
- #define PNV_PHB4_MAX_INTs          4096
- #define PNV_PHB4_MAX_MIST          (PNV_PHB4_MAX_INTs >> 2)
-diff --git a/include/hw/ppc/mac_dbdma.h b/include/hw/ppc/mac_dbdma.h
-index 896ee4a2b17..76764882453 100644
---- a/include/hw/ppc/mac_dbdma.h
-+++ b/include/hw/ppc/mac_dbdma.h
-@@ -164,7 +164,9 @@ struct DBDMAState {
-     DBDMA_channel channels[DBDMA_CHANNELS];
-     QEMUBH *bh;
- };
--typedef struct DBDMAState DBDMAState;
-+
-+#define TYPE_MAC_DBDMA "mac-dbdma"
-+OBJECT_DECLARE_SIMPLE_TYPE(DBDMAState, MAC_DBDMA)
+     /* Default to the maximum size being the machine's ram size */
+     size = load_image_targphys_as(file, s->addr, current_machine->ram_size,
+-                                  NULL);
++                                  NULL, NULL);
+     if (size < 0) {
+         error_setg(errp, "Cannot load specified image %s", file);
+         return;
+diff --git a/hw/core/loader.c b/hw/core/loader.c
+index c9782d67e86..7aca4989ef0 100644
+--- a/hw/core/loader.c
++++ b/hw/core/loader.c
+@@ -48,6 +48,7 @@
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-machine.h"
+ #include "qapi/type-helpers.h"
++#include "qemu/units.h"
+ #include "trace.h"
+ #include "hw/hw.h"
+ #include "disas/disas.h"
+@@ -70,11 +71,11 @@
+ static int roms_loaded;
  
- /* Externally callable functions */
- 
-@@ -173,7 +175,4 @@ void DBDMA_register_channel(void *dbdma, int nchan, qemu_irq irq,
-                             void *opaque);
- void DBDMA_kick(DBDMAState *dbdma);
- 
--#define TYPE_MAC_DBDMA "mac-dbdma"
--OBJECT_DECLARE_SIMPLE_TYPE(DBDMAState, MAC_DBDMA)
--
- #endif
-diff --git a/include/hw/riscv/iommu.h b/include/hw/riscv/iommu.h
-index 8a8acfc3f07..25f1a8b1596 100644
---- a/include/hw/riscv/iommu.h
-+++ b/include/hw/riscv/iommu.h
-@@ -24,18 +24,15 @@
- 
- #define TYPE_RISCV_IOMMU "riscv-iommu"
- OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUState, RISCV_IOMMU)
--typedef struct RISCVIOMMUState RISCVIOMMUState;
- 
- #define TYPE_RISCV_IOMMU_MEMORY_REGION "riscv-iommu-mr"
- typedef struct RISCVIOMMUSpace RISCVIOMMUSpace;
- 
- #define TYPE_RISCV_IOMMU_PCI "riscv-iommu-pci"
- OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUStatePci, RISCV_IOMMU_PCI)
--typedef struct RISCVIOMMUStatePci RISCVIOMMUStatePci;
- 
- #define TYPE_RISCV_IOMMU_SYS "riscv-iommu-device"
- OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUStateSys, RISCV_IOMMU_SYS)
--typedef struct RISCVIOMMUStateSys RISCVIOMMUStateSys;
- 
- #define FDT_IRQ_TYPE_EDGE_LOW 1
- 
-diff --git a/include/hw/scsi/scsi.h b/include/hw/scsi/scsi.h
-index 90ee192b4d4..044bd048b49 100644
---- a/include/hw/scsi/scsi.h
-+++ b/include/hw/scsi/scsi.h
-@@ -10,7 +10,9 @@
- 
- #define MAX_SCSI_DEVS 255
- 
--typedef struct SCSIBus SCSIBus;
-+#define TYPE_SCSI_BUS "SCSI"
-+OBJECT_DECLARE_SIMPLE_TYPE(SCSIBus, SCSI_BUS)
-+
- typedef struct SCSIBusInfo SCSIBusInfo;
- typedef struct SCSIDevice SCSIDevice;
- typedef struct SCSIRequest SCSIRequest;
-@@ -151,9 +153,6 @@ struct SCSIBusInfo {
-     void (*drained_end)(SCSIBus *bus);
- };
- 
--#define TYPE_SCSI_BUS "SCSI"
--OBJECT_DECLARE_SIMPLE_TYPE(SCSIBus, SCSI_BUS)
--
- struct SCSIBus {
-     BusState qbus;
-     int busnr;
-diff --git a/include/hw/vfio/vfio-container-legacy.h b/include/hw/vfio/vfio-container-legacy.h
-index ffd594e80d6..fe822125268 100644
---- a/include/hw/vfio/vfio-container-legacy.h
-+++ b/include/hw/vfio/vfio-container-legacy.h
-@@ -12,7 +12,8 @@
- #include "hw/vfio/vfio-container.h"
- #include "hw/vfio/vfio-cpr.h"
- 
--typedef struct VFIOLegacyContainer VFIOLegacyContainer;
-+OBJECT_DECLARE_SIMPLE_TYPE(VFIOLegacyContainer, VFIO_IOMMU_LEGACY);
-+
- typedef struct VFIODevice VFIODevice;
- 
- typedef struct VFIOGroup {
-@@ -35,6 +36,4 @@ struct VFIOLegacyContainer {
-     VFIOContainerCPR cpr;
- };
- 
--OBJECT_DECLARE_SIMPLE_TYPE(VFIOLegacyContainer, VFIO_IOMMU_LEGACY);
--
- #endif /* HW_VFIO_CONTAINER_LEGACY_H */
-diff --git a/include/hw/virtio/virtio-serial.h b/include/hw/virtio/virtio-serial.h
-index d87c62eab7a..60641860bf8 100644
---- a/include/hw/virtio/virtio-serial.h
-+++ b/include/hw/virtio/virtio-serial.h
-@@ -29,7 +29,8 @@ struct virtio_serial_conf {
- OBJECT_DECLARE_TYPE(VirtIOSerialPort, VirtIOSerialPortClass,
-                     VIRTIO_SERIAL_PORT)
- 
--typedef struct VirtIOSerial VirtIOSerial;
-+#define TYPE_VIRTIO_SERIAL "virtio-serial-device"
-+OBJECT_DECLARE_SIMPLE_TYPE(VirtIOSerial, VIRTIO_SERIAL)
- 
- #define TYPE_VIRTIO_SERIAL_BUS "virtio-serial-bus"
- OBJECT_DECLARE_SIMPLE_TYPE(VirtIOSerialBus, VIRTIO_SERIAL_BUS)
-@@ -221,7 +222,5 @@ size_t virtio_serial_guest_ready(VirtIOSerialPort *port);
-  */
- void virtio_serial_throttle_port(VirtIOSerialPort *port, bool throttle);
- 
--#define TYPE_VIRTIO_SERIAL "virtio-serial-device"
--OBJECT_DECLARE_SIMPLE_TYPE(VirtIOSerial, VIRTIO_SERIAL)
- 
- #endif
-diff --git a/include/net/can_emu.h b/include/net/can_emu.h
-index 6f9b206bb5f..777281bad96 100644
---- a/include/net/can_emu.h
-+++ b/include/net/can_emu.h
-@@ -85,7 +85,9 @@ typedef struct qemu_can_filter {
- #define QEMU_CAN_INV_FILTER 0x20000000U
- 
- typedef struct CanBusClientState CanBusClientState;
--typedef struct CanBusState CanBusState;
-+
-+#define TYPE_CAN_BUS "can-bus"
-+OBJECT_DECLARE_SIMPLE_TYPE(CanBusState, CAN_BUS)
- 
- typedef struct CanBusClientInfo {
-     bool (*can_receive)(CanBusClientState *);
-@@ -105,9 +107,6 @@ struct CanBusClientState {
-     bool fd_mode;
- };
- 
--#define TYPE_CAN_BUS "can-bus"
--OBJECT_DECLARE_SIMPLE_TYPE(CanBusState, CAN_BUS)
--
- int can_bus_filter_match(struct qemu_can_filter *filter, qemu_canid_t can_id);
- 
- int can_bus_insert_client(CanBusState *bus, CanBusClientState *client);
-diff --git a/backends/cryptodev-lkcf.c b/backends/cryptodev-lkcf.c
-index bb7a81d5d06..97a8a8812ce 100644
---- a/backends/cryptodev-lkcf.c
-+++ b/backends/cryptodev-lkcf.c
-@@ -68,7 +68,6 @@ typedef struct CryptoDevBackendLKCFSession {
-     QCryptoAkCipherOptions akcipher_opts;
- } CryptoDevBackendLKCFSession;
- 
--typedef struct CryptoDevBackendLKCF CryptoDevBackendLKCF;
- typedef struct CryptoDevLKCFTask CryptoDevLKCFTask;
- struct CryptoDevLKCFTask {
-     CryptoDevBackendLKCFSession *sess;
-diff --git a/hw/char/ipoctal232.c b/hw/char/ipoctal232.c
-index 752c6c818ab..0a7ffcd0b7e 100644
---- a/hw/char/ipoctal232.c
-+++ b/hw/char/ipoctal232.c
-@@ -93,7 +93,10 @@
- #define ISR_RXRDY(CH) (((CH) & 1) ? BIT(5) : BIT(1))
- #define ISR_BREAK(CH) (((CH) & 1) ? BIT(6) : BIT(2))
- 
--typedef struct IPOctalState IPOctalState;
-+#define TYPE_IPOCTAL "ipoctal232"
-+
-+OBJECT_DECLARE_SIMPLE_TYPE(IPOctalState, IPOCTAL)
-+
- typedef struct SCC2698Channel SCC2698Channel;
- typedef struct SCC2698Block SCC2698Block;
- 
-@@ -122,10 +125,6 @@ struct IPOctalState {
-     uint8_t irq_vector;
- };
- 
--#define TYPE_IPOCTAL "ipoctal232"
--
--OBJECT_DECLARE_SIMPLE_TYPE(IPOctalState, IPOCTAL)
--
- static const VMStateDescription vmstate_scc2698_channel = {
-     .name = "scc2698_channel",
-     .version_id = 1,
-diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-index 9c34a554bfa..0e73c2aee40 100644
---- a/hw/char/xen_console.c
-+++ b/hw/char/xen_console.c
-@@ -56,7 +56,6 @@ struct XenConsole {
-     CharBackend       chr;
-     int               backlog;
- };
--typedef struct XenConsole XenConsole;
- 
- #define TYPE_XEN_CONSOLE_DEVICE "xen-console"
- OBJECT_DECLARE_SIMPLE_TYPE(XenConsole, XEN_CONSOLE_DEVICE)
-diff --git a/hw/dma/pl330.c b/hw/dma/pl330.c
-index a570bb08ec4..f9c91f924bb 100644
---- a/hw/dma/pl330.c
-+++ b/hw/dma/pl330.c
-@@ -111,7 +111,8 @@ typedef enum  {
-     pl330_chan_fault = 15,
- } PL330ChanState;
- 
--typedef struct PL330State PL330State;
-+#define TYPE_PL330 "pl330"
-+OBJECT_DECLARE_SIMPLE_TYPE(PL330State, PL330)
- 
- typedef struct PL330Chan {
-     uint32_t src;
-@@ -274,9 +275,6 @@ struct PL330State {
-     AddressSpace *mem_as;
- };
- 
--#define TYPE_PL330 "pl330"
--OBJECT_DECLARE_SIMPLE_TYPE(PL330State, PL330)
--
- static const VMStateDescription vmstate_pl330 = {
-     .name = "pl330",
-     .version_id = 2,
-diff --git a/hw/net/xen_nic.c b/hw/net/xen_nic.c
-index 34c6a1d0b08..e7bdc732de0 100644
---- a/hw/net/xen_nic.c
-+++ b/hw/net/xen_nic.c
-@@ -62,8 +62,6 @@ struct XenNetDev {
-     NICState              *nic;
- };
- 
--typedef struct XenNetDev XenNetDev;
--
- #define TYPE_XEN_NET_DEVICE "xen-net-device"
- OBJECT_DECLARE_SIMPLE_TYPE(XenNetDev, XEN_NET_DEVICE)
- 
-diff --git a/hw/pci-host/bonito.c b/hw/pci-host/bonito.c
-index 7d6251a78d7..cbda068ef7d 100644
---- a/hw/pci-host/bonito.c
-+++ b/hw/pci-host/bonito.c
-@@ -230,7 +230,9 @@ struct PCIBonitoState {
-     MemoryRegion bonito_localio;
- 
- };
--typedef struct PCIBonitoState PCIBonitoState;
-+
-+#define TYPE_PCI_BONITO "Bonito"
-+OBJECT_DECLARE_SIMPLE_TYPE(PCIBonitoState, PCI_BONITO)
- 
- struct BonitoState {
-     PCIHostState parent_obj;
-@@ -239,9 +241,6 @@ struct BonitoState {
-     MemoryRegion pci_mem;
- };
- 
--#define TYPE_PCI_BONITO "Bonito"
--OBJECT_DECLARE_SIMPLE_TYPE(PCIBonitoState, PCI_BONITO)
--
- static void bonito_writel(void *opaque, hwaddr addr,
-                           uint64_t val, unsigned size)
+ /* return the size or -1 if error */
+-int64_t get_image_size(const char *filename)
++int64_t get_image_size(const char *filename, Error **errp)
  {
-diff --git a/hw/ppc/pef.c b/hw/ppc/pef.c
-index 254f5707876..39b4ce94f10 100644
---- a/hw/ppc/pef.c
-+++ b/hw/ppc/pef.c
-@@ -19,7 +19,6 @@
- #define TYPE_PEF_GUEST "pef-guest"
- OBJECT_DECLARE_SIMPLE_TYPE(PefGuest, PEF_GUEST)
+     int fd;
+     int64_t size;
+-    fd = qemu_open(filename, O_RDONLY | O_BINARY, NULL);
++    fd = qemu_open(filename, O_RDONLY | O_BINARY, errp);
+     if (fd < 0)
+         return -1;
+     size = lseek(fd, 0, SEEK_END);
+@@ -118,18 +119,19 @@ ssize_t read_targphys(const char *name,
+ }
  
--typedef struct PefGuest PefGuest;
- typedef struct PefGuestClass PefGuestClass;
+ ssize_t load_image_targphys(const char *filename,
+-                            hwaddr addr, uint64_t max_sz)
++                            hwaddr addr, uint64_t max_sz, Error **errp)
+ {
+-    return load_image_targphys_as(filename, addr, max_sz, NULL);
++    return load_image_targphys_as(filename, addr, max_sz, NULL, errp);
+ }
  
- struct PefGuestClass {
-diff --git a/hw/usb/dev-mtp.c b/hw/usb/dev-mtp.c
-index ce45c9cd061..afd7944b737 100644
---- a/hw/usb/dev-mtp.c
-+++ b/hw/usb/dev-mtp.c
-@@ -123,11 +123,13 @@ typedef struct {
+ /* return the size or -1 if error */
+ ssize_t load_image_targphys_as(const char *filename,
+-                               hwaddr addr, uint64_t max_sz, AddressSpace *as)
++                               hwaddr addr, uint64_t max_sz, AddressSpace *as,
++                               Error **errp)
+ {
+     ssize_t size;
  
- /* ----------------------------------------------------------------------- */
+-    size = get_image_size(filename);
++    size = get_image_size(filename, errp);
+     if (size < 0 || size > max_sz) {
+         return -1;
+     }
+@@ -150,7 +152,7 @@ ssize_t load_image_mr(const char *filename, MemoryRegion *mr)
+         return -1;
+     }
  
--typedef struct MTPState MTPState;
- typedef struct MTPControl MTPControl;
- typedef struct MTPData MTPData;
- typedef struct MTPObject MTPObject;
+-    size = get_image_size(filename);
++    size = get_image_size(filename, NULL);
  
-+#define TYPE_USB_MTP "usb-mtp"
-+OBJECT_DECLARE_SIMPLE_TYPE(MTPState, USB_MTP)
-+
- enum {
-     EP_DATA_IN = 1,
-     EP_DATA_OUT,
-@@ -236,9 +238,6 @@ typedef struct {
-     /* string and other data follows */
- } QEMU_PACKED ObjectInfo;
+     if (size < 0 || size > memory_region_size(mr)) {
+         return -1;
+diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
+index cddca69b938..ba894f8b1e9 100644
+--- a/hw/hppa/machine.c
++++ b/hw/hppa/machine.c
+@@ -495,7 +495,7 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
+             ram_addr_t initrd_base;
+             int64_t initrd_size;
  
--#define TYPE_USB_MTP "usb-mtp"
--OBJECT_DECLARE_SIMPLE_TYPE(MTPState, USB_MTP)
+-            initrd_size = get_image_size(initrd_filename);
++            initrd_size = get_image_size(initrd_filename, NULL);
+             if (initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              initrd_filename);
+@@ -516,7 +516,8 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
+                 exit(1);
+             }
+ 
+-            load_image_targphys(initrd_filename, initrd_base, initrd_size);
++            load_image_targphys(initrd_filename, initrd_base, initrd_size,
++                                NULL);
+             cpu[0]->env.initrd_base = initrd_base;
+             cpu[0]->env.initrd_end  = initrd_base + initrd_size;
+         }
+diff --git a/hw/i386/multiboot.c b/hw/i386/multiboot.c
+index 6e6b96bc345..78690781b74 100644
+--- a/hw/i386/multiboot.c
++++ b/hw/i386/multiboot.c
+@@ -337,7 +337,7 @@ int load_multiboot(X86MachineState *x86ms,
+                 *next_space = '\0';
+             }
+             mb_debug("multiboot loading module: %s", one_file);
+-            mb_mod_length = get_image_size(one_file);
++            mb_mod_length = get_image_size(one_file, NULL);
+             if (mb_mod_length < 0) {
+                 error_report("Failed to open file '%s'", one_file);
+                 exit(1);
+diff --git a/hw/i386/x86-common.c b/hw/i386/x86-common.c
+index 7512be64d67..6e78f3d07d6 100644
+--- a/hw/i386/x86-common.c
++++ b/hw/i386/x86-common.c
+@@ -924,7 +924,7 @@ void x86_load_linux(X86MachineState *x86ms,
+             exit(1);
+         }
+ 
+-        dtb_size = get_image_size(dtb_filename);
++        dtb_size = get_image_size(dtb_filename, NULL);
+         if (dtb_size <= 0) {
+             fprintf(stderr, "qemu: error reading dtb %s: %s\n",
+                     dtb_filename, strerror(errno));
+@@ -1025,7 +1025,7 @@ void x86_bios_rom_init(X86MachineState *x86ms, const char *default_firmware,
+     bios_name = MACHINE(x86ms)->firmware ?: default_firmware;
+     filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, bios_name);
+     if (filename) {
+-        bios_size = get_image_size(filename);
++        bios_size = get_image_size(filename, NULL);
+     } else {
+         bios_size = -1;
+     }
+diff --git a/hw/ipmi/ipmi_bmc_sim.c b/hw/ipmi/ipmi_bmc_sim.c
+index 04e1dcd0e76..4604d632b1e 100644
+--- a/hw/ipmi/ipmi_bmc_sim.c
++++ b/hw/ipmi/ipmi_bmc_sim.c
+@@ -2211,7 +2211,7 @@ static void ipmi_fru_init(IPMIFru *fru)
+         goto out;
+     }
+ 
+-    fsize = get_image_size(fru->filename);
++    fsize = get_image_size(fru->filename, NULL);
+     if (fsize > 0) {
+         size = QEMU_ALIGN_UP(fsize, fru->areasize);
+         fru->data = g_malloc0(size);
+diff --git a/hw/loongarch/boot.c b/hw/loongarch/boot.c
+index 3dd48cb8aab..8857a049980 100644
+--- a/hw/loongarch/boot.c
++++ b/hw/loongarch/boot.c
+@@ -328,14 +328,13 @@ static int64_t load_kernel_info(struct loongarch_boot_info *info)
+     }
+ 
+     if (info->initrd_filename) {
+-        ssize_t initrd_size = get_image_size(info->initrd_filename);
 -
- #define QEMU_STORAGE_ID 0x00010001
++        ssize_t initrd_size = get_image_size(info->initrd_filename, NULL);
+         if (initrd_size > 0) {
+             initrd_offset = ROUND_UP(kernel_high + 4 * kernel_size, 64 * KiB);
+             initrd_offset = alloc_initrd_memory(info, initrd_offset,
+                                                 initrd_size);
+             initrd_size = load_image_targphys(info->initrd_filename,
+-                                              initrd_offset, initrd_size);
++                                              initrd_offset, initrd_size, NULL);
+         }
  
- #define MTP_FLAG_WRITABLE 0
-diff --git a/hw/usb/dev-uas.c b/hw/usb/dev-uas.c
-index 21cc2835c62..18ebe15d0c4 100644
---- a/hw/usb/dev-uas.c
-+++ b/hw/usb/dev-uas.c
-@@ -109,10 +109,12 @@ typedef struct {
- #define UAS_STREAM_BM_ATTR  4
- #define UAS_MAX_STREAMS     (1 << UAS_STREAM_BM_ATTR)
+         if (initrd_size == -1) {
+diff --git a/hw/m68k/an5206.c b/hw/m68k/an5206.c
+index d97399b882b..ff21d7779e1 100644
+--- a/hw/m68k/an5206.c
++++ b/hw/m68k/an5206.c
+@@ -82,7 +82,7 @@ static void an5206_init(MachineState *machine)
+     }
+     if (kernel_size < 0) {
+         kernel_size = load_image_targphys(kernel_filename, KERNEL_LOAD_ADDR,
+-                                          ram_size - KERNEL_LOAD_ADDR);
++                                          ram_size - KERNEL_LOAD_ADDR, NULL);
+         entry = KERNEL_LOAD_ADDR;
+     }
+     if (kernel_size < 0) {
+diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
+index 75cc076f787..4a585b231db 100644
+--- a/hw/m68k/mcf5208.c
++++ b/hw/m68k/mcf5208.c
+@@ -351,7 +351,7 @@ static void mcf5208evb_init(MachineState *machine)
+             error_report("Could not find ROM image '%s'", machine->firmware);
+             exit(1);
+         }
+-        if (load_image_targphys(fn, 0x0, ROM_SIZE) < 8) {
++        if (load_image_targphys(fn, 0x0, ROM_SIZE, NULL) < 8) {
+             error_report("Could not load ROM image '%s'", machine->firmware);
+             exit(1);
+         }
+@@ -380,7 +380,7 @@ static void mcf5208evb_init(MachineState *machine)
+     }
+     if (kernel_size < 0) {
+         kernel_size = load_image_targphys(kernel_filename, 0x40000000,
+-                                          ram_size);
++                                          ram_size, NULL);
+         entry = 0x40000000;
+     }
+     if (kernel_size < 0) {
+diff --git a/hw/m68k/next-cube.c b/hw/m68k/next-cube.c
+index 957644b2d1e..cfb2b319e5e 100644
+--- a/hw/m68k/next-cube.c
++++ b/hw/m68k/next-cube.c
+@@ -1325,7 +1325,7 @@ static void next_cube_init(MachineState *machine)
+     memory_region_init_alias(&m->rom2, NULL, "next.rom2", &m->rom, 0x0,
+                              0x20000);
+     memory_region_add_subregion(sysmem, 0x0, &m->rom2);
+-    if (load_image_targphys(bios_name, 0x01000000, 0x20000) < 8) {
++    if (load_image_targphys(bios_name, 0x01000000, 0x20000, NULL) < 8) {
+         if (!qtest_enabled()) {
+             error_report("Failed to load firmware '%s'.", bios_name);
+         }
+diff --git a/hw/m68k/q800.c b/hw/m68k/q800.c
+index 793b23f8155..b8676feb418 100644
+--- a/hw/m68k/q800.c
++++ b/hw/m68k/q800.c
+@@ -629,7 +629,7 @@ static void q800_machine_init(MachineState *machine)
  
--typedef struct UASDevice UASDevice;
- typedef struct UASRequest UASRequest;
- typedef struct UASStatus UASStatus;
+         /* load initrd */
+         if (initrd_filename) {
+-            initrd_size = get_image_size(initrd_filename);
++            initrd_size = get_image_size(initrd_filename, NULL);
+             if (initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              initrd_filename);
+@@ -638,7 +638,7 @@ static void q800_machine_init(MachineState *machine)
  
-+#define TYPE_USB_UAS "usb-uas"
-+OBJECT_DECLARE_SIMPLE_TYPE(UASDevice, USB_UAS)
-+
- struct UASDevice {
-     USBDevice                 dev;
-     SCSIBus                   bus;
-@@ -133,9 +135,6 @@ struct UASDevice {
-     USBPacket                 *status3[UAS_MAX_STREAMS + 1];
- };
+             initrd_base = (ram_size - initrd_size) & TARGET_PAGE_MASK;
+             load_image_targphys(initrd_filename, initrd_base,
+-                                ram_size - initrd_base);
++                                ram_size - initrd_base, NULL);
+             BOOTINFO2(param_ptr, BI_RAMDISK, initrd_base,
+                       initrd_size);
+         } else {
+@@ -668,7 +668,8 @@ static void q800_machine_init(MachineState *machine)
  
--#define TYPE_USB_UAS "usb-uas"
--OBJECT_DECLARE_SIMPLE_TYPE(UASDevice, USB_UAS)
--
- struct UASRequest {
-     uint16_t     tag;
-     uint64_t     lun;
+         /* Load MacROM binary */
+         if (filename) {
+-            bios_size = load_image_targphys(filename, MACROM_ADDR, MACROM_SIZE);
++            bios_size = load_image_targphys(filename, MACROM_ADDR, MACROM_SIZE,
++                                            NULL);
+             g_free(filename);
+         } else {
+             bios_size = -1;
+diff --git a/hw/m68k/virt.c b/hw/m68k/virt.c
+index 98cfe43c73a..3f65d915561 100644
+--- a/hw/m68k/virt.c
++++ b/hw/m68k/virt.c
+@@ -283,7 +283,7 @@ static void virt_init(MachineState *machine)
+ 
+         /* load initrd */
+         if (initrd_filename) {
+-            initrd_size = get_image_size(initrd_filename);
++            initrd_size = get_image_size(initrd_filename, NULL);
+             if (initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              initrd_filename);
+@@ -292,7 +292,7 @@ static void virt_init(MachineState *machine)
+ 
+             initrd_base = (ram_size - initrd_size) & TARGET_PAGE_MASK;
+             load_image_targphys(initrd_filename, initrd_base,
+-                                ram_size - initrd_base);
++                                ram_size - initrd_base, NULL);
+             BOOTINFO2(param_ptr, BI_RAMDISK, initrd_base,
+                       initrd_size);
+         } else {
+diff --git a/hw/microblaze/boot.c b/hw/microblaze/boot.c
+index 4a9c9df3181..ec38107f503 100644
+--- a/hw/microblaze/boot.c
++++ b/hw/microblaze/boot.c
+@@ -170,7 +170,7 @@ void microblaze_load_kernel(MicroBlazeCPU *cpu, bool is_little_endian,
+         /* Not an ELF image nor an u-boot image, try a RAW image.  */
+         if (kernel_size < 0) {
+             kernel_size = load_image_targphys(kernel_filename, ddr_base,
+-                                              ramsize);
++                                              ramsize, NULL);
+             boot_info.bootstrap_pc = ddr_base;
+             high = (ddr_base + kernel_size + 3) & ~3;
+         }
+@@ -189,7 +189,8 @@ void microblaze_load_kernel(MicroBlazeCPU *cpu, bool is_little_endian,
+             if (initrd_size < 0) {
+                 initrd_size = load_image_targphys(initrd_filename,
+                                                   boot_info.initrd_start,
+-                                                  ramsize - initrd_offset);
++                                                  ramsize - initrd_offset,
++                                                  NULL);
+             }
+             if (initrd_size < 0) {
+                 error_report("could not load initrd '%s'",
+diff --git a/hw/mips/boston.c b/hw/mips/boston.c
+index 149a263bd5a..0a3a827b5f6 100644
+--- a/hw/mips/boston.c
++++ b/hw/mips/boston.c
+@@ -778,7 +778,7 @@ static void boston_mach_init(MachineState *machine)
+ 
+     if (machine->firmware) {
+         fw_size = load_image_targphys(machine->firmware,
+-                                      0x1fc00000, 4 * MiB);
++                                      0x1fc00000, 4 * MiB, NULL);
+         if (fw_size == -1) {
+             error_report("unable to load firmware image '%s'",
+                           machine->firmware);
+diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
+index 2a8507b8b0a..5fe40eee65a 100644
+--- a/hw/mips/fuloong2e.c
++++ b/hw/mips/fuloong2e.c
+@@ -118,7 +118,7 @@ static uint64_t load_kernel(MIPSCPU *cpu)
+     initrd_size = 0;
+     initrd_offset = 0;
+     if (loaderparams.initrd_filename) {
+-        initrd_size = get_image_size(loaderparams.initrd_filename);
++        initrd_size = get_image_size(loaderparams.initrd_filename, NULL);
+         if (initrd_size > 0) {
+             initrd_offset = ROUND_UP(kernel_high, INITRD_PAGE_SIZE);
+             if (initrd_offset + initrd_size > loaderparams.ram_size) {
+@@ -127,8 +127,9 @@ static uint64_t load_kernel(MIPSCPU *cpu)
+                 exit(1);
+             }
+             initrd_size = load_image_targphys(loaderparams.initrd_filename,
+-                                              initrd_offset,
+-                                              loaderparams.ram_size - initrd_offset);
++                                         initrd_offset,
++                                         loaderparams.ram_size - initrd_offset,
++                                         NULL);
+         }
+         if (initrd_size == (target_ulong) -1) {
+             error_report("could not load initial ram disk '%s'",
+@@ -264,7 +265,7 @@ static void mips_fuloong2e_init(MachineState *machine)
+                                   machine->firmware ?: FULOONG_BIOSNAME);
+         if (filename) {
+             bios_size = load_image_targphys(filename, 0x1fc00000LL,
+-                                            BIOS_SIZE);
++                                            BIOS_SIZE, NULL);
+             g_free(filename);
+         } else {
+             bios_size = -1;
+diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
+index 7fb0b97a388..1d6bdc00917 100644
+--- a/hw/mips/jazz.c
++++ b/hw/mips/jazz.c
+@@ -245,7 +245,7 @@ static void mips_jazz_init(MachineState *machine,
+                               machine->firmware ?: bios_name);
+     if (filename) {
+         bios_size = load_image_targphys(filename, 0xfff00000LL,
+-                                        MAGNUM_BIOS_SIZE);
++                                        MAGNUM_BIOS_SIZE, NULL);
+         g_free(filename);
+     } else {
+         bios_size = -1;
+diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
+index 672083dec98..77dc895648f 100644
+--- a/hw/mips/loongson3_virt.c
++++ b/hw/mips/loongson3_virt.c
+@@ -371,7 +371,7 @@ static uint64_t load_kernel(CPUMIPSState *env)
+     initrd_size = 0;
+     initrd_offset = 0;
+     if (loaderparams.initrd_filename) {
+-        initrd_size = get_image_size(loaderparams.initrd_filename);
++        initrd_size = get_image_size(loaderparams.initrd_filename, NULL);
+         if (initrd_size > 0) {
+             initrd_offset = MAX(loader_memmap[LOADER_INITRD].base,
+                                 ROUND_UP(kernel_high, INITRD_PAGE_SIZE));
+@@ -383,8 +383,9 @@ static uint64_t load_kernel(CPUMIPSState *env)
+             }
+ 
+             initrd_size = load_image_targphys(loaderparams.initrd_filename,
+-                                              initrd_offset,
+-                                              loaderparams.ram_size - initrd_offset);
++                                        initrd_offset,
++                                        loaderparams.ram_size - initrd_offset,
++                                        NULL);
+         }
+ 
+         if (initrd_size == (target_ulong) -1) {
+@@ -650,7 +651,8 @@ static void mips_loongson3_virt_init(MachineState *machine)
+         if (filename) {
+             bios_size = load_image_targphys(filename,
+                                             virt_memmap[VIRT_BIOS_ROM].base,
+-                                            virt_memmap[VIRT_BIOS_ROM].size);
++                                            virt_memmap[VIRT_BIOS_ROM].size,
++                                            NULL);
+             g_free(filename);
+         } else {
+             bios_size = -1;
+diff --git a/hw/mips/malta.c b/hw/mips/malta.c
+index 02da629b5af..806e8d50789 100644
+--- a/hw/mips/malta.c
++++ b/hw/mips/malta.c
+@@ -892,7 +892,7 @@ static uint64_t load_kernel(void)
+     initrd_size = 0;
+     initrd_offset = 0;
+     if (loaderparams.initrd_filename) {
+-        initrd_size = get_image_size(loaderparams.initrd_filename);
++        initrd_size = get_image_size(loaderparams.initrd_filename, NULL);
+         if (initrd_size > 0) {
+             /*
+              * The kernel allocates the bootmap memory in the low memory after
+@@ -908,8 +908,9 @@ static uint64_t load_kernel(void)
+                 exit(1);
+             }
+             initrd_size = load_image_targphys(loaderparams.initrd_filename,
+-                                              initrd_offset,
+-                                              loaderparams.ram_size - initrd_offset);
++                                        initrd_offset,
++                                        loaderparams.ram_size - initrd_offset,
++                                        NULL);
+         }
+         if (initrd_size == (target_ulong) -1) {
+             error_report("could not load initial ram disk '%s'",
+@@ -1176,7 +1177,7 @@ void mips_malta_init(MachineState *machine)
+                                       machine->firmware ?: bios_name);
+             if (filename) {
+                 bios_size = load_image_targphys(filename, FLASH_ADDRESS,
+-                                                BIOS_SIZE);
++                                                BIOS_SIZE, NULL);
+                 g_free(filename);
+             } else {
+                 bios_size = -1;
+diff --git a/hw/nubus/nubus-device.c b/hw/nubus/nubus-device.c
+index 7797e61c7fc..0d4d6c0d875 100644
+--- a/hw/nubus/nubus-device.c
++++ b/hw/nubus/nubus-device.c
+@@ -68,7 +68,7 @@ static void nubus_device_realize(DeviceState *dev, Error **errp)
+             path = g_strdup(nd->romfile);
+         }
+ 
+-        size = get_image_size(path);
++        size = get_image_size(path, NULL);
+         if (size < 0) {
+             error_setg(errp, "failed to find romfile \"%s\"", nd->romfile);
+             g_free(path);
+diff --git a/hw/openrisc/boot.c b/hw/openrisc/boot.c
+index c81efe8138a..db6fea071e8 100644
+--- a/hw/openrisc/boot.c
++++ b/hw/openrisc/boot.c
+@@ -44,7 +44,8 @@ hwaddr openrisc_load_kernel(ram_addr_t ram_size,
+         if (kernel_size < 0) {
+             kernel_size = load_image_targphys(kernel_filename,
+                                               KERNEL_LOAD_ADDR,
+-                                              ram_size - KERNEL_LOAD_ADDR);
++                                              ram_size - KERNEL_LOAD_ADDR,
++                                              NULL);
+             high_addr = KERNEL_LOAD_ADDR + kernel_size;
+         }
+ 
+@@ -74,7 +75,7 @@ hwaddr openrisc_load_initrd(void *fdt, const char *filename,
+ 
+     size = load_ramdisk(filename, start, mem_size - start);
+     if (size < 0) {
+-        size = load_image_targphys(filename, start, mem_size - start);
++        size = load_image_targphys(filename, start, mem_size - start, NULL);
+         if (size < 0) {
+             error_report("could not load ramdisk '%s'", filename);
+             exit(1);
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index acc03fd4707..738b0c41ae5 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -2557,7 +2557,7 @@ static void pci_add_option_rom(PCIDevice *pdev, bool is_default_rom,
+             path = g_strdup(pdev->romfile);
+         }
+ 
+-        size = get_image_size(path);
++        size = get_image_size(path, NULL);
+         if (size < 0) {
+             error_setg(errp, "failed to find romfile \"%s\"", pdev->romfile);
+             return;
+diff --git a/hw/ppc/amigaone.c b/hw/ppc/amigaone.c
+index 47fb016b4aa..192474e0aee 100644
+--- a/hw/ppc/amigaone.c
++++ b/hw/ppc/amigaone.c
+@@ -324,7 +324,7 @@ static void amigaone_init(MachineState *machine)
+             error_report("Could not find firmware '%s'", machine->firmware);
+             exit(1);
+         }
+-        sz = load_image_targphys(filename, PROM_ADDR, PROM_SIZE);
++        sz = load_image_targphys(filename, PROM_ADDR, PROM_SIZE, NULL);
+         if (sz <= 0 || sz > PROM_SIZE) {
+             error_report("Could not load firmware '%s'", filename);
+             exit(1);
+@@ -413,7 +413,7 @@ static void amigaone_init(MachineState *machine)
+         loadaddr = ROUND_UP(loadaddr + 4 * MiB, 4 * KiB);
+         loadaddr = MAX(loadaddr, INITRD_MIN_ADDR);
+         sz = load_image_targphys(machine->initrd_filename, loadaddr,
+-                                 bi->bd_info - loadaddr);
++                                 bi->bd_info - loadaddr, NULL);
+         if (sz <= 0) {
+             error_report("Could not load initrd '%s'",
+                          machine->initrd_filename);
+diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
+index 3d69428f31c..418e1bb2fb4 100644
+--- a/hw/ppc/e500.c
++++ b/hw/ppc/e500.c
+@@ -1227,7 +1227,7 @@ void ppce500_init(MachineState *machine)
+         kernel_base = cur_base;
+         kernel_size = load_image_targphys(machine->kernel_filename,
+                                           cur_base,
+-                                          machine->ram_size - cur_base);
++                                          machine->ram_size - cur_base, NULL);
+         if (kernel_size < 0) {
+             error_report("could not load kernel '%s'",
+                          machine->kernel_filename);
+@@ -1241,7 +1241,8 @@ void ppce500_init(MachineState *machine)
+     if (machine->initrd_filename) {
+         initrd_base = (cur_base + INITRD_LOAD_PAD) & ~INITRD_PAD_MASK;
+         initrd_size = load_image_targphys(machine->initrd_filename, initrd_base,
+-                                          machine->ram_size - initrd_base);
++                                          machine->ram_size - initrd_base,
++                                          NULL);
+ 
+         if (initrd_size < 0) {
+             error_report("could not load initial ram disk '%s'",
+diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
+index 0b6e096116a..004efc6b97b 100644
+--- a/hw/ppc/mac_newworld.c
++++ b/hw/ppc/mac_newworld.c
+@@ -188,7 +188,8 @@ static void ppc_core99_init(MachineState *machine)
+ 
+         if (bios_size <= 0) {
+             /* or load binary ROM image */
+-            bios_size = load_image_targphys(filename, PROM_BASE, PROM_SIZE);
++            bios_size = load_image_targphys(filename, PROM_BASE, PROM_SIZE,
++                                            NULL);
+         }
+         g_free(filename);
+     }
+@@ -210,7 +211,8 @@ static void ppc_core99_init(MachineState *machine)
+         if (kernel_size < 0) {
+             kernel_size = load_image_targphys(machine->kernel_filename,
+                                               kernel_base,
+-                                              machine->ram_size - kernel_base);
++                                              machine->ram_size - kernel_base,
++                                              NULL);
+         }
+         if (kernel_size < 0) {
+             error_report("could not load kernel '%s'",
+@@ -222,7 +224,8 @@ static void ppc_core99_init(MachineState *machine)
+             initrd_base = TARGET_PAGE_ALIGN(kernel_base + kernel_size + KERNEL_GAP);
+             initrd_size = load_image_targphys(machine->initrd_filename,
+                                               initrd_base,
+-                                              machine->ram_size - initrd_base);
++                                              machine->ram_size - initrd_base,
++                                              NULL);
+             if (initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              machine->initrd_filename);
+diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+index 40ae936ad8a..c7e44d49b07 100644
+--- a/hw/ppc/mac_oldworld.c
++++ b/hw/ppc/mac_oldworld.c
+@@ -143,7 +143,8 @@ static void ppc_heathrow_init(MachineState *machine)
+ 
+         if (bios_size <= 0) {
+             /* or if could not load ELF try loading a binary ROM image */
+-            bios_size = load_image_targphys(filename, PROM_BASE, PROM_SIZE);
++            bios_size = load_image_targphys(filename, PROM_BASE, PROM_SIZE,
++                                            NULL);
+             bios_addr = PROM_BASE;
+         }
+         g_free(filename);
+@@ -166,7 +167,8 @@ static void ppc_heathrow_init(MachineState *machine)
+         if (kernel_size < 0) {
+             kernel_size = load_image_targphys(machine->kernel_filename,
+                                               kernel_base,
+-                                              machine->ram_size - kernel_base);
++                                              machine->ram_size - kernel_base,
++                                              NULL);
+         }
+         if (kernel_size < 0) {
+             error_report("could not load kernel '%s'",
+@@ -179,7 +181,8 @@ static void ppc_heathrow_init(MachineState *machine)
+                                             KERNEL_GAP);
+             initrd_size = load_image_targphys(machine->initrd_filename,
+                                               initrd_base,
+-                                              machine->ram_size - initrd_base);
++                                              machine->ram_size - initrd_base,
++                                              NULL);
+             if (initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              machine->initrd_filename);
+diff --git a/hw/ppc/pegasos2.c b/hw/ppc/pegasos2.c
+index 93696ed381f..a9e706644c5 100644
+--- a/hw/ppc/pegasos2.c
++++ b/hw/ppc/pegasos2.c
+@@ -197,7 +197,8 @@ static void pegasos_init(MachineState *machine)
+     sz = load_elf(filename, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                   ELFDATA2MSB, PPC_ELF_MACHINE, 0, 0);
+     if (sz <= 0) {
+-        sz = load_image_targphys(filename, pm->vof ? 0 : prom_addr, PROM_SIZE);
++        sz = load_image_targphys(filename, pm->vof ? 0 : prom_addr, PROM_SIZE,
++                                 NULL);
+     }
+     if (sz <= 0 || sz > PROM_SIZE) {
+         error_report("Could not load firmware '%s'", filename);
+@@ -301,7 +302,7 @@ static void pegasos_init(MachineState *machine)
+         pm->initrd_addr = ROUND_UP(pm->initrd_addr, 4);
+         pm->initrd_addr = MAX(pm->initrd_addr, INITRD_MIN_ADDR);
+         sz = load_image_targphys(machine->initrd_filename, pm->initrd_addr,
+-                                 machine->ram_size - pm->initrd_addr);
++                                 machine->ram_size - pm->initrd_addr, NULL);
+         if (sz <= 0) {
+             error_report("Could not load initrd '%s'",
+                          machine->initrd_filename);
+diff --git a/hw/ppc/pnv.c b/hw/ppc/pnv.c
+index f0469cdb8b6..1c0dadda876 100644
+--- a/hw/ppc/pnv.c
++++ b/hw/ppc/pnv.c
+@@ -1068,7 +1068,8 @@ static void pnv_init(MachineState *machine)
+         exit(1);
+     }
+ 
+-    fw_size = load_image_targphys(fw_filename, pnv->fw_load_addr, FW_MAX_SIZE);
++    fw_size = load_image_targphys(fw_filename, pnv->fw_load_addr, FW_MAX_SIZE,
++                                  NULL);
+     if (fw_size < 0) {
+         error_report("Could not load OPAL firmware '%s'", fw_filename);
+         exit(1);
+@@ -1080,7 +1081,8 @@ static void pnv_init(MachineState *machine)
+         long kernel_size;
+ 
+         kernel_size = load_image_targphys(machine->kernel_filename,
+-                                          KERNEL_LOAD_ADDR, KERNEL_MAX_SIZE);
++                                          KERNEL_LOAD_ADDR, KERNEL_MAX_SIZE,
++                                          NULL);
+         if (kernel_size < 0) {
+             error_report("Could not load kernel '%s'",
+                          machine->kernel_filename);
+@@ -1092,7 +1094,8 @@ static void pnv_init(MachineState *machine)
+     if (machine->initrd_filename) {
+         pnv->initrd_base = INITRD_LOAD_ADDR;
+         pnv->initrd_size = load_image_targphys(machine->initrd_filename,
+-                                  pnv->initrd_base, INITRD_MAX_SIZE);
++                                               pnv->initrd_base,
++                                               INITRD_MAX_SIZE, NULL);
+         if (pnv->initrd_size < 0) {
+             error_report("Could not load initial ram disk '%s'",
+                          machine->initrd_filename);
+diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
+index 6fff0d8afbc..7c66912c103 100644
+--- a/hw/ppc/ppc440_bamboo.c
++++ b/hw/ppc/ppc440_bamboo.c
+@@ -242,7 +242,8 @@ static void bamboo_init(MachineState *machine)
+     /* Load initrd. */
+     if (initrd_filename) {
+         initrd_size = load_image_targphys(initrd_filename, RAMDISK_ADDR,
+-                                          machine->ram_size - RAMDISK_ADDR);
++                                          machine->ram_size - RAMDISK_ADDR,
++                                          NULL);
+ 
+         if (initrd_size < 0) {
+             error_report("could not load ram disk '%s' at %x",
+diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
+index c730cb3429e..0759e95cb64 100644
+--- a/hw/ppc/prep.c
++++ b/hw/ppc/prep.c
+@@ -280,7 +280,7 @@ static void ibm_40p_init(MachineState *machine)
+     bios_size = load_elf(filename, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                          ELFDATA2MSB, PPC_ELF_MACHINE, 0, 0);
+     if (bios_size < 0) {
+-        bios_size = load_image_targphys(filename, BIOS_ADDR, BIOS_SIZE);
++        bios_size = load_image_targphys(filename, BIOS_ADDR, BIOS_SIZE, NULL);
+     }
+     if (bios_size < 0 || bios_size > BIOS_SIZE) {
+         error_report("Could not load bios image '%s'", filename);
+@@ -379,7 +379,8 @@ static void ibm_40p_init(MachineState *machine)
+         kernel_base = KERNEL_LOAD_ADDR;
+         kernel_size = load_image_targphys(machine->kernel_filename,
+                                           kernel_base,
+-                                          machine->ram_size - kernel_base);
++                                          machine->ram_size - kernel_base,
++                                          NULL);
+         if (kernel_size < 0) {
+             error_report("could not load kernel '%s'",
+                          machine->kernel_filename);
+@@ -392,7 +393,8 @@ static void ibm_40p_init(MachineState *machine)
+             initrd_base = INITRD_LOAD_ADDR;
+             initrd_size = load_image_targphys(machine->initrd_filename,
+                                               initrd_base,
+-                                              machine->ram_size - initrd_base);
++                                              machine->ram_size - initrd_base,
++                                              NULL);
+             if (initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              machine->initrd_filename);
+diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
+index ee31bd8f349..68d3eacbff8 100644
+--- a/hw/ppc/sam460ex.c
++++ b/hw/ppc/sam460ex.c
+@@ -494,7 +494,8 @@ static void sam460ex_init(MachineState *machine)
+     if (machine->initrd_filename) {
+         initrd_size = load_image_targphys(machine->initrd_filename,
+                                           RAMDISK_ADDR,
+-                                          machine->ram_size - RAMDISK_ADDR);
++                                          machine->ram_size - RAMDISK_ADDR,
++                                          NULL);
+         if (initrd_size < 0) {
+             error_report("could not load ram disk '%s' at %x",
+                     machine->initrd_filename, RAMDISK_ADDR);
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index 6764730beb4..cdf2fdeadc2 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -2854,7 +2854,7 @@ static void spapr_machine_init(MachineState *machine)
+         error_report("Could not find LPAR firmware '%s'", bios_name);
+         exit(1);
+     }
+-    fw_size = load_image_targphys(filename, 0, FW_MAX_SIZE);
++    fw_size = load_image_targphys(filename, 0, FW_MAX_SIZE, NULL);
+     if (fw_size <= 0) {
+         error_report("Could not load LPAR firmware '%s'", filename);
+         exit(1);
+@@ -3115,9 +3115,9 @@ static void spapr_machine_init(MachineState *machine)
+             spapr->initrd_base = (spapr->kernel_addr + spapr->kernel_size
+                                   + 0x1ffff) & ~0xffff;
+             spapr->initrd_size = load_image_targphys(initrd_filename,
+-                                                     spapr->initrd_base,
+-                                                     load_limit
+-                                                     - spapr->initrd_base);
++                                                spapr->initrd_base,
++                                                load_limit - spapr->initrd_base,
++                                                NULL);
+             if (spapr->initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              initrd_filename);
+diff --git a/hw/ppc/virtex_ml507.c b/hw/ppc/virtex_ml507.c
+index c9969ae48a8..00d9ab75090 100644
+--- a/hw/ppc/virtex_ml507.c
++++ b/hw/ppc/virtex_ml507.c
+@@ -253,7 +253,7 @@ static void virtex_init(MachineState *machine)
+             /* If we failed loading ELF's try a raw image.  */
+             kernel_size = load_image_targphys(kernel_filename,
+                                               boot_offset,
+-                                              machine->ram_size);
++                                              machine->ram_size, NULL);
+             boot_info.bootstrap_pc = boot_offset;
+             high = boot_info.bootstrap_pc + kernel_size + 8192;
+         }
+@@ -264,7 +264,8 @@ static void virtex_init(MachineState *machine)
+         if (machine->initrd_filename) {
+             initrd_base = high = ROUND_UP(high, 4);
+             initrd_size = load_image_targphys(machine->initrd_filename,
+-                                              high, machine->ram_size - high);
++                                              high, machine->ram_size - high,
++                                              NULL);
+ 
+             if (initrd_size < 0) {
+                 error_report("couldn't load ram disk '%s'",
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 828a867be39..f38078c8c22 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -172,7 +172,8 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+ 
+     firmware_size = load_image_targphys_as(firmware_filename,
+                                            *firmware_load_addr,
+-                                           current_machine->ram_size, NULL);
++                                           current_machine->ram_size, NULL,
++                                           NULL);
+ 
+     if (firmware_size > 0) {
+         return *firmware_load_addr + firmware_size;
+@@ -207,7 +208,7 @@ static void riscv_load_initrd(MachineState *machine, RISCVBootInfo *info)
+ 
+     size = load_ramdisk(filename, start, mem_size - start);
+     if (size == -1) {
+-        size = load_image_targphys(filename, start, mem_size - start);
++        size = load_image_targphys(filename, start, mem_size - start, NULL);
+         if (size == -1) {
+             error_report("could not load ramdisk '%s'", filename);
+             exit(1);
+@@ -262,7 +263,7 @@ void riscv_load_kernel(MachineState *machine,
+     }
+ 
+     kernel_size = load_image_targphys_as(kernel_filename, kernel_start_addr,
+-                                         current_machine->ram_size, NULL);
++                                         current_machine->ram_size, NULL, NULL);
+     if (kernel_size > 0) {
+         info->kernel_size = kernel_size;
+         info->image_low_addr = kernel_start_addr;
+diff --git a/hw/rx/rx-gdbsim.c b/hw/rx/rx-gdbsim.c
+index 5b9004e9e15..ed91c631788 100644
+--- a/hw/rx/rx-gdbsim.c
++++ b/hw/rx/rx-gdbsim.c
+@@ -63,7 +63,7 @@ static void rx_load_image(RXCPU *cpu, const char *filename,
+     long kernel_size;
+     int i;
+ 
+-    kernel_size = load_image_targphys(filename, start, size);
++    kernel_size = load_image_targphys(filename, start, size, NULL);
+     if (kernel_size < 0) {
+         fprintf(stderr, "qemu: could not load kernel '%s'\n", filename);
+         exit(1);
+diff --git a/hw/s390x/ipl.c b/hw/s390x/ipl.c
+index 2f082396c73..3843d2a8505 100644
+--- a/hw/s390x/ipl.c
++++ b/hw/s390x/ipl.c
+@@ -169,7 +169,7 @@ static void s390_ipl_realize(DeviceState *dev, Error **errp)
+         } else {
+             /* Try to load non-ELF file */
+             bios_size = load_image_targphys(bios_filename, ZIPL_IMAGE_START,
+-                                            4096);
++                                            4096, NULL);
+             ipl->bios_start_addr = ZIPL_IMAGE_START;
+         }
+         g_free(bios_filename);
+@@ -188,7 +188,8 @@ static void s390_ipl_realize(DeviceState *dev, Error **errp)
+                                &pentry, NULL,
+                                NULL, NULL, ELFDATA2MSB, EM_S390, 0, 0);
+         if (kernel_size < 0) {
+-            kernel_size = load_image_targphys(ipl->kernel, 0, ms->ram_size);
++            kernel_size = load_image_targphys(ipl->kernel, 0, ms->ram_size,
++                                              NULL);
+             if (kernel_size < 0) {
+                 error_setg(errp, "could not load kernel '%s'", ipl->kernel);
+                 return;
+@@ -247,7 +248,8 @@ static void s390_ipl_realize(DeviceState *dev, Error **errp)
+                 initrd_offset += 0x100000;
+             }
+             initrd_size = load_image_targphys(ipl->initrd, initrd_offset,
+-                                              ms->ram_size - initrd_offset);
++                                              ms->ram_size - initrd_offset,
++                                              NULL);
+             if (initrd_size == -1) {
+                 error_setg(errp, "could not load initrd '%s'", ipl->initrd);
+                 return;
+diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
+index d68c94e82ef..010be6d5394 100644
+--- a/hw/sh4/r2d.c
++++ b/hw/sh4/r2d.c
+@@ -329,8 +329,9 @@ static void r2d_init(MachineState *machine)
+         int kernel_size;
+ 
+         kernel_size = load_image_targphys(kernel_filename,
+-                                          SDRAM_BASE + LINUX_LOAD_OFFSET,
+-                                          INITRD_LOAD_OFFSET - LINUX_LOAD_OFFSET);
++                                        SDRAM_BASE + LINUX_LOAD_OFFSET,
++                                        INITRD_LOAD_OFFSET - LINUX_LOAD_OFFSET,
++                                        NULL);
+         if (kernel_size < 0) {
+             error_report("qemu: could not load kernel '%s'", kernel_filename);
+             exit(1);
+@@ -350,7 +351,8 @@ static void r2d_init(MachineState *machine)
+ 
+         initrd_size = load_image_targphys(initrd_filename,
+                                           SDRAM_BASE + INITRD_LOAD_OFFSET,
+-                                          SDRAM_SIZE - INITRD_LOAD_OFFSET);
++                                          SDRAM_SIZE - INITRD_LOAD_OFFSET,
++                                          NULL);
+ 
+         if (initrd_size < 0) {
+             error_report("qemu: could not load initrd '%s'", initrd_filename);
+diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+index 13e21a9c43e..7558b2ad839 100644
+--- a/hw/smbios/smbios.c
++++ b/hw/smbios/smbios.c
+@@ -1340,7 +1340,7 @@ void smbios_entry_add(QemuOpts *opts, Error **errp)
+             return;
+         }
+ 
+-        size = get_image_size(val);
++        size = get_image_size(val, NULL);
+         if (size == -1 || size < sizeof(struct smbios_structure_header)) {
+             error_setg(errp, "Cannot read SMBIOS file %s", val);
+             return;
+diff --git a/hw/sparc/leon3.c b/hw/sparc/leon3.c
+index 09d2cec488c..631c6113b5c 100644
+--- a/hw/sparc/leon3.c
++++ b/hw/sparc/leon3.c
+@@ -349,7 +349,7 @@ static void leon3_generic_hw_init(MachineState *machine)
+     filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, bios_name);
+ 
+     if (filename) {
+-        bios_size = get_image_size(filename);
++        bios_size = get_image_size(filename, NULL);
+     } else {
+         bios_size = -1;
+     }
+@@ -360,7 +360,7 @@ static void leon3_generic_hw_init(MachineState *machine)
+     }
+ 
+     if (bios_size > 0) {
+-        ret = load_image_targphys(filename, LEON3_PROM_OFFSET, bios_size);
++        ret = load_image_targphys(filename, LEON3_PROM_OFFSET, bios_size, NULL);
+         if (ret < 0 || ret > prom_size) {
+             error_report("could not load prom '%s'", filename);
+             exit(1);
+diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
+index 8ac7e625ef1..53d7ae08ae9 100644
+--- a/hw/sparc/sun4m.c
++++ b/hw/sparc/sun4m.c
+@@ -245,7 +245,8 @@ static unsigned long sun4m_load_kernel(const char *kernel_filename,
+         if (kernel_size < 0)
+             kernel_size = load_image_targphys(kernel_filename,
+                                               KERNEL_LOAD_ADDR,
+-                                              RAM_size - KERNEL_LOAD_ADDR);
++                                              RAM_size - KERNEL_LOAD_ADDR,
++                                              NULL);
+         if (kernel_size < 0) {
+             error_report("could not load kernel '%s'", kernel_filename);
+             exit(1);
+@@ -256,7 +257,8 @@ static unsigned long sun4m_load_kernel(const char *kernel_filename,
+         if (initrd_filename) {
+             *initrd_size = load_image_targphys(initrd_filename,
+                                                INITRD_LOAD_ADDR,
+-                                               RAM_size - INITRD_LOAD_ADDR);
++                                               RAM_size - INITRD_LOAD_ADDR,
++                                               NULL);
+             if ((int)*initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              initrd_filename);
+@@ -700,7 +702,7 @@ static void prom_init(hwaddr addr, const char *bios_name)
+                        translate_prom_address, &addr, NULL,
+                        NULL, NULL, NULL, ELFDATA2MSB, EM_SPARC, 0, 0);
+         if (ret < 0 || ret > PROM_SIZE_MAX) {
+-            ret = load_image_targphys(filename, addr, PROM_SIZE_MAX);
++            ret = load_image_targphys(filename, addr, PROM_SIZE_MAX, NULL);
+         }
+         g_free(filename);
+     } else {
+diff --git a/hw/sparc64/sun4u.c b/hw/sparc64/sun4u.c
+index e9f9b0a4cb9..82c3e7c855b 100644
+--- a/hw/sparc64/sun4u.c
++++ b/hw/sparc64/sun4u.c
+@@ -182,7 +182,8 @@ static uint64_t sun4u_load_kernel(const char *kernel_filename,
+         if (kernel_size < 0) {
+             kernel_size = load_image_targphys(kernel_filename,
+                                               KERNEL_LOAD_ADDR,
+-                                              RAM_size - KERNEL_LOAD_ADDR);
++                                              RAM_size - KERNEL_LOAD_ADDR,
++                                              NULL);
+         }
+         if (kernel_size < 0) {
+             error_report("could not load kernel '%s'", kernel_filename);
+@@ -195,7 +196,7 @@ static uint64_t sun4u_load_kernel(const char *kernel_filename,
+ 
+             *initrd_size = load_image_targphys(initrd_filename,
+                                                *initrd_addr,
+-                                               RAM_size - *initrd_addr);
++                                               RAM_size - *initrd_addr, NULL);
+             if ((int)*initrd_size < 0) {
+                 error_report("could not load initial ram disk '%s'",
+                              initrd_filename);
+@@ -437,7 +438,7 @@ static void prom_init(hwaddr addr, const char *bios_name)
+         ret = load_elf(filename, NULL, translate_prom_address, &addr,
+                        NULL, NULL, NULL, NULL, ELFDATA2MSB, EM_SPARCV9, 0, 0);
+         if (ret < 0 || ret > PROM_SIZE_MAX) {
+-            ret = load_image_targphys(filename, addr, PROM_SIZE_MAX);
++            ret = load_image_targphys(filename, addr, PROM_SIZE_MAX, NULL);
+         }
+         g_free(filename);
+     } else {
+diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
+index 55de1a7a073..db3b0155495 100644
+--- a/hw/xtensa/xtfpga.c
++++ b/hw/xtensa/xtfpga.c
+@@ -381,7 +381,8 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
+             if (initrd_size < 0) {
+                 initrd_size = load_image_targphys(initrd_filename,
+                                                   cur_lowmem,
+-                                                  lowmem_end - cur_lowmem);
++                                                  lowmem_end - cur_lowmem,
++                                                  NULL);
+             }
+             if (initrd_size < 0) {
+                 error_report("could not load initrd '%s'", initrd_filename);
+diff --git a/system/device_tree.c b/system/device_tree.c
+index aa3fe9516f3..7850b90fa72 100644
+--- a/system/device_tree.c
++++ b/system/device_tree.c
+@@ -83,7 +83,7 @@ void *load_device_tree(const char *filename_path, int *sizep)
+     void *fdt = NULL;
+ 
+     *sizep = 0;
+-    dt_size = get_image_size(filename_path);
++    dt_size = get_image_size(filename_path, NULL);
+     if (dt_size < 0) {
+         error_report("Unable to get size of device tree file '%s'",
+                      filename_path);
 -- 
 2.51.0
 
