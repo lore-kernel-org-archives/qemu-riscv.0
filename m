@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97541CCD1BF
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 08:47:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03781CCD1BF
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Oct 2025 08:47:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDfLs-0004E4-II; Tue, 28 Oct 2025 04:46:49 -0400
+	id 1vDfMh-0004OZ-DS; Tue, 28 Oct 2025 04:47:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
- id 1vDfLn-0004BB-2j
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:46:43 -0400
-Received: from mail-qt1-x830.google.com ([2607:f8b0:4864:20::830])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vDfLp-0004CQ-Kb
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:46:45 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <marcandre.lureau@gmail.com>)
- id 1vDfLj-0006TF-JT
- for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:46:42 -0400
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-4ed0d2a949dso1932011cf.1
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 01:46:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vDfLi-0006Su-Og
+ for qemu-riscv@nongnu.org; Tue, 28 Oct 2025 04:46:45 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-33d962c0e9aso4799077a91.0
+ for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 01:46:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761641197; x=1762245997; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=74c4+HqxRJPus9bQybEz+YN4FB48AHHcS3sr1YkogJg=;
- b=IcvSbhL1ZGFLVcTUotjTFyI4ByQbVwWJLU+YVa1YRCGxMzU7LajnMviEMqyp5nu6Ch
- Ximv7tdccAfCIdoWo8XRryg1cGCAVTV//U9TxKoqLvFatfnJMuzHxt7/b3GHpwAxT5hk
- AgwiIb0M8onXgFTy4PEJv0smBfuVnHQOguC2W2SvQoZW5JsKGuyrXRieGLZoXSWUzC1j
- CwFzor9FDthC6HeZrOBP4EO+usP9yqXH6me2XnpG+aYx8n5OqUrWnPq+NIgqfiWajYSF
- QUx4gXZOQ4iPF5PbFUhzhyr/obQmaorAu9XMBf6lfBA90iDWR2PkeuhKMqQgFVgdMmNj
- RCBA==
+ d=ventanamicro.com; s=google; t=1761641194; x=1762245994; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NcmS5eSVVHZBTH578A5sV7MzSCEtEH7mlQHouzUnnQ8=;
+ b=XhL/jBhPNCmAzEqMnLAjCLUejbr4KfDY757oYrZxVzlS/1L0LFfa02w42PNG1IaUNW
+ a2huHAT7Ut8EGmHnO4e1M8cwUQpRT2l4ullqkqsAAA/5i+bwuQ5JnLxU/E5YYUqDf4hr
+ O+ocuyRQqoCplnueJWTBuYbTvISOg/3aaV5q8KGtgXm/xdu9k27akGMLkqC+dM/kJ94M
+ T9QppWEO0EVzs9KsOdN2sDFqGkJdDZWoHH1L36UEmiCsZIvyrovOdmgzF5WMQGqWiXMc
+ +3GnKhyCZhlEUSQgqO0A4mauIBnOPfV1f4Mt+pBg991YPF1BXHGOI8ZaUhptXkzosfKE
+ AKFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761641197; x=1762245997;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=74c4+HqxRJPus9bQybEz+YN4FB48AHHcS3sr1YkogJg=;
- b=WNrGsIFeQ3h0fxN6NgIA+iJFK8PbX0Byc+lvIrsq0ZBHUeT7fbzG2IyXW8j34oDIOZ
- hUqe2etGTQsYf2jXNf/rK1wzrq4sCl3Aw+/hO3/X/eK72roZuU3MtLKJQ8o5ztvrxlRp
- ylyiZIqzki2I4mUndO/klM6E+RmmBrCd9h5xKunk7QOjwG7Qg4TxoX/qeVLGF3pHZ4bv
- XX0P6e3IKngBMpltCPwDdAP8JQoyrGNUsQHNPih8J30nosKW516fqn7y7xlX7HcpbYyi
- qlpnHRcw44PXhpr0krrjYBdjZT4ZJI8RM7d5KHTsjCfryvJyEKVAavkYTO5uEPZVO5Zy
- WmAQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX92qa2bKQM30y6gXxYSQ4H/oKmudVdX5pMhSL/Z4Z2mnFikfwRHrcBd4RF8nnK6tXmKmdasIvFFEq7@nongnu.org
-X-Gm-Message-State: AOJu0Ywn4l8JUmxEV/HDpP+So1SVknX2eKd4+oUcLrrh3bt1d/xb8rNl
- hs8QKruKBLbHYtS14NBnbgVUgAylLqW+WoF5oQPV4a/4ce3BlqFfTWG0LHZjyuaDzKJLILcKoSI
- sHShQZRUp2dIKbaazMxW+Eh6OHyXhkQ4=
-X-Gm-Gg: ASbGncuWClrjqHal39Fs8mf3D/jaIkaHg2l+0S9dk+VgvS+omR+2s1R0KhDm0jtTDaP
- s3xXoclRr8B9m5kLZIZIHyMFQQ/Wm9SfLVIchFarowAOhVIOuW6P6bYXAjG0suczPP29HYiLNqr
- u2VZ9DfqBeBhe6YITuwC/4waprvLkVjaDFJVJ+fPjoCov6PQxSzEtj+aoY6W8ZhbFB75gPdrN7A
- qQwaV0Wnms33SvdnCXWi4apbBRT5aUuuLnHIJL6r2MgO871iVw+zGhoPgRNWZMfxWkJ3Fw6e6Ki
- kpBCTNF+Z2ExDxHO
-X-Google-Smtp-Source: AGHT+IFzNNq0xtkG3HBZV+k9Q4Qh4wBkcSOloZPVyfaympGwhInn0h4RZJZpXf6Rit9f1sgCDBkCbzqmNa2FO97Oecs=
-X-Received: by 2002:a05:622a:4244:b0:4ec:fa43:4d58 with SMTP id
- d75a77b69052e-4ed075cd25bmr42364871cf.50.1761641196777; Tue, 28 Oct 2025
- 01:46:36 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1761641194; x=1762245994;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NcmS5eSVVHZBTH578A5sV7MzSCEtEH7mlQHouzUnnQ8=;
+ b=e3JYNu3SSdNWef++DM8dFCOZq10ZIjDP6TvylF3Uw30lgKHvJUiLGkgiLMhxgWcMGo
+ UBtHjsiBnHQTy4J3U/Mx/kyhYtoSHUdvTU7eE1q1ZH2kFZyzkT/PEuwo6KNrCq9GFj0R
+ 1MrG0RWmi3baYp+rUchPwdc2JFTzKDUoGfEw55qZ+fM2DnMPLETkF7CyiWbxgGZWOlYS
+ W5p35IvbAl2/FzFYKuYdSVI8V+iDmpupQsF8MjG8FKkn0vSe8/S1az9EfYao3lauvpSS
+ zjNsyydWq/NGoOvFNubKY7v1jT2me9m8VM8npxeG53w988gcw4pyaouX/gdYuifcchd7
+ +uCA==
+X-Gm-Message-State: AOJu0YxLG/HGJEb3nqtdd//c1LTEZ8FbfJhmHI59ZVfcHQ3G/SoHUIE6
+ GHeY8GRXVqxFcLijbbbadaCiM4+D+2c5W3yJnK1dmxvpTH4QlypfjSofHxKBQrtDJWg=
+X-Gm-Gg: ASbGncvA+30nOiizqJlLO6L3V/a/Eam7nrfNOW2S/mjr79A23EU2CZkTEfGgyUdLUZn
+ VN3ELkveNUSpuV2xzONEg3HdgC/3v8ApZoXf+MQnVgnpFdDjTuOytMyc36/RcsAHweOWO1gy8M7
+ SD+nuYpLkLorWkD0aDQKxZaMMthq0NfvH4UeNNQZeuT4GN9MMEdZ1RpOLL/Wv9ZBUSjfGh7QSTz
+ R9BsvuX7GzyhxJfA0Y70rE8aFvc0h5GfFzIinY2ejwoCBEWV8kcGekjFpS3vxgFaYrqT8QnHgiH
+ aDvHQwnLTuzVAyK+SRHqBxJ5rSm91D29pg7uFVEqM0Aluwnm7rhQLDFDwkMVpD9etzBzhLkJmXE
+ +0D09OjbrAvyuBjjkVn02xFLFLaMz5Mi9NjMskQS4ZIuc3miKB7R7z55fzS3ycEY9dzEkCK7lf4
+ GqspeH3MSCOPiQQc4xq0xv8csycw==
+X-Google-Smtp-Source: AGHT+IG/3xDOEkCqPLEful9dpkqv84BRHwAiR1n0BvreEcJXi0pCvJnT+DBV3hrwyuT2NkBo6IWd5w==
+X-Received: by 2002:a17:90b:38cf:b0:33d:a6a6:2e26 with SMTP id
+ 98e67ed59e1d1-34028989872mr3220349a91.13.1761641194289; 
+ Tue, 28 Oct 2025 01:46:34 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([189.38.141.22])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-33fed81c8e0sm11343909a91.18.2025.10.28.01.46.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Oct 2025 01:46:33 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH] docs/specs/riscv-aia.rst: add 'riscv-aia' accel prop info
+Date: Tue, 28 Oct 2025 05:46:22 -0300
+Message-ID: <20251028084622.1177574-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251028080258.23309-1-philmd@linaro.org>
- <20251028080258.23309-2-philmd@linaro.org>
-In-Reply-To: <20251028080258.23309-2-philmd@linaro.org>
-From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
-Date: Tue, 28 Oct 2025 12:46:25 +0400
-X-Gm-Features: AWmQ_bkThyhwBWC8TUuZxvYfJI7M5STrRVP98r7pdXwiwEosZAsP-gMPAiyy5zo
-Message-ID: <CAJ+F1CK=CcFS3xxWQtoEcYBmSoTFKwaAqZz=BsBcevp6ZXh=3w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/7] hw/sysbus: Use memory_region_name()
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
- Bernhard Beschow <shentey@gmail.com>,
- Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org, 
- qemu-block@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Eduardo Habkost <eduardo@habkost.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::830;
- envelope-from=marcandre.lureau@gmail.com; helo=mail-qt1-x830.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,43 +99,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Oct 28, 2025 at 12:06=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
->
-> MemoryRegion::name is kind of internal. Use the proper
-> memory_region_name() accessor, which might return a different
-> name.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+Add a small section talking about the 'riscv-aia' KVM setting we
+implement and how it affects the provisioning of the IMSIC s-mode
+in-kernel controller.
 
-Reviewed-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+While we're at it, fix the formatting of the AIA bullet list.
 
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ docs/specs/riscv-aia.rst | 43 ++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 39 insertions(+), 4 deletions(-)
 
-> ---
->  hw/core/sysbus.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
-> index ae447c1196a..d33be6b2b52 100644
-> --- a/hw/core/sysbus.c
-> +++ b/hw/core/sysbus.c
-> @@ -154,7 +154,7 @@ void sysbus_mmio_map(SysBusDevice *dev, int n, hwaddr=
- addr)
->  int sysbus_mmio_map_name(SysBusDevice *dev, const char *name, hwaddr add=
-r)
->  {
->      for (int i =3D 0; i < dev->num_mmio; i++) {
-> -        if (!strcmp(dev->mmio[i].memory->name, name)) {
-> +        if (!strcmp(memory_region_name(dev->mmio[i].memory), name)) {
->              sysbus_mmio_map(dev, i, addr);
->              return i;
->          }
-> --
-> 2.51.0
->
->
+diff --git a/docs/specs/riscv-aia.rst b/docs/specs/riscv-aia.rst
+index 8097e2f897..f3c6ab7fcb 100644
+--- a/docs/specs/riscv-aia.rst
++++ b/docs/specs/riscv-aia.rst
+@@ -8,10 +8,8 @@ RISC-V machine for TCG and KVM accelerators.
+ 
+ The support consists of two main modes:
+ 
+-- "aia=aplic": adds one or more APLIC (Advanced Platform Level Interrupt Controller)
+-  devices
+-- "aia=aplic-imsic": adds one or more APLIC device and an IMSIC (Incoming MSI
+-   Controller) device for each CPU
++- *aia=aplic*: adds one or more APLIC (Advanced Platform Level Interrupt Controller) devices
++- *aia=aplic-imsic*: adds one or more APLIC device and an IMSIC (Incoming MSI Controller) device for each CPU
+ 
+ From an user standpoint, these modes will behave the same regardless of the accelerator
+ used.  From a developer standpoint the accelerator settings will change what it being
+@@ -81,3 +79,40 @@ we will emulate in userspace:
+      - n/a
+      - emul
+      - in-kernel
++
++
++KVM accel option 'riscv-aia'
++----------------------------
++
++The KVM accelerator property 'riscv-aia' interacts with the "aia=aplic-imsic"
++to determine how the host KVM module will provide the in-kernel IMSIC s-mode
++controller.  The 'kernel-irqchip' setting has no impact in 'riscv-aia' given
++that any available 'kernel-irqchip' setting will always have an in-kernel
++IMSIC s-mode.  'riscv-aia' has no impact in APLIC m-mode/s-mode and
++IMSIC m-mode settings.
++
++
++.. list-table:: How 'riscv-aia' changes in-kernel IMSIC s-mode provisioning
++   :widths: 25 25 25 25
++   :header-rows: 1
++
++   * - Accel
++     - KVM riscv-aia
++     - AIA type
++     - IMSIC s-mode
++   * - kvm
++     - none
++     - aplic-imsic
++     - in-kernel, default to 'auto'
++   * - kvm
++     - auto
++     - aplic-imsic
++     - in-kernel, hwaccel if available, emul otherwise
++   * - kvm
++     - hwaccel
++     - aplic-imsic
++     - in-kernel, use IMSIC controller from guest hardware
++   * - kvm
++     - emul
++     - aplic-imsic
++     - in-kernel, IMSIC is emulated by KVM
+-- 
+2.51.0
 
-
---
-Marc-Andr=C3=A9 Lureau
 
