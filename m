@@ -4,158 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 959B7CCF9E9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Oct 2025 13:25:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8146ECCF9F0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Oct 2025 15:51:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vE69n-0006h8-EC; Wed, 29 Oct 2025 09:24:07 -0400
+	id 1vE8SK-0004TI-Oj; Wed, 29 Oct 2025 11:51:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1vE69k-0006gc-Q5
- for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 09:24:04 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1vE69g-0008Bl-4I
- for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 09:24:04 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1761744233;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=AogRYBHoO4A57v3hzc3wexA/dhZmmHaY+zW6HuELAzE=;
- b=WFKHUBe2oESnCwF88btAqakakoXHosV4qKGHSYjRTcJDps6jjrt+tRrmrlzKCOIoykJvbG
- 4ZF5B5j4L+t8c8/m2UTvvIFjLx6h/TC2cj06WVo5RWgacLj+DnyJy/SlWXixI8+rezMt/n
- TTCR1OL1KC2QvFAXX005nav6BDo1DtE=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-471-_w9bp3euMninZm9Vka6gag-1; Wed, 29 Oct 2025 09:23:51 -0400
-X-MC-Unique: _w9bp3euMninZm9Vka6gag-1
-X-Mimecast-MFC-AGG-ID: _w9bp3euMninZm9Vka6gag_1761744230
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-475dd9906e1so25939215e9.0
- for <qemu-riscv@nongnu.org>; Wed, 29 Oct 2025 06:23:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1vE8SH-0004MP-Rm
+ for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 11:51:21 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1vE8S1-0002uZ-9K
+ for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 11:51:21 -0400
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b5e19810703so1722166b.2
+ for <qemu-riscv@nongnu.org>; Wed, 29 Oct 2025 08:51:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761753061; x=1762357861; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=64uzFuglk4bHde6NA01qGjQHIOCA617Oktb15rTiY1Q=;
+ b=qGJuFfr8XGefrgBpVNGSBBlTy1wDvDE3FRcb9WV8An6b4To7KUYlGqcK6Q136CBdju
+ UlDSEmmATWl0aKAMhLm2ZFtb/Kjkw6pfdDHufPjlPo+zqBs/ZEotzk814AkieQhCmhBs
+ AId2HAdC9KLGnhJo8ASk5xYdSt6RDx1PDFfGt2x7xXsZtbE65fC8kbt8t5Jwdp0uZh65
+ 4VvyDHoqe5kUuphYO3zJqKYCGxlYF8TlGJo7nhsUHSQNM28srnUZowbejRxdxVku4TJU
+ I3HzcsViobjqTfaFX0Gl1daTIP0+UEmaXTtKaXTHJlGWjnwXUeOW5RNU0ClKJgUjXWuk
+ ZzTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761744230; x=1762349030;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AogRYBHoO4A57v3hzc3wexA/dhZmmHaY+zW6HuELAzE=;
- b=q4ZCeEHiB9oFsRpxTdi0iO/SC/zFybjbFqeQ80tWmYUhx6UhjkVT+1+5Um1DqS+9hG
- Cyz8aaxq134Au4dlczjX5EK8n3XnNx7D5scI+3AXC3o1CWuskyLkNEbayiwTiLuW67hf
- eW9g8nGBPZsehliKJF9sZFQ+uai+2MI1qUnirEogkwwZr8Iaim8Odlb7B+XjftoOYXbd
- Vbv3g7PrscaBT2rXic7tRtcU1LDsU31Ao7PMQ9+Q2tGcA/y4MgD6ghHU7miz5uXJipdR
- u1PXGX1gKgQB+Yy+QxOOsvhpY9zKkce5ZkjHvbUYgMGzFc9YJ6f4Pc8p3FyQAz9bN9QG
- MMJA==
+ d=1e100.net; s=20230601; t=1761753061; x=1762357861;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=64uzFuglk4bHde6NA01qGjQHIOCA617Oktb15rTiY1Q=;
+ b=Fu3lX4KkCunwGD/VyGSAVDuKxbAAXJm7p35HeQTGYPGd3nJDxA3nWEh5+kAPzJX5iJ
+ E8CqyHajD+PkC4Ap9vFBfSjSlZlNLo3pOptI393IuW15Nml3GJ/fKCdwOYorVBMOui3Q
+ qMAtuaydwXnb1hx1jehQ9Smhfss73sjkA5u5+Fo5yU0RaIfBOqtje22/rkGai785IBwR
+ MFbfr8BRy8O90Utp4mCElYdNFSzQ966FL9XcobiIwFS0W7AkZnPWlIFUcrqcMEhuGFpq
+ zqB0tOXkOwS9KU6zeVfjp3lYrTXJH8vzzkIMrOjyKixsCxZ/bk/F+mnFlwLoO89lyLqU
+ Rsow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWc27dQcFMcTvuXGTfmnkf261CFJM7L4m8N8HthiNl2ps/RD2f3GCEUXJfHB3iu/hrP45J7BboPPCe+@nongnu.org
-X-Gm-Message-State: AOJu0YywTCz2yJ8tQ9WUqt9A3PWzOhNOnnrYpTCM4G4sO2uEUaFHrca/
- 1WtdsfwahgNV7B9pLZNBPJ7vQz8vmdJ4sJugSBs3jnhXjgqyVRc4zz9mSswox7iH8XrkPrkKYbs
- 3VYi6pY7uBBoLXkHPB1YzGD5Pt5jg2ImHUMK+DC4/PsP6h2O/NC8TuIis
-X-Gm-Gg: ASbGncuJ6hUzcoQjUYKtgGCwIRT0nfGGGwfcvnekgbIZUGbs9MKzxwV9KVngg7Bvo6H
- WrA3PhA1QECzxe+jxkU3V2nMgL8bNEXZ8A4zM7V2/tQaqkhnlVXuXplMBbeczUmdIkoERwVI/2D
- m/mqCNdHgjkLH0dleImdiqps6PCFrLyRExr69wK0tCkUAJbzEZeU6DiMSEEVXT/m1KNGndGXE46
- ss8cYAaDO497jZdFXUmXDPzCMBn17fO/DFCALMJeAtllWQ1C3q43qg/kFMY9IR5FSA/BGrcwSMy
- j2pvyH+Uyv3gO7tfHClQdEmgxnaSjhrHhJighJUIcthHWFj+gjfsRrfnV5+xJJ4H5vYsTbGyxLv
- 6DMqut2p+kTOebBIMbv4f7Q==
-X-Received: by 2002:a05:6000:43c5:20b0:429:b2ad:f31e with SMTP id
- ffacd0b85a97d-429b2adf486mr1103778f8f.35.1761744230318; 
- Wed, 29 Oct 2025 06:23:50 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHs3GHPTxhTJjem3aESiDF4BQX1bREhvCngFdtuNJwqQU7ImFOFBiOT/tU0aym0SPUb+UjcwQ==
-X-Received: by 2002:a05:6000:43c5:20b0:429:b2ad:f31e with SMTP id
- ffacd0b85a97d-429b2adf486mr1103748f8f.35.1761744229881; 
- Wed, 29 Oct 2025 06:23:49 -0700 (PDT)
-Received: from [10.32.64.156] (nat-pool-muc-t.redhat.com. [149.14.88.26])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952b7badsm25787894f8f.7.2025.10.29.06.23.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Oct 2025 06:23:49 -0700 (PDT)
-Message-ID: <dede2c38-7b86-4df7-8d26-e4dceb20e653@redhat.com>
-Date: Wed, 29 Oct 2025 14:23:48 +0100
+ AJvYcCVdjYQcBGl/QuIOGL1wPTPuYbn9V4HHXmM1C14Sp8SFv8kSNI2DkesQNTOGYSM535czWm6BuczqHBth@nongnu.org
+X-Gm-Message-State: AOJu0YxRkgiemvxH82Tfm6WHQSIZIph7UVg61LoguaNsjC/eICib1ZS+
+ joyqKjq6r+UOLUHDFKwIe+sGqNdrkw+7IhuFv3Mwk0CGADjjIW7WB5P39nr7Z5sDtxA=
+X-Gm-Gg: ASbGncuCVlqZsBzSw4jkU45I/iEL18A4NcSv+y4abRhOX8B5HopfMo3IO9qHeXeImmh
+ Jg9OnrfdQMLS/ScpJmdDksRjfaNc0R33p8MtcEt0c1MtyLZ+htgJ+DAdJAJnmp7DeAYgF4mwxQs
+ MFaUw7a2DIpUtaW945ZPoCeRjRog3l0VzTNWao4TFp6qy8z3533lWT4B7/58FQczDJm3scJ2xgE
+ 0yCGmJKeCk077+Fwmvq+dqeRxGWsEggmnF8ywbaIo4vivbBniNDN/btumLvMX9KzyjIzNT7IKZs
+ qylBHC/8Mkggjata6gx2uh7yqZWf5RGbhwL15iaIOjIY5T0VydJNQIwt0knO2uxUb7sN4TY+KVG
+ L+k/hiauw3uA1nxdd6RghCh5U6ahVzimhgejoJ7illBeXaHbswM6Xz9E5BfS2C2lqqHq9s7EgQh
+ 01
+X-Google-Smtp-Source: AGHT+IGz4z6aiC4cMd00DKOxniMT1FGr/nDAki9jLYLnKjqPv3EKQsCigv+sIV99S9BDqtfKy7lyRQ==
+X-Received: by 2002:a17:907:3f21:b0:b6d:5363:88a9 with SMTP id
+ a640c23a62f3a-b703d2dc7ebmr309686566b.9.1761753061457; 
+ Wed, 29 Oct 2025 08:51:01 -0700 (PDT)
+Received: from draig.lan ([185.126.160.19]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b6d85ba3798sm1472546166b.39.2025.10.29.08.50.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Oct 2025 08:50:58 -0700 (PDT)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id E673B61208;
+ Wed, 29 Oct 2025 15:50:48 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Julian Ganz <neither@nut.email>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PULL 31/35] tests: add test with interrupted memory accesses on rv64
+Date: Wed, 29 Oct 2025 15:50:40 +0000
+Message-ID: <20251029155045.257802-32-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20251029155045.257802-1-alex.bennee@linaro.org>
+References: <20251029155045.257802-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 16/25] hw/s390x: Use memory_region_get_address()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-block@nongnu.org,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
- Matthew Rosato <mjrosato@linux.ibm.com>, Eric Farman <farman@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>
-References: <20251028181300.41475-1-philmd@linaro.org>
- <20251028181300.41475-17-philmd@linaro.org>
- <f99989f4-88bd-4167-b9e3-fe4a249a2c99@redhat.com>
- <99870dc8-830c-4ce9-a25a-5aa7c47e074f@linaro.org>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; keydata=
- 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
- qIws/H2t
-In-Reply-To: <99870dc8-830c-4ce9-a25a-5aa7c47e074f@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: CMLjDZ956ImrO84FBx2shMfAn4Mj5p99_hz0lCL2j-c_1761744230
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=david@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -171,39 +111,151 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 29.10.25 14:18, Philippe Mathieu-Daudé wrote:
-> On 29/10/25 09:28, David Hildenbrand wrote:
->>
->>> @@ -510,11 +514,12 @@ static MemTxResult
->>> zpci_write_bar(S390PCIBusDevice *pbdev, uint8_t pcias,
->>>                                      uint64_t offset, uint64_t data,
->>> uint8_t len)
->>>    {
->>>        MemoryRegion *mr;
->>> +    hwaddr subregion_base_addr;
->>>        mr = pbdev->pdev->io_regions[pcias].memory;
->>>        mr = s390_get_subregion(mr, offset, len);
->>> -    offset -= mr->addr;
->>> -    return memory_region_dispatch_write(mr, offset, data,
->>> +    subregion_base_addr = memory_region_get_address(mr);
->>
->> Any partixular reason for the temp variable?
-> 
-> To fit the 72-80 chars per line limit. Since various people
-> asked the same, I'll just replace in place, ignoring the
-> checkpatch.pl warnings.
+From: Julian Ganz <neither@nut.email>
 
-I was wondering about a simple
+This test aims at catching API misbehaviour w.r.t. the interaction
+between interrupts and memory accesses, such as the bug fixed in
 
-	offset -= memory_region_get_address(mr);
+    27f347e6a1d269c533633c812321cabb249eada8
+    (accel/tcg: also suppress asynchronous IRQs for cpu_io_recompile)
 
-by minimizing changes to surrounding code.
+Because the condition for triggering misbehaviour may not be
+deterministic and the cross-section between memory accesses and
+interrupt handlers may be small, we have to place our trust in large
+numbers. Instead of guessing/trying an arbitrary, fixed loop-bound, we
+decided to loop for a fixed amount of real-time. This avoids the test
+running into a time-out on slower machines while enabling a high number
+of possible interactions on faster machines.
 
-Anyhow, I was just wondering about that.
+The test program sends a single '.' per 1000000 loads/stores over the
+serial. This output is not captured, but may be used by developers to
+gauge the number of possible interactions.
 
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Signed-off-by: Julian Ganz <neither@nut.email>
+Message-ID: <20251027110344.2289945-32-alex.bennee@linaro.org>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index d9c0036eb4b..eb1ce6504a0 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -30,5 +30,11 @@ run-plugin-doubletrap: doubletrap
+ 	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $<.pout \
+ 	  $(QEMU_OPTS)$<)
+ 
++EXTRA_RUNS += run-plugin-interruptedmemory
++run-plugin-interruptedmemory: interruptedmemory
++	$(call run-test, $<, \
++	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $<.pout \
++	  $(QEMU_OPTS)$<)
++
+ # We don't currently support the multiarch system tests
+ undefine MULTIARCH_TESTS
+diff --git a/tests/tcg/riscv64/interruptedmemory.S b/tests/tcg/riscv64/interruptedmemory.S
+new file mode 100644
+index 00000000000..cd9073ee314
+--- /dev/null
++++ b/tests/tcg/riscv64/interruptedmemory.S
+@@ -0,0 +1,97 @@
++	.option norvc
++
++	.text
++	.global _start
++_start:
++	# Set up trap vector
++	lla	t0, trap
++	csrw	mtvec, t0
++
++	# Set up timer
++	lui	t1, 0x02004
++	sd	zero, 0(t1) # MTIMECMP0
++
++	# Enable timer interrupts
++	li	t0, 0x80
++	csrrs	zero, mie, t0
++	csrrsi	zero, mstatus, 0x8
++
++	# Set up UART
++	lui	t1, 0x10000
++	li	a0, 0x80	# DLAB=1
++	sb	a0, 3(t1)
++	li	a0, 1		# Full speed
++	sw	a0, 0(t1)
++	li	a0, 0x03	# 8N1, DLAB=0
++	sb	a0, 3(t1)
++
++	# Run test for around 60s
++	call	rtc_get
++	li	t0, 30
++	slli	t0, t0, 30 # Approx. 10e9 ns
++	add	t0, t0, a0
++0:
++	# Tight loop with memory accesses
++	li	a1, 1000000
++	la	a2, semiargs
++1:
++	ld	a0, 0(a2)
++	sd	a0, 0(a2)
++	addi	a1, a1, -1
++	bnez	a1, 1b
++
++	li	a0, '.'
++	call	send_byte
++	call	rtc_get
++	bltu	a0, t0, 0b
++
++	li	a0, '\n'
++	call	send_byte
++
++	# Exit
++	li	a0, 0
++	lla	a1, semiargs
++	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
++
++	# Semihosting call sequence
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++
++	j	.
++
++rtc_get:
++	# Get current time from the goldfish RTC
++	lui	t3, 0x0101
++	lw	a0, 0(t3)
++	lw	t3, 4(t3)
++	slli	t3, t3, 32
++	add	a0, a0, t3
++	ret
++
++send_byte:
++	# Send a single byte over the serial
++	lui	t3, 0x10000
++	lb	a1, 5(t3)
++	andi	a1, a1, 0x20
++	beqz	a1, send_byte
++	sb	a0, 0(t3)
++	ret
++
++	.balign 4
++trap:
++	lui	t5, 0x0200c
++	ld	t6, -0x8(t5) # MTIME
++	addi	t6, t6, 100
++	lui	t5, 0x02004
++	sd	t6, 0(t5) # MTIMECMP
++	mret
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
 -- 
-Cheers
-
-David / dhildenb
+2.47.3
 
 
