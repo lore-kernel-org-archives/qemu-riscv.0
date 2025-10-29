@@ -4,151 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 040A1CCD1BF
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Oct 2025 05:56:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50556CCD1BF
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Oct 2025 07:18:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vDzA8-00033f-EG; Wed, 29 Oct 2025 01:56:00 -0400
+	id 1vE0RN-0007f6-50; Wed, 29 Oct 2025 03:17:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1vDzA2-0002zu-RY
- for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 01:55:54 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <n.novikov@syntacore.com>)
+ id 1vE0RK-0007eW-4Z; Wed, 29 Oct 2025 03:17:50 -0400
+Received: from m.syntacore.com ([178.249.69.228])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1vDz9t-0004hT-Pm
- for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 01:55:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1761717343;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=1o1n3zkkomerIivcCOpA8hDMEzivep5yr5QizrlN9zw=;
- b=DfnWTnFmHW3Yui00G7r3n1hK/wKw3GzuAeSSr0zUxqh4/q96S2921XMlcdN4iWQ3xfTZ1d
- D8swKfOoSeQtoBYCpwRLcQ/Eb8d2v4ux88aDaImJUh2ztQEAIdig55VdSQWkbHm4wdYR6X
- IwQ1zFAfYGNeqrqF1+TvTBhZ2ujJU8g=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-658-HqQmab3gP7Oj0gAd1YAoTg-1; Wed, 29 Oct 2025 01:55:42 -0400
-X-MC-Unique: HqQmab3gP7Oj0gAd1YAoTg-1
-X-Mimecast-MFC-AGG-ID: HqQmab3gP7Oj0gAd1YAoTg_1761717341
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-b6d580e3fc3so264244566b.1
- for <qemu-riscv@nongnu.org>; Tue, 28 Oct 2025 22:55:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761717341; x=1762322141;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1o1n3zkkomerIivcCOpA8hDMEzivep5yr5QizrlN9zw=;
- b=YnBblKYy+SJvFrzFd/2WgwwrICA7vESKdjqxfzKJhndFBAFbENblY/EXqhfZi/zJaq
- gZ/lB8ezqM//5MhcCjp4zU6f/J0NGPOs7OzD952gUHsG7hpJVFFS4nc1oWKdpdtlITcZ
- TdOpSWtOeW2OcBnOR+hYZwQ3+cfcgtpsmoor63kKApyB5FM6vn41ZT81zZVCLjja5fjr
- vNYfqLO+iiCfArHNr/byQD2Ca7UluhfaZ+03Lyt/nnLTiHL1V01T/Wufc8kigcyXxVbp
- VWM/liI2NSRJHqekP2GpgAYGIzynsJgPnwLczl3OjJwAV2MNySCSoa2QsMIaRF1cPe8F
- LrhA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDQKXYkx72l5udlA8+JiUHTgewIHoB/c0wiOJ3mmd1YAm0rShZIIVZ3gOr6f3ZzvJJXbwdvCY4IoXR@nongnu.org
-X-Gm-Message-State: AOJu0Yx2EvV7kEZE8H3Jn9aasCIRCTgYhUAD2HNqk3YgjxidcbckeN+G
- QZXAWnpey5azpb9nm6phvW2H/c3SY++Ua+5B9TY9rgQV9aRqhMblKA/l4XgEUSOgMbrAAF8bCgZ
- H142zRqzV7MopQYXy0QcBoktDR58iEYGkewJVYYghWVpFwnpd5LX8oVWb
-X-Gm-Gg: ASbGncswilxCy5G8PB6lSE4z79ujzHTbsH+KE4Qv49mXUZEB7jHxwTmtuNUwp1EszWP
- Meg6Nuz0O/OJjerlUoMXGTgtjJvWcU+YBO9t81eW+TihuDLo7UBVBxsIUo7uJM8+kKYaoR5HdyJ
- ACXxI4PcJJ4uDHXuSd628Z5NiAXQzL8FtSjRJmOlAq+79N4uqhc1BnxmHJgrsFq7/+PSn4bm5h1
- JMo644wdbI0Sdy5ib8uuTdYhYBvusXi5Xw4Stvplpi0HyGjaNi4hJ7Qkd2erbyojk7aJRd6bkWf
- E6F09xUUtPfAs0Q/8H2YWpFSzsnX5LoVsqcVDoP0bIwrOVAsvwFHBzY/Bz6dfB0TfO06Lrs=
-X-Received: by 2002:a17:907:3d0d:b0:b3e:6091:2c7d with SMTP id
- a640c23a62f3a-b703d3ccd97mr179648466b.27.1761717340896; 
- Tue, 28 Oct 2025 22:55:40 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGiPU+C6AuaDOTUjd8ldoDv6qA4GnjKQUW+hfwEDTJEc1Rp6aVJFGS7iqPK8vF1ViI3lCG0PQ==
-X-Received: by 2002:a17:907:3d0d:b0:b3e:6091:2c7d with SMTP id
- a640c23a62f3a-b703d3ccd97mr179645566b.27.1761717340513; 
- Tue, 28 Oct 2025 22:55:40 -0700 (PDT)
-Received: from [192.168.0.7] ([47.64.112.33]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b6d85309074sm1307010066b.2.2025.10.28.22.55.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Oct 2025 22:55:40 -0700 (PDT)
-Message-ID: <32efa600-0faf-481e-a98e-31a83d298b52@redhat.com>
-Date: Wed, 29 Oct 2025 06:55:38 +0100
+ (Exim 4.90_1) (envelope-from <n.novikov@syntacore.com>)
+ id 1vE0RG-0005wE-Kc; Wed, 29 Oct 2025 03:17:49 -0400
+Received: from MRN-SC-KSMG-01.corp.syntacore.com (localhost [127.0.0.1])
+ by m.syntacore.com (Postfix) with ESMTP id 809D71A0005;
+ Wed, 29 Oct 2025 07:17:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 m.syntacore.com 809D71A0005
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com; s=m;
+ t=1761722264; bh=YJGVliqenItPfXmFgXw7zMsjaTNeX8YAjNRruO4xHo8=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=GpbKQA832Ulf7lVcdKbhw4ithuJUaqzoWJBhkkrU6nu8t7K0JT5pbuRfMxpi88/gF
+ uN+K+H2wSgLU0wtjNfHKyKESyYfJx173JsKkUwwFgqn6OLq2KHg7tbqcWgui5ak28b
+ UGVVZgIbs6qZkjw+PiahKXTXO92pbt5yocx+wRnbhcd99KjA2/qQTbr2MhtYLBS0xC
+ ieNKhFkEz6XIc8BdWJx0o6116wm1Mjj/eF+DhFTSEb+F9qh6c8qdSRy0THFWLX3XWJ
+ gRC1Y1vvih9ISFWoXpU8fw31kkOvSuHIe15ghKTS7wEz+j8xfHq0eI/7LvxT6glI0b
+ q0YkHuYQxCyvw==
+Received: from S-SC-EXCH-01.corp.syntacore.com (exchange.syntacore.com
+ [10.76.202.20])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by m.syntacore.com (Postfix) with ESMTPS;
+ Wed, 29 Oct 2025 07:17:43 +0000 (UTC)
+Received: from mail.syntacore.com (172.17.58.29) by
+ S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Wed, 29 Oct 2025 10:17:38 +0300
+From: Nikita Novikov <n.novikov@syntacore.com>
+To: <qemu-devel@nongnu.org>
+CC: Nikita Novikov <n.novikov@syntacore.com>, <qemu-riscv@nongnu.org>, Palmer
+ Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 2/2] hw/intc/riscv_aplic: Factor out source_active() and
+ remove duplicate checks
+Date: Wed, 29 Oct 2025 10:17:13 +0300
+Message-ID: <20251029-n-novikov-aplic_aia_ro-v1-2-39fec74c918a@syntacore.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251029-n-novikov-aplic_aia_ro-v1-0-39fec74c918a@syntacore.com>
+References: <20251029-n-novikov-aplic_aia_ro-v1-0-39fec74c918a@syntacore.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 16/25] hw/s390x: Use memory_region_get_address()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-block@nongnu.org,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
- Matthew Rosato <mjrosato@linux.ibm.com>, Eric Farman <farman@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>
-References: <20251028181300.41475-1-philmd@linaro.org>
- <20251028181300.41475-17-philmd@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20251028181300.41475-17-philmd@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 0KhFclkUcv7sCpSslva_zW1ATGjuRKeyDyWMmLEiAks_1761717341
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1761722114; l=2968;
+ i=n.novikov@syntacore.com; s=20251028; h=from:subject:message-id;
+ bh=jNhz21qMMPjj9BorlQDIHcDoXk3KtnEbQex2fn3RXlk=;
+ b=4cXq5RIAnpdxZtvwid/Hm78ZHjzMAMBAMnfssdYmtk0F0q9i1Q6qgNaZ3TbnUTMK+c4P7oV0R
+ GMg0ZQk0j42AChM0AegfUojXO4ItIRrFH32JhwJs5tU74afWjWVgcTQ
+X-Developer-Key: i=n.novikov@syntacore.com; a=ed25519;
+ pk=b3kqL1EmXxsQV/ZvSbT5Us5pjaKldmMgJuniTm3uLSM=
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+X-Originating-IP: [172.17.58.29]
+X-ClientProxiedBy: S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) To
+ S-SC-EXCH-01.corp.syntacore.com (10.76.202.20)
+X-KSMG-AntiPhishing: not scanned, disabled by settings
+X-KSMG-AntiSpam-Interceptor-Info: not scanned
+X-KSMG-AntiSpam-Status: not scanned, disabled by settings
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.1.1.8310,
+ bases: 2025/10/29 02:43:00 #27799423
+X-KSMG-AntiVirus-Status: NotDetected, skipped
+X-KSMG-LinksScanning: NotDetected
+X-KSMG-Message-Action: skipped
+X-KSMG-Rule-ID: 5
+Received-SPF: pass client-ip=178.249.69.228;
+ envelope-from=n.novikov@syntacore.com; helo=m.syntacore.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -164,37 +101,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 28/10/2025 19.12, Philippe Mathieu-Daudé wrote:
-> MemoryRegion::addr is private data of MemoryRegion, use
-> memory_region_get_address() to access it.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   hw/s390x/s390-pci-inst.c | 21 ++++++++++++++-------
->   1 file changed, 14 insertions(+), 7 deletions(-)
-> 
-> diff --git a/hw/s390x/s390-pci-inst.c b/hw/s390x/s390-pci-inst.c
-> index 5841dfc4fec..d4adf782ca1 100644
-> --- a/hw/s390x/s390-pci-inst.c
-> +++ b/hw/s390x/s390-pci-inst.c
-> @@ -394,11 +394,14 @@ static MemoryRegion *s390_get_subregion(MemoryRegion *mr, uint64_t offset,
->   {
->       MemoryRegion *subregion;
->       uint64_t subregion_size;
-> +    hwaddr subregion_addr;
->   
->       QTAILQ_FOREACH(subregion, &mr->subregions, subregions_link) {
->           subregion_size = memory_region_size(subregion);
-> -        if ((offset >= subregion->addr) &&
-> -            (offset + len) <= (subregion->addr + subregion_size)) {
-> +        subregion_addr = memory_region_get_address(subregion);
-> +
-> +        if ((offset >= subregion_addr) &&
-> +            (offset + len) <= (subregion_addr + subregion_size)) {
+Refactor the APLIC code to consolidate repeated conditions checking
+whether an interrupt source is valid, delegated, or inactive.
 
-While you're at it, you could also drop the superfluous parentheses here.
+Signed-off-by: Nikita Novikov <n.novikov@syntacore.com>
+---
+ hw/intc/riscv_aplic.c | 44 +++++++-------------------------------------
+ 1 file changed, 7 insertions(+), 37 deletions(-)
 
-Anyway:
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index 8c3b16074cd3ca1bc3004cfaaa13f34b8860bd48..ccfbc9b4656f3e2a69eb5bcd1cee9e5762020351 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -216,22 +216,13 @@ static inline bool riscv_aplic_source_active(RISCVAPLICState *aplic,
+ static bool riscv_aplic_irq_rectified_val(RISCVAPLICState *aplic,
+                                           uint32_t irq)
+ {
+-    uint32_t sourcecfg, sm, raw_input, irq_inverted;
++    uint32_t sm, raw_input, irq_inverted;
+ 
+-    if (!irq || aplic->num_irqs <= irq) {
+-        return false;
+-    }
+-
+-    sourcecfg = aplic->sourcecfg[irq];
+-    if (sourcecfg & APLIC_SOURCECFG_D) {
+-        return false;
+-    }
+-
+-    sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
+-    if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
++    if (!riscv_aplic_source_active(aplic, irq)) {
+         return false;
+     }
+ 
++    sm = aplic->sourcecfg[irq] & APLIC_SOURCECFG_SM_MASK;
+     raw_input = (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
+     irq_inverted = (sm == APLIC_SOURCECFG_SM_LEVEL_LOW ||
+                     sm == APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
+@@ -284,22 +275,13 @@ static void riscv_aplic_set_pending_raw(RISCVAPLICState *aplic,
+ static void riscv_aplic_set_pending(RISCVAPLICState *aplic,
+                                     uint32_t irq, bool pending)
+ {
+-    uint32_t sourcecfg, sm;
++    uint32_t sm;
+ 
+-    if ((irq <= 0) || (aplic->num_irqs <= irq)) {
+-        return;
+-    }
+-
+-    sourcecfg = aplic->sourcecfg[irq];
+-    if (sourcecfg & APLIC_SOURCECFG_D) {
+-        return;
+-    }
+-
+-    sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
+-    if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
++    if (!riscv_aplic_source_active(aplic, irq)) {
+         return;
+     }
+ 
++    sm = aplic->sourcecfg[irq] & APLIC_SOURCECFG_SM_MASK;
+     if ((sm == APLIC_SOURCECFG_SM_LEVEL_HIGH) ||
+         (sm == APLIC_SOURCECFG_SM_LEVEL_LOW)) {
+         if (!aplic->msimode) {
+@@ -370,19 +352,7 @@ static void riscv_aplic_set_enabled_raw(RISCVAPLICState *aplic,
+ static void riscv_aplic_set_enabled(RISCVAPLICState *aplic,
+                                     uint32_t irq, bool enabled)
+ {
+-    uint32_t sourcecfg, sm;
+-
+-    if ((irq <= 0) || (aplic->num_irqs <= irq)) {
+-        return;
+-    }
+-
+-    sourcecfg = aplic->sourcecfg[irq];
+-    if (sourcecfg & APLIC_SOURCECFG_D) {
+-        return;
+-    }
+-
+-    sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
+-    if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
++    if (!riscv_aplic_source_active(aplic, irq)) {
+         return;
+     }
+ 
+
+-- 
+2.51.0
 
 
