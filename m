@@ -4,94 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21CF9CCF9EE
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Oct 2025 08:26:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5DA0CCF9EE
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Oct 2025 08:27:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vE1Vh-00064e-Lo; Wed, 29 Oct 2025 04:26:25 -0400
+	id 1vE1WE-0006k8-74; Wed, 29 Oct 2025 04:26:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1vE1Ve-00063t-US
- for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 04:26:22 -0400
+ (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1vE1WA-0006ft-0K
+ for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 04:26:54 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1vE1VT-0006su-Bu
- for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 04:26:21 -0400
+ (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1vE1W3-0006z3-C1
+ for qemu-riscv@nongnu.org; Wed, 29 Oct 2025 04:26:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1761726367;
+ s=mimecast20190719; t=1761726406;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=PAPYmqBubSY8EDI1rv1OSmTzgJkWTGZxwkAIXnpy4/k=;
- b=DepN2QLhblKxjF5TaU+WYFTdepSB6wHcWkrg0xJ6J0p3rzO0XJzhSd7FGlE0OeiI4z58sj
- tffVTTYNBr+8BVe1Pv/L6Cq9O7PjPgBPE1vYqAhJTgtWhW2yDX+BoddZrZnzZiMhU6x8eo
- Cx2L35ROULMTyEB8hCm7c3XaaYue7z4=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=gx4hdZ3X7ACRThKv1PvvG4q4eU4MJfYx93KBkvS4UvM=;
+ b=UdEHkt+gJwScBSexrM44Eug4fG4lRfvYovvPa4fyFZUPcvkcGmuVghezcNBVP3U9A0XMWk
+ jbat8roVfBzE0U/LWO+crPNQuQ1bp7r8NenAd/wCxR7vW5RYWrQ/DpXX7xnhfpYM+k3MJi
+ DMV5ilWTItOEIZqA3idW1h68gSHHeFw=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-669-KGYzneezOUujIRNMTwlaIg-1; Wed, 29 Oct 2025 04:26:05 -0400
-X-MC-Unique: KGYzneezOUujIRNMTwlaIg-1
-X-Mimecast-MFC-AGG-ID: KGYzneezOUujIRNMTwlaIg_1761726365
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-477171bbf51so7023875e9.3
- for <qemu-riscv@nongnu.org>; Wed, 29 Oct 2025 01:26:05 -0700 (PDT)
+ us-mta-445-tk1mxhuxOISYia4kOgSXkw-1; Wed, 29 Oct 2025 04:26:44 -0400
+X-MC-Unique: tk1mxhuxOISYia4kOgSXkw-1
+X-Mimecast-MFC-AGG-ID: tk1mxhuxOISYia4kOgSXkw_1761726403
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-477212937eeso1560475e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 29 Oct 2025 01:26:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761726364; x=1762331164;
+ d=1e100.net; s=20230601; t=1761726403; x=1762331203;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PAPYmqBubSY8EDI1rv1OSmTzgJkWTGZxwkAIXnpy4/k=;
- b=CuH7xR4jnqPo63DaYgav53C6XrcilAzkhgrpRiNBZuhZl84AI5phP3AON1q792HBLl
- yp1uwYFK01QfGYqZnO9Jmpo6ORhh5yR5ioDYET50qYurzx1flHlppdiHLhVgUc4Vf7jx
- pLgSX1WT4ofZfwiC97rHwVLnFBHvdoA/UhFgqrDXPGRbjzd3oNWoOnzxMd2DVbm9M0FY
- o5EZmgqu9rrTpToFHviHFeBEGh97JA0xq3oxPpBlumnI5CgnBSzhoMqmuFiCWlxDhPGA
- Ttsg2dNFqBY5wMZdnsJCvSUwDc+PuzWsrzSsugbtQNb1DfNz5uP2zTWWV+ya9dahLx7j
- mCcg==
+ bh=gx4hdZ3X7ACRThKv1PvvG4q4eU4MJfYx93KBkvS4UvM=;
+ b=OnRexIn/i+Rmrx1aWNs2J9rPKl2uU33X+/tk7w9mo6y9oPlqND0V4s1wJmEngd6aK8
+ oDJ4fSF2ivU0bAOuYX2zvNtNmDCTjaJOlt2YRe6Mwh6pIKI2eZjX0o8PM+suq7ftZNgx
+ KgNJyhM8w5LxrNcFWiZ2tmOqc2IYk0mI6vsjxVQsLGfDPL3qd0TkP1cAybnI5BKvyz5y
+ 4Cv4HKEKglxsCqJ6VHq6LaMUdVSdA+0PuY+ypldWPxBS1gSEHTs82Id7MolY07OhsXc5
+ yUhmAFD//9DCegtp91F2CMoLm8DvXmiB8HZX4gON+022eQbMjPFDCW0AaPVFhEzEutV9
+ wqMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDfvuf3AFQWkHs6p4hGKTPXiBLthiMPzviRtijqKB7VDS2Wz0Vj2Sqm66Xn1M9O+zmhCSYFmZSpL7U@nongnu.org
-X-Gm-Message-State: AOJu0Yy3vFmHYu03xwNOv4IhBAnHQ+Pc/1cXdu6YvkpXSVDO1fXTodCX
- O1ZmhmPEhIyf69KiMLnyXZhvlXT+hlmbtJPZqyfZPnd6glXYGOcsyOqXNptqlfGhQagri557qQ/
- ww39MeltkgE7o3azWOZkckDyJTha+MRcc0JEqrRwCeN1/0PlcT/eAKVCC
-X-Gm-Gg: ASbGncsvj+F/kfHrIpjl1dlGwov84fD4ch6yaDUKy0yzvyye1nJI6zWRUDKCSHc+xDj
- J/vStG49F8TPMt8imYWirT4C/xPo2xqcL9D3kchoDOL0LJgSKib73zy+PW3kOH13ut4L7M1Mms2
- ZoRJXMoBvs73r+eoa6FQ3f4nvwDZQNk8WleFu5Au0QWQz2j0Ca+mpXsQ9aB1oR2LXU+KCcjjb3G
- zK8P/02mcROFgQuOlC1ohmSkSMaiii/E4CIXYATC9RbCecJxG3OcMdok4X/Pmw9kHBmJP84nvds
- 7gO2HI+Rdg7rfLMAX61RAJAbfrttIsdV4RdmyreWj5pQRoqTFRxONMbdlSY20mapAZhLBHOnrWw
- 93o1Z+9vD0zMq+RG78FJQoA==
-X-Received: by 2002:a05:600c:608b:b0:475:de12:d3b2 with SMTP id
- 5b1f17b1804b1-4771e1f1dc2mr19573095e9.36.1761726364510; 
- Wed, 29 Oct 2025 01:26:04 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEspPy4uKdak0A5vp1X87R4s/r3pGY64tzl0XbiRUbhlUfPQ2uMd0heS9GT5ydO8pjA63gjTg==
-X-Received: by 2002:a05:600c:608b:b0:475:de12:d3b2 with SMTP id
- 5b1f17b1804b1-4771e1f1dc2mr19572825e9.36.1761726364060; 
- Wed, 29 Oct 2025 01:26:04 -0700 (PDT)
+ AJvYcCUjhplFD7dJFOrvR50To8ZslfF4WfhoaTAt1/uiWPmiCam5ABOfwkXn8rJdMX9Wdl3oRec72gUhhL96@nongnu.org
+X-Gm-Message-State: AOJu0Yxwc3LpL9+B8EXGbOA6qMEADBwtu4BrmHqvVtSF+DDrumYeNelX
+ V9+ekQVAPmIlN0boXxzJrg+d0xQnUv0xkajahDM2tHTMBJZX5mHVblIDUds7UQrSyQZXK/pWxbQ
+ 7LBpPNY8qNFvC6W9SafkTgm9hAdodSWqQxe0oOa/RNfXudBmR6ySkLA2o
+X-Gm-Gg: ASbGncvJDkWbXlgn8dku0t7TTLOrnrvA8iwq+Y5/uY3+VhCu7NdVv38/VquTkWugPIN
+ HG9erio5c6Tli27vuUdQx8RQ0SWe12hAexNgVc868ZMh5KF4VpyJp3ws1To0sYm4cduGA2HmUGr
+ q5f6uOeDgTkuARyffETDNJGjz6SaRZmAbPkIVmdWLig2Zk7QyZoq5TpuM8QWWM9OGMy8Dvpt5JH
+ e4I4LYT9hy6c/9QF/hNLPvo+93W4eSVDyuq9e29vYpNl98DIq0bDEVnCOz9EcjR/NqrEKyMJQP3
+ o1tegQlilu4cz4K1MOmNjeDZK/NRYMc5X/TIv7OjrtkwPxm0mQ0FOCcZfNXB1Qx8uzZ1TeLjOq5
+ qEPGvyshxm+hLNdMJ3G1E3Q==
+X-Received: by 2002:a05:600c:4ecc:b0:475:dd59:d8ba with SMTP id
+ 5b1f17b1804b1-4771e38c191mr16793025e9.3.1761726403460; 
+ Wed, 29 Oct 2025 01:26:43 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG3HkP9kBt8XjjVkcnXWZ52Jir5YiSNn63PKIYv812PQ6SbfvactO/D7dbT0oecP+VL7J2MKQ==
+X-Received: by 2002:a05:600c:4ecc:b0:475:dd59:d8ba with SMTP id
+ 5b1f17b1804b1-4771e38c191mr16792865e9.3.1761726403066; 
+ Wed, 29 Oct 2025 01:26:43 -0700 (PDT)
 Received: from [10.32.64.156] (nat-pool-muc-t.redhat.com. [149.14.88.26])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4771e39379dsm35077095e9.6.2025.10.29.01.26.02
+ 5b1f17b1804b1-47718fc0335sm39451235e9.2.2025.10.29.01.26.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Oct 2025 01:26:03 -0700 (PDT)
-Message-ID: <3e379ec0-e472-4ba7-b9ef-cb32ef618e07@redhat.com>
-Date: Wed, 29 Oct 2025 09:26:02 +0100
+ Wed, 29 Oct 2025 01:26:42 -0700 (PDT)
+Message-ID: <68b506ff-e82a-49ba-a2fd-6a24fac7d154@redhat.com>
+Date: Wed, 29 Oct 2025 09:26:41 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 09/25] hw/s390x: Use memory_region_size()
+Subject: Re: [PATCH v3 11/25] system/memory: Introduce
+ memory_region_get_address()
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, qemu-ppc@nongnu.org,
  qemu-riscv@nongnu.org, qemu-block@nongnu.org,
  =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
  qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
- Matthew Rosato <mjrosato@linux.ibm.com>, Eric Farman <farman@linux.ibm.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>
+ Peter Maydell <peter.maydell@linaro.org>, Paolo Bonzini
+ <pbonzini@redhat.com>, Peter Xu <peterx@redhat.com>
 References: <20251028181300.41475-1-philmd@linaro.org>
- <20251028181300.41475-10-philmd@linaro.org>
+ <20251028181300.41475-12-philmd@linaro.org>
 From: David Hildenbrand <david@redhat.com>
 Autocrypt: addr=david@redhat.com; keydata=
  xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
@@ -137,9 +134,9 @@ Autocrypt: addr=david@redhat.com; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20251028181300.41475-10-philmd@linaro.org>
+In-Reply-To: <20251028181300.41475-12-philmd@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: jdMfG5Q7MmBn34rZjH_s-8iFWRdktfli_oPcLvoqOv4_1761726365
+X-Mimecast-MFC-PROC-ID: bETZfpqToIoA14T2LKv5uB1ezwwtj1S_9jC_GKLHNpM_1761726403
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -170,27 +167,13 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 28.10.25 19:12, Philippe Mathieu-Daudé wrote:
-> MemoryRegion::size is private data of MemoryRegion,
-> use the proper memory_region_size() getter to get it.
+> MemoryRegion::addr is private data of MemoryRegion.
+> Introduce memory_region_get_address() to get it,
+> similar to memory_region_set_address() to set it.
 > 
+> Suggested-by: Peter Maydell <peter.maydell@linaro.org>
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   hw/s390x/s390-pci-inst.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/hw/s390x/s390-pci-inst.c b/hw/s390x/s390-pci-inst.c
-> index a3bb5aa2216..5841dfc4fec 100644
-> --- a/hw/s390x/s390-pci-inst.c
-> +++ b/hw/s390x/s390-pci-inst.c
-> @@ -396,7 +396,7 @@ static MemoryRegion *s390_get_subregion(MemoryRegion *mr, uint64_t offset,
->       uint64_t subregion_size;
->   
->       QTAILQ_FOREACH(subregion, &mr->subregions, subregions_link) {
-> -        subregion_size = int128_get64(subregion->size);
-> +        subregion_size = memory_region_size(subregion);
->           if ((offset >= subregion->addr) &&
->               (offset + len) <= (subregion->addr + subregion_size)) {
->               mr = subregion;
 
 Reviewed-by: David Hildenbrand <david@redhat.com>
 
