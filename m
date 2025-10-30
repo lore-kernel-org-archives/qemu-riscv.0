@@ -4,103 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDD5FCCF9F0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Oct 2025 08:00:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3838CCF9E3
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Oct 2025 11:44:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vENZC-0003t7-MG; Thu, 30 Oct 2025 03:59:30 -0400
+	id 1vER4k-0005Bg-7D; Thu, 30 Oct 2025 07:44:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
- id 1vENZ7-0003pW-BQ; Thu, 30 Oct 2025 03:59:25 -0400
-Received: from fout-a7-smtp.messagingengine.com ([103.168.172.150])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
- id 1vENZ5-0000MP-0u; Thu, 30 Oct 2025 03:59:25 -0400
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
- by mailfout.phl.internal (Postfix) with ESMTP id 4418DEC00FF;
- Thu, 30 Oct 2025 03:59:19 -0400 (EDT)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-04.internal (MEProxy); Thu, 30 Oct 2025 03:59:19 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irrelevant.dk;
- h=cc:cc:content-type:content-type:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=fm2; t=1761811159; x=
- 1761897559; bh=rgBdBTUlayjkuNUuoGOCZg+/F5LhGbCJmCRiUCgKzRc=; b=Y
- iiT0yxpFSGgu67MNslZ3jb5vWkAgvpIZ942QRZ19QZoruaUQ/INOTcjXS71LD1Xp
- 23w8/kr3isp5+U+0rHNi54iimkz25yhluH12MdyPFili6ve3ELu3JUYkdywAoGt5
- AzGkhEoJqZKrv802ZFIpANj6FKPzmXhHqgCHH/spJ4RMZiwvXwAUE/GgO2K3h3Le
- tMDAluwNdBgx7VBpEwDMlXjOlSZx+Haghh8QxHoxyL1wAdOKodDkq4uekLySw1ts
- RCOEUh/JQA3l+MFlllA99hPPq7V8LWZUDZX9j8teSkHSA4g9GwAVhY4ReqPKFIEz
- tpBQOtumt6bfZ9mnZudtw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1761811159; x=1761897559; bh=rgBdBTUlayjkuNUuoGOCZg+/F5LhGbCJmCR
- iUCgKzRc=; b=t5Dl1YxoAYTCsxqU21t3Ilj3r443/g/H3aoMMkExD9c3d4FJcz5
- oO3n6UeolbJOemt7WiGtm5fYhAWLX4H1QEZw3SXzkUjs2OyDQbIKlXMV2rSL0du5
- sCM7JMJda0uKWGglZH7e7gFMGllj5FpRYcdtcFaiSiJi4qa+Isi8Wvqf+Yy5x5Xd
- C29Rw7CNJj7tbgl6KC0Ia58FhbC/RnlbtM/JyCAZyz0zmfjJtzVZLGvefq3iVsUO
- TwolylFsk2lfBZJ/jXD1qMGoUYpATEOPjU/ToxEokIPtUxTyqWujaqbe+a97SP8h
- YruJryulDbub1tfDNawV1FpKWQ1+crzODSA==
-X-ME-Sender: <xms:1hoDaUQTOot0NDsDYkBYOgWGhNC61BCiJrviw8wb2pI0RkbZaQfQCw>
- <xme:1hoDadoeniZ5aN4kKRKn-d6Wy13wyMFsNQ89FjYzfPeJpmQFs_TSbmv_Pj8WhS-7P
- qIPqtyjGq9qKpD-mceJ6wQMBnBnDQrNmXZcn-mvj-N577R3jrtXL0s>
-X-ME-Received: <xmr:1hoDae0Zzs2YrpXAQnb4ODWU7lwL5conqbE67TSDmq51-Ep5fKJUXwNmivZqh6Eaxs30QSAiMGBDJOR5IveeLnqhC6GT8ynt5MKRQOzF5hCi>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdduieeitdejucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
- rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
- gurhepfffhvfevuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepmfhlrghushcu
- lfgvnhhsvghnuceoihhtshesihhrrhgvlhgvvhgrnhhtrdgukheqnecuggftrfgrthhtvg
- hrnhepjefgjeefffdvuefhieefhffggfeuleehudekveejvedtuddugeeigeetffffjeev
- necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepihhtsh
- esihhrrhgvlhgvvhgrnhhtrdgukhdpnhgspghrtghpthhtohepuddvpdhmohguvgepshhm
- thhpohhuthdprhgtphhtthhopehphhhilhhmugeslhhinhgrrhhordhorhhgpdhrtghpth
- htohepqhgvmhhuqdguvghvvghlsehnohhnghhnuhdrohhrghdprhgtphhtthhopehmrghr
- khdrtggrvhgvrgihlhgrnhgusehnuhhtrghnihigrdgtohhmpdhrtghpthhtohepqhgvmh
- huqdhpphgtsehnohhnghhnuhdrohhrghdprhgtphhtthhopehqvghmuhdqrhhishgtvhes
- nhhonhhgnhhurdhorhhgpdhrtghpthhtohepqhgvmhhuqdgslhhotghksehnohhnghhnuh
- drohhrghdprhgtphhtthhopehmrghrtggrnhgurhgvrdhluhhrvggruhesrhgvughhrght
- rdgtohhmpdhrtghpthhtohepqhgvmhhuqdgrrhhmsehnohhnghhnuhdrohhrghdprhgtph
- htthhopehqvghmuhdqshefledtgiesnhhonhhgnhhurdhorhhg
-X-ME-Proxy: <xmx:1hoDac5iufXrvViM64FuVenRsQ_zrobl9Kb9aeBxm88fWQL-cZgHsg>
- <xmx:1hoDaSRf7bCv2UTPgUwOEyhCgkMtBZBFaQIAjnHX6mbluTpkkWYSfA>
- <xmx:1hoDaZUXarj3hjhi54xa_zOK5ivUpta7bEHNlKCumkLr5-olPZZUDQ>
- <xmx:1hoDafF-QhBwmKMSGcjY3XyLmCbGz2iMPIc46qeLmvQn5bYhlp1u8g>
- <xmx:1xoDaTa8GeqW93MmUfFADEFlizx-Bl0xGLIScIGy8W-Fp1ftTpNjdWEd>
-Feedback-ID: idc91472f:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 30 Oct 2025 03:59:18 -0400 (EDT)
-Date: Thu, 30 Oct 2025 08:59:17 +0100
-From: Klaus Jensen <its@irrelevant.dk>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Mark Cave-Ayland <mark.caveayland@nutanix.com>,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-block@nongnu.org,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
- qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
- Keith Busch <kbusch@kernel.org>, Jesper Devantier <foss@defmacro.it>
-Subject: Re: [PATCH v3 08/25] hw/nvme/ctrl: Use memory_region_size()
-Message-ID: <aQMa1bECP5oZQMKr@AALNPWKJENSEN.aal.scsc.local>
-References: <20251028181300.41475-1-philmd@linaro.org>
- <20251028181300.41475-9-philmd@linaro.org>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vER4e-0005B0-UB
+ for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 07:44:14 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vER4U-00089a-9T
+ for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 07:44:12 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-7a2754a7f6aso1368446b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 30 Oct 2025 04:43:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1761824634; x=1762429434; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3ZtBwzTFoA28DOTGj1siDb0KDV+QHNz5oQKilWDAhNo=;
+ b=GvqUwJOgCb82LbM7jAYDj6weXF8uN8bqPEb68VKoVH4FXwsGNzmyIOaXf5X4+PGZty
+ rv2kMjJeDCo79voCo6sTJAkbRW4DQbBjpwrg27lLu5+b4XLNRpag3e7sZ/qL19+6v2Yp
+ /lthpVa7YGmN+ltoRWJjLWrmkl4d6nHBMmHzvst26+mdxJ/P9RYMOLmOCzK7UMT2g/fF
+ rNOH3rDZC/xCtuGxM2I7ETWleviztNMRqOhXD5E0wVJRCFLiuHgjDBey0y1N0PpfFRtE
+ AltKttzUtaqiLInoYQLE8Jv0cM3b3S7B+8R1K4/gZ8p6ctQiW0kd91+0yM2yswxzGhpV
+ 0/GQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761824634; x=1762429434;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3ZtBwzTFoA28DOTGj1siDb0KDV+QHNz5oQKilWDAhNo=;
+ b=ONU8og+6Jl4JGfAWCdyll2D9PEHv88DMKx7hGzp5bPqkEbjKgpWQ4uhLS5fH4mmwld
+ Xn4g6TpdTnpiP9fO/3qcHacpz2SbEIOVrnVIZGNDJ26MaF3MG1JyQ2ggJbL7W/cKpSr4
+ Bcit5HP0HczKD/cp6fUPCNoaNsauw7By5XpnyeR38YmlWraqF0ogbBC23hYi7KlUOva6
+ ZVCscQX6tkAf7FvHqketTV/lo5BokUZhRDgwXhnVqzr2KjOx+6sQOvHuEVKLrHW04IVH
+ x4yyXwyWNuYiPRf1uoxNi38WfLdCxKvxki2phRghLj2WmRaetFGgfLkzs9rB7ZbUlKYh
+ kY7Q==
+X-Gm-Message-State: AOJu0YxeKUu7vUiLFDK6dSmaaGgf1e7Vf9i4z9QvCj5mKyI5BedTtmgb
+ IZcVa0T57cosAo2Na9kX5aMl+QMWWuLQ4VJHPFkHIK7nQ+FN2yyOboitN+YM+srLTrA=
+X-Gm-Gg: ASbGncshpbgKepUIwR2cr8zL5Akhc7z0PdKnI3cjxB9z2eoVLJLiSkdT3KgMwCyStPG
+ GXJGW58731IxLSrD9MKNBv4pbhUMfUDRS1Zq0beWdUoNZqM2R8bNR6B8NJ8umq1pFjMW5BaI6Cy
+ rDs3iRgCJboHAteYiTQ8VRy7guzma9jsMPnB3ArIdwzMQq3yQcq/UR5hnD//QLkMViEEBhp7fox
+ YpD1BmVwpvFYvHGqVU+DH3oT2UcCVKHhzhOpiIS4F1Gu0MXzlK3BEE1iv87EyfngOmmnEBImmjB
+ bNquZ49gX4iJj9xLb4V62xdFM1x9G4JwblYlhxglDTAt6pLceehaQDhymRA82RIjNNzgbVissy6
+ C+kbDJKEpGCdU6ZgwTTuKhZumB6Hw49axZlYnrdVcF3OO0y5WZaAC7ewp1EGjj9/OeZROQ+FpSf
+ R2R9hToPGbLivQU5lk4B1zvb6/RjZOPmqDbTEFJOLmKHytmchWWPM=
+X-Google-Smtp-Source: AGHT+IFP2Az6vABUtX5OKNubvfdNC8xUjeLeelZONf/IaEeLmfb6XjDcBzkK4DNjc/LJQZ94xVwdxg==
+X-Received: by 2002:a05:6300:218e:b0:341:a688:90b0 with SMTP id
+ adf61e73a8af0-3465798aae2mr8638743637.1.1761824633712; 
+ Thu, 30 Oct 2025 04:43:53 -0700 (PDT)
+Received: from ?IPV6:2804:7f0:bcc2:d3c:248f:9caf:b5f3:fc32?
+ ([2804:7f0:bcc2:d3c:248f:9caf:b5f3:fc32])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b712791576dsm16478751a12.12.2025.10.30.04.43.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Oct 2025 04:43:52 -0700 (PDT)
+Message-ID: <116837b3-4dbf-4d1c-81cd-c492f4f14f0f@ventanamicro.com>
+Date: Thu, 30 Oct 2025 08:43:48 -0300
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="co6+pYaLvIJ9a2Ks"
-Content-Disposition: inline
-In-Reply-To: <20251028181300.41475-9-philmd@linaro.org>
-Received-SPF: pass client-ip=103.168.172.150; envelope-from=its@irrelevant.dk;
- helo=fout-a7-smtp.messagingengine.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] target/riscv: add NEORV32 RV32 CPU type and vendor
+ CSR hooks
+To: Michael Levit <michael@videogpu.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, philmd@linaro.org, pbonzini@redhat.com,
+ zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, smishash@gmail.com
+References: <20251027100938.11822-1-michael@videogpu.com>
+ <20251027100938.11822-2-michael@videogpu.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <20251027100938.11822-2-michael@videogpu.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,34 +106,259 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi,
 
---co6+pYaLvIJ9a2Ks
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This patch, and other patches from this series, has code style issues
+(indentation with TABs, missing whitespaces, etc). I advise running the
+scripts/checkpatch.pl script with your patch files to check for style
+problems. E.g.:
 
-On Oct 28 19:12, Philippe Mathieu-Daud=C3=A9 wrote:
-> MemoryRegion::size is private data of MemoryRegion,
-> use the proper memory_region_size() getter to get it.
->=20
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+----
+/scripts/checkpatch.pl 0001-target-riscv-add-NEORV32-RV32-CPU-type-and-vendor-CS.patch
+ERROR: trailing whitespace
+#44: FILE: target/riscv/cpu.c:248:
++    ISA_EXT_DATA_ENTRY(xneorv32xisa,PRIV_VERSION_1_10_0,ext_xneorv32xisa), $
 
-Reviewed-by: Klaus Jensen <k.jensen@samsung.com>
+ERROR: space required after that ',' (ctx:VxV)
+#44: FILE: target/riscv/cpu.c:248:
++    ISA_EXT_DATA_ENTRY(xneorv32xisa,PRIV_VERSION_1_10_0,ext_xneorv32xisa),
+                                     ^
 
---co6+pYaLvIJ9a2Ks
-Content-Type: application/pgp-signature; name="signature.asc"
+ERROR: space required after that ',' (ctx:VxV)
+#44: FILE: target/riscv/cpu.c:248:
++    ISA_EXT_DATA_ENTRY(xneorv32xisa,PRIV_VERSION_1_10_0,ext_xneorv32xisa),
+                                                         ^
 
------BEGIN PGP SIGNATURE-----
+ERROR: code indent should never use tabs
+#52: FILE: target/riscv/cpu.c:1370:
++^IMULTI_EXT_CFG_BOOL("xneorv32xisa", ext_xneorv32xisa, false),$
 
-iQEzBAABCgAdFiEEUigzqnXi3OaiR2bATeGvMW1PDekFAmkDGtUACgkQTeGvMW1P
-DenRjQf/ZbbBjslUkCM2TBVssTYLG3NiFvDGPEizoepZ1lNaw/TKZEtTFgG49KF3
-TesHPAMz1JQ8CGkn/qbgCzgygQflczoDkyfSzzfv+A6zflWCUEjWifJ+mXK6AmZw
-7nGzfqWbftGNN4RYprILJbfAHyFc5PdBmZNy3ZggSO967CHYJBvqEeQ47/ZlVsgW
-NYBeTCAwGOy3qk46Se6uewUC9iHeNYXHEqvp4GtqIWRnySudysnw+DwlSDPv1Ohc
-+2HNILI1p5D7vvF0on6xWfozY+yfNX+ays4AvtrWmEXYM3Z9ObPfNeTQ/q0KFP/i
-H3KRiJo9RAJY3U6PfWObIjUBd4d/bA==
-=3Qt6
------END PGP SIGNATURE-----
+(...)
+------
 
---co6+pYaLvIJ9a2Ks--
+
+
+On 10/27/25 7:09 AM, Michael Levit wrote:
+> From: Michael <michael@videogpu.com>
+> 
+> Introduce NEORV32 RV32 CPU type under target/riscv, wire NEORV32 vendor ID,
+> and add a vendor CSR (CSR_MXISA) guarded by mvendorid match, plus meson glue.
+> 
+> Signed-off-by: Michael Levit <michael@videogpu.com>
+> 
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 75f4e43408..a39bf853cc 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -57,6 +57,8 @@
+>   #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
+>   #define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
+>   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+> +#define TYPE_RISCV_CPU_NEORV32          RISCV_CPU_TYPE_NAME("neorv32")
+> +
+
+There's a non-written ordering here - generic CPUs first, vendor CPUs next, host CPU
+always last. If you could add NEORV32 right after CPU_IBEX that would be great.
+
+>   
+>   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 73d4280d7c..7bcf93c66c 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -245,6 +245,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(xtheadmempair, PRIV_VERSION_1_11_0, ext_xtheadmempair),
+>       ISA_EXT_DATA_ENTRY(xtheadsync, PRIV_VERSION_1_11_0, ext_xtheadsync),
+>       ISA_EXT_DATA_ENTRY(xventanacondops, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
+> +    ISA_EXT_DATA_ENTRY(xneorv32xisa,PRIV_VERSION_1_10_0,ext_xneorv32xisa),
+
+We need this array to be sorted like described in the comment above isa_edata_arr[].
+For this case you need to put this new entry before 'xtheadba'.
+
+>   
+>       { },
+>   };
+> @@ -1366,6 +1367,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
+>       MULTI_EXT_CFG_BOOL("xtheadmempair", ext_xtheadmempair, false),
+>       MULTI_EXT_CFG_BOOL("xtheadsync", ext_xtheadsync, false),
+>       MULTI_EXT_CFG_BOOL("xventanacondops", ext_XVentanaCondOps, false),
+> +	MULTI_EXT_CFG_BOOL("xneorv32xisa", ext_xneorv32xisa, false),
+>   
+>       { },
+>   };
+> @@ -3032,6 +3034,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>           .cfg.pmp_regions = 8
+>       ),
+>   
+> +
+>   #if defined(TARGET_RISCV32) || \
+>       (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
+>       DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE32, TYPE_RISCV_DYNAMIC_CPU,
+> @@ -3075,6 +3078,21 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>           .misa_mxl_max = MXL_RV32,
+>           .misa_ext = RVE
+>       ),
+> +	DEFINE_RISCV_CPU(TYPE_RISCV_CPU_NEORV32, TYPE_RISCV_VENDOR_CPU,
+> +		.misa_mxl_max = MXL_RV32,
+> +        .misa_ext = RVI | RVM | RVA | RVC | RVU,
+> +        .priv_spec = PRIV_VERSION_1_10_0,
+> +
+> +        .cfg.max_satp_mode = VM_1_10_MBARE,
+> +        .cfg.ext_zifencei = true,
+> +        .cfg.ext_zicsr = true,
+> +        .cfg.pmp = true,
+> +        .cfg.pmp_regions = 16,
+> +		.cfg.mvendorid = NEORV32_VENDOR_ID,
+> +#ifndef CONFIG_USER_ONLY
+> +        .custom_csrs = neorv32_csr_list
+> +#endif
+> +    ),
+>   #endif
+>   
+>   #if (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 36e7f10037..6a9918a25a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -985,5 +985,8 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
+>   /* In th_csr.c */
+>   extern const RISCVCSR th_csr_list[];
+>   
+> +/* Implemented in neorv32_csr.c */
+> +extern const RISCVCSR neorv32_csr_list[];
+> +
+>   const char *priv_spec_to_str(int priv_version);
+>   #endif /* RISCV_CPU_H */
+> 
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index aa28dc8d7e..9ad38506e4 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -64,5 +64,6 @@ MATERIALISE_EXT_PREDICATE(xtheadmemidx)
+>   MATERIALISE_EXT_PREDICATE(xtheadmempair)
+>   MATERIALISE_EXT_PREDICATE(xtheadsync)
+>   MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
+> +MATERIALISE_EXT_PREDICATE(xneorv32xisa)
+>   
+>   #endif
+> 
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+> index a154ecdc79..b84e1bd287 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -147,6 +147,7 @@ BOOL_FIELD(ext_xtheadmemidx)
+>   BOOL_FIELD(ext_xtheadmempair)
+>   BOOL_FIELD(ext_xtheadsync)
+>   BOOL_FIELD(ext_XVentanaCondOps)
+> +BOOL_FIELD(ext_xneorv32xisa)
+>   
+>   BOOL_FIELD(mmu)
+>   BOOL_FIELD(pmp)
+> 
+> diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
+> index 96b6b9c2cb..66a8f30b81 100644
+> --- a/target/riscv/cpu_vendorid.h
+> +++ b/target/riscv/cpu_vendorid.h
+> @@ -7,4 +7,6 @@
+>   #define VEYRON_V1_MIMPID        0x111
+>   #define VEYRON_V1_MVENDORID     0x61f
+>   
+> +#define NEORV32_VENDOR_ID       0xF0000001
+> +
+>   #endif /*  TARGET_RISCV_CPU_VENDORID_H */
+> 
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index fdefe88ccd..44e706ad3f 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -40,6 +40,7 @@ riscv_system_ss.add(files(
+>     'th_csr.c',
+>     'time_helper.c',
+>     'riscv-qmp-cmds.c',
+> +  'neorv32_csr.c',
+>   ))
+>   
+>   subdir('tcg')
+> 
+> diff --git a/target/riscv/neorv32_csr.c b/target/riscv/neorv32_csr.c
+> new file mode 100644
+> index 0000000000..0cb8663436
+> --- /dev/null
+> +++ b/target/riscv/neorv32_csr.c
+> @@ -0,0 +1,54 @@
+> +/*
+> + * Neorv32-specific CSR.
+> + *
+> + * Copyright (c) 2025 Michael Levit
+> + *
+> + * Author:
+> + *   Michael Levit <michael@videogpu.com>
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+
+If you run checkpatch.pl it will inform you that we expect a copyright header with a
+different format for new files. Here's an example from target/riscv.cpu-param.h
+
+
+/*
+  * RISC-V cpu parameters for qemu.
+  *
+  * Copyright (c) 2017-2018 SiFive, Inc.
+  * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+
+
+Thanks,
+
+Daniel
+
+
+> +
+> +#include "qemu/osdep.h"
+> +#include "cpu.h"
+> +#include "cpu_vendorid.h"
+> +
+> +#define    CSR_MXISA    (0xfc0)
+> +
+> +static RISCVException smode(CPURISCVState *env, int csrno)
+> +{
+> +	return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_neorv32_xisa(CPURISCVState *env, int csrno,
+> +                                       target_ulong *val)
+> +{
+> +	/* We don't support any extension for now on QEMU */
+> +    *val = 0x00;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static bool test_neorv32_mvendorid(RISCVCPU *cpu)
+> +{
+> +    return cpu->cfg.mvendorid == NEORV32_VENDOR_ID;
+> +}
+> +
+> +const RISCVCSR neorv32_csr_list[] = {
+> +    {
+> +        .csrno = CSR_MXISA,
+> +        .insertion_test = test_neorv32_mvendorid,
+> +        .csr_ops = { "neorv32.xisa", smode, read_neorv32_xisa }
+> +    },
+> +    { }
+> +};
+> +
+
 
