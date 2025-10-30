@@ -4,95 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C4BCCF9F0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Oct 2025 14:24:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A4FBCCF9F0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Oct 2025 15:03:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vETZY-0001OP-JZ; Thu, 30 Oct 2025 10:24:16 -0400
+	id 1vEUAk-00062H-SQ; Thu, 30 Oct 2025 11:02:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vETZO-0001KO-1o
- for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 10:24:08 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vETZJ-00067X-4Z
- for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 10:24:05 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-780fc3b181aso876017b3a.2
- for <qemu-riscv@nongnu.org>; Thu, 30 Oct 2025 07:23:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1761834234; x=1762439034; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2qhmL40yJuYA7VTug2A9/droT3+foPeGGcISVtBeqCo=;
- b=ilb85lcci2CiIuyYcM/KLvevRSK+UpCEqKx3DeYcNKr8zY7y74KIz5bsaIX7iVWuyz
- /Ek+PKT0CAm3bdg3tejmtn/LnsKCUevexOdAdbStOhWqP16Nn+MuNtmNVUhCi5X5Q0Yc
- zExn6u0jja/kCXMq43mkaawj/DkdcSYAbwh73agBo6AcROr12FT0hbPRIBkMcE5q7lGr
- dtmaGS/FFG/LaBkviUhZWRKq1ctcRUNzKAHOR2lSi5pZNlkMGmSvePP3aIsHjpoexo32
- iZjvriussZVdEcVeKetn1YcIhhk7v51+ch7eADad5Zyd0IZEPxSMp9yqcNfFMyUH6fri
- wsKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761834234; x=1762439034;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2qhmL40yJuYA7VTug2A9/droT3+foPeGGcISVtBeqCo=;
- b=c8CWbDw96XVtJm6/1kwsvAmK753R255L3UZx87+LUaWLpwsorS8B49QdocCsH2m5lW
- WBHFjQsHvVuIh+3FB4lNSCJmyPWdaARgEfWh1CXIp2auYXSlkFVsaF4/LyjueLQM4hfL
- bKZp5LeXabZv4KIQs/WW64107Z5GX7kIXz6rDYjq4MQfwSs+k2iFy4o6tVHZ7AAZ2230
- CwjaTLx2sZgqV+cy1uKMcKYsJLBINrRglN9cC1mfTL/MzXdjB9nr+sIcax30pGm99JD3
- cGGN8K5Lbdxmcm0drF+ZGRsQ7U6JU2T/OV51PwNfsURaVvbEb/7zE9l1RIWQdl5DsjjL
- hr5g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWxafbdvACycz3u0JTC5Q7yPMjaLpCV26nQuVDCm0HeCCweDEerMGWMY/JeECmcJxGQaxaNMUoiTD+F@nongnu.org
-X-Gm-Message-State: AOJu0Yxpw4CnkGVh9GJ7JFR0E3Yyi8EBXFj1yYxMG+C8y0JdoeUkZ//G
- sNrD2r+UCE/m0bTnDtiMLWzKdb0wshMtyHgO4p4EuzUZbeSI6qqEdog0s6uz7BxQ2Es=
-X-Gm-Gg: ASbGncsuGZtkNkDYCtKXhQCjP2lcvINlnBY8Vyzx1NNQhLczmFynEGFsoeZT2NpZIlB
- SCt7jnra9b8+gF3zxsTgWBgXbUOft+iK4THgGHEWrLoQ+zlvTJB+hBhDvNopXF1o2pw+p+ArMqa
- +GanhBWNO/rXrupLvcqI3qEcLr1PZ2vKXukOYX5Io0ste0yVBiJH5GHowqn0GTEk6kMGk/k1xkT
- +VwNmECN70RGGE4ZKVX19iS3kXNwKVOn7Xk4p4TL9WMGF5PBWaOYxJ13Gz7VPsZQdOoUySiEcHq
- 8Jwh8FC6Hs3z7PefFGTVuLC+mPQgyW8UF9b7iJTMWrtpyFmFcjtQovBjClszrbsYMzz0fAZXghS
- XuWZymNfw20xx8xH/BwDmH1TYe3TA8HlJ2H01tsljzXbtTTI1WMfrltl4xqE3rrvcoaJm8WHKXS
- 7koCJsT9tBJsGleSql4rLvAhQ=
-X-Google-Smtp-Source: AGHT+IFuwKo04u9v0JNDnnu0lw8LLMTDxx7C5hMRIO22lCjQU5IfvCCWveWeiXaY9m3O8KUM2m2QRw==
-X-Received: by 2002:a17:903:1a4e:b0:246:80b1:8c87 with SMTP id
- d9443c01a7336-294deef8844mr94161415ad.43.1761834229801; 
- Thu, 30 Oct 2025 07:23:49 -0700 (PDT)
-Received: from [192.168.68.110] ([187.101.65.79])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29498d0c414sm189617475ad.44.2025.10.30.07.23.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Oct 2025 07:23:49 -0700 (PDT)
-Message-ID: <8a1ee6f6-0198-4a6c-b4db-180ede88187f@ventanamicro.com>
-Date: Thu, 30 Oct 2025 11:23:44 -0300
+ (Exim 4.90_1) (envelope-from <chao.liu.riscv@isrc.iscas.ac.cn>)
+ id 1vEUAS-0005yu-Uw; Thu, 30 Oct 2025 11:02:25 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <chao.liu.riscv@isrc.iscas.ac.cn>)
+ id 1vEUAI-00041B-KV; Thu, 30 Oct 2025 11:02:24 -0400
+Received: from [192.168.71.4] (unknown [114.88.97.170])
+ by APP-01 (Coremail) with SMTP id qwCowAAnj2nlfQNpJTxqAA--.2776S2;
+ Thu, 30 Oct 2025 23:01:57 +0800 (CST)
+Message-ID: <ab8161b3-d4e9-4573-b13f-e13b9c6b322e@isrc.iscas.ac.cn>
+Date: Thu, 30 Oct 2025 23:01:57 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv: riscv-iommu: Don't look up DDT cache in Off and
- Bare modes
-To: frank.chang@sifive.com, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20251028085032.2053569-1-frank.chang@sifive.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Language: en-US
-In-Reply-To: <20251028085032.2053569-1-frank.chang@sifive.com>
+To: dbarboza@ventanamicro.com
+Cc: ajones@ventanamicro.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ palmer@dabbelt.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ wu.fei9@sanechips.com.cn, zhiwei_liu@linux.alibaba.com
+References: <20250528200129.1548259-3-dbarboza@ventanamicro.com>
+Subject: Re: [PATCH v3 2/4] target/riscv: Add server platform reference cpu
+From: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>
+In-Reply-To: <20250528200129.1548259-3-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowAAnj2nlfQNpJTxqAA--.2776S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxZF4UtF43trW5urW5JFy5urg_yoW5ZFyfpr
+ 48KFWqk34kJ39FkayftF4DXr4kZws3Ww43Gwn3ZwsFyrWYqrWUWryDKFyUC3ZFvF1xG3WS
+ yw1UCr95Jrs8ZFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUk2b7Iv0xC_tr1lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6r1j6r18M7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVWUJVW8JwA2z4x0Y4vEx4
+ A2jsIEc7CjxVAFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+ 64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
+ Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7CjxVAaw2AFwI0_Jw0_GFyl42xK
+ 82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGw
+ C20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48J
+ MIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMI
+ IF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E
+ 87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU2wIDUUUUU
+X-Originating-IP: [114.88.97.170]
+X-CM-SenderInfo: pfkd0hholxh2hlvf4qplvuuh5lvft2wodfhubq/1tbiCRALAGkDL2ftMwAAsu
+Received-SPF: pass client-ip=159.226.251.21;
+ envelope-from=chao.liu.riscv@isrc.iscas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_PASS=-0.001, T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,63 +76,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Wed, May 28, 2025 at 05:01:29PM -0300, Daniel Henrique Barboza wrote:
+>rom: Fei Wu <wu.fei9@sanechips.com.cn>
+>
+>he harts requirements of RISC-V server platform [1] require RVA23 ISA
+>rofile support, plus Sv48, Svadu, H, Sscofmpf etc. This patch provides
+> virt CPU type (rvsp-ref) as compliant as possible.
+>
+>1] https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
+>
+>igned-off-by: Fei Wu <fei2.wu@intel.com>
+>igned-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>--
+>target/riscv/cpu-qom.h |  1 +
+>target/riscv/cpu.c     | 11 +++++++++++
+>2 files changed, 12 insertions(+)
+>
+>iff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+>ndex 1ee05eb393..70978fd53c 100644
+>-- a/target/riscv/cpu-qom.h
+>++ b/target/riscv/cpu-qom.h
+>@ -55,6 +55,7 @@
+>#define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+>#define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
+>#define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
+>#define TYPE_RISCV_CPU_RVSP_REF         RISCV_CPU_TYPE_NAME("rvsp-ref")
+>#define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>
+>OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+>iff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>ndex 4a30cf8444..ec2fbc0e78 100644
+>-- a/target/riscv/cpu.c
+>++ b/target/riscv/cpu.c
+>@ -3166,6 +3166,17 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>        .cfg.max_satp_mode = VM_1_10_SV39,
+>    ),
+>
+>    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_RVSP_REF, TYPE_RISCV_VENDOR_CPU,
 
+I'm not sure the parent type TYPE_RISCV_VENDOR_CPU is right here.
 
-On 10/28/25 5:50 AM, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
-> 
-> According to the RISC-V IOMMU specification:
-> 
-> * When ddtp.iommu_mode is set to Off, there is no DDT look-up, and an "All
->    inbound transactions disallowed" fault (cause = 256) is reported for any
->    inbound transaction.
-> 
-> * When ddtp.iommu_mode is set to Bare, there is no DDT look-up, and the
->    translated address is the same as the IOVA, unless the transaction type
->    is disallowed (cause = 260).
-> 
-> In the current implementation, the DDT cache is incorrectly looked up
-> even when ddtp.iommu_mode is set to Off or Bare. This may result in
-> unintended cache hits.
-> 
-> Therefore, the DDT cache must not be looked up when ddtp.iommu_mode is
-> set to Off or Bare. For other modes, software is required to issue cache
-> invalidation commands before any inbound transactions.
-> 
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> ---
+To be on the safe side, I tested this CPU type using an openEuler image that
+can boot on a virtual machine. This image supports rva23s64, and my command is
+as follows:
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+cmd="$QEMU_SYSTEM_RISCV64 \
+   -nographic -machine virt,pflash0=pflash0,pflash1=pflash1,acpi=off \
+   -cpu rvsp-ref \
+   -smp "$vcpu" -m "$memory"G \
+   -blockdev node-name=pflash0,driver=file,read-only=on,filename="$fw1" \
+   -blockdev node-name=pflash1,driver=file,filename="$fw2" \
+   -drive file="$drive",format=qcow2,id=hd0,if=none \
+   -object rng-random,filename=/dev/urandom,id=rng0 \
+   -device virtio-vga \
+   -device virtio-rng-device,rng=rng0 \
+   -device virtio-blk-device,drive=hd0 \
+   -device virtio-net-device,netdev=usernet \
+   -netdev user,id=usernet,hostfwd=tcp::"$ssh_port"-:22 \
+   -device qemu-xhci -usb -device usb-kbd -device usb-tablet"
 
->   hw/riscv/riscv-iommu.c | 13 +++++++++----
->   1 file changed, 9 insertions(+), 4 deletions(-)
-> 
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index b33c7fe3259..95db811f125 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -1290,13 +1290,18 @@ static RISCVIOMMUContext *riscv_iommu_ctx(RISCVIOMMUState *s,
->           .devid = devid,
->           .process_id = process_id,
->       };
-> +    unsigned mode = get_field(s->ddtp, RISCV_IOMMU_DDTP_MODE);
->   
->       ctx_cache = g_hash_table_ref(s->ctx_cache);
-> -    ctx = g_hash_table_lookup(ctx_cache, &key);
->   
-> -    if (ctx && (ctx->tc & RISCV_IOMMU_DC_TC_V)) {
-> -        *ref = ctx_cache;
-> -        return ctx;
-> +    if (mode != RISCV_IOMMU_DDTP_MODE_OFF &&
-> +        mode != RISCV_IOMMU_DDTP_MODE_BARE) {
-> +        ctx = g_hash_table_lookup(ctx_cache, &key);
-> +
-> +        if (ctx && (ctx->tc & RISCV_IOMMU_DC_TC_V)) {
-> +            *ref = ctx_cache;
-> +            return ctx;
-> +        }
->       }
->   
->       ctx = g_new0(RISCVIOMMUContext, 1);
+This process gets stuck at the initialization stage:
+
+```
+     Loading Linux 6.6.0-102.0.0.5.oe2509.riscv64 ...
+     Loading initial ramdisk ...
+```
+
+If I use the parameter `-cpu rva23s64`, the system can boot normally.
+
+I tried changing TYPE_RISCV_VENDOR_CPU to TYPE_RISCV_BARE_CPU and found that
+the system then boots normally.
+
+However, I haven’t conducted an in-depth analysis yet, so the issue might be
+with my system image.
+
+Thanks,
+Chao
+
+>        .misa_mxl_max = MXL_RV64,
+>        .profile = &RVA23S64,
+>
+>        /* ISA extensions */
+>        .cfg.ext_zkr = true,
+>        .cfg.ext_svadu = true,
+>
+>        .cfg.max_satp_mode = VM_1_10_SV57,
+>    ),
+>
 
 
