@@ -4,93 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0924CCF9E3
-	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Oct 2025 15:15:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55182CCF9E3
+	for <qemu-riscv@archiver.kernel.org>; Thu, 30 Oct 2025 15:24:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vEUMt-0001B8-O2; Thu, 30 Oct 2025 11:15:16 -0400
+	id 1vEUVJ-0005b8-Il; Thu, 30 Oct 2025 11:23:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vEUMl-00018J-NZ
- for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 11:15:09 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vEUMZ-0005GZ-Sk
- for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 11:15:06 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-7a27ab05a2dso1180079b3a.2
- for <qemu-riscv@nongnu.org>; Thu, 30 Oct 2025 08:14:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1761837289; x=1762442089; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=U6mJ0g/+kW+Y8nTHGzBtrH2PgIx+cPR3kGz9k168hFA=;
- b=TMapYF1wkVf4CJic1NlNie8ozlr0PubaZw/wEGKFeqvhK5SpS9qU5sFFLeIsE6Rs35
- FcKW7nIAwacC15/9uSCA0TZI9O+bGHQ0ZVIWK0Ay9/W6es9EDbzCi/aLvcLp8MfcqluL
- 9QhTu+6CRcOYsw9S14t9HCbAKLSnhsqfuIt3oq168ygpuPWwpabZkNDK6JDz5aCJbZeJ
- VYqUm8lKx7EF0mIaiENQzMcpWJ/61iqblwIL/MP8AwE7wgIxFOYxqRwQvdBJLiOGRGJe
- /51koXHH6cSHtlmkHX/oXVPT0smPz0/Nd5tE6pI+0n/b5PZyHgaBNlVH8GrXkaV4V1bx
- r/Ew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761837289; x=1762442089;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=U6mJ0g/+kW+Y8nTHGzBtrH2PgIx+cPR3kGz9k168hFA=;
- b=WubR5z0XRD7ToFIzQ9vSjvLhDsiAIRWoKIAHOi1twveoXVF9cTWSe8bazR2l4Zslg7
- VIN5nYNBMLMPm2/f1T1R8X3e07eGFBwyqj7zVbfC8SH7OWuzqwAVQ3xXUQxjFsxcGdJ/
- FESuD1VYcgTxB7cjeGFFp+eulNRSCNz7rrhqP5mtLZU2jVDv+Dt2xrZHOMyXnu60ABC0
- x1kmPhn0JQEbWw+fgf78z5YDb5RL8JU+i4wwsggCgniTv6UIRRpdnX5tk+uq4wQXH5bq
- gmRtt43e9jjbQ3Z6nEi9PxuX0axib/LwHZyI8MHJo5egbI5fdATnKph8wFQAOr0ysVqu
- gi4Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVgvXBU4m3MORt4PExcaKy11Bm0Fu7qJwxsWqJbmaeegfhPWlnE4DnLJFzVFnC6FlV1wiDwdW3y8VIt@nongnu.org
-X-Gm-Message-State: AOJu0YxZMNQAKWpsOWPDtLDFbtTjwKk30pWXO5cKG6OneJNxnVajrPbv
- PHcGfM+D3Lru2NHgvszcBBiorN93JBoFxvkszsDo9090iICxq+xuZ1BwsUZS8Bt/f8s=
-X-Gm-Gg: ASbGncvE9yNbbbpHWaK1U8VLoKE+0VMjecg3IcN7udzZJ168ph/KCBaQCLEIZ1Qd49I
- N1qqPWy9lrMMihxkjwnotmN7CEbgnbFY7joGtLCLvIGy2R+5RBXwWPqhLLH+5QQu3b+4AtbjjRm
- +GHBkcW3lhC2SSpVbN4kSaomu3FiN2Oeqn03vUHMkeiTacvCDq12fGbHjVoH9lVuAD1/8A356Od
- aBQhn55GMo6idXchzS7wRjECddEIuzIi7E6E+D9leawYgiw0iVEvnfoBtsiO3Frdt3X/SLGwyc2
- +VYdbb7ruUUz4jnWZxkyjAtyd3cguYJ46c/HksE+ZGhouRp+rS/ednAgJoS/wIyfcO4iIpQKgDo
- EIGJsFpUecivjjpfdBIzTbUiNRwPr51TMVmjO5vuwCSFOhD4yAicPRRPEw2LnfmQByOXa701Skq
- EoqDqsr8aDjqGS3dLaKCuaHkk=
-X-Google-Smtp-Source: AGHT+IGnE98uTtgnQDrafPBSe7qMC3620rcPUbBNeOeUZYJLKpJrqKEVAVIS7KjZz7J7b/QKglZx9w==
-X-Received: by 2002:a17:902:daca:b0:27e:eabd:4b41 with SMTP id
- d9443c01a7336-2951a422c63mr1050225ad.7.1761837288721; 
- Thu, 30 Oct 2025 08:14:48 -0700 (PDT)
-Received: from [192.168.68.110] ([187.101.65.79])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29498d099b6sm188010175ad.33.2025.10.30.08.14.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Oct 2025 08:14:48 -0700 (PDT)
-Message-ID: <14f0ce37-909b-4d04-8a7a-ba9db63e5cda@ventanamicro.com>
-Date: Thu, 30 Oct 2025 12:14:44 -0300
+ (Exim 4.90_1) (envelope-from <chao.liu.riscv@isrc.iscas.ac.cn>)
+ id 1vEUV9-0005RX-Ab; Thu, 30 Oct 2025 11:23:47 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <chao.liu.riscv@isrc.iscas.ac.cn>)
+ id 1vEUUx-0006ha-SY; Thu, 30 Oct 2025 11:23:46 -0400
+Received: from [192.168.71.4] (unknown [114.88.97.170])
+ by APP-01 (Coremail) with SMTP id qwCowABnzmjqggNplL1vAA--.2178S2;
+ Thu, 30 Oct 2025 23:23:22 +0800 (CST)
+Message-ID: <74d8553b-f98b-4d5d-8b47-5fe21b1c7904@isrc.iscas.ac.cn>
+Date: Thu, 30 Oct 2025 23:23:22 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/4] target/riscv: Add server platform reference cpu
-To: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>
+Subject: Re: [PATCH v3 0/4] hw/riscv: Add Server Platform Reference Board
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: ajones@ventanamicro.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  palmer@dabbelt.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- wu.fei9@sanechips.com.cn, zhiwei_liu@linux.alibaba.com
-References: <20250528200129.1548259-3-dbarboza@ventanamicro.com>
- <ab8161b3-d4e9-4573-b13f-e13b9c6b322e@isrc.iscas.ac.cn>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Language: en-US
-In-Reply-To: <ab8161b3-d4e9-4573-b13f-e13b9c6b322e@isrc.iscas.ac.cn>
+ zhiwei_liu@linux.alibaba.com
+References: <20250528200129.1548259-1-dbarboza@ventanamicro.com>
+ <dbbdc597-9b4d-4dd3-8143-821ac5d82a3a@zevorn.cn>
+ <18dc5a20-85c6-4e85-b76f-66dca6771bc1@ventanamicro.com>
+From: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>
+In-Reply-To: <18dc5a20-85c6-4e85-b76f-66dca6771bc1@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42f.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-CM-TRANSID: qwCowABnzmjqggNplL1vAA--.2178S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxWr47KrW7Kr45tFW7CFyxGrg_yoW5Xr47pF
+ WFga43KF1DJr1fArsFqw4jgr40yF4xXay5Kr4rJrykAF90v3W8Jr1qyF45ua48Jw4fCF42
+ vFWYq34fZrWDZFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUk2b7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6r1j6r18M7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVWUJVW8JwA2z4x0Y4vEx4
+ A2jsIEc7CjxVAFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+ 64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
+ Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7CjxVAaw2AFwI0_JF0_Jw1l42xK
+ 82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGw
+ C20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48J
+ MIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMI
+ IF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E
+ 87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUgcTQUUUUU
+X-Originating-IP: [114.88.97.170]
+X-CM-SenderInfo: pfkd0hholxh2hlvf4qplvuuh5lvft2wodfhubq/1tbiBwoLAGkDftgJuwAAs4
+Received-SPF: pass client-ip=159.226.251.21;
+ envelope-from=chao.liu.riscv@isrc.iscas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_PASS=-0.001, T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,109 +78,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 10/30/25 12:01 PM, Chao Liu wrote:
-> On Wed, May 28, 2025 at 05:01:29PM -0300, Daniel Henrique Barboza wrote:
->> rom: Fei Wu <wu.fei9@sanechips.com.cn>
+On 10/30/2025 9:33 PM, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 10/30/25 8:48 AM, Chao Liu wrote:
+>> On Wed, May 28, 2025 at 05:01:29PM -0300, Daniel Henrique Barboza wrote:
+>>> Hi,
+>>>
+>>> This is my attempt to ressurect the Server SoC Platform reference work
+>>> that has been buried for an year. The last posting was made an year ago
+>>> [1].
+>>> Most of the changes were made due to upstream differences from one year
+>>> ago. Patch 1 is an example of that.
+>>>
+>>> In patch 2 (former 1), the main difference is the new CPU is rva23s64
+>>> compliant. This wasn't possible in May 2024 because we didn't have this
+>>> support back then.
+>>>
+>>> Patch 3 consists mostly of code base changes rather than functional
+>>> changes. There was a discussion about whether we should supply fdts in
+>>> this machine back in the v2 review [2]. The answer is yes: machine mode
+>>> requires fdt to work, and we want to be flexible enough to generate our
+>>> own fdt instead of relying on EDK2 to supply them. Note that we can also
+>>> supply an EDK2-generated fdt via command line, bypassing the fdt created
+>>> by QEMU, if desired.
+>>>
+>>> Patch 4 adds a riscv-iommu-sys device to the board. This wasn't possible
+>>> back then because we didn't have the required upstream support for it.
+>>>
 >>
->> he harts requirements of RISC-V server platform [1] require RVA23 ISA
->> rofile support, plus Sv48, Svadu, H, Sscofmpf etc. This patch provides
->> virt CPU type (rvsp-ref) as compliant as possible.
+>> Hi, Daniel.
 >>
->> 1] https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
+>> Do we have any plans to support virt-io on the rvsp-ref machine in the future?
+> 
+> Hmmm good question. In theory we're interested only in implementing the rvsp-ref
+> spec but adding virt-io support doesn't hurt the spec implementation in any
+> way ... I think. Drew, any comments?
+> 
+> 
 >>
->> igned-off-by: Fei Wu <fei2.wu@intel.com>
->> igned-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> -- 
->> target/riscv/cpu-qom.h |  1 +
->> target/riscv/cpu.c     | 11 +++++++++++
->> 2 files changed, 12 insertions(+)
+>> Recently, I have been using the RISC-V reference platform built on this set of
+>> patches to support running the OpenEuler RISC-V operating system.
 >>
->> iff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
->> ndex 1ee05eb393..70978fd53c 100644
->> -- a/target/riscv/cpu-qom.h
->> ++ b/target/riscv/cpu-qom.h
->> @ -55,6 +55,7 @@
->> #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
->> #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
->> #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
->> #define TYPE_RISCV_CPU_RVSP_REF         RISCV_CPU_TYPE_NAME("rvsp-ref")
->> #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
->>
->> OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
->> iff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> ndex 4a30cf8444..ec2fbc0e78 100644
->> -- a/target/riscv/cpu.c
->> ++ b/target/riscv/cpu.c
->> @ -3166,6 +3166,17 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->>        .cfg.max_satp_mode = VM_1_10_SV39,
->>    ),
->>
->>    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_RVSP_REF, TYPE_RISCV_VENDOR_CPU,
+>> I will actively feed back any test results to the upstream.
 > 
-> I'm not sure the parent type TYPE_RISCV_VENDOR_CPU is right here.
 > 
-> To be on the safe side, I tested this CPU type using an openEuler image that
-> can boot on a virtual machine. This image supports rva23s64, and my command is
-> as follows:
+> This series has been stale because, as you might've read in the thread, it turns
+> out we're missing a mandatory extension (sdext).
 > 
-> cmd="$QEMU_SYSTEM_RISCV64 \
->    -nographic -machine virt,pflash0=pflash0,pflash1=pflash1,acpi=off \
->    -cpu rvsp-ref \
->    -smp "$vcpu" -m "$memory"G \
->    -blockdev node-name=pflash0,driver=file,read-only=on,filename="$fw1" \
->    -blockdev node-name=pflash1,driver=file,filename="$fw2" \
->    -drive file="$drive",format=qcow2,id=hd0,if=none \
->    -object rng-random,filename=/dev/urandom,id=rng0 \
->    -device virtio-vga \
->    -device virtio-rng-device,rng=rng0 \
->    -device virtio-blk-device,drive=hd0 \
->    -device virtio-net-device,netdev=usernet \
->    -netdev user,id=usernet,hostfwd=tcp::"$ssh_port"-:22 \
->    -device qemu-xhci -usb -device usb-kbd -device usb-tablet"
-> 
-> This process gets stuck at the initialization stage:
-> 
-> ```
->      Loading Linux 6.6.0-102.0.0.5.oe2509.riscv64 ...
->      Loading initial ramdisk ...
-> ```
-> 
-> If I use the parameter `-cpu rva23s64`, the system can boot normally.
-> 
-> I tried changing TYPE_RISCV_VENDOR_CPU to TYPE_RISCV_BARE_CPU and found that
-> the system then boots normally.
 
-There is a chance that we're mishandling the .profile property with VENDOR
-type CPUs. Maybe worth taking a look.
+I have a basic version of the sdext extension ready. I’ll improve it later and
+share it with the upstream community to discuss.
 
-There's nothing stopping us from declaring the CPU as BARE though. It's
-probably a good idea - it gives us a clean CPU without any enabled default
-extensions to work on. I believe we can change that for v4.
+Thank,
+Chao
 
-
-Thanks,
-
-Daniel
-
+> I get emails from time to time from people asking about the status of this work
+> so I'm considering pushing the patches as is, without sdext, and add documentation
+> saying that this isn't a 100% rsvp-ref compliant board. The absence of sdext
+> seems tolerable for the current uses ppl have for the board ATM, so upstreaming
+> it as is can be beneficial for everyone. We can add sdext support later and
+> then update the docs claiming 100% compliance.
 > 
-> However, I haven’t conducted an in-depth analysis yet, so the issue might be
-> with my system image.
+> At very least I'll have to send a v4 now that you pointed out a wrong memory
+> address in the memmap, so I'll start with that.
+> 
 > 
 > Thanks,
-> Chao
 > 
->>        .misa_mxl_max = MXL_RV64,
->>        .profile = &RVA23S64,
->>
->>        /* ISA extensions */
->>        .cfg.ext_zkr = true,
->>        .cfg.ext_svadu = true,
->>
->>        .cfg.max_satp_mode = VM_1_10_SV57,
->>    ),
->>
+> Daniel
 > 
+> 
+>>
+>> Thanks,
+>> Chao
 
 
