@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2120FCCF9EB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Oct 2025 03:58:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A474CCF9EB
+	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Oct 2025 03:58:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vEgGt-0002O4-0u; Thu, 30 Oct 2025 23:57:51 -0400
+	id 1vEgHp-0002Ue-6v; Thu, 30 Oct 2025 23:58:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vEgGh-0002NS-8W
- for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 23:57:40 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ id 1vEgHl-0002Td-AK
+ for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 23:58:45 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vEgGZ-00045W-F5
- for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 23:57:37 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-637e9f9f9fbso3309725a12.0
- for <qemu-riscv@nongnu.org>; Thu, 30 Oct 2025 20:57:27 -0700 (PDT)
+ id 1vEgHi-0004FX-DM
+ for qemu-riscv@nongnu.org; Thu, 30 Oct 2025 23:58:44 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-640741cdda7so1308215a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 30 Oct 2025 20:58:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761883043; x=1762487843; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1761883116; x=1762487916; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zy3s0O+9VQSfO5YWBSuQfekLg7QXQLE9qEziOWGD6B4=;
- b=UMw9UBm2Kq3TrcOarM+2Ey2upx9L8WeQej5Qpze1Nb7Nrwp1J1YvE2k7Hr7vobcKBh
- utxqo7UtFGTE0rElUxfgsUa9dhuMtHV9pMDAH4KUyP0bEEykxLQhGr9qCWkF0h25DGVx
- Gt4/CyyiegOP9TqD2n7Jo1ddNiGUgFWzjaugD8RLNIMTmWvqYaQ3uv5f6cbaqb8vBVcG
- PRPRMC4ulpXSF4cL/vsHwjXqFE9ExlGBqSXYmNVJ3OY/9wsUX5xeE/ORt1QKSjrVosgS
- glROyMrV2QXI7hNEvzcmrb9JgrpjV2gaVASK/budKjptWjyRg4SM/hMYhkIx+D+scNs6
- u1fw==
+ bh=BokiKp9qTUNyh6rzgGYHS36tM4lwyXsDRyewuQc6pY8=;
+ b=ASfpWjjwX/tCq+fzLyzvyEa4mk9vJUuvbryh3GuvFnrxRpZF2AjhROwMB+Nkjb5KxZ
+ 1aUetRoGkhHP8zH+ht+Pw3gVFWTZ3eYHZ19seUwBP6j9h/upUVnKzLikubgOgy21IsLE
+ D8aBheS/BfYXGxm4e4tjKka+144eHu21Mb5K//iId2O2e8LxSJzEt0sTy/PDWFIEzOVz
+ nPZcDrWE8gEV16KNmcIJikKqyxYWJpXr/YPDOHZGU/LHopvG0pOgERHSQU5BDim8DN7p
+ 5TyFNdJHRWKQ5flOfWEO/OgAnpXaWBqsERR3gEVDcewtFH4eFldLOqp55YqbkMYQOlsc
+ xkFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761883043; x=1762487843;
+ d=1e100.net; s=20230601; t=1761883116; x=1762487916;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zy3s0O+9VQSfO5YWBSuQfekLg7QXQLE9qEziOWGD6B4=;
- b=qKTqhJw9vXTUWicHq5S6VTIUqygRgnZtp3GW+c77LcveZ7adDM3sK7kmtvtA+qVC3C
- KIRk70Z3QDvmvbWvZ/CNnUkN0lmMh8jvmFEcj2FqyA3r59VLa6fEG6cXb1rwJItXYWZj
- Nu2TK8gXVyoLQKTSGpui3RWGKdbH2xOqOqfoCAQTVojqjS3I/tkpAVxoO5hxFr5cur5+
- +5N0gEmpL415yZGjG555fwQpp6zt1B+W7FH800F2d+sr8YuG+DEV0ea56yWwTLqbk1Dw
- idbWYQsFjHk2i0aqPfaYDedBbQb05uEN7t0YEr67LYrTrXSamr95xh/ZC1gSj6qQ5Ppt
- JuuA==
+ bh=BokiKp9qTUNyh6rzgGYHS36tM4lwyXsDRyewuQc6pY8=;
+ b=jcq/yx/XGukahytdZbg9m7DDJVP/L9lsNpKbMEGCuOhVGRrzQ+SMMpSNv7OJz3RR4F
+ GdkmSyuNGj8BqpaPfOFG/9p+od4YWWRxrZR5VCvIH7lhpHYVCfOnwELc8sSdh1aJXp8s
+ 0ubFBaaG1HzJQnlGMuOVANbdk02ERPHLq38+wtK7GV+itqbK7BY+FzzyA2jUbowk+8LM
+ pesN/IVRE1KIcBBPYIZ0DLOFGsqAbV78Lk4wJwB9i5Aoku/1A99rltUD2Xz83Asr6bqx
+ 42OHqyuxSWEUavuoGXYbI0RVyAQIZiV+6DViF4rFuQIVzxQz4sYgSD2cn4tE7F/9S5Oc
+ J1nw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVsCta1JEfEErDd00i2K5DWnTnLTIejcQ3RlJpSNu8nI0HDVJcOuPT8yaMqcHr4+QB+v6B4+kWCmOw@nongnu.org
-X-Gm-Message-State: AOJu0YyrvUsALF7gYERZ5uzoPi6Bxnks4K7FRjTXl+5IaAIqWLsgRtrC
- 8r8xSF29psq71zNhP1vqqFm3u1nfrYFcy3E9ovZFKOSZFQ5wyEjylhAlPBm6Bw+G3TH+LMaszod
- LKBr853a5nGRqne0lpj6sUpuDVlgDxLQ=
-X-Gm-Gg: ASbGncvMhSHIf0fHenCFZVdJwNG8nQFl1J0vmSF0J16pp52KeoLu6LGUfWAeue0LpUT
- 7x2off7LgGhAIKR9jf5yrrT0IgabXJRNaZkTGmN7d/9lRod2h63ERgIxeT9EeZtwbHd2D1a5Dgl
- C7es9Gd2j/r/4Z9ZTTckvzWPXyHjOIzC66DBS1Du+wjKXmwXlmIcy008yuH/ZbqFCwcdm8AHme+
- r7MkIzt7INjO5dzX143i2lYgowsGM6judbxolWY2rCEmuW8aBqQ/iqUWbycr5jZZnt+GlTYHYJK
- cvS3WIfjFualvxndUzTeCJkPeQ==
-X-Google-Smtp-Source: AGHT+IGFrcOlp5nJJ7lpcyP3/SjKtSZlH0KHMLVVq1N6vmtcQ1eRa7A4Xr7aBnEI9wUCsU7qCVCZ9p5q35vrKEVoRUY=
-X-Received: by 2002:a05:6402:2711:b0:63c:33f8:f05e with SMTP id
- 4fb4d7f45d1cf-64077018349mr1384557a12.22.1761883043203; Thu, 30 Oct 2025
- 20:57:23 -0700 (PDT)
+ AJvYcCV5qAiA44KFB9Y1ToWircAZYqk9guTOZkwQzyma1x0pSbZHOjUk/vaAruOteZlzXI4tR8QV8f0Yd82K@nongnu.org
+X-Gm-Message-State: AOJu0YztjDEU2bMIYiPh+RhVL0P7oBftaOarnKq5C7tmWWpi/IbulteP
+ B0QfJPGEoJxJU7KxPr8cK08pR0bRVCoVv3ZGxHvzUa36LZBhP1g32Nzkd6c7q/+hOJYjw92Z9KC
+ UIsOFpRIUnGRF3Uxns3UupTEOXwsEcaM=
+X-Gm-Gg: ASbGncuqy8iz6UZHG6HEMhn3bAD50S+MO9pwqN5znEoc7/uO+rJIh/rw+kz8fpUEp9T
+ A3OhgqiCK2F1jJ8Kngb1ZAzR8sa4nEZpVrLFbGxk+fLcJBo1olXWmF3sNH6y6sxztKEIof1mj8c
+ ILzBOr1qpnliP+sDXr3HUfhwvgfUZA79mtjG9sUgrPVRtGv6HSR4hBybtnVdfJHSv6BZCKShLcs
+ Du0MRfbZPqOFjKleqH71ToqgM+gDnp72ay3qyho3Ls78aBJ/aE9y97AgO51r4qntIGsbNBsR+0h
+ GT7MGHxxeJgLQfrcl1F/xUajng==
+X-Google-Smtp-Source: AGHT+IHZwTFDrPREnrsfj9gwbv1h2cnf7MXKpBdQ5HZ8aHojq9OikDTXpFbf4USOSSQWfMVPOifH8Kg61eyQ72MUqWw=
+X-Received: by 2002:a05:6402:50cb:b0:634:ab80:d84b with SMTP id
+ 4fb4d7f45d1cf-640770403admr1524959a12.32.1761883116398; Thu, 30 Oct 2025
+ 20:58:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251028084622.1177574-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20251028084622.1177574-1-dbarboza@ventanamicro.com>
+References: <20251027-iommu-v1-1-0fc52a02a273@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <20251027-iommu-v1-1-0fc52a02a273@rsg.ci.i.u-tokyo.ac.jp>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 31 Oct 2025 13:56:56 +1000
-X-Gm-Features: AWmQ_bmdy5wh079yPhyjyG68W8N8RdQR_osSpNc9bvrVbPLm4VxdJfuUKrGAdCc
-Message-ID: <CAKmqyKNjW0ME9DuY=ADWa_WGs9Ak7NFjpAMCqbYfs6Ap1xtLRA@mail.gmail.com>
-Subject: Re: [PATCH] docs/specs/riscv-aia.rst: add 'riscv-aia' accel prop info
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
+Date: Fri, 31 Oct 2025 13:58:10 +1000
+X-Gm-Features: AWmQ_bm_dus-q2D7bfKBZY0JcC3WoyxuokwhueMUeBG2PKrFnMFVJ6f39IPWRbA
+Message-ID: <CAKmqyKOMaBRGJ_p_7Ht1s4y=hWubS_Zt_c0Gz6EaT7xa-o8EeA@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv/riscv-iommu: Fix MemoryRegion owner
+To: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x533.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,16 +101,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Oct 28, 2025 at 6:48=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Mon, Oct 27, 2025 at 3:39=E2=80=AFPM Akihiko Odaki
+<odaki@rsg.ci.i.u-tokyo.ac.jp> wrote:
 >
-> Add a small section talking about the 'riscv-aia' KVM setting we
-> implement and how it affects the provisioning of the IMSIC s-mode
-> in-kernel controller.
+> as points to the MemoryRegion itself. s is the device that owns the
+> MemoryRegion.
 >
-> While we're at it, fix the formatting of the AIA bullet list.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 
 Thanks!
 
@@ -117,80 +116,32 @@ Applied to riscv-to-apply.next
 Alistair
 
 > ---
->  docs/specs/riscv-aia.rst | 43 ++++++++++++++++++++++++++++++++++++----
->  1 file changed, 39 insertions(+), 4 deletions(-)
+>  hw/riscv/riscv-iommu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/docs/specs/riscv-aia.rst b/docs/specs/riscv-aia.rst
-> index 8097e2f897..f3c6ab7fcb 100644
-> --- a/docs/specs/riscv-aia.rst
-> +++ b/docs/specs/riscv-aia.rst
-> @@ -8,10 +8,8 @@ RISC-V machine for TCG and KVM accelerators.
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index b33c7fe3259e..51c28d4f8c57 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -1362,7 +1362,7 @@ static AddressSpace *riscv_iommu_space(RISCVIOMMUSt=
+ate *s, uint32_t devid)
+>          /* IOVA address space, untranslated addresses */
+>          memory_region_init_iommu(&as->iova_mr, sizeof(as->iova_mr),
+>              TYPE_RISCV_IOMMU_MEMORY_REGION,
+> -            OBJECT(as), "riscv_iommu", UINT64_MAX);
+> +            OBJECT(s), "riscv_iommu", UINT64_MAX);
+>          address_space_init(&as->iova_as, MEMORY_REGION(&as->iova_mr), na=
+me);
 >
->  The support consists of two main modes:
+>          QLIST_INSERT_HEAD(&s->spaces, as, list);
 >
-> -- "aia=3Daplic": adds one or more APLIC (Advanced Platform Level Interru=
-pt Controller)
-> -  devices
-> -- "aia=3Daplic-imsic": adds one or more APLIC device and an IMSIC (Incom=
-ing MSI
-> -   Controller) device for each CPU
-> +- *aia=3Daplic*: adds one or more APLIC (Advanced Platform Level Interru=
-pt Controller) devices
-> +- *aia=3Daplic-imsic*: adds one or more APLIC device and an IMSIC (Incom=
-ing MSI Controller) device for each CPU
+> ---
+> base-commit: 36076d24f04ea9dc3357c0fbe7bb14917375819c
+> change-id: 20251027-iommu-94d68e7a85d2
 >
->  From an user standpoint, these modes will behave the same regardless of =
-the accelerator
->  used.  From a developer standpoint the accelerator settings will change =
-what it being
-> @@ -81,3 +79,40 @@ we will emulate in userspace:
->       - n/a
->       - emul
->       - in-kernel
-> +
-> +
-> +KVM accel option 'riscv-aia'
-> +----------------------------
-> +
-> +The KVM accelerator property 'riscv-aia' interacts with the "aia=3Daplic=
--imsic"
-> +to determine how the host KVM module will provide the in-kernel IMSIC s-=
-mode
-> +controller.  The 'kernel-irqchip' setting has no impact in 'riscv-aia' g=
-iven
-> +that any available 'kernel-irqchip' setting will always have an in-kerne=
-l
-> +IMSIC s-mode.  'riscv-aia' has no impact in APLIC m-mode/s-mode and
-> +IMSIC m-mode settings.
-> +
-> +
-> +.. list-table:: How 'riscv-aia' changes in-kernel IMSIC s-mode provision=
-ing
-> +   :widths: 25 25 25 25
-> +   :header-rows: 1
-> +
-> +   * - Accel
-> +     - KVM riscv-aia
-> +     - AIA type
-> +     - IMSIC s-mode
-> +   * - kvm
-> +     - none
-> +     - aplic-imsic
-> +     - in-kernel, default to 'auto'
-> +   * - kvm
-> +     - auto
-> +     - aplic-imsic
-> +     - in-kernel, hwaccel if available, emul otherwise
-> +   * - kvm
-> +     - hwaccel
-> +     - aplic-imsic
-> +     - in-kernel, use IMSIC controller from guest hardware
-> +   * - kvm
-> +     - emul
-> +     - aplic-imsic
-> +     - in-kernel, IMSIC is emulated by KVM
+> Best regards,
 > --
-> 2.51.0
+> Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 >
 >
 
