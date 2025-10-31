@@ -4,91 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49CF5CCF9FF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Oct 2025 10:47:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8257CCF9F8
+	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Oct 2025 10:52:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vEmej-0000ft-9S; Fri, 31 Oct 2025 06:46:53 -0400
+	id 1vEmjQ-0002M5-66; Fri, 31 Oct 2025 06:51:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vEmeh-0000f9-FB
- for qemu-riscv@nongnu.org; Fri, 31 Oct 2025 06:46:51 -0400
-Received: from mail-wm1-x342.google.com ([2a00:1450:4864:20::342])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vEmjM-0002Ip-EZ
+ for qemu-riscv@nongnu.org; Fri, 31 Oct 2025 06:51:40 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vEmee-0001kh-2U
- for qemu-riscv@nongnu.org; Fri, 31 Oct 2025 06:46:51 -0400
-Received: by mail-wm1-x342.google.com with SMTP id
- 5b1f17b1804b1-475e01db75aso13894125e9.1
- for <qemu-riscv@nongnu.org>; Fri, 31 Oct 2025 03:46:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vEmjG-0002hV-4O
+ for qemu-riscv@nongnu.org; Fri, 31 Oct 2025 06:51:39 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-4270a3464bcso1517584f8f.2
+ for <qemu-riscv@nongnu.org>; Fri, 31 Oct 2025 03:51:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761907604; x=1762512404; darn=nongnu.org;
+ d=linaro.org; s=google; t=1761907890; x=1762512690; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=t7RRK2AsLEw/BDg8tEo+jJn/R/r/v0KXYOZO5g4JKm0=;
- b=glpLyI/aasPnZ4UyAsNfoKsIDlRGsG29lc3e8ELJO4qoM+iUk+f8BYDGVoSmV3ymHW
- uxQeMErkl2UK+olTXDgkbYhBBN2vsKop0fsQerwnyuWkCO6cxuZwwzxO9t5VZolpzUYz
- xTsEr8CtfEmWovVBEMeR6xc4ajPu+3GCiXWjlzEERUrmixeWYlsrU4n/qYxGaw8NRwwS
- ECOqqkJ1T5isEWjRnLonRTeklUFOyWCySaiS8UB29sCdH2Mx1mmhB8FnM4au9pSmwxnu
- P3Ebs88NWhyoQno57DJiHmGcOBROhoHyygw4i7/ZolBCsv1Mp5LUK+illIKjYuN3jRb3
- oapA==
+ bh=h+FnkYZFDp4Lw292UW1n71WG3c/3Nki6YoZZ9R9Pp2M=;
+ b=Z2MtubhCfcpFqxlGpD/w/KeEo6Kv/GRj/ZqcXKNBh/BNEPf7sEh1qToqintxDJmIDr
+ fRSDFLsDl+O92kisn+jhKjxG7xSm4WlL5GWiD2ogrLBauIvHGe8k/GzLHkc6M812cZLI
+ d4XGkRbqFi1btn5/0aB6BLl6M85tseuRPsJdyy4epw7cUsTxuySUOs0g8fg7Txb1Sgri
+ K+z9LgYtfn+wY/h+dkO2G41rqJeIpsu59JOsI66XJWfVKW67SvDXFRDMOoZU9eDXCqd7
+ YkpxhVn93FVkA8zp4bw+28HgYNJ6oy72kfbutxLJynTDSTElFmi4mch9G74qMZBvmz2L
+ 6kOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761907604; x=1762512404;
+ d=1e100.net; s=20230601; t=1761907890; x=1762512690;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=t7RRK2AsLEw/BDg8tEo+jJn/R/r/v0KXYOZO5g4JKm0=;
- b=oGgzsYHIf5jXN1p1sh9x4UPGXoXe/SPfVv+5Luqnm4WawBd6eU17fEVRtCLWJC5eJC
- MknRD36P1WUWbVwYp96gRid6iGCI9S5zzejr7foa+zdDjHNEjqo+cKX7Qx8cUSSt+atQ
- 7xwG450UymhG0PZgUvLWELlcICeWIKp8LWfXrj0ylgrzeEyXs2WKBYS+Q3M1X8ONvhIA
- Pg5vFnou4LVtF4weJatPZgQQRSDCH8tKJ9KmurqTP+tyDGh6k8nVHcjiBdkzLCRWBzc8
- iZloqzcLGw7Z5/tP/FLM9tOlGXoLgRLvsMlvLyRCrYGJ60MvulcbBlxGeOZUS7N3R2/l
- ZKuw==
-X-Gm-Message-State: AOJu0YzJDMLCRE64wgMPWjILa4ysAKY4iZKXbcvQRyJUM1GGLqn6My1l
- C0SgW/GmJxvilSJLN9B1sIGve+KjGdXoKRkl2XIKXqPrXGu0zFY6xZAzHx+z9aSIJ7tPaOT2oTO
- m4EA8VwdOa/8xhrI=
-X-Gm-Gg: ASbGncvFkic1bNdn7kMDYNMw0qxh7iGVm4J0FbsFj+1BhFvCVq36QB3eVXtGKPin4vw
- SlC27Lnm26ohMnbfVLAyPz1/bW+48KlRytNHLVd6jenlLPAmJBR10QsFbYPmsUj1SFWsYN5wYwk
- /QPue0z5qlhtY7KCIb+SACe085jy4YAv+I5HWJnsiLptwf1vqqdax1Fr/qFqYoxeJyA0bHOotPS
- fBUXw+pREz3cy3qgT3+A260NpJZga+vSX32PeeUYC9M7tB7cbyTSPvoV0RKEc1eQnFGWWQgYOA3
- igFAoNo7nLb+xzP5k19AFiDcK5LXVkudaaxS9hwcVXo86qpCLgSoeay+uxhlXyNYhgmnfnBhf+F
- WXtRm+uH4zl4RLZ63TD2RuPgFiAGrFUToCCgje5NQKZlgn++3L65RcSKDLXr5aSzz0ufRNziIjb
- MS4Q2Zeid2FikQkOuuxrc79OKcmOmudxMN7wg7duWDG51/UadCGmFkVxaVOsFk4jBY4A==
-X-Google-Smtp-Source: AGHT+IHJleT3TOztLaX77DBhcishsUHgG1hf7GaUmavljt9rzDVdBi/vsFo50UxXHXkW3qqcqIcyZg==
-X-Received: by 2002:a05:600d:4350:b0:477:3543:3a51 with SMTP id
- 5b1f17b1804b1-47735433daamr10599815e9.6.1761907604595; 
- Fri, 31 Oct 2025 03:46:44 -0700 (PDT)
+ bh=h+FnkYZFDp4Lw292UW1n71WG3c/3Nki6YoZZ9R9Pp2M=;
+ b=jfAHx+pD4xBFORYXij4nycC9SQOTbT4IwFX35BtjvCNyv3Ut4hWnZQgSFKsZTcPWmj
+ pqxVI3UTSqSrsjK2ikLrvTHss7Loga+SXssFSjBEGR/B6Z+7lnxUhoJHtfgKxt6loOu7
+ YsOZ7FOC1BtiNa1HS/Y4u7zvoSxc+v/M4679Crkmn7hMC0RqwF2KoulamvTWcVE+h1Ou
+ j82qMfq0pNknWf9/xZafUZ+dZrW3fKi4aUJle9JPi8fhISgL78zs4/wvdgihSxlstV9+
+ 5Nm/J75UHT4Bcdjg8/Y8pQJcmJw9GpiB+mlHow9mnp4Dlt3/WRoiqXEbSIS0cGOJ+1up
+ 4THQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX+eXbmkXH5WdInpiGsqsu7AMCOQqMIiDeAzugv5+EBTvmCH5sKejOLPjVJ76OsFiCFtkR/s9Bqiqwu@nongnu.org
+X-Gm-Message-State: AOJu0YwBEgWJRlNn0KchI73AjPpC5RRQ8PcwEGsXr6Un8gkK4RFHAjbH
+ WqSRK5DzK3/ytmGw1WRZ4rfwxmmbFRemtT86HHAdyboNOsuE4YHa9p/hu8A242GtLxU=
+X-Gm-Gg: ASbGncsBsn2mSCn3wFsDOlcVvXnU6VdXCdzrQ2gTkQHp/AiJW6xRB2YVDU/x1VCGuVX
+ W0W0oWB7TBx4BNFGnF6giVeXxH1F7HbTvxbiAiPEIXmCTyhJA1rpYu4ygMpUA2d1n4VFma6IvKR
+ uqqRD+tBNG2Jdx3OduwwuVH5SO9fPH1osbCDUw8lT0hwrRy6DOWDm1r1ftI73qD1bkeaVK3xOZq
+ Hyf+s3PzypFERpml6QM7yfA2dtOEGdqBuJPS8FJCW2LAHXlGnI6jSd96nq/x0Ql4P6YuktWiMSo
+ GO+ya3/G6RjTQmPXc5/TZCbsFKYELTgMrvM6Ve6p4T/wPoH0vFnI6e8l8AXhXbD+B51W6ZV/emI
+ sotSk4OXeAXiriJ6HdzLmpO4grG8dZy4vD+Kwp8iwtUFCGUJpbWIySCfr+ZmtmZekTQ55xOOEl3
+ d0Nwln3BkYYDkzhgPXI4vq+owke7K0d0PVtmPDwxUO9AKogztzsi0wYS4=
+X-Google-Smtp-Source: AGHT+IEOeJDIw15a3psdx2TelkDf96UtBc8hzl4XXKhv7GHOCpFC2/8U5kacyy0pDc0PbDY5OdloBg==
+X-Received: by 2002:a05:6000:1a89:b0:428:5673:11d8 with SMTP id
+ ffacd0b85a97d-429bd682cbdmr2545137f8f.23.1761907890219; 
+ Fri, 31 Oct 2025 03:51:30 -0700 (PDT)
 Received: from [192.168.1.17] (adijon-656-1-155-31.w90-33.abo.wanadoo.fr.
  [90.33.190.31]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429c114be36sm2969467f8f.18.2025.10.31.03.46.43
+ ffacd0b85a97d-429c13eae16sm2872142f8f.32.2025.10.31.03.51.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Oct 2025 03:46:44 -0700 (PDT)
-Message-ID: <ac37d23f-a0fe-48aa-8f17-3fee8534e71f@linaro.org>
-Date: Fri, 31 Oct 2025 11:46:42 +0100
+ Fri, 31 Oct 2025 03:51:29 -0700 (PDT)
+Message-ID: <0942717b-214f-4e08-9e2a-6b87ded991c9@linaro.org>
+Date: Fri, 31 Oct 2025 11:51:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/5] target/riscv: add NEORV32 RV32 CPU type and vendor
- CSR hooks
+Subject: Re: [PATCH v4 00/27] hw/i386/pc: Remove deprecated 2.6 and 2.7 PC
+ machines
 Content-Language: en-US
-To: Michael Levit <michael@videogpu.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, smishash@gmail.com
-References: <20251027100938.11822-1-michael@videogpu.com>
- <20251027100938.11822-2-michael@videogpu.com>
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Laurent Vivier <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Yi Liu <yi.l.liu@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
+ Zhao Liu <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Ani Sinha <anisinha@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?Q?Cl=C3=A9ment_Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
+ qemu-arm@nongnu.org, =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?=
+ <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>,
+ Jason Wang <jasowang@redhat.com>
+References: <20250508133550.81391-1-philmd@linaro.org>
+ <20251031113344.7cb11540@imammedo-mac>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20251027100938.11822-2-michael@videogpu.com>
+In-Reply-To: <20251031113344.7cb11540@imammedo-mac>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::342;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x342.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,41 +123,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 27/10/25 11:09, Michael Levit wrote:
-> From: Michael <michael@videogpu.com>
+Hi Igor,
+
+On 31/10/25 11:33, Igor Mammedov wrote:
+> On Thu,  8 May 2025 15:35:23 +0200
+> Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
 > 
-> Introduce NEORV32 RV32 CPU type under target/riscv, wire NEORV32 vendor ID,
-> and add a vendor CSR (CSR_MXISA) guarded by mvendorid match, plus meson glue.
-> 
-> Signed-off-by: Michael Levit <michael@videogpu.com>
+> Are you planning to resping it?
+> (if yes, I can provide you with a fixed 2/27 patch that removes all legacy cpu hp leftovers)
 
+Sorry, no, I already burned all the x86 credits I had for 2025 :S
 
-> diff --git a/target/riscv/neorv32_csr.c b/target/riscv/neorv32_csr.c
-> new file mode 100644
-> index 0000000000..0cb8663436
-> --- /dev/null
-> +++ b/target/riscv/neorv32_csr.c
-> @@ -0,0 +1,54 @@
-> +/*
-> + * Neorv32-specific CSR.
-> + *
-> + * Copyright (c) 2025 Michael Levit
-> + *
-> + * Author:
-> + *   Michael Levit <michael@videogpu.com>
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
+Zhao kindly offered to help with respin :)
 
-FYI since commit 354925d4225 we mandate SPDX-License-Identifier tags.
+Regards,
+
+Phil.
 
