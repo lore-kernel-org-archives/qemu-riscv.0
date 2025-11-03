@@ -4,120 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B3F7CCF9FE
-	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Oct 2025 14:24:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73D0DCCF9FE
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Nov 2025 03:38:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vEq31-0006MC-AB; Fri, 31 Oct 2025 10:24:12 -0400
+	id 1vFlOA-00064D-Fd; Sun, 02 Nov 2025 22:37:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1vEq30-0006M1-5Z
- for qemu-riscv@nongnu.org; Fri, 31 Oct 2025 10:24:10 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1vEq2t-00073n-1W
- for qemu-riscv@nongnu.org; Fri, 31 Oct 2025 10:24:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1761920634;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=z8NsndKxi9wjfiwiNCzQ0sDwvjij+/0YwRPZVMGXiAQ=;
- b=CDzHUCDQOViS3D8LLnruRk5FzzHkB5EBPMZwGO+r8xzucVW4pyKjnwvEnAJkqeBt4ePHcc
- EQn0BHCey28sWr4BhFrCKvxJDIlK2D/VOt3eXrErbrDdnyt+6eDH5In5SeZ61d/54w4dZ5
- 396WAiax4msxCBeGiQxuJQ/0oA72hCw=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-481-8OwbC5Y6OVKcC0rbFW5wAQ-1; Fri, 31 Oct 2025 10:23:51 -0400
-X-MC-Unique: 8OwbC5Y6OVKcC0rbFW5wAQ-1
-X-Mimecast-MFC-AGG-ID: 8OwbC5Y6OVKcC0rbFW5wAQ_1761920630
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-475de0566adso18409585e9.0
- for <qemu-riscv@nongnu.org>; Fri, 31 Oct 2025 07:23:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1vFlNv-00062g-GD
+ for qemu-riscv@nongnu.org; Sun, 02 Nov 2025 22:37:37 -0500
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1vFlNs-0000Cp-Cc
+ for qemu-riscv@nongnu.org; Sun, 02 Nov 2025 22:37:35 -0500
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-340299fe579so4112209a91.2
+ for <qemu-riscv@nongnu.org>; Sun, 02 Nov 2025 19:37:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1762141049; x=1762745849; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=db+Ekq9ZlQ6OwPFUrOw9iSwB7ZjdaVlv1TkkdVkABH8=;
+ b=HizgSWAutZE+TSnCwbR0Ma3okv6dMBLymPDdoJlHyO3bTQIC7K5jMoa4W+T+WMkh1q
+ aMxDrmX+G6CjxBNQKCwDXYiwR4lsIcC5JTz0+zhVty1dnqdIT2VhFTFl5+6t0l0ltp3K
+ uJxvpBorZ0W06Vz7rDMBHi1SI9CCg+SoDKK97NWxOuMsa5S4hafIlUTthKAfyr89ieZx
+ Ylc4nXB4dw1fcgLhKmW5EMaN/uJXi313kZ0TjDR4rSqBXgHSr3zgnA/VkClHty5pOLgC
+ x05uTSjKZaRdWPDEfvYXXMvLCwQgYyxZcJ9uf3lnCXVzbjRIe7kmOArTNFm32sifE/Kf
+ k39w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761920630; x=1762525430;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=z8NsndKxi9wjfiwiNCzQ0sDwvjij+/0YwRPZVMGXiAQ=;
- b=AitgMdtc9yGF1lD8svb5nQWObsDNW4g7/wXRJN8Ga8ERpuemGJkYI1ania4z+pG1w8
- Gh/FwWdl6Ch78d4XxIDKbuoaEOE8oCC+HBEfd2dRANDO8pYR1u+2BjC3534BqYc7Olq2
- w1poO/8CmQ+K1YGUE9glmnl54xz/sF1p1hr0yJHR1Q/DNBStxUb432u1HvqD3HxYoJ/9
- BYH0uvMzjbHKfoUl3zmi/3UlEXwhIb2GbMcXG7Tp9TxZuqUiqo6fqaYCZsKSSNQzXMHZ
- f6rnbOpPHEw2sUGoYEVgcik0xRoiUpdTCN/TO+UlpnoEHbKi+c6avZmAU3luihv9HMUW
- DBzg==
+ d=1e100.net; s=20230601; t=1762141049; x=1762745849;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=db+Ekq9ZlQ6OwPFUrOw9iSwB7ZjdaVlv1TkkdVkABH8=;
+ b=HguKvvtbUwoCXDpvSaaGiqdY6gGxoQiF8UtKADKicYuZWQLI87Wizld7juEmi0Palo
+ ebtY++tbot9cLgTv7o8x/dTzHGspf0Ft4+A2t8pbnLMUT+ixDtXr1QtLeUwlOVY9yhHX
+ ZETX0YTHDdU1jfc43SQYbddxHBY6DtqFbAUwJgiEolHOfGC79nDNBr79MfjP9y2X3o63
+ sAwbNMnNobLTg590YtYeikYSTqgIr5Wjz5UoxnQfelqWTg2lIrEN7oj69DLKIPywsErv
+ W3DaCqM/sxrpRBH5t3orOvq6O/c5kOLoKKuy+xE4ZKqRXdY78AyoRz8BeKzTxlAmHNtN
+ XCbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWWB31KoN2Qcr1fP1Ij/iidmXFax9H4RggkaLyXR+r1CI+4t59DGncFKitqNsJRWvbL+LAFlc+lccCX@nongnu.org
-X-Gm-Message-State: AOJu0YyRS73jWtli/vSohVLZE+pm82HJ8taidCl46s4Saz1aTWnXjgKn
- L8dP6nj7bQ0eNLnDt8oVPlDUcuJeD7tZP9na+BOH1iNmya9JO8QA+zj22C9QXzp1jn32zD81Nl6
- NqkcZFPs0qlJrHUpzuH0B4Oq8UK2cGAblrHgsb5HQ3dwWo+Pd0vphNhAe
-X-Gm-Gg: ASbGnct/5SSEoXlSyP2+5AnJX0Ga9u8MsvjlUejM5WHk9CcOlZqzzj4toUo/TzCqUKc
- 8NJfVun0nLQS2P/EHhKZtTZ50AQGxd9sLelQVaampxmP2APkwHcGjGI+u8O9I4rqcZdm+9l/zyk
- ZTD6Ff1gX18Q9EB/S2t8yVBYNm0cr7voARYlalw4jZikSHKRssP1FBaMioMhQ4NLrQO4IbHam+2
- Q21VRDPH82YHm2GKQ8rbxnLrKl/977K9pfG3//Ju0kW2Dn0b1oZcwcWQSkT6bSD0XtBpjajJO38
- ElZbh/tZMOvNBEJ3fKVhDRrJhmxhhOD+5inql1sSHpTZ6maqaoIdrYpQvNyGAngB5A==
-X-Received: by 2002:a05:600c:c16a:b0:46f:b42e:e39e with SMTP id
- 5b1f17b1804b1-477308c60aamr38306915e9.39.1761920629809; 
- Fri, 31 Oct 2025 07:23:49 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH73DZHEsR+mQzo+LpxpAHYqi6uaGXmBv0wFmteO6GGOwU3gZyA1bUah7DEckHfOtZkUbifcg==
-X-Received: by 2002:a05:600c:c16a:b0:46f:b42e:e39e with SMTP id
- 5b1f17b1804b1-477308c60aamr38306415e9.39.1761920629398; 
- Fri, 31 Oct 2025 07:23:49 -0700 (PDT)
-Received: from fedora ([85.93.96.130]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4773c2ed409sm664775e9.2.2025.10.31.07.23.47
+ AJvYcCV9ryLXWSoSL//Neh16/5tfj7sGPDiOB1CmeChXEcWH4Nj2mQesSaDhY37PB/Ac5J5Tn/1d2Lcr/Wjw@nongnu.org
+X-Gm-Message-State: AOJu0YzB3bw/MXX5K3qZuss7l5gdkjdODeBlOWTPhl+GT6J2FI2Dic3G
+ 2biAGurC4J3uJlJcjZ49Levr/5LOHov/TnQOZJdsi8BaFB9KxDQZJb7o
+X-Gm-Gg: ASbGncswibCat5h1UObk0fji9pjY56cIf92xtDcLWtUYJXhPOGms4btJmXtdAFlu0RQ
+ 5JJ79m61Ht9tP7s+EIDIJhezPc0MfjTQRuTu30tn3nMNd7tPWIkeBceDcZ4v29YSGWM02rgXwWk
+ 6tSeVOjg15gCQz1XH7pO92zdhOYI+gR7I1eUaEPojcYTptZpUXI53LFFbSaMWXUECX+DpeStE4Y
+ RotAfjJr2u61qQCRa7x+/rm9lS1CUYa/chRp+3l+OQq48SWbg8TJHviCEl2shBDK5wQdY0cze9M
+ Gv6si5loYsPF8st4K+tC8m7bXHxrWQGmoqYwV152j6iylg4FNHys4fDhwhAZ3XvoP6aik1FB0Gx
+ 2mO4fpX3B/ClUchCdcdN6X4Qs+x2eNvFvLHoN9OrB1zLD24F6qi24l49U3WUKiUD8Sbo8vdW1gY
+ iGLDwye2QNRy6LucVb6nWyLCU7gVjFBRtanRK3rh15f5GzTf69rQBNRc/gx16D5FHwpK7eWSW0Q
+ imm3aMe9rAdy0epgeaUj7gEZj6RSA==
+X-Google-Smtp-Source: AGHT+IHsvlUHpKRjTGM/vIv3BOmn5V6UGnSPZizxxUaD3UT5t+oMKQJMSVRKf4L8VyNB/NLRwF00Kw==
+X-Received: by 2002:a17:90b:2583:b0:340:7972:a617 with SMTP id
+ 98e67ed59e1d1-3408306e83fmr13999548a91.18.1762141049101; 
+ Sun, 02 Nov 2025 19:37:29 -0800 (PST)
+Received: from toolbx.alistair23.me
+ (2403-580b-97e8-0-82ce-f179-8a79-69f4.ip6.aussiebb.net.
+ [2403:580b:97e8:0:82ce:f179:8a79:69f4])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-340a460ed24sm7939641a91.16.2025.11.02.19.37.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Oct 2025 07:23:48 -0700 (PDT)
-Date: Fri, 31 Oct 2025 15:23:45 +0100
-From: Igor Mammedov <imammedo@redhat.com>
-To: Zhao Liu <zhao1.liu@intel.com>
-Cc: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
- kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>, Gerd Hoffmann
- <kraxel@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Laurent
- Vivier <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu
- <yi.l.liu@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>, Eduardo
- Habkost <eduardo@habkost.net>, Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Marcelo Tosatti
- <mtosatti@redhat.com>, qemu-riscv@nongnu.org, Weiwei Li
- <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>, Yanan Wang
- <wangyanan55@huawei.com>, Helge Deller <deller@gmx.de>, Palmer Dabbelt
- <palmer@dabbelt.com>, Ani Sinha <anisinha@redhat.com>, Fabiano Rosas
- <farosas@suse.de>, Paolo Bonzini <pbonzini@redhat.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, =?UTF-8?B?Q2zDqW1lbnQ=?= Mathieu--Drif
- <clement.mathieu--drif@eviden.com>, qemu-arm@nongnu.org, =?UTF-8?B?TWFy?=
- =?UTF-8?B?Yy1BbmRyw6k=?= Lureau <marcandre.lureau@redhat.com>, Huacai Chen
- <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v4 00/27] hw/i386/pc: Remove deprecated 2.6 and 2.7 PC
- machines
-Message-ID: <20251031152345.65b2caed@fedora>
-In-Reply-To: <aQTEKyQjqIIGtyP0@intel.com>
-References: <20250508133550.81391-1-philmd@linaro.org>
- <20251031113344.7cb11540@imammedo-mac>
- <0942717b-214f-4e08-9e2a-6b87ded991c9@linaro.org>
- <aQTEKyQjqIIGtyP0@intel.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+ Sun, 02 Nov 2025 19:37:28 -0800 (PST)
+From: alistair23@gmail.com
+X-Google-Original-From: alistair.francis@wdc.com
+To: qemu-devel@nongnu.org, anjo@rev.ng, philmd@linaro.org, palmer@dabbelt.com,
+ dbarboza@ventanamicro.com, atishp@rivosinc.com
+Cc: alistair23@gmail.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH 0/8] single-binary: Make riscv cpu.h target partially
+ independent
+Date: Mon,  3 Nov 2025 13:37:05 +1000
+Message-ID: <20251103033713.904455-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: LBrQZCyNESicnImcyDgLbe6Jh-Hkfx8OF9g_6IaBD2s_1761920630
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x102c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -133,34 +107,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 31 Oct 2025 22:14:03 +0800
-Zhao Liu <zhao1.liu@intel.com> wrote:
+From: Alistair Francis <alistair.francis@wdc.com>
 
-> Hi Igor and Philippe,
->=20
-> > On 31/10/25 11:33, Igor Mammedov wrote: =20
-> > > On Thu,  8 May 2025 15:35:23 +0200
-> > > Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
-> > >=20
-> > > Are you planning to resping it?
-> > > (if yes, I can provide you with a fixed 2/27 patch that removes all l=
-egacy cpu hp leftovers) =20
-> >=20
-> > Sorry, no, I already burned all the x86 credits I had for 2025 :S =20
->=20
-> Don't say that, thanks for your efforts! :-)
->=20
-> > Zhao kindly offered to help with respin :) =20
->=20
-> I haven't forgotten about this. I also plan to help it move forward
-> in the coming weeks.
+This is the first 8 patches (one of which has been removed) from Anton's
+series [1], plus an extra cleanup patch at the end.
 
-in this case, I'll send reworked patch (not really tested)
-as a reply 2/27 so you could incorporate it on respin.
+This addresses the comments I had about Anton's changes to
+riscv_pmu_ctr_get_fixed_counters_val().
 
-=20
-> Thanks,
-> Zhao
->=20
+Besides my new patch and removing a patch the actual changes are
+limited, so I have kept all of the Reviewed-by tags.
+
+1: https://patchew.org/QEMU/20251027181831.27016-1-anjo@rev.ng/
+
+Alistair Francis (1):
+  target/riscv: Remove upper_half from
+    riscv_pmu_ctr_get_fixed_counters_val
+
+Anton Johansson (7):
+  target/riscv: Fix size of trivial CPUArchState fields
+  target/riscv: Fix size of mhartid
+  target/riscv: Bugfix make bit 62 read-only 0 for sireg* cfg CSR read
+  target/riscv: Combine mhpmevent and mhpmeventh
+  target/riscv: Combine mcyclecfg and mcyclecfgh
+  target/riscv: Combine minstretcfg and minstretcfgh
+  target/riscv: Combine mhpmcounter and mhpmcounterh
+
+ target/riscv/cpu.h         | 106 +++++++++---------
+ target/riscv/cpu_helper.c  |   2 +-
+ target/riscv/csr.c         | 221 ++++++++++++++++---------------------
+ target/riscv/machine.c     |  99 ++++++++---------
+ target/riscv/pmu.c         | 150 ++++++-------------------
+ target/riscv/tcg/tcg-cpu.c |   2 +-
+ 6 files changed, 227 insertions(+), 353 deletions(-)
+
+-- 
+2.51.1
 
 
