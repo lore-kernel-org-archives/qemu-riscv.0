@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1147CCCF9FE
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Nov 2025 12:15:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BCC0CCF9F8
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Nov 2025 12:21:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vFtSS-0007hV-7Z; Mon, 03 Nov 2025 07:14:49 -0500
+	id 1vFtYY-0001t1-NC; Mon, 03 Nov 2025 07:21:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vFtS9-0007fH-V4
- for qemu-riscv@nongnu.org; Mon, 03 Nov 2025 07:14:30 -0500
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ id 1vFtYW-0001qw-8m
+ for qemu-riscv@nongnu.org; Mon, 03 Nov 2025 07:21:04 -0500
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vFtS1-0004Go-CD
- for qemu-riscv@nongnu.org; Mon, 03 Nov 2025 07:14:28 -0500
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-7a435a3fc57so4044761b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 03 Nov 2025 04:14:11 -0800 (PST)
+ id 1vFtYM-0005f0-5n
+ for qemu-riscv@nongnu.org; Mon, 03 Nov 2025 07:21:03 -0500
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-3401314d845so5704066a91.1
+ for <qemu-riscv@nongnu.org>; Mon, 03 Nov 2025 04:20:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1762172049; x=1762776849; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1762172447; x=1762777247; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=VwJ4E1CnRoW4X96XmZV3n/pGDA7Tx+TyThnuSnSkfeI=;
- b=V9I5VeJDOtGz5G9cAvwLCSMju7RjQWj5o4gZSnPZvFH8zbQ7oxrAfkcL5VjWR7MtJb
- DIFALMIvltkJsINvgT12Wz84KWB+UwFMgmgwIfntLQaz2nLpPMpxPsHWQGspwz+mJnTL
- UvVeYcWQJAxxT05swSURQcF04b7YSJsYE1lWjSCTNz+pjC4VMy+8k1RcIW1g1Ln5NNpk
- TGz8E5wnbPIxfzCrHPX9yHfqCYdrt2ORYtHWcsdqpBhXjurwLArmrWb5DJdquu6GvvUb
- M9w7WpXB59V/sghoud5/wsIA1DUBsxYcDBFXdmKyqfBvjiotziAxlkGIfOQRRx2qQkzv
- ZGXg==
+ bh=r5d3Wh8oVEEFgOQK5yGrVs/okJ1AvJqd+6XS87n2UT4=;
+ b=a1nBimvu4b8qa0cwfCEGuEjPcTrfbGKGzOw2L1IR+EkTVoX2rvBjWI7c+tGcacd05G
+ eMpcupYMNi8iN34WCDQj8z2Ijy7BMd4e19sf5Qoq8NgU5nZ55zgZdGUqAuM0/4rROxIu
+ n+J0JjoBzNiFkfryYlwyRQ882AOgnvDICBr1Jc0w5IncF7OzSlwtTi0x8kjTqymhTAyr
+ mFvNRpEB8rDx/4R6dLHyj1tkzsw8OgJqe6xmMZuLrtyNiWg88XkNZrjSNPXqpNEYZFQn
+ uCfKgCsC5mcZmbSf40nH0smCcezKs01wD9ptc2hnuPEu44exWPi+73SnA1wlsfMVhxg7
+ bb3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762172049; x=1762776849;
+ d=1e100.net; s=20230601; t=1762172447; x=1762777247;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VwJ4E1CnRoW4X96XmZV3n/pGDA7Tx+TyThnuSnSkfeI=;
- b=aKEw5hWlZaB/n9eCHGGJ2/oBP/bvTKRIQYXhywjP7B8c4oWp6FdjKcpwKAlEdi52up
- EMvjI/VZ8jRCvLvMSPOIhFlqpKl/306KXTdemcfjDThwWju80hm7lT/TxGGr174Gcuvk
- E0EJglvtoN+gzOwt5di78ApiELsSR5BQ14l0GwA6fzLC8922oLVqxlCrSa0Mn4XXzom/
- QYgapDgz63VGiGhpJVtOPa2DgR+ReosCVl5XbALriz16xMZmixtPf37UuCEtxHVJmbCM
- KSE205VJfu8pgvB0Bf5bEgVvjzkOENrY2DqyfQYZhhY73SI7b3zSKrYhQ7pWPsgDl0+F
- 9Dpw==
+ bh=r5d3Wh8oVEEFgOQK5yGrVs/okJ1AvJqd+6XS87n2UT4=;
+ b=H/9M1slGMLHY9/DqZGVPB94cqyyKsBGdflrmoWYAANBjG5sdkeRemI4qD1bFur6fSb
+ qcf4xqipIOWax38gpXpxp2w0EXKx3yAHNx7Y04cjpLxmgqPyB2nXuM3WHQxPWUsj58Ke
+ 4ZPNdTG6yI2xiW0sjoclg+AVJlGzDyfL83tdfmQT2eePlh5oeA2VF23VoNtF90p7vc0R
+ RJatTBEOsCQ2Resm2umGUhUpAeIWQQs9vM/1Iwi44q1nqZTHe1Yr9jKlWHNHjrr28RHf
+ 74zD28xN8eqfTDzR2rIAvS4I6S84kjf4GF5TZ6kqnNZ6mftM3D2tvqsu3DM2m/QwPHHd
+ d+dw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXop3ocsgvJSTcFlxN7TCOXxbHFNwt2gUbsU0tSbQY+c7C3hHRvlFE2DlOuRbeaSlnVZTJEZOWvnta@nongnu.org
-X-Gm-Message-State: AOJu0YzznKAIJgbnKiNb/2ExvVHHwfQIQsnM1SBV0yBmBtLGHVCrp4t6
- mazFYx4sjK9ra3rwb271Jepep+EAEhBuUtGC2NMuT6S85v1ehafT0JWehkTSWi3jIl8=
-X-Gm-Gg: ASbGncuRKW/XBm5bjLL021AsnVHXoXYhuAe+GRqvHRD8LhBr6jFXJjVYMkszxGP+J2b
- T/3DiwDZ+O9q482MF69ivz4YDkwkqZZxfFrhIa0wgb1XcDGv6NWXn0jANPIdhqeT3o5fkC1r5xq
- 6sNsHkfx9fVggZsZJe7+IEdn97Z1/HEvHjLcZTd5I6td488alF104p42bBqWNMIcuvOYPadJqDB
- tx3RdwlztydObtTi3RimnDHZ2EH37s3oRO1RoZbix4CqsggV+TcuIbYa9gxAyjbp8uQoIHY6Qco
- t9sr+gIt5U2AUgvdvC5UXcfCDI2WsFc4BNzZARBX5p9Qvg4wsp5anlmn67yWaG49w6c+SBm9xLI
- Ch5gyYNWJYXikKQID0+WbNXhRl+SbsCglWNT9TVt0iIiWzSNbJny1VrUWF45YtRixDNz76WyykX
- xJLQrFGY/j46VtEc5F2sYQoIc=
-X-Google-Smtp-Source: AGHT+IF6ssF4vtxdGhasJRtaY5hA6SZSFCSEQXAz+Nj6xgiAcT0FCsAWU7QKf10KDK2sWrkm3/A/iQ==
-X-Received: by 2002:a05:6a20:7d8b:b0:334:8759:5016 with SMTP id
- adf61e73a8af0-348cbda9bb2mr15612013637.28.1762172048670; 
- Mon, 03 Nov 2025 04:14:08 -0800 (PST)
+ AJvYcCUSKVKaVixvIGO21/fEn7FTLKfDf7tIUnwBh8A2hOY66XI/9+IJkECvqjoGzy8ASWj8rOlRG4yzu4+Y@nongnu.org
+X-Gm-Message-State: AOJu0YzN1qr+auXEZAGqBeKo3b1bRvPv5Xkc6p4Ut4OoTwJzAdjrKlHH
+ 0zPCSu3D3z6pBqE/4mzUCAt35eNztecUUjkOUVBZ8tMi9OggqgpNs5/1urGFDd3JecM=
+X-Gm-Gg: ASbGncsCgsiV0t7ZUvOWA1NVo94WnYMdUrg3cD5ff+3Eb2eYClWGLTC70lfoSSMNxqh
+ J/BQFItCnzoZ5zlyUUaB096HHqu8clEyucMJ6r2h2MES3k+5+zaLZ3kYo9U4gbMxubuWVIdQoam
+ 7DIRsEUiYvP7MiHMuQh6WIjzeeo09bZB1JqVx6VBIWKy/UCDxEcPzTzyyeZAMCpr74S0XFdTMdC
+ DgUJxke5+52/afbaH+v5zrhJixbGukeDUmRC6UiEnpOCRjJTKRUHXr8wgdmsllKDfct7o8Q75Wg
+ hyh9LZu2LICPY08NeIvldNr7vEKeBhO5eirXiHMO17Fx8XgErFnQ3Qa89uXITSErcp5gO3+XDQV
+ FcDLGrmUVZZ5i+XGpzeHtHMYqxwBTDbQwf/5jqZ7LJn6JttUG28QPjCHdAtQS8Jow2xlE0Du4b4
+ 6SnqLGb/2NlHwe
+X-Google-Smtp-Source: AGHT+IFtukZ5uEIJ6kzigTHjFiqyoSviIh/4YGLnu4ZdZaDqW30Q4J4SpEC+QP16K5OWVZdQ2NU3HA==
+X-Received: by 2002:a17:90a:dfd0:b0:341:194:5e82 with SMTP id
+ 98e67ed59e1d1-341019461a8mr5966010a91.30.1762172447195; 
+ Mon, 03 Nov 2025 04:20:47 -0800 (PST)
 Received: from [192.168.68.110] ([187.101.65.79])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b93bf265180sm10377203a12.33.2025.11.03.04.13.59
+ 41be03b00d2f7-b96078aee39sm7860884a12.1.2025.11.03.04.20.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Nov 2025 04:14:08 -0800 (PST)
-Message-ID: <a4e05115-25a2-4487-b8b4-32462a1c88f6@ventanamicro.com>
-Date: Mon, 3 Nov 2025 09:13:56 -0300
+ Mon, 03 Nov 2025 04:20:46 -0800 (PST)
+Message-ID: <3e3e3617-5b8b-442f-adea-068ef636515f@ventanamicro.com>
+Date: Mon, 3 Nov 2025 09:20:37 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/18] accel/tcg: Store section pointer in
- CPUTLBEntryFull
+Subject: Re: [PATCH v3 02/18] system/physmem: Remove the assertion of
+ page-aligned section number
 To: Jim Shu <jim.shu@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -99,21 +99,21 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
  "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
 References: <20251021155548.584543-1-jim.shu@sifive.com>
- <20251021155548.584543-2-jim.shu@sifive.com>
+ <20251021155548.584543-3-jim.shu@sifive.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20251021155548.584543-2-jim.shu@sifive.com>
+In-Reply-To: <20251021155548.584543-3-jim.shu@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,277 +132,40 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 10/21/25 12:55 PM, Jim Shu wrote:
-> To fix the bug of iotlb_to_section(), store complete MemoryRegionSection
-> pointer in CPUTLBEntryFull to replace the section_index in xlat_section.
-> Rename 'xlat_section' to 'xlat' as we remove last 12 bits section_index
-> inside. Also, since we directly use section pointer in the
-> CPUTLBEntryFull (full->section), we can remove the unused functions:
-> iotlb_to_section(), memory_region_section_get_iotlb().
+> The physical section number is no longer ORed into the IOTLB entries
+> together with a page-aligned pointer, so it no longer needs to be
+> page-aligned.
 > 
-> iotlb_to_section() bug description:
-> 'CPUTLBEntryFull.xlat_section' stores section_index in last 12 bits to
-> find the correct section when CPU access the IO region over the IOTLB.
-> However, section_index is only unique inside single AddressSpace. If
-> address space translation is over IOMMUMemoryRegion, it could return
-> section from other AddressSpace. 'iotlb_to_section()' API only finds the
-> sections from CPU's AddressSpace so that it couldn't find section in
-> other AddressSpace. Thus, using 'iotlb_to_section()' API will find the
-> wrong section and QEMU will have wrong load/store access.
-> 
-> This bug occurs only when
-> (1) IOMMUMemoryRegion is in the path of CPU access.
-> (2) IOMMUMemoryRegion returns different target_as and the section is in
-> the IO region.
-> 
-> Common IOMMU devices don't have this issue since they are only in the
-> path of DMA access. Currently, the bug only occurs when ARM MPC device
-> (hw/misc/tz-mpc.c) returns 'blocked_io_as' to emulate blocked access
-> handling. Upcoming RISC-V wgChecker device is also affected by this bug.
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> ---
 
-
-I believe you could sent this patch as a bug fix, apart from this series, given
-that it's a bug fix.
-
-I would also rename the commit title to something like
-
-"accel/tcg: Fix store section ptr in ...",
-
-i.e. adding a "fix" in it, to make it clearer that this is a bug fix.
-
+If you go with my idea of sending patch 1 apart from this series, as a bug fix,
+this patch would go along with it.
 
 
 Thanks,
 
 Daniel
 
+>   system/physmem.c | 6 ------
+>   1 file changed, 6 deletions(-)
 > 
-> Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> ---
->   accel/tcg/cputlb.c        | 32 +++++++++++++++-----------------
->   include/accel/tcg/iommu.h | 15 ---------------
->   include/exec/cputlb.h     |  2 +-
->   include/hw/core/cpu.h     | 12 +++++++-----
->   system/physmem.c          | 25 -------------------------
->   5 files changed, 23 insertions(+), 63 deletions(-)
-> 
-> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-> index 631f1fe135..b3ed5d2b9c 100644
-> --- a/accel/tcg/cputlb.c
-> +++ b/accel/tcg/cputlb.c
-> @@ -1089,7 +1089,7 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
->           }
->       } else {
->           /* I/O or ROMD */
-> -        iotlb = memory_region_section_get_iotlb(cpu, section) + xlat;
-> +        iotlb = xlat;
->           /*
->            * Writes to romd devices must go through MMIO to enable write.
->            * Reads to romd devices go through the ram_ptr found above,
-> @@ -1140,10 +1140,9 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
->       /*
->        * When memory region is ram, iotlb contains a TARGET_PAGE_BITS
->        * aligned ram_addr_t of the page base of the target RAM.
-> -     * Otherwise, iotlb contains
-> -     *  - a physical section number in the lower TARGET_PAGE_BITS
-> -     *  - the offset within section->mr of the page base (I/O, ROMD) with the
-> -     *    TARGET_PAGE_BITS masked off.
-> +     * Otherwise, iotlb contains a TARGET_PAGE_BITS aligned
-> +     * offset within section->mr of the page base (I/O, ROMD)
-> +     *
->        * We subtract addr_page (which is page aligned and thus won't
->        * disturb the low bits) to give an offset which can be added to the
->        * (non-page-aligned) vaddr of the eventual memory access to get
-> @@ -1153,7 +1152,8 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
->        */
->       desc->fulltlb[index] = *full;
->       full = &desc->fulltlb[index];
-> -    full->xlat_section = iotlb - addr_page;
-> +    full->xlat = iotlb - addr_page;
-> +    full->section = section;
->       full->phys_addr = paddr_page;
->   
->       /* Now calculate the new entry */
-> @@ -1269,14 +1269,14 @@ static inline void cpu_unaligned_access(CPUState *cpu, vaddr addr,
->   }
->   
->   static MemoryRegionSection *
-> -io_prepare(hwaddr *out_offset, CPUState *cpu, hwaddr xlat,
-> +io_prepare(hwaddr *out_offset, CPUState *cpu, CPUTLBEntryFull *full,
->              MemTxAttrs attrs, vaddr addr, uintptr_t retaddr)
->   {
->       MemoryRegionSection *section;
->       hwaddr mr_offset;
->   
-> -    section = iotlb_to_section(cpu, xlat, attrs);
-> -    mr_offset = (xlat & TARGET_PAGE_MASK) + addr;
-> +    section = full->section;
-> +    mr_offset = full->xlat + addr;
->       cpu->mem_io_pc = retaddr;
->       if (!cpu->neg.can_do_io) {
->           cpu_io_recompile(cpu, retaddr);
-> @@ -1335,7 +1335,7 @@ static bool victim_tlb_hit(CPUState *cpu, size_t mmu_idx, size_t index,
->   static void notdirty_write(CPUState *cpu, vaddr mem_vaddr, unsigned size,
->                              CPUTLBEntryFull *full, uintptr_t retaddr)
->   {
-> -    ram_addr_t ram_addr = mem_vaddr + full->xlat_section;
-> +    ram_addr_t ram_addr = mem_vaddr + full->xlat;
->   
->       trace_memory_notdirty_write_access(mem_vaddr, ram_addr, size);
->   
-> @@ -1592,9 +1592,7 @@ bool tlb_plugin_lookup(CPUState *cpu, vaddr addr, int mmu_idx,
->   
->       /* We must have an iotlb entry for MMIO */
->       if (tlb_addr & TLB_MMIO) {
-> -        MemoryRegionSection *section =
-> -            iotlb_to_section(cpu, full->xlat_section & ~TARGET_PAGE_MASK,
-> -                             full->attrs);
-> +        MemoryRegionSection *section = full->section;
->           data->is_io = true;
->           data->mr = section->mr;
->       } else {
-> @@ -1991,7 +1989,7 @@ static uint64_t do_ld_mmio_beN(CPUState *cpu, CPUTLBEntryFull *full,
->       tcg_debug_assert(size > 0 && size <= 8);
->   
->       attrs = full->attrs;
-> -    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
-> +    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
->       mr = section->mr;
->   
->       BQL_LOCK_GUARD();
-> @@ -2012,7 +2010,7 @@ static Int128 do_ld16_mmio_beN(CPUState *cpu, CPUTLBEntryFull *full,
->       tcg_debug_assert(size > 8 && size <= 16);
->   
->       attrs = full->attrs;
-> -    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
-> +    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
->       mr = section->mr;
->   
->       BQL_LOCK_GUARD();
-> @@ -2532,7 +2530,7 @@ static uint64_t do_st_mmio_leN(CPUState *cpu, CPUTLBEntryFull *full,
->       tcg_debug_assert(size > 0 && size <= 8);
->   
->       attrs = full->attrs;
-> -    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
-> +    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
->       mr = section->mr;
->   
->       BQL_LOCK_GUARD();
-> @@ -2552,7 +2550,7 @@ static uint64_t do_st16_mmio_leN(CPUState *cpu, CPUTLBEntryFull *full,
->       tcg_debug_assert(size > 8 && size <= 16);
->   
->       attrs = full->attrs;
-> -    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
-> +    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
->       mr = section->mr;
->   
->       BQL_LOCK_GUARD();
-> diff --git a/include/accel/tcg/iommu.h b/include/accel/tcg/iommu.h
-> index 90cfd6c0ed..547f8ea0ef 100644
-> --- a/include/accel/tcg/iommu.h
-> +++ b/include/accel/tcg/iommu.h
-> @@ -14,18 +14,6 @@
->   #include "exec/hwaddr.h"
->   #include "exec/memattrs.h"
->   
-> -/**
-> - * iotlb_to_section:
-> - * @cpu: CPU performing the access
-> - * @index: TCG CPU IOTLB entry
-> - *
-> - * Given a TCG CPU IOTLB entry, return the MemoryRegionSection that
-> - * it refers to. @index will have been initially created and returned
-> - * by memory_region_section_get_iotlb().
-> - */
-> -MemoryRegionSection *iotlb_to_section(CPUState *cpu,
-> -                                      hwaddr index, MemTxAttrs attrs);
-> -
->   MemoryRegionSection *address_space_translate_for_iotlb(CPUState *cpu,
->                                                          int asidx,
->                                                          hwaddr addr,
-> @@ -34,8 +22,5 @@ MemoryRegionSection *address_space_translate_for_iotlb(CPUState *cpu,
->                                                          MemTxAttrs attrs,
->                                                          int *prot);
->   
-> -hwaddr memory_region_section_get_iotlb(CPUState *cpu,
-> -                                       MemoryRegionSection *section);
-> -
->   #endif
->   
-> diff --git a/include/exec/cputlb.h b/include/exec/cputlb.h
-> index 9bec0e7890..c0ca7ad77b 100644
-> --- a/include/exec/cputlb.h
-> +++ b/include/exec/cputlb.h
-> @@ -43,7 +43,7 @@ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
->    * @full: the details of the tlb entry
->    *
->    * Add an entry to @cpu tlb index @mmu_idx.  All of the fields of
-> - * @full must be filled, except for xlat_section, and constitute
-> + * @full must be filled, except for xlat, and constitute
->    * the complete description of the translated page.
->    *
->    * This is generally called by the target tlb_fill function after
-> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-> index e79e8e0a8e..cce3f16198 100644
-> --- a/include/hw/core/cpu.h
-> +++ b/include/hw/core/cpu.h
-> @@ -214,15 +214,17 @@ typedef uint32_t MMUIdxMap;
->    */
->   struct CPUTLBEntryFull {
->       /*
-> -     * @xlat_section contains:
-> -     *  - in the lower TARGET_PAGE_BITS, a physical section number
-> -     *  - with the lower TARGET_PAGE_BITS masked off, an offset which
-> -     *    must be added to the virtual address to obtain:
-> +     * @xlat contains:
-> +     *  - a TARGET_PAGE_BITS aligned offset which must be added to
-> +     *    the virtual address to obtain:
->        *     + the ram_addr_t of the target RAM (if the physical section
->        *       number is PHYS_SECTION_NOTDIRTY or PHYS_SECTION_ROM)
->        *     + the offset within the target MemoryRegion (otherwise)
->        */
-> -    hwaddr xlat_section;
-> +    hwaddr xlat;
-> +
-> +    /* @section contains physical section. */
-> +    MemoryRegionSection *section;
->   
->       /*
->        * @phys_addr contains the physical address in the address space
 > diff --git a/system/physmem.c b/system/physmem.c
-> index a340ca3e61..c163d6b856 100644
+> index c163d6b856..23d9b92954 100644
 > --- a/system/physmem.c
 > +++ b/system/physmem.c
-> @@ -748,31 +748,6 @@ translate_fail:
->       return &d->map.sections[PHYS_SECTION_UNASSIGNED];
->   }
->   
-> -MemoryRegionSection *iotlb_to_section(CPUState *cpu,
-> -                                      hwaddr index, MemTxAttrs attrs)
-> -{
-> -    int asidx = cpu_asidx_from_attrs(cpu, attrs);
-> -    CPUAddressSpace *cpuas = &cpu->cpu_ases[asidx];
-> -    AddressSpaceDispatch *d = address_space_to_dispatch(cpuas->as);
-> -    int section_index = index & ~TARGET_PAGE_MASK;
-> -    MemoryRegionSection *ret;
+> @@ -1305,12 +1305,6 @@ static subpage_t *subpage_init(FlatView *fv, hwaddr base);
+>   static uint16_t phys_section_add(PhysPageMap *map,
+>                                    MemoryRegionSection *section)
+>   {
+> -    /* The physical section number is ORed with a page-aligned
+> -     * pointer to produce the iotlb entries.  Thus it should
+> -     * never overflow into the page-aligned value.
+> -     */
+> -    assert(map->sections_nb < TARGET_PAGE_SIZE);
 > -
-> -    assert(section_index < d->map.sections_nb);
-> -    ret = d->map.sections + section_index;
-> -    assert(ret->mr);
-> -    assert(ret->mr->ops);
-> -
-> -    return ret;
-> -}
-> -
-> -/* Called from RCU critical section */
-> -hwaddr memory_region_section_get_iotlb(CPUState *cpu,
-> -                                       MemoryRegionSection *section)
-> -{
-> -    AddressSpaceDispatch *d = flatview_to_dispatch(section->fv);
-> -    return section - d->map.sections;
-> -}
-> -
->   #endif /* CONFIG_TCG */
->   
->   void cpu_address_space_init(CPUState *cpu, int asidx,
+>       if (map->sections_nb == map->sections_nb_alloc) {
+>           map->sections_nb_alloc = MAX(map->sections_nb_alloc * 2, 16);
+>           map->sections = g_renew(MemoryRegionSection, map->sections,
 
 
