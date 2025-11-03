@@ -4,116 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BCC0CCF9F8
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Nov 2025 12:21:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C795CCF9FE
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Nov 2025 12:41:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vFtYY-0001t1-NC; Mon, 03 Nov 2025 07:21:07 -0500
+	id 1vFtrS-0002Tm-Oa; Mon, 03 Nov 2025 07:40:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vFtYW-0001qw-8m
- for qemu-riscv@nongnu.org; Mon, 03 Nov 2025 07:21:04 -0500
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vFtYM-0005f0-5n
- for qemu-riscv@nongnu.org; Mon, 03 Nov 2025 07:21:03 -0500
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-3401314d845so5704066a91.1
- for <qemu-riscv@nongnu.org>; Mon, 03 Nov 2025 04:20:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1762172447; x=1762777247; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=r5d3Wh8oVEEFgOQK5yGrVs/okJ1AvJqd+6XS87n2UT4=;
- b=a1nBimvu4b8qa0cwfCEGuEjPcTrfbGKGzOw2L1IR+EkTVoX2rvBjWI7c+tGcacd05G
- eMpcupYMNi8iN34WCDQj8z2Ijy7BMd4e19sf5Qoq8NgU5nZ55zgZdGUqAuM0/4rROxIu
- n+J0JjoBzNiFkfryYlwyRQ882AOgnvDICBr1Jc0w5IncF7OzSlwtTi0x8kjTqymhTAyr
- mFvNRpEB8rDx/4R6dLHyj1tkzsw8OgJqe6xmMZuLrtyNiWg88XkNZrjSNPXqpNEYZFQn
- uCfKgCsC5mcZmbSf40nH0smCcezKs01wD9ptc2hnuPEu44exWPi+73SnA1wlsfMVhxg7
- bb3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762172447; x=1762777247;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=r5d3Wh8oVEEFgOQK5yGrVs/okJ1AvJqd+6XS87n2UT4=;
- b=H/9M1slGMLHY9/DqZGVPB94cqyyKsBGdflrmoWYAANBjG5sdkeRemI4qD1bFur6fSb
- qcf4xqipIOWax38gpXpxp2w0EXKx3yAHNx7Y04cjpLxmgqPyB2nXuM3WHQxPWUsj58Ke
- 4ZPNdTG6yI2xiW0sjoclg+AVJlGzDyfL83tdfmQT2eePlh5oeA2VF23VoNtF90p7vc0R
- RJatTBEOsCQ2Resm2umGUhUpAeIWQQs9vM/1Iwi44q1nqZTHe1Yr9jKlWHNHjrr28RHf
- 74zD28xN8eqfTDzR2rIAvS4I6S84kjf4GF5TZ6kqnNZ6mftM3D2tvqsu3DM2m/QwPHHd
- d+dw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUSKVKaVixvIGO21/fEn7FTLKfDf7tIUnwBh8A2hOY66XI/9+IJkECvqjoGzy8ASWj8rOlRG4yzu4+Y@nongnu.org
-X-Gm-Message-State: AOJu0YzN1qr+auXEZAGqBeKo3b1bRvPv5Xkc6p4Ut4OoTwJzAdjrKlHH
- 0zPCSu3D3z6pBqE/4mzUCAt35eNztecUUjkOUVBZ8tMi9OggqgpNs5/1urGFDd3JecM=
-X-Gm-Gg: ASbGncsCgsiV0t7ZUvOWA1NVo94WnYMdUrg3cD5ff+3Eb2eYClWGLTC70lfoSSMNxqh
- J/BQFItCnzoZ5zlyUUaB096HHqu8clEyucMJ6r2h2MES3k+5+zaLZ3kYo9U4gbMxubuWVIdQoam
- 7DIRsEUiYvP7MiHMuQh6WIjzeeo09bZB1JqVx6VBIWKy/UCDxEcPzTzyyeZAMCpr74S0XFdTMdC
- DgUJxke5+52/afbaH+v5zrhJixbGukeDUmRC6UiEnpOCRjJTKRUHXr8wgdmsllKDfct7o8Q75Wg
- hyh9LZu2LICPY08NeIvldNr7vEKeBhO5eirXiHMO17Fx8XgErFnQ3Qa89uXITSErcp5gO3+XDQV
- FcDLGrmUVZZ5i+XGpzeHtHMYqxwBTDbQwf/5jqZ7LJn6JttUG28QPjCHdAtQS8Jow2xlE0Du4b4
- 6SnqLGb/2NlHwe
-X-Google-Smtp-Source: AGHT+IFtukZ5uEIJ6kzigTHjFiqyoSviIh/4YGLnu4ZdZaDqW30Q4J4SpEC+QP16K5OWVZdQ2NU3HA==
-X-Received: by 2002:a17:90a:dfd0:b0:341:194:5e82 with SMTP id
- 98e67ed59e1d1-341019461a8mr5966010a91.30.1762172447195; 
- Mon, 03 Nov 2025 04:20:47 -0800 (PST)
-Received: from [192.168.68.110] ([187.101.65.79])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b96078aee39sm7860884a12.1.2025.11.03.04.20.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Nov 2025 04:20:46 -0800 (PST)
-Message-ID: <3e3e3617-5b8b-442f-adea-068ef636515f@ventanamicro.com>
-Date: Mon, 3 Nov 2025 09:20:37 -0300
+ (Exim 4.90_1) (envelope-from <chao.liu.riscv@isrc.iscas.ac.cn>)
+ id 1vFtrJ-0002Sr-CU; Mon, 03 Nov 2025 07:40:29 -0500
+Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <chao.liu.riscv@isrc.iscas.ac.cn>)
+ id 1vFtr9-0000p7-HD; Mon, 03 Nov 2025 07:40:27 -0500
+Received: from ZEVORN-PC (unknown [114.88.97.170])
+ by APP-03 (Coremail) with SMTP id rQCowADHQemhoghphSM7AQ--.13961S2;
+ Mon, 03 Nov 2025 20:40:02 +0800 (CST)
+From: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>
+To: dbarboza@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>
+Subject: [RFC v1 0/1] add virtio bus for rvsp-ref board
+Date: Mon,  3 Nov 2025 20:39:54 +0800
+Message-ID: <cover.1762172539.git.chao.liu.riscv@isrc.iscas.ac.cn>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/18] system/physmem: Remove the assertion of
- page-aligned section number
-To: Jim Shu <jim.shu@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>,
- Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
- Michael Rolnik <mrolnik@gmail.com>, Helge Deller <deller@gmx.de>,
- Song Gao <gaosong@loongson.cn>, Laurent Vivier <laurent@vivier.eu>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
- Chinmay Rath <rathc@linux.ibm.com>, Yoshinori Sato
- <yoshinori.sato@nifty.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>,
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>,
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
-References: <20251021155548.584543-1-jim.shu@sifive.com>
- <20251021155548.584543-3-jim.shu@sifive.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Language: en-US
-In-Reply-To: <20251021155548.584543-3-jim.shu@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1035.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: rQCowADHQemhoghphSM7AQ--.13961S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxWrWxtrykWFW8KFyrKF17KFg_yoW5Gw4rpF
+ 45GF15Gr1UXF17Xr13JryrJF15Zr18Gr1UGry3tr1UJr4UJr1UJr1UJr48CryUtr1UGr15
+ Kr47Gry5ur4UX3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWUWVWUuwAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j
+ 6r4UM28EF7xvwVC2z280aVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
+ 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY1x0262kKe7AKxVWU
+ AVWUtwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14
+ v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkG
+ c2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI
+ 0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4U
+ MIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7VUbSfO7UUUU
+ U==
+X-Originating-IP: [114.88.97.170]
+X-CM-SenderInfo: pfkd0hholxh2hlvf4qplvuuh5lvft2wodfhubq/1tbiDAYPAGkIkuwp6wAAsY
+Received-SPF: pass client-ip=159.226.251.81;
+ envelope-from=chao.liu.riscv@isrc.iscas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, FORGED_SPF_HELO=1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,43 +75,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi, Daniel.
 
+This patch series adds an always present virtio bus for the rvsp-ref board.
 
-On 10/21/25 12:55 PM, Jim Shu wrote:
-> The physical section number is no longer ORed into the IOTLB entries
-> together with a page-aligned pointer, so it no longer needs to be
-> page-aligned.
-> 
-> Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> ---
+You are free to use this patch, and if possible, please include it in the v4
+version.
 
-If you go with my idea of sending patch 1 apart from this series, as a bug fix,
-this patch would go along with it.
+Based on this set of patches and the results of our previous discussions,
+I can successfully boot OpenEuler RISC-V 25.09, which is an operating system
+distribution that supports rvsp-ref spec 1.0.
+
+like this:
+
+```
+[root@localhost ~]# fastfetch 
+                 `.cc.`
+             ``.cccccccc..`
+          `.cccccccccccccccc.`
+      ``.cccccccccccccccccccccc.``
+   `..cccccccccccccccccccccccccccc..`
+`.ccccccccccccccc/++/ccccccccccccccccc.`
+.cccccccccccccccmNMMNdo+oso+ccccccccccc.
+.cccccccccc/++odms+//+mMMMMm/:+syso/cccc
+.cccccccccyNNMMMs:::/::+o+/:cdMMMMMmcccc    root@localhost
+.ccccccc:+NmdyyhNNmNNNd:ccccc:oyyyo:cccc    --------------
+.ccc:ohdmMs:cccc+mNMNmyccccccccccccccccc    OS: openEuler 25.09 riscv64
+.cc/NMMMMMo////:c:///:cccccccccccccccccc    Host: riscv-rvsp-ref,qemu
+.cc:syysyNMNNNMNyccccccccccccccccccccccc    Kernel: Linux 6.6.0.oe2509.riscv64
+.cccccccc+MMMMMNyc:/+++/cccccccccccccccc    Uptime: 56 mins
+.cccccccccohhhs/comMMMMNhccccccccccccccc    Packages: 306 (rpm)
+.ccccccccccccccc:MMMMMMMM/cccccccccccccc    Shell: bash 5.2.37
+.ccccccccccccccccsNNNNNd+cccccccccccccc.    Cursor: Adwaita
+`..cccccccccccccccc/+/:cccccccccccccc..`    Terminal: vt220
+   ``.cccccccccccccccccccccccccccc.``       CPU: rv64gcvh (8)
+       `.cccccccccccccccccccccc.`           Memory: 277.14 MiB / 7.50 GiB
+          ``.cccccccccccccc.``              Swap: Disabled
+              `.cccccccc.`                  Disk (/): 1.32 GiB / 37.11 GiB
+                 `....`                     Local IP (eth0): 10.0.2.15/24
+                                            Locale: en_US.UTF-8
+```
+
+It should be added that booting OpenEuler still requires modifying the default
+CPU type of the rvsp-ref board to TYPE_RISCV_CPU_MAX.
+
+If using the RVSP_REF CPU type inherited from TYPE_RISCV_VENDOR_CPU, the kernel
+cannot be booted;
+
+If using the RVSP_REF CPU type inherited from TYPE_RISCV_BARE_CPU, EDKII cannot
+be booted.
+
+About the second problem, I've checked it a little bit first. I found the
+issue is still because some extensions turned on in the profile are different.
+
+Once I figure out which specific extensions are causing this problem,
+I'll try to send a fix patch to the upstream.
+
+Also, I want to ask:
+
+Right now, EDKII is still compiled based on QEMU virt. Do we need to add a
+configuration for rvsp-ref in EDKII? Even though our rvsp-ref is made from virt.
 
 
 Thanks,
+Chao
 
-Daniel
+Chao Liu (1):
+  hw/riscv/server_platform_ref.c: add virtio bus
 
->   system/physmem.c | 6 ------
->   1 file changed, 6 deletions(-)
-> 
-> diff --git a/system/physmem.c b/system/physmem.c
-> index c163d6b856..23d9b92954 100644
-> --- a/system/physmem.c
-> +++ b/system/physmem.c
-> @@ -1305,12 +1305,6 @@ static subpage_t *subpage_init(FlatView *fv, hwaddr base);
->   static uint16_t phys_section_add(PhysPageMap *map,
->                                    MemoryRegionSection *section)
->   {
-> -    /* The physical section number is ORed with a page-aligned
-> -     * pointer to produce the iotlb entries.  Thus it should
-> -     * never overflow into the page-aligned value.
-> -     */
-> -    assert(map->sections_nb < TARGET_PAGE_SIZE);
-> -
->       if (map->sections_nb == map->sections_nb_alloc) {
->           map->sections_nb_alloc = MAX(map->sections_nb_alloc * 2, 16);
->           map->sections = g_renew(MemoryRegionSection, map->sections,
+ hw/riscv/server_platform_ref.c | 42 ++++++++++++++++++++++++++++++++--
+ 1 file changed, 40 insertions(+), 2 deletions(-)
+
+-- 
+2.51.0
 
 
