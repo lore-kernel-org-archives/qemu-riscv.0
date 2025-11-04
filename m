@@ -4,53 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC8E4CCF9E3
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Nov 2025 12:01:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E20CCF9E3
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Nov 2025 12:56:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vGFin-0004Do-To; Tue, 04 Nov 2025 07:01:10 -0500
+	id 1vGGZl-00053X-HZ; Tue, 04 Nov 2025 07:55:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1vGFiY-0004Co-JM; Tue, 04 Nov 2025 07:00:54 -0500
-Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1vGFiV-0004ry-Ma; Tue, 04 Nov 2025 07:00:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
- MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:In-Reply-To:
- References; bh=ibZRCFk2kipCAd+0+yWJjniT71+ohB8gCWcyrrZG754=; b=eEu1JmedBaWqHB
- q7h8Kzd/9QZIGDz2lVpxAU9wA8Vb2r2r+lQ1BtxbpxEzdv8R756NrbVOIrYy+MaYxHT9vDfhiVcod
- 6EN5JUhYSajJubJbwO5XK4Sn6nlxmaXrQBXRSkBHcPl4nVIoipBcmRhPOonZJ+Cs/KE07NGq6pbBt
- weKyQ8wdZMvpAgJuUc7ULJtkIAeLCVSKMR0Ob85L5yyiSrsGO/WPrFKQv8oB+05imcHY2hB8CE/yH
- RtVfDvQxAd2/xDkcETI+tD9Rhn0ZYZyBoznCLhpdNSnp/yqZVK33r+oer7UF5jBMMd2Q6Kghw0Ifx
- CS2hfyIupxeYxVCu2GvQ==;
-Received: from [167.98.27.226] (helo=codethink.guest.codethink.co.uk)
- by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1vGFi1-000gr8-GJ; Tue, 04 Nov 2025 12:00:21 +0000
-From: Roan Richmond <roan.richmond@codethink.co.uk>
-To: qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- qemu-devel@nongnu.org, alistair23@gmail.com,
- Roan Richmond <roan.richmond@codethink.co.uk>
-Subject: [PATCH] Add RISCV Zilsd extension
-Date: Tue,  4 Nov 2025 11:59:57 +0000
-Message-ID: <20251104120012.194899-1-roan.richmond@codethink.co.uk>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vGGZi-00053F-Uc
+ for qemu-riscv@nongnu.org; Tue, 04 Nov 2025 07:55:50 -0500
+Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vGGZh-0003tS-91
+ for qemu-riscv@nongnu.org; Tue, 04 Nov 2025 07:55:50 -0500
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c53400935fso3330694a34.1
+ for <qemu-riscv@nongnu.org>; Tue, 04 Nov 2025 04:55:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1762260947; x=1762865747; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1B4aL6lmDAS1Q4KBKTEZjTi3iqC833O0hT7WUDB03bc=;
+ b=SVE9fc2PYRotp9bsUnBxNjJij0FRqlbnXJfHEcPbcFMn1P13ci8qOLyrvKaUC5gm36
+ vMdu4snORfKGQSvU5BuWLTsz7cXnpy3nYrqb2/hGeic6zlMaZ3tN0T6TEIqgUARRnrGG
+ lN7dPG0GFATlgU3XqmaEUnkqoxL+T2n+1L8oqXELlUkmFwVVRER4f4faT7bWBRpxX+W4
+ Hl6KrdtK+r7VKm/kQc07dkLzzuYlcmFG4b9NRiA1sVhcmMNPBgofz2VJ4UWe9kW1sR2F
+ CiQQTPLeQwCh/YPmXYNzjW3m6aHVxtbnSX8LxamPVw/I3vkkGg5/qxdhBkQ2MrHYkM/P
+ BbYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762260947; x=1762865747;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1B4aL6lmDAS1Q4KBKTEZjTi3iqC833O0hT7WUDB03bc=;
+ b=ia9bOkLISc829ubwahIUiI73XO49oiJf5+engcVVQamz1OCLcAiJPssxzAz1VN4ZNx
+ +mz0O3+It3uo5j3kBp5R+619tn0WzlHUR3FmSUcKN4E8GphfIEeBLeTZo7BQ2UIVzt1r
+ sfhs+eLLU3GiyZsCDwPwPXQg6IxpKlr74/y21SrVM1wMgr+n5hqT2unBBj/zVau1ixpJ
+ hbavKZvc1TRhoDjoWVd0XvRKitgLvbnNAxdglSQyhLYTQeq037fXnQSVQVnAGmCoqP7d
+ Vc213mgV6aVLEYPKice71Aw/vOSXiVf3iPFDJ1UKos9tI0qPmGW9skr/vb+051Vsyl+0
+ TKTw==
+X-Gm-Message-State: AOJu0YwrZwsMDIrVtrBo+R04M7walkZ1CxeqTelPzbaLuHmtPlZAbfdG
+ 2ffd31eIZ1Ta8zLFlo/C2WOr6CHc8dj6E6W4Uzk5F9wb+wrG9fbOXfLBSZu30rQ2C1w=
+X-Gm-Gg: ASbGncuHF0cRyHNg4W7lD/AndjkVrrkr6TrHvlrhAk2s4cPjT1U2pqRpfi3aQSMYc2E
+ vFtduWFO1JZuiOGcMmDot8QZ5+P/idvZBFr3JhfcxVP5jarGY+tMjLor9T5k1Le+j+LF0HIoleX
+ qLOxpFsYL5P3VpgHcYruruMaWXRiXPYmAkV6h20uFsLUo4RRSbBGpZnIGk+zEHUSmU5I8DYobty
+ p/3zYDonr+bqP+0xFTvqdmauPUkOkXGGb4RjAISCEAy3ymCBpbO35f/VcXWAI3Hlhp8NnD3zQsN
+ x3kGx8Hu8Ym+oxUUIwij44mEIVtIaJ7b7tAhW0lOPcWDeRST8TdRG0XDm13yIwmZSc7Kfvzsuok
+ a8pIOMbmfY//PP/cmqh/vmpvGCFrPPX7tb62FGZiB4VOyQQ1l6hMwUwCYN7ZmB0CJ4ysVxvmrPc
+ tYOPrt6Jt8cEamVe/Q4zzn5Qc=
+X-Google-Smtp-Source: AGHT+IF233HHzX/K9Z7CJlxn4TRSkM2HGWcF9lCUerVSygtAut12j/M00IgFO5dlx/Cb/0N1A7F9VA==
+X-Received: by 2002:a9d:768b:0:b0:7c2:91cd:2776 with SMTP id
+ 46e09a7af769-7c6c5c528camr1113254a34.17.1762260947259; 
+ Tue, 04 Nov 2025 04:55:47 -0800 (PST)
+Received: from [192.168.68.110] ([179.93.21.233])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c6c2448b20sm1008660a34.1.2025.11.04.04.55.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 04 Nov 2025 04:55:45 -0800 (PST)
+Message-ID: <4e825697-e57c-4f77-8920-9f18b787e425@ventanamicro.com>
+Date: Tue, 4 Nov 2025 09:55:40 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=78.40.148.171;
- envelope-from=roan.richmond@codethink.co.uk; helo=imap5.colo.codethink.co.uk
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC v1 1/1] hw/riscv/server_platform_ref.c: add virtio bus
+To: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrew Jones <ajones@ventanamicro.com>
+References: <cover.1762172539.git.chao.liu.riscv@isrc.iscas.ac.cn>
+ <38a180e7ed4014ba7d401dc9b8de755fadf33bea.1762172539.git.chao.liu.riscv@isrc.iscas.ac.cn>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Language: en-US
+In-Reply-To: <38a180e7ed4014ba7d401dc9b8de755fadf33bea.1762172539.git.chao.liu.riscv@isrc.iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,155 +105,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is based on v1.0 of the Zilsd extension [1].
-The specification is listed as in the Ratified state [2],
- since Jan 30, 2025.
+CCing Drew since he's the TG chair for this spec
 
-[1]: https://github.com/riscv/riscv-zilsd
-[2]: https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154861/RISC-V+Specs+Under+Development
+On 11/3/25 9:39 AM, Chao Liu wrote:
+> Add an always present virtio bus for the rvsp-ref board.
+> 
+> The IRQs being used are similar to what the 'virt' board is using: IRQs
+> 40 to 47, one IRQ for queue.
+> 
+> Signed-off-by: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>
+> ---
+>   hw/riscv/server_platform_ref.c | 42 ++++++++++++++++++++++++++++++++--
+>   1 file changed, 40 insertions(+), 2 deletions(-)
+> 
+> diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
+> index 975f07ddfb..24c3fc2e41 100644
+> --- a/hw/riscv/server_platform_ref.c
+> +++ b/hw/riscv/server_platform_ref.c
+> @@ -46,6 +46,7 @@
+>   #include "target/riscv/cpu.h"
+>   #include "target/riscv/pmu.h"
+>   #include "net/net.h"
+> +#include "hw/virtio/virtio-mmio.h"
+>   
+>   #define RVSP_CPUS_MAX_BITS             9
+>   #define RVSP_CPUS_MAX                  (1 << RVSP_CPUS_MAX_BITS)
+> @@ -108,16 +109,20 @@ enum {
+>       RVSP_PCIE_MMIO,
+>       RVSP_PCIE_PIO,
+>       RVSP_PCIE_ECAM,
+> -    RVSP_PCIE_MMIO_HIGH
+> +    RVSP_PCIE_MMIO_HIGH,
+> +    RVSP_VIRTIO
+>   };
+>   
+>   enum {
+>       RVSP_UART0_IRQ = 10,
+>       RVSP_RTC_IRQ = 11,
+>       RVSP_PCIE_IRQ = 0x20, /* 32 to 35 */
+> -    IOMMU_SYS_IRQ = 0x24 /* 36 to 39 */
+> +    IOMMU_SYS_IRQ = 0x24, /* 36 to 39 */
+> +    RVSP_VIRTIO_IRQ = 0x28 /* 40 to 47 */
+>   };
+>   
+> +#define RVSP_VIRTIO_COUNT 8
+> +
+>   /*
+>    * The server soc reference machine physical address space used by some of the
+>    * devices namely ACLINT, APLIC and IMSIC depend on number of Sockets, number
+> @@ -151,6 +156,7 @@ static const MemMapEntry rvsp_ref_memmap[] = {
+>       [RVSP_APLIC_M] =        {  0xc000000, APLIC_SIZE(RVSP_CPUS_MAX) },
+>       [RVSP_APLIC_S] =        {  0xd000000, APLIC_SIZE(RVSP_CPUS_MAX) },
+>       [RVSP_UART0] =          { 0x10000000,         0x100 },
+> +    [RVSP_VIRTIO] =         { 0x10001000,        0x1000 },
+>       [RVSP_FLASH] =          { 0x20000000,     0x4000000 },
+>       [RVSP_IMSIC_M] =        { 0x24000000, RVSP_IMSIC_MAX_SIZE },
+>       [RVSP_IMSIC_S] =        { 0x28000000, RVSP_IMSIC_MAX_SIZE },
+> @@ -816,6 +822,29 @@ static void create_fdt_flash(RVSPMachineState *s, const MemMapEntry *memmap)
+>       qemu_fdt_setprop_cell(ms->fdt, name, "bank-width", 4);
+>   }
+>   
+> +static void create_fdt_virtio(RVSPMachineState *s, uint32_t irq_virtio_phandle)
+> +{
+> +    int i;
+> +    MachineState *ms = MACHINE(s);
+> +    hwaddr virtio_base = rvsp_ref_memmap[RVSP_VIRTIO].base;
+> +
+> +    for (i = 0; i < RVSP_VIRTIO_COUNT; i++) {
+> +        g_autofree char *name = NULL;
+> +        uint64_t size = rvsp_ref_memmap[RVSP_VIRTIO].size;
+> +        hwaddr addr = virtio_base + i * size;
+> +
+> +        name = g_strdup_printf("/soc/virtio_mmio@%"HWADDR_PRIx, addr);
+> +
+> +        qemu_fdt_add_subnode(ms->fdt, name);
+> +        qemu_fdt_setprop_string(ms->fdt, name, "compatible", "virtio,mmio");
+> +        qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2, addr, 2, size);
+> +        qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
+> +            irq_virtio_phandle);
+> +        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts",
+> +                            RVSP_VIRTIO_IRQ + i, 0x4);
+> +    }
+> +}
+> +
+>   static void finalize_fdt(RVSPMachineState *s)
+>   {
+>       uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
+> @@ -835,6 +864,8 @@ static void finalize_fdt(RVSPMachineState *s)
+>       create_fdt_uart(s, rvsp_ref_memmap, irq_mmio_phandle);
+>   
+>       create_fdt_rtc(s, rvsp_ref_memmap, irq_mmio_phandle);
+> +
+> +    create_fdt_virtio(s, irq_mmio_phandle);
+>   }
+>   
+>   static void create_fdt(RVSPMachineState *s, const MemMapEntry *memmap)
+> @@ -1205,6 +1236,13 @@ static void rvsp_ref_machine_init(MachineState *machine)
+>           }
+>       }
+>   
+> +    /* VirtIO MMIO devices */
+> +    for (i = 0; i < RVSP_VIRTIO_COUNT; i++) {
+> +        sysbus_create_simple("virtio-mmio",
+> +            memmap[RVSP_VIRTIO].base + i * memmap[RVSP_VIRTIO].size,
+> +            qdev_get_gpio_in(mmio_irqchip, RVSP_VIRTIO_IRQ + i));
+> +    }
+> +
 
-Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
----
- target/riscv/cpu.c                      |  2 +
- target/riscv/cpu_cfg_fields.h.inc       |  1 +
- target/riscv/insn_trans/trans_rvi.c.inc | 56 ++++++++++++++++++++++++-
- 3 files changed, 57 insertions(+), 2 deletions(-)
+When you said virtio support I thought about virtio-pci and virtio-net-pci. I'm not sure if
+we need a virtio-mmio for that.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 73d4280d7c..6e0d37fb96 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -121,6 +121,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
-     ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
-     ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
-+    ISA_EXT_DATA_ENTRY(zilsd, PRIV_VERSION_1_13_0, ext_zilsd),
-     ISA_EXT_DATA_ENTRY(zimop, PRIV_VERSION_1_13_0, ext_zimop),
-     ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
-     ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, has_priv_1_12),
-@@ -1247,6 +1248,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
-     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
-     MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
-+    MULTI_EXT_CFG_BOOL("zilsd", ext_zilsd, false),
-     MULTI_EXT_CFG_BOOL("zimop", ext_zimop, false),
-     MULTI_EXT_CFG_BOOL("zcmop", ext_zcmop, false),
-     MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index a154ecdc79..8d8e35e4cf 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -41,6 +41,7 @@ BOOL_FIELD(ext_zicond)
- BOOL_FIELD(ext_zihintntl)
- BOOL_FIELD(ext_zihintpause)
- BOOL_FIELD(ext_zihpm)
-+BOOL_FIELD(ext_zilsd)
- BOOL_FIELD(ext_zimop)
- BOOL_FIELD(ext_zcmop)
- BOOL_FIELD(ext_ztso)
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 54b9b4f241..dcbb3811d9 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -370,6 +370,27 @@ static bool gen_load_tl(DisasContext *ctx, arg_lb *a, MemOp memop)
-     return true;
- }
- 
-+/* Zilsd extension adds load/store double for 32bit arch */
-+static bool gen_load_zilsd(DisasContext *ctx, arg_lb *a)
-+{
-+    TCGv dest_1 = dest_gpr(ctx, a->rd);
-+    TCGv dest_2 = dest_gpr(ctx, (a->rd)+1);
-+    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
-+    TCGv addr_2 = get_address(ctx, a->rs1, (a->imm)+4);
-+    
-+    tcg_gen_qemu_ld_tl(dest_1, addr_1, ctx->mem_idx, MO_SL);
-+    tcg_gen_qemu_ld_tl(dest_2, addr_2, ctx->mem_idx, MO_SL);
-+
-+    /* If destination is x0 then result of the load is discarded */
-+    if (a->rd == 0) {
-+        return true;
-+    }
-+
-+    gen_set_gpr(ctx, a->rd, dest_1);
-+    gen_set_gpr(ctx, a->rd+1, dest_2);
-+    return true;
-+}
-+
- /* Compute only 64-bit addresses to use the address translation mechanism */
- static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
-@@ -409,6 +430,8 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-     decode_save_opc(ctx, 0);
-     if (get_xl(ctx) == MXL_RV128) {
-         out = gen_load_i128(ctx, a, memop);
-+    } else if (memop == MO_SQ && get_xl(ctx) == MXL_RV32) {
-+        out = gen_load_zilsd(ctx, a);
-     } else {
-         out = gen_load_tl(ctx, a, memop);
-     }
-@@ -437,7 +460,10 @@ static bool trans_lw(DisasContext *ctx, arg_lw *a)
- 
- static bool trans_ld(DisasContext *ctx, arg_ld *a)
- {
--    REQUIRE_64_OR_128BIT(ctx);
-+    /* Check for Zilsd extension if 32bit */
-+    if (get_xl(ctx) == MXL_RV32 && !ctx->cfg_ptr->ext_zilsd) {
-+        return false;
-+    }
-     return gen_load(ctx, a, MO_SQ);
- }
- 
-@@ -482,6 +508,27 @@ static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
-     return true;
- }
- 
-+/* Zilsd extension adds load/store double for 32bit arch */
-+static bool gen_store_zilsd(DisasContext *ctx, arg_sb *a)
-+{
-+    TCGv data_1 = tcg_temp_new();
-+    TCGv data_2 = tcg_temp_new();
-+    if (a->rs2 != 0) {
-+        data_1 = get_gpr(ctx, a->rs2, EXT_NONE);
-+        data_2 = get_gpr(ctx, (a->rs2)+1, EXT_NONE);
-+    }
-+    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
-+    TCGv addr_2 = get_address(ctx, a->rs1, (a->imm)+4);
-+
-+    if (ctx->ztso) {
-+        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-+    }
-+
-+    tcg_gen_qemu_st_tl(data_1, addr_1, ctx->mem_idx, MO_SL);
-+    tcg_gen_qemu_st_tl(data_2, addr_2, ctx->mem_idx, MO_SL);
-+    return true;
-+}
-+
- static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
-     TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
-@@ -511,6 +558,8 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-     decode_save_opc(ctx, 0);
-     if (get_xl(ctx) == MXL_RV128) {
-         return gen_store_i128(ctx, a, memop);
-+    } else if (memop == MO_UQ && get_xl(ctx) == MXL_RV32) {
-+        return gen_store_zilsd(ctx, a);
-     } else {
-         return gen_store_tl(ctx, a, memop);
-     }
-@@ -533,7 +582,10 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
- 
- static bool trans_sd(DisasContext *ctx, arg_sd *a)
- {
--    REQUIRE_64_OR_128BIT(ctx);
-+    /* Check for Zilsd extension if 32bit */
-+    if (get_xl(ctx) == MXL_RV32 && !ctx->cfg_ptr->ext_zilsd) {
-+        return false;
-+    }
-     return gen_store(ctx, a, MO_UQ);
- }
- 
--- 
-2.43.0
+Also, I can't say if adding a device like virtio-mmio might conflict with something else from
+the server plat specification. Drew, care to comment?
+
+
+
+Daniel
+
+
+
+>       s->memmap = rvsp_ref_memmap;
+>   
+>       /* register system main memory (actual RAM) */
 
 
