@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E20CCF9E3
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Nov 2025 12:56:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6045FCCF9E3
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Nov 2025 14:19:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vGGZl-00053X-HZ; Tue, 04 Nov 2025 07:55:53 -0500
+	id 1vGHsl-0002iI-Jy; Tue, 04 Nov 2025 09:19:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vGGZi-00053F-Uc
- for qemu-riscv@nongnu.org; Tue, 04 Nov 2025 07:55:50 -0500
-Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1vGHsj-0002fM-Uv
+ for qemu-riscv@nongnu.org; Tue, 04 Nov 2025 09:19:34 -0500
+Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vGGZh-0003tS-91
- for qemu-riscv@nongnu.org; Tue, 04 Nov 2025 07:55:50 -0500
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7c53400935fso3330694a34.1
- for <qemu-riscv@nongnu.org>; Tue, 04 Nov 2025 04:55:48 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1vGHsi-0005hr-6e
+ for qemu-riscv@nongnu.org; Tue, 04 Nov 2025 09:19:33 -0500
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c2846c961fso4100868a34.2
+ for <qemu-riscv@nongnu.org>; Tue, 04 Nov 2025 06:19:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1762260947; x=1762865747; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1B4aL6lmDAS1Q4KBKTEZjTi3iqC833O0hT7WUDB03bc=;
- b=SVE9fc2PYRotp9bsUnBxNjJij0FRqlbnXJfHEcPbcFMn1P13ci8qOLyrvKaUC5gm36
- vMdu4snORfKGQSvU5BuWLTsz7cXnpy3nYrqb2/hGeic6zlMaZ3tN0T6TEIqgUARRnrGG
- lN7dPG0GFATlgU3XqmaEUnkqoxL+T2n+1L8oqXELlUkmFwVVRER4f4faT7bWBRpxX+W4
- Hl6KrdtK+r7VKm/kQc07dkLzzuYlcmFG4b9NRiA1sVhcmMNPBgofz2VJ4UWe9kW1sR2F
- CiQQTPLeQwCh/YPmXYNzjW3m6aHVxtbnSX8LxamPVw/I3vkkGg5/qxdhBkQ2MrHYkM/P
- BbYg==
+ d=ventanamicro.com; s=google; t=1762265970; x=1762870770; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6ikCHD3Tg1zx5QGXUH3vch8LsyelkzwIcQsX+rDl8vs=;
+ b=BzX09ihAqxCBsvNZx9G8Eb2Nog1nsY0X5g1WFKrGyZH3hO/QGQA90diTYXgzLf607T
+ W5Yenck5a5IAI2VtfOOuqHeP+4BAcdPlVoeuPZ7/gPXPd8A2Op4LC+HOMMHHyk/47BQe
+ QLSETh7twsANg1Wln9GrOSDt6rFLJkSUB0DRnNQd762B1MY4kvIiouwmDGMCaEystz78
+ U03mhWA5JZ1o4ahUhvY4TdcV4exJzc/Vu30uEEdNPThtYfj4RxdGr2MEkVoca3ax+uEf
+ eZIyM4nHH35cj1gLcKYiFGxDNk3ZQ6Cj5gd+aTPcwp2rlhKCbx0MN6XCzIkb1H32+EnD
+ KQJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762260947; x=1762865747;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1B4aL6lmDAS1Q4KBKTEZjTi3iqC833O0hT7WUDB03bc=;
- b=ia9bOkLISc829ubwahIUiI73XO49oiJf5+engcVVQamz1OCLcAiJPssxzAz1VN4ZNx
- +mz0O3+It3uo5j3kBp5R+619tn0WzlHUR3FmSUcKN4E8GphfIEeBLeTZo7BQ2UIVzt1r
- sfhs+eLLU3GiyZsCDwPwPXQg6IxpKlr74/y21SrVM1wMgr+n5hqT2unBBj/zVau1ixpJ
- hbavKZvc1TRhoDjoWVd0XvRKitgLvbnNAxdglSQyhLYTQeq037fXnQSVQVnAGmCoqP7d
- Vc213mgV6aVLEYPKice71Aw/vOSXiVf3iPFDJ1UKos9tI0qPmGW9skr/vb+051Vsyl+0
- TKTw==
-X-Gm-Message-State: AOJu0YwrZwsMDIrVtrBo+R04M7walkZ1CxeqTelPzbaLuHmtPlZAbfdG
- 2ffd31eIZ1Ta8zLFlo/C2WOr6CHc8dj6E6W4Uzk5F9wb+wrG9fbOXfLBSZu30rQ2C1w=
-X-Gm-Gg: ASbGncuHF0cRyHNg4W7lD/AndjkVrrkr6TrHvlrhAk2s4cPjT1U2pqRpfi3aQSMYc2E
- vFtduWFO1JZuiOGcMmDot8QZ5+P/idvZBFr3JhfcxVP5jarGY+tMjLor9T5k1Le+j+LF0HIoleX
- qLOxpFsYL5P3VpgHcYruruMaWXRiXPYmAkV6h20uFsLUo4RRSbBGpZnIGk+zEHUSmU5I8DYobty
- p/3zYDonr+bqP+0xFTvqdmauPUkOkXGGb4RjAISCEAy3ymCBpbO35f/VcXWAI3Hlhp8NnD3zQsN
- x3kGx8Hu8Ym+oxUUIwij44mEIVtIaJ7b7tAhW0lOPcWDeRST8TdRG0XDm13yIwmZSc7Kfvzsuok
- a8pIOMbmfY//PP/cmqh/vmpvGCFrPPX7tb62FGZiB4VOyQQ1l6hMwUwCYN7ZmB0CJ4ysVxvmrPc
- tYOPrt6Jt8cEamVe/Q4zzn5Qc=
-X-Google-Smtp-Source: AGHT+IF233HHzX/K9Z7CJlxn4TRSkM2HGWcF9lCUerVSygtAut12j/M00IgFO5dlx/Cb/0N1A7F9VA==
-X-Received: by 2002:a9d:768b:0:b0:7c2:91cd:2776 with SMTP id
- 46e09a7af769-7c6c5c528camr1113254a34.17.1762260947259; 
- Tue, 04 Nov 2025 04:55:47 -0800 (PST)
-Received: from [192.168.68.110] ([179.93.21.233])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6c2448b20sm1008660a34.1.2025.11.04.04.55.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Nov 2025 04:55:45 -0800 (PST)
-Message-ID: <4e825697-e57c-4f77-8920-9f18b787e425@ventanamicro.com>
-Date: Tue, 4 Nov 2025 09:55:40 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ d=1e100.net; s=20230601; t=1762265970; x=1762870770;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6ikCHD3Tg1zx5QGXUH3vch8LsyelkzwIcQsX+rDl8vs=;
+ b=Gj+seBDBPyhvOR9RnpokvjQn7WAJv0/yi+IFrYtYKSgB4Q37K4TOo4TjoHseOBsCDq
+ b0pJCc6gx0RyM4neikpsZL4wWdfOETf3duSr/LlxAPp1VnJyWeHaiGFpnPJymTq47H6b
+ oKluStIxW1SuRGC99KtdFMHJd0LE1Bbej7VnUXKANcKir4dgrFU/tij090tiFH7LS0Di
+ WfILVV7YIgEJp06M2oUIpHi/rPV8j9hNtL0nCoPeV3U8ZeYxroBVfVev6Dr/VuW6u0dy
+ nbKD0bnxDwq4jgnJjH0qpEbybzAlLkr2usgYvH14Sc25Lwd6rwaKr+bcOEIPPN2XJ1ZT
+ lj/A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXHGIWZEebnSmmapy5YaX8WpiAIZJhlcDmKW/fgHp8RKrd0NaguUB48Q/BMyq7lU+2IhLxUyXqvufiR@nongnu.org
+X-Gm-Message-State: AOJu0Yxoa+xJTvk3o/EFAk4PecP61U/Xoopu9CALlDSxtmAuOW91oGaY
+ Z6e9fuBVsHHiLXM6Bb7R6pliLGECcn1eHoBwWo+E4dwZs6Te5asiL1Eg2sk6ZAWHtaY=
+X-Gm-Gg: ASbGnct6MAKCxJZajTCVxHfD2rA6jWdQoymyvk4CorqA/B3sRiaHaQYzsaDbJZHqCOa
+ 8ELH7dObD+9q/5eCvIpz0rf6wykJ6SO5NRDJFZdokmz6A8N+l9p5y6rbLLuybkjoocafggjW76y
+ VDmwef/RU0XtpspSciSGh815m+cHGpwsUVXWKRhGoxGOaJgqaKRH/Se4IZwx6oAA3kROz7X0sOy
+ fOtgaOvlsImyIMVfUStSnGJCPKVhf1Ge1VtSr1eQ4Vbqn0nmyen5S1PITpw3twjt6oTq93sJwgi
+ ZAfHlRwFOlpBmuC/HrTvI93hW82pLWh+wsXHEkFzTFAQ04sJq+iXMY2rD7ruGC287TH1DjxsqEB
+ jKKQv8+l/+Q15ZFCVFaTbBfvjuv3pgAwcS2n1T7zna5GSpGAAb5OfQm9WQvdPc8MMvc69BRXOpy
+ ooiw==
+X-Google-Smtp-Source: AGHT+IFNlJESBqpqlXHlNZDbbp6q+9ga5s5K5T+a1Vuk4uN0MMNzFhrQlh3Depb4pjW8FW37W3yDbQ==
+X-Received: by 2002:a05:6808:1b0d:b0:43f:2cb1:aff2 with SMTP id
+ 5614622812f47-44f95e5e308mr7174011b6e.16.1762265970209; 
+ Tue, 04 Nov 2025 06:19:30 -0800 (PST)
+Received: from localhost ([140.82.166.162]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44fd849533fsm758712b6e.3.2025.11.04.06.19.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Nov 2025 06:19:29 -0800 (PST)
+Date: Tue, 4 Nov 2025 08:19:28 -0600
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Subject: Re: [RFC v1 1/1] hw/riscv/server_platform_ref.c: add virtio bus
-To: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Andrew Jones <ajones@ventanamicro.com>
+Message-ID: <20251104-7b7ec269da2412cc24e99234@orel>
 References: <cover.1762172539.git.chao.liu.riscv@isrc.iscas.ac.cn>
  <38a180e7ed4014ba7d401dc9b8de755fadf33bea.1762172539.git.chao.liu.riscv@isrc.iscas.ac.cn>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Language: en-US
-In-Reply-To: <38a180e7ed4014ba7d401dc9b8de755fadf33bea.1762172539.git.chao.liu.riscv@isrc.iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x332.google.com
+ <4e825697-e57c-4f77-8920-9f18b787e425@ventanamicro.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <4e825697-e57c-4f77-8920-9f18b787e425@ventanamicro.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ot1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,127 +104,122 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-CCing Drew since he's the TG chair for this spec
-
-On 11/3/25 9:39 AM, Chao Liu wrote:
-> Add an always present virtio bus for the rvsp-ref board.
+On Tue, Nov 04, 2025 at 09:55:40AM -0300, Daniel Henrique Barboza wrote:
+> CCing Drew since he's the TG chair for this spec
 > 
-> The IRQs being used are similar to what the 'virt' board is using: IRQs
-> 40 to 47, one IRQ for queue.
+> On 11/3/25 9:39 AM, Chao Liu wrote:
+> > Add an always present virtio bus for the rvsp-ref board.
+> > 
+> > The IRQs being used are similar to what the 'virt' board is using: IRQs
+> > 40 to 47, one IRQ for queue.
+> > 
+> > Signed-off-by: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>
+> > ---
+> >   hw/riscv/server_platform_ref.c | 42 ++++++++++++++++++++++++++++++++--
+> >   1 file changed, 40 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
+> > index 975f07ddfb..24c3fc2e41 100644
+> > --- a/hw/riscv/server_platform_ref.c
+> > +++ b/hw/riscv/server_platform_ref.c
+> > @@ -46,6 +46,7 @@
+> >   #include "target/riscv/cpu.h"
+> >   #include "target/riscv/pmu.h"
+> >   #include "net/net.h"
+> > +#include "hw/virtio/virtio-mmio.h"
+> >   #define RVSP_CPUS_MAX_BITS             9
+> >   #define RVSP_CPUS_MAX                  (1 << RVSP_CPUS_MAX_BITS)
+> > @@ -108,16 +109,20 @@ enum {
+> >       RVSP_PCIE_MMIO,
+> >       RVSP_PCIE_PIO,
+> >       RVSP_PCIE_ECAM,
+> > -    RVSP_PCIE_MMIO_HIGH
+> > +    RVSP_PCIE_MMIO_HIGH,
+> > +    RVSP_VIRTIO
+> >   };
+> >   enum {
+> >       RVSP_UART0_IRQ = 10,
+> >       RVSP_RTC_IRQ = 11,
+> >       RVSP_PCIE_IRQ = 0x20, /* 32 to 35 */
+> > -    IOMMU_SYS_IRQ = 0x24 /* 36 to 39 */
+> > +    IOMMU_SYS_IRQ = 0x24, /* 36 to 39 */
+> > +    RVSP_VIRTIO_IRQ = 0x28 /* 40 to 47 */
+> >   };
+> > +#define RVSP_VIRTIO_COUNT 8
+> > +
+> >   /*
+> >    * The server soc reference machine physical address space used by some of the
+> >    * devices namely ACLINT, APLIC and IMSIC depend on number of Sockets, number
+> > @@ -151,6 +156,7 @@ static const MemMapEntry rvsp_ref_memmap[] = {
+> >       [RVSP_APLIC_M] =        {  0xc000000, APLIC_SIZE(RVSP_CPUS_MAX) },
+> >       [RVSP_APLIC_S] =        {  0xd000000, APLIC_SIZE(RVSP_CPUS_MAX) },
+> >       [RVSP_UART0] =          { 0x10000000,         0x100 },
+> > +    [RVSP_VIRTIO] =         { 0x10001000,        0x1000 },
+> >       [RVSP_FLASH] =          { 0x20000000,     0x4000000 },
+> >       [RVSP_IMSIC_M] =        { 0x24000000, RVSP_IMSIC_MAX_SIZE },
+> >       [RVSP_IMSIC_S] =        { 0x28000000, RVSP_IMSIC_MAX_SIZE },
+> > @@ -816,6 +822,29 @@ static void create_fdt_flash(RVSPMachineState *s, const MemMapEntry *memmap)
+> >       qemu_fdt_setprop_cell(ms->fdt, name, "bank-width", 4);
+> >   }
+> > +static void create_fdt_virtio(RVSPMachineState *s, uint32_t irq_virtio_phandle)
+> > +{
+> > +    int i;
+> > +    MachineState *ms = MACHINE(s);
+> > +    hwaddr virtio_base = rvsp_ref_memmap[RVSP_VIRTIO].base;
+> > +
+> > +    for (i = 0; i < RVSP_VIRTIO_COUNT; i++) {
+> > +        g_autofree char *name = NULL;
+> > +        uint64_t size = rvsp_ref_memmap[RVSP_VIRTIO].size;
+> > +        hwaddr addr = virtio_base + i * size;
+> > +
+> > +        name = g_strdup_printf("/soc/virtio_mmio@%"HWADDR_PRIx, addr);
+> > +
+> > +        qemu_fdt_add_subnode(ms->fdt, name);
+> > +        qemu_fdt_setprop_string(ms->fdt, name, "compatible", "virtio,mmio");
+> > +        qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2, addr, 2, size);
+> > +        qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
+> > +            irq_virtio_phandle);
+> > +        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts",
+> > +                            RVSP_VIRTIO_IRQ + i, 0x4);
+> > +    }
+> > +}
+> > +
+> >   static void finalize_fdt(RVSPMachineState *s)
+> >   {
+> >       uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
+> > @@ -835,6 +864,8 @@ static void finalize_fdt(RVSPMachineState *s)
+> >       create_fdt_uart(s, rvsp_ref_memmap, irq_mmio_phandle);
+> >       create_fdt_rtc(s, rvsp_ref_memmap, irq_mmio_phandle);
+> > +
+> > +    create_fdt_virtio(s, irq_mmio_phandle);
+> >   }
+> >   static void create_fdt(RVSPMachineState *s, const MemMapEntry *memmap)
+> > @@ -1205,6 +1236,13 @@ static void rvsp_ref_machine_init(MachineState *machine)
+> >           }
+> >       }
+> > +    /* VirtIO MMIO devices */
+> > +    for (i = 0; i < RVSP_VIRTIO_COUNT; i++) {
+> > +        sysbus_create_simple("virtio-mmio",
+> > +            memmap[RVSP_VIRTIO].base + i * memmap[RVSP_VIRTIO].size,
+> > +            qdev_get_gpio_in(mmio_irqchip, RVSP_VIRTIO_IRQ + i));
+> > +    }
+> > +
 > 
-> Signed-off-by: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>
-> ---
->   hw/riscv/server_platform_ref.c | 42 ++++++++++++++++++++++++++++++++--
->   1 file changed, 40 insertions(+), 2 deletions(-)
+> When you said virtio support I thought about virtio-pci and virtio-net-pci. I'm not sure if
+> we need a virtio-mmio for that.
 > 
-> diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
-> index 975f07ddfb..24c3fc2e41 100644
-> --- a/hw/riscv/server_platform_ref.c
-> +++ b/hw/riscv/server_platform_ref.c
-> @@ -46,6 +46,7 @@
->   #include "target/riscv/cpu.h"
->   #include "target/riscv/pmu.h"
->   #include "net/net.h"
-> +#include "hw/virtio/virtio-mmio.h"
->   
->   #define RVSP_CPUS_MAX_BITS             9
->   #define RVSP_CPUS_MAX                  (1 << RVSP_CPUS_MAX_BITS)
-> @@ -108,16 +109,20 @@ enum {
->       RVSP_PCIE_MMIO,
->       RVSP_PCIE_PIO,
->       RVSP_PCIE_ECAM,
-> -    RVSP_PCIE_MMIO_HIGH
-> +    RVSP_PCIE_MMIO_HIGH,
-> +    RVSP_VIRTIO
->   };
->   
->   enum {
->       RVSP_UART0_IRQ = 10,
->       RVSP_RTC_IRQ = 11,
->       RVSP_PCIE_IRQ = 0x20, /* 32 to 35 */
-> -    IOMMU_SYS_IRQ = 0x24 /* 36 to 39 */
-> +    IOMMU_SYS_IRQ = 0x24, /* 36 to 39 */
-> +    RVSP_VIRTIO_IRQ = 0x28 /* 40 to 47 */
->   };
->   
-> +#define RVSP_VIRTIO_COUNT 8
-> +
->   /*
->    * The server soc reference machine physical address space used by some of the
->    * devices namely ACLINT, APLIC and IMSIC depend on number of Sockets, number
-> @@ -151,6 +156,7 @@ static const MemMapEntry rvsp_ref_memmap[] = {
->       [RVSP_APLIC_M] =        {  0xc000000, APLIC_SIZE(RVSP_CPUS_MAX) },
->       [RVSP_APLIC_S] =        {  0xd000000, APLIC_SIZE(RVSP_CPUS_MAX) },
->       [RVSP_UART0] =          { 0x10000000,         0x100 },
-> +    [RVSP_VIRTIO] =         { 0x10001000,        0x1000 },
->       [RVSP_FLASH] =          { 0x20000000,     0x4000000 },
->       [RVSP_IMSIC_M] =        { 0x24000000, RVSP_IMSIC_MAX_SIZE },
->       [RVSP_IMSIC_S] =        { 0x28000000, RVSP_IMSIC_MAX_SIZE },
-> @@ -816,6 +822,29 @@ static void create_fdt_flash(RVSPMachineState *s, const MemMapEntry *memmap)
->       qemu_fdt_setprop_cell(ms->fdt, name, "bank-width", 4);
->   }
->   
-> +static void create_fdt_virtio(RVSPMachineState *s, uint32_t irq_virtio_phandle)
-> +{
-> +    int i;
-> +    MachineState *ms = MACHINE(s);
-> +    hwaddr virtio_base = rvsp_ref_memmap[RVSP_VIRTIO].base;
-> +
-> +    for (i = 0; i < RVSP_VIRTIO_COUNT; i++) {
-> +        g_autofree char *name = NULL;
-> +        uint64_t size = rvsp_ref_memmap[RVSP_VIRTIO].size;
-> +        hwaddr addr = virtio_base + i * size;
-> +
-> +        name = g_strdup_printf("/soc/virtio_mmio@%"HWADDR_PRIx, addr);
-> +
-> +        qemu_fdt_add_subnode(ms->fdt, name);
-> +        qemu_fdt_setprop_string(ms->fdt, name, "compatible", "virtio,mmio");
-> +        qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2, addr, 2, size);
-> +        qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
-> +            irq_virtio_phandle);
-> +        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts",
-> +                            RVSP_VIRTIO_IRQ + i, 0x4);
-> +    }
-> +}
-> +
->   static void finalize_fdt(RVSPMachineState *s)
->   {
->       uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
-> @@ -835,6 +864,8 @@ static void finalize_fdt(RVSPMachineState *s)
->       create_fdt_uart(s, rvsp_ref_memmap, irq_mmio_phandle);
->   
->       create_fdt_rtc(s, rvsp_ref_memmap, irq_mmio_phandle);
-> +
-> +    create_fdt_virtio(s, irq_mmio_phandle);
->   }
->   
->   static void create_fdt(RVSPMachineState *s, const MemMapEntry *memmap)
-> @@ -1205,6 +1236,13 @@ static void rvsp_ref_machine_init(MachineState *machine)
->           }
->       }
->   
-> +    /* VirtIO MMIO devices */
-> +    for (i = 0; i < RVSP_VIRTIO_COUNT; i++) {
-> +        sysbus_create_simple("virtio-mmio",
-> +            memmap[RVSP_VIRTIO].base + i * memmap[RVSP_VIRTIO].size,
-> +            qdev_get_gpio_in(mmio_irqchip, RVSP_VIRTIO_IRQ + i));
-> +    }
-> +
+> Also, I can't say if adding a device like virtio-mmio might conflict with something else from
+> the server plat specification. Drew, care to comment?
 
-When you said virtio support I thought about virtio-pci and virtio-net-pci. I'm not sure if
-we need a virtio-mmio for that.
+I'd rather we don't add virtio-mmio to the reference platform. In
+hindsight, I guess the only reason virtio was brought up was for
+virtio-mmio, since virtio-pci devices could already have been used.
+So I apologize for misleading by saying adding virtio support was
+fine.
 
-Also, I can't say if adding a device like virtio-mmio might conflict with something else from
-the server plat specification. Drew, care to comment?
+Let's discuss the motivation. Which virtio devices were intended to
+be added to these virtio-mmio transports?
 
-
-
-Daniel
-
-
-
->       s->memmap = rvsp_ref_memmap;
->   
->       /* register system main memory (actual RAM) */
-
+Thanks,
+drew
 
