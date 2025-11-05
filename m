@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87FA4CCFA04
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Nov 2025 07:04:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D032CCF9F8
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Nov 2025 07:19:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vGXYs-0005cw-LR; Wed, 05 Nov 2025 02:04:06 -0500
+	id 1vGXnC-0002WF-Dc; Wed, 05 Nov 2025 02:18:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jerry.zhangjian@sifive.com>)
- id 1vGXYq-0005cU-7r
- for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 02:04:04 -0500
+ id 1vGXn5-0002Tq-7X
+ for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 02:18:47 -0500
 Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jerry.zhangjian@sifive.com>)
- id 1vGXYn-0003rf-VA
- for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 02:04:03 -0500
+ id 1vGXn3-0000dB-6K
+ for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 02:18:46 -0500
 Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-295ceaf8dacso29944695ad.0
- for <qemu-riscv@nongnu.org>; Tue, 04 Nov 2025 23:04:01 -0800 (PST)
+ d9443c01a7336-2951a817541so72419125ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 04 Nov 2025 23:18:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1762326240; x=1762931040; darn=nongnu.org;
+ d=sifive.com; s=google; t=1762327123; x=1762931923; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=PslxH34VRyt9U/kQBE87KNhYHXS6tZsHOtci+Xo2x+Q=;
- b=bnpTHXxRAeegAG3aNcYOs2wWSh/tOSWc0bzY8BNqbv6JiZpVyroJRlUlYh4WkbWpmP
- o73Ftf3dzo0YwiV09lF7HYeTmRxJdTYsOxtaUmDY7yLfcbAHBV/UHzvhCOE1DGWZY0j/
- hYKgawg3jVdp2ANl7YIMuDTgm72OPL5zOZEt3kXVAOgm/4fviOD/pRBX7XaQa/S7B6Fw
- iMBaaeyMX7+jYGevoHiwHQi1+VGsNIGH7ZjazZvlf9dDHS1tL/YdgvicioO7H1x9GvfY
- n6+Rz8sd/cGVmA79TXYTzM9m7GWY4hMuoRm6ziH+So3ZLcI/SrdTPZdrj4vG6c/YMc8R
- 3DPA==
+ bh=MlG5rnOvUQA75NWfv4D3M3eKo3Ku1ZTp/yqLDnLUGQA=;
+ b=Q4lKJAScPO10oN4jIfLuCvfthxrwMnIEdl5vcT6I0N1ErhIlpKRJBcMMM2INung5k8
+ tP2TCNvM9lgFIzyVLDCQmUC33lTfk4t5mpQFRvpZI/HyV5onjk/YWTGFO9GCp/GQv97p
+ VW4Ao2cj+lpd27PL9Obd/h8MHz/aFi3DApyx+T6RtINCG5pKnqPdtlcC9Q+6ypud/VR8
+ 1REjZfJFjHKb8yUdsswnwEP7eAlpdtNiUgRvQVAsygtV8qArJMfzgQo4PPoojCHB/dJ/
+ x2wa6FiHlBGbyQRMz2VXr5Aly2gZJGD5gBbS/mROPK3d7pmceseDM3y2EGrPxuxQ6U21
+ 586g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762326240; x=1762931040;
+ d=1e100.net; s=20230601; t=1762327123; x=1762931923;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PslxH34VRyt9U/kQBE87KNhYHXS6tZsHOtci+Xo2x+Q=;
- b=C2V7alNQjs3iOAYhxM4SRsWdua7eNbJdXk//Sp7MC+PmA+8V6MFD83QjFr+x61uYs7
- UZoBwDj0BrTehzzjM8HvRCMZsdKC6HROQ+riijr0IC3AV1qbDMCtBHxtYhT2RspmNZbQ
- v106pEJ95+oOuQz/+64J8K12iFpAtLAS9f08WrGmJXIUli6AWVtdOfjrRWG9N2UVSxLe
- fMqsmjsX4eR/CvC+Od+ntcwsF430P/2QJ0CHcEdK1vXwSwgQtBueL9IRjfyy+GLzdxT9
- qOQ3mORSoxAd4e1MIjbyFouAuTLjQyngzGBwSDhQ6zo34BFQf+416TsvOtPjsXaAPVv0
- yRDA==
-X-Gm-Message-State: AOJu0Yx64g5B2tY/WugLxQN5V6LNEL3IRacNlI2pvkCmQcKcbITRHJvK
- 0qhe2Xu6o4pdlSzvFKdyx8UCZuHUQVgWGnsx+inHkEOx9XvXLdCZv56UFpYbqg0UEVM=
-X-Gm-Gg: ASbGncszZSDsegCU/1GwluwGwZAhIL8w04kDpjud5+zm/apFv98fcIIAs0BbzwBwQeq
- 30mGP1YIukjPKB30jJgcTEuPPnbzEtfb67amJjMYNPn0Djp5N7vIj8TmhVhByVKaNM33/9nD1oh
- w31Ko+X9FlzhNN1gQjaiBsVsMR49of8giTRgQl/923lh7wWFB7Fw9L/G9iiUzzmXTGAs32OXvey
- eCADhoHptkl4zNzXy8zCY0uMQwr/pxGp5NXDJ+NzgKhMO5yqcqWWlhCb7ZbrhlOLzESa24urxfY
- 6HpgU71BO0CHsYZgK3whEnpjPbIYu2tyKl6NjImk1vySdSU3YhMAAsMEdVOIexcuxK0jNF9EoK8
- SAOAdkIsJP7rr9B/YGbTLvCbofRQSENU2pkqY1XcnYlODCaikMvraEjOKhNlDuJBNH9T8WQNBBB
- GIwXzeRGv3w6DhNp7UpwfhiKE=
-X-Google-Smtp-Source: AGHT+IFvx4nMjyEt7CrC47T4NQ1KMNsAPY9RyiVsYiMPY+QUCWHpGVEOMwORectsP73zI4GdT1quLw==
-X-Received: by 2002:a17:903:b07:b0:28e:ccd7:dd61 with SMTP id
- d9443c01a7336-2962adedf4dmr32616505ad.57.1762326239868; 
- Tue, 04 Nov 2025 23:03:59 -0800 (PST)
+ bh=MlG5rnOvUQA75NWfv4D3M3eKo3Ku1ZTp/yqLDnLUGQA=;
+ b=RPX2zkhI7sarS7aqMTa5NxUXw0/OwDQPURQ5uIXdrfvbKnEo1VkMA2BYwzgugNU+ky
+ fojxdw/SmeqEc+jNP6EbvL9BC2EmGXiWWf60+9EOBA+AJ8cDGCJgyVO6aHNh7QsjmgmZ
+ 6f0u9eSde4Reh8V/jEMmHZ8iZydCqKSVOCGUP8U8GX+tPuNPbuMaHzbr8ss3u9HkaZqy
+ 2yJXi7Xp4NfDeTculR+JMZVjAOLQSWe8FgDlc9B2Ae8Qvzpf0Eu/NIY6IcZsvv0yTgV9
+ Xy69wn7/1PMOUyMzFcMhwIC7xwXgRR6kLPDJObRIzPE6qDrve48qj6a5d33xwi7cy55v
+ bEGw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUuUKmwI/tx5AZnLf0Js4JlhnFhy/1boGD7bsr+C6OBKVtLTRwqOR0peDLBZaeacoeLN3x1FRK9RSXP@nongnu.org
+X-Gm-Message-State: AOJu0YwGCDxXmMNFYA10IBBsUY2qi7UAdPrRytRRFMbQmfdyCDAHHTe1
+ fbQMK74IDOv3Ruk64cbYoHACV1AMG6lKr8rZlxS0bpCKkLdtZ6zzz5SJEpPWlfkNFVk=
+X-Gm-Gg: ASbGncvkJjk/k4c1WoTHXa1WjqIEvzybLD01hn+ZUpBxdeCf570FyV/s4hBhqIf0wQM
+ P4bdQRWijpsUHVVmUZJeYjdUuGekCkaS6Am+e49ELLUQilME7Ckz9NR+T/Se8plkGefVUA/jDks
+ 5SflA8TOGp2BPD4QMi2BL2d4zmEkLzCfd8jOnrL/F7dfJ8n8CGZv0hWiN7UPOQn7Jm5dsSqv0GL
+ lxp2E+/7gBP7KCOvg5nWer+BWTyCO7Ge64wArSJBJuM5nHd7hL1+BvE3khqRGpHNoerk3cU4d4J
+ AtEMtJRm7pHAi47KAH2Iv9NouJapq5KtfEcSxVUddWYaKcdVekSrU2REmjfHjxQEHLRQWdzaTLm
+ QIa+4FwecoUSvImlieH2kKUABT/dayMYHsal0hJ5zQZbLJZgAba9WFVZgl29OooxeUwa1ebr5Kw
+ Yh4p7LT9kNRIeYX6l+1071G3I=
+X-Google-Smtp-Source: AGHT+IHJntEwTcX6/7fTPo2BtkxbxCQp100jH5FoEsAJ52HMWGiy3hcrGH656V5IZaBl/ivf08qIUQ==
+X-Received: by 2002:a17:902:d505:b0:290:c0ed:de42 with SMTP id
+ d9443c01a7336-2962ada2117mr35771225ad.36.1762327122701; 
+ Tue, 04 Nov 2025 23:18:42 -0800 (PST)
 Received: from sw08.internal.sifive.com ([4.53.31.132])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7acd32462d2sm5332964b3a.4.2025.11.04.23.03.58
+ d9443c01a7336-29601a741e3sm49708465ad.98.2025.11.04.23.18.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Nov 2025 23:03:59 -0800 (PST)
+ Tue, 04 Nov 2025 23:18:42 -0800 (PST)
 From: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-To: jerry0715no14@gmail.com
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- alex.bennee@linaro.org, philmd@linaro.org, kito.cheng@gmail.com,
+To: qemu-devel@nongnu.org
+Cc: alex.bennee@linaro.org, philmd@linaro.org, palmer@dabbelt.com,
+ alistair.francis@wdc.com, qemu-riscv@nongnu.org, kito.cheng@gmail.com,
  frank.chang@sifive.com, Jerry Zhang Jian <jerry.zhangjian@sifive.com>
 Subject: [PATCH] target/riscv: Add bfloat16 and half-float support to GDB stub
-Date: Tue,  4 Nov 2025 23:03:58 -0800
-Message-ID: <20251105070358.940188-1-jerry.zhangjian@sifive.com>
+Date: Tue,  4 Nov 2025 23:18:30 -0800
+Message-ID: <20251105071830.946163-1-jerry.zhangjian@sifive.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -115,10 +117,10 @@ For 32-bit FPU (riscv-32bit-fpu.xml):
 
 This enables GDB users to inspect and modify FPU registers using
 different floating-point formats:
-  (gdb) print $ft0.bfloat16
-  (gdb) print $ft0.half
-  (gdb) print $ft0.float
-  (gdb) print $ft0.double
+  (gdb) print \.bfloat16
+  (gdb) print \.half
+  (gdb) print \.float
+  (gdb) print \.double
 
 This change corresponds to the GDB-side support for these formats:
 https://sourceware.org/pipermail/gdb-patches/2025-November/222353.html
@@ -135,7 +137,7 @@ index 24aa087031..f0439c626e 100644
 +++ b/gdb-xml/riscv-32bit-fpu.xml
 @@ -7,36 +7,42 @@
  
- <\!DOCTYPE feature SYSTEM "gdb-target.dtd">
+ <!DOCTYPE feature SYSTEM "gdb-target.dtd">
  <feature name="org.gnu.gdb.riscv.fpu">
 -  <reg name="ft0" bitsize="32" type="ieee_single"/>
 -  <reg name="ft1" bitsize="32" type="ieee_single"/>
