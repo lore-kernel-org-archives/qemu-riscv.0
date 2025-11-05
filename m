@@ -4,92 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18229CCFA0D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Nov 2025 13:44:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC162CCF9F8
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Nov 2025 18:51:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vGdnq-0004x3-Kt; Wed, 05 Nov 2025 08:43:58 -0500
+	id 1vGibJ-00047Z-Of; Wed, 05 Nov 2025 13:51:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1vGdno-0004wn-Sw
- for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 08:43:56 -0500
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
+ (Exim 4.90_1) (envelope-from <michael@videogpu.com>)
+ id 1vGib3-0003zV-Dv
+ for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 13:51:06 -0500
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1vGdnn-0002vL-3q
- for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 08:43:56 -0500
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-ba4874edb5dso897900a12.0
- for <qemu-riscv@nongnu.org>; Wed, 05 Nov 2025 05:43:54 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <michael@videogpu.com>)
+ id 1vGiay-0003Ba-M2
+ for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 13:51:05 -0500
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-429bcddad32so113209f8f.3
+ for <qemu-riscv@nongnu.org>; Wed, 05 Nov 2025 10:50:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1762350233; x=1762955033; darn=nongnu.org;
+ d=videogpu-com.20230601.gappssmtp.com; s=20230601; t=1762368658; x=1762973458;
+ darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=D26vXv+8Ed1orfqhFfArUAxk2oGjpGYqrtarHGtxK4I=;
- b=hQzfOsRa1w0uKpk+nrcPIdYsJp8PVf+bc0KXwihoch9HQo/J8AWTiu5Op+T3BhAwyZ
- 03uhi01R6B22SjW8pnrpJRNmna6M1CmkfL4F8SI/pfz5v+mAqmuR1/Cv6DLteQ6PhEsf
- at5NNEJcHpmcAOBOhK2wx7n5tHpGuHUEji9AA7Gi4Ql05r4hxJgqeqLRBla0REql5a8C
- pR9mm6zNXWZIFsKc6sASsAWsNGy45tO4pgm8F6otRwcnTqqipXK2snRtb2Hp5TAAPjLl
- JijpEtQuNdWYPJMloFvnn/NuoA8nBoosDJ5fRJ7pt+wXA5Pcr6elaIa8hHMdSh8kI7UB
- qKQQ==
+ bh=2if4ozVw8yt5djDJE9vZL0DPZmNx/MlAw6CBcParLWA=;
+ b=iB/ce8X5G6XFkuqe8b2tFoVeVJzvTVka5rboPE0hrSRZgD7dJOJvihYBoMMvE99iIM
+ wzZKh4x53HxbPWa4q0UVqdplk844LIzuwX0hBACn6Ab7tAet97fv2t/fJLH5cfEdgN4f
+ bQSeVE2gbz0LDQvO7afWsdejjcyd2Xj85Wh9Zh9BYuoIumyKvoMZJLgudzXVJnpGbz1g
+ cY3Thf8yLvJBZXRlIJ8oy0i5gc+cM8R2Zy61QL7V5VGaoEhNRVzKYOZ7aSFzsG8fqc0j
+ LenLw+RflGjrzMjkRZFqDERzcy1IieNl+q3shj49mZSzt91B9C4LPl0HsDBAaofW0/uM
+ YDnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762350233; x=1762955033;
+ d=1e100.net; s=20230601; t=1762368658; x=1762973458;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=D26vXv+8Ed1orfqhFfArUAxk2oGjpGYqrtarHGtxK4I=;
- b=slp8FnQYSPE2/rc9AobDUAmY+kSp75hyeiLSkzLfSZ1HjL0RaxojWR/Ru3koarqp6J
- tDBTcy9bZvOCcohb7IUjqBQ0YGe74HwTHpNiyHR+qmVUvxS1tMNYRmXTGICGSh95/6R7
- OWIuJRw/An8/qfkM3jSGzPLpGxRy+Kj7PCu7Ucf2dn75JeOH8+i6ftXZZCpbyFO+yVKG
- dG5ho/wAAm+bldFQx3kum9kvG+vcMPn+9+Ql0AsqiOzzLG87gBGi2UbzXNW3kQuNcnbt
- tskYcEmrsJ1OB7tAr3LuC1dYc++OyRoZjs4dYNPFOqcesmWNji683SvAunK/0IXwwv24
- +7yQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQvzW9M2W2gdP/H4duxbOmIU64P8Jv+zRncyr8xVieUopceOI1OPhYCbJftJlSNZFKeBDDOoLI0q62@nongnu.org
-X-Gm-Message-State: AOJu0YwA1lV7xPVXYp56/wgp5AOsV7rpWeBESZsRMEjR6lCtwhIUWDbn
- TGuOfggmjIc6ECAnV5sWMloRRAN/tYw8udlB0G/b/CkLY8tVHYkgzVGv/B44Y3KIk+w=
-X-Gm-Gg: ASbGncua+9bAA0aVF6aRyy1JZur7uCKUYGubKU0jHtT4zPO7190SY0Ztfjhb7P9OHkF
- i2ycQNc9b9YisUSDIoipYcIpCVe+l/ck6bxL3kkPIc2FtchzdMcrKxE+cLd3cOmbKqFqeSZt9JD
- 8RNIOpv3HnKBGEbhV+nwLSC8KD9waN57TdyIJIAZn4YjzbY+N0zE9eAB18Hs0C9UW3QhMVEVoVz
- lRej7ia9MwHq5P66MZQDAYiSYRrOE81M02kAS6vSO/Esy/qpBIHjhMiNLnADJqXMVqqsCDrZOx+
- tthkGPtkLiD4g+LF36XxD2Aj9e+19MAXJBsK22V4MaJW5vFqJGUj0H3TmOsiCpsrVy43mu1JJH0
- mWYccLGFWyt15s8busYO44Agos64Wc/2CXCwiczZk4kflQZppUWV8BnznfhP0zdGH8kJbHY0NNX
- EKXJUW3MqoYtHbRnsInk5yM8aIxt60qOlm87gNGtckX7ZwE4cVG36Aizw=
-X-Google-Smtp-Source: AGHT+IGYah24Y0s/NK6v+G6at5eKCyU5E4fM7XlHmy4bkrY2d+b1grd+elfj34qh1Sopd/vKvj5z+w==
-X-Received: by 2002:a05:6a20:3d95:b0:349:c80b:d5e9 with SMTP id
- adf61e73a8af0-34f8400875fmr4208076637.23.1762350233055; 
- Wed, 05 Nov 2025 05:43:53 -0800 (PST)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-ba1f87a6155sm5556501a12.29.2025.11.05.05.43.51
+ bh=2if4ozVw8yt5djDJE9vZL0DPZmNx/MlAw6CBcParLWA=;
+ b=motD7u+yqURcXxdqhRaJGunpxtnGtvtEcK8qBHYVTzQJXSCATdlf17ICRnQXsdX8Po
+ OQLtB0gNSbs7Anuh/eeXlOPSHf8X/T1FILJYiR0XKDxlpCC0YBbVrbVBrEm5C/lBNXGb
+ /xLrhtQnfC9pOcXhdhfgNJhDzoBvd1ICTZUsDskogGvy+LMm8pVoRspWhhawmWEp75qs
+ nvY5JmzKrPvDhB5Gt80XcmhOl5CwHTt4W1NNAGLHuSmdYhAr16MCa6Ju0PrwOYUVn8+T
+ AOUIwwc3uOr6Aorfz1apUZ4ey8pemSmFC+3tygfvtTkFh+r1RZtfcU11NhQRSFQdC/so
+ usDQ==
+X-Gm-Message-State: AOJu0YyqaYQ1g/W6Hpa/CZ+1Z1lER2SmSneRaJFXG+ixCQVsBEk6UCmM
+ vB9vh7OwayzgpuzwoKEkpcrCZSKb4G7gWlRCsTULkIH3gm9BdInIrHC4VrkqtQNNWto=
+X-Gm-Gg: ASbGncsdJSTweVijD45XTCrRpGmUzEtISnqZnHN+cD5jpq8OFtQARjpxpF2elKWBpX3
+ ZmE8bChPj9KVXOTXqh0bhWnuiaVq9wM1Ssz2xP65VvBhDJH+sg7OKAden0aRTqq88+kNczD3Ol8
+ 6XEvbrw+VFIcY7Z2hLWJh39JRAHEReN/XbwMW1ksmZEuE9dH6pFG536OrE0e5i6v6tyj6Rf2cgs
+ HaRGdoMYZDOCCklZIuSaeln2m3tLU8+8aasUL0BVqGyV6+1+d1aFQdOiiBBnSkI9swvRe+d15zA
+ MlzuFrb3fTxT6FXfjakcH7N+lngDl93yP/NhjJhc30b07XOhIHtcaVPvaMjOjT0cJ6ZrSs2i922
+ +nn9zk2QrZNJfA5fFyhfX9A/ycdivbY2VokvtiNxsja7ADyY1VnPyhD//9Sq1hVIQKhC/RRDGVb
+ DiboVH
+X-Google-Smtp-Source: AGHT+IFlpPTMNUnO9qYRrTXBi9prP4yQo/YngAVNjhCrIYbFUhXLhWGnp6vE80c6bZ44QKdQuGRruw==
+X-Received: by 2002:a05:6000:310d:b0:429:ba48:4d8 with SMTP id
+ ffacd0b85a97d-429e32f478emr3892703f8f.25.1762368658174; 
+ Wed, 05 Nov 2025 10:50:58 -0800 (PST)
+Received: from DDesktop.local ([2a10:8012:d:eea4:f4de:376b:66b1:d7b5])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-429eb42a354sm270622f8f.20.2025.11.05.10.50.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Nov 2025 05:43:52 -0800 (PST)
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Max Chou <max.chou@sifive.com>
-Subject: [PATCH] target/riscv: Fix PC sync in trans_sspopchk for CFI exception
- handling
-Date: Wed,  5 Nov 2025 21:43:31 +0800
-Message-ID: <20251105134331.2865581-1-max.chou@sifive.com>
-X-Mailer: git-send-email 2.43.0
+ Wed, 05 Nov 2025 10:50:57 -0800 (PST)
+From: Michael Levit <michael@videogpu.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, philmd@linaro.org, pbonzini@redhat.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ liwei1518@gmail.com, smishash@gmail.com
+Subject: [PATCH v3 0/5] RISC-V: NEORV32 CPU, peripherials, and machine
+Date: Wed,  5 Nov 2025 20:50:51 +0200
+Message-ID: <20251105185056.23565-1-michael@videogpu.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=max.chou@sifive.com; helo=mail-pg1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: none client-ip=2a00:1450:4864:20::432;
+ envelope-from=michael@videogpu.com; helo=mail-wr1-x432.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,49 +99,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move gen_update_pc call before conditional logic to ensure consistent
-PC state regardless of execution path.
+Hi all,
 
-Previously, the host instructions generated to update the cpu_pc were
-only executed in the failure path when shadow stack validation failed.
-This created inconsistent PC synchronization.
+This v3 reworks my initial NEORV32 submissions.
 
-This inconsistency caused issues in CF_PCREL mode where subsequent
-instructions calculated wrong relative offsets from stale pc_save
-values, and could lead to incorrect exception return addresses.
+The series introduces:
+  * a minimal NEORV32 RV32 CPU type and vendor CSR hook,
+  * the SYSINFO MMIO block,
+  * a small UART device,
+  * an SPI controller with command-mode chip-select,
+  * and the 'neorv32' RISC-V board wiring the above, plus docs.
 
-This fix ensures PC is always synchronized before any helper that
-might raise an exception, maintaining consistent translator state
-across all execution paths.
+Tested by booting the NEORV32 bootloader as -bios and chaining into a
+Hello World from an MTD-backed SPI flash image, with UART on stdio.
 
-Signed-off-by: Max Chou <max.chou@sifive.com>
----
- target/riscv/insn_trans/trans_rvzicfiss.c.inc | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Changes since v2:
+  * Clean-up all errors and most of the warnings generated by scripts/checkpatch.pl 
+  * Sync with master, fix compile error
+  * No intentional functional changes; only file organization and clarity.
+  * Kept default.mak entry off by default (n).
 
-diff --git a/target/riscv/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
-index 0b6ad57965c..f76697b8a11 100644
---- a/target/riscv/insn_trans/trans_rvzicfiss.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
-@@ -32,6 +32,9 @@ static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
-     TCGLabel *skip = gen_new_label();
-     uint32_t tmp = (get_xl(ctx) == MXL_RV64) ? 8 : 4;
-     TCGv data = tcg_temp_new();
-+
-+    gen_update_pc(ctx, 0);
-+
-     tcg_gen_ld_tl(addr, tcg_env, offsetof(CPURISCVState, ssp));
-     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
-     tcg_gen_qemu_ld_tl(data, addr, SS_MMU_INDEX(ctx),
-@@ -40,7 +43,6 @@ static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
-     tcg_gen_brcond_tl(TCG_COND_EQ, data, rs1, skip);
-     tcg_gen_st_tl(tcg_constant_tl(RISCV_EXCP_SW_CHECK_BCFI_TVAL),
-                   tcg_env, offsetof(CPURISCVState, sw_check_code));
--    gen_update_pc(ctx, 0);
-     gen_helper_raise_exception(tcg_env,
-                   tcg_constant_i32(RISCV_EXCP_SW_CHECK));
-     gen_set_label(skip);
+Patch layout
+============
+  1/5  target/riscv: add NEORV32 RV32 CPU type and vendor CSR hooks
+  2/5  hw/misc: add NEORV32 SYSINFO block (CLK/MISC/SOC/CACHE)
+  3/5  hw/char: add NEORV32 UART (CTRL/DATA, fifo, chardev)
+  4/5  hw/ssi: add NEORV32 SPI controller (SSI master, CS command)
+  5/5  hw/riscv: introduce 'neorv32' board, docs, and riscv32 device config
+
+Quick usage
+===========
+  $ ./configure --target-list=riscv32-softmmu --enable-debug --enable-fdt
+  $ make -j$(nproc)
+
+Prepare a flash image (64MiB) and place your app at 4MiB offset:
+  $ dd if=/dev/zero of=$HOME/flash_contents.bin bs=1 count=$((0x04000000))
+  $ dd if=/path/to/neorv32_exe.bin of=$HOME/flash_contents.bin \\
+       bs=1 seek=$((0x00400000)) conv=notrunc
+
+Run bootloader and chain-load your app:
+  $ ./build/qemu-system-riscv32 -nographic -machine neorv32 \\
+      -bios /path/to/neorv32/bootloader/neorv32_raw_exe.bin \\
+      -drive file=$HOME/flash_contents.bin,if=mtd,format=raw
+
+Debugging:
+  $ ... -s -S   # gdbstub on :1234, start paused
+
+
+
+Thanks for reviewing!
+Michael
+
+Michael (5):
+  target/riscv: add NEORV32 RV32 CPU type and vendor CSR hooks
+  hw/misc: add NEORV32 SYSINFO block (CLK/MISC/SOC/CACHE)
+  hw/char: add NEORV32 UART (CTRL/DATA, fifo, chardev)
+  hw/ssi: add NEORV32 SPI controller (SSI master, CS command)
+  hw/riscv: introduce 'neorv32' board, docs, and riscv32 device config
+
+ configs/devices/riscv32-softmmu/default.mak |   1 +
+ docs/system/riscv/neorv32.rst               | 110 +++++
+ hw/char/Kconfig                             |   3 +
+ hw/char/meson.build                         |   1 +
+ hw/char/neorv32_uart.c                      | 285 ++++++++++++
+ hw/misc/Kconfig                             |   2 +
+ hw/misc/meson.build                         |   1 +
+ hw/misc/neorv32_sysinfo.c                   | 201 ++++++++
+ hw/misc/neorv32_sysinfo.h                   |  88 ++++
+ hw/misc/neorv32_sysinfo_rtl.h               | 239 ++++++++++
+ hw/riscv/Kconfig                            |   8 +
+ hw/riscv/meson.build                        |   1 +
+ hw/riscv/neorv32.c                          | 215 +++++++++
+ hw/ssi/Kconfig                              |   4 +
+ hw/ssi/meson.build                          |   1 +
+ hw/ssi/neorv32_spi.c                        | 478 ++++++++++++++++++++
+ include/hw/char/neorv32_uart.h              |  54 +++
+ include/hw/riscv/neorv32.h                  |  54 +++
+ include/hw/ssi/neorv32_spi.h                |  57 +++
+ target/riscv/cpu-qom.h                      |   2 +
+ target/riscv/cpu.c                          |  18 +
+ target/riscv/cpu.h                          |   3 +
+ target/riscv/cpu_cfg.h                      |   1 +
+ target/riscv/cpu_cfg_fields.h.inc           |   1 +
+ target/riscv/cpu_vendorid.h                 |   2 +
+ target/riscv/meson.build                    |   1 +
+ target/riscv/neorv32_csr.c                  |  40 ++
+ 27 files changed, 1871 insertions(+)
+ create mode 100644 docs/system/riscv/neorv32.rst
+ create mode 100644 hw/char/neorv32_uart.c
+ create mode 100644 hw/misc/neorv32_sysinfo.c
+ create mode 100644 hw/misc/neorv32_sysinfo.h
+ create mode 100644 hw/misc/neorv32_sysinfo_rtl.h
+ create mode 100644 hw/riscv/neorv32.c
+ create mode 100644 hw/ssi/neorv32_spi.c
+ create mode 100644 include/hw/char/neorv32_uart.h
+ create mode 100644 include/hw/riscv/neorv32.h
+ create mode 100644 include/hw/ssi/neorv32_spi.h
+ create mode 100644 target/riscv/neorv32_csr.c
+
 -- 
-2.43.0
+2.51.1
 
 
