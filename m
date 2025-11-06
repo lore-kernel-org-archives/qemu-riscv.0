@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3485ECCFA05
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Nov 2025 14:48:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A34BCCFA03
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Nov 2025 15:12:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vH1Gu-00045x-3K; Thu, 06 Nov 2025 09:47:32 -0500
+	id 1vH1f5-0002Dv-80; Thu, 06 Nov 2025 10:12:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vH1Gr-00045U-8b
- for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 09:47:29 -0500
-Received: from mail-ot1-x336.google.com ([2607:f8b0:4864:20::336])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1vH1f3-0002Ba-8w
+ for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 10:12:29 -0500
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vH1Gn-00042V-VC
- for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 09:47:28 -0500
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c281c649ccso579030a34.2
- for <qemu-riscv@nongnu.org>; Thu, 06 Nov 2025 06:47:25 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1vH1f1-0001ut-MP
+ for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 10:12:29 -0500
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b4f323cf89bso239232866b.2
+ for <qemu-riscv@nongnu.org>; Thu, 06 Nov 2025 07:12:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1762440444; x=1763045244; darn=nongnu.org;
+ d=linaro.org; s=google; t=1762441945; x=1763046745; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=oXgccf7I5iySfbLwoBZqSZ4fs3thsclpVhNyfz7pkmU=;
- b=T0AzeM7tHVqN38wLk8v0FHFviF9c2CnRAAKD4o0dlLPW+yh2p5ptPcEJ9ZqkwKg+OM
- Hma/VUZW2fiJKwWdnWkyQQvFIKXsnTcYT51Ik6gN3wPuj5TN517j+MpaCbB4xeqq6+Jb
- w4p4IB5Egh4nG+3KFeIjXZKEW7ziz1d1CqOcp654dbQiSjs0DUjvNCiYMcUfqOaSHdh3
- UxxnSXGKqtvb5ZGVUbxPdZp8sDiATRWwhBUZBz+S1yhDBC3u0KO8JSbVeWIFI4yeULlL
- 87f55yEYHMkxsW+u7LGS1GKlbgfCdimuqc6VznjjcBntjJ/MulMX6kJi0hRLjPJ5TnAU
- KzQA==
+ bh=YwzN0w6St7GK0tiS0apQaEg90la80zGg9XrnVdabP6Q=;
+ b=dcbvG1zAqMdlhDTQBTmrYV0Wbygl1hYBzqfENTje1leBXEZ3Q9YU/apPb+hFMiwdMP
+ rLUSytjSJzTMrIy/gLqBo4pu2TiM99chTx5eW492GDYlusbBgFhH1NfhLu3REfBnLuQb
+ /CU9bD4xOFnaODwYC4h6+wYVWPRHOjkPFf3rYc8I5r9/pjejckGg6EAioKw16L+2uHR4
+ guqKHxSyHyiGvhP8FV6jeE5tEC2tSlSeXY9YW+MdxR+qTJWx1DWTZLkXlKzeXcbDmsZg
+ Yu+SDL3UG8il1J7ShiTnnWK/3wwLHniVKQQgCkvYESX3zwofzyJM1NLX7nk8SHqow001
+ MeJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762440444; x=1763045244;
+ d=1e100.net; s=20230601; t=1762441945; x=1763046745;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oXgccf7I5iySfbLwoBZqSZ4fs3thsclpVhNyfz7pkmU=;
- b=qyfMyi7T2rAz/bMdIqbcRMUHYCetHYVzyQIEV4ovuxo6WC6zmjQkOQSJgw/Y3Aw4UH
- kJPMzouKSCfQZK2cmdRnVnub2IaII+/B/Oyyw0Ri90/6V3P65TBNgIv7ozRxVJYlu4fD
- R3ME59MK3V3Y9Wti0CCw16X27J7g0ekYAMthuj8yLbpNiiVSCYtj+M/GociMtbzrTwTx
- 1UoEzW/JY/mdD9SRH7JY7ErRJAsj6c3O8Wyiv3dDBJXJMvxZx/by+tXj08s72Wkhi4Aw
- SVrNTy4lSweNLq3Gg7C7WoOaB7UKrhIVKILc0mU5ZqZkmrI8U3TSaexfNOR68q5B2RL+
- 0S7Q==
+ bh=YwzN0w6St7GK0tiS0apQaEg90la80zGg9XrnVdabP6Q=;
+ b=COnwficWVf4IsZAhTPQFHOSKJ+Qqy10vFwfP9yfBDJcuNkyQGnrqokCsTS9HqzLTxc
+ 4VnWq8/wMByMCAZoQp6Av+/T1B+dxCXBxKe6FEz9Uis01SCMeqlmJGdwWIhV8I0D2Qv5
+ N6LvNr4YZFJK0l6bZPSMkJI1g7B7u3uTRVauX3C8hyv85TJjPD6htiY43sAvGyIFyVz6
+ S+io2Qkx0x/PQ+MwyWHmUDB9hII3M7Jr2woYpepSOmiw9xxqiZ12qRTMtZOaURH52+PY
+ qb0TpuppenClK9vWhr5GlX9+9AAyxFm2EEvFkHHYBjXRdHB7Qmu2q+uz5Z80GlB2wOlx
+ Xy1A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjPOByNIqaGzYcc39BuCfe9DuAE5GAH+6A5ZQfeoteiEEgc24sVnt70pM2RArMpt75HYClYs/6MmID@nongnu.org
-X-Gm-Message-State: AOJu0YyY7lnc6PVwpGYibJiQB/vZh5FDlrOwVlynn4yXZYuANIpbCtB5
- U2AJR28d0B5hurSDseXlyxG6yZiS4vnY6TF9d/y0y9YBIX29/29lPwaah1DKmo6b65U=
-X-Gm-Gg: ASbGncsKExbobRLEcHkyHdX2OcmDLYt2iseYekAyC4WDd8D+Qq/14m8soFmw+nm5M5x
- SvroPufiq0yfE+IoniTsWaDRrCT3hc9GcIEL7YBR+FPDDz2+kQhQ6c8ymrr2ZWuKMetXXeKFNwb
- KwU8sEYU/6QVXUv0U9/rnaNN5aE9Dn3/pAgWn6TMIlW7TqDy5OpZcDNHcTrTMb7dIbN4ZpODhn4
- KXsqmrKdlKHKW2yxK0uDIcrdZK29sZzRlyFLSn0emTJdXEnFdLUptr1Sx903FGtPEsd0OfODqOX
- zCLv3aJ0hOH0M1xTngACdbr4lHsBQc2+NEYI39Hm0BXDsu7UpRPMRxkGViHb4YNOQswD3Lf/IMS
- u6vB0g1MLAYDMLxhNwBdf3iCw9bw4mECYVEk2HpV2LdrXHk/rWqw/gGFeQW0C6Hqw3iN9yQoAhe
- q9swqNYBipkyoiFw==
-X-Google-Smtp-Source: AGHT+IFN+PfcOLQGVDRRew6qsBEDqIOoaYcjQmynXT9qDZUKw92TbtdQnMlmQ1jzQ7dFm1IhsYdXkw==
-X-Received: by 2002:a05:6830:6d19:b0:788:d698:a0ad with SMTP id
- 46e09a7af769-7c6d13e9de1mr5032896a34.24.1762440444223; 
- Thu, 06 Nov 2025 06:47:24 -0800 (PST)
-Received: from [192.168.68.110] ([179.93.21.233])
+ AJvYcCVcgVhr1kM8P+agOljWPbHG5ILdAH9IWkzPSok1TJv5LUag0NiakutNrEIJAy9W+XfR8SnerOFjTFtA@nongnu.org
+X-Gm-Message-State: AOJu0YxTKlW5DqlhNkAi13W3mzmSlpOHuFPk3RXbTrFjJXzGLlQ75OZS
+ 708yv+zrnK3DXHVjVWSf+EjFGwFDdzPRFIKu+1+o+D961b5BgYwGY2xH+jZ4gKTbEMA=
+X-Gm-Gg: ASbGncteuk9oEqBT/SyZrRdOuxP7iyH+miac1ZV7ZWUJ2zKzHEc834zxCgx0F8XK1Nz
+ OYicxGHt/w9PvAcTBuyXn21T7osb0rK/Zs8j2qtkM9S/KvUwohVDn6GNJqeaTuuX7jU/VfwsbW8
+ Im5WtFQ+vjcWeu8OApo7vb0Du1kdUKzbrzKUvh5FltU23mqLMw2MopwRPUcydAJ/9dA8WS0/I4V
+ N84RJCPz1LA4TL51SAmBDul0ow5H7Cq+XqmSWtyPXQl/NKEDtSQfXbYIoTpZCsrM7QmOXTNZvqS
+ KpaK2TKSW10YiZI20jq4Vw+omIUykr4FFngjMi4OxteVxWUhPLcCXuJrGWMymnm8u1ojNlfvWmg
+ FKTyWyQL5kTUyW6HYBeg/w7XRCRyaxkFwXD2TlwZXuFsWMNJw9RLqruRTfi4iFqAQ5CCY3Qx2vm
+ XKmGlQP+9prVEtUTT6ouLyNHAPjjo=
+X-Google-Smtp-Source: AGHT+IFwGUsPHQ/gppJ59lH8pgoOFIEuMDJxuA3cCZvuvHJuYLOCnXwlZO0AEwgWSG743kNCiq6+DA==
+X-Received: by 2002:a17:907:96a0:b0:b70:cf3f:7fbc with SMTP id
+ a640c23a62f3a-b72656cf18bmr757738466b.65.1762441942413; 
+ Thu, 06 Nov 2025 07:12:22 -0800 (PST)
+Received: from [172.20.148.100] ([87.213.113.147])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6e32d1abesm1180433a34.19.2025.11.06.06.47.21
+ a640c23a62f3a-b7289334257sm242776166b.6.2025.11.06.07.12.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Nov 2025 06:47:23 -0800 (PST)
-Message-ID: <6b90bd55-f2c9-4c6c-9058-16ba147f3c0f@ventanamicro.com>
-Date: Thu, 6 Nov 2025 11:47:19 -0300
+ Thu, 06 Nov 2025 07:12:21 -0800 (PST)
+Message-ID: <89299280-94da-49ce-97d6-90b085ccd16c@linaro.org>
+Date: Thu, 6 Nov 2025 16:12:19 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] Add RISCV Zilsd extension
-To: Roan Richmond <roan.richmond@codethink.co.uk>, qemu-riscv@nongnu.org
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Roan Richmond <roan.richmond@codethink.co.uk>, qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, alistair23@gmail.com
 References: <20251104120012.194899-1-roan.richmond@codethink.co.uk>
  <710d9b96-ac43-4d51-b210-65917bf91aa0@ventanamicro.com>
  <6d00d026-25e7-40a7-ad44-348a7aa4fc1a@codethink.co.uk>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ <6b90bd55-f2c9-4c6c-9058-16ba147f3c0f@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <6d00d026-25e7-40a7-ad44-348a7aa4fc1a@codethink.co.uk>
+In-Reply-To: <6b90bd55-f2c9-4c6c-9058-16ba147f3c0f@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::336;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ej1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,203 +109,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 11/6/25 11:31 AM, Roan Richmond wrote:
-> I understand your point about doing the check before the 2 ld_tl() and the 2 dst_gpr() calls.
+On 11/6/25 15:47, Daniel Henrique Barboza wrote:
 > 
-> My reasoning for doing the check after was the wording of the specification:
-> "LD instructions with destination x0 are processed as any other load, but the result is discarded entirely and x1 is not written"
-> This suggests that a load instruction is still dispatched but the result is then discarded.
-
-Oh, so it's not a coding choice. In this case let's adhere to the spec as close as
-we can (a.k.a keep it as is).
-
-
-Thanks,
-
-Daniel
-
 > 
-> I am happy to move the check if you think it is definitely necessary, otherwise I would prefer to leave it as happening after the calls to ld_tl() and dst_gpr, so we are closer the the expected behavior.
-> 
-> Thanks,
-> Roan
-> 
-> On 06/11/2025 12:17, Daniel Henrique Barboza wrote:
+> On 11/6/25 11:31 AM, Roan Richmond wrote:
+>> I understand your point about doing the check before the 2 ld_tl() and the 2 dst_gpr() 
+>> calls.
 >>
->>
->> On 11/4/25 8:59 AM, Roan Richmond wrote:
->>> This is based on v1.0 of the Zilsd extension [1].
->>> The specification is listed as in the Ratified state [2],
->>>   since Jan 30, 2025.
->>>
->>> [1]: https://github.com/riscv/riscv-zilsd
->>> [2]: https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154861/RISC-V+Specs+Under+Development
->>>
->>> Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
->>> ---
->>>   target/riscv/cpu.c                      |  2 +
->>>   target/riscv/cpu_cfg_fields.h.inc       |  1 +
->>>   target/riscv/insn_trans/trans_rvi.c.inc | 56 ++++++++++++++++++++++++-
->>>   3 files changed, 57 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>> index 73d4280d7c..6e0d37fb96 100644
->>> --- a/target/riscv/cpu.c
->>> +++ b/target/riscv/cpu.c
->>> @@ -121,6 +121,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->>>       ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
->>>       ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
->>>       ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
->>> +    ISA_EXT_DATA_ENTRY(zilsd, PRIV_VERSION_1_13_0, ext_zilsd),
->>>       ISA_EXT_DATA_ENTRY(zimop, PRIV_VERSION_1_13_0, ext_zimop),
->>>       ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
->>>       ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, has_priv_1_12),
->>> @@ -1247,6 +1248,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
->>>       MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
->>>       MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
->>>       MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
->>> +    MULTI_EXT_CFG_BOOL("zilsd", ext_zilsd, false),
->>>       MULTI_EXT_CFG_BOOL("zimop", ext_zimop, false),
->>>       MULTI_EXT_CFG_BOOL("zcmop", ext_zcmop, false),
->>>       MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
->>> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
->>> index a154ecdc79..8d8e35e4cf 100644
->>> --- a/target/riscv/cpu_cfg_fields.h.inc
->>> +++ b/target/riscv/cpu_cfg_fields.h.inc
->>> @@ -41,6 +41,7 @@ BOOL_FIELD(ext_zicond)
->>>   BOOL_FIELD(ext_zihintntl)
->>>   BOOL_FIELD(ext_zihintpause)
->>>   BOOL_FIELD(ext_zihpm)
->>> +BOOL_FIELD(ext_zilsd)
->>>   BOOL_FIELD(ext_zimop)
->>>   BOOL_FIELD(ext_zcmop)
->>>   BOOL_FIELD(ext_ztso)
->>> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
->>> index 54b9b4f241..dcbb3811d9 100644
->>> --- a/target/riscv/insn_trans/trans_rvi.c.inc
->>> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
->>> @@ -370,6 +370,27 @@ static bool gen_load_tl(DisasContext *ctx, arg_lb *a, MemOp memop)
->>>       return true;
->>>   }
->>>   +/* Zilsd extension adds load/store double for 32bit arch */
->>> +static bool gen_load_zilsd(DisasContext *ctx, arg_lb *a)
->>> +{
->>> +    TCGv dest_1 = dest_gpr(ctx, a->rd);
->>> +    TCGv dest_2 = dest_gpr(ctx, (a->rd)+1);
->>> +    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
->>> +    TCGv addr_2 = get_address(ctx, a->rs1, (a->imm)+4);
->>> +
->>> +    tcg_gen_qemu_ld_tl(dest_1, addr_1, ctx->mem_idx, MO_SL);
->>> +    tcg_gen_qemu_ld_tl(dest_2, addr_2, ctx->mem_idx, MO_SL);
->>> +
->>> +    /* If destination is x0 then result of the load is discarded */
->>> +    if (a->rd == 0) {
->>> +        return true;
->>> +    }
->>
->> Can't we exit earlier in this case? We're doing 2 dst_gpr() calls, 2 get_address() and
->> 2 ld_tl() loads before checking a->rd == 0. Maybe something like this:
->>
->>
->>> +    TCGv addr_1, addr_2, dest_1, dest_2;
->>> +
->>> +    /* If destination is x0 then result of the load is discarded */
->>> +    if (a->rd == 0) {
->>> +        return true;
->>> +    }
->>> +
->>> +    dest_1 = dest_gpr(ctx, a->rd);
->>> +    dest_2 = dest_gpr(ctx, (a->rd)+1);
->>> +    addr_1 = get_address(ctx, a->rs1, a->imm);
->>> +    addr_2 = get_address(ctx, a->rs1, (a->imm)+4);
->>> +
->>> +    tcg_gen_qemu_ld_tl(dest_1, addr_1, ctx->mem_idx, MO_SL);
->>> +    tcg_gen_qemu_ld_tl(dest_2, addr_2, ctx->mem_idx, MO_SL);
->>
->>
->> Thanks,
->>
->> Daniel
->>
->>
->>
->>> +
->>> +    gen_set_gpr(ctx, a->rd, dest_1);
->>> +    gen_set_gpr(ctx, a->rd+1, dest_2);
->>> +    return true;
->>> +}
->>> +
->>>   /* Compute only 64-bit addresses to use the address translation mechanism */
->>>   static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
->>>   {
->>> @@ -409,6 +430,8 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
->>>       decode_save_opc(ctx, 0);
->>>       if (get_xl(ctx) == MXL_RV128) {
->>>           out = gen_load_i128(ctx, a, memop);
->>> +    } else if (memop == MO_SQ && get_xl(ctx) == MXL_RV32) {
->>> +        out = gen_load_zilsd(ctx, a);
->>>       } else {
->>>           out = gen_load_tl(ctx, a, memop);
->>>       }
->>> @@ -437,7 +460,10 @@ static bool trans_lw(DisasContext *ctx, arg_lw *a)
->>>     static bool trans_ld(DisasContext *ctx, arg_ld *a)
->>>   {
->>> -    REQUIRE_64_OR_128BIT(ctx);
->>> +    /* Check for Zilsd extension if 32bit */
->>> +    if (get_xl(ctx) == MXL_RV32 && !ctx->cfg_ptr->ext_zilsd) {
->>> +        return false;
->>> +    }
->>>       return gen_load(ctx, a, MO_SQ);
->>>   }
->>>   @@ -482,6 +508,27 @@ static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
->>>       return true;
->>>   }
->>>   +/* Zilsd extension adds load/store double for 32bit arch */
->>> +static bool gen_store_zilsd(DisasContext *ctx, arg_sb *a)
->>> +{
->>> +    TCGv data_1 = tcg_temp_new();
->>> +    TCGv data_2 = tcg_temp_new();
->>> +    if (a->rs2 != 0) {
->>> +        data_1 = get_gpr(ctx, a->rs2, EXT_NONE);
->>> +        data_2 = get_gpr(ctx, (a->rs2)+1, EXT_NONE);
->>> +    }
->>> +    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
->>> +    TCGv addr_2 = get_address(ctx, a->rs1, (a->imm)+4);
->>> +
->>> +    if (ctx->ztso) {
->>> +        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
->>> +    }
->>> +
->>> +    tcg_gen_qemu_st_tl(data_1, addr_1, ctx->mem_idx, MO_SL);
->>> +    tcg_gen_qemu_st_tl(data_2, addr_2, ctx->mem_idx, MO_SL);
->>> +    return true;
->>> +}
->>> +
->>>   static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
->>>   {
->>>       TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
->>> @@ -511,6 +558,8 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
->>>       decode_save_opc(ctx, 0);
->>>       if (get_xl(ctx) == MXL_RV128) {
->>>           return gen_store_i128(ctx, a, memop);
->>> +    } else if (memop == MO_UQ && get_xl(ctx) == MXL_RV32) {
->>> +        return gen_store_zilsd(ctx, a);
->>>       } else {
->>>           return gen_store_tl(ctx, a, memop);
->>>       }
->>> @@ -533,7 +582,10 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
->>>     static bool trans_sd(DisasContext *ctx, arg_sd *a)
->>>   {
->>> -    REQUIRE_64_OR_128BIT(ctx);
->>> +    /* Check for Zilsd extension if 32bit */
->>> +    if (get_xl(ctx) == MXL_RV32 && !ctx->cfg_ptr->ext_zilsd) {
->>> +        return false;
->>> +    }
->>>       return gen_store(ctx, a, MO_UQ);
->>>   }
->>
->>
+>> My reasoning for doing the check after was the wording of the specification:
+>> "LD instructions with destination x0 are processed as any other load, but the result is 
+>> discarded entirely and x1 is not written"
+>> This suggests that a load instruction is still dispatched but the result is then discarded.
+...
+>>>>   +/* Zilsd extension adds load/store double for 32bit arch */
+>>>> +static bool gen_load_zilsd(DisasContext *ctx, arg_lb *a)
+>>>> +{
+>>>> +    TCGv dest_1 = dest_gpr(ctx, a->rd);
+>>>> +    TCGv dest_2 = dest_gpr(ctx, (a->rd)+1);
+>>>> +    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
+>>>> +    TCGv addr_2 = get_address(ctx, a->rs1, (a->imm)+4);
+>>>> +
+>>>> +    tcg_gen_qemu_ld_tl(dest_1, addr_1, ctx->mem_idx, MO_SL);
+>>>> +    tcg_gen_qemu_ld_tl(dest_2, addr_2, ctx->mem_idx, MO_SL);
+>>>> +
+>>>> +    /* If destination is x0 then result of the load is discarded */
+>>>> +    if (a->rd == 0) {
+>>>> +        return true;
+>>>> +    }
+
+If you're looking to not write to r1, then you need to use true temporaries, not 
+dest_gpr(), which may return r1, which will be modified by the load.
+
+You can drop the unnecessary () in those a->{rd,imm} + c expressions.
+
 
 
