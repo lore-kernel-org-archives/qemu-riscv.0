@@ -4,89 +4,171 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC63DCCF9F8
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Nov 2025 18:53:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34313CCF9F8
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Nov 2025 10:17:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vGic1-0004Hv-I0; Wed, 05 Nov 2025 13:52:05 -0500
+	id 1vGx31-00023t-Cw; Thu, 06 Nov 2025 05:16:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <michael@videogpu.com>)
- id 1vGib4-0003zZ-QA
- for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 13:51:10 -0500
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <michael@videogpu.com>)
- id 1vGib0-0003C8-38
- for qemu-riscv@nongnu.org; Wed, 05 Nov 2025 13:51:06 -0500
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3f0ae439b56so108032f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 05 Nov 2025 10:51:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=videogpu-com.20230601.gappssmtp.com; s=20230601; t=1762368661; x=1762973461;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5BHzlRkBUYh2EjQ2JUIqKE4S0PnVMUwsZ8qt/uPZSfU=;
- b=XmT6qMDahnu8Q6JwaeScbMkTYwtSoC1JUzo8bciC+Q8s+9f+gBG/d1agXsnyTqGSjX
- +fzH34jfZiCn2GokWuhaQi50F0sZ0852ouyCNLp2GQNQ2TZWmGYixrVoLRFbfJ9tOUtE
- EtsP/nfDQwrKJ3EKc14/8Cab2gCWVdiUhMP4RfAbDLb8BUmV3i1S35ZlkNc9sPVZzHhh
- FlZxg25IsCtzELV1hVfq0PjU+flRpZooCny/nFQYDWzqBYii/ir981XoW6dl9bSTbMt5
- HTp2Rkc/GPV26AKaEH6WZ33U0MT3xk+rJjtjNVvDqW5ocb+gwHStfewibAUYr0HPZxx3
- QmuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762368661; x=1762973461;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5BHzlRkBUYh2EjQ2JUIqKE4S0PnVMUwsZ8qt/uPZSfU=;
- b=gbfLVj4RbI+xf9OeIO+3mrJMG04pTixsHFfoGCbtc+0hMNEbbvz8SoJS9PhxIx0qfF
- +dt7LcgxhZjiw/aFKwyHrOlNob40BEvXFqnUCaMBU5juNHdXjG2tediaGsT5f6ssmIBG
- Nk06VOTBerNS4uVDhx9riiD8XH5lejG2O++vXBIaF8DWHldOf/SM88oASDBrj4LI/s/p
- pu/HZIrNqDYb3L9z9ECXvIz4s0jfFVn5jJVl0ZLjoL12YIyel5+mZS2qAyN14g1wlBEC
- kD6RGTVlrW/UO3rYXvSkvsPVbNFkNyVXR0f224GsHAJC4IuqPBMrikwXR1gheZmW1Cd2
- /30Q==
-X-Gm-Message-State: AOJu0Ywm1RvaHZP8pTnbkAlqmoZZqldaFD/6ThBa6v2UOk0b1b6kmHRL
- FGhzU7Gpd0uDyR2L0+MCUryubeWA+lpUHRX5tFTe5T7GtKd6Kr/o7bYwV5Jxc+97gLU=
-X-Gm-Gg: ASbGncsAupju/XHAUFnRhx71oHLIuV8mAcltoM71z/DOyyFINgeZjAIQmSJFAJSLrtQ
- OeoUbKdfeH+1+REldtX/jGRjnbeAOtCVOnq8+RautSOn44JZ6aeJLOW+Kb6ky6ITw6Sx9rIT4qe
- OYG+A+BILfWAJSbv7VVqRKZz67thW1kNACoQc7KYLoH+p/NkCJwG9G+yf9w9NpPWgqmJKUB7ZxR
- iOeUZ5oLnup+xohTjw1FkGAsZKw5R69+uyusmWZFs642a1KdhKPBIvZbSA7IE14npyODb4zPBR/
- xmKicvwTA6YH/uFF3XnkhFYM4tWQUGciBo/Y7OJ+QcBUOUBismjEWIKl2Jy/adQzmvs/HUEH3iS
- 5fQCbazHXS6MBs3yvTjyN7paIR08mmLvRlufSyz7koSGrEMcnfmPbEBvHLVRZ7CG+/N0a/LXH8p
- 8GT+YW7MO2hQzJ/k4=
-X-Google-Smtp-Source: AGHT+IGWMsr/Fllml8pRNdOg083d7fdM/SpV6egSwCWWHV6eOq1/B+gOkK386GXBafAZjHffK7VnsA==
-X-Received: by 2002:a05:6000:2408:b0:429:ca3c:b802 with SMTP id
- ffacd0b85a97d-429e3309404mr4195497f8f.44.1762368660530; 
- Wed, 05 Nov 2025 10:51:00 -0800 (PST)
-Received: from DDesktop.local ([2a10:8012:d:eea4:f4de:376b:66b1:d7b5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429eb42a354sm270622f8f.20.2025.11.05.10.50.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Nov 2025 10:51:00 -0800 (PST)
-From: Michael Levit <michael@videogpu.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, philmd@linaro.org, pbonzini@redhat.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- liwei1518@gmail.com, smishash@gmail.com
-Subject: [PATCH v3 2/5] hw/misc: add NEORV32 SYSINFO block (CLK/MISC/SOC/CACHE)
-Date: Wed,  5 Nov 2025 20:50:53 +0200
-Message-ID: <20251105185056.23565-3-michael@videogpu.com>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20251105185056.23565-1-michael@videogpu.com>
-References: <20251105185056.23565-1-michael@videogpu.com>
+ (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
+ id 1vGx2z-00023e-EF; Thu, 06 Nov 2025 05:16:53 -0500
+Received: from mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ ([2a01:111:f403:c20f::7] helo=OSPPR02CU001.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
+ id 1vGx2x-0004aC-GN; Thu, 06 Nov 2025 05:16:53 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xxWjjA+SI/2t22cR0qNvwIos1/xLuqKp8fL6DGDCBDoEe2lK9FOV1ALZjHAG4Vp3XzouH/wFzIXqOr/P1rp57vih0XI+woosTg3NYCL8kBhgLCI63KehBENt5NXagbiE3FoINGpd+4d2YOM80N3WXVNxM/bI3KjD9VQz07UwjAZ80l0Y31fw0mPKCVZp+fVcP1HfHH9I4436a9jUwHtlLkhD54Jtkcru5loYgu7RTLZ4LT6U3Q11Nd7GclWarBmRrmLMRT+hjKdhf0RsEMp/h+wrqn9aWM4iAHQgCasTLPR7i/tWeKS/Cwsz3UvMy5aVCG4Ad2qFMwaull7stD4iqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4zwfh+mXvM9lJBlrchTTG9suLsc/qbu1JuCc7X6yk5w=;
+ b=Vgl+O/7g8IhkBUr12iOORX5n9SLUqr29AOFxVUSpyWMR2QLOjWXZlaAMrpaUwaED/VDftZNk6oQwC5apifAAjQ57tXRu7qUWx3SehcVX3fCuH7uUMfTT5UM9kCMEf5lizF0GoHLly6z0F/I8wULo9bQXpwb3GeL//9g/Qy+zwIdshGExMgcNUN7Ao8JmP1+aH+jg4OdFLLFUetUi099Ml2OpGiw3BIycdrp4ynqwGqn5eKdJm+XB4i/CrBEmKFfhEH+ipbnchQ0e01+rN8K2V4+phwftif/sqF44NO8Bo3NXy8x/OlPyNhADntnaDklFjsaBKoTj82PGCFxg6qd5iQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=htecgroup.com; dmarc=pass action=none
+ header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4zwfh+mXvM9lJBlrchTTG9suLsc/qbu1JuCc7X6yk5w=;
+ b=P443LKwWnnQWgNU2XfQ53zDhRBWH9QdiLH02VDWq5or1dumrM4Wrwd0Bu2otUGv6R/l5k4iILnaBnNllw/cY+Ezmw+D47fnAilN4DhmLlLuWgvDHjcaQ0JT/uTtLR5kndlRPtrdvCShHMkYnQSXhjFDGhLIapesIVm7OvWGC/eY71fbxE8IOCwQHguaikUTExQ5wwLC0rdkU40w7H3wIZjUz849LZ6exd8YDtstL8VLRPPihb9iHR/LQ0pKCJwOh8OBUqXnJENfW/0dA5RBFVWwiKCLqC3cp/xPuib3j0rVZyM+5oPNF4EAysPfd7sqnCPbtLoOWaaTEKN+4Oemfog==
+Received: from AS4PR09MB6518.eurprd09.prod.outlook.com (2603:10a6:20b:4fb::5)
+ by PA4PR09MB4686.eurprd09.prod.outlook.com (2603:10a6:102:e4::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.9; Thu, 6 Nov
+ 2025 10:16:44 +0000
+Received: from AS4PR09MB6518.eurprd09.prod.outlook.com
+ ([fe80::ad50:891a:847c:580a]) by AS4PR09MB6518.eurprd09.prod.outlook.com
+ ([fe80::ad50:891a:847c:580a%4]) with mapi id 15.20.9298.010; Thu, 6 Nov 2025
+ 10:16:44 +0000
+From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
+To: Alistair Francis <alistair23@gmail.com>
+CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
+ <qemu-riscv@nongnu.org>, "cfu@mips.com" <cfu@mips.com>, "mst@redhat.com"
+ <mst@redhat.com>, "marcel.apfelbaum@gmail.com" <marcel.apfelbaum@gmail.com>,
+ "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>, "philmd@linaro.org"
+ <philmd@linaro.org>, "thuth@redhat.com" <thuth@redhat.com>
+Subject: Re: [PATCH v1 0/1] riscv: Update MIPS vendor id
+Thread-Topic: [PATCH v1 0/1] riscv: Update MIPS vendor id
+Thread-Index: AQHcTZy0WB//FmK49UaNRcS3d/Iv/LTjJJOAgAJNGYA=
+Date: Thu, 6 Nov 2025 10:16:44 +0000
+Message-ID: <5301acd3-6e1e-41f0-9cf0-f262bd8c5521@htecgroup.com>
+References: <20251104150708.3345289-1-djordje.todorovic@htecgroup.com>
+ <CAKmqyKNV9Dc5-mszwg8aFCkqLiASLZ_u+dbLLyG_59usMAL6Mw@mail.gmail.com>
+In-Reply-To: <CAKmqyKNV9Dc5-mszwg8aFCkqLiASLZ_u+dbLLyG_59usMAL6Mw@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla Thunderbird
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=htecgroup.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS4PR09MB6518:EE_|PA4PR09MB4686:EE_
+x-ms-office365-filtering-correlation-id: 7cf51927-0eec-496c-7765-08de1d1d9644
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700021;
+x-microsoft-antispam-message-info: =?utf-8?B?Unc0NjdsY20xOWZRY0ZxOHkyWkhaVW5way92QXp4NG1MS09meDJVdU1BMmdX?=
+ =?utf-8?B?eVFVbWRic2lGRndqZHREMW1YNFk3bnh2NDBDTHR6RGRCc2doMTlaSGovbFFi?=
+ =?utf-8?B?SE15QnpwM3R6bmpnZVBhMFRDbnExK0dJZUJzU0F3UXFYRjYzTnRwOEh5dXho?=
+ =?utf-8?B?RXVnMTF5TkZ6RDVSZE4rR3VDUUlVa25hTUk3SjF4WXcxSEhFNTUwdlpta0hn?=
+ =?utf-8?B?bVB2OHplTUtUSjdLUU1ic2lpaXUrUjhVb3ZxUlo4blc4bGJoRytKYTB6MXhh?=
+ =?utf-8?B?Ymc5QXkrY0dSZ2ZkZXNpZGVTVDFac2IzTU9qUllOREdDM0FRb1llZ1IwNWhV?=
+ =?utf-8?B?eWY3ZWpwZDZuMlZFR1M3cnN5RUl3ekcvYStjd01JUGR6cUxtOFpkM0tYaThu?=
+ =?utf-8?B?WFdoZ3NCWS92YncrVitoT0dvMlBwR0JzUHFBYXE3UWN2aW1scEFjNmJZTkIw?=
+ =?utf-8?B?S2RxbkU5R0lJTGRnYktydFdEaElUeDl2Nm95RnFIdnZRRnpZM0piVCtwNURS?=
+ =?utf-8?B?THlWUmQzc2ozMkt5bVUvUWpzSWs0RGl5eHhxQ2FzMnlBdkkraTFPU1RwdVJ4?=
+ =?utf-8?B?Si95NTBSNS8vL2x6YVlyWVd4c0ZkQXEyNzJLZnBwZzRwWWo5a2FpTXVmcVQ2?=
+ =?utf-8?B?UFlNb2NWOVd6blU1YkxWYW5qRDBKRGNhY1BkWVQ4YmRSK2ZHVEN1bmtlbXVV?=
+ =?utf-8?B?NkJzQUp6WHlOVlJSeEpFVG4vOWJUUml0aktEcVdCUFRYbDdRcDBtaDQ5Sktk?=
+ =?utf-8?B?TktwamREWGcya0JaVHFpNWhxWEViZHdja0tMYmtzbWlZT2FRZEdxVVA4SHZB?=
+ =?utf-8?B?dHY0cXFwbGdvdkdkTGtOZlZSMndHK3RzNHFaOGp1blZiQ0drZlZtMWl1VlNl?=
+ =?utf-8?B?bjNWdzgxbCtXVzhPdldVQzF2M1cyK1M4cDAvUDlwM1pVVE0rVTNLMVZZb0Jm?=
+ =?utf-8?B?QzBEeDNNZ2RQaGFIck81cEpzdzR4ZjAzVGRYMnlMSHpvc2FRSGIxQjVjbGxV?=
+ =?utf-8?B?ZXJlTjJ2SG1ienFDd0dZZHh1VGRhejgzY25RWlRtM2RkNGJUa2ZiRVhxdC8v?=
+ =?utf-8?B?dFJUWXEzTlAwTmdsNGpIczJrTkh5ckRzSmJxNDN3R3JoQ3kyU0ZXRlNwblVX?=
+ =?utf-8?B?VytVRUY3eEVncXNYMFVIdXpiZDZQSGRVaW50T0ZXZXpsN0xQWm83cjhxcGVT?=
+ =?utf-8?B?QkZlUFJyaHkwMk5WRUVpbWFqSkZ2SHhlYWp1eHBra3FBWVlIQWJmbWs5RXd1?=
+ =?utf-8?B?ZTNpcUxqVjJzRkdrSEFVMmc4VGxTdnIvcjV1Q0lEaUNTTlRuTERHR0tKamIr?=
+ =?utf-8?B?dXJhNDBRQUV1SmlVL1ZBcVRLM0FISU1QQmxIbzY0MG52ZlI3b2RKZllFZU8w?=
+ =?utf-8?B?VEltR2hRT0dMVm1XcTZteUZ1WU9yU0lodnBBaDFFWTZDbW1GQUFtUEVrNDFX?=
+ =?utf-8?B?NU56ZklpQmJVVDRWbTlQd2YvMlRXc3orM3kzbkR3NkZjbkI0b0t4K0xIa2Y3?=
+ =?utf-8?B?aGdjcElNUXU5MjMrdDU0WlRwaDhOY00xcUlJNXVWQlpIUUtlbGhvQkhlK2RW?=
+ =?utf-8?B?ZWh6c3B6Y1BZc3dWWVdOUEpja2xkYXBFZm5oZEIvdlVhRUw3TXl5K0xDQUp5?=
+ =?utf-8?B?RGVnT05uUXNnQXpqNVBVZExNaEVWQzZ2bjV0dGxxZ1NWK3I4WlhYY1BnZWN1?=
+ =?utf-8?B?a1BpMHBtMHhUVlRpWTlkZVVTRlV3RXByNGNSdmFQL1cxWXQ1aWpEcFJJVkxq?=
+ =?utf-8?B?ZHo2c04wNTY5ZTY3dHFOUnFXcEc0Y3gwWEp6TkVnbUpORG9TSnZVSDZXY245?=
+ =?utf-8?B?NERUQ3VVck5pa0FuNlZHaHZvVVNFa2o5b0JlVm1CTEFJWlZTOEhmbTI4RDhw?=
+ =?utf-8?B?SjhBaURVYmcxWXdiRlV2Y1JBMGx1KzcwWVlqcGhQZTg3OExTbGxyT1M0UWUz?=
+ =?utf-8?B?TVRaVXN6aGVyNE01KzlGcXk5cE8yZmt1d3A1UVBqQld4NVlnTFU2dnVlU1lx?=
+ =?utf-8?B?dHJyZnNiWkJRPT0=?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR09MB6518.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700021); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dGROQWkrQ2F3bzVMdUI3d1M3YzZKR0VLZ2gvYTI1QTE5QW5GSDBGdEtGZC9W?=
+ =?utf-8?B?T1c0UWljakYxMENDMkRUQ1JPa0Z6Z1QvUTZ5MCsrZzBSUzRFODFpN0NITXJV?=
+ =?utf-8?B?YWU1U0JveUExTm8yMDlabGJ1R29TUHEyeVBGNDgzUTZSaStFT1V6VEhYK2lk?=
+ =?utf-8?B?MHFjUEhYTDR0MUI1amNjU0xwNGJMdFlFbDRuWUpNYmo4citER3g1aHRPQ2Jw?=
+ =?utf-8?B?WTJ2bGhiemNPOTYzaXBXSGY4amZqN3FDSEE0RVphNTlCZHRMazZiSWhOU2Vx?=
+ =?utf-8?B?WHNDdXlLRWxaSlp0SmVUeXVJcVFUbGJKd0xUNHBqL1J4S0hIa0t3YktLSDlM?=
+ =?utf-8?B?cHB4dFBxTGtmMlptWmQrK2RCOS9xanBlYXpnb0hkdEtQZkRhNU9MdmUxUUtj?=
+ =?utf-8?B?aENxNFpIbHRZT2VKS1lCRHZYcHVqNUFoZXBrd3JwbjZ5UkFYeUdXK0cvK2NL?=
+ =?utf-8?B?N2F6OXpPb2JiVFVNSmRXdGRpTHpSaC9wL2JWdWNSb0NBL0pUbVFveld1MEJn?=
+ =?utf-8?B?djhlZitnNUJCMURxUFZOb0lrQzNtU1FLQ0JmSW5CcTkveTU0dnV0anRFWFE5?=
+ =?utf-8?B?c3VFRnRZdGVzWGdnUTZWRXdQcmN2NlVSczJHSDZVY0EwM0tSY1U3UC9pTEMw?=
+ =?utf-8?B?OXJEalAxMDU3b2FBYktNNGtnR0o0ZUxFY05BU3lHd2RlT2xzdkViU2cwcHFL?=
+ =?utf-8?B?TndTcmp1YkgyVko5UDFqK0FzRTJuTGRvdzMxSWZEWFcvejlhNEcxV3lmRndv?=
+ =?utf-8?B?aTNsVkUzS1NzTmpFRi82TzhUdytaMlNqdVI4SDg2UjZ0MkpHZGNQcWdpdS9t?=
+ =?utf-8?B?cC9jR3MvVk0yQ1JURjd3WGxOakh6akhrOUM5eDRKSHlZbHpIcGtzWWtndW96?=
+ =?utf-8?B?QXF3UVEyTDVySFNxZm43MFZtT2RWK0NORUtFMERFb28zZk1VVEJ4bkt0a21C?=
+ =?utf-8?B?NCtzSU9mazNXdjdtQ1ZoS1BKSHdZcXM1aEsyTHdpSHl2SDgrTDVpQkJ0RWhm?=
+ =?utf-8?B?MXFIWTlVaGlvYTVCb0lnNTVhQkVIb01ZaTlQTWJ0enltQkl0YTFrUTl5ZmdB?=
+ =?utf-8?B?dENpMGNSb2NiKzFocmRMWTIwK3VBUFZTaWpQNWtHcHM3UDgxU1lrT25GcGVS?=
+ =?utf-8?B?WFg0NVhCdlpKZFRjQlFodTFrOXZ3K0F0MUpmRjY4SWhrWGlCTjZEcU5mT1hT?=
+ =?utf-8?B?Z21LMXdPNGxnMjUwQjFlR0MvRWV4ODlmVFRYRHpaSEN3MFU1RGtDc3puK0d4?=
+ =?utf-8?B?VGppWTdZV1VJU0hjSkJiR1phbDZzbVRGcmI3WXpKVUVheHc3NWdsa3dLK0ty?=
+ =?utf-8?B?NWQwQWl6RE5HZW9rbk02dVI4ajBOWWw4VGJUQnFOZlVOeU9HUVlXY1FYWEU5?=
+ =?utf-8?B?Z296WDdXWE5GS0ovK0N6bis3T2J3ekhpbHlGQ0xselRpM1kwQWQ1VENxYklx?=
+ =?utf-8?B?UjdLZGtaMjE3U2xTYzlOQWprMW1FYVUzcjZYcU5LUnpVTG9mTnVQSitIMHFZ?=
+ =?utf-8?B?UzdRNktySjJ1dXMvNjA3MFR5VnZyMmd0eS84M3hzY3FaOERGL25hYXdKK3Ey?=
+ =?utf-8?B?VHNVbkFxa3psd0s5N3hhbnViYTFLOWVWbUd4SHBibDBvbEJUSW55dExSd01B?=
+ =?utf-8?B?ZUt1ZVVsKzZSN3hZaGlRSy93MnA1NkVjTGoxK21nejltS0V2WFlRc0RtZ1dn?=
+ =?utf-8?B?K0R6cEk2b1BzV2Y4dytZSXZISG81cjlVUHN1R0gzV2tHZHppVTBZZ2JieFR4?=
+ =?utf-8?B?YkRBWEhkK3hBR20zbnlvc084NzJOYkpWRjdpOVo1WUR3RFFZSDBsL2N6WEwv?=
+ =?utf-8?B?UzlkdDRGUjJ2S0J0WnJoVy9iVmhqWkFEYkJhbjdFV1puZmdNamNWeXZtYzBP?=
+ =?utf-8?B?U2pTMnArVFRjUjZ6UERtbVQ4Vkd5N21DRE1rV0JlaktkVHl5TzNNVGN3OEc3?=
+ =?utf-8?B?OXFqUS9IbnIxZ0xYeTV6TjJMeTRjT0xCTjNnM3ZsNGlZQ0hhSDgvd2xjWTRv?=
+ =?utf-8?B?MmkxdU42ZlpTeXZiQjV6Zk1vMkxLZkIybHRPc05UaWJXNHhqdDNmVjMrLzlI?=
+ =?utf-8?B?eTJiblR6NmFSSkxrdDE2ZFRTQ2hveEEzVmtCMFh4RnM5bjZPa3FGTFlVVXFL?=
+ =?utf-8?B?RCtEV1NHZ2VYVTFUd2V2RldHU1JtWGVvcWM4Z1ptUzNMTUp1ZHl4TnJEd0hO?=
+ =?utf-8?Q?MjeOZV/kz45vy+NtpLjk6W8=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <4023F337E8FB224397E0D535A912E571@eurprd09.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2a00:1450:4864:20::434;
- envelope-from=michael@videogpu.com; helo=mail-wr1-x434.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+X-OriginatorOrg: htecgroup.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR09MB6518.eurprd09.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7cf51927-0eec-496c-7765-08de1d1d9644
+X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Nov 2025 10:16:44.5140 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: kBFQ7VxwJF2Dam3WMWxoUbDoex7SsHzITrg6afsrJTrMoDuAa/FBlf8cHTJn709UYkb5u/+Qz0GXhQUKput8L7OQVCLJ+Omciz1fXSuWMPU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR09MB4686
+Received-SPF: pass client-ip=2a01:111:f403:c20f::7;
+ envelope-from=Djordje.Todorovic@htecgroup.com;
+ helo=OSPPR02CU001.outbound.protection.outlook.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,593 +184,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Michael <michael@videogpu.com>
-
-Add a minimal SYSINFO MMIO device compatible with NEORV32 SDK expectations:
-CLK (rw), MISC/SOC/CACHE (ro) composed from constants. Includes Kconfig/meson.
-
-Signed-off-by: Michael Levit <michael@videogpu.com>
----
- hw/misc/Kconfig               |   2 +
- hw/misc/meson.build           |   1 +
- hw/misc/neorv32_sysinfo.c     | 201 ++++++++++++++++++++++++++++
- hw/misc/neorv32_sysinfo.h     |  88 +++++++++++++
- hw/misc/neorv32_sysinfo_rtl.h | 239 ++++++++++++++++++++++++++++++++++
- 5 files changed, 531 insertions(+)
- create mode 100644 hw/misc/neorv32_sysinfo.c
- create mode 100644 hw/misc/neorv32_sysinfo.h
- create mode 100644 hw/misc/neorv32_sysinfo_rtl.h
-
-diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-index fccd735c24..dba77acb63 100644
---- a/hw/misc/Kconfig
-+++ b/hw/misc/Kconfig
-@@ -240,4 +240,6 @@ config IOSB
- config XLNX_VERSAL_TRNG
-     bool
- 
-+config NEORV32_SYSINFO_QEMU
-+    bool
- source macio/Kconfig
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index b1d8d8e5d2..4ea46ec2d1 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -34,6 +34,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
-+system_ss.add(when: 'CONFIG_NEORV32_SYSINFO_QEMU', if_true: files('neorv32_sysinfo.c'))
- 
- subdir('macio')
- 
-diff --git a/hw/misc/neorv32_sysinfo.c b/hw/misc/neorv32_sysinfo.c
-new file mode 100644
-index 0000000000..e64a003120
---- /dev/null
-+++ b/hw/misc/neorv32_sysinfo.c
-@@ -0,0 +1,201 @@
-+/*
-+ * Neorv32 SysInfo
-+ *
-+ * Copyright (c) 2025 Michael Levit
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "qemu/log.h"
-+#include "system/address-spaces.h"
-+#include "neorv32_sysinfo.h" /* QEMU related */
-+#include "neorv32_sysinfo_rtl.h" /* RTL related */
-+
-+
-+/* Register addresses (offsets) */
-+enum {
-+    REG_SYSINFO_CLK    = 0x00,
-+    REG_SYSINFO_MISC   = 0x04,
-+    REG_SYSINFO_SOC    = 0x08,
-+    REG_SYSINFO_CACHE  = 0x0C,
-+};
-+
-+
-+typedef struct Neorv32SysInfoState {
-+    MemoryRegion mmio;
-+    uint32_t clk_hz;   /* rw */
-+    uint32_t misc;     /* ro */
-+    uint32_t soc;      /* ro */
-+    uint32_t cache;    /* ro */
-+} Neorv32SysInfoState;
-+
-+
-+/* Safe integer log2: assumes power-of-two sizes; returns 0 if size is 0 */
-+static unsigned int neorv32_log2u(uint32_t x)
-+{
-+    if (x == 0U) {
-+        return 0U;
-+    }
-+    unsigned int r = 0U;
-+    while ((x >>= 1U) != 0U) {
-+        r++;
-+    }
-+    return r;
-+}
-+
-+/* Compose MISC register per the firmware header */
-+static uint32_t neorv32_sysinfo_build_misc(void)
-+{
-+    const uint32_t imem_log2  =
-+        neorv32_log2u(SYSINFO_IMEM_SIZE) & 0xFFU;  /* Bits [7:0]  */
-+    const uint32_t dmem_log2  =
-+        neorv32_log2u(SYSINFO_DMEM_SIZE) & 0xFFU;  /* Bits [15:8] */
-+    const uint32_t harts      =
-+        (SYSINFO_NUM_HARTS & 0x0FU);               /* Bits [19:16] */
-+    const uint32_t bootmode   =
-+        (SYSINFO_BOOTMODE_ID & 0x03U);             /* Bits [21:20] */
-+    const uint32_t intbus_to  =
-+        (SYSINFO_INTBUS_TO_LOG2 & 0x1FU);          /* Bits [26:22] */
-+    const uint32_t extbus_to  =
-+        (SYSINFO_EXTBUS_TO_LOG2 & 0x1FU);          /* Bits [31:27] */
-+
-+    uint32_t v = 0U;
-+    v |= (imem_log2 << 0);
-+    v |= (dmem_log2 << 8);
-+    v |= (harts     << 16);
-+    v |= (bootmode  << 20);
-+    v |= (intbus_to << 22);
-+    v |= (extbus_to << 27);
-+    return v;
-+}
-+
-+/* Compose CACHE register per the firmware header */
-+static uint32_t neorv32_sysinfo_build_cache(void)
-+{
-+    uint32_t v = 0U;
-+    v |= ((ICACHE_BLOCK_SIZE_LOG2 & 0x0FU) << 0);
-+    v |= ((ICACHE_NUM_BLOCKS_LOG2 & 0x0FU) << 4);
-+    v |= ((DCACHE_BLOCK_SIZE_LOG2 & 0x0FU) << 8);
-+    v |= ((DCACHE_NUM_BLOCKS_LOG2 & 0x0FU) << 12);
-+    v |= ((ICACHE_BURSTS_EN ? 1U : 0U) << 16);
-+    v |= ((DCACHE_BURSTS_EN ? 1U : 0U) << 24);
-+    return v;
-+}
-+
-+static uint64_t neorv32_sysinfo_read(void *opaque, hwaddr addr, unsigned size)
-+{
-+    Neorv32SysInfoState *s = opaque;
-+    uint32_t val = 0U;
-+
-+    switch (addr) {
-+    case REG_SYSINFO_CLK:
-+        val = s->clk_hz;
-+        break;
-+    case REG_SYSINFO_MISC:
-+        val = s->misc;
-+        break;
-+    case REG_SYSINFO_SOC:
-+        val = s->soc;
-+        break;
-+    case REG_SYSINFO_CACHE:
-+        val = s->cache;
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: invalid read addr=0x%" HWADDR_PRIx " size=%u\n",
-+                      __func__, addr, size);
-+        return 0;
-+    }
-+
-+    /* Enforce access size semantics (1/2/4 ok); we just return the low bytes */
-+    switch (size) {
-+    case 4: return val;
-+    case 2: return (uint16_t)val;
-+    case 1: return (uint8_t)val;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: invalid read size=%u at addr=0x%" HWADDR_PRIx "\n",
-+                      __func__, size, addr);
-+        return 0;
-+    }
-+}
-+
-+static void neorv32_sysinfo_write(void *opaque, hwaddr addr,
-+                                  uint64_t data, unsigned size)
-+{
-+    Neorv32SysInfoState *s = opaque;
-+
-+    /* Only CLK is writable; others are read-only */
-+    if (addr == REG_SYSINFO_CLK) {
-+        /* Accept 1/2/4 byte writes; update the corresponding bytes of clk_hz */
-+        uint32_t old = s->clk_hz;
-+        uint32_t val = old;
-+
-+        switch (size) {
-+        case 4:
-+            val = (uint32_t)data;
-+            break;
-+        case 2: {
-+            uint16_t part = (uint16_t)data;
-+            /* Little-endian halfword at offset (0 or 2) */
-+            if ((addr & 0x3) == 0x0) {
-+                val = (old & 0xFFFF0000U) | part;
-+            } else if ((addr & 0x3) == 0x2) {
-+                val = (old & 0x0000FFFFU) | ((uint32_t)part << 16);
-+            } else {
-+                qemu_log_mask(LOG_GUEST_ERROR,
-+                              "%s: misaligned 16-bit write at 0x%"
-+                              HWADDR_PRIx "\n",
-+                              __func__, addr);
-+
-+                return;
-+            }
-+            break;
-+        }
-+        case 1: {
-+            uint8_t part = (uint8_t)data;
-+            uint32_t shift = (addr & 0x3) * 8U;
-+            val = (old & ~(0xFFU << shift)) | ((uint32_t)part << shift);
-+            break;
-+        }
-+        default:
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "%s: invalid write size=%u at addr=0x%"
-+                          HWADDR_PRIx "\n",
-+                          __func__, size, addr);
-+            return;
-+        }
-+
-+        s->clk_hz = val;
-+        return;
-+    }
-+
-+    qemu_log_mask(LOG_GUEST_ERROR,
-+                  "%s: write to read-only addr=0x%" HWADDR_PRIx " val=0x%"
-+                  PRIx64 " size=%u\n",
-+                  __func__, addr, data, size);
-+}
-+
-+static const MemoryRegionOps neorv32_sysinfo_ops = {
-+    .read = neorv32_sysinfo_read,
-+    .write = neorv32_sysinfo_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid.min_access_size = 1,
-+    .valid.max_access_size = 4,
-+};
-+
-+void neorv32_sysinfo_create(MemoryRegion *address_space, hwaddr base)
-+{
-+    Neorv32SysInfoState *s = g_new0(Neorv32SysInfoState, 1);
-+
-+    s->clk_hz = SYSINFO_CLK_HZ_DEFAULT;
-+    s->misc   = neorv32_sysinfo_build_misc();
-+    s->soc    = SYSINFO_SOC_VAL;
-+    s->cache  = neorv32_sysinfo_build_cache();
-+
-+    memory_region_init_io(&s->mmio, NULL, &neorv32_sysinfo_ops,
-+                          s, "neorv32.sysinfo", 16 /* 4 regs x 4 bytes */);
-+
-+    memory_region_add_subregion(address_space, base, &s->mmio);
-+}
-diff --git a/hw/misc/neorv32_sysinfo.h b/hw/misc/neorv32_sysinfo.h
-new file mode 100644
-index 0000000000..71e6a3a5d1
---- /dev/null
-+++ b/hw/misc/neorv32_sysinfo.h
-@@ -0,0 +1,88 @@
-+/*
-+ * Neorv32 SysInfo
-+ *
-+ * Copyright (c) 2025 Michael Levit
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef HW_NEORV32_SYSINFO_H
-+#define HW_NEORV32_SYSINFO_H
-+
-+#include "system/memory.h"
-+
-+
-+/* Internal memory sizes (bytes) */
-+#define SYSINFO_IMEM_SIZE        0x00008000U  /* 32 KiB IMEM */
-+#define SYSINFO_DMEM_SIZE        0x00008000U  /* 32 KiB DMEM */
-+
-+/* Number of harts (physical cores) */
-+#define SYSINFO_NUM_HARTS        1U
-+
-+/* Boot mode (matches RTL BOOT_MODE_SELECT encoding used in your firmware) */
-+#define SYSINFO_BOOTMODE_ID      0U           /* 0..3 */
-+
-+/* Bus timeout encodings: value is log2(cycles); 0 means "no timeout" */
-+#define SYSINFO_INTBUS_TO_LOG2   0U           /* 0 => returns 0 */
-+#define SYSINFO_EXTBUS_TO_LOG2   0U           /* 0 => returns 0 */
-+
-+/* Clock (Hz): writable at runtime via SYSINFO.CLK */
-+#define SYSINFO_CLK_HZ_DEFAULT   100000000U   /* 100 MHz */
-+
-+/* Cache topology encodings (log2 values ) */
-+#define ICACHE_BLOCK_SIZE_LOG2   0U           /* bits [3:0] */
-+#define ICACHE_NUM_BLOCKS_LOG2   0U           /* bits [7:4] */
-+#define DCACHE_BLOCK_SIZE_LOG2   0U           /* bits [11:8] */
-+#define DCACHE_NUM_BLOCKS_LOG2   0U           /* bits [15:12] */
-+#define ICACHE_BURSTS_EN         0U           /* bit 16 */
-+#define DCACHE_BURSTS_EN         0U           /* bit 24 */
-+
-+/* Feature bitmap for SOC register. */
-+#define SYSINFO_SOC_ENABLE(x)    (1U << (x))
-+
-+/* Enable Bootloader, IMEM, DMEM, UART and SPI */
-+#define SYSINFO_SOC_VAL \
-+     (SYSINFO_SOC_ENABLE(SYSINFO_SOC_BOOTLOADER) | \
-+      SYSINFO_SOC_ENABLE(SYSINFO_SOC_IMEM)       | \
-+      SYSINFO_SOC_ENABLE(SYSINFO_SOC_DMEM)       | \
-+      SYSINFO_SOC_ENABLE(SYSINFO_SOC_IO_UART0)   | \
-+      SYSINFO_SOC_ENABLE(SYSINFO_SOC_IO_SPI))
-+
-+/*
-+ * -------------------------------------------------------------------------
-+ * Address map
-+ * -------------------------------------------------------------------------
-+ */
-+#define NEORV32_BOOTLOADER_BASE_ADDRESS (0xFFE00000U)
-+#define NEORV32_IO_BASE_ADDRESS         (0xFFE00000U)
-+
-+#define NEORV32_IMEM_BASE               (0x00000000U)
-+#define NEORV32_DMEM_BASE               (0x80000000U)
-+
-+/* IO base addresses */
-+#define NEORV32_TWD_BASE     (0xFFEA0000U)
-+#define NEORV32_CFS_BASE     (0xFFEB0000U)
-+#define NEORV32_SLINK_BASE   (0xFFEC0000U)
-+#define NEORV32_DMA_BASE     (0xFFED0000U)
-+#define NEORV32_CRC_BASE     (0xFFEE0000U)
-+#define NEORV32_XIP_BASE     (0xFFEF0000U)
-+#define NEORV32_PWM_BASE     (0xFFF00000U)
-+#define NEORV32_GPTMR_BASE   (0xFFF10000U)
-+#define NEORV32_ONEWIRE_BASE (0xFFF20000U)
-+#define NEORV32_XIRQ_BASE    (0xFFF30000U)
-+#define NEORV32_MTIME_BASE   (0xFFF40000U)
-+#define NEORV32_UART0_BASE   (0xFFF50000U)
-+#define NEORV32_UART1_BASE   (0xFFF60000U)
-+#define NEORV32_SDI_BASE     (0xFFF70000U)
-+#define NEORV32_SPI_BASE     (0xFFF80000U)
-+#define NEORV32_TWI_BASE     (0xFFF90000U)
-+#define NEORV32_TRNG_BASE    (0xFFFA0000U)
-+#define NEORV32_WDT_BASE     (0xFFFB0000U)
-+#define NEORV32_GPIO_BASE    (0xFFFC0000U)
-+#define NEORV32_NEOLED_BASE  (0xFFFD0000U)
-+#define NEORV32_SYSINFO_BASE (0xFFFE0000U)
-+#define NEORV32_DM_BASE      (0xFFFF0000U)
-+
-+/* MMIO creator */
-+void neorv32_sysinfo_create(MemoryRegion *address_space, hwaddr base);
-+
-+#endif /* HW_NEORV32_SYSINFO_H */
-diff --git a/hw/misc/neorv32_sysinfo_rtl.h b/hw/misc/neorv32_sysinfo_rtl.h
-new file mode 100644
-index 0000000000..524400438b
---- /dev/null
-+++ b/hw/misc/neorv32_sysinfo_rtl.h
-@@ -0,0 +1,239 @@
-+/*
-+ * NEORV32 RTL specific definitions.
-+ *
-+ * Copyright (c) 2025 Michael Levit
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+/*
-+ * NEORV32: neorv32_sysinfo.h - System Information Memory (SYSINFO) HW driver.
-+ *
-+ * BSD 3-Clause License.
-+ *
-+ * Copyright (c) 2023, Stephan Nolting.
-+ * All rights reserved.
-+ *
-+ * Redistribution and use in source and binary forms, with or without
-+ * modification, are permitted provided that the following conditions are met:
-+ *
-+ * 1. Redistributions of source code must retain the above copyright notice,
-+ *    this list of conditions and the following disclaimer.
-+ *
-+ * 2. Redistributions in binary form must reproduce the above copyright
-+ *    notice, this list of conditions and the following disclaimer in the
-+ *    documentation and/or other materials provided with the distribution.
-+ *
-+ * 3. Neither the name of the copyright holder nor the names of its
-+ *    contributors may be used to endorse or promote products derived from
-+ *    this software without specific prior written permission.
-+ *
-+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
-+ * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-+ *
-+ * The NEORV32 Processor: https://github.com/stnolting/neorv32
-+ */
-+
-+#ifndef NEORV32_SYSINFO_RTL_H
-+#define NEORV32_SYSINFO_RTL_H
-+
-+/*
-+ * IO Device: System Configuration Information Memory (SYSINFO).
-+ */
-+
-+typedef struct __attribute__((packed, aligned(4))) {
-+    uint32_t CLK;         /* Offset 0: Clock speed in Hz. */
-+    const uint32_t MISC;  /*
-+                           * Offset 4: Misc system configuration bits.
-+                           * See enum NEORV32_SYSINFO_MISC_enum.
-+                           */
-+    const uint32_t SOC;   /*
-+                           * Offset 8: Implemented SoC features.
-+                           * See enum NEORV32_SYSINFO_SOC_enum.
-+                           */
-+    const uint32_t CACHE; /*
-+                           * Offset 12: Cache configuration.
-+                           * See enum NEORV32_SYSINFO_CACHE_enum.
-+                           */
-+} neorv32_sysinfo_t;
-+
-+/* SYSINFO module hardware access. */
-+#define NEORV32_SYSINFO ((neorv32_sysinfo_t *)(NEORV32_SYSINFO_BASE))
-+
-+/*
-+ * NEORV32_SYSINFO.MISC (r/-): Miscellaneous system configurations.
-+ */
-+enum NEORV32_SYSINFO_MISC_enum {
-+    /* log2(internal IMEM size in bytes) (via IMEM_SIZE generic). */
-+    SYSINFO_MISC_IMEM_LSB = 0,   /* LSB. */
-+    SYSINFO_MISC_IMEM_MSB = 7,   /* MSB. */
-+
-+    /* log2(internal DMEM size in bytes) (via DMEM_SIZE generic). */
-+    SYSINFO_MISC_DMEM_LSB = 8,   /* LSB. */
-+    SYSINFO_MISC_DMEM_MSB = 15,  /* MSB. */
-+
-+    /* Number of physical CPU cores ("harts"). */
-+    SYSINFO_MISC_HART_LSB = 16,  /* LSB. */
-+    SYSINFO_MISC_HART_MSB = 19,  /* MSB. */
-+
-+    /* Boot mode configuration (via BOOT_MODE_SELECT generic). */
-+    SYSINFO_MISC_BOOT_LSB = 20,  /* LSB. */
-+    SYSINFO_MISC_BOOT_MSB = 21,  /* MSB. */
-+
-+    /* log2(internal bus timeout cycles). */
-+    SYSINFO_MISC_ITMO_LSB = 22,  /* LSB. */
-+    SYSINFO_MISC_ITMO_MSB = 26,  /* MSB. */
-+
-+    /* log2(external bus timeout cycles). */
-+    SYSINFO_MISC_ETMO_LSB = 27,  /* LSB. */
-+    SYSINFO_MISC_ETMO_MSB = 31   /* MSB. */
-+};
-+
-+/*
-+ * NEORV32_SYSINFO.SOC (r/-): Implemented processor devices/features.
-+ */
-+enum NEORV32_SYSINFO_SOC_enum {
-+    /* Bootloader implemented when 1 (via BOOT_MODE_SELECT). */
-+    SYSINFO_SOC_BOOTLOADER = 0,
-+
-+    /* External bus interface implemented when 1 (via XBUS_EN). */
-+    SYSINFO_SOC_XBUS = 1,
-+
-+    /* Instruction memory implemented when 1 (via IMEM_EN). */
-+    SYSINFO_SOC_IMEM = 2,
-+
-+    /* Data memory implemented when 1 (via DMEM_EN). */
-+    SYSINFO_SOC_DMEM = 3,
-+
-+    /* On-chip debugger implemented when 1 (via OCD_EN). */
-+    SYSINFO_SOC_OCD = 4,
-+
-+    /* Instruction cache implemented when 1 (via ICACHE_EN). */
-+    SYSINFO_SOC_ICACHE = 5,
-+
-+    /* Data cache implemented when 1 (via DCACHE_EN). */
-+    SYSINFO_SOC_DCACHE = 6,
-+
-+    /* Reserved. */
-+    /* SYSINFO_SOC_reserved = 7, */
-+
-+    /* Reserved. */
-+    /* SYSINFO_SOC_reserved = 8, */
-+
-+    /* Reserved. */
-+    /* SYSINFO_SOC_reserved = 9, */
-+
-+    /* Reserved. */
-+    /* SYSINFO_SOC_reserved = 10, */
-+
-+    /* On-chip debugger authentication when 1 (via OCD_AUTHENTICATION). */
-+    SYSINFO_SOC_OCD_AUTH = 11,
-+
-+    /*
-+     * Instruction memory as pre-initialized ROM when 1
-+     * (via BOOT_MODE_SELECT).
-+     */
-+    SYSINFO_SOC_IMEM_ROM = 12,
-+
-+    /* Two-wire device implemented when 1 (via IO_TWD_EN). */
-+    SYSINFO_SOC_IO_TWD = 13,
-+
-+    /* Direct memory access controller when 1 (via IO_DMA_EN). */
-+    SYSINFO_SOC_IO_DMA = 14,
-+
-+    /* General purpose I/O port when 1 (via IO_GPIO_EN). */
-+    SYSINFO_SOC_IO_GPIO = 15,
-+
-+    /* Core local interruptor when 1 (via IO_CLINT_EN). */
-+    SYSINFO_SOC_IO_CLINT = 16,
-+
-+    /* UART0 when 1 (via IO_UART0_EN). */
-+    SYSINFO_SOC_IO_UART0 = 17,
-+
-+    /* SPI when 1 (via IO_SPI_EN). */
-+    SYSINFO_SOC_IO_SPI = 18,
-+
-+    /* TWI when 1 (via IO_TWI_EN). */
-+    SYSINFO_SOC_IO_TWI = 19,
-+
-+    /* PWM unit when 1 (via IO_PWM_EN). */
-+    SYSINFO_SOC_IO_PWM = 20,
-+
-+    /* Watchdog timer when 1 (via IO_WDT_EN). */
-+    SYSINFO_SOC_IO_WDT = 21,
-+
-+    /* Custom functions subsystem when 1 (via IO_CFS_EN). */
-+    SYSINFO_SOC_IO_CFS = 22,
-+
-+    /* True random number generator when 1 (via IO_TRNG_EN). */
-+    SYSINFO_SOC_IO_TRNG = 23,
-+
-+    /* Serial data interface when 1 (via IO_SDI_EN). */
-+    SYSINFO_SOC_IO_SDI = 24,
-+
-+    /* UART1 when 1 (via IO_UART1_EN). */
-+    SYSINFO_SOC_IO_UART1 = 25,
-+
-+    /* NeoPixel-compatible smart LED IF when 1 (via IO_NEOLED_EN). */
-+    SYSINFO_SOC_IO_NEOLED = 26,
-+
-+    /* Execution tracer when 1 (via IO_TRACER_EN). */
-+    SYSINFO_SOC_IO_TRACER = 27,
-+
-+    /* General purpose timer when 1 (via IO_GPTMR_EN). */
-+    SYSINFO_SOC_IO_GPTMR = 28,
-+
-+    /* Stream link interface when 1 (via IO_SLINK_EN). */
-+    SYSINFO_SOC_IO_SLINK = 29,
-+
-+    /* 1-wire interface controller when 1 (via IO_ONEWIRE_EN). */
-+    SYSINFO_SOC_IO_ONEWIRE = 30
-+
-+    /* Reserved. */
-+    /* SYSINFO_SOC_reserved = 31 */
-+};
-+
-+/*
-+ * NEORV32_SYSINFO.CACHE (r/-): Cache configuration.
-+ */
-+enum NEORV32_SYSINFO_CACHE_enum {
-+    /* I-cache: log2(block size in bytes), bit 0 (via CACHE_BLOCK_SIZE). */
-+    SYSINFO_CACHE_INST_BLOCK_SIZE_0 = 0,
-+
-+    /* I-cache: log2(block size in bytes), bit 3 (via CACHE_BLOCK_SIZE). */
-+    SYSINFO_CACHE_INST_BLOCK_SIZE_3 = 3,
-+
-+    /* I-cache: log2(number of cache blocks), bit 0 (via ICACHE_NUM_BLOCKS). */
-+    SYSINFO_CACHE_INST_NUM_BLOCKS_0 = 4,
-+
-+    /* I-cache: log2(number of cache blocks), bit 3 (via ICACHE_NUM_BLOCKS). */
-+    SYSINFO_CACHE_INST_NUM_BLOCKS_3 = 7,
-+
-+    /* D-cache: log2(block size in bytes), bit 0 (via CACHE_BLOCK_SIZE). */
-+    SYSINFO_CACHE_DATA_BLOCK_SIZE_0 = 8,
-+
-+    /* D-cache: log2(block size in bytes), bit 3 (via CACHE_BLOCK_SIZE). */
-+    SYSINFO_CACHE_DATA_BLOCK_SIZE_3 = 11,
-+
-+    /* D-cache: log2(number of cache blocks), bit 0 (via DCACHE_NUM_BLOCKS). */
-+    SYSINFO_CACHE_DATA_NUM_BLOCKS_0 = 12,
-+
-+    /* D-cache: log2(number of cache blocks), bit 3 (via DCACHE_NUM_BLOCKS). */
-+    SYSINFO_CACHE_DATA_NUM_BLOCKS_3 = 15,
-+
-+    /* I-cache: issue burst transfers on update (via CACHE_BURSTS_EN). */
-+    SYSINFO_CACHE_INST_BURSTS_EN = 16,
-+
-+    /* D-cache: issue burst transfers on update (via CACHE_BURSTS_EN). */
-+    SYSINFO_CACHE_DATA_BURSTS_EN = 24
-+};
-+
-+#endif /* NEORV32_SYSINFO_RTL_H */
--- 
-2.51.1
-
+DQpPbiA1LiAxMS4gMjUuIDAwOjA4LCBBbGlzdGFpciBGcmFuY2lzIHdyb3RlOg0KPiBDQVVUSU9O
+OiBUaGlzIGVtYWlsIG9yaWdpbmF0ZWQgZnJvbSBvdXRzaWRlIG9mIHRoZSBvcmdhbml6YXRpb24u
+IERvIG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVubGVzcyB5b3UgcmVjb2du
+aXplIHRoZSBzZW5kZXIgYW5kIGtub3cgdGhlIGNvbnRlbnQgaXMgc2FmZS4NCj4NCj4NCj4gT24g
+V2VkLCBOb3YgNSwgMjAyNSBhdCAxOjA34oCvQU0gRGpvcmRqZSBUb2Rvcm92aWMNCj4gPERqb3Jk
+amUuVG9kb3JvdmljQGh0ZWNncm91cC5jb20+IHdyb3RlOg0KPj4gV2UgaGF2ZSBhbHJlYWR5IHNl
+bnQgcGF0Y2ggc2V0IGZvciBpbnRyb2R1Y2luZyBNSVBTJ3MNCj4+IHA4NzAwIENQVSBpbiBxZW11
+IGF0Og0KPj4NCj4+ICAgIGh0dHBzOi8vcGF0Y2hldy5vcmcvUUVNVS8yMDI1MTAxODE1NDUyMi43
+NDU3ODgtMS1kam9yZGplLnRvZG9yb3ZpY0BodGVjZ3JvdXAuY29tLw0KPiBUaGF0IHNlcmllcyB3
+YXMgZHJvcHBlZCBhcyBpdCBmYWlsZWQgdG8gcGFzcyB0aGUgQ0kgdGVzdHM6DQo+IGh0dHBzOi8v
+cGF0Y2hldy5vcmcvUUVNVS8yMDI1MTAyMzA0MTQzNS4xNzc1MjA4LTEtYWxpc3RhaXIuZnJhbmNp
+c0B3ZGMuY29tLw0KPg0KPiBZb3UgY2FuIGp1c3QgaW5jbHVkZSB0aGlzIGNoYW5nZSBpbiBhIG5l
+dyBwYXRjaHNldA0KPg0KPiBBbGlzdGFpcg0KPg0KSGkgQWxpc3RhaXIsDQoNCg0KSSBhbSBsb29r
+aW5nIGludG8gdGhlIA0KaHR0cHM6Ly9naXRsYWIuY29tL3FlbXUtcHJvamVjdC9xZW11Ly0vam9i
+cy8xMTgyNzA4MDkzOSNMNTg1OQ0KDQphbmQgaXQgc2VlbXMgdGhhdCBpdCBkaWQgbm90IGdldCB0
+aGUgYmluYXJpZXMgZnJvbToNCg0KaHR0cHM6Ly9naXRodWIuY29tL01JUFMvbGludXgtdGVzdC1k
+b3dubG9hZHMvcmF3L21haW4vcDg3MDAvZndfcGF5bG9hZC5iaW4NCg0KVGhlIHRlc3QgZm9yIEJv
+c3RvbiBib2FyZCBzaG91bGQgdHJ5IHRvIGRvd25sb2FkIHRoYXQsIGJ1dCB0aGVyZSBpcyANClRJ
+TUVPVVQgc2V0IGZvciBpdC4NCg0KDQpBbnkgYWR2aWNlIG9uIGhvdyB0byBjaGVjayB0aGlzIG9u
+IHRoZSBzMzkweCBtYWNoaW5lPw0KDQpJcyB0aGVyZSBhIHdheSB0byBydW4gdGhlIENJIGZyb20g
+YSBmb3JrPw0KDQoNClRoYW5rcyBhIGxvdCwNCkRqb3JkamUNCg0KDQo+PiBTbywgdGhpcyBpcyBh
+IGJ1Z2ZpeCB0aGF0IHNob3VsZCBnbyBvbiB0b3Agb2YgaXQuDQo+Pg0KPj4gRGpvcmRqZSBUb2Rv
+cm92aWMgKDEpOg0KPj4gICAgcmlzY3Y6IFVwZGF0ZSBNSVBTIHZlbmRvciBpZA0KPj4NCj4+ICAg
+dGFyZ2V0L3Jpc2N2L2NwdV92ZW5kb3JpZC5oIHwgMiArLQ0KPj4gICAxIGZpbGUgY2hhbmdlZCwg
+MSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCj4+DQo+PiAtLQ0KPj4gMi4zNC4x
 
