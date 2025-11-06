@@ -4,96 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A34BCCFA03
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Nov 2025 15:12:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F3CCCF9F8
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Nov 2025 15:49:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vH1f5-0002Dv-80; Thu, 06 Nov 2025 10:12:31 -0500
+	id 1vH2EG-0005Te-Jr; Thu, 06 Nov 2025 10:48:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1vH1f3-0002Ba-8w
- for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 10:12:29 -0500
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1vH1f1-0001ut-MP
- for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 10:12:29 -0500
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b4f323cf89bso239232866b.2
- for <qemu-riscv@nongnu.org>; Thu, 06 Nov 2025 07:12:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762441945; x=1763046745; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YwzN0w6St7GK0tiS0apQaEg90la80zGg9XrnVdabP6Q=;
- b=dcbvG1zAqMdlhDTQBTmrYV0Wbygl1hYBzqfENTje1leBXEZ3Q9YU/apPb+hFMiwdMP
- rLUSytjSJzTMrIy/gLqBo4pu2TiM99chTx5eW492GDYlusbBgFhH1NfhLu3REfBnLuQb
- /CU9bD4xOFnaODwYC4h6+wYVWPRHOjkPFf3rYc8I5r9/pjejckGg6EAioKw16L+2uHR4
- guqKHxSyHyiGvhP8FV6jeE5tEC2tSlSeXY9YW+MdxR+qTJWx1DWTZLkXlKzeXcbDmsZg
- Yu+SDL3UG8il1J7ShiTnnWK/3wwLHniVKQQgCkvYESX3zwofzyJM1NLX7nk8SHqow001
- MeJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762441945; x=1763046745;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YwzN0w6St7GK0tiS0apQaEg90la80zGg9XrnVdabP6Q=;
- b=COnwficWVf4IsZAhTPQFHOSKJ+Qqy10vFwfP9yfBDJcuNkyQGnrqokCsTS9HqzLTxc
- 4VnWq8/wMByMCAZoQp6Av+/T1B+dxCXBxKe6FEz9Uis01SCMeqlmJGdwWIhV8I0D2Qv5
- N6LvNr4YZFJK0l6bZPSMkJI1g7B7u3uTRVauX3C8hyv85TJjPD6htiY43sAvGyIFyVz6
- S+io2Qkx0x/PQ+MwyWHmUDB9hII3M7Jr2woYpepSOmiw9xxqiZ12qRTMtZOaURH52+PY
- qb0TpuppenClK9vWhr5GlX9+9AAyxFm2EEvFkHHYBjXRdHB7Qmu2q+uz5Z80GlB2wOlx
- Xy1A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcgVhr1kM8P+agOljWPbHG5ILdAH9IWkzPSok1TJv5LUag0NiakutNrEIJAy9W+XfR8SnerOFjTFtA@nongnu.org
-X-Gm-Message-State: AOJu0YxTKlW5DqlhNkAi13W3mzmSlpOHuFPk3RXbTrFjJXzGLlQ75OZS
- 708yv+zrnK3DXHVjVWSf+EjFGwFDdzPRFIKu+1+o+D961b5BgYwGY2xH+jZ4gKTbEMA=
-X-Gm-Gg: ASbGncteuk9oEqBT/SyZrRdOuxP7iyH+miac1ZV7ZWUJ2zKzHEc834zxCgx0F8XK1Nz
- OYicxGHt/w9PvAcTBuyXn21T7osb0rK/Zs8j2qtkM9S/KvUwohVDn6GNJqeaTuuX7jU/VfwsbW8
- Im5WtFQ+vjcWeu8OApo7vb0Du1kdUKzbrzKUvh5FltU23mqLMw2MopwRPUcydAJ/9dA8WS0/I4V
- N84RJCPz1LA4TL51SAmBDul0ow5H7Cq+XqmSWtyPXQl/NKEDtSQfXbYIoTpZCsrM7QmOXTNZvqS
- KpaK2TKSW10YiZI20jq4Vw+omIUykr4FFngjMi4OxteVxWUhPLcCXuJrGWMymnm8u1ojNlfvWmg
- FKTyWyQL5kTUyW6HYBeg/w7XRCRyaxkFwXD2TlwZXuFsWMNJw9RLqruRTfi4iFqAQ5CCY3Qx2vm
- XKmGlQP+9prVEtUTT6ouLyNHAPjjo=
-X-Google-Smtp-Source: AGHT+IFwGUsPHQ/gppJ59lH8pgoOFIEuMDJxuA3cCZvuvHJuYLOCnXwlZO0AEwgWSG743kNCiq6+DA==
-X-Received: by 2002:a17:907:96a0:b0:b70:cf3f:7fbc with SMTP id
- a640c23a62f3a-b72656cf18bmr757738466b.65.1762441942413; 
- Thu, 06 Nov 2025 07:12:22 -0800 (PST)
-Received: from [172.20.148.100] ([87.213.113.147])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b7289334257sm242776166b.6.2025.11.06.07.12.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Nov 2025 07:12:21 -0800 (PST)
-Message-ID: <89299280-94da-49ce-97d6-90b085ccd16c@linaro.org>
-Date: Thu, 6 Nov 2025 16:12:19 +0100
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1vH2EE-0005Sj-Fk; Thu, 06 Nov 2025 10:48:50 -0500
+Received: from sea.source.kernel.org ([2600:3c0a:e001:78e:0:1991:8:25])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1vH2EC-0007AG-UK; Thu, 06 Nov 2025 10:48:50 -0500
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 9F2894080D;
+ Thu,  6 Nov 2025 15:48:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 17D65C4CEFB;
+ Thu,  6 Nov 2025 15:48:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1762444117;
+ bh=VzM6jNEG5DCPm05kF9VC2zW4y6uzRBlaGistE432Kgk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=DnlccOH7OJ45pBL/fnSmIdwj2uMusWZo04ohpMgZOVlDmHWn0oBdOriuQFoqs9LLc
+ Xp+qyES/H48q0LYxanKcJpJqQ/hzchK0hazkyGE67AJ210cQkBE6/ZoUh4vlEjgW38
+ OeYq4XflupMqH9H+b5JFhIK823gzb90uilLn2HIm9nE9gix37njckMLWLGsW+jTB+t
+ MVhr4PIbXuMu3Fk3LyBlL3HE+4tYejj2vCjR+izcK65F6CGsbjZ6syvo1NuiJzXK7L
+ EvTM+zUKuSzfUp12q35qubtfYSz2RLGTpkuV3KEAdZo+oJWMB+8NKkmJ+6snhuHjia
+ 3dl84dVbrgePA==
+Date: Thu, 6 Nov 2025 15:48:33 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
+Subject: Re: [PATCH 0/2] riscv: riscv,isa fixes + check script
+Message-ID: <20251106-napped-haunt-109e9e24ad40@spud>
+References: <20251106112044.162617-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Add RISCV Zilsd extension
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Roan Richmond <roan.richmond@codethink.co.uk>, qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, alistair23@gmail.com
-References: <20251104120012.194899-1-roan.richmond@codethink.co.uk>
- <710d9b96-ac43-4d51-b210-65917bf91aa0@ventanamicro.com>
- <6d00d026-25e7-40a7-ad44-348a7aa4fc1a@codethink.co.uk>
- <6b90bd55-f2c9-4c6c-9058-16ba147f3c0f@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Content-Language: en-US
-In-Reply-To: <6b90bd55-f2c9-4c6c-9058-16ba147f3c0f@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=richard.henderson@linaro.org; helo=mail-ej1-x62d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2mmnlSxZnq/BKRxE"
+Content-Disposition: inline
+In-Reply-To: <20251106112044.162617-1-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2600:3c0a:e001:78e:0:1991:8:25;
+ envelope-from=conor@kernel.org; helo=sea.source.kernel.org
+X-Spam_score_int: -23
+X-Spam_score: -2.4
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.271,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,38 +69,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11/6/25 15:47, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 11/6/25 11:31 AM, Roan Richmond wrote:
->> I understand your point about doing the check before the 2 ld_tl() and the 2 dst_gpr() 
->> calls.
->>
->> My reasoning for doing the check after was the wording of the specification:
->> "LD instructions with destination x0 are processed as any other load, but the result is 
->> discarded entirely and x1 is not written"
->> This suggests that a load instruction is still dispatched but the result is then discarded.
-...
->>>>   +/* Zilsd extension adds load/store double for 32bit arch */
->>>> +static bool gen_load_zilsd(DisasContext *ctx, arg_lb *a)
->>>> +{
->>>> +    TCGv dest_1 = dest_gpr(ctx, a->rd);
->>>> +    TCGv dest_2 = dest_gpr(ctx, (a->rd)+1);
->>>> +    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
->>>> +    TCGv addr_2 = get_address(ctx, a->rs1, (a->imm)+4);
->>>> +
->>>> +    tcg_gen_qemu_ld_tl(dest_1, addr_1, ctx->mem_idx, MO_SL);
->>>> +    tcg_gen_qemu_ld_tl(dest_2, addr_2, ctx->mem_idx, MO_SL);
->>>> +
->>>> +    /* If destination is x0 then result of the load is discarded */
->>>> +    if (a->rd == 0) {
->>>> +        return true;
->>>> +    }
 
-If you're looking to not write to r1, then you need to use true temporaries, not 
-dest_gpr(), which may return r1, which will be modified by the load.
+--2mmnlSxZnq/BKRxE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-You can drop the unnecessary () in those a->{rd,imm} + c expressions.
+On Thu, Nov 06, 2025 at 08:20:42AM -0300, Daniel Henrique Barboza wrote:
+> Hi,
+>=20
+> We have an array called isa_edata_arr[] in target/riscv/cpu.c which
+> needs to be always kept in the RISC-V specification riscv,isa order.
+> Easier said that done: as more and more extensions are added we're
+> failing to keep up with the array ordering in the review process.
+>=20
+> I have considered changing how we're retrieving riscv,isa to not rely on
+> the array ordering (in fact I have code that does that). We would sort
+> the enabled extensions using riscv,is ordering during init time, before
+> writing it in the DT, ignoring the current isa_edata_arr ordering. When
+> all was said and done that sounded a bit extreme and I think there's
+> other stuff we can try first.
 
+FWIW, I have yet to actually see a parser for it in a "real" application
+that relied on the ordering. It probably makes a parser more complicated
+to write than one where the ordering is ignored. The only time I can really
+see ordering mattering is if something has a very simple bit of code and
+is looking for "rv##ima" or similar, and using a string comparison
+function.
+Either way, my point basically is that you shouldn't have to go to any
+extreme effort to make sure it is perfect, particularly when it comes to
+the multiletter stuff as, at least for devicetree, the binding has never
+enforced ordering for multiletter extensions. I know ACPI cites spec
+order (and spec definitions, so GL there lol), and there could be relevant
+for some ACPI only code where the devicetree parser is not being reused.
 
+--2mmnlSxZnq/BKRxE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaQzDOQAKCRB4tDGHoIJi
+0mHiAP4iJvU+Gi5m5pzMZnx2xj8iGN1vmLXutQ7o49Ocv+pl+AD/UeI2jb3vOjs6
+XFVcqc65oibKNXVZlWK25aLsYBLkowo=
+=vDWC
+-----END PGP SIGNATURE-----
+
+--2mmnlSxZnq/BKRxE--
 
