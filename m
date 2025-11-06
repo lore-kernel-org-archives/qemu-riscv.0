@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2F52CCFA03
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Nov 2025 11:21:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8535CCFA05
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Nov 2025 11:21:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vGy36-00058m-M2; Thu, 06 Nov 2025 06:21:04 -0500
+	id 1vGy31-00057m-Ej; Thu, 06 Nov 2025 06:20:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vGy31-000583-Tn
- for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 06:21:01 -0500
-Received: from mail-oo1-xc29.google.com ([2607:f8b0:4864:20::c29])
+ id 1vGy2z-00056x-ET
+ for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 06:20:57 -0500
+Received: from mail-ot1-x336.google.com ([2607:f8b0:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vGy2z-0002nF-U5
- for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 06:20:59 -0500
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-656b8ca52e8so354216eaf.3
- for <qemu-riscv@nongnu.org>; Thu, 06 Nov 2025 03:20:57 -0800 (PST)
+ id 1vGy2x-0002mU-Eg
+ for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 06:20:57 -0500
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7c69f515220so230565a34.1
+ for <qemu-riscv@nongnu.org>; Thu, 06 Nov 2025 03:20:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1762428056; x=1763032856; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1762428053; x=1763032853; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A4Cm1X0FRT6nMV7NKszGwc7YW2PJtWPtLODjaZRG/Rs=;
- b=BlFYyWzcjiQMfmFawQfh3K34uXWXbtXzr8DfmbpsMLkUJcLEOIgEXJtBPE8Hn7bjaW
- TOAIIpBt0LKJkXS61XksTBZ5zH+ZBIrN8/Xgzp9gp0I2n0/MYrnrelP/PURUQvmS8Dwv
- Xatm0N99Q1Sr4c4uFnsSN3DJMgZh18ej95Oryv1GxlK3GDMeiKJGonzHdcottQn8eYKw
- jOlSuBZss9eeXkh/Gy/OJ1m+2hEZeZWEY18/QujdedHTx3cwwHzRm1cd09rFVwIbVIyH
- z1WEyY09AVoS9NYd7BJpais1rytot9MGMx+ggdJWnNrn8avWFxtwxSJZlWWMcI1dtWFS
- hjnw==
+ bh=iTKxVuBCxwnHszyRkY/kZ8dOE4K+EhtgSC9uwTs5XNk=;
+ b=dOLkwVT2vKr9jpsqNWxcDMF5YsK+4KC1zZ2ARfz5TnQaMt2bKflytS8DNkpwszKV7P
+ W4zm91OhXh/a15QX5a+PABSwEY1I02rh40E7Ig00gagSnDq+EI+Kxq+ZRDcVQTJDAqUb
+ nf/4zhRRU2NAA+mhElHYKYkihv3TdXrtoJwhRAZ7PIa1dlO/kL4OretuPRXmDYkDhnWs
+ vOJnO2/fvV0sKJ5OKzXDp6wC4WmLGImMEUtkIVKWy8u7DB5mBHoIhqB8FsMDC5PmVmy7
+ WzVrtRTWrmPa2R3B/jKMqqRcfV9I7U6PypJyu1C8TAAbUcyBz0gRl3nlM7MT5Lcg2U8d
+ y2nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762428056; x=1763032856;
+ d=1e100.net; s=20230601; t=1762428053; x=1763032853;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=A4Cm1X0FRT6nMV7NKszGwc7YW2PJtWPtLODjaZRG/Rs=;
- b=oO59WUlJu/UsX/ri5dzHJDR5Sa+ynzH84dkMyXNG+h/nwPl9Id9v5kUumUF7I1Sbfs
- 37+ug+mA8vplaKdBLfH/eTePIPo9dF3Me4YeH0pU0mWXd/SPKD8ua7j0FHN6XrQ3tdyF
- xrKE72nO4lY48pvbPcoZ8g0qC3G8RwRCE1mT8biVXbDhnQA6rUlmxb5j2tUZQCzeJsGn
- B6AcVTUJhsT8ri39Jil25pdN9uemwO7sIaN10pCUbuaD71Y3iEmT5j9uYAnerv4I+yrZ
- ZR2GHRd/P9+hZIZa6kNq72Ar56+dmy+wts5FXPWKRPW+hxZcdSNcYCC5stUKHsRVUFKy
- gbxQ==
-X-Gm-Message-State: AOJu0Yy2LIdPl3DomMVO/vxjJY0XMm4pR3KcOqus2M0o0wcJPHxfM5vG
- aACZqhvjS7mKuGzSCyS9q1hVP9fsA5Cn2TImxlxpBJpaZugrckYkj75om6fVixtXe98=
-X-Gm-Gg: ASbGncvhbYIVIdRwDOGPH9ipWZsBDxJcA7G3AV6VKKzXNmLnOugXTCR0KONZ9dmI0L0
- dfwGoce8Hyy4pVQYJhN59TiyLTZcf/AfElFgrT9K1sOw7wD2RxWiFCKZnOEi9cObcqIU2R+Ndko
- vwFxYcYuy1j4aXToADFRNr15ramjgGnylvgzqEVr2JlMS5tk0qBwoG6ncd1rBf4G97jr+4NyP3f
- diup255nkqsbj/uIf6aa6m67XCpWXDDYfZ/Cl/AcndczpkBYJ13uklMe7STw29FlB4J+tNhpqXt
- cFGZvxVnrGpm/gZTRgP+D10s+REyBiPdpBhMd5Mfsz2COVQKfVqGQ8kgD3BPIWT8etp8YoYM+F1
- 15wCy4y6Qji6xsf1ngEajjzn71q60OlJQGokVxHeNJe7UScAc/cgbI1QLMRusuWBlitQSwtXqkZ
- tNLNSNMbi8Af2k+KDxc2te9VBvuw418w==
-X-Google-Smtp-Source: AGHT+IFZetbvhg8tLiQlizod7UrTOcoGmJ/D1cxNY7x8tY2HHNsZM8vZxRFSlCXt8tLjDd77sf18Ag==
-X-Received: by 2002:a05:6871:2896:b0:3d2:86bd:2ad2 with SMTP id
- 586e51a60fabf-3e19c0556b9mr3491807fac.35.1762428056483; 
- Thu, 06 Nov 2025 03:20:56 -0800 (PST)
+ bh=iTKxVuBCxwnHszyRkY/kZ8dOE4K+EhtgSC9uwTs5XNk=;
+ b=Hl69UGEB8Of6kJtvh3s0d2JzWdeAOMpD/gmKEjz3xQq3idcvB9+ELQUOQLzfnweSs2
+ s69ZcD7gB+gzjoAop8O7rXyjtSQGhnXfs8oayu4phu1IIs/FVnIHhFm/aLsqfDLDwGzA
+ pfgjwHnfoUBGa1U5FsMX1QVCpt1tdt5hplVCO08Qz9l0duuAluz/aLhuJECwc9ShGp1a
+ ViTanG+eNX3jN0A5hNJI7+T5YP1NHEJHUIMdHkK1nFeMq5A8FP8tzlnEna3fBzstRkaV
+ wMOcV24dc32x5I31hXX658zVgkeNVuMo9RgOhi5JUJtukLQX+EjAqBDSESsxtfCwcxzV
+ ItPA==
+X-Gm-Message-State: AOJu0YyU1SQQuansqrvEqB+6tt5OLfQGqJf1x67w3XkXtE/io2reHLSn
+ BPw0kGL0m+R3KnNtIPFUkCU7MOMSqK2XYtnqqruwVYetfYsykOWfPsf71k69BKiLn2o=
+X-Gm-Gg: ASbGnctTXweWa3z3EqbhmmVnRIQ4UpoqwGc7wCiZW2GDvL/4ZzLNBgcJRqo6nX52Ldh
+ udGXXdg+/5oCW9QPn4JiYgnEznus7d4CXd+2uSMdm2I6yObF1mIrkaL5eFzO4huPUoto2Se0Ql7
+ Gh44m9D82g33XOHw2fKsmI3hrGaMXDMQahw+s4O9d63+KP5+oIyXN1omMxpLoBPGA0VOOIEsVR+
+ 15wja2YQk4cVi9OdZ8lvLAEbjzsZnkkPpuqkNqRlQef3HRBY0b2SEBZkpS7W7/6pE3UlZIqcOay
+ m3VRx0AxcvYSit2MQ7IMnICKQwYPeIbS8SA/3GnoBex/UxjCYFPwseRQBcuzIy8FOmA0W0Kmz0B
+ sCXDc4aDfJXviGANwuJc58jUoZYWMnjqS1Xt6DSKbYFB1iw2dLV9lIL+FSe5J3khItzsnLpJY95
+ yvSGK18WrKwfTVlC8d0Z5bALpva8jVHneysrrvnzb2
+X-Google-Smtp-Source: AGHT+IEwHypvZbtNJ6lXuGCnU9iF/ApoFgmdZ2VxFZBA/pLYgJ2XS0DZk+I6/+h4gc8gQNPGV+nuAQ==
+X-Received: by 2002:a05:6830:7110:b0:7c5:3e44:1903 with SMTP id
+ 46e09a7af769-7c6d1449007mr4649318a34.25.1762428053457; 
+ Thu, 06 Nov 2025 03:20:53 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com
  ([2804:7f0:bcc2:7873:e847:e589:d030:667d])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e30a439b97sm932716fac.16.2025.11.06.03.20.53
+ 586e51a60fabf-3e30a439b97sm932716fac.16.2025.11.06.03.20.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 03:20:56 -0800 (PST)
+ Thu, 06 Nov 2025 03:20:53 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 2/2] scripts: RISC-V python script to check isa_edata_arr[]
-Date: Thu,  6 Nov 2025 08:20:44 -0300
-Message-ID: <20251106112044.162617-3-dbarboza@ventanamicro.com>
+Subject: [PATCH 1/2] target/riscv/cpu.c: isa_edata_arr[] ordering fixes
+Date: Thu,  6 Nov 2025 08:20:43 -0300
+Message-ID: <20251106112044.162617-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20251106112044.162617-1-dbarboza@ventanamicro.com>
 References: <20251106112044.162617-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c29;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::336;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,213 +103,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Keeping isa_edata_arr[] from target/riscv/cpu.c in order is not a fun
-time. The RISC-V specification rules are very convoluted (Z extensions
-first, then if it's a Z extension then there's the IMAFD subcategory
-S and X exts are always alphabetical ...), very hard to follow during
-the patch review process, and in the end this array keeps getting
-out of order constantly during development.
+Yet another patch to fix the ordering of isa_edata_arr[].
 
-This script aims to ease the suffering of reviewers by reading the
-array from target/riscv/cpu.c and pointing ordering errors that
-were introduced in the file:
-
-$ ./script/riscv-isaedata-check.py
-Wrong ordering: ssstateen must succeed ssctr
-
-A successful run will give no output and retval 0.
+The ordering errors was found by a python script that we'll be adding in
+the next patch to, hopefully, automate the ordering of this array for
+us.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- scripts/riscv-isaedata-check.py | 164 ++++++++++++++++++++++++++++++++
- target/riscv/cpu.c              |   3 +
- 2 files changed, 167 insertions(+)
- create mode 100755 scripts/riscv-isaedata-check.py
+ target/riscv/cpu.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/scripts/riscv-isaedata-check.py b/scripts/riscv-isaedata-check.py
-new file mode 100755
-index 0000000000..a276dc952f
---- /dev/null
-+++ b/scripts/riscv-isaedata-check.py
-@@ -0,0 +1,164 @@
-+#!/usr/bin/env python3
-+# Copyright (c) 2025 Ventana Micro Systems Inc.
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+
-+#
-+# Check if isa_edata_arr[] from target/riscv/cpu.c is
-+# ordered according to the RISC-V specification.
-+#
-+
-+import os
-+
-+"""
-+This script aims to check the ordering of isa_edata_arr[] array
-+from target/riscv/cpu.c.
-+
-+The RISC-V riscv,isa ordering has a lot of rules (see the comment
-+right before isa_edata_arr[] in target/riscv/cpu.c) and we're not
-+able to keep up with it during the review process. In the end
-+every new extension added has a good chance of breaking it.
-+
-+The idea with this script is to try to catch these errors earlier
-+by directly reading isa_edata_arr[] and pointing out discrepancies
-+found. E.g.:
-+
-+$ python3 riscv-isaedata-check.py
-+Wrong ordering: sspm must succeed ssctr
-+
-+This indicates that 'ssctr' must be put earlier that sspm in the
-+array.
-+
-+A successful run of this script has a retval = 0 and no output.
-+"""
-+
-+def ext_is_sorted(ext1: str, ext2: str) -> bool:
-+    """Check if the RISC-V ISA extension 'ext1' comes after
-+       the RISC-V ISA extension 'ext2' using the RISC-V sorting
-+       rules. We're summing up these rules in 3 steps when
-+       comparing isa_edata extensions:
-+
-+        1. If both extensions does not start with 'z', they're
-+           sorted with regular alphabetical order;
-+
-+        2. A 'z' extension always precedes a non 'z' extension;
-+
-+        3. If both extensions starts with 'z', check the second
-+           letter of both:
-+             - if they're the same, sort it in alphabetical order;
-+             - otherwise, sort it via the Z extension category
-+               (IMAFDQLCBKJTPVH).
-+
-+       Args:
-+            ext1 (str): lower-case RISC-V isa extension name
-+            ext2 (str): lower-case RISC-V isa extension name
-+
-+       Returns:
-+            bool: True ext1 precedes ext2, False otherwise.
-+    """
-+    z_order = ['i','m','a','f','d','q', 'l', 'c', 'b',
-+               'k', 'j', 't', 'p', 'v', 'h']
-+    order1 = len(z_order)
-+    order2 = len(z_order)
-+
-+    if ext1[0] != 'z' and ext2[0] != 'z':
-+        return ext1 < ext2
-+
-+    if ext1[0] == 'z' and ext2[0] != 'z':
-+        return True
-+
-+    if ext1[0] != 'z' and ext2[0] == 'z':
-+        return False
-+
-+    # At this point we know both starts with 'z'. If
-+    # they're both the same z_order use alphabetical
-+    # order.
-+    if ext1[1] == ext2[1]:
-+        return ext1 < ext2
-+
-+    # Get the order within the z category for each
-+    for i in range(len(z_order)):
-+        if ext1[1] == z_order[i]:
-+            order1 = i;
-+        if ext2[1] == z_order[i]:
-+            order2 = i;
-+        if order1 != len(z_order) and order2 != len(z_order):
-+            break
-+
-+    if order1 < order2:
-+        return True
-+
-+    return False
-+# end ext_is_sorted
-+
-+
-+def get_extension_name(line: str) -> str:
-+    """Given a 'line' str in the format
-+
-+       ISA_EXT_DATA_ENTRY(ext_name, ...)
-+
-+       Return 'ext_name' if successful or None otherwise.
-+    """
-+    match_str = "ISA_EXT_DATA_ENTRY("
-+    match_idx = line.rfind(match_str)
-+
-+    if match_idx < 0:
-+        return None
-+
-+    last_idx = line.find(",")
-+    if last_idx < 0:
-+        return None
-+
-+    match_idx += len(match_str)
-+
-+    return line[match_idx:last_idx]
-+#end get_extension_name
-+
-+
-+def main():
-+    dir_path = os.path.dirname(os.path.realpath(__file__))
-+    filename = dir_path + "/../target/riscv/cpu.c"
-+
-+    try:
-+        with open(filename, 'r') as file:
-+            isaEdataFound = False
-+            ext1 = None
-+            ext2 = None
-+
-+            for line in file:
-+                if "const RISCVIsaExtData isa_edata_arr[]" in line:
-+                    isaEdataFound = True
-+                    continue
-+
-+                if not isaEdataFound:
-+                    continue
-+
-+                if "{ }" in line:
-+                    break
-+
-+                tmp = get_extension_name(line)
-+
-+                if tmp is None:
-+                    continue
-+
-+                if ext1 is None:
-+                    ext1 = tmp
-+                    continue
-+
-+                if ext2 is None:
-+                    ext2 = tmp
-+                else:
-+                    ext1 = ext2
-+                    ext2 = tmp
-+
-+                if not ext_is_sorted(ext1, ext2):
-+                    print(f"Wrong ordering: {ext1} must succeed {ext2}")
-+                    exit(1)
-+    except FileNotFoundError:
-+        print(f"Error: The file '{filename}' was not found.")
-+    except Exception as e:
-+        print(f"An error occurred: {e}")
-+# end main
-+
-+
-+if __name__ == '__main__':
-+    main()
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 79fda08f9d..93c02bab27 100644
+index ae8b721e55..79fda08f9d 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -102,6 +102,9 @@ static void riscv_cpu_cfg_merge(RISCVCPUConfig *dest, const RISCVCPUConfig *src)
-  *
-  * Single letter extensions are checked in riscv_cpu_validate_misa_priv()
-  * instead.
-+ *
-+ * **NOTE**: please run ./scripts/riscv-isaedata-check.py every time a
-+ * new entry is added in this array.
-  */
- const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zic64b, PRIV_VERSION_1_12_0, ext_zic64b),
+@@ -114,8 +114,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, ext_ziccrse),
+     ISA_EXT_DATA_ENTRY(zicfilp, PRIV_VERSION_1_12_0, ext_zicfilp),
+     ISA_EXT_DATA_ENTRY(zicfiss, PRIV_VERSION_1_13_0, ext_zicfiss),
+-    ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
+     ISA_EXT_DATA_ENTRY(zicntr, PRIV_VERSION_1_12_0, ext_zicntr),
++    ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
+     ISA_EXT_DATA_ENTRY(zicsr, PRIV_VERSION_1_10_0, ext_zicsr),
+     ISA_EXT_DATA_ENTRY(zifencei, PRIV_VERSION_1_10_0, ext_zifencei),
+     ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
+@@ -138,9 +138,9 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zdinx, PRIV_VERSION_1_12_0, ext_zdinx),
+     ISA_EXT_DATA_ENTRY(zca, PRIV_VERSION_1_12_0, ext_zca),
+     ISA_EXT_DATA_ENTRY(zcb, PRIV_VERSION_1_12_0, ext_zcb),
+-    ISA_EXT_DATA_ENTRY(zcf, PRIV_VERSION_1_12_0, ext_zcf),
+     ISA_EXT_DATA_ENTRY(zcd, PRIV_VERSION_1_12_0, ext_zcd),
+     ISA_EXT_DATA_ENTRY(zce, PRIV_VERSION_1_12_0, ext_zce),
++    ISA_EXT_DATA_ENTRY(zcf, PRIV_VERSION_1_12_0, ext_zcf),
+     ISA_EXT_DATA_ENTRY(zcmop, PRIV_VERSION_1_13_0, ext_zcmop),
+     ISA_EXT_DATA_ENTRY(zcmp, PRIV_VERSION_1_12_0, ext_zcmp),
+     ISA_EXT_DATA_ENTRY(zcmt, PRIV_VERSION_1_12_0, ext_zcmt),
+@@ -166,8 +166,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zvbc, PRIV_VERSION_1_12_0, ext_zvbc),
+     ISA_EXT_DATA_ENTRY(zve32f, PRIV_VERSION_1_10_0, ext_zve32f),
+     ISA_EXT_DATA_ENTRY(zve32x, PRIV_VERSION_1_10_0, ext_zve32x),
+-    ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
+     ISA_EXT_DATA_ENTRY(zve64d, PRIV_VERSION_1_10_0, ext_zve64d),
++    ISA_EXT_DATA_ENTRY(zve64f, PRIV_VERSION_1_10_0, ext_zve64f),
+     ISA_EXT_DATA_ENTRY(zve64x, PRIV_VERSION_1_10_0, ext_zve64x),
+     ISA_EXT_DATA_ENTRY(zvfbfmin, PRIV_VERSION_1_12_0, ext_zvfbfmin),
+     ISA_EXT_DATA_ENTRY(zvfbfwma, PRIV_VERSION_1_12_0, ext_zvfbfwma),
+@@ -190,8 +190,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+     ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, debug),
+-    ISA_EXT_DATA_ENTRY(shcounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(sha, PRIV_VERSION_1_12_0, ext_sha),
++    ISA_EXT_DATA_ENTRY(shcounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(shgatpa, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(shtvala, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(shvsatpa, PRIV_VERSION_1_12_0, has_priv_1_12),
+@@ -201,11 +201,12 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(smcdeleg, PRIV_VERSION_1_13_0, ext_smcdeleg),
+     ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
+     ISA_EXT_DATA_ENTRY(smcsrind, PRIV_VERSION_1_13_0, ext_smcsrind),
++    ISA_EXT_DATA_ENTRY(smctr, PRIV_VERSION_1_12_0, ext_smctr),
+     ISA_EXT_DATA_ENTRY(smdbltrp, PRIV_VERSION_1_13_0, ext_smdbltrp),
+     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+-    ISA_EXT_DATA_ENTRY(smrnmi, PRIV_VERSION_1_12_0, ext_smrnmi),
+     ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_13_0, ext_smmpm),
+     ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_13_0, ext_smnpm),
++    ISA_EXT_DATA_ENTRY(smrnmi, PRIV_VERSION_1_12_0, ext_smrnmi),
+     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(ssccfg, PRIV_VERSION_1_13_0, ext_ssccfg),
+@@ -213,6 +214,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(sscsrind, PRIV_VERSION_1_12_0, ext_sscsrind),
++    ISA_EXT_DATA_ENTRY(ssctr, PRIV_VERSION_1_12_0, ext_ssctr),
+     ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
+     ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
+     ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
+@@ -224,8 +226,6 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(ssu64xl, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(supm, PRIV_VERSION_1_13_0, ext_supm),
+     ISA_EXT_DATA_ENTRY(svade, PRIV_VERSION_1_11_0, ext_svade),
+-    ISA_EXT_DATA_ENTRY(smctr, PRIV_VERSION_1_12_0, ext_smctr),
+-    ISA_EXT_DATA_ENTRY(ssctr, PRIV_VERSION_1_12_0, ext_ssctr),
+     ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
+     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
 -- 
 2.51.1
 
