@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06826CCFA05
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Nov 2025 14:26:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61CFDCCF9F8
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Nov 2025 14:26:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vHNP9-0005lV-Pu; Fri, 07 Nov 2025 09:25:32 -0500
+	id 1vHNPA-0005n5-Cj; Fri, 07 Nov 2025 09:25:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
- id 1vHJdX-0008UW-KO; Fri, 07 Nov 2025 05:24:07 -0500
-Received: from mail-northcentralusazlp170120005.outbound.protection.outlook.com
- ([2a01:111:f403:c105::5] helo=CH5PR02CU005.outbound.protection.outlook.com)
+ id 1vHJdY-0008Ui-8k; Fri, 07 Nov 2025 05:24:08 -0500
+Received: from mail-eastus2azlp170100001.outbound.protection.outlook.com
+ ([2a01:111:f403:c110::1] helo=BN1PR04CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
- id 1vHJdV-0000ql-Mc; Fri, 07 Nov 2025 05:24:07 -0500
+ id 1vHJdV-0000qz-Lj; Fri, 07 Nov 2025 05:24:08 -0500
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gaqvuPRRZRWEtJjEPVxs51RKqBMo41I4K8g6CKxjkw3eS/ziClMdvhAx6sSMT1Q1LnadHIp2QCewl00DKydSCHFKR/6ig9+xDasDbnyGin36DM69eCqF5ZHMvc3ts1gNsItcSoQhnkUg2z08CLYIh51a0RMXyrEiucgxNS5BSp+s2oPqxJyyj3c4yd+qTWYIuAO8zEg55oT0GqYJhhCkk1W50Wo3jyNN103NSaN/fKbIlrkbBjUUtcvpA0RzVJpjXVSgOAYhGqgOMbJNHT43753lsw36d+JxJd/IzJp8pW/b95u03MFh1e992zZdr4ci8HRd8LvEBFYuHmTA8nYjVw==
+ b=MqSUwDWSSVGoOBUpYeEl0tJEIJcoJzqOEFpNDaay/F4SsdQ701fK7Chf3xbTSwY0UC3v92DdzVJWl7fx8woi7EuivvcyRHkiQSxJZXOzSCG6dyZZjllJX2VLpcbKgVrZRDylQuqY4ofUl9NyGdQUg2T01CMX8CmuuEK2kCL0uioR0eocdqZOiIMa69dBTS0mSp5tZXnQm7Pc3Itg2ylDBU8pSYO3LbDCGi1QMZjRPJdwjvZnf+VS+Z65aH35OHFbQsKOKmIOdSYBECQiqRbDrqyPbvDYbAjVRGdKUXQwGk0YRDPmPUdU0UTftP0TDXRrfsByW91Ih6icsquX3j76pQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5f3hruUVjU6JCunv0Eyj+ZhBLm0DUSbj7lcYlnJlWQk=;
- b=eJ1WFDFT+DQ533e6YeghJJPjTxxQ40C3zbZRzeYCAkOoZPfW08pFf4hCpIKDVm9FDziCL+6eURSEWbd7jzkR3VJZOtWqU++zyw/Do6gSLsVH3uA7aiB8xGmcuSEcv8FOZk3afdZuyLA5fwVbV27Pnd4R7knbBIwn+3WNNtETmphNQ+QT7ouzsjiGZNkFWTyJFblIjrxtFYPAX4xfrmT6WupZk1MsEakedU9wHgmOKsnDy5Rg+nZqxIHmYfX910H/9ujqxRf9qzzGX9NzylwRwU1m5s6eCLe45kbqigIHqlOlS95yLbd6ad+Jw9Ep0VjGVopeMMIF8AfVk80SFQmM5A==
+ bh=54H3ruafHcxFwaxbPBI9keacdZV92zgv0BwZqSbzQCM=;
+ b=YbgXbGte2A3vj55EN7uSdtZWLrIeR6rAoB3nG+6VPD3zlbPPTiRFFj6qEacx8REVuX6IIzIIsx/gX1NnwYGqKMMdqGPxosf+xgh64naYUNuWcbeHpn90JWpuTVu/GUycZ6vSh5og2ehfMr+/I5Q4naWor1EDFcz6swby2eDU4qPBuOUO+oXzuI9GBQCFUC075nPsmlZrc14d1zkMBfW3tiwvaRMwJOqDEkhbWoER7Dtv3LRdNBcfMOZA+6y3+iiPR6vMt+iASpgtvwcJH8n1TFzS1IQNwCV7Iffk5oEC8A8YNuDWqLQ2t7cD6/0PAmaRgrKUjlRMWPYqmxoAFasiuw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5f3hruUVjU6JCunv0Eyj+ZhBLm0DUSbj7lcYlnJlWQk=;
- b=S+6udiS9Cyu/5FofZzD6uM3Yizc+5AirzXFVXFMUixp3FxilMNR+ZSYGCZNYTnenVkI8bIpnf+R5yv46L4wqcaVFV2Lk9x+FlmntSI9LTvRoYX4dEeADcveKYSjp8tRQKspP75Pjwac0uWp55kp1txULJU6xxq0AdQmMhPddpZk=
-Received: from MW4PR04CA0085.namprd04.prod.outlook.com (2603:10b6:303:6b::30)
- by DS0PR12MB6438.namprd12.prod.outlook.com (2603:10b6:8:ca::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.15; Fri, 7 Nov
- 2025 10:23:58 +0000
-Received: from MWH0EPF000A6734.namprd04.prod.outlook.com
- (2603:10b6:303:6b:cafe::5c) by MW4PR04CA0085.outlook.office365.com
- (2603:10b6:303:6b::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.12 via Frontend Transport; Fri,
- 7 Nov 2025 10:23:56 +0000
+ bh=54H3ruafHcxFwaxbPBI9keacdZV92zgv0BwZqSbzQCM=;
+ b=ifE+Uu/jLP/OP70+WoBTF+LtbZ9pHbaDW36WbUg1MsCkB8rnpgsBwKvYXkBeDAhFoncHWmJZQBMM4lFromIpTCf3S8jFxIutzfSep2MWlQA2hlE0h0Zj1yAsxDnqqqgC6AKErUpQ8TWZ9yg6AiyrHpkpj3JATfpKKYN8WYujllE=
+Received: from BN9P221CA0001.NAMP221.PROD.OUTLOOK.COM (2603:10b6:408:10a::16)
+ by CY5PR12MB6453.namprd12.prod.outlook.com (2603:10b6:930:37::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.12; Fri, 7 Nov
+ 2025 10:23:59 +0000
+Received: from BN2PEPF000044A4.namprd02.prod.outlook.com
+ (2603:10b6:408:10a:cafe::59) by BN9P221CA0001.outlook.office365.com
+ (2603:10b6:408:10a::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.9 via Frontend Transport; Fri, 7
+ Nov 2025 10:23:59 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- MWH0EPF000A6734.mail.protection.outlook.com (10.167.249.26) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN2PEPF000044A4.mail.protection.outlook.com (10.167.243.155) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Fri, 7 Nov 2025 10:23:57 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 7 Nov
- 2025 02:23:57 -0800
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 7 Nov
- 2025 02:23:56 -0800
+ 15.20.9298.6 via Frontend Transport; Fri, 7 Nov 2025 10:23:59 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 7 Nov
+ 2025 02:23:58 -0800
+Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 7 Nov
+ 2025 04:23:58 -0600
 Received: from XFR-LUMICHEL-L2.xilinx.com (10.180.168.240) by
  satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17
- via Frontend Transport; Fri, 7 Nov 2025 02:23:55 -0800
+ via Frontend Transport; Fri, 7 Nov 2025 02:23:57 -0800
 From: Luc Michel <luc.michel@amd.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: Luc Michel <luc.michel@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -72,10 +72,9 @@ CC: Luc Michel <luc.michel@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Liu Zhiwei
  <zhiwei_liu@linux.alibaba.com>, Francisco Iglesias
  <francisco.iglesias@amd.com>
-Subject: [PATCH 1/9] target/riscv: drop unused include directive in
- time_helper.c
-Date: Fri, 7 Nov 2025 11:23:27 +0100
-Message-ID: <20251107102340.471141-2-luc.michel@amd.com>
+Subject: [PATCH 2/9] hw/intc/riscv_aclint: fix coding style
+Date: Fri, 7 Nov 2025 11:23:28 +0100
+Message-ID: <20251107102340.471141-3-luc.michel@amd.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251107102340.471141-1-luc.michel@amd.com>
 References: <20251107102340.471141-1-luc.michel@amd.com>
@@ -84,56 +83,56 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000A6734:EE_|DS0PR12MB6438:EE_
-X-MS-Office365-Filtering-Correlation-Id: c73a118b-0286-4fd8-e1dd-08de1de7c30a
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A4:EE_|CY5PR12MB6453:EE_
+X-MS-Office365-Filtering-Correlation-Id: 60a8e50e-7b78-4411-3f24-08de1de7c3ce
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2ARhGWNRKRmHFKDrmh9/hLubyC6hjIe8yR8jn69XdJ+JUsUPA4MMaDgmvuJz?=
- =?us-ascii?Q?XwDcGdK2Yy3EyW1xIjijq87pZWYdfhvsqywBhS3XyfDE91egaTbxjw81Dp2w?=
- =?us-ascii?Q?dodGAqGR0/wRK2UWMZ0rPRhHCocha+aRCGQls+sDTV7LCSJMmFb8xTPiq3cp?=
- =?us-ascii?Q?rdcdIuHkb3tgCO40kulHqd9kBR9eoGx/7MmOgann/Y6/AX+KvOAwo7mGnIjy?=
- =?us-ascii?Q?KWNnvR1hMVq13FPyfGWwdfx4Xd5djKgMozAUM6JdK0mGRcdZsmuBLGpzIpZc?=
- =?us-ascii?Q?oPqUnR8isZfV1hKCRyJ68zrQXdJSdvdp5wisjPT+xnRu24srxiv1tdekqd95?=
- =?us-ascii?Q?QjK8oTgmFGYf9nWKGjej3GnLBDJ5y3r3/7MFjNZwzscLdTadfoJAqommU9n3?=
- =?us-ascii?Q?r3oDWVJ8q6EoCyXioNoqTtIdMycx4foTY4Z9k9e+Mu50XBCUHdCQiBdh3VOz?=
- =?us-ascii?Q?0iZVgmxFMlFUKTxUqANjXXyVZD3vBbCjRTJ2ddKwnbnTYZV1fM6tsrAdT1VE?=
- =?us-ascii?Q?fZbhxPXvrdkNHlZFswsoKocfOkyy+sW+nZVSayGUe42rCqTLkxsL9mpA+P+Z?=
- =?us-ascii?Q?NKv2xUPJ3NPU7VkbfqEEACRTn2Dn+7FAhXdZKQ0eUm2StzYOPhPbbCBOe+kc?=
- =?us-ascii?Q?DiuZKteEUcPdzbArYkAj3ZPbczh09yNDZKBUHl3suICwa1rXXzyuvFVi+XcS?=
- =?us-ascii?Q?n/aDIl1tiRaN33RzC+SyeEIQkQJcnj2ZqQbpGHUME/Gr3SlITug9I62xSVHF?=
- =?us-ascii?Q?7HYkrmDxyKSzLHy8+PebrA/kLyi9ylIpUsgqVvQGSDc3WlfnyTD8vvqObUNO?=
- =?us-ascii?Q?w+nZHL0ckr876ty1VklksIbYs/gdw5wreui2jEoSeLKo4BdJ5FRkXaW6Pv8f?=
- =?us-ascii?Q?C1IDQd7K9JnadHBKcHeWwUqGRzBS+OdZhe8k0OVtWIRwKattEYgtuw6AoLes?=
- =?us-ascii?Q?plAxmFrKu/sOE90p0TSaV4DzP+V/sKmFYumbIo9Imm0LjK7Ux86v8vcCGjJ7?=
- =?us-ascii?Q?gVdSTXJyvlx0ivkajJg8MxECF0+ugBG2Tyzvp+NfJbxnx0ne5rmYVAt8/312?=
- =?us-ascii?Q?JEfumwyFOzP8ZI2QA6NIoa9hYM/uJfEmZfZ9DvmbyM90bTWOiUoqBZU24EIA?=
- =?us-ascii?Q?e+nge2/cPgVSqsYdJWLcSIFjVrOjZzKlhA1PgpWa5VQQez9p/Z06SVmtA9EO?=
- =?us-ascii?Q?T6sPCTZf9WRGtjC2SUgPThKqzWb276v/6Di3qqTBlK/ma6WLoDKWFvCMT+Ic?=
- =?us-ascii?Q?Z39MipyEZweLekzdQdyQZy3apcAvVUN/KOvVqd7oQD6UU68Wx54xKxeJaD1c?=
- =?us-ascii?Q?OSUPjqE0hGRllxza7kJT03eDpJCSNsO35ZXtqmDH19xkd+XLhGtFuHyOdtGd?=
- =?us-ascii?Q?diqmyzdKrHSVRWBe11p3el74fr4DXutGdrH8PzZUGwwT1Z9cVyOSO57jGu3L?=
- =?us-ascii?Q?anHszBj5vUGhS2FVIljpwTYzRn8lxYERTtSPeI4PqvdyH+6C5y54wS7uHYNl?=
- =?us-ascii?Q?yz7fjLFyqgweYHcubR5+xQPOWWplAdpprCXoYHjiKuzOTOvL62TNSDId+vno?=
- =?us-ascii?Q?DiMQEG4MBt58IhHneRs=3D?=
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Bh6HMaqtWbAx2v6O9T0BXHqQZ6Gb8NOpxXF9ynjw5NCet/5NSf6lTbHcJwSA?=
+ =?us-ascii?Q?hcfjz09d0+7rQAUVOYju3+4lCmpefiZPKs8T8U4Ar0FUdFyRYW6tt7xNT+Q2?=
+ =?us-ascii?Q?nGrF3hoaVNOvYOrq4aXIokX+u1KAL+x8pEryGnTyOSIRbHB0739VYXSqbNzT?=
+ =?us-ascii?Q?J/fYK+hbIVUN67aW62V0LBmZ2uNVI2ZyMXYBL4gpJDta5YNMhp5LVJxa/YrX?=
+ =?us-ascii?Q?q8PwmR4IqPM0rWluuMb53x7uSt/FgQiUb7bc0cUn77NoE4wU9phazhezy8vv?=
+ =?us-ascii?Q?YxvFh/sJd9G0upRTGmv4CzWfHfYKNjoin2joj09yvM23HY41vYY8asQhNPuT?=
+ =?us-ascii?Q?vFiXbc6NEIk5ercmksDn6EoX+3VI6gBmCgduvemhhbCv7Dn+Mm7sztENm2U/?=
+ =?us-ascii?Q?BTFhrdjunf3LbGwzsFTwtzeKFDSN1PA/K/PMS5nDJCNRq8JFJfEUEal5uY9a?=
+ =?us-ascii?Q?VzWAQykLRhvcfrRKDO5Yz5sS120/G+qhotPOw8xY0s+M3NgbNQd1COCHtgHp?=
+ =?us-ascii?Q?oVtlkdixBZde1Is7MCliP99dUzMMxsqNAkf5sdXCYorNkMImF2hcxhQBhjJu?=
+ =?us-ascii?Q?ILFusYyKUdQ9TH+rEKB3buqeAW+UQChERVKMMI1AT2t6BcXPvKL/A20HLItH?=
+ =?us-ascii?Q?higmkSl9b29tSPd6r+Zw/B2K0A2sPXc2oUAWJEBq7+TP3ByTVL4PwC9E/vGs?=
+ =?us-ascii?Q?itXJrdLRwpD3QcLBivvaiesoh6CtQJBpmpLkPsgWrNuXpuybZwHp0X/OSzVq?=
+ =?us-ascii?Q?CVReDYUJsnNJ//izYEhNC9cZO/s7SLZFjatgl3U+g3vrfErt175R2vzyxsS6?=
+ =?us-ascii?Q?tqNZ2gHPnzHli+JWBHywHp1ByA4iREyuWhFyHekA8J/VkWNm4BoWTKX5+6y6?=
+ =?us-ascii?Q?GmJeLUMDqOqx5tS0xXp2Q8BbVMQUGYdMz573iw6Vz66ZM5mK8W19rzzFslV7?=
+ =?us-ascii?Q?5xhl8c8g/U3MEAoACe22EA1otYtQp0+W2/K651bKhVdZKEpzgEcahwYSABKz?=
+ =?us-ascii?Q?oExYiLkoXAswUkfNnrXkN/BUgJWWFKdF5Vy/ckmZ425X8a50N6sYIBpOC+Y7?=
+ =?us-ascii?Q?mpZdt2hPp8fXCdYUhF5VuLxrZtti2t93o5IaFigs9J4VW8Z7/53ektp6kJN7?=
+ =?us-ascii?Q?rQ2cJiGIteGY29wL3l9QffuNIgZx2MkFGox5i83x5MXNZCve24Hbku0o8dEW?=
+ =?us-ascii?Q?wxbewpHNJ/7nWt95M2LclxEyw7G0jK6IP82zamBuhockyCN6HDbHKl8PeCpO?=
+ =?us-ascii?Q?L8geNLvw7rd+TOgoH+eaZ8z7UJUP8TobOGKU3ovmuiTN9oSsDq16Y42rUZ1Q?=
+ =?us-ascii?Q?vYHU43pJ2fIqHLEQurTtv0yiSZSY4YDf3DwxlQei8fxi9LLYBiRNLhsqNybx?=
+ =?us-ascii?Q?JpJW90cRV/OFil+FX5MjP+QQ4q9yuVpXTH4xmNNL3cmolJLtnUwnYa8HvlKI?=
+ =?us-ascii?Q?z3N5adNUL0Wf84ft/fQVQPSJH3m1JyM7a0/FAybDjxZmmSe/ywBQZ0OxMW8+?=
+ =?us-ascii?Q?/OjvLTFNYrWvMY5Z0ve1VMyGnZTBp3RjwtbFo5JcmEOVL2bXBvVUwzNtojnK?=
+ =?us-ascii?Q?S/wG1v+ABqOtMt35ig4=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 10:23:57.8780 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c73a118b-0286-4fd8-e1dd-08de1de7c30a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 10:23:59.2474 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 60a8e50e-7b78-4411-3f24-08de1de7c3ce
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000A6734.namprd04.prod.outlook.com
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A4.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6438
-Received-SPF: permerror client-ip=2a01:111:f403:c105::5;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6453
+Received-SPF: permerror client-ip=2a01:111:f403:c110::1;
  envelope-from=Luc.Michel@amd.com;
- helo=CH5PR02CU005.outbound.protection.outlook.com
+ helo=BN1PR04CU002.outbound.protection.outlook.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -142,7 +141,7 @@ X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.271,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 07 Nov 2025 09:24:43 -0500
+X-Mailman-Approved-At: Fri, 07 Nov 2025 09:24:44 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -157,29 +156,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Drop the unused qemu/log.h include directive in time_helper.c
+Fix coding style in `riscv_aclint_mtimer_class_init' and
+`riscv_aclint_swi_class_init' functions.
 
 Signed-off-by: Luc Michel <luc.michel@amd.com>
 ---
- target/riscv/time_helper.c | 1 -
- 1 file changed, 1 deletion(-)
+ hw/intc/riscv_aclint.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-index 400e9173542..d2ec8a94166 100644
---- a/target/riscv/time_helper.c
-+++ b/target/riscv/time_helper.c
-@@ -15,11 +15,10 @@
-  * You should have received a copy of the GNU General Public License along with
-  * this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
+diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+index c6f13f647ec..5f5ffc61e80 100644
+--- a/hw/intc/riscv_aclint.c
++++ b/hw/intc/riscv_aclint.c
+@@ -342,13 +342,14 @@ static const VMStateDescription vmstate_riscv_mtimer = {
+ };
  
- #include "qemu/osdep.h"
--#include "qemu/log.h"
- #include "cpu_bits.h"
- #include "time_helper.h"
- #include "hw/intc/riscv_aclint.h"
+ static void riscv_aclint_mtimer_class_init(ObjectClass *klass, const void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
++
+     dc->realize = riscv_aclint_mtimer_realize;
+     device_class_set_props(dc, riscv_aclint_mtimer_properties);
+-    ResettableClass *rc = RESETTABLE_CLASS(klass);
+     rc->phases.enter = riscv_aclint_mtimer_reset_enter;
+     dc->vmsd = &vmstate_riscv_mtimer;
+ }
  
- static void riscv_vstimer_cb(void *opaque)
+ static const TypeInfo riscv_aclint_mtimer_info = {
+@@ -528,13 +529,14 @@ static void riscv_aclint_swi_reset_enter(Object *obj, ResetType type)
+ }
+ 
+ static void riscv_aclint_swi_class_init(ObjectClass *klass, const void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
++
+     dc->realize = riscv_aclint_swi_realize;
+     device_class_set_props(dc, riscv_aclint_swi_properties);
+-    ResettableClass *rc = RESETTABLE_CLASS(klass);
+     rc->phases.enter = riscv_aclint_swi_reset_enter;
+ }
+ 
+ static const TypeInfo riscv_aclint_swi_info = {
+     .name          = TYPE_RISCV_ACLINT_SWI,
 -- 
 2.51.0
 
