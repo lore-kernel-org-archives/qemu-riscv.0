@@ -4,93 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05DB0CCFA13
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Nov 2025 02:32:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2F38CCFA18
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Nov 2025 14:25:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vHCGU-0006G3-Jh; Thu, 06 Nov 2025 21:31:50 -0500
+	id 1vHNOZ-00058a-UR; Fri, 07 Nov 2025 09:24:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1vHCGR-0006Eb-7g
- for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 21:31:47 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1vHCGO-0002wA-2R
- for qemu-riscv@nongnu.org; Thu, 06 Nov 2025 21:31:46 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2952048eb88so3632915ad.0
- for <qemu-riscv@nongnu.org>; Thu, 06 Nov 2025 18:31:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1762482702; x=1763087502; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DY6gp++mEiAa25/v6nXiBTsLV9urICNYQrtoFh1K61s=;
- b=K4UFcDkfHvCdbh/EPfFMh/lVgNL0E/Mlk5jI2L/+IgVyAEy3kgIfHGXRuqBQCLChRS
- X/phWsdypObX6NXUCB/qJN6tvoAtbMGvorvyZwjZzhNZExFW9OsUJb/pMDjsPX7tizng
- 9jbs4CHZ7hW210iCumJ4abMAGpCCcpjlmoLFmSPR5ouIoSpqeGhzdfZDFuznNAUIbxM6
- 3gtVg5zNucOq+ebApPqAglxWEGC5sWAF2MkMQN9UKa9eHcq3mFHcQrOErFiK8RktFTga
- Lu3rGUUxiC/lQLKQp5YZ/o8pqxKWG5xDqABcM0SeS5+YY19zqk68TaVI5DsZLo0trd8v
- 5VVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762482702; x=1763087502;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DY6gp++mEiAa25/v6nXiBTsLV9urICNYQrtoFh1K61s=;
- b=TEq9HuMFYnHvqNthLdOultqcet84HlsVY7ePPoeJzZ2YZbh4lGmGi3LbSnyLMjYfkO
- 3YSt5KjP+BqUE/aGjQkehJD0q5CUbp5Svm9UZO+UTkfCDoPEdB2C0E1FJG060UU5K+/G
- epJvIuPMdybNR01XoKLc0NzaWfdMlpRX1BvTh5l+GY8d7ytRTtcLEOnU/jwcnnp8EyBk
- QeH4YVvm0vUvyFWU5XnVgCPRtSC1xmFpTwBj/xCAuK57wu5eNEUsDw1QdpklHP/3FcVx
- iPq5UVVOtarkkBMJbv/sw8x3BMyGlRxW71BRMrLZzuUYlRQi+/2XxGjI0oYLOgBweGy/
- 5pBA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXL8BVR3SbLZHt/hSJQ78X3mFcJPI0tgGthyM5eHbtYqKNmLCrRQwRWYsSI+tSAne0J68BUCidxt12X@nongnu.org
-X-Gm-Message-State: AOJu0YylSc2eJbXYKRrCwpF/luJoATY/LP9BlvyZVD1+p6elHmE8cHZy
- 2vVDp6wmVZ8sbcJGBtkKpmZuEdHr6i77SHO6FXv7KwrD2h+o2OHz3r16vaobBqPZ060=
-X-Gm-Gg: ASbGncu7W5UfRCuepiMP3yv1DQHP4wruYJPU8HsZMfH14rItGTBMWld9u8uZ4V+MCpf
- Br91/2P+ndRR06qCp0rqQmCSf1GwR2RCmvQDjEpKwJPvPmgmCM/c4HVIPvpCfobEa/bAbmaj+y8
- QeRDGvxaZu+0V5HuCTV6w6hnfeIa9bc/UihJXEJc/+YXrQLCocCIbd/cBweBpQQp3eF6hA2dwL+
- allCaboKEsobKn054GF4f7eCxXQ+/x3kMLbWS2Cj+qJh754fh7G7Id5O3UKf86XLpH0hpnGYQng
- AOrWrIOvuxT7dxw8f3vmg2I7ew8oGgCQlOApCcEpjkhaZDRDsBD9NdmnZXkLxzmkdNw/h765GUa
- K2qId2cGx+JEAQTxDOz0RIBi8CKvhEeoVFLZy6EpvhM+cNEdigze8au3I5jB0jQIL9kAByM7tDK
- IADKLk1/E8TOwWH8ouC50X4KjNFV2T4M+5OPLYwF8=
-X-Google-Smtp-Source: AGHT+IECF1HWgGebGi88d+FEvKlKfn+1in6jeeypiKZ0z5+1xcsFi/GL2HgtqzESO0AM74WSiNGZgg==
-X-Received: by 2002:a17:902:ecc9:b0:262:9c4:5470 with SMTP id
- d9443c01a7336-297c044f7a3mr22379935ad.28.1762482701781; 
- Thu, 06 Nov 2025 18:31:41 -0800 (PST)
-Received: from jchang-1875.internal.sifive.com ([136.226.240.208])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29651ca1eb7sm43499775ad.89.2025.11.06.18.31.39
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 06 Nov 2025 18:31:41 -0800 (PST)
-From: Jay Chang <jay.chang@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Jay Chang <jay.chang@sifive.com>, Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v2] target/riscv: Support Smpmpmt extension
-Date: Fri,  7 Nov 2025 10:31:36 +0800
-Message-ID: <20251107023136.89181-1-jay.chang@sifive.com>
-X-Mailer: git-send-email 2.48.1
+ (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
+ id 1vHJdb-0008VM-73; Fri, 07 Nov 2025 05:24:11 -0500
+Received: from mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ ([2a01:111:f403:c112::7] helo=CY3PR05CU001.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
+ id 1vHJdZ-0000xf-93; Fri, 07 Nov 2025 05:24:10 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=x23xUOfPM80LEG+LOoHW6kkknjgJNxMZ4QxdHRuuhz0et9WGxG6DzCUXlrj4UnECXfJvmhAOCA9zAgTal4GJDwtTYVtkuee9YSBaeofYlzsdFcwQES+tQR66Javx46MrkWKkJmgXKARs7HxceY48HUfZxu/3TAwHCAiSg3zAqfWSR9QZVPWSVSr0Xr407Hw9ymdMiBGtRNSxZA86zEdMrgdmjCM4nuvnjBvflc3fjwqj5RLAYD0sbwDkZ2n8GfzbSVk5eq3inyw4Xq3V5t1Ck5c+zaSmeaWQxiLnMc4flngKuhj82tB3+TLgMkXgJq3Ygy2JKpS6Z79SsIjxqetOtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=A8r1KvHxNf7vDoP9gSEE6sL6xWq523MgXK8dY0e8E+4=;
+ b=Vk1FxvZtd9KnU/vomO+XMwQYRRQuWfVxvWgNsswhSHsJDpR39vRqZRPryiGfBVN0sbXL94/plxF85gVGnpWs3iQiBxm5SDQg+YXFYSgLBouvy22IpVhjAgIxCEltD/nPQBJAKoCMeKuv+xwEry1FKv6NG7E/U0X7+B9ypG/7wRiSfWMcYDoAibWHpmBUlMqnXd+yC/uC0pxKgHaxZq56nVSZlQdqeyxOYBWlsB7F58jbndNr635wgj+jkERp8e2YNU7ihO2rsbPmmZ3y3bZ0VoL+ItYksT8/Bv7iDQvcfGA+qfRc/LJMsyNRKgi3p96EWon8qA46gWRZe5lu/tbzag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=A8r1KvHxNf7vDoP9gSEE6sL6xWq523MgXK8dY0e8E+4=;
+ b=YhF4B83C9n8twXMoGlP9/GiLnGjynWI1GUUqw7RCJjoahsn3oaG0buUyWhB1BsGAumqk7VbYKdxk5t9FFRplPp60eCxSNzgv2GfwLCMTvtLL/khZQDCZMpdycH1mwKaJcO6KZ3uFi456P1TuXubxuqOxqxaMbRSloA4nasty0jU=
+Received: from BN9P221CA0027.NAMP221.PROD.OUTLOOK.COM (2603:10b6:408:10a::21)
+ by DS0PR12MB6389.namprd12.prod.outlook.com (2603:10b6:8:cf::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9298.13; Fri, 7 Nov 2025 10:24:01 +0000
+Received: from BN2PEPF000044A4.namprd02.prod.outlook.com
+ (2603:10b6:408:10a:cafe::85) by BN9P221CA0027.outlook.office365.com
+ (2603:10b6:408:10a::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.12 via Frontend Transport; Fri,
+ 7 Nov 2025 10:24:00 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN2PEPF000044A4.mail.protection.outlook.com (10.167.243.155) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9298.6 via Frontend Transport; Fri, 7 Nov 2025 10:24:00 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 7 Nov
+ 2025 02:24:00 -0800
+Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 7 Nov
+ 2025 04:24:00 -0600
+Received: from XFR-LUMICHEL-L2.xilinx.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17
+ via Frontend Transport; Fri, 7 Nov 2025 02:23:58 -0800
+From: Luc Michel <luc.michel@amd.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+CC: Luc Michel <luc.michel@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Francisco Iglesias
+ <francisco.iglesias@amd.com>
+Subject: [PATCH 3/9] hw/intc/riscv_aclint: rename cpu_riscv_read_rtc to
+ riscv_aclint_mtimer_get_ticks
+Date: Fri, 7 Nov 2025 11:23:29 +0100
+Message-ID: <20251107102340.471141-4-luc.michel@amd.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251107102340.471141-1-luc.michel@amd.com>
+References: <20251107102340.471141-1-luc.michel@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=jay.chang@sifive.com; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: luc.michel@amd.com does not designate
+ permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A4:EE_|DS0PR12MB6389:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6a886b18-397a-4f74-f22e-08de1de7c4c8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?cdeO6rQ9IxHDfDYtSH3XNcC4iU4a9EToXfZQHm1Ob5ZHIBEi9WdYnvjbwoWy?=
+ =?us-ascii?Q?LCSPj90NlyA0eUVNpgxFh6xgtsCM8Dkt6WWpAzc/WY71hukQSHg5tELXWdf2?=
+ =?us-ascii?Q?syz8JcIH1AidyEErDCIvcQFftDK62X/UB5F8OEZ+LgSUpEXkrHDmBvNNmnBR?=
+ =?us-ascii?Q?MXqhwU1sUo1Q8U/ixas7JIq68qtejTGLX7pXFd2QZt8JEVUXRbEjAgGr9ZkK?=
+ =?us-ascii?Q?IznPcuk5kJbcFzzxr4kaSsS5IOPFt90F9ecambWATZhXwRdO0A2rynH7hXYX?=
+ =?us-ascii?Q?lxoJlF/0LkZ7VBpxkTiZilcPWz96rmjytqWmcNP1SWsWF0sI5nHYM9hVy+nF?=
+ =?us-ascii?Q?igZSRV/IRWZqD2hoZDZJ20ExVICBNkZ+NErGxDCLUWP3wBa63pjpvrBCPFgG?=
+ =?us-ascii?Q?F2ehBNyU2rV3Hf1HseVxjAOB32HvyEfEM60j/WMpGk6btdHiMqb4vVBOsQh9?=
+ =?us-ascii?Q?BIjl/49vttkUuuOQ/qL9lhZ3XrZeUONTU0xLkjygbby0SpprFyQoMQkwJp7Z?=
+ =?us-ascii?Q?ZKSqyJAikePEmFDbsgRfIO/XKjM2IyzLg5p4mlcSmcjBfyTKkjMycsxCMab2?=
+ =?us-ascii?Q?XGoI8SteOmveDqVOd34/62SSF3ddDgX6FcobIYvMtakY9n865B/dyfpe1gx+?=
+ =?us-ascii?Q?pHS+QBD2eo5BLCKfONPR9zBOv/x6uR+Lnn9saqfnJ2drg7fmlSHKr50f15x/?=
+ =?us-ascii?Q?D0Br+Y80WKy8FrAdVzIiZVLUOJIW2EcsMkQPKkE1rLTVGbaq6Yq7YO+67RsW?=
+ =?us-ascii?Q?cNZjj6n0xdSoBtsQ21O8yTpvX1fqpScPwvg5CnXClTiCGaesZARnNw5jYQE0?=
+ =?us-ascii?Q?SSoKuq0Oh3Y0AEaK1ZafSra3GeK1VpGseSDwJ8hrbC63D2693ZbcFKWTQOQw?=
+ =?us-ascii?Q?t6SJd1dUohMHrB3tV1aAYPxHBRYHc4Z+c1g5GnHGQ9J6LIiUgSwxVcE2ZQRN?=
+ =?us-ascii?Q?Nmxj7+3cAfUUa/de/YgLzFCPwxZX8OqhQFb373Lscef+GqNY+hjrKk1zQ/mb?=
+ =?us-ascii?Q?inucg+k6c+TmcgrX6RQ9OEPUbJr9bhiZNwYBOBuKDskbgMN9DiKVdZihFEOU?=
+ =?us-ascii?Q?ryKdfLAgwrJ7Swp82BDA0NsDw7qTTMCVuQoZM32Zslbs37SKVxwbjmcpN7LT?=
+ =?us-ascii?Q?2IZCsVUgczmA1HmT9yAa4aKdjxwyh9/fC2DhzDO74Iq6P87zGE6l67oBnDjf?=
+ =?us-ascii?Q?xOep6UI9m5gE7JSRSprZuF6yr9Fw7m+2p7rhIEHfeGE6yuQ4ryvY0e9NCX6J?=
+ =?us-ascii?Q?miYPqnUIcCnvqXQmANX7kE1S6eaRRNR95W4ZIpfTIKHkBFUpc5dwTykdudYW?=
+ =?us-ascii?Q?50MT+5tXGdbvTbXkrvSPr5sR8V8Y5DHPNE9N+DxUU6pgyicrTwMN/SqrxsVa?=
+ =?us-ascii?Q?JPiomFFmQaa7IUTpAXnzGEtv4ShpouttHfqfJrxQCpXuHqNi4Sp2o1WRFKaC?=
+ =?us-ascii?Q?xezhsd5qtEBjEGyPaLzF2Rz1s3C22J6CgDnAvZBAPcS0epyn8aN9LgKrDRBE?=
+ =?us-ascii?Q?dVfJMKkrlvC3krnKLNZLGoFA/ytUr0mVww+DGmLPUVC1sZYsCVnivh8zZGUy?=
+ =?us-ascii?Q?6IY38gusK04US4QspZ4=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 10:24:00.8905 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a886b18-397a-4f74-f22e-08de1de7c4c8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A4.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6389
+Received-SPF: permerror client-ip=2a01:111:f403:c112::7;
+ envelope-from=Luc.Michel@amd.com;
+ helo=CY3PR05CU001.outbound.protection.outlook.com
+X-Spam_score_int: -23
+X-Spam_score: -2.4
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.271,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 07 Nov 2025 09:24:45 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,97 +159,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Smpmpmt extension provides a mechanism to control memory attributes
-at the granularity of PMP (Physical Memory Protection) registers, similar
-to how Svpbmt controls memory attributes at the page level.
+For more clarity, rename the cpu_riscv_read_rtc function to
+riscv_aclint_mtimer_get_ticks:
+   - The ACLINT is the time source here, not the CPU,
+   - This function returns a number of ticks based on the timer
+     frequency.
 
-Version 0.6
-https://github.com/riscv/riscv-isa-manual/blob/smpmpmt/src/smpmpmt.adoc#svpbmt
+Rename the _raw version of this function as well and the local variables
+storing the result of those function.
 
-Signed-off-by: Jay Chang <jay.chang@sifive.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-
+Signed-off-by: Luc Michel <luc.michel@amd.com>
 ---
-v2:
-    Place smpmpmt in the correct riscv,isa order.
+ hw/intc/riscv_aclint.c | 31 ++++++++++++++++---------------
+ 1 file changed, 16 insertions(+), 15 deletions(-)
 
-Signed-off-by: Jay Chang <jay.chang@sifive.com>
----
- target/riscv/cpu.c                |  2 ++
- target/riscv/cpu_cfg_fields.h.inc |  1 +
- target/riscv/pmp.c                | 12 ++++++++++++
- target/riscv/pmp.h                |  1 +
- 4 files changed, 16 insertions(+)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ae8b721e55..0760ee7d9e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -203,6 +203,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(smcsrind, PRIV_VERSION_1_13_0, ext_smcsrind),
-     ISA_EXT_DATA_ENTRY(smdbltrp, PRIV_VERSION_1_13_0, ext_smdbltrp),
-     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
-+    ISA_EXT_DATA_ENTRY(smpmpmt, PRIV_VERSION_1_12_0, ext_smpmpmt),
-     ISA_EXT_DATA_ENTRY(smrnmi, PRIV_VERSION_1_12_0, ext_smrnmi),
-     ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_13_0, ext_smmpm),
-     ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_13_0, ext_smnpm),
-@@ -1262,6 +1263,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
-     MULTI_EXT_CFG_BOOL("svnapot", ext_svnapot, false),
-     MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
-+    MULTI_EXT_CFG_BOOL("smpmpmt", ext_smpmpmt, false),
-     MULTI_EXT_CFG_BOOL("svrsw60t59b", ext_svrsw60t59b, false),
-     MULTI_EXT_CFG_BOOL("svvptc", ext_svvptc, true),
+diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+index 5f5ffc61e80..95398e48821 100644
+--- a/hw/intc/riscv_aclint.c
++++ b/hw/intc/riscv_aclint.c
+@@ -38,20 +38,21 @@
+ typedef struct riscv_aclint_mtimer_callback {
+     RISCVAclintMTimerState *s;
+     int num;
+ } riscv_aclint_mtimer_callback;
  
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index a154ecdc79..b1096da664 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -57,6 +57,7 @@ BOOL_FIELD(ext_svadu)
- BOOL_FIELD(ext_svinval)
- BOOL_FIELD(ext_svnapot)
- BOOL_FIELD(ext_svpbmt)
-+BOOL_FIELD(ext_smpmpmt)
- BOOL_FIELD(ext_svrsw60t59b)
- BOOL_FIELD(ext_svvptc)
- BOOL_FIELD(ext_svukte)
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 3ef62d26ad..52a7677683 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -165,6 +165,18 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-                           "ignoring pmpcfg write - invalid\n");
+-static uint64_t cpu_riscv_read_rtc_raw(uint32_t timebase_freq)
++static uint64_t riscv_aclint_mtimer_get_ticks_raw(uint32_t timebase_freq)
+ {
+     return muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
+         timebase_freq, NANOSECONDS_PER_SECOND);
+ }
+ 
+-static uint64_t cpu_riscv_read_rtc(void *opaque)
++static uint64_t riscv_aclint_mtimer_get_ticks(void *opaque)
+ {
+     RISCVAclintMTimerState *mtimer = opaque;
+-    return cpu_riscv_read_rtc_raw(mtimer->timebase_freq) + mtimer->time_delta;
++    return riscv_aclint_mtimer_get_ticks_raw(mtimer->timebase_freq) +
++           mtimer->time_delta;
+ }
+ 
+ /*
+  * Called when timecmp is written to update the QEMU timer or immediately
+  * trigger timer interrupt if mtimecmp <= current timer value.
+@@ -63,28 +64,28 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
+ {
+     uint32_t timebase_freq = mtimer->timebase_freq;
+     uint64_t next;
+     uint64_t diff;
+ 
+-    uint64_t rtc = cpu_riscv_read_rtc(mtimer);
++    uint64_t ticks = riscv_aclint_mtimer_get_ticks(mtimer);
+ 
+     /* Compute the relative hartid w.r.t the socket */
+     hartid = hartid - mtimer->hartid_base;
+ 
+     mtimer->timecmp[hartid] = value;
+-    if (mtimer->timecmp[hartid] <= rtc) {
++    if (mtimer->timecmp[hartid] <= ticks) {
+         /*
+          * If we're setting an MTIMECMP value in the "past",
+          * immediately raise the timer interrupt
+          */
+         qemu_irq_raise(mtimer->timer_irqs[hartid]);
+         return;
+     }
+ 
+     /* otherwise, set up the future timer interrupt */
+     qemu_irq_lower(mtimer->timer_irqs[hartid]);
+-    diff = mtimer->timecmp[hartid] - rtc;
++    diff = mtimer->timecmp[hartid] - ticks;
+     /* back to ns (note args switched in muldiv64) */
+     uint64_t ns_diff = muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
+ 
+     /*
+      * check if ns_diff overflowed and check if the addition would potentially
+@@ -149,15 +150,15 @@ static uint64_t riscv_aclint_mtimer_read(void *opaque, hwaddr addr,
+                           "aclint-mtimer: invalid read: %08x", (uint32_t)addr);
+             return 0;
+         }
+     } else if (addr == mtimer->time_base) {
+         /* time_lo for RV32/RV64 or timecmp for RV64 */
+-        uint64_t rtc = cpu_riscv_read_rtc(mtimer);
+-        return (size == 4) ? (rtc & 0xFFFFFFFF) : rtc;
++        uint64_t ticks = riscv_aclint_mtimer_get_ticks(mtimer);
++        return (size == 4) ? (ticks & 0xFFFFFFFF) : ticks;
+     } else if (addr == mtimer->time_base + 4) {
+         /* time_hi */
+-        return (cpu_riscv_read_rtc(mtimer) >> 32) & 0xFFFFFFFF;
++        return (riscv_aclint_mtimer_get_ticks(mtimer) >> 32) & 0xFFFFFFFF;
+     }
+ 
+     qemu_log_mask(LOG_UNIMP,
+                   "aclint-mtimer: invalid read: %08x", (uint32_t)addr);
+     return 0;
+@@ -206,25 +207,25 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+                           "aclint-mtimer: invalid timecmp write: %08x",
+                           (uint32_t)addr);
+         }
+         return;
+     } else if (addr == mtimer->time_base || addr == mtimer->time_base + 4) {
+-        uint64_t rtc_r = cpu_riscv_read_rtc_raw(mtimer->timebase_freq);
+-        uint64_t rtc = cpu_riscv_read_rtc(mtimer);
++        uint64_t ticks_r = riscv_aclint_mtimer_get_ticks_raw(mtimer->timebase_freq);
++        uint64_t ticks = riscv_aclint_mtimer_get_ticks(mtimer);
+ 
+         if (addr == mtimer->time_base) {
+             if (size == 4) {
+                 /* time_lo for RV32/RV64 */
+-                mtimer->time_delta = ((rtc & ~0xFFFFFFFFULL) | value) - rtc_r;
++                mtimer->time_delta = ((ticks & ~0xFFFFFFFFULL) | value) - ticks_r;
+             } else {
+                 /* time for RV64 */
+-                mtimer->time_delta = value - rtc_r;
++                mtimer->time_delta = value - ticks_r;
+             }
          } else {
-             uint8_t a_field = pmp_get_a_field(val);
-+
-+            if (!riscv_cpu_cfg(env)->ext_smpmpmt) {
-+                /* If smpmpmt not supported, clear the MTMATCH bit */
-+                val &= ~PMP_MTMATCH;
-+            } else if ((val & PMP_MTMATCH) == PMP_MTMATCH) {
-+                /*
-+                 * If trying to set reserved value (0x3) for MT field,
-+                 * preserve the original MT field from current config.
-+                 */
-+                val = (val & ~PMP_MTMATCH) |
-+                    (env->pmp_state.pmp[pmp_index].cfg_reg & PMP_MTMATCH);
-+            }
-             /*
-              * When granularity g >= 1 (i.e., granularity > 4 bytes),
-              * the NA4 (Naturally Aligned 4-byte) mode is not selectable
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index 271cf24169..467fb6b4b1 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -29,6 +29,7 @@ typedef enum {
-     PMP_WRITE = 1 << 1,
-     PMP_EXEC  = 1 << 2,
-     PMP_AMATCH = (3 << 3),
-+    PMP_MTMATCH = (3 << 5),
-     PMP_LOCK  = 1 << 7
- } pmp_priv_t;
+             if (size == 4) {
+                 /* time_hi for RV32/RV64 */
+-                mtimer->time_delta = (value << 32 | (rtc & 0xFFFFFFFF)) - rtc_r;
++                mtimer->time_delta = (value << 32 | (ticks & 0xFFFFFFFF)) - ticks_r;
+             } else {
+                 qemu_log_mask(LOG_GUEST_ERROR,
+                               "aclint-mtimer: invalid time_hi write: %08x",
+                               (uint32_t)addr);
+                 return;
+@@ -395,11 +396,11 @@ DeviceState *riscv_aclint_mtimer_create(hwaddr addr, hwaddr size,
+         if (!env) {
+             g_free(cb);
+             continue;
+         }
+         if (provide_rdtime) {
+-            riscv_cpu_set_rdtime_fn(env, cpu_riscv_read_rtc, dev);
++            riscv_cpu_set_rdtime_fn(env, riscv_aclint_mtimer_get_ticks, dev);
+         }
  
+         cb->s = s;
+         cb->num = i;
+         s->timers[i] = timer_new_ns(QEMU_CLOCK_VIRTUAL,
 -- 
-2.48.1
+2.51.0
 
 
