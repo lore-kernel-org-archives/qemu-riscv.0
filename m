@@ -4,146 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FD5FCCF9F8
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Nov 2025 14:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3944BCCFA1A
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Nov 2025 13:56:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vHNPA-0005la-3N; Fri, 07 Nov 2025 09:25:32 -0500
+	id 1vI5uC-0005fH-Ru; Sun, 09 Nov 2025 08:56:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
- id 1vHJdi-00007X-No; Fri, 07 Nov 2025 05:24:18 -0500
-Received: from mail-westus2azlp170100005.outbound.protection.outlook.com
- ([2a01:111:f403:c005::5] helo=CO1PR03CU002.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
- id 1vHJdh-0001Mc-6j; Fri, 07 Nov 2025 05:24:18 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BBC95J1YR3J9LUvuFhKp5lscQjUfwXd4ZWmtMhyqK/WQfl/8Dthcv5MUmaw/yQukCOnn1ybTXNhuUByEOczjfaiLSk+1ZqnjwCyfM7HUWoHoWk8AMHxvhoUU0MSz6vW2c3ZZENNr4efiSgrHdRLzEvAH8GJoW8RZ3CF6+SHiXle5MBga+bUFNNMiQi9eL8ANB5NQURGcbU+R/KgLpgeV1isVUoGXJJAXzG5KbHootYfF3mlOsdrE38kV9eemXuBd7asVIQiCgFabNGb10Oy9CK9YSLtsDZoXZV0AG9yz6J2z8itHORBd2abgDyCOU4X/ZTOCWr6jJK9nB+SUOOo14Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dSv5QKFD3tWmtdSGCj7BNqUyO4ztu/VTThNVj+AHFv8=;
- b=D3z1zgOecySJ74JI1AoZHWP7eqsbr5fH0di4JyQSM7LDUrI8IIL2DDZqDrO5f7XThlO5l9clVuKsxBMRj4c6wfbZk+YC0wIdWcUvpWUauHSRN2dUct2HXs76lT2xEqDlniCjiryH/HKozS2V2yJey+MWBf6WNSXZ3FouGufcrmujA+36wPGFDA6TdN6TCRwd1JrURCKhx/nEn7TY8E3Kk7A6WwBxQ9ivDF+aIf0ozluxfiPqAz02RmPTUlLdH1BuNnlnqFDDEj89sjAWcq0CAKrJzyigCXH8lN2Mvk70YLPGkbQy0UY0MsPSLCnefoWzEtEC4mIxi5L3lGeW7XUTiw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dSv5QKFD3tWmtdSGCj7BNqUyO4ztu/VTThNVj+AHFv8=;
- b=ujsKGKmThlKH17V/HTrw0gLCsJx2bMeuZUdNgLXqAS54nXs8FPXVI5ZAtK/CgSVouvsWv4WVgtY6SeFjZe1KlTxi6joy5jFQf+LrMgxs2MLpJJ71EHaD5loPlHneNubwIc8O5WTKZDllVSYSGGMTSOGXFUDD3pUtHSiOpO7eDQI=
-Received: from BN9PR03CA0766.namprd03.prod.outlook.com (2603:10b6:408:13a::21)
- by IA1PR12MB8288.namprd12.prod.outlook.com (2603:10b6:208:3fe::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.12; Fri, 7 Nov
- 2025 10:24:11 +0000
-Received: from BN2PEPF000044A2.namprd02.prod.outlook.com
- (2603:10b6:408:13a:cafe::bb) by BN9PR03CA0766.outlook.office365.com
- (2603:10b6:408:13a::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.12 via Frontend Transport; Fri,
- 7 Nov 2025 10:23:59 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BN2PEPF000044A2.mail.protection.outlook.com (10.167.243.153) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Fri, 7 Nov 2025 10:24:11 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 7 Nov
- 2025 02:24:10 -0800
-Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 7 Nov
- 2025 04:24:10 -0600
-Received: from XFR-LUMICHEL-L2.xilinx.com (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.17
- via Frontend Transport; Fri, 7 Nov 2025 02:24:09 -0800
-From: Luc Michel <luc.michel@amd.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: Luc Michel <luc.michel@amd.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Francisco Iglesias
- <francisco.iglesias@amd.com>
-Subject: [PATCH 9/9] hw/intc/riscv_aclint: implement the
- register_time_change_notifier method
-Date: Fri, 7 Nov 2025 11:23:35 +0100
-Message-ID: <20251107102340.471141-10-luc.michel@amd.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251107102340.471141-1-luc.michel@amd.com>
-References: <20251107102340.471141-1-luc.michel@amd.com>
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vI5tv-0005Zx-EV
+ for qemu-riscv@nongnu.org; Sun, 09 Nov 2025 08:56:18 -0500
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vI5tr-0003AF-7P
+ for qemu-riscv@nongnu.org; Sun, 09 Nov 2025 08:56:14 -0500
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b3c2c748bc8so275154566b.2
+ for <qemu-riscv@nongnu.org>; Sun, 09 Nov 2025 05:56:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1762696568; x=1763301368; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KIdpjXo0r6s66hWwLKpdXWvog9BjlXyRWXujWoi5mMU=;
+ b=S5zRwUPjEo9I3+/n8rIryHRkw8h7UFnbj7fU0yT7Rf/2T+7L21aUm3x58kLhnrBMKq
+ ulipg9R8g9KhR6PPn5vy7biu7NOd/G1gLguPIjsPgPPBDVqTCrT2jy+YnON3UpR6HVko
+ /hS+Dso7g0HPk6qabKjTp7BYQGz3+VKkjP2ROBzD5gCb+TjX9ORb1A7UYWvOuTOypWkU
+ qjhk6yjuObiObZaMY/8nj9hMTE9O7v5uiCWqBaSHo+GCWPhyQEphxUFj3howM5hwGN3R
+ Slyffs3ki1FffmWiQ83JB0Aitevt3JGb8jplcw43HUAai+zxn2Ghpxffq1DA0MQPW1sH
+ g+Tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762696568; x=1763301368;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KIdpjXo0r6s66hWwLKpdXWvog9BjlXyRWXujWoi5mMU=;
+ b=Dt6E3c33BnaUWy+IigvUzy6gDA2keU1vi7fkiVyVc1GPuS3tXWNHxuOe/kwCXoTmIU
+ 1DR+ILMB6cx/jMYXLoMLpSxZ383CKTeWbgHZ/M/VM0FCLdu22f0OSTJBTYWVpgzu9PFk
+ VOwXHghtfcPwGjcMo1noT8YuRnUI1iuiHhsZNXkQo9Ld+cihfC/opWlhGw86Alz6/v3i
+ VQ0kY+mRmRk17Yqn4a58NaXYeqJODxyvhwj8haHGMfvqqLgc3YjTn4KuLo2y5ofSpDG6
+ vmcjtOxE5LErLle0GAkehxBxw0oZfPV2Gi9x38qR5ha1a5UkUtuGOgLfH3v8i1e9pAkf
+ OAgw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU78c1tc2xWm6+YRJwutECY3bF7gGbhABeAAs69Xc/GUofdfVIL02cynrTS51HP8SnIHdQuKcQ8EiXk@nongnu.org
+X-Gm-Message-State: AOJu0Yyu7h0Y6F24p86FwkHN/QlxpMQyZghf1taUze32pFXIrszAgS/+
+ trcOorEdQHNZkuw6WLoZZO+Y79/cT93HzAmOj0ZxhMO+oDAPtKjDOEQK0BEmkwpmwMY=
+X-Gm-Gg: ASbGncswKZzZAwDtPhXsoQ27dC/7R9eK1rWBE6vGc4QewG7JzoUsqkM7mIzNrXansu8
+ t8jgy++K2x9y40vd48Wy7OwuQmUD2vkA0G1fo3LlXF2AwBn+JzNev/VJzjdeJZGX4tIvaOrggc6
+ oHm/Qfn+UVmM2okZiNpmFXtHmbQajDP+M3UGL3C4e25PrhIs8u79ZZzOrz2jx7vvHgA8J9RpEt0
+ lGwaJKEuSK3g4OdOLwGAXF8VuulznRLLAGeofpsbtrzCEJM3CoZ3kdtC+ATQZsK2FIWiYI0Z9Yo
+ wOQNizsm/mJHNRgSP7VnZr05sdAEas1r1SYbdAbnIagHE0uOQzVbn9z/r3L5qOZfJ1VW4OiJXhm
+ jIftDqVWpFdmSEMH/25onoms9PDC2CH6NndGHZsGq5O11/BDhK5HOiRCesivLNtrzdwLvIiN0aG
+ +pKhVTQzL5leD9SWMImE3KtoP983AmRJPR/SVk9s1JPN1zkBM=
+X-Google-Smtp-Source: AGHT+IHx4/lpPmoD0dy5mjaAWMmzLwBwQYS1I5sMzfgig3IEkS2ijPWHm/iCzwGQckiAYr3N7jHtWA==
+X-Received: by 2002:a17:907:60d1:b0:b70:bc2e:a6f0 with SMTP id
+ a640c23a62f3a-b72e02b3521mr452532166b.5.1762696567704; 
+ Sun, 09 Nov 2025 05:56:07 -0800 (PST)
+Received: from [192.168.2.7] (tmo-086-152.customers.d1-online.com.
+ [80.187.86.152]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b72bf407a01sm810683766b.22.2025.11.09.05.56.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 09 Nov 2025 05:56:07 -0800 (PST)
+Message-ID: <dde87e6d-6790-40e3-bfc6-418645b3dd91@linaro.org>
+Date: Sun, 9 Nov 2025 14:56:05 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/9] hw/intc/riscv_aclint: fix coding style
+Content-Language: en-US
+To: Luc Michel <luc.michel@amd.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Francisco Iglesias <francisco.iglesias@amd.com>
+References: <20251107102340.471141-1-luc.michel@amd.com>
+ <20251107102340.471141-3-luc.michel@amd.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20251107102340.471141-3-luc.michel@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: luc.michel@amd.com does not designate
- permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A2:EE_|IA1PR12MB8288:EE_
-X-MS-Office365-Filtering-Correlation-Id: 34449fde-d246-4ec6-713d-08de1de7cb1e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Wcg3pZPJeoI3lm8Mj2ph3bJ8b+gxNloPsrvU/QBEUiCmWR9s9DgvV0N6eOLq?=
- =?us-ascii?Q?CBHW1k5YzWVmH3QCtM39AERkDb8rXsWuU0uhPIuyeLgMewebvBd8L90xAS4N?=
- =?us-ascii?Q?oPzRVJcuocTS9PpVOe7Md8AKFnxuhyMq2Taw3rLv9ixyRFJPLl9ZbH0cZEPh?=
- =?us-ascii?Q?RcdFQ9bwfC4qufoJV8CTs40NwlbYk2cKIoszwVD1LCG0TwGGFJFAPq7wGnlq?=
- =?us-ascii?Q?adIntn9jSs2e1dpCv7MYJmcvD/9XlgWZGnuMeUAEqzCGILW5RzqnfdGMQ35A?=
- =?us-ascii?Q?jBqTv3L7bkMmb8Oac52Duupn00fmlBV7Y5CJUWrlBTFdimDiZ3hPVlD6Chhd?=
- =?us-ascii?Q?ihlHICHQKystHoJSlwW8RQ0ZcJTxg3dBKx0WueMmZEdVE2/NAreAJVRIJjSW?=
- =?us-ascii?Q?qbgmc/2RFx064/O5FQVoIbam1cFuK5DXz44djp9bmiKm1PkqLke/eN7F/kSX?=
- =?us-ascii?Q?9y8EkWHMNoTUnCd56Yfi17AhpMY1G9/8HrftSn4SWRI+F4ZseP4r46TJ4RNi?=
- =?us-ascii?Q?dlw/02Ucpao7/AVy8TsCjECXUbn4GLcs5GrnUxoGqFEKVNLrLZlBv4cvRoPp?=
- =?us-ascii?Q?r+GJN5e323UYVyOPwtmCPUB1gEZD0AEuaSoAQ8xvjtHQ88hRAny6I+dbaRO4?=
- =?us-ascii?Q?nIrz6csoqL990hIiKAIYhFTRka8v7V9fVpe0pMzJd/wsZenBZnOXzTnCk+z0?=
- =?us-ascii?Q?X1WcJdSnrvq66kvR0EaAGNdIRgpwQ9yYJK1LINcyaBCmL3CvhyGdYMQJexba?=
- =?us-ascii?Q?wxOdG6PKazN+PJSPr4WCU140baUMc46GVpZgEFL/+DxvS9SWFK4HOAR0UvWv?=
- =?us-ascii?Q?Xn8cj3KlhlUwwfJ0IBz9Vk5zftZYcSyXm0ARWJijub7g3kNvc7Gp1OlvYi7e?=
- =?us-ascii?Q?BzhLn2poJ1gtke24BwCRSysJd3KOWZqWdw1bFrWpTLew7T31uAlMJnYKgZzK?=
- =?us-ascii?Q?daJgkUYWrAsLq/FmMz9Cu3927xcwTETjV04CIoxhJw3BDBFRi2SvOmgiwyMS?=
- =?us-ascii?Q?PG9vG6qtfdM/7u8TiuB5Jvo/Aid7TfyGv5rcL4Qj+OP5KYFKnYTXDumKo86F?=
- =?us-ascii?Q?65nGAjr/GRuJYO5reBpUSX6VWMc3+h+Xc1herdhQFSjwoTXJkxqzWJ/IwYGE?=
- =?us-ascii?Q?lbQ7Vgn5G6AqUdTpR+K0Egok8mu7VrDB0lX9VNSx5ufpgsunFzUpmgg3PsIy?=
- =?us-ascii?Q?Wo6TCjef8HKmuhu5hTuLJJEXY/mV0CxcUskaSDPor0o5jL0Swr4bSmDRl/I1?=
- =?us-ascii?Q?l9uO+Z83QgoXyBQvYiahH6HBslmTHwVX8JCLo+s2mmeIr/VOMIKHhGxxmaaz?=
- =?us-ascii?Q?XQ/i2HF32eJSSOexNqbhG+lFf2wTpw7jJSja7u3mMOwSuSgMma9MH0LryXjx?=
- =?us-ascii?Q?WAB67eEbw9PsK/sctXNalIEj4K+dhb4D4sHH/EIm0M2nN8flBz9OgbTpweW+?=
- =?us-ascii?Q?GfMhOnFW/jWnlOKHrSo8mhh9DMcOC05tJxfiBr1PaETo2dobp931diuC7Lqs?=
- =?us-ascii?Q?DQ6dJ/ddyNUi4l3i4qZ3X1kKAF16/5Qh+hWwPcEScHJvuu6FESRgK1/2Dj8F?=
- =?us-ascii?Q?QuYHZ14VaCprVVDNy1w=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 10:24:11.5185 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 34449fde-d246-4ec6-713d-08de1de7cb1e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A2.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8288
-Received-SPF: permerror client-ip=2a01:111:f403:c005::5;
- envelope-from=Luc.Michel@amd.com;
- helo=CO1PR03CU002.outbound.protection.outlook.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.271,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 07 Nov 2025 09:24:46 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -158,111 +109,15 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Implement the register_time_change_notifier method of the
-RISCVCPUTimeSrcIf interface in the ACLINT. Keep a notifier list and
-notify it upon `time' register modification. This effectively replaces
-the explicit calls to the internal riscv_timer_write_timecmp CPU
-functions as this is now done by the corresponding CPU notifier.
+On 7/11/25 11:23, Luc Michel wrote:
+> Fix coding style in `riscv_aclint_mtimer_class_init' and
+> `riscv_aclint_swi_class_init' functions.
+> 
+> Signed-off-by: Luc Michel <luc.michel@amd.com>
+> ---
+>   hw/intc/riscv_aclint.c | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
 
-Signed-off-by: Luc Michel <luc.michel@amd.com>
----
- include/hw/intc/riscv_aclint.h |  1 +
- hw/intc/riscv_aclint.c         | 16 +++++++++++-----
- 2 files changed, 12 insertions(+), 5 deletions(-)
-
-diff --git a/include/hw/intc/riscv_aclint.h b/include/hw/intc/riscv_aclint.h
-index 4b7406eec00..3451aa1786b 100644
---- a/include/hw/intc/riscv_aclint.h
-+++ b/include/hw/intc/riscv_aclint.h
-@@ -32,10 +32,11 @@ typedef struct RISCVAclintMTimerState {
-     /*< private >*/
-     SysBusDevice parent_obj;
-     uint64_t time_delta;
-     uint64_t *timecmp;
-     QEMUTimer **timers;
-+    NotifierList time_change_notifiers;
- 
-     /*< public >*/
-     MemoryRegion mmio;
-     uint32_t hartid_base;
-     uint32_t num_harts;
-diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-index 014b733d72f..f5e120cc853 100644
---- a/hw/intc/riscv_aclint.c
-+++ b/hw/intc/riscv_aclint.c
-@@ -26,11 +26,10 @@
- #include "qemu/error-report.h"
- #include "qemu/log.h"
- #include "qemu/module.h"
- #include "hw/sysbus.h"
- #include "target/riscv/cpu.h"
--#include "target/riscv/time_helper.h"
- #include "hw/qdev-properties.h"
- #include "hw/intc/riscv_aclint.h"
- #include "qemu/timer.h"
- #include "hw/irq.h"
- #include "migration/vmstate.h"
-@@ -239,15 +238,13 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
-                 continue;
-             }
-             riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu),
-                                               mtimer->hartid_base + i,
-                                               mtimer->timecmp[i]);
--            riscv_timer_write_timecmp(env, env->stimer, env->stimecmp, 0, MIP_STIP);
--            riscv_timer_write_timecmp(env, env->vstimer, env->vstimecmp,
--                                      env->htimedelta, MIP_VSTIP);
--
-         }
-+
-+        notifier_list_notify(&mtimer->time_change_notifiers, NULL);
-         return;
-     }
- 
-     qemu_log_mask(LOG_UNIMP,
-                   "aclint-mtimer: invalid write: %08x", (uint32_t)addr);
-@@ -284,10 +281,11 @@ static const Property riscv_aclint_mtimer_properties[] = {
- static void riscv_aclint_mtimer_realize(DeviceState *dev, Error **errp)
- {
-     RISCVAclintMTimerState *s = RISCV_ACLINT_MTIMER(dev);
-     int i;
- 
-+    notifier_list_init(&s->time_change_notifiers);
-     memory_region_init_io(&s->mmio, OBJECT(dev), &riscv_aclint_mtimer_ops,
-                           s, TYPE_RISCV_ACLINT_MTIMER, s->aperture_size);
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
- 
-     s->timer_irqs = g_new(qemu_irq, s->num_harts);
-@@ -338,10 +336,17 @@ static uint32_t riscv_aclint_mtimer_time_src_get_tick_freq(RISCVCPUTimeSrcIf *if
-     RISCVAclintMTimerState *mtimer = RISCV_ACLINT_MTIMER(iface);
- 
-     return mtimer->timebase_freq;
- }
- 
-+static void mtimer_time_src_register_change_notifier(RISCVCPUTimeSrcIf *iface,
-+                                                     Notifier *notifier)
-+{
-+    RISCVAclintMTimerState *mtimer = RISCV_ACLINT_MTIMER(iface);
-+
-+    notifier_list_add(&mtimer->time_change_notifiers, notifier);
-+}
- 
- static const VMStateDescription vmstate_riscv_mtimer = {
-     .name = "riscv_mtimer",
-     .version_id = 3,
-     .minimum_version_id = 3,
-@@ -366,10 +371,11 @@ static void riscv_aclint_mtimer_class_init(ObjectClass *klass, const void *data)
-     device_class_set_props(dc, riscv_aclint_mtimer_properties);
-     rc->phases.enter = riscv_aclint_mtimer_reset_enter;
-     dc->vmsd = &vmstate_riscv_mtimer;
-     rctsc->get_ticks = riscv_aclint_mtimer_time_src_get_ticks;
-     rctsc->get_tick_freq = riscv_aclint_mtimer_time_src_get_tick_freq;
-+    rctsc->register_time_change_notifier = mtimer_time_src_register_change_notifier;
- }
- 
- static const TypeInfo riscv_aclint_mtimer_info = {
-     .name          = TYPE_RISCV_ACLINT_MTIMER,
-     .parent        = TYPE_SYS_BUS_DEVICE,
--- 
-2.51.0
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
