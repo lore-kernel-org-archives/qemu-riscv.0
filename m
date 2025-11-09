@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EECFCCF9F8
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Nov 2025 19:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A942CCF9F8
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Nov 2025 19:16:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vIAt3-0003My-SW; Sun, 09 Nov 2025 14:15:41 -0500
+	id 1vIAt7-0003Q5-0u; Sun, 09 Nov 2025 14:15:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <michael@videogpu.com>)
- id 1vIAt2-0003LV-2W
- for qemu-riscv@nongnu.org; Sun, 09 Nov 2025 14:15:40 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1vIAt4-0003Nb-LN
+ for qemu-riscv@nongnu.org; Sun, 09 Nov 2025 14:15:42 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <michael@videogpu.com>)
- id 1vIAsz-0007ud-KL
- for qemu-riscv@nongnu.org; Sun, 09 Nov 2025 14:15:39 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4777707a7c2so6232005e9.1
- for <qemu-riscv@nongnu.org>; Sun, 09 Nov 2025 11:15:37 -0800 (PST)
+ id 1vIAt2-0007wT-Af
+ for qemu-riscv@nongnu.org; Sun, 09 Nov 2025 14:15:42 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4777a9aeedaso4623685e9.3
+ for <qemu-riscv@nongnu.org>; Sun, 09 Nov 2025 11:15:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=videogpu-com.20230601.gappssmtp.com; s=20230601; t=1762715736; x=1763320536;
+ d=videogpu-com.20230601.gappssmtp.com; s=20230601; t=1762715739; x=1763320539;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yOCt94/jYqEKQ0fi5IY8khjz3WqWYGUTB8ZkxXFgisw=;
- b=gYIUPHIRJPGogFPkXDEcuC8goxDEzgBAApcIklpkQ9UTcQ8u2seXCx64nWqcRD7wNt
- K497cQBKcMKCO86qQPQWJMMDPwCy/253sTTBFlWAC0ztbyCi20MAzs0qB0hl+pnzf3fk
- d4jAdnuTWqmiasiAvhjAVdU0HeCnEedLCdb4jObN1HGYKjC9Zm5assYxzoelhDpgD3E3
- zkuJrR5BO3mUBAzYj7+QZBZDEyTSrQDGS/uxzIaj6D9LHUhSWy10gwZDvry4Ldho+Jn8
- 39I7yBsqIaRQUzybWgkbKK38ItZtAsGEW+4i+BP5DoRHY5uwoEVk+ipi4NdyyU3EzNnD
- rb2g==
+ bh=coXM3aabJBT21GBiTqQtXzlDQRzt3k5zaMleXYUcg/A=;
+ b=tIu3uH/tYy9eAwQ4vP6GZ9OC0QT4Oyq/R5sJttdtdpMGqeJkrgo2knPqA1a6vMK9h5
+ BMHsqHAF9FImx1Qd3PLSKerlTHtNjWC4o+KQfvXMNoRWtQh2+b5PdelPwgWb1fVHZoP9
+ sw97lD/QnlgraXu/Vv2J3KHnkr2absVf8qyyYNdPUWChruWVRxVcRNs8q+NlLUtyHEMZ
+ VTcnHoelC5oJiekDM5mJ32OG/wfpZAT4rIBziTsbV6FT4LQBmfL7enBSm+gSBTdNg9MN
+ YXKxqqZGWAx54bQSLNephF0htv9Crppand5rdukFPamlz0Ix1GRC1HvmwMNBHIDNEBgb
+ RxOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762715736; x=1763320536;
+ d=1e100.net; s=20230601; t=1762715739; x=1763320539;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=yOCt94/jYqEKQ0fi5IY8khjz3WqWYGUTB8ZkxXFgisw=;
- b=Bpg/BMV5veGraTBuELnvw9qJ5WGlVGvnSf1ztwD4Xkzi7aQrc7lO5zatYtSQukKC3u
- jtn/vzlW3gWQT31h5n8MApxaqGBf6N9ODV9dDNibUAGafChB3b+gCzdFbtw0nJhn/zkH
- EheXT0p2ret/r8DpmSYmSOtf8kYYBXDRABvilv2GD+Uqa5ZSsggNQ4fEcHFHk7rc4aR2
- HuZxxLftwZQ3yne+oVh0+likesZhhslhXMGyu8mkDhvULZriqKZJPgWm2PqXy/0lhVtl
- dstoo52+YWcU++/WBE5EnjSxkYjhTS/+h5Rhc8BfkmQcSIPb7Cwm8iN0r1FEzkw7RJTU
- 9Eng==
-X-Gm-Message-State: AOJu0YzziGKJcHNo2FLmLxqf0rgVjekccA4TkT0W/iRUnj4tMwCQBEof
- a/fNAaVKVT9wo5o+bAtdMdmX0mLNfKfCq8nwJSgwsZk2niMcpRjPha5KS0nn9HsQMqk=
-X-Gm-Gg: ASbGncs2wh3n8r/g2rzGP09tdjMQo11Q8uU9Ada80Xk9cBCInR2HxwJzErkz7egApxO
- HEuSfaKcqNyNdajSrnaLRH4rzl53SezgDDnSWosI/t5vUWmF+CMT+84PxZmdF7Ei764uj20oP1w
- dz1JcLifqc19LEvpFsZp/bccME04Jl1qmX1c+yoTeSJ+yT5MEXzJRNiXqBAvWy5wJ1/LGST9W7r
- FbkGQVNgnUYpHT47TYtNCHN2SMa56wDk3vIkbF16NXfXS4CVydeyBY8cuWIxVE8WCzj72TXx9CN
- vG73RJu1o18aXkCMgNxTl/v+uq0/1SmbSkQ3gScjh7/9z6/+6jG/azAHzuD3UF5mGnlzPJWlytf
- PH/iesxkNw0W7k5MFW0+0BUHKzId9l6uiPY5/UT6gf0kMxqvsmKVvZDzvIuRY0LLvURa5aUagef
- EaoN8mw1i+hoI=
-X-Google-Smtp-Source: AGHT+IFJsfVD+5aLGfqGgoEpdZnXSs5ITo7S7ZZi4TxhmchvxvJpfRf7R3MdID25JqgTW7Zc2Sv/Hw==
-X-Received: by 2002:a05:600c:4251:b0:475:de06:dbaf with SMTP id
- 5b1f17b1804b1-4776dcd61dfmr44318815e9.17.1762715735995; 
- Sun, 09 Nov 2025 11:15:35 -0800 (PST)
+ bh=coXM3aabJBT21GBiTqQtXzlDQRzt3k5zaMleXYUcg/A=;
+ b=AQMmHbMxSmIJSr9pHSb5mgaa+ToLl6ZyJRWZLiZD3fSE9jpRHgggxKjuWy1H1r6X/d
+ +XEKHdxB60WLvF+6EUd4D7fxbBl+UtdFEDEqdzH6EU2PEjjZUxb143624XtPcQVCNfMY
+ Se/L8XDwSyguG/GTwS21byzL/a1hLMgf9MqF+d4LlFJk5GgXs/oUvhCKMtWNDnIhLE3e
+ QBPTsflpiPti8V5WHfp1a3COMxumpLOy28VCoK2lZKq98hndb2ODkTILwaQznqE0usnU
+ J/jTuO/YE2QmIUycx8kgFJjYzRPzAi6xn2KcLe3dcURgtVUvl57mNOaQJ+rgYfsnVB1+
+ BS3A==
+X-Gm-Message-State: AOJu0YxDJuS41G1w2U4rJ2PXZFd0BlpBCeA7bSsRzLZhTrA5QDpRWZ1g
+ sMQM9Q15TgYoBLiOiMyNUV+5LrvpGviVZETLwnagT3jMOCHwv64ORaqzLupLluNVppE=
+X-Gm-Gg: ASbGnctRcdZynkUG7zuDhtf7yhMT81wUf2YBLyiifFeeex4JIrWFBFllb0vKyHbmKrj
+ cVumz7OTc+VCeZjVHLn6W0t3tq69XvvtbKFdMbXT2qz63LKFIQxwmO0n8/77OETiQMW6ZEtA/RY
+ yWz3fFKgM886/OLwSoFQ8XIvY70QftuJmKoS9deeU01ppjcvRUN9w/3Mc7Wu6ppVhrr/XzNYGO8
+ uhhpLdHeUx+1hb+mhIbNINe5qksvyzKna+xzkatn0yvbVxbRaQmG023AkuKWj1hGDEUhdDY2I2V
+ q0QjcP3l6gL482xqo4VIumAWplM1gmpAWvlfSSfqgLL8DyTSRrvwJGNBMD40VFbg9jA4QU7JckN
+ mEvvz+VQlx0804p8RprpS1ptRnd45ALCD9Zv2ljJII9QgW7BLrJ9GWzQVBq0yku8IlLd7LDqeyn
+ P8EZ1IX4zOy6Q=
+X-Google-Smtp-Source: AGHT+IHULoUwWfdlHahlPFUvs9QbBkIQELFwVug5ZYVttmZL2iYPg71eOpBmmFJz/WuTK7C3A1+QjA==
+X-Received: by 2002:a05:600c:1550:b0:475:dd59:d8da with SMTP id
+ 5b1f17b1804b1-4777329785cmr53765705e9.40.1762715738540; 
+ Sun, 09 Nov 2025 11:15:38 -0800 (PST)
 Received: from DDesktop.local ([2a10:8012:1:b32a:35:83e6:baea:8ad])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47778daf2c3sm54600265e9.10.2025.11.09.11.15.34
+ 5b1f17b1804b1-47778daf2c3sm54600265e9.10.2025.11.09.11.15.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Nov 2025 11:15:35 -0800 (PST)
+ Sun, 09 Nov 2025 11:15:37 -0800 (PST)
 From: Michael Levit <michael@videogpu.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, philmd@linaro.org, pbonzini@redhat.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  liwei1518@gmail.com, smishash@gmail.com
-Subject: [PATCH v4 1/5] target/riscv: add NEORV32 RV32 CPU type and vendor CSR
- hooks
-Date: Sun,  9 Nov 2025 21:15:28 +0200
-Message-ID: <20251109191532.32419-2-michael@videogpu.com>
+Subject: [PATCH v4 3/5] hw/char: add NEORV32 UART (CTRL/DATA, fifo, chardev)
+Date: Sun,  9 Nov 2025 21:15:30 +0200
+Message-ID: <20251109191532.32419-4-michael@videogpu.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20251109191532.32419-1-michael@videogpu.com>
 References: <20251109191532.32419-1-michael@videogpu.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2a00:1450:4864:20::330;
- envelope-from=michael@videogpu.com; helo=mail-wm1-x330.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::332;
+ envelope-from=michael@videogpu.com; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -105,181 +104,393 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Michael <michael@videogpu.com>
 
-Introduce NEORV32 RV32 CPU type under target/riscv, wire NEORV32 vendor ID,
-and add a vendor CSR (CSR_MXISA) guarded by mvendorid match, plus meson glue.
+Add NEORV32 UART device: CTRL/DATA registers, RX FIFO, TX to chardev.
+Includes Kconfig/meson and public header.
 
 Signed-off-by: Michael Levit <michael@videogpu.com>
 ---
- target/riscv/cpu-qom.h            |  1 +
- target/riscv/cpu.c                | 17 +++++++++++++
- target/riscv/cpu.h                |  3 +++
- target/riscv/cpu_cfg.h            |  1 +
- target/riscv/cpu_cfg_fields.h.inc |  1 +
- target/riscv/cpu_vendorid.h       |  2 ++
- target/riscv/meson.build          |  1 +
- target/riscv/neorv32_csr.c        | 40 +++++++++++++++++++++++++++++++
- 8 files changed, 66 insertions(+)
- create mode 100644 target/riscv/neorv32_csr.c
+ hw/char/Kconfig                |   3 +
+ hw/char/meson.build            |   1 +
+ hw/char/neorv32_uart.c         | 285 +++++++++++++++++++++++++++++++++
+ include/hw/char/neorv32_uart.h |  54 +++++++
+ 4 files changed, 343 insertions(+)
+ create mode 100644 hw/char/neorv32_uart.c
+ create mode 100644 include/hw/char/neorv32_uart.h
 
-diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-index 75f4e43408..e0c1f5888f 100644
---- a/target/riscv/cpu-qom.h
-+++ b/target/riscv/cpu-qom.h
-@@ -43,6 +43,7 @@
- #define TYPE_RISCV_CPU_RVA23U64         RISCV_CPU_TYPE_NAME("rva23u64")
- #define TYPE_RISCV_CPU_RVA23S64         RISCV_CPU_TYPE_NAME("rva23s64")
- #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
-+#define TYPE_RISCV_CPU_NEORV32          RISCV_CPU_TYPE_NAME("neorv32")
- #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
- #define TYPE_RISCV_CPU_SIFIVE_E         RISCV_CPU_TYPE_NAME("sifive-e")
- #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 73d4280d7c..67260ed9d7 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -233,6 +233,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(svrsw60t59b, PRIV_VERSION_1_13_0, ext_svrsw60t59b),
-     ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
-     ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
-+    ISA_EXT_DATA_ENTRY(xneorv32xisa, PRIV_VERSION_1_10_0, ext_xneorv32xisa),
-     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
-     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
-     ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
-@@ -1366,6 +1367,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
-     MULTI_EXT_CFG_BOOL("xtheadmempair", ext_xtheadmempair, false),
-     MULTI_EXT_CFG_BOOL("xtheadsync", ext_xtheadsync, false),
-     MULTI_EXT_CFG_BOOL("xventanacondops", ext_XVentanaCondOps, false),
-+    MULTI_EXT_CFG_BOOL("xneorv32xisa", ext_xneorv32xisa, false),
- 
-     { },
- };
-@@ -3075,6 +3077,21 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .misa_mxl_max = MXL_RV32,
-         .misa_ext = RVE
-     ),
-+    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_NEORV32, TYPE_RISCV_VENDOR_CPU,
-+        .misa_mxl_max = MXL_RV32,
-+        .misa_ext = RVI | RVM | RVA | RVC | RVU,
-+        .priv_spec = PRIV_VERSION_1_10_0,
+diff --git a/hw/char/Kconfig b/hw/char/Kconfig
+index 020c0a84bb..1fd39c2b30 100644
+--- a/hw/char/Kconfig
++++ b/hw/char/Kconfig
+@@ -95,3 +95,6 @@ config IP_OCTAL_232
+     bool
+     default y
+     depends on IPACK
 +
-+        .cfg.max_satp_mode = VM_1_10_MBARE,
-+        .cfg.ext_zifencei = true,
-+        .cfg.ext_zicsr = true,
-+        .cfg.pmp = true,
-+        .cfg.pmp_regions = 16,
-+        .cfg.mvendorid = NEORV32_VENDOR_ID,
-+#ifndef CONFIG_USER_ONLY
-+        .custom_csrs = neorv32_csr_list
-+#endif
-+    ),
- #endif
- 
- #if (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 36e7f10037..6a9918a25a 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -985,5 +985,8 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
- /* In th_csr.c */
- extern const RISCVCSR th_csr_list[];
- 
-+/* Implemented in neorv32_csr.c */
-+extern const RISCVCSR neorv32_csr_list[];
-+
- const char *priv_spec_to_str(int priv_version);
- #endif /* RISCV_CPU_H */
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index aa28dc8d7e..9ad38506e4 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -64,5 +64,6 @@ MATERIALISE_EXT_PREDICATE(xtheadmemidx)
- MATERIALISE_EXT_PREDICATE(xtheadmempair)
- MATERIALISE_EXT_PREDICATE(xtheadsync)
- MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
-+MATERIALISE_EXT_PREDICATE(xneorv32xisa)
- 
- #endif
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index a154ecdc79..b84e1bd287 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -147,6 +147,7 @@ BOOL_FIELD(ext_xtheadmemidx)
- BOOL_FIELD(ext_xtheadmempair)
- BOOL_FIELD(ext_xtheadsync)
- BOOL_FIELD(ext_XVentanaCondOps)
-+BOOL_FIELD(ext_xneorv32xisa)
- 
- BOOL_FIELD(mmu)
- BOOL_FIELD(pmp)
-diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
-index 96b6b9c2cb..66a8f30b81 100644
---- a/target/riscv/cpu_vendorid.h
-+++ b/target/riscv/cpu_vendorid.h
-@@ -7,4 +7,6 @@
- #define VEYRON_V1_MIMPID        0x111
- #define VEYRON_V1_MVENDORID     0x61f
- 
-+#define NEORV32_VENDOR_ID       0xF0000001
-+
- #endif /*  TARGET_RISCV_CPU_VENDORID_H */
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index fdefe88ccd..44e706ad3f 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -40,6 +40,7 @@ riscv_system_ss.add(files(
-   'th_csr.c',
-   'time_helper.c',
-   'riscv-qmp-cmds.c',
-+  'neorv32_csr.c',
- ))
- 
- subdir('tcg')
-diff --git a/target/riscv/neorv32_csr.c b/target/riscv/neorv32_csr.c
++config NEORV32_UART
++    bool
+diff --git a/hw/char/meson.build b/hw/char/meson.build
+index a9e1dc26c0..2f5bf827a7 100644
+--- a/hw/char/meson.build
++++ b/hw/char/meson.build
+@@ -31,6 +31,7 @@ system_ss.add(when: 'CONFIG_OMAP', if_true: files('omap_uart.c'))
+ system_ss.add(when: 'CONFIG_RASPI', if_true: files('bcm2835_aux.c'))
+ system_ss.add(when: 'CONFIG_RENESAS_SCI', if_true: files('renesas_sci.c'))
+ system_ss.add(when: 'CONFIG_SIFIVE_UART', if_true: files('sifive_uart.c'))
++system_ss.add(when: 'CONFIG_NEORV32_UART', if_true: files('neorv32_uart.c'))
+ system_ss.add(when: 'CONFIG_SH_SCI', if_true: files('sh_serial.c'))
+ system_ss.add(when: 'CONFIG_STM32F2XX_USART', if_true: files('stm32f2xx_usart.c'))
+ system_ss.add(when: 'CONFIG_STM32L4X5_USART', if_true: files('stm32l4x5_usart.c'))
+diff --git a/hw/char/neorv32_uart.c b/hw/char/neorv32_uart.c
 new file mode 100644
-index 0000000000..3b0f0cab05
+index 0000000000..a21066d194
 --- /dev/null
-+++ b/target/riscv/neorv32_csr.c
-@@ -0,0 +1,40 @@
++++ b/hw/char/neorv32_uart.c
+@@ -0,0 +1,285 @@
 +/*
-+ * NEORV32-specific CSR.
++ * Neorv32-specific UART.
 + *
 + * Copyright (c) 2025 Michael Levit
 + * SPDX-License-Identifier: GPL-2.0-or-later
 + */
 +
++
 +#include "qemu/osdep.h"
-+#include "cpu.h"
-+#include "cpu_vendorid.h"
++#include "qapi/error.h"
++#include "qemu/log.h"
++#include "migration/vmstate.h"
++#include "chardev/char.h"
++#include "chardev/char-fe.h"
++#include "hw/irq.h"
++#include "hw/char/neorv32_uart.h"
++#include "hw/qdev-properties-system.h"
 +
-+#define    CSR_MXISA    (0xfc0)
++#define NEORV32_UART_IO_REGION_SIZE  (32)
 +
-+static RISCVException smode(CPURISCVState *env, int csrno)
-+{
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_neorv32_xisa(CPURISCVState *env, int csrno,
-+                                       target_ulong *val)
-+{
-+    /* We don't support any extension for now on QEMU */
-+    *val = 0x00;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static bool test_neorv32_mvendorid(RISCVCPU *cpu)
-+{
-+    return cpu->cfg.mvendorid == NEORV32_VENDOR_ID;
-+}
-+
-+const RISCVCSR neorv32_csr_list[] = {
-+    {
-+        .csrno = CSR_MXISA,
-+        .insertion_test = test_neorv32_mvendorid,
-+        .csr_ops = { "neorv32.xisa", smode, read_neorv32_xisa }
-+    },
-+    { }
++static Property neorv32_uart_properties[] = {
++    DEFINE_PROP_CHR("chardev", Neorv32UARTState, chr),
 +};
 +
++enum {
++    NEORV32_UART_CTRL = 0,  /**< offset 0: control register */
++    NEORV32_UART_DATA = 4  /**< offset 4: data register  */
++};
++
++/** UART control register bits */
++enum NEORV32_UART_CTRL_enum {
++    UART_CTRL_EN            = 0,  /* enable */
++    UART_CTRL_SIM_MODE      = 1,  /* sim override */
++    UART_CTRL_HWFC_EN       = 2,  /* RTS/CTS */
++    UART_CTRL_PRSC_LSB      = 3,  /* prescaler sel LSB */
++    UART_CTRL_PRSC_MSB      = 5,  /* prescaler sel MSB */
++    UART_CTRL_BAUD_LSB      = 6,  /* baud div LSB */
++    UART_CTRL_BAUD_MSB      = 15, /* baud div MSB */
++    UART_CTRL_RX_NEMPTY     = 16, /* RX not empty */
++    UART_CTRL_RX_FULL       = 17, /* RX full */
++    UART_CTRL_TX_EMPTY      = 18, /* TX empty */
++    UART_CTRL_TX_NFULL      = 19, /* TX not full */
++    UART_CTRL_IRQ_RX_NEMPTY = 20, /* IRQ on RX not empty */
++    UART_CTRL_IRQ_RX_FULL   = 21, /* IRQ on RX full */
++    UART_CTRL_IRQ_TX_EMPTY  = 22, /* IRQ on TX empty */
++    UART_CTRL_IRQ_TX_NFULL  = 23, /* IRQ on TX not full */
++
++    UART_CTRL_RX_OVER       = 30, /* RX overflow */
++    UART_CTRL_TX_BUSY       = 31  /* TX busy or not empty */
++};
++
++/**  bits */
++enum NEORV32_UART_DATA_enum {
++    UART_DATA_RTX_LSB = 0, /**< (r/w): UART rx/tx data, LSB */
++    UART_DATA_RTX_MSB = 7, /**< (r/w): UART rx/tx data, MSB */
++
++    UART_DATA_RX_FIFO_SIZE_LSB = 8, /**< (r/-): log2(RX FIFO size), LSB */
++    UART_DATA_RX_FIFO_SIZE_MSB = 11, /**< (r/-): log2(RX FIFO size), MSB */
++
++    UART_DATA_TX_FIFO_SIZE_LSB = 12, /**< (r/-): log2(RX FIFO size), LSB */
++    UART_DATA_TX_FIFO_SIZE_MSB = 15, /**< (r/-): log2(RX FIFO size), MSB */
++};
++/**@}*/
++
++static void neorv32_uart_update_irq(Neorv32UARTState *s)
++{
++    int cond = 0;
++    if ((s->ie & NEORV32_UART_IE_TXWM) ||
++       ((s->ie & NEORV32_UART_IE_RXWM) && s->rx_fifo_len)) {
++        cond = 1;
++    }
++    if (cond) {
++        qemu_irq_raise(s->irq);
++    } else {
++        qemu_irq_lower(s->irq);
++    }
++}
++
++static uint64_t
++neorv32_uart_read(void *opaque, hwaddr addr, unsigned int size)
++{
++  Neorv32UARTState *s = opaque;
++  unsigned char r;
++
++    switch (addr) {
++    case NEORV32_UART_CTRL:
++        if (s->rx_fifo_len) {
++            s->CTRL |= (1 << UART_CTRL_RX_NEMPTY); /* set data available */
++        } else {
++            s->CTRL &= ~(1 << UART_CTRL_RX_NEMPTY); /* clear data available */
++        }
++        /* TODO: assuming here TX is always avalable, fix it. */
++        s->CTRL |= (1 << UART_CTRL_TX_NFULL); /* set TX not full */
++
++        return s->CTRL;
++
++    case NEORV32_UART_DATA:
++        if (s->rx_fifo_len) {
++            r = s->rx_fifo[0];
++            memmove(s->rx_fifo, s->rx_fifo + 1, s->rx_fifo_len - 1);
++            s->rx_fifo_len--;
++            qemu_chr_fe_accept_input(&s->chr);
++            s->DATA = r;
++
++            neorv32_uart_update_irq(s); /* TODO: check if need to call */
++            return r;
++        }
++    }
++
++    qemu_log_mask(LOG_GUEST_ERROR, "%s: bad read: addr = 0x%x\n",
++    __func__, (int)addr);
++    return 0;
++}
++
++
++
++static void
++neorv32_uart_write(void *opaque, hwaddr addr, uint64_t val64, unsigned int size)
++{
++    Neorv32UARTState *s = opaque;
++    uint32_t value = val64;
++    unsigned char ch = value;
++
++    /* TODO: check if need to update data and control bits */
++    switch (addr) {
++    case NEORV32_UART_CTRL:
++        s->CTRL = value;
++        /* TODO: check if need to call, depending on IRQ flags */
++        /* neorv32_uart_update_irq(s); */
++        return;
++    case NEORV32_UART_DATA:
++        s->DATA = value;
++        qemu_chr_fe_write(&s->chr, &ch, 1);
++        /* neorv32_uart_update_irq(s); TODO: check if need to call */
++    return;
++    }
++
++    qemu_log_mask(LOG_GUEST_ERROR, "%s: bad write: addr = 0x%x v = 0x%x\n",
++    __func__, (int)addr, (int)value);
++}
++
++static const MemoryRegionOps neorv32_uart_ops = {
++    .read = neorv32_uart_read,
++    .write = neorv32_uart_write,
++    .endianness = DEVICE_NATIVE_ENDIAN,
++    .valid = {
++    .min_access_size = 4,
++    .max_access_size = 4
++    }
++};
++
++static void neorv32_uart_init(Object *obj)
++{
++    SysBusDevice *sbd = SYS_BUS_DEVICE(obj);
++    Neorv32UARTState *s = NEORV32_UART(obj);
++
++    memory_region_init_io(&s->mmio, OBJECT(s), &neorv32_uart_ops, s,
++    TYPE_NEORV32_UART, NEORV32_UART_IO_REGION_SIZE);
++    sysbus_init_mmio(sbd, &s->mmio);
++    sysbus_init_irq(sbd, &s->irq);
++}
++
++
++static void neorv32_uart_rx(void *opaque, const uint8_t *buf, int size)
++{
++    Neorv32UARTState *s = opaque;
++
++    /* Got a byte.  */
++    if (s->rx_fifo_len >= sizeof(s->rx_fifo)) {
++        printf("WARNING: UART dropped char.\n");
++        return;
++    }
++    s->rx_fifo[s->rx_fifo_len++] = *buf;
++
++    neorv32_uart_update_irq(s);
++}
++
++static int neorv32_uart_can_rx(void *opaque)
++{
++    Neorv32UARTState *s = opaque;
++
++    return s->rx_fifo_len < sizeof(s->rx_fifo);
++}
++
++static void neorv32_uart_event(void *opaque, QEMUChrEvent event)
++{
++}
++
++static int  neorv32_uart_be_change(void *opaque)
++{
++    Neorv32UARTState *s = opaque;
++
++    qemu_chr_fe_set_handlers(&s->chr, neorv32_uart_can_rx, neorv32_uart_rx,
++    neorv32_uart_event, neorv32_uart_be_change, s,
++    NULL, true);
++
++    return 0;
++}
++
++static void neorv32_uart_realize(DeviceState *dev, Error **errp)
++{
++    Neorv32UARTState *s = NEORV32_UART(dev);
++
++    qemu_chr_fe_set_handlers(&s->chr, neorv32_uart_can_rx, neorv32_uart_rx,
++    neorv32_uart_event, neorv32_uart_be_change, s,
++    NULL, true);
++}
++
++static const VMStateDescription vmstate_neorv32_uart = {
++    .name = TYPE_NEORV32_UART,
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++    VMSTATE_UINT8_ARRAY(rx_fifo, Neorv32UARTState,
++    NEORV32_UART_RX_FIFO_SIZE),
++    VMSTATE_UINT8(rx_fifo_len, Neorv32UARTState),
++    VMSTATE_UINT32(ie, Neorv32UARTState),
++    VMSTATE_END_OF_LIST()
++    },
++};
++
++static void neorv32_uart_reset_enter(Object *obj, ResetType type)
++{
++    Neorv32UARTState *s = NEORV32_UART(obj);
++    s->rx_fifo_len = 0;
++    s->ie = 0;
++}
++
++static void neorv32_uart_reset_hold(Object *obj, ResetType type)
++{
++    Neorv32UARTState *s = NEORV32_UART(obj);
++    qemu_irq_lower(s->irq);
++}
++
++static void neorv32_uart_class_init(ObjectClass *oc, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(oc);
++    ResettableClass *rc = RESETTABLE_CLASS(oc);
++
++    dc->realize = neorv32_uart_realize;
++    dc->vmsd = &vmstate_neorv32_uart;
++    rc->phases.enter = neorv32_uart_reset_enter;
++    rc->phases.hold = neorv32_uart_reset_hold;
++    device_class_set_props(dc, neorv32_uart_properties);
++    set_bit(DEVICE_CATEGORY_INPUT, dc->categories);
++}
++
++static const TypeInfo neorv32_uart_info = {
++    .name = TYPE_NEORV32_UART,
++    .parent = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(Neorv32UARTState),
++    .instance_init = neorv32_uart_init,
++    .class_init = neorv32_uart_class_init,
++};
++
++static void neorv32_uart_register_types(void)
++{
++    type_register_static(&neorv32_uart_info);
++}
++
++type_init(neorv32_uart_register_types)
++/*
++ * Create UART device.
++ */
++Neorv32UARTState *neorv32_uart_create(MemoryRegion *address_space, hwaddr base,
++  Chardev *chr)
++{
++    DeviceState *dev;
++    SysBusDevice *s;
++    bool succed = false;
++
++    dev = qdev_new("riscv.neorv32.uart");
++
++    qdev_prop_set_chr(dev, "chardev", chr);
++    s = SYS_BUS_DEVICE(dev);
++    succed = sysbus_realize_and_unref(s, &error_fatal);
++
++    if (succed) {
++        memory_region_add_subregion(address_space, base,
++        sysbus_mmio_get_region(s, 0));
++        return NEORV32_UART(dev);
++    } else {
++        return NULL;
++    }
++} /* neorv32_uart_create */
+diff --git a/include/hw/char/neorv32_uart.h b/include/hw/char/neorv32_uart.h
+new file mode 100644
+index 0000000000..fa33906724
+--- /dev/null
++++ b/include/hw/char/neorv32_uart.h
+@@ -0,0 +1,54 @@
++/*
++ * Neorv32-specific UART.
++ *
++ * Copyright (c) 2025 Michael Levit
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef HW_NEORV32_UART_H
++#define HW_NEORV32_UART_H
++
++#include "chardev/char-fe.h"
++#include "hw/qdev-properties.h"
++#include "hw/sysbus.h"
++#include "qom/object.h"
++
++#define TYPE_NEORV32_UART "riscv.neorv32.uart"
++OBJECT_DECLARE_SIMPLE_TYPE(Neorv32UARTState, NEORV32_UART)
++
++#define QEMU_UART_DATA_RX_FIFO_SIZE_LSB  8  /* log2 RX FIFO size LSB */
++#define QEMU_UART_DATA_RX_FIFO_SIZE_MSB  11  /* log2 RX FIFO size MSB */
++
++#define NEORV32_UART_RX_FIFO_SIZE  32 /* in HW it is 2048 + 256 = _MSB + _LSB */
++
++enum {
++    NEORV32_UART_IE_TXWM = 1, /* Transmit watermark interrupt enable */
++    NEORV32_UART_IE_RXWM = 2  /* Receive watermark interrupt enable */
++};
++
++enum {
++    NEORV32_UART_IP_TXWM = 1, /* Transmit watermark interrupt pending */
++    NEORV32_UART_IP_RXWM = 2  /* Receive watermark interrupt pending */
++};
++
++
++
++struct Neorv32UARTState {
++    /*< private >*/
++    SysBusDevice parent_obj;
++
++    /*< public >*/
++    qemu_irq irq;
++    MemoryRegion mmio;
++    CharFrontend chr;
++    uint8_t rx_fifo[NEORV32_UART_RX_FIFO_SIZE];
++    uint8_t rx_fifo_len;
++    uint32_t ie; /* interrupt enable */
++    uint32_t CTRL;
++    uint32_t DATA;
++};
++
++Neorv32UARTState *neorv32_uart_create(MemoryRegion *address_space, hwaddr base,
++    Chardev *chr);
++
++#endif /* HW_NEORV32_UART_H */
 -- 
 2.51.1
 
