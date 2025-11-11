@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEEECCCFA1A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Nov 2025 18:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A5D3CCFA18
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Nov 2025 18:33:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vItAe-0000kh-KP; Tue, 11 Nov 2025 13:32:49 -0500
+	id 1vItAm-0001DM-7k; Tue, 11 Nov 2025 13:32:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vIt8O-0006ZT-2V
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 13:30:28 -0500
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ id 1vIt8W-0006gR-4i
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 13:30:41 -0500
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vIt8L-0007vn-Ib
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 13:30:27 -0500
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3437af844afso59403a91.0
- for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 10:30:25 -0800 (PST)
+ id 1vIt8R-0007x3-Mf
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 13:30:34 -0500
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-7afc154e411so16598b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 10:30:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1762885824; x=1763490624; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1762885830; x=1763490630; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+ejXKSTaDA35niW7ha/aOEtXaqbxX1TLV58CYVMkvWw=;
- b=DDSNFO8J32BiEwM7EZRZtO57lpX5Hdy+vxHLWiKpjzk9nskdbRIS4uSM0UP2M8IzK4
- m180C6VACNcgo2pDro4OxxqBtT+a59wginDkz7k9zLqllF4sDU2GoWNYj7sywtWTsLea
- L01K0zDp3XCb+qQQHz7D/ZMJMqsDYDT+lWXDCZdCrnIngAhJrLxYx4epFzoF/MyLV9p8
- 93b7ydr9T+J4FS16j2NrlBgnwKjYNB8bAB3t5POS9jY6Zp8GmXiBQFRdFGYEtn7Jflpc
- uJrqZaZ3FrncYBOW/VM7sywlDuoJwIp+1WEqhggkmhe7QBZTjNlPXOhTuAi02K3Z0R1l
- NWgQ==
+ bh=rtwyPP7veGakivKkZ5RT11DzhVP7xIaN1NJCE3YY26c=;
+ b=OqwInSKdHm3Z0JIt5O7Lz+Y85AJW3L1QR/4HRNz5GRMRTM4Br4hQfhRduozzijquYo
+ IU1eWxVQQnTQYp9a3a80xhJb9sXFzx0sSB9JTvUzwFKx/mpDb6HoR0cMc9FQbBaHDolD
+ ei3u1t+h8jjTIvnhGuUc6P/TcKDxr2Ndk9aawUDvydv8LWLHhR2ETc/NrJ78QReWJ3bv
+ 7s/kZZ2QY3dzYo957APmEcdzQU0cincoVcrDaiRat8HxQiHv+SR6F+65+MjD4pmtYMI1
+ zFfxb4Utku4aM2Zuq60NaWLf+5Jaox7PJ7Jwls/CCVJAwQAlnGTPr/60zrIEkMOqepV6
+ Zr2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762885824; x=1763490624;
+ d=1e100.net; s=20230601; t=1762885830; x=1763490630;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=+ejXKSTaDA35niW7ha/aOEtXaqbxX1TLV58CYVMkvWw=;
- b=xEmIxFxW5rNa+NlJoiIgHQxU25OwkgZgXeldSxf++nxvTe5ZmRRZ2S7xaQ6sTwEP7z
- 7mS8rTiGnPG+dn8L8xzyRllBFUckm5S/qMETXBk+Jd4HWe/uMWCVsQQ442hATfzNGWHD
- M7BnjALnLMzEXyzbDhjFkSgTQl9DmXbB2w5P+lW/MOVSI1inJUhhk0Nwwz13GNMASYII
- SXEmcUCsbEYHHGQ+MpXMvj82+oVJ6Xw8FHaLeW+tFsoBpEyo0t5rAnPdwdU2yAG5nS/p
- P/y5wECFNQGpdcMzUcUh0DqLQV3KO36Wt/03tyuc2TR2C9ORDS9o7Ol83yjmM9b6c3QT
- i6+Q==
-X-Gm-Message-State: AOJu0YzTVn3Zgf8en9WuNavfdXzYArTJ5YZgwdoMJL9CBt4EET10b5BF
- FkoYTQhaBDqiC3JaoyxVO3yzJM8zueedU8zHBa0X1oXmZrQUN3D3CTOQ6EqHoHFpto8=
-X-Gm-Gg: ASbGnctfi0DuMafnVMYVpBAWNeu1pXWpVMWiZBD4+V+V+MKgVyuOLk8Avslsxqg80js
- v2/FkXKsf6KbldXJsUGUq9i2vXpl7BOxkYuS0h/vNLb5AHCbhwHu+EECDwQnJWgFKST2FzFyXJ1
- SzRmFhSv1YHG61NSJg3YmwDU6kCMMsGLY0lHxqjtFXAN8ZOooN6PINkXiIp9M4yo7Xrkpu7QGlU
- bIv1YZzhewXVyMQfm5G2QPlwlZiEUFts0QkkhFX8NBwt/1fid3QNDughQQa1ld6G6Pvpe+CDEq1
- LCk8VObXSasJ4BUc3Z2jDtS1ci5nVk7qaK2+B9UHbRXcyBRM7fyCz8QUQgyQCMKFNA/EF4IwdxP
- B1VjNxUHv/u/tH6DJyPlOrTbQaVOgCfJLO+wkOWIOqlq8GrT0bvPrBoJl9QQp9fDPNrAGkJ8PVN
- nH/db4L2wPAHVZMYGjYHZmUZ59pVM=
-X-Google-Smtp-Source: AGHT+IGWwLlNHCrTasvJmDQRp5/NBz/QZSmsHGa1z0Cyg+tdJ/j8zlYoTazvFnBYllTPaDDbJTS2tA==
-X-Received: by 2002:a17:90b:3512:b0:330:7a32:3290 with SMTP id
- 98e67ed59e1d1-343ddeefd91mr322726a91.37.1762885824157; 
- Tue, 11 Nov 2025 10:30:24 -0800 (PST)
+ bh=rtwyPP7veGakivKkZ5RT11DzhVP7xIaN1NJCE3YY26c=;
+ b=gMXFYHK+56j35uqqLehT9ob1e5o4l7Hc6cl0r/VLMfkxU4OdEAT6ROtcc3gaOlxZcp
+ KQa2ynhLNo6UZBXHI8APe+OctOx0KV4v5xAoarBStpdcL+FHSN8hPn7c8foa3anpU3k0
+ OhiENHpYDQukq/j7+vTexPyM7ou1L0wnaG4gt0b90ViYqYSQ0BcDtwnUQwIihUXKr6+U
+ IfvBk1KiAfizMkE3poVcwdXPf/lGdiht9TRffPPuYWNwpLzSCcL0sgOfyIp1iI7iZkfR
+ pLON2ru/YH/oSn1ug+EByjfwahNK6yBG9nTNaLwIQbz6tDthXE6g0Vtlb3Fvdgff2yss
+ cC2Q==
+X-Gm-Message-State: AOJu0Yx8cxBjgIIlP6tDK6uWe+dChMx++fMdJNvaRw8F95hqbTUVkgzZ
+ rFUEUGw5g1Ae4TMf/HCYpeJGQc67kZ4ws0UchBjK6j3r7Mhr0Zm8YuII13fHw9BTwAE=
+X-Gm-Gg: ASbGncvt6DVTwGd1fajsq5T96URJdxe9Jqnq3HSBLocbAQZ9qzcTs147XOFcQexAuGx
+ XGMu5YeLAqWd5iSvTTLKGXhQJofv0Ukt3/JRbwQeZLbthYgc+a61x53/QHwAlELYPemzqiBvOIs
+ 4VvsrO5CqTlKDe7G1eWqJX/bsTFVSxeMgdI/hLTBLmLaykm342ZndctCO9R07m0GfRpGLhjIP9S
+ ia6KdpQ1WNa45kJV0ktKVIQXD6TY4eW/ql8IuSEGLdsAD8B48l2zDPtk81yuwttNYe1E1I5FGZI
+ fvL9yxQZX3QJRSyh6kovkgj92lrNNvIMlEyY2d88kF0KobBMvcYsb2vxq16SRsgRG5auQjDJcF5
+ bwRKJUX4enJviTIqqkLEKV/eXPNa05AG/kES3+IzP/fk/2zQCoSMQDXEqHtsnxW7hgsyz1Terre
+ 8iFYZ23pVOVHOBAW7AkkcJYba+kTs=
+X-Google-Smtp-Source: AGHT+IGLxd2arqkC7GOAX6hXmU8L63K9XsVIo/gsSdPGKgIXkDrrxyjvnersYW22odnfr5V4hBrVjg==
+X-Received: by 2002:a17:90b:554d:b0:341:c964:125b with SMTP id
+ 98e67ed59e1d1-343ddec54e9mr292955a91.31.1762885830250; 
+ Tue, 11 Nov 2025 10:30:30 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([179.93.21.233])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3434c2ffdecsm15207419a91.2.2025.11.11.10.30.18
+ 98e67ed59e1d1-3434c2ffdecsm15207419a91.2.2025.11.11.10.30.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 10:30:23 -0800 (PST)
+ Tue, 11 Nov 2025 10:30:29 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH v4 4/5] hw/riscv/server_platform_ref.c: add riscv-iommu-sys
-Date: Tue, 11 Nov 2025 15:29:43 -0300
-Message-ID: <20251111182944.2895892-5-dbarboza@ventanamicro.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v4 5/5] docs: add rvsp-ref.rst
+Date: Tue, 11 Nov 2025 15:29:44 -0300
+Message-ID: <20251111182944.2895892-6-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20251111182944.2895892-1-dbarboza@ventanamicro.com>
 References: <20251111182944.2895892-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,181 +102,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add an always present IOMMU platform device for the rvsp-ref board.
-
-The IRQs being used are similar to what the 'virt' board is using: IRQs
-36 to 39, one IRQ for queue.
+Add documentation on the new experimental board rvsp-ref.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- hw/riscv/Kconfig               |  1 +
- hw/riscv/server_platform_ref.c | 78 ++++++++++++++++++++++++++++++++--
- 2 files changed, 75 insertions(+), 4 deletions(-)
+ docs/system/riscv/rvsp-ref.rst | 28 ++++++++++++++++++++++++++++
+ docs/system/target-riscv.rst   |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 docs/system/riscv/rvsp-ref.rst
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 6a5085c7a5..4f8cbfe77f 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -82,6 +82,7 @@ config SERVER_PLATFORM_REF
-     select RISCV_ACLINT
-     select RISCV_APLIC
-     select RISCV_IMSIC
-+    select RISCV_IOMMU
+diff --git a/docs/system/riscv/rvsp-ref.rst b/docs/system/riscv/rvsp-ref.rst
+new file mode 100644
+index 0000000000..3889fce413
+--- /dev/null
++++ b/docs/system/riscv/rvsp-ref.rst
+@@ -0,0 +1,28 @@
++Experimental RISC-V Server Platform Reference board (``rvsp-ref``)
++==================================================================
++
++The RISC-V Server Platform specification `spec`_ defines a standardized
++set of hardware and software capabilities that portable system software,
++such as OS and hypervisors, can rely on being present in a RISC-V server
++platform. This machine aims to emulate this specification, providing
++an environment for firmware/OS development and testing.
++
++The main features included in rvsp-ref are:
++
++*  a new CPU type rvsp-ref CPU for server platform compliance
++* AIA
++* PCIe AHCI
++* PCIe NIC
++* No virtio mmio bus
++* No fw_cfg device
++* No ACPI table
++* Minimal device tree nodes
++
++The board is being provisioned as *experimental* because QEMU isn't
++100% compliant with the specification at this moment - we do not have
++support for the mandatory 'sdext' extension. The existence of the board
++is beneficial to the development of the ecossystem around the specification,
++so we're choosing the make the board available even in an incomplete state.
++When 'sdext' is implemented we'll remove the 'experimental' tag from it.
++
++.. _spec: https://github.com/riscv-non-isa/riscv-server-platform
+diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+index 89b2cb732c..2ed337c8cf 100644
+--- a/docs/system/target-riscv.rst
++++ b/docs/system/target-riscv.rst
+@@ -72,6 +72,7 @@ undocumented; you can get a complete list by running
+    riscv/sifive_u
+    riscv/virt
+    riscv/xiangshan-kunminghu
++   riscv/rvsp-ref
  
- config SHAKTI_C
-     bool
-diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
-index ef2891a9d7..dc6caf72a6 100644
---- a/hw/riscv/server_platform_ref.c
-+++ b/hw/riscv/server_platform_ref.c
-@@ -31,6 +31,8 @@
- #include "hw/riscv/riscv_hart.h"
- #include "hw/riscv/boot.h"
- #include "hw/riscv/numa.h"
-+#include "hw/riscv/iommu.h"
-+#include "hw/riscv/riscv-iommu-bits.h"
- #include "hw/intc/riscv_aclint.h"
- #include "hw/intc/riscv_aplic.h"
- #include "hw/intc/riscv_imsic.h"
-@@ -94,6 +96,7 @@ enum {
-     RVSP_MROM,
-     RVSP_RESET_SYSCON,
-     RVSP_RTC,
-+    RVSP_IOMMU_SYS,
-     RVSP_ACLINT,
-     RVSP_APLIC_M,
-     RVSP_APLIC_S,
-@@ -112,6 +115,7 @@ enum {
-     RVSP_UART0_IRQ = 10,
-     RVSP_RTC_IRQ = 11,
-     RVSP_PCIE_IRQ = 0x20, /* 32 to 35 */
-+    IOMMU_SYS_IRQ = 0x24 /* 36 to 39 */
- };
- 
- /*
-@@ -141,6 +145,7 @@ static const MemMapEntry rvsp_ref_memmap[] = {
-     [RVSP_MROM] =           {     0x1000,        0xf000 },
-     [RVSP_RESET_SYSCON] =   {   0x100000,        0x1000 },
-     [RVSP_RTC] =            {   0x101000,        0x1000 },
-+    [RVSP_IOMMU_SYS] =      {   0x102000,        0x1000 },
-     [RVSP_ACLINT] =         {  0x2000000,       0x10000 },
-     [RVSP_PCIE_PIO] =       {  0x3000000,       0x10000 },
-     [RVSP_APLIC_M] =        {  0xc000000, APLIC_SIZE(RVSP_CPUS_MAX) },
-@@ -638,9 +643,51 @@ static void create_fdt_sockets(RVSPMachineState *s, const MemMapEntry *memmap,
-     riscv_socket_fdt_write_distance_matrix(ms);
- }
- 
-+static void create_fdt_iommu_sys(RVSPMachineState *s, uint32_t irq_chip,
-+                                 uint32_t msi_phandle,
-+                                 uint32_t *iommu_sys_phandle)
-+{
-+    const char comp[] = "riscv,iommu";
-+    void *fdt = MACHINE(s)->fdt;
-+    uint32_t iommu_phandle;
-+    g_autofree char *iommu_node = NULL;
-+    hwaddr addr = s->memmap[RVSP_IOMMU_SYS].base;
-+    hwaddr size = s->memmap[RVSP_IOMMU_SYS].size;
-+    uint32_t iommu_irq_map[RISCV_IOMMU_INTR_COUNT] = {
-+        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_CQ,
-+        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_FQ,
-+        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_PM,
-+        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_PQ,
-+    };
-+
-+    iommu_node = g_strdup_printf("/soc/iommu@%"HWADDR_PRIx,
-+                                 s->memmap[RVSP_IOMMU_SYS].base);
-+    iommu_phandle = qemu_fdt_alloc_phandle(fdt);
-+    qemu_fdt_add_subnode(fdt, iommu_node);
-+
-+    qemu_fdt_setprop(fdt, iommu_node, "compatible", comp, sizeof(comp));
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
-+
-+    qemu_fdt_setprop_cells(fdt, iommu_node, "reg",
-+                           addr >> 32, addr, size >> 32, size);
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip);
-+
-+    qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
-+        iommu_irq_map[0], FDT_IRQ_TYPE_EDGE_LOW,
-+        iommu_irq_map[1], FDT_IRQ_TYPE_EDGE_LOW,
-+        iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
-+        iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
-+
-+    qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
-+
-+    *iommu_sys_phandle = iommu_phandle;
-+}
-+
- static void create_fdt_pcie(RVSPMachineState *s, const MemMapEntry *memmap,
-                             uint32_t irq_pcie_phandle,
--                            uint32_t msi_pcie_phandle)
-+                            uint32_t msi_pcie_phandle,
-+                            uint32_t iommu_sys_phandle)
- {
-     g_autofree char *name = NULL;
-     MachineState *ms = MACHINE(s);
-@@ -675,6 +722,10 @@ static void create_fdt_pcie(RVSPMachineState *s, const MemMapEntry *memmap,
-            memmap[RVSP_PCIE_MMIO_HIGH].size);
- 
-     create_pcie_irq_map(s, ms->fdt, name, irq_pcie_phandle);
-+
-+    qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
-+                           0, iommu_sys_phandle, 0, 0, 0,
-+                           iommu_sys_phandle, 0, 0xffff);
- }
- 
- static void create_fdt_reset(RVSPMachineState *s, const MemMapEntry *memmap,
-@@ -768,12 +819,16 @@ static void create_fdt_flash(RVSPMachineState *s, const MemMapEntry *memmap)
- static void finalize_fdt(RVSPMachineState *s)
- {
-     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
--    uint32_t irq_pcie_phandle = 1;
-+    uint32_t irq_pcie_phandle = 1, iommu_sys_phandle;
- 
-     create_fdt_sockets(s, rvsp_ref_memmap, &phandle, &irq_mmio_phandle,
-                        &irq_pcie_phandle, &msi_pcie_phandle);
- 
--    create_fdt_pcie(s, rvsp_ref_memmap, irq_pcie_phandle, msi_pcie_phandle);
-+    create_fdt_iommu_sys(s, irq_mmio_phandle, msi_pcie_phandle,
-+                         &iommu_sys_phandle);
-+
-+    create_fdt_pcie(s, rvsp_ref_memmap, irq_pcie_phandle,
-+                    msi_pcie_phandle, iommu_sys_phandle);
- 
-     create_fdt_reset(s, rvsp_ref_memmap, &phandle);
- 
-@@ -1078,7 +1133,7 @@ static void rvsp_ref_machine_init(MachineState *machine)
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-     MemoryRegion *reset_syscon_io = g_new(MemoryRegion, 1);
--    DeviceState *mmio_irqchip, *pcie_irqchip;
-+    DeviceState *mmio_irqchip, *pcie_irqchip, *iommu_sys;
-     int i, base_hartid, hart_count;
-     int socket_count = riscv_socket_count(machine);
- 
-@@ -1196,6 +1251,21 @@ static void rvsp_ref_machine_init(MachineState *machine)
-         create_fdt(s, memmap);
-     }
- 
-+    iommu_sys = qdev_new(TYPE_RISCV_IOMMU_SYS);
-+    object_property_set_uint(OBJECT(iommu_sys), "addr",
-+                             s->memmap[RVSP_IOMMU_SYS].base,
-+                             &error_fatal);
-+
-+    object_property_set_uint(OBJECT(iommu_sys), "base-irq",
-+                             IOMMU_SYS_IRQ,
-+                             &error_fatal);
-+
-+    object_property_set_link(OBJECT(iommu_sys), "irqchip",
-+                             OBJECT(mmio_irqchip),
-+                             &error_fatal);
-+
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(iommu_sys), &error_fatal);
-+
-     s->machine_done.notify = rvsp_ref_machine_done;
-     qemu_add_machine_init_done_notifier(&s->machine_done);
- }
+ RISC-V CPU firmware
+ -------------------
 -- 
 2.51.1
 
