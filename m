@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C20EDCCF9E3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Nov 2025 11:48:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CB45CCFA1A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Nov 2025 11:48:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vImrB-0006RY-V8; Tue, 11 Nov 2025 06:48:17 -0500
+	id 1vImrD-0006UY-Fp; Tue, 11 Nov 2025 06:48:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vImqH-0004d7-KQ
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 06:47:22 -0500
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ id 1vImqL-0004jH-I9
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 06:47:26 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vImqD-0004NA-Uu
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 06:47:21 -0500
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2953ad5517dso41793055ad.0
- for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 03:47:10 -0800 (PST)
+ id 1vImqJ-0004OO-2E
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 06:47:25 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-29586626fbeso36941585ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 03:47:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1762861629; x=1763466429; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xVSefwdylmHt/m8ehGWs07UoxaxH3X0P/5IAlbElPkA=;
- b=Xxta+nb/9qrg+X2N0aryAycawGL2PhZzoKWWeND47n2e62WrdG+YTgJHUVXD/smXe2
- LYBOOD3maFnGrPv0tqwmOG/lVogsOLWkE8QS2/rN8FbSUNSpT/CEXpZdps6nVwP6pFSr
- eJPin2tAV+eeEHGIzittm4JHhgs0LNIOxcf20zgcyqXqtUHjAWREFNcjXf51JT2FHcMh
- K92uIgln8v7X22uT4ontM8iHR24n22iafxJBpckZzGJyeDN53nwuJXKVdeolO0YPZIDI
- I38XiXqxgStc0AX/rBrzd+h8kSvBxcC64rsrOkZ017RB6pyhvImR7W1NGz1SwPaZbLgB
- GQZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762861629; x=1763466429;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=ventanamicro.com; s=google; t=1762861641; x=1763466441; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xVSefwdylmHt/m8ehGWs07UoxaxH3X0P/5IAlbElPkA=;
- b=MB5dt+jpCopVsm1FIh+14CSAtIroYMGXM0xFQkOE4K8H6KKKBrWcunqAT8q2Zx4vvs
- 6y7HHNkk0S+e54764M9OC5nd8QmIQbpZG+Juh/C4gWrkYQOJfJwE35cMREe2tga3A3os
- P8WPDDEDrgTvu/4yDB7xOPd4bgW0pncO+jW1t/Dux/r1h70ouoH5p4YZ03fE6RDU8Trj
- G0Rb9t7V1TT+TvTtwMwCZmSTN0kw65CGd4jq+zFQloGxaztfWS1Iny8oPPO0KlWeJ3kZ
- hEMSymO3pyykOWGrBVCfEB0WRupjayN0/zr/zQ2TzV35OF3aGp7hZGF2DYHMH4ROejDZ
- Qo5A==
-X-Gm-Message-State: AOJu0YxuKEOKv7/YZlkJsxlqtwG60OsAfg5uDBB+kYc3lf5Hq+MaiyIl
- nNsrqRUjIFB3Byh+8lFAdBx5VxqtUTUcBXnfHpKsuPzcDQGMP6TS/eRcAJ4GDJ0c1ZA=
-X-Gm-Gg: ASbGncv8PsM04E5XWZhBpITaTrVjtJ3qoZriLneXGLGjEnAt+7LeHi7QspRVaUKJ3/J
- g96MH9/XDMn1V/JzDpQKjgpyqqZ+1hUKK17pOdm562+O4+Wpgm95xa2tNXJWp262/5T1zXFDLX7
- y5Pmc8SAdma8/ITXL4aAbC1zJznlWWWZQK0GfFBvLnNLsX66v5WsduXpxu2I6RLx+ehzvFQMQ6h
- rCuARutMLD9n88omkagBYa+xVkarzmU0f6qzXu8olIvnLmgJtzh/s0i14FZoIXc/avixmbJbGV5
- CTeDASqL0m3UTnLBKacEise0igeR0VOm1Dy0bAftBxK5ja/r8sbmGgIH60bPktUHHNLkMO0YvQQ
- hGCqqM9imiEzb9M5FN0hRZfg1aFdyO2FIZ9+dQ7TpJG+v8YHcBfogJ7gsel4Yvw0SJF3aZU03gS
- wd6vaWdQmTupobSG1eN8zI+zFS22U=
-X-Google-Smtp-Source: AGHT+IFgow+W0V/VHh9HrzfmJaiZ3oV9k2iUXsy+7kZSHMDHg7znSvR6NSJgigYnmTjUj28yIvb5Ag==
-X-Received: by 2002:a17:903:40c9:b0:297:d6c1:26e with SMTP id
- d9443c01a7336-297e5406088mr139598465ad.6.1762861629017; 
- Tue, 11 Nov 2025 03:47:09 -0800 (PST)
+ bh=OnNgxDvECjfofIwXpwzJzkhqPD4xUi0O1E23cP4lx4s=;
+ b=hBkxuIP4H4jPIytE6XWUzUGzdRbyJNnFSAksFcAe/RNlyIU4G0e2qbfbBAcq2jHErU
+ 1G9iz2eyZrh0+PunzXzIiehTYSVdoKD/e7ml5RSSAzcH+wLqQZZYV/NZLRNYkMKGc3XU
+ nqSczV7BT+GcYlZmOjGXtYDIByi6uab2PRYqVhL4vkJai7C0gMHNyY698WXFT10kGGIB
+ EyBXUk4wvunNuQj7uRgw0PoWhdOM4hnOgyNdXLyHfVINIjIyKTNYp0bwUC0WX3J2vL2L
+ pRUQczoxVCJh8wjmhzu8iOpx50JsL3uZ06r5ItwZJsEHO1Vg7MgKkIH8bAXjJV18gtU+
+ mnTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762861641; x=1763466441;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=OnNgxDvECjfofIwXpwzJzkhqPD4xUi0O1E23cP4lx4s=;
+ b=jal61WxpB9KniQlPKOmgj4GWb1K3pn+8spUP/67OrbRq5dpyvcpglXAW+vkjSCQcHQ
+ xZhjCwtuq6c5y6XOTozFrwO+ChdtgnzhOwqmr2v+yCG6gsxVs+5Q0othtCcw1cJ0m/nW
+ hWMJV9i9y7lezNWN+cIhv6XzsILgqtjANQ4c1RXZlI4kzoLxx/nPWhhJglu65w+dp5h6
+ GNwqXq+vu+tWp1UT6M6RBaZ0Xfx6VRinFsw7jWIiztgVnbeY6r9bWA/vZCooy/EJ3nb5
+ YOdFwH0dSZek1oyl81MtHND5rxf2rWlmODyy1beDxqN6LIPtSGbJtathU0NgczAhtjHR
+ Cypg==
+X-Gm-Message-State: AOJu0YxO/4UnPWcu4M7qyacAmXYZ/XpZKLZn16DA64Pqi8fTx4TdFXJ2
+ Q8cV+NhersBD52wMoHYi7oyTASA3+Vm8f1RtWAAWY867uoPsD/KKwK8IzDuaLO/PWac=
+X-Gm-Gg: ASbGncs7r7VYtQp1WSVA6qDVoz275ZjTKlyFkp5yFF0rUpPFP6luWIrIJeIqh/0mD7W
+ +dQrJlLKqpKlrMGtkPvADvggBrrUaBJ1Oxq39yWCxGAAXnZR7KgMCFPTLwfesLErIm9aCBMlvLB
+ bP4GZCs19udGkvnRATN6pVo/zSmcFgDuUBCXWbqTIS8Ee4y3MUjh7h1SsGy1P8hGr3PurfoUYuA
+ Geb0fZ7RTgASdRsGeScBFZGkK1m38Wd7C60cAzVouAuKuhzakJJet7bILUK6y0mz3HGxZpgsRv0
+ FwP3IUfRgBAQe/PfXSE5433PVQccLFzRDuJdf3Or2o2rz3oqrzMq7zRXMoQhF02afN+c5gMxgw5
+ djqA8qq37Sq61qcR0+a+Bzx0UoUmJXg2tJA8SNac39ErTDwXx6RzDf/SMjdfpyhoEisTWab/wJq
+ HtuY3ysP1/19BkM1z3VB8MqtsbgHE=
+X-Google-Smtp-Source: AGHT+IHVuK/yIbMSqMmgxWCK07cYDcrrA7apki/JNfMucSN5RSsb6RoYrXE4uwvfJiblkhmsa+g/kA==
+X-Received: by 2002:a17:903:244a:b0:295:59ef:809e with SMTP id
+ d9443c01a7336-297e564e380mr154915745ad.24.1762861641429; 
+ Tue, 11 Nov 2025 03:47:21 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([179.93.21.233])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29651c747d1sm177533125ad.63.2025.11.11.03.47.03
+ d9443c01a7336-29651c747d1sm177533125ad.63.2025.11.11.03.47.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 03:47:08 -0800 (PST)
+ Tue, 11 Nov 2025 03:47:21 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 00/17] hw/riscv, target/riscv: initial e-trace support
-Date: Tue, 11 Nov 2025 08:46:39 -0300
-Message-ID: <20251111114656.2285048-1-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 02/17] hw/riscv: Trace RAM Sink initial impl
+Date: Tue, 11 Nov 2025 08:46:41 -0300
+Message-ID: <20251111114656.2285048-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20251111114656.2285048-1-dbarboza@ventanamicro.com>
+References: <20251111114656.2285048-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,84 +102,412 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+Following the effort to implement the basic support for Efficient Trace
+(e-trace) in QEMU we'll add a Trace RAM Sink implementation.
 
-In this v2 we're addressing a review comment from Konstantin in patch
-14. We're also doing changes in the FDT (patch 5) to keep up with the
-changes that the kernel support is making [1].
+Similar to the Trace Encoder, this is inspired in both the Efficient
+Trace for RISC-V [1] and  RISC-V Trace Control Interface Specification
+[2] specs. It implements a minimal set of features to get started - only
+SMEM will be supported for now.
 
-I've been thinking about adding partial support for N-trace in this work
-as well. From what I can tell the difference between N-trace and E-trace
-are the encoding of the packages, with everything else staying the same.
-In this case we could add hooks in the code to be ready to support
-N-trace encoding in the future.
+We'll implement the RAM sink logic in the next patches, although most of
+the work will be done by the trace encoder.
 
-No other changes made. Patches based on current master.
+[1] https://github.com/riscv-non-isa/riscv-trace-spec/releases/download/v2.0-20250616/riscv-trace-spec-asciidoc.pdf
+[2] https://github.com/riscv-non-isa/tg-nexus-trace/releases/download/1.0_Ratified/RISC-V-Trace-Control-Interface.pdf
 
-Changes in v2:
-- patch 5:
-  - changed tr_compat from "ventana,veyron-v2-trace" to "qemu,trace-component"
-  - renamed trace encoder prop handler "cpu" to "cpus"
-- patch 14:
-  - removed updiscon generation in gen_jal()
-- v1 link: https://lore.kernel.org/qemu-riscv/20251002112335.2374517-1-dbarboza@ventanamicro.com/
-
-
-[1] https://lore.kernel.org/linux-riscv/20251101154245.162492-1-apatel@ventanamicro.com/
-
-Daniel Henrique Barboza (16):
-  hw/riscv: Trace Encoder initial impl
-  hw/riscv: Trace RAM Sink initial impl
-  hw/riscv/trace-encoder: add trace start/stop logic
-  hw/riscv/virt.c: add trace encoders and trace ram sinks
-  hw/riscv: add e-trace message helpers
-  target/riscv: add initial trace instrumentation
-  hw/riscv/trace-encoder: write e-trace packets to RAM sink
-  test/qtest: add riscv-trace-test.c
-  hw/riscv/rv-trace-messages.c: add encoded trap message
-  hw/riscv, target/riscv: send trace trap messages
-  target/riscv, hw/riscv: send trace ppccd packets
-  hw/riscv/trace: add format2 msg helper
-  hw/riscv, target/riscv: send resync updiscon trace packets
-  hw/riscv/rv-trace-messages: add format 1 msgs with branch info
-  hw/riscv/trace-encoder: send branches info
-  hw/riscv/trace: update branch bit in sync messages
-
-Mayuresh Chitale (1):
-  hw/riscv/virt.c add trace encoder and ramsink fdt nodes
-
- hw/riscv/Kconfig                              |   5 +
- hw/riscv/meson.build                          |   2 +
- hw/riscv/rv-trace-messages.c                  | 373 +++++++++++
- hw/riscv/rv-trace-messages.h                  |  40 ++
- hw/riscv/trace-encoder.c                      | 609 ++++++++++++++++++
- hw/riscv/trace-encoder.h                      |  62 ++
- hw/riscv/trace-events                         |   9 +
- hw/riscv/trace-ram-sink.c                     | 263 ++++++++
- hw/riscv/trace-ram-sink.h                     |  83 +++
- hw/riscv/virt.c                               | 135 ++++
- include/hw/riscv/virt.h                       |   2 +
- target/riscv/cpu.h                            |  11 +
- target/riscv/cpu_helper.c                     |  26 +-
- target/riscv/helper.h                         |   6 +
- .../riscv/insn_trans/trans_privileged.c.inc   |  11 +
- target/riscv/insn_trans/trans_rvi.c.inc       |  15 +
- target/riscv/meson.build                      |   3 +-
- target/riscv/tcg/tcg-cpu.c                    |   5 +
- target/riscv/trace_helper.c                   |  62 ++
- target/riscv/translate.c                      |  19 +
- tests/qtest/meson.build                       |   2 +-
- tests/qtest/riscv-trace-test.c                | 120 ++++
- 22 files changed, 1860 insertions(+), 3 deletions(-)
- create mode 100644 hw/riscv/rv-trace-messages.c
- create mode 100644 hw/riscv/rv-trace-messages.h
- create mode 100644 hw/riscv/trace-encoder.c
- create mode 100644 hw/riscv/trace-encoder.h
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ hw/riscv/meson.build      |   2 +-
+ hw/riscv/trace-events     |   4 +
+ hw/riscv/trace-ram-sink.c | 263 ++++++++++++++++++++++++++++++++++++++
+ hw/riscv/trace-ram-sink.h |  83 ++++++++++++
+ 4 files changed, 351 insertions(+), 1 deletion(-)
  create mode 100644 hw/riscv/trace-ram-sink.c
  create mode 100644 hw/riscv/trace-ram-sink.h
- create mode 100644 target/riscv/trace_helper.c
- create mode 100644 tests/qtest/riscv-trace-test.c
 
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index b4a9988a62..2aadbe1e50 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -14,6 +14,6 @@ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
+ 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
+ riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
+ riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
+-riscv_ss.add(when: 'CONFIG_RISCV_TRACE', if_true: files('trace-encoder.c'))
++riscv_ss.add(when: 'CONFIG_RISCV_TRACE', if_true: files('trace-encoder.c', 'trace-ram-sink.c'))
+ 
+ hw_arch += {'riscv': riscv_ss}
+diff --git a/hw/riscv/trace-events b/hw/riscv/trace-events
+index 0cbf6ffcb6..14e333fd9e 100644
+--- a/hw/riscv/trace-events
++++ b/hw/riscv/trace-events
+@@ -28,3 +28,7 @@ riscv_iommu_hpm_evt_write(uint32_t ctr_idx, uint32_t ovf, uint64_t val) "ctr_idx
+ # trace-encoder.c
+ trencoder_read_error(uint64_t addr) "addr 0x%" PRIx64
+ trencoder_write_error(uint64_t addr, uint64_t value) "addr 0x%" PRIx64 " value 0x%" PRIx64
++
++# trace-ram-sink.c
++tr_ramsink_read_error(uint64_t addr) "addr 0x%" PRIx64
++tr_ramsink_write_error(uint64_t addr, uint64_t value) "addr 0x%" PRIx64 " value 0x%" PRIx64
+diff --git a/hw/riscv/trace-ram-sink.c b/hw/riscv/trace-ram-sink.c
+new file mode 100644
+index 0000000000..e00de80c04
+--- /dev/null
++++ b/hw/riscv/trace-ram-sink.c
+@@ -0,0 +1,263 @@
++/*
++ * Emulation of a RISC-V Trace RAM Sink
++ *
++ * Copyright (C) 2025 Ventana Micro Systems Inc.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++
++#include "trace-ram-sink.h"
++#include "hw/irq.h"
++#include "hw/qdev-properties.h"
++#include "migration/vmstate.h"
++#include "qemu/bitops.h"
++#include "qemu/log.h"
++#include "qemu/module.h"
++#include "qapi/error.h"
++#include "trace.h"
++#include "system/device_tree.h"
++#include "hw/sysbus.h"
++#include "hw/register.h"
++
++#define R_TR_RAM_CONTROL_RSVP_BITS (MAKE_64BIT_MASK(32, 32) | \
++                                    R_TR_RAM_CONTROL_RSVP1_MASK | \
++                                    R_TR_RAM_CONTROL_RSVP2_MASK | \
++                                    R_TR_RAM_CONTROL_RSVP3_MASK | \
++                                    R_TR_RAM_CONTROL_RSVP4_MASK)
++
++/* trRamEmpty is the only RO field and reset value */
++#define R_TR_RAM_CONTROL_RESET R_TR_RAM_CONTROL_EMPTY_MASK
++#define R_TR_RAM_CONTROL_RO_BITS R_TR_RAM_CONTROL_EMPTY_MASK
++
++#define R_TR_RAM_IMPL_RSVP_BITS (MAKE_64BIT_MASK(32, 32) | \
++                                 R_TR_RAM_IMPL_RSVP1_MASK)
++
++#define R_TR_RAM_IMPL_RO_BITS (R_TR_RAM_IMPL_VER_MAJOR_MASK | \
++                               R_TR_RAM_IMPL_VER_MINOR_MASK | \
++                               R_TR_RAM_IMPL_COMP_TYPE_MASK | \
++                               R_TR_RAM_IMPL_HAS_SRAM_MASK | \
++                               R_TR_RAM_IMPL_HAS_SMEM_MASK)
++
++#define R_TR_RAM_IMPL_RESET (BIT(0) | 0x9 << 8)
++
++static RegisterAccessInfo tr_ramsink_regs_info[] = {
++    {   .name = "TR_RAM_CONTROL", .addr = A_TR_RAM_CONTROL,
++        .rsvd = R_TR_RAM_CONTROL_RSVP_BITS,
++        .reset = R_TR_RAM_CONTROL_RESET,
++        .ro = R_TR_RAM_CONTROL_RO_BITS,
++    },
++    {   .name = "TR_RAM_IMPL", .addr = A_TR_RAM_IMPL,
++        .rsvd = R_TR_RAM_IMPL_RSVP_BITS,
++        .reset = R_TR_RAM_IMPL_RESET,
++        .ro = R_TR_RAM_IMPL_RO_BITS,
++    },
++    {   .name = "TR_RAM_START_LOW", .addr = A_TR_RAM_START_LOW,
++    },
++    {   .name = "TR_RAM_START_HIGH", .addr = A_TR_RAM_START_HIGH,
++    },
++    {   .name = "TR_RAM_LIMIT_LOW", .addr = A_TR_RAM_LIMIT_LOW,
++    },
++    {   .name = "TR_RAM_LIMIT_HIGH", .addr = A_TR_RAM_LIMIT_HIGH,
++    },
++    {   .name = "TR_RAM_WP_LOW", .addr = A_TR_RAM_WP_LOW,
++    },
++    {   .name = "TR_RAM_WP_HIGH", .addr = A_TR_RAM_WP_HIGH,
++    },
++};
++
++static uint64_t tr_ramsink_regread(void *opaque, hwaddr addr, unsigned size)
++{
++    TraceRamSink *tram = TRACE_RAM_SINK(opaque);
++    RegisterInfo *r = &tram->regs_info[addr / 4];
++
++    if (!r->data) {
++        trace_tr_ramsink_read_error(addr);
++        return 0;
++    }
++
++    return register_read(r, ~0, NULL, false);
++}
++
++static void tr_ramsink_regwrite(void *opaque, hwaddr addr,
++                            uint64_t value, unsigned size)
++{
++    TraceRamSink *tram = TRACE_RAM_SINK(opaque);
++    RegisterInfo *r = &tram->regs_info[addr / 4];
++
++    if (!r->data) {
++        trace_tr_ramsink_write_error(addr, value);
++        return;
++    }
++
++    register_write(r, value, ~0, NULL, false);
++}
++
++static const MemoryRegionOps tr_ramsink_regops = {
++    .read = tr_ramsink_regread,
++    .write = tr_ramsink_regwrite,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .valid = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++};
++
++static uint64_t tr_ramsink_msgread(void *opaque, hwaddr addr, unsigned size)
++{
++    TraceRamSink *tram = TRACE_RAM_SINK(opaque);
++
++    switch (size) {
++    case 1:
++        return tram->msgs[addr];
++    case 2:
++        return (uint16_t)tram->msgs[addr];
++    case 4:
++        return (uint32_t)tram->msgs[addr];
++    default:
++        g_assert_not_reached();
++    }
++}
++
++static void tr_ramsink_msgwrite(void *opaque, hwaddr addr,
++                                uint64_t value, unsigned size)
++{
++    TraceRamSink *tram = TRACE_RAM_SINK(opaque);
++
++    switch (size) {
++    case 1:
++        tram->msgs[addr] = value;
++        break;
++    case 2:
++        tram->msgs[addr] = extract16(value, 0, 8);
++        tram->msgs[addr + 1] = extract16(value, 8, 8);
++        break;
++    case 4:
++        tram->msgs[addr] = extract32(value, 0, 8);
++        tram->msgs[addr + 1] = extract32(value, 8, 8);
++        tram->msgs[addr + 2] = extract32(value, 16, 8);
++        tram->msgs[addr + 3] = extract32(value, 24, 8);
++        break;
++    default:
++        g_assert_not_reached();
++    }
++}
++
++static const MemoryRegionOps tr_ramsink_smemops = {
++    .read = tr_ramsink_msgread,
++    .write = tr_ramsink_msgwrite,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .valid = {
++        .min_access_size = 1,
++        .max_access_size = 4,
++    },
++};
++
++static void tr_ramsink_setup_regs(TraceRamSink *tram)
++{
++    hwaddr ramlimit = tram->smemaddr + tram->smemsize;
++
++    ARRAY_FIELD_DP32(tram->regs, TR_RAM_START_LOW, ADDR,
++                     extract64(tram->smemaddr, 2, 30));
++    ARRAY_FIELD_DP32(tram->regs, TR_RAM_START_HIGH, ADDR,
++                     extract64(tram->smemaddr, 32, 32));
++
++    ARRAY_FIELD_DP32(tram->regs, TR_RAM_WP_LOW, ADDR,
++                     extract64(tram->smemaddr, 2, 30));
++    ARRAY_FIELD_DP32(tram->regs, TR_RAM_WP_HIGH, ADDR,
++                     extract64(tram->smemaddr, 32, 32));
++
++    ARRAY_FIELD_DP32(tram->regs, TR_RAM_LIMIT_LOW, ADDR,
++                     extract64(ramlimit, 2, 30));
++    ARRAY_FIELD_DP32(tram->regs, TR_RAM_LIMIT_HIGH, ADDR,
++                     extract64(ramlimit, 32, 32));
++}
++
++static void tr_ramsink_reset(DeviceState *dev)
++{
++    TraceRamSink *tram = TRACE_RAM_SINK(dev);
++
++    for (int i = 0; i < ARRAY_SIZE(tram->regs_info); i++) {
++        register_reset(&tram->regs_info[i]);
++    }
++
++    tr_ramsink_setup_regs(tram);
++}
++
++static void tr_ramsink_realize(DeviceState *dev, Error **errp)
++{
++    TraceRamSink *tram = TRACE_RAM_SINK(dev);
++
++    memory_region_init_io(&tram->reg_mem, OBJECT(dev),
++                          &tr_ramsink_regops, tram,
++                          "trace-ram-sink-regs",
++                          tram->reg_mem_size);
++    sysbus_init_mmio(SYS_BUS_DEVICE(tram), &tram->reg_mem);
++    sysbus_mmio_map(SYS_BUS_DEVICE(tram), 0, tram->baseaddr);
++
++    g_assert(tram->smemsize > 0);
++    tram->msgs = g_malloc0(tram->smemsize);
++
++    memory_region_init_io(&tram->smem, OBJECT(dev),
++                          &tr_ramsink_smemops, tram,
++                          "trace-ram-sink-smem",
++                          tram->smemsize);
++    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &tram->smem);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 1, tram->smemaddr);
++
++    /* RegisterInfo init taken from hw/dma/xlnx-zdma.c */
++    for (int i = 0; i < ARRAY_SIZE(tr_ramsink_regs_info); i++) {
++        uint32_t reg_idx = tr_ramsink_regs_info[i].addr / 4;
++        RegisterInfo *r = &tram->regs_info[reg_idx];
++
++        *r = (RegisterInfo) {
++            .data = (uint8_t *)&tram->regs[reg_idx],
++            .data_size = sizeof(uint32_t),
++            .access = &tr_ramsink_regs_info[i],
++            .opaque = tram,
++        };
++    }
++}
++
++static const Property tr_ramsink_props[] = {
++    DEFINE_PROP_UINT64("baseaddr", TraceRamSink, baseaddr, 0),
++    DEFINE_PROP_UINT64("smemaddr", TraceRamSink, smemaddr, 0),
++    DEFINE_PROP_UINT32("smemsize", TraceRamSink, smemsize, 0),
++    DEFINE_PROP_UINT32("reg-mem-size", TraceRamSink,
++                       reg_mem_size, TR_DEV_REGMAP_SIZE),
++};
++
++static const VMStateDescription vmstate_tr_ramsink = {
++    .name = TYPE_TRACE_RAM_SINK,
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (const VMStateField[]) {
++        VMSTATE_UINT32_ARRAY(regs, TraceRamSink, TRACE_R_MAX),
++        VMSTATE_END_OF_LIST(),
++    }
++};
++
++static void tr_ramsink_class_init(ObjectClass *klass, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    device_class_set_legacy_reset(dc, tr_ramsink_reset);
++    device_class_set_props(dc, tr_ramsink_props);
++    dc->realize = tr_ramsink_realize;
++    dc->vmsd = &vmstate_tr_ramsink;
++}
++
++static const TypeInfo tr_ramsink_info = {
++    .name          = TYPE_TRACE_RAM_SINK,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(TraceRamSink),
++    .class_init    = tr_ramsink_class_init,
++};
++
++static void tr_ramsink_register_types(void)
++{
++    type_register_static(&tr_ramsink_info);
++}
++
++type_init(tr_ramsink_register_types)
+diff --git a/hw/riscv/trace-ram-sink.h b/hw/riscv/trace-ram-sink.h
+new file mode 100644
+index 0000000000..cd55145669
+--- /dev/null
++++ b/hw/riscv/trace-ram-sink.h
+@@ -0,0 +1,83 @@
++/*
++ * Emulation of a RISC-V Trace RAM Sink
++ *
++ * Copyright (C) 2025 Ventana Micro Systems Inc.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef RISCV_TRACE_RAM_SINK_H
++#define RISCV_TRACE_RAM_SINK_H
++
++#include "hw/register.h"
++#include "hw/sysbus.h"
++#include "system/dma.h"
++#include "qom/object.h"
++
++#define TRACE_R_MAX (0xFFF / 4)
++#define TR_DEV_REGMAP_SIZE 0x1000
++
++/*
++ * The Trace Encoder will read/write those regs so put their
++ * declaration in this header.
++ */
++REG32(TR_RAM_CONTROL, 0x0)
++    FIELD(TR_RAM_CONTROL, ACTIVE, 0, 1)
++    FIELD(TR_RAM_CONTROL, ENABLE, 1, 1)
++    FIELD(TR_RAM_CONTROL, EMPTY, 3, 1)
++    FIELD(TR_RAM_CONTROL, MODE, 4, 1)
++    FIELD(TR_RAM_CONTROL, STOP_ON_WRAP, 8, 1)
++    FIELD(TR_RAM_CONTROL, MEM_FORMAT, 9, 2)
++    /* reserved bits */
++    FIELD(TR_RAM_CONTROL, RSVP1, 2, 1)
++    FIELD(TR_RAM_CONTROL, RSVP2, 5, 2)
++    FIELD(TR_RAM_CONTROL, RSVP3, 11, 1)
++    FIELD(TR_RAM_CONTROL, RSVP4, 15, 16)
++
++REG32(TR_RAM_IMPL, 0x4)
++    FIELD(TR_RAM_IMPL, VER_MAJOR, 0, 4)
++    FIELD(TR_RAM_IMPL, VER_MINOR, 4, 4)
++    FIELD(TR_RAM_IMPL, COMP_TYPE, 8, 4)
++    FIELD(TR_RAM_IMPL, HAS_SRAM, 12, 1)
++    FIELD(TR_RAM_IMPL, HAS_SMEM, 13, 1)
++    /* reserved bits */
++    FIELD(TR_RAM_IMPL, RSVP1, 14, 18)
++
++REG32(TR_RAM_START_LOW, 0x010)
++    FIELD(TR_RAM_START_LOW, ADDR, 2, 30)
++REG32(TR_RAM_START_HIGH, 0x014)
++    FIELD(TR_RAM_START_HIGH, ADDR, 0, 32)
++
++REG32(TR_RAM_LIMIT_LOW, 0x018)
++    FIELD(TR_RAM_LIMIT_LOW, ADDR, 2, 30)
++REG32(TR_RAM_LIMIT_HIGH, 0x01C)
++    FIELD(TR_RAM_LIMIT_HIGH, ADDR, 0, 32)
++
++REG32(TR_RAM_WP_LOW, 0x020)
++    FIELD(TR_RAM_WP_LOW, WRAP, 0, 1)
++    FIELD(TR_RAM_WP_LOW, ADDR, 2, 30)
++REG32(TR_RAM_WP_HIGH, 0x024)
++    FIELD(TR_RAM_WP_HIGH, ADDR, 0, 32)
++
++struct TraceRamSink {
++    /*< private >*/
++    SysBusDevice parent_obj;
++
++    MemoryRegion reg_mem;
++    uint32_t reg_mem_size;
++
++    hwaddr baseaddr;
++    uint32_t regs[TRACE_R_MAX];
++    RegisterInfo regs_info[TRACE_R_MAX];
++
++    hwaddr smemaddr;
++    MemoryRegion smem;
++    uint32_t smemsize;
++    uint8_t *msgs;
++};
++
++#define TYPE_TRACE_RAM_SINK "trace-ram-sink"
++
++OBJECT_DECLARE_SIMPLE_TYPE(TraceRamSink, TRACE_RAM_SINK)
++
++#endif
 -- 
 2.51.1
 
