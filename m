@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78298CCF9E3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Nov 2025 11:50:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB54CCD13D3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Nov 2025 11:51:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vImrQ-00072S-4M; Tue, 11 Nov 2025 06:48:32 -0500
+	id 1vImrM-0006tH-Ik; Tue, 11 Nov 2025 06:48:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vImqh-000503-8W
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 06:47:47 -0500
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1vImqv-0005m6-UH
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 06:48:01 -0500
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vImqd-0004Q5-Um
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 06:47:46 -0500
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-29844c68068so3468755ad.2
- for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 03:47:41 -0800 (PST)
+ id 1vImqt-0004TO-Uz
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 06:48:01 -0500
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-b593def09e3so2584266a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 03:47:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1762861660; x=1763466460; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1762861678; x=1763466478; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FVYI3uDYuiUnuBphImalv/xBwCe/21ga86oRo136tDE=;
- b=ohkrdcSuj+flJaShRGoY9z471IdMV++XszvH9PL6/9UeQ2Nw87zejgSekGA2MNZ1B0
- yEnHtoDTF2FplZDQQIsdIdU03SHI3aHKu+HowIoX83sFQlDvDz1VYoIGFkDWq8w8sBGU
- 4vxUCClADGB3sSOPL0i0X4+LHmf7O5WU+vDqmcpgI30WqmO5/SA1wahXG3L1MDoZou5z
- bGhGriXMDl9xhUW9cMgf4IiMTJDdiOdVg7D9W2S3H5fTwuHASfhQanNQRDCa5W0QU708
- gOMrdJbxDkZrBNeYR2yjepqlWNCUq78hehZh05rNpqNUKel94F4iAwb3rP+pofbNZaqW
- 6TFA==
+ bh=Crky1vMWebfz9/HpBtY7DyZt1iGNX1EI7tQZJybiMs0=;
+ b=B1O7affPNw1IdH70yCFzKV98xKduweUnHhVjOfpoY92rt5hSm1jbiSlKHtSVrcJd13
+ hxB8tiaIhEhvHrhDk9O4DFN+UWEv5mgg8jGVpB+p0Mk+K7FeCvMRxcTXQixa0gA/eRwZ
+ pls0IAmaP+nT4JJ+wtu5IwIeY4P403xLZmEVcTKOHgWJ6/az58izVjPtYHQ+87d/+58F
+ 1Cl/FQAbqjQcXSiZnDXte3kIx34110lLSO09oAUM1sIc3g9j6RXuzh8rFeI8Dj6cUn7D
+ Kn3f+2zaHG03yGdeIQ57UA7LHTHdLdHzY27MT39K0EkkkLfTjcoJ99C2K0oyfdVD/AyM
+ meCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762861660; x=1763466460;
+ d=1e100.net; s=20230601; t=1762861678; x=1763466478;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=FVYI3uDYuiUnuBphImalv/xBwCe/21ga86oRo136tDE=;
- b=uwohh30pLkn/qhdct1yPOlDBJU+xI6LMpuWH+MJL2vv3Nt9yu/ZAvIGRxcDIfoeDef
- qF1amozQ1h0pMV6Ckzoe0DOIGW0GPvwuFSRPxhBWtXSWLYtQOb5bbkhjtZsUCwrUqPPL
- us9UINrQSHX3nSxyvFGJu9nl8qdfS5caCror/Jv0Rb9i4WNauifJSa3QneooAfCjcmoK
- S2Rm2/zj0T2uk/+KgW9wvIQ6Y+G/IW3wHDBgD47f8h12ZSyVOo1C1QURUI5hKa0D0M6e
- TpPlNq3axXdwNC1UhxkzEWxJaeXQTalWmgnI8aW6UmTJipUvguuXp7mFjqQ70FZM61Kw
- e9OQ==
-X-Gm-Message-State: AOJu0Yx535WCl7A0+y12f53sdNncdDF1/sgem2hg9HbwPmqCYDBZbOQ/
- PVrHtiY+wbLHOVXvrrTUnAIdi0i+GHcKu6kK3NQ+ElwbBHh9gm+JT48yfPaFrFIAj+0=
-X-Gm-Gg: ASbGncsNj3MQZK/9WyfmHyy4FKJTj1Jsay6IWHLIQq7ShwW/LURXIfFjT8sc7LNIVTx
- 9radWnO5PZtgfscouhLfHrCjnm9J4vbaWwuScX740NMmZsiie8avsOgJ3wTNcuFWJTurAh1hzn0
- RoSLOeeyRntGc51tTC6Spx4Hkmiaq7XTAv1enscVVTls5R/Uw46ZR4qS7NFSIRpkDZnHI1JeYuv
- OldybhTcsdJLDGhoMcR6Xt/JZG7BlOIZ5Wi5yPve1AtdVAu8cEDvauSKVFThDEt/wSuUUY9e6W2
- VIP6twJO1DEoLazCO8PITTCAWiFT5BN9BAlg05Z8Zj4rqXhklbYPWLWwBKeoSiGQ0j7JpOrUHaU
- apvyAytp8TBFA+yi8N6p1sQEjoF9h4BZau3cD6F+og3ESOy1dmNTZPaqG4y3i0WIsUmF3QbY9PL
- cxrQFbMrrUETONLLxpmsXLbVm9OSE=
-X-Google-Smtp-Source: AGHT+IG/JmIzL6MQOcq4afromovbKQ+ojOkf+fQTkALXHkrzQWcq5fyv9wHkfQQIeXKgw8ke2ICTWA==
-X-Received: by 2002:a17:903:3848:b0:294:def6:5961 with SMTP id
- d9443c01a7336-297e56d0868mr156485935ad.45.1762861660161; 
- Tue, 11 Nov 2025 03:47:40 -0800 (PST)
+ bh=Crky1vMWebfz9/HpBtY7DyZt1iGNX1EI7tQZJybiMs0=;
+ b=RmEYXEcmVnOTC9O6V72KjhaPWxL6NSWiGellzDHS8CDqFqwfb+X2mpfAD06ahMdy6v
+ 2AFzXJwzEZz4nV8RHxzDmxDrpfOXMVOulB3jhakf7mTffkzHeAzr1D7v9pazfKQpsul4
+ OTpeVFJslOASGobhDXfAKpOYrGqeiL86YO4V+aPktZ/7p6wKe+UeMKsmkIY9mn8jqr3u
+ NQ+4o/4hGVuMNlCfll4CZFz3S+NjVlBqn9vgyuxlCmfMGDP+aVnUaZ9MB3+GvZsrrhkv
+ 2sl0giaH24f7x2tKvumWPnCyvGgtWe7YnKpngHLtEHPuafau3ID1hEP9tx/v7GfwLr9E
+ C4tQ==
+X-Gm-Message-State: AOJu0YzGn1E4BTr+5eSCErE/HHPcDCd+MxM/YMNoHojZNpfGytLoA8Gy
+ 4yym0Lz20/+hWzGOZFQSeb4Cs8zDBUNoKT3OQF95D59REsszHoGhE5en4M0nqjHHZ80=
+X-Gm-Gg: ASbGncv+ugltX1tkbqrA9ngSCdECsY8EbPmqJawXT6JXYeD92g8zOkva1+NS5cJPDi2
+ l5Qqcn73JRvU1orfFK/g33KebJSuyurfYt6uUSuwrHMah/3FERAYTwWn1lyhjBovAmfH6Vx2GM/
+ XytVurLK1l+0pziSabUK3JjEqezTRumg9g5KjycurEko6R5Nesdmy2GnaxPwbAunL/M8jPQuyBh
+ QGmXecZ4pnzMWq5T3ZS3QIdKEy5E4wgBoasFL/cZrq0ebJgLt4BtMkQ6aUHde22b8n6p1c2sGu4
+ BR8O1xMefynuKEOz51XeHu+Lv4saILUqCKo6IOQqZ6I3a5OH/D7WjaMIBcKckSdfQVFcCfgBeNd
+ E090ONJJ+8hDKKT6doQEc8sSxssZrDLeleMny1IChpbL5D7U19Av7UzgJFqHbtxVUrd/e1+SeQf
+ I1RRni1mxlTmUDVS21eVWu2iXajqug/0M0SyAXKA==
+X-Google-Smtp-Source: AGHT+IGhdsaHcNXvikuXvh9SGUlxeZRWVCPepvZWhYs9PN9EOE3dVtqxPONvNZSA/C3T39DFN9YIrw==
+X-Received: by 2002:a17:903:ac6:b0:294:ccc6:cd30 with SMTP id
+ d9443c01a7336-297e56223aemr158656905ad.17.1762861678443; 
+ Tue, 11 Nov 2025 03:47:58 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([179.93.21.233])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29651c747d1sm177533125ad.63.2025.11.11.03.47.34
+ d9443c01a7336-29651c747d1sm177533125ad.63.2025.11.11.03.47.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 03:47:39 -0800 (PST)
+ Tue, 11 Nov 2025 03:47:57 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 05/17] hw/riscv/virt.c add trace encoder and ramsink fdt
- nodes
-Date: Tue, 11 Nov 2025 08:46:44 -0300
-Message-ID: <20251111114656.2285048-6-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 08/17] hw/riscv/trace-encoder: write e-trace packets to RAM
+ sink
+Date: Tue, 11 Nov 2025 08:46:47 -0300
+Message-ID: <20251111114656.2285048-9-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20251111114656.2285048-1-dbarboza@ventanamicro.com>
 References: <20251111114656.2285048-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,96 +103,195 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
+We have the needed pieces to make the trace encoder write messages (or
+packets, in e-trace lingo) in its associated RAM sink.
 
-The trace encoder and trace ramsink nodes should confirm to the bindings
-described in "riscv,trace-component.yaml" in the Linux kernel. That way,
-encoder and ramsink devices get populated on the rvtrace bus and perf
-record is able to capture the trace data in the auxtrace section as
-expected.
+We'll start by writing a sync message that we're already able to fetch
+from the TCG instruction train. The trace encoder must be able to
+read/write TR_RAM_WP RAM sink regs to know where it is supposed to write
+packets, thus a handful of helpers are added to manipulate both the ram
+sink SMEM memory and relevant registers.
 
-Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+The bulk of the work is done in trencoder_send_message_smem() where the
+trace encoder writes each trace packet. The 'wrap' mechanism is
+implemented to keep writing the RAM sink memory even after a SMEM
+workflow.  If we can't fit a full packet in the end of the ring buffer
+we're filling with NULLs and writing a new packet back to ramstart.
+
+In an overflow event we'll wrap the TR_RAM_WP_LOW WRAP bit and userspace
+is supposed to clear it after the wrapping was handled (i.e. userspace
+read the whole ring buffer back to the start).
+
+We're also allowing userspace to freely set ramsink and ramstart before
+the trace session begins, allowing for more freedom w.r.t where the SMEM
+will be written by the encoder. Note that this also means that userspace
+is responsible for setting at least TR_RAM_WP_LOW and TR_RAM_WP_HIGH
+before starting a trace session.
+
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/riscv/virt.c | 58 +++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
+ hw/riscv/trace-encoder.c | 121 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 121 insertions(+)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index b1a4d63efd..30e89a6c5a 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1142,6 +1142,62 @@ static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
-     s->pci_iommu_bdf = bdf;
- }
- 
-+static void create_fdt_rvtrace(RISCVVirtState *s)
+diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
+index 9701ce43cf..16c9475d46 100644
+--- a/hw/riscv/trace-encoder.c
++++ b/hw/riscv/trace-encoder.c
+@@ -20,6 +20,34 @@
+ #include "system/device_tree.h"
+ #include "hw/register.h"
+ #include "cpu.h"
++#include "hw/riscv/trace-ram-sink.h"
++#include "rv-trace-messages.h"
++
++/*
++ * Size of header + payload since we're not sending
++ * srcID and timestamp.
++ */
++#define TRACE_MSG_MAX_SIZE 32
++
++static TracePrivLevel trencoder_get_curr_priv_level(TraceEncoder *te)
 +{
-+    static const char * const tr_compat[2] = { "qemu,trace-component",
-+                                               "riscv,trace-component" };
-+    g_autofree char *cpu_name = NULL, *ram_sink_name = NULL,
-+                    *trencoder_name = NULL, *ep = NULL;
-+    MachineState *ms = MACHINE(s);
-+    int socket_count = riscv_socket_count(ms), i;
-+    uint64_t addr, size = 0x100;
-+    uint32_t rs_phandle;
-+    RISCVCPU *cpu_ptr;
++    CPURISCVState *env = &te->cpu->env;
 +
-+
-+    for (i = 0; i < socket_count; i++) {
-+        for (int cpu = 0; cpu < s->soc[i].num_harts; cpu++) {
-+            cpu_ptr = &s->soc[i].harts[cpu];
-+            if (!cpu_ptr->trencoder) {
-+                continue;
-+            }
-+            cpu_name = g_strdup_printf("/cpus/cpu@%d",
-+                                       s->soc[i].hartid_base + cpu);
-+            ram_sink_name = g_strdup_printf("/soc/ramsink@%d",
-+                                            s->soc[i].hartid_base + cpu);
-+            qemu_fdt_add_subnode(ms->fdt, ram_sink_name);
-+            addr = object_property_get_uint(cpu_ptr->trencoder, "dest-baseaddr",
-+                                            &error_abort);
-+            qemu_fdt_setprop_sized_cells(ms->fdt, ram_sink_name, "reg", 2, addr,
-+                                         2, size);
-+            qemu_fdt_setprop_string_array(ms->fdt, ram_sink_name, "compatible",
-+                                          (char **)&tr_compat,
-+                                          ARRAY_SIZE(tr_compat));
-+            qemu_fdt_setprop_phandle(ms->fdt, ram_sink_name, "cpu", cpu_name);
-+            ep = g_strdup_printf("%s/in-ports/port/endpoint", ram_sink_name);
-+            qemu_fdt_add_path(ms->fdt, ep);
-+            rs_phandle = qemu_fdt_alloc_phandle(ms->fdt);
-+            qemu_fdt_setprop_cell(ms->fdt, ep, "phandle", rs_phandle);
-+
-+
-+            trencoder_name = g_strdup_printf("/soc/encoder@%d",
-+                                             s->soc[i].hartid_base + cpu);
-+            qemu_fdt_add_subnode(ms->fdt, trencoder_name);
-+            addr = object_property_get_uint(cpu_ptr->trencoder, "baseaddr",
-+                                            &error_abort);
-+            qemu_fdt_setprop_sized_cells(ms->fdt, trencoder_name, "reg", 2,
-+                                         addr, 2, size);
-+            qemu_fdt_setprop_string_array(ms->fdt, trencoder_name, "compatible",
-+                                          (char **)&tr_compat,
-+                                          ARRAY_SIZE(tr_compat));
-+            qemu_fdt_setprop_phandle(ms->fdt, trencoder_name, "cpus", cpu_name);
-+            ep = g_strdup_printf("%s/out-ports/port/endpoint", trencoder_name);
-+            qemu_fdt_add_path(ms->fdt, ep);
-+            qemu_fdt_setprop_cell(ms->fdt, ep, "remote-endpoint", rs_phandle);
-+        }
++    switch (env->priv) {
++    case PRV_U:
++        return env->virt_enabled ? VU : U;
++    case PRV_S:
++        return env->virt_enabled ? VS : S_HS;
++    case PRV_M:
++        return M;
 +    }
++
++    /*
++     * Return a reserved value to signal an error.
++     * TODO: handle Debug (D).
++     */
++    return RESERVED;
++}
+ 
+ /*
+  * trTeControl register fields
+@@ -82,6 +110,41 @@ REG32(TR_TE_IMPL, 0x4)
+ REG32(TR_TE_INST_FEATURES, 0x8)
+     FIELD(TR_TE_INST_FEATURES, NO_ADDR_DIFF, 0, 1)
+ 
++static uint32_t trencoder_read_reg(TraceEncoder *te, uint32_t reg_addr)
++{
++    hwaddr addr = te->dest_baseaddr + reg_addr;
++    uint32_t val;
++
++    cpu_physical_memory_read(addr, &val, sizeof(uint32_t));
++    return val;
 +}
 +
- static void finalize_fdt(RISCVVirtState *s)
- {
-     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
-@@ -1166,6 +1222,8 @@ static void finalize_fdt(RISCVVirtState *s)
-     create_fdt_uart(s, irq_mmio_phandle);
- 
-     create_fdt_rtc(s, irq_mmio_phandle);
++static void trencoder_write_reg(TraceEncoder *te, uint32_t reg_addr,
++                                uint32_t val)
++{
++    hwaddr addr = te->dest_baseaddr + reg_addr;
 +
-+    create_fdt_rvtrace(s);
++    cpu_physical_memory_write(addr, &val, sizeof(uint32_t));
++}
++
++static hwaddr trencoder_read_ramsink_writep(TraceEncoder *te)
++{
++    hwaddr ret = trencoder_read_reg(te, A_TR_RAM_WP_HIGH);
++    ret <<= 32;
++    ret += trencoder_read_reg(te, A_TR_RAM_WP_LOW);
++
++    return ret;
++}
++
++static hwaddr trencoder_read_ramsink_ramlimit(TraceEncoder *te)
++{
++    hwaddr ret = trencoder_read_reg(te, A_TR_RAM_LIMIT_HIGH);
++    ret <<= 32;
++    ret += trencoder_read_reg(te, A_TR_RAM_LIMIT_LOW);
++
++    return ret;
++}
++
+ static uint64_t trencoder_te_ctrl_set_hardwire_vals(uint64_t input)
+ {
+     input = FIELD_DP32(input, TR_TE_CONTROL, INST_MODE, 0x6);
+@@ -171,6 +234,9 @@ static void trencoder_te_ctrl_postw(RegisterInfo *reg, uint64_t val)
+     if (!te->trace_running && trTeInstTracing) {
+         /* Starting trace. Ask the CPU for the first trace insn */
+         te->trace_next_insn = true;
++
++        te->ramsink_ramstart = trencoder_read_ramsink_writep(te);
++        te->ramsink_ramlimit = trencoder_read_ramsink_ramlimit(te);
+     }
+ 
+     te->trace_running = trTeInstTracing ? true : false;
+@@ -274,12 +340,67 @@ static void trencoder_realize(DeviceState *dev, Error **errp)
+     }
  }
  
- static void create_fdt(RISCVVirtState *s)
++static void trencoder_update_ramsink_writep(TraceEncoder *te,
++                                            hwaddr wp_val,
++                                            bool wrapped)
++{
++    uint32_t wp_low = trencoder_read_reg(te, A_TR_RAM_WP_LOW);
++
++    wp_low = FIELD_DP32(wp_low, TR_RAM_WP_LOW, ADDR,
++                        extract64(wp_val, 2, 30));
++
++    if (wrapped) {
++        wp_low = FIELD_DP32(wp_low, TR_RAM_WP_LOW, WRAP, 1);
++    }
++
++    trencoder_write_reg(te, A_TR_RAM_WP_LOW, wp_low);
++    trencoder_write_reg(te, A_TR_RAM_WP_HIGH, extract64(wp_val, 32, 32));
++}
++
++static void trencoder_send_message_smem(TraceEncoder *trencoder,
++                                        uint8_t *msg, uint8_t msg_size)
++{
++    hwaddr dest = trencoder_read_ramsink_writep(trencoder);
++    bool wrapped = false;
++
++    msg_size = QEMU_ALIGN_UP(msg_size, 4);
++
++    /* clear trRamWrap before writing to SMEM */
++    dest = FIELD_DP64(dest, TR_RAM_WP_LOW, WRAP, 0);
++
++    /*
++     * Fill with null bytes if we can't fit the packet in
++     * ramlimit, set wrap and write the packet in ramstart.
++     */
++    if (dest + msg_size > trencoder->ramsink_ramlimit) {
++        g_autofree uint8_t *null_packet = NULL;
++        uint8_t null_size = trencoder->ramsink_ramlimit - dest;
++
++        null_packet = g_malloc0(null_size);
++        cpu_physical_memory_write(dest, null_packet, null_size);
++
++        dest = trencoder->ramsink_ramstart;
++        wrapped = true;
++    }
++
++    cpu_physical_memory_write(dest, msg, msg_size);
++    dest += msg_size;
++
++    trencoder_update_ramsink_writep(trencoder, dest, wrapped);
++}
++
+ void trencoder_set_first_trace_insn(Object *trencoder_obj, uint64_t pc)
+ {
+     TraceEncoder *trencoder = TRACE_ENCODER(trencoder_obj);
++    TracePrivLevel priv = trencoder_get_curr_priv_level(trencoder);
++    g_autofree uint8_t *msg = g_malloc0(TRACE_MSG_MAX_SIZE);
++    uint8_t msg_size;
+ 
+     trencoder->first_pc = pc;
+     trace_trencoder_first_trace_insn(pc);
++    msg_size = rv_etrace_gen_encoded_sync_msg(msg, pc, priv);
++
++    trencoder_send_message_smem(trencoder, msg, msg_size);
+ }
+ 
+ static const Property trencoder_props[] = {
 -- 
 2.51.1
 
