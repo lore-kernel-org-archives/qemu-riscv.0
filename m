@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 701A7CCF9F8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 03:51:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B19BCCFA1A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 04:31:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJ1tY-0002GK-8c; Tue, 11 Nov 2025 22:51:44 -0500
+	id 1vJ2WA-0003S9-TW; Tue, 11 Nov 2025 23:31:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vJ1tR-0001up-PD
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 22:51:40 -0500
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ id 1vJ2Vb-0001Ry-2N
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 23:31:10 -0500
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vJ1tP-0005Yu-5q
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 22:51:37 -0500
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b72b495aa81so58458666b.2
- for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 19:51:34 -0800 (PST)
+ id 1vJ2VY-0004yz-Fc
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 23:31:02 -0500
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b7277324054so66380466b.0
+ for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 20:30:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762919492; x=1763524292; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1762921857; x=1763526657; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qWmIFl2p3JmH5lLJKRpxSwj4K5BjNoadKE7MiwVKNs8=;
- b=E9tObukFdrL05cxQfdnQbW0P/8FHbinlcIgfKcdwPy22XcdarogZLzosVOcS38JfWP
- 4Zw++QFcu/KA6qZJ83VOiQlI9j2UFSiVEXoEwxJlqcfnETk+3KSc3J+u5ObzU5Ci5gAD
- C27H0FA7jeTgqq0L2I3oLW/LVCXtFpogfB3M1ZnmNNTc3VQUBiFrfBd6bs8Lei0DtrIT
- s6R9fG4NGqTiE59xKefFRCcjOUoG/6w3FtPefyO0ekwQrfSGykp5njGVGLoLEvU0jE+I
- zExKL30PWsA9xpBIC7PHFWQx8olBx/0U8iJvIZiGBMt1SHtFnfraISWTbWyWOdv5d4nu
- /R/A==
+ bh=6lac5ro+yp99GdJ+3+yhqyvxHMVhwWPaQ6X17M7mSgA=;
+ b=hXzd1gI/rxm8nCFeRd6WOf3k32O7Ld6BLvGX7TAFMulttnEkBQj3E3BqQFmkvtIttZ
+ sBvLSiIOzkXqLrA0pcEXuKNT/0aItR03Xb2+lHdYDaPZBBBxg+vkTt7wKFpJWiIKz9jU
+ haSy0Q/VuQSDsh9xt3jq6ZnGtsVdGfPBhfKNZDwyLuqWv+IMEiloxG0wqXHFmuou4JL6
+ h1FsUQeXvpdcqMP3cyRkQycpsYeR6kWBVQrvMjhu7sLfruKV0poOEsdO2eb1Xyf9QWUe
+ +TZbvIY1PAJ25qJBpGnA+SyyuVkVfhgRKLP4y0rSLk0eM47VNJERdKy5Ozg3R0tmUM+g
+ 0b/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762919492; x=1763524292;
+ d=1e100.net; s=20230601; t=1762921858; x=1763526658;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=qWmIFl2p3JmH5lLJKRpxSwj4K5BjNoadKE7MiwVKNs8=;
- b=wHEzUxTdF4zT6Vc3S1FBc/r065GCpLRBXWrl595VYJYWO1icQl8CKm+Nx9Rf+bfXUV
- itA2KKl8gtCQEV7SEJTov3fj1hw89FWTs8ZCnLjzypZ7cv4Ga+IKo077C4v+uDYVgi+h
- MktaXkcq/5kKzbIDazEIAPiblOhthplvqOeQ5XR6/0Fq3insAXzWGFflK3FyyGNVcbjX
- HtNqtk+EWXziJNQ43JhmRusEkw0LCN5BdmZrT8okNGUp0MjNxoRkL0NPHZHZwq4/wD2b
- ZXHCl1YS40lhiKqhKylW9omNNJVKeNDAJpYMWAK/0vLZ2rgdkUaZL/AZFwa64Zl3J7Cs
- 0FpA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUoNHjEVvgRyiOqWjtrPDQtYIFkROAewHWrMeMMMGtMPNurSEdN24UduEbayfUeQvea54zKHmu1pYvY@nongnu.org
-X-Gm-Message-State: AOJu0YyQOlUrrcVnZZNCw+LEMksc21tLb74v1vhcX+0LkMnLlf2gvirj
- 0D/l9ES8HKIZRzcjN6KGJepjITE/2TTroGPV2+kyFVuSCjc/ljC1Ai+iFZnK0JJvnoD4Dg9LkPL
- TEN1aHBt1aZISOW4aeAjX5rlm/PIGqqk=
-X-Gm-Gg: ASbGncvGN0v33cTfNfj3UishDUv08CECzIpEhzES6xat3E/sYDuGxBSJ+dj1xTi1Zqe
- P+WSBReDlL3Djl6jxJ/9haVVJfx/xGT0X5y39CTI3ljYKMF3V48o1uM7GotuexguDE4i/EiHg1+
- pbRNb353GgBLkZIHQGmRy4DwSDhZgVjikYHA+HWVFSwkDKRsSq+9pmQ3eqDsG0ReK2gPaQPhhb0
- eVuwgloNJdK00uMj8iO9TN/o099fOEh9SxwTL4CSARUjpDw41DlB5ra+SE4iJX4AM1DPzenWkND
- XNk5UbbRiUqdk7nj5RkuS4E6pQ==
-X-Google-Smtp-Source: AGHT+IEPKki5sMlF5rKEC6UQU4jmuz/eE5cw2UPGz8+MrwdZzpD88tgp7MhyJFQBgokI3QtgSG7fqQcAO0QLPEBvI+s=
-X-Received: by 2002:a17:907:da6:b0:b70:7d61:b8a5 with SMTP id
- a640c23a62f3a-b7331b331f7mr151240266b.62.1762919491437; Tue, 11 Nov 2025
- 19:51:31 -0800 (PST)
+ bh=6lac5ro+yp99GdJ+3+yhqyvxHMVhwWPaQ6X17M7mSgA=;
+ b=itL1YSKkWXdeWKVFUzgDlyKf+eOi2M2fNu+E+wifOrijMMdREfNBCkARNnUHBqb6BY
+ frmTlAxXNx2F680DnT/vwwtQreiOC0DN325P+f4zKZE3kivYkbbfckUZQEWoyQDhSGoF
+ DJPPKK2YNC63Xrh+CWmEklgeKne+gI4PLalFlbsr1QbH+LtA5DwLG0n4grK5tX0xBSth
+ tgNgC8Mx97Wn0J172kCQOqiagc0UFbnlob2iu71c8pQues5crBtHHk4hVeX1MVrT9SkO
+ nWlXtGqrOyfQX9GcHuDmtpxmR8X3h2X12rXTOXEd9UaiGaglfMwBz78pqz3yvenb/qne
+ /KTQ==
+X-Gm-Message-State: AOJu0YzqrtJkT8oLFr+tMurtJ7lsiwDZ1Bxi4dxqmQ5p0U0y9f7IUcG2
+ fLieih5PqBJC/HpyUpyqWcTGM3cvgmt2nC5rz4MMpqeCmku+NQhhLYlKFvimZWDVoty6uo+noc1
+ GUZCD+Clq3kQIEn/pEns5Q1MdfugtbgU/Pg==
+X-Gm-Gg: ASbGncvflvopSDpp9/1asrdx11RNRXUx56TsDC/gbJm48QRJPagxDw/LhiRJrHL31sa
+ W4tOMLMrU4jub/SPcjHtYq/ROxPIKcD+5jeASEXoNsd7+C4XtKdveUqEVZjaPcZQQO31DGZbyTL
+ E8MzjQil4Rval8cEraOh2S8VUensiswuX+/slJWK4p7Q4vRvv3/7MKBKToWSvrHImEjJLlQS2PJ
+ 7z4M1205/mKOmCnmCyWPkjAa9eUXe2jtCcw0bZgXkXI2Zu4mU3a1WvB4D8o6NgpVBrvv4Dl2LEl
+ 3+8x1muGnzEUSs0=
+X-Google-Smtp-Source: AGHT+IG01WaHD+6dbX068DV86c8INfDqtvBoX42xGoROqRYjf9m7OMFhFBJA2Fttswn08sI47qQ/tDZUCppK8NHhI4c=
+X-Received: by 2002:a17:906:9fc8:b0:b72:b710:cbfd with SMTP id
+ a640c23a62f3a-b7331b5f268mr142619666b.36.1762921857504; Tue, 11 Nov 2025
+ 20:30:57 -0800 (PST)
 MIME-Version: 1.0
-References: <20250918061911.904-1-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20250918061911.904-1-zhiwei_liu@linux.alibaba.com>
+References: <20251103101730.80749-1-roan.richmond@codethink.co.uk>
+In-Reply-To: <20251103101730.80749-1-roan.richmond@codethink.co.uk>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Nov 2025 13:51:05 +1000
-X-Gm-Features: AWmQ_bkNNADSHjyRDUlKbor6n-ZaMPRgLnxcdJ8hTHOuxW9tgCotXsZZtWvTTe0
-Message-ID: <CAKmqyKM+18jY2YZkeCtRvB=cUJK9VrRZu70DSNm2WYEaQUn63Q@mail.gmail.com>
-Subject: Re: [PATCH v2 0/6] target/riscv: Implement Smsdid and Smmpt extension
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com
+Date: Wed, 12 Nov 2025 14:30:31 +1000
+X-Gm-Features: AWmQ_bmCuHQd1gPII2i35Tm_OQYgncWgrTO_tgoEauu0qhoJ195tCyc1ozVbrEU
+Message-ID: <CAKmqyKO3k1SFgd7gw7jAnQ+j0V+yys+ytRMNhU2-OFuw361DLQ@mail.gmail.com>
+Subject: Re: [PATCH v4 1/1] Add RISCV ZALASR extension
+To: Roan Richmond <roan.richmond@codethink.co.uk>
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x629.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,59 +98,241 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 18, 2025 at 4:20=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibab=
-a.com> wrote:
+On Mon, Nov 3, 2025 at 8:17=E2=80=AFPM Roan Richmond
+<roan.richmond@codethink.co.uk> wrote:
 >
-> This patch set introduces support for the RISC-V Smmpt (Supervisor
-> Memory-tracking and Protection Table) extension. Smmpt provides a
-> hardware mechanism for fine-grained memory protection, checked after
-> address translation, which is particularly useful for supervisor-level
-> sandboxing and security monitoring.
+> This is based on version v0.9 of the ZALASR specification [1].
+> The specification is listed as in Ratified state [2].
 >
-> The rfc patch set:
-> https://mail.gnu.org/archive/html/qemu-riscv/2025-09/msg00216.html
+> [1]: https://github.com/riscv/riscv-zalasr/tree/v0.9
+> [2]: https://lf-riscv.atlassian.net/wiki/spaces/HOME/pages/16154882/All+R=
+ISC-V+Specifications+Under+Active+Development
 >
-> rfc->v2:
->     1. When ext_smmpt is false or BARE mode, make other fields in mmpt
->        CSR zero.
->     2. Add patch 5 to fix smrnmi ISA string order.
->     3. Fix patch 6 smmpt and smsdid ISA string order.
->     4. Make smmpt and smsdid experiment extensions.
->     5. Add review tags.
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
+> ---
+> V4:
+>   - rebased onto newest master branch
+>   - added config option for ZALASR into RISCVCPUMultiExtConfig
+>     which was missed off in V3 version
 >
-> LIU Zhiwei (6):
->   target/riscv: Add basic definitions and CSRs for SMMPT
->   target/riscv: Implement core SMMPT lookup logic
->   target/riscv: Integrate SMMPT checks into MMU and TLB fill
->   target/riscv: Implement SMMPT fence instructions
->   target/riscv: Fix smrnmi isa alphabetical order
->   target/riscv: Enable SMMPT extension
+>  target/riscv/cpu.c                           |   2 +
+>  target/riscv/cpu_cfg_fields.h.inc            |   1 +
+>  target/riscv/insn32.decode                   |  10 ++
+>  target/riscv/insn_trans/trans_rvzalasr.c.inc | 120 +++++++++++++++++++
+>  target/riscv/translate.c                     |   1 +
+>  5 files changed, 134 insertions(+)
+>  create mode 100644 target/riscv/insn_trans/trans_rvzalasr.c.inc
 
-Thanks!
-
-Applied to riscv-to-apply.next
+This fails checkpatch, can you send a new version with the errors and
+warnings fixed
 
 Alistair
 
 >
->  target/riscv/cpu.c                            |   6 +-
->  target/riscv/cpu.h                            |   9 +-
->  target/riscv/cpu_bits.h                       |  27 ++
->  target/riscv/cpu_cfg_fields.h.inc             |   2 +
->  target/riscv/cpu_helper.c                     |  81 +++++-
->  target/riscv/csr.c                            |  95 ++++++
->  target/riscv/insn32.decode                    |   2 +
->  .../riscv/insn_trans/trans_privileged.c.inc   |  30 ++
->  target/riscv/meson.build                      |   1 +
->  target/riscv/pmp.h                            |   3 +
->  target/riscv/riscv_smmpt.c                    | 274 ++++++++++++++++++
->  target/riscv/riscv_smmpt.h                    |  36 +++
->  12 files changed, 560 insertions(+), 6 deletions(-)
->  create mode 100644 target/riscv/riscv_smmpt.c
->  create mode 100644 target/riscv/riscv_smmpt.h
->
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 73d4280d7c..96e33ee10f 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -127,6 +127,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
+>      ISA_EXT_DATA_ENTRY(zabha, PRIV_VERSION_1_13_0, ext_zabha),
+>      ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
+> +    ISA_EXT_DATA_ENTRY(zalasr, PRIV_VERSION_1_12_0, ext_zalasr),
+>      ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
+>      ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
+>      ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
+> @@ -1253,6 +1254,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[]=
+ =3D {
+>      MULTI_EXT_CFG_BOOL("zama16b", ext_zama16b, false),
+>      MULTI_EXT_CFG_BOOL("zabha", ext_zabha, false),
+>      MULTI_EXT_CFG_BOOL("zaamo", ext_zaamo, false),
+> +    MULTI_EXT_CFG_BOOL("zalasr", ext_zalasr, false),
+>      MULTI_EXT_CFG_BOOL("zalrsc", ext_zalrsc, false),
+>      MULTI_EXT_CFG_BOOL("zawrs", ext_zawrs, true),
+>      MULTI_EXT_CFG_BOOL("zfa", ext_zfa, true),
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fie=
+lds.h.inc
+> index a154ecdc79..7d3d5d0d57 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -65,6 +65,7 @@ BOOL_FIELD(ext_zaamo)
+>  BOOL_FIELD(ext_zacas)
+>  BOOL_FIELD(ext_zama16b)
+>  BOOL_FIELD(ext_zabha)
+> +BOOL_FIELD(ext_zalasr)
+>  BOOL_FIELD(ext_zalrsc)
+>  BOOL_FIELD(ext_zawrs)
+>  BOOL_FIELD(ext_zfa)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index cd23b1f3a9..c848c0c1c5 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -1066,3 +1066,13 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111=
+ @atom_st
+>  amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
+>  amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
+>  amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
+> +
+> +# *** Zalasr Standard Extension ***
+> +lb_aqrl  00110 . . ..... ..... 000 ..... 0101111 @atom_st
+> +lh_aqrl  00110 . . ..... ..... 001 ..... 0101111 @atom_st
+> +lw_aqrl  00110 . . ..... ..... 010 ..... 0101111 @atom_st
+> +ld_aqrl  00110 . . ..... ..... 011 ..... 0101111 @atom_st
+> +sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
+> +sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
+> +sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
+> +sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
+> diff --git a/target/riscv/insn_trans/trans_rvzalasr.c.inc b/target/riscv/=
+insn_trans/trans_rvzalasr.c.inc
+> new file mode 100644
+> index 0000000000..8761508de3
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvzalasr.c.inc
+> @@ -0,0 +1,120 @@
+> +/*
+> + * RISC-V translation routines for the ZALASR (Load-Aquire and Store-Rel=
+ease)
+> + * Extension.
+> + *
+> + * Copyright (c) 2025 Roan Richmond, roan.richmond@codethink.co.uk
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
+ for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License alo=
+ng with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#define REQUIRE_ZALASR(ctx) do {     \
+> +    if (!ctx->cfg_ptr->ext_zalasr) { \
+> +        return false;                \
+> +    }                                \
+> +} while (0)
+> +
+> +static bool gen_load_acquire(DisasContext *ctx, arg_lb_aqrl *a, MemOp me=
+mop)
+> +{
+> +    decode_save_opc(ctx, 0);
+> +
+> +    TCGv addr =3D get_address(ctx, a->rs1, 0);
+> +    TCGv dest =3D get_gpr(ctx, a->rd, EXT_NONE);
+> +    TCGBar bar =3D (a->rl) ? TCG_BAR_STRL : 0;
+> +
+> +    /* Check that AQ is set, as this is mandatory */
+> +    if (!a->aq) {
+> +        return false;
+> +    }
+> +
+> +    memop |=3D (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
+> +
+> +    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +
+> +    /* Add a memory barrier implied by AQ (mandatory) and RL (optional) =
+*/
+> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ | bar);
+> +
+> +    return true;
+> +}
+> +
+> +static bool trans_lb_aqrl(DisasContext *ctx, arg_lb_aqrl *a)
+> +{
+> +    REQUIRE_ZALASR(ctx);
+> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_SB));
+> +}
+> +
+> +static bool trans_lh_aqrl(DisasContext *ctx, arg_lh_aqrl *a)
+> +{
+> +    REQUIRE_ZALASR(ctx);
+> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESW));
+> +}
+> +
+> +static bool trans_lw_aqrl(DisasContext *ctx, arg_lw_aqrl *a)
+> +{
+> +    REQUIRE_ZALASR(ctx);
+> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESL));
+> +}
+> +
+> +static bool trans_ld_aqrl(DisasContext *ctx, arg_ld_aqrl *a)
+> +{
+> +    REQUIRE_64BIT(ctx);
+> +    REQUIRE_ZALASR(ctx);
+> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TEUQ));
+> +}
+> +
+> +static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp m=
+emop)
+> +{
+> +    decode_save_opc(ctx, 0);
+> +
+> +    TCGv addr =3D get_address(ctx, a->rs1, 0);
+> +    TCGv data =3D get_gpr(ctx, a->rs2, EXT_NONE);
+> +    TCGBar bar =3D (a->aq) ? TCG_BAR_LDAQ : 0;
+> +
+> +    /* Check that RL is set, as this is mandatory */
+> +    if (!a->rl) {
+> +        return false;
+> +    }
+> +
+> +    memop |=3D (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
+> +
+> +    /* Add a memory barrier implied by RL (mandatory) and AQ (optional) =
+*/
+> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
+> +
+> +    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
+> +    return true;
+> +}
+> +
+> +static bool trans_sb_aqrl(DisasContext *ctx, arg_sb_aqrl *a)
+> +{
+> +    REQUIRE_ZALASR(ctx);
+> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_SB));
+> +}
+> +
+> +static bool trans_sh_aqrl(DisasContext *ctx, arg_sh_aqrl *a)
+> +{
+> +    REQUIRE_ZALASR(ctx);
+> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESW));
+> +}
+> +
+> +static bool trans_sw_aqrl(DisasContext *ctx, arg_sw_aqrl *a)
+> +{
+> +    REQUIRE_ZALASR(ctx);
+> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESL));
+> +}
+> +
+> +static bool trans_sd_aqrl(DisasContext *ctx, arg_sd_aqrl *a)
+> +{
+> +    REQUIRE_64BIT(ctx);
+> +    REQUIRE_ZALASR(ctx);
+> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_TEUQ));
+> +}
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index e1f4dc5ffd..f89a99c849 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -1199,6 +1199,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase,=
+ target_ulong pc)
+>  #include "insn_trans/trans_rvzicond.c.inc"
+>  #include "insn_trans/trans_rvzacas.c.inc"
+>  #include "insn_trans/trans_rvzabha.c.inc"
+> +#include "insn_trans/trans_rvzalasr.c.inc"
+>  #include "insn_trans/trans_rvzawrs.c.inc"
+>  #include "insn_trans/trans_rvzicbo.c.inc"
+>  #include "insn_trans/trans_rvzimop.c.inc"
 > --
-> 2.25.1
->
+> 2.43.0
 >
 
