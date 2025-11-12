@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40FA1CCFA1A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 01:42:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A73E4CCFA18
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 01:54:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vIzrx-0001F1-Ge; Tue, 11 Nov 2025 20:41:57 -0500
+	id 1vJ035-0006aO-FX; Tue, 11 Nov 2025 20:53:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vIzrh-0001AV-3K
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 20:41:42 -0500
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ id 1vJ02q-0006WO-Bv
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 20:53:14 -0500
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vIzrf-0008LH-28
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 20:41:40 -0500
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b3e9d633b78so42452566b.1
- for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 17:41:38 -0800 (PST)
+ id 1vJ02h-0002B7-7J
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 20:53:06 -0500
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-640ca678745so447977a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 17:53:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762911697; x=1763516497; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1762912380; x=1763517180; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OYNY1PhL+a+57b28p45cNB4F1UrmOK6hyjyA5m67VL4=;
- b=B0DWakIIzn8ipZHCvbGv02BtuDqrrQhoug3D9AQG3ykt5WzUVTVJ50gucDIK+zuLKp
- OMZvObTQEjcQJADzdJfwzVzcNPYOIB8p8MnRXLYY8sx/Jjt3zqNFvHgcJ7OQXOP1V6wP
- bjJQkNfowgKMOaT1RJQrREcrm8t58588w8mGsgA4BPH+NM398TbMCen0UTTnR7o87Uoe
- tMuISbRt4mENRLs8Fjk2TLIhh8V0t6+m4uXj35fzT0U1FK3erxaSGibVhXz3VuKGXf4l
- 81MDJ21hfvn3li3/kwYj47HmgljXxdPIEofckEnJzgukcP6/TvbE4f50Es+xWZeeSnmZ
- kHDA==
+ bh=h3NSfBrXFusAi+hWaGkvdhWGYM99uw6czHjs+nP0lI4=;
+ b=bByZAkiYNUhLLALe+Los5YB1oRMyATQuaMMAvmUWePsB90ymAL7fnEEahhjavjQB/u
+ Bsh554pTiJKqX4tLBWH4hD8FCsfYCn7FIc8rFwhtsQ8cVk6bFbvAdrtRjtygp9DIxua/
+ e7eUafYeqYZ7CqkbhFTHhIzz2vstuCOUXwp4h4P2RaVdFarUEvYd6jESlrQUn/Tk7jPp
+ sl+N99vqs/eNH1RK7Mwaso24NBtbXHM+59+V8jNMNnkM0lbGMs7aKyfuGs+cXt3/YjYZ
+ nS+rdl6ktsuHhwid4hwqGVyllvd63DUu1wcCvD/F/uT07JbIkazWQfT9DbIMVKPHs3B2
+ eMqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762911697; x=1763516497;
+ d=1e100.net; s=20230601; t=1762912380; x=1763517180;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=OYNY1PhL+a+57b28p45cNB4F1UrmOK6hyjyA5m67VL4=;
- b=T2R5/CncVtZM9wEjvVVsvHHOHexMHAPQL+n1Et6BZ57qHhEtIt6mHRqFoZxO7KlX4C
- sCDz2pjsVqTwM0ByERgYEquacMT7DX2fVlcmitowzHbpL7TYoee+nCYiTz6A4J1E5TkM
- tIwNICNQN+L0y80aHju55iCy+y5VxBxTZ7lu2JW3sxkDwHWbUDjC3r0SNWE3Klo3pnpN
- RoRRy3WHxZaT7po6R/pzz5m1+pqQyAwG90fHvB6T3RQ6fhm0fFVS9PUnAV6xQnXpC+B8
- yK5qwWgwdvG9CDx6nyhJtRgdUtJX+MLhl7cnxdmJCu81RZiE1oY0Th4llXKRctM2Nsia
- Yrpg==
-X-Gm-Message-State: AOJu0Yy/M3aw9RAjftZ3UgtTTSoHEZUQSgSRcPwM/le0LiHY64EuWwDv
- GsbQvjJmQrSn0ROhftPzYTYxLx3UkBtahwHPAzECDxJ0rVbgD9q/cQQjg2zfuWdW1igbkgzgqxA
- P+x+rZo7ypawhTXZLtmKGXfmYPFrafPo=
-X-Gm-Gg: ASbGnct1fXj5v1vWoDWUjnjzoQOIXerlbi6Yq5qkMHqOm30oAjqUbwHPa6ArevlP4p/
- MhXM/vFhYr1ho03kPsdhzkSZJ9Vqg+kQoTSDFDMs9VcCh51U1DBRhBSj+kEQUd17QR6618ya/uN
- Nu3+vqiLcztqitCbs44nwuk7vJ7JVmD4QWg4lkrtWPdgbKsXJqhOglf6eCCEDplFPetZouYxROT
- GXEZGgZJX+7XmcSKOeSsmzYENs/EhH7/zeidMYQ9t2ZqbMSP3sysM1Ildkw4873xdSss/iJg0bc
- fxCVPCmJKCcFrWQ=
-X-Google-Smtp-Source: AGHT+IGvPtejJ0bBTf+PRteid/fSuYdzmOoL8tVD2vK4TdgnuOxGEBIbARMWxb5oOR14tcombSSAwNYD1NVZT+cqNek=
-X-Received: by 2002:a17:906:730d:b0:b4a:e7c9:84c1 with SMTP id
- a640c23a62f3a-b7331189644mr134065666b.7.1762911696878; Tue, 11 Nov 2025
- 17:41:36 -0800 (PST)
+ bh=h3NSfBrXFusAi+hWaGkvdhWGYM99uw6czHjs+nP0lI4=;
+ b=eZczNtUQEGDD/ZMluHgSiOXA83iJ8sz6yiUBUvVodcm/YvgFx1F3rICsyrVWvCi675
+ snuuAFDbPUVo0Se4t1xdHNVVydublEQdHXWYxj/E5pMnuLV88mdYo4kCzOuXQhMRo3f1
+ 1c77+QN62DN0MkawKR9fbXhZTcn5FPwKWB4/UHTOzezv9KR9Ini2BlqdgBNgu80V9oI6
+ 1XDI+6/diE4Hqi4DBnQNp0swg08KdibAEEyeY7SPAaew9rw4DgcVkNmKli11JT62AmOu
+ 67PqrkClZOsOmoQaZbdmlmRN8TXDEiEYQpiDiMmSgvVMDdoy6d/OrtSuvr2nSkDt6czK
+ ijug==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVedTaplR6EQHkbXoURKAyu6sSkFO6WkCIsUH0kQtbsEuT7aYSiuAfH99DqLW7X/bTKTjbLMTk/RMgv@nongnu.org
+X-Gm-Message-State: AOJu0Yzq85Txjw7eyozSwLiaPeQxcMgzNpEeCvwS9tCAX0FNIqkEEeeU
+ kvqabsH6GoENcJ/FBRRhGH0DUvkCBxTv1n3c5Hn6rnXyi1liwmdxIHJY89QMhJSpMJlnRgGYLPM
+ HCCwCmRHw2avg9xybPmiEoPWweCFcD7s=
+X-Gm-Gg: ASbGnctYIz7f/4dWeZLhhukcDwrgnL6iJFOUcY0Fj1VGRkEhUdpCCMK4w96eGr7U7We
+ j3Ide/QdqwMveBvgep+tmopVZj/SEUxtQmJoUJSnDoSa+OjXlG4SVi0XKGJXdRlJeaP0MyAhog6
+ Px8iyEQ/TL8M0DklvMtwkzv59aqByejzIzYMApgAYLTC8DgMu048JgYzOBpYazAUaNO3F58ITNp
+ 9tjs8EazD5d7I8eRusCTJS2X7jH1xdCAJ/6x7ZEgaZnhq6P0PLyerR5vApeuW91TK+K2C4L9LNs
+ BlyR+Sv5TNfVK/g=
+X-Google-Smtp-Source: AGHT+IGxUEgL8WFg6CGYQFor4OfLvHtzP9op9N5MJ/p98ABJEsFpXCBZoIF8VhsunTNRbKjlpvl/d2lmA/C+4Qw1BIE=
+X-Received: by 2002:a17:907:7f17:b0:b70:b3e8:a353 with SMTP id
+ a640c23a62f3a-b7331ac5960mr108529566b.50.1762912380218; Tue, 11 Nov 2025
+ 17:53:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20251110090510.84103-1-roan.richmond@codethink.co.uk>
-In-Reply-To: <20251110090510.84103-1-roan.richmond@codethink.co.uk>
+References: <20251027100938.11822-1-michael@videogpu.com>
+ <20251027100938.11822-2-michael@videogpu.com>
+In-Reply-To: <20251027100938.11822-2-michael@videogpu.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Nov 2025 11:41:10 +1000
-X-Gm-Features: AWmQ_bkv2g0N_fILFix7BZhEj4LJx4OzD_1r9hdSJY7MpeaoiDwS4ohdf_7jC1I
-Message-ID: <CAKmqyKPheAMZt6cn2d4bN2kPxXMrr5Vr8jY5+MBuqhptnc4wjw@mail.gmail.com>
-Subject: Re: [PATCH v2] Add RISCV Zilsd extension
-To: Roan Richmond <roan.richmond@codethink.co.uk>
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-devel@nongnu.org, richard.henderson@linaro.org
+Date: Wed, 12 Nov 2025 11:52:33 +1000
+X-Gm-Features: AWmQ_blnEkxcXk9je3KDXlQviT1XutaPVKEk9kGZKdg4ml-pnSG7t9BwxJkmHck
+Message-ID: <CAKmqyKOoZnm+wjypuTPxRWYGy+bb=RS3sc0gF=TOeBybaAmwaw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] target/riscv: add NEORV32 RV32 CPU type and vendor
+ CSR hooks
+To: Michael Levit <michael@videogpu.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, philmd@linaro.org, 
+ pbonzini@redhat.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ liwei1518@gmail.com, smishash@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -82,7 +86,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,191 +102,225 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Nov 10, 2025 at 7:05=E2=80=AFPM Roan Richmond
-<roan.richmond@codethink.co.uk> wrote:
+On Mon, Oct 27, 2025 at 8:12=E2=80=AFPM Michael Levit <michael@videogpu.com=
+> wrote:
 >
-> This is based on v1.0 of the Zilsd extension [1].
-> The specification is listed as in the Ratified state [2],
->  since Jan 30, 2025.
+> From: Michael <michael@videogpu.com>
 >
-> [1]: https://github.com/riscv/riscv-zilsd
-> [2]: https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154861/RISC-V+S=
-pecs+Under+Development
->
-> Reviewed-by: Daniel Henrique barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Richard Henderson  <richard.henderson@linaro.org>
-> Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
-> ---
-> v2:
->   - In `gen_load_zilsd` swapped `dest_gpr` with `tcg_temp_new`, this prev=
-ents
->     writing to `r1/r0` in the case where `r0` is the set as `rd`.
->   - Removed unneeded brackets around `a->rd` + c expressions
->
->  target/riscv/cpu.c                      |  2 +
->  target/riscv/cpu_cfg_fields.h.inc       |  1 +
->  target/riscv/insn_trans/trans_rvi.c.inc | 57 ++++++++++++++++++++++++-
->  3 files changed, 58 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 73d4280d7c..6e0d37fb96 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -121,6 +121,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
->      ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
->      ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause=
-),
->      ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
-> +    ISA_EXT_DATA_ENTRY(zilsd, PRIV_VERSION_1_13_0, ext_zilsd),
->      ISA_EXT_DATA_ENTRY(zimop, PRIV_VERSION_1_13_0, ext_zimop),
->      ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
->      ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, has_priv_1_12),
-> @@ -1247,6 +1248,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[]=
- =3D {
->      MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
->      MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
->      MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
-> +    MULTI_EXT_CFG_BOOL("zilsd", ext_zilsd, false),
->      MULTI_EXT_CFG_BOOL("zimop", ext_zimop, false),
->      MULTI_EXT_CFG_BOOL("zcmop", ext_zcmop, false),
->      MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
-> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fie=
-lds.h.inc
-> index a154ecdc79..8d8e35e4cf 100644
-> --- a/target/riscv/cpu_cfg_fields.h.inc
-> +++ b/target/riscv/cpu_cfg_fields.h.inc
-> @@ -41,6 +41,7 @@ BOOL_FIELD(ext_zicond)
->  BOOL_FIELD(ext_zihintntl)
->  BOOL_FIELD(ext_zihintpause)
->  BOOL_FIELD(ext_zihpm)
-> +BOOL_FIELD(ext_zilsd)
->  BOOL_FIELD(ext_zimop)
->  BOOL_FIELD(ext_zcmop)
->  BOOL_FIELD(ext_ztso)
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
-trans/trans_rvi.c.inc
-> index 54b9b4f241..20058bf483 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -18,6 +18,7 @@
->   * this program.  If not, see <http://www.gnu.org/licenses/>.
->   */
->
-> +#include "migration/multifd.h"
->  static bool trans_illegal(DisasContext *ctx, arg_empty *a)
->  {
->      gen_exception_illegal(ctx);
-> @@ -370,6 +371,27 @@ static bool gen_load_tl(DisasContext *ctx, arg_lb *a=
-, MemOp memop)
->      return true;
->  }
->
-> +/* Zilsd extension adds load/store double for 32bit arch */
-> +static bool gen_load_zilsd(DisasContext *ctx, arg_lb *a)
-> +{
-> +    TCGv dest_1 =3D tcg_temp_new();
-> +    TCGv dest_2 =3D tcg_temp_new();
-> +    TCGv addr_1 =3D get_address(ctx, a->rs1, a->imm);
-> +    TCGv addr_2 =3D get_address(ctx, a->rs1, a->imm+4);
-> +
-> +    tcg_gen_qemu_ld_tl(dest_1, addr_1, ctx->mem_idx, MO_SL);
-> +    tcg_gen_qemu_ld_tl(dest_2, addr_2, ctx->mem_idx, MO_SL);
-> +
-> +    /* If destination is x0 then result of the load is discarded */
-> +    if (a->rd =3D=3D 0) {
-> +        return true;
-> +    }
-> +
-> +    gen_set_gpr(ctx, a->rd, dest_1);
-> +    gen_set_gpr(ctx, a->rd+1, dest_2);
-> +    return true;
-> +}
-> +
->  /* Compute only 64-bit addresses to use the address translation mechanis=
-m */
->  static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
->  {
-> @@ -409,6 +431,8 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, Me=
-mOp memop)
->      decode_save_opc(ctx, 0);
->      if (get_xl(ctx) =3D=3D MXL_RV128) {
->          out =3D gen_load_i128(ctx, a, memop);
-> +    } else if (memop =3D=3D MO_SQ && get_xl(ctx) =3D=3D MXL_RV32) {
-> +        out =3D gen_load_zilsd(ctx, a);
->      } else {
->          out =3D gen_load_tl(ctx, a, memop);
->      }
-> @@ -437,7 +461,10 @@ static bool trans_lw(DisasContext *ctx, arg_lw *a)
->
->  static bool trans_ld(DisasContext *ctx, arg_ld *a)
->  {
-> -    REQUIRE_64_OR_128BIT(ctx);
-> +    /* Check for Zilsd extension if 32bit */
-> +    if (get_xl(ctx) =3D=3D MXL_RV32 && !ctx->cfg_ptr->ext_zilsd) {
-> +        return false;
-> +    }
->      return gen_load(ctx, a, MO_SQ);
->  }
->
-> @@ -482,6 +509,27 @@ static bool gen_store_tl(DisasContext *ctx, arg_sb *=
-a, MemOp memop)
->      return true;
->  }
->
-> +/* Zilsd extension adds load/store double for 32bit arch */
-> +static bool gen_store_zilsd(DisasContext *ctx, arg_sb *a)
-> +{
-> +    TCGv data_1 =3D tcg_temp_new();
-> +    TCGv data_2 =3D tcg_temp_new();
-> +    if (a->rs2 !=3D 0) {
-> +        data_1 =3D get_gpr(ctx, a->rs2, EXT_NONE);
-> +        data_2 =3D get_gpr(ctx, a->rs2+1, EXT_NONE);
-> +    }
+> Introduce NEORV32 RV32 CPU type under target/riscv, wire NEORV32 vendor I=
+D,
+> and add a vendor CSR (CSR_MXISA) guarded by mvendorid match, plus meson g=
+lue.
 
-Don't mix code and declarations, otherwise
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Looks good. There are a bunch of whitespace errors though, can you run
+your patches through checkpatch.pl
 
 Alistair
 
-> +    TCGv addr_1 =3D get_address(ctx, a->rs1, a->imm);
-> +    TCGv addr_2 =3D get_address(ctx, a->rs1, a->imm+4);
+>
+> Signed-off-by: Michael Levit <michael@videogpu.com>
+>
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 75f4e43408..a39bf853cc 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -57,6 +57,8 @@
+>  #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-n=
+anhu")
+>  #define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-k=
+unminghu")
+>  #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+> +#define TYPE_RISCV_CPU_NEORV32          RISCV_CPU_TYPE_NAME("neorv32")
 > +
-> +    if (ctx->ztso) {
-> +        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-> +    }
+>
+>  OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 73d4280d7c..7bcf93c66c 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -245,6 +245,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(xtheadmempair, PRIV_VERSION_1_11_0, ext_xtheadmem=
+pair),
+>      ISA_EXT_DATA_ENTRY(xtheadsync, PRIV_VERSION_1_11_0, ext_xtheadsync),
+>      ISA_EXT_DATA_ENTRY(xventanacondops, PRIV_VERSION_1_12_0, ext_XVentan=
+aCondOps),
+> +    ISA_EXT_DATA_ENTRY(xneorv32xisa,PRIV_VERSION_1_10_0,ext_xneorv32xisa=
+),
+>
+>      { },
+>  };
+> @@ -1366,6 +1367,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[=
+] =3D {
+>      MULTI_EXT_CFG_BOOL("xtheadmempair", ext_xtheadmempair, false),
+>      MULTI_EXT_CFG_BOOL("xtheadsync", ext_xtheadsync, false),
+>      MULTI_EXT_CFG_BOOL("xventanacondops", ext_XVentanaCondOps, false),
+> +       MULTI_EXT_CFG_BOOL("xneorv32xisa", ext_xneorv32xisa, false),
+>
+>      { },
+>  };
+> @@ -3032,6 +3034,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>          .cfg.pmp_regions =3D 8
+>      ),
+>
 > +
-> +    tcg_gen_qemu_st_tl(data_1, addr_1, ctx->mem_idx, MO_SL);
-> +    tcg_gen_qemu_st_tl(data_2, addr_2, ctx->mem_idx, MO_SL);
-> +    return true;
+>  #if defined(TARGET_RISCV32) || \
+>      (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
+>      DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE32, TYPE_RISCV_DYNAMIC_CPU,
+> @@ -3075,6 +3078,21 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>          .misa_mxl_max =3D MXL_RV32,
+>          .misa_ext =3D RVE
+>      ),
+> +       DEFINE_RISCV_CPU(TYPE_RISCV_CPU_NEORV32, TYPE_RISCV_VENDOR_CPU,
+> +               .misa_mxl_max =3D MXL_RV32,
+> +        .misa_ext =3D RVI | RVM | RVA | RVC | RVU,
+> +        .priv_spec =3D PRIV_VERSION_1_10_0,
+> +
+> +        .cfg.max_satp_mode =3D VM_1_10_MBARE,
+> +        .cfg.ext_zifencei =3D true,
+> +        .cfg.ext_zicsr =3D true,
+> +        .cfg.pmp =3D true,
+> +        .cfg.pmp_regions =3D 16,
+> +               .cfg.mvendorid =3D NEORV32_VENDOR_ID,
+> +#ifndef CONFIG_USER_ONLY
+> +        .custom_csrs =3D neorv32_csr_list
+> +#endif
+> +    ),
+>  #endif
+>
+>  #if (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 36e7f10037..6a9918a25a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -985,5 +985,8 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_=
+32_bit);
+>  /* In th_csr.c */
+>  extern const RISCVCSR th_csr_list[];
+>
+> +/* Implemented in neorv32_csr.c */
+> +extern const RISCVCSR neorv32_csr_list[];
+> +
+>  const char *priv_spec_to_str(int priv_version);
+>  #endif /* RISCV_CPU_H */
+>
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index aa28dc8d7e..9ad38506e4 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -64,5 +64,6 @@ MATERIALISE_EXT_PREDICATE(xtheadmemidx)
+>  MATERIALISE_EXT_PREDICATE(xtheadmempair)
+>  MATERIALISE_EXT_PREDICATE(xtheadsync)
+>  MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
+> +MATERIALISE_EXT_PREDICATE(xneorv32xisa)
+>
+>  #endif
+>
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fie=
+lds.h.inc
+> index a154ecdc79..b84e1bd287 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -147,6 +147,7 @@ BOOL_FIELD(ext_xtheadmemidx)
+>  BOOL_FIELD(ext_xtheadmempair)
+>  BOOL_FIELD(ext_xtheadsync)
+>  BOOL_FIELD(ext_XVentanaCondOps)
+> +BOOL_FIELD(ext_xneorv32xisa)
+>
+>  BOOL_FIELD(mmu)
+>  BOOL_FIELD(pmp)
+>
+> diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
+> index 96b6b9c2cb..66a8f30b81 100644
+> --- a/target/riscv/cpu_vendorid.h
+> +++ b/target/riscv/cpu_vendorid.h
+> @@ -7,4 +7,6 @@
+>  #define VEYRON_V1_MIMPID        0x111
+>  #define VEYRON_V1_MVENDORID     0x61f
+>
+> +#define NEORV32_VENDOR_ID       0xF0000001
+> +
+>  #endif /*  TARGET_RISCV_CPU_VENDORID_H */
+>
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index fdefe88ccd..44e706ad3f 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -40,6 +40,7 @@ riscv_system_ss.add(files(
+>    'th_csr.c',
+>    'time_helper.c',
+>    'riscv-qmp-cmds.c',
+> +  'neorv32_csr.c',
+>  ))
+>
+>  subdir('tcg')
+>
+> diff --git a/target/riscv/neorv32_csr.c b/target/riscv/neorv32_csr.c
+> new file mode 100644
+> index 0000000000..0cb8663436
+> --- /dev/null
+> +++ b/target/riscv/neorv32_csr.c
+> @@ -0,0 +1,54 @@
+> +/*
+> + * Neorv32-specific CSR.
+> + *
+> + * Copyright (c) 2025 Michael Levit
+> + *
+> + * Author:
+> + *   Michael Levit <michael@videogpu.com>
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
+ for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License alo=
+ng with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "cpu.h"
+> +#include "cpu_vendorid.h"
+> +
+> +#define    CSR_MXISA    (0xfc0)
+> +
+> +static RISCVException smode(CPURISCVState *env, int csrno)
+> +{
+> +       return RISCV_EXCP_NONE;
 > +}
 > +
->  static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
->  {
->      TCGv src1l =3D get_gpr(ctx, a->rs1, EXT_NONE);
-> @@ -511,6 +559,8 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, M=
-emOp memop)
->      decode_save_opc(ctx, 0);
->      if (get_xl(ctx) =3D=3D MXL_RV128) {
->          return gen_store_i128(ctx, a, memop);
-> +    } else if (memop =3D=3D MO_UQ && get_xl(ctx) =3D=3D MXL_RV32) {
-> +        return gen_store_zilsd(ctx, a);
->      } else {
->          return gen_store_tl(ctx, a, memop);
->      }
-> @@ -533,7 +583,10 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
->
->  static bool trans_sd(DisasContext *ctx, arg_sd *a)
->  {
-> -    REQUIRE_64_OR_128BIT(ctx);
-> +    /* Check for Zilsd extension if 32bit */
-> +    if (get_xl(ctx) =3D=3D MXL_RV32 && !ctx->cfg_ptr->ext_zilsd) {
-> +        return false;
-> +    }
->      return gen_store(ctx, a, MO_UQ);
->  }
->
+> +static RISCVException read_neorv32_xisa(CPURISCVState *env, int csrno,
+> +                                       target_ulong *val)
+> +{
+> +       /* We don't support any extension for now on QEMU */
+> +    *val =3D 0x00;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static bool test_neorv32_mvendorid(RISCVCPU *cpu)
+> +{
+> +    return cpu->cfg.mvendorid =3D=3D NEORV32_VENDOR_ID;
+> +}
+> +
+> +const RISCVCSR neorv32_csr_list[] =3D {
+> +    {
+> +        .csrno =3D CSR_MXISA,
+> +        .insertion_test =3D test_neorv32_mvendorid,
+> +        .csr_ops =3D { "neorv32.xisa", smode, read_neorv32_xisa }
+> +    },
+> +    { }
+> +};
+> +
 > --
-> 2.43.0
+> 2.51.1
 >
 
