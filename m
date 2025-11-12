@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68547CCFA1A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 06:52:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76024CCFA1A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 06:52:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJ4hE-0006jl-05; Wed, 12 Nov 2025 01:51:12 -0500
+	id 1vJ4hC-0006iX-5O; Wed, 12 Nov 2025 01:51:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1vJ4gC-0006Lf-M5; Wed, 12 Nov 2025 01:50:20 -0500
-Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132])
+ id 1vJ4g9-0006KQ-EL; Wed, 12 Nov 2025 01:50:07 -0500
+Received: from out30-133.freemail.mail.aliyun.com ([115.124.30.133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1vJ4g4-0001W7-LN; Wed, 12 Nov 2025 01:50:06 -0500
+ id 1vJ4g4-0001Wb-JG; Wed, 12 Nov 2025 01:50:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1762930192; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=D6hxXjspeNA6pycvYior6h12FLtDmYammcdZitMD384=;
- b=dzoHVROryC0cvd168JdX8AqK3xMWGbqNm/3HULFRPT1XmYMoKj2q+uz5f4mYzaUNMYLuCbqGsU3e1yRIRxb2zGroB9BaUOtpIieALds+MMo+c9t1m74G1s48Lu5VtnVRkanhYRt3xdYCVge7Gzfagfj8G401F1JUvzdwAoosYLE=
+ t=1762930194; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=vgzzjNPLZ8wZOVR/jL4BoqiZstbNeBM+KJ0qg0mSqEY=;
+ b=SXHOghHLpLx39yNohZrRajqFW3KI/ikNYIa+0oxKtTiJgdkT+hXMjMVnLB+H5fim24C4wpi05v2jIsL0T9+vUFSeVnHpc+lAgHuaNTbwhYvNYjK1K7uuCc7HJ4ZKuu3J329NIMhjo5hwI+dWASmlyEBT2FozuXHiJCH/NnQmFfw=
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WsFCrAE_1762930191 cluster:ay36) by smtp.aliyun-inc.com;
- Wed, 12 Nov 2025 14:49:51 +0800
+ fp:SMTPD_---0WsFCrAS_1762930191 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 12 Nov 2025 14:49:52 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, Huang Tao <eric.huang@linux.alibaba.com>,
  TANG Tiancheng <lyndra@linux.alibaba.com>
-Subject: [PATCH v4 3/6] target/riscv: Integrate SMMPT checks into MMU and TLB
- fill
-Date: Wed, 12 Nov 2025 14:49:42 +0800
-Message-Id: <20251112064945.46533-4-zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v4 4/6] target/riscv: Implement SMMPT fence instructions
+Date: Wed, 12 Nov 2025 14:49:43 +0800
+Message-Id: <20251112064945.46533-5-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.39.3 (Apple Git-146)
 In-Reply-To: <20251112064945.46533-1-zhiwei_liu@linux.alibaba.com>
 References: <20251112064945.46533-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.132;
+Received-SPF: pass client-ip=115.124.30.133;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-132.freemail.mail.aliyun.com
+ helo=out30-133.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -68,147 +67,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-With the core MPT lookup logic in place, this patch integrates the
-permission checks into QEMU's main MMU processing functions.
+This patch completes the SMMPT implementation by adding support for the
+new fence instructions: `mfence.spa` and `minval.spa`.
 
-A new helper, `get_physical_address_mpt`, is introduced to check the
-permissions for a given physical address against the MPT. This helper
-is then called at two critical points:
+According to the specification, these instructions act as memory ordering
+fences for MPT updates. In QEMU's TCG model, this is conservatively
+implemented by flushing the entire TLB, which ensures that any subsequent
+memory accesses will re-evaluate permissions and see the effects of any prior
+MPT modifications.
 
-1. During page table walks (`get_physical_address`): The physical
-   address of the Page Table Entry (PTE) itself is checked to ensure
-   the supervisor has permission to read it.
-
-2. After successful address translation (`riscv_cpu_tlb_fill`): The final
-   guest-physical address is checked against the MPT before the access
-   is allowed to proceed.
-
-This ensures that SMMPT protection is enforced for both the translation
-process and the final memory access, as required by the specification.
+The instructions are privileged and will cause an illegal instruction
+exception if executed outside of M-mode.
 
 Co-authored-by: Huang Tao <eric.huang@linux.alibaba.com>
 Co-authored-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu_helper.c | 76 ++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 75 insertions(+), 1 deletion(-)
+ target/riscv/insn32.decode                    |  2 ++
+ .../riscv/insn_trans/trans_privileged.c.inc   | 30 +++++++++++++++++++
+ 2 files changed, 32 insertions(+)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index a055a8ab20..e4d52a37af 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1161,6 +1161,60 @@ static bool check_svukte_addr(CPURISCVState *env, vaddr addr)
-     return !high_bit;
- }
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index cd23b1f3a9..cf58f1beee 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -120,6 +120,8 @@ sret        0001000    00010 00000 000 00000 1110011
+ mret        0011000    00010 00000 000 00000 1110011
+ wfi         0001000    00101 00000 000 00000 1110011
+ sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
++mfence_spa  1000011    ..... ..... 000 00000 1110011 @sfence_vma
++minval_spa  0000011    ..... ..... 000 00000 1110011 @sfence_vma
  
-+/*
-+ * get_physical_address_mpt - check mpt permission for this physical address
-+ *
-+ * Lookup the Memory Protection Table and check permission for this
-+ * physical address. Returns 0 if the permission checking was successful
-+ *
-+ * @env: CPURISCVState
-+ * @prot: The returned protection attributes
-+ * @addr: The physical address to be checked permission
-+ * @access_type: The type of MMU access
-+ * @mode: Indicates current privilege level.
-+ */
-+static int get_physical_address_mpt(CPURISCVState *env, int *prot, hwaddr addr,
-+                                    MMUAccessType access_type, int mode)
+ # *** NMI ***
+ mnret       0111000    00010 00000 000 00000 1110011
+diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+index 8a62b4cfcd..5ec6bf5991 100644
+--- a/target/riscv/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/insn_trans/trans_privileged.c.inc
+@@ -160,3 +160,33 @@ static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
+ #endif
+     return false;
+ }
++
++#define REQUIRE_SMSDID(ctx) do {          \
++    if (!ctx->cfg_ptr->ext_smsdid) {      \
++        return false;                     \
++    }                                     \
++} while (0)
++
++static bool do_mfence_spa(DisasContext *ctx)
 +{
-+    mpt_access_t mpt_access;
-+    bool mpt_has_access;
-+
-+    /*
-+     * If the extension is not supported or the mmpt.mode is Bare,
-+     * there is no protection, return success.
-+     */
-+    if (!riscv_cpu_cfg(env)->ext_smmpt || env->mptmode == 0) {
-+        *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
-+        return TRANSLATE_SUCCESS;
++#ifndef CONFIG_USER_ONLY
++    REQUIRE_SMSDID(ctx);
++    if (ctx->priv != PRV_M) {
++        return false;
 +    }
-+
-+    /*
-+     * MPT is checked for all accesses to physical memory, unless the
-+     * effective privilege mode is M.
-+     *
-+     * Data accesses in M-mode when the MPRV bit in mstatus is set and
-+     * the MPP field in mstatus contains S or U are subject to MPT checks.
-+     *
-+     * In riscv_env_mmu_index, The MPRV and MPP bits are already checked and
-+     * encoded to mmu_idx, So we do not need to check it here.
-+     */
-+    if (mode == PRV_M) {
-+        *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
-+        return TRANSLATE_SUCCESS;
-+    }
-+
-+    mpt_has_access = smmpt_check_access(env, addr,
-+                                      &mpt_access, access_type);
-+    if (!mpt_has_access) {
-+        *prot = 0;
-+        return TRANSLATE_MPT_FAIL;
-+    }
-+
-+    *prot = smmpt_access_to_page_prot(mpt_access);
-+
-+    return TRANSLATE_SUCCESS;
++    decode_save_opc(ctx, 0);
++    gen_helper_tlb_flush_all(tcg_env);
++    return true;
++#endif
++    return false;
 +}
 +
- /*
-  * get_physical_address - get the physical address for this virtual address
-  *
-@@ -1355,6 +1409,13 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-             pte_addr = base + idx * ptesize;
-         }
- 
-+        int mpt_prot;
-+        int mpt_ret = get_physical_address_mpt(env, &mpt_prot, pte_addr,
-+                                               MMU_DATA_LOAD, PRV_S);
-+        if (mpt_ret != TRANSLATE_SUCCESS) {
-+            return TRANSLATE_MPT_FAIL;
-+        }
++static bool trans_mfence_spa(DisasContext *ctx, arg_mfence_spa *a)
++{
++    return do_mfence_spa(ctx);
++}
 +
-         int pmp_prot;
-         int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
-                                                sxlen_bytes,
-@@ -1765,7 +1826,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     CPURISCVState *env = &cpu->env;
-     vaddr im_address;
-     hwaddr pa = 0;
--    int prot, prot2, prot_pmp;
-+    int prot, prot2, prot_pmp, mpt_prot;
-     bool pmp_violation = false;
-     bool first_stage_error = true;
-     bool two_stage_lookup = mmuidx_2stage(mmu_idx);
-@@ -1819,6 +1880,13 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-             prot &= prot2;
- 
-             if (ret == TRANSLATE_SUCCESS) {
-+                ret = get_physical_address_mpt(env, &mpt_prot, pa,
-+                                               access_type, mode);
-+                qemu_log_mask(CPU_LOG_MMU,
-+                              "%s MPT address=" HWADDR_FMT_plx " ret %d prot"
-+                              " %d\n",
-+                              __func__, pa, ret, mpt_prot);
-+                prot &= mpt_prot;
-                 ret = get_physical_address_pmp(env, &prot_pmp, pa,
-                                                size, access_type, mode);
-                 tlb_size = pmp_get_tlb_size(env, pa);
-@@ -1854,6 +1922,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                       __func__, address, ret, pa, prot);
- 
-         if (ret == TRANSLATE_SUCCESS) {
-+            ret = get_physical_address_mpt(env, &mpt_prot, pa,
-+                                           access_type, mode);
-+            qemu_log_mask(CPU_LOG_MMU,
-+                          "%s MPT address=" HWADDR_FMT_plx " ret %d prot %d\n",
-+                          __func__, pa, ret, mpt_prot);
-+            prot &= mpt_prot;
-             ret = get_physical_address_pmp(env, &prot_pmp, pa,
-                                            size, access_type, mode);
-             tlb_size = pmp_get_tlb_size(env, pa);
++static bool trans_minval_spa(DisasContext *ctx, arg_minval_spa *a)
++{
++    return do_mfence_spa(ctx);
++}
 -- 
 2.25.1
 
