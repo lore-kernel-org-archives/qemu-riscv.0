@@ -4,45 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9765ECCF9F8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 06:41:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95E1CCCFA1A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 06:42:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJ4Xk-0004iF-4d; Wed, 12 Nov 2025 01:41:24 -0500
+	id 1vJ4Xq-0004oV-3x; Wed, 12 Nov 2025 01:41:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1vJ4XB-0004DL-KE; Wed, 12 Nov 2025 01:40:49 -0500
-Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132])
+ id 1vJ4X9-0004Bz-Ig; Wed, 12 Nov 2025 01:40:47 -0500
+Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1vJ4X9-0000Nj-Mg; Wed, 12 Nov 2025 01:40:49 -0500
+ id 1vJ4X7-0000Mv-2Q; Wed, 12 Nov 2025 01:40:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1762929641; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=vgzzjNPLZ8wZOVR/jL4BoqiZstbNeBM+KJ0qg0mSqEY=;
- b=KuztAQNUl1Unvmz77/yth9YUi2FSrla1vOlKVwoifP2X6NRE5Dcxenxx53kNqE8ba1nCP1cRX0WzaS21KRRU8CLdjw4LDmWABJOJNeOVD3m48NAHk04wV/HBwu9VCs+HxiypOXX8HCHopXDSaP6Z1SwRqQ1vZTLUrh15fR86DqM=
+ t=1762929633; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=LkDz/p7t+T+PV1mfUzHw9wDgGZ0AEmqr3sWsbFCFH5Y=;
+ b=XJ59Mdn9Lxmvh17Z6kbM5rtmk82F7aDH+KLFD6gUBV2YShBtc+rtlTPXZJ9fumxw+cfUfJXyqF2RBQwjMY394lEMw21DVSBlSF5nAZu3xlV+UMn222W1YdvbK//YI/YFjJXZDHA4NV88c95C6iPHC2terS8OI4675l8B002YpSI=
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WsF6VJU_1762929640 cluster:ay36) by smtp.aliyun-inc.com;
- Wed, 12 Nov 2025 14:40:40 +0800
+ fp:SMTPD_---0WsF6VG3_1762929631 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 12 Nov 2025 14:40:32 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, Huang Tao <eric.huang@linux.alibaba.com>,
- TANG Tiancheng <lyndra@linux.alibaba.com>
-Subject: [PATCH v3 4/6] target/riscv: Implement SMMPT fence instructions
-Date: Wed, 12 Nov 2025 14:40:24 +0800
-Message-Id: <20251112064026.44222-5-zhiwei_liu@linux.alibaba.com>
+ zhiwei_liu@linux.alibaba.com
+Subject: [PATCH v3 0/6] target/riscv: Implement Smsdid and Smmpt extension
+Date: Wed, 12 Nov 2025 14:40:20 +0800
+Message-Id: <20251112064026.44222-1-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.39.3 (Apple Git-146)
-In-Reply-To: <20251112064026.44222-1-zhiwei_liu@linux.alibaba.com>
-References: <20251112064026.44222-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.132;
+Received-SPF: pass client-ip=115.124.30.131;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-132.freemail.mail.aliyun.com
+ helo=out30-131.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -67,78 +64,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch completes the SMMPT implementation by adding support for the
-new fence instructions: `mfence.spa` and `minval.spa`.
+This patch set introduces support for the RISC-V Smmpt (Supervisor
+Memory-tracking and Protection Table) extension. Smmpt provides a
+hardware mechanism for fine-grained memory protection, checked after
+address translation, which is particularly useful for supervisor-level
+sandboxing and security monitoring.
 
-According to the specification, these instructions act as memory ordering
-fences for MPT updates. In QEMU's TCG model, this is conservatively
-implemented by flushing the entire TLB, which ensures that any subsequent
-memory accesses will re-evaluate permissions and see the effects of any prior
-MPT modifications.
+The rfc patch set:
+https://mail.gnu.org/archive/html/qemu-riscv/2025-09/msg00216.html
 
-The instructions are privileged and will cause an illegal instruction
-exception if executed outside of M-mode.
+v2->v3:
+    1. Fix build error in patch 2.
+    2. Rebase to master.
 
-Co-authored-by: Huang Tao <eric.huang@linux.alibaba.com>
-Co-authored-by: TANG Tiancheng <lyndra@linux.alibaba.com>
-Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/insn32.decode                    |  2 ++
- .../riscv/insn_trans/trans_privileged.c.inc   | 30 +++++++++++++++++++
- 2 files changed, 32 insertions(+)
+rfc->v2:
+    1. When ext_smmpt is false or BARE mode, make other fields in mmpt
+       CSR zero.
+    2. Add patch 5 to fix smrnmi ISA string order.
+    3. Fix patch 6 smmpt and smsdid ISA string order.
+    4. Make smmpt and smsdid experiment extensions.
+    5. Add review tags.
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index cd23b1f3a9..cf58f1beee 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -120,6 +120,8 @@ sret        0001000    00010 00000 000 00000 1110011
- mret        0011000    00010 00000 000 00000 1110011
- wfi         0001000    00101 00000 000 00000 1110011
- sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
-+mfence_spa  1000011    ..... ..... 000 00000 1110011 @sfence_vma
-+minval_spa  0000011    ..... ..... 000 00000 1110011 @sfence_vma
- 
- # *** NMI ***
- mnret       0111000    00010 00000 000 00000 1110011
-diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
-index 8a62b4cfcd..5ec6bf5991 100644
---- a/target/riscv/insn_trans/trans_privileged.c.inc
-+++ b/target/riscv/insn_trans/trans_privileged.c.inc
-@@ -160,3 +160,33 @@ static bool trans_sfence_vma(DisasContext *ctx, arg_sfence_vma *a)
- #endif
-     return false;
- }
-+
-+#define REQUIRE_SMSDID(ctx) do {          \
-+    if (!ctx->cfg_ptr->ext_smsdid) {      \
-+        return false;                     \
-+    }                                     \
-+} while (0)
-+
-+static bool do_mfence_spa(DisasContext *ctx)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    REQUIRE_SMSDID(ctx);
-+    if (ctx->priv != PRV_M) {
-+        return false;
-+    }
-+    decode_save_opc(ctx, 0);
-+    gen_helper_tlb_flush_all(tcg_env);
-+    return true;
-+#endif
-+    return false;
-+}
-+
-+static bool trans_mfence_spa(DisasContext *ctx, arg_mfence_spa *a)
-+{
-+    return do_mfence_spa(ctx);
-+}
-+
-+static bool trans_minval_spa(DisasContext *ctx, arg_minval_spa *a)
-+{
-+    return do_mfence_spa(ctx);
-+}
+
+LIU Zhiwei (6):
+  target/riscv: Add basic definitions and CSRs for SMMPT
+  target/riscv: Implement core SMMPT lookup logic
+  target/riscv: Integrate SMMPT checks into MMU and TLB fill
+  target/riscv: Implement SMMPT fence instructions
+  target/riscv: Fix smrnmi isa alphabetical order
+  target/riscv: Enable SMMPT extension
+
+ target/riscv/cpu.c                            |   6 +-
+ target/riscv/cpu.h                            |   9 +-
+ target/riscv/cpu_bits.h                       |  27 ++
+ target/riscv/cpu_cfg_fields.h.inc             |   2 +
+ target/riscv/cpu_helper.c                     |  81 +++++-
+ target/riscv/csr.c                            |  95 ++++++
+ target/riscv/insn32.decode                    |   2 +
+ .../riscv/insn_trans/trans_privileged.c.inc   |  30 ++
+ target/riscv/meson.build                      |   1 +
+ target/riscv/pmp.h                            |   3 +
+ target/riscv/riscv_smmpt.c                    | 274 ++++++++++++++++++
+ target/riscv/riscv_smmpt.h                    |  36 +++
+ 12 files changed, 560 insertions(+), 6 deletions(-)
+ create mode 100644 target/riscv/riscv_smmpt.c
+ create mode 100644 target/riscv/riscv_smmpt.h
+
 -- 
 2.25.1
 
