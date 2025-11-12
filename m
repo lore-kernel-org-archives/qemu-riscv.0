@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFB23CCFA18
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 00:58:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F832CCFA18
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 01:06:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vIzBl-00016D-St; Tue, 11 Nov 2025 19:58:21 -0500
+	id 1vIzJo-000447-AE; Tue, 11 Nov 2025 20:06:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vIzBk-00015M-T1
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 19:58:20 -0500
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ id 1vIzJl-00042S-9K
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 20:06:37 -0500
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1vIzBj-0007Aq-9k
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 19:58:20 -0500
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b7272012d30so47711266b.2
- for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 16:58:18 -0800 (PST)
+ id 1vIzJj-0000Up-PA
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 20:06:37 -0500
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b729f239b39so50705566b.0
+ for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 17:06:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762909098; x=1763513898; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1762909593; x=1763514393; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AlJOSdY9gejfEjf0mcm+BMw5d1pO7d3fxtdUHg7SH4c=;
- b=RqalWcbFAAkQwI5qFAhg4mmCwZgiAb0Pcj4Eb3jRERUhKknN4Xa+h4A00qz8Jo7yIJ
- wL4MaD44r+OSHB+tSXRswc8IvpOYcN0g5aBvK2NE7O4a2THNrgNzb4JKoTEt7ikzP9pn
- fYGsDqM/RS16GIuGgpEHI1Hood55kufSLbWXOYAj0CfFhtviAK/86rCxnP5Ag3D+PYV1
- kCVxvcFRsQUqch866/WlLrKnrv6iMNl17fV3jwRfiC2n2hj0YgKMC6q3sXnsu+1WOFeB
- QRKYvZO07+hQkDMlI1NDt4tzPrtiGkdhuklGg8TYJm0Wto7IId4KOUk60UxVJFZquljc
- Wqjw==
+ bh=XvhMcUh+UpChbQh8PclRGyUbOeZNkjouJKlydi97Kug=;
+ b=bEMtIoaOmkD3Mwh58mRwJ/+PNKYe5MYhImrrwLi6vx10+nTkv0RJ48yIFZPiNb2yBT
+ EyIUT9WEoVCyKRul5NPc8d4u5bpjQvAUcXmRv1wjeRlBl2/CEp2eHVvB7E035GDBevuP
+ MuiG8C0nIdVqTCHkO2/donfHEY8ZdO0R/tmkkUU+Hmk+eacSlPwEMH2PFDuZoqHAuq1S
+ HVU41lDxTtUiXfJhRY/hAd8b9gEcrXkC/e9B3ilSB89lHnVqBa7PF9PwDdQqwegFEqfQ
+ dY/iHNOtJHRUVc3rFobAmiTO+K4zi+v2tQUO1U+Azu5YBxHkuRE8Xq7ApwXlFdi9k0L/
+ DkJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762909098; x=1763513898;
+ d=1e100.net; s=20230601; t=1762909593; x=1763514393;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=AlJOSdY9gejfEjf0mcm+BMw5d1pO7d3fxtdUHg7SH4c=;
- b=sFa2Op0HgdfvnPpSOqL9MV7pkx8RSAmOjt2WJPaH1BVnyyu95QSo7w5/beh7NyF3qs
- Xz01j+yPnoqcxjq/rjPnz1Kjin6HerRVkFfWSNq1oTDl52M2MhwKyuiF6enzHy1PhL6l
- N8X+Cf5MGQrA6jfYj85ZnEsfWODvpLXd688P4h2HYbRfsw4G0nXGJEwsfgSAbZhunSW7
- b/FnVxHaAqHcUC3Es8J7Xy3uvG20kRnlaIijc2MDhpIn6A/ImvkZepjk+zTFIxgG2Zui
- TwJfpwukaXGdNPJ+A96o4XLk7sl+re7mRFxCBWyjUyRJEdi4SN0np2cgHqUtBpren+g2
- +6Vg==
+ bh=XvhMcUh+UpChbQh8PclRGyUbOeZNkjouJKlydi97Kug=;
+ b=DDoh716LMrq5CIocE39+pUxi06iSWjwoKppS1bgSoG72qdOB7y+kUefKYK5KEf844y
+ viOGj54tSqa9QUgLu9t1Q4BssDbqEU7Uuimz8WcwcL89bklSuKlAVMftZHo94a+Z9I5Y
+ PWOTEtbQ6G9dcQvKLpPZj3v9Cr5qn6xZGy1anO9RVSYDvEZFsQFD2Nw3/P6AwYWPn62e
+ 0GT27ZGseA8ZFNBra9tku1Uyl8IzCHe1ATEJD1r/TCM5O/LzAWzRMpBsSqTqq+5NuulA
+ fhkgawyGplBjCEPvDFkycpl3RULZYdeMOgRzDITOvceED5MVhVKWzIobi2v15JceEUXf
+ ZGtw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJxzoHG6W8q9Cb4uvGe2D3cAaWAgukujuynLPhslybw461EQebuuoMWNV8b2ZLkGac+oFVPVBE6w2a@nongnu.org
-X-Gm-Message-State: AOJu0YwxTuvL6sVrf4JWRKH6SpvNY46i96nVRqd5LQ247dOeB09KulSV
- xszD3Zd20FU0Yu3RX2ciCegtmY0FbQv2XhuVnj6ip5vWcrVDXQy9YuJnFmdRvwafMoaP76zVgr7
- bwxnwQVBh5izZdyXf7YxlYUf/ItniejU=
-X-Gm-Gg: ASbGncvuYAMlFw5jPqQRwAuVZlisK0VUZ2NFj1iAKmeGlhS6BncoIq6/D1OhOxtD3h8
- nchvrIACbdk1OrwvxdC5pm9cB8Z8W536nJxpma1knKn8xftqNUs3CJ6LDnAz9hlmPmS6SWizhDE
- qvwhe92rkd5EypUSCqktWp4mBNCROZjoR9WqhyUaicdo07385NztOSWbH5KgNA2i5k2BRxOOYn0
- nOnmkZg9a1hT+KmiFX3mCWWOHP1GSTn9/lCxD0AOvEUEIdsvLjdqntog+5u/6vnCq/tg4h2xgV2
- AvpJfLk7EHnRUsyMRqhMoEjPzA==
-X-Google-Smtp-Source: AGHT+IFBz152kEYQZ37uY2dGr3TrxsIba/lsFOaY7WudRrBOw+39emgZnBS1HkKN/ptntZMoJVfRJVBlXUMjRrSYNaI=
-X-Received: by 2002:a17:907:9487:b0:b72:58b6:b263 with SMTP id
- a640c23a62f3a-b7331aee8f7mr94546766b.60.1762909097580; Tue, 11 Nov 2025
- 16:58:17 -0800 (PST)
+ AJvYcCVek4D3soGYoZbYsF8IpXoi2T5UQEmtmfsyPlBtcj4xW1ck5uAPbVz+474+MO6LgKxpYCkWhdzqbQKj@nongnu.org
+X-Gm-Message-State: AOJu0YzH8KBmJX943dxK3zMggkr+DIOJN3Od3KfHcM5Zl2YzTj/6Ovas
+ BkZVqgvydF9g92Cl7/hw2/skZI7AwebTrDzb+09iosNtlg8QEBHqo4fqA7eHUumhsb/SFWO0OWi
+ ht2dQA0Ddz5aiZ5Fx/9JAMoVzrBEW9Wg=
+X-Gm-Gg: ASbGncspLWM4lJYtGnLsfgfSRc24TID9BuZJdKyvZS06pkr3PSOg7BOAj8hVY65hmId
+ R7mep3MRBdwof/LhJ1WpHf4djB/KomAmc1AOmkLUdlTMuC3Y/GDys+RF8AzUGqXO4RUK/gayqqZ
+ qdKZuLlolaRu1vQkN7Ho3awB9sX05ywTHBaOyI6DFmNLe/z6WRcczsz9Luxuid4979BCtNieeLE
+ 7CdLWrHdN0pC9ElC2LWLCW7hK5NQnUWFjhMBVrJjkPrImWfp98elEzLjBwNZXTmIigTWwQKbQM+
+ 8m3iJZJ+z0DsPwA=
+X-Google-Smtp-Source: AGHT+IHwiNkthort9wNDYNcLBlZfx6ZsNZlqD5hnI7FfjZLSF6rnpgGNCSmEJhUuwC9vhqtvHnu88bzXVWWrQU0EAjg=
+X-Received: by 2002:a17:907:c1a:b0:b73:1b97:5ddd with SMTP id
+ a640c23a62f3a-b731d1bff6bmr568082666b.8.1762909593125; Tue, 11 Nov 2025
+ 17:06:33 -0800 (PST)
 MIME-Version: 1.0
 References: <20251029-n-novikov-aplic_aia_ro-v1-0-39fec74c918a@syntacore.com>
- <20251029-n-novikov-aplic_aia_ro-v1-2-39fec74c918a@syntacore.com>
-In-Reply-To: <20251029-n-novikov-aplic_aia_ro-v1-2-39fec74c918a@syntacore.com>
+In-Reply-To: <20251029-n-novikov-aplic_aia_ro-v1-0-39fec74c918a@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Nov 2025 10:57:51 +1000
-X-Gm-Features: AWmQ_bkaoLxAVMDLLvicO39mTCevACWxa5m4oZX8oNl8sGHAYm3oPFWQRVorxjA
-Message-ID: <CAKmqyKMj=eLX=ZoruFUXAN2cCtii3tG_47seibneU_mV+Zu2Nw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] hw/intc/riscv_aplic: Factor out source_active() and
- remove duplicate checks
+Date: Wed, 12 Nov 2025 11:06:06 +1000
+X-Gm-Features: AWmQ_bkZr7QiJOliWWv6UZQYjUkEazNRc3D--mIs0nhUrkqptE3eFde97147qkw
+Message-ID: <CAKmqyKPtufR8H4YiBrVerg9TGPVKfMRxnq1ZGQoUc0rQRd2W8Q@mail.gmail.com>
+Subject: Re: [PATCH 0/2] hw/intc/riscv_aplic: Expand AIA target[i] source
+ handling and refactor related code
 To: Nikita Novikov <n.novikov@syntacore.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -80,8 +79,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x629.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -105,106 +104,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 29, 2025 at 5:19=E2=80=AFPM Nikita Novikov <n.novikov@syntacore=
+On Wed, Oct 29, 2025 at 5:20=E2=80=AFPM Nikita Novikov <n.novikov@syntacore=
 .com> wrote:
 >
-> Refactor the APLIC code to consolidate repeated conditions checking
-> whether an interrupt source is valid, delegated, or inactive.
+> During the debug of APLIC I faced with the problem with target[i]
+> registers of source i. According to RISC-V AIA spec v1.0 ratificated on
+> the 12-th of March, 2025, the section 4.5.2 ("Source configurations")
+> says, than register target[i] shall be read-only zero when interrupt sour=
+ce i
+> is inactive in this domain. A source is inactive if it is delegated to a =
+child
+> domain or its source mode is INACTIVE. Currently we checks the source sta=
+tus
+> only using sm =3D=3D INACTIVE, but we do not check whether the source is
+> delegated.
+>
+> This series of patches expands current active source checking and reduces
+> code the associated code dublication.
 >
 > Signed-off-by: Nikita Novikov <n.novikov@syntacore.com>
+> ---
+> Nikita Novikov (2):
+>       hw/intc/riscv_aplic: Expand inactive source handling for AIA target=
+[i]
+>       hw/intc/riscv_aplic: Factor out source_active() and remove duplicat=
+e checks
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
+>
+>  hw/intc/riscv_aplic.c | 66 ++++++++++++++++++++++-----------------------=
+------
+>  1 file changed, 29 insertions(+), 37 deletions(-)
 > ---
->  hw/intc/riscv_aplic.c | 44 +++++++-------------------------------------
->  1 file changed, 7 insertions(+), 37 deletions(-)
+> base-commit: d1bf06e8cc8197a2b18dbde820d957a51899d374
+> change-id: 20251028-n-novikov-aplic_aia_ro-1baa353cd672
 >
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index 8c3b16074cd3ca1bc3004cfaaa13f34b8860bd48..ccfbc9b4656f3e2a69eb5bcd1=
-cee9e5762020351 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -216,22 +216,13 @@ static inline bool riscv_aplic_source_active(RISCVA=
-PLICState *aplic,
->  static bool riscv_aplic_irq_rectified_val(RISCVAPLICState *aplic,
->                                            uint32_t irq)
->  {
-> -    uint32_t sourcecfg, sm, raw_input, irq_inverted;
-> +    uint32_t sm, raw_input, irq_inverted;
->
-> -    if (!irq || aplic->num_irqs <=3D irq) {
-> -        return false;
-> -    }
-> -
-> -    sourcecfg =3D aplic->sourcecfg[irq];
-> -    if (sourcecfg & APLIC_SOURCECFG_D) {
-> -        return false;
-> -    }
-> -
-> -    sm =3D sourcecfg & APLIC_SOURCECFG_SM_MASK;
-> -    if (sm =3D=3D APLIC_SOURCECFG_SM_INACTIVE) {
-> +    if (!riscv_aplic_source_active(aplic, irq)) {
->          return false;
->      }
->
-> +    sm =3D aplic->sourcecfg[irq] & APLIC_SOURCECFG_SM_MASK;
->      raw_input =3D (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
->      irq_inverted =3D (sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_LOW ||
->                      sm =3D=3D APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
-> @@ -284,22 +275,13 @@ static void riscv_aplic_set_pending_raw(RISCVAPLICS=
-tate *aplic,
->  static void riscv_aplic_set_pending(RISCVAPLICState *aplic,
->                                      uint32_t irq, bool pending)
->  {
-> -    uint32_t sourcecfg, sm;
-> +    uint32_t sm;
->
-> -    if ((irq <=3D 0) || (aplic->num_irqs <=3D irq)) {
-> -        return;
-> -    }
-> -
-> -    sourcecfg =3D aplic->sourcecfg[irq];
-> -    if (sourcecfg & APLIC_SOURCECFG_D) {
-> -        return;
-> -    }
-> -
-> -    sm =3D sourcecfg & APLIC_SOURCECFG_SM_MASK;
-> -    if (sm =3D=3D APLIC_SOURCECFG_SM_INACTIVE) {
-> +    if (!riscv_aplic_source_active(aplic, irq)) {
->          return;
->      }
->
-> +    sm =3D aplic->sourcecfg[irq] & APLIC_SOURCECFG_SM_MASK;
->      if ((sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_HIGH) ||
->          (sm =3D=3D APLIC_SOURCECFG_SM_LEVEL_LOW)) {
->          if (!aplic->msimode) {
-> @@ -370,19 +352,7 @@ static void riscv_aplic_set_enabled_raw(RISCVAPLICSt=
-ate *aplic,
->  static void riscv_aplic_set_enabled(RISCVAPLICState *aplic,
->                                      uint32_t irq, bool enabled)
->  {
-> -    uint32_t sourcecfg, sm;
-> -
-> -    if ((irq <=3D 0) || (aplic->num_irqs <=3D irq)) {
-> -        return;
-> -    }
-> -
-> -    sourcecfg =3D aplic->sourcecfg[irq];
-> -    if (sourcecfg & APLIC_SOURCECFG_D) {
-> -        return;
-> -    }
-> -
-> -    sm =3D sourcecfg & APLIC_SOURCECFG_SM_MASK;
-> -    if (sm =3D=3D APLIC_SOURCECFG_SM_INACTIVE) {
-> +    if (!riscv_aplic_source_active(aplic, irq)) {
->          return;
->      }
->
->
+> Best regards,
 > --
-> 2.51.0
+> Nikita Novikov <n.novikov@syntacore.com>
 >
 >
 
