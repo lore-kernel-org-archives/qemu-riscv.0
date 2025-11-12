@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E169CCFA1A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 07:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DED99CCF9F8
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 07:15:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJ531-0007oH-7E; Wed, 12 Nov 2025 02:13:43 -0500
+	id 1vJ53d-00007U-FU; Wed, 12 Nov 2025 02:14:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vJ52u-0007aM-8H
- for qemu-riscv@nongnu.org; Wed, 12 Nov 2025 02:13:36 -0500
-Received: from mail-wr1-x442.google.com ([2a00:1450:4864:20::442])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vJ539-0007xX-Em
+ for qemu-riscv@nongnu.org; Wed, 12 Nov 2025 02:13:52 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vJ52s-0005YE-EZ
- for qemu-riscv@nongnu.org; Wed, 12 Nov 2025 02:13:35 -0500
-Received: by mail-wr1-x442.google.com with SMTP id
- ffacd0b85a97d-42b2dc17965so370287f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 23:13:33 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vJ536-0005ZQ-Pg
+ for qemu-riscv@nongnu.org; Wed, 12 Nov 2025 02:13:51 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4710022571cso3772385e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 23:13:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762931613; x=1763536413; darn=nongnu.org;
+ d=linaro.org; s=google; t=1762931626; x=1763536426; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=SToKNFNxWpGdZztA7IEd8LMdQOrB7lsXcR+gQX37vnY=;
- b=eNzjzS1vH8B3m/eMPui0XbUwPJAZgRAdQEnzXMfML8r0o9cpo+Bd3fZW5cS52AbD0f
- pCbrVZF/wb/uD7pYXP1bPLjxFTflzy5oAnQGNc+iQiOkVDHCXfoR/VTWD1ruz4l1zmaA
- tGWfT7b8T0KJEvaBpqSQI+ymjnOwmnRWHhBTIxULt5qmma5uQaLrBqgXDwFd6fQugGC4
- ybyQ0kbAX9JD9NSGYksayT36NkgzO+aqiS2VZaQLla/kdDePXLsxkWUze+S56as0sHez
- AQ7sFvX5rV74hD2WVENVixx1KQCzXG4jrF8Pr2eYUGtdiXH56WQUiILIn6p65m4j1qrA
- aqsQ==
+ bh=JP15IZWR8qAc0tWzr+vK1k14ifPXVpBaDW6ReMVdEJ0=;
+ b=GYEmHZkDd/cP+lc4pIycqnsA/KYmUAr7/owH61U1eiUJdXZOahuVT0goVAMJKlSwhv
+ 0XOsXo9WFnEklLAxMckfD8EfrDwYW18bsCQTDSlHMKI9kATMdLfzn6jaSonEGz7qb1yW
+ WZUfY/JongV/9FftvXjkQqFgA65AjnovcjV9MoHbxD1oE9byTn9OrD0Fy6hY45gAb/d1
+ ERQ1FuKeNT17mVdiwCEJeqY0PkqjaY8M83QnyvyL3s9lqZ0j4ipqrDiAlXTTlKVrbx8T
+ yjNX2OesAL65LqEfCOiwXE3yPfTtnum9+n1WBJCsGs2FddLtFksrQiKUMSoKDErMVdZf
+ 8C/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762931613; x=1763536413;
+ d=1e100.net; s=20230601; t=1762931626; x=1763536426;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SToKNFNxWpGdZztA7IEd8LMdQOrB7lsXcR+gQX37vnY=;
- b=AyOvf8jChgVfGn0CwKEGBPTqMtIdU6EWw7qZzIjJ6cmhtNx4E97YNizNOkx///Sxo9
- igdKKai4XXD5uqEZjbckiKEFJ2TO1zZFjJTjHCXibBREgbHbBvzkivKpZux8/nI5dRsT
- mGs5AWE42ZYZRD+/clNOLImjdBsOxJBlZGxXB5fwYqAQS4onsKXa30kdXsOisdFT6kDL
- 0yv2yRqx+TFE/ZnbEZApg0Gx90G8GX7vbr81bd8u5G/OA/TnjHNds5VrgDpLc0DKoNMe
- XHymEct5zrKRreVdHLrMVqy9RmyPw0mN0EX8VXcDrT7op18vECJ0pUBQ8JtMHtO1hhQw
- IjIw==
-X-Gm-Message-State: AOJu0Ywsgdd6p7Nl1lopSdfp4bVplnsFarwF7JrF+9vXukpmsqTlGvgK
- k9iaamMjFYqpe0cOrD1GroBPKKVvRSnCtb7V6ILHVWO7CU3P1lL8z6rimGH2YFUeVPA=
-X-Gm-Gg: ASbGncurPJA3egyZyfL8lWO0FMuY/m/T50aGYtdz6q/9Zqcxch3JCSHCzSND9VjWZhk
- XHLNz7yCxThrwrw9YmMKV7xs8tSHSworL1cvE0Td54jMkjCN8SQ7LTDjthJdAsnCagNNAoSiIL3
- 2krL5zGST8Tz/1lQzURfEihnB1YTkorri26ROH/vAIqv/MX/HySFjnk1kyT8K07aKi+d6eJPgfy
- o+AXRSEY7oCbXATYcmtosQqRHGKxJhuuuUKSSvCr8NSjtRSeS3vGsoJg7/gJ3nLm+8AHLIiPWXk
- ePILdoLuTya/auW9YkfO6o6mYm0z9Y4Ms2j6zkKr1JVlHsVKCJIxkwbpoWd5Z3BUIQvWSJq57B7
- Ugbjd9CeqX8cueP9AKLIJpWObrKiwbLKMMQaP4eeeV+n5v9uHh8DDwTNYZAQAh2BI3y85tZ2kgI
- W19oCIntsMwS4Jd6jJ+AHwcbSGUcrJ0hNAUF6f/UxgDQyOlfEM
-X-Google-Smtp-Source: AGHT+IGxDHKQTRT9FMW1fL8Epb47f/j9HtWLL6HZNCrAHpLNNJ3o1D8l+NtCkzBAAozMAvLrijWMhA==
-X-Received: by 2002:a05:6000:250c:b0:429:cc1c:c42 with SMTP id
- ffacd0b85a97d-42b4bdae90fmr1535776f8f.61.1762931612692; 
- Tue, 11 Nov 2025 23:13:32 -0800 (PST)
+ bh=JP15IZWR8qAc0tWzr+vK1k14ifPXVpBaDW6ReMVdEJ0=;
+ b=MhfvKeIfHon7dj424R+EOAkxJQDNNMoQ3k2sGdTZ210gkQXMvN65JudjeQ3lW87AHq
+ BsNSpqqWTd7/a5uA975lYob7Utp8UZ+t+j7sbWbfrOxjoEVaKbpXBgfg6RCdNHDmAUjn
+ LfE/H7CZzGmqMYSPg99c7qbxKB6suaPaF2kRVKnk7SEI9RCZ0UgisGqJmQWKMAxcgdfv
+ y6ok3IZA44QlzRzHwUnL0+uodXtCv+XvkER1iKoi1ZlkbAsb+Mu1LdtDWx6Z4kmgTpkU
+ xlt/kQKxXtZ19rJksDsPWDyH0zGOYEXyJQWLDU2UvfHWiWPer/t65hV4v/i5+6NTKdfl
+ nlIA==
+X-Gm-Message-State: AOJu0YyJaltnyR4XTHCMbeqCFXm7N8tTLZu4HSXKUl+Wwh85Uhmxltii
+ XDONlIj3ECuDYZyA+CFkpRJ4x0haYVPkPHxO7OgxeKjP1Lo0C/hENH+tfTOhtZwvAAVgWXtr1VL
+ 6MwRhHKztVg==
+X-Gm-Gg: ASbGncvvRScSzHdwIYZuBzdNZJpiUhLnODXVD1+32yRjS8C4pcL7n8iiRLz9sDu/2vX
+ kmzZSczh1WoNEeLQXHYca+4HdrqfiL1AW6ydxHihDeLZLYlZfuOwfroNGmmud9S/aFMV7rvEpYS
+ GggPlM1cDkfGShKwjerwc/sxgWi91XE7GcPA397PJ1CXULIftvMD7d+byN2ppVThcP2aUMmQiyC
+ oKhrr7wxPnI1jcJXWzNB2hLYRo3Qtj4bJ5VZ+OchmpmSksg/NiWN1uzXPqx2eL+cuxG35AbufaM
+ pmgzGJVxYIyPB3GyMGimkdWFMBq1lNEfbu917DgMHwqpDhkE2o50HtdM5PM46JggvnB0nDx9pb4
+ FBIykZeNM/Mxsw6DdhGRqn38kTcoR+HmWmq0BLGso+XwyNx/WwL86ytD2lS7l9P4W/upAr2ZZkX
+ +ORzYfHZaS48z3zSB6OXxj1cvgJHYeLGDfYQwZRIdOwdjid/B0BuSUCp6PNHQ=
+X-Google-Smtp-Source: AGHT+IFgDUFQCJ7adEN0Il+lrYYzAtCB2COR3CBdk/PGv+TskJHC5uo8S0feCdXbxgFzyDnT/oXisw==
+X-Received: by 2002:a05:600c:1f8c:b0:471:16b1:b824 with SMTP id
+ 5b1f17b1804b1-477871c47b6mr18358705e9.28.1762931625640; 
+ Tue, 11 Nov 2025 23:13:45 -0800 (PST)
 Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42b2e9644fbsm24417511f8f.25.2025.11.11.23.13.31
+ 5b1f17b1804b1-47787e2bcf9sm19860375e9.3.2025.11.11.23.13.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Nov 2025 23:13:32 -0800 (PST)
-Message-ID: <4b2862d9-0912-4a73-bcf6-29bdfd681b0e@linaro.org>
-Date: Wed, 12 Nov 2025 08:13:31 +0100
+ Tue, 11 Nov 2025 23:13:45 -0800 (PST)
+Message-ID: <6697cd8d-4bd3-4492-9e43-b56d65709187@linaro.org>
+Date: Wed, 12 Nov 2025 08:13:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/5] hw/riscv: experimental server platform reference
- machine
+Subject: Re: [PATCH v4 4/5] hw/riscv/server_platform_ref.c: add riscv-iommu-sys
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Fei Wu <wu.fei9@sanechips.com.cn>
+ Andrew Jones <ajones@ventanamicro.com>
 References: <20251111182944.2895892-1-dbarboza@ventanamicro.com>
- <20251111182944.2895892-4-dbarboza@ventanamicro.com>
+ <20251111182944.2895892-5-dbarboza@ventanamicro.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20251111182944.2895892-4-dbarboza@ventanamicro.com>
+In-Reply-To: <20251111182944.2895892-5-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::442;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x442.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,51 +105,19 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Fei, Daniel,
-
 On 11/11/25 19:29, Daniel Henrique Barboza wrote:
-> From: Fei Wu <wu.fei9@sanechips.com.cn>
+> Add an always present IOMMU platform device for the rvsp-ref board.
 > 
-> The RISC-V Server Platform specification [1] defines a standardized set
-> of hardware and software capabilities, that portable system software,
-> such as OS and hypervisors can rely on being present in a RISC-V server
-> platform.
+> The IRQs being used are similar to what the 'virt' board is using: IRQs
+> 36 to 39, one IRQ for queue.
 > 
-> We do not have all the required extensions in QEMU: we're missing
-> 'sdext'. In theory we shouldn't go ahead with this work, but the
-> emulation as is now is proving to be useful for development and testing
-> of other parts of the SW stack (firmware, kernel) and we would like to
-> make it broadly available to everyone. We're contributing it as
-> 'experimental', hopefully making it clear that the board does NOT
-> complies 100% with [1].
-> 
-> The main features included in this emulation are:
-> 
->   - Based on riscv virt machine type
->   - A new memory map as close as virt machine as possible
->   - A new virt CPU type rvsp-ref-cpu for server platform compliance
->   - AIA
->   - PCIe AHCI
->   - PCIe NIC
->   - No virtio device
->   - No fw_cfg device
->   - No ACPI table provided
->   - Only minimal device tree nodes
-> 
-> [1] https://github.com/riscv-non-isa/riscv-server-platform
-> 
-> Signed-off-by: Fei Wu <fei2.wu@intel.com>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 > ---
->   configs/devices/riscv64-softmmu/default.mak |    1 +
->   hw/riscv/Kconfig                            |   14 +
->   hw/riscv/meson.build                        |    1 +
->   hw/riscv/server_platform_ref.c              | 1276 +++++++++++++++++++
+>   hw/riscv/Kconfig               |  1 +
+>   hw/riscv/server_platform_ref.c | 78 ++++++++++++++++++++++++++++++++--
+>   2 files changed, 75 insertions(+), 4 deletions(-)
 
-Too big to my taste to review and/or look back in future.
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-(Don't bother splitting if someone is willing to review the patch).
-
->   4 files changed, 1292 insertions(+)
->   create mode 100644 hw/riscv/server_platform_ref.c
 
