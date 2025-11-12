@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2FCCCFA1A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Nov 2025 23:39:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74669CCFA18
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 00:37:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vIxxa-000682-KV; Tue, 11 Nov 2025 18:39:38 -0500
+	id 1vIyra-0006Kj-I9; Tue, 11 Nov 2025 19:37:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1vIxxX-00066C-A9
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 18:39:35 -0500
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1vIyrV-0006JY-Lu
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 19:37:26 -0500
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1vIxxV-0007wD-Fv
- for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 18:39:34 -0500
-Received: by mail-io1-xd42.google.com with SMTP id
- ca18e2360f4ac-9486248f01bso9613239f.0
- for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 15:39:33 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1vIyrT-0003AQ-RD
+ for qemu-riscv@nongnu.org; Tue, 11 Nov 2025 19:37:25 -0500
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b72db05e50fso54447966b.0
+ for <qemu-riscv@nongnu.org>; Tue, 11 Nov 2025 16:37:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1762904372; x=1763509172; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MClZp1wb+APJJTu8Kt7fW51aMX17E4oy5g9GVGtSrm8=;
- b=WpW9t8fxUgdtDgoKPpO4jxLlzvnLn4jOn4JLnY4QeK1YyqNDJWmMFGe8fHQvbziLrW
- xOK8BNfD9tuCyH8X3ZDq5AzS8j2ZHXq4aEpwfnZRiq14dUMxns+DjHQNB21zRuP1wUuf
- Dvrzg9P1yGcM/m76a094g6xtciDImajwEsWwE+pi5cGnk5cH9z2o4DmjENVIMmMAgfM7
- +nBlypyjYl8MXqHFO9CxFAvwL3kUItFLgfiywQ175evvE3Suj9hUloEU9t8qZj/kYDeB
- eMZHPnoqxGw5yk7zz4qnFolGiVIhzgd8+DqazPA8iDiOjUNFvLVntm8VEMP2R+Yn9ACs
- kFJQ==
+ d=gmail.com; s=20230601; t=1762907841; x=1763512641; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=suvugzczrCxFJUjcdNp2A2QB7aIzdPrpCEpkrukVpTw=;
+ b=AZDQ5eatwPz6NR03JiR6Ohd4PKugB7AaC5bos46rBBHTS1eylslIN4bnzZnzJXS3XD
+ /M7jT9Ct0chsJtbTTklJqj3YRHp8OVmyeWlWoi3h/u6i619kqlDxOKe2cj7F+In2zIpy
+ pslevQAM83UO15/rLsIitzuB8OVuAVafd+s2a5QWfO2vWnQ4tZI1vBRJTf/JVJrYiO+u
+ hDUUCjUTNaJQBUbE+i1ElFQUQq8cZgbspTfsqowxRuO82RIM1fMt92QSyTctQ/VYnFXb
+ eb7/Sr+bwoMMRrkIorzqNj1i/jT0v/n0o67nOXV9OU7eDX4crdwEoIW846x47pczcQkU
+ LCUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762904372; x=1763509172;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MClZp1wb+APJJTu8Kt7fW51aMX17E4oy5g9GVGtSrm8=;
- b=l88i03rnLrQuIi5nisd453+UpwurzKV98ltcdXr8h9rfxyghbMneMyhwxewk7s4j4e
- U30SmaNmLBKF4OrO7Lp+VZt9lKZDb52C3IV5pJkS1IJaSM2/qZ6oz0C5T5NJ8becFvck
- R5x7hJaRQPxIY6IGd0ptZglPj58clUDqGbfu8HpCSIPbeX/H0XqedSRtbiHcJKVEJLcP
- uiaLMCwwlZbJbxEi8oZJfC+kp5h2/93HfD4KEhfuKOBahkfk3w8U8ls1aOTs9o/vqkkP
- 8d7u5IEH6BWd+YyUatitcfqFNtsCWcchA8qAfn21PpmWQ/afK+B8AFS2bYtYDlmgjFQS
- 21TA==
+ d=1e100.net; s=20230601; t=1762907841; x=1763512641;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=suvugzczrCxFJUjcdNp2A2QB7aIzdPrpCEpkrukVpTw=;
+ b=F3gQxbrlN573PNb99ku/e5Y1PvsptUtOVX+BJgZKRV+k+DYp7t0s/6s0EahTi+vR20
+ C+KYl/gIBrFpSwqW30qZtUB8gAhL5QXURoLQ9xDKLhy1eC99Yf7MAyzksz41h4bX3xjO
+ JQm2CqHD23wM5KuMc4RpU2rF2Qp5zN4Ve14B4iIj2NSUscNaR9Pt1zVJZuz+cZ4SVnj4
+ Tf8EG81uED4fvSqgBg/7XfnH+EEmNWA/vkDYDJkGhatsXmhwpVkffdDpKhTKY/7V4M2V
+ XBoW+Q5BzXZNOE5QMDYKjJFq4IzYCfffO8xQzlQGplhhSBzj4jtGdaMx6IUbyVmWdX7T
+ WAUg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXuUSVMG+wM9Ib8Ou9ToDNtdVqJmPzwyDl8HiXDm90bzConhZ6ZG5W1AvA3v6yGWNiahwW34LpBIHOT@nongnu.org
-X-Gm-Message-State: AOJu0YxNI48BZ03R9+V5+q7CUWLetkA5nzDMcBW5fPxaZPmwUt7sIIYu
- 3bjo/AJfEuA2mCbZR1NCjFQUx1VQ8+vyaUXwA7TO68FtMejxIGhRMorqM/UK5Pa1bAY=
-X-Gm-Gg: ASbGncuDqco8JnqfP1nCP2xuo4c4+fWnRhWdH3r4TqkA4Kz1W9oXpi/ss3WG6N33OE8
- 26auap/cfvCrU0MwHp42okhzhnwUW1mbzAfniGHgqUnWsoBujSlko7ge5CA/xGmVNrIyKkby0TP
- 8C/GiIfvCAqI6p6oGN9RsLYOPjNBHCXwfeweM8pt0kESPgQVokv2FU0sDZ20Zal8QR2VPMi0CqM
- KHxHLI3+fW5JM6UMO9OKt4JS9+Li7udbuEtp5qzwN5zyBWqLnpnkdijsp0wjm2QoqS3tyyBoxNp
- FJ//4tMbR9lHuBcJJBa+o/HOA0P9QoANIWXqRZFZUtWYKby7lpccLCPoPSk3yowtVvF5bgPtd2e
- oV8bY3z/A54ZssK6ifede3U2O7qIkuNs2gSQFPQP6BCBsGkof77nW2GcKApO3BTs6Ux0qGIOWXZ
- rJ2w==
-X-Google-Smtp-Source: AGHT+IFRxvzqAKPJG9xzL73zHdqqK/XBKTbic+bpiH+SQ/Woun4CtiEWI1SXJBpUXoHtn5UAjb4vvw==
-X-Received: by 2002:a05:6602:1549:b0:948:3d23:529e with SMTP id
- ca18e2360f4ac-948c4561827mr160444639f.4.1762904372075; 
- Tue, 11 Nov 2025 15:39:32 -0800 (PST)
-Received: from localhost ([140.82.166.162]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-94888dac337sm503609839f.21.2025.11.11.15.39.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 15:39:31 -0800 (PST)
-Date: Tue, 11 Nov 2025 17:39:30 -0600
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
-Subject: Re: [PATCH v4 5/5] docs: add rvsp-ref.rst
-Message-ID: <20251111-82866e9eb0212c08d8d02a0d@orel>
-References: <20251111182944.2895892-1-dbarboza@ventanamicro.com>
- <20251111182944.2895892-6-dbarboza@ventanamicro.com>
+ AJvYcCUuocVIAMj4ko2hmrmUnFmi5AtPJDl79NQ5wvgGVpQwBFoTWQU6QQ6KTJcV/yEZDjcKGaGYTiC0UnRc@nongnu.org
+X-Gm-Message-State: AOJu0YykReI+45f3WuN3ROYLN4yqQHEaqgdsNHlvLfH434Eop+3aI89F
+ ZHzKE1zE0wKZsA2JmUtKHy5w0kKQ6QGGABcY7HGehxfJ+YCo1dMrU4mH5ATYpD03pe9YV5m75+0
+ GF3EPCTfGGNdpAk7K1LdjR00n9U7TaZE=
+X-Gm-Gg: ASbGncvgz/oh8sa+ygSbTR9yfFAdORLiYDNDCGOgG4QuFYNG805AnckGlDTRLs80y7b
+ z8kbvh0G/eT8ggUzWY2EkNgmpLc2RdAmIo5O8XvZ/8/rogBXBU5UmS8UoAlrk6UrnkD0QxfzS0b
+ CDQS/ifYFbW0XY3IT6sA3g5bHWgtBgHuaYMtnn3nRBc9vLisjDN9EtMMdDNjgvo2Xz6q7r9xWCo
+ QB+dFPRkAQ4+fMmduJ3+GoHYTBCvUkcVin8BAUIZJYBujCW5AGpAU+RtmtpwanzEOaKrwYk1FMt
+ jRF7ubesskpO5QY=
+X-Google-Smtp-Source: AGHT+IGktKgWaFc/uClqXOAva7tWGvLsI2/1p/H9GZWFSVtgseO2dCeJ555THIwsiWW8xbYS8cE9+XJsZEIZEUGMgY8=
+X-Received: by 2002:a17:907:d23:b0:b73:22a9:8989 with SMTP id
+ a640c23a62f3a-b7331aac300mr100308666b.34.1762907841215; Tue, 11 Nov 2025
+ 16:37:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251111182944.2895892-6-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d42;
- envelope-from=ajones@ventanamicro.com; helo=mail-io1-xd42.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20251103033713.904455-1-alistair.francis@wdc.com>
+In-Reply-To: <20251103033713.904455-1-alistair.francis@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 12 Nov 2025 10:36:54 +1000
+X-Gm-Features: AWmQ_bnxh-ijAoRYOPelzgZaXUZRwYYbdT7RHKk2EM5yTO0u4xeWyOzZfsWwGb4
+Message-ID: <CAKmqyKP5_wLNK=jgbyx2utZZR9YyGO=TxSd68ECRRKD=yu28kQ@mail.gmail.com>
+Subject: Re: [PATCH 0/8] single-binary: Make riscv cpu.h target partially
+ independent
+To: qemu-devel@nongnu.org, anjo@rev.ng, philmd@linaro.org, palmer@dabbelt.com, 
+ dbarboza@ventanamicro.com, atishp@rivosinc.com
+Cc: liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x62f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -102,71 +101,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Nov 11, 2025 at 03:29:44PM -0300, Daniel Henrique Barboza wrote:
-> Add documentation on the new experimental board rvsp-ref.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  docs/system/riscv/rvsp-ref.rst | 28 ++++++++++++++++++++++++++++
->  docs/system/target-riscv.rst   |  1 +
->  2 files changed, 29 insertions(+)
->  create mode 100644 docs/system/riscv/rvsp-ref.rst
-> 
-> diff --git a/docs/system/riscv/rvsp-ref.rst b/docs/system/riscv/rvsp-ref.rst
-> new file mode 100644
-> index 0000000000..3889fce413
-> --- /dev/null
-> +++ b/docs/system/riscv/rvsp-ref.rst
-> @@ -0,0 +1,28 @@
-> +Experimental RISC-V Server Platform Reference board (``rvsp-ref``)
-> +==================================================================
-> +
-> +The RISC-V Server Platform specification `spec`_ defines a standardized
-> +set of hardware and software capabilities that portable system software,
-> +such as OS and hypervisors, can rely on being present in a RISC-V server
-> +platform. This machine aims to emulate this specification, providing
-> +an environment for firmware/OS development and testing.
-> +
-> +The main features included in rvsp-ref are:
-> +
-> +*  a new CPU type rvsp-ref CPU for server platform compliance
-> +* AIA
-> +* PCIe AHCI
-> +* PCIe NIC
-> +* No virtio mmio bus
-> +* No fw_cfg device
-> +* No ACPI table
-> +* Minimal device tree nodes
-> +
-> +The board is being provisioned as *experimental* because QEMU isn't
-> +100% compliant with the specification at this moment - we do not have
-> +support for the mandatory 'sdext' extension. The existence of the board
-> +is beneficial to the development of the ecossystem around the specification,
-> +so we're choosing the make the board available even in an incomplete state.
-> +When 'sdext' is implemented we'll remove the 'experimental' tag from it.
+On Mon, Nov 3, 2025 at 1:37=E2=80=AFPM <alistair23@gmail.com> wrote:
+>
+> From: Alistair Francis <alistair.francis@wdc.com>
+>
+> This is the first 8 patches (one of which has been removed) from Anton's
+> series [1], plus an extra cleanup patch at the end.
+>
+> This addresses the comments I had about Anton's changes to
+> riscv_pmu_ctr_get_fixed_counters_val().
+>
+> Besides my new patch and removing a patch the actual changes are
+> limited, so I have kept all of the Reviewed-by tags.
+>
+> 1: https://patchew.org/QEMU/20251027181831.27016-1-anjo@rev.ng/
+>
+> Alistair Francis (1):
+>   target/riscv: Remove upper_half from
+>     riscv_pmu_ctr_get_fixed_counters_val
+>
+> Anton Johansson (7):
+>   target/riscv: Fix size of trivial CPUArchState fields
+>   target/riscv: Fix size of mhartid
+>   target/riscv: Bugfix make bit 62 read-only 0 for sireg* cfg CSR read
+>   target/riscv: Combine mhpmevent and mhpmeventh
+>   target/riscv: Combine mcyclecfg and mcyclecfgh
+>   target/riscv: Combine minstretcfg and minstretcfgh
+>   target/riscv: Combine mhpmcounter and mhpmcounterh
 
-'experimental' needs to stay until the 1.0 spec is ratified. Or, see my
-comments in a previous patch about versioning the board instead.
+Thanks!
 
-Thanks,
-drew
+Applied to riscv-to-apply.next
 
-> +
-> +.. _spec: https://github.com/riscv-non-isa/riscv-server-platform
-> diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-> index 89b2cb732c..2ed337c8cf 100644
-> --- a/docs/system/target-riscv.rst
-> +++ b/docs/system/target-riscv.rst
-> @@ -72,6 +72,7 @@ undocumented; you can get a complete list by running
->     riscv/sifive_u
->     riscv/virt
->     riscv/xiangshan-kunminghu
-> +   riscv/rvsp-ref
->  
->  RISC-V CPU firmware
->  -------------------
-> -- 
+Alistair
+
+>
+>  target/riscv/cpu.h         | 106 +++++++++---------
+>  target/riscv/cpu_helper.c  |   2 +-
+>  target/riscv/csr.c         | 221 ++++++++++++++++---------------------
+>  target/riscv/machine.c     |  99 ++++++++---------
+>  target/riscv/pmu.c         | 150 ++++++-------------------
+>  target/riscv/tcg/tcg-cpu.c |   2 +-
+>  6 files changed, 227 insertions(+), 353 deletions(-)
+>
+> --
 > 2.51.1
-> 
-> 
+>
 
