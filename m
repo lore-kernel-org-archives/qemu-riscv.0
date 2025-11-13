@@ -4,58 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49B22CD5BA2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Nov 2025 08:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C54CBCD5BC2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Nov 2025 10:57:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJT5Z-0001IL-83; Thu, 13 Nov 2025 03:53:57 -0500
+	id 1vJV0y-0006QD-9R; Thu, 13 Nov 2025 05:57:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1vJT52-00014W-Fy; Thu, 13 Nov 2025 03:53:25 -0500
-Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1vJT50-0001of-1l; Thu, 13 Nov 2025 03:53:24 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
- Reply-To; bh=kYbaxiwNZYnS7hL2hoqeHX+nQYbGcUKgNgLkh8tmBb0=; b=BiX5CzqiaGxiq7xQ
- cfqQ2VVYRFGwAs0zQJm/ZpU+lEvC1efG5PE/N6QODmgYg7BtVGlIFLdNT8ENpaab+UU3iIsYhYLsT
- E22ymIWFfow5meoH4iOdqr00OMK6yFIWjlcRZfN4miblrkJEfNRLY29/0PKhVm0CaewxYsia4icNQ
- nLdu0O0UExBQVA0XzRIZ9Wgmay77yUQBTWNJZlxg1C+RbRff0ZaLmd+T7EDjtVMyoj/Ti03GfRXnq
- sFgLaFHHw4Rr/nPp3OgJa+j27yp6py14Gcykpwbhmu7EMDUFVNPOjb70FbuLWrrYNOMm+LFY889+o
- Yu9h0HB5NPP39RLFcw==;
-Received: from [167.98.27.226] (helo=[10.35.4.47])
- by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1vJT4v-000eCB-0J; Thu, 13 Nov 2025 08:53:18 +0000
-Message-ID: <19ada6a7-089e-4103-9c2f-c6a9a0e7add2@codethink.co.uk>
-Date: Thu, 13 Nov 2025 08:53:17 +0000
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1vJUyE-0003PD-MN
+ for qemu-riscv@nongnu.org; Thu, 13 Nov 2025 05:54:31 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1vJUyC-0002fI-SI
+ for qemu-riscv@nongnu.org; Thu, 13 Nov 2025 05:54:30 -0500
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-42b32900c8bso397351f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 13 Nov 2025 02:54:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1763031266; x=1763636066; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=c60PujkVLQPQGwYj0ljUmIvgnvt/g65UJr1SOWD57x4=;
+ b=DkKRlhKqjMBjh9WDt1iVZ22qa8f/EvNHfrPTUGGsahMDC/6Jka9C6dV+M6B8zwHSi/
+ NqcPojCDGfTzpzWiqMEGkymcBNVWFTzWbgmZ6NErndQojMasb6glLHwb7dLP8sCQsRmA
+ +AGMWC+kyO4sIQwtXArKHJnnzLYXNYOmDG7Ugtw0Mcs5z2NJbUhtPDPZ826wa6a7WzAE
+ pXoEdEHQ/fabBWplXolSjm6N/e8OS57o+VG0ilMBjoy1WetRSorMbMHWJyWjxAdFK++H
+ ytlc01MQgxy4mDntYJuCoqYtrcuobhbGmNBrrKIaZSxdcccy5khrWoz+uDVtl0e6Cyoy
+ 6/oA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763031266; x=1763636066;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=c60PujkVLQPQGwYj0ljUmIvgnvt/g65UJr1SOWD57x4=;
+ b=bSe75DWNOyabFDeC67uEheeUaB+I/178O9tbXTcO9SAlXFL5kjq5Zt3D4C3Zvv/o4O
+ 8jUWSOaUQsmx08aD1UhNzyKXLAfzIHUsaFyhawxQJUW/pf6HLe4PiUz1v5C0u1jZos7d
+ vAFnu3sB60btrvjgIlb3MNfj7y9Xe/6fhVP2CxnLp2MRC0rdkjOQ3FidDedYQtj8iqih
+ GA+Fu1FQKeoR0mLZrSPFrZm3186XD1Fw5Lbb1kxh5LIXX5y0VJzujfX36WU5/DwoH5V6
+ ite254sGehjIa6FVT7/Vz19kR0msQ/gvWHnf3F5rMYoextr2ZWPsE/h4RFkdRqLiZ75E
+ evng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUVnZCDKVL0ehXpYUt6nOevd+euWWZDae8SDqKyV21SVTpCC9N3YFvECipc/6i8jWTkPm0IlQ1uappj@nongnu.org
+X-Gm-Message-State: AOJu0Yw++UcQ+IOu6gZIhQZx9EzW6BAUscn3lchJafVJIMso1Vof6dEq
+ szeXa6mZVJkkaeFpX+8Kbu77L/buRjXKz/aQwBQ0z2HJSLiXhPDXcEs2/oKJjOdufGg=
+X-Gm-Gg: ASbGncsugzPzVvP3adDOg+dtaZ2/DkC1NWY5j4yYdboOPHFgDRfZrsRB3TPJ48K8zoc
+ 1hUiQWytq/BmQ1QrOB7Sjmrs01BIdjfMjTX4yPQkmz0epJQVCJJ/0DD2nPvuLUyttLul1G/S4oG
+ eU+ZB9vhtnqJQCB6ue6mxNPC/BVLKfHNTBQDjfAHIxUNpKzojrGQEMm5h5yv27KyROt9YivcJbc
+ 1fVeP3mXsklcIoopoFQRWG1K8uRYVcPqLBRHZDRwb3VVyMkVgXdH4uBOGvOQWdtYx+1DymYeMeR
+ qkt+92Z+lZ8CPpZ1XAmP201udyo6Krem/Wf5CwQuVv4i7OpNHebY3e7b96rszQegqeGnwzZxiyi
+ plZmrV17syNqAqyD8rEIsiv06etRNw516+frYsTWahmfoTL6ksbqGs4VwhYQ2zXV7zfTy2BvDrN
+ zMjPcYGecCAmZwZFPRuEWBcT7ibwKBlEnJgwD38vkWN0UGegWAUl9bLHw=
+X-Google-Smtp-Source: AGHT+IFO6dVamTSftIGMw8NDdoX8EshnLT40t63u/6g2L0kwN6lwtUoXX0BUsk6XLVzRIgac1qpFDg==
+X-Received: by 2002:a05:6000:61e:b0:42b:3ee9:4772 with SMTP id
+ ffacd0b85a97d-42b4bdb6744mr5637032f8f.52.1763031266147; 
+ Thu, 13 Nov 2025 02:54:26 -0800 (PST)
+Received: from [192.168.8.105] (90.red-2-142-37.dynamicip.rima-tde.net.
+ [2.142.37.90]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-42b53f0b513sm3229607f8f.30.2025.11.13.02.54.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 13 Nov 2025 02:54:25 -0800 (PST)
+Message-ID: <ad83714b-ee19-4c0b-a230-2fd078a7dece@linaro.org>
+Date: Thu, 13 Nov 2025 11:54:22 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2] Add RISCV Zilsd extension
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org,
- richard.henderson@linaro.org
+To: Roan Richmond <roan.richmond@codethink.co.uk>, qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ qemu-devel@nongnu.org, alistair23@gmail.com
 References: <20251110090510.84103-1-roan.richmond@codethink.co.uk>
- <CAKmqyKPheAMZt6cn2d4bN2kPxXMrr5Vr8jY5+MBuqhptnc4wjw@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-From: Roan Richmond <roan.richmond@codethink.co.uk>
-In-Reply-To: <CAKmqyKPheAMZt6cn2d4bN2kPxXMrr5Vr8jY5+MBuqhptnc4wjw@mail.gmail.com>
+In-Reply-To: <20251110090510.84103-1-roan.richmond@codethink.co.uk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=188.40.203.114;
- envelope-from=roan.richmond@codethink.co.uk; helo=imap4.hz.codethink.co.uk
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,193 +107,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 11/10/25 10:05, Roan Richmond wrote:
+> +/* Zilsd extension adds load/store double for 32bit arch */
+> +static bool gen_store_zilsd(DisasContext *ctx, arg_sb *a)
+> +{
+> +    TCGv data_1 = tcg_temp_new();
+> +    TCGv data_2 = tcg_temp_new();
+> +    if (a->rs2 != 0) {
+> +        data_1 = get_gpr(ctx, a->rs2, EXT_NONE);
+> +        data_2 = get_gpr(ctx, a->rs2+1, EXT_NONE);
+> +    }
+> +    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
+> +    TCGv addr_2 = get_address(ctx, a->rs1, a->imm+4);
+> +
+> +    if (ctx->ztso) {
+> +        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+> +    }
+> +
+> +    tcg_gen_qemu_st_tl(data_1, addr_1, ctx->mem_idx, MO_SL);
+> +    tcg_gen_qemu_st_tl(data_2, addr_2, ctx->mem_idx, MO_SL);
 
-On 12/11/2025 01:41, Alistair Francis wrote:
-> On Mon, Nov 10, 2025 at 7:05 PM Roan Richmond
-> <roan.richmond@codethink.co.uk> wrote:
->> This is based on v1.0 of the Zilsd extension [1].
->> The specification is listed as in the Ratified state [2],
->>   since Jan 30, 2025.
->>
->> [1]: https://github.com/riscv/riscv-zilsd
->> [2]: https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154861/RISC-V+Specs+Under+Development
->>
->> Reviewed-by: Daniel Henrique barboza <dbarboza@ventanamicro.com>
->> Reviewed-by: Richard Henderson  <richard.henderson@linaro.org>
->> Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
->> ---
->> v2:
->>    - In `gen_load_zilsd` swapped `dest_gpr` with `tcg_temp_new`, this prevents
->>      writing to `r1/r0` in the case where `r0` is the set as `rd`.
->>    - Removed unneeded brackets around `a->rd` + c expressions
->>
->>   target/riscv/cpu.c                      |  2 +
->>   target/riscv/cpu_cfg_fields.h.inc       |  1 +
->>   target/riscv/insn_trans/trans_rvi.c.inc | 57 ++++++++++++++++++++++++-
->>   3 files changed, 58 insertions(+), 2 deletions(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 73d4280d7c..6e0d37fb96 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -121,6 +121,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->>       ISA_EXT_DATA_ENTRY(zihintntl, PRIV_VERSION_1_10_0, ext_zihintntl),
->>       ISA_EXT_DATA_ENTRY(zihintpause, PRIV_VERSION_1_10_0, ext_zihintpause),
->>       ISA_EXT_DATA_ENTRY(zihpm, PRIV_VERSION_1_12_0, ext_zihpm),
->> +    ISA_EXT_DATA_ENTRY(zilsd, PRIV_VERSION_1_13_0, ext_zilsd),
->>       ISA_EXT_DATA_ENTRY(zimop, PRIV_VERSION_1_13_0, ext_zimop),
->>       ISA_EXT_DATA_ENTRY(zmmul, PRIV_VERSION_1_12_0, ext_zmmul),
->>       ISA_EXT_DATA_ENTRY(za64rs, PRIV_VERSION_1_12_0, has_priv_1_12),
->> @@ -1247,6 +1248,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
->>       MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
->>       MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
->>       MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
->> +    MULTI_EXT_CFG_BOOL("zilsd", ext_zilsd, false),
->>       MULTI_EXT_CFG_BOOL("zimop", ext_zimop, false),
->>       MULTI_EXT_CFG_BOOL("zcmop", ext_zcmop, false),
->>       MULTI_EXT_CFG_BOOL("zacas", ext_zacas, false),
->> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
->> index a154ecdc79..8d8e35e4cf 100644
->> --- a/target/riscv/cpu_cfg_fields.h.inc
->> +++ b/target/riscv/cpu_cfg_fields.h.inc
->> @@ -41,6 +41,7 @@ BOOL_FIELD(ext_zicond)
->>   BOOL_FIELD(ext_zihintntl)
->>   BOOL_FIELD(ext_zihintpause)
->>   BOOL_FIELD(ext_zihpm)
->> +BOOL_FIELD(ext_zilsd)
->>   BOOL_FIELD(ext_zimop)
->>   BOOL_FIELD(ext_zcmop)
->>   BOOL_FIELD(ext_ztso)
->> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
->> index 54b9b4f241..20058bf483 100644
->> --- a/target/riscv/insn_trans/trans_rvi.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
->> @@ -18,6 +18,7 @@
->>    * this program.  If not, see <http://www.gnu.org/licenses/>.
->>    */
->>
->> +#include "migration/multifd.h"
->>   static bool trans_illegal(DisasContext *ctx, arg_empty *a)
->>   {
->>       gen_exception_illegal(ctx);
->> @@ -370,6 +371,27 @@ static bool gen_load_tl(DisasContext *ctx, arg_lb *a, MemOp memop)
->>       return true;
->>   }
->>
->> +/* Zilsd extension adds load/store double for 32bit arch */
->> +static bool gen_load_zilsd(DisasContext *ctx, arg_lb *a)
->> +{
->> +    TCGv dest_1 = tcg_temp_new();
->> +    TCGv dest_2 = tcg_temp_new();
->> +    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
->> +    TCGv addr_2 = get_address(ctx, a->rs1, a->imm+4);
->> +
->> +    tcg_gen_qemu_ld_tl(dest_1, addr_1, ctx->mem_idx, MO_SL);
->> +    tcg_gen_qemu_ld_tl(dest_2, addr_2, ctx->mem_idx, MO_SL);
->> +
->> +    /* If destination is x0 then result of the load is discarded */
->> +    if (a->rd == 0) {
->> +        return true;
->> +    }
->> +
->> +    gen_set_gpr(ctx, a->rd, dest_1);
->> +    gen_set_gpr(ctx, a->rd+1, dest_2);
->> +    return true;
->> +}
->> +
->>   /* Compute only 64-bit addresses to use the address translation mechanism */
->>   static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
->>   {
->> @@ -409,6 +431,8 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
->>       decode_save_opc(ctx, 0);
->>       if (get_xl(ctx) == MXL_RV128) {
->>           out = gen_load_i128(ctx, a, memop);
->> +    } else if (memop == MO_SQ && get_xl(ctx) == MXL_RV32) {
->> +        out = gen_load_zilsd(ctx, a);
->>       } else {
->>           out = gen_load_tl(ctx, a, memop);
->>       }
->> @@ -437,7 +461,10 @@ static bool trans_lw(DisasContext *ctx, arg_lw *a)
->>
->>   static bool trans_ld(DisasContext *ctx, arg_ld *a)
->>   {
->> -    REQUIRE_64_OR_128BIT(ctx);
->> +    /* Check for Zilsd extension if 32bit */
->> +    if (get_xl(ctx) == MXL_RV32 && !ctx->cfg_ptr->ext_zilsd) {
->> +        return false;
->> +    }
->>       return gen_load(ctx, a, MO_SQ);
->>   }
->>
->> @@ -482,6 +509,27 @@ static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
->>       return true;
->>   }
->>
->> +/* Zilsd extension adds load/store double for 32bit arch */
->> +static bool gen_store_zilsd(DisasContext *ctx, arg_sb *a)
->> +{
->> +    TCGv data_1 = tcg_temp_new();
->> +    TCGv data_2 = tcg_temp_new();
->> +    if (a->rs2 != 0) {
->> +        data_1 = get_gpr(ctx, a->rs2, EXT_NONE);
->> +        data_2 = get_gpr(ctx, a->rs2+1, EXT_NONE);
->> +    }
-> Don't mix code and declarations, otherwise
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->
-> Alistair
-Struggling to see what you mean by this.
+This is wrong, because if rs2 == 0, then data_1 and data_2 are uninitialized.  If you're 
+testing properly with --enable-debug-tcg, this should trigger an assertion failure.
 
-Could you provide a bit more clarification on the changes you would like 
-me to make and then I'll send out a v3.
+You wanted
 
-Thanks,
-Roan
+     if (a->rs2 == 0) {
+         data_1 = tcg_constant_tl(0);
+         data_2 = data_1;
+     } else {
+         data_1 = get_gpr(ctx, a->rs2, EXT_NONE);
+         data_2 = get_gpr(ctx, a->rs2 + 1, EXT_NONE);
+     }
 
->
->> +    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
->> +    TCGv addr_2 = get_address(ctx, a->rs1, a->imm+4);
->> +
->> +    if (ctx->ztso) {
->> +        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
->> +    }
->> +
->> +    tcg_gen_qemu_st_tl(data_1, addr_1, ctx->mem_idx, MO_SL);
->> +    tcg_gen_qemu_st_tl(data_2, addr_2, ctx->mem_idx, MO_SL);
->> +    return true;
->> +}
->> +
->>   static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
->>   {
->>       TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
->> @@ -511,6 +559,8 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
->>       decode_save_opc(ctx, 0);
->>       if (get_xl(ctx) == MXL_RV128) {
->>           return gen_store_i128(ctx, a, memop);
->> +    } else if (memop == MO_UQ && get_xl(ctx) == MXL_RV32) {
->> +        return gen_store_zilsd(ctx, a);
->>       } else {
->>           return gen_store_tl(ctx, a, memop);
->>       }
->> @@ -533,7 +583,10 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
->>
->>   static bool trans_sd(DisasContext *ctx, arg_sd *a)
->>   {
->> -    REQUIRE_64_OR_128BIT(ctx);
->> +    /* Check for Zilsd extension if 32bit */
->> +    if (get_xl(ctx) == MXL_RV32 && !ctx->cfg_ptr->ext_zilsd) {
->> +        return false;
->> +    }
->>       return gen_store(ctx, a, MO_UQ);
->>   }
->>
->> --
->> 2.43.0
->>
--- 
-Roan Richmond (he/him)
-Software Engineer
-Codethink Ltd
+You're also missing the endianness indicator: mo_endian().
 
+You really should consider combining the two halves so that you can perform one 64-bit 
+store.  While I see that the spec allows the store to be non-atomic, you still probably do 
+not want to to allow the first half store to succeed when the second half store faults.  I 
+don't see clear language about that.  Anyway, that's as simple as
+
+     TCGv_i64 data;
+     MemOp end = mo_endian(ctx);
+
+     if (a->rs2 == 0) {
+         data = tcg_constant_i64(0);
+     } else {
+         TCGv data_1 = get_gpr(ctx, a->rs2, EXT_NONE);
+         TCGv data_2 = get_gpr(ctx, a->rs2 + 1, EXT_NONE);
+         data = tcg_temp_new_i64();
+         if (end == MO_LE) {
+             tcg_gen_concat_tl_i64(data, data_1, data_2);
+         } else {
+             tcg_gen_concat_tl_i64(data, data_2, data_1);
+         }
+     }
+     tcg_gen_qemu_st_i64(data, addr, ctx->mem_idx, MO_UQ | end);
+
+
+r~
 
