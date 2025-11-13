@@ -4,53 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 352DCCD13DF
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Nov 2025 16:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14C30CD3445
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Nov 2025 01:28:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJDjY-0004xu-H5; Wed, 12 Nov 2025 11:30:12 -0500
+	id 1vJM7w-0001sD-Hg; Wed, 12 Nov 2025 20:27:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1vJDj5-0004dR-IS; Wed, 12 Nov 2025 11:29:47 -0500
-Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
+ (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
+ id 1vJM7T-0001a8-88; Wed, 12 Nov 2025 20:27:27 -0500
+Received: from mxhk.zte.com.cn ([160.30.148.35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1vJDj2-0005rl-Iy; Wed, 12 Nov 2025 11:29:43 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
- MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:In-Reply-To:
- References; bh=WweDe8aW0W5MYKBn+bd5QztRjn+mxAd579J4X5qjDSA=; b=OA76FO0F9eqEaW
- xo82n7GMjKVsCcBtwzlIe32jtx7p0+ppDiVcBJfLvPZoTDuU0TG5xkZibjo97K+SZhKxPp+0Mt6Rg
- cDE0pTEb4kU3ztC/GFG39kLT8kP7/Co4na9LxK2e5fXLPClfFuAPG1OzgpyvgvwzsQaOFKc7n5nUf
- quX5Z8amwNY71dE4VPKsqTs8Gx97ufQBUuQg+ycRBdOdW075LSoNOlWPggil+8+GaQh92mRxtdt/K
- 6e2/QdtnROQ6+JF+Xupxo2KFjGdht0S6eUohfDp55BmdHrBgf/lHx9mENML/nACWWHlalIEADlV68
- JQxOprc6cAfi5osGc1/A==;
-Received: from [167.98.27.226] (helo=codethink.guest.codethink.co.uk)
- by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1vJDiu-001Sx1-1u; Wed, 12 Nov 2025 16:29:31 +0000
-From: Roan Richmond <roan.richmond@codethink.co.uk>
-To: qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- qemu-devel@nongnu.org, alistair23@gmail.com,
- Roan Richmond <roan.richmond@codethink.co.uk>
-Subject: [PATCH v5] Add RISCV ZALASR extension
-Date: Wed, 12 Nov 2025 16:29:21 +0000
-Message-ID: <20251112162923.311714-1-roan.richmond@codethink.co.uk>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=78.40.148.171;
- envelope-from=roan.richmond@codethink.co.uk; helo=imap5.colo.codethink.co.uk
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
+ id 1vJM7Q-00082a-2Q; Wed, 12 Nov 2025 20:27:26 -0500
+Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4d6N0v5YcLz8Xs6y;
+ Thu, 13 Nov 2025 09:27:11 +0800 (CST)
+Received: from xaxapp01.zte.com.cn ([10.88.99.176])
+ by mse-fl1.zte.com.cn with SMTP id 5AD1R8JR083952;
+ Thu, 13 Nov 2025 09:27:08 +0800 (+08)
+ (envelope-from liu.xuemei1@zte.com.cn)
+Received: from mapi (xaxapp05[null]) by mapi (Zmail) with MAPI id mid32;
+ Thu, 13 Nov 2025 09:27:09 +0800 (CST)
+Date: Thu, 13 Nov 2025 09:27:09 +0800 (CST)
+X-Zmail-TransId: 2afc691533ed0af-7d401
+X-Mailer: Zmail v1.0
+Message-ID: <2025111309270952219AjKpVEnbJXB7fcGTE4g@zte.com.cn>
+Mime-Version: 1.0
+From: <liu.xuemei1@zte.com.cn>
+To: <imammedo@redhat.com>, <alistair.francis@wdc.com>,
+ <dbarboza@ventanamicro.com>, <sunilvl@ventanamicro.com>,
+ <anisinha@redhat.com>
+Cc: <pbonzini@redhat.com>, <palmer@dabbelt.com>, <liwei1518@gmail.com>,
+ <zhiwei_liu@linux.alibaba.com>, <mst@redhat.com>,
+ <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, <liu.xuemei1@zte.com.cn>
+Subject: =?UTF-8?B?W1BBVENIIHY0IFJFU0VORCAwLzJdIGh3L3Jpc2N2L3ZpcnQ6IEFkZCBhY3BpIGdlZCBhbmQgcG93ZXJkb3duIHN1cHBvcnQ=?=
+Content-Type: text/plain;
+	charset="UTF-8"
+X-MAIL: mse-fl1.zte.com.cn 5AD1R8JR083952
+X-TLS: YES
+X-SPF-DOMAIN: zte.com.cn
+X-ENVELOPE-SENDER: liu.xuemei1@zte.com.cn
+X-SPF: None
+X-SOURCE-IP: 10.5.228.132 unknown Thu, 13 Nov 2025 09:27:11 +0800
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-MID-QID: 691533EF.000/4d6N0v5YcLz8Xs6y
+Received-SPF: pass client-ip=160.30.148.35;
+ envelope-from=liu.xuemei1@zte.com.cn; helo=mxhk.zte.com.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,212 +77,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is based on version v0.9 of the ZALASR specification [1].
-The specification is listed as in Ratified state [2].
+From: Xuemei Liu <liu.xuemei1@zte.com.cn>
 
-[1]: https://github.com/riscv/riscv-zalasr/tree/v0.9
-[2]: https://lf-riscv.atlassian.net/wiki/spaces/HOME/pages/16154882/All+RISC-V+Specifications+Under+Active+Development
+Add riscv acpi powerdown support
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
----
+Changes in v4:
+- Added modifies of DSDT blob in another patch
+- Link to v3: https://lore.kernel.org/qemu-riscv/20250723113739751COZ5PkRzx6aXEuKzsHhm_@zte.com.cn/
 
-V5:
-  - Rebased onto newest master
-  - Fixes for checkpatch.pl
-    - 2 occurances of trailing whitespace
-    - License comment reformatted to what checkpatch expects
+Changes in v3:
+- Added missing param to virt_is_acpi_enabled
+- Fixed failure of bios-tables-test
+- Link to v2: https://lore.kernel.org/qemu-riscv/202506201130099861lTkD839Hh6oko8Jo2W2H@zte.com.cn/
 
- target/riscv/cpu.c                           |   2 +
- target/riscv/cpu_cfg_fields.h.inc            |   1 +
- target/riscv/insn32.decode                   |  10 ++
- target/riscv/insn_trans/trans_rvzalasr.c.inc | 113 +++++++++++++++++++
- target/riscv/translate.c                     |   1 +
- 5 files changed, 127 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzalasr.c.inc
+Changes in v2:
+- Unwrappered acpi_dsdt_add_ged function
+- Modified base address of VIRT_ACPI_GED
+- Added conditions for function calls
+- Adjusted code formatting
+- Link to v1: https://lore.kernel.org/qemu-riscv/202506191556260735QxWC8sxRwFURYEvlD24y@zte.com.cn/
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 73d4280d7c..96e33ee10f 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -127,6 +127,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
-     ISA_EXT_DATA_ENTRY(zabha, PRIV_VERSION_1_13_0, ext_zabha),
-     ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
-+    ISA_EXT_DATA_ENTRY(zalasr, PRIV_VERSION_1_12_0, ext_zalasr),
-     ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
-     ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
-     ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
-@@ -1253,6 +1254,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("zama16b", ext_zama16b, false),
-     MULTI_EXT_CFG_BOOL("zabha", ext_zabha, false),
-     MULTI_EXT_CFG_BOOL("zaamo", ext_zaamo, false),
-+    MULTI_EXT_CFG_BOOL("zalasr", ext_zalasr, false),
-     MULTI_EXT_CFG_BOOL("zalrsc", ext_zalrsc, false),
-     MULTI_EXT_CFG_BOOL("zawrs", ext_zawrs, true),
-     MULTI_EXT_CFG_BOOL("zfa", ext_zfa, true),
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index a154ecdc79..7d3d5d0d57 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -65,6 +65,7 @@ BOOL_FIELD(ext_zaamo)
- BOOL_FIELD(ext_zacas)
- BOOL_FIELD(ext_zama16b)
- BOOL_FIELD(ext_zabha)
-+BOOL_FIELD(ext_zalasr)
- BOOL_FIELD(ext_zalrsc)
- BOOL_FIELD(ext_zawrs)
- BOOL_FIELD(ext_zfa)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index cd23b1f3a9..c848c0c1c5 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -1066,3 +1066,13 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
- amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
- amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
- amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
-+
-+# *** Zalasr Standard Extension ***
-+lb_aqrl  00110 . . ..... ..... 000 ..... 0101111 @atom_st
-+lh_aqrl  00110 . . ..... ..... 001 ..... 0101111 @atom_st
-+lw_aqrl  00110 . . ..... ..... 010 ..... 0101111 @atom_st
-+ld_aqrl  00110 . . ..... ..... 011 ..... 0101111 @atom_st
-+sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
-+sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
-+sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
-+sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
-diff --git a/target/riscv/insn_trans/trans_rvzalasr.c.inc b/target/riscv/insn_trans/trans_rvzalasr.c.inc
-new file mode 100644
-index 0000000000..bf86805cef
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvzalasr.c.inc
-@@ -0,0 +1,113 @@
-+/*
-+ * RISC-V translation routines for the ZALASR (Load-Aquire and Store-Release)
-+ * Extension.
-+ *
-+ * Copyright (c) 2025 Roan Richmond, roan.richmond@codethink.co.uk
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * The documentation of the ISA extension can be found here:
-+ *   https://github.com/riscv/riscv-zalasr/tree/v0.9
-+ */
-+
-+#define REQUIRE_ZALASR(ctx) do {     \
-+    if (!ctx->cfg_ptr->ext_zalasr) { \
-+        return false;                \
-+    }                                \
-+} while (0)
-+
-+static bool gen_load_acquire(DisasContext *ctx, arg_lb_aqrl *a, MemOp memop)
-+{
-+    decode_save_opc(ctx, 0);
-+
-+    TCGv addr = get_address(ctx, a->rs1, 0);
-+    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
-+    TCGBar bar = (a->rl) ? TCG_BAR_STRL : 0;
-+
-+    /* Check that AQ is set, as this is mandatory */
-+    if (!a->aq) {
-+        return false;
-+    }
-+
-+    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
-+
-+    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    /* Add a memory barrier implied by AQ (mandatory) and RL (optional) */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ | bar);
-+
-+    return true;
-+}
-+
-+static bool trans_lb_aqrl(DisasContext *ctx, arg_lb_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_SB));
-+}
-+
-+static bool trans_lh_aqrl(DisasContext *ctx, arg_lh_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESW));
-+}
-+
-+static bool trans_lw_aqrl(DisasContext *ctx, arg_lw_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESL));
-+}
-+
-+static bool trans_ld_aqrl(DisasContext *ctx, arg_ld_aqrl *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TEUQ));
-+}
-+
-+static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp memop)
-+{
-+    decode_save_opc(ctx, 0);
-+
-+    TCGv addr = get_address(ctx, a->rs1, 0);
-+    TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-+    TCGBar bar = (a->aq) ? TCG_BAR_LDAQ : 0;
-+
-+    /* Check that RL is set, as this is mandatory */
-+    if (!a->rl) {
-+        return false;
-+    }
-+
-+    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
-+
-+    /* Add a memory barrier implied by RL (mandatory) and AQ (optional) */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
-+
-+    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
-+    return true;
-+}
-+
-+static bool trans_sb_aqrl(DisasContext *ctx, arg_sb_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_SB));
-+}
-+
-+static bool trans_sh_aqrl(DisasContext *ctx, arg_sh_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESW));
-+}
-+
-+static bool trans_sw_aqrl(DisasContext *ctx, arg_sw_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESL));
-+}
-+
-+static bool trans_sd_aqrl(DisasContext *ctx, arg_sd_aqrl *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_TEUQ));
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index e1f4dc5ffd..f89a99c849 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1199,6 +1199,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvzicond.c.inc"
- #include "insn_trans/trans_rvzacas.c.inc"
- #include "insn_trans/trans_rvzabha.c.inc"
-+#include "insn_trans/trans_rvzalasr.c.inc"
- #include "insn_trans/trans_rvzawrs.c.inc"
- #include "insn_trans/trans_rvzicbo.c.inc"
- #include "insn_trans/trans_rvzimop.c.inc"
+Xuemei Liu (2):
+  hw/riscv/virt: Add acpi ged and powerdown support
+  tests/acpi: Add acpi ged and power button in DSDT for RISC-V
+
+ hw/riscv/Kconfig                  |   1 +
+ hw/riscv/virt-acpi-build.c        |  10 +++++++++
+ hw/riscv/virt.c                   |  35 ++++++++++++++++++++++++++++++
+ include/hw/riscv/virt.h           |   4 ++++
+ tests/data/acpi/riscv64/virt/DSDT | Bin 3538 -> 3681 bytes
+ 5 files changed, 50 insertions(+)
+
 -- 
-2.43.0
-
+2.27.0
 
