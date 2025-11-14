@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EACECCD8CAD
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Nov 2025 17:18:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E7BCDE032
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Nov 2025 08:44:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJawi-0001Pt-7M; Thu, 13 Nov 2025 12:17:20 -0500
+	id 1vJpPS-0001Gn-QW; Fri, 14 Nov 2025 03:43:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1vJavg-0000SG-Td
- for qemu-riscv@nongnu.org; Thu, 13 Nov 2025 12:16:20 -0500
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1vJpPO-0001E1-4b
+ for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 03:43:54 -0500
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1vJavd-0006Yj-UB
- for qemu-riscv@nongnu.org; Thu, 13 Nov 2025 12:16:15 -0500
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-7b9a98b751eso547520b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 13 Nov 2025 09:16:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1vJpPM-0007ok-I4
+ for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 03:43:53 -0500
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7ad1cd0db3bso1511134b3a.1
+ for <qemu-riscv@nongnu.org>; Fri, 14 Nov 2025 00:43:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1763054170; x=1763658970; darn=nongnu.org;
+ d=sifive.com; s=google; t=1763109830; x=1763714630; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/+VeEoZv4V+FvSeUptBC/KXfvYsV2MVEcENr2lwOWwc=;
- b=mZhI6WYi05KFUdNsihfeeEavp+lBpIry/Jn+nApxUA8s5Gy/DTx99SqBEoc9B3b0Dm
- jTQlcGXvfV0X0wW1KTS0Lm6KVVKU5+tOYFY+LhtPmqNQ3BixT0v6RemwhcBSlPyWeYfz
- BtxBBjOy9gHsxl/004N2KcfM2V/39hLVB1L1/ujSWilWonbgcgtLuzLSbZBsCmq1FfqK
- We8VUdazr+oQRGVWVH5EwB+XpfdPQzY/Vy9cLFA5VJ3Z2PjTQeSyJDakRqp3vt4OV5zL
- bL1lQbJ8Mmrf241rSkG2wjAzTLgv/wFk5fF47FWvOeODNBciyZz2rUK/tmdz7sHZmydf
- jEOg==
+ bh=lF2fu4z2XG02l76l/IsUrBTfEhGWyD0UfOXyu3FKewU=;
+ b=bQiMPY8K6nwdJfvQyVTlW1VXE0yp9ryBiiaUI0BrvpY61noLrykzQaMq2j4nHqQ7BZ
+ hzTgWBjey4oE+y9G9PL9mAfP/Pa9aCastva45tu/miYi1mpgsCfj+6EbPwSF1SG9u6dq
+ xY2Y9KrbOJxlIHAqUex07yU3s7iAFQPaNp/sa4lrQpQmO5n4zCsNBZ1tEoBwuvN7PRLh
+ //Yk35zX7RtSP5C39J+Fbp1S0r5yw0qkMCy9Tq7tdKN2dQTOLHlvbd+EDl7Td+ptjUND
+ irHh8SdG5QGU1+PTaovvLGQ5jnnczQoTwjQXpS/inR5gJKTj5+0ijGwSMefXc/STZKgH
+ MB+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763054170; x=1763658970;
+ d=1e100.net; s=20230601; t=1763109830; x=1763714630;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/+VeEoZv4V+FvSeUptBC/KXfvYsV2MVEcENr2lwOWwc=;
- b=Yu3oseUceO6mmPsYlh7pOHW0/ZcrYTO6A9lP2mP85FjgSqy028IY45F63fEPevJj6c
- k4qtSPhP2jsoDdk7G5Z2caanW4P4eaTtyv92dRUFKmapwPXsrGV5QwbnpxeMLhOmu2ZC
- xxlthYMQJRSnddHZZv2Mv4C9DhPUmDAMeavqXThvUpykAmmjyodn7MGdRNcGA/I/HLdr
- G14+YME+B/HFUBuySKHTl5BA1qCWAVQKn3QltR+piL/LZAXyI9jQCxJ5gaGRI4FtufHH
- hd8KKMM+Zs/Gb2IZDJ7FSuwL8g0tAlONeZvVyskNIlYraGQNU29z1PFkRqpUJzsl5EVj
- +3nw==
+ bh=lF2fu4z2XG02l76l/IsUrBTfEhGWyD0UfOXyu3FKewU=;
+ b=iOZWg7aC54SzQR4N82v4QpX1Z3p3HjjCK3YJ9jvmAUpY6ENDdgLe+7KFeWMYkj0tP5
+ n6TDGgL1AsQwfU1MHQVFAWDtdoSzqnFdyHShua1YTqi7oz9t6aYN0D73NHIegTB60r5l
+ B33LswnGYbLJi1eLMgv576fNFVfoAhtajoXNzdnRz0Cfrv4zpbFLYvqGWpiNu11Pqvo2
+ PEVnv4BYXubqTb+VrqTYaMa9kstz88qyIEMY0sAIyCaksS30kyS9+Wn+fFudtyOuQLLe
+ 8KUEOMrr1MBZVkOLd4klTEw1ChYsIgVfvbd463kvVRi7KpFvRK0qKnzQuJbvMhup0yy+
+ ORQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWP6xqSFhYt2lFZ/ivy7RndX24AwYp8qSa6bRTBFtt1UAzRAYm3+0IBs/MEisQKyNhX8fUMDlTLZllH@nongnu.org
-X-Gm-Message-State: AOJu0Yzfgs2k9X09lr62ZMrqxaB06sDbi61sJ/D2y87bDwF/JAodnVWE
- cu10X6b81H2wxfWbug222b4NUj1oTyoAGJKwndkEmS+9rfyQn4pyPEKYmzTGXzTGJAY=
-X-Gm-Gg: ASbGncv3idpmqSKZvELI1cnr8y52eOhMdCQM3JgA3ysdwhdzcGzVP+ijkSG8EnIpbxD
- 1DpwPpG6aM9Bf26h5E4x6ZcvyoRJqQd+z2rQeKVLjbebwrlB62v5gt2dWlDjnp3Sc0gZOdTNeqC
- Jqt/jN+xsMb4zivoXU0wfcLwEG8VUEPQf05I76fx+ZGnBMqEjElhuZAJgHbAB05RR3APervpHTu
- 1TvXB8Vm43dqz5KqdIimrs2eoiYlld8NwxwfBxkooByMIhlOloKIXSZ7olTuzPYUMcftpYlEM6V
- bncJgG4dL3t922RR0S6oO6kZcoXxXiz7IJ6ovgOt9HRc+Mp98CHornmn8PR/wzYX8Yx4hTeiGy/
- gIw6WYf9XZIUSIZpuujRylYYBVGzepZ2uzG166Tj2dSYXdNLLv+z6j51jvg3Z1YeSktRwkr+Oh6
- PBdm8hafDSwVBvRhnHQ/2Bh0nJ8Ne6lIPWbDLWdR0xkh3C
-X-Google-Smtp-Source: AGHT+IEHBFRC8Ia81Bn5aRJ2lYYjp8s4iP0yWvKhtWNg3wFs/RKokcr091JozWC+cLaNiUzGS+mpcA==
-X-Received: by 2002:a05:6a20:3c8f:b0:343:5d53:c0ab with SMTP id
- adf61e73a8af0-35ba0994bf2mr439167637.20.1763054169896; 
- Thu, 13 Nov 2025 09:16:09 -0800 (PST)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-bc375081023sm2712992a12.21.2025.11.13.09.16.08
+ AJvYcCWcZTudzXsWP2wV7UxHtZ9QFh1qjPWyt6j7eGVaU1TF5V7DWgpvc12ibnwaRtZ9bkzXmHYOmjk0+58v@nongnu.org
+X-Gm-Message-State: AOJu0Yyqzdl0IVq4yEznWRSVffd2QOGJ92Y5Vti6d7ol7l+xaU+t6k/q
+ IDspRG96R3FbrmPbBgveSkMR9Xen66FQEGNBPH0sSSGpmUqF7CeFz22BVKt7l3N27u4=
+X-Gm-Gg: ASbGncuwQ+obXv6JmKEghJq4c6wKUC5lw+iCEvWnzPyq7LM5V+EdNv75y5S41YlC6DP
+ qX0/7qNGq/DPEDmjs8ZELktkmxBegeBcwtX5+uLl1DhtUadNxnignbNrzpESrKZ/taXYDOyi5AS
+ hFTdKQPQSSru1C3/MjBhAF/uSeIPgTYaJuy8mt+5g7hTrE4Y4untB5NKUy9fy0GB/QwAZgFpdRc
+ Xtw2NDZEWLTzrlNP3c9M6Adr/j2YvoVfitnHCLdDgRLmnNYa16V9hKlahanAtKQUktW6lrE+0JW
+ GgqWY/Xwv34ri2be9ebMxHlLdPfmdM+jGZycxkgZoWfKJB72PXd4ab0MMUaHQevE9de/nZai6kd
+ 2FOHm7Q5Jz6ECE+hrZZgBBYNt+CdIXyeBycom+Z+xGhW3ny1SrhJaBu7hi8vJfasxukC0y/Vmeg
+ dul7sXKHCIfUzM4wSJSf+q6kKZTuxjcgP+CDzTHQ==
+X-Google-Smtp-Source: AGHT+IEXfGmvQiv0Bx97VzNlUmzGDSMLI0mIPlKC5fnDI06Z7P8Qm2KeytEYu//sZDx2JzVRM7J9ZQ==
+X-Received: by 2002:a05:7022:689e:b0:119:e56b:98be with SMTP id
+ a92af1059eb24-11b41505914mr789172c88.37.1763109829659; 
+ Fri, 14 Nov 2025 00:43:49 -0800 (PST)
+Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-11b060885e3sm7994657c88.0.2025.11.14.00.43.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Nov 2025 09:16:09 -0800 (PST)
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Max Chou <max.chou@sifive.com>
-Subject: [PATCH v3 0/3] Fix some more RVV source overlap issues
-Date: Fri, 14 Nov 2025 01:16:01 +0800
-Message-ID: <20251113171604.3034161-1-max.chou@sifive.com>
+ Fri, 14 Nov 2025 00:43:49 -0800 (PST)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-riscv@nongnu.org (open list:SiFive Machines),
+ Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH] hw/char: sifive_uart: Implement txctrl.txen and rxctrl.rxen
+Date: Fri, 14 Nov 2025 16:43:43 +0800
+Message-ID: <20251114084343.1094486-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=max.chou@sifive.com; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,25 +104,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patchset is based on the v2 with following update:
+From: Frank Chang <frank.chang@sifive.com>
 
-* Update the commit message to distinguish the affected rvv instructions.
+Implement txctrl.txen and rxctrl.rxen as follows:
 
-  Reference:
-  * v1: 20250415043207.3512209-1-antonb@tenstorrent.com
-  * v2: 20250627132022.439315-1-max.chou@sifive.com
+* txctrl.txen
+  The txen bit controls whether the Tx channel is active. When cleared,
+  transmission of Tx FIFO contents is suppressed, and the txd pin is
+  driven high.
 
-Anton Blanchard (3):
-  target/riscv: rvv: Apply vext_check_input_eew to vector int/fp compare
-    instructions
-  target/riscv: rvv: Apply vext_check_input_eew to vector reduction
-    instructions
-  target/riscv: vadc and vsbc are vm=0 instructions
+* rxctrl.rxen:
+  The rxen bit controls whether the Rx channel is active. When cleared,
+  the state of the rxd pin is ignored, and no characters will be
+  enqueued into the Rx FIFO.
 
- target/riscv/insn32.decode              | 10 +++++-----
- target/riscv/insn_trans/trans_rvv.c.inc | 26 ++++++++++++++-----------
- 2 files changed, 20 insertions(+), 16 deletions(-)
+Therefore, the Tx FIFO should not be dequeued when txctrl.txen is
+cleared, and the Rx FIFO should not be enqueued when rxctrl.rxen is
+cleared.
 
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+---
+ hw/char/sifive_uart.c         | 27 ++++++++++++++++++++-------
+ include/hw/char/sifive_uart.h |  2 ++
+ 2 files changed, 22 insertions(+), 7 deletions(-)
+
+diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+index e7357d585a1..4a54dd52a1e 100644
+--- a/hw/char/sifive_uart.c
++++ b/hw/char/sifive_uart.c
+@@ -78,6 +78,11 @@ static gboolean sifive_uart_xmit(void *do_not_use, GIOCondition cond,
+         return G_SOURCE_REMOVE;
+     }
+ 
++    /* Don't pop the FIFO if transmit is disabled. */
++    if (!SIFIVE_UART_TXEN(s->txctrl)) {
++        return G_SOURCE_REMOVE;
++    }
++
+     /* Don't pop the FIFO in case the write fails */
+     characters = fifo8_peek_bufptr(&s->tx_fifo,
+                                    fifo8_num_used(&s->tx_fifo), &numptr);
+@@ -106,11 +111,19 @@ static gboolean sifive_uart_xmit(void *do_not_use, GIOCondition cond,
+     return G_SOURCE_REMOVE;
+ }
+ 
+-static void sifive_uart_write_tx_fifo(SiFiveUARTState *s, const uint8_t *buf,
+-                                      int size)
++static void sifive_uart_trigger_tx_fifo(SiFiveUARTState *s)
+ {
+     uint64_t current_time = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+ 
++    if (!timer_pending(s->fifo_trigger_handle)) {
++        timer_mod(s->fifo_trigger_handle, current_time +
++            TX_INTERRUPT_TRIGGER_DELAY_NS);
++    }
++}
++
++static void sifive_uart_write_tx_fifo(SiFiveUARTState *s, const uint8_t *buf,
++                                      int size)
++{
+     if (size > fifo8_num_free(&s->tx_fifo)) {
+         size = fifo8_num_free(&s->tx_fifo);
+         qemu_log_mask(LOG_GUEST_ERROR, "sifive_uart: TX FIFO overflow.\n");
+@@ -124,10 +137,7 @@ static void sifive_uart_write_tx_fifo(SiFiveUARTState *s, const uint8_t *buf,
+         s->txfifo |= SIFIVE_UART_TXFIFO_FULL;
+     }
+ 
+-    if (!timer_pending(s->fifo_trigger_handle)) {
+-        timer_mod(s->fifo_trigger_handle, current_time +
+-                      TX_INTERRUPT_TRIGGER_DELAY_NS);
+-    }
++    sifive_uart_trigger_tx_fifo(s);
+ }
+ 
+ static uint64_t
+@@ -184,6 +194,9 @@ sifive_uart_write(void *opaque, hwaddr addr,
+         return;
+     case SIFIVE_UART_TXCTRL:
+         s->txctrl = val64;
++        if (SIFIVE_UART_TXEN(s->txctrl) && !fifo8_is_empty(&s->tx_fifo)) {
++            sifive_uart_trigger_tx_fifo(s);
++        }
+         return;
+     case SIFIVE_UART_RXCTRL:
+         s->rxctrl = val64;
+@@ -231,7 +244,7 @@ static int sifive_uart_can_rx(void *opaque)
+ {
+     SiFiveUARTState *s = opaque;
+ 
+-    return s->rx_fifo_len < sizeof(s->rx_fifo);
++    return SIFIVE_UART_RXEN(s->rxctrl) && (s->rx_fifo_len < sizeof(s->rx_fifo));
+ }
+ 
+ static void sifive_uart_event(void *opaque, QEMUChrEvent event)
+diff --git a/include/hw/char/sifive_uart.h b/include/hw/char/sifive_uart.h
+index 6486c3f4a5d..e216cacf693 100644
+--- a/include/hw/char/sifive_uart.h
++++ b/include/hw/char/sifive_uart.h
+@@ -51,6 +51,8 @@ enum {
+ 
+ #define SIFIVE_UART_TXFIFO_FULL    0x80000000
+ 
++#define SIFIVE_UART_TXEN(txctrl)        (txctrl & 0x1)
++#define SIFIVE_UART_RXEN(rxctrl)        (rxctrl & 0x1)
+ #define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
+ #define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
+ 
 -- 
 2.43.0
 
