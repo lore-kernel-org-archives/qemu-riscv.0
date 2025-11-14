@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E7BCDE032
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Nov 2025 08:44:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C976CCE7A8C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Nov 2025 09:02:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJpPS-0001Gn-QW; Fri, 14 Nov 2025 03:43:58 -0500
+	id 1vJphN-0005qh-Q0; Fri, 14 Nov 2025 04:02:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1vJpPO-0001E1-4b
- for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 03:43:54 -0500
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
+ id 1vJpgh-00046s-1s
+ for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 04:01:47 -0500
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1vJpPM-0007ok-I4
- for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 03:43:53 -0500
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-7ad1cd0db3bso1511134b3a.1
- for <qemu-riscv@nongnu.org>; Fri, 14 Nov 2025 00:43:50 -0800 (PST)
+ id 1vJpgd-0007Fi-RA
+ for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 04:01:46 -0500
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-7a9cdf62d31so2076062b3a.3
+ for <qemu-riscv@nongnu.org>; Fri, 14 Nov 2025 01:01:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1763109830; x=1763714630; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lF2fu4z2XG02l76l/IsUrBTfEhGWyD0UfOXyu3FKewU=;
- b=bQiMPY8K6nwdJfvQyVTlW1VXE0yp9ryBiiaUI0BrvpY61noLrykzQaMq2j4nHqQ7BZ
- hzTgWBjey4oE+y9G9PL9mAfP/Pa9aCastva45tu/miYi1mpgsCfj+6EbPwSF1SG9u6dq
- xY2Y9KrbOJxlIHAqUex07yU3s7iAFQPaNp/sa4lrQpQmO5n4zCsNBZ1tEoBwuvN7PRLh
- //Yk35zX7RtSP5C39J+Fbp1S0r5yw0qkMCy9Tq7tdKN2dQTOLHlvbd+EDl7Td+ptjUND
- irHh8SdG5QGU1+PTaovvLGQ5jnnczQoTwjQXpS/inR5gJKTj5+0ijGwSMefXc/STZKgH
- MB+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763109830; x=1763714630;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=sifive.com; s=google; t=1763110902; x=1763715702; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lF2fu4z2XG02l76l/IsUrBTfEhGWyD0UfOXyu3FKewU=;
- b=iOZWg7aC54SzQR4N82v4QpX1Z3p3HjjCK3YJ9jvmAUpY6ENDdgLe+7KFeWMYkj0tP5
- n6TDGgL1AsQwfU1MHQVFAWDtdoSzqnFdyHShua1YTqi7oz9t6aYN0D73NHIegTB60r5l
- B33LswnGYbLJi1eLMgv576fNFVfoAhtajoXNzdnRz0Cfrv4zpbFLYvqGWpiNu11Pqvo2
- PEVnv4BYXubqTb+VrqTYaMa9kstz88qyIEMY0sAIyCaksS30kyS9+Wn+fFudtyOuQLLe
- 8KUEOMrr1MBZVkOLd4klTEw1ChYsIgVfvbd463kvVRi7KpFvRK0qKnzQuJbvMhup0yy+
- ORQw==
+ bh=UXAFxMHlvRSnA7eqtSuOeq6X1JUPuTSkqH51774VWV8=;
+ b=UK/WdP8TAijd0l/c7kB0mW3MsBypGhOV5LDdPdtAmwtrQLfCG1tWxG3wm5svfxWbJ7
+ 2nnVABgPbhKaupeP+ora3T+UsSCmnwOYNYiVQBo8fwgmOk5KUSgDj+m5qgiQbHoBlFwy
+ 8IzqunXlGWfrlbUy2ang9oWvYHJkqyFL/lxhR041+VXBEMJ21CXTO9Y0PDUVNezb+PUc
+ xir6h/ZRzK1NNxOWvRRmRZwKyOKauEIowrJ3lPoTwNlLFclz+ptDh9VlMC2UKcgb8lOH
+ 6QSjJpIYQdUcPs3MW3kvf31/2XFWvPO/Mrz6a+DQo9z8n9uK8CsOt5S7ug0Vx/c6mqHA
+ gpEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763110902; x=1763715702;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=UXAFxMHlvRSnA7eqtSuOeq6X1JUPuTSkqH51774VWV8=;
+ b=oPn9TfUX71UVWJC7lreoy/W7sM7M4S5kb9qkU/HC/6I0gcQC6wsF+RCudw+oFItXhY
+ hv3GWqEd+TEG7OHbouoWREsIURh7r2OmPd5vghgtC2ZUuNIzbXbg6VfkwQojVp+8XxQo
+ r80zM0AaqOw+kM+nggnPvXz8vx+dfjM+tFGOAmHZ2oVxVOq8QmnFkBGInQylAiFZHiVY
+ P+WBgysnErzu0i+I/WhjfbwASeTSIWKbhKv7Z/VjzcgVJOP/GGnAdcTqjRYxaMyYTpV7
+ q8mDbCigzRybfjJojmbXEzW71QdyY965ccPsowpTI9k51qsIKVfBDuJ+MN9UMxbQRPxE
+ uBFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcZTudzXsWP2wV7UxHtZ9QFh1qjPWyt6j7eGVaU1TF5V7DWgpvc12ibnwaRtZ9bkzXmHYOmjk0+58v@nongnu.org
-X-Gm-Message-State: AOJu0Yyqzdl0IVq4yEznWRSVffd2QOGJ92Y5Vti6d7ol7l+xaU+t6k/q
- IDspRG96R3FbrmPbBgveSkMR9Xen66FQEGNBPH0sSSGpmUqF7CeFz22BVKt7l3N27u4=
-X-Gm-Gg: ASbGncuwQ+obXv6JmKEghJq4c6wKUC5lw+iCEvWnzPyq7LM5V+EdNv75y5S41YlC6DP
- qX0/7qNGq/DPEDmjs8ZELktkmxBegeBcwtX5+uLl1DhtUadNxnignbNrzpESrKZ/taXYDOyi5AS
- hFTdKQPQSSru1C3/MjBhAF/uSeIPgTYaJuy8mt+5g7hTrE4Y4untB5NKUy9fy0GB/QwAZgFpdRc
- Xtw2NDZEWLTzrlNP3c9M6Adr/j2YvoVfitnHCLdDgRLmnNYa16V9hKlahanAtKQUktW6lrE+0JW
- GgqWY/Xwv34ri2be9ebMxHlLdPfmdM+jGZycxkgZoWfKJB72PXd4ab0MMUaHQevE9de/nZai6kd
- 2FOHm7Q5Jz6ECE+hrZZgBBYNt+CdIXyeBycom+Z+xGhW3ny1SrhJaBu7hi8vJfasxukC0y/Vmeg
- dul7sXKHCIfUzM4wSJSf+q6kKZTuxjcgP+CDzTHQ==
-X-Google-Smtp-Source: AGHT+IEXfGmvQiv0Bx97VzNlUmzGDSMLI0mIPlKC5fnDI06Z7P8Qm2KeytEYu//sZDx2JzVRM7J9ZQ==
-X-Received: by 2002:a05:7022:689e:b0:119:e56b:98be with SMTP id
- a92af1059eb24-11b41505914mr789172c88.37.1763109829659; 
- Fri, 14 Nov 2025 00:43:49 -0800 (PST)
+ AJvYcCXm6gscADK2TqeviibM+XR3F4yXDaZbeKzNWm5NFvyETuzJpasrMT0ww9S6M3g9iivx8HhNygfqCWOK@nongnu.org
+X-Gm-Message-State: AOJu0YyHgjohZlyV3PEbQqT+oJR6Scb+KXfJTu82vZ7Q3DUIvebrSzlI
+ /XdcIEsI5duEXM/s5dnHn8DDAOsWIu91vYETyzOzwRioYWlVDLMzPEIkPbNOU5wsfgQ=
+X-Gm-Gg: ASbGnctpnLBQ3mWrp8NQ6ep3baL3ySR1vwx3/Jx2ucPE19bNp8I5rIxcIMqvv1aACtF
+ eRsI4WQPEbCnPKaDOKtVah3KhWcc5W9XgyWinOm8T0tIBmSayndonCfgJehkZcA80EOV9auLDEj
+ nhiJjLQH5u6Vqew8Nr7rc1EJsR9OkocDcQPEdl6mfu0otMVYsz5MNRD4UfyiRUepdmK84mBU63b
+ 2uksm0R23XI1BCXrBsbIv/Dwv6oPT6ysSuJ4FXJ2ri/U+XZW32t98Yt4avgI8WxnP9IQgm/jXsg
+ mgi/oRwJ7GVJk1pIpJIGigDKNtZUukiZ328+iVUsSNF54g8PUh5LHeCXgutR2FBJOrWUAUPujAc
+ SdvB2Ha3sWpgk70CrrIV1EDmRTIDTBig5YBlhuPBZ8WbJ3eGAWhkDip28BZehVKrOOGyqLN0x4f
+ aPsu+TTAW2cMZFamUb7jTxlvvM+ROKuGB7U3ZEx7vcL5OzNwgg
+X-Google-Smtp-Source: AGHT+IG6JoqC+OwN+zp8veFIHYGO7Slcy0gNqgc8sKe5BBh9C+MZgw6tGQH0BeMf+8IR1yFlMFfBJQ==
+X-Received: by 2002:a05:7022:ea44:b0:119:e56c:18af with SMTP id
+ a92af1059eb24-11b41504ba5mr461285c88.23.1763110902375; 
+ Fri, 14 Nov 2025 01:01:42 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-11b060885e3sm7994657c88.0.2025.11.14.00.43.47
+ a92af1059eb24-11b06088625sm8049254c88.8.2025.11.14.01.01.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 00:43:49 -0800 (PST)
+ Fri, 14 Nov 2025 01:01:41 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org (open list:SiFive Machines),
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH] hw/char: sifive_uart: Implement txctrl.txen and rxctrl.rxen
-Date: Fri, 14 Nov 2025 16:43:43 +0800
-Message-ID: <20251114084343.1094486-1-frank.chang@sifive.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
+ Frank Chang <frank.chang@sifive.com>, Max Chou <max.chou@sifive.com>
+Subject: [PATCH 1/2] target/riscv: Update MISA.C for Zc* extensions
+Date: Fri, 14 Nov 2025 17:01:32 +0800
+Message-ID: <20251114090134.1125646-2-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251114090134.1125646-1-frank.chang@sifive.com>
+References: <20251114090134.1125646-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,110 +110,70 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Implement txctrl.txen and rxctrl.rxen as follows:
+MISA.C is set if the following extensions are selected:
+  * Zca and not F.
+  * Zca, Zcf and F (but not D) is specified (RV32 only).
+  * Zca, Zcf and Zcd if D is specified (RV32 only).
+  * Zca, Zcd if D is specified (RV64 only).
 
-* txctrl.txen
-  The txen bit controls whether the Tx channel is active. When cleared,
-  transmission of Tx FIFO contents is suppressed, and the txd pin is
-  driven high.
-
-* rxctrl.rxen:
-  The rxen bit controls whether the Rx channel is active. When cleared,
-  the state of the rxd pin is ignored, and no characters will be
-  enqueued into the Rx FIFO.
-
-Therefore, the Tx FIFO should not be dequeued when txctrl.txen is
-cleared, and the Rx FIFO should not be enqueued when rxctrl.rxen is
-cleared.
+Therefore, we need to set MISA.C according to the rules for Zc*
+extensions.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Max Chou <max.chou@sifive.com>
 ---
- hw/char/sifive_uart.c         | 27 ++++++++++++++++++++-------
- include/hw/char/sifive_uart.h |  2 ++
- 2 files changed, 22 insertions(+), 7 deletions(-)
+ target/riscv/tcg/tcg-cpu.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-index e7357d585a1..4a54dd52a1e 100644
---- a/hw/char/sifive_uart.c
-+++ b/hw/char/sifive_uart.c
-@@ -78,6 +78,11 @@ static gboolean sifive_uart_xmit(void *do_not_use, GIOCondition cond,
-         return G_SOURCE_REMOVE;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 440626ddfad..da09a2417cc 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -1150,6 +1150,36 @@ static void riscv_cpu_enable_implied_rules(RISCVCPU *cpu)
      }
- 
-+    /* Don't pop the FIFO if transmit is disabled. */
-+    if (!SIFIVE_UART_TXEN(s->txctrl)) {
-+        return G_SOURCE_REMOVE;
-+    }
-+
-     /* Don't pop the FIFO in case the write fails */
-     characters = fifo8_peek_bufptr(&s->tx_fifo,
-                                    fifo8_num_used(&s->tx_fifo), &numptr);
-@@ -106,11 +111,19 @@ static gboolean sifive_uart_xmit(void *do_not_use, GIOCondition cond,
-     return G_SOURCE_REMOVE;
  }
  
--static void sifive_uart_write_tx_fifo(SiFiveUARTState *s, const uint8_t *buf,
--                                      int size)
-+static void sifive_uart_trigger_tx_fifo(SiFiveUARTState *s)
- {
-     uint64_t current_time = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
- 
-+    if (!timer_pending(s->fifo_trigger_handle)) {
-+        timer_mod(s->fifo_trigger_handle, current_time +
-+            TX_INTERRUPT_TRIGGER_DELAY_NS);
++/*
++ * MISA.C is set if the following extensions are selected:
++ *   - Zca and not F.
++ *   - Zca, Zcf and F (but not D) is specified on RV32.
++ *   - Zca, Zcf and Zcd if D is specified on RV32.
++ *   - Zca, Zcd if D is specified on RV64.
++ */
++static void riscv_cpu_update_misa_c(RISCVCPU *cpu)
++{
++    CPURISCVState *env = &cpu->env;
++
++    if (cpu->cfg.ext_zca && !riscv_has_ext(env, RVF)) {
++        riscv_cpu_set_misa_ext(env, env->misa_ext | RVC);
++        return;
++    }
++
++    if (riscv_cpu_mxl(env) == MXL_RV32 &&
++        cpu->cfg.ext_zca && cpu->cfg.ext_zcf &&
++        riscv_has_ext(env, RVD) ? cpu->cfg.ext_zcd : riscv_has_ext(env, RVF)) {
++        riscv_cpu_set_misa_ext(env, env->misa_ext | RVC);
++        return;
++    }
++
++    if (riscv_cpu_mxl(env) == MXL_RV64 &&
++        cpu->cfg.ext_zca && cpu->cfg.ext_zcd) {
++        riscv_cpu_set_misa_ext(env, env->misa_ext | RVC);
++        return;
 +    }
 +}
 +
-+static void sifive_uart_write_tx_fifo(SiFiveUARTState *s, const uint8_t *buf,
-+                                      int size)
-+{
-     if (size > fifo8_num_free(&s->tx_fifo)) {
-         size = fifo8_num_free(&s->tx_fifo);
-         qemu_log_mask(LOG_GUEST_ERROR, "sifive_uart: TX FIFO overflow.\n");
-@@ -124,10 +137,7 @@ static void sifive_uart_write_tx_fifo(SiFiveUARTState *s, const uint8_t *buf,
-         s->txfifo |= SIFIVE_UART_TXFIFO_FULL;
-     }
- 
--    if (!timer_pending(s->fifo_trigger_handle)) {
--        timer_mod(s->fifo_trigger_handle, current_time +
--                      TX_INTERRUPT_TRIGGER_DELAY_NS);
--    }
-+    sifive_uart_trigger_tx_fifo(s);
- }
- 
- static uint64_t
-@@ -184,6 +194,9 @@ sifive_uart_write(void *opaque, hwaddr addr,
-         return;
-     case SIFIVE_UART_TXCTRL:
-         s->txctrl = val64;
-+        if (SIFIVE_UART_TXEN(s->txctrl) && !fifo8_is_empty(&s->tx_fifo)) {
-+            sifive_uart_trigger_tx_fifo(s);
-+        }
-         return;
-     case SIFIVE_UART_RXCTRL:
-         s->rxctrl = val64;
-@@ -231,7 +244,7 @@ static int sifive_uart_can_rx(void *opaque)
+ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
  {
-     SiFiveUARTState *s = opaque;
+     CPURISCVState *env = &cpu->env;
+@@ -1157,6 +1187,7 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
  
--    return s->rx_fifo_len < sizeof(s->rx_fifo);
-+    return SIFIVE_UART_RXEN(s->rxctrl) && (s->rx_fifo_len < sizeof(s->rx_fifo));
- }
+     riscv_cpu_init_implied_exts_rules();
+     riscv_cpu_enable_implied_rules(cpu);
++    riscv_cpu_update_misa_c(cpu);
  
- static void sifive_uart_event(void *opaque, QEMUChrEvent event)
-diff --git a/include/hw/char/sifive_uart.h b/include/hw/char/sifive_uart.h
-index 6486c3f4a5d..e216cacf693 100644
---- a/include/hw/char/sifive_uart.h
-+++ b/include/hw/char/sifive_uart.h
-@@ -51,6 +51,8 @@ enum {
- 
- #define SIFIVE_UART_TXFIFO_FULL    0x80000000
- 
-+#define SIFIVE_UART_TXEN(txctrl)        (txctrl & 0x1)
-+#define SIFIVE_UART_RXEN(rxctrl)        (rxctrl & 0x1)
- #define SIFIVE_UART_GET_TXCNT(txctrl)   ((txctrl >> 16) & 0x7)
- #define SIFIVE_UART_GET_RXCNT(rxctrl)   ((rxctrl >> 16) & 0x7)
- 
+     riscv_cpu_validate_misa_priv(env, &local_err);
+     if (local_err != NULL) {
 -- 
 2.43.0
 
