@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C976CCE7A8C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Nov 2025 09:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6151CE7A8C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Nov 2025 09:03:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJphN-0005qh-Q0; Fri, 14 Nov 2025 04:02:29 -0500
+	id 1vJphQ-00068W-4f; Fri, 14 Nov 2025 04:02:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1vJpgh-00046s-1s
- for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 04:01:47 -0500
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1vJpgj-0004MK-PP
+ for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 04:01:50 -0500
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1vJpgd-0007Fi-RA
- for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 04:01:46 -0500
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-7a9cdf62d31so2076062b3a.3
- for <qemu-riscv@nongnu.org>; Fri, 14 Nov 2025 01:01:43 -0800 (PST)
+ id 1vJpgg-0007G4-PZ
+ for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 04:01:49 -0500
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-bc8ceb76c04so42402a12.1
+ for <qemu-riscv@nongnu.org>; Fri, 14 Nov 2025 01:01:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1763110902; x=1763715702; darn=nongnu.org;
+ d=sifive.com; s=google; t=1763110905; x=1763715705; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UXAFxMHlvRSnA7eqtSuOeq6X1JUPuTSkqH51774VWV8=;
- b=UK/WdP8TAijd0l/c7kB0mW3MsBypGhOV5LDdPdtAmwtrQLfCG1tWxG3wm5svfxWbJ7
- 2nnVABgPbhKaupeP+ora3T+UsSCmnwOYNYiVQBo8fwgmOk5KUSgDj+m5qgiQbHoBlFwy
- 8IzqunXlGWfrlbUy2ang9oWvYHJkqyFL/lxhR041+VXBEMJ21CXTO9Y0PDUVNezb+PUc
- xir6h/ZRzK1NNxOWvRRmRZwKyOKauEIowrJ3lPoTwNlLFclz+ptDh9VlMC2UKcgb8lOH
- 6QSjJpIYQdUcPs3MW3kvf31/2XFWvPO/Mrz6a+DQo9z8n9uK8CsOt5S7ug0Vx/c6mqHA
- gpEg==
+ bh=E/fRO/sMpvxBW5liC2r3DKNfWyHa1X3NXHWrEWWToCI=;
+ b=HYDqcIYG8l0bdfnt0xRKvMfkAU0xTxIY0VGB0zaXl+BkVDmMV03Q8tnYU3lEMuMk1+
+ hUN5h34YUDQbWqEX5Q4qHnAKwJqkKTyZcCTLyr3NlXxsC1GIUYd32CTWdUxbm/KeMjKn
+ 4T1M8DOGXUSXwQPGEJaMmAoloibKLD+GeZV4ms5QOzMO8AhSuADWNVcY0kqNYqxDmpKR
+ K/289tkiSNoccrjo5wXN0xl3bGvtFchCv6mQkbMlGim5qoX6DLZSo8lUaYwdazz4CkzH
+ 2bO+gj/yfn+/tmuGFs7QOck0mqrVDrWX7m63Ck1tFX1XbNaFd+aSyZOodvVtCCGSDv6c
+ mYyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763110902; x=1763715702;
+ d=1e100.net; s=20230601; t=1763110905; x=1763715705;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=UXAFxMHlvRSnA7eqtSuOeq6X1JUPuTSkqH51774VWV8=;
- b=oPn9TfUX71UVWJC7lreoy/W7sM7M4S5kb9qkU/HC/6I0gcQC6wsF+RCudw+oFItXhY
- hv3GWqEd+TEG7OHbouoWREsIURh7r2OmPd5vghgtC2ZUuNIzbXbg6VfkwQojVp+8XxQo
- r80zM0AaqOw+kM+nggnPvXz8vx+dfjM+tFGOAmHZ2oVxVOq8QmnFkBGInQylAiFZHiVY
- P+WBgysnErzu0i+I/WhjfbwASeTSIWKbhKv7Z/VjzcgVJOP/GGnAdcTqjRYxaMyYTpV7
- q8mDbCigzRybfjJojmbXEzW71QdyY965ccPsowpTI9k51qsIKVfBDuJ+MN9UMxbQRPxE
- uBFw==
+ bh=E/fRO/sMpvxBW5liC2r3DKNfWyHa1X3NXHWrEWWToCI=;
+ b=vSn0XwUz4DNNMBRMkZUYJoKQVVQSqL1W/KQiTxQURQX+u94VYAG5I5mfTCASlMKHxf
+ FkfvWC8zzJAvbXnXDWMyNZqVksrZFCw5Z+PCOsqkWyK89dQXjCe2oNgMUOhq9WQoTMmK
+ KMH/jlrKEb4PALJf3yifTZb64TlXnb4guUs8j+gLP8GG74gQnBleRqLLNfjKqdWVXlmB
+ exge8wV4wzErbz9ez+gCV2Z7lZlqnDitpVJmkLiDndWcyXvlav4cnD6R9GMrmPD1nEw9
+ YrKrSeDtOMrq2vaFLcxtBo034ApRmRIxS5oxJ6vWb+ULWipGtqEjBCRQ7ND965a5CNUv
+ MfBQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXm6gscADK2TqeviibM+XR3F4yXDaZbeKzNWm5NFvyETuzJpasrMT0ww9S6M3g9iivx8HhNygfqCWOK@nongnu.org
-X-Gm-Message-State: AOJu0YyHgjohZlyV3PEbQqT+oJR6Scb+KXfJTu82vZ7Q3DUIvebrSzlI
- /XdcIEsI5duEXM/s5dnHn8DDAOsWIu91vYETyzOzwRioYWlVDLMzPEIkPbNOU5wsfgQ=
-X-Gm-Gg: ASbGnctpnLBQ3mWrp8NQ6ep3baL3ySR1vwx3/Jx2ucPE19bNp8I5rIxcIMqvv1aACtF
- eRsI4WQPEbCnPKaDOKtVah3KhWcc5W9XgyWinOm8T0tIBmSayndonCfgJehkZcA80EOV9auLDEj
- nhiJjLQH5u6Vqew8Nr7rc1EJsR9OkocDcQPEdl6mfu0otMVYsz5MNRD4UfyiRUepdmK84mBU63b
- 2uksm0R23XI1BCXrBsbIv/Dwv6oPT6ysSuJ4FXJ2ri/U+XZW32t98Yt4avgI8WxnP9IQgm/jXsg
- mgi/oRwJ7GVJk1pIpJIGigDKNtZUukiZ328+iVUsSNF54g8PUh5LHeCXgutR2FBJOrWUAUPujAc
- SdvB2Ha3sWpgk70CrrIV1EDmRTIDTBig5YBlhuPBZ8WbJ3eGAWhkDip28BZehVKrOOGyqLN0x4f
- aPsu+TTAW2cMZFamUb7jTxlvvM+ROKuGB7U3ZEx7vcL5OzNwgg
-X-Google-Smtp-Source: AGHT+IG6JoqC+OwN+zp8veFIHYGO7Slcy0gNqgc8sKe5BBh9C+MZgw6tGQH0BeMf+8IR1yFlMFfBJQ==
-X-Received: by 2002:a05:7022:ea44:b0:119:e56c:18af with SMTP id
- a92af1059eb24-11b41504ba5mr461285c88.23.1763110902375; 
- Fri, 14 Nov 2025 01:01:42 -0800 (PST)
+ AJvYcCUSM7pGs6QRTh/f8ylewJZZA4X+BQhNCwlt8UFNjqLRIaIitfQcq3d7hQ9Jh0f8jK06jHjBXKzPNjTj@nongnu.org
+X-Gm-Message-State: AOJu0Yz6iBzNvLYv8H0pEsfg4WaLTGCpKbfV/WGVLsEX2k6UApwmB+np
+ rroHwfYSpq5gphuTRSkzZVFzblpypv25rIzp350N58/oswBbbvB5zc2rvjabay9+haM=
+X-Gm-Gg: ASbGnctuGJP+K2dmiMKrTX3YH2XepJJ/8SNTECBDkMc7pJ/5KvtkxNId2ALi3mpIe4q
+ rIzNibihkuVXt5Vvg5ajtg6OMnFpEyewsR1oKADx9hIJeNrg0SmzIB89DycTV3eECxW11irKxk7
+ mT0ZpWFbABefM6HYVndgYCsNlv03j4grgbRCKF2lO/mHGHd2ypFVeMfskv0+JpiurwAlHjyqHbx
+ ghxK0IvnJ1X4Am95haOhtd3m0SlN8sG+uJHpImCHLO03lzALc3aoupDZ/DTAilpKBhG363EMVDF
+ rqXzJJV23gxqhxDokJ5npr4aNUvqFHxHb7Hw0lXgwq4wt3Ek7BzCzSj+D62E4w1G0R0H0H9zdyy
+ lOM0xthlzq0EhwiRPys6vpM28TJ/Vs5WDfUjiS/FyDzt1G9DlHzfnkUuWbZg8FeTz7ci6C/tY80
+ tkAJhL2dOtJzN8xVHldfGQ019gbNuUeRHJch4DvA==
+X-Google-Smtp-Source: AGHT+IFdLjF9PQ/ri41efq6F51vgsaSRsZt1RmR0JugtuZ7cHaYYsxrzQTIRF52p8Nh2Lm1hYDHbaA==
+X-Received: by 2002:a05:7022:4590:b0:119:e569:f60d with SMTP id
+ a92af1059eb24-11b40f9bcd8mr824634c88.6.1763110905073; 
+ Fri, 14 Nov 2025 01:01:45 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-11b06088625sm8049254c88.8.2025.11.14.01.01.39
+ a92af1059eb24-11b06088625sm8049254c88.8.2025.11.14.01.01.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 01:01:41 -0800 (PST)
+ Fri, 14 Nov 2025 01:01:44 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -76,16 +76,16 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
  Frank Chang <frank.chang@sifive.com>, Max Chou <max.chou@sifive.com>
-Subject: [PATCH 1/2] target/riscv: Update MISA.C for Zc* extensions
-Date: Fri, 14 Nov 2025 17:01:32 +0800
-Message-ID: <20251114090134.1125646-2-frank.chang@sifive.com>
+Subject: [PATCH 2/2] target/riscv: Update MISA.X for non-standard extensions
+Date: Fri, 14 Nov 2025 17:01:33 +0800
+Message-ID: <20251114090134.1125646-3-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251114090134.1125646-1-frank.chang@sifive.com>
 References: <20251114090134.1125646-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,67 +110,58 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Frank Chang <frank.chang@sifive.com>
 
-MISA.C is set if the following extensions are selected:
-  * Zca and not F.
-  * Zca, Zcf and F (but not D) is specified (RV32 only).
-  * Zca, Zcf and Zcd if D is specified (RV32 only).
-  * Zca, Zcd if D is specified (RV64 only).
-
-Therefore, we need to set MISA.C according to the rules for Zc*
-extensions.
+MISA.X is set if there are any non-standard extensions.
+We should set MISA.X when any of the vendor extensions is enabled.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/tcg/tcg-cpu.c | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+ target/riscv/cpu.h         |  1 +
+ target/riscv/tcg/tcg-cpu.c | 15 +++++++++++++++
+ 2 files changed, 16 insertions(+)
 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 8899bf7667a..2e0c92fe593 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -69,6 +69,7 @@ typedef struct CPUArchState CPURISCVState;
+ #define RVH RV('H')
+ #define RVG RV('G')
+ #define RVB RV('B')
++#define RVX RV('X')
+ 
+ extern const uint32_t misa_bits[];
+ const char *riscv_get_misa_ext_name(uint32_t bit);
 diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 440626ddfad..da09a2417cc 100644
+index da09a2417cc..0d730f4d774 100644
 --- a/target/riscv/tcg/tcg-cpu.c
 +++ b/target/riscv/tcg/tcg-cpu.c
-@@ -1150,6 +1150,36 @@ static void riscv_cpu_enable_implied_rules(RISCVCPU *cpu)
+@@ -1180,6 +1180,20 @@ static void riscv_cpu_update_misa_c(RISCVCPU *cpu)
      }
  }
  
-+/*
-+ * MISA.C is set if the following extensions are selected:
-+ *   - Zca and not F.
-+ *   - Zca, Zcf and F (but not D) is specified on RV32.
-+ *   - Zca, Zcf and Zcd if D is specified on RV32.
-+ *   - Zca, Zcd if D is specified on RV64.
-+ */
-+static void riscv_cpu_update_misa_c(RISCVCPU *cpu)
++/* MISA.X is set when any of the non-standard extensions is enabled. */
++static void riscv_cpu_update_misa_x(RISCVCPU *cpu)
 +{
 +    CPURISCVState *env = &cpu->env;
++    const RISCVCPUMultiExtConfig *arr = riscv_cpu_vendor_exts;
 +
-+    if (cpu->cfg.ext_zca && !riscv_has_ext(env, RVF)) {
-+        riscv_cpu_set_misa_ext(env, env->misa_ext | RVC);
-+        return;
-+    }
-+
-+    if (riscv_cpu_mxl(env) == MXL_RV32 &&
-+        cpu->cfg.ext_zca && cpu->cfg.ext_zcf &&
-+        riscv_has_ext(env, RVD) ? cpu->cfg.ext_zcd : riscv_has_ext(env, RVF)) {
-+        riscv_cpu_set_misa_ext(env, env->misa_ext | RVC);
-+        return;
-+    }
-+
-+    if (riscv_cpu_mxl(env) == MXL_RV64 &&
-+        cpu->cfg.ext_zca && cpu->cfg.ext_zcd) {
-+        riscv_cpu_set_misa_ext(env, env->misa_ext | RVC);
-+        return;
++    for (int i = 0; arr[i].name != NULL; i++) {
++        if (isa_ext_is_enabled(cpu, arr[i].offset)) {
++            riscv_cpu_set_misa_ext(env, env->misa_ext | RVX);
++            break;
++        }
 +    }
 +}
 +
  void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
  {
      CPURISCVState *env = &cpu->env;
-@@ -1157,6 +1187,7 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
- 
+@@ -1188,6 +1202,7 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
      riscv_cpu_init_implied_exts_rules();
      riscv_cpu_enable_implied_rules(cpu);
-+    riscv_cpu_update_misa_c(cpu);
+     riscv_cpu_update_misa_c(cpu);
++    riscv_cpu_update_misa_x(cpu);
  
      riscv_cpu_validate_misa_priv(env, &local_err);
      if (local_err != NULL) {
