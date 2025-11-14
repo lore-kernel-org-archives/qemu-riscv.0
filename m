@@ -4,142 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8445CE7A9B
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Nov 2025 09:26:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80FA3CE7B06
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Nov 2025 13:02:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vJq4B-0007Ck-01; Fri, 14 Nov 2025 04:26:03 -0500
+	id 1vJtR8-00078B-5H; Fri, 14 Nov 2025 08:01:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
- id 1vJq40-0006zZ-Bg; Fri, 14 Nov 2025 04:25:54 -0500
-Received: from mail-eastus2azlp170100001.outbound.protection.outlook.com
- ([2a01:111:f403:c110::1] helo=BN1PR04CU002.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
- id 1vJq3w-00062G-Id; Fri, 14 Nov 2025 04:25:52 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MixVrzGo2Hzb9Px36E6trTw6gzU3ZKaE7uYZUaU4zZpGvsIRtHchoQrNtwIpTL540ccrLwZaPRqx2gpXSuMECtkPMi9suDMx1q9olDJyyYCcr/aRTA5+2NflqKKzSP4H11KMhnY35u80araUM/nva8QqS5ugD+ZrilvYB/CUIobJVnOxiCnfL3Mun7ReKlTH849PNX6MULOXrWmMKEg9julVfTRj4xjBCJbmarlxyeRdhHNgpR1xqtHQgbGoS+VkTcdU5kTsgD4HjG+QZdNI/aKfahDB8MR22ppucQcYomgStFp/NdXW/k/YYbvgz4Arlmnf7bci37E9S1wGrmS3ZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IQpsEFrMAOhDNkkTnfpDUT2cVsCffa2CmTEnfEu8HsE=;
- b=NLJYiHZkeqAkhuyZfBfcMwBgY41VfnxR/XD0gBTT6PIHa7jtSUjUtzHamEKxhqWrnmNQ2xmsLekYiFlDfuikAocLIkzf0LxuBACzdjt0n/DrL1snY7VoCyUwjzxdocZD2Oz8UAL2Vkq2MjkTPu7ZUukLEIbtJku4bjPU1AtakDDyGqzfMLKIn+gLIDyqYF8QdsCxms6aekyeHeDXpEE29HRvBKk6NqW4EOU67+dWroL/nTd67NZUHK9lWQBmLf15I203NYGsFziBhAWRyA+GE64QeOVlgIYa2e129Yi7eVyrhAeO7Igp+e1hV3ZHaBM5geCkM+3jXLuYMQnyMKmd2Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IQpsEFrMAOhDNkkTnfpDUT2cVsCffa2CmTEnfEu8HsE=;
- b=TtpGim6a6uADPLdCgXF+DTvqXQBGi8Kg2zfgCME54Bq0Qo8Z0GW005GzwjjxEwZpSQ8YCzEUSmYR/NH0VE/9/DqhivgCCmb/07DoVOi1WwcEt9NN1iFqyKQWzZs9St4A7qh7ijbhWzp8vxvo/yCBoOXk7d17ZUaBJl2L+vmFDEE=
-Received: from SJ0PR05CA0201.namprd05.prod.outlook.com (2603:10b6:a03:330::26)
- by MW6PR12MB8835.namprd12.prod.outlook.com (2603:10b6:303:240::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Fri, 14 Nov
- 2025 09:25:38 +0000
-Received: from SJ5PEPF000001D1.namprd05.prod.outlook.com
- (2603:10b6:a03:330:cafe::ae) by SJ0PR05CA0201.outlook.office365.com
- (2603:10b6:a03:330::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.7 via Frontend Transport; Fri,
- 14 Nov 2025 09:25:38 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ5PEPF000001D1.mail.protection.outlook.com (10.167.242.53) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Fri, 14 Nov 2025 09:25:38 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 14 Nov
- 2025 01:25:36 -0800
-Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 14 Nov
- 2025 03:25:37 -0600
-Received: from XFR-LUMICHEL-L2.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Fri, 14 Nov 2025 01:25:35 -0800
-Date: Fri, 14 Nov 2025 10:25:34 +0100
-From: Luc Michel <luc.michel@amd.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, "Daniel Henrique
- Barboza" <dbarboza@ventanamicro.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Francisco Iglesias
- <francisco.iglesias@amd.com>
-Subject: Re: [PATCH 0/9] RISC-V CPU time source interface
-Message-ID: <aRb1jmwXE18JB2_g@XFR-LUMICHEL-L2.amd.com>
-References: <20251107102340.471141-1-luc.michel@amd.com>
+ (Exim 4.90_1) (envelope-from <michael@videogpu.com>)
+ id 1vJtQW-0006qq-2R
+ for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 08:01:22 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <michael@videogpu.com>)
+ id 1vJtQS-0004kQ-MU
+ for qemu-riscv@nongnu.org; Fri, 14 Nov 2025 08:01:19 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-47112edf9f7so9771465e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 14 Nov 2025 05:01:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=videogpu-com.20230601.gappssmtp.com; s=20230601; t=1763125274; x=1763730074;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PO12BqMIJDTcwAgg5ArVVi2jvQUIdx57542PZJSmqTM=;
+ b=PrQfQBPSbjgNFmc1em2hPLg3NMkeobZgQUjVsgtgZ9BsnLaBFPuCVnLHZfWr7EuZ2e
+ 9WbV3I926ThlLhxQP3T+A5e9pEPNiLNg3iN7kV8Da8aRARzyb3y+UPE5OVYAM8TZvRyb
+ ZsAJlKrp4+QZDVUEK97RlaN8Cy/QA1ySnW2bjK87iPE6bbfXAc2u1vyQVRPoKNaedth2
+ FWbSVSMLq8QgQrER+bB7Sq9F+vvS5o+BkXpMqL0wfjYoXKDXAFxY3RYZGQlixToE/ttG
+ aiU6e57wAuz2Y0ftSvV148XbQzcqWaNwRsiBpQe0ONWPcSk5KzjR73lFO3wr2g323mxk
+ ishw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763125274; x=1763730074;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PO12BqMIJDTcwAgg5ArVVi2jvQUIdx57542PZJSmqTM=;
+ b=aQ62fMU7BCmnKHO+R14VTwrfo0JozoE9+dcpb3kzoel0bydVt81u2PiIODBSfiRFWm
+ axDoKzbdthciK5jq54B21UVplE6G9LN4ikhOr0yqAnOy9o+/1VFNY4UC2yhIxThUyYQZ
+ qSIsZfcHPgNCru38G4gm3jboEiPcjO/5+StkYce+38D3xL4FwGDrbdK4SV9qRw3U2knw
+ UVG6/E49fmh4cuHVuCqtmMjQLpDhnYOCS758N3XX4UTnSvzcZSPONpJuwhrudVZXCOu9
+ e89W+iKB3HpKR7GhfCeBBk5emDcKBo2CewqkLZYZT0/heEvOrC180S2UUFiq4yibMUq/
+ 5F8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUjG3Je00MBeF1KoF3b8VM+UeIW1k+uaLQ/sln1L6QBK1q3n20fF8p09j5nA5oy+b3nTzt8iniPmyif@nongnu.org
+X-Gm-Message-State: AOJu0YxwDKIbfvXVjn9T4ygvr093IRDSewvt2vSeSA0CL1KHcUL3b7Zq
+ C6EDPs1uK9ydaUZTBnfJGeETiQmN94WS1XOQ+vx/kdDIwXikNOWK6ZNfCaZhNjBSjT0=
+X-Gm-Gg: ASbGncv89k3xZwkB7XgLsFDERcaL5wwG5q0M38aRouNhsbb7EQeupOGTqfPc2cDdLvL
+ d7SQ3z5Bpa81YrjXfwYQ4Rpv5Om/Qy/ffic7eclLKf1MYVZoEZ4bczvS6Ir0Bbz/c8LX2K33BKs
+ aPCtUjnYJbbpq2EF5xfk1ocOPHfTFUOS6IaAp7LVKFGIEk149VsLZ0FcUTLz45rMumhEPrKNqfx
+ N7mddQLq8jXYBbdwIC1bCxKFQkHun+KvCWn5dF3E8dgt/hnLK6Wruvt8zwqiRHwlJjnGkXA6BZP
+ +JUsYYkbcC4UfLoPujYO3I13WlBVVJF2qYDQmR3N5jCl5Yi4DaQj/sjigsAw61qpyIk6sOcsZ6h
+ yV/kryqdUSuqLh/HGaMxiAucFD22dN/WTaBXkhhh5trp7cMKF+1LRtGF0GIi4laJzKlCfBqow+f
+ 5byq92yFkM/5/p4pMfkvPL3FBiOSWNVw+REC+hu2ZIobRjMA==
+X-Google-Smtp-Source: AGHT+IHiQymjt12wY6UCSSw0k0ufJhG1WyA81PINqexNaf0NKYuLhIHAiiEch6bASYl7EzOGLub7Jw==
+X-Received: by 2002:a05:600c:8b4c:b0:477:7f4a:44ba with SMTP id
+ 5b1f17b1804b1-4778fe60072mr26155985e9.4.1763125273382; 
+ Fri, 14 Nov 2025 05:01:13 -0800 (PST)
+Received: from ?IPV6:2a10:8012:1:b32a:35:83e6:baea:8ad?
+ ([2a10:8012:1:b32a:35:83e6:baea:8ad])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4778bb5ba68sm43686375e9.7.2025.11.14.05.01.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Nov 2025 05:01:12 -0800 (PST)
+Message-ID: <3bcbd36e-5d9b-443a-9704-bbab84363f85@videogpu.com>
+Date: Fri, 14 Nov 2025 15:01:10 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20251107102340.471141-1-luc.michel@amd.com>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D1:EE_|MW6PR12MB8835:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0dcb77b7-d4ab-4716-e5c1-08de235fc622
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?vh2nK16K+Z5BJuD5kxdErFpNOTgV74LInd4SB/5OICFJjiwm3JwQeZ6hxHAI?=
- =?us-ascii?Q?cZvVpR+O5UzXrsR4rDDy8OsvDppgewyztoFdDiSphQikGOo/FRoVDmJ4b487?=
- =?us-ascii?Q?UAHPWvS9t/I1aRU4cABN07QNdDnxxJOQf71UpHWPAp+MH8QBKGzlT92UQ/V/?=
- =?us-ascii?Q?loQoNnCghOq9f6qbcTMVZyz1wYmQ5ovdW/eDa2WWVlLocwhE4a3hGZgUphoy?=
- =?us-ascii?Q?QVgIOr0kB4n6SLAwRk6TvEZj8zeLtwp6i02nZrEhNN2eUvsGCVuwFtt59XnB?=
- =?us-ascii?Q?OkHFn6iC2dXZP0F/Dz5G52goGJyBENoPf7RcjmEw/MM2NTGguMwDIwLw/gYS?=
- =?us-ascii?Q?vBm42ASwGPAglegBdM3ju7CeNLBFbFSt8RJuNuCx/uhwMxt86S/emQrI9Fbt?=
- =?us-ascii?Q?Oj8ZDyQbsWPjHR7DWYfDw+ekoGwujg5cN1TSdIfkgjj9S4eGcl9bUIlOrRAC?=
- =?us-ascii?Q?Sj+v6c8pv5Ljcre+E/rYvDcy5zXD7TmJCUYoO20hVr4V09a9BRhPwMp8iLYE?=
- =?us-ascii?Q?RHztrYdATt4CgyBAhpdVYlsScr/JOwZtDNTbnf+Z604subdquyyd8hZC/7h5?=
- =?us-ascii?Q?/6jcC7eW3dp5xpWgjvAXUicqWOkP4tKpkQ5GNPcANugVqltUFMH6KfI5vurt?=
- =?us-ascii?Q?QH5sO1JuKYPfaUBR8vprZGVNc/q/eapyhEkR2itTA9Av/RKdFk3L17dnxN0V?=
- =?us-ascii?Q?YX/NsuDhJkC2yfgZy5UCqfPLQO/hEdrE8KIsiQlPpD7nYzuRdqJS73pW5K69?=
- =?us-ascii?Q?c8ZTO7y44UNgS8zhdpz0t5eW6B+QZnoyGjnZ0AzgGe09EQShpfEluT9wHhd3?=
- =?us-ascii?Q?g8y30aqgvTvJYZpbLpo1UjlBEkSt6gGqYSX3Ws+sElDxwDbApZxsUnERnUDG?=
- =?us-ascii?Q?JyKrkxQVP0JxIOrG2wHwRiiA4KEYd6X2Z2G6P0x8Ej8F7SBhcQ46F4lbaXCM?=
- =?us-ascii?Q?CgZgPEJEJlCnNl6v2Y86R7VygWNp9Jb9hFSxC12xfpCBThAxY8hmN4HxXaIm?=
- =?us-ascii?Q?DOQgzHVdbt0wj1/vUEd3vj07IsUr7Si063s4GxJKm01S46w4SIKtj0JeyEso?=
- =?us-ascii?Q?q53oIZNUKKbYCdff+Yk4DzSYWrb83uIoTJyOHCf2GGx5F+J/AEkpM8HPbsnQ?=
- =?us-ascii?Q?lrQ+bFn/6RctQOYKYG6Rd16XhaZTbwmKs6p2JnHD1DWwRewVIUhF+QiUcs2J?=
- =?us-ascii?Q?XY3zvqe1giDjalnQecQW4r3yrtmGak0ogZXfUlfDF9oR3HwYITPLLX2UiW+P?=
- =?us-ascii?Q?7l/ztimtvD9xkpalxY4Q9TXf7LQIuHJOa6Q7n+ADsGywl56CqJRaclYHPg9u?=
- =?us-ascii?Q?F9nMamULf6S3YM01p09eVtBEcjtFWAzdD+lvTeGhkga38gv9YZufgDSQ/j+M?=
- =?us-ascii?Q?ezWIlDsZkTNLGG0MaFqkkYNhjcHgEt/8i0Ts5E+WsS3leCjfGFI+L/LeJvK6?=
- =?us-ascii?Q?JyaRI6552T4FVNtQ8t4JcYN/CKfMw88mqDmsKQXLExJNclOC5B5p6NizNIi/?=
- =?us-ascii?Q?6tOysF409nNehUKZKKT4qnXSJzHdldJZU6DaACx9bbw5dJF5RFcx91cOUrI4?=
- =?us-ascii?Q?GQVaMOcSr2CSsU9chZg=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2025 09:25:38.4897 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0dcb77b7-d4ab-4716-e5c1-08de235fc622
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D1.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8835
-Received-SPF: permerror client-ip=2a01:111:f403:c110::1;
- envelope-from=Luc.Michel@amd.com;
- helo=BN1PR04CU002.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/5] hw/misc: add NEORV32 SYSINFO block
+ (CLK/MISC/SOC/CACHE)
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, philmd@linaro.org,
+ pbonzini@redhat.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, smishash@gmail.com
+References: <20251027100938.11822-1-michael@videogpu.com>
+ <20251027100938.11822-3-michael@videogpu.com>
+ <CAKmqyKOwBvq_Rut1pwEmAG0Y9uyevOCdH-MwutWx7mZRhZcwpA@mail.gmail.com>
+Content-Language: en-US
+From: Michael Levit <michael@videogpu.com>
+In-Reply-To: <CAKmqyKOwBvq_Rut1pwEmAG0Y9uyevOCdH-MwutWx7mZRhZcwpA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2a00:1450:4864:20::32f;
+ envelope-from=michael@videogpu.com; helo=mail-wm1-x32f.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -155,87 +111,469 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11:23 Fri 07 Nov     , Luc Michel wrote:
-> Hello,
-> 
-> By working locally on a RISC-V CPU with the sstc extension, I noticed
-> that the sstc code (the `riscv_timer_write_timecmp' function) was
-> implicitly assuming that the object behind the env->rdtime_fn callback
-> was a ACLINT. This is not a correct assumption from the point of view of
-> the riscv_cpu_set_rdtime_fn function API since env->rdtime_fn_arg is a
-> `void *' and is not required to be a ACLINT.
-> 
-> I reworked this and ended up with this series. It introduces the
-> RISCVCPUTimeSrcIf interface to replace the env->rdtime_fn callback and
-> break this dependency. This interface provides a mean to retrieve the
-> number of ticks (same as the rdtime_fn callback), and the tick frequency
-> that `riscv_timer_write_timecmp' needs.
-> 
-> This will effectively allow other platforms with CPUs and the sstc
-> extension but no ACLINT to provide their own time source. For now only
-> the ACLINT implements this interface.
-> 
-> The last two patches enhance the interface with a tick change notifier
-> registering mechanism. This allows the time source user (the CPU) to get
-> notified when the time source tick counter gets asynchronously modified
-> (reset to 0, ...), i.e., when the time register is written to. This is
-> then implemented in the ACLINT so that it does not have to include
-> time_helper.h and tinker with the CPU internals. This again will allow
-> new sources to be implemented more easily. It also ease maintenance by
-> keeping internal CPU mechanics contained into the RISC-V target code and
-> avoid potential duplication.
-> 
-> Note that I would have liked to put the time_src interface as a qdev
-> link property on the CPU but given the current state of the various
-> RISC-V machines, this is not easy to do. Most of the time the CPU gets
-> realized before the ACLINT so it is too late to set the link property.
-> This would require further refactoring.
-> 
-> Tested using `make check' and by booting Linux v6.17.6 in the virt
-> machine with 4 CPUs. I can see an initial `time' register write
-> (probably initial reset or OpenSBI) that correctly notifies the CPUs.
-> 
-> Thanks
-> 
-> Luc
 
-Hi,
+On 11/12/25 04:00, Alistair Francis wrote:
+> On Mon, Oct 27, 2025 at 8:12 PM Michael Levit <michael@videogpu.com> wrote:
+>> From: Michael <michael@videogpu.com>
+>>
+>> Add a minimal SYSINFO MMIO device compatible with NEORV32 SDK expectations:
+>> CLK (rw), MISC/SOC/CACHE (ro) composed from constants. Includes Kconfig/meson.
+>>
+>> Signed-off-by: Michael Levit <michael@videogpu.com>
+>>
+>> diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
+>> index 4e35657468..3de644a9e0 100644
+>> --- a/hw/misc/Kconfig
+>> +++ b/hw/misc/Kconfig
+>> @@ -235,4 +235,6 @@ config IOSB
+>>   config XLNX_VERSAL_TRNG
+>>       bool
+>>
+>> +config NEORV32_SYSINFO_QEMU
+>> +    bool
+>>   source macio/Kconfig
+>>
+>> diff --git a/hw/misc/meson.build b/hw/misc/meson.build
+>> index b1d8d8e5d2..4ea46ec2d1 100644
+>> --- a/hw/misc/meson.build
+>> +++ b/hw/misc/meson.build
+>> @@ -34,6 +34,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
+>>   system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
+>>   system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
+>>   system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
+>> +system_ss.add(when: 'CONFIG_NEORV32_SYSINFO_QEMU', if_true: files('neorv32_sysinfo.c'))
+>>
+>>   subdir('macio')
+>>
+>> diff --git a/hw/misc/neorv32_sysinfo.c b/hw/misc/neorv32_sysinfo.c
+>> new file mode 100644
+>> index 0000000000..09378b17a9
+>> --- /dev/null
+>> +++ b/hw/misc/neorv32_sysinfo.c
+>> @@ -0,0 +1,183 @@
+> Run these all through checkpatch, you are missing license info
+Fixed in later patch series.
+>> +#include "qemu/osdep.h"
+>> +#include "qapi/error.h"
+>> +#include "qemu/log.h"
+>> +#include "system/address-spaces.h"
+>> +#include "neorv32_sysinfo.h" /* QEMU related */
+>> +#include "neorv32_sysinfo_rtl.h" /* RTL related */
+>> +
+>> +
+>> +/* Register addresses (offsets) */
+>> +enum {
+>> +       REG_SYSINFO_CLK    = 0x00,
+>> +       REG_SYSINFO_MISC   = 0x04,
+>> +       REG_SYSINFO_SOC    = 0x08,
+>> +       REG_SYSINFO_CACHE  = 0x0C,
+>> +};
+> Why an enum?
+I wanted to be inline with a firmware implementation of the Neorv32 author.
+So when debugging, it would be easy to compare the hardware state and 
+QEMU emulated state.
 
-Ping, patches missing review: 8 and 9.
-
-Thanks
-
--- 
-Luc
-
-> 
-> Luc Michel (9):
->   target/riscv: drop unused include directive in time_helper.c
->   hw/intc/riscv_aclint: fix coding style
->   hw/intc/riscv_aclint: rename cpu_riscv_read_rtc to
->     riscv_aclint_mtimer_get_ticks
->   target/riscv: add the RISCVCPUTimeSrcIf interface
->   hw/intc/riscv_aclint: implement the RISCVCPUTimeSrcIf interface
->   target/riscv: replace env->rdtime_fn with a time source
->   hw/intc/riscv_aclint: riscv_aclint_mtimer_get_ticks: get rid of void*
->     argument
->   target/riscv: RISCVCPUTimeSrcIf: add register_time_change_notifier
->   hw/intc/riscv_aclint: implement the register_time_change_notifier
->     method
-> 
->  include/hw/intc/riscv_aclint.h |  1 +
->  target/riscv/cpu-qom.h         | 41 ++++++++++++++++++
->  target/riscv/cpu.h             |  9 ++--
->  target/riscv/time_helper.h     | 27 ++++++++++++
->  hw/intc/riscv_aclint.c         | 76 ++++++++++++++++++++++++----------
->  target/riscv/cpu_helper.c      |  7 ----
->  target/riscv/csr.c             | 24 +++++------
->  target/riscv/time_helper.c     | 42 +++++++++++++++----
->  8 files changed, 173 insertions(+), 54 deletions(-)
-> 
-> -- 
-> 2.51.0
-> 
-
--- 
+>> +
+>> +
+>> +typedef struct Neorv32SysInfoState {
+>> +    MemoryRegion mmio;
+>> +    uint32_t clk_hz;   /* rw */
+>> +    uint32_t misc;     /* ro */
+>> +    uint32_t soc;      /* ro */
+>> +    uint32_t cache;    /* ro */
+>> +} Neorv32SysInfoState;
+>> +
+>> +
+>> +/* Safe integer log2: assumes power-of-two sizes; returns 0 if size is 0 */
+>> +static unsigned int neorv32_log2u(uint32_t x)
+>> +{
+>> +    if (x == 0U) {
+>> +        return 0U;
+>> +    }
+>> +    unsigned int r = 0U;
+>> +    while ((x >>= 1U) != 0U) {
+>> +        r++;
+>> +    }
+>> +    return r;
+>> +}
+>> +
+>> +/* Compose MISC register per the firmware header */
+>> +static uint32_t neorv32_sysinfo_build_misc(void)
+>> +{
+>> +    const uint32_t imem_log2  = neorv32_log2u(SYSINFO_IMEM_SIZE) & 0xFFU;  /* [7:0]  */
+>> +    const uint32_t dmem_log2  = neorv32_log2u(SYSINFO_DMEM_SIZE) & 0xFFU;  /* [15:8] */
+>> +    const uint32_t harts      = (SYSINFO_NUM_HARTS & 0x0FU);               /* [19:16] */
+>> +    const uint32_t bootmode   = (SYSINFO_BOOTMODE_ID & 0x03U);             /* [21:20] */
+>> +    const uint32_t intbus_to  = (SYSINFO_INTBUS_TO_LOG2 & 0x1FU);          /* [26:22] */
+>> +    const uint32_t extbus_to  = (SYSINFO_EXTBUS_TO_LOG2 & 0x1FU);          /* [31:27] */
+>> +
+>> +    uint32_t v = 0U;
+>> +    v |= (imem_log2 << 0);
+>> +    v |= (dmem_log2 << 8);
+>> +    v |= (harts     << 16);
+>> +    v |= (bootmode  << 20);
+>> +    v |= (intbus_to << 22);
+>> +    v |= (extbus_to << 27);
+>> +    return v;
+>> +}
+>> +
+>> +/* Compose CACHE register per the firmware header */
+>> +static uint32_t neorv32_sysinfo_build_cache(void)
+>> +{
+>> +    uint32_t v = 0U;
+>> +    v |= ((ICACHE_BLOCK_SIZE_LOG2 & 0x0FU) << 0);
+>> +    v |= ((ICACHE_NUM_BLOCKS_LOG2 & 0x0FU) << 4);
+>> +    v |= ((DCACHE_BLOCK_SIZE_LOG2 & 0x0FU) << 8);
+>> +    v |= ((DCACHE_NUM_BLOCKS_LOG2 & 0x0FU) << 12);
+>> +    v |= ((ICACHE_BURSTS_EN ? 1U : 0U) << 16);
+>> +    v |= ((DCACHE_BURSTS_EN ? 1U : 0U) << 24);
+>> +    return v;
+>> +}
+>> +
+>> +static uint64_t neorv32_sysinfo_read(void *opaque, hwaddr addr, unsigned size)
+>> +{
+>> +    Neorv32SysInfoState *s = opaque;
+>> +    uint32_t val = 0U;
+>> +
+>> +    switch (addr) {
+>> +    case REG_SYSINFO_CLK:
+>> +        val = s->clk_hz;
+>> +        break;
+>> +    case REG_SYSINFO_MISC:
+>> +        val = s->misc;
+>> +        break;
+>> +    case REG_SYSINFO_SOC:
+>> +        val = s->soc;
+>> +        break;
+>> +    case REG_SYSINFO_CACHE:
+>> +        val = s->cache;
+>> +        break;
+>> +    default:
+>> +        qemu_log_mask(LOG_GUEST_ERROR,
+>> +                      "%s: invalid read addr=0x%" HWADDR_PRIx " size=%u\n",
+>> +                      __func__, addr, size);
+>> +        return 0;
+>> +    }
+>> +
+>> +    /* Enforce access size semantics (1/2/4 ok); we just return the low bytes */
+>> +    switch (size) {
+>> +    case 4: return val;
+>> +    case 2: return (uint16_t)val;
+>> +    case 1: return (uint8_t)val;
+>> +    default:
+>> +        qemu_log_mask(LOG_GUEST_ERROR,
+>> +                      "%s: invalid read size=%u at addr=0x%" HWADDR_PRIx "\n",
+>> +                      __func__, size, addr);
+>> +        return 0;
+>> +    }
+>> +}
+>> +
+>> +static void neorv32_sysinfo_write(void *opaque, hwaddr addr, uint64_t data, unsigned size)
+>> +{
+>> +    Neorv32SysInfoState *s = opaque;
+>> +
+>> +    /* Only CLK is writable; others are read-only */
+>> +    if (addr == REG_SYSINFO_CLK) {
+>> +        /* Accept 1/2/4 byte writes; update the corresponding bytes of clk_hz */
+>> +        uint32_t old = s->clk_hz;
+>> +        uint32_t val = old;
+>> +
+>> +        switch (size) {
+>> +        case 4:
+>> +            val = (uint32_t)data;
+>> +            break;
+>> +        case 2: {
+>> +            uint16_t part = (uint16_t)data;
+>> +            /* Little-endian halfword at offset (0 or 2) */
+>> +            if ((addr & 0x3) == 0x0) {
+>> +                val = (old & 0xFFFF0000U) | part;
+>> +            } else if ((addr & 0x3) == 0x2) {
+>> +                val = (old & 0x0000FFFFU) | ((uint32_t)part << 16);
+>> +            } else {
+>> +                qemu_log_mask(LOG_GUEST_ERROR,
+>> +                              "%s: misaligned 16-bit write at 0x%" HWADDR_PRIx "\n",
+>> +                              __func__, addr);
+>> +                return;
+>> +            }
+>> +            break;
+>> +        }
+>> +        case 1: {
+>> +            uint8_t part = (uint8_t)data;
+>> +            uint32_t shift = (addr & 0x3) * 8U;
+>> +            val = (old & ~(0xFFU << shift)) | ((uint32_t)part << shift);
+>> +            break;
+>> +        }
+>> +        default:
+>> +            qemu_log_mask(LOG_GUEST_ERROR,
+>> +                          "%s: invalid write size=%u at addr=0x%" HWADDR_PRIx "\n",
+>> +                          __func__, size, addr);
+>> +            return;
+>> +        }
+>> +
+>> +        s->clk_hz = val;
+>> +        return;
+>> +    }
+>> +
+>> +    qemu_log_mask(LOG_GUEST_ERROR,
+>> +                  "%s: write to read-only addr=0x%" HWADDR_PRIx " val=0x%" PRIx64 " size=%u\n",
+>> +                  __func__, addr, data, size);
+>> +}
+>> +
+>> +static const MemoryRegionOps neorv32_sysinfo_ops = {
+>> +    .read = neorv32_sysinfo_read,
+>> +    .write = neorv32_sysinfo_write,
+>> +    .endianness = DEVICE_LITTLE_ENDIAN,
+>> +    .valid.min_access_size = 1,
+>> +    .valid.max_access_size = 4,
+>> +};
+>> +
+>> +void neorv32_sysinfo_create(MemoryRegion *address_space, hwaddr base)
+>> +{
+>> +    Neorv32SysInfoState *s = g_new0(Neorv32SysInfoState, 1);
+>> +
+>> +    s->clk_hz = SYSINFO_CLK_HZ_DEFAULT;
+>> +    s->misc   = neorv32_sysinfo_build_misc();
+>> +    s->soc    = SYSINFO_SOC_VAL;
+>> +    s->cache  = neorv32_sysinfo_build_cache();
+> These should be properties that can be set
+OK. Thanks for a guidance.
+>
+>> +
+>> +    memory_region_init_io(&s->mmio, NULL, &neorv32_sysinfo_ops,
+>> +                          s, "neorv32.sysinfo", 16 /* 4 regs x 4 bytes */);
+>> +
+>> +    memory_region_add_subregion(address_space, base, &s->mmio);
+>> +}
+>>
+>> diff --git a/hw/misc/neorv32_sysinfo.h b/hw/misc/neorv32_sysinfo.h
+>> new file mode 100644
+>> index 0000000000..c0ac7d87e4
+>> --- /dev/null
+>> +++ b/hw/misc/neorv32_sysinfo.h
+>> @@ -0,0 +1,79 @@
+>> +#ifndef HW_NEORV32_SYSINFO_H
+>> +#define HW_NEORV32_SYSINFO_H
+>> +
+>> +#include "system/memory.h"
+>> +
+>> +
+>> +/* Internal memory sizes (bytes) */
+>> +#define SYSINFO_IMEM_SIZE        0x00008000U  /* 32 KiB IMEM */
+>> +#define SYSINFO_DMEM_SIZE        0x00008000U  /* 32 KiB DMEM */
+>> +
+>> +/* Number of harts (physical cores) */
+>> +#define SYSINFO_NUM_HARTS        1U
+>> +
+>> +/* Boot mode (matches RTL BOOT_MODE_SELECT encoding used in your firmware) */
+>> +#define SYSINFO_BOOTMODE_ID      0U           /* 0..3 */
+>> +
+>> +/* Bus timeout encodings: value is log2(cycles); 0 means "no timeout" per your helper */
+>> +#define SYSINFO_INTBUS_TO_LOG2   0U           /* 0 => returns 0 */
+>> +#define SYSINFO_EXTBUS_TO_LOG2   0U           /* 0 => returns 0 */
+>> +
+>> +/* Clock (Hz): writable at runtime via SYSINFO.CLK */
+>> +#define SYSINFO_CLK_HZ_DEFAULT   100000000U   /* 100 MHz */
+>> +
+>> +/* Cache topology encodings (log2 values ) */
+>> +#define ICACHE_BLOCK_SIZE_LOG2   0U           /* bits [3:0] */
+>> +#define ICACHE_NUM_BLOCKS_LOG2   0U           /* bits [7:4] */
+>> +#define DCACHE_BLOCK_SIZE_LOG2   0U           /* bits [11:8] */
+>> +#define DCACHE_NUM_BLOCKS_LOG2   0U           /* bits [15:12] */
+>> +#define ICACHE_BURSTS_EN         0U           /* bit 16 */
+>> +#define DCACHE_BURSTS_EN         0U           /* bit 24 */
+>> +
+>> +/* Feature bitmap for SOC register. */
+>> +#define SYSINFO_SOC_ENABLE(x)    (1U << (x))
+>> +
+>> +// Enable Bootloader, IMEM, DMEM, UART and SPI
+>> +#define SYSINFO_SOC_VAL \
+>> +    ( SYSINFO_SOC_ENABLE(SYSINFO_SOC_BOOTLOADER) | \
+>> +      SYSINFO_SOC_ENABLE(SYSINFO_SOC_IMEM)       | \
+>> +      SYSINFO_SOC_ENABLE(SYSINFO_SOC_DMEM)       | \
+>> +      SYSINFO_SOC_ENABLE(SYSINFO_SOC_IO_UART0)   | \
+>> +      SYSINFO_SOC_ENABLE(SYSINFO_SOC_IO_SPI) )
+>> +
+>> +/* --------------------------------------------------------------------------------------
+>> + * Address map
+>> + * ------------------------------------------------------------------------------------*/
+>> +#define NEORV32_BOOTLOADER_BASE_ADDRESS (0xFFE00000U)
+>> +#define NEORV32_IO_BASE_ADDRESS         (0xFFE00000U)
+>> +
+>> +#define NEORV32_IMEM_BASE               (0x00000000U)
+>> +#define NEORV32_DMEM_BASE               (0x80000000U)
+>> +
+>> +/* IO base addresses */
+>> +#define NEORV32_TWD_BASE     (0xFFEA0000U)
+>> +#define NEORV32_CFS_BASE     (0xFFEB0000U)
+>> +#define NEORV32_SLINK_BASE   (0xFFEC0000U)
+>> +#define NEORV32_DMA_BASE     (0xFFED0000U)
+>> +#define NEORV32_CRC_BASE     (0xFFEE0000U)
+>> +#define NEORV32_XIP_BASE     (0xFFEF0000U)
+>> +#define NEORV32_PWM_BASE     (0xFFF00000U)
+>> +#define NEORV32_GPTMR_BASE   (0xFFF10000U)
+>> +#define NEORV32_ONEWIRE_BASE (0xFFF20000U)
+>> +#define NEORV32_XIRQ_BASE    (0xFFF30000U)
+>> +#define NEORV32_MTIME_BASE   (0xFFF40000U)
+>> +#define NEORV32_UART0_BASE   (0xFFF50000U)
+>> +#define NEORV32_UART1_BASE   (0xFFF60000U)
+>> +#define NEORV32_SDI_BASE     (0xFFF70000U)
+>> +#define NEORV32_SPI_BASE     (0xFFF80000U)
+>> +#define NEORV32_TWI_BASE     (0xFFF90000U)
+>> +#define NEORV32_TRNG_BASE    (0xFFFA0000U)
+>> +#define NEORV32_WDT_BASE     (0xFFFB0000U)
+>> +#define NEORV32_GPIO_BASE    (0xFFFC0000U)
+>> +#define NEORV32_NEOLED_BASE  (0xFFFD0000U)
+>> +#define NEORV32_SYSINFO_BASE (0xFFFE0000U)
+>> +#define NEORV32_DM_BASE      (0xFFFF0000U)
+>> +
+>> +/* MMIO creator */
+>> +void neorv32_sysinfo_create(MemoryRegion *address_space, hwaddr base);
+>> +
+>> +#endif //HW_NEORV32_SYSINFO_H
+>>
+>> diff --git a/hw/misc/neorv32_sysinfo_rtl.h b/hw/misc/neorv32_sysinfo_rtl.h
+>> new file mode 100644
+>> index 0000000000..594e251c5b
+>> --- /dev/null
+>> +++ b/hw/misc/neorv32_sysinfo_rtl.h
+>> @@ -0,0 +1,134 @@
+>> +// #################################################################################################
+>> +// # << NEORV32: neorv32_sysinfo.h - System Information Memory (SYSINFO) HW Driver >>              #
+>> +// # ********************************************************************************************* #
+>> +// # BSD 3-Clause License                                                                          #
+>> +// #                                                                                               #
+>> +// # Copyright (c) 2023, Stephan Nolting. All rights reserved.                                     #
+>> +// #                                                                                               #
+>> +// # Redistribution and use in source and binary forms, with or without modification, are          #
+>> +// # permitted provided that the following conditions are met:                                     #
+>> +// #                                                                                               #
+>> +// # 1. Redistributions of source code must retain the above copyright notice, this list of        #
+>> +// #    conditions and the following disclaimer.                                                   #
+>> +// #                                                                                               #
+>> +// # 2. Redistributions in binary form must reproduce the above copyright notice, this list of     #
+>> +// #    conditions and the following disclaimer in the documentation and/or other materials        #
+>> +// #    provided with the distribution.                                                            #
+>> +// #                                                                                               #
+>> +// # 3. Neither the name of the copyright holder nor the names of its contributors may be used to  #
+>> +// #    endorse or promote products derived from this software without specific prior written      #
+>> +// #    permission.                                                                                #
+>> +// #                                                                                               #
+>> +// # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS   #
+>> +// # OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF               #
+>> +// # MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE    #
+>> +// # COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,     #
+>> +// # EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE #
+>> +// # GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED    #
+>> +// # AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING     #
+>> +// # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED  #
+>> +// # OF THE POSSIBILITY OF SUCH DAMAGE.                                                            #
+>> +// # ********************************************************************************************* #
+>> +// # The NEORV32 Processor - https://github.com/stnolting/neorv32              (c) Stephan Nolting #
+>> +// #################################################################################################
+>> +
+>> +
+>> +/**********************************************************************//**
+>> + * @file neorv32_cfs.h
+>> + * @brief System Configuration Information Memory (SYSINFO) HW driver header file.
+>> + **************************************************************************/
+> Can we cleanup the autogen file
+>
+> Alistair
+Done in later patch series.
+>> +
+>> +#ifndef neorv32_sysinfo_h
+>> +#define neorv32_sysinfo_h
+>> +
+>> +/**********************************************************************//**
+>> + * @name IO Device: System Configuration Information Memory (SYSINFO)
+>> + **************************************************************************/
+>> +/**@{*/
+>> +/** SYSINFO module prototype - whole module is read-only */
+>> +typedef volatile struct __attribute__((packed,aligned(4))) {
+>> +        uint32_t CLK;   /**< offset 0:  Clock speed in Hz */
+>> +  const uint32_t MISC;  /**< offset 4:  Miscellaneous system configurations (#NEORV32_SYSINFO_MISC_enum) */
+>> +  const uint32_t SOC;   /**< offset 8:  SoC features (#NEORV32_SYSINFO_SOC_enum) */
+>> +  const uint32_t CACHE; /**< offset 12: Cache configuration (#NEORV32_SYSINFO_CACHE_enum) */
+>> +} neorv32_sysinfo_t;
+>> +
+>> +/** SYSINFO module hardware access (#neorv32_sysinfo_t) */
+>> +#define NEORV32_SYSINFO ((neorv32_sysinfo_t*) (NEORV32_SYSINFO_BASE))
+>> +
+>> +/** NEORV32_SYSINFO.MISC (r/-): Miscellaneous system configurations */
+>> +enum NEORV32_SYSINFO_MISC_enum {
+>> +  SYSINFO_MISC_IMEM_LSB =  0, /**< SYSINFO_MISC  (0) (r/-): log2(internal IMEM size in bytes) (via IMEM_SIZE generic), LSB */
+>> +  SYSINFO_MISC_IMEM_MBS =  7, /**< SYSINFO_MISC  (7) (r/-): log2(internal IMEM size in bytes) (via IMEM_SIZE generic), MSB */
+>> +
+>> +  SYSINFO_MISC_DMEM_LSB =  8, /**< SYSINFO_MISC  (8) (r/-): log2(internal DMEM size in bytes) (via DMEM_SIZE generic), LSB */
+>> +  SYSINFO_MISC_DMEM_MSB = 15, /**< SYSINFO_MISC (15) (r/-): log2(internal DMEM size in bytes) (via DMEM_SIZE generic), MSB */
+>> +
+>> +  SYSINFO_MISC_HART_LSB = 16, /**< SYSINFO_MISC (16) (r/-): number of physical CPU cores ("harts"), LSB */
+>> +  SYSINFO_MISC_HART_MSB = 19, /**< SYSINFO_MISC (19) (r/-): number of physical CPU cores ("harts"), MSB */
+>> +
+>> +  SYSINFO_MISC_BOOT_LSB = 20, /**< SYSINFO_MISC (20) (r/-): boot mode configuration (via BOOT_MODE_SELECT generic), LSB */
+>> +  SYSINFO_MISC_BOOT_MSB = 21, /**< SYSINFO_MISC (21) (r/-): boot mode configuration (via BOOT_MODE_SELECT generic), MSB */
+>> +
+>> +  SYSINFO_MISC_ITMO_LSB = 22, /**< SYSINFO_MISC (22) (r/-): log2(internal bus timeout cycles), LSB */
+>> +  SYSINFO_MISC_ITMO_MSB = 26, /**< SYSINFO_MISC (26) (r/-): log2(internal bus timeout cycles), MSB */
+>> +
+>> +  SYSINFO_MISC_ETMO_LSB = 27, /**< SYSINFO_MISC (27) (r/-): log2(external bus timeout cycles), LSB */
+>> +  SYSINFO_MISC_ETMO_MSB = 31  /**< SYSINFO_MISC (31) (r/-): log2(external bus timeout cycles), MSB */
+>> +};
+>> +
+>> +/** NEORV32_SYSINFO.SOC (r/-): Implemented processor devices/features */
+>> +enum NEORV32_SYSINFO_SOC_enum {
+>> +  SYSINFO_SOC_BOOTLOADER =  0, /**< SYSINFO_SOC  (0) (r/-): Bootloader implemented when 1 (via BOOT_MODE_SELECT generic) */
+>> +  SYSINFO_SOC_XBUS       =  1, /**< SYSINFO_SOC  (1) (r/-): External bus interface implemented when 1 (via XBUS_EN generic) */
+>> +  SYSINFO_SOC_IMEM       =  2, /**< SYSINFO_SOC  (2) (r/-): Processor-internal instruction memory implemented when 1 (via IMEM_EN generic) */
+>> +  SYSINFO_SOC_DMEM       =  3, /**< SYSINFO_SOC  (3) (r/-): Processor-internal data memory implemented when 1 (via DMEM_EN generic) */
+>> +  SYSINFO_SOC_OCD        =  4, /**< SYSINFO_SOC  (4) (r/-): On-chip debugger implemented when 1 (via OCD_EN generic) */
+>> +  SYSINFO_SOC_ICACHE     =  5, /**< SYSINFO_SOC  (5) (r/-): Processor-internal instruction cache implemented when 1 (via ICACHE_EN generic) */
+>> +  SYSINFO_SOC_DCACHE     =  6, /**< SYSINFO_SOC  (6) (r/-): Processor-internal instruction cache implemented when 1 (via DCACHE_EN generic) */
+>> +//SYSINFO_SOC_reserved   =  7, /**< SYSINFO_SOC  (7) (r/-): reserved */
+>> +//SYSINFO_SOC_reserved   =  8, /**< SYSINFO_SOC  (8) (r/-): reserved */
+>> +//SYSINFO_SOC_reserved   =  9, /**< SYSINFO_SOC  (9) (r/-): reserved */
+>> +//SYSINFO_SOC_reserved   = 10, /**< SYSINFO_SOC (10) (r/-): reserved */
+>> +  SYSINFO_SOC_OCD_AUTH   = 11, /**< SYSINFO_SOC (11) (r/-): On-chip debugger authentication implemented when 1 (via OCD_AUTHENTICATION generic) */
+>> +  SYSINFO_SOC_IMEM_ROM   = 12, /**< SYSINFO_SOC (12) (r/-): Processor-internal instruction memory implemented as pre-initialized ROM when 1 (via BOOT_MODE_SELECT generic) */
+>> +  SYSINFO_SOC_IO_TWD     = 13, /**< SYSINFO_SOC (13) (r/-): Two-wire device implemented when 1 (via IO_TWD_EN generic) */
+>> +  SYSINFO_SOC_IO_DMA     = 14, /**< SYSINFO_SOC (14) (r/-): Direct memory access controller implemented when 1 (via IO_DMA_EN generic) */
+>> +  SYSINFO_SOC_IO_GPIO    = 15, /**< SYSINFO_SOC (15) (r/-): General purpose input/output port unit implemented when 1 (via IO_GPIO_EN generic) */
+>> +  SYSINFO_SOC_IO_CLINT   = 16, /**< SYSINFO_SOC (16) (r/-): Core local interruptor implemented when 1 (via IO_CLINT_EN generic) */
+>> +  SYSINFO_SOC_IO_UART0   = 17, /**< SYSINFO_SOC (17) (r/-): Primary universal asynchronous receiver/transmitter 0 implemented when 1 (via IO_UART0_EN generic) */
+>> +  SYSINFO_SOC_IO_SPI     = 18, /**< SYSINFO_SOC (18) (r/-): Serial peripheral interface implemented when 1 (via IO_SPI_EN generic) */
+>> +  SYSINFO_SOC_IO_TWI     = 19, /**< SYSINFO_SOC (19) (r/-): Two-wire interface implemented when 1 (via IO_TWI_EN generic) */
+>> +  SYSINFO_SOC_IO_PWM     = 20, /**< SYSINFO_SOC (20) (r/-): Pulse-width modulation unit implemented when 1 (via IO_PWM_EN generic) */
+>> +  SYSINFO_SOC_IO_WDT     = 21, /**< SYSINFO_SOC (21) (r/-): Watchdog timer implemented when 1 (via IO_WDT_EN generic) */
+>> +  SYSINFO_SOC_IO_CFS     = 22, /**< SYSINFO_SOC (22) (r/-): Custom functions subsystem implemented when 1 (via IO_CFS_EN generic) */
+>> +  SYSINFO_SOC_IO_TRNG    = 23, /**< SYSINFO_SOC (23) (r/-): True random number generator implemented when 1 (via IO_TRNG_EN generic) */
+>> +  SYSINFO_SOC_IO_SDI     = 24, /**< SYSINFO_SOC (24) (r/-): Serial data interface implemented when 1 (via IO_SDI_EN generic) */
+>> +  SYSINFO_SOC_IO_UART1   = 25, /**< SYSINFO_SOC (25) (r/-): Secondary universal asynchronous receiver/transmitter 1 implemented when 1 (via IO_UART1_EN generic) */
+>> +  SYSINFO_SOC_IO_NEOLED  = 26, /**< SYSINFO_SOC (26) (r/-): NeoPixel-compatible smart LED interface implemented when 1 (via IO_NEOLED_EN generic) */
+>> +  SYSINFO_SOC_IO_TRACER  = 27, /**< SYSINFO_SOC (10) (r/-): Execution tracer implemented when 1 (via IO_TRACER_EN generic) */
+>> +  SYSINFO_SOC_IO_GPTMR   = 28, /**< SYSINFO_SOC (28) (r/-): General purpose timer implemented when 1 (via IO_GPTMR_EN generic) */
+>> +  SYSINFO_SOC_IO_SLINK   = 29, /**< SYSINFO_SOC (29) (r/-): Stream link interface implemented when 1 (via IO_SLINK_EN generic) */
+>> +  SYSINFO_SOC_IO_ONEWIRE = 30  /**< SYSINFO_SOC (30) (r/-): 1-wire interface controller implemented when 1 (via IO_ONEWIRE_EN generic) */
+>> +//SYSINFO_SOC_reserved   = 31  /**< SYSINFO_SOC (31) (r/-): reserved */
+>> +};
+>> +
+>> +/** NEORV32_SYSINFO.CACHE (r/-): Cache configuration */
+>> + enum NEORV32_SYSINFO_CACHE_enum {
+>> +  SYSINFO_CACHE_INST_BLOCK_SIZE_0 =  0, /**< SYSINFO_CACHE  (0) (r/-): i-cache: log2(Block size in bytes), bit 0 (via CACHE_BLOCK_SIZE generic) */
+>> +  SYSINFO_CACHE_INST_BLOCK_SIZE_3 =  3, /**< SYSINFO_CACHE  (3) (r/-): i-cache: log2(Block size in bytes), bit 3 (via CACHE_BLOCK_SIZE generic) */
+>> +  SYSINFO_CACHE_INST_NUM_BLOCKS_0 =  4, /**< SYSINFO_CACHE  (4) (r/-): i-cache: log2(Number of cache blocks), bit 0 (via ICACHE_NUM_BLOCKS generic) */
+>> +  SYSINFO_CACHE_INST_NUM_BLOCKS_3 =  7, /**< SYSINFO_CACHE  (7) (r/-): i-cache: log2(Number of cache blocks), bit 3 (via ICACHE_NUM_BLOCKS generic) */
+>> +
+>> +  SYSINFO_CACHE_DATA_BLOCK_SIZE_0 =  8, /**< SYSINFO_CACHE  (8) (r/-): d-cache: log2(Block size in bytes), bit 0 (via CACHE_BLOCK_SIZE generic) */
+>> +  SYSINFO_CACHE_DATA_BLOCK_SIZE_3 = 11, /**< SYSINFO_CACHE (11) (r/-): d-cache: log2(Block size in bytes), bit 3 (via CACHE_BLOCK_SIZE generic) */
+>> +  SYSINFO_CACHE_DATA_NUM_BLOCKS_0 = 12, /**< SYSINFO_CACHE (12) (r/-): d-cache: log2(Number of cache blocks), bit 0 (via DCACHE_NUM_BLOCKS generic) */
+>> +  SYSINFO_CACHE_DATA_NUM_BLOCKS_3 = 15, /**< SYSINFO_CACHE (15) (r/-): d-cache: log2(Number of cache blocks), bit 3 (via DCACHE_NUM_BLOCKS generic) */
+>> +
+>> +  SYSINFO_CACHE_INST_BURSTS_EN    = 16, /**< SYSINFO_CACHE (16) (r/-): i-cache: issue burst transfers or cache update (via CACHE_BURSTS_EN generic) */
+>> +  SYSINFO_CACHE_DATA_BURSTS_EN    = 24  /**< SYSINFO_CACHE (14) (r/-): d-cache: issue burst transfers or cache update (via CACHE_BURSTS_EN generic) */
+>> +};
+>> +/**@}*/
+>> +
+>> +
+>> +#endif // neorv32_sysinfo_h
+>>
 
