@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C48C8CEACEF
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Nov 2025 13:53:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6754CE8D6B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Nov 2025 17:58:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vKzfq-00015l-7o; Mon, 17 Nov 2025 08:53:42 -0500
+	id 1vL3UP-0000Hp-6U; Mon, 17 Nov 2025 12:58:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vKzfo-00013l-8x
- for qemu-riscv@nongnu.org; Mon, 17 Nov 2025 08:53:40 -0500
-Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
+ id 1vL3U2-0008MO-K9
+ for qemu-riscv@nongnu.org; Mon, 17 Nov 2025 12:57:48 -0500
+Received: from mail-oo1-xc31.google.com ([2607:f8b0:4864:20::c31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vKzfl-0006Ee-Dn
- for qemu-riscv@nongnu.org; Mon, 17 Nov 2025 08:53:39 -0500
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4503ee5c160so2037904b6e.1
- for <qemu-riscv@nongnu.org>; Mon, 17 Nov 2025 05:53:37 -0800 (PST)
+ id 1vL3Ty-0007MA-GP
+ for qemu-riscv@nongnu.org; Mon, 17 Nov 2025 12:57:45 -0500
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-656de56ce7aso942233eaf.3
+ for <qemu-riscv@nongnu.org>; Mon, 17 Nov 2025 09:57:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1763387616; x=1763992416; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1763402260; x=1764007060; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=THHknnhDbC0Q9nJKFENfLtsiXQLF+2FU2w8m9DDR6JA=;
- b=BCWGeOKhvfVG6PBsd06GRAEibaV8ygey40Mr9Lx0K0ALQc7I+T1Mtsj9OGwQYgVEEO
- fWlm+c13Z8jIxGM8jHLwEEWMFDwmxOLGuaYBXpU/M5PXHFRGo51/1HUNTd3XXgnD2YQQ
- C+noMD/AoF+O22SBmqtAcnZAujTBERA21zV4u4BBW+DJ4NmFdfEHRY24SVcLOsuN9i1c
- tftN8aVRhon7WHASrtNbezifkczu5yJKcXUtFABZt9+Ggyg4cZIimLBgI12pI6cc9m/q
- SluIO/ZZz4/iGQIOhNKvTzdCmCNLNy0x1M72j/GHeAh/gZ766/c5Yly4wOLkXNL3EmXy
- bzdQ==
+ bh=psiYa7+6mddVnP5SlGVSIu1eWh5vsyL2fgOE804Kq7k=;
+ b=cgGHk+MVVhW5xuvUeMd61eZJ6JQpek8K7Ol2tHMA4chS1eYUx6YWfMNLEH3ePJ+w3D
+ ls52fF9cPlGO1Lch5h9fkaCnMNd0hh7+9utq56u9DCHeOBeJYai0aM6fGorFgf1d6yxO
+ OMblcMRibiT83gFYD+jug65RM/o65/4xuOI4apnLoEy0AAZEljbDQ/dWYcUVk5YwdUxP
+ 2ZMK/JRsUnoIot4JrsfGxeS5QqmMuMmevDekTUMIXwYf7KugvpIA/ezi4VvzTvAcwOGO
+ vTHA9Zk35gbnBme9JzXA9TMbLzVHweou3BwQezBzGHR/6IX8MKBIQ1RgzSdZqVQmOmof
+ aikw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763387616; x=1763992416;
+ d=1e100.net; s=20230601; t=1763402260; x=1764007060;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=THHknnhDbC0Q9nJKFENfLtsiXQLF+2FU2w8m9DDR6JA=;
- b=iVla4hHyaEMaHPXYMo4uHrccaSe/56RjW9cFu3hlpzMhbm95HzyVVJmYiukFYnMBEQ
- Cs8hm9nltOoTCIvN9/Tytdwp+w2RfNs9Ct3xcmQjkVOBRb7DWvvCu0jeX0zsAKK7ZQK1
- C+xpivnFaaHbAayIJLjD7/4rJ8RoMOL/Jg1eq3B8b9nQ1ASmy0lvge2JFThvpVbmE030
- +iyKPmZnN5mcxFoKgHsc3vmtl/2V21aXHX/AUe+n8hGVu47bEe4eLT1Tep0HdcJy/yeh
- Tj2CNSOQ6JpJC2tcu4iWiaSD4SYglY2XgZumPlw8LYHwzgHbwGLS6kt3lXE1UfetMHzQ
- L+fQ==
+ bh=psiYa7+6mddVnP5SlGVSIu1eWh5vsyL2fgOE804Kq7k=;
+ b=KnRk1J8oqlYC0sFHhwaK9iTrIyZw3sRiMFLySBrCVEFe8VISvvqZK1JP4cVA9cOsvq
+ k7dNkd3qyzNCEI2ch4FEM43y3b8f70c5KNWFxtCGwicIqlJQ/UnAF1efOu9xYUNGH5YD
+ XGJnWyPjqV+f7Xw8qcYzfyCqEXzdd4loK7gWaKTCj0j6MTJjuO1S3OLEDqU/NKbw4wWR
+ HRoe4j/rE6wOwRPVKBdPJ5Sqes0V0rZm5NqfZQPIzlkHUEwaw1hm8vqYApcodO2fbkDG
+ hz+NDEkTXtDoDVFs15MfdhfGJEUtly0iMLQr3F2kYYzKOLH2ikdwx47H9PmCjWieKyPl
+ DqRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUyU6TOKZqielSRVBc8gddqpGhcsRfqbbDkdhI1cKMqQcbwmx5M9xkGDgQGoORRmdZ34O5YWsrXLNbD@nongnu.org
-X-Gm-Message-State: AOJu0YyrS3KFum6uhkFUhaWAy9Wrs1DA9VL5qD07PW6Y+yK2MRHqqhFv
- eaW991WdUy5blRek7uriXWrq9BOQDzvRwxN7p442uLuH5nP30aqNE/AQ6bQTg8lTkeM=
-X-Gm-Gg: ASbGncuoJz8sgdJSR7WSmDAcCjJ9vCkNcC0xk3DEnzlMtnVM/iisAkZn5f7VvHsbpE4
- KAZrngu46AUCaZDX7Fo+IORxrqiPRQdF0Wt18dqN55Uyen6tyNdSlq9+Y/X6E3xu5Ej/+TSi+mQ
- nO9KV9vTHvqrXH8i10w7Y8EcJ81R3rHX0GnDE0aCkimBhTSABXQWB+om6Rkw2BUOBc3qt/uisX4
- 5Ygf1k+QY+K+3Lcj/WpMeIw7Dg6nIoDTe71PeKI8MeOgXYiELnCCJLJCFdZ+M25JmmZ8OgYSvIc
- zjlhXGsSXf98OCPB3rLC6wOurPIXyTDuIrafMf/iCdKRzqMgGnwHrBW2ocCfGHVmy5TrGID+75F
- bWoePSTUeP3EVWfKQTn9ELdLDDwLpt+ihFUAZC8POlHZMB1bl+dhBTUKky+BOLYgDUE68MUM/HB
- rQLgOZ7B3d/O2K01timxokv1Zds09rlcN5+2Z5
-X-Google-Smtp-Source: AGHT+IGrLUOs/s8X9JZxvMWUpWJ9ZTtcEDZPrtSKudUmH6/zXKBPsrtblrJ0fRagJI6pvs1VvKUOTw==
-X-Received: by 2002:a05:6808:1785:b0:438:430b:3dce with SMTP id
- 5614622812f47-4509734a487mr5825160b6e.10.1763387616166; 
- Mon, 17 Nov 2025 05:53:36 -0800 (PST)
+ AJvYcCX49JcPZC75f+gXvd0U5hcALA2enwZKp4qIbKfdsxsPbxiQS1W7+m0SfhFJfDRR3sbqMRvoQy+5CUpc@nongnu.org
+X-Gm-Message-State: AOJu0YzeE5gqZnPLJ2HaZrRRwI8NorjeQg/p5zhzg1UX7mUIvX2XBSAR
+ 4fsFDPGlH5hBvS7S0IM+kD3bsXkHgaTHQ7gLOTl5KtJZWIWE3tyRZb9BaZeoiSjTspg=
+X-Gm-Gg: ASbGncsijs9ZQeN7tGLaX/cN0lIZWGCFkrJeSnoNjbfOnagpWGgE6jDF91HLT/y83np
+ 4EbpV3ws/CROJSfcpH5dO6ZR3ndb4b/ijh+xF+WIGo1VivirgLu68sGTmHgxHiRyLSkqCx6MWVy
+ DwTBh9/rFpjlJBOGKOC6WafEhWfX3gzw/QDJbue0ppmqmvkShi75qpBiAc9mZGbKmTvp7gpmEpF
+ VCmsFsj/6UZMUSKvbAm7IzpIp2GBo4B5v/yaYDI9tbDAi6KGSRMHC/YNIftCNPFlEcGTygezHjX
+ tcV0Y5W3bwy1iGCOdruP/KA3VyMDBMpmOl8i87seB8/YhAgf9tgwjQR4gnkhw7KtvSXbDDaM8Ay
+ Ls3x3t791WhJ/bUPEL4lQAxnRuU8seGa2FGWFYVOulRDE3Wk1UBD4zgmBVwsJVuyWinLQgksdkD
+ 5NOXjlGFrwmNk4ftnjQE1mSuNUqA==
+X-Google-Smtp-Source: AGHT+IF+FMq1MfRS0GbQ9jOrjYjM1IxXTECP0pk336zuSYpBTZCHboklw/Md3qN0iQB5n9yhDf0jFg==
+X-Received: by 2002:a05:6808:2444:b0:450:c49f:9a38 with SMTP id
+ 5614622812f47-450c49fa214mr2393165b6e.17.1763402260450; 
+ Mon, 17 Nov 2025 09:57:40 -0800 (PST)
 Received: from [192.168.68.110] ([191.202.237.26])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4508a6c1510sm4285905b6e.18.2025.11.17.05.53.32
+ 5614622812f47-4508a531221sm4411650b6e.1.2025.11.17.09.57.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Nov 2025 05:53:34 -0800 (PST)
-Message-ID: <f7da44c5-e9dc-45db-9ccc-02d662ab9ad4@ventanamicro.com>
-Date: Mon, 17 Nov 2025 10:53:30 -0300
+ Mon, 17 Nov 2025 09:57:39 -0800 (PST)
+Message-ID: <ff6a9d8f-9d8e-46f2-90e8-a04b10bb21bc@ventanamicro.com>
+Date: Mon, 17 Nov 2025 14:57:35 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] target/riscv: Update MISA.X for non-standard
- extensions
-To: frank.chang@sifive.com, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Max Chou <max.chou@sifive.com>
-References: <20251114090134.1125646-1-frank.chang@sifive.com>
- <20251114090134.1125646-3-frank.chang@sifive.com>
+Subject: Re: [PATCH v4 2/5] target/riscv: Add server platform reference cpu
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
+ Fei Wu <wu.fei9@sanechips.com.cn>
+References: <20251111182944.2895892-1-dbarboza@ventanamicro.com>
+ <20251111182944.2895892-3-dbarboza@ventanamicro.com>
+ <20251111-e4f4062f326aef78ef820d00@orel>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20251114090134.1125646-3-frank.chang@sifive.com>
+In-Reply-To: <20251111-e4f4062f326aef78ef820d00@orel>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -113,66 +111,88 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 11/14/25 6:01 AM, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
+On 11/11/25 8:05 PM, Andrew Jones wrote:
+> On Tue, Nov 11, 2025 at 03:29:41PM -0300, Daniel Henrique Barboza wrote:
+>> From: Fei Wu <wu.fei9@sanechips.com.cn>
+>>
+>> The harts requirements of RISC-V server platform [1] require RVA23 ISA
+>> profile support, plus Sv48, Svadu, H, Sscofmpf etc.
+>>
+>> This patch provides a CPU type (rvsp-ref) to go along with the rvsp-ref
+>> board.
+>>
+>> [1] https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
+>>
+>> Signed-off-by: Fei Wu <fei2.wu@intel.com>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/cpu-qom.h |  1 +
+>>   target/riscv/cpu.c     | 14 ++++++++++++++
+>>   2 files changed, 15 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+>> index 75f4e43408..07e96a14ba 100644
+>> --- a/target/riscv/cpu-qom.h
+>> +++ b/target/riscv/cpu-qom.h
+>> @@ -42,6 +42,7 @@
+>>   #define TYPE_RISCV_CPU_RVA22S64         RISCV_CPU_TYPE_NAME("rva22s64")
+>>   #define TYPE_RISCV_CPU_RVA23U64         RISCV_CPU_TYPE_NAME("rva23u64")
+>>   #define TYPE_RISCV_CPU_RVA23S64         RISCV_CPU_TYPE_NAME("rva23s64")
+>> +#define TYPE_RISCV_CPU_RVSP_REF         RISCV_CPU_TYPE_NAME("rvsp-ref")
+>>   #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
+>>   #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
+>>   #define TYPE_RISCV_CPU_SIFIVE_E         RISCV_CPU_TYPE_NAME("sifive-e")
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 975f7953e1..3ddb249970 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -3305,6 +3305,20 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>>           .cfg.max_satp_mode = VM_1_10_SV48,
+>>       ),
+>>   
+>> +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_RVSP_REF, TYPE_RISCV_BARE_CPU,
+>> +        .misa_mxl_max = MXL_RV64,
+>> +        .profile = &RVA23S64,
+>> +
+>> +        /*
+>> +         * ISA extensions
+>> +         * NOTE: we're missing 'sdext'.
+>> +         */
+>> +        .cfg.ext_zkr = true,
+>> +        .cfg.ext_svadu = true,
 > 
-> MISA.X is set if there are any non-standard extensions.
-> We should set MISA.X when any of the vendor extensions is enabled.
+> Svadu is no longer required.
 > 
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Max Chou <max.chou@sifive.com>
-> ---
+>> +
+>> +        .cfg.max_satp_mode = VM_1_10_SV57,
+> 
+> Shouldn't this be SV48 and then allow instantiations to use
+> rvsp-ref,sv57=on.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Makes sense.
 
->   target/riscv/cpu.h         |  1 +
->   target/riscv/tcg/tcg-cpu.c | 15 +++++++++++++++
->   2 files changed, 16 insertions(+)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 8899bf7667a..2e0c92fe593 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -69,6 +69,7 @@ typedef struct CPUArchState CPURISCVState;
->   #define RVH RV('H')
->   #define RVG RV('G')
->   #define RVB RV('B')
-> +#define RVX RV('X')
->   
->   extern const uint32_t misa_bits[];
->   const char *riscv_get_misa_ext_name(uint32_t bit);
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index da09a2417cc..0d730f4d774 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -1180,6 +1180,20 @@ static void riscv_cpu_update_misa_c(RISCVCPU *cpu)
->       }
->   }
->   
-> +/* MISA.X is set when any of the non-standard extensions is enabled. */
-> +static void riscv_cpu_update_misa_x(RISCVCPU *cpu)
-> +{
-> +    CPURISCVState *env = &cpu->env;
-> +    const RISCVCPUMultiExtConfig *arr = riscv_cpu_vendor_exts;
-> +
-> +    for (int i = 0; arr[i].name != NULL; i++) {
-> +        if (isa_ext_is_enabled(cpu, arr[i].offset)) {
-> +            riscv_cpu_set_misa_ext(env, env->misa_ext | RVX);
-> +            break;
-> +        }
-> +    }
-> +}
-> +
->   void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
->   {
->       CPURISCVState *env = &cpu->env;
-> @@ -1188,6 +1202,7 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
->       riscv_cpu_init_implied_exts_rules();
->       riscv_cpu_enable_implied_rules(cpu);
->       riscv_cpu_update_misa_c(cpu);
-> +    riscv_cpu_update_misa_x(cpu);
->   
->       riscv_cpu_validate_misa_priv(env, &local_err);
->       if (local_err != NULL) {
+> We also need Ssccfg and Sdtrig.
+
+Sdtrig is enabled by default, and somehow I forgot to add ssccfg. I'll add it.
+
+
+Thanks,
+
+Daniel
+
+> 
+>> +    ),
+>> +
+>>   #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>>       DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
+>>           .cfg.max_satp_mode = VM_1_10_SV57,
+>> -- 
+>> 2.51.1
+>>
+>>
+> 
+> Thanks,
+> drew
 
 
