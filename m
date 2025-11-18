@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0434CEBF92
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Nov 2025 08:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 384ADCEBF92
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Nov 2025 08:59:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLHXm-0008Du-D6; Tue, 18 Nov 2025 03:58:34 -0500
+	id 1vLHXd-00086x-H3; Tue, 18 Nov 2025 03:58:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1vLHXj-0008CI-W5; Tue, 18 Nov 2025 03:58:32 -0500
-Received: from mail-northeuropeazlp170120005.outbound.protection.outlook.com
- ([2a01:111:f403:c200::5] helo=DUZPR83CU001.outbound.protection.outlook.com)
+ id 1vLHXa-00083g-Uv; Tue, 18 Nov 2025 03:58:23 -0500
+Received: from mail-francecentralazlp170130007.outbound.protection.outlook.com
+ ([2a01:111:f403:c20a::7] helo=PA4PR04CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <Djordje.Todorovic@htecgroup.com>)
- id 1vLHXi-0003Vy-25; Tue, 18 Nov 2025 03:58:31 -0500
+ id 1vLHXZ-0003VY-1c; Tue, 18 Nov 2025 03:58:22 -0500
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MFxh/ahO7OLlMjed37C+JjqPLyRV7K72Mws5zlu58e1HDcJnwJPJWbbO8MhvT/eV4STc71J3ZpUH6xejxNJfu9vH69aJg8LSGRu6CpDH7ouj5XHJMI5soUSo7laCErH9iO3FQMpNumrXqDZu85b9zSchcNQ3c+JtIWFR4xZzmsCOM5hCGdS0D4ZD6EcBWCF9+KE8lYYN/s7HT4TfM7UAfHRanqYmGd+CvsQZYL0Hw9yQodpa4OHJ/8JPnXRihxU2Kr92DtgQHHF/aADjMX8SUoIo4pF/hRVfAhlObXDaGuFQQrxZL3MzCKAJ6eEt0t2VYj4wKBnTpehPUSuSy364bQ==
+ b=fSqU9FhN3Hw+4Pwb2dSOCB0h1QMNrlTp3XWh27cVaR4+NTl3hvF9+z4Ec/xbTOijhjZ7/yfu0SWkvKAwShZ0KTMK2TCEKDVDY80D46/wdxUOpWKgrMq5EGzduQFIFiHIwOIovNTUnSYVB6UmCZkB24dwPjaVyrD9JkBID1/Fyj73JIpS8qNuGovOTYp0S7enp/pEkLzPlfo4Eo1o69DWrC2h6B6llZtCXztNfOA1l38yMrmdYEneiuDGGjzoR97SPzEtlIXYwCWHTRk/ZgTuGpJffFLRLDZcJaamqM4wYdXykwNMDz8kZACMavWcfyMgHjCxVRoFglSz4nV6Mn+bmg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=m1uJ1nZcMszuOEYS2dgtFT0UIQ3DHUQLHvvIi5VaMoM=;
- b=zV3asH1RYy3O47LROsfjuxHZjHRH2DwRMfI75DnfHxe3lG3SijyFEIIX21TMF+NOJiFM9S2OTfjoshVFi+LEWi+9Q+AzNGAtMbuOQMlDwB9yqDphbYKG/ehy6qDG7xB36zZlqEUeuj2f+kpZ/iaGuSPBaVWKXezgU04cShkAQTQZ3ELuGJxKVykUUVXUj4A0WWxAtP/qX/JbzYl8AXj/dLZ2lG6GHY0+fZEjijzgymxWtczC/ywGTYKQ4Z8GPq2tPiJezHgKc0l+AMd3T5jlOaomY9+9SgPGYEDxe7ksG4Z5rcCoZZyob0OKMgjAWmVb9N6pZTwFv8cwLb8rJxyrIA==
+ bh=2braOq5ecbz3Vm8ktPLzy3hIhWI8JevJoJP4vfqqmZ0=;
+ b=tAzk/hfPwpJnI7T4NcxY/FSM0Kum+OUSXOYw7aSbSVaqcqW33o/bBzR0AGBgvoXcCBh1yq1qDt21cNncUHpeF9qvnxeaBA6+Px5LJF26J2K+KHy+fcfi5Rxix3ALQkZ5UfOg7wVQulbmuwabJrbq7UvThdfkxM4pUf3ZM5tZHW5ighwsZaCetI43mVg2ijgiA6I5xxxO34e1J7bCjhJpLXnU7USRd7/Hpel1OrFuE1OXIRJxaXzoD6SrWxo0S/m+bUrXmKbrPj8I5ZHFWQkXqZdSNUOcwdZ5MTLgf/A7gHQF6JW/7Om9QYS5f308sW+nFpFzt5YMWC8IqCYldvK5ow==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=m1uJ1nZcMszuOEYS2dgtFT0UIQ3DHUQLHvvIi5VaMoM=;
- b=pJk+ZCROmDThGNkOgyS5rWh9lcXZDGbrcov8JwHLkx6ZOJkJ90ZJgeKUXw3Q6AtY0fPDVuTklggJj10vIpHtYK0R/77KsKuH3x3eZcpZcF45WE+Wye/rUmdOworrGpVC+GzT37uw+85I40YqQc9rrm+UJdftn1fBHRjLrZXTdlc2kM9XxAE2HT8eLQZ9Ls78aFZVopK4jNtXzb+Z0vNWqyxA8sawIxv8SLlHnnFyxedi+BPqxjVT3qhXf2XimRBhE4oeJkpXlCgNUh0AJPuTG+myDgsGsx5Rtb5Iy0fj0pOQtfmkhXngYrRMiZd6GWEry16wswRzC6snG3hLUSU2lg==
+ bh=2braOq5ecbz3Vm8ktPLzy3hIhWI8JevJoJP4vfqqmZ0=;
+ b=GX1AVxF4q7Dm+CzhCMTVKpT6xcrNlEGTh7mF2w7XnAKppHqbcbo2Mz6WAUyaI7Ohg0gXWKO6PTbDXmXzwne2TIbZW4cP/VB3XjmOI4PjCWahnbs7ALbzzWQBShOXHcInm8czZ977N3cxDtwghGfNHTl9+zOKX/zZ7RBbPJhvNXAr2cuO3i9t10enxx6zLgXxJ4SI+0dfWpnaq2i5a+tAqCkMz59bI6hhHNr4rf96z5c6QdqdeCjaEnAqqv2BhPXIHZshwxN+nnXBc89kpq3AVH7tKQQEnq52slYgyqAqat82nwJQChHkBrXpzqb339/6cAKwOPW4y58Vlnw9ZZ2Aog==
 Received: from DB9PR09MB6506.eurprd09.prod.outlook.com (2603:10a6:10:303::20)
  by DB8PR09MB3612.eurprd09.prod.outlook.com (2603:10a6:10:112::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Tue, 18 Nov
- 2025 08:58:09 +0000
+ 2025 08:58:07 +0000
 Received: from DB9PR09MB6506.eurprd09.prod.outlook.com
  ([fe80::1eb3:5638:369d:24f2]) by DB9PR09MB6506.eurprd09.prod.outlook.com
  ([fe80::1eb3:5638:369d:24f2%4]) with mapi id 15.20.9320.021; Tue, 18 Nov 2025
- 08:58:09 +0000
+ 08:58:07 +0000
 From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
 To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
 CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cfu@mips.com"
@@ -51,12 +51,13 @@ CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "cfu@mips.com"
  "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>, "philmd@linaro.org"
  <philmd@linaro.org>, "alistair23@gmail.com" <alistair23@gmail.com>,
  "thuth@redhat.com" <thuth@redhat.com>, Djordje Todorovic
- <Djordje.Todorovic@htecgroup.com>
-Subject: [PATCH v14 10/14] hw/riscv: Add support for RISCV CPS
-Thread-Topic: [PATCH v14 10/14] hw/riscv: Add support for RISCV CPS
-Thread-Index: AQHcWGl2JQQxhITBnEujGPJ40Yrneg==
-Date: Tue, 18 Nov 2025 08:58:09 +0000
-Message-ID: <20251118085758.3996513-11-djordje.todorovic@htecgroup.com>
+ <Djordje.Todorovic@htecgroup.com>, Alistair Francis
+ <alistair.francis@wdc.com>
+Subject: [PATCH v14 05/14] target/riscv: Add mips.ccmov instruction
+Thread-Topic: [PATCH v14 05/14] target/riscv: Add mips.ccmov instruction
+Thread-Index: AQHcWGl1mLWvIFKqckeddw2NQ2ESjw==
+Date: Tue, 18 Nov 2025 08:58:07 +0000
+Message-ID: <20251118085758.3996513-6-djordje.todorovic@htecgroup.com>
 References: <20251118085758.3996513-1-djordje.todorovic@htecgroup.com>
 In-Reply-To: <20251118085758.3996513-1-djordje.todorovic@htecgroup.com>
 Accept-Language: en-US
@@ -67,86 +68,88 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: DB9PR09MB6506:EE_|DB8PR09MB3612:EE_
-x-ms-office365-filtering-correlation-id: c47dfecd-96d5-450b-ce53-08de268098d9
+x-ms-office365-filtering-correlation-id: 03037c19-95e0-415b-defb-08de268097ae
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700021;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?1YX+wgzjw6OviRAFpwb4LKwUP9oaZebx3++uY/qKyCNfzxyoOPoQD+xgro?=
- =?iso-8859-1?Q?PaRZE0FKnbRuu+VueasKvCOwMMWkLGaWBY/CZ2E5INHdl1TNK1NpaWs3yL?=
- =?iso-8859-1?Q?rUkLor6RqTBjYwDFIciC4jxJx1YxymBXsVIIcHaFDDjMoFa/YKUSIDk1uK?=
- =?iso-8859-1?Q?OroKG8SyEn6kM4N5akUGPXyaxi3L4OmQOepBoeO2224xG2NJb4K6BbNxEb?=
- =?iso-8859-1?Q?z5yvbOh954D7e1Uz22hY1wVhGROtA4q5SHHcQTh0QWf8D03Hq0uKfp9Zwa?=
- =?iso-8859-1?Q?no9yXJxhdHrgTaJwJr2VPC5Sx5JYu2JVPUKFJBRIwb1t5P/ihk/MuBQkeE?=
- =?iso-8859-1?Q?prLRabNAq83xo6Q7U5MRQJzasn4ecY6Z5vUS95N2OU6+ii+K0I9qsicSel?=
- =?iso-8859-1?Q?Xq6gCt5+5CxjFu3us19RsU9hqxJzm3WVUoRQodRjpZLK9vF7l1XCh+phbo?=
- =?iso-8859-1?Q?8ZK25FGeRC089BdJmCZal24sroTeqkhPO/yiBoN4m2YUIHbsRrJBP0cAh4?=
- =?iso-8859-1?Q?b80KeEI3M3sl+P4ciFCWhbOuN8q76h73rqI7ky+cHOdK/ZfM91v+gqk0Pc?=
- =?iso-8859-1?Q?CvzkNLObLO9kPfBzKWTUfgmtJcb0cGvMTw8rJNTzZz1kb88kDpngQvK6o3?=
- =?iso-8859-1?Q?fXW0xvvlkDl8BiDK7QGKKUyfB4Az3JrBTuqIFnvKQ79PiVDzo4tqW2tFnD?=
- =?iso-8859-1?Q?26xVTji8O67rI7IQP3d1chGqcSYUAiTn+zYRHydVNauTQkXpF4L+oK8mFQ?=
- =?iso-8859-1?Q?4tAwi7XfDP2RshfJtiiKy0pgvPOKLz/8CtXIZZBJP6uE57tH+nOuIdHct4?=
- =?iso-8859-1?Q?ZnjaTQ7ZOWdKF9b5R8kKdJMcrddEszN10iqDL80Hmis2/MGGnjjp5piQcW?=
- =?iso-8859-1?Q?pJeVdXgII74V2yiPwWbgGR2GGM0KyHnVanmgu71L3KEbKNN09Rb/TdoAu7?=
- =?iso-8859-1?Q?82t4WxIS6OYVSbToc4cTughWvJIl6pT+Xu2MeCobp55X88GIuiiht/yEG9?=
- =?iso-8859-1?Q?2pvpZ06qT06T6a8t32ERI0PL2JAIF/bt+d+p2Gy/Ir2/+QWMVdJdDf/5Lm?=
- =?iso-8859-1?Q?kQ4AGhiGebyM/7RUywsM4C93PuusRJmnBgwrMo2ej2PU2ErTsKPxBpxZa/?=
- =?iso-8859-1?Q?V5XOeoa9HULONwzDeOfOJOd0OBloEYN8mtkxIkuRGlvgZ9F+R1pzcsBtMR?=
- =?iso-8859-1?Q?fAd/jVJqo/yDrif7KC638ASbrYgMLiaTb6g43CsW3fTB4Cd4sic6pORrGi?=
- =?iso-8859-1?Q?ORqq98pw/7lLKmCXcKXOrMaFBe1o05eRnIib4EHu/M5ayXO+iXI70Tjb9b?=
- =?iso-8859-1?Q?EZ5gxT6enFifcGqMs/gYwKZhv7PFbn79Kk/LLVD4cewfRiPro5uNDD1R06?=
- =?iso-8859-1?Q?myuToC2BsoML9OmGk1R2GdwTDddFK4Q92QL9NVjqpP6vJ4cjUs52kOFrJm?=
- =?iso-8859-1?Q?bIBOEN29589vJ/KBMihq/6y8eAMGbK5X84HclrZUraC8WfmHMjzXucvXyr?=
- =?iso-8859-1?Q?1zpi+ZwWbITRTKFplveoaYNgpOtUT1AwplzfWy1GkwWVmX7mcXw6ZQDJm4?=
- =?iso-8859-1?Q?T6MILwD3c3MO+to7Np5AweIGMt5k?=
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|7416014|1800799024|366016|13003099007|38070700021; 
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?RxHLoWLq4HzqK7bT8r46J+eELINQ5lF7J1K+Bf0iFWx6RP8XoIvoZHGxTK?=
+ =?iso-8859-1?Q?EBfDAFsXgq0/86SLNz156cr5kf419noaNMwfbh08frR7XTQDtrN64duuq6?=
+ =?iso-8859-1?Q?hP4K3z/8Nm0pCUicO9CIeGuboXY1dy/eEBrQmx1fWmQPY5Ht9l9FOhBZ37?=
+ =?iso-8859-1?Q?/pcUzEfmkPMZO9c8WJguBhGrJTRRAv3baR2Ta5BK3q6QuYr42DrcRlobAH?=
+ =?iso-8859-1?Q?nSMcZm+QgEPw44YUjWvo2yDxtpDwvczy94mkqZdWofqHW5OruPZdioNW5/?=
+ =?iso-8859-1?Q?FEIGS2dEOAqJa88h6l5DFBoyfTRmqpW/OupeNFYSrlDzDjndCpOgbRV2ut?=
+ =?iso-8859-1?Q?ZqyLqZKbkUD420tPxAPUxQCS62d4tJgT9xZOwZ8d4ASjtuMIofv4VZUPbh?=
+ =?iso-8859-1?Q?NzKddHXejWjz7dU2fIRivUbNaXBqKoSwjciMCpQHKFwYkEEj7Yo5dATuTV?=
+ =?iso-8859-1?Q?EO4EE4qIwF3GIYgrjyoaTDDNQKbJvz0rW2od/m4cT52aJAjI0QEeq56xRi?=
+ =?iso-8859-1?Q?hOnIlGNxPoA949cDAFPlxXzqTr9sur7MVuPNPCKwzsPrss3/j6OZaal1UN?=
+ =?iso-8859-1?Q?GDCpd5+BwF1ZKheZ3EVHK9RMklyraQAov0tab1jvsdEb6A9BTJyZKjLYD6?=
+ =?iso-8859-1?Q?YQ53AR1qRMDYFuoZUpS7PtwSjpv9aYi37MOf9Z6MkWhjSB6F6IsS0TjZNj?=
+ =?iso-8859-1?Q?luYpo4XYR0wlPAx+21Mz+flmTnvI0MMXquqtyxFFC0f5M7ib5EFXU5BpB+?=
+ =?iso-8859-1?Q?3iunHCu93kLsR7letrXhfr2uAmaxQoF1KPkwyRi+I20Jo0Xnn0DjwnjdVl?=
+ =?iso-8859-1?Q?XcQ9yF+AZfa73geA3xKKoTa64XahT+AATr6ySVvsYu10jjsmTUfUdAUx8e?=
+ =?iso-8859-1?Q?PEGQX+kHV+wmuVNIFTkUBdV9/9iAsg/HEN/RPcqF/LfN2BBXt+HK6DE4Ai?=
+ =?iso-8859-1?Q?yAUsSwAjplKz4AKj5sVN5JPmR7zFjsAoSfwwtylO3m1BGAwHj2bcJxsf3u?=
+ =?iso-8859-1?Q?RSH5D6VXIZpbZVU0Y4IaE6Uhkg/SA+S1kkntmOQohFtExFX9u27Qpswhv0?=
+ =?iso-8859-1?Q?pr2/po9cLw1rMtkVPkL3PvQktAg41y4MDYSKOZNQDCtXd/ZMt7q/zp7hr4?=
+ =?iso-8859-1?Q?tmCQs3lNAndby2knZMrYWdvPuX8UjuK5qIoCOqRKqw+gm1t+X5cIlcH2Gc?=
+ =?iso-8859-1?Q?SA58ma3LzL7niYJYK8Ig+MXoadY14073lUhRC4Je7rbvrQCf9GLAunEmDb?=
+ =?iso-8859-1?Q?kywiivPN6RpAM4pppml5aGtfvQ5byH2S2Aad7xyoQIbcW/TBhz48qdCnoE?=
+ =?iso-8859-1?Q?t05ZHN6s9iGWIJwkw6ZnGUPzpsB0ZI1FnPDimFbVNw4vafEESWso3LBmOr?=
+ =?iso-8859-1?Q?e9Yh+y2Xisy/Sjl2rCUqFcafuw6CnDAFV+f/yWyzReDDL6O19BhZLwCK4M?=
+ =?iso-8859-1?Q?qKIhc1VDKWLy03lqY7Ta9oudyk0q3Cak6CvX56HcCQEK5pVqoKgroW4D7u?=
+ =?iso-8859-1?Q?FuyCjSLX88NKyxewfGRrUHvK66bOgSwgoCw2O9ks8EjiMGrQt422zqhpIj?=
+ =?iso-8859-1?Q?wqPigIpVfg/ga8/TxNJcUFroQHIZ?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR09MB6506.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(38070700021); DIR:OUT; SFP:1102; 
+ SFS:(13230040)(376014)(7416014)(1800799024)(366016)(13003099007)(38070700021);
+ DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?lWOLRRoFPlH3J7LnfgxHQdW++GUZ9e2SUb14aYoHqe3CbiDoBbmjhgLRLs?=
- =?iso-8859-1?Q?nV41tgSjooxuZk1TxqJd+Z0aftJVFZ6rY2Ls1348WO7YnVvCh2AAFXffQL?=
- =?iso-8859-1?Q?KNy6z5RtY3H03NPstHG/oU0CDVgnKnJwzDpN567OMB69bJD+fwhR/mUK3W?=
- =?iso-8859-1?Q?KU5bVU15mbUmmy/ozE3MwIScRzfNYy1hyGClsSO2xqgtH1+2wO/YBONkzE?=
- =?iso-8859-1?Q?HZ3RLOZJ1bXuY8VqMDCIIaKmVtuwkHX0+ZIRjFBykyB3oTgAWopK7W+V1f?=
- =?iso-8859-1?Q?GTLnb6pI1hSwMlxJxhGTbul/GAIgZvHvY1oOpPTOku4g59mXa0BZjb1rZe?=
- =?iso-8859-1?Q?fjgQRLweskcZsIFOImp6eUhv3XGxcfJJvz0kV87PLFAPxLmRyqHAw+p2qp?=
- =?iso-8859-1?Q?PhCkf8hbAiNIHVYABOgCkRyTMytZXoBY8qgZt1iTDq+xT9MA/0gCTvbElE?=
- =?iso-8859-1?Q?/EWMpMAYD0c9+1uRlWwbEPY5uWSwV0fU6bFmDmB9twEHIYkfMui8HjgKU0?=
- =?iso-8859-1?Q?bdrT2ThyhPb72Z2dFXs58LkOCzjOKLFGjwjJ1uc8P2unh2n6CXKPvlh7bK?=
- =?iso-8859-1?Q?VueJhXEr/Ckf8f9/fBeNgIvjmCPxm1BOKE2l9J7A1AWJWq9OEMzqXJksQb?=
- =?iso-8859-1?Q?5Bk0Cuctg9rRu6hyARmJuAIiNsQ9eeCwI0XH0C2mnWbDP2BUhGMx64Wx3o?=
- =?iso-8859-1?Q?mqzXzs+Erj4ZRUOFCxDs2YIeGAhAdoATFpMA+QgLWsZKSg/78QsEvSs1NO?=
- =?iso-8859-1?Q?oPONASyjP4hf9dyPQxyMuKmLPjY6gd6bhc1mp281muA8rSUUruzLjSprzZ?=
- =?iso-8859-1?Q?WM901h+9NkZUdVpOgo7iSzQ2RR3fGCQgmzcgAyDxTRcQbt16KiCTERWq+s?=
- =?iso-8859-1?Q?SPMtkE80UJEF13YgJICneEUc+wlNURhP1OrUit7scEUl06YywxYJBOJULn?=
- =?iso-8859-1?Q?FGYspXPrBmZNITmLUlZLLWKQ0fU0SVr9lInMr7SYJv6EthF9VRgFBnZQOg?=
- =?iso-8859-1?Q?hwQCDdI0tTl3l3bpFaDscLgppeiwVLwRieaZpdccer8CKMSbEbU9BXpscH?=
- =?iso-8859-1?Q?oeXz1Si6EbIoMDJwr2Pi6sPBCpfl0oby+iy8ZgXkil7/uACoklVg/XuY56?=
- =?iso-8859-1?Q?RoYnM9Jj2xq3MVf+qfSYDpQDFWJ/tqd+C8pvvo7Y8mkM6pi7QQDXmwrd4t?=
- =?iso-8859-1?Q?EC+UpGyCqrIuotLk0MLh0vSLGS6LBpFiG4dq6iYthPW+LA+EAVUsV24DkU?=
- =?iso-8859-1?Q?2fOl0vSy3/xj+uT+HAicPWstp20OwvnFSzaUEGNyVz/QXscfXUtjxCHBXK?=
- =?iso-8859-1?Q?h6jeAYohofQh7MpkltAbiby7ypBjUQT5x86vkQHarTYuaXyM3HUtVC14LZ?=
- =?iso-8859-1?Q?wEa8xeB6gxMBAnf/FhqvJcYIm+GyHDQaTERwXDS3KIj0qWjntH/tb8cA88?=
- =?iso-8859-1?Q?Hkx9h9GzUAh1Gj59n6WMhhzCe3PuaEt55hR/7APMCFhTeGuio0phmbvtyK?=
- =?iso-8859-1?Q?D7NmWGaXHiABSvivV7jq9khsso84zJ57FtuO5VxI2DoADDBxIBpVdLX3bE?=
- =?iso-8859-1?Q?utWv6tsEo8Z/xEnDXF85NrGqapLaUzZjfjyKQkj0+oLPo8yK3cIr/wnE7/?=
- =?iso-8859-1?Q?axFkJRtBDl0MRK+S95fQB+B1uX1M32nvJ1I3zmp1EeLUn4l3jMqR/Zeeyu?=
- =?iso-8859-1?Q?NbFykSY1F/4+4W5jDC8=3D?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?LQah59tHwUqteMHxuIedcqY3pwBUQmQqPryXhes8+Aa9LmfO/07RLRE5Jb?=
+ =?iso-8859-1?Q?O+6D5ihIDhcq7V7mY9YDBU7q7LtJDzEUWFjjeRi73J5meQ/zXsiUYZzbPO?=
+ =?iso-8859-1?Q?Q73HuJD7tZAQyr+0SjWurOlvSgeeCSW3V0Im4xLHNb6vo/Vez/yUu65mLm?=
+ =?iso-8859-1?Q?dhcb8tmllktkkts+nRfscucUOPLa59w0FwQxKu4ZSif0inBFJPGE6EYotk?=
+ =?iso-8859-1?Q?G1amvAYAr394AbmWelnUNrvBiZ0NSWJ2xemGQVy+Auczx6q1TBcY5BjyMY?=
+ =?iso-8859-1?Q?WDcylutkPcN9oWllYpO8A8ayXq9NEpKH7jN7yf3HLXiy4iGKjQgEGAb7F1?=
+ =?iso-8859-1?Q?SwZXM+W3uLz3Umt4Ez1AnF12poHKn1SMjy/flIU0gEhXkB3oqMELNzjFGi?=
+ =?iso-8859-1?Q?g8424ME8aGuhSUH1EP4kM3Fc2dfItPbzo0opsPQ2QjEw6oAuOMAfmvANTR?=
+ =?iso-8859-1?Q?iTa6hurr3dWaldi8MBPjsLyIqzG3VMjuArJKmuhZk2lhkvybsGe9sTS+qr?=
+ =?iso-8859-1?Q?ATG78mexW26yYCLXUJu+UAsWR9b60TKk+qCf0dTsaCebssd+2BdsmITFtN?=
+ =?iso-8859-1?Q?ZTXHe0lS/BQL3XlBhUTLA0k3mC1tI8G19H+KWnW6DbIjtoD5VltVU/rrH+?=
+ =?iso-8859-1?Q?iJk7Tq+uR97hvMm6Cqkq0ZaU7sX6XDtdWuecP69Nloxb75bv3OA7N0M074?=
+ =?iso-8859-1?Q?pOpnXdgD16yNra1qzFalkT+RiBEIEK9VEsUWCvItNI/OcT6sWpa3cknjto?=
+ =?iso-8859-1?Q?tVe0rr4cQKqKee7/WnX8VvDXFujM4YNt2O8kcnQKPDgGhnXBALURiQGHJQ?=
+ =?iso-8859-1?Q?ba8I9HKo3u3iK6C0VNeFbo58ZEWNgczzR6nnmN93cb89lTeY62kFiJeZps?=
+ =?iso-8859-1?Q?U4KbsO0p4Ms+hMKaqFc64ChVCm2wmWfgZ7Q2d+/6Ckp6l0yib3kMaG4BMt?=
+ =?iso-8859-1?Q?Exs2O2AaUmG05ALR6JVpHdY235qgIVg6/iiiWjS4MjAaKCafRM32FsmIpg?=
+ =?iso-8859-1?Q?98nc7xyyJkoSrbXv8uTIl2d0glmMKQ7bt7RZqBsVin289npmvOayN389of?=
+ =?iso-8859-1?Q?vdv0R+2jxBM6PpioEYnpc1EckVcdYETq6bR+myITrMmEaS33m94DSvIchV?=
+ =?iso-8859-1?Q?DToa/KNbhe5yNg8YZD6hO/BAsSJwkht7U1Rp6v/LGm6qy32QFfBv0StUCb?=
+ =?iso-8859-1?Q?+ozf3XQoHglg/vWFuiOspFASCubDubJB2Rc07AZEqkxL0TAJyRoRDWDZX+?=
+ =?iso-8859-1?Q?HVqVr+mZTcfNIUoI80QFO0q130g9p/0nqUCJaxYQ/q74ZDsafPjAOAbIGu?=
+ =?iso-8859-1?Q?gyoqomkEbPki7cxrEZEPDw07r9ij0v+v6qnlQPCfApTIp1SYC49TMNtb5Z?=
+ =?iso-8859-1?Q?4YOdxYPI6s4i6AgW6JlmO6+MjPfkkdk31w640IWwyboe1PMLuJKboHx7f0?=
+ =?iso-8859-1?Q?sYje2/sPCAhvfmNWalve1AyLnasAUoEO+LKyoaosZLOfigsQGpF59o2FF5?=
+ =?iso-8859-1?Q?HfFBcMQcWbzLoIAvZChFA+KCw8PEavn1rMaFmUADX8v+NrAnUQmasQKIMX?=
+ =?iso-8859-1?Q?zogtCovTwgPez2ylfpgQRYVkU06EaWuCK8KbPTxzt59QkvUQK5Mil/EpSZ?=
+ =?iso-8859-1?Q?ewKegjFjFvOT9js1keJZfl1iC9ygV5RSEv/bohJR/EVQeZKN7l9hSHyey8?=
+ =?iso-8859-1?Q?sGh27Iyp/k+vPNSwUk8=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR09MB6506.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c47dfecd-96d5-450b-ce53-08de268098d9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Nov 2025 08:58:09.4713 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 03037c19-95e0-415b-defb-08de268097ae
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Nov 2025 08:58:07.4559 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: eCYd/DhZlKqB5c7USAbrhQvsygjSXj/6urcr29O38kKXTbG++aIiD+Pne4FmELL8lSUWUB8CVwpqFOhjbx7wT120sn4Y7wjmT75+72k2iDM=
+X-MS-Exchange-CrossTenant-userprincipalname: kIzdteFG7ZsZ9JdIIDkpsARAf9qy1Z7xnw8s4Z2B6IpH+1N4H/vGJgtzDjWpFpJQJdjx1pdsbp7c9Keh1+bhekgSiXP/9P5Xi7hr+ilm6RY=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR09MB3612
-Received-SPF: pass client-ip=2a01:111:f403:c200::5;
+Received-SPF: pass client-ip=2a01:111:f403:c20a::7;
  envelope-from=Djordje.Todorovic@htecgroup.com;
- helo=DUZPR83CU001.outbound.protection.outlook.com
+ helo=PA4PR04CU001.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -168,336 +171,181 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add support for the Coherent Processing System for RISC-V.
-This enables SMP support for RISC-V boards that require
-cache-coherent multiprocessor systems.
+Add mips.ccmov defined by Xmipscmov.
 
 Signed-off-by: Chao-ying Fu <cfu@mips.com>
 Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
 Acked-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/misc/Kconfig        |   4 +
- hw/riscv/cps.c         | 196 +++++++++++++++++++++++++++++++++++++++++
- hw/riscv/meson.build   |   2 +
- include/hw/riscv/cps.h |  66 ++++++++++++++
- 4 files changed, 268 insertions(+)
- create mode 100644 hw/riscv/cps.c
- create mode 100644 include/hw/riscv/cps.h
+ target/riscv/cpu.c                        |  3 +++
+ target/riscv/cpu_cfg.h                    |  5 ++++
+ target/riscv/cpu_cfg_fields.h.inc         |  1 +
+ target/riscv/insn_trans/trans_xmips.c.inc | 33 +++++++++++++++++++++++
+ target/riscv/meson.build                  |  1 +
+ target/riscv/translate.c                  |  3 +++
+ target/riscv/xmips.decode                 | 11 ++++++++
+ 7 files changed, 57 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_xmips.c.inc
+ create mode 100644 target/riscv/xmips.decode
 
-diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-index 2b308ec9b0..a2726abccc 100644
---- a/hw/misc/Kconfig
-+++ b/hw/misc/Kconfig
-@@ -127,12 +127,16 @@ config RISCV_MIPS_CMGCR
- config RISCV_MIPS_CPC
-     bool
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 2fd0ced25f..87cb367676 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -249,6 +249,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+     ISA_EXT_DATA_ENTRY(svrsw60t59b, PRIV_VERSION_1_13_0, ext_svrsw60t59b),
+     ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
+     ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
++    ISA_EXT_DATA_ENTRY(xmipscmov, PRIV_VERSION_1_12_0, ext_xmipscmov),
+     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
+     ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
+@@ -1381,6 +1382,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] =
+=3D {
+     MULTI_EXT_CFG_BOOL("xtheadmempair", ext_xtheadmempair, false),
+     MULTI_EXT_CFG_BOOL("xtheadsync", ext_xtheadsync, false),
+     MULTI_EXT_CFG_BOOL("xventanacondops", ext_XVentanaCondOps, false),
++    MULTI_EXT_CFG_BOOL("xmipscmov", ext_xmipscmov, false),
 =20
-+config RISCV_MIPS_CPS
-+    bool
+     { },
+ };
+@@ -3295,6 +3297,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+         .cfg.pmp =3D true,
+         .cfg.ext_zba =3D true,
+         .cfg.ext_zbb =3D true,
++        .cfg.ext_xmipscmov =3D true,
+         .cfg.marchid =3D 0x8000000000000201,
+         .cfg.mvendorid =3D MIPS_VENDOR_ID,
+ #ifndef CONFIG_USER_ONLY
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index aa28dc8d7e..2db471ad17 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -36,6 +36,11 @@ static inline bool always_true_p(const RISCVCPUConfig *c=
+fg __attribute__((__unus
+     return true;
+ }
+=20
++static inline bool has_xmips_p(const RISCVCPUConfig *cfg)
++{
++    return cfg->ext_xmipscmov;
++}
 +
- config MIPS_BOSTON_AIA
-     bool
-     default y
-     depends on RISCV64
-     select RISCV_MIPS_CMGCR
-     select RISCV_MIPS_CPC
-+    select RISCV_MIPS_CPS
+ static inline bool has_xthead_p(const RISCVCPUConfig *cfg)
+ {
+     return cfg->ext_xtheadba || cfg->ext_xtheadbb ||
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_field=
+s.h.inc
+index e2d116f0df..a290303ee7 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -147,6 +147,7 @@ BOOL_FIELD(ext_xtheadmemidx)
+ BOOL_FIELD(ext_xtheadmempair)
+ BOOL_FIELD(ext_xtheadsync)
+ BOOL_FIELD(ext_XVentanaCondOps)
++BOOL_FIELD(ext_xmipscmov)
 =20
- config MPS2_FPGAIO
-     bool
-diff --git a/hw/riscv/cps.c b/hw/riscv/cps.c
+ BOOL_FIELD(mmu)
+ BOOL_FIELD(pmp)
+diff --git a/target/riscv/insn_trans/trans_xmips.c.inc b/target/riscv/insn_=
+trans/trans_xmips.c.inc
 new file mode 100644
-index 0000000000..8642d87fbc
+index 0000000000..3202fd9cc0
 --- /dev/null
-+++ b/hw/riscv/cps.c
-@@ -0,0 +1,196 @@
++++ b/target/riscv/insn_trans/trans_xmips.c.inc
+@@ -0,0 +1,33 @@
 +/*
-+ * Coherent Processing System emulation.
-+ *
-+ * Copyright (c) 2016 Imagination Technologies
++ * RISC-V translation routines for the MIPS extensions (xmips*).
 + *
 + * Copyright (c) 2025 MIPS
 + *
 + * SPDX-License-Identifier: GPL-2.0-or-later
 + *
++ * Reference: MIPS P8700 instructions
++ *            (https://mips.com/products/hardware/p8700/)
 + */
 +
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "qemu/module.h"
-+#include "hw/riscv/cps.h"
-+#include "hw/qdev-properties.h"
-+#include "system/reset.h"
-+#include "hw/intc/riscv_aclint.h"
-+#include "hw/intc/riscv_aplic.h"
-+#include "hw/intc/riscv_imsic.h"
-+#include "hw/pci/msi.h"
++#define REQUIRE_XMIPSCMOV(ctx) do {              \
++    if (!ctx->cfg_ptr->ext_xmipscmov) {          \
++        return false;                            \
++    }                                            \
++} while (0)
 +
-+static void riscv_cps_init(Object *obj)
++/* Conditional move by MIPS. */
++static bool trans_ccmov(DisasContext *ctx, arg_ccmov *a)
 +{
-+    SysBusDevice *sbd =3D SYS_BUS_DEVICE(obj);
-+    RISCVCPSState *s =3D RISCV_CPS(obj);
++    REQUIRE_XMIPSCMOV(ctx);
 +
-+    /*
-+     * Cover entire address space as there do not seem to be any
-+     * constraints for the base address of CPC .
-+     */
-+    memory_region_init(&s->container, obj, "mips-cps-container", UINT64_MA=
-X);
-+    sysbus_init_mmio(sbd, &s->container);
++    TCGv zero, source1, source2, source3;
++    zero =3D tcg_constant_tl(0);
++    source1 =3D get_gpr(ctx, a->rs1, EXT_NONE);
++    source2 =3D get_gpr(ctx, a->rs2, EXT_NONE);
++    source3 =3D get_gpr(ctx, a->rs3, EXT_NONE);
++
++    tcg_gen_movcond_tl(TCG_COND_NE, cpu_gpr[a->rd],
++                       source2, zero, source1, source3);
++
++    return true;
 +}
-+
-+static void main_cpu_reset(void *opaque)
-+{
-+    CPUState *cs =3D opaque;
-+
-+    cpu_reset(cs);
-+}
-+
-+static void riscv_cps_realize(DeviceState *dev, Error **errp)
-+{
-+    RISCVCPSState *s =3D RISCV_CPS(dev);
-+    RISCVCPU *cpu;
-+    int i;
-+
-+    /* Validate num_vp */
-+    if (s->num_vp =3D=3D 0) {
-+        error_setg(errp, "num-vp must be at least 1");
-+        return;
-+    }
-+    if (s->num_vp > MAX_HARTS) {
-+        error_setg(errp, "num-vp cannot exceed %d", MAX_HARTS);
-+        return;
-+    }
-+
-+    /* Allocate CPU array */
-+    s->cpus =3D g_new0(CPUState *, s->num_vp);
-+
-+    /* Set up cpu_index and mhartid for avaiable CPUs. */
-+    int harts_in_cluster =3D s->num_hart * s->num_core;
-+    int num_of_clusters =3D s->num_vp / harts_in_cluster;
-+    for (i =3D 0; i < s->num_vp; i++) {
-+        cpu =3D RISCV_CPU(object_new(s->cpu_type));
-+
-+        /* All VPs are halted on reset. Leave powering up to CPC. */
-+        object_property_set_bool(OBJECT(cpu), "start-powered-off", true,
-+                                 &error_abort);
-+
-+        if (!qdev_realize_and_unref(DEVICE(cpu), NULL, errp)) {
-+            return;
-+        }
-+
-+        /* Store CPU in array */
-+        s->cpus[i] =3D CPU(cpu);
-+
-+        /* Set up mhartid */
-+        int cluster_id =3D i / harts_in_cluster;
-+        int hart_id =3D (i % harts_in_cluster) % s->num_hart;
-+        int core_id =3D (i % harts_in_cluster) / s->num_hart;
-+        int mhartid =3D (cluster_id << MHARTID_CLUSTER_SHIFT) +
-+                      (core_id << MHARTID_CORE_SHIFT) +
-+                      (hart_id << MHARTID_HART_SHIFT);
-+        cpu->env.mhartid =3D mhartid;
-+        qemu_register_reset(main_cpu_reset, s->cpus[i]);
-+    }
-+
-+    /* Cluster Power Controller */
-+    object_initialize_child(OBJECT(dev), "cpc", &s->cpc, TYPE_RISCV_CPC);
-+    object_property_set_uint(OBJECT(&s->cpc), "cluster-id", 0,
-+                            &error_abort);
-+    object_property_set_uint(OBJECT(&s->cpc), "num-vp", s->num_vp,
-+                            &error_abort);
-+    object_property_set_uint(OBJECT(&s->cpc), "num-hart", s->num_hart,
-+                            &error_abort);
-+    object_property_set_uint(OBJECT(&s->cpc), "num-core", s->num_core,
-+                            &error_abort);
-+
-+    /* Pass CPUs to CPC using link properties */
-+    for (i =3D 0; i < s->num_vp; i++) {
-+        char *propname =3D g_strdup_printf("cpu[%d]", i);
-+        object_property_set_link(OBJECT(&s->cpc), propname,
-+                                OBJECT(s->cpus[i]), &error_abort);
-+        g_free(propname);
-+    }
-+
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->cpc), errp)) {
-+        return;
-+    }
-+
-+    memory_region_add_subregion(&s->container, 0,
-+                            sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->cpc)=
-, 0));
-+
-+    /* Global Configuration Registers */
-+    object_initialize_child(OBJECT(dev), "gcr", &s->gcr, TYPE_RISCV_GCR);
-+    object_property_set_uint(OBJECT(&s->gcr), "cluster-id", 0,
-+                            &error_abort);
-+    object_property_set_uint(OBJECT(&s->gcr), "num-vp", s->num_vp,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->gcr), "gcr-rev", 0xa00,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->gcr), "gcr-base", s->gcr_base,
-+                            &error_abort);
-+    object_property_set_link(OBJECT(&s->gcr), "cpc", OBJECT(&s->cpc.mr),
-+                             &error_abort);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->gcr), errp)) {
-+        return;
-+    }
-+
-+    memory_region_add_subregion(&s->container, s->gcr_base,
-+                            sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->gcr)=
-, 0));
-+
-+    for (i =3D 0; i < num_of_clusters; i++) {
-+        uint64_t cm_base =3D GLOBAL_CM_BASE + (CM_SIZE * i);
-+        uint32_t hartid_base =3D i << MHARTID_CLUSTER_SHIFT;
-+        s->aplic =3D riscv_aplic_create(cm_base + AIA_PLIC_M_OFFSET,
-+                                      AIA_PLIC_M_SIZE,
-+                                      hartid_base, /* hartid_base */
-+                                      MAX_HARTS, /* num_harts */
-+                                      APLIC_NUM_SOURCES,
-+                                      APLIC_NUM_PRIO_BITS,
-+                                      false, true, NULL);
-+        riscv_aplic_create(cm_base + AIA_PLIC_S_OFFSET,
-+                           AIA_PLIC_S_SIZE,
-+                           hartid_base, /* hartid_base */
-+                           MAX_HARTS, /* num_harts */
-+                           APLIC_NUM_SOURCES,
-+                           APLIC_NUM_PRIO_BITS,
-+                           false, false, s->aplic);
-+        /* PLIC changes msi_nonbroken to ture. We revert the change. */
-+        msi_nonbroken =3D false;
-+        riscv_aclint_swi_create(cm_base + AIA_CLINT_OFFSET,
-+                                hartid_base, MAX_HARTS, false);
-+        riscv_aclint_mtimer_create(cm_base + AIA_CLINT_OFFSET +
-+                                   RISCV_ACLINT_SWI_SIZE,
-+                                   RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-+                                   hartid_base,
-+                                   MAX_HARTS,
-+                                   RISCV_ACLINT_DEFAULT_MTIMECMP,
-+                                   RISCV_ACLINT_DEFAULT_MTIME,
-+                                   RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, fal=
-se);
-+    }
-+}
-+
-+static const Property riscv_cps_properties[] =3D {
-+    DEFINE_PROP_UINT32("num-vp", RISCVCPSState, num_vp, 1),
-+    DEFINE_PROP_UINT32("num-hart", RISCVCPSState, num_hart, 1),
-+    DEFINE_PROP_UINT32("num-core", RISCVCPSState, num_core, 1),
-+    DEFINE_PROP_UINT64("gcr-base", RISCVCPSState, gcr_base, GCR_BASE_ADDR)=
-,
-+    DEFINE_PROP_STRING("cpu-type", RISCVCPSState, cpu_type),
-+};
-+
-+static void riscv_cps_class_init(ObjectClass *klass, const void *data)
-+{
-+    DeviceClass *dc =3D DEVICE_CLASS(klass);
-+
-+    dc->realize =3D riscv_cps_realize;
-+    device_class_set_props(dc, riscv_cps_properties);
-+}
-+
-+static const TypeInfo riscv_cps_info =3D {
-+    .name =3D TYPE_RISCV_CPS,
-+    .parent =3D TYPE_SYS_BUS_DEVICE,
-+    .instance_size =3D sizeof(RISCVCPSState),
-+    .instance_init =3D riscv_cps_init,
-+    .class_init =3D riscv_cps_class_init,
-+};
-+
-+static void riscv_cps_register_types(void)
-+{
-+    type_register_static(&riscv_cps_info);
-+}
-+
-+type_init(riscv_cps_register_types)
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 2a8d5b136c..9023b80087 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -15,4 +15,6 @@ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
- riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-gen=
-eric.c'))
- riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan=
-_kmh.c'))
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index 25d59ef9f9..3842c7c1a8 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -4,6 +4,7 @@ gen =3D [
+   decodetree.process('insn32.decode', extra_args: '--static-decode=3Ddecod=
+e_insn32'),
+   decodetree.process('xthead.decode', extra_args: '--static-decode=3Ddecod=
+e_xthead'),
+   decodetree.process('XVentanaCondOps.decode', extra_args: '--static-decod=
+e=3Ddecode_XVentanaCodeOps'),
++  decodetree.process('xmips.decode', extra_args: '--static-decode=3Ddecode=
+_xmips'),
+ ]
 =20
-+riscv_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
-+
- hw_arch +=3D {'riscv': riscv_ss}
-diff --git a/include/hw/riscv/cps.h b/include/hw/riscv/cps.h
+ riscv_ss =3D ss.source_set()
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 9ddef2d6e2..66d31b67d3 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1194,8 +1194,10 @@ static uint32_t opcode_at(DisasContextBase *dcbase, =
+target_ulong pc)
+ #include "insn_trans/trans_svinval.c.inc"
+ #include "insn_trans/trans_rvbf16.c.inc"
+ #include "decode-xthead.c.inc"
++#include "decode-xmips.c.inc"
+ #include "insn_trans/trans_xthead.c.inc"
+ #include "insn_trans/trans_xventanacondops.c.inc"
++#include "insn_trans/trans_xmips.c.inc"
+=20
+ /* Include the auto-generated decoder for 16 bit insn */
+ #include "decode-insn16.c.inc"
+@@ -1211,6 +1213,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, t=
+arget_ulong pc)
+=20
+ const RISCVDecoder decoder_table[] =3D {
+     { always_true_p, decode_insn32 },
++    { has_xmips_p, decode_xmips},
+     { has_xthead_p, decode_xthead},
+     { has_XVentanaCondOps_p, decode_XVentanaCodeOps},
+ };
+diff --git a/target/riscv/xmips.decode b/target/riscv/xmips.decode
 new file mode 100644
-index 0000000000..00f17112c1
+index 0000000000..fadcb78470
 --- /dev/null
-+++ b/include/hw/riscv/cps.h
-@@ -0,0 +1,66 @@
-+/*
-+ * Coherent Processing System emulation.
-+ *
-+ * Copyright (c) 2016 Imagination Technologies
-+ *
-+ * Copyright (c) 2025 MIPS
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ */
++++ b/target/riscv/xmips.decode
+@@ -0,0 +1,11 @@
++#
++# RISC-V translation routines for the MIPS extension
++#
++# Copyright (c) 2025 MIPS
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Reference: MIPS P8700 instructions
++#            (https://mips.com/products/hardware/p8700/)
 +
-+#ifndef RISCV_CPS_H
-+#define RISCV_CPS_H
-+
-+#include "hw/sysbus.h"
-+#include "hw/misc/riscv_cmgcr.h"
-+#include "hw/misc/riscv_cpc.h"
-+#include "target/riscv/cpu.h"
-+#include "qom/object.h"
-+
-+#define TYPE_RISCV_CPS "riscv-cps"
-+OBJECT_DECLARE_SIMPLE_TYPE(RISCVCPSState, RISCV_CPS)
-+
-+/* The model supports up to 64 harts. */
-+#define MAX_HARTS 64
-+
-+/* The global CM base for the boston-aia model. */
-+#define GLOBAL_CM_BASE 0x16100000
-+/* The CM block is 512 KiB. */
-+#define CM_SIZE (1 << 19)
-+
-+/*
-+ * The mhartid bits has cluster at bit 16, core at bit 4, and hart at
-+ * bit 0.
-+ */
-+
-+#define MHARTID_CLUSTER_SHIFT 16
-+#define MHARTID_CORE_SHIFT 4
-+#define MHARTID_HART_SHIFT 0
-+
-+#define APLIC_NUM_SOURCES 0x35 /* Arbitray maximum number of interrupts. *=
-/
-+#define APLIC_NUM_PRIO_BITS 3
-+#define AIA_PLIC_M_OFFSET 0x40000
-+#define AIA_PLIC_M_SIZE 0x8000
-+#define AIA_PLIC_S_OFFSET 0x60000
-+#define AIA_PLIC_S_SIZE 0x8000
-+#define AIA_CLINT_OFFSET 0x50000
-+
-+typedef struct RISCVCPSState {
-+    SysBusDevice parent_obj;
-+
-+    uint32_t num_vp;
-+    uint32_t num_hart;
-+    uint32_t num_core;
-+    uint64_t gcr_base;
-+    char *cpu_type;
-+
-+    MemoryRegion container;
-+    RISCVGCRState gcr;
-+    RISCVCPCState cpc;
-+
-+    DeviceState *aplic;
-+    CPUState **cpus;
-+} RISCVCPSState;
-+
-+#endif
++ccmov          rs3:5 11 rs2:5 rs1:5 011 rd:5 0001011
 --=20
 2.34.1
 
