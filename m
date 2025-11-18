@@ -4,97 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F4ECEE351
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Nov 2025 20:16:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E16AECEE351
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Nov 2025 20:18:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLS7V-0001KG-3Y; Tue, 18 Nov 2025 15:16:09 -0500
+	id 1vLS8y-0002BP-DN; Tue, 18 Nov 2025 15:17:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vLS7T-0001IC-5N
- for qemu-riscv@nongnu.org; Tue, 18 Nov 2025 15:16:07 -0500
-Received: from mail-oi1-x235.google.com ([2607:f8b0:4864:20::235])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vLS8u-0002Ae-Cw
+ for qemu-riscv@nongnu.org; Tue, 18 Nov 2025 15:17:36 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vLS7N-0000T2-RT
- for qemu-riscv@nongnu.org; Tue, 18 Nov 2025 15:16:06 -0500
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-450b3f60c31so984881b6e.3
- for <qemu-riscv@nongnu.org>; Tue, 18 Nov 2025 12:16:01 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vLS8q-0000YV-U2
+ for qemu-riscv@nongnu.org; Tue, 18 Nov 2025 15:17:35 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-47795f6f5c0so27564065e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 18 Nov 2025 12:17:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1763496960; x=1764101760; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1763497051; x=1764101851; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=2eNVuyENc+noQdzzieQR9zdjw5WgRieBXmzrL2XC+8o=;
- b=OaKYG7e6hjKNL7TQm6LKXqLhCNXeyvwZYkNYH9+YJ1/HDs5jC4Jc1Wy3URFXpbBjno
- zUI8YBeJiKDiiXrkORaFCFstzabNCljVJxEp8LPtpzqTguJ1ji+JKxpBokuZK+0sFRPc
- TiIqiUwbcIZMqMYmEepZxOsOV1XQ7hI026yQoyw+BOXUdvmgBSOuvhuWApg72lHwpAiH
- wdfipVprJuA+cZOLqfHUmFQAlEiWyyJedbbTyjBSQ8kX78wJ/DpabkF8MgwO+Q8RH3OM
- o6OwmyjuG0VkHy3rYH3D0vkxwDeC41f/zPdPXmDDFSsNDvPWLi5QOVy1xJX2/zWa7H/V
- cFnA==
+ bh=0fsDbp266x/i7vzPqogyJHiihfg6OIpNQWatkbpvId8=;
+ b=hpCtcQpIxa+hptsgcy3vWrmeaZSyqoguPIt7DO0qMtxt8peEjz0za28MZ0+En3nnUd
+ zZHBYaBT2A8HlgSA+u1icVtg5K9HUl2vs/QK1zj9E+Gs6FM8uR0SZiJQeABuZHTJd671
+ uphCswM/GCxZjYUSeQEH4rqgLrrtkSJNLkYinlYmjEzVzlfwXbLCOtfSnyF4mr9uLQ/k
+ K2peT3/UxdFF61wZBC2w1FtddS0rcZH5b1mTbc4Jn0N09j5eSmbqnQMx4JUUO1kdZcVv
+ 1+zHbFucme27uCkseEqdsn7lN86smvwVXGSpMB5dePnRFImy2GmBaeNMTHqNO1A4BKff
+ r8Vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763496960; x=1764101760;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1763497051; x=1764101851;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2eNVuyENc+noQdzzieQR9zdjw5WgRieBXmzrL2XC+8o=;
- b=o81TY3BkAGYANV7dol2vp9y/rv42KhBgZj3dIvV/m2a41tWRQ4nuAL9aiMgrKzycx+
- NOJOC8SxHY/CfbZan2bx0yiO2r6V69PqbeFvQZtyOloFRrqLzwUFnejOoNU0ZQF+Br7l
- yrqyT88DI9myPP/VTkES/sZHOX8HiUYFsn6peWHSLZ9NVQOV8Lh4gFv/ISurpGOlKHHl
- HSwPUJvV6mv8bkmuLVB86T3J30MDhKFNI/2weR2EpwGQg/llssEo3QynjEFyUl2KyIoC
- 5vXitYodsSeNJ/wk+QIaVtAsSghGZvAErOVKriVRF8ikkTHq4PEMgvDxwJX9bJKnqAr5
- KZdA==
+ bh=0fsDbp266x/i7vzPqogyJHiihfg6OIpNQWatkbpvId8=;
+ b=Hg/uKmNnlpDYJGldsTmoMGxXuPZ605B532TLkZWoFQYMohxV9SD+hX++vFP/OGgXE4
+ 0V+sif2V+XCkPJL5Y5i2o47D1yVZ9o3gWb0A27EsV772C/eAig1yq/ZqSgissFqeOcM9
+ NEniB8ziUEl8EfypuV6z3bEcypeWuFi5br21IVoujAEHKxe+n4tWNqK3gxSm36W9NfwF
+ YuPbN3d+T33r9a+Jv5TwXoafQMtaJbwAoOO8pa5vjFWJcMY3R+uaM0yAoEccsq+MpjO9
+ yR+Y0s5TKyKRY41ZPbYOsZUcjA0gGB55GR6quReSjcd0HG2jvMHn3xbAqh63lIZIx2z5
+ TDVg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXyIBtz5BVH1upwxPmXLUxcTyeLNl9KmNqnGyc6tQpumNaVks1F5EQbFwToPUBG4HdQUHMLTSQLuWcN@nongnu.org
-X-Gm-Message-State: AOJu0YzXq65hAJQABkDXfErk/C61z7BqHyQ1tovOpFy9NZKfItKR5jt6
- 3K28iNt011XMXoG0M058FV6FPbf5aOSHoWZbLgGlQI/VIQDPLjX4qhtWbh8XzagW1fE=
-X-Gm-Gg: ASbGncvWh6C98ag6stGJjT2JgP61kH8CQ3Y7XOpCvqiPWriweMceRVn7sb/cPztO/o8
- GLXm7hdUdzPrU6PtrWuSHLDf8RKK7yWNsLo0H0uQP1zJq7iQz6gaFJ1CN1GKZAr1XYiCSEweGzb
- KB+wchtH0cuoaWUdxAtHmmNGIOtg135uH7vV79AkB3sJAiz1Ntpn8vCbwvgy4NXHk7yyj3YbyMH
- ZV8oT6lk65c/XxSKOi0/letiRK4kxxV3c0+takcE3bQVjedG7bqv/Vc+9kUu8jrFQU1TpTax1Jf
- TXSjdLm8NvGcP9WYnxa+5O1R6b+BP87D7oEHAJlyJ6feEd1sOvd+kl1/WNfG7Ly5UFn2nznrbYH
- 9E0bZsCtsMrnZRPcQNWKkAfQ20m8waeJET3/vtkGaIfLGEZ130sbhGF+SkN3WnGAAAi3Xzmnixh
- yLSXCNjZNbM2RZUWBSy8bdAxxx6i8=
-X-Google-Smtp-Source: AGHT+IHIj5USQ6OqyYKD28IPJra6pnh7oU0fsxgobwd1dEzWgZp5fzng6/vjMhfhAGPWF7lRGjkWYQ==
-X-Received: by 2002:a05:6808:1a1c:b0:450:4a53:54d4 with SMTP id
- 5614622812f47-4509740562bmr7899438b6e.25.1763496960367; 
- Tue, 18 Nov 2025 12:16:00 -0800 (PST)
-Received: from [192.168.68.110] ([177.188.133.235])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4508a6b7c4bsm5596377b6e.17.2025.11.18.12.15.57
+ AJvYcCWeycVO6wj0kLt4HshyQnD+uOX3xMqBL/jxUD6PmL287SxvPMceZ6zNx1bRIIC63+d93rZ0jUjnTnn2@nongnu.org
+X-Gm-Message-State: AOJu0YxW0vV8oR0gidTWfXhigQZaWvhkSSSfsmidMje5MHhlL+HptZ/6
+ yrlNyG2pAzl9jMVjRbr3N/9qi4IVAAbHwHZn3s2huyov57AkZb3rNCi2MCEo54BO9lQ=
+X-Gm-Gg: ASbGncsM3WPiCbKRRIW4h9/WY7skoEo9ygB9kVpUurQyzm6yp9jGm/Gm12xeGkgimto
+ qERLgdFFqsgXbOXdDryYAVo8XHj6G+WrAzfPvRPaiOZIZRwXa65RDaTQCaUG9Z0UASxlCE6qu8j
+ VfmDcpU3AdWZmKjbpBI3FR75FggYR8E/HcFoVvmAfiDxtYqpMRrUcJ/4ACMfv4/Zr0F1acAizp9
+ FdXB9ZhivOw+KlEfCkOJfSR5wjoVCrJUtuh4ilqJ7efKcI8vYlnZG3y8L3krvgtMBL09jAmy6kK
+ c81S+bRczskwsR+Xfgo3Yy2JjDpARRwvDtF7dKytksLRubkDILb8Myat3FUS6eEh212PEQHB9nK
+ M1GnENaizMcz1VDP4MzkJn/D9atwQY9CKrzbSOlewjEWGDf5RUZfgjqhDA/A0AD2lGwJwuPyBzf
+ /D8XvbHbjBEBNnYjtv0MX8iqIf5axSmTxclE8rMpbD2zRa8QzHaZ0WTh6OwZhhao6aauoEKmWR4
+ ig=
+X-Google-Smtp-Source: AGHT+IGIBA2WyROgLGXhq+Mazm6ZBzKqe1NWsoKEfPXlE4J3bLXYhVTPM3sHJBIIbzq7NcDocedLpQ==
+X-Received: by 2002:a05:600c:6b66:b0:477:9a28:b09a with SMTP id
+ 5b1f17b1804b1-4779a28b24bmr96241525e9.0.1763497051232; 
+ Tue, 18 Nov 2025 12:17:31 -0800 (PST)
+Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-477b102a3a1sm7970765e9.9.2025.11.18.12.17.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Nov 2025 12:15:59 -0800 (PST)
-Message-ID: <265ca0e7-b331-4158-8e11-8f31921cfcc0@ventanamicro.com>
-Date: Tue, 18 Nov 2025 17:15:54 -0300
+ Tue, 18 Nov 2025 12:17:30 -0800 (PST)
+Message-ID: <958b25bf-c930-4117-8378-e9f87621d2c3@linaro.org>
+Date: Tue, 18 Nov 2025 21:17:29 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/5] hw/riscv: experimental server platform reference
- machine
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Fei Wu <wu.fei9@sanechips.com.cn>
-References: <20251111182944.2895892-1-dbarboza@ventanamicro.com>
- <20251111182944.2895892-4-dbarboza@ventanamicro.com>
- <20251111-a6e8ae9a0d6809ba0e62ba2e@orel>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: Re: [PATCH 01/13] target/riscv: Really use little endianness for
+ 128-bit loads/stores
 Content-Language: en-US
-In-Reply-To: <20251111-a6e8ae9a0d6809ba0e62ba2e@orel>
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Anton Johansson <anjo@rev.ng>,
+ Valentin Haudiquet <valentin.haudiquet@canonical.com>,
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?= <frederic.petrot@univ-grenoble-alpes.fr>
+References: <20251010155045.78220-1-philmd@linaro.org>
+ <20251010155045.78220-2-philmd@linaro.org>
+ <88f8d901-b7b4-47e6-b209-f9375c5b95e1@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <88f8d901-b7b4-47e6-b209-f9375c5b95e1@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::235;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x235.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,135 +115,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi Richard,
 
+[Dropping Fabien Portas from Cc due to bouncing email]
 
-On 11/11/25 8:36 PM, Andrew Jones wrote:
-> On Tue, Nov 11, 2025 at 03:29:42PM -0300, Daniel Henrique Barboza wrote:
->> From: Fei Wu <wu.fei9@sanechips.com.cn>
-> ...
->> +static char *rvsp_ref_get_aia_guests(Object *obj, Error **errp)
->> +{
->> +    RVSPMachineState *s = RVSP_REF_MACHINE(obj);
->> +    char val[32];
->> +
->> +    sprintf(val, "%d", s->aia_guests);
->> +    return g_strdup(val);
->> +}
->> +
->> +static void rvsp_ref_set_aia_guests(Object *obj, const char *val, Error **errp)
->> +{
->> +    RVSPMachineState *s = RVSP_REF_MACHINE(obj);
->> +
->> +    s->aia_guests = atoi(val);
->> +    if (s->aia_guests < 0 || s->aia_guests > RVSP_IRQCHIP_MAX_GUESTS) {
-> 
-> The minimum is 5 for the server platform, so we should enforce that. Also
-> I suggest we bump RVSP_IRQCHIP_MAX_GUESTS since it's only 7 right now.
-> 
->> +        error_setg(errp, "Invalid number of AIA IMSIC guests");
->> +        error_append_hint(errp, "Valid values be between 0 and %d.\n",
->> +                          RVSP_IRQCHIP_MAX_GUESTS);
->> +    }
->> +}
->> +
->> +static void rvsp_ref_machine_class_init(ObjectClass *oc, const void *data)
->> +{
->> +    char str[128];
->> +    MachineClass *mc = MACHINE_CLASS(oc);
->> +    static const char * const valid_cpu_types[] = {
->> +        TYPE_RISCV_CPU_RVSP_REF,
->> +    };
->> +
->> +    mc->desc = "RISC-V Server SoC Reference board (EXPERIMENTAL)";
-> 
-> We could (and probably should) version this machine type from the get go.
-> If we do that, then we could simply give it a version 0.9, which would
-> match the current spec. When the spec is ratified and this model is
-> complete, then it can be bumped to 1.0. Going that route would allow us
-> to avoid the EXPERIMENTAL "flag".
-
-There has been some discussions offline on this and I'll bring them here.
-
-A minor point: it was suggested to rename the board to 'rvserver' instead
-of 'rvsp-ref'. I like this idea mostly because I keep misspelling rvsp-ref
-as rsvp-ref.
-
-As for the "version this machine type": in this case is different with what we do
-with other QEMU machines. They have a new version for every QEMU release, e.g.
-ARM's newest virt board is virt-10.2, in the next QEMU release it will be virt-11.0
-and so on. We wouldn't do the same thing here - 'versioning' in this case is name
-the board in a way that makes reference to the spec it implements. So this current
-emulation would be named 'rvsp-ref-0.9', with an alias 'rvsp-ref' pointing to it.
-
-Changing the emulation to comply with spec version 1.0 will create a rvsp-ref-1.0
-board while keeping rvsp-ref-0.9 as is. Usually QEMU does that by using compat flags
-that changes the behavior of the board, and we'll probably go this route.
-
-One thing worth considering is that we can't just version stamp the board, we need to
-do the same with the CPU. So we would have a rvsp-ref-cpu-0.9, rvsp-ref-cpu-1.0 and
-an alias to point to the newest available emulation.
-
-Also note that we're not 0.9 compliant either since we're missing sdext. So unless
-we're willing to name this current board as rvsp-ref-0.9-beta or something like that,
-maybe it's a good idea to postpone this work until we have 'sdext' implemented.
-
-
-Thoughts always welcome. Thanks,
-
-Daniel
-   
-
-
-
-
-
-> 
->> +    mc->init = rvsp_ref_machine_init;
->> +    mc->max_cpus = RVSP_CPUS_MAX;
->> +    mc->default_cpu_type = TYPE_RISCV_CPU_RVSP_REF;
->> +    mc->valid_cpu_types = valid_cpu_types;
->> +    mc->pci_allow_0_address = true;
->> +    mc->default_nic = "e1000e";
->> +    mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
->> +    mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
->> +    mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
->> +    mc->numa_mem_supported = true;
->> +    /* platform instead of architectural choice */
->> +    mc->cpu_cluster_has_numa_boundary = true;
->> +    mc->default_ram_id = "riscv_rvsp_ref_board.ram";
->> +
->> +    object_class_property_add_str(oc, "aia-guests",
->> +                                  rvsp_ref_get_aia_guests,
->> +                                  rvsp_ref_set_aia_guests);
->> +    sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid value "
->> +                 "should be between 0 and %d.", RVSP_IRQCHIP_MAX_GUESTS);
-> 
-> Same comment about the guest file range as above (we shouldn't suggest
-> anything less than 5).
-> 
->> +    object_class_property_set_description(oc, "aia-guests", str);
->> +}
->> +
->> +static const TypeInfo rvsp_ref_typeinfo = {
->> +    .name       = TYPE_RVSP_REF_MACHINE,
->> +    .parent     = TYPE_MACHINE,
->> +    .class_init = rvsp_ref_machine_class_init,
->> +    .instance_init = rvsp_ref_machine_instance_init,
->> +    .instance_size = sizeof(RVSPMachineState),
->> +};
->> +
->> +static void rvsp_ref_init_register_types(void)
->> +{
->> +    type_register_static(&rvsp_ref_typeinfo);
->> +}
->> +
->> +type_init(rvsp_ref_init_register_types)
->> -- 
->> 2.51.1
+On 10/10/25 20:44, Richard Henderson wrote:
+> On 10/10/25 08:50, Philippe Mathieu-Daudé wrote:
+>> Per commit a2f827ff4f4 ("target/riscv: accessors to registers upper
+>> part and 128-bit load/store") description:
 >>
+>>   > The 128-bit ISA adds ldu, lq and sq. We provide support for these
+>>   > instructions. Note that (a) we compute only 64-bit addresses to
+>>   > actually access memory, cowardly utilizing the existing address
+>>   > translation mechanism of QEMU, and (b) we assume for now
+>>   > little-endian memory accesses.
 >>
+>>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>>
+>> However this commit used MO_TE (target endianness) for the
+>> gen_load_i128() and gen_store_i128() helpers. Likely it was
+>> unnoticed because current targets are only built using little
+>> endianness:
+>>
+>>    $ git grep -L TARGET_BIG_ENDIAN=y configs/targets/riscv*
+>>    configs/targets/riscv32-linux-user.mak
+>>    configs/targets/riscv32-softmmu.mak
+>>    configs/targets/riscv64-bsd-user.mak
+>>    configs/targets/riscv64-linux-user.mak
+>>    configs/targets/riscv64-softmmu.mak
+>>
+>> Replace by MO_TE -> MO_LE to really use little endianness.
+>>
+>> Cc: Fabien Portas <fabien.portas@grenoble-inp.org>
+>> Cc: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+>> Fixes: a2f827ff4f4 ("target/riscv: accessors to registers upper part 
+>> and 128-bit load/store")
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+>>   target/riscv/insn_trans/trans_rvi.c.inc | 12 ++++++++----
+>>   1 file changed, 8 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/ 
+>> insn_trans/trans_rvi.c.inc
+>> index b9c71604687..df0b555176a 100644
+>> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+>> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+>> @@ -389,9 +389,11 @@ static bool gen_load_i128(DisasContext *ctx, 
+>> arg_lb *a, MemOp memop)
+>>           }
+>>       } else {
+>>           /* assume little-endian memory access for now */
+>> -        tcg_gen_qemu_ld_tl(destl, addrl, ctx->mem_idx, MO_TEUQ);
+>> +        MemOp memop = MO_LEUQ;
+>> +
+>> +        tcg_gen_qemu_ld_tl(destl, addrl, ctx->mem_idx, memop);
+>>           tcg_gen_addi_tl(addrl, addrl, 8);
+>> -        tcg_gen_qemu_ld_tl(desth, addrl, ctx->mem_idx, MO_TEUQ);
+>> +        tcg_gen_qemu_ld_tl(desth, addrl, ctx->mem_idx, memop);
+>>       }
+>>       gen_set_gpr128(ctx, a->rd, destl, desth);
+>> @@ -494,9 +496,11 @@ static bool gen_store_i128(DisasContext *ctx, 
+>> arg_sb *a, MemOp memop)
+>>           tcg_gen_qemu_st_tl(src2l, addrl, ctx->mem_idx, memop);
+>>       } else {
+>>           /* little-endian memory access assumed for now */
+>> -        tcg_gen_qemu_st_tl(src2l, addrl, ctx->mem_idx, MO_TEUQ);
+>> +        MemOp memop = MO_LEUQ;
+>> +
+>> +        tcg_gen_qemu_st_tl(src2l, addrl, ctx->mem_idx, memop);
+>>           tcg_gen_addi_tl(addrl, addrl, 8);
+>> -        tcg_gen_qemu_st_tl(src2h, addrl, ctx->mem_idx, MO_TEUQ);
+>> +        tcg_gen_qemu_st_tl(src2h, addrl, ctx->mem_idx, memop);
+>>       }
+>>       return true;
+>>   }
 > 
-> Thanks,
-> drew
+> We fix this to use tcg_gen_qemu_{ld,st}_i128.
 
+IIUC the target doesn't use TCGv_i128 but a pair of TCGv_i64
+named cpu_gpr[] and cpu_gprh[] (i.e. see how gen_set_gpr128()
+set them). Using tcg_gen_qemu_{ld,st}_i128() makes sense but
+implies a huge internals rewrite, which 1/ I'm not willing to
+do without tests and 2/ I won't have time to do because of
+priorities. Could we proceed with this simple patch meanwhile?
+
+Regards,
+
+Phil.
 
