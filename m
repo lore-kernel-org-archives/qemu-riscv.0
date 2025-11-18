@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59962CED255
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Nov 2025 11:00:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83299CED603
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Nov 2025 11:00:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLJRA-0005DJ-UY; Tue, 18 Nov 2025 05:59:52 -0500
+	id 1vLJR6-00057D-L2; Tue, 18 Nov 2025 05:59:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1vLJR8-0005Bm-Hz
- for qemu-riscv@nongnu.org; Tue, 18 Nov 2025 05:59:50 -0500
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ id 1vLJR4-00055X-Qz
+ for qemu-riscv@nongnu.org; Tue, 18 Nov 2025 05:59:47 -0500
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1vLJR7-0000AY-3T
- for qemu-riscv@nongnu.org; Tue, 18 Nov 2025 05:59:50 -0500
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-7a435a3fc57so5064021b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 18 Nov 2025 02:59:48 -0800 (PST)
+ id 1vLJR2-00009R-NO
+ for qemu-riscv@nongnu.org; Tue, 18 Nov 2025 05:59:46 -0500
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-b996c8db896so5476271a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 18 Nov 2025 02:59:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1763463588; x=1764068388; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BeAfhzzwLoezXUW4QEKWPyiXQiwrmDlOOpUfme2j/5E=;
- b=hkDzl0KkPTBCA9niuMj60/rQJeTFJt2weYmIeYVS21IitekMwW4aJ+20l2eHEerQXG
- ltGAvj0hZDj+ZN8dgC52smvdWoW9rmYi2OU7HyzcE/vcC8delO9Tj3vfzU2tJdlVSCbq
- lszNyZR99yqBbbmLE7AuI2K5H8k4A5fuF6MWEgPxi/LE9Oert+NFLxco7i1iiakq5VJU
- Dea8cLT6xS7qayeYNiFYetTpLSkH94IQtLFtT/UpWw9N+gMKShOIu+SesxCokW3/lQdm
- DyJtEgoOqVNBRPJLDshXKk561KH+swAHoUUkq/No9cv/VF3hHhs0KuSOdN/Ok5tmtjft
- 1+2g==
+ d=sifive.com; s=google; t=1763463583; x=1764068383; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Is3BbcfmauA71t6fvcSpUGDXXuuhKoITYqwGWhnwxuk=;
+ b=gpc3O3NfgoD3Pjqd9DBUw15ul6zjrXY88p6g3EjEkFKnWXfpKAGXW2cW0X/2TCTB+Y
+ 1ayO76SGGp0S73gXQ41FM1LK28kLrE0YlcSFI6bVspI75kfeGgNJlo1IiF+zAacWoTnF
+ 27/U3iwYLLKTJWkHKrlaYMq8QrotvSiXZUm7AoXz6MDLR/z21B0aGaB2mKO+EiaWWpKs
+ JOjSLvqHuZRVbCJ2Bj0mLMxGdYi5s6zYpjMhphcudKPKP+mB3BjQ4hnHhuNZMOTeLwvU
+ iENtTo31yvNwnNlhmiBtRWPdwqU8gkz7yzsFUjPlXdBkzjxhCS7YjuUH8aMIXV1xn2fA
+ 9xGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763463588; x=1764068388;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=BeAfhzzwLoezXUW4QEKWPyiXQiwrmDlOOpUfme2j/5E=;
- b=gXofrpavWwIu/y0tFKf30mL1Dsyqv632Rkg6q8S3KVMuzSixeOYdgwkvmch84Yl1yk
- VnzlAKAV26vs+4D4uOen/yFGNAGCt7W4Bs32eLFs2jh3k1rPwhHzIPFJ1/ROOn38DJ0K
- skwvxtrsz+bJmG1iD1IkXTyxv4I4mVKO36eR124Rh6sHA534230ZPEpnf/XuCnGRaGOu
- U7yovYBG6icEoHOxl4hwnRoofTJ0IW+oWJIZaCpcoLVaNgzr4QcY5QuvqGOn2eAG2Osz
- bozavLlkI8lGwgvByTu/6egFZWQeeXRiJwJszmCm5FGCs7dP/rymiDaRmPzwspdmYBKf
- l65g==
+ d=1e100.net; s=20230601; t=1763463583; x=1764068383;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Is3BbcfmauA71t6fvcSpUGDXXuuhKoITYqwGWhnwxuk=;
+ b=f71Y1jDqbOx8zjibqXJ7frxA1eOjCb/vW6FVqGUrjoNhq0WoALbkMnYWjL7uuUxKDB
+ +WyZvzywWCwYtkDoU03AyP46852LMO0dEs8CoBHTOubYZYNtro3+dkZ8+7BnGN0hJpXH
+ b1M/I5HvHDTIK07/eoc1LwRje0KTKx0oZ4p2ayJ0jm1nnb0ZRoRt6/0XtM0w7AoQ0635
+ G9yvYjAS8UYEH+K6BgL+aXcVUo+qkP11yhjn/rksp2dgsW10J3/PfyMTlIdAl/6ONWxz
+ u8hKjlw1PfoH+1+TRUrGoBBEOahsHZdG3AKWQP/9jaFyTBFrQkAjhT6E3DWEcKEBE7kp
+ DFxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUd+tCeEBaFv2j7XAzob1VlP4xA/8+xMPM1kHr7SFBcSJxqSiPe2FUiHt5NSJ3+zndD6jiM8e4qrcwq@nongnu.org
-X-Gm-Message-State: AOJu0YwTTPQyQZhsQEzTGwWo0MsIgh9WxeetLuitWRI5VPBMCW4F4HQc
- 2C7fT+UsrRHjh2Cfg9QliXJ8K6C8J6Ty+h0xB0OPcN68LX/6tSysWNQ5rngcBso02BQ=
-X-Gm-Gg: ASbGnctk50+wHr4OdykEKlRSgBnQ1LVVLLdD0/v2B/GTnyvzAubX0CN60tl3bxOCE/K
- s8q9ZCHp7yNPzULHFySLK0ku6aZowDkmiuK6O49NidGIsmyOWKZ99XEp8tyPAyY5s3AQkZupj/9
- NCTUFcINa7mp+u6+l2i3iVUm5LR+pF+xvAkW7SvK0roxRdhnhWldzYB6PCQvWY+0XCODa9Q/Nwv
- bJZGRuaBThZAWTNdRNCx4W8ycTFzRi6Ibszqmu4s9ypQl+ifzjsvLXu0pn9pmuKp/R3ezRmdAud
- mNqyHtz9RTwNcXQLkCWq3wV1ixSrZ/0LF8HO9UtTUm8yzsOcdpam9KzKntydyU6fgFTKEdl0lrG
- dqR/u6WGlULTlVIgdMFdyBl74vsTWyMHrSQxPWurn47e0WIn/W6CeMZjiaKluOHMlttNAFFPCnN
- 69Zn61dx5rBmxkOed8xfrCTbsNXciVbIc97t0Gx/ii97AUFyVl
-X-Google-Smtp-Source: AGHT+IEc2MitcQABfhGMFRlWqEWvpt1XO2zEb5HfUNZCS7ZD4azMbbNnUkXzpcZLGtupsytJpEP9SA==
-X-Received: by 2002:a05:7022:1e05:b0:11b:c2ea:daed with SMTP id
- a92af1059eb24-11bc2eadc31mr6464311c88.32.1763463587625; 
- Tue, 18 Nov 2025 02:59:47 -0800 (PST)
+ AJvYcCXuvkOSBfhHUqui2jFWNzRqeAyodnXZ7sQz2MQsV8ujaLJv+QeJHaxsHruhXUv0Viflo5MZpl7OrnUT@nongnu.org
+X-Gm-Message-State: AOJu0YxAkmT24Hb3zCbnr2l5ZL64lb1/u2b13iIMFp+rog2O6kTMewLm
+ E1mX13pY77BNsYcdTKl2+xgicOZ6bMjwkc2xKrFp1bznuFDNq57BvxHTN2jNWHo3u58=
+X-Gm-Gg: ASbGncs7VsDn980ss5Vjmq3Kyeb7dToaoRUZjxfuPmlqt/DCpfnWzMsDyYd1/tuWUlV
+ iVPIb2fNxgPNljVJEl/Q/nm7DOYjX7jzsT3rcZX1FsrGasJjSmz03T50FP7r5XkrYV+9vYQEzkK
+ tGBcKVGqP+OS12YlqRc9/jE5NXQT6zcJY51LRQhw0HQKvPzzZLJ3Z0+HJbLxLfMW4AIPEEUOa9H
+ BKqlDPdmGKMfnLWgaRLzzMa6YskVGjuRWdacmfPLB7wroOy1pI0NlHF8bNN7Grsl7nmP/4XXHVI
+ DTi1DmTGH2Z9fN9o4WEAKFkVVqoTHuWxrjspwXJHfXL9HqsJOdiJr9WBI1sUMvmTyqdYGI6Zf8r
+ 62GES1fZb7tINB/NpBnbjaJ7eRL2wGge4jHwKtjmxFtXRrtMuN/ySibZk2HMLRH+lwls6eFIpc2
+ frlKruGaXEY4gA9UxdQm/0OL0aOmS2VqvfUEYXkA2srIP8dWC2
+X-Google-Smtp-Source: AGHT+IFLea9ZvxKN0VmTFnwklXclNlNZD3sp+zhRfu/ROzmfWHLbucPjb4tPVJrGb9HA+xjW93+dkQ==
+X-Received: by 2002:a05:7022:f30e:b0:11b:9386:7ed2 with SMTP id
+ a92af1059eb24-11b93868332mr4049518c88.47.1763463582499; 
+ Tue, 18 Nov 2025 02:59:42 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2a49db4a36asm43989903eec.5.2025.11.18.02.59.45
+ 5a478bee46e88-2a49db4a36asm43989903eec.5.2025.11.18.02.59.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 02:59:47 -0800 (PST)
+ Tue, 18 Nov 2025 02:59:42 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -76,17 +75,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
  Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH 2/3] target/riscv: Fix pointer masking PMM field selection
- logic
-Date: Tue, 18 Nov 2025 18:59:35 +0800
-Message-ID: <20251118105936.2839054-3-frank.chang@sifive.com>
+Subject: [PATCH 0/3] Fix Zjpm implementation
+Date: Tue, 18 Nov 2025 18:59:33 +0800
+Message-ID: <20251118105936.2839054-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251118105936.2839054-1-frank.chang@sifive.com>
-References: <20251118105936.2839054-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,83 +107,30 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Frank Chang <frank.chang@sifive.com>
 
-mstatus.MPV only records the previous virtualization state, and does not
-affect pointer masking according to the Zjpm specification.
+The current Zjpm implementation has two issues:
 
-This patch rewrites riscv_pm_get_pmm() to follow the architectural
-definition of Smmpm, Smnpm, and Ssnpm.
+1. The address is shifted before obtaining the correct PMLEN value.
+2. riscv_pm_get_pmm() does not handle VS/VU modes correctly.
 
-The resulting PMM source for each mode is summarized below:
+This patchset fixes the above issues and also renames
+riscv_pm_get_virt_pmm() to riscv_pm_get_vm_ldst_pmm(), as the helper
+is only used when checking the PMM configuration for virtual-machine
+load/store instructions (HLV.* and HSV.*), rather than for VS/VU modes.
 
-  * Smmpm + Smnpm + Ssnpm:
-      M-mode:  mseccfg.PMM
-      S-mode:  menvcfg.PMM
-      U-mode:  senvcfg.PMM
-      VS-mode: henvcfg.PMM
-      VU-mode: senvcfg.PMM
+Frank Chang (2):
+  target/riscv: Fix pointer masking PMM field selection logic
+  target/riscv: Rename riscv_pm_get_virt_pmm() to
+    riscv_pm_get_vm_ldst_pmm()
 
-  * Smmpm + Smnpm (RVS implemented):
-      M-mode:  mseccfg.PMM
-      S-mode:  menvcfg.PMM
-      U/VS/VU: disabled (Ssnpm not present)
+Yong-Xuan Wang (1):
+  target/riscv: fix address masking
 
-  * Smmpm + Smnpm (RVS not implemented):
-      M-mode:  mseccfg.PMM
-      U-mode:  menvcfg.PMM
-      S/VS/VU: disabled (no S-mode)
+ target/riscv/cpu.h        |  2 +-
+ target/riscv/cpu_helper.c | 24 ++++++++++++++++--------
+ target/riscv/internals.h  |  4 ++--
+ 3 files changed, 19 insertions(+), 11 deletions(-)
 
-  * Smmpm only:
-      M-mode:  mseccfg.PMM
-      Other existing modes: pointer masking disabled
-
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/cpu_helper.c | 22 +++++++++++++++-------
- 1 file changed, 15 insertions(+), 7 deletions(-)
-
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index dd6c861a90e..112093012b0 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -154,22 +154,30 @@ RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env)
-         }
-         break;
-     case PRV_S:
--        if (riscv_cpu_cfg(env)->ext_smnpm) {
--            if (get_field(env->mstatus, MSTATUS_MPV)) {
--                return get_field(env->henvcfg, HENVCFG_PMM);
--            } else {
-+        if (!env->virt_enabled) {
-+            if (riscv_cpu_cfg(env)->ext_smnpm) {
-                 return get_field(env->menvcfg, MENVCFG_PMM);
-             }
-+        } else {
-+            if (riscv_cpu_cfg(env)->ext_ssnpm) {
-+                return get_field(env->henvcfg, HENVCFG_PMM);
-+            }
-         }
-         break;
-     case PRV_U:
--        if (riscv_has_ext(env, RVS)) {
-+        if (!env->virt_enabled) {
-             if (riscv_cpu_cfg(env)->ext_ssnpm) {
-                 return get_field(env->senvcfg, SENVCFG_PMM);
-             }
--        } else {
-+
-             if (riscv_cpu_cfg(env)->ext_smnpm) {
--                return get_field(env->menvcfg, MENVCFG_PMM);
-+                if (!riscv_has_ext(env, RVS)) {
-+                    return get_field(env->menvcfg, MENVCFG_PMM);
-+                }
-+            }
-+        } else {
-+            if (riscv_cpu_cfg(env)->ext_ssnpm) {
-+                return get_field(env->senvcfg, SENVCFG_PMM);
-             }
-         }
-         break;
--- 
+--
 2.43.0
 
 
