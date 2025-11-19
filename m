@@ -4,174 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B292CF34AD
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA458CF34B1
 	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Nov 2025 13:55:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLieZ-000268-Az; Wed, 19 Nov 2025 08:55:23 -0500
+	id 1vLieX-00025K-PW; Wed, 19 Nov 2025 08:55:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <andrew.cooper@citrix.com>)
- id 1vLi8g-0006Qh-OG; Wed, 19 Nov 2025 08:22:26 -0500
-Received: from mail-westus2azlp170120002.outbound.protection.outlook.com
- ([2a01:111:f403:c007::2] helo=MW6PR02CU001.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <andrew.cooper@citrix.com>)
- id 1vLi8c-0006VK-8N; Wed, 19 Nov 2025 08:22:25 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eEJp9XEX0TQZpIkFqLFwpHhqXQC11rYrLDNvxjrZ64gGa2t54Ebcje0mcWHQl1rPJFasQNT4rVz0paOsgY5fVlbmVCnembpug7+bEsn6q7Q8g+maBwUN1qM29FYNqyB8jXMtw9L1JjBTyRlbKRgpgus+9EDlxDkCI1oQASNxm2K3gn4KUMh2LYGzXSW4GigtRU1sejw6UIX8+G8n8PlOBGXcuR61Y/Wg6gEtkzv8wYMkcOv/h2Yv3MojTWy1XLSAQ2OKddCgbcj4gdh94blWJCozA0lS0v0lDtk/9Ke9KuBvdxbPS81t7v5Y0eYyr5pYiSZKcP2AxxW3vlhHWcd3Mw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aihNnCGI4tJ8zoQ72ytyPTqMzPj/HcLyikTFHTHi3gQ=;
- b=ZgVQ+WUBwwrvMNqTgUeIfuXJ3QnbJMU4jdomOmpcThYGLMBNOj1xYyB9cZsXSu1FRcLswrCW+pgeR02pNJjyUmgQxRebGxkW7P9x3hZBBuGeQdjQMQ2v9aVGrdSpOoAZlaitF1CvS38DLjsNi8zSRlm6ab2xs0Na/mpjIPjH1E9hlbNYV6ECnXXWyFUBpoHFww3z8Vgmn3H5E2mM1QhiLrKtTkP+cEvHBzWVnrNOvSZ6asJvV2spckxPvAQRf2wJ84YwBv+zINGVxYif/gwUXlyDkEwB8DU09q3MSf9/Fb9b8tzk3t0649aOWsDCQYsKCqYFNITkXXNvyE4hJrOqNw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aihNnCGI4tJ8zoQ72ytyPTqMzPj/HcLyikTFHTHi3gQ=;
- b=KQqrnvw5omu8qgKLy6Abb15eVBozBqLVhmpOXo7zWo88rdO1yxDAySvjyCm3OyfjGVOUWAxWCOg7A4VFTDWhnz8OUnWHHjlF2HMPs2cmLZaoddatPZ1Ub2uDiFQ1E7mzbc9Y0X7VGtC6RhkXD3gX4eaAtCCf1jzMwVcNOhxjCvA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by DS1PR03MB7989.namprd03.prod.outlook.com (2603:10b6:8:21b::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Wed, 19 Nov
- 2025 13:22:13 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::b334:94c2:4965:89b8]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::b334:94c2:4965:89b8%5]) with mapi id 15.20.9343.009; Wed, 19 Nov 2025
- 13:22:13 +0000
-Message-ID: <3ffe11b9-db81-4930-aefa-e55d758645bf@citrix.com>
-Date: Wed, 19 Nov 2025 13:22:06 +0000
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] error: Consistently name Error * objects err, and not
- errp
-To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
-Cc: kwolf@redhat.com, hreitz@redhat.com, mst@redhat.com, imammedo@redhat.com, 
- anisinha@redhat.com, gengdongjiu1@gmail.com, peter.maydell@linaro.org,
- alistair@alistair23.me, edgar.iglesias@gmail.com, npiggin@gmail.com,
- harshpb@linux.ibm.com, palmer@dabbelt.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- sstabellini@kernel.org, anthony@xenproject.org, paul@xen.org,
- berrange@redhat.com, peterx@redhat.com, farosas@suse.de, eblake@redhat.com,
- vsementsov@yandex-team.ru, eduardo@habkost.net, marcel.apfelbaum@gmail.com,
- philmd@linaro.org, wangyanan55@huawei.com, zhao1.liu@intel.com,
- qemu-block@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org
-References: <20251119130855.105479-1-armbru@redhat.com>
- <20251119130855.105479-6-armbru@redhat.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-In-Reply-To: <20251119130855.105479-6-armbru@redhat.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0326.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:18c::7) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+ (Exim 4.90_1) (envelope-from <zhiyuan.plct@isrc.iscas.ac.cn>)
+ id 1vLgLh-0007xG-Dt; Wed, 19 Nov 2025 06:27:45 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <zhiyuan.plct@isrc.iscas.ac.cn>)
+ id 1vLgLe-0007l3-GK; Wed, 19 Nov 2025 06:27:45 -0500
+Received: from chenxiaoou-ubuntu-02.. (unknown [210.73.43.101])
+ by APP-01 (Coremail) with SMTP id qwCowAD3js6gqR1pq9FAAQ--.30793S2;
+ Wed, 19 Nov 2025 19:27:29 +0800 (CST)
+From: TravisYang <zhiyuan.plct@isrc.iscas.ac.cn>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: =?UTF-8?q?=E6=9D=A8=E6=99=BA=E6=BA=90?= <zhiyuan.plct@isrc.iscas.ac.cn>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: [PATCH v1] target/riscv: add support for RV64 THEAD C910 CPU
+Date: Wed, 19 Nov 2025 11:27:24 +0000
+Message-Id: <20251119112724.1342110-1-zhiyuan.plct@isrc.iscas.ac.cn>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|DS1PR03MB7989:EE_
-X-MS-Office365-Filtering-Correlation-Id: 38c1ebd8-acb5-4a89-379e-08de276ea6dc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?U1VFeFE4alBsRm04SVcweEhSeG5zUjE5L01pYXVqM0VLdytpNnNaN1NGa0x3?=
- =?utf-8?B?YXIrZURDM0dnaFZCTHd5STh4YlFvMGtBK0VNQ2UyYVY0aWVZK2pYdnQvR1h4?=
- =?utf-8?B?eHU2Uis2Rzl6OGJaMVhwTzRvb0dmb3JNVUhYYWx5dVpUcUtYS1A1aG5UWEVB?=
- =?utf-8?B?dXRVNjN0elRQWXExaUpWbkE4b3NxVzVMM2R0blRuSW82bHFob1dSVXJvK0Ny?=
- =?utf-8?B?ZXdITEtUVFdaT0Q1OHJhRFZwaWZoZ2NoUkgvek1QRlhRbXo1MVZRVXdyVDI5?=
- =?utf-8?B?OFdLUC9yQWY0NkxRbTRYM0kyTzNCaGVBSm5oa3hzNmM2YXl0OGZiODZzVit4?=
- =?utf-8?B?MmpRL0p1MzlVSkN0dEpWcEpUS2RDaVVpWUJCOStRRkI1UTlmRUVKL2J1dzlY?=
- =?utf-8?B?SzA0RTJMWWg4T2ZwazlRaFBBeXhxVDZUN0hCcFd2cVc1bXpKYlpRbElDSGtq?=
- =?utf-8?B?Z2Z2bHNtbDI3WkdDdkJwODlmSzE4TGlCcmZKWEJEdFJPN2gwTEdSR0ovK0hE?=
- =?utf-8?B?QzNLQXhtMU04NXFvYUFjUkNJTXdPVndoRXllR3drcWRuZk5OTkRja1FPMEVV?=
- =?utf-8?B?M3BOYW1xRXFXZVN5dGFrSUVjbzd1S1BNU1NqY0E0OXI3VUEyOGdoM3ZxVkpw?=
- =?utf-8?B?NGIrLyt1Szl0dmxQL3F4UjE4UlRwdEYrQXgzZnlPRmJxZE9FT2lhZUFFSXQw?=
- =?utf-8?B?eFQxTWZwZTBVNExBZWlKSzFSbXJxVlhUSFExaHUrQ25Xa0R1ZEg5KzhZVmcy?=
- =?utf-8?B?MnJHUEQ4SllYNTVOdHExd3RZVWRYNUdwczFBbVJqWkRXdGpFMXNhV1IvbXNS?=
- =?utf-8?B?MHJOTXRacmFNaG9TOW1DeHNXVUlrei9GbWhVaGF5Q01DUnYxOUpUdG9uUkpB?=
- =?utf-8?B?Wlk0YUEvbmJDd0ZJTVBXakdqY3dNRFg3dzRvRm1iNHdSYXMrZlZwVGw5WGpt?=
- =?utf-8?B?TlVFMWxmN2c3Ui9DRXh6WlR6dFYzN0R1QUtJSm44MFFwNkxVMnM2a2hCbjVK?=
- =?utf-8?B?dytVOGQ2MzdKZ2xJanJJTHphM2xFb3QwYnQ3R3U3LzV5Zmlqa2FQdUJIcjhZ?=
- =?utf-8?B?UkpPall3NWZyak8zWndYZE1IM2pSbDA4RTlCaEhYYWYzNVF0NUgwaUR3MDQ5?=
- =?utf-8?B?K0JUdmoxRDZJbXFuazZUcTNTZlpnVGtyKzNudHZHN0FMNDV4L2dpMEJSMVZ6?=
- =?utf-8?B?Tk90djdoWStPa1BmVnpMdW9seHZUNklUclVWT2NOeEt2VTNOSFNkMU1kWEtl?=
- =?utf-8?B?bC9WeUk0QnRJWVRMQ1lYLzZOVDV2S2JNcU4wWG4wQ1A3eExDRTg1b0Izc2Rm?=
- =?utf-8?B?MVM3T0NGV2dhTVlDdkI4NDVwMTl6L3JaNmN3MFU0WnhmSkhqU3kyVWJzM3FS?=
- =?utf-8?B?K2xIMGpmNVZMYXJaVGNzQ2xOdkQxNG5icHFHZVlYR3k0U0R6UWtSZ0Fxa0Zj?=
- =?utf-8?B?bEpaZ1hIdkQ2UEd4dDNKVFp2YStNQk9mSUhUOU13eU9ka2hjOHlUcEJYcVBk?=
- =?utf-8?B?K0ZkcFdLeVZoQ0VnMFR5S1d3YThXeFNKMitKempocFd1UENndk1MQUZRL1Z1?=
- =?utf-8?B?M21tUmxhcXRYNzR0UHNvdWxmMURYVU9HVGFNSUs4Vi9EV20yU3VxejFSUVlG?=
- =?utf-8?B?RXBNMTM5cmlpdEUrNkZ4cW5IVTVZeUcvOGhhOWVRVUpBWUdDR2lRUitDeFdH?=
- =?utf-8?B?UEFTM0VUZjRDYlZCdkZ5bUgwOFpmakdNZmQ3NlpQNGI0SDl3VnpPa2kxMlpY?=
- =?utf-8?B?ZHJHSnZFdmVZQklqRkx1Z2FsektHbVAwT3AwbTlMZWJQUXlVaUVYNU8rNFZi?=
- =?utf-8?B?NWZoVDZ4T0s3c1VHZVM3Y3RMeTgvUWcyTmhyeDEyUHFXLzRXUndhZVhVa0Vp?=
- =?utf-8?B?allNNmtRVHpjelMrT3NCYnIvdlVvZEtPNVh0NkxBYTZmcEZUaCtDTFRFMU9r?=
- =?utf-8?Q?amf2NRy23zoKE8eFNIXuOL5nbM46onOY?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH8PR03MB8275.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZnFtWGVrZXp3bG9SWENBSWZ0TWRncGJpcHFwbWVDT0wxRVR5RDYvaUJTVTNh?=
- =?utf-8?B?Qmo0ZXhmdk0yVUlrdmF0S25nK056WEZOWENNZ2hpZytqb1RxZE50RHNFNks0?=
- =?utf-8?B?RU1sa0RLN3pMQWdrdzNZc2FzZDMrNWJtN3Btd0o1Z2hHNHQ1d1VHV1dmd2lL?=
- =?utf-8?B?Q1l6dGpmY3lEL1kwZmw3eTJWaGF5aitxYUVJTjNxaUJiNVVyTDBRaUsvVEJS?=
- =?utf-8?B?Mk1sdVEyQ0piTDVRSS9xU2p1UTBsSzVjeGp3QmlMUGhuaW5vdFNnczdhbHYy?=
- =?utf-8?B?aGtZdzYrZG4wUkZoM2dzdU5IWHBxbjRlSk4zOXc3bTYrcHNWUlhBbHEyRGE1?=
- =?utf-8?B?c0N6RGJQaS9weVJ3eUQ2RjZ6cGpJT3N2bjRMRE1aRkFkclZXa3Q2bWlxV2Na?=
- =?utf-8?B?QVUvTVlwUURiZjRKMStvTnZleUFOaDRnaGVjdTZxNWdNU0NMVERuWXRLZ2sx?=
- =?utf-8?B?SEZvaWdnU3VEWUVYS3dCM2R2cGVWZjlQdlQ3TmU0aUlyY3A1S0F2b2lzaHVM?=
- =?utf-8?B?YlY4RnZ2ZXZWS2xrc3hTREdsa2F0dGFUVHJkSDkzNStXOXdXU09jeTNoRzJV?=
- =?utf-8?B?Z3I1YTJPOGx6enNYSERETGdPVWxOUFl4Q2doeUZRRTVxWGkxcVA4NVYrLzBQ?=
- =?utf-8?B?d1VwdTR0K0NwUDA4VzdJQk1Jd3Bla0t0OW5HWXk4MlZmdi9tcEpVUG1ncSs1?=
- =?utf-8?B?RGVPMmgvSmtKMVR0OE9zUXFjeVhiaStxNGNRYkZMbkVXVlZmREVRczJIZ0RO?=
- =?utf-8?B?QnlMTUNJTGdRQlpOaWFCdHBTQnArcWRsNWxsdDZ6dEd0dnN0UFY0YjJiZlI1?=
- =?utf-8?B?NEdtdG9mdTk0a09mSXJ6eUg0QWhjb3I2UFpGOVNXRlJLWFIxUVptSFBYVTNw?=
- =?utf-8?B?WHlOWDN2U2ZDM2FlVVNxc1A2d0EzM3NBTWIzQTE2VUM4ekRscTFJVEdpc213?=
- =?utf-8?B?ZTBFaWNDaFhvemcvazVrRTQ3YjNnZkdLU3VtS0tKaCtyNk1XLzJ3Q3hkbTNB?=
- =?utf-8?B?aUZUYlJ2aU9OcitOQWI1TndVa3BWNWtCbVVhbk00V3oyMmRkZFNZY1JPeGF2?=
- =?utf-8?B?cHhLTDhndGJuZlAzSnJiUlRyZVk1NDFya0MzSXlFVVRWSUJRb0JyUDExcDFR?=
- =?utf-8?B?dS8wdEZmMHJOMUFPK3JwS2JKSzBQZTNXNVFIOEYrZnZMeTMyM0Vvb2FBNVV6?=
- =?utf-8?B?VjROZExuQlRLZCsybkV3dzRKbnVyaElrUmowL05OV2JIR29QaDNhR1huMDRx?=
- =?utf-8?B?d2ZjcGVlMWtjSGZXZGovSWJpK3hHL2dldlZGbUk4Z1V6eDhGVDZ1U1Q4QkRJ?=
- =?utf-8?B?c2oxMWc2OHNSUzc1dktLYmlHdlJGWlZza1FZR0Q1dUFhTTczaG54SFBoUndZ?=
- =?utf-8?B?N2hKQ1pKbUZSdEl6R0xaV3l0RkRiR3QwY2hkTXQyWjRLSm9weXBZcU1PRDl5?=
- =?utf-8?B?elpSeS9CdWJSUmdvOUtlbm5qRjF3MkJUaTZhUGJpM3JpMitOb01LYXFGcFEx?=
- =?utf-8?B?WnNObUhyUi9OVGZTUE1rVGl3T1BObU1FTHVXT2tTUzg0bG5Gd3Y5M2VWSTZG?=
- =?utf-8?B?UDRIK3JrdzZ5NGNmaHJnZENvYW1ac0dCcjVoeFFaaXA4QUp2WE1KSVAxRnJO?=
- =?utf-8?B?WCsrNGEzSkFYOENwWE5MN09TdzhYUnRXeUMwK3JRSkh4dWFDVGtpTE9Cc0w3?=
- =?utf-8?B?NnkzM0xrVHJueGQyOVJPQ0ZIUHptYW1OSXNjL0s1alduSE5yUEtKY0RQcC92?=
- =?utf-8?B?SFRHTWpTenpTUlNUVGROL0NRWm5kSGlXbjFkcUFVRzBmbGYyMmN4ZHZ1bXdF?=
- =?utf-8?B?UEJVcFRGMkdYbU1xZUJzand5QVhSZCtUdi9RbjJiYUVBZ3hETkhjSmttM25m?=
- =?utf-8?B?YzlvV1BBZmJTa1FYRXBmZ3RZU1BVQWFzUWx3SFp3Y3dEVTY4YjdUSFFHcEpQ?=
- =?utf-8?B?SFI1a0lERUhSbW5TUTRaN1JTZXpObmJGZHJTcDVIeS81NDJWcTN5cEI2cWQ4?=
- =?utf-8?B?Kzd6L2FYQ0FiTjFmUS9ZTGdGQXlFdXpHM2E0N3dNTTdvYm53SGl3UHlYbThG?=
- =?utf-8?B?aXB0QjZpWjcydENBUEIxeFR3cTQ4SGN5R3R5QWRlYW0yTUJLYk14U3ZuVzlv?=
- =?utf-8?B?L3lWU0p2R0lFME1RZ01FeDEyTlhIZGl4NlJ5ZzBwSmlwR2dPWURyeXFveUVy?=
- =?utf-8?B?c1E9PQ==?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 38c1ebd8-acb5-4a89-379e-08de276ea6dc
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2025 13:22:13.3227 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IV97UAwBFJ6bMGnajwqCPvyrxiVdAL9INiK3J3Ly+fIs+JwJYzpYKB7epKIQfrg4h46BCho8oFqe+DnV8wUpOaWA1TG+Q/De73LxSCJ3j84=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS1PR03MB7989
-Received-SPF: pass client-ip=2a01:111:f403:c007::2;
- envelope-from=andrew.cooper@citrix.com;
- helo=MW6PR02CU001.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowAD3js6gqR1pq9FAAQ--.30793S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAF4UWr1UAF4UCr43ZF18Xwb_yoW5XrW8pr
+ 15GFZ0k34DJFZrtws3JFWDXrn5Wr4ru3yIg3sxZ3ZrGr4akFW3Jrn7JrWDGr4vqF1rJ3WF
+ gr18Cw15Gws0qa7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9Y14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWUuVWrJwAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j
+ 6r4UM28EF7xvwVC2z280aVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
+ 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VCY1x0262k0Y48FwI0_Jr0_Gr1lYx0Ex4A2jsIE14v26F
+ 4j6r4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS
+ 5cI20VAGYxC7MxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFV
+ Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
+ x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
+ 1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_
+ JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCT
+ nIWIevJa73UjIFyTuYvjfUYWrWUUUUU
+X-Originating-IP: [210.73.43.101]
+X-CM-SenderInfo: 52kl53ddqo1z1fw6x21ufox2xfdvhtffof0/
+Received-SPF: pass client-ip=159.226.251.21;
+ envelope-from=zhiyuan.plct@isrc.iscas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Wed, 19 Nov 2025 08:55:20 -0500
 X-BeenThere: qemu-riscv@nongnu.org
@@ -188,42 +79,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 19/11/2025 1:08 pm, Markus Armbruster wrote:
-> diff --git a/hw/xen/xen-pvh-common.c b/hw/xen/xen-pvh-common.c
-> index b93ff80c85..3e62ec09d0 100644
-> --- a/hw/xen/xen-pvh-common.c
-> +++ b/hw/xen/xen-pvh-common.c
-> @@ -101,7 +101,7 @@ static void xen_create_virtio_mmio_devices(XenPVHMachineState *s)
->  #ifdef CONFIG_TPM
->  static void xen_enable_tpm(XenPVHMachineState *s)
->  {
-> -    Error *errp = NULL;
-> +    Error *err = NULL;
->      DeviceState *dev;
->      SysBusDevice *busdev;
->  
-> @@ -111,8 +111,15 @@ static void xen_enable_tpm(XenPVHMachineState *s)
->          return;
->      }
->      dev = qdev_new(TYPE_TPM_TIS_SYSBUS);
-> -    object_property_set_link(OBJECT(dev), "tpmdev", OBJECT(be), &errp);
-> -    object_property_set_str(OBJECT(dev), "tpmdev", be->id, &errp);
-> +    /*
-> +     * FIXME This use of &err is is wrong.  If both calls fail, the
-> +     * second will trip error_setv()'s assertion.  If just one call
-> +     * fails, we leak an Error object.  Setting the same property
-> +     * twice (first to a QOM path, then to an ID string) is almost
-> +     * certainly wrong, too.
-> +     */
-> +    object_property_set_link(OBJECT(dev), "tpmdev", OBJECT(be), &err);
-> +    object_property_set_str(OBJECT(dev), "tpmdev", be->id, &err);
+From: 杨智源 <zhiyuan.plct@isrc.iscas.ac.cn>
 
-To your question, I don't know the answer, but I think it's far more
-likely that the original author didn't grok the proper use of &errp,
-than for this behaviour to be intentional.
+Add a CPU entry for the RV64 THEAD C910 CPU which supports single-core
+and dual-core configurations.More details can be found at
+https://www.xrvm.cn/product/xuantie/C910?spm=a2d5.28054257.0.0.4a0f7a32qXoU1w
 
-Surely we just want a failure path and abort the construction if this
-goes wrong?
+Signed-off-by: TravisYang <zhiyuan.plct@isrc.iscas.ac.cn>
+---
+ target/riscv/cpu-qom.h |  1 +
+ target/riscv/cpu.c     | 47 ++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 48 insertions(+)
 
-~Andrew
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index 75f4e43408..1fc8140190 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -56,6 +56,7 @@
+ #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
+ #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
+ #define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
++#define TYPE_RISCV_CPU_THEAD_C910       RISCV_CPU_TYPE_NAME("thead-c910")
+ #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+ 
+ OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index ae8b721e55..f522bc856b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -3281,6 +3281,53 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .cfg.max_satp_mode = VM_1_10_SV48,
+     ),
+ 
++    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_THEAD_C910, TYPE_RISCV_VENDOR_CPU,
++        .misa_mxl_max = MXL_RV64,
++        .misa_ext = RVG | RVC | RVS | RVU,
++        .priv_spec = PRIV_VERSION_1_12_0,
++
++        .cfg.ext_zcf = true,
++        .cfg.ext_zcd = true,
++        .cfg.ext_zfa = true,
++        .cfg.ext_zfh = true,
++        .cfg.ext_zfhmin = true,
++
++        .cfg.mmu = true,
++        .cfg.ext_xtheadba = true,
++        .cfg.ext_xtheadbb = true,
++        .cfg.ext_xtheadbs = true,
++        .cfg.ext_xtheadcmo = true,
++        .cfg.ext_xtheadcondmov = true,
++        .cfg.ext_xtheadfmemidx = true,
++        .cfg.ext_xtheadmac = true,
++        .cfg.ext_xtheadmemidx = true,
++        .cfg.ext_xtheadmempair = true,
++        .cfg.ext_xtheadsync = true,
++        .cfg.pmp = true,
++
++        .cfg.ext_svinval = true,
++        .cfg.ext_svadu = true,
++        .cfg.ext_zicbom = true,
++        .cfg.ext_zicboz = true,
++
++        .cfg.ext_zba = true,
++        .cfg.ext_zbb = true,
++        .cfg.ext_zbc = true,
++        .cfg.ext_zbs = true,
++
++        .cfg.ext_zknd = true,
++        .cfg.ext_zkne = true,
++        .cfg.ext_zknh = true,
++
++        .cfg.mvendorid = THEAD_VENDOR_ID,
++
++        .cfg.max_satp_mode = VM_1_10_SV39,
++#ifndef CONFIG_USER_ONLY
++        .custom_csrs = th_csr_list,
++#endif
++    ),
++
++
+ #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+     DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
+         .cfg.max_satp_mode = VM_1_10_SV57,
+-- 
+2.34.1
+
 
