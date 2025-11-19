@@ -4,67 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA458CF34B1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Nov 2025 13:55:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1606CF3972
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Nov 2025 17:05:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLieX-00025K-PW; Wed, 19 Nov 2025 08:55:21 -0500
+	id 1vLlc1-0004uW-6e; Wed, 19 Nov 2025 12:04:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiyuan.plct@isrc.iscas.ac.cn>)
- id 1vLgLh-0007xG-Dt; Wed, 19 Nov 2025 06:27:45 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <zhiyuan.plct@isrc.iscas.ac.cn>)
- id 1vLgLe-0007l3-GK; Wed, 19 Nov 2025 06:27:45 -0500
-Received: from chenxiaoou-ubuntu-02.. (unknown [210.73.43.101])
- by APP-01 (Coremail) with SMTP id qwCowAD3js6gqR1pq9FAAQ--.30793S2;
- Wed, 19 Nov 2025 19:27:29 +0800 (CST)
-From: TravisYang <zhiyuan.plct@isrc.iscas.ac.cn>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: =?UTF-8?q?=E6=9D=A8=E6=99=BA=E6=BA=90?= <zhiyuan.plct@isrc.iscas.ac.cn>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v1] target/riscv: add support for RV64 THEAD C910 CPU
-Date: Wed, 19 Nov 2025 11:27:24 +0000
-Message-Id: <20251119112724.1342110-1-zhiyuan.plct@isrc.iscas.ac.cn>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
+ id 1vLl8j-0006p8-2x; Wed, 19 Nov 2025 11:34:41 -0500
+Received: from forwardcorp1a.mail.yandex.net ([178.154.239.72])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
+ id 1vLl8g-00027k-7b; Wed, 19 Nov 2025 11:34:40 -0500
+Received: from mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c1f:3a87:0:640:845c:0])
+ by forwardcorp1a.mail.yandex.net (Yandex) with ESMTPS id 7BFCAC0678;
+ Wed, 19 Nov 2025 19:34:30 +0300 (MSK)
+Received: from [IPV6:2a02:6bf:8080:d4f::1:a] (unknown [2a02:6bf:8080:d4f::1:a])
+ by mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net (smtpcorp/Yandex) with
+ ESMTPSA id QYZPeU1FLa60-mQxSyg0n; Wed, 19 Nov 2025 19:34:30 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+ s=default; t=1763570070;
+ bh=nvUxf4V4e/z9dwNpB0No3uc5zUvVA+AcUD4f7gSNLCY=;
+ h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
+ b=b4HvaIDkLdN13ZIRsj7vpKOom9PrDP1UVvmJwn5Ej4iOeBldqY/rc59PIRJWV6Jfk
+ Rc+59oFHW2OhaV1fIpTz2cPhhqz+U1DoFm08nRC734t1aRTOAqTleRaQ9XC9f2fWVb
+ NOHTrES/em7yeh3uIebA6z4lvlE5ELFCJo0LMEgE=
+Authentication-Results: mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net;
+ dkim=pass header.i=@yandex-team.ru
+Message-ID: <bf44d9cd-806a-4d2c-8cff-0a88222959ed@yandex-team.ru>
+Date: Wed, 19 Nov 2025 19:34:26 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAD3js6gqR1pq9FAAQ--.30793S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxAF4UWr1UAF4UCr43ZF18Xwb_yoW5XrW8pr
- 15GFZ0k34DJFZrtws3JFWDXrn5Wr4ru3yIg3sxZ3ZrGr4akFW3Jrn7JrWDGr4vqF1rJ3WF
- gr18Cw15Gws0qa7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9Y14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWUuVWrJwAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j
- 6r4UM28EF7xvwVC2z280aVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
- 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VCY1x0262k0Y48FwI0_Jr0_Gr1lYx0Ex4A2jsIE14v26F
- 4j6r4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS
- 5cI20VAGYxC7MxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFV
- Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
- x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
- 1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_
- JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCT
- nIWIevJa73UjIFyTuYvjfUYWrWUUUUU
-X-Originating-IP: [210.73.43.101]
-X-CM-SenderInfo: 52kl53ddqo1z1fw6x21ufox2xfdvhtffof0/
-Received-SPF: pass client-ip=159.226.251.21;
- envelope-from=zhiyuan.plct@isrc.iscas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] hw/core/loader: Make load_elf_hdr() return bool,
+ simplify caller
+To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
+Cc: kwolf@redhat.com, hreitz@redhat.com, mst@redhat.com, imammedo@redhat.com, 
+ anisinha@redhat.com, gengdongjiu1@gmail.com, peter.maydell@linaro.org,
+ alistair@alistair23.me, edgar.iglesias@gmail.com, npiggin@gmail.com,
+ harshpb@linux.ibm.com, palmer@dabbelt.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ sstabellini@kernel.org, anthony@xenproject.org, paul@xen.org,
+ berrange@redhat.com, peterx@redhat.com, farosas@suse.de, eblake@redhat.com,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
+ wangyanan55@huawei.com, zhao1.liu@intel.com, qemu-block@nongnu.org,
+ qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ xen-devel@lists.xenproject.org
+References: <20251119130855.105479-1-armbru@redhat.com>
+ <20251119130855.105479-2-armbru@redhat.com>
+Content-Language: en-US
+From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+In-Reply-To: <20251119130855.105479-2-armbru@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=178.154.239.72;
+ envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1a.mail.yandex.net
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 19 Nov 2025 08:55:20 -0500
+X-Mailman-Approved-At: Wed, 19 Nov 2025 12:04:54 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,89 +86,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: 杨智源 <zhiyuan.plct@isrc.iscas.ac.cn>
+On 19.11.25 16:08, Markus Armbruster wrote:
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
 
-Add a CPU entry for the RV64 THEAD C910 CPU which supports single-core
-and dual-core configurations.More details can be found at
-https://www.xrvm.cn/product/xuantie/C910?spm=a2d5.28054257.0.0.4a0f7a32qXoU1w
+Reviewed-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
 
-Signed-off-by: TravisYang <zhiyuan.plct@isrc.iscas.ac.cn>
----
- target/riscv/cpu-qom.h |  1 +
- target/riscv/cpu.c     | 47 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 48 insertions(+)
+> ---
+>   include/hw/loader.h |  4 +++-
+>   hw/arm/boot.c       |  6 +-----
+>   hw/core/loader.c    |  8 ++++++--
+>   hw/riscv/spike.c    | 10 +---------
+>   4 files changed, 11 insertions(+), 17 deletions(-)
+> 
+> diff --git a/include/hw/loader.h b/include/hw/loader.h
+> index d035e72748..6f91703503 100644
+> --- a/include/hw/loader.h
+> +++ b/include/hw/loader.h
+> @@ -188,8 +188,10 @@ ssize_t load_elf(const char *filename,
+>    *
+>    * Inspect an ELF file's header. Read its full header contents into a
+>    * buffer and/or determine if the ELF is 64bit.
+> + *
+> + * Returns true on success, false on failure.
 
-diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-index 75f4e43408..1fc8140190 100644
---- a/target/riscv/cpu-qom.h
-+++ b/target/riscv/cpu-qom.h
-@@ -56,6 +56,7 @@
- #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
- #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
- #define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
-+#define TYPE_RISCV_CPU_THEAD_C910       RISCV_CPU_TYPE_NAME("thead-c910")
- #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
- 
- OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ae8b721e55..f522bc856b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -3281,6 +3281,53 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.max_satp_mode = VM_1_10_SV48,
-     ),
- 
-+    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_THEAD_C910, TYPE_RISCV_VENDOR_CPU,
-+        .misa_mxl_max = MXL_RV64,
-+        .misa_ext = RVG | RVC | RVS | RVU,
-+        .priv_spec = PRIV_VERSION_1_12_0,
-+
-+        .cfg.ext_zcf = true,
-+        .cfg.ext_zcd = true,
-+        .cfg.ext_zfa = true,
-+        .cfg.ext_zfh = true,
-+        .cfg.ext_zfhmin = true,
-+
-+        .cfg.mmu = true,
-+        .cfg.ext_xtheadba = true,
-+        .cfg.ext_xtheadbb = true,
-+        .cfg.ext_xtheadbs = true,
-+        .cfg.ext_xtheadcmo = true,
-+        .cfg.ext_xtheadcondmov = true,
-+        .cfg.ext_xtheadfmemidx = true,
-+        .cfg.ext_xtheadmac = true,
-+        .cfg.ext_xtheadmemidx = true,
-+        .cfg.ext_xtheadmempair = true,
-+        .cfg.ext_xtheadsync = true,
-+        .cfg.pmp = true,
-+
-+        .cfg.ext_svinval = true,
-+        .cfg.ext_svadu = true,
-+        .cfg.ext_zicbom = true,
-+        .cfg.ext_zicboz = true,
-+
-+        .cfg.ext_zba = true,
-+        .cfg.ext_zbb = true,
-+        .cfg.ext_zbc = true,
-+        .cfg.ext_zbs = true,
-+
-+        .cfg.ext_zknd = true,
-+        .cfg.ext_zkne = true,
-+        .cfg.ext_zknh = true,
-+
-+        .cfg.mvendorid = THEAD_VENDOR_ID,
-+
-+        .cfg.max_satp_mode = VM_1_10_SV39,
-+#ifndef CONFIG_USER_ONLY
-+        .custom_csrs = th_csr_list,
-+#endif
-+    ),
-+
-+
- #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-     DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
-         .cfg.max_satp_mode = VM_1_10_SV57,
+I don't really care, but IMO, it's obvious contract for bool+errp functions, not worth a comment.
+
+>    */
+> -void load_elf_hdr(const char *filename, void *hdr, bool *is64, Error **errp);
+> +bool load_elf_hdr(const char *filename, void *hdr, bool *is64, Error **errp);
+>   
+>   ssize_t load_aout(const char *filename, hwaddr addr, int max_sz,
+>                     bool big_endian, hwaddr target_page_size);
+
 -- 
-2.34.1
-
+Best regards,
+Vladimir
 
