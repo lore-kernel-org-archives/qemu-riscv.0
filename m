@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1606CF3972
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Nov 2025 17:05:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73366CF3959
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Nov 2025 17:05:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLlc1-0004uW-6e; Wed, 19 Nov 2025 12:04:57 -0500
+	id 1vLlc2-0004vP-I5; Wed, 19 Nov 2025 12:04:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1vLl8j-0006p8-2x; Wed, 19 Nov 2025 11:34:41 -0500
-Received: from forwardcorp1a.mail.yandex.net ([178.154.239.72])
+ id 1vLlIo-0005HI-Sw; Wed, 19 Nov 2025 11:45:07 -0500
+Received: from forwardcorp1b.mail.yandex.net ([178.154.239.136])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1vLl8g-00027k-7b; Wed, 19 Nov 2025 11:34:40 -0500
-Received: from mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net
- (mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net
- [IPv6:2a02:6b8:c1f:3a87:0:640:845c:0])
- by forwardcorp1a.mail.yandex.net (Yandex) with ESMTPS id 7BFCAC0678;
- Wed, 19 Nov 2025 19:34:30 +0300 (MSK)
+ id 1vLlIn-0003yx-84; Wed, 19 Nov 2025 11:45:06 -0500
+Received: from mail-nwsmtp-smtp-corp-canary-81.sas.yp-c.yandex.net
+ (mail-nwsmtp-smtp-corp-canary-81.sas.yp-c.yandex.net
+ [IPv6:2a02:6b8:c10:49f:0:640:b99a:0])
+ by forwardcorp1b.mail.yandex.net (Yandex) with ESMTPS id F27A3893AA;
+ Wed, 19 Nov 2025 19:45:00 +0300 (MSK)
 Received: from [IPV6:2a02:6bf:8080:d4f::1:a] (unknown [2a02:6bf:8080:d4f::1:a])
- by mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net (smtpcorp/Yandex) with
- ESMTPSA id QYZPeU1FLa60-mQxSyg0n; Wed, 19 Nov 2025 19:34:30 +0300
+ by mail-nwsmtp-smtp-corp-canary-81.sas.yp-c.yandex.net (smtpcorp/Yandex) with
+ ESMTPSA id uiZX4u1FEiE0-dyR3VX9a; Wed, 19 Nov 2025 19:45:00 +0300
 X-Yandex-Fwd: 1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
- s=default; t=1763570070;
- bh=nvUxf4V4e/z9dwNpB0No3uc5zUvVA+AcUD4f7gSNLCY=;
+ s=default; t=1763570700;
+ bh=s5SGDEOXCffdPGa2ExWMjbXnxXE80V2KPR7fbbbsK78=;
  h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
- b=b4HvaIDkLdN13ZIRsj7vpKOom9PrDP1UVvmJwn5Ej4iOeBldqY/rc59PIRJWV6Jfk
- Rc+59oFHW2OhaV1fIpTz2cPhhqz+U1DoFm08nRC734t1aRTOAqTleRaQ9XC9f2fWVb
- NOHTrES/em7yeh3uIebA6z4lvlE5ELFCJo0LMEgE=
-Authentication-Results: mail-nwsmtp-smtp-corp-main-69.vla.yp-c.yandex.net;
+ b=oMT+pXOJswxjJJq1zanTvP8KS2EylucYuHPNHD4L6q6KUnf3xGj709hkkW/XV2ahX
+ I/57FU9PC3BrCmtaQu/FF2c0XnjgR2Zdb67j8D18YC3cxQWboyaRHjFJTVx/WeUBJa
+ JsLwq61D96jB+ELIc9XI/coQIf63FBxXzkOXgr2E=
+Authentication-Results: mail-nwsmtp-smtp-corp-canary-81.sas.yp-c.yandex.net;
  dkim=pass header.i=@yandex-team.ru
-Message-ID: <bf44d9cd-806a-4d2c-8cff-0a88222959ed@yandex-team.ru>
-Date: Wed, 19 Nov 2025 19:34:26 +0300
+Message-ID: <0a07425e-ddee-4942-8ae7-dc8b801b1595@yandex-team.ru>
+Date: Wed, 19 Nov 2025 19:44:56 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] hw/core/loader: Make load_elf_hdr() return bool,
- simplify caller
+Subject: Re: [PATCH 4/5] error: error_free(NULL) is safe, drop unnecessary
+ conditionals
 To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
 Cc: kwolf@redhat.com, hreitz@redhat.com, mst@redhat.com, imammedo@redhat.com, 
  anisinha@redhat.com, gengdongjiu1@gmail.com, peter.maydell@linaro.org,
@@ -55,14 +55,14 @@ Cc: kwolf@redhat.com, hreitz@redhat.com, mst@redhat.com, imammedo@redhat.com,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  xen-devel@lists.xenproject.org
 References: <20251119130855.105479-1-armbru@redhat.com>
- <20251119130855.105479-2-armbru@redhat.com>
+ <20251119130855.105479-5-armbru@redhat.com>
 Content-Language: en-US
 From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-In-Reply-To: <20251119130855.105479-2-armbru@redhat.com>
+In-Reply-To: <20251119130855.105479-5-armbru@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=178.154.239.72;
- envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1a.mail.yandex.net
+Received-SPF: pass client-ip=178.154.239.136;
+ envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1b.mail.yandex.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -87,36 +87,9 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 19.11.25 16:08, Markus Armbruster wrote:
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> Signed-off-by: Markus Armbruster<armbru@redhat.com>
 
 Reviewed-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-
-> ---
->   include/hw/loader.h |  4 +++-
->   hw/arm/boot.c       |  6 +-----
->   hw/core/loader.c    |  8 ++++++--
->   hw/riscv/spike.c    | 10 +---------
->   4 files changed, 11 insertions(+), 17 deletions(-)
-> 
-> diff --git a/include/hw/loader.h b/include/hw/loader.h
-> index d035e72748..6f91703503 100644
-> --- a/include/hw/loader.h
-> +++ b/include/hw/loader.h
-> @@ -188,8 +188,10 @@ ssize_t load_elf(const char *filename,
->    *
->    * Inspect an ELF file's header. Read its full header contents into a
->    * buffer and/or determine if the ELF is 64bit.
-> + *
-> + * Returns true on success, false on failure.
-
-I don't really care, but IMO, it's obvious contract for bool+errp functions, not worth a comment.
-
->    */
-> -void load_elf_hdr(const char *filename, void *hdr, bool *is64, Error **errp);
-> +bool load_elf_hdr(const char *filename, void *hdr, bool *is64, Error **errp);
->   
->   ssize_t load_aout(const char *filename, hwaddr addr, int max_sz,
->                     bool big_endian, hwaddr target_page_size);
 
 -- 
 Best regards,
