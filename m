@@ -4,101 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 762C2CF58C8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Nov 2025 18:09:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AB32CF58C9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Nov 2025 19:11:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLmcm-0003Bo-DI; Wed, 19 Nov 2025 13:09:48 -0500
+	id 1vLnaE-0003zp-An; Wed, 19 Nov 2025 14:11:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1vLmch-000393-Kt
- for qemu-riscv@nongnu.org; Wed, 19 Nov 2025 13:09:43 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vLnaA-0003x7-2X
+ for qemu-riscv@nongnu.org; Wed, 19 Nov 2025 14:11:10 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peterx@redhat.com>) id 1vLmcg-0002wn-9x
- for qemu-riscv@nongnu.org; Wed, 19 Nov 2025 13:09:43 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vLna6-0003Sx-0u
+ for qemu-riscv@nongnu.org; Wed, 19 Nov 2025 14:11:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1763575781;
+ s=mimecast20190719; t=1763579464;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=iWKuGlFXZQJhDckFQcgt5gxApYJTrA/9Towipm9l4OQ=;
- b=CGTnwgeGwbbN0YgTb4hgrl1iLdaUylAA2r+WMIzXkxeF45EUOH2SaVoUvQQrLcOIqyjYSx
- 7VUoRYnbi+5KCwG3nCy7Ad+vNzHYB8CKPIj3yGthBrMQic0xDPxD/QhielG/gd2BpCMwWT
- Wk9esbDAcyYg4OTtRyqs8GC7cw0mNlE=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-382-mPcegozUMj66DdNgtNKCqw-1; Wed, 19 Nov 2025 13:09:38 -0500
-X-MC-Unique: mPcegozUMj66DdNgtNKCqw-1
-X-Mimecast-MFC-AGG-ID: mPcegozUMj66DdNgtNKCqw_1763575778
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-88050708ac2so593226d6.2
- for <qemu-riscv@nongnu.org>; Wed, 19 Nov 2025 10:09:38 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763575778; x=1764180578;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iWKuGlFXZQJhDckFQcgt5gxApYJTrA/9Towipm9l4OQ=;
- b=eWMBRsYh3yTrcLxrSAOH2aufLNGm02pgVx881pblXqIA3+NM/Mwb11KZtNdMfKBGhz
- JaPIYIirN591pF3czUN/sIIsNrsajVdf2p40tfl490BQfDGsK40UrSquaXfgyTW1lUOn
- pGp7RYzNcHWSm2/qbe+U9TyCfvk99z6ASarRm2ZVR/Trrm2ZcNjXdbvYz6ITLdWPFuRH
- yzOzpjI40ceOK5pS9M+9G3gy/tR1mH08MKZs+N1DAIQBIKM8FLsywxTFdN6xkErQteNG
- 9u4ipr5KOuMYzORe2yJje8pBe/fu130IXjQxOjRSfMFzhmX7aDEEfTV2M1ebR0Xo5GUD
- R60A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXdEbc504qNig6D38eXfaAS24yyfTIwOYO8pT8pOz1kRGfNVpv4nUtjOnz9VgcXLWI/TUXdmK3JGM/7@nongnu.org
-X-Gm-Message-State: AOJu0YxRZFAal5Rm1F/hn/mJ+0/ij6X9zkCoN9zyFVVpFeCFf6huTZvJ
- akQiZkYv4bU/Hg/ia8NbIS6y9Zpgl/ErH1UTNcUiKI1SXbVZjPxjHH/wZ+BO+/zBN+oOC3V1EjG
- qSE5LtMUjR1++4so+LlvXgfED5gEtSRjBrnrUe0FAjidKVbmNFw+60LQN
-X-Gm-Gg: ASbGnct1ZBlPHVQFMFK88EjnSc6oK3Ay9Wn3v6J6QZ5ll+l2pSTsNZ0ce3SdTNXe4dG
- 2PRr3muCJ+/GAUcZ3bV3WdEJg2dt8ufHcwKyB+dqI6XZI25ZyLKnkATwUf+tYsdRUlGA4zuynaW
- MN2u2rtLBcQQjI67f5gj9qfZrqBJ+XUpDqyYMDlfeg4Ts6bOt36t0kM/vlPP6KODca8mSwEnEmw
- vQ3mYfewwxq0HoT3rXDxr3sJZ5HfrHeWplhVxP6Be+O9it7Qzsmwi7bkosTZRLeH3+fFZLAkWrL
- OOMkKjyrAXTGA+BOSPDsriIlyqVrg6hYZFDslX+0Fk2cPRAx7t/+R7i8wAsRwjecAyEg7wjLyRz
- a/7s=
-X-Received: by 2002:a05:6214:33c6:b0:87c:a4f:afd3 with SMTP id
- 6a1803df08f44-8846e02d57bmr1889266d6.16.1763575778001; 
- Wed, 19 Nov 2025 10:09:38 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IELSahBwRm5SxgULUmKqEQouDGBl9IAYstEeLqOk0A49a/xIWSs9mc1bJ81aMUBPzhLGlz0ig==
-X-Received: by 2002:a05:6214:33c6:b0:87c:a4f:afd3 with SMTP id
- 6a1803df08f44-8846e02d57bmr1888776d6.16.1763575777665; 
- Wed, 19 Nov 2025 10:09:37 -0800 (PST)
-Received: from x1.local ([142.188.210.156]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8846e445bd4sm265876d6.10.2025.11.19.10.09.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Nov 2025 10:09:37 -0800 (PST)
-Date: Wed, 19 Nov 2025 13:09:35 -0500
-From: Peter Xu <peterx@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: qemu-devel@nongnu.org, kwolf@redhat.com, hreitz@redhat.com,
- mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
- gengdongjiu1@gmail.com, peter.maydell@linaro.org,
- alistair@alistair23.me, edgar.iglesias@gmail.com, npiggin@gmail.com,
- harshpb@linux.ibm.com, palmer@dabbelt.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- sstabellini@kernel.org, anthony@xenproject.org, paul@xen.org,
- berrange@redhat.com, farosas@suse.de, eblake@redhat.com,
- vsementsov@yandex-team.ru, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, philmd@linaro.org,
- wangyanan55@huawei.com, zhao1.liu@intel.com, qemu-block@nongnu.org,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 3/5] nbd/client-connection: Replace error_propagate() by
- assignment
-Message-ID: <aR4H3-CQ-F8ZUN_Z@x1.local>
+ bh=wt/fub6z3HxiVa5B4/hE5RzRQKQVhOj7h1C0uZV+h1o=;
+ b=Ka+3pUYJ9tfXtaePnKbLAeMKZ8lGiMl5FBBiUpCqePi7Ga3VaJH67dQsuE9/lZkzOBAfwg
+ 8hJQCtuTvRuphKxFcHYXFJ4kRGJUZcFPkMJSO6MuGLfQXi+tXM29U8SRnI3z/Am/eAk+Um
+ i/S1RLovuufcP7unMtpy0pdW3KlBsfI=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-111-yNpZLchdNUuuTavbCUxFWQ-1; Wed,
+ 19 Nov 2025 14:10:59 -0500
+X-MC-Unique: yNpZLchdNUuuTavbCUxFWQ-1
+X-Mimecast-MFC-AGG-ID: yNpZLchdNUuuTavbCUxFWQ_1763579455
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 96A13195608F; Wed, 19 Nov 2025 19:10:54 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.45.242.18])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9B530180047F; Wed, 19 Nov 2025 19:10:52 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id E69F421E6A27; Wed, 19 Nov 2025 20:10:49 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+Cc: qemu-devel@nongnu.org,  kwolf@redhat.com,  hreitz@redhat.com,
+ mst@redhat.com,  imammedo@redhat.com,  anisinha@redhat.com,
+ gengdongjiu1@gmail.com,  peter.maydell@linaro.org,
+ alistair@alistair23.me,  edgar.iglesias@gmail.com,  npiggin@gmail.com,
+ harshpb@linux.ibm.com,  palmer@dabbelt.com,  liwei1518@gmail.com,
+ dbarboza@ventanamicro.com,  zhiwei_liu@linux.alibaba.com,
+ sstabellini@kernel.org,  anthony@xenproject.org,  paul@xen.org,
+ berrange@redhat.com,  peterx@redhat.com,  farosas@suse.de,
+ eblake@redhat.com,  eduardo@habkost.net,  marcel.apfelbaum@gmail.com,
+ philmd@linaro.org,  wangyanan55@huawei.com,  zhao1.liu@intel.com,
+ qemu-block@nongnu.org,  qemu-arm@nongnu.org,  qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org,  xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 2/5] hw/nvram/xlnx-bbram: More idiomatic and simpler
+ error reporting
+In-Reply-To: <a36f938d-b35a-4605-ab77-6ed7dd419945@yandex-team.ru> (Vladimir
+ Sementsov-Ogievskiy's message of "Wed, 19 Nov 2025 19:39:14 +0300")
 References: <20251119130855.105479-1-armbru@redhat.com>
- <20251119130855.105479-4-armbru@redhat.com>
+ <20251119130855.105479-3-armbru@redhat.com>
+ <a36f938d-b35a-4605-ab77-6ed7dd419945@yandex-team.ru>
+Date: Wed, 19 Nov 2025 20:10:49 +0100
+Message-ID: <87a50hx2h2.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-In-Reply-To: <20251119130855.105479-4-armbru@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: yi0HF2in1v7MoWFc2ITIqkZ5Q90cm8LW0tjgGp92F10_1763575778
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=peterx@redhat.com;
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -123,16 +98,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Nov 19, 2025 at 02:08:53PM +0100, Markus Armbruster wrote:
-> connect_thread_func() sets a variable to null, then error_propagate()s
-> an Error * to it.  This is a roundabout way to assign the Error * to
-> it, so replace it by just that.
-> 
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
 
-Reviewed-by: Peter Xu <peterx@redhat.com>
+> On 19.11.25 16:08, Markus Armbruster wrote:
+>> bbram_bdrv_error() interpolates a "detail" string into a template with
+>> error_setg_errno(), then reports the result with error_report().
+>> Produces error messages with an unwanted '.':
+>>
+>>      BLK-NAME: BBRAM backstore DETAIL failed.: STERROR
+>>
+>> Replace both calls of bbram_bdrv_error() by straightforward
+>> error_report(), and drop the function.  This is less code, easier to
+>> read, and the error message is more greppable.
+>>
+>> Also delete the unwanted '.'.
+>
+> Also, using "errp" name for local "Error *" (one star) variable is a bit misleading.
 
--- 
-Peter Xu
+True.  I don't mention it, because I delete the variable.
+
+My search for misleading uses of @errp led me here.
+
+>> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+>
+> Reviewed-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+
+Thanks!
 
 
