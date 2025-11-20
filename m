@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58692CF8848
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 11:52:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62659CF884A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 11:59:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vM3Cf-0004dX-M2; Thu, 20 Nov 2025 06:51:57 -0500
+	id 1vM3Jy-0006Vo-4L; Thu, 20 Nov 2025 06:59:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM3Cc-0004d1-9H
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:51:54 -0500
-Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
+ id 1vM3Jw-0006VC-5O
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:59:28 -0500
+Received: from mail-ot1-x329.google.com ([2607:f8b0:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM3Ca-0002EV-47
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:51:54 -0500
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7c75fd8067fso475639a34.2
- for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 03:51:51 -0800 (PST)
+ id 1vM3Ju-0003TW-C6
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:59:27 -0500
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7c76f65feb5so595601a34.0
+ for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 03:59:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1763639511; x=1764244311; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1763639965; x=1764244765; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=4M+oichSv/HuVecZkWvfD9clcnZ++q2Q16ttqO2f7es=;
- b=j4E/hopcvbuP/Vo4lJzz1ZV+x04JBTTi+sCyxizECDXM03taRDi0mgL5H3zCzwBWQl
- wW/4anQ5ZJ+Eh6h5L+8qvEYtRqhDz9YuYiBQp09/OGxP+nPgrZEXceQ9WDZS4zmE3317
- uH6nlo9YCH1OJ0tErF6S0JwzBYnA0CsHnNAt9S1vaun3Nsdsq/n61O595iPMQHDwmhdg
- LWc3APIT6irKG2OamknMirKJ4TvuN3/qnDqnoE+t0nJZoEnrz6f0yvsOZ0SgSG/s86IN
- hQST2/ya3cnEf6UiwCqLHJfOnOlaBem+4PGKQk5OPh+U3zOdLEiZ8HhbIO/qaGr0EFWc
- UbFA==
+ bh=BwKMvDY8297hr9uPqK/3BBxH5Upv5LgYn4pXQ9ZWDpA=;
+ b=iaIoaAnmbsqvZHXxJUY93nGYFKny0Yuiv9o29BDmJooBE9J7fBHKIGpyJll09zmW3Q
+ Z+sozR6D0bTGxkfF7hF5Oed6whygUg9ntJXLF7igTlUIASLvNyMZuz/a2v22RDJwgTKB
+ O/aojw3oJa190NQYOKKUjIefyhHYI34SzdHTd9RHseiZTa2c8Es/B90cFntS4iZumTJD
+ mppuDUwSpM84cRn8FcgEUUXhX+gGK6g+Ck3mOiSy6CMSFhFkwSf1xMwQgQ4i6aKO/U3t
+ RJUgidWZFEmB6HZi5EUTDpx2lG1eTHW9oJBsUYUb07l6E0HJY7rJq5KsRiiQFWNkWfRH
+ uRYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763639511; x=1764244311;
+ d=1e100.net; s=20230601; t=1763639965; x=1764244765;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4M+oichSv/HuVecZkWvfD9clcnZ++q2Q16ttqO2f7es=;
- b=ELpNY3UuzY2vcmRbdhsR7024bsn3JHvZi+zOJGl3GbBWukT6WIQlyfR9SGVopULvDM
- pPSGhtSMOntIfHJxzeJu5ILXkPrKLokrW4RKe5E3/olHLP4OpfUdVR9y0iffhWl80uYg
- 3WqX0OihEr9e341K02aH+OGZzdVmSinCHRmQtveUAQchCgAlfAfH5/XGC960c0YyzNVI
- eGD8HkAPmbbTUk0+4qhYR2numBUjvfW04qtGSOJHarPYvZHsz5J4nhLdaH59uC1DM3yE
- JTuWVOXJ/LqiQqUkFC1sGhYhyoF6JJgV4QgKUMqS8q1hlcUKIUoWbkAETz7v0SpkVZu6
- YnOw==
+ bh=BwKMvDY8297hr9uPqK/3BBxH5Upv5LgYn4pXQ9ZWDpA=;
+ b=GsWOao9vIv3qHi0wcbiRICwMiPwitLxQfqw7jyXcaZb7n1I2oqlyZkDfoJwv5VfM9z
+ 0qV/+9ktUtATFu/5mlEOVkM0OaIiAfbhmOW5VuVMzqc1E8Ua6bdu4DPDoPp3Niaobdcf
+ FqYboANOTaAxMjRWG8Kj0rYi25w3hi89rRp/fRowgp2VlS88g2Q7xvtRf0PaSC/dMIf8
+ bSrZP/qlJmIPFM7iuZggUA1YRpXCwYY/IEBbar/cGF5/GbiByI7IecxqSDnCx7esOtAM
+ SnJFo5XPdSbDBdtiB4nrF8g8YcItaluF/faUmEOC3NBZgNfzmzr2MM7Cq160Tl0uEYbu
+ ulBg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFLI9aMSWaqgiwrHo1xk3RhJGLo+l3N5iW9qtPRW1tMJU2IZKLTmKkRxB1bNZQ6YCy8gCh/Oh/qlC3@nongnu.org
-X-Gm-Message-State: AOJu0Yw0cJRprNXe7ODGYb5MsLe/ogJm4wwxNUS0Tw6At/XOR8+wklNp
- jpVdeK8SgE1+TdUGwCFOi+yFK36w46wYB4Fozo53mO7fbzenw+R2+hQ7UCP2138lAzU=
-X-Gm-Gg: ASbGncs0Qj/8cCVd1syYgDbk/yJFnZFCEQUVx3ddOcYNl7p8jHAewwVV7BJDtb14wJ+
- +eSzN3pZ1Xbd+6zkvOTpzbaX/72KLy2NR+gx/RwXLn7GUyg7kMFKXL/kzAk09qWeim++hY2Pm5T
- q3SBWfhlWKhNCp1rozKhrvNcBMpkiHLre8lVWxrVM9LXVYPc2EhZ60MkvFTCaiYd7issDmv6oyl
- UuW01JxAudVS3rYxMvVk3Mp2Yq0P6U3fA3vvhjd/PiX/2rW1YFzOPnobXUbkP6M7mL/+P2VPUoA
- HXzdwJ+bMEUkRLTKWS0R9C2KQCyDuT0H351ROWnG+nstTwgdWOkk41XVVJZ9CUs3g+oWkGRShff
- PQ4wnd+7xeZ57W7UD3eFth2i2uiqhhExkXI7D7tSO40EUy7S2/zgCnU13pl++KuQMvGjvqYpEqT
- gqrrKmLVP7/ayg1T+LnN99OD1H3t1bPrJMqcXWPw==
-X-Google-Smtp-Source: AGHT+IGh+c+I1DCVfv0ULtCxij8sjDjKQl4VEO0jqrM+6B3FNR4wiQdEVFyykPyYIyMUHvxUvSUogQ==
-X-Received: by 2002:a05:6830:449e:b0:7c7:e5a:5c68 with SMTP id
- 46e09a7af769-7c78d26692cmr1885343a34.16.1763639510762; 
- Thu, 20 Nov 2025 03:51:50 -0800 (PST)
+ AJvYcCW29NTNyHsMd2vAq7B4/vXPR8SHeOdssI+C0z4HZvTfgGejHNFJidIe7gcC7wWFIo00K8oRCWcC7MGI@nongnu.org
+X-Gm-Message-State: AOJu0YyO2nKvxOQLh3WPATSGo1x7Q75ZSruo4CGX5k08MoEkIw2z/Re5
+ XoE58P1VN6EtMaFOmQ5G7rpl5dlPvvzfDvuvT7XLhbrrKDkOZxL0yYyw2w6gTJw3rIc=
+X-Gm-Gg: ASbGncs/PvD9ilthnS9csCDCxx8u27LZ/6svy7ZOP9zedvkCebJUM0a0Wi5DYIwbKqy
+ HQ753QCcUKfmc75w1Nhvk8TQP5ziVfrFjoqIK4vBqlKDLj0Y19G5jmCavqb6o6DUyfLpkrY8oku
+ xidcxsgz7zQPQLsaqE6eIQycgBaBjrpoOflUi6FdH0eCACThB0KBNKMh8ErzoNfjYq0x5wUKwUm
+ NtU0hV/AQdnQQjc/FBPWZjKJY+fQHn8iby4Qal4ctRAhlUWX6z+t9NiVWWNWK0ri7sQS2DypF6d
+ ig/xx3xUJh6icb4UH5DZ+655r82An7rVJ2vIeGHzbGZXqoOMDwg//qRwWFCno+nQSa2Yc/2xtqI
+ zi1F9RCWwOQ7N6B4Th4kRo4iAv6PHyH7WNq+8D4oolUPTOZ0Zu2ifQlpHkeFdxm5vj0oYq6O1Rx
+ eaO5cEADOpwLp8A4XO6X2ghTVRwMo=
+X-Google-Smtp-Source: AGHT+IHx1l8t/uOlVBUL45bt6MO6wfOe3CXRPGjbGY2pDPVF5MxAP9pa0cIKItQXqgXknSy/gICoiQ==
+X-Received: by 2002:a05:6830:8485:b0:7c7:586e:8e76 with SMTP id
+ 46e09a7af769-7c78f4208e3mr715003a34.28.1763639965063; 
+ Thu, 20 Nov 2025 03:59:25 -0800 (PST)
 Received: from [192.168.68.110] ([177.188.133.235])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c78d3e3b5esm894212a34.15.2025.11.20.03.51.44
+ 46e09a7af769-7c78d428edfsm913265a34.31.2025.11.20.03.59.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Nov 2025 03:51:49 -0800 (PST)
-Message-ID: <92645282-ddfd-4b50-89fa-e6d1d546cde2@ventanamicro.com>
-Date: Thu, 20 Nov 2025 08:51:43 -0300
+ Thu, 20 Nov 2025 03:59:22 -0800 (PST)
+Message-ID: <0699f702-d65b-4ab3-89ac-0c27b9330b6e@ventanamicro.com>
+Date: Thu, 20 Nov 2025 08:59:16 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/7] hw/riscv: implement CBQRI bandwidth controller
+Subject: Re: [PATCH 2/7] hw/riscv: define capabilities of CBQRI controllers
 To: Drew Fustini <fustini@kernel.org>, qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, Weiwei Li
@@ -86,14 +86,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Chen Pei <cp0613@linux.alibaba.com>, guo.wenjia23@zte.com.cn,
  liu.qingtao2@zte.com.cn
 References: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
- <20251119-riscv-ssqosid-cbqri-v1-4-3392fc760e48@kernel.org>
+ <20251119-riscv-ssqosid-cbqri-v1-2-3392fc760e48@kernel.org>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-4-3392fc760e48@kernel.org>
+In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-2-3392fc760e48@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::329;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,50 +121,52 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 11/19/25 9:42 PM, Drew Fustini wrote:
 > From: Nicolas Pitre <npitre@baylibre.com>
 > 
-> Implement a bandwidth controller according to the Capacity and Bandwidth
-> QoS Register Interface (CBQRI) which supports these capabilities:
-> 
->    - Number of access types: 2 (code and data)
->    - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
->    - Event IDs supported: None, Total read/write byte count, Total
->                           read byte count, Total write byte count
->    - Bandwidth allocation operations: CONFIG_LIMIT, READ_LIMIT
+> Define structs to represent the hardware capabilities of capacity and
+> bandwidth controllers according to the RISC-V Capacity and Bandwidth QoS
+> Register Interface (CBQRI).
 > 
 > Link: https://github.com/riscv-non-isa/riscv-cbqri/blob/main/riscv-cbqri.pdf
 > Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
-> [fustini: add fields introduced in the ratified spec: rpfx and p]
+> [fustini: add fields introduced in the ratified spec: cunits, rpfx, p]
 > Signed-off-by: Drew Fustini <fustini@kernel.org>
 > ---
->   MAINTAINERS                |   1 +
->   hw/riscv/cbqri_bandwidth.c | 613 +++++++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 614 insertions(+)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   MAINTAINERS              |  7 ++++
+>   include/hw/riscv/cbqri.h | 89 ++++++++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 96 insertions(+)
 > 
 > diff --git a/MAINTAINERS b/MAINTAINERS
-> index 48cca4ac8702..16500c4e8a83 100644
+> index 38325e0617c4..7afe80f1b17c 100644
 > --- a/MAINTAINERS
 > +++ b/MAINTAINERS
-> @@ -362,6 +362,7 @@ M: Nicolas Pitre <npitre@baylibre.com>
->   M: Drew Fustini <fustini@kernel.org>
->   L: qemu-riscv@nongnu.org
->   S: Supported
-> +F: hw/riscv/cbqri_bandwidth.c
->   F: hw/riscv/cbqri_capacity.c
->   F: include/hw/riscv/cbqri.h
+> @@ -357,6 +357,13 @@ F: target/riscv/XVentanaCondOps.decode
+>   F: target/riscv/insn_trans/trans_xventanacondops.c.inc
+>   F: disas/riscv-xventana*
 >   
-> diff --git a/hw/riscv/cbqri_bandwidth.c b/hw/riscv/cbqri_bandwidth.c
+> +RISC-V QoS (Ssqosid ext and CBQRI spec)
+> +M: Nicolas Pitre <npitre@baylibre.com>
+> +M: Drew Fustini <fustini@kernel.org>
+> +L: qemu-riscv@nongnu.org
+> +S: Supported
+> +F: include/hw/riscv/cbqri.h
+> +
+>   RENESAS RX CPUs
+>   R: Yoshinori Sato <yoshinori.sato@nifty.com>
+>   S: Orphan
+> diff --git a/include/hw/riscv/cbqri.h b/include/hw/riscv/cbqri.h
 > new file mode 100644
-> index 000000000000..40357a3219d8
+> index 000000000000..1b4c69779c0e
 > --- /dev/null
-> +++ b/hw/riscv/cbqri_bandwidth.c
-> @@ -0,0 +1,613 @@
+> +++ b/include/hw/riscv/cbqri.h
+> @@ -0,0 +1,89 @@
 > +/*
 > + * RISC-V Capacity and Bandwidth QoS Register Interface
 > + * URL: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
 > + *
 > + * Copyright (c) 2023 BayLibre SAS
 > + * SPDX-License-Identifier: GPL-2.0-or-later
-> + *
-> + * This file contains the Bandwidth-controller QoS Register Interface.
 > + *
 > + * This program is free software; you can redistribute it and/or modify it
 > + * under the terms and conditions of the GNU General Public License,
@@ -179,250 +181,75 @@ On 11/19/25 9:42 PM, Drew Fustini wrote:
 > + * this program.  If not, see <http://www.gnu.org/licenses/>.
 > + */
 > +
-> +#include "qemu/osdep.h"
-> +#include "qapi/error.h"
-> +#include "qemu/error-report.h"
-> +#include "qemu/log.h"
-> +#include "qemu/module.h"
-> +#include "hw/qdev-properties.h"
-> +#include "hw/sysbus.h"
-> +#include "target/riscv/cpu.h"
-> +#include "hw/riscv/cbqri.h"
+> +#ifndef HW_RISCV_CBQRI_H
+> +#define HW_RISCV_CBQRI_H
 > +
-
-[...]
-
-> +static void riscv_cbqri_bc_write(void *opaque, hwaddr addr,
-> +                                 uint64_t value, unsigned size)
-> +{
-> +    RiscvCbqriBandwidthState *bc = opaque;
+> +#include "qemu/typedefs.h"
 > +
-> +    assert((addr % 8) == 0);
-> +    assert(size == 8);
-
-Same comment I made on patch 3: both callbacks are asserting if size == 8. This can be
-avoided by setting the minimal access size in riscv_cbqri_bc_ops to 8.
-
-
-Thanks,
-
-Daniel
-
+> +#define RISCV_CBQRI_VERSION_MAJOR   0
+> +#define RISCV_CBQRI_VERSION_MINOR   1
 > +
-> +    switch (addr) {
-> +    case A_BC_CAPABILITIES:
-> +        /* read-only register */
-> +        break;
-> +    case A_BC_MON_CTL:
-> +        riscv_cbqri_bc_write_mon_ctl(bc, value);
-> +        break;
-> +    case A_BC_MON_CTR_VAL:
-> +        /* read-only register */
-> +        break;
-> +    case A_BC_ALLOC_CTL:
-> +        riscv_cbqri_bc_write_alloc_ctl(bc, value);
-> +        break;
-> +    case A_BC_BW_ALLOC:
-> +        riscv_cbqri_bc_write_bw_alloc(bc, value);
-> +        break;
-> +    default:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: out of bounds (addr=0x%x)",
-> +                      __func__, (uint32_t)addr);
-> +    }
-> +}
+> +#define TYPE_RISCV_CBQRI_CC         "riscv.cbqri.capacity"
+> +#define TYPE_RISCV_CBQRI_BC         "riscv.cbqri.bandwidth"
 > +
-> +static uint64_t riscv_cbqri_bc_read(void *opaque, hwaddr addr, unsigned size)
-> +{
-> +    RiscvCbqriBandwidthState *bc = opaque;
-> +    uint64_t value = 0;
+> +/* Capacity Controller hardware capabilities */
+> +typedef struct RiscvCbqriCapacityCaps {
+> +    uint16_t nb_mcids;
+> +    uint16_t nb_rcids;
 > +
-> +    assert((addr % 8) == 0);
-> +    assert(size == 8);
+> +    uint16_t ncblks;
+> +    bool cunits:1;
 > +
-> +    switch (addr) {
-> +    case A_BC_CAPABILITIES:
-> +        value = FIELD_DP64(value, BC_CAPABILITIES, VER_MAJOR,
-> +                           RISCV_CBQRI_VERSION_MAJOR);
-> +        value = FIELD_DP64(value, BC_CAPABILITIES, VER_MINOR,
-> +                           RISCV_CBQRI_VERSION_MINOR);
-> +        value = FIELD_DP64(value, BC_CAPABILITIES, RPFX,
-> +                           bc->rpfx);
-> +        value = FIELD_DP64(value, BC_CAPABILITIES, P,
-> +                           bc->p);
-> +        value = FIELD_DP64(value, BC_CAPABILITIES, NBWBLKS,
-> +                           bc->nbwblks);
-> +        value = FIELD_DP64(value, BC_CAPABILITIES, MRBWB,
-> +                           bc->mrbwb);
-> +        break;
-> +    case A_BC_MON_CTL:
-> +        value = bc->bc_mon_ctl;
-> +        break;
-> +    case A_BC_MON_CTR_VAL:
-> +        value = bc->bc_mon_ctr_val;
-> +        break;
-> +    case A_BC_ALLOC_CTL:
-> +        value = bc->bc_alloc_ctl;
-> +        break;
-> +    case A_BC_BW_ALLOC:
-> +        BandwidthAllocation *bc_bw_alloc = &bc->bw_allocations[0];
-> +        value = FIELD_DP64(value, BC_BW_ALLOC, Rbwb, bc_bw_alloc->Rbwb);
-> +        value = FIELD_DP64(value, BC_BW_ALLOC, Mweight, bc_bw_alloc->Mweight);
-> +        value = FIELD_DP64(value, BC_BW_ALLOC, sharedAT, bc_bw_alloc->sharedAT);
-> +        value = FIELD_DP64(value, BC_BW_ALLOC, useShared,
-> +                           bc_bw_alloc->useShared);
-> +        break;
-> +    default:
-> +        qemu_log_mask(LOG_GUEST_ERROR,
-> +                      "%s: out of bounds (addr=0x%x)",
-> +                      __func__, (uint32_t)addr);
-> +    }
+> +    bool rpfx:1;
+> +    uint8_t p;
 > +
-> +    return value;
-> +}
+> +    bool supports_at_data:1;
+> +    bool supports_at_code:1;
 > +
-> +static const MemoryRegionOps riscv_cbqri_bc_ops = {
-> +    .read = riscv_cbqri_bc_read,
-> +    .write = riscv_cbqri_bc_write,
-> +    .endianness = DEVICE_LITTLE_ENDIAN,
-> +    .valid.min_access_size = 4,
-> +    .valid.max_access_size = 8,
-> +    .impl.min_access_size = 8,
-> +    .impl.max_access_size = 8,
-> +};
+> +    bool supports_alloc_op_config_limit:1;
+> +    bool supports_alloc_op_read_limit:1;
+> +    bool supports_alloc_op_flush_rcid:1;
 > +
-> +static void riscv_cbqri_bc_realize(DeviceState *dev, Error **errp)
-> +{
-> +    RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(dev);
+> +    bool supports_mon_op_config_event:1;
+> +    bool supports_mon_op_read_counter:1;
 > +
-> +    if (!bc->mmio_base) {
-> +        error_setg(errp, "mmio_base property not set");
-> +        return;
-> +    }
+> +    bool supports_mon_evt_id_none:1;
+> +    bool supports_mon_evt_id_occupancy:1;
+> +} RiscvCbqriCapacityCaps;
 > +
-> +    assert(bc->mon_counters == NULL);
-> +    bc->mon_counters = g_new0(MonitorCounter, bc->nb_mcids);
+> +/* Bandwidth Controller hardware capabilities */
+> +typedef struct RiscvCbqriBandwidthCaps {
+> +    uint16_t nb_mcids;
+> +    uint16_t nb_rcids;
 > +
-> +    assert(bc->bw_allocations == NULL);
-> +    BandwidthAllocation *bw_alloc_end = get_bw_alloc(bc, bc->nb_rcids, 0);
-> +    unsigned int bw_alloc_size = bw_alloc_end - bc->bw_allocations;
-> +    bc->bw_allocations = g_new0(BandwidthAllocation, bw_alloc_size);
+> +    uint16_t nbwblks;
+> +    uint16_t mrbwb;
 > +
-> +    memory_region_init_io(&bc->mmio, OBJECT(dev), &riscv_cbqri_bc_ops,
-> +                          bc, TYPE_RISCV_CBQRI_BC".mmio", 4 * 1024);
-> +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &bc->mmio);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, bc->mmio_base);
-> +}
+> +    bool rpfx:1;
+> +    uint8_t p;
 > +
-> +static void riscv_cbqri_bc_reset(DeviceState *dev)
-> +{
-> +    RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(dev);
+> +    bool supports_at_data:1;
+> +    bool supports_at_code:1;
 > +
-> +    bc->bc_mon_ctl = 0;
-> +    bc->bc_alloc_ctl = 0;
-> +}
+> +    bool supports_alloc_op_config_limit:1;
+> +    bool supports_alloc_op_read_limit:1;
 > +
-> +static Property riscv_cbqri_bc_properties[] = {
-> +    DEFINE_PROP_UINT64("mmio_base", RiscvCbqriBandwidthState, mmio_base, 0),
-> +    DEFINE_PROP_STRING("target", RiscvCbqriBandwidthState, target),
+> +    bool supports_mon_op_config_event:1;
+> +    bool supports_mon_op_read_counter:1;
 > +
-> +    DEFINE_PROP_UINT16("max_mcids", RiscvCbqriBandwidthState, nb_mcids, 256),
-> +    DEFINE_PROP_UINT16("max_rcids", RiscvCbqriBandwidthState, nb_rcids, 64),
-> +    DEFINE_PROP_UINT16("nbwblks", RiscvCbqriBandwidthState, nbwblks, 1024),
-> +    DEFINE_PROP_UINT16("mrbwb", RiscvCbqriBandwidthState, mrbwb, 819),
+> +    bool supports_mon_evt_id_none:1;
+> +    bool supports_mon_evt_id_rdwr_count:1;
+> +    bool supports_mon_evt_id_rdonly_count:1;
+> +    bool supports_mon_evt_id_wronly_count:1;
+> +} RiscvCbqriBandwidthCaps;
 > +
-> +    DEFINE_PROP_BOOL("rpfx", RiscvCbqriBandwidthState, rpfx, true),
-> +    DEFINE_PROP_UINT8("p", RiscvCbqriBandwidthState, p, 4),
-> +
-> +    DEFINE_PROP_BOOL("at_data", RiscvCbqriBandwidthState,
-> +                     supports_at_data, true),
-> +    DEFINE_PROP_BOOL("at_code", RiscvCbqriBandwidthState,
-> +                     supports_at_code, true),
-> +
-> +    DEFINE_PROP_BOOL("alloc_op_config_limit", RiscvCbqriBandwidthState,
-> +                     supports_alloc_op_config_limit, true),
-> +    DEFINE_PROP_BOOL("alloc_op_read_limit", RiscvCbqriBandwidthState,
-> +                     supports_alloc_op_read_limit, true),
-> +
-> +    DEFINE_PROP_BOOL("mon_op_config_event", RiscvCbqriBandwidthState,
-> +                     supports_mon_op_config_event, true),
-> +    DEFINE_PROP_BOOL("mon_op_read_counter", RiscvCbqriBandwidthState,
-> +                     supports_mon_op_read_counter, true),
-> +
-> +    DEFINE_PROP_BOOL("mon_evt_id_none", RiscvCbqriBandwidthState,
-> +                     supports_mon_evt_id_none, true),
-> +    DEFINE_PROP_BOOL("mon_evt_id_rdwr_count", RiscvCbqriBandwidthState,
-> +                     supports_mon_evt_id_rdwr_count, true),
-> +    DEFINE_PROP_BOOL("mon_evt_id_rdonly_count", RiscvCbqriBandwidthState,
-> +                     supports_mon_evt_id_rdonly_count, true),
-> +    DEFINE_PROP_BOOL("mon_evt_id_wronly_count", RiscvCbqriBandwidthState,
-> +                     supports_mon_evt_id_wronly_count, true),
-> +};
-> +
-> +static void riscv_cbqri_bc_class_init(ObjectClass *klass, const void *data)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(klass);
-> +    dc->realize = riscv_cbqri_bc_realize;
-> +    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
-> +    dc->desc = "RISC-V CBQRI Bandwidth Controller";
-> +    device_class_set_props(dc, riscv_cbqri_bc_properties);
-> +    dc->legacy_reset = riscv_cbqri_bc_reset;
-> +    dc->user_creatable = true;
-> +}
-> +
-> +static const TypeInfo riscv_cbqri_bc_info = {
-> +    .name          = TYPE_RISCV_CBQRI_BC,
-> +    .parent        = TYPE_SYS_BUS_DEVICE,
-> +    .instance_size = sizeof(RiscvCbqriBandwidthState),
-> +    .class_init    = riscv_cbqri_bc_class_init,
-> +};
-> +
-> +static void riscv_cbqri_bc_register_types(void)
-> +{
-> +    type_register_static(&riscv_cbqri_bc_info);
-> +}
-> +
+> +DeviceState *riscv_cbqri_cc_create(hwaddr addr,
+> +                                   const RiscvCbqriCapacityCaps *caps,
+> +                                   const char *target_name);
 > +DeviceState *riscv_cbqri_bc_create(hwaddr addr,
 > +                                   const RiscvCbqriBandwidthCaps *caps,
-> +                                   const char *target_name)
-> +{
-> +    DeviceState *dev = qdev_new(TYPE_RISCV_CBQRI_BC);
-> +
-> +    qdev_prop_set_uint64(dev, "mmio_base", addr);
-> +    qdev_prop_set_string(dev, "target", target_name);
-> +    qdev_prop_set_uint16(dev, "max_mcids", caps->nb_mcids);
-> +    qdev_prop_set_uint16(dev, "max_rcids", caps->nb_rcids);
-> +    qdev_prop_set_uint16(dev, "nbwblks", caps->nbwblks);
-> +    qdev_prop_set_bit(dev, "rpfx", caps->rpfx);
-> +    qdev_prop_set_uint8(dev, "p", caps->p);
-> +
-> +    qdev_prop_set_bit(dev, "at_data",
-> +                      caps->supports_at_data);
-> +    qdev_prop_set_bit(dev, "at_code",
-> +                      caps->supports_at_code);
-> +    qdev_prop_set_bit(dev, "alloc_op_config_limit",
-> +                      caps->supports_alloc_op_config_limit);
-> +    qdev_prop_set_bit(dev, "alloc_op_read_limit",
-> +                      caps->supports_alloc_op_read_limit);
-> +    qdev_prop_set_bit(dev, "mon_op_config_event",
-> +                      caps->supports_mon_op_config_event);
-> +    qdev_prop_set_bit(dev, "mon_op_read_counter",
-> +                      caps->supports_mon_op_read_counter);
-> +    qdev_prop_set_bit(dev, "mon_evt_id_none",
-> +                      caps->supports_mon_evt_id_none);
-> +    qdev_prop_set_bit(dev, "mon_evt_id_rdwr_count",
-> +                      caps->supports_mon_evt_id_rdwr_count);
-> +    qdev_prop_set_bit(dev, "mon_evt_id_rdonly_count",
-> +                      caps->supports_mon_evt_id_rdonly_count);
-> +    qdev_prop_set_bit(dev, "mon_evt_id_wronly_count",
-> +                      caps->supports_mon_evt_id_wronly_count);
-> +
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +
-> +    return dev;
-> +}
-> +
-> +type_init(riscv_cbqri_bc_register_types)
+> +                                   const char *target_name);
+> +#endif
 > 
 
 
