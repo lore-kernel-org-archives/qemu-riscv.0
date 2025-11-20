@@ -4,86 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F22CF58C9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Nov 2025 19:13:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 939EDCF64A1
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 01:04:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLncE-0005F7-7A; Wed, 19 Nov 2025 14:13:19 -0500
+	id 1vLt55-0000JY-Mt; Wed, 19 Nov 2025 20:03:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vLnby-00053Y-4h
- for qemu-riscv@nongnu.org; Wed, 19 Nov 2025 14:13:03 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1vLskk-0004HI-58; Wed, 19 Nov 2025 19:42:26 -0500
+Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vLnbw-0003Zj-Lc
- for qemu-riscv@nongnu.org; Wed, 19 Nov 2025 14:13:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1763579579;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=40h3XLj9+PQ9YtwgX30Ek+MMJ2QDdr/Ci5vXiZEsl2A=;
- b=LYgG10ir+FU4SpT/B7ihc3nfpJ9OCELMtpaPsEn9sxR8WpYzmfu9JdmYLn/5aTUC9nN1S3
- 10Eqe5XBiteiwa7dPrcigNDkhVBh72fzKuggFjtUOvKkEDv6KdxZu+/zJrKoRT6cDjDNJQ
- lkr05chC8YXzmBi0gadsesQzsJWDMUg=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-163-ZZ9ZNeNsM7mLeavDfCwX8g-1; Wed,
- 19 Nov 2025 14:12:56 -0500
-X-MC-Unique: ZZ9ZNeNsM7mLeavDfCwX8g-1
-X-Mimecast-MFC-AGG-ID: ZZ9ZNeNsM7mLeavDfCwX8g_1763579572
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0EC18180034A; Wed, 19 Nov 2025 19:12:51 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.45.242.18])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id B313C180047F; Wed, 19 Nov 2025 19:12:49 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 3478021E6A27; Wed, 19 Nov 2025 20:12:47 +0100 (CET)
-From: Markus Armbruster <armbru@redhat.com>
-To: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Cc: qemu-devel@nongnu.org,  kwolf@redhat.com,  hreitz@redhat.com,
- mst@redhat.com,  imammedo@redhat.com,  anisinha@redhat.com,
- gengdongjiu1@gmail.com,  peter.maydell@linaro.org,
- alistair@alistair23.me,  edgar.iglesias@gmail.com,  npiggin@gmail.com,
- harshpb@linux.ibm.com,  palmer@dabbelt.com,  liwei1518@gmail.com,
- dbarboza@ventanamicro.com,  zhiwei_liu@linux.alibaba.com,
- sstabellini@kernel.org,  anthony@xenproject.org,  paul@xen.org,
- berrange@redhat.com,  peterx@redhat.com,  farosas@suse.de,
- eblake@redhat.com,  eduardo@habkost.net,  marcel.apfelbaum@gmail.com,
- philmd@linaro.org,  wangyanan55@huawei.com,  zhao1.liu@intel.com,
- qemu-block@nongnu.org,  qemu-arm@nongnu.org,  qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org,  xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 1/5] hw/core/loader: Make load_elf_hdr() return bool,
- simplify caller
-In-Reply-To: <bf44d9cd-806a-4d2c-8cff-0a88222959ed@yandex-team.ru> (Vladimir
- Sementsov-Ogievskiy's message of "Wed, 19 Nov 2025 19:34:26 +0300")
-References: <20251119130855.105479-1-armbru@redhat.com>
- <20251119130855.105479-2-armbru@redhat.com>
- <bf44d9cd-806a-4d2c-8cff-0a88222959ed@yandex-team.ru>
-Date: Wed, 19 Nov 2025 20:12:47 +0100
-Message-ID: <875xb5x2ds.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1vLskg-0002SV-Ss; Wed, 19 Nov 2025 19:42:25 -0500
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 458376019D;
+ Thu, 20 Nov 2025 00:42:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD191C116B1;
+ Thu, 20 Nov 2025 00:42:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1763599341;
+ bh=OZkhn5pjjQ2Q3QlWagDHaKGU9UJL0kw5S10Ux3BRkZE=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+ b=QHmYXdnWaoJpXVy/6uq27xxsF+ia6BoEd9aaLaQS1/ooDOMBhmoPSeYaSZ2RUTXh1
+ b8UB74ZR3WWq/Qq6S/YVVBhOCJ0rePOdLUNLS667BbOtID72jCjTqzC88sA77K5FJD
+ XmaJzJrrMTqmDj2ZCkAB0mQYiBfxQBtU2/UFu694jajxGsMZF5Z6LUw8BLrGU8W7YP
+ ec0wu+2R0lYLuhbZLhnJKRb480dA1GqWAFH26Zkv2oyq+Fuki5xQJML3X+f3frmzHs
+ AIyvMOf0+UIedl27Hoq9t6qCA7WSmzpgma0uJnJ2LS1gev8YYD4Biybx5/qqmJbi0B
+ wPlDaG00m1SSw==
+From: Drew Fustini <fustini@kernel.org>
+Date: Wed, 19 Nov 2025 16:42:23 -0800
+Subject: [PATCH 7/7] hw/riscv: add CBQRI controllers to virt machine
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251119-riscv-ssqosid-cbqri-v1-7-3392fc760e48@kernel.org>
+References: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
+In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, Nicolas Pitre <npitre@baylibre.com>, 
+ =?utf-8?q?Kornel_Dul=C4=99ba?= <mindal@semihalf.com>, 
+ Atish Kumar Patra <atishp@rivosinc.com>, 
+ Atish Patra <atish.patra@linux.dev>, 
+ Vasudevan Srinivasan <vasu@rivosinc.com>, 
+ =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>, 
+ yunhui cui <cuiyunhui@bytedance.com>, Chen Pei <cp0613@linux.alibaba.com>, 
+ guo.wenjia23@zte.com.cn, liu.qingtao2@zte.com.cn, 
+ Drew Fustini <fustini@kernel.org>
+X-Mailer: b4 0.14.3
+Received-SPF: pass client-ip=2600:3c04:e001:324:0:1991:8:25;
+ envelope-from=fustini@kernel.org; helo=tor.source.kernel.org
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 19 Nov 2025 20:03:24 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,39 +82,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
+From: Nicolas Pitre <npitre@baylibre.com>
 
-> On 19.11.25 16:08, Markus Armbruster wrote:
->> Signed-off-by: Markus Armbruster <armbru@redhat.com>
->
-> Reviewed-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
->
->> ---
->>   include/hw/loader.h |  4 +++-
->>   hw/arm/boot.c       |  6 +-----
->>   hw/core/loader.c    |  8 ++++++--
->>   hw/riscv/spike.c    | 10 +---------
->>   4 files changed, 11 insertions(+), 17 deletions(-)
->> diff --git a/include/hw/loader.h b/include/hw/loader.h
->> index d035e72748..6f91703503 100644
->> --- a/include/hw/loader.h
->> +++ b/include/hw/loader.h
->> @@ -188,8 +188,10 @@ ssize_t load_elf(const char *filename,
->>    *
->>    * Inspect an ELF file's header. Read its full header contents into a
->>    * buffer and/or determine if the ELF is 64bit.
->> + *
->> + * Returns true on success, false on failure.
->
-> I don't really care, but IMO, it's obvious contract for bool+errp functions, not worth a comment.
+Add CBQRI controllers to the RISC-V virt machine. The device properties
+can be fully configured from the command line:
 
-Nearby function comments all have a "Returns" sentence.  I try to blend
-in :)
+  $ qemu-system-riscv64 -M virt ... \
+      -device riscv.cbqri.capacity,mmio_base=0x04828000[,...]
+      -device riscv.cbqri.bandwidth,mmio_base=0x04829000[,...]
 
->>    */
->> -void load_elf_hdr(const char *filename, void *hdr, bool *is64, Error **errp);
->> +bool load_elf_hdr(const char *filename, void *hdr, bool *is64, Error **errp);
->>     ssize_t load_aout(const char *filename, hwaddr addr, int max_sz,
->>                     bool big_endian, hwaddr target_page_size);
+The mmio_base option is mandatory, the others are optional.
+
+Many -device arguments as wanted can be provided as long as their
+mmio regions don't conflict.
+
+To see all possible options:
+
+  $ qemu-system-riscv64 -device riscv.cbqri.capacity,help
+  riscv.cbqri.capacity options:
+    alloc_op_config_limit=<bool> -  (default: true)
+    alloc_op_flush_rcid=<bool> -  (default: true)
+    alloc_op_read_limit=<bool> -  (default: true)
+    at_code=<bool>         -  (default: true)
+    at_data=<bool>         -  (default: true)
+    max_mcids=<uint16>     -  (default: 256)
+    max_rcids=<uint16>     -  (default: 64)
+    mmio_base=<uint64>     -  (default: 0)
+    mon_evt_id_none=<bool> -  (default: true)
+    mon_evt_id_occupancy=<bool> -  (default: true)
+    mon_op_config_event=<bool> -  (default: true)
+    mon_op_read_counter=<bool> -  (default: true)
+    ncblks=<uint16>        -  (default: 16)
+    target=<str>
+
+  $ qemu-system-riscv64 -device riscv.cbqri.bandwidth,help
+  riscv.cbqri.bandwidth options:
+    alloc_op_config_limit=<bool> -  (default: true)
+    alloc_op_read_limit=<bool> -  (default: true)
+    at_code=<bool>         -  (default: true)
+    at_data=<bool>         -  (default: true)
+    max_mcids=<uint16>     -  (default: 256)
+    max_rcids=<uint16>     -  (default: 64)
+    mmio_base=<uint64>     -  (default: 0)
+    mon_evt_id_none=<bool> -  (default: true)
+    mon_evt_id_rdonly_count=<bool> -  (default: true)
+    mon_evt_id_rdwr_count=<bool> -  (default: true)
+    mon_evt_id_wronly_count=<bool> -  (default: true)
+    mon_op_config_event=<bool> -  (default: true)
+    mon_op_read_counter=<bool> -  (default: true)
+    nbwblks=<uint16>       -  (default: 1024)
+    target=<str>
+
+Boolean options correspond to hardware capabilities that can be disabled
+
+Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
+Signed-off-by: Drew Fustini <fustini@kernel.org>
+---
+ hw/riscv/virt.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 17909206c7ef..498f606d33b1 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -55,6 +55,7 @@
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
+ #include "hw/acpi/aml-build.h"
++#include "hw/riscv/cbqri.h"
+ #include "qapi/qapi-visit-common.h"
+ #include "hw/virtio/virtio-iommu.h"
+ #include "hw/uefi/var-service-api.h"
+@@ -1941,6 +1942,8 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+ #ifdef CONFIG_TPM
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
+ #endif
++    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_BC);
++    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_CC);
+ 
+     object_class_property_add_bool(oc, "aclint", virt_get_aclint,
+                                    virt_set_aclint);
+
+-- 
+2.43.0
 
 
