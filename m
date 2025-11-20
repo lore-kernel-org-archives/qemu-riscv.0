@@ -4,62 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35995CF8855
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 12:55:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5899CF8861
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 14:32:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vM4C7-0007P8-FI; Thu, 20 Nov 2025 07:55:27 -0500
+	id 1vM5hl-0002HT-0n; Thu, 20 Nov 2025 09:32:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1vM4C5-0007NO-8O; Thu, 20 Nov 2025 07:55:25 -0500
-Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001])
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1vM5gy-00020X-Ba; Thu, 20 Nov 2025 09:31:24 -0500
+Received: from mgamail.intel.com ([198.175.65.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1vM4C3-0005uv-5s; Thu, 20 Nov 2025 07:55:24 -0500
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 851795969FB;
- Thu, 20 Nov 2025 13:55:15 +0100 (CET)
-X-Virus-Scanned: amavis at eik.bme.hu
-Received: from zero.eik.bme.hu ([127.0.0.1])
- by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
- id UFymzwfFm40x; Thu, 20 Nov 2025 13:55:13 +0100 (CET)
-Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id 6C8115969F7; Thu, 20 Nov 2025 13:55:13 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 695685969FC;
- Thu, 20 Nov 2025 13:55:13 +0100 (CET)
-Date: Thu, 20 Nov 2025 13:55:13 +0100 (CET)
-From: BALATON Zoltan <balaton@eik.bme.hu>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-cc: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org, 
- kwolf@redhat.com, hreitz@redhat.com, mst@redhat.com, imammedo@redhat.com, 
- anisinha@redhat.com, gengdongjiu1@gmail.com, peter.maydell@linaro.org, 
- alistair@alistair23.me, edgar.iglesias@gmail.com, npiggin@gmail.com, 
- harshpb@linux.ibm.com, palmer@dabbelt.com, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com, sstabellini@kernel.org, 
- anthony@xenproject.org, paul@xen.org, berrange@redhat.com, 
- peterx@redhat.com, farosas@suse.de, eblake@redhat.com, 
- vsementsov@yandex-team.ru, eduardo@habkost.net, marcel.apfelbaum@gmail.com, 
- philmd@linaro.org, wangyanan55@huawei.com, zhao1.liu@intel.com, 
- qemu-block@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
- qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1vM5gw-0006Rx-1E; Thu, 20 Nov 2025 09:31:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1763649083; x=1795185083;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=BJQ0ePr3LQV5SiK/Z+mX4/dVwor8ikb3J0AbLLg45uc=;
+ b=RGpdj/Xxf8P+DPHI+VGrITTvTraO+WEDdNw/+HlVq+rVkR6YwP5J8CIQ
+ 8aRSi/9GXA6eE3kCTbdJP4NmKBJqkd6Ly4MaDzWmSwXq2o9pNKZs17lMu
+ d+O7K6pUXxDOFotliv+eZtRUaKzYu4qx0w/HrMibGOm+3kXRFZjdmgz/N
+ ZKhE03NN6K10SWdLJj5undNQWsPfVGqnycTGjgPVrLn1g0F8fx4kA2N8E
+ aLLxRNtEHHYWlRPrzqTqgHYr26JeMmYzJQ4WDwdrk7zUzx8Tx5xTUB9ju
+ l97qijFdQDuNTcDJiM471TnJK3g7MAHZ1ec02Nbz1+ARHAyie1CZj4hGS A==;
+X-CSE-ConnectionGUID: GcyFchWIQA6SVsn9a27wQQ==
+X-CSE-MsgGUID: F2Ajblc9RgOzHJ6H35kTiA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11619"; a="65651091"
+X-IronPort-AV: E=Sophos;i="6.20,213,1758610800"; d="scan'208";a="65651091"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+ by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 Nov 2025 06:31:19 -0800
+X-CSE-ConnectionGUID: IHUmIxu8STWCMdWRCOkkHQ==
+X-CSE-MsgGUID: r9ZK/qnPSHODU6gCYG74XA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.20,213,1758610800"; d="scan'208";a="190664714"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.39])
+ by orviesa010.jf.intel.com with ESMTP; 20 Nov 2025 06:31:10 -0800
+Date: Thu, 20 Nov 2025 22:53:30 +0800
+From: Zhao Liu <zhao1.liu@intel.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, kwolf@redhat.com, hreitz@redhat.com,
+ mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
+ gengdongjiu1@gmail.com, peter.maydell@linaro.org,
+ alistair@alistair23.me, edgar.iglesias@gmail.com, npiggin@gmail.com,
+ harshpb@linux.ibm.com, palmer@dabbelt.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ sstabellini@kernel.org, anthony@xenproject.org, paul@xen.org,
+ berrange@redhat.com, peterx@redhat.com, farosas@suse.de,
+ eblake@redhat.com, vsementsov@yandex-team.ru, eduardo@habkost.net,
+ marcel.apfelbaum@gmail.com, philmd@linaro.org,
+ wangyanan55@huawei.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org
 Subject: Re: [PATCH 1/5] hw/core/loader: Make load_elf_hdr() return bool,
  simplify caller
-In-Reply-To: <4fb0a736-4450-47c0-9f9e-6cb86a3b28ea@ventanamicro.com>
-Message-ID: <072c1f11-1bb4-6f19-f847-e4ba07c148c3@eik.bme.hu>
+Message-ID: <aR8rajtQm+kppR87@intel.com>
 References: <20251119130855.105479-1-armbru@redhat.com>
  <20251119130855.105479-2-armbru@redhat.com>
- <4fb0a736-4450-47c0-9f9e-6cb86a3b28ea@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII; format=flowed
-Received-SPF: pass client-ip=2001:738:2001:2001::2001;
- envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251119130855.105479-2-armbru@redhat.com>
+Received-SPF: pass client-ip=198.175.65.21; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -76,123 +93,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 20 Nov 2025, Daniel Henrique Barboza wrote:
-> On 11/19/25 10:08 AM, Markus Armbruster wrote:
->> Signed-off-by: Markus Armbruster <armbru@redhat.com>
->> ---
->
-> Nice cleanup
->
->
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->
->>   include/hw/loader.h |  4 +++-
->>   hw/arm/boot.c       |  6 +-----
->>   hw/core/loader.c    |  8 ++++++--
->>   hw/riscv/spike.c    | 10 +---------
->>   4 files changed, 11 insertions(+), 17 deletions(-)
->> 
->> diff --git a/include/hw/loader.h b/include/hw/loader.h
->> index d035e72748..6f91703503 100644
->> --- a/include/hw/loader.h
->> +++ b/include/hw/loader.h
->> @@ -188,8 +188,10 @@ ssize_t load_elf(const char *filename,
->>    *
->>    * Inspect an ELF file's header. Read its full header contents into a
->>    * buffer and/or determine if the ELF is 64bit.
->> + *
->> + * Returns true on success, false on failure.
->>    */
->> -void load_elf_hdr(const char *filename, void *hdr, bool *is64, Error 
->> **errp);
->> +bool load_elf_hdr(const char *filename, void *hdr, bool *is64, Error 
->> **errp);
->>     ssize_t load_aout(const char *filename, hwaddr addr, int max_sz,
->>                     bool big_endian, hwaddr target_page_size);
->> diff --git a/hw/arm/boot.c b/hw/arm/boot.c
->> index b91660208f..06b303aab8 100644
->> --- a/hw/arm/boot.c
->> +++ b/hw/arm/boot.c
->> @@ -766,16 +766,12 @@ static ssize_t arm_load_elf(struct arm_boot_info 
->> *info, uint64_t *pentry,
->>       int data_swab = 0;
->>       int elf_data_order;
->>       ssize_t ret;
->> -    Error *err = NULL;
->>   -
->> -    load_elf_hdr(info->kernel_filename, &elf_header, &elf_is64, &err);
->> -    if (err) {
->> +    if (!load_elf_hdr(info->kernel_filename, &elf_header, &elf_is64, 
->> NULL)) {
->>           /*
->>            * If the file is not an ELF file we silently return.
->>            * The caller will fall back to try other formats.
->>            */
->> -        error_free(err);
->>           return -1;
->>       }
->>   diff --git a/hw/core/loader.c b/hw/core/loader.c
->> index 590c5b02aa..10687fe1c8 100644
->> --- a/hw/core/loader.c
->> +++ b/hw/core/loader.c
->> @@ -364,8 +364,9 @@ const char *load_elf_strerror(ssize_t error)
->>       }
->>   }
->>   -void load_elf_hdr(const char *filename, void *hdr, bool *is64, Error 
->> **errp)
->> +bool load_elf_hdr(const char *filename, void *hdr, bool *is64, Error 
->> **errp)
->>   {
->> +    bool ok = false;
->>       int fd;
->>       uint8_t e_ident_local[EI_NIDENT];
->>       uint8_t *e_ident;
->> @@ -380,7 +381,7 @@ void load_elf_hdr(const char *filename, void *hdr, bool 
->> *is64, Error **errp)
->>       fd = open(filename, O_RDONLY | O_BINARY);
->>       if (fd < 0) {
->>           error_setg_errno(errp, errno, "Failed to open file: %s", 
->> filename);
->> -        return;
->> +        return false;
->>       }
->>       if (read(fd, hdr, EI_NIDENT) != EI_NIDENT) {
->>           error_setg_errno(errp, errno, "Failed to read file: %s", 
->> filename);
->> @@ -415,8 +416,11 @@ void load_elf_hdr(const char *filename, void *hdr, 
->> bool *is64, Error **errp)
->>           off += br;
->>       }
->>   +    ok = true;
->> +
->>   fail:
->>       close(fd);
->> +    return ok;
->>   }
->>     /* return < 0 if error, otherwise the number of bytes loaded in memory 
->> */
->> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
->> index b0bab3fe00..8531e1d121 100644
->> --- a/hw/riscv/spike.c
->> +++ b/hw/riscv/spike.c
->> @@ -180,15 +180,7 @@ static void create_fdt(SpikeState *s, const 
->> MemMapEntry *memmap,
->>     static bool spike_test_elf_image(char *filename)
->>   {
->> -    Error *err = NULL;
->> -
->> -    load_elf_hdr(filename, NULL, NULL, &err);
->> -    if (err) {
->> -        error_free(err);
->> -        return false;
->> -    } else {
->> -        return true;
->> -    }
->> +    return load_elf_hdr(filename, NULL, NULL, NULL);
+On Wed, Nov 19, 2025 at 02:08:51PM +0100, Markus Armbruster wrote:
+> Date: Wed, 19 Nov 2025 14:08:51 +0100
+> From: Markus Armbruster <armbru@redhat.com>
+> Subject: [PATCH 1/5] hw/core/loader: Make load_elf_hdr() return bool,
+>  simplify caller
+> 
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> ---
+>  include/hw/loader.h |  4 +++-
+>  hw/arm/boot.c       |  6 +-----
+>  hw/core/loader.c    |  8 ++++++--
+>  hw/riscv/spike.c    | 10 +---------
+>  4 files changed, 11 insertions(+), 17 deletions(-)
 
-Does it worth to keep this function or could just be inlined at the two 
-callers now that it's equivalent with load_elf_hdr?
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
-Regards,
-BALATON Zoltan
 
