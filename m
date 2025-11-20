@@ -4,73 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65044CF64A2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 01:05:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE062CF64A2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 08:11:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLt54-0000Im-Jm; Wed, 19 Nov 2025 20:03:26 -0500
+	id 1vLzlA-00008s-7B; Thu, 20 Nov 2025 03:11:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1vLski-0004Gf-2g; Wed, 19 Nov 2025 19:42:24 -0500
-Received: from sea.source.kernel.org ([172.234.252.31])
+ (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
+ id 1vLzl7-00005J-HC; Thu, 20 Nov 2025 03:11:18 -0500
+Received: from mail-eastus2azlp170100001.outbound.protection.outlook.com
+ ([2a01:111:f403:c110::1] helo=BN1PR04CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1vLskf-0002Rx-PW; Wed, 19 Nov 2025 19:42:23 -0500
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C111242ACF;
- Thu, 20 Nov 2025 00:42:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EC33C116B1;
- Thu, 20 Nov 2025 00:42:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1763599338;
- bh=tK5VXeBCScAA0GX2jf41kOrpkUQRfPqqtHW/xzrML0A=;
- h=From:Subject:Date:To:Cc:From;
- b=hrM77l/pkzGFWk5Ea2btCGwzor83qj5bfOP1yrUZ+tO0vKkgvV4JQ5GojoL7p3hew
- K0lUfjCpCMTnkJgJ5yCoSDUQM6U4gC1qsDIp4/TOb772oIY0D2lRQ2sMP0Oefh71m9
- P/BZbKY9dSLzq9O8IJ5aCMRibInl25U2RecpOoEuR6BTPLudGQZKm2jR6G9Fx1BX3M
- lIfg5cucXJVetbeq5j43JjgBbRK5br/QMD+32HxUgrFTM4zj/7yG7xMkd6BbAE5AdG
- 0V+lfzLNBkDWyw7x+bKvqh0j3912M29VgyYwLoMgjwVDCxU/y0Eu4zkMLIMcm/J1d7
- epRUM1O6g+6nA==
-From: Drew Fustini <fustini@kernel.org>
-Subject: [PATCH 0/7] riscv: implement Ssqosid extension and CBQRI controllers
-Date: Wed, 19 Nov 2025 16:42:16 -0800
-Message-Id: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
+ (Exim 4.90_1) (envelope-from <Luc.Michel@amd.com>)
+ id 1vLzl5-0003VK-8I; Thu, 20 Nov 2025 03:11:17 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=k0ernmHbpR0++IS1oDj3A8sXKmbhoFT687NP/vujCdre/DT233TceIZare4UTrNq6W4do+OZB6ILMjf3PZ17vhXSJMS4RBBN3cmsotZapSxMWG0lheV+UhkzRMESJ9XT68lJMTc9nfTTMgsryYXbygvPeRZknU3kiq2UPdCbNi1D5MIWpzTz7nrV3k7iRCLudfpnk6hNUhVMT/Xhmpm+AeK78Iw5BwyMdWQvHJ/m6EWk3X1vgqspz8jGI+KtbKWWWJkMdyYx1m4JSbkAaKp/mh4M6/wil5QgwQIZtE07ONgy44ujABe4OGnNdAj+vLaFSbvuBW/rN3bhziBJ3XDsEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ARoXeX8gsb6s7/rH9G4XD4nZ+xh3tI27WjqRUo6FL0Q=;
+ b=qyh8h454a2sY3sbTiD4B/Wh2TOiXO9LVMVNq7LGegQ9qitCmut8M4twkHcr7vXrbF2vYYpGwi6bWwGPolnI7UZrxz9rqLY758dz4CExk4cligJElPU4t02j1Yogm+rQBBj6Gux0wuKNXE6bK2iaqWB4TL/H38DAWePVtJtGFG9VvEqf2ikwzbRMCsLILMtxfeSgb7Sqfqb9s2IW3+MdxjhOLNDB/UIZfnqsJQig0f/iag223sa261cIFHmJROtMYDrOYhUe6PAAarKpCo2qDtcSoKeaQkYvebJMYHybzOfPbQ26CPrwMPr2LSq+7XH4hPKPncKZZWJDORDlzvG53VA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ARoXeX8gsb6s7/rH9G4XD4nZ+xh3tI27WjqRUo6FL0Q=;
+ b=cDeoe6b7MZeJ2vlIEw469sl5erO6LS8D5RtfdEPjh/ZtqK3q3382EhECuxNKbmRGMpDpy+kSIG3/pW6vg3AMX6475oqynixuZgx7xXxWZ4pq8PF51PApih/nUe9TMTVQZ0tPdZjy9Ywd8x2qxMo2iYANSko3om83oGgWyemLYk8=
+Received: from BLAPR03CA0077.namprd03.prod.outlook.com (2603:10b6:208:329::22)
+ by DS7PR12MB5742.namprd12.prod.outlook.com (2603:10b6:8:71::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Thu, 20 Nov
+ 2025 08:11:03 +0000
+Received: from MN1PEPF0000ECD6.namprd02.prod.outlook.com
+ (2603:10b6:208:329:cafe::1) by BLAPR03CA0077.outlook.office365.com
+ (2603:10b6:208:329::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.10 via Frontend Transport; Thu,
+ 20 Nov 2025 08:11:02 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MN1PEPF0000ECD6.mail.protection.outlook.com (10.167.242.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9343.9 via Frontend Transport; Thu, 20 Nov 2025 08:11:03 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 20 Nov
+ 2025 00:11:03 -0800
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 20 Nov
+ 2025 00:11:03 -0800
+Received: from XFR-LUMICHEL-L2.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Thu, 20 Nov 2025 00:10:58 -0800
+Date: Thu, 20 Nov 2025 09:10:56 +0100
+From: Luc Michel <luc.michel@amd.com>
+To: Markus Armbruster <armbru@redhat.com>
+CC: <qemu-devel@nongnu.org>, <kwolf@redhat.com>, <hreitz@redhat.com>,
+ <mst@redhat.com>, <imammedo@redhat.com>, <anisinha@redhat.com>,
+ <gengdongjiu1@gmail.com>, <peter.maydell@linaro.org>,
+ <alistair@alistair23.me>, <edgar.iglesias@gmail.com>, <npiggin@gmail.com>,
+ <harshpb@linux.ibm.com>, <palmer@dabbelt.com>, <liwei1518@gmail.com>,
+ <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>,
+ <sstabellini@kernel.org>, <anthony@xenproject.org>, <paul@xen.org>,
+ <berrange@redhat.com>, <peterx@redhat.com>, <farosas@suse.de>,
+ <eblake@redhat.com>, <vsementsov@yandex-team.ru>, <eduardo@habkost.net>,
+ <marcel.apfelbaum@gmail.com>, <philmd@linaro.org>, <wangyanan55@huawei.com>,
+ <zhao1.liu@intel.com>, <qemu-block@nongnu.org>, <qemu-arm@nongnu.org>,
+ <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
+ <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH 2/5] hw/nvram/xlnx-bbram: More idiomatic and simpler
+ error reporting
+Message-ID: <aR7NEB_hRiBRZ6vN@XFR-LUMICHEL-L2.amd.com>
+References: <20251119130855.105479-1-armbru@redhat.com>
+ <20251119130855.105479-3-armbru@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAOhjHmkC/x3MPQqAMAxA4atIZgNNURGvIg7apprFnwREkN7d4
- vgN771grMIGQ/WC8i0mx15AdQVhm/eVUWIxeOdbImpQxcKNZtdhEjEslwr2KXa0sPMutlDKUzn
- J81/HKecP8usktWUAAAA=
-X-Change-ID: 20251114-riscv-ssqosid-cbqri-8fd61be020d5
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, Nicolas Pitre <npitre@baylibre.com>, 
- =?utf-8?q?Kornel_Dul=C4=99ba?= <mindal@semihalf.com>, 
- Atish Kumar Patra <atishp@rivosinc.com>, 
- Atish Patra <atish.patra@linux.dev>, 
- Vasudevan Srinivasan <vasu@rivosinc.com>, 
- =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>, 
- yunhui cui <cuiyunhui@bytedance.com>, Chen Pei <cp0613@linux.alibaba.com>, 
- guo.wenjia23@zte.com.cn, liu.qingtao2@zte.com.cn, 
- Drew Fustini <fustini@kernel.org>
-X-Mailer: b4 0.14.3
-Received-SPF: pass client-ip=172.234.252.31; envelope-from=fustini@kernel.org;
- helo=sea.source.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20251119130855.105479-3-armbru@redhat.com>
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD6:EE_|DS7PR12MB5742:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2c54ceaa-b355-4920-6d02-08de280c596e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|7416014|36860700013|82310400026|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?3QT2PaI+IpKNrBbRATmK3YqKY9wivNn/d2S4hqUF99ymRxJnK7+IUSxHlBzW?=
+ =?us-ascii?Q?sbJgw/huJd8xMOu7a0XaMKFG0s9022cqNOOekI31YOBByVLdTEPUKhLjXC3M?=
+ =?us-ascii?Q?as1q7oQIKVewohpOL1uHAgz/tB/W34D6a0ZOSjIM96NPlLWaSNeIfiAW833N?=
+ =?us-ascii?Q?PUhKNsbwTWJNleppvC8tJuFC/mFnaxuKJvd/q2TS7HItmhqy3gqg2YSyxuNh?=
+ =?us-ascii?Q?3zkrPdMKikeo3iJezB5a2Tz5RL85OIHVOMNYYg7ougQOq8WbJsq2s7lgaPeB?=
+ =?us-ascii?Q?zcfLy9U/Nlg4ylwcqaxVYjJrAnZ/mbrswFg2iC1J5ad6ig1BkU7vthtAh/aj?=
+ =?us-ascii?Q?OZoVRXwQ2XBPd3l43LweUz6LFH/p+cvkfGKjZYGvYvJIL/Ees0ZDrGa6VkW3?=
+ =?us-ascii?Q?0DYjXe9Pm3foeV7lXylC70HdQuskl/AhYMPPfRWxdi94ViBbEZ4XLkHunPVt?=
+ =?us-ascii?Q?BlLzdjAvbsxoZFyZ4hRrniCYVvJS4EI9Al8dnxtUDBihF0VsOMkSsS9hTF2e?=
+ =?us-ascii?Q?BcVjXfRerO4IrA2xwwPTs7JfVKoKRa1OVFRCTR/Kkqv0wrKchX4VNSkoyGhU?=
+ =?us-ascii?Q?DekIataSv7mweZSeLQ7AefEu/8FYEHJ7cevsF/WRZ/oPLF+cSG2fkVngirpi?=
+ =?us-ascii?Q?MR30aoVVPEnv/6HYlVaYUPcgMZMZ1oI9HkpjM3cN+Qo21O/oTD4+1ApVO3rA?=
+ =?us-ascii?Q?O4xyk4ZDOlZ/a/3OvbvFq1xGH2HB0bic4hIHaJ/KnjF0hYTudJmP/Zn7co0L?=
+ =?us-ascii?Q?M0TNg3yZhuPcmoSx+5Pi3UqTKsVME2EAWzAOjDaWSH/IXRnqa8kB7Ei+mjHn?=
+ =?us-ascii?Q?3hK4fvhm6moxvGGAqZvtKK6HGQ6MukrnqX4vK/XXVYnrCbBJSXRehK1zWCZp?=
+ =?us-ascii?Q?D1A4/IaGEbG16l0aow3k4pCnk+hyuCIdrdjmWcpJihLpjGXaY606anehC6cv?=
+ =?us-ascii?Q?Dq8Zhzqwq3CA9b8ooZoC29shIJpJJkEvCL5o6y50CS29E0T89SjcaRqaLXue?=
+ =?us-ascii?Q?I4LVNMEFMBpnkcDmTM4c37KselgIjtfZhvKNQpuVd9RO5+3+G6777JePGsjW?=
+ =?us-ascii?Q?L6fRa0XZGfOV2OwCz0ry5nZu2aTv8xMPQZEHVK/LZXLJgJSqdiHNcHEi9u3y?=
+ =?us-ascii?Q?jh2E6ag8IGkIsVtIcMmwTfxCcEce7lFphgMdUHDiR119z71/QBax2x2xLgss?=
+ =?us-ascii?Q?SV+KjX2gdtFlYChfPxFNVy2QxjDli4z54xC9MWwBMBYmKQclquVr+xpZ2RBk?=
+ =?us-ascii?Q?JCvQJ4uRdAVs7ctwZr6384Hze/ZLZpEUAeAicpJD13yVP4l8RY1+7k+SIw3O?=
+ =?us-ascii?Q?0skRv4W2nY8JrRbdIy5pbm12nfArOpTw9LQXawz3fEJd3l5+dedy9ckYW5S1?=
+ =?us-ascii?Q?QurSDiGQYI+vedyO+Rku9g+pGzId/C9yflAN28AQZL7s9qz6UA3yAlGxXU+W?=
+ =?us-ascii?Q?SjBxIEP0Tt5Ei4Nx5NDO2D0y0xCiOv9s5tJsrL9ikwPeLv9PlBR2MRRamUj5?=
+ =?us-ascii?Q?5LsB2HyR9hLJb4XKoet9+asEysAust3i7CJG1TwWWHAZA/xX2sZHug2HuWoL?=
+ =?us-ascii?Q?lBSjY06FsUBx6dsdVyo=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(7416014)(36860700013)(82310400026)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2025 08:11:03.7875 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2c54ceaa-b355-4920-6d02-08de280c596e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD6.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5742
+Received-SPF: permerror client-ip=2a01:111:f403:c110::1;
+ envelope-from=Luc.Michel@amd.com;
+ helo=BN1PR04CU002.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 19 Nov 2025 20:03:24 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,223 +165,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series implements the RISC-V Quality-of-Service Identifiers
-(Ssqosid) extension [1] which adds the srmcfg register. It also
-implements the RISC-V Capacity and Bandwidth Controller QoS Register
-Interface (CBQRI) specification [2]. Quality of Service (QoS) in this
-context is concerned with shared resources on an SoC such as cache
-capacity and memory bandwidth.
+On 14:08 Wed 19 Nov     , Markus Armbruster wrote:
+> Caution: This message originated from an External Source. Use proper caution when opening attachments, clicking links, or responding.
+> 
+> 
+> bbram_bdrv_error() interpolates a "detail" string into a template with
+> error_setg_errno(), then reports the result with error_report().
+> Produces error messages with an unwanted '.':
+> 
+>     BLK-NAME: BBRAM backstore DETAIL failed.: STERROR
+> 
+> Replace both calls of bbram_bdrv_error() by straightforward
+> error_report(), and drop the function.  This is less code, easier to
+> read, and the error message is more greppable.
+> 
+> Also delete the unwanted '.'.
+> 
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
 
-Sssqosid srmcfg CSR
--------------------
-The srmcfg CSR configures a hart with two identifiers:
+Reviewed-by: Luc Michel <luc.michel@amd.com>
 
- - Resource Control ID (RCID)
- - Monitoring Counter ID (MCID)
+> ---
+>  hw/nvram/xlnx-bbram.c | 18 ++++--------------
+>  1 file changed, 4 insertions(+), 14 deletions(-)
+> 
+> diff --git a/hw/nvram/xlnx-bbram.c b/hw/nvram/xlnx-bbram.c
+> index 22aefbc240..fe289bad9d 100644
+> --- a/hw/nvram/xlnx-bbram.c
+> +++ b/hw/nvram/xlnx-bbram.c
+> @@ -88,18 +88,6 @@ static bool bbram_pgm_enabled(XlnxBBRam *s)
+>      return ARRAY_FIELD_EX32(s->regs, BBRAM_STATUS, PGM_MODE) != 0;
+>  }
+> 
+> -static void bbram_bdrv_error(XlnxBBRam *s, int rc, gchar *detail)
+> -{
+> -    Error *errp = NULL;
+> -
+> -    error_setg_errno(&errp, -rc, "%s: BBRAM backstore %s failed.",
+> -                     blk_name(s->blk), detail);
+> -    error_report("%s", error_get_pretty(errp));
+> -    error_free(errp);
+> -
+> -    g_free(detail);
+> -}
+> -
+>  static void bbram_bdrv_read(XlnxBBRam *s, Error **errp)
+>  {
+>      uint32_t *ram = &s->regs[R_BBRAM_0];
+> @@ -162,7 +150,8 @@ static void bbram_bdrv_sync(XlnxBBRam *s, uint64_t hwaddr)
+>      offset = hwaddr - A_BBRAM_0;
+>      rc = blk_pwrite(s->blk, offset, 4, &le32, 0);
+>      if (rc < 0) {
+> -        bbram_bdrv_error(s, rc, g_strdup_printf("write to offset %u", offset));
+> +        error_report("%s: BBRAM backstore write to offset %u failed: %s",
+> +                     blk_name(s->blk), offset, strerror(-rc));
+>      }
+>  }
+> 
+> @@ -178,7 +167,8 @@ static void bbram_bdrv_zero(XlnxBBRam *s)
+> 
+>      rc = blk_make_zero(s->blk, 0);
+>      if (rc < 0) {
+> -        bbram_bdrv_error(s, rc, g_strdup("zeroizing"));
+> +        error_report("%s: BBRAM backstore zeroizing failed: %s",
+> +                     blk_name(s->blk), strerror(-rc));
+>      }
+> 
+>      /* Restore bbram8 if it is non-zero */
+> --
+> 2.49.0
+> 
+> 
 
-These identifiers accompany each request issued by the hart to shared
-resource controllers. This allows the capacity and bandwidth resources
-used by a software workload (e.g. a process or a set of processes) to be
-controlled and monitored.
-
-CBQRI controllers
------------------
-CBQRI defines operations to configure resource usage limits, in the form
-of capacity or bandwidth, for an RCID. CBQRI also defines operations to
-configure counters to track the resource utilization per MCID.
-
-This series implements an CBQRI capacity controller and an CBQRI
-bandwidth controller which can be configured from the command line:
-
-  $ qemu-system-riscv64 -M virt ... \
-      -device riscv.cbqri.capacity,mmio_base=0x04828000[,...] \
-      -device riscv.cbqri.bandwidth,mmio_base=0x04829000[,...]
-    
-The mmio_base option is mandatory, the others are optional.
-                           
-As many -device arguments as wanted can be provided as long as their
-mmio regions don't conflict.
-
-To see all possible options:
-
-  $ qemu-system-riscv64 -device riscv.cbqri.capacity,help
-  riscv.cbqri.capacity options:
-    alloc_op_config_limit=<bool> -  (default: true)
-    alloc_op_flush_rcid=<bool> -  (default: true)
-    alloc_op_read_limit=<bool> -  (default: true)
-    at_code=<bool>         -  (default: true)
-    at_data=<bool>         -  (default: true)
-    cunits=<bool>          - on/off (default: on)
-    max_mcids=<uint16>     -  (default: 256)
-    max_rcids=<uint16>     -  (default: 64)   
-    mmio_base=<uint64>     -  (default: 0)
-    mon_evt_id_none=<bool> -  (default: true)
-    mon_evt_id_occupancy=<bool> -  (default: true)
-    mon_op_config_event=<bool> -  (default: true)
-    mon_op_read_counter=<bool> -  (default: true)
-    ncblks=<uint16>        -  (default: 16)
-    p=<uint8>              -  (default: 4)
-    rpfx=<bool>            - on/off (default: on)
-    target=<str>
-   
-  $ qemu-system-riscv64 -device riscv.cbqri.bandwidth,help
-  riscv.cbqri.bandwidth options:
-    alloc_op_config_limit=<bool> -  (default: true)
-    alloc_op_read_limit=<bool> -  (default: true)
-    at_code=<bool>         -  (default: true)
-    at_data=<bool>         -  (default: true)
-    max_mcids=<uint16>     -  (default: 256)
-    max_rcids=<uint16>     -  (default: 64)
-    mmio_base=<uint64>     -  (default: 0)
-    mon_evt_id_none=<bool> -  (default: true)
-    mon_evt_id_rdonly_count=<bool> -  (default: true)
-    mon_evt_id_rdwr_count=<bool> -  (default: true)
-    mon_evt_id_wronly_count=<bool> -  (default: true)
-    mon_op_config_event=<bool> -  (default: true)
-    mon_op_read_counter=<bool> -  (default: true)
-    nbwblks=<uint16>       -  (default: 1024)
-    p=<uint8>              -  (default: 4)
-    rpfx=<bool>            - on/off (default: on)
-    target=<str>
-
-Boolean options correspond to hardware capabilities that can be disabled
- 
-Example SoC for CBQRI
----------------------
-An example SoC with the following CBQRI controller configuration can be
-used to test the implementation:
-
-  - L2 cache controllers
-    - Resource type: Capacity
-    - Number of capacity blocks (NCBLKS): 12
-    	- In the context of a set-associative cache, the number of
-	  capacity blocks can be thought of as the number of ways
-    - Number of access types: 2 (code and data)
-    - Usage monitoring not supported
-    - Capacity allocation operations: CONFIG_LIMIT, READ_LIMIT
-
-  - Last-level cache (LLC) controller
-    - Resource type: Capacity
-    - Number of capacity blocks (NCBLKS): 16
-    - Number of access types: 2 (code and data)
-    - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
-    - Event IDs supported: None, Occupancy
-    - Capacity allocation ops: CONFIG_LIMIT, READ_LIMIT, FLUSH_RCID
-
-  - Memory controllers
-    - Resource type: Bandwidth
-    - Number of bandwidth blocks (NBWBLKS): 1024
-       - Bandwidth blocks do not have a unit but instead represent a
-         portion of the total bandwidth resource. For NWBLKS of 1024,
-	 each block represents about 0.1% of the bandwidth resource.
-    - Maximum reserved bandwidth blocks (MRBWB): 819 [80% of NBWBLKS]
-    - Number of access types: 1 (no code/data differentiation)
-    - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
-    - Event IDs supported: None, Total read/write byte count, Total
-                           read byte count, Total write byte count
-    - Bandwidth allocation operations: CONFIG_LIMIT, READ_LIMIT
-
-The memory map used for the example SoC:
-
-  Base addr  Size
-  0x4820000  4KB  Cluster 0 L2 cache controller
-  0x4821000  4KB  Cluster 1 L2 cache controller
-  0x4828000  4KB  Memory controller 0
-  0x4829000  4KB  Memory controller 1
-  0x482a000  4KB  Memory controller 2
-  0x482b000  4KB  Shared LLC cache controller
-
-This configuration is meant to provide a "concrete" example for software
-(like Linux) to test against. It represents just one of many possible
-ways for hardware to implement the CBQRI spec.
-
-The example SoC configuration is created with the following:
-
-  qemu-system-riscv64 \
-        -M virt \
-        -nographic \
-        -smp 8 \
-        -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=12,alloc_op_flush_rcid=false,mon_op_config_event=false,mon_op_read_counter=false,mon_evt_id_none=false,mon_evt_id_occupancy=false,mmio_base=0x04820000 \
-        -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=12,alloc_op_flush_rcid=false,mon_op_config_event=false,mon_op_read_counter=false,mon_evt_id_none=false,mon_evt_id_occupancy=false,mmio_base=0x04821000 \
-        -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=16,mmio_base=0x0482B000 \
-        -device riscv.cbqri.bandwidth,max_mcids=256,max_rcids=64,nbwblks=1024,mrbwb=819,mmio_base=0x04828000 \
-        -device riscv.cbqri.bandwidth,max_mcids=256,max_rcids=64,nbwblks=1024,mrbwb=819,mmio_base=0x04829000 \
-        -device riscv.cbqri.bandwidth,max_mcids=256,max_rcids=64,nbwblks=1024,mrbwb=819,mmio_base=0x0482a000
-
-In addition, please note that this series only implements the register
-interface that CBQRI specifies. It does not attempt to emulate the
-performance impact of configuring limits on shared resources like cache
-and memory bandwidth. Similarly, the code does not attempt to emulate
-cache and memory bandwidth utilization, like what would be observed on a
-real hardware system implementing CBQRI.
-
-There is a branch of Linux [3] which adds support for Ssqosid and CBQRI
-along with resctrl integration. I still need to do some more cleanup of
-the code and intend to post the Linux patch series soon.
-
-Changes since v2
-----------------
- - Rebase on master which is currently at version v10.1.50
- - Add fields that were not in the draft used for the proof of concept
-   and introduced in final CBQRI 1.0 spec: capacity units (cunits) and
-   RCID-prefixed mode (RPFX) along with parameter P (prefixed bits)
- - Fix check_srmcfg() to check if virtualization is enabled, and if so,
-   return virt instruction fault, otherwise return smode()
- - Fix indentation in read_srmcfg()
- - Add SPDX headers
- - Add MAINTAINERS enteries
- - Link to v2: https://lore.kernel.org/qemu-devel/20230425203834.1135306-1-dfustini@baylibre.com/ 
-
-Changes since v1
-----------------
- - Rebase on current master (8.0.50) instead of 8.0.0-rc4
- - Configure CBQRI controllers based on device properties in command line
-   arguments instead of a fixed example SoC configuration.
- - Move TYPE_RISCV_CBQRI_BC and TYPE_RISCV_CBQRI_CC into header so that
-   machines may use it (suggested by Alistair).
- - Change 'select RISC_CBQRI' to 'imply RISCV_CBQRI' for RISCV_VIRT.
- - Patches 8/9 could be dropped as they are not needed for the CBQRI
-   proof-of-concept to work. They are only meant to serve as an example
-   for those implementing new machines.
- - Link to v1: https://lore.kernel.org/qemu-devel/20230416232050.4094820-1-dfustini@baylibre.com/
-
-[1] https://github.com/riscv/riscv-ssqosid/releases/tag/v1.0
-[2] https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
-[3] https://git.kernel.org/pub/scm/linux/kernel/git/fustini/linux.git/log/?h=b4/ssqosid-cbqri
-
-Signed-off-by: Drew Fustini <fustini@kernel.org>
----
-Kornel Dulęba (1):
-      riscv: implement Ssqosid extension and srmcfg CSR
-
-Nicolas Pitre (6):
-      hw/riscv: define capabilities of CBQRI controllers
-      hw/riscv: implement CBQRI capacity controller
-      hw/riscv: implement CBQRI bandwidth controller
-      hw/riscv: Kconfig: add CBQRI options
-      hw/riscv: meson: add CBQRI controllers to the build
-      hw/riscv: add CBQRI controllers to virt machine
-
- MAINTAINERS                       |   9 +
- disas/riscv.c                     |   1 +
- hw/riscv/Kconfig                  |   4 +
- hw/riscv/cbqri_bandwidth.c        | 613 ++++++++++++++++++++++++++++++++++++
- hw/riscv/cbqri_capacity.c         | 634 ++++++++++++++++++++++++++++++++++++++
- hw/riscv/meson.build              |   1 +
- hw/riscv/virt.c                   |   3 +
- include/hw/riscv/cbqri.h          |  89 ++++++
- target/riscv/cpu.c                |   2 +
- target/riscv/cpu.h                |   3 +
- target/riscv/cpu_bits.h           |   8 +
- target/riscv/cpu_cfg_fields.h.inc |   1 +
- target/riscv/csr.c                |  34 ++
- 13 files changed, 1402 insertions(+)
----
-base-commit: e88510fcdc13380bd4895a17d6f8a0b3a3325b85
-change-id: 20251114-riscv-ssqosid-cbqri-8fd61be020d5
-
-Best regards,
 -- 
-Drew Fustini <fustini@kernel.org>
-
 
