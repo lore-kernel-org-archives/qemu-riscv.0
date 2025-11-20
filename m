@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62659CF884A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 11:59:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30037CF8844
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 12:01:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vM3Jy-0006Vo-4L; Thu, 20 Nov 2025 06:59:30 -0500
+	id 1vM3Ll-0007K5-8r; Thu, 20 Nov 2025 07:01:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM3Jw-0006VC-5O
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:59:28 -0500
-Received: from mail-ot1-x329.google.com ([2607:f8b0:4864:20::329])
+ id 1vM3Le-0007II-TA
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:01:15 -0500
+Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM3Ju-0003TW-C6
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:59:27 -0500
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7c76f65feb5so595601a34.0
- for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 03:59:25 -0800 (PST)
+ id 1vM3Ld-0003xl-7G
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:01:14 -0500
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3e84d56c4b8so460913fac.2
+ for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 04:01:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1763639965; x=1764244765; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1763640072; x=1764244872; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=BwKMvDY8297hr9uPqK/3BBxH5Upv5LgYn4pXQ9ZWDpA=;
- b=iaIoaAnmbsqvZHXxJUY93nGYFKny0Yuiv9o29BDmJooBE9J7fBHKIGpyJll09zmW3Q
- Z+sozR6D0bTGxkfF7hF5Oed6whygUg9ntJXLF7igTlUIASLvNyMZuz/a2v22RDJwgTKB
- O/aojw3oJa190NQYOKKUjIefyhHYI34SzdHTd9RHseiZTa2c8Es/B90cFntS4iZumTJD
- mppuDUwSpM84cRn8FcgEUUXhX+gGK6g+Ck3mOiSy6CMSFhFkwSf1xMwQgQ4i6aKO/U3t
- RJUgidWZFEmB6HZi5EUTDpx2lG1eTHW9oJBsUYUb07l6E0HJY7rJq5KsRiiQFWNkWfRH
- uRYw==
+ bh=gaK6xjFEa7Rqoa5NHcx38vyaGD1+kzqQP35qMZPac2Y=;
+ b=FNCWIvq/HS2DeyeAgOai4W4imei3YqfDoivtu0LVUoQTgGf9wNn+ZWhD1kVTMdwFZt
+ WwOHXWCaVIgpg2MosCHkbCOza+4dNCsY9zwQhE4vsW7VNvY07GNAveWs7V4sGDsvkc0r
+ AdJad35zTBR6ZibITmyOUfHk9YYu+vsTWEPrHCy2B07HH1ZWOyNAPJiqBeCjGw9PvVJO
+ OG+fQ2eF5IsQ6mmaE2O++CEmGTXAYr62GqyvjcY4uiPU+YErgeF66/HlqOtGD1FCHzea
+ 4RoAnEumaHTj0OwGSnn0d5mgEaGbxqkOjg15Mv8y3qxtaYwkTR+0tIV7i5Q38+3WMrml
+ aalQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763639965; x=1764244765;
+ d=1e100.net; s=20230601; t=1763640072; x=1764244872;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BwKMvDY8297hr9uPqK/3BBxH5Upv5LgYn4pXQ9ZWDpA=;
- b=GsWOao9vIv3qHi0wcbiRICwMiPwitLxQfqw7jyXcaZb7n1I2oqlyZkDfoJwv5VfM9z
- 0qV/+9ktUtATFu/5mlEOVkM0OaIiAfbhmOW5VuVMzqc1E8Ua6bdu4DPDoPp3Niaobdcf
- FqYboANOTaAxMjRWG8Kj0rYi25w3hi89rRp/fRowgp2VlS88g2Q7xvtRf0PaSC/dMIf8
- bSrZP/qlJmIPFM7iuZggUA1YRpXCwYY/IEBbar/cGF5/GbiByI7IecxqSDnCx7esOtAM
- SnJFo5XPdSbDBdtiB4nrF8g8YcItaluF/faUmEOC3NBZgNfzmzr2MM7Cq160Tl0uEYbu
- ulBg==
+ bh=gaK6xjFEa7Rqoa5NHcx38vyaGD1+kzqQP35qMZPac2Y=;
+ b=nbzjR7RpMNMwucTT9ORVVnsG+W0aNf4rTMD/iVHPpX9+PaV3OeTBT1q4f6U2E+Q+8H
+ Rz2Zl2vNuwtDF8Ur0fZ8S9cxdkBe7r/PftjSKcWBMNBekswHVAwhe0ZxhupiYe/q9Z5o
+ gRiZViR5Z2uyNy0bIocg4MuJLEpZngbzofG9/fwrp4kNcY+SfsBg8hLDI4KG+yr3oWfK
+ fetwEOipIfvUMS2pbm4pLyGO2Go975zq22fX63UjfknFhgfhXYluZ9zG8Yg1GOgU4dKw
+ kItfYbbopqCU1DWm7qR7vWsgFVgSSUofFF0KqZaV2aLDRDKPokhICGJawQjjUgggbnkj
+ GYeQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW29NTNyHsMd2vAq7B4/vXPR8SHeOdssI+C0z4HZvTfgGejHNFJidIe7gcC7wWFIo00K8oRCWcC7MGI@nongnu.org
-X-Gm-Message-State: AOJu0YyO2nKvxOQLh3WPATSGo1x7Q75ZSruo4CGX5k08MoEkIw2z/Re5
- XoE58P1VN6EtMaFOmQ5G7rpl5dlPvvzfDvuvT7XLhbrrKDkOZxL0yYyw2w6gTJw3rIc=
-X-Gm-Gg: ASbGncs/PvD9ilthnS9csCDCxx8u27LZ/6svy7ZOP9zedvkCebJUM0a0Wi5DYIwbKqy
- HQ753QCcUKfmc75w1Nhvk8TQP5ziVfrFjoqIK4vBqlKDLj0Y19G5jmCavqb6o6DUyfLpkrY8oku
- xidcxsgz7zQPQLsaqE6eIQycgBaBjrpoOflUi6FdH0eCACThB0KBNKMh8ErzoNfjYq0x5wUKwUm
- NtU0hV/AQdnQQjc/FBPWZjKJY+fQHn8iby4Qal4ctRAhlUWX6z+t9NiVWWNWK0ri7sQS2DypF6d
- ig/xx3xUJh6icb4UH5DZ+655r82An7rVJ2vIeGHzbGZXqoOMDwg//qRwWFCno+nQSa2Yc/2xtqI
- zi1F9RCWwOQ7N6B4Th4kRo4iAv6PHyH7WNq+8D4oolUPTOZ0Zu2ifQlpHkeFdxm5vj0oYq6O1Rx
- eaO5cEADOpwLp8A4XO6X2ghTVRwMo=
-X-Google-Smtp-Source: AGHT+IHx1l8t/uOlVBUL45bt6MO6wfOe3CXRPGjbGY2pDPVF5MxAP9pa0cIKItQXqgXknSy/gICoiQ==
-X-Received: by 2002:a05:6830:8485:b0:7c7:586e:8e76 with SMTP id
- 46e09a7af769-7c78f4208e3mr715003a34.28.1763639965063; 
- Thu, 20 Nov 2025 03:59:25 -0800 (PST)
+ AJvYcCXQLt00nWSyZzLfWHEd6zunYSEYJNPbODpXGQITxT88NsFfDyKmm9NzyP89DRM2PUVdF4r3iZJSCaNM@nongnu.org
+X-Gm-Message-State: AOJu0YwIdxR1RojYwxQv7cugB7gMOXfWQ+wE91siUlgOXYZJD5YZLEyS
+ VPODJ99ymeVtUYlVaZ80f4mPZEAwECErWDfSZwxh+Lwqh+TI4nePdHOacOylVnMwe0A=
+X-Gm-Gg: ASbGncvAqLL1ciqyAVSV3mCmE9GbhxBWflmDC4C0xzAK1q7Wh5hCZaONgnaS8sEJzIq
+ 8gSAWKcLImnH/9LH0agG73twr0YZ02lA66RjHPMWccHASE9EzN1RPOMfnM5Dl5xxGsqYUMLGYZh
+ JeQdkyzQunGPR6DmmyIy6PGBIeXy9hGL1KM+lfNwkBSuJiOrNFwf7yPu9v1LYSSeI4OMoOmnUiS
+ kyeFrfEWd7TARN+FfDW8A/Qf1oy9DCMwdxtKzA29rY3lvMarLiPtrdgI/EhHQAr0Ysgnx6f2T0E
+ iWoHN0qOyNaZi47h1pXDhhw4sio3OIy5kl/kQ7hlDQxPr2uVdGFgvudZTbOy5Iz4JwnV9hxfUHN
+ qx4g4K2euiIHkO9c88TgwpNWXlau8okINgMNWRr80hSGv6rvTdzBA5bO1R8EnWbn0FHqrx+/c27
+ cy6wN/ZXMmCzB2p2qvfBCDI1Dw5xA=
+X-Google-Smtp-Source: AGHT+IEntktp2t6F3c2FtTfsZubi/joeyDbNxjQRO85Lw7W41uGRuibq+CDm/o15Yxf057JkT7PT/w==
+X-Received: by 2002:a05:6870:6129:b0:3ec:3c47:b3e7 with SMTP id
+ 586e51a60fabf-3ec9a64f8fcmr1484701fac.47.1763640071814; 
+ Thu, 20 Nov 2025 04:01:11 -0800 (PST)
 Received: from [192.168.68.110] ([177.188.133.235])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c78d428edfsm913265a34.31.2025.11.20.03.59.17
+ 586e51a60fabf-3ec9c347b2bsm1031566fac.9.2025.11.20.04.01.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Nov 2025 03:59:22 -0800 (PST)
-Message-ID: <0699f702-d65b-4ab3-89ac-0c27b9330b6e@ventanamicro.com>
-Date: Thu, 20 Nov 2025 08:59:16 -0300
+ Thu, 20 Nov 2025 04:01:09 -0800 (PST)
+Message-ID: <fe2648a7-7875-4aa8-a1f6-485490ddc7b3@ventanamicro.com>
+Date: Thu, 20 Nov 2025 09:01:03 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7] hw/riscv: define capabilities of CBQRI controllers
+Subject: Re: [PATCH 6/7] hw/riscv: meson: add CBQRI controllers to the build
 To: Drew Fustini <fustini@kernel.org>, qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, Weiwei Li
@@ -86,21 +86,21 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Chen Pei <cp0613@linux.alibaba.com>, guo.wenjia23@zte.com.cn,
  liu.qingtao2@zte.com.cn
 References: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
- <20251119-riscv-ssqosid-cbqri-v1-2-3392fc760e48@kernel.org>
+ <20251119-riscv-ssqosid-cbqri-v1-6-3392fc760e48@kernel.org>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-2-3392fc760e48@kernel.org>
+In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-6-3392fc760e48@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::329;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x329.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,140 +116,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi,
 
+I think this patch and patch 5 should be squashed together. Both LGTM otherwise.
+
+
+Thanks,
+
+Daniel
 
 On 11/19/25 9:42 PM, Drew Fustini wrote:
 > From: Nicolas Pitre <npitre@baylibre.com>
 > 
-> Define structs to represent the hardware capabilities of capacity and
-> bandwidth controllers according to the RISC-V Capacity and Bandwidth QoS
-> Register Interface (CBQRI).
+> Build the CBQRI controllers when RISC-V CBQRI is enabled by Kconfig.
 > 
-> Link: https://github.com/riscv-non-isa/riscv-cbqri/blob/main/riscv-cbqri.pdf
 > Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
-> [fustini: add fields introduced in the ratified spec: cunits, rpfx, p]
 > Signed-off-by: Drew Fustini <fustini@kernel.org>
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   MAINTAINERS              |  7 ++++
->   include/hw/riscv/cbqri.h | 89 ++++++++++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 96 insertions(+)
+>   hw/riscv/meson.build | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 38325e0617c4..7afe80f1b17c 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -357,6 +357,13 @@ F: target/riscv/XVentanaCondOps.decode
->   F: target/riscv/insn_trans/trans_xventanacondops.c.inc
->   F: disas/riscv-xventana*
+> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+> index 2a8d5b136cc4..79e15514b797 100644
+> --- a/hw/riscv/meson.build
+> +++ b/hw/riscv/meson.build
+> @@ -14,5 +14,6 @@ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
+>   	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
+>   riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
+>   riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
+> +riscv_ss.add(when: 'CONFIG_RISCV_CBQRI', if_true: files('cbqri_capacity.c', 'cbqri_bandwidth.c'))
 >   
-> +RISC-V QoS (Ssqosid ext and CBQRI spec)
-> +M: Nicolas Pitre <npitre@baylibre.com>
-> +M: Drew Fustini <fustini@kernel.org>
-> +L: qemu-riscv@nongnu.org
-> +S: Supported
-> +F: include/hw/riscv/cbqri.h
-> +
->   RENESAS RX CPUs
->   R: Yoshinori Sato <yoshinori.sato@nifty.com>
->   S: Orphan
-> diff --git a/include/hw/riscv/cbqri.h b/include/hw/riscv/cbqri.h
-> new file mode 100644
-> index 000000000000..1b4c69779c0e
-> --- /dev/null
-> +++ b/include/hw/riscv/cbqri.h
-> @@ -0,0 +1,89 @@
-> +/*
-> + * RISC-V Capacity and Bandwidth QoS Register Interface
-> + * URL: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
-> + *
-> + * Copyright (c) 2023 BayLibre SAS
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef HW_RISCV_CBQRI_H
-> +#define HW_RISCV_CBQRI_H
-> +
-> +#include "qemu/typedefs.h"
-> +
-> +#define RISCV_CBQRI_VERSION_MAJOR   0
-> +#define RISCV_CBQRI_VERSION_MINOR   1
-> +
-> +#define TYPE_RISCV_CBQRI_CC         "riscv.cbqri.capacity"
-> +#define TYPE_RISCV_CBQRI_BC         "riscv.cbqri.bandwidth"
-> +
-> +/* Capacity Controller hardware capabilities */
-> +typedef struct RiscvCbqriCapacityCaps {
-> +    uint16_t nb_mcids;
-> +    uint16_t nb_rcids;
-> +
-> +    uint16_t ncblks;
-> +    bool cunits:1;
-> +
-> +    bool rpfx:1;
-> +    uint8_t p;
-> +
-> +    bool supports_at_data:1;
-> +    bool supports_at_code:1;
-> +
-> +    bool supports_alloc_op_config_limit:1;
-> +    bool supports_alloc_op_read_limit:1;
-> +    bool supports_alloc_op_flush_rcid:1;
-> +
-> +    bool supports_mon_op_config_event:1;
-> +    bool supports_mon_op_read_counter:1;
-> +
-> +    bool supports_mon_evt_id_none:1;
-> +    bool supports_mon_evt_id_occupancy:1;
-> +} RiscvCbqriCapacityCaps;
-> +
-> +/* Bandwidth Controller hardware capabilities */
-> +typedef struct RiscvCbqriBandwidthCaps {
-> +    uint16_t nb_mcids;
-> +    uint16_t nb_rcids;
-> +
-> +    uint16_t nbwblks;
-> +    uint16_t mrbwb;
-> +
-> +    bool rpfx:1;
-> +    uint8_t p;
-> +
-> +    bool supports_at_data:1;
-> +    bool supports_at_code:1;
-> +
-> +    bool supports_alloc_op_config_limit:1;
-> +    bool supports_alloc_op_read_limit:1;
-> +
-> +    bool supports_mon_op_config_event:1;
-> +    bool supports_mon_op_read_counter:1;
-> +
-> +    bool supports_mon_evt_id_none:1;
-> +    bool supports_mon_evt_id_rdwr_count:1;
-> +    bool supports_mon_evt_id_rdonly_count:1;
-> +    bool supports_mon_evt_id_wronly_count:1;
-> +} RiscvCbqriBandwidthCaps;
-> +
-> +DeviceState *riscv_cbqri_cc_create(hwaddr addr,
-> +                                   const RiscvCbqriCapacityCaps *caps,
-> +                                   const char *target_name);
-> +DeviceState *riscv_cbqri_bc_create(hwaddr addr,
-> +                                   const RiscvCbqriBandwidthCaps *caps,
-> +                                   const char *target_name);
-> +#endif
+>   hw_arch += {'riscv': riscv_ss}
 > 
 
 
