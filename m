@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0D45CF64A2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 01:05:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DCCCCF64A1
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 01:05:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vLt54-0000J3-Ty; Wed, 19 Nov 2025 20:03:26 -0500
+	id 1vLt54-0000Ik-AB; Wed, 19 Nov 2025 20:03:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1vLskj-0004HF-AN; Wed, 19 Nov 2025 19:42:25 -0500
-Received: from tor.source.kernel.org ([172.105.4.254])
+ id 1vLskh-0004GY-L4; Wed, 19 Nov 2025 19:42:23 -0500
+Received: from sea.source.kernel.org ([172.234.252.31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1vLskg-0002S0-H8; Wed, 19 Nov 2025 19:42:24 -0500
+ id 1vLskf-0002Rz-QV; Wed, 19 Nov 2025 19:42:23 -0500
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 49B0F60185;
+ by sea.source.kernel.org (Postfix) with ESMTP id 73E2C4415E;
  Thu, 20 Nov 2025 00:42:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC160C16AAE;
- Thu, 20 Nov 2025 00:42:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B3FEC116B1;
+ Thu, 20 Nov 2025 00:42:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1763599339;
- bh=ZoKXyBiS0bJFhqyVI65ezn+Mu3I5RJvtW5nvhBqRgC4=;
+ bh=kjvlwlRN49L6rvGN48vARsDhBcoPdQj+aJ62SJB8nxo=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=N/kT5CTQrRHNl8GaM9v7Fc8JBtmLb2L/Gvt+kR+J3yuQviUqZbzWaN2mzYNXpfrpn
- rajtzB6Qp3KtJJekt6EMyec7bu9ckRgi0HC3qnmIcU/ikCnrRrPJiYl8ldpy90i9Kw
- g/R5ql0D2ToMGPYLRXJgmA/blPQuHgBcSsbn5Q4kDhcrhhPmP2TaOJOAeUmplXVdPb
- jUblBe5di8kiFEMs2kY1Dr6KTHqcZ52N2JjZJpAzdvuWnAVWGxuuiFwswmzoDbwfQ0
- ykFBq3AEhHbjACuue81nNJ9UDaO7thsAsy7sH20OSsKEerYVhKWTj+Prx+jxCdq+32
- R1jdFHFZWmySg==
+ b=DyT9TLM9reykGgAtyVEKrdpMd4cjLvMP1Vpk8ERc7JTuV6BmVHLNOeAnPNG9dOHa0
+ EW8w5m+fdcb2rmirowMWbx+tvdoEfN+W4WlYnFVusXowX85HVqUyAoFD1oXvkL3WQj
+ wdq8LLPi4TSVM7gM8yQpRb/fPsVrlONp7/nd/mw0qSm8GQF511nZ8iQoXZqXMGFwjZ
+ fxcPxh3EsSrv9o3puJ3WCQUcN/JZIUT06foN9ZKaoPXgRaBtrtmuV7kDZKumZzHXxa
+ IYrta03gi2IYEcSay9cOztwkAMuFK8FWQqGGvjfuGesDL9Zu9NPNIufvBZGrg6Wc18
+ R58o/hBwR+ULw==
 From: Drew Fustini <fustini@kernel.org>
-Date: Wed, 19 Nov 2025 16:42:17 -0800
-Subject: [PATCH 1/7] riscv: implement Ssqosid extension and srmcfg CSR
+Date: Wed, 19 Nov 2025 16:42:18 -0800
+Subject: [PATCH 2/7] hw/riscv: define capabilities of CBQRI controllers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20251119-riscv-ssqosid-cbqri-v1-1-3392fc760e48@kernel.org>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251119-riscv-ssqosid-cbqri-v1-2-3392fc760e48@kernel.org>
 References: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
 In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
 To: qemu-devel@nongnu.org
@@ -58,8 +58,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  guo.wenjia23@zte.com.cn, liu.qingtao2@zte.com.cn, 
  Drew Fustini <fustini@kernel.org>
 X-Mailer: b4 0.14.3
-Received-SPF: pass client-ip=172.105.4.254; envelope-from=fustini@kernel.org;
- helo=tor.source.kernel.org
+Received-SPF: pass client-ip=172.234.252.31; envelope-from=fustini@kernel.org;
+ helo=sea.source.kernel.org
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,165 +83,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Kornel Dulęba <mindal@semihalf.com>
+From: Nicolas Pitre <npitre@baylibre.com>
 
-Implement the srmcfg CSR defined by the Ssqosid ISA extension
-(Supervisor-mode Quality of Service ID). The CSR contains two fields:
+Define structs to represent the hardware capabilities of capacity and
+bandwidth controllers according to the RISC-V Capacity and Bandwidth QoS
+Register Interface (CBQRI).
 
-  - Resource Control ID (RCID) used determine resource allocation
-  - Monitoring Counter ID (MCID) used to track resource usage
-
-The CSR is defined for S-mode but accessing it when V=1 shall cause a
-virtual instruction exception. Implement this behavior by calling the
-hmode predicate.
-
-Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/download/v1.0/riscv-cbqri.pdf
-Signed-off-by: Kornel Dulęba <mindal@semihalf.com>
-[fustini: rebase on v10.1.50, fix check_srmcfg]
+Link: https://github.com/riscv-non-isa/riscv-cbqri/blob/main/riscv-cbqri.pdf
+Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
+[fustini: add fields introduced in the ratified spec: cunits, rpfx, p]
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- disas/riscv.c                     |  1 +
- target/riscv/cpu.c                |  2 ++
- target/riscv/cpu.h                |  3 +++
- target/riscv/cpu_bits.h           |  8 ++++++++
- target/riscv/cpu_cfg_fields.h.inc |  1 +
- target/riscv/csr.c                | 34 ++++++++++++++++++++++++++++++++++
- 6 files changed, 49 insertions(+)
+ MAINTAINERS              |  7 ++++
+ include/hw/riscv/cbqri.h | 89 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 96 insertions(+)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 85cd2a9c2aef..86fc710528c1 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -2289,6 +2289,7 @@ static const char *csr_name(int csrno)
-     case 0x0143: return "stval";
-     case 0x0144: return "sip";
-     case 0x0180: return "satp";
-+    case 0x0181: return "srmcfg";
-     case 0x0200: return "hstatus";
-     case 0x0202: return "hedeleg";
-     case 0x0203: return "hideleg";
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 73d4280d7c84..2e2e642de26b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -216,6 +216,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
-     ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
-     ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
-+    ISA_EXT_DATA_ENTRY(ssqosid, PRIV_VERSION_1_12_0, ext_ssqosid),
-     ISA_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
-     ISA_EXT_DATA_ENTRY(ssstrict, PRIV_VERSION_1_12_0, has_priv_1_12),
-     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
-@@ -1268,6 +1269,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("zvfbfwma", ext_zvfbfwma, false),
-     MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
-     MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
-+    MULTI_EXT_CFG_BOOL("ssqosid", ext_ssqosid, true),
-     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
-     MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
-     MULTI_EXT_CFG_BOOL("sspm", ext_sspm, false),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 36e7f100374d..21688d8ca002 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -336,6 +336,9 @@ struct CPUArchState {
-     uint64_t ctr_dst[16 << SCTRDEPTH_MAX];
-     uint64_t ctr_data[16 << SCTRDEPTH_MAX];
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 38325e0617c4..7afe80f1b17c 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -357,6 +357,13 @@ F: target/riscv/XVentanaCondOps.decode
+ F: target/riscv/insn_trans/trans_xventanacondops.c.inc
+ F: disas/riscv-xventana*
  
-+    /* Ssqosid extension */
-+    target_ulong srmcfg;
++RISC-V QoS (Ssqosid ext and CBQRI spec)
++M: Nicolas Pitre <npitre@baylibre.com>
++M: Drew Fustini <fustini@kernel.org>
++L: qemu-riscv@nongnu.org
++S: Supported
++F: include/hw/riscv/cbqri.h
 +
-     /* Machine and Supervisor interrupt priorities */
-     uint8_t miprio[64];
-     uint8_t siprio[64];
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index b62dd82fe7c0..ebb400bf6f2c 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -228,6 +228,9 @@
- #define CSR_SPTBR           0x180
- #define CSR_SATP            0x180
- 
-+/* Ssqosid extension */
-+#define CSR_SRMCFG          0x181
+ RENESAS RX CPUs
+ R: Yoshinori Sato <yoshinori.sato@nifty.com>
+ S: Orphan
+diff --git a/include/hw/riscv/cbqri.h b/include/hw/riscv/cbqri.h
+new file mode 100644
+index 000000000000..1b4c69779c0e
+--- /dev/null
++++ b/include/hw/riscv/cbqri.h
+@@ -0,0 +1,89 @@
++/*
++ * RISC-V Capacity and Bandwidth QoS Register Interface
++ * URL: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
++ *
++ * Copyright (c) 2023 BayLibre SAS
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
 +
- /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
- #define CSR_SISELECT        0x150
- #define CSR_SIREG           0x151
-@@ -1164,4 +1167,9 @@ typedef enum CTRType {
- #define MCONTEXT64                         0x0000000000001FFFULL
- #define MCONTEXT32_HCONTEXT                0x0000007F
- #define MCONTEXT64_HCONTEXT                0x0000000000003FFFULL
++#ifndef HW_RISCV_CBQRI_H
++#define HW_RISCV_CBQRI_H
 +
-+/* SRMCFG CSR field masks (Ssqosid extensions) */
-+#define SRMCFG_RCID                      0x00000FFF
-+#define SRMCFG_MCID                      0x0FFF0000
++#include "qemu/typedefs.h"
 +
- #endif
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index a154ecdc792b..6518f6f9c571 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -105,6 +105,7 @@ BOOL_FIELD(ext_ssaia)
- BOOL_FIELD(ext_smctr)
- BOOL_FIELD(ext_ssctr)
- BOOL_FIELD(ext_sscofpmf)
-+BOOL_FIELD(ext_ssqosid)
- BOOL_FIELD(ext_smepmp)
- BOOL_FIELD(ext_smrnmi)
- BOOL_FIELD(ext_ssnpm)
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 5c91658c3dc4..06a6212c672d 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1759,6 +1759,37 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static RISCVException check_srmcfg(CPURISCVState *env, int csrno)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
++#define RISCV_CBQRI_VERSION_MAJOR   0
++#define RISCV_CBQRI_VERSION_MINOR   1
 +
-+    if (!cpu->cfg.ext_ssqosid) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
++#define TYPE_RISCV_CBQRI_CC         "riscv.cbqri.capacity"
++#define TYPE_RISCV_CBQRI_BC         "riscv.cbqri.bandwidth"
 +
-+    /*
-+     * Even though this is an S-mode CSR the spec says that we need to throw
-+     * and virt instruction fault if a guest tries to access it.
-+     */
-+    return env->virt_enabled ?
-+           RISCV_EXCP_VIRT_INSTRUCTION_FAULT : smode(env, csrno);
-+}
++/* Capacity Controller hardware capabilities */
++typedef struct RiscvCbqriCapacityCaps {
++    uint16_t nb_mcids;
++    uint16_t nb_rcids;
 +
-+static RISCVException read_srmcfg(CPURISCVState *env, int csrno,
-+                                  target_ulong *val)
-+{
-+    *val = env->srmcfg;
-+    return RISCV_EXCP_NONE;
-+}
++    uint16_t ncblks;
++    bool cunits:1;
 +
-+static RISCVException write_srmcfg(CPURISCVState *env, int csrno,
-+                                   target_ulong val, uintptr_t ra)
-+{
-+    env->srmcfg = val & (SRMCFG_RCID | SRMCFG_MCID);
-+    return RISCV_EXCP_NONE;
-+}
++    bool rpfx:1;
++    uint8_t p;
 +
++    bool supports_at_data:1;
++    bool supports_at_code:1;
 +
- #define VSTOPI_NUM_SRCS 5
- 
- /*
-@@ -6035,6 +6066,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* Supervisor Protection and Translation */
-     [CSR_SATP]     = { "satp",     satp, read_satp,     write_satp     },
- 
-+    /* Supervisor-Level Quality-of-Service Identifiers (Ssqosid) */
-+    [CSR_SRMCFG]   = { "srmcfg",  check_srmcfg, read_srmcfg, write_srmcfg },
++    bool supports_alloc_op_config_limit:1;
++    bool supports_alloc_op_read_limit:1;
++    bool supports_alloc_op_flush_rcid:1;
 +
-     /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
-     [CSR_SISELECT]   = { "siselect",   csrind_or_aia_smode, NULL, NULL,
-                          rmw_xiselect                                       },
++    bool supports_mon_op_config_event:1;
++    bool supports_mon_op_read_counter:1;
++
++    bool supports_mon_evt_id_none:1;
++    bool supports_mon_evt_id_occupancy:1;
++} RiscvCbqriCapacityCaps;
++
++/* Bandwidth Controller hardware capabilities */
++typedef struct RiscvCbqriBandwidthCaps {
++    uint16_t nb_mcids;
++    uint16_t nb_rcids;
++
++    uint16_t nbwblks;
++    uint16_t mrbwb;
++
++    bool rpfx:1;
++    uint8_t p;
++
++    bool supports_at_data:1;
++    bool supports_at_code:1;
++
++    bool supports_alloc_op_config_limit:1;
++    bool supports_alloc_op_read_limit:1;
++
++    bool supports_mon_op_config_event:1;
++    bool supports_mon_op_read_counter:1;
++
++    bool supports_mon_evt_id_none:1;
++    bool supports_mon_evt_id_rdwr_count:1;
++    bool supports_mon_evt_id_rdonly_count:1;
++    bool supports_mon_evt_id_wronly_count:1;
++} RiscvCbqriBandwidthCaps;
++
++DeviceState *riscv_cbqri_cc_create(hwaddr addr,
++                                   const RiscvCbqriCapacityCaps *caps,
++                                   const char *target_name);
++DeviceState *riscv_cbqri_bc_create(hwaddr addr,
++                                   const RiscvCbqriBandwidthCaps *caps,
++                                   const char *target_name);
++#endif
 
 -- 
 2.43.0
