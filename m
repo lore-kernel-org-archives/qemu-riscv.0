@@ -4,80 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C6C4CF884A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 12:15:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F29FCF884C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 12:22:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vM3Z2-0003PI-4n; Thu, 20 Nov 2025 07:15:04 -0500
+	id 1vM3fj-0005c9-2d; Thu, 20 Nov 2025 07:21:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <k.semichastnov@syntacore.com>)
- id 1vM3Yw-0003Nu-Lk; Thu, 20 Nov 2025 07:14:58 -0500
-Received: from m.syntacore.com ([178.249.69.228])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <k.semichastnov@syntacore.com>)
- id 1vM3Yu-0007Hm-Ht; Thu, 20 Nov 2025 07:14:58 -0500
-Received: from MRN-SC-KSMG-01.corp.syntacore.com (localhost [127.0.0.1])
- by m.syntacore.com (Postfix) with ESMTP id C37181A0004;
- Thu, 20 Nov 2025 12:14:46 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 m.syntacore.com C37181A0004
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com; s=m;
- t=1763640886; bh=P2Q7hwyiXX7mlh7Z/UK8BvADLpW9q6378YcSTU7CGa4=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=astkgntwVH9Zq/8UhA0kQaizolZIYiezGOOY8eIzJyTzb8nBBiHBy+VbcyrIJBoz9
- MqlPkOTf4Fzy/qHAEz/uZOrv4+YbalSNfB6LAH5NiqaibdFlSaIT/Rnp8+c3bnwgei
- 1lcqnGZSBLWwnVaJCKy/cbQiQpEIxxSQ5+BzQ+qcIZJLnymz2283Kr7ospkKAXwfkm
- Ja0QT/TtBTMNEBk6SqsDx0Fo/WGBdXdD1Krz9AKca2xQzZZU6tB4+RoyPYRB5vuBIm
- TaBFaUW7muXjLckWFvvhyr0TUMikMOg42nLnyksrN4gyhjN+dxBf+Zq/F1kBmmAvFk
- cVVEMh15xdqVA==
-Received: from S-SC-EXCH-01.corp.syntacore.com (mail.syntacore.com
- [10.76.202.20])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by m.syntacore.com (Postfix) with ESMTPS;
- Thu, 20 Nov 2025 12:14:46 +0000 (UTC)
-Received: from [10.178.119.213] (10.178.119.213) by
- S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Thu, 20 Nov 2025 15:14:40 +0300
-Message-ID: <115a56af-4db1-42ee-9541-8077322207c7@syntacore.com>
-Date: Thu, 20 Nov 2025 15:14:45 +0300
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vM3fg-0005bb-ED
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:21:56 -0500
+Received: from mail-ot1-x333.google.com ([2607:f8b0:4864:20::333])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vM3fe-0000Nn-CF
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:21:55 -0500
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7c6da42fbd4so283004a34.1
+ for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 04:21:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1763641313; x=1764246113; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+gko722ZjvT5CvrOtyL+ov5rxK6NCsvJ7x0/i88tP9Q=;
+ b=eS0Xm8aigjEceBisaPAZWYqb4XQd8d856XA2mWFklRo+2kwLzTaGRTtsZU+Pva/Zq/
+ 42QdD9MNjLdwXm4KzDprGbr063Uz5Vya9lpjkLOSjz1xsse0ElY5uV5rFya5LWTATocq
+ J2PxTyPbkpm1jbwGShO5xVVKdsTyXZOIp1TJy7QytvXujqLy2haQz98p1oMYSoUkgr2C
+ z6wfgFS3xUXC8DnJZenW3FlwIPoE0mhd8DtP7KHQHs8ontjFvvBV5qrGOYsdLvOiGtp6
+ gt7Lud2IE+Y34AJ1hmSa+tYJmQzvio8B2xLfwQTkuh2dnaQT+njUw7m1G7LNN+jY1SNQ
+ 29dQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763641313; x=1764246113;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+gko722ZjvT5CvrOtyL+ov5rxK6NCsvJ7x0/i88tP9Q=;
+ b=iYMWcctVFgQ6/MCnrpLNYOiJnkHPSKJhnd95MWRokWjl5rLNTVxtdHveCjpLvnPQvV
+ qE5UTqu/6f4jJdnP/BbJoSUWf97UBsHsZT1jcebS+R7xK7bK4BcB1nJv7ni0Yy82sd8d
+ EAuyO6G1MrGd0+TNjAu4lHCXNrM+GK8J0uWmgsWCUydTEK9QV5bPuYciMzOx6W2NhyKq
+ 5Vw0dAlWFxKvZbJbEBjCLqo0eNSylsWVfy8YcNMg64Mz8hbkVXmbdYa68Grf8YLkY7iT
+ mErrl/24CoKpP0VtRxG6mOOXV5y08flS0eNXsPgWpC3PeI97DquVcD6DaVqNuYUTRTcP
+ hdNw==
+X-Gm-Message-State: AOJu0YxwDVp/TP+dU/mXvGcd/h4113MvQhXkaoXgLDwxmiLDoplwUQl7
+ ozHRieR0QBk61QygYcWIbTeh7eveQDpozK6GKTyWsKSV7djfFlTD0nvVooLG+joyHJPgz8cDcem
+ rmG3RNAA=
+X-Gm-Gg: ASbGncuy836afyyrUklq+qgHOyFWmBCp2ew1qD+0FzKkJd+DJ5468vEhjCljxBQw0Mk
+ kMeaki46e/UGWh6bwu+LXWJQnY19CU0xl8Xv+A1hPwwMgBVYWBF4hQg5mP4le2/L7CUu+nUc5w8
+ 0CNp9z4Pwc5UdmCv1yXL9er73mVRuyK2Zxs8oGeOJ45BKsfyEpbJnvZylq/EwK2SlEomxoUMlbx
+ QhBe/8RBbXh6TKMbA86TdYJiTXDBXU2E/jmBpmPNX0BHUFGJcSFM517eVkOFay5Aw4jtyj9PYAy
+ 1RZzGCPIcDSZXtR/SbguxcJx1hAPmhigyrYGwCyaeznWC1pQb6SyWb94spORsDvQImL/IGvZrhd
+ vQ3P+GEoXSeew1ILlWHtWjrpCxRUeawOHysUIKGwqjtodInWigEL1PATD/wyyKvyeDNAvh3vog6
+ 79LDAgY2HrLbhCgvdJfY37aRYOF8Y=
+X-Google-Smtp-Source: AGHT+IG6B3xEX7cauIS3zxOIe78TPKEP6GmtQS98k8nskvoUphKkytREbyQHScCTtFQuhp2Q8HImKw==
+X-Received: by 2002:a05:6830:440e:b0:7c6:8c73:aafb with SMTP id
+ 46e09a7af769-7c78d306650mr1575519a34.35.1763641312978; 
+ Thu, 20 Nov 2025 04:21:52 -0800 (PST)
+Received: from [192.168.68.110] ([177.188.133.235])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c78d3ff21fsm907108a34.20.2025.11.20.04.21.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Nov 2025 04:21:51 -0800 (PST)
+Message-ID: <7d8e2ed4-3adf-4db6-aebd-7d6b9f695e48@ventanamicro.com>
+Date: Thu, 20 Nov 2025 09:21:47 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/17] hw/riscv, target/riscv: initial e-trace support
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- <qemu-devel@nongnu.org>
-CC: <qemu-riscv@nongnu.org>, <alistair.francis@wdc.com>,
- <liwei1518@gmail.com>, <zhiwei_liu@linux.alibaba.com>, <palmer@dabbelt.com>,
- <k.semichastnov@syntacore.com>
-References: <20251111114656.2285048-1-dbarboza@ventanamicro.com>
+Subject: Re: [PATCH v1] target/riscv: add support for RV64 THEAD C910 CPU
+To: TravisYang <zhiyuan.plct@isrc.iscas.ac.cn>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20251119112724.1342110-1-zhiyuan.plct@isrc.iscas.ac.cn>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-From: Konstantin Semichastnov <k.semichastnov@syntacore.com>
-In-Reply-To: <20251111114656.2285048-1-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.178.119.213]
-X-ClientProxiedBy: S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) To
- S-SC-EXCH-01.corp.syntacore.com (10.76.202.20)
-X-KSMG-AntiPhishing: not scanned, disabled by settings
-X-KSMG-AntiSpam-Interceptor-Info: not scanned
-X-KSMG-AntiSpam-Status: not scanned, disabled by settings
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.1.1.8310,
- bases: 2025/11/20 11:26:00 #27952687
-X-KSMG-AntiVirus-Status: NotDetected, skipped
-X-KSMG-LinksScanning: NotDetected, bases: 2025/11/20 11:32:00
-X-KSMG-Message-Action: skipped
-X-KSMG-Rule-ID: 5
-Received-SPF: pass client-ip=178.249.69.228;
- envelope-from=k.semichastnov@syntacore.com; helo=m.syntacore.com
+In-Reply-To: <20251119112724.1342110-1-zhiyuan.plct@isrc.iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::333;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,92 +109,91 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 11/11/25 14:46, Daniel Henrique Barboza wrote:
-> Hi,
+On 11/19/25 8:27 AM, TravisYang wrote:
+> From: 杨智源 <zhiyuan.plct@isrc.iscas.ac.cn>
 > 
-> In this v2 we're addressing a review comment from Konstantin in patch
-> 14. We're also doing changes in the FDT (patch 5) to keep up with the
-> changes that the kernel support is making [1].
+> Add a CPU entry for the RV64 THEAD C910 CPU which supports single-core
+> and dual-core configurations.More details can be found at
+> https://www.xrvm.cn/product/xuantie/C910?spm=a2d5.28054257.0.0.4a0f7a32qXoU1w
 > 
-> I've been thinking about adding partial support for N-trace in this work
-> as well. From what I can tell the difference between N-trace and E-trace
-> are the encoding of the packages, with everything else staying the same.
-> In this case we could add hooks in the code to be ready to support
-> N-trace encoding in the future.
-> 
-> No other changes made. Patches based on current master.
-> 
-> Changes in v2:
-> - patch 5:
->    - changed tr_compat from "ventana,veyron-v2-trace" to "qemu,trace-component"
->    - renamed trace encoder prop handler "cpu" to "cpus"
-> - patch 14:
->    - removed updiscon generation in gen_jal()
-> - v1 link: https://lore.kernel.org/qemu-riscv/20251002112335.2374517-1-dbarboza@ventanamicro.com/
-> 
-> 
-> [1] https://lore.kernel.org/linux-riscv/20251101154245.162492-1-apatel@ventanamicro.com/
-> 
-> Daniel Henrique Barboza (16):
->    hw/riscv: Trace Encoder initial impl
->    hw/riscv: Trace RAM Sink initial impl
->    hw/riscv/trace-encoder: add trace start/stop logic
->    hw/riscv/virt.c: add trace encoders and trace ram sinks
->    hw/riscv: add e-trace message helpers
->    target/riscv: add initial trace instrumentation
->    hw/riscv/trace-encoder: write e-trace packets to RAM sink
->    test/qtest: add riscv-trace-test.c
->    hw/riscv/rv-trace-messages.c: add encoded trap message
->    hw/riscv, target/riscv: send trace trap messages
->    target/riscv, hw/riscv: send trace ppccd packets
->    hw/riscv/trace: add format2 msg helper
->    hw/riscv, target/riscv: send resync updiscon trace packets
->    hw/riscv/rv-trace-messages: add format 1 msgs with branch info
->    hw/riscv/trace-encoder: send branches info
->    hw/riscv/trace: update branch bit in sync messages
-> 
-> Mayuresh Chitale (1):
->    hw/riscv/virt.c add trace encoder and ramsink fdt nodes
-> 
->   hw/riscv/Kconfig                              |   5 +
->   hw/riscv/meson.build                          |   2 +
->   hw/riscv/rv-trace-messages.c                  | 373 +++++++++++
->   hw/riscv/rv-trace-messages.h                  |  40 ++
->   hw/riscv/trace-encoder.c                      | 609 ++++++++++++++++++
->   hw/riscv/trace-encoder.h                      |  62 ++
->   hw/riscv/trace-events                         |   9 +
->   hw/riscv/trace-ram-sink.c                     | 263 ++++++++
->   hw/riscv/trace-ram-sink.h                     |  83 +++
->   hw/riscv/virt.c                               | 135 ++++
->   include/hw/riscv/virt.h                       |   2 +
->   target/riscv/cpu.h                            |  11 +
->   target/riscv/cpu_helper.c                     |  26 +-
->   target/riscv/helper.h                         |   6 +
->   .../riscv/insn_trans/trans_privileged.c.inc   |  11 +
->   target/riscv/insn_trans/trans_rvi.c.inc       |  15 +
->   target/riscv/meson.build                      |   3 +-
->   target/riscv/tcg/tcg-cpu.c                    |   5 +
->   target/riscv/trace_helper.c                   |  62 ++
->   target/riscv/translate.c                      |  19 +
->   tests/qtest/meson.build                       |   2 +-
->   tests/qtest/riscv-trace-test.c                | 120 ++++
->   22 files changed, 1860 insertions(+), 3 deletions(-)
->   create mode 100644 hw/riscv/rv-trace-messages.c
->   create mode 100644 hw/riscv/rv-trace-messages.h
->   create mode 100644 hw/riscv/trace-encoder.c
->   create mode 100644 hw/riscv/trace-encoder.h
->   create mode 100644 hw/riscv/trace-ram-sink.c
->   create mode 100644 hw/riscv/trace-ram-sink.h
->   create mode 100644 target/riscv/trace_helper.c
->   create mode 100644 tests/qtest/riscv-trace-test.c
-> 
-Hi, I am currently working on adding the N-Trace message format, based 
-on your v1 patch set. Currently I have supported ProgTraceSync, 
-ProgTraceCorrelation, ResourceFull, IndirectBranchHist, 
-IndirectBranchHistSync, Ownership messages.
+> Signed-off-by: TravisYang <zhiyuan.plct@isrc.iscas.ac.cn>
+> ---
 
-After finishing the internal review and rebasing over the v2 patch set, 
-I would like to send it here next week.
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Konstantin
+>   target/riscv/cpu-qom.h |  1 +
+>   target/riscv/cpu.c     | 47 ++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 48 insertions(+)
+> 
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 75f4e43408..1fc8140190 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -56,6 +56,7 @@
+>   #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
+>   #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
+>   #define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
+> +#define TYPE_RISCV_CPU_THEAD_C910       RISCV_CPU_TYPE_NAME("thead-c910")
+>   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>   
+>   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index ae8b721e55..f522bc856b 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -3281,6 +3281,53 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>           .cfg.max_satp_mode = VM_1_10_SV48,
+>       ),
+>   
+> +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_THEAD_C910, TYPE_RISCV_VENDOR_CPU,
+> +        .misa_mxl_max = MXL_RV64,
+> +        .misa_ext = RVG | RVC | RVS | RVU,
+> +        .priv_spec = PRIV_VERSION_1_12_0,
+> +
+> +        .cfg.ext_zcf = true,
+> +        .cfg.ext_zcd = true,
+> +        .cfg.ext_zfa = true,
+> +        .cfg.ext_zfh = true,
+> +        .cfg.ext_zfhmin = true,
+> +
+> +        .cfg.mmu = true,
+> +        .cfg.ext_xtheadba = true,
+> +        .cfg.ext_xtheadbb = true,
+> +        .cfg.ext_xtheadbs = true,
+> +        .cfg.ext_xtheadcmo = true,
+> +        .cfg.ext_xtheadcondmov = true,
+> +        .cfg.ext_xtheadfmemidx = true,
+> +        .cfg.ext_xtheadmac = true,
+> +        .cfg.ext_xtheadmemidx = true,
+> +        .cfg.ext_xtheadmempair = true,
+> +        .cfg.ext_xtheadsync = true,
+> +        .cfg.pmp = true,
+> +
+> +        .cfg.ext_svinval = true,
+> +        .cfg.ext_svadu = true,
+> +        .cfg.ext_zicbom = true,
+> +        .cfg.ext_zicboz = true,
+> +
+> +        .cfg.ext_zba = true,
+> +        .cfg.ext_zbb = true,
+> +        .cfg.ext_zbc = true,
+> +        .cfg.ext_zbs = true,
+> +
+> +        .cfg.ext_zknd = true,
+> +        .cfg.ext_zkne = true,
+> +        .cfg.ext_zknh = true,
+> +
+> +        .cfg.mvendorid = THEAD_VENDOR_ID,
+> +
+> +        .cfg.max_satp_mode = VM_1_10_SV39,
+> +#ifndef CONFIG_USER_ONLY
+> +        .custom_csrs = th_csr_list,
+> +#endif
+> +    ),
+> +
+> +
+>   #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>       DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
+>           .cfg.max_satp_mode = VM_1_10_SV57,
+
 
