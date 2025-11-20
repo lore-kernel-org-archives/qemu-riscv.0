@@ -4,98 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07FD1CF857B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 10:52:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27F57CF857F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 11:31:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vM2Ge-0003wz-4z; Thu, 20 Nov 2025 05:52:00 -0500
+	id 1vM2sW-0007Qq-3n; Thu, 20 Nov 2025 06:31:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vM2GF-0003tU-Js
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 05:51:37 -0500
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vM2sR-0007MN-NP
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:31:03 -0500
+Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vM2GC-0004k8-63
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 05:51:34 -0500
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-42b427cda88so512703f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 02:51:31 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1vM2sO-0006g0-So
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:31:03 -0500
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c6d1ebb0c4so532930a34.1
+ for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 03:30:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763635890; x=1764240690; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=ventanamicro.com; s=google; t=1763638258; x=1764243058; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=1M/18t6moVlkRgWVwoPcK84uBvdA6yoMjg+D+edbTko=;
- b=wfSc+JgJ0dI7VOXGQZ+KxVreJ+fO9QOTpcR9mOc0tauYvgoulOvQ+o2cWdaPdqcsEq
- Jw+lE0nxDogD8auAyXVkuooER8BTCmmOWt3EAWfuDvc5Pr+Kl7zqeEGTefScxP8tJnrq
- VIe9S3nQThB5+3xcsD30sNgXOt/EbUwJupk3Fx9WpOVImJJUQBs5bqMuOlrB3XDXj8/b
- 2ygQ7W5NzGybYIGcXJOEMgyUPw/AkRno0kMi7Wqk4jYloDQbKvpyjKdhNnBEpraNYQkp
- GbO4qK401M2S2pca29OuEoC+Ub80PGyxjStn7svYq8N5y3CENRneph6iGz40H3WbghRf
- n3qA==
+ bh=bWM7SOnj8IXxnsjvITWtruLHxXr9gFoRWbtc0wMT8/M=;
+ b=OYeoNRl4ICxWG27Q9VpmMZ0nqeeMsuuhWNBVmKyG7NzJD+6N2EWGN95idtGXq44z8u
+ Yq+aXAkMEjq49Dhtej/TaNhAUhXK85Kf4j1FDxim4KWmmDuiVqenomLmQSeQRHclGuA7
+ OrRdG1u0h4g/77kauT3gcLsWgVbWoZjc9/qHEDlE1WTNwL5EixNn+puNPt2ivlnCwOkj
+ RUrN9Dush4K+UEgkDzHqwE0g3asF7opaFdg+2nQ9SXs/Q0JxeoxC8MDf/8awwgA16vEO
+ WbC1go24BPLE+RMg3mFjXUoLvmx9DTSraD/UYvaTt2gVC6IOv/FB6ISoFC8u3+sXdJcV
+ HmGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763635890; x=1764240690;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1763638258; x=1764243058;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1M/18t6moVlkRgWVwoPcK84uBvdA6yoMjg+D+edbTko=;
- b=vIoYiCT/S2Dt93E0ZXKfSKMMkKIQFWyU7zPI+onC2UKoNed7ghkfP88soUZcn8HYeu
- 5xSKoHdQ9zeIR2DZyY4kc1dNALV5RoreLWaS9qC5XD/6AXT5KoPmxAJXPY6nVFoMnwOb
- HraIesgJeFZGsyFTToMoDIIG9bpnSUlb0696scJAc8pssUxH1GOKZ6LwxTFWwN8HjR7Q
- 18wBeoseVpHltlWQJxcwiGNrMOqNiHyzjOqeyOyAu7mX6hZIaJUFmCI2e4ocqHS8JDkR
- KYwjvySd1gIXo2D4/njmsSL/w14BXrmTOuXV6UxQqDBNIjH67mUPqCGnCq03NgLxSKWa
- oamw==
+ bh=bWM7SOnj8IXxnsjvITWtruLHxXr9gFoRWbtc0wMT8/M=;
+ b=NlueuclID2PSg4kvmkvK95EZKf9hrKkIfjJbTs41iDTv6K3kt0oMdXttTNJ2spU54v
+ M1wOlM13+R6sZnLijTEd7/qW8HHJOIP4Kj9O5/X8KWW6TDPZPa/FqGOyhvWa4M8Rmsj0
+ u9e+UcNeYFna94uYKLhmf4R/jX5WtuzdiL263APHVY95TDjnSsLQ6JHYaOBPoOf9J1wS
+ Cv38r2ESFGXTaTB41cjJ2UAx6ePgVRwyo1HidVwM+ZQmzUh4s9pdB7/bP1GbGdBfic9q
+ T9gy3fnvveM+FTgbHsVBZ2R8CfUTCdNVeErm7Opcv5PoXNSWx3nDtOvEgbRwM2MFjsBP
+ 69bg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVH6kPDvkI4qf5HrmAqd91ZQlEsgq4DvbhmMxqHb0cuBfk5UU8iIlKuK+ToXaIQ7Qwy06vBFKC244MJ@nongnu.org
-X-Gm-Message-State: AOJu0YxOkjt2jLl6ufFpZZYKQn5GNwp54zL4lYkPeH+oeH8wI9OomY37
- DRabGJQsT+TykrE+bahu+jxK7EoIaCy7C23niUpfj9t7U90nn/QyOoCrXtOGemFDjLU=
-X-Gm-Gg: ASbGncvTnE5VFadrxsQ6BvCX2zw+7hFrAn4z0naUU7X8seIYHKW174nZg78D3TklLZZ
- e6d6gEp9J6QLBLqoua4xqz/rD3/8makWV3ml243m+lSBaaCowptpNbDXASzUonNGKOGh5Qia6lW
- x3GSJVEMUlvYyTXWuM0Rx4hjPrm4wEux5MAaNtXUckB3oRnXyJmVCoV1rbgDlj/4Cajy70MRW5L
- cTeqo/biF7C4IJ/cnckWpevn1UJCPQi6DHpxIMD/ZEPVYE6ky8dN8ygFIi+fbz9OOiU3COJ2FEf
- Iy69zAWpkkPa2nJU2JzhCxDSQ8m1fbtb5QftNOfORxV+OWSOVExc697RjVzu/E/o9HCFBVxHDzP
- c7C+qKJ+CQKHoPe/ZWKZ2SPqW+A+Mc3+9YdGw2iBSPR+344ALETBcG2ybQDnwuAM8GGjBdVfges
- XsyIBoN+a0Cl5L46vmEBRgjsFKDxHMnMENQdrp5Sg3WhX+jkWd/AhBqg==
-X-Google-Smtp-Source: AGHT+IF1uX4P9Ldl1MKPWCI4CVFASAXHm93mBmH2oSNKZDSuBThVvq6LdHNkjvPuApS7MKVFsJt3HQ==
-X-Received: by 2002:a05:6000:228a:b0:42b:3131:5433 with SMTP id
- ffacd0b85a97d-42cb9a2decbmr2359371f8f.26.1763635890108; 
- Thu, 20 Nov 2025 02:51:30 -0800 (PST)
-Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7fb9190sm4912620f8f.33.2025.11.20.02.51.28
+ AJvYcCUqALbjKHv7lR8NTUpb2kIT2ELsqsLhXpl+5hyVTWdjLB+g+CDb535dfA9jviNhgsUNVrc1Iv2ZZFrk@nongnu.org
+X-Gm-Message-State: AOJu0Yz2xzBkiIwK7M+yZHxwz5qcjsfYDaYtb3rW5wu8fkE5y/NDoXEL
+ mf/ezVywBRBx1+yV3EFRju/2ro9gVHK4eAL9pk6qOjUb29tHQ7UQD4MxIQh9XL0kqTc=
+X-Gm-Gg: ASbGncsrfVyEjjkfX4ze/CST1XnlAPPi6A9Fw/hwg9+SKvh9CCDX+vO/aGl8MCkOt9M
+ s1HzjgTazi8vdIRwABupnwkdUumAhCm+mKE0e+r6lIOBmbIkafxGa7GQMHVZ6VD4ac+y+gj9hLS
+ Dfbg0pe5hZEEGKJIEGTI5uhsM+f2HvwvJbxeoiqPE48KH4lKLQjhnBGToRPGsNr0v9ugdNcjydp
+ WuSs4+9NcCuoZfwPeyVdRR4P9msE5+Yn8PsL/cMBw7cKbF5qnk+tM5spj0h2MG/tbLxMyNjC5+m
+ 7Tz6TFDLGSZoZDrkDyf5+5AXdTARNgwqCR4zwxnC38rMqWF3/ciP7TmOlZTbwSvOWxiWmjkxHRs
+ Vw3cONufCrGSwmI+sGlB81b+RMK2KsFhjrmIXy4OaZcFCsPQacDk1Dxp413gwt6jCe9N9KEyRC3
+ t/H+1aNcfVhoPbFhohH0Ko93iJ7is=
+X-Google-Smtp-Source: AGHT+IHtZ1Rswo0oTDU8Z9h8JiUVaWMzHUr8/mj5Z6InfErs4zNtC+GJABD9YCo/RrjgZc2Wv9EMhA==
+X-Received: by 2002:a05:6830:304e:b0:7c7:2e9d:aee1 with SMTP id
+ 46e09a7af769-7c78f40bc1bmr1001933a34.19.1763638258346; 
+ Thu, 20 Nov 2025 03:30:58 -0800 (PST)
+Received: from [192.168.68.110] ([177.188.133.235])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c78d30475asm893622a34.3.2025.11.20.03.30.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Nov 2025 02:51:29 -0800 (PST)
-Message-ID: <ab69153d-b162-47f2-90c9-22cd248c94a5@linaro.org>
-Date: Thu, 20 Nov 2025 11:51:27 +0100
+ Thu, 20 Nov 2025 03:30:57 -0800 (PST)
+Message-ID: <3592062a-f5f1-4350-87c1-ee9c4753ba15@ventanamicro.com>
+Date: Thu, 20 Nov 2025 08:30:50 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] hw/core/loader: Make load_elf_hdr() return bool,
- simplify caller
+Subject: Re: [PATCH 1/7] riscv: implement Ssqosid extension and srmcfg CSR
+To: Drew Fustini <fustini@kernel.org>, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+ Nicolas Pitre <npitre@baylibre.com>, =?UTF-8?Q?Kornel_Dul=C4=99ba?=
+ <mindal@semihalf.com>, Atish Kumar Patra <atishp@rivosinc.com>,
+ Atish Patra <atish.patra@linux.dev>, Vasudevan Srinivasan
+ <vasu@rivosinc.com>, =?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?=
+ <rkrcmar@ventanamicro.com>, yunhui cui <cuiyunhui@bytedance.com>,
+ Chen Pei <cp0613@linux.alibaba.com>, guo.wenjia23@zte.com.cn,
+ liu.qingtao2@zte.com.cn
+References: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
+ <20251119-riscv-ssqosid-cbqri-v1-1-3392fc760e48@kernel.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-To: Markus Armbruster <armbru@redhat.com>,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Cc: qemu-devel@nongnu.org, kwolf@redhat.com, hreitz@redhat.com,
- mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
- gengdongjiu1@gmail.com, peter.maydell@linaro.org, alistair@alistair23.me,
- edgar.iglesias@gmail.com, npiggin@gmail.com, harshpb@linux.ibm.com,
- palmer@dabbelt.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, sstabellini@kernel.org,
- anthony@xenproject.org, paul@xen.org, berrange@redhat.com,
- peterx@redhat.com, farosas@suse.de, eblake@redhat.com, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, wangyanan55@huawei.com, zhao1.liu@intel.com,
- qemu-block@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org
-References: <20251119130855.105479-1-armbru@redhat.com>
- <20251119130855.105479-2-armbru@redhat.com>
- <bf44d9cd-806a-4d2c-8cff-0a88222959ed@yandex-team.ru>
- <875xb5x2ds.fsf@pond.sub.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <875xb5x2ds.fsf@pond.sub.org>
+In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-1-3392fc760e48@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -118,46 +116,179 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 19/11/25 20:12, Markus Armbruster wrote:
-> Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
-> 
->> On 19.11.25 16:08, Markus Armbruster wrote:
->>> Signed-off-by: Markus Armbruster <armbru@redhat.com>
->>
->> Reviewed-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
->>
->>> ---
->>>    include/hw/loader.h |  4 +++-
->>>    hw/arm/boot.c       |  6 +-----
->>>    hw/core/loader.c    |  8 ++++++--
->>>    hw/riscv/spike.c    | 10 +---------
->>>    4 files changed, 11 insertions(+), 17 deletions(-)
->>> diff --git a/include/hw/loader.h b/include/hw/loader.h
->>> index d035e72748..6f91703503 100644
->>> --- a/include/hw/loader.h
->>> +++ b/include/hw/loader.h
->>> @@ -188,8 +188,10 @@ ssize_t load_elf(const char *filename,
->>>     *
->>>     * Inspect an ELF file's header. Read its full header contents into a
->>>     * buffer and/or determine if the ELF is 64bit.
->>> + *
->>> + * Returns true on success, false on failure.
->>
->> I don't really care, but IMO, it's obvious contract for bool+errp functions, not worth a comment.
-> 
-> Nearby function comments all have a "Returns" sentence.  I try to blend
-> in :)
 
-New developers might just have to look at a particular API such this
-loader one, without knowing the global errp contract. With that in
-mind, I'll documents @return everywhere.
 
+On 11/19/25 9:42 PM, Drew Fustini wrote:
+> From: Kornel Dulęba <mindal@semihalf.com>
 > 
->>>     */
->>> -void load_elf_hdr(const char *filename, void *hdr, bool *is64, Error **errp);
->>> +bool load_elf_hdr(const char *filename, void *hdr, bool *is64, Error **errp);
->>>      ssize_t load_aout(const char *filename, hwaddr addr, int max_sz,
->>>                      bool big_endian, hwaddr target_page_size);
+> Implement the srmcfg CSR defined by the Ssqosid ISA extension
+> (Supervisor-mode Quality of Service ID). The CSR contains two fields:
+> 
+>    - Resource Control ID (RCID) used determine resource allocation
+>    - Monitoring Counter ID (MCID) used to track resource usage
+> 
+> The CSR is defined for S-mode but accessing it when V=1 shall cause a
+> virtual instruction exception. Implement this behavior by calling the
+> hmode predicate.
+> 
+> Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/download/v1.0/riscv-cbqri.pdf
+> Signed-off-by: Kornel Dulęba <mindal@semihalf.com>
+> [fustini: rebase on v10.1.50, fix check_srmcfg]
+> Signed-off-by: Drew Fustini <fustini@kernel.org>
+> ---
+>   disas/riscv.c                     |  1 +
+>   target/riscv/cpu.c                |  2 ++
+>   target/riscv/cpu.h                |  3 +++
+>   target/riscv/cpu_bits.h           |  8 ++++++++
+>   target/riscv/cpu_cfg_fields.h.inc |  1 +
+>   target/riscv/csr.c                | 34 ++++++++++++++++++++++++++++++++++
+>   6 files changed, 49 insertions(+)
+> 
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 85cd2a9c2aef..86fc710528c1 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -2289,6 +2289,7 @@ static const char *csr_name(int csrno)
+>       case 0x0143: return "stval";
+>       case 0x0144: return "sip";
+>       case 0x0180: return "satp";
+> +    case 0x0181: return "srmcfg";
+>       case 0x0200: return "hstatus";
+>       case 0x0202: return "hedeleg";
+>       case 0x0203: return "hideleg";
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 73d4280d7c84..2e2e642de26b 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -216,6 +216,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
+>       ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
+>       ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
+> +    ISA_EXT_DATA_ENTRY(ssqosid, PRIV_VERSION_1_12_0, ext_ssqosid),
+>       ISA_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
+>       ISA_EXT_DATA_ENTRY(ssstrict, PRIV_VERSION_1_12_0, has_priv_1_12),
+>       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+> @@ -1268,6 +1269,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+>       MULTI_EXT_CFG_BOOL("zvfbfwma", ext_zvfbfwma, false),
+>       MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
+>       MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
+> +    MULTI_EXT_CFG_BOOL("ssqosid", ext_ssqosid, true),
+>       MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
+>       MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
+>       MULTI_EXT_CFG_BOOL("sspm", ext_sspm, false),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 36e7f100374d..21688d8ca002 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -336,6 +336,9 @@ struct CPUArchState {
+>       uint64_t ctr_dst[16 << SCTRDEPTH_MAX];
+>       uint64_t ctr_data[16 << SCTRDEPTH_MAX];
+>   
+> +    /* Ssqosid extension */
+> +    target_ulong srmcfg;
+> +
+>       /* Machine and Supervisor interrupt priorities */
+>       uint8_t miprio[64];
+>       uint8_t siprio[64];
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index b62dd82fe7c0..ebb400bf6f2c 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -228,6 +228,9 @@
+>   #define CSR_SPTBR           0x180
+>   #define CSR_SATP            0x180
+>   
+> +/* Ssqosid extension */
+> +#define CSR_SRMCFG          0x181
+> +
+>   /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
+>   #define CSR_SISELECT        0x150
+>   #define CSR_SIREG           0x151
+> @@ -1164,4 +1167,9 @@ typedef enum CTRType {
+>   #define MCONTEXT64                         0x0000000000001FFFULL
+>   #define MCONTEXT32_HCONTEXT                0x0000007F
+>   #define MCONTEXT64_HCONTEXT                0x0000000000003FFFULL
+> +
+> +/* SRMCFG CSR field masks (Ssqosid extensions) */
+> +#define SRMCFG_RCID                      0x00000FFF
+> +#define SRMCFG_MCID                      0x0FFF0000
+> +
+>   #endif
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+> index a154ecdc792b..6518f6f9c571 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -105,6 +105,7 @@ BOOL_FIELD(ext_ssaia)
+>   BOOL_FIELD(ext_smctr)
+>   BOOL_FIELD(ext_ssctr)
+>   BOOL_FIELD(ext_sscofpmf)
+> +BOOL_FIELD(ext_ssqosid)
+>   BOOL_FIELD(ext_smepmp)
+>   BOOL_FIELD(ext_smrnmi)
+>   BOOL_FIELD(ext_ssnpm)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 5c91658c3dc4..06a6212c672d 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1759,6 +1759,37 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> +static RISCVException check_srmcfg(CPURISCVState *env, int csrno)
+> +{
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    if (!cpu->cfg.ext_ssqosid) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+
+env_archcpu() is a bit heavyweight and we usually avoid it. Since you're using the 'cpu' ptr
+solely to access the CFG pointer I suggest using riscv_cpu_cfg() instead:
+
+if (!riscv_cpu_cfg(env)->ext_ssqosid) {...}
+
+
+Thanks,
+
+Daniel
+
+> +
+> +    /*
+> +     * Even though this is an S-mode CSR the spec says that we need to throw
+> +     * and virt instruction fault if a guest tries to access it.
+> +     */
+> +    return env->virt_enabled ?
+> +           RISCV_EXCP_VIRT_INSTRUCTION_FAULT : smode(env, csrno);
+> +}
+> +
+> +static RISCVException read_srmcfg(CPURISCVState *env, int csrno,
+> +                                  target_ulong *val)
+> +{
+> +    *val = env->srmcfg;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_srmcfg(CPURISCVState *env, int csrno,
+> +                                   target_ulong val, uintptr_t ra)
+> +{
+> +    env->srmcfg = val & (SRMCFG_RCID | SRMCFG_MCID);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +
+>   #define VSTOPI_NUM_SRCS 5
+>   
+>   /*
+> @@ -6035,6 +6066,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>       /* Supervisor Protection and Translation */
+>       [CSR_SATP]     = { "satp",     satp, read_satp,     write_satp     },
+>   
+> +    /* Supervisor-Level Quality-of-Service Identifiers (Ssqosid) */
+> +    [CSR_SRMCFG]   = { "srmcfg",  check_srmcfg, read_srmcfg, write_srmcfg },
+> +
+>       /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
+>       [CSR_SISELECT]   = { "siselect",   csrind_or_aia_smode, NULL, NULL,
+>                            rmw_xiselect                                       },
 > 
 
 
