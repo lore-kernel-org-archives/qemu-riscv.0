@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27F57CF857F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 11:31:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D942CF8844
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 11:48:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vM2sW-0007Qq-3n; Thu, 20 Nov 2025 06:31:08 -0500
+	id 1vM38o-0003v9-TR; Thu, 20 Nov 2025 06:47:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM2sR-0007MN-NP
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:31:03 -0500
-Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
+ id 1vM38n-0003uu-H1
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:47:57 -0500
+Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM2sO-0006g0-So
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:31:03 -0500
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7c6d1ebb0c4so532930a34.1
- for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 03:30:59 -0800 (PST)
+ id 1vM38k-0001Kk-5U
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 06:47:56 -0500
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3d56d0cb3dbso439090fac.3
+ for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 03:47:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1763638258; x=1764243058; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1763639273; x=1764244073; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=bWM7SOnj8IXxnsjvITWtruLHxXr9gFoRWbtc0wMT8/M=;
- b=OYeoNRl4ICxWG27Q9VpmMZ0nqeeMsuuhWNBVmKyG7NzJD+6N2EWGN95idtGXq44z8u
- Yq+aXAkMEjq49Dhtej/TaNhAUhXK85Kf4j1FDxim4KWmmDuiVqenomLmQSeQRHclGuA7
- OrRdG1u0h4g/77kauT3gcLsWgVbWoZjc9/qHEDlE1WTNwL5EixNn+puNPt2ivlnCwOkj
- RUrN9Dush4K+UEgkDzHqwE0g3asF7opaFdg+2nQ9SXs/Q0JxeoxC8MDf/8awwgA16vEO
- WbC1go24BPLE+RMg3mFjXUoLvmx9DTSraD/UYvaTt2gVC6IOv/FB6ISoFC8u3+sXdJcV
- HmGQ==
+ bh=AIkVXxyf/Z/fObsx2RfS9UWv6SxbVJnijAfCzH+YkZM=;
+ b=Dos7knJGGGujYBNmvkVWkaVpcN9Eq7KI/M0A2loXkNg+YVA03a+CK3nV48vf92i51w
+ naUTuJSW1qg85yt9VcZ/9lPEyziuppPjQ/adAZ5PN5J6ms+qxiV2g5pjqQ904zDHtF/g
+ +XJaZALlnyWoTg+Olrfp8FHMP1wbPej+5hgBcfrKNYScOQV1Bv6d1ovd0CEtyXCfzRHz
+ kFg22nSoX3X/oUPL7Y8l5f1utE6u896E7lLlEhq8iI0i3p44Il12C6brxtU7TaPTYCo2
+ W5ZskAimLuxQ5B68DYcuReFQBsiHcUtEO7vgYKzJlCTng032FLKtR2nTw7DqkvUkpkWl
+ N26Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763638258; x=1764243058;
+ d=1e100.net; s=20230601; t=1763639273; x=1764244073;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bWM7SOnj8IXxnsjvITWtruLHxXr9gFoRWbtc0wMT8/M=;
- b=NlueuclID2PSg4kvmkvK95EZKf9hrKkIfjJbTs41iDTv6K3kt0oMdXttTNJ2spU54v
- M1wOlM13+R6sZnLijTEd7/qW8HHJOIP4Kj9O5/X8KWW6TDPZPa/FqGOyhvWa4M8Rmsj0
- u9e+UcNeYFna94uYKLhmf4R/jX5WtuzdiL263APHVY95TDjnSsLQ6JHYaOBPoOf9J1wS
- Cv38r2ESFGXTaTB41cjJ2UAx6ePgVRwyo1HidVwM+ZQmzUh4s9pdB7/bP1GbGdBfic9q
- T9gy3fnvveM+FTgbHsVBZ2R8CfUTCdNVeErm7Opcv5PoXNSWx3nDtOvEgbRwM2MFjsBP
- 69bg==
+ bh=AIkVXxyf/Z/fObsx2RfS9UWv6SxbVJnijAfCzH+YkZM=;
+ b=trRoNnjAkk+0eixAqOqcLFPTjbZIoSTUwrjBuiQ+MOkWenh+X2TeyGoopAcBHzR0/z
+ DCMEpth0ryugwjKlqN77qU1NvijIsAE3v3QTNrRlkZ7l0YD6ERzR3nzK+4A5zIMkrMMo
+ 3azhkQwt/voNSvJP1vjqKmyXH6ae9lcX4afOTjZYZWl/0rjp9tu+Y+gBhMrgYL+/2EKk
+ TsdF4VSk1uPbKiqyPJSf7AYWzS7R/eXOL43NAKwQ2sV+jbjMAonJHE1R4GCTieSXaxpT
+ 2r2rkJJhW+V1iC0Ejsjckbcg1hTfnBP/frgu2F68XLW3BSlvChXW5/ytFI0RyIBNonbR
+ zQHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUqALbjKHv7lR8NTUpb2kIT2ELsqsLhXpl+5hyVTWdjLB+g+CDb535dfA9jviNhgsUNVrc1Iv2ZZFrk@nongnu.org
-X-Gm-Message-State: AOJu0Yz2xzBkiIwK7M+yZHxwz5qcjsfYDaYtb3rW5wu8fkE5y/NDoXEL
- mf/ezVywBRBx1+yV3EFRju/2ro9gVHK4eAL9pk6qOjUb29tHQ7UQD4MxIQh9XL0kqTc=
-X-Gm-Gg: ASbGncsrfVyEjjkfX4ze/CST1XnlAPPi6A9Fw/hwg9+SKvh9CCDX+vO/aGl8MCkOt9M
- s1HzjgTazi8vdIRwABupnwkdUumAhCm+mKE0e+r6lIOBmbIkafxGa7GQMHVZ6VD4ac+y+gj9hLS
- Dfbg0pe5hZEEGKJIEGTI5uhsM+f2HvwvJbxeoiqPE48KH4lKLQjhnBGToRPGsNr0v9ugdNcjydp
- WuSs4+9NcCuoZfwPeyVdRR4P9msE5+Yn8PsL/cMBw7cKbF5qnk+tM5spj0h2MG/tbLxMyNjC5+m
- 7Tz6TFDLGSZoZDrkDyf5+5AXdTARNgwqCR4zwxnC38rMqWF3/ciP7TmOlZTbwSvOWxiWmjkxHRs
- Vw3cONufCrGSwmI+sGlB81b+RMK2KsFhjrmIXy4OaZcFCsPQacDk1Dxp413gwt6jCe9N9KEyRC3
- t/H+1aNcfVhoPbFhohH0Ko93iJ7is=
-X-Google-Smtp-Source: AGHT+IHtZ1Rswo0oTDU8Z9h8JiUVaWMzHUr8/mj5Z6InfErs4zNtC+GJABD9YCo/RrjgZc2Wv9EMhA==
-X-Received: by 2002:a05:6830:304e:b0:7c7:2e9d:aee1 with SMTP id
- 46e09a7af769-7c78f40bc1bmr1001933a34.19.1763638258346; 
- Thu, 20 Nov 2025 03:30:58 -0800 (PST)
+ AJvYcCV88QNKGAwNwHoJgbohMh8Va2i5G79h9oUEIa0cd8ii6terhwp0K2PwHx74VJ8cqruAhJeXAgnjQHfj@nongnu.org
+X-Gm-Message-State: AOJu0Yw+cqWErIqOqHMi57xYBIZ77KIeNezntV8xJabNFv6P47JKDh0P
+ JkqWt3fH4rYqhhTkdpe4AjR2am0D7GHSEpL7QMHR2NAVOqXOIXknRIXWRlQ3dJRZ5FE=
+X-Gm-Gg: ASbGncvk4IoNPKAmrbnSDYB045UDXmtXxaUs04cmV3kAzYlO7a4LOH8R1ehdq9ECd5e
+ GMBAohrs/qzkaYZD4p73IGug93xPJKmbQTz4Deg/fwHXdT+wnD+o71+hCJzIWeFLcB2GwRk9IUP
+ lIiavzdNtRxSuBPXexzqLESUgJzez4n2R5TsEls89b6+bDxXJNpGD+vp/N+2jKG206sLLhnJi7S
+ YGkBDOfbiUtRnPwaXmLGOCe2qGIwnJ5lL4oW6XRyUAGlTZzLng8w0BCKtTGIMr+fwWefA4VHtG3
+ B6gKyOpvEZjKyCfhNG8zp9ht+BQjDrOuKU1Td64icmKWhws/PiDsIw+kD9aTCShdNdyRcOSj/Rn
+ DvScNGjhQKrOUnXQXyt52NXnqx+q4Qv+o8bNaP+vnbZM/gwB6P/6jriGkM0dc3ghAamAF01hji9
+ gGo9ZIotTUycpZ4Pl+HlB8qvj2LEA=
+X-Google-Smtp-Source: AGHT+IEXlA2HUFVYXz/AHmv8DNNrJoYfj0ROpMMd87AakyldtZDu1Zy75Dwjrf2gxG0+IDc6gzMvrw==
+X-Received: by 2002:a05:6870:71d1:b0:3ec:371b:3fbe with SMTP id
+ 586e51a60fabf-3eca49aeccfmr715752fac.17.1763639271973; 
+ Thu, 20 Nov 2025 03:47:51 -0800 (PST)
 Received: from [192.168.68.110] ([177.188.133.235])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c78d30475asm893622a34.3.2025.11.20.03.30.52
+ 586e51a60fabf-3ec9c2d0e96sm1021227fac.2.2025.11.20.03.47.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Nov 2025 03:30:57 -0800 (PST)
-Message-ID: <3592062a-f5f1-4350-87c1-ee9c4753ba15@ventanamicro.com>
-Date: Thu, 20 Nov 2025 08:30:50 -0300
+ Thu, 20 Nov 2025 03:47:50 -0800 (PST)
+Message-ID: <ea794b78-2b7e-44eb-96e2-342f6a338090@ventanamicro.com>
+Date: Thu, 20 Nov 2025 08:47:44 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] riscv: implement Ssqosid extension and srmcfg CSR
+Subject: Re: [PATCH 3/7] hw/riscv: implement CBQRI capacity controller
 To: Drew Fustini <fustini@kernel.org>, qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, Weiwei Li
@@ -86,21 +86,21 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Chen Pei <cp0613@linux.alibaba.com>, guo.wenjia23@zte.com.cn,
  liu.qingtao2@zte.com.cn
 References: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
- <20251119-riscv-ssqosid-cbqri-v1-1-3392fc760e48@kernel.org>
+ <20251119-riscv-ssqosid-cbqri-v1-3-3392fc760e48@kernel.org>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-1-3392fc760e48@kernel.org>
+In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-3-3392fc760e48@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32d.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2001:4860:4864:20::31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -119,176 +119,356 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 11/19/25 9:42 PM, Drew Fustini wrote:
-> From: Kornel Dulęba <mindal@semihalf.com>
+> From: Nicolas Pitre <npitre@baylibre.com>
 > 
-> Implement the srmcfg CSR defined by the Ssqosid ISA extension
-> (Supervisor-mode Quality of Service ID). The CSR contains two fields:
+> Implement a capacity controller according to the Capacity and Bandwidth
+> QoS Register Interface (CBQRI) which supports these capabilities:
 > 
->    - Resource Control ID (RCID) used determine resource allocation
->    - Monitoring Counter ID (MCID) used to track resource usage
+>    - Number of access types: 2 (code and data)
+>    - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
+>    - Event IDs supported: None, Occupancy
+>    - Capacity allocation ops: CONFIG_LIMIT, READ_LIMIT, FLUSH_RCID
 > 
-> The CSR is defined for S-mode but accessing it when V=1 shall cause a
-> virtual instruction exception. Implement this behavior by calling the
-> hmode predicate.
-> 
-> Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/download/v1.0/riscv-cbqri.pdf
-> Signed-off-by: Kornel Dulęba <mindal@semihalf.com>
-> [fustini: rebase on v10.1.50, fix check_srmcfg]
+> Link: https://github.com/riscv-non-isa/riscv-cbqri/blob/main/riscv-cbqri.pdf
+> Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
+> [fustini: add fields introduced in the ratified spec: cunits, rpfx, p]
 > Signed-off-by: Drew Fustini <fustini@kernel.org>
 > ---
->   disas/riscv.c                     |  1 +
->   target/riscv/cpu.c                |  2 ++
->   target/riscv/cpu.h                |  3 +++
->   target/riscv/cpu_bits.h           |  8 ++++++++
->   target/riscv/cpu_cfg_fields.h.inc |  1 +
->   target/riscv/csr.c                | 34 ++++++++++++++++++++++++++++++++++
->   6 files changed, 49 insertions(+)
+>   MAINTAINERS               |   1 +
+>   hw/riscv/cbqri_capacity.c | 634 ++++++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 635 insertions(+)
 > 
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index 85cd2a9c2aef..86fc710528c1 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -2289,6 +2289,7 @@ static const char *csr_name(int csrno)
->       case 0x0143: return "stval";
->       case 0x0144: return "sip";
->       case 0x0180: return "satp";
-> +    case 0x0181: return "srmcfg";
->       case 0x0200: return "hstatus";
->       case 0x0202: return "hedeleg";
->       case 0x0203: return "hideleg";
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 73d4280d7c84..2e2e642de26b 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -216,6 +216,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
->       ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
->       ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
-> +    ISA_EXT_DATA_ENTRY(ssqosid, PRIV_VERSION_1_12_0, ext_ssqosid),
->       ISA_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
->       ISA_EXT_DATA_ENTRY(ssstrict, PRIV_VERSION_1_12_0, has_priv_1_12),
->       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
-> @@ -1268,6 +1269,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
->       MULTI_EXT_CFG_BOOL("zvfbfwma", ext_zvfbfwma, false),
->       MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
->       MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
-> +    MULTI_EXT_CFG_BOOL("ssqosid", ext_ssqosid, true),
->       MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
->       MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
->       MULTI_EXT_CFG_BOOL("sspm", ext_sspm, false),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 36e7f100374d..21688d8ca002 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -336,6 +336,9 @@ struct CPUArchState {
->       uint64_t ctr_dst[16 << SCTRDEPTH_MAX];
->       uint64_t ctr_data[16 << SCTRDEPTH_MAX];
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 7afe80f1b17c..48cca4ac8702 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -362,6 +362,7 @@ M: Nicolas Pitre <npitre@baylibre.com>
+>   M: Drew Fustini <fustini@kernel.org>
+>   L: qemu-riscv@nongnu.org
+>   S: Supported
+> +F: hw/riscv/cbqri_capacity.c
+>   F: include/hw/riscv/cbqri.h
 >   
-> +    /* Ssqosid extension */
-> +    target_ulong srmcfg;
+>   RENESAS RX CPUs
+> diff --git a/hw/riscv/cbqri_capacity.c b/hw/riscv/cbqri_capacity.c
+> new file mode 100644
+> index 000000000000..e70f831878ac
+> --- /dev/null
+> +++ b/hw/riscv/cbqri_capacity.c
+> @@ -0,0 +1,634 @@
+> +/*
+> + * RISC-V Capacity and Bandwidth QoS Register Interface
+> + * URL: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
+> + *
+> + * Copyright (c) 2023 BayLibre SAS
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * This file contains the Capacity-controller QoS Register Interface.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
 > +
->       /* Machine and Supervisor interrupt priorities */
->       uint8_t miprio[64];
->       uint8_t siprio[64];
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index b62dd82fe7c0..ebb400bf6f2c 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -228,6 +228,9 @@
->   #define CSR_SPTBR           0x180
->   #define CSR_SATP            0x180
->   
-> +/* Ssqosid extension */
-> +#define CSR_SRMCFG          0x181
+> +#include "qemu/osdep.h"
+> +#include "qapi/error.h"
+> +#include "qemu/error-report.h"
+> +#include "qemu/log.h"
+> +#include "qemu/module.h"
+> +#include "qemu/bitmap.h"
+> +#include "hw/qdev-properties.h"
+> +#include "hw/sysbus.h"
+> +#include "target/riscv/cpu.h"
+> +#include "hw/riscv/cbqri.h"
 > +
->   /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
->   #define CSR_SISELECT        0x150
->   #define CSR_SIREG           0x151
-> @@ -1164,4 +1167,9 @@ typedef enum CTRType {
->   #define MCONTEXT64                         0x0000000000001FFFULL
->   #define MCONTEXT32_HCONTEXT                0x0000007F
->   #define MCONTEXT64_HCONTEXT                0x0000000000003FFFULL
+
+[ ...]
+
 > +
-> +/* SRMCFG CSR field masks (Ssqosid extensions) */
-> +#define SRMCFG_RCID                      0x00000FFF
-> +#define SRMCFG_MCID                      0x0FFF0000
-> +
->   #endif
-> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-> index a154ecdc792b..6518f6f9c571 100644
-> --- a/target/riscv/cpu_cfg_fields.h.inc
-> +++ b/target/riscv/cpu_cfg_fields.h.inc
-> @@ -105,6 +105,7 @@ BOOL_FIELD(ext_ssaia)
->   BOOL_FIELD(ext_smctr)
->   BOOL_FIELD(ext_ssctr)
->   BOOL_FIELD(ext_sscofpmf)
-> +BOOL_FIELD(ext_ssqosid)
->   BOOL_FIELD(ext_smepmp)
->   BOOL_FIELD(ext_smrnmi)
->   BOOL_FIELD(ext_ssnpm)
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 5c91658c3dc4..06a6212c672d 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1759,6 +1759,37 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
->       return RISCV_EXCP_NONE;
->   }
->   
-> +static RISCVException check_srmcfg(CPURISCVState *env, int csrno)
+> +static void riscv_cbqri_cc_write(void *opaque, hwaddr addr,
+> +                                 uint64_t value, unsigned size)
 > +{
-> +    RISCVCPU *cpu = env_archcpu(env);
+> +    RiscvCbqriCapacityState *cc = opaque;
 > +
-> +    if (!cpu->cfg.ext_ssqosid) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
+> +    assert((addr % 8) == 0);
+> +    assert(size == 8);
 
-env_archcpu() is a bit heavyweight and we usually avoid it. Since you're using the 'cpu' ptr
-solely to access the CFG pointer I suggest using riscv_cpu_cfg() instead:
+So here and in the read callback (riscv_cbqri_cc_read) you're doing asserts for
+size == 8, while your memoryops has:
 
-if (!riscv_cpu_cfg(env)->ext_ssqosid) {...}
+static const MemoryRegionOps riscv_cbqri_cc_ops = {
+     .read = riscv_cbqri_cc_read,
+     .write = riscv_cbqri_cc_write,
+     .endianness = DEVICE_LITTLE_ENDIAN,
+     .valid.min_access_size = 4,  <==========
+     .valid.max_access_size = 8,
+     .impl.min_access_size = 8,
+     .impl.max_access_size = 8,
+};
 
 
-Thanks,
+You can get rid of assert(size == 8) in both callbacks by setting
+min_access_size = 8.
+
+
+Code LGTM otherwise. Thanks,
+
 
 Daniel
 
+
 > +
-> +    /*
-> +     * Even though this is an S-mode CSR the spec says that we need to throw
-> +     * and virt instruction fault if a guest tries to access it.
-> +     */
-> +    return env->virt_enabled ?
-> +           RISCV_EXCP_VIRT_INSTRUCTION_FAULT : smode(env, csrno);
+> +    switch (addr) {
+> +    case A_CC_CAPABILITIES:
+> +        /* read-only register */
+> +        break;
+> +    case A_CC_MON_CTL:
+> +        riscv_cbqri_cc_write_mon_ctl(cc, value);
+> +        break;
+> +    case A_CC_ALLOC_CTL:
+> +        riscv_cbqri_cc_write_alloc_ctl(cc, value);
+> +        break;
+> +    case A_CC_MON_CTR_VAL:
+> +        /* read-only register */
+> +        break;
+> +    case A_CC_BLOCK_MASK:
+> +        if (cc->ncblks == 0) {
+> +            break;
+> +        }
+> +        /* fallthrough */
+> +    default:
+> +        uint32_t blkmask_slot = (addr - A_CC_BLOCK_MASK) / 8;
+> +        if (blkmask_slot >= (cc->ncblks + 63) / 64) {
+> +            qemu_log_mask(LOG_GUEST_ERROR,
+> +                          "%s: out of bounds (addr=0x%x)",
+> +                          __func__, (uint32_t)addr);
+> +            break;
+> +        }
+> +        cc->alloc_blockmasks[blkmask_slot] = value;
+> +    }
 > +}
 > +
-> +static RISCVException read_srmcfg(CPURISCVState *env, int csrno,
-> +                                  target_ulong *val)
+> +static uint64_t riscv_cbqri_cc_read(void *opaque, hwaddr addr, unsigned size)
 > +{
-> +    *val = env->srmcfg;
-> +    return RISCV_EXCP_NONE;
+> +    RiscvCbqriCapacityState *cc = opaque;
+> +    uint64_t value = 0;
+> +
+> +    assert((addr % 8) == 0);
+> +    assert(size == 8);
+> +
+> +    switch (addr) {
+> +    case A_CC_CAPABILITIES:
+> +        value = FIELD_DP64(value, CC_CAPABILITIES, VER_MAJOR,
+> +                           RISCV_CBQRI_VERSION_MAJOR);
+> +        value = FIELD_DP64(value, CC_CAPABILITIES, VER_MINOR,
+> +                           RISCV_CBQRI_VERSION_MINOR);
+> +        value = FIELD_DP64(value, CC_CAPABILITIES, NCBLKS,
+> +                           cc->ncblks);
+> +        value = FIELD_DP64(value, CC_CAPABILITIES, FRCID,
+> +                           cc->supports_alloc_op_flush_rcid);
+> +        value = FIELD_DP64(value, CC_CAPABILITIES, CUNITS,
+> +                           cc->cunits);
+> +        value = FIELD_DP64(value, CC_CAPABILITIES, RPFX,
+> +                           cc->rpfx);
+> +        value = FIELD_DP64(value, CC_CAPABILITIES, P,
+> +                           cc->p);
+> +
+> +        break;
+> +    case A_CC_MON_CTL:
+> +        value = cc->cc_mon_ctl;
+> +        break;
+> +    case A_CC_ALLOC_CTL:
+> +        value = cc->cc_alloc_ctl;
+> +        break;
+> +    case A_CC_MON_CTR_VAL:
+> +        value = cc->cc_mon_ctr_val;
+> +        break;
+> +    case A_CC_BLOCK_MASK:
+> +        if (cc->ncblks == 0) {
+> +            break;
+> +        }
+> +        /* fallthrough */
+> +    default:
+> +        unsigned int blkmask_slot = (addr - A_CC_BLOCK_MASK) / 8;
+> +        if (blkmask_slot >= (cc->ncblks + 63) / 64) {
+> +            qemu_log_mask(LOG_GUEST_ERROR,
+> +                          "%s: out of bounds (addr=0x%x)",
+> +                          __func__, (uint32_t)addr);
+> +            break;
+> +        }
+> +        value = cc->alloc_blockmasks[blkmask_slot];
+> +    }
+> +
+> +    return value;
 > +}
 > +
-> +static RISCVException write_srmcfg(CPURISCVState *env, int csrno,
-> +                                   target_ulong val, uintptr_t ra)
+> +static const MemoryRegionOps riscv_cbqri_cc_ops = {
+> +    .read = riscv_cbqri_cc_read,
+> +    .write = riscv_cbqri_cc_write,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +    .valid.min_access_size = 4,
+> +    .valid.max_access_size = 8,
+> +    .impl.min_access_size = 8,
+> +    .impl.max_access_size = 8,
+> +};
+> +
+> +static void riscv_cbqri_cc_realize(DeviceState *dev, Error **errp)
 > +{
-> +    env->srmcfg = val & (SRMCFG_RCID | SRMCFG_MCID);
-> +    return RISCV_EXCP_NONE;
+> +    RiscvCbqriCapacityState *cc = RISCV_CBQRI_CC(dev);
+> +
+> +    if (!cc->mmio_base) {
+> +        error_setg(errp, "mmio_base property not set");
+> +        return;
+> +    }
+> +
+> +    assert(cc->mon_counters == NULL);
+> +    cc->mon_counters = g_new0(MonitorCounter, cc->nb_mcids);
+> +
+> +    assert(cc->alloc_blockmasks == NULL);
+> +    uint64_t *end = get_blockmask_location(cc, cc->nb_rcids, 0);
+> +    unsigned int blockmasks_size = end - cc->alloc_blockmasks;
+> +    cc->alloc_blockmasks = g_new0(uint64_t, blockmasks_size);
+> +
+> +    memory_region_init_io(&cc->mmio, OBJECT(dev), &riscv_cbqri_cc_ops,
+> +                          cc, TYPE_RISCV_CBQRI_CC".mmio", 4 * 1024);
+> +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &cc->mmio);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, cc->mmio_base);
 > +}
 > +
+> +static void riscv_cbqri_cc_reset(DeviceState *dev)
+> +{
+> +    RiscvCbqriCapacityState *cc = RISCV_CBQRI_CC(dev);
 > +
->   #define VSTOPI_NUM_SRCS 5
->   
->   /*
-> @@ -6035,6 +6066,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->       /* Supervisor Protection and Translation */
->       [CSR_SATP]     = { "satp",     satp, read_satp,     write_satp     },
->   
-> +    /* Supervisor-Level Quality-of-Service Identifiers (Ssqosid) */
-> +    [CSR_SRMCFG]   = { "srmcfg",  check_srmcfg, read_srmcfg, write_srmcfg },
+> +    cc->cc_mon_ctl = 0;
+> +    cc->cc_alloc_ctl = 0;
 > +
->       /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
->       [CSR_SISELECT]   = { "siselect",   csrind_or_aia_smode, NULL, NULL,
->                            rmw_xiselect                                       },
+> +    /* assign all capacity only to rcid0 */
+> +    for (unsigned int rcid = 0; rcid < cc->nb_rcids; rcid++) {
+> +        bool any_at = false;
+> +
+> +        if (cc->supports_at_data) {
+> +            alloc_blockmask_init(cc, rcid, CC_AT_DATA,
+> +                                 rcid == 0, NULL);
+> +            any_at = true;
+> +        }
+> +        if (cc->supports_at_code) {
+> +            alloc_blockmask_init(cc, rcid, CC_AT_CODE,
+> +                                 rcid == 0, NULL);
+> +            any_at = true;
+> +        }
+> +        if (!any_at) {
+> +            alloc_blockmask_init(cc, rcid, 0,
+> +                                 rcid == 0, NULL);
+> +        }
+> +    }
+> +}
+> +
+> +static Property riscv_cbqri_cc_properties[] = {
+> +    DEFINE_PROP_UINT64("mmio_base", RiscvCbqriCapacityState, mmio_base, 0),
+> +    DEFINE_PROP_STRING("target", RiscvCbqriCapacityState, target),
+> +
+> +    DEFINE_PROP_UINT16("max_mcids", RiscvCbqriCapacityState, nb_mcids, 256),
+> +    DEFINE_PROP_UINT16("max_rcids", RiscvCbqriCapacityState, nb_rcids, 64),
+> +    DEFINE_PROP_UINT16("ncblks", RiscvCbqriCapacityState, ncblks, 16),
+> +
+> +    DEFINE_PROP_BOOL("cunits", RiscvCbqriCapacityState, cunits, true),
+> +    DEFINE_PROP_BOOL("rpfx", RiscvCbqriCapacityState, rpfx, true),
+> +    DEFINE_PROP_UINT8("p", RiscvCbqriCapacityState, p, 4),
+> +
+> +    DEFINE_PROP_BOOL("at_data", RiscvCbqriCapacityState,
+> +                     supports_at_data, true),
+> +    DEFINE_PROP_BOOL("at_code", RiscvCbqriCapacityState,
+> +                     supports_at_code, true),
+> +
+> +    DEFINE_PROP_BOOL("alloc_op_config_limit", RiscvCbqriCapacityState,
+> +                     supports_alloc_op_config_limit, true),
+> +    DEFINE_PROP_BOOL("alloc_op_read_limit", RiscvCbqriCapacityState,
+> +                     supports_alloc_op_read_limit, true),
+> +    DEFINE_PROP_BOOL("alloc_op_flush_rcid", RiscvCbqriCapacityState,
+> +                     supports_alloc_op_flush_rcid, true),
+> +
+> +    DEFINE_PROP_BOOL("mon_op_config_event", RiscvCbqriCapacityState,
+> +                     supports_mon_op_config_event, true),
+> +    DEFINE_PROP_BOOL("mon_op_read_counter", RiscvCbqriCapacityState,
+> +                     supports_mon_op_read_counter, true),
+> +
+> +    DEFINE_PROP_BOOL("mon_evt_id_none", RiscvCbqriCapacityState,
+> +                     supports_mon_evt_id_none, true),
+> +    DEFINE_PROP_BOOL("mon_evt_id_occupancy", RiscvCbqriCapacityState,
+> +                     supports_mon_evt_id_occupancy, true),
+> +};
+> +
+> +static void riscv_cbqri_cc_class_init(ObjectClass *klass, const void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +    dc->realize = riscv_cbqri_cc_realize;
+> +    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
+> +    dc->desc = "RISC-V CBQRI Capacity Controller";
+> +    device_class_set_props(dc, riscv_cbqri_cc_properties);
+> +    dc->legacy_reset = riscv_cbqri_cc_reset;
+> +    dc->user_creatable = true;
+> +}
+> +
+> +static const TypeInfo riscv_cbqri_cc_info = {
+> +    .name          = TYPE_RISCV_CBQRI_CC,
+> +    .parent        = TYPE_SYS_BUS_DEVICE,
+> +    .instance_size = sizeof(RiscvCbqriCapacityState),
+> +    .class_init    = riscv_cbqri_cc_class_init,
+> +};
+> +
+> +static void riscv_cbqri_cc_register_types(void)
+> +{
+> +    type_register_static(&riscv_cbqri_cc_info);
+> +}
+> +
+> +DeviceState *riscv_cbqri_cc_create(hwaddr addr,
+> +                                   const RiscvCbqriCapacityCaps *caps,
+> +                                   const char *target_name)
+> +{
+> +    DeviceState *dev = qdev_new(TYPE_RISCV_CBQRI_CC);
+> +
+> +    qdev_prop_set_uint64(dev, "mmio_base", addr);
+> +    qdev_prop_set_string(dev, "target", target_name);
+> +    qdev_prop_set_uint16(dev, "max_mcids", caps->nb_mcids);
+> +    qdev_prop_set_uint16(dev, "max_rcids", caps->nb_rcids);
+> +    qdev_prop_set_uint16(dev, "ncblks", caps->ncblks);
+> +    qdev_prop_set_bit(dev, "cunits", caps->cunits);
+> +    qdev_prop_set_bit(dev, "rpfx", caps->rpfx);
+> +    qdev_prop_set_uint8(dev, "p", caps->p);
+> +
+> +    qdev_prop_set_bit(dev, "at_data",
+> +                      caps->supports_at_data);
+> +    qdev_prop_set_bit(dev, "at_code",
+> +                      caps->supports_at_code);
+> +    qdev_prop_set_bit(dev, "alloc_op_config_limit",
+> +                      caps->supports_alloc_op_config_limit);
+> +    qdev_prop_set_bit(dev, "alloc_op_read_limit",
+> +                      caps->supports_alloc_op_read_limit);
+> +    qdev_prop_set_bit(dev, "alloc_op_flush_rcid",
+> +                      caps->supports_alloc_op_flush_rcid);
+> +    qdev_prop_set_bit(dev, "mon_op_config_event",
+> +                      caps->supports_mon_op_config_event);
+> +    qdev_prop_set_bit(dev, "mon_op_read_counter",
+> +                      caps->supports_mon_op_read_counter);
+> +    qdev_prop_set_bit(dev, "mon_evt_id_none",
+> +                      caps->supports_mon_evt_id_none);
+> +    qdev_prop_set_bit(dev, "mon_evt_id_occupancy",
+> +                      caps->supports_mon_evt_id_occupancy);
+> +
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +
+> +    return dev;
+> +}
+> +
+> +type_init(riscv_cbqri_cc_register_types)
 > 
 
 
