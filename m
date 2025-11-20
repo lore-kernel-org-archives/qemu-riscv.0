@@ -4,93 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F29FCF884C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 12:22:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35995CF8855
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 12:55:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vM3fj-0005c9-2d; Thu, 20 Nov 2025 07:21:59 -0500
+	id 1vM4C7-0007P8-FI; Thu, 20 Nov 2025 07:55:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM3fg-0005bb-ED
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:21:56 -0500
-Received: from mail-ot1-x333.google.com ([2607:f8b0:4864:20::333])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM3fe-0000Nn-CF
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:21:55 -0500
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7c6da42fbd4so283004a34.1
- for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 04:21:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1763641313; x=1764246113; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+gko722ZjvT5CvrOtyL+ov5rxK6NCsvJ7x0/i88tP9Q=;
- b=eS0Xm8aigjEceBisaPAZWYqb4XQd8d856XA2mWFklRo+2kwLzTaGRTtsZU+Pva/Zq/
- 42QdD9MNjLdwXm4KzDprGbr063Uz5Vya9lpjkLOSjz1xsse0ElY5uV5rFya5LWTATocq
- J2PxTyPbkpm1jbwGShO5xVVKdsTyXZOIp1TJy7QytvXujqLy2haQz98p1oMYSoUkgr2C
- z6wfgFS3xUXC8DnJZenW3FlwIPoE0mhd8DtP7KHQHs8ontjFvvBV5qrGOYsdLvOiGtp6
- gt7Lud2IE+Y34AJ1hmSa+tYJmQzvio8B2xLfwQTkuh2dnaQT+njUw7m1G7LNN+jY1SNQ
- 29dQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763641313; x=1764246113;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+gko722ZjvT5CvrOtyL+ov5rxK6NCsvJ7x0/i88tP9Q=;
- b=iYMWcctVFgQ6/MCnrpLNYOiJnkHPSKJhnd95MWRokWjl5rLNTVxtdHveCjpLvnPQvV
- qE5UTqu/6f4jJdnP/BbJoSUWf97UBsHsZT1jcebS+R7xK7bK4BcB1nJv7ni0Yy82sd8d
- EAuyO6G1MrGd0+TNjAu4lHCXNrM+GK8J0uWmgsWCUydTEK9QV5bPuYciMzOx6W2NhyKq
- 5Vw0dAlWFxKvZbJbEBjCLqo0eNSylsWVfy8YcNMg64Mz8hbkVXmbdYa68Grf8YLkY7iT
- mErrl/24CoKpP0VtRxG6mOOXV5y08flS0eNXsPgWpC3PeI97DquVcD6DaVqNuYUTRTcP
- hdNw==
-X-Gm-Message-State: AOJu0YxwDVp/TP+dU/mXvGcd/h4113MvQhXkaoXgLDwxmiLDoplwUQl7
- ozHRieR0QBk61QygYcWIbTeh7eveQDpozK6GKTyWsKSV7djfFlTD0nvVooLG+joyHJPgz8cDcem
- rmG3RNAA=
-X-Gm-Gg: ASbGncuy836afyyrUklq+qgHOyFWmBCp2ew1qD+0FzKkJd+DJ5468vEhjCljxBQw0Mk
- kMeaki46e/UGWh6bwu+LXWJQnY19CU0xl8Xv+A1hPwwMgBVYWBF4hQg5mP4le2/L7CUu+nUc5w8
- 0CNp9z4Pwc5UdmCv1yXL9er73mVRuyK2Zxs8oGeOJ45BKsfyEpbJnvZylq/EwK2SlEomxoUMlbx
- QhBe/8RBbXh6TKMbA86TdYJiTXDBXU2E/jmBpmPNX0BHUFGJcSFM517eVkOFay5Aw4jtyj9PYAy
- 1RZzGCPIcDSZXtR/SbguxcJx1hAPmhigyrYGwCyaeznWC1pQb6SyWb94spORsDvQImL/IGvZrhd
- vQ3P+GEoXSeew1ILlWHtWjrpCxRUeawOHysUIKGwqjtodInWigEL1PATD/wyyKvyeDNAvh3vog6
- 79LDAgY2HrLbhCgvdJfY37aRYOF8Y=
-X-Google-Smtp-Source: AGHT+IG6B3xEX7cauIS3zxOIe78TPKEP6GmtQS98k8nskvoUphKkytREbyQHScCTtFQuhp2Q8HImKw==
-X-Received: by 2002:a05:6830:440e:b0:7c6:8c73:aafb with SMTP id
- 46e09a7af769-7c78d306650mr1575519a34.35.1763641312978; 
- Thu, 20 Nov 2025 04:21:52 -0800 (PST)
-Received: from [192.168.68.110] ([177.188.133.235])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c78d3ff21fsm907108a34.20.2025.11.20.04.21.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Nov 2025 04:21:51 -0800 (PST)
-Message-ID: <7d8e2ed4-3adf-4db6-aebd-7d6b9f695e48@ventanamicro.com>
-Date: Thu, 20 Nov 2025 09:21:47 -0300
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1vM4C5-0007NO-8O; Thu, 20 Nov 2025 07:55:25 -0500
+Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1vM4C3-0005uv-5s; Thu, 20 Nov 2025 07:55:24 -0500
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 851795969FB;
+ Thu, 20 Nov 2025 13:55:15 +0100 (CET)
+X-Virus-Scanned: amavis at eik.bme.hu
+Received: from zero.eik.bme.hu ([127.0.0.1])
+ by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
+ id UFymzwfFm40x; Thu, 20 Nov 2025 13:55:13 +0100 (CET)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id 6C8115969F7; Thu, 20 Nov 2025 13:55:13 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 695685969FC;
+ Thu, 20 Nov 2025 13:55:13 +0100 (CET)
+Date: Thu, 20 Nov 2025 13:55:13 +0100 (CET)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+cc: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org, 
+ kwolf@redhat.com, hreitz@redhat.com, mst@redhat.com, imammedo@redhat.com, 
+ anisinha@redhat.com, gengdongjiu1@gmail.com, peter.maydell@linaro.org, 
+ alistair@alistair23.me, edgar.iglesias@gmail.com, npiggin@gmail.com, 
+ harshpb@linux.ibm.com, palmer@dabbelt.com, liwei1518@gmail.com, 
+ zhiwei_liu@linux.alibaba.com, sstabellini@kernel.org, 
+ anthony@xenproject.org, paul@xen.org, berrange@redhat.com, 
+ peterx@redhat.com, farosas@suse.de, eblake@redhat.com, 
+ vsementsov@yandex-team.ru, eduardo@habkost.net, marcel.apfelbaum@gmail.com, 
+ philmd@linaro.org, wangyanan55@huawei.com, zhao1.liu@intel.com, 
+ qemu-block@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
+ qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 1/5] hw/core/loader: Make load_elf_hdr() return bool,
+ simplify caller
+In-Reply-To: <4fb0a736-4450-47c0-9f9e-6cb86a3b28ea@ventanamicro.com>
+Message-ID: <072c1f11-1bb4-6f19-f847-e4ba07c148c3@eik.bme.hu>
+References: <20251119130855.105479-1-armbru@redhat.com>
+ <20251119130855.105479-2-armbru@redhat.com>
+ <4fb0a736-4450-47c0-9f9e-6cb86a3b28ea@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] target/riscv: add support for RV64 THEAD C910 CPU
-To: TravisYang <zhiyuan.plct@isrc.iscas.ac.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20251119112724.1342110-1-zhiyuan.plct@isrc.iscas.ac.cn>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Language: en-US
-In-Reply-To: <20251119112724.1342110-1-zhiyuan.plct@isrc.iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::333;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x333.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+Received-SPF: pass client-ip=2001:738:2001:2001::2001;
+ envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -107,93 +76,123 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Thu, 20 Nov 2025, Daniel Henrique Barboza wrote:
+> On 11/19/25 10:08 AM, Markus Armbruster wrote:
+>> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+>> ---
+>
+> Nice cleanup
+>
+>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>
+>>   include/hw/loader.h |  4 +++-
+>>   hw/arm/boot.c       |  6 +-----
+>>   hw/core/loader.c    |  8 ++++++--
+>>   hw/riscv/spike.c    | 10 +---------
+>>   4 files changed, 11 insertions(+), 17 deletions(-)
+>> 
+>> diff --git a/include/hw/loader.h b/include/hw/loader.h
+>> index d035e72748..6f91703503 100644
+>> --- a/include/hw/loader.h
+>> +++ b/include/hw/loader.h
+>> @@ -188,8 +188,10 @@ ssize_t load_elf(const char *filename,
+>>    *
+>>    * Inspect an ELF file's header. Read its full header contents into a
+>>    * buffer and/or determine if the ELF is 64bit.
+>> + *
+>> + * Returns true on success, false on failure.
+>>    */
+>> -void load_elf_hdr(const char *filename, void *hdr, bool *is64, Error 
+>> **errp);
+>> +bool load_elf_hdr(const char *filename, void *hdr, bool *is64, Error 
+>> **errp);
+>>     ssize_t load_aout(const char *filename, hwaddr addr, int max_sz,
+>>                     bool big_endian, hwaddr target_page_size);
+>> diff --git a/hw/arm/boot.c b/hw/arm/boot.c
+>> index b91660208f..06b303aab8 100644
+>> --- a/hw/arm/boot.c
+>> +++ b/hw/arm/boot.c
+>> @@ -766,16 +766,12 @@ static ssize_t arm_load_elf(struct arm_boot_info 
+>> *info, uint64_t *pentry,
+>>       int data_swab = 0;
+>>       int elf_data_order;
+>>       ssize_t ret;
+>> -    Error *err = NULL;
+>>   -
+>> -    load_elf_hdr(info->kernel_filename, &elf_header, &elf_is64, &err);
+>> -    if (err) {
+>> +    if (!load_elf_hdr(info->kernel_filename, &elf_header, &elf_is64, 
+>> NULL)) {
+>>           /*
+>>            * If the file is not an ELF file we silently return.
+>>            * The caller will fall back to try other formats.
+>>            */
+>> -        error_free(err);
+>>           return -1;
+>>       }
+>>   diff --git a/hw/core/loader.c b/hw/core/loader.c
+>> index 590c5b02aa..10687fe1c8 100644
+>> --- a/hw/core/loader.c
+>> +++ b/hw/core/loader.c
+>> @@ -364,8 +364,9 @@ const char *load_elf_strerror(ssize_t error)
+>>       }
+>>   }
+>>   -void load_elf_hdr(const char *filename, void *hdr, bool *is64, Error 
+>> **errp)
+>> +bool load_elf_hdr(const char *filename, void *hdr, bool *is64, Error 
+>> **errp)
+>>   {
+>> +    bool ok = false;
+>>       int fd;
+>>       uint8_t e_ident_local[EI_NIDENT];
+>>       uint8_t *e_ident;
+>> @@ -380,7 +381,7 @@ void load_elf_hdr(const char *filename, void *hdr, bool 
+>> *is64, Error **errp)
+>>       fd = open(filename, O_RDONLY | O_BINARY);
+>>       if (fd < 0) {
+>>           error_setg_errno(errp, errno, "Failed to open file: %s", 
+>> filename);
+>> -        return;
+>> +        return false;
+>>       }
+>>       if (read(fd, hdr, EI_NIDENT) != EI_NIDENT) {
+>>           error_setg_errno(errp, errno, "Failed to read file: %s", 
+>> filename);
+>> @@ -415,8 +416,11 @@ void load_elf_hdr(const char *filename, void *hdr, 
+>> bool *is64, Error **errp)
+>>           off += br;
+>>       }
+>>   +    ok = true;
+>> +
+>>   fail:
+>>       close(fd);
+>> +    return ok;
+>>   }
+>>     /* return < 0 if error, otherwise the number of bytes loaded in memory 
+>> */
+>> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+>> index b0bab3fe00..8531e1d121 100644
+>> --- a/hw/riscv/spike.c
+>> +++ b/hw/riscv/spike.c
+>> @@ -180,15 +180,7 @@ static void create_fdt(SpikeState *s, const 
+>> MemMapEntry *memmap,
+>>     static bool spike_test_elf_image(char *filename)
+>>   {
+>> -    Error *err = NULL;
+>> -
+>> -    load_elf_hdr(filename, NULL, NULL, &err);
+>> -    if (err) {
+>> -        error_free(err);
+>> -        return false;
+>> -    } else {
+>> -        return true;
+>> -    }
+>> +    return load_elf_hdr(filename, NULL, NULL, NULL);
 
+Does it worth to keep this function or could just be inlined at the two 
+callers now that it's equivalent with load_elf_hdr?
 
-On 11/19/25 8:27 AM, TravisYang wrote:
-> From: 杨智源 <zhiyuan.plct@isrc.iscas.ac.cn>
-> 
-> Add a CPU entry for the RV64 THEAD C910 CPU which supports single-core
-> and dual-core configurations.More details can be found at
-> https://www.xrvm.cn/product/xuantie/C910?spm=a2d5.28054257.0.0.4a0f7a32qXoU1w
-> 
-> Signed-off-by: TravisYang <zhiyuan.plct@isrc.iscas.ac.cn>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/cpu-qom.h |  1 +
->   target/riscv/cpu.c     | 47 ++++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 48 insertions(+)
-> 
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 75f4e43408..1fc8140190 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -56,6 +56,7 @@
->   #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
->   #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
->   #define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
-> +#define TYPE_RISCV_CPU_THEAD_C910       RISCV_CPU_TYPE_NAME("thead-c910")
->   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
->   
->   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ae8b721e55..f522bc856b 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -3281,6 +3281,53 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->           .cfg.max_satp_mode = VM_1_10_SV48,
->       ),
->   
-> +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_THEAD_C910, TYPE_RISCV_VENDOR_CPU,
-> +        .misa_mxl_max = MXL_RV64,
-> +        .misa_ext = RVG | RVC | RVS | RVU,
-> +        .priv_spec = PRIV_VERSION_1_12_0,
-> +
-> +        .cfg.ext_zcf = true,
-> +        .cfg.ext_zcd = true,
-> +        .cfg.ext_zfa = true,
-> +        .cfg.ext_zfh = true,
-> +        .cfg.ext_zfhmin = true,
-> +
-> +        .cfg.mmu = true,
-> +        .cfg.ext_xtheadba = true,
-> +        .cfg.ext_xtheadbb = true,
-> +        .cfg.ext_xtheadbs = true,
-> +        .cfg.ext_xtheadcmo = true,
-> +        .cfg.ext_xtheadcondmov = true,
-> +        .cfg.ext_xtheadfmemidx = true,
-> +        .cfg.ext_xtheadmac = true,
-> +        .cfg.ext_xtheadmemidx = true,
-> +        .cfg.ext_xtheadmempair = true,
-> +        .cfg.ext_xtheadsync = true,
-> +        .cfg.pmp = true,
-> +
-> +        .cfg.ext_svinval = true,
-> +        .cfg.ext_svadu = true,
-> +        .cfg.ext_zicbom = true,
-> +        .cfg.ext_zicboz = true,
-> +
-> +        .cfg.ext_zba = true,
-> +        .cfg.ext_zbb = true,
-> +        .cfg.ext_zbc = true,
-> +        .cfg.ext_zbs = true,
-> +
-> +        .cfg.ext_zknd = true,
-> +        .cfg.ext_zkne = true,
-> +        .cfg.ext_zknh = true,
-> +
-> +        .cfg.mvendorid = THEAD_VENDOR_ID,
-> +
-> +        .cfg.max_satp_mode = VM_1_10_SV39,
-> +#ifndef CONFIG_USER_ONLY
-> +        .custom_csrs = th_csr_list,
-> +#endif
-> +    ),
-> +
-> +
->   #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
->       DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
->           .cfg.max_satp_mode = VM_1_10_SV57,
-
+Regards,
+BALATON Zoltan
 
