@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30037CF8844
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 12:01:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7789BCF8844
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 12:02:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vM3Ll-0007K5-8r; Thu, 20 Nov 2025 07:01:21 -0500
+	id 1vM3MO-0007aM-8w; Thu, 20 Nov 2025 07:02:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM3Le-0007II-TA
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:01:15 -0500
-Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
+ id 1vM3M3-0007UL-8t
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:01:39 -0500
+Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vM3Ld-0003xl-7G
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:01:14 -0500
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-3e84d56c4b8so460913fac.2
- for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 04:01:12 -0800 (PST)
+ id 1vM3M1-00043K-AS
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 07:01:38 -0500
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-3eae4e590a4so239689fac.1
+ for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 04:01:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1763640072; x=1764244872; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1763640096; x=1764244896; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=gaK6xjFEa7Rqoa5NHcx38vyaGD1+kzqQP35qMZPac2Y=;
- b=FNCWIvq/HS2DeyeAgOai4W4imei3YqfDoivtu0LVUoQTgGf9wNn+ZWhD1kVTMdwFZt
- WwOHXWCaVIgpg2MosCHkbCOza+4dNCsY9zwQhE4vsW7VNvY07GNAveWs7V4sGDsvkc0r
- AdJad35zTBR6ZibITmyOUfHk9YYu+vsTWEPrHCy2B07HH1ZWOyNAPJiqBeCjGw9PvVJO
- OG+fQ2eF5IsQ6mmaE2O++CEmGTXAYr62GqyvjcY4uiPU+YErgeF66/HlqOtGD1FCHzea
- 4RoAnEumaHTj0OwGSnn0d5mgEaGbxqkOjg15Mv8y3qxtaYwkTR+0tIV7i5Q38+3WMrml
- aalQ==
+ bh=R3tFfvdkAZuykFuhavubWzW+tt7BCO4yozz0yoia5Ao=;
+ b=HggfpDCJcXEYUArSTse0OEKXb5AbUdCJPd+phNMW97nmUeebpr3uQAcJS0bwFyENv8
+ Xe+RQhuBgn4/L0I2jJEj4lt07jQmAS0cSLfSDzsLoi6FhswvhVuYenc6YJE+3Ru5ypj9
+ J9X0fVtWoNh6LN178ivsdD8G4fLdvAVZ/cxwI+0sbLV9p0hMnI5V9Hd5q8DE3oI/n3cv
+ JQDe8mixwO8FZqj5QFPIqToWe/HZ+z6TrQN7FtXs9MCH4Wsb+mBTCTFo8wWP6Ui8Gfrp
+ bVCNF0CKGE0Ulat1tawc5VioXeF4w/vAkUuRArPG4H8YlUBXogb6WxPwehWgPdzh++Or
+ 1Low==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763640072; x=1764244872;
+ d=1e100.net; s=20230601; t=1763640096; x=1764244896;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gaK6xjFEa7Rqoa5NHcx38vyaGD1+kzqQP35qMZPac2Y=;
- b=nbzjR7RpMNMwucTT9ORVVnsG+W0aNf4rTMD/iVHPpX9+PaV3OeTBT1q4f6U2E+Q+8H
- Rz2Zl2vNuwtDF8Ur0fZ8S9cxdkBe7r/PftjSKcWBMNBekswHVAwhe0ZxhupiYe/q9Z5o
- gRiZViR5Z2uyNy0bIocg4MuJLEpZngbzofG9/fwrp4kNcY+SfsBg8hLDI4KG+yr3oWfK
- fetwEOipIfvUMS2pbm4pLyGO2Go975zq22fX63UjfknFhgfhXYluZ9zG8Yg1GOgU4dKw
- kItfYbbopqCU1DWm7qR7vWsgFVgSSUofFF0KqZaV2aLDRDKPokhICGJawQjjUgggbnkj
- GYeQ==
+ bh=R3tFfvdkAZuykFuhavubWzW+tt7BCO4yozz0yoia5Ao=;
+ b=eLc3hkCAy8SuXOks6ax9OdvGTyzihoHDbWghygVxT+vW8TmEMm59V9dCSXOHu6a59W
+ xTUUrxT2wSW+P/EkP8NTVl9UpFotAadjBij5E9AvsS/udO0cZmoJh1HAfaF5TWK857LH
+ G/Gi53gL6sOqKo68AYmiclOQcJcy9Sw7gijRyO82e2JwCLgUzMSmJO0ywpxAFnMfoyF7
+ a5KQWYrkR1p3egVwxrcPaFjkd/DQ6akjhxiqOqFAci7ZFzJUL37/LckKSSTxcg+/Q3Yo
+ 6nHK2tX1317MDFTj2zwYt7h2PpYZ4Ti1GnaOWSZ3pOK+QIUeI0rDdSrg6zM+5MlC8lsD
+ vBww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQLt00nWSyZzLfWHEd6zunYSEYJNPbODpXGQITxT88NsFfDyKmm9NzyP89DRM2PUVdF4r3iZJSCaNM@nongnu.org
-X-Gm-Message-State: AOJu0YwIdxR1RojYwxQv7cugB7gMOXfWQ+wE91siUlgOXYZJD5YZLEyS
- VPODJ99ymeVtUYlVaZ80f4mPZEAwECErWDfSZwxh+Lwqh+TI4nePdHOacOylVnMwe0A=
-X-Gm-Gg: ASbGncvAqLL1ciqyAVSV3mCmE9GbhxBWflmDC4C0xzAK1q7Wh5hCZaONgnaS8sEJzIq
- 8gSAWKcLImnH/9LH0agG73twr0YZ02lA66RjHPMWccHASE9EzN1RPOMfnM5Dl5xxGsqYUMLGYZh
- JeQdkyzQunGPR6DmmyIy6PGBIeXy9hGL1KM+lfNwkBSuJiOrNFwf7yPu9v1LYSSeI4OMoOmnUiS
- kyeFrfEWd7TARN+FfDW8A/Qf1oy9DCMwdxtKzA29rY3lvMarLiPtrdgI/EhHQAr0Ysgnx6f2T0E
- iWoHN0qOyNaZi47h1pXDhhw4sio3OIy5kl/kQ7hlDQxPr2uVdGFgvudZTbOy5Iz4JwnV9hxfUHN
- qx4g4K2euiIHkO9c88TgwpNWXlau8okINgMNWRr80hSGv6rvTdzBA5bO1R8EnWbn0FHqrx+/c27
- cy6wN/ZXMmCzB2p2qvfBCDI1Dw5xA=
-X-Google-Smtp-Source: AGHT+IEntktp2t6F3c2FtTfsZubi/joeyDbNxjQRO85Lw7W41uGRuibq+CDm/o15Yxf057JkT7PT/w==
-X-Received: by 2002:a05:6870:6129:b0:3ec:3c47:b3e7 with SMTP id
- 586e51a60fabf-3ec9a64f8fcmr1484701fac.47.1763640071814; 
- Thu, 20 Nov 2025 04:01:11 -0800 (PST)
+ AJvYcCWGbRAtrqPqisvsOkGnhg9Lv2dBcUIOlMDH+18sc4ASuNjG2pqtanBH7CzanDdGREQObfgXE1xQeF+2@nongnu.org
+X-Gm-Message-State: AOJu0YxqBXWDKOI3FPvRNlO2yW1qhxenEoJrnB60fxqArBeX5vVkCEP/
+ j18rv66R9yJ7C5QJYLQeylLxYl6HPKI84g/gk4eRwRUHps0Y+tFUdW+MIvC8s04+6Wk=
+X-Gm-Gg: ASbGnctw+cIz6pO0eCegGqQi/CUYGXdUFogYS47qfeE/3RlPLMAZMSpZekjmpgAottw
+ Vrt6rY7fNjEik+69QE2mbNEHEnKnRYUKgNzCx416dWYUeAXHd3UyKbVEMcE1B/LQ55RTEsQiVVd
+ DBAhc4U/mnsWs7+dln/nOlcRZii19cBvJxnKjQDB4bQWScuNFCCRaogSw+H5vYBeIsSaj9Ls/Zs
+ zgexp5C/FMGPVt7/VG2xD6FWqf1mCU7r2enYd7+Ir0rpZXmdH6RwDIdRwUEX9Rhxtq6RoPj9Fbo
+ ms+xRfGFdujUwHAa6oNudGdDFdIVovxNt31PuOYRJlUSzfQvxPoDbTlrCbPcQAbsfZYjgGv/oP6
+ QfUwmjMEPTN+zWR2dzutB5Cp4O59RkjlsTfVwzSX2C6QN2s0PMn7D9wwjE2DWa6C5ro918Gxwte
+ DuWEVdC3/X7JVnO+BQNIcJnh3TBSk=
+X-Google-Smtp-Source: AGHT+IGV9UOPEolf+O/M/6ZC2/Z/P8nRN0SdULeS0yEW1pLRV3BLqckkS94HTSAX38CbYougemuDJA==
+X-Received: by 2002:a05:6871:228b:b0:306:c53a:f904 with SMTP id
+ 586e51a60fabf-3ec9a400f1bmr1641698fac.9.1763640095898; 
+ Thu, 20 Nov 2025 04:01:35 -0800 (PST)
 Received: from [192.168.68.110] ([177.188.133.235])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ec9c347b2bsm1031566fac.9.2025.11.20.04.01.05
+ 586e51a60fabf-3ec9dc8ab10sm1023731fac.16.2025.11.20.04.01.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Nov 2025 04:01:09 -0800 (PST)
-Message-ID: <fe2648a7-7875-4aa8-a1f6-485490ddc7b3@ventanamicro.com>
-Date: Thu, 20 Nov 2025 09:01:03 -0300
+ Thu, 20 Nov 2025 04:01:34 -0800 (PST)
+Message-ID: <71ca906b-5365-43c8-be54-6f0a85bbe0c6@ventanamicro.com>
+Date: Thu, 20 Nov 2025 09:01:28 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/7] hw/riscv: meson: add CBQRI controllers to the build
+Subject: Re: [PATCH 7/7] hw/riscv: add CBQRI controllers to virt machine
 To: Drew Fustini <fustini@kernel.org>, qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, Weiwei Li
@@ -86,21 +86,21 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Chen Pei <cp0613@linux.alibaba.com>, guo.wenjia23@zte.com.cn,
  liu.qingtao2@zte.com.cn
 References: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
- <20251119-riscv-ssqosid-cbqri-v1-6-3392fc760e48@kernel.org>
+ <20251119-riscv-ssqosid-cbqri-v1-7-3392fc760e48@kernel.org>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-6-3392fc760e48@kernel.org>
+In-Reply-To: <20251119-riscv-ssqosid-cbqri-v1-7-3392fc760e48@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::31;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::34;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x34.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,37 +116,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
 
-I think this patch and patch 5 should be squashed together. Both LGTM otherwise.
-
-
-Thanks,
-
-Daniel
 
 On 11/19/25 9:42 PM, Drew Fustini wrote:
 > From: Nicolas Pitre <npitre@baylibre.com>
 > 
-> Build the CBQRI controllers when RISC-V CBQRI is enabled by Kconfig.
+> Add CBQRI controllers to the RISC-V virt machine. The device properties
+> can be fully configured from the command line:
+> 
+>    $ qemu-system-riscv64 -M virt ... \
+>        -device riscv.cbqri.capacity,mmio_base=0x04828000[,...]
+>        -device riscv.cbqri.bandwidth,mmio_base=0x04829000[,...]
+> 
+> The mmio_base option is mandatory, the others are optional.
+> 
+> Many -device arguments as wanted can be provided as long as their
+> mmio regions don't conflict.
+> 
+> To see all possible options:
+> 
+>    $ qemu-system-riscv64 -device riscv.cbqri.capacity,help
+>    riscv.cbqri.capacity options:
+>      alloc_op_config_limit=<bool> -  (default: true)
+>      alloc_op_flush_rcid=<bool> -  (default: true)
+>      alloc_op_read_limit=<bool> -  (default: true)
+>      at_code=<bool>         -  (default: true)
+>      at_data=<bool>         -  (default: true)
+>      max_mcids=<uint16>     -  (default: 256)
+>      max_rcids=<uint16>     -  (default: 64)
+>      mmio_base=<uint64>     -  (default: 0)
+>      mon_evt_id_none=<bool> -  (default: true)
+>      mon_evt_id_occupancy=<bool> -  (default: true)
+>      mon_op_config_event=<bool> -  (default: true)
+>      mon_op_read_counter=<bool> -  (default: true)
+>      ncblks=<uint16>        -  (default: 16)
+>      target=<str>
+> 
+>    $ qemu-system-riscv64 -device riscv.cbqri.bandwidth,help
+>    riscv.cbqri.bandwidth options:
+>      alloc_op_config_limit=<bool> -  (default: true)
+>      alloc_op_read_limit=<bool> -  (default: true)
+>      at_code=<bool>         -  (default: true)
+>      at_data=<bool>         -  (default: true)
+>      max_mcids=<uint16>     -  (default: 256)
+>      max_rcids=<uint16>     -  (default: 64)
+>      mmio_base=<uint64>     -  (default: 0)
+>      mon_evt_id_none=<bool> -  (default: true)
+>      mon_evt_id_rdonly_count=<bool> -  (default: true)
+>      mon_evt_id_rdwr_count=<bool> -  (default: true)
+>      mon_evt_id_wronly_count=<bool> -  (default: true)
+>      mon_op_config_event=<bool> -  (default: true)
+>      mon_op_read_counter=<bool> -  (default: true)
+>      nbwblks=<uint16>       -  (default: 1024)
+>      target=<str>
+> 
+> Boolean options correspond to hardware capabilities that can be disabled
 > 
 > Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
 > Signed-off-by: Drew Fustini <fustini@kernel.org>
 > ---
->   hw/riscv/meson.build | 1 +
->   1 file changed, 1 insertion(+)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+
+>   hw/riscv/virt.c | 3 +++
+>   1 file changed, 3 insertions(+)
 > 
-> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-> index 2a8d5b136cc4..79e15514b797 100644
-> --- a/hw/riscv/meson.build
-> +++ b/hw/riscv/meson.build
-> @@ -14,5 +14,6 @@ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
->   	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
->   riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
->   riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
-> +riscv_ss.add(when: 'CONFIG_RISCV_CBQRI', if_true: files('cbqri_capacity.c', 'cbqri_bandwidth.c'))
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 17909206c7ef..498f606d33b1 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -55,6 +55,7 @@
+>   #include "hw/pci-host/gpex.h"
+>   #include "hw/display/ramfb.h"
+>   #include "hw/acpi/aml-build.h"
+> +#include "hw/riscv/cbqri.h"
+>   #include "qapi/qapi-visit-common.h"
+>   #include "hw/virtio/virtio-iommu.h"
+>   #include "hw/uefi/var-service-api.h"
+> @@ -1941,6 +1942,8 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+>   #ifdef CONFIG_TPM
+>       machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
+>   #endif
+> +    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_BC);
+> +    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_CC);
 >   
->   hw_arch += {'riscv': riscv_ss}
+>       object_class_property_add_bool(oc, "aclint", virt_get_aclint,
+>                                      virt_set_aclint);
 > 
 
 
