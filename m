@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE36CF9C7A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 19:14:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05D96CFA443
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Nov 2025 19:14:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vMA6f-0005yg-B1; Thu, 20 Nov 2025 14:14:13 -0500
+	id 1vMA6o-0006No-R3; Thu, 20 Nov 2025 14:14:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMA6O-0005gW-Hl
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 14:13:57 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMA6P-0005hC-Qb
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 14:13:59 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMA6L-000721-9l
- for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 14:13:55 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMA6L-000732-BI
+ for qemu-riscv@nongnu.org; Thu, 20 Nov 2025 14:13:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1763666030;
+ s=mimecast20190719; t=1763666032;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=umeOgmRBAWLAHxdfid+WkX0aqDhcSVhY+M4Sagb57i8=;
- b=H/hfm1I2bU/CqiYpSSkYO+fJDOTaKOWCp+ZVq7JwR2RMu91S2IiowOOuQdnfq3GomfQyg2
- PHrRXipbhbtaLFF/1jnTQaHXZIMXEqqnfwl4XZY6YNakBZKn4l5IKRWcyiZ32MTJrfPSkj
- HVTAIcuG89RfMPFBs+bhX5vwRHBwz9c=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ bh=fcIBzXudHPYvY6QmF4OmsaPzhsA+4LiQymdChLvcMTo=;
+ b=IxkLbyK5UmXn8DEYYgWwjnBOF33jrWZcqkZDDQth2M4cWptgnG2vadEy8AmJhnF7s7ADUa
+ DKzyr70VRydz9pSwArM3doo2sUndvSB+SwrL2bdsoYtnPOaJCjpwSDaEXSihUGx5yNp5ad
+ ksXRpOJpr3sonHHeO6vzpJcScytglI8=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-567-2sTwlhUGNZObweGKQdVHUQ-1; Thu,
- 20 Nov 2025 14:13:48 -0500
-X-MC-Unique: 2sTwlhUGNZObweGKQdVHUQ-1
-X-Mimecast-MFC-AGG-ID: 2sTwlhUGNZObweGKQdVHUQ_1763666024
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-581-7Iq_K6oTO5mz-isRrtZO_Q-1; Thu,
+ 20 Nov 2025 14:13:49 -0500
+X-MC-Unique: 7Iq_K6oTO5mz-isRrtZO_Q-1
+X-Mimecast-MFC-AGG-ID: 7Iq_K6oTO5mz-isRrtZO_Q_1763666024
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 9C6C319560A1; Thu, 20 Nov 2025 19:13:43 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 7BF861956053; Thu, 20 Nov 2025 19:13:43 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.45.242.18])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 7CAC730044DB; Thu, 20 Nov 2025 19:13:41 +0000 (UTC)
+ id 9A8CB30044E7; Thu, 20 Nov 2025 19:13:41 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 50C8F21E66EF; Thu, 20 Nov 2025 20:13:39 +0100 (CET)
+ id 45CE821E6935; Thu, 20 Nov 2025 20:13:39 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: arei.gonglei@huawei.com, pizhenwei@bytedance.com, alistair.francis@wdc.com,
@@ -65,10 +65,10 @@ Cc: arei.gonglei@huawei.com, pizhenwei@bytedance.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  marcandre.lureau@redhat.com, qemu-block@nongnu.org, qemu-ppc@nongnu.org,
  xen-devel@lists.xenproject.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org
-Subject: [PATCH 03/14] tap-solaris: Use error_setg_file_open() for better
- error messages
-Date: Thu, 20 Nov 2025 20:13:28 +0100
-Message-ID: <20251120191339.756429-4-armbru@redhat.com>
+Subject: [PATCH 01/14] error: Strip trailing '\n' from error string arguments
+ (again)
+Date: Thu, 20 Nov 2025 20:13:26 +0100
+Message-ID: <20251120191339.756429-2-armbru@redhat.com>
 In-Reply-To: <20251120191339.756429-1-armbru@redhat.com>
 References: <20251120191339.756429-1-armbru@redhat.com>
 MIME-Version: 1.0
@@ -99,53 +99,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Error messages change from
-
-    Can't open /dev/ip (actually /dev/udp)
-    Can't open /dev/tap
-    Can't open /dev/tap (2)
-
-to
-
-    Could not open '/dev/udp': REASON
-    Could not open '/dev/tap': REASON
-
-where REASON is the value of strerror(errno).
+Tracked down with scripts/coccinelle/err-bad-newline.cocci.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- net/tap-solaris.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ hw/audio/es1370.c | 2 +-
+ ui/gtk.c          | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/net/tap-solaris.c b/net/tap-solaris.c
-index 75397e6c54..faf7922ea8 100644
---- a/net/tap-solaris.c
-+++ b/net/tap-solaris.c
-@@ -87,13 +87,13 @@ static int tap_alloc(char *dev, size_t dev_size, Error **errp)
- 
-     ip_fd = RETRY_ON_EINTR(open("/dev/udp", O_RDWR, 0));
-     if (ip_fd < 0) {
--        error_setg(errp, "Can't open /dev/ip (actually /dev/udp)");
-+        error_setg_file_open(errp, errno, "/dev/udp");
-         return -1;
+diff --git a/hw/audio/es1370.c b/hw/audio/es1370.c
+index 9873ffadab..566f93f1ea 100644
+--- a/hw/audio/es1370.c
++++ b/hw/audio/es1370.c
+@@ -228,7 +228,7 @@ static void print_sctl(uint32_t val)
+ #undef a
+         error_report("es1370: "
+                 "%s p2_end_inc %d, p2_st_inc %d,"
+-                " r1_fmt %s, p2_fmt %s, p1_fmt %s\n",
++                " r1_fmt %s, p2_fmt %s, p1_fmt %s",
+                 buf,
+                 (val & SCTRL_P2ENDINC) >> SCTRL_SH_P2ENDINC,
+                 (val & SCTRL_P2STINC) >> SCTRL_SH_P2STINC,
+diff --git a/ui/gtk.c b/ui/gtk.c
+index 48571bedbf..e83a366625 100644
+--- a/ui/gtk.c
++++ b/ui/gtk.c
+@@ -1197,7 +1197,7 @@ static gboolean gd_touch_event(GtkWidget *widget, GdkEventTouch *touch,
+         type = INPUT_MULTI_TOUCH_TYPE_END;
+         break;
+     default:
+-        warn_report("gtk: unexpected touch event type\n");
++        warn_report("gtk: unexpected touch event type");
+         return FALSE;
      }
  
-     tap_fd = RETRY_ON_EINTR(open("/dev/tap", O_RDWR, 0));
-     if (tap_fd < 0) {
--        error_setg(errp, "Can't open /dev/tap");
-+        error_setg_file_open(errp, errno, "/dev/tap");
-         return -1;
-     }
- 
-@@ -107,7 +107,7 @@ static int tap_alloc(char *dev, size_t dev_size, Error **errp)
- 
-     if_fd = RETRY_ON_EINTR(open("/dev/tap", O_RDWR, 0));
-     if (if_fd < 0) {
--        error_setg(errp, "Can't open /dev/tap (2)");
-+        error_setg_file_open(errp, errno, "/dev/tap");
-         return -1;
-     }
-     if(ioctl(if_fd, I_PUSH, "ip") < 0){
 -- 
 2.49.0
 
