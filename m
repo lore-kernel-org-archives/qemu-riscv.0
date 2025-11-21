@@ -4,94 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F30ACFA478
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Nov 2025 07:42:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D49DECFA478
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Nov 2025 07:43:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vMLmN-00013g-Ck; Fri, 21 Nov 2025 02:42:03 -0500
+	id 1vMLng-0001zM-V7; Fri, 21 Nov 2025 02:43:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vMLmL-00012q-0L
- for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 02:42:01 -0500
-Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vMLmJ-0005lf-0B
- for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 02:42:00 -0500
-Received: by mail-wm1-x341.google.com with SMTP id
- 5b1f17b1804b1-47775fb6c56so14635595e9.1
- for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 23:41:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763710916; x=1764315716; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=L1ma/FgOyn6F5DDDvAZGScTkgrExcWHFs5u8FhdaZUg=;
- b=I4kdN48RaKhHAikpiwpY/CNjhB0ZBRPSA//905mhFaQTQAa3B6FNvL1//AFU0sm10X
- pSE3Sd3+JG3vlChw1OTaKm4BaMMpGmbOVFnlr9tz9RYq95Tx28600xNSZrig9d2ZDQ/x
- mizVepBs9lLh1CQkYMxbcy1d1N9ugjAblJ/wB4SujoslKmdvW58vSdsFE09dJ+9cumUV
- RD/SckCfCCmOYsoNsdlD6kEVnu+8xCdKSPmc5pk1Do3qCSK4VN7ni+eTmEWFJa9mzGGj
- KAR4cyHZ71ApK6puhZFlTfjBr0+yg/Iikr9nVE3yigM26sib9lEgg30CNvw3QFeLbXrs
- Z7zQ==
+ (Exim 4.90_1) (envelope-from <kkostiuk@redhat.com>)
+ id 1vMLne-0001yn-Uw
+ for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 02:43:22 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <kkostiuk@redhat.com>)
+ id 1vMLnb-0005uT-Tp
+ for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 02:43:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1763710999;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=UaRrR/bSI9ifC9leQ59k3dsXaJNuvD/OvOK7ugPKPuQ=;
+ b=LSgbZsLOnNrIR0y1Wpp6QLTKqmgDj24bRbePt8ROkGMXwPwL7Le3luILLQQaK9HhPoAZgf
+ DNrm0fcOmJ6UyiO0xjVMXe17CwjrMT4ZYtWw8GS2ckYV+cd9WFOTjqsAFs6u/vlZV08hPd
+ vl+f3IJ0x1Is73SgqsDXUKwkmvLM7KA=
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-247-ijJVWklxP0W3WIAXK97JBg-1; Fri, 21 Nov 2025 02:43:16 -0500
+X-MC-Unique: ijJVWklxP0W3WIAXK97JBg-1
+X-Mimecast-MFC-AGG-ID: ijJVWklxP0W3WIAXK97JBg_1763710996
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-8b2e9b2608dso146539985a.3
+ for <qemu-riscv@nongnu.org>; Thu, 20 Nov 2025 23:43:16 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763710916; x=1764315716;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=L1ma/FgOyn6F5DDDvAZGScTkgrExcWHFs5u8FhdaZUg=;
- b=RxB7WHwfJ6Gg5v4y/EKI/Qt6kxE+AyXIrWfXD8tIilAOsMTW8l7X70e7Chw4LExn8M
- ZHUk5DGbT+IfJAvohV8TB4UMM1cKRlBgiLJc5vGOSftEql4ULp08jrvZf8ZZERUbpO8g
- GT+Y8yeqDrQ1vUdQgpjTMF1Rkp6u3Pp/RB0XBoN2VqBkq9XFowKQlA020Kq4iRBe+10F
- RUY844IDrFsgk73VkxB5RdeL4wcsSo1mWX0ttvJWKonD058ZnoY07SMlY+8aVrUdBZlp
- ST48pu3x2PCJmUTQoIoU9fJnQKmV+FRyxi21maj2txtsELKK1Sxe+TGRa1O6ODB+lBq+
- NfvA==
-X-Gm-Message-State: AOJu0YzJFT3EYfKJiM2Z4tfkvwPkMOrC+uA4Bv5ylar8KIByx/ahWYEG
- eE3F4GvvSQa/PHUfFp9GBtNXbHC58XhFnMgiR8dWeHRaGoLWrGmqZfisK6MKJmvLl8I=
-X-Gm-Gg: ASbGnctsyE7aB+Y0wHZZMQxle7mJIRcOGJJDAOwLBfqUjYPar/ZT8L6cjamfBxwKMAi
- WI9IqWDNm/wJfOgYqaUPFW+/5VXQSv8CeKISKubAJm2qsUV/BOIid7XwldENSFwPRp5TWEHS34i
- 1AvYOXsTVEXbWHBLynehiV1pRI3GG0/KVm46XeoUik2nNnp/23wUoy9Bns3ETUWO4rFic9Kbt2e
- SGzHzH+C5WTLKpirJjDr5Uf9SX3IGGh43IrFyYadAP03Q5afX3aDX97JobvsxeyejTTuXA6BXdc
- Lip0vWz1+nWbwyPaxGz9jlBuINN2vPKw8HPjxIsOYCGONaf65VQiwH5zbkWZrNy7jQOXJEO0fBb
- 4IXPrPHCg8HVa+phZCT4A0DlruZGVRMzwi6J7bouEC4RX4acHqcwD7L6Gb5sdy9oJnEzmfJAmu9
- pKMcGOaqaXmuDfL+kMR97poqFpFbkQccPLZG6T/U4WFPGzEeHMJenW1A==
-X-Google-Smtp-Source: AGHT+IFStL+sfVxup5vil7E7ot3Uzb0O0qqSAlc0Ome8ai0acGyOjot4XlKspPovgMmuEv0k4n7dwg==
-X-Received: by 2002:a05:6000:1448:b0:429:f0a4:22e with SMTP id
- ffacd0b85a97d-42cc1d3a800mr990706f8f.54.1763710915531; 
- Thu, 20 Nov 2025 23:41:55 -0800 (PST)
-Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7f2e432sm9172211f8f.9.2025.11.20.23.41.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Nov 2025 23:41:54 -0800 (PST)
-Message-ID: <442e57d9-74f1-4a46-be5a-70158ce0c8ea@linaro.org>
-Date: Fri, 21 Nov 2025 08:41:53 +0100
+ d=1e100.net; s=20230601; t=1763710996; x=1764315796;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UaRrR/bSI9ifC9leQ59k3dsXaJNuvD/OvOK7ugPKPuQ=;
+ b=UV6KqkiXOYNK9DGqWPhA2I6je9Tez00ekEBjk/i4z/8V9cgRNRdSsOV6QQEucqbIcf
+ VLBHODe/9lLIiUFCMHTVBZ4uWUqAZgnH+q4faBv2pQq6IKM6iHEt4OkY7JPyLWXOKuQp
+ cizycHxCBEBJhudLePiI9LQWM/Vvia1bvKx59ArHzALMm5alF7qpPNoJYOlwoO41F6Y/
+ dmBSFH8zORkzCeSoy6FOaJWOY25tjEshj7sr8UUriOWbv+XCpqttpd3CEZIJQsuxUcFe
+ gLUwIgepoYuuBghngF98NrgkyoJHOIK+gc/FHiy2650MicPlGJ2NR0GQOAp7ghKkU+n9
+ /Hqg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVT7UBCVDtoJimIRVlGYEHx3+f993WgD+F5eHwAkcmtuEm3Xl5qmrhjYP6Nkr+viWoT7ofqSHcNng2l@nongnu.org
+X-Gm-Message-State: AOJu0Yw830ImgE7NdnrcwFKT6UyzERB4Y4w7FYAEFQi4vBFZfsq8YTi2
+ aknLObVl10aDkydhRTlxt+L9P1Acu6pMiwwkhYC3s/j+UgHUG8mzYekA2boLmOotFQ4fqwIExXC
+ 6zy7ujE0JG6pvSUo/QRtzdH5isXKS6fh+aERvrBJuf3XhhuxrUoos/rXg/xhqKuhG+5hINLPwPW
+ 9em8qeND/X6qB4WpaThIMdYbQ9DjdM3Ng=
+X-Gm-Gg: ASbGncvIIPqMqZeYergQ5t59goi4fEJXeL4B3JdS2njsmnuxTFbkYanNpfBYi3tCoYM
+ 2Xrw8UbzYGc3+xNSeddGy8Cl1jjGUpJv5KXzMYf0gebuERfeQAUMKTUcGkI+0S4YXmvvt/4jgJu
+ Q93taDoYOLnGuCdRYfXAYxtLCsQyLHwOvAzdJBLcxsE1dFOliZxpQT/VNFpKBtSXOsCB1X
+X-Received: by 2002:a05:622a:199b:b0:4ed:ae38:6592 with SMTP id
+ d75a77b69052e-4ee589409f9mr19048251cf.79.1763710996256; 
+ Thu, 20 Nov 2025 23:43:16 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IETP0cHXZT3TQIN11rmLao5OEegQ9+57ZsItOyprELi91KV6ANui+OB+j0cbxmwyqlkyxoABL6wqmfFCHzvktk=
+X-Received: by 2002:a05:622a:199b:b0:4ed:ae38:6592 with SMTP id
+ d75a77b69052e-4ee589409f9mr19047861cf.79.1763710995835; Thu, 20 Nov 2025
+ 23:43:15 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] Add RISCV Zilsd extension
-Content-Language: en-US
-To: Roan Richmond <roan.richmond@codethink.co.uk>,
- Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org,
- richard.henderson@linaro.org
-References: <20251110090510.84103-1-roan.richmond@codethink.co.uk>
- <CAKmqyKPheAMZt6cn2d4bN2kPxXMrr5Vr8jY5+MBuqhptnc4wjw@mail.gmail.com>
- <19ada6a7-089e-4103-9c2f-c6a9a0e7add2@codethink.co.uk>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <19ada6a7-089e-4103-9c2f-c6a9a0e7add2@codethink.co.uk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::341;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x341.google.com
+References: <20251120191339.756429-1-armbru@redhat.com>
+ <20251120191339.756429-14-armbru@redhat.com>
+In-Reply-To: <20251120191339.756429-14-armbru@redhat.com>
+From: Kostiantyn Kostiuk <kkostiuk@redhat.com>
+Date: Fri, 21 Nov 2025 09:43:04 +0200
+X-Gm-Features: AWmQ_bmdKUn6ydK6C5Q1jdfMet69rDLS9kOEgzlcXdE8rv6sRstOoduZH2Z6aYY
+Message-ID: <CAPMcbCqzp9BwUvRF1kt1CoeftAL3jiVWoWE_3DyrkBx+dyKabQ@mail.gmail.com>
+Subject: Re: [PATCH 13/14] qga/commands-win32: Use error_setg_win32() for
+ better error messages
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, arei.gonglei@huawei.com, pizhenwei@bytedance.com, 
+ alistair.francis@wdc.com, stefanb@linux.vnet.ibm.com, kwolf@redhat.com, 
+ hreitz@redhat.com, sw@weilnetz.de, qemu_oss@crudebyte.com, groug@kaod.org, 
+ mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com, kraxel@redhat.com, 
+ shentey@gmail.com, npiggin@gmail.com, harshpb@linux.ibm.com, 
+ sstabellini@kernel.org, anthony@xenproject.org, paul@xen.org, 
+ edgar.iglesias@gmail.com, elena.ufimtseva@oracle.com, jag.raman@oracle.com, 
+ sgarzare@redhat.com, pbonzini@redhat.com, fam@euphon.net, philmd@linaro.org, 
+ alex@shazbot.org, clg@redhat.com, peterx@redhat.com, farosas@suse.de, 
+ lizhijian@fujitsu.com, dave@treblig.org, jasowang@redhat.com, 
+ samuel.thibault@ens-lyon.org, michael.roth@amd.com, zhao1.liu@intel.com, 
+ mtosatti@redhat.com, rathc@linux.ibm.com, palmer@dabbelt.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ marcandre.lureau@redhat.com, qemu-block@nongnu.org, qemu-ppc@nongnu.org, 
+ xen-devel@lists.xenproject.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: m1KopLMYILkSdK9jAdgYVkTrFS0zvKq3lUJygmwoeus_1763710996
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/alternative; boundary="00000000000064bbee064415f7a2"
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=kkostiuk@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,129 +122,182 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Roan,
+--00000000000064bbee064415f7a2
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 13/11/25 09:53, Roan Richmond wrote:
-> On 12/11/2025 01:41, Alistair Francis wrote:
->> On Mon, Nov 10, 2025 at 7:05 PM Roan Richmond
->> <roan.richmond@codethink.co.uk> wrote:
->>> This is based on v1.0 of the Zilsd extension [1].
->>> The specification is listed as in the Ratified state [2],
->>>   since Jan 30, 2025.
->>>
->>> [1]: https://github.com/riscv/riscv-zilsd
->>> [2]: https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154861/ 
->>> RISC-V+Specs+Under+Development
->>>
->>> Reviewed-by: Daniel Henrique barboza <dbarboza@ventanamicro.com>
->>> Reviewed-by: Richard Henderson  <richard.henderson@linaro.org>
->>> Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
->>> ---
->>> v2:
->>>    - In `gen_load_zilsd` swapped `dest_gpr` with `tcg_temp_new`, this 
->>> prevents
->>>      writing to `r1/r0` in the case where `r0` is the set as `rd`.
->>>    - Removed unneeded brackets around `a->rd` + c expressions
->>>
->>>   target/riscv/cpu.c                      |  2 +
->>>   target/riscv/cpu_cfg_fields.h.inc       |  1 +
->>>   target/riscv/insn_trans/trans_rvi.c.inc | 57 ++++++++++++++++++++++++-
->>>   3 files changed, 58 insertions(+), 2 deletions(-)
+Reviewed-by: Kostiantyn Kostiuk <kkostiuk@redhat.com>
 
+On Thu, Nov 20, 2025 at 9:14=E2=80=AFPM Markus Armbruster <armbru@redhat.co=
+m> wrote:
 
->>> @@ -482,6 +509,27 @@ static bool gen_store_tl(DisasContext *ctx, 
->>> arg_sb *a, MemOp memop)
->>>       return true;
->>>   }
->>>
->>> +/* Zilsd extension adds load/store double for 32bit arch */
->>> +static bool gen_store_zilsd(DisasContext *ctx, arg_sb *a)
->>> +{
->>> +    TCGv data_1 = tcg_temp_new();
->>> +    TCGv data_2 = tcg_temp_new();
+> We include numeric GetLastError() codes in error messages in a few
+> places, like this:
+>
+>     error_setg(errp, "GRIPE: %d", (int)GetLastError());
+>
+> Show text instead, like this:
+>
+>     error_setg_win32(errp, GetLastError(), "GRIPE");
+>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> ---
+>  qga/commands-win32.c | 16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
+>
+> diff --git a/qga/commands-win32.c b/qga/commands-win32.c
+> index acc2c11589..0fd0c966e4 100644
+> --- a/qga/commands-win32.c
+> +++ b/qga/commands-win32.c
+> @@ -1798,8 +1798,8 @@ void qmp_guest_set_time(bool has_time, int64_t
+> time_ns, Error **errp)
+>      tf.dwHighDateTime =3D (DWORD) (time >> 32);
+>
+>      if (!FileTimeToSystemTime(&tf, &ts)) {
+> -        error_setg(errp, "Failed to convert system time %d",
+> -                   (int)GetLastError());
+> +        error_setg_win32(errp, GetLastError(),
+> +                         "Failed to convert system time");
+>          return;
+>      }
+>
+> @@ -1810,7 +1810,8 @@ void qmp_guest_set_time(bool has_time, int64_t
+> time_ns, Error **errp)
+>      }
+>
+>      if (!SetSystemTime(&ts)) {
+> -        error_setg(errp, "Failed to set time to guest: %d",
+> (int)GetLastError());
+> +        error_setg_win32(errp, GetLastError(),
+> +                         "Failed to set time to guest");
+>          return;
+>      }
+>  }
+> @@ -1834,13 +1835,12 @@ GuestLogicalProcessorList
+> *qmp_guest_get_vcpus(Error **errp)
+>          (length > sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION))) {
+>          ptr =3D pslpi =3D g_malloc0(length);
+>          if (GetLogicalProcessorInformation(pslpi, &length) =3D=3D FALSE)=
+ {
+> -            error_setg(&local_err, "Failed to get processor information:
+> %d",
+> -                       (int)GetLastError());
+> +            error_setg_win32(&local_err, GetLastError(),
+> +                             "Failed to get processor information");
+>          }
+>      } else {
+> -        error_setg(&local_err,
+> -                   "Failed to get processor information buffer length:
+> %d",
+> -                   (int)GetLastError());
+> +        error_setg_win32(&local_err, GetLastError(),
+> +                         "Failed to get processor information buffer
+> length");
+>      }
+>
+>      while ((local_err =3D=3D NULL) && (length > 0)) {
+> --
+> 2.49.0
+>
+>
 
-[*]
+--00000000000064bbee064415f7a2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
->>> +    if (a->rs2 != 0) {
->>> +        data_1 = get_gpr(ctx, a->rs2, EXT_NONE);
->>> +        data_2 = get_gpr(ctx, a->rs2+1, EXT_NONE);
->>> +    }
->> Don't mix code and declarations, otherwise
->>
->> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->>
->> Alistair
-> Struggling to see what you mean by this.
-> 
-> Could you provide a bit more clarification on the changes you would like 
-> me to make and then I'll send out a v3.
-> 
-> Thanks,
-> Roan
-> 
->>
->>> +    TCGv addr_1 = get_address(ctx, a->rs1, a->imm);
+<div dir=3D"ltr">Reviewed-by: Kostiantyn Kostiuk &lt;<a href=3D"mailto:kkos=
+tiuk@redhat.com" target=3D"_blank">kkostiuk@redhat.com</a>&gt;</div><br><di=
+v class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gma=
+il_attr">On Thu, Nov 20, 2025 at 9:14=E2=80=AFPM Markus Armbruster &lt;<a h=
+ref=3D"mailto:armbru@redhat.com">armbru@redhat.com</a>&gt; wrote:<br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left:1px solid rgb(204,204,204);padding-left:1ex">We include numeric GetLas=
+tError() codes in error messages in a few<br>
+places, like this:<br>
+<br>
+=C2=A0 =C2=A0 error_setg(errp, &quot;GRIPE: %d&quot;, (int)GetLastError());=
+<br>
+<br>
+Show text instead, like this:<br>
+<br>
+=C2=A0 =C2=A0 error_setg_win32(errp, GetLastError(), &quot;GRIPE&quot;);<br=
+>
+<br>
+Signed-off-by: Markus Armbruster &lt;<a href=3D"mailto:armbru@redhat.com" t=
+arget=3D"_blank">armbru@redhat.com</a>&gt;<br>
+---<br>
+=C2=A0qga/commands-win32.c | 16 ++++++++--------<br>
+=C2=A01 file changed, 8 insertions(+), 8 deletions(-)<br>
+<br>
+diff --git a/qga/commands-win32.c b/qga/commands-win32.c<br>
+index acc2c11589..0fd0c966e4 100644<br>
+--- a/qga/commands-win32.c<br>
++++ b/qga/commands-win32.c<br>
+@@ -1798,8 +1798,8 @@ void qmp_guest_set_time(bool has_time, int64_t time_n=
+s, Error **errp)<br>
+=C2=A0 =C2=A0 =C2=A0tf.dwHighDateTime =3D (DWORD) (time &gt;&gt; 32);<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0if (!FileTimeToSystemTime(&amp;tf, &amp;ts)) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg(errp, &quot;Failed to convert syste=
+m time %d&quot;,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(int)=
+GetLastError());<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_win32(errp, GetLastError(),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0&quot;Failed to convert system time&quot;);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+@@ -1810,7 +1810,8 @@ void qmp_guest_set_time(bool has_time, int64_t time_n=
+s, Error **errp)<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0if (!SetSystemTime(&amp;ts)) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg(errp, &quot;Failed to set time to g=
+uest: %d&quot;, (int)GetLastError());<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_win32(errp, GetLastError(),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0&quot;Failed to set time to guest&quot;);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0}<br>
+@@ -1834,13 +1835,12 @@ GuestLogicalProcessorList *qmp_guest_get_vcpus(Erro=
+r **errp)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(length &gt; sizeof(SYSTEM_LOGICAL_PROCES=
+SOR_INFORMATION))) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ptr =3D pslpi =3D g_malloc0(length);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (GetLogicalProcessorInformation(pslpi,=
+ &amp;length) =3D=3D FALSE) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg(&amp;local_err, &quot=
+;Failed to get processor information: %d&quot;,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0(int)GetLastError());<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_win32(&amp;local_err,=
+ GetLastError(),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;Failed to get processor information&qu=
+ot;);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0 =C2=A0 =C2=A0} else {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg(&amp;local_err,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot=
+;Failed to get processor information buffer length: %d&quot;,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(int)=
+GetLastError());<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg_win32(&amp;local_err, GetLastError(=
+),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0&quot;Failed to get processor information buffer length&qu=
+ot;);<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0while ((local_err =3D=3D NULL) &amp;&amp; (length &gt; =
+0)) {<br>
+-- <br>
+2.49.0<br>
+<br>
+</blockquote></div>
 
-The declaration part is:
-
-    TCGv addr_1;
-
-and the code part is:
-
-    addr_1 = get_address(ctx, a->rs1, a->imm);
-
-Per our coding style (docs/devel/style.rst) chapter "Declarations":
-
-    Mixed declarations (interleaving statements and declarations
-    within blocks) are generally not allowed; declarations should
-    be at the beginning of blocks.
-
-Declarations should go in [*].
-
-For v3 you should address Richard's comments.
-
-Regards,
-
-Phil.
-
->>> +    TCGv addr_2 = get_address(ctx, a->rs1, a->imm+4);
->>> +
->>> +    if (ctx->ztso) {
->>> +        tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
->>> +    }
->>> +
->>> +    tcg_gen_qemu_st_tl(data_1, addr_1, ctx->mem_idx, MO_SL);
->>> +    tcg_gen_qemu_st_tl(data_2, addr_2, ctx->mem_idx, MO_SL);
->>> +    return true;
->>> +}
->>> +
->>>   static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
->>>   {
->>>       TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
->>> @@ -511,6 +559,8 @@ static bool gen_store(DisasContext *ctx, arg_sb 
->>> *a, MemOp memop)
->>>       decode_save_opc(ctx, 0);
->>>       if (get_xl(ctx) == MXL_RV128) {
->>>           return gen_store_i128(ctx, a, memop);
->>> +    } else if (memop == MO_UQ && get_xl(ctx) == MXL_RV32) {
->>> +        return gen_store_zilsd(ctx, a);
->>>       } else {
->>>           return gen_store_tl(ctx, a, memop);
->>>       }
->>> @@ -533,7 +583,10 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
->>>
->>>   static bool trans_sd(DisasContext *ctx, arg_sd *a)
->>>   {
->>> -    REQUIRE_64_OR_128BIT(ctx);
->>> +    /* Check for Zilsd extension if 32bit */
->>> +    if (get_xl(ctx) == MXL_RV32 && !ctx->cfg_ptr->ext_zilsd) {
->>> +        return false;
->>> +    }
->>>       return gen_store(ctx, a, MO_UQ);
->>>   }
->>>
->>> -- 
->>> 2.43.0
->>>
+--00000000000064bbee064415f7a2--
 
 
