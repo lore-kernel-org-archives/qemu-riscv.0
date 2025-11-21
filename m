@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AB3CF64B1
-	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Nov 2025 04:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C67EFCF64B1
+	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Nov 2025 04:30:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vMcnr-0003sj-40; Fri, 21 Nov 2025 20:52:44 -0500
+	id 1vMcmT-0002sK-Jm; Fri, 21 Nov 2025 20:51:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbdB-00046N-1O
- for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:37:37 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbaV-0002EP-5K
+ for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:34:53 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbd0-00067Z-Lq
- for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:37:33 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbaH-0005V9-LN
+ for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:34:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1763771822;
+ s=mimecast20190719; t=1763771661;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/QEiTeEFvA8zkWAoBuerCa692vNPnWKWwqHvysdpeIs=;
- b=G0TOFA+bzwaM8q59o6P0cAbagET5ufNmcBgoP8EmV/Ou5kGuwhW57kMfFd44uPyXUHzT/Z
- +280nZzv1gr0cHdg+nR2p6ctytwO0p1d89fkHQu3HF5G693qeJgt5BygxnCi1UIkq/GUo/
- OodCoAlpb+Z40i50XASXzCD00likAUE=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ bh=s+f/YPMyhiw0MODLrT/W+QVnkFDpo2Q2VNPNda433v0=;
+ b=G4XyZPmxsUGLepQtyx6U9Vc+SH7/oMy64YcydR+n++XKOOOJoQlhMt3IK/56dei8SlslfB
+ t/2ojicZZToUEvl5UJ/V++BCyYegfS6UzwYSgkVpKlGso2zri7cnn0aOaxvYaprBuqsDBM
+ h/2IPR1oTVIm5tV9oRc1FizZrWG3ee0=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-116-_q0zrpcsOni3q2XTxVwVng-1; Fri,
- 21 Nov 2025 07:14:50 -0500
-X-MC-Unique: _q0zrpcsOni3q2XTxVwVng-1
-X-Mimecast-MFC-AGG-ID: _q0zrpcsOni3q2XTxVwVng_1763727286
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-63--Cu4SEnVN0iR9hO-VJAOfQ-1; Fri,
+ 21 Nov 2025 07:14:51 -0500
+X-MC-Unique: -Cu4SEnVN0iR9hO-VJAOfQ-1
+X-Mimecast-MFC-AGG-ID: -Cu4SEnVN0iR9hO-VJAOfQ_1763727287
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4DA111954B0C; Fri, 21 Nov 2025 12:14:46 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9F51C1800343; Fri, 21 Nov 2025 12:14:46 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.45.242.3])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 92CEC1955F1C; Fri, 21 Nov 2025 12:14:45 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id A8D84180047F; Fri, 21 Nov 2025 12:14:45 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id A194221E66B9; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
+ id B3F5821E65DC; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: arei.gonglei@huawei.com, zhenwei.pi@linux.dev, alistair.francis@wdc.com,
@@ -65,16 +65,16 @@ Cc: arei.gonglei@huawei.com, zhenwei.pi@linux.dev, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  marcandre.lureau@redhat.com, qemu-block@nongnu.org, qemu-ppc@nongnu.org,
  xen-devel@lists.xenproject.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org
-Subject: [PATCH v2 06/15] hw/scsi: Use error_setg_file_open() for a better
+Subject: [PATCH v2 09/15] blkdebug: Use error_setg_file_open() for a better
  error message
-Date: Fri, 21 Nov 2025 13:14:29 +0100
-Message-ID: <20251121121438.1249498-7-armbru@redhat.com>
+Date: Fri, 21 Nov 2025 13:14:32 +0100
+Message-ID: <20251121121438.1249498-10-armbru@redhat.com>
 In-Reply-To: <20251121121438.1249498-1-armbru@redhat.com>
 References: <20251121121438.1249498-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,38 +92,33 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 The error message changes from
 
-    vhost-scsi: open vhost char device failed: REASON
+    Could not read blkdebug config file: REASON
 
 to
 
-    Could not open '/dev/vhost-scsi': REASON
+    Could not open 'FNAME': REASON
 
 I think the exact file name is more useful to know than the file's
 purpose.
 
-We could put back the "vhost-scsi: " prefix with error_prepend().  Not
-worth the bother.
-
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Dr. David Alan Gilbert <dave@treblig.org>
 ---
- hw/scsi/vhost-scsi.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ block/blkdebug.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/scsi/vhost-scsi.c b/hw/scsi/vhost-scsi.c
-index cdf405b0f8..239138c931 100644
---- a/hw/scsi/vhost-scsi.c
-+++ b/hw/scsi/vhost-scsi.c
-@@ -245,8 +245,7 @@ static void vhost_scsi_realize(DeviceState *dev, Error **errp)
-     } else {
-         vhostfd = open("/dev/vhost-scsi", O_RDWR);
-         if (vhostfd < 0) {
--            error_setg(errp, "vhost-scsi: open vhost char device failed: %s",
--                       strerror(errno));
-+            error_setg_file_open(errp, errno, "/dev/vhost-scsi");
-             return;
+diff --git a/block/blkdebug.c b/block/blkdebug.c
+index c54aee0c84..8a4a8cb85e 100644
+--- a/block/blkdebug.c
++++ b/block/blkdebug.c
+@@ -288,7 +288,7 @@ static int read_config(BDRVBlkdebugState *s, const char *filename,
+     if (filename) {
+         f = fopen(filename, "r");
+         if (f == NULL) {
+-            error_setg_errno(errp, errno, "Could not read blkdebug config file");
++            error_setg_file_open(errp, errno, filename);
+             return -errno;
          }
-     }
+ 
 -- 
 2.49.0
 
