@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52538CFA472
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Nov 2025 05:36:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D978CFA478
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Nov 2025 05:46:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vMJns-0002QG-0d; Fri, 21 Nov 2025 00:35:28 -0500
+	id 1vMJxs-00007v-BB; Fri, 21 Nov 2025 00:45:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMJno-0002Nn-2B
- for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 00:35:24 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMJxW-0008Qf-PS
+ for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 00:45:31 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMJnj-0007io-Jt
- for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 00:35:22 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMJxU-00024n-46
+ for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 00:45:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1763703318;
+ s=mimecast20190719; t=1763703920;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=GjNOwtR9Z6IKyvsldJuL+qO2CUUAzUivSxONBT+whyk=;
- b=G4yoqeoHNbpHXLTpjXDBvZ31aEbe7/dvy81kvVUjasNWFG1kj2y5dNpa2q4tB+WxaPH7Us
- dRsAoEhm8S93zkF1mr2OQlu8FU0KVpVfjEVFw+9+1/Fg4YEYgGRoVpElt3Mqrfg+g7c/ey
- LNuIIcykQGo58fB8o1bFiE3D2FEToKA=
+ bh=M/iAoWDs3TI1i4yv2SFCc8BQMzVF2ZzwOWLNv6dOrLw=;
+ b=FNKvTBqm72s46tEGky5sH9QpYLpbPrOcFK/Zs/m3bdDoDGQcINQztCQpusI9bRap5Oh5Xr
+ aDfgmWsa2gvyS+fcDkhjbbP05foCROCaKw6Ps7eTFO7UlGDloubsgLgrHo9/8gJHTg6ajH
+ iqmzqzr36xDtz63pcjU2x0yk/69ji/Q=
 Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-447-YELbPn2YM7-MEnuiDffihA-1; Fri,
- 21 Nov 2025 00:35:13 -0500
-X-MC-Unique: YELbPn2YM7-MEnuiDffihA-1
-X-Mimecast-MFC-AGG-ID: YELbPn2YM7-MEnuiDffihA_1763703309
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-556-QWRSdU85PZOwmsuMAg_68Q-1; Fri,
+ 21 Nov 2025 00:45:17 -0500
+X-MC-Unique: QWRSdU85PZOwmsuMAg_68Q-1
+X-Mimecast-MFC-AGG-ID: QWRSdU85PZOwmsuMAg_68Q_1763703913
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id BD5B11956060; Fri, 21 Nov 2025 05:35:07 +0000 (UTC)
+ id 70BB31956072; Fri, 21 Nov 2025 05:45:11 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.45.242.18])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 810F430044DB; Fri, 21 Nov 2025 05:35:05 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id E836F1956045; Fri, 21 Nov 2025 05:45:08 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 0CA9D21E6A27; Fri, 21 Nov 2025 06:35:03 +0100 (CET)
+ id 7D61821E6A27; Fri, 21 Nov 2025 06:45:06 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: "Dr. David Alan Gilbert" <dave@treblig.org>
 Cc: qemu-devel@nongnu.org,  arei.gonglei@huawei.com,
@@ -66,20 +66,20 @@ Cc: qemu-devel@nongnu.org,  arei.gonglei@huawei.com,
  zhiwei_liu@linux.alibaba.com,  marcandre.lureau@redhat.com,
  qemu-block@nongnu.org,  qemu-ppc@nongnu.org,
  xen-devel@lists.xenproject.org,  kvm@vger.kernel.org, qemu-riscv@nongnu.org
-Subject: Re: [PATCH 03/14] tap-solaris: Use error_setg_file_open() for
- better error messages
-In-Reply-To: <aR-xJgDErvQaN600@gallifrey> (David Alan Gilbert's message of
- "Fri, 21 Nov 2025 00:24:06 +0000")
+Subject: Re: [PATCH 09/14] error: Use error_setg_file_open() for simplicity
+ and consistency
+In-Reply-To: <aR-q2YeegIEPmk2R@gallifrey> (David Alan Gilbert's message of
+ "Thu, 20 Nov 2025 23:57:13 +0000")
 References: <20251120191339.756429-1-armbru@redhat.com>
- <20251120191339.756429-4-armbru@redhat.com>
- <aR-xJgDErvQaN600@gallifrey>
-Date: Fri, 21 Nov 2025 06:35:03 +0100
-Message-ID: <87wm3kq77c.fsf@pond.sub.org>
+ <20251120191339.756429-10-armbru@redhat.com>
+ <aR-q2YeegIEPmk2R@gallifrey>
+Date: Fri, 21 Nov 2025 06:45:05 +0100
+Message-ID: <87see8q6qm.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -107,29 +107,40 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 "Dr. David Alan Gilbert" <dave@treblig.org> writes:
 
 > * Markus Armbruster (armbru@redhat.com) wrote:
->> Error messages change from
+>> Replace
 >> 
->>     Can't open /dev/ip (actually /dev/udp)
->>     Can't open /dev/tap
->>     Can't open /dev/tap (2)
+>>     error_setg_errno(errp, errno, MSG, FNAME);
 >> 
->> to
+>> by
 >> 
->>     Could not open '/dev/udp': REASON
->>     Could not open '/dev/tap': REASON
+>>     error_setg_file_open(errp, errno, FNAME);
 >> 
->> where REASON is the value of strerror(errno).
+>> where MSG is "Could not open '%s'" or similar.
+>> 
+>> Also replace equivalent uses of error_setg().
+>> 
+>> A few messages lose prefixes ("net dump: ", "SEV: ", __func__ ": ").
+>> We could put them back with error_prepend().  Not worth the bother.
 >
-> I guess the new macro has a __LINE__ so the (2) is redundant.
+> Yeh, I guess you could just do it with another macro using
+> the same internal function just with string concatenation.
 
-It does capture __FILE__, __LINE__, and __func__, but they're only
-printed for &error_abort.
+I'm no fan of such prefixes.  A sign of developers not caring enough to
+craft a good error message for *users*.  *Especially* in the case of
+__func__.
 
-How likely is it that the first open of /dev/tap succeeds, and the
-second fails?
+The error messages changes in question are:
 
-Do users users then need to know that the second failed?  If yes, then
-" (2)" is a terrible way to tell them.
+    net dump: can't open DUMP-FILE: REASON
+    Could not open 'DUMP-FILE': REASON
+
+    SEV: Failed to open SEV-DEVICE: REASON
+    Could not open 'SEV-DEVICE': REASON
+
+    sev_common_kvm_init: Failed to open SEV_DEVICE 'REASON'
+    Could not open 'SEV-DEVICE': REASON
+
+I think these are all improvements, and the loss of the prefix is fine.
 
 >> Signed-off-by: Markus Armbruster <armbru@redhat.com>
 >
