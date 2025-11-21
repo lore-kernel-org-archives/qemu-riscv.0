@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B046ECFC518
-	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Nov 2025 01:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37368CFC515
+	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Nov 2025 02:03:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vMcqM-0005RC-S3; Fri, 21 Nov 2025 20:55:19 -0500
+	id 1vMcn0-0003L3-LJ; Fri, 21 Nov 2025 20:51:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbcE-0003Tp-KG
- for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:36:38 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbbO-0002xo-MF
+ for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:35:47 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbc3-0005um-7K
- for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:36:35 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbbF-0005kZ-74
+ for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:35:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1763771772;
+ s=mimecast20190719; t=1763771721;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=oeDPJTEK/mbRoQ9G1reQyHyjo6pRRwMOwFAV76+b8w0=;
- b=OWU3DuhIF1JuGNlJy7uSkk8uOlH8HQdR4NVcMYvzG4KixJ8rcCNN9ILbYAttUea70MUtqw
- IKdWR5h0R5ZhZgAN8obhXDSdn74wcYXKDvT+2hVxXP5XCauGdJ+yLkOvglGBfBineCoPDw
- vx+XC7gdtxilPG0G/pc00zyNKVfnjUE=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ bh=jq+qsu9NDrfjYMe8jH6z7ShPmZi4eWzdQ6ZA1QbTE4A=;
+ b=hu7/DUgR23Ek8vRDURA83UnvLvHXDn9VKTYGQ27eM6ZP4kAcNsIgNzBO7UdS3ztsYJElgd
+ tZfOkvgC0lp4OOQ2Q+J73lUWhFWQmJjg5v+hIm6uz82lh+ujLGMmNTFTDVDWbxOdkn3eJl
+ n0x1UkgOWLK2euFH7XUxjVmp/P4hg/U=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-544-9KVhRz1PNjG4B1qvQhE2_Q-1; Fri,
- 21 Nov 2025 07:14:53 -0500
-X-MC-Unique: 9KVhRz1PNjG4B1qvQhE2_Q-1
-X-Mimecast-MFC-AGG-ID: 9KVhRz1PNjG4B1qvQhE2_Q_1763727289
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-33-xMZFCiGKODWbluovOjm9cg-1; Fri,
+ 21 Nov 2025 07:14:50 -0500
+X-MC-Unique: xMZFCiGKODWbluovOjm9cg-1
+X-Mimecast-MFC-AGG-ID: xMZFCiGKODWbluovOjm9cg_1763727286
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id F29621956061; Fri, 21 Nov 2025 12:14:48 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 6738E1956080; Fri, 21 Nov 2025 12:14:46 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.45.242.3])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id A221C1800451; Fri, 21 Nov 2025 12:14:48 +0000 (UTC)
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 976641940E8F; Fri, 21 Nov 2025 12:14:45 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id D6F9B21EC348; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
+ id 9B3D421E668C; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: arei.gonglei@huawei.com, zhenwei.pi@linux.dev, alistair.francis@wdc.com,
@@ -65,15 +65,16 @@ Cc: arei.gonglei@huawei.com, zhenwei.pi@linux.dev, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  marcandre.lureau@redhat.com, qemu-block@nongnu.org, qemu-ppc@nongnu.org,
  xen-devel@lists.xenproject.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org
-Subject: [PATCH v2 15/15] block/file-win32: Improve an error message
-Date: Fri, 21 Nov 2025 13:14:38 +0100
-Message-ID: <20251121121438.1249498-16-armbru@redhat.com>
+Subject: [PATCH v2 05/15] qga: Use error_setg_file_open() for better error
+ messages
+Date: Fri, 21 Nov 2025 13:14:28 +0100
+Message-ID: <20251121121438.1249498-6-armbru@redhat.com>
 In-Reply-To: <20251121121438.1249498-1-armbru@redhat.com>
 References: <20251121121438.1249498-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,27 +90,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Two out of three calls of CreateFile() use error_setg_win32() to
-report errors.  The third uses error_setg_errno(), mapping
-ERROR_ACCESS_DENIED to EACCES, and everything else to EINVAL, throwing
-away detail.  Switch it to error_setg_win32().
+Error messages change from
+
+    open("FNAME"): REASON
+
+to
+
+    Could not open 'FNAME': REASON
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Dr. David Alan Gilbert <dave@treblig.org>
+Reviewed-by: Kostiantyn Kostiuk <kkostiuk@redhat.com>
 ---
- block/file-win32.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ qga/commands-linux.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/block/file-win32.c b/block/file-win32.c
-index 0efb609e1d..78961837c8 100644
---- a/block/file-win32.c
-+++ b/block/file-win32.c
-@@ -904,7 +904,7 @@ static int hdev_open(BlockDriverState *bs, QDict *options, int flags,
+diff --git a/qga/commands-linux.c b/qga/commands-linux.c
+index 4a09ddc760..5cf76ca2d9 100644
+--- a/qga/commands-linux.c
++++ b/qga/commands-linux.c
+@@ -1502,14 +1502,15 @@ static void transfer_vcpu(GuestLogicalProcessor *vcpu, bool sys2vcpu,
+ 
+     dirfd = open(dirpath, O_RDONLY | O_DIRECTORY);
+     if (dirfd == -1) {
+-        error_setg_errno(errp, errno, "open(\"%s\")", dirpath);
++        error_setg_file_open(errp, errno, dirpath);
+         return;
+     }
+ 
+     fd = openat(dirfd, fn, sys2vcpu ? O_RDONLY : O_RDWR);
+     if (fd == -1) {
+         if (errno != ENOENT) {
+-            error_setg_errno(errp, errno, "open(\"%s/%s\")", dirpath, fn);
++            error_setg_errno(errp, errno, "could not open %s/%s",
++                             dirpath, fn);
+         } else if (sys2vcpu) {
+             vcpu->online = true;
+             vcpu->can_offline = false;
+@@ -1711,7 +1712,7 @@ static void transfer_memory_block(GuestMemoryBlock *mem_blk, bool sys2memblk,
+     dirfd = open(dirpath, O_RDONLY | O_DIRECTORY);
+     if (dirfd == -1) {
+         if (sys2memblk) {
+-            error_setg_errno(errp, errno, "open(\"%s\")", dirpath);
++            error_setg_file_open(errp, errno, dirpath);
          } else {
-             ret = -EINVAL;
-         }
--        error_setg_errno(errp, -ret, "Could not open device");
-+        error_setg_win32(errp, err, "Could not open device");
-         goto done;
+             if (errno == ENOENT) {
+                 result->response = GUEST_MEMORY_BLOCK_RESPONSE_TYPE_NOT_FOUND;
+@@ -1936,7 +1937,7 @@ static GuestDiskStatsInfoList *guest_get_diskstats(Error **errp)
+ 
+     fp = fopen(diskstats, "r");
+     if (fp  == NULL) {
+-        error_setg_errno(errp, errno, "open(\"%s\")", diskstats);
++        error_setg_file_open(errp, errno, diskstats);
+         return NULL;
+     }
+ 
+@@ -2047,7 +2048,7 @@ GuestCpuStatsList *qmp_guest_get_cpustats(Error **errp)
+ 
+     fp = fopen(cpustats, "r");
+     if (fp  == NULL) {
+-        error_setg_errno(errp, errno, "open(\"%s\")", cpustats);
++        error_setg_file_open(errp, errno, cpustats);
+         return NULL;
      }
  
 -- 
