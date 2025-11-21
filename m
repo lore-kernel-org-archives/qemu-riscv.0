@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B91F4CFC518
-	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Nov 2025 03:21:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9677CF64B1
+	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Nov 2025 03:34:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vMcpI-0004vs-TS; Fri, 21 Nov 2025 20:54:13 -0500
+	id 1vMcqf-0005Tc-Kg; Fri, 21 Nov 2025 20:55:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbcN-0003eO-KJ
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbcM-0003e1-FQ
  for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:36:47 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbcC-0005wY-95
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1vMbcD-0005wX-3z
  for qemu-riscv@nongnu.org; Fri, 21 Nov 2025 19:36:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1763771781;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=SakLJGJj0LkA1a6qNyCMYZNSthSDHMhyUkRA4qcArBA=;
- b=Au9QhXmlhdgJszC9tz8aQaLsQfTGaYZdRKw8fkFXhaf5Bh1upwd2c+vvO6V12jiXvPx5fm
- wXhsQuRjW0jse2fBGfhEGvoe/bZdSJSoijvSlxKAC5sxfKBWZYM72/PH4I+SUC85/LQyRP
- /G3j0QiQ0gn24b33Qv4X7qKkdzwBsIY=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=C9+n4YIkHnh2mbMl8vw6pyQd6cuiMoiXUxhhscAry0s=;
+ b=Bc8xtXEGBeEcgC+S888ixs9XrYKnMa/8u3/+XoHhi8nqDylGe/h30GZf8jVaWfIK5xtPWu
+ NWp8cx0zjpLrBtQI+AbvpMK/7h1Hb+584AtSvYKy/97b22DznsSvv5eXfippPZiUcZIh5I
+ pBzHJwVlW9NiMgzVb1YlT1VLTZ7Jots=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-362--3aJYg8QO7mowt-5VMm9DQ-1; Fri,
- 21 Nov 2025 07:14:49 -0500
-X-MC-Unique: -3aJYg8QO7mowt-5VMm9DQ-1
-X-Mimecast-MFC-AGG-ID: -3aJYg8QO7mowt-5VMm9DQ_1763727284
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-120-Sv5pPRFTM0qJToJsn2kRMw-1; Fri,
+ 21 Nov 2025 07:14:51 -0500
+X-MC-Unique: Sv5pPRFTM0qJToJsn2kRMw-1
+X-Mimecast-MFC-AGG-ID: Sv5pPRFTM0qJToJsn2kRMw_1763727287
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 384951956059; Fri, 21 Nov 2025 12:14:43 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C02061800447; Fri, 21 Nov 2025 12:14:46 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.45.242.3])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id E1C871940E82; Fri, 21 Nov 2025 12:14:40 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id B54FE1956045; Fri, 21 Nov 2025 12:14:45 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 7FBC221E6A27; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
+ id CB99D21EC344; Fri, 21 Nov 2025 13:14:38 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: arei.gonglei@huawei.com, zhenwei.pi@linux.dev, alistair.francis@wdc.com,
@@ -64,13 +65,16 @@ Cc: arei.gonglei@huawei.com, zhenwei.pi@linux.dev, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  marcandre.lureau@redhat.com, qemu-block@nongnu.org, qemu-ppc@nongnu.org,
  xen-devel@lists.xenproject.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org
-Subject: [PATCH v2 00/15] Error message improvements
-Date: Fri, 21 Nov 2025 13:14:23 +0100
-Message-ID: <20251121121438.1249498-1-armbru@redhat.com>
+Subject: [PATCH v2 13/15] error: Use error_setg_errno() for simplicity and
+ consistency
+Date: Fri, 21 Nov 2025 13:14:36 +0100
+Message-ID: <20251121121438.1249498-14-armbru@redhat.com>
+In-Reply-To: <20251121121438.1249498-1-armbru@redhat.com>
+References: <20251121121438.1249498-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,74 +90,427 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-v2:
-* PATCH 02: New, replacing old PATCH 02 [Dave]
-* PATCH 03: New, replacing one of old PATCH 09's hunks
-* PATCH 12: Fix patch splitting mishap [Dave]
-* PATCH 13: Fix lost argument [Dave]
+Use error_setg_errno() instead of passing the value of strerror() or
+g_strerror() to error_setg().
 
-Markus Armbruster (15):
-  error: Strip trailing '\n' from error string arguments (again)
-  hw/usb: Convert to qemu_create() for a better error message
-  ui: Convert to qemu_create() for simplicity and consistency
-  tap-solaris: Use error_setg_file_open() for better error messages
-  qga: Use error_setg_file_open() for better error messages
-  hw/scsi: Use error_setg_file_open() for a better error message
-  hw/virtio: Use error_setg_file_open() for a better error message
-  net/tap: Use error_setg_file_open() for a better error message
-  blkdebug: Use error_setg_file_open() for a better error message
-  error: Use error_setg_file_open() for simplicity and consistency
-  net/slirp: Improve file open error message
-  error: Use error_setg_errno() to improve error messages
-  error: Use error_setg_errno() for simplicity and consistency
-  qga/commands-win32: Use error_setg_win32() for better error messages
-  block/file-win32: Improve an error message
+The separator between the error message proper and the value of
+strerror() changes from " : ", "", " - ", "- " to ": " in places.
 
- backends/cryptodev-lkcf.c   |  2 +-
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+---
  backends/spdm-socket.c      |  4 ++--
  backends/tpm/tpm_emulator.c | 13 +++++--------
- block/blkdebug.c            |  2 +-
- block/file-win32.c          |  2 +-
- hw/9pfs/9p-local.c          |  2 +-
  hw/9pfs/9p.c                |  3 +--
- hw/acpi/core.c              |  5 ++---
- hw/audio/es1370.c           |  2 +-
- hw/core/loader.c            |  2 +-
+ hw/acpi/core.c              |  3 +--
  hw/intc/openpic_kvm.c       |  3 +--
  hw/intc/xics_kvm.c          |  5 +++--
- hw/pci-host/xen_igd_pt.c    |  2 +-
- hw/ppc/spapr.c              |  6 +++---
  hw/remote/vfio-user-obj.c   | 18 +++++++++---------
- hw/scsi/vhost-scsi.c        |  3 +--
  hw/sensor/emc141x.c         |  4 ++--
  hw/sensor/tmp421.c          |  4 ++--
  hw/smbios/smbios.c          |  4 ++--
- hw/usb/bus.c                |  5 ++---
- hw/vfio/migration-multifd.c |  5 +++--
  hw/virtio/vdpa-dev.c        |  4 ++--
- hw/virtio/vhost-vsock.c     |  3 +--
  migration/postcopy-ram.c    | 10 +++++-----
- migration/rdma.c            |  3 +--
- monitor/hmp-cmds-target.c   |  2 +-
- net/dump.c                  |  2 +-
- net/l2tpv3.c                |  6 ++----
- net/slirp.c                 |  9 ++++++---
- net/tap-bsd.c               |  6 +++---
- net/tap-linux.c             |  2 +-
- net/tap-solaris.c           |  6 +++---
- net/tap.c                   |  3 +--
- qga/commands-linux.c        | 11 ++++++-----
+ net/slirp.c                 |  5 +++--
  qga/commands-posix-ssh.c    | 23 +++++++++++++----------
- qga/commands-win32.c        | 16 ++++++++--------
  system/vl.c                 |  2 +-
- target/i386/sev.c           |  6 ++----
  target/ppc/kvm.c            |  5 ++---
- target/riscv/kvm/kvm-cpu.c  | 11 ++++++-----
- ui/gtk.c                    |  2 +-
- ui/ui-qmp-cmds.c            |  4 +---
- util/vfio-helpers.c         |  5 ++---
- 43 files changed, 114 insertions(+), 123 deletions(-)
+ 16 files changed, 54 insertions(+), 56 deletions(-)
 
+diff --git a/backends/spdm-socket.c b/backends/spdm-socket.c
+index 6d8f02d3b9..a12bc47f77 100644
+--- a/backends/spdm-socket.c
++++ b/backends/spdm-socket.c
+@@ -167,7 +167,7 @@ int spdm_socket_connect(uint16_t port, Error **errp)
+ 
+     client_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+     if (client_socket < 0) {
+-        error_setg(errp, "cannot create socket: %s", strerror(errno));
++        error_setg_errno(errp, errno, "cannot create socket");
+         return -1;
+     }
+ 
+@@ -179,7 +179,7 @@ int spdm_socket_connect(uint16_t port, Error **errp)
+ 
+     if (connect(client_socket, (struct sockaddr *)&server_addr,
+                 sizeof(server_addr)) < 0) {
+-        error_setg(errp, "cannot connect: %s", strerror(errno));
++        error_setg_errno(errp, errno, "cannot connect");
+         close(client_socket);
+         return -1;
+     }
+diff --git a/backends/tpm/tpm_emulator.c b/backends/tpm/tpm_emulator.c
+index f10b9074fb..f52cb4d435 100644
+--- a/backends/tpm/tpm_emulator.c
++++ b/backends/tpm/tpm_emulator.c
+@@ -225,8 +225,7 @@ static int tpm_emulator_set_locality(TPMEmulator *tpm_emu, uint8_t locty_number,
+     if (tpm_emulator_ctrlcmd(tpm_emu, CMD_SET_LOCALITY, &loc,
+                              sizeof(loc), sizeof(loc.u.resp.tpm_result),
+                              sizeof(loc)) < 0) {
+-        error_setg(errp, "tpm-emulator: could not set locality : %s",
+-                   strerror(errno));
++        error_setg_errno(errp, errno, "tpm-emulator: could not set locality");
+         return -1;
+     }
+ 
+@@ -315,8 +314,7 @@ static int tpm_emulator_stop_tpm(TPMBackend *tb, Error **errp)
+ 
+     if (tpm_emulator_ctrlcmd(tpm_emu, CMD_STOP, &res, 0,
+                              sizeof(ptm_res), sizeof(res)) < 0) {
+-        error_setg(errp, "tpm-emulator: Could not stop TPM: %s",
+-                   strerror(errno));
++        error_setg_errno(errp, errno, "tpm-emulator: Could not stop TPM");
+         return -1;
+     }
+ 
+@@ -377,8 +375,8 @@ static int tpm_emulator_set_buffer_size(TPMBackend *tb,
+     if (tpm_emulator_ctrlcmd(tpm_emu, CMD_SET_BUFFERSIZE, &psbs,
+                              sizeof(psbs.u.req), sizeof(psbs.u.resp.tpm_result),
+                              sizeof(psbs.u.resp)) < 0) {
+-        error_setg(errp, "tpm-emulator: Could not set buffer size: %s",
+-                   strerror(errno));
++        error_setg_errno(errp, errno,
++                         "tpm-emulator: Could not set buffer size");
+         return -1;
+     }
+ 
+@@ -426,8 +424,7 @@ static int tpm_emulator_startup_tpm_resume(TPMBackend *tb, size_t buffersize,
+     if (tpm_emulator_ctrlcmd(tpm_emu, CMD_INIT, &init, sizeof(init),
+                              sizeof(init.u.resp.tpm_result),
+                              sizeof(init)) < 0) {
+-        error_setg(errp, "tpm-emulator: could not send INIT: %s",
+-                   strerror(errno));
++        error_setg_errno(errp, errno, "tpm-emulator: could not send INIT");
+         goto err_exit;
+     }
+ 
+diff --git a/hw/9pfs/9p.c b/hw/9pfs/9p.c
+index bc4a016ee3..6fbe604ce8 100644
+--- a/hw/9pfs/9p.c
++++ b/hw/9pfs/9p.c
+@@ -4345,8 +4345,7 @@ int v9fs_device_realize_common(V9fsState *s, const V9fsTransport *t,
+      * use co-routines here.
+      */
+     if (s->ops->name_to_path(&s->ctx, NULL, "/", &path) < 0) {
+-        error_setg(errp,
+-                   "error in converting name to path %s", strerror(errno));
++        error_setg_errno(errp, errno, "error in converting name to path");
+         goto out;
+     }
+     if (s->ops->lstat(&s->ctx, &path, &stat)) {
+diff --git a/hw/acpi/core.c b/hw/acpi/core.c
+index d2677332af..82974eb257 100644
+--- a/hw/acpi/core.c
++++ b/hw/acpi/core.c
+@@ -293,8 +293,7 @@ void acpi_table_add(const QemuOpts *opts, Error **errp)
+                 memcpy(blob + bloblen, data, r);
+                 bloblen += r;
+             } else if (errno != EINTR) {
+-                error_setg(errp, "can't read file %s: %s", *cur,
+-                           strerror(errno));
++                error_setg_errno(errp, errno, "can't read file %s", *cur);
+                 close(fd);
+                 goto out;
+             }
+diff --git a/hw/intc/openpic_kvm.c b/hw/intc/openpic_kvm.c
+index 673ea9ca05..0c11bbc963 100644
+--- a/hw/intc/openpic_kvm.c
++++ b/hw/intc/openpic_kvm.c
+@@ -223,8 +223,7 @@ static void kvm_openpic_realize(DeviceState *dev, Error **errp)
+     cd.type = kvm_openpic_model;
+     ret = kvm_vm_ioctl(s, KVM_CREATE_DEVICE, &cd);
+     if (ret < 0) {
+-        error_setg(errp, "Can't create device %d: %s",
+-                   cd.type, strerror(errno));
++        error_setg_errno(errp, errno, "Can't create device %d", cd.type);
+         return;
+     }
+     opp->fd = cd.fd;
+diff --git a/hw/intc/xics_kvm.c b/hw/intc/xics_kvm.c
+index ee72969f5f..61f66d1019 100644
+--- a/hw/intc/xics_kvm.c
++++ b/hw/intc/xics_kvm.c
+@@ -165,8 +165,9 @@ void icp_kvm_realize(DeviceState *dev, Error **errp)
+     if (ret < 0) {
+         Error *local_err = NULL;
+ 
+-        error_setg(&local_err, "Unable to connect CPU%ld to kernel XICS: %s",
+-                   vcpu_id, strerror(errno));
++        error_setg_errno(&local_err, errno,
++                         "Unable to connect CPU%ld to kernel XICS",
++                         vcpu_id);
+         if (errno == ENOSPC) {
+             error_append_hint(&local_err, "Try -smp maxcpus=N with N < %u\n",
+                               MACHINE(qdev_get_machine())->smp.max_cpus);
+diff --git a/hw/remote/vfio-user-obj.c b/hw/remote/vfio-user-obj.c
+index 216b4876e2..24c0088f63 100644
+--- a/hw/remote/vfio-user-obj.c
++++ b/hw/remote/vfio-user-obj.c
+@@ -751,7 +751,7 @@ static void vfu_object_init_ctx(VfuObject *o, Error **errp)
+                                 LIBVFIO_USER_FLAG_ATTACH_NB,
+                                 o, VFU_DEV_TYPE_PCI);
+     if (o->vfu_ctx == NULL) {
+-        error_setg(errp, "vfu: Failed to create context - %s", strerror(errno));
++        error_setg_errno(errp, errno, "vfu: Failed to create context");
+         return;
+     }
+ 
+@@ -776,9 +776,9 @@ static void vfu_object_init_ctx(VfuObject *o, Error **errp)
+ 
+     ret = vfu_pci_init(o->vfu_ctx, pci_type, PCI_HEADER_TYPE_NORMAL, 0);
+     if (ret < 0) {
+-        error_setg(errp,
+-                   "vfu: Failed to attach PCI device %s to context - %s",
+-                   o->device, strerror(errno));
++        error_setg_errno(errp, errno,
++                         "vfu: Failed to attach PCI device %s to context",
++                         o->device);
+         goto fail;
+     }
+ 
+@@ -792,9 +792,9 @@ static void vfu_object_init_ctx(VfuObject *o, Error **errp)
+                            VFU_REGION_FLAG_RW | VFU_REGION_FLAG_ALWAYS_CB,
+                            NULL, 0, -1, 0);
+     if (ret < 0) {
+-        error_setg(errp,
+-                   "vfu: Failed to setup config space handlers for %s- %s",
+-                   o->device, strerror(errno));
++        error_setg_errno(errp, errno,
++                         "vfu: Failed to setup config space handlers for %s",
++                         o->device);
+         goto fail;
+     }
+ 
+@@ -822,8 +822,8 @@ static void vfu_object_init_ctx(VfuObject *o, Error **errp)
+ 
+     ret = vfu_realize_ctx(o->vfu_ctx);
+     if (ret < 0) {
+-        error_setg(errp, "vfu: Failed to realize device %s- %s",
+-                   o->device, strerror(errno));
++        error_setg_errno(errp, errno, "vfu: Failed to realize device %s",
++                         o->device);
+         goto fail;
+     }
+ 
+diff --git a/hw/sensor/emc141x.c b/hw/sensor/emc141x.c
+index 7b2ce383a1..a51fc44395 100644
+--- a/hw/sensor/emc141x.c
++++ b/hw/sensor/emc141x.c
+@@ -59,7 +59,7 @@ static void emc141x_get_temperature(Object *obj, Visitor *v, const char *name,
+     unsigned tempid;
+ 
+     if (sscanf(name, "temperature%u", &tempid) != 1) {
+-        error_setg(errp, "error reading %s: %s", name, g_strerror(errno));
++        error_setg_errno(errp, errno, "error reading %s", name);
+         return;
+     }
+ 
+@@ -86,7 +86,7 @@ static void emc141x_set_temperature(Object *obj, Visitor *v, const char *name,
+     }
+ 
+     if (sscanf(name, "temperature%u", &tempid) != 1) {
+-        error_setg(errp, "error reading %s: %s", name, g_strerror(errno));
++        error_setg_errno(errp, errno, "error reading %s", name);
+         return;
+     }
+ 
+diff --git a/hw/sensor/tmp421.c b/hw/sensor/tmp421.c
+index 3421c44086..127edd0ba5 100644
+--- a/hw/sensor/tmp421.c
++++ b/hw/sensor/tmp421.c
+@@ -117,7 +117,7 @@ static void tmp421_get_temperature(Object *obj, Visitor *v, const char *name,
+     int tempid;
+ 
+     if (sscanf(name, "temperature%d", &tempid) != 1) {
+-        error_setg(errp, "error reading %s: %s", name, g_strerror(errno));
++        error_setg_errno(errp, errno, "error reading %s", name);
+         return;
+     }
+ 
+@@ -154,7 +154,7 @@ static void tmp421_set_temperature(Object *obj, Visitor *v, const char *name,
+     }
+ 
+     if (sscanf(name, "temperature%d", &tempid) != 1) {
+-        error_setg(errp, "error reading %s: %s", name, g_strerror(errno));
++        error_setg_errno(errp, errno, "error reading %s", name);
+         return;
+     }
+ 
+diff --git a/hw/smbios/smbios.c b/hw/smbios/smbios.c
+index 7558b2ad83..b228f9eb85 100644
+--- a/hw/smbios/smbios.c
++++ b/hw/smbios/smbios.c
+@@ -1281,8 +1281,8 @@ static int save_opt_one(void *opaque,
+                 break;
+             }
+             if (ret < 0) {
+-                error_setg(errp, "Unable to read from %s: %s",
+-                           value, strerror(errno));
++                error_setg_errno(errp, errno, "Unable to read from %s",
++                                 value);
+                 qemu_close(fd);
+                 return -1;
+             }
+diff --git a/hw/virtio/vdpa-dev.c b/hw/virtio/vdpa-dev.c
+index 4a7b970976..f97d576171 100644
+--- a/hw/virtio/vdpa-dev.c
++++ b/hw/virtio/vdpa-dev.c
+@@ -41,8 +41,8 @@ vhost_vdpa_device_get_u32(int fd, unsigned long int cmd, Error **errp)
+     uint32_t val = (uint32_t)-1;
+ 
+     if (ioctl(fd, cmd, &val) < 0) {
+-        error_setg(errp, "vhost-vdpa-device: cmd 0x%lx failed: %s",
+-                   cmd, strerror(errno));
++        error_setg_errno(errp, errno, "vhost-vdpa-device: cmd 0x%lx failed",
++                         cmd);
+     }
+ 
+     return val;
+diff --git a/migration/postcopy-ram.c b/migration/postcopy-ram.c
+index 3f98dcb6fd..5454372ac6 100644
+--- a/migration/postcopy-ram.c
++++ b/migration/postcopy-ram.c
+@@ -582,7 +582,7 @@ bool postcopy_ram_supported_by_host(MigrationIncomingState *mis, Error **errp)
+ 
+     ufd = uffd_open(O_CLOEXEC);
+     if (ufd == -1) {
+-        error_setg(errp, "Userfaultfd not available: %s", strerror(errno));
++        error_setg_errno(errp, errno, "Userfaultfd not available");
+         goto out;
+     }
+ 
+@@ -620,7 +620,7 @@ bool postcopy_ram_supported_by_host(MigrationIncomingState *mis, Error **errp)
+      * it was enabled.
+      */
+     if (munlockall()) {
+-        error_setg(errp, "munlockall() failed: %s", strerror(errno));
++        error_setg_errno(errp, errno, "munlockall() failed");
+         goto out;
+     }
+ 
+@@ -632,7 +632,7 @@ bool postcopy_ram_supported_by_host(MigrationIncomingState *mis, Error **errp)
+     testarea = mmap(NULL, pagesize, PROT_READ | PROT_WRITE, MAP_PRIVATE |
+                                     MAP_ANONYMOUS, -1, 0);
+     if (testarea == MAP_FAILED) {
+-        error_setg(errp, "Failed to map test area: %s", strerror(errno));
++        error_setg_errno(errp, errno, "Failed to map test area");
+         goto out;
+     }
+     g_assert(QEMU_PTR_IS_ALIGNED(testarea, pagesize));
+@@ -642,14 +642,14 @@ bool postcopy_ram_supported_by_host(MigrationIncomingState *mis, Error **errp)
+     reg_struct.mode = UFFDIO_REGISTER_MODE_MISSING;
+ 
+     if (ioctl(ufd, UFFDIO_REGISTER, &reg_struct)) {
+-        error_setg(errp, "UFFDIO_REGISTER failed: %s", strerror(errno));
++        error_setg_errno(errp, errno, "UFFDIO_REGISTER failed");
+         goto out;
+     }
+ 
+     range_struct.start = (uintptr_t)testarea;
+     range_struct.len = pagesize;
+     if (ioctl(ufd, UFFDIO_UNREGISTER, &range_struct)) {
+-        error_setg(errp, "UFFDIO_UNREGISTER failed: %s", strerror(errno));
++        error_setg_errno(errp, errno, "UFFDIO_UNREGISTER failed");
+         goto out;
+     }
+ 
+diff --git a/net/slirp.c b/net/slirp.c
+index 5996fec512..04925f3318 100644
+--- a/net/slirp.c
++++ b/net/slirp.c
+@@ -1020,8 +1020,9 @@ static int slirp_smb(SlirpState* s, const char *exported_dir,
+     }
+ 
+     if (access(exported_dir, R_OK | X_OK)) {
+-        error_setg(errp, "Error accessing shared directory '%s': %s",
+-                   exported_dir, strerror(errno));
++        error_setg_errno(errp, errno,
++                         "Error accessing shared directory '%s'",
++                         exported_dir);
+         return -1;
+     }
+ 
+diff --git a/qga/commands-posix-ssh.c b/qga/commands-posix-ssh.c
+index 246171d323..661972e34e 100644
+--- a/qga/commands-posix-ssh.c
++++ b/qga/commands-posix-ssh.c
+@@ -61,20 +61,22 @@ mkdir_for_user(const char *path, const struct passwd *p,
+                mode_t mode, Error **errp)
+ {
+     if (g_mkdir(path, mode) == -1) {
+-        error_setg(errp, "failed to create directory '%s': %s",
+-                   path, g_strerror(errno));
++        error_setg_errno(errp, errno, "failed to create directory '%s'",
++                         path);
+         return false;
+     }
+ 
+     if (chown(path, p->pw_uid, p->pw_gid) == -1) {
+-        error_setg(errp, "failed to set ownership of directory '%s': %s",
+-                   path, g_strerror(errno));
++        error_setg_errno(errp, errno,
++                         "failed to set ownership of directory '%s'",
++                         path);
+         return false;
+     }
+ 
+     if (chmod(path, mode) == -1) {
+-        error_setg(errp, "failed to set permissions of directory '%s': %s",
+-                   path, g_strerror(errno));
++        error_setg_errno(errp, errno,
++                         "failed to set permissions of directory '%s'",
++                         path);
+         return false;
+     }
+ 
+@@ -95,14 +97,15 @@ write_authkeys(const char *path, const GStrv keys,
+     }
+ 
+     if (chown(path, p->pw_uid, p->pw_gid) == -1) {
+-        error_setg(errp, "failed to set ownership of directory '%s': %s",
+-                   path, g_strerror(errno));
++        error_setg_errno(errp, errno,
++                         "failed to set ownership of directory '%s'",
++                         path);
+         return false;
+     }
+ 
+     if (chmod(path, 0600) == -1) {
+-        error_setg(errp, "failed to set permissions of '%s': %s",
+-                   path, g_strerror(errno));
++        error_setg_errno(errp, errno, "failed to set permissions of '%s'",
++                         path);
+         return false;
+     }
+ 
+diff --git a/system/vl.c b/system/vl.c
+index 5091fe52d9..2ef5b4b3b2 100644
+--- a/system/vl.c
++++ b/system/vl.c
+@@ -619,7 +619,7 @@ static int parse_add_fd(void *opaque, QemuOpts *opts, Error **errp)
+     }
+ #endif
+     if (dupfd == -1) {
+-        error_setg(errp, "error duplicating fd: %s", strerror(errno));
++        error_setg_errno(errp, errno, "error duplicating fd");
+         return -1;
+     }
+ 
+diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
+index 43124bf1c7..3501b5d546 100644
+--- a/target/ppc/kvm.c
++++ b/target/ppc/kvm.c
+@@ -2699,9 +2699,8 @@ int kvmppc_get_htab_fd(bool write, uint64_t index, Error **errp)
+ 
+     ret = kvm_vm_ioctl(kvm_state, KVM_PPC_GET_HTAB_FD, &s);
+     if (ret < 0) {
+-        error_setg(errp, "Unable to open fd for %s HPT %s KVM: %s",
+-                   write ? "writing" : "reading", write ? "to" : "from",
+-                   strerror(errno));
++        error_setg_errno(errp, errno, "Unable to open fd for %s HPT %s KVM",
++                   write ? "writing" : "reading", write ? "to" : "from");
+         return -errno;
+     }
+ 
 -- 
 2.49.0
 
