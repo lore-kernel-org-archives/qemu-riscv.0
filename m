@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51808CFD313
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Nov 2025 16:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7C1ACFD313
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Nov 2025 17:04:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vNZqE-0007ZK-1W; Mon, 24 Nov 2025 11:55:06 -0500
+	id 1vNZyD-0004f7-8X; Mon, 24 Nov 2025 12:03:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
- id 1vNZqC-0007YL-AM
- for qemu-riscv@nongnu.org; Mon, 24 Nov 2025 11:55:04 -0500
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ id 1vNZy8-0004bs-17
+ for qemu-riscv@nongnu.org; Mon, 24 Nov 2025 12:03:16 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
- id 1vNZqA-0000wh-Ra
- for qemu-riscv@nongnu.org; Mon, 24 Nov 2025 11:55:04 -0500
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-429cbdab700so474470f8f.1
- for <qemu-riscv@nongnu.org>; Mon, 24 Nov 2025 08:55:01 -0800 (PST)
+ id 1vNZy5-0003E5-Mc
+ for qemu-riscv@nongnu.org; Mon, 24 Nov 2025 12:03:15 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-477782a42a8so2661675e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 24 Nov 2025 09:03:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1764003301; x=1764608101; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1764003791; x=1764608591; darn=nongnu.org;
  h=in-reply-to:references:from:to:cc:subject:message-id:date
  :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=de/nL1X6CIhlZMzkys7paLOokbEaoPrAmuKY8a3olBA=;
- b=U45MQOtHKyl4/h8COmCuXj0r922CQT2BGbq7AXRkpEVlB0W8EUUTkS0DaZRqiEsurA
- M+5W/v1m5nhJNauB63YkeUNmzDrW0B/ZqPT06jvJJrFRE+geF+/yY7Iuzd3+qH3SAQ4J
- PJo6W6lLRH0iBriTnIiMhjw3YJAMOS8HCVQVqhL1zD3dhJ+dP6f4o5gMatcJLw1mm+th
- VBndFJONa4iZ/FbKleZ4ttvTK91CHn4j1kD4/pPSMX/AvCo01db4BzVlJqVudCEdZIGU
- j/RgGATgcgam3WRBBlzE/g0eXdb5ePKw89fP9m/AfifA4MGrQ5Q5JitNBAKLtu6kGkFI
- lUiw==
+ bh=UpMGIaOohBIWSN+juWH3bKlLeQUwDFZmhfK7rIQw8bw=;
+ b=jFAryUydhmYQGhEJYQj3Q8cmAqqQAhTr4nIbbYuZsqXhUD/d3jFZuYdoAFH87cY3IK
+ 4+YJJmXoeedGwRoJ21VoFKjKdEuNqyLhuDQP4O7U/ZkII/8JzS9XJEHX/n15vqny/K8x
+ 7tGQbbceYHmA9O7S3GSzcrYjIXscvMIyPDG9agufGkEpqUcHi6APURt6Dc72DK+rQ6D+
+ uRo00LDEEoxgj++ysjM3akAW7Wgda6mKXpYZH2ZWxqGVE4x0NKy7vcbqq5sHuoP/kgI6
+ zZWBNamZNdzeUuxx+GU4VHrOTGckHxw28Iyr4ddpEESq/ZfQ2lLh8rt3Ot13iOdTix3P
+ rJNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764003301; x=1764608101;
+ d=1e100.net; s=20230601; t=1764003791; x=1764608591;
  h=in-reply-to:references:from:to:cc:subject:message-id:date
  :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=de/nL1X6CIhlZMzkys7paLOokbEaoPrAmuKY8a3olBA=;
- b=cJg8VGDWYzNPYptBLUP+LcenWtDfeX00qaGOpK0ZJ3CcarA/8UtrSmTfppFltcAXt7
- lkzNSplpB9M3VnfFT6yF9riisfX/hxp6H2mL8RxhUB2ctPLlnl/RzINiRguoXdKiuxdw
- cPg+rt9g3CGzUhh1U1rMOzaV2QGJfkGEW26RsYbPHYlkS1Ap0Kq5S7m0tjHmAApHjOu9
- jfaP3tN+62ptfmSR8VPzyMKTIk9iHIjRATBdNa0QkG7QHgnbptFUcbedBguTVedYkPBu
- 5KE4dCjPjNn3yRpxj794QS9oRAo206Vnt+TvI9arQ9ihcfCyyJAM6uHZkXs1BBAopWEU
- c6VA==
+ bh=UpMGIaOohBIWSN+juWH3bKlLeQUwDFZmhfK7rIQw8bw=;
+ b=VWYCWFk4swmX7+qmm199/lZlkntRvo+qqAPVZkhZBx6QOrWOS77yMiqSlfsyiScI2d
+ 5+/SjdT7soq8b8QTJ777Xtq+i8Jjw6DxRwyONICeGBEJkUsUsUgosANn4PrVRiGKFgol
+ 1HM1gt9TdJTiofy8RLJGNE1BCQKMUD7sBulU6Kp5JunJjysHttEWXSmg2JZmH5hcGoly
+ 7ldQqs+C+FwKOIjXe0vyDdDbLweeAyGXKPrvidnA35tFhLQerpsEMQQ6FQ+9kb6naqzk
+ 4QE91TfYwXOJTzFTUcfEpmwLNVZdmdVDOs1s8xcArDR3j1zr/IghbbZMZeFAi/YvVCSi
+ oksg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURyKyKPMlmAscpleOMGNumEf+FH7a57YI0twWpcP5z0h6OeXcvVO/Hl3KM1EigbHOozI/w4ayDcf1P@nongnu.org
-X-Gm-Message-State: AOJu0Yw+lVNPf66sTiA9fbt5C4GFYkEV0gwyIIuGFRCzW1sxNWZCOMub
- JmnFfSe3fFMlXJWtMawcAzKBMxVskd6ztVrirJkMyY9dPkIM1AP5V8cP2q9qVgYQY9g=
-X-Gm-Gg: ASbGncu1iaa+jZx82CBB6pqYh2wYmpqbiy/LcXqOsOjXDNoxGe5pxPP0qUCiubG0pi3
- 7kiexfqlL8oT9kJot+wdMtd6DNptGDkx3UOGUTy3TvywYPM8n3VRXceYzXta5EBjjzzKC+oE/i4
- LiFsGWw9PXFrfThrU/OW/w6c6if5Kjrt0pUQMmoLHXA8lxobo6mPFJ3FQFkEm8p3ictQ0ZS/PGu
- La4p8uL1QZ2SNMMScrplQJF/g1yd0kCLEPXLJIdosSeDvEpQsRVlgbq7rd+dTpykUakuM/ZDfI/
- 8lImtlCdYiXAk9dKHw17t2ZT9iOIbqao0Hp2nafVWi7q78Ca7Mww/zdQ5OsZOVpgtbvnvuFlGa5
- gCPjjXy4nl0QhzyUgkl5i4S+RT+qazhe5TUYOpOaWcvpmF17s3Y/5yddM3hQL2GO+0PqA6ZLGCH
- IQtmCqekhRYQ==
-X-Google-Smtp-Source: AGHT+IHrHQe/gGtpnjuGp01WJdMtGbyDl6MaVugqBX/YEn4FtcnTRmcRG4/lv4qEi6lGJfrvotdinA==
-X-Received: by 2002:a05:6000:310b:b0:429:c8f6:587c with SMTP id
- ffacd0b85a97d-42cc3cbdfc2mr6933915f8f.0.1764003300617; 
- Mon, 24 Nov 2025 08:55:00 -0800 (PST)
+ AJvYcCVMFySkZJlW4kP58+ev99MepLFV5Jabp1HIRXwHvc6P8wwnfkqpwVtCQrqRe4KvC9Su3+gf6EeHq/rq@nongnu.org
+X-Gm-Message-State: AOJu0Yx6w+Ca1ggDb8bQHvBfA1ID6LWdVGJfe9gZU7rfNTYft6FCT5py
+ bTML68yv5Xg7sP+ISgaf23FNjoTD9pv9sgWdbQqWdJLdlYy4hwiJVQuKVqiG2pjfe7w=
+X-Gm-Gg: ASbGncspjWNmxRW2IQ20tsd90LhiscMaMCU5+f41NJZ7do97d5LdIlAqTDULl+nhvEt
+ asR70hrNRpMh7SJYQE2m1MNCzePd8ufQD8iIDnQ9EdjK541yzME1exij9HVaBwMwOuGOCUGFGW0
+ q6ZBpbkhZw3LVcssBBu7ZXqgmDlHBwzqOffPGicCw0h1kAPtbH/EDr0VQnL8NAKciMo1kum5Nso
+ JXZTRyvoS1obLjf6LOcPcBZZt+yMyDoPZim1Pzr5u6IPNv5CimyE3O5qZvntk93NyrkZ/b8OuSW
+ v0CH/jRxtSHbrevUyIsTxk8eQ9rSBaxSDGuPngqMYzKuuMO0ug0KsdhEJcIMIOBdHklpt8UNwIi
+ OSTRVKgOfIIQwgTMQo5XkA7E/DwI7Wg5xEbsY8V6N5dYGSlLi5lrs2tWvPPflFfOK/Oa6whsALW
+ k=
+X-Google-Smtp-Source: AGHT+IHsnUiEWgHnUYRxleh6IJNZN8H7wk9vZuXsrKZqmzqPCBAizP93nXsokIqRHwpMI+VgJlIF7Q==
+X-Received: by 2002:a05:600c:4693:b0:477:9d54:58ce with SMTP id
+ 5b1f17b1804b1-477c311cdc6mr67530555e9.1.1764003791192; 
+ Mon, 24 Nov 2025 09:03:11 -0800 (PST)
 Received: from localhost ([2a02:8308:a00c:e200::3052])
  by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-42cb7fa35b7sm29698215f8f.20.2025.11.24.08.54.59
+ ffacd0b85a97d-42cb7f34fd1sm30111795f8f.11.2025.11.24.09.03.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Nov 2025 08:55:00 -0800 (PST)
+ Mon, 24 Nov 2025 09:03:10 -0800 (PST)
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Mon, 24 Nov 2025 17:54:26 +0100
-Message-Id: <DEH2YXGOYGO7.1J2NUI1KD165O@ventanamicro.com>
-Subject: Re: [PATCH 1/7] riscv: implement Ssqosid extension and srmcfg CSR
+Date: Mon, 24 Nov 2025 18:02:37 +0100
+Message-Id: <DEH356RBYAIG.IS7SP4D5XLIQ@ventanamicro.com>
+Subject: Re: [PATCH 3/7] hw/riscv: implement CBQRI capacity controller
 Cc: <qemu-devel@nongnu.org>, "Palmer Dabbelt" <palmer@dabbelt.com>,
  "Alistair Francis" <Alistair.Francis@wdc.com>, "Weiwei Li"
  <liwei1518@gmail.com>, "Daniel Henrique Barboza"
@@ -88,11 +88,11 @@ Cc: <qemu-devel@nongnu.org>, "Palmer Dabbelt" <palmer@dabbelt.com>,
 To: "Drew Fustini" <fustini@kernel.org>
 From: =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>
 References: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
- <20251119-riscv-ssqosid-cbqri-v1-1-3392fc760e48@kernel.org>
- <DEDNGGQCPNKP.25HNT2IHYB0C2@ventanamicro.com> <aR9+NoQVkxq3mcP6@x1>
-In-Reply-To: <aR9+NoQVkxq3mcP6@x1>
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=rkrcmar@ventanamicro.com; helo=mail-wr1-x430.google.com
+ <20251119-riscv-ssqosid-cbqri-v1-3-3392fc760e48@kernel.org>
+ <DEDROLF9I9YQ.2MQIEGB7I4BKH@ventanamicro.com> <aSDCmrvONUgvzqbV@x1>
+In-Reply-To: <aSDCmrvONUgvzqbV@x1>
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=rkrcmar@ventanamicro.com; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -115,26 +115,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-2025-11-20T12:46:46-08:00, Drew Fustini <fustini@kernel.org>:
-> On Thu, Nov 20, 2025 at 05:07:03PM +0100, Radim Kr=C4=8Dm=C3=A1=C5=99 wro=
+2025-11-21T11:50:50-08:00, Drew Fustini <fustini@kernel.org>:
+> On Thu, Nov 20, 2025 at 08:25:44PM +0100, Radim Kr=C4=8Dm=C3=A1=C5=99 wro=
 te:
->> 2025-11-19T16:42:17-08:00, Drew Fustini <fustini@kernel.org>:
->> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> > @@ -216,6 +216,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
->> >      ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
->> >      ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
->> >      ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
->> > +    ISA_EXT_DATA_ENTRY(ssqosid, PRIV_VERSION_1_12_0, ext_ssqosid),
+>> 2025-11-19T16:42:19-08:00, Drew Fustini <fustini@kernel.org>:
+>> > +static void riscv_cbqri_cc_realize(DeviceState *dev, Error **errp)
+>> > +{
+>> > +    RiscvCbqriCapacityState *cc =3D RISCV_CBQRI_CC(dev);
+>> > +
+>> > +    if (!cc->mmio_base) {
+>> > +        error_setg(errp, "mmio_base property not set");
+>> > +        return;
+>> > +    }
+>> > +
+>> > +    assert(cc->mon_counters =3D=3D NULL);
+>> > +    cc->mon_counters =3D g_new0(MonitorCounter, cc->nb_mcids);
+>> > +
+>> > +    assert(cc->alloc_blockmasks =3D=3D NULL);
+>> > +    uint64_t *end =3D get_blockmask_location(cc, cc->nb_rcids, 0);
+>> > +    unsigned int blockmasks_size =3D end - cc->alloc_blockmasks;
+>> > +    cc->alloc_blockmasks =3D g_new0(uint64_t, blockmasks_size);
+>> > +
+>> > +    memory_region_init_io(&cc->mmio, OBJECT(dev), &riscv_cbqri_cc_ops=
+,
+>> > +                          cc, TYPE_RISCV_CBQRI_CC".mmio", 4 * 1024);
 >>=20
->> Just out of curiosity, where does PRIV_VERSION_1_12_0 come from?
+>> Shouldn't the region size take cc->ncblks into account?
+>> (A bitmask for 2^16 ids is 8kB.)
 >
-> Ssqosid was originally ratified as a separate document but it since was
-> add to the Privileged Architecture document [1]. However, the Supervisor
-> Level ISA was version 1.13 when Ssqosid was added, so I should change
-> the above to PRIV_VERSION_1_13_0.
+> cc_block_mask field is BMW / 8. In the case of NCBLKS of 12 and NCBLKS
+> of 16, both end up with a BMW of 64 which would be 8 bytes. I think the
+> the only reason the allocation is 4KB is that is meant to be aligned to
+> the page size. Otherwise, the capacity controller register layout is
+> pretty small.
 
-I was mainly wondering if the PRIV_VERSION_* symbols have any meaning.
-I think PRIV_VERSION_1_13_0 refers to manual version 20241017 while the
-changelog has Ssqosid in 20241101...  I guess there is no meaning, and
-PRIV_VERSION_1_12_0 would work just as well. :)
+I understood NCBLKS as the amount of bits in the capacity bitmask, and
+NCBLKS in encoded in a 16 bit field, which means up to 65536 bits.
+Is there a lower limit?
+
+Thanks.
 
