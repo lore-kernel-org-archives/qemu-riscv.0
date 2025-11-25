@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 615E7D0E6C4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E562D0E6C3
 	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 10:55:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vNqh6-0003cl-Rp; Tue, 25 Nov 2025 05:54:48 -0500
+	id 1vNqhk-0004Iv-HC; Tue, 25 Nov 2025 05:55:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqh1-0003TI-Iu
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:54:43 -0500
-Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqhi-0004Fu-11
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:55:26 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqgy-0001Ob-27
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:54:43 -0500
-Received: by mail-wr1-x441.google.com with SMTP id
- ffacd0b85a97d-42b2dc17965so5060843f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 02:54:38 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqhe-0001fW-P1
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:55:25 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-42b47f662a0so2798505f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 02:55:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764068076; x=1764672876; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Jfyijvl1JFPahxbivQxrrAGa5h/+4fXCl7qTUyuB64s=;
- b=Z2ytID3XEq5wrX9W0qoX5GTwR2C6BSaLNfgqhgGdUpVH3vOnSlVUYQcGMQKjVvgzPn
- ntvCYByGSyZYHyYZXm3SMbrGtXzfn7RIDFUHW4m+6GL6HXKExthNv8cMeQO6aC2EpVxR
- 8nWWIQ1627aEQJVc6d2migzMwN5a+Uh9vCEZllCm+pCqXYFjEKZrU2esVDs49rVWlN+l
- FcMJrZOlANNZfnIWyLyr98r1SamYM2dYMi0QI/7BChOTdVM8vjhXnL2ukDY7tUTbUyrj
- WQRVnqXSP6rXHPy5NLJcsBhysJLfi0zMzEF8KZrGBR62JTnGXNcRJ1CS4PYBWjfHRPc/
- TKEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764068076; x=1764672876;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1764068120; x=1764672920; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Jfyijvl1JFPahxbivQxrrAGa5h/+4fXCl7qTUyuB64s=;
- b=XlT3Kt39/lqbeGyL/TdhomTNvLk6fYMXOu55vSP7g+VwxtAGRotTn+cWHUoNMdjtPT
- p0kngk2E2euyFl/FhfgQb5U4gcFRQwpYsal5SlLU33WLjssB25H/GoRqWl6qN12Rt66L
- mZd69pAjVhqPWiPzSunKtlAHh4mQlRH8/zPuqCr7bLJvyBYyA+FRVMzp6RpCwmsu0NUo
- 3Y7CvuvD1px6KQxYvDfIklK6IohmasvpXqjSGtHaTbxubKKQ/9svIO9+Db3snxEDU8t+
- GzAaR2XoaFkN4RO6G2TCxsRhOPQXmal5K917L6p/e6ad3PpPdcLicdrerKfusxwv9vln
- 1rHA==
+ bh=lJnvThjS80O1Eon7AqXWBK1cOL1m23OMM4urIwDftzk=;
+ b=dSDcv4fY4jLmCrbYeNtvQ0dYyApViaKAs/GV1CV50xxofebri4Ke+gZoNPhANMrfHm
+ WMcLzGwDp/+TZl9Zh2R4TAz+wimCjsXXrleFitFX44woseRj2dMKlRYSPKfDtfjPgSRw
+ ZQKV0nPfC60OYcVtE8ZTTB2QdHwdY3b0NNDdmxanloM+LKKeQGt+tTspJ6tLmlqSk4I9
+ 9NrYLLcjOiRUirvB5J1EU9wQqMEmj+YwQfbiBn69AF/usgtj34n8YqUZCUIhOPbtdpGd
+ VHdQqkxtxd6/qra20DCaDajVFUjkMK33Kd+PYYFQS2y9A1eZRk1NJO2P1EoGwW6Z1TZB
+ zYyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764068120; x=1764672920;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=lJnvThjS80O1Eon7AqXWBK1cOL1m23OMM4urIwDftzk=;
+ b=NmNZz9oYdAPNC5PRqNu41G91zo/2dU7n4j1M0YgYPc9h8ef/PKUQrDRbgf3hPeO0oS
+ SYIAf5KvSBN5UFlo1W3uZEirNIXi4s6rG2SGgSQ3IL67icKP165+AVfgBBuPjAgxSVGR
+ XDAsHvez3uw1amIPOHf5pvSP/vnppn1aqlzI9t0G6qDbrtG7b5+GgjCY0iRbPVcVex+S
+ dKsJ9S6V3rMVX7ek6pR8vRhX/GwtK8fJD/Z7X06hBm/ZRO+uKQ8OD+CGRxY2hI3C6ocI
+ u1hJXT7QR67k9O0bekPfogA9+KTdaIIz0rWTH6RG9DxBf1fszb8Oxz3z+GrLr1Rlpuxi
+ cq2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+TmZhwpzLNMK+BuRoVlhR40O2vGm8PpE53ydOOSBH9AJiqN4K8oVwAEjpOy/7u6I3XGGZnV14aMp+@nongnu.org
-X-Gm-Message-State: AOJu0Yyb0ETMaJBiv96MavQd97HHAZthaWBxHE2BjJoHr1j+eoShoghC
- pFMhWBb4a2JCc/yEpYw5qQeOhM5rbNDLWQDr45bmH3y8zebZLEI3jMwZL1CIE4urHDN5x0zEIr+
- TOf9dFeGyILOg
-X-Gm-Gg: ASbGncvZPkD1tS54LsoHDA+q56D5jJSMWlZMbXnVE/eTmp6znP1h4cdiBin6AwYjCcd
- rGAeK+nt+9iJmg9JVuR80IG7GiXjWtyQ0wpD9EDvxGrpHdpyG3wurfZd1kTi8y5JTOJfVpjZ35T
- k7RseF0HMVZBB0FTB4A4Hsn0/UOAQFSfXrJsbMyCji5EGYSrVFRaubiByI7j2zy/SYg6/uVSoGN
- 36xrYQjvmrvZCDBgZin7JD07jXs6mUEB4hpOlCtNtVqtuIQFoO57UmAdfpJJtjX9EQbDfg5cZJL
- gmIbDw3JTt1F1el1xUJFmhVnHMr1SxCIa3OFCURrkQsiEb0sXfxAU219yCbtxy4ISbAtVUTLd7N
- V6pF/Kzh/N82R0RZXCR+1tCSg+JxBWAgAj8HSoUU58RpyVfmcL6pLD/mwMWdVUuZdS9RP6x6Bp+
- 8N/ZOYW/g78BGwytzM4udwfk75A8M4cfDdlNFJxFJje0E9CVyjc8kzjQbWvv3l
-X-Google-Smtp-Source: AGHT+IERb9JX2msGUhosBK7KYnxgaVzJeCNqY8/qwfS0VTZe5M/yJxvfuGH+GR0rR4EcCKGJXvCyMA==
-X-Received: by 2002:a05:6000:22ca:b0:42b:30a6:9c10 with SMTP id
- ffacd0b85a97d-42cc1d22e12mr16261013f8f.56.1764068076531; 
- Tue, 25 Nov 2025 02:54:36 -0800 (PST)
+ AJvYcCXCS7wtxeNc17lCSMfaz+2UB2a7LrR6Bz3cUPRYGFx4F/xXOQ3xGmyEGSAmcvxzOF4p3rGWT/yFT7PA@nongnu.org
+X-Gm-Message-State: AOJu0Yy7gT3cG0/LEx/5tBAD516UMEWhWI77a7BYJrW0Udgb9bs2voEC
+ c5N9TgAKohJT71zkvcQlMOfmijyZ0HsFTi0m7No6itNIH7lTsf1crMqN5FZXArurCPo=
+X-Gm-Gg: ASbGncvWivnkoBvzHq7aj0sb2YsiCWAVq93LdZfWoGFJb1b7ny78JNE47bQk+IqaK7h
+ gXPteaPkkS/iuCsGj5B8P10QLfZQOCPDtrksAsfgPwGvjaFGhj30ioXgLAm+5rquj2M1HeuSGch
+ AeHdn8veNLUI1pftzxBdqgX8PKn6ctz+nFJ0qZ0kg3Z1+vm94zTX9fNjoGHGwYjAaDRFVpqaq9C
+ 4raBqrCvdhm3PBWfKZAJ1xeVjJA0qP8qxZNN6GijHGvan+cEtZy68MZ00vl9zVexzVbwpok9USN
+ h6EQmP+5J468CEG8oiUEY3I3jdaGFLoohLOW3UDFWwNFfLrX/qrLHtltMJyOmKy+In1/tkrJxEi
+ 1DoE6aNnXaeofyTJ6u4sFXPHv9m5GtQRj0ph0KiBt5s6/cGNwUCk1DYFo6SpYjIcAJ97QGzrmTJ
+ murfDBjT+bPUO99KuABikL3c8wiMhQtvjoVyyXlOm0LA7aK46EsGrvti0bRV24
+X-Google-Smtp-Source: AGHT+IGsqiVHH5SjJWCQB8QRWjbF3lU+3KogymlcesoKSiwG5fKIhJYXXZqXGAfxfKyTCo39hLqidw==
+X-Received: by 2002:a05:6000:4010:b0:42b:3dbe:3a37 with SMTP id
+ ffacd0b85a97d-42cc1302285mr17879937f8f.10.1764068120487; 
+ Tue, 25 Nov 2025 02:55:20 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7fb8a29sm34188178f8f.30.2025.11.25.02.54.35
+ ffacd0b85a97d-42cc231dc6esm24752764f8f.7.2025.11.25.02.55.19
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 25 Nov 2025 02:54:35 -0800 (PST)
+ Tue, 25 Nov 2025 02:55:20 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-11.0 00/12] accel/tcg: Remove most MO_TE uses in
- cpu_ld/st_data()
-Date: Tue, 25 Nov 2025 11:54:21 +0100
-Message-ID: <20251125105434.92355-1-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>
+Subject: [PATCH-for-11.0 06/12] target/sparc: Use little-endian variant of
+ cpu_ld/st_data*()
+Date: Tue, 25 Nov 2025 11:54:27 +0100
+Message-ID: <20251125105434.92355-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251125105434.92355-1-philmd@linaro.org>
+References: <20251125105434.92355-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::441;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x441.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,57 +106,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Still trying to remove MO_TE uses, here looking at cpu_ld/st_data()
-in fixed-endianness targets.
+We only build the SPARC targets using little endianness order,
+therefore the cpu_ld/st_data*() definitions expand to the little
+endian declarations. Use the explicit little-endian variants.
 
-Series split of bigger one [*] where Richard made a comment on
-*_code() patches. Since not related to *_data() uses, post separetely
-since almost ready (still few PPC/MIPS paths to update, but I'd rather
-check if this is heading in the correct direction before looking at
-them).
+Mechanical change running:
 
-[*] https://lore.kernel.org/qemu-devel/20251121134503.30914-1-philmd@linaro.org/
+  $ tgt=sparc; \
+    end=be; \
+    for op in data mmuidx_ra; do \
+      for ac in uw sw l q; do \
+        sed -i -e "s/cpu_ld${ac}_${op}/cpu_ld${ac}_${end}_${op}/" \
+                  $(git grep -l cpu_ target/${tgt}/); \
+      done;
+      for ac in w l q; do \
+        sed -i -e "s/cpu_st${ac}_${op}/cpu_st${ac}_${end}_${op}/" \
+                  $(git grep -l cpu_ target/${tgt}/); \
+      done;
+    done
 
-Philippe Mathieu-Daudé (12):
-  target/hexagon: Use little-endian variant of cpu_ld/st_data*()
-  target/tricore: Use little-endian variant of cpu_ld/st_data*()
-  target/rx: Use little-endian variant of cpu_ld/st_data*()
-  target/m68k: Use little-endian variant of cpu_ld/st_data*()
-  target/s390x: Use little-endian variant of cpu_ld/st_data*()
-  target/sparc: Use little-endian variant of cpu_ld/st_data*()
-  target/i386: Use little-endian variant of cpu_ld/st_data*()
-  target/hppa: Use little-endian variant of cpu_ld/st_data*()
-  target/riscv: Use little-endian variant of cpu_ld/st_data*() for
-    vector
-  target/sh4: Replace cpu_stl_data() by explicit endianness variants
-  target/mips: Use big-endian variant of cpu_ld/st_data*() for MSA
-  accel/tcg: Remove non-explicit endian cpu_ld/st*_data*() helpers
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/sparc/ldst_helper.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- include/accel/tcg/cpu-ldst.h         |  46 --------
- target/hexagon/macros.h              |   6 +-
- target/i386/ops_sse.h                |  12 +--
- target/i386/tcg/seg_helper.h         |  12 +--
- linux-user/vm86.c                    |   4 +-
- target/hexagon/op_helper.c           |   6 +-
- target/hppa/op_helper.c              |  44 ++++----
- target/i386/tcg/mem_helper.c         |   8 +-
- target/i386/tcg/mpx_helper.c         |  28 ++---
- target/i386/tcg/seg_helper.c         |  16 +--
- target/i386/tcg/system/excp_helper.c |   8 +-
- target/i386/tcg/system/svm_helper.c  |  48 ++++-----
- target/m68k/fpu_helper.c             |  12 +--
- target/m68k/op_helper.c              |  88 ++++++++--------
- target/mips/tcg/msa_helper.c         |  51 +++++----
- target/riscv/vector_helper.c         |  12 +--
- target/rx/helper.c                   |  14 +--
- target/rx/op_helper.c                |   6 +-
- target/s390x/tcg/mem_helper.c        |  48 ++++-----
- target/s390x/tcg/vec_helper.c        |   8 +-
- target/sh4/op_helper.c               |   6 +-
- target/sparc/ldst_helper.c           |   6 +-
- target/tricore/op_helper.c           | 152 +++++++++++++--------------
- 23 files changed, 305 insertions(+), 336 deletions(-)
-
+diff --git a/target/sparc/ldst_helper.c b/target/sparc/ldst_helper.c
+index 2c63eb9e036..bd0257d313a 100644
+--- a/target/sparc/ldst_helper.c
++++ b/target/sparc/ldst_helper.c
+@@ -1228,13 +1228,13 @@ uint64_t helper_ld_asi(CPUSPARCState *env, target_ulong addr,
+             ret = cpu_ldub_data(env, addr);
+             break;
+         case 2:
+-            ret = cpu_lduw_data(env, addr);
++            ret = cpu_lduw_be_data(env, addr);
+             break;
+         case 4:
+-            ret = cpu_ldl_data(env, addr);
++            ret = cpu_ldl_be_data(env, addr);
+             break;
+         case 8:
+-            ret = cpu_ldq_data(env, addr);
++            ret = cpu_ldq_be_data(env, addr);
+             break;
+         default:
+             g_assert_not_reached();
 -- 
 2.51.0
 
