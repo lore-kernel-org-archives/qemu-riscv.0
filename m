@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11349D0E6C3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 10:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025C0D0E6C3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 10:57:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vNqiQ-0005NA-1t; Tue, 25 Nov 2025 05:56:10 -0500
+	id 1vNqiI-0004r2-Pj; Tue, 25 Nov 2025 05:56:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqiO-0005I3-Qw
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:56:08 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqi8-0004XH-6I
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:55:55 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqiM-0001tk-Rd
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:56:08 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-477619f8ae5so30236925e9.3
- for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 02:56:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqi4-0001nH-1l
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:55:51 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-42bb288c219so4588023f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 02:55:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764068165; x=1764672965; darn=nongnu.org;
+ d=linaro.org; s=google; t=1764068143; x=1764672943; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HqbvtytwZhlAGHOU7hmLAcqlvwP/xTJGGdaDHqryDAY=;
- b=S6G/zLYIFutIk2e3jnEXqKV1445hTeQGV7Cxo3h2x3ni39CWPyPCMTjHPFb/IiLQf8
- wmSoZfCZvQj6NbbtllCKliPIzUlxOTqFxXyOrTFVwQj4hE1/M7+IZzBAInWa/XPV0/Qc
- C6rN8THVZSHEVV4sV8iHAe1Pgf11o8kIN5FOxVcWr6OLo9pk5knG0/j19LfW7MP/F0Uh
- y0xSwZVNbA1vsYn9XUlhRqBt9blT5i9/TO/u+DtcW/pmnw03A84CY+J+5DhPKQ2Ur5MF
- 5gIZXw5XWl1UAGjvk9LR1ykvcaeWUbFjbGhRMOXrLj6XUj4CnCD2Mki0hBQI1k1BzFhm
- bnlQ==
+ bh=1/moKxyhhhNUAAssiCB4z5/4yHLvVf9L6ospDexZsZ8=;
+ b=yOlt9LaYNYjuk6yA/JJ6P4+iYfNT+9NlDEBRdTs2kQAKSia4j+rM7kLZG3CJm2nvGS
+ w4key30D/JlP/+8ojziaLxU0oxRTMSffekjlxZKMBTp4r0jfHnf+ZIy79ZOwabm7YdXp
+ ijnGtGijz4jL9sXCS4exwsNZsjrfshh/aBzj2HFQbCSv/FEnE+tvs4wFh5L6hAcAsO8/
+ N8dLhKIEt9WkpNnq3IekpsNBXLHo8aUSuLf9Ww7jrG40sO1O7dV3bEOkwICTdD7ERbFq
+ 2iP9rFbvprUTXPl8f1nbCvpzdf4HI5s5k3obyXYnW+yOVb7A6SU2ZvpxRw9p/I9g+b7c
+ 5L6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764068165; x=1764672965;
+ d=1e100.net; s=20230601; t=1764068143; x=1764672943;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=HqbvtytwZhlAGHOU7hmLAcqlvwP/xTJGGdaDHqryDAY=;
- b=qw+AjVeIYOXJq+i9upfTGKtyEw8yMqzw85hRT0J1iYiWC6UXMYJWMshhaYPQ5Sg7AK
- 8CXUV5hmDd1qlJZ2uEV92rGF6QiIM57Sg246p+aZ2TZu7vmsbNLiheN9IW5wiNQumvAv
- yUeHjCITIDMLhUfgKq90l8tKRYLDIwWSLqKMkM+QLd+LVkvKvNaM1RZWzi20xUdz3c4f
- KSXTjKAsixSEpYR5qFn5vm0QjuRNacSdAv0AzsxXqI9llvHunwhB1rN2JGX6Cs+gw+sZ
- Nv5GtcEoNAxpdjpHF3a0oSvU+Kbm8F6+ctNsxhYLIdViG8zC04O1Nih4bYYFBqFBtFYj
- 51+A==
+ bh=1/moKxyhhhNUAAssiCB4z5/4yHLvVf9L6ospDexZsZ8=;
+ b=VxkUaiN7bOuwsLzIbl4T8K6jbC4qDGQ0WC18GIscWnMvV1Y7TSbCcw51WmiTs6gqdq
+ ffhstvFlq0C0XQJGog34cTus3sSx6bOr/HP8JF5bVQemflKXDXjL4/b1bIlSLjtc3Xpo
+ Df9ujsQTpnFBJMY2Z1su4hG+IjtqbecPpnMk4kKnPo8/HHxjp2J8JO2NI4hfi2ISKjYr
+ vrXGvsDkIEfvj1uEYq2javIKJ4Vl5IHtJZQG+HUeJkTqIVjeiZYFqVYmUuADLaZuBeF8
+ h6KN4E+vwvPNT5lexMkd1MUetDRRTtJmfl7+qxsaSzdqKR0zskNxPim+rmTHX4ggc6Tx
+ gmLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXFfUVVESwCIFSSFiafJe5rF1Gsw5pvsz0MIZAenG+vrg3cdCyAgFhOIyrgooclFWw2bZT1u3DcuSn2@nongnu.org
-X-Gm-Message-State: AOJu0YyIU+cGS19hfspUhBr8HBCzVd9QhDPhANKfuJpO8xs8nDBzVq7U
- Nlv0VajTf5D2KRtNUYLlldGBWHMUKfOYUw6szkff13j/zFeviZmNl69x2lfIVuOHJgo=
-X-Gm-Gg: ASbGncvSZRo+EUx6hluUQ8s8UqX9nzkmU+/WmaJGLVm7NFa9Cj7iLIPvCmVOh/jCz1C
- 4kypGJ7kEWTpLrgDtPL0tP+W4X87SJPLey/W3vxrEnw02qX4t71H14JOSEch5zI4o2Y/qoIYSs0
- fbO5h3EAlsRgPfJ9ZdJQSfiAir9hQijaSPGPFkF99uu3ILjPlCUdS8WZnibxVgbdJAOFrPypPvD
- 1Ozkon7JZ8EEO4ykjEqZqI9GTuOm1ZR8Vy0hYwAeR0NnPIdb6umkidtPm95nNzuZcNqTF3Yo+Cu
- ynN/t1VFr98UNrsorQxDvwH+LA8UhtcqEdI8vKaV9N3nB93UAm2q5pt1B+SWm5ImYQftf7aNBIe
- QCIn4dG/4Sa8rsTD2Ln9eesX6CkQtIVRjNFAQC6QU8X/pbRNvGw7Rade5P0uRZ9f7lFN5bWXTC/
- bNnikAOrU9TGycYe02DWVtYyJ/ddVBanqMfcx7zVrLulIlxpbGeXEE6v0uqM4O
-X-Google-Smtp-Source: AGHT+IEi5lbB43t1hen5gtYZrTis4D86qp8KTt2V55htTR5tlKY+FOKUCP4/Mo4dCjJthpO9zgxAoA==
-X-Received: by 2002:a05:6000:1a8e:b0:429:cf88:f7ac with SMTP id
- ffacd0b85a97d-42cc1d35d6dmr15171928f8f.44.1764068165307; 
- Tue, 25 Nov 2025 02:56:05 -0800 (PST)
+ AJvYcCVVJ86xib6QjgJK9ojRJgDfqmHh184OoM8vkEp1BTd/SXMbmkJ60gJcItGiv0tu+F62ABL9lVb4B9Es@nongnu.org
+X-Gm-Message-State: AOJu0YxQ1cTCiwPDruDa08Xv4dwu7vDA6x7+mdhw6mrCPvNKcRW8GA3w
+ XFNd4whZWGLgUeZLlz4yHDb0W4iVRHvThlJgPkVuuXz++kzWpPx2RBW0ZPE3z5/pTVQ=
+X-Gm-Gg: ASbGncs0BE3klq1hV+eKIdFmZEuahZv0+N6gveJs9LO1OMZeZRp2tmQgk5b7AUFGnJW
+ vAqNRsll5tkcphfC0jdcJRYnOVHlTjlyhHg1HIpR5Fqv1KN/AoqkKSV/TEhYRpAwXrvcey8pPCY
+ U8463L91K7sPfqWls3KUDnWNCjFysylFa/11MdZQxFQCqM4J+0cNb7pO0cP7rp3+vHHkMT8cAxZ
+ Ecwp46SZSW94WoQr81PV40LpgoZh9fs0cecmzK4qP5x97Sp83Bo29bTgSaE91LQTswl3zJMmqLd
+ Ex9Aa85Ae+zBJN0hREA5KFipKqB6aOyb8iSYVfnx956/Qd0Tc8WuYnOjjNWVFIUR7aB/Vop5rtv
+ Xreym34Or2b0fHbsHhkbhRHUy5stSAXzeqBmMu1QIKLBe3vlKo37IoT6vGCDXTBIltvQ71kTVHZ
+ qBGfzN8JeJ+oLwX23+ZLbQZQr3vVt4C2ds9nVg1SMxWg4He2gRAlscI1yTqn2o
+X-Google-Smtp-Source: AGHT+IHyvsxgcQUNPg/NfqXzo+L4q8Axosz32sAX+4NDQUAgn/EY3SkUaSnhck7OcRoCLKievYQ1+w==
+X-Received: by 2002:a05:6000:4022:b0:42b:3746:3b85 with SMTP id
+ ffacd0b85a97d-42cc1d198c0mr15200852f8f.45.1764068143512; 
+ Tue, 25 Nov 2025 02:55:43 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7fb8e62sm33608840f8f.35.2025.11.25.02.56.04
+ ffacd0b85a97d-42cc231dc6esm24754351f8f.7.2025.11.25.02.55.42
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 25 Nov 2025 02:56:04 -0800 (PST)
+ Tue, 25 Nov 2025 02:55:42 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH-for-11.0 12/12] accel/tcg: Remove non-explicit endian
- cpu_ld/st*_data*() helpers
-Date: Tue, 25 Nov 2025 11:54:33 +0100
-Message-ID: <20251125105434.92355-13-philmd@linaro.org>
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH-for-11.0 09/12] target/riscv: Use little-endian variant of
+ cpu_ld/st_data*() for vector
+Date: Tue, 25 Nov 2025 11:54:30 +0100
+Message-ID: <20251125105434.92355-10-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251125105434.92355-1-philmd@linaro.org>
 References: <20251125105434.92355-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,73 +109,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All uses were converted to the explicit cpu_ld/st*_{be,le}_data*()
-helpers, no need for the non-explicit versions anymore.
+RISC-V vector "elements are simply packed in order from
+the least-signicant to most-signicant bits of the vector
+register" [*] which is little endianness, therefore the
+cpu_ld/st_data*() definitions expand to the little endian
+declarations. Use the explicit little-endian variants.
+
+[*] RISC-V "V" Vector Extension v1.0
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
-FIXME: Still some PPC/MIPS uses
----
- include/accel/tcg/cpu-ldst.h | 46 ------------------------------------
- 1 file changed, 46 deletions(-)
+ target/riscv/vector_helper.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/include/accel/tcg/cpu-ldst.h b/include/accel/tcg/cpu-ldst.h
-index 0de7f5eaa6b..12dd38599a6 100644
---- a/include/accel/tcg/cpu-ldst.h
-+++ b/include/accel/tcg/cpu-ldst.h
-@@ -428,52 +428,6 @@ cpu_stq_le_data(CPUArchState *env, abi_ptr addr, uint64_t val)
-     cpu_stq_le_data_ra(env, addr, val, 0);
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 2de3358ee86..caa8dd9c125 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -193,9 +193,9 @@ void NAME##_host(void *vd, uint32_t idx, void *host)        \
  }
  
--#if TARGET_BIG_ENDIAN
--# define cpu_lduw_data        cpu_lduw_be_data
--# define cpu_ldsw_data        cpu_ldsw_be_data
--# define cpu_ldl_data         cpu_ldl_be_data
--# define cpu_ldq_data         cpu_ldq_be_data
--# define cpu_lduw_data_ra     cpu_lduw_be_data_ra
--# define cpu_ldsw_data_ra     cpu_ldsw_be_data_ra
--# define cpu_ldl_data_ra      cpu_ldl_be_data_ra
--# define cpu_ldq_data_ra      cpu_ldq_be_data_ra
--# define cpu_lduw_mmuidx_ra   cpu_lduw_be_mmuidx_ra
--# define cpu_ldsw_mmuidx_ra   cpu_ldsw_be_mmuidx_ra
--# define cpu_ldl_mmuidx_ra    cpu_ldl_be_mmuidx_ra
--# define cpu_ldq_mmuidx_ra    cpu_ldq_be_mmuidx_ra
--# define cpu_stw_data         cpu_stw_be_data
--# define cpu_stl_data         cpu_stl_be_data
--# define cpu_stq_data         cpu_stq_be_data
--# define cpu_stw_data_ra      cpu_stw_be_data_ra
--# define cpu_stl_data_ra      cpu_stl_be_data_ra
--# define cpu_stq_data_ra      cpu_stq_be_data_ra
--# define cpu_stw_mmuidx_ra    cpu_stw_be_mmuidx_ra
--# define cpu_stl_mmuidx_ra    cpu_stl_be_mmuidx_ra
--# define cpu_stq_mmuidx_ra    cpu_stq_be_mmuidx_ra
--#else
--# define cpu_lduw_data        cpu_lduw_le_data
--# define cpu_ldsw_data        cpu_ldsw_le_data
--# define cpu_ldl_data         cpu_ldl_le_data
--# define cpu_ldq_data         cpu_ldq_le_data
--# define cpu_lduw_data_ra     cpu_lduw_le_data_ra
--# define cpu_ldsw_data_ra     cpu_ldsw_le_data_ra
--# define cpu_ldl_data_ra      cpu_ldl_le_data_ra
--# define cpu_ldq_data_ra      cpu_ldq_le_data_ra
--# define cpu_lduw_mmuidx_ra   cpu_lduw_le_mmuidx_ra
--# define cpu_ldsw_mmuidx_ra   cpu_ldsw_le_mmuidx_ra
--# define cpu_ldl_mmuidx_ra    cpu_ldl_le_mmuidx_ra
--# define cpu_ldq_mmuidx_ra    cpu_ldq_le_mmuidx_ra
--# define cpu_stw_data         cpu_stw_le_data
--# define cpu_stl_data         cpu_stl_le_data
--# define cpu_stq_data         cpu_stq_le_data
--# define cpu_stw_data_ra      cpu_stw_le_data_ra
--# define cpu_stl_data_ra      cpu_stl_le_data_ra
--# define cpu_stq_data_ra      cpu_stq_le_data_ra
--# define cpu_stw_mmuidx_ra    cpu_stw_le_mmuidx_ra
--# define cpu_stl_mmuidx_ra    cpu_stl_le_mmuidx_ra
--# define cpu_stq_mmuidx_ra    cpu_stq_le_mmuidx_ra
--#endif
--
- static inline uint32_t cpu_ldub_code(CPUArchState *env, abi_ptr addr)
- {
-     CPUState *cs = env_cpu(env);
+ GEN_VEXT_LD_ELEM(lde_b, uint8_t,  H1, ldub)
+-GEN_VEXT_LD_ELEM(lde_h, uint16_t, H2, lduw)
+-GEN_VEXT_LD_ELEM(lde_w, uint32_t, H4, ldl)
+-GEN_VEXT_LD_ELEM(lde_d, uint64_t, H8, ldq)
++GEN_VEXT_LD_ELEM(lde_h, uint16_t, H2, lduw_le)
++GEN_VEXT_LD_ELEM(lde_w, uint32_t, H4, ldl_le)
++GEN_VEXT_LD_ELEM(lde_d, uint64_t, H8, ldq_le)
+ 
+ #define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)             \
+ static inline QEMU_ALWAYS_INLINE                            \
+@@ -214,9 +214,9 @@ void NAME##_host(void *vd, uint32_t idx, void *host)        \
+ }
+ 
+ GEN_VEXT_ST_ELEM(ste_b, uint8_t,  H1, stb)
+-GEN_VEXT_ST_ELEM(ste_h, uint16_t, H2, stw)
+-GEN_VEXT_ST_ELEM(ste_w, uint32_t, H4, stl)
+-GEN_VEXT_ST_ELEM(ste_d, uint64_t, H8, stq)
++GEN_VEXT_ST_ELEM(ste_h, uint16_t, H2, stw_le)
++GEN_VEXT_ST_ELEM(ste_w, uint32_t, H4, stl_le)
++GEN_VEXT_ST_ELEM(ste_d, uint64_t, H8, stq_le)
+ 
+ static inline QEMU_ALWAYS_INLINE void
+ vext_continuous_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
 -- 
 2.51.0
 
