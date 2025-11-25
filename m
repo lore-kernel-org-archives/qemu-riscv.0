@@ -4,93 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E562D0E6C3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 10:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B920D0E6C4
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 10:56:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vNqhk-0004Iv-HC; Tue, 25 Nov 2025 05:55:28 -0500
+	id 1vNqhX-0003w7-Dg; Tue, 25 Nov 2025 05:55:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqhi-0004Fu-11
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:55:26 -0500
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqhM-0003iy-0D
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:55:07 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqhe-0001fW-P1
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:55:25 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-42b47f662a0so2798505f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 02:55:21 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqhI-0001Qf-Cc
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:55:03 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-429c7869704so4457946f8f.2
+ for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 02:54:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764068120; x=1764672920; darn=nongnu.org;
+ d=linaro.org; s=google; t=1764068099; x=1764672899; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lJnvThjS80O1Eon7AqXWBK1cOL1m23OMM4urIwDftzk=;
- b=dSDcv4fY4jLmCrbYeNtvQ0dYyApViaKAs/GV1CV50xxofebri4Ke+gZoNPhANMrfHm
- WMcLzGwDp/+TZl9Zh2R4TAz+wimCjsXXrleFitFX44woseRj2dMKlRYSPKfDtfjPgSRw
- ZQKV0nPfC60OYcVtE8ZTTB2QdHwdY3b0NNDdmxanloM+LKKeQGt+tTspJ6tLmlqSk4I9
- 9NrYLLcjOiRUirvB5J1EU9wQqMEmj+YwQfbiBn69AF/usgtj34n8YqUZCUIhOPbtdpGd
- VHdQqkxtxd6/qra20DCaDajVFUjkMK33Kd+PYYFQS2y9A1eZRk1NJO2P1EoGwW6Z1TZB
- zYyg==
+ bh=NVumjk0F6Tq93V240FNbMOnFtVOEoBWTLGnL0WT9/nA=;
+ b=IlTwdXmkY45ydg66iilqx+bOGLC0ywl2qnjjFJ/orAYpF5DEtpTEgoXRIr+nbeSJY/
+ MaMG6WEmEEAzzT7xNEmzCPj7vs+WSEKYKRmBqM+MZHDhdNWr0U+Z1hi0oo+toB8i0gaC
+ nNV3FYtNZ0Mucs1XaWXnGGIJdLWC82iHoOUU96fXo5XJPoIa04c4NY8Syqwbu3KpNO8S
+ rdUqib+vp3N3LlMHPuFclFViPX1KTPm0iIr/ZufMGkhan2h7zhcWJ+0SKFe5iAnLJCjq
+ qyHZoFubO3I5YICJLk+FYnQilgeSuPXPmzsU+93xcrRLMPNK9RS5s8FvgsKnEaksZC8Z
+ TfOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764068120; x=1764672920;
+ d=1e100.net; s=20230601; t=1764068099; x=1764672899;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=lJnvThjS80O1Eon7AqXWBK1cOL1m23OMM4urIwDftzk=;
- b=NmNZz9oYdAPNC5PRqNu41G91zo/2dU7n4j1M0YgYPc9h8ef/PKUQrDRbgf3hPeO0oS
- SYIAf5KvSBN5UFlo1W3uZEirNIXi4s6rG2SGgSQ3IL67icKP165+AVfgBBuPjAgxSVGR
- XDAsHvez3uw1amIPOHf5pvSP/vnppn1aqlzI9t0G6qDbrtG7b5+GgjCY0iRbPVcVex+S
- dKsJ9S6V3rMVX7ek6pR8vRhX/GwtK8fJD/Z7X06hBm/ZRO+uKQ8OD+CGRxY2hI3C6ocI
- u1hJXT7QR67k9O0bekPfogA9+KTdaIIz0rWTH6RG9DxBf1fszb8Oxz3z+GrLr1Rlpuxi
- cq2g==
+ bh=NVumjk0F6Tq93V240FNbMOnFtVOEoBWTLGnL0WT9/nA=;
+ b=FrbVWgiLrfSHbz7OmHXtb1gxNe0MwGp5UjWyKmwHYlDLhi2b5rybgoGf9MxqITIFwL
+ VKKhc7peGouEBH00scWgjmpVzR8otagccmNVE1G6RRTgQeRahYId6pPkATPqO4bHNXlU
+ yPa8P5aqKdrsyQ2jmsYDCqdKmWzuwCGftgcGysxBiMi1kINkG4C/6MBRgjeAc8G+2hsS
+ XGoTuIFfnCB9LOFn1PEter2v0EdZdX6jMy+MRbyE5pYGmtPVfzgoyq6nVdUler2ZXvo6
+ E+nrAeu8pwIEw3ROVP9n7l1ZZhyyXmudw/xJ7XgYF3xo6721cdqWNvp5AGDUvNktLDCF
+ NTGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCS7wtxeNc17lCSMfaz+2UB2a7LrR6Bz3cUPRYGFx4F/xXOQ3xGmyEGSAmcvxzOF4p3rGWT/yFT7PA@nongnu.org
-X-Gm-Message-State: AOJu0Yy7gT3cG0/LEx/5tBAD516UMEWhWI77a7BYJrW0Udgb9bs2voEC
- c5N9TgAKohJT71zkvcQlMOfmijyZ0HsFTi0m7No6itNIH7lTsf1crMqN5FZXArurCPo=
-X-Gm-Gg: ASbGncvWivnkoBvzHq7aj0sb2YsiCWAVq93LdZfWoGFJb1b7ny78JNE47bQk+IqaK7h
- gXPteaPkkS/iuCsGj5B8P10QLfZQOCPDtrksAsfgPwGvjaFGhj30ioXgLAm+5rquj2M1HeuSGch
- AeHdn8veNLUI1pftzxBdqgX8PKn6ctz+nFJ0qZ0kg3Z1+vm94zTX9fNjoGHGwYjAaDRFVpqaq9C
- 4raBqrCvdhm3PBWfKZAJ1xeVjJA0qP8qxZNN6GijHGvan+cEtZy68MZ00vl9zVexzVbwpok9USN
- h6EQmP+5J468CEG8oiUEY3I3jdaGFLoohLOW3UDFWwNFfLrX/qrLHtltMJyOmKy+In1/tkrJxEi
- 1DoE6aNnXaeofyTJ6u4sFXPHv9m5GtQRj0ph0KiBt5s6/cGNwUCk1DYFo6SpYjIcAJ97QGzrmTJ
- murfDBjT+bPUO99KuABikL3c8wiMhQtvjoVyyXlOm0LA7aK46EsGrvti0bRV24
-X-Google-Smtp-Source: AGHT+IGsqiVHH5SjJWCQB8QRWjbF3lU+3KogymlcesoKSiwG5fKIhJYXXZqXGAfxfKyTCo39hLqidw==
-X-Received: by 2002:a05:6000:4010:b0:42b:3dbe:3a37 with SMTP id
- ffacd0b85a97d-42cc1302285mr17879937f8f.10.1764068120487; 
- Tue, 25 Nov 2025 02:55:20 -0800 (PST)
+ AJvYcCU7xc0G1OhL/DxFhul6cXSZ6auWUKI8GXBjgwBVac42Lv/duc5Ndhe+BPuOqIM5tNIYGal+p5d6X0Wt@nongnu.org
+X-Gm-Message-State: AOJu0YwOtATvirvZG/DPy8crsj+PxXJ9hG7vkHA9k3CCJa8b8/Au6H9D
+ RobZJvA+tkW3EKMqpj0l2GAwH0bBBoE8t0gAO3cN9QLJhrzE9ws0hH30GejzuviWg/k=
+X-Gm-Gg: ASbGnctX+BF44L2Q0SmyxQjh3InUAYHqTEBsiC2nF1AJAGVorP/iH/y1hq7MKIV2lP8
+ ImK0H+e5jOdJ4cO2kRxb7QtipQTAtCfGOJ1WFAW02jY6qHi4pdwRpW/92XZRQ1VLxQ8nv4BZmA/
+ 1TiuOR69lVcvOAug+ZLmZoFlJiBdYYghIdG+d47EtzAPN2pqxSxRqzVg2zFrHhYc8iDnVJJ4/KU
+ LewwcMrJKGmRpfWAGCm+qW3NIpk+TuvRyKmT8EvyQDOcRA6bOl0L636LTy1WMSIoxT9OIPJwcmm
+ usNbzPWdXbTKfYepbf8O5WRB/fiXZtpdDOU+L9NMcoiMgJGrJVoQr6yR/OJP7Yol/6y8B717Cq3
+ spKPBwO1Z3jcZSKgzj0ftdWDByBpglgypf1Nd2Weea/u4uGylLgBWLVZdznrnTUrvz0lDCXNuDn
+ pD1DWAt7mUpF4BRYKIzfXoa28wuZZTsT7z3HOHb94JxkEq8L3HUIV0LBao9hP5k247A3q12R8=
+X-Google-Smtp-Source: AGHT+IEiVpF5o+SfyjWN7bCv64a0BsvPVLLknCQNWUQyyXwxLPUetlS8IgypNYrMqQE9+aneNqCs1Q==
+X-Received: by 2002:a05:6000:2210:b0:42b:4961:eb4c with SMTP id
+ ffacd0b85a97d-42e0f1d57f9mr2509092f8f.1.1764068098723; 
+ Tue, 25 Nov 2025 02:54:58 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cc231dc6esm24752764f8f.7.2025.11.25.02.55.19
+ ffacd0b85a97d-42cb7f363e4sm34060597f8f.12.2025.11.25.02.54.57
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 25 Nov 2025 02:55:20 -0800 (PST)
+ Tue, 25 Nov 2025 02:54:58 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>
-Subject: [PATCH-for-11.0 06/12] target/sparc: Use little-endian variant of
+ Yoshinori Sato <yoshinori.sato@nifty.com>
+Subject: [PATCH-for-11.0 03/12] target/rx: Use little-endian variant of
  cpu_ld/st_data*()
-Date: Tue, 25 Nov 2025 11:54:27 +0100
-Message-ID: <20251125105434.92355-7-philmd@linaro.org>
+Date: Tue, 25 Nov 2025 11:54:24 +0100
+Message-ID: <20251125105434.92355-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251125105434.92355-1-philmd@linaro.org>
 References: <20251125105434.92355-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,14 +105,14 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We only build the SPARC targets using little endianness order,
+We only build the RX target using little endianness order,
 therefore the cpu_ld/st_data*() definitions expand to the little
 endian declarations. Use the explicit little-endian variants.
 
 Mechanical change running:
 
-  $ tgt=sparc; \
-    end=be; \
+  $ tgt=rx; \
+    end=le; \
     for op in data mmuidx_ra; do \
       for ac in uw sw l q; do \
         sed -i -e "s/cpu_ld${ac}_${op}/cpu_ld${ac}_${end}_${op}/" \
@@ -127,30 +126,75 @@ Mechanical change running:
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/sparc/ldst_helper.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ target/rx/helper.c    | 14 +++++++-------
+ target/rx/op_helper.c |  6 +++---
+ 2 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/target/sparc/ldst_helper.c b/target/sparc/ldst_helper.c
-index 2c63eb9e036..bd0257d313a 100644
---- a/target/sparc/ldst_helper.c
-+++ b/target/sparc/ldst_helper.c
-@@ -1228,13 +1228,13 @@ uint64_t helper_ld_asi(CPUSPARCState *env, target_ulong addr,
-             ret = cpu_ldub_data(env, addr);
-             break;
-         case 2:
--            ret = cpu_lduw_data(env, addr);
-+            ret = cpu_lduw_be_data(env, addr);
-             break;
-         case 4:
--            ret = cpu_ldl_data(env, addr);
-+            ret = cpu_ldl_be_data(env, addr);
-             break;
-         case 8:
--            ret = cpu_ldq_data(env, addr);
-+            ret = cpu_ldq_be_data(env, addr);
-             break;
-         default:
-             g_assert_not_reached();
+diff --git a/target/rx/helper.c b/target/rx/helper.c
+index e9a7aaf610d..83cd491eb4a 100644
+--- a/target/rx/helper.c
++++ b/target/rx/helper.c
+@@ -68,10 +68,10 @@ void rx_cpu_do_interrupt(CPUState *cs)
+         qemu_log_mask(CPU_LOG_INT, "fast interrupt raised\n");
+     } else if (cpu_test_interrupt(cs, CPU_INTERRUPT_HARD)) {
+         env->isp -= 4;
+-        cpu_stl_data(env, env->isp, save_psw);
++        cpu_stl_le_data(env, env->isp, save_psw);
+         env->isp -= 4;
+-        cpu_stl_data(env, env->isp, env->pc);
+-        env->pc = cpu_ldl_data(env, env->intb + env->ack_irq * 4);
++        cpu_stl_le_data(env, env->isp, env->pc);
++        env->pc = cpu_ldl_le_data(env, env->intb + env->ack_irq * 4);
+         env->psw_ipl = env->ack_ipl;
+         cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
+         qemu_set_irq(env->ack, env->ack_irq);
+@@ -82,14 +82,14 @@ void rx_cpu_do_interrupt(CPUState *cs)
+         const char *expname = "unknown exception";
+ 
+         env->isp -= 4;
+-        cpu_stl_data(env, env->isp, save_psw);
++        cpu_stl_le_data(env, env->isp, save_psw);
+         env->isp -= 4;
+-        cpu_stl_data(env, env->isp, env->pc);
++        cpu_stl_le_data(env, env->isp, env->pc);
+ 
+         if (vec < 0x100) {
+-            env->pc = cpu_ldl_data(env, 0xffffff80 + vec * 4);
++            env->pc = cpu_ldl_le_data(env, 0xffffff80 + vec * 4);
+         } else {
+-            env->pc = cpu_ldl_data(env, env->intb + (vec & 0xff) * 4);
++            env->pc = cpu_ldl_le_data(env, env->intb + (vec & 0xff) * 4);
+         }
+ 
+         if (vec == 30) {
+diff --git a/target/rx/op_helper.c b/target/rx/op_helper.c
+index 2b190a4b2cf..ca3e9e85fc7 100644
+--- a/target/rx/op_helper.c
++++ b/target/rx/op_helper.c
+@@ -217,20 +217,20 @@ void helper_scmpu(CPURXState *env)
+ static uint32_t (* const cpu_ldufn[])(CPUArchState *env,
+                                      abi_ptr ptr,
+                                      uintptr_t retaddr) = {
+-    cpu_ldub_data_ra, cpu_lduw_data_ra, cpu_ldl_data_ra,
++    cpu_ldub_data_ra, cpu_lduw_le_data_ra, cpu_ldl_le_data_ra,
+ };
+ 
+ static uint32_t (* const cpu_ldfn[])(CPUArchState *env,
+                                      abi_ptr ptr,
+                                      uintptr_t retaddr) = {
+-    cpu_ldub_data_ra, cpu_lduw_data_ra, cpu_ldl_data_ra,
++    cpu_ldub_data_ra, cpu_lduw_le_data_ra, cpu_ldl_le_data_ra,
+ };
+ 
+ static void (* const cpu_stfn[])(CPUArchState *env,
+                                  abi_ptr ptr,
+                                  uint32_t val,
+                                  uintptr_t retaddr) = {
+-    cpu_stb_data_ra, cpu_stw_data_ra, cpu_stl_data_ra,
++    cpu_stb_data_ra, cpu_stw_le_data_ra, cpu_stl_le_data_ra,
+ };
+ 
+ void helper_sstr(CPURXState *env, uint32_t sz)
 -- 
 2.51.0
 
