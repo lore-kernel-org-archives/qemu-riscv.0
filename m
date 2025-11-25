@@ -4,98 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F180D0E6C4
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 11:24:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8345AD0E6C4
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 11:57:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vNr9v-00024S-AS; Tue, 25 Nov 2025 06:24:35 -0500
+	id 1vNrf9-0003Ao-Bl; Tue, 25 Nov 2025 06:56:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vNr9u-00023k-Ce
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 06:24:34 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
+ id 1vNreu-00032n-U7
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 06:56:39 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1vNr9r-0005bq-Tc
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 06:24:33 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-297ef378069so48965395ad.3
- for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 03:24:31 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <rkrcmar@ventanamicro.com>)
+ id 1vNreq-0001Tq-UI
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 06:56:36 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-477985aea2bso5243245e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 03:56:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1764069870; x=1764674670; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OlJU5560DCLx/I0dP0FAI6d4yobFRnrr8Vxh7F9JD7c=;
- b=fCdo4fGu1r5MeC2Bc8s4oK/ZpBuAqL4Si4psjUOFF9MiG5QWM93K3PueWX0Ze0X4k/
- DT2MYev585mySFkpvGID+fkZ/T7BpoOdzY6PEhsLN7uUJohS4mWYjeoYRJeCk6IYCCuM
- FSeSL71nTBfVSwcyztxmw38RcJtXcZA910yLfi2N0OcTZSSP6kxoKHDFLSvMNDuZd8qG
- A+LfQWOntjCTr8sOZ5ALMfXcBvzaC2UgPbX5FAiXCofgNKrZU4eAqdfCmmronjjdNOqC
- aqvEW2A2MV5PKaSjn9GU8Pj06MwaWilcZj09WG5cikdXxUK9xd9sqt6uokqcyozA9CAt
- eqiw==
+ d=ventanamicro.com; s=google; t=1764071791; x=1764676591; darn=nongnu.org;
+ h=in-reply-to:references:cc:subject:from:to:message-id:date
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7kyw4befvI18aymVdMUr3l27qAPs4Z/qz6RNj8ukU1M=;
+ b=O+g92Q9g9z4u0Rtn1y0IVbHFYod1yBNC2IoupR3EWLvpgeDNXjcOfuohrCYfeGt774
+ 5f8us6IQk3NRy74FViuDROfm90hoP+jsGDYDwMS6S4gZdOEyEqU/s+Quio+5xnwIFUI1
+ ORB2Me/cbRtNxfOulcEmOccnVLxawdYauKXJRZbcginohBFjx5Ci/857w3Ew6Rl3sR/S
+ a6t6Nq81+/aheMf4BX8TuUO3YS5xC6IAnTAu3cKQBiKXN1Ndk2bfDfBUq1fdWbzqqqRg
+ eW72V3LsXpG9nuj9+d56Koay4wr4vf0S4eFakVL6xnv7OcfjhOzqqklgCVf390fHh3ae
+ nD3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764069870; x=1764674670;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OlJU5560DCLx/I0dP0FAI6d4yobFRnrr8Vxh7F9JD7c=;
- b=l/T/hTLUjtEZ/6YQhHp8d5bmr8/bubRksEvnB65D78gCqDxDWxMReX+VtUeXAum1NV
- YVpO9nG4PWvTWZcVTVqwBGzRzv5GvSV5YhLz0gpPFIGITPG+7w1kdqK8Fg1zf9vCq/Rc
- E3kpoMP+oG0Tt6WifaRGRXwjwOZYuvWPym+xjjy5pVJdsdfDrxAcZW9i5TbjwWN+taY2
- eekN4wJDMB4eIvA1eGjjav1EJH9ANmZvNp7ZaK82Rd1LiNYo9w1EzuzN3wjgnPWXmvo7
- GZXkMr2tCOXxxPZ/BkdClulnK/pIwUbt7v4vQY9wdmCFvI6d5XKoHNFydgBfsbty+lOo
- iuUw==
+ d=1e100.net; s=20230601; t=1764071791; x=1764676591;
+ h=in-reply-to:references:cc:subject:from:to:message-id:date
+ :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7kyw4befvI18aymVdMUr3l27qAPs4Z/qz6RNj8ukU1M=;
+ b=BSWylEeqAdvsKSKvG0FAiTKvYdcfwC8s320/C34fiZ9IpU/VNn0oQ1H/YfP+X6NcVJ
+ r2GyoFVIKes3LQH1Lpdz1UTVlzavdJLTCG6ItEGTRAxYoDx8y3rBu42LMxVhR9Ex/WPK
+ eALfgZsZ3R7rjRjo6/RQZcXMBAPwWGXNOCeje8umcZK8FDXRAMmGXKaWtDgaUkii1jJG
+ F5qUVH64BOItmkt+D9PmlucKi+HeYAi6G1vGEK16DiK9VJuyo6tByGYgTQ3Rd46W9l/R
+ x/ySdffRtFXHsvS9T5RPYchhkuNGyXd0F6HOY5W9rMRRj23eiZLCu7uoenLHjBlzBC1P
+ 8W6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVWdh1hAcwPkxQz7mz0+oHx0N6Kgjn50UgFNEPireQK3GKurSb3afTCAiXG2Q4A6gf6FwVrNn1bP5Pv@nongnu.org
-X-Gm-Message-State: AOJu0YyE5XekB5Icl0DTi/k5KgdtPqZ4u5uW7mRPLwTrWs9JX2g5qaSl
- nom7fq5/zYMbNDyBTNVw9RfLy30lcTOocEplFyviTdAO26lVwtK8X+c9CGekTQwkOYqdF94QyN7
- Z24Ibgww=
-X-Gm-Gg: ASbGnctjppeXAOIlc4AQJoAZYRZOgx/4mdan01SbOgnlm5h0YY8mXDi13/GVXG09Hpx
- ClYKXFNTvElEVmJ5GHDKNdAkPM1akWf0APfFcHvyjeKrs0fZ+OfFiD0DOWdMIhBfDNzX/jIlt9p
- k8/st6+ESbZ1mTMzfL6VQ4OK6sDMO+qyZNj7UYaFSOE0Pl24ySrglAqGXygjKxY0wbrKF9AENm3
- ecERXDbJOKJDCRaDPog7qX5Ov8KY9064hraiQMpbA/tzHC/g0B8XmvvXnDebFGMFI6D2DxhRQLO
- HtqY9vuB/v6Q09bp+YItnPOC5dykSoMPTC0bCU18yIl46jQp9MYgml5/R4QiS0TExsk3F1O9hal
- VZFdZuZBIVzgLJLUQJdDSqhk9LlvspHqLnMqRbmwlJyiS9e1AcXuBXudxGfMWuUQO7d6K5cjV3X
- YJo2Vw4q8hPx+o9RBYqbMvE1pXww==
-X-Google-Smtp-Source: AGHT+IHmKE9PT36s1zgHFJWwuRW21I9HvVChLbUlLGx3rynDqKwYQGUWMDgBaNtIHOX6UfrcZo5R5Q==
-X-Received: by 2002:a17:903:11cc:b0:295:223b:cdee with SMTP id
- d9443c01a7336-29baaf9a98dmr29597255ad.14.1764069869679; 
- Tue, 25 Nov 2025 03:24:29 -0800 (PST)
-Received: from [192.168.68.110] ([179.133.97.212])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29b5b106094sm167281625ad.10.2025.11.25.03.24.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Nov 2025 03:24:29 -0800 (PST)
-Message-ID: <ef829d73-f39c-421a-8ebd-ef5422a7fedc@ventanamicro.com>
-Date: Tue, 25 Nov 2025 08:24:22 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/5] hw/riscv: experimental server platform reference
- machine
-To: Chao Liu <chao.liu.riscv@isrc.iscas.ac.cn>
-Cc: alistair.francis@wdc.com, liwei1518@gmail.com, palmer@dabbelt.com,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, wu.fei9@sanechips.com.cn,
- zhiwei_liu@linux.alibaba.com, xiaofan@iscas.ac.cn, wangjingwei@iscas.ac.cn,
- Andrew Jones <ajones@ventanamicro.com>
-References: <20251111182944.2895892-4-dbarboza@ventanamicro.com>
- <b1d0bc43-96cd-4919-b5c5-d004e422e902@isrc.iscas.ac.cn>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Content-Language: en-US
-In-Reply-To: <b1d0bc43-96cd-4919-b5c5-d004e422e902@isrc.iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ AJvYcCXfXMACb+Qt4U0d0sE8OyzGMdRKfmTvzJoNfG/gHpJTr1aAIHspLHaNq+6u60CwxRYVURQYbmkIh61K@nongnu.org
+X-Gm-Message-State: AOJu0Yw+4c3VSAaDGxVhud8ggYLBNrafKwcqqjePWh/rhFoougsFQwXJ
+ OWtdd6Rr/JfszGmCmHf0PQYhBGY3MtYlsJmNrnh2IEoHEChK3ivKhOmpR5up9T5pP0U=
+X-Gm-Gg: ASbGncua7dsfKYyH09imR9lgfInGfZXK9FczYxIzE/B0GOP9co8WJtIZRXaG80sbbCc
+ cTJzt21Q5Y5yfhg265Cv91SmxrnYXx5ZV3pTDvVOB4WkkaV1jBpG7dwyXiWPkLopntjgYcQlXUT
+ kehc6IwUd90Cw3spl33s6r7AN7acF/CAg1/YsOlm6I6YJs4AzN1mCSLYutBSY7qlM5s8PZqqRAj
+ LZAGabgARr3KXfGbaiatalQwl+k/Nz5tr41/WMautEHgC0G12dp30YieJ1/3b5UbXOsIFGN3qUv
+ weqXNP8a2fdM/2L3QjUYVI6Rj2698wKQ9/5GzrTD8urhbXaGB8Cvwhdrge8azOH8UVBZV0GDj4V
+ wVM6x4BEc2qB0Tuj8V5T99zvoam/TkullVN0dMRgcabZ64wVDMCQ5O6CHov0HecuMojactPoDRd
+ 4=
+X-Google-Smtp-Source: AGHT+IFZTloe7LfpQtOsFEgjeDg6mpCEPL60xSAbEXBCcFV273O4wWK1+hQSkcnsrqw5+pCP+XgO5A==
+X-Received: by 2002:a05:600c:1551:b0:477:555b:3411 with SMTP id
+ 5b1f17b1804b1-477c2ef91d3mr80375375e9.1.1764071790520; 
+ Tue, 25 Nov 2025 03:56:30 -0800 (PST)
+Received: from localhost ([2a02:8308:a00c:e200::3052])
+ by smtp.gmail.com with UTF8SMTPSA id
+ 5b1f17b1804b1-477bf3ba1b4sm251521605e9.15.2025.11.25.03.56.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Nov 2025 03:56:30 -0800 (PST)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 25 Nov 2025 12:55:54 +0100
+Message-Id: <DEHR8WGZCTQW.3GFZR4PZNGOAH@ventanamicro.com>
+To: "Drew Fustini" <fustini@kernel.org>
+From: =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>
+Subject: Re: [PATCH 3/7] hw/riscv: implement CBQRI capacity controller
+Cc: <qemu-devel@nongnu.org>, "Palmer Dabbelt" <palmer@dabbelt.com>,
+ "Alistair Francis" <Alistair.Francis@wdc.com>, "Weiwei Li"
+ <liwei1518@gmail.com>, "Daniel Henrique Barboza"
+ <dbarboza@ventanamicro.com>, "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
+ <qemu-riscv@nongnu.org>, "Paolo Bonzini" <pbonzini@redhat.com>, "Nicolas
+ Pitre" <npitre@baylibre.com>, =?utf-8?q?Kornel_Dul=C4=99ba?=
+ <mindal@semihalf.com>, "Atish Kumar Patra" <atishp@rivosinc.com>, "Atish
+ Patra" <atish.patra@linux.dev>, "Vasudevan Srinivasan" <vasu@rivosinc.com>,
+ "yunhui cui" <cuiyunhui@bytedance.com>, "Chen Pei"
+ <cp0613@linux.alibaba.com>, <guo.wenjia23@zte.com.cn>,
+ <liu.qingtao2@zte.com.cn>,
+ <qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org>
+References: <20251119-riscv-ssqosid-cbqri-v1-0-3392fc760e48@kernel.org>
+ <20251119-riscv-ssqosid-cbqri-v1-3-3392fc760e48@kernel.org>
+ <DEDROLF9I9YQ.2MQIEGB7I4BKH@ventanamicro.com> <aSDCmrvONUgvzqbV@x1>
+ <DEH356RBYAIG.IS7SP4D5XLIQ@ventanamicro.com> <aSSl6+i5fa4+kD3Q@x1>
+In-Reply-To: <aSSl6+i5fa4+kD3Q@x1>
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=rkrcmar@ventanamicro.com; helo=mail-wm1-x334.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ HK_RANDOM_ENVFROM=0.001, HK_RANDOM_FROM=0.999, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,315 +116,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+2025-11-24T10:37:31-08:00, Drew Fustini <fustini@kernel.org>:
+> On Mon, Nov 24, 2025 at 06:02:37PM +0100, Radim Kr=C4=8Dm=C3=A1=C5=99 wro=
+te:
+>> 2025-11-21T11:50:50-08:00, Drew Fustini <fustini@kernel.org>:
+>> > On Thu, Nov 20, 2025 at 08:25:44PM +0100, Radim Kr=C4=8Dm=C3=A1=C5=99 =
+wrote:
+>> >> 2025-11-19T16:42:19-08:00, Drew Fustini <fustini@kernel.org>:
+>> >> > +static void riscv_cbqri_cc_realize(DeviceState *dev, Error **errp)
+>> >> > +{
+>> >> > +    RiscvCbqriCapacityState *cc =3D RISCV_CBQRI_CC(dev);
+>> >> > +
+>> >> > +    if (!cc->mmio_base) {
+>> >> > +        error_setg(errp, "mmio_base property not set");
+>> >> > +        return;
+>> >> > +    }
+>> >> > +
+>> >> > +    assert(cc->mon_counters =3D=3D NULL);
+>> >> > +    cc->mon_counters =3D g_new0(MonitorCounter, cc->nb_mcids);
+>> >> > +
+>> >> > +    assert(cc->alloc_blockmasks =3D=3D NULL);
+>> >> > +    uint64_t *end =3D get_blockmask_location(cc, cc->nb_rcids, 0);
+>> >> > +    unsigned int blockmasks_size =3D end - cc->alloc_blockmasks;
+>> >> > +    cc->alloc_blockmasks =3D g_new0(uint64_t, blockmasks_size);
+>> >> > +
+>> >> > +    memory_region_init_io(&cc->mmio, OBJECT(dev), &riscv_cbqri_cc_=
+ops,
+>> >> > +                          cc, TYPE_RISCV_CBQRI_CC".mmio", 4 * 1024=
+);
+>> >>=20
+>> >> Shouldn't the region size take cc->ncblks into account?
+>> >> (A bitmask for 2^16 ids is 8kB.)
+>> >
+>> > cc_block_mask field is BMW / 8. In the case of NCBLKS of 12 and NCBLKS
+>> > of 16, both end up with a BMW of 64 which would be 8 bytes. I think th=
+e
+>> > the only reason the allocation is 4KB is that is meant to be aligned t=
+o
+>> > the page size. Otherwise, the capacity controller register layout is
+>> > pretty small.
+>>=20
+>> I understood NCBLKS as the amount of bits in the capacity bitmask, and
+>> NCBLKS in encoded in a 16 bit field, which means up to 65536 bits.
+>> Is there a lower limit?
+>
+> Ah, yes, thank you for correcting me. NCBLKS can be 2^16 therefore BMW
+> can be 8 KB:=20
+>
+> x =3D 65536
+> x +=3D 63 =3D> 65599
+> x /=3D 64 =3D> 1024
+> x *=3D 64 =3D> BMW is 65536 bits
+> cc_block_mask =3D BMW/8 =3D 8192 bytes
+>
+> This would yield capacity register layout:
+>
+> cc_capabilities	8
+> cc_mon_ctl	8
+> cc_mon_ctr_val	8
+> cc_alloc_ctl	8
+> cc_block_mask	8192
+> cc_cunits	8
+>
+> Thus I think the mmio size would need to be: (BMW/8) + 40
+>
+> In the max NCBLKS case, that would be 8,232 bytes. I am wondering if
+> that a problem as it would not be aligned on a 4 KB page boundary. Do
+> you think that would be a problem?
 
+memory_region_init_io will handle it, and I think it is actually better
+to specify the exact size.
 
-On 11/23/25 10:56 PM, Chao Liu wrote:
-> On Tue, 11 Nov 2025 15:29:42 -0300, Daniel Henrique Barboza wrote:
->> From: Fei Wu <wu.fei9@sanechips.com.cn>
->>
->> The RISC-V Server Platform specification [1] defines a standardized set
->> of hardware and software capabilities, that portable system software,
->> such as OS and hypervisors can rely on being present in a RISC-V server
->> platform.
->>
->> We do not have all the required extensions in QEMU: we're missing
->> 'sdext'. In theory we shouldn't go ahead with this work, but the
->> emulation as is now is proving to be useful for development and testing
->> of other parts of the SW stack (firmware, kernel) and we would like to
->> make it broadly available to everyone. We're contributing it as
->> 'experimental', hopefully making it clear that the board does NOT
->> complies 100% with [1].
->>
->> The main features included in this emulation are:
->>
->> - Based on riscv virt machine type
->> - A new memory map as close as virt machine as possible
->> - A new virt CPU type rvsp-ref-cpu for server platform compliance
->> - AIA
->> - PCIe AHCI
->> - PCIe NIC
->> - No virtio device
->> - No fw_cfg device
->> - No ACPI table provided
->> - Only minimal device tree nodes
->>
->> [1] https://github.com/riscv-non-isa/riscv-server-platform
->>
->> Signed-off-by: Fei Wu <fei2.wu@intel.com>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->> configs/devices/riscv64-softmmu/default.mak |    1 +
->> hw/riscv/Kconfig                            |   14 +
->> hw/riscv/meson.build                        |    1 +
->> hw/riscv/server_platform_ref.c              | 1276 +++++++++++++++++++
->> 4 files changed, 1292 insertions(+)
->> create mode 100644 hw/riscv/server_platform_ref.c
->>
->> diff --git a/configs/devices/riscv64-softmmu/default.mak
-> b/configs/devices/riscv64-softmmu/default.mak
->> index e485bbd1a3..e6075a7113 100644
->> --- a/configs/devices/riscv64-softmmu/default.mak
->> +++ b/configs/devices/riscv64-softmmu/default.mak
->> @@ -9,6 +9,7 @@
->> # CONFIG_SIFIVE_E=n
->> # CONFIG_SIFIVE_U=n
->> # CONFIG_RISCV_VIRT=n
->> +# CONFIG_SERVER_PLATFORM_REF=n
->> # CONFIG_MICROCHIP_PFSOC=n
->> # CONFIG_SHAKTI_C=n
->> # CONFIG_XIANGSHAN_KUNMINGHU=n
->> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
->> index fc9c35bd98..6a5085c7a5 100644
->> --- a/hw/riscv/Kconfig
->> +++ b/hw/riscv/Kconfig
->> @@ -69,6 +69,20 @@ config RISCV_VIRT
->>      select ACPI
->>      select ACPI_PCI
->>
->> +config SERVER_PLATFORM_REF
->> +    bool
->> +    default y
->> +    depends on RISCV64
->> +    select RISCV_NUMA
->> +    select GOLDFISH_RTC
->> +    select PCI
->> +    select PCI_EXPRESS_GENERIC_BRIDGE
->> +    select PFLASH_CFI01
->> +    select SERIAL
->> +    select RISCV_ACLINT
->> +    select RISCV_APLIC
->> +    select RISCV_IMSIC
->> +
->> config SHAKTI_C
->>      bool
->>      default y
->> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
->> index 2a8d5b136c..0daf77e887 100644
->> --- a/hw/riscv/meson.build
->> +++ b/hw/riscv/meson.build
->> @@ -4,6 +4,7 @@ riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
->> riscv_ss.add(files('riscv_hart.c'))
->> riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
->> riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
->> +riscv_ss.add(when: 'CONFIG_SERVER_PLATFORM_REF', if_true:
-> files('server_platform_ref.c'))
->> riscv_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
->> riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
->> riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
->> diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
->> new file mode 100644
->> index 0000000000..ef2891a9d7
->> --- /dev/null
->> +++ b/hw/riscv/server_platform_ref.c
->> @@ -0,0 +1,1276 @@
->> +/*
->> + * QEMU RISC-V Server Platform (RVSP) Reference Board
->> + *
->> + * Copyright (c) 2024 Intel, Inc.
->> + * Copyright (c) 2025 Ventana Micro Systems Inc.
->> + *
->> + * This board is compliant RISC-V Server platform specification and leveraging
->> + * a lot of riscv virt code.
->> + *
->> + * This work is licensed under the terms of the GNU GPL, version 2 or later.
->> + * See the COPYING file in the top-level directory.
->> + */
->> +
->> +#include "qemu/osdep.h"
->> +#include "qemu/units.h"
->> +#include "qemu/error-report.h"
->> +#include "qemu/guest-random.h"
->> +#include "qapi/error.h"
->> +#include "qapi/qapi-visit-common.h"
->> +#include "hw/boards.h"
->> +#include "hw/loader.h"
->> +#include "hw/sysbus.h"
->> +#include "hw/qdev-properties.h"
->> +#include "hw/char/serial.h"
->> +#include "hw/block/flash.h"
->> +#include "hw/ide/pci.h"
->> +#include "hw/ide/ahci-pci.h"
->> +#include "hw/pci/pci.h"
->> +#include "hw/pci-host/gpex.h"
->> +#include "hw/core/sysbus-fdt.h"
->> +#include "hw/riscv/riscv_hart.h"
->> +#include "hw/riscv/boot.h"
->> +#include "hw/riscv/numa.h"
->> +#include "hw/intc/riscv_aclint.h"
->> +#include "hw/intc/riscv_aplic.h"
->> +#include "hw/intc/riscv_imsic.h"
->> +#include "chardev/char.h"
->> +#include "hw/char/serial-mm.h"
->> +#include "system/device_tree.h"
->> +#include "system/runstate.h"
->> +#include "system/system.h"
->> +#include "system/tcg.h"
->> +#include "system/qtest.h"
->> +#include "target/riscv/cpu.h"
->> +#include "target/riscv/pmu.h"
->> +#include "net/net.h"
->> +
->> +#define RVSP_CPUS_MAX_BITS             9
->> +#define RVSP_CPUS_MAX                  (1 << RVSP_CPUS_MAX_BITS)
->> +#define RVSP_SOCKETS_MAX_BITS          2
->> +#define RVSP_SOCKETS_MAX               (1 << RVSP_SOCKETS_MAX_BITS)
->> +
->> +#define RVSP_IRQCHIP_NUM_MSIS 255
->> +#define RVSP_IRQCHIP_NUM_SOURCES 96
->> +#define RVSP_IRQCHIP_NUM_PRIO_BITS 3
->> +#define RVSP_IRQCHIP_MAX_GUESTS_BITS 3
->> +#define RVSP_IRQCHIP_MAX_GUESTS ((1U << RVSP_IRQCHIP_MAX_GUESTS_BITS) - 1U)
->> +
->> +#define FDT_PCI_ADDR_CELLS    3
->> +#define FDT_PCI_INT_CELLS     1
->> +#define FDT_APLIC_INT_CELLS   2
->> +#define FDT_IMSIC_INT_CELLS   0
->> +#define FDT_MAX_INT_CELLS     2
->> +#define FDT_MAX_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
->> +                                 1 + FDT_MAX_INT_CELLS)
->> +#define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
->> +                                 1 + FDT_APLIC_INT_CELLS)
->> +
->> +#define NUM_SATA_PORTS  6
->> +
->> +#define SYSCON_RESET     0x1
->> +#define SYSCON_POWEROFF  0x2
->> +
->> +#define TYPE_RVSP_REF_MACHINE MACHINE_TYPE_NAME("rvsp-ref")
->> +OBJECT_DECLARE_SIMPLE_TYPE(RVSPMachineState, RVSP_REF_MACHINE)
->> +
->> +struct RVSPMachineState {
->> +    /*< private >*/
->> +    MachineState parent;
->> +
->> +    /*< public >*/
->> +    Notifier machine_done;
->> +    RISCVHartArrayState soc[RVSP_SOCKETS_MAX];
->> +    DeviceState *irqchip[RVSP_SOCKETS_MAX];
->> +    PFlashCFI01 *flash[2];
->> +
->> +    int fdt_size;
->> +    int aia_guests;
->> +    const MemMapEntry *memmap;
->> +};
->> +
->> +enum {
->> +    RVSP_DEBUG,
->> +    RVSP_MROM,
->> +    RVSP_RESET_SYSCON,
->> +    RVSP_RTC,
->> +    RVSP_ACLINT,
->> +    RVSP_APLIC_M,
->> +    RVSP_APLIC_S,
->> +    RVSP_UART0,
->> +    RVSP_IMSIC_M,
->> +    RVSP_IMSIC_S,
->> +    RVSP_FLASH,
->> +    RVSP_DRAM,
->> +    RVSP_PCIE_MMIO,
->> +    RVSP_PCIE_PIO,
->> +    RVSP_PCIE_ECAM,
->> +    RVSP_PCIE_MMIO_HIGH
->> +};
->> +
->> +enum {
->> +    RVSP_UART0_IRQ = 10,
->> +    RVSP_RTC_IRQ = 11,
->> +    RVSP_PCIE_IRQ = 0x20, /* 32 to 35 */
->> +};
->> +
->> +/*
->> + * The server soc reference machine physical address space used by some of the
->> + * devices namely ACLINT, APLIC and IMSIC depend on number of Sockets, number
->> + * of CPUs, and number of IMSIC guest files.
->> + *
->> + * Various limits defined by RVSP_SOCKETS_MAX_BITS, RVSP_CPUS_MAX_BITS, and
->> + * RVSP_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization of server soc
->> + * reference machine physical address space.
->> + */
->> +
->> +#define RVSP_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT)
->> +#if RVSP_IMSIC_GROUP_MAX_SIZE < \
->> +    IMSIC_GROUP_SIZE(RVSP_CPUS_MAX_BITS, RVSP_IRQCHIP_MAX_GUESTS_BITS)
->> +#error "Can't accomodate single IMSIC group in address space"
->> +#endif
->> +
->> +#define RVSP_IMSIC_MAX_SIZE            (RVSP_SOCKETS_MAX * \
->> +                                        RVSP_IMSIC_GROUP_MAX_SIZE)
->> +#if 0x4000000 < RVSP_IMSIC_MAX_SIZE
->> +#error "Can't accomodate all IMSIC groups in address space"
->> +#endif
->> +
->> +static const MemMapEntry rvsp_ref_memmap[] = {
->> +    [RVSP_DEBUG] =          {        0x0,         0x100 },
->> +    [RVSP_MROM] =           {     0x1000,        0xf000 },
->> +    [RVSP_RESET_SYSCON] =   {   0x100000,        0x1000 },
->> +    [RVSP_RTC] =            {   0x101000,        0x1000 },
->> +    [RVSP_ACLINT] =         {  0x2000000,       0x10000 },
->> +    [RVSP_PCIE_PIO] =       {  0x3000000,       0x10000 },
->> +    [RVSP_APLIC_M] =        {  0xc000000, APLIC_SIZE(RVSP_CPUS_MAX) },
->> +    [RVSP_APLIC_S] =        {  0xd000000, APLIC_SIZE(RVSP_CPUS_MAX) },
->> +    [RVSP_UART0] =          { 0x10000000,         0x100 },
->> +    [RVSP_FLASH] =          { 0x20000000,     0x4000000 },
->> +    [RVSP_IMSIC_M] =        { 0x24000000, RVSP_IMSIC_MAX_SIZE },
->> +    [RVSP_IMSIC_S] =        { 0x28000000, RVSP_IMSIC_MAX_SIZE },
->> +    [RVSP_PCIE_ECAM] =      { 0x30000000,    0x10000000 },
->> +    [RVSP_PCIE_MMIO] =      { 0x40000000,    0x40000000 },
->> +    [RVSP_DRAM] =           { 0x80000000, 0xff80000000ull },
->> +    [RVSP_PCIE_MMIO_HIGH] = { 0x10000000000ull, 0x10000000000ull },
-> The base address of RVSP_PCIE_MMIO_HIGH exceeds the 39-bit address space, while
-> the satp mode of the rvsp-ref-cpu is SV39 (based on the RVA23S64).
-> 
-> static RISCVCPUProfile RVA23S64 = {
->      .u_parent = &RVA23U64,
->      .s_parent = &RVA22S64,
->      .name = "rva23s64",
->      .misa_ext = RVS,
->      .priv_spec = PRIV_VERSION_1_13_0,
->      .satp_mode = VM_1_10_SV39, /* there */
->      ...
-> }
-> 
-> This will cause an error when EDKII processes the address mapping of PCI MMIO,
-> but I am not yet sure whose issue this is.
-> 
-> I suggest setting the default value of satp_mode for rvsp-ref-cpu to SV48.
-
-So, in the latest spec, section 2.1 RISC-V Harts:
-
-https://github.com/riscv-non-isa/riscv-server-platform/releases/download/v0.9-rc3/riscv-server-platform.pdf
-
-There's a set of "rules" that each hart should or can follow. Rule RVA_010 states:
-
-"The RISC-V application processor harts in the SoC MUST support the RVA23S64 ISA
-profile [6]."
-
-The next rule, RVA_020:
-
-"The RISC-V application processor harts in the SoC MUST support the following
-extensions:
-- Sv48
-- Sdtrig [7]
-- Sdext [7]
-- Zkr
-- Ssccfg
-- Ssstrict [6]
-- Ssaia [8]"
-
-
-I take it that the wording used, **MUST**, indicates that RVA_020 is mandatory so we should
-in fact support sv48. In this case we can change the default to sv48 without problems
-
-
-Drew, is this a fair interpretation? Thanks,
-
-
-Daniel
-
-
-> 
-> Thanks,
-> Chao
-> 
-
+Thanks.
 
