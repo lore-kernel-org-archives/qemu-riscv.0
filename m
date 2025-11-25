@@ -4,100 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54AC3D0E6C1
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 10:29:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 615E7D0E6C4
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 10:55:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vNqId-0003bm-Ut; Tue, 25 Nov 2025 05:29:32 -0500
+	id 1vNqh6-0003cl-Rp; Tue, 25 Nov 2025 05:54:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqIE-0003LD-8z
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:29:12 -0500
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqh1-0003TI-Iu
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:54:43 -0500
+Received: from mail-wr1-x441.google.com ([2a00:1450:4864:20::441])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqIB-0005lx-4K
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:29:05 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-42b32900c8bso3070205f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 02:29:02 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNqgy-0001Ob-27
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 05:54:43 -0500
+Received: by mail-wr1-x441.google.com with SMTP id
+ ffacd0b85a97d-42b2dc17965so5060843f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 25 Nov 2025 02:54:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764066541; x=1764671341; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=FOtq6FkTjjV4xqPH8MCZhBCC4A3ygFQQRD95vDYNiQk=;
- b=Y1ThCxNNk+zh3BvwgbqRwh0g3KcWoNqFlG2FguHQ1oy3sDzZMsoXuF3btB5Hr3BEn3
- 9yQYXVJb0s/PS//yqdVlJtldxIYtUs5JEi5KfvdYjSe0ZS2+7QjpCp044IXl40uJ+KFr
- inUjcySZSwpytTJd/+R8C04YCIQXd+sHcdX9sronq30B3FhvfrnFWAdOqOZFnG7wgQyD
- JNhIDa2N2GjdsvlDhAo/gwtV9kep4O6KvjCEOy/jmTszqvs6zI7AGAB7wPPbmT/rE2mY
- HnNfv+tlvuAZXBK6wQh4tjBW7oxO8EslbXP6bjBAs7FGpvqEE0xL042yN/9eFgO2No2D
- ZMZQ==
+ d=linaro.org; s=google; t=1764068076; x=1764672876; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Jfyijvl1JFPahxbivQxrrAGa5h/+4fXCl7qTUyuB64s=;
+ b=Z2ytID3XEq5wrX9W0qoX5GTwR2C6BSaLNfgqhgGdUpVH3vOnSlVUYQcGMQKjVvgzPn
+ ntvCYByGSyZYHyYZXm3SMbrGtXzfn7RIDFUHW4m+6GL6HXKExthNv8cMeQO6aC2EpVxR
+ 8nWWIQ1627aEQJVc6d2migzMwN5a+Uh9vCEZllCm+pCqXYFjEKZrU2esVDs49rVWlN+l
+ FcMJrZOlANNZfnIWyLyr98r1SamYM2dYMi0QI/7BChOTdVM8vjhXnL2ukDY7tUTbUyrj
+ WQRVnqXSP6rXHPy5NLJcsBhysJLfi0zMzEF8KZrGBR62JTnGXNcRJ1CS4PYBWjfHRPc/
+ TKEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764066541; x=1764671341;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FOtq6FkTjjV4xqPH8MCZhBCC4A3ygFQQRD95vDYNiQk=;
- b=D77Lh4O/O4FNKyxNfmRlC62zoBXcLGYhKGd2jD24MIe8/KcngNwUldWv49BMpEvfNE
- UiBBDpU2mO4gjKXUVutnAhHAxSo5NK6lbk7XOMMGC0nYVqJLAHvX8Dkv6oORtUI3fXwe
- si31uUjYlObBkVu99aIHYRFoU5tKV3KdB8I4v7wVsHXzZDnspeE2RBBPRCB+4cZKH42R
- xaMv/m1bQy4imJ68QtI3BCqiAB02UJJwkodMVA/smNVX1I3Nx00IWXeX2iaBpal5XNf7
- PHrCP/B+y6TSSSAmftxQh52L7noItNngIohXcRtc8LAvtR41rbNRhHi5TVfvWbLqPybX
- lABw==
+ d=1e100.net; s=20230601; t=1764068076; x=1764672876;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Jfyijvl1JFPahxbivQxrrAGa5h/+4fXCl7qTUyuB64s=;
+ b=XlT3Kt39/lqbeGyL/TdhomTNvLk6fYMXOu55vSP7g+VwxtAGRotTn+cWHUoNMdjtPT
+ p0kngk2E2euyFl/FhfgQb5U4gcFRQwpYsal5SlLU33WLjssB25H/GoRqWl6qN12Rt66L
+ mZd69pAjVhqPWiPzSunKtlAHh4mQlRH8/zPuqCr7bLJvyBYyA+FRVMzp6RpCwmsu0NUo
+ 3Y7CvuvD1px6KQxYvDfIklK6IohmasvpXqjSGtHaTbxubKKQ/9svIO9+Db3snxEDU8t+
+ GzAaR2XoaFkN4RO6G2TCxsRhOPQXmal5K917L6p/e6ad3PpPdcLicdrerKfusxwv9vln
+ 1rHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU98W3N4FhzzJEhsZXPR88aJWF83ZjIzJtY9T3djx4y9LYM5jHXZqui6OEF+qYTtpAw9djIuuNLzld0@nongnu.org
-X-Gm-Message-State: AOJu0Yy49V7Qb+fG+GtR3MeGsHMrKU9wA+K2whRWJhWFe9adikFX/x32
- EFajMfsUgPrCldhlVafzdIAjpec0ZFx3akqkOTtHcoE8D4Fqo/MPGuHinTDiTd8VyoQ=
-X-Gm-Gg: ASbGncv40iBEN9MRdzaD9Wp/aIuslqXUzkxx9/3iXSEiAJkxM1bsUp4xIlvGPltmmpj
- 21xzg+iadlF20ISa2u6Tzo1zw1xITBGPhSHQkKZjPa2AFz0+Tbe+XrtU0lQLTvUc0YChqknfD53
- gYjxP/UML9Ke4WIUHckAR0gC1R3OdKNU5X4Xg8VcBlhTeYamQCbrjlulyQqwtTRkh1sYGZlH4pu
- KQIHC0TS/DqG8L+YsyOk+TAvL1q0PzuZwZQjBPQHngGPo+8uCOwh8FZI9zapBu/IAr3AjBX6Z2H
- EnJ/obkby9NIY2LU5+i4PG/XxBLl1uuP3gp6Z3I16icTfE7SifqVkoekRC8+38Ik890JrfpJ2RR
- gxNkF8Bpxl3vCoEQJtX+muw/XlFPnGcWWlj31iHeECvebLlfasyV/d6SN0ysSA0R0TFL5Odzjn0
- dN8Hx1Uu1JJ/lXS3erm6pnKkY3O1zWQu5SFRk0NOLykNjCNaJK/MaNtQ==
-X-Google-Smtp-Source: AGHT+IEbJeTrLY46fCznAtjfXdYPHTUtYeQtitUWoI1YXftLHuYFMPldzZFqKU9cjG8M/We/w9d/JA==
-X-Received: by 2002:a5d:588b:0:b0:42b:411b:e487 with SMTP id
- ffacd0b85a97d-42cc1cd920amr16516595f8f.2.1764066541445; 
- Tue, 25 Nov 2025 02:29:01 -0800 (PST)
-Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
+ AJvYcCX+TmZhwpzLNMK+BuRoVlhR40O2vGm8PpE53ydOOSBH9AJiqN4K8oVwAEjpOy/7u6I3XGGZnV14aMp+@nongnu.org
+X-Gm-Message-State: AOJu0Yyb0ETMaJBiv96MavQd97HHAZthaWBxHE2BjJoHr1j+eoShoghC
+ pFMhWBb4a2JCc/yEpYw5qQeOhM5rbNDLWQDr45bmH3y8zebZLEI3jMwZL1CIE4urHDN5x0zEIr+
+ TOf9dFeGyILOg
+X-Gm-Gg: ASbGncvZPkD1tS54LsoHDA+q56D5jJSMWlZMbXnVE/eTmp6znP1h4cdiBin6AwYjCcd
+ rGAeK+nt+9iJmg9JVuR80IG7GiXjWtyQ0wpD9EDvxGrpHdpyG3wurfZd1kTi8y5JTOJfVpjZ35T
+ k7RseF0HMVZBB0FTB4A4Hsn0/UOAQFSfXrJsbMyCji5EGYSrVFRaubiByI7j2zy/SYg6/uVSoGN
+ 36xrYQjvmrvZCDBgZin7JD07jXs6mUEB4hpOlCtNtVqtuIQFoO57UmAdfpJJtjX9EQbDfg5cZJL
+ gmIbDw3JTt1F1el1xUJFmhVnHMr1SxCIa3OFCURrkQsiEb0sXfxAU219yCbtxy4ISbAtVUTLd7N
+ V6pF/Kzh/N82R0RZXCR+1tCSg+JxBWAgAj8HSoUU58RpyVfmcL6pLD/mwMWdVUuZdS9RP6x6Bp+
+ 8N/ZOYW/g78BGwytzM4udwfk75A8M4cfDdlNFJxFJje0E9CVyjc8kzjQbWvv3l
+X-Google-Smtp-Source: AGHT+IERb9JX2msGUhosBK7KYnxgaVzJeCNqY8/qwfS0VTZe5M/yJxvfuGH+GR0rR4EcCKGJXvCyMA==
+X-Received: by 2002:a05:6000:22ca:b0:42b:30a6:9c10 with SMTP id
+ ffacd0b85a97d-42cc1d22e12mr16261013f8f.56.1764068076531; 
+ Tue, 25 Nov 2025 02:54:36 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7fb9190sm33346517f8f.33.2025.11.25.02.28.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Nov 2025 02:29:00 -0800 (PST)
-Message-ID: <9922cb86-5c48-464f-a811-05a7a4b4a9cb@linaro.org>
-Date: Tue, 25 Nov 2025 11:28:58 +0100
+ ffacd0b85a97d-42cb7fb8a29sm34188178f8f.30.2025.11.25.02.54.35
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 25 Nov 2025 02:54:35 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH-for-11.0 00/12] accel/tcg: Remove most MO_TE uses in
+ cpu_ld/st_data()
+Date: Tue, 25 Nov 2025 11:54:21 +0100
+Message-ID: <20251125105434.92355-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/15] qga: Use error_setg_file_open() for better error
- messages
-Content-Language: en-US
-To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
-Cc: arei.gonglei@huawei.com, zhenwei.pi@linux.dev, alistair.francis@wdc.com,
- stefanb@linux.vnet.ibm.com, kwolf@redhat.com, hreitz@redhat.com,
- sw@weilnetz.de, qemu_oss@crudebyte.com, groug@kaod.org, mst@redhat.com,
- imammedo@redhat.com, anisinha@redhat.com, kraxel@redhat.com,
- shentey@gmail.com, npiggin@gmail.com, harshpb@linux.ibm.com,
- sstabellini@kernel.org, anthony@xenproject.org, paul@xen.org,
- edgar.iglesias@gmail.com, elena.ufimtseva@oracle.com, jag.raman@oracle.com,
- sgarzare@redhat.com, pbonzini@redhat.com, fam@euphon.net, alex@shazbot.org,
- clg@redhat.com, peterx@redhat.com, farosas@suse.de, lizhijian@fujitsu.com,
- dave@treblig.org, jasowang@redhat.com, samuel.thibault@ens-lyon.org,
- michael.roth@amd.com, kkostiuk@redhat.com, zhao1.liu@intel.com,
- mtosatti@redhat.com, rathc@linux.ibm.com, palmer@dabbelt.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, marcandre.lureau@redhat.com,
- qemu-block@nongnu.org, qemu-ppc@nongnu.org, xen-devel@lists.xenproject.org,
- kvm@vger.kernel.org, qemu-riscv@nongnu.org
-References: <20251121121438.1249498-1-armbru@redhat.com>
- <20251121121438.1249498-6-armbru@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20251121121438.1249498-6-armbru@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::441;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x441.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -120,22 +102,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 21/11/25 13:14, Markus Armbruster wrote:
-> Error messages change from
-> 
->      open("FNAME"): REASON
-> 
-> to
-> 
->      Could not open 'FNAME': REASON
-> 
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Reviewed-by: Dr. David Alan Gilbert <dave@treblig.org>
-> Reviewed-by: Kostiantyn Kostiuk <kkostiuk@redhat.com>
-> ---
->   qga/commands-linux.c | 11 ++++++-----
->   1 file changed, 6 insertions(+), 5 deletions(-)
+Still trying to remove MO_TE uses, here looking at cpu_ld/st_data()
+in fixed-endianness targets.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Series split of bigger one [*] where Richard made a comment on
+*_code() patches. Since not related to *_data() uses, post separetely
+since almost ready (still few PPC/MIPS paths to update, but I'd rather
+check if this is heading in the correct direction before looking at
+them).
+
+[*] https://lore.kernel.org/qemu-devel/20251121134503.30914-1-philmd@linaro.org/
+
+Philippe Mathieu-Daudé (12):
+  target/hexagon: Use little-endian variant of cpu_ld/st_data*()
+  target/tricore: Use little-endian variant of cpu_ld/st_data*()
+  target/rx: Use little-endian variant of cpu_ld/st_data*()
+  target/m68k: Use little-endian variant of cpu_ld/st_data*()
+  target/s390x: Use little-endian variant of cpu_ld/st_data*()
+  target/sparc: Use little-endian variant of cpu_ld/st_data*()
+  target/i386: Use little-endian variant of cpu_ld/st_data*()
+  target/hppa: Use little-endian variant of cpu_ld/st_data*()
+  target/riscv: Use little-endian variant of cpu_ld/st_data*() for
+    vector
+  target/sh4: Replace cpu_stl_data() by explicit endianness variants
+  target/mips: Use big-endian variant of cpu_ld/st_data*() for MSA
+  accel/tcg: Remove non-explicit endian cpu_ld/st*_data*() helpers
+
+ include/accel/tcg/cpu-ldst.h         |  46 --------
+ target/hexagon/macros.h              |   6 +-
+ target/i386/ops_sse.h                |  12 +--
+ target/i386/tcg/seg_helper.h         |  12 +--
+ linux-user/vm86.c                    |   4 +-
+ target/hexagon/op_helper.c           |   6 +-
+ target/hppa/op_helper.c              |  44 ++++----
+ target/i386/tcg/mem_helper.c         |   8 +-
+ target/i386/tcg/mpx_helper.c         |  28 ++---
+ target/i386/tcg/seg_helper.c         |  16 +--
+ target/i386/tcg/system/excp_helper.c |   8 +-
+ target/i386/tcg/system/svm_helper.c  |  48 ++++-----
+ target/m68k/fpu_helper.c             |  12 +--
+ target/m68k/op_helper.c              |  88 ++++++++--------
+ target/mips/tcg/msa_helper.c         |  51 +++++----
+ target/riscv/vector_helper.c         |  12 +--
+ target/rx/helper.c                   |  14 +--
+ target/rx/op_helper.c                |   6 +-
+ target/s390x/tcg/mem_helper.c        |  48 ++++-----
+ target/s390x/tcg/vec_helper.c        |   8 +-
+ target/sh4/op_helper.c               |   6 +-
+ target/sparc/ldst_helper.c           |   6 +-
+ target/tricore/op_helper.c           | 152 +++++++++++++--------------
+ 23 files changed, 305 insertions(+), 336 deletions(-)
+
+-- 
+2.51.0
 
 
