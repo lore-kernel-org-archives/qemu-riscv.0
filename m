@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 156E5CFD315
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 06:15:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E2C7CFD315
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Nov 2025 06:17:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1vNmL6-0004VF-B7; Tue, 25 Nov 2025 01:15:48 -0500
+	id 1vNmMZ-0005U4-M4; Tue, 25 Nov 2025 01:17:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNmL3-0004Ti-Kw
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 01:15:45 -0500
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNmML-0005Ow-Ix
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 01:17:07 -0500
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNmL2-0001vY-28
- for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 01:15:45 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-42b566859ecso4493895f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 24 Nov 2025 22:15:42 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1vNmMI-00029q-Gm
+ for qemu-riscv@nongnu.org; Tue, 25 Nov 2025 01:17:04 -0500
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-477ba2c1ca2so53517595e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 24 Nov 2025 22:17:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764051341; x=1764656141; darn=nongnu.org;
+ d=linaro.org; s=google; t=1764051421; x=1764656221; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=0f/9Y7JR60Swip/dFOGxc5iPJjQDRvPRSNeJxakP8wk=;
- b=HcOd4FK431JVDzh8QNCqgpEhZ8lPc8Zh5xfuYaIAZrlsFQ8T3ZL00XoZbP/8TtaC5j
- UXqiQM1Uv8/pvCbsqg7Yjgqoux+0bOoLiJ4I6mVEKTWWmV6fXTGtEDwNuGcFcndikbg0
- N4VG9R4EJQ3GWQeNz8Z5wasQZbDb0lnrYiMMt3JlsdhGKZMQ0cvNzQ6JJCzgze/3XLT8
- fycFZrozf7w68+U7ElKtu7jagRaVoDf5amvYdoOQfa3h/WnlCME7MmKV6bBbYSQnkShq
- 8124bqh0sDB9aeUF0uJVKXNnJoZuwb1nmhGPZfyuFHMUc0YHOtLRDqwX+mOZ4mbo/IIG
- YgQg==
+ bh=PPPfFfN/KUZJSdg4GVyykKSiNQuZspsjOUrb6Yk6o8M=;
+ b=kGOCEXHM3TYp0E6HTc0cK+Vpl+V7iFmBK6G6a7ctfvkjkgJkr72PV+bTAJlNgm9UOq
+ TSd7QaVN6Sd58LmaDK14CHsGeVsbYkmnMnYlhafB6T87OonvMQCRxHHgNhOT516aX8si
+ EghmP8kp7/oRD2HEkkRpxAM/fIZL8u+SH/mG9CB1BAaXMA6XwiOHvdKSmUrtWrJJuEU+
+ 9CiDrHR/Mj3hfQKxSYV43Nd+9yUOD1oE09AvhV9jyG2Aja/45RgyT1OkJUXenwUzLtf8
+ QiXA7ffcT4YmOmJkj3cAqNwwV9IwdMtYYtx3agRGreJVcj5hkXPGqQjzcWvpk7esIoib
+ 7cMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764051341; x=1764656141;
+ d=1e100.net; s=20230601; t=1764051421; x=1764656221;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0f/9Y7JR60Swip/dFOGxc5iPJjQDRvPRSNeJxakP8wk=;
- b=BKQwSXteCC3PD9xr3h1eqpJ8aFQn8DFB0JyOPWDf/4fE+o54eNHZE770Lo6o9iDYTv
- 03baFGrlD3TvH9qbngz1FgpZkFl0ihQ3dCfHW+ymfVLWDmG7+QoJoiCayg1D2cVMsmh8
- +41x9AlPsAo3EuIHzGa52qhDrHtzchyo8gyj2J/IbPg96006BwRoM8ofu6TiJ4JP+cmf
- Luu9zWolMWiqk2RrQEAKVIEGS5fUq3x3UvR8TW5n6OWMl3Rf75VZrYcZzeAmt7Qdpzz8
- BP7XIL6nP+YEMScOcNjosLYsQaChqceZoF5sfT2FE6UrknbGTFjkmQkgEmmcAgG9/ogN
- VwIA==
+ bh=PPPfFfN/KUZJSdg4GVyykKSiNQuZspsjOUrb6Yk6o8M=;
+ b=cB/9Q/0s0vZBxu7TnJtlvODvmwXEJx/yihXnM1r6PACk0IYIAloJfYlqvrjDxjwuE2
+ Q5stRtT2ZeLFw43uS5BDyQsI/edhutcaL3llGQX+RHt3U0z5fcjirB1pqPwsz/a/ACSs
+ P+QUc9+y0XBH9G5tf5Zq/NcuCxIKZTwlj0UAmWbM5LkAzAMTr2ryCV+lu4iSKrBGxeIQ
+ g90AY/jGLG4iU23/+phUZo7KWRZ5cmKjJR64X2va+zhlkz6m/jDfIwJk3sfxhTGO0Rml
+ J7CjoPOnpcAJ0etIRUh9igNgQASU+eMXgYoZvpN8UhCwH9n4tbY0nDfB6BjeriP6o42O
+ jYYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUNbecoJ+ON9l72ICY0Qh+sNxAZAMNDjMS13yAqUcodncAX1Oe+ZzDiQSHBOqgrOd8TK12logDkAwbI@nongnu.org
-X-Gm-Message-State: AOJu0YzkARISxXgVgEEHNsqrBBo9CmPOY9l6Yqws2+AzfyCsI/xuPXIp
- bKy7pJDc0p6JSd8Pdq/21vU+uvmXJu6hKMqFlamnRWy2gQDjQeP1g+l910rMWjiBg1Q=
-X-Gm-Gg: ASbGncs+G2s12+Vfdku/B2pbmdHpZadb5lezLL5szUY66ehBoeMoAhVEiDgXImgAHL0
- qWW45awjuR9/fcHlI4/qdMMsLE/cz09txES+nHukf3RJKXimIPiVH9rpc7phXC9k+20VCoo2vIy
- Y8UBr+GselOkGCYEM6OdAhP5ULP7NvamGkm9virsba7Z8O50/oW+nPdG0fGdPguGzyINV09bc5L
- gs3L1cwPc6mq1hW/GmjmZb0AcYyG/Jsj0CzJMyA0f2E/Es/Mvn392OeklVzvJNzDaj5xdez2lJX
- ttaDIuxU9sDF5ALcz7SOPo/ecsKNaTWGd5ZG2xlvCOvvibkdo2XblnJh3CM6mtDygCNpTmzmF3E
- tsGZiCZSixSNVdbrpLfNzuTJwyx7OPoTfH+OP8datMStkK0r+8tesQJQNAnkidF8SthnhUZaPEC
- hrpTHDphaDUL+xqOIDqje3yQKkjkB/ClROQyUxpbB6TjqEs1yoBYK6kQ==
-X-Google-Smtp-Source: AGHT+IHZNFdwNkAyt39hw1XEKeec2HDhjScGvIOI1PKKSdFRbVG0BYsnK8PrGv30KDcQUn6wPGJ2MA==
-X-Received: by 2002:a05:6000:4028:b0:42b:3366:632a with SMTP id
- ffacd0b85a97d-42e0f355caamr1135311f8f.39.1764051341155; 
- Mon, 24 Nov 2025 22:15:41 -0800 (PST)
+ AJvYcCVX9yf1N5skrXNy9I/habA5xUklVWyJLEnZKVZFIX3J0IIKuQix/Ka8ljvnntorddaXeKxH2aUtNyl8@nongnu.org
+X-Gm-Message-State: AOJu0Yw+v6VV8IgClVcFkLcCNdDTS5/Yn22f3Qb9mFg1ZH5hFufl/mff
+ 8saCi6Q+E97grrqKXCqTWOGslCKg9mdKhOXynekA2kwEwWyIYY+CsnEPxTwra/Xf6go=
+X-Gm-Gg: ASbGncsDAPpMgaRTwH/N6xA2GAoAUVFb1GdnZ6I0mWeEvWdEsA/K1yfpgE1tfJyTZVN
+ eErM105Or6rtsp6mXOHptchHOUVF2HBOKfUxaVdEVAH94sA8WWlQM8Huip7PN2araTQF4U/3UEM
+ +jXpsOG28ygOXRgnnPZRb2RAXr6kj8ROW/OSorULivi8UgrGvvAOzDFjDW+6TMQ0NBUFHvyqwod
+ TVMbXJio2hP87cTi6+eKljCHmEBGzEhEjhLa47oXOgZamNP1WhHgSS0SI7NcutwO7JN3UkQWUd3
+ GtrjdgwbbshWeOijzIOWHM7m1UGCJFrSq6sAzJCzleqCLchsGfFqg8zDjEHJW7ffYbviSISOuhU
+ idIbUrhUJqeNrzyWOmB1GSIcqP5rZaigTiApE8Ns4OjbAtgrpMPY+1cxr8onT52/kO/fuZuvAx0
+ rGXfmq7BPt+osQll3LXzj9qMktGDrXPaFnUPpsa+fQKGdJNscuH/mqgg==
+X-Google-Smtp-Source: AGHT+IEZ8yeE/n/51O0eDQmUGk/RzXgmUxX0n0wP7TPhPNjZtJBLXLV0NRiL/n6XCwlWTPrAzRjq6A==
+X-Received: by 2002:a05:600c:8b37:b0:477:76bf:e1fb with SMTP id
+ 5b1f17b1804b1-47904b1ab30mr12560125e9.16.1764051420782; 
+ Mon, 24 Nov 2025 22:17:00 -0800 (PST)
 Received: from [192.168.69.210] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7f2e574sm32156895f8f.3.2025.11.24.22.15.38
+ 5b1f17b1804b1-477bf3aef57sm221641805e9.11.2025.11.24.22.16.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Nov 2025 22:15:40 -0800 (PST)
-Message-ID: <7984cbbd-905e-4e03-84fa-1cc2a1261a80@linaro.org>
-Date: Tue, 25 Nov 2025 07:15:37 +0100
+ Mon, 24 Nov 2025 22:17:00 -0800 (PST)
+Message-ID: <fed0991f-0ad8-4da4-a182-1bd0c7ec6b9f@linaro.org>
+Date: Tue, 25 Nov 2025 07:16:57 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/15] error: Strip trailing '\n' from error string
- arguments (again)
+Subject: Re: [PATCH v2 04/15] tap-solaris: Use error_setg_file_open() for
+ better error messages
 Content-Language: en-US
 To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
 Cc: arei.gonglei@huawei.com, zhenwei.pi@linux.dev, alistair.francis@wdc.com,
@@ -91,13 +91,13 @@ Cc: arei.gonglei@huawei.com, zhenwei.pi@linux.dev, alistair.francis@wdc.com,
  qemu-block@nongnu.org, qemu-ppc@nongnu.org, xen-devel@lists.xenproject.org,
  kvm@vger.kernel.org, qemu-riscv@nongnu.org
 References: <20251121121438.1249498-1-armbru@redhat.com>
- <20251121121438.1249498-2-armbru@redhat.com>
+ <20251121121438.1249498-5-armbru@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20251121121438.1249498-2-armbru@redhat.com>
+In-Reply-To: <20251121121438.1249498-5-armbru@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,13 +121,24 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 21/11/25 13:14, Markus Armbruster wrote:
-> Tracked down with scripts/coccinelle/err-bad-newline.cocci.
+> Error messages change from
+> 
+>      Can't open /dev/ip (actually /dev/udp)
+>      Can't open /dev/tap
+>      Can't open /dev/tap (2)
+> 
+> to
+> 
+>      Could not open '/dev/udp': REASON
+>      Could not open '/dev/tap': REASON
+> 
+> where REASON is the value of strerror(errno).
 > 
 > Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> Reviewed-by: Dr. David Alan Gilbert <dave@treblig.org>
 > ---
->   hw/audio/es1370.c | 2 +-
->   ui/gtk.c          | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
+>   net/tap-solaris.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
