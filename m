@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECDD4CD5BD5
-	for <qemu-riscv@archiver.kernel.org>; Thu, 28 May 2026 20:07:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4A4FCD5BD5
+	for <qemu-riscv@archiver.kernel.org>; Thu, 28 May 2026 20:13:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wSh16-0000PA-AS; Thu, 28 May 2026 16:07:44 -0400
+	id 1wSh6r-00020p-6S; Thu, 28 May 2026 16:13:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSh12-0000Nr-LF
- for qemu-riscv@nongnu.org; Thu, 28 May 2026 16:07:40 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSh6q-00020O-5I
+ for qemu-riscv@nongnu.org; Thu, 28 May 2026 16:13:40 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSh11-000687-4y
- for qemu-riscv@nongnu.org; Thu, 28 May 2026 16:07:40 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-43fe608cb92so8120179f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 28 May 2026 13:07:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSh6n-000807-3h
+ for qemu-riscv@nongnu.org; Thu, 28 May 2026 16:13:39 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-49041e84237so57325965e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 28 May 2026 13:13:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779998857; x=1780603657; darn=nongnu.org;
+ d=linaro.org; s=google; t=1779999215; x=1780604015; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=/Uz+8CZ/iT5Ihn09Fq2+YPM68NPvOTLdQvf3rxAK89I=;
- b=INBSMOks7hAfqL/67RmOrk56ViOQ0KHtYabQeeVQrxCrGUdUWUJ3F05RSHNEUdxU14
- Xr7R7Bkvi00/IsXXR5JYkQMwJ152C3r2bz5Z8lgBzYgplIkRRTgaO5WH3ydY5Rw/hdV0
- YXD2hPu24SGyAKKTUZirW6dvfCtU6HpKIxmW7MBjuEghnLzoY+fMn43KsDrx1QHbnULw
- +vHAnkMbHdtjCra09YzGrFJGaL6xZYNdgovYgiNHesUxhT2eqm9xI8JWBG3khs88BDYi
- u6ojNg6NpzlCWf5m7H2zgTZ5zAdxnqjeCUQHxXdmFs1gMnf4Ly9nV5JAzbydGmDHxhMX
- zccg==
+ bh=IajTlBHwPTt/Tp1vL2OQG0W56LP4BolHd4GcTegZ2v0=;
+ b=FBBCx4WpDNxNll9thhaV0DBFiZoKJ4BkTxDcqqXcG4XxMDBmqW3px0SjMABmOLugsW
+ 1w7Si73u/jskITws8HtJ2TbwVF5F1MoSbjJBx3zzE7ozNLsvmrCdvfpCuStdjrFmaNfs
+ 7o3op4fk1JaHVbBkYCv0POuh7RaIIsezZt+3GcptfEDiGZVneeGGb03Rm0obRDMmx7+Q
+ yM+Z+h+jYBTGpOojVRYsun7xFpMvyD5CJBml9I9mz51J78pbMmkuhGapHiB738G+sz8N
+ R401dfTbmvKJzbjNnlTJPBqCmgJcNYAbrjeD+/qwklkLdDJxCok3l47QpM+o7LOp6VPF
+ xzxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779998857; x=1780603657;
+ d=1e100.net; s=20251104; t=1779999215; x=1780604015;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/Uz+8CZ/iT5Ihn09Fq2+YPM68NPvOTLdQvf3rxAK89I=;
- b=oKr9P3BDxt5d6gPsA9gkf32MRqoghRGdMATiCsm5GGTjq3PlBfsF9TFz5yWa23EJhD
- 8paNM3qauqowSj7Ng0XSr0a72hWpBRXthQA9nxPbIpge2HFL6VvTpll8vIvFsLlHSr6y
- 8LfVUt/J5bY4Pfu1n6+Rw5FO5PSDomE93gqftzPRI1KDa35BEzuwJdHzSw8uO2DPtRDh
- ntgbwcNdLKsL36IfzuQikNEf+lrwQC9vEBA1kFPgPVHEL7ZM7ZRl4vMPxhgoQsdNvrPL
- TBfza2meh896IV+S2IETSeJGXTob5arOfjKSs4J7FsZrSp+fUHJ7aDGdqzWMX4OU6X1i
- X1Hg==
-X-Gm-Message-State: AOJu0YwF3uRmpzp2K1g/XQ3y/K4ffqWmVkFcRIKSoTOKVxAbj9U2nbwi
- V/V4ljyTo0Mw11Ug2q25eXWj2tBIqo0lI6GcsAD10JNG4Dwz0fkLn3+/DhmXn3xZcjQL17BVhD5
- ibkrIFOBUnQ==
-X-Gm-Gg: Acq92OFGvGfYBOR4wVD1oB2EL+eiIYjglQPW7YBuFuwWsGNwRx9NROcnN7zkbRir/r5
- /hfXBkLMwr4dGD04n0QNF0uFOwYJA7va7Y9EealvPkuzIvCKh7Zj53a4Fcekwt/W8c4IPDCswAt
- 0b+iGV0UreqYGHBqpYHTPXYqpokfph8U+saGJNBTr4EuNoZuCsBwQ6IGjqe5FQqFu3OSf5VSrfS
- YklfhqNJ8gtoK3pD1/zPU8WizksFVEA2/rcf+KdfmC2ypbVrSCxTy4EJ4YVjZO6xMVIN7C9WzKe
- eYi2+nguo4Gxj9HhZgvKG3+nCG0hcUXDboL74+wspasZFLlREOIop+kLLPoz089GbPVeSIpD77K
- H4V9Y8oSHqyg/XKRMdyvj9rxwuTbja20JYJo36XVycOegO3VUxNxZ/ZDAwtphc1Cgap5G9Bu1eg
- NsYsD21yHAv2rSzcW0LKagRwzQW0HHdJ9JGzk3bAGkmWM94GPqxLnLMs9bQEXr3FJVliTySIlbA
- pKY
-X-Received: by 2002:a5d:6946:0:b0:45e:739c:f187 with SMTP id
- ffacd0b85a97d-45ef05e2054mr726089f8f.22.1779998857370; 
- Thu, 28 May 2026 13:07:37 -0700 (PDT)
+ bh=IajTlBHwPTt/Tp1vL2OQG0W56LP4BolHd4GcTegZ2v0=;
+ b=YJyUrLgWrpqv998RvLplTVHS7p/wWqmyU3l/gBy7/MeAdjLmqftpAFHB5DSXygwOYM
+ yxY+YysfHrUeHDliIzlVpj3sFViIOfLnk0On5IzvtedCQb09DpGHM0vDL32OlGLMVpMO
+ FcgwvAMNBm6BIrGsCBeHuy7y8641VLLlrZa7TyZyGaLLkbUD/IIAu8WYuyrn4BvHBY+e
+ 8Bnypd68kaHSW9nXm52X74DxjJv+2F6jRpZVu3gcxWZbZYIe4ov8K9MKEaNCC+HcEkIN
+ DP/PnyKPKMhdztiR1Ecy82X4uoJwHSVztU+UuI9L9vIpeeZu6Hhd+ET8acPZwgCaT6Uq
+ 7nEg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/D61ByJkBtndQwJCOP1wi0K73BUUGsowApL+BMzIPyCc2S+Wsa7pOSS1zUFI8sU4Wj/e0+PDoNBZbZ@nongnu.org
+X-Gm-Message-State: AOJu0Yz4GbKiewOjN9npNAWgSJUlQW7l8dedv9XAD3r5aOXwOYIDQQH7
+ 8g0LgC0Q9DzyzEAuOK4LTYYTCwFRD4i4ydzorGKmYVZOf8342LO4AY9OI7NnDg65y9o=
+X-Gm-Gg: Acq92OGI/6jTs+qoPBoyIjJ2vp1ibuDZkHUO4DyUV51WfYlXyl/OzKnBOPIyuDv4rlC
+ j6bEk6i/cOIAfU/HO5vjxKjLg9xuS1voXLRvHOyWYVBjPRz7juq7Sp9vlbbU1usov9s5qSD70kN
+ I5dWkzNzYQQ6BG//P7/DHwj6R9eprO3jt9jeyG4LJQdTU5bzf6SgXuysgx3Md5HuHWUyBvNoumE
+ InnODC5/BE8EkINEkCvzZScPhohvjPZETgRE/2PdSfXx/3bSYSXtwiwdr/XOaEDY7F9nHTNIcVn
+ kaWZF/njGtY8GhaR6mNzXsOPkuN8UTYP9pHUZ22AlU2nc5hvixqyugDdL5ZayVAEtH+0ufTB/r5
+ n53BG7J6kc/4B/EtCqGmTqmStLlwU+bK8MG5cyvNZA98PrBwDPIBdi+9Jk9luKP6E5GgnQv5Y9s
+ xvS1A36E+TYoa9FSOl30qszOyiszu2jgMC6cS8A9TdiJp7V+YbVJ7ja5JRViYKJQOqPcgT/Ieh7
+ j03
+X-Received: by 2002:a05:600c:6a84:b0:490:3cf0:8d81 with SMTP id
+ 5b1f17b1804b1-4909c087135mr94915e9.13.1779999214757; 
+ Thu, 28 May 2026 13:13:34 -0700 (PDT)
 Received: from [192.168.69.207] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45edb5b1a28sm15553600f8f.26.2026.05.28.13.07.35
+ 5b1f17b1804b1-49092654d10sm59928175e9.6.2026.05.28.13.13.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 May 2026 13:07:36 -0700 (PDT)
-Message-ID: <b58a8c8d-79bb-47cc-8c5b-764e4675a34d@linaro.org>
-Date: Thu, 28 May 2026 22:07:34 +0200
+ Thu, 28 May 2026 13:13:33 -0700 (PDT)
+Message-ID: <ea220eb7-5fca-4510-a784-81226a0f5e29@linaro.org>
+Date: Thu, 28 May 2026 22:13:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 02/12] target/riscv: Implement runtime data endianness
- via MSTATUS bits
+Subject: Re: [PATCH v11 03/12] target/riscv: Assert PTE.N/PBMT bits are not
+ expected on RV32
 Content-Language: en-US
-To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Djordje Todorovic
- <Djordje.Todorovic@htecgroup.com>, Anton Johansson <anjo@rev.ng>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ qemu-riscv@nongnu.org, Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
+ Anton Johansson <anjo@rev.ng>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Christoph Muellner <christoph.muellner@vrull.eu>
 References: <20260527201348.29511-1-philmd@linaro.org>
- <20260527201348.29511-3-philmd@linaro.org>
- <09c45039-110e-4fe5-b799-f4c33d545c3e@oss.qualcomm.com>
+ <20260527201348.29511-4-philmd@linaro.org>
+ <200e1664-a690-4fe7-bda3-074da046e311@oss.qualcomm.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <09c45039-110e-4fe5-b799-f4c33d545c3e@oss.qualcomm.com>
+In-Reply-To: <200e1664-a690-4fe7-bda3-074da046e311@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,44 +113,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 28/5/26 21:18, Pierrick Bouvier wrote:
-> On 5/27/2026 1:13 PM, Philippe Mathieu-Daudé wrote:
->> From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
+On 28/5/26 22:01, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 5/27/2026 5:13 PM, Philippe Mathieu-Daudé wrote:
+>> PTE_N and PTE_PBMT are undefined on RV64, assert we are not
+>> under RV32.
 >>
->> Make data accesses honour the MSTATUS MBE/SBE/UBE endianness bits
->> instead of being hardcoded to little-endian. Update mo_endian_env()
->> to pick the bit corresponding to the current privilege level (MBE
->> for M, SBE for S, UBE for U). Remove the now unused mo_endian()
->> helper.
->>
->> Note, TB_FLAGS has no free bits, so the data endianness is carried
->> in the extended RISC-V TB flags stored in cs_base. It uses
->> EXT_TB_FLAGS.BIG_ENDIAN at bit 33, leaving bit 32 for
->> EXT_TB_FLAGS.ALTFMT. This keys TBs correctly on the current data
->> endianness.
->>
->> Instruction fetches remain MO_LE unconditionally; RISC-V instructions
->> are always little-endian per the ISA specification. Update the
->> disassembler comment to clarify that BFD_ENDIAN_LITTLE is correct.
->>
->> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
->> Co-developed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> 
+> I didn't find this info in the RV priv ISA.  Can you please quote the
+> except it in the commit msg?
+> 
+> Maybe you meant "undefined on RV32"?
+
+Yes :)
+
 >> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 >> ---
->>   target/riscv/cpu.h         |  1 +
->>   target/riscv/internals.h   | 29 +++++++++++++++++++++--------
->>   target/riscv/cpu.c         |  7 ++-----
->>   target/riscv/tcg/tcg-cpu.c |  2 ++
->>   target/riscv/translate.c   | 15 ++-------------
->>   5 files changed, 28 insertions(+), 26 deletions(-)
+>>   target/riscv/cpu_helper.c | 2 ++
+>>   1 file changed, 2 insertions(+)
 >>
+>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>> index 17305e1bb75..f86bfdb32e7 100644
+>> --- a/target/riscv/cpu_helper.c
+>> +++ b/target/riscv/cpu_helper.c
+>> @@ -1490,6 +1490,7 @@ static int get_physical_address(CPURISCVState 
+>> *env, hwaddr *physical,
+>>           return TRANSLATE_FAIL;
+>>       }
+>>       if (!pbmte && (pte & PTE_PBMT)) {
+>> +        assert(riscv_cpu_sxl(env) != MXL_RV32);
 > 
-> Patch 1 makes more sense with this one, but order is not too important.
+> 
+> What I understood from the RV priv ISA w.r.t PTE_PMBT is that it doesn't
+> have much to do with SXLEN/riscv_cpu_sxl().  PTE_PBMT is a bits 62|61 field
+> that determine override mem attributes when we have the 'svpbmt' extension
+> enabled.  'svpbmt' is dependent on satp_mode sv39 or greater, which happens
+> to be riscv64 only.
+> 
+> I didn't see any restrictions of SXLEN=32 in the 'svpbmt' chapter in the
+> RISC-V ISA, e.g. PTE_PMBT set to a non-zero val and SXLEN=32 seems to be
+> a valid combo - a riscv64 target running sv39+ can use svpbmt to override
+> PTE properties in a SXLEN=32 context.
 
-I can reword the previous patch, amending something like "This will
-allow next commit to change mo_endian() in a single place".
+It was hard to figure that out by myself.
+
+
+> Now, PTE_PBMT is not writable when MXLEN=32 (i.e. riscv_cpu_mxl() == 
+> MXL_RV32),
+> and maybe this is what you're trying to do.
+
+Yes.
+
+>  In this case the assert might
+> be justifiable, although we just landed a recent fix in Alistair's tree
+> that disables svpbmt for riscv32 entirely, and this also means that
+> PTE_PBMT won't ever be set.  But if the assert (with MXL, not SXL) would 
+> give
+> some sort of guarantee aside from the bit being set, by all means go ahead.
+
+I'll wait to see that merged before revisiting. This patch is not
+required for this series, I was trying to make sense of this huge
+function while reviewing it.
+
+>>           /* Reserved without Svpbmt. */
+>>           qemu_log_mask(LOG_GUEST_ERROR, "%s: PBMT bits set in PTE, "
+>>                         "and Svpbmt extension is disabled: "
+>> @@ -1643,6 +1644,7 @@ static int get_physical_address(CPURISCVState 
+>> *env, hwaddr *physical,
+>>       target_ulong vpn = addr >> PGSHIFT;
+>>       if (riscv_cpu_cfg(env)->ext_svnapot && (pte & PTE_N)) {
+>> +        assert(riscv_cpu_sxl(env) != MXL_RV32);
+> 
+> 
+> All the stuff I said above happens to be applicable for PTE_N.  This is 
+> a bit
+> that indicates if the PTE represents a "naturally aligned power-of-2" 
+> range,
+> or NAPOT range, and this is specified by another extension called 
+> 'svnapot'.
+> This extension is also sv39+ exclusive, which means riscv64 exclusive, 
+> and it
+> doesn't seem to have any restrictions with SXLEN=32.
+
+OK. Let's discard this patch :)
 
 > 
-> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+> 
+> Thanks,
+> Daniel
+> 
+>>           napot_bits = ctzl(ppn) + 1;
+>>           if ((i != (levels - 1)) || (napot_bits != 4)) {
+>>               return TRANSLATE_FAIL;
+> 
 
 
