@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B181CD6E50
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 14:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18E2BCD6E50
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 14:29:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wSyA2-0005Y5-PY; Fri, 29 May 2026 10:26:06 -0400
+	id 1wSy9U-00043m-1O; Fri, 29 May 2026 10:25:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSy9z-0005Su-OE
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 10:26:03 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSy9S-0003ze-Jj
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 10:25:30 -0400
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSy9w-0002ty-F7
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 10:26:03 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-48a563e4ef7so99093125e9.0
- for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 07:25:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSy9P-0002fK-Vj
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 10:25:30 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-490426d72f7so71388455e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 07:25:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780064759; x=1780669559; darn=nongnu.org;
+ d=linaro.org; s=google; t=1780064726; x=1780669526; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P59p3YW/AQDnYqwHW3EKNEj9nqZIetNGrubj5RXjTq8=;
- b=BgduVFOCpdgQLyUluQhyJkPN9VYbJOwwB/G37mUZIF/Q5RzdyUg6VV0d9j/iSrtCp3
- FNxDaGdG5zD9i1sC+qktE8Dy/7VuiBn3CJTJrv5CWSv0ltAnMYUawWnU5Vyu3oPDDRMT
- L3WCmv/AX1ON26hrwqIjNviAGMwTlTF+fTQLK51NXSFrrwMQkSYC/dm+/enBOZ8M7AEa
- u31nLaVaRSmxn7wpje32etUclq48rKkIlyk/RlocgSFMknwbnIHSdf8mgFsQymymsQP8
- raBSHNOnsdT0LgloXZqQ3YK7zD1ND2TpfwXPZ67044+VvqgyE3fLdxMu0+IHSDz21F9l
- CjOg==
+ bh=Bh2neLmp2yCN+no5zdf9s1S1CTB1NaAAPjqIYQpJDXU=;
+ b=jv05KxeGCGgxY/643LjsMcSgKTuJqq9BooyT09yfEKcyXQtJkriDseh4jOuqiEoilb
+ KKgyXW/pUQ7lga3/+eBYVTV/uSqvmlYsO+YkxCiHuH0TJwK0njCg1j000Kg9YhUWDnIW
+ UFs4s2InFPp6b+blXW2R+uXRJg71JPe133b1EFC0fUqCPUdjI1JO+ga7TndF06X07Ug4
+ KKvEdiWu/7ZRpfWyhoVLU1jXhBkSAl5tsU2g/zkaZ9i3/xfhQ7aq4KWCTbiIp2U8iKU4
+ gQSwrDTSk2Lik1mkh2qa8IYbciNqUdlyo29oBvqTF4rN6x5chqoVCowIn7TOApZdbKnu
+ RrYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780064759; x=1780669559;
+ d=1e100.net; s=20251104; t=1780064726; x=1780669526;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=P59p3YW/AQDnYqwHW3EKNEj9nqZIetNGrubj5RXjTq8=;
- b=YKeNNC+Dm1utWh559BlgFd22YP2jJNvIFuxTkMseEO6vhmenL57gz7gRdVE8rABNIx
- rVvDCfgjfT6TGz5u4Z5FnWKo4bzHCnzfqsT8Wv8fZkxfxQVPclSMiYTq97dncj7YezPP
- b6xLv9MKBX1N61QbllBGq4ZGX/ky0jaUDOxiQqnqF1MPDx6VwcSmoLgBfJoK8IVIc3it
- JYUi0XTcl3Th4LT2oKvM/Yk72KwNfz/bVQoCbrRejqL3QnRxgm0F5Z8nSf5l2WF41gfo
- aeTcQoYq2nSZCwSLh6ojsHTDFexlDk3TyCaN77QXDGCNbkXlvoUye203diGDtzpCFUqt
- Aluw==
+ bh=Bh2neLmp2yCN+no5zdf9s1S1CTB1NaAAPjqIYQpJDXU=;
+ b=hb1QEB/xIAGxH8Od7J1zeIsrwtfqaszMo6p0ayAsGrspTL0zyWg+OvEU1alcFuvez6
+ hq3LNB9fWJa8GSJVVxBWaXNWekkN2ZUdbxxX1UpIjEBZAgfJUcNpu2P6c3CyrY8+5K0H
+ JuMjZHvijuis1NyKeoH3UiyXKoO+Pk3vJj5nWiY83zSOMafPC2B3+Vf9ZQ/YhVKeet+4
+ 3h+C5WB3tyDQag7l5eX2yM2L5Bqm7hCQT8mTH14vQSICD2hxni/G61hYx3u04aikfS4M
+ GOupuztVepz0GLKVCFmJvqkl390YPIt1W1nM+qq/ehQLBBMCpVbx22SK/Qlh3fBT2isZ
+ E/SA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/XGj1tWVyqCfTfzIqqQbXsoau6c3ZaGo5jmh6VIThsHSf6pS+HzVAOFd8rtJ2XtVrQRT4MqleupdW7@nongnu.org
-X-Gm-Message-State: AOJu0YyiurzJUZn2ZTi+IwsjN3v/Zn5ARM5m49PkIBGwULKaNBxOfByr
- ikW/+oAX4Lr1P1hxSUbsXz2rxovT4+nfdzromtMDTDj41ZM6GHWig4bLq7kbNWv/J3A=
-X-Gm-Gg: Acq92OH/yoU1ivJ7Tkz1X6utMjhAVctr0xH6njl4HRnL96JtZcXC4GKYt3KHc1/xzHN
- viXWu3Mjiq2x8xo5IvMhVCqLr/oxtSuEKBW4FjJZiJwpu7QmiCz/k8cd+300jtHlvlps6Al4DNZ
- KIIxzky9p8jBmsHMTCv+u7ga2/n2ssHVkMIQ7GI5mvdBX8jJkA9b19HeXZzA5BUoEC5lmNv6pRE
- /2EwOc0nPgxjTqcsuyMssUNH9nHQqFRdhR3c4VyO+GheMuqN0UnIyib/hFvTdbenqtuWBp2W768
- s4CJIA7D6f3zGMYw1+r0C9OHy52xBlP9Xm/IIK4mSOdLTWOn96zeXAf4A8qlDwPpQ5hK0tNbzq9
- WnGqpfVHxVLNqr6oTN/5gqsGapv55lKFl0HETilX4SWwgJNpaqiBqAdb8zjddkBl8SvDR5J9HJR
- i/7mzsCj9GcBbCPX6TD7yEcZpCm45E1DSuTUf7GuzQY0EesVwcmVRmRP3nk5re/aid1g==
-X-Received: by 2002:a05:600c:c0d2:10b0:48e:7854:1608 with SMTP id
- 5b1f17b1804b1-4909c0b34e3mr43174675e9.25.1780064758692; 
- Fri, 29 May 2026 07:25:58 -0700 (PDT)
+ AFNElJ9nBlD4auXJ6AuBno7anbrkYMgnIIOxanUzpekz/eOIqZ/qH1cee0EfRmD13VpYc2eK5lp9MGuMTbu5@nongnu.org
+X-Gm-Message-State: AOJu0YxOfC60yMzLIIHrx6EfEOdpWQIqxu8gVuEVJwE3wBGMe5a+JtEr
+ t6tT7R6Bu1OB9iI8UJXsT1fpsVEjIqo8OWRMl21L+VsZxTIWlnmTfE/hT/ns4OSi9JY=
+X-Gm-Gg: Acq92OErh9x80PBp3u9xKjFmbmRR8TGPt2W+NabhokIU6C+I7Cbmii6fDVo/x9Tag5o
+ Wq2YA1LJuw2p+N4MvaSJ/ZyNRxmFb4r0sJgIi4msWWfBYy01ej/3V9dPZ9yytzGX+olIf9c93zh
+ yCb+EhyURKU2PZ/izSVju16pDCJ1Q6Zib1kAKcLpcV16fEoKXC7PLpWThwDzN8DF41sIe3cv5Ab
+ diXlGpBzNlHdSmhV8UAoHHHtCJFOzn794FwPAgoY65AMSkE+FKHWvOtBOkxV3jHSyzZvReg5taf
+ wEOG3ifPRzAceqM2kpRFl6JahjWyJjNjUbvJTeWWnzqsKM+i4ybnN2yPC3azl3biFV4Ou2vJfCe
+ jNwtWc9lUfovwBh0721CgtMrmNqsx8SnvPcULwmIeoulZs7T2Zjqonk12YcBJFqXg+nGjLZLvbN
+ lXIT58hUmRRG3lwi0OeUc5XR079ZaLzJ1c93E/wMfKaySSl9CCiuY/kxgQ0TrLbKUtUSJg/92Ek
+ 7Gj
+X-Received: by 2002:a05:600c:c04b:20b0:490:3cb4:f1b3 with SMTP id
+ 5b1f17b1804b1-4909c0ba682mr43032785e9.16.1780064726422; 
+ Fri, 29 May 2026 07:25:26 -0700 (PDT)
 Received: from m15.home (88-187-86-199.subs.proxad.net. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4909d6eb4acsm42435095e9.9.2026.05.29.07.25.56
+ 5b1f17b1804b1-4909d7002e8sm55832855e9.15.2026.05.29.07.25.23
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 29 May 2026 07:25:58 -0700 (PDT)
+ Fri, 29 May 2026 07:25:25 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Reinoud Zandijk <reinoud@netbsd.org>,
@@ -87,25 +88,25 @@ Cc: Reinoud Zandijk <reinoud@netbsd.org>,
  Chinmay Rath <rathc@linux.ibm.com>,
  Mohamed Mediouni <mohamed@unpredictable.fr>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 10/17] accel/kvm: Convert AccelCPUClass ->
- AccelOpsClass::cpu_instance_init
-Date: Fri, 29 May 2026 16:24:26 +0200
-Message-ID: <20260529142434.87880-11-philmd@linaro.org>
+Subject: [PATCH 06/17] accel: Introduce AccelOpsClass::cpu_instance_init
+ handler
+Date: Fri, 29 May 2026 16:24:22 +0200
+Message-ID: <20260529142434.87880-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260529142434.87880-1-philmd@linaro.org>
 References: <20260529142434.87880-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,136 +122,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Expose kvm_arch_cpu_instance_init() and register it as generic
-AccelOpsClass::cpu_instance_init hook.
-
-Both X86 / RISCV's ACCEL_CPU_NAME("kvm") TypeInfo are now empty,
-remove them.
+accel_cpu_instance_init() currently dispatch via target specific
+AccelCPUClass which we want to remove. Introduce a similar hook
+in the generic AccelOpsClass structure.
+We will convert implementations from one struct to the other, so
+add an assertion to be sure only one implementation at a time.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/system/kvm.h       |  1 +
- accel/kvm/kvm-accel-ops.c  |  1 +
- target/i386/kvm/kvm-cpu.c  | 22 +---------------------
- target/riscv/kvm/kvm-cpu.c | 23 +----------------------
- 4 files changed, 4 insertions(+), 43 deletions(-)
+ include/accel/accel-cpu-ops.h |  1 +
+ accel/accel-common.c          | 10 +++++++++-
+ 2 files changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/include/system/kvm.h b/include/system/kvm.h
-index fd7175ea9f5..2c31fa6019e 100644
---- a/include/system/kvm.h
-+++ b/include/system/kvm.h
-@@ -364,6 +364,7 @@ int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp);
- int kvm_arch_init_vcpu(CPUState *cpu);
- int kvm_arch_destroy_vcpu(CPUState *cpu);
+diff --git a/include/accel/accel-cpu-ops.h b/include/accel/accel-cpu-ops.h
+index fd1307dad6d..9810cc27cd2 100644
+--- a/include/accel/accel-cpu-ops.h
++++ b/include/accel/accel-cpu-ops.h
+@@ -34,6 +34,7 @@ struct AccelOpsClass {
+     /* initialization function called when accel is chosen */
+     void (*ops_init)(AccelClass *ac);
  
-+void kvm_arch_cpu_instance_init(CPUState *cpu);
- bool kvm_arch_cpu_realize(CPUState *cpu, Error **errp);
++    void (*cpu_instance_init)(CPUState *cpu);
+     bool (*cpu_realize)(CPUState *cpu, Error **errp);
+     bool (*cpus_are_resettable)(void);
+     void (*cpu_reset_hold)(CPUState *cpu);
+diff --git a/accel/accel-common.c b/accel/accel-common.c
+index 176b03e0e90..b3bcd53a4c6 100644
+--- a/accel/accel-common.c
++++ b/accel/accel-common.c
+@@ -39,7 +39,15 @@ void accel_init_interfaces(AccelClass *ac)
  
- #ifdef TARGET_KVM_HAVE_RESET_PARKED_VCPU
-diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
-index 4294c7a9514..113a23f2384 100644
---- a/accel/kvm/kvm-accel-ops.c
-+++ b/accel/kvm/kvm-accel-ops.c
-@@ -97,6 +97,7 @@ static void kvm_accel_ops_class_init(ObjectClass *oc, const void *data)
-     AccelOpsClass *ops = ACCEL_OPS_CLASS(oc);
- 
-     ops->create_vcpu_thread = kvm_start_vcpu_thread;
-+    ops->cpu_instance_init = kvm_arch_cpu_instance_init;
-     ops->cpu_target_realize = kvm_arch_cpu_realize;
-     ops->cpu_thread_is_idle = kvm_vcpu_thread_is_idle;
-     ops->cpus_are_resettable = kvm_cpus_are_resettable;
-diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
-index 36634ec8929..6d93b50248c 100644
---- a/target/i386/kvm/kvm-cpu.c
-+++ b/target/i386/kvm/kvm-cpu.c
-@@ -16,7 +16,6 @@
- #include "hw/i386/x86.h"
- 
- #include "kvm_i386.h"
--#include "accel/accel-cpu-target.h"
- 
- static void kvm_set_guest_phys_bits(CPUState *cs)
+ void accel_cpu_instance_init(CPUState *cpu)
  {
-@@ -207,7 +206,7 @@ static void x86_cpu_change_kvm_default(const char *prop, const char *value)
-     assert(pv->prop);
+-    if (cpu->cc->accel_cpu && cpu->cc->accel_cpu->cpu_instance_init) {
++    AccelState *accel = current_accel();
++    AccelClass *acc = ACCEL_GET_CLASS(accel);
++
++    if (acc->ops && acc->ops->cpu_instance_init) {
++        if (cpu->cc->accel_cpu) {
++            assert(!cpu->cc->accel_cpu->cpu_instance_init);
++        }
++        acc->ops->cpu_instance_init(cpu);
++    } else if (cpu->cc->accel_cpu && cpu->cc->accel_cpu->cpu_instance_init) {
+         cpu->cc->accel_cpu->cpu_instance_init(cpu);
+     }
  }
- 
--static void kvm_cpu_instance_init(CPUState *cs)
-+void kvm_arch_cpu_instance_init(CPUState *cs)
- {
-     X86CPU *cpu = X86_CPU(cs);
-     X86CPUClass *xcc = X86_CPU_GET_CLASS(cpu);
-@@ -232,22 +231,3 @@ static void kvm_cpu_instance_init(CPUState *cs)
- 
-     kvm_cpu_xsave_init();
- }
--
--static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
--{
--    AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
--
--    acc->cpu_instance_init = kvm_cpu_instance_init;
--}
--static const TypeInfo kvm_cpu_accel_type_info = {
--    .name = ACCEL_CPU_NAME("kvm"),
--
--    .parent = TYPE_ACCEL_CPU,
--    .class_init = kvm_cpu_accel_class_init,
--    .abstract = true,
--};
--static void kvm_cpu_accel_register_types(void)
--{
--    type_register_static(&kvm_cpu_accel_type_info);
--}
--type_init(kvm_cpu_accel_register_types);
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 7c4440d0025..b8e08d810a8 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -32,7 +32,6 @@
- #include "system/kvm_int.h"
- #include "cpu.h"
- #include "trace.h"
--#include "accel/accel-cpu-target.h"
- #include "hw/pci/pci.h"
- #include "exec/memattrs.h"
- #include "system/address-spaces.h"
-@@ -1981,7 +1980,7 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
-     kvm_msi_via_irqfd_allowed = true;
- }
- 
--static void kvm_cpu_instance_init(CPUState *cs)
-+void kvm_arch_cpu_instance_init(CPUState *cs)
- {
-     Object *obj = OBJECT(RISCV_CPU(cs));
- 
-@@ -2108,26 +2107,6 @@ void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-     kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
- }
- 
--static void kvm_cpu_accel_class_init(ObjectClass *oc, const void *data)
--{
--    AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
--
--    acc->cpu_instance_init = kvm_cpu_instance_init;
--}
--
--static const TypeInfo kvm_cpu_accel_type_info = {
--    .name = ACCEL_CPU_NAME("kvm"),
--
--    .parent = TYPE_ACCEL_CPU,
--    .class_init = kvm_cpu_accel_class_init,
--    .abstract = true,
--};
--static void kvm_cpu_accel_register_types(void)
--{
--    type_register_static(&kvm_cpu_accel_type_info);
--}
--type_init(kvm_cpu_accel_register_types);
--
- static const TypeInfo riscv_kvm_cpu_type_infos[] = {
-     {
-         .name = TYPE_RISCV_CPU_HOST,
 -- 
 2.53.0
 
