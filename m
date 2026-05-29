@@ -4,137 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F38CD6E4A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 13:40:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC18CD4F54
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 14:25:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wSxQm-0006v7-3x; Fri, 29 May 2026 09:39:20 -0400
+	id 1wSy8p-0003Ov-Sv; Fri, 29 May 2026 10:24:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wSxQj-0006uX-0T
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 09:39:17 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wSxQh-0004OX-92
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 09:39:16 -0400
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 64TDKpID1202095
- for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 13:39:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- eqLKTMoRsKLQgoSRd5utjONT413qeJGEMK1P59WVr6c=; b=MxJsuI/kvso9dTZo
- c1L9/JQvoesZ090SnsYzN1Scb68wt80edV1HNVp84HL1MuqkywbZhmywrQ3bHFfY
- kHL/jYqgbrlLls1Fru7ZOjKPBWTEqlPaVtVJB71DqD1PS+oOhFiL5jwKLfcTW1de
- b9HAK9rgvuOFQg7Y8xOadnex8l/TTDIa0CFEMFgAOwpM4YYqWUiijQATF/DI/+C8
- oqgJPEtDZnCsnPLHm022JLKGEquIWSm4gHya5VuiA4HCSwNlwP+Ywnt/YBsmkFzs
- WYgiyFVAktHXgJiRqS6YGz7G4s/vjOSyzpsL9T4Y9BQv9BiDuTZRSNOjnerKWqxq
- SbM0vA==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ef3te24yn-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 13:39:10 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-90cbd806004so2831813685a.0
- for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 06:39:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSy8n-0003NM-Uk
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 10:24:49 -0400
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wSy8l-0002HE-86
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 10:24:49 -0400
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48a563e4ef7so99085715e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 07:24:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780061950; x=1780666750; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=eqLKTMoRsKLQgoSRd5utjONT413qeJGEMK1P59WVr6c=;
- b=VKRUi1SZGSFaDTiA2U077VyOiLNAhah14EoO8Iyb0PgjoHLVQR3zGCWpwuACC3X7OU
- KAzUhHGXCcupWbFxxdIsvYuV7ybTAWqg1E3upZfrn+cLwCAykTOetS3EvjoTa6T5wYC3
- a8Ed40xxwBVfnSivbYxsSTlelhRs5eGxKHq8IyjAsJHFVAkVuh3L9lJcK2MP8yOyqsH1
- ML+h0t1dVxWeCS5OuGj/gtgb87Jy7K4ceQn5iRWeUrnh+P/FifD2cdcvLLz0VHXXIdT0
- t0SFH8ImPw2CQBSznUPTDqs9oghoMFt03iXt9SH/HRgRG2PjRKeHqnVEcSL00TGD984d
- 5EaQ==
+ d=linaro.org; s=google; t=1780064685; x=1780669485; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6VZ/i6ZvNqvmU5zUZzrSJBDpAWD/Cx5iX+bh+R6LBuQ=;
+ b=L9SlzBVX8aKnsFIlnFuQZVlCw3z9qTzXlRcJn1v+fWYxZgoqGikHAX02gpnqbgqHaj
+ nlkeqL9I55IWTtLQkPvZZ2HjAT4WVEO0u4oRKTdrRMZYA7T75gBbUh2ndPEYiJze9TGR
+ fqwF0W04z0hhuOxnmwcZH+zs/t5bgy74A5EAnigaxY23L/1mx0HNnXiSwkx3nHVDdepe
+ NCBU60k1xBViVs4i523O3cBtE8QN01hvwq3BKfr7Z8qeb151smOmivvCiZwF9xVqYScN
+ NuSZN5SuSzFms/JRfZBxe4Vg3McF+QWB2ZvJi1raK7GGpsbqR3eoQFSJZkTLf0G29LsI
+ 899g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780061950; x=1780666750;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=eqLKTMoRsKLQgoSRd5utjONT413qeJGEMK1P59WVr6c=;
- b=AEvy36E2WumTKzGwQjSj0nYt/3pjcAfAKQzyxrnSMmjdHrT7DlIHLLAgRCNHBcF5op
- QlBhuAf93/OmQ9UYxGbn0zM2ygjqMb2BfqTL8y7T9CAMOWJMQGb53aEmaHXncIjWlyQE
- YH2aNB2SXqpfyZ56zYTFtnwjpGbMXjnEAzSVCbO/ZKv+U10WCFYZnL0zcnNkd00xvP0Q
- NXDqj44REH6mfVopDSoJQ+gbhAQgBmkIcP8OUNItcOmvHXdyO3TTBIlxHDAGRZ1P7baL
- hX8xI+zR5yhFPLaOtWcyqWTxskdyYm6iQXBMr+qpg8fBNirG/lK16/S8g6ao+DPdZDQY
- ZwKw==
-X-Gm-Message-State: AOJu0Yz5u8Li4nbumhfPfgJeIu3hBexovxpT0YEdqypiODlDtqjLjmR2
- Awogs1k1IN7kFEtZpCOMjt3HyZR//oXis9oYLLoGPEqVsDKr000/usZ8uT7uIkn1scgL8mgfgKr
- 3id/0mf3+2PPE9CL5o44Dw1eFkm76x4jHhelSPRp9h03UeiqH9E8w3ggyDA==
-X-Gm-Gg: Acq92OF/Q6GsX3lOsvXuTy/y53F7W5YEqeanvIVadoAo8ipsyVCGYYEB8Yw+7tpqIII
- Zy8WQt3JoGEHpBo2/cKcsdeWcXLraGTvbg/jIQ7p7uLAlZtQZd+qRd+MfuKR0ufugXyUmwZrG6d
- fFPAZVZHM0sAxRA9ZK5lADaH4D2pEyr0eX0LE0F6ZxHlDPk+ZN72NDrgNUWqnMen5h7+m5CZp1u
- cHlv4p9ErctdS3EJhgHXP193XOXkXYSJCLeuIC8Z5++rr9ufXC4M/KYqiOjFhjHk28LNyM0XaMm
- w2PalZvyratP2efpfP99xSGCHpaE87a/V3IWx/VqUCDJpJc10JvZMWtV6fx9XkTz8Jtfr2Tift2
- /LnW0cFPMjqer+S7SGkpvjNw/+AECjfm90uG65tkFgdf7QBje5rSKwmS9enCy91kb7JeJ
-X-Received: by 2002:a05:620a:40d2:b0:912:1206:ddd1 with SMTP id
- af79cd13be357-9152fd1e304mr370048485a.1.1780061949849; 
- Fri, 29 May 2026 06:39:09 -0700 (PDT)
-X-Received: by 2002:a05:620a:40d2:b0:912:1206:ddd1 with SMTP id
- af79cd13be357-9152fd1e304mr370042885a.1.1780061949258; 
- Fri, 29 May 2026 06:39:09 -0700 (PDT)
-Received: from [192.168.68.106] ([177.170.117.62])
+ d=1e100.net; s=20251104; t=1780064685; x=1780669485;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=6VZ/i6ZvNqvmU5zUZzrSJBDpAWD/Cx5iX+bh+R6LBuQ=;
+ b=eDj2yfA/DmUHZN5rA84Hn2NH5J8tLNeMJIme33DzH/OGYCbQgzW/AnoA9BrYMkSqWH
+ 3RNTxXMs3UB4xZCyZIU2yHLde57wvxnYIKWas8WeoxBmcHiELwA1wRCD9wrreY02f0sC
+ iOtlQu4zM3FFNNYJDdN0srj1HrO2jKhwrBMFuy07/HGUnnbgKj0lBN3OifpCvXl/lpJz
+ pD4t7JEyg42Lv72sjjRgcQf2WxlBcQeCkXdvxybmPLUNO0LATZbkM7j9s6MBiQToxgUN
+ wJnKUVWUQ+5kZOMfOqqY7pO6BofENW5OfGvV6GEE7YrjyBUMHqGQp0HpDc6weTJj8w+o
+ wqHw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+HK7gvhcvx3nL/eFmLKuDs9/ZgyUU/eRFFEQ4ySRFv4mHrRYuT32v17ZZxX5/VxKLhIWN0MP5YMRLd@nongnu.org
+X-Gm-Message-State: AOJu0YzydeKzwCR5zaJ89I62+ubfYIPPboAo5bJvlvf8R9jpyW4sNOrV
+ /NrPS+pHWce5ResTEJ2UYeww4Fra+BoiWWUS/AVA7qLrD9j8XzxUatQv+sCOOx/NNK8=
+X-Gm-Gg: Acq92OE7gjr64pCaBo5YzZgsbPc6EfxyaRybTc5LTCiZR1TWRIinFYftkMZlfvnLsAn
+ FJ56QTdEVTGu+EsAItfwtUDy/hNMsqPsQb7fgSfFSwxPy82qHV7heWBmud0Ny3p1E2neogh5bO+
+ woSf0PjunOA85ruW9kZjW9i6n8FDRk85hM1djW8v4FKwzjPfbqUTrbj+F/BFJ7QN7OshFtLC8Mz
+ P9POBDPsTyLN2TugmMy+F+c2S6vxnxsJWZ3EW4Q2Cl5cgzLdfWEXhAe4oE1LRIVk0dWqT3SNb1Y
+ cuDCtgQA2KTfPsh0XWo3IeRIPusmWY9KogyVs5rgo4b2hZvjJrEJu9oDeWl/cVkPQB0zWctbAsg
+ S6g54e7UbBiSjzpaIL6QpYnD1o7PELBX4XPD0CDZqHyiK9wYuaNluEoUzdWA7dzfasGfnDD2U/5
+ FumTIhc14kfFAG5M25RIuFV8bq7L3BLQoZseJvNhYgHaKo63R37MJ8zo/jGtujE5yaHQ==
+X-Received: by 2002:a05:600c:8582:b0:490:51e9:deba with SMTP id
+ 5b1f17b1804b1-4909c0bb2e7mr47068875e9.27.1780064685579; 
+ Fri, 29 May 2026 07:24:45 -0700 (PDT)
+Received: from m15.home (88-187-86-199.subs.proxad.net. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9153244e114sm203883385a.5.2026.05.29.06.39.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 May 2026 06:39:08 -0700 (PDT)
-Message-ID: <599f551b-0ca4-465d-8c78-d7612f3191a5@oss.qualcomm.com>
-Date: Fri, 29 May 2026 10:39:03 -0300
+ 5b1f17b1804b1-4909caa7e17sm52805175e9.9.2026.05.29.07.24.43
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 29 May 2026 07:24:44 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Reinoud Zandijk <reinoud@netbsd.org>,
+ Pedro Barbuda <pbarbuda@microsoft.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Glenn Miles <milesg@linux.ibm.com>,
+ Alexander Graf <agraf@csgraf.de>, Peter Maydell <peter.maydell@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, qemu-arm@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Roman Bolshakov <rbolshakov@ddn.com>, Anton Johansson <anjo@rev.ng>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <gaosong@loongson.cn>,
+ qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Phil Dennis-Jordan <phil@philjordan.eu>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-ppc@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>, Chao Liu <chao.liu.zevorn@gmail.com>,
+ kvm@vger.kernel.org, Claudio Fontana <cfontana@suse.de>,
+ Chinmay Rath <rathc@linux.ibm.com>,
+ Mohamed Mediouni <mohamed@unpredictable.fr>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 01/17] target/loongarch: Remove unused
+ 'accel/accel-cpu-target.h' header
+Date: Fri, 29 May 2026 16:24:17 +0200
+Message-ID: <20260529142434.87880-2-philmd@linaro.org>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260529142434.87880-1-philmd@linaro.org>
+References: <20260529142434.87880-1-philmd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/numa.c: Supplement cpu topology arguments
-To: liu.xuemei1@zte.com.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20260529181848378wiq8pXCmbwAZR5_-wZFJd@zte.com.cn>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260529181848378wiq8pXCmbwAZR5_-wZFJd@zte.com.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: HNaWwe47-jAJSGM5lyMG55gCnhVNXJi4
-X-Proofpoint-GUID: HNaWwe47-jAJSGM5lyMG55gCnhVNXJi4
-X-Authority-Analysis: v=2.4 cv=daSwG3Xe c=1 sm=1 tr=0 ts=6a1996fe cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
- a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=1RTuLK3dAAAA:8 a=EUspDBNiAAAA:8 a=2M_qXnMZ40JJAAL4XIsA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22 a=kRpfLKi8w9umh8uBmg1i:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI5MDEzNiBTYWx0ZWRfX8O5Y306ALQl0
- Uzc5tv/RfDsaYJEoX52uGdPUGJuxpvgWD9cfRTHr4sKoDcmY6mroQbT/HC81rN39x8zx/+D6bLW
- h49VUGtTj7tFodQikSIv+HRRRxR/N8AVEW2hNiwzIxfJDlyzbD1M8A88MXRm3EFXnc+Td+ojNh7
- 1iCczWxrvyhI54aAvf2XAbzBUBkzmrDzpBbF1yB/DmmK4bhAMd95aKDmOGmkSfdovq1ggbBD2qO
- UYTtYbAqSntv5SSiFOncl6I1zbMLplNbhEUbHIxmsv4OfmH6MJkVrekUlKmZy3Mnc+k9E4QJAe8
- gGwsbfjcUwHLKaMbV1ug1fMxFxag/PM1M4mIf+YJIEo/V0WuMNTL4+LPS0n/ge87//h9NkKKYbT
- RSTR3JF1Zzl6EO6cB5oswsJgMK4BueQiSVNASEu/qLQi1ZwMAMRExtJhS9gBuJihxszR27PICk3
- CgCd2SFy8NfUvZo2WPQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-05-29_03,2026-05-28_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 bulkscore=0 priorityscore=1501 impostorscore=0 suspectscore=0
- clxscore=1015 spamscore=0 phishscore=0 lowpriorityscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2605290136
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -150,57 +121,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+"accel/accel-cpu-target.h" is to register accelerator target
+specific hooks via TypeInfo::ACCEL_CPU_NAME(), which LoongArch
+TCG frontend does not. Remove as unused header.
 
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/loongarch/tcg/tcg_cpu.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-On 5/29/2026 7:18 AM, liu.xuemei1@zte.com.cn wrote:
-> From: Xuemei Liu <liu.xuemei1@zte.com.cn>
-> 
-> Supplement RISC-V cpu topology arguments, including support socket
-> cluster and threads per core.
-> 
-> Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
-> ---
-
-Seems like we can't set clusters/cores/threads as 0 from the command line:
-
-u$ ./build/qemu-system-riscv64 -M virt -smp cores=0
-qemu-system-riscv64: Invalid CPU topology: CPU topology parameters must be greater than zero
-
-And any missing SMP values from the cmd line is filled with '1' during
-machine_parse_smp_config().  So we're not generating div by zero with
-this patch.
-
-
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-
-
-
->   hw/riscv/numa.c | 12 +++++++++++-
->   1 file changed, 11 insertions(+), 1 deletion(-)
-> 
-> diff --git a/hw/riscv/numa.c b/hw/riscv/numa.c
-> index 24a803f7fa..8a144925c1 100644
-> --- a/hw/riscv/numa.c
-> +++ b/hw/riscv/numa.c
-> @@ -239,8 +239,18 @@ const CPUArchIdList *riscv_numa_possible_cpu_arch_ids(MachineState *ms)
->       for (n = 0; n < ms->possible_cpus->len; n++) {
->           ms->possible_cpus->cpus[n].type = ms->cpu_type;
->           ms->possible_cpus->cpus[n].arch_id = n;
-> +        ms->possible_cpus->cpus[n].props.has_socket_id = true;
-> +        ms->possible_cpus->cpus[n].props.socket_id =
-> +            n / (ms->smp.clusters * ms->smp.cores * ms->smp.threads);
-> +        ms->possible_cpus->cpus[n].props.has_cluster_id = true;
-> +        ms->possible_cpus->cpus[n].props.cluster_id =
-> +            (n / (ms->smp.cores * ms->smp.threads)) % ms->smp.clusters;
->           ms->possible_cpus->cpus[n].props.has_core_id = true;
-> -        ms->possible_cpus->cpus[n].props.core_id = n;
-> +        ms->possible_cpus->cpus[n].props.core_id =
-> +            (n / ms->smp.threads) % ms->smp.cores;
-> +        ms->possible_cpus->cpus[n].props.has_thread_id = true;
-> +        ms->possible_cpus->cpus[n].props.thread_id =
-> +            n % ms->smp.threads;
->       }
-> 
->       return ms->possible_cpus;
+diff --git a/target/loongarch/tcg/tcg_cpu.c b/target/loongarch/tcg/tcg_cpu.c
+index 31d3db6e8e1..2bb1feaa66f 100644
+--- a/target/loongarch/tcg/tcg_cpu.c
++++ b/target/loongarch/tcg/tcg_cpu.c
+@@ -9,7 +9,6 @@
+ #include "qemu/error-report.h"
+ #include "qemu/log.h"
+ #include "qemu/plugin.h"
+-#include "accel/accel-cpu-target.h"
+ #include "accel/tcg/cpu-ldst.h"
+ #include "accel/tcg/cpu-ops.h"
+ #include "exec/translation-block.h"
+-- 
+2.53.0
 
 
