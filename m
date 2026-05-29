@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE22CD4F54
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 19:51:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC03CD4F54
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 19:51:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wT3DT-0004Xl-9N; Fri, 29 May 2026 15:49:59 -0400
+	id 1wT3EM-0006tI-7j; Fri, 29 May 2026 15:50:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3DQ-0004PT-Dt
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:49:56 -0400
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3EF-0006bi-GY
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:50:47 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3DN-0004DA-Mb
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:49:56 -0400
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-45ef1198766so654050f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 12:49:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3ED-0004oN-M1
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:50:47 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4904c1ce4c1so85742015e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 12:50:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780084192; x=1780688992; darn=nongnu.org;
+ d=linaro.org; s=google; t=1780084244; x=1780689044; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gToO07btHAw940X+sVMcM9/aOH/ZnEfIGi+vwCzDH2o=;
- b=ftecYP1bdSgAOPkDuxRVrwKJ08i182es8gZlL5VM6JlbNo/t4j6DQDRcbOeftqCQ46
- I0N7NVGkUukK/RVh7Ak33947uAHgqSUbuABslUfcyDXskOncYzhBCdtMKuxM8zV6ZBEO
- 3KHTgvC0g3B69VMRxM/7ANnnvnedhwpzsQR6w2DLvXp2oQyj8pLtB+ykJQiPlbxvdFOX
- hjOVUupxsm+pQvL/RhMNiIIfjxYeLlmoxYGI0sozUb8uobPMdGivk5lNv/x+wfXa64Dj
- DNbhdTw5VFYa7srzLz0G/+x9Q7w1AZlI/BngtqSk9Hb/mRE6u26vuVjY+3fgKQ+WUeRM
- sx1A==
+ bh=HTEurkffFP4f5HtctBBlTf0KhJxPmE6GCKl/0QMxQlY=;
+ b=HAg+PpUhSMYfNICGU33w73iTKZHZvHn0TEl8k9cMKjJKIjyb8+cFwk+SvfrpdcaTF9
+ GBdqU2fCpWj/5g/0eph98ck9u4vmfLzFnrA2OBS8LqKrIyJWlXAuo9fTZ45mv9IQOkLh
+ wsF0kcYpWiO/TqQqZKfJa3On4hZshQxKVDHnHhnmMDpXRAgZMPHWlJzQMRC4/ymqeV97
+ Oku/ibGyjtEPxvPVPb3vJ3uPtw684f+8MnTgJa4rONaOMs1VyIph4GmWMcsja1FOaPmB
+ e5OW7Lyr1Wx9Mi6hFjPl4HtfhYFMYOiDJM7U+ZjPu/40q2bbZ5hjsW7efV1C4dqF/Zg0
+ cVhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780084192; x=1780688992;
+ d=1e100.net; s=20251104; t=1780084244; x=1780689044;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=gToO07btHAw940X+sVMcM9/aOH/ZnEfIGi+vwCzDH2o=;
- b=pX7SciS51tHeE8+z8aazqobNXTGXK5At7lDl5pw/TN0W2o9lMb7CZqP2FDWJwKN5nw
- rD10o+T/iqckr9weHibPwDG+n0nJFHFxiLf0zuNzlNsIJYiwvSRo+PGAOA2A9FFgjdXa
- 9mpi2nsEnM4e0FIl5Oj3Dhitg7qmCtGEqMqRHUN5CCKJR/1/0+jrl1PTaDVufTcLBOyS
- 75WVjEHDbcx6Krn4CxAUGqE0CnCsvtbGueJBYgp7skjad2sL6bBmBsbDEIRU5SLEi82+
- 1sQQNugsHiHUiSWreYwtAfczKF983JyxF3EdhvO8eZVtnpcpVW+mmHmtX3k1xVOCS1Bb
- dCYg==
+ bh=HTEurkffFP4f5HtctBBlTf0KhJxPmE6GCKl/0QMxQlY=;
+ b=cw+SPPOu7pZfPTCBCPqKuuJqw5V88iK11iSvnYMEbvWiHTlXn/ATnW6z/a4z3MNV6y
+ Qf5k58ZbU3h1Ncbjs6TJrLMEshyIL8FYQoC8kqfo7LLUbMzcziuxLwrApEBMJ+bR6oJ7
+ 2pPuvDUfgRsy7k6/McUsTMnXayacaF07nF/j4YoXHIHW6yqWpE67RfXDkxD6O+/Vuqls
+ BarMsPcQFingY+6yLTeNnQn8GTPulJnkKvkuJNkPA7Ghj5LNe6ty3IbedjHN70rDjFwB
+ 7E1Cux0jTiCqrc0T+hf408WR7a9GQSWAJyezO3B45HirnXg/KD1wjW5RYu08Th8ywBfl
+ y/BQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/VTMDQT148oAQH+kR6dHmn+37URa2k5NOcLqzLRFLpDZ+WEYb9DUIYczudFI2ZdfZjgY9mbLi3eNec@nongnu.org
-X-Gm-Message-State: AOJu0YwkTkWLarYUUXSFkWQ+cnxk6qQISzSpNzNxbFNwivprruhAzF7Q
- e/nbq/sGr/dz9sjdAlcv/XgENjNsHwmtif+vEI2hIHHLsFMWQ1/F73ft2nITJ8pMG1A=
-X-Gm-Gg: Acq92OFnziatmWNSaaNLuBbpDa2DvGDsC4Q9cOrflLvSaRyBtiTQSvUCss+BMcZzV7I
- ysMfOldfZ8tPXZJR2pBLz54kbE9QLfp6uWAfq/5dTsBOC2+YvIFwFdF7K+oPVdcLdyvh7HTbNW5
- al8741XPF2zXjGdyW3qnCnEXoOdQAyAHwixMDMcQ+izeG7svIyPLxxGXP7TCbOwDGBb94SA5eEA
- 85UBBxgpxsLWpwmYGMCxVYzr0y/daLz1l7xW4pspOovwuEDyFRLcFUNLnoXVl/bm30E026TsMuy
- pJF+YOdUkAPVZ7rmnwdWog7TFjPq7wDulKUKnNFwzwllrTYmwfYq+/2IdlLisO1qTEZVkUS1qhd
- 5CaqojPluFUshkLbQn/giR7P6Y205YKZPG2Zb1AlFXvsFJS8rXOwW6/L3fQXfXW7wEqWm/C9tQ+
- k4ZqMKCMXxk6NYom+EKtJ+YlAZAEjjIzhEBa5khbFuqavfzc32YOxb6S0OadMn6Hb9CQ==
-X-Received: by 2002:a05:6000:11d2:b0:45e:f295:33cd with SMTP id
- ffacd0b85a97d-45ef6ea9417mr918738f8f.11.1780084192037; 
- Fri, 29 May 2026 12:49:52 -0700 (PDT)
+ AFNElJ+3KKEFjkVeIpgEAqKO662kfTitc9WjTFGbTI0Zw2dqw+Quonh8vMeyaGnblNHn8vNgYTy+pmRrB8lZ@nongnu.org
+X-Gm-Message-State: AOJu0YwA7/BtdmQGKvUPtewR4jNRusiodXkK1rIFXyCdxZUOAS3Ayghe
+ 3sRt0uEUM2Mn5DSHxfHqZA//MKNubT7b7O5Y7t7wX/eajtzqnZJXAyqgV794zQqylUg=
+X-Gm-Gg: Acq92OGw3oSB7pkXUDr5p5SVeb/F68ZeYqiRUcZiemqkP3JKBnB+8OnOczEpAEJY1CP
+ 8W8Yv9RClT77VMcC0DbiG9tzjxzKLR6NDn5i+zRnx3sWumg29qyTBwpkmdiDpCYW5dmfSI78fAn
+ Ys3dvXkHKdHEtOqkpXLv+uZjXa7j2Pql235lX/Vc1RtOAEeWWrfCA3CrqrQU/d0VAeZMMk6+Eoi
+ GLZEqIGYiDhKdi+tyz7kfTYKr6VFxwuqCt77yUo8/fT3LBTqA2c/uEPyBmV/4E4CmRMXHvNrihB
+ YXjxM5Zi4SZX59d0LOqZ2we6LHntxCnPr5QqqKeOpADJgosoKNtTQQIrMXKDzq/qrBbQjHCVCvX
+ bMWe+nrxX7PVmRABt1unH0tbYGCJhoNR1U4J9hETakuqcW2QoZl8rSan2Yk/SKqIWTBj49oA5Gk
+ JXfItrvYDKGjAXAaxk1Ycz38ouJWfkrfej2HJGiN8VjSRGmzKzhugpFLaU7u4pxH/CQA==
+X-Received: by 2002:a05:600c:818c:b0:490:81cb:d7a with SMTP id
+ 5b1f17b1804b1-490a297085emr16599145e9.29.1780084244117; 
+ Fri, 29 May 2026 12:50:44 -0700 (PDT)
 Received: from m15.home (88-187-86-199.subs.proxad.net. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45ef34c50f6sm6471508f8f.16.2026.05.29.12.49.49
+ 5b1f17b1804b1-4909d6f35f8sm52943695e9.13.2026.05.29.12.50.41
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 29 May 2026 12:49:51 -0700 (PDT)
+ Fri, 29 May 2026 12:50:43 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Harsh Prateek Bora <harshpb@linux.ibm.com>,
@@ -92,18 +92,18 @@ Cc: Harsh Prateek Bora <harshpb@linux.ibm.com>,
  Phil Dennis-Jordan <phil@philjordan.eu>,
  Reinoud Zandijk <reinoud@netbsd.org>, Halil Pasic <pasic@linux.ibm.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 01/17] target/loongarch: Remove unused
- 'accel/accel-cpu-target.h' header
-Date: Fri, 29 May 2026 21:49:23 +0200
-Message-ID: <20260529194940.97143-2-philmd@linaro.org>
+Subject: [PATCH v2 07/17] accel/whpx: Convert AccelCPUClass ->
+ AccelOpsClass::cpu_instance_init
+Date: Fri, 29 May 2026 21:49:29 +0200
+Message-ID: <20260529194940.97143-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260529194940.97143-1-philmd@linaro.org>
 References: <20260529194940.97143-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -126,29 +126,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"accel/accel-cpu-target.h" is to register accelerator target
-specific hooks via TypeInfo::ACCEL_CPU_NAME(), which LoongArch
-TCG frontend does not. Remove as unused header.
+Register the new AccelOpsClass::cpu_instance_init hook.
+
+ACCEL_CPU_NAME("whpx") TypeInfo is now empty, remove it.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 ---
- target/loongarch/tcg/tcg_cpu.c | 1 -
- 1 file changed, 1 deletion(-)
+ accel/whpx/whpx-accel-ops.c |  2 ++
+ accel/whpx/whpx-common.c    | 17 -----------------
+ target/arm/whpx/whpx-all.c  |  1 -
+ target/i386/whpx/whpx-all.c |  1 -
+ 4 files changed, 2 insertions(+), 19 deletions(-)
 
-diff --git a/target/loongarch/tcg/tcg_cpu.c b/target/loongarch/tcg/tcg_cpu.c
-index 31d3db6e8e1..2bb1feaa66f 100644
---- a/target/loongarch/tcg/tcg_cpu.c
-+++ b/target/loongarch/tcg/tcg_cpu.c
-@@ -9,7 +9,6 @@
- #include "qemu/error-report.h"
- #include "qemu/log.h"
- #include "qemu/plugin.h"
+diff --git a/accel/whpx/whpx-accel-ops.c b/accel/whpx/whpx-accel-ops.c
+index b8f41544cbe..099e8ef6da3 100644
+--- a/accel/whpx/whpx-accel-ops.c
++++ b/accel/whpx/whpx-accel-ops.c
+@@ -98,6 +98,8 @@ static void whpx_accel_ops_class_init(ObjectClass *oc, const void *data)
+     ops->handle_interrupt = generic_handle_interrupt;
+     ops->supports_guest_debug = whpx_supports_guest_debug;
+ 
++    ops->cpu_instance_init = whpx_cpu_instance_init;
++
+     ops->synchronize_post_reset = whpx_cpu_synchronize_post_reset;
+     ops->synchronize_post_init = whpx_cpu_synchronize_post_init;
+     ops->synchronize_state = whpx_cpu_synchronize_state;
+diff --git a/accel/whpx/whpx-common.c b/accel/whpx/whpx-common.c
+index 247e12db812..25c5d84fd30 100644
+--- a/accel/whpx/whpx-common.c
++++ b/accel/whpx/whpx-common.c
+@@ -24,7 +24,6 @@
+ #include "qapi/qapi-types-common.h"
+ #include "qapi/qapi-visit-common.h"
+ #include "migration/blocker.h"
 -#include "accel/accel-cpu-target.h"
- #include "accel/tcg/cpu-ldst.h"
- #include "accel/tcg/cpu-ops.h"
- #include "exec/translation-block.h"
+ #include <winerror.h>
+ 
+ #include "system/whpx-internal.h"
+@@ -505,21 +504,6 @@ static void whpx_set_hyperv(Object *obj, Visitor *v,
+     }
+ }
+ 
+-static void whpx_cpu_accel_class_init(ObjectClass *oc, const void *data)
+-{
+-    AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
+-
+-    acc->cpu_instance_init = whpx_cpu_instance_init;
+-}
+-
+-static const TypeInfo whpx_cpu_accel_type = {
+-    .name = ACCEL_CPU_NAME("whpx"),
+-
+-    .parent = TYPE_ACCEL_CPU,
+-    .class_init = whpx_cpu_accel_class_init,
+-    .abstract = true,
+-};
+-
+ static void whpx_accel_class_init(ObjectClass *oc, const void *data)
+ {
+     AccelClass *ac = ACCEL_CLASS(oc);
+@@ -569,7 +553,6 @@ static const TypeInfo whpx_accel_type = {
+ static void whpx_type_init(void)
+ {
+     type_register_static(&whpx_accel_type);
+-    type_register_static(&whpx_cpu_accel_type);
+ }
+ 
+ bool init_whp_dispatch(void)
+diff --git a/target/arm/whpx/whpx-all.c b/target/arm/whpx/whpx-all.c
+index 3079c6293c8..16040f102a3 100644
+--- a/target/arm/whpx/whpx-all.c
++++ b/target/arm/whpx/whpx-all.c
+@@ -23,7 +23,6 @@
+ #include "qapi/qapi-types-common.h"
+ #include "qapi/qapi-visit-common.h"
+ #include "migration/blocker.h"
+-#include "accel/accel-cpu-target.h"
+ #include <winerror.h>
+ 
+ #include "syndrome.h"
+diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
+index e626acef2f0..1b68f13a7dd 100644
+--- a/target/i386/whpx/whpx-all.c
++++ b/target/i386/whpx/whpx-all.c
+@@ -33,7 +33,6 @@
+ #include "qapi/qapi-visit-common.h"
+ #include "migration/blocker.h"
+ #include "host-cpu.h"
+-#include "accel/accel-cpu-target.h"
+ #include <winerror.h>
+ 
+ #include "system/whpx-internal.h"
 -- 
 2.53.0
 
