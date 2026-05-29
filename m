@@ -4,102 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D35CD6E45
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 07:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03414CD5BD2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 10:19:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wSrsI-0000dV-QF; Fri, 29 May 2026 03:43:23 -0400
+	id 1wSuJ1-0007zY-KZ; Fri, 29 May 2026 06:19:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1wSrsG-0000dA-Qj; Fri, 29 May 2026 03:43:21 -0400
-Received: from isrv.corpit.ru ([212.248.84.144])
+ (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
+ id 1wSuIz-0007yt-Iy; Fri, 29 May 2026 06:19:05 -0400
+Received: from mxhk.zte.com.cn ([160.30.148.34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1wSrsE-0001wc-4w; Fri, 29 May 2026 03:43:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
- t=1780040585; bh=7DmnP7pWdZNT0OhO/8twJGCTyU0EmwxHKLxbam133JM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=szybUmdL+mKOOrDMZkdGSmVNMJzDxelWh5wUaSll1oFa4xdqEvM/4YuFKi1GcScqt
- r8LkPx4wXJ1CL1KU2Mkaz+1vpkT1yiRDxfAgPlRLiIcN1dsAXQHTlYFFagIwyIQde7
- i2dgJROmlWLiXYpThjUsAbbmL+AVxU/Ihwi72gYSpHh6lpUmKQTNKTatlfRQaA5TUn
- qpNv0GWPpNaPmo9Q1JmJTp3ro3kvJFRtvc3Ygad5VA8eX/YmcZmIXJaHsRhEV0l3Ua
- SJp+cIIT96yb1zpxx3SRX0tAsZW1uP6E26IrVDQFApcRxk623LF8U0cBZcm9Php3Sg
- 9iGtUGKlSlfzA==
-Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
- by isrv.corpit.ru (Postfix) with ESMTP id 16EA91B2745;
- Fri, 29 May 2026 10:43:05 +0300 (MSK)
-Message-ID: <da24799f-dd23-49b6-8e7f-65d757721d3d@tls.msk.ru>
-Date: Fri, 29 May 2026 10:43:13 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] target/riscv: Add mseccfg to VMStateDescription
-To: Fabiano Rosas <farosas@suse.de>,
- Alistair Francis <Alistair.Francis@wdc.com>, Zishun Yi <vulab@iscas.ac.cn>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-stable@nongnu.org" <qemu-stable@nongnu.org>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Peter Xu <peterx@redhat.com>
-References: <20260511124828.3210477-1-vulab@iscas.ac.cn>
- <bcc0aaa1-8d1c-4f52-a681-85bc903c8d66@tls.msk.ru>
- <6e42ecc1026a057e07e73386463bd57e1467a46f.camel@wdc.com>
- <bf46f39c-6173-4cfd-b374-63529892a1fb@tls.msk.ru> <87ecix59j9.fsf@suse.de>
-Content-Language: en-US, ru-RU
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- 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
-In-Reply-To: <87ecix59j9.fsf@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
+ id 1wSuIx-0001wz-7Z; Fri, 29 May 2026 06:19:05 -0400
+Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4gRfTV5pzXz5B100;
+ Fri, 29 May 2026 18:18:54 +0800 (CST)
+Received: from xaxapp04.zte.com.cn ([10.99.98.157])
+ by mse-fl2.zte.com.cn with SMTP id 64TAIjJX060163;
+ Fri, 29 May 2026 18:18:46 +0800 (+08)
+ (envelope-from liu.xuemei1@zte.com.cn)
+Received: from mapi (xaxapp02[null]) by mapi (Zmail) with MAPI id mid32;
+ Fri, 29 May 2026 18:18:48 +0800 (CST)
+X-Zmail-TransId: 2afa6a196808cdc-4c8b2
+X-Mailer: Zmail v1.0
+Message-ID: <20260529181848378wiq8pXCmbwAZR5_-wZFJd@zte.com.cn>
+Date: Fri, 29 May 2026 18:18:48 +0800 (CST)
+Mime-Version: 1.0
+From: <liu.xuemei1@zte.com.cn>
+To: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <liwei1518@gmail.com>,
+ <daniel.barboza@oss.qualcomm.com>, <zhiwei_liu@linux.alibaba.com>,
+ <chao.liu.zevorn@gmail.com>
+Cc: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
+Subject: =?UTF-8?B?W1BBVENIXSBody9yaXNjdi9udW1hLmM6IFN1cHBsZW1lbnQgY3B1IHRvcG9sb2d5IGFyZ3VtZW50cw==?=
+Content-Type: text/plain;
+	charset="UTF-8"
+X-MAIL: mse-fl2.zte.com.cn 64TAIjJX060163
+X-TLS: YES
+X-SPF-DOMAIN: zte.com.cn
+X-ENVELOPE-SENDER: liu.xuemei1@zte.com.cn
+X-SPF: None
+X-SOURCE-IP: 10.5.228.133 unknown Fri, 29 May 2026 18:18:54 +0800
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-MID-QID: 6A19680E.001/4gRfTV5pzXz5B100
+Received-SPF: pass client-ip=160.30.148.34;
+ envelope-from=liu.xuemei1@zte.com.cn; helo=mxhk.zte.com.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,72 +73,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-[Trimmed the Cc list a bit]
+From: Xuemei Liu <liu.xuemei1@zte.com.cn>
 
-On 27.05.2026 15:20, Fabiano Rosas wrote:
+Supplement RISC-V cpu topology arguments, including support socket
+cluster and threads per core.
 
-> There are no migration compatibility guarantees for an unversioned
-> machine type. Only migration and snapshots from same-version QEMUs are
-> expected to work in this case. Other scenarios may or may not work.
-..
-> 
-> The addition from this patch is in a subsection, so .needed will
-> determine whether it will be put on the stream. If we backport the
-> change, then the stable QEMU build will (likely) start sending this
-> subsection, which the old, non-stable QEMU will not recognize and
-> migration will fail. Migration from stable-stable would likely work.
-> 
-> So any stable versions that (would) contain this patch are likely to
-> block migration from that version into an unpatched QEMU.
-> 
-> Note that since the machine is unversioned, migration from QEMU x to
-> QEMU x+1 is already prone to being broken.
+Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
+---
+ hw/riscv/numa.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-Yeah, this was my understanding too.
+diff --git a/hw/riscv/numa.c b/hw/riscv/numa.c
+index 24a803f7fa..8a144925c1 100644
+--- a/hw/riscv/numa.c
++++ b/hw/riscv/numa.c
+@@ -239,8 +239,18 @@ const CPUArchIdList *riscv_numa_possible_cpu_arch_ids(MachineState *ms)
+     for (n = 0; n < ms->possible_cpus->len; n++) {
+         ms->possible_cpus->cpus[n].type = ms->cpu_type;
+         ms->possible_cpus->cpus[n].arch_id = n;
++        ms->possible_cpus->cpus[n].props.has_socket_id = true;
++        ms->possible_cpus->cpus[n].props.socket_id =
++            n / (ms->smp.clusters * ms->smp.cores * ms->smp.threads);
++        ms->possible_cpus->cpus[n].props.has_cluster_id = true;
++        ms->possible_cpus->cpus[n].props.cluster_id =
++            (n / (ms->smp.cores * ms->smp.threads)) % ms->smp.clusters;
+         ms->possible_cpus->cpus[n].props.has_core_id = true;
+-        ms->possible_cpus->cpus[n].props.core_id = n;
++        ms->possible_cpus->cpus[n].props.core_id =
++            (n / ms->smp.threads) % ms->smp.cores;
++        ms->possible_cpus->cpus[n].props.has_thread_id = true;
++        ms->possible_cpus->cpus[n].props.thread_id =
++            n % ms->smp.threads;
+     }
 
-And given all the above, I think we should apply the fixes to the
-stable series, and treat this as changing version (the version is
-actually changed, but only the minor version).  Yes, the VMs wont
-be migratable between 10.0.9 and 10.0.10, exactly like it was
-not-migratable between 10.0.x and 10.1.x.  Because basically, with
-no versioned machines, there's basically no migration capability
-between different qemus *at all*.
-
-When we do have versioned machines, we can't add fields to previous
-versions anymore, exactly because of the migration guarantees.  But
-as long as we don't, there's no guarantees at all.  And the only
-place where migration can be done is between different hosts with
-the same qemu versions.
-
-The above description leaves one question still.  What happens when
-migrating from unpatched qemu to a patched qemu?  Will the migration
-fail due to missing field, or succeed, making the missing field to
-have a default value?
-
-If it will succeed, then we definitely should add the field to fix
-the original issue.
-
-BTW, can't we just skip, at the receive end, fields we don't know about?
-
-But all this is.. well... sort of moot for this very change already.
-
-I haven't realized that this discussion is about a change which I
-*already* applied (I wanted to revert it until this question settles,
-but I forgot to do that!).  And meanwhile, I released the next set
-of stable qemu releases, with the changes in question (two of them)
-applied.  It wasn't my intention (or else I'd not start this
-discussion in the first place, obviously).
-
-So we do have this migration breakage already, "thanks" to my sloppiness.
-
-And I don't want to break things for users for no reason.  The original
-issue were described as a security issue even, so there's a reason to
-fix it.  I think.
-
-But in the future I'll try to be more careful about such things.
-Again, understanding the machinery and consequences helps here too.
-
-Thank,
-
-/mjt
+     return ms->possible_cpus;
+-- 
+2.27.0
 
