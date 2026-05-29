@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE932CD6E54
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 19:52:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E02DCD4F54
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 19:52:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wT3F1-0000gK-LG; Fri, 29 May 2026 15:51:35 -0400
+	id 1wT3Es-0008T4-8n; Fri, 29 May 2026 15:51:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3Ew-0000UI-BU
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:51:30 -0400
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3Eo-0007yj-8i
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:51:22 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3Et-00052x-4D
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:51:29 -0400
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-45ef189aa1cso906490f8f.0
- for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 12:51:26 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3El-0004xL-Cx
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:51:21 -0400
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-45ef189aa1cso906375f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 12:51:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780084285; x=1780689085; darn=nongnu.org;
+ d=linaro.org; s=google; t=1780084277; x=1780689077; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ayZcEqBv6LCuc8yFGoECVuWb6aDn4koW4Fzg+F8BkqA=;
- b=lf1i1W98ePwM6i5JgwgMRoQaAlT9yaYcOtpQp5Gaw2RHREd1Tn6DaYN8HYS+JfwPKZ
- M0MW6lEeminzCUOXy+Q9NykGcrINOxkBe//2tEfBkTAawnOCViLZUM2vp6bioAsKXG0B
- Kmw2y2Zybn4v+uyENKHt+LMmh+cB3MAfWcIiS1xNbzBn3zCbVIR33o1cHZ1/hZGk+dpR
- r+wsazpoA+RaAP2TCE0VX8uxUwXFxXQ/Ddm4R40tKyHgcY3CTutHKr1yuxFWBBzHzJPA
- 60u30I45CJ2IDX+gJD6CHbsSBLvc/zDmzIDWNH4bVXTPsTnqIw1m/7b/McCYpUVyl9+7
- wjxw==
+ bh=xN08zAfKjwU0dgbBSed5OKjgOJn32PYWdXU4H33xVTk=;
+ b=Twx78MLvbHTNBgn+nVgvrdi0XaxIPzijUJdFqzfLIowrtbO0VxwLS2bqFsCX4J27gn
+ 1Tcj5GM6bX//b2Vyy5AG+M88jAzfzlXPwGnQPINFjlC150sMZxpa4PPjaTT9OkQTrqnc
+ PZ73BH9X4IErGp2CFjHEuId8B/ZmARRq/5yRxEGtsF7cV+C3CIdyFJf6MjeNRddP5kgD
+ Tn/bHD9pNq/XAkG9twpBFMEcrgoGyAv2CZlL+4TIrZFph3kkXSk4aj3rMzLhOoh7ecve
+ +9aAwu96L0HBX2xpTiIG41lw3rECCCTzqpIU/qhAsnpYQZyehWYYiKPNuY7ar+5bdeeO
+ hUGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780084285; x=1780689085;
+ d=1e100.net; s=20251104; t=1780084277; x=1780689077;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ayZcEqBv6LCuc8yFGoECVuWb6aDn4koW4Fzg+F8BkqA=;
- b=q615mpZAmabW/ukQmZ8AJh6A5H8GCnWZsjRYL8blDKL71huV60yIoDFjBtzmwXRKBu
- Sgmfp22+eJCUjcbHg6azNvF25wk0euvcLItNfjuQg/S178dDHVE0aaY2Qb7PBoppIVJu
- 620zmJtAZ0/WtmHh5fbwGsPyb+59xXrG0HO61C78c7hi9ClNninvo5rLEGPhdS6CZUXW
- GP75HCbmMl76LppWSjhoZT3L12ULnKwlD0ZA831eNyAPEzVwmr+kxnrFZ0bMmsyr1egm
- pfT2ltTh9ht8R/0OlnaYufKet8VyU5qfLNO+yRVSkDmMJTUuii7Rom+rCGkhGg34kJbX
- xU/g==
+ bh=xN08zAfKjwU0dgbBSed5OKjgOJn32PYWdXU4H33xVTk=;
+ b=mmkMcvLFl7tztiDaq1wo0RX5sy8EomzBjUwnIk4VjNTqvIYt5onCdnMbeiUyhyFRfC
+ KL2yAo4THIgijI1N2qRgNA1WJ0I+ZGElomhgIC9qyWJz1R/yTjX7S+Dg0tAwXVgF56nn
+ l2K2C87kyaiXggCrD78ygT73qMJFm0SZg2gwUXMAEw6VfZoLceRSCqEnsy8w8xEXl14S
+ jbM9UvVmBMtUuSD11J3Zdsu/PSA5pexDPQG+YI9e3uNjWQwMAZwSmIVoS62EJAGMLcoK
+ ILGxFc9HuPramxTLcF7uQfy/oM01oHc850WZ8bqq4MnqZjHuIosrMD8aOys+A9+8ldi3
+ SU9w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ97zXaFjrVGp5J7kZY5q4BjXUqEMc0quKFzk5R1KkZdUTfcxfMvYpXAC9/h2jCxltDjzLz1s8gwpmqW@nongnu.org
-X-Gm-Message-State: AOJu0YyKOBC5LztgM5k/rZV1tDpgjKnsi+qua6GgbX+IdfYWbK2X7kM2
- wKmHuXxn349sq8JAGD9BVlMxpFoID9+x83IQzHE2J9V8oKjYBBTGqh5Y2Wmw0ivCqhE=
-X-Gm-Gg: Acq92OEzkPob/eevxA5ICwar65I7k4Aa20/RoazHLeTDrtBkVUSV+ukh8rdAGYktq/v
- H+VDyrEanlI8D75ZTbJuM51K+NBWg0z6ARhLzdHW7iXYC+FOcTgJWgy6XUEzxVZ1dh/aIQtwSh7
- Hbjx8o4+wcyM7Sy4QvR/6D/6D275gJxsJJwIuWNdchMZe9U61M51qHIADPGqpB70mo9T0fqXsOm
- q/uu80F1/XyK9zclxdL3CogJ2o9mk+7P+3iXD2tzR6TRE5GHpbKxmiFEiOCVAbm/JaIGp3hFAFg
- 8GdZ6s66+jrG6TXLIgtawXtE7cTzIioxl0+0domcdkxiAWNyFh1c3NnfqrdpsgEqu5mjdjuI8EZ
- AjAPubzB+C9/iCfI7aoTaD1pf7CmWXqKcyPFsfc8bxNBw0QaostMj9DRvCrd3Tolfw4I4hDQvEq
- SmAkV0mtnf4EqgwrMdJgLuhSPY0Rt4F5K+V+hUTVx/koV8N1qdLXtuDswU2+BTVDJxAA==
+ AFNElJ8wckNy5/bUhYQ4sinxh0YRowE6V/k5iJESq1hyh6DelUK7A+U7kdhszEbAnqudsGyMzcif54bs9p4M@nongnu.org
+X-Gm-Message-State: AOJu0Yywp8ucnvClGhm+UeHEZxjj3ZlB15AormbY0Ym2HsX4bPTJ1rul
+ OGs9yJebjT9sCM+ZvLJWCripfle+LoxguuiPmCf/DSK4WrZtvEyBRHtjG52ASf/FgOs=
+X-Gm-Gg: Acq92OEac61XsCDeTYJ05UFTrfFHySsU7dDUWfs3Ln9sJQM9gFIr1z1fn5EJ0bZvibA
+ ApVmmJfhQSeEEtKZWPvL7508C1MAELQZGVTQ7fjUoU1rKHtCbXZk5K+lGpYoz0tPAByC0lW1lwY
+ 9tNmnNo9D28O3xWwQW9sZLlbtKVh6DXdNVLPQR5n8n3RJCkp/jg3JgAfwUsWbItWsaodW1AlXwR
+ OcZaX9zDLOkxTVP0R/2Hmf7Ql8/VnwtHxfMBqB9INJrOgIniTMH+eA2Mxlgd66vs3HtivovbSVS
+ YXPeIVgc+bljEIs1QWYwGz1KHZIRY2RZrWl3Nvm2DDuwGVwxngQCLJtUqg9ZDbwcyLqJaeVgzVj
+ TeCqB8+jfa248V7+Q2iD6Haa7eZVJ9+1y2y3HdmXNs78I4dcJ5IkM4de+eG1yxgd1tewPzhFWQ2
+ SupZsiudvk35cf7G5uyLHG4CPKNu4hVVYxDkV6P8Y3mjPgPC0OYgTO4Dzj+K5dpS5z+DYMiY4nb
+ 4CO
 X-Received: by 2002:adf:ed43:0:b0:43d:7dcf:ae26 with SMTP id
- ffacd0b85a97d-45ef6b78552mr1841372f8f.34.1780084285470; 
- Fri, 29 May 2026 12:51:25 -0700 (PDT)
+ ffacd0b85a97d-45ef6b78552mr1840866f8f.34.1780084277341; 
+ Fri, 29 May 2026 12:51:17 -0700 (PDT)
 Received: from m15.home (88-187-86-199.subs.proxad.net. [88.187.86.199])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45ef356b129sm7392104f8f.32.2026.05.29.12.51.23
+ ffacd0b85a97d-45ef34bcc30sm5738817f8f.12.2026.05.29.12.51.15
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 29 May 2026 12:51:24 -0700 (PDT)
+ Fri, 29 May 2026 12:51:16 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Harsh Prateek Bora <harshpb@linux.ibm.com>,
@@ -92,17 +93,18 @@ Cc: Harsh Prateek Bora <harshpb@linux.ibm.com>,
  Phil Dennis-Jordan <phil@philjordan.eu>,
  Reinoud Zandijk <reinoud@netbsd.org>, Halil Pasic <pasic@linux.ibm.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 12/17] accel: Remove AccelCPUClass::cpu_instance_init()
-Date: Fri, 29 May 2026 21:49:34 +0200
-Message-ID: <20260529194940.97143-13-philmd@linaro.org>
+Subject: [PATCH v2 11/17] accel/tcg: Convert AccelCPUClass -> new
+ TCGCPUOps::cpu_instance_init
+Date: Fri, 29 May 2026 21:49:33 +0200
+Message-ID: <20260529194940.97143-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260529194940.97143-1-philmd@linaro.org>
 References: <20260529194940.97143-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,43 +127,137 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We removed all implementations: remove as dead code.
+Introduce a TCGCPUOps::cpu_instance_init hook and call it with
+tcg_cpu_instance_init(). Register tcg_cpu_instance_init() as
+AccelOpsClass::cpu_instance_init.
+
+At the same time, convert X86 and RISCV AccelCPUClass hooks,
+after forward-declaring each target method (to avoid moving
+code around).
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 ---
- include/accel/accel-cpu.h | 1 -
- accel/accel-common.c      | 5 -----
- 2 files changed, 6 deletions(-)
+ accel/tcg/tcg-accel-ops.h   | 1 +
+ include/accel/tcg/cpu-ops.h | 1 +
+ accel/tcg/cpu-exec.c        | 9 +++++++++
+ accel/tcg/tcg-accel-ops.c   | 1 +
+ target/i386/tcg/tcg-cpu.c   | 5 +++--
+ target/riscv/tcg/tcg-cpu.c  | 4 +++-
+ 6 files changed, 18 insertions(+), 3 deletions(-)
 
-diff --git a/include/accel/accel-cpu.h b/include/accel/accel-cpu.h
-index 88c0815e2d8..c42221f96cf 100644
---- a/include/accel/accel-cpu.h
-+++ b/include/accel/accel-cpu.h
-@@ -15,7 +15,6 @@
- typedef struct AccelCPUClass {
-     ObjectClass parent_class;
+diff --git a/accel/tcg/tcg-accel-ops.h b/accel/tcg/tcg-accel-ops.h
+index aecce605d7b..be712c02efd 100644
+--- a/accel/tcg/tcg-accel-ops.h
++++ b/accel/tcg/tcg-accel-ops.h
+@@ -14,6 +14,7 @@
  
--    void (*cpu_instance_init)(CPUState *cpu);
-     bool (*cpu_target_realize)(CPUState *cpu, Error **errp);
- } AccelCPUClass;
+ #include "system/cpus.h"
  
-diff --git a/accel/accel-common.c b/accel/accel-common.c
-index b3bcd53a4c6..04482b6b57e 100644
---- a/accel/accel-common.c
-+++ b/accel/accel-common.c
-@@ -43,12 +43,7 @@ void accel_cpu_instance_init(CPUState *cpu)
-     AccelClass *acc = ACCEL_GET_CLASS(accel);
++void tcg_cpu_instance_init(CPUState *cpu);
+ void tcg_cpu_destroy(CPUState *cpu);
+ int tcg_cpu_exec(CPUState *cpu);
+ void tcg_handle_interrupt(CPUState *cpu, int mask);
+diff --git a/include/accel/tcg/cpu-ops.h b/include/accel/tcg/cpu-ops.h
+index 5950cdcaab1..d7d329e419d 100644
+--- a/include/accel/tcg/cpu-ops.h
++++ b/include/accel/tcg/cpu-ops.h
+@@ -48,6 +48,7 @@ struct TCGCPUOps {
+      * Called when the first CPU is realized.
+      */
+     void (*initialize)(void);
++    void (*cpu_instance_init)(CPUState *cpu);
+     /**
+      * @translate_code: Translate guest instructions to TCGOps
+      * @cpu: cpu context
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+index ad94f96b252..ef44c12b601 100644
+--- a/accel/tcg/cpu-exec.c
++++ b/accel/tcg/cpu-exec.c
+@@ -1045,6 +1045,15 @@ int cpu_exec(CPUState *cpu)
+     return ret;
+ }
  
-     if (acc->ops && acc->ops->cpu_instance_init) {
--        if (cpu->cc->accel_cpu) {
--            assert(!cpu->cc->accel_cpu->cpu_instance_init);
--        }
-         acc->ops->cpu_instance_init(cpu);
--    } else if (cpu->cc->accel_cpu && cpu->cc->accel_cpu->cpu_instance_init) {
--        cpu->cc->accel_cpu->cpu_instance_init(cpu);
++void tcg_cpu_instance_init(CPUState *cpu)
++{
++    const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
++
++    if (tcg_ops->cpu_instance_init) {
++        tcg_ops->cpu_instance_init(cpu);
++    }
++}
++
+ bool tcg_exec_realizefn(CPUState *cpu, Error **errp)
+ {
+     static bool tcg_target_initialized;
+diff --git a/accel/tcg/tcg-accel-ops.c b/accel/tcg/tcg-accel-ops.c
+index 3bd98005042..381f1614923 100644
+--- a/accel/tcg/tcg-accel-ops.c
++++ b/accel/tcg/tcg-accel-ops.c
+@@ -219,6 +219,7 @@ static void tcg_accel_ops_init(AccelClass *ac)
+         }
      }
+ 
++    ops->cpu_instance_init = tcg_cpu_instance_init;
+     ops->cpu_reset_hold = tcg_cpu_reset_hold;
+     ops->supports_guest_debug = tcg_supports_guest_debug;
+     ops->insert_breakpoint = tcg_insert_breakpoint;
+diff --git a/target/i386/tcg/tcg-cpu.c b/target/i386/tcg/tcg-cpu.c
+index 6f5dc06b3b9..04bb9787575 100644
+--- a/target/i386/tcg/tcg-cpu.c
++++ b/target/i386/tcg/tcg-cpu.c
+@@ -157,6 +157,8 @@ static vaddr x86_pointer_wrap(CPUState *cs, int mmu_idx,
+ }
+ #endif
+ 
++static void x86_tcg_cpu_instance_init(CPUState *cs);
++
+ const TCGCPUOps x86_tcg_ops = {
+     .mttcg_supported = true,
+     .precise_smc = true,
+@@ -165,6 +167,7 @@ const TCGCPUOps x86_tcg_ops = {
+      */
+     .guest_default_memory_order = TCG_MO_ALL & ~TCG_MO_ST_LD,
+     .initialize = tcg_x86_init,
++    .cpu_instance_init = x86_tcg_cpu_instance_init,
+     .translate_code = x86_translate_code,
+     .get_tb_cpu_state = x86_get_tb_cpu_state,
+     .synchronize_from_tb = x86_cpu_synchronize_from_tb,
+@@ -237,8 +240,6 @@ static void x86_tcg_cpu_accel_class_init(ObjectClass *oc, const void *data)
+ #ifndef CONFIG_USER_ONLY
+     acc->cpu_target_realize = tcg_cpu_realizefn;
+ #endif /* CONFIG_USER_ONLY */
+-
+-    acc->cpu_instance_init = x86_tcg_cpu_instance_init;
+ }
+ static const TypeInfo x86_tcg_cpu_accel_type_info = {
+     .name = ACCEL_CPU_NAME("tcg"),
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 3e22e7ed53d..703c2d9bd0a 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -268,11 +268,14 @@ static vaddr riscv_pointer_wrap(CPUState *cs, int mmu_idx,
+ }
+ #endif
+ 
++static void riscv_tcg_cpu_instance_init(CPUState *cs);
++
+ const TCGCPUOps riscv_tcg_ops = {
+     .mttcg_supported = true,
+     .guest_default_memory_order = 0,
+ 
+     .initialize = riscv_translate_init,
++    .cpu_instance_init = riscv_tcg_cpu_instance_init,
+     .translate_code = riscv_translate_code,
+     .get_tb_cpu_state = riscv_get_tb_cpu_state,
+     .synchronize_from_tb = riscv_cpu_synchronize_from_tb,
+@@ -1678,7 +1681,6 @@ static void riscv_tcg_cpu_accel_class_init(ObjectClass *oc, const void *data)
+ {
+     AccelCPUClass *acc = ACCEL_CPU_CLASS(oc);
+ 
+-    acc->cpu_instance_init = riscv_tcg_cpu_instance_init;
+     acc->cpu_target_realize = riscv_tcg_cpu_realize;
  }
  
 -- 
