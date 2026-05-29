@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAC48CD6E49
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 05:36:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D2F3CD6E45
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 06:01:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wSpt6-0000ch-I6; Fri, 29 May 2026 01:36:04 -0400
+	id 1wSqH1-0003qq-SQ; Fri, 29 May 2026 02:00:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1wSpt1-0000bF-BS
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 01:36:00 -0400
-Received: from mail-ot1-x32a.google.com ([2607:f8b0:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1wSqH0-0003qh-Gz
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 02:00:46 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1wSpsy-0001Us-Vh
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 01:35:58 -0400
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7de44ed7a11so12091386a34.1
- for <qemu-riscv@nongnu.org>; Thu, 28 May 2026 22:35:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1wSqGz-0007mb-0X
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 02:00:46 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2bcd730e090so108059845ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 28 May 2026 23:00:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1780032956; x=1780637756; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GZWpgE7C1GVlusaJBkGbSPYhr5f5uVmFrg4V7xjHwEY=;
- b=go+TQp9P99uaz2hZK0gmmCQ3jwR+T0nkx3iJBiRgjiXJk8Mtrs1MS4lpiimMJGVFYN
- cgkPX/wgdgqqm3g9JDy8IJJ4yjEbbu/45Vyex8n0N0bqXeCJBvnEwozhWmLISdLUD9tZ
- 6JON8y7yyx44IhjdO7FcvyZAYaI9dM+5V1Uv8uAaLkz7Ea1CKCM+JX1dYWMtZBF5au/d
- Vz8RTtZr2FQ1h3hh3ICnoVgDbxI2FTvdCu/smqMT0QryVh5js6vKBVQStJDUcypr6lh5
- hE/+2INNT7d0N49QeABs4TtjB7CaPvzeUxxBj+2M/yAa7diC7wInddVanUONo+FLc+Be
- 1Grw==
+ d=sifive.com; s=google; t=1780034442; x=1780639242; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WBlnqahlL4zc7puc7f/tbbI7ATLOEIWxyXIiecDKUpM=;
+ b=i9MhVcfPnqMOiwqoL91Zk2CKwiPcOO4YhbcXV0zum3c1KX+5LY2cM2RRb2uXNaY1wK
+ bar5OvAcjrTuVY5Q61Lsb5jQgReMeGPeVVpi2HfAADoy8ax5tMYLr7Vep3fqmtuvf5Zg
+ qhC6yViRe8Le6orY85xQzF1MeuW2AkTP6623n6alkxf+NLDFGt3Xu8Njnti2PGuiv9wx
+ MhIwnODT5rdzDv2dU34CYW5zFfm4LpQC+lsumRPekdJrqJOZFodZB0tlNH3EKGaDrpzW
+ 4YnAjKFGC5fgBxKUW74tBDwaFpPjqjtIm1xF+g7kxBMNI0qRRoBMjmcKkc+iQzF6lUzL
+ tf7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780032956; x=1780637756;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=GZWpgE7C1GVlusaJBkGbSPYhr5f5uVmFrg4V7xjHwEY=;
- b=FN2yJNgN929cO6nAVdO2KqK++frzD8BjGx1FOqwJL/YT9m0cLvV9dFaQhvT7puE5ck
- kK7pLkT/cJd39xdgkg606Ev0TpKObSezmhVE53Nf8+eMA/A+r1DJbbQNAHJu5Z0tTdfJ
- WITmJ78sYLN9OiWgJXtw/ExqfHhqO+b5Lo39qNxq6c+hI/uv/qFeVm5PWg0O4rYS9rbD
- nZyhrObQVGZ/QeiNJVhOhs5cQzUuxt1MJCd9p0o4ycXFdVMq8hmnPdi11StFm7v1p0U1
- EFkrLxbqC33Tfy9w+SUbgzL4WZMCAv6n54Qo+ASr+beS8CfcZm1O3gZtsz/rffTh4LlX
- vu8w==
+ d=1e100.net; s=20251104; t=1780034442; x=1780639242;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WBlnqahlL4zc7puc7f/tbbI7ATLOEIWxyXIiecDKUpM=;
+ b=NOTFKJ9EuE8VRABeC4ghKE0S5VeyR/S51NrB7vdeim5JGorPOtZ1WFQHYJ/RiXqdri
+ qoa0t2CDsi7xbcGb2vPxa/K3ZR2WFGGJm6FofpRx+XTnZIWWeCey89d5Eli472HgglF6
+ qiL+y0csytqd1IwDRP3FOxN67god28npQ/1GgmgE/xDNnqIDbDgjfSsUsmbYZYfsSjwt
+ cmW2z/380qkbrbuIR2m9JrgmSolddizCERfzMSkcYS0XISSWc4vlEjNMF/GDgEk0LnPw
+ 1vEwmLE9tmS6ajYS8MSJuADoYVU3+SU0QajFR0r9/UTWNvU4bBXKDIW0UD65kyeVa0se
+ tjlA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9u/qJS+YYIJED/qDPQssu8w8H58balJt4eJ1Hq7bFmgy6vkX23ovCpVEiqk2gih/2jHva+HLUVfFi2@nongnu.org
-X-Gm-Message-State: AOJu0Yzcw8Ix33tIFCbuUdnCGYTh1HnXyFy38Ojph5IKnfxHipjZWmIL
- uSSBzyw6ai8w6Jc6aYGxviXuwMkrofOcdLhrqwbG37hZO57V+x7d6Xi9YenefZwRDBI=
-X-Gm-Gg: Acq92OFNfYCO9LtNzaKe6J54q/rsd6YVaNPBpKUMGdVfOcjFnsDHEICe7a07BUinggr
- swT9ArxXy50JsDrbeZcD9/l+N1oFIVTzScYB0DxPtFYSuS3q8oVLeOG7jEZdJsgq7Zm8CSTa26D
- VZyY57ZOqrjEVcN5qALH6UAUN5E3sc33ZoAHONs8y+K5Z/PpMHO83OGU4upXibWLxDEhL82hrx6
- AqQM/jVh/MoHgxvRUDv7W/v6/2j164ETyz3GsjZSyKjash+udAmIqXMWizp/3ZKRIZs7CUkz76t
- ppQR4YRpnclrReaWbh0lVaBJGpo4f26ZxUtxH6pBOELiYPj459Es/JpGihnDHBQ3/u0K/sKvgUs
- hq4J8X8uXob8fPl0URzlwTeUAC3+LFp04biBTeTOaQ0JyZ/1hPidkMN+OcvNXJpc/RILDsinre6
- kV+MWp6Jtqiqk4oXDAnpm+Mjj/5TYECffrIvdrSo1QFuzS2RyLNIbAk+alpO/YsjqGvJPus7E9N
- 3oQd4c=
-X-Received: by 2002:a05:6830:67cf:b0:7d7:e57a:bcd with SMTP id
- 46e09a7af769-7e694d484c4mr948045a34.20.1780032955804; 
- Thu, 28 May 2026 22:35:55 -0700 (PDT)
-Received: from ausc-rvsw-c-01-anton.tail89d63.ts.net ([38.104.49.66])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e695d4726dsm742428a34.19.2026.05.28.22.35.53
+ AFNElJ9winKO1hJ33RiQU60yGhNeeIqRMNdsm0GQrEqm95syYJ+LHgI4BbLVsoGzj5ri1j9lJlOlxgJIKZsU@nongnu.org
+X-Gm-Message-State: AOJu0Yxld9lsHS+9LPRDNYav3QRUqAKZb+nT/oo2F4VeM/FBDzWQbO1E
+ ORZayAq/87kn6LAthBj7hwF9IhoXieXhRMi91fLReZeHKUnpIqwJ6AsGkkuPZkGYa2o=
+X-Gm-Gg: Acq92OHf+Z4AzlB296yFuNi5luyeaR+kstRiRiYK7akQGwRIIxs7M9dT4s8MjOHvu+e
+ csftwP5vT/vQ0mJavft3EycvfqvkHvGmDgH1C+UPMN2K3W1o7HV/Zel4ysSi6NQJhqV8CN55p0t
+ Rz630Bs01auOROBDJ65rFIj9ksuDB+T6PkK8p5DM8k2293/eKXrIRSHpj0JF+ZWallKHPdfOk6q
+ 9dj+qBowQWLxaee3tyysFlgCgh1xUYdCthFcgPU3b4Sm0IKTykmqlE/4sJpIL33XUqYCmzuugO/
+ QJ0ULMwMDKOLoGsQLZ1rH5Cwl8Ple3gvcog1Gsthh4kqRhtg2Lg+LgNk4PnyvOdCDHaJLawCnUU
+ 66DoCV6AfwjU59DpY03K1tdLwPSbCGzmWvpBG/MWtWqQg7/q+gMPVSwsH+9dhPNpesMEFMKe2vv
+ 33j5N5ebHT4neozJnBHScf/83yVxGAVWegmdnH+fQ4YMcTR7AS1MkjU7xmV5krdi1sWniGghpwD
+ Wk=
+X-Received: by 2002:a17:902:e543:b0:2bc:e62a:979b with SMTP id
+ d9443c01a7336-2bf20996a71mr20118105ad.30.1780034441871; 
+ Thu, 28 May 2026 23:00:41 -0700 (PDT)
+Received: from sifive.com ([136.226.240.165]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2bf239e5c83sm6339045ad.16.2026.05.28.23.00.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 May 2026 22:35:54 -0700 (PDT)
-From: Anton Blanchard <antonb@tenstorrent.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, daniel.barboza@oss.qualcomm.com,
- palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, Anton Blanchard <antonb@tenstorrent.com>
-Subject: [PATCH 2/2] target/riscv: Improve alignment in riscv_cpu_dump_state
-Date: Fri, 29 May 2026 05:35:19 +0000
-Message-Id: <20260529053519.1224019-2-antonb@tenstorrent.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260529053519.1224019-1-antonb@tenstorrent.com>
-References: <20260529053519.1224019-1-antonb@tenstorrent.com>
+ Thu, 28 May 2026 23:00:39 -0700 (PDT)
+Date: Fri, 29 May 2026 14:00:35 +0800
+From: Max Chou <max.chou@sifive.com>
+To: Alistair <alistair@alistair23.me>
+Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ qemu-riscv@nongnu.org
+Subject: Re: QEMU RISC-V Call
+Message-ID: <ahkrD2h1kaubNtXq@sifive.com>
+References: <e2576b58-9356-4d88-8485-42256b2a2366@alistair23.me>
+ <6e25408f-662c-4cd9-93b7-35ea100c81fb@oss.qualcomm.com>
+ <81a5c280-973d-4ada-b2f3-3ac4652a2037@app.fastmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32a;
- envelope-from=antonb@tenstorrent.com; helo=mail-ot1-x32a.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <81a5c280-973d-4ada-b2f3-3ac4652a2037@app.fastmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,54 +103,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Align all the CSR values. mcountinhibit is the longest CSR name at
-13 characters, so use that width for PC, implicit state, and CSR names.
-Also remove the redundant '=' from the implicit state lines.t
+On 2026-05-28 21:37, Alistair wrote:
+> On Thu, 28 May 2026, at 5:13 AM, Daniel Henrique Barboza wrote:
+> > 
+> > 
+> > On 5/27/2026 9:15 AM, Alistair Francis wrote:
+> > > Hello everyone,
+> > > 
+> > > There has been some interest recently about setting up a call to discuss QEMU RISC-V and the current status.
+> > > 
+> > > So I wanted to setup a chat next week AEST (UTC+10) time to discuss a few things on a call.
+> > > 
+> > > I was thinking 1PM on Monday the 1st of June.
+> > 
+> > Can we make it 10AM AEST?
+> 
+> Sure! Let's do that
 
-Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
----
- target/riscv/cpu.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Both work for me. Thx
 
-This makes it easier to read the output in my eyes, but I wasn't sure if the
-format is set in stone. Feel free to drop it if so.
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index b38ddc39ea..883aa906a1 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -575,7 +575,7 @@ static void riscv_dump_csr(CPURISCVState *env, int csrno, FILE *f)
-      * to do the filtering of the registers that are present.
-      */
-     if (res == RISCV_EXCP_NONE) {
--        qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n",
-+        qemu_fprintf(f, " %-13s " TARGET_FMT_lx "\n",
-                      csr_ops[csrno].name, val);
-     }
- }
-@@ -604,17 +604,17 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-     uint8_t *p;
- 
- #if !defined(CONFIG_USER_ONLY)
--    qemu_fprintf(f, " %s %s\n", "priv   =  ", riscv_priv_str(env->priv));
-+    qemu_fprintf(f, " %-13s %s\n", "priv", riscv_priv_str(env->priv));
- 
-     if (riscv_has_ext(env, RVH)) {
--        qemu_fprintf(f, " %s %d\n", "V      =  ", env->virt_enabled);
-+        qemu_fprintf(f, " %-13s %d\n", "V", env->virt_enabled);
-     }
- 
-     if (cpu->cfg.ext_zicfilp) {
--        qemu_fprintf(f, " %s %d\n", "elp    =  ", env->elp);
-+        qemu_fprintf(f, " %-13s %d\n", "elp", env->elp);
-     }
- #endif
--    qemu_fprintf(f, " %s %" PRIx64 "\n", "pc      ", env->pc);
-+    qemu_fprintf(f, " %-13s %" PRIx64 "\n", "pc", env->pc);
- #ifndef CONFIG_USER_ONLY
-     for (i = 0; i < ARRAY_SIZE(csr_ops); i++) {
-         int csrno = i;
--- 
-2.34.1
-
+rnax
 
