@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A5C6CD4F54
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 12:52:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11049CD4F54
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 12:52:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wSwfu-0004lf-3X; Fri, 29 May 2026 08:50:54 -0400
+	id 1wSwgD-0004t1-5h; Fri, 29 May 2026 08:51:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>) id 1wSwfs-0004kx-BY
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 08:50:52 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <npiggin@gmail.com>) id 1wSwgB-0004sZ-BO
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 08:51:11 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <npiggin@gmail.com>) id 1wSwfq-0006E7-Ka
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 08:50:52 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-841513664bbso4481641b3a.1
- for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 05:50:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <npiggin@gmail.com>) id 1wSwg8-0006Jy-19
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 08:51:11 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-837dfccd950so6503572b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 05:51:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780059049; x=1780663849; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1780059067; x=1780663867; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oBtA1oFudyVY7Vw5dgqM/2NWOChlQXrgG47s0EI8hXU=;
- b=nNrne3pOxDEnu+yfWVIJN/fxt0G79YgYAZ5D8HkjcWrQDUN+bAy41LUSF7VsEW1yWh
- nlilq1SPgo9V1HAm+kzoNkhsrL1XknhMv7Zdw+S6MisX7o/c9OTj6S7SxPBZ1J2qin5I
- lRo7deUxQbJoaO7zE54dJQRK9VWU96+yUNHS2RhDxbZsLUkZzggnYLM7BYDKZgy+w+t2
- MriwGxL3aRFaC0PT7J9A7xQokkSNLTNGV+oP6cTFsLXvXzqy3BQf7GFTJw6CKo/7vEEH
- bELysypz7zzHtKDTOi6DQnuhcTsRuHQolSSYmaQCf8RzjEi0hgeZ8kWDyo5Gj3xdgGXJ
- pmMQ==
+ bh=x92lbn+dfm1bMNXAWkcVvhDZDWVp9FGF9ZyQOtYbWgc=;
+ b=iyllGam/PMM3tYDlYY2TUXrwU6i88rWfxO5GQ50lrXhkPDFzKXGm8zRRbb/2tj55zS
+ 0mc7lg1FIfXlUQvWubIkJWnvmOFuguz4VVFEI30VBogdSN7bL+rQLVlcpfBA6XII7xMb
+ Hzne3dgF0q3A5JjPsUG7J4spO+jmXvgbskIgZZdUtl/cNGAY2FAtUwuTw7s1XqkaLqXG
+ 2sHlsEkptou63bJx0Y90aOFwIQDI3g1HydEqZLtqIXwfgzqCxR2LBKIoTcIfOHrl5owz
+ EQ7CNe1Bs93KdLt/xeVrk0urC0DsL8A+fhdq0N7R1R9pDZC6LZ0fo3FnhisJW2b5e5Tm
+ Wsbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780059049; x=1780663849;
+ d=1e100.net; s=20251104; t=1780059067; x=1780663867;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=oBtA1oFudyVY7Vw5dgqM/2NWOChlQXrgG47s0EI8hXU=;
- b=Cs5NVJ/JdokviLF5LdpfQLDS73wZ+gvA23GIdKCtPeBO7EVA/ZtLK7P3hI9YbQ1++H
- ii/K8UK2OP5KfOQlIRR908nfsc/ANpqXiDr6W8+1oh+FsuPdEuDaIna64b9W0RkmA3uD
- ncXwCuTkC4pjRJGAMF3BEfsXr5rHi5QY11Jq/oV6hFLbbSjzu2oiJIKh8M21132J9jgp
- hw/IEJTYrhwbUfbbLsgp7m9PVTVQx8aY9K6Tr0a9CkghVcMjbiV+D0ui+/1MCxCW4eqv
- lkFMVIbAAEJ/bt6KYMo6VdO4VASnFwya/RLzB8j615MgM4v40fxGKi0J2+gmQK/PkMch
- 8bUw==
+ bh=x92lbn+dfm1bMNXAWkcVvhDZDWVp9FGF9ZyQOtYbWgc=;
+ b=mNumcR05vZvEpjGMwAdJcNKy2QDP697UNe1VLnBTWUc/SbaKA4agGgDdHDCpm2p8Br
+ PiRhNlbVldpmtzjsVTetD43RWghJalgWb8EVuNMUZn0hCtzSLk/ktixvFt/YK/gthTZc
+ n3CezUOTJi7z8X4HRhweBzeRhAMrG+JA1o1Y6qZkGJhSA5cE8TzkTo1i4W4CzNmKgMPe
+ aTrgg2bVz0PqT6tHvUX/yMxJW7dpZCbZMFk59CnIBgrdNzx64zlM4rAteS+gE+X0a/Y7
+ 91G+erNK9P5V+fwaiX9QF8MHitGhf7tirrUs3rIX6i08NdQRqxQt+K+CPwDHFU6H6J43
+ Cimw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9fyrX1VINNQATFmX6R2UjAzTXZNdm++jNhnxRmMOmY23LjusJ2MWotXwigQhPnWkbtrKa0wOQoTod6@nongnu.org
-X-Gm-Message-State: AOJu0YzRrJt+isKYxGi+Svvp/LLNSnqSQ+DEn8kqoGSPCp+z6FqWNGpi
- Y5L2CPCnUMk/OCVcWtnO7i7kfN2gMtYSESBIqQTjrW7aU32fZFLE6V9g
-X-Gm-Gg: Acq92OEA60sK3KQ7D+NeQHw2wR1bD/EHBw03StKPWuV9xhYLwEC6FDWZPzoydA7eSzm
- 1JpJFztlqWt9ila9EXP7uV0MuWdZ2ce3BN97pRUcIgV/F+LcYf5BCsSyHT/hyRmybEYpbfLrGPm
- 5H27VJGUJM1GJCoJMrpYnFvL15psk7rp1TaK7mOH5ydvBoIkb8ccG79em9Sw6SlRPWChQoRg1rv
- gpIGDseae+ft+Bq5Etpa8KpUAjA0dP5G4udYdxM1RNKe9OaZ/eg4J+uIOnpRj7sk86MGV/Cq07o
- 7Mb5wokWT9RfqdUw2gJapAL+SvyjtwSfL1RlqjqNp+6dukvsOYXvVT5CpRkHhjOQ6qV2UaZXm41
- n0HpWuRKsg+nukc8qrQIpnCExPDL92pDeattqdCaaq8Q5QDVgvtG+uxI8xL1LsGJvFHjmlK+Fmv
- HsXnOOerapxN6OHt0X0HteF+nrQn6VANz7bpmDN0YByo1x/4+tfjnieqEZKNzu4bYYU0kgP4ZME
- yDyFfrw
-X-Received: by 2002:a05:6a00:12c6:b0:7e8:3fcb:9b03 with SMTP id
- d2e1a72fcca58-84210c9e6d8mr2463722b3a.25.1780059049246; 
- Fri, 29 May 2026 05:50:49 -0700 (PDT)
+ AFNElJ8pbKgrvP7Wsraems5LlHtgE/q50bOa1TI+H1BlRJ9jSgep4lImI72RvTr3zGq4hesxEpTne3FVKVlu@nongnu.org
+X-Gm-Message-State: AOJu0Yzese4XCDYtpAoY959hbvv4wihRlPb1l0OittrObdSgVIQi4s/Q
+ 2h7xFPQxOQGPtHK9XHTpHfgQUG2HFLOuXyHPPkkmEk7Yqx4SX31Ff4YFDDeC+Q==
+X-Gm-Gg: Acq92OHM5iu+NaLtA6Kb5T7/zp8DiK3omhTiMlxxY93YJgv7ciKK4wYAD65IoQ4vTgu
+ KZZXase0Z3nE4e7gdWCovtR8G7Oe56+ycrMmhC3wEwjyFjVbJqkVorWgox/lcgn8ViUtWetC1hZ
+ JPd1hoRqISCenc/oDO+Z51IjjDN5yba6DMA18hsBg0onFtD1K8FSmVIQ9j+c4Pzq0nRVY5DwkNW
+ 86DHyJlwjze6kliSK60eDn3OFoqaKH2S/nvl3tJkzP8Lg9gd/VCQQAM5Sr8AWAZivTLGt+IKgsK
+ ZYb4GqEf2Luae74gAaI0d3xdo+DSfd4iiyrgdCm20jPEapWMri6JB24GJFQ6OJbsiatXBHM4b9a
+ KpE1+wG4lL4odzC6P8rb22hsnfvoqtG8Bc5obEBgm6PpeH5rP/krzYMaQqAgfszzzHfAXwzec73
+ E5mCDP6JeCIBiSv6KqTZhQDLDe4mEqKHj3+1oJMVXDm1fGxQANBkp71ilbNvHheRXxWzaQN8znd
+ zIqzhsyVh9dx2kLNBI=
+X-Received: by 2002:a05:6a00:12cc:b0:837:e9cc:d465 with SMTP id
+ d2e1a72fcca58-84212c8cd39mr2873145b3a.20.1780059066398; 
+ Fri, 29 May 2026 05:51:06 -0700 (PDT)
 Received: from localhost (124.158.97.178.qld.leaptel.network. [124.158.97.178])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84214c92fc6sm1791888b3a.36.2026.05.29.05.50.47
+ d2e1a72fcca58-84214b31933sm1840875b3a.23.2026.05.29.05.51.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 May 2026 05:50:48 -0700 (PDT)
+ Fri, 29 May 2026 05:51:05 -0700 (PDT)
 From: Nicholas Piggin <npiggin@gmail.com>
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: Nicholas Piggin <npiggin@gmail.com>,
@@ -74,18 +74,19 @@ Cc: Nicholas Piggin <npiggin@gmail.com>,
  Joel Stanley <jms@oss.tenstorrent.com>,
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
  Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Joel Stanley <joel@jms.id.au>
-Subject: [PATCH v7 01/10] hw/riscv/boot: Describe discontiguous memory in
- boot_info
-Date: Fri, 29 May 2026 05:50:26 -0700
-Message-ID: <20260529125036.728206-2-npiggin@gmail.com>
+ qemu-devel@nongnu.org, Joel Stanley <joel@jms.id.au>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v7 05/10] hw/riscv: Add Tenstorrent Atlantis machine
+Date: Fri, 29 May 2026 05:50:30 -0700
+Message-ID: <20260529125036.728206-6-npiggin@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260529125036.728206-1-npiggin@gmail.com>
 References: <20260529125036.728206-1-npiggin@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=npiggin@gmail.com; helo=mail-pf1-x42e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=npiggin@gmail.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,77 +109,769 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Machines that have discontiguous memory may need to adjust where
-firmware and images are loaded at boot. Provide an interface for
-machines to describe a discontiguous low/high RAM scheme for this
-purpose.
+From: Joel Stanley <joel@jms.id.au>
 
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+The Tenstorrent Atlantis platform is a collaboration between Tenstorrent
+and CoreLab Technology. It is based on the Atlantis SoC, which includes
+the Ascalon-X CPU and other IP from Tenstorrent and CoreLab Technology.
+The Tenstorrent Ascalon-X is a high performance 64-bit RVA23 compliant
+RISC-V CPU.
+
+Add the tt-atlantis machine containing serial console, interrupt
+controllers, and device tree support.
+
+The Atlantis boot images loaded from include OpenSBI and an initial DTB
+that is passed to OpenSBI. This is approximated in the model by having
+QEMU build the device tree rather than load a DTB image directly.
+Subsequent stages may use the modified DTB provided by OpenSBI or opt to
+supply their own.
+
+  qemu-system-riscv64 -M tt-atlantis -m 512M \
+   -kernel Image -initrd rootfs.cpio -nographic
+
+Co-Developed-by: Nicholas Piggin <npiggin@gmail.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
 ---
- hw/riscv/boot.c         | 16 ++++++++++++++++
- include/hw/riscv/boot.h |  7 +++++++
- 2 files changed, 23 insertions(+)
+ MAINTAINERS                       |  10 +
+ docs/system/riscv/tt_atlantis.rst |  32 ++
+ docs/system/target-riscv.rst      |   1 +
+ hw/riscv/Kconfig                  |  10 +
+ hw/riscv/meson.build              |   1 +
+ hw/riscv/tt_atlantis.c            | 558 ++++++++++++++++++++++++++++++
+ include/hw/riscv/tt_atlantis.h    |  51 +++
+ 7 files changed, 663 insertions(+)
+ create mode 100644 docs/system/riscv/tt_atlantis.rst
+ create mode 100644 hw/riscv/tt_atlantis.c
+ create mode 100644 include/hw/riscv/tt_atlantis.h
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index ae2f86c7ce..b1a020b58a 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -69,11 +69,27 @@ char *riscv_plic_hart_config_string(int hart_count)
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 7eb5823da6..c5f7a8a6e4 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1779,6 +1779,16 @@ F: hw/*/*sifive*.c
+ F: include/hw/*/*sifive*.h
+ F: tests/functional/test_riscv64_sifive_u.py
  
- void riscv_boot_info_init(RISCVBootInfo *info, RISCVHartArrayState *harts)
- {
-+    info->ram_low_start = 0;
-+    info->ram_low_size = 0;
-     info->kernel_size = 0;
-     info->initrd_size = 0;
-     info->is_32bit = riscv_is_32bit(harts);
- }
++Tenstorrent Machines
++M: Joel Stanley <joel@jms.id.au>
++R: Nicholas Piggin <npiggin@gmail.com>
++R: Michael Ellerman <mpe@kernel.org>
++L: qemu-riscv@nongnu.org
++S: Supported
++F: docs/system/riscv/tt_*.rst
++F: hw/riscv/tt_*.c
++F: include/hw/riscv/tt_*.h
++
+ AMD Microblaze-V Generic Board
+ M: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
+ S: Maintained
+diff --git a/docs/system/riscv/tt_atlantis.rst b/docs/system/riscv/tt_atlantis.rst
+new file mode 100644
+index 0000000000..e8bc625677
+--- /dev/null
++++ b/docs/system/riscv/tt_atlantis.rst
+@@ -0,0 +1,32 @@
++Tenstorrent Atlantis (``tt-atlantis``)
++======================================
++
++The Tenstorrent Atlantis platform is a collaboration between Tenstorrent
++and CoreLab Technology. It is based on the Atlantis SoC, which includes
++the Ascalon-X CPU and other IP from Tenstorrent and CoreLab Technology.
++
++The Tenstorrent Ascalon-X is a high performance 64-bit RVA23 compliant
++RISC-V CPU.
++
++tt-atlantis QEMU model features
++-------------------------------
++
++* 8-core Ascalon-X CPU Cluster
++* RISC-V compliant Advanced Interrupt Architecture
++* 16550A compatible UART
++
++
++Note: the QEMU tt-atlantis machine does not model the platform
++exactly or all devices, but it is undergoing improvement.
++
++Supported software
++------------------
++
++The Tenstorrent Ascalon CPUs avoid proprietary or non-standard
++extensions, so compatibility with existing software is generally
++good. The QEMU tt-atlantis machine works with upstream OpenSBI
++and Linux with default configurations.
++
++The development board hardware will require some implementation
++specific setup in firmware which is being developed and may
++become a requirement or option for the tt-atlantis machine.
+diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+index 3ad5d1ddaf..a8e6b33421 100644
+--- a/docs/system/target-riscv.rst
++++ b/docs/system/target-riscv.rst
+@@ -71,6 +71,7 @@ undocumented; you can get a complete list by running
+    riscv/mips
+    riscv/shakti-c
+    riscv/sifive_u
++   riscv/tt_atlantis
+    riscv/virt
+    riscv/xiangshan-kunminghu
  
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 2518b04175..aaf029c9ed 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -120,6 +120,16 @@ config SPIKE
+     select RISCV_ACLINT
+     select SIFIVE_PLIC
+ 
++config TENSTORRENT
++    bool
++    default y
++    depends on RISCV64
++    select RISCV_ACLINT
++    select RISCV_APLIC
++    select RISCV_IMSIC
++    select SERIAL_MM
++    select DEVICE_TREE
++
+ config XIANGSHAN_KUNMINGHU
+     bool
+     default y
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index e53c180d0d..026e79591f 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -9,6 +9,7 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
+ riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
+ riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
+ riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
++riscv_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis.c'))
+ riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
+ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
+ 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+new file mode 100644
+index 0000000000..6f8b882fca
+--- /dev/null
++++ b/hw/riscv/tt_atlantis.c
+@@ -0,0 +1,558 @@
 +/*
-+ * This can be used instead of riscv_boot_info_init() if the machine has
-+ * discontiguous physical memory. The low memory range specified will be
-+ * used to place firmware images.
++ * Tenstorrent Atlantis RISC-V System on Chip
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright 2025 Tenstorrent, Joel Stanley <joel@jms.id.au>
 + */
-+void riscv_boot_info_init_discontig_mem(RISCVBootInfo *info,
-+                                        RISCVHartArrayState *harts,
-+                                        hwaddr low_start, hwaddr low_size)
++
++#include "qemu/osdep.h"
++#include "qemu/cutils.h"
++#include "qemu/error-report.h"
++#include "qemu/guest-random.h"
++#include "qemu/units.h"
++
++#include "hw/core/boards.h"
++#include "hw/core/loader.h"
++#include "hw/core/sysbus.h"
++
++#include "target/riscv/cpu.h"
++#include "target/riscv/pmu.h"
++
++#include "hw/riscv/boot.h"
++#include "hw/riscv/machines-qom.h"
++#include "hw/riscv/riscv_hart.h"
++
++#include "hw/char/serial-mm.h"
++#include "hw/intc/riscv_aclint.h"
++#include "hw/intc/riscv_aplic.h"
++
++#include "system/system.h"
++#include "system/device_tree.h"
++
++#include "hw/riscv/tt_atlantis.h"
++
++#include "aia.h"
++
++#define TT_IRQCHIP_NUM_MSIS       255
++#define TT_IRQCHIP_NUM_SOURCES    128
++#define TT_IRQCHIP_NUM_PRIO_BITS  3
++#define TT_IRQCHIP_GUESTS         7 /* aia_guests */
++
++#define FDT_PCI_ADDR_CELLS    3
++#define FDT_PCI_INT_CELLS     1
++#define FDT_MAX_INT_CELLS     2
++#define FDT_MAX_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
++                                 1 + FDT_MAX_INT_CELLS)
++
++#define TT_ACLINT_MTIME_SIZE    0x8050
++#define TT_ACLINT_MTIME         0x0
++#define TT_ACLINT_MTIMECMP      0x8000
++#define TT_ACLINT_TIMEBASE_FREQ 1000000000
++
++static const MemMapEntry tt_atlantis_memmap[] = {
++    /* Keep sorted with :'<,'>!sort -g -k 4 */
++    [TT_ATL_DDR_LO] =           { 0x00000000,    0x80000000 },
++    [TT_ATL_BOOTROM] =          { 0x80000000,        0x2000 },
++    [TT_ATL_MIMSIC] =           { 0xa0000000,      0x200000 },
++    [TT_ATL_ACLINT] =           { 0xa2180000,       0x10000 },
++    [TT_ATL_SIMSIC] =           { 0xa4000000,      0x200000 },
++    [TT_ATL_TIMER] =            { 0xa8020000,       0x10000 },
++    [TT_ATL_UART0] =            { 0xb0100000,       0x10000 },
++    [TT_ATL_MAPLIC] =           { 0xcc000000,     0x4000000 },
++    [TT_ATL_SAPLIC] =           { 0xe8000000,     0x4000000 },
++    [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
++};
++
++static uint32_t next_phandle(void)
 +{
-+    riscv_boot_info_init(info, harts);
-+    info->ram_low_start = low_start;
-+    info->ram_low_size = low_size;
++    static uint32_t phandle = 1;
++    return phandle++;
 +}
 +
- vaddr riscv_calc_kernel_start_addr(RISCVBootInfo *info,
-                                    hwaddr firmware_end_addr) {
-     if (info->is_32bit) {
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index f00b3ca122..69c99a1496 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -28,6 +28,10 @@
- #define RISCV64_BIOS_BIN    "opensbi-riscv64-generic-fw_dynamic.bin"
- 
- typedef struct RISCVBootInfo {
-+    /* First contiguous RAM region. If size is zero then assume entire RAM */
-+    hwaddr ram_low_start;
-+    hwaddr ram_low_size;
++static void create_fdt_cpus(TTAtlantisState *s, uint32_t *intc_phandles)
++{
++    uint32_t cpu_phandle;
++    void *fdt = MACHINE(s)->fdt;
 +
-     ssize_t kernel_size;
-     hwaddr image_low_addr;
-     hwaddr image_high_addr;
-@@ -43,6 +47,9 @@ bool riscv_is_32bit(RISCVHartArrayState *harts);
- char *riscv_plic_hart_config_string(int hart_count);
- 
- void riscv_boot_info_init(RISCVBootInfo *info, RISCVHartArrayState *harts);
-+void riscv_boot_info_init_discontig_mem(RISCVBootInfo *info,
-+                                        RISCVHartArrayState *harts,
-+                                        hwaddr low_start, hwaddr low_size);
- vaddr riscv_calc_kernel_start_addr(RISCVBootInfo *info,
-                                    hwaddr firmware_end_addr);
- hwaddr riscv_find_and_load_firmware(MachineState *machine,
++    for (int cpu = s->soc.num_harts - 1; cpu >= 0; cpu--) {
++        RISCVCPU *cpu_ptr = &s->soc.harts[cpu];
++        g_autofree char *cpu_name = NULL;
++        g_autofree char *intc_name = NULL;
++
++        cpu_phandle = next_phandle();
++
++        cpu_name = g_strdup_printf("/cpus/cpu@%d", s->soc.hartid_base + cpu);
++        qemu_fdt_add_subnode(fdt, cpu_name);
++
++        qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv57");
++
++        riscv_isa_write_fdt(cpu_ptr, fdt, cpu_name);
++
++        qemu_fdt_setprop_cell(fdt, cpu_name, "riscv,cbom-block-size",
++                cpu_ptr->cfg.cbom_blocksize);
++
++        qemu_fdt_setprop_cell(fdt, cpu_name, "riscv,cboz-block-size",
++                cpu_ptr->cfg.cboz_blocksize);
++
++        qemu_fdt_setprop_cell(fdt, cpu_name, "riscv,cbop-block-size",
++                cpu_ptr->cfg.cbop_blocksize);
++
++        qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
++        qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
++        qemu_fdt_setprop_cell(fdt, cpu_name, "reg", s->soc.hartid_base + cpu);
++        qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
++        qemu_fdt_setprop_cell(fdt, cpu_name, "phandle", cpu_phandle);
++
++        intc_phandles[cpu] = next_phandle();
++
++        intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
++        qemu_fdt_add_subnode(fdt, intc_name);
++        qemu_fdt_setprop_cell(fdt, intc_name, "phandle",
++                              intc_phandles[cpu]);
++        qemu_fdt_setprop_string(fdt, intc_name, "compatible",
++                                "riscv,cpu-intc");
++        qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
++        qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
++    }
++}
++
++static void create_fdt_memory_node(TTAtlantisState *s,
++                                   hwaddr addr, hwaddr size)
++{
++    void *fdt = MACHINE(s)->fdt;
++    g_autofree char *name = g_strdup_printf("/memory@%"HWADDR_PRIX, addr);
++    qemu_fdt_add_subnode(fdt, name);
++    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, addr, 2, size);
++    qemu_fdt_setprop_string(fdt, name, "device_type", "memory");
++}
++
++static void create_fdt_memory(TTAtlantisState *s)
++{
++    hwaddr size_lo = MACHINE(s)->ram_size;
++    hwaddr size_hi = 0;
++
++    if (size_lo > s->memmap[TT_ATL_DDR_LO].size) {
++        size_lo = s->memmap[TT_ATL_DDR_LO].size;
++        size_hi = MACHINE(s)->ram_size - size_lo;
++    }
++
++    create_fdt_memory_node(s, s->memmap[TT_ATL_DDR_LO].base, size_lo);
++    if (size_hi) {
++        /*
++         * The first part of the HI address is aliased at the LO address
++         * so do not include that as usable memory. Is there any way
++         * (or good reason) to describe that aliasing 2GB with DT?
++         */
++        create_fdt_memory_node(s, s->memmap[TT_ATL_DDR_HI].base + size_lo,
++                               size_hi);
++    }
++}
++
++static void create_fdt_aclint(TTAtlantisState *s, uint32_t *intc_phandles)
++{
++    void *fdt = MACHINE(s)->fdt;
++    g_autofree char *name = NULL;
++    g_autofree uint32_t *aclint_mtimer_cells = NULL;
++    uint32_t aclint_cells_size;
++    hwaddr addr;
++
++    aclint_mtimer_cells = g_new0(uint32_t, s->soc.num_harts * 2);
++
++    for (int cpu = 0; cpu < s->soc.num_harts; cpu++) {
++        aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
++        aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
++    }
++    aclint_cells_size = s->soc.num_harts * sizeof(uint32_t) * 2;
++
++    addr = s->memmap[TT_ATL_ACLINT].base;
++
++    name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIX, addr);
++    qemu_fdt_add_subnode(fdt, name);
++    qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,aclint-mtimer");
++    qemu_fdt_setprop_sized_cells(fdt, name, "reg",
++                                 2, addr + TT_ACLINT_MTIME,
++                                 2, 0x1000,
++                                 2, addr + TT_ACLINT_MTIMECMP,
++                                 2, 0x1000);
++    qemu_fdt_setprop(fdt, name, "interrupts-extended",
++                     aclint_mtimer_cells, aclint_cells_size);
++}
++
++static void create_fdt_one_imsic(void *fdt, const MemMapEntry *mem, int cpus,
++                                 uint32_t *intc_phandles, uint32_t msi_phandle,
++                                 int irq_line, uint32_t imsic_guest_bits)
++{
++    g_autofree char *name = NULL;
++    g_autofree uint32_t *imsic_cells = g_new0(uint32_t, cpus * 2);
++
++    for (int cpu = 0; cpu < cpus; cpu++) {
++        imsic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
++        imsic_cells[cpu * 2 + 1] = cpu_to_be32(irq_line);
++    }
++
++    name = g_strdup_printf("/soc/interrupt-controller@%"HWADDR_PRIX, mem->base);
++    qemu_fdt_add_subnode(fdt, name);
++    qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,imsics");
++
++    qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", 0);
++    qemu_fdt_setprop(fdt, name, "interrupt-controller", NULL, 0);
++    qemu_fdt_setprop(fdt, name, "msi-controller", NULL, 0);
++    qemu_fdt_setprop(fdt, name, "interrupts-extended",
++                     imsic_cells, sizeof(uint32_t) * cpus * 2);
++    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
++    qemu_fdt_setprop_cell(fdt, name, "riscv,num-ids", TT_IRQCHIP_NUM_MSIS);
++
++    if (imsic_guest_bits) {
++        qemu_fdt_setprop_cell(fdt, name, "riscv,guest-index-bits",
++                              imsic_guest_bits);
++    }
++    qemu_fdt_setprop_cell(fdt, name, "phandle", msi_phandle);
++}
++
++static void create_fdt_one_aplic(void *fdt,
++                                 const MemMapEntry *mem,
++                                 uint32_t msi_phandle,
++                                 uint32_t *intc_phandles,
++                                 uint32_t aplic_phandle,
++                                 uint32_t aplic_child_phandle,
++                                 int irq_line, int num_harts)
++{
++    g_autofree char *name =
++        g_strdup_printf("/soc/interrupt-controller@%"HWADDR_PRIX, mem->base);
++    g_autofree uint32_t *aplic_cells = g_new0(uint32_t, num_harts * 2);
++
++    for (int cpu = 0; cpu < num_harts; cpu++) {
++        aplic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
++        aplic_cells[cpu * 2 + 1] = cpu_to_be32(irq_line);
++    }
++
++    qemu_fdt_add_subnode(fdt, name);
++    qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,aplic");
++    qemu_fdt_setprop_cell(fdt, name, "#address-cells", 0);
++    qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", 2);
++    qemu_fdt_setprop(fdt, name, "interrupt-controller", NULL, 0);
++
++    qemu_fdt_setprop(fdt, name, "interrupts-extended",
++                     aplic_cells, num_harts * sizeof(uint32_t) * 2);
++    qemu_fdt_setprop_cell(fdt, name, "msi-parent", msi_phandle);
++
++    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
++    qemu_fdt_setprop_cell(fdt, name, "riscv,num-sources",
++                          TT_IRQCHIP_NUM_SOURCES);
++
++    if (aplic_child_phandle) {
++        qemu_fdt_setprop_cell(fdt, name, "riscv,children",
++                              aplic_child_phandle);
++        qemu_fdt_setprop_cells(fdt, name, "riscv,delegation",
++                               aplic_child_phandle, 1, TT_IRQCHIP_NUM_SOURCES);
++    }
++
++    qemu_fdt_setprop_cell(fdt, name, "phandle", aplic_phandle);
++}
++
++static void create_fdt_pmu(TTAtlantisState *s)
++{
++    g_autofree char *pmu_name = g_strdup_printf("/pmu");
++    void *fdt = MACHINE(s)->fdt;
++    RISCVCPU *hart = &s->soc.harts[0];
++
++    qemu_fdt_add_subnode(fdt, pmu_name);
++    qemu_fdt_setprop_string(fdt, pmu_name, "compatible", "riscv,pmu");
++    riscv_pmu_generate_fdt_node(fdt, hart->pmu_avail_ctrs, pmu_name);
++}
++
++static void create_fdt_cpu(TTAtlantisState *s, const MemMapEntry *memmap,
++                           uint32_t aplic_s_phandle,
++                           uint32_t imsic_s_phandle)
++{
++    MachineState *ms = MACHINE(s);
++    void *fdt = MACHINE(s)->fdt;
++    g_autofree uint32_t *intc_phandles = NULL;
++
++    qemu_fdt_add_subnode(fdt, "/cpus");
++    qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
++                          TT_ACLINT_TIMEBASE_FREQ);
++    qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
++    qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
++
++    intc_phandles = g_new0(uint32_t, ms->smp.cpus);
++
++    create_fdt_cpus(s, intc_phandles);
++
++    create_fdt_memory(s);
++
++    create_fdt_aclint(s, intc_phandles);
++
++    /* M-level IMSIC node */
++    uint32_t msi_m_phandle = next_phandle();
++    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_MIMSIC], ms->smp.cpus,
++                         intc_phandles, msi_m_phandle,
++                         IRQ_M_EXT, 0);
++
++    /* S-level IMSIC node */
++    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_SIMSIC], ms->smp.cpus,
++                         intc_phandles, imsic_s_phandle,
++                         IRQ_S_EXT, imsic_num_bits(TT_IRQCHIP_GUESTS + 1));
++
++    uint32_t aplic_m_phandle = next_phandle();
++
++    /* M-level APLIC node */
++    create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_MAPLIC],
++                         msi_m_phandle, intc_phandles,
++                         aplic_m_phandle, aplic_s_phandle,
++                         IRQ_M_EXT, s->soc.num_harts);
++
++    /* S-level APLIC node */
++    create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_SAPLIC],
++                         imsic_s_phandle, intc_phandles,
++                         aplic_s_phandle, 0,
++                         IRQ_S_EXT, s->soc.num_harts);
++}
++
++static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
++                            int irqchip_phandle)
++{
++    g_autofree char *name = g_strdup_printf("/soc/serial@%"HWADDR_PRIX,
++                                            mem->base);
++
++    qemu_fdt_add_subnode(fdt, name);
++    qemu_fdt_setprop_string(fdt, name, "compatible", "ns16550a");
++    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
++    qemu_fdt_setprop_cell(fdt, name, "reg-shift", 2);
++    qemu_fdt_setprop_cell(fdt, name, "reg-io-width", 4);
++    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 3686400);
++    qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irqchip_phandle);
++    qemu_fdt_setprop_cells(fdt, name, "interrupts", irq, 0x4);
++
++    qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", name);
++    qemu_fdt_setprop_string(fdt, "/aliases", "serial0", name);
++}
++
++static void finalize_fdt(TTAtlantisState *s)
++{
++    uint32_t aplic_s_phandle = next_phandle();
++    uint32_t imsic_s_phandle = next_phandle();
++    void *fdt = MACHINE(s)->fdt;
++
++    create_fdt_cpu(s, s->memmap, aplic_s_phandle, imsic_s_phandle);
++
++    /*
++     * We want to do this, but the Linux aplic driver was broken before v6.16
++     *
++     * qemu_fdt_setprop_cell(MACHINE(s)->fdt, "/soc", "interrupt-parent",
++     *                       aplic_s_phandle);
++     */
++
++    create_fdt_uart(fdt, &s->memmap[TT_ATL_UART0], TT_ATL_UART0_IRQ,
++                    aplic_s_phandle);
++}
++
++static void create_fdt(TTAtlantisState *s)
++{
++    MachineState *ms = MACHINE(s);
++    uint8_t rng_seed[32];
++    g_autofree char *name = NULL;
++    void *fdt;
++
++    fdt = create_device_tree(&s->fdt_size);
++    if (!fdt) {
++        error_report("create_device_tree() failed");
++        exit(1);
++    }
++    ms->fdt = fdt;
++
++    qemu_fdt_setprop_string(fdt, "/", "model",
++                            "Tenstorrent Atlantis RISC-V Machine");
++    qemu_fdt_setprop_string(fdt, "/", "compatible", "tenstorrent,atlantis");
++    qemu_fdt_setprop_cell(fdt, "/", "#size-cells", 0x2);
++    qemu_fdt_setprop_cell(fdt, "/", "#address-cells", 0x2);
++
++    qemu_fdt_add_subnode(fdt, "/soc");
++    qemu_fdt_setprop(fdt, "/soc", "ranges", NULL, 0);
++    qemu_fdt_setprop_string(fdt, "/soc", "compatible", "simple-bus");
++    qemu_fdt_setprop_cell(fdt, "/soc", "#size-cells", 0x2);
++    qemu_fdt_setprop_cell(fdt, "/soc", "#address-cells", 0x2);
++
++    qemu_fdt_add_subnode(fdt, "/chosen");
++
++    /* Pass seed to RNG */
++    qemu_guest_getrandom_nofail(rng_seed, sizeof(rng_seed));
++    qemu_fdt_setprop(fdt, "/chosen", "rng-seed", rng_seed, sizeof(rng_seed));
++
++    qemu_fdt_add_subnode(fdt, "/aliases");
++
++    create_fdt_pmu(s);
++}
++
++static void tt_atlantis_machine_done(Notifier *notifier, void *data)
++{
++    TTAtlantisState *s = container_of(notifier, TTAtlantisState, machine_done);
++    MachineState *machine = MACHINE(s);
++    hwaddr start_addr = s->memmap[TT_ATL_DDR_LO].base;
++    hwaddr mem_size;
++    target_ulong firmware_end_addr, kernel_start_addr;
++    const char *firmware_name = riscv_default_firmware_name(&s->soc);
++    uint64_t fdt_load_addr;
++    uint64_t kernel_entry;
++    RISCVBootInfo boot_info;
++
++    /*
++     * A user provided dtb must include everything, including
++     * dynamic sysbus devices. Our FDT needs to be finalized.
++     */
++    if (machine->dtb == NULL) {
++        finalize_fdt(s);
++    }
++
++    mem_size = machine->ram_size;
++    if (mem_size > s->memmap[TT_ATL_DDR_LO].size) {
++        mem_size = s->memmap[TT_ATL_DDR_LO].size;
++    }
++    riscv_boot_info_init_discontig_mem(&boot_info, &s->soc,
++                                       s->memmap[TT_ATL_DDR_LO].base,
++                                       mem_size);
++
++    firmware_end_addr = riscv_find_and_load_firmware(machine, &boot_info,
++                                                     firmware_name,
++                                                     &start_addr, NULL);
++
++    kernel_start_addr = riscv_calc_kernel_start_addr(&boot_info,
++                                                     firmware_end_addr);
++    if (machine->kernel_filename) {
++        riscv_load_kernel(machine, &boot_info, kernel_start_addr,
++                          true, NULL);
++    }
++    kernel_entry = boot_info.image_low_addr;
++
++    fdt_load_addr = riscv_compute_fdt_addr(s->memmap[TT_ATL_DDR_LO].base,
++                                           s->memmap[TT_ATL_DDR_LO].size,
++                                           machine, &boot_info);
++    riscv_load_fdt(fdt_load_addr, machine->fdt);
++
++    /* load the reset vector */
++    riscv_setup_rom_reset_vec(machine, &s->soc, start_addr,
++                              s->memmap[TT_ATL_BOOTROM].base,
++                              s->memmap[TT_ATL_BOOTROM].size,
++                              kernel_entry,
++                              fdt_load_addr);
++
++}
++
++static void tt_atlantis_machine_init(MachineState *machine)
++{
++    TTAtlantisState *s = TT_ATLANTIS_MACHINE(machine);
++
++    MemoryRegion *system_memory = get_system_memory();
++    MemoryRegion *ram_hi = g_new(MemoryRegion, 1);
++    MemoryRegion *ram_lo = g_new(MemoryRegion, 1);
++    MemoryRegion *bootrom = g_new(MemoryRegion, 1);
++    ram_addr_t lo_ram_size, hi_ram_size;
++    int hart_count = machine->smp.cpus;
++    int base_hartid = 0;
++
++    s->memmap = tt_atlantis_memmap;
++
++    object_initialize_child(OBJECT(machine), "soc", &s->soc,
++                            TYPE_RISCV_HART_ARRAY);
++    object_property_set_str(OBJECT(&s->soc), "cpu-type", machine->cpu_type,
++                            &error_abort);
++    object_property_set_int(OBJECT(&s->soc), "hartid-base", base_hartid,
++                            &error_abort);
++    object_property_set_int(OBJECT(&s->soc), "num-harts", hart_count,
++                            &error_abort);
++    object_property_set_int(OBJECT(&s->soc), "resetvec",
++                            s->memmap[TT_ATL_BOOTROM].base,
++                            &error_abort);
++    sysbus_realize(SYS_BUS_DEVICE(&s->soc), &error_fatal);
++
++    s->irqchip = riscv_create_aia(true, TT_IRQCHIP_GUESTS,
++                                  TT_IRQCHIP_NUM_SOURCES,
++                                  &s->memmap[TT_ATL_MAPLIC],
++                                  &s->memmap[TT_ATL_SAPLIC],
++                                  &s->memmap[TT_ATL_MIMSIC],
++                                  &s->memmap[TT_ATL_SIMSIC],
++                                  0, base_hartid, hart_count,
++                                  TT_IRQCHIP_NUM_MSIS,
++                                  TT_IRQCHIP_NUM_PRIO_BITS);
++
++    riscv_aclint_mtimer_create(s->memmap[TT_ATL_ACLINT].base,
++            TT_ACLINT_MTIME_SIZE,
++            base_hartid, hart_count,
++            TT_ACLINT_MTIMECMP,
++            TT_ACLINT_MTIME,
++            TT_ACLINT_TIMEBASE_FREQ, true);
++
++    /* DDR */
++
++    /* The high address covers all of RAM, the low address just the first 2GB */
++    lo_ram_size = s->memmap[TT_ATL_DDR_LO].size;
++    hi_ram_size = s->memmap[TT_ATL_DDR_HI].size;
++    if (machine->ram_size > hi_ram_size) {
++        char *sz = size_to_str(hi_ram_size);
++        error_report("RAM size is too large, maximum is %s", sz);
++        g_free(sz);
++        exit(EXIT_FAILURE);
++    }
++
++    memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", machine->ram,
++                             0, lo_ram_size);
++    memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", machine->ram,
++                             0, hi_ram_size);
++    memory_region_add_subregion(system_memory,
++                                s->memmap[TT_ATL_DDR_LO].base, ram_lo);
++    memory_region_add_subregion(system_memory,
++                                s->memmap[TT_ATL_DDR_HI].base, ram_hi);
++
++    /* Boot ROM */
++    memory_region_init_rom(bootrom, NULL, "tt-atlantis.bootrom",
++                           s->memmap[TT_ATL_BOOTROM].size, &error_fatal);
++    memory_region_add_subregion(system_memory, s->memmap[TT_ATL_BOOTROM].base,
++                                bootrom);
++
++    /* UART */
++    serial_mm_init(system_memory, s->memmap[TT_ATL_UART0].base, 2,
++                   qdev_get_gpio_in(s->irqchip, TT_ATL_UART0_IRQ),
++                   115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
++
++    /* Load or create device tree */
++    if (machine->dtb) {
++        machine->fdt = load_device_tree(machine->dtb, &s->fdt_size);
++        if (!machine->fdt) {
++            error_report("load_device_tree() failed");
++            exit(1);
++        }
++    } else {
++        create_fdt(s);
++    }
++
++    s->machine_done.notify = tt_atlantis_machine_done;
++    qemu_add_machine_init_done_notifier(&s->machine_done);
++}
++
++static void tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
++{
++    MachineClass *mc = MACHINE_CLASS(oc);
++
++    mc->desc = "Tenstorrent Atlantis RISC-V SoC";
++    mc->init = tt_atlantis_machine_init;
++    mc->max_cpus = 8;
++    mc->default_cpus = 8;
++    mc->default_ram_size = 2 * GiB;
++    mc->default_cpu_type = TYPE_RISCV_CPU_TT_ASCALON;
++    mc->block_default_type = IF_VIRTIO;
++    mc->no_cdrom = 1;
++    mc->default_ram_id = "tt_atlantis.ram";
++}
++
++static const TypeInfo tt_atlantis_types[] = {
++    {
++        .name       = MACHINE_TYPE_NAME("tt-atlantis"),
++        .parent     = TYPE_MACHINE,
++        .class_init = tt_atlantis_machine_class_init,
++        .instance_size = sizeof(TTAtlantisState),
++        .interfaces = riscv64_machine_interfaces,
++    },
++};
++
++DEFINE_TYPES(tt_atlantis_types)
+diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+new file mode 100644
+index 0000000000..960dc07841
+--- /dev/null
++++ b/include/hw/riscv/tt_atlantis.h
+@@ -0,0 +1,51 @@
++/*
++ * Tenstorrent Atlantis RISC-V System on Chip
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Copyright 2025 Tenstorrent, Joel Stanley <joel@jms.id.au>
++ */
++
++#ifndef HW_RISCV_TT_ATLANTIS_H
++#define HW_RISCV_TT_ATLANTIS_H
++
++#include "hw/core/boards.h"
++#include "hw/core/sysbus.h"
++#include "hw/intc/riscv_imsic.h"
++#include "hw/riscv/riscv_hart.h"
++
++#define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
++OBJECT_DECLARE_SIMPLE_TYPE(TTAtlantisState, TT_ATLANTIS_MACHINE)
++
++struct TTAtlantisState {
++    /*< private >*/
++    MachineState parent;
++
++    /*< public >*/
++    Notifier machine_done;
++    const MemMapEntry *memmap;
++
++    RISCVHartArrayState soc;
++    DeviceState *irqchip;
++
++    int fdt_size;
++};
++
++enum {
++    TT_ATL_UART0_IRQ = 38,
++};
++
++enum {
++    TT_ATL_ACLINT,
++    TT_ATL_BOOTROM,
++    TT_ATL_DDR_LO,
++    TT_ATL_DDR_HI,
++    TT_ATL_MAPLIC,
++    TT_ATL_MIMSIC,
++    TT_ATL_SAPLIC,
++    TT_ATL_SIMSIC,
++    TT_ATL_TIMER,
++    TT_ATL_UART0,
++};
++
++#endif
 -- 
 2.53.0
 
