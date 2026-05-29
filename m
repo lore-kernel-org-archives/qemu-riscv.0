@@ -4,90 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2360CD6E4C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 19:04:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F943CD6E4A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 May 2026 19:49:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wT2Uo-0000o4-7p; Fri, 29 May 2026 15:03:50 -0400
+	id 1wT3DM-0004Dc-BN; Fri, 29 May 2026 15:49:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mohamed@unpredictable.fr>)
- id 1wT2Uh-0000mZ-7S
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:03:43 -0400
-Received: from p-east2-cluster6-host1-snip4-10.eps.apple.com ([57.103.76.181]
- helo=outbound.st.icloud.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mohamed@unpredictable.fr>)
- id 1wT2Ud-00086b-PQ
- for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:03:41 -0400
-Received: from outbound.st.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-east-1a-60-percent-2 (Postfix) with ESMTPS id
- 54CDB18003BF; Fri, 29 May 2026 19:03:33 +0000 (UTC)
-X-ICL-Out-Info: HUtFAUMHWwJACUgBTUQeDx5WFlZNRAJCTQFIHV8DWRxBAUkdXw9LVxQEFVwFVgZXFHkNXR1FDlYZWgxSD1sOHBZLWFUJCh5cAEsdVwRUH1MSVR0dC0VLQBMESwNNXw5eHwQXRhlVBEceXVZAGRkCURxWDVdDVARfUEkMQVBsWgBHF0gdXRlZb1BdHA4YWRtAFV0RUBlWCV4VFx5BTVoCVk0FQAtVDi4HRQ5VBF90Kh9EfT13QHVbBDUUTHdVBVoBRXo+Cl8EK0ceSQpWCV4IRhFbFFZDURkMUE0BQwgKCEcDTRdeMlMEXxFQFg==
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=unpredictable.fr;
- s=sig1; t=1780081414; x=1782673414;
- bh=L5MbozJ5ZtclVRHz2/UqMohOJuTYcCfjXEZ5p11/12M=;
- h=Content-Type:Mime-Version:Subject:From:Date:Message-Id:To:x-icloud-hme;
- b=IVVgtVKNoeujD2aToxqnTEDEGofjD0PbXjBayJ13XZDLzrJC0Qth6X2sjlnjIRBmfFSRaf+kSR4VCFIzlB+A5gSM1SA0zOwQ4NQMUAVy9Dv+UvSl7SvX2ldlA9b2LVrE5uwsYwxP3BwdURT3xmKdoQOKpQWzCyzlmGt2JwfT72qH+p90UGyjEoCiXzQ+8LVoD80jFIBKAPlXS8QAyWP36RAU/emWY7+FiXn4MxT3HLWlA+xXoizHVkFJncqE33SnDJfUfC0iG6U8RLRxPIHRx2lOSawib4hRNQOo/0VN3dFc4CfS7vCNd22VVxkx3PFUUSvof0JBdTd0J1hZSgpmmw==
-mail-alias-created-date: 1752046281608
-Received: from smtpclient.apple (unknown [17.42.251.67])
- by p00-icloudmta-asmtp-us-east-1a-60-percent-2 (Postfix) with ESMTPSA id
- 5FAFB18011CD; Fri, 29 May 2026 19:03:29 +0000 (UTC)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.500.181\))
-Subject: Re: [PATCH 07/17] accel/whpx: Convert AccelCPUClass ->
- AccelOpsClass::cpu_instance_init
-From: Mohamed Mediouni <mohamed@unpredictable.fr>
-In-Reply-To: <20260529142434.87880-8-philmd@linaro.org>
-Date: Fri, 29 May 2026 21:03:17 +0200
-Cc: qemu-devel@nongnu.org, Reinoud Zandijk <reinoud@netbsd.org>,
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3DJ-00040Q-QS
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:49:50 -0400
+Received: from mail-wm1-x341.google.com ([2a00:1450:4864:20::341])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1wT3DF-00049C-U9
+ for qemu-riscv@nongnu.org; Fri, 29 May 2026 15:49:49 -0400
+Received: by mail-wm1-x341.google.com with SMTP id
+ 5b1f17b1804b1-48a3e9862f0so75759965e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 12:49:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1780084184; x=1780688984; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zgZBm14Uyju02XQkgmWQYMN4Aqeyrq3QWm64d0lF2pg=;
+ b=cY/uO65xZBVYT+YVORaX5Deaa0m0mLlDIWiwFPYGca0y+WIfb3hY7heO5ABuJayIwg
+ +YdoiasgwuDcW/2M2viddj087pwcmd1UCUfaS6/d9ielwajAfiNYsNrIWZlm/C+0imXU
+ uzmxVoJ2EDmuftjfn3K55ESL6UbyNDPmjNz/krJnKQDz+yTyG3RjTWhUcApEmqFyqfcn
+ AVpb6hLHP9CUkL6Sa4b3BH2PsndTF5NITriu/5FCCUJTHIYKomwDgzPcMYq9Urk13VcZ
+ UuYGLQto3C4C++oTxx6/mLDavBGKWf0Gshp+3U/C2eKX4dZQkmypr1wZAUtHTR6iV+DR
+ j7bQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780084184; x=1780688984;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zgZBm14Uyju02XQkgmWQYMN4Aqeyrq3QWm64d0lF2pg=;
+ b=ahYaAwbKQyK4qehcNdU81dFSI1WxkUHb61fPP2/Z8klzbf2/VxDQ3q+dbYV8d5a4rg
+ WDct11vddPHOLToRz+eF9s3UK7+LkEZC9X+rb1gpqaa73ji6zwoY5V9Yz8iBdO/Kt5Uv
+ ybtgIW7BnoUIYyL6Q1sNogpSz/JS9WD8nsBVq2ZCDuhfmUD0fxe2CUrecdLyFYiYIYvH
+ W+tnFX/SEyj9abkweEjlbAhWbZ8oUxRdTpBYn04dhqwp1ae0T6RC6q4Cdg2xEwLEZApQ
+ lSj4pwCltovhW0eW1fPP8Sav0p8uaYgjsmDVVjLPI7FBaO2L5Shw6pFtQsXyYEkB3Ogv
+ ei0Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+gEU3/ZmOtK7G1rqtsOLmpj4oOi5y99fAiIByMNQyh3Eb9OZmAzFBfqwppMCXnK3iWa0UVhwx8BmQI@nongnu.org
+X-Gm-Message-State: AOJu0Yy8T/Oo7x0AUxcYDVtQXRa9YxaRmffCO2lJSbhZodT+HDZ/UgLx
+ rknCtB1NtZ8ZFopULbaxfbbFlCtAL4Pd8hxiZ/c+HNNsrzkb8VfMtjOkncVU0z2FFeU=
+X-Gm-Gg: Acq92OEU5V53LAN2XSdbWs9lVS9VZXO/de7bmyZjQ0k8twFcNCoX1incjVqbE+X0CH+
+ hZOCsHjp1kJIvBduIcsdYDq59Of5QfEBUDAM8ITFGmhDygmyN52OM4mPCPoXC1elAKjtDtlrfOT
+ lf08p2fL2VC1Wss/LJZrVauvAOaNyKbgufrOmfps2bWAT+7akfvbBlU07B5ouMkj3ZZv7MMIgu7
+ NYOVTrNTHlD9ipntQ3JSJPaDaqQwqbFmeRvqfMNcfPM0atYS55gz4jvoMdbdaVspxRC5hZ8EfgZ
+ DMQnYox7qt1Q3OVx17QyfKirm1aPFRieDp6JM8egEUNCWove6LEDPCbAHHkn/nXZN23JaJr51W4
+ kPOvwiG3cKACPWI94G58C/Uw3sMBoDOJyGzj8LwJoeSq+fEFHpBD4b2afLxfZdyDou21b6GK72U
+ 6wTdbR1Z1VLxAzKts1qwfcITL1XI2NEz1ifXDBJWKxtv8qWbUkqZ438z7xt51+b4oirQ==
+X-Received: by 2002:a05:600c:64c8:b0:489:1abb:5559 with SMTP id
+ 5b1f17b1804b1-490a2a1f07cmr10902485e9.5.1780084183971; 
+ Fri, 29 May 2026 12:49:43 -0700 (PDT)
+Received: from m15.home (88-187-86-199.subs.proxad.net. [88.187.86.199])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4909c103baesm20533745e9.17.2026.05.29.12.49.41
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 29 May 2026 12:49:43 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Weiwei Li <liwei1518@gmail.com>, Glenn Miles <milesg@linux.ibm.com>,
+ kvm@vger.kernel.org, qemu-s390x@nongnu.org,
+ Chao Liu <chao.liu.zevorn@gmail.com>, David Hildenbrand <david@kernel.org>,
  Pedro Barbuda <pbarbuda@microsoft.com>,
- Nicholas Piggin <npiggin@gmail.com>, Glenn Miles <milesg@linux.ibm.com>,
- Alexander Graf <agraf@csgraf.de>, Peter Maydell <peter.maydell@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Marcelo Tosatti <mtosatti@redhat.com>, qemu-arm@nongnu.org,
+ Mohamed Mediouni <mohamed@unpredictable.fr>,
  Richard Henderson <richard.henderson@linaro.org>,
- Roman Bolshakov <rbolshakov@ddn.com>, Anton Johansson <anjo@rev.ng>,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?utf-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Song Gao <gaosong@loongson.cn>,
- qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
+ Song Gao <gaosong@loongson.cn>, Paolo Bonzini <pbonzini@redhat.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Anton Johansson <anjo@rev.ng>, Claudio Fontana <cfontana@suse.de>,
+ Eric Farman <farman@linux.ibm.com>, Alexander Graf <agraf@csgraf.de>,
+ Chinmay Rath <rathc@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ qemu-riscv@nongnu.org, Roman Bolshakov <rbolshakov@ddn.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Cornelia Huck <cohuck@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
  Phil Dennis-Jordan <phil@philjordan.eu>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-ppc@nongnu.org,
- Weiwei Li <liwei1518@gmail.com>, Chao Liu <chao.liu.zevorn@gmail.com>,
- kvm@vger.kernel.org, Claudio Fontana <cfontana@suse.de>,
- Chinmay Rath <rathc@linux.ibm.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <8889E557-72CA-4DED-B06E-4D82135CF923@unpredictable.fr>
-References: <20260529142434.87880-1-philmd@linaro.org>
- <20260529142434.87880-8-philmd@linaro.org>
-To: =?utf-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-X-Mailer: Apple Mail (2.3864.500.181)
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI5MDE5MCBTYWx0ZWRfX4o4D5iz7EZwB
- PafAprm4LAshjRT8vyziar5UHXlrRXeaCPpL8YtaSFbSe+khRmYckQMr8HJM+wFDb0UzxhbJ2f0
- vbVX5PY+D6pzFCt54DkKrz//hqR9i3C/zrVD0gyG6wILpCyhq7kQWANXj0l95ZDk+QdRE8Jr2F4
- 7gRhv3KD/jPqNaKEF40tXEpDAKNVM+8ik7645wl4FXn3rWsjFNrQVLw5YSbySX4pf3TiMg4a8k2
- 9xTnU0wK1CGgjZ1xEhBW2uUc2jbecGk+/pUf0pA/WaC6McGzCdUnVudt1b0s9461fPBMhSnIxve
- V8njC4Z6OtNr44Eo8CaHNJkAcv7dF4i5fMgO4+1fyf+habX8GesupW6T7OIaf8=
-X-Proofpoint-GUID: vYP-en4IsCvIH_H4la6OLn5fC5b_mBMB
-X-Authority-Info-Out: v=2.4 cv=Jtb8bc4C c=1 sm=1 tr=0 ts=6a19e306
- cx=c_apl:c_pps:t_out a=YrL12D//S6tul8v/L+6tKg==:117
- a=YrL12D//S6tul8v/L+6tKg==:17 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=KKAkSRfTAAAA:8 a=S16TypstT75ussWUPpsA:9
- a=QEXdDO2ut3YA:10 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: vYP-en4IsCvIH_H4la6OLn5fC5b_mBMB
-Received-SPF: pass client-ip=57.103.76.181;
- envelope-from=mohamed@unpredictable.fr; helo=outbound.st.icloud.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+ Reinoud Zandijk <reinoud@netbsd.org>, Halil Pasic <pasic@linux.ibm.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v2 00/17] accel: Remove need for AccelCPUClass
+Date: Fri, 29 May 2026 21:49:22 +0200
+Message-ID: <20260529194940.97143-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::341;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x341.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -104,117 +122,189 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Could get re-review: 4 & 5
 
+Move cpu_init/realize hooks from AccelCPUClass to
+AccelOpsClass. Specialize them for TCG in TCGCPUOps.
 
-> On 29. May 2026, at 16:24, Philippe Mathieu-Daud=C3=A9 =
-<philmd@linaro.org> wrote:
->=20
-> Register the new AccelOpsClass::cpu_instance_init hook.
->=20
-> ACCEL_CPU_NAME("whpx") TypeInfo is now empty, remove it.
->=20
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> ---
-> accel/whpx/whpx-accel-ops.c |  2 ++
-> accel/whpx/whpx-common.c    | 17 -----------------
-> target/arm/whpx/whpx-all.c  |  1 -
-> target/i386/whpx/whpx-all.c |  1 -
-> 4 files changed, 2 insertions(+), 19 deletions(-)
->=20
-> diff --git a/accel/whpx/whpx-accel-ops.c b/accel/whpx/whpx-accel-ops.c
-> index b8f41544cbe..099e8ef6da3 100644
-> --- a/accel/whpx/whpx-accel-ops.c
-> +++ b/accel/whpx/whpx-accel-ops.c
-> @@ -98,6 +98,8 @@ static void whpx_accel_ops_class_init(ObjectClass =
-*oc, const void *data)
->     ops->handle_interrupt =3D generic_handle_interrupt;
->     ops->supports_guest_debug =3D whpx_supports_guest_debug;
->=20
-> +    ops->cpu_instance_init =3D whpx_cpu_instance_init;
-> +
-Hi,
+This drastically simplifies the need of per-binary QOM
+types per accelerator per target (see also the nice
+diff-stat).
 
-No whpx_cpu_instance_init implementation present in the commit
-as far as I can tell.
+Based-on: tag single-binary-20260528
 
-Did you miss it? Other than that things look fine and a stub =
-implementation=20
-should be okay.
+Ignoring checkpatch.pl:
 
->     ops->synchronize_post_reset =3D whpx_cpu_synchronize_post_reset;
->     ops->synchronize_post_init =3D whpx_cpu_synchronize_post_init;
->     ops->synchronize_state =3D whpx_cpu_synchronize_state;
-> diff --git a/accel/whpx/whpx-common.c b/accel/whpx/whpx-common.c
-> index 247e12db812..25c5d84fd30 100644
-> --- a/accel/whpx/whpx-common.c
-> +++ b/accel/whpx/whpx-common.c
-> @@ -24,7 +24,6 @@
-> #include "qapi/qapi-types-common.h"
-> #include "qapi/qapi-visit-common.h"
-> #include "migration/blocker.h"
-> -#include "accel/accel-cpu-target.h"
-> #include <winerror.h>
->=20
-> #include "system/whpx-internal.h"
-> @@ -505,21 +504,6 @@ static void whpx_set_hyperv(Object *obj, Visitor =
-*v,
->     }
-> }
->=20
-> -static void whpx_cpu_accel_class_init(ObjectClass *oc, const void =
-*data)
-> -{
-> -    AccelCPUClass *acc =3D ACCEL_CPU_CLASS(oc);
-> -
-> -    acc->cpu_instance_init =3D whpx_cpu_instance_init;
-> -}
-> -
-> -static const TypeInfo whpx_cpu_accel_type =3D {
-> -    .name =3D ACCEL_CPU_NAME("whpx"),
-> -
-> -    .parent =3D TYPE_ACCEL_CPU,
-> -    .class_init =3D whpx_cpu_accel_class_init,
-> -    .abstract =3D true,
-> -};
-> -
-> static void whpx_accel_class_init(ObjectClass *oc, const void *data)
-> {
->     AccelClass *ac =3D ACCEL_CLASS(oc);
-> @@ -569,7 +553,6 @@ static const TypeInfo whpx_accel_type =3D {
-> static void whpx_type_init(void)
-> {
->     type_register_static(&whpx_accel_type);
-> -    type_register_static(&whpx_cpu_accel_type);
-> }
->=20
-> bool init_whp_dispatch(void)
-> diff --git a/target/arm/whpx/whpx-all.c b/target/arm/whpx/whpx-all.c
-> index 3079c6293c8..16040f102a3 100644
-> --- a/target/arm/whpx/whpx-all.c
-> +++ b/target/arm/whpx/whpx-all.c
-> @@ -23,7 +23,6 @@
-> #include "qapi/qapi-types-common.h"
-> #include "qapi/qapi-visit-common.h"
-> #include "migration/blocker.h"
-> -#include "accel/accel-cpu-target.h"
-> #include <winerror.h>
->=20
-> #include "syndrome.h"
-> diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
-> index e626acef2f0..1b68f13a7dd 100644
-> --- a/target/i386/whpx/whpx-all.c
-> +++ b/target/i386/whpx/whpx-all.c
-> @@ -33,7 +33,6 @@
-> #include "qapi/qapi-visit-common.h"
-> #include "migration/blocker.h"
-> #include "host-cpu.h"
-> -#include "accel/accel-cpu-target.h"
-> #include <winerror.h>
->=20
-> #include "system/whpx-internal.h"
-> --=20
-> 2.53.0
->=20
->=20
+  WARNING: added, moved or deleted file(s), does MAINTAINERS need updating?
+    accel/accel-target.c
+    include/accel/accel-cpu-target.h
+    include/accel/accel-cpu.h
+
+$ git backport-diff since v1:
+
+  [----] : patches are identical
+  [####] : number of functional differences between upstream/downstream patch
+  [down] : patch is downstream-only
+  The flags [FC] indicate (F)unctional and (C)ontextual differences, respectively
+
+  001/      17:[----] [--] 'target/loongarch: Remove unused 'accel/accel-cpu-target.h' header'
+  002/      17:[----] [--] 'accel: Remove AccelCPUClass::cpu_class_init()'
+  003/      17:[----] [--] 'accel: Rename AccelOpsClass::cpu_target_realize() -> cpu_realize()'
+  004/      17:[----] [--] 'accel/hvf: Remove need for AccelCPUClass::cpu_realize'
+  005/      17:[----] [--] 'accel/kvm: Remove need for AccelCPUClass::cpu_realize'
+  006/      17:[----] [--] 'accel: Introduce AccelOpsClass::cpu_instance_init handler'
+  007/      17:[----] [--] 'accel/whpx: Convert AccelCPUClass -> AccelOpsClass::cpu_instance_init'
+  008/      17:[0002] [FC] 'accel/nvmm: Convert AccelCPUClass -> AccelOpsClass::cpu_instance_init'
+  009/      17:[0002] [FC] 'accel/hvf: Convert AccelCPUClass -> AccelOpsClass::cpu_instance_init'
+  010/      17:[0016] [FC] 'accel/kvm: Convert AccelCPUClass -> AccelOpsClass::cpu_instance_init'
+  011/      17:[----] [--] 'accel/tcg: Convert AccelCPUClass -> new TCGCPUOps::cpu_instance_init'
+  012/      17:[----] [--] 'accel: Remove AccelCPUClass::cpu_instance_init()'
+  013/      17:[----] [--] 'accel/tcg: Convert AccelCPUClass -> new TCGCPUOps::cpu_realize'
+  014/      17:[----] [--] 'accel/tcg: Convert X86 AccelCPUClass -> TCGCPUOps::cpu_realize'
+  015/      17:[----] [--] 'accel/tcg: Convert RISCV AccelCPUClass -> TCGCPUOps::cpu_realize'
+  016/      17:[----] [--] 'accel: Remove AccelCPUClass::cpu_target_realize()'
+  017/      17:[----] [--] 'accel: Remove AccelCPUClass and 'accel/accel-cpu-target.h''
+
+  diff --git a/include/system/kvm.h b/include/system/kvm.h
+  index 2c31fa6019e..a249f076763 100644
+  --- a/include/system/kvm.h
+  +++ b/include/system/kvm.h
+  @@ -225,0 +226,3 @@ void kvm_irqchip_change_notify(void);
+  +void kvm_arch_cpu_instance_init(CPUState *cpu);
+  +bool kvm_arch_cpu_realize(CPUState *cpu, Error **errp);
+  +
+  @@ -367,3 +369,0 @@ int kvm_arch_destroy_vcpu(CPUState *cpu);
+  -void kvm_arch_cpu_instance_init(CPUState *cpu);
+  -bool kvm_arch_cpu_realize(CPUState *cpu, Error **errp);
+  -
+  diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
+  index 113a23f2384..edad3c1acea 100644
+  --- a/accel/kvm/kvm-accel-ops.c
+  +++ b/accel/kvm/kvm-accel-ops.c
+  @@ -101 +101 @@ static void kvm_accel_ops_class_init(ObjectClass *oc, const void *data)
+  -    ops->cpu_target_realize = kvm_arch_cpu_realize;
+  +    ops->cpu_realize = kvm_arch_cpu_realize;
+  diff --git a/target/arm/kvm.c b/target/arm/kvm.c
+  index 7d194ea112b..0f1a98b430f 100644
+  --- a/target/arm/kvm.c
+  +++ b/target/arm/kvm.c
+  @@ -1785,0 +1786,9 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
+  +void kvm_arch_cpu_instance_init(CPUState *cpu)
+  +{
+  +}
+  +
+  +bool kvm_arch_cpu_realize(CPUState *cpu, Error **errp)
+  +{
+  +    return true;
+  +}
+  +
+  diff --git a/target/i386/hvf/hvf-cpu.c b/target/i386/hvf/hvf-cpu.c
+  index 5d74ca6fd56..536bcecd7d2 100644
+  --- a/target/i386/hvf/hvf-cpu.c
+  +++ b/target/i386/hvf/hvf-cpu.c
+  @@ -58 +58 @@ static void hvf_cpu_xsave_init(void)
+  -void hvf_arch_cpu_instance_init(CPUState *cpu)
+  +void hvf_arch_cpu_instance_init(CPUState *cs)
+  diff --git a/target/i386/nvmm/nvmm-all.c b/target/i386/nvmm/nvmm-all.c
+  index 10ab7b2a4dc..2973e28122a 100644
+  --- a/target/i386/nvmm/nvmm-all.c
+  +++ b/target/i386/nvmm/nvmm-all.c
+  @@ -1214 +1214 @@ static const TypeInfo nvmm_accel_type = {
+  -void nvmm_arch_cpu_instance_init(CPUState *cpu)
+  +void nvmm_arch_cpu_instance_init(CPUState *cs)
+  diff --git a/target/loongarch/kvm/kvm.c b/target/loongarch/kvm/kvm.c
+  index 9d844c4905a..167fdd515be 100644
+  --- a/target/loongarch/kvm/kvm.c
+  +++ b/target/loongarch/kvm/kvm.c
+  @@ -1497,0 +1498,9 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
+  +
+  +void kvm_arch_cpu_instance_init(CPUState *cpu)
+  +{
+  +}
+  +
+  +bool kvm_arch_cpu_realize(CPUState *cpu, Error **errp)
+  +{
+  +    return true;
+  +}
+  diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
+  index 013f5e852e1..894962d509f 100644
+  --- a/target/ppc/kvm.c
+  +++ b/target/ppc/kvm.c
+  @@ -2354,0 +2355,4 @@ static void alter_insns(uint64_t *word, uint64_t flags, bool on)
+  +void kvm_arch_cpu_instance_init(CPUState *cpu)
+  +{
+  +}
+  +
+  diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
+  index 2e4f435c537..46730e72a92 100644
+  --- a/target/s390x/kvm/kvm.c
+  +++ b/target/s390x/kvm/kvm.c
+  @@ -2613,0 +2614,9 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
+  +
+  +void kvm_arch_cpu_instance_init(CPUState *cpu)
+  +{
+  +}
+  +
+  +bool kvm_arch_cpu_realize(CPUState *cpu, Error **errp)
+  +{
+  +    return true;
+  +}
+
+Philippe Mathieu-Daudé (17):
+  target/loongarch: Remove unused 'accel/accel-cpu-target.h' header
+  accel: Remove AccelCPUClass::cpu_class_init()
+  accel: Rename AccelOpsClass::cpu_target_realize() -> cpu_realize()
+  accel/hvf: Remove need for AccelCPUClass::cpu_realize
+  accel/kvm: Remove need for AccelCPUClass::cpu_realize
+  accel: Introduce AccelOpsClass::cpu_instance_init handler
+  accel/whpx: Convert AccelCPUClass -> AccelOpsClass::cpu_instance_init
+  accel/nvmm: Convert AccelCPUClass -> AccelOpsClass::cpu_instance_init
+  accel/hvf: Convert AccelCPUClass -> AccelOpsClass::cpu_instance_init
+  accel/kvm: Convert AccelCPUClass -> AccelOpsClass::cpu_instance_init
+  accel/tcg: Convert AccelCPUClass -> new TCGCPUOps::cpu_instance_init
+  accel: Remove AccelCPUClass::cpu_instance_init()
+  accel/tcg: Convert AccelCPUClass -> new TCGCPUOps::cpu_realize
+  accel/tcg: Convert X86 AccelCPUClass -> TCGCPUOps::cpu_realize
+  accel/tcg: Convert RISCV AccelCPUClass -> TCGCPUOps::cpu_realize
+  accel: Remove AccelCPUClass::cpu_target_realize()
+  accel: Remove AccelCPUClass and 'accel/accel-cpu-target.h'
+
+ accel/tcg/tcg-accel-ops.h         |  1 +
+ include/accel/accel-cpu-ops.h     |  3 +-
+ include/accel/accel-cpu-target.h  | 31 --------------
+ include/accel/accel-cpu.h         | 23 -----------
+ include/accel/tcg/cpu-ops.h       |  2 +
+ include/system/hvf_int.h          |  1 +
+ include/system/kvm.h              |  3 ++
+ target/i386/nvmm/nvmm-accel-ops.h |  2 +
+ accel/accel-common.c              | 68 ++++---------------------------
+ accel/hvf/hvf-accel-ops.c         |  3 +-
+ accel/kvm/kvm-accel-ops.c         |  2 +
+ accel/tcg/cpu-exec.c              | 15 ++++++-
+ accel/tcg/tcg-accel-ops.c         |  1 +
+ accel/whpx/whpx-accel-ops.c       |  2 +
+ accel/whpx/whpx-common.c          | 17 --------
+ target/arm/hvf/hvf.c              |  4 ++
+ target/arm/kvm.c                  |  9 ++++
+ target/arm/whpx/whpx-all.c        |  1 -
+ target/i386/hvf/hvf-cpu.c         | 25 ++----------
+ target/i386/hvf/hvf.c             |  5 ---
+ target/i386/kvm/kvm-cpu.c         | 25 +-----------
+ target/i386/nvmm/nvmm-accel-ops.c |  2 +
+ target/i386/nvmm/nvmm-all.c       | 19 +--------
+ target/i386/tcg/tcg-cpu.c         | 28 ++-----------
+ target/i386/whpx/whpx-all.c       |  1 -
+ target/loongarch/kvm/kvm.c        |  9 ++++
+ target/loongarch/tcg/tcg_cpu.c    |  1 -
+ target/ppc/kvm.c                  | 27 +++---------
+ target/riscv/kvm/kvm-cpu.c        | 33 +--------------
+ target/riscv/tcg/tcg-cpu.c        | 28 +++----------
+ target/s390x/kvm/kvm.c            |  9 ++++
+ 31 files changed, 95 insertions(+), 305 deletions(-)
+ delete mode 100644 include/accel/accel-cpu-target.h
+ delete mode 100644 include/accel/accel-cpu.h
+
+-- 
+2.53.0
 
 
