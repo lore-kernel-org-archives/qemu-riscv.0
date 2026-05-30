@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25206CD5BD0
-	for <qemu-riscv@archiver.kernel.org>; Sat, 30 May 2026 05:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C8EFCD5BD0
+	for <qemu-riscv@archiver.kernel.org>; Sat, 30 May 2026 10:21:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wTCJA-0003HB-67; Sat, 30 May 2026 01:32:28 -0400
+	id 1wTGox-0005lV-43; Sat, 30 May 2026 06:21:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <314abh@gmail.com>) id 1wTCIz-0003G3-PM
- for qemu-riscv@nongnu.org; Sat, 30 May 2026 01:32:19 -0400
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ (Exim 4.90_1) (envelope-from <314abh@gmail.com>) id 1wTGou-0005l1-Pp
+ for qemu-riscv@nongnu.org; Sat, 30 May 2026 06:21:32 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <314abh@gmail.com>) id 1wTCIy-0007G0-7Y
- for qemu-riscv@nongnu.org; Sat, 30 May 2026 01:32:17 -0400
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-36d630c0e35so171172a91.3
- for <qemu-riscv@nongnu.org>; Fri, 29 May 2026 22:32:15 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <314abh@gmail.com>) id 1wTGos-00044S-4w
+ for qemu-riscv@nongnu.org; Sat, 30 May 2026 06:21:32 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-84236f9b638so43598b3a.2
+ for <qemu-riscv@nongnu.org>; Sat, 30 May 2026 03:21:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780119134; x=1780723934; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1780136488; x=1780741288; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8BLEpb1qVJQlLoIKuGkWEWOKI1hjsxY8cabZ5Za7MGU=;
- b=Tn9zYzl5Q+J9NWEJHosEL9QGdyLgNa/bl5cBjdYRnp+e0ltDz9grwT59390Y04v6+T
- cDRfwpSUFVVfzFYncNWXVTrfzAmv7AF4GaiN0q0adNC7JOWv9watSSMKvBssL8yJGo7f
- wmJSVhJKyrDwVgfYdMTneR/qY3w6hwH7/gL93WgvirPRXxxipwJZv45m9Oc417kKStHc
- ihu8xhwe0vDTktBdnDua+lHcysG5f4TFxWqnRbla+3kbOCxr9jWSDyNUbUrl5UzkHWQN
- d3DcB/RDhUkGu40ThrDuw43hW6nyI5/bpqFUN9nqroNBy5LP1wkUDSAPFtsuna0bG8to
- cdtQ==
+ bh=KGXs0zklixupHui+lUe2OoB4NdpP2UqJjahJ3jAoXkY=;
+ b=LoaLEkwx50GdB2VoWDU76/ViLB1jtA/r2acFDCsD5wUfciOJPdCNDaYCAvhvk3ULET
+ TewpX5BM2IXAOwrazJMwn+0MKo2kh6n10blXMV/QBTLphGYsTqlqA1yPfbblFki9pY2C
+ bmJPaacoBUG/XDxeg2b8cmXUQHR7znoc6pCaDBadfDkmANZfrnq2y5VBWRS9WuX3L3Z8
+ ZG8lybpDSanfshrzINb7Ntl3KFFqYWKMjtVkC8prNax2fgU0p2fz82sPlZ44tSQA6mX1
+ 5YSxbFD6w84JN285ipJy158Z+seObP17HR/NrCt0PKUhIbwg9kQlhkHrMUV2Jm5HQVs1
+ lTIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780119134; x=1780723934;
+ d=1e100.net; s=20251104; t=1780136488; x=1780741288;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8BLEpb1qVJQlLoIKuGkWEWOKI1hjsxY8cabZ5Za7MGU=;
- b=DrBBL5qyGitAObIhvLhwG8d7iIlVeg3lvZ40Edben24KkuU3p8gaLE7RbqwwVJhFQy
- ltK8XAG6rLU3aHwRKHRkpE6OQLfmssZpCG68qaaOs6ttb+nrEV2CeX/PBkoeE8tKkhJc
- XQCAr06bvwFH8XwktVbPTRERQBBQcApgqjUST6zj798lqzIR8L9cLIOcNJMJolTm00ea
- VQjqq0+c2FfcENRlsPw7Nfyckqwz/KSqe1fY/S69/fo6Ult+WSBXl4h8d4CFVqmIHsYw
- Tyx9qkY2b4WR9Acf4vcyw+cP/Ke2JnLwn0QiXp/jDXo3i7uz+IN+sVk7FIS4vIImke54
- hEEw==
-X-Gm-Message-State: AOJu0YwWnqrlroILzCa9fsZY2UQzqTU7Vy+W6xmt43Pr3em8uw5az9NT
- 2CTA07hkkU9cbbOb5RKZKzoQe0SAa//XyIxaJN95b73OOnyNUsGRnGdB
-X-Gm-Gg: Acq92OG0AE3PZg8yc4fu8Lt768T3LGjO3fPGw/V/zWFH6fIHCw73kxl9feViHBsdE5p
- 37CIy6D0x/RX0u9GQDmkbN/B/Vz5fp9lxgS733oGGs1rUBZ6OVdmqjIEL0TSJvf6ceedvOwDts/
- a8R6ydUL4HXwAHO7LOy2fh2eUpoNxDnFG1trgCLyuyanU8Pil4jZvlmdfXViOfZsEsRJyXq45J1
- SdildlLNPPVszWE8GUYt42+vbSbDGkWwbshXyPwb0peJKFomlTNR5hQ/afLveaLyq4qqdLxc09s
- 0HnLgdWpIaeFlKWpUB/KyDD6diq1iL9tuQtof/9CMDHgQJQu121WkubsbHs9FpYJUQN0PdfDA2s
- KVU9gjV8tedemaOUqPQU3Ncg7czXHO594D/OsuNgsPuQt70VnSFMsI+CE0uSwEl8+Gf4dCIduJM
- bCYYJhaZ2IU63wuvez85FgKK1zOnYVWw==
-X-Received: by 2002:a17:903:1a87:b0:2bc:90b6:3e6f with SMTP id
- d9443c01a7336-2bf36779dabmr32233225ad.4.1780119134536; 
- Fri, 29 May 2026 22:32:14 -0700 (PDT)
-Received: from arch ([112.133.246.2]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2bf239e5d78sm37216385ad.12.2026.05.29.22.32.09
+ bh=KGXs0zklixupHui+lUe2OoB4NdpP2UqJjahJ3jAoXkY=;
+ b=SByuKfh29AqA6ZmdmgiH1zR/D1L4+YA1r2FovWOn+6ELDecRApd8FKOrDUALLYp49l
+ rV0J1FuILHEeMzt1c2aGKEO7DZGSS+33dfikZaBc3kBwXNMA5Co31ZtOferpdIQohtFo
+ Ell45ll+AoJIcHQgxhbBiVc7CEAhFPkboNCVJ8VlN1V9qpa6MDWIV+pdz9ts/Cpm2uBu
+ 8ACTMNTQRJYckOXnSDsRT0uyqth308W97P8gG4KC2GLMZ+E60H0gUVv4DWFMKK/A8T8V
+ 66o4onThJQ8kGiicy6Py8KJDZVn0WRHEMya6hdKWwW+wu9BRcBmWPMzQ/A2Uu1Xu7A1j
+ n76g==
+X-Gm-Message-State: AOJu0YwAo0Y9KmtDjr9XnR3pjTGbv/UjxBZmvAWch1UyiVW0JOU3p7KF
+ ooqdcd3W1gZiSxdZtTvV4qKWXNkWV5aQpUMBLDAVe5/B8Uz3CwOLhhcb
+X-Gm-Gg: Acq92OGQ6Wj7XjLa8bYFdR0IAcDwSyiG7TwKZXI9dORPwa98eOae1m8N5B7oow5OUy1
+ HEzwCfOqJ6re1w1+dKBSYBB/LUkST1zEyPoCZ4rB8wSO3E8Zp/AZmwXTqQobCzz/GYosSoqCRkw
+ yjF64g4z0NpoC2GhNiU7qCkyi713jtwbfyNSd5sMC+HGf2Y2pJBEkPZ9H3eFT4AXsTgCd2hJkNy
+ dZNlFpy5+v7I9ZE9RVB+m4Wa0fvxAfCROHhZgWAH6XGSkX87UdLOwLnjY9AS2e1XXD3UUi+y7TX
+ 8BWi2PKgrQL0PQS3An80gkGy9kv94Fyfd1HpJXhAfa0XA+rq6h52Nl+0gavulEcD/LtisZvmc2/
+ eyvwPR76gwOpIZoiQq0MCgcFiyPrPpiRiCZ/AdpqzvIVM7hjWyucILuJgYHwrJiAWDAv/TlTeLj
+ dwvZddKqUU5X72ngnk2ey/ASYaFmJ2Ce8=
+X-Received: by 2002:a05:6a00:6f50:b0:842:2ae0:968d with SMTP id
+ d2e1a72fcca58-8422ae09a48mr1844918b3a.32.1780136488439; 
+ Sat, 30 May 2026 03:21:28 -0700 (PDT)
+Received: from arch ([112.133.246.20]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-84214c92fc6sm4364229b3a.36.2026.05.30.03.21.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 May 2026 22:32:12 -0700 (PDT)
+ Sat, 30 May 2026 03:21:27 -0700 (PDT)
 From: Abhigyan Kumar <314abh@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
@@ -68,14 +68,14 @@ Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Abhigyan Kumar <314abh@gmail.com>
-Subject: [PATCH] target/riscv: fix invalid sstc predicate in gdbstub
-Date: Sat, 30 May 2026 11:02:00 +0530
-Message-ID: <20260530053200.902591-1-314abh@gmail.com>
+Subject: [PATCH v2] target/riscv: mask vxrm csrw write to the low 2 bits
+Date: Sat, 30 May 2026 15:51:00 +0530
+Message-ID: <20260530102100.78150-1-314abh@gmail.com>
 X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=314abh@gmail.com; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=314abh@gmail.com; helo=mail-pf1-x436.google.com
 X-Spam_score_int: -13
 X-Spam_score: -1.4
 X-Spam_bar: -
@@ -98,32 +98,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-sstc function incorrectly checks for avaibility of env->rdtime_fn.
-This causes it to fail each time it's called because rdtime_fn is setup
-later in the procedure (when timer devices are created). This prevents
-stimecmp's addition to gdb.
+Citing the RISC-V specification:
 
-This change ensures only the riscv_cpu_cfg(env) check is done. rdtime_fn
-will always be NULL otherwise and fail.
+    "The vector fixed-point rounding-mode register holds a two-bit
+    read-write rounding-mode field in the least-significant bits
+    (vxrm[1:0]). The upper bits, vxrm[XLEN-1:2], should be written as
+    zeros."
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3496
+QEMU wrote full value into env->vxrm causing read of upper bits too.
+Used existing macros for bit-masking. Previous had a hard-coded value.
+
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3470
 Signed-off-by: Abhigyan Kumar <314abh@gmail.com>
 ---
  target/riscv/csr.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index f5b0895fd..d72df945f 100644
+index 5514e0f45..7b98d66db 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -590,7 +590,7 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
- {
-     bool hmode_check = false;
- 
--    if (!riscv_cpu_cfg(env)->ext_sstc || !env->rdtime_fn) {
-+    if (!riscv_cpu_cfg(env)->ext_sstc) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
+@@ -977,7 +977,7 @@ static RISCVException write_vxrm(CPURISCVState *env, int csrno,
+ #if !defined(CONFIG_USER_ONLY)
+     env->mstatus |= MSTATUS_VS;
+ #endif
+-    env->vxrm = val;
++    env->vxrm = val & (VCSR_VXRM >> VCSR_VXRM_SHIFT);
+     return RISCV_EXCP_NONE;
+ }
  
 -- 
 2.54.0
