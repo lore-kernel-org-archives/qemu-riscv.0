@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B043FCD5BD1
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Jun 2026 04:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88753CD5BD1
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Jun 2026 04:06:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wTtu2-0001z3-D0; Mon, 01 Jun 2026 00:05:28 -0400
+	id 1wTtu7-0001zI-3x; Mon, 01 Jun 2026 00:05:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wTtsk-0001Mu-Uv
- for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 00:04:09 -0400
+ id 1wTtsA-0001LQ-UX
+ for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 00:03:30 -0400
 Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wTtsh-00056D-Oo
- for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 00:04:05 -0400
+ id 1wTts8-0004x8-Kt
+ for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 00:03:30 -0400
 Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6896c54a7easo8669196a12.3
- for <qemu-riscv@nongnu.org>; Sun, 31 May 2026 21:04:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780286642; cv=none;
+ 4fb4d7f45d1cf-68cc6c7df99so1987149a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 31 May 2026 21:03:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780286607; cv=none;
  d=google.com; s=arc-20240605;
- b=GTFTq4jiGokKnzPevYCNduDnmki9QMBIKpjguAPsIq67ymXkV5u04zFLmzqXMVRBtp
- en8SMSD/MLhdRqpcVPlOcFAf6yQ+fGgy8GQHvbLTcfwfFWorURX0EFtzKwyDXq904Btp
- 2l9sFHh+5uFRlwTKQbG9tBTZu59DnIOGeh9I7NkjXBMqD7zPCACN26YVaWwHe7ATdE8M
- VkSt3loHIL3fc6LRn5JTyM9qIOO7/gXFN1N9axAJ2GRZFJ0U2xZLePV6A7r9HCRqM5qb
- eUN4m3Rv3QUMm5zyhk+dFEJuus2zdleH+i+eU6LmLEqIMIBl1Gq0vcQ/z++ZjKSZoEUe
- yF5Q==
+ b=kcRn8eno3zvJ58Foh3MVfsPhNHzTfdWYOkoLEITCdizI0Yyfd8LHp3d96e8ZZjytqa
+ svIwG3Y4Cw4q2xxBX5JRjjPeK1/I5t6dr8v4bOdaqFb7+bTLIeJKalSGAEa8lIX7FUuD
+ 7lHm5fJVvgxT+FBK7slDoHucT8F32OgZEQUc41H0utgtHbT1P9sJKsYE68H340DUgMIb
+ Ms33B2VqZwartZKdRjhExsPTAhsq258DjWcLENUo53IZhJatiQHo1CrklCu/D/eZ7K8R
+ LABgYB43JzAy00Bol/5W5AT71Mg+H1ReA1t4Gi9bWxgip+XIxIH6MYhH5reSUYUGwB3I
+ cMoQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=NC2xQWYBXNBidmnkAft1EwZSoT5dXFiA4v6h8LSB9DU=;
- fh=1mFJ0bM5V8h2pLV7oARLJ7ttnHTk1aIPrmGlO0NhfQ4=;
- b=QFAgV54HbgsF81bysKsmmKUYwn3qyIreag0W9tacmo19JLoQucSHATjW/92wd/V31H
- 2aLJ1EZ4lJ4W5s99PBZfwXRW+yJnLELHxHujy+iA4wrUP8jri2GKUqoWHHtrJJpN3X9n
- v7/7lCfFNhozfCywkfsKCK1pwMq4+Pd+v/v99+u523hz5U082aSu8bJ4v6ITrY4bu1Rb
- APQ6ylVLGQfOXjCk8QGWtXnEd7uCeySpBJTxbLVna+athhPo4tSlZavSlysIbjdRcnbV
- 15WOyvPLoScHPCZHcjDjDrfZD5FUURQA7RGkRhQAg5QhuIgZ45RCl/TBo2GI1xKVa2Dt
- +xHA==; darn=nongnu.org
+ bh=5lQ2CRJVJRF3dAw5O0Gz8GXOHNbsk01cV0af47qhLwk=;
+ fh=WGb6oMEsDXpqSBFS8EdtxD5ejcgXOztVS/nk9fwTAY4=;
+ b=VKSKt2ijmWboayTeKKYHHdG2QvQtzfVTBmTSMpmodwnY2vXn6K1CZvjz9+Np4gh8oh
+ qYytlAmNxjGG7K+G3JLeP0Ziu8jJi6cT9V2ZJCAAm2uPVgBR+jpHTEMfq8sXnXMdWwnH
+ vE6THLKteWTgD2YmFrv3Wlup99lD18dTEKLdycX9zPgjv7qYZGmfOekLPGIsoTMm6ceP
+ EDkCp+SNljLrRPT2aOas0QSGtmaxzKBkoVpUQ4aU/2P4QIw5w/PHobdDpzUgJQR+8qHP
+ 6wvXAnOMr8u4lqEg3yxkFZkOcl96H74uLh29SJRhKrfdM9H+6xtuOqiU8q1G/A2hVtkK
+ lb/g==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780286642; x=1780891442; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1780286607; x=1780891407; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NC2xQWYBXNBidmnkAft1EwZSoT5dXFiA4v6h8LSB9DU=;
- b=NChK+rgJax/+MOJo3IyfQKBk/8W/5eO9FfK0TVrBSBg0DBjW5X1CyGB164pCG+egbo
- 2ldIByIDWk13bJKN6azpAaqJ/2Vp7ygbNX4eE+bGGY1VQEGDHhPWUBx2rE8/9ruOBD8e
- I+/n9Bh2/gmT6hDlWYbMycnJ5QmigzESiE/CuTvsoLUu1RI81DyFFBKLGnf0g+ev3zJH
- baIPYxSHY/SV9z7MP9Mm5SPEsoPKL+veYYFzk9AaiWJdbpdR0ZAIsO/MsBpy9ST4yYTv
- R5TzsLq3wFAz67hTeLui7k+nyrIbJCmad1Hf61XerZWPQoRQHK6ZJUO8xW4il5IKUzKP
- Bmcw==
+ bh=5lQ2CRJVJRF3dAw5O0Gz8GXOHNbsk01cV0af47qhLwk=;
+ b=mXYysfgR5eVNWlwSfxWwYPky7Tqx2Rk5i2kmBZxRBJMyn2o6p8KhmO5jiKTxVCehn+
+ Edcr00XuQjeWC2PUHBWEPiq8lv5tIWMJ08YRV6vQcWiNVN6U9JlpcIWY69cLpyH/NY6z
+ m4I//8qQsru3AbAx8KwTrbO6ebzG8+u9TtHjBmxPxXaMWo2XrXxWQz9GrlV2+k0XbR5b
+ keCBpAYVKkW05nyvjUXwahnwuWo9Y2ylyMPtHQf6WJxXYdEsImnovhpW+fMex9nKI7rq
+ zhhhx35yN7AW4Xpg4+eTk3VisABqJjsCYxgkIUeHzrJec4vWbg6FyM6yONSoJ5M+ROBb
+ zS5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780286642; x=1780891442;
+ d=1e100.net; s=20251104; t=1780286607; x=1780891407;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=NC2xQWYBXNBidmnkAft1EwZSoT5dXFiA4v6h8LSB9DU=;
- b=acaZvNYmUUUApSZwK4VmSXFyDA0cbRaAWza7R+3ttOUPS5C9RFtDxqXlaKOKyH7LbO
- 8vhUvBRc1W4hVvdGm+N4S8a2HhzMKfX9NO7RaAVU80YNfl8RuoJHvOd1cdMFPWVga7AM
- 71KnwKCe3Kjb7tsOxmrPGrEzttGV8GfzNfxV68wFZI9Auo6KaZd1+ZlwG+Lau2qbtGSW
- eWMejR9FvGdf9Ja1nCgzh/37wbuuzO2IxDDO8rO3WMW10q2FkFitl88Gpyag+C+hWhxN
- yq6FhUe3cx/icI6oHDT82DJb0jdxiMJAsYF2pmg/mMdrGy33Y89zAi6340+oI4zmBECY
- ERSA==
+ bh=5lQ2CRJVJRF3dAw5O0Gz8GXOHNbsk01cV0af47qhLwk=;
+ b=aQce9DuqwFQCbprAOPky7Zvs81jCpxe0ypFXbhTjic05opxQQeV80jFDMCOdE3F9ST
+ 2eulSD0x/z5oNCgui28tDeEDwfZYazZ214IGM16doMhrhDHPd6hu2LIMzr83J3YsCCEJ
+ LImcvGWIt1l/vhRwaqjIu74EO+0kEaz3O2EKtBsUEh84OTus1fxV162/N7FxxdwFcQxD
+ PLndXu017IpaNBK6j5Ol/YOdCg/tW7p3ugIhkxSBa40J0an4xbvkKZ2FglwkfvEltFIM
+ vCbe7Sqa8q+buzEJ1iG/IXk0GRU243PkZA+t3y02X4k2tdGSMACFD0HM0QFRz80n6JZW
+ S5rg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+t4F4avYXdujs9nKpywg23o4+E1H0/sBibUDD03m9lndQfC+/PlOSa1HEtTA1/j8NG7NWrrqBWmrew@nongnu.org
-X-Gm-Message-State: AOJu0YzSiH4qmZDHfxFHdgnYo/zuDqObnqNzrsLQ2nH3lvrjMY2IHdmt
- iOsuEsXYHzCGRFzwsh4LqqGKR7ijMnmqM1ODZpXKqoSJUC/JXcTnIKW4ACXqCVJTzw4xOV26TIG
- f5fdxJbdRmTf0WnEX/agjPKiSPWjMUrQ=
-X-Gm-Gg: Acq92OFHMFvvz4M+BDh77SZXU3PM2CbK37TTm4rj+B52WUBJarOj6gVbW1u2MKVZ+8m
- YiGK0DdiJ3k6tcr5qX8Iazscx8/ZgDNVZXQuAlovKMIOBbvc7N61fCIimAcg+GfFoAD4SRXRN0K
- kyNs2FFmKDLAatXExVR7J6FnQsB2G7WJTCyHvIfwy3bfUueyzf6MWkE2+Je4/lpr1d4FOlPi247
- M0SUEVGl/U6rKaAAIzjFlZoRULBRRQkIBc7eY4EvVL3cdbRwdmuILG0nvku6e7L2gy2x9kHRMgh
- RHAFf4CvzaRAcDRvKqWnln587//l6vtb7WwrKnYjg7e+irgR
-X-Received: by 2002:a17:907:7351:b0:beb:a431:6750 with SMTP id
- a640c23a62f3a-beba4316bd4mr238824066b.29.1780286642114; Sun, 31 May 2026
- 21:04:02 -0700 (PDT)
+ AFNElJ+NwBbxJ1HKcPvSM4Whu7zvlNXkTD7cyorc2QuB7dDxofzS5cRZqRjLughn3OwHDLS39bPOFaUtl45Q@nongnu.org
+X-Gm-Message-State: AOJu0Yw1iEDoWxrydg50+M2NM9TRSpuBd+k77vHs7QohbgkHSCVjcP7S
+ SI0wPoAtZexl2WjHRsiDipy7qrv0c6WfLo2dEAgP/Nuw3aXreppbKVvgi2faB71B0DvICncXtwG
+ 26xzha2RFt2qBmo1VCb7zuNFIcaHAVYs=
+X-Gm-Gg: Acq92OHaHQpURFqjADW0C1U+4guEDEBxbpEU6fAo7geaOhnqOofLvUCerB/uRfU1vKl
+ 7LD/1n10O3a7VVcqjf1k+DdWW35rOpb90tewz/G7NHRWZZ64PAlEv0VJkWU7gv/X1LSRnFRn/oJ
+ q35Vmm0CrMvZb9rh8A/hRUkcVO4XRMyfUhEW5Nj22/fkBDKRB5/C92q7yElmomXphuEq2jZ3gin
+ b5hO2jJCNzHcu9VtDtcEVqrPY4pfttkaQEROcU60eeGGAjSyZGwyXyGQUX95YVMNx6T93Zg/y/L
+ 0sdMY/l3embC7YJHHAYKqBSCv2QxzyJMZTJnCe5U0TXb6xTc
+X-Received: by 2002:a17:907:a602:b0:baa:6847:af9 with SMTP id
+ a640c23a62f3a-beab77be12amr510988066b.28.1780286606581; Sun, 31 May 2026
+ 21:03:26 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260527201348.29511-1-philmd@linaro.org>
- <20260527201348.29511-13-philmd@linaro.org>
-In-Reply-To: <20260527201348.29511-13-philmd@linaro.org>
+ <20260527201348.29511-12-philmd@linaro.org>
+In-Reply-To: <20260527201348.29511-12-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 1 Jun 2026 14:03:35 +1000
-X-Gm-Features: AVHnY4JwMPycNbxBbHqU5CvNOUuGmIRdzcwnJLC1nR-4azHKyDjbRXJM03FKz3A
-Message-ID: <CAKmqyKPH2B8iz7Kkg2z9hfL-UGxudCrVRdHwOATsbqqYomVxSg@mail.gmail.com>
-Subject: Re: [PATCH v11 12/12] tests/functional: Add RISC-V endianness test
+Date: Mon, 1 Jun 2026 14:02:59 +1000
+X-Gm-Features: AVHnY4LcqcVJNdKzsuknIFw-jdRx16Y57eOcd_XPbwd-_hkrM48hzcfU0yb9WbI
+Message-ID: <CAKmqyKO1_uSgjGTXA1u+DgJisv0apyQuuSxcp9yDKeZPBZMsvQ@mail.gmail.com>
+Subject: Re: [PATCH v11 11/12] target/riscv: Expose and document the CPU
+ 'big-endian' property
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, 
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-riscv@nongnu.org, 
@@ -100,8 +101,7 @@ Cc: qemu-devel@nongnu.org,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>,
- Christoph Muellner <christoph.muellner@vrull.eu>, 
- Thomas Huth <thuth@redhat.com>
+ Christoph Muellner <christoph.muellner@vrull.eu>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Received-SPF: pass client-ip=2a00:1450:4864:20::531;
@@ -113,7 +113,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -134,12 +134,21 @@ On Thu, May 28, 2026 at 6:16=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
 >
 > From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
 >
-> Add functional test for the RISC-V 'big-endian' CPU property.
+> Now that the full big-endian data path is in place (runtime MSTATUS
+> bits, boot code, and page-table walks), expose the "big-endian"
+> property to users via DEFINE_PROP_BOOL and document it in
+> docs/system/target-riscv.rst.
+>
+> Document that the property models fixed-endian hardware: it selects
+> harts whose MBE/SBE/UBE fields are fixed to 1, and it does not model
+> a mixed-endian implementation where software can toggle those bits at
+> runtime.
+>
+> The property can be enabled from the command line, e.g.:
+>
+>     -cpu <cpu>,big-endian=3Don
 >
 > Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-> Reviewed-by: Thomas Huth <thuth@redhat.com>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Tested-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -147,90 +156,72 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  tests/functional/riscv64/meson.build        |  1 +
->  tests/functional/riscv64/test_endianness.py | 57 +++++++++++++++++++++
->  2 files changed, 58 insertions(+)
->  create mode 100644 tests/functional/riscv64/test_endianness.py
+>  docs/system/target-riscv.rst | 29 +++++++++++++++++++++++++++++
+>  target/riscv/cpu.c           |  1 +
+>  2 files changed, 30 insertions(+)
 >
-> diff --git a/tests/functional/riscv64/meson.build b/tests/functional/risc=
-v64/meson.build
-> index b996c89d7df..5871211e899 100644
-> --- a/tests/functional/riscv64/meson.build
-> +++ b/tests/functional/riscv64/meson.build
-> @@ -11,6 +11,7 @@ tests_riscv64_system_quick =3D [
->  ]
+> diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+> index 3ad5d1ddafb..afd86ca2ba1 100644
+> --- a/docs/system/target-riscv.rst
+> +++ b/docs/system/target-riscv.rst
+> @@ -95,3 +95,32 @@ the images they need.
+>  * ``-bios <file>``
 >
->  tests_riscv64_system_thorough =3D [
-> +  'endianness',
->    'boston',
->    'sifive_u',
->    'tuxrun',
-> diff --git a/tests/functional/riscv64/test_endianness.py b/tests/function=
-al/riscv64/test_endianness.py
-> new file mode 100644
-> index 00000000000..9e0b3b7db5c
-> --- /dev/null
-> +++ b/tests/functional/riscv64/test_endianness.py
-> @@ -0,0 +1,57 @@
-> +#!/usr/bin/env python3
-> +#
-> +# Functional tests for RISC-V big-endian support
-> +#
-> +# Copyright (c) 2026 MIPS
-> +#
-> +# SPDX-License-Identifier: GPL-2.0-or-later
+>  Tells QEMU to load the specified file as the firmware.
 > +
-> +from qemu_test import QemuSystemTest, Asset
-> +from qemu_test import wait_for_console_pattern
+> +RISC-V CPU endianness
+> +---------------------
 > +
+> +The RISC-V ISA specifies that instruction fetches are always little-endi=
+an,
+> +while data accesses can be either little-endian or big-endian under cont=
+rol
+> +of the MSTATUS ``MBE``/``SBE``/``UBE`` bits (see section 3.1.6.5, "Memor=
+y
+> +Endianness", in the RISC-V Privileged Specification).
 > +
-> +class RiscvBigEndian(QemuSystemTest):
-> +    """
-> +    Tests for RISC-V runtime big-endian data support.
+> +QEMU implements the full data-endianness behaviour described by those bi=
+ts.
+> +In addition, the RISC-V CPU object exposes a ``big-endian`` boolean prop=
+erty
+> +which models a big-endian-only hardware implementation, where the
+> +``MBE``/``SBE``/``UBE`` bits are hardwired to 1. When the property is se=
+t,
+> +the CPU is reset with all three bits initialised to 1, so the guest star=
+ts
+> +executing in big-endian data mode from the reset vector. The property is=
+ a
+> +static, per-CPU hardware configuration option and is not meant to be tog=
+gled
+> +at runtime.
 > +
-> +    Uses a bare-metal RV64 ELF that detects data endianness at runtime
-> +    by storing a 32-bit word and reading back byte 0. Prints "ENDIAN: BE=
-"
-> +    or "ENDIAN: LE" to the NS16550A UART on the virt machine.
-> +    """
+> +The property does not model a mixed-endian implementation where software=
+ can
+> +toggle ``MBE``/``SBE``/``UBE`` at runtime. QEMU's RISC-V CPUs treat thes=
+e
+> +fields as fixed by the CPU configuration: they are reset to 0 by default=
+ and
+> +to 1 when ``big-endian`` is enabled.
 > +
-> +    timeout =3D 10
+> +The property can be enabled from the command line, for example::
 > +
-> +    ASSET_BE_TEST =3D Asset(
-> +        'https://github.com/MIPS/linux-test-downloads/raw/main/'
-> +        'riscvbe-baremetal/be-test-bare-metal.elf',
-> +        '9ad51b675e101de65908fadbac064ed1d0564c17463715d09dd734db86ea0f5=
-8')
+> +    -cpu <cpu>,big-endian=3Don
 > +
-> +    def _run_bare_metal(self, big_endian=3DFalse):
-> +        self.set_machine('virt')
-> +        kernel =3D self.ASSET_BE_TEST.fetch()
-> +        self.vm.add_args('-bios', 'none')
-> +        self.vm.add_args('-kernel', kernel)
-> +        if big_endian:
-> +            self.vm.add_args('-cpu', 'rv64,big-endian=3Don')
-> +        self.vm.set_console()
-> +        self.vm.launch()
-> +        expected =3D 'ENDIAN: BE' if big_endian else 'ENDIAN: LE'
-> +        wait_for_console_pattern(self, expected)
-> +
-> +    def test_bare_metal_littleendian(self):
-> +        """
-> +        Boot bare-metal ELF on virt with default little-endian CPU.
-> +        Expects "ENDIAN: LE" on UART.
-> +        """
-> +        self._run_bare_metal(big_endian=3DFalse)
-> +
-> +    def test_bare_metal_bigendian(self):
-> +        """
-> +        Boot bare-metal ELF on virt with big-endian=3Don CPU property.
-> +        Expects "ENDIAN: BE" on UART.
-> +        """
-> +        self._run_bare_metal(big_endian=3DTrue)
-> +
-> +
-> +if __name__ =3D=3D '__main__':
-> +    QemuSystemTest.main()
+> +No upstream CPU model currently defaults to big-endian; the property is
+> +provided so that big-endian-only RISC-V CPU variants can be modelled.
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index fef424f2bf9..c8a41c57a57 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -2520,6 +2520,7 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_ru=
+les[] =3D {
+>
+>  static const Property riscv_cpu_properties[] =3D {
+>      DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+> +    DEFINE_PROP_BOOL("big-endian", RISCVCPU, cfg.big_endian, false),
+>
+>      {.name =3D "pmu-mask", .info =3D &prop_pmu_mask},
+>      {.name =3D "pmu-num", .info =3D &prop_pmu_num}, /* Deprecated */
 > --
 > 2.53.0
 >
