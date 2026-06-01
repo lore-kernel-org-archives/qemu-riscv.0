@@ -4,116 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88753CD5BD1
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Jun 2026 04:06:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AD11CD6E4C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Jun 2026 04:08:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wTtu7-0001zI-3x; Mon, 01 Jun 2026 00:05:31 -0400
+	id 1wTtwX-0002ml-KW; Mon, 01 Jun 2026 00:08:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wTtsA-0001LQ-UX
- for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 00:03:30 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
+ id 1wTttd-0001jK-Bz
+ for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 00:05:01 -0400
+Received: from mail-dy1-x1342.google.com ([2607:f8b0:4864:20::1342])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wTts8-0004x8-Kt
- for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 00:03:30 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-68cc6c7df99so1987149a12.1
- for <qemu-riscv@nongnu.org>; Sun, 31 May 2026 21:03:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780286607; cv=none;
- d=google.com; s=arc-20240605;
- b=kcRn8eno3zvJ58Foh3MVfsPhNHzTfdWYOkoLEITCdizI0Yyfd8LHp3d96e8ZZjytqa
- svIwG3Y4Cw4q2xxBX5JRjjPeK1/I5t6dr8v4bOdaqFb7+bTLIeJKalSGAEa8lIX7FUuD
- 7lHm5fJVvgxT+FBK7slDoHucT8F32OgZEQUc41H0utgtHbT1P9sJKsYE68H340DUgMIb
- Ms33B2VqZwartZKdRjhExsPTAhsq258DjWcLENUo53IZhJatiQHo1CrklCu/D/eZ7K8R
- LABgYB43JzAy00Bol/5W5AT71Mg+H1ReA1t4Gi9bWxgip+XIxIH6MYhH5reSUYUGwB3I
- cMoQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=5lQ2CRJVJRF3dAw5O0Gz8GXOHNbsk01cV0af47qhLwk=;
- fh=WGb6oMEsDXpqSBFS8EdtxD5ejcgXOztVS/nk9fwTAY4=;
- b=VKSKt2ijmWboayTeKKYHHdG2QvQtzfVTBmTSMpmodwnY2vXn6K1CZvjz9+Np4gh8oh
- qYytlAmNxjGG7K+G3JLeP0Ziu8jJi6cT9V2ZJCAAm2uPVgBR+jpHTEMfq8sXnXMdWwnH
- vE6THLKteWTgD2YmFrv3Wlup99lD18dTEKLdycX9zPgjv7qYZGmfOekLPGIsoTMm6ceP
- EDkCp+SNljLrRPT2aOas0QSGtmaxzKBkoVpUQ4aU/2P4QIw5w/PHobdDpzUgJQR+8qHP
- 6wvXAnOMr8u4lqEg3yxkFZkOcl96H74uLh29SJRhKrfdM9H+6xtuOqiU8q1G/A2hVtkK
- lb/g==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
+ id 1wTttZ-0005H1-Vd
+ for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 00:05:00 -0400
+Received: by mail-dy1-x1342.google.com with SMTP id
+ 5a478bee46e88-304e83724bfso3502762eec.0
+ for <qemu-riscv@nongnu.org>; Sun, 31 May 2026 21:04:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780286607; x=1780891407; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5lQ2CRJVJRF3dAw5O0Gz8GXOHNbsk01cV0af47qhLwk=;
- b=mXYysfgR5eVNWlwSfxWwYPky7Tqx2Rk5i2kmBZxRBJMyn2o6p8KhmO5jiKTxVCehn+
- Edcr00XuQjeWC2PUHBWEPiq8lv5tIWMJ08YRV6vQcWiNVN6U9JlpcIWY69cLpyH/NY6z
- m4I//8qQsru3AbAx8KwTrbO6ebzG8+u9TtHjBmxPxXaMWo2XrXxWQz9GrlV2+k0XbR5b
- keCBpAYVKkW05nyvjUXwahnwuWo9Y2ylyMPtHQf6WJxXYdEsImnovhpW+fMex9nKI7rq
- zhhhx35yN7AW4Xpg4+eTk3VisABqJjsCYxgkIUeHzrJec4vWbg6FyM6yONSoJ5M+ROBb
- zS5w==
+ d=gmail.com; s=20251104; t=1780286695; x=1780891495; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KwHe78JFZTLkHtRpzg9EXfast0UYxFZ4bqnWbkv/tD8=;
+ b=JihbZoGawa+m4U3WO8mxTu/GiZXPUteBayXybqewFUo9p3Lq9Gj1VuEDhAzJOjH3Ks
+ 3tSax41CP9QZxrpAV35wQUnwPH4QKGATBq7LrmZXuNbDcduDDTOdQs2juY2CdlsjYTH3
+ G9oe0k2qAXnKciRdWCmAeuWnVC07ZvOZ4OsEKbBbOK50mkqHc7E6ERBb8pI9aOGzgaMx
+ vj4Axu4efpE3eyCd+SoIw+n6uBherBkI7Ss4RDRokfRlEpIJJO0pghWaSagx67o3XJ1g
+ CNr+zcrVnIhfvxPKQRY9g4ORqsJs3IlOFTJqS6BC1MOOLAznSi8ULKoXLubV8xFUSzIe
+ p8kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780286607; x=1780891407;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=5lQ2CRJVJRF3dAw5O0Gz8GXOHNbsk01cV0af47qhLwk=;
- b=aQce9DuqwFQCbprAOPky7Zvs81jCpxe0ypFXbhTjic05opxQQeV80jFDMCOdE3F9ST
- 2eulSD0x/z5oNCgui28tDeEDwfZYazZ214IGM16doMhrhDHPd6hu2LIMzr83J3YsCCEJ
- LImcvGWIt1l/vhRwaqjIu74EO+0kEaz3O2EKtBsUEh84OTus1fxV162/N7FxxdwFcQxD
- PLndXu017IpaNBK6j5Ol/YOdCg/tW7p3ugIhkxSBa40J0an4xbvkKZ2FglwkfvEltFIM
- vCbe7Sqa8q+buzEJ1iG/IXk0GRU243PkZA+t3y02X4k2tdGSMACFD0HM0QFRz80n6JZW
- S5rg==
+ d=1e100.net; s=20251104; t=1780286695; x=1780891495;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KwHe78JFZTLkHtRpzg9EXfast0UYxFZ4bqnWbkv/tD8=;
+ b=o0lJLX4sHYcivlVd1qMzAu8jmbluFaFyWAkSJz5w7tTlHdER8Hr20cqr+0zo5/GwMF
+ AIXBy2HBzV7IqAxqb1TmdYdp5MrZp4MWHumxsQakbqTz/06BM4Xd7F8GnIpsgx8690D1
+ l2KRbQ6rXP1G/dUxvzRqCwRsDbBpBvefk+kMsFvreqBzKkDx4w+c/zJKV3GUPIhG8jwO
+ CazSyNxWgChJ1YScheRHNexrodK3JitWqLFpsaZ1gpJlPLb00iq2JRa6AEuQWlA67rKq
+ 7DpXeBjYu4Ijipb6VDM3DyxO9PhBnRPRHccJNo27yII60OG9FBBNJxWTSps2Paklla3L
+ wnIQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+NwBbxJ1HKcPvSM4Whu7zvlNXkTD7cyorc2QuB7dDxofzS5cRZqRjLughn3OwHDLS39bPOFaUtl45Q@nongnu.org
-X-Gm-Message-State: AOJu0Yw1iEDoWxrydg50+M2NM9TRSpuBd+k77vHs7QohbgkHSCVjcP7S
- SI0wPoAtZexl2WjHRsiDipy7qrv0c6WfLo2dEAgP/Nuw3aXreppbKVvgi2faB71B0DvICncXtwG
- 26xzha2RFt2qBmo1VCb7zuNFIcaHAVYs=
-X-Gm-Gg: Acq92OHaHQpURFqjADW0C1U+4guEDEBxbpEU6fAo7geaOhnqOofLvUCerB/uRfU1vKl
- 7LD/1n10O3a7VVcqjf1k+DdWW35rOpb90tewz/G7NHRWZZ64PAlEv0VJkWU7gv/X1LSRnFRn/oJ
- q35Vmm0CrMvZb9rh8A/hRUkcVO4XRMyfUhEW5Nj22/fkBDKRB5/C92q7yElmomXphuEq2jZ3gin
- b5hO2jJCNzHcu9VtDtcEVqrPY4pfttkaQEROcU60eeGGAjSyZGwyXyGQUX95YVMNx6T93Zg/y/L
- 0sdMY/l3embC7YJHHAYKqBSCv2QxzyJMZTJnCe5U0TXb6xTc
-X-Received: by 2002:a17:907:a602:b0:baa:6847:af9 with SMTP id
- a640c23a62f3a-beab77be12amr510988066b.28.1780286606581; Sun, 31 May 2026
- 21:03:26 -0700 (PDT)
+ AFNElJ85wJ9Pth/2c85V/dDUfk3wFxjNJ4gYKA/P1wc41zIlySoa9eE3eL1NaGvy++GpsPoPwS82EipovmCA@nongnu.org
+X-Gm-Message-State: AOJu0YydXTM5v+F3R+pAqIIGWCnEBlzhtW386PllSci+EMIpKG1Tr5m/
+ f1Kw/wzbAV+8FdG7Xrjh8jv+egYkT4XM5eRbnD8d0fZG2j56+kRMpLDy
+X-Gm-Gg: Acq92OHLse5VJud5G36uteoRohl3Zezbp51gypYV86kRBuIpcqpFf9z48OlhoFm2hKU
+ 3reonxC0D8FE1VvduSAT0b2RhsEHTip9w6/GgsX0N0jWoFw12XwWvrK3e7Bz8Nrn6M6DHMecaeo
+ nfZtDf1/0nzr0Yq2OQjxFi0H5VtPWPmHNqArYpPPvKOPQW8VfJRt3iztrdT9o2muUK3oXbv90UP
+ ZenLRFfAE8vhtD6ebnPb+L6JLFd1Fhu3kHwCGO6AK0LY0Wc020rXzSjejNixePgNBpLDqF7e1fm
+ RNIhycVdRMvTqDtUZ/cAUP9JHrnIQPoAokRX034a+sIbmb9NxY5EU5jUzRtQP0djfhSTzYieItg
+ DbtTEwkcTx96xMje+YQ2EuZY+XfWB8aDTHJF8nzZe5XBeoOe/HihjSdXrIznPrUGbm4jMxRJ+i6
+ PKCMiaLqkCd6HtR2oj9Y1OO3D380JsmMjXi/AN/NEtBmECc2ya4WQMUmeVMCDP3hVSvwDyHw==
+X-Received: by 2002:a05:7300:e7ab:b0:304:54d6:20f3 with SMTP id
+ 5a478bee46e88-304fa4b716dmr3738330eec.4.1780286694949; 
+ Sun, 31 May 2026 21:04:54 -0700 (PDT)
+Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-304ed130dafsm7597861eec.0.2026.05.31.21.04.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 31 May 2026 21:04:54 -0700 (PDT)
+Date: Mon, 1 Jun 2026 12:04:52 +0800
+From: Chao Liu <chao.liu.zevorn@gmail.com>
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ Tao Tang <tangtao1634@phytium.com.cn>
+Subject: Re: [PATCH v3 1/1] target/riscv: deprecate 'debug' CPU property and
+ Debug 0.13
+Message-ID: <ahz7-1OomsZTMIz2@ChaodeMacBook-Pro.local>
+References: <20260528131214.2251075-1-daniel.barboza@oss.qualcomm.com>
+ <20260528131214.2251075-2-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <20260527201348.29511-1-philmd@linaro.org>
- <20260527201348.29511-12-philmd@linaro.org>
-In-Reply-To: <20260527201348.29511-12-philmd@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 1 Jun 2026 14:02:59 +1000
-X-Gm-Features: AVHnY4LcqcVJNdKzsuknIFw-jdRx16Y57eOcd_XPbwd-_hkrM48hzcfU0yb9WbI
-Message-ID: <CAKmqyKO1_uSgjGTXA1u+DgJisv0apyQuuSxcp9yDKeZPBZMsvQ@mail.gmail.com>
-Subject: Re: [PATCH v11 11/12] target/riscv: Expose and document the CPU
- 'big-endian' property
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-riscv@nongnu.org, 
- Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
- Anton Johansson <anjo@rev.ng>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Christoph Muellner <christoph.muellner@vrull.eu>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x531.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260528131214.2251075-2-daniel.barboza@oss.qualcomm.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1342;
+ envelope-from=chao.liu.zevorn@gmail.com; helo=mail-dy1-x1342.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,101 +103,319 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 28, 2026 at 6:16=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
->
-> From: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
->
-> Now that the full big-endian data path is in place (runtime MSTATUS
-> bits, boot code, and page-table walks), expose the "big-endian"
-> property to users via DEFINE_PROP_BOOL and document it in
-> docs/system/target-riscv.rst.
->
-> Document that the property models fixed-endian hardware: it selects
-> harts whose MBE/SBE/UBE fields are fixed to 1, and it does not model
-> a mixed-endian implementation where software can toggle those bits at
-> runtime.
->
-> The property can be enabled from the command line, e.g.:
->
->     -cpu <cpu>,big-endian=3Don
->
-> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+Hi Daniel,
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On Thu, May 28, 2026 at 10:12:14AM +0800, Daniel Henrique Barboza wrote:
+> Starting on commit f31ba686a9 ("target/riscv/cpu.c: add 'sdtrig' in
+> riscv,isa') the 'debug' flag has been used as an alias for 'sdtrig' that
+> is, for now, compliant with Debug 0.13 that was ratified 8 years go.
+> 
+> We're going to add more debug trigger extensions, e.g. 'sdext' [1].
+> Thing is that 'sdext' and all other extensions that will follow are now
+> adherent to Debug 1.0, ratified Dec 2022.  And so it happens that Debug
+> 1.0 and 0.13 are not compatible with each other.  This makes support new
+> Debug 1.0 extensions like 'sdext' harder because we would need two
+> independent code bases for each.
+> 
+> We consider that most of the RVI ecosystem already moved on to Debug
+> 1.0 and is now going towards the extended Debug 1.0 extensions, and we
+> should follow suit.  And the best way to do that is to leave Debug 0.13
+> behind, by deprecating its 'debug' flag and making it an alias for
+> 'sdtrig' that will eventually move on to Debug 1.0.
+> 
+> The following changes are made:
+> 
+> - 'ext_sdtrig' flag was added in cpu->cfg. 'debug' flag was removed from
+>   cpu->cfg;
+> - All occurrences of cpu->cfg.debug were replaced to 'ext_sdtrig';
+> - Two explicit getters and setters for the 'debug' property were added.
+>   The property will simply get/set ext_sdtrig;
+> - vmstate_debug was renamed to vmstate_sdtrig. We're aware that this
+>   will impact migration between QEMU 10.2 to newer versions, but we're
+>   still in a point where the migration break cost isn't big enough to
+>   justify adding migration compatibility scaffolding.
+> 
+> Finally, deprecated.rst was updated to deprecate 'debug' and inform that
+> it will be now interpreted as an alias of 'sdtrig', which is now going
+> to be compliant with Debug 1.0.
+> 
 
-Alistair
+This patch conflicts with Alistair's riscv-to-apply.next branch.
 
+f71708fedf target/riscv/tcg: disable svnapot if satp_mode < sv39
+
+```
+   <<<<<<< HEAD
+   static const VMStateDescription vmstate_debug = {
+       .name = "cpu/debug",
+       .version_id = 3,
+       .minimum_version_id = 3,
+       .needed = debug_needed,
+       .post_load = debug_post_load,
+   =======
+   static const VMStateDescription vmstate_sdtrig = {
+       .name = "cpu/sdtrig",
+       .version_id = 1,
+       .minimum_version_id = 1,
+       .needed = sdtrig_needed,
+       .post_load = sdtrig_post_load,
+   >>>>>>> target/riscv: deprecate 'debug' CPU property and Debug 0.13
+```
+
+You probably need to rebase onto and fix it.
+
+Thanks,
+Chao
+
+> [1] https://lore.kernel.org/qemu-devel/cover.1768622881.git.chao.liu.zevorn@gmail.com/
+> 
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+> Tested-by: Tao Tang <tangtao1634@phytium.com.cn>
 > ---
->  docs/system/target-riscv.rst | 29 +++++++++++++++++++++++++++++
->  target/riscv/cpu.c           |  1 +
->  2 files changed, 30 insertions(+)
->
-> diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-> index 3ad5d1ddafb..afd86ca2ba1 100644
-> --- a/docs/system/target-riscv.rst
-> +++ b/docs/system/target-riscv.rst
-> @@ -95,3 +95,32 @@ the images they need.
->  * ``-bios <file>``
->
->  Tells QEMU to load the specified file as the firmware.
+>  docs/about/deprecated.rst         | 19 ++++++++++++
+>  target/riscv/cpu.c                | 50 ++++++++++++++++++++++++++++---
+>  target/riscv/cpu_cfg_fields.h.inc |  2 +-
+>  target/riscv/csr.c                |  2 +-
+>  target/riscv/machine.c            | 24 +++++++--------
+>  target/riscv/tcg/tcg-cpu.c        |  2 +-
+>  6 files changed, 80 insertions(+), 19 deletions(-)
+> 
+> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+> index 97750f5edc..bc872e50ba 100644
+> --- a/docs/about/deprecated.rst
+> +++ b/docs/about/deprecated.rst
+> @@ -417,6 +417,25 @@ ABI is long-obsolete. We are therefore deprecating both OABI support
+>  and NWFPE emulation, and they will be removed in a future QEMU
+>  release.
+>  
+> +``debug=true|false`` on RISC-V CPUs (since 11.1)
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 > +
-> +RISC-V CPU endianness
-> +---------------------
+> +When first introduced this flag enabled/disabled support for the RISC-V
+> +Debug spec version 0.13.  Then, since QEMU 10.1, it became instead an
+> +alias to the ``sdtrig`` extension that still adheres to Debug 0.13.
 > +
-> +The RISC-V ISA specifies that instruction fetches are always little-endi=
-an,
-> +while data accesses can be either little-endian or big-endian under cont=
-rol
-> +of the MSTATUS ``MBE``/``SBE``/``UBE`` bits (see section 3.1.6.5, "Memor=
-y
-> +Endianness", in the RISC-V Privileged Specification).
+> +We're moving to the new ratified 1.0 Debug spec that will be maintained
+> +long term by RISC-V International, but this new ratified version is not
+> +backward compatible with 0.13.  This means that keeping both implementations
+> +is a maintainership hurdle that impacts the development of new Debug 1.0
+> +extensions like ``sdext``.  And most of the RISC-V ecosystem already
+> +moved on to Debug 1.0.
 > +
-> +QEMU implements the full data-endianness behaviour described by those bi=
-ts.
-> +In addition, the RISC-V CPU object exposes a ``big-endian`` boolean prop=
-erty
-> +which models a big-endian-only hardware implementation, where the
-> +``MBE``/``SBE``/``UBE`` bits are hardwired to 1. When the property is se=
-t,
-> +the CPU is reset with all three bits initialised to 1, so the guest star=
-ts
-> +executing in big-endian data mode from the reset vector. The property is=
- a
-> +static, per-CPU hardware configuration option and is not meant to be tog=
-gled
-> +at runtime.
-> +
-> +The property does not model a mixed-endian implementation where software=
- can
-> +toggle ``MBE``/``SBE``/``UBE`` at runtime. QEMU's RISC-V CPUs treat thes=
-e
-> +fields as fixed by the CPU configuration: they are reset to 0 by default=
- and
-> +to 1 when ``big-endian`` is enabled.
-> +
-> +The property can be enabled from the command line, for example::
-> +
-> +    -cpu <cpu>,big-endian=3Don
-> +
-> +No upstream CPU model currently defaults to big-endian; the property is
-> +provided so that big-endian-only RISC-V CPU variants can be modelled.
+> +For all these reasons, starting on 11.1, QEMU is moving away from Debug
+> +0.13 by deprecating the ``debug`` flag.  Setting it, from now on, will be
+> +be the same as setting ``sdtrig`` version 1.0.  Users that are still using
+> +Debug 0.13 will need to update their software to use Debug 1.0 or use QEMU
+> +11.0 and older.
+>  
+>  Backwards compatibility
+>  -----------------------
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index fef424f2bf9..c8a41c57a57 100644
+> index 862834b480..54e8f78a4d 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -2520,6 +2520,7 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_ru=
-les[] =3D {
->
->  static const Property riscv_cpu_properties[] =3D {
->      DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-> +    DEFINE_PROP_BOOL("big-endian", RISCVCPU, cfg.big_endian, false),
->
->      {.name =3D "pmu-mask", .info =3D &prop_pmu_mask},
->      {.name =3D "pmu-num", .info =3D &prop_pmu_num}, /* Deprecated */
-> --
-> 2.53.0
->
->
+> @@ -226,7 +226,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>      ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+>      ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+>      ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+> -    ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, debug),
+> +    ISA_EXT_DATA_ENTRY(sdtrig, PRIV_VERSION_1_12_0, ext_sdtrig),
+>      ISA_INTERNAL_EXT_DATA_ENTRY(shcounterenw, PRIV_VERSION_1_12_0,
+>                                  has_priv_1_12),
+>      ISA_INTERNAL_EXT_DATA_ENTRY(sha, PRIV_VERSION_1_12_0, ext_sha),
+> @@ -807,7 +807,7 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>      env->vill = true;
+>  
+>  #ifndef CONFIG_USER_ONLY
+> -    if (cpu->cfg.debug) {
+> +    if (cpu->cfg.ext_sdtrig) {
+>          riscv_trigger_reset_hold(env);
+>      }
+>  
+> @@ -971,7 +971,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      riscv_cpu_register_gdb_regs_for_features(cs);
+>  
+>  #ifndef CONFIG_USER_ONLY
+> -    if (cpu->cfg.debug) {
+> +    if (cpu->cfg.ext_sdtrig) {
+>          riscv_trigger_realize(&cpu->env);
+>      }
+>  #endif
+> @@ -1150,6 +1150,14 @@ static void riscv_cpu_init(Object *obj)
+>      cpu->env.vext_ver = VEXT_VERSION_1_00_0;
+>      cpu->cfg.max_satp_mode = -1;
+>  
+> +    /*
+> +     * 'debug' started being deprecated in 11.0, been just a proxy
+> +     * to set ext_sdtrig ever since. It has been enabled by default
+> +     * for a long time though, so we're stuck with setting set 'strig'
+> +     * by default too. At least for now ...
+> +     */
+> +    cpu->cfg.ext_sdtrig = true;
+> +
+>      if (mcc->def->profile) {
+>          mcc->def->profile->enabled = true;
+>      }
+> @@ -2514,8 +2522,42 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
+>      NULL
+>  };
+>  
+> +/*
+> + * DEPRECATED_11.0: just a proxy for ext_sdtrig.
+> + */
+> +static void prop_debug_get(Object *obj, Visitor *v, const char *name,
+> +                         void *opaque, Error **errp)
+> +{
+> +    bool value = RISCV_CPU(obj)->cfg.ext_sdtrig;
+> +
+> +    visit_type_bool(v, name, &value, errp);
+> +}
+> +
+> +/*
+> + * DEPRECATED_11.0: just a proxy for ext_sdtrig.
+> + */
+> +static void prop_debug_set(Object *obj, Visitor *v, const char *name,
+> +                         void *opaque, Error **errp)
+> +{
+> +    RISCVCPU *cpu = RISCV_CPU(obj);
+> +    bool value;
+> +
+> +    visit_type_bool(v, name, &value, errp);
+> +    cpu->cfg.ext_sdtrig = value;
+> +}
+> +
+> +/*
+> + * DEPRECATED_11.0: just a proxy for ext_sdtrig.
+> + */
+> +static const PropertyInfo prop_debug = {
+> +    .type = "bool",
+> +    .description = "DEPRECATED: use 'sdtrig' instead.",
+> +    .get = prop_debug_get,
+> +    .set = prop_debug_set,
+> +};
+> +
+>  static const Property riscv_cpu_properties[] = {
+> -    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+> +    {.name = "debug", .info = &prop_debug},
+>  
+>      {.name = "pmu-mask", .info = &prop_pmu_mask},
+>      {.name = "pmu-num", .info = &prop_pmu_num}, /* Deprecated */
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+> index 734fa079f2..44235bfaa1 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -46,6 +46,7 @@ BOOL_FIELD(ext_zilsd)
+>  BOOL_FIELD(ext_zimop)
+>  BOOL_FIELD(ext_zcmop)
+>  BOOL_FIELD(ext_ztso)
+> +BOOL_FIELD(ext_sdtrig)
+>  BOOL_FIELD(ext_smstateen)
+>  BOOL_FIELD(ext_sstc)
+>  BOOL_FIELD(ext_smcdeleg)
+> @@ -159,7 +160,6 @@ BOOL_FIELD(ext_xlrbr)
+>  
+>  BOOL_FIELD(mmu)
+>  BOOL_FIELD(pmp)
+> -BOOL_FIELD(debug)
+>  BOOL_FIELD(misa_w)
+>  
+>  BOOL_FIELD(short_isa_string)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 5514e0f455..17992715ff 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -796,7 +796,7 @@ static RISCVException have_mseccfg(CPURISCVState *env, int csrno)
+>  
+>  static RISCVException debug(CPURISCVState *env, int csrno)
+>  {
+> -    if (riscv_cpu_cfg(env)->debug) {
+> +    if (riscv_cpu_cfg(env)->ext_sdtrig) {
+>          return RISCV_EXCP_NONE;
+>      }
+>  
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 6776e7bf5a..4ca5c9c8d7 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -218,14 +218,14 @@ static const VMStateDescription vmstate_kvmtimer = {
+>  };
+>  #endif
+>  
+> -static bool debug_needed(void *opaque)
+> +static bool sdtrig_needed(void *opaque)
+>  {
+>      RISCVCPU *cpu = opaque;
+>  
+> -    return cpu->cfg.debug;
+> +    return cpu->cfg.ext_sdtrig;
+>  }
+>  
+> -static int debug_post_load(void *opaque, int version_id)
+> +static int sdtrig_post_load(void *opaque, int version_id)
+>  {
+>      RISCVCPU *cpu = opaque;
+>      CPURISCVState *env = &cpu->env;
+> @@ -237,12 +237,12 @@ static int debug_post_load(void *opaque, int version_id)
+>      return 0;
+>  }
+>  
+> -static const VMStateDescription vmstate_debug = {
+> -    .name = "cpu/debug",
+> -    .version_id = 2,
+> -    .minimum_version_id = 2,
+> -    .needed = debug_needed,
+> -    .post_load = debug_post_load,
+> +static const VMStateDescription vmstate_sdtrig = {
+> +    .name = "cpu/sdtrig",
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .needed = sdtrig_needed,
+> +    .post_load = sdtrig_post_load,
+>      .fields = (const VMStateField[]) {
+>          VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
+>          VMSTATE_UINTTL_ARRAY(env.tdata1, RISCVCPU, RV_MAX_TRIGGERS),
+> @@ -444,8 +444,8 @@ static const VMStateDescription vmstate_mseccfg = {
+>  
+>  const VMStateDescription vmstate_riscv_cpu = {
+>      .name = "cpu",
+> -    .version_id = 11,
+> -    .minimum_version_id = 11,
+> +    .version_id = 12,
+> +    .minimum_version_id = 12,
+>      .post_load = riscv_cpu_post_load,
+>      .fields = (const VMStateField[]) {
+>          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+> @@ -511,7 +511,6 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          &vmstate_kvmtimer,
+>  #endif
+>          &vmstate_envcfg,
+> -        &vmstate_debug,
+>          &vmstate_smstateen,
+>          &vmstate_jvt,
+>          &vmstate_elp,
+> @@ -519,6 +518,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          &vmstate_ctr,
+>          &vmstate_sstc,
+>          &vmstate_mseccfg,
+> +        &vmstate_sdtrig,
+>          NULL
+>      }
+>  };
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 3e22e7ed53..a6dd864264 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -180,7 +180,7 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
+>               ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+>      }
+>  
+> -    if (cpu->cfg.debug && !icount_enabled()) {
+> +    if (cpu->cfg.ext_sdtrig && !icount_enabled()) {
+>          flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
+>      }
+>  #endif
+> -- 
+> 2.43.0
+> 
 
