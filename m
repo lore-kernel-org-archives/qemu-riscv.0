@@ -4,100 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FC6FCD5BD1
-	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Jun 2026 03:07:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45EEACD6E55
+	for <qemu-riscv@archiver.kernel.org>; Mon,  1 Jun 2026 03:09:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wTsze-0006rV-Vb; Sun, 31 May 2026 23:07:10 -0400
+	id 1wTt1j-0007PG-IW; Sun, 31 May 2026 23:09:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wTszb-0006qY-Kc
- for qemu-riscv@nongnu.org; Sun, 31 May 2026 23:07:08 -0400
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ id 1wTt1h-0007O9-Kf
+ for qemu-riscv@nongnu.org; Sun, 31 May 2026 23:09:17 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wTszZ-00038v-V1
- for qemu-riscv@nongnu.org; Sun, 31 May 2026 23:07:07 -0400
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-bec441e4018so89401066b.2
- for <qemu-riscv@nongnu.org>; Sun, 31 May 2026 20:07:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780283223; cv=none;
+ id 1wTt1f-0004Yq-VJ
+ for qemu-riscv@nongnu.org; Sun, 31 May 2026 23:09:17 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-68be16c61d1so4859129a12.2
+ for <qemu-riscv@nongnu.org>; Sun, 31 May 2026 20:09:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780283354; cv=none;
  d=google.com; s=arc-20240605;
- b=PKzzHJ/0pEcGKFohiER1ScEH3S+5lL7u03e0CZXAaZbR/6e77M8ifJ1d2eukTQttJN
- KLbV2wCTMEMtNCo5bjkekVZM0UUFjGIizNPPpZ9Q2BBX1Rj0GEBwrjeAv6cqFjmtOfUN
- Nb8sQLVAlzOx/cWPXRo+tsZZ5HViPbtHO2j6zDR0XJVDXHC0UM7pmvMG4+ePxfe+ax+6
- Z/u69DRleel92BoRknWeO3OpBhXoes3YVX8VPVlnnBpgooSqdr4uhEtsgLEv7lrirD+W
- Qiy+IEDzltd1cNK4WniD+h0tKKbBsxk6Ou54ZdLe7eoeAomXxhWym2l8RLw1rhgEsfF3
- 2dWw==
+ b=DRKL7ZAXJnupQSRWwvY4kb+MbgFygBXckVRpb5UXU4iX9SwvRzok5hAaSN2IzR6hX4
+ XSytjFnV5RBoDbKOZO6KX3TzX8Qx6S22Q47wfsb8iuvW00ZYXJKIRg25E/zlsLi1mVuw
+ UW+61Sb4wslRkFPPJ4OuLKvgnJtVYMubuNE6etjwzfsKIlwvxHsCX06sksoaJVszHb49
+ v9OuPAl1fUb+fshSVfHW04QnbNN2FWkyINxAOQiTfUJF/Oe4VMNe4EU5+Armjmh89UvS
+ mpUX1ODhbJ4VRa1Jjb8+JI1YYpcMCwYDIsTqqauQsBZmIGh2IPk+P34EUzAVNKheY9AN
+ aPRA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=2bG2vXcHgdOad+pyBwpMkeEMzF2PgRDTgnOaa8Co4Yc=;
- fh=W0hm1+Qc0mS3hk3zAhGNF8fUc8cqGx9K7Vi0PhW77Ls=;
- b=I9HoeBlKJe9GIiY7UG7I7aJ2lN0tUgKbOvFzUAy10QtjA+Hqy44aA2boDe5XMEW5dT
- m7RlX2c2RkxM0KTk+4YR4sqv8dM0k0MiIw8pOj7uLlWTkLiko096dmQ+eq+0P5gXvTSM
- 7j43PnzenhlWaM/IPbvvKBYYxqg12kXeLRdKyMX9s8GezRSnZsyTnaugEX/wI8uaRn9R
- RiKY7Ups//5SbjciD0AbVGV2otqtZjZPLQRFf5n3F8tAKy3U1F6dvoGqHruQE5pQmJAj
- vKYhPKS1zDTQbP4TATkRJKTGvBJmWxC2ei+VYKb6kHGEL+gTCquwyN9Kx86rWCi0Sf3m
- +BJQ==; darn=nongnu.org
+ bh=n4sbSR2xC6UUdTGOGPF+IffDjA0MczriSf99ZJRi3X0=;
+ fh=k6K/99/gbC35cg1rcjRVesdDJsd+ZkA6u+UeViyCR4I=;
+ b=cfI+y9ne2/6Rw/Ya3k0GbdntaDuJUqKi3QfFyikEgDTF6YKtFKxw1TXKAV52eUS6lB
+ TlbQe/ZH0QMZwFEsN1Vty2H8h3wKqKZ1bfQWRJOgjfcf5wQox8dAszHw+6Eq5k0tv89P
+ a4vrj0UMicesx1GSfgok/iQRXIF6KJcBFxh8gXyBv+LYxJ+RVU605FUYbypjYIr2upGv
+ 6stuG2CNMvmgI9GxEX874IzLAYLLScRiBJuXsnJwa4EmeCHhdkhhMI8sCpZQ1urV//uS
+ ulL3D32+1HrWe6IB9le2LxyaQhoB4ly5Z+yybkVcJpKZWcJh8RbffHIAQthaKcueSgoC
+ DZBQ==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780283223; x=1780888023; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1780283354; x=1780888154; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2bG2vXcHgdOad+pyBwpMkeEMzF2PgRDTgnOaa8Co4Yc=;
- b=GP+IdZ/vCVJXHy37E9uVIsZVNKio2S/SC3eONsJNtQDDYCpbVg9AYHIXB/IYhhSeKs
- ITXoW8LM3SZ/ySo3ay9qNIS3xd7FpXsxE1JH/rw7zeu1LjKzKnDy3avsJZMZZ1AUJ1ml
- ToCXhbJ0wOOmpVsjyYJ2hqkmrCrv+tQiKQswc/sEsMBmGEzBxP2MoB/i1t5fcJ006k8S
- OeVuIJDwzNF6k7sv4vSBm5RrqaUX2xMoj0fWsvWtHP0iZRrrURJn6KZlmLbfH0v72uzB
- uyKwNkMX5tmDbCy/DExHPJATRXStVT47bWSvsG4aw4C7gJzdugEUzB0nnNNFj3ysoOzP
- sB6w==
+ bh=n4sbSR2xC6UUdTGOGPF+IffDjA0MczriSf99ZJRi3X0=;
+ b=q84Pbz+Ojf0foHqrAvenV4i6FH3t5fXxZ/nETTc8Nvb18mm9Qm3msC3WUYtEDYBb3X
+ KKubcOgVJ2vB939xX1p7BR/4T1QiaDsmzxG1vVVe9+CJl0/01D+CZUjBimlQkal8vpUi
+ hCXhdAJ1+9gxqFS2LRxiwkH5kLnw3r1hj39t2q2obzV9pHJAG6yLJ6zqdvdCBPyLqP2H
+ VMOsnNoUVV2zpTnMlPzw5WW3fezciGqYd+VMAFVE1iUBK4XmicCYZW6adfu5/T/yMad9
+ XoYBMrNG6e2zed2S/lLljIjLggwPOJ2zKW8G2xqtWib1faqT3cnPC/SBN7jXqtglZEsB
+ Ihtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780283223; x=1780888023;
+ d=1e100.net; s=20251104; t=1780283354; x=1780888154;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=2bG2vXcHgdOad+pyBwpMkeEMzF2PgRDTgnOaa8Co4Yc=;
- b=AG2neTGCchIeOwOrjpz5myOqWSP0RtJJj/wA8JpJZgsfu6XkqKAfcmkjDuI5mmzr9R
- 8fZwAQi3vkAPXFn2wZGwO9rK7T+3pZ04Vdyxwx2yEmcKTmEI8OrekGmtjRScrcRdHD3E
- uSoZ5vJ7TYxlxdBFYJupJkjzFwov2CgF2SdEq/nm/E6FWBt4zVFNYl0wwOxm/vvYdEcr
- P/P0kJqRlhTE8h55L/tsesAVwwDMcc3Q7PFcKDaGkX4ro6+1Y1XxlsPAqdrhu5tNJpk9
- 1Ps7tKaQBrWIMygkDKRbB/dLQDoHWW9Rsi/lIy9+/4Q7wsaFMgPdHbYB9rRl89BhL5L/
- l5xw==
+ bh=n4sbSR2xC6UUdTGOGPF+IffDjA0MczriSf99ZJRi3X0=;
+ b=KCOWmsS29FkIgkUdxFqvB9JWukp7GtRc/1/lWwUED3WT57YgYIXsQBVODs9yln2pSO
+ RW/8A/xkJ5QCIzvviCWK4z9VCCUBH/WuZkV1tjRRak2dqyy8LtAh3y+Q+Bk9ujfELj4j
+ v8jLdd9C1jfjU3hameP3AqmCIRNPx1JukhKGILxwCx7OOPms1Jh9NghVuamytJCxiHML
+ v2EHcH+McLVENSPlPiJhR+tpJMivzShRm4hBOerZD7T8fGZWk8gZmgTIFZVJC0PYVD7/
+ Kx+OLVOtHkFPaHR6HbIUxU/tC6JAhLRe9WfXkTEjspFfYyI0WadbNBNTWicfEUTXsD26
+ nEpQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8OE+rk36LQNvYpTbYFLMNp1/7/CEn9KDlNPgZ/u7eqeg8+eJ7v+mj4YJoBL61oBil9sPTUeTR0eXXP@nongnu.org
-X-Gm-Message-State: AOJu0Yw0L+THg+OkbyzPvH+Tb/KrMBLer1Jh7wASwICyB/kL1MD0db8Z
- H0IUakEiwSublQezOKUFY3Ko9e+TlOaJsV7ANEJhkccA7VoNC8PHSUrXx+Hm8amv/+GgTGlmSK9
- JqegfDsoOon9es7FRBPxEu+YVqHs/XpA=
-X-Gm-Gg: Acq92OEIkf4VZvZcK7uuuG0NCLghliv4WAFw7fQKG1SI3vFewpbULxzwN8oLlOsW+VF
- nVY0ttjXdql0NCje1R5ynDloW7q857VxIoAGmCp1H5bPsIPuU88lnUaMllJbea/gqU+mMNN1/4F
- iJg7nxjuCpwc49NUaxk5qBiQWmJU+ZH1i0O4LwDrNJKjA3OK8oB4LaktZOKB3yuBjL0NQp+34ys
- Sx6V9SZcJwiFxGSCalc74X32txVDKdTAUZUko142SXBV4tQT2zIyAayR8U+W72nvePcBhMRh6ak
- T7I+2rGoF9VX1bynMjJC1m64XhwDtefuEcKEiUjXxx9s5MRn5kguXmiqA9w=
-X-Received: by 2002:a17:907:a2c5:b0:bed:9a7:5ed1 with SMTP id
- a640c23a62f3a-bed09a768a4mr156000866b.5.1780283223014; Sun, 31 May 2026
- 20:07:03 -0700 (PDT)
+ AFNElJ+RyJ4kqkCOeCkazp33kkP77jA1K+ms4/YwOBxqVXtI9yv5y6PXNwg6nsGCqb1G/3YWHYlLHh4+H6gK@nongnu.org
+X-Gm-Message-State: AOJu0YxkPaZ9jP5dkMlSD0fXldY+BSgVuCL3kfifVWNcGqItWXkLDwTW
+ hpyxKlfigLXqcUumH15DimsfiIvJk9d/IDyh/h8iJbc400QW3AI8lqNftxK/REBl3Ih6UtsOFzN
+ YVYTSKzL+l8QGNf5FMwCvL5ieVpDH0JQ=
+X-Gm-Gg: Acq92OHFxcNSPnjlemzmPESeEya1EIUwL/w+iBkXLqbjFIwglNeCCKAhR2bjjh52c03
+ GCvA5hpnONzoKsTUGp43xHtSm0ZhpUhgkQ2Ob3DQNEIRkiBD3M0hRbZkqlKY3bC4gKYKWy4zz4L
+ HogveWlRV3PP/sYdJjN87xSzLwj8O9fLPW4/ZRaOfXkOhRlgHU2QLZdqFHTmSfg/ZRr8Gan/cTj
+ ZLM4sR6G5z7W7NOTqFx21Dx/DH2dm9E6IFdwWuCIhTh7vOrfpVLZ/viyq06IvCRZk3/m9mN/sTY
+ Zn6i3GPAK7U72fkYYCm9X4cVoPVbFW3YW1GoX7RrPjTVDj0c
+X-Received: by 2002:a17:907:1dc7:b0:bec:929b:cee6 with SMTP id
+ a640c23a62f3a-bec929bd40bmr141662666b.20.1780283353776; Sun, 31 May 2026
+ 20:09:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260514204640.2540054-1-daniel.barboza@oss.qualcomm.com>
- <20260514204640.2540054-5-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260514204640.2540054-5-daniel.barboza@oss.qualcomm.com>
+References: <20260527200355.2068879-1-daniel.barboza@oss.qualcomm.com>
+ <20260527200355.2068879-2-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260527200355.2068879-2-daniel.barboza@oss.qualcomm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 1 Jun 2026 13:06:35 +1000
-X-Gm-Features: AVHnY4KhQnxn9iTub1d8SKP7MGJHvKYAqWRB6Q9ZO2yHUoNl56ONKi4qeLoPUUw
-Message-ID: <CAKmqyKNNHh70cxDXEwncFk0Hngje2HbiBdmwc8KxOP8m47+HRw@mail.gmail.com>
-Subject: Re: [PATCH v6 4/4] docs: add riscv-server-ref.rst
+Date: Mon, 1 Jun 2026 13:08:46 +1000
+X-Gm-Features: AVHnY4LGYH77SdW-Q81ino76eRCbfO5-aUZoEUlHxUGh2FWBaMDE6gnhCm2yQ68
+Message-ID: <CAKmqyKPAVkCfjcN6kyLTu_EVkU35k3T85qM99MGaw7qVHoqzHw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] disas/riscv.c: fix inst_length()
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
- leif.lindholm@oss.qualcomm.com, andrew.jones@oss.qualcomm.com
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -105,7 +104,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,68 +120,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, May 15, 2026 at 6:48=E2=80=AFAM Daniel Henrique Barboza
+On Thu, May 28, 2026 at 6:05=E2=80=AFAM Daniel Henrique Barboza
 <daniel.barboza@oss.qualcomm.com> wrote:
 >
-> Add documentation for the new riscv-server-ref board.
+> inst_length() can return 0 if 'inst' happens to not match any known
+> encoding (like [1]).  Returning 0 is not desirable, even for unknown
+> encodings, given that it will cause a loop in target_disas() later on.
 >
+> The most recent version of the RISC-V unpriv spec ditched the
+> sophisticated instruction-length encoding.  We're now supporting only
+> 16-bit and 32-bit length instructions, where:
+>
+> "All the 32-bit instructions in the base ISA have their lowest two bits
+> set to 11.  The optional compressed 16-bit instruction-set extensions
+> have their lowest two bits equal to 00, 01, or 10."
+>
+> So the code is now simpler, never returning 0, and in fact it's the same
+> thing we're already doing in insn_len() from target/riscv/internals.h.
+> Due to include shenarigans we can't use that function in disas/riscv.c,
+> but I believe we can cut ourselves some slack this time and not lose
+> sleep over a 1 line of duplicated logic.  We're documenting it though!
+>
+> [1] https://gitlab.com/qemu-project/qemu/-/work_items/3479
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3479
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> ---
->  docs/system/riscv/riscv-server-ref.rst | 37 ++++++++++++++++++++++++++
->  docs/system/target-riscv.rst           |  1 +
->  2 files changed, 38 insertions(+)
->  create mode 100644 docs/system/riscv/riscv-server-ref.rst
->
-> diff --git a/docs/system/riscv/riscv-server-ref.rst b/docs/system/riscv/r=
-iscv-server-ref.rst
-> new file mode 100644
-> index 0000000000..7803133b77
-> --- /dev/null
-> +++ b/docs/system/riscv/riscv-server-ref.rst
-> @@ -0,0 +1,37 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +RISC-V Server Platform Reference board (``riscv-server-ref``)
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +The RISC-V Server Platform specification `spec`_ defines a standardized
-> +set of hardware and software capabilities that portable system software,
-> +such as OS and hypervisors, can rely on being present in a RISC-V server
-> +platform.  This machine aims to emulate this specification, providing
-> +an environment for firmware/OS development and testing.
-> +
-> +`spec`_ is version 1.0 at the introduction of this board.  New spec vers=
-ions
-> +might trigger a revision of the emulation itself, which will strive to a=
-lways
-> +match the latest version available.  In case the emulation changes aren'=
-t
-> +backwards compatible we'll introduce a versioning scheme, probably via
-> +a machine property, to allow older SW to run with older spec versions.
-> +
-> +The main features included in the riscv-server-ref board are:
-> +
-> +* IOMMU platform device (riscv-iommu-sys)
-> +* AIA
-> +* PCIe AHCI
-> +* PCIe NIC
-> +* No virtio mmio bus
-> +* No fw_cfg device
-> +* No ACPI table
-> +* Minimal device tree nodes
-> +
-> +There are multiple ways of using this reference board, some of them bein=
-g:
-> +
-> +* BIOS: u-boot-spl.bin; SD-CARD: <disk_containing_FIT>; NVME: <distro_di=
-sk>
-> +* BIOS: fw_dynamic.bin; KERNEL: u-boot.bin; NVME: <distro_disk>
-> +* BIOS: fw_dynamic.bin; KERNEL: EDK2.fd; NVME: <distro_disk>
-> +* BIOS: fw_dynamic.bin; KERNEL: <linux_image>; INITRD: <busybox_initrd>
 
-Can we add a test case that boots something?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
+
+> ---
+>  disas/riscv.c | 20 ++------------------
+>  1 file changed, 2 insertions(+), 18 deletions(-)
+>
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index d416a4d6b3..fbdb24fcea 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -5057,26 +5057,10 @@ static bool check_constraints(rv_decode *dec, con=
+st rvc_constraint *c)
+>      return true;
+>  }
+>
+> -/* instruction length */
+> -
+> +/* Same as insn_len() from target/riscv/internals.h */
+>  static size_t inst_length(rv_inst inst)
+>  {
+> -    /* NOTE: supports maximum instruction size of 64-bits */
+> -
+> -    /*
+> -     * instruction length coding
+> -     *
+> -     *      aa - 16 bit aa !=3D 11
+> -     *   bbb11 - 32 bit bbb !=3D 111
+> -     *  011111 - 48 bit
+> -     * 0111111 - 64 bit
+> -     */
+> -
+> -    return (inst &      0b11) !=3D 0b11      ? 2
+> -         : (inst &   0b11100) !=3D 0b11100   ? 4
+> -         : (inst &  0b111111) =3D=3D 0b011111  ? 6
+> -         : (inst & 0b1111111) =3D=3D 0b0111111 ? 8
+> -         : 0;
+> +    return (inst & 3) =3D=3D 3 ? 4 : 2;
+>  }
+>
+>  /* format instruction */
+> --
+> 2.43.0
+>
+>
 
