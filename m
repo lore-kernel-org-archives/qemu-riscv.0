@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 862FFCD6E4A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 09:20:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E4DDCD6E57
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 09:20:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wULH2-0000nA-CT; Tue, 02 Jun 2026 05:19:00 -0400
+	id 1wULH2-0000n7-Bd; Tue, 02 Jun 2026 05:19:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1wULGm-0000Yr-GG
- for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:49 -0400
-Received: from mail-dy1-x1342.google.com ([2607:f8b0:4864:20::1342])
+ id 1wULGu-0000cZ-L8
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:53 -0400
+Received: from mail-dy1-x1343.google.com ([2607:f8b0:4864:20::1343])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1wULGg-0007YH-6U
- for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:42 -0400
-Received: by mail-dy1-x1342.google.com with SMTP id
- 5a478bee46e88-304d7f31215so4950161eec.1
- for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2026 02:18:35 -0700 (PDT)
+ id 1wULGq-0007k2-Ri
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:51 -0400
+Received: by mail-dy1-x1343.google.com with SMTP id
+ 5a478bee46e88-304d7f31215so4950314eec.1
+ for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2026 02:18:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780391914; x=1780996714; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1780391926; x=1780996726; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8WxnG1ZaVTxzKCs44ZH++uO0YK7iL7fr4U5+9la7l0s=;
- b=nQw3AdRAVZyZHrjCr3Z3dZ/x8jx1i0QiHI6WFMqUHKqnacfh3BcHHSsIkm8UUjpR7T
- EeCVOcNOTlqBHb5qOw1LdCBz5s5MCmd1vx4ZLrQyBxZ0LylSEO/kBOngb+2ks6/4jgf5
- AMTxOVg48E8AVHsLFD6SYB/z5/67uIb8wGMloWRneXP98SpxzRISuBD2blZMqXD3ScrX
- iSnUZeubIyrZF1Vuh5ngUFcgGMaF3BfW34NR63VHbstg9ZmW2CKBFwoqajQHKKGragGD
- NUYHMQ03wJumKGyPtfNjSbaY5j1op3HKD4MGmWyDCDURylbyS1Dg7SWVtW6AQFbVXq37
- tZxA==
+ bh=HcOVA7z761sRU6mzSlK4g0qMB5qPdXRWmaIP73uflqw=;
+ b=V1N7agQXjFvn7TxbMUM5oQwRRdCuJ13e2gYM36xkXCT1moUR8wwatkwUs6h7KwzTr5
+ x55pUPtzJcxeC3BLotT0cJvWW3pbTnCyR3vg6tsPHmj6OmMVhEP9Sh3izmCbTocl42HD
+ 36vD72V+EiYd8XoMwiJZVbjU65mbyQ7x0Pn6Nu/Ly0HB779y9kuv/Be0CwH3K8JB43Lm
+ McQeame5kzwDC2Wml5ZIifSkF5a3vM5oP0JZw9aJ5dH/BYe0ph1eRHz3nC9QBH+mNbEm
+ fEG8gjOIAAyA4mwr+BZOkNgHfXOpUFKf6EVnHLjrgjn+w5itQQo31aVTQiVXDCKnuAsO
+ Un5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780391915; x=1780996715;
+ d=1e100.net; s=20251104; t=1780391926; x=1780996726;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=8WxnG1ZaVTxzKCs44ZH++uO0YK7iL7fr4U5+9la7l0s=;
- b=TDM3U1ltIVpCoXTpOkJFc8w5h4Ti6+RHjB8t60Vq6OOMz+8XgE9dY2pTHo5sWFvNd0
- docBwF/WyEhlLQFfGhSvlgs3axqbVGN+qKO1U2K44uTuAuwIu0dMJ5SilqFiRRkXS2v0
- B1bzBskS30Zl13fDUdjhxgsjSUQFz4+r3pfL0mxqA5yANJalT6YG6UuSY9LmDX3k9CNy
- g9iNqZMQQj0pKA17TvBg/o+Xibj0MzfvBxHGAFH/erZd/UcNVJcwZfnaIowX0EpRR6/Z
- apuqdQBDWsVJRJQeaSowBwEh7TjANoqqMzeEPUPXidvflgU5iMQN7XXNT+iuZRnYc5tF
- oxaw==
-X-Gm-Message-State: AOJu0YwMxxAsM6OYEPyLcn8dVHKhmPzqMHOhDLKCO97X+LkR5sdbcujt
- Oz/UUnTL+w9kQswpedQIg3JI8i+O2P5Axh36r0Cxhm9dgofJRjzvA5pE
-X-Gm-Gg: Acq92OGwGXPLXkPvlYDZMGe6U93ne67VayS95I6qRcGwymxhGBpEtY842IzjJ2UL2Bl
- u3g5R1Pec13CCOESB1FJv+SZItuO8eUBPqB/irYlHLknOVodHfFqzNG/dXFZ9gKDh2ja1/7Fvfi
- OIJf35L+hCkmzpJ7h++baL2VLLq72CqB/GMWhCv8upFMEZ61suAZbHGkzxTVWWs6J3HaFwVkHGh
- HUqOuakr5UPocBngKBrpOg1jdhzyiyvgVAWH39yZb4ZQWyS6C3hJksVq5LwGryOI4Of3Ul2u3SG
- afAckWJAau1yBEkYQYzWIGrREvgC6HZlxIuDomXCvxy2z3LQkr1qMvgrJdpntZ4FpPYmowtfYp3
- rUitX4JcoUta794bNOLR093CAzyVd0Hws5HZl/Fjg5zkFhJI2s3l5i4IqTyanAeTZwba26vWwXf
- Dy2BHj7jDp8a14lkxnECnZvF9DbHSrIrzrZ0CLEq7gCqjRw8odavZjf3Dhmv0YPNQrAwEkKOFn1
- TNUiXkb3niEsVKoOYXPL0Z5dUs=
-X-Received: by 2002:a05:7300:f18f:b0:303:f26f:df30 with SMTP id
- 5a478bee46e88-304fa632e0dmr6146120eec.23.1780391914520; 
- Tue, 02 Jun 2026 02:18:34 -0700 (PDT)
+ bh=HcOVA7z761sRU6mzSlK4g0qMB5qPdXRWmaIP73uflqw=;
+ b=jGpAd7ahnMh2yObu/gdpUAgCHHdD4THB8/tv8K3TKCVrdvEkdCFipKow2jQ6/txli9
+ zOKZRtfwBLHLbnd8iqv4lDPf15UlUGqiE4IUQIVCExmPIV9ysnpQMzYvGYv1XL4yaPMI
+ ECuRlctu06pYS9jADbIUANr52poywPPapxrG3TTdrkTF8PY5KSJBrdtFc9uaOeGK5E2K
+ pP0sOo0CSw/YOsfOJnVvPosPRJBbBvxPUCG5AwZ+YvT7c/GIOyHM7TZQfDs2E6dtauXb
+ OMblAdgaXBih3UfMDwoxv05Ut50CJyiQPajMHM5KLLMAPjuhulgeFMCOxi5q1h1M6mEU
+ tvsA==
+X-Gm-Message-State: AOJu0Yyv2VoTGfNxh7WZ51/DYAuVn+7ckYpxeImwhVlGV0tZ+5nezxIq
+ IC0rqJZwPvRM9wA61YKfMKQ/8YC3JY4/9DScJ8bkeESKKLuB+Z0yC79n
+X-Gm-Gg: Acq92OFOeLDFCj1RPjktyqmX8rzzKvMB8YZ8T1CPv55W+FXaHE1ocYY8uR1gQH/v32P
+ l85aSeJ7cEFIfXN+sE8pZgLoFdYfMlx5qWiF5pqPDcBPQ5jPSvYlczk4rt23kVqtlDek6RjiBaf
+ f0461fjSUNCemf5ZyD5+u/Az/GDlUl37C3GVIiQS74G0cJmu6bDII+4gbX+vuvImYMWxkrzN5Jy
+ MVuzDwf+GMaWU7pgX0jk1OFZaL5AMBoWDFfTW8tVNqLLBQq7K8VigaycmNE3hhc+FcEyzw6oO4I
+ gyCh3hC3WuiRatp4855QfnOJzBNjomW29TAxv4wjNyvnDTqL4VFCBhsLJ9zA9cpDJnQcWQDuOQx
+ z/oyD9NLuXVpAygc9pYn+xh+vLJEIQPFXuzbOmNIp7y3ZpCsAdKYJGjWHoqZlG7z9iJ8ftsx9O9
+ PPjfqcSh04goY9ytmAqwGbhfmsK1hDRS41+7cEOw7MqCfcOPkHi7lZGDiyPFLRqBS7HFntFhuW+
+ WIv+xEJpgHEP5syQwR5YnpMKw4=
+X-Received: by 2002:a05:7300:6c84:b0:2ea:ed70:3ea8 with SMTP id
+ 5a478bee46e88-304fa6939demr7209201eec.29.1780391926221; 
+ Tue, 02 Jun 2026 02:18:46 -0700 (PDT)
 Received: from openkylin..
  (ec2-54-176-108-193.us-west-1.compute.amazonaws.com. [54.176.108.193])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-304ed2c3121sm11419146eec.5.2026.06.02.02.18.30
+ 5a478bee46e88-304ed2c3121sm11419146eec.5.2026.06.02.02.18.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jun 2026 02:18:34 -0700 (PDT)
+ Tue, 02 Jun 2026 02:18:45 -0700 (PDT)
 From: Zephyr Li <fritchleybohrer@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
@@ -73,17 +73,16 @@ Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
  alex.bennee@linaro.org, pierrick.bouvier@oss.qualcomm.com,
  philmd@linaro.org, Zephyr Li <fritchleybohrer@gmail.com>
-Subject: [PATCH v3 3/6] target/riscv: move riscv_raise_exception() out of
- op_helper.c
-Date: Tue,  2 Jun 2026 17:17:50 +0800
-Message-ID: <20260602091753.3209261-4-fritchleybohrer@gmail.com>
+Subject: [PATCH v3 5/6] target/riscv: build TCG-only sources only with TCG
+Date: Tue,  2 Jun 2026 17:17:52 +0800
+Message-ID: <20260602091753.3209261-6-fritchleybohrer@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
 References: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1342;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-dy1-x1342.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1343;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-dy1-x1343.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,132 +105,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-riscv_raise_exception() is referenced by RISC-V internal code, but its
-current implementation relies on TCG's cpu_loop_exit_restore(). Move it to
-cpu_helper.c so op_helper.c can become TCG-only. The actual exception
-unwind still relies on TCG's cpu_loop_exit_restore(), so the non-TCG path
-remains unreachable.
+Several RISC-V source files contain translated-code helpers, decoders, or
+TCG-only instruction implementations, but are currently part of the common
+RISC-V source set. This breaks --disable-tcg builds once TCG headers and
+helpers are unavailable.
+
+After moving common helpers out of TCG-only files, build the remaining
+TCG-only RISC-V sources only when CONFIG_TCG is enabled. Keep common CSR
+misa handling from relying on TCG unwind state in no-TCG builds by falling
+back to env->pc.
+
+Drop the stale tcg/tcg.h include from common CPU code so no-TCG builds do
+not include a TCG-private header.
 
 Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 ---
- target/riscv/cpu.h        |  4 ----
- target/riscv/cpu_helper.c | 19 +++++++++++++++++++
- target/riscv/debug.c      |  1 +
- target/riscv/internals.h  |  4 ++++
- target/riscv/op_helper.c  | 15 ---------------
- target/riscv/zce_helper.c |  1 +
- 6 files changed, 25 insertions(+), 19 deletions(-)
+ target/riscv/cpu.c        |  1 -
+ target/riscv/cpu_helper.c |  6 ++++++
+ target/riscv/csr.c        | 11 +++++++++--
+ target/riscv/meson.build  |  9 ++++++---
+ 4 files changed, 21 insertions(+), 6 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 2273567139..98bda189e6 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -662,10 +662,6 @@ void riscv_translate_init(void);
- void riscv_translate_code(CPUState *cs, TranslationBlock *tb,
-                           int *max_insns, vaddr pc, void *host_pc);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8ef72a88b1..459e32f4ac 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -36,7 +36,6 @@
+ #include "system/tcg.h"
+ #include "kvm/kvm_riscv.h"
+ #include "tcg/tcg-cpu.h"
+-#include "tcg/tcg.h"
  
--G_NORETURN void riscv_raise_exception(CPURISCVState *env,
--                                      RISCVException exception,
--                                      uintptr_t pc);
--
- #ifndef CONFIG_USER_ONLY
- void cpu_set_exception_base(int vp_index, target_ulong address);
- #endif
+ /* RISC-V CPU definitions */
+ static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 678c106ae5..752752d520 100644
+index 752752d520..e53a5d567d 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -39,6 +39,25 @@
- #include "pmp.h"
- #include "qemu/plugin.h"
- 
-+/* Exceptions processing helpers */
-+G_NORETURN void riscv_raise_exception(CPURISCVState *env,
-+                                      RISCVException exception,
-+                                      uintptr_t pc)
-+{
-+    CPUState *cs = env_cpu(env);
-+
-+    trace_riscv_exception(exception,
-+                          riscv_cpu_get_trap_name(exception, false),
-+                          env->pc);
-+
-+    cs->exception_index = exception;
+@@ -29,8 +29,10 @@
+ #include "exec/target_page.h"
+ #include "system/memory.h"
+ #include "instmap.h"
 +#ifdef CONFIG_TCG
-+    cpu_loop_exit_restore(cs, pc);
-+#else
-+    qemu_build_not_reached();
+ #include "tcg/tcg-op.h"
+ #include "accel/tcg/cpu-ops.h"
 +#endif
-+}
-+
- target_ulong riscv_cpu_get_fflags(CPURISCVState *env)
- {
-     int soft = get_float_exception_flags(&env->fp_status);
-diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index 5664466749..1a74aedeab 100644
---- a/target/riscv/debug.c
-+++ b/target/riscv/debug.c
-@@ -27,6 +27,7 @@
- #include "qemu/log.h"
- #include "qapi/error.h"
- #include "cpu.h"
-+#include "internals.h"
  #include "trace.h"
- #include "exec/helper-proto.h"
- #include "exec/watchpoint.h"
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 7f28190c29..1863012807 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -193,6 +193,10 @@ static inline target_ulong get_xepc_mask(CPURISCVState *env)
- bool riscv_cpu_has_work(CPUState *cs);
- #endif
+ #include "semihosting/common-semi.h"
+ #include "exec/icount.h"
+@@ -1714,6 +1716,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     return TRANSLATE_SUCCESS;
+ }
  
-+G_NORETURN void riscv_raise_exception(CPURISCVState *env,
-+                                      RISCVException exception,
-+                                      uintptr_t pc);
-+
- target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
- void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong val);
++#ifdef CONFIG_TCG
+ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+                                 MMUAccessType access_type, bool pmp_violation,
+                                 bool first_stage, bool two_stage,
+@@ -1756,6 +1759,7 @@ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+     env->two_stage_lookup = two_stage;
+     env->two_stage_indirect_lookup = two_stage_indirect;
+ }
++#endif
  
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 81873014cb..d17a8bbf10 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -28,21 +28,6 @@
- #include "exec/tlb-flags.h"
- #include "trace.h"
- 
--/* Exceptions processing helpers */
--G_NORETURN void riscv_raise_exception(CPURISCVState *env,
--                                      RISCVException exception,
--                                      uintptr_t pc)
--{
--    CPUState *cs = env_cpu(env);
--
--    trace_riscv_exception(exception,
--                          riscv_cpu_get_trap_name(exception, false),
--                          env->pc);
--
--    cs->exception_index = exception;
--    cpu_loop_exit_restore(cs, pc);
--}
--
- void helper_raise_exception(CPURISCVState *env, uint32_t exception)
+ hwaddr riscv_cpu_get_phys_addr_debug(CPUState *cs, vaddr addr)
  {
-     riscv_raise_exception(env, exception, 0);
-diff --git a/target/riscv/zce_helper.c b/target/riscv/zce_helper.c
-index 15bf0a99c8..152a7a63ef 100644
---- a/target/riscv/zce_helper.c
-+++ b/target/riscv/zce_helper.c
-@@ -18,6 +18,7 @@
+@@ -1780,6 +1784,7 @@ hwaddr riscv_cpu_get_phys_addr_debug(CPUState *cs, vaddr addr)
+     return phys_addr;
+ }
  
- #include "qemu/osdep.h"
- #include "cpu.h"
-+#include "internals.h"
- #include "exec/helper-proto.h"
- #include "accel/tcg/cpu-ldst.h"
++#ifdef CONFIG_TCG
+ void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
+                                      vaddr addr, unsigned size,
+                                      MMUAccessType access_type,
+@@ -2004,6 +2009,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
  
+     return true;
+ }
++#endif
+ 
+ static target_ulong riscv_transformed_insn(CPURISCVState *env,
+                                            target_ulong insn,
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 186d32fca8..9a9a148bfe 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2134,15 +2134,22 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
+ 
+ static target_ulong get_next_pc(CPURISCVState *env, uintptr_t ra)
+ {
++    /* Outside of a running cpu, env contains the next pc. */
++    if (ra == 0) {
++        return env->pc;
++    }
++#ifdef CONFIG_TCG
+     uint64_t data[INSN_START_WORDS];
+ 
+-    /* Outside of a running cpu, env contains the next pc. */
+-    if (ra == 0 || !cpu_unwind_state_data(env_cpu(env), ra, data)) {
++    if (!cpu_unwind_state_data(env_cpu(env), ra, data)) {
+         return env->pc;
+     }
+ 
+     /* Within unwind data, [0] is pc and [1] is the opcode. */
+     return data[0] + insn_len(data[1]);
++#else
++    return env->pc;
++#endif
+ }
+ 
+ static RISCVException write_misa(CPURISCVState *env, int csrno,
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index 4c99f2b802..2f86dbd5bf 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -9,7 +9,7 @@ gen = [
+ ]
+ 
+ riscv_ss = ss.source_set()
+-riscv_ss.add(gen)
++riscv_ss.add(when: 'CONFIG_TCG', if_true: gen)
+ 
+ riscv_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
+ 		     if_true: files('common-semi-target.c'))
+@@ -19,11 +19,14 @@ riscv_ss.add(files(
+   'cpu-validate.c',
+   'cpu_helper.c',
+   'csr.c',
+-  'fpu_helper.c',
+   'gdbstub.c',
++  'vector_internals.c',
++))
++
++riscv_ss.add(when: 'CONFIG_TCG', if_true: files(
++  'fpu_helper.c',
+   'op_helper.c',
+   'vector_helper.c',
+-  'vector_internals.c',
+   'bitmanip_helper.c',
+   'translate.c',
+   'm128_helper.c',
 -- 
 2.43.0
 
