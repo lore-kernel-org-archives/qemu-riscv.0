@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C3A5CD6E4A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 07:49:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8748FCD6E4A
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 07:49:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wUJr4-0006AZ-EZ; Tue, 02 Jun 2026 03:48:06 -0400
+	id 1wUJr0-00068M-3g; Tue, 02 Jun 2026 03:48:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wUJr2-00069c-Td; Tue, 02 Jun 2026 03:48:04 -0400
-Received: from [115.124.30.97] (helo=out30-97.freemail.mail.aliyun.com)
+ id 1wUJqy-00067B-3z; Tue, 02 Jun 2026 03:48:00 -0400
+Received: from [115.124.30.133] (helo=out30-133.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wUJr0-0004vi-A0; Tue, 02 Jun 2026 03:48:04 -0400
+ id 1wUJqv-0004vo-1w; Tue, 02 Jun 2026 03:47:59 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1780386456; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=8lZQdxMRvn1C3XUCXtvDihVYcgry9SAPjkeEBCgc8SQ=;
- b=SsYjWI6zOTUfs52tBALhoWyP4sY8WvVh5g+JhRleINXuoD1SOBzdLEZOPrJRggQKUj69V+8DcMI/oFbe5ONKr81qn5Sn0c1QIDZn9HS/C1vWw0p3UGCqZyTPBH05yA0XuHuDroWwdjH8K/EbekAFf8KaMNe6bvieu6WoKvYRCUk=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
+ t=1780386457; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=bC5APgQSccMcMwPowh1j/zrujNKfyybUz8KbJ3l6djI=;
+ b=hg+bF9f3i43YoAu4Hc5UvrHPGtHl2f+CsI0BcmwehwX8D82grNwIOYH5KbkHCKTFGX+1ej3raXAaD0qs5aX/6lekKOnlBMVAtvLJUrHcAIW7gMle41hAS0fPizE5PxgcWKD/4J52pqrXuc9bNKuWLqohjfxj9akopNEmyHcCQ5A=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
  MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0X43o4Na_1780386142; 
+ TI=SMTPD_---0X43o4N5_1780386140; 
 Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0X43o4Na_1780386142 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 02 Jun 2026 15:42:22 +0800
+ fp:SMTPD_---0X43o4N5_1780386140 cluster:ay36) by smtp.aliyun-inc.com;
+ Tue, 02 Jun 2026 15:42:20 +0800
 From: Chen Pei <cp0613@linux.alibaba.com>
 To: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
@@ -38,18 +38,18 @@ To: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  guoren@kernel.org
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Chen Pei <cp0613@linux.alibaba.com>
-Subject: [PATCH 4/4] hw/cxl: Map committed HDM decoder ranges as RAM for
- direct DMA
-Date: Tue,  2 Jun 2026 15:41:27 +0800
-Message-ID: <20260602074127.63819-5-cp0613@linux.alibaba.com>
+Subject: [PATCH 1/4] hw/riscv/virt: Add CXL support to the RISC-V virt machine
+Date: Tue,  2 Jun 2026 15:41:24 +0800
+Message-ID: <20260602074127.63819-2-cp0613@linux.alibaba.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260602074127.63819-1-cp0613@linux.alibaba.com>
 References: <20260602074127.63819-1-cp0613@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.97 (deferred)
-Received-SPF: pass client-ip=115.124.30.97;
- envelope-from=cp0613@linux.alibaba.com; helo=out30-97.freemail.mail.aliyun.com
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.133 (deferred)
+Received-SPF: pass client-ip=115.124.30.133;
+ envelope-from=cp0613@linux.alibaba.com;
+ helo=out30-133.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -73,173 +73,196 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The CXL Fixed Memory Window (CFMW) is registered with
-memory_region_init_io() and has no backing ram_block.  As a result
-address_space_map() on a guest physical address inside the CFMW
-takes the bounce-buffer path and is bounded by
-DEFAULT_MAX_BOUNCE_BUFFER_SIZE (4 KiB by default for the system
-AddressSpace).  Once a Type-3 device is brought online as system RAM
-(daxctl online-memory), the kernel happily allocates DMA buffers from
-the CFMW range and any virtio operation whose scatter list exceeds
-4 KiB or that overlaps with another in-flight transfer fails with:
-
-    qemu-system-riscv64: virtio: bogus descriptor or out of resources
-
-The bug is not RISC-V specific: CFMW registration and the bounce
-buffer limit are both arch-agnostic, so any guest that onlines CXL
-memory and issues DMA larger than 4 KiB into it is affected.  It
-shows up first on RISC-V virt because that is where the rest of
-this series enables the daxctl + virtio path end-to-end.
-
-Reproduce on RISC-V virt with cxl=on and a single Type-3 device:
-
-    cxl create-region -m -t ram -d decoder0.0 -w 1 mem0 -s 4G
-    daxctl online-memory dax0.0
-    free -h    # triggers the error and stalls the guest
-
-Fix it by overlaying a RAM alias of the device's memory backend
-(hostvmem / hostpmem) at the committed HDM decoder's HPA range, with
-higher priority than the CFMW I/O region.  flatview_translate() then
-hits the alias, address_space_map() returns a direct host pointer,
-and DMA proceeds without bouncing.  This mirrors the existing QEMU
-pattern of PCI BAR and IOMMU MR overlays.  The alias is torn down on
-hdm_decoder_uncommit() so subsequent region tear-down + re-creation
-works.
+Enable CXL support on the RISC-V virt machine following the same
+approach used by the ARM virt machine:
+- Add PXB and ACPI_CXL Kconfig selections
+- Add CXLState and PCIBus pointer to RISCVVirtState
+- Register CXL machine properties via cxl_machine_init()
+- Create CXL host register region above the PCIe high MMIO region
+- Call cxl_hook_up_pxb_registers() and cxl_fmws_link_targets() at
+  machine_done time
+- Map Fixed Memory Windows above the CXL host register region
+- Add ACPI0017 device in DSDT and build CEDT table in virt-acpi-build.c
 
 Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
 ---
- hw/mem/cxl_type3.c          | 81 +++++++++++++++++++++++++++++++++++++
- include/hw/cxl/cxl_device.h |  4 ++
- 2 files changed, 85 insertions(+)
+ hw/riscv/Kconfig           |  2 ++
+ hw/riscv/virt-acpi-build.c | 20 ++++++++++++++++++
+ hw/riscv/virt.c            | 42 ++++++++++++++++++++++++++++++++++++++
+ include/hw/riscv/virt.h    |  3 +++
+ 4 files changed, 67 insertions(+)
 
-diff --git a/hw/mem/cxl_type3.c b/hw/mem/cxl_type3.c
-index 4739239da3..f962bce66a 100644
---- a/hw/mem/cxl_type3.c
-+++ b/hw/mem/cxl_type3.c
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 2518b04175..ebd0355f09 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -66,8 +66,10 @@ config RISCV_VIRT
+     select VIRTIO_MMIO
+     select FW_CFG_DMA
+     select PLATFORM_BUS
++    select PXB
+     select ACPI
+     select ACPI_PCI
++    select ACPI_CXL
+ 
+ config SHAKTI_C
+     bool
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 413d47d70e..309d64b322 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -29,12 +29,16 @@
+ #include "hw/acpi/aml-build.h"
+ #include "hw/acpi/pci.h"
+ #include "hw/acpi/utils.h"
++#include "hw/acpi/cxl.h"
+ #include "hw/intc/riscv_aclint.h"
+ #include "hw/nvram/fw_cfg_acpi.h"
+ #include "hw/pci-host/gpex.h"
++#include "hw/pci/pci_bus.h"
+ #include "hw/riscv/virt.h"
+ #include "hw/riscv/numa.h"
+ #include "hw/virtio/virtio-acpi.h"
++#include "hw/cxl/cxl.h"
++#include "hw/cxl/cxl_host.h"
+ #include "kvm/kvm_riscv.h"
+ #include "migration/vmstate.h"
+ #include "qapi/error.h"
+@@ -503,6 +507,17 @@ static void build_dsdt(GArray *table_data,
+         acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2);
+     }
+ 
++    if (s->cxl_devices_state.is_enabled) {
++        Aml *cxl_dev = aml_device("CXLM");
++        aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
++        Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
++        aml_append(method, aml_return(aml_int(0x0B)));
++        aml_append(cxl_dev, method);
++        build_cxl_dsm_method(cxl_dev);
++
++        aml_append(scope, cxl_dev);
++    }
++
+     aml_append(dsdt, scope);
+ 
+     /* copy AML table into ACPI tables blob and patch header there */
+@@ -910,6 +925,11 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
+                    s->oem_table_id);
+     }
+ 
++    if (s->cxl_devices_state.is_enabled) {
++        cxl_build_cedt(table_offsets, tables_blob, tables->linker,
++                       s->oem_id, s->oem_table_id, &s->cxl_devices_state);
++    }
++
+     if (ms->numa_state->num_nodes > 0) {
+         acpi_add_table(table_offsets, tables_blob);
+         build_srat(tables_blob, tables->linker, s);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index ce64eaaef7..899f632de7 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -55,6 +55,8 @@
+ #include "hw/pci/pci.h"
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
++#include "hw/cxl/cxl.h"
++#include "hw/cxl/cxl_host.h"
+ #include "hw/acpi/aml-build.h"
+ #include "qapi/qapi-visit-common.h"
+ #include "hw/virtio/virtio-iommu.h"
+@@ -1259,9 +1261,27 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+     }
+ 
+     GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
++    s->bus = PCI_HOST_BRIDGE(dev)->bus;
+     return dev;
+ }
+ 
++static void create_cxl_host_reg_region(RISCVVirtState *s)
++{
++    MemoryRegion *sysmem = get_system_memory();
++    MemoryRegion *mr = &s->cxl_devices_state.host_mr;
++    hwaddr base;
++
++    if (!s->cxl_devices_state.is_enabled) {
++        return;
++    }
++
++    base = virt_high_pcie_memmap.base + virt_high_pcie_memmap.size;
++    base = ROUND_UP(base, 64 * KiB);
++
++    memory_region_init(mr, OBJECT(s), "cxl_host_reg", 64 * KiB * 16);
++    memory_region_add_subregion(sysmem, base, mr);
++}
++
+ static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
+ {
+     FWCfgState *fw_cfg;
+@@ -1426,6 +1446,15 @@ static void virt_machine_done(Notifier *notifier, void *data)
+                                      machine_done);
+     MachineState *machine = MACHINE(s);
+     hwaddr start_addr = s->memmap[VIRT_DRAM].base;
++
++    if (s->bus) {
++        cxl_hook_up_pxb_registers(s->bus, &s->cxl_devices_state,
++                                  &error_fatal);
++    }
++
++    if (s->cxl_devices_state.is_enabled) {
++        cxl_fmws_link_targets(&error_fatal);
++    }
+     hwaddr firmware_end_addr;
+     vaddr kernel_start_addr;
+     const char *firmware_name = riscv_default_firmware_name(&s->soc[0]);
+@@ -1663,6 +1692,17 @@ static void virt_machine_init(MachineState *machine)
+             ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
+     }
+ 
++    create_cxl_host_reg_region(s);
++
++    if (s->cxl_devices_state.is_enabled) {
++        hwaddr cxl_base = virt_high_pcie_memmap.base +
++                          virt_high_pcie_memmap.size;
++        cxl_base += memory_region_size(&s->cxl_devices_state.host_mr);
++        cxl_base = ROUND_UP(cxl_base, 256 * MiB);
++        cxl_fmws_set_memmap(cxl_base, UINT64_MAX);
++        cxl_fmws_update_mmio();
++    }
++
+     /* register system main memory (actual RAM) */
+     memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
+                                 machine->ram);
+@@ -1769,6 +1809,8 @@ static void virt_machine_instance_init(Object *obj)
+     s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
+     s->acpi = ON_OFF_AUTO_AUTO;
+     s->iommu_sys = ON_OFF_AUTO_AUTO;
++
++    cxl_machine_init(obj, &s->cxl_devices_state);
+ }
+ 
+ static char *virt_get_aia_guests(Object *obj, Error **errp)
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 18a2a323a3..c3201588bb 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
 @@ -24,6 +24,7 @@
- #include "qemu/module.h"
- #include "qemu/pmem.h"
- #include "qemu/range.h"
-+#include "system/address-spaces.h"
- #include "qemu/rcu.h"
- #include "qemu/guest-random.h"
- #include "system/hostmem.h"
-@@ -420,6 +421,11 @@ static void hdm_decoder_commit(CXLType3Dev *ct3d, int which)
-     ComponentRegisters *cregs = &ct3d->cxl_cstate.crb;
-     uint32_t *cache_mem = cregs->cache_mem_registers;
-     uint32_t ctrl;
-+    uint32_t low, high;
-+    uint64_t decoder_base, decoder_size;
-+    MemoryRegion *mr = NULL;
-+    uint64_t dpa_offset = 0;
-+    char *alias_name;
+ #include "hw/core/sysbus.h"
+ #include "hw/block/flash.h"
+ #include "hw/intc/riscv_imsic.h"
++#include "hw/cxl/cxl.h"
  
-     ctrl = ldl_le_p(cache_mem + R_CXL_HDM_DECODER0_CTRL + which * hdm_inc);
-     /* TODO: Sanity checks that the decoder is possible */
-@@ -427,6 +433,73 @@ static void hdm_decoder_commit(CXLType3Dev *ct3d, int which)
-     ctrl = FIELD_DP32(ctrl, CXL_HDM_DECODER0_CTRL, COMMITTED, 1);
+ #define VIRT_CPUS_MAX_BITS             9
+ #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
+@@ -64,6 +65,8 @@ struct RISCVVirtState {
+     struct GPEXHost *gpex_host;
+     OnOffAuto iommu_sys;
+     uint16_t pci_iommu_bdf;
++    CXLState cxl_devices_state;
++    PCIBus *bus;
+ };
  
-     stl_le_p(cache_mem + R_CXL_HDM_DECODER0_CTRL + which * hdm_inc, ctrl);
-+
-+    /*
-+     * Create a RAM alias in system memory for the committed decoder range.
-+     * This enables direct DMA mapping (address_space_map) for devices like
-+     * virtio that need to DMA to/from CXL memory.  Without this, the CFMW
-+     * I/O region would require bounce buffering which is limited to 4KB.
-+     */
-+    low = ldl_le_p(cache_mem + R_CXL_HDM_DECODER0_BASE_LO + which * hdm_inc);
-+    high = ldl_le_p(cache_mem + R_CXL_HDM_DECODER0_BASE_HI + which * hdm_inc);
-+    decoder_base = ((uint64_t)high << 32) | (low & 0xf0000000);
-+
-+    low = ldl_le_p(cache_mem + R_CXL_HDM_DECODER0_SIZE_LO + which * hdm_inc);
-+    high = ldl_le_p(cache_mem + R_CXL_HDM_DECODER0_SIZE_HI + which * hdm_inc);
-+    decoder_size = ((uint64_t)high << 32) | (low & 0xf0000000);
-+
-+    if (!decoder_base || !decoder_size) {
-+        return;
-+    }
-+
-+    /* Calculate DPA offset by summing sizes of preceding decoders */
-+    for (int i = 0; i < which; i++) {
-+        uint32_t prev_low, prev_high;
-+        uint64_t prev_size;
-+        uint32_t prev_ctrl;
-+
-+        prev_ctrl = ldl_le_p(cache_mem + R_CXL_HDM_DECODER0_CTRL +
-+                             i * hdm_inc);
-+        if (!FIELD_EX32(prev_ctrl, CXL_HDM_DECODER0_CTRL, COMMITTED)) {
-+            continue;
-+        }
-+        prev_low = ldl_le_p(cache_mem + R_CXL_HDM_DECODER0_SIZE_LO +
-+                            i * hdm_inc);
-+        prev_high = ldl_le_p(cache_mem + R_CXL_HDM_DECODER0_SIZE_HI +
-+                             i * hdm_inc);
-+        prev_size = ((uint64_t)prev_high << 32) | (prev_low & 0xf0000000);
-+        dpa_offset += prev_size;
-+    }
-+
-+    /* Determine which memory backend to alias */
-+    if (ct3d->hostvmem) {
-+        MemoryRegion *vmr = host_memory_backend_get_memory(ct3d->hostvmem);
-+        uint64_t vmr_size = memory_region_size(vmr);
-+
-+        if (dpa_offset < vmr_size) {
-+            mr = vmr;
-+        }
-+    }
-+    if (!mr && ct3d->hostpmem) {
-+        MemoryRegion *pmr = host_memory_backend_get_memory(ct3d->hostpmem);
-+        uint64_t vmr_size = ct3d->hostvmem ?
-+            memory_region_size(
-+                host_memory_backend_get_memory(ct3d->hostvmem)) : 0;
-+        mr = pmr;
-+        dpa_offset -= vmr_size;
-+    }
-+
-+    if (!mr) {
-+        return;
-+    }
-+
-+    alias_name = g_strdup_printf("cxl-hdm%d-ram-alias", which);
-+    memory_region_init_alias(&ct3d->hdm_ram_alias[which], OBJECT(ct3d),
-+                             alias_name, mr, dpa_offset, decoder_size);
-+    memory_region_add_subregion_overlap(get_system_memory(), decoder_base,
-+                                        &ct3d->hdm_ram_alias[which], 1);
-+    ct3d->hdm_ram_alias_valid[which] = true;
-+    g_free(alias_name);
- }
- 
- static void hdm_decoder_uncommit(CXLType3Dev *ct3d, int which)
-@@ -442,6 +515,14 @@ static void hdm_decoder_uncommit(CXLType3Dev *ct3d, int which)
-     ctrl = FIELD_DP32(ctrl, CXL_HDM_DECODER0_CTRL, COMMITTED, 0);
- 
-     stl_le_p(cache_mem + R_CXL_HDM_DECODER0_CTRL + which * hdm_inc, ctrl);
-+
-+    /* Remove the RAM alias if it was added during commit */
-+    if (ct3d->hdm_ram_alias_valid[which]) {
-+        memory_region_del_subregion(get_system_memory(),
-+                                    &ct3d->hdm_ram_alias[which]);
-+        object_unparent(OBJECT(&ct3d->hdm_ram_alias[which]));
-+        ct3d->hdm_ram_alias_valid[which] = false;
-+    }
- }
- 
- static int ct3d_qmp_uncor_err_to_cxl(CxlUncorErrorType qmp_err)
-diff --git a/include/hw/cxl/cxl_device.h b/include/hw/cxl/cxl_device.h
-index 393f312217..07deef2e2c 100644
---- a/include/hw/cxl/cxl_device.h
-+++ b/include/hw/cxl/cxl_device.h
-@@ -714,6 +714,10 @@ struct CXLType3Dev {
-     /* State */
-     AddressSpace hostvmem_as;
-     AddressSpace hostpmem_as;
-+
-+    /* RAM aliases for HDM decoders - enables direct DMA mapping */
-+    MemoryRegion hdm_ram_alias[CXL_HDM_DECODER_COUNT];
-+    bool hdm_ram_alias_valid[CXL_HDM_DECODER_COUNT];
-     CXLComponentState cxl_cstate;
-     CXLDeviceState cxl_dstate;
-     CXLCCI cci; /* Primary PCI mailbox CCI */
+ enum {
 -- 
 2.50.1
 
