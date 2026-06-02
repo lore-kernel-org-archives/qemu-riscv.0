@@ -4,113 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62604CD6E56
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 01:55:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68FBDCD6E56
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 02:01:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wUELL-0004ai-UR; Mon, 01 Jun 2026 21:55:00 -0400
+	id 1wUERn-0005dT-Up; Mon, 01 Jun 2026 22:01:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wUELJ-0004aM-Ei
- for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 21:54:57 -0400
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wUELH-0005qx-P8
- for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 21:54:57 -0400
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-bec450b950dso258535766b.2
- for <qemu-riscv@nongnu.org>; Mon, 01 Jun 2026 18:54:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780365294; cv=none;
- d=google.com; s=arc-20240605;
- b=NTg9aFLIslB9YvPqHhekln3ysTLdtyhvoezbfweX6xdEIifLltSuOKLZ2mupofV8HM
- +RRxFLJUCMMyPSaeZEZbIHzfezygu3ic8QdHDYBC1eEkJCwjvj3NVbCT8UG9lwk+xMzr
- EWnwIpJcuuh+rkKdEz4A30Sdy9a2xB6uZV/yTdNke0J4EqGp6Oqw2p0vKE6wzwyaAQLu
- psogjlxA81ZVNqpJa+uHnSwOVvykQnhg+F2lz2O3KSDVYFiE93hzwOy47n618kzvr7J/
- irYIfTaFqn9EKrk13vAjNK0awEfQWwvFDYjsfFfhiBVPU7L5o0xYPAtAByo9B4hN0rGN
- /26Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=GsT/zJJT04FSJ3qQSZawD94yLTY70A7Cy3wojYqgmWA=;
- fh=FzCLvP4pnTM+eY15uTd0PgeSmWdhkuPm5aSRGhJTvnM=;
- b=DukN0DpD8x94IWRofjGAUV7PD59JfFaMitm7cpuXeP7Ry4ZTsrR1VvTv74AyhlrWZK
- wfp5obX8sjS+o+hJiHdFEGc9OOlZgYfavABc7FzITk4n0W6EeDEyY3q7U1bvZu5yoaMh
- TnLd+ynIxBpAmswB7F6i6R1VNpRn5NGJ1XHnKLoLQ5j0vccomqallR+76Z5fHUTU7Fd+
- JW7T/A9YCsAFewirlxQgvcZk5I70Cc3SoUHlhCCWrEqcnNbor3axHDHt6/3ptiFvWHlW
- dkxDzHW1wrofOGUwvQ+kmCEjyH3qwKt59SWoABzcJCHAxpn8ewhXwyjAr15lDFkRu7fl
- EeoQ==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780365294; x=1780970094; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GsT/zJJT04FSJ3qQSZawD94yLTY70A7Cy3wojYqgmWA=;
- b=cy4G1/feU6NQ+T+1tafOmhQMoB+O0eEMdXE9mN62LslQgn45mADvIzc1aH6Wnav/Jz
- GCKvKXb4kLl6m+PzA+T3X618j/u3UdUydjqWJJHqwyhhfEWGkX7TMMhJtf7ZjEsD9l6Q
- myaCN5b807VZjp4G5pp4bXMnuYZEwfHO/r8n6HYpai05Y/pW1C9RBuv4SPfz8ToJJZ5e
- l0cul748R/w/hDdyDOf0S/liGyzuo7SqlK/k/16oEIsWQ2BWYETA6f5GdkFFzEQP29iY
- sOEqDnYmxaAjI37UB5o50SsqdEzCBiWjmUmeQSMHh4ofQLZdSX6X2vkJQuTfSqmX9T6x
- 7eHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780365294; x=1780970094;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=GsT/zJJT04FSJ3qQSZawD94yLTY70A7Cy3wojYqgmWA=;
- b=gkfC836AGiomET8pYFaXZNlTXTxc3ZEfPab1c9jA4ToiSoxkfUq5shyPfWhD3mC+qX
- 2XS113Z+PUtci5zbJ81M9nSKWuSMH+EddIo6rpinAs//BLumhnNvOy6welmaaLs9z0R8
- hs3VFD3iplYqeF62MP45ja1eRegr1Olo17b6Hx9lMG9XH30TYKpSwNb6yaUVAUo25NE5
- 3B2Tpa79ydn6cdO69vopuxq9kPoSoDBpl7NbFaqRyUuJU6UGYKAHO8gaWo18q4l+cA+E
- 6CvdISiVa/G3dXntRm3WvnAoE/DSeAPtRCt2VkwN2bYcZedPMq8t10mtOJU1VLqQvHrT
- QVMw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8NSPSok0m/VPjm9yksk/bQHdLbunSui6hsekC6Va84hrRvRSx0s8mJ/wKOwWE6oRwAyvct802Yxn1u@nongnu.org
-X-Gm-Message-State: AOJu0YyLqPPtCKYITY4u9uQ4bKSZvu7sbqqsOYLwg/M6wYFOODR+BFtX
- RKmTttqKufUT7uZ2n/C4MXDitFb7LY/HHbbxFw5drgVWGeLH+69l3h2drKGw5lllSc1mv1CxkGz
- vtnMl476RLyypCSBFKM9jrHFfXBns6Bg=
-X-Gm-Gg: Acq92OEhWJa7Mj2E109AKy3V4Xa7k8mtvOQdexVxEuxGEpmYbDrpzM40SW+NZi8ihNf
- Ey0Bur9zJYLjP7bkvyNE2PlCe4ZF3sNCEeumTRv6iJRguwYBvLvkSklXSoP0u5yECMADdsG0e27
- IboIEyK6Goo9KhtrDxQXAATQZJmu5RvEYWVNKPrm8X+362WU5n4XjGc2gnA0jEH4pfHCLjn+6Xm
- 2yKllShVtkKR88A81632NV+GA4Fq/SrE6vXIfhxrFk9KGHsSnILGrmcKI3VgCoiHMNItlOUDOdc
- jL6tEInj2LmljogxnQfQgJ4KqZl/9LvC2x/LWqc+Q7kXm09e
-X-Received: by 2002:a17:907:1c8f:b0:bc2:70ca:c41e with SMTP id
- a640c23a62f3a-beab6bc5386mr740979066b.25.1780365293292; Mon, 01 Jun 2026
- 18:54:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wUERm-0005dH-FD
+ for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 22:01:38 -0400
+Received: from fhigh-a8-smtp.messagingengine.com ([103.168.172.159])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wUERk-0008QB-CE
+ for qemu-riscv@nongnu.org; Mon, 01 Jun 2026 22:01:38 -0400
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 50DFB14001A0;
+ Mon,  1 Jun 2026 22:01:34 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-01.internal (MEProxy); Mon, 01 Jun 2026 22:01:34 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm1;
+ t=1780365694; x=1780452094; bh=CCHui1JrX6s/eN9eNpwv7JRuRBY8BS2w
+ NtieLrJ1xk0=; b=tzKbjdVZ8tcoC196LWKV+Z9VY37ifTGuNAP6R1SK4qr7lukH
+ Ol8RYPg6HtyAgsG+Po30ZGSWLQxuuXQWXns9kksiwTbnhiiivo8agllCw5IgftZW
+ 9iSZpEiEqePdFifzgaAAHQlzDDi3CNGuIh/6cfHrPiU7R7ud32dlNndai2dqIkgI
+ gSBmfcb3Q3+qTqblV4MDuSTmEwRQtpG8xEXvjbKU+uo6/r3DHAQFJmO5EHfpNG+T
+ 6X1R0by10LERgM5NIgNlL2owqNkGUtqpV7/0HvDPfG6QMOEgqFIP2P/gP7cJdR1F
+ rwgr68hdppKqnVEFnoQCt6MorlKyABwqNRe3ag==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1780365694; x=
+ 1780452094; bh=CCHui1JrX6s/eN9eNpwv7JRuRBY8BS2wNtieLrJ1xk0=; b=h
+ llu15pcKwMsK0XUs+7eHumwDM0B4/g9AUgYaHDz3u5wJ6nfraB7XBah2jdpthiEL
+ a5qXKEkY77YSXoZ3ILuFv+q7uBHWTURhpxiAabxLdAxVOBVav8viGyr95tdlIqj1
+ ozitxnc4dZLZUscz8SzdOXLMdt1+QFyxFJwBcFTwXnvaPIwXhUVqIQPjw+DZKd4T
+ hCPjdX5XN+mp3n7hXV6tw6TN1WgbjApp8JGiFfXUwKzOOnK1NyRMbHrgJd3AAmxS
+ JMJKbvLYgl5YJyJKkqRUnf/grGozWFsUkYTjM02CnNsQ1nSWc9L+/3pFgUlKshGk
+ 1V+JeK3GJ3Xb0admm42Dw==
+X-ME-Sender: <xms:fTkeamKoisOimKceFOhoXTfNQ_XFboCH2nI0fTpnlAcpM4s2yxQPYw>
+ <xme:fTkealm1e73JOzDdSGntZIkvKWqwPma-mplB-wrSsSe_rOksuf1w_8r188IIsCASW
+ f_g-9aEY-DQy-DNhToLviB83t8KiUDjHOPmF17lXqpy8jjXI-po8g>
+X-ME-Received: <xmr:fTkeakE1JGOI3cxbfEZGwbv02G8nvsFcBhtfZ5O309iGa0u6ADQdfFLoDGeT-X-wqA>
+X-ME-Proxy-Cause: dmFkZTFCe4swW75GNFtDBNefGuX3TMIKdRHyydzb4n5Awd4GjE7OKZ9qXdLvK5MMLL/iU9
+ kVNWDg891FRq0Ob4Udt+HtNruo3ItIX0VejPHa/KFOlkEQVEVuo05g7dI5mvNOS+RWxsCC
+ oYqMdbgFiBsALCRU5arxq+sKYr10Nm/tA7tZkUW8wJX+reO/QpLmogtXunDYJtttm7TOUZ
+ RKhwS6FFYMws2efngYjfcrLhMBwPKEbwo6zCN3MEiiOnny4+dZ7HgBemU49vPQRIB3kYj/
+ YUR2HGA6prdv7ybSZxFMAiOxweco8jFwOInIXcmiZte/ZuD7+Xpc5UiMyuFD+sZSKJ6rcx
+ OrXDM44Dwa4eAeQOVIC1yfKO+LlT5m2c07iDLVm0jJcGatV88IT+LoStoI8GNUcyjl1Ooa
+ sNW/usjCBBAUJ9w+erbe55OQsDmPlapXgtj6+eAsCyeJkJX05QFon4zxcoM/XTNR0BPGce
+ je7vgGpJUVBYpoLntDDO8TNlsyrSgahYEj3GUIUU2mS5zE6Bp2Cq0gqf+l4WrGXk3BVeXX
+ IEhAb7g1BVj534CBsaipIFvStTUY7FJ781b/XewkxN2UOq7O32ahRZ6yLGyRHe8ntH4g0E
+ AkjlCWs42pKXdXxAEji5cNsgMc8FJePW4pChepPCdtd307nW70d/HI7YCXyw
+X-ME-Proxy: <xmx:fTkealGW-Rxh2uVpnFn3KOr3rLtAyrX6_JK1jsoxQCdHuTBGgm2ONw>
+ <xmx:fTkeahNCX850mFc9ubY6slomDlcS2a_-scitAyIm-I303qBDwJvGrA>
+ <xmx:fTkeakG1AeIPePKu9QHxKtvBEvkTBlrYYFiTTMW12qKW_7jDVgCooA>
+ <xmx:fTkeaoOcUacvTKQ2rzRxpoojSuAvLbiBqwoaLoisqaM4DSY0wWK7zw>
+ <xmx:fjkeajBHaLIMlGd6wiPQ8iVNxsBnuOyhs5gnGneFT966hxI9CBYhVVH2>
+Feedback-ID: ifd214418:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 1 Jun 2026 22:01:32 -0400 (EDT)
+Message-ID: <b43aaa95-9a94-4ae9-931b-9dbc21ad66cf@alistair23.me>
+Date: Tue, 2 Jun 2026 12:01:29 +1000
 MIME-Version: 1.0
-References: <20260527201348.29511-1-philmd@linaro.org>
-In-Reply-To: <20260527201348.29511-1-philmd@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 2 Jun 2026 11:54:26 +1000
-X-Gm-Features: AVHnY4KdbUpeQHRHHIagqkU6Omh4yKouC1cZ9AO-wzbepkcWIap8pGwqvr3Ubb4
-Message-ID: <CAKmqyKMt8GEzXTyVGnTvr4zOkkpS8S3Bep3QD4KFzy1FEH_6eA@mail.gmail.com>
-Subject: Re: [PATCH v11 00/12] Add RISC-V big-endian target support
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-riscv@nongnu.org, 
- Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
- Anton Johansson <anjo@rev.ng>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Christoph Muellner <christoph.muellner@vrull.eu>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x62b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+From: Alistair Francis <alistair@alistair23.me>
+Subject: Re: QEMU RISC-V Call
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Max Chou <max.chou@sifive.com>
+Cc: qemu-riscv@nongnu.org
+References: <e2576b58-9356-4d88-8485-42256b2a2366@alistair23.me>
+ <6e25408f-662c-4cd9-93b7-35ea100c81fb@oss.qualcomm.com>
+ <81a5c280-973d-4ada-b2f3-3ac4652a2037@app.fastmail.com>
+ <ahkrD2h1kaubNtXq@sifive.com>
+ <443d2b53-a613-4d46-b750-3a22aa72f67c@app.fastmail.com>
+ <3c88b75c-3658-4516-a655-d500de323d8c@alistair23.me>
+ <a02f618f-7e0e-4bac-9748-afa0469c3a60@oss.qualcomm.com>
+Content-Language: en-AU
+In-Reply-To: <a02f618f-7e0e-4bac-9748-afa0469c3a60@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=103.168.172.159;
+ envelope-from=alistair@alistair23.me; helo=fhigh-a8-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -127,81 +115,138 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 28, 2026 at 6:14=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
->
-> v11:
-> - rewrite some patches while reviewing for mainstream integration
->
-> v10 cover from Djordje:
->
-> Hi all,
->
-> This series adds big-endian data support for RISC-V system emulation.
->
-> Following the discussion on previous versions, this series models
-> fixed-endian harts, not a mixed-endian implementation where software can
-> toggle MBE/SBE/UBE at runtime. The reset value of MBE/SBE/UBE is selected
-> from the CPU configuration. These bits remain outside the
-> mstatus/mstatush/sstatus writable masks, so they are effectively hardwire=
-d
-> to 0 for the default little-endian CPUs and to 1 when `big-endian=3Don`.
->
-> The user-visible `big-endian` CPU property is exposed only after the data
-> path, boot path, and page-table walk support are in place, so the series
-> remains bisectable.
->
-> Djordje Todorovic (6):
->   target/riscv: Implement runtime data endianness via MSTATUS bits
->   target/riscv: Fix page table walk endianness for big-endian harts
->   target/riscv: Add big-endian CPU configuration field and reset logic
->   hw/riscv/boot: Honour data endianness
->   target/riscv: Expose and document the CPU 'big-endian' property
->   tests/functional: Add RISC-V endianness test
->
-> Philippe Mathieu-Daud=C3=A9 (6):
->   target/riscv: Initialize DisasContext::mo_endian once
->   target/riscv: Assert PTE.N/PBMT bits are not expected on RV32
->   target/riscv: De-indent some code in get_physical_address()
->   target/riscv: Remove target_ulong use in get_physical_address()
->   hw/riscv/boot: Rewrite setup_rom_reset_vec() using load/store API
->   hw/riscv/boot: Replace cpu_to_le32() -> const_le32()
+On Mon, 1 Jun 2026, at 7:32 PM, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 5/31/2026 10:56 PM, Alistair Francis wrote:
+> > 
+> > 
+> > On 30/5/26 20:43, Alistair wrote:
+> >> On Fri, 29 May 2026, at 4:00 PM, Max Chou wrote:
+> >>> On 2026-05-28 21:37, Alistair wrote:
+> >>>> On Thu, 28 May 2026, at 5:13 AM, Daniel Henrique Barboza wrote:
+> >>>>>
+> >>>>>
+> >>>>> On 5/27/2026 9:15 AM, Alistair Francis wrote:
+> >>>>>> Hello everyone,
+> >>>>>>
+> >>>>>> There has been some interest recently about setting up a call to discuss QEMU RISC-V and the current status.
+> >>>>>>
+> >>>>>> So I wanted to setup a chat next week AEST (UTC+10) time to discuss a few things on a call.
+> >>>>>>
+> >>>>>> I was thinking 1PM on Monday the 1st of June.
+> >>>>>
+> >>>>> Can we make it 10AM AEST?
+> >>>>
+> >>>> Sure! Let's do that
+> >>>
+> >>> Both work for me. Thx
+> >>
+> >> Great! I'll send a meeting link out on Monday.
+> > 
+> > Hello everyone,
+> > 
+> > We had the meeting today.
+> 
+> Oh, Monday 10am AEST is still Sunday for me.  Got stuff messed up in my
+> head :D I thought it was today (Monday for me, so it would be Tuesday
+> morning Australia).
+> 
+> > 
+> > A few of my key takeaways after the meeting:
+> > 
+> >   * We need a new stricter extension requirement as there are just too many extensions being submitted.
+> >      * I'm thinking requiring upstream tests to use the extension and at least some proof the extension is used and provides value before it is reviewed. Thoughts?
+> 
+> 
+> The root problem is that we have a lot of people that consumes the code
+> silently, i.e. they're not vocal about "I care about this feature".  This
+> makes a criteria like "proof the extension is used" harder.
 
-Thanks!
+Just to be clear, this proposal is for new extensions being reviewed. It 
+wouldn't apply to existing extensions.
 
-Applied to riscv-to-apply.next with patch 3 dropped
+At the moment we are pretty much in the position where no new extension 
+will be accepted as I don't have time to review it, So we need to do 
+something
+
+> 
+> And the main nature of how qemu-riscv is consumed, enabling development
+> of other pieces of the stack (OpenSBI, kernel ...), promotes this behavior
+> where having stuff in QEMU earlier helps.  Recent examples are the Server
+> Ref Platform board and the smmtt extensions Zhiwei sent last month.
+
+Agreed, those extensions have clear justifiable uses, so they would be fine.
+
+> 
+> 
+> I'm not sure if we can put a process on it.  Maybe we should go case by
+> case instead ... and note that a patch sent to the ML doesn't mean
+> auto-acceptable either.  As an example my e-trace patches are buried
+> since January.  I'll eventually re-send those (maybe this week).  If there's
+> no reviewer interest then it's up to the maintainer to take them or not.
+> So maybe the existing process already works ...
+
+Ha, but the existing process is I just don't get to them. It would be 
+better to try and prioritise extensions a bit.
+
+> 
+> 
+> >   * Someone? Tenstorrent? will submit documentation to QEMU to describe a few key Vector options that people should test their code against
+> >   * Joel to send Sdtrig patches supporting both debug spec versions. Otherwsie deprecate current 0.13 version
+> 
+> In that case I ask to name the older version "sdtrig-0.13" and make
+> the current "debug" an alias to sdtrig-0.13.
+
+The new one should be called "sdtrig", I don't think the old one was 
+called sdtrig so I think we are stuck with "debug".
+
+> 
+> And if we could make this happen ASAP that would be appreciated - the
+> current sdtrig situation is holding back the "sdext" patches from Chao,
+> which in turn are holding back the riscv-server-ref board.  If we could
+> make all this happen for this release (code freeze beginning of July)
+> that would be terrific.
+> 
+> >   * Anton to send vector patches
+> >   * Schedule these regularly, but not on a Monday. How about 10AM (so same time) on a Wednesday?
+> 
+> Works way better than Monday 10am AEST :D
+> 
+> > 
+> > 
+> > Portia kindly took notes that are below:
+> > 
+> > 
+> > QEMU Community Meeting Notes
+> > 
+> > QEMU RISC-V extension policies
+> > * There are too many extensions coming through and cannot keep up with reviews.
+> > * Is there even code that runs using them?
+> > * Discussed requiring some test as part of accepting these, TCG test or kvm unit tests
+> >      * RVI is supposed to do compliance test, we could ask for these tests, but they generally don't seem to exist
+> 
+> 
+> RVI is doing compliance tests using riscv-arch-test:
+> 
+> https://github.com/riscv/riscv-arch-test
+> 
+> They're working on a sort of certification process with QEMU and other RISC-V
+> emulators (Sail, whisper, Spike ...).  I suppose more bugs will be coming
+> our way.
+> 
+> RVI got me involved directly in the last 2 weeks because they claimed they
+> were opening Gitlab bugs and they weren't seeing action, and it would be
+> nice to have some stuff fixed before RVI Summit Europe.  I did some work
+> on them and now seems like we have more people from the community joining
+> in fixing bugs, which is awesome.
+
+Great!
 
 Alistair
 
->
->  docs/system/target-riscv.rst                  | 29 ++++++
->  target/riscv/cpu.h                            |  1 +
->  target/riscv/internals.h                      | 29 ++++--
->  target/riscv/cpu_cfg_fields.h.inc             |  1 +
->  hw/riscv/boot.c                               | 93 ++++++++++---------
->  target/riscv/cpu.c                            | 15 ++-
->  target/riscv/cpu_helper.c                     | 44 +++++----
->  target/riscv/tcg/tcg-cpu.c                    |  2 +
->  target/riscv/translate.c                      | 22 ++---
->  target/riscv/insn_trans/trans_rva.c.inc       |  4 +-
->  target/riscv/insn_trans/trans_rvd.c.inc       |  4 +-
->  target/riscv/insn_trans/trans_rvf.c.inc       |  4 +-
->  target/riscv/insn_trans/trans_rvi.c.inc       |  8 +-
->  target/riscv/insn_trans/trans_rvzacas.c.inc   |  4 +-
->  target/riscv/insn_trans/trans_rvzalasr.c.inc  |  4 +-
->  target/riscv/insn_trans/trans_rvzce.c.inc     |  4 +-
->  target/riscv/insn_trans/trans_rvzfh.c.inc     |  4 +-
->  target/riscv/insn_trans/trans_rvzicfiss.c.inc |  4 +-
->  target/riscv/insn_trans/trans_xmips.c.inc     |  8 +-
->  target/riscv/insn_trans/trans_xthead.c.inc    | 16 ++--
->  target/riscv/insn_trans/trans_zilsd.c.inc     |  4 +-
->  tests/functional/riscv64/meson.build          |  1 +
->  tests/functional/riscv64/test_endianness.py   | 57 ++++++++++++
->  23 files changed, 240 insertions(+), 122 deletions(-)
->  create mode 100644 tests/functional/riscv64/test_endianness.py
->
-> --
-> 2.53.0
->
->
+> 
+> 
+> Cheers,
+> Daniel
 
