@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF3C5CD6E4A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 09:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5A7BCD6E61
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 09:19:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wULH4-0000u3-Th; Tue, 02 Jun 2026 05:19:03 -0400
+	id 1wULH2-0000ng-TY; Tue, 02 Jun 2026 05:19:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1wULGp-0000Z2-P1
- for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:49 -0400
-Received: from mail-dl1-x1244.google.com ([2607:f8b0:4864:20::1244])
+ id 1wULH1-0000kz-5p
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:59 -0400
+Received: from mail-dy1-x1344.google.com ([2607:f8b0:4864:20::1344])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1wULGk-0007e8-Pd
- for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:45 -0400
-Received: by mail-dl1-x1244.google.com with SMTP id
- a92af1059eb24-137eeae6c29so30658c88.0
- for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2026 02:18:41 -0700 (PDT)
+ id 1wULGv-0007p3-HU
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:56 -0400
+Received: by mail-dy1-x1344.google.com with SMTP id
+ 5a478bee46e88-304e83724bfso5376286eec.0
+ for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2026 02:18:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780391920; x=1780996720; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1780391931; x=1780996731; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PCLumQ0UyNQHKa/ypfifej8V3OAD6FODRX9ywAOjyVA=;
- b=M2ntlYJf1Azh56TrvgvL5KtpTsGwa1xJVatQ+Ldh8cufU+7al30A5VnHitJq7mhjWJ
- 8dyAK5G3itKmkJvoAAdBTfjwsrvgrey9UmK0TXo/DWwNTm+/THR7Vays94I/S47TreRG
- guQoV/jKSuKi0c4XW/QT3AaLVnU8TbIDblcLM9EvcfiOThviHadnAXbGgdGx9xH89f0w
- Za5SJSzNXnzJ1B6bXBsuCMK4Un5/nL8q3SavesRCAP6jBQ5iiOuhKxKwJRavLVLRA2P+
- vKBAmHV6XlyISmjhZVvF/u3c6abz30nV80TbsaJ2/ynPEyCWgNhG4ZYPDhJSd4MSlzar
- rj4A==
+ bh=rf1sbRZ5RIrg3eme622ykejQTQoAbCXsWDkVCjzGz90=;
+ b=YQ75bAo8ljZsasWKf5kqG/m7mWI5pH8gHGE0EAjUSjPk7ZFXmAtZkvGO2oNY5NERwW
+ Q3WuLXPUAIUDjrq4CmZMMYihCGJIMWvjjQA/li7pk270vxexUl+PJBb0KdGdNNiFx9X0
+ k6Ffmx36Mw92v+vA9uemz+dfNG0pLxFVyzR67p7fdZyagAXi6o1LeMin2g+ne14pPJwY
+ 9WK5iSrbiRJLfZNhTLDFckCh1+MjYbHP2KFrT7Bo2FTNYqg7LdEGDjG/bDtpZ118o85P
+ rWb0YtwWGBmPS0xK+EXs4ReKaPw9hBcXc+bUuUUx8ViFtU3AXAFgEY5mwShHFjvnG08A
+ 5G/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780391920; x=1780996720;
+ d=1e100.net; s=20251104; t=1780391931; x=1780996731;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=PCLumQ0UyNQHKa/ypfifej8V3OAD6FODRX9ywAOjyVA=;
- b=LlFVgXsGQLTyaL2hc+9uSQEF8FOdYifr5A0anr3CFB9cV0e+nxO6WuvpHJNus47FA+
- ppZUZSX2TMjvgX8esXOlViTedktRRM8lfZPjhVRe4gjup/P501ipasVM2g6+zTBqisaG
- 9ic33dUyVz/M9lRojRGqHcENda3huwSChpIza5iDhcKdQtZGU7R0zliOCsrVXEnuZTCH
- jj0o8+4Zd8e0hsNwfDPccqLSyacsgJ7B15YrWoB0MXRQ/fgWo1AviQEHi4MrfRT7f0YO
- 7xMAe2bz0VIodWIP2/gyvw6QctxgB4wwWMt4j03X0j7diGk2+6ZvijCdzOho2leLZpyM
- Ceow==
-X-Gm-Message-State: AOJu0Yx7WoaCzoJNanaB+bMVH7nUJgJ8abCp3+XpgDdkLGKj0xGAva6T
- 6L329fX4sJC+ZjAem+99tF0O/E1mfyoaVCU7b6msX8J3q5oJNcKzImxx
-X-Gm-Gg: Acq92OGNcEvmwg/ryqGh6uCcnflpV7KvRTA8wyO3+is5So0IELP3AMs3GbaBNT6UOv/
- Ppk9XHA33R5U0joHdbI4BBLKsorZf/1e1CWPA3QQbVEHh5auwknJsBDDG3THfZnHoVmEshe+9Ob
- iWexUxtdh8VJEk8wW629tGKErDaIg+HjcYaIJm7gfUrNZVEmcWzN4OoC0pnF8IgzgR7b//xMwUS
- OrHE6hIBG9X3/7FDbepy0EKx4CCHKwwaIWO93w9cKEUXf/i0YssmEIih5LuTiifBd1XiqIQ5+TY
- rA4P0zCA4/q5cfzaw/ATydDc7UvCAOFOiWqVGrMzGvly3tyQHWNMEj+VVxVzVtkR/T2+8VFvXMe
- fzZHIsTzao1+QI8APrgLSYTPRIOu+lco2P0h+wuIQAfOVXw/R1iuG/uLqLJbXeIS6yIMgwek7Ex
- biGnBQFwsS5cItAe6Ppamn5pb8J/CrkDDMkpX40vxEid8gs4Os1LkT0qvmZJuhYW47xSAxbMSWq
- OtmC2tXoITAK21f0U5pnp8xZ+hONm8fEivr7w==
-X-Received: by 2002:a05:693c:300c:b0:2ca:8099:ffc0 with SMTP id
- 5a478bee46e88-304fa4a90c6mr7077827eec.7.1780391920436; 
- Tue, 02 Jun 2026 02:18:40 -0700 (PDT)
+ bh=rf1sbRZ5RIrg3eme622ykejQTQoAbCXsWDkVCjzGz90=;
+ b=RSTdJzDUq/XY9jqmzgd8IZJJKvkbRwfMBn51R9SI5FKiBdKOAYeG9FsjCWEaF+GcBv
+ 7fCxLusddnrGt0hImzmPrgeGbr9HNCIaed2D2cCTy3XO4p1Aytm/j4DJ+CBuxgLLpt6/
+ LI6G6jNQdurdoNKiLYGcKGtgseZijwwgmhQdU9/Kq5fOITFtkbcHOiWDMdkYM7/q00XV
+ AMcxdReL2uwVq3unwredSVnOzh9YdonVokDMPGmR6eMXc8iUyd27wlE/DpnPCdJxVsSA
+ 4Dhq9vGzzJyR6VauRCwnOy2TAmRJ36H2JR9GAycnk0pGbiW77vxH3WV4YDJ4otsduU8K
+ GYFQ==
+X-Gm-Message-State: AOJu0YwdlQ137LaK0CpL+Tyk1ZS/tIHFsFlN+L/hLpmvd/fbciLuslUz
+ fwxiN9jBdx79NJOFfhFYSQXiyhFh0rBhBdCKZP2NeSoCRXUpTrG8aukPUxB9q3VjhLqJPg==
+X-Gm-Gg: Acq92OE1ccUjJT1aDby8SiHNUZ6HqkaEbMwA3EvBLDC65nGXa2WBNv+L0c1uS4QRkbr
+ Aw7ZwOl447IYgXcXTLOLlqZR28P6CJxTg/IlqUAcZ3ojPX5Jl7dUnFpJVkZGIR4BhK6JGmN+/Ph
+ bi1kCXtLyG4ItmuiikkqSBVXitnnegiWY+MmBwc0K4PM9/zelROZH1gl7CrfFN71GW6S/sA22nn
+ vTs79qYZXgAbA/bZx7fzaDdLnBCYROAUUU5R+/4rQoMxfdeOTRWY6sQah/4zAD4EZ480goW5eSD
+ 889UqvsMC+gbmfnXHVx9wbk/Ye/lJ5YzX54tAqDXQ9TJ6e/Oa60cVx8FbVPg7LMH0oV2vvOQgzI
+ Ww9rPlv/N90xE8HiHbn/wO/BSRdJBZ/2foqL7ozn/FSegSWaYItMMx05sb+TJ7WqQcFvosj8xRS
+ 2fMp8fDSXalttwYw7q/1JZnSOqeQd0xi3/WCqWckSfwk/yTUFhACDi9/uNrQmSF9wzn36dZZ23x
+ 8H3FCR6ojsnGnPZb6gGeMUOjpI=
+X-Received: by 2002:a05:7300:6427:b0:304:cefc:5fd7 with SMTP id
+ 5a478bee46e88-304fa6dbc01mr6528709eec.32.1780391931499; 
+ Tue, 02 Jun 2026 02:18:51 -0700 (PDT)
 Received: from openkylin..
  (ec2-54-176-108-193.us-west-1.compute.amazonaws.com. [54.176.108.193])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-304ed2c3121sm11419146eec.5.2026.06.02.02.18.36
+ 5a478bee46e88-304ed2c3121sm11419146eec.5.2026.06.02.02.18.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jun 2026 02:18:39 -0700 (PDT)
+ Tue, 02 Jun 2026 02:18:51 -0700 (PDT)
 From: Zephyr Li <fritchleybohrer@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
@@ -73,23 +73,23 @@ Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
  alex.bennee@linaro.org, pierrick.bouvier@oss.qualcomm.com,
  philmd@linaro.org, Zephyr Li <fritchleybohrer@gmail.com>
-Subject: [PATCH v3 4/6] target/riscv: reject x-misa-w outside TCG
-Date: Tue,  2 Jun 2026 17:17:51 +0800
-Message-ID: <20260602091753.3209261-5-fritchleybohrer@gmail.com>
+Subject: [PATCH v3 6/6] gitlab-ci.d/crossbuilds: add riscv64 KVM-only build job
+Date: Tue,  2 Jun 2026 17:17:53 +0800
+Message-ID: <20260602091753.3209261-7-fritchleybohrer@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
 References: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1244;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-dl1-x1244.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1344;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-dy1-x1344.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,42 +105,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-x-misa-w controls dynamic writes to misa in the emulated CPU path and is
-only meaningful when TCG is available. Reject it explicitly outside TCG
-instead of relying on TCG-only finalize code.
+Add CI coverage for a riscv64 --disable-tcg cross build. This ensures that
+RISC-V no-TCG/KVM-only builds keep working and prevents TCG-only code from
+being accidentally pulled into common RISC-V sources again.
 
-This also covers CONFIG_TCG builds that are running with a non-TCG
-accelerator. It also rejects CPU models that require writable misa by
-default when the selected accelerator is not TCG.
+The cross_accel_build_job template enables KVM by default via
+--enable-${ACCEL:-kvm}, so the extra options only need to disable TCG.
 
 Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 ---
- target/riscv/cpu.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ .gitlab-ci.d/crossbuilds.yml | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 862834b480..8ef72a88b1 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -956,6 +956,18 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-     Error *local_err = NULL;
+diff --git a/.gitlab-ci.d/crossbuilds.yml b/.gitlab-ci.d/crossbuilds.yml
+index eaeeb533ce..a823aaaa21 100644
+--- a/.gitlab-ci.d/crossbuilds.yml
++++ b/.gitlab-ci.d/crossbuilds.yml
+@@ -59,6 +59,14 @@ cross-riscv64-user:
+   variables:
+     IMAGE: debian-riscv64-cross
  
-+    if (cpu->cfg.misa_w) {
-+#ifdef CONFIG_TCG
-+        if (!tcg_enabled()) {
-+            error_setg(errp, "x-misa-w requires TCG");
-+            return;
-+        }
-+#else
-+        error_setg(errp, "x-misa-w requires TCG");
-+        return;
-+#endif
-+    }
++cross-riscv64-kvm-only:
++  extends: .cross_accel_build_job
++  needs:
++    - job: riscv64-debian-cross-container
++  variables:
++    IMAGE: debian-riscv64-cross
++    EXTRA_CONFIGURE_OPTS: --disable-tcg --without-default-features
 +
-     cpu_exec_realizefn(cs, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
+ cross-s390x-system:
+   extends: .cross_system_build_job
+   needs:
 -- 
 2.43.0
 
