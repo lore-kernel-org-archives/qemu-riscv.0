@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A578FC5DF71
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 06:33:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD1CCD6E61
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 07:48:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wUIhF-0005Wc-A1; Tue, 02 Jun 2026 02:33:53 -0400
+	id 1wUJr3-0006A4-AZ; Tue, 02 Jun 2026 03:48:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
- id 1wUIhE-0005WI-9V; Tue, 02 Jun 2026 02:33:52 -0400
-Received: from mxct.zte.com.cn ([183.62.165.209])
+ (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
+ id 1wUJr1-00069P-OH; Tue, 02 Jun 2026 03:48:03 -0400
+Received: from [115.124.30.130] (helo=out30-130.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
- id 1wUIhB-0004Xc-BC; Tue, 02 Jun 2026 02:33:52 -0400
-Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mxct.zte.com.cn (FangMail) with ESMTPS id 4gV1Hp0mGlz55y1s;
- Tue, 02 Jun 2026 14:33:42 +0800 (CST)
-Received: from xaxapp01.zte.com.cn ([10.88.99.176])
- by mse-fl1.zte.com.cn with SMTP id 6526XXEK075103;
- Tue, 2 Jun 2026 14:33:33 +0800 (+08)
- (envelope-from liu.xuemei1@zte.com.cn)
-Received: from mapi (xaxapp04[null]) by mapi (Zmail) with MAPI id mid32;
- Tue, 2 Jun 2026 14:33:35 +0800 (CST)
-X-Zmail-TransId: 2afb6a1e793fbfd-903a2
-X-Mailer: Zmail v1.0
-Message-ID: <20260602143335139vSrlCbb4GSWlGSnOMETFs@zte.com.cn>
-In-Reply-To: <20260602142709086IsQxEt0LYI9ygtpFnj-XN@zte.com.cn>
-References: 20260602142709086IsQxEt0LYI9ygtpFnj-XN@zte.com.cn
-Date: Tue, 2 Jun 2026 14:33:35 +0800 (CST)
-Mime-Version: 1.0
-From: <liu.xuemei1@zte.com.cn>
-To: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <liwei1518@gmail.com>,
- <daniel.barboza@oss.qualcomm.com>, <zhiwei_liu@linux.alibaba.com>,
- <chao.liu.zevorn@gmail.com>, <peterx@redhat.com>, <farosas@suse.de>
-Cc: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>, <liu.xuemei1@zte.com.cn>
-Subject: =?UTF-8?B?W1BBVENIIHYzIFJFU0VORCAzLzNdIGh3L2ludGMvaW1zaWM6IEFkZCBpbi1rZXJuZWwgaW1zaWMgc2F2ZSBhbmQgcmVzdG9yZSBmdW5jdGlvbg==?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL: mse-fl1.zte.com.cn 6526XXEK075103
-X-TLS: YES
-X-ENVELOPE-SENDER: liu.xuemei1@zte.com.cn
-X-SOURCE-IP: 10.5.228.132 unknown Tue, 02 Jun 2026 14:33:42 +0800
-X-CLEAN: YES
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6A1E7946.000/4gV1Hp0mGlz55y1s
-Received-SPF: pass client-ip=183.62.165.209;
- envelope-from=liu.xuemei1@zte.com.cn; helo=mxct.zte.com.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
+ id 1wUJqv-0004vp-32; Tue, 02 Jun 2026 03:48:03 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1780386457; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=6S2lEnZ81z/IeFhAxFKvcMvH5ZShhZW641Rwpz2KB68=;
+ b=LA0GPXPTcgk4i/Ziq1ouVDHp5bjGNyUbDpmE2x4rqS/pe3uWB1WG8CLjINBulD01rAP3zvOnRITIoL7WLOd94bZZxmj4g4kIYTDmGZ26TD1a7oDB7cbqRl0lJC+mG/sJ3wQsvwYAVFHIpZXcvCVPVlTlhUoix/qn60YYyRyu1dE=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R261e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037009110;
+ MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
+ TI=SMTPD_---0X43o4NG_1780386140; 
+Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
+ fp:SMTPD_---0X43o4NG_1780386140 cluster:ay36) by smtp.aliyun-inc.com;
+ Tue, 02 Jun 2026 15:42:21 +0800
+From: Chen Pei <cp0613@linux.alibaba.com>
+To: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ sunilvl@ventanamicro.com, jonathan.cameron@huawei.com, fan.ni@samsung.com,
+ guoren@kernel.org
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Chen Pei <cp0613@linux.alibaba.com>
+Subject: [PATCH 2/4] hw/riscv/virt-acpi-build: Add _DEP to ACPI0017 for CXL
+ host bridge dependency
+Date: Tue,  2 Jun 2026 15:41:25 +0800
+Message-ID: <20260602074127.63819-3-cp0613@linux.alibaba.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260602074127.63819-1-cp0613@linux.alibaba.com>
+References: <20260602074127.63819-1-cp0613@linux.alibaba.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.130 (deferred)
+Received-SPF: pass client-ip=115.124.30.130;
+ envelope-from=cp0613@linux.alibaba.com;
+ helo=out30-130.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,274 +74,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Xuemei Liu <liu.xuemei1@zte.com.cn>
+On RISC-V QEMU virt platform with CXL enabled, the probe ordering
+of acpi_pci_root (ACPI0016) and cxl_acpi (ACPI0017) is not
+guaranteed. If cxl_acpi probes before acpi_pci_root has attached
+the CXL host bridges, the CXL port topology will be incomplete
+because to_cxl_host_bridge() silently skips devices whose PCI root
+is not yet ready.
 
-Add save and restore funtction if kvm_irqchip_in_kernel() return
-true, it is to get and set IMSIC irqchip state from KVM kernel.
+Add a _DEP object to the ACPI0017 device in the DSDT, declaring
+its dependency on the ACPI0016 CXL host bridge devices. This tells
+the OS to defer ACPI0017 enumeration until all ACPI0016 devices
+have been attached by acpi_pci_root.
 
-Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
+This requires a corresponding kernel change to call
+acpi_dev_clear_dependencies() in acpi_pci_root_add().
+
+Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
 ---
- hw/intc/riscv_imsic.c         | 171 +++++++++++++++++++++++++++++++---
- include/hw/intc/riscv_imsic.h |   3 +
- include/qemu/bitops.h         |   1 +
- migration/vmstate-types.c     |   1 -
- 4 files changed, 161 insertions(+), 15 deletions(-)
+ hw/riscv/virt-acpi-build.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-index 6dbbc152a2..bfce181af9 100644
---- a/hw/intc/riscv_imsic.c
-+++ b/hw/intc/riscv_imsic.c
-@@ -34,6 +34,7 @@
- #include "system/system.h"
- #include "system/kvm.h"
- #include "migration/vmstate.h"
-+#include "kvm/kvm_riscv.h"
-
- #define IMSIC_MMIO_PAGE_LE             0x00
- #define IMSIC_MMIO_PAGE_BE             0x04
-@@ -382,11 +383,16 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
-         qdev_init_gpio_out(dev, imsic->external_irqs, imsic->num_pages);
-
-         imsic->num_eistate = imsic->num_pages * imsic->num_irqs;
--        imsic->eidelivery = g_new0(uint32_t, imsic->num_pages);
--        imsic->eithreshold = g_new0(uint32_t, imsic->num_pages);
-         imsic->eistate = g_new0(uint32_t, imsic->num_eistate);
-+    } else {
-+        imsic->nr_eix = 2 * BITS_TO_U64S(imsic->num_irqs);
-+        imsic->eie = g_new0(uint32_t, imsic->nr_eix);
-+        imsic->eip = g_new0(uint32_t, imsic->nr_eix);
-     }
-
-+    imsic->eidelivery = g_new0(uint32_t, imsic->num_pages);
-+    imsic->eithreshold = g_new0(uint32_t, imsic->num_pages);
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 309d64b322..a5bafd1dcf 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -510,6 +510,38 @@ static void build_dsdt(GArray *table_data,
+     if (s->cxl_devices_state.is_enabled) {
+         Aml *cxl_dev = aml_device("CXLM");
+         aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
 +
-     memory_region_init_io(&imsic->mmio, OBJECT(dev), &riscv_imsic_ops,
-                           imsic, TYPE_RISCV_IMSIC,
-                           IMSIC_MMIO_SIZE(imsic->num_pages));
-@@ -417,23 +423,17 @@ static const Property riscv_imsic_properties[] = {
-     DEFINE_PROP_UINT32("num-irqs", RISCVIMSICState, num_irqs, 0),
- };
-
--static bool riscv_imsic_state_needed(void *opaque)
-+static bool riscv_imsic_emul_state_needed(void *opaque)
- {
-     return !kvm_irqchip_in_kernel();
- }
-
--static const VMStateDescription vmstate_riscv_imsic = {
--    .name = "riscv_imsic",
--    .version_id = 2,
--    .minimum_version_id = 2,
--    .needed = riscv_imsic_state_needed,
-+static const VMStateDescription vmstate_riscv_imsic_emul = {
-+    .name = "riscv_imsic_emul",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = riscv_imsic_emul_state_needed,
-     .fields = (const VMStateField[]) {
--            VMSTATE_VARRAY_UINT32(eidelivery, RISCVIMSICState,
--                                  num_pages, 0,
--                                  vmstate_info_uint32, uint32_t),
--            VMSTATE_VARRAY_UINT32(eithreshold, RISCVIMSICState,
--                                  num_pages, 0,
--                                  vmstate_info_uint32, uint32_t),
-             VMSTATE_VARRAY_UINT32(eistate, RISCVIMSICState,
-                                   num_eistate, 0,
-                                   vmstate_info_uint32, uint32_t),
-@@ -441,6 +441,149 @@ static const VMStateDescription vmstate_riscv_imsic = {
-         }
- };
-
-+static bool riscv_imsic_in_kernel_state_needed(void *opaque)
-+{
-+    return kvm_irqchip_in_kernel();
-+}
++        /*
++         * Declare a _DEP on every ACPI0016 CXL host bridge so the OS
++         * defers ACPI0017 enumeration until acpi_pci_root has attached
++         * the CXL host bridges. Without this, cxl_acpi may probe before
++         * to_cxl_host_bridge() can resolve the PCI root and the CXL
++         * port topology comes up empty.
++         */
++        if (s->bus) {
++            PCIBus *bus;
++            uint32_t num_cxl_hbs = 0;
 +
-+static int riscv_imsic_in_kernel_pre_save(void *opaque)
-+{
-+    RISCVIMSICState *imsic = opaque;
-+    RISCVCPU *rcpu = RISCV_CPU(cpu_by_arch_id(imsic->hartid));
-+    bool is_32bit = riscv_cpu_is_32bit(rcpu);
-+    uint32_t inc = 2;
-+    uint64_t attr;
++            QLIST_FOREACH(bus, &s->bus->child, sibling) {
++                if (pci_bus_is_root(bus) && pci_bus_is_cxl(bus)) {
++                    num_cxl_hbs++;
++                }
++            }
 +
-+    if (is_32bit) {
-+        inc = 1;
-+    }
++            if (num_cxl_hbs > 0) {
++                Aml *dep_pkg = aml_package(num_cxl_hbs);
 +
-+    if (kvm_irqchip_in_kernel()) {
-+        for (uint32_t i = 0; i < imsic->nr_eix; i += inc) {
-+            attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-+                                                  ISELECT_IMSIC_EIE0 + i);
-+            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-+                                     imsic->eie + i, false);
-+
-+            attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-+                                                  ISELECT_IMSIC_EIP0 + i);
-+            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-+                                     imsic->eip + i, false);
++                QLIST_FOREACH(bus, &s->bus->child, sibling) {
++                    if (pci_bus_is_root(bus) && pci_bus_is_cxl(bus)) {
++                        aml_append(dep_pkg,
++                                   aml_name("\\_SB.PC%.02X",
++                                            pci_bus_num(bus)));
++                    }
++                }
++                aml_append(cxl_dev, aml_name_decl("_DEP", dep_pkg));
++            }
 +        }
-+    }
 +
-+    return 0;
-+}
-+
-+static int riscv_imsic_in_kernel_post_load(void *opaque, int version_id)
-+{
-+    RISCVIMSICState *imsic = opaque;
-+    RISCVCPU *rcpu = RISCV_CPU(cpu_by_arch_id(imsic->hartid));
-+    bool is_32bit = riscv_cpu_is_32bit(rcpu);
-+    uint32_t inc = 2;
-+    uint64_t attr;
-+
-+    if (is_32bit) {
-+        inc = 1;
-+    }
-+
-+    if (kvm_irqchip_in_kernel()) {
-+        for (uint32_t i = 0; i < imsic->nr_eix; i += inc) {
-+            attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-+                                                  ISELECT_IMSIC_EIE0 + i);
-+            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-+                                     imsic->eie + i, true);
-+
-+            attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-+                                                  ISELECT_IMSIC_EIP0 + i);
-+            kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-+                                     imsic->eip + i, true);
-+        }
-+    }
-+
-+    return 0;
-+}
-+
-+static const VMStateDescription vmstate_riscv_imsic_in_kernel = {
-+    .name = "riscv_imsic_in_kernel",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = riscv_imsic_in_kernel_state_needed,
-+    .pre_save = riscv_imsic_in_kernel_pre_save,
-+    .post_load = riscv_imsic_in_kernel_post_load,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_VARRAY_UINT32(eie, RISCVIMSICState,
-+                              nr_eix, 0,
-+                              vmstate_info_uint32, uint32_t),
-+        VMSTATE_VARRAY_UINT32(eip, RISCVIMSICState,
-+                              nr_eix, 0,
-+                              vmstate_info_uint32, uint32_t),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+static int riscv_imsic_pre_save(void *opaque)
-+{
-+    RISCVIMSICState *imsic = opaque;
-+    uint64_t attr;
-+
-+    if (kvm_irqchip_in_kernel()) {
-+        attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-+                                              ISELECT_IMSIC_EIDELIVERY);
-+        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-+                                 imsic->eidelivery, false);
-+
-+        attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-+                                              ISELECT_IMSIC_EITHRESHOLD);
-+        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-+                                 imsic->eithreshold, false);
-+   }
-+
-+    return 0;
-+}
-+
-+static int riscv_imsic_post_load(void *opaque, int version_id)
-+{
-+    RISCVIMSICState *imsic = opaque;
-+    uint64_t attr;
-+
-+    if (kvm_irqchip_in_kernel()) {
-+        attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-+                                              ISELECT_IMSIC_EIDELIVERY);
-+        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-+                                 imsic->eidelivery, true);
-+
-+        attr = KVM_DEV_RISCV_AIA_IMSIC_MKATTR(imsic->hartid,
-+                                              ISELECT_IMSIC_EITHRESHOLD);
-+        kvm_riscv_aia_access_reg(KVM_DEV_RISCV_AIA_GRP_IMSIC, attr,
-+                                 imsic->eithreshold, true);
-+   }
-+
-+    return 0;
-+}
-+
-+static const VMStateDescription vmstate_riscv_imsic = {
-+    .name = "riscv_imsic",
-+    .version_id = 3,
-+    .minimum_version_id = 3,
-+    .pre_save = riscv_imsic_pre_save,
-+    .post_load = riscv_imsic_post_load,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_VARRAY_UINT32(eidelivery, RISCVIMSICState,
-+                              num_pages, 0,
-+                              vmstate_info_uint32, uint32_t),
-+        VMSTATE_VARRAY_UINT32(eithreshold, RISCVIMSICState,
-+                              num_pages, 0,
-+                              vmstate_info_uint32, uint32_t),
-+        VMSTATE_END_OF_LIST()
-+    },
-+    .subsections = (const VMStateDescription * const []) {
-+        &vmstate_riscv_imsic_emul,
-+        &vmstate_riscv_imsic_in_kernel,
-+        NULL
-+    }
-+};
-+
- static void riscv_imsic_class_init(ObjectClass *klass, const void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
-diff --git a/include/hw/intc/riscv_imsic.h b/include/hw/intc/riscv_imsic.h
-index fae999731d..2206d82e0c 100644
---- a/include/hw/intc/riscv_imsic.h
-+++ b/include/hw/intc/riscv_imsic.h
-@@ -54,12 +54,15 @@ struct RISCVIMSICState {
-     uint32_t *eidelivery;
-     uint32_t *eithreshold;
-     uint32_t *eistate;
-+    uint32_t *eip;
-+    uint32_t *eie;
-
-     /* config */
-     bool mmode;
-     uint32_t hartid;
-     uint32_t num_pages;
-     uint32_t num_irqs;
-+    uint32_t nr_eix;
- };
-
- DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
-diff --git a/include/qemu/bitops.h b/include/qemu/bitops.h
-index c7b838a628..a7f86f2ee0 100644
---- a/include/qemu/bitops.h
-+++ b/include/qemu/bitops.h
-@@ -20,6 +20,7 @@
- #define BITS_PER_LONG           (sizeof (unsigned long) * BITS_PER_BYTE)
- #define BITS_TO_LONGS(nr)       DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(long))
- #define BITS_TO_U32S(nr)        DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(uint32_t))
-+#define BITS_TO_U64S(nr)        DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(uint64_t))
-
- #define BIT(nr)                 (1UL << (nr))
- #define BIT_ULL(nr)             (1ULL << (nr))
-diff --git a/migration/vmstate-types.c b/migration/vmstate-types.c
-index ae465c5c2c..7e6f37f8c4 100644
---- a/migration/vmstate-types.c
-+++ b/migration/vmstate-types.c
-@@ -597,7 +597,6 @@ const VMStateInfo vmstate_info_tmp = {
-  * is an array of 'unsigned long', which may be either 32 or 64 bits.
-  */
- /* This is the number of 64 bit words sent over the wire */
--#define BITS_TO_U64S(nr) DIV_ROUND_UP(nr, 64)
- static bool load_bitmap(QEMUFile *f, void *pv, size_t size,
-                         const VMStateField *field, Error **errp)
- {
+         Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
+         aml_append(method, aml_return(aml_int(0x0B)));
+         aml_append(cxl_dev, method);
 -- 
-2.27.0
+2.50.1
+
 
