@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2C29CD6E4A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 09:19:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 862FFCD6E4A
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 09:20:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wULH4-0000sP-9u; Tue, 02 Jun 2026 05:19:02 -0400
+	id 1wULH2-0000nA-CT; Tue, 02 Jun 2026 05:19:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1wULGi-0000Xz-Ba
- for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:45 -0400
-Received: from mail-dy1-x1341.google.com ([2607:f8b0:4864:20::1341])
+ id 1wULGm-0000Yr-GG
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:49 -0400
+Received: from mail-dy1-x1342.google.com ([2607:f8b0:4864:20::1342])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1wULGc-0007WN-42
- for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:37 -0400
-Received: by mail-dy1-x1341.google.com with SMTP id
- 5a478bee46e88-304df7ff4c2so3025574eec.0
- for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2026 02:18:29 -0700 (PDT)
+ id 1wULGg-0007YH-6U
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:42 -0400
+Received: by mail-dy1-x1342.google.com with SMTP id
+ 5a478bee46e88-304d7f31215so4950161eec.1
+ for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2026 02:18:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780391909; x=1780996709; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1780391914; x=1780996714; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2E86yNzatxnQca835DMjkBt+7nm3dHtMLB7OKJHEifQ=;
- b=NqOaDHPkKyU1IgvDIYAQuufVbJj2cfqnAEJUMCk+dwL7xAEsekVFCVzGI94iM8QmoE
- yJrfuUgR5tYOh1zTIXu0qIc63HFHeDnjQ02KlnBtLv+DUfzAHfdPKCHtXbhfQMl/0Kbe
- AdHe05nZQ8DMB9eDXrVUOPZGeJEjepXWTtQXWdE1pga1gxMZWWi4C8gpR4lhALuARa2x
- e2kzExNNmN498B+Efuuo0LjzrOe3DIF0ulEiDGmSq4Eiu6sT59UcLPs5LurI+YE2J6St
- s1kTDpG4ejaUpJsEtl9O/Ni9wEEdksqBtovKIRc3xdkrGEY+YGHCg1bRr/lHyy2l7ouz
- vwmA==
+ bh=8WxnG1ZaVTxzKCs44ZH++uO0YK7iL7fr4U5+9la7l0s=;
+ b=nQw3AdRAVZyZHrjCr3Z3dZ/x8jx1i0QiHI6WFMqUHKqnacfh3BcHHSsIkm8UUjpR7T
+ EeCVOcNOTlqBHb5qOw1LdCBz5s5MCmd1vx4ZLrQyBxZ0LylSEO/kBOngb+2ks6/4jgf5
+ AMTxOVg48E8AVHsLFD6SYB/z5/67uIb8wGMloWRneXP98SpxzRISuBD2blZMqXD3ScrX
+ iSnUZeubIyrZF1Vuh5ngUFcgGMaF3BfW34NR63VHbstg9ZmW2CKBFwoqajQHKKGragGD
+ NUYHMQ03wJumKGyPtfNjSbaY5j1op3HKD4MGmWyDCDURylbyS1Dg7SWVtW6AQFbVXq37
+ tZxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780391909; x=1780996709;
+ d=1e100.net; s=20251104; t=1780391915; x=1780996715;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=2E86yNzatxnQca835DMjkBt+7nm3dHtMLB7OKJHEifQ=;
- b=riMkosZbu1+0R2ZNVuvh8HZIzxQhOeXEDNG741c/JjG+/dlqdanbiwsOUfJXIrAseT
- KGbKHJYTmh6tBgjTY9O3NL9HRQ/TFZpDHVWIde+r7fVKIbGlTnTwvV/xSl8jQNsyxY6S
- Ci91f852dqfFx8Lr3FcgKSXEILHqdTFHOfV+PpG1UGt+qbXqjP9FTtVp0RFVB6ucexJs
- eMrEb8I7iMruMuZLsTbvi1o9+UvtMtTgbkfvDLRb8lFdhQtYvq+hNk5SU1QFwUJB5f4J
- CayIPSpopgV5KHAINF5TY5nAB/7xicz+ftlQOYWbYY8yMTY0g4WsI40wkIUIqeNheKw7
- O1xA==
-X-Gm-Message-State: AOJu0YzRUq9o2Br5bEb32p2FB068apJL0/X/NkCvbX8WIvwH1QzEHK2L
- 4Fz8kCMM15rnJbW4lv/sZ1YTjP8bEbt99l7jsf+kWYGilcFz64TeeKUB
-X-Gm-Gg: Acq92OFmIPz1e1HZ3A/M4+4ef3i0K66kFvMP8DuyGitklOHn7XTJxJSWpfADMRvdetf
- fYCgWVT0bnxcyGJXcRV0Cpn0qsJcGBLgQMHMZcc12qnwweFp43xi+LGVIGHOVe9otMj6V+9NAK3
- 0gwW4KTlcA14a/G1F3Q2yl5/Z6C9+XEcefDCGkoyRIF5chQTC8Qd3SVMxYueidZJXwluHo1rL8A
- 3CXRfuqUQK5Cu6TLBe0fQ/jjxHwGl6a8hRsS2csKaoc46Kq9LQlVQBliHxv8UmN1cBNYPBXUfcl
- 9/K3BpM/7/zgkx7l4w7qO8BRSWlnqOw9VSzpaYUsNANXPZD6KHf945r6IizXSG209zf7vDhwgko
- ZIM75K80B9yY2aHkU7orOOMiTrLW+P3c37Kk6Y/qTJy2lQDEVS5RsXMyjcJDYBG03rUUFl7WKZ+
- r1E7gYNCKcDNs2qBiBbTZWHIoTKazHn1hi00lUofelwMzhdyuikCcX8DU7cV77CdeN8sq7cmfBH
- qJfMY1ugppNLQ29QjLklnvFBoQ=
-X-Received: by 2002:a05:7300:3b04:b0:2c1:67e1:61a9 with SMTP id
- 5a478bee46e88-30734b66b7dmr1396766eec.13.1780391908530; 
- Tue, 02 Jun 2026 02:18:28 -0700 (PDT)
+ bh=8WxnG1ZaVTxzKCs44ZH++uO0YK7iL7fr4U5+9la7l0s=;
+ b=TDM3U1ltIVpCoXTpOkJFc8w5h4Ti6+RHjB8t60Vq6OOMz+8XgE9dY2pTHo5sWFvNd0
+ docBwF/WyEhlLQFfGhSvlgs3axqbVGN+qKO1U2K44uTuAuwIu0dMJ5SilqFiRRkXS2v0
+ B1bzBskS30Zl13fDUdjhxgsjSUQFz4+r3pfL0mxqA5yANJalT6YG6UuSY9LmDX3k9CNy
+ g9iNqZMQQj0pKA17TvBg/o+Xibj0MzfvBxHGAFH/erZd/UcNVJcwZfnaIowX0EpRR6/Z
+ apuqdQBDWsVJRJQeaSowBwEh7TjANoqqMzeEPUPXidvflgU5iMQN7XXNT+iuZRnYc5tF
+ oxaw==
+X-Gm-Message-State: AOJu0YwMxxAsM6OYEPyLcn8dVHKhmPzqMHOhDLKCO97X+LkR5sdbcujt
+ Oz/UUnTL+w9kQswpedQIg3JI8i+O2P5Axh36r0Cxhm9dgofJRjzvA5pE
+X-Gm-Gg: Acq92OGwGXPLXkPvlYDZMGe6U93ne67VayS95I6qRcGwymxhGBpEtY842IzjJ2UL2Bl
+ u3g5R1Pec13CCOESB1FJv+SZItuO8eUBPqB/irYlHLknOVodHfFqzNG/dXFZ9gKDh2ja1/7Fvfi
+ OIJf35L+hCkmzpJ7h++baL2VLLq72CqB/GMWhCv8upFMEZ61suAZbHGkzxTVWWs6J3HaFwVkHGh
+ HUqOuakr5UPocBngKBrpOg1jdhzyiyvgVAWH39yZb4ZQWyS6C3hJksVq5LwGryOI4Of3Ul2u3SG
+ afAckWJAau1yBEkYQYzWIGrREvgC6HZlxIuDomXCvxy2z3LQkr1qMvgrJdpntZ4FpPYmowtfYp3
+ rUitX4JcoUta794bNOLR093CAzyVd0Hws5HZl/Fjg5zkFhJI2s3l5i4IqTyanAeTZwba26vWwXf
+ Dy2BHj7jDp8a14lkxnECnZvF9DbHSrIrzrZ0CLEq7gCqjRw8odavZjf3Dhmv0YPNQrAwEkKOFn1
+ TNUiXkb3niEsVKoOYXPL0Z5dUs=
+X-Received: by 2002:a05:7300:f18f:b0:303:f26f:df30 with SMTP id
+ 5a478bee46e88-304fa632e0dmr6146120eec.23.1780391914520; 
+ Tue, 02 Jun 2026 02:18:34 -0700 (PDT)
 Received: from openkylin..
  (ec2-54-176-108-193.us-west-1.compute.amazonaws.com. [54.176.108.193])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-304ed2c3121sm11419146eec.5.2026.06.02.02.18.23
+ 5a478bee46e88-304ed2c3121sm11419146eec.5.2026.06.02.02.18.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jun 2026 02:18:26 -0700 (PDT)
+ Tue, 02 Jun 2026 02:18:34 -0700 (PDT)
 From: Zephyr Li <fritchleybohrer@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
@@ -73,16 +73,17 @@ Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
  alex.bennee@linaro.org, pierrick.bouvier@oss.qualcomm.com,
  philmd@linaro.org, Zephyr Li <fritchleybohrer@gmail.com>
-Subject: [PATCH v3 2/6] target/riscv: move fflags helpers to common code
-Date: Tue,  2 Jun 2026 17:17:49 +0800
-Message-ID: <20260602091753.3209261-3-fritchleybohrer@gmail.com>
+Subject: [PATCH v3 3/6] target/riscv: move riscv_raise_exception() out of
+ op_helper.c
+Date: Tue,  2 Jun 2026 17:17:50 +0800
+Message-ID: <20260602091753.3209261-4-fritchleybohrer@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
 References: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1341;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-dy1-x1341.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1342;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-dy1-x1342.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,133 +106,132 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-riscv_cpu_get_fflags() and riscv_cpu_set_fflags() are used by CSR/FCSR
-handling and operate on architectural CPU state rather than translated
-floating-point instructions.
-
-Move them out of fpu_helper.c so fpu_helper.c can be built only when TCG
-is enabled.
+riscv_raise_exception() is referenced by RISC-V internal code, but its
+current implementation relies on TCG's cpu_loop_exit_restore(). Move it to
+cpu_helper.c so op_helper.c can become TCG-only. The actual exception
+unwind still relies on TCG's cpu_loop_exit_restore(), so the non-TCG path
+remains unreachable.
 
 Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 ---
- target/riscv/cpu.h        |  3 ---
- target/riscv/cpu_helper.c | 28 ++++++++++++++++++++++++++++
- target/riscv/fpu_helper.c | 27 ---------------------------
- target/riscv/internals.h  |  3 +++
- 4 files changed, 31 insertions(+), 30 deletions(-)
+ target/riscv/cpu.h        |  4 ----
+ target/riscv/cpu_helper.c | 19 +++++++++++++++++++
+ target/riscv/debug.c      |  1 +
+ target/riscv/internals.h  |  4 ++++
+ target/riscv/op_helper.c  | 15 ---------------
+ target/riscv/zce_helper.c |  1 +
+ 6 files changed, 25 insertions(+), 19 deletions(-)
 
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7d79c7a5a7..2273567139 100644
+index 2273567139..98bda189e6 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -666,9 +666,6 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
-                                       RISCVException exception,
-                                       uintptr_t pc);
+@@ -662,10 +662,6 @@ void riscv_translate_init(void);
+ void riscv_translate_code(CPUState *cs, TranslationBlock *tb,
+                           int *max_insns, vaddr pc, void *host_pc);
  
--target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
--void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
+-G_NORETURN void riscv_raise_exception(CPURISCVState *env,
+-                                      RISCVException exception,
+-                                      uintptr_t pc);
 -
  #ifndef CONFIG_USER_ONLY
  void cpu_set_exception_base(int vp_index, target_ulong address);
  #endif
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 17305e1bb7..678c106ae5 100644
+index 678c106ae5..752752d520 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -21,6 +21,7 @@
- #include "qemu/log.h"
- #include "qemu/main-loop.h"
- #include "cpu.h"
-+#include "fpu/softfloat.h"
- #include "internals.h"
- #include "pmu.h"
- #include "exec/cputlb.h"
-@@ -38,6 +39,33 @@
+@@ -39,6 +39,25 @@
  #include "pmp.h"
  #include "qemu/plugin.h"
  
-+target_ulong riscv_cpu_get_fflags(CPURISCVState *env)
++/* Exceptions processing helpers */
++G_NORETURN void riscv_raise_exception(CPURISCVState *env,
++                                      RISCVException exception,
++                                      uintptr_t pc)
 +{
-+    int soft = get_float_exception_flags(&env->fp_status);
-+    target_ulong hard = 0;
++    CPUState *cs = env_cpu(env);
 +
-+    hard |= (soft & float_flag_inexact) ? FPEXC_NX : 0;
-+    hard |= (soft & float_flag_underflow) ? FPEXC_UF : 0;
-+    hard |= (soft & float_flag_overflow) ? FPEXC_OF : 0;
-+    hard |= (soft & float_flag_divbyzero) ? FPEXC_DZ : 0;
-+    hard |= (soft & float_flag_invalid) ? FPEXC_NV : 0;
++    trace_riscv_exception(exception,
++                          riscv_cpu_get_trap_name(exception, false),
++                          env->pc);
 +
-+    return hard;
++    cs->exception_index = exception;
++#ifdef CONFIG_TCG
++    cpu_loop_exit_restore(cs, pc);
++#else
++    qemu_build_not_reached();
++#endif
 +}
 +
-+void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong hard)
-+{
-+    int soft = 0;
-+
-+    soft |= (hard & FPEXC_NX) ? float_flag_inexact : 0;
-+    soft |= (hard & FPEXC_UF) ? float_flag_underflow : 0;
-+    soft |= (hard & FPEXC_OF) ? float_flag_overflow : 0;
-+    soft |= (hard & FPEXC_DZ) ? float_flag_divbyzero : 0;
-+    soft |= (hard & FPEXC_NV) ? float_flag_invalid : 0;
-+
-+    set_float_exception_flags(soft, &env->fp_status);
-+}
-+
- int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+ target_ulong riscv_cpu_get_fflags(CPURISCVState *env)
  {
- #ifdef CONFIG_USER_ONLY
-diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-index af40561b31..eec6328281 100644
---- a/target/riscv/fpu_helper.c
-+++ b/target/riscv/fpu_helper.c
-@@ -23,33 +23,6 @@
- #include "fpu/softfloat.h"
- #include "internals.h"
- 
--target_ulong riscv_cpu_get_fflags(CPURISCVState *env)
--{
--    int soft = get_float_exception_flags(&env->fp_status);
--    target_ulong hard = 0;
--
--    hard |= (soft & float_flag_inexact) ? FPEXC_NX : 0;
--    hard |= (soft & float_flag_underflow) ? FPEXC_UF : 0;
--    hard |= (soft & float_flag_overflow) ? FPEXC_OF : 0;
--    hard |= (soft & float_flag_divbyzero) ? FPEXC_DZ : 0;
--    hard |= (soft & float_flag_invalid) ? FPEXC_NV : 0;
--
--    return hard;
--}
--
--void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong hard)
--{
--    int soft = 0;
--
--    soft |= (hard & FPEXC_NX) ? float_flag_inexact : 0;
--    soft |= (hard & FPEXC_UF) ? float_flag_underflow : 0;
--    soft |= (hard & FPEXC_OF) ? float_flag_overflow : 0;
--    soft |= (hard & FPEXC_DZ) ? float_flag_divbyzero : 0;
--    soft |= (hard & FPEXC_NV) ? float_flag_invalid : 0;
--
--    set_float_exception_flags(soft, &env->fp_status);
--}
--
- void helper_set_rounding_mode(CPURISCVState *env, uint32_t rm)
- {
-     int softrm;
+     int soft = get_float_exception_flags(&env->fp_status);
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index 5664466749..1a74aedeab 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -27,6 +27,7 @@
+ #include "qemu/log.h"
+ #include "qapi/error.h"
+ #include "cpu.h"
++#include "internals.h"
+ #include "trace.h"
+ #include "exec/helper-proto.h"
+ #include "exec/watchpoint.h"
 diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 4e1bb8849a..7f28190c29 100644
+index 7f28190c29..1863012807 100644
 --- a/target/riscv/internals.h
 +++ b/target/riscv/internals.h
-@@ -193,6 +193,9 @@ static inline target_ulong get_xepc_mask(CPURISCVState *env)
+@@ -193,6 +193,10 @@ static inline target_ulong get_xepc_mask(CPURISCVState *env)
  bool riscv_cpu_has_work(CPUState *cs);
  #endif
  
-+target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
-+void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong val);
++G_NORETURN void riscv_raise_exception(CPURISCVState *env,
++                                      RISCVException exception,
++                                      uintptr_t pc);
 +
- void riscv_cpu_ext_user_opts_init(void);
- void riscv_cpu_cfg_ext_add_user_opt(uint32_t ext_offset, bool value);
- void riscv_cpu_misa_ext_add_user_opt(uint32_t bit, bool value);
+ target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
+ void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong val);
+ 
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 81873014cb..d17a8bbf10 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -28,21 +28,6 @@
+ #include "exec/tlb-flags.h"
+ #include "trace.h"
+ 
+-/* Exceptions processing helpers */
+-G_NORETURN void riscv_raise_exception(CPURISCVState *env,
+-                                      RISCVException exception,
+-                                      uintptr_t pc)
+-{
+-    CPUState *cs = env_cpu(env);
+-
+-    trace_riscv_exception(exception,
+-                          riscv_cpu_get_trap_name(exception, false),
+-                          env->pc);
+-
+-    cs->exception_index = exception;
+-    cpu_loop_exit_restore(cs, pc);
+-}
+-
+ void helper_raise_exception(CPURISCVState *env, uint32_t exception)
+ {
+     riscv_raise_exception(env, exception, 0);
+diff --git a/target/riscv/zce_helper.c b/target/riscv/zce_helper.c
+index 15bf0a99c8..152a7a63ef 100644
+--- a/target/riscv/zce_helper.c
++++ b/target/riscv/zce_helper.c
+@@ -18,6 +18,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "cpu.h"
++#include "internals.h"
+ #include "exec/helper-proto.h"
+ #include "accel/tcg/cpu-ldst.h"
+ 
 -- 
 2.43.0
 
