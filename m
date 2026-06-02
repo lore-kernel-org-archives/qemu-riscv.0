@@ -4,60 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E87ECD6E4A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 08:06:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF3C5CD6E4A
+	for <qemu-riscv@archiver.kernel.org>; Tue,  2 Jun 2026 09:19:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wUK8F-0003CO-15; Tue, 02 Jun 2026 04:05:51 -0400
+	id 1wULH4-0000u3-Th; Tue, 02 Jun 2026 05:19:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wUK81-00038D-OR; Tue, 02 Jun 2026 04:05:38 -0400
-Received: from [115.124.30.100] (helo=out30-100.freemail.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wUK7r-0001j2-FA; Tue, 02 Jun 2026 04:05:36 -0400
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1wULGp-0000Z2-P1
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:49 -0400
+Received: from mail-dl1-x1244.google.com ([2607:f8b0:4864:20::1244])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1wULGk-0007e8-Pd
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 05:18:45 -0400
+Received: by mail-dl1-x1244.google.com with SMTP id
+ a92af1059eb24-137eeae6c29so30658c88.0
+ for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2026 02:18:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1780387503; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=kaHY0D+Wdx9V3hsWgTf97DSopoPVhxFDi9fEzQW9uC8=;
- b=cUbOVPEUU1TRl7oXYbpWFOF4wS6FuLRFS/b5odWj1XuFf/fLOjartAqZkgHEBluzsRhp7EvE1ob+EZxCSKaJQiqY3g/WGpgheKLFLOyI8++KxQ/6culAmzNUlWaS122CmAPk2vIlMJPqfTY9FJvGO3v7a0HkD+mxiGMtBmydVK0=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
- MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0X43oDGJ_1780387498; 
-Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0X43oDGJ_1780387498 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 02 Jun 2026 16:05:02 +0800
-From: Chen Pei <cp0613@linux.alibaba.com>
-To: cp0613@linux.alibaba.com
-Cc: alistair.francis@wdc.com, chao.liu.zevorn@gmail.com,
- daniel.barboza@oss.qualcomm.com, guoren@kernel.org, jic23@kernel.org,
- liwei1518@gmail.com, palmer@dabbelt.com, pbonzini@redhat.com,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, sunilvl@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH 4/4] hw/cxl: Map committed HDM decoder ranges as RAM for
- direct DMA
-Date: Tue,  2 Jun 2026 16:04:58 +0800
-Message-ID: <20260602080458.71561-1-cp0613@linux.alibaba.com>
+ d=gmail.com; s=20251104; t=1780391920; x=1780996720; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PCLumQ0UyNQHKa/ypfifej8V3OAD6FODRX9ywAOjyVA=;
+ b=M2ntlYJf1Azh56TrvgvL5KtpTsGwa1xJVatQ+Ldh8cufU+7al30A5VnHitJq7mhjWJ
+ 8dyAK5G3itKmkJvoAAdBTfjwsrvgrey9UmK0TXo/DWwNTm+/THR7Vays94I/S47TreRG
+ guQoV/jKSuKi0c4XW/QT3AaLVnU8TbIDblcLM9EvcfiOThviHadnAXbGgdGx9xH89f0w
+ Za5SJSzNXnzJ1B6bXBsuCMK4Un5/nL8q3SavesRCAP6jBQ5iiOuhKxKwJRavLVLRA2P+
+ vKBAmHV6XlyISmjhZVvF/u3c6abz30nV80TbsaJ2/ynPEyCWgNhG4ZYPDhJSd4MSlzar
+ rj4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780391920; x=1780996720;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=PCLumQ0UyNQHKa/ypfifej8V3OAD6FODRX9ywAOjyVA=;
+ b=LlFVgXsGQLTyaL2hc+9uSQEF8FOdYifr5A0anr3CFB9cV0e+nxO6WuvpHJNus47FA+
+ ppZUZSX2TMjvgX8esXOlViTedktRRM8lfZPjhVRe4gjup/P501ipasVM2g6+zTBqisaG
+ 9ic33dUyVz/M9lRojRGqHcENda3huwSChpIza5iDhcKdQtZGU7R0zliOCsrVXEnuZTCH
+ jj0o8+4Zd8e0hsNwfDPccqLSyacsgJ7B15YrWoB0MXRQ/fgWo1AviQEHi4MrfRT7f0YO
+ 7xMAe2bz0VIodWIP2/gyvw6QctxgB4wwWMt4j03X0j7diGk2+6ZvijCdzOho2leLZpyM
+ Ceow==
+X-Gm-Message-State: AOJu0Yx7WoaCzoJNanaB+bMVH7nUJgJ8abCp3+XpgDdkLGKj0xGAva6T
+ 6L329fX4sJC+ZjAem+99tF0O/E1mfyoaVCU7b6msX8J3q5oJNcKzImxx
+X-Gm-Gg: Acq92OGNcEvmwg/ryqGh6uCcnflpV7KvRTA8wyO3+is5So0IELP3AMs3GbaBNT6UOv/
+ Ppk9XHA33R5U0joHdbI4BBLKsorZf/1e1CWPA3QQbVEHh5auwknJsBDDG3THfZnHoVmEshe+9Ob
+ iWexUxtdh8VJEk8wW629tGKErDaIg+HjcYaIJm7gfUrNZVEmcWzN4OoC0pnF8IgzgR7b//xMwUS
+ OrHE6hIBG9X3/7FDbepy0EKx4CCHKwwaIWO93w9cKEUXf/i0YssmEIih5LuTiifBd1XiqIQ5+TY
+ rA4P0zCA4/q5cfzaw/ATydDc7UvCAOFOiWqVGrMzGvly3tyQHWNMEj+VVxVzVtkR/T2+8VFvXMe
+ fzZHIsTzao1+QI8APrgLSYTPRIOu+lco2P0h+wuIQAfOVXw/R1iuG/uLqLJbXeIS6yIMgwek7Ex
+ biGnBQFwsS5cItAe6Ppamn5pb8J/CrkDDMkpX40vxEid8gs4Os1LkT0qvmZJuhYW47xSAxbMSWq
+ OtmC2tXoITAK21f0U5pnp8xZ+hONm8fEivr7w==
+X-Received: by 2002:a05:693c:300c:b0:2ca:8099:ffc0 with SMTP id
+ 5a478bee46e88-304fa4a90c6mr7077827eec.7.1780391920436; 
+ Tue, 02 Jun 2026 02:18:40 -0700 (PDT)
+Received: from openkylin..
+ (ec2-54-176-108-193.us-west-1.compute.amazonaws.com. [54.176.108.193])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-304ed2c3121sm11419146eec.5.2026.06.02.02.18.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Jun 2026 02:18:39 -0700 (PDT)
+From: Zephyr Li <fritchleybohrer@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ alex.bennee@linaro.org, pierrick.bouvier@oss.qualcomm.com,
+ philmd@linaro.org, Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH v3 4/6] target/riscv: reject x-misa-w outside TCG
+Date: Tue,  2 Jun 2026 17:17:51 +0800
+Message-ID: <20260602091753.3209261-5-fritchleybohrer@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260602074127.63819-5-cp0613@linux.alibaba.com>
-References: <20260602074127.63819-5-cp0613@linux.alibaba.com>
+In-Reply-To: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
+References: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.100 (deferred)
-Received-SPF: pass client-ip=115.124.30.100;
- envelope-from=cp0613@linux.alibaba.com;
- helo=out30-100.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1244;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-dl1-x1244.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,7 +105,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2 Jun 2026 15:41:27 +0800, cp0613@linux.alibaba.com wrote:
+x-misa-w controls dynamic writes to misa in the emulated CPU path and is
+only meaningful when TCG is available. Reject it explicitly outside TCG
+instead of relying on TCG-only finalize code.
 
-CC Jonathan.
+This also covers CONFIG_TCG builds that are running with a non-TCG
+accelerator. It also rejects CPU models that require writable misa by
+default when the selected accelerator is not TCG.
+
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+---
+ target/riscv/cpu.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 862834b480..8ef72a88b1 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -956,6 +956,18 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     Error *local_err = NULL;
+ 
++    if (cpu->cfg.misa_w) {
++#ifdef CONFIG_TCG
++        if (!tcg_enabled()) {
++            error_setg(errp, "x-misa-w requires TCG");
++            return;
++        }
++#else
++        error_setg(errp, "x-misa-w requires TCG");
++        return;
++#endif
++    }
++
+     cpu_exec_realizefn(cs, &local_err);
+     if (local_err != NULL) {
+         error_propagate(errp, local_err);
+-- 
+2.43.0
+
 
