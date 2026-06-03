@@ -4,103 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E5BECD6E57
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jun 2026 00:42:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E986DCD6E57
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jun 2026 00:43:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wUZgl-00007g-AO; Tue, 02 Jun 2026 20:42:31 -0400
+	id 1wUZhr-0000bX-NC; Tue, 02 Jun 2026 20:43:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wUZgh-00006n-QJ
- for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 20:42:29 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ id 1wUZho-0000ay-PF
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 20:43:36 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wUZgf-0003Up-9b
- for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 20:42:27 -0400
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-bdb3fd39045so1804932066b.3
- for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2026 17:42:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780447344; cv=none;
+ id 1wUZhn-0003io-6q
+ for qemu-riscv@nongnu.org; Tue, 02 Jun 2026 20:43:36 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-bec4639953dso563410766b.1
+ for <qemu-riscv@nongnu.org>; Tue, 02 Jun 2026 17:43:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780447412; cv=none;
  d=google.com; s=arc-20240605;
- b=jl71wkjrqVR+zPfUi206CaIQ/kupiE8FMRKbyKXUvJQ/luoHDt8weNiiwG9PT7wHt+
- pYKeL+DFpXmTKv3SxEXrPNvHI0hL2ZM+7x6LLm8K+IQoaQXtUE2QVgA5Sy9KmYmbUU0B
- 1QYtVuO+wiFgxockjT+WYHD83o3qqff7ajeGEROnspHwUJt0K/kdLH98q7b44FODtXjV
- YuQ4vk/r9AFZgx0UBw4T+o7xy7nqMpK18ygVsAZ8DsHtMDJUoB7LIFk6qGKPEnaamRS3
- tyOIMzeR6R9fA2hAUE7Rx+aw0h7faRS0MyKjA2ZAI9Q+ERed0C5M5O54ZUu9U6vTSvyF
- turg==
+ b=N15gxF1VKqXuOiLVH9X1HltLbGD/0LQfgY1Psi5uzYEchDWD+eS7tZlivshfClAV64
+ cwruvSpNGUD9RsrZFBGSBpY6UIxn35MQ5V7CgNz96Lojb20XuVJGVHf7NcSphIaFdqkT
+ I4jW2DDtiTVVzgiM3zYBGKR2PeEz5CcFd5K3PQ7Ig7MdjcM8w6BUregZDSyjLkFtmlcO
+ KyETHhaJBBQpJX/0HYJUxTMVzjD2Qlt9okScjZkk40tQQmWeyrgxwy0PvVTTyiOBebYG
+ eYn1xGKnkaYew35kumVBxJh2dj1C9f7c1bY11sLg8GJCVHRCGWw5RymfMk4SbTkHUFeC
+ uOdg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=dYLOQEEK9SlB+I4AbXytkiWykJ8Oikpc/Uw3zoytCc0=;
- fh=C+UqRN1LNmUCjl7YjY2JsLMNf0toKly+CeBRlqh5CTY=;
- b=S7KGIokFkSDMeZXlZwPoC5xg9tk06TiHlbxYCJDCxChCbXl+FWaIixU2wCP5bfAkJH
- XJcm5b7mSq20Wa1DvilASlQWFGymEuV76JKEJYcZxfba53Lg1N/Vc8Qgu5lw2qpxHn9T
- KDhH/7OHYm4CspeRsvhuH4egTnvu/ML+lKBgUL8UoUctmlLHSt40+0idrxK0Jwnvf14n
- wSA8foD2ezF0m3xNpxt6OTtA7z8lOnQrKHvG6NPMVnHvCBXoPVukhFrh6gpkolLSsEPe
- UurzdJdU4pq4NVlASj5pf8PJC/Dmh1zkLC9idpdbRS7mR1IiEE1Kgh1CoN7Y4Sy0Okya
- nQZA==; darn=nongnu.org
+ bh=34HVZbjV4xGIsTW3/VVhwRHkAaNJIlIs2vBfAIsqaHc=;
+ fh=b0wtvXkziF5nqAi6b2f3GN/9kdr5gf0wSXPVtF0mHw8=;
+ b=Hc7JT5FuW28aJzA2SVUW48B+M8HnwnxXNQ70C58J6RSb/mAYxDvpDGP22XS/gdIr7y
+ lo4Q+d7yeDIMujFo7N9/D0uPujRmEMJeZd8fm7fYSdyWGHZNukp6nvnOPLrd//2/MOVj
+ bkLx52h1BPie7oqjSFYceSW0rDVoakva0+8QCgJR2V5p1zRIS+iMd8Y1cgLM+tPS8DhU
+ czoJj8WbIy+UDLPdq1LS+uC4kQ9w9DluXUPec2A1dhkZOSOCpiBMtlA4CdzJSfHVBCmb
+ V0sfayR0rW4Vt4FmivwknEVwmZCPIfTIyPXKyS1vNi7vM/Hc7Es4x1Rr5ceB1Z24CiFc
+ w5Ew==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780447344; x=1781052144; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1780447412; x=1781052212; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dYLOQEEK9SlB+I4AbXytkiWykJ8Oikpc/Uw3zoytCc0=;
- b=rVhVGqkkvT2Pp5bVKoovgIvYdUVVIdLR/WuIKvPJ6zqjQum/6U8JoU7dd1S6UCrOrF
- bQT7joP2sHm4V+pn6JKD3eYezU2YGHp+zqS10i3UtyFCv+ZMrUIfh129HlaFjDwQOn7k
- N4Gq95xBYmrUJirDo5Dmnub+v2nplbp/9SV2NL8DMvXEBGEFky4N4nlS3YFOmTArmtlt
- wryKjd3r/pVXdGNNjoVh2e7AZ82xY+AWsu17AOiUgpffspgk4w9bgl4cLJBGRd1CPNxy
- GZ7XI4G0G00L7qybPfa5wLI6dAhFsBiQvaK+ZAPO17YSSH7b19R/+zh47Mioi15MrFZx
- VUEg==
+ bh=34HVZbjV4xGIsTW3/VVhwRHkAaNJIlIs2vBfAIsqaHc=;
+ b=UbySrFOnLA9UmcitJD0TNfIVKoK2Gstrkt6mBR9b1e0K6TFi+pIoMcQVKlgJuZJn4v
+ W7yOuYmOo5TBe0bRdw6wAkM21/Xh4IXTRP+p4ocWlHplBUK79UuZ30ByGux5JlMAjbYL
+ jT8Z3UB+VJZzr7N3ftSTDhNjd4/ozARSPenN+1BTq7v8FVbnoJGsPRaN+4o0WxD4Xr16
+ U0veKxI3wfZEz/R8XDhNCz7yZBuKQJi26FejhQD9tyxL41fMf8BW1EwZLbc9BMGcW+g6
+ oB0NEu7Wme/0zXWUfN93osZYqtTJmKGkgHOHsXTpzU7vp/gpV8MqjJX+IcuS3eEekJE3
+ 6AYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780447344; x=1781052144;
+ d=1e100.net; s=20251104; t=1780447412; x=1781052212;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=dYLOQEEK9SlB+I4AbXytkiWykJ8Oikpc/Uw3zoytCc0=;
- b=ZGC+HUptU/bjC0QG5pYusmuEooHCNTBvJ/mucKUtL71RZoCmMLG8QwkzvFKnmMoMJN
- OHyl2R1cPj8gnMvtWSnzgSb8SETThgc3QzlBb9ISKLe0Oj5pn+onYekzK6Wj61rgtKW9
- sAHLM8+N/HmVclUiAaN9029oHYYOBvYWdi+tzXjikHcBBkc7uRr6G9BDsQY3R9yauzn0
- SCuZl5BQKJ9mQN2HeXbHzIqNTu+t3X0EzCyYJoYiXmHS33wUTM0vN13W6HAU07P67LLd
- X6HgkLeRS04YfNT+gsb4Ncwlbl4WPbtaCjk+FMpZ3eAqJMphdpAQMOdXSU+KbRlaP5AC
- KgxQ==
+ bh=34HVZbjV4xGIsTW3/VVhwRHkAaNJIlIs2vBfAIsqaHc=;
+ b=iQPBI2yAStO+u8Rj10wH4L/MdbDJOgMT6J8Aym79IJ0IDowAihYTM7C8P2w/krqdkK
+ K9RvBP7IObHivjKsbSoVxmUf5LNByemOduu+6Vn4MbiXrV/wdTBy+mgrEjY1i6P3yWbc
+ 4lM+ooiRTyxCvkRDckulLXooHr2RnF+OZ2nDgI0ve9dK1BS1M8FtRgFOUrBCDrtIgMtI
+ inljxyqHUt+DnTywwv6OF0cvDTyyYAMcNq5l7cy7gDxsGuJeTJV3lwtSYY2UStloYhhY
+ oTAO4m3RJ7Mr7i4NV8yjyjxAMM0Pto/fYyJ8xzdOvE0X9AFFpAR3CbsTjY92GUucAYhE
+ c/NQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8DSi6GLdtA6kgAO+haj4qCqoKXRMFQ0qhCuFO2kJ84BOKCAs+AjhSjJZLfb7HZV0LqjuiOpFG9blUS@nongnu.org
-X-Gm-Message-State: AOJu0YwoGNL6A2msTJ/f5b3yboDoSHtBQ4PvxAS0KUNO6IPb3LQhcjiz
- TQGL2gn7o4DWtCmjEdov/HEFJRBY/y547Dp7kfiiUYffNeLhoCW+jJzmagoEwx6yrOKgXb5HQHK
- OJfa8Jaqe5nrVsTFBS53rbC0VtSpq7xA=
-X-Gm-Gg: Acq92OGgzlG426d0xNv4/yS3wzyzG5+eaymwlA5mGzAqHAo7ODUGlo7Cxrh85w9B9oA
- m5zBmFGfxQJvLh/rI8iFmbnmyvbV+ejLNulO3xvwsIFvPvKhtKILTVY0jNUeWrz5qS3/64Kewft
- SNYkWajwm/KGXjY4XmnzX5o8Kj16Zjn4mqbou0WM+Ie55gX9MGFkLyn5rEE7REUVij2qPTG4Gky
- k5hDoCa61dCGhNH4WTmz8fwxRxpi+auYm+m++cevJbtT/aKN4ptfwUZT+PUYiaxHlaStg5q6/sA
- NW1DIRlFkKQkvJ2UUJRGj6/NE+dDgq3IpEky3iZ3NTK3jIPq
-X-Received: by 2002:a17:907:9446:b0:beb:bf23:ac78 with SMTP id
- a640c23a62f3a-bf0af9fb89cmr31746566b.44.1780447343457; Tue, 02 Jun 2026
- 17:42:23 -0700 (PDT)
+ AFNElJ/Aog5iB+hS7uzuoHXy5gBc1iVskY7A7uQYDAAOFGejW3OK1hf2ghV1M1FGAj9zeaWBnwDedy6PCK5E@nongnu.org
+X-Gm-Message-State: AOJu0YyXPMiQbJXtXeIlBJAkwnw3IxJOQLRpsSfIuMx/RILGTD0WaCQ0
+ ILeTV7rgGcRZrir+Gjua5NV60bUOurzmI6wpSZttyB+dJyaAZURmhEH87Kn7tIodQHLQpAZ5GSQ
+ lmG1IHY0sTbSYh0PPjDIA5r00TOXLt+k=
+X-Gm-Gg: Acq92OHq4T1IysAxkFnUQ1kJkdNazmWgAQaNRr1UzwdM7WiHrp8V7zVztOE6jaY4ans
+ 4dhTsrI+Z0LRjRm9oaHnIYRp2Fk/f+Rn+glmK7JqNt/K1gQQJm0dTMlOCYECvpQh3S07eP/3UEX
+ VmvBa/pIEu15xCSG+nVdxU1KNXg7O3P77zSsnk3essE9XnKbNIU4BaejZ2yCxa2A3ZDjApYIMvm
+ Bnqv1aQ7i9nhMGYBbgkmTQBo3bs2yPrOI5lABXWQxH7huqJL2lYul91gg5hoS2SSZkBQ7rloqvj
+ 0Y9KWxZbpJHPtgIwHASJ+/Rony5yuGTEFaFz6AT95CDno2mF
+X-Received: by 2002:a17:907:cf87:b0:beb:4674:6a1d with SMTP id
+ a640c23a62f3a-bf0b15d8aabmr32478766b.11.1780447412071; Tue, 02 Jun 2026
+ 17:43:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260528054213.678458-1-frank.chang@sifive.com>
-In-Reply-To: <20260528054213.678458-1-frank.chang@sifive.com>
+References: <20260529053519.1224019-1-antonb@tenstorrent.com>
+In-Reply-To: <20260529053519.1224019-1-antonb@tenstorrent.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Jun 2026 10:41:57 +1000
-X-Gm-Features: AVHnY4IKvVCf21hG50UGzHAoPKdheIhX8Zz2EDvxf6t3FZm66T_I7UOOBF9DhIM
-Message-ID: <CAKmqyKPywAKDrKKnVsNKvPpzCz09+La5Ec6zFawN2qwmAf9foQ@mail.gmail.com>
-Subject: Re: [PATCH v4 0/2] target/riscv: Add the implied rules for G and B
- extensions
-To: frank.chang@sifive.com
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Date: Wed, 3 Jun 2026 10:43:04 +1000
+X-Gm-Features: AVHnY4IFwdF7pq9nDcwdvilMnf7yDm4-l6X86zjwsANhtOoiaZsLI6O92UDppX0
+Message-ID: <CAKmqyKPWj5qLUnchuzH4=gyqee9wmwn53FXnsH5dw-kuMvW1bg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Print privilege level and ELP in
+ riscv_cpu_dump_state
+To: Anton Blanchard <antonb@tenstorrent.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ daniel.barboza@oss.qualcomm.com, palmer@dabbelt.com, liwei1518@gmail.com, 
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=alistair23@gmail.com; helo=mail-ej1-x62d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -108,7 +105,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,42 +121,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 28, 2026 at 3:43=E2=80=AFPM <frank.chang@sifive.com> wrote:
+On Fri, May 29, 2026 at 3:37=E2=80=AFPM Anton Blanchard <antonb@tenstorrent=
+.com> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> The privilege level and ELP are implicit state (like virt), so print them
+> out.
 >
-> Add the implied rules for G and B extensions to enable the implied
-> extensions.
->
-> Changelog:
->   v4: Add 'target/riscv' to cover-letter subject prefix.
->
->   v3: Keep riscv_cpu_validate_g() and riscv_cpu_validate_b() but remove
->       the auto-enables as the implied extensions can be enabled by the
->       implied rules.
->
->   v2: Remove riscv_cpu_validate_g() and riscv_cpu_validate_b() as the
->       implied extensions can be enabled by the implied rules.
->
-> Frank Chang (1):
->   target/riscv: Add standard B extension implied rule
->
-> Jim Shu (1):
->   target/riscv: Add the implied rule for G extension
+> Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu.c | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
 >
->  target/riscv/cpu.c         | 26 ++++++++++++++++++++++++-
->  target/riscv/tcg/tcg-cpu.c | 39 +++++++-------------------------------
->  2 files changed, 32 insertions(+), 33 deletions(-)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 952e34fdf5..b38ddc39ea 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -580,6 +580,22 @@ static void riscv_dump_csr(CPURISCVState *env, int c=
+srno, FILE *f)
+>      }
+>  }
 >
+> +#if !defined(CONFIG_USER_ONLY)
+> +static const char *riscv_priv_str(uint32_t priv)
+> +{
+> +    switch (priv) {
+> +    case PRV_M:
+> +        return "M";
+> +    case PRV_S:
+> +        return "S";
+> +    case PRV_U:
+> +        return "U";
+> +    }
+> +
+> +    return "?";
+> +}
+> +#endif
+> +
+>  static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>  {
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+> @@ -588,9 +604,15 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE =
+*f, int flags)
+>      uint8_t *p;
+>
+>  #if !defined(CONFIG_USER_ONLY)
+> +    qemu_fprintf(f, " %s %s\n", "priv   =3D  ", riscv_priv_str(env->priv=
+));
+> +
+>      if (riscv_has_ext(env, RVH)) {
+>          qemu_fprintf(f, " %s %d\n", "V      =3D  ", env->virt_enabled);
+>      }
+> +
+> +    if (cpu->cfg.ext_zicfilp) {
+> +        qemu_fprintf(f, " %s %d\n", "elp    =3D  ", env->elp);
+> +    }
+>  #endif
+>      qemu_fprintf(f, " %s %" PRIx64 "\n", "pc      ", env->pc);
+>  #ifndef CONFIG_USER_ONLY
 > --
-> 2.43.0
+> 2.34.1
 >
 >
 
