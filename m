@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 214DCCD6E55
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jun 2026 07:01:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59920CD6E4A
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jun 2026 07:01:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wUfaC-0004W3-24; Wed, 03 Jun 2026 03:00:08 -0400
+	id 1wUfab-0005IO-Mk; Wed, 03 Jun 2026 03:00:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wUfa9-0004Tn-If
- for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 03:00:05 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ id 1wUfaL-0004mg-5h
+ for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 03:00:20 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wUfa7-0006Ml-Es
- for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 03:00:05 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-36d98b9aa9aso3060443a91.3
- for <qemu-riscv@nongnu.org>; Wed, 03 Jun 2026 00:00:02 -0700 (PDT)
+ id 1wUfaJ-0006dw-6H
+ for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 03:00:16 -0400
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-c858d69bde9so1734402a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jun 2026 00:00:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780470002; x=1781074802; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1780470014; x=1781074814; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mdktWbjeb6VlessgA96IHNIsEfmQLs2g6k25G78KNk4=;
- b=IjKzLlk5RSDVcfCuzSKChmK1SEM9X4ghJT+IFv+vM4KwoBK4RhxYNaR4GN7U6lB1Pv
- vZbbllwTMYrXPAa+jbBBUBn/FacoR/dBY9IrXErYQP5Hj5K8oGLG7mQnlE8IYTJ4aO9f
- CffseybB9duibaA/Q9ln28bDpV8Itx/iWvLGUaZ1BddAnN1AFZxuiZIwKOneLl65fYoF
- bIlz0uOqY+w8QtvFWRWwUkBqFclt+I7odVR4rnFBPr5c9R6HhqUO+eMpdEFLlmjQ7lQp
- jqj+hucfX+ENhRGb3cqLC31cjTk+atwM/1lW0oQCXPLlDDvBj6rr3YrQRIaK6WB6wCNs
- hGMA==
+ bh=KET5U/K+NNsKfxB2MaQGs5abLHYbTDB804zLrrpBzhQ=;
+ b=MepktE7O0sAGwasEQyCwT7yzYpNSQKqGF8qecysAcb0KFmp/pnQFX8pyT9OG/5yrpQ
+ kxNh6s3TxwjkkAsRYVFsqd0pRZLXnk6c4x61pG1ThYrWszGUPfPQc+AMMuHYK7YGCzSu
+ rRCgSmGNO66fWAkMPHNArIJsrOiJpCmKnOho7/4MfXg1akp63FDKywB3FqD2+yfrbbxp
+ ZTnEz6R3CdnIE34lBeQF2itWBxql6pUJYqVEyZvjPOnhELGPO3qQODmBMDs48To+kzYF
+ Gw2iQHePyI2a4oSH+D4H6Sn3e8+/JCYxKENE/7rFNJvzrXXm6002MJDrDVeXprpPAsoN
+ Gcaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780470002; x=1781074802;
+ d=1e100.net; s=20251104; t=1780470014; x=1781074814;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mdktWbjeb6VlessgA96IHNIsEfmQLs2g6k25G78KNk4=;
- b=lDTmCvIRMpDR8kyiYpcWsq9FUcGSRgCCHVTDNtlrU8nfBp8dKnY5xicEtz3jSnJ1lu
- UZ87cf30txlsYGYOETWO0MOoAerZZRcbRe6j+yWFkcxl+wzS2EF+CzfNe4zaBQ6k9VPZ
- pvtKjc1Wi984Yi23VjuuqIVnoQXsmYf4JM0ABabSxqM4I9BF1vRQOjeXuvOnalWgRV+K
- abKkYPjx/XxeeMfC95d7B6E27VmMiyXcciDBUp6B9JKb4bs52CCh5YO/lQXUqdY2m3BQ
- M2FXGC8/0YhJjqb7oZPuw3msuwVKA4BNNh6ye6YE/sm+jV8cAxvSGmMfXtcDQPDiogqT
- Fxig==
+ bh=KET5U/K+NNsKfxB2MaQGs5abLHYbTDB804zLrrpBzhQ=;
+ b=EYVMtHDpynoZYIrzLITfOIlIzkGPYDTixUXL1UEEPwrs0MzqNgsq8ohMnIdMdVxmBo
+ fU9IGXRm8S6bvIoXDxLUhouPz6tt9g8Krv7NrHRpPV7uxDNUk40zlg1ealyGv3tWjw6c
+ VHPfZxDxTomd7mhNs9H2GXYWLuAcEiLEWepV5vTNXEs+H19GdItiSQ/s+9XU+QZer6rF
+ a1GhPGDE69XvQL+0MusyJBM6Us+NURzt/Q0o6/EpqAipSi4g2qSDT1mfF3uEl/hM+X2L
+ DuyAUy5wozN8mrd4UHqngngV3fe78CKEQjjHqFT4syig/fkCS3dPKP9ILbrDxfI6kOxC
+ c4jg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9ogtKaPaP2t+Tj0xzbkxid0nYX8uDQAntUXksX3Uu4IORFJE+fLKTFFIGrPx41R3EzUa7/LlXg/Lsk@nongnu.org
-X-Gm-Message-State: AOJu0YwrTiwFMIyUp77sHverQ4cOjmGggWvi0tj7FU5rl1OARxvvHTVM
- AZInEcx11vLfug6aMMTG5ZitFkow0kL/Bau3vRhm6j23zpIdRSXoJl7C
-X-Gm-Gg: Acq92OHRb8oVpE8EK6J10WdBYid8BXoRgTA0bvgWN6ZQD3vao6kc4aLA5ozQ3+nzzi6
- zLetuw4cM5udSImD4pFW45UDnYZL6pg6lZoP3GxysWc/z0hIDkm3ICH1LWTwNHiu2DVH1zZ6rEc
- 4zh5MD8/qnsBUUEJNsifzdsmfx1vE+pRXlsT0Olpm+ATpuEmWIWVUU7UIIRZXiQPNMoWpBL2MK8
- hJfQNoWSfM9G3yayJUOb+KYUJBO3OU4w8qJqJCLSR0QZPJv42NHQoVx80BW1KlUYuUOhydAra+i
- rQIHJFJ7UnVmVRaVPS2xRasTTIwbpii/8AxUr4TNXCczELuW7WQSe6DxeGSn86mrPPfGmBDBjhv
- 6pGLPRFKUB98DhqRFhGgHjzfTbLwoTffRA4i/R4fvuSmGht81ha04A0cQzcmiPFTM2f7RYpdD5m
- 31hde/jDml3ACUblkCfze3e8GTgI990BjptuI8VqDBH9f87NftVMNl2F0pf1qrxdXVraTAxeBFK
- AbsUb2b8QeMyTbyHIZLEmGif/IM1tCtCQOspexEE5hgbRePkhru/cQ6iZtKufKV
-X-Received: by 2002:a05:6a20:9185:b0:3b4:640c:7225 with SMTP id
- adf61e73a8af0-3b49798adadmr2433945637.46.1780470001872; 
- Wed, 03 Jun 2026 00:00:01 -0700 (PDT)
+ AFNElJ9mVSZXRPNcmHPgE5UsE7Q2D5Vwpb1vy8o1Caas2WsGdrtIe0qgH1w/DMEn8EFkH0GnovdB4AdbZf+6@nongnu.org
+X-Gm-Message-State: AOJu0YxItoTL/5fjHFOzqgNfceodaf8aKWBL+UGc/BP5ZdpdQhrti6YY
+ u88ULlBL8eZwJ7x55PxqZMglHM7gTXBsUBlAoF7kZsk7SO+V1tRw3nNy
+X-Gm-Gg: Acq92OHZa4E5MpN62WAeHb8iCv4OqvZpD0bfW/S+pKKopmDs8u9X+3PtfRlxm3c2UAq
+ ej0s8qWTIbabFVG8YvCpFBsJIvnW9lM0Lx+NAWace1CfFIpopaE7LdQI6+SRuhIAU1RS9Lxu3t+
+ sQe3BIKCg0JUbFXwditjFHF8x7oga8kMOPI1BdQV0DYxfh7zdrPMg+PhHCFNlobfmTYjWCS+vF4
+ WyHSjk8GBAxauVdU5s719E+es4M0F3/qdQVd9gCdS3bAda3brQW7xd0S2HRsztHby6rLgM44Pz6
+ GqHuwn+zJhoTe8JsnBuqua1UGkbsDLQ+3KSzNGI2njOGHhhNh5MOVtkhTUqDsv3+fG5/kIs8bZL
+ 9wpKwsUlh1G5aMlmuFMHMJg2MFHtcwstJHEzP2jZCdNFx2FsckTdw6tBAqmQ3LhKh8kiHyc4HhG
+ AsgT4PN/J1chMSHl4uDN7lJ2+arwQWIWT9JPkvvTJHYgnkZu4dVaeZ81cBJ1e5Tz9Qa+JIqbSJS
+ nqYaP1CFBmLj3yeLEYD1M9ThehWclRjp7cU9mYSTqmDPZsWrePSfBIrIJ5mRFYs
+X-Received: by 2002:a05:6a20:c5aa:b0:3b4:6f7e:d107 with SMTP id
+ adf61e73a8af0-3b49739bbbfmr2582226637.14.1780470013607; 
+ Wed, 03 Jun 2026 00:00:13 -0700 (PDT)
 Received: from donnager-debian.. ([45.124.203.15])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c85df033887sm1283261a12.2.2026.06.02.23.59.57
+ 41be03b00d2f7-c85df033887sm1283261a12.2.2026.06.03.00.00.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jun 2026 00:00:01 -0700 (PDT)
+ Wed, 03 Jun 2026 00:00:13 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: Nicholas Piggin <npiggin@gmail.com>,
@@ -78,17 +78,17 @@ Cc: Nicholas Piggin <npiggin@gmail.com>,
  Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v8 09/12] tests/functional/riscv64: Add tt-atlantis tests
-Date: Wed,  3 Jun 2026 16:28:53 +0930
-Message-ID: <20260603065859.592063-10-joel@jms.id.au>
+Subject: [PATCH v8 11/12] hw/riscv/atlantis: Integrate i2c controllers
+Date: Wed,  3 Jun 2026 16:28:55 +0930
+Message-ID: <20260603065859.592063-12-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260603065859.592063-1-joel@jms.id.au>
 References: <20260603065859.592063-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=joel.stan@gmail.com; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -112,123 +112,177 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Nicholas Piggin <npiggin@gmail.com>
+Add DesignWare I2C controllers to the tt-atlantis machine.
 
-Add OpenSBI and Linux boot tests for the tt-atlantis machine. Based on
-tests/functional/riscv64/test_sifive_u.py.
+Provide a fixed clock in the device tree so that the Linux driver probes
+without WARNing.
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- MAINTAINERS                                  |  1 +
- tests/functional/riscv64/meson.build         |  1 +
- tests/functional/riscv64/test_opensbi.py     |  4 ++
- tests/functional/riscv64/test_tt_atlantis.py | 57 ++++++++++++++++++++
- 4 files changed, 63 insertions(+)
- create mode 100755 tests/functional/riscv64/test_tt_atlantis.py
+ include/hw/riscv/tt_atlantis.h | 14 ++++++++
+ hw/riscv/tt_atlantis.c         | 59 ++++++++++++++++++++++++++++++++++
+ hw/riscv/Kconfig               |  1 +
+ 3 files changed, 74 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index e52aa769c9ae..f4b7e7fd43a6 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1793,6 +1793,7 @@ S: Supported
- F: docs/system/riscv/tt_*.rst
- F: hw/riscv/tt_*.c
- F: include/hw/riscv/tt_*.h
-+F: tests/functional/riscv64/test_tt_*.py
+diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
+index a17732ce8114..7f7d4a5a5905 100644
+--- a/include/hw/riscv/tt_atlantis.h
++++ b/include/hw/riscv/tt_atlantis.h
+@@ -11,12 +11,15 @@
  
- AMD Microblaze-V Generic Board
- M: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
-diff --git a/tests/functional/riscv64/meson.build b/tests/functional/riscv64/meson.build
-index b996c89d7df9..c4456fabd757 100644
---- a/tests/functional/riscv64/meson.build
-+++ b/tests/functional/riscv64/meson.build
-@@ -13,5 +13,6 @@ tests_riscv64_system_quick = [
- tests_riscv64_system_thorough = [
-   'boston',
-   'sifive_u',
-+  'tt_atlantis',
-   'tuxrun',
- ]
-diff --git a/tests/functional/riscv64/test_opensbi.py b/tests/functional/riscv64/test_opensbi.py
-index d077e40f4278..0f8beb7e7a8c 100755
---- a/tests/functional/riscv64/test_opensbi.py
-+++ b/tests/functional/riscv64/test_opensbi.py
-@@ -28,6 +28,10 @@ def test_riscv_sifive_u(self):
-         self.set_machine('sifive_u')
-         self.boot_opensbi()
+ #include "hw/core/boards.h"
+ #include "hw/core/sysbus.h"
++#include "hw/i2c/designware_i2c.h"
+ #include "hw/intc/riscv_imsic.h"
+ #include "hw/riscv/riscv_hart.h"
  
-+    def test_riscv_tt_atlantis(self):
-+        self.set_machine('tt-atlantis')
-+        self.boot_opensbi()
+ #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
+ OBJECT_DECLARE_SIMPLE_TYPE(TTAtlantisState, TT_ATLANTIS_MACHINE)
+ 
++#define TT_ATL_NUM_I2C 5
 +
-     def test_riscv_virt(self):
-         self.set_machine('virt')
-         self.boot_opensbi()
-diff --git a/tests/functional/riscv64/test_tt_atlantis.py b/tests/functional/riscv64/test_tt_atlantis.py
-new file mode 100755
-index 000000000000..48abd5cd27c2
---- /dev/null
-+++ b/tests/functional/riscv64/test_tt_atlantis.py
-@@ -0,0 +1,57 @@
-+#!/usr/bin/env python3
-+#
-+# Functional test that boots a Linux kernel on a Tenstorrent Atlantis machine
-+# and checks the console
-+#
-+# Copyright (c) Linaro Ltd.
-+# Copyright 2026 Tenstorrent
-+#
-+# SPDX-License-Identifier: GPL-2.0-or-later
+ struct TTAtlantisState {
+     /*< private >*/
+     MachineState parent;
+@@ -27,11 +30,17 @@ struct TTAtlantisState {
+ 
+     RISCVHartArrayState soc;
+     DeviceState *irqchip;
++    DesignWareI2CState i2c[TT_ATL_NUM_I2C];
+ 
+     int fdt_size;
+ };
+ 
+ enum {
++    TT_ATL_I2C0_IRQ = 33,
++    TT_ATL_I2C1_IRQ = 34,
++    TT_ATL_I2C2_IRQ = 35,
++    TT_ATL_I2C3_IRQ = 36,
++    TT_ATL_I2C4_IRQ = 37,
+     TT_ATL_UART1_IRQ = 39,
+ };
+ 
+@@ -40,6 +49,11 @@ enum {
+     TT_ATL_BOOTROM,
+     TT_ATL_DDR_LO,
+     TT_ATL_DDR_HI,
++    TT_ATL_I2C0,
++    TT_ATL_I2C1,
++    TT_ATL_I2C2,
++    TT_ATL_I2C3,
++    TT_ATL_I2C4,
+     TT_ATL_MAPLIC,
+     TT_ATL_MIMSIC,
+     TT_ATL_SAPLIC,
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 5de138578b48..b1ff0cbe2f61 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -53,6 +53,11 @@ static const MemMapEntry tt_atlantis_memmap[] = {
+     [TT_ATL_ACLINT] =           { 0xa2180000,       0x10000 },
+     [TT_ATL_SIMSIC] =           { 0xa4000000,      0x200000 },
+     [TT_ATL_MAPLIC] =           { 0xcc000000,     0x4000000 },
++    [TT_ATL_I2C0] =             { 0xd4040000,       0x10000 },
++    [TT_ATL_I2C1] =             { 0xd4050000,       0x10000 },
++    [TT_ATL_I2C2] =             { 0xd4060000,       0x10000 },
++    [TT_ATL_I2C3] =             { 0xd4070000,       0x10000 },
++    [TT_ATL_I2C4] =             { 0xd4080000,       0x10000 },
+     [TT_ATL_UART1] =            { 0xd4110000,       0x10000 },
+     [TT_ATL_SAPLIC] =           { 0xe8000000,     0x4000000 },
+     [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
+@@ -333,10 +338,40 @@ static void create_fdt_rng(void *fdt)
+     qemu_fdt_setprop(fdt, "/chosen", "rng-seed", rng_seed, sizeof(rng_seed));
+ }
+ 
++static void create_fdt_clk(void *fdt, const char *clock_name,
++                           uint32_t freq, uint32_t phandle)
++{
++    g_autofree char *name = g_strdup_printf("/clocks/%s", clock_name);
 +
-+from qemu_test import Asset, LinuxKernelTest
++    qemu_fdt_add_path(fdt, name);
++    qemu_fdt_setprop_string(fdt, name, "compatible", "fixed-clock");
++    qemu_fdt_setprop_string(fdt, name, "clock-output-names", clock_name);
++    qemu_fdt_setprop_cell(fdt, name, "#clock-cells", 0);
++    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", freq);
++    qemu_fdt_setprop_cell(fdt, name, "phandle", phandle);
++}
 +
++static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
++                           uint32_t irqchip_phandle, uint32_t clk_phandle)
++{
++    g_autofree char *name = g_strdup_printf("/soc/i2c@%"HWADDR_PRIX, mem->base);
 +
-+class TTAtlantis(LinuxKernelTest):
++    qemu_fdt_add_subnode(fdt, name);
++    qemu_fdt_setprop_string(fdt, name, "compatible", "snps,designware-i2c");
++    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
++    qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irqchip_phandle);
++    qemu_fdt_setprop_cells(fdt, name, "interrupts", irq, 0x4);
++    qemu_fdt_setprop_cell(fdt, name, "clocks", clk_phandle);
++    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 100000);
++    qemu_fdt_setprop_cell(fdt, name, "#address-cells", 1);
++    qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
++}
 +
-+    ASSET_KERNEL = Asset(
-+        'https://storage.tuxboot.com/kernels/6.11.9/riscv64/Image',
-+        '174f8bb87f08961e54fa3fcd954a8e31f4645f6d6af4dd43983d5e9841490fb0')
-+    ASSET_ROOTFS = Asset(
-+        ('https://github.com/groeck/linux-build-test/raw/'
-+         '9819da19e6eef291686fdd7b029ea00e764dc62f/rootfs/riscv64/'
-+         'rootfs.ext2.gz'),
-+        'b6ed95610310b7956f9bf20c4c9c0c05fea647900df441da9dfe767d24e8b28b')
+ static void finalize_fdt(TTAtlantisState *s)
+ {
+     uint32_t aplic_s_phandle = next_phandle();
+     uint32_t imsic_s_phandle = next_phandle();
++    uint32_t periph_clk_phandle = next_phandle();
+     void *fdt = MACHINE(s)->fdt;
+ 
+     create_fdt_cpu(s, s->memmap, aplic_s_phandle, imsic_s_phandle);
+@@ -350,6 +385,15 @@ static void finalize_fdt(TTAtlantisState *s)
+ 
+     create_fdt_uart(fdt, &s->memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
+                     aplic_s_phandle);
 +
-+    def do_test_riscv64_tt_atlantis(self, connect_disk):
-+        self.set_machine('tt-atlantis')
-+        kernel_path = self.ASSET_KERNEL.fetch()
-+        rootfs_path = self.uncompress(self.ASSET_ROOTFS)
++    create_fdt_clk(fdt, "periph-clk", 100000000, periph_clk_phandle);
 +
-+        self.vm.set_console()
-+        kernel_command_line = self.KERNEL_COMMON_COMMAND_LINE + 'earlycon=sbi '
++    for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
++        create_fdt_i2c(fdt,
++                       &s->memmap[TT_ATL_I2C0 + i],
++                       TT_ATL_I2C0_IRQ + i,
++                       aplic_s_phandle, periph_clk_phandle);
++    }
+ }
+ 
+ static void create_fdt(TTAtlantisState *s)
+@@ -581,6 +625,21 @@ static void tt_atlantis_machine_init(MachineState *machine)
+                                 s->memmap[TT_ATL_UART1].base,
+                                 s->memmap[TT_ATL_UART1].size);
+ 
++    /* I2C */
++    for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
++        SysBusDevice *sbd;
 +
-+        if connect_disk:
-+            kernel_command_line += 'root=/dev/vda panic=-1 noreboot rootwait '
-+            self.vm.add_args('-device',
-+                             'virtio-blk,drive=drive0,serial=0x1234,bus=pcie.0')
-+            self.vm.add_args('-drive',
-+                             f'file={rootfs_path},if=none,id=drive0,format=raw')
-+            pattern = 'Boot successful.'
-+        else:
-+            kernel_command_line += 'panic=0 noreboot '
-+            pattern = 'Cannot open root device'
++        object_initialize_child(OBJECT(s), "i2c[*]", &s->i2c[i],
++                                TYPE_DESIGNWARE_I2C);
++        sbd = SYS_BUS_DEVICE(&s->i2c[i]);
++        sysbus_realize(sbd, &error_fatal);
++        memory_region_add_subregion(system_memory,
++                                    s->memmap[TT_ATL_I2C0 + i].base,
++                                    sysbus_mmio_get_region(sbd, 0));
++        sysbus_connect_irq(sbd, 0,
++                           qdev_get_gpio_in(s->irqchip, TT_ATL_I2C0_IRQ + i));
++    }
 +
-+        self.vm.add_args('-kernel', kernel_path,
-+                         '-append', kernel_command_line,
-+                         '-no-reboot')
-+
-+        self.vm.launch()
-+        self.wait_for_console_pattern(pattern)
-+
-+    def test_riscv64_tt_atlantis(self):
-+        # tt-atlantis machine has no PCI host yet, so no disk
-+        self.do_test_riscv64_tt_atlantis(False)
-+
-+
-+if __name__ == '__main__':
-+    LinuxKernelTest.main()
+     /* Load or create device tree */
+     if (machine->dtb) {
+         load_fdt(s);
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index aaf029c9ed5e..38180a903fbf 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -129,6 +129,7 @@ config TENSTORRENT
+     select RISCV_IMSIC
+     select SERIAL_MM
+     select DEVICE_TREE
++    select DESIGNWARE_I2C
+ 
+ config XIANGSHAN_KUNMINGHU
+     bool
 -- 
 2.47.3
 
