@@ -4,145 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2BE5CD6E64
-	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jun 2026 09:28:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CA6CD6E64
+	for <qemu-riscv@archiver.kernel.org>; Wed,  3 Jun 2026 09:53:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wUhsn-00062C-9r; Wed, 03 Jun 2026 05:27:29 -0400
+	id 1wUiI8-0002w2-QO; Wed, 03 Jun 2026 05:53:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1wUhsm-000620-8N; Wed, 03 Jun 2026 05:27:28 -0400
-Received: from mail-japaneastazolkn190120002.outbound.protection.outlook.com
- ([2a01:111:f403:d405::2] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wUiI6-0002vp-WD
+ for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 05:53:39 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1wUhsk-0007jI-IO; Wed, 03 Jun 2026 05:27:28 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fPHnIeouoKL6U1WC3YhMR83Du1Kj3Po9sl3V1vHyZUSHpv/UTy7ReTuH90/2b5NLSU+t+vOXF8D/QJjjSFL54n3SGtwn52SBzojc+UeEhQhB5uJRzX+O63B8w/HEsOT761caMhGrucatJ+W+WvCMxvxPetxjGJUCVOOkICAkq/GziSeiqU60TZLAQCtS6sJQ8vrSUvLd/HBGeR/wF93vxFHeHQzLldB3OLRC0rjwBfgOMsqOkrH9OSrPc8Irg4R1OZ9MC5lDksF6QjKyeGJUTLl7Ev2IUiphTRXh+GZmQJbEQakv61xQGVsnLAMVshyPBF/zuX0sTa13EL7sxazbtA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3LskRRrcPpoCSWv3AvuDX9y4BRPfdNVUULWuv0g2+AM=;
- b=oI0k/33gE6fJtfHDcL9bMkfTV0WwbclQyp3Bf//FSUlg+ErEmzzNrYa4gyLMCP6t6dNlVTYbdniUEaSd0yVaT212LK9jfRGBeVppFbP5Dfvl6iJLFYLHr6EWN2Znl2oFyB5Qf19YyBo8P5dnwoOq/4kd+YgnCH6IcNkH+al/mgH+bv6xjXEdzc+BA8Y7PTQGFGVCO+CbEuOUcOmrgvhcb7OlRVVMFEbp8h++/hHUABInee3ioZQT0zIVa6L6EeB2jtgJn54RrjXZE0QlQ2HW+rGjny0+bPideX69OmoBZayyzyMZ1borBhUA4YWtyWK7XcFy351rJlJUqee/68H1vw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3LskRRrcPpoCSWv3AvuDX9y4BRPfdNVUULWuv0g2+AM=;
- b=j+SowRIpBqLszJS6zSVwSPLATK0YQPgXiOmPJ2Gw1eZZLKqDHICnwi0Q0XPs95bAlgO3Nt5RVh4Y+0PkLCf+EA47uWVlRGSPLm/GhYZrl+i6tsT9YWvJbnIW1KTIX+7/CXaDnteyY36lv2DQt6mfmD6AxTSjFpbtMM65D+CA9rAWgvC6mIku4w4S8ymgGdIarv3eWd0CkC3Sx0d4oQVP8X2d/bfBzobLzSsevNFzR4IGJY+WRu6rKg2xp+mpDkYEu3EeRA//lMFbuDJLfXq77yohrMTBxqMkMBxEFD4EsGfokrOxS9eE29Dz+Rzoib89tmy00RjfOCVbXCIlmwc26w==
-Received: from SE3PR04MB8922.apcprd04.prod.outlook.com (2603:1096:101:2e9::7)
- by TYZPR04MB6954.apcprd04.prod.outlook.com (2603:1096:400:333::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Wed, 3 Jun 2026
- 09:27:18 +0000
-Received: from SE3PR04MB8922.apcprd04.prod.outlook.com
- ([fe80::3450:f139:5238:8f58]) by SE3PR04MB8922.apcprd04.prod.outlook.com
- ([fe80::3450:f139:5238:8f58%6]) with mapi id 15.21.0092.006; Wed, 3 Jun 2026
- 09:27:18 +0000
-Message-ID: <SE3PR04MB8922C94211AEA9EE81E88EEAF3132@SE3PR04MB8922.apcprd04.prod.outlook.com>
-Date: Wed, 3 Jun 2026 17:27:11 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/intc: Fix KVM VM start failure when AIA is configured
- as aplic-imsic
-To: liu.xuemei1@zte.com.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20260601111637608gw-0SX_SUzpTzaHRaZftH@zte.com.cn>
-Content-Language: en-US
-From: "Nutty.Liu" <nutty.liu@hotmail.com>
-In-Reply-To: <20260601111637608gw-0SX_SUzpTzaHRaZftH@zte.com.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: TY6PR01CA0020.jpnprd01.prod.outlook.com
- (2603:1096:405:3bb::12) To SE3PR04MB8922.apcprd04.prod.outlook.com
- (2603:1096:101:2e9::7)
-X-Microsoft-Original-Message-ID: <51edf9b6-dea3-4931-a054-12e7a8d1903f@hotmail.com>
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wUiI3-0000ng-Bd
+ for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 05:53:38 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6536RI8d1200075
+ for <qemu-riscv@nongnu.org>; Wed, 3 Jun 2026 09:53:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ KpgpF7A16AAQFzB9hYeS2UN2mJRYNAL4rsBg1DNRLk4=; b=c7NKmB1HwYR/9o8S
+ 89B+PgN+cLxpxm8/nFJhkZMFyrdPe2p4wwld3P2lxOpSStKb294XoIoKtaWlHUFU
+ IBZdYXtkk8AMurBEML6b42NBiWGOWIP+2BaInZ+vPZ1ErkEDZYYzxJEy3TtYPx8r
+ i0TMfMQYlF6gOmr8WzKZnnKSzC6FRputO005aIUANrYArSTT0tvHFw/CkOlZHpWU
+ PgcMJGZLeqYzUBMQapRTNIcESOqoipygsYELdzsG/6cGgrcuwRvmKdl1gZRzpKha
+ yQQ90iibUHAFp0HeWfH6javRDwg4t9KWtDR/HgrzmxR0RB0XHYhCWKBLYsANJbET
+ QJbLMQ==
+Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com
+ [74.125.224.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ejckw1dj1-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jun 2026 09:53:33 +0000 (GMT)
+Received: by mail-yx1-f71.google.com with SMTP id
+ 956f58d0204a3-66073c7c2f1so5868040d50.2
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jun 2026 02:53:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1780480413; x=1781085213; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KpgpF7A16AAQFzB9hYeS2UN2mJRYNAL4rsBg1DNRLk4=;
+ b=dv7O31KV4UeFUDfcLNkfpc7rYlfNDJjrpGKhrSQbxL0FZD3y9SIeNFiIX1pMEh4Xt4
+ kLXt4ENxDYMRLpRW8zKLuvRIHXz3YT6C6QfVWx/FBFwrEHzrxrHbQ3FfjA2UJdWVgXgu
+ t/p6i9wcZsRPb3N7EONWqpjhc7t5hVt72TFeAAXVA3XSrFq9SL+4l85tyzURmskko/vV
+ 97pPkHKsw6dlAcZTLP1ku65GFR7+rkgdL7rFlFSDSjt3fzxYomO1MBkzKUTyq6dWEcbb
+ j8tA92T2Lu01s7s92Ute0XY80dntp33k+eVQEOqyhMsfp7amfck8aDfOJcYqm1OKycFm
+ 4TZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780480413; x=1781085213;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KpgpF7A16AAQFzB9hYeS2UN2mJRYNAL4rsBg1DNRLk4=;
+ b=kX0a0To+443H/G42+7kpzg16TxYKrTUDHXz8BoFrnMwU6Tc7MTpKJsbrGW8shzW0Sh
+ 7WQ3WowGK6ctuAiDyU74fMXk/Unpzm1I+BhqoREG9q68GC/JUL6KCt7wLKyEYUeLshjs
+ 4hG0O0xoQwMVLJ2lXt48jw/FeIO3vWmwnyOY67XFNcWufOCSvC879UHdCDExYjZU0LLi
+ lhIQ0JsK1Mj+F3f2C08VPzGERmUymKz6lgbkuyymPEYxYyZr9buC8ioSm5RgcFq66HaI
+ buZncO4KOzED1hV96c6Ff5d2Lj/fFsHVw6KnDUo7P8J8ZzmCFl80mAMjCZp2ZTBj62g5
+ cQ+w==
+X-Gm-Message-State: AOJu0YzViqpxE041r642OWhd03KOCZc2Tdi8VuwCEuWkeXb7IqysfjXa
+ AL7CmlY2yLYSrkO45TX/ELyJIJ8PABwpp1I6LnG+p4O8FAPxKl+G3tE0NCPUXgJLE7oED3UJnhM
+ gKSy20siK23OwimFUAIPCvApiMb7yHzzQADsmp4rp8nKSj7LBL1gtiSGUWg==
+X-Gm-Gg: Acq92OGqsZjoS2BCCSNRc6Q+eodkqtBIl4DcrcB2OjRyDtND4QFSV2Z/431qeCod1Hj
+ vfj1qLJI8wZGaQoENhBp0YhiUs1D+bq4EyfXJrvJsfRAktt+VrDTnAMpu5EHe5uWnXxFydZv2TU
+ FyJ8AYq0COFs4O2DiyrOoCQp79v3+PUiVUnzDJ/F2CdAMo9mlcj9hv5RfQ6fPUQEixpPfPtEWaH
+ A025e+lBeGBoxFbflGIAxTQgdtCc5YmfMxlHwy8XQfVr/yIYf6I6P2Wz/A3GHGhceWLaHLTDAYk
+ RlSfIezT3JPJRWlXk21vzY+kkEQBX/mzPDI7JHOH2U9wzQZLMhve5euiNDGM2cRgFWuxU9E/vFs
+ /VxhDUOfi/sPBPtQ6tifDS4gXe51vmh31Dod2PV4ukzy1WW49ZYni1DL61lFMhTEEzpjW
+X-Received: by 2002:a05:690c:b10:b0:7dc:1d92:180a with SMTP id
+ 00721157ae682-7ea4db5d23emr23185057b3.50.1780480412846; 
+ Wed, 03 Jun 2026 02:53:32 -0700 (PDT)
+X-Received: by 2002:a05:690c:b10:b0:7dc:1d92:180a with SMTP id
+ 00721157ae682-7ea4db5d23emr23184897b3.50.1780480412360; 
+ Wed, 03 Jun 2026 02:53:32 -0700 (PDT)
+Received: from [192.168.68.106] ([177.170.117.62])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-7ea23b9b4d7sm13013607b3.42.2026.06.03.02.53.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 03 Jun 2026 02:53:31 -0700 (PDT)
+Message-ID: <6633f78c-2291-4f6e-9ef0-9d3198cd30a6@oss.qualcomm.com>
+Date: Wed, 3 Jun 2026 06:53:28 -0300
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SE3PR04MB8922:EE_|TYZPR04MB6954:EE_
-X-MS-Office365-Filtering-Correlation-Id: cee4f769-b040-452e-6a01-08dec1524e5d
-X-MS-Exchange-SLBlob-MailProps: AlkLxVwsndm0VyxXF8Qt5+inPVJ6WOFFUD46XjF9sLLjvtMhgW/DsRYS7Yi1PFmUdomz5n+u9KE3cuZ3EdvHW+nA8KRKoz9Sz3/5MiPq3gQfvXPOUu/fr8hXIGKHNmgG0F/A8TraU90fMKpNVRWAOyznqW094jY58/DMTTEtxfw6FXAoiw6ujytSB52sSrZ3Drhruz22xEKA3jRHEiVgAS14zBoIMO5k4Ktx/yNuEOrcob9C+4I5UCw8heN89kPj9vfkUClFZ+UxxjPI3Av1kZAYCWlRUD2Fu0shD7m22um/gImnJ4R1bKfo+peEzZiSQWQooZ3f8Wr+3UNqPwIl9Zw93OWEYtSXNoPQHmGli5lKdiZE422cbZ2hUf4XC3ZB/bhlw0/c1KeuiurK0yGFjWpwdz8AS8JsaoKPyQ6QbTDU+LcesmzjMow4z19ngMls/HuegnLACHX/+otmPRoeBpKG1r4ZFRHJfkNBXUlOsZ6PN1BbDsiwCjq+5qGqe/tbXZIVQSLUUt6rchRJBmws7kKibq3DVXCx7KftADulJUX9UQ+akvUZCvUMRPQvm8jVOKhP/T6vctY7TFCJkCokB5SY+xCvpV76IMISSHa5RY3RiaiSOl5P8Qwj+p+LUKWwyzkjqKVQ4vNRDl7q5yS6SWCV1jXDnJhXiTonbUkz8d9YReo0CAvs0THHrGtsGRx7V0IDO3lkB3UJ8sd8d0ZDbsR9MiaMwMCZxtGxCa4LAO5Ii9vRGNetrJXMAJVRPJCTKeQ+0/POxtpku4wUde6g777U8B+Tt0wy
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|5072599009|45011099003|51005399006|19110799012|8060799015|6090799003|15080799012|23021999003|12121999013|40105399003|440099028|3412199025;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NzQySzh6RTVjeUMyTDNmbnNiMmtJZk9NeTZWR0E5aWhQc1NqeXZYTjFjQXV5?=
- =?utf-8?B?ZmVwWE1xdFU0NUYrUUsvQldkcWJDekxOK2hHZTVmU2pRVFd4bE1JVEdTcDhX?=
- =?utf-8?B?VU9heXc0Mm5rcktzK21jQllRV09ubDJUeTVuUDlFb0QyVStyTUgzZVFESGNR?=
- =?utf-8?B?ZHNNRFpTd2t4bWczckZXVEQreHRhT0tsRDZzeUo3YmptSDRrUVJZVDRtTkZM?=
- =?utf-8?B?MkZRY3R5OUZvakRicHdJUFpWbHZMemlXT1hCRWxzTlp0R0hlMVByc2ZOYkpQ?=
- =?utf-8?B?N0pMME01Q2RsTElpLzFncGVxRVpNRWp2ckVCc1dQb3dWNHJSb3NZRndqeUxa?=
- =?utf-8?B?dGl5MWtyVG44SUE1WFFsNU9pVVZHVFltbWNOQUZjR0dwb2hDRWRFWkRsbFMy?=
- =?utf-8?B?dVRtSEV5R2xFNkxhdndXWjVjZzhjQXRObEY3RFZ0K2ZNU0tpSDlSZk9MUWJH?=
- =?utf-8?B?N1BKSE43NHBaWHRwTE9rMlIrWUxIcFpnR0VmOWNodHNWdjJNY2VtZGNZZnhB?=
- =?utf-8?B?WFJaSVpKb2wwZEgwbmg2QzdHcHhUSmhkZ01JZGdoMEhNVFNSTnJwMTFJS1lN?=
- =?utf-8?B?N0Y3aXZ2SDN2MzFQOUJaVkJ1dy9VVmRKNXYvcFMxODUreVFkWXRPVkFQcUx1?=
- =?utf-8?B?bUt1NEZCd2haRVdTbnk4K3Z4eTZzMmw2SXNEMWQvYVkxdWRreWRqY1UyVnBN?=
- =?utf-8?B?VVY4cVZzUDA5QUNGTXQ3V3ArQmRUMkcwNTQvdzhPWmFGWVExU29ubG5xa2Mz?=
- =?utf-8?B?S2tDbGN4WFFrY0oySldBUjlnTDJPTjNpRTBkUU80Wnl4d1pHUlNaRHNLUVoz?=
- =?utf-8?B?QksxODQ2K0pJYlBmdC9Lclhwbk1xRzE2dzM5TkRvZXk4Q1hhQ05kR1B3cVEz?=
- =?utf-8?B?WGdyRHMzTXFEM0YvVEtLMUJLUC9EeTcyRUZ0dXIwaGQyYzgxYjdManFFMTFs?=
- =?utf-8?B?YSt0K0N2REVVSk5hOS9FeERMbTcyT3hPMFY3N1VYcHNtSUN4UldueHoxYWNn?=
- =?utf-8?B?L05oL1N2VDcvZG93Yk1iN0JORFFxeWh1YkVwMkZRaGlLZDJnVElaaFkwci9K?=
- =?utf-8?B?Q3Z2M0YvMVhycXQ0dHhnNGdrbFJ5M0tsc0hWNnQvSEhSdzF0SjR6Q0ZvYUl5?=
- =?utf-8?B?SC9LN0lTa3h2U1EvMmlkZlVvZG12b2MwS25tdHJ2ZWFudy9tdkhnS3U3QXho?=
- =?utf-8?B?RzJ5eGlpdk12Z1dSTWR3N3NIVWFOdzhMOER0TmxORmhwbDM0TWpGYjBIdlY3?=
- =?utf-8?B?c0wyWGsyblZEWTlmdmRWczQwSkJVbkJDVzNlNXlCMUtGVlpxM0c3anRoaUtE?=
- =?utf-8?Q?QCzBl0ra+APwe54dmDEA5xnnJMtayUA3Kj?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OUlqZ21oSklkSjQ0eEdBcWUrb3Y1cTNYTUJhclZVOUdHZFlLUENjWkJrYS9Z?=
- =?utf-8?B?VXdTOGFrZ2dBV1ZPTERxN1BaWDRSb1ZWWDA3SHF2NC9VdEQrN01hc2xjQWMz?=
- =?utf-8?B?dmVpaGR1VkhNeE5pYkR6NGZpNHo4Vms3Q2lzeDRoWUk3dE1hcExnL2EyQWFD?=
- =?utf-8?B?TTNWbk5OazZoREd3ZCtPN2dPWml4UFBqTEJQcTJaaURMUUNGdHpUV3JZSy9p?=
- =?utf-8?B?R0l1QzFKbTFQQ1pDM0lFVW5yTUZ0aVk3amdMWWlldTN5NDdtVDh3Wmw1dlUv?=
- =?utf-8?B?RTdWRDdUdDJuNjdRWm9OcWk2clgvQkNZKzM5bWdJTnVIYkt5Rkw5RlRONXVu?=
- =?utf-8?B?Wm9yTWo4c1EvWG84UFc0RC80UVpHTWRjN3RhMVNnK2JkZklmMHhLYkFsdG82?=
- =?utf-8?B?NWFHUVpQNlIvdTBBSjZieittTTlsbjNqeDBVTWhWVm93ZjNUZlRkdk9aL1dx?=
- =?utf-8?B?bGlFUFBOSGkwUS9SMzd0N1JTUTlGWWxYTzdZa2gySUpWaHpxa3ZHOEhnaGds?=
- =?utf-8?B?UTZudnViWEJieHdDT3RRcjZlUGh2KzZYQlVnNnpvb0d4N2JCKzl6MGppT09V?=
- =?utf-8?B?ZTlJY09TNGdENU5BL1h1YllpTDhnUSthdklsS0Q5WEZUTkhhQ05WVXJCbm5L?=
- =?utf-8?B?NndKSE9XTnk1eklRdFBMMWY2bWZoYW5xMHNBU0xJbms0dmZnREhacVN4d2dy?=
- =?utf-8?B?akc5T05ZU3h6bHhrU0pHQzB2TkFFY1k1U09iVU9DNHNLOW9pM3hUNmVTelkz?=
- =?utf-8?B?c0llQmEzZkpWMVRMK1VaaGpDVTIrOGJVVkM4U1R5SlMvbjVpbFZldVBhVU9Z?=
- =?utf-8?B?UjkrSmtaUGlnOWlveDRNeDl1RWpCaklpelA0Qk5hYndkcWlpKytHTzRDNXFw?=
- =?utf-8?B?SW5PT3BDUWI0VmFwTHRFemdWS0FVTFBqTTFTaGJSd0JCOE9XUDZyUnVWWXU5?=
- =?utf-8?B?ck9JcmdKODN5MEd4MUp6aE1wMnBnSzlTWW85RUpPdlFjcmV6dFZ0SUwyaUVW?=
- =?utf-8?B?c2tnc29lT3hCVzE1RTJwVUZBSnp3c2o3VkVhZUc5eWFxZW8rcDlJZWYzNlRG?=
- =?utf-8?B?amtJWEthYXBSL2dtMkx4elQwNllocVJPVEZmYXMzbDFaSHFIS1lDVXlXN0hy?=
- =?utf-8?B?V2VoTDExV3FPT0VSTml2SUlZUGQxbG5udSt4TGJMRTlmZHhIZkFZR1MyVkEx?=
- =?utf-8?B?dkVlWlRWdDB6VW1abDVFUlp1Y2R2RjQzWi9uTUxwdnN5Z0lGWkk4WUNqVEph?=
- =?utf-8?B?ZnVuTEtaSTRqbHJLWnNFS3JLdkJzVjBZTXUxUCtmVTlRMHVuN1dEY2RjS1Fl?=
- =?utf-8?B?LzVWNURkZEgzKzQvOU9qVUdJYVV6N3F3TEl6bVZxT2N5bWpjSU1ReDJ5aFJL?=
- =?utf-8?B?ZVl4MVE0NUxSb1oyaUpsMzJuVUpHRnJtRzd2UURuQy9iQUJwcjZHSmVRMFJW?=
- =?utf-8?B?aGwrUkY3U2cwZmVDajVhb3AxdVRaRjg2aGNaRDYzOFhieUdSY2R6RlErc3J0?=
- =?utf-8?B?aThzOWltZURrWE04WUpZWExJaytLb2lka1h5QVgrbXh6WW0xUFRyWVRJUzZy?=
- =?utf-8?B?VGtWTy9VVDhOWTY1YjM5eS82R3ZYNnJndENkTVFPZXZLQThHU2I5RFpSTUpv?=
- =?utf-8?B?ZDVpT1dFb3BCb3hWVGhKQlFQZWFHWjVKbURXUUYrTVU3ZFZJR1NBWmZSRjBR?=
- =?utf-8?B?NThaZDNWeEZ6SDlWWkx1SkxkckhNVy9YM01qVHMxdGlZWEZaUDhIa0VtaDRx?=
- =?utf-8?B?NUZDcTN0Wkxvci9Kc0VuNWkxczlUT2NsQUZWd0RNWExKTGV3VkU3NHAvWDFh?=
- =?utf-8?B?Z0hpZFJuSjdhUTcvT2xYTXpaeVEwY29URDNybjM0WnYzcDJySVc1ajhoTGx6?=
- =?utf-8?Q?96X0Cr0/B4ZLu?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: cee4f769-b040-452e-6a01-08dec1524e5d
-X-MS-Exchange-CrossTenant-AuthSource: SE3PR04MB8922.apcprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2026 09:27:18.3093 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR04MB6954
-Received-SPF: pass client-ip=2a01:111:f403:d405::2;
- envelope-from=nutty.liu@hotmail.com;
- helo=TYPPR03CU001.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 15/27] target/riscv: Fix arguments to board IMSIC
+ emulation callbacks
+To: Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, pierrick.bouvier@linaro.org, philmd@linaro.org,
+ alistair.francis@wdc.com
+References: <20260520125406.28693-1-anjo@rev.ng>
+ <20260520125406.28693-16-anjo@rev.ng>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260520125406.28693-16-anjo@rev.ng>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: DDGll-I54MTKvM2IubRUiTshnsHAY60-
+X-Authority-Analysis: v=2.4 cv=edUNubEH c=1 sm=1 tr=0 ts=6a1ff99d cx=c_pps
+ a=ngMg22mHWrP7m7pwYf9JkA==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=KKAkSRfTAAAA:8 a=JF9118EUAAAA:8 a=nrPx4w6NPzF0ZZKuB-IA:9 a=QEXdDO2ut3YA:10
+ a=yHXA93iunegOHmWoMUFd:22 a=cvBusfyB2V15izCimMoJ:22 a=xVlTc564ipvMDusKsbsT:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjAzMDA5NCBTYWx0ZWRfX6v/xqF1rrS+V
+ 8KAqTaVqSKSy1fvt5QcTvBuWA+zvIcRyJMjhwWlu0bR8OYunUzSwpBOTZfcCzIiUACDpiYTkZIM
+ wWGYxacBy0/NDAZnfTudBa/KvY4UPMGhvTbkSjylX5r5dCp1yHzr+okUYEMl/PoWwVZhq+w4+tZ
+ GLdWaEg571j9z0F6NPUBtLXhgQnf/QtW1YVWqsP4g5Qi7t4sCHJimjDD3AOqRpjalewsqTm2er+
+ nSDwT6MLjI8ix0nC+2c8ALlvQVwgYwGWWMtl/f4QZcfjyqOjM7+xqNTt+sY/zb6jcmynkeeMh6E
+ rA0GkznbQkwvPGxfQ2Ybl/alHa9oD+ZACcdnqaLSmxWvCK+NAxE8XMEklqJshBQJPtgNv2dxDQC
+ trCBPjBdhuFs7+bLGsqIZKQYbuZaHS/lQXi0YpaAECTwSN+y2dZGnsEFAIBDsqz28tbaPE2ygnp
+ A83YHEAXjXTyrqD2xjg==
+X-Proofpoint-GUID: DDGll-I54MTKvM2IubRUiTshnsHAY60-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-03_03,2026-05-28_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 adultscore=0 malwarescore=0 suspectscore=0 impostorscore=0
+ spamscore=0 lowpriorityscore=0 bulkscore=0 phishscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606030094
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
+X-Spam_bar: -
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_BL_SPAMCOP_NET=1.347, RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -158,135 +151,360 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi,
 
-On 6/1/2026 11:16 AM, liu.xuemei1@zte.com.cn wrote:
-> From: Xuemei Liu <liu.xuemei1@zte.com.cn>
->
-> Since commits 99bfcd329a ("hw/intc: riscv_aplic: Add reset API to APLIC")
-> and 766391483b ("hw/intc: riscv_imsic: Add reset API to IMSIC"), when KVM
-> acceleration is used and AIA is configured as aplic-imsic, the APLIC and
-> IMSIC devices are not emulated (they are handled in-kernel). In such
-> cases, the realize functions do not allocate memory for their internal
-> register state, leaving the corresponding pointers NULL.
->
-> The reset functions riscv_aplic_reset_enter() and riscv_imsic_reset_enter()
-> subsequently attempt to access these NULL pointers (e.g., via memset),
-> causing a segmentation fault and VM start failure.
->
-> Fix this by guarding the reset operations with condition checks that
-> skip the emulated‑specific logic when the in‑kernel mode is active:
-> - For APLIC, check riscv_use_emulated_aplic(aplic->msimode).
-> - For IMSIC, check !kvm_irqchip_in_kernel().
->
-> Fixes: 99bfcd329a ("hw/intc: riscv_aplic: Add reset API to APLIC")
-> Fixes: 766391483b ("hw/intc: riscv_imsic: Add reset API to IMSIC")
->
-> Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
-It would be better to split this patch into two fix patches.
-Otherwise,
-Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+This patch is causing a seg fault in rmw_xireg_aia():
 
-Thanks,
-Nutty
+
+$ gdb --args ./build/qemu-system-riscv64 -M riscv-server-ref --nographic
+
+
+(gdb) bt
+#0  0x0000aaaaab3bda20 in rmw_xireg_aia
+     (env=0xaaaaac194d80, csrno=849, isel=114, val=0x0, new_val=0, wr_mask=18446744073709551615)
+     at ../target/riscv/csr.c:2735
+#1  0x0000aaaaab3be320 in rmw_xireg (env=0xaaaaac194d80, csrno=849, val=0x0, new_val=0, wr_mask=18446744073709551615)
+     at ../target/riscv/csr.c:2950
+#2  0x0000aaaaab3c5628 in riscv_csrrw_do64
+     (env=0xaaaaac194d80, csrno=849, ret_value=0x0, new_value=0, write_mask=18446744073709551615, ra=281472560986724)
+     at ../target/riscv/csr.c:5813
+#3  0x0000aaaaab3c5884 in riscv_csrrw
+     (env=0xaaaaac194d80, csrno=849, ret_value=0x0, new_value=0, write_mask=18446744073709551615, ra=281472560986724)
+     at ../target/riscv/csr.c:5871
+#4  0x0000aaaaab3cb670 in helper_csrw (env=0xaaaaac194d80, csr=849, src=0) at ../target/riscv/op_helper.c:75
+
+
+Down there:
+
+
+
+On 5/20/2026 9:53 AM, Anton Johansson via qemu development wrote:
+> In hw/ the relevant RISCVIMSICState fields
+> eidelivery, eithreshold, eistate are uint32_t.
+> 
+> Signed-off-by: Anton Johansson <anjo@rev.ng>
+> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->   hw/intc/riscv_aplic.c | 52 ++++++++++++++++++++++---------------------
->   hw/intc/riscv_imsic.c | 16 +++++++------
->   2 files changed, 36 insertions(+), 32 deletions(-)
->
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index c2c67c29e6..0f61b67fc5 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -910,35 +910,37 @@ static void riscv_aplic_reset_enter(Object *obj, ResetType type)
->       RISCVAPLICState *aplic = RISCV_APLIC(obj);
->       int i;
->
-> -    aplic->domaincfg = 0;
-> -    memset(aplic->sourcecfg, 0, sizeof(uint32_t) * aplic->num_irqs);
-> -    memset(aplic->target, 0, sizeof(uint32_t) * aplic->num_irqs);
-> -    if (!aplic->msimode) {
-> -        for (i = 0; i < aplic->num_irqs; i++) {
-> -            aplic->target[i] = 1;
-> +    if (riscv_use_emulated_aplic(aplic->msimode)) {
-> +        aplic->domaincfg = 0;
-> +        memset(aplic->sourcecfg, 0, sizeof(uint32_t) * aplic->num_irqs);
-> +        memset(aplic->target, 0, sizeof(uint32_t) * aplic->num_irqs);
-> +        if (!aplic->msimode) {
-> +            for (i = 0; i < aplic->num_irqs; i++) {
-> +                aplic->target[i] = 1;
-> +            }
->           }
-> -    }
->
-> -    for (i = 0; i < aplic->num_irqs ; i++) {
-> -        riscv_aplic_set_enabled_raw(aplic, i, false);
-> -    }
-> -
-> -    /* Need to unlock [ms]msicfgaddrh.L */
-> -    aplic->mmsicfgaddr = 0;
-> -    aplic->mmsicfgaddrH = 0;
-> -    aplic->smsicfgaddr = 0;
-> -    aplic->smsicfgaddrH = 0;
-> -
-> -    if (!aplic->msimode) {
-> -        /* Reset IDC registers only in non-MSI mode */
-> -        for (i = 0; i < aplic->num_harts; i++) {
-> -            aplic->idelivery[i] = 0;
-> -            aplic->iforce[i] = 0;
-> -            aplic->ithreshold[i] = 0;
-> +        for (i = 0; i < aplic->num_irqs ; i++) {
-> +            riscv_aplic_set_enabled_raw(aplic, i, false);
->           }
->
-> -        for (i = 0; i < aplic->num_harts; i++) {
-> -            qemu_irq_lower(aplic->external_irqs[i]);
-> +        /* Need to unlock [ms]msicfgaddrh.L */
-> +        aplic->mmsicfgaddr = 0;
-> +        aplic->mmsicfgaddrH = 0;
-> +        aplic->smsicfgaddr = 0;
-> +        aplic->smsicfgaddrH = 0;
+>   target/riscv/cpu.h        | 42 ++++++++++++++++++++-------------------
+>   hw/intc/riscv_imsic.c     | 34 +++++++++++++++----------------
+>   target/riscv/cpu_helper.c | 12 ++++-------
+>   target/riscv/csr.c        | 24 ++++++++++++----------
+>   4 files changed, 57 insertions(+), 55 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 10afc617f8..9823d7d581 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -200,6 +200,24 @@ FIELD(VTYPE, VMA, 7, 1)
+>   FIELD(VTYPE, ALTFMT, 8, 1)
+>   FIELD(VTYPE, RESERVED, 9, sizeof(uint64_t) * 8 - 10)
+>   
+> +#ifndef CONFIG_USER_ONLY
+> +/* machine specific AIA ireg read-modify-write callback */
+> +#define AIA_MAKE_IREG(__isel, __priv, __virt, __vgein, __xlen)                 \
+> +    ((uint32_t)((((__xlen) & 0xff) << 24) |                                    \
+> +                (((__vgein) & 0x3f) << 20) |                                   \
+> +                (((__virt) & 0x1) << 18) |                                     \
+> +                (((__priv) & 0x3) << 16) |                                     \
+> +                  (__isel & 0xffff)))
+> +#define AIA_IREG_ISEL(__ireg) ((__ireg) & 0xffff)
+> +#define AIA_IREG_PRIV(__ireg) (((__ireg) >> 16) & 0x3)
+> +#define AIA_IREG_VIRT(__ireg) (((__ireg) >> 18) & 0x1)
+> +#define AIA_IREG_VGEIN(__ireg) (((__ireg) >> 20) & 0x3f)
+> +#define AIA_IREG_XLEN(__ireg) (((__ireg) >> 24) & 0xff)
 > +
-> +        if (!aplic->msimode) {
-> +            /* Reset IDC registers only in non-MSI mode */
-> +            for (i = 0; i < aplic->num_harts; i++) {
-> +                aplic->idelivery[i] = 0;
-> +                aplic->iforce[i] = 0;
-> +                aplic->ithreshold[i] = 0;
-> +            }
+> +typedef int (*aia_ireg_rmw_fn)(void *arg, uint32_t reg, uint64_t *val,
+> +                               uint64_t new_val, uint64_t write_mask);
+> +#endif
 > +
-> +            for (i = 0; i < aplic->num_harts; i++) {
-> +                qemu_irq_lower(aplic->external_irqs[i]);
-> +            }
->           }
->       }
->   }
+>   typedef struct PMUCTRState {
+>       /* Current value of a counter */
+>       uint64_t mhpmcounter_val;
+> @@ -465,20 +483,8 @@ struct CPUArchState {
+>       void *rdtime_fn_arg;
+>   
+>       /* machine specific AIA ireg read-modify-write callback */
+> -#define AIA_MAKE_IREG(__isel, __priv, __virt, __vgein, __xlen) \
+> -    ((((__xlen) & 0xff) << 24) | \
+> -     (((__vgein) & 0x3f) << 20) | \
+> -     (((__virt) & 0x1) << 18) | \
+> -     (((__priv) & 0x3) << 16) | \
+> -     (__isel & 0xffff))
+> -#define AIA_IREG_ISEL(__ireg)                  ((__ireg) & 0xffff)
+> -#define AIA_IREG_PRIV(__ireg)                  (((__ireg) >> 16) & 0x3)
+> -#define AIA_IREG_VIRT(__ireg)                  (((__ireg) >> 18) & 0x1)
+> -#define AIA_IREG_VGEIN(__ireg)                 (((__ireg) >> 20) & 0x3f)
+> -#define AIA_IREG_XLEN(__ireg)                  (((__ireg) >> 24) & 0xff)
+> -    int (*aia_ireg_rmw_fn[4])(void *arg, target_ulong reg,
+> -        target_ulong *val, target_ulong new_val, target_ulong write_mask);
+> -    void *aia_ireg_rmw_fn_arg[4];
+> +    aia_ireg_rmw_fn aia_ireg_rmw_cb[4];
+> +    void *aia_ireg_rmw_cb_arg[4];
+>   
+>       /* True if in debugger mode.  */
+>       bool debugger;
+> @@ -646,12 +652,8 @@ void riscv_cpu_interrupt(CPURISCVState *env);
+>   #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
+>   void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *),
+>                                void *arg);
+> -void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, privilege_mode_t priv,
+> -                                   int (*rmw_fn)(void *arg,
+> -                                                 target_ulong reg,
+> -                                                 target_ulong *val,
+> -                                                 target_ulong new_val,
+> -                                                 target_ulong write_mask),
+> +void riscv_cpu_set_aia_ireg_rmw_cb(CPURISCVState *env, privilege_mode_t priv,
+> +                                   aia_ireg_rmw_fn rmw_fn,
+>                                      void *rmw_fn_arg);
+>   
+>   RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
 > diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-> index ac59496c22..6dbbc152a2 100644
+> index 7c9a012033..3ce9f146c0 100644
 > --- a/hw/intc/riscv_imsic.c
 > +++ b/hw/intc/riscv_imsic.c
-> @@ -347,15 +347,17 @@ static void riscv_imsic_reset_enter(Object *obj, ResetType type)
->       RISCVIMSICState *imsic = RISCV_IMSIC(obj);
->       int i;
->
-> -    memset(imsic->eidelivery, 0, sizeof(uint32_t) * imsic->num_pages);
-> -    memset(imsic->eithreshold, 0, sizeof(uint32_t) * imsic->num_pages);
-> +    if (!kvm_irqchip_in_kernel()) {
-> +        memset(imsic->eidelivery, 0, sizeof(uint32_t) * imsic->num_pages);
-> +        memset(imsic->eithreshold, 0, sizeof(uint32_t) * imsic->num_pages);
->
-> -    for (i = 0; i < imsic->num_eistate; i++) {
-> -        imsic->eistate[i] &= ~IMSIC_EISTATE_ENABLED;
-> -    }
-> +        for (i = 0; i < imsic->num_eistate; i++) {
-> +            imsic->eistate[i] &= ~IMSIC_EISTATE_ENABLED;
-> +        }
->
-> -    for (i = 0; i < imsic->num_pages; i++) {
-> -        qemu_irq_lower(imsic->external_irqs[i]);
-> +        for (i = 0; i < imsic->num_pages; i++) {
-> +            qemu_irq_lower(imsic->external_irqs[i]);
-> +        }
+> @@ -88,11 +88,11 @@ static void riscv_imsic_update(RISCVIMSICState *imsic, uint32_t page)
+>   }
+>   
+>   static int riscv_imsic_eidelivery_rmw(RISCVIMSICState *imsic, uint32_t page,
+> -                                      target_ulong *val,
+> -                                      target_ulong new_val,
+> -                                      target_ulong wr_mask)
+> +                                      uint64_t *val,
+> +                                      uint64_t new_val,
+> +                                      uint64_t wr_mask)
+>   {
+> -    target_ulong old_val = imsic->eidelivery[page];
+> +    uint32_t old_val = imsic->eidelivery[page];
+>   
+>       if (val) {
+>           *val = old_val;
+> @@ -106,11 +106,11 @@ static int riscv_imsic_eidelivery_rmw(RISCVIMSICState *imsic, uint32_t page,
+>   }
+>   
+>   static int riscv_imsic_eithreshold_rmw(RISCVIMSICState *imsic, uint32_t page,
+> -                                      target_ulong *val,
+> -                                      target_ulong new_val,
+> -                                      target_ulong wr_mask)
+> +                                      uint64_t *val,
+> +                                      uint64_t new_val,
+> +                                      uint64_t wr_mask)
+>   {
+> -    target_ulong old_val = imsic->eithreshold[page];
+> +    uint32_t old_val = imsic->eithreshold[page];
+>   
+>       if (val) {
+>           *val = old_val;
+> @@ -124,8 +124,8 @@ static int riscv_imsic_eithreshold_rmw(RISCVIMSICState *imsic, uint32_t page,
+>   }
+>   
+>   static int riscv_imsic_topei_rmw(RISCVIMSICState *imsic, uint32_t page,
+> -                                 target_ulong *val, target_ulong new_val,
+> -                                 target_ulong wr_mask)
+> +                                 uint64_t *val, uint64_t new_val,
+> +                                 uint64_t wr_mask)
+>   {
+>       uint32_t base, topei = riscv_imsic_topei(imsic, page);
+>   
+> @@ -149,11 +149,11 @@ static int riscv_imsic_topei_rmw(RISCVIMSICState *imsic, uint32_t page,
+>   
+>   static int riscv_imsic_eix_rmw(RISCVIMSICState *imsic,
+>                                  uint32_t xlen, uint32_t page,
+> -                               uint32_t num, bool pend, target_ulong *val,
+> -                               target_ulong new_val, target_ulong wr_mask)
+> +                               uint32_t num, bool pend, uint64_t *val,
+> +                               uint64_t new_val, uint64_t wr_mask)
+>   {
+>       uint32_t i, base, prev;
+> -    target_ulong mask;
+> +    uint64_t mask;
+>       uint32_t state = (pend) ? IMSIC_EISTATE_PENDING : IMSIC_EISTATE_ENABLED;
+>   
+>       if (xlen != 32) {
+> @@ -178,7 +178,7 @@ static int riscv_imsic_eix_rmw(RISCVIMSICState *imsic,
+>               continue;
+>           }
+>   
+> -        mask = (target_ulong)1 << i;
+> +        mask = 1ull << i;
+>           if (wr_mask & mask) {
+>               if (new_val & mask) {
+>                   prev = qatomic_fetch_or(&imsic->eistate[base + i], state);
+> @@ -197,8 +197,8 @@ static int riscv_imsic_eix_rmw(RISCVIMSICState *imsic,
+>       return 0;
+>   }
+>   
+> -static int riscv_imsic_rmw(void *arg, target_ulong reg, target_ulong *val,
+> -                           target_ulong new_val, target_ulong wr_mask)
+> +static int riscv_imsic_rmw(void *arg, uint32_t reg, uint64_t *val,
+> +                           uint64_t new_val, uint64_t wr_mask)
+>   {
+>       RISCVIMSICState *imsic = arg;
+>       uint32_t isel, priv, virt, vgein, xlen, page;
+> @@ -383,7 +383,7 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
+>           }
+>   
+>           if (!kvm_irqchip_in_kernel()) {
+> -            riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic->mmode) ? PRV_M : PRV_S,
+> +            riscv_cpu_set_aia_ireg_rmw_cb(env, (imsic->mmode) ? PRV_M : PRV_S,
+>                                             riscv_imsic_rmw, imsic);
+>           }
+>       }
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index e7c0ff49d0..90c126fdc2 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -816,17 +816,13 @@ void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *),
+>       env->rdtime_fn_arg = arg;
+>   }
+>   
+> -void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, privilege_mode_t priv,
+> -                                   int (*rmw_fn)(void *arg,
+> -                                                 target_ulong reg,
+> -                                                 target_ulong *val,
+> -                                                 target_ulong new_val,
+> -                                                 target_ulong write_mask),
+> +void riscv_cpu_set_aia_ireg_rmw_cb(CPURISCVState *env, privilege_mode_t priv,
+> +                                   aia_ireg_rmw_fn rmw_fn,
+>                                      void *rmw_fn_arg)
+>   {
+>       if (priv <= PRV_M) {
+> -        env->aia_ireg_rmw_fn[priv] = rmw_fn;
+> -        env->aia_ireg_rmw_fn_arg[priv] = rmw_fn_arg;
+> +        env->aia_ireg_rmw_cb[priv] = rmw_fn;
+> +        env->aia_ireg_rmw_cb_arg[priv] = rmw_fn_arg;
 >       }
 >   }
->
+>   
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 4bab7ec29f..837212b55f 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2655,6 +2655,7 @@ static RISCVException rmw_xireg_aia(CPURISCVState *env, int csrno,
+>       uint8_t *iprio;
+>       privilege_mode_t priv;
+>       uint32_t vgein;
+> +    uint64_t wide_val;
+>   
+>       /* VS-mode CSR number passed in has already been translated */
+>       switch (csrno) {
+> @@ -2699,16 +2700,17 @@ static RISCVException rmw_xireg_aia(CPURISCVState *env, int csrno,
+>           }
+>       } else if (ISELECT_IMSIC_FIRST <= isel && isel <= ISELECT_IMSIC_LAST) {
+>           /* IMSIC registers only available when machine implements it. */
+> -        if (env->aia_ireg_rmw_fn[priv]) {
+> +        if (env->aia_ireg_rmw_cb[priv]) {
+>               /* Selected guest interrupt file should not be zero */
+>               if (virt && (!vgein || env->geilen < vgein)) {
+>                   goto done;
+>               }
+>               /* Call machine specific IMSIC register emulation */
+> -            ret = env->aia_ireg_rmw_fn[priv](env->aia_ireg_rmw_fn_arg[priv],
+> +            ret = env->aia_ireg_rmw_cb[priv](env->aia_ireg_rmw_cb_arg[priv],
+>                                       AIA_MAKE_IREG(isel, priv, virt, vgein,
+>                                                     riscv_cpu_mxl_bits(env)),
+> -                                    val, new_val, wr_mask);
+> +                                    &wide_val, new_val, wr_mask);
+> +            *val = wide_val;
+
+Here.  We can't just do *val = wide_val because there's no guarantee that *val,
+i.e. the 'ret_value' of riscv_csr_op_fn(), is not NULL:
+
+typedef RISCVException (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
+                                           target_ulong *ret_value,  <--------
+                                           target_ulong new_value,
+                                           target_ulong write_mask);
+
+This fixes it:
+
+    if (val) {
+        *val = wide_val;
+    }
+
+
+Note that this is the same pattern used in other predicates.  E.g
+rmw_xiselect() does:
+
+
+     if (val) {
+         *val = *iselect;
+     }
+
+
+
+rmw_xtopei down there needs the same:
+
+>           }
+>       } else {
+>           isel_reserved = true;
+> @@ -2941,6 +2943,7 @@ static RISCVException rmw_xtopei(CPURISCVState *env, int csrno,
+>       int ret = -EINVAL;
+>       privilege_mode_t priv;
+>       uint32_t vgein;
+> +    uint64_t wide_val;
+>   
+>       /* Translate CSR number for VS-mode */
+>       csrno = aia_xlate_vs_csrno(env, csrno);
+> @@ -2966,7 +2969,7 @@ static RISCVException rmw_xtopei(CPURISCVState *env, int csrno,
+>       };
+>   
+>       /* IMSIC CSRs only available when machine implements IMSIC. */
+> -    if (!env->aia_ireg_rmw_fn[priv]) {
+> +    if (!env->aia_ireg_rmw_cb[priv]) {
+>           goto done;
+>       }
+>   
+> @@ -2979,10 +2982,11 @@ static RISCVException rmw_xtopei(CPURISCVState *env, int csrno,
+>       }
+>   
+>       /* Call machine specific IMSIC register emulation for TOPEI */
+> -    ret = env->aia_ireg_rmw_fn[priv](env->aia_ireg_rmw_fn_arg[priv],
+> +    ret = env->aia_ireg_rmw_cb[priv](env->aia_ireg_rmw_cb_arg[priv],
+>                       AIA_MAKE_IREG(ISELECT_IMSIC_TOPEI, priv, virt, vgein,
+>                                     riscv_cpu_mxl_bits(env)),
+> -                    val, new_val, wr_mask);
+> +                    &wide_val, new_val, wr_mask);
+> +    *val = wide_val;
+
+This needs to be:
+
+     if (val) {
+         *val = wide_val;
+     }
+
+
+
+Thanks,
+Daniel
+
+>   
+>   done:
+>       if (ret) {
+> @@ -4486,7 +4490,7 @@ static RISCVException read_vstopi(CPURISCVState *env, int csrno,
+>                                     target_ulong *val)
+>   {
+>       int irq, ret;
+> -    target_ulong topei;
+> +    uint64_t topei = 0;
+>       uint64_t vseip, vsgein;
+>       uint32_t iid, iprio, hviid, hviprio, gein;
+>       uint32_t s, scount = 0, siid[VSTOPI_NUM_SRCS], siprio[VSTOPI_NUM_SRCS];
+> @@ -4501,13 +4505,13 @@ static RISCVException read_vstopi(CPURISCVState *env, int csrno,
+>           if (gein <= env->geilen && vseip) {
+>               siid[scount] = IRQ_S_EXT;
+>               siprio[scount] = IPRIO_MMAXIPRIO + 1;
+> -            if (env->aia_ireg_rmw_fn[PRV_S]) {
+> +            if (env->aia_ireg_rmw_cb[PRV_S]) {
+>                   /*
+>                    * Call machine specific IMSIC register emulation for
+>                    * reading TOPEI.
+>                    */
+> -                ret = env->aia_ireg_rmw_fn[PRV_S](
+> -                        env->aia_ireg_rmw_fn_arg[PRV_S],
+> +                ret = env->aia_ireg_rmw_cb[PRV_S](
+> +                        env->aia_ireg_rmw_cb_arg[PRV_S],
+>                           AIA_MAKE_IREG(ISELECT_IMSIC_TOPEI, PRV_S, true, gein,
+>                                         riscv_cpu_mxl_bits(env)),
+>                           &topei, 0, 0);
+
 
