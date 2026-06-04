@@ -4,101 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D61CD6E60
-	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jun 2026 01:10:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18915CD6E4A
+	for <qemu-riscv@archiver.kernel.org>; Thu,  4 Jun 2026 03:04:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wUwb4-0006Ya-E0; Wed, 03 Jun 2026 21:10:10 -0400
+	id 1wUyN0-0001E0-C0; Wed, 03 Jun 2026 23:03:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wUwb1-0006Tw-8O
- for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 21:10:07 -0400
-Received: from mail-yw1-x1135.google.com ([2607:f8b0:4864:20::1135])
+ id 1wUyMz-0001Dk-Cg
+ for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 23:03:45 -0400
+Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wUwax-0005hJ-K0
- for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 21:10:06 -0400
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-7e266714bd3so2159417b3.2
- for <qemu-riscv@nongnu.org>; Wed, 03 Jun 2026 18:10:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780535400; cv=none;
+ id 1wUyMw-0007jn-E8
+ for qemu-riscv@nongnu.org; Wed, 03 Jun 2026 23:03:45 -0400
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-7ea16f090b4so3586327b3.2
+ for <qemu-riscv@nongnu.org>; Wed, 03 Jun 2026 20:03:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780542219; cv=none;
  d=google.com; s=arc-20240605;
- b=SH3XMHQBU0gFXZBjhZRmGkrlxzpOGvoG5qyIjHfnUI6StuPBXtR65v2EqP6+EDCNkC
- lGkHGpp6sheOz0Mn+oCbZ1naFTESU4oEPPzfd2tCIdw7UlOx8sdpDikBvjZOJgGjBzKr
- PMITIahFll/3hbBbo1gzWumc9RUO4GY4HMZb/eW7MHiMX4EwNvt3Pvki4kpAl7H6K/Y6
- RIQcRW99tbDgmm6j7wu3IAZqUSXW+mYqxmv/kUzSGDvVp9sXUuZCXON8gX/EnD+Ax/3n
- lo1zeraxsQSPd7XyjHO6Mhdvq4+J3eUzMQoudzMmKqNFp/8HOCoF/3Vqw5Olbj/Q+VyY
- sWcg==
+ b=AQjZF0EQ61ozSRw6QRN8C+18gYDaRJx6fbElr8wyHkQbBTQlubCEeOHhnW2/+P6W0/
+ 0y2/xE4vlntZhXW+rqI44JpBrKFDQgl2QzymVjK5q94WGETL1/VZtD6nF2F6spN3OLNK
+ yJduKpXsS+S5AubBIIRfzNAch1lbYcsezzmy0RDq1OCsxg5bhDuU7nUHBRQgktNVHDxL
+ b7lW0DuIL8SgxjETWxhrYklHXQMGBc5xpS+vB3szGH3F1EAmf8WbIz+BSnxCFfsVqGqS
+ K/H52PIbFoXxcM1djeveniXSb4+ppizT3QUE9iWAjH8luMe0v118Na5K/ZFhSVnryI6Z
+ 1oTg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=fIed5qgpa5dwUJMxn35bujyif9xQg3tYkXlsm1gXA+U=;
- fh=2sw2fdJZn/L/2+N5Ud2RTAwr3Z95izLopjZFOwMWovE=;
- b=fhDNOGVv+n9/UQTIBLwBicQ1bs+VuJ/lRazSHpgqyOlwA75hRmxXrC8aVmSX3AJn6d
- vkj8GSVX+muOeAD7gLQciFNxTVsIQ8My6RZeT/hVRQ5Ts3eUqWATUvWuAOigor3awpnc
- pxGPXvUAvEtDGIX9dcz7zMlhe9dNV/kdpjFU9Q9Pm+OLSuFTS9sZX5Y83BKRD36zXIdw
- ufROZpM+pElE0PMg3DgYc9g5R6eoVEypL055rEgMFXRKXf+Fe+NUGEYyvc2zYz028PZY
- 2TV7hKJqRvFq/PBAXt/DxioVasi4HSlqTJi8TG1ySRz509a3kHRT0qdETrxcS/BHK81Y
- M6rQ==; darn=nongnu.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=EJ/7cbNnLAl3O3LPfWL/LtTNZVrE9ReRYjyLbX5TjZQ=;
+ fh=Kg8bbc/Tdm+3aFUCZEGK67fy+bXPhqlvC1LKleNOuOI=;
+ b=dbQB3/h8y0Kn7ocYzklkMwhsHbX4DlT41aJdeStsV9TD06oa4htIdOg5hr69wlRoaD
+ gA93H3aX1KJlvqbNgT4RYLnWTvaK/IXVlIEjA05d1tmG7+cTl8Q0iUVkZDgmb/YRjh1M
+ cF+eYCEs4d1NwmvxRWPxjifcxFgyPwxDApiT6Er7YN+IOQ1noxmuhy+lHPAr5dNlb3Eo
+ L9av/evYlNgPCuD/ozCGMe3s8rcfjl6+TkXMEfLy3AgpTt/0yZdeGMsweRwX3llkE0VI
+ Age3ftzJ0Qp7jtqKzGkrtOPpOUTN7R3G8Ny5HqkK52bwJqt+PtQiEcXPa5fuvnppQNob
+ TsqA==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1780535400; x=1781140200; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fIed5qgpa5dwUJMxn35bujyif9xQg3tYkXlsm1gXA+U=;
- b=mqQzAkN1nxocLHwIyNA+VGaAJG2nRAXWv8Yq8XP/A7XYVwlYiGvaykazN3la1CLxAC
- q54Gw4g4IQwJ3q8Pmv0ZOS2PhS2i0aZRG2pmG930H+UUHxQJs68f2O40mgSHMuypcuNh
- fXOjaVCYqAXzY/JmO30RZCvtl0tZReVLgOLyg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780535400; x=1781140200;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=jms.id.au; s=google; t=1780542219; x=1781147019; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fIed5qgpa5dwUJMxn35bujyif9xQg3tYkXlsm1gXA+U=;
- b=XxfWlNEwirjwV976nftHLQUTFarl6fsrCg6KpBtG3b2tBmiC0X5NM5nsDUdYO07ayk
- 8sMIe5W4VHm7lg4XUOlP2Mh0oKZvFIe93RS9Swx/qwUWDdlFXpf2OIPwX4VGDkxTMQaQ
- 8aSW4s1RItYnnTdvl8SfqMkJ+f9lKYhXqWH8HDFJrbDxbw+go/NuZMOlZMIY4E1K1/6e
- ZK0QRZK1pSiGJcoHOaBi7F7+c4qtzowDHU+TnJqhiNzCBmz1O3cBYiNFz5M6vNG9Af9U
- JC+cdjGQoMO9pDzG6qNmGey5/DjjcKpc2Cx1o+ugrq5tm2bnkCD4A/ftb7F9a2S8SAX/
- TYOg==
+ bh=EJ/7cbNnLAl3O3LPfWL/LtTNZVrE9ReRYjyLbX5TjZQ=;
+ b=eMc64BfzehTUA138pQTqtSX/Er9L8oa0kbmgOIWO4PPyOZALKEwyyO8TAzGRy/2Jtv
+ IY1Flr1y7VDMHP/paNEHqart7xZVatMfReFdFvRGY6R6fmprvXkvDMZ9xQ1SR/C6oeyM
+ 7TOlf4TL//peJmINY6/cLdXlwS8N4SR2Soo5I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780542219; x=1781147019;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=EJ/7cbNnLAl3O3LPfWL/LtTNZVrE9ReRYjyLbX5TjZQ=;
+ b=n+nI46CbVjEBonWNBDHezoHY5TorBe6PNlTnbbynck/spGvlvE+KVXut6wZrh7RnUI
+ qHhyYBBm7VE7MWgZZdpVGFX3vPJ1nSIJMMHiKZKVdDuMBHzJpFqZ29hj6zHFc5MozKI0
+ Kp899T7W1Vd5jspFXTA/R9z3KipRPe8LL4+pZTi/bfLlzb8rgI9rmeKwQlDRkGr2MPI9
+ Yjeestm1Zu6qzDSEQ2Y0pemz8bFKCyl10BNF6cPV+fqqRbdIlenRhG1o+dlztg1R30m5
+ XhflkEIFjSZ6H4rI3BZ+YdC2czlkLnek5B6LUfJLbLCAqmEL0bXCDZ7uZQf8tZUaKk09
+ UtAA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+k0pVGYhZ4ITuCR0KkE1BnOMjKYz1gUXhuV3kpDQV+Pgs2dDixcRIjKxq6xCvhqTIwWq+kvwRhR36D@nongnu.org
-X-Gm-Message-State: AOJu0YybpMrIQy6ACEw2jbN7FYPnDnzJ6mpUJoc1uyNoPugktXdfcx6Y
- mnt/l+iB09HJl+wIBeOK3UqkdpL5jvOk/AWh8Vi1Vx0VeAT6wz6f5LaldpUt/dMw1NSV3eh+4F3
- X5/UMKEGj46cJ4zuNEqMa2MaZPI3p6iw=
-X-Gm-Gg: Acq92OEuXQutj4fZoQANcRtcnvBWCb255bzvHA6FRNBLBk/dJBdvhprKW3e6oWjzN2W
- vXkPMcSImO0jz9bkns9vjIki5cOL9Ftv1pPJWrn1n4j3ln6sDFFhdWrrBM6SEfgF/Msu2tYAMnO
- 9rUXjRhvPS4iJR4nEX6LBFewvIJBgzo/6XYsTylMwmQR+8zzVkySX7UjyRBCcZfNJNkQsStvWhy
- wP+F3Y9/5nClT78x/+9UF2Q1h8cO/xkynnx2N0B5ngXnZvxP+K/6qZZ9dr95JlZeOYCEs3yDr07
- 8drhtHnlh7GIhkjzx3lTc3SHbKp/7+Z2eNdmN2lgWU3j2LwEfwnD7zHNnBwdug64L5zRKs+GGjk
- xt7WN+REGlySYhYgl4xMhBpolHlvRKhrGuvE=
-X-Received: by 2002:a05:690c:3682:b0:7bd:577d:7828 with SMTP id
- 00721157ae682-7ea4987b42cmr53589307b3.31.1780535399639; Wed, 03 Jun 2026
- 18:09:59 -0700 (PDT)
+ AFNElJ8a7WDaDwjlcptklPoxfYuyzu3qsbqVf1JicLrELnbMbTBRjhr1OmbhKs7ShrXGL4BunL4OlnqNQuAc@nongnu.org
+X-Gm-Message-State: AOJu0YxDjESgMz7bqmwoJ/gJUo2Sc+0voTnqgGonmiWJcQJIqwrtcenk
+ g0EjK2Zy4ncXg/A95PkN2rRucpE+yyFcRjblW4ZS2sTAnpXlL1uUL28ywyjefhktoftm2902NUj
+ ++3/aY4ARBdeCV/go7JVur1s536kL56k=
+X-Gm-Gg: Acq92OG/ewUI7+GZQwZ6kX4rj25CJC6wHtBw6BTSjmQ5bFihC6KeOfjqd9Cl/PQNZnr
+ nh4M256FyP+8W4JKO1swVyIXOHIGNwoknSWbg2QwUxKaXbIRoUv0CFApFONgIf4vU1bKO+FOzQ2
+ FvRsyiY11bP02QufL3ZvvhufNOqsiGEJe75/qoP1CSY8d8ZFnmd7ECDFH/3V9INzdmt4l363v72
+ zFjxqoLAGChjlBnvuVlRL9w2NhTl1wK5UfqCrKZrcRCZxyTXHVPin7+a5ZwxMezlxWUzLfnpJXB
+ /CUftq/ESE/5B58l9oD9F73QcYgMRRoXT5P+4KMjZCAZKxG7GJd7RAgvfj7iEiGm6UHq9Ze997u
+ VpUZbQN2L2cfcRSVgqsmPHHmazarr4bT3bHjJDmjdEFHYmA==
+X-Received: by 2002:a05:690c:c22c:b0:7dc:a5a8:8b9 with SMTP id
+ 00721157ae682-7ea46d27046mr60132337b3.10.1780542219351; Wed, 03 Jun 2026
+ 20:03:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260528131214.2251075-1-daniel.barboza@oss.qualcomm.com>
- <20260528131214.2251075-2-daniel.barboza@oss.qualcomm.com>
- <ahz7-1OomsZTMIz2@ChaodeMacBook-Pro.local>
- <b063eb61-a246-4f10-bac2-ee9272afcd2f@oss.qualcomm.com>
-In-Reply-To: <b063eb61-a246-4f10-bac2-ee9272afcd2f@oss.qualcomm.com>
+References: <20260603065859.592063-1-joel@jms.id.au>
+ <20260603065859.592063-6-joel@jms.id.au>
+ <876dbf23-c7ec-46f4-9232-816a3d0bf16c@mailo.com>
+In-Reply-To: <876dbf23-c7ec-46f4-9232-816a3d0bf16c@mailo.com>
 From: Joel Stanley <joel@jms.id.au>
-Date: Thu, 4 Jun 2026 10:39:48 +0930
-X-Gm-Features: AVHnY4LcozYN8wqknDYQoC6wRDK9EI5pMFa79rlcsdEesr8BW8hKWj7h18o_yrU
-Message-ID: <CACPK8XcjabfXiDLNm5WoaypfHKbGRggqLL3gob2FWz2TZf0ZZw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] target/riscv: deprecate 'debug' CPU property and
- Debug 0.13
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Nicholas Piggin <npiggin@gmail.com>
-Cc: Chao Liu <chao.liu.zevorn@gmail.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- Tao Tang <tangtao1634@phytium.com.cn>
+Date: Thu, 4 Jun 2026 12:33:27 +0930
+X-Gm-Features: AVHnY4Kt8-7101iy7BvqOSpSETeScdndUz42ZR-kpCQwSfcycZ40Fa2SBoy016M
+Message-ID: <CACPK8XeJX2s3-mvpsrCeOLsMyZXYN7fxiMCiitKTtN84Ntxvvw@mail.gmail.com>
+Subject: Re: [PATCH v8 05/12] hw/riscv/aia: Configure stride for the M-mode
+ IMSIC
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Nicholas Piggin <npiggin@gmail.com>, 
+ Andrew Jones <andrew.jones@oss.qualcomm.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, 
+ Michael Ellerman <mpe@kernel.org>, Joel Stanley <jms@oss.tenstorrent.com>, 
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>, 
+ Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1135;
- envelope-from=joel.stan@gmail.com; helo=mail-yw1-x1135.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
+ envelope-from=joel.stan@gmail.com; helo=mail-yw1-x1133.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -122,72 +127,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 4 Jun 2026 at 06:27, Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
->
->
->
-> On 6/1/2026 1:04 AM, Chao Liu wrote:
-> > Hi Daniel,
+On Wed, 3 Jun 2026 at 17:41, Philippe Mathieu-Daud=C3=A9 <philmd@mailo.com>=
+ wrote:
+> > --- a/hw/riscv/aia.h
+> > +++ b/hw/riscv/aia.h
+> > @@ -14,6 +14,7 @@
+> >   uint32_t imsic_num_bits(uint32_t count);
 > >
-> > On Thu, May 28, 2026 at 10:12:14AM +0800, Daniel Henrique Barboza wrote:
-> >> Starting on commit f31ba686a9 ("target/riscv/cpu.c: add 'sdtrig' in
-> >> riscv,isa') the 'debug' flag has been used as an alias for 'sdtrig' that
-> >> is, for now, compliant with Debug 0.13 that was ratified 8 years go.
-> >>
-> >> We're going to add more debug trigger extensions, e.g. 'sdext' [1].
-> >> Thing is that 'sdext' and all other extensions that will follow are now
-> >> adherent to Debug 1.0, ratified Dec 2022.  And so it happens that Debug
-> >> 1.0 and 0.13 are not compatible with each other.  This makes support new
-> >> Debug 1.0 extensions like 'sdext' harder because we would need two
-> >> independent code bases for each.
-> >>
-> >> We consider that most of the RVI ecosystem already moved on to Debug
-> >> 1.0 and is now going towards the extended Debug 1.0 extensions, and we
-> >> should follow suit.  And the best way to do that is to leave Debug 0.13
-> >> behind, by deprecating its 'debug' flag and making it an alias for
-> >> 'sdtrig' that will eventually move on to Debug 1.0.
-> >>
-> >> The following changes are made:
-> >>
-> >> - 'ext_sdtrig' flag was added in cpu->cfg. 'debug' flag was removed from
-> >>    cpu->cfg;
-> >> - All occurrences of cpu->cfg.debug were replaced to 'ext_sdtrig';
-> >> - Two explicit getters and setters for the 'debug' property were added.
-> >>    The property will simply get/set ext_sdtrig;
-> >> - vmstate_debug was renamed to vmstate_sdtrig. We're aware that this
-> >>    will impact migration between QEMU 10.2 to newer versions, but we're
-> >>    still in a point where the migration break cost isn't big enough to
-> >>    justify adding migration compatibility scaffolding.
-> >>
-> >> Finally, deprecated.rst was updated to deprecate 'debug' and inform that
-> >> it will be now interpreted as an alias of 'sdtrig', which is now going
-> >> to be compliant with Debug 1.0.
-> >>
-> >
-> > This patch conflicts with Alistair's riscv-to-apply.next branch.
-> >
-> > f71708fedf target/riscv/tcg: disable svnapot if satp_mode < sv39
+> >   DeviceState *riscv_create_aia(bool msimode, int aia_guests,
+> > +                             hwaddr m_imsic_stride,
 >
-> Based on recent discussions with Alistair (check the "QEMU RISC-V Call" thread)
-> seems like we're postponing this change because there seems to be interest
-> in keeping the 'debug' flag around, together with the 'sdtrig' extension that
-> we need for your 'sdext' extension (and for the riscv-server-ref board).  Seems
-> like someone is going to send patches making it possible.
+> hw/riscv/virt-acpi-build.c:74:    uint64_t imsic_socket_addr, imsic_addr;
+> hw/riscv/virt.c:532:    uint32_t imsic_max_hart_per_socket, imsic_addr,
+> imsic_size;
+> target/riscv/kvm/kvm-cpu.c:1829:    uint64_t socket, base_hart,
+> hart_count, socket_imsic_base, imsic_addr;
+>
+> Why choose hwaddr for a stride (region size)?
 
-I think this was a reference to Nick's work (I got credit for a bunch
-of things Nick said on the call, so swap out "Joel" for "Nick" in some
-places):
+Brain fart.
 
- [RFC PATCH 00/25] target/riscv/debug: Sdtrig fixes and TT Ascalon support
- https://lore.kernel.org/qemu-devel/20260114044701.1173347-1-npiggin@gmail.com/
+> Using uint64_t:
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@mailo.com>
 
-I encouraged Nick to get it out on the list early, to make others
-aware of the work that had been done.
-He mentioned there's some further improvements to make, I'll let him
-fill you in.
-
-Cheers,
-
-Joel
+uint32_t would be more than sufficient too, do you agree?
 
