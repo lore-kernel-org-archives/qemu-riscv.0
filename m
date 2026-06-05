@@ -4,72 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A8ACD6E6B
-	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jun 2026 07:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E91ACD6E74
+	for <qemu-riscv@archiver.kernel.org>; Fri,  5 Jun 2026 11:07:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wVOXD-0007fY-2a; Fri, 05 Jun 2026 03:00:03 -0400
+	id 1wVSOA-0008N9-1z; Fri, 05 Jun 2026 07:06:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <uwu@icenowy.me>)
- id 1wVOXA-0007eW-5f; Fri, 05 Jun 2026 03:00:00 -0400
-Received: from sender4-op-o12.zoho.com ([136.143.188.12])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <uwu@icenowy.me>)
- id 1wVOX8-0006n2-Dy; Fri, 05 Jun 2026 02:59:59 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1780642778; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=A6rALD49tyXQBhKRmoiZeci4AIXTqXZD9eAB6v1+TP8lCJJ/jbGqRN623qo8OcYeW/kPmhx7JXW27Hl8oiEoZWk5L48PGxHwVzzrIHLfRILCp30ZQaBBuQBFq6T7HSDX+ec0wRPVxWtgpNtAeZt5y6jrmCa/FeeV3oWC9rEp8+8=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1780642778;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=1AJMRkIDmj8Dxnv02Bm1Zg3eEAiVJYJvjGXe+p/TJQ8=; 
- b=oLuafldfdyR+t8DzOe8kIh1TLyYuLTzmNVm91+49aooeXlLHrpUtQ2+0LSjJ09Mb04BBSuqFA8LjGDaP4MFGkzet12P+Q0U4TZQlZjVHkbxG8mqS+QuuqcNJ2HbaGXsyNTss+GHoHh4jl1bXy5LZd787wt28WUW+mKBfnY+KWEs=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=icenowy.me;
- spf=pass  smtp.mailfrom=uwu@icenowy.me;
- dmarc=pass header.from=<uwu@icenowy.me>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1780642778; 
- s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
- h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
- bh=1AJMRkIDmj8Dxnv02Bm1Zg3eEAiVJYJvjGXe+p/TJQ8=;
- b=UvloSPb3cjD/DWNhFBF9L86SQ3raAVQJwSv/QI3gZTZWKZ5gc7r+lAWI8GZpfolp
- H/gafnWHQ54GZ+ZBdvO2rf3pHvDIcX7PjB7QQOMg0FOS4Z6zZe8cwQnF4QhTsi6YC5+
- roN93Fx0YjSgl+KHZsG/w/TsXXIt6UTuLAXjrAZu5ESaPWloNT8+BoD74l42AkgYTS2
- d4CMPFPkBnh7+hgc/6iLDmhqEC9l5ysbAQsikfWLwXG3usjusbQC0Th5qHv5uJC72x4
- I6nvje7cf2dwLst9RYxNuPPG6GsQw4nYP76Z/Z5qXsufoOb1xGUHeF3ps8TIjWj2fZg
- LgZEC+bfrw==
-Received: by mx.zohomail.com with SMTPS id 1780642776077152.07251563982675;
- Thu, 4 Jun 2026 23:59:36 -0700 (PDT)
-Message-ID: <4acb210eea217195fa733a4f42369c01591d5499.camel@icenowy.me>
-Subject: Re: [PATCH v7 2/5] target/riscv: Add server platform reference cpu
-From: Icenowy Zheng <uwu@icenowy.me>
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
- andrew.jones@oss.qualcomm.com, leif.lindholm@oss.qualcomm.com, Fei Wu
- <wu.fei9@sanechips.com.cn>, Palmer Dabbelt <palmer@dabbelt.com>
-Date: Fri, 05 Jun 2026 14:59:29 +0800
-In-Reply-To: <20260604095244.3313259-3-daniel.barboza@oss.qualcomm.com>
-References: <20260604095244.3313259-1-daniel.barboza@oss.qualcomm.com>
- <20260604095244.3313259-3-daniel.barboza@oss.qualcomm.com>
-Organization: Anthon Open-Source Community
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+ (Exim 4.90_1) (envelope-from <qingwei.hu@bytedance.com>)
+ id 1wVSNw-0008Gq-W6
+ for qemu-riscv@nongnu.org; Fri, 05 Jun 2026 07:06:46 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <qingwei.hu@bytedance.com>)
+ id 1wVSNt-0005uy-S0
+ for qemu-riscv@nongnu.org; Fri, 05 Jun 2026 07:06:44 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2c0bd02d97eso20642665ad.2
+ for <qemu-riscv@nongnu.org>; Fri, 05 Jun 2026 04:06:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bytedance.com; s=google; t=1780657600; x=1781262400; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4BOUEe+VamKGk6MRknmAp6o59Ee2hSdf7ohcP2aYG4I=;
+ b=TvK3GRuK91TLw+5AKl1JqhSn7oJ7gd9Z/Rw9JxCd/kuF51eIKMwGqydturUgS4e4DC
+ QiSdltLRYcaTij8yp4emdMjBDJZ8MTxmmJzSdPWpSEeQWUpw/gS1afN1S5/nSW7UK7pV
+ 3eDWdWo10wWZhKY0+jNty0eLqyBhRewZ9VPplTJY2u0nnUbwAsftlqId1UNmFvNZ/Ne4
+ 2NcACUgx+FxoqDf/CnzD9Kr9HUlKDtv3khTIMMoPNgdX5NfglBbhD2WBg9CdiemqouBH
+ o7r02F7Nz89Zxr0goaFfGuavmn14Jfd4rTnZzYtwqDeXAwzYuCJRBa8DBiXwpYOmLaXv
+ 79RA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780657600; x=1781262400;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4BOUEe+VamKGk6MRknmAp6o59Ee2hSdf7ohcP2aYG4I=;
+ b=rtR9W4F8DjJohhuxrXZQea0nrHJlAPQsyEnXP0JMLzCTpjACS9P74+SSK+4amzMO+R
+ kV0wZFMFVMELIYHWDPDQ4p9cjcdYePj+Z2F0DFBwVOBeYRl2QGo45zZ0WQk7f40jzs2+
+ xfGrjUYqcKI6INPbwwAWQ0XsmKuaRdQs3L+lSpt2Qi1C4+xaKma08k9qwLp6NZQC75qE
+ OSVNxynRBuxFdsenzq4jQXUPQCFqdCBNQ6pEWo1shHs1IavBnY+tmJBoRNdGhTGqo0/c
+ CBoxVirAH1SDb3SfnCr8TAen0q3xFNEiVu7kJ5c0iD3/gmP7V/flv6F4MHHUIxq1OuZS
+ yQEQ==
+X-Gm-Message-State: AOJu0YxQF6csL7Ibqn2WAXIDeVPKuhHdyAQetht8euXI4bU6UDXX90WG
+ DrRJUI0AszCGeHYV2y3i5ssqT5a5r1aX6VhBfYtmw1p0EruJ/g45mzc95t7zeM9riAA=
+X-Gm-Gg: Acq92OEeWAoJFOZKpoSPlPRZDEiRpVETyUS8mXxiHmuD4DrPJ7ukYVRdcvY8m7w9qDv
+ A8xDXnDIadMgsbkY98iQ1a1U6hVGAGqaqMFEWO19phOREjrL+GZkNGOPCU7CQ+vV/JEX80neJuu
+ 6jQ0X7PuDdrxfEL1xSbOGI9u1buHaZPYI2KxqrQd6jq2wFgB29yGKc9Gl2IaM50pWxp+USpIB8q
+ gOborW50tYwIq321+XyC2vg2MrsoJBVCaLwZLB5FvzQKLTij5MT1oP5CNgr5qXkcTWLPdSns5OF
+ u4mCKNEcJ64l54J8H6xZJH1SHEegYAg2oo3A44OZwh9Gp9iNxuikkL/3JRL2sFTIs5NwNUN5WE+
+ QyG53mdVNevQW8JuWYfuw9w9jcUzKoOpbcx/ja36VofrrYRuMmKN2wfaJgvdJpZqDk8uXkhj60U
+ wzE9Okpo9eWspp+GYIJcR1aiue8/jZwb3Lenvh0ZZt6mj59vj5icQh
+X-Received: by 2002:a17:903:2c0e:b0:2b2:4d36:7aa with SMTP id
+ d9443c01a7336-2c1e85cdd1amr36937335ad.35.1780657599768; 
+ Fri, 05 Jun 2026 04:06:39 -0700 (PDT)
+Received: from n37-012-226.byted.org ([115.190.40.10])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2c16629cf89sm88179605ad.56.2026.06.05.04.06.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Jun 2026 04:06:35 -0700 (PDT)
+From: Qingwei Hu <qingwei.hu@bytedance.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ jim.shu@sifive.com, Qingwei Hu <qingwei.hu@bytedance.com>
+Subject: [PATCH] hw/intc: riscv_aia: Skip reset for KVM irqchip
+Date: Fri,  5 Jun 2026 19:06:21 +0800
+Message-Id: <20260605110621.644997-1-qingwei.hu@bytedance.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.12; envelope-from=uwu@icenowy.me;
- helo=sender4-op-o12.zoho.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=qingwei.hu@bytedance.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,96 +99,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-=E5=9C=A8 2026-06-04=E5=9B=9B=E7=9A=84 06:52 -0300=EF=BC=8CDaniel Henrique =
-Barboza=E5=86=99=E9=81=93=EF=BC=9A
-> From: Fei Wu <wu.fei9@sanechips.com.cn>
->=20
-> The harts requirements of RISC-V server platform [1] require RVA23
-> ISA
-> profile support and others.
->=20
-> This patch provides a new "riscv-server-ref" CPU to go along with the
-> future "riscv-server-ref" board.
->=20
-> [1]
-> https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_p=
-latform_requirements.adoc
->=20
-> Signed-off-by: Fei Wu <wu.fei9@sanechips.com.cn>
-> Signed-off-by: Daniel Henrique Barboza
-> <daniel.barboza@oss.qualcomm.com>
-> ---
-> =C2=A0target/riscv/cpu-qom.h |=C2=A0 1 +
-> =C2=A0target/riscv/cpu.c=C2=A0=C2=A0=C2=A0=C2=A0 | 11 +++++++++++
-> =C2=A02 files changed, 12 insertions(+)
->=20
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 30dcdcfaae..a150acd151 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -42,6 +42,7 @@
-> =C2=A0#define TYPE_RISCV_CPU_RVA22S64=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0
-> RISCV_CPU_TYPE_NAME("rva22s64")
-> =C2=A0#define TYPE_RISCV_CPU_RVA23U64=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0
-> RISCV_CPU_TYPE_NAME("rva23u64")
-> =C2=A0#define TYPE_RISCV_CPU_RVA23S64=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0
-> RISCV_CPU_TYPE_NAME("rva23s64")
-> +#define TYPE_RISCV_CPU_RVSERVER_REF=C2=A0=C2=A0=C2=A0=C2=A0 RISCV_CPU_TY=
-PE_NAME("riscv-
-> server-ref")
-> =C2=A0#define TYPE_RISCV_CPU_IBEX=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> RISCV_CPU_TYPE_NAME("lowrisc-ibex")
-> =C2=A0#define TYPE_RISCV_CPU_SHAKTI_C=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 RISCV_CPU_TYPE_NAME("shakti-
-> c")
-> =C2=A0#define TYPE_RISCV_CPU_SIFIVE_E=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 RISCV_CPU_TYPE_NAME("sifive-
-> e")
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 3f0f931335..c4a5a7f1cb 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -3315,6 +3315,17 @@ static const TypeInfo riscv_cpu_type_infos[] =3D
-> {
-> =C2=A0#endif
-> =C2=A0=C2=A0=C2=A0=C2=A0 ),
-> =C2=A0
-> +=C2=A0=C2=A0=C2=A0 DEFINE_RISCV_CPU(TYPE_RISCV_CPU_RVSERVER_REF,
-> TYPE_RISCV_BARE_CPU,
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .misa_mxl_max =3D MXL_RV64,
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .profile =3D &RVA23S64,
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .cfg.ext_zkr =3D true,
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .cfg.ext_svadu =3D true,
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .cfg.ext_sdext =3D true,
-> +
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .cfg.max_satp_mode =3D VM_1_1=
-0_SV48,
+The emulated APLIC and IMSIC state arrays are only allocated when QEMU
+handles the interrupt controller state itself. With KVM AIA/APLIC-IMSIC,
+the interrupt controller state is owned by the KVM in-kernel irqchip, so
+these emulated state arrays are not allocated.
 
-Here it only declares the maximum supported SATP mode is Sv48, but the
-RVSP spec requires Sv48, and the RVSP REF machine created in the next
-patch also requires it (because the above 4G PCIe memory space is
-beyond 40-bit physical address space).
+The reset handlers added for APLIC and IMSIC still clear those arrays
+unconditionally. This makes qemu_system_reset(), which runs during machine
+creation, dereference NULL pointers with -machine virt,aia=aplic-imsic and
+KVM.
 
-Without `,sv48=3Don` explicitly enabled on the CPU, booting EDK2 firmware
-will fail because of the out-of-address-space PCIe memory space.
+Skip the emulated APLIC and IMSIC reset paths when the interrupt controller
+is handled by KVM. The emulated paths are unchanged for TCG and for
+configurations that use QEMU emulation.
 
-Maybe a RVSERVER profile could be defined for CPUs conformant to server
-platform spec (because that spec really adds some requireed
-extensions), and use it for RVSERVER_REF CPU type?
+Fixes: 99bfcd329a ("hw/intc: riscv_aplic: Add reset API to APLIC")
+Fixes: 766391483b ("hw/intc: riscv_imsic: Add reset API to IMSIC")
+Signed-off-by: Qingwei Hu <qingwei.hu@bytedance.com>
+---
+ hw/intc/riscv_aplic.c | 4 ++++
+ hw/intc/riscv_imsic.c | 4 ++++
+ 2 files changed, 8 insertions(+)
 
-Thanks,
-Icenowy
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index c2c67c29e6..84606e9f3d 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -910,6 +910,10 @@ static void riscv_aplic_reset_enter(Object *obj, ResetType type)
+     RISCVAPLICState *aplic = RISCV_APLIC(obj);
+     int i;
+ 
++    if (!riscv_use_emulated_aplic(aplic->msimode)) {
++        return;
++    }
++
+     aplic->domaincfg = 0;
+     memset(aplic->sourcecfg, 0, sizeof(uint32_t) * aplic->num_irqs);
+     memset(aplic->target, 0, sizeof(uint32_t) * aplic->num_irqs);
+diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+index ac59496c22..f1f23c3a3e 100644
+--- a/hw/intc/riscv_imsic.c
++++ b/hw/intc/riscv_imsic.c
+@@ -347,6 +347,10 @@ static void riscv_imsic_reset_enter(Object *obj, ResetType type)
+     RISCVIMSICState *imsic = RISCV_IMSIC(obj);
+     int i;
+ 
++    if (kvm_irqchip_in_kernel()) {
++        return;
++    }
++
+     memset(imsic->eidelivery, 0, sizeof(uint32_t) * imsic->num_pages);
+     memset(imsic->eithreshold, 0, sizeof(uint32_t) * imsic->num_pages);
+ 
+-- 
+2.47.3
 
-> +=C2=A0=C2=A0=C2=A0 ),
-> +
-> =C2=A0#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-> =C2=A0=C2=A0=C2=A0=C2=A0 DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RI=
-SCV_DYNAMIC_CPU,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .cfg.max_satp_mode =3D V=
-M_1_10_SV57,
 
