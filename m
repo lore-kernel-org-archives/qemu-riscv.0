@@ -4,80 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E834BCD8C88
-	for <qemu-riscv@archiver.kernel.org>; Sat,  6 Jun 2026 17:26:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 041FDCD8C92
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jun 2026 02:57:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wVumm-0003Hy-VN; Sat, 06 Jun 2026 13:26:16 -0400
+	id 1wWQBR-0007v3-EI; Sun, 07 Jun 2026 22:57:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <uwu@icenowy.me>)
- id 1wVumk-0003Fk-8Q; Sat, 06 Jun 2026 13:26:14 -0400
-Received: from sender4-op-o12.zoho.com ([136.143.188.12])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <uwu@icenowy.me>)
- id 1wVumi-0001Dm-DS; Sat, 06 Jun 2026 13:26:13 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1780766749; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=GkNe89N3ccPajdxwtl0b6ncGZOg0L1mA85R8EEu5LR2bDspHVYd93MFLz14NoJ60yGGfs7yJPHHj5Xoe3pJ9jYOU3Uzwd8wR2q1cOxL3IxcgfatBNGygxHbuFUsNHAg6Z3xvm9R/D3lk79qB8uvtdQzvK2IaWM9fMXjNo560s1o=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1780766749;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=z3UFztaGlhYb792H4HZIluZceq0eQ8TPRFTTB6uwWfc=; 
- b=YTFwaIh1T4uLHNv9aElcpsYsqOCoO29hN7satL0eWPf8/+MR1TLffKbmWVN5T5InKSWlinq4PYQnpyQ51xo35tmhnzuCPZ4XPrNp4tTs7/d2VcOjgFOgRa8ThfKueXKiU7e5XBYBaAwvZ1YGANKsInTnx7R0q+NmWAcsUnoxqZw=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=icenowy.me;
- spf=pass  smtp.mailfrom=uwu@icenowy.me;
- dmarc=pass header.from=<uwu@icenowy.me>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1780766749; 
- s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
- h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
- bh=z3UFztaGlhYb792H4HZIluZceq0eQ8TPRFTTB6uwWfc=;
- b=mgNIeRAzF59DqyU1wT5Dw2qVWfeyCGDTJZy5f6bRajj16HvObnUOfcSQwovypTvR
- qPEOao63kOvTmDz3ostwosvQUW4FSJs26pkeVtG9h2A0uL57gnb5zI030VrWKH9XXoZ
- sXGDSzm8iOFBqpKaNNAb3kTORXE5/wXF6C5hV45zYQzFwqiBLoVZbX768rtzcIBklHg
- OO3fn8DDWkAL8xL4zfTCzkOK3QWfcOIbP2TFjFBLSNEsxuHkG/n/ods9ehKtYeRmEvB
- w05oAfHFBDuzxln98r2DFsBxUytWwQEHL8ni+mPmcUFOQTMf8f42nNdam8kIhZJY2LG
- vChnC5t++w==
-Received: by mx.zohomail.com with SMTPS id 1780766747568386.80379582955106;
- Sat, 6 Jun 2026 10:25:47 -0700 (PDT)
-Message-ID: <b7bf59aed4e0e2882a89a96bab335797d8a1f6fe.camel@icenowy.me>
-Subject: Re: [PATCH v7 2/5] target/riscv: Add server platform reference cpu
-From: Icenowy Zheng <uwu@icenowy.me>
-To: Andrew Jones <andrew.jones@oss.qualcomm.com>, Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, 	leif.lindholm@oss.qualcomm.com, Fei Wu
- <wu.fei9@sanechips.com.cn>, Palmer Dabbelt <palmer@dabbelt.com>
-Date: Sun, 07 Jun 2026 01:25:41 +0800
-In-Reply-To: <skdkxsqs7ag7el6ikasgpdhc6p2g3zdoqexse2fj2mzhmlybmt@2pxvqsl7ho77>
-References: <20260604095244.3313259-1-daniel.barboza@oss.qualcomm.com>
- <20260604095244.3313259-3-daniel.barboza@oss.qualcomm.com>
- <4acb210eea217195fa733a4f42369c01591d5499.camel@icenowy.me>
- <a77a1891-214e-4788-8cc3-a5729f5cd182@oss.qualcomm.com>
- <9b05368c-972a-491e-bddb-7e015100eee2@oss.qualcomm.com>
- <5y2sdlx3pu5oyhrm3yxxkvkwv6pl3bpvuzdpnlqg4xt3l2zrxd@yi4h5x2f2xze>
- <3f9d50fb-304c-4ef3-bd63-9fd215b45965@oss.qualcomm.com>
- <17b395009bef17cc056ae4a58a83c744ebb12798.camel@icenowy.me>
- <eb4169a9-6f28-4104-884a-62249f7ccdbd@oss.qualcomm.com>
- <skdkxsqs7ag7el6ikasgpdhc6p2g3zdoqexse2fj2mzhmlybmt@2pxvqsl7ho77>
-Organization: Anthon Open-Source Community
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+ (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
+ id 1wWQBP-0007uY-2M
+ for qemu-riscv@nongnu.org; Sun, 07 Jun 2026 22:57:47 -0400
+Received: from mail-dy1-x1343.google.com ([2607:f8b0:4864:20::1343])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
+ id 1wWQBN-0006IZ-Hm
+ for qemu-riscv@nongnu.org; Sun, 07 Jun 2026 22:57:46 -0400
+Received: by mail-dy1-x1343.google.com with SMTP id
+ 5a478bee46e88-30759632453so5095219eec.1
+ for <qemu-riscv@nongnu.org>; Sun, 07 Jun 2026 19:57:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1780887462; x=1781492262; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=F0ybTsXpRtSsOnAJvkaAfgt66zHmzQMMx618/yj4OKw=;
+ b=Mkn2PYkOHlqzEbtL941FO/yjd8HP9xfbJIXUXSFGtyd9iOSGZAI7izTF0xWgiRxw1S
+ rpXTiEN2xm8AmN1c11z61Hc1w+uLMOPKugNThrZkdmWs9ebR2VZeEkzfb4B6HSerKqX3
+ SXal3JUprHQ5rVkdw40pyTwqCFkh5qFc0Ye3BJSwnj4QmtYKMop+ExiWPALGecGWUFIM
+ LGFz7PuTZFvPBMqEoyWlaJU3LiVWrwCdTpf6enp/+t6lXLRvGs9q7If2WkROfToezenQ
+ Aun41XzVAYbQETm+qiCdkwCP3ecKassX7O4XNrd202SJX4rrXQCwgpV6PSfx0FhNbZab
+ 3Rbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780887462; x=1781492262;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=F0ybTsXpRtSsOnAJvkaAfgt66zHmzQMMx618/yj4OKw=;
+ b=Sk55alIgzVHYYRJlDYbNhSbDpUcJPQapbZMPa5bFBXRlLjh4cMNBCb27AA6cOiln9k
+ AUYFk+Xb/aci2ecnuPwOGnmLoZwVufNu035chxMqs9wjzz4MHajY5RKSBJx2S6BJtmFl
+ ExXX5hn3rUKpdzW8ISVtT5bS8AMNFM+b1wPgo23kZBYrtjEfRz5QV3dCvvsHT1Tu/G5C
+ mWGNmb4otySvELLu2ROjqyV//KX2S8HaAtoFv9zWLC7OKr8A4pejlXFya8kE7JuT2OFQ
+ EMMMeo/d4NWlpHltWROvfKDPbDr0Lv4ckl7vyurT6UVL33sfRgLaGwKHl+bjdbTk2O4V
+ iEvA==
+X-Gm-Message-State: AOJu0YwWjQ+Y1k94fftD0yC7E906RKDCCpIZ9whqUFphr47o3vCurLTn
+ 1NARBxZOd2OzAD9HEJbKMR75VUKHydot4AVcRDY93HNcD4GOFt2wE6wZ
+X-Gm-Gg: Acq92OGYBkunkXKsbHZAHZ0LkLXO5oEgtZ8RuNmNP9Z9C4xE83M8CfUL33mddC02EL8
+ 7EraCUx/ng2R19udzOT++OIH65efgEKNTbqHsmb2HYVgO3qPO4I12+68MKinXfzCoiv0jMsywcs
+ PT1J/W35zu26Ga5hdTZVXDfi/aH/M9/LsfAGstMcvRsKqegv/qf46i+lv+xqvPyyssZQYZ/aapw
+ p+O1Cgt9szY6TGlYfJIFynkjfz2d9yd5VIc8rueL37ArMMzkyavr+IMuyW8ONtxVvvDV2TwbXE6
+ U/Ry+0uzJNAKspAMESgkX9q8JF1sd3o6BDJH1w3cS1F+n6NjNqccYKwNSMrol+khwlaBmOaE23o
+ bDNTHnbMYu1hm0ZbOT9N9YeZWKTjG640c+WLr+70lCMLEGXfvrRXq+ywi5fs/dLv7/qEUkQLDjr
+ F523x3Kih3JyjM6XX16jiIFsNg3H8JvCu2IeedZHURnDX1K97nx9aTeVf3ua/5SN2chhoSly6d+
+ ho+S6T9
+X-Received: by 2002:a05:7300:bc06:b0:304:dfae:68a with SMTP id
+ 5a478bee46e88-3077b29b6c7mr7022266eec.28.1780887462237; 
+ Sun, 07 Jun 2026 19:57:42 -0700 (PDT)
+Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3074df3b234sm20199224eec.23.2026.06.07.19.57.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Jun 2026 19:57:41 -0700 (PDT)
+Date: Mon, 8 Jun 2026 10:57:38 +0800
+From: Chao Liu <chao.liu.zevorn@gmail.com>
+To: Nicholas Piggin <npiggin@gmail.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, bin.meng@windriver.com,
+ vivahavey@gmail.com, 
+ Alvin Chang <alvinga@andestech.com>, Yu-Ming Chang <yumin686@andestech.com>, 
+ Joel Stanley <joel@jms.id.au>
+Subject: Re: [RFC PATCH 01/25] target/riscv/debug: Check only mcontrol
+ triggers for break/watchpoint matching
+Message-ID: <aiYvkZXHIObH_mK1@ChaodeMacBook-Pro.local>
+References: <20260114044701.1173347-1-npiggin@gmail.com>
+ <20260114044701.1173347-2-npiggin@gmail.com>
 MIME-Version: 1.0
-X-ZohoMailClient: External
-Received-SPF: pass client-ip=136.143.188.12; envelope-from=uwu@icenowy.me;
- helo=sender4-op-o12.zoho.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260114044701.1173347-2-npiggin@gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1343;
+ envelope-from=chao.liu.zevorn@gmail.com; helo=mail-dy1-x1343.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,52 +108,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-=E5=9C=A8 2026-06-06=E5=85=AD=E7=9A=84 11:09 -0500=EF=BC=8CAndrew Jones=E5=
-=86=99=E9=81=93=EF=BC=9A
-> On Sat, Jun 06, 2026 at 07:21:32AM -0300, Daniel Henrique Barboza
-> wrote:
-> ...
-> > > I think we can just make RVSP a profile, and rvsp-ref CPU a BARE
-> > > CPU
-> > > based on that profile; then set the profile's min SATP to Sv48,
-> > > and the
-> > > BARE CPU's max SATP to Sv57.
-> > >=20
-> > > In this case if any other CPU complying to RVSP is added, it can
-> > > just
-> > > reuse the profile.
-> >=20
-> > Having riscv-server-ref being a profile CPU seems compelling indeed
-> > ...
-> > new CPUs could instance it with .profile =3D &rvserver-ref to have
-> > everything
-> > already sorted out, we would also have a flag to enable the profile
-> > for
-> > existing cpus, e.g. -cpu rv64,rvserver-ref=3Don.
-> >=20
-> > Drew, any thoughts?
->=20
-> As long as the concept of 'profile' is internal to QEMU and we
-> comment its
-> [ab]use explaining why the riscv-server-ref is modeled that way, then
-> that
-> sounds good to me. If the concept is exposed to users then I fear
-> we'd
-> confuse things by inventing profiles that don't exist in the profiles
-> spec.
+On Wed, Jan 14, 2026 at 02:46:34PM +0800, Nicholas Piggin wrote:
+> trigger_common_match() has some warning log messages in it for
+> unsupported triggers. Don't call it in BP/WP checking except for
+> mcontrol/mcontrol6 triggers applicable to BP/WPs.
+> 
+> Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
 
-Well I think the problem here is that RVI doesn't restrict the
-definition of required processor feature sets to profiles spec.
-
-The best solution here is to make them create a proper profile
-describing the ISA extension requirement of RV Server Platform spec,
-instead of open-coding it in RVSP spec; otherwise they're effectively
-creating a profile, even if it's not in the profiles spec.
-
-Thanks,
-Icenowy
-
->=20
-> Thanks,
-> drew
+> ---
+>  target/riscv/debug.c | 22 ++++++++++++++++++----
+>  1 file changed, 18 insertions(+), 4 deletions(-)
+> 
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index 5664466749..4273ab7a8d 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -952,6 +952,14 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>          for (i = 0; i < RV_MAX_TRIGGERS; i++) {
+>              trigger_type = get_trigger_type(env, i);
+>  
+> +            switch (trigger_type) {
+> +            case TRIGGER_TYPE_AD_MATCH:
+> +            case TRIGGER_TYPE_AD_MATCH6:
+> +                break;
+> +            default:
+> +                continue; /* No other types match breakpoint */
+> +            }
+> +
+>              if (!trigger_common_match(env, trigger_type, i)) {
+>                  continue;
+>              }
+> @@ -976,8 +984,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>                  }
+>                  break;
+>              default:
+> -                /* other trigger types are not supported or irrelevant */
+> -                break;
+> +                g_assert_not_reached();
+>              }
+>          }
+>      }
+> @@ -998,6 +1005,14 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+>      for (i = 0; i < RV_MAX_TRIGGERS; i++) {
+>          trigger_type = get_trigger_type(env, i);
+>  
+> +        switch (trigger_type) {
+> +        case TRIGGER_TYPE_AD_MATCH:
+> +        case TRIGGER_TYPE_AD_MATCH6:
+> +            break;
+> +        default:
+> +            continue; /* No other types match watchpoint */
+> +        }
+> +
+>          if (!trigger_common_match(env, trigger_type, i)) {
+>              continue;
+>          }
+> @@ -1036,8 +1051,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+>              }
+>              break;
+>          default:
+> -            /* other trigger types are not supported */
+> -            break;
+> +            g_assert_not_reached();
+>          }
+>      }
+>  
+> -- 
+> 2.51.0
+> 
+> 
 
