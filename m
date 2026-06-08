@@ -4,95 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 041FDCD8C92
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jun 2026 02:57:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C04CD8C9D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 Jun 2026 06:35:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wWQBR-0007v3-EI; Sun, 07 Jun 2026 22:57:49 -0400
+	id 1wWTa5-0000QR-NY; Mon, 08 Jun 2026 02:35:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wWQBP-0007uY-2M
- for qemu-riscv@nongnu.org; Sun, 07 Jun 2026 22:57:47 -0400
-Received: from mail-dy1-x1343.google.com ([2607:f8b0:4864:20::1343])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wWQBN-0006IZ-Hm
- for qemu-riscv@nongnu.org; Sun, 07 Jun 2026 22:57:46 -0400
-Received: by mail-dy1-x1343.google.com with SMTP id
- 5a478bee46e88-30759632453so5095219eec.1
- for <qemu-riscv@nongnu.org>; Sun, 07 Jun 2026 19:57:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780887462; x=1781492262; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=F0ybTsXpRtSsOnAJvkaAfgt66zHmzQMMx618/yj4OKw=;
- b=Mkn2PYkOHlqzEbtL941FO/yjd8HP9xfbJIXUXSFGtyd9iOSGZAI7izTF0xWgiRxw1S
- rpXTiEN2xm8AmN1c11z61Hc1w+uLMOPKugNThrZkdmWs9ebR2VZeEkzfb4B6HSerKqX3
- SXal3JUprHQ5rVkdw40pyTwqCFkh5qFc0Ye3BJSwnj4QmtYKMop+ExiWPALGecGWUFIM
- LGFz7PuTZFvPBMqEoyWlaJU3LiVWrwCdTpf6enp/+t6lXLRvGs9q7If2WkROfToezenQ
- Aun41XzVAYbQETm+qiCdkwCP3ecKassX7O4XNrd202SJX4rrXQCwgpV6PSfx0FhNbZab
- 3Rbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780887462; x=1781492262;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=F0ybTsXpRtSsOnAJvkaAfgt66zHmzQMMx618/yj4OKw=;
- b=Sk55alIgzVHYYRJlDYbNhSbDpUcJPQapbZMPa5bFBXRlLjh4cMNBCb27AA6cOiln9k
- AUYFk+Xb/aci2ecnuPwOGnmLoZwVufNu035chxMqs9wjzz4MHajY5RKSBJx2S6BJtmFl
- ExXX5hn3rUKpdzW8ISVtT5bS8AMNFM+b1wPgo23kZBYrtjEfRz5QV3dCvvsHT1Tu/G5C
- mWGNmb4otySvELLu2ROjqyV//KX2S8HaAtoFv9zWLC7OKr8A4pejlXFya8kE7JuT2OFQ
- EMMMeo/d4NWlpHltWROvfKDPbDr0Lv4ckl7vyurT6UVL33sfRgLaGwKHl+bjdbTk2O4V
- iEvA==
-X-Gm-Message-State: AOJu0YwWjQ+Y1k94fftD0yC7E906RKDCCpIZ9whqUFphr47o3vCurLTn
- 1NARBxZOd2OzAD9HEJbKMR75VUKHydot4AVcRDY93HNcD4GOFt2wE6wZ
-X-Gm-Gg: Acq92OGYBkunkXKsbHZAHZ0LkLXO5oEgtZ8RuNmNP9Z9C4xE83M8CfUL33mddC02EL8
- 7EraCUx/ng2R19udzOT++OIH65efgEKNTbqHsmb2HYVgO3qPO4I12+68MKinXfzCoiv0jMsywcs
- PT1J/W35zu26Ga5hdTZVXDfi/aH/M9/LsfAGstMcvRsKqegv/qf46i+lv+xqvPyyssZQYZ/aapw
- p+O1Cgt9szY6TGlYfJIFynkjfz2d9yd5VIc8rueL37ArMMzkyavr+IMuyW8ONtxVvvDV2TwbXE6
- U/Ry+0uzJNAKspAMESgkX9q8JF1sd3o6BDJH1w3cS1F+n6NjNqccYKwNSMrol+khwlaBmOaE23o
- bDNTHnbMYu1hm0ZbOT9N9YeZWKTjG640c+WLr+70lCMLEGXfvrRXq+ywi5fs/dLv7/qEUkQLDjr
- F523x3Kih3JyjM6XX16jiIFsNg3H8JvCu2IeedZHURnDX1K97nx9aTeVf3ua/5SN2chhoSly6d+
- ho+S6T9
-X-Received: by 2002:a05:7300:bc06:b0:304:dfae:68a with SMTP id
- 5a478bee46e88-3077b29b6c7mr7022266eec.28.1780887462237; 
- Sun, 07 Jun 2026 19:57:42 -0700 (PDT)
-Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3074df3b234sm20199224eec.23.2026.06.07.19.57.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Jun 2026 19:57:41 -0700 (PDT)
-Date: Mon, 8 Jun 2026 10:57:38 +0800
-From: Chao Liu <chao.liu.zevorn@gmail.com>
-To: Nicholas Piggin <npiggin@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, bin.meng@windriver.com,
- vivahavey@gmail.com, 
- Alvin Chang <alvinga@andestech.com>, Yu-Ming Chang <yumin686@andestech.com>, 
- Joel Stanley <joel@jms.id.au>
-Subject: Re: [RFC PATCH 01/25] target/riscv/debug: Check only mcontrol
- triggers for break/watchpoint matching
-Message-ID: <aiYvkZXHIObH_mK1@ChaodeMacBook-Pro.local>
-References: <20260114044701.1173347-1-npiggin@gmail.com>
- <20260114044701.1173347-2-npiggin@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260114044701.1173347-2-npiggin@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1343;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-dy1-x1343.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
+ id 1wWTZv-0000JY-SL; Mon, 08 Jun 2026 02:35:22 -0400
+Received: from mxhk.zte.com.cn ([160.30.148.34])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
+ id 1wWTZt-0004yt-Bb; Mon, 08 Jun 2026 02:35:19 -0400
+Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4gYj2f0Vbkz5B1Gv;
+ Mon, 08 Jun 2026 14:35:06 +0800 (CST)
+Received: from szxl2zmapp06.zte.com.cn ([10.1.32.108])
+ by mse-fl1.zte.com.cn with SMTP id 6586Yupr091611;
+ Mon, 8 Jun 2026 14:34:56 +0800 (+08)
+ (envelope-from wang.yechao255@zte.com.cn)
+Received: from mapi (szxl2zmapp07[null]) by mapi (Zmail) with MAPI id mid12;
+ Mon, 8 Jun 2026 14:34:58 +0800 (CST)
+X-Zmail-TransId: 2b096a2662920c1-4eefb
+X-Mailer: Zmail v1.0
+Message-ID: <20260608143458400rOXqFmoA6o1tmlztJH2gE@zte.com.cn>
+Date: Mon, 8 Jun 2026 14:34:58 +0800 (CST)
+Mime-Version: 1.0
+From: <wang.yechao255@zte.com.cn>
+To: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <liwei1518@gmail.com>,
+ <daniel.barboza@oss.qualcomm.com>, <zhiwei_liu@linux.alibaba.com>,
+ <chao.liu.zevorn@gmail.com>
+Cc: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
+Subject: =?UTF-8?B?W1BBVENIXSBody9yaXNjdi92aXJ0OiBBZGQgImlvbW11LW1hcCIgcHJvcGVydHkgZm9yIHBjaWUgYnVz?=
+Content-Type: text/plain;
+	charset="UTF-8"
+X-MAIL: mse-fl1.zte.com.cn 6586Yupr091611
+X-TLS: YES
+X-ENVELOPE-SENDER: wang.yechao255@zte.com.cn
+X-SOURCE-IP: 10.5.228.132 unknown Mon, 08 Jun 2026 14:35:06 +0800
+X-CLEAN: YES
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-MID-QID: 6A26629A.000/4gYj2f0Vbkz5B1Gv
+Received-SPF: pass client-ip=160.30.148.34;
+ envelope-from=wang.yechao255@zte.com.cn; helo=mxhk.zte.com.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,74 +72,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 14, 2026 at 02:46:34PM +0800, Nicholas Piggin wrote:
-> trigger_common_match() has some warning log messages in it for
-> unsupported triggers. Don't call it in BP/WP checking except for
-> mcontrol/mcontrol6 triggers applicable to BP/WPs.
-> 
-> Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+From: Wang Yechao <wang.yechao255@zte.com.cn>
 
-> ---
->  target/riscv/debug.c | 22 ++++++++++++++++++----
->  1 file changed, 18 insertions(+), 4 deletions(-)
-> 
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index 5664466749..4273ab7a8d 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -952,6 +952,14 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
->          for (i = 0; i < RV_MAX_TRIGGERS; i++) {
->              trigger_type = get_trigger_type(env, i);
->  
-> +            switch (trigger_type) {
-> +            case TRIGGER_TYPE_AD_MATCH:
-> +            case TRIGGER_TYPE_AD_MATCH6:
-> +                break;
-> +            default:
-> +                continue; /* No other types match breakpoint */
-> +            }
-> +
->              if (!trigger_common_match(env, trigger_type, i)) {
->                  continue;
->              }
-> @@ -976,8 +984,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
->                  }
->                  break;
->              default:
-> -                /* other trigger types are not supported or irrelevant */
-> -                break;
-> +                g_assert_not_reached();
->              }
->          }
->      }
-> @@ -998,6 +1005,14 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->      for (i = 0; i < RV_MAX_TRIGGERS; i++) {
->          trigger_type = get_trigger_type(env, i);
->  
-> +        switch (trigger_type) {
-> +        case TRIGGER_TYPE_AD_MATCH:
-> +        case TRIGGER_TYPE_AD_MATCH6:
-> +            break;
-> +        default:
-> +            continue; /* No other types match watchpoint */
-> +        }
-> +
->          if (!trigger_common_match(env, trigger_type, i)) {
->              continue;
->          }
-> @@ -1036,8 +1051,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->              }
->              break;
->          default:
-> -            /* other trigger types are not supported */
-> -            break;
-> +            g_assert_not_reached();
->          }
->      }
->  
-> -- 
-> 2.51.0
-> 
-> 
+On DT system, add the "iommu-map" property for pcie bus, so the kernel
+can build the dependency between iommu and devices, to avoid the
+incorrect removal order.
+
+Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
+---
+ hw/riscv/virt.c         | 8 ++++++++
+ include/hw/riscv/virt.h | 1 +
+ 2 files changed, 9 insertions(+)
+
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index ce64eaaef7..0ce16f13c2 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -904,6 +904,13 @@ static void create_fdt_pcie(RISCVVirtState *s,
+                                iommu_sys_phandle, 0, 0xffff);
+     }
+
++    if (s->pci_iommu_bdf) {
++        qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
++                               0, s->pci_iommu_phandle, 0, s->pci_iommu_bdf,
++                               s->pci_iommu_bdf + 1, s->pci_iommu_phandle,
++                               s->pci_iommu_bdf + 1, 0xffff - s->pci_iommu_bdf);
++    }
++
+     create_pcie_irq_map(s, ms->fdt, name, irq_pcie_phandle);
+ }
+
+@@ -1117,6 +1124,7 @@ static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
+                            0, iommu_phandle, 0, bdf,
+                            bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
+     s->pci_iommu_bdf = bdf;
++    s->pci_iommu_phandle = iommu_phandle;
+ }
+
+ static void finalize_fdt(RISCVVirtState *s)
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 18a2a323a3..25c563cf8f 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -64,6 +64,7 @@ struct RISCVVirtState {
+     struct GPEXHost *gpex_host;
+     OnOffAuto iommu_sys;
+     uint16_t pci_iommu_bdf;
++    uint32_t pci_iommu_phandle;
+ };
+
+ enum {
+-- 
+2.27.0
 
