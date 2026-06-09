@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 901C0CD8C92
-	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jun 2026 12:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9711ECD8C92
+	for <qemu-riscv@archiver.kernel.org>; Tue,  9 Jun 2026 12:56:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wWw0C-0000tP-C9; Tue, 09 Jun 2026 08:56:20 -0400
+	id 1wWw0I-0000tQ-Ur; Tue, 09 Jun 2026 08:56:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jic23@kernel.org>)
- id 1wWvlb-0004qh-9R; Tue, 09 Jun 2026 08:41:15 -0400
-Received: from tor.source.kernel.org ([172.105.4.254])
+ id 1wWvrb-0006DX-Dz; Tue, 09 Jun 2026 08:47:29 -0400
+Received: from sea.source.kernel.org ([172.234.252.31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jic23@kernel.org>)
- id 1wWvlZ-0003Kl-K2; Tue, 09 Jun 2026 08:41:15 -0400
+ id 1wWvrX-0006w0-0A; Tue, 09 Jun 2026 08:47:26 -0400
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 53E44601DC;
- Tue,  9 Jun 2026 12:41:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 134841F00893;
- Tue,  9 Jun 2026 12:41:06 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 1C1A343D63;
+ Tue,  9 Jun 2026 12:47:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D3951F00893;
+ Tue,  9 Jun 2026 12:47:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781008872;
- bh=gdFWwupeABirGKtuLIonyynWxBena413bVbMEmUpeEw=;
+ s=k20260515; t=1781009241;
+ bh=4X26vcbCVfZIBSpn5p7qHWYu06T8VSoTygDc7YdrmQI=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References;
- b=WT2uIx6V2GcUVquXQsi9TnlnRv1Nu+DOvmC13BPM2UA+MEK8OjtoBnJAwuKRSBtdL
- SN/rT4xpsWjwcdsXBBGpQ7Bh9FCrmd4KF3g9s+vh6UBcxlu1y+GOrAZgKi25hzjD0n
- 2M6kdlG91leaGIvQufE9JxKHprFL8vCpCICymdRFz8NQZyHcrocxnbxUKoLx5RD6W7
- dscxFM5/me7reqsmLPRt/Xs7G//eLRqBJiClHVG8dPVV8kEHjT/ARZv05iGgsm4X7G
- hjCgkVaKeEgRf4JmUal3Kj1IPX12YOV8UbcUPaxQ1kJFdmvYrcqrKb4m0TyzIJHikE
- RmzCnCqkPNMLQ==
-Date: Tue, 9 Jun 2026 13:41:01 +0100
+ b=ngmzzyV8D+ZRrg4wKWrbKLcxQ4xQ64A+1/QXnRBEorASK97a076dQqjX0D/Wui9pC
+ iVzSlxS2FVIgX5pYtJsDrSxsqjIvHy2sOD8LZRVLc3Y0uG3NfM/4aOjLU83jwQUjy9
+ szu8cvIo3UQJuqBBVjkVZiZLy02pRZBA7tQgV3Oq2uvWzXGBztYzLIdgiHdiJy3pAU
+ Wi68IwapiOIxAM0pSytYhKKpXoV/CzlI5R85klE8GM76+2Rv9me1kFE9zTrbp7IOCJ
+ TDh3+rHMr0C7ozK4ZYlg4vmWoLB4bXacaXOKLSSnWouZ1oChagHriXD8OBpug3isDY
+ Y5oPbYanmt87Q==
+Date: Tue, 9 Jun 2026 13:47:09 +0100
 From: Jonathan Cameron <jic23@kernel.org>
 To: Chen Pei <cp0613@linux.alibaba.com>
 Cc: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
  sunilvl@ventanamicro.com, jonathan.cameron@huawei.com, fan.ni@samsung.com,
- guoren@kernel.org, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: Re: [PATCH 1/4] hw/riscv/virt: Add CXL support to the RISC-V virt
- machine
-Message-ID: <20260609134101.1dd53f93@jic23-huawei>
-In-Reply-To: <20260602074127.63819-2-cp0613@linux.alibaba.com>
+ guoren@kernel.org, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ linux-cxl@vger.kernel.org
+Subject: Re: [PATCH 2/4] hw/riscv/virt-acpi-build: Add _DEP to ACPI0017 for
+ CXL host bridge dependency
+Message-ID: <20260609134659.3dc89b40@jic23-huawei>
+In-Reply-To: <20260602074127.63819-3-cp0613@linux.alibaba.com>
 References: <20260602074127.63819-1-cp0613@linux.alibaba.com>
- <20260602074127.63819-2-cp0613@linux.alibaba.com>
+ <20260602074127.63819-3-cp0613@linux.alibaba.com>
 X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=172.105.4.254; envelope-from=jic23@kernel.org;
- helo=tor.source.kernel.org
+Received-SPF: pass client-ip=172.234.252.31; envelope-from=jic23@kernel.org;
+ helo=sea.source.kernel.org
 X-Spam_score_int: -24
 X-Spam_score: -2.5
 X-Spam_bar: --
@@ -60,7 +61,7 @@ X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 09 Jun 2026 08:56:13 -0400
+X-Mailman-Approved-At: Tue, 09 Jun 2026 08:56:17 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,120 +76,98 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue,  2 Jun 2026 15:41:24 +0800
+On Tue,  2 Jun 2026 15:41:25 +0800
 Chen Pei <cp0613@linux.alibaba.com> wrote:
 
-> Enable CXL support on the RISC-V virt machine following the same
-> approach used by the ARM virt machine:
-> - Add PXB and ACPI_CXL Kconfig selections
-> - Add CXLState and PCIBus pointer to RISCVVirtState
-> - Register CXL machine properties via cxl_machine_init()
-> - Create CXL host register region above the PCIe high MMIO region
-> - Call cxl_hook_up_pxb_registers() and cxl_fmws_link_targets() at
->   machine_done time
-> - Map Fixed Memory Windows above the CXL host register region
-> - Add ACPI0017 device in DSDT and build CEDT table in virt-acpi-build.c
+> On RISC-V QEMU virt platform with CXL enabled, the probe ordering
+> of acpi_pci_root (ACPI0016) and cxl_acpi (ACPI0017) is not
+> guaranteed. If cxl_acpi probes before acpi_pci_root has attached
+> the CXL host bridges, the CXL port topology will be incomplete
+> because to_cxl_host_bridge() silently skips devices whose PCI root
+> is not yet ready.
+> 
+> Add a _DEP object to the ACPI0017 device in the DSDT, declaring
+> its dependency on the ACPI0016 CXL host bridge devices. This tells
+> the OS to defer ACPI0017 enumeration until all ACPI0016 devices
+> have been attached by acpi_pci_root.
+> 
+> This requires a corresponding kernel change to call
+> acpi_dev_clear_dependencies() in acpi_pci_root_add().
 > 
 > Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
-Just really minor stuff inline. Been a while since we added an architecture
-but all looks fine to me.
 
-Reviewed-by: Jonathan Cameron <jic23@kernel.org>
+It may be a good idea to add a bios tables test as well.
+ 
+We only have the x86 q35 one today because I argued at the time
+the ARM64 one would be just duplication.  Now we have this new _DEP
+stuff we should probably add something to cover it.
 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index ce64eaaef7..899f632de7 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -55,6 +55,8 @@
->  #include "hw/pci/pci.h"
->  #include "hw/pci-host/gpex.h"
->  #include "hw/display/ramfb.h"
-> +#include "hw/cxl/cxl.h"
-> +#include "hw/cxl/cxl_host.h"
->  #include "hw/acpi/aml-build.h"
->  #include "qapi/qapi-visit-common.h"
->  #include "hw/virtio/virtio-iommu.h"
-> @@ -1259,9 +1261,27 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
->      }
->  
->      GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
-> +    s->bus = PCI_HOST_BRIDGE(dev)->bus;
->      return dev;
->  }
+Please also include an iasl -d dump of the relevant additions to DSDT
+in the patch description.  Much easier to review than the code that
+generates it!
 
->  static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
->  {
->      FWCfgState *fw_cfg;
-> @@ -1426,6 +1446,15 @@ static void virt_machine_done(Notifier *notifier, void *data)
->                                       machine_done);
->      MachineState *machine = MACHINE(s);
->      hwaddr start_addr = s->memmap[VIRT_DRAM].base;
+In general looks fine to me and great that you are clearing this up.
+Seems it's luck that x86 and ARM64 worked without this (or strictly
+speaking other things enforcing the ordering).  Ultimately we probably
+want to add this to those two architectures a well.
+
+One small thing inline.
+
+Thanks,
+
+Jonathan
+
+
+> ---
+>  hw/riscv/virt-acpi-build.c | 32 ++++++++++++++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
+> 
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 309d64b322..a5bafd1dcf 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -510,6 +510,38 @@ static void build_dsdt(GArray *table_data,
+>      if (s->cxl_devices_state.is_enabled) {
+>          Aml *cxl_dev = aml_device("CXLM");
+>          aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
 > +
-> +    if (s->bus) {
-
-There is a guard against !s->bus inside the function so you should be
-able to do this unconditionally.
-
-> +        cxl_hook_up_pxb_registers(s->bus, &s->cxl_devices_state,
-> +                                  &error_fatal);
-> +    }
+> +        /*
+> +         * Declare a _DEP on every ACPI0016 CXL host bridge so the OS
+> +         * defers ACPI0017 enumeration until acpi_pci_root has attached
+> +         * the CXL host bridges. Without this, cxl_acpi may probe before
+> +         * to_cxl_host_bridge() can resolve the PCI root and the CXL
+> +         * port topology comes up empty.
+> +         */
+> +        if (s->bus) {
+> +            PCIBus *bus;
+> +            uint32_t num_cxl_hbs = 0;
 > +
-> +    if (s->cxl_devices_state.is_enabled) {
-> +        cxl_fmws_link_targets(&error_fatal);
-> +    }
->      hwaddr firmware_end_addr;
->      vaddr kernel_start_addr;
->      const char *firmware_name = riscv_default_firmware_name(&s->soc[0]);
-> @@ -1663,6 +1692,17 @@ static void virt_machine_init(MachineState *machine)
->              ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
->      }
->  
-> +    create_cxl_host_reg_region(s);
-> +
-> +    if (s->cxl_devices_state.is_enabled) {
-> +        hwaddr cxl_base = virt_high_pcie_memmap.base +
-> +                          virt_high_pcie_memmap.size;
-> +        cxl_base += memory_region_size(&s->cxl_devices_state.host_mr);
-> +        cxl_base = ROUND_UP(cxl_base, 256 * MiB);
-> +        cxl_fmws_set_memmap(cxl_base, UINT64_MAX);
-> +        cxl_fmws_update_mmio();
-> +    }
-> +
->      /* register system main memory (actual RAM) */
->      memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
->                                  machine->ram);
-> @@ -1769,6 +1809,8 @@ static void virt_machine_instance_init(Object *obj)
->      s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
->      s->acpi = ON_OFF_AUTO_AUTO;
->      s->iommu_sys = ON_OFF_AUTO_AUTO;
-> +
-> +    cxl_machine_init(obj, &s->cxl_devices_state);
->  }
->  
->  static char *virt_get_aia_guests(Object *obj, Error **errp)
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 18a2a323a3..c3201588bb 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -24,6 +24,7 @@
->  #include "hw/core/sysbus.h"
->  #include "hw/block/flash.h"
->  #include "hw/intc/riscv_imsic.h"
-> +#include "hw/cxl/cxl.h"
->  
->  #define VIRT_CPUS_MAX_BITS             9
->  #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
-> @@ -64,6 +65,8 @@ struct RISCVVirtState {
->      struct GPEXHost *gpex_host;
->      OnOffAuto iommu_sys;
->      uint16_t pci_iommu_bdf;
-> +    CXLState cxl_devices_state;
-> +    PCIBus *bus;
+> +            QLIST_FOREACH(bus, &s->bus->child, sibling) {
+> +                if (pci_bus_is_root(bus) && pci_bus_is_cxl(bus)) {
+> +                    num_cxl_hbs++;
 
-That's a very vague bit of naming.  I'd make it explicit what PCIBus this is.
+I think you only care if there is at least one. Instead of counting, just set
+a bool and break out early if you find one.
 
->  };
->  
->  enum {
+> +                }
+> +            }
+> +
+> +            if (num_cxl_hbs > 0) {
+> +                Aml *dep_pkg = aml_package(num_cxl_hbs);
+> +
+> +                QLIST_FOREACH(bus, &s->bus->child, sibling) {
+> +                    if (pci_bus_is_root(bus) && pci_bus_is_cxl(bus)) {
+> +                        aml_append(dep_pkg,
+> +                                   aml_name("\\_SB.PC%.02X",
+> +                                            pci_bus_num(bus)));
+> +                    }
+> +                }
+> +                aml_append(cxl_dev, aml_name_decl("_DEP", dep_pkg));
+> +            }
+> +        }
+> +
+>          Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
+>          aml_append(method, aml_return(aml_int(0x0B)));
+>          aml_append(cxl_dev, method);
 
 
