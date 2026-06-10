@@ -4,131 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 733ABCD98CC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jun 2026 21:42:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DBDDCD98C5
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jun 2026 21:42:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXQgP-0006oq-V3; Wed, 10 Jun 2026 17:41:57 -0400
+	id 1wXQgP-0006nq-OQ; Wed, 10 Jun 2026 17:41:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wXQgO-0006kf-Tr
- for qemu-riscv@nongnu.org; Wed, 10 Jun 2026 17:41:56 -0400
+ id 1wXQgN-0006g2-G2
+ for qemu-riscv@nongnu.org; Wed, 10 Jun 2026 17:41:55 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wXQgL-00032H-4E
- for qemu-riscv@nongnu.org; Wed, 10 Jun 2026 17:41:56 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1wXQgK-000314-Uk
+ for qemu-riscv@nongnu.org; Wed, 10 Jun 2026 17:41:55 -0400
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65AJYUPv2471531
- for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 21:41:50 GMT
+ 65AJZ4bR2602029
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 21:41:45 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=pZIAO/tzWro
- CgEzjpoZj5lnjJ7EetIqK5We7SK6ra5M=; b=nNQFwXvGYTOfrjGM/o9XkJmv0Ak
- eQZ4dh1FZgN21meXmkzT4ufQb+qsrrWEwNhYD1g5RbNHpi7lqd+rh7ru72G6Qly3
- cgxzBjupaSQqWQeIm2V4GUnmK05niPQUd87nEO7OZTyjegEDBqVyvSc9v82lDXtQ
- JC9RHpjbxqsa1tu1f/C3jRB53GOK1cq+1nA2clQzgVxlbbBLM1o7JyswcK6dwgbd
- zqKEjJrEY0LEzH7RnTKoDpCJp4h1y3ibt3r+GUBL2X/pMt9+IDIoyqvxZ4Hb55GW
- DUuNSl4fywyMl0wl5hPXTCfk9ntidbjqZSVgoM6bbR8CIrvwwl7elju1inw==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eqe6u8ewj-1
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=fr+hmP6wAcyJg6fA0k1Ejn
+ Gs7psf8eLT4/6GCio/uCU=; b=LtFfjLJa6IVy++vwqhJzlnTZ04K6XoG9spjxF3
+ yCN6bPY3gpuMWrMmtc8Fk8VLyI7oHLWL+28bUvApDarAa37nFK/SyclpyziiYeZ1
+ 1u4gyWh5o885DvoaAG/aF8dU87jL5q5KpvEFJg7xK+CwPtWE8CcbxBT3XP8HZXtl
+ qqbSBw58ElVgh2igFMTG+Y/aIkplAc8BQi/qgXqLDoRJc/h5oVcSHsvuouIYa61Z
+ aYf8SKYG9hszNDEVt9A7nUm4AvhQReeqSr486Sib6TmIg1pI3q3yEW2Acs85UNX4
+ BUNinvJJSTIK8gJQst88V5E8Kp9xZT8VjFP5ulNziJJtDFzA==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eqe700exg-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 21:41:50 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-517a00fbac6so26103761cf.2
- for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 14:41:50 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 21:41:45 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-517c65c019bso71050631cf.0
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 14:41:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781127710; x=1781732510; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pZIAO/tzWroCgEzjpoZj5lnjJ7EetIqK5We7SK6ra5M=;
- b=CvA6zVWhBPkrUm1GChsDuOFpF8xBfR90aaIBrxeqNe8uvHm4AOuRo1paLGyEQt9esa
- rJQdV5FBpIFLbwSRYbkEO4f+vFpSzdhJDGjh32aPvVKxYWITzwhix1AkbtcsMkyaDe2U
- YaIz8QvTaywarEDsxZNA2AURnIG/JRViLttLgNWw0hzINJ/H8lcWmJaJxNSilJfJ5SgM
- JLWKzn3ivURlzNgrY2f97glCiBtDyTMGF1Fvei7OeWvn4wjzxFQe2wlHyPu6plNKkn2b
- Eu/Pu8/Qt7cJH9J0GCGamDB9+MHDN34YEz82voy3MOCx4BEVbomU1B5ikDl4uFZsMacZ
- ys7A==
+ d=oss.qualcomm.com; s=google; t=1781127705; x=1781732505; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fr+hmP6wAcyJg6fA0k1EjnGs7psf8eLT4/6GCio/uCU=;
+ b=knj8z5UI/JDOEtgsFF6d7jou7V1hAq5UHz8ORV24GGLH/JxBtJRP9QrV1zjWTcCoyJ
+ bjgd0wkMjb1laiUmk147peOHUkre0jEAr4HUGxVKm2RRxuiuc4fORRMYUsby8SWy0jYZ
+ dksgyGi38S3hKy2G8Gy8xGGB27bpe4+2woWnmcw5/5z3aTASgJgoEeqnTc7qWtmtnR4f
+ b2xpxsoVl38xF6pjRsIycaJUr2kHQoxUi8lhQaese3pJFMh8nCtuXyb3v/VmcoGRUiOU
+ BXtVrcdLKZYBUtc9ey271Pkeu1RmbLr9JcosDzdq5IrKC26ukXglodMYah6jP2RM76bY
+ GCXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781127710; x=1781732510;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=pZIAO/tzWroCgEzjpoZj5lnjJ7EetIqK5We7SK6ra5M=;
- b=IpfsTegRkC32ad72uatw+e1cSZVzs9NB4QueqKjzKGIYu1BcQtv7kdHjtd09dpbRz3
- Z8XTf42Hx+QteXi/8PefjPffhF/y8G1eWPqdEwiAmrzLTuchVK35jfDU+/kqjzx6gDRF
- DdrUDP1pCZz6e2RTPJz0PyOOuSWaVmhGLotznZGQ7M7e+asa2FEvCkKT05VwCUDlrnYb
- jRJdA7umKmBFxrFj1kcVsmq3OJw31MX7n5CeYHWZMM9I6d2T0FQ+fS5CaRCN2RwF8IWA
- 5YfwqJoCUX1oOEgBfi7ywO/rK2Dg+OUBj+84fXwdpl9k9U3nLnCnUEhJJuoR7x6HHzAr
- 3wDw==
-X-Gm-Message-State: AOJu0Yx0NEJ3K9H4HEgzva8IoFxPEzsxfgf32GKGBgBiiXzCwnrkhmNm
- 8HhSKR639magy8JH5BZVzozj611RMakPB+2pbrm8h57PDbRRMVQMalh5UgMkAJwH5H8sdPGT6jO
- xRlTMphJm4L0ttFhk+CDoPBd4u64MTm6MRzqASNNCYS8hXw6q6/re+ZcDwQ==
-X-Gm-Gg: Acq92OHvLp/MMzR/8LRa2rrukbzoSiBU6rKXb+V4TkqxLhBJTeujOEIMcicu2TRT8KV
- PaOBFpQzL/LjQRjIk6WXzdlSSF+FETAvv1Gf4yjidtNtYS/A866brSuKBIAXU4P8tENR+7sory0
- /Uc9+A+soKN7wXctUJID0PUcdFwCRH+uB01c8b2gLa4j+bMjQjWgNGybW8InQ+qZUskWDkKvEHW
- EywQLs9K8jFbPDzpNAoL686yxZBSxdZ4lPI/0pfJ/CM1PNt+F2GCR7PPDG2cOs446PVxp9iupZc
- ixUWU5tpaUejBttORl05W9JKGBmBGC+das6vV1vSeawnu9elyHD52uxjEV6XSvweulb2nwJC2Bn
- navMuEh1unoKo99h7wk4Z5E4i2/N8NcfhJ5WKxjxO9WD2aIb40PWNp+V5cfoqUslD22pb4w==
-X-Received: by 2002:a05:622a:511:b0:517:57f5:e21a with SMTP id
- d75a77b69052e-517ee28dbdcmr521091cf.41.1781127709820; 
- Wed, 10 Jun 2026 14:41:49 -0700 (PDT)
-X-Received: by 2002:a05:622a:511:b0:517:57f5:e21a with SMTP id
- d75a77b69052e-517ee28dbdcmr520491cf.41.1781127709293; 
- Wed, 10 Jun 2026 14:41:49 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1781127705; x=1781732505;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fr+hmP6wAcyJg6fA0k1EjnGs7psf8eLT4/6GCio/uCU=;
+ b=kg35d2OaXPo6VWRkMbb1RMxsOUJX6h2bGczlZolyRzp3fpPEWsXJDIks9VMZUZNqg0
+ e4TVgESnUgT2GUkBVBXTcsdCQb/LoQjgexbkK6jgpk0vMDDajTLbfXjkt/PH2uPdHzkU
+ pS+Ew13T2wogqONPb04UqRZWqJVY6PCpDRPlmvaQHZxUNzYdLtW6Eo9VP2t1Zckk7neL
+ 4tfgOFgAlQsTmIoWwVqH8my93ipjECcwzdS1b01xq8RJv61wmPv6TWY/uj0r/eq5rJBu
+ b1vFa/EEjBPxbexMH0YdckgPgKWLFyipzySd3DRCGIM8FZcSr9jIGLfSS88b73Okygng
+ /yIA==
+X-Gm-Message-State: AOJu0YwgbYWWQXybZkeRTiMwLJR+x8C66r53flYStc0FkkhvPV5fAc/G
+ qurejKsreeevVca/ZH5EBrBk5/yBGeh/blWOYQ2So4V6x9ggaHnuA8fAQAN6hSWJ5AKc324bT1y
+ 1dd4S9IjsQpjnTrpPizHuJYZEAOY92/jpZx2lsVfM6jDT+xjmuF192f2Lmw==
+X-Gm-Gg: Acq92OFsEyAwalJglzEU8BcAf8ZU6icAm5A/FTbSdJCiVb3mefBbs93Pu0cOIdKFzg4
+ YRdApjuz/mFa9rbAH0mx2V04O3bGEBneO6UvGP7NHqqwpYKWRoa+eZV609CkRM4o8zzJVco0a0/
+ 9MnM8qE608wwsrIc2FyvGewziRMYeAZ04himnTJPJAjviE+EW0NkpNNaaGp+0dgNIgYecu1Wfhk
+ uMSFC13xN4Q5xuTnrVvfVoBV+EhYftdC4zW0twKF5Gee5b+qqsZFdYwn+FMivkumg6XxcLWhUfZ
+ vWnptT4iqib++XsTpJr2bVsml+oz8FAVcdxpHBRHLHB6s1AQstUPV/i31D8i4FnNI0DCC7Co22F
+ ZyVX3OJ52kIywBgeY51hQjfaIP7UnpKBEHy1MybZkgiz36wThfPqOTx47q9I98jujxSU+Sg==
+X-Received: by 2002:a05:622a:2616:b0:50f:b904:454 with SMTP id
+ d75a77b69052e-517ede3fc7fmr1364551cf.11.1781127704660; 
+ Wed, 10 Jun 2026 14:41:44 -0700 (PDT)
+X-Received: by 2002:a05:622a:2616:b0:50f:b904:454 with SMTP id
+ d75a77b69052e-517ede3fc7fmr1364061cf.11.1781127704154; 
+ Wed, 10 Jun 2026 14:41:44 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.170.117.62])
  by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-5a6d777996csm20766280e0c.7.2026.06.10.14.41.44
+ 71dfb90a1353d-5a6d777996csm20766280e0c.7.2026.06.10.14.41.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 14:41:48 -0700 (PDT)
+ Wed, 10 Jun 2026 14:41:43 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
  andrew.jones@oss.qualcomm.com, leif.lindholm@oss.qualcomm.com,
- uwu@icenowy.me, Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v8 1/7] target/riscv/cpu.c: remove 'bare' condition for
- .profile
-Date: Wed, 10 Jun 2026 18:41:27 -0300
-Message-ID: <20260610214133.1882563-2-daniel.barboza@oss.qualcomm.com>
+ uwu@icenowy.me, Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v8 0/7] hw/riscv: Server Platform Reference Board
+Date: Wed, 10 Jun 2026 18:41:26 -0300
+Message-ID: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
-References: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjEwMDIwNyBTYWx0ZWRfXxFbf8bXkZlgy
- eVY+3ioSdusVmoIb4CAvWZu+sjgI89coYlQ4a9NzUcdbDbwqD9OpfmgsI6HVX2PBkVW3O+xx0jf
- 6GnwlVzF0wteXVyJjbLJlFFt1sabpq8=
-X-Authority-Analysis: v=2.4 cv=atOCzyZV c=1 sm=1 tr=0 ts=6a29da1e cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
- a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=JF9118EUAAAA:8 a=GhL2bEVCvcqOW28JNKkA:9 a=a_PwQJl-kcHnX1M80qC6:22
- a=xVlTc564ipvMDusKsbsT:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjEwMDIwNyBTYWx0ZWRfXxi6iFTJLgQ/S
- 0mUZygAkF80+7Aw3wWne4qvolSRJ8zoqjeoy5KuRjPGKiu4btmioXo4Q0yD5wxanwsSQ7J8yzke
- 83Oiam9unccSlf9qhi4fXlztCJwL5UixPTch+xRe/rGLk7h7hPPKOZ2cWwbDBaKGNLzMNqpSBNb
- fCM+RICHGb7J/VYQZqjy5o7Bn/hgYIgwwp4nJ/5bO9oRswCdQ7T07LVi2QghwCEdySXANl/7jFl
- VK4eyw+vfHrGrekbqU/+s7GNl6/8e1xBMbMdImTsnGp1ecCvYDYLz3Gc4eMFgkBf3aatKqb3Ry4
- NdpqUpNCX8FgGZVVtdGjCbXtENcmlrR45hbJkn79MNyQioWFEzCybsrv+4KOHUBA2fWJAUVh9uy
- WU7JrLBPj0VZgPp4WYmFri4SwyHigmyqHWl5nPFGTKXtIN4trj6j96M8omFMjY+gsyJOT0KQVHw
- Do7Q+db28GU1BJA1tbQ==
-X-Proofpoint-GUID: iYdjPj8bWVPDwYWfu31OLUctHzFEgFwe
-X-Proofpoint-ORIG-GUID: iYdjPj8bWVPDwYWfu31OLUctHzFEgFwe
+X-Proofpoint-GUID: aAvDIJgxs-r-hzWBmsNEUJZXt0UPhICc
+X-Authority-Analysis: v=2.4 cv=B9eJFutM c=1 sm=1 tr=0 ts=6a29da19 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=p0WdMEafAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=KcQHL849TJs2vjbMfwwA:9
+ a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjEwMDIwNyBTYWx0ZWRfX0I7XiY3qtFko
+ rhrtGtHy5FocmUaPSnj/yUzAG+BxLgybs9GpKNMbGdD6Sfs0GkCuy+0Tf3myVqlFKzN1yWwWuyu
+ 8r2g5LsokgsVJ7NUfReUT3MT2ypj/UXGZzU2oEwXQczP/urELeLUAMVM/9dprennDShNenALlJ5
+ aDPueRDti+YkmPnA0vfA+m7tGFcgXmbM2sF3jGSMR5kX3g7aOZBBzI5bxLiUeelyw0LQH0/F8pP
+ N7NM73ATEvxTIElziM8zU9CkPMelM8hvsClHt5U3mLnvI9Mi3rQzbFPb9gBF/8n1ItqUPZoqmLy
+ hpLD/MQ3y9FuwGbHK98ZJLfXxuYx0qvEInFdKPudFonLFVMmCDosKc6+Cx+UG0I6Q+mBUaE7DiY
+ uGoUwmyF6mq0aZDAgcHJ8hNXw4Fyl9p+M3FOTEBpk6en4MNUOjVef/28+lRVjKTMF+pwVNmGOpA
+ B76w/9X/FnDRajRp4zQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjEwMDIwNyBTYWx0ZWRfX24c9za7CzUBh
+ aVvm+csbG+Cm8QWsKWpGJlZeZAO9Em6TjFsr7+MCIKS+AoQpI4rgzY+3zdoy15TSyrm0ebmpUCc
+ CThmE/+gKc4h2e1SoNjnBZSHR9Vucg8=
+X-Proofpoint-ORIG-GUID: aAvDIJgxs-r-hzWBmsNEUJZXt0UPhICc
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-10_04,2026-06-09_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 bulkscore=0 clxscore=1015 spamscore=0
- malwarescore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606040000
- definitions=main-2606100207
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 spamscore=0 bulkscore=0
+ phishscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606100207
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -153,33 +148,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We want to configure other CPU types to use profiles as an alternative
-to adding every profile extension explicitly, i.e. a profile is nothing
-more than an extension bundle.
+Greetings,
 
-This means that a vendor CPU can set .profile=rva23s64 while having the
-same handling as any other vendor CPU. Same thing with all other CPU
-types.
+In this new version a lot of changes were made.  Some of them based in
+the reviews from v7 [1], others from a more in-depth review I did with
+Drew Jones.
 
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 1 -
- 1 file changed, 1 deletion(-)
+The most notable change is the TPM support, missing from the previous
+versions.  Turns out this is a must have for the server-ref spec 1.0 and
+we can't miss out on it.  TPM support is added in patch 5, while patch 6
+changes the existing testcase to support TPM.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6423f2d548..e02d53cbba 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2744,7 +2744,6 @@ static void riscv_cpu_class_base_init(ObjectClass *c, const void *data)
-         mcc->def->bare |= def->bare;
-         if (def->profile) {
-             assert(profile_extends(def->profile, mcc->def->profile));
--            assert(mcc->def->bare);
-             mcc->def->profile = def->profile;
-         }
-         if (def->misa_mxl_max) {
+Adding TPM support required the addition of a platform bus, and with it
+I realized that the board was running an old version of aplic and
+imisics DT that were copied from the 'virt' board.  With this
+realization I did some fine tuning in other DT problems that the board
+had.
+
+Finally, in patch 2, I'm following Icenowy's suggestion and the
+riscv-server-ref CPU is now based on the profile engine.  This change
+fixed the satp issue we were having in v7 without the need for
+additional changes in the base code (that I'll end up sending anyway).
+I liked the end result but I'm ready to hear different opinions.
+
+There was also another notable change in patch 2, based on another
+realization when reading the riscv-server-ref spec: we don't have enough
+debug triggers.  The spec requires at least 11, RISC-V CPUs has 2
+hardcoded triggers per default.  I am solving this in the base code with
+additional changes [2], and after that we're now able to add 11 triggers
+to riscv-server-ref to be spec compliant.  Additional triggers can be
+set via a new property called 'num-triggers' - see [2] for more info.
+
+What we're missing here is an EDK2 compliant image.  I am aware that
+there is an upstream effort to make this image available, but I reckon
+such effort is also reliant on this work availability.  I guess we'll
+keep pushing new revisions of this work as long as needed until it goes
+upstream, and update tests/docs with the EDK2 information when we have
+a eligible image.
+
+
+This series is now dependant on two not yet upstreamed work:
+
+- Chao Liu's series "[PATCH v6 0/7] riscv: add initial sdext support"
+- "[PATCH v2 0/2] target/riscv: parametrize debug trigger number"
+
+For easier consumption this work is available at this branch:
+
+https://gitlab.com/danielhb/qemu/-/tree/riscv-server-ref_v8
+
+Changes from v7:
+- patch 2:
+  - create riscv-server-ref using the profile backend
+- patch 3:
+  - fix aplic, imsics and iommu-map DT generation
+- patch 4:
+  - change test_boot_linux_test to use a PCIe AHCI disk instead of
+    virtio
+- patch 5 (new):
+  - add platform bus to support TPM (tpm-tis) devices
+- patch 6 (new):
+  - change riscv-server-ref linux tests to test TPM devices if the host
+    has 'swtpm' support
+- patch 7 (former 5)
+  - add additional information about TPM support and command line with
+    AHCI disk
+- v7 link: https://lore.kernel.org/qemu-devel/20260604095244.3313259-1-daniel.barboza@oss.qualcomm.com/ 
+
+
+[1] https://lore.kernel.org/qemu-devel/20260604095244.3313259-1-daniel.barboza@oss.qualcomm.com/ 
+[2] https://lore.kernel.org/qemu-devel/20260610205457.1868701-1-daniel.barboza@oss.qualcomm.com/ 
+
+
+Daniel Henrique Barboza (6):
+  target/riscv/cpu.c: remove 'bare' condition for .profile
+  target/riscv: add riscv-server-ref CPU
+  tests/functional/riscv64: add riscv-server-ref tests
+  hw/riscv/server_platform_ref.c: add platform bus and TPM support
+  tests/functional/riscv64: add riscv-server-ref TPM selftest
+  docs: add riscv-server-ref.rst
+
+Fei Wu (1):
+  hw/riscv: server platform reference machine
+
+ configs/devices/riscv64-softmmu/default.mak |    1 +
+ docs/system/riscv/riscv-server-ref.rst      |   62 +
+ docs/system/target-riscv.rst                |    1 +
+ hw/riscv/Kconfig                            |   16 +
+ hw/riscv/meson.build                        |    1 +
+ hw/riscv/server_platform_ref.c              | 1477 +++++++++++++++++++
+ target/riscv/cpu-qom.h                      |    1 +
+ target/riscv/cpu.c                          |   32 +-
+ tests/functional/riscv64/meson.build        |    2 +
+ tests/functional/riscv64/test_opensbi.py    |    4 +
+ tests/functional/riscv64/test_server_ref.py |   88 ++
+ 11 files changed, 1684 insertions(+), 1 deletion(-)
+ create mode 100644 docs/system/riscv/riscv-server-ref.rst
+ create mode 100644 hw/riscv/server_platform_ref.c
+ create mode 100755 tests/functional/riscv64/test_server_ref.py
+
 -- 
 2.43.0
 
