@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D702ACD8CB2
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jun 2026 12:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA931CD8CB9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jun 2026 13:04:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXIWN-0000zq-Ac; Wed, 10 Jun 2026 08:59:03 -0400
+	id 1wXIay-00036v-4y; Wed, 10 Jun 2026 09:03:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wXIWL-0000zB-7g; Wed, 10 Jun 2026 08:59:01 -0400
-Received: from [115.124.30.124] (helo=out30-124.freemail.mail.aliyun.com)
+ id 1wXIao-000346-Uc; Wed, 10 Jun 2026 09:03:39 -0400
+Received: from [115.124.30.131] (helo=out30-131.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
- id 1wXIWD-0007iJ-Sk; Wed, 10 Jun 2026 08:59:00 -0400
+ id 1wXIam-0000b4-0d; Wed, 10 Jun 2026 09:03:38 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1781096314; h=From:To:Subject:Date:Message-ID:MIME-Version;
- bh=vpU7ZNjHFA9icKkFKSMunHnmJ4XPHPbRqufEXy/icBo=;
- b=B+r8JinLQKpMIRN8HlTiSwR69Spch7LzC1syMPA1myW4NqX4I1Fg/8qgtRUh4HknKbIIg3r/C/K+pTp53TdLERujLq9HKiD36YR9xlccKgvhDAOn/UFdsPszvUOIIwgSijWHHRpbtj6xsGZAjHCM/HCaJHVjaVLxTsLs9/G571w=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R931e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
- MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=17; SR=0;
- TI=SMTPD_---0X4ajqa-_1781096310; 
+ t=1781096601; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=NZ4BHM1yjrt16IQRj2LtjsWfvfTTrCOqekiJi6pkNgg=;
+ b=QeNdKtDS8wPYBqPs5kO2PXluy4zvYG1vo+yBZFHiC6a5IZr3n62jGxH3Iug5XMrQFSZZBNbs6kUY5EcjsUChuZZLdb2JWTfslsITYKVUupISV0CNIu0MyhBxJhIkIMFHsY4S/7uQsBv0i69dUmwoNhbS1iBPUoY/lkv9H0XUMnU=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
+ MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
+ TI=SMTPD_---0X4ajruV_1781096595; 
 Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
- fp:SMTPD_---0X4ajqa-_1781096310 cluster:ay36) by smtp.aliyun-inc.com;
- Wed, 10 Jun 2026 20:58:33 +0800
+ fp:SMTPD_---0X4ajruV_1781096595 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 10 Jun 2026 21:03:19 +0800
 From: Chen Pei <cp0613@linux.alibaba.com>
 To: jic23@kernel.org
 Cc: alistair.francis@wdc.com, chao.liu.zevorn@gmail.com,
  cp0613@linux.alibaba.com, daniel.barboza@oss.qualcomm.com,
- dave.jiang@intel.com, guoren@kernel.org, imammedo@redhat.com,
- linux-cxl@vger.kernel.org, liwei1518@gmail.com, mst@redhat.com,
+ guoren@kernel.org, linux-cxl@vger.kernel.org, liwei1518@gmail.com,
  palmer@dabbelt.com, pbonzini@redhat.com, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, sunilvl@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH 3/4] hw/riscv/virt,
- gpex: Provide 32-bit MMIO window for CXL host bridges
-Date: Wed, 10 Jun 2026 20:58:29 +0800
-Message-ID: <20260610125830.133654-1-cp0613@linux.alibaba.com>
+Subject: Re: [PATCH 4/4] hw/cxl: Map committed HDM decoder ranges as RAM for
+ direct DMA
+Date: Wed, 10 Jun 2026 21:03:15 +0800
+Message-ID: <20260610130315.134515-1-cp0613@linux.alibaba.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260609135611.307122c8@jic23-huawei>
-References: <20260609135611.307122c8@jic23-huawei>
+In-Reply-To: <20260609133634.7dbb892c@jic23-huawei>
+References: <20260609133634.7dbb892c@jic23-huawei>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.124 (deferred)
-Received-SPF: pass client-ip=115.124.30.124;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.131 (deferred)
+Received-SPF: pass client-ip=115.124.30.131;
  envelope-from=cp0613@linux.alibaba.com;
- helo=out30-124.freemail.mail.aliyun.com
+ helo=out30-131.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -79,74 +78,31 @@ On Tue, 9 Jun 2026 13:56:11 +0100, Jonathan Cameron <jic23@kernel.org> wrote:
 
 Hi Jonathan,
 
-> > CXL component register BAR (BAR0 on CXL Root Port and Type3 device)
-> > and the CXL device register BAR (BAR2 on Type3 device) are declared
-> > as 64-bit non-prefetchable memory.  A standard PCIe-to-PCI bridge
-> > exposes a 32-bit non-prefetchable memory window plus an (optional)
-> > 64-bit prefetchable memory window, but no 64-bit non-prefetchable
-> > window.
+> +CC linux-cxl as that's where you are more likely to get feedback on 
+> CXL aspects.
 > 
-> When you say 'standard' do you mean that is all the PCI spec allows
-> for?
-
-Yes, I confirmed against the PCI-to-PCI Bridge Architecture
-Specification, Revision 1.2 (PCI-SIG, 2003). Relevant sections:
-
-  - Section 3.2.5.8 (Memory Base Register and Memory Limit Register):
-      "The upper 12 bits of both the Memory Base and Memory Limit
-       registers are read/write and correspond to the upper 12 address
-       bits, AD[31::20], of 32-bit addresses."
-    -> The non-prefetchable memory window is 32-bit only, and the
-       Type 1 header defines no upper-32-bit extension for it.
-
-  - Section 3.2.5.9 (Prefetchable Memory Base/Limit Register):
-      The bottom 4 bits encode 64-bit support: 0h = 32-bit only,
-      01h = 64-bit (extended via 3.2.5.10).
-
-  - Section 3.2.5.10 (Prefetchable Base/Limit Upper 32 Bits):
-      Optional registers that hold AD[63::32] for the 64-bit
-      *prefetchable* range.
-
-So the architecture only allows a 64-bit window when it is also
-prefetchable; there is no 64-bit non-prefetchable form. PCIe
-inherits this Type 1 header layout unchanged.
-
-Public mirror of the spec text (Rev 1.1, identical wording for these
-sections):
-  https://0x04.net/~mwk/doc/pci/PCI-to-PCI%20Bridge%20Architecture%20Specification.pdf
-
-Official Rev 1.2 page (PCI-SIG, member access):
-  https://pcisig.com/specifications/conventional/pci_bridge_2_1
-
-> >  Linux therefore places 64-bit non-prefetchable BARs in the
-> > 32-bit non-prefetchable bridge window, which requires the bridge to
-> > own enough address space below 4 GiB.
-> > 
+> For this one there is a more comprehensive solution that restricts this
+> to the cases that are valid (no interleaving going on).
+> https://lore.kernel.org/qemu-devel/20260318171918.146-1-alireza.sanaee@huawei.com/#t
+> It is rather more complex as a result.
 > 
-> This sounds a bit like the issue that Dave Jiang reported with recent
-> EDK2 on x86 (fedora upgraded).  We don't see it with the older EDK2
-> that ships with QEMU. I haven't yet figured out exactly why.
-> Arguably whatever they changed is a regression but we don't have good
-> enough testing in place to have detected it early enough.
+> For other cases we have always intentionally left it as not supporting
+> what you have here because we want the interleave to be correct and testable.
 > 
-> I'd like some input from PCI / ACPI experts on this. +CC Michael and
-> Igor.
+> As far as I'm concerned that series of Alireza's has been ready to merge for
+> a while. I've been a bit busy with other things so haven't been poking
+> for that though.  Might be a week or two before I get back on top of things.
 > 
-> Like the previous patch we'd definitely want some testing around this
-> to make sure it doesn't accidentally get broken in future.
+> Anyhow, please give Ali's series a go and see if that works for you.
+> There may well be other corners we haven't thought of!
 
-The symptoms do look related -- in both cases UEFI's
-PciHostBridgeDxe ends up not giving a 32-bit non-prefetchable
-window to the CXL host bridge (ACPI0016), so build_crs() in
-gpex-acpi.c returns an empty resource set. I haven't dug deep
-enough into Dave's case to say whether the underlying trigger is
-the same as on RISC-V virt though.
+Thanks for pointing out Alireza's series.
 
-Would appreciate input from Michael / Igor / Dave on whether the
-approach in this patch (carve out a dedicated cxl_mmio32 range and
-emit a static _CRS for ACPI0016) is a reasonable shape for a
-shared fix, or if there's a preferred direction on the PCI/ACPI
-side.
+I'll test Alireza's series against the RISC-V virt machine with the
+same CXL + daxctl + virtio DMA workflow. If it resolves the issue,
+I'll drop this patch from v2 and just rebase patches 1-3.
+
+I'll report back once I've tested.
 
 Best,
 Pei
