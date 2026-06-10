@@ -4,146 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D9D0CD8CB9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jun 2026 04:36:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAAFBCD98C7
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jun 2026 09:38:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXAgQ-0005vM-TE; Wed, 10 Jun 2026 00:36:54 -0400
+	id 1wXFNR-0004px-Ox; Wed, 10 Jun 2026 05:37:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1wXAgM-0005uT-VS; Wed, 10 Jun 2026 00:36:51 -0400
-Received: from mail-japanwestazolkn190120001.outbound.protection.outlook.com
- ([2a01:111:f403:d406::1] helo=OS8PR02CU002.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wXFNQ-0004pT-Cc
+ for qemu-riscv@nongnu.org; Wed, 10 Jun 2026 05:37:36 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1wXAgL-0000KP-E5; Wed, 10 Jun 2026 00:36:50 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XsBrczk7CGh5sqrYRX/nTHtjMfXxaOP5NTKfdK8ZtYmoNP627GR5AL3vkex5dcxDXFkYcUy0IzHhVIswlVqNILaI6YRvNZ9AJQbCeI5wPlJae0alF59M8myLrk6ljeu6/JS4aVEL3Cjzhlw37KPuFoY0pQw3NgWQDZuvNj330W7RAtVJW9Kq6XDpcx1cyLI7yS86KycSh61qJGBAIfcTu8H+dWiGkO1y7xm+VvYhatKlz4cAy6iG2hQYqaSlTzQYXPmQFDsj/FFOmItPHo4rlE5Ns6X6cDKb/mxXJVj5SLD7ZGph7FYEAXJjm7SEa8atWd87PUVPBdrTf6GUAc5cEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YHN7Qjtet30UKTGQ5WM62CZXgtNFkR9uJvhnhDwUPQg=;
- b=X+mUwRjO5bcQ6rVBh8vjmVLZ9yjvZf1esnBbZFRGmSmH7p1LLjkS7PD7nF4lyfSPBYQps4+hyt2pvnNzGHcccxwONyRV+S9np497MJgt6UCWpzh3OAP6N3pRN2bqFxjDIrw8/VM6UUYYaZybcvHPiN/Z5jqbcDDxkH3tBtxjymTsL+iFE/RWdYwNv5QgOn1H05Hco0UxQbVqb+LvnA2Qh6uZgFE85fabDQ5qaz+Ej4GG0XArUu4UK7/wx8tqG4oUQo4WasDwGcLbuKDZLrNpyOx9MGaU0aA2SPZkd4yLGE9KNQJLVFnQ9XNY15royEo7mRJb1JbcR6EB9TlCwFeDeg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YHN7Qjtet30UKTGQ5WM62CZXgtNFkR9uJvhnhDwUPQg=;
- b=IVxOY9I86mTJmMyRrt6Db+RyuNgWVPhbOvolFZgO5mNt4eVNsT0OlBJoFsTZyvkg0z9REYf/NX0rKkvx/TZHxXv3Jn3z+G99ed/SCfF/9d408DCMZS0IcRKu7a14aCjPxH0vOIkTy5GnP72Yvhfxt0mUsBtFoEn/N4/VTlNDeDznvAjukJGJgRM5Ky3ZyaSlYifLb1BP42f8p0PDuS6arKES4FO/b8C9ZOqcdlTvJuobKVIsyFt9kgaI08LzxkNMMVv9HlFwpvcpk8bg+fPyNFAQO+Rc4XfjhUolkelFSwjJ22jcxb6MjDx6K08H0kEx2tQHP9cOOmhF13RtHOOX3w==
-Received: from SE3PR04MB8922.apcprd04.prod.outlook.com (2603:1096:101:2e9::7)
- by OSNPR04MB9288.apcprd04.prod.outlook.com (2603:1096:604:471::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 04:36:39 +0000
-Received: from SE3PR04MB8922.apcprd04.prod.outlook.com
- ([fe80::3450:f139:5238:8f58]) by SE3PR04MB8922.apcprd04.prod.outlook.com
- ([fe80::3450:f139:5238:8f58%6]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 04:36:39 +0000
-Message-ID: <SE3PR04MB8922447B869F2D090EEEA830F31A2@SE3PR04MB8922.apcprd04.prod.outlook.com>
-Date: Wed, 10 Jun 2026 12:36:31 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/virt-acpi-build: Fix RINTC PLIC context ID for
- KVM
-To: Qingwei Hu <qingwei.hu@bytedance.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, sunilvl@ventanamicro.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com
-References: <20260604120017.398890-1-qingwei.hu@bytedance.com>
-Content-Language: en-US
-From: "Nutty.Liu" <nutty.liu@hotmail.com>
-In-Reply-To: <20260604120017.398890-1-qingwei.hu@bytedance.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TPYP295CA0017.TWNP295.PROD.OUTLOOK.COM (2603:1096:7d0:a::9)
- To SE3PR04MB8922.apcprd04.prod.outlook.com
- (2603:1096:101:2e9::7)
-X-Microsoft-Original-Message-ID: <820dcdd9-a025-42df-a64e-578615edaefa@hotmail.com>
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wXFNO-00020p-Oa
+ for qemu-riscv@nongnu.org; Wed, 10 Jun 2026 05:37:36 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65A7iWDP904065
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 09:37:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ lM5UWcwDDxSAAYu0W+ChEIVwJmkj+A9RIiZ34ZrORdQ=; b=V1FbUH6sZ3gPxPfa
+ oC8B4Dyn90UOWXN42bLVnJK6Jf/DxDNHpXd4CDMsEMOD0dMqi0aNCm17nGJPT9pN
+ ksaJo06ARi/NuIky+V2WnfXbQkxwcdbFVr/OUHFYAVHhKuwqk15QgL8pgT84RmDN
+ dqI4vZp3mvEfp96sq3Ey06vNBqlbq2gcSw5geVecWXcCQZCW0DIhtpkRxp0733a0
+ 9Ub5lmBv8A7hwoY8xVpNft78OzzzP+ihgXAPhlebdjToVpsql9qi3xgpdxjiJM/v
+ NXbWebTkfB06gA5BKZqo4blJ33NPcmwARTZd1X2GouC89BpIMzOO7+oDMjOAvRLI
+ Zefodw==
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
+ [209.85.222.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4epuketayf-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 09:37:32 +0000 (GMT)
+Received: by mail-ua1-f71.google.com with SMTP id
+ a1e0cc1a2514c-963df05f08cso1717895241.0
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 02:37:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1781084252; x=1781689052; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lM5UWcwDDxSAAYu0W+ChEIVwJmkj+A9RIiZ34ZrORdQ=;
+ b=LyKOssQor7tft0jHa7hPjb0qp85LxDcu5ibBl7VmLM3qwM/fW16K46JBnc8JuqACht
+ 9ikZcWqJr62XuoKB0vPlVZy98Wz3jE169jQXjcC/pWmn1AAURUQDzLbyRmIE6lDbzk54
+ km5mp9bV7ufP/chSc90zPw0CvV/hcYcXC/CAclGeINov4TfVH0VwEZ1iyeTOxDAyI5K7
+ WAriScO/95mQMAFh70LPQq6BFW7JIVluGJq82LRByJA1NZnofC7zSDLi7zTHnxniwB2x
+ vhtDA4PA6yZM9oqAU3mHA713vB67xueEOTcVSVsi8j6GUFJV+X6M4WJFlmPB33dh9D+N
+ Uzxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781084252; x=1781689052;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lM5UWcwDDxSAAYu0W+ChEIVwJmkj+A9RIiZ34ZrORdQ=;
+ b=bPGMNozb9Ei8DbM+peBGO75GTZSxcJ4CHznFPL2gS0f3oIbOR3wGM8SkcDm88fyi1B
+ /4zQmJ+KkQcgI/GYybrkMA1F13lrZtxY0neT15vVu0/gaqUx6LZJnPHV/Qps7UQtlIQP
+ +Q6/iQwc2aek5p6iSH1ehEkdp2cZKLMn5qSKtFaEpyXfEDAMC+TqJz4vAuQdbQo7Jl3w
+ I6vzLryiQavImpOicAmSHOoX8OSk5+FLJOb44LRHLTDSsl0qaJJs3ot20Q483ecHmW3F
+ h2oVYSbXJR/PBi46IDe0W6bsDuXY7EdTpgd0BAzJMwvWXx8+he0ruTDzLd9+ThMhiOz4
+ jTVg==
+X-Gm-Message-State: AOJu0YwqqM5L6g6iZTIz32cuJyyAktiesTjEtbr/0Isb+FUEjsDca0Yn
+ e5VaGAkbLNftLLQID+wHU1/tV49Jgszuj5QfZPwS9VJB6lCB9EoLrvukeWKKqijybK5FdyHyX13
+ F+3mkfe6mGUKr5rmTfxIUGeIuivM1zwtjKJJYU9DNmawyCeUS/R+nN5Y52w==
+X-Gm-Gg: Acq92OGPe7Kd+0gbUi9+DsLKqwQBMExRh1yenGdkepLycJyXzILGdlTDRxqNQclC26W
+ sWJCgwyf/l5wUW/tT1QV95Es40a4dLrJQkZZozqvJmOnSFt0pRkdJb8WetKczwyXjydkiCwnmFS
+ IXI4n9yatf46jU28PiAAZLMqyIPHRHB26HvBbX5zlNeR9IxTWEs2oSM2NkM3OiZpT+luM8MGNnk
+ VB0MkUCG8kE6ySY4RWfZ+L7VfHrA/oUdKeB3tJ4uV7JZXRmVfS6bJArHg3bGH2F6iTmmzIOIhyo
+ 2Wl2KdbGcl9gFBsgHfSJz80NhpoB2H5JgAi0+yJyNP06hw9xF96BEynmT2iv0+3xvgUrIz2ip94
+ mcJSsaGTvjx6dELzjl0PBYXMRi/tqgAqUzxqCEP20vG4PvNO0x+M3HgLi0TRM8WfC9FoB
+X-Received: by 2002:a05:6102:554c:b0:6a2:b2a1:f16a with SMTP id
+ ada2fe7eead31-6feef09ad62mr12605338137.2.1781084252236; 
+ Wed, 10 Jun 2026 02:37:32 -0700 (PDT)
+X-Received: by 2002:a05:6102:554c:b0:6a2:b2a1:f16a with SMTP id
+ ada2fe7eead31-6feef09ad62mr12605323137.2.1781084251777; 
+ Wed, 10 Jun 2026 02:37:31 -0700 (PDT)
+Received: from [192.168.68.106] ([177.170.117.62])
+ by smtp.gmail.com with ESMTPSA id
+ ada2fe7eead31-6eb5549144csm19475478137.3.2026.06.10.02.37.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Jun 2026 02:37:31 -0700 (PDT)
+Message-ID: <25dc379c-7421-44e2-98a7-15593db4f93c@oss.qualcomm.com>
+Date: Wed, 10 Jun 2026 06:37:26 -0300
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SE3PR04MB8922:EE_|OSNPR04MB9288:EE_
-X-MS-Office365-Filtering-Correlation-Id: a68118df-ffc2-4d75-00e9-08dec6a9dc4e
-X-MS-Exchange-SLBlob-MailProps: laRBL560oLSPhlJ95/U7v6W/AahuugGa00XHAA32DaAL1zL5od4SzuQ2FT8+cqJL2dUCBBGVEHd2DC5RuFJdXTb44Ir1iOtlKKQPowSINI7NrCLKGS+PbVWJ8UHYAdib+JSC9IM4GEtvXHKLpwqDqZXYXzgVjvmkm3bbM7PX4n/TIQ6zIn93wo6EkKA+7ObTVRb4//1JDGofYuOpzXL8tCrIpe9LEAm/23POicRi/0lCA6dBGKWANh8nTsyfhY7lxN3tW8W4S0fR+dCeE/+UdtKfCuQWfM3wTv7KepoUQW3eSqAI0dDnNIIWMdgFyzEqzhwip/f+CD+JyyrWXAvu14dBUc/o7eyD4RU3SVShTyHwwuFNy+dvnjjYpgUjeIJuIqwK/bWzHYRUnT92/P+USW82/y+sxfpdtOiXJhHMJh6Tgqa+kibD27juZvhNCCxRzUkeADGerLi6GgmoA7Hu8s+X6UDvensL6jPaSJiVdgv0X+eTZjiMRVd9sYHRVu6NHvTNTSE3nZwoHDeOIVEzqDT9ZmHn2fpwsSpRelKBJitsHy/YCRvTG9i/zMYI1rV0WV475jnRb3zwg7Gb6LMByx2RPbkRXoGpUq6ZxtFtYzHSY4lk3ZOktCZsgzlGO3amO4ary2lg14ZyXRDV7aHW7EnRaHqqhbZkIaSohRxqqcSdJo7vGFR4pk8fUUVXLbU08/bhBcorpDMTCE/bs+BPCdAoooJtMUOOCwF4dBAyJxL/C8uAvpnHlb8C2iv7zTvGW2gP/qUSfy/gRNG7wYTyT2Z9alPFmlW3
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|7042599007|5072599009|8060799015|23021999003|45011099003|19110799012|6090799003|15080799012|51005399006|40105399003|3412199025|440099028;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WHI1WmtZZTdyRWdUSEhMOEYvSUF4dGx1Umo0cS9EbTZpWlh4QmNpZTdhaFdK?=
- =?utf-8?B?VlM5ajdCaHp5UkphUDZ0c3ZEUVBleThCYUY2OFQ0czN3UFNTeUJwbnZDdFB2?=
- =?utf-8?B?REhPL3NxM1prSXNibXhvcVhIdDBlS2xtNHYxYkJjVU5saG9tL05nWHlRazZ5?=
- =?utf-8?B?UWRUbnVZQVhQMXJ0dmZLbUVQdHJNTEdZeGI1bXA3emxMbzYrbmV0VHFXTFoz?=
- =?utf-8?B?VStGVzFINnFzZUVnOTg5YWt5L2tTRmlyTWU3VTRRdFFxeW1XcVRkSWZBbXNX?=
- =?utf-8?B?b2dnRVR0TkNsYnRVOEp1eUZvRGROVnd2a08wZ2gxUmNnTk02anNBdVBJZUZl?=
- =?utf-8?B?aFBERTRqNEtBTVE3djlOaEptNnhCcDFnZ05HRzBjdm5RQWwyQWpSOW41U003?=
- =?utf-8?B?UUxkdEtLQXg1clI3RGtoZ1NVNVBlNWwyR29Wc3JiNk43eDcxampXcUZKWEFD?=
- =?utf-8?B?aGgvM3d2NFlRRzRkaGROS1pTaDhCWHJuaGozUzZ1V2M3OWQwSVJkdnpKMXNM?=
- =?utf-8?B?QjZaS0ZseXZFb3VCSlE5UEg5U0NjRFZuSGZ3RzU4UEF3N3J5MXFsMk00Wmlk?=
- =?utf-8?B?RjVTMytlM2NRbTBJek5HMDhvVnRseGp5RzhnSmVZcGJIbE5EWk9iV0JrN1dH?=
- =?utf-8?B?NkJIdG9UUmFITmRRZ0hyYS9JL2dDZWRjckc1M0luNW85M2ZZMjlmV05zUXUr?=
- =?utf-8?B?em4xeDVhODVZWHMxWklDQjlyTXJRYUlkTTR2blF2MTBqSTRSM3phTnVvalZE?=
- =?utf-8?B?Z0tSNTZkM3F4Mlp3a2Q4VmxRMjhaMHFvTENvWE5yK3Rpa2FQZGtMbWlydkhV?=
- =?utf-8?B?ZkFjSUhtVGdzQzg5T0pYOVZJRDFObHZKWHNnWmdldVVla0g5UG10VlJUMENW?=
- =?utf-8?B?UE5nMkU5YU1vY3RkU2kyTmIvK3hORnVrMHU5elFzQkx0NWNTMHh3aEx0THpq?=
- =?utf-8?B?MGYvT20wYTNSKzlyVHBqOVR1WW5FazVGNHYxKzVaS0dlT2hFS1lPSDQrS2s3?=
- =?utf-8?B?K3ZhVktVbGJmS2xleTBER25Qc2hrMXMrRC80MHV1bnZlbDZQd3g4bGFTODF1?=
- =?utf-8?B?VnFlZ25Mb29YNmNOb2RHcHBUOXNKaC9McVBFd1VVMDR3WmRqT2ROVHBmRmh0?=
- =?utf-8?B?blpqMk5QQSt4NmN4aFF3bjVoaGRJcTA0M2d5L2pDK0hCZjhlalRJR1JWblF0?=
- =?utf-8?B?TUVPSnFabTBhTVhSMFRBN250Vll1dC9RSGFZb3k5aDk4dVNRR3ZBTnNyQmQ5?=
- =?utf-8?B?b0JCZ3pRL0MrY0JBY1V5SWh4U0pxUVNkM2UrUUo2UHhLdWRkSHNUeWpnNUlp?=
- =?utf-8?Q?hhGWCaALB3NmzcbAmoUXljo12baTZX8HCt?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?andDUnh3MnJzTk9wWG9uclRlRy9QYmczY0tQci94NG00NXdDZWRoRlV0Q1Fy?=
- =?utf-8?B?ZHZRSkdrRzZHSEVSRml5amQ0MjlWcUlMM0UrajRZWnY3amdxdTBzcHB2dDh1?=
- =?utf-8?B?NURwVitFZUdRUTBSNU8rMVdobWluSk81VzlXNHFLWmtTdTdwS0Rlakdwa1NH?=
- =?utf-8?B?S2RDSDR1TFVIODA0SWpJMGlQMXdPSVdJbW1SMXNoeUdndFMyQmdmWmlwMitX?=
- =?utf-8?B?S05WMGRlbVdqdng1emtDOEM2MStPWWkwM1pSc2NQVWJuUFdHNkxPSXJ3UlFo?=
- =?utf-8?B?aDF6MDBHaVhzNlRUcGl6NHZwS21qS3RqbzFHaitrOC9OODNCSFA2dXZYV0JC?=
- =?utf-8?B?eGprUS9TOHBmZnBrUkNPbEg2NUsydmlvOEVLekVndS9BbVZ2akRXY3BzNjdt?=
- =?utf-8?B?QzB0WTY0cUhsek1oQkdRQTVqeVVzMldvVnR5V1d0eFlwVXhjYllkR1NpMVlq?=
- =?utf-8?B?N2xiQVFDNzFjTWtPWXkrMUI5NXdENXQyZmsrMEsvVS9BZXFmUnNNM2cvQ05h?=
- =?utf-8?B?UFpBdFRUNXE0TGh0bi9aQUJ6eStoNlpmczFjMlArN2FaZEtDZCt0ZXFnVjFO?=
- =?utf-8?B?VDBoYWZxU1dJTmJjZkVGQVZnNXZuaHJXUmV2YWIyWFlxSmN3TWtYaTdBN0dJ?=
- =?utf-8?B?N1UzcTAwQVNGbnlxcGZKVnkxeE5zZ3FEQVBWVDlocDBrK2JBMG14NDloQlZ6?=
- =?utf-8?B?OXVORWFEZFdTaW5hTFBWeERVQVlqTzBFK3VIcmVQS0QvUG1Hc0xDekxvVzkw?=
- =?utf-8?B?MG41aERiVExCczlOT2R1ZW82K2tWMytxR0lTUmxSdVBwbUdpS0hGcHZUV2dU?=
- =?utf-8?B?blRodm9NVzkxcHRuSDI1VWhDcENNT0xGREt0dVhMTDlGNDkzNnREblhrNjJt?=
- =?utf-8?B?d0FLTDhUSG0yTlgySmx3eWErUHJzN3pmZk0vRU54OUJ4NmhqSDJlcXBsLzYr?=
- =?utf-8?B?SlFjNlBXREkvMGhKUkM3c2llUUNCRjZWazRUNHRrUlhlMFNxeTJSTDdUQ2VG?=
- =?utf-8?B?TE1UaXU3UmN6K1h3OU9yMVZuZEVzTXBOanNUYWorZzNDWmFoWTVseGQ2NkVN?=
- =?utf-8?B?TXk3WlVYVzJPeVEvSzV4Vmc4bytTSWVrRnhaV3ZzTURYeTV5Ui9JUWx3ajlP?=
- =?utf-8?B?alN5bTNZVjF0N0tBZGtyZTR5Z0dqN1RsY3dSczY1dG5aTkZrcjBZb2Jodi9w?=
- =?utf-8?B?S2pJdHNkeGF5ZExrUkllNVZVUlBJTlNuTUNIbkZzaTJuOGE1enRPZFRiLzRE?=
- =?utf-8?B?aS9VSkNGOWRLbWxpOEh4OFRmcVlqMVN3ZDhDbVNTaDdId1FnZXZKQ0Y5am9o?=
- =?utf-8?B?YjUyNFRLQUNveVpUTmVBVkttUE1yVUVqOVZCdFFCb3dpMVQyVDJVY3d2cHdQ?=
- =?utf-8?B?WUtoZGdpdU9FMThHYzlvOE9vZFJITVMxVjlHL1V2Z0RwS2p2QjVHM0VRdFEy?=
- =?utf-8?B?S2EyMkRzSTNKd3JkbzZRakxMSmdWTi8xMG5ZNnR0M0RXK3JEaGFLYitkN3lD?=
- =?utf-8?B?cG1SMzJXT1I4bi9CcCs2aFJwMVZYZlN5MkY1K0JldFBTZHcyaEZCRXpqdEl1?=
- =?utf-8?B?NWFGN21mWmpmdVFRNGpLTHJtTGJCNnViTDErWnhEZGdMWEJsRnFNTEUvN2hI?=
- =?utf-8?B?UU56M2JHQUdyZzRLSGhHV0xvbkIrU1dkajhkdy8xMHVRZGd0U1FUbGJSbWg3?=
- =?utf-8?B?a2FuVzFhTW03SWk2S09sNHpJc1dIallrUHlwdWZBY2dQWjFmd0VjU3NpTkdO?=
- =?utf-8?B?a2tLTUs1dVpXelcrd3RLaHRueno3ZzNmMWtpbjZkWmlhcHRidVBsQW9CMUFr?=
- =?utf-8?B?dVY3Z3RRWFJzeHNYN3E4MTBTMDBMUU93NERBSEdxOFRZeGRpZUNPRlh3Q0Vx?=
- =?utf-8?Q?Lb9z41f/G4Sys?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: a68118df-ffc2-4d75-00e9-08dec6a9dc4e
-X-MS-Exchange-CrossTenant-AuthSource: SE3PR04MB8922.apcprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 04:36:38.7047 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSNPR04MB9288
-Received-SPF: pass client-ip=2a01:111:f403:d406::1;
- envelope-from=nutty.liu@hotmail.com;
- helo=OS8PR02CU002.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: add 'trigger-count' debug property
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260609213905.1126795-1-daniel.barboza@oss.qualcomm.com>
+ <6db02c91-83fb-4021-91ec-72e6b56afeb3@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <6db02c91-83fb-4021-91ec-72e6b56afeb3@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjEwMDA5MCBTYWx0ZWRfX0NDOeQ3Njpn1
+ dMHQrNQq1SfccAF2puIfk6dBrl2lJBcDDVQPl6+2V0plKM3IpeWjpPn3ZqE/pccDYohkwjfgjVT
+ rDT8LDndrfFCGXB5esv4CVDcGfKX0G5/S61tJUukM5Ctim+/n257hMD2L8G8cAZ9GbaM+0GfM6N
+ /nJBrNnVnQTTffq32EXye4m9878ozG+wrw2WTqGKeTVl/sTolx/fz31iCU1EjQcokYYlHBqmWa4
+ DmpS35xspbDkTHojHkC9vBPGdapZcUank+F/28Xmku/QpRSQsrkSUG3sf4CwuT+bFXaUI9W5lF6
+ Uo812Ai04W7oLAk8aakLU/l2mFBx/lzhJHnlGkN/JzbSXxV3ssnGVDtFoIL8zlkmhqDKwGez/w5
+ A0LEXCeWx6TcdbEHBjGrbGkD1R2ye0I69YIt8WP/93QZ+2TqZZemSfN9iPFzD2+O4XluHeDZxdO
+ l+zMlARMBbzq66GN7yw==
+X-Proofpoint-ORIG-GUID: azDeXCf2T3EbUb4yqtVsx6CdPFFvLBVv
+X-Proofpoint-GUID: azDeXCf2T3EbUb4yqtVsx6CdPFFvLBVv
+X-Authority-Analysis: v=2.4 cv=DNG/JSNb c=1 sm=1 tr=0 ts=6a29305c cx=c_pps
+ a=KB4UBwrhAZV1kjiGHFQexw==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=C11olbwvBXIHrrjHZpIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=o1xkdb1NAhiiM49bd1HK:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-10_02,2026-06-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 spamscore=0 impostorscore=0
+ priorityscore=1501 adultscore=0 phishscore=0 clxscore=1015 suspectscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2606100090
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -161,46 +154,99 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-On 6/4/2026 8:00 PM, Qingwei Hu wrote:
-> Each RISC-V MADT RINTC entry contains an External Interrupt Controller
-> ID field. On the virt machine without AIA, this field identifies the
-> S-mode PLIC context associated with the hart.
->
-> TCG virt has both M-mode and S-mode PLIC contexts, so the S-mode context
-> ID is odd and 2 * local_cpu_id + 1 is correct. KVM virt exposes only
-> S-mode PLIC contexts, and those contexts are numbered contiguously from
-> 0. Reporting the TCG context ID for KVM makes the guest enable a
-> different PLIC context from the one used by QEMU.
->
-> With ACPI enabled, this can leave PCI INTx interrupts pending in QEMU
-> while the guest-programmed PLIC context remains disabled. A virtio-blk
-> root disk can then stall during boot because its first interrupt is never
-> delivered.
->
-> Use local_cpu_id for KVM and keep the existing odd S-mode context ID for
-> TCG.
->
-> Fixes: d641da6ed43 ("hw/riscv/virt-acpi-build.c: Add PLIC in MADT")
-> Signed-off-by: Qingwei Hu <qingwei.hu@bytedance.com>
-Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+
+On 6/10/2026 6:04 AM, Philippe Mathieu-Daudé wrote:
+> Hi Daniel,
+> 
+> On 9/6/26 23:39, Daniel Henrique Barboza wrote:
+>> All CPUs have the same amount of triggers: 2 triggers per hart, set via
+>> RV_MAX_TRIGGERS.  This is not enough anymore: we'll have at least one
+>> future CPU that will demand more triggers per hart when implementing the
+>> RISC-V Server Ref Platform, requiring at least 11 triggers per hart.
+>>
+>> Parametrize the trigger amount using a new 'trigger_count' env property.
+>> The default amount is kept at 2.  Set the new maximum to an educated
+>> guess of 128 triggers per hart (which is less than 2^XLEN theoretical
+>> maximum by the spec).  All relevant callers (csr.c and debug.c) will now
+>> use env->trigger_count instead of RV_MAX_TRIGGERS.
+>>
+>> We're also adding two ways of setting the property:
+>>
+>> - a '.trigger_count' CPU definition flag, allowing CPUs to set a custom
+>>    amount inside the CPU def in DEFINE_RISCV_CPU();
+>> - a new 'trigger-count' user property.  The user property has a higher
+>>    priority than an existing '.trigger_count' CPU def setting.
+>>
+>> Assuming a hypotetical case where a CPU 'X' is defined with
+>> '.trigger_count = 8':
+>>
+>> - -cpu X,trigger-count=30 => trigger_count set to 30
+>> - -cpu X (...)            => trigger_count set to 8
+>>
+>> For a CPU that doesn't set '.trigger_count':
+>>
+>> - -cpu rv64,trigger-count=30 => trigger_count set to 30
+>> - -cpu rv64 (...)            => trigger_count set to 2
+>>
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> ---
+>>   target/riscv/cpu.c         | 11 +++++++++++
+>>   target/riscv/cpu.h         | 23 ++++++++++++++++++++++-
+>>   target/riscv/csr.c         |  2 +-
+>>   target/riscv/debug.c       | 16 ++++++++--------
+>>   target/riscv/machine.c     |  4 ++--
+>>   target/riscv/tcg/tcg-cpu.c |  7 +++++++
+>>   6 files changed, 51 insertions(+), 12 deletions(-)
+> 
+> 
+>> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+>> index 6e70b145a5..a667c06b17 100644
+>> --- a/target/riscv/machine.c
+>> +++ b/target/riscv/machine.c
+>> @@ -240,8 +240,8 @@ static int debug_post_load(void *opaque, int version_id)
+>>   static const VMStateDescription vmstate_debug = {
+>>       .name = "cpu/debug",
+>> -    .version_id = 3,
+>> -    .minimum_version_id = 3,
+>> +    .version_id = 4,
+>> +    .minimum_version_id = 4,
+> 
+> Since you bump the migration version, we can also change the array size
+> to only serialize the number of trigger used:
+> 
+> @@ -246,9 +246,9 @@ static const VMStateDescription vmstate_debug = {
+>       .post_load = debug_post_load,
+>       .fields = (const VMStateField[]) {
+>           VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
+> -        VMSTATE_UINTTL_ARRAY(env.tdata1, RISCVCPU, RV_MAX_TRIGGERS),
+> -        VMSTATE_UINTTL_ARRAY(env.tdata2, RISCVCPU, RV_MAX_TRIGGERS),
+> -        VMSTATE_UINTTL_ARRAY(env.tdata3, RISCVCPU, RV_MAX_TRIGGERS),
+> +        VMSTATE_UINTTL_ARRAY(env.tdata1, RISCVCPU, env.trigger_count),
+> +        VMSTATE_UINTTL_ARRAY(env.tdata2, RISCVCPU, env.trigger_count),
+> +        VMSTATE_UINTTL_ARRAY(env.tdata3, RISCVCPU, env.trigger_count),
+
+Good stuff.  I searched a bit yesterday to see if there was a way of putting a
+variable in the array size of this macro and figured this wasn't possible.
+Didn't find any example after searching for like 2 minutes, then convinced
+myself that the vmstate array should have a static size.
+
+I'll send a v2.
+
+
+
+>           VMSTATE_END_OF_LIST()
+>       }
+>   };
+> 
+> Orthogonal, we'd need to replace these target_ulong at some point
+> (likely bumping the version number again).
+
+I suppose we should do that in a separated patch that handles all ulongs
+from all vmstate objects of this file.  Then we can do a mass bump on
+everything.
+
 
 Thanks,
-Nutty
-> ---
->   hw/riscv/virt-acpi-build.c | 2 ++
->   1 file changed, 2 insertions(+)
->
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 413d47d70e..6b06d9aa87 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -100,6 +100,8 @@ static void riscv_acpi_madt_add_rintc(uint32_t uid,
->           build_append_int_noprefix(entry,
->                                     ACPI_BUILD_INTC_ID(
->                                         arch_ids->cpus[uid].props.node_id,
-> +                                      kvm_enabled() ?
-> +                                      local_cpu_id :
->                                         2 * local_cpu_id + 1),
->                                     4);
->       } else {
+Daniel
+
 
