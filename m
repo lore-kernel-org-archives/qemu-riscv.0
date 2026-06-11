@@ -4,91 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A2B7CD98CE
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jun 2026 12:38:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76AB7CD98CE
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jun 2026 12:45:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXefa-0003TH-IW; Thu, 11 Jun 2026 08:38:02 -0400
+	id 1wXemE-00047L-Nt; Thu, 11 Jun 2026 08:44:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wXefZ-0003Sy-4y
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 08:38:01 -0400
-Received: from fout-b2-smtp.messagingengine.com ([202.12.124.145])
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wXemD-000473-OQ
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 08:44:53 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wXefW-0004rK-16
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 08:38:00 -0400
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id 671901D001A3
- for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 08:37:56 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-05.internal (MEProxy); Thu, 11 Jun 2026 08:37:56 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm1; t=1781181476; x=1781267876; bh=Dc
- wLD5rjA30of6nylUV4nqSOjUjTRT6x4gEcElWHcIk=; b=pOWcqZtjs5UT3uYi36
- qqR8ymDoEm9SpzvSlbufbRoF3S6B/ni6kVTJGwpi9R4F/c8l/KvWudlYMq9RP+I/
- FHajZ35fcV0xB+908VsCL8qv3GeHEW9iDFcMQqqsOVPufEBKqxbdFUixM/lW4J2e
- xmnRrolK44gl0+J4esygONYbFMe9RKRGS64tEpqLTCOUM9QNPvGuPCkhEhfg/czS
- 2HO8qGsp2imuqVaB/4SQdcVEmEE8yZ0u6zXJldZMLLGDbMUgkNygHhnH/2Z6yFAO
- yLalLp0qGr4RVBGOPMFw8eY9SUWKzrhZcgUWKxGVx6UthUlBFZ5nRGculZAY2STU
- hO2Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-transfer-encoding:content-type
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
- 1781181476; x=1781267876; bh=DcwLD5rjA30of6nylUV4nqSOjUjTRT6x4gE
- cElWHcIk=; b=Yq2JhLkwQ5GzQSUFGUXpmvT0mpV5F5gwhm0m+NmxFkhnPn9H+cG
- qjVl6Z55kxOhIbOmXjftZVXzE3BBzCm3Joeop5tuUOdvEG6CohMenvWdgoyHMAKC
- 47N7i+GZckT1didtaf2oSmyogZVDVvb3+Ojg3qDNAvEIJm9Kg65/J8viDnTjkIQL
- GX2F3BIIXWRrRbvhZhkWUxu622s5DLk/4S4edjotbLrswBBUIAvbkmk6qHlXG+Ks
- 1YqAkLRvHzyObtZ1WZlUR15krcjUbLyB1t+y5Xf/RlzGKyz13pJrD1a/auwK4Nnu
- YzqVL2RFc9m1qNbSbFpVrK7I7aNp/BzIpzA==
-X-ME-Sender: <xms:JKwqamKBKDGHUzIy6wvEB4R9emOj66QQq3-Q_L8xeuXyVMID-WzNuA>
- <xme:JKwqakC0cge3awRjKJwD0HLCaxFpnV_rVowt3x5BpnhsfbwqhwOb8QPdR2MOO4NQ8
- _JZLF3S9pfLeDaf1YlR9WcMp0-5zR49FGE1KhjvMoWxgxURW1myog>
-X-ME-Received: <xmr:JKwqahwMee1EvndKc5LWUVUgxMIDFAH85hgWl89iMpnZbEIOWDbnGV1d5vKY4Zh2Lw>
-X-ME-Proxy-Cause: dmFkZTFnabU1R/LSFcRfkOgtibdnawTTX8EU1QQSmPt4cElZ8QIw6YuaovE1gZY1DDz0JZ
- QHr7VzcHnLGd5xG3E/r4QoY3EpVTCX2fwV+33jX3FprayrG8PoKhi2x81DtWrH282vM0v1
- abHP//57q5Dgx2F3rqC7PpPdjWXDZuL53FXVGM9b8W8Isq0Je5ljpUqNW9SMaZmOtig/g1
- hksVu55IBO6iIVnuDSQKhlEpHkIbL2hl8QzzzZi8xrOROtcsCiuLRY2AR2zXA2x6IniJK8
- uTWO6bVYvVs5CQ6TVDjWj3/RweQ5rcB+vCcZnddEfWIlBM/CEmA1/xL3yc/jddDTQ3Ehlh
- 7zY2/4rVf/X87gN9YDGNfr+xpNadlAVAfhJCmgeDDiqq+PPjWDEdcZe5oN0jwU3eQ8sQda
- pBvJccN4tYW4oPaeMkFfRDdnT6jwgZayrfACh8SyNhFDZPY1uQJc3WAjKya0dNZhRe0/EY
- gcdEr65EXuDiOJBSsVMnpMj2ITZzhoI8Upb+OV0P7tbkk4TnSk8ofaU+6zLBvfXHUlpdEo
- D0nLqcuvmBqUY+QElNhlPoveFCvb7K0RK6gpH/wBi+8MdRAkAfifyjhhtb/kUmNjWs6sv4
- hW2RL1sXV3gTiacAI2YyYq9Oz8MlgBqYrCBHW7jNd5vgpeSpNW1KRL+6iP+w
-X-ME-Proxy: <xmx:JKwqaoNk2_XLu2X4aRnpKjV-xa52FkzSuPLPbOXihRAI5sbZbK5hgw>
- <xmx:JKwqag_pnYnJ-rX761pfs5cgQ8ql9ZZEP_7zlmuiH1DoYsYSfL_Xvw>
- <xmx:JKwqaoo26bu2_c1Xw5Yzl-N4M8gcQD_EDPthiqkJTsazLiWA7A8lJg>
- <xmx:JKwqai4qqR36XkBLkXkQ03lo36XAolqWb-_u5_vuiz7-V5vVxaBE0A>
- <xmx:JKwqap5ENB2efxBeDomPT9mi37xlrgPBWaoqNxjqSwa-qzzh1kSRiKYU>
-Feedback-ID: ifd214418:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA for
- <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 08:37:55 -0400 (EDT)
-Message-ID: <057cb481-c6f3-489c-aad7-1bee152fc336@alistair23.me>
-Date: Thu, 11 Jun 2026 22:37:52 +1000
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wXemC-0000Qg-49
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 08:44:53 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65BCSwGh630647
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 12:44:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 4bc4dNNWV7PSHolIkjyQRCbQgU9kET4IqKaqlNUEnBo=; b=U23Hpfnih2KqwFrB
+ HltJvTPJqkz+JbqJ3XDBZEesNL9+8oYnMPrSSpfmvSsgg2xyMXhWh/pwWaReT39U
+ imIrlL5jdaRHUUDu00RhGgqdMrf1353OqO9rgIlgB4QPMemlJe7NU76EyIXHzJDq
+ xfOZQG6ve4NTQSPQKp6VfC+rCeS8YLihPeiC//YKrwR3gjIEIj4RN7mpYSdhJl8S
+ qJI56JyAue2Ij2Xg7BB2aG1bNnTTXOS4/oFU8mD2f62kLufWrouUI1jlZZ0nm111
+ +SMqYRT2lW24QISIClJhZbOebfz51BJNw+44C1UqJPeOeCzT9jiJBwK0rlRAajT8
+ jmWiNQ==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eqtb5gq7q-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 12:44:50 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-8cce1c3c26bso51612936d6.2
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 05:44:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1781181890; x=1781786690; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4bc4dNNWV7PSHolIkjyQRCbQgU9kET4IqKaqlNUEnBo=;
+ b=Y0oXG4N+/GKB+dItOLACjps7mm4GlSWCwztuM0iSUC0uJMGseubP1nKHeB4O294NmV
+ HcahgLXZdHcMiuBVbUf/s2poRVk4hNw0IAS4kzj01tfpwgPB1ojWOox5keeSDt0U7kY8
+ H8Hh/YtuygFfPR/KibykIICMgRt4lEOfLsxHRkzh/pvMSSaDJniFppukc2ALN9+39A4e
+ X1vBtJ7AHySZ4lQrRrkb++Lcns3dv5xa7+0XviQZnRYptr3XC0dL+Q8m5ImepSFLyzMW
+ 2N8NPItmyd7hHgHpm5kaTLDTxOzkaelKMAdRANIGp3//KFOF8+d0Hs/y8UjkbrxqVSiu
+ y4GA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781181890; x=1781786690;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4bc4dNNWV7PSHolIkjyQRCbQgU9kET4IqKaqlNUEnBo=;
+ b=kXvVIQuheXz3AUnawyPaDlGfol7AsqQ03ammolnjg74g7AEEv5jQWxylzTAg6/2RiJ
+ 51LeK61mS2/Ng2Q39yAFa0DJ+iH0Q+wkyr2LRc7OkctF0ZtGbeIlustVSI3UoWa/Msn3
+ 8d1PHc26CNmTFCFZUZAyDxyGwLnzXEQeBpXnmKmSZVzGkrEitKBx7ji6V70Y6WpSqQOe
+ NFqieE98rc7VNXqSj8V+8OffyHst6v/hHq8Ug3DstUc9g57kqg0KqjuR7G0xx0p9E9J6
+ AlW48N4N4z4I1viiVJqlZDejZlKQHu9ryD6Weesib18Fb+7+Cdj745hlk1nITf5VQwCE
+ 8vTw==
+X-Gm-Message-State: AOJu0Yx8dKX64QJReahtu0cJRwBsspfLbx496rUBIuV9qLQhdFhTFuOf
+ 18V4a5ooO6MeP4+2rrWt8Qvsgd8laKf0sfBRP7njK2SK8TuyDPnFF3fZbq+xuSidN3KHWvY5Olv
+ pA6+qwZF/OtGNCke7AaS3HcpkmNdJBNXRDX98gwqY4X5GAErIG6NdEAO1sQ==
+X-Gm-Gg: Acq92OHyApBdHGTDT9mEbE4Ajyzfsj8u91A2RdXjblH5V4R9cKqZlWYPTzt8ikBOLlU
+ 8K0N8BUXZryIZVxREl+Me3T8/YAxH1qwtWj2syYX5t0po0YAtXIDnQxH3YJl+7KntryCv35ZLUk
+ 043c3VAWIGa6E0UyuhuXjy7z2GtBT6yFIXjGrAU6Wm2gVuyC1nv00ggKUMXwjpAIa578Uc+9Gyk
+ MBb4Qeqpe/TQrK0ncm7Nw6sIwpMlgYUXKfmQOXt+Q4WXMlOZJdzPW5P3KjqAdMUnphuBMlfmFre
+ aa+GDnn1Jbhm7qDkmUO5NZklFguW8VoAJvgd5LeTDP97mydtFkXQUEAcpX48InCeWalKvmYBnwR
+ SMnJIN6x7X4CxJ8SAPGfix8WMz8IHy/CuWdmiqydW0MX2Z6vdvNPSfAcQud4pB9M1eckKpTiuJs
+ emPn92IUY=
+X-Received: by 2002:a05:622a:1786:b0:516:d66e:7b1f with SMTP id
+ d75a77b69052e-517ee2336eamr40605411cf.31.1781181889777; 
+ Thu, 11 Jun 2026 05:44:49 -0700 (PDT)
+X-Received: by 2002:a05:622a:1786:b0:516:d66e:7b1f with SMTP id
+ d75a77b69052e-517ee2336eamr40604971cf.31.1781181889395; 
+ Thu, 11 Jun 2026 05:44:49 -0700 (PDT)
+Received: from [192.168.69.208] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490e5153feesm50541155e9.0.2026.06.11.05.44.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Jun 2026 05:44:48 -0700 (PDT)
+Message-ID: <5fe6cc68-4808-447b-aef3-366a0e830434@oss.qualcomm.com>
+Date: Thu, 11 Jun 2026 14:44:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-AU
-To: qemu-riscv@nongnu.org
-From: Alistair Francis <alistair@alistair23.me>
-Subject: RISC-V Code Policy
+Subject: Re: [PATCH v3 1/3] target/riscv/cpu: add CPU unrealize callback
+Content-Language: en-US
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260611123412.2135600-1-daniel.barboza@oss.qualcomm.com>
+ <20260611123412.2135600-2-daniel.barboza@oss.qualcomm.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20260611123412.2135600-2-daniel.barboza@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=202.12.124.145;
- envelope-from=alistair@alistair23.me; helo=fout-b2-smtp.messagingengine.com
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjExMDEyOCBTYWx0ZWRfX39VA3Grrayo1
+ gN3nz75aPpOSQYOBc5y7ZnKD1IEJ7JmuR5yL6oQTHgasswi/da0QZKooPfUfj+UdAHPuhUUCppe
+ YeKhau8h4U5QYX//IN0bd6KJqutDdg89vyFfb0VfL91vSQEl8IAyKHq2supz+JP9YGNmWqQ3KMJ
+ +/OvQf7ZkZJdviIwalVVuRsIRebZBbLxSCRIEJOhAkCfimvU3SR81Gl16bUG0shwIXW96xXT4l8
+ maca1h+gk8blvjPZnsloYef4fjPiozcRRbnNbcoZEgNYou5brndFfgf5+HYmMSe1XRGusUumKbQ
+ QErBQmdbY10HJkJLniKO2pLPL6gMqVZZ5V/7BCMqbMLpl+xmPi50EplANpsbRuQSCbg8JPDrbyG
+ yqBvrqD8xYWj8MmmEtWG2QAORVFtB6s9+S4r5yLSnOXM7ntwd3thTWYxcbnkhUZj/f1O8u9bdTY
+ EVrSZySM0+gTL/uXz6w==
+X-Proofpoint-ORIG-GUID: CikfTmw4SWdQ6Vr928206KOZPOrPUW0r
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjExMDEyOCBTYWx0ZWRfXyKr7jugTjClb
+ vO0PA9rGlCwAsLbisGyq126gpM+oKjidaKuBg/MkFpYVKh3a1OKgQuNzhUH/WfTxYsUzIMhWXS5
+ 54mKt+mnlSGZh7Gm9p8cNQIAj0um3X8=
+X-Authority-Analysis: v=2.4 cv=e6g2j6p/ c=1 sm=1 tr=0 ts=6a2aadc2 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=1RuTZz-hwFsd0XIn-eAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=1HOtulTD9v-eNWfpl4qZ:22
+X-Proofpoint-GUID: CikfTmw4SWdQ6Vr928206KOZPOrPUW0r
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-11_02,2026-06-11_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 suspectscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0
+ phishscore=0 clxscore=1015 impostorscore=0 adultscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606110128
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,92 +156,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hey,
+On 11/6/26 14:34, Daniel Henrique Barboza wrote:
+> Next patch is going to dynamically allocate debug trigger arrays during
+> realize() time.  We need a way of freeing them during unrealize(), which
+> doesn't exist at this moment.
+> 
+> There's a lot going on in that patch already so we're adding the
+> callback infrastructure beforehand.
+> 
+> Suggested-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> ---
+>   target/riscv/cpu.c | 9 +++++++++
+>   target/riscv/cpu.h | 2 ++
+>   2 files changed, 11 insertions(+)
 
-The current state of QEMU RISC-V is very swamped. It's mostly only me 
-reviewing patches (Daniel does review a lot as well) and I don't have 
-time to get to everything.
-
-So I wanted to propose some stricter requirements on upstreaming 
-features. The idea being that we can improve the quality which should 
-reduce review burden and also help filter out some stuff that maybe 
-doesn't need to go upstream.
-
-The idea would be to extend our 
-https://wiki.qemu.org/Documentation/Platforms/RISCV#RISC-V_Foundation_Extensions 
-section to be the following.
-
-"""
-As RISC-V has a huge range of possible extensions, QEMU has guidelines 
-for supporting them all.
-
-If an extension is frozen or ratified by the RISC-V foundation, it can 
-be upstreamed to QEMU. Generally we will try to support as many versions 
-as feasible, following the usual QEMU deprecation policy to remove old 
-versions. We take efforts not to remove ratified extensions.
-
-As there are so many extensions and so few reviewers for QEMU RISC-V we 
-do have some extra requirements at the moment. All new extensions much 
-include unit tests. This will require testing the new instructions 
-and/or CSR accesses, most likely by adding test cases to `tests/tcg/`. 
-We also require all new extensions to have a justification of why they 
-should be added. This helps reviewers allocate time. Examples of reasons 
-would be: "my hardware xxx is shipping with this extension", "it is 
-required for xxx profile", "it enables this cool and useful feature". 
-Being an official RISC-V extension is not enough of a justification at 
-this time.
-
-If an official RISC-V foundation extension is in a reasonable draft 
-state, that is not too many changes are still expected, it can be 
-supported experimentally by QEMU. Experimental support means it must be 
-disabled by default and marked with a "x-" in the user facing CPU/board 
-properties. Draft extensions must also include unit tests and a 
-justification of why we should support it.
-
-Note that official RISC-V foundation drafts must be hosted by RVI and 
-the code must be developed against the latest tag. The QEMU series must 
-point to the exact spec used for the extension
-
-Draft extensions should also try to include the version information in 
-the property. Draft extensions can be enabled by specific CPUs or boards 
-if the hardware supports that extension.
-
-QEMU will only support the latest version of patches submitted for a 
-draft extension. A draft extension can also be removed at any time and 
-does not follow QEMU's deprecation policy.
-"""
-
-I'm also thinking about extending 
-https://wiki.qemu.org/Documentation/Platforms/RISCV#RISC-V_Machines
-
-"""
-As RISC-V Machines are user facing they follow QEMU's deprecation 
-policy. Backwards incompatible changes should be avoided, but that is 
-somewhat board dependent. For example soft core boards (like OpenTitan) 
-are in flux and likely to change while the `virt` board is fixed to 
-allow developers to target a stable machine.
-
-Adding new features to boards is acceptable as that doesn't break 
-existing users.
-
-When new features are added there should be a justification as to why we 
-want this feature.
-
-Where possible boards based on physical hardware should model the 
-hardware as closely as possible. Information (ideally a datasheet) 
-should also be provided to provide technical details about the hardware.
-
-Machines that aren't maintained and/or used will be deprecated. 
-Submitters are expected to help maintain the machine after it has been 
-accepted.
-
-All new boards must include a boot test to boot a guest on the board. 
-Generally if the board supports Linux then the boot test should boot 
-Linux on the board.
-"""
-
-Any thoughts or comments on these?
-
-Alistair
-
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 
