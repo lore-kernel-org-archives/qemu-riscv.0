@@ -4,113 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30662CD8C9D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jun 2026 04:19:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2ED4CD98C6
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jun 2026 04:23:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXWs4-0003dw-V7; Thu, 11 Jun 2026 00:18:24 -0400
+	id 1wXWwn-0004SA-DQ; Thu, 11 Jun 2026 00:23:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wXWs3-0003dn-Tl
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 00:18:23 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wXWs1-0003jE-VB
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 00:18:23 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-68c19f1f3ceso12081372a12.2
- for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 21:18:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781151500; cv=none;
- d=google.com; s=arc-20240605;
- b=ORCYoh8DcgbG3k2+l4JF4FBGE7ZODHMgkgT9CTHacgPWET/ePRwtczubPwLnl0ZsW9
- AOCsrBgCe0hp9bMckqsleRx+ngc8K5/DkWPztcEK/NYm1SBU/522eXyZSn+JzBK8G/hW
- NLc/7CCoIvx2gYP4mUSC+RpNBp3Nt5SAo4MLLHZUrUD0SJx6vFV/wDLEo+l7rNHgS8mB
- MfI++V2q9cqEwGkY7oonNFf3ksoy7orbyRi7BL4pMpjspTCmh9qL9vG1Gen41YYzTFtu
- tiuvgQfDSAbGBfO/6nHOpE/XXqT/rLlPuFl3lIXmAH7Uq87asV92MF2d4OUxVvPJqHz+
- cC2w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=wy+S6RRfCW9Ayyv0MaBvn9PEJAH1zd8qYVAPVxJvIqc=;
- fh=Xh44Eweznu3U/LRxViqSEOgIXtQq075GvbV0U+ynRDw=;
- b=JEg5vhJ0gh0fzGH8mA+fXSHKiqbgMVoRrP1EAI23MvNmYK+uipMPyHqS0iKHKc0iCv
- pijOFPAMHnNS0YPuZ/UNYSXowWR7xGvwigGBFrQCHQz+e6wWXyRycrwR1P0cmzvzB4zR
- L7JpYg08g4c2EHAmYivirolTAxukOKqtDnMcObkdbSsWlUTgXmfBdifSDuTZoYHt0hh3
- Y4uAO4hr6asuc6DetA4nsKm2drBXIb+osYnN7O1Znpc0ut5M21VxlYxgZWNS6FoAEYL/
- zjpe8/iamEhk04jqfxgEnlIg9BgkUgxTpbiY6/pwEtSMCho1Ltod39yze6FMc0Mme3DK
- bqBw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781151500; x=1781756300; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wy+S6RRfCW9Ayyv0MaBvn9PEJAH1zd8qYVAPVxJvIqc=;
- b=HFUx1xYq/0hU3vmarP1e4kuUGTS03gPyJn5h1shQhUbchGxCuSsiXeJ9GpEtcllmGf
- kTE1MECkb/GQmRu/kK2j3hPyTunwBjjLICnqzM/eun78q+2LVq5JAoew+I7UKx6mpWk+
- 5T2wEc8Mmao45FuzZGLzXmYCtWMWpWQphAJutEgMDK+DiegcT53jf6oMcCqWS9AR8U8v
- WcA4GksKsvKPDFRudwSmq2twmYHZ0DDF5rj7AphqGRBL6CJTIuw9jDD2uzzhXUcuj9jE
- MKzUSGY6TT53NlU5TlZXneMzS+nqnsGiCUacCnpv515dBWKfr9As6OLKTf86NepEXa3t
- Ekbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781151500; x=1781756300;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=wy+S6RRfCW9Ayyv0MaBvn9PEJAH1zd8qYVAPVxJvIqc=;
- b=et4Xl32ZaFkYbCZvUxwKdxf9HiKvfg6nvZU2CNcqiyX6j0rv4nAKRPpGI6F+L0VjBM
- kuHoTvzz44YNBN+55qjjxAgy00/FJtAPKBVJ2jsCLrdvOyhjFeeA0qJJz1nXJrWLaXFJ
- boCDjbpr6pp5xgjiIdocgIsWGwfevJaziNg4dBQSmOlgc5XOV31CXbIOTHC9gJ1SAADR
- D/XZmsLSIg5atRbSXai3jtT/WhltbQU6AC6CKjI0EGLOmSn/cscb79i17EbJBLEI6VKx
- RCbdebCfhhAqJ+tygFsapwwKMRrJ/IEBCoisriYyp12kVlmX/xyGdCxIL/uzuAyNRkxk
- vLuw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9ag32v9/EaJmb912KsHpIMJa/lhFNQKSBqK0KhJBIeqybopPXsmSVhNxwbSIwZmdgaFX10TWpA6bKJ@nongnu.org
-X-Gm-Message-State: AOJu0YwVYp0x60ArxdUnrheWcIoZ8HTlfHQHVKwPttWzU/8zOeULE623
- OQ9g0jFl1YiEJ9iLi2x1gNL4Zezf9M5oN17Fon575+o/SUc3pWxKccWImausM51uNQyW5IL7eCu
- uM/FuSmQSQCWNLqrlgcsCEAvykKWtdl4=
-X-Gm-Gg: Acq92OFOQfpPUadZtZVgrF80GBqzt5gzzWRr4dydj++wOUw0HLdgMJiJRNp8qfHNhHL
- ys2C9Mi4xX41MP/rpWlg/3axip1RIJTYOzmhPEGZ4cbIc4ainiTomUG1Z1NXB3SoOpR9GdtmVQW
- ouXbb7ytREzZ4tLCTU5EPjxH6YJa3x5Gy7vRqouX1CfQqLG3MaJoV3cr952g1TMo0j6HKKtuQ2o
- 8jnieQodIGWzZaRqM6smjThlsb1dsAKdidd66zIHEgyT1/0TvNrffoI1AtkpK4tbk8xrfM/MFhw
- LSunpW3NK8QPyXf4t+wlNXOtFrn5RM9UDvSFM5lRaYr6yviD
-X-Received: by 2002:a05:6402:1d52:b0:691:956a:cf6a with SMTP id
- 4fb4d7f45d1cf-6930e28a84bmr409476a12.12.1781151499601; Wed, 10 Jun 2026
- 21:18:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wXWwm-0004Rb-4x
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 00:23:16 -0400
+Received: from fhigh-a3-smtp.messagingengine.com ([103.168.172.154])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wXWwk-0005Mh-GL
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 00:23:15 -0400
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 21C681400077;
+ Thu, 11 Jun 2026 00:23:12 -0400 (EDT)
+Received: from phl-imap-06 ([10.202.2.83])
+ by phl-compute-04.internal (MEProxy); Thu, 11 Jun 2026 00:23:12 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:content-type:content-type:date:date:from:from:in-reply-to
+ :message-id:mime-version:reply-to:subject:subject:to:to; s=fm1;
+ t=1781151792; x=1781238192; bh=4oslrsk7DFnE+Z0O/BogOb/s5IfDBs8z
+ +CGYxF5h/jk=; b=WLa/tBu9yGA5BH28H1QzoRRtm//xWT7bRq4smpkhwr0BPT+h
+ 5sgGkAWJwK0fN/8yRHqY2H0OX0ZB3bD7DXgYn4cBJUa9A+7m/lGCoaRegvZDGfIu
+ VEYiK/U2c0f9yvAq4BxVkmhdwuvPBpXbcxRzdDZ2gB37nt11+queHF8jHHTRR/om
+ k8vHA183C66In+7ugJbEeKVaXT+n99wINjyFLluw0yiMCj6lZEyNZf31U2z8TPCP
+ K2FQBCVVWP1p+ZWNWHhyOtLuq7JWwk5iA83Vi3UaBKZfArshhORsmh42v57shXr0
+ /mFe24ksyIlgTWl7UgoISY69kTJg2jk47PiGIg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:message-id
+ :mime-version:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1781151792; x=
+ 1781238192; bh=4oslrsk7DFnE+Z0O/BogOb/s5IfDBs8z+CGYxF5h/jk=; b=W
+ kaO6GHbw16SnXKlmcyB99afMnVuviilC9+Ptn2SZYkv80eaV0IFCS4U5ayrnRh20
+ wZGbLOKJkavJ4WL6Ewh9P6x7rLZYG6hn3fQidpm6kPph4r1iE+9RCIEd1Vc2RiJO
+ Z4K/58e/63rRp63gDqSCQJqg6fFCuyZk3YeAIlgLVEgjTCYbTZgw04eFQUEN8wVB
+ 7L5ITGsKp7dEeK96A38J9xmcVff59ddjjL9kEVDMSZYiNqtO2tK3Wf3GrapIcJr9
+ XIa+wD1r/REmen9LBYEk0Ar3H//WoSRjxDYeP7vLXdIGvYbexRFN8XN5qda9B7IS
+ M70SBh8UxdrqaZC0YbL+g==
+X-ME-Sender: <xms:LzgqanO5zql3OLIxRtF8C5bxA9VAUGm4gkoHjW3C3JNJvVuQKdju8g>
+ <xme:LzgqaswbNZPYqiDaZSsXNeXnWlRu2-vsry8VHGvPr_VKNtKnncGWwCLuqXHJ7Y7Hu
+ OVJod4_0c_wQ7pcc0-x96foPXZUz50Ohi48ArX7sOgnOyC9vQg6nw>
+X-ME-Proxy-Cause: dmFkZTGEC2Tu+zdtWNaof55SN/CZJnr5HPlnUL3suQ4wm20l4mVo0YmvhVzYd2xTkSrai1
+ HGwQtLC/ZB3YtQKOjGGuF8oTGoAHGWaOPaim1esrTJlJPakFaGGa0Ncw8gh2eptop0Plda
+ 2ijIdVlj0Vo/0lLhKLUPqiHxi2Uywcw//eoOo3KjcxooSGva1OMyinWUQflwIL4jdaUuP5
+ 9QfWrYKk7x8yKANtfaI3YdAcGjomwUN8TNu+V0M5FsCulaKRTIUZ0UZYrJWdsFwUK7TLmT
+ wyFbKVEUPb9lXuZ8PVcBU6GaY3OUd5PHMozpGF9o7T71oUdupZNT3zrfVA3QGOFSxjLFYu
+ vg3kUXK4/qx9dzScRtSE83b59+z5mZDIxrvumbg/6Del9P8zCY+0RXvY0LscYbVyahSvdL
+ mkyPis/fhlQefQ/uy1z+a+Ueqi94F9yTfY7GyCPtu8EUSOXW7m+9Q9Ky7i2w40aE49yuWn
+ zlw3/4WFOnEcMKRdYnyHofP9ogXIHeVvmzOoWsgOSGlo4gU0c+6BZ5LmosYKCdnXXkYv/G
+ BcF8r+htqBZMQnVzv7ViIrmLj3uw0ga93pyM8ocIzjoGD5+z7pagLp9hpV12fP5EPIpXE+
+ 0DDPSrHOVRFFRhnSSgpiYNVkKTSYOj1PWqZkcXAyrKLHrV0OnXyag1ZFJhXw
+X-ME-Proxy: <xmx:LzgqauuriklJM5HpCExccy4c3FJZWN1qw5jNEYkamEE_uVPkYK_Irg>
+ <xmx:LzgqavdS3A39GjFVdkU3M3rvk67c7JDjnMyQbCSDKwfjWu28kU3CZQ>
+ <xmx:Lzgqar-N0AnivS1Nqe3SsGm0il9_9lrUQJHagci9X56Sq5RGjICTeg>
+ <xmx:LzgqaqTU7Q1NwN0fWyPmQxKeBTrm_1uTqlww0l-apEPvBMLaUi_JTw>
+ <xmx:MDgqaqGsTTosYSBKQxM6iDRPWPQl1UDj_g27psqNTzz1JewNbsfMtIVY>
+Feedback-ID: ifd214418:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+ id 46B562400098; Thu, 11 Jun 2026 00:23:11 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 MIME-Version: 1.0
-References: <cover.1778516731.git.chao.liu.zevorn@gmail.com>
-In-Reply-To: <cover.1778516731.git.chao.liu.zevorn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 11 Jun 2026 14:17:53 +1000
-X-Gm-Features: AVVi8CcAQajcjNwT7j5gxtDMrfqhYAUoUovU2yeoFkGRStNK6om151TRmZSGtIw
-Message-ID: <CAKmqyKMU+hMjaevvKLNve3=wnWJXRGMasy4BThnfZ6o0CizTNA@mail.gmail.com>
-Subject: Re: [PATCH v7 0/5] Add support for K230 board
-To: Chao Liu <chao.liu.zevorn@gmail.com>
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Paolo Bonzini <pbonzini@redhat.com>,
- Christoph Muellner <christoph.muellner@vrull.eu>, 
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x533.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Date: Thu, 11 Jun 2026 14:22:50 +1000
+From: Alistair <alistair@alistair23.me>
+To: "Daniel Henrique Barboza" <daniel.barboza@oss.qualcomm.com>,
+ "Palmer Dabbelt" <palmer@dabbelt.com>, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ qemu-riscv@nongnu.org, max.chou@sifive.com, mikey@neuling.org
+Message-Id: <6315a319-19d9-4533-83ed-eaba9c0b29d5@app.fastmail.com>
+Subject: Regular QEMU RISC-V Call
+Content-Type: multipart/alternative;
+ boundary=f253d97086e35e4c3833182d228c32ed77ba7726
+Received-SPF: pass client-ip=103.168.172.154;
+ envelope-from=alistair@alistair23.me; helo=fhigh-a3-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -126,126 +104,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 12, 2026 at 2:32=E2=80=AFAM Chao Liu <chao.liu.zevorn@gmail.com=
-> wrote:
->
-> This patch series adds support for U-Boot + OpenSBI + standard Linux kern=
-el on
-> K230 board. Thanks to Peng Jiang, Mig Yang, Renzao Ren, Yao Zi for their =
-help.
->
-> The current patchset fixes some bug and tag errors, Thanks to Alistair an=
-d
-> Conor for the review.
->
-> Test command with the direct Linux boot:
->
-> ```
-> $QEMU -M k230 \
->       -kernel [Image] \
->       -dtb [k230-qemu.dtb] \
->       -initrd [rootfs.cpio.gz] \
->       -nographic
-> ```
->
-> The k230-boot-assets repo [1] provides K230 Linux kernel images built wit=
-h
-> k230-sdk and Yocto.
->
-> For more information, see docs/system/riscv/k230.rst.
->
-> The GitLab CI result [2] passed all cases.
->
-> PATCH v7 changelog:
-> - Patchset: Removed invalid tags for patchset.
-> - Patchset: Updated the K230 datasheet link in the patchset comment heade=
-r.
-> - Patch 2: Removed the unnecessary changes to MAINTAINERS.
-> - Patch 2: Fixed an Oops caused by accesses to an unimpl UART MMIO addres=
-s.
-> - Patch 2: Adjusted the K230 machine hart count to 1.
-> - Patch 2: Supported direct boot linux with `-kernel`.
-> - Patch 3: Aligned the WDT interrupt number with the K230 datasheet.
-> - Patch 5: Updated k230.rst Linux boot docs.
->
-> PATCH v6 changelog:
-> - Patchset: Rebased on the latest Alistair's riscv-to-apply.next branch [=
-3].
-> - Patch 4: Picked up Fabiano's Acked-by.
->
-> PATCH v5 changelog:
-> - Patchset: Rebased on Alistair's riscv-to-apply.next branch.
-> - Patch 2: Fixed reset vector ROM jump to trap-handler bug.
->
-> PATCH v4 changelog:
-> - Patchset: Rebased on the latest master branch.
-> - Patchset: No functional changes from v3.
->
-> PATCH v3 changelog:
-> - Patch 1: Align T-Head C908 CPU's RISC-V extension with XUANTIE-QEMU.
-> - Patch 2: Adjust PLIC and CLINT addresses to match K230 datasheet.
->
-> PATCH v2 changelog:
-> - Patch 1: Add Svpbmt extension support for the T-Head C908 CPU.
-> - Patch 2: Move the k230.rst definition from MAINTAINERS to Patch 5.
-> - Patch 5: Apply Daniel's bugfix to build the k230 documentation successf=
-ully.
->
-> PATCH v1 changelog:
-> - Patch 1: Add T-Head C908 and C908v CPU support.
-> - Patch 2: Add K230 board initial support(big core is not supported yet).
-> - Patch 3: Add Programmable Watchdog Timer (WDT) peripheral support.
-> - Patch 4: Add QEMU test for K230 watchdog.
-> - Patch 5: Add documentation for K230 machine.
->
-> ---
->
-> Link:
-> [1] https://github.com/zevorn/k230-boot-assets
-> [2] https://gitlab.com/chao23.liu/qemu/-/pipelines/2515556858
-> [3] https://github.com/alistair23/qemu/tree/riscv-to-apply.next
->
-> Thanks,
-> Chao
->
-> Chao Liu (5):
->   target/riscv: add thead-c908 cpu support
->   hw/riscv: add k230 board initial support
->   hw/watchdog: add k230 watchdog initial support
->   tests/qtest: add test for K230 watchdog
->   docs/system/riscv: add documentation for k230 machine
+--f253d97086e35e4c3833182d228c32ed77ba7726
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Thanks!
+Hello everyone,
 
-Applied to riscv-to-apply.next
+As we discussed last time we should setup a reoccurring meeting for QEMU RISC-V. The current plan is to start next week and then occur once every month.
+
+For the time, I'm picking Wednesday the 17th of June at 10AM AEST (UTC+10). Hopefully that works ok for everyone. If it doesn't let me know and we might be able to move it around.
+
+If anyone has anything they want to discuss let me know. I can send an agenda and confirmed meeting time out in a few days.
 
 Alistair
 
->
->  MAINTAINERS                    |  11 +
->  docs/system/riscv/k230.rst     | 113 +++++++
->  docs/system/target-riscv.rst   |   1 +
->  hw/riscv/Kconfig               |  11 +
->  hw/riscv/k230.c                | 524 +++++++++++++++++++++++++++++++++
->  hw/riscv/meson.build           |   2 +-
->  hw/watchdog/Kconfig            |   4 +
->  hw/watchdog/k230_wdt.c         | 296 +++++++++++++++++++
->  hw/watchdog/meson.build        |   1 +
->  hw/watchdog/trace-events       |   9 +
->  include/hw/riscv/k230.h        | 149 ++++++++++
->  include/hw/watchdog/k230_wdt.h | 121 ++++++++
->  target/riscv/cpu-qom.h         |   2 +
->  target/riscv/cpu.c             |  51 ++++
->  target/riscv/th_csr.c          | 380 +++++++++++++++++++++++-
->  tests/qtest/k230-wdt-test.c    | 189 ++++++++++++
->  tests/qtest/meson.build        |   3 +-
->  17 files changed, 1864 insertions(+), 3 deletions(-)
->  create mode 100644 docs/system/riscv/k230.rst
->  create mode 100644 hw/riscv/k230.c
->  create mode 100644 hw/watchdog/k230_wdt.c
->  create mode 100644 include/hw/riscv/k230.h
->  create mode 100644 include/hw/watchdog/k230_wdt.h
->  create mode 100644 tests/qtest/k230-wdt-test.c
->
->
+--f253d97086e35e4c3833182d228c32ed77ba7726
+Content-Type: text/html
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html><html><head><title></title></head><body><div>Hello everyone,</div><div><br></div><div>As we discussed last time we should setup a reoccurring meeting for QEMU RISC-V. The current plan is to start next week and then occur once every month.</div><div><br></div><div>For the time, I'm picking Wednesday the 17th of June at 10AM AEST (UTC+10). Hopefully that works ok for everyone. If it doesn't let me know and we might be able to move it around.</div><div><br></div><div>If anyone has anything they want to discuss let me know. I can send an agenda and confirmed meeting time out in a few days.</div><div><br></div><div id="sig95865080"><div class="signature">Alistair</div></div><div><br></div></body></html>
+--f253d97086e35e4c3833182d228c32ed77ba7726--
 
