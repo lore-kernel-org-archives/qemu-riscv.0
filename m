@@ -4,143 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62363CD98CC
-	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jun 2026 09:54:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DEA3CD98D2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jun 2026 10:07:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXc6d-0005bm-VR; Thu, 11 Jun 2026 05:53:47 -0400
+	id 1wXcJ5-0001Wh-Lv; Thu, 11 Jun 2026 06:06:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wXc6b-0005bR-OC
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 05:53:45 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1wXcJ4-0001WS-Ap; Thu, 11 Jun 2026 06:06:38 -0400
+Received: from mail-japaneastazolkn190120002.outbound.protection.outlook.com
+ ([2a01:111:f403:d405::2] helo=TYPPR03CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wXc6Z-0003y0-VH
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 05:53:45 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65B5GGG43791630
- for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 09:53:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- q7IyhJ9A3UVSHCPTP9d6w83TYbzzTlaoirtCImmcpNI=; b=ZQ/18lS//GhJanBm
- Q+gH2fPlaNd2UxWCfvlBsI30tsIHhFSbUc5iu0LoMmx4rOpQRnIAUMF5V2tnfVvn
- 18fR35VyY8rQjbNbwJiFf7i+ruIB+EiDl+hs3sKAAEmE0Tdje7bVoznFkfzyATTI
- kD+T21qs/5eWAmRYUJ9o7EKIn1PEUQQM3uv4qrtaBFPjSnaZlVw36hoxSagHmMv5
- efQXl5xsofe4UwVv9H6di9qurf42ExXXaPxQfakTvLK1agdHZPerw53+UYWk7vBl
- jPXHJuqp6F+y44HsIFOOEAc0+RqGnI4TG1KzEzOb4kzUgiXKs7bK4oMN8cfnzFjf
- rIWGMg==
-Received: from mail-ua1-f70.google.com (mail-ua1-f70.google.com
- [209.85.222.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eqe702u26-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 09:53:41 +0000 (GMT)
-Received: by mail-ua1-f70.google.com with SMTP id
- a1e0cc1a2514c-963aef8141bso2271348241.0
- for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 02:53:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781171620; x=1781776420; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=q7IyhJ9A3UVSHCPTP9d6w83TYbzzTlaoirtCImmcpNI=;
- b=doSvExW1JwaEY1QdjpdLUnVfAKY1YBj9DQbc00QNq6equHAMEa4+YTcZyHTGFL7wK0
- CrMBcnHEST4ZO4MtlXj2pntU2PM6mQplx9zxv6E2N1hnpragVDwY7dD8PYE/gz7SERKx
- hn/943OALYwmedR+lLsdjFRVUgmhjsGeEydItKpD8fjH4voTkY4WoU+3r9zAc9fLfM23
- 403/P+A3KHE2Mlxm/sh9372TzpD2FUL0lcUqoCtLxemAYjQ5pwqfQO8puANiOZ7ewtKs
- ySIEcWEfCeOf4k5d84SB5jJVG/1rN17ykRqgJfwCZF5oMfkLELptX/7cyCij3/cI/+8n
- N5RA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781171620; x=1781776420;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=q7IyhJ9A3UVSHCPTP9d6w83TYbzzTlaoirtCImmcpNI=;
- b=j38b8+DhR6Ba6T1YBDRUsi8wxxSg3+vs39dfJWeCNT+Vs94iRMcu3Pel9y0Gjt+Iex
- FT7B2kvpuxXq5We1IEegcTqA0KDUsZyM9tGSMpiPJ6YMd5uUhwFIXHlYNmycYcHSGfd0
- tZ19bzgTLrL9On8DDJ5CqBZpINLY3uMlsM0wwPPptq4tGZ54xBO+/McUDMv7vMgTjjQA
- rfKyOpyWknQ1P7tCJ/w56Z/Rp4cn9zonIHz6ByJu3+PlmdLkmrs9VLLCRB/btrnJTZwH
- 1r6QCxzSykfzBFaEmQN07Q3nBRVeBqdblo5UtV5twzts737NqIK2egGoY1wQRraxdb5R
- 1rOg==
-X-Gm-Message-State: AOJu0Yw9gGlFXcQJIT84l6XFbZaKO8lejPjJdHziFHFrUjRIRq/bk6p3
- zMCgip69AH5dCY2epS8vEzn+1PvKMVjwAsAuRxt4IJBstLx2T83atW8cFsc/iSEd8mjsjzi9h26
- 3dO6tErLLmiNHp99G6iFQEf6O8w+aU9UIdG5j2/eJVIq5btjlvy5IkguYVw==
-X-Gm-Gg: Acq92OHr9LQCaKe9seoU5OZjhILxhX2MGNYiscN37PsgcnbgDZEdbB8uI9kX4rfJBrn
- 3D4duRB4dYSbOHHrlpWSwcS5Hsa2VyOuFXMsuGMJkHjNBTburse+p4VvbOZjusGI9y9gnhVr6DP
- 4ZYewF2F34vwH85XH7yxjuZNgTt6urfDlPoN5bujk22r07D4uKpc9XlFO5brE8kaezo0SHR9ZAB
- MnZmkUYWZaEWt0QCR7ERdCJyEPcQKAjpCZiYMas307koABbEDG5gbD7oqIB+vy4Fdy/PRF7Vdhb
- dvrCuiEumIChjpSkoA/MJb755/93M91anr7NdK97dnGj4abGJ+cJ6+SrrnzlY6QBViSjBxK9ehe
- Ue/+9pcdF1OXKSLs2se7fCtYtLwXn9cvq60n2iTYFVkkhT4KHVREouk+1cu3EwRQZtbfm
-X-Received: by 2002:a05:6102:5e93:b0:607:4fde:1921 with SMTP id
- ada2fe7eead31-71d5f4c9e9cmr583540137.24.1781171620171; 
- Thu, 11 Jun 2026 02:53:40 -0700 (PDT)
-X-Received: by 2002:a05:6102:5e93:b0:607:4fde:1921 with SMTP id
- ada2fe7eead31-71d5f4c9e9cmr583532137.24.1781171619680; 
- Thu, 11 Jun 2026 02:53:39 -0700 (PDT)
-Received: from [192.168.68.106] ([177.170.117.62])
- by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-71d900c43c1sm610880137.3.2026.06.11.02.53.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Jun 2026 02:53:39 -0700 (PDT)
-Message-ID: <d3ab9f75-449a-4196-b4d4-802e71576edd@oss.qualcomm.com>
-Date: Thu, 11 Jun 2026 06:53:33 -0300
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1wXcJ2-0006vQ-NH; Thu, 11 Jun 2026 06:06:38 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GTDW/Z541pDAYuUXaNOuvr0APWW0kzV5rXKuEMYhHCeJWlsXwW4j94kqqLcsxIeKmkMIThA0gGGaaubXbclhjRmerpPYkCrmkOEu5uiPs0SrrYmvZPLIBsww14ObqifePDsPQ8Qvyyvn1ip8I13VcOFFEKDY/HjrBhd/7EcYF3b2rvLxsh9ytF0POywW1yldTcRsKV94c0rwJdEdwIOqD4e8yrfKVR0b4Tks4/GY1hmLRoDR8bY9DhudBx0uK1+MExLFMoh20umbzignlXVLdW3ebCe1vjA9hGrn5Tw2AXZUqbSQIeqn/T383Tjq6wbaUg0L0pedhbNwgLx/Jeiuaw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6229FYuDhqLQc/dMps29OthbEvyBcxohdqbTftR/MdI=;
+ b=YI6a61YTGCtZygc14H92Ay/vlQO4mV7MnCuTpXiJQCmAKa1dzv26oY/wUDT/BMzINXMTGCS01WbfDxLl3/cVQQmyzD6IMqvpbV4ARivIsA9VcLZApQs1Os1HPS2UWJT0r8bSNZLSC2XjDpHksNNp7INyhneIM8r294DP4j4Na5CPDiUELMAxYHuy+kmQVBpejbfBqkr4anMf0fSEam9vCqfChFAxIiRKok2t6RyKWhdaHQt3mHMh43CP0JCUIJsFwFMWMdYVNa6BNUFQS/eqAZwf+anPc5k7KaDhTh5wM9cXqm3dpVmxmtNmiNmOr3GU1I6aHmJQwuq6ecCtGhbCvw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6229FYuDhqLQc/dMps29OthbEvyBcxohdqbTftR/MdI=;
+ b=mtKjTLz7hxlie9TU29itIehjKfSWEiRUDrBfuyge271nLeuWI7raBjFg1TQDD1wol2CrhnurtAUvGMmg9DNujyt6ygLP895mWQ6/QN2sb8LfgHsKmiCl9lGxKRSLlzvT+HNbFNG1yE5usZqAYtoLG8e0LvajvmDzHdCbYUQkqwN+6AJCGcVFacUdc/A5Hqdg4j4kR6hvMmqNuBnis9dhZw5xLBy1bX91wl1JNUHRx4ApqlFUJoKvcjlLNlbhArvsOZ7iA2YjYvtfwAGolLaq1Z1m1J77ql0gDspNo7FMiVQ73OcR7ZUc0ethm/ovKQooiiuTbQyiTDsnyDsEnLjZKA==
+Received: from SE3PR04MB8922.apcprd04.prod.outlook.com (2603:1096:101:2e9::7)
+ by KL1PR04MB6980.apcprd04.prod.outlook.com (2603:1096:820:d6::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.13; Thu, 11 Jun
+ 2026 10:06:27 +0000
+Received: from SE3PR04MB8922.apcprd04.prod.outlook.com
+ ([fe80::3450:f139:5238:8f58]) by SE3PR04MB8922.apcprd04.prod.outlook.com
+ ([fe80::3450:f139:5238:8f58%6]) with mapi id 15.21.0113.013; Thu, 11 Jun 2026
+ 10:06:27 +0000
+Message-ID: <SE3PR04MB89223BFA19CAED63F7C799EFF31B2@SE3PR04MB8922.apcprd04.prod.outlook.com>
+Date: Thu, 11 Jun 2026 18:06:21 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] target/riscv: dynamic alloc of debug trigger arrays
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20260610205457.1868701-1-daniel.barboza@oss.qualcomm.com>
- <20260610205457.1868701-2-daniel.barboza@oss.qualcomm.com>
- <380995c0-fbf5-4f1a-a996-fbf39513c166@oss.qualcomm.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: Re: [PATCH] hw/intc: riscv_aia: Skip reset for KVM irqchip
+To: Qingwei Hu <qingwei.hu@bytedance.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, jim.shu@sifive.com
+References: <20260605110621.644997-1-qingwei.hu@bytedance.com>
 Content-Language: en-US
-In-Reply-To: <380995c0-fbf5-4f1a-a996-fbf39513c166@oss.qualcomm.com>
+From: "Nutty.Liu" <nutty.liu@hotmail.com>
+In-Reply-To: <20260605110621.644997-1-qingwei.hu@bytedance.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjExMDA5OCBTYWx0ZWRfX6fDeeihuLb1g
- gRz5JL84ajnlBtbPN1HFzr6WAaCx3OuaG4aZPoUBD1srZtlqQy86KpI6mqtTpB+rYNmN1nesS1q
- uvQ3ZrR0NkXstZq8bec60QRDGn2bBh3zGacQIeGWnLDvDE3zMUJwuXGWG84D3Eq6GlYw1IPUp2i
- YltevdkMa/Gyqkla7iswAD67WiFAaqMyMBF2Yij7mNwshApI8SG8JYrubGUwo059t8SfMnAUNBS
- GiIwJyrPaLkIJj2Frxrc4lgYfVgIzYlHT9SLtVKrLRVNALI19l9K+4gXy2aeC5rFcZfYhxIyOP0
- 8X0gdSuTp7TiuXNelmlPUGuyDdfLvpnmz8NGdYpZNerzA0dlDHKVWoE3eTmxxwKBn4/K8v1DOVQ
- Ui8DIkjmD8c4LOfUm8RU3WbZUNJyupNk57+p3+5IZUg22D6dHaJt2khwclDmGB8NKWi1pqFgLxP
- Vk7ZJf8sjFBZoRc1oYQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjExMDA5OCBTYWx0ZWRfX4bL9+uppiPv0
- 2tl7JilinjvlxzQWbjuHodXPBUdPmVIGF5COgSATbc/j79181Uj40jNmGbtqCN8ZaEqV8G6z2wc
- 3sWbbR2jcHwBciY0yBwjHmo0EfWkCRQ=
-X-Proofpoint-GUID: KBtQDPnCd7UjnToKuEy0u737bKKRF85_
-X-Proofpoint-ORIG-GUID: KBtQDPnCd7UjnToKuEy0u737bKKRF85_
-X-Authority-Analysis: v=2.4 cv=Z5Tc2nRA c=1 sm=1 tr=0 ts=6a2a85a5 cx=c_pps
- a=R6oCqFB+Yf/t2GF8e0/dFg==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=q7Ro75FnHStSpohpR88A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=TD8TdBvy0hsOASGTdmB-:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-11_01,2026-06-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 adultscore=0 impostorscore=0 malwarescore=0
- spamscore=0 lowpriorityscore=0 phishscore=0 priorityscore=1501 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606110098
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: TP0P295CA0036.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:4::15) To SE3PR04MB8922.apcprd04.prod.outlook.com
+ (2603:1096:101:2e9::7)
+X-Microsoft-Original-Message-ID: <585f629d-2873-48fd-b44a-52fcf643deb8@hotmail.com>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SE3PR04MB8922:EE_|KL1PR04MB6980:EE_
+X-MS-Office365-Filtering-Correlation-Id: 27c7a4c2-42d4-43f6-9cdc-08dec7a11906
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|41001999006|51005399006|21061999006|6090799003|23021999003|19110799012|15080799012|5072599009|8060799015|19101099003|440099028|3412199025|40105399003;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VmZzVERtMm1xdVVDTUlXaWFTT295Zlo4Mm84OU4yb3BkY1VLRVZveXducnlZ?=
+ =?utf-8?B?RmFTWGVBNTRGcEhVSUJwZ2dQek9nNk9Ta1BnNnlMczNOVWE1M1VxQjEyUjBo?=
+ =?utf-8?B?RUU0TGNiMGNqZkVybDdjMCtHcE1mYklTd05jcTUvMWg5VnArUjlvRlFXT3RZ?=
+ =?utf-8?B?RER0UEYwVm0yVjJOL05FV0VPR2xpTkxEc0pQeUV2SFhBL2xnZzk3bGU2Ykl5?=
+ =?utf-8?B?azdvOGJTRjFBd0JPbDhzeWZTQjJ0MnFxS3dCMlVjRWlzOU82eXZQTFlzNnJa?=
+ =?utf-8?B?Q3JXQ24raXNFNkJrR0E3ZmlFdGduSWE3NS9HZmgyQUNjR3NMSzI2NUQyMzVT?=
+ =?utf-8?B?cUthRUoxT29sUENWQUNSek5qWm9uUkZyaWRiQXBtZWp0TnpTNlNVRFpEMmFn?=
+ =?utf-8?B?UFNOaTVkeG9WSnlwSC9tbGtkd2R0NEVDR3BJdXVNTHJFdnRkVjlYMUZxVmtp?=
+ =?utf-8?B?QXdneGZVQUVaQXoweXV6UW5keUFkcmR2d0NkNUhMcWN5N1NLNWRZRE5uV0FE?=
+ =?utf-8?B?dFByVThjOWVkUm5PV244YWFlSFJQeDRrdjVnYUtjamYxTUVxaHlDYTdQM080?=
+ =?utf-8?B?MzJDVFVvdXZraGFtTE42elViTFVUL0JReFFTdFQ1VjJpcUQ4Ri9nWDIyNmJj?=
+ =?utf-8?B?dXJwcUNKbURkN2xrQk5GM21zZGozU2RPNDZuVzA3L0Y2TmpibWR6dFpQdkh1?=
+ =?utf-8?B?bDZldFU1eGNKUWZsOElVT1FrRWxiTXdyeTh4VUxiRjYzZFg1NDQ1MjRHSmhN?=
+ =?utf-8?B?UG9VeW5wTGNwZFlZTDA5cEhDZUpBRkY1TDVKQ2lZVlhXeks3VVZVNmJJYXgy?=
+ =?utf-8?B?ek0yNGVMOWxXaGZzYzJUSmY1cXo3cXZlN0owVzQ2akY3ZTkyenlqL2lhSHY1?=
+ =?utf-8?B?UmJXVVJWSm5CQzNieEcvMEdIYkxXdlJ5VFU4REhSLy9JU1YrbzZlMHlvL1pS?=
+ =?utf-8?B?TTUxQjZhUGQzVkhkTno1ZUtrMlJyMHhUVzAyK1VUNDZkT2d0UGVkNWc5YzZP?=
+ =?utf-8?B?cC82SDhVUDk4Nnk3YkRQUEtDUTlpVzNuNWRDWDVUUlpiMWpRMm5rSmN1bGF3?=
+ =?utf-8?B?cDhKakFoclhSVlNGa2Y2MHVhQjd2MFpZZFdwazVHWHdDUldabWY5WHRaa2xD?=
+ =?utf-8?B?N2wwWXpHZTR0OUNKRCtqeU1ubWJId21NQ2cyMjFHZHZrbUUrN0J2WVc2dDZI?=
+ =?utf-8?B?M0E3T0V3bi9yQXp5aFJPMDJoWGp1ZmwxbEhEeU1uYTVRelpkY25Ub0JHK0Zi?=
+ =?utf-8?B?cnN5Y0pkMnV4ZzljUEhxVVlBMXNkZXEzdzNEdXNjdUpWNzB0bTJjTmZoRk81?=
+ =?utf-8?B?Rzk0bS8xK1dWMjArMnhROXY0cFpmTEJOZ1pwdWkvci9HVitNT1M3ZnpoNitk?=
+ =?utf-8?Q?DSo7H2VkyetDUvJQR9jqSnHCqLjVU9Ws=3D?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MzAzTEo2SWlYOHBMVFJBTkhwUjhVVkZZa0dkSEFOdS9LMkt6M2RPUE5RaVRB?=
+ =?utf-8?B?akhJWDFzOXhIelZXa3h2ZERYMGExRkUrVnF3bzZGc3E3V1lsYk45cUhlblNV?=
+ =?utf-8?B?cE1sekJkN2R1K05PaVlmZU1kL2twYTdUODY0b0JaTGgxU09RdDhsNVFzUll6?=
+ =?utf-8?B?NGJvTUFpcDZzbUlEUE50ZW9VaUpUNTJCcS93UnBuS2hxNHh5cXJtZWNLUzZx?=
+ =?utf-8?B?NjVFU1FFMk1GZEFPdU9yS1pONHlYa1VZVXUvYjNiOHJQTjFuMnZSaVRvSnF0?=
+ =?utf-8?B?L3FTNkJ4ejBvemRJc2psOHJTTTZ3OWlDbWkrc05xZzBHVW9FVy9nbDJRM3V1?=
+ =?utf-8?B?L0R2UVU5UzNRNEhKRnJrTzM3L3EvVWJ6cCsveHBNbjVCZUVOajFpVG8xYWhC?=
+ =?utf-8?B?TVplbHIvMlpCVjdHclVEZEM4OEU2aHprUE5wSGlyV0RyeW80WGFlaTFHWk56?=
+ =?utf-8?B?eGQrNmoyN1BpV0M2a0hMWXNsMDlvQmRHNkErVS83UFEyTllseEtDNDlYRXZl?=
+ =?utf-8?B?WGgyeklKT3VlTE1UUTZqT2J0ZDZwbWdTL2RkT1JTcnBYUlJva3RjTHBMMGtq?=
+ =?utf-8?B?d2JodjhNTU0xZUttdDNhZXBSNXBpQ1g4c0p2dFEvUmZLZFdQYzR5bGRRQkN5?=
+ =?utf-8?B?L1UrRzB6SXZScVBWRVFveTgxeTBacUdaN0Fjd3VNQVRDNW1Pdmh3c3RJb0ho?=
+ =?utf-8?B?NUFEbXhQajhHWTJTZG1US05ocG52VmlhQ1QwdXZEUjFJSmJaZVFXVFZ1cFJ0?=
+ =?utf-8?B?VFhwUUIwalhsREVvZDJsK2VJemxLS1FneDVYeVg0cytsN3hLaTRPYVFCRWNr?=
+ =?utf-8?B?VktxTVZaRTFXcTVGempDc1JEeWM4K1RFSHpvaHhzSC82cEtnaG9rK2cxcWty?=
+ =?utf-8?B?bFhTWDBad3N0Ry9jRXZZN2xyOEw3MjhNUk0rencwWDBUbnFXWGhVTnhDTGtY?=
+ =?utf-8?B?VmlHdmFMN241R1RpTk9lbndkVStwZERvZnBOeGhQUjcrWTNabExqUm43dWxs?=
+ =?utf-8?B?YUxoVWttRVB5MGw3WVN3MSszaVhtWmZ3WGhsYjRlTWNvQmJhSGdqQy9qRWJC?=
+ =?utf-8?B?Q1JHSXliNFZ2VnJPTitBL3liRGlKL1JKLzdlWW0zV3ArL0tzUmYxMFduZlV2?=
+ =?utf-8?B?QTF4NGQ2VGRkZ2plVHhaMHZkZW5GRDlYVUdjMEJxRTRqbzI2Wm9JY01HY1hS?=
+ =?utf-8?B?YmVPaFd6L0JnRkl2ZVA4MTV1Ym15eXA5a3NwazZLdVlSREVLK3FJMVRDUllm?=
+ =?utf-8?B?aUphbW1CSGxiV1dwNU1aQ25HRzF2OGxMdHdMNjBQM002LzhRZHB5TTBXRDJj?=
+ =?utf-8?B?S3Y1ZUlkWFBNTVpockJXNXhrdmtIMnI3bkZoTGpuZWs4U0phdmxmV2UyR2xy?=
+ =?utf-8?B?eXovRzJKWDl0WnY3L0ZVdlkvQ3V4NTdwVXdUa3VLMm1ETDQva0JFaWtUOW16?=
+ =?utf-8?B?Z3FLNWN1YXhEU2l4d0tLYjl1c2ZYL0F3RGo3cDRhbDNSZHpMcGNXY1dTVi9V?=
+ =?utf-8?B?VHFWN1krdFdNNXZ4WVVBY0JCVUE4Y0JGbmgvMTg3dFlyd2w3dU14dnpzRVEy?=
+ =?utf-8?B?RXNGcGFPQUJRbStXVjZ5dFdpMmtrV2lGYmlURW5qT1A1NUYwamlmRVhBTWlT?=
+ =?utf-8?B?dHkwcTdtY3ZtTG5ETnpnMEIzNnFVS0ZRY3Ywd1VLaGRkdTBteStHcmlsSG9o?=
+ =?utf-8?B?KzhINThVenUwUm1ERFp1VzBWNDBZbWFUdHBCTXA1VDROZktlZUFrWUxkM3Rk?=
+ =?utf-8?B?OVlzWkhERFI5TlRYZ3llR0lSZkhVaUdUY3NTZHhWZ1B6WDg0aEM2a05VZC84?=
+ =?utf-8?B?OU1VaWl5NXJRTVFURmFNL0JOVWdxZFRtVXNaVTEzaWpjSTJGOVZrYlg1VjZX?=
+ =?utf-8?Q?PcFpBFxPdtnnp?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27c7a4c2-42d4-43f6-9cdc-08dec7a11906
+X-MS-Exchange-CrossTenant-AuthSource: SE3PR04MB8922.apcprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2026 10:06:26.7679 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR04MB6980
+Received-SPF: pass client-ip=2a01:111:f403:d405::2;
+ envelope-from=nutty.liu@hotmail.com;
+ helo=TYPPR03CU001.outbound.protection.outlook.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -157,90 +158,63 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
+On 6/5/2026 7:06 PM, Qingwei Hu wrote:
+> The emulated APLIC and IMSIC state arrays are only allocated when QEMU
+> handles the interrupt controller state itself. With KVM AIA/APLIC-IMSIC,
+> the interrupt controller state is owned by the KVM in-kernel irqchip, so
+> these emulated state arrays are not allocated.
+>
+> The reset handlers added for APLIC and IMSIC still clear those arrays
+> unconditionally. This makes qemu_system_reset(), which runs during machine
+> creation, dereference NULL pointers with -machine virt,aia=aplic-imsic and
+> KVM.
+>
+> Skip the emulated APLIC and IMSIC reset paths when the interrupt controller
+> is handled by KVM. The emulated paths are unchanged for TCG and for
+> configurations that use QEMU emulation.
+>
+> Fixes: 99bfcd329a ("hw/intc: riscv_aplic: Add reset API to APLIC")
+> Fixes: 766391483b ("hw/intc: riscv_imsic: Add reset API to IMSIC")
+> Signed-off-by: Qingwei Hu <qingwei.hu@bytedance.com>
+It would be better to split it into two fix patches.
+Otherwise,
+Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
 
-On 6/11/2026 4:09 AM, Philippe Mathieu-Daudé wrote:
-> On 10/6/26 22:54, Daniel Henrique Barboza wrote:
->> The debug trigger facility consists of a set of arrays: tdata1-3,
->> cpu_breakpoint, cpu_watchpoint and itrigger_timer.  All of them are
->> static allocated with RV_MAX_TRIGGERS (2).  This means that all RISC-V
->> cpus will have 2 triggers per hart.
->>
->> The RISC-V Server Ref demands at least 11 triggers per hart, and several
->> CPUs in the wild works with 4+ triggers.  We need more flexibility, ergo
->> we need to parametrize the amount of triggers and make it configurable.
->>
->> Before doing that we need to handle a situation faced in a previous
->> attempt [1].  We were unable to set the tdataN array length in
->> vmstate_debug, meaning that we would always migrate RV_MAX_TRIGGERS
->> regardless of the actual amount of triggers in play. To fix that we need
->> to change the tdata arrays from static to dynamic, allowing us to use
->> VMSTATE_VARRAY_UINT32().  This also means that, in contrast with [1], we
->> have the opportunity to turn all trigger arrays into dynamic allocation
->> and reduce the amount of stuff being carried by CPURISCVState, or in
->> other words, we can carry just what we're using instead of a static max
->> value.
->>
->> All the forementioned trigger facility arrays are now dynamic.  They are
->> allocated during realize time in riscv_trigger_realize(), and their size
->> is expressed by env->num_triggers.  All relevant code is changed to use
->> env->num_triggers instead of the RV_MAX_TRIGGERS to loop through each
->> array.
->>
->> This will make it easier for the next patch to parametrize
->> env->num_triggers.
->>
->> [1] https://lore.kernel.org/qemu-devel/94c772b0-5231-40e4-9cab-6ac39b9e4d45@oss.qualcomm.com/
->>
->> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->> ---
->>   target/riscv/cpu.h     | 18 ++++++++++++------
->>   target/riscv/csr.c     |  2 +-
->>   target/riscv/debug.c   | 31 +++++++++++++++++++++++--------
->>   target/riscv/machine.c | 12 +++++++++---
->>   4 files changed, 45 insertions(+), 18 deletions(-)
-> 
-> 
->> @@ -1049,7 +1049,22 @@ void riscv_trigger_realize(CPURISCVState *env)
->>   {
->>       int i;
->> -    for (i = 0; i < RV_MAX_TRIGGERS; i++) {
->> +    /*
->> +     * Alloc env->tdata1/2/3, cpu_breakpoint, cpu_watchpoint and
->> +     * itrigger_timer dynamically.  This is overkill now
->> +     * given that they could be static arrays with RV_MAX_TRIGGERS
->> +     * but we'll parametrize the trigger number later, i.e. the
->> +     * array length won't be static.
->> +     */
->> +    env->num_triggers = RV_MAX_TRIGGERS;
->> +    env->tdata1 = g_new0(uint64_t, env->num_triggers);
->> +    env->tdata2 = g_new0(uint64_t, env->num_triggers);
->> +    env->tdata3 = g_new0(uint64_t, env->num_triggers);
->> +    env->cpu_breakpoint = g_new0(struct CPUBreakpoint *, env->num_triggers);
->> +    env->cpu_watchpoint = g_new0(struct CPUWatchpoint *, env->num_triggers);
->> +    env->itrigger_timer = g_new0(QEMUTimer *, env->num_triggers);
->> +
->> +    for (i = 0; i < env->num_triggers; i++) {
->>           env->itrigger_timer[i] = timer_new_ns(QEMU_CLOCK_VIRTUAL,
->>                                                 riscv_itrigger_timer_cb, env);
->>       }
-> 
-> Ideally we'd implement riscv_cpu_unrealize() first, so
-> in this patch you could fill the riscv_trigger_unrealize()
-> cleaning path. Can be done later, but the sooner the
-> better IMHO.
-
-I guess we can add a riscv_cpu_unrealize() cb in this patch.  If we already have
-existing stuff that would be eligible for that I can add a prep patch for it.
-
-I'll take a look.
-
-> 
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-
-
-Thx!
-
-
-Daniel
-
+Thanks,
+Nutty
+> ---
+>   hw/intc/riscv_aplic.c | 4 ++++
+>   hw/intc/riscv_imsic.c | 4 ++++
+>   2 files changed, 8 insertions(+)
+>
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index c2c67c29e6..84606e9f3d 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -910,6 +910,10 @@ static void riscv_aplic_reset_enter(Object *obj, ResetType type)
+>       RISCVAPLICState *aplic = RISCV_APLIC(obj);
+>       int i;
+>   
+> +    if (!riscv_use_emulated_aplic(aplic->msimode)) {
+> +        return;
+> +    }
+> +
+>       aplic->domaincfg = 0;
+>       memset(aplic->sourcecfg, 0, sizeof(uint32_t) * aplic->num_irqs);
+>       memset(aplic->target, 0, sizeof(uint32_t) * aplic->num_irqs);
+> diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+> index ac59496c22..f1f23c3a3e 100644
+> --- a/hw/intc/riscv_imsic.c
+> +++ b/hw/intc/riscv_imsic.c
+> @@ -347,6 +347,10 @@ static void riscv_imsic_reset_enter(Object *obj, ResetType type)
+>       RISCVIMSICState *imsic = RISCV_IMSIC(obj);
+>       int i;
+>   
+> +    if (kvm_irqchip_in_kernel()) {
+> +        return;
+> +    }
+> +
+>       memset(imsic->eidelivery, 0, sizeof(uint32_t) * imsic->num_pages);
+>       memset(imsic->eithreshold, 0, sizeof(uint32_t) * imsic->num_pages);
+>   
 
