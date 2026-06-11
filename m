@@ -4,139 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 484F9CD98C7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 Jun 2026 21:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE47FCD8C9D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 11 Jun 2026 04:05:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXQhY-0007cy-H2; Wed, 10 Jun 2026 17:43:08 -0400
+	id 1wXWfZ-0008Jj-7V; Thu, 11 Jun 2026 00:05:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wXQgu-00075T-Dt
- for qemu-riscv@nongnu.org; Wed, 10 Jun 2026 17:42:29 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wXQgi-0003An-9W
- for qemu-riscv@nongnu.org; Wed, 10 Jun 2026 17:42:23 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65AJYPP82545671
- for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 21:42:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=udmSzSUa6z+
- gUWugoUUUxrU6odPhMe9N3fOewRK4CqU=; b=gsa9NmBFgCeC1nvxbbrDmAeWhCx
- L5JJjHl60Fhig/bTFGVLaRzt197h9Vy8J5O2eV7s80wj9D5pjXDOxhDyJ4+dHtk0
- eH/IIx4OV0Scv4HA0PWX+LuHTAAneB8xgzDMIKN2fD5VsSl+jXhmiqrgQlE0AoOt
- JzbN9cFUmDHh0ZyT2bVV/5Xih9y5u6JUW8zpWmxzqZ3mD3RcIlN/1bU89OeV/k5f
- 9Gt82YvYnKz0kQrCcLPkvYpjKX3ZTc9bjjYM6sxPoNLDKTX5DUuuTrpmERxDCJkE
- brixj5E75FhtWGu0TagNFMgjRlYUXXor213YpCNWTlPelIBrEop99azVNvw==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eqe700f45-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 21:42:09 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-517e0cdf99fso28642401cf.2
- for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 14:42:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wXWfX-0008I7-AT
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 00:05:27 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wXWfT-00086i-Lt
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 00:05:27 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6913fb25322so6987171a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 10 Jun 2026 21:05:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781150721; cv=none;
+ d=google.com; s=arc-20240605;
+ b=a4os8x7KIzV+8lu32q68PWhTI5hXnQUBq7SWmluanHEA1DUxa+Qhyal3G3px4l+HtI
+ PU3KH7aLbmV29ZMcdQcnVVt/FLndJHn+OLMxJjshnwF4n+WsxVMt+58B2LF8fFQUZeFV
+ QBf24hygqjYlxmXITnAfRbvnFZqxPHbYVR9WG6suLXEYSWfpMLwozk1edikgBd975BKA
+ oQTVTLUbmQ08OYgFJTGFqRVgCb9sk/lhD4Tye4i3d8eEprbenJLPX7WVJqv0SjzjFUAY
+ xWvqDMmBsz8F+hMWc8J0u8ODeRpQ03kdbGMR9JM/fxbBhEeLgiZZeBIcpZ8WeA4+kg9Q
+ 7qlQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=MhToRyknw6SQchBFrsL1CWFK3gLmfxx578ordKdWUd8=;
+ fh=jrCG2kIS1wFq5Kxj4JIhw0/knOhik7GaBZAqa3TcJ+s=;
+ b=Xu+D0zgB/7q92vXwGlVuZUUr8CxgJf7OmO+ZEBdysmyUhoMKyspHnqgWa4nJTAYzQb
+ XKD5FjgdOCL9x9rIvEssJhCBC3pCJ98ZaqbfezKgihtNrgOhEFZuau+1HFOcuFvVFUAk
+ 8OCacGNziKVQC3cziICZdQINWZyjlawIHezrnASzAoiaR5ox1uCEajF6ZiJWTi/TgQI8
+ q6O2HqEUi/FZQ6tWfmBcXqt5yiyBEuc5kkRsvePoySB1mQRsARbTsu3dDMSOj4kaV1L1
+ W9B99/nCOXS1VZIZIBR+YvI7cImK0HLA7e3K3BBHQC/w9OqvTu9s0yfO+sSrf4X+WMiK
+ Q0xQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781127729; x=1781732529; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1781150721; x=1781755521; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=udmSzSUa6z+gUWugoUUUxrU6odPhMe9N3fOewRK4CqU=;
- b=UgyaMsydOiefP8peClAjEx8mFX9FJ2q6CVV/0PsEoWbWRI8d3enx+SwIhi4imTraOo
- eoBLPPJJ/lscZFP3PfpwoWCIDZY+83lXMRmv7VCfKl+P3WcIeDP8Y5/aWJT4yxj68K12
- F0h3hrnxvghlJK/w4v09U2S/gaJEPINmgWtMsvKLantPHtIjWufOE2/sdvZ7p77LYXff
- UM1hmDtaIapMKrtTqO4rGGXjXLcMj1pwfUuDc1/S99wG62j4C0o74bBM9O4jeSgYrF9y
- VupVOYomeYlmqSTYD/yMjE50oR5qOwuLeoV1Fi19jam/RWgeBBB4gG9XkmzTvCEGWha7
- DjyA==
+ bh=MhToRyknw6SQchBFrsL1CWFK3gLmfxx578ordKdWUd8=;
+ b=cbyhfKkxWlWE3dlfZ6oTGRXNQ0jucMXx/gPB9ipp+OoNyettjmwkCaBTQr4V4RaFhc
+ U4oy1hw4UKesiShVuHxYimQXtOFQEfI0vxfLOCuh0SF/iPpRjMzaql0g4dyI86QzsVgZ
+ b2dAiWamMKNNMWpjYJ8FMAhgc4Hiv/1pv/8fwqUFMzGXimtIiIXeb/KHYzIpxBsWCsF+
+ lAhxE0llRMkkD26cDgBo32QuezoTbU/yVKwcHA0GzNG8sNvJuBKSXJj63uH2MyW6n+vg
+ tCpCGX7U1+1ZP/3tpdodIXf/6ohb82J/iE/3MDAxAzV/+WhWMIVRSsvrk3WvAyCCaxXJ
+ IGtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781127729; x=1781732529;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1781150721; x=1781755521;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=udmSzSUa6z+gUWugoUUUxrU6odPhMe9N3fOewRK4CqU=;
- b=lbMbnps1PMTXP05ktS1osYBSpbvgEfVYu2Y8JtXA9OQWa2ai1HmVgc632Y3ylJc1Li
- 5BDi/Wnab7Ip23+zMhG6n1h9ojIikHigDeE+H2sOUX+aUQSsKM/+WGWiBWF+F17L0gRw
- u49bfxeI3ncItQFcXRMt8MdsaqOFfcaCn+VepaRSKx+1lYhlf612mxS9NdLYorqIvKJf
- jxKNrut+S6NfREEJZNux3qiji8a+lDlN38lySSXdNv9Ugpj/9OhR4joNMGtUxa6TAEzK
- 4OFKI6XtrcWIZ6fkVlyGaNiJjX+mL8niy+4ZRLopvjmi36VstyIJCGgCj5naKOL//PZx
- iSfA==
-X-Gm-Message-State: AOJu0YycXEFxVQkoSaWpdFVyC58/pvtqlzEVnsMncE+UDuA8bCBMD2SE
- DMNndmOcW1C0UeneOIH/+fV4vKG2hxnuULqv6fIJ75pXsf7tA6hzRuXXwEgl+4d1LRsZLmU8Yzm
- o3Tv1+5P1gmWw+cDZyM1JB1xtvgWHEWwb/KCJ8kUfUAHRaxLfpm10hzU13CvIs5wg5Q==
-X-Gm-Gg: Acq92OFV6WD0W1FZtIc65oV9DKXHpknbOkXX28tkz77UO/J/FaBm3PXNlJMqbn/j+Zu
- /l/zpD2uLoQTau/Lg63oTBU+fhWlQnnUgCdt9qbIkevrvvTnq2aQVrRC8HS3h3+KKWUh7Nq6f+5
- /m/QVXgQ+gwOP0RB51eZgwXvEj5TP44ootFmgMTNnzrLmJy2kSOrCZjG8WLACLNEXN0y0sUFDDd
- VdyKKt0EaMf6U+pedjIx4mO1ba9ed7pFWQ+taL6HMXEOXez7Cw3rwo7XPiQ3Q3O6vM4ZwipADw3
- FoB6FGq+kfdmcnYp+cdJ5xesP56Ra78c/iITA/lS7zLswHe0hhXfAOcyVvhUVQVvcj5LHkP+Kge
- aXGZkCEbGJ9xMnUiQeXXoKXZ8qi8RHR0N3ZPHoDcNz8hrTTnH7X+AuJlBMMk/mjKxb2grvw==
-X-Received: by 2002:a05:622a:493:b0:517:9f43:4732 with SMTP id
- d75a77b69052e-517edd32107mr1276371cf.11.1781127728703; 
- Wed, 10 Jun 2026 14:42:08 -0700 (PDT)
-X-Received: by 2002:a05:622a:493:b0:517:9f43:4732 with SMTP id
- d75a77b69052e-517edd32107mr1275761cf.11.1781127728273; 
- Wed, 10 Jun 2026 14:42:08 -0700 (PDT)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.170.117.62])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-5a6d777996csm20766280e0c.7.2026.06.10.14.42.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 14:42:07 -0700 (PDT)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- andrew.jones@oss.qualcomm.com, leif.lindholm@oss.qualcomm.com,
- uwu@icenowy.me, Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v8 5/7] hw/riscv/server_platform_ref.c: add platform bus and
- TPM support
-Date: Wed, 10 Jun 2026 18:41:31 -0300
-Message-ID: <20260610214133.1882563-6-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
-References: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
+ bh=MhToRyknw6SQchBFrsL1CWFK3gLmfxx578ordKdWUd8=;
+ b=fa062t2LyEUfBrZgelBKVo+/HUGsCvy775VkHYEjgpMxtazFstS8Q+BNFkLFT/Y1xk
+ Mk1g2FM1tLiPqfpQ4u2DobKU7RElgzJ/zoccEavF1CCInAzppzTrnLf4/N6OAKMbmsPQ
+ QiyF+9cVvL4hQSvQU03VBbAAJhpuv0Dm/HCNJOMLmFkgj3daFi9Zj3/6qjAeWEI1nFBK
+ I84HEzvJ9kejXS1BXEhuv1mVusxV7qViQ82fwxRW/BxrAD9BahPCGT248Ec/Uu2YPtT1
+ D8IMtT19QdnsY7Jc4LAGKb7ERr4y44MoS5RVzxJh6Qq45KpTWK7YoYLkN2e+9zgqdvlQ
+ aPtA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9PVDilZpwxl/buFjkKQjWMyzsBmGnyXgwtXNTASKJlsQZLfKGRR2ohP5zIKuU8rl9XBJMT4ktkbmWM@nongnu.org
+X-Gm-Message-State: AOJu0YzTFZaKqPV8UlyWOFi2nSWm0DVFZGAOPWfHxAFU+8qUpBENBOgW
+ t6xeLOf0ycRCBvIe2mTQ6wo7Cdq1srkbXLevalx5Sko1RdVacKLDkTRd4VH+GiHglVJpeX+LZI4
+ iGzf2Z77t6hFHY3PuIZq6cFsM5H2eiBs=
+X-Gm-Gg: Acq92OHelDtcK3LKV9VtE5pVdeWMqMWB+gtKmfUfUdljBUA9QLw9Ahl9bJgxobaT/Mv
+ 7yx/gO7CGTFS/fw0oaCFwV2xN2THe5fLOdgclQ3+2BsBhNDatFzmrs+Wq6I1oDZF/71DDNM1Pa+
+ A6QIn18qWfg/AfA4saFLGHbJG38KLhGnlRmI36sKhaPb7SI+tlDl5jKu/+d04fPX9ep5aY8Mkht
+ VnIidzD6vO5HosVwrYFe7Az9rn0wWi06j6S8Bf1tEzHbJ3dzBM3vVTE8rbUBM1Nncs42oqkX6EP
+ mbgYQoyN8FJhDIFJP+AiedTI9zmxyJrSH6e6X72nOSc1wtDX
+X-Received: by 2002:a05:6402:2b93:b0:68d:296d:9a34 with SMTP id
+ 4fb4d7f45d1cf-6930e2b6ebdmr360508a12.18.1781150721124; Wed, 10 Jun 2026
+ 21:05:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjEwMDIwNyBTYWx0ZWRfX+hfyuyOgMKt3
- 5PjIUvvfbM6qriG7kcYqQqsrsXaNhzECwRAL6+I4KlBoB0H8tyZsXVKH98bFr6W2ThFeRX/9XGa
- vKnOJur6YOPdRTRGoAiQibNnsA/e+h5hnZtBU6l+fkQODbLcBPSzet32hNXhKWepPXllIJF7c63
- 4C/hI2XKWJ2qBpEHBDmNiXe7wU1FL8kGv2vF6BbuO0Nk67VqkwFgleXdUL98I28eqIETErOISNj
- djWnP2OP46z2tBF04Za3LEBebTty3yheaz58O4crXFKjTsJ+ZAAkHpNxCnq4Irm3pNtVmYZfMeb
- 0m/zaKn8PanVKAdpAorTVKfghHW06vyjrox/DJBF+jAWjYgm1yy3XSqwz/l4GERBFEzVKLmYjzX
- V85GIlFHp0cA2r702gx5fr4nI6kxeU4mcfB8bbzB9098LuSNZEDXFajTxjXfSIErLli/Rz2qMkp
- RxbLIRAygiLYr5kPgIw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjEwMDIwNyBTYWx0ZWRfX7jLbkAB7mIT+
- jjN+ak1Tj+q2b1SSEtg7n9B9vQpEjP4/zOO7qTN3JY/YPDxEX0QEI0NMFcN7Os3lkCy5SMBBSJx
- +s+cRNpMgaTUnIxTJN5jPze8NnoGEFg=
-X-Proofpoint-GUID: kcaXuRHoebAVItPOK_B77eQR1fFn2P0a
-X-Proofpoint-ORIG-GUID: kcaXuRHoebAVItPOK_B77eQR1fFn2P0a
-X-Authority-Analysis: v=2.4 cv=Z5Tc2nRA c=1 sm=1 tr=0 ts=6a29da31 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
- a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=NLiCwHATAAAA:8
- a=EUspDBNiAAAA:8 a=HCLQLsBmYQwgZ2F9z0YA:9 a=kacYvNCVWA4VmyqE58fU:22
- a=F9tHCgz3TLBaZgltkx5D:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-10_04,2026-06-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 adultscore=0 impostorscore=0 malwarescore=0
- spamscore=0 lowpriorityscore=0 phishscore=0 priorityscore=1501 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606100207
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <cover.1778516731.git.chao.liu.zevorn@gmail.com>
+ <98d3e3f8d931712fd9148411595608b9bba81053.1778516731.git.chao.liu.zevorn@gmail.com>
+In-Reply-To: <98d3e3f8d931712fd9148411595608b9bba81053.1778516731.git.chao.liu.zevorn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 11 Jun 2026 14:04:54 +1000
+X-Gm-Features: AVVi8Ce24oCueNNrXY_PM_tHs_GPjRKGe4nBIFfaeDr2_9jHLbkF1i_txGFMoek
+Message-ID: <CAKmqyKMSzQ9QF79m5sy6cNeLnaYuR4jhk9mn=7dF=emN63pr=g@mail.gmail.com>
+Subject: Re: [PATCH v7 2/5] hw/riscv: add k230 board initial support
+To: Chao Liu <chao.liu.zevorn@gmail.com>
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Christoph Muellner <christoph.muellner@vrull.eu>, 
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
+ qemu-devel@nongnu.org, 
+ qemu-riscv@nongnu.org, Peng Jiang <3160104094@zju.edu.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -152,253 +128,775 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The RISC-V Server Platform spec requires a TPM device.  TPM devices in
-QEMU comes usually in two flavors: emulated or passthrough.  A
-passthrough device requires a host TPM device that the QEMU process can
-borrow and it's usually coupled with KVM acceleration.
+On Tue, May 12, 2026 at 2:32=E2=80=AFAM Chao Liu <chao.liu.zevorn@gmail.com=
+> wrote:
+>
+> K230 Board compatible with Kendryte K230 SDK.
+>
+> Preliminarily supports the C908 small core, which can run U-Boot and
+> Linux kernels compiled by the K230 SDK.
+>
+> The K230 boot flow provides its device tree from firmware or software.
+> QEMU does not generate a K230 DTB; users can pass one with -dtb for
+> direct Linux boot, or rely on firmware/kernel built-in DTB for other
+> payloads.
+>
+> Signed-off-by: Chao Liu <chao.liu.zevorn@gmail.com>
+> Tested-by: Peng Jiang <3160104094@zju.edu.cn>
 
-To use the TPM emulator we'll need help from an external TPM emulator
-called swtpm.  More info can be found in [1].  For our purposes this is
-a process that, if running Ubuntu, can be installed via 'swtpm' package.
-We'll go back to it shortly.
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-For now, adding support for the emulated TPM device 'tpm-tis' (other TPM
-flavors might work as well, 'tpm-tis' is the one tested with this work)
-requires a platform bus.  Adding a platform bus will open the door for
-more devices to be added in the board.  This is ok - a reference board
-isn't a restricted board and users are free to add devices at their
-leisure.
+Alistair
 
-Here's how to use tpm-tis with the riscv-server-ref board after applying
-this patch:
-
-- in a separated shell/term run 'swtpm' (--log is optional):
-
-$ mkdir /tmp/mytpm1
-$ swtpm socket --tpmstate dir=/tmp/mytpm1 \
-	--ctrl type=unixio,path=/tmp/mytpm1/swtpm-sock \
-	--tpm2 \
-	--log level=20
-
-Then start QEMU with:
-
-$ qemu-system-riscv64 -M riscv-server-ref (...) \
-	-chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \
-	-tpmdev emulator,id=tpm0,chardev=chrtpm\
-	-device tpm-tis-device,tpmdev=tpm0
-
-[1] https://qemu-project.gitlab.io/qemu/specs/tpm.html
-
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- hw/riscv/Kconfig               |  1 +
- hw/riscv/server_platform_ref.c | 92 +++++++++++++++++++++++++++++++++-
- 2 files changed, 91 insertions(+), 2 deletions(-)
-
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 1807c423ff..d3912cbb1e 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -73,6 +73,7 @@ config RISCV_SERVER_PLATFORM_REF
-     bool
-     default y
-     depends on RISCV64
-+    imply TPM_TIS_SYSBUS
-     select RISCV_NUMA
-     select GOLDFISH_RTC
-     select PCI
-diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
-index 7e626c6eb7..790d9861f3 100644
---- a/hw/riscv/server_platform_ref.c
-+++ b/hw/riscv/server_platform_ref.c
-@@ -14,6 +14,7 @@
- #include "qapi/error.h"
- #include "qapi/qapi-visit-common.h"
- #include "hw/core/boards.h"
-+#include "hw/core/platform-bus.h"
- #include "hw/core/loader.h"
- #include "hw/core/sysbus.h"
- #include "hw/core/qdev-properties.h"
-@@ -39,6 +40,7 @@
- #include "system/runstate.h"
- #include "system/system.h"
- #include "system/tcg.h"
-+#include "system/tpm.h"
- #include "system/qtest.h"
- #include "target/riscv/cpu.h"
- #include "target/riscv/pmu.h"
-@@ -72,6 +74,8 @@
- #define SYSCON_RESET     0x1
- #define SYSCON_POWEROFF  0x2
- 
-+#define RVSERVER_PLATFORM_BUS_NUM_IRQS 8
-+
- #define TYPE_RISCV_SERVER_REF_MACHINE MACHINE_TYPE_NAME("riscv-server-ref")
- OBJECT_DECLARE_SIMPLE_TYPE(RISCVServerRefMachineState, RISCV_SERVER_REF_MACHINE)
- 
-@@ -88,6 +92,8 @@ struct RISCVServerRefMachineState {
-     int fdt_size;
-     int aia_guests;
-     const MemMapEntry *memmap;
-+
-+    DeviceState *platform_bus_dev;
- };
- 
- enum {
-@@ -106,6 +112,7 @@ enum {
-     RVSERVER_DRAM,
-     RVSERVER_PCIE_MMIO,
-     RVSERVER_PCIE_PIO,
-+    RVSERVER_PLATFORM_BUS,
-     RVSERVER_PCIE_ECAM,
-     RVSERVER_PCIE_MMIO_HIGH
- };
-@@ -114,7 +121,8 @@ enum {
-     RVSERVER_UART0_IRQ = 10,
-     RVSERVER_RTC_IRQ = 11,
-     RVSERVER_PCIE_IRQ = 0x20, /* 32 to 35 */
--    IOMMU_SYS_IRQ = 0x24 /* 36 to 39 */
-+    IOMMU_SYS_IRQ = 0x24, /* 36 to 39 */
-+    RVSERVER_PLATFORM_BUS_IRQ = 40, /* 40 to 48 */
- };
- 
- /*
-@@ -147,6 +155,7 @@ static const MemMapEntry rvserver_ref_memmap[] = {
-     [RVSERVER_IOMMU_SYS] =      {   0x102000,        0x1000 },
-     [RVSERVER_ACLINT] =         {  0x2000000,       0x10000 },
-     [RVSERVER_PCIE_PIO] =       {  0x3000000,       0x10000 },
-+    [RVSERVER_PLATFORM_BUS] =   {  0x4000000,     0x2000000 },
-     [RVSERVER_APLIC_M] =        {  0xc000000, APLIC_SIZE(RVSERVER_CPUS_MAX) },
-     [RVSERVER_APLIC_S] =        {  0xd000000, APLIC_SIZE(RVSERVER_CPUS_MAX) },
-     [RVSERVER_UART0] =          { 0x10000000,         0x100 },
-@@ -214,6 +223,34 @@ static void rvserver_flash_maps(RISCVServerRefMachineState *s,
-     rvserver_flash_map(s->flash[1], flashbase + flashsize, flashsize, sysmem);
- }
- 
-+static void create_platform_bus(RISCVServerRefMachineState *s,
-+                                DeviceState *irqchip)
-+{
-+    DeviceState *dev;
-+    SysBusDevice *sysbus;
-+    int i;
-+    MemoryRegion *sysmem = get_system_memory();
-+
-+    dev = qdev_new(TYPE_PLATFORM_BUS_DEVICE);
-+    dev->id = g_strdup(TYPE_PLATFORM_BUS_DEVICE);
-+    qdev_prop_set_uint32(dev, "num_irqs", RVSERVER_PLATFORM_BUS_NUM_IRQS);
-+    qdev_prop_set_uint32(dev, "mmio_size",
-+                         s->memmap[RVSERVER_PLATFORM_BUS].size);
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+
-+    s->platform_bus_dev = dev;
-+
-+    sysbus = SYS_BUS_DEVICE(dev);
-+    for (i = 0; i < RVSERVER_PLATFORM_BUS_NUM_IRQS; i++) {
-+        int irq = RVSERVER_PLATFORM_BUS_IRQ + i;
-+        sysbus_connect_irq(sysbus, i, qdev_get_gpio_in(irqchip, irq));
-+    }
-+
-+    memory_region_add_subregion(sysmem,
-+                                s->memmap[RVSERVER_PLATFORM_BUS].base,
-+                                sysbus_mmio_get_region(sysbus, 0));
-+}
-+
- static void create_pcie_irq_map(RISCVServerRefMachineState *s,
-                                 void *fdt, char *nodename,
-                                 uint32_t irqchip_phandle)
-@@ -585,6 +622,16 @@ static void create_fdt_socket_aplic(RISCVServerRefMachineState *s,
-                          aplic_s_phandle, 0,
-                          false, num_harts);
- 
-+    if (socket == 0) {
-+        g_autofree char *aplic_name = fdt_get_aplic_nodename(aplic_addr);
-+        MachineState *ms = MACHINE(s);
-+
-+        platform_bus_add_all_fdt_nodes(ms->fdt, aplic_name,
-+                                       s->memmap[RVSERVER_PLATFORM_BUS].base,
-+                                       s->memmap[RVSERVER_PLATFORM_BUS].size,
-+                                       RVSERVER_PLATFORM_BUS_IRQ);
-+    }
-+
-     aplic_phandles[socket] = aplic_s_phandle;
- }
- 
-@@ -1265,6 +1312,8 @@ static void rvserver_ref_machine_init(MachineState *machine)
- 
-     gpex_pcie_init(system_memory, pcie_irqchip, s);
- 
-+    create_platform_bus(s, mmio_irqchip);
-+
-     serial_mm_init(system_memory, memmap[RVSERVER_UART0].base,
-         0, qdev_get_gpio_in(mmio_irqchip, RVSERVER_UART0_IRQ), 399193,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
-@@ -1341,10 +1390,38 @@ static void rvserver_ref_set_aia_guests(Object *obj, const char *val,
-     }
- }
- 
-+static HotplugHandler *rvserver_machine_get_hotplug_handler(MachineState *ms,
-+                                                            DeviceState *dev)
-+{
-+    MachineClass *mc = MACHINE_GET_CLASS(ms);
-+
-+    if (device_is_dynamic_sysbus(mc, dev)) {
-+        return HOTPLUG_HANDLER(ms);
-+    }
-+
-+    return NULL;
-+}
-+
-+static void rvserver_machine_device_plug_cb(HotplugHandler *hotplug_dev,
-+                                            DeviceState *dev, Error **errp)
-+{
-+    RISCVServerRefMachineState *s = RISCV_SERVER_REF_MACHINE(hotplug_dev);
-+
-+    if (s->platform_bus_dev) {
-+        MachineClass *mc = MACHINE_GET_CLASS(s);
-+
-+        if (device_is_dynamic_sysbus(mc, dev)) {
-+            platform_bus_link_device(PLATFORM_BUS_DEVICE(s->platform_bus_dev),
-+                                     SYS_BUS_DEVICE(dev));
-+        }
-+    }
-+}
-+
- static void rvserver_ref_machine_class_init(ObjectClass *oc, const void *data)
- {
-     char str[128];
-     MachineClass *mc = MACHINE_CLASS(oc);
-+    HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
-     static const char * const valid_cpu_types[] = {
-         TYPE_RISCV_CPU_RVSERVER_REF,
-     };
-@@ -1370,6 +1447,13 @@ static void rvserver_ref_machine_class_init(ObjectClass *oc, const void *data)
-     sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid value "
-                  "should be between 0 and %d.", RVSERVER_IRQCHIP_MAX_GUESTS);
-     object_class_property_set_description(oc, "aia-guests", str);
-+
-+    assert(!mc->get_hotplug_handler);
-+    mc->get_hotplug_handler = rvserver_machine_get_hotplug_handler;
-+    hc->plug = rvserver_machine_device_plug_cb;
-+#ifdef CONFIG_TPM
-+    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
-+#endif
- }
- 
- static const TypeInfo rvserver_ref_typeinfo = {
-@@ -1378,7 +1462,11 @@ static const TypeInfo rvserver_ref_typeinfo = {
-     .class_init = rvserver_ref_machine_class_init,
-     .instance_init = rvserver_ref_machine_instance_init,
-     .instance_size = sizeof(RISCVServerRefMachineState),
--    .interfaces = riscv64_machine_interfaces,
-+    .interfaces = (const InterfaceInfo[]) {
-+         { TYPE_HOTPLUG_HANDLER },
-+         { TYPE_TARGET_RISCV64_MACHINE },
-+         { }
-+    },
- };
- 
- static void rvserver_ref_init_register_types(void)
--- 
-2.43.0
-
+> ---
+>  MAINTAINERS             |   7 +
+>  hw/riscv/Kconfig        |  10 +
+>  hw/riscv/k230.c         | 506 ++++++++++++++++++++++++++++++++++++++++
+>  hw/riscv/meson.build    |   2 +-
+>  include/hw/riscv/k230.h | 145 ++++++++++++
+>  5 files changed, 669 insertions(+), 1 deletion(-)
+>  create mode 100644 hw/riscv/k230.c
+>  create mode 100644 include/hw/riscv/k230.h
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index f109e46172..196b476abe 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1780,6 +1780,13 @@ F: docs/system/riscv/xiangshan-kunminghu.rst
+>  F: hw/riscv/xiangshan_kmh.c
+>  F: include/hw/riscv/xiangshan_kmh.h
+>
+> +K230 Machines
+> +M: Chao Liu <chao.liu.zevorn@gmail.com>
+> +L: qemu-riscv@nongnu.org
+> +S: Maintained
+> +F: hw/riscv/k230.c
+> +F: include/hw/riscv/k230.h
+> +
+>  RX Machines
+>  -----------
+>  rx-gdbsim
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index 0222c93f87..b1a7357866 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -134,3 +134,13 @@ config MIPS_BOSTON_AIA
+>      default y
+>      select PCI_EXPRESS
+>      select PCI_EXPRESS_XILINX
+> +
+> +config K230
+> +    bool
+> +    default y
+> +    depends on RISCV64
+> +    select RISCV_ACLINT
+> +    select RISCV_APLIC
+> +    select RISCV_IMSIC
+> +    select SERIAL_MM
+> +    select UNIMP
+> diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+> new file mode 100644
+> index 0000000000..327355b565
+> --- /dev/null
+> +++ b/hw/riscv/k230.c
+> @@ -0,0 +1,506 @@
+> +/*
+> + * QEMU RISC-V Virt Board Compatible with Kendryte K230 SDK
+> + *
+> + * Copyright (c) 2025 Chao Liu <chao.liu.zevorn@gmail.com>
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * Provides a board compatible with the Kendryte K230 SDK
+> + *
+> + * K230 Technical Reference Manual V0.3.1 (2024-11-18):
+> + * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_T=
+echnical_Reference_Manual_V0.3.1_20241118.pdf
+> + *
+> + * For more information, see <https://www.kendryte.com/en/proDetail/230>
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "cpu-qom.h"
+> +#include "qemu/cutils.h"
+> +#include "qemu/error-report.h"
+> +#include "qapi/error.h"
+> +#include "system/device_tree.h"
+> +#include "system/system.h"
+> +#include "system/memory.h"
+> +#include "target/riscv/cpu.h"
+> +#include "hw/core/loader.h"
+> +#include "hw/core/sysbus.h"
+> +#include "hw/riscv/k230.h"
+> +#include "hw/riscv/boot.h"
+> +#include "hw/intc/riscv_aclint.h"
+> +#include "hw/intc/sifive_plic.h"
+> +#include "hw/char/serial-mm.h"
+> +#include "hw/misc/unimp.h"
+> +
+> +/* Align K230_SDK k230_canmv_defconfig */
+> +#define K230_DIRECT_OPENSBI_ADDR 0x8000000
+> +#define K230_DIRECT_KERNEL_ADDR  0x8200000
+> +#define K230_DIRECT_DTB_ADDR     0xa000000
+> +
+> +static const MemMapEntry memmap[] =3D {
+> +    [K230_DEV_DDRC] =3D         { 0x00000000,  0x80000000 },
+> +    [K230_DEV_KPU_L2_CACHE] =3D { 0x80000000,  0x00200000 },
+> +    [K230_DEV_SRAM] =3D         { 0x80200000,  0x00200000 },
+> +    [K230_DEV_KPU_CFG] =3D      { 0x80400000,  0x00000800 },
+> +    [K230_DEV_FFT] =3D          { 0x80400800,  0x00000400 },
+> +    [K230_DEV_AI_2D_ENGINE] =3D { 0x80400C00,  0x00000800 },
+> +    [K230_DEV_GSDMA] =3D        { 0x80800000,  0x00004000 },
+> +    [K230_DEV_DMA] =3D          { 0x80804000,  0x00004000 },
+> +    [K230_DEV_DECOMP_GZIP] =3D  { 0x80808000,  0x00004000 },
+> +    [K230_DEV_NON_AI_2D] =3D    { 0x8080C000,  0x00004000 },
+> +    [K230_DEV_ISP] =3D          { 0x90000000,  0x00008000 },
+> +    [K230_DEV_DEWARP] =3D       { 0x90008000,  0x00001000 },
+> +    [K230_DEV_RX_CSI] =3D       { 0x90009000,  0x00002000 },
+> +    [K230_DEV_H264] =3D         { 0x90400000,  0x00010000 },
+> +    [K230_DEV_2P5D] =3D         { 0x90800000,  0x00040000 },
+> +    [K230_DEV_VO] =3D           { 0x90840000,  0x00010000 },
+> +    [K230_DEV_VO_CFG] =3D       { 0x90850000,  0x00001000 },
+> +    [K230_DEV_3D_ENGINE] =3D    { 0x90A00000,  0x00000800 },
+> +    [K230_DEV_PMU] =3D          { 0x91000000,  0x00000C00 },
+> +    [K230_DEV_RTC] =3D          { 0x91000C00,  0x00000400 },
+> +    [K230_DEV_CMU] =3D          { 0x91100000,  0x00001000 },
+> +    [K230_DEV_RMU] =3D          { 0x91101000,  0x00001000 },
+> +    [K230_DEV_BOOT] =3D         { 0x91102000,  0x00001000 },
+> +    [K230_DEV_PWR] =3D          { 0x91103000,  0x00001000 },
+> +    [K230_DEV_MAILBOX] =3D      { 0x91104000,  0x00001000 },
+> +    [K230_DEV_IOMUX] =3D        { 0x91105000,  0x00000800 },
+> +    [K230_DEV_TIMER] =3D        { 0x91105800,  0x00000800 },
+> +    [K230_DEV_WDT0] =3D         { 0x91106000,  0x00000800 },
+> +    [K230_DEV_WDT1] =3D         { 0x91106800,  0x00000800 },
+> +    [K230_DEV_TS] =3D           { 0x91107000,  0x00000800 },
+> +    [K230_DEV_HDI] =3D          { 0x91107800,  0x00000800 },
+> +    [K230_DEV_STC] =3D          { 0x91108000,  0x00000800 },
+> +    [K230_DEV_BOOTROM] =3D      { 0x91200000,  0x00010000 },
+> +    [K230_DEV_SECURITY] =3D     { 0x91210000,  0x00008000 },
+> +    [K230_DEV_UART0] =3D        { 0x91400000,  0x00001000 },
+> +    [K230_DEV_UART1] =3D        { 0x91401000,  0x00001000 },
+> +    [K230_DEV_UART2] =3D        { 0x91402000,  0x00001000 },
+> +    [K230_DEV_UART3] =3D        { 0x91403000,  0x00001000 },
+> +    [K230_DEV_UART4] =3D        { 0x91404000,  0x00001000 },
+> +    [K230_DEV_I2C0] =3D         { 0x91405000,  0x00001000 },
+> +    [K230_DEV_I2C1] =3D         { 0x91406000,  0x00001000 },
+> +    [K230_DEV_I2C2] =3D         { 0x91407000,  0x00001000 },
+> +    [K230_DEV_I2C3] =3D         { 0x91408000,  0x00001000 },
+> +    [K230_DEV_I2C4] =3D         { 0x91409000,  0x00001000 },
+> +    [K230_DEV_PWM] =3D          { 0x9140A000,  0x00001000 },
+> +    [K230_DEV_GPIO0] =3D        { 0x9140B000,  0x00001000 },
+> +    [K230_DEV_GPIO1] =3D        { 0x9140C000,  0x00001000 },
+> +    [K230_DEV_ADC] =3D          { 0x9140D000,  0x00001000 },
+> +    [K230_DEV_CODEC] =3D        { 0x9140E000,  0x00001000 },
+> +    [K230_DEV_I2S] =3D          { 0x9140F000,  0x00001000 },
+> +    [K230_DEV_USB0] =3D         { 0x91500000,  0x00010000 },
+> +    [K230_DEV_USB1] =3D         { 0x91540000,  0x00010000 },
+> +    [K230_DEV_SD0] =3D          { 0x91580000,  0x00001000 },
+> +    [K230_DEV_SD1] =3D          { 0x91581000,  0x00001000 },
+> +    [K230_DEV_QSPI0] =3D        { 0x91582000,  0x00001000 },
+> +    [K230_DEV_QSPI1] =3D        { 0x91583000,  0x00001000 },
+> +    [K230_DEV_SPI] =3D          { 0x91584000,  0x00001000 },
+> +    [K230_DEV_HI_SYS_CFG] =3D   { 0x91585000,  0x00000400 },
+> +    [K230_DEV_DDRC_CFG] =3D     { 0x98000000,  0x02000000 },
+> +    [K230_DEV_FLASH] =3D        { 0xC0000000,  0x08000000 },
+> +    [K230_DEV_PLIC] =3D         { 0xF00000000, 0x00400000 },
+> +    [K230_DEV_CLINT] =3D        { 0xF04000000, 0x00400000 },
+> +};
+> +
+> +static void k230_soc_init(Object *obj)
+> +{
+> +    K230SoCState *s =3D RISCV_K230_SOC(obj);
+> +    RISCVHartArrayState *cpu0 =3D &s->c908_cpu;
+> +
+> +    object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY=
+);
+> +    qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+> +    qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_=
+C908);
+> +    qdev_prop_set_uint64(DEVICE(cpu0), "resetvec",
+> +                         memmap[K230_DEV_BOOTROM].base);
+> +}
+> +
+> +static DeviceState *k230_create_plic(int base_hartid, int hartid_count)
+> +{
+> +    g_autofree char *plic_hart_config =3D NULL;
+> +
+> +    /* Per-socket PLIC hart topology configuration string */
+> +    plic_hart_config =3D riscv_plic_hart_config_string(hartid_count);
+> +
+> +    /* Per-socket PLIC */
+> +    return sifive_plic_create(memmap[K230_DEV_PLIC].base,
+> +                              plic_hart_config, hartid_count, base_harti=
+d,
+> +                              K230_PLIC_NUM_SOURCES,
+> +                              K230_PLIC_NUM_PRIORITIES,
+> +                              K230_PLIC_PRIORITY_BASE, K230_PLIC_PENDING=
+_BASE,
+> +                              K230_PLIC_ENABLE_BASE, K230_PLIC_ENABLE_ST=
+RIDE,
+> +                              K230_PLIC_CONTEXT_BASE,
+> +                              K230_PLIC_CONTEXT_STRIDE,
+> +                              memmap[K230_DEV_PLIC].size);
+> +}
+> +
+> +static void k230_create_uart(MemoryRegion *sys_mem, DeviceState *plic,
+> +                             int index)
+> +{
+> +    int uart_dev =3D K230_DEV_UART0 + index;
+> +    g_autofree char *name =3D g_strdup_printf("uart%d", index);
+> +
+> +    /* Cover the non-16550 part of the SDK's 0x1000 UART window. */
+> +    create_unimplemented_device(name, memmap[uart_dev].base,
+> +                                memmap[uart_dev].size);
+> +
+> +    serial_mm_init(sys_mem, memmap[uart_dev].base, 2,
+> +                   qdev_get_gpio_in(plic, K230_UART0_IRQ + index),
+> +                   399193, serial_hd(index), DEVICE_LITTLE_ENDIAN);
+> +}
+> +
+> +static void k230_soc_realize(DeviceState *dev, Error **errp)
+> +{
+> +    K230SoCState *s =3D RISCV_K230_SOC(dev);
+> +    MemoryRegion *sys_mem =3D get_system_memory();
+> +    int c908_cpus;
+> +
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->c908_cpu), &error_fatal);
+> +
+> +    c908_cpus =3D s->c908_cpu.num_harts;
+> +
+> +    /* SRAM */
+> +    memory_region_init_ram(&s->sram, OBJECT(dev), "sram",
+> +                           memmap[K230_DEV_SRAM].size, &error_fatal);
+> +    memory_region_add_subregion(sys_mem, memmap[K230_DEV_SRAM].base,
+> +                                &s->sram);
+> +
+> +    /* BootROM */
+> +    memory_region_init_rom(&s->bootrom, OBJECT(dev), "bootrom",
+> +                           memmap[K230_DEV_BOOTROM].size, &error_fatal);
+> +    memory_region_add_subregion(sys_mem, memmap[K230_DEV_BOOTROM].base,
+> +                                &s->bootrom);
+> +
+> +    /* PLIC */
+> +    s->c908_plic =3D k230_create_plic(C908_CPU_HARTID, c908_cpus);
+> +
+> +    /* CLINT */
+> +    riscv_aclint_swi_create(memmap[K230_DEV_CLINT].base,
+> +                            C908_CPU_HARTID, c908_cpus, false);
+> +    riscv_aclint_mtimer_create(memmap[K230_DEV_CLINT].base + 0x4000,
+> +                               RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
+> +                               C908_CPU_HARTID, c908_cpus,
+> +                               RISCV_ACLINT_DEFAULT_MTIMECMP,
+> +                               RISCV_ACLINT_DEFAULT_MTIME,
+> +                               RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true)=
+;
+> +
+> +    /* UART */
+> +    for (int i =3D 0; i < K230_UART_COUNT; i++) {
+> +        k230_create_uart(sys_mem, DEVICE(s->c908_plic), i);
+> +    }
+> +
+> +    /* unimplemented devices */
+> +    create_unimplemented_device("kpu.l2-cache",
+> +                                memmap[K230_DEV_KPU_L2_CACHE].base,
+> +                                memmap[K230_DEV_KPU_L2_CACHE].size);
+> +
+> +    create_unimplemented_device("kpu_cfg", memmap[K230_DEV_KPU_CFG].base=
+,
+> +                                memmap[K230_DEV_KPU_CFG].size);
+> +
+> +    create_unimplemented_device("fft", memmap[K230_DEV_FFT].base,
+> +                                memmap[K230_DEV_FFT].size);
+> +
+> +    create_unimplemented_device("2d-engine.ai",
+> +                                memmap[K230_DEV_AI_2D_ENGINE].base,
+> +                                memmap[K230_DEV_AI_2D_ENGINE].size);
+> +
+> +    create_unimplemented_device("gsdma", memmap[K230_DEV_GSDMA].base,
+> +                                memmap[K230_DEV_GSDMA].size);
+> +
+> +    create_unimplemented_device("dma", memmap[K230_DEV_DMA].base,
+> +                                memmap[K230_DEV_DMA].size);
+> +
+> +    create_unimplemented_device("decomp-gzip",
+> +                                memmap[K230_DEV_DECOMP_GZIP].base,
+> +                                memmap[K230_DEV_DECOMP_GZIP].size);
+> +
+> +    create_unimplemented_device("2d-engine.non-ai",
+> +                                memmap[K230_DEV_NON_AI_2D].base,
+> +                                memmap[K230_DEV_NON_AI_2D].size);
+> +
+> +    create_unimplemented_device("isp", memmap[K230_DEV_ISP].base,
+> +                                memmap[K230_DEV_ISP].size);
+> +
+> +    create_unimplemented_device("dewarp", memmap[K230_DEV_DEWARP].base,
+> +                                memmap[K230_DEV_DEWARP].size);
+> +
+> +    create_unimplemented_device("rx-csi", memmap[K230_DEV_RX_CSI].base,
+> +                                memmap[K230_DEV_RX_CSI].size);
+> +
+> +    create_unimplemented_device("vpu", memmap[K230_DEV_H264].base,
+> +                                memmap[K230_DEV_H264].size);
+> +
+> +    create_unimplemented_device("gpu", memmap[K230_DEV_2P5D].base,
+> +                                memmap[K230_DEV_2P5D].size);
+> +
+> +    create_unimplemented_device("vo", memmap[K230_DEV_VO].base,
+> +                                memmap[K230_DEV_VO].size);
+> +
+> +    create_unimplemented_device("vo_cfg", memmap[K230_DEV_VO_CFG].base,
+> +                                memmap[K230_DEV_VO_CFG].size);
+> +
+> +    create_unimplemented_device("3d-engine", memmap[K230_DEV_3D_ENGINE].=
+base,
+> +                                memmap[K230_DEV_3D_ENGINE].size);
+> +
+> +    create_unimplemented_device("pmu", memmap[K230_DEV_PMU].base,
+> +                                memmap[K230_DEV_PMU].size);
+> +
+> +    create_unimplemented_device("rtc", memmap[K230_DEV_RTC].base,
+> +                                memmap[K230_DEV_RTC].size);
+> +
+> +    create_unimplemented_device("cmu", memmap[K230_DEV_CMU].base,
+> +                                memmap[K230_DEV_CMU].size);
+> +
+> +    create_unimplemented_device("rmu", memmap[K230_DEV_RMU].base,
+> +                                memmap[K230_DEV_RMU].size);
+> +
+> +    create_unimplemented_device("boot", memmap[K230_DEV_BOOT].base,
+> +                                memmap[K230_DEV_BOOT].size);
+> +
+> +    create_unimplemented_device("pwr", memmap[K230_DEV_PWR].base,
+> +                                memmap[K230_DEV_PWR].size);
+> +
+> +    create_unimplemented_device("ipcm", memmap[K230_DEV_MAILBOX].base,
+> +                                memmap[K230_DEV_MAILBOX].size);
+> +
+> +    create_unimplemented_device("iomux", memmap[K230_DEV_IOMUX].base,
+> +                                memmap[K230_DEV_IOMUX].size);
+> +
+> +    create_unimplemented_device("timer", memmap[K230_DEV_TIMER].base,
+> +                                memmap[K230_DEV_TIMER].size);
+> +
+> +    create_unimplemented_device("wdt0", memmap[K230_DEV_WDT0].base,
+> +                                memmap[K230_DEV_WDT0].size);
+> +
+> +    create_unimplemented_device("wdt1", memmap[K230_DEV_WDT1].base,
+> +                                memmap[K230_DEV_WDT1].size);
+> +
+> +    create_unimplemented_device("ts", memmap[K230_DEV_TS].base,
+> +                                memmap[K230_DEV_TS].size);
+> +
+> +    create_unimplemented_device("hdi", memmap[K230_DEV_HDI].base,
+> +                                memmap[K230_DEV_HDI].size);
+> +
+> +    create_unimplemented_device("stc", memmap[K230_DEV_STC].base,
+> +                                memmap[K230_DEV_STC].size);
+> +
+> +    create_unimplemented_device("security", memmap[K230_DEV_SECURITY].ba=
+se,
+> +                                memmap[K230_DEV_SECURITY].size);
+> +
+> +    create_unimplemented_device("i2c0", memmap[K230_DEV_I2C0].base,
+> +                                memmap[K230_DEV_I2C0].size);
+> +
+> +    create_unimplemented_device("i2c1", memmap[K230_DEV_I2C1].base,
+> +                                memmap[K230_DEV_I2C1].size);
+> +
+> +    create_unimplemented_device("i2c2", memmap[K230_DEV_I2C2].base,
+> +                                memmap[K230_DEV_I2C2].size);
+> +
+> +    create_unimplemented_device("i2c3", memmap[K230_DEV_I2C3].base,
+> +                                memmap[K230_DEV_I2C3].size);
+> +
+> +    create_unimplemented_device("i2c4", memmap[K230_DEV_I2C4].base,
+> +                                memmap[K230_DEV_I2C4].size);
+> +
+> +    create_unimplemented_device("pwm", memmap[K230_DEV_PWM].base,
+> +                                memmap[K230_DEV_PWM].size);
+> +
+> +    create_unimplemented_device("gpio0", memmap[K230_DEV_GPIO0].base,
+> +                                memmap[K230_DEV_GPIO0].size);
+> +
+> +    create_unimplemented_device("gpio1", memmap[K230_DEV_GPIO1].base,
+> +                                memmap[K230_DEV_GPIO1].size);
+> +
+> +    create_unimplemented_device("adc", memmap[K230_DEV_ADC].base,
+> +                                memmap[K230_DEV_ADC].size);
+> +
+> +    create_unimplemented_device("codec", memmap[K230_DEV_CODEC].base,
+> +                                memmap[K230_DEV_CODEC].size);
+> +
+> +    create_unimplemented_device("i2s", memmap[K230_DEV_I2S].base,
+> +                                memmap[K230_DEV_I2S].size);
+> +
+> +    create_unimplemented_device("usb0", memmap[K230_DEV_USB0].base,
+> +                                memmap[K230_DEV_USB0].size);
+> +
+> +    create_unimplemented_device("usb1", memmap[K230_DEV_USB1].base,
+> +                                memmap[K230_DEV_USB1].size);
+> +
+> +    create_unimplemented_device("sd0", memmap[K230_DEV_SD0].base,
+> +                                memmap[K230_DEV_SD0].size);
+> +
+> +    create_unimplemented_device("sd1", memmap[K230_DEV_SD1].base,
+> +                                memmap[K230_DEV_SD1].size);
+> +
+> +    create_unimplemented_device("qspi0", memmap[K230_DEV_QSPI0].base,
+> +                                memmap[K230_DEV_QSPI0].size);
+> +
+> +    create_unimplemented_device("qspi1", memmap[K230_DEV_QSPI1].base,
+> +                                memmap[K230_DEV_QSPI1].size);
+> +
+> +    create_unimplemented_device("spi", memmap[K230_DEV_SPI].base,
+> +                                memmap[K230_DEV_SPI].size);
+> +
+> +    create_unimplemented_device("hi_sys_cfg", memmap[K230_DEV_HI_SYS_CFG=
+].base,
+> +                                memmap[K230_DEV_HI_SYS_CFG].size);
+> +
+> +    create_unimplemented_device("ddrc_cfg", memmap[K230_DEV_DDRC_CFG].ba=
+se,
+> +                                memmap[K230_DEV_DDRC_CFG].size);
+> +
+> +    create_unimplemented_device("flash", memmap[K230_DEV_FLASH].base,
+> +                                memmap[K230_DEV_FLASH].size);
+> +}
+> +
+> +static void k230_soc_class_init(ObjectClass *oc, const void *data)
+> +{
+> +    DeviceClass *dc =3D DEVICE_CLASS(oc);
+> +
+> +    dc->realize =3D k230_soc_realize;
+> +}
+> +
+> +static const TypeInfo k230_soc_type_info =3D {
+> +    .name =3D TYPE_RISCV_K230_SOC,
+> +    .parent =3D TYPE_DEVICE,
+> +    .instance_size =3D sizeof(K230SoCState),
+> +    .instance_init =3D k230_soc_init,
+> +    .class_init =3D k230_soc_class_init,
+> +};
+> +
+> +static void k230_soc_register_types(void)
+> +{
+> +    type_register_static(&k230_soc_type_info);
+> +}
+> +
+> +type_init(k230_soc_register_types)
+> +
+> +static void k230_direct_boot(K230MachineState *s, MachineState *machine)
+> +{
+> +    const char *firmware_name =3D riscv_default_firmware_name(&s->soc.c9=
+08_cpu);
+> +    RISCVBootInfo boot_info =3D {0};
+> +    hwaddr start_addr =3D K230_DIRECT_OPENSBI_ADDR;
+> +    hwaddr firmware_end_addr =3D 0;
+> +    hwaddr kernel_entry =3D 0;
+> +    int fdt_size =3D 0;
+> +
+> +    if (machine->firmware && !strcmp(machine->firmware, "none")) {
+> +        error_report("K230 direct boot requires OpenSBI firmware; omit "
+> +                     "-bios none or pass OpenSBI with -bios");
+> +        exit(EXIT_FAILURE);
+> +    }
+> +
+> +    if (!machine->dtb) {
+> +        error_report("K230 direct boot requires -dtb");
+> +        exit(EXIT_FAILURE);
+> +    }
+> +
+> +    machine->fdt =3D load_device_tree(machine->dtb, &fdt_size);
+> +    if (!machine->fdt) {
+> +        error_report("load_device_tree() failed");
+> +        exit(EXIT_FAILURE);
+> +    }
+> +
+> +    qemu_fdt_add_path(machine->fdt, "/chosen");
+> +
+> +    riscv_boot_info_init(&boot_info, &s->soc.c908_cpu);
+> +    riscv_load_kernel(machine, &boot_info, K230_DIRECT_KERNEL_ADDR, true=
+, NULL);
+> +    kernel_entry =3D boot_info.image_low_addr;
+> +
+> +    riscv_load_fdt(K230_DIRECT_DTB_ADDR, machine->fdt);
+> +
+> +    firmware_end_addr =3D riscv_find_and_load_firmware(machine, firmware=
+_name,
+> +                                                     &start_addr, NULL);
+> +    if (firmware_end_addr > K230_DIRECT_KERNEL_ADDR) {
+> +        error_report("K230 firmware overlaps kernel address 0x%x",
+> +                     K230_DIRECT_KERNEL_ADDR);
+> +        exit(EXIT_FAILURE);
+> +    }
+> +
+> +    riscv_setup_rom_reset_vec(machine, &s->soc.c908_cpu, start_addr,
+> +                              memmap[K230_DEV_BOOTROM].base,
+> +                              memmap[K230_DEV_BOOTROM].size, kernel_entr=
+y,
+> +                              K230_DIRECT_DTB_ADDR);
+> +}
+> +
+> +static void k230_firmware_boot(K230MachineState *s, MachineState *machin=
+e)
+> +{
+> +    const char *firmware_name =3D riscv_default_firmware_name(&s->soc.c9=
+08_cpu);
+> +    hwaddr start_addr =3D memmap[K230_DEV_DDRC].base;
+> +
+> +    if (machine->dtb || (machine->kernel_cmdline && *machine->kernel_cmd=
+line)) {
+> +        error_report("K230 firmware boot does not support -dtb or -appen=
+d");
+> +        exit(EXIT_FAILURE);
+> +    }
+> +
+> +    riscv_find_and_load_firmware(machine, firmware_name, &start_addr, NU=
+LL);
+> +
+> +    riscv_setup_rom_reset_vec(machine, &s->soc.c908_cpu, start_addr,
+> +                              memmap[K230_DEV_BOOTROM].base,
+> +                              memmap[K230_DEV_BOOTROM].size, 0, 0);
+> +}
+> +
+> +static void k230_machine_done(Notifier *notifier, void *data)
+> +{
+> +    K230MachineState *s =3D container_of(notifier, K230MachineState,
+> +                                       machine_done);
+> +    MachineState *machine =3D MACHINE(s);
+> +
+> +    if (machine->kernel_filename) {
+> +        k230_direct_boot(s, machine);
+> +    } else {
+> +        k230_firmware_boot(s, machine);
+> +    }
+> +}
+> +
+> +static void k230_machine_init(MachineState *machine)
+> +{
+> +    MachineClass *mc =3D MACHINE_GET_CLASS(machine);
+> +    K230MachineState *s =3D RISCV_K230_MACHINE(machine);
+> +    MemoryRegion *sys_mem =3D get_system_memory();
+> +
+> +    if (machine->ram_size < mc->default_ram_size) {
+> +        char *sz =3D size_to_str(mc->default_ram_size);
+> +        error_report("Invalid RAM size, should be %s", sz);
+> +        g_free(sz);
+> +        exit(EXIT_FAILURE);
+> +    }
+> +
+> +    /* Initialize SoC */
+> +    object_initialize_child(OBJECT(machine), "soc", &s->soc,
+> +                            TYPE_RISCV_K230_SOC);
+> +    qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
+> +
+> +    /* Data Memory */
+> +    memory_region_add_subregion(sys_mem, memmap[K230_DEV_DDRC].base,
+> +                                machine->ram);
+> +
+> +    s->machine_done.notify =3D k230_machine_done;
+> +    qemu_add_machine_init_done_notifier(&s->machine_done);
+> +}
+> +
+> +static void k230_machine_instance_init(Object *obj)
+> +{
+> +}
+> +
+> +static void k230_machine_class_init(ObjectClass *oc, const void *data)
+> +{
+> +    MachineClass *mc =3D MACHINE_CLASS(oc);
+> +
+> +    mc->desc =3D "RISC-V Board compatible with Kendryte K230 SDK";
+> +    mc->init =3D k230_machine_init;
+> +    mc->default_cpus =3D 1;
+> +    mc->default_ram_id =3D "riscv.K230.ram"; /* DDR */
+> +    mc->default_ram_size =3D memmap[K230_DEV_DDRC].size;
+> +}
+> +
+> +static const TypeInfo k230_machine_typeinfo =3D {
+> +    .name       =3D TYPE_RISCV_K230_MACHINE,
+> +    .parent     =3D TYPE_MACHINE,
+> +    .class_init =3D k230_machine_class_init,
+> +    .instance_init =3D k230_machine_instance_init,
+> +    .instance_size =3D sizeof(K230MachineState),
+> +};
+> +
+> +static void k230_machine_init_register_types(void)
+> +{
+> +    type_register_static(&k230_machine_typeinfo);
+> +}
+> +
+> +type_init(k230_machine_init_register_types)
+> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+> index 533472e22a..09cf855984 100644
+> --- a/hw/riscv/meson.build
+> +++ b/hw/riscv/meson.build
+> @@ -14,8 +14,8 @@ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files=
+(
+>         'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv=
+-iommu-hpm.c'))
+>  riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-g=
+eneric.c'))
+>  riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangsh=
+an_kmh.c'))
+> -
+>  riscv_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
+>  riscv_ss.add(when: 'CONFIG_MIPS_BOSTON_AIA', if_true: files('boston-aia.=
+c'))
+> +riscv_ss.add(when: 'CONFIG_K230', if_true: files('k230.c'))
+>
+>  hw_arch +=3D {'riscv': riscv_ss}
+> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+> new file mode 100644
+> index 0000000000..dcfde39096
+> --- /dev/null
+> +++ b/include/hw/riscv/k230.h
+> @@ -0,0 +1,145 @@
+> +/*
+> + * QEMU RISC-V Virt Board Compatible with kendryte K230 SDK
+> + *
+> + * Copyright (c) 2025 Chao Liu <chao.liu.zevorn@gmail.com>
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * Provides a board compatible with the kendryte K230 SDK
+> + *
+> + * K230 Technical Reference Manual V0.3.1 (2024-11-18):
+> + * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_T=
+echnical_Reference_Manual_V0.3.1_20241118.pdf
+> + *
+> + * For more information, see <https://www.kendryte.com/en/proDetail/230>
+> + */
+> +#ifndef HW_K230_H
+> +#define HW_K230_H
+> +
+> +#include "hw/core/boards.h"
+> +#include "hw/riscv/riscv_hart.h"
+> +
+> +#define C908_CPU_HARTID   (0)
+> +
+> +#define TYPE_RISCV_K230_SOC "riscv.k230.soc"
+> +#define RISCV_K230_SOC(obj) \
+> +    OBJECT_CHECK(K230SoCState, (obj), TYPE_RISCV_K230_SOC)
+> +
+> +typedef struct K230SoCState {
+> +    /*< private >*/
+> +    DeviceState parent_obj;
+> +
+> +    /*< public >*/
+> +    RISCVHartArrayState c908_cpu; /* Small core */
+> +
+> +    MemoryRegion sram;
+> +    MemoryRegion bootrom;
+> +
+> +    DeviceState *c908_plic;
+> +} K230SoCState;
+> +
+> +#define TYPE_RISCV_K230_MACHINE MACHINE_TYPE_NAME("k230")
+> +#define RISCV_K230_MACHINE(obj) \
+> +    OBJECT_CHECK(K230MachineState, (obj), TYPE_RISCV_K230_MACHINE)
+> +
+> +typedef struct K230MachineState {
+> +    /*< private >*/
+> +    MachineState parent_obj;
+> +
+> +    /*< public >*/
+> +    K230SoCState soc;
+> +    Notifier machine_done;
+> +} K230MachineState;
+> +
+> +enum {
+> +    K230_DEV_DDRC,
+> +    K230_DEV_KPU_L2_CACHE,
+> +    K230_DEV_SRAM,
+> +    K230_DEV_KPU_CFG,
+> +    K230_DEV_FFT,
+> +    K230_DEV_AI_2D_ENGINE,
+> +    K230_DEV_GSDMA,
+> +    K230_DEV_DMA,
+> +    K230_DEV_DECOMP_GZIP,
+> +    K230_DEV_NON_AI_2D,
+> +    K230_DEV_ISP,
+> +    K230_DEV_DEWARP,
+> +    K230_DEV_RX_CSI,
+> +    K230_DEV_H264,
+> +    K230_DEV_2P5D,
+> +    K230_DEV_VO,
+> +    K230_DEV_VO_CFG,
+> +    K230_DEV_3D_ENGINE,
+> +    K230_DEV_PMU,
+> +    K230_DEV_RTC,
+> +    K230_DEV_CMU,
+> +    K230_DEV_RMU,
+> +    K230_DEV_BOOT,
+> +    K230_DEV_PWR,
+> +    K230_DEV_MAILBOX,
+> +    K230_DEV_IOMUX,
+> +    K230_DEV_TIMER,
+> +    K230_DEV_WDT0,
+> +    K230_DEV_WDT1,
+> +    K230_DEV_TS,
+> +    K230_DEV_HDI,
+> +    K230_DEV_STC,
+> +    K230_DEV_BOOTROM,
+> +    K230_DEV_SECURITY,
+> +    K230_DEV_UART0,
+> +    K230_DEV_UART1,
+> +    K230_DEV_UART2,
+> +    K230_DEV_UART3,
+> +    K230_DEV_UART4,
+> +    K230_DEV_I2C0,
+> +    K230_DEV_I2C1,
+> +    K230_DEV_I2C2,
+> +    K230_DEV_I2C3,
+> +    K230_DEV_I2C4,
+> +    K230_DEV_PWM,
+> +    K230_DEV_GPIO0,
+> +    K230_DEV_GPIO1,
+> +    K230_DEV_ADC,
+> +    K230_DEV_CODEC,
+> +    K230_DEV_I2S,
+> +    K230_DEV_USB0,
+> +    K230_DEV_USB1,
+> +    K230_DEV_SD0,
+> +    K230_DEV_SD1,
+> +    K230_DEV_QSPI0,
+> +    K230_DEV_QSPI1,
+> +    K230_DEV_SPI,
+> +    K230_DEV_HI_SYS_CFG,
+> +    K230_DEV_DDRC_CFG,
+> +    K230_DEV_FLASH,
+> +    K230_DEV_PLIC,
+> +    K230_DEV_CLINT,
+> +};
+> +
+> +enum {
+> +    /*
+> +     * K230 TRM v0.3.1 section 2.4 lists peripheral interrupt bits; SDK
+> +     * DTBs expose the corresponding PLIC IDs as bit + 16.
+> +     */
+> +    K230_UART0_IRQ  =3D 16,
+> +    K230_UART1_IRQ  =3D 17,
+> +    K230_UART2_IRQ  =3D 18,
+> +    K230_UART3_IRQ  =3D 19,
+> +    K230_UART4_IRQ  =3D 20,
+> +};
+> +
+> +#define K230_UART_COUNT 5
+> +
+> +/*
+> + * Integrates with the interrupt controller (PLIC),
+> + * which can process 208 interrupt external sources
+> + */
+> +#define K230_PLIC_NUM_SOURCES 208
+> +#define K230_PLIC_NUM_PRIORITIES 7
+> +#define K230_PLIC_PRIORITY_BASE 0x00
+> +#define K230_PLIC_PENDING_BASE 0x1000
+> +#define K230_PLIC_ENABLE_BASE 0x2000
+> +#define K230_PLIC_ENABLE_STRIDE 0x80
+> +#define K230_PLIC_CONTEXT_BASE 0x200000
+> +#define K230_PLIC_CONTEXT_STRIDE 0x1000
+> +
+> +#endif
+>
 
