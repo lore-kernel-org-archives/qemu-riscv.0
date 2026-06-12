@@ -4,99 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E2ACCD8CA8
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jun 2026 04:07:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D0FCD98CC
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jun 2026 04:25:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXtAb-00043N-2C; Fri, 12 Jun 2026 00:07:01 -0400
+	id 1wXtSG-0006vd-SL; Fri, 12 Jun 2026 00:25:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wXtAZ-00042n-4K
- for qemu-riscv@nongnu.org; Fri, 12 Jun 2026 00:06:59 -0400
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ id 1wXtSE-0006uX-Ru
+ for qemu-riscv@nongnu.org; Fri, 12 Jun 2026 00:25:14 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wXtAW-0007QY-Ts
- for qemu-riscv@nongnu.org; Fri, 12 Jun 2026 00:06:58 -0400
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-beeba001887so73145166b.3
- for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 21:06:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781237215; cv=none;
+ id 1wXtSC-00021o-4X
+ for qemu-riscv@nongnu.org; Fri, 12 Jun 2026 00:25:14 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-68bac6e24fdso765472a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 21:25:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781238309; cv=none;
  d=google.com; s=arc-20240605;
- b=CbQ5GrPFYKP1wEggswn1pSUF+PdVM7LiTcMPVHgG2kiYNRX4LAkTdWHIInspi38kWz
- /AkTlKsfgzxfWLBtHISxumGBq+uOk08ztgDYjPI+FObB4o5um7G+P4n8uV7YicAhIpZh
- Ik0G4SAm/Ui+u66zhQ/vgjSYlirQWmAiYT1gO8+18m7GUpiGeIEFJQ0raYL5unjQFWjG
- WeqQIUIXNoLz7oaMZuQnCT1zI8cFym9YFnU5+BQ4el4ChhNS2mU6H1BdxQmRL7WhyIDT
- 9czG5BXENxzd+f7Itk8EtuZUqt5mkwskNS9EKvX7o/0pfHsTx/mJG8Hm3EiBPTE6blkF
- 4vRw==
+ b=Cn36Cpt3y0xechAR7mH+B2c1QuDB2nJSrET3SEXk/d3im0Mea2ThG6K4CKuscQMnJG
+ em/N0dDBJ4QUvC6XMp/tlIpwxdLqtcDDaDXJN3F+nupnm2ndPgs4QHiGQfUa1pCmMCkY
+ mLhGLROYmyeWV9w1u5yL8OdlV3xvyqgC6lRURlrHrO9FZOFQ1lcDDx24zlVjX3jwdRrA
+ NxTbGsmSDIfI7in4qN8IlFUL7nWnJZ+3RePNkLRNxOrU3fzgmotxyy0zISgWvQR1iu8Z
+ AFULxW1zDMb+Z7QpYn12qDmG4igjLh6Zqw+niky3KU6hh5f7nGoq2yMPuFFvQuuLh1rM
+ lJ+Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=miGF1yHVafpVx2qupDeuM3gVrtYBw2ce86jlAdHCQAI=;
- fh=4XzYX0GJRHOE2nAfTIHNCtBAfwfOz56rQTQ4/Rzzou4=;
- b=OEYB562YYSEiabQpNsHJ46Rt8o2D4G409g9Vr0hx/leB4QE842Bap99/i644fTO3OA
- e4r6bJf2xLU5RQaUrbtd4+OAZUecwu5+/kCF2maw4qDjzyhNRwDxS4EOJlXKNtNifPyV
- TUCOJ1iAB79Gme9bCZmp/80xSkXMs3WdU6ypUMQgufFIxf/rkfnw3lUeFqL89mY+77gR
- eX3yvCG2B5MJe6yoXQw9xBlx8Bkf4QUXFB1BjRwJ9q1BtBLwgyltBPMx72RnQi3CYWLo
- xm8HMBWXaH82Vxa6xCtz6gg9TbdpYq0lQSCEFDVfOtVtViUExJLwu+b3henQsa2uv0wn
- Jjow==; darn=nongnu.org
+ bh=Sdm+KFjX8FCSQz+PrUNWbK270jsk0dt4ls/rkCUxdQ4=;
+ fh=ddkkab/+UczsW7ET/ptgQufAM9Tg5jls/WYhKMYyJNM=;
+ b=GkvZWKAutNDzceRVlkr1hsq+Wd05K60JRzq72IP8A4AYZ8VcE9tdFDxt35eyy0xlkj
+ dM1yJPJNAgqhk0IQ0x+XiS7V1F5D1L+E8DNAVuwq06+m5pFT4ggEYqWpX3VfSeboW0vq
+ L/FCWimjM/ABEGW2WU8yb94HViQLBlJkURIRZp04GiLubGJU6kcTHMj8HNX6ip9MDh5g
+ noZoGUamPhm9Akchuv44Yyf+bJrnsnYrHKwh+wZ1VnXK6p/fAa2KatopVkpByKqKCk4d
+ 6TTQXBwZO0OO/Iivvz3LKatnMn56ZICBbO1aExY9camueuAzOhvG6w6L7zRAvW0eq1Zj
+ zvuA==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781237215; x=1781842015; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1781238309; x=1781843109; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=miGF1yHVafpVx2qupDeuM3gVrtYBw2ce86jlAdHCQAI=;
- b=iV4lGdienJnsB9bA52n9773fZYMNvtsKh8FJltsKnKyA2kT4cQJP6bBDfMQzpfbwqK
- /TLFoajUqkbQh6DgKbawMY2tdrT27fl2G21BrS6HW/N+5GRaOo+/hxUPls53NYp/Tkl+
- buyRM3cbbwKSj5u6bGJMyMvb+zR5BEO0QPRJiztznNliFjDHwJRrRTX6J2DHGRmZTgp/
- ibvOw9WgnpxE1qFp0kQ2QdV0yjGmqZTe1qSnrTrcr9ytF5UY8B2YH/Ew3LLAHF1ml1yG
- Ih9thHQNxkAh4fE+VPTBg81axQjrk3NIJR7IMWrjcd0nCdm7/XbUn1kxTWll7q2Fj615
- 2eTw==
+ bh=Sdm+KFjX8FCSQz+PrUNWbK270jsk0dt4ls/rkCUxdQ4=;
+ b=KD1U1x7XRT6q0FQb3vtNS7CiCxanYiM4CajbsOvs7rQ/vEwPF51IStLn153rmyo4c/
+ Djh593RtYXtktFBFnU9S8GP4HbVkijo/IJi3r8Bw/qvjrxJ2zoOwVO/l6BZTKAeucWwv
+ meiXzrSpyVUnzY+vviq535UhwjThTigBsLXlf9H6na+nPdv8CWs8zd4H72TL+9LumUax
+ 9ej40W/8Qupdu9rDFNUWJbTa5DrZMqpUumIEsZpMFBAaHa4aXb7Ziq9VFomyx5gSkE8b
+ gUwd6G2js3zPBg7Ngf0xryM2fRPzLQ5HJ/rUVSgZMZpJyrBvIQAedv6ynsvaBwaQYBcs
+ IrfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781237215; x=1781842015;
+ d=1e100.net; s=20251104; t=1781238309; x=1781843109;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=miGF1yHVafpVx2qupDeuM3gVrtYBw2ce86jlAdHCQAI=;
- b=bcjjNxaYQPaaFlWFkfxgakTPkurAOyy9ygM+bO7SLY+3aWTeQA8SaqoNNlKjXhohza
- ZauukgFSCIu3WF9IZejV1SveddKf7D62OwO9QMw2lDogY+xNhSkf0IFNBGLOYgcbmy/n
- ME+DtT10uE+cVD80temCjAjr3BfMSgCLddXwOeOeqkPeBgFaeLEiloD4p50KciIy8Ni3
- jbnGqY/TIzZ4Re9c4zUgy3OzpXmxgtQ3fB0VfI/UXrRiMpNCIdgSK4tOyVeyB5oTkIH1
- grhGQhspz524D1dfw8xnKczv7SvEGLUahSh4NQQYTdHiXqwjd5X6F5wCb96eMInKJFlm
- tgrw==
+ bh=Sdm+KFjX8FCSQz+PrUNWbK270jsk0dt4ls/rkCUxdQ4=;
+ b=NvBh+U3ERyqAHKXaSRN8c2JxFtdXcj4g77/FCxlNJp/jbpeIYvWRCvV/B5YR1hBWc3
+ GiPUvt/InINeCC9bc3rS4EC8etLpOhu+fpu8l1cc5a2TB/oNBpVPpf4xLHC6WTEB50hV
+ m6DL87Xf5Jkex6kB3QkrQxTQKoV8joJGTnNd2+vDCv78z3NEFAP7t1w/NDHtaW1QNuuK
+ FpnBuVY4S9aeHpzPcFTwe1EZ44htejAKL3ApQ6YAPWCHT/nI8e1abFt1SDQswUvB5rob
+ AvhYydAXjlRI4rfK9HxpP77CsYBv235UnapKQpH0i3+rKsvmxm13dD6SXk377fUEmPzo
+ BKdg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8t4kfuTGeU55ec1eixWvK7JE9MnJ06KV8hjquUX1PdAcTphyASNAdh6Dv0s0vpGrSS4SLX/ehSZrfu@nongnu.org
-X-Gm-Message-State: AOJu0YzfIgaOSQ9kSQl7pmSJKtOrFChp69NH3HaX5nDIVWEPX1BSdW/Y
- 9Z21bYqzCHxQpmwxOFAhCgZ4FMLrPmQs+PqCamfT+2OqIv30IHLzdMs5WWXbJm69si/BH2g033E
- HJN3SAA+nMx426vMfOAcAgTanmyDn3aY=
-X-Gm-Gg: Acq92OFqijMct8k+SCSnVxZO4C10a28pPdfZJ2UFqffRVGwDBSq6zs6GtByStRlqY/e
- y7px0sP5QR5mpCst70LExN44XJARQNs7x2cdwodyAscRTkHzZbQ4JVH2UY0KHp4fbmSzyvcgGH6
- rBQ4yETsL3InK7WQjaURpAEfbdsPcUl87JCDLyvsYKz5WJtZeUVDPhH0wJTBfZ84lEYyRlDXSRi
- HkgEORZJ6H58aRrw2aXFOySg1E603c+sJXGNHqATilpaqc8hOsPAhZFHKQWt7ecMgIXmBaJhTYe
- Ez00quZF3bhKytsuRGiV54vm3JrYF5IbZZRjcg==
-X-Received: by 2002:a17:907:1c9f:b0:bee:bcf6:6a22 with SMTP id
- a640c23a62f3a-bfe2a115631mr38111966b.44.1781237214765; Thu, 11 Jun 2026
- 21:06:54 -0700 (PDT)
+ AFNElJ/wFpI8slMZwYLtcXyhtYKFqhrXtuSjVIK7Yl9VoNB53l4zVOAaYWca5Stzt1cXtVUmw3/v/YLwVNG4@nongnu.org
+X-Gm-Message-State: AOJu0YwbJvAYpN9CxPX6brn5jN8umEnt3ChneT0DFRAq8IH9g03xM5x8
+ 8CCxMuUJlv10++lPEkyzi6M0Xkc8+uaDhqOluv1JBiMKSwhqjNdl4eIcTNwcfzIKxj2NyyC565U
+ HkLnN+kzwxrKc8OpFJ7FBC72m9aG2dt4=
+X-Gm-Gg: Acq92OGjQnYPrnR1lfDqEACotHiEmF+JphHgDqSn6t7t3ejimRCwxUVPLCEnoXCxdMn
+ E1+n734NwCtK8Fk0wgcge9YCCZVpmM1onTWC2XXYs/8+ZGUrLv5+ewKN8qf0YMCtYeFSxMW5i4r
+ h+l6lWlRe/SZOBgj44znHxjEylwsrHOOPw1kvw3DJq1L2FYvyZXgGycqZcsGch9iONLSj/ZHeBj
+ vkqIqBJCiNC6gMc1jw7vtx8fu4+sZuPyxHgoprAx9O/81l73+Ycnj2u4kbRreHGrH3oSCV028gB
+ To5FbSDtvQpGzhIKNgd7U5461wSRMEOKGON7Kw==
+X-Received: by 2002:a05:6402:4143:b0:670:8add:2b8d with SMTP id
+ 4fb4d7f45d1cf-69378a84dc8mr370745a12.24.1781238308397; Thu, 11 Jun 2026
+ 21:25:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260608210642.464131-1-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260608210642.464131-1-daniel.barboza@oss.qualcomm.com>
+References: <20260611105037.157773-1-max.chou@sifive.com>
+ <20260611105037.157773-2-max.chou@sifive.com>
+In-Reply-To: <20260611105037.157773-2-max.chou@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 12 Jun 2026 14:06:28 +1000
-X-Gm-Features: AVVi8Cd9v6dNE8XnFn6MAya34l9CzA6tHQObG0ihfchmlQmM6lxFNIXEi3MggV8
-Message-ID: <CAKmqyKOHR78hiHePh_q_c36k4QXcX-5RLRKH13Jx_RQp464MAA@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv/virt.c: fix 'iommu-map' FDT entry
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
- Palmer Dabbelt <palmer@dabbelt.com>
+Date: Fri, 12 Jun 2026 14:24:42 +1000
+X-Gm-Features: AVVi8CfcK9jvxYXhlbuNp48Zakd2aH-e_iXvK4yySIH1kTbcivx0td9mndQUHL8
+Message-ID: <CAKmqyKN0X1uYkccbjm3GzhzG2DVFRCi988FoRm_xv5N=-=sjwA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Set mstatus.FS dirty when scalar FP
+ raises exceptions
+To: Max Chou <max.chou@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu.zevorn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x62d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -104,7 +110,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,77 +126,422 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 9, 2026 at 7:08=E2=80=AFAM Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
+On Thu, Jun 11, 2026 at 8:52=E2=80=AFPM Max Chou <max.chou@sifive.com> wrot=
+e:
 >
-> Based on the DT documentation of 'iommu-map':
+> According to the RISC-V privileged spec 3.1.6, any instruction that
+> modifies FP extension state (FP CSRs including fflags, or f registers)
+> must set mstatus.FS to Dirty.  Raising fflags bits is modifying fcsr
+> (an FP CSR).
 >
-> https://www.kernel.org/doc/Documentation/devicetree/bindings/pci/pci-iomm=
-u.txt
+> Scalar FP instructions that write integer registers (FP comparisons and
+> FP-to-integer conversions) never call mark_fs_dirty at translation time
+> to set mstatus.FS to dirty.  However, they can raise FP exception flags
+> via softfloat functions, which modifies fflags without any mechanism to
+> dirty mstatus.FS.
 >
-> - iommu-map: Maps a Requester ID to an IOMMU and associated IOMMU specifi=
-er
->   data.
+> The affected helpers:
+> - Comparisons: fle/fleq/flt/fltq/feq
+>   =E2=80=94 raise NV on NaN operands
+> - FP-to-integer: fcvt.[w|wu|l|lu]/fcvtmod.w.d
+>   =E2=80=94 raise NX on inexact or NV on out-of-range
 >
->   The property is an arbitrary number of tuples of
->   (rid-base,iommu,iommu-base,length).
+> Fix this issue by
+> 1. Save float_exception_flags before the softfloat operation
+> 2. Perform the operation
+> 3. If any new exception bits are set, set fs to dirty
 >
-> ----------
->
-> We're adding a no-op entry (length =3D 0) in iommu-map:
->
->          qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
->                                 0, iommu_sys_phandle, 0, 0, 0,
->                                 iommu_sys_phandle, 0, 0xffff);
->
-> This is easily seen in the generated DT:
->
-> iommu-map =3D <0x00 0x8000 0x00 0x00 0x00 0x8000 0x00 0xffff>;
->
-> The tuple (0 0 0x8000 0) does nothing since it has length =3D 0.  The
-> information we want to advertise is in the second tuple only.  Thus
-> remove the empty tuple.
->
-> While we're at it, seems like we've mistaken the API and we're using
-> 0xffff as 'last address', but in fact it is length.  This means that
-> we're telling the DT we're mapping 0x0 -> 0xfffe, which wasn't our
-> intention.  Therefore change size to '0x10000' to reflect the address
-> mapping we want (0x0 -> 0xffff).
->
-> Found while reviewing the RISC-V Server Platform DT generation, which
-> happens to copy a lot of code from the 'virt' board, and this nit is
-> also present there.
->
-> Fixes: 2c12de1460 ("hw/riscv/virt: Add IOMMU as platform device if the op=
-tion is set")
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Signed-off-by: Max Chou <max.chou@sifive.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/virt.c | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+>  target/riscv/cpu.h        |   1 +
+>  target/riscv/fpu_helper.c | 157 +++++++++++++++++++++++++++++++-------
+>  2 files changed, 130 insertions(+), 28 deletions(-)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index ce64eaaef7..0c489bb412 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -900,8 +900,7 @@ static void create_fdt_pcie(RISCVVirtState *s,
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index c98652cd62..9961815ec3 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -675,6 +675,7 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *=
+env,
 >
->      if (virt_is_iommu_sys_enabled(s)) {
->          qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
-> -                               0, iommu_sys_phandle, 0, 0, 0,
-> -                               iommu_sys_phandle, 0, 0xffff);
-> +                               0, iommu_sys_phandle, 0, 0x10000);
->      }
+>  uint8_t riscv_cpu_get_fflags(CPURISCVState *env);
+>  void riscv_cpu_set_fflags(CPURISCVState *env, uint8_t);
+> +void riscv_cpu_check_fflags(CPURISCVState *env, FloatExceptionFlags);
 >
->      create_pcie_irq_map(s, ms->fdt, name, irq_pcie_phandle);
+>  #ifndef CONFIG_USER_ONLY
+>  void cpu_set_exception_base(int vp_index, uint64_t address);
+> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+> index e6d1ffb1d6..db1475271b 100644
+> --- a/target/riscv/fpu_helper.c
+> +++ b/target/riscv/fpu_helper.c
+> @@ -50,6 +50,22 @@ void riscv_cpu_set_fflags(CPURISCVState *env, uint8_t =
+hard)
+>      set_float_exception_flags(soft, &env->fp_status);
+>  }
+>
+> +#ifndef CONFIG_USER_ONLY
+> +void riscv_cpu_check_fflags(CPURISCVState *env,
+> +                            FloatExceptionFlags pre_fflag)
+> +{
+> +    if (get_float_exception_flags(&env->fp_status) & ~pre_fflag) {
+> +        env->mstatus |=3D MSTATUS_FS;
+> +        if (env->virt_enabled) {
+> +            env->mstatus_hs |=3D MSTATUS_FS;
+> +        }
+> +    }
+> +}
+> +#else
+> +void riscv_cpu_check_fflags(CPURISCVState *env,
+> +                            FloatExceptionFlags pre_fflag) {}
+> +#endif
+> +
+>  void helper_set_rounding_mode(CPURISCVState *env, uint32_t rm)
+>  {
+>      FloatRoundMode softrm;
+> @@ -286,59 +302,86 @@ target_ulong helper_fle_s(CPURISCVState *env, uint6=
+4_t rs1, uint64_t rs2)
+>  {
+>      float32 frs1 =3D check_nanbox_s(env, rs1);
+>      float32 frs2 =3D check_nanbox_s(env, rs2);
+> -    return float32_le(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float32_le(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fleq_s(CPURISCVState *env, uint64_t rs1, uint64_t rs=
+2)
+>  {
+>      float32 frs1 =3D check_nanbox_s(env, rs1);
+>      float32 frs2 =3D check_nanbox_s(env, rs2);
+> -    return float32_le_quiet(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float32_le_quiet(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_flt_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2=
+)
+>  {
+>      float32 frs1 =3D check_nanbox_s(env, rs1);
+>      float32 frs2 =3D check_nanbox_s(env, rs2);
+> -    return float32_lt(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float32_lt(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fltq_s(CPURISCVState *env, uint64_t rs1, uint64_t rs=
+2)
+>  {
+>      float32 frs1 =3D check_nanbox_s(env, rs1);
+>      float32 frs2 =3D check_nanbox_s(env, rs2);
+> -    return float32_lt_quiet(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float32_lt_quiet(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_feq_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2=
+)
+>  {
+>      float32 frs1 =3D check_nanbox_s(env, rs1);
+>      float32 frs2 =3D check_nanbox_s(env, rs2);
+> -    return float32_eq_quiet(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float32_eq_quiet(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_w_s(CPURISCVState *env, uint64_t rs1)
+>  {
+>      float32 frs1 =3D check_nanbox_s(env, rs1);
+> -    return float32_to_int32(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float32_to_int32(frs1, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_wu_s(CPURISCVState *env, uint64_t rs1)
+>  {
+>      float32 frs1 =3D check_nanbox_s(env, rs1);
+> -    return (int32_t)float32_to_uint32(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D (int32_t)float32_to_uint32(frs1, &env->fp_statu=
+s);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
+>  {
+>      float32 frs1 =3D check_nanbox_s(env, rs1);
+> -    return float32_to_int64(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float32_to_int64(frs1, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
+>  {
+>      float32 frs1 =3D check_nanbox_s(env, rs1);
+> -    return float32_to_uint64(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float32_to_uint64(frs1, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  uint64_t helper_fcvt_s_w(CPURISCVState *env, target_ulong rs1)
+> @@ -453,52 +496,83 @@ uint64_t helper_fsqrt_d(CPURISCVState *env, uint64_=
+t frs1)
+>
+>  target_ulong helper_fle_d(CPURISCVState *env, uint64_t frs1, uint64_t fr=
+s2)
+>  {
+> -    return float64_le(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float64_le(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fleq_d(CPURISCVState *env, uint64_t frs1, uint64_t f=
+rs2)
+>  {
+> -    return float64_le_quiet(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float64_le_quiet(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_flt_d(CPURISCVState *env, uint64_t frs1, uint64_t fr=
+s2)
+>  {
+> -    return float64_lt(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float64_lt(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fltq_d(CPURISCVState *env, uint64_t frs1, uint64_t f=
+rs2)
+>  {
+> -    return float64_lt_quiet(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float64_lt_quiet(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_feq_d(CPURISCVState *env, uint64_t frs1, uint64_t fr=
+s2)
+>  {
+> -    return float64_eq_quiet(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float64_eq_quiet(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_w_d(CPURISCVState *env, uint64_t frs1)
+>  {
+> -    return float64_to_int32(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float64_to_int32(frs1, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  uint64_t helper_fcvtmod_w_d(CPURISCVState *env, uint64_t value)
+>  {
+> -    return float64_to_int32_modulo(value, float_round_to_zero, &env->fp_=
+status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    uint64_t ret =3D float64_to_int32_modulo(value, float_round_to_zero,
+> +                                           &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_wu_d(CPURISCVState *env, uint64_t frs1)
+>  {
+> -    return (int32_t)float64_to_uint32(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D (int32_t)float64_to_uint32(frs1, &env->fp_statu=
+s);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_l_d(CPURISCVState *env, uint64_t frs1)
+>  {
+> -    return float64_to_int64(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float64_to_int64(frs1, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_lu_d(CPURISCVState *env, uint64_t frs1)
+>  {
+> -    return float64_to_uint64(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float64_to_uint64(frs1, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  uint64_t helper_fcvt_d_w(CPURISCVState *env, target_ulong rs1)
+> @@ -619,35 +693,50 @@ target_ulong helper_fle_h(CPURISCVState *env, uint6=
+4_t rs1, uint64_t rs2)
+>  {
+>      float16 frs1 =3D check_nanbox_h(env, rs1);
+>      float16 frs2 =3D check_nanbox_h(env, rs2);
+> -    return float16_le(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float16_le(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fleq_h(CPURISCVState *env, uint64_t rs1, uint64_t rs=
+2)
+>  {
+>      float16 frs1 =3D check_nanbox_h(env, rs1);
+>      float16 frs2 =3D check_nanbox_h(env, rs2);
+> -    return float16_le_quiet(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float16_le_quiet(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_flt_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2=
+)
+>  {
+>      float16 frs1 =3D check_nanbox_h(env, rs1);
+>      float16 frs2 =3D check_nanbox_h(env, rs2);
+> -    return float16_lt(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float16_lt(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fltq_h(CPURISCVState *env, uint64_t rs1, uint64_t rs=
+2)
+>  {
+>      float16 frs1 =3D check_nanbox_h(env, rs1);
+>      float16 frs2 =3D check_nanbox_h(env, rs2);
+> -    return float16_lt_quiet(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float16_lt_quiet(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_feq_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2=
+)
+>  {
+>      float16 frs1 =3D check_nanbox_h(env, rs1);
+>      float16 frs2 =3D check_nanbox_h(env, rs2);
+> -    return float16_eq_quiet(frs1, frs2, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float16_eq_quiet(frs1, frs2, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fclass_h(CPURISCVState *env, uint64_t rs1)
+> @@ -683,25 +772,37 @@ uint64_t helper_froundnx_h(CPURISCVState *env, uint=
+64_t rs1)
+>  target_ulong helper_fcvt_w_h(CPURISCVState *env, uint64_t rs1)
+>  {
+>      float16 frs1 =3D check_nanbox_h(env, rs1);
+> -    return float16_to_int32(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float16_to_int32(frs1, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_wu_h(CPURISCVState *env, uint64_t rs1)
+>  {
+>      float16 frs1 =3D check_nanbox_h(env, rs1);
+> -    return (int32_t)float16_to_uint32(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D (int32_t)float16_to_uint32(frs1, &env->fp_statu=
+s);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_l_h(CPURISCVState *env, uint64_t rs1)
+>  {
+>      float16 frs1 =3D check_nanbox_h(env, rs1);
+> -    return float16_to_int64(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float16_to_int64(frs1, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  target_ulong helper_fcvt_lu_h(CPURISCVState *env, uint64_t rs1)
+>  {
+>      float16 frs1 =3D check_nanbox_h(env, rs1);
+> -    return float16_to_uint64(frs1, &env->fp_status);
+> +    FloatExceptionFlags pre_fflag =3D get_float_exception_flags(&env->fp=
+_status);
+> +    target_ulong ret =3D float16_to_uint64(frs1, &env->fp_status);
+> +    riscv_cpu_check_fflags(env, pre_fflag);
+> +    return ret;
+>  }
+>
+>  uint64_t helper_fcvt_h_w(CPURISCVState *env, target_ulong rs1)
 > --
-> 2.43.0
+> 2.43.7
 >
 >
 
