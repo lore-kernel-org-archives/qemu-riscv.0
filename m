@@ -4,99 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF6BDCD8CA8
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jun 2026 03:46:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38ABFCD8C9D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jun 2026 03:49:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXsr8-0000gN-Ar; Thu, 11 Jun 2026 23:46:54 -0400
+	id 1wXst3-0000rg-5N; Thu, 11 Jun 2026 23:48:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wXsr6-0000gC-Ko
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 23:46:52 -0400
-Received: from fout-a2-smtp.messagingengine.com ([103.168.172.145])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wXsr4-0006hR-Lb
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 23:46:52 -0400
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfout.phl.internal (Postfix) with ESMTP id 69318EC009F;
- Thu, 11 Jun 2026 23:46:49 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-05.internal (MEProxy); Thu, 11 Jun 2026 23:46:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:date:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:subject:subject:to:to; s=fm1;
- t=1781236009; x=1781322409; bh=HEqlBnYTkDW/LI7YowjBMHTHP0HA/ClY
- OTUYs8yyr/o=; b=nMrOkvUN5BR3wIOZ91lTIagxCLQpSKh5+AEQnk8GCRDQKvaj
- n7pkOwWt27cy4MAXxh416JoGrJcatCcxdKIPT3diiNbz2taQWRi/NcKtwD0H9ze2
- 6gxKXkBCwjSMCeoxuLqnL2jIo/cA3U6rYdgJWL99RcpjRGdsFLq/0dizih0tZ+OG
- M1dGYVmrpGQKcmjyzdTtr355ihmdvv0QZ9UykuUhLjkFRoSXJhVT2VePYzH56fEW
- mZ+0V71nmltCtqHT5JtBEQ2dwfKTrlKAlKizxxYNeXB0Why2rFKnqQf65qFW/AbV
- XO6HsEpG2FJ3hMoAyWRu0r6OxMPghsT/8XLM/Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1781236009; x=
- 1781322409; bh=HEqlBnYTkDW/LI7YowjBMHTHP0HA/ClYOTUYs8yyr/o=; b=V
- bZqZQu41u8b/NBmWtI2eEvnakL00dPVahLtUZZVj925N17JWofcUrig/u2logCys
- EMPUCssHB2UN4yTZIKCjQ7hSVaHFsUBddhrWC/zDQawepMxk+cNQf1/fmSzAFrY4
- 0fIIGZsU4kCclculMSng5t5edNfM9LtdPOOcNLW4H+zDl5goyM/yZSu0+FI0z+S3
- FhofLMvyTqwkit4ShPaGDbPihRbUhGeMbOSWft3HbZ4aIJwKRMb4GJFLjHesW8s6
- 4nieHXCcz1mXqCscC6nn84rplVu9KrjwT+MNr4J4YEN7EM2fkweYOHDnOTWSUfcI
- WV3TSkAOceuU1fEUO8t9g==
-X-ME-Sender: <xms:KYEratFKZ8eKkWDWw-5ljlIl2iqZUW3qDNQuvZnXGaTVqKD6PR3obA>
- <xme:KYErasW-x1_6-koKInPOormmqJcanSRRZXrfZ765ZjwIBoyQhR7jNJgBwcwy6PYa-
- TBQzS1Vv0eF4zLynOaZRNZLeOwYt4I4BSe-5-Dg_XNclLul-A6qmdXX>
-X-ME-Received: <xmr:KYEralzGSxlKoYwZ0mWKi349rX60KZBq4UooZNZXBvItautSUK_o5SQtn4N8WNT4uw>
-X-ME-Proxy-Cause: dmFkZTFV6zeuoqtYn4VoV+A5gbkj0SWZccP19Cc1eAMUceQKHZ1Z+963/DLPpMAZcWCUCj
- HTNuOqrZGJQwTJiG9LWqgvH7pmhVFZkvqVCvXwdhSrVIFWiWY3LC9hKq8JKMOrGKmzxvkT
- Un1Y76/n92SgQWo1K/LbgQzxN82I2UY1IAi+fJOnPWSH0escjpdUud1L3SHVpxmr20tGQX
- 47xGKoO2ya0g3TSrT8sdlBdWHe0TyiWhMIE7VbU7daglxPRQXc92IaWz00DTUBgC8XAnb5
- f8zJJ34aBrBbUfd3sjn0dtxqTzbU0aF8ToiGBYJC51OGCtxz5IDK6tndz990Wqmmfu9lTE
- C2QmN86/2B62qW465HgDsMteZ2oQ8Yf9fCBLXopp78/TUDgT2A/3WCtvYA1M1AfYGgdszl
- phP3veqwojxyWSXtTtry0O/Y6MB/6wHdJRrWYSmAXh82jqJ5rJ1kxlYWV5Ur7Yn6NdutRW
- yjqCeW3HmnlK/Bz7Kjgllw4JJtTfqtnzZMZxLVXHvbGhJ25qzQ6rCu24hFwVlPzt8Q5Rga
- XJkVF49B0PrenQxGzx3H6kbI2gsWfFxSq64sACU8gxMrfoI9U2ayMT7mxVblNAm+npe4Pt
- lAbzppPnfaOeKAIjZyTbkELjYi0ZxX3pwnnldKL9D3wc2qNOJ8aJmZk8Ci/A
-X-ME-Proxy: <xmx:KYErahQbAl84XmpH7DGWb0RWuSMD3E4pVGABiKzbD6uQbYMQB2FHYQ>
- <xmx:KYErahjQbCn2SGoQUUtlrACNgyTNnG-_Kk-Zu1BujRzscVzoqx2-nQ>
- <xmx:KYEraokKHj8W01TimW_RHu1VF44HKcOeN0zBH71NqdetWCCmlrJ1rg>
- <xmx:KYEraktnq-iCGpu_yhbW7mauQ0F4vHwQKPvum-T5h9szedw_oTJoJQ>
- <xmx:KYErapKFeBdKSUELe5AtDy8ZUVlBl9WKL9YDBfM4go7ZX1LNeliu04gr>
-Feedback-ID: ifd214418:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 11 Jun 2026 23:46:45 -0400 (EDT)
-Message-ID: <c5e243ee-2da1-4b82-8248-d69d7525227a@alistair23.me>
-Date: Fri, 12 Jun 2026 13:46:42 +1000
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wXst0-0000rM-Ob
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 23:48:50 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wXssy-0007U0-37
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 23:48:49 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-68bd9fce347so951041a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 20:48:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781236126; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Sw5QmcQ3vC8FiEGr37tGCctwglRmfuBwPGS7ZVqvqVCCvOl2xZEaS0GB/SnlqmAkDN
+ 5d89JZdfvPe8T7M0DmIJUxvYyAB1TF2Xq5Urr4ZifVDNyCtql61IgCen/sv9xYTNz84+
+ jGx8vAPWl/B8ynb+emwjQNAJUDZX563Ybduhgso8e0XUuaAgVregTpBY8gE7Y+PLRgWb
+ YCe89iHOgIVI6s0LiSptFoJpXlaD5VPln0ERYVpJe7LXqVy2RRrPpHzY41pVrnFI4WJ+
+ X10hwzDrQDYbNgvGbfLOy02MILdKyioPNTQ7XEi6t6FfVcjf5qPs0NmvsuxgGWf5Nlh+
+ rceQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=asLThhv5rJ9q+kTKdzC8tDXN+Ex3qgtD7namDBKaYUA=;
+ fh=JsT5ZyLvcRgredCq3gDydk+aSEQmqPn1/UV6Sx0D2Go=;
+ b=FtgBKveBtJTM16uACGDfOimL9e3xjxoMxSr8ovtOgoEjaYDSQvjQGPljItnnltiAvV
+ K4+VSS9qiBM369/baCGwvSVBQ9FueimeR4W/BowhTeCyEINWOY448eLGVqGariUnvngz
+ 9hMFXtzQ3dWP2cp91PGqtKkx2LEl4kcUJ3Jy2Fo5gSQSqFdZEfGnKMtBbvBgUtUdrlRI
+ HKbSkaEXi+UVbSyTHiXmKnq536VbA2LCwlJNX7dDOQy331CVg20b9qy6VkwmvISq791Q
+ TJ1D64Fl9cjNVKF8uIoT4RboiQovQsV4myjJJWBGc4fMkiddUTHgx/ZiJj/Ig0sV/kcp
+ iLVw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1781236126; x=1781840926; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=asLThhv5rJ9q+kTKdzC8tDXN+Ex3qgtD7namDBKaYUA=;
+ b=d5EF14/prLStaDn9A/YSYjAGtpvNHBKGPFOtdZ7HILwN+VTLhEm4l3ANt/4rUhPFoU
+ UgkKz3gWcBqVgBDW9RBvNozr0yNSu4N/5BOh2CSe4P/WCu0LyBYhn5iasDQxEO803sna
+ tKNaqukNVB31z4N/TkTFs79iSn+3q8g1epdGRvalmqwXpYRTXcLmk2CuVCmz7cnaiMnV
+ usfyNEArFNq7tk4oiz0vpDErisoQJiVmmsIXQ209+ottxmqrt+xJuFbIzgNGWP418mf1
+ fzxNxRf1RMUdioFV5zI8Tdm/rKAusQEzN+peKyUYSdiwqL9BLy+sujvpdP5yPPI3NXaN
+ 3m7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781236126; x=1781840926;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=asLThhv5rJ9q+kTKdzC8tDXN+Ex3qgtD7namDBKaYUA=;
+ b=oGV28tFIyFddi16GQQ04a+qe/3Faq+Ndp2a916bpLxaQdHyFSj8+nFUoDdShRHwjRy
+ sXTX5+Gl+Q2mNET9Z8ykyYZGvd23Nnu+Pzn96YrEWQRSWzv4B8BFrUSsuOfgxnoDUfS1
+ naEqEoBeKw8m1AL65RlSs4kfsSrk21V4AB8Mt0kJiRmoS6Uxuar2JwPm6v9fhErNQ8Cy
+ 8LjleNoV0vC02bOFlYykzb9MJWQ1rfNxyLjxC7HyNvCkDbREfjvWeIElQ7oxFr2zmyhm
+ LEG/q11v+bf6D6aiSwZmAYlaC5Niri+KwecD696eilxD2OCI2SnNsoG3AaqmH6MHFQJE
+ nxOg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/yvDfhYO32fbZyVXy+U0FamgY1pWRUuwL/RrEnhcQLyeuKIlbwT4OyRGJxFZzyIJXwTKEC5AOxTKKE@nongnu.org
+X-Gm-Message-State: AOJu0Yy+osBM9Dt8n5ZpbA9B2OD2io9MRVTDbuZeYYnVsCkuhzclP3gt
+ +Yjsef+8kIdwB/qGInDHCF9uTpzT6AbR0o7HaN92M2Ux3pHsT9tFC42j+pM8ZXc64U6JSI3Nrat
+ 4rSdOPHG1q/d1IrVi5P9HgZoDdTp4Poo=
+X-Gm-Gg: Acq92OEkEC3aYuT++EHSzeJsBbR/KRUso1IeGxBsMMj9vbZzTA0S/lB/BgQTIod/Q8Q
+ N9UBS31jgZlgWZiDmi2fhgClam3V3oUPrhLr6DinfEkmlfq/slC3gULbuaM3vuGlsFW+YdhvuE8
+ 9TvFt69AF6/S++m/ICAsISzPsT+M2olteMRD+IHjndhrfZHTNIJ/rzYIBHYganQEg28q1l6IrGj
+ dolPSgxC6mT0aHuDIO59QJ8Lxqc5/L8ew1msc8EsxcJj7HaCPN0rX/JdiCDv9pRu4EeYsbp7mmt
+ gpG0BBaWgRQzWlZo8WmRDYBt1x9scE1+gL6zjs80ZbTnx4lz
+X-Received: by 2002:a05:6402:e0e:b0:693:ee1:9018 with SMTP id
+ 4fb4d7f45d1cf-693781919d3mr352681a12.28.1781236125468; Thu, 11 Jun 2026
+ 20:48:45 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Regular QEMU RISC-V Call
-To: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, qemu-riscv@nongnu.org, max.chou@sifive.com,
- mikey@neuling.org
-References: <6315a319-19d9-4533-83ed-eaba9c0b29d5@app.fastmail.com>
- <CANs6eM=nBQO-dpY6ib0qdfihJUPcYmM3xAhkqV6_6d_jsX5K9Q@mail.gmail.com>
-Content-Language: en-AU
-From: Alistair Francis <alistair@alistair23.me>
-In-Reply-To: <CANs6eM=nBQO-dpY6ib0qdfihJUPcYmM3xAhkqV6_6d_jsX5K9Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=103.168.172.145;
- envelope-from=alistair@alistair23.me; helo=fout-a2-smtp.messagingengine.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20260606145520.34152-1-imaginos32@gmail.com>
+In-Reply-To: <20260606145520.34152-1-imaginos32@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 12 Jun 2026 13:48:17 +1000
+X-Gm-Features: AVVi8CenocUhIQTh6e52GkloSrLBnOJyI5wJ-e8xWZFRwPQG_3Yf9HftiKRWLL8
+Message-ID: <CAKmqyKPYAYP-npmDr1E3-+sqKU7aBSm+a=YuwUG=_Vr=9Z7Yvg@mail.gmail.com>
+Subject: Re: [PATCH] disas/riscv: enable `mnret` disassembly
+To: imaginos <imaginos32@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x534.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,28 +121,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/6/26 03:53, Palmer Dabbelt wrote:
-> On Wed, Jun 10, 2026 at 9:23 PM Alistair <alistair@alistair23.me> wrote:
->>
->> Hello everyone,
->>
->> As we discussed last time we should setup a reoccurring meeting for QEMU RISC-V. The current plan is to start next week and then occur once every month.
->>
->> For the time, I'm picking Wednesday the 17th of June at 10AM AEST (UTC+10). Hopefully that works ok for everyone. If it doesn't let me know and we might be able to move it around.
-> 
-> IIUC that's Tuesday 5pm Pacific.  I'm pretty terrible with time zones,
-> so I just made a calendar event and it should be accessible here:
-> https://calendar.google.com/calendar/u/0?cid=Y183NGQxMTNlNjRmZGYyMmU5OGQyMjkwZjMxYzY2MzRiMWY2OTg2YWJlOWVmNDRiYmM2MjQ2YWU3ZTI5NTliYmMxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20
-> 
+On Sun, Jun 7, 2026 at 1:32=E2=80=AFAM imaginos <imaginos32@gmail.com> wrot=
+e:
+>
+> The translator has supported mnret since commit 3157a553ec6b9a
+> ("target/riscv: Add Smrnmi mnret instruction"), but the
+> disassembler still renders it as illegal. Add it unguarded,
+> since the encoding does not overlap any other extension.
+>
+> Signed-off-by: imaginos <imaginos32@gmail.com>
 
-Yeah, that looks right to me.
+Do you mind rebasing this on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next and
+sending a v2
 
 Alistair
 
->>
->> If anyone has anything they want to discuss let me know. I can send an agenda and confirmed meeting time out in a few days.
->>
->> Alistair
->>
-
+> ---
+>  disas/riscv.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index d416a4d6b3..065985992b 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -985,6 +985,7 @@ typedef enum {
+>      rv_op_ssamoswap_d =3D 953,
+>      rv_op_c_sspush =3D 954,
+>      rv_op_c_sspopchk =3D 955,
+> +    rv_op_mnret =3D 956,
+>  } rv_op;
+>
+>  /* register names */
+> @@ -2255,6 +2256,7 @@ const rv_opcode_data rvi_opcode_data[] =3D {
+>        rv_op_sspush, 0 },
+>      { "c.sspopchk", rv_codec_cmop_ss, rv_fmt_rs1, NULL, rv_op_sspopchk,
+>        rv_op_sspopchk, 0 },
+> +    { "mnret", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
+>  };
+>
+>  /* CSR names */
+> @@ -4050,6 +4052,11 @@ static void decode_inst_opcode(rv_decode *dec, rv_=
+isa isa)
+>                      case 64: op =3D rv_op_mret; break;
+>                      }
+>                      break;
+> +                case 1792:
+> +                    switch ((inst >> 15) & 0b1111111111) {
+> +                    case 64: op =3D rv_op_mnret; break;
+> +                    }
+> +                    break;
+>                  case 1952:
+>                      switch ((inst >> 15) & 0b1111111111) {
+>                      case 576: op =3D rv_op_dret; break;
+> --
+> 2.43.0
+>
+>
 
