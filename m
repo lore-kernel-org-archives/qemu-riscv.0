@@ -4,100 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38ABFCD8C9D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jun 2026 03:49:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 591D6CD8CA8
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jun 2026 03:54:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXst3-0000rg-5N; Thu, 11 Jun 2026 23:48:53 -0400
+	id 1wXsxa-0001kA-Kt; Thu, 11 Jun 2026 23:53:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wXst0-0000rM-Ob
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 23:48:50 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ id 1wXsxY-0001jl-Pl
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 23:53:32 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wXssy-0007U0-37
- for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 23:48:49 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-68bd9fce347so951041a12.2
- for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 20:48:47 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781236126; cv=none;
+ id 1wXsxX-0001Dt-5G
+ for qemu-riscv@nongnu.org; Thu, 11 Jun 2026 23:53:32 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-687ed9aabb3so984577a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 20:53:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781236409; cv=none;
  d=google.com; s=arc-20240605;
- b=Sw5QmcQ3vC8FiEGr37tGCctwglRmfuBwPGS7ZVqvqVCCvOl2xZEaS0GB/SnlqmAkDN
- 5d89JZdfvPe8T7M0DmIJUxvYyAB1TF2Xq5Urr4ZifVDNyCtql61IgCen/sv9xYTNz84+
- jGx8vAPWl/B8ynb+emwjQNAJUDZX563Ybduhgso8e0XUuaAgVregTpBY8gE7Y+PLRgWb
- YCe89iHOgIVI6s0LiSptFoJpXlaD5VPln0ERYVpJe7LXqVy2RRrPpHzY41pVrnFI4WJ+
- X10hwzDrQDYbNgvGbfLOy02MILdKyioPNTQ7XEi6t6FfVcjf5qPs0NmvsuxgGWf5Nlh+
- rceQ==
+ b=IyHs0E9fSU56VbkKevB+uSJFS0ii3s0E4h5oqUGBmdh7dy0LKgPy1lOc2GAEYbFLPE
+ mkJjbLEESgBHDpH+cqY7LQrpb9PHkyxC3SoFqDZL/5KO9Hh+DR+k7E1FC5nExwoaVNnD
+ +4Uj4FQ1ZEl9v8OX1dunywDieMoknM63HFbpui3Y6jTZuO+8+iesRYxqmHQoEch/FeN/
+ G7IsRV7m1ARr5oX4UxYCMXAErsPQVTfE3nn8oTSeGrROfHTZv3U+PKz+LZu4b4r8Qnh7
+ eha+75xrvmGjqI4CJWhvca6n1HP2Op2oWnmdINEhKOwZAhYhTwK4iOKnk7RRsILEvYDa
+ 81CQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=asLThhv5rJ9q+kTKdzC8tDXN+Ex3qgtD7namDBKaYUA=;
- fh=JsT5ZyLvcRgredCq3gDydk+aSEQmqPn1/UV6Sx0D2Go=;
- b=FtgBKveBtJTM16uACGDfOimL9e3xjxoMxSr8ovtOgoEjaYDSQvjQGPljItnnltiAvV
- K4+VSS9qiBM369/baCGwvSVBQ9FueimeR4W/BowhTeCyEINWOY448eLGVqGariUnvngz
- 9hMFXtzQ3dWP2cp91PGqtKkx2LEl4kcUJ3Jy2Fo5gSQSqFdZEfGnKMtBbvBgUtUdrlRI
- HKbSkaEXi+UVbSyTHiXmKnq536VbA2LCwlJNX7dDOQy331CVg20b9qy6VkwmvISq791Q
- TJ1D64Fl9cjNVKF8uIoT4RboiQovQsV4myjJJWBGc4fMkiddUTHgx/ZiJj/Ig0sV/kcp
- iLVw==; darn=nongnu.org
+ bh=NT0jiI1LL8LpL+XLatjRNUWIc5cedH8v9+dfJaedNU4=;
+ fh=gr/Nq/1QlrHRArvT4rvqmtMtLfFTjiii0QWfuc+bJi0=;
+ b=Y5G+U+N0FT6Wo1C5XAAHu5JEsrCVmDWpa7EWi1ZcTRzFAFpSnqphAsxY1DeyLxdfzX
+ P8efRYo1FxhZ2N3h4iaGZJfvk0PIf2uGRP8QoOYTxxXTSW4vWSCfEUyjlIYOZlU3VW9P
+ pGX/L4V75Cq5hXrdz9qyQCzQUuQZbOI3BKVUnM1TI3aGibcqTpkZfOxOVOaTvQkBLZsi
+ sd/Jan2Q2sVJAXqFBCIebJ8DIU/CnHaoOVXlz/aVMACBmaHiJgMrI7WUwb712ccghiKB
+ OpJoc0ygSXUdwN3xvyidmhE7wqpQ4BtCargp+IQ2UgFIWKZDKgzh96y6bnZ0AhOHGdwO
+ oKlw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781236126; x=1781840926; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1781236409; x=1781841209; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=asLThhv5rJ9q+kTKdzC8tDXN+Ex3qgtD7namDBKaYUA=;
- b=d5EF14/prLStaDn9A/YSYjAGtpvNHBKGPFOtdZ7HILwN+VTLhEm4l3ANt/4rUhPFoU
- UgkKz3gWcBqVgBDW9RBvNozr0yNSu4N/5BOh2CSe4P/WCu0LyBYhn5iasDQxEO803sna
- tKNaqukNVB31z4N/TkTFs79iSn+3q8g1epdGRvalmqwXpYRTXcLmk2CuVCmz7cnaiMnV
- usfyNEArFNq7tk4oiz0vpDErisoQJiVmmsIXQ209+ottxmqrt+xJuFbIzgNGWP418mf1
- fzxNxRf1RMUdioFV5zI8Tdm/rKAusQEzN+peKyUYSdiwqL9BLy+sujvpdP5yPPI3NXaN
- 3m7Q==
+ bh=NT0jiI1LL8LpL+XLatjRNUWIc5cedH8v9+dfJaedNU4=;
+ b=AlTdkQrvqI4VpNsqFnUKPzYI98jWhEtzAGSi0KiSePcY6rfQc0i8NnuE8nbBx+aXT/
+ M79x4EIxo/pQp9ztwpS/g5wvGvYsUhPrctGff9/gvENVmBDrrdR1Je5kYuN4G5iOd2wa
+ QaMtDPmqyU7jtJKGJnWb+8/f5UNXCEb+xWFxl12DBu7YrngKhH5ZZflL7karu3Yxtx7O
+ MD8h4s0Zakdzs/xBKNMNwAlIa1m9MUoS+ix61YM+f9GBnXMyk/jE6bpz5oKh0AoCbyXJ
+ AxvKc7X6ZtenU2+6DfKlAfGzalLrSR6Qs/NfFN02Zz+exxNf6iIFfB0sGqRlGiJPTjmM
+ BW9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781236126; x=1781840926;
+ d=1e100.net; s=20251104; t=1781236409; x=1781841209;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=asLThhv5rJ9q+kTKdzC8tDXN+Ex3qgtD7namDBKaYUA=;
- b=oGV28tFIyFddi16GQQ04a+qe/3Faq+Ndp2a916bpLxaQdHyFSj8+nFUoDdShRHwjRy
- sXTX5+Gl+Q2mNET9Z8ykyYZGvd23Nnu+Pzn96YrEWQRSWzv4B8BFrUSsuOfgxnoDUfS1
- naEqEoBeKw8m1AL65RlSs4kfsSrk21V4AB8Mt0kJiRmoS6Uxuar2JwPm6v9fhErNQ8Cy
- 8LjleNoV0vC02bOFlYykzb9MJWQ1rfNxyLjxC7HyNvCkDbREfjvWeIElQ7oxFr2zmyhm
- LEG/q11v+bf6D6aiSwZmAYlaC5Niri+KwecD696eilxD2OCI2SnNsoG3AaqmH6MHFQJE
- nxOg==
+ bh=NT0jiI1LL8LpL+XLatjRNUWIc5cedH8v9+dfJaedNU4=;
+ b=T3G+W+IteAI+QDSzJA1TCb/iewJTFEJ1y+c53Cp+9u/wptDQU1uEDMnV6oL3zUidYG
+ Bv1EbEs86uvdlPkrsu1tu42tLZBGMJjnqQD+HolCkxxv3wxeRd4uvhKdbbg/a3RE50aG
+ HyzXivcYwIR+VfW7g85FauSLXUU+ECw372WLBJJTy4sK7dpx+7nRYGGeujTE+TTMkRcp
+ +2TLm2aG8VQO957BwmPZ8xupc9l1EMLHWPIzutxZQKcw3G94pf1BFPlPx7Dvlqvrlz3b
+ fW9zXhBdbWQ33ZvTepn7HLGTYeq/QUJ09EtkZPHAJxaiIFVJzks3RNQLWVw8H6//S05f
+ FRHA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/yvDfhYO32fbZyVXy+U0FamgY1pWRUuwL/RrEnhcQLyeuKIlbwT4OyRGJxFZzyIJXwTKEC5AOxTKKE@nongnu.org
-X-Gm-Message-State: AOJu0Yy+osBM9Dt8n5ZpbA9B2OD2io9MRVTDbuZeYYnVsCkuhzclP3gt
- +Yjsef+8kIdwB/qGInDHCF9uTpzT6AbR0o7HaN92M2Ux3pHsT9tFC42j+pM8ZXc64U6JSI3Nrat
- 4rSdOPHG1q/d1IrVi5P9HgZoDdTp4Poo=
-X-Gm-Gg: Acq92OEkEC3aYuT++EHSzeJsBbR/KRUso1IeGxBsMMj9vbZzTA0S/lB/BgQTIod/Q8Q
- N9UBS31jgZlgWZiDmi2fhgClam3V3oUPrhLr6DinfEkmlfq/slC3gULbuaM3vuGlsFW+YdhvuE8
- 9TvFt69AF6/S++m/ICAsISzPsT+M2olteMRD+IHjndhrfZHTNIJ/rzYIBHYganQEg28q1l6IrGj
- dolPSgxC6mT0aHuDIO59QJ8Lxqc5/L8ew1msc8EsxcJj7HaCPN0rX/JdiCDv9pRu4EeYsbp7mmt
- gpG0BBaWgRQzWlZo8WmRDYBt1x9scE1+gL6zjs80ZbTnx4lz
-X-Received: by 2002:a05:6402:e0e:b0:693:ee1:9018 with SMTP id
- 4fb4d7f45d1cf-693781919d3mr352681a12.28.1781236125468; Thu, 11 Jun 2026
- 20:48:45 -0700 (PDT)
+ AFNElJ+CmtNifepxUk+AiriJKfFM3ojEH4CJw68Z2Zg2uQ9Ac3lrH006yWCsLKBNSlhIdn5uMpD0dv4t/i2/@nongnu.org
+X-Gm-Message-State: AOJu0YyfOCXlAj75LLhQsh30ciWWyCJhcoHDr2waZdHqy/aUet9zvwFd
+ OfQ6lMRfAbbQHiAcLgEmv7/tQ+uBvqi/RfaOJJVB40rTaMCx3Y9gxe7FfLMPo/3EdvR1pnmIN9x
+ Pq8iCc+XSZgVtcabZAYVBS+j4QM+n5ag=
+X-Gm-Gg: Acq92OEFSXGwgf4guSKO843FF0b+M86oMrtof2LK+PrnLArNJCXE7+kDL7vwZ6bYtf3
+ kb3bf7Q295c9gNyabVolZgKC8JTgmnmW5wkX+fiFD7IO1Eo/aXRquTBx+Ns/MmJcShBcq0WoU4r
+ R8qA8xX2OcgoKCNWX8FadiAX2lhKBonxwqeiAZAUGBaciuuOYp073MktNZye4RPDGFPoDI7ZuqV
+ d6YgIvNuT8ECHyugHIhUBwEx8bKr6UsNRlgKUH+T2cVo6iX2A10DxBYY2ZIBZQuyUKajbshIrIx
+ 3y/ri+IL/uzYYnddzy2/NzpjyvSNSrvrwPhQdA==
+X-Received: by 2002:a05:6402:2349:b0:68f:cc95:ba5b with SMTP id
+ 4fb4d7f45d1cf-69378a9515cmr357891a12.27.1781236408994; Thu, 11 Jun 2026
+ 20:53:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260606145520.34152-1-imaginos32@gmail.com>
-In-Reply-To: <20260606145520.34152-1-imaginos32@gmail.com>
+References: <20260608210642.464131-1-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260608210642.464131-1-daniel.barboza@oss.qualcomm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 12 Jun 2026 13:48:17 +1000
-X-Gm-Features: AVVi8CenocUhIQTh6e52GkloSrLBnOJyI5wJ-e8xWZFRwPQG_3Yf9HftiKRWLL8
-Message-ID: <CAKmqyKPYAYP-npmDr1E3-+sqKU7aBSm+a=YuwUG=_Vr=9Z7Yvg@mail.gmail.com>
-Subject: Re: [PATCH] disas/riscv: enable `mnret` disassembly
-To: imaginos <imaginos32@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Date: Fri, 12 Jun 2026 13:53:02 +1000
+X-Gm-Features: AVVi8Cd3PdcYY4Lv5bkQDoI3Ozt8d_lSUNo6Kfo3lDflORknv8xJMjd4iF-jCPg
+Message-ID: <CAKmqyKPCRKMnrUyWEZerHF30Gwvdo7nds1LvFUiK=JoW27CSew@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv/virt.c: fix 'iommu-map' FDT entry
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x534.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -121,59 +120,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, Jun 7, 2026 at 1:32=E2=80=AFAM imaginos <imaginos32@gmail.com> wrot=
-e:
+On Tue, Jun 9, 2026 at 7:08=E2=80=AFAM Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
 >
-> The translator has supported mnret since commit 3157a553ec6b9a
-> ("target/riscv: Add Smrnmi mnret instruction"), but the
-> disassembler still renders it as illegal. Add it unguarded,
-> since the encoding does not overlap any other extension.
+> Based on the DT documentation of 'iommu-map':
 >
-> Signed-off-by: imaginos <imaginos32@gmail.com>
+> https://www.kernel.org/doc/Documentation/devicetree/bindings/pci/pci-iomm=
+u.txt
+>
+> - iommu-map: Maps a Requester ID to an IOMMU and associated IOMMU specifi=
+er
+>   data.
+>
+>   The property is an arbitrary number of tuples of
+>   (rid-base,iommu,iommu-base,length).
+>
+> ----------
+>
+> We're adding a no-op entry (length =3D 0) in iommu-map:
+>
+>          qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
+>                                 0, iommu_sys_phandle, 0, 0, 0,
+>                                 iommu_sys_phandle, 0, 0xffff);
+>
+> This is easily seen in the generated DT:
+>
+> iommu-map =3D <0x00 0x8000 0x00 0x00 0x00 0x8000 0x00 0xffff>;
+>
+> The tuple (0 0 0x8000 0) does nothing since it has length =3D 0.  The
+> information we want to advertise is in the second tuple only.  Thus
+> remove the empty tuple.
+>
+> While we're at it, seems like we've mistaken the API and we're using
+> 0xffff as 'last address', but in fact it is length.  This means that
+> we're telling the DT we're mapping 0x0 -> 0xfffe, which wasn't our
+> intention.  Therefore change size to '0x10000' to reflect the address
+> mapping we want (0x0 -> 0xffff).
+>
+> Found while reviewing the RISC-V Server Platform DT generation, which
+> happens to copy a lot of code from the 'virt' board, and this nit is
+> also present there.
+>
+> Fixes: 2c12de1460 ("hw/riscv/virt: Add IOMMU as platform device if the op=
+tion is set")
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-Do you mind rebasing this on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next and
-sending a v2
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  disas/riscv.c | 7 +++++++
->  1 file changed, 7 insertions(+)
+>  hw/riscv/virt.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index d416a4d6b3..065985992b 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -985,6 +985,7 @@ typedef enum {
->      rv_op_ssamoswap_d =3D 953,
->      rv_op_c_sspush =3D 954,
->      rv_op_c_sspopchk =3D 955,
-> +    rv_op_mnret =3D 956,
->  } rv_op;
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index ce64eaaef7..0c489bb412 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -900,8 +900,7 @@ static void create_fdt_pcie(RISCVVirtState *s,
 >
->  /* register names */
-> @@ -2255,6 +2256,7 @@ const rv_opcode_data rvi_opcode_data[] =3D {
->        rv_op_sspush, 0 },
->      { "c.sspopchk", rv_codec_cmop_ss, rv_fmt_rs1, NULL, rv_op_sspopchk,
->        rv_op_sspopchk, 0 },
-> +    { "mnret", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
->  };
+>      if (virt_is_iommu_sys_enabled(s)) {
+>          qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
+> -                               0, iommu_sys_phandle, 0, 0, 0,
+> -                               iommu_sys_phandle, 0, 0xffff);
+> +                               0, iommu_sys_phandle, 0, 0x10000);
+>      }
 >
->  /* CSR names */
-> @@ -4050,6 +4052,11 @@ static void decode_inst_opcode(rv_decode *dec, rv_=
-isa isa)
->                      case 64: op =3D rv_op_mret; break;
->                      }
->                      break;
-> +                case 1792:
-> +                    switch ((inst >> 15) & 0b1111111111) {
-> +                    case 64: op =3D rv_op_mnret; break;
-> +                    }
-> +                    break;
->                  case 1952:
->                      switch ((inst >> 15) & 0b1111111111) {
->                      case 576: op =3D rv_op_dret; break;
+>      create_pcie_irq_map(s, ms->fdt, name, irq_pcie_phandle);
 > --
 > 2.43.0
 >
