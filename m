@@ -4,101 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C593ECD98CC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jun 2026 05:36:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA589CD98CE
+	for <qemu-riscv@archiver.kernel.org>; Fri, 12 Jun 2026 07:29:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wXuZ3-0008EO-Eo; Fri, 12 Jun 2026 01:36:21 -0400
+	id 1wXwKS-0007Fi-I3; Fri, 12 Jun 2026 03:29:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wXuZ1-0008De-3Q
- for qemu-riscv@nongnu.org; Fri, 12 Jun 2026 01:36:19 -0400
-Received: from mail-dy1-x1342.google.com ([2607:f8b0:4864:20::1342])
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1wXwKP-0007CM-9Z
+ for qemu-riscv@nongnu.org; Fri, 12 Jun 2026 03:29:22 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wXuYy-0001sL-Ds
- for qemu-riscv@nongnu.org; Fri, 12 Jun 2026 01:36:18 -0400
-Received: by mail-dy1-x1342.google.com with SMTP id
- 5a478bee46e88-304cf518c9dso1023118eec.1
- for <qemu-riscv@nongnu.org>; Thu, 11 Jun 2026 22:36:15 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1wXwKN-0001Yh-Fw
+ for qemu-riscv@nongnu.org; Fri, 12 Jun 2026 03:29:20 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-68c3421b009so2678102a12.1
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jun 2026 00:29:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781242574; x=1781847374; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=1lksxLlJXxD4Ja1JGJLQOQpQFhJ/myfx88cj4NaMbUM=;
- b=bO8I0IjYl0/FXfTnjR5GBeE5R8MtX8mjiLBRTldMvCvJPlKqk0PI7jgBTfaxEKzusv
- hKuty0ddcrKp8PjrdwdmJ2dhWC/V09XuZ7dvH+qau7SEYT6RAdgb3SX4Ku4AhRFRcv1y
- FeJWwuZGaSj1sB0c6Ioxg/lvhbiN4xSMrU5dawUuZJ61RjKXwXoGKHb2QqouV7ub8gYY
- ewMT3R4Kt0i0T3VVUZITuh43ZbPmJAWulBxCWUqzVcgfVxXs+RBXzp5U5MkprrvX26Fz
- dQ7uy2DRz6rgnHAj78qw8j9wn0oFmOfUpa+4ZJ7jmMEZg0DijR4qU1RtS+3P4Br+e4z9
- kPHA==
+ d=sifive.com; s=google; t=1781249357; x=1781854157; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=JbubdKVEEeVDhmtZ20UfxUpGZTQuBLzZdBV6ViDmMUY=;
+ b=JG/BD62iIxdTcn7fykbFVqx8ftJtyxJkwgq2QtYn/l3kzpdSo0JpHC1KsBd/EDc/Lx
+ 5v33H9YCwRCD9QFADjsHyo/A92bcGIpT1Lwm8Dltu5o64xLa0LakgsGZBFNfLlMLUBri
+ qaB97+eBW3xBB9aCH/Xr3qBgGB3SLO5FIXeD7kvOgZw48dhP329jfLoSfWxMNPCIOMjl
+ b3Yg00k1WHRN5DWapZ/6RTZDL4Csz6DhKJc9tCI+YtRJH+HP19dWAYIQYuTtkEmjY3FC
+ 6TT8wqaY7JZJTdhm/O72Do1Kr2cDat+1CTsrZqJApGjMcZyWbwEhtvkfgaTV8abVM3YW
+ s3sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781242574; x=1781847374;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1lksxLlJXxD4Ja1JGJLQOQpQFhJ/myfx88cj4NaMbUM=;
- b=pIeMoTkiN87XDwY2Najk38Jy2ks06F/mF06+R8C01mt0vyajjFzX7R+RrVbFojdJOw
- ZWlHLYrsIKB6hjYQ2Ic3UBblWW8m8B1KXBuLKm3uhZD8gBVkVUNM3NcL8orj34SE+cAD
- IyPUUr5Vsb1QJrKSZ0CpMgcRI0XxjGyf7t0h2FFpuAlR8Lh75z04ShLlAOh8c5PgE14D
- /RlPcCVPznfhSJSQ6tnnZ8jhV3Y9mCWjUShbPFKjrc6A5fhh0VWwQkV95sWi+cnwscfu
- KnnKSTQkhcGhK9ycS7kcs9by/u1tQJVh71zEYYzv8aa6Nbhs5qzD7TfWUtHr0w/lwEaL
- Mxtw==
+ d=1e100.net; s=20251104; t=1781249357; x=1781854157;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JbubdKVEEeVDhmtZ20UfxUpGZTQuBLzZdBV6ViDmMUY=;
+ b=Ks9Kv7CKoi8ovXDQSiWc+wpFqp+vIKU0ilGweyuA1Ro8Ry0eNK7W4CfFk01wRZQZr0
+ 4NFAljeG45qFQ4u9P78fxjDTMYB+BaZXKIetXv+thBnexTjGcEhJ9SWVoe6jrmv1//eT
+ La2AmS0LUw1JJgM/fqD0QPXZDdZT4seBs1uumYYR6iA4KCOh5f0UQqad4le3HV7ZZCch
+ ppRKZf7FGpz4ypgHG16SbpP4mDJived5/HRWYULO3Vbthofkw4X+6uLnQllj4yMPUlzS
+ tP1n9aAjdvfH1HFLtXGGwCYDL9Prl1scwj9yhT36SGGi5Pg9VPUsvnjBpWZEIJrbdHU8
+ XvAQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9G9I0SU6268+IwfqKNcaat930rChf0lFNwbIDfWB2XrOJXcyGbJpK0CLOZycCOyt0azVuzjPc2Rgvd@nongnu.org
-X-Gm-Message-State: AOJu0YwW6UlfddPuu5WXKP/HlkvkSvQphAAJ6Ao7Dv0GY9yJ1mIddWbf
- dtXW14waevBH7LQps2ktFn5hgGMhbSnazL9rblMutk2gdo8o+fmfzZYz
-X-Gm-Gg: Acq92OHFiZ34XVWWR3m0gFBP5PHewJGpciDN7ZuVi0IYo5mitE4Nsz2SfhdYrK0neg0
- m7JtVzty1GVjaOb1kUOakz9ozlwbcNG0zH3fgLoOpiatbTok3wC1pW8QxrxuPWTPaDxsgNgZvj+
- FaIOCSpAvZsb1C4O257cfMsotpfavRXN3IGRupaEjgzPRbvNnspFmMkbnb/4M1fjN/I2JR7JGWD
- cMoRcv+MrKlqWz/OCBuSmzQyFUnGoN52+T9fqUz9B1TuT5F+0xCbfLHy+PG5cHuLjVnCjODJUsF
- qly8Dtl1gdReC5c8dvXr9dKTczq4avBBRsHw17Q6SUUmVO+SZAoN1hA1MPPwKqPPKdJ9+LzjNMb
- t0vxF9PcyTQK3nO9Bmp86VgmvU2pZMbuLk3RkFLwJgzBxTNLMqUV6VSD3SDcQL89RWnINB9pJQ+
- 3WSe3qtpoZkeYal5kTdjxPYwxcWQZzGjM/F8JSA/gruBnQsZM+ss33JHleQb8=
-X-Received: by 2002:a05:7300:8cab:b0:304:ab8:f87c with SMTP id
- 5a478bee46e88-3081ff7c07fmr856959eec.12.1781242574334; 
- Thu, 11 Jun 2026 22:36:14 -0700 (PDT)
-Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3081ddaf69asm2086363eec.0.2026.06.11.22.36.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 22:36:13 -0700 (PDT)
-Date: Fri, 12 Jun 2026 13:36:11 +0800
-From: Chao Liu <chao.liu.zevorn@gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Christoph Muellner <christoph.muellner@vrull.eu>,
- Fabiano Rosas <farosas@suse.de>, 
- Laurent Vivier <lvivier@redhat.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- Chao Liu <chao.liu@zevorn.cn>, Mig Yang <temashking@foxmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: Re: [PATCH v7 4/5] tests/qtest: add test for K230 watchdog
-Message-ID: <aiuYsOG0QFkMc4eO@ChaodeMacBook-Pro.local>
-References: <cover.1778516731.git.chao.liu.zevorn@gmail.com>
- <69be8c8a8b47f4b6283a4a89850fff8cde300137.1778516731.git.chao.liu.zevorn@gmail.com>
- <CAKmqyKOF8KpDTtmtHpJvQ-uu6trSQZ3=NNs-R3AkW3RUMLP98g@mail.gmail.com>
+ AFNElJ9IMkNC6D3uKpN/WwNchjqJDoNk2Ajlt2zMpxJsXm9oUrTbCl4/GkKafian3N0KOSy4KFppf+WpIlNP@nongnu.org
+X-Gm-Message-State: AOJu0Yzx1OBxEs1A8bQAmcwGjs8XKtx8Uu/Ri90JGSOVqKU8UwJV2Me9
+ LUMFQuGvbXEWB5lTpwgAwJvIeQBGTENMIToe7EnVqOwhTMK3ZUGgVN+EEMbCO/z3Vhs/nQiVCpK
+ AzdT4P7W1raRuljZL5qscfz9RjcM4MQC8DNl6W0uwPxeGOSsmfiS1ND+2gMKVZv6OHn3i+XAx3X
+ f+VSquijV29oLHtQgaYZB/dvtyCD9+T/OAv29xDCQT+YQ=
+X-Gm-Gg: Acq92OEwNnTesgdb28g3KYlkmyLRV6G+4trGVKtyn8/URh+cbB6P1vtQntKK86gC8YU
+ obRT4n4LOyUS85Ql6hSh50+UcbDA4Okom/ZDOUcBMSRiD2buhnfWGriWubfYZhyhAhXsorXX/Og
+ D/bbS5btX+ATzjq0ICcFw2VE+xD7iBKkuJfAXoa2GA7PHvH0FRL8ebywQVHZN+vwSDQjRqQgMqv
+ v3DusX53HISJI+2/Q1AzfRE3ET4WGng3UoAOFhGih5nG7IeBwrmRbaHdQKmR+PkCoPb6jM2+ibG
+ 7PU/svu2MMb+2jM2m9HzmdwzVdwTCGVn68FKgyCO8P9C4iRG2i3ZRL6dxEFONuIfptOs9gPF/3N
+ C6T9Fm/mOh0olJTfpCGJIoZuc1Qx3jttQRf4CEG1blDkU7LRM6u/apypGeBCnqmWTUlM0OoXjhB
+ m7YTnnQ9Bx15OML9JOD/aif1SYc3/lCaHtXcRJNUzRsnFw9dRCbr8OZ6tkeGYB
+X-Received: by 2002:a05:6402:34c5:b0:670:d548:62a1 with SMTP id
+ 4fb4d7f45d1cf-69378d96d9emr615227a12.3.1781249357149; 
+ Fri, 12 Jun 2026 00:29:17 -0700 (PDT)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com.
+ [209.85.208.50]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6937919b54asm296482a12.3.2026.06.12.00.29.14
+ for <qemu-riscv@nongnu.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 12 Jun 2026 00:29:15 -0700 (PDT)
+Received: by mail-ed1-f50.google.com with SMTP id
+ 4fb4d7f45d1cf-68b90fc6a1dso1386401a12.1
+ for <qemu-riscv@nongnu.org>; Fri, 12 Jun 2026 00:29:14 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+XBSguoRFwlOgDa+M6SEu1EO3c5BmLdHkVRdBWF9K827eg0lxIBX79Tt8T2KN4TNbHvST3FUQlAyhg@nongnu.org
+X-Received: by 2002:a05:6402:44d7:b0:671:9dec:ba3 with SMTP id
+ 4fb4d7f45d1cf-69369d7b16emr703854a12.13.1781249354280; Fri, 12 Jun 2026
+ 00:29:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKmqyKOF8KpDTtmtHpJvQ-uu6trSQZ3=NNs-R3AkW3RUMLP98g@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1342;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-dy1-x1342.google.com
+References: <20260318185238.99143-1-luisccunha8@gmail.com>
+ <20260318185238.99143-4-luisccunha8@gmail.com>
+In-Reply-To: <20260318185238.99143-4-luisccunha8@gmail.com>
+From: Jay Chang <jay.chang@sifive.com>
+Date: Fri, 12 Jun 2026 15:29:02 +0800
+X-Gmail-Original-Message-ID: <CAMXXpfabjF1SFFj+C=95WRWmdB2c_ejk6wy8pO6=t3ko+n+THw@mail.gmail.com>
+X-Gm-Features: AVVi8CdjqQ3aRn_07XLDSXGaNUTL5UDewtCpjISEYsbe4-TVb3Hdi4zrOMVcB2Q
+Message-ID: <CAMXXpfabjF1SFFj+C=95WRWmdB2c_ejk6wy8pO6=t3ko+n+THw@mail.gmail.com>
+Subject: Re: [RFC PATCH 3/6] target/riscv: Implement extension for Sharing
+ Hardware Resources (Smpmpdeleg)
+To: luisccc <luisccunha8@gmail.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, frank.chang@sifive.com
+Content-Type: multipart/alternative; boundary="00000000000004b6040654096f69"
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=jay.chang@sifive.com; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,305 +118,137 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jun 12, 2026 at 12:37:03PM +0800, Alistair Francis wrote:
-> On Tue, May 12, 2026 at 2:33 AM Chao Liu <chao.liu.zevorn@gmail.com> wrote:
-> >
-> > From: Chao Liu <chao.liu@zevorn.cn>
-> >
-> > Testing the Basic Functions of K230 WDT:
-> > 1. Reset Function
-> > 2. Timeout Check
-> > 3. Interrupt Function
-> >
-> > Signed-off-by: Mig Yang <temashking@foxmail.com>
-> > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> > Acked-by: Fabiano Rosas <farosas@suse.de>
-> > Signed-off-by: Chao Liu <chao.liu.zevorn@gmail.com>
-> 
-> This fails `make check` for me. I guess the `k230` machine wasn't built?
+--00000000000004b6040654096f69
+Content-Type: text/plain; charset="UTF-8"
+
 >
-I've tested the case on my local machine and it's running fine.
+>      pmp_unlock_entries(env);
+> +
+> +    /* Is SPMP enabled? */
+> +    if (riscv_cpu_cfg(env)->spmp) {
+> +        env->mpmpdeleg = MPMP_DELEG_DEFAULT;
+> +        env->spmp_state.num_deleg_rules = 64 - MPMP_DELEG_DEFAULT;
+>
+Can we replace the const number with a macro?
 
-However, since the patch set is already a month old, maybe need rebase
-next branch.
++        spmp_unlock_entries(env);
+> +    }
+>  #else
+>      env->priv = PRV_U;
+>      env->senvcfg = 0;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index c265098324..e19c1216ea 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -179,6 +179,7 @@ extern RISCVCPUImpliedExtsRule
+> *riscv_multi_ext_implied_rules[];
+>  #define MIN_RISCV_PMP_GRANULARITY 4
+>
+>  #define MAX_RISCV_SPMPS (64)
+> +#define MPMP_DELEG_DEFAULT (64)
+>
+Why do we need MPMP_DELEG_DEFAULT?
+Since SPMP and PMP share the same PMP entries, maybe we can directly use
+MAX_RISCV_PMPS instead?
 
-And I found an issue in the first patch while looking through the Milk-V
-Duo patches.
++/* S-mode Physical Memory Protection */
+> +static RISCVException rmw_mpmpdeleg(CPURISCVState *env, int csrno,
+> +                                    target_ulong *ret_val,
+> +                                    target_ulong new_val, target_ulong
+> wr_mask)
+> +{
+> +    uint16_t new_mpmpdeleg = (env->mpmpdeleg & ~wr_mask) | (new_val &
+> wr_mask);
+> +
+> +    if (ret_val) {
+> +        *ret_val = env->mpmpdeleg;
+> +    }
+> +
+> +    /*
+> +     * pmpnum is locked if MSECCFG_MML is set
+> +     * and if new_mpmpdeleg is higher than last locked rule
+> +     */
+> +    if (!(env->mseccfg & MSECCFG_MML) &&
+> +        (new_mpmpdeleg & 0x7F) > env->pmp_state.last_locked_rule) {
+> +        env->mpmpdeleg = new_mpmpdeleg & 0x7F;
+> +    }
+> +
+> +    env->spmp_state.num_deleg_rules = MPMP_DELEG_DEFAULT - env->mpmpdeleg;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>
+Do we need to flush tlb here ?
 
-https://lore.kernel.org/qemu-devel/agZFchak-jsc2moK@ZEVORN-PC.localdomain/
+--00000000000004b6040654096f69
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'll fix it and send out a V8 version shortly. You can test it again
-once that's out.
+<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">=C2=A0 =C2=A0 =C2=A0pmp_unlock_ent=
+ries(env);<br>
++<br>
++=C2=A0 =C2=A0 /* Is SPMP enabled? */<br>
++=C2=A0 =C2=A0 if (riscv_cpu_cfg(env)-&gt;spmp) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mpmpdeleg =3D MPMP_DELEG_DEFAULT;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;spmp_state.num_deleg_rules =3D 64 - MP=
+MP_DELEG_DEFAULT;<br></blockquote><div>Can we replace the const number with=
+ a macro?</div><div><br></div><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
+1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 spmp_unlock_entries(env);<br>
++=C2=A0 =C2=A0 }<br>
+=C2=A0#else<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;priv =3D PRV_U;<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;senvcfg =3D 0;<br>
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
+index c265098324..e19c1216ea 100644<br>
+--- a/target/riscv/cpu.h<br>
++++ b/target/riscv/cpu.h<br>
+@@ -179,6 +179,7 @@ extern RISCVCPUImpliedExtsRule *riscv_multi_ext_implied=
+_rules[];<br>
+=C2=A0#define MIN_RISCV_PMP_GRANULARITY 4<br>
+<br>
+=C2=A0#define MAX_RISCV_SPMPS (64)<br>
++#define MPMP_DELEG_DEFAULT (64)<br></blockquote><div>Why do we need MPMP_D=
+ELEG_DEFAULT?<br>Since SPMP and PMP share the same PMP entries, maybe we ca=
+n directly use MAX_RISCV_PMPS instead?</div><div><br></div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
+gb(204,204,204);padding-left:1ex">
++/* S-mode Physical Memory Protection */<br>
++static RISCVException rmw_mpmpdeleg(CPURISCVState *env, int csrno,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong *ret_val,=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong new_val, =
+target_ulong wr_mask)<br>
++{<br>
++=C2=A0 =C2=A0 uint16_t new_mpmpdeleg =3D (env-&gt;mpmpdeleg &amp; ~wr_mask=
+) | (new_val &amp; wr_mask);<br>
++<br>
++=C2=A0 =C2=A0 if (ret_val) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *ret_val =3D env-&gt;mpmpdeleg;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /*<br>
++=C2=A0 =C2=A0 =C2=A0* pmpnum is locked if MSECCFG_MML is set<br>
++=C2=A0 =C2=A0 =C2=A0* and if new_mpmpdeleg is higher than last locked rule=
+<br>
++=C2=A0 =C2=A0 =C2=A0*/<br>
++=C2=A0 =C2=A0 if (!(env-&gt;mseccfg &amp; MSECCFG_MML) &amp;&amp;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 (new_mpmpdeleg &amp; 0x7F) &gt; env-&gt;pmp_st=
+ate.last_locked_rule) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mpmpdeleg =3D new_mpmpdeleg &amp; 0x7F=
+;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 env-&gt;spmp_state.num_deleg_rules =3D MPMP_DELEG_DEFAULT - =
+env-&gt;mpmpdeleg;<br>
++=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
++}<br>
++<br></blockquote><div>Do we need to flush tlb here ?</div></div></div>
 
-Thanks,
-Chao
-> 541/542 qemu:qtest+qtest-aarch64 / qtest-aarch64/bios-tables-test
->                OK              91.02s   15 subtests passed
-> ▶ 542/542 /riscv64/k230-wdt/register_read_write -
-> ERROR:../tests/qtest/libqtest.c:558:qtest_connect: assertion failed:
-> (s->fd >= 0 && s->qmp_fd >= 0) FAIL
-> ▶ 542/542
->                ERROR
-> 542/542 qemu:qtest+qtest-riscv64 / qtest-riscv64/k230-wdt-test
->                ERROR           51.60s   killed by signal 6 SIGABRT
-> >>> PYTHON=/var/mnt/scratch/alistair/software/qemu/build/pyvenv/bin/python3 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 QTEST_QEMU_VNC_BINARY=./tools/qemu-vnc/qemu-vnc UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 QTEST_QEMU_IMG=./qemu-img RUST_BACKTRACE=1 G_TEST_DBUS_DAEMON=/var/mnt/scratch/alistair/software/qemu/tests/dbus-daemon.sh MALLOC_PERTURB_=94 QTEST_QEMU_STORAGE_DAEMON_BINARY=./storage-daemon/qemu-storage-daemon ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 QTEST_QEMU_BINARY=./qemu-system-riscv64 /var/mnt/scratch/alistair/software/qemu/build/tests/qtest/k230-wdt-test --tap -k
-> ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-> ✀  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-> stderr:
-> qemu-system-riscv64: unsupported machine type: "k230"
-> Use -machine help to list supported machines
-> socket_accept failed: Resource temporarily unavailable
-> **
-> ERROR:../tests/qtest/libqtest.c:558:qtest_connect: assertion failed:
-> (s->fd >= 0 && s->qmp_fd >= 0)
-> ../tests/qtest/libqtest.c:201: kill_qemu() tried to terminate QEMU
-> process but encountered exit status 1 (expected 0)
-> 
-> (test program exited with status code -6)
-> ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-> 
-> 
-> Summary of Failures:
-> 
-> 542/542 qemu:qtest+qtest-riscv64 / qtest-riscv64/k230-wdt-test
->       ERROR           51.60s   killed by signal 6 SIGABRT
-> 
-> Ok:                 510
-> Expected Fail:      0
-> Fail:               1
-> Unexpected Pass:    0
-> Skipped:            31
-> Timeout:            0
-> 
-> Alistair
-> 
-> > ---
-> >  MAINTAINERS                 |   1 +
-> >  tests/qtest/k230-wdt-test.c | 189 ++++++++++++++++++++++++++++++++++++
-> >  tests/qtest/meson.build     |   3 +-
-> >  3 files changed, 192 insertions(+), 1 deletion(-)
-> >  create mode 100644 tests/qtest/k230-wdt-test.c
-> >
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index e5ec6367ca..e7e3ed0c5c 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -1788,6 +1788,7 @@ F: hw/riscv/k230.c
-> >  F: hw/watchdog/k230_wdt.c
-> >  F: include/hw/riscv/k230.h
-> >  F: include/hw/watchdog/k230_wdt.h
-> > +F: tests/qtest/k230-wdt-test.c
-> >
-> >  RX Machines
-> >  -----------
-> > diff --git a/tests/qtest/k230-wdt-test.c b/tests/qtest/k230-wdt-test.c
-> > new file mode 100644
-> > index 0000000000..c8eaeaf1ae
-> > --- /dev/null
-> > +++ b/tests/qtest/k230-wdt-test.c
-> > @@ -0,0 +1,189 @@
-> > +/*
-> > + * QTest testcase for K230 Watchdog
-> > + *
-> > + * Copyright (c) 2025 Mig Yang <temashking@foxmail.com>
-> > + *
-> > + * SPDX-License-Identifier: GPL-2.0-or-later
-> > + *
-> > + * Provides a board compatible with the kendryte K230 SDK
-> > + *
-> > + * K230 Technical Reference Manual V0.3.1 (2024-11-18):
-> > + * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
-> > + *
-> > + * For more information, see <https://www.kendryte.com/en/proDetail/230>
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "qemu/timer.h"
-> > +#include "qemu/bitops.h"
-> > +#include "libqtest.h"
-> > +#include "hw/watchdog/k230_wdt.h"
-> > +
-> > +/* K230 WDT0 base address */
-> > +#define K230_WDT0_BASE 0x91106000
-> > +#define K230_WDT1_BASE 0x91106800
-> > +
-> > +/* Test WDT0 by default */
-> > +#define WDT_BASE K230_WDT0_BASE
-> > +
-> > +static void test_register_read_write(void)
-> > +{
-> > +    QTestState *qts = qtest_init("-machine k230");
-> > +
-> > +    /* Test Control Register (CR) read/write */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_CR, 0xFFFFFFFF);
-> > +    g_assert_cmphex(qtest_readl(qts, WDT_BASE + K230_WDT_CR), ==,
-> > +                    (K230_WDT_CR_RPL_MASK << K230_WDT_CR_RPL_SHIFT) |
-> > +                    K230_WDT_CR_RMOD | K230_WDT_CR_WDT_EN);
-> > +
-> > +    /* Test Timeout Range Register (TORR) read/write */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_TORR, 0xFFFFFFFF);
-> > +    g_assert_cmphex(qtest_readl(qts, WDT_BASE + K230_WDT_TORR), ==,
-> > +                    K230_WDT_TORR_TOP_MASK);
-> > +
-> > +    /* Test Protection Level Register read/write */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_PROT_LEVEL, 0xFFFFFFFF);
-> > +    g_assert_cmphex(qtest_readl(qts, WDT_BASE + K230_WDT_PROT_LEVEL), ==, 0x7);
-> > +
-> > +    qtest_quit(qts);
-> > +}
-> > +
-> > +static void test_counter_restart(void)
-> > +{
-> > +    QTestState *qts = qtest_init("-machine k230");
-> > +
-> > +    /* Enable watchdog and set timeout */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_CR, K230_WDT_CR_WDT_EN);
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_TORR, 0x5); /* TOP = 5 */
-> > +
-> > +    /* Read current counter value */
-> > +    uint32_t initial_count = qtest_readl(qts, WDT_BASE + K230_WDT_CCVR);
-> > +    g_assert_cmpuint(initial_count, >, 0);
-> > +
-> > +    /* Restart counter with magic value */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_CRR, K230_WDT_CRR_RESTART);
-> > +
-> > +    /* Wait for time */
-> > +    qtest_clock_step(qts, NANOSECONDS_PER_SECOND * 2);
-> > +
-> > +    /* Counter should be reset to timeout value */
-> > +    uint32_t new_count = qtest_readl(qts, WDT_BASE + K230_WDT_CCVR);
-> > +    g_assert_cmpuint(new_count, >, 0);
-> > +    g_assert_cmpuint(new_count, !=, initial_count);
-> > +
-> > +    qtest_quit(qts);
-> > +}
-> > +
-> > +static void test_interrupt_mode(void)
-> > +{
-> > +    QTestState *qts = qtest_init("-machine k230 --trace k230_*,file=k230.log");
-> > +
-> > +    /* Set interrupt mode and enable watchdog */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_CR,
-> > +                 K230_WDT_CR_RMOD | K230_WDT_CR_WDT_EN);
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_TORR, 0x1); /* Short timeout */
-> > +
-> > +    /* Wait for timeout to trigger interrupt */
-> > +    qtest_clock_step(qts, NANOSECONDS_PER_SECOND * 10);
-> > +
-> > +    /* Check interrupt status */
-> > +    uint32_t stat = qtest_readl(qts, WDT_BASE + K230_WDT_STAT);
-> > +    g_assert_cmphex(stat & K230_WDT_STAT_INT, ==, K230_WDT_STAT_INT);
-> > +
-> > +    /* Clear interrupt */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_EOI, 0x1);
-> > +    stat = qtest_readl(qts, WDT_BASE + K230_WDT_STAT);
-> > +    g_assert_cmphex(stat & K230_WDT_STAT_INT, ==, 0);
-> > +
-> > +    qtest_quit(qts);
-> > +}
-> > +
-> > +static void test_reset_mode(void)
-> > +{
-> > +    QTestState *qts = qtest_init("-machine k230 -no-reboot");
-> > +
-> > +    /* Set reset mode and enable watchdog */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_CR, K230_WDT_CR_WDT_EN);
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_TORR, 0x1); /* Short timeout */
-> > +
-> > +    /* Wait for timeout to trigger reset */
-> > +    qtest_clock_step(qts, NANOSECONDS_PER_SECOND * 2);
-> > +
-> > +    /* In reset mode, the system should reset */
-> > +    /* This test verifies that reset mode is properly configured */
-> > +
-> > +    qtest_quit(qts);
-> > +}
-> > +
-> > +static void test_timeout_calculation(void)
-> > +{
-> > +    QTestState *qts = qtest_init("-machine k230");
-> > +
-> > +    /* Test different timeout values */
-> > +    for (uint32_t top = 0; top <= 15; top++) {
-> > +        qtest_writel(qts, WDT_BASE + K230_WDT_TORR, top);
-> > +        qtest_writel(qts, WDT_BASE + K230_WDT_CR, K230_WDT_CR_WDT_EN);
-> > +
-> > +        /* Read current counter value */
-> > +        uint32_t count = qtest_readl(qts, WDT_BASE + K230_WDT_CCVR);
-> > +        g_assert_cmpuint(count, >, 0);
-> > +
-> > +        /* Disable watchdog for next iteration */
-> > +        qtest_writel(qts, WDT_BASE + K230_WDT_CR, 0);
-> > +    }
-> > +
-> > +    qtest_quit(qts);
-> > +}
-> > +
-> > +static void test_wdt1_registers(void)
-> > +{
-> > +    QTestState *qts = qtest_init("-machine k230");
-> > +
-> > +    /* Test WDT1 registers (second watchdog) */
-> > +    qtest_writel(qts, K230_WDT1_BASE + K230_WDT_CR, 0xFFFFFFFF);
-> > +    g_assert_cmphex(qtest_readl(qts, K230_WDT1_BASE + K230_WDT_CR), ==,
-> > +                    (K230_WDT_CR_RPL_MASK << K230_WDT_CR_RPL_SHIFT) |
-> > +                    K230_WDT_CR_RMOD | K230_WDT_CR_WDT_EN);
-> > +
-> > +    qtest_writel(qts, K230_WDT1_BASE + K230_WDT_TORR, 0xFFFFFFFF);
-> > +    g_assert_cmphex(qtest_readl(qts, K230_WDT1_BASE + K230_WDT_TORR), ==,
-> > +                    K230_WDT_TORR_TOP_MASK);
-> > +
-> > +    qtest_quit(qts);
-> > +}
-> > +
-> > +static void test_enable_disable(void)
-> > +{
-> > +    QTestState *qts = qtest_init("-machine k230");
-> > +
-> > +    /* Initially disabled */
-> > +    uint32_t cr = qtest_readl(qts, WDT_BASE + K230_WDT_CR);
-> > +    g_assert_cmphex(cr & K230_WDT_CR_WDT_EN, ==, 0);
-> > +
-> > +    /* Enable watchdog */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_CR, K230_WDT_CR_WDT_EN);
-> > +    cr = qtest_readl(qts, WDT_BASE + K230_WDT_CR);
-> > +    g_assert_cmphex(cr & K230_WDT_CR_WDT_EN, ==, K230_WDT_CR_WDT_EN);
-> > +
-> > +    /* Disable watchdog */
-> > +    qtest_writel(qts, WDT_BASE + K230_WDT_CR, 0);
-> > +    cr = qtest_readl(qts, WDT_BASE + K230_WDT_CR);
-> > +    g_assert_cmphex(cr & K230_WDT_CR_WDT_EN, ==, 0);
-> > +
-> > +    qtest_quit(qts);
-> > +}
-> > +
-> > +int main(int argc, char *argv[])
-> > +{
-> > +    g_test_init(&argc, &argv, NULL);
-> > +
-> > +    qtest_add_func("/k230-wdt/register_read_write", test_register_read_write);
-> > +    qtest_add_func("/k230-wdt/counter_restart", test_counter_restart);
-> > +    qtest_add_func("/k230-wdt/interrupt_mode", test_interrupt_mode);
-> > +    qtest_add_func("/k230-wdt/reset_mode", test_reset_mode);
-> > +    qtest_add_func("/k230-wdt/timeout_calculation", test_timeout_calculation);
-> > +    qtest_add_func("/k230-wdt/wdt1_registers", test_wdt1_registers);
-> > +    qtest_add_func("/k230-wdt/enable_disable", test_enable_disable);
-> > +
-> > +    return g_test_run();
-> > +}
-> > diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> > index 43f83ffd3a..45c4898454 100644
-> > --- a/tests/qtest/meson.build
-> > +++ b/tests/qtest/meson.build
-> > @@ -290,7 +290,8 @@ qtests_riscv64 = ['riscv-csr-test'] + \
-> >    (unpack_edk2_blobs ? ['bios-tables-test'] : []) + \
-> >    (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
-> >     config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
-> > -   ['iommu-riscv-test'] : [])
-> > +   ['iommu-riscv-test'] : []) + \
-> > +  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
-> >
-> >  qos_test_ss = ss.source_set()
-> >  qos_test_ss.add(
-> >
+--00000000000004b6040654096f69--
 
