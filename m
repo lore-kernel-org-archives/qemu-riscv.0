@@ -4,83 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39523CD98C5
-	for <qemu-riscv@archiver.kernel.org>; Sun, 14 Jun 2026 14:14:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4574CD8CA8
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jun 2026 03:21:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wYlb3-0001J6-4F; Sun, 14 Jun 2026 10:13:57 -0400
+	id 1wYxt8-0003wx-NY; Sun, 14 Jun 2026 23:21:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imaginos32@gmail.com>)
- id 1wYlb1-0001Iq-Ug
- for qemu-riscv@nongnu.org; Sun, 14 Jun 2026 10:13:55 -0400
-Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wYxt7-0003wd-2Z
+ for qemu-riscv@nongnu.org; Sun, 14 Jun 2026 23:21:25 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <imaginos32@gmail.com>)
- id 1wYlb0-0003rg-EF
- for qemu-riscv@nongnu.org; Sun, 14 Jun 2026 10:13:55 -0400
-Received: by mail-wm1-x344.google.com with SMTP id
- 5b1f17b1804b1-490ae94a89eso21351595e9.1
- for <qemu-riscv@nongnu.org>; Sun, 14 Jun 2026 07:13:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wYxt5-0002Nt-JP
+ for qemu-riscv@nongnu.org; Sun, 14 Jun 2026 23:21:24 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-6913160c9ddso5177282a12.2
+ for <qemu-riscv@nongnu.org>; Sun, 14 Jun 2026 20:21:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781493681; cv=none;
+ d=google.com; s=arc-20240605;
+ b=If6ySmAzEBkKG2gCwtU1hztwKxgwvkYkWoKm+nBemBBK3DZlwAqse2Z7E3DrK7mB0I
+ 07Qt/0cgFwm+RGelIEvNbVXErtcV637nyiyAPNHiY1iZPenWqqnDYm4Rc0+6l7gJccQd
+ TwX/nVDv7ezJG9jFxu6Dw8AsV9wERJDtOYVoexaladxQ9KYH7G+bOpCQdPAtwbnjbfbY
+ Iph2N6nIiKFwV4/+auTtdVYP5awedRHQKJQ/8RRTVsqpA6G2VxLAPjwr7vsKyJpG2Uns
+ nHCtaHIFPhcIZzCf+GJXcWRgCLC0mtQLJxlEmSXaf4kLTAg8KvfxTfm+eHCe9seK4VZb
+ 5UTw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=6+zjqdkCNMmJ84r7dOg5uxcLfVrYTRBYhD/tLDl2Dyk=;
+ fh=9RSvR5PqI7+P+3mApybPOJKCStsVk4QfwJuUstZHCf4=;
+ b=X9+0iy9ZvsrlUoUSqAb1Rx1v7OZPJFQLeNTsaGVGaojFiVkp5E/rSiyX9xQRktBZ0O
+ Ca5qFd7M1WqnXFdBqb6i1pNC0b/tNy/Qn1nfArGmRTs8hYZK93hlB06Bm2TnvccS4NuO
+ Q1g/dKZqxmYjeXIadwGoDpgazONataKGITI8rhEYrPQKhj9QT0miR6kw5d98oZNti9Gm
+ 2xwMAAPn9RDVqXCyIvcJTVuFv2UJkTcqyzgRtuEwkZ34inhH68wpyDKR0AgdyelJZWDo
+ p7HAGjJ7h6sJ6UHuNFHg5T/qwD3hcUy5toj99rSNsAxuN34zlLL0CzjaFpIW+FsUQZXt
+ pCJQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781446432; x=1782051232; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1781493681; x=1782098481; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gHUYLuZwuzMi7F4ecz5j9hrjNh+yhJRwg5RXiaHYtqQ=;
- b=p2IQiEf1U0LCsfo5tXM8HAOQmwuxoJC19j3rliJ5EgbYxN1yIPPKMAmgfWFqW2sx69
- eiWFBuWEIPL1LUETEQgLkjlpG+s1GTfKKjKwEKPRjPyNac8vHgp9ftwRbZIwEHNDA+Z+
- Vvi5bwgVWCyOEywp3aMCDPjjeg6E5t3oYrlowWZVETS6Omo3DNbHAgflNdbBiujsLXVf
- EVUN6TRIKMl1kwcDAKijXqwWVR83ceSIxij1N5uvD/F+OZN/VewPBX6SfdvF4D/ojPxz
- nimnx5RweTi9cc/72sfHBIv8NlzgFrp4YHI8m4jKO0GgTWSdu6mS/y/1jupFA3htLXYq
- QOEQ==
+ bh=6+zjqdkCNMmJ84r7dOg5uxcLfVrYTRBYhD/tLDl2Dyk=;
+ b=Mz3fJHYdcGNyqP7OtziinSX6YtM/U6ZKqqHmWQuWTw/P6WjEhrgFIuzfkBo5Vv0twm
+ 46tA3RkObogf7JuZw8Ly+5zrUgPIGaIbNnVN08IuM3Ry3WgslxiMl/Q4OrJlDMEzyHnK
+ bsCkUUExMDmPD91fyXVFd4UAghnBBO1aw8ct+ydF7H0d7vaFbABRrz6ykfuZX0COU7Ld
+ gYnk6qLzpRF5MLjmL35pCty4pu0qrvWMR81PJYhEQ75/Xa659SXX5KqLQLsKyVzYdf6W
+ O4C6KpGwIU3C7dVpn/YtNeicfj7qCWjfl5vd1ELMbOMuuRiAkNsdo1zGwNQBIvA+TRXV
+ sdRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781446432; x=1782051232;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1781493681; x=1782098481;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=gHUYLuZwuzMi7F4ecz5j9hrjNh+yhJRwg5RXiaHYtqQ=;
- b=sBdd7e/qGg9BVWb95yE2WCmOZV3y7nxbwU1W268xUQcUcEiXsD1ErEA7mB4bCV7sX3
- vp6FhEnQQzmbPC5DIBwU23Wr5V197H65woeEPiWtwCSsD5UpohthNzuKRfp0o1Ry6OPQ
- zfcxU8cfwjHW2VkaIOLQSo6HKacwhwcAr32qp4nlbFLe/4O8mXw2BeFjYWYFausASgfF
- WLtzGkOiztZ3WQIgW4Gr7KHgtxct4sCk7LZIEmhVFenwh9IQLU/hVQ0X9tTKmDn9uSwv
- iFMaLzYSrG/k1RBMoz0YVrGCShFKZSahS/FrYRJ+W5PhU+NBxqscd8Ltb7fBQmjslGT4
- /7Fw==
-X-Gm-Message-State: AOJu0YyAE82H3jq8gazSp1oMjt66j93Re1xb382juA4hkdwrp/4DzB7v
- 4U5kD7NAN9tJ3lIDKFjwPcD0totDKgpyShablRW79ixxHecgGVXMTPJ0
-X-Gm-Gg: Acq92OH7TYFOphlnj64WfFxGOGZjxHjntMVxEMHjdQ9Zx5hsgSPZ1NvEOsMJdgK/rrQ
- Y4qseAReuYjeEATaxfRurPUTmkGjxyx9WWXobJ5jM5XrecHYIh6Nh5t/XIBOpzNOci1+8BpHfoY
- 1m9lSOpkO1ONCpxWejoXTBMJuZR3w54HI3VT8+2nwu6a5zVb2CBiAzulCOipSHfNSAQYwYzaI3+
- 8pmZ1yWmFqZOrDLHQ3JXpzyC6NR7kyIDUnWpkcqBE1eCk0D0/wpaRtzC1QCZUScSWVi0m2N2HAE
- dCt/RkmPPfJvbEjrH8Mm2Nano2hl9uU5lfgtJVhqBU5U8H3z4NfFNenDTOqUEljYMqUoddbLRAB
- QhLZ1b00RSXq/oL/sUMi8ebwip40exWxhR8Jn3mRUHHToK9ytAJW1qF9lYaSdVaXDMucOz6Y7Fd
- oXnZxrwHcXC8sJdWP/zjuEBYS1KY8rlgVwOJRlLKaHuAiCIyRmsjcKegrWZul9UpFBb/qI12OVk
- X9mj1A=
-X-Received: by 2002:a05:600c:55c2:b0:490:b1b8:95f5 with SMTP id
- 5b1f17b1804b1-4922006282bmr62664325e9.15.1781446432172; 
- Sun, 14 Jun 2026 07:13:52 -0700 (PDT)
-Received: from user-Legion-Pro-5-16ARX8.. (cable-89-216-220-81.dynamic.sbb.rs.
- [89.216.220.81]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-492202edf89sm177523435e9.1.2026.06.14.07.13.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Jun 2026 07:13:51 -0700 (PDT)
-From: imaginos <imaginos32@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- imaginos <imaginos32@gmail.com>
-Subject: [PATCH v2] disas/riscv: enable `mnret` disassembly
-Date: Sun, 14 Jun 2026 16:12:24 +0200
-Message-ID: <20260614141315.17320-1-imaginos32@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260606145520.34152-1-imaginos32@gmail.com>
-References: <20260606145520.34152-1-imaginos32@gmail.com>
+ bh=6+zjqdkCNMmJ84r7dOg5uxcLfVrYTRBYhD/tLDl2Dyk=;
+ b=D4WiwGy2oAUGngCymKrWe4V7bWrmZCRyZgyg9K6BK0PhbihtbO9QPYGtUr7347vsQC
+ 47h2pSSTb+XTe0USEhi4D2Tnoh4M+s2Vwp/BavPIoZHZVYiDrnLJTc/2bxbM1DW6jRw4
+ HCuxNHpnLdglpnIh5yp6xNKHkYQLBwEs11jzL7euzl0MhPFsJ4xEi9u6xtWv1SnkZRiZ
+ hlJBKUCqVMU5t6JEUyh8pRRKXF47VLoq3r98Xz4U+N2Ze7aSKjmf1/XgW1jo8WIX4FQU
+ 2PYKVlaUvpOmleL+YWazEBqqlumCMPOGeaAaPJmvyx2nNYIcUK8NW/aMxUEasGqNkGKG
+ Ld/g==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/a8mbGhZEdUvgHhov+62zRnhvowi+Kdm1ZJjMZHgZt92goJ2yDhnzBHo1djMGm9Abwuo9vW3JWFnq0@nongnu.org
+X-Gm-Message-State: AOJu0YyrcVK+UzU2QGuA3XXteLExGJbTPXcwMzBmUkjFB8xMV93Ym0RG
+ oXa/+w2K6rhLK8mmJpe9jl0zoIeBXuCx1+u4hVNTKgZs71o0isHtZe7DHjZlrQX9oebZs+dZ4t2
+ 3l0iHfY7YwO9lGLwEnuSaWZaXJACpJ+s=
+X-Gm-Gg: Acq92OGSrTPM28o/1+VQFYiSbD1BzGYnznyLV3PB58k45A8pAD8v9flOxBeuC0epfll
+ BLJUY5tFlWX1ay5JYB0C1dgxkMR1JLwDB2Io3a/JzkI53ApyjfRTSmDGCHEJIKXdPnNaVfhdGZA
+ pldmlBX7R5PZgVXcKB2buv1mLsqF3COTN5APugxVqJFp9mO1lRczW7HOdgqEVa79qFbBIpVbgtJ
+ 4NcVmw4BaAaF2VIoX10koxMjSZ+AAzzbEpTNdUabNXvf2m3SEcggOVjgsQ0dIy03Kec+GSTP1r2
+ 8BYtRzHKW/Yrtcwfqx5htjEaAFUN+biqwAfbVg==
+X-Received: by 2002:a05:6402:524d:b0:692:4759:ac53 with SMTP id
+ 4fb4d7f45d1cf-693c69ffab8mr3829691a12.3.1781493681364; Sun, 14 Jun 2026
+ 20:21:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::344;
- envelope-from=imaginos32@gmail.com; helo=mail-wm1-x344.google.com
+References: <20260606145520.34152-1-imaginos32@gmail.com>
+ <20260614141315.17320-1-imaginos32@gmail.com>
+In-Reply-To: <20260614141315.17320-1-imaginos32@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 15 Jun 2026 13:20:54 +1000
+X-Gm-Features: AVVi8Ce0s0CT7WKAJArdFH8HZ5NyQ4SUZQ6On179ddMgKq8R30d1sDYnlBWQ6_w
+Message-ID: <CAKmqyKMwTzbnZsgDzsWwrLkAbDqLkwK+Ud+wMnbCqLc0mC_ctA@mail.gmail.com>
+Subject: Re: [PATCH v2] disas/riscv: enable `mnret` disassembly
+To: imaginos <imaginos32@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -104,51 +122,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The translator has supported mnret since commit 3157a553ec6b9a
-("target/riscv: Add Smrnmi mnret instruction"), but the
-disassembler still renders it as illegal. Add it unguarded,
-since the encoding does not overlap any other extension.
+On Mon, Jun 15, 2026 at 12:15=E2=80=AFAM imaginos <imaginos32@gmail.com> wr=
+ote:
+>
+> The translator has supported mnret since commit 3157a553ec6b9a
+> ("target/riscv: Add Smrnmi mnret instruction"), but the
+> disassembler still renders it as illegal. Add it unguarded,
+> since the encoding does not overlap any other extension.
+>
+> Signed-off-by: imaginos <imaginos32@gmail.com>
 
-Signed-off-by: imaginos <imaginos32@gmail.com>
----
-v2: rebase on riscv-to-apply.next
+Thanks!
 
- disas/riscv.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+Applied to riscv-to-apply.next
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index b8ec546883..7f1b262773 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -989,6 +989,7 @@ typedef enum {
-     rv_op_cbo_clean = 957,
-     rv_op_cbo_flush = 958,
-     rv_op_cbo_zero = 959,
-+    rv_op_mnret = 960,
- } rv_op;
- 
- /* register names */
-@@ -2263,6 +2264,7 @@ const rv_opcode_data rvi_opcode_data[] = {
-    { "cbo.clean", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-    { "cbo.flush", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-    { "cbo.zero", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+   { "mnret", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
- };
- 
- /* CSR names */
-@@ -4077,6 +4079,11 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                     case 64: op = rv_op_mret; break;
-                     }
-                     break;
-+                case 1792:
-+                    switch ((inst >> 15) & 0b1111111111) {
-+                    case 64: op = rv_op_mnret; break;
-+                    }
-+                    break;
-                 case 1952:
-                     switch ((inst >> 15) & 0b1111111111) {
-                     case 576: op = rv_op_dret; break;
--- 
-2.43.0
+Alistair
 
+> ---
+> v2: rebase on riscv-to-apply.next
+>
+>  disas/riscv.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index b8ec546883..7f1b262773 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -989,6 +989,7 @@ typedef enum {
+>      rv_op_cbo_clean =3D 957,
+>      rv_op_cbo_flush =3D 958,
+>      rv_op_cbo_zero =3D 959,
+> +    rv_op_mnret =3D 960,
+>  } rv_op;
+>
+>  /* register names */
+> @@ -2263,6 +2264,7 @@ const rv_opcode_data rvi_opcode_data[] =3D {
+>     { "cbo.clean", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
+>     { "cbo.flush", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
+>     { "cbo.zero", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
+> +   { "mnret", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
+>  };
+>
+>  /* CSR names */
+> @@ -4077,6 +4079,11 @@ static void decode_inst_opcode(rv_decode *dec, rv_=
+isa isa)
+>                      case 64: op =3D rv_op_mret; break;
+>                      }
+>                      break;
+> +                case 1792:
+> +                    switch ((inst >> 15) & 0b1111111111) {
+> +                    case 64: op =3D rv_op_mnret; break;
+> +                    }
+> +                    break;
+>                  case 1952:
+>                      switch ((inst >> 15) & 0b1111111111) {
+>                      case 576: op =3D rv_op_dret; break;
+> --
+> 2.43.0
+>
+>
 
