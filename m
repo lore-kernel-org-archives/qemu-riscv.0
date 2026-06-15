@@ -4,93 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42EACCD98C7
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jun 2026 11:47:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB2D8CD98C7
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jun 2026 11:51:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZ5ml-000529-Ks; Mon, 15 Jun 2026 07:47:23 -0400
+	id 1wZ5qb-0006Kb-Cv; Mon, 15 Jun 2026 07:51:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wZ5mh-00051Z-PO
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 07:47:19 -0400
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
+ id 1wZ5qX-0006Jl-G1
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 07:51:17 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wZ5mg-000608-4I
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 07:47:19 -0400
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-68d234218bcso5710530a12.2
- for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 04:47:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781524036; cv=none;
+ id 1wZ5qV-0006gl-KG
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 07:51:17 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-68d23430690so5943528a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 04:51:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781524274; cv=none;
  d=google.com; s=arc-20240605;
- b=Vr9Xm6QNz6GCOxkWk+5VaTpypG3CPndiIKiC80VE++e5uPBLEiu1sgGcfJpKixRfmb
- mPo1QqSmYTnbJejzap2foDZYq/5YbE+EWPFJcIQoFUAU9NraYV5z+l5wfQ2cqha/wMTD
- 5TN2RNe7KeN+38NBuV9HmXO+yq44dP401ESuL/YrjJo6kbNbNSyGC/RMSmHIqroWT5xn
- D815Y081T7kKoUZmSp9+w5X/dPjOe9l7iikx3CzI6HX2rO33j2ADX0Ra3gayBHqvWO8O
- aZaBDQ09qVQNy0UTHnX7jbID0bGSrl5vXUI1FEg9/bQv9r0Sr4HUxTvFoegMotf9uY6n
- 5vSQ==
+ b=i5NrazoZLsUMHCFUqs16hG6EFU0YCQBgrl8lovCVF/x/C4J2Uetuwa6S5zul9ZrDug
+ yG8g1J0s1d/pLjMjGzMvVZ1JcLtrKOEr4XDWfUR6M9R5p53dtpideBYREADjjtJ4qe8H
+ UGsLqJPECc8jU0cN3lFqabkvFy53ukGBMU24g+CBPwtGfTBHe3CfZKyI759k3nLNrlNP
+ I5y/yg8CXgve00uxSwt28kLJXJLEZ1TuF/Xpioig9d6aIy5EtW4B114iqS9OErusUl+p
+ A5n8OE8cxhcqsXz1NWUpEE3DVSpXgn4SkVyLVg+L+jEkeunyjb6UNAdZGUvVWwoZPq3c
+ 0okg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=26eSbiFwouxMDBokhhVOiZHj5ZeI/02XK83mokRODi8=;
- fh=ElOjwlGObUsZGtoS+Qp3shMY/BB/PN+lpSt2yKbTLPY=;
- b=IkrcWX3as0isIjzX2Mtn2cKoHmPR97BuAm7e99dxNfXJcBg1UVoieDWd5Ge1zUbwcW
- sVNfh6JnYfJ1D82XOq9o44T8eTCir+i2yViJ+HmLdeGQ2rRsSW8fCF7c5oBYON+CW3HP
- zqYyo4ILzNMkvafM8tm0LkDMboAFh4U/ML1CeiShmWFqCIW08Lap79Qy1dKcA/g3yCWG
- 7SmPtFLuv2/fTY5CbKEYfyzkw0X0EbefPdETTnZvL+LwnVAT6HWrYotZl4ndYSWGGPTM
- aMN+KEXNji/nlbfTwjJhBoiJeYvQhpV1BEtnbNtv12g0mdij9SzY6J63MNOdq2TRj69q
- iPBg==; darn=nongnu.org
+ bh=o8ITxXPVAXJIl7DYU1ZGSTuJwscSmRvrE+T7BLiEatQ=;
+ fh=MKWeYI/Tw7JYuQKbgBXjlniYn6vztlQFVEUHQqInXMo=;
+ b=klB7b0BCAZJ37GN9cnpFzse1+oP3WnYcrFpv7Dete2IJ6dBZS3ZYIcOnk4CFNrmYJ4
+ IxoyQSygNEvjTAo/FYo/QLvKVCh7apc0TrWs5C3j1FWRfzk1HHdWXD6Em/rOaqApA8P2
+ C1iEOcrYpAytSUvMdBJyacdEzJzRmBEYXLsuVA9z+ykncHup5JwJoGAyWhDw8LJuAgf5
+ nBRC/T0F3xuZPQ2HA3Fhc4siWi4jFDSQk/uhUZxj3Rg3NjYcBoGAavhs7nKJOJHMIFUK
+ KoV9V5vcQqxWwcj8ghsXV13ibIPpj9L6DtTZNf81III7EPKBVqe88xNSDs9/GXx3pe6j
+ gTTw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781524036; x=1782128836; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1781524274; x=1782129074; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=26eSbiFwouxMDBokhhVOiZHj5ZeI/02XK83mokRODi8=;
- b=bAT7V48bdBYEn+U7VsbWUq0IWSgSXi6h/lubH56vRg3zx69anVF+H1EB9KcXoz4HFN
- GZeoy9oaoqF/PT1iJuNDrxj29J8MJHI6L3kORgBbUKST9LR0x9XoYbGIX1lQhMw1uCC1
- wiGcQyXja3TnpMJGlmDxj1FDhbX3LsLmTarohwD4AB9YFWDAfyWWdR2I/tDqIs+usHKs
- 64pUbZwsEHoS6poZR/7B57Out/p6Dgm8ZM8JWP0Eo52cF4u440cfla6cT+hLQWS+U9IE
- xZulnKPh+cIjhZeUkhxKfuu3wcimKptTqG9NZjcZmj41k8sQT2QlwdKw4VAj3W7D7AYV
- rfOw==
+ bh=o8ITxXPVAXJIl7DYU1ZGSTuJwscSmRvrE+T7BLiEatQ=;
+ b=sy7A89SD4ppMpKXpiiFNmIXxTyeSHxr2BGkLiUbhUOpqtQF53Ho5/WeVOyaTV/3TFL
+ Zp1dyx7X4nrwvL7gAjooeG0YBS8myQMdu8VO+GbbWzZaRUdT8GOoEKWwC4PPpPCHXsZz
+ otIzFJFiY00G0sFhG+Sq7jq5ESJ//dmrgyvgJVqwuEB0ykRWzUxalmrZwH9WjZMhAhSf
+ nuaZht3TUJlfssMRJGfTBt5+Z5O1m2SlbBjJwymxQn1xsBu2t8s9dCnDSEvoX/Z3d46G
+ EiX5LsRV9rvWXviNJbyXvPCQ/mLridRulidTmv1MP6669baELGMZYHVI9rGMr27lXLUM
+ SSyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781524036; x=1782128836;
+ d=1e100.net; s=20251104; t=1781524274; x=1782129074;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=26eSbiFwouxMDBokhhVOiZHj5ZeI/02XK83mokRODi8=;
- b=gY6+Yav9lmjX0EF1ofKkuWggRUG4GNz3FcQ8tsg1ZOf2pN6ruW/CvauVrWcFHx2aXY
- GV/JwAUauwV4dtJPi4kURmjxAIREP+8eSjsw4/cU0iX+8WUKlXo/+dBL0MAbsWMZaBKb
- 4unN9yJo6xGX6JTNk28Pt8pZiN250HOe5s3AWXC5Cqka0deYzyIYZTWrnrYJQvnsml3d
- +hHBLp7TDC0FJqeY67m9/nVztrWCWKJsGn3YMPBDP95FP31CU+nEY3zvwwrHbAH/mM/s
- hArO8Z0KMXDOVwYOIxfoyjd3BDcaI+ghcJGFSMaleVUl6+jeUnk4SDKcggoFP7k89VeK
- 7twg==
+ bh=o8ITxXPVAXJIl7DYU1ZGSTuJwscSmRvrE+T7BLiEatQ=;
+ b=I8zGwmqEacJyBDZHi1C/PvYtUwGMo/iY0/meLFWvFGRaYRGjIUOQQhCd24LhZahbxQ
+ Bqulilb7btgTp/UoZNdciiqwzEG40rIUQ8TSx82zexJ+EaFMjhP/W0phLHrsWYh51b61
+ Cno88vzF9whM4aNZuvi9TWcsNSR1LEvwOsCy4j1m/YrC48mS4+DCJeIgkQO/fFJEPRjq
+ 1sGaYg+0Am/UEuzhWkx/rNxSbeke24zwA5RLaVZj1WTZWJgMlJ+tj3LocahMkTMT1R1K
+ wMUe4H6nn9KHZVOUvMUzsXmvbZVNy3YkDEdvEKoFcTrX/yqlorB/O2KFWtv8+5Qz08Ks
+ HHfQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+Pk+MqZGmR0XZuT6zPVHuAW2QCrZY9vwbLxA+zVw/ZqJvUubsMLqIMZpoQMtkRFS61H090Z8zFiQIx@nongnu.org
-X-Gm-Message-State: AOJu0YzN8SNyqzTQKPCbwjbKMzEitDjvIaR7NRj9LPu1xuemmL9kWIax
- dmNICeTCb3tb2a6Lt7oV8tvSOaifA+2JMKPo+gL9Wo95FFoXY0C0exNkCmanfFRFdSVkMfsris4
- dAcK3M3GNYEmSHZ5qSlAFOySHPk7SGd8=
-X-Gm-Gg: Acq92OF3qVZ+PVH9Z3T/ECw1xtYGiGe/9cQni0Kud0XONX7UHEfey0N88FyhKsjvqg9
- vBEs0oalVBldBl6yE0MvZ7xuXyUlkSafMRnn8AZCzNOZ+GpwYZWBxj9C0RMp76IKK9qnayUPSO+
- 3D40mGVjs6DvURpffRDKTKzxjLBL+Jk154T43V7IpMOZd0laQC34uYHHskn2oUwlXwpc6vR85LO
- BCL3tbKaI3r0uN3/M+42KtQZcLZKaT4Tgvx+HQho45A2hl192e/3IBhprOFtbW/IsEKKaegjLWh
- 643OHH0h
-X-Received: by 2002:a05:6402:1ece:b0:689:92c0:22b0 with SMTP id
- 4fb4d7f45d1cf-693c6a11cd5mr4438635a12.3.1781524036296; Mon, 15 Jun 2026
- 04:47:16 -0700 (PDT)
+ AFNElJ8jN6JFdvalyPtL64Y9WkKCUR2l0wKe6sSFmPpyYJiZbS3zYFehrZOKgaI7jnT4mSIozQXTKzpRvHGD@nongnu.org
+X-Gm-Message-State: AOJu0YyvQ/hAvMYuqYlyA0fqvqX3sy+s6z8+zsFl4m/6UwFtsm3ovANh
+ 1H3oxNX6RuWRhumqQ+e1qMWBBPFFaPQdMSkh0a35Ok9Q3KXqVXjupiGv7phsbzAUz7YQg2PinKn
+ iyGVq2IDay3QvF3Y9GvVXudSN3kq7kSk=
+X-Gm-Gg: Acq92OHHrqLEAR2w6gSuNloKg0Z379Er2ZXjYSVLmq6hos7yfXq3IZRJOiatDdlXgkj
+ YqJCh7uHKNuppl8QI5AUluCuvBYhOKzzhguz00ithFvDIAgO2pGRQdJiOEM6zAUdc4q2Cb3IUzD
+ 1lm7yfYYY1JM/IORDOYMvM/NKAwdSEXVLcBdjhtZHKQFYqGdIdAREY4+4U5Aay/uCBTOs3ePp2q
+ Wc89FTSK+es4BlWHq1IEhbgKG4M9B+oufrfmHH6OwJ8WGu/BkLYEkw6FAjpQ37tmYJ0i8k45qrp
+ l0CBIvXY
+X-Received: by 2002:a05:6402:4496:b0:691:52e1:646 with SMTP id
+ 4fb4d7f45d1cf-693c6a6af35mr4034562a12.18.1781524274021; Mon, 15 Jun 2026
+ 04:51:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260603065859.592063-1-joel@jms.id.au>
- <20260603065859.592063-9-joel@jms.id.au>
-In-Reply-To: <20260603065859.592063-9-joel@jms.id.au>
+ <20260603065859.592063-12-joel@jms.id.au>
+In-Reply-To: <20260603065859.592063-12-joel@jms.id.au>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Jun 2026 21:46:50 +1000
-X-Gm-Features: AVVi8Ce-aKIyl3kUWlGp9FFmZZ_aOL8VhdTS6HfBp3s-Ayx3pNE2wELa0WiT95Q
-Message-ID: <CAKmqyKPZjt8-pj8Ou8P52cAM-G4iTVujgJ=OJrZMn9u2iy6qJA@mail.gmail.com>
-Subject: Re: [PATCH v8 08/12] hw/riscv/atlantis: Provide a simple halting
- payload
+Date: Mon, 15 Jun 2026 21:50:46 +1000
+X-Gm-Features: AVVi8Cd4Z5hoiOLfbSTM3T5mJ_azApCWKfSXkUAfBEwTi8duNM8rfTXPK-cBLW4
+Message-ID: <CAKmqyKMeMhkUD_uhCXTtXXNJ2fEJNJqQYvuEpYmbWn9D-ubM_w@mail.gmail.com>
+Subject: Re: [PATCH v8 11/12] hw/riscv/atlantis: Integrate i2c controllers
 To: Joel Stanley <joel@jms.id.au>
 Cc: Alistair Francis <alistair.francis@wdc.com>,
  Nicholas Piggin <npiggin@gmail.com>, 
@@ -104,8 +103,8 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -131,91 +130,193 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On Wed, Jun 3, 2026 at 5:03=E2=80=AFPM Joel Stanley <joel@jms.id.au> wrote:
 >
-> From: Nicholas Piggin <npiggin@gmail.com>
+> Add DesignWare I2C controllers to the tt-atlantis machine.
 >
-> OpenSBI hangs before any console output if the domain init code sees the
-> next stage is not in an executable region.
+> Provide a fixed clock in the device tree so that the Linux driver probes
+> without WARNing.
 >
-> If no kernel payload is provided to QEMU, the next stage address is
-> NULL, and the riscv virt machine memory map ends up covering the 0
-> address with the catch all S-mode RWX region and so OpenSBI prints
-> console messages and does not hang until the next stage boot.
->
-> The Tenstorrent Atlantis machine address map has RAM starting at 0 and
-> it loads OpenSBI there, so it is M-mode and not accessible by S-mode,
-> tripping the early check and hang.
->
-> Add a helper to set up a simple payload that gets OpenSBI messages to
-> console, until OpenSBI can be fixed.
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
 
-I still don't like this. What is the status of the OpenSBI fix? Can we
-link to the upstream patch? I'm worried we are going to be stuck with
-this hack forever.
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
-> Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Signed-off-by: Joel Stanley <joel@jms.id.au>
 > ---
->  hw/riscv/tt_atlantis.c | 27 +++++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
+>  include/hw/riscv/tt_atlantis.h | 14 ++++++++
+>  hw/riscv/tt_atlantis.c         | 59 ++++++++++++++++++++++++++++++++++
+>  hw/riscv/Kconfig               |  1 +
+>  3 files changed, 74 insertions(+)
 >
+> diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlanti=
+s.h
+> index a17732ce8114..7f7d4a5a5905 100644
+> --- a/include/hw/riscv/tt_atlantis.h
+> +++ b/include/hw/riscv/tt_atlantis.h
+> @@ -11,12 +11,15 @@
+>
+>  #include "hw/core/boards.h"
+>  #include "hw/core/sysbus.h"
+> +#include "hw/i2c/designware_i2c.h"
+>  #include "hw/intc/riscv_imsic.h"
+>  #include "hw/riscv/riscv_hart.h"
+>
+>  #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
+>  OBJECT_DECLARE_SIMPLE_TYPE(TTAtlantisState, TT_ATLANTIS_MACHINE)
+>
+> +#define TT_ATL_NUM_I2C 5
+> +
+>  struct TTAtlantisState {
+>      /*< private >*/
+>      MachineState parent;
+> @@ -27,11 +30,17 @@ struct TTAtlantisState {
+>
+>      RISCVHartArrayState soc;
+>      DeviceState *irqchip;
+> +    DesignWareI2CState i2c[TT_ATL_NUM_I2C];
+>
+>      int fdt_size;
+>  };
+>
+>  enum {
+> +    TT_ATL_I2C0_IRQ =3D 33,
+> +    TT_ATL_I2C1_IRQ =3D 34,
+> +    TT_ATL_I2C2_IRQ =3D 35,
+> +    TT_ATL_I2C3_IRQ =3D 36,
+> +    TT_ATL_I2C4_IRQ =3D 37,
+>      TT_ATL_UART1_IRQ =3D 39,
+>  };
+>
+> @@ -40,6 +49,11 @@ enum {
+>      TT_ATL_BOOTROM,
+>      TT_ATL_DDR_LO,
+>      TT_ATL_DDR_HI,
+> +    TT_ATL_I2C0,
+> +    TT_ATL_I2C1,
+> +    TT_ATL_I2C2,
+> +    TT_ATL_I2C3,
+> +    TT_ATL_I2C4,
+>      TT_ATL_MAPLIC,
+>      TT_ATL_MIMSIC,
+>      TT_ATL_SAPLIC,
 > diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-> index 1ccd7d017c56..5de138578b48 100644
+> index 5de138578b48..b1ff0cbe2f61 100644
 > --- a/hw/riscv/tt_atlantis.c
 > +++ b/hw/riscv/tt_atlantis.c
-> @@ -413,6 +413,30 @@ static void load_fdt(TTAtlantisState *s)
->      create_fdt_memory(s);
+> @@ -53,6 +53,11 @@ static const MemMapEntry tt_atlantis_memmap[] =3D {
+>      [TT_ATL_ACLINT] =3D           { 0xa2180000,       0x10000 },
+>      [TT_ATL_SIMSIC] =3D           { 0xa4000000,      0x200000 },
+>      [TT_ATL_MAPLIC] =3D           { 0xcc000000,     0x4000000 },
+> +    [TT_ATL_I2C0] =3D             { 0xd4040000,       0x10000 },
+> +    [TT_ATL_I2C1] =3D             { 0xd4050000,       0x10000 },
+> +    [TT_ATL_I2C2] =3D             { 0xd4060000,       0x10000 },
+> +    [TT_ATL_I2C3] =3D             { 0xd4070000,       0x10000 },
+> +    [TT_ATL_I2C4] =3D             { 0xd4080000,       0x10000 },
+>      [TT_ATL_UART1] =3D            { 0xd4110000,       0x10000 },
+>      [TT_ATL_SAPLIC] =3D           { 0xe8000000,     0x4000000 },
+>      [TT_ATL_DDR_HI] =3D          { 0x100000000,  0x1000000000 },
+> @@ -333,10 +338,40 @@ static void create_fdt_rng(void *fdt)
+>      qemu_fdt_setprop(fdt, "/chosen", "rng-seed", rng_seed, sizeof(rng_se=
+ed));
 >  }
 >
-> +/*
-> + * This works around a problem with OpenSBI hanging with no console outp=
-ut if
-> + * no payload is provided. By chance, machines with memory at 0x80000000=
- do get
-> + * output, but Atlantis memory begins at 0x0 which takes a different Ope=
-nSBI
-> + * error path.
-> + *
-> + * This can be removed when OpenSBI is fixed in QEMU.
-> + */
-> +static void tt_atlantis_setup_halting_payload_opensbi_fixup(
-> +                                        RISCVBootInfo *info, hwaddr addr=
-)
+> +static void create_fdt_clk(void *fdt, const char *clock_name,
+> +                           uint32_t freq, uint32_t phandle)
 > +{
-> +    /* Store the payload vector in little_endian byte order */
-> +    static const uint32_t payload_vec[] =3D {
-> +        const_le32(0x10500073),         /* 1: wfi           */
-> +        const_le32(0xffdff06f),         /* j       1b       */
-> +    };
-> +    rom_add_blob_fixed_as("mrom.payload", payload_vec, sizeof(payload_ve=
-c),
-> +                          addr, &address_space_memory);
+> +    g_autofree char *name =3D g_strdup_printf("/clocks/%s", clock_name);
 > +
-> +    info->kernel_size =3D sizeof(payload_vec);
-> +    info->image_low_addr =3D addr;
-> +    info->image_high_addr =3D info->image_low_addr + info->kernel_size;
+> +    qemu_fdt_add_path(fdt, name);
+> +    qemu_fdt_setprop_string(fdt, name, "compatible", "fixed-clock");
+> +    qemu_fdt_setprop_string(fdt, name, "clock-output-names", clock_name)=
+;
+> +    qemu_fdt_setprop_cell(fdt, name, "#clock-cells", 0);
+> +    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", freq);
+> +    qemu_fdt_setprop_cell(fdt, name, "phandle", phandle);
 > +}
 > +
->  static void tt_atlantis_machine_done(Notifier *notifier, void *data)
+> +static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t i=
+rq,
+> +                           uint32_t irqchip_phandle, uint32_t clk_phandl=
+e)
+> +{
+> +    g_autofree char *name =3D g_strdup_printf("/soc/i2c@%"HWADDR_PRIX, m=
+em->base);
+> +
+> +    qemu_fdt_add_subnode(fdt, name);
+> +    qemu_fdt_setprop_string(fdt, name, "compatible", "snps,designware-i2=
+c");
+> +    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem-=
+>size);
+> +    qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irqchip_phandle=
+);
+> +    qemu_fdt_setprop_cells(fdt, name, "interrupts", irq, 0x4);
+> +    qemu_fdt_setprop_cell(fdt, name, "clocks", clk_phandle);
+> +    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 100000);
+> +    qemu_fdt_setprop_cell(fdt, name, "#address-cells", 1);
+> +    qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
+> +}
+> +
+>  static void finalize_fdt(TTAtlantisState *s)
 >  {
->      TTAtlantisState *s =3D container_of(notifier, TTAtlantisState, machi=
-ne_done);
-> @@ -450,6 +474,9 @@ static void tt_atlantis_machine_done(Notifier *notifi=
-er, void *data)
->      if (machine->kernel_filename) {
->          riscv_load_kernel(machine, &boot_info, kernel_start_addr,
->                            true, NULL);
-> +    } else {
-> +        tt_atlantis_setup_halting_payload_opensbi_fixup(&boot_info,
-> +                                                        kernel_start_add=
-r);
->      }
->      kernel_entry =3D boot_info.image_low_addr;
+>      uint32_t aplic_s_phandle =3D next_phandle();
+>      uint32_t imsic_s_phandle =3D next_phandle();
+> +    uint32_t periph_clk_phandle =3D next_phandle();
+>      void *fdt =3D MACHINE(s)->fdt;
 >
+>      create_fdt_cpu(s, s->memmap, aplic_s_phandle, imsic_s_phandle);
+> @@ -350,6 +385,15 @@ static void finalize_fdt(TTAtlantisState *s)
+>
+>      create_fdt_uart(fdt, &s->memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
+>                      aplic_s_phandle);
+> +
+> +    create_fdt_clk(fdt, "periph-clk", 100000000, periph_clk_phandle);
+> +
+> +    for (int i =3D 0; i < TT_ATL_NUM_I2C; i++) {
+> +        create_fdt_i2c(fdt,
+> +                       &s->memmap[TT_ATL_I2C0 + i],
+> +                       TT_ATL_I2C0_IRQ + i,
+> +                       aplic_s_phandle, periph_clk_phandle);
+> +    }
+>  }
+>
+>  static void create_fdt(TTAtlantisState *s)
+> @@ -581,6 +625,21 @@ static void tt_atlantis_machine_init(MachineState *m=
+achine)
+>                                  s->memmap[TT_ATL_UART1].base,
+>                                  s->memmap[TT_ATL_UART1].size);
+>
+> +    /* I2C */
+> +    for (int i =3D 0; i < TT_ATL_NUM_I2C; i++) {
+> +        SysBusDevice *sbd;
+> +
+> +        object_initialize_child(OBJECT(s), "i2c[*]", &s->i2c[i],
+> +                                TYPE_DESIGNWARE_I2C);
+> +        sbd =3D SYS_BUS_DEVICE(&s->i2c[i]);
+> +        sysbus_realize(sbd, &error_fatal);
+> +        memory_region_add_subregion(system_memory,
+> +                                    s->memmap[TT_ATL_I2C0 + i].base,
+> +                                    sysbus_mmio_get_region(sbd, 0));
+> +        sysbus_connect_irq(sbd, 0,
+> +                           qdev_get_gpio_in(s->irqchip, TT_ATL_I2C0_IRQ =
++ i));
+> +    }
+> +
+>      /* Load or create device tree */
+>      if (machine->dtb) {
+>          load_fdt(s);
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index aaf029c9ed5e..38180a903fbf 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -129,6 +129,7 @@ config TENSTORRENT
+>      select RISCV_IMSIC
+>      select SERIAL_MM
+>      select DEVICE_TREE
+> +    select DESIGNWARE_I2C
+>
+>  config XIANGSHAN_KUNMINGHU
+>      bool
 > --
 > 2.47.3
 >
