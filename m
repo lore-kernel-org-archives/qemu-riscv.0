@@ -4,127 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CBEBCD98DA
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jun 2026 20:40:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CC28CD98E0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jun 2026 20:41:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZE4T-0002uO-7X; Mon, 15 Jun 2026 16:38:13 -0400
+	id 1wZE4T-0002v5-Mk; Mon, 15 Jun 2026 16:38:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wZE4Q-0002tB-JO
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 16:38:11 -0400
+ id 1wZE4S-0002tU-5H
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 16:38:12 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wZE4P-0002DM-2t
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 16:38:10 -0400
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ id 1wZE4Q-0002Do-Dt
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 16:38:11 -0400
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65FJ1UWq1367680
- for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 20:38:07 GMT
+ 65FJ0KGR1389732
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 20:38:09 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=GAA61L+XZ0F
- SCpoJ7H3XQj4XJSxu1eEJBcyu69Qdiqc=; b=ZhZPiPsSjfLQg+RRJAzmi9GJv80
- VwhujWR9/X8gZt+4Pax1R52rqKG0UTMrw8p/00kuxcs7xqYUuKl9vag5QK8QOC2u
- vzsU5t2g6miM1V7X369mt91ZKFRon3xwN2Oj1HDyW7M+JxQ/wy5BnCSk7/p6f+JA
- Sx/QUT/7sNHQXQQzYxbgT+ohK1xASeelglZkg/NfaY3AAIKOB07AjNKHFIGgor5b
- 5pJlfYKVRXurNILUZJ7q9xd2s3lyfoTUidw2TYbKN31dhTNKYuCJNNDi9UWd+RLb
- YDdQ5/l+/67mwLcS6teoulswnJZ6NAUxAMdifDKFYRlprhllryex/JOkOqA==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4etegutxew-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=wKEor47NbLS
+ cwX/g4lVMu6L2DhfHhbRrWJeN0erWBWw=; b=M5azKEfAAebU62hU6qgJTHyEfGh
+ m0SXGZIWgMYjQlbMhYcFQ9OZRAxeHyjeJM7YcGbqe8NM279Tft3y06o1EqhheGYd
+ H6aQwcAUuMJKZZaASQPieRkTvEEkKkE/Q8UfwHQISnp9HEbYiaf0Z7KTS7DPvCtC
+ /g9muR9quDtndbJMFsG0ZvYV0iVOu3pzQvXX/gXDKmwQX4MOomjNjc56yb/ezZfF
+ feJdoI0vKA3W1kDtBpDkEmaE79+7NYdolJsqzH7c8LOeRZQapkWYiF7MVS6yvKAo
+ +ACjMbN8Uc1VSm8TgPr2KkZKg6zGVW8YReei0CyXQFr3lrfRi61U1d/c8RA==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eter22xq4-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 20:38:06 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-517c65c019bso107795061cf.0
- for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 13:38:06 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 20:38:09 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-5178fc89b2aso62427281cf.3
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 13:38:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781555886; x=1782160686; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1781555889; x=1782160689; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GAA61L+XZ0FSCpoJ7H3XQj4XJSxu1eEJBcyu69Qdiqc=;
- b=OhAhuNTtwfUM4HUTY17Dbi+2UfgT8vxDjj4dvQe6IqUFj834Aq/9HsEWFuG8miRBnu
- ozHRJ37ZwKP6ZPutXS0bmrMYWavZ/iB+viOQh8Py2X0W5+5lF9GIOmDr7vPEkIqXfpmd
- X+qA1hF1WNYaRo0co9KgCh5nIiuX+0Ob9Cj869kCEPiIQz2CgJKCpn8Cb7/xFVZGI6BY
- Hg7qdRwCcoGGs4kR0XAonhMDA5Q6jnzn7OzZLPaoI6UBH93qk4QkNYxCV3svWxwbNCrS
- y8d/6kyBJabYqa20oPPJGP0TDgaLCzEIltTc+2+9k8bKsiPYWSY9WDQ4Y5vhq3uz33xo
- KPUA==
+ bh=wKEor47NbLScwX/g4lVMu6L2DhfHhbRrWJeN0erWBWw=;
+ b=UhTLVUEIbEs5/4Zb5rjVVqt+AgVBdV7lfPvRSAaTpeuN9BLX5lIfeQ+fqVfSP8Yi25
+ bc/yZ0YdnqbryWJVJgd6gqdx5eXH9SNG6NUZuy3vuv0geirlCA2xEp4wW1WGhOlaZqGE
+ SDeZgajgZcvvhN00k5M4xuAA2x3iYhFz5RRtPKUKRNNpNnEuCMFdHglRHJbQz5wsbk7R
+ JXM6lAJ7WM9NbJSnI31RkxscJl0/xsw8wSygezC2B02m4FINC37Ei9FUoG1ZudqmXG4B
+ Xr/hfJI+GMhnqK9F7kovUvU8OkBm2PB+Ka6CQkd7DcmJzSMci+K5gAl5x30VnscVTeNM
+ qwhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781555886; x=1782160686;
+ d=1e100.net; s=20251104; t=1781555889; x=1782160689;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=GAA61L+XZ0FSCpoJ7H3XQj4XJSxu1eEJBcyu69Qdiqc=;
- b=lp6994NQDHmhRqVfG/V+o0HJdOt3KmdFt2tEZVpc2lD0hIyPnfXzJSGdMqbtFewwFG
- t5i2hCjYTyiLBf6388OR22g4X+bVGWZvBYyspKCdzxlOeDPXNrgSReWkdRw0cdazp8wH
- jAglMDEP+Ytk5r88lSjt9E3iMvxg2QmPxDvsFnrTpBbkpaFOru02E98O2QoHVu0zSZ6g
- UZ30FJVnA49T2HNw1y7H75UC/xD7UQcHInsWSNghixssFkBJAAoRskfLh03gWdY5FIA6
- HCc1zvbzYnaC/fhY9tqK/TPgZN516p4C3nr0mqFfaRCYTa/j8wLnXrP710GJvF0jPvXg
- 8RIw==
-X-Gm-Message-State: AOJu0YyHLAH5ZJiFc5LIf9cXBGiPOGamkWs8PN/WWbw54MSwiMelCXDZ
- 9u9hhPZb25f9qGb8bjDvUiq0VKkJDw9b+CdWyyXHy+8V0xHeQmarsFJ8k2d/2gdw++thV6RRIxw
- gNgk3EyVv+uta7hCHLiowiBpWCGKIoFvpVFNYb1lasruyEGXxjDQC18ovmw==
-X-Gm-Gg: Acq92OFGTIvr2BblhmsRapZydGKaQoJGAyxXLRBebPyBwJqi7kE0XafGORnKegcqbWu
- Lh3cXFjCfm3TY70Dn/jLajj6pxC7r7cDI+rROQEOwO2p65WiR3ecffZLMS72mnFmigW3fn9/Gim
- V74FFY8R8JrIari6j1vQRx3uZ7l/EdzcQgfVhFa0yJzTXbKmOc4Zj7WsmEwQe8GvGmfcPLYBiu9
- zlKNi9rottCSInN/kD6VroPkn7OtagKllcxoY08/LfQsh3COAU9zvKim7zMYT9vh9dPGqIow4zz
- UE+r7mwvTG0Id5FmuQ8gkYorIGHwN8ylAIG9LBxDXpjNLpRItZDHEy7vqxSQ0PWeF9YEib0MyXT
- AEFKcN6rSzKiqLsquO7tesWJwCwx+iAm4ZGFxThKg9MG5U/MCoHXTpLyzHqA=
-X-Received: by 2002:a05:622a:8c7:b0:516:d943:175c with SMTP id
- d75a77b69052e-51953718a35mr197446501cf.56.1781555886332; 
- Mon, 15 Jun 2026 13:38:06 -0700 (PDT)
-X-Received: by 2002:a05:622a:8c7:b0:516:d943:175c with SMTP id
- d75a77b69052e-51953718a35mr197446121cf.56.1781555885850; 
- Mon, 15 Jun 2026 13:38:05 -0700 (PDT)
+ bh=wKEor47NbLScwX/g4lVMu6L2DhfHhbRrWJeN0erWBWw=;
+ b=DTINBetCMu1vTsnDyhCSxIxWDK+vjdeXtiNkrkAkaKSqY+Y39rev8aB7HBYtzW/fcN
+ kLshT3yTtGCgyW/8yl7I497zhqsJCHZ7FandwMZpoc3yHVBblOot2lZaz4bctIbUePmO
+ v8mryKvima/a+nVPQMIZPs89ONGLPYE/dL3cJcsa1W+xeZ1U+Re32Iqvmg92wrtAefvX
+ CXwa+vvwAC7sZ5DzYYliZb0mSnwvCZ3Cu2FkwJHMhjEC5jFRS5djYVcF506bNdQAF7em
+ E/voTz0+/Jai3WDt3GF0970TD794MQg4HZ9FYnyLzTvS8FMm3OBIPAyU89EiUOJCOTY9
+ Jasg==
+X-Gm-Message-State: AOJu0YzC34pHUpSgFJqbQEiBoxvzJbgmaZzvGiC8VDn1ZxPhcVVvvsCe
+ 9UXcEM/4JKD9DOmy3/JHoyu4X1J4ixP/mH6W2mQJEmcXItBcgc6jer6LmqkHzFVIDhausKA+ojK
+ P5lPeE1W3huZ2RnFiHLbAHQxiTI9KWepOwO3J69GyJZDiwliCNANLbgRBiQ==
+X-Gm-Gg: Acq92OFCKKUmsl5HapqC6ttXBHdWAagvmrD1bQuhJrO0UGCaZk7fGwcjJJahb4VRJG+
+ mFecL4a8wbxUkBQZoFKfFrrxjlKwiXVzGeio8EG27fReHhGZieGXfxcDUGQoSREWv8wn5uyz1sK
+ 5G3/vrYN3/lFIMHPL858+87Sbl3vECInYREcNH9MGMgYZafmrT2KW2ygQAosQeA/c6t9CJO6b4n
+ AD2X3tnxO5bjpm9eul6NBPTUbQ/XtegxqjCg+DQ6LZGUkDTtWzSo4guIWgsu8RoydbsZDa2IZhw
+ /SZaP/xIeh9hJoGyC/c57GAqiAdzK1FgEYv8LIxZqI99tnWe0/BtNspmcDg1KDEGS9krujqriBR
+ ELxSPozjC+jcO7VuFjsCkKkog3vyLBKuft+kcs3en1nosRxZXgZhAmqe9eBQ=
+X-Received: by 2002:a05:622a:4fc8:b0:517:7971:a234 with SMTP id
+ d75a77b69052e-51953360166mr145911031cf.4.1781555888727; 
+ Mon, 15 Jun 2026 13:38:08 -0700 (PDT)
+X-Received: by 2002:a05:622a:4fc8:b0:517:7971:a234 with SMTP id
+ d75a77b69052e-51953360166mr145910721cf.4.1781555888337; 
+ Mon, 15 Jun 2026 13:38:08 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.170.117.62])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8d9f4740fbasm9749906d6.29.2026.06.15.13.38.03
+ 6a1803df08f44-8d9f4740fbasm9749906d6.29.2026.06.15.13.38.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jun 2026 13:38:05 -0700 (PDT)
+ Mon, 15 Jun 2026 13:38:07 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 11/13] hw/riscv/spike.c: use create_fdt_socket_cpus()
-Date: Mon, 15 Jun 2026 17:37:31 -0300
-Message-ID: <20260615203734.954428-12-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH 12/13] hw/riscv/fdt_common.c: create
+ create_fdt_socket_cpu_internal()
+Date: Mon, 15 Jun 2026 17:37:32 -0300
+Message-ID: <20260615203734.954428-13-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260615203734.954428-1-daniel.barboza@oss.qualcomm.com>
 References: <20260615203734.954428-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDIxOSBTYWx0ZWRfXw0e+zVZ4/EI4
- 9CtHBJnQB5tLObFXggPwm3PkXauraI5YgASHer1TwSY5QEtCf7JiDOTCkwBzcV9cq5IaMGTPBRT
- 6vqlOJ7kaC8LbetXbA2TcM3Hu1BI8tgaBmsQuqqijXYBRasoOPlozxkJvn6RIURc/FsxlJ56Lmn
- juq6bQYOg6bULDj07ZLeHmPFKz5U8tSkbyDIy/E/8+rCcZWY6Y56Zx3XaHfURVhrPBy5DP1ILAx
- c/cpSDl3TibjrnPh5FrymL7HPGCRnW2wH/XewKBCRG8D8L7uyctKUl2XVc0ROa4IgQvIjWanKeA
- ENFWUFBmF4/w6f9B7zXYuz0ruTQn/sKjgLfNyF1CHdP/9EMNKSeck+5zeP73b0+HheWQtZc2hce
- Vm/Aj5fnmRXsiACl+MJVPil4YhjjDltnKCLc9c8Of4oAvxRBl4k2EHhO2Cv1YXikDFwiWtfWZJ/
- BIdmZoLHOFKrUVxeRnQ==
-X-Proofpoint-ORIG-GUID: EBGy0SCly_7IVeNbfkqjYPgv5Jw5CZ7A
-X-Authority-Analysis: v=2.4 cv=HMvz0Itv c=1 sm=1 tr=0 ts=6a3062ae cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDIxOSBTYWx0ZWRfX/U21DrMv1ela
+ 8ceF3SoClPStipCQ+mpvqnZJsDeFY9+5otXLGTGW5FTIuiy+X32GgeXkH6US1ZcU5Ol/Vu3gAwn
+ MBsQ1JhB6k4ZEkvZMDKYd1DhO7/zESk=
+X-Proofpoint-GUID: HPqYhdJNH_OWROeZCaZjHK0RDt3Kdm-e
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDIxOSBTYWx0ZWRfX7+0vvGcLZ2ug
+ etivZcv8R6SsM/3wuQBpwpTc7kdMgveArJTAar24FAfnJeQ7dIDzGmK11a8yBU9SnvTj/9x+Xgj
+ yeexJ4HLjEA4urTGVoDSf9ebDIrkSiXFcBM/5xEg9gH7J9uvwSWYMxPzrGdhU8r4es/r5iI4XrE
+ 5bvrparkNBdZO9DcBYUBWGhIIsfz338QhXqvNxlMQldEt5UEo0w61idrztLPikAZLA85d846Fxy
+ gzl5Fjd9QPWaDT/+En54B3c25T+ipcRz+E/JPoosp2QybOIgQ7GdtS4h4sy3ZS2XYl9rKy78FTo
+ F2oN0AGUE34ANlWZN7XVhLJksGfdF/DdZf448C+1jk4a1DF4lzeBmBHollDaxvVBXB9QXjmREOo
+ r7UK8xGI7gORLbx4RyD391l7oZkxcLF7JWmsgeEUyyAbiGGfw+a3epMMkxkLLcnpxLWWVhe/dpV
+ MIZEoymIbEsE1dzTHrQ==
+X-Authority-Analysis: v=2.4 cv=F4tnsKhN c=1 sm=1 tr=0 ts=6a3062b1 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
  a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=QnBC-bTUeyzvsoOUzocA:9 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDIxOSBTYWx0ZWRfXyFk74qgCe6zW
- 291+A/MBvreqG0n9zcCpIskeUSAiquqyrMEeqPIXgtnpiL/YV594KCa/RunZHte/ueMQhlLSl4C
- 9aBaEbrvlmMLwPENodQ5vw2UeS6gcwA=
-X-Proofpoint-GUID: EBGy0SCly_7IVeNbfkqjYPgv5Jw5CZ7A
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
+ a=uOZKRBi9aaBGZPAeGrsA:9 a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-ORIG-GUID: HPqYhdJNH_OWROeZCaZjHK0RDt3Kdm-e
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-15_05,2026-06-15_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 spamscore=0 malwarescore=0 suspectscore=0
- phishscore=0 bulkscore=0 adultscore=0 priorityscore=1501 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606150219
+ phishscore=0 bulkscore=0 clxscore=1015 impostorscore=0 spamscore=0
+ adultscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606040000
+ definitions=main-2606150219
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -149,93 +151,152 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use the new FDT helper to create FDTs for the CPU sockets.
+The sifive_u board does not share the same CPU socket FDT bits from the
+other boards.  In particular the riscv,isa creation is done using either
+CPU0 from soc.e_cpus.harts, and for all other CPUs soc.u_cups.harts is
+used.
+
+It would be too cumbersome to add all these details in the common code
+so we're going to add a special sifive_u only helper that shares the
+common bits with the common helper used by the other boards.
+
+create_fdt_socket_cpu_internal() contains the common bits shared between
+the sifive_u board and the rest.
 
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- hw/riscv/spike.c | 54 +++++++-----------------------------------------
- 1 file changed, 7 insertions(+), 47 deletions(-)
+ hw/riscv/fdt-common.c | 108 +++++++++++++++++++++++++-----------------
+ 1 file changed, 65 insertions(+), 43 deletions(-)
 
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index ee8232f734..4e60724c14 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -56,11 +56,9 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
-     void *fdt;
-     int fdt_size;
-     unsigned long clint_addr;
--    int cpu, socket;
-+    int socket;
-     MachineState *ms = MACHINE(s);
--    uint32_t cpu_phandle, phandle = 1;
--    char *clust_name;
--    char *core_name, *cpu_name, *intc_name;
-+    uint32_t phandle = 1;
-     bool numa_enabled = riscv_numa_enabled(ms);
+diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
+index 6c795409a4..70168ad657 100644
+--- a/hw/riscv/fdt-common.c
++++ b/hw/riscv/fdt-common.c
+@@ -94,28 +94,29 @@ void fdt_create_cpu_socket_subnode(void *fdt, uint64_t timebase_frequency)
+     qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
+ }
  
-     fdt = ms->fdt = create_board_device_tree("ucbbar,spike-bare,qemu",
-@@ -82,48 +80,11 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
-                          riscv_socket_mem_offset(ms, socket);
-         uint64_t memsize =  riscv_socket_mem_size(ms, socket);
+-void create_fdt_socket_cpus(void *fdt, RISCVCPU *socket_harts,
+-                            int socket_id, int num_harts_socket,
+-                            int socket_hartid_base, uint32_t *phandle,
+-                            uint32_t *intc_phandles, bool numa_enabled,
+-                            bool is_32_bit)
++static void
++create_fdt_socket_cpu_internal(void *fdt, char *clust_name, RISCVCPU *cpu_ptr,
++                               int cpu, int socket_id, int socket_hartid_base,
++                               uint32_t *phandle, uint32_t *intc_phandles,
++                               bool numa_enabled, bool is_32_bit)
+ {
+-    g_autofree char *clust_name = NULL;
+-    uint32_t cpu_phandle;
+-
+-    clust_name = g_strdup_printf("/cpus/cpu-map/cluster%d", socket_id);
+-    qemu_fdt_add_subnode(fdt, clust_name);
+-
+-    for (int cpu = num_harts_socket - 1; cpu >= 0; cpu--) {
+-        RISCVCPU *cpu_ptr = &socket_harts[cpu];
++    g_autofree char *cpu_name = NULL;
++    g_autofree char *core_name = NULL;
++    g_autofree char *intc_name = NULL;
++    uint32_t cpu_phandle = (*phandle)++;
++    bool is_sifive_u = cpu_ptr == NULL;
++
++    cpu_name = g_strdup_printf("/cpus/cpu@%d", socket_hartid_base + cpu);
++
++    /*
++     * The sifive_u board has an exclusive satp and riscv,isa
++     * schema that can't be shared with other boards, so part
++     * of the CPU FDT creation (i.e. the /cpus/cpu@N subnode)
++     * is still being done by the board.
++     */
++    if (!is_sifive_u) {
+         int8_t satp_mode_max = cpu_ptr->cfg.max_satp_mode;
+-        g_autofree char *cpu_name = NULL;
+-        g_autofree char *core_name = NULL;
+-        g_autofree char *intc_name = NULL;
+-
+-        cpu_phandle = (*phandle)++;
  
--        clust_name = g_strdup_printf("/cpus/cpu-map/cluster%d", socket);
--        qemu_fdt_add_subnode(fdt, clust_name);
--
--        for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
--            cpu_phandle = phandle++;
--
--            cpu_name = g_strdup_printf("/cpus/cpu@%d",
--                s->soc[socket].hartid_base + cpu);
--            qemu_fdt_add_subnode(fdt, cpu_name);
--            if (is_32_bit) {
--                qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv32");
--            } else {
--                qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv48");
--            }
--            riscv_isa_write_fdt(&s->soc[socket].harts[cpu], fdt, cpu_name);
--            qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
--            qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
--            qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
--                s->soc[socket].hartid_base + cpu);
--            qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
--            riscv_socket_fdt_write_id(ms, cpu_name, socket);
--            qemu_fdt_setprop_cell(fdt, cpu_name, "phandle", cpu_phandle);
--
--            intc_phandles[cpu] = phandle++;
--
--            intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
--            qemu_fdt_add_subnode(fdt, intc_name);
--            qemu_fdt_setprop_cell(fdt, intc_name, "phandle",
--                                  intc_phandles[cpu]);
--            qemu_fdt_setprop_string(fdt, intc_name, "compatible",
--                "riscv,cpu-intc");
--            qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
--            qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
--
--            core_name = g_strdup_printf("%s/core%d", clust_name, cpu);
--            qemu_fdt_add_subnode(fdt, core_name);
--            qemu_fdt_setprop_cell(fdt, core_name, "cpu", cpu_phandle);
--
--            g_free(core_name);
--            g_free(intc_name);
--            g_free(cpu_name);
+-        cpu_name = g_strdup_printf("/cpus/cpu@%d", socket_hartid_base + cpu);
+         qemu_fdt_add_subnode(fdt, cpu_name);
+ 
+         if (satp_mode_max != -1) {
+@@ -140,30 +141,51 @@ void create_fdt_socket_cpus(void *fdt, RISCVCPU *socket_harts,
+             qemu_fdt_setprop_cell(fdt, cpu_name, "riscv,cbop-block-size",
+                                   cpu_ptr->cfg.cbop_blocksize);
+         }
++    }
+ 
+-        qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
+-        qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
+-        qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
+-                              socket_hartid_base + cpu);
+-        qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
+-        if (numa_enabled) {
+-            qemu_fdt_setprop_cell(fdt, cpu_name, "numa-node-id", socket_id);
 -        }
-+        create_fdt_socket_cpus(fdt, (&s->soc[socket])->harts, socket,
-+                               s->soc[socket].num_harts,
-+                               s->soc[socket].hartid_base,
-+                               &phandle, intc_phandles, numa_enabled,
-+                               is_32_bit);
- 
-         create_fdt_socket_memory(fdt, memaddr, memsize, socket,
-                                  riscv_numa_enabled(ms));
-@@ -133,7 +94,6 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
-         create_fdt_socket_clint(fdt, clint_addr, memmap[SPIKE_CLINT].size,
-                                 socket, intc_phandles,
-                                 s->soc[socket].num_harts, numa_enabled);
--        g_free(clust_name);
+-        qemu_fdt_setprop_cell(fdt, cpu_name, "phandle", cpu_phandle);
+-
+-        intc_phandles[cpu] = (*phandle)++;
+-
+-        intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
+-        qemu_fdt_add_subnode(fdt, intc_name);
+-        qemu_fdt_setprop_cell(fdt, intc_name, "phandle",
+-                              intc_phandles[cpu]);
+-        qemu_fdt_setprop_string(fdt, intc_name, "compatible",
+-                                "riscv,cpu-intc");
+-        qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
+-        qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
+-
+-        core_name = g_strdup_printf("%s/core%d", clust_name, cpu);
+-        qemu_fdt_add_subnode(fdt, core_name);
+-        qemu_fdt_setprop_cell(fdt, core_name, "cpu", cpu_phandle);
++    qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
++    qemu_fdt_setprop_string(fdt, cpu_name, "status", "okay");
++    qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
++                          socket_hartid_base + cpu);
++    qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
++    if (numa_enabled) {
++        qemu_fdt_setprop_cell(fdt, cpu_name, "numa-node-id", socket_id);
++    }
++    qemu_fdt_setprop_cell(fdt, cpu_name, "phandle", cpu_phandle);
++
++    intc_phandles[cpu] = (*phandle)++;
++
++    intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
++    qemu_fdt_add_subnode(fdt, intc_name);
++    qemu_fdt_setprop_cell(fdt, intc_name, "phandle",
++                          intc_phandles[cpu]);
++    qemu_fdt_setprop_string(fdt, intc_name, "compatible",
++                            "riscv,cpu-intc");
++    qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NULL, 0);
++    qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1);
++
++    core_name = g_strdup_printf("%s/core%d", clust_name, cpu);
++    qemu_fdt_add_subnode(fdt, core_name);
++    qemu_fdt_setprop_cell(fdt, core_name, "cpu", cpu_phandle);
++}
++
++void create_fdt_socket_cpus(void *fdt, RISCVCPU *socket_harts,
++                            int socket_id, int num_harts_socket,
++                            int socket_hartid_base, uint32_t *phandle,
++                            uint32_t *intc_phandles, bool numa_enabled,
++                            bool is_32_bit)
++{
++    g_autofree char *clust_name = NULL;
++
++    clust_name = g_strdup_printf("/cpus/cpu-map/cluster%d", socket_id);
++    qemu_fdt_add_subnode(fdt, clust_name);
++
++    for (int cpu = num_harts_socket - 1; cpu >= 0; cpu--) {
++        RISCVCPU *cpu_ptr = &socket_harts[cpu];
++
++        create_fdt_socket_cpu_internal(fdt, clust_name, cpu_ptr, cpu,
++                                       socket_id, socket_hartid_base,
++                                       phandle, intc_phandles, numa_enabled,
++                                       is_32_bit);
      }
- 
-     riscv_socket_fdt_write_distance_matrix(ms);
+ }
 -- 
 2.43.0
 
