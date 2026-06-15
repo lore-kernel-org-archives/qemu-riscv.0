@@ -4,95 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B5B9CD98DE
-	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jun 2026 12:36:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51AB3CD98C5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 15 Jun 2026 13:02:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZ6Xo-0000Wq-12; Mon, 15 Jun 2026 08:36:00 -0400
+	id 1wZ6wv-0005me-Kc; Mon, 15 Jun 2026 09:01:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <qingwei.hu@bytedance.com>)
- id 1wZ6Xl-0000WC-NJ
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 08:35:57 -0400
-Received: from mail-oo1-xc2b.google.com ([2607:f8b0:4864:20::c2b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <qingwei.hu@bytedance.com>)
- id 1wZ6Xi-0007eZ-Tr
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 08:35:57 -0400
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-69e9b037d82so2557868eaf.2
- for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 05:35:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wZ6ws-0005m7-OM
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 09:01:55 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wZ6wp-0005Ve-PE
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 09:01:54 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65FCbbWc386584
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 13:01:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ WUHcU1V/1c+24BRWz761wIQ/26MSKmQQQ2vGWP21ynw=; b=MfhW3AwFdN1rcT6K
+ cBCJnINudRwLVChbcSyv6N0z1Ca6vryM3CH/hHkB6PHi1kVZpsLoCweumAsd/1PV
+ WeLnhlCH+9N6WHgTxQZUN+xKQVUiEWxLid+vMO5AHyTjOBegfvC7uDGKTmIIV7Wc
+ ZvuWOSj3VM877G5njBUPTVI39T45J2HFOmUzeD7tkRC+ZJkzwwugqnwtuvJHmLxW
+ d7so64HUXjU8woimT7tTRDVjeiGWR82hak1sb/WaBt3835ZuZoYbUj3aSoBv9Yr3
+ smoLp0+iWiUH6NB9vqBOinvyiJJTuZgwNOd+6O0BgyhT5gZzbIhUfri/5EyH0zze
+ SeZDtA==
+Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com
+ [74.125.224.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4etetf0rru-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 13:01:47 +0000 (GMT)
+Received: by mail-yx1-f70.google.com with SMTP id
+ 956f58d0204a3-660e9ff05c1so4386327d50.3
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 06:01:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance.com; s=google; t=1781526953; x=1782131753; darn=nongnu.org;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lJBaTgnYBhJ/7ZxZTUrmZhgNziWSVLbeEuWoj2TvCuQ=;
- b=jnpSXq4HFdGjs4IWTAmJLWkb1LQy0eQ/CU9/pHgJoA0rL09ob3cVGTS3pzTiuVkCxo
- yJOE99hOfdZ4Ef9fEOT7J1rcjaS4QitSlAER02pXiFxfX3B2tPFRS27XEGhHmuyHeNP2
- uvyakyLsQKAwmYly8KotBS38kW3Hl78+LUwk5Ius2MpsKJFlBHUt/vYcQWRry5tRh8OH
- Cq84EmXP4RtcrnhPAvEGB1AvS8pZQgX0O1V+PY+olWV/1soXtZ0qd8PXDXkW99XKLKdx
- ld9ECUTkoAcM4cONoA7pW8KEaO4V++DO0wIpOqFy8eKKhLa+ETpqzhHwd1DBkGcwj6Zk
- 263g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781526953; x=1782131753;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:x-gm-gg:x-gm-message-state
+ d=oss.qualcomm.com; s=google; t=1781528507; x=1782133307; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=lJBaTgnYBhJ/7ZxZTUrmZhgNziWSVLbeEuWoj2TvCuQ=;
- b=P17x3eUdUOe6mvK6UbluextYGsDiqLl4RkPWfEwc495POpkVpiF3cAYYXh5SUh5D1D
- F38lMoWvVLa+deW30Wly5TCSMJ79LzgEOnqR4t2nJvsu+JgJIGFdgMRX6gnWNQ0hLwwd
- dWUJ8dII/x1l1B9N6uwkVlJEGGu13z6/9Y5XEUAGRJg2n4+w33ULQHa7gYnkV3Asz2U/
- aqN6DyLrcb03MhIoajs1CDygB45D+hW04r1/gAQDMjERBAKwpGp6lUq1pdJfyMBZJoXI
- BKm7bVuw/l0irgOcmHBU1HlcmdZE8l0n7npXR6s8PsE1CAvzZjH4/ErIkdFh+TaadRK8
- Pp8Q==
+ bh=WUHcU1V/1c+24BRWz761wIQ/26MSKmQQQ2vGWP21ynw=;
+ b=DBNSZMGi1bF1Cf5O1RBUiZLvowdjrUiuasCwe7EbJbLUIkJ2rSCHdCDR5yuCTN1+0H
+ I1w4WSwMNqaxetKppnWYIqoWJlyidFhcwMPlDsiq51UGR358VpaR9sXRG0ZaHPB3qi5G
+ PuIVZul1Y/rTQHhI0htKSYTDarAA1TwK+7uXMWOmP2eWw8brGSh00REDqGpj5speP4pr
+ IwFS0SkBU5rq7KZSVvfHVxVxoEJlspbgn355ZXZUzTybGWLIE0KSy+5/U+TmN2iv8ZQW
+ uEBT/EzgTlW0Fa/uTOUGuaUvMbv8E6EbuUauN9xvxwJ9XBnIMc5E3R6VW2PCBYtV748w
+ hbAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781528507; x=1782133307;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WUHcU1V/1c+24BRWz761wIQ/26MSKmQQQ2vGWP21ynw=;
+ b=sp1aOlYAGYsZiakHjYA2zjwSnEe3dUWk54Sfo089xHK9oWYoPgsLGWDSvn8TX9dE0X
+ bfm/T48Rn5lShxenKeHmRax0HcxTl0+g6Au8lbbGHyl4sVUZvLntajv6nNpEKTx+gfoC
+ q/veXBBklvIs8Sy3jvGyGh55Pvj6n7mhqaKVFHOwP8NflXHFVk+ITdYuhsFNeC3h68GN
+ ILbH39OPWIxiUhIlqMdsRYO2SquLketqiBzcm5u5aEB64vMO15VWwYkiE0eAooD//BAa
+ bTyL7zciQ3shl6M8MJOT5QzygMGoitLsMQ0W04Z4tXIM0fSHm16gSzwrOHU0rDWBmKnb
+ doKA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+Ctqy8dl96P5+yw+Mo3KSxjwbvvJ2qMC9N3eMN48bgAAWBCWAEoxlqMPCxP0x4mRv/0FtPKl+g30v7@nongnu.org
-X-Gm-Message-State: AOJu0Yy17okav54AyHl8QouaYp7poy92RNjlVNeYaCUkrkbUwGqlRTVX
- pwZCMvHfq9UHWuRowVHTQRBWPDZuaDKajT2Ps/KOg0RvcLKuKhsenUX3TvhvTUirIP2BvOc94Kh
- 2CFpm
-X-Gm-Gg: Acq92OHmwBn9rFK4wgqcJQBq8QBW4z11df0+r5o3Fed6Mkh6BIVnjHafwnx+SN4oVmk
- +8lUIQKWjlnCna4kI033x3HJ2GrrA+V1Z/ozwDu9mQYK907r3vgjpS/YTqUL15MZp3iSlW1lRJ5
- BRMO8YcfJ2mz0KzOgwVM13GTNFBv6MgBXWVzCujevx9buDGNhNv0Qy1/l/npr2iaXZ3KodnA/Gz
- rs1Vkc8idGetBG3onctxXGXkwyOlCFaQrmnsNxb/cS40hs7EC/q7OT3PUok0YBhjBybrbaIFiJk
- HGLcUmccglu12PA9a0uzCJKioUbkjRfTe6g1yQcUNg8DUELK3do87EapHMjFUU//8ilulmcr3Zj
- AsZN17T8KvIghlf39lPLbe4ChqCJpfcHeg5ydf3i98u87tHEiwsqnwdXW8yZNRwOwKw51ofWbiT
- QADwqIvs63FmsywjYorFLZNn30W4vkLmewo6c=
-X-Received: by 2002:a05:6820:214:b0:69d:8555:c458 with SMTP id
- 006d021491bc7-69edc675fbbmr8713820eaf.24.1781526952881; 
- Mon, 15 Jun 2026 05:35:52 -0700 (PDT)
-Received: from smtpclient.apple ([240e:694:e20:401::4])
+ AFNElJ+iMV8S2Xnel6bIO+NNtxYWsEP72aXMXYt03ihM/sH0H48P0eKxtkIvzh+OE2vCuDTWrRNpTJSm74hh@nongnu.org
+X-Gm-Message-State: AOJu0YyWSg+fM7tY+s8jRniWDE4AzjgsPwEZmr9Yzt3EqeLNvPkxTQun
+ OlVVFf3PHmUpGWsCGCW/nuQZXDUXPvbTqdLINIY2vUnFjMdntVZ41P2yFO1AgSiXSvgLdYFDqNc
+ +KGnl8Q+QSTiktO83NrAVmmAUEaQ2Rmy4MerWlq8DMxRACtB6pIc1rH422A==
+X-Gm-Gg: Acq92OFCyW6JRDQYkYHy3W3iYYxwVzmG0Nz2BDeahOOgMrngs2IhLhkBWshIEMe1kFU
+ AYWwoxPDvMZepNQphiql0jon2iROtQjptQSKu9OU74nn1ZKHW9ZMguME1bEh7MUo2rJvC7KeKP3
+ pha1qQyRb8XCr/zZlrWajjUCDPGieK/o/y8uTJvJcTiik1shRf0wYJKrln088/IMHI9FM7SmEBS
+ xzdyajmcy96Wzl9kXTd1m/oSBbGiuAwiUhPwpO/CtkcHGWb/dTrrlro7tA4pgFsbHJBnNrEuyNg
+ EtEp6qjei+dCk9rJkM3bPevvYXe6LJD+QyZp7g51IeMQneAiy/onBJDjAPl2fiAChPqe7Iybft+
+ T2EOyY4DRqk4H3459p85Bq6A57HhCI3jN3O97o2S3ui4khK4jHGD6VaPHaQ==
+X-Received: by 2002:a05:690e:b88:b0:662:7533:5927 with SMTP id
+ 956f58d0204a3-662782ccf2bmr11379410d50.38.1781528506599; 
+ Mon, 15 Jun 2026 06:01:46 -0700 (PDT)
+X-Received: by 2002:a05:690e:b88:b0:662:7533:5927 with SMTP id
+ 956f58d0204a3-662782ccf2bmr11379283d50.38.1781528505627; 
+ Mon, 15 Jun 2026 06:01:45 -0700 (PDT)
+Received: from [192.168.68.103] ([177.170.117.62])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69f00d2138dsm2895493eaf.5.2026.06.15.05.35.43
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 15 Jun 2026 05:35:52 -0700 (PDT)
-Content-Type: text/plain;
-	charset=us-ascii
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.300.41.1.7\))
-Subject: Re: [External] [PATCH] hw/intc: riscv_aia: Skip reset for KVM irqchip
-From: Qingwei Hu <qingwei.hu@bytedance.com>
-In-Reply-To: <SE3PR04MB89223BFA19CAED63F7C799EFF31B2@SE3PR04MB8922.apcprd04.prod.outlook.com>
-Date: Mon, 15 Jun 2026 20:35:21 +0800
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, jim.shu@sifive.com
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <3284CAB2-000E-468C-A565-7F28F145C032@bytedance.com>
-References: <20260605110621.644997-1-qingwei.hu@bytedance.com>
- <SE3PR04MB89223BFA19CAED63F7C799EFF31B2@SE3PR04MB8922.apcprd04.prod.outlook.com>
-To: "Nutty.Liu" <nutty.liu@hotmail.com>
-X-Mailer: Apple Mail (2.3864.300.41.1.7)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2b;
- envelope-from=qingwei.hu@bytedance.com; helo=mail-oo1-xc2b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ 956f58d0204a3-66274e55ee5sm4888040d50.18.2026.06.15.06.01.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 15 Jun 2026 06:01:44 -0700 (PDT)
+Message-ID: <393da8db-e360-42f1-9563-babf0fdb63e7@oss.qualcomm.com>
+Date: Mon, 15 Jun 2026 10:01:40 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] target/riscv/cpu.c: do not default to svbare for bare
+ CPUs
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu.zevorn@gmail.com, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260611162223.2361941-1-daniel.barboza@oss.qualcomm.com>
+ <20260611162223.2361941-3-daniel.barboza@oss.qualcomm.com>
+ <CAKmqyKP=nFiDXGdGCvEPbKoUvWkNedNjggd7nXYYqFgz4WO8Qw@mail.gmail.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <CAKmqyKP=nFiDXGdGCvEPbKoUvWkNedNjggd7nXYYqFgz4WO8Qw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=adxRWxot c=1 sm=1 tr=0 ts=6a2ff7bb cx=c_pps
+ a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=o-Yv1TYGoLSqRNxq_U8A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=nd2WpGr1bMy9NW-iytEl:22
+X-Proofpoint-GUID: GiBPzRDQspIpKEOly-YeJY2TRgy7InhD
+X-Proofpoint-ORIG-GUID: GiBPzRDQspIpKEOly-YeJY2TRgy7InhD
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDEzNyBTYWx0ZWRfXzDxTnfdBIh/4
+ I91EAWuAGivivQX583yuFJkgEiq3Hk71LH8rj/VI+OFWxQsFC21VK84hhfSbZ2ohUXkZHe7mJnt
+ 4ZDTkOG0R/yv4N1UIf5ahdA9qPYskiE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDEzNyBTYWx0ZWRfX71foGyCkAkgv
+ k6k8Qfcstqag8z5aCpQyZvLpcp3CnEaka1W6nSIFAGYsDdKacAprtWbdS1xGL+maTo/AARqa5Q6
+ v949iV7Q/NjPJqw4xEsykZUKq1WhU7pO5NEYGB/0H/uovFlyDu8g+lI4U7tL07OjeBxRXU/oFMK
+ McGDuGGpym07ewAmv8dUE8+AVs7aSw+oCfUEZYRDJk2yWd5AEmZ42MZbg+sWoc3dg5WMM8fonfa
+ SLu9vHtMEx3uZgvZgxZoYgxhf7HgUBKP3d4K476Ruv2TCyvmB7uoKTxZpqZuoMhV4VJ/GL69Rn0
+ off4SbJZSVDr/fG4igvm3aJ3dyw84i+Iu4Pc0GLzI5LLVXtAfqBh138iq0EqqSZrGN9m/SsXlCZ
+ 0f6gUFLMFlirdKL7QK7gdjy1bjDVfsS+Isf6jgigw2PSguq5tuddfJjx4cMbHdxURN3y5KpZpvq
+ GqvusDouobAgZCvENng==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-15_03,2026-06-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 clxscore=1015 impostorscore=0 lowpriorityscore=0
+ malwarescore=0 suspectscore=0 spamscore=0 phishscore=0 adultscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606040000
+ definitions=main-2606150137
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
+X-Spam_bar: -
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_BL_SPAMCOP_NET=1.347, RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,83 +160,111 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-> On Jun 11, 2026, at 18:06, Nutty.Liu <nutty.liu@hotmail.com> wrote:
->=20
->=20
-> On 6/5/2026 7:06 PM, Qingwei Hu wrote:
->> The emulated APLIC and IMSIC state arrays are only allocated when =
-QEMU
->> handles the interrupt controller state itself. With KVM =
-AIA/APLIC-IMSIC,
->> the interrupt controller state is owned by the KVM in-kernel irqchip, =
-so
->> these emulated state arrays are not allocated.
->>=20
->> The reset handlers added for APLIC and IMSIC still clear those arrays
->> unconditionally. This makes qemu_system_reset(), which runs during =
-machine
->> creation, dereference NULL pointers with -machine =
-virt,aia=3Daplic-imsic and
->> KVM.
->>=20
->> Skip the emulated APLIC and IMSIC reset paths when the interrupt =
-controller
->> is handled by KVM. The emulated paths are unchanged for TCG and for
->> configurations that use QEMU emulation.
->>=20
->> Fixes: 99bfcd329a ("hw/intc: riscv_aplic: Add reset API to APLIC")
->> Fixes: 766391483b ("hw/intc: riscv_imsic: Add reset API to IMSIC")
->> Signed-off-by: Qingwei Hu <qingwei.hu@bytedance.com>
-> It would be better to split it into two fix patches.
-> Otherwise,
-> Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
->=20
-> Thanks,
-> Nutty
 
-Hi Nutty,
+On 6/15/2026 1:11 AM, Alistair Francis wrote:
+> On Fri, Jun 12, 2026 at 2:23 AM Daniel Henrique Barboza
+> <daniel.barboza@oss.qualcomm.com> wrote:
+>>
+>> Back when we added bare CPUs (rv64i and friends) we didn't had a way of
+>> easily setting satp-mode to 'bare' in the command line, so we decided
+>> that if the user didn't specify a satp-mode we would limit the CPU to
+>> max_satp_mode = bare.
+>>
+>> We don't need to do that anymore now that we can set 'svbare' in the
+>> command line, thus users can confortably set 'svbare=on' if they want.
+>>
+>> Besides, setting svbare if no satp-mode is provided in the command line
+>> just for bare CPUs, while every other CPU will default to its
+>> max_satp_mode value, is yet another random stuff users have to deal with
+>> for no good reason.  And, on top of all that, this will make it weirder
+>> to use CPUs that uses bare CPUs as their parent type.
+>>
+>> Remove this special handling for bare CPUs.
+> 
+> This is a breaking change though. I think this should follow our
+> deprecation process.
 
-Thanks for the review. I will split this into two patches and send a v2.
+I don't consider this a breaking change because we're changing the default
+to a higher satp mode.  Existing software that is running these CPUs with
+'bare' will keep working because the satp mode in use is defined by
+the firmware. A software using 'bare' does not care, or it definitely
+shouldn't care at least, if the underlying virtual CPU happens to support
+more satp modes.
 
-Best regards,
-Qingwei
+The most impactful different here is to CPUs that might be created using
+'Bare' as a parent.  We don't have that ATM but I did do that in the
+riscv-server-ref board at some point.  This new CPU will have the same
+satp behavior as the Bare CPU, i.e. the default max_satp_mode will be
+defaulted to 'bare' too, ignoring any cfg.max_satp_mode that this new
+CPU made at its own init.
 
+Maybe we need more debate on this.  I'm okay with applying just patch 1
+for now while we dwell on this one a bit.
+
+> 
+> Although I'm not sure we even want to make this change. The idea of
+> the bare CPUs was to disable everything by default (which we don't do,
+> but that doesn't mean we should be worse at it)
+
+I think we do a good job with bare CPUs, although from my understanding the
+most usage they have is to be a backbone for the profile CPUs.
+
+
+
+Cheers,
+Daniel
+
+
+> 
+> Alistair
+> 
+>>
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 >> ---
->>  hw/intc/riscv_aplic.c | 4 ++++
->>  hw/intc/riscv_imsic.c | 4 ++++
->>  2 files changed, 8 insertions(+)
->>=20
->> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
->> index c2c67c29e6..84606e9f3d 100644
->> --- a/hw/intc/riscv_aplic.c
->> +++ b/hw/intc/riscv_aplic.c
->> @@ -910,6 +910,10 @@ static void riscv_aplic_reset_enter(Object *obj, =
-ResetType type)
->>      RISCVAPLICState *aplic =3D RISCV_APLIC(obj);
->>      int i;
->>  +    if (!riscv_use_emulated_aplic(aplic->msimode)) {
->> +        return;
->> +    }
->> +
->>      aplic->domaincfg =3D 0;
->>      memset(aplic->sourcecfg, 0, sizeof(uint32_t) * aplic->num_irqs);
->>      memset(aplic->target, 0, sizeof(uint32_t) * aplic->num_irqs);
->> diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
->> index ac59496c22..f1f23c3a3e 100644
->> --- a/hw/intc/riscv_imsic.c
->> +++ b/hw/intc/riscv_imsic.c
->> @@ -347,6 +347,10 @@ static void riscv_imsic_reset_enter(Object *obj, =
-ResetType type)
->>      RISCVIMSICState *imsic =3D RISCV_IMSIC(obj);
->>      int i;
->>  +    if (kvm_irqchip_in_kernel()) {
->> +        return;
->> +    }
->> +
->>      memset(imsic->eidelivery, 0, sizeof(uint32_t) * =
-imsic->num_pages);
->>      memset(imsic->eithreshold, 0, sizeof(uint32_t) * =
-imsic->num_pages);
-
+>>   target/riscv/cpu.c | 20 +-------------------
+>>   1 file changed, 1 insertion(+), 19 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index d968daa404..c2f79a1ca0 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -510,21 +510,6 @@ static bool get_satp_mode_supported(RISCVCPU *cpu, uint16_t *supported)
+>>       }
+>>       return true;
+>>   }
+>> -
+>> -/* Set the satp mode to the max supported */
+>> -static void set_satp_mode_default_map(RISCVCPU *cpu)
+>> -{
+>> -    /*
+>> -     * Bare CPUs do not default to the max available.
+>> -     * Users must set a valid satp_mode in the command
+>> -     * line.  Otherwise, leave the existing max_satp_mode
+>> -     * in place.
+>> -     */
+>> -    if (object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_BARE_CPU) != NULL) {
+>> -        warn_report("No satp mode set. Defaulting to 'bare'");
+>> -        cpu->cfg.max_satp_mode = VM_1_10_MBARE;
+>> -    }
+>> -}
+>>   #endif
+>>
+>>   #ifndef CONFIG_USER_ONLY
+>> @@ -896,10 +881,7 @@ static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
+>>       }
+>>
+>>       if (cpu->satp_modes.map == 0) {
+>> -        if (cpu->satp_modes.init == 0) {
+>> -            /* If unset by the user, we fallback to the default satp mode. */
+>> -            set_satp_mode_default_map(cpu);
+>> -        } else {
+>> +        if (cpu->satp_modes.init != 0) {
+>>               /*
+>>                * Find the lowest level that was disabled and then enable the
+>>                * first valid level below which can be found in
+>> --
+>> 2.43.0
+>>
+>>
 
 
