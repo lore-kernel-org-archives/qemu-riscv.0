@@ -4,100 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C87BCD98D2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 23:19:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9886BCD98D2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 23:54:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZd3W-0001yp-FQ; Tue, 16 Jun 2026 19:18:54 -0400
+	id 1wZdbK-0008RW-Ja; Tue, 16 Jun 2026 19:53:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wZd3U-0001yH-Vs
- for qemu-riscv@nongnu.org; Tue, 16 Jun 2026 19:18:53 -0400
-Received: from fout-b8-smtp.messagingengine.com ([202.12.124.151])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1wZd3S-0005l8-VC
- for qemu-riscv@nongnu.org; Tue, 16 Jun 2026 19:18:52 -0400
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
- by mailfout.stl.internal (Postfix) with ESMTP id D7DA01D0015D;
- Tue, 16 Jun 2026 19:18:48 -0400 (EDT)
-Received: from phl-imap-06 ([10.202.2.83])
- by phl-compute-04.internal (MEProxy); Tue, 16 Jun 2026 19:18:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:date:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:subject:subject:to:to; s=fm1;
- t=1781651928; x=1781738328; bh=NZtgvQLoa1cqADapuzgSrBUi2/HbTuzM
- Bay0dZAOWdM=; b=K0/Dcp5mY8tqQrsVEEJZkCrhouFn1qRnxwaFZN7nT+7xLWBW
- dzQfzjai1xT19vhj5znGS/thS/pp1LGXVFGvbYW5OmnsjauR/uOMV17OFV6ZtchV
- DkxNbwC8gVWbAshyjun+TiKghOlp4Lq9SmtLeGBgiVrhPZeYyonMIJaWJScy9Co/
- xnu4p2HyBq+5SLkrxScD/r5Li7YSvstauIf9kUiVQJW4FTW9Pb/Uw+dw0CMJEt0F
- 2aiNiKAe2BE8pQWwN2eajeUUwc2h7z6qOMGBO+I1jqQ6TpxD2FkQUuvo1zJv2Up6
- iVldUNqrUZhTt1PFta57EllLskBHpJGo6jEB3A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1781651928; x=
- 1781738328; bh=NZtgvQLoa1cqADapuzgSrBUi2/HbTuzMBay0dZAOWdM=; b=g
- eq+3mvK5RBVjxzvazXRysf+6UMjN9E+9+/hRIbbg7z4IN+a58GjU67jKE0Ae3cau
- iasm+jWr6o8tSZ9GdYzNR0crh3TvnPDZXIuPCmrSbcXsxR/sia4QXkrGdcEIu/SP
- mzpJdMadQsw7oRFC3kjwSq+AC5Gp/k4hU8JhirfPcKWfU+WhjV3tfV8ChnqWQirs
- r8OaquZnvUIwZwa0Go7Myi5if3bFi7rdCDua843hIswPmMPkkmNw6yoHIlzrV0Cf
- AeTyVYJiYYUmPXSa/jwVK19flW/mh0U5VgkUCRjL9zwS+zEkRWCwYq9WSnREV/Db
- ev+UjQSnpSBQ/EkYGhcYg==
-X-ME-Sender: <xms:19kxauLylemmFFW5jQ8ppONhWdDzNhvY3YVjS9_uL7ADrC3cMMvG2w>
- <xme:19kxag9K9uzWSc4LPCoqeUqRvg_eSI9n90d6hk8Y_DbVctNhPIYwUjpgU0ogbRdJO
- fjkbbYDpYs7X2B4jkWUAnZonp6_PaYcdCNwJvcTNBLh6F4O2mgQdQ>
-X-ME-Proxy-Cause: dmFkZTGOoGJNK4cOmDuPXG4DG0o/RKBAJ3m3PFO2SFkuN8f5CMcXv9KceE0UZxeTGkxA1L
- sKfwrccIrQ70Sa+xMkpD6J7KU4cDFzt2pX+0n0BKxg1SYSXMFyZFGCQCYEBH9Xst7QIBmh
- S8/8EFzNYi2nQoxgVRX+qp4HnRylrD325WkDLm31n/Q5PzYpAe2cp/iEq/2MH1BkjWDhmg
- 2MzArDCZn7Dh3FYQL85TFHhpaqHqetW/nnREs1ND9CheUCgu4mxlJzyG9wMogPwJ7bt/Mt
- fioj1w9KzF+HjnYfYTd8dM1ABlTu/VJaAaOaIMSEYA55Dzp6GEpirizpM8KElxIzugcLdc
- HbTTCZjLgEhzR0VTbIGnmOd1/HhOjPjeDyeL4JmCZ5fqDrxZ+r9V/bRASTPSSLOz9mOhNz
- 4bU7oiV+MyrbVx4anCntohaIS4TTmc0KZM7Lx0o3QI55Jo1dVqvqFX5WZ/ghyHq9MgLCk9
- jQnYrAz4wkIfbkRFu28hT2DgZvjAI07qGp5txRscT2pedqY8LRI502TzHoG4wVGmDz3Uyt
- VZJQeiXtTE7R36xBWhFaHWr9Mm/p4rlpm6FmqwVY7Z/GjuXncc5kA0/owj1eHXL6VBQ5oR
- dCJNa4KbjXELYiQ9q3C2qa19A9zz4iQmpTY72LVY199mZbPtTWjU9892qnDw
-X-ME-Proxy: <xmx:19kxagpF6Dpl2yHgdE8s-9iecaUFCa58SJtUIaTdoWbuDeNQid7ImQ>
- <xmx:19kxajNI8IvB0GmUy4AfY89ksaqpU9gKPCRAnJS40cLMWZ9_89PhkA>
- <xmx:19kxaprI1rKksqjDkqwOG_Y_VUfBthYoo42q9u0yD1YGyp7RO1XcuA>
- <xmx:19kxauvGGsiZYt1nEw2uRJVE9Yj0AZy4MS8HxSyDzrTMzBIPwLHpiw>
- <xmx:2NkxajGHF73HXL2YTRWdO0YjFtIG2s1vtB9oT2Rfs1ZrhXjsbRKVvJsu>
-Feedback-ID: ifd214418:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 056A52400098; Tue, 16 Jun 2026 19:18:47 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wZdbI-0008R1-EM
+ for qemu-riscv@nongnu.org; Tue, 16 Jun 2026 19:53:48 -0400
+Received: from mail-yx1-xb12e.google.com ([2607:f8b0:4864:20::b12e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wZdbG-0006fl-1Z
+ for qemu-riscv@nongnu.org; Tue, 16 Jun 2026 19:53:48 -0400
+Received: by mail-yx1-xb12e.google.com with SMTP id
+ 956f58d0204a3-6611689dc10so5304677d50.1
+ for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 16:53:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781654025; cv=none;
+ d=google.com; s=arc-20240605;
+ b=HJVnJEawMxUpUBhyaNCnzzFJsTlXnfBit30WmMZk+pmGlteMCmMw5VvlNTqkX70gzf
+ sSoR7riFutdZObQPPckg1c8vQYwIu0T5GfuvjlrKlrpMIu+nzKWXmwenWum5q+x35vhl
+ kDsY/KTrdecBvqF7RNflTboru80yytX3PIsWJosOLqHekbXwyXDw4z8xGneIG8vOQiaI
+ z4QolJboy0BqjRoasWpfBTihedU5libdrJRuAF527pbUWr/vqEhe2Fg7kE3F4nnxhLZY
+ tKTt4Iq8MUpnuy5045hwj78/8/aiAf4dp7SvLPkNDF3UH7DYOLVdYEV1X1d3mE55vpwj
+ bQJw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=3uyaD0H+P51kA/CNyr779LEJ13leNm6JvFsygQeaYEE=;
+ fh=74WaDkWqF7YrHSkfRvYFASqJMVJe3MUFI7rZNyZkfek=;
+ b=hTOu4hFJOfFBPVMRMwDpO8/h5Zs9flCn6qiy4FkO6UOa2jRPVYsQzynOXbLtcZcRUx
+ QhBW9e5GsUatnD2E2CW+C6MH9hikNt1L16l0RZYECfCrOuPyA8oeLcwL5zufRUaQLeNu
+ Y06BZN4bHFegFOGZtHiFsrEwkP61ynZcsY9fKzd+TP/GeNZ0s3EsuF78ykiZLhmnwlA4
+ I+NZ/0KIKxGP7LE7bBAsrz+J8VFUJjfT8LkC8+Pb8fd31IFhcuMIR48+qGI1176JQukR
+ EftOBGGfZlxzFjQ2WsvwkWaAcazz4jJMGmhlNTtwPO5Yzm5EA+wzZAE91h1Hh1U8thSc
+ qOOA==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=jms.id.au; s=google; t=1781654025; x=1782258825; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3uyaD0H+P51kA/CNyr779LEJ13leNm6JvFsygQeaYEE=;
+ b=ctkNPnaQpQzgh+2viHAxkCylTCuGYtDgl2XuDa/6NY+KG2qezNV7EMkxjCLbR24xFA
+ xCxcd/sMwMSsX/TabFKCTHn4qzIAiHbor0AEVVjCgkPanFv8TTiCLRbBo10TGjlY4o2v
+ KhRsQr25dCAk3iGMp/xs5VGU2+tf9c50uMKcg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781654025; x=1782258825;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=3uyaD0H+P51kA/CNyr779LEJ13leNm6JvFsygQeaYEE=;
+ b=oGIfaneXEvvT0H/oSwr12iXtMIsT4zZ31yfcYFJmAyC/R3trwAd8Kf8lmGITzSu0+t
+ LT7dHpOMAwoCTuRyoPFC3OvihgtJBLH4LLOm0hWPsVXxYSL79sRCqd8P0IvYTi3xLvXx
+ VsSCLYacHqY+xxS697mpxaH4Y16LgNHCPEun9Mu6RUqY4Rkf9W/8fcZ6E2GpOtVwzp9V
+ 0muAbYbrw8s8bS9wg0M/W5EoIVO/+nxPd60ijqGfArvj9MPLmZGslvNmbwPqcdRi2Lof
+ arZxRkoyjGagbLgkQn05nrDS2+ATmTic7jR5CwhdcDUr7VkzdHAuQ7xt6A+cT+3tcP8w
+ vy3A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9GUKALiAizTDmY9LG/xA9pmIyl0VcPY+5bJZeTl85gZ/2ziYDJQm14WMVAGmzagDU4UWnbcnACgXE+@nongnu.org
+X-Gm-Message-State: AOJu0YzzpwUPzPEbQi7h0oDbDY7ywBrnjKnMkUEuF9iXyM78ZdNPweyj
+ Zfyte7Hhr569iejFXIrqpWwA+udXxhO3vwCyPoFi/Ge/AbBiL4M8ODsbes3kgplwJZ69SHiK5kM
+ T5qgA5hNEgBeEWpJpMJDd8dm2O3BHfc0=
+X-Gm-Gg: AfdE7ckWIHqIfoGYNZkB/A7eeo36VIoYtYFxhWA6BfMbNvI2ZtqFQYaZzFLad8j+qRi
+ R0AnnV0np2nzo6CkHB12uI+ZMaDaTJ9g/WoFfqfkc9w2m5CSRWcGX68yVImp/WgE+KhsauVKxQq
+ op5ZXwhuEW/h6200XeYRbUSPbORjd8Galt5drj4KkW5zmfN3lFa6adGxtgNxe9EXoyvreevAI9c
+ Cu+0wzJc5/gMyib38rw6tl5VklP8YntaOV3gDX2EhrHxhxqypDg2NncPz4Qsrv+nVr6mNPQ9jwA
+ e3IMkVVuF+/VvzdC3Owv5ZvWRXrxcZgGIiuMw1+x1uyCSZuD/jkMBwUURztK697r975hsbRZngG
+ hUdLFs5oC2XuBWOwj/C/wDEK3
+X-Received: by 2002:a53:c0cf:0:b0:65e:4ac9:272e with SMTP id
+ 956f58d0204a3-662cbd1f291mr977534d50.50.1781654024771; Tue, 16 Jun 2026
+ 16:53:44 -0700 (PDT)
 MIME-Version: 1.0
-X-ThreadId: AbA2t0igsNsw
-Date: Wed, 17 Jun 2026 09:18:26 +1000
-From: Alistair <alistair@alistair23.me>
-To: "Joel Stanley" <joel@jms.id.au>
-Cc: "Daniel Henrique Barboza" <daniel.barboza@oss.qualcomm.com>,
- "Palmer Dabbelt" <palmer@dabbelt.com>, "Weiwei Li" <liwei1518@gmail.com>,
- "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
- "Chao Liu" <chao.liu.zevorn@gmail.com>, qemu-riscv@nongnu.org,
- "Max Chou" <max.chou@sifive.com>, "Michael Neuling" <mikey@neuling.org>
-Message-Id: <68917b26-32a2-49e6-94ea-1ca587948f23@app.fastmail.com>
-In-Reply-To: <ad259828-65b3-4c4a-bf3f-73cc195c19f5@alistair23.me>
-References: <6315a319-19d9-4533-83ed-eaba9c0b29d5@app.fastmail.com>
- <CACPK8Xe9JVggXzX9kku-zm7RYzM++fqcr=fx-MdkKiViHdiMYw@mail.gmail.com>
- <ad259828-65b3-4c4a-bf3f-73cc195c19f5@alistair23.me>
-Subject: Re: Regular QEMU RISC-V Call
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=202.12.124.151;
- envelope-from=alistair@alistair23.me; helo=fout-b8-smtp.messagingengine.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20260603065859.592063-1-joel@jms.id.au>
+ <20260603065859.592063-8-joel@jms.id.au>
+ <CAKmqyKP0VxQj0apsuVOrCeaP0KVHy5VfdqH-Nn9_99Vc76Ru_w@mail.gmail.com>
+In-Reply-To: <CAKmqyKP0VxQj0apsuVOrCeaP0KVHy5VfdqH-Nn9_99Vc76Ru_w@mail.gmail.com>
+From: Joel Stanley <joel@jms.id.au>
+Date: Wed, 17 Jun 2026 09:23:33 +0930
+X-Gm-Features: AVVi8CcFJ3G0RX6JPO1K2-FuV6xVNUm69iRE_OsHDmYuZfclUjLd1CAoD8fziiA
+Message-ID: <CACPK8Xdow4U7qJ73BFneyzxo6U1RK1kLnY=UkdQzskY7H=oqOQ@mail.gmail.com>
+Subject: Re: [PATCH v8 07/12] hw/riscv: Add Tenstorrent Atlantis machine
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Nicholas Piggin <npiggin@gmail.com>, 
+ Andrew Jones <andrew.jones@oss.qualcomm.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, 
+ Michael Ellerman <mpe@kernel.org>, Joel Stanley <jms@oss.tenstorrent.com>, 
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>, 
+ Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b12e;
+ envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb12e.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,92 +127,118 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 16 Jun 2026, at 8:35 PM, Alistair Francis wrote:
-> On 16/6/26 16:07, Joel Stanley wrote:
-> > On Thu, 11 Jun 2026 at 13:52, Alistair <alistair@alistair23.me> wrote:
-> >> For the time, I'm picking Wednesday the 17th of June at 10AM AEST (UTC+10). Hopefully that works ok for everyone. If it doesn't let me know and we might be able to move it around.
-> 
-> That means the meeting should start in a little less then 13 and a half 
-> hours! I'll send out a Teams invite tomorrow
+On Mon, 15 Jun 2026 at 15:15, Alistair Francis <alistair23@gmail.com> wrote=
+:
+>
+> On Wed, Jun 3, 2026 at 5:04=E2=80=AFPM Joel Stanley <joel@jms.id.au> wrot=
+e:
 
-Call in details are below. Starting in 40 minutes!
+> > +static void load_fdt(TTAtlantisState *s)
+> > +{
+> > +    MachineState *ms =3D MACHINE(s);
+> > +    char **node_path;
+> > +    Error *err =3D NULL;
+> > +
+> > +    ms->fdt =3D load_device_tree(ms->dtb, &s->fdt_size);
+> > +    if (!ms->fdt) {
+> > +        error_report("load_device_tree() failed");
+> > +        exit(1);
+> > +    }
+> > +
+> > +    qemu_fdt_add_path(ms->fdt, "/chosen");
+> > +
+> > +    /* Clear memory nodes and update with the specified RAM size */
+> > +    node_path =3D qemu_fdt_node_unit_path(ms->fdt, "memory", &err);
+> > +    if (err) {
+> > +        warn_report_err(err);
+> > +    } else {
+> > +        for (int i =3D 0; node_path[i]; i++) {
+> > +            qemu_fdt_nop_node(ms->fdt, node_path[i]);
+>
+> Should we print a warning here to the user that we are doing this? I
+> would be confused (and annoyed) if QEMU deleted my memory regions and
+> I didn't know
 
-________________________________________________________________________________
-Microsoft Teams meeting
+The code is the same for the arm machines; they silently update the
+device tree when provided one. I agree with you though, I will add a
+warning.
 
-Join:
-https://teams.microsoft.com/meet/275503449279724?p=C2D0EDrqxwFb5LuRnB
+I added this as in testing the device tree was larger than what the
+machine had, which Linux happily tries to use and crashes during boot.
+I can see the argument for not touching the device tree at all but on
+balance I decided helping the user out is the right thing to do. If
+users complain I'm happy to change it.
 
-Meeting ID:
-275 503 449 279 724
+> > +static void tt_atlantis_machine_done(Notifier *notifier, void *data)
+> > +{
+> > +    TTAtlantisState *s =3D container_of(notifier, TTAtlantisState, mac=
+hine_done);
+> > +    MachineState *machine =3D MACHINE(s);
+> > +    hwaddr start_addr =3D s->memmap[TT_ATL_DDR_LO].base;
+> > +    hwaddr mem_size;
+> > +    target_ulong firmware_end_addr, kernel_start_addr;
+> > +    const char *firmware_name =3D riscv_default_firmware_name(&s->soc)=
+;
+> > +    uint64_t fdt_load_addr;
+> > +    uint64_t kernel_entry;
+> > +    RISCVBootInfo boot_info;
+> > +
+> > +    /*
+> > +     * A user provided dtb must include everything, including
+> > +     * dynamic sysbus devices. Our FDT needs to be finalized.
+> > +     */
+> > +    if (machine->dtb =3D=3D NULL) {
+> > +        finalize_fdt(s);
+>
+> Was expecting a finalise here :)
 
-Passcode:
-kS9Vg23i
+Desensitized.
 
-________________________________________
-Need
- help? | 
-System reference
-Dial in by phone
+> > +    /* DDR */
+> > +
+> > +    /* The high address covers all of RAM, the low address just the fi=
+rst 2GB */
+> > +    lo_ram_size =3D s->memmap[TT_ATL_DDR_LO].size;
+> > +    hi_ram_size =3D s->memmap[TT_ATL_DDR_HI].size;
+> > +    if (machine->ram_size > hi_ram_size) {
+>
+> What if machine->ram_size is less then s->memmap[TT_ATL_DDR_HI].size?
+> You will still allocate s->memmap[TT_ATL_DDR_HI].size instead of what
+> the user asked for. You then report what the user asked for in the DT,
+> so there is a bunch of wasted memory.
+>
+> Memory is expensive these days, we can't waste it
+>
+> Also, if the user asks for 2GB or less, you shouldn't create ram.high at =
+all
 
-+1
- 408-627-4258,,498330396# 
-United States, San Jose
-Find
- a local number
-Phone conference ID:
-498 330 396#
+Good catch. There's an even better bug; ram.high and ram.low are
+aliases into the machine ram region and they are always sized to their
+default maximum, regardless of the machine ram size.
 
-Join on a video conferencing device
+address-space: memory
+  0000000000000000-ffffffffffffffff (prio 0, container): system
+    0000000000000000-000000007fffffff (prio 0, ram): alias ram.low
+@tt_atlantis.ram 0000000000000000-000000007fffffff
+    0000000100000000-00000010ffffffff (prio 0, ram): alias ram.high
+@tt_atlantis.ram 0000000000000000-0000000fffffffff
+memory-region: tt_atlantis.ram
+  0000000000000000-00000000ffffffff (prio 0, ram): tt_atlantis.ram
 
-Tenant key:
-wdc@m.webex.com
+They should be sized to the configured size.
 
-Video ID:
-119 833 426 2
+The device tree is okay because it sets the region based on the
+configured ram size, and Linux politely doesn't write outside of that.
 
-More
- info
-For organizers:
-Meeting
- options | 
-Reset dial-in PIN
+In hardware the high region is where the ram lives and low is an alias
+of the first 2GB. I'll fix up the modelling to match, and set the
+sizes appropriately.
 
-________________________________________________________________________________
+> Otherwise looks good
 
-> 
-> > 
-> > I'll be on, hopefully in the right timezone this time around. 9:30 ACST.
-> > 
-> >> If anyone has anything they want to discuss let me know. I can send an agenda and confirmed meeting time out in a few days.
-> > 
-> > Two agenda items:
-> > 
-> > * RISC-V Code Policy
-> > 
-> > https://lore.kernel.org/qemu-riscv/057cb481-c6f3-489c-aad7-1bee152fc336@alistair23.me/
-> > 
-> > Good idea writing down your expectations somewhere everyone can see.
-> > Do you want to raise it as a topic and we can talk it through?
-> 
-> Yep!
-> 
-> > 
-> > * Machine model use cases
-> > 
-> > I wanted to share my perspective on the system emulator machines, what
-> > they are for, who they are for, and hear what others had to say.
-> 
-> Sounds good as well
-> 
-> Alistair
-> 
-> > 
-> > See you on the call tomorrow.
-> > 
-> > Cheers,
-> > 
-> > Joel
-> 
-> 
+Thanks for the review.
+
+Cheers,
+
+Joel
 
