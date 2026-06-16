@@ -4,100 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95519CD98DE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 03:14:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A052DCD98DA
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 03:15:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZKFQ-00007m-Ma; Mon, 15 Jun 2026 23:13:56 -0400
+	id 1wZKGl-0000pW-PV; Mon, 15 Jun 2026 23:15:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wZKFP-00006D-Ax
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:13:55 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ id 1wZKGk-0000p9-27
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:15:18 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wZKFN-0001js-GW
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:13:55 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-68bd9fce347so7352881a12.2
- for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 20:13:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781579632; cv=none;
+ id 1wZKGh-0001yc-Jl
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:15:17 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-68acf0a15b3so6184918a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 20:15:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781579713; cv=none;
  d=google.com; s=arc-20240605;
- b=fuf8RaqCUiedYhIKHkGpNp7JVHNI2p4wgh27aeHYQymXy6UI5KEQSYR/TJPDJYyVkV
- VdfgAUjYs/6ApRMd93JMsbutSKGDLChJur1+g2W4qOusZXF1p89xxnbaUwaCvYi4cmR4
- u3Ttk2Rlx1XJ2XGWMNfEtrjESSp/uNLBgEsw4aTUPggsOqrfXLH7O9UvhKhogzI5DGzU
- nRM7Oj1MPt9CNaKfZh1FZl+pPZ7H1h5xlRwEa5NsU2xPhX04d+vAFMZhXDC6vuHd5p3G
- 2D9s+BAKw5tEl3tvO8Qtvs+N/Vykyw9Laqip7uGqiMJSNUznLUUxiUXXDwlK74pER2rq
- 4lbw==
+ b=NfesOG69d4kLcxMadmMQmuB99ITIrlqfd7olgBl8GrfDj3en+81pldxl7ajfLMpitk
+ rX+E3V1hylHIA0QALreaNyFueJjWfZUxOTintfibqDJxBGOf97bOHBjNVNNene5mAOzJ
+ KwbKZGEbYiOoE94KM7H3p/Y02ZI2SmdOV4dV8iMiOdhKJXCjEUtcYrK/c4YNsbx/I/3w
+ GiSNtd4kZX0VRtYGS93SZ7qdvPkAU9kKI1oWttuoFMfCzKwhJQj5tGGK4wXVkD8TdfrG
+ 3cBH1xwqM3TjzHaI0zNSHWvPArgQ79ITfVaqpmIgoFicku5cTYtvyBQDkGHAMXHTfXTS
+ aM/Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=YkwaVw3MVlo9U754wm7BPYx6CRLOgvXkcJyPmfBFsxA=;
- fh=z8Ynapo4P+o3cJw+Na/2KKKWwj5/Qo/79ZmpEekTi7I=;
- b=SZsAMjx8Jzy5F5yw2jhqjXU1SdPckVpt2wbXyL++0XdGE4OwYOTY7clPP7y+i4hQmp
- aNw3UEfpDu/2KzMK2UcgFj3cel8+OoMHIybjWeV125B9mWYoGn2+h4E5X7HWoB/IW14l
- X2xMAp833NSlDEpf7G1zEXdtDU3aTfXL5+VwNEB7LHR227wreq4BLoLNtyrky6eA02sx
- X1jwq1djtR4gwGiyQuK+5Dj/KhnD0XbQ85jt5p42kxgibdEMqCr5kwvXvZ3JtYyI/i41
- ysCbLlD25buiGBcBVOw3dKzt8PgiH/mHQhB0lbYG2mQ+8eFyuR3h7PLdoS1mZHmImwWI
- iajA==; darn=nongnu.org
+ bh=2//7fekKtdDPkgBvtLRGOmWSThEKpL0MI6l5G2YadNg=;
+ fh=rVedaLcyba/r7QsUhoKXoMS2tFGUPMt+l4Oe1If/kpY=;
+ b=lRAAZvTrk9j8pLqLAk3/TKOcu+ZB+fKinWPlwW3cgKAWP8PI+9kTUByy7ZfT5mTRr7
+ bRbAj3u5ApLSMpwEbGU5yghE9wEZNC7BXVK4tu6bPjpGAr+whPePWwwi4GMoz/mAzS1i
+ /CsTwY7d8ZR59+SLor1+ZzEt9w57sUlNq2MydUjdoGrUbEfrAkmmXUtGWf7InYU+82oc
+ SClotWSYLy0tuYFVtVUKjrzZHSsFiG4YXOdKIKWOgAM76fenzw79RonQiY4tXLpqjK0x
+ u0JvGS1XtwgSGawPKwLzBYHMqQqySXnmvPRgZTsY7WvLNyik6mAAtD9/HYyzB3oBN0pn
+ kz7A==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781579632; x=1782184432; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1781579713; x=1782184513; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YkwaVw3MVlo9U754wm7BPYx6CRLOgvXkcJyPmfBFsxA=;
- b=pPeYJ5kE4sZ59KuT1355fMhIiFvMKnth2kNoOSHI8ayQ3gzm0Ca5GnfUbh8x/pudOI
- IJPKmbvYAdJxegQ/rE5f2MC9WByMLrzp9mRFPeH+USPjKB7IS2fDa+2T8qrwbgSilej/
- ZRCMNwyas4O4571aTyM1J1Ki0Im7X8AVE22kEIL4oknA/jwWZ5xiGGueFMKyd1eElb2b
- 3boyCQ34/hphiAC1yZ79x49MyYSoGKaeRu1K8pCB4IAv++wLR8TnYJp7zVW9lygd/8UX
- wfsX//2JPeFpGy81obD6oW8ZRg8efXow13yX8F9THOEf89JpZZBdJAK1Wv0dYPpxOpyv
- JOhg==
+ bh=2//7fekKtdDPkgBvtLRGOmWSThEKpL0MI6l5G2YadNg=;
+ b=Edj1zrqWvf8SkGs8Xd2pkzXziB6wGUjmnQG0SdkDwO5djEg2YBCnMcIDJnqSnga74c
+ JVxpd6fSo1GxNOfy2bVkwYFW8AYYtj/hNqvvmaJbRC9mlV8LEo9q4MBVeZCsSTaa1eG1
+ 9aJwySgxyhhLj1GNKupJIXvX55xriO8vb9qrRBqVo6sn/e+bDbOSlGnjXMhJdaCWoAyi
+ jHAYzm9nxOUExfllo6HbfLD9NTDoC2jwpwHwomWhjUQC8JoeO1LLGQ3oeR1vI8FMvRbt
+ /8NnIubJU+83xGHU1BGAFoA0Er3U0fZXjtkCGNIEYeSl8K3V2YbLAh42kye44qmbimt+
+ pcbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781579632; x=1782184432;
+ d=1e100.net; s=20251104; t=1781579713; x=1782184513;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=YkwaVw3MVlo9U754wm7BPYx6CRLOgvXkcJyPmfBFsxA=;
- b=S94cgyxFmwPbzOf77MedZgi0tnExqA2qh49/i+sR4gU1vomZ/xdDOnFWt4NdmQPMwS
- aZfAB+ljfjNOcWx22o/YJej5nunsiGn62b3LcLiRzEDpK7yGPEjVZlM/riuG94HKmtzy
- uC11QQw2sU0QrIONzMvqWT38NjsVRWm3nz9IfsCbcASqHkIyjda6WhcBw75RLegrYkR0
- npZdTri9drNW0ke4lItl3BhDrCvGNAJVe857kEmB1UjQBh1xdzZeE/ZJHWDC+Fb9AKDm
- Y5lORx9triUE/jl8cszXzhwpZthHZJatSQQ9RnIb7WRSxiPW7FYBsy6gZ36jfObmykLG
- R3mQ==
+ bh=2//7fekKtdDPkgBvtLRGOmWSThEKpL0MI6l5G2YadNg=;
+ b=qQW6E5z0n6+PFJji4DIagLKmDC5cOgHkzSPhK5jGj7EcOMmL2r/UZfczLiESFo89la
+ 9og9fmWhQspDUyDM1m2x58Khj8D1O0vfRyDmnxspxJgSQvgUaps/dngs9HIG1PhyHPGl
+ 95w0sgBAg63T2jhQ4yAWD54aOnclnxGQEmlOIlhMtiNFjCP5jcAAaclXh9HLmXQ8jzo6
+ OFi6tNzUvJzFyxbT4DLd+KV61FWSWFyqYEac6Horp5/oDDfRyyEOPvIlI4DCYmAnUrVF
+ PykXyFl4mdfG8auVY1SHDy+e1at7XOQBxXTe1jxrCvnZsnh64myDewWGMFLmQZFE7aOx
+ xSCQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+o9UKvQPXBexXyh+C2WHtYZOwCyCd0yoqupkhNeDas5jRu1ANeebS8j7ZzY+DQaFLLfDBrygntDjgf@nongnu.org
-X-Gm-Message-State: AOJu0YxMaPyOwnMBwV4bpNMFi2mSSEKhOP5sD7Yyca3BDBdLtRYV9zTQ
- xN8FIOfTqejUhrTu7j628OfISY48Ew2qZ7Z+AH/A+py3Si/OlQlTq7COlJdZMQxOqlRA2FnOW6c
- FQOnGVE+9l1FW6sKaiBPuE9bRK74dJhU=
-X-Gm-Gg: Acq92OHg6swhiXzIzOuFkJPxe2JawKl1IVCNnyPFRoC6kYhE2sMDes58MMrynIL2T1j
- g6+YB6o6qTE0EIhMFVNxfl8P2whbu0kx/OxV/3NDocNPhKq5ZoCHed/GkHZeFBMFMU9fcav9LmX
- pGtA7J8LXbnV6Xd4nxL0Bui0KIk+mMaAkElACWeCT8oEPMDcfxJThikkbZCFImNTlZhbmB/IJI+
- yRWP/7ln0t+ohg8esM5cx614UZZz2FdUoLMp4bJgHrQ2UnRG7RlXCdJSQRn5or5IWCSDlyB0MaZ
- qRqKQMCf7tcKsfglI0GeDqj/hxmWTVN9m6b+nA==
-X-Received: by 2002:a05:6402:5208:b0:689:6c2e:6cdf with SMTP id
- 4fb4d7f45d1cf-6950874bfdemr783191a12.22.1781579631925; Mon, 15 Jun 2026
- 20:13:51 -0700 (PDT)
+ AFNElJ+DYiyBdPUJK77bHRa0xBt7KmSDGDQUMFfzoDWIW/E6+TsPIyFNfghAxu1nUqsU5C2A1J2rCQqFpeES@nongnu.org
+X-Gm-Message-State: AOJu0YzigGbyJp88sbxgv1iD9cAv6nJn/wYE7oVg03Jdb+/oOqJTmJR7
+ QRbYzk3tb9Svze4qGLOUQC6xBjxceyZG7KYOIcq67/1iMhXpv4PDCJYqX5Jxy7xDjlVvWGLb7mT
+ dn5YLmB6weQLYPnTLRqErWyftn5eyma0=
+X-Gm-Gg: Acq92OHg/ZgZagdQ8mq9+eujYnUUBWdQMXHzSXC/DPGrrcglBK1Sw+v0R/NQ+daUDid
+ lByPqOJ7IFrYAgVaOiR0+CbbsquBMtowtvjmKgRc3zMSoK3aG2TDOJCgvwH//xAnJWIoSq3nuGs
+ ZlDD5mMjLq/kEgJz/5p1+kgUcrVODujHb1yejeT9DL5fdEvwXs+8DJqvNqxFUnEbZvw6B0KlS5R
+ Kqr77iL5W46bjf3yswMbsqNYlKJwQvs8VBXxk1BVqq81V5u+nXwobeRUXY0qFr9nmCFDWVkD0LC
+ MtCQ28Ps5zKM5YrwKtz7usX6OEII6BSBVCzAh9w644Nsmzgb
+X-Received: by 2002:a05:6402:1ec7:b0:691:7054:8c6a with SMTP id
+ 4fb4d7f45d1cf-695087df672mr793580a12.20.1781579712706; Mon, 15 Jun 2026
+ 20:15:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260615203734.954428-1-daniel.barboza@oss.qualcomm.com>
- <20260615203734.954428-7-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260615203734.954428-7-daniel.barboza@oss.qualcomm.com>
+ <20260615203734.954428-8-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260615203734.954428-8-daniel.barboza@oss.qualcomm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 16 Jun 2026 13:13:25 +1000
-X-Gm-Features: AVVi8Cc5EIcGOjrqGMSaHgobiAJitL9LMRwuVwl5ItwGXiTuP31CiZB6H9Oyue4
-Message-ID: <CAKmqyKOQuy74DmSMa+e03ZL-ifctu_qSmh6_kTCX8cnYnVSpkw@mail.gmail.com>
-Subject: Re: [PATCH 06/13] hw/riscv/spike.c: add intc_phandles array
+Date: Tue, 16 Jun 2026 13:14:44 +1000
+X-Gm-Features: AVVi8Cf-txzAHHbpjJBy1yrNFquJBwPseazDhfxWYZrzZWPVQnyzaC8acLSTyz4
+Message-ID: <CAKmqyKOVtBTwY1Wpv5KGvEM12H6hMa1=ySfQwjK1gDrXQhC-ng@mail.gmail.com>
+Subject: Re: [PATCH 07/13] hw/riscv: add create_fdt_clint() helper
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -121,19 +121,10 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 16, 2026 at 6:38=E2=80=AFAM Daniel Henrique Barboza
+On Tue, Jun 16, 2026 at 6:42=E2=80=AFAM Daniel Henrique Barboza
 <daniel.barboza@oss.qualcomm.com> wrote:
 >
-> The clint FDT generation uses a cells array (clint_cells) that are
-> populated in the middle of the loop that creates the CPU socket FDT.
-> This is completely fine but it differs from the other boards that
-> creates the clint cells array right before creating the clint FDT.
-> 'virt' and 'sifive_u' store the intc phandles in a intc_phandles array
-> during FDT CPU socket creation, and this array is used to create the
-> clint FDT cells.
->
-> Standardize the clint FDT creation for spike doing the same here,
-> allowing us to move everything to a common helper later.
+> Move all clint FDT generation to fdt-common.c reducing code repetition.
 >
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
@@ -142,96 +133,260 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/spike.c | 26 ++++++++++++++++----------
->  1 file changed, 16 insertions(+), 10 deletions(-)
+>  hw/riscv/fdt-common.c         | 33 +++++++++++++++++++++++++
+>  hw/riscv/sifive_u.c           | 25 +++----------------
+>  hw/riscv/spike.c              | 31 ++++-------------------
+>  hw/riscv/virt.c               | 46 ++++++-----------------------------
+>  include/hw/riscv/fdt-common.h |  5 ++++
+>  5 files changed, 54 insertions(+), 86 deletions(-)
 >
+> diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
+> index 719c36e001..d2661ec389 100644
+> --- a/hw/riscv/fdt-common.c
+> +++ b/hw/riscv/fdt-common.c
+> @@ -12,6 +12,7 @@
+>  #include "system/device_tree.h"
+>  #include "hw/core/boards.h"
+>  #include "hw/riscv/fdt-common.h"
+> +#include "target/riscv/cpu_bits.h"
+>
+>  void *create_board_device_tree(const char *model, const char *compatible=
+,
+>                                 int *fdt_size)
+> @@ -50,3 +51,35 @@ void create_fdt_socket_memory(void *fdt, hwaddr addr, =
+uint64_t size,
+>          qemu_fdt_setprop_cell(fdt, mem_name, "numa-node-id", socket_id);
+>      }
+>  }
+> +
+> +void create_fdt_socket_clint(void *fdt, hwaddr addr, uint64_t size,
+> +                             int socket_id, uint32_t *intc_phandles,
+> +                             int num_harts, bool numa_enabled)
+> +{
+> +    g_autofree uint32_t *clint_cells =3D g_new0(uint32_t, num_harts * 4)=
+;
+> +    g_autofree char *clint_name =3D NULL;
+> +    static const char * const clint_compat[2] =3D {
+> +        "sifive,clint0", "riscv,clint0"
+> +    };
+> +
+> +    for (int cpu =3D 0; cpu < num_harts; cpu++) {
+> +        clint_cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandles[cpu]);
+> +        clint_cells[cpu * 4 + 1] =3D cpu_to_be32(IRQ_M_SOFT);
+> +        clint_cells[cpu * 4 + 2] =3D cpu_to_be32(intc_phandles[cpu]);
+> +        clint_cells[cpu * 4 + 3] =3D cpu_to_be32(IRQ_M_TIMER);
+> +    }
+> +
+> +    clint_name =3D g_strdup_printf("/soc/clint@%"HWADDR_PRIx, addr);
+> +    qemu_fdt_add_subnode(fdt, clint_name);
+> +    qemu_fdt_setprop_string_array(fdt, clint_name, "compatible",
+> +                                  (char **)&clint_compat,
+> +                                  ARRAY_SIZE(clint_compat));
+> +    qemu_fdt_setprop_sized_cells(fdt, clint_name, "reg",
+> +                                 2, addr, 2, size);
+> +    qemu_fdt_setprop(fdt, clint_name, "interrupts-extended",
+> +                     clint_cells, num_harts * sizeof(uint32_t) * 4);
+> +
+> +    if (numa_enabled) {
+> +        qemu_fdt_setprop_cell(fdt, clint_name, "numa-node-id", socket_id=
+);
+> +    }
+> +}
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index ce86989bc8..9a791b36d6 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -105,9 +105,6 @@ static void create_fdt(SiFiveUState *s, const MemMapE=
+ntry *memmap,
+>      uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle =3D 1;
+>      uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
+>      static const char * const ethclk_names[2] =3D { "pclk", "hclk" };
+> -    static const char * const clint_compat[2] =3D {
+> -        "sifive,clint0", "riscv,clint0"
+> -    };
+>      static const char * const plic_compat[2] =3D {
+>          "sifive,plic-1.0.0", "riscv,plic0"
+>      };
+> @@ -180,25 +177,9 @@ static void create_fdt(SiFiveUState *s, const MemMap=
+Entry *memmap,
+>          g_free(nodename);
+>      }
+>
+> -    cells =3D  g_new0(uint32_t, ms->smp.cpus * 4);
+> -    for (cpu =3D 0; cpu < ms->smp.cpus; cpu++) {
+> -        cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandles[cpu]);
+> -        cells[cpu * 4 + 1] =3D cpu_to_be32(IRQ_M_SOFT);
+> -        cells[cpu * 4 + 2] =3D cpu_to_be32(intc_phandles[cpu]);
+> -        cells[cpu * 4 + 3] =3D cpu_to_be32(IRQ_M_TIMER);
+> -    }
+> -    nodename =3D g_strdup_printf("/soc/clint@%lx",
+> -        (long)memmap[SIFIVE_U_DEV_CLINT].base);
+> -    qemu_fdt_add_subnode(fdt, nodename);
+> -    qemu_fdt_setprop_string_array(fdt, nodename, "compatible",
+> -        (char **)&clint_compat, ARRAY_SIZE(clint_compat));
+> -    qemu_fdt_setprop_cells(fdt, nodename, "reg",
+> -        0x0, memmap[SIFIVE_U_DEV_CLINT].base,
+> -        0x0, memmap[SIFIVE_U_DEV_CLINT].size);
+> -    qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
+> -        cells, ms->smp.cpus * sizeof(uint32_t) * 4);
+> -    g_free(cells);
+> -    g_free(nodename);
+> +    create_fdt_socket_clint(fdt, memmap[SIFIVE_U_DEV_CLINT].base,
+> +                            memmap[SIFIVE_U_DEV_CLINT].size, 0,
+> +                            intc_phandles, ms->smp.cpus, false);
+>
+>      nodename =3D g_strdup_printf("/soc/otp@%lx",
+>          (long)memmap[SIFIVE_U_DEV_OTP].base);
 > diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 92facba29d..82005ec163 100644
+> index 82005ec163..b15188fb07 100644
 > --- a/hw/riscv/spike.c
 > +++ b/hw/riscv/spike.c
-> @@ -59,7 +59,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry=
- *memmap,
+> @@ -58,13 +58,10 @@ static void create_fdt(SpikeState *s, const MemMapEnt=
+ry *memmap,
+>      unsigned long clint_addr;
 >      int cpu, socket;
 >      MachineState *ms =3D MACHINE(s);
->      uint32_t *clint_cells;
-> -    uint32_t cpu_phandle, intc_phandle, phandle =3D 1;
-> +    uint32_t cpu_phandle, phandle =3D 1;
->      char *clint_name, *clust_name;
+> -    uint32_t *clint_cells;
+>      uint32_t cpu_phandle, phandle =3D 1;
+> -    char *clint_name, *clust_name;
+> +    char *clust_name;
 >      char *core_name, *cpu_name, *intc_name;
->      static const char * const clint_compat[2] =3D {
-> @@ -84,6 +84,8 @@ static void create_fdt(SpikeState *s, const MemMapEntry=
- *memmap,
->      qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
+> -    static const char * const clint_compat[2] =3D {
+> -        "sifive,clint0", "riscv,clint0"
+> -    };
+> +    bool numa_enabled =3D riscv_numa_enabled(ms);
 >
->      for (socket =3D (riscv_socket_count(ms) - 1); socket >=3D 0; socket-=
--) {
-> +        g_autofree uint32_t *intc_phandles =3D g_new0(uint32_t,
-> +                                                    s->soc[socket].num_h=
-arts);
->          hwaddr memaddr =3D memmap[SPIKE_DRAM].base +
->                           riscv_socket_mem_offset(ms, socket);
->          uint64_t memsize =3D  riscv_socket_mem_size(ms, socket);
-> @@ -91,8 +93,6 @@ static void create_fdt(SpikeState *s, const MemMapEntry=
- *memmap,
->          clust_name =3D g_strdup_printf("/cpus/cpu-map/cluster%d", socket=
-);
->          qemu_fdt_add_subnode(fdt, clust_name);
->
-> -        clint_cells =3D  g_new0(uint32_t, s->soc[socket].num_harts * 4);
-> -
->          for (cpu =3D s->soc[socket].num_harts - 1; cpu >=3D 0; cpu--) {
->              cpu_phandle =3D phandle++;
->
-> @@ -113,20 +113,17 @@ static void create_fdt(SpikeState *s, const MemMapE=
+>      fdt =3D ms->fdt =3D create_board_device_tree("ucbbar,spike-bare,qemu=
+",
+>          "ucbbar,spike-bare-dev", &fdt_size);
+> @@ -136,29 +133,11 @@ static void create_fdt(SpikeState *s, const MemMapE=
 ntry *memmap,
->              riscv_socket_fdt_write_id(ms, cpu_name, socket);
->              qemu_fdt_setprop_cell(fdt, cpu_name, "phandle", cpu_phandle)=
-;
->
-> +            intc_phandles[cpu] =3D phandle++;
-> +
->              intc_name =3D g_strdup_printf("%s/interrupt-controller", cpu=
-_name);
->              qemu_fdt_add_subnode(fdt, intc_name);
-> -            intc_phandle =3D phandle++;
-> -            qemu_fdt_setprop_cell(fdt, intc_name, "phandle", intc_phandl=
-e);
-> +            qemu_fdt_setprop_cell(fdt, intc_name, "phandle",
-> +                                  intc_phandles[cpu]);
->              qemu_fdt_setprop_string(fdt, intc_name, "compatible",
->                  "riscv,cpu-intc");
->              qemu_fdt_setprop(fdt, intc_name, "interrupt-controller", NUL=
-L, 0);
->              qemu_fdt_setprop_cell(fdt, intc_name, "#interrupt-cells", 1)=
-;
->
-> -            clint_cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandle);
-> -            clint_cells[cpu * 4 + 1] =3D cpu_to_be32(IRQ_M_SOFT);
-> -            clint_cells[cpu * 4 + 2] =3D cpu_to_be32(intc_phandle);
-> -            clint_cells[cpu * 4 + 3] =3D cpu_to_be32(IRQ_M_TIMER);
-> -
->              core_name =3D g_strdup_printf("%s/core%d", clust_name, cpu);
->              qemu_fdt_add_subnode(fdt, core_name);
->              qemu_fdt_setprop_cell(fdt, core_name, "cpu", cpu_phandle);
-> @@ -139,6 +136,15 @@ static void create_fdt(SpikeState *s, const MemMapEn=
-try *memmap,
 >          create_fdt_socket_memory(fdt, memaddr, memsize, socket,
 >                                   riscv_numa_enabled(ms));
 >
-> +        clint_cells =3D  g_new0(uint32_t, s->soc[socket].num_harts * 4);
-> +
-> +        for (cpu =3D 0; cpu < s->soc[socket].num_harts; cpu++) {
-> +            clint_cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandles[cpu])=
+> -        clint_cells =3D  g_new0(uint32_t, s->soc[socket].num_harts * 4);
+> -
+> -        for (cpu =3D 0; cpu < s->soc[socket].num_harts; cpu++) {
+> -            clint_cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandles[cpu])=
 ;
-> +            clint_cells[cpu * 4 + 1] =3D cpu_to_be32(IRQ_M_SOFT);
-> +            clint_cells[cpu * 4 + 2] =3D cpu_to_be32(intc_phandles[cpu])=
+> -            clint_cells[cpu * 4 + 1] =3D cpu_to_be32(IRQ_M_SOFT);
+> -            clint_cells[cpu * 4 + 2] =3D cpu_to_be32(intc_phandles[cpu])=
 ;
-> +            clint_cells[cpu * 4 + 3] =3D cpu_to_be32(IRQ_M_TIMER);
-> +        }
-> +
+> -            clint_cells[cpu * 4 + 3] =3D cpu_to_be32(IRQ_M_TIMER);
+> -        }
+> -
 >          clint_addr =3D memmap[SPIKE_CLINT].base +
 >              (memmap[SPIKE_CLINT].size * socket);
->          clint_name =3D g_strdup_printf("/soc/clint@%lx", clint_addr);
+> -        clint_name =3D g_strdup_printf("/soc/clint@%lx", clint_addr);
+> -        qemu_fdt_add_subnode(fdt, clint_name);
+> -        qemu_fdt_setprop_string_array(fdt, clint_name, "compatible",
+> -            (char **)&clint_compat, ARRAY_SIZE(clint_compat));
+> -        qemu_fdt_setprop_cells(fdt, clint_name, "reg",
+> -            0x0, clint_addr, 0x0, memmap[SPIKE_CLINT].size);
+> -        qemu_fdt_setprop(fdt, clint_name, "interrupts-extended",
+> -            clint_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4=
+);
+> -        riscv_socket_fdt_write_id(ms, clint_name, socket);
+> -
+> -        g_free(clint_name);
+> -        g_free(clint_cells);
+> +        create_fdt_socket_clint(fdt, clint_addr, memmap[SPIKE_CLINT].siz=
+e,
+> +                                socket, intc_phandles,
+> +                                s->soc[socket].num_harts, numa_enabled);
+>          g_free(clust_name);
+>      }
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index df3eadef78..b134f11266 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -302,42 +302,6 @@ static void create_fdt_socket_cpus(RISCVVirtState *s=
+, int socket,
+>      }
+>  }
+>
+> -static void create_fdt_socket_clint(RISCVVirtState *s,
+> -                                    int socket,
+> -                                    uint32_t *intc_phandles)
+> -{
+> -    int cpu;
+> -    g_autofree char *clint_name =3D NULL;
+> -    g_autofree uint32_t *clint_cells =3D NULL;
+> -    hwaddr clint_addr;
+> -    MachineState *ms =3D MACHINE(s);
+> -    static const char * const clint_compat[2] =3D {
+> -        "sifive,clint0", "riscv,clint0"
+> -    };
+> -
+> -    clint_cells =3D g_new0(uint32_t, s->soc[socket].num_harts * 4);
+> -
+> -    for (cpu =3D 0; cpu < s->soc[socket].num_harts; cpu++) {
+> -        clint_cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandles[cpu]);
+> -        clint_cells[cpu * 4 + 1] =3D cpu_to_be32(IRQ_M_SOFT);
+> -        clint_cells[cpu * 4 + 2] =3D cpu_to_be32(intc_phandles[cpu]);
+> -        clint_cells[cpu * 4 + 3] =3D cpu_to_be32(IRQ_M_TIMER);
+> -    }
+> -
+> -    clint_addr =3D s->memmap[VIRT_CLINT].base +
+> -                 s->memmap[VIRT_CLINT].size * socket;
+> -    clint_name =3D g_strdup_printf("/soc/clint@%"HWADDR_PRIx, clint_addr=
+);
+> -    qemu_fdt_add_subnode(ms->fdt, clint_name);
+> -    qemu_fdt_setprop_string_array(ms->fdt, clint_name, "compatible",
+> -                                  (char **)&clint_compat,
+> -                                  ARRAY_SIZE(clint_compat));
+> -    qemu_fdt_setprop_sized_cells(ms->fdt, clint_name, "reg",
+> -        2, clint_addr, 2, s->memmap[VIRT_CLINT].size);
+> -    qemu_fdt_setprop(ms->fdt, clint_name, "interrupts-extended",
+> -        clint_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+> -    riscv_socket_fdt_write_id(ms, clint_name, socket);
+> -}
+> -
+>  static void create_fdt_socket_aclint(RISCVVirtState *s,
+>                                       int socket,
+>                                       uint32_t *intc_phandles)
+> @@ -728,6 +692,7 @@ static void create_fdt_sockets(RISCVVirtState *s,
+>      uint32_t xplic_phandles[MAX_NODES];
+>      g_autofree uint32_t *intc_phandles =3D NULL;
+>      int socket_count =3D riscv_socket_count(ms);
+> +    bool numa_enabled =3D riscv_numa_enabled(ms);
+>
+>      qemu_fdt_add_subnode(ms->fdt, "/cpus");
+>      qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
+> @@ -762,8 +727,13 @@ static void create_fdt_sockets(RISCVVirtState *s,
+>              create_fdt_socket_aclint(s, socket,
+>                                       &intc_phandles[phandle_pos]);
+>          } else if (tcg_enabled()) {
+> -            create_fdt_socket_clint(s, socket,
+> -                                    &intc_phandles[phandle_pos]);
+> +            hwaddr clintaddr =3D s->memmap[VIRT_CLINT].base +
+> +                               s->memmap[VIRT_CLINT].size * socket;
+> +
+> +            create_fdt_socket_clint(ms->fdt, clintaddr,
+> +                                    s->memmap[VIRT_CLINT].size,
+> +                                    socket, &intc_phandles[phandle_pos],
+> +                                    s->soc[socket].num_harts, numa_enabl=
+ed);
+>          }
+>      }
+>
+> diff --git a/include/hw/riscv/fdt-common.h b/include/hw/riscv/fdt-common.=
+h
+> index 81689f418b..6e81d6cd6c 100644
+> --- a/include/hw/riscv/fdt-common.h
+> +++ b/include/hw/riscv/fdt-common.h
+> @@ -13,4 +13,9 @@ void *create_board_device_tree(const char *model, const=
+ char *compatible,
+>                                 int *fdt_size);
+>  void create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
+>                                int socket_id, bool numa_enabled);
+> +void create_fdt_clint(void *fdt, hwaddr addr, uint64_t size,
+> +                      uint32_t *intc_phandles, int num_harts);
+> +void create_fdt_socket_clint(void *fdt, hwaddr addr, uint64_t size,
+> +                             int socket_id, uint32_t *intc_phandles,
+> +                             int num_harts, bool numa_enabled);
+>  #endif
 > --
 > 2.43.0
 >
