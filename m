@@ -4,100 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06751CD8CA8
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 03:48:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFC43CD8CA8
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 05:37:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZKmJ-0001Ua-4O; Mon, 15 Jun 2026 23:47:55 -0400
+	id 1wZMUh-0002XP-38; Tue, 16 Jun 2026 01:37:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wZKmH-0001U5-Je
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:47:53 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ id 1wZMUf-0002Ws-5X
+ for qemu-riscv@nongnu.org; Tue, 16 Jun 2026 01:37:49 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wZKmF-0001c4-QH
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:47:53 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-69155ca09d8so4411553a12.3
- for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 20:47:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781581670; cv=none;
+ id 1wZMUd-0005Vq-Gs
+ for qemu-riscv@nongnu.org; Tue, 16 Jun 2026 01:37:48 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-68d233bf083so5765950a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 22:37:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781588265; cv=none;
  d=google.com; s=arc-20240605;
- b=gzi/dQ10IqKZk462WjtXg9RxlXTD7OU+MsmsZSHnHXRyfcd42UJq3Hp0XknsXmc4S5
- qF4FIHPf9U4a4xDm2PP/zWGj7dApojxsIWcXTG+OFCXes9rQWsrFy+Eoes400ixh/o7K
- +57lm1ftZe4peSxDaBWqwVZwOm9hOD39fa+dfwObeg86usBvvARx7D0sxh7SFuWNl+de
- fVmkr5N4t+mZpTO3sJPp+5M5FeFWA35Lhw+LA/STXj92SWMX1SRFBChl8NS+Ehxu6LTU
- A4xaqXudRUBZv0Dxa7c32BjXQWVT24HnQi4ZgcZd0aT0lx/VOnxTUAqHerZ8P/ypmkMq
- wcFw==
+ b=jkGf1U9e9hYdDw+hY3J4Ge0gyDn7HfmbE7wEGEmm4FWSydD+r5pjcmT+QgC4BQlVlr
+ OH3tzkOexDVH+hS3vEuPphfPm5ia4Lc8YwXrfYm5Pin1s/fdnF8Y9rOeqjBYGvrdHkWx
+ fP00dcZk6Gk+4J3YCJs/Wm38x9JoOfNGbBO44iH3YPZa6KSs4M0HtXWii0ynwOldCtJE
+ 5+nGPClf4V8POi17A3mWEACNCqXv8j/w9s1KGOorsbeMGnh5YS2V0Z6gAy4jTs9oVCyc
+ cXQGGT2ajp2LSuOLxZjcPjiYS+PzkqIVN9FuAUV9gkL/26bNGO9zkh0l6R56kDeqM3PS
+ m9Jw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=yOh4CeSqtj/dXF33YNZ875SwYCJfUmho3ewVKm2kM+M=;
- fh=i37x9DjMWwtKaOkqcO9ElkErcZm4q6LqiJgAHNfIw00=;
- b=XRJhKUnsN5cFKPBKmkzQNXMgUeLZeMinKoVTzVABgeETjQ1aKf37+685PoxNMzlreu
- wJxZ/MwkSwnwfBFCSJFiOkhSQyuG44KXdhW9VCJhWJLCaT9OnRLyWGmbu8DF691fV7du
- zYuPaDewCPUyx4a7X80Woeap4DULUNnmlJgVadEqL4gahAhHpiB3yzw5BCX3PB0wUy1+
- S8hsS9qkT734If25tCBF/6ODKdNpYtrO0IciubHz9Bn3irp9FsnimqzPbV4iyroifCTq
- f00uGaWITN/63nEXzdxrdzDQO4fnxRbh2FVqhYUMvPAUPulBuWTFK7p9MAdQjZnYGAbH
- LvfQ==; darn=nongnu.org
+ bh=5uFwkG+95qzaTNv1FdhD4Kjfag1rKFrdZyhPBHtmxOY=;
+ fh=68e+OGROc8T9h9MqpsCObQQLSPzsT8/3DaC6mo1GTYE=;
+ b=gqXegJwpNJzGwldDuOvhAnYxmsKBcqYQD1+5ZfaBTEO42mQKXU4C8Wq3czXUfPpmg3
+ Wg4g7nYIQbVe4tiVyz+J1R9tv0TBmbzHnHfjj7gqQ3yU38vehlX0qEJTCHWUpoz/MjSU
+ 2FlG1+2OKw6QKNZDmLY+bxdK1M27oaKptDjDDrOInWpPfwFiutPq+4qhSgSvWje2XSFa
+ 2R4V9tdVXnd44MJHlyn6Ba7d6tDV9GMVy1mdLe9ZgjDqQwP249FbccZ2xgQ27njfzmBJ
+ UczQjO69d8OEQugqQpErVBbktLEX6Un4t7DuU8EH4OpczWrEtWqj9KXdopLGve0Ztuqe
+ oqzQ==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781581670; x=1782186470; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1781588265; x=1782193065; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yOh4CeSqtj/dXF33YNZ875SwYCJfUmho3ewVKm2kM+M=;
- b=XRIz3iVRWF5IN+QpfZeCW+HqqEkWWKCvLta+xjN1hnLH9PH7ddug1NkM0rL2VXyi3Z
- v1YW0Q3J1NtlC0KRme2VXzjRDOYY+GSKbJ6TlcH8Y/fVoYT3q6wAlV88UfpAAD6gh7UZ
- VFBQTMrPy/HeGPg/ILyp7qkOXAmrd1x5Du7DAA72Mdy4nq76sZhcw/CHcgSIXabfURzv
- eYmwPXa3jmb4Do9B/mFuNegA+iZHtj5dW2vhh0hEgiURVaOYZ9kIV/2MNsnVqEaWBJug
- sa2EumKUGlj5hyi39jATULWdFkFGpFSWTUzNmeoHzZMjes80A+FKFuZiKUpXPNZ3/RLO
- RnxA==
+ bh=5uFwkG+95qzaTNv1FdhD4Kjfag1rKFrdZyhPBHtmxOY=;
+ b=LkjW74PAf74H1/vI7f0Zm46N9j6dgwlwlP/Sepunb2u0gLrYW6XphUSjAp1vr/KdMz
+ kynWbuR0GGVlta6jZQt8o3b0GUBKshqPVW8XQqbbH8xeQ2+2u3sgpFymKG5K6Y05Sy2R
+ AXqINTeNIE/Z7JXbaAPFIY4DQiJ3nifsxdG7Gy89OwysTuxlUN8moRHMHH7Zi37ihpNp
+ jRUN00UY226xsu/nooQN+ssyAqbwY0nDxuwbIERK2vWUP9nkM4TsaeqrOE1AmydW4rkB
+ vlKACMuWwH7G38FmZvcCjWj1nfWvlMQL6nLd0sA3i2APuSe9fa97XEq2ghk16KXp5kum
+ ZI7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781581670; x=1782186470;
+ d=1e100.net; s=20251104; t=1781588265; x=1782193065;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=yOh4CeSqtj/dXF33YNZ875SwYCJfUmho3ewVKm2kM+M=;
- b=cDPXatod8YmWWygTiLqH1FYxVfzqPxM9D1IBYlDqdv9DuQVhCH7Mgbw2pQRljfTnkU
- yOLpTibsThfGiPB+IkPqawRBlCUiUZtLkkunV5/24wBEp2wril+XhMwLRFS2Ap2okpfG
- MAjWCtx0Lw34W9DCb71zVdRjshqsAYY0qQ1P+IwbfgI4sHb70GFfnihLOf1bbCW3LuzM
- Rwy4vpxwNXV9mtdDiQH8xsZuo3DNcuI3C2CDnQi66DjaDgW0Ozw2EI3uIoubYbNjRd3V
- SS+ezg9SCrDciqkVmFhLC0aUK0H6fzSeimYK3HsNQcJI+tloMqcTmNsI6dCRBnNszJLl
- ephw==
+ bh=5uFwkG+95qzaTNv1FdhD4Kjfag1rKFrdZyhPBHtmxOY=;
+ b=oYk3+99m46JgUYZmrS+XR9JjC92X4AK439ddFOKdcAYR/da/CgFE8t6pOXTmtu4qcq
+ s85R67LGbO/NXxJdewcX8jd8Ux0N4Hvor0l3UvpQ8g4QfVjyHG2tXTLPXnyqYuc8Bn4t
+ kJMbRzAZOqmEPLGJ+GHBHtudROhBsAeXBQU0J0Q1m8ET2ltTHxQzcT24kfoH65EXK3MZ
+ hO876W0tRj3m9MvFFxoRS0nawNYxEuMEX9TuCMqp08tvkH8Q+AZeMyt0suILCunNAg4B
+ yLjRd+kkYDbrPZof+eZiTPrMhwC4pW02+tN7EeVRYNGJh+5KfZ6Rba91EWBoof4g4FB3
+ mEAw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9a3Qo/vsz9jrgN+VQFMl/yjQVWNPqZQkAkNNG9mRc5iFR5GnBppBnRnMbNrwAqJBKGQdxWeDwh+IgG@nongnu.org
-X-Gm-Message-State: AOJu0YzezEiTOGImqCKmEUdNEz3t2+mpnYjjc6WyEC4zeAow/8wRLZLd
- WcRXgRqQpB+6SADJLsj69PRYeyAfLE5GxpP0D6cFAPojPQXOtEu/nEkLC1DmMBQ/Zh7mA//61yV
- icqwjF7yb/xbDWzdA0xZPbatqgA8zJzk=
-X-Gm-Gg: Acq92OHhJ5SByV9+hB0/rbgLy6djAvRmqRFPLE26RLmwcQkv74opU1huxmEYwlKzcPW
- DvTBKZx+B+dUJbniRyMiBDisOA9cAvO+W6hndeu4oOVRl+9d3YRG8IrwbsQqUNYDjASZQl/29gO
- rKaQRtY1nToaqqENVHp/qWZMoHE2sSCPQKPyUXGqm5ouilrbeUc5fnQyrCGNiRK/4DfCM8agFyL
- Pva18wJf6uMj9kwE/ON6JfRYHyzG93oS97jedN1b3mUFbcS6TUmnLDLk6cYye6prXIJMp95th80
- 7kYU4Hab4NwJ3pBUtt2peiMKAR28VI9R0p2MzQ==
-X-Received: by 2002:a05:6402:4282:b0:693:a399:6e10 with SMTP id
- 4fb4d7f45d1cf-695086ecea0mr863236a12.10.1781581670145; Mon, 15 Jun 2026
- 20:47:50 -0700 (PDT)
+ AFNElJ/Z7wF74xAFENXluCnKCAevWSvtU1v2mLW142Ytkt6G1TNXiPxp/IAqQWIV/wKAK3/JfeuSqimQzqeu@nongnu.org
+X-Gm-Message-State: AOJu0YzNdd+48wjxP2cniTLdOvQYf2HmNA4QCSNOrQaA5dvpdSgg3M7I
+ wrCGXMlukGU3ZojRaJonPq4UdVo/yk113lbw9+lqZMJpCC9XIv8qMjQVbf72MlRroMHFh6UCZg4
+ pwwJbETiDIE+WqtoFIF1ciPhN2ZmTTrE=
+X-Gm-Gg: Acq92OEevNJo8KCT8AMqYxvVUJywm7A37RLgHEesIEbTDKECpFo+hujHD8PZjakAlUt
+ KO8BvbDaD7uRPvMrZIbwIyIm/HOaMPy0aVwHGSRJn/FqTk/1bog4TtSHBYHJljDUuu/N+iVkN35
+ 2VVx3PI7yq82dcufpfI0xlJkgHgt1vruEFRyEpCKp0HbBSEkbgn3nnZjPTeHGyaJ0i0bKrVKAA7
+ u8P7wSRbdb2SUXo3CBLK1BEGqLLFiLLJvj4/KTAojHKfBf3yZa3Puxb9Zk3Ym24TsEa5Whf7itH
+ ciGSXIToMucPfdYDbXAqzNuscLsSIhep4rUJ8g==
+X-Received: by 2002:a05:6402:3907:b0:691:6fca:c1a6 with SMTP id
+ 4fb4d7f45d1cf-69378a5a009mr7720299a12.26.1781588265291; Mon, 15 Jun 2026
+ 22:37:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260611123412.2135600-1-daniel.barboza@oss.qualcomm.com>
- <20260611123412.2135600-4-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260611123412.2135600-4-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260611123412.2135600-1-daniel.barboza@oss.qualcomm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 16 Jun 2026 13:47:22 +1000
-X-Gm-Features: AVVi8CdQqIOS6RxXLh17Fk7_sjrw3XkYb6uJGVxknYUl4QHmgrqnwIOatmbNFdM
-Message-ID: <CAKmqyKOewcpiev62v6wpwjmZ9HVUX2eEGRRyeivQp=iGR4wz6w@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] target/riscv: add 'num-triggers' debug property
+Date: Tue, 16 Jun 2026 15:37:18 +1000
+X-Gm-Features: AVVi8CepJSERSEEcvIrkW3C0kjRtmyqoZQBrG75f486f8udXUrNnyJLJhl6tqjo
+Message-ID: <CAKmqyKMUN-iDhhAF176eZsVsdDd7_-soL4CYL0vYfxGHkFEKhw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/3] target/riscv: parametrize debug trigger number
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
- philmd@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
+ philmd@oss.qualcomm.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x529.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -121,162 +120,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jun 11, 2026 at 10:35=E2=80=AFPM Daniel Henrique Barboza
+On Thu, Jun 11, 2026 at 10:34=E2=80=AFPM Daniel Henrique Barboza
 <daniel.barboza@oss.qualcomm.com> wrote:
 >
-> All CPUs have the same amount of triggers: 2 triggers per hart, set via
-> RV_MAX_TRIGGERS.  This is not enough anymore: we'll have at least one
-> future CPU that will demand more triggers per hart when implementing the
-> RISC-V Server Ref Platform, requiring at least 11 triggers per hart.
+> Hi,
 >
-> Parametrize the trigger amount using a new 'num_triggers' property.  The
-> default amount is kept at 2 for backwards compatibility.  The new
-> maximum is bumped to a generous 1024 triggers per hart, which hopefully
-> will be enough for the foreseeable future.
+> In this new version we're adding Phil's comments in v2, in particular
+> the need for an unrealize() callback to free the stuff we're now
+> allocating.
 >
-> The property can be set in two ways:
->
-> - a '.num_triggers' CPU definition flag, allowing CPUs to set a custom
->   amount inside the CPU def in DEFINE_RISCV_CPU();
-> - a new 'num-triggers' user property.  The user property has a higher
->   priority than an existing '.num_triggers' CPU def setting.
->
-> Assuming a hypothetical case where a CPU 'X' is defined with
-> '.num_triggers =3D 8':
->
-> - -cpu X,num-triggers=3D30 =3D> num_triggers set to 30
-> - -cpu X (...)           =3D> num_triggers set to 8
->
-> For a CPU that doesn't set '.num_triggers':
->
-> - -cpu rv64,num-triggers=3D30 =3D> num_triggers set to 30
-> - -cpu rv64 (...)           =3D> num_triggers set to 2
->
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
+> Patches based on alistair/riscv-to-apply.next.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Hmm... I can't get this to apply. Mind resending?
 
 Alistair
 
-> ---
->  target/riscv/cpu.c   | 11 +++++++++++
->  target/riscv/cpu.h   | 19 ++++++++++++++++++-
->  target/riscv/debug.c | 16 ++++++++--------
->  3 files changed, 37 insertions(+), 9 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b20271a220..6d8f9ad3a6 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1167,6 +1167,11 @@ static void riscv_cpu_init(Object *obj)
->                        IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
->      qdev_init_gpio_in_named(DEVICE(cpu), riscv_cpu_set_nmi,
->                              "riscv.cpu.rnmi", RNMI_MAX);
-> +
-> +    if (mcc->def->num_triggers) {
-> +        env->num_triggers =3D mcc->def->num_triggers;
-> +    }
-> +
->  #endif /* CONFIG_USER_ONLY */
+> Changes from v2:
+> - patch 1 (new):
+>   - add RISC-V CPU unrealize callback
+> - patch 2 (former 1):
+>   - free allocated debug trigger arrays during unrealize()
+>   - change version_id and minimum_version from vmstate_debug
+> - patch 3 (former 2):
+>   - do not touch vmstate_debug version_id/minimum_version_id
+>   - added Phil's R-b
+> - v2 link: https://lore.kernel.org/qemu-devel/20260610205457.1868701-1-da=
+niel.barboza@oss.qualcomm.com/
 >
->      general_user_opts =3D g_hash_table_new(g_str_hash, g_str_equal);
-> @@ -2619,6 +2624,8 @@ static const Property riscv_cpu_properties[] =3D {
->                         DEFAULT_RNMI_IRQVEC),
->      DEFINE_PROP_UINT64("rnmi-exception-vector", RISCVCPU, env.rnmi_excpv=
-ec,
->                         DEFAULT_RNMI_EXCPVEC),
-> +    DEFINE_PROP_UINT32("num-triggers", RISCVCPU, env.num_triggers,
-> +                       RV_DEFAULT_NUM_TRIGGERS),
->  #endif
 >
->      DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string,=
- false),
-> @@ -2764,6 +2771,10 @@ static void riscv_cpu_class_base_init(ObjectClass =
-*c, const void *data)
->                  !valid_vm_1_10_32[mcc->def->cfg.max_satp_mode]) {
->                  mcc->def->cfg.max_satp_mode =3D VM_1_10_SV32;
->              }
-> +
-> +            if (def->num_triggers) {
-> +                mcc->def->num_triggers =3D def->num_triggers;
-> +            }
->  #endif
->          }
->          if (def->priv_spec !=3D RISCV_PROFILE_ATTR_UNUSED) {
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index ea92e2c68c..38f02a9dc7 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -189,7 +189,22 @@ extern RISCVCPUImpliedExtsRule *riscv_multi_ext_impl=
-ied_rules[];
->  #define RV_VLEN_MAX 1024
->  #define RV_MAX_MHPMEVENTS 32
->  #define RV_MAX_MHPMCOUNTERS 32
-> -#define RV_MAX_TRIGGERS 2
-> +
-> +/*
-> + * The Debug 1.0 spec allows a humongous amount of triggers.  Section
-> + * "Enumeration" says: "The above algorithm reads back tselect so that
-> + * implementations which have 2^n triggers only need to implement n
-> + * bits of tselect.".  tselect can have up to XLEN bits, so the max
-> + * theoretical RV_MAX_TRIGGERS value is 2^XLEN.
-> + *
-> + * Allowing 2^XLEN triggers per hart is silly so we'll set a max to a
-> + * modest 1024 triggers, which is way more than what we see current
-> + * hardware use (most chips uses 2-4 triggers per hart, RISC-V Server
-> + * Ref requires at least 11).  With a 1024 max per hart we'll be set
-> + * for a long time ... hopefully.
-> + */
-> +#define RV_MAX_TRIGGERS 1024
-> +#define RV_DEFAULT_NUM_TRIGGERS 2
+> Daniel Henrique Barboza (3):
+>   target/riscv/cpu: add CPU unrealize callback
+>   target/riscv: dynamic alloc of debug trigger arrays
+>   target/riscv: add 'num-triggers' debug property
 >
->  FIELD(VTYPE, VLMUL, 0, 3)
->  FIELD(VTYPE, VSEW, 3, 3)
-> @@ -576,6 +591,8 @@ typedef struct RISCVCPUDef {
->      RISCVCPUConfig cfg;
->      bool bare;
->      const RISCVCSR *custom_csrs;
-> +    /* This is just a setter for env->num_triggers.  */
-> +    uint32_t num_triggers;
->  } RISCVCPUDef;
+>  target/riscv/cpu.c     | 26 ++++++++++++++++++++++++
+>  target/riscv/cpu.h     | 39 ++++++++++++++++++++++++++++-------
+>  target/riscv/csr.c     |  2 +-
+>  target/riscv/debug.c   | 46 ++++++++++++++++++++++++++++++++++--------
+>  target/riscv/debug.h   |  1 +
+>  target/riscv/machine.c | 16 ++++++++++-----
+>  6 files changed, 109 insertions(+), 21 deletions(-)
 >
->  /**
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index 9a4910c431..ba5bc6ae13 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -26,6 +26,7 @@
->  #include "qemu/osdep.h"
->  #include "qemu/log.h"
->  #include "qapi/error.h"
-> +#include "qemu/error-report.h"
->  #include "cpu.h"
->  #include "target/riscv/debug.h"
->  #include "trace.h"
-> @@ -1049,14 +1050,13 @@ void riscv_trigger_realize(CPURISCVState *env)
->  {
->      int i;
->
-> -    /*
-> -     * Alloc env->tdata1/2/3, cpu_breakpoint, cpu_watchpoint and
-> -     * itrigger_timer dynamically.  This is overkill now
-> -     * given that they could be static arrays with RV_MAX_TRIGGERS
-> -     * but we'll parametrize the trigger number later, i.e. the
-> -     * array length won't be static.
-> -     */
-> -    env->num_triggers =3D RV_MAX_TRIGGERS;
-> +    if (env->num_triggers > RV_MAX_TRIGGERS) {
-> +        error_report(
-> +                "Invalid configuration: 'num-triggers' must be less than=
- %u",
-> +                RV_MAX_TRIGGERS);
-> +        exit(1);
-> +    }
-> +
->      env->tdata1 =3D g_new0(uint64_t, env->num_triggers);
->      env->tdata2 =3D g_new0(uint64_t, env->num_triggers);
->      env->tdata3 =3D g_new0(uint64_t, env->num_triggers);
 > --
 > 2.43.0
 >
