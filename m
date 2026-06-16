@@ -4,75 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB53CD98E3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 15:34:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADC6BCD98E1
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 18:05:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZVnf-0000dx-Mz; Tue, 16 Jun 2026 11:34:03 -0400
+	id 1wZY9n-0002wz-Qw; Tue, 16 Jun 2026 14:05:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <qinzhengxiang@foxmail.com>)
- id 1wZVnd-0000dY-3P; Tue, 16 Jun 2026 11:34:01 -0400
-Received: from out162-62-57-64.mail.qq.com ([162.62.57.64])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wZY9m-0002wa-8J
+ for qemu-riscv@nongnu.org; Tue, 16 Jun 2026 14:05:02 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <qinzhengxiang@foxmail.com>)
- id 1wZVnY-0004Pw-SR; Tue, 16 Jun 2026 11:34:00 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1781624021;
- bh=zix0yq62GHbXus38oGkGj/93owtFspKq1rppq5/yiqU=;
- h=From:To:Cc:Subject:Date;
- b=ekjM3VSIGlNsMDcae2V2j8xtjEilenhi+hptW1hj+fIwHMjZeDrKF8vUNe5NXAz4E
- 0kAwFJ5Q/8Z4FqbAyI3HNpkgPWpbMWLM7lOswGeUwWdqH7L6A17AhmDzrzEN6jXgN3
- GFsMCcJHgV76E2LksdjoJU9JLoi4NDHHRnMROBiQ=
-Received: from GavinQin-Ubuntu24.. ([117.147.33.130])
- by newxmesmtplogicsvrszc56-0.qq.com (NewEsmtp) with SMTP
- id 85D252E7; Tue, 16 Jun 2026 23:33:29 +0800
-X-QQ-mid: xmsmtpt1781624009t6vmnb7pl
-Message-ID: <tencent_AFB2247001B0C72775E3DE202C43F5126107@qq.com>
-X-QQ-XMAILINFO: NHCc2xbemT0jhcIPUh2SvQWAFtJQa58kmPQGsKW0TkAnxdyk592zPY+kTS6Aye
- i2d4aJDhU3fGFflyVausd12aMnQiDc30/vmK8hOSeSA5tTDSVbAWGRF+1fFuzNiiP2Vhk9viv6oI
- IQEZpLEmCqrrylzuVk4hzWrAmgkcFGf97dfIS1PYxHKPjc+N1VbHJCAOY2nioP6KKOztr05jFnqY
- q4J50M+yie//VshmP9BoM40qK1wCDg4uL1LgvvhzqLCLjrdRhMSS3zp2zfOHiPh4RimRxYHQwP3f
- l0nnaIra8nCe+39MP5FUcB/N3yawTvuu8epTgbHBE7AIadVuFM8ElNwldO8gOcxt/ziaUICLOSdu
- gNkhAQYv09RS8c9seMGgGHWoE53R2jmDkfOi1CBu+txxnFF122nDZXEW+H1TFAQzrOG1JQVb+NFJ
- KDdqYOlL3WtHPkgoyHFfXyoIxCW0vAMFDTsWTVpY/mEex15AsrsBGI2Wzg2iYeKCJjpcDzM7K3MX
- dh3GiuidkJCIuyFhlZ6XnqwahU8mRvrXaBaag+nKt2a89xTw62wgtfap75biSlned/VyOL0nZ5pp
- HaHI7YiqdegiUqS/J7m9MbGW7zxKwDt+J8z0uesY3tAiPH40i1okHzVxCecEQuxYD9GVNpFqBliy
- E6XkKGPXB73D2U8Oz+A5S6eiHusEsjWpmws9GX13SNKlomq4LdoyNlg7l4naPsmuwoVM4tTpa0Mu
- AK7/nGN1w5vGKy+GAOj9gjl5E1xoqzOCXp8vDSU08H6xdxvxlr6FjMaGK0UueJ6QRc+cJoODxsrm
- L7LTbJ3w1+ra/khluPtU9HwbsxtkHGBfrx2PgJooIXeVPGMap5gBvsA1Qbu4tbWLh4qnxgcLxe2e
- ybuysfzQv4QT09+yDV75WTm4iEnXX5hQ1X9Dx8nTI2Hoetq1hElLY7koP5AnTptHiWGEYGSHdRYm
- kQqqMFAgcqcX8EwcINfRZng5YcfUAihJxrgxPNghlwCZsXVkn+pbKzZDbVS6PrEArbDNUKpvqws/
- cNRD7ZBZHR2VOfCJ9otGC/fpRxUwrs6EPRIMyEYg1lM3ONxyfgk30Vp69nvehhelbGG712P286C0
- uaqOi6qZtrslu4on88V3v6S+HsHf0JFp+XuoSEqxWY/kKQcojIyBsXkBgf0K6DO/W91Fcb7wLP8n
- 1Sy8c=
-X-QQ-XMRINFO: NyFYKkN4Ny6FuXrnB5Ye7Aabb3ujjtK+gg==
-From: ZhengXiang Qin <qinzhengxiang@foxmail.com>
-To: qemu-devel@nongnu.org
-Cc: ZhengXiang Qin <qinzhengxiang@foxmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH] target/riscv: raise access fault for Zicbom MMIO-like accesses
-Date: Tue, 16 Jun 2026 23:33:26 +0800
-X-OQ-MSGID: <20260616153326.31362-1-qinzhengxiang@foxmail.com>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wZY9k-0006Yb-6C
+ for qemu-riscv@nongnu.org; Tue, 16 Jun 2026 14:05:01 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65GH9FST006306
+ for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 18:04:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ UL5mhEPD3YA44YAlvCn907khtWrS45vl5LdOiDWFwfA=; b=Y43jleiI7VoObe9n
+ vlTVDBGt9Rh1V+FHARPW0EMultEDkNOKF+MtZkJUDMwLVT9CJzQV8jIf7CXut8VL
+ tqZDEGX2QvzHvGd5zmtfAlwHJY0Cpu0cWK5inVmhNZX+IrkQPWnFkNokhZM+WPkb
+ tlM+PnkD5lBGlPn+pF89SmsJgzfrEO8TsC1CuP0l4KarUV9t8Tq4dPfDw3WkGn8b
+ YnfbPPwIxdMNVMClt+YnTwSNQc7QnyS74KheO2X91Hzv6DRdxMcbLIOMKmgLwWCV
+ h0x8iAd++rBHDW5cneGz8By4tKABEd9z4uogTLTbXx46T3vgF57O3qRzR9XR559M
+ pwfDew==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eu09kbc8y-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 18:04:57 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-91931144870so626300985a.1
+ for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 11:04:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1781633096; x=1782237896; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=UL5mhEPD3YA44YAlvCn907khtWrS45vl5LdOiDWFwfA=;
+ b=F0SfxVSn4dGNPtmPIRcLIwJXS1wyDnL9kDEqJb6Y/whGw8QDs4sBOHpJatOp12yZ5S
+ 6saLTBZPBtwhM4TQlXFTQWcVxaOR+cm2aH2FAoigKn76nNl0tuTMfzbyUZvswdFRgQqC
+ diDB5rq1oub8rt/zlFu69s2jThQMhAQRF6MUmKqCzNKxcK9cEk/1W5F0rPGYquo5fVou
+ JpbBV+Pn2u1m42g909yKy8EvSNVkQpw/F0tp8Qq2CvRFUVS72cc4Dgyqsczgfdu40KIf
+ gvGKeXCDQ0ewrUUIQbljolwC+BQTmBxLb25+/BwmpiqNO1sq9WQgXdLFDZR8h5TYpjFg
+ uXAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781633096; x=1782237896;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UL5mhEPD3YA44YAlvCn907khtWrS45vl5LdOiDWFwfA=;
+ b=GZVKgAKcJj+yNwYo6Djb3fJ6dk5nCmX+tO3akyA9VpYC63IL/Wu/ZmBqJE+xwE3oLr
+ II6SlgJemRr01VZYJxWGGT9t2KoKzvnrszUpam0nwUZKm3klb+12LrcCGiHJfVGsnwEe
+ A7CyygMTGpY37JAspLZD+o6jPSIqZXY5wxK+QayTzAraSCUGFBWMhnwPz78kkflFfZ2F
+ sRi6PGYs+DVSEUr/WiavGKGRVojOfkrz6WDx4x+JXp9FwJE7maH+cDYQqXlueZE7rhDn
+ LfpTrAXdnbJKqBCoOPnEZSD98MQZFFd8lm94UojzhkcpWEGy1vA9lJAFMh+8QYWUo93G
+ a1pw==
+X-Gm-Message-State: AOJu0Yy2ntd3T7zR3pqVcmuqSc/unPceCmNrv0U6ONE544zRcLklwNZz
+ BP4CY+gOzWJPuiGtjmyYf34v41xeIZ6C6nN9WqY6umFelGmjuQZ9rIHpFdtdHEghiAxp5m6rOlr
+ 5sO+yAAHSiT2vLDYaT5aJNNTS2VxIOgFkALesKmbgwiQHJne41/EqlT9yfw==
+X-Gm-Gg: Acq92OG8wDUHzXuLBIHVa1+PuHvpD0PxSufIfP7rUVRQcPTiX1tDsHWAFBoIClRJiVj
+ B4vO1UV9W/jkB/Bmu1R+xrjOlk0DBtxOk1EXAZ3LWt4DRoJjCQbMSnq7NtceRxWe6bjG73oud1a
+ UBgYhyVThNQYhgSuCB+3S/1rrdH/QL9jwf6u+aDWwv0dpSCJ6e7o7gjYAOddFU02PU5uUrXsXaJ
+ gzjtxTHNxrrTmfZvl22p9ABtwefcbgMELY0m3Fz/Fxe1LtYRwjZabTq2ExcULwGRcAdC35XbcDa
+ j0mOhoBOlxSANRFrz6Hr4gPNvJ8tEiSOYsuyvEt0BnC1LvW6vlBRDEAT6Qd+0tbv6Yn9SwJ7REc
+ fXXZfwmlIcgGH+xMnvJWpTBpCi/+tRzathOnmgc+WvnIvBkO/BwFVWEKRFw==
+X-Received: by 2002:a05:620a:371a:b0:914:7e9a:2716 with SMTP id
+ af79cd13be357-91d8d3a9a27mr131470385a.38.1781633096387; 
+ Tue, 16 Jun 2026 11:04:56 -0700 (PDT)
+X-Received: by 2002:a05:620a:371a:b0:914:7e9a:2716 with SMTP id
+ af79cd13be357-91d8d3a9a27mr131464485a.38.1781633095770; 
+ Tue, 16 Jun 2026 11:04:55 -0700 (PDT)
+Received: from [192.168.68.103] ([177.170.117.62])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-9161a04f5b7sm1533213585a.38.2026.06.16.11.04.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Jun 2026 11:04:54 -0700 (PDT)
+Message-ID: <9c47ffd1-e90b-41a1-903f-019d0c78e4c1@oss.qualcomm.com>
+Date: Tue, 16 Jun 2026 15:04:49 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 2/7] target/riscv: add riscv-server-ref CPU
+To: Matheus Ferst <matheus.ferst@eldorado.org.br>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ andrew.jones@oss.qualcomm.com, leif.lindholm@oss.qualcomm.com,
+ uwu@icenowy.me, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
+ <20260610214133.1882563-3-daniel.barboza@oss.qualcomm.com>
+ <fae30540-54df-42c1-bd2e-1c832f69f75b@eldorado.org.br>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <fae30540-54df-42c1-bd2e-1c832f69f75b@eldorado.org.br>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=162.62.57.64;
- envelope-from=qinzhengxiang@foxmail.com; helo=out162-62-57-64.mail.qq.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE2MDE4NSBTYWx0ZWRfX9pYAq/YD+6/7
+ DLb/kKVwm+x3M4XZy3ndRiqTCaTjyJKQMMUH9aMsy+VKzVSWXihoZFK+83BAqAaHRdp7KTOS1u7
+ D7m9Nvjv2ZC5HpaMeJTKhUwKx+F1zpw=
+X-Proofpoint-GUID: RdWqJJDOsq9ucHEDLQwv3GKrxgc_3upn
+X-Authority-Analysis: v=2.4 cv=DoZmPm/+ c=1 sm=1 tr=0 ts=6a319049 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=V1jnuoLLAAAA:20 a=EUspDBNiAAAA:8 a=PXcuKL70AAAA:8 a=RceVjk-67B5CBUFRr-MA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+ a=1qLaeP4TCVy2vqIEy19U:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-ORIG-GUID: RdWqJJDOsq9ucHEDLQwv3GKrxgc_3upn
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE2MDE4NSBTYWx0ZWRfX/7zUydDnIRj9
+ B4Ka0lLGBsL3UoXGGu0JdM7gnYKPJqNLjdefIIMXfqUm51uR89Es04VjT/TAQwr7ifvOpGWuynz
+ Wj0wVGf+X9XiltSZRuHnFWOVGp2J9XoA80O9VJxYDeCkOoDF/GPCnMaflK10VAjZHlOpt+lNjBQ
+ zkwXhQ+TkHddYzBNg14BhQp1kowgaA0wiMUj0+AZ6iceIWi/43lNNW+0QWBYczkBzyN2/vR+BEw
+ Sf0WaymQZ5vt7r05tC+U8PWC/euCb7iiN33kS+x4Z6l/GWGIldML+cMe1iR7VQ7QqV9v7SkkIZ8
+ 7NhMUO9GDqwDBCE4T417LfY+QGbBqK2xkUIdthJkXfq3cWdBlEhV7v469Uf5utUHVz4oCd+QNMh
+ CIUn9qVVNkZ/SU5ihZkR99npf6HADyjGpchxG+Nx2QeV7wnkjnr6oXh96MPgSAr1Gx2tBI0qJ+C
+ 8tEbIqYrJWCORt36QlQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-16_05,2026-06-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 phishscore=0 adultscore=0 impostorscore=0
+ suspectscore=0 priorityscore=1501 spamscore=0 bulkscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606160185
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HELO_STATIC_HOST=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,50 +157,124 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-check_zicbom_access() probes the cache block with MMU_DATA_LOAD and
-returns early for any result other than TLB_INVALID_MASK.  This treats
-TLB_MMIO as a successful load access.
 
-For Zicbom, a TLB_MMIO result does not provide a RAM host pointer for the
-cache block operation and should not be treated as a successful access.
-Raise a store/AMO access fault instead of silently completing the CBO
-instruction.
 
-This fixes sv39_zicbom_exceptions_Smode.S, where cbo.clean/cbo.flush and
-cbo.inval access a block mapped to a physical address without PMA
-permissions.  Before this change, the CBO instruction completed and the
-following addi was executed.
+On 6/16/2026 2:51 PM, Matheus Ferst wrote:
+> Hi Daniel,
+> 
+> On 6/10/26 18:41, Daniel Henrique Barboza wrote:
+>> The harts requirements of RISC-V server platform [1] require RVA23 ISA
+>> profile support and others.
+>>
+>> We're going for a profile-based implementation, instead of a regular CPU
+>> that can inherit RVA23, to allow future CPUs to use it internally as a
+>> starting base for their own extension sets.  There's also a new
+>> 'rvserver-ref-1.0' flag that can be used to set the extensions in the
+>> command line for other CPUs, which can be used for testing/debugging
+>> purposes.
+>>
+>> Note that for all intents and purposes "riscv-server-ref" is a regular
+>> CPU and no, we're not trying to set a precedent of calling the riscv
+>> server platform spec a profile.
+>>
+>> [1] defines in rule SEE_020 that we must support at least 11 debug
+>> triggers (4 for insn address, 4 for insn load/store, 1 for icount,
+>> one for int, one for excp).  We're going for the minimum.  If more
+>> triggers are needed users can set any trigger amount with:
+>>
+>> -cpu riscv-server-ref,trigger-count=N
+>>
+>> Note that N must be <= 128.
+>>
+>> [1] https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
+>>
+>> Suggested-by: Icenowy Zheng <uwu@icenowy.me>
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> ---
+>>   target/riscv/cpu-qom.h |  1 +
+>>   target/riscv/cpu.c     | 31 +++++++++++++++++++++++++++++++
+>>   2 files changed, 32 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+>> index 30dcdcfaae..a150acd151 100644
+>> --- a/target/riscv/cpu-qom.h
+>> +++ b/target/riscv/cpu-qom.h
+>> @@ -42,6 +42,7 @@
+>>   #define TYPE_RISCV_CPU_RVA22S64         RISCV_CPU_TYPE_NAME("rva22s64")
+>>   #define TYPE_RISCV_CPU_RVA23U64         RISCV_CPU_TYPE_NAME("rva23u64")
+>>   #define TYPE_RISCV_CPU_RVA23S64         RISCV_CPU_TYPE_NAME("rva23s64")
+>> +#define TYPE_RISCV_CPU_RVSERVER_REF     RISCV_CPU_TYPE_NAME("riscv-server-ref")
+>>   #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
+>>   #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
+>>   #define TYPE_RISCV_CPU_SIFIVE_E         RISCV_CPU_TYPE_NAME("sifive-e")
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index e02d53cbba..63fbc4b98e 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -2063,11 +2063,35 @@ static RISCVCPUProfile RVA23S64 = {
+>>       }
+>>   };
+>> +/*
+>> + * The riscv-server-ref spec isn't a profile per se but its
+>> + * CPU definition can be modelled as a profile that extends
+>> + * RVA23, with additional things on top of it, and allowing
+>> + * future CPUs to derive from it via
+>> + * ".profile = &RVServerRef1_0;".
+>> + */
+>> +static RISCVCPUProfile RVServerRef1_0 = {
+>> +    .s_parent = &RVA22S64,
+> 
+> I guess it should be &RVA23S64 instead of &RVA22S64.
+> 
+> Other than that,
+> 
+> Reviewed-by: Matheus Ferst <matheus.ferst@eldorado.org.br>
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/3501
-Signed-off-by: ZhengXiang Qin <qinzhengxiang@foxmail.com>
----
- target/riscv/op_helper.c | 5 +++++
- 1 file changed, 5 insertions(+)
+Good catch!  This was weird ... my lame excuse here is that I got this
+fixed in my branch before sending and forgot to re-generate the patches :D
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 81873014cb..6c9bd5c102 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -218,6 +218,7 @@ static void check_zicbom_access(CPURISCVState *env,
-     void *phost;
-     int ret;
- 
-+    target_ulong fault_addr = address;
-     /* Mask off low-bits to align-down to the cache-block. */
-     address &= ~(cbomlen - 1);
- 
-@@ -235,6 +236,10 @@ static void check_zicbom_access(CPURISCVState *env,
-      */
-     ret = probe_access_flags(env, address, cbomlen, MMU_DATA_LOAD,
-                              mmu_idx, true, &phost, ra);
-+    if (ret == TLB_MMIO) {
-+        env->badaddr = fault_addr;
-+        riscv_raise_exception(env, RISCV_EXCP_STORE_AMO_ACCESS_FAULT, ra);
-+    }
-     if (ret != TLB_INVALID_MASK) {
-         /* Success: readable */
-         return;
--- 
-2.43.0
+
+It's fixed in v9 now.  Thanks!
+
+
+Daniel
+
+> 
+>> +    .name = "rvserver-ref-1.0",
+>> +    .satp_mode = VM_1_10_SV48,
+>> +    .ext_offsets = {
+>> +        CPU_CFG_OFFSET(ext_zkr),
+>> +        CPU_CFG_OFFSET(ext_sdtrig),
+>> +        CPU_CFG_OFFSET(ext_ssaia),
+>> +        CPU_CFG_OFFSET(ext_ssccfg),
+>> +        /* ssstrict is always enabled for PRIV_VER_1_12 */
+>> +
+>> +        RISCV_PROFILE_EXT_LIST_END
+>> +    }
+>> +};
+>> +
+>> +
+>>   RISCVCPUProfile *riscv_profiles[] = {
+>>       &RVA22U64,
+>>       &RVA22S64,
+>>       &RVA23U64,
+>>       &RVA23S64,
+>> +    &RVServerRef1_0,
+>>       NULL,
+>>   };
+>> @@ -3326,6 +3350,13 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>>   #endif
+>>       ),
+>> +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_RVSERVER_REF, TYPE_RISCV_BARE_CPU,
+>> +        .profile = &RVServerRef1_0,
+>> +        .misa_mxl_max = MXL_RV64,
+>> +        .cfg.max_satp_mode = VM_1_10_SV57,
+>> +        .num_triggers = 11,
+>> +    ),
+>> +
+>>   #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>>       DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
+>>           .cfg.max_satp_mode = VM_1_10_SV57,
+> 
 
 
