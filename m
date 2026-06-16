@@ -4,143 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97ED0CD98DA
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 00:37:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48CE9CD98DE
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 00:58:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZHnU-0005aU-S1; Mon, 15 Jun 2026 20:36:56 -0400
+	id 1wZI81-0002ET-Ub; Mon, 15 Jun 2026 20:58:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wZHnQ-0005WO-Fu
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 20:36:53 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wZHnN-00069L-SC
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 20:36:52 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65G0OSG02094036
- for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 00:36:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- AbuYbK3pjxiY3ihwluJLqjh3Xg7cgM/OaetNnrjndj0=; b=hSgafwPl37ny/Su8
- t+HE7lynpf9f3F7m2e81oVqLrhaT4kXBR6YmqPHxwbS3YykD9cScefv9DlzL+KuN
- HH2roNavW133hS7ctewtz103dPZHO2M7uK4uYsnmt4gqGWBtjNYN0lRluNSMOM90
- cQ5TUrMj3p7dGJwHoVjmwDzUIjU4sQg5F411sgZAgNkvcR2Fl4wJmA95DR4fhW+n
- sgJGv0IJnHiW1lPVwQ6VmN94Fb8BmAoN9RT6DjdWDwY+/W00K8Sp8xmlyNO3L5PQ
- 9Vz+UtnV6oH2wxhrpEWC7UKjyv7drfzxP6juKpDdFYvAgcc69TMdhUBKFFHuq1H0
- dCTtVg==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eter23vcb-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 00:36:47 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-915f7c37734so865420585a.1
- for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 17:36:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wZI81-0002E7-2H
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 20:58:09 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wZI7z-0001vb-4p
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 20:58:08 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6913fb25322so5095415a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 17:58:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781571485; cv=none;
+ d=google.com; s=arc-20240605;
+ b=VkV/IoP7rV0Z8S4MwM0d1VhKPPCJ2qWqBZbFTCOT90ZsRLq3wbblIp6MX7nbRTRRXJ
+ 3cwnj4ACoRwgXSYpE2uGj6DsCC6wuKmaX7z0MawJpb9xfP6fScwGM3v4tjxb712+X+YL
+ s2UP9yrdkVOn6HU4IMVGZM1o4jLcVL4DdO0vYDlZzM9AtgbIk0t5e8H9c0hGg+nd7Qlq
+ qUCM5WKwr1FpKst34V9Arf/81NjapPQzgLBgEceGeeIsTXEGVtGYiTEb6uPq5gCjsAMg
+ YR0ooPXDfgE7TCsYTMjA+5uOqhe8BqDwxAWrVQPiyt91xFJ8SOjwM5o6z0WcvY2jc3Dp
+ 5PBw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=y5JtVxw1GsJ+ot8xffNhghsZIFL5pVEBHi4kPvzg/hA=;
+ fh=cYBopu+uVfN1EFBnYQnDcpqeEsO22kzAcGX36QpWybk=;
+ b=X/ntoMdEJOZvHGv9WkaxkbMnJG2tE0/ERJcm4Jrlm33+mJCjGrphaqVL8krtCtylOf
+ vmgBipH2tgIcQOPDH+CJ+6rkUaFiaD0SRYKOm5j8lrDqGBdbF1RVbEH6I/BoI+DtnRf3
+ JEGkqJ4akKruNkoisyV4V4enT/58vq+9l8rTm5ALOvR1C9vpvHiAOSlBLB49RItQoOiM
+ 7luyPmZU2ey9IujV/Rm0RRgHMDVJ+Pax7+3JdiHLGBM0fHPSNPa1DcyR8bjDUDRIbLPN
+ t53OX98kvIC4amC/FZ1lQapdA0EeTu2NtMAml2M4MED/Tc9f6UZoSB/1A4yMErDnPp22
+ /okg==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781570207; x=1782175007; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=AbuYbK3pjxiY3ihwluJLqjh3Xg7cgM/OaetNnrjndj0=;
- b=dbUrihnAs4+cbMC5EdFzvzsnbGlN8RsDeNvCrl+0kDcCJxPmN+5dZ+GYLfaErOcatW
- Pr2yx40G+iwhz58IglDVFDbOwSvphjETIcTNPvdF1b+O7tVQGWOgZXIjLhQKtDrkx8Un
- Q2c4F5x1CVmIfWJVqvQNgEFDma+l64ACm+juDYJaWk2ATih1tSZHRyMyL8QpJ6K1u6JT
- 91d0DD8de89ab6mNG1YZYD5g/8dChMj7A0sFuxI1yVUwF5HCcOUhXDR8nq0QB9I86cy1
- 4TeS+Btf8//s4QXEzD6qg9MSc2IR7wDC85Q59nkqmPF6cx+2QDIhivulStLAwBvGdutC
- TMCQ==
+ d=gmail.com; s=20251104; t=1781571485; x=1782176285; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=y5JtVxw1GsJ+ot8xffNhghsZIFL5pVEBHi4kPvzg/hA=;
+ b=AvH6Uh2b0MOqjgyqf27QIkrxRxs+biJntRjasm+MkNf6NwG2d7e8EWWtY6iEVMxYp7
+ jklbVw6fK+B9YcLrTBqAPpX1z6vGocHklN696JiXjOT8Ztxjv1UXVqBmluI7XBpn1NZ0
+ PDE5EV2twNU9KSH0TstEWu1aVSS+D8omVZxZILcoIuCQX/y/An/d9dYW3YT7/nj0K4lL
+ zcBIrrbeJylAqmgf4x4hlyxC9E7sm4HbsrmS/BsYWlztD7K5YPAA1YE2N+kvRJ2SldGX
+ Fc/oSfhvp7H4VIp92lfd9g5yOoKSu+O5Nhpbh0qP9/eS1v3YYUrQzSf0HlKNS+C504sr
+ XZOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781570207; x=1782175007;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AbuYbK3pjxiY3ihwluJLqjh3Xg7cgM/OaetNnrjndj0=;
- b=ZSHFV8zz5jDQhnuuYQhggxNoP5Aom04BLKyaiNtUhM4KE/dsRRRG6LKWXMzVpHqxpS
- /G3DnQHSWTFDL72BCXAAWRAPKjzMWlytLEG0jtmTHUdloBurLR7GGJkgdadh3b8iWm4C
- Iv/mGGTn8kOqLtQ6UCOI44yGtIAXV0rUbc/3iacgh2bZf0EF55M4eEUsLv0pcaRFnsdU
- RYRnn+McD+0ZPSqB2guHhPH5cr/sh2rr6E3MgVyFyGpwD69x7Cq7AAtV4kizu8W39602
- 22FXSyoA8A8VM3AujSEvWy+7Lq5H2HJfqX6ff7wXhsiOWAXgeGc/+TcOPNNzCZq4F4Q/
- M3VA==
-X-Gm-Message-State: AOJu0YwyiwS3cXFRsEeUI0dor21aYc5dJnabyZwRVDsSfJg8OXz0FvGj
- lJNJCvMB2QJ6rOPbXwkf2w8niMRPdQ2zOuaDznj5N9kkc9vfvFfYXLkrvX2AOdgVIYTuIUgagi1
- Mo+NWLXo5+IpFrZYR7N4d0ckxdoRsbVZ6UJPOh7U5wX0QSqlvX4ZvrmblGw==
-X-Gm-Gg: Acq92OF3X2GEYkah+c0bg+Uy31iER3skXWWUIefeB/dajJSZt7vYac/YXK+5gFRUsQC
- Md0OGI8x17E4VrgTNF7eG599MS2JrKAXNarTXAFjdtqU79WSzNy3FWYqdwCERy/U7uXnoJU5Ut7
- NWVQBBbUafA+B8PHwabwt74tQ0k2y1JP6fl8NwI/F9UuFH5tenZoC3o7cCit5lPIIp8Qo6g2CFx
- mX/aoGbrjxjZZMr7vDBwIT1fJtYmy8JjEEOoJj+LyBhAReAMspTWRDZs4Zn2ImzPtyfrQJCq6Xl
- P13+wUaNtJaHAJDQvk77YEiwiYGRwINvMNFWb/Hiw4FVnw68BhuGiu5IU4vhHcCH6NWdSDKC8K2
- 1e71448YYPECBtwX1eLcduDKYvqGweZ5erlEo3H8X5Z654SGSmlUyq9K6xf6NycwboiSAXjkG
-X-Received: by 2002:a05:620a:2943:b0:915:e7bf:e6ff with SMTP id
- af79cd13be357-91c23c7bb91mr349921085a.11.1781570207102; 
- Mon, 15 Jun 2026 17:36:47 -0700 (PDT)
-X-Received: by 2002:a05:620a:2943:b0:915:e7bf:e6ff with SMTP id
- af79cd13be357-91c23c7bb91mr349917885a.11.1781570206693; 
- Mon, 15 Jun 2026 17:36:46 -0700 (PDT)
-Received: from [192.168.69.214] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49230a45b30sm10436305e9.2.2026.06.15.17.36.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jun 2026 17:36:46 -0700 (PDT)
-Message-ID: <66c2731a-91cf-48e3-9303-8353c6be418c@oss.qualcomm.com>
-Date: Tue, 16 Jun 2026 02:36:44 +0200
+ d=1e100.net; s=20251104; t=1781571485; x=1782176285;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=y5JtVxw1GsJ+ot8xffNhghsZIFL5pVEBHi4kPvzg/hA=;
+ b=cFpl/JFiwtoc91hEL2EU78wjk6JiiGKwHC6NdAch1Twcl85mcBjHWMKY+lV7D3OnN4
+ EpSgQKd3huU6bvZhKXRa4YDu6uQfLy3mlBMPXr3IuGTsYAgDgENQ8vfswPQGdfkwiq03
+ AmUGRIH5R4Sd2fMGihXly1fFA3TG9GpsLYTUzH4wn9Qd7i47l156e56QK0Coe7UOCaY0
+ e3sy6JvwwE6sKqvPHSOQnXdHyLQeo9xmUnCcyVDdQyn+GQxngAa9tenlYIwD+GrDetKf
+ LlZi/yB1L9pqW8yN03xCh/x+SOpvvAUqGt/Sy11pSrdOSnd/0vKRxyeph3WQLOia4MvD
+ GiTA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+79R0GmEYM/ZO0rOiFieoyHvojFRENjASOcmx6jgeFcNmQS7wDTy/HKtszyqgy+eNbDoppdlM4TVPF@nongnu.org
+X-Gm-Message-State: AOJu0YyQEG246yAhVrhKmRc55Le2QXy3jsRUUDnCbyU+NL7+5BFqIX6K
+ gO9Z21DRliJDU9G77uaBH0WUzMTSEXdIFjC2RpVcTWnDc6IHRKVqFY2FiWk7NFig3nXffUmdi0Y
+ kavzuNTQvfND2dMzOLAO96MFHXoxY9Z0=
+X-Gm-Gg: Acq92OFRsxwHM3k/fVRlPrQKkv9zAd0dchfE6Mfbi06+Hxbb7MeOvai1v0lQkpXwwIW
+ ndaDCyoOaQ1/HrXZte/FzUoyMOn4QlHEG1DU/zRQXgVwd4NcLcRIS3fZL1tgMahmHpZ7Ps475DA
+ NmgPlAR5VSdim8ui/p/5jE8lXCLCZqWTmZKH2irk/EV1l597fncUf2qmkfdrUYuichyENcb822a
+ QSj5jzeDsYq5N7wg6e6jxIXRrGgO5KUYoVk2rYTgvYm2Aqe5f1nYF4rfXjyWJeqnyVOnxBgHkDX
+ ndK+1foaMbdS51XSCO5aAy4fERkefJwdGRbKFA==
+X-Received: by 2002:a05:6402:3212:b0:691:b5aa:5a70 with SMTP id
+ 4fb4d7f45d1cf-693788fb36bmr7517095a12.4.1781571485356; Mon, 15 Jun 2026
+ 17:58:05 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/13] hw/riscv/numa: make numa_enabled() public
-Content-Language: en-US
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+References: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
+ <20260610214133.1882563-3-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260610214133.1882563-3-daniel.barboza@oss.qualcomm.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 16 Jun 2026 10:57:39 +1000
+X-Gm-Features: AVVi8CccgmY5SS9TMVYXOGFIwlnHVDlya1J7fwj1QELPGIWNPEMMDTK-L2Kzpj0
+Message-ID: <CAKmqyKOHLaR8mkL_An6UiKkbAXSe4f4fwAhJm=x4MgFMvJSNjQ@mail.gmail.com>
+Subject: Re: [PATCH v8 2/7] target/riscv: add riscv-server-ref CPU
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
+ andrew.jones@oss.qualcomm.com, leif.lindholm@oss.qualcomm.com, uwu@icenowy.me, 
  Palmer Dabbelt <palmer@dabbelt.com>
-References: <20260615203734.954428-1-daniel.barboza@oss.qualcomm.com>
- <20260615203734.954428-4-daniel.barboza@oss.qualcomm.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260615203734.954428-4-daniel.barboza@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE2MDAwMyBTYWx0ZWRfXxCMQg3xdPPuM
- mFhIAHbNVhYbE2LvxN/24rG+9jN4s6JdtV4CYbh7CFGjA9ZpmjTW0BpQHso77riprJ+O8UbUAOg
- CcxAWony8GZzllUPptLa/Lbu4wfe1ck=
-X-Proofpoint-GUID: cqZ36yW1jpZj-RFJBVwP-t2qZ4OCh2gm
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE2MDAwMyBTYWx0ZWRfX537leYBIw7JW
- qJPCK+/WvlGNMCO1EOVIEzUBe5GCTYYA+4dNYUhkKWRhFqhIR7g3Q+eJymPWZIN9KNKVB13dhyF
- sfM3ReKGN4VnCXvDrqdIZXAqGAW3O2Q0OBq1mzs0ir67Bq3HRpHvQ0UMwilBp0XuWl4shoon7jh
- 2mf6L5E5971v8sI2S7LcXFuCtOsO6mkMGS7ISIE/ltbK3tnFjGDdzzR4P5J+9rEFMSy6joJigXk
- Xs+48Tcnz37qJ4ceY0VEwSsN4vi+mEZDCHTT4N9W5pWlv0JNmtTQHlKQfVCBUmA7HAy3d2QpwKc
- LqIGF4gIvlgUCPD6DVVwth09YubkXQO79YIBIR18G20gvMNtCDkEeVVtxy3IcfaoprcApm7yxWM
- 5kra5AnX+5kBmvcBoxDWdObGWbe9Cb5EymZDqagCjls/+TxWWAcMNj0n1gqUNZ+T5NZQRZVz2z/
- tnN/Tf992ekMIhqtnFA==
-X-Authority-Analysis: v=2.4 cv=F4tnsKhN c=1 sm=1 tr=0 ts=6a309a9f cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=3x77jrtbuF8AUm31dGkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-ORIG-GUID: cqZ36yW1jpZj-RFJBVwP-t2qZ4OCh2gm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-16_01,2026-06-15_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 clxscore=1015 impostorscore=0 spamscore=0
- adultscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606040000
- definitions=main-2606160003
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,21 +122,121 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 15/6/26 22:37, Daniel Henrique Barboza wrote:
-> There's FDT logic gated around 'numa_enabled()' in virt.c and spike.c.
-> We want to move the FDT code to a common helper without having to call
-> hw/riscv/numa.c functions from it, but at the same time being aware of
-> the FDT changes if numa is enabled.
-> 
-> To do that the boards will inform the FDT helpers if we have
-> numa_enabled in the env or not.  And for the boards to be able to do
-> that we need the static 'numa_enabled' function to be public.
-> 
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> ---
->   hw/riscv/numa.c         | 20 ++++++++++----------
->   include/hw/riscv/numa.h |  8 ++++++++
->   2 files changed, 18 insertions(+), 10 deletions(-)
+On Thu, Jun 11, 2026 at 7:44=E2=80=AFAM Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
+>
+> The harts requirements of RISC-V server platform [1] require RVA23 ISA
+> profile support and others.
+>
+> We're going for a profile-based implementation, instead of a regular CPU
+> that can inherit RVA23, to allow future CPUs to use it internally as a
+> starting base for their own extension sets.  There's also a new
+> 'rvserver-ref-1.0' flag that can be used to set the extensions in the
+> command line for other CPUs, which can be used for testing/debugging
+> purposes.
+>
+> Note that for all intents and purposes "riscv-server-ref" is a regular
+> CPU and no, we're not trying to set a precedent of calling the riscv
+> server platform spec a profile.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Urgh! Let's see how this looks in a year or two. Hopefully we didn't
+dig ourselves a hole
+
+>
+> [1] defines in rule SEE_020 that we must support at least 11 debug
+> triggers (4 for insn address, 4 for insn load/store, 1 for icount,
+> one for int, one for excp).  We're going for the minimum.  If more
+> triggers are needed users can set any trigger amount with:
+>
+> -cpu riscv-server-ref,trigger-count=3DN
+>
+> Note that N must be <=3D 128.
+>
+> [1] https://github.com/riscv-non-isa/riscv-server-platform/blob/main/serv=
+er_platform_requirements.adoc
+>
+> Suggested-by: Icenowy Zheng <uwu@icenowy.me>
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  target/riscv/cpu-qom.h |  1 +
+>  target/riscv/cpu.c     | 31 +++++++++++++++++++++++++++++++
+>  2 files changed, 32 insertions(+)
+>
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 30dcdcfaae..a150acd151 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -42,6 +42,7 @@
+>  #define TYPE_RISCV_CPU_RVA22S64         RISCV_CPU_TYPE_NAME("rva22s64")
+>  #define TYPE_RISCV_CPU_RVA23U64         RISCV_CPU_TYPE_NAME("rva23u64")
+>  #define TYPE_RISCV_CPU_RVA23S64         RISCV_CPU_TYPE_NAME("rva23s64")
+> +#define TYPE_RISCV_CPU_RVSERVER_REF     RISCV_CPU_TYPE_NAME("riscv-serve=
+r-ref")
+>  #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibe=
+x")
+>  #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
+>  #define TYPE_RISCV_CPU_SIFIVE_E         RISCV_CPU_TYPE_NAME("sifive-e")
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index e02d53cbba..63fbc4b98e 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -2063,11 +2063,35 @@ static RISCVCPUProfile RVA23S64 =3D {
+>      }
+>  };
+>
+> +/*
+> + * The riscv-server-ref spec isn't a profile per se but its
+> + * CPU definition can be modelled as a profile that extends
+> + * RVA23, with additional things on top of it, and allowing
+> + * future CPUs to derive from it via
+> + * ".profile =3D &RVServerRef1_0;".
+> + */
+> +static RISCVCPUProfile RVServerRef1_0 =3D {
+> +    .s_parent =3D &RVA22S64,
+> +    .name =3D "rvserver-ref-1.0",
+> +    .satp_mode =3D VM_1_10_SV48,
+> +    .ext_offsets =3D {
+> +        CPU_CFG_OFFSET(ext_zkr),
+> +        CPU_CFG_OFFSET(ext_sdtrig),
+> +        CPU_CFG_OFFSET(ext_ssaia),
+> +        CPU_CFG_OFFSET(ext_ssccfg),
+> +        /* ssstrict is always enabled for PRIV_VER_1_12 */
+> +
+> +        RISCV_PROFILE_EXT_LIST_END
+> +    }
+> +};
+> +
+> +
+>  RISCVCPUProfile *riscv_profiles[] =3D {
+>      &RVA22U64,
+>      &RVA22S64,
+>      &RVA23U64,
+>      &RVA23S64,
+> +    &RVServerRef1_0,
+>      NULL,
+>  };
+>
+> @@ -3326,6 +3350,13 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>  #endif
+>      ),
+>
+> +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_RVSERVER_REF, TYPE_RISCV_BARE_CPU,
+> +        .profile =3D &RVServerRef1_0,
+> +        .misa_mxl_max =3D MXL_RV64,
+> +        .cfg.max_satp_mode =3D VM_1_10_SV57,
+> +        .num_triggers =3D 11,
+> +    ),
+> +
+>  #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>      DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
+>          .cfg.max_satp_mode =3D VM_1_10_SV57,
+> --
+> 2.43.0
+>
+>
 
