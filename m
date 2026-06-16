@@ -4,100 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EB1ACD98DE
-	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 03:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E611BCD98DE
+	for <qemu-riscv@archiver.kernel.org>; Tue, 16 Jun 2026 03:10:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZKAW-0006uL-V0; Mon, 15 Jun 2026 23:08:52 -0400
+	id 1wZKCB-0007eD-FR; Mon, 15 Jun 2026 23:10:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wZKAQ-0006tD-Uc
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:08:47 -0400
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ id 1wZKC9-0007dG-4F
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:10:33 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wZKAP-0008Bq-26
- for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:08:46 -0400
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6912f4acca4so7048501a12.1
- for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 20:08:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781579323; cv=none;
+ id 1wZKC7-0000Lo-HK
+ for qemu-riscv@nongnu.org; Mon, 15 Jun 2026 23:10:32 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-68c32f3c6d6so3984564a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 15 Jun 2026 20:10:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781579430; cv=none;
  d=google.com; s=arc-20240605;
- b=GgWSEXp3CyZeWzdF8cBtnb11IsGBz/RarIBbN0uhdVI2TXuvKV+BVLhEopaPTImUSH
- +nVhaIMriapo44U3Ept3Yh3jqV5rKlJIqMLjaMQbxwQKOXlhL+Do1RR/327DYCkztZH7
- PZdALOo6Bizcn5pZFkVxWKP14QBS9pvCjLGL5NUihTquGVRpeUNlCw6HwYyg+yFrmglJ
- Cfv8MBT+4enGNJOkA+RPOnsxRv0W60cKEkBn/ZTf7Z4tf1xdGZ3c6f3KtUpZZJEDMkdl
- evDDdZBtoqaA6ir0LM4FtxoqDbY+PRqREhfvh69RK9UvTrphXYYBz4q/KthP5WrNXqe3
- fF0w==
+ b=Y5FxC65gRfbkFIvzoh5MGv/91qCSX1nnc98sCUTKAZbEmfeDKZfYgyjZyWPstqUW4m
+ 3YJxboVrX29xW9ZE/u361/wYOMkWGQhj7lmTTcwMmJzvC/lhgJ2BTn+R5Mm5HosgCtPN
+ sivJcsjluyfWLxsAHunk4zW4vAxgaqSgdQeRViM8E9njpwlshy/dDwlYQHHUR8h5SYln
+ oQBdaZdREbP4A4VDgKDxONYcCAEPlqdhnqNSEmkiQXLWVPZUQVC769EOPnPWPeqR6vG2
+ jRpwyMsuqHMSpwTE6Lklm84/TVI6sER3iEuWJeSEzm8qn7wdQZTiVayNSI+7DgluUQD5
+ LMCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=gF+1+ugwYxUqSuygQLOoDf6gnCwtaiiiPyJc5ma5Uf8=;
- fh=naxnGUJ96pAoesY7Cx24XrWmpTR9RujAqwyBEqlGstc=;
- b=NOjN77unurJ/nq9y8xGxSfy55sHuZLZhUaoC2vr4XjSdblNzQOecEEajSjiJvEo7Mn
- LotnPxj9HZc0AGyTtuq6ADjIL8gyFNAKW/F5GfG9B5g9pqCILtvSobtfJI/Q6FVNHyj0
- VMTggX9zCZSAfRo2/1b1rwvrZXnUKSRNkYFLJOD9rHsJRX+tZhl/NZP4Lelh1TKpcBi7
- kSUsqdRvJf+EQv4fa1flX0W0u+aBnaHujpsbmltytmY4hoYbmoW7Usd5MO0uolt6Xg1k
- h/DNV3rKKnd2JQVbLTvThhUMD5020jZumKzDgIcd7NqX6PRvhyzUs9CRWySwVasYF2i9
- 6Pug==; darn=nongnu.org
+ bh=N44fD8qAnwX80ld8/GmOLqf+sw/wbXbSFzxkLU/B1FI=;
+ fh=pC6iMxRcsiVOT/sUQ8DgBFt7cEGQ9PnVguLSaF09BNU=;
+ b=lWWUVF/j2dhQ3cpEYrvu6Pca0R6VI76rcISlnNCG4CmZnc/ixAKA+QA/Z7H+GHmhcW
+ KAY8hXe179bxV/5v3au8CQakgiH9VCNSXNXYP0osEdpsSjcNhndA9wJpWsf7h+bYiBj/
+ 5Zw427cqU11RrrGQRgJ+KMJi5CUBvirKnx/jR5+w03Nf2CTPArMm2p9pyiLgW4sE5O2a
+ pPQ13UeD6lx+Adjey+zWUlCbkSY5AyMiGuVsbSJEb6W9MH9my7gHUi4Gpm/8UeZwlO1n
+ kGj+gSu2KF0BwWkH9JWW9z+xlEFyIst8gHnCO4/urruh03ewoVEBYEI3J2TQ5HZFXIH/
+ nAFw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781579323; x=1782184123; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1781579430; x=1782184230; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gF+1+ugwYxUqSuygQLOoDf6gnCwtaiiiPyJc5ma5Uf8=;
- b=Z7lB2D8apQEoaAPgz5hdRTcVatzUoWyubQDau1F0lyBj3gP9FWEWouijIDMG6gKPnx
- 6B9SIjnTq94SyokBfN6R22fyotf1Ozbfws6/VFOCefvuecFSRi7esHBD9GgMjmToSL/L
- frFRYs90nkyV8LY01Viq/zR8HC5Bt+4wLcFB72IM3qz8ne65pWsVrD7MwSkTa5Sq9jmI
- IYfpp6M8fzHr9iedb7qCn5sXfYvtqNs//61dpJosxogGD2ikcwt+Y5mzA7PAwDHYDsRv
- sJym0Sr0dWxWXJfrbYPRDkFjp9vwj5Xl8szmbQBlj3mJgRbZT9sXvBdgjBMNaguDUWvZ
- 6+Tw==
+ bh=N44fD8qAnwX80ld8/GmOLqf+sw/wbXbSFzxkLU/B1FI=;
+ b=CPVZSsa1m0zudtWCAXw+8zzXJj1zZ/aSlM2Ls/pI4X5k1pYXTIyoNRoU9QByJ7cKLb
+ +ShcrA6D6/VjI3wmh69aPa1Q8k686T60Oo4EH9LxWm9PeYyHmG9vZtIXNYYQkGfXQPI4
+ jI8JtnMHrc5IuOm0MJ7i2RMoTPzyoi8GUZ8FlC2ykiJtLxqZQTZJATDJPJ5uqgijHfsn
+ 0QiY66utyIXtru0V9F09Ic7mjwe1hlBMvd2J497TZrWH1YhYDpdDyhqnWGOZ0UNEOPNt
+ gOd942wSIPvtuNxdCNugb8KAlhYVYZ6RjkqIpDZNFRH8LI159ez1lUMQCF2Q+LlPwUdQ
+ edjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781579323; x=1782184123;
+ d=1e100.net; s=20251104; t=1781579430; x=1782184230;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=gF+1+ugwYxUqSuygQLOoDf6gnCwtaiiiPyJc5ma5Uf8=;
- b=M49TQBYCPsiJAujX1IsnOnm/3lSYI/h+IlkjTVqU1hyqIJaALIn8fOIp5h+3s1jHqW
- oFjjiHPErbCAFFmVzvtCfiSGA3m3sxS26enqreDmQvb4NsjRwMSKFxgY+F619XQZBcUi
- bV6VQSLJg3SLFgQwG7cJ5E4nnpdNDeVNmm+IyE7KKtV21BeAMuS7oGB4bO8Vek+4zxAA
- Fx5QvJ3c/JM+XBS0BfJoqFPpNMkUrhFS1jmoZuS+vP3c3/LDFi2kuAYHqZuQyLQQBaul
- VyEtqKuacrZrm7RcIu/DVkrWJjVZkxSU/hNI0IvcQ2zMO6SjDiiI65Z6KO23LbXFdn7e
- gL9g==
+ bh=N44fD8qAnwX80ld8/GmOLqf+sw/wbXbSFzxkLU/B1FI=;
+ b=knu3ofHvS1tgm8KqQP7oAn8h/eqRxlsYVytljxWcyvnZDttNVkOlABu/Lr7aDPgi3q
+ zGlmPgfYM8MEOl1LV4SOUU9XmAK4bOLo3C1nS2oGg5t20r4uAJLTymq+Yq3RF4T39Val
+ F5ik2lniYXa8NFUJBksHCElwIivNMCHsErSBLXmrxJJH0gjo9LdrhuJcqyUyqH/pbpZe
+ ICU2JNeAUfXT3Iqsz1+uODMJhdl3+HnW2mfZuVoirEZug24WbQkv3PymSl1dA27mhP6v
+ MjHrxXsCjQZyV9Fd0PfDIS3JVuSRYGmPBd+2VAnH0Kz0KXTOn9ULuhSjErI/WZhM2HWL
+ bdBQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+1UtbjHnTEGpbHricfbFI3kK8ScnTz7VXHWgiMp4k81s31afsuhdH5Mh86g4TizpBIqCS/P2t8GzoF@nongnu.org
-X-Gm-Message-State: AOJu0YzgblGWQFdpw8f1tYSKY+A4owv/FeYGMx0h2lySQD6HwCtBrroA
- brXDjaLRX8zWncMPStXKzBS1F1Z8ReRmu+YvVQeJDVYMh50j4qS8UYyhbExluYZG632rZ3L6h2S
- dZ4WfULDesrukmBWwRLKp3VMD/+PCi4U=
-X-Gm-Gg: Acq92OFmwPT+dj5f4ozhuP+ZjZANg4dupjbEymMsmSWO+uE91fcQvGma5OimxnZHZqh
- B+65NVP761YKDzomPdOa9zPGRs2fmdfWMxl2DZxKQNMAGlnI1iv+IE+RlzdvwdmIGXYTEsCNbjp
- EstXPk17phYj2GJR0A/q/rj3IKwWISo9mcFN2jIMo5R7BZPrgJ2iwV3Ds6MILS2yxX2EwGIj9cd
- U/LjK5S5FZeA0FoONNeaqM0Ql4hQD/MAnN5vDR+N6FqR9rDHSGfPsM4S6WUPRhxbx3NgTG6niNk
- Wmgl06npFMmP3yL6BQ9sE1BhToME8NP556RX8g==
-X-Received: by 2002:a05:6402:27cf:b0:67b:89f5:26c7 with SMTP id
- 4fb4d7f45d1cf-693c6a93510mr5810363a12.26.1781579323434; Mon, 15 Jun 2026
- 20:08:43 -0700 (PDT)
+ AFNElJ8hfOawVlVqk4cdChcvK0tPPCuNnar32zkW0f0TzmOhN7nSYLUYyIAZWZCgw/k4aByCiobpNf7JeCEB@nongnu.org
+X-Gm-Message-State: AOJu0YzGT0dpPEXu4pI9rS2btkUFm4AipzRF9/kntMt4PX8iLCWu6euQ
+ 8K288KWnh7E2pYMeaIB3coGsbm15huic3Hq4BVyYIXoW6dyko+lAcpMT3/g4FevQ9o+AVUbl7vV
+ HfE8S/mXSpuN1ULu72C7Fwq3K4pCgbxiyT/2gauM=
+X-Gm-Gg: Acq92OHXqRkgIem43Q4fztBubR/sBL2FYyv37nkiqMTzV+op4sy8gSqeJQR+Xkmyupl
+ Mte3c9KVq7TAxANvl+GtO6FlxL1ZFAPRA+Gn7CsLwvqX+rntYI52/ofhtkS8KuKcpIBJ20THzbI
+ jUHqqqESkihX2nflV3A2cXmsRHT5LFW9upGmcseJPvHhU1A1Hvqx6NSHZWof7m0RWlcvZgiVz8T
+ YzN81rQjB898FaOuGnO4OWaweFIfQN6dpRu0KmYqepE9GjvRvHKROQNfkLbzFMQAYgPLZ8wDw07
+ PndhbxEpZpsur6hq3hPtoSpJ8e+Qn6ewQivaCQ==
+X-Received: by 2002:a05:6402:c43:b0:691:b051:41e0 with SMTP id
+ 4fb4d7f45d1cf-695086e1e08mr761701a12.4.1781579429700; Mon, 15 Jun 2026
+ 20:10:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260615203734.954428-1-daniel.barboza@oss.qualcomm.com>
- <20260615203734.954428-5-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260615203734.954428-5-daniel.barboza@oss.qualcomm.com>
+ <20260615203734.954428-6-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260615203734.954428-6-daniel.barboza@oss.qualcomm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 16 Jun 2026 13:08:17 +1000
-X-Gm-Features: AVVi8CcxQY9T5iH1LxgOsorzHrtflh_vpvnbiViJBpMXEtACID7g1SCRvSSUiDM
-Message-ID: <CAKmqyKNcOURk1zU9F+R0YB02YnkdQjafiRjzYCa9FKg8Mo7=hw@mail.gmail.com>
-Subject: Re: [PATCH 04/13] hw/riscv: add create_fdt_socket_memory() helper
+Date: Tue, 16 Jun 2026 13:10:03 +1000
+X-Gm-Features: AVVi8Cfx78ks6fN0eLf3a3NDqcbJTVHFhjRtmCkdSnNeGmt4wModOXrr3r0lXEQ
+Message-ID: <CAKmqyKMg1QnHymPW8Q8aD-hcjL+gTyGmbg_kYPz2aVV9EK0hZg@mail.gmail.com>
+Subject: Re: [PATCH 05/13] hw/riscv/sifive_u.c: add intc_phandles array
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -121,13 +121,12 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 16, 2026 at 6:39=E2=80=AFAM Daniel Henrique Barboza
+On Tue, Jun 16, 2026 at 6:38=E2=80=AFAM Daniel Henrique Barboza
 <daniel.barboza@oss.qualcomm.com> wrote:
 >
-> This helper encapsulates the creation of /memory@addr FDT subnodes.
->
-> Boards are responsible for calculating the adequate addr, size and
-> inform if we have numa enabled.
+> Store the intc phandles in an 'intc_phandles' array, like the 'virt'
+> board does, instead of re-creating the interrupt-controller FDT string
+> and using qemu_fdt_get_phandle() to fetch it.
 >
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
@@ -136,198 +135,56 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/fdt-common.c         | 15 +++++++++++++++
->  hw/riscv/sifive_u.c           | 11 ++---------
->  hw/riscv/spike.c              | 18 +++++++-----------
->  hw/riscv/virt.c               | 23 ++++++-----------------
->  include/hw/riscv/fdt-common.h |  2 ++
->  5 files changed, 32 insertions(+), 37 deletions(-)
+>  hw/riscv/sifive_u.c | 13 ++++++-------
+>  1 file changed, 6 insertions(+), 7 deletions(-)
 >
-> diff --git a/hw/riscv/fdt-common.c b/hw/riscv/fdt-common.c
-> index b155246998..719c36e001 100644
-> --- a/hw/riscv/fdt-common.c
-> +++ b/hw/riscv/fdt-common.c
-> @@ -10,6 +10,7 @@
->
->  #include "qemu/error-report.h"
->  #include "system/device_tree.h"
-> +#include "hw/core/boards.h"
->  #include "hw/riscv/fdt-common.h"
->
->  void *create_board_device_tree(const char *model, const char *compatible=
-,
-> @@ -35,3 +36,17 @@ void *create_board_device_tree(const char *model, cons=
-t char *compatible,
->
->      return fdt;
->  }
-> +
-> +void create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
-> +                              int socket_id, bool numa_enabled)
-> +{
-> +    g_autofree char *mem_name =3D g_strdup_printf("/memory@%"HWADDR_PRIx=
-, addr);
-> +
-> +    qemu_fdt_add_subnode(fdt, mem_name);
-> +    qemu_fdt_setprop_sized_cells(fdt, mem_name, "reg", 2, addr, 2, size)=
-;
-> +    qemu_fdt_setprop_string(fdt, mem_name, "device_type", "memory");
-> +
-> +    if (numa_enabled) {
-> +        qemu_fdt_setprop_cell(fdt, mem_name, "numa-node-id", socket_id);
-> +    }
-> +}
 > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 5d3b2751ad..a00cfd08a7 100644
+> index a00cfd08a7..ce86989bc8 100644
 > --- a/hw/riscv/sifive_u.c
 > +++ b/hw/riscv/sifive_u.c
-> @@ -98,7 +98,6 @@ static void create_fdt(SiFiveUState *s, const MemMapEnt=
-ry *memmap,
->                         bool is_32_bit)
->  {
->      MachineState *ms =3D MACHINE(s);
-> -    uint64_t mem_size =3D ms->ram_size;
->      void *fdt;
->      int cpu;
->      uint32_t *cells;
-> @@ -138,14 +137,8 @@ static void create_fdt(SiFiveUState *s, const MemMap=
+> @@ -111,6 +111,7 @@ static void create_fdt(SiFiveUState *s, const MemMapE=
+ntry *memmap,
+>      static const char * const plic_compat[2] =3D {
+>          "sifive,plic-1.0.0", "riscv,plic0"
+>      };
+> +    g_autofree uint32_t *intc_phandles =3D g_new0(uint32_t, ms->smp.cpus=
+);
+>
+>      fdt =3D ms->fdt =3D create_board_device_tree("SiFive HiFive Unleashe=
+d A00",
+>          "sifive,hifive-unleashed-a00", &s->fdt_size);
+> @@ -168,8 +169,10 @@ static void create_fdt(SiFiveUState *s, const MemMap=
 Entry *memmap,
->      qemu_fdt_setprop_cell(fdt, nodename, "#clock-cells", 0x0);
->      g_free(nodename);
+>          qemu_fdt_setprop_string(fdt, nodename, "device_type", "cpu");
+>          qemu_fdt_setprop_cell(fdt, nodename, "phandle", cpu_phandle);
 >
-> -    nodename =3D g_strdup_printf("/memory@%lx",
-> -        (long)memmap[SIFIVE_U_DEV_DRAM].base);
-> -    qemu_fdt_add_subnode(fdt, nodename);
-> -    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-> -        memmap[SIFIVE_U_DEV_DRAM].base >> 32, memmap[SIFIVE_U_DEV_DRAM].=
-base,
-> -        mem_size >> 32, mem_size);
-> -    qemu_fdt_setprop_string(fdt, nodename, "device_type", "memory");
-> -    g_free(nodename);
-> +    create_fdt_socket_memory(fdt, memmap[SIFIVE_U_DEV_DRAM].base,
-> +                             ms->ram_size, 0, false);
->
->      qemu_fdt_add_subnode(fdt, "/cpus");
->      qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 79c9bb041f..92facba29d 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -55,13 +55,12 @@ static void create_fdt(SpikeState *s, const MemMapEnt=
-ry *memmap,
->  {
->      void *fdt;
->      int fdt_size;
-> -    uint64_t addr, size;
->      unsigned long clint_addr;
->      int cpu, socket;
->      MachineState *ms =3D MACHINE(s);
->      uint32_t *clint_cells;
->      uint32_t cpu_phandle, intc_phandle, phandle =3D 1;
-> -    char *mem_name, *clint_name, *clust_name;
-> +    char *clint_name, *clust_name;
->      char *core_name, *cpu_name, *intc_name;
->      static const char * const clint_compat[2] =3D {
->          "sifive,clint0", "riscv,clint0"
-> @@ -85,6 +84,10 @@ static void create_fdt(SpikeState *s, const MemMapEntr=
-y *memmap,
->      qemu_fdt_add_subnode(fdt, "/cpus/cpu-map");
->
->      for (socket =3D (riscv_socket_count(ms) - 1); socket >=3D 0; socket-=
--) {
-> +        hwaddr memaddr =3D memmap[SPIKE_DRAM].base +
-> +                         riscv_socket_mem_offset(ms, socket);
-> +        uint64_t memsize =3D  riscv_socket_mem_size(ms, socket);
+> +        intc_phandles[cpu] =3D phandle++;
 > +
->          clust_name =3D g_strdup_printf("/cpus/cpu-map/cluster%d", socket=
-);
->          qemu_fdt_add_subnode(fdt, clust_name);
+>          qemu_fdt_add_subnode(fdt, intc);
+> -        qemu_fdt_setprop_cell(fdt, intc, "phandle", phandle++);
+> +        qemu_fdt_setprop_cell(fdt, intc, "phandle", intc_phandles[cpu]);
+>          qemu_fdt_setprop_string(fdt, intc, "compatible", "riscv,cpu-intc=
+");
+>          qemu_fdt_setprop(fdt, intc, "interrupt-controller", NULL, 0);
+>          qemu_fdt_setprop_cell(fdt, intc, "#interrupt-cells", 1);
+> @@ -179,14 +182,10 @@ static void create_fdt(SiFiveUState *s, const MemMa=
+pEntry *memmap,
 >
-> @@ -133,15 +136,8 @@ static void create_fdt(SpikeState *s, const MemMapEn=
-try *memmap,
->              g_free(cpu_name);
->          }
->
-> -        addr =3D memmap[SPIKE_DRAM].base + riscv_socket_mem_offset(ms, s=
-ocket);
-> -        size =3D riscv_socket_mem_size(ms, socket);
-> -        mem_name =3D g_strdup_printf("/memory@%lx", (long)addr);
-> -        qemu_fdt_add_subnode(fdt, mem_name);
-> -        qemu_fdt_setprop_cells(fdt, mem_name, "reg",
-> -            addr >> 32, addr, size >> 32, size);
-> -        qemu_fdt_setprop_string(fdt, mem_name, "device_type", "memory");
-> -        riscv_socket_fdt_write_id(ms, mem_name, socket);
-> -        g_free(mem_name);
-> +        create_fdt_socket_memory(fdt, memaddr, memsize, socket,
-> +                                 riscv_numa_enabled(ms));
->
->          clint_addr =3D memmap[SPIKE_CLINT].base +
->              (memmap[SPIKE_CLINT].size * socket);
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index cb1d83fd48..df3eadef78 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -302,22 +302,6 @@ static void create_fdt_socket_cpus(RISCVVirtState *s=
-, int socket,
+>      cells =3D  g_new0(uint32_t, ms->smp.cpus * 4);
+>      for (cpu =3D 0; cpu < ms->smp.cpus; cpu++) {
+> -        nodename =3D
+> -            g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
+> -        uint32_t intc_phandle =3D qemu_fdt_get_phandle(fdt, nodename);
+> -        cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandle);
+> +        cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandles[cpu]);
+>          cells[cpu * 4 + 1] =3D cpu_to_be32(IRQ_M_SOFT);
+> -        cells[cpu * 4 + 2] =3D cpu_to_be32(intc_phandle);
+> +        cells[cpu * 4 + 2] =3D cpu_to_be32(intc_phandles[cpu]);
+>          cells[cpu * 4 + 3] =3D cpu_to_be32(IRQ_M_TIMER);
+> -        g_free(nodename);
 >      }
->  }
->
-> -static void create_fdt_socket_memory(RISCVVirtState *s, int socket)
-> -{
-> -    g_autofree char *mem_name =3D NULL;
-> -    hwaddr addr;
-> -    uint64_t size;
-> -    MachineState *ms =3D MACHINE(s);
-> -
-> -    addr =3D s->memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, soc=
-ket);
-> -    size =3D riscv_socket_mem_size(ms, socket);
-> -    mem_name =3D g_strdup_printf("/memory@%"HWADDR_PRIx, addr);
-> -    qemu_fdt_add_subnode(ms->fdt, mem_name);
-> -    qemu_fdt_setprop_sized_cells(ms->fdt, mem_name, "reg", 2, addr, 2, s=
-ize);
-> -    qemu_fdt_setprop_string(ms->fdt, mem_name, "device_type", "memory");
-> -    riscv_socket_fdt_write_id(ms, mem_name, socket);
-> -}
-> -
->  static void create_fdt_socket_clint(RISCVVirtState *s,
->                                      int socket,
->                                      uint32_t *intc_phandles)
-> @@ -759,6 +743,10 @@ static void create_fdt_sockets(RISCVVirtState *s,
->      phandle_pos =3D ms->smp.cpus;
->      for (socket =3D (socket_count - 1); socket >=3D 0; socket--) {
->          g_autofree char *clust_name =3D NULL;
-> +        hwaddr memaddr =3D s->memmap[VIRT_DRAM].base +
-> +                         riscv_socket_mem_offset(ms, socket);
-> +        uint64_t memsize =3D riscv_socket_mem_size(ms, socket);
-> +
->          phandle_pos -=3D s->soc[socket].num_harts;
->
->          clust_name =3D g_strdup_printf("/cpus/cpu-map/cluster%d", socket=
-);
-> @@ -767,7 +755,8 @@ static void create_fdt_sockets(RISCVVirtState *s,
->          create_fdt_socket_cpus(s, socket, clust_name, phandle,
->                                 &intc_phandles[phandle_pos]);
->
-> -        create_fdt_socket_memory(s, socket);
-> +        create_fdt_socket_memory(ms->fdt, memaddr, memsize,
-> +                                 socket, riscv_numa_enabled(ms));
->
->          if (virt_aclint_allowed() && s->have_aclint) {
->              create_fdt_socket_aclint(s, socket,
-> diff --git a/include/hw/riscv/fdt-common.h b/include/hw/riscv/fdt-common.=
-h
-> index adf9b33dfd..81689f418b 100644
-> --- a/include/hw/riscv/fdt-common.h
-> +++ b/include/hw/riscv/fdt-common.h
-> @@ -11,4 +11,6 @@
->
->  void *create_board_device_tree(const char *model, const char *compatible=
-,
->                                 int *fdt_size);
-> +void create_fdt_socket_memory(void *fdt, hwaddr addr, uint64_t size,
-> +                              int socket_id, bool numa_enabled);
->  #endif
+>      nodename =3D g_strdup_printf("/soc/clint@%lx",
+>          (long)memmap[SIFIVE_U_DEV_CLINT].base);
 > --
 > 2.43.0
 >
