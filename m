@@ -4,93 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC8DCD98EE
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jun 2026 06:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7BD3CD98F0
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jun 2026 11:34:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZk32-0006FQ-OA; Wed, 17 Jun 2026 02:46:52 -0400
+	id 1wZoXR-0006rm-2T; Wed, 17 Jun 2026 07:34:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wZk2v-0006Ej-Nx
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 02:46:47 -0400
-Received: from mail-dl1-x1242.google.com ([2607:f8b0:4864:20::1242])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wZk2t-0000Gl-9Y
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 02:46:45 -0400
-Received: by mail-dl1-x1242.google.com with SMTP id
- a92af1059eb24-13986d61b4eso3792122c88.0
- for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 23:46:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wZoXO-0006rN-1v
+ for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 07:34:30 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wZoXL-0007Yu-IF
+ for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 07:34:29 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65H8WA4Z2058005
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jun 2026 11:34:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ zwyaTYje9gbDOiUGC+Cyk/RTLe+hVlwfL4K6YFXVYgM=; b=hdANukom33sePZ/t
+ aYONcUmqEti87wjpE/ihL9jViGidcqjN4o31PftKxJpvwBpEYjowNLd4eNFgahbP
+ dbUAaPYE7H/RrYw5YZ5CbDlpLPlV0rv9DSDai0DA/M1bfTJeHqaUJs7P3H1XpOV/
+ TqkpyYR8F1BlcP8RkG2FYz/l5UJFvRWSMitMMW8taGzsKLZqJ5H0/ac51PHekjkb
+ 5b7k60lLLb4KxwXxuskzIgA2KlxqSUCzftm+AO+2NKKX+lEka0rCgpngNPz8+9qQ
+ CaQSPTVf2917CleEKyNkzFoGLKvNdd2CR+/iR+xH+1hw6Mpl4zPe4vT198Qk7NbC
+ Y1q4hQ==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eueesaw8e-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jun 2026 11:34:25 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-5177f07ea82so111850801cf.3
+ for <qemu-riscv@nongnu.org>; Wed, 17 Jun 2026 04:34:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781678802; x=1782283602; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=D/NyF93pYnBKphkBcMiGHvliwIPuTAB8rfxK/53zw3Y=;
- b=XCgBvKYNMbpjPeId5dsgv1sBB3Ji0IsDIMNZQw5qc/Epg/O2xILh13888FkvmADXwr
- vgaGAVEwAhocwaRLSSobeAF7DMrWtLFqLox5xZ5PCZtF1cPer4Cmvqpi+jxqNG4Zn5mx
- uRHqdQQc4wgNhmnd26Q0KTIb8NB4QVDzKyMWrduxMhAZ7Z4K+6rQZ9FhNZyGq1B3EQEt
- EDBoUPKJxQqSm7+HtftHYlTlAQhujYN9RwKQv6UxFtjIKuvpN326G3tBluAMqRBfpPCm
- BE21guILwIETi9/y4xXaH7aCem/++VPAyz7eoCVNqagsmroYk8tgMALHQepQ87hQRlvE
- Z5HA==
+ d=oss.qualcomm.com; s=google; t=1781696064; x=1782300864; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zwyaTYje9gbDOiUGC+Cyk/RTLe+hVlwfL4K6YFXVYgM=;
+ b=ituqJg+PyWA19RInYXKPXtR+5/FEPendT1ryXXvsicoRefCuG1ocArTvyP5Q8tXpZx
+ hQswSbefGGX+nQ/7szwH+gfaiOeNm08HU6ZpX0kCYeez8i/3lW48zwyBle2u6kbjhbNu
+ azL6WNQjzxFT2WaMhbD0/1GjYUufeSH55hXrpkXIOxY7kV7czYsMlBoEcAVpEc78jroe
+ ZhRy7DiCGaLAzruG71gkJF63+XgObn25w7yx6230Wxe+87+nXXjSwChUwLNEy1KWvKHO
+ IGwMeFTnnBvF7A+1NhtPjxWs44FmjXBlqcM+rVvH11Hc3C6G9jkb2RqDdTLil2k4Qbb3
+ pm0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781678802; x=1782283602;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=D/NyF93pYnBKphkBcMiGHvliwIPuTAB8rfxK/53zw3Y=;
- b=psB0xGfYKlQHy3Zn8T60SKxihqJFn49WyrDvAjBB3wcymNcxyDJN+LmLM1AJpThQR1
- +fnUDcmny9EUpL3Io934P1cTb2ze+MqfXLYovhh1NG3DZ1Rcj/lkCe+/d4Pr1N+zYO86
- 7XJsKfBV+fuGH3b3XNOOBcWXSIgq5aPa0AN2CEp7NVHviIu44mtfVmz73du7mNLSnitN
- r8Wa+EonPiF1wyH2OY4Iv7JR0OFSQncBXijv2JYlBbtSZfas9lKHEkABiRmjY8b8c/wT
- qFHErtvDy2O0KifT2HS7ttQM7gp9bwMAwyQFb8QMGS9t0/1TcuLjnStN4Zgf+yFDVU9r
- 2fwA==
+ d=1e100.net; s=20251104; t=1781696064; x=1782300864;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zwyaTYje9gbDOiUGC+Cyk/RTLe+hVlwfL4K6YFXVYgM=;
+ b=Xid9zUHnDTot6pcUn3vTcAG/ahjjA1QM4M//kzlo13mxbx7gu6TLTUOZct6SkgMHXV
+ FkKkjcJRE25O8g+Dq+wfNipqXTCx4qWqUISpW2F4q/fg3gd5EnYGgWArqvOpeRgBDcg9
+ jjbyHMSo25ey723/L3b30mUxlllfqFPKI52g2yX6YXHScMLhF3n/PP72L3kCBAgBqwpK
+ tUeoE294vFsdNP119hA3+At1/VBjtt4sffyKzLHThU/m8cwSSs479QZbbRuMepDC2aKD
+ wSGFk5TzNX7tUs7BWlIuRwv5+7Y5ftf8C+uE6tt1S0oMxHGarOhQtPo0ms4QrTsx59qw
+ NAkQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9sJ4FapurmGs7wqah+/cESJiAv1fbf3NjR9Gk0WmgKFB8o9O+b1Eiv7JBNVtEkz9ClujuhRGtXuHFO@nongnu.org
-X-Gm-Message-State: AOJu0YybvXSiwg59B/KboIMXFN9rNVbvh8kliIw2XYQszz8QgbfQQJ5d
- Iw4mAaY3zoUSDf/DDNiuv6/7bNZd21X69JXx3hGK5UwwzXCxYKDkmelX
-X-Gm-Gg: Acq92OG00oMpRhtnqMLxdO6O66r2pe0hFTVpELSPcmG6V3GV/SOEjmHvVb1FDIE3ctN
- SjQQYJwy6BM/C+nWPMQBMplQSBh/aeczwUASGYsQVJhMxCu1U4MPdAh5EXpTWehdZDiIE4yxRoT
- 2TFZFXsqahpus7mzQsnbM+Wp2/O/fnPLmwWR5tFGCDL5kJgJ+uyUBC36eZ+nrnj0zP4SEw+HjJa
- 1XXeMqu7FWUTUNV0gkVT/YM5qYlEAbeG+9BX7sYF5WMl42AZrtnOu5PtY56wfl+BFwurssCCkyM
- EsyR4Jjj3xmwUyQqm/XJpua3YDq8SKC1F5hQ2P4l7Wi2jqcg2S8Cnduzf/i3kgq2ZSwssbV23xE
- iGsVvSuS/53dGwLOBPBF9VEOUllKNEgXfpfmNcZ7LT/WrndLOm0Nm8o71tq7NaPdAQbrBwZi6jq
- 3ocExaIRsHddT02z3Dw+UpOxz2VPlPTYYwV92PMIG3iFXKrNJA
-X-Received: by 2002:a05:7022:907:b0:128:d4be:7438 with SMTP id
- a92af1059eb24-1398f6dedc6mr998965c88.30.1781678801568; 
- Tue, 16 Jun 2026 23:46:41 -0700 (PDT)
-Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1384b8f9889sm14927377c88.3.2026.06.16.23.46.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 23:46:41 -0700 (PDT)
-Date: Wed, 17 Jun 2026 14:46:38 +0800
-From: Chao Liu <chao.liu.zevorn@gmail.com>
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: pbonzini@redhat.com, marcandre.lureau@redhat.com, 
- alistair.francis@wdc.com, farosas@suse.de, lvivier@redhat.com,
- liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- jserv@ccns.ncku.edu.tw, 
- eleanor15x@gmail.com, marscheng@google.com, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org
-Subject: Re: [PATCH v3 2/5] hw/misc: Add Sophgo CV1800B clock controller
-Message-ID: <ajJBpOYxVfOw5Wr_@ChaodeMacBook-Pro.local>
-References: <20260616190147.1286316-1-visitorckw@gmail.com>
- <20260616190147.1286316-3-visitorckw@gmail.com>
+ AFNElJ9xmvyc70q8sD1pXKsZpACT8Iljc4rW1PKCFuUQkARQa7LJOcJ63JnoS6w/I0umuWxCZ/dg+wQJLyCY@nongnu.org
+X-Gm-Message-State: AOJu0Yzgdudpge2+3TRf74Q9zfhf/731lcPV8MoMaWF5qkdgzxz7ASXl
+ CDti2WJnudF3uqC6uMH/jIidbewjtpsVZP3S0EqGYLgiy4WCHBH7NnEzjxZQAzTtCWMUtw6E3tS
+ OK5W7VvDIagnMwi7Ru2KZajI0cHpKFnAZe0Ekq/riFMjjVGlDLJvstI7j/w==
+X-Gm-Gg: Acq92OGUwyApj4S9MOs2z+1ZJtcNcFXAmO4+mWG2JeY7wKbL0w3BnL118YXOHyrgKhu
+ QPBV063x7O5/w3aUxUVnaucau7esUy5NKcMbFvoxFB8wt/2aN12sEhqQOFOuUB1eaH0PLynlerc
+ xRfmdc8U9Ugnv23rTITO2Jz1brfHGOb+FTq2K20Hfp2H8bL9LZnHc6KqW/YVX9DWIbYnRhX8HJ9
+ DCGBht2fDyZTi9T376pVsCUPP4j9tBeTaKztbWBzJWUlbkTjAjrpdBdb/D4P2bNjJyrWR1p82LY
+ hB6PBoECYfyPquRj8iPV6gQth33LgvxeGCbUE6qndk0mWn5ZY5ZM/ARlYCfbKUnDkt/BmppU9xb
+ e4PZ45BROKuFZV/sPO+7fqBjUcYUf4hdEcP32GGxEmM9gfiA=
+X-Received: by 2002:a05:622a:14c7:b0:517:580c:bcd3 with SMTP id
+ d75a77b69052e-519ac2276aemr39688031cf.19.1781696064054; 
+ Wed, 17 Jun 2026 04:34:24 -0700 (PDT)
+X-Received: by 2002:a05:622a:14c7:b0:517:580c:bcd3 with SMTP id
+ d75a77b69052e-519ac2276aemr39687501cf.19.1781696063416; 
+ Wed, 17 Jun 2026 04:34:23 -0700 (PDT)
+Received: from [192.168.68.103] ([177.170.117.62])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-51955b271fbsm131095431cf.22.2026.06.17.04.34.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 17 Jun 2026 04:34:22 -0700 (PDT)
+Message-ID: <9cc3db2f-9153-476c-91e7-82020cf60651@oss.qualcomm.com>
+Date: Wed, 17 Jun 2026 08:34:19 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260616190147.1286316-3-visitorckw@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1242;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-dl1-x1242.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: raise access fault for Zicbom MMIO-like
+ accesses
+To: ZhengXiang Qin <qinzhengxiang@foxmail.com>, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+References: <tencent_AFB2247001B0C72775E3DE202C43F5126107@qq.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <tencent_AFB2247001B0C72775E3DE202C43F5126107@qq.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDExMCBTYWx0ZWRfX+0TesHVTvSen
+ imKKJjMDYnkqirXRuZCcnv7swGEeSkvpmiDmF+NWD1Fo2aYQfSy2PXa3GsFbO3YJlWRGoIPr3Uf
+ f05EPh475yz+8H9+xZJWKX4YM37CRzM=
+X-Proofpoint-ORIG-GUID: MFyPvNMRRBggZEzqFFkXgCkdNLAkApTv
+X-Authority-Analysis: v=2.4 cv=R6oz39RX c=1 sm=1 tr=0 ts=6a328641 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=gdiugJE53z4H+vvYeRBHqw==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=p0WdMEafAAAA:8 a=bDN84i_9AAAA:8 a=EUspDBNiAAAA:8 a=D1X-efNntoiCHaPa3eEA:9
+ a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22 a=J2PsDwZO0S0EpbpLmD-j:22
+X-Proofpoint-GUID: MFyPvNMRRBggZEzqFFkXgCkdNLAkApTv
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDExMCBTYWx0ZWRfX2MTb2mV0KQEC
+ VaSPvQUKOLqWRhSdndt347dmgm91SrD9pmziHZTXnS9JTaWjjsw4bUoG6YQAr+WTfUf5MY3zi2s
+ CUm14UHiYJXh3XgPALyU5qZAQtcnOv5FaI38jh4jYVY8+zta3jOQ4zYoEuNXdwQq90pQNOHEoDA
+ kzESfMlpENosbpqFaJ2q/hnKFYTxwHIsa6MjImpa56kLZJddtRT23LO+4ZUAwIgbPf2Emgw2Q1H
+ ZeGqkF2d/pbFrHtgvkV9Ir8hBjc/YhPCaTN87fsa3fQ3veDi8o13zCR3lr7L7ThFM8OQxP5cpYp
+ mZFvF05ZoAeHEzMT/jju9hiaiuTBQn21pWnv2of1L91NwLaTUuiKmH5TxiWygOC6Z0dfwd3G3Xc
+ 0S7H9E3dBboQNp0PcI6f0PbNt6qBbCNAlSOmVXne1DwVSYtItqydfrEsWPtSBuVIpwgak0A12xe
+ 4aa+YDNyA4731m2Zu0g==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-17_01,2026-06-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 bulkscore=0 clxscore=1015 impostorscore=0 phishscore=0
+ lowpriorityscore=0 suspectscore=0 priorityscore=1501 malwarescore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2606170110
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,215 +159,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 16, 2026 at 07:01:44PM +0800, Kuan-Wei Chiu wrote:
-> Add a stub for the CV1800B clock controller. This is specifically
-> required for the SDHCI controller to function correctly under Linux.
+
+
+On 6/16/2026 12:33 PM, ZhengXiang Qin wrote:
+> check_zicbom_access() probes the cache block with MMU_DATA_LOAD and
+> returns early for any result other than TLB_INVALID_MASK.  This treats
+> TLB_MMIO as a successful load access.
 > 
-> The Linux 'sophgo,cv1800-clk' driver probes this device to determine
-> the clock tree configuration. This implementation sets the bypass
-> registers (CLK_BYP_0 and CLK_BYP_1) to 0xFFFFFFFF during reset,
-> matching the POR default state. This bypasses the PLLs and allows the
-> SDHCI and other peripherals to operate using the 25MHz reference clock.
+> For Zicbom, a TLB_MMIO result does not provide a RAM host pointer for the
+> cache block operation and should not be treated as a successful access.
+> Raise a store/AMO access fault instead of silently completing the CBO
+> instruction.
 > 
-> Without this device, the SD card driver fails to initialize, preventing
-> the system from mounting the root filesystem from the SD card:
+> This fixes sv39_zicbom_exceptions_Smode.S, where cbo.clean/cbo.flush and
+> cbo.inval access a block mapped to a physical address without PMA
+> permissions.  Before this change, the CBO instruction completed and the
+> following addi was executed.
 > 
-> [    0.888739] Waiting for root device /dev/mmcblk0...
-> [   10.727739] mmc0: Timeout waiting for hardware cmd interrupt.
-> [   10.728042] mmc0: sdhci: ============ SDHCI REGISTER DUMP ===========
-> [   10.728356] mmc0: sdhci: Sys addr:  0x00000002 | Version:  0x00002402
-> [   10.728618] mmc0: sdhci: Blk size:  0x00000000 | Blk cnt:  0x00000000
-> [   10.728919] mmc0: sdhci: Argument:  0x00000000 | Trn mode: 0x00000000
-> [   10.729271] mmc0: sdhci: Present:   0x01ff0000 | Host ctl: 0x00000001
-> [   10.729591] mmc0: sdhci: Power:     0x0000000f | Blk gap:  0x00000000
-> [   10.729903] mmc0: sdhci: Wake-up:   0x00000000 | Clock:    0x00000000
-> [   10.730223] mmc0: sdhci: Timeout:   0x00000000 | Int stat: 0x00000000
-> [   10.730537] mmc0: sdhci: Int enab:  0x00ff0083 | Sig enab: 0x00ff0083
-> [   10.730795] mmc0: sdhci: ACmd stat: 0x00000000 | Slot int: 0x00000000
-> [   10.731005] mmc0: sdhci: Caps:      0x056900b9 | Caps_1:   0x00000000
-> [   10.731211] mmc0: sdhci: Cmd:       0x00000000 | Max curr: 0x00000000
-> [   10.731415] mmc0: sdhci: Resp[0]:   0x00000000 | Resp[1]:  0x00000000
-> [   10.731636] mmc0: sdhci: Resp[2]:   0x00000000 | Resp[3]:  0x00000000
-> [   10.731851] mmc0: sdhci: Host ctl2: 0x00000000
-> [   10.732018] mmc0: sdhci: ADMA Err:  0x00000000 | ADMA Ptr: 0x00000000
-> [   10.732229] mmc0: sdhci: ============================================
-> 
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/3501
+> Signed-off-by: ZhengXiang Qin <qinzhengxiang@foxmail.com>
 > ---
->  hw/misc/Kconfig               |  3 ++
->  hw/misc/cv1800b_clk.c         | 90 +++++++++++++++++++++++++++++++++++
->  hw/misc/meson.build           |  1 +
->  include/hw/misc/cv1800b_clk.h | 24 ++++++++++
->  4 files changed, 118 insertions(+)
->  create mode 100644 hw/misc/cv1800b_clk.c
->  create mode 100644 include/hw/misc/cv1800b_clk.h
+
+Thanks for taking care of this one.
+
+Without this patch:
+
+$ ./build/qemu-system-riscv64 -d in_asm,int,mmu,unimp,cpu,fpu,vpu,exec,nochain \
+	-D sv39_zicbom_access_fault.elf.trace.log -nographic -semihosting -icount shift=1 \
+	-machine virt -cpu max,pmu-mask=0xfffffff8 \
+	-bios ~/Downloads/sv39_zicbom_access_fault.elf
+
+RVCP-SUMMARY: TEST FAILED - Test File "sv39_zicbom_exceptions_Smode.S"
+RVCP: DEBUG INFORMATION FOLLOWS
+RVCP: Test Info: "Mismatch during cbo.clean in Test Case 1!"
+RVCP: Instruction: 0x0017a00f
+RVCP: Approximate address (failure may be slightly after this): 0x0000000080000250
+RVCP: Register: x12
+RVCP: Bad Value:      0x0000000000000814
+RVCP: Expected Value: 0x0000000000000810
+RVCP: END OF DEBUG INFORMATION
+
+
+With the patch, same cmd line:
+
+$ ./build/qemu-system-riscv64 (...)
+
+RVCP-SUMMARY: TEST PASSED - Test File "sv39_zicbom_exceptions_Smode.S"
+
+
+
+
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Tested-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+
+
+>   target/riscv/op_helper.c | 5 +++++
+>   1 file changed, 5 insertions(+)
 > 
-> diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-> index 1543ee6653..fd56f0a4c5 100644
-> --- a/hw/misc/Kconfig
-> +++ b/hw/misc/Kconfig
-> @@ -257,4 +257,7 @@ config XLNX_VERSAL_TRNG
->  config XLNX_ZYNQ_DDRC
->      bool
->  
-> +config SOPHGO_CV1800B_CLK
-> +    bool
-> +
->  source macio/Kconfig
-> diff --git a/hw/misc/cv1800b_clk.c b/hw/misc/cv1800b_clk.c
-> new file mode 100644
-> index 0000000000..db7e626158
-> --- /dev/null
-> +++ b/hw/misc/cv1800b_clk.c
-> @@ -0,0 +1,90 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * Sophgo CV1800B Clock Controller
-> + *
-> + * Copyright (c) 2026 Kuan-Wei Chiu <visitorckw@gmail.com>
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "qemu/log.h"
-> +#include "hw/misc/cv1800b_clk.h"
-> +
-> +#define REG_BYTE_WIDTH    (4)
-> +#define REG_CLK_BYP_0     (0x030 / REG_BYTE_WIDTH)
-> +#define REG_CLK_BYP_1     (0x034 / REG_BYTE_WIDTH)
-> +
-> +static uint64_t cv1800b_clk_read(void *opaque, hwaddr addr, unsigned int size)
-> +{
-> +    CV1800BClkState *s = opaque;
-> +    uint32_t val = 0;
-> +
-> +    if ((addr / 4) < ARRAY_SIZE(s->regs)) {
-> +        val = s->regs[addr / 4];
-We can use REG_BYTE_WIDTH to replace the const number 4.
-
-like:
-
-    if ((addr / REG_BYTE_WIDTH) < ARRAY_SIZE(s->regs)) {
-        val = s->regs[addr / REG_BYTE_WIDTH];
-    }
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 81873014cb..6c9bd5c102 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -218,6 +218,7 @@ static void check_zicbom_access(CPURISCVState *env,
+>       void *phost;
+>       int ret;
+>   
+> +    target_ulong fault_addr = address;
+>       /* Mask off low-bits to align-down to the cache-block. */
+>       address &= ~(cbomlen - 1);
+>   
+> @@ -235,6 +236,10 @@ static void check_zicbom_access(CPURISCVState *env,
+>        */
+>       ret = probe_access_flags(env, address, cbomlen, MMU_DATA_LOAD,
+>                                mmu_idx, true, &phost, ra);
+> +    if (ret == TLB_MMIO) {
+> +        env->badaddr = fault_addr;
+> +        riscv_raise_exception(env, RISCV_EXCP_STORE_AMO_ACCESS_FAULT, ra);
 > +    }
-> +
-> +    return val;
-> +}
-> +
-> +static void cv1800b_clk_write(void *opaque, hwaddr addr, uint64_t val, unsigned int size)
-> +{
-> +    CV1800BClkState *s = opaque;
-> +
-> +    if ((addr / 4) < ARRAY_SIZE(s->regs)) {
-> +        s->regs[addr / 4] = val;
-This needs to be modified here as well.
+>       if (ret != TLB_INVALID_MASK) {
+>           /* Success: readable */
+>           return;
 
-> +    }
-> +}
-> +
-> +static const MemoryRegionOps cv1800b_clk_ops = {
-> +    .read = cv1800b_clk_read,
-> +    .write = cv1800b_clk_write,
-> +    .endianness = DEVICE_LITTLE_ENDIAN,
-> +    .valid = {
-> +        .min_access_size = 4,
-> +        .max_access_size = 4,
-> +    },
-> +};
-> +
-> +static void cv1800b_clk_reset_hold(Object *obj, ResetType type)
-> +{
-> +    CV1800BClkState *s = CV1800B_CLK(obj);
-> +
-> +    memset(s->regs, 0, sizeof(s->regs));
-> +
-> +    /*
-> +     * TODO: Implement proper PLL state machines.
-> +     * For now, use POR default to bypass PLLs and boot via 25MHz XTAL.
-> +     */
-> +    s->regs[REG_CLK_BYP_0] = 0xFFFFFFFF;
-> +    s->regs[REG_CLK_BYP_1] = 0xFFFFFFFF;
-> +}
-> +
-> +static void cv1800b_clk_init(Object *obj)
-> +{
-> +    CV1800BClkState *s = CV1800B_CLK(obj);
-> +
-> +    memory_region_init_io(&s->iomem, obj, &cv1800b_clk_ops, s,
-> +                            TYPE_CV1800B_CLK, 0x1000);
-> +    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->iomem);
-> +}
-> +
-> +static void cv1800b_clk_class_init(ObjectClass *klass, const void *data)
-> +{
-> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
-> +
-> +    rc->phases.hold = cv1800b_clk_reset_hold;
-> +}
-> +
-> +static const TypeInfo cv1800b_clk_info = {
-> +    .name = TYPE_CV1800B_CLK,
-> +    .parent = TYPE_SYS_BUS_DEVICE,
-> +    .instance_size = sizeof(CV1800BClkState),
-> +    .instance_init = cv1800b_clk_init,
-> +    .class_init = cv1800b_clk_class_init,
-> +};
-> +
-> +static void cv1800b_clk_register_types(void)
-> +{
-> +    type_register_static(&cv1800b_clk_info);
-> +}
-> +
-> +type_init(cv1800b_clk_register_types)
-> diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-> index 23265f6035..692f290a87 100644
-> --- a/hw/misc/meson.build
-> +++ b/hw/misc/meson.build
-> @@ -36,6 +36,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
->  system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
->  system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
->  system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
-> +system_ss.add(when: 'CONFIG_SOPHGO_CV1800B_CLK', if_true: files('cv1800b_clk.c'))
->  
->  subdir('macio')
->  
-> diff --git a/include/hw/misc/cv1800b_clk.h b/include/hw/misc/cv1800b_clk.h
-> new file mode 100644
-> index 0000000000..05c0d1ca1b
-> --- /dev/null
-> +++ b/include/hw/misc/cv1800b_clk.h
-> @@ -0,0 +1,24 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * Sophgo CV1800B Clock Controller
-> + *
-> + * Copyright (c) 2026 Kuan-Wei Chiu <visitorckw@gmail.com>
-> + */
-> +
-> +#ifndef HW_MISC_CV1800B_CLK_H
-> +#define HW_MISC_CV1800B_CLK_H
-> +
-> +#include "hw/core/sysbus.h"
-> +#include "qom/object.h"
-> +
-> +#define TYPE_CV1800B_CLK "cv1800b-clk"
-> +OBJECT_DECLARE_SIMPLE_TYPE(CV1800BClkState, CV1800B_CLK)
-> +
-> +struct CV1800BClkState {
-> +    SysBusDevice parent_obj;
-> +
-> +    MemoryRegion iomem;
-> +    uint32_t regs[0x1000 / 4];
-Maybe we can move the struct types to the C source file.
-
-It's easier to use macros to replace the constant values there.
-
-Thanks,
-Chao
-> +};
-> +
-> +#endif
-> -- 
-> 2.54.0.1136.gdb2ca164c4-goog
-> 
 
