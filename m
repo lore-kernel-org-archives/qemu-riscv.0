@@ -4,91 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C438CD98F2
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jun 2026 05:42:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 487C5CD98E2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jun 2026 06:37:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZj1a-0007LM-M6; Wed, 17 Jun 2026 01:41:18 -0400
+	id 1wZju0-0001wh-MK; Wed, 17 Jun 2026 02:37:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wZj1X-0007K5-Dq
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 01:41:15 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wZj1V-0003vc-VU
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 01:41:15 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2bf20f6be6bso38931095ad.3
- for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 22:41:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781674872; x=1782279672; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to;
- bh=c8kDKuGdmXQ0qjXWUf1LvEVQeOU9K5mmWBPHFWVh0nY=;
- b=PjKyMDWCtbCr2jWTsqsiWXhF20Xhzgmh1o5GXyik5cfI+A9V0uMSHD1Tcel437Qsb/
- uVzthz1fzHRyX40uL7fFhqlMqX3QndX/K4jsXAqT4XBk7IIVR9PP1k45ihx3CzH2C1dr
- TOCT1El9vXlmTljJXzLH+OdBqqDtiGwy01AeQY/0vpBnk+j0xnNj3+ldnT0v7eNk3DP5
- 0TuEmDVzkUKzUk4tfNbyg30qWAG0PQyHBAU0tN6YWw+mrg4zKcVJEkjVLHKwv8vkGHuR
- 3iDfChnOme/t74XQ0WoeIU2UZ3lkQH6M2y5uQnOY2oTS4NphVVdVhxLHyWFfRBGi+Eai
- oe5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781674872; x=1782279672;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=c8kDKuGdmXQ0qjXWUf1LvEVQeOU9K5mmWBPHFWVh0nY=;
- b=CmRmT3WWBp4L94G6q0t486L2eme/HhhbKCGQlainE1qLJkiGSWlDiyxk8NvvNz7uaF
- crYkC8iYMydNGMoqX8MjoiMnMt0xb0pqXhyPZjMNx+OpZKhFGWiz+6/l+IN2LUVgWXHh
- KFJvkz5Mj3ZDamPu8COn6XupWdZl/4pAk68zVW2QwHvXCyN817PfflDobtrGbH2WUkZZ
- /lYRpkgbMtfM9IZjQIqAauQV88gZ3Vx2BR7yQa1ROHL45OL+Sr0vWqwpuCxNMx+8wtci
- 0Ks+gs0Pit3GPMDrNC2VvdKnHKlGr0UHhnDZi1ZWnKAkzVvHgnDph28co5/BgvcPA7JN
- mY1A==
-X-Gm-Message-State: AOJu0YwgvwJ30BAEx98bnWhwKoo4F9Y3pI31yKpoDkB69VeKloYfanpN
- bjjy4sJqwzkKVoYkw0LaWdylPgWrMLD31mVNFarPHsp08pfAEUtjPAQMMMp9RNuk
-X-Gm-Gg: AfdE7cmUVHPQ+JL7Z7rj6Bp/q+14rHAQRLD3fCa4kq7Ljw62PEF2uChzPM2LiBnMYC6
- zXstIu3IpVs9uYKoJCT1KCr6uYEPDmG7lm8+OytWLPmkkLy4qPVe/Z6sy8Hwq1iDVqQIRXlGkki
- PKcz2CgUj/t39UWMITfOJn8TVhiki4YsoOSQClQT3wA3qgSCgnotxx1CRyjQOzOF5UrrLz88ElC
- llctb1OXyos3vf+bggfBzmeGM6elnbrg/9xgSsT2yNrZT7SUIVZpD5YzLN7LJIZbngRDV1oeJzR
- pJet/G2jrn7mKSOUsbwj9G/bYHCBCHpfJYfaSewD3DXfgwpQH3cjhnDXQ1Bjz1Mm3ONp9ZYdjNQ
- Ouvq6fU79/QajbV3bYVhnZ8fVvHMcEX/zKM+5iRwqRZhfXFhKstEwcKMpc36DSiAq1S7EJJ9kBv
- H0rRGhu1I3mYkITi9YZ3OzI6iDwOfQko+QnaqifTSadPCcwdrQUX1e2/JxkI91fqZcMTxb09yjV
- AtT/fy5iVXO1uRkqf0qkp4k00lYbfnwbs0c7OY5kBg=
-X-Received: by 2002:a17:903:46c6:b0:2c0:fa4e:91f6 with SMTP id
- d9443c01a7336-2c6bc0bdcbdmr23719745ad.13.1781674872510; 
- Tue, 16 Jun 2026 22:41:12 -0700 (PDT)
-Received: from donnager-debian.. ([45.124.203.15])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c433078264sm149294725ad.65.2026.06.16.22.41.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 22:41:12 -0700 (PDT)
-From: Joel Stanley <joel@jms.id.au>
-To: alistair.francis@wdc.com,
+ (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
+ id 1wZjtv-0001vq-2L; Wed, 17 Jun 2026 02:37:27 -0400
+Received: from mxhk.zte.com.cn ([160.30.148.34])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
+ id 1wZjts-00074X-8R; Wed, 17 Jun 2026 02:37:26 -0400
+Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4ggDfx3Vyvz5B12k;
+ Wed, 17 Jun 2026 14:37:13 +0800 (CST)
+Received: from szxl2zmapp05.zte.com.cn ([10.1.32.37])
+ by mse-fl2.zte.com.cn with SMTP id 65H6b5x6070819;
+ Wed, 17 Jun 2026 14:37:05 +0800 (+08)
+ (envelope-from wang.yechao255@zte.com.cn)
+Received: from localhost.localdomain (unknown [10.234.74.162])
+ by smtp (Zmail) with SMTP; Wed, 17 Jun 2026 14:37:07 +0800
+X-Zmail-TransId: 3e816a324092004-f1ef0
+X-Zmail-LocalSMTP: 1
+X-Zmail-RealSender: wang.yechao255@zte.com.cn
+From: Wang Yechao <wang.yechao255@zte.com.cn>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Anton Johansson <anjo@rev.ng>
-Cc: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Subject: [PATCH 2/3] tests/functional/riscv64: Use newer kernel for tuxrun boot
-Date: Wed, 17 Jun 2026 15:09:27 +0930
-Message-ID: <20260617054034.1020724-3-joel@jms.id.au>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260617054034.1020724-1-joel@jms.id.au>
-References: <20260617054034.1020724-1-joel@jms.id.au>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>,
+ Wang Yechao <wang.yechao255@zte.com.cn>
+Subject: [PATCH] target/riscv/kvm: add extensions after v7.1-rc4 update
+Date: Wed, 17 Jun 2026 14:36:30 +0800
+Message-ID: <20260617063630.111472-1-wang.yechao255@zte.com.cn>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=joel.stan@gmail.com; helo=mail-pl1-x634.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+Content-Type: multipart/mixed;
+	boundary="=====_001_next====="
+X-MAIL: mse-fl2.zte.com.cn 65H6b5x6070819
+X-TLS: YES
+X-ENVELOPE-SENDER: wang.yechao255@zte.com.cn
+X-SOURCE-IP: 10.5.228.133 unknown Wed, 17 Jun 2026 14:37:13 +0800
+X-CLEAN: YES
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-MID-QID: 6A324099.001/4ggDfx3Vyvz5B12k
+Received-SPF: pass client-ip=160.30.148.34;
+ envelope-from=wang.yechao255@zte.com.cn; helo=mxhk.zte.com.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,39 +79,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The published tuxrun kernel is 6.4 which predates the introduction of
-AIA support in Linux. Update it to a 6.11 kernel, the newest build
-on the tuxrun site.
 
-Boot times on a laptop are slightly longer but still reasonable:
 
-                       | v6.4.16 | v6.11.9
-  ---------------------|---------|--------
-   test_riscv64        | 4.82s   | 5.56s
-  ---------------------|---------|--------
-   test_riscv64_maxcpu | 4.94s   | 5.30s
+--=====_001_next=====
+Content-Type: multipart/related;
+	boundary="=====_002_next====="
 
-Signed-off-by: Joel Stanley <joel@jms.id.au>
----
- tests/functional/riscv64/test_tuxrun.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/tests/functional/riscv64/test_tuxrun.py b/tests/functional/riscv64/test_tuxrun.py
-index 0d8de36204a3..43d1242be52b 100755
---- a/tests/functional/riscv64/test_tuxrun.py
-+++ b/tests/functional/riscv64/test_tuxrun.py
-@@ -17,8 +17,8 @@
- class TuxRunRiscV64Test(TuxRunBaselineTest):
- 
-     ASSET_RISCV64_KERNEL = Asset(
--        'https://storage.tuxboot.com/buildroot/20241119/riscv64/Image',
--        '2bd8132a3bf21570290042324fff48c987f42f2a00c08de979f43f0662ebadba')
-+        'https://storage.tuxboot.com/kernels/6.11.9/riscv64/Image',
-+        '174f8bb87f08961e54fa3fcd954a8e31f4645f6d6af4dd43983d5e9841490fb0')
-     ASSET_RISCV64_ROOTFS = Asset(
-         'https://storage.tuxboot.com/buildroot/20241119/riscv64/rootfs.ext4.zst',
-         'aa4736a9872651dfc0d95e709465eedf1134fd19d42b8cb305bfd776f9801004')
--- 
-2.47.3
+--=====_002_next=====
+Content-Type: multipart/alternative;
+	boundary="=====_003_next====="
+
+
+--=====_003_next=====
+Content-Type: text/plain;
+	charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+RXhwb3NlIHppbHNkLCB6Y2xzZCBhbmQgemFsYXNyLg0KDQpTaWduZWQtb2ZmLWJ5OiBXYW5nIFll
+Y2hhbyA8d2FuZy55ZWNoYW8yNTVAenRlLmNvbS5jbj4NCi0tLQ0KIHRhcmdldC9yaXNjdi9rdm0v
+a3ZtLWNwdS5jIHwgMyArKysNCiAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspDQoNCmRp
+ZmYgLS1naXQgYS90YXJnZXQvcmlzY3Yva3ZtL2t2bS1jcHUuYyBiL3RhcmdldC9yaXNjdi9rdm0v
+a3ZtLWNwdS5jDQppbmRleCA1M2Q4ODMzOWMxLi42YmViYmFmN2Q0IDEwMDY0NA0KLS0tIGEvdGFy
+Z2V0L3Jpc2N2L2t2bS9rdm0tY3B1LmMNCisrKyBiL3RhcmdldC9yaXNjdi9rdm0va3ZtLWNwdS5j
+DQpAQCAtMzAzLDEwICszMDMsMTMgQEAgc3RhdGljIEtWTUNQVUNvbmZpZyBrdm1fbXVsdGlfZXh0
+X2NmZ3NbXSA9IHsNCiAgICAgS1ZNX0VYVF9DRkcoInppaGludG50bCIsIGV4dF96aWhpbnRudGws
+IEtWTV9SSVNDVl9JU0FfRVhUX1pJSElOVE5UTCksDQogICAgIEtWTV9FWFRfQ0ZHKCJ6aWhpbnRw
+YXVzZSIsIGV4dF96aWhpbnRwYXVzZSwgS1ZNX1JJU0NWX0lTQV9FWFRfWklISU5UUEFVU0UpLA0K
+ICAgICBLVk1fRVhUX0NGRygiemlocG0iLCBleHRfemlocG0sIEtWTV9SSVNDVl9JU0FfRVhUX1pJ
+SFBNKSwNCisgICAgS1ZNX0VYVF9DRkcoInppbHNkIiwgZXh0X3ppbHNkLCBLVk1fUklTQ1ZfSVNB
+X0VYVF9aSUxTRCksDQogICAgIEtWTV9FWFRfQ0ZHKCJ6aW1vcCIsIGV4dF96aW1vcCwgS1ZNX1JJ
+U0NWX0lTQV9FWFRfWklNT1ApLA0KICAgICBLVk1fRVhUX0NGRygiemNtb3AiLCBleHRfemNtb3As
+IEtWTV9SSVNDVl9JU0FfRVhUX1pDTU9QKSwNCisgICAgS1ZNX0VYVF9DRkcoInpjbHNkIiwgZXh0
+X3pjbHNkLCBLVk1fUklTQ1ZfSVNBX0VYVF9aQ0xTRCksDQogICAgIEtWTV9FWFRfQ0ZHKCJ6YWJo
+YSIsIGV4dF96YWJoYSwgS1ZNX1JJU0NWX0lTQV9FWFRfWkFCSEEpLA0KICAgICBLVk1fRVhUX0NG
+RygiemFjYXMiLCBleHRfemFjYXMsIEtWTV9SSVNDVl9JU0FfRVhUX1pBQ0FTKSwNCisgICAgS1ZN
+X0VYVF9DRkcoInphbGFzciIsIGV4dF96YWxhc3IsIEtWTV9SSVNDVl9JU0FfRVhUX1pBTEFTUiks
+DQogICAgIEtWTV9FWFRfQ0ZHKCJ6YXdycyIsIGV4dF96YXdycywgS1ZNX1JJU0NWX0lTQV9FWFRf
+WkFXUlMpLA0KICAgICBLVk1fRVhUX0NGRygiemZhIiwgZXh0X3pmYSwgS1ZNX1JJU0NWX0lTQV9F
+WFRfWkZBKSwNCiAgICAgS1ZNX0VYVF9DRkcoInpmYmZtaW4iLCBleHRfemZiZm1pbiwgS1ZNX1JJ
+U0NWX0lTQV9FWFRfWkZCRk1JTiksDQotLSANCjIuMjcuMA==
+
+
+--=====_003_next=====
+Content-Type: text/html ;
+	charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+RXhwb3NlJm5ic3A7emlsc2QsJm5ic3A7emNsc2QmbmJzcDthbmQmbmJzcDt6YWxhc3IuPGJyIC8+
+DTxiciAvPlNpZ25lZC1vZmYtYnk6Jm5ic3A7V2FuZyZuYnNwO1llY2hhbyZuYnNwOyZsdDt3YW5n
+LnllY2hhbzI1NUB6dGUuY29tLmNuJmd0Ow08YnIgLz4tLS08YnIgLz4mbmJzcDt0YXJnZXQvcmlz
+Y3Yva3ZtL2t2bS1jcHUuYyZuYnNwO3wmbmJzcDszJm5ic3A7KysrPGJyIC8+Jm5ic3A7MSZuYnNw
+O2ZpbGUmbmJzcDtjaGFuZ2VkLCZuYnNwOzMmbmJzcDtpbnNlcnRpb25zKCspPGJyIC8+DTxiciAv
+PmRpZmYmbmJzcDstLWdpdCZuYnNwO2EvdGFyZ2V0L3Jpc2N2L2t2bS9rdm0tY3B1LmMmbmJzcDti
+L3RhcmdldC9yaXNjdi9rdm0va3ZtLWNwdS5jPGJyIC8+aW5kZXgmbmJzcDs1M2Q4ODMzOWMxLi42
+YmViYmFmN2Q0Jm5ic3A7MTAwNjQ0PGJyIC8+LS0tJm5ic3A7YS90YXJnZXQvcmlzY3Yva3ZtL2t2
+bS1jcHUuYzxiciAvPisrKyZuYnNwO2IvdGFyZ2V0L3Jpc2N2L2t2bS9rdm0tY3B1LmM8YnIgLz5A
+QCZuYnNwOy0zMDMsMTAmbmJzcDsrMzAzLDEzJm5ic3A7QEAmbmJzcDtzdGF0aWMmbmJzcDtLVk1D
+UFVDb25maWcmbmJzcDtrdm1fbXVsdGlfZXh0X2NmZ3NbXSZuYnNwOz0mbmJzcDt7PGJyIC8+Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7S1ZNX0VYVF9DRkcoJnF1b3Q7emloaW50bnRsJnF1
+b3Q7LCZuYnNwO2V4dF96aWhpbnRudGwsJm5ic3A7S1ZNX1JJU0NWX0lTQV9FWFRfWklISU5UTlRM
+KSw8YnIgLz4mbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDtLVk1fRVhUX0NGRygmcXVvdDt6
+aWhpbnRwYXVzZSZxdW90OywmbmJzcDtleHRfemloaW50cGF1c2UsJm5ic3A7S1ZNX1JJU0NWX0lT
+QV9FWFRfWklISU5UUEFVU0UpLDxiciAvPiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwO0tW
+TV9FWFRfQ0ZHKCZxdW90O3ppaHBtJnF1b3Q7LCZuYnNwO2V4dF96aWhwbSwmbmJzcDtLVk1fUklT
+Q1ZfSVNBX0VYVF9aSUhQTSksPGJyIC8+KyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwO0tWTV9FWFRf
+Q0ZHKCZxdW90O3ppbHNkJnF1b3Q7LCZuYnNwO2V4dF96aWxzZCwmbmJzcDtLVk1fUklTQ1ZfSVNB
+X0VYVF9aSUxTRCksPGJyIC8+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7S1ZNX0VYVF9D
+RkcoJnF1b3Q7emltb3AmcXVvdDssJm5ic3A7ZXh0X3ppbW9wLCZuYnNwO0tWTV9SSVNDVl9JU0Ff
+RVhUX1pJTU9QKSw8YnIgLz4mbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDtLVk1fRVhUX0NG
+RygmcXVvdDt6Y21vcCZxdW90OywmbmJzcDtleHRfemNtb3AsJm5ic3A7S1ZNX1JJU0NWX0lTQV9F
+WFRfWkNNT1ApLDxiciAvPismbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDtLVk1fRVhUX0NGRygmcXVv
+dDt6Y2xzZCZxdW90OywmbmJzcDtleHRfemNsc2QsJm5ic3A7S1ZNX1JJU0NWX0lTQV9FWFRfWkNM
+U0QpLDxiciAvPiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwO0tWTV9FWFRfQ0ZHKCZxdW90
+O3phYmhhJnF1b3Q7LCZuYnNwO2V4dF96YWJoYSwmbmJzcDtLVk1fUklTQ1ZfSVNBX0VYVF9aQUJI
+QSksPGJyIC8+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7S1ZNX0VYVF9DRkcoJnF1b3Q7
+emFjYXMmcXVvdDssJm5ic3A7ZXh0X3phY2FzLCZuYnNwO0tWTV9SSVNDVl9JU0FfRVhUX1pBQ0FT
+KSw8YnIgLz4rJm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7S1ZNX0VYVF9DRkcoJnF1b3Q7emFsYXNy
+JnF1b3Q7LCZuYnNwO2V4dF96YWxhc3IsJm5ic3A7S1ZNX1JJU0NWX0lTQV9FWFRfWkFMQVNSKSw8
+YnIgLz4mbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDtLVk1fRVhUX0NGRygmcXVvdDt6YXdy
+cyZxdW90OywmbmJzcDtleHRfemF3cnMsJm5ic3A7S1ZNX1JJU0NWX0lTQV9FWFRfWkFXUlMpLDxi
+ciAvPiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwO0tWTV9FWFRfQ0ZHKCZxdW90O3pmYSZx
+dW90OywmbmJzcDtleHRfemZhLCZuYnNwO0tWTV9SSVNDVl9JU0FfRVhUX1pGQSksPGJyIC8+Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7S1ZNX0VYVF9DRkcoJnF1b3Q7emZiZm1pbiZxdW90
+OywmbmJzcDtleHRfemZiZm1pbiwmbmJzcDtLVk1fUklTQ1ZfSVNBX0VYVF9aRkJGTUlOKSw8YnIg
+Lz4tLSZuYnNwOw08YnIgLz4yLjI3LjA8YnIgLz4=
+
+
+--=====_003_next=====--
+
+--=====_002_next=====--
+
+--=====_001_next=====--
 
 
