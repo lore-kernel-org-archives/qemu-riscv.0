@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E94CD98EE
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jun 2026 05:42:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C438CD98F2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 Jun 2026 05:42:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wZj1X-0007K4-Fz; Wed, 17 Jun 2026 01:41:15 -0400
+	id 1wZj1a-0007LM-M6; Wed, 17 Jun 2026 01:41:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wZj1U-0007Iv-E5
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 01:41:12 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1wZj1X-0007K5-Dq
+ for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 01:41:15 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1wZj1S-0003uU-TU
- for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 01:41:12 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2c6b3f71648so10160885ad.2
- for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 22:41:10 -0700 (PDT)
+ id 1wZj1V-0003vc-VU
+ for qemu-riscv@nongnu.org; Wed, 17 Jun 2026 01:41:15 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2bf20f6be6bso38931095ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 16 Jun 2026 22:41:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781674870; x=1782279670; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1781674872; x=1782279672; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Lp7xEj51Z44lN7tJkr0UCrWIcX0S3C7ow2fXXn9SBtw=;
- b=bvcWgiPv/EcCPDv2af9GlRDileMq+lWMUK7FRIi/eNhX+uvP654S0B3nYKJzPvChVy
- 7m5HRQQy7KdZK0newa9FAsHA6nDb7gTrd0jgjBPCe36+wkvomarPbHH+EBGz1IDD0elf
- EjICgTSVPrNN9vmbsdQGjRr3bw8nfu51SY95HvEX9IffGXu17o2pXTYGNvnL9n5bvX3j
- cKh6hyFADUXR5cJ30FLupFS2/6EtoVUidTfZZ17N5AbVHx9TIw338cxTuKe2PiYnlnOf
- 2mv9WAKpYwiahXfUSqvf9w0cbj63a0iH6H5qZnhDZj4HN2JXp6N11dp8Q621QyDar/Dv
- Gdpg==
+ bh=c8kDKuGdmXQ0qjXWUf1LvEVQeOU9K5mmWBPHFWVh0nY=;
+ b=PjKyMDWCtbCr2jWTsqsiWXhF20Xhzgmh1o5GXyik5cfI+A9V0uMSHD1Tcel437Qsb/
+ uVzthz1fzHRyX40uL7fFhqlMqX3QndX/K4jsXAqT4XBk7IIVR9PP1k45ihx3CzH2C1dr
+ TOCT1El9vXlmTljJXzLH+OdBqqDtiGwy01AeQY/0vpBnk+j0xnNj3+ldnT0v7eNk3DP5
+ 0TuEmDVzkUKzUk4tfNbyg30qWAG0PQyHBAU0tN6YWw+mrg4zKcVJEkjVLHKwv8vkGHuR
+ 3iDfChnOme/t74XQ0WoeIU2UZ3lkQH6M2y5uQnOY2oTS4NphVVdVhxLHyWFfRBGi+Eai
+ oe5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781674870; x=1782279670;
+ d=1e100.net; s=20251104; t=1781674872; x=1782279672;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Lp7xEj51Z44lN7tJkr0UCrWIcX0S3C7ow2fXXn9SBtw=;
- b=AxIJiDgbXSphowIyvMFhIgJGZzzFIIwtuffxQWpoVuf/s2/ljCACZY9fpNgNUACLSg
- rfob+RdEsn3LwFkMtIUeKLxZYKmLZ0PSlfzai2mCNgovXuchh5htHjB+Iyb2x9SphE9i
- 1ht7oNSLfTmqC6qLls/tomkFIZasNJ/9VRNauV8X0ZY0Wa0Aeto13eqXsQValzFK8TFE
- u+Kd2xLa528dFDAaO85fjIv6iWclM/smJfsbqQ+jkpzoQ+tkUQgGVvJJJK6foY+ofsqb
- In5A9iq6m4A2oj4C91+vedZWzZYa0gSXbNUpIAG3PkERkcfHDR+e1lM+uG8E/rueMR4L
- bjYw==
-X-Gm-Message-State: AOJu0Yxm+To/L/p2chwwEIir9PTAwdmYwzb1o8sibrOHDTaQhXrs7Bee
- CB/1i+lkAI0KyA58AVskxPNNBWDjCteFQ3HjodHo+65uH0GzgDtluBvV
-X-Gm-Gg: AfdE7clFHict7v/4E0jRhM85V6o4Ol5Esf7j0qo+Ts63BR1j5yu1Tl6JososzF+KFaD
- pmU3SahImb7l0AEVwaaIatIhGs0DjKJLlNC9yQnXu3432pqvb+QstVD1uIuI/wtXxYW8AEbaal7
- OEhCiJvqWffPWzIQgxUQ+m6Ex7aq0QJ2+Iaf9fpN3vxCRN8i+sfDSJTq/UW5poaX3KIclsTK5UQ
- a5De0glpyu/pWIextBkDxA0OZDyfAGXKsRF0a1XRKsc6/1r+PmUZn7TmkQAWF05yL5VzCWNnqm4
- L2hCrRQupX76ISK25YOr7AnXjRklnDzr846k6qzsOJa45Ox+2hINWf4fubIKuh5Fy2qJBfFIOe7
- +fILGapM0t1cubNrJfPHV9JVBPr5POR67KcKA3IeIuxxn3BZNlDTmD9J0oJs6qK1pwIOyyenMRG
- 3zCU5bGXrEp/4Qusa03P1Vboghf2/lCaecp/JQxO9wGibi0qJ9BCWkTSySF3MVub11UZwidpee2
- QZZVgHimdCc0+E40Z5wjZwuC0UT1Bui8mF91HJvGoY=
-X-Received: by 2002:a17:903:2411:b0:2c0:ca93:1303 with SMTP id
- d9443c01a7336-2c6bbf93604mr20397155ad.6.1781674869654; 
- Tue, 16 Jun 2026 22:41:09 -0700 (PDT)
+ bh=c8kDKuGdmXQ0qjXWUf1LvEVQeOU9K5mmWBPHFWVh0nY=;
+ b=CmRmT3WWBp4L94G6q0t486L2eme/HhhbKCGQlainE1qLJkiGSWlDiyxk8NvvNz7uaF
+ crYkC8iYMydNGMoqX8MjoiMnMt0xb0pqXhyPZjMNx+OpZKhFGWiz+6/l+IN2LUVgWXHh
+ KFJvkz5Mj3ZDamPu8COn6XupWdZl/4pAk68zVW2QwHvXCyN817PfflDobtrGbH2WUkZZ
+ /lYRpkgbMtfM9IZjQIqAauQV88gZ3Vx2BR7yQa1ROHL45OL+Sr0vWqwpuCxNMx+8wtci
+ 0Ks+gs0Pit3GPMDrNC2VvdKnHKlGr0UHhnDZi1ZWnKAkzVvHgnDph28co5/BgvcPA7JN
+ mY1A==
+X-Gm-Message-State: AOJu0YwgvwJ30BAEx98bnWhwKoo4F9Y3pI31yKpoDkB69VeKloYfanpN
+ bjjy4sJqwzkKVoYkw0LaWdylPgWrMLD31mVNFarPHsp08pfAEUtjPAQMMMp9RNuk
+X-Gm-Gg: AfdE7cmUVHPQ+JL7Z7rj6Bp/q+14rHAQRLD3fCa4kq7Ljw62PEF2uChzPM2LiBnMYC6
+ zXstIu3IpVs9uYKoJCT1KCr6uYEPDmG7lm8+OytWLPmkkLy4qPVe/Z6sy8Hwq1iDVqQIRXlGkki
+ PKcz2CgUj/t39UWMITfOJn8TVhiki4YsoOSQClQT3wA3qgSCgnotxx1CRyjQOzOF5UrrLz88ElC
+ llctb1OXyos3vf+bggfBzmeGM6elnbrg/9xgSsT2yNrZT7SUIVZpD5YzLN7LJIZbngRDV1oeJzR
+ pJet/G2jrn7mKSOUsbwj9G/bYHCBCHpfJYfaSewD3DXfgwpQH3cjhnDXQ1Bjz1Mm3ONp9ZYdjNQ
+ Ouvq6fU79/QajbV3bYVhnZ8fVvHMcEX/zKM+5iRwqRZhfXFhKstEwcKMpc36DSiAq1S7EJJ9kBv
+ H0rRGhu1I3mYkITi9YZ3OzI6iDwOfQko+QnaqifTSadPCcwdrQUX1e2/JxkI91fqZcMTxb09yjV
+ AtT/fy5iVXO1uRkqf0qkp4k00lYbfnwbs0c7OY5kBg=
+X-Received: by 2002:a17:903:46c6:b0:2c0:fa4e:91f6 with SMTP id
+ d9443c01a7336-2c6bc0bdcbdmr23719745ad.13.1781674872510; 
+ Tue, 16 Jun 2026 22:41:12 -0700 (PDT)
 Received: from donnager-debian.. ([45.124.203.15])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c433078264sm149294725ad.65.2026.06.16.22.41.07
+ d9443c01a7336-2c433078264sm149294725ad.65.2026.06.16.22.41.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 22:41:09 -0700 (PDT)
+ Tue, 16 Jun 2026 22:41:12 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: alistair.francis@wdc.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Anton Johansson <anjo@rev.ng>
 Cc: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
-Subject: [PATCH 1/3] target/riscv: Avoid NULL deref in IMSIC CSR write
-Date: Wed, 17 Jun 2026 15:09:26 +0930
-Message-ID: <20260617054034.1020724-2-joel@jms.id.au>
+Subject: [PATCH 2/3] tests/functional/riscv64: Use newer kernel for tuxrun boot
+Date: Wed, 17 Jun 2026 15:09:27 +0930
+Message-ID: <20260617054034.1020724-3-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260617054034.1020724-1-joel@jms.id.au>
 References: <20260617054034.1020724-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=joel.stan@gmail.com; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=joel.stan@gmail.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -104,49 +104,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-rmw_xireg_aia() and rmw_xtopei() were changed to store the IMSIC
-callback's value in a local before passing it back to the caller.
-For write only CSR accesses that pointer is NULL, causing a crash when
-guest programs write to xireg or xtopei, such as when the guest sets up
-the IMSIC.
+The published tuxrun kernel is 6.4 which predates the introduction of
+AIA support in Linux. Update it to a 6.11 kernel, the newest build
+on the tuxrun site.
 
-This only happens when setting aia=aplic-imsic so none of the existing
-boot tests caught it.
+Boot times on a laptop are slightly longer but still reasonable:
 
-Fix it by guarding the pointer dereference as done for other CSRs.
+                       | v6.4.16 | v6.11.9
+  ---------------------|---------|--------
+   test_riscv64        | 4.82s   | 5.56s
+  ---------------------|---------|--------
+   test_riscv64_maxcpu | 4.94s   | 5.30s
 
-Fixes: 63469ad75dcc ("target/riscv: Fix arguments to board IMSIC emulation callbacks")
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- target/riscv/csr.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ tests/functional/riscv64/test_tuxrun.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ec931a8c3ddf..4502f2ab4788 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -2732,7 +2732,9 @@ static RISCVException rmw_xireg_aia(CPURISCVState *env, int csrno,
-                                     AIA_MAKE_IREG(isel, priv, virt, vgein,
-                                                   riscv_cpu_mxl_bits(env)),
-                                     &wide_val, new_val, wr_mask);
--            *val = wide_val;
-+            if (val) {
-+                *val = wide_val;
-+            }
-         }
-     } else {
-         isel_reserved = true;
-@@ -3008,7 +3010,9 @@ static RISCVException rmw_xtopei(CPURISCVState *env, int csrno,
-                     AIA_MAKE_IREG(ISELECT_IMSIC_TOPEI, priv, virt, vgein,
-                                   riscv_cpu_mxl_bits(env)),
-                     &wide_val, new_val, wr_mask);
--    *val = wide_val;
-+    if (val) {
-+        *val = wide_val;
-+    }
+diff --git a/tests/functional/riscv64/test_tuxrun.py b/tests/functional/riscv64/test_tuxrun.py
+index 0d8de36204a3..43d1242be52b 100755
+--- a/tests/functional/riscv64/test_tuxrun.py
++++ b/tests/functional/riscv64/test_tuxrun.py
+@@ -17,8 +17,8 @@
+ class TuxRunRiscV64Test(TuxRunBaselineTest):
  
- done:
-     if (ret) {
+     ASSET_RISCV64_KERNEL = Asset(
+-        'https://storage.tuxboot.com/buildroot/20241119/riscv64/Image',
+-        '2bd8132a3bf21570290042324fff48c987f42f2a00c08de979f43f0662ebadba')
++        'https://storage.tuxboot.com/kernels/6.11.9/riscv64/Image',
++        '174f8bb87f08961e54fa3fcd954a8e31f4645f6d6af4dd43983d5e9841490fb0')
+     ASSET_RISCV64_ROOTFS = Asset(
+         'https://storage.tuxboot.com/buildroot/20241119/riscv64/rootfs.ext4.zst',
+         'aa4736a9872651dfc0d95e709465eedf1134fd19d42b8cb305bfd776f9801004')
 -- 
 2.47.3
 
