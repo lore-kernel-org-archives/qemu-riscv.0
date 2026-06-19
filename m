@@ -4,145 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E992CCD98F2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 Jun 2026 14:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2B91CD98F8
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jun 2026 04:50:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1waDrS-0006Z2-3t; Thu, 18 Jun 2026 10:36:54 -0400
+	id 1waRAo-0008UI-Ot; Fri, 19 Jun 2026 00:49:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1waDrP-0006YR-6k
- for qemu-riscv@nongnu.org; Thu, 18 Jun 2026 10:36:51 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1waDrM-0008ET-Li
- for qemu-riscv@nongnu.org; Thu, 18 Jun 2026 10:36:50 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65IDtIbf1768772
- for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2026 14:36:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- oiIzWgo2ACmGpLKfLueCD8cX1zsKt1grMXbORVio9w8=; b=cSDIWSMMm9NM5V6S
- YcMn3SBWIViGsddcpHntgXFrJcmvPqjo5CX1hI5HcPOMz7fdZp7H79T+kv8C7cnB
- 8gTMLpkj2ybepvO9Sgb2QUcGF/lmjJH4o9SrvR52aVJn32PxXPFGh5d/1YQtxcDM
- 8F9pP4xXHdYMYH7TPFMWEeRmFGBpjS1pzVgdFqFjtT7VKd2n1ChzdJqt63jkg5ao
- mH1dQg+2Z0vVifua0gUCE7w8v6RK553qhHVWoZI4QfZcv1kDqI1on17sfDJgXVnc
- IL0xtQPU+dOJ3tHi8kRDQgjCBHf17xvhQ0u+cNTDa9yoaEXdqiFJxidHOq8X3b4Z
- YLDZ+g==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
- [209.85.217.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ev1rtun1t-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2026 14:36:46 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id
- ada2fe7eead31-6c5794db0eeso1326616137.2
- for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2026 07:36:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1waRAn-0008Tu-41
+ for qemu-riscv@nongnu.org; Fri, 19 Jun 2026 00:49:45 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1waRAl-0005aB-HK
+ for qemu-riscv@nongnu.org; Fri, 19 Jun 2026 00:49:44 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-8422871b42dso1191993b3a.3
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2026 21:49:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781793406; x=1782398206; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=oiIzWgo2ACmGpLKfLueCD8cX1zsKt1grMXbORVio9w8=;
- b=TvPJ0tEXiUl/YrBYtnosooRBEFDs7WNyLplt7zPzJZ1FzMR864OJXCMHSoTk8RtZq2
- wGsqEeUenN7iflwTokow8Rvr2CLidcJOOhNh//gRsKS1ITOmM86s/Jfd9lP1KTy4Gy5h
- xaABLk2Ac1cb3YHPLAPw9/ihY/MogQNS9kPqt5iLhSH+ww5xkJt/E2YVTt9Uq/io/pLn
- DIU6GQXEZm51uafIf8Mnj39acrJowzB7PIsWgAoobeFfhUA0/Wy+Msjvi7v6vc7jp9J9
- ZsdCjJXXNMj5yr66TuWOl3MOasMKY8Zp5VZQzPNt+tL+HKVnAELYFuX6SqIOxg67OSOR
- KGyg==
+ d=gmail.com; s=20251104; t=1781844582; x=1782449382; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=h/4gPFTvEOiA6bvBc5b2RKGBkvJS7RvJu6EipcSXEpI=;
+ b=qKxhYi5CxIsmD/2SXjY2yJoJ26ZHx42ZRsE9u6ekLhAfmCQFIWrWxY+hsXkDFyVm+e
+ EbocD+hJT+JKGDrXUIu2hxt8lynVCpm/aT0EgKv5ppHycY4cyX4KTXg1GqRccAiTxFNV
+ TXomXSNbA3UblmyxtIjtUybNl2vQ0EWkaD70OHM8YBSKWdR3SxV0d90bFkRrlwy4juah
+ aK4CKo8Obny4hFn57vW5sBPmbCmpxiMDjIzJHvGoixXIt0sWUbGy+U2GmroZ88C6ca+m
+ ZhUWLoJwLAj8YnSR5NBuZk8T9kRaZESAB9TLqef1O0r+tQZXpQf5VtwhU4LwqRmEykoA
+ x8JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781793406; x=1782398206;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oiIzWgo2ACmGpLKfLueCD8cX1zsKt1grMXbORVio9w8=;
- b=nWmrLb/D6GLCgtsrLMkUtF2QgNvxjYIb0Jvi6WdbaGu7XEbT0eWDmWb0Ak5hKz8vu5
- vRQ0zGXULx+DU2CsO4KQwbuycviFUsnUUm+Sz9OuzgU6o5inRjSksdyFxiceKF2gab1X
- r725kwT7zF1aIgeDWLQKqNPDodKigD32uVxx4XWzPhsr66hkzccGrUEniM9839pzuMoc
- QZIZ3Ed0BbkTw+mQq2sV/o/xRjf+VKAINJYObVKauStYvAvGoUJy69p/nWklPz/WY5ER
- QVyPVn+qZasFY73TC57oR48N61ENUnucYcgI5aI+LBZX4Pt5YxUwoIee8BIKf6wWBVCh
- JnkA==
-X-Gm-Message-State: AOJu0YzkuEtUx9hNtCKsWkhL5RhHb7XmHZ0zrpEffPTcs+jc8V2xP5EZ
- 50edj2jnkEhz1D9gNlwiUa/Sf1ATSpS/YsM4IiAXU0eoKBE/8ZBenxqua+mwmN1SbWkmPxGR53z
- CvstbDRUvpxgCyuA5x9q23WqWRcmVuM0zsEufdnaHksfwggESPiCdBMt/zg==
-X-Gm-Gg: AfdE7cnwBFNF89QDOqHANGt6cvQU2wIgZZ3cCLQIj1Mb1Uapwgi2vQl/ixMXZPVtwbZ
- GKocNROrn7LsxrYl2DjgrXKVU9YTmoZHN31htjGdVC/nqFpL+6Xe+4rFJfS8XXMVKsoBSTd0buc
- yt1JHK/LD6kpCs7FJkUXHCFbD3DmEmFXa+vO/ET8QaBc7rBYXAKCyWnDENT7nJ8kFwQCzNQUYR9
- m/Jg7jJnUjcI/7mi0LzqftEXhq+VoLofPZkoeAVUcmQDUfE46uXWPOYuc3SolBFktgz3Bh+hDU8
- 9V+aro20LGQbpittJ3b19baAG8hIPEMjHjl1JPaB1w/bgLtNz83sxrtSNJEf4OhkG+Nt+cQQ9aG
- 58uG1tUyT+h6MjO7FDR6vl1qa1O2EXXsrbfnY3T686DNTpVEpeHe2p92OevtQ+g==
-X-Received: by 2002:a05:6102:50a8:b0:6d9:5eaa:6d9c with SMTP id
- ada2fe7eead31-727c51cec36mr2652364137.12.1781793405960; 
- Thu, 18 Jun 2026 07:36:45 -0700 (PDT)
-X-Received: by 2002:a05:6102:50a8:b0:6d9:5eaa:6d9c with SMTP id
- ada2fe7eead31-727c51cec36mr2652341137.12.1781793405561; 
- Thu, 18 Jun 2026 07:36:45 -0700 (PDT)
-Received: from [192.168.69.213] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4922fa96f0esm284654915e9.12.2026.06.18.07.36.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Jun 2026 07:36:44 -0700 (PDT)
-Message-ID: <f174b13c-2678-42d8-b59b-b14d7e9177cd@oss.qualcomm.com>
-Date: Thu, 18 Jun 2026 16:36:43 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: raise access fault for Zicbom MMIO-like
- accesses
-Content-Language: en-US
-To: ZhengXiang Qin <qinzhengxiang@foxmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
+ d=1e100.net; s=20251104; t=1781844582; x=1782449382;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=h/4gPFTvEOiA6bvBc5b2RKGBkvJS7RvJu6EipcSXEpI=;
+ b=KvETIG9/eJZXBeTJuKGPqUlyExN/kBRCAJqjdsUIUFW022JPQp6OA3IvgDX1Le+bzl
+ UROVQiwvm/Prhby7tXgy7sAXS/lQBPaBINEY0GvGn3uCZuhBdfZBHogbm6fmh5QNO8i4
+ 3X7bYVlF6LRK2wkmOAfAZb6d9wcLM0zDe5L3vjs8KTzR8WRgkWWIXIWhDPTQuYq2nv26
+ PtVJ7A8YF1SzLAW/PlcM7J5JeZKQsYPKpsHTqm0a6LlNzmPgKfmpwyvFhpr/Cn9UPrTD
+ 0tIboUoeopvBxDZhtJYcyrtAMwQ9SFJngu081k2XEzsfnkvUm72Z9ocHsC04lo1fSZpr
+ 2iaQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+txuHiH7Wsp2nqauA3O5NIrYAMtPaWygChcuBTANe9FVb5uPW0bv74nERCgt9wgXUtlGl3kmZIfR0S@nongnu.org
+X-Gm-Message-State: AOJu0Yzaw+XkAKn495aXgVXWHVSsrtfdEOKAJTuco8KOsq8Au92w748Q
+ 4PKfZs1rIaikfSiD46LTqICIwlMLek8/R8MM352KyQj/uAjXkXmk1Jdn
+X-Gm-Gg: AfdE7cn9rGjY2uYdHQt2BDik1BsERCyX4At6LcuwBYvWHZv+LbKDF/mgtjv/u4Af6vU
+ lLQoRyc0W/R5C4kftBvKzxtb+ulhW9nfEX9EZ2LJRN78HGzbo6XzY84OPOA/fELGv5jOcsxUY82
+ MSwIzVDZa3udv+pJ0iNWXbRnBarKA+dkkQHzV/2PRFboy6/EfpfqXSgiEqxgsgbM0Bg5LilUU4e
+ qW6I/JgZLXNXipanVJS5ELRTNyBF4d1AGbkKDKc4devLjmPUho75HikJvr6e+PbgdJP1coTo90a
+ w0UXqQWH0uLNiIQ5xpUJyHip1DE8fIFQHS2UGqZw/gxfG5kacwla5asf+rI394CkBqCx1iFD4jQ
+ u+l5aHCDzjSr7oG6dFt/LHCeKwYLMQiDp0IooBT8Dor7R+J4N8rHGA6AlIZFR5uxHLdy827sf72
+ SkJ3FV+SB2Deit3WnorlxaSLzegwpq77BKSHYeR0Rj0liWqr+59dMcx48T7SRfCKVYyCnb7NGSM
+ te/PA5EHB/tSEmZXTCsuDVMWe97jc6u8uIlWr0hMg==
+X-Received: by 2002:a05:6a00:18a3:b0:845:4888:74c5 with SMTP id
+ d2e1a72fcca58-8455612ed04mr1166726b3a.23.1781844582268; 
+ Thu, 18 Jun 2026 21:49:42 -0700 (PDT)
+Received: from donnager-debian.. ([144.6.172.18])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-8455363da44sm870141b3a.8.2026.06.18.21.49.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jun 2026 21:49:41 -0700 (PDT)
+From: Joel Stanley <joel@jms.id.au>
+To: Alistair Francis <alistair.francis@wdc.com>,
+	qemu-devel@nongnu.org
+Cc: Nicholas Piggin <npiggin@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <tencent_4EF8937D817B836D3D911B9B05491B02950A@qq.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <tencent_4EF8937D817B836D3D911B9B05491B02950A@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
+ Chris Rauer <crauer@google.com>, Alano Song <alanosong@163.com>,
+ Michael Ellerman <mpe@kernel.org>, Joel Stanley <jms@oss.tenstorrent.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v9 08/12] hw/riscv/atlantis: Provide a simple halting payload
+Date: Fri, 19 Jun 2026 14:18:32 +0930
+Message-ID: <20260619044838.1054677-9-joel@jms.id.au>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260619044838.1054677-1-joel@jms.id.au>
+References: <20260619044838.1054677-1-joel@jms.id.au>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=MNpQXsZl c=1 sm=1 tr=0 ts=6a34027e cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=p0WdMEafAAAA:8 a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=bDN84i_9AAAA:8
- a=Wo38fnyJPC63dEFqrDAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=ODZdjJIeia2B_SHc_B0f:22 a=J2PsDwZO0S0EpbpLmD-j:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE4MDEzNSBTYWx0ZWRfX7/mS5NBIazB6
- xBRMXqrkU5TOpbfwDMc1A75wl9jRCur4qmA5hSdYefRg8//730uuNsb0DD9di9jSGLwN0IOZ+kY
- X2paPrnEwsq3wKAouhR4wVXM85vmM5rZkahNW/Jf9WVkdbxRk0gnBPG3tAttyuKNc/ycfYM1enE
- IEomLL1QTnsFOSP6KW2/1f6rSoTEMG2jC6jd5iOqokH2aRu1+hAFFG9//QhMi2FjaqWAvEpbzQT
- /19p7IO8jk9mUNtVf0mY4eVEbtXBod3CHpqQ5pA/91Qn1/jZN9ctUbmOX4so2Fop2tqcqC6FnDO
- vwNsc2nvn9zTmF/wTM71Xnplyx+xOUf8svwmxOkfTXXlcIDrie7hPf5ZzichNfogM9WM0pWPlCE
- LDC03lm/Q/c0Q0NOXSXJHm6cenHDxwr3uQQeo4hur7bNw4JfFuaDzfsaOrKZEoBqSopVQmNb32M
- s+2hS4+SysdgbpYWAHg==
-X-Proofpoint-ORIG-GUID: UmIj6IqD009r4-1CXmk3k4e3W4b2J1AM
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE4MDEzNSBTYWx0ZWRfXwfKzYx5OUcOQ
- nfviu8eZyoCYXBr8Yp+X3j+DBFpL583LI1iIkI+wR7EwakBskrk+dm6r4qJUKTnqY0AUccZ3wl8
- Yw+aM/JicYcm9n6TuOaUVuEv3laTeFQ=
-X-Proofpoint-GUID: UmIj6IqD009r4-1CXmk3k4e3W4b2J1AM
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-18_02,2026-06-18_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 phishscore=0 spamscore=0 impostorscore=0 clxscore=1015
- malwarescore=0 suspectscore=0 lowpriorityscore=0 priorityscore=1501
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2606180135
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=joel.stan@gmail.com; helo=mail-pf1-x42b.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -158,61 +112,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 18/6/26 16:06, ZhengXiang Qin wrote:
-> check_zicbom_access() currently treats any probe_access_flags() result
-> other than TLB_INVALID_MASK as a successful access. However, a result
-> with TLB_MMIO means that the target is MMIO-like and should not be
-> treated as a normal cache block management target.
-> 
-> Raise a store/AMO access fault for Zicbom accesses to MMIO-like regions
-> so that cbo.clean, cbo.flush and cbo.inval do not silently succeed on
-> non-cacheable/MMIO-like memory.
-> 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/3501
-> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
-> Signed-off-by: ZhengXiang Qin <qinzhengxiang@foxmail.com>
-> ---
-> Changes since v1:
-> - Use a bit test for TLB_MMIO since probe_access_flags() returns a bitmask.
-> - Keep Reviewed-by tags from v1.
-> 
->   target/riscv/op_helper.c | 5 +++++
->   1 file changed, 5 insertions(+)
-> 
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 81873014cb..f23b060585 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -218,6 +218,7 @@ static void check_zicbom_access(CPURISCVState *env,
->       void *phost;
->       int ret;
->   
-> +    target_ulong fault_addr = address;
+From: Nicholas Piggin <npiggin@gmail.com>
 
-CPURISCVState::badaddr is of type uint64_t, can we use that here instead
-of target_ulong?
+OpenSBI hangs before any console output if the domain init code sees the
+next stage is not in an executable region.
 
->       /* Mask off low-bits to align-down to the cache-block. */
->       address &= ~(cbomlen - 1);
->   
-> @@ -235,6 +236,10 @@ static void check_zicbom_access(CPURISCVState *env,
->        */
->       ret = probe_access_flags(env, address, cbomlen, MMU_DATA_LOAD,
->                                mmu_idx, true, &phost, ra);
-> +    if (ret & TLB_MMIO) {
-> +        env->badaddr = fault_addr;
-> +        riscv_raise_exception(env, RISCV_EXCP_STORE_AMO_ACCESS_FAULT, ra);
-> +    }
+If no kernel payload is provided to QEMU, the next stage address is
+NULL, and the riscv virt machine memory map ends up covering the 0
+address with the catch all S-mode RWX region and so OpenSBI prints
+console messages and does not hang until the next stage boot.
 
-Maybe adding 'else' make this code path more readable.
+The Tenstorrent Atlantis machine address map has RAM starting at 0 and
+it loads OpenSBI there, so it is M-mode and not accessible by S-mode,
+tripping the early check and hang.
 
->       if (ret != TLB_INVALID_MASK) {
->           /* Success: readable */
->           return;
+Add a helper to set up a simple payload that gets OpenSBI messages to
+console, until OpenSBI can be fixed.
 
-Feel free to ignore these nitpicking comments.
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Joel Stanley <joel@jms.id.au>
+---
+ hw/riscv/tt_atlantis.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 1f0cd08ac959..c3016d6d4c9e 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -340,6 +340,30 @@ static void load_fdt(TTAtlantisState *s)
+     create_fdt_memory(s);
+ }
+ 
++/*
++ * This works around a problem with OpenSBI hanging with no console output if
++ * no payload is provided. By chance, machines with memory at 0x80000000 do get
++ * output, but Atlantis memory begins at 0x0 which takes a different OpenSBI
++ * error path.
++ *
++ * This can be removed when OpenSBI is fixed in QEMU.
++ */
++static void tt_atlantis_setup_halting_payload_opensbi_fixup(
++                                        RISCVBootInfo *info, hwaddr addr)
++{
++    /* Store the payload vector in little_endian byte order */
++    static const uint32_t payload_vec[] = {
++        const_le32(0x10500073),         /* 1: wfi           */
++        const_le32(0xffdff06f),         /* j       1b       */
++    };
++    rom_add_blob_fixed_as("mrom.payload", payload_vec, sizeof(payload_vec),
++                          addr, &address_space_memory);
++
++    info->kernel_size = sizeof(payload_vec);
++    info->image_low_addr = addr;
++    info->image_high_addr = info->image_low_addr + info->kernel_size;
++}
++
+ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
+ {
+     TTAtlantisState *s = container_of(notifier, TTAtlantisState, machine_done);
+@@ -377,6 +401,9 @@ static void tt_atlantis_machine_done(Notifier *notifier, void *data)
+     if (machine->kernel_filename) {
+         riscv_load_kernel(machine, &boot_info, kernel_start_addr,
+                           true, NULL);
++    } else {
++        tt_atlantis_setup_halting_payload_opensbi_fixup(&boot_info,
++                                                        kernel_start_addr);
+     }
+     kernel_entry = boot_info.image_low_addr;
+ 
+-- 
+2.47.3
 
 
