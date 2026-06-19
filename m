@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF7FECDB467
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jun 2026 04:52:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 984DDCD98E6
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jun 2026 04:52:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1waRBb-0000gs-0I; Fri, 19 Jun 2026 00:50:35 -0400
+	id 1waRAT-0008MS-7e; Fri, 19 Jun 2026 00:49:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1waRBI-0000Kp-3L
- for qemu-riscv@nongnu.org; Fri, 19 Jun 2026 00:50:21 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ id 1waRAB-0008LN-Ma
+ for qemu-riscv@nongnu.org; Fri, 19 Jun 2026 00:49:11 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1waRBE-0005oL-0j
- for qemu-riscv@nongnu.org; Fri, 19 Jun 2026 00:50:14 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-84531988438so1264047b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2026 21:50:06 -0700 (PDT)
+ id 1waRA6-0005Fs-6l
+ for qemu-riscv@nongnu.org; Fri, 19 Jun 2026 00:49:04 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-842358aaf36so767693b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2026 21:49:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781844605; x=1782449405; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HO68ROaXgpgmoPhUOGfAjCfRCsOUvV6mmReMnRWPMyg=;
- b=bEUKqMsioN5HwssxklpxGfJdzCZFjI7l5Gi8burtk2xN4DhgXMVF1xGiFqj3BnAdLf
- Mlo0mkO5voZRRbkNZ6UHOOs9PKoc/rIdVXtiwhfY+DyHcJnreG9gJEtS03V6lpLncgkZ
- 3Een9A0TyxGaLPe5Is8jPJPj9FXIyDeFyCx0qe8JO1yUUvCcwp14NojMIKIZCDbKEVrt
- n0jfZxH9W7P++mU5nMYHHoRf4/KWMxNCtxJf6Z6Tnm8z4ZchQiUv0ECHmq9VOhtBiIQz
- vrX0lCpR3K+dswQAw3iK7aoM1UEg729nVS1ZaIQ+OnULxWE1Hbsij9lEEP10MiJHBFQH
- FYgA==
+ d=gmail.com; s=20251104; t=1781844539; x=1782449339; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=30hGgoPrHRyAt5aIu0xhOcmwM3yeZQ1gOMqUkh60lMk=;
+ b=nMZCn7CkV3dY9J+jH2kIj/a+05wSC/HOAPAFwcAhtwanSHSoxFkdzKzGEhC6mT8qtk
+ RAlXJCs0iLV/w9bIeyskuEdXxkTo7RrkS5uBiX52Dm4qZfm7n6ngG094i+TuYeoZ4tfa
+ m69dKpuXzwPVC9nyQiAqRCDnvSsWYX2dASG2Lp92XmxsrOilBdpaYpbPT2565ci6+mTW
+ pggo3sAGZbo7eKOkU0LgEpUQVIQG26WkyuR9zNB5sjvpgtKIuESRFoQ8FV9Aft38bVFJ
+ eHKk5n1s0Ps1+wWQjldNaggbK7Lwik8FpnODs6VxpRBt9Rb788XQqZDW5X8v665tijmh
+ ZfAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781844605; x=1782449405;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HO68ROaXgpgmoPhUOGfAjCfRCsOUvV6mmReMnRWPMyg=;
- b=iyJAW0p8KkYquR5GEGnvLeB2AFxy9j/YJ1bZNPX+aK7NgpLgFn+Tm3tjdD8mhq6YA2
- bqkYFQid8/Zb4mljHWIng6zpHBxJbg8RXGoyL2kMdrRVoYQq6w3n/ZKb0O8YWXjIlAKE
- mUR+WvDQL32tDlZVPN8GB/r9bLd9FWtMFRskgzazsO3LoJf5LUlyK5HgdBrxTmd4def2
- mOhqwzea7IPGuYQH/A2BwkCqKVzF8OkZ69j1D0wuVqZawcC1eDNJMj62elhqSdHCjjPG
- 9gcYwbrTVg6WLjM3r5ligXLluFqeBcZ2XeNYltdmtwTdUWnyc6SEFcrteavNpwhpKzPa
- On7A==
+ d=1e100.net; s=20251104; t=1781844539; x=1782449339;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=30hGgoPrHRyAt5aIu0xhOcmwM3yeZQ1gOMqUkh60lMk=;
+ b=VdNexe8UX11BdFsUO+3L1U6Yagfiehinnr+2xYbr1k4cxyqylfh3BYFe1TaTexo+5P
+ 3oCSBt6vrO+scPxgH2ArwkE0M4MmLnK8Il2i6RH9mMpHN4wLfz0M2X7O6MNRIbZUZGEa
+ UECcSBc/BBZn3O9jREsSEAkqLcqaHqGSQRq7A4JvzF7XJtQGMuYdh1b/Y/hTTeIpnQrK
+ M0m7I92HdZ/1g085EzQHBwchxqKxwHtAt3odL05mvx68f8d/QTRnvmFSzQkB5L8jF9pE
+ hZYdGCLfdCdvtsXd9W3CK6a2UwdNskQIsZYwbb6i5iB3HYrEEq8N7JSDtE9QoqVhby9B
+ smAw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/BU3XXpxOZqGJJRu+dSCTszA5qD0g+F7iuw99fbKzzUKvuDkFb19xW0P1HV/cw/OzIW7N+4bz0jiKi@nongnu.org
-X-Gm-Message-State: AOJu0Yx8ypVDrJWq1q/m/TXiwMVPhnOmiXxqUxXotxAdBechDZ2rnVV6
- xq3R5NR4riCtCEE5twJPLoyTx35un9L+bn/mfjuh1iU8nzJjFiRn0Tn3
-X-Gm-Gg: AfdE7cm+O0CMjlgUfdQVEx2MzQp6vj4DPHmPlDnG0WWCzIuYRkgGcw2WbWNuB0sAFc7
- JwWXHnids1oj8zUnaxLUiFzW9AhBRKMBo97SSUrLxzcRQ1uYbhoSX23v4afAMjsQdIBKchTilob
- Yzbkkg5OjW6Dw4rgElV1yrpNtLCHH1ms3B4f1hIGS+coj7ClpYZ8y2gJ/9lqSWafo3KXjTmB+XI
- hTLT5aB06KTFcmmbc2UgYAZkNx1UJ7ot7eG8NxUuBw29rBzTbBIPCTIHnC2ElEDC1kjR6fCHkil
- Qly1d4NTj0OHsb+FWr7uA/t/YsoFjfEkC2FsvizKYyzqGSdms/9YvhDI1HB6bj8Q6iiqV5oQBST
- ci/VxC5g22IhzLhBWbvpoW1ru//p4Sm/pS9e6jpvPY6QL7dnB02Iq/zCPOtggg4eb8cTXQULq+5
- pE/nAlBWHqmdV84ZImi7ySOnuKxN5aKpVQjYaGzLBg8erADcfdKG7H78yrdy0tyBOrW988u5bsa
- +R5maxx9VcRFvq0W2ObLm7oBQeWiQ4ovs+lRXv0Ag==
-X-Received: by 2002:a05:6a00:4fc7:b0:845:3033:6cbb with SMTP id
- d2e1a72fcca58-8455015fc65mr1591578b3a.11.1781844605133; 
- Thu, 18 Jun 2026 21:50:05 -0700 (PDT)
+ AFNElJ+iq8CVMh8mduwoAhGs6PqcCu2ooGHIzskJuWoGt5JkAB44mpyZeXTqE0B1mV8QM6og8KTn2+nqUp6o@nongnu.org
+X-Gm-Message-State: AOJu0YwOa+ifqriMDP7S4rLpo8o6HImIDQGeOckgVZktbf0pAwXJydQp
+ TPqcjTu9eY0oCK2st64h/AdkyM1gNrSvroXNQyeCpfWuvHscTMXwD1ji
+X-Gm-Gg: AfdE7cmB0e/voZ5tuLQo7SQ1Eqry/4ArSraJPhQ2gMqk5j0nWOzy6WsRRBOTxrrh6vc
+ 9sXJ24lxS4o4VodOwtDbuoqKAkLBDflHnephRhZXnqjEtGy4nqC55ogfSTZ1vItpTolq2yUWywb
+ t8ebMUUEGIT2keLqtxJCypwRotV/oWQM3tLQKwyXWSTTBwh9TLKaZzldYhgdUnGGZblSx+29T0a
+ Oo7noHvSCe2Xgcz5v7E/TcZWn6D2V/Yli8OcgQPmKuCJf+anypAquoSrxAKcPeAmXPdaid20KHT
+ WvTe+IewyytESdgQmRhDbL6oeXSS2DWSn3I22BsAfQPWrdWPdlbSkGlK9gO7w/IemYEalmd0Yea
+ KRE/mrIUecJqbu1rPZXiyucwHBmn2HeBPg0eWHGpFPB4QAbybUTT2EDtWb0hcIBWyYbyvCiwz3t
+ FHc1NZ92lSkRGZPp3WA3eYo0UQ+7PAF5On4ZdmkQG1yo4eLOhi3MYUWnzYY+uqx2PMiVFPLOM/w
+ Y3uP25PFupRH+IZ8ppyjSPH+sWNgBNx6nNIX+3n0w==
+X-Received: by 2002:a05:6a00:a257:b0:842:7fc8:eba with SMTP id
+ d2e1a72fcca58-845507bbd87mr2179181b3a.11.1781844539371; 
+ Thu, 18 Jun 2026 21:48:59 -0700 (PDT)
 Received: from donnager-debian.. ([144.6.172.18])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8455363da44sm870141b3a.8.2026.06.18.21.50.00
+ d2e1a72fcca58-8455363da44sm870141b3a.8.2026.06.18.21.48.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jun 2026 21:50:04 -0700 (PDT)
+ Thu, 18 Jun 2026 21:48:58 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
 	qemu-devel@nongnu.org
@@ -76,19 +75,16 @@ Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Michael Ellerman <mpe@kernel.org>, Joel Stanley <jms@oss.tenstorrent.com>,
  Nick Piggin <npiggin@gmail.com>,
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v9 12/12] hw/riscv/atlantis: Add some i2c peripherals
-Date: Fri, 19 Jun 2026 14:18:36 +0930
-Message-ID: <20260619044838.1054677-13-joel@jms.id.au>
+ Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v9 00/12] hw/riscv: Add the Tenstorrent Atlantis machine
+Date: Fri, 19 Jun 2026 14:18:24 +0930
+Message-ID: <20260619044838.1054677-1-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260619044838.1054677-1-joel@jms.id.au>
-References: <20260619044838.1054677-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=joel.stan@gmail.com; helo=mail-pf1-x42c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=joel.stan@gmail.com; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -112,95 +108,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add an I2C RTC device and a temperature sensor. These are not present
-on the board but help for testing.
+Introducing Tenstorrent Atlantis!
 
-The tmp105 is a lm75 compatible temperature sensor used by the
-SENSORS_LM75 Linux kernel driver.
+ The Tenstorrent Atlantis platform is a collaboration between Tenstorrent
+ and CoreLab Technology. It is based on the Atlantis SoC, which includes
+ the Ascalon-X CPU and other IP from Tenstorrent and CoreLab Technology.
 
-The ds1338 is a RTC device that is used by the RTC_DRV_DS1307 Linux
-kernel driver.
+ The Tenstorrent Ascalon-X is a high performance 64-bit RVA23 compliant
+ RISC-V CPU.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-Signed-off-by: Joel Stanley <joel@jms.id.au>
----
- hw/riscv/tt_atlantis.c | 27 +++++++++++++++++++++++++++
- hw/riscv/Kconfig       |  2 ++
- 2 files changed, 29 insertions(+)
+Thanks to Alistair and Phil for the reviews.
 
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index e6afd7627da8..9b64f26d2f76 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -64,6 +64,13 @@ static const MemMapEntry tt_atlantis_memmap[] = {
-     [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
- };
- 
-+static I2CBus *i2c_get_bus(TTAtlantisState *s, unsigned busnr)
-+{
-+    assert(busnr < TT_ATL_NUM_I2C);
-+
-+    return s->i2c[busnr].bus;
-+}
-+
- static uint32_t fdt_phandle = 1;
- static uint32_t next_phandle(void)
- {
-@@ -309,6 +316,19 @@ static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
-     qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
- }
- 
-+static void create_fdt_i2c_device(TTAtlantisState *s, int bus,
-+                                  const char *compat, int addr)
-+{
-+    void *fdt = MACHINE(s)->fdt;
-+    hwaddr base = s->memmap[TT_ATL_I2C0 + bus].base;
-+    g_autofree char *name = g_strdup_printf("/soc/i2c@%"HWADDR_PRIX"/sensor@%x",
-+                                            base, addr);
-+
-+    qemu_fdt_add_subnode(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", compat);
-+    qemu_fdt_setprop_cell(fdt, name, "reg", addr);
-+}
-+
- static void finalize_fdt(TTAtlantisState *s)
- {
-     uint32_t aplic_s_phandle = next_phandle();
-@@ -336,6 +356,9 @@ static void finalize_fdt(TTAtlantisState *s)
-                        TT_ATL_I2C0_IRQ + i,
-                        aplic_s_phandle, periph_clk_phandle);
-     }
-+
-+    create_fdt_i2c_device(s, 0, "dallas,ds1338", 0x6f);
-+    create_fdt_i2c_device(s, 4, "ti,tmp105", 0x48);
- }
- 
- static void create_fdt(TTAtlantisState *s)
-@@ -570,6 +593,10 @@ static void tt_atlantis_machine_init(MachineState *machine)
-                            qdev_get_gpio_in(s->irqchip, TT_ATL_I2C0_IRQ + i));
-     }
- 
-+    /* I2C peripherals: qemu specific */
-+    i2c_slave_create_simple(i2c_get_bus(s, 0), "ds1338", 0x6f);
-+    i2c_slave_create_simple(i2c_get_bus(s, 4), "tmp105", 0x48);
-+
-     /* Load or create device tree */
-     if (machine->dtb) {
-         load_fdt(s);
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index dcce819bf6e9..de37c08caece 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -130,6 +130,8 @@ config TENSTORRENT
-     select SERIAL_MM
-     select DEVICE_TREE
-     select DESIGNWARE_I2C
-+    select DS1338
-+    select TMP105
- 
- config XIANGSHAN_KUNMINGHU
-     bool
+v8: https://lore.kernel.org/qemu-riscv/20260603065859.592063-1-joel@jms.id.au/
+
+Changes since v8:
+ - Use uint32_t for imsic stride
+ - Rebase on Daniel's upstream fdt helpers and use them
+ - Fix dram memory layout and handle < 2GB case 
+ - Warn when modifying provided device tree memory node 
+ - Add experimental to machine description so users who haven't read the
+   docs know the machine is WIP
+ - Minor dw i2c fixes: avoid guest_error at reset time, fix DW_IC_CON
+   valid mask
+ - Add Portia and Anirudh as Reviewers for Tenstorrent machines
+
+Chris Rauer (1):
+  hw/i2c: Add DesignWare I2C Controller
+
+Joel Stanley (6):
+  hw/riscv/virt: Move AIA initialisation to helper file
+  hw/riscv/aia: Provide number of irq sources
+  hw/riscv/aia: Configure stride for the M-mode IMSIC
+  hw/riscv: Add Tenstorrent Atlantis machine
+  hw/riscv/atlantis: Integrate i2c controllers
+  hw/riscv/atlantis: Add some i2c peripherals
+
+Nicholas Piggin (5):
+  hw/riscv/boot: Describe discontiguous memory in boot_info
+  hw/riscv/boot: Account for discontiguous memory when loading firmware
+  target/riscv: tt-ascalon: Enable Zkr extension
+  hw/riscv/atlantis: Provide a simple halting payload
+  tests/functional/riscv64: Add tt-atlantis tests
+
+ MAINTAINERS                                  |  21 +
+ docs/system/riscv/tt_atlantis.rst            |  41 +
+ docs/system/target-riscv.rst                 |   1 +
+ hw/riscv/aia.h                               |  26 +
+ include/hw/i2c/designware_i2c.h              |  56 ++
+ include/hw/riscv/boot.h                      |  12 +-
+ include/hw/riscv/tt_atlantis.h               |  64 ++
+ include/hw/riscv/virt.h                      |   2 +-
+ hw/i2c/designware_i2c.c                      | 745 +++++++++++++++++++
+ hw/riscv/aia.c                               |  94 +++
+ hw/riscv/boot.c                              |  34 +-
+ hw/riscv/k230.c                              |   8 +-
+ hw/riscv/microchip_pfsoc.c                   |   8 +-
+ hw/riscv/opentitan.c                         |   6 +-
+ hw/riscv/shakti_c.c                          |   6 +-
+ hw/riscv/sifive_u.c                          |   6 +-
+ hw/riscv/spike.c                             |   6 +-
+ hw/riscv/tt_atlantis.c                       | 636 ++++++++++++++++
+ hw/riscv/virt-acpi-build.c                   |  27 +-
+ hw/riscv/virt.c                              |  97 +--
+ hw/riscv/xiangshan_kmh.c                     |   6 +-
+ target/riscv/cpu.c                           |   1 +
+ hw/i2c/Kconfig                               |   5 +
+ hw/i2c/meson.build                           |   1 +
+ hw/riscv/Kconfig                             |  13 +
+ hw/riscv/meson.build                         |   2 +
+ tests/functional/riscv64/meson.build         |   1 +
+ tests/functional/riscv64/test_opensbi.py     |   4 +
+ tests/functional/riscv64/test_tt_atlantis.py |  57 ++
+ 29 files changed, 1878 insertions(+), 108 deletions(-)
+ create mode 100644 docs/system/riscv/tt_atlantis.rst
+ create mode 100644 hw/riscv/aia.h
+ create mode 100644 include/hw/i2c/designware_i2c.h
+ create mode 100644 include/hw/riscv/tt_atlantis.h
+ create mode 100644 hw/i2c/designware_i2c.c
+ create mode 100644 hw/riscv/aia.c
+ create mode 100644 hw/riscv/tt_atlantis.c
+ create mode 100755 tests/functional/riscv64/test_tt_atlantis.py
+
 -- 
 2.47.3
 
