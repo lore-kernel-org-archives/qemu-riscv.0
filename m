@@ -4,99 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C7CFCD98F6
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 Jun 2026 04:52:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66DC6CD98F2
+	for <qemu-riscv@archiver.kernel.org>; Sun, 21 Jun 2026 12:47:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1waRBX-0000Yr-9Y; Fri, 19 Jun 2026 00:50:31 -0400
+	id 1wbHZx-0008Ms-9D; Sun, 21 Jun 2026 08:47:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1waRBI-0000Mp-Li
- for qemu-riscv@nongnu.org; Fri, 19 Jun 2026 00:50:23 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1waRBE-0005bU-NW
- for qemu-riscv@nongnu.org; Fri, 19 Jun 2026 00:50:15 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-8453b56ab74so911846b3a.3
- for <qemu-riscv@nongnu.org>; Thu, 18 Jun 2026 21:50:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781844600; x=1782449400; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zw4yGax63bC0ox/jGkXgO4IBMTah0WlBIPfyiNjDhBE=;
- b=iZ0RKETny4jHJSugx7d9HHJvTBJuToZpt+Sgtmti0ahpu7mBK9cvfxP3xygWhWd3KY
- UQXywVO9jh1z03jDava0vd7H5DMcrGYaTdvBa2wBtFstunD6kxwUDdHkj3plJ98gakH0
- 9cO35X9j5x9gpnKXIlOjFYdnn/9EeVcXL3xUhh8arZXH1QZevJFhRUfBpjxzbXSKl8h+
- b+pqLLnDYBHV3knYSWoKQX4Ir/VQFnOWpNPBM+dVnDgjB0DXVbDTooLENgrH3ivyjpji
- 8zlaGXkF/eS8YsiTIp6wasoZcEF4rX7g3YNlA4LWtlF+5uejv/BZlSaRV1i8B4D3PrTh
- +Rpw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781844600; x=1782449400;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zw4yGax63bC0ox/jGkXgO4IBMTah0WlBIPfyiNjDhBE=;
- b=pguVFuBY1q63mYCdwONOoXsjl4LZdKKpeTYUM0gK09crMEQMcm+BMIiho3dtedvEJl
- App/d7+hOgwRjV2WHbDY0i3piMrGCalPpmyRajZmf5zg9w+FXDWh5atpHqr12QC+hape
- 5LxrkWU4u11gFfwkIDtskfTQPpmrubGdZrfm+nJ6Nah7G+FxReIhhGBRP8K9i6CBnxJz
- tvqu1SJW+TTtzSNZiatD+CUQvxVudw9Ugkt+l33dRFK2IFTFWuTlPqYMPYcNqp//KwWK
- gDS66a9iV9mROep45l7lkJ6khNhPKXnlhx20VV9HXEQLSlrjVCdzPEtQ9D9EZ0PtLroG
- gY2w==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/sDPt13MODFEjH3+amvZiECgwCkD+s/ZaLCjUosIX7MiPD/lvusnXMLsjwWsRz3s+Rx1JTtM/9F2dS@nongnu.org
-X-Gm-Message-State: AOJu0YyBi7pXjGkViNkHoWSA+09m7QYLmEBKqycxl9Uwc9y58yDpi1mL
- vWmbLQh6p541tsebLQZNr06Jv18Da9J1P6Yr0gdvXBt4WRpuM/6vBODR
-X-Gm-Gg: AfdE7cn+vJEgY/a5qxoh6yvOZyD2eTS38tTYZM6JJMghSVA0f6Y9dwSCxCJXuXBEMQo
- +Tm3mpITEOalJ8ev/9cygwNV2ydPfLMxQ0FatRHIYcTp+IyWj67uKia4+qLsRwfcMmIA5D7W/vJ
- pqIx1eYXXu+Edl+Rwz3/RXYZL20FofMCjCbE1uaC61C1GgqEPuI4ShjTI0KBdZYSYn3pXB1RDZ1
- xeDd/dn6hFAyt1Qg/PNT9sv93Sm4e1D7iyHMSsr6+9kj5+EWHU0po7PqgUGnmrF+k6oG6ZqCNO+
- Y+Yaef+Br0+zTz8bYjng9oofD0eCdQmyo3DSyQNfbSQ2Yhp8Mrw8kj0SaQcsj3+A13CSJf/aLc2
- k+09bYaS3brw53RYiCpC/UndgEQkC5aSv5kMrdvtp8jZTz9+izJ8p+E42ui/hYvkChHm0Zz3giv
- r1ez0rjKd9tZ5rFdrMalZKKHn6jGa54csQLG1qwlmtAdlNBWLaSAkYMNyrOcF0GvvmoF9JUBOu8
- ZEA1u/d0E88/pU4xGEFTjv/OOHP0M/ouVnwkRhu6g==
-X-Received: by 2002:a05:6a00:1401:b0:842:5b63:610f with SMTP id
- d2e1a72fcca58-8455603d0e5mr1101311b3a.4.1781844599880; 
- Thu, 18 Jun 2026 21:49:59 -0700 (PDT)
-Received: from donnager-debian.. ([144.6.172.18])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8455363da44sm870141b3a.8.2026.06.18.21.49.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jun 2026 21:49:58 -0700 (PDT)
-From: Joel Stanley <joel@jms.id.au>
-To: Alistair Francis <alistair.francis@wdc.com>,
-	qemu-devel@nongnu.org
-Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Chris Rauer <crauer@google.com>, Alano Song <alanosong@163.com>,
- Michael Ellerman <mpe@kernel.org>, Joel Stanley <jms@oss.tenstorrent.com>,
- Nick Piggin <npiggin@gmail.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v9 11/12] hw/riscv/atlantis: Integrate i2c controllers
-Date: Fri, 19 Jun 2026 14:18:35 +0930
-Message-ID: <20260619044838.1054677-12-joel@jms.id.au>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260619044838.1054677-1-joel@jms.id.au>
-References: <20260619044838.1054677-1-joel@jms.id.au>
+ (Exim 4.90_1) (envelope-from <qinzhengxiang@foxmail.com>)
+ id 1wbHZm-0008Lo-UT; Sun, 21 Jun 2026 08:47:04 -0400
+Received: from out203-205-221-239.mail.qq.com ([203.205.221.239])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <qinzhengxiang@foxmail.com>)
+ id 1wbHZj-0001jt-WE; Sun, 21 Jun 2026 08:47:02 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
+ s=s201512; t=1782046005;
+ bh=hQAsJ+7y36xamJk5U9WYMNrhORFmFFXnHfR7QC7l+vs=;
+ h=From:To:Cc:Subject:Date;
+ b=RheXp3KNhZ2DpN8PINl5USvP/tTjcio5oMMBOlll3VdtsjZSeAxa2881athc4PZwz
+ XExO4cHZ9mQ3P9ncZa7RV8cULv5BGHjpT7V/Lo5n7xHU9Td7vTn7SImiUZ8RfPZ1fr
+ XjDnH2LZBRoJfkwBbQ5kzQQUpYCpXNK4pFsAy0DI=
+Received: from GavinQin-Ubuntu24.. ([117.147.32.38])
+ by newxmesmtplogicsvrszc50-0.qq.com (NewEsmtp) with SMTP
+ id B8BB3048; Sun, 21 Jun 2026 20:46:11 +0800
+X-QQ-mid: xmsmtpt1782045971tbvqpbib1
+Message-ID: <tencent_CA380CBF4A98C990C07BC04A9E748C438309@qq.com>
+X-QQ-XMAILINFO: MqswyhUqVe0CQv34ZXQ9fF2UjVvd6sXR5w29X0YAT/hb0zlGs+8ob9Rk9PjQ7Y
+ Q9oOs2oGk3dmGNtF8tqqwrOG3Boh2+Qi4bzc9bU05YtNNpxEf38KIjEIRnoRXKQlCIwCfKf+rPWn
+ ZzfUx5l5c+lk5vdXmRMWXMdgbHjs8fJYVTCEz1Nj65zbJ+crz5l45eIx1JA3A9aOzQKQFz9vevhd
+ GKitxW7hSRaRJyxYVobPM9wQPG25e0m+GAAw6f46uqtqtw4zvLSHJt9aJQzNI8m/emJDAzjOi5BX
+ iTCvjgmrQthJRKaFH0Q/Olo++3ZRfK/zsWtocWaNiRpuAwaTh1BD02y2gWnxBnYDiux7Wnb42T/q
+ b8whza0KoH3ju3phxb0U7cKg4a22wqjGMNPiUcDyHepF+safL5CvdyF3U4iUNX7bxwitEeHfK1tC
+ 1+pZtcWZuuR0i8bUF4NFP1SkNhVzA/EY3RHG711GgZt5tLbpPy5ckiyq/ZhfaNbQUq9a7Ju83TCM
+ Xk9+1aNgh5WuIawL77Cxan9WGPTraewns4txqWYTOWJjWZRxf/8NeUr4b6FIfWOKVIP3SZ0Z7X+0
+ SUrXi1OXZXCRwLeW242dOHU03pp31kRF8tLd642SY0oWLpodPl9pa1PNJAFHQFVMtsaUj1UQn5Zm
+ CQMx6vBmVTor3rMvfgsiXDa0kfn/M/S9O3ksMeP/VyIIQm2/mIzqjvyKJRJqrScmTDBIageTnDsQ
+ XuiyBkvYSu9rH/TYAAw6UbzFcsBYLxxEgFuP9D0doI0lo24/pTwEB1kGddGPC0YFokpyCh7ThnjQ
+ 0Q3UmZit3SeV0BBcpZ9yfSoafPT910AcOtyYWQJfmmOFtKXeRhUM/ozoLsKlNgobMhcGcinaRMLH
+ nVapAxPNGN+QK+eLajlIEa7OoKjOCTiHoKwsZiPMTMYotWNvf0gldOO+vky/ayCx5Y+Kdm9avTaI
+ Ap2DglKMWd+PdWyAnKajW4K/+J/eA2Mt+4NtW0kN63JfiyxecbNkX9QTHOJvK0Le3cErbfLSaeEE
+ k3OEuKcN5tEse7oI45qlBYDLPfLqJj/dvL55DOdHKANjJ652Gq+sCv/k00tn3RuWhjMmHnCHGK3V
+ oiP1ATe2uitlmHK9a5NuguxOUNmC9/07mhfduNxVDhy33NRqk=
+X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
+From: ZhengXiang Qin <qinzhengxiang@foxmail.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, ZhengXiang Qin <qinzhengxiang@foxmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v3] target/riscv: raise access fault for Zicbom MMIO-like
+ accesses
+Date: Sun, 21 Jun 2026 20:46:09 +0800
+X-OQ-MSGID: <20260621124609.11754-1-qinzhengxiang@foxmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=joel.stan@gmail.com; helo=mail-pf1-x431.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=203.205.221.239;
+ envelope-from=qinzhengxiang@foxmail.com; helo=out203-205-221-239.mail.qq.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HELO_STATIC_HOST=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,179 +88,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add DesignWare I2C controllers to the tt-atlantis machine.
+check_zicbom_access() currently treats any probe_access_flags() result
+other than TLB_INVALID_MASK as a successful access. However, a result
+with TLB_MMIO means that the target is MMIO-like and should not be
+treated as a normal cache block management target.
 
-Provide a fixed clock in the device tree so that the Linux driver probes
-without WARNing.
+Raise a store/AMO access fault for Zicbom accesses to MMIO-like regions
+so that cbo.clean, cbo.flush and cbo.inval do not silently succeed on
+non-cacheable/MMIO-like memory.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-Signed-off-by: Joel Stanley <joel@jms.id.au>
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/3501
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Signed-off-by: ZhengXiang Qin <qinzhengxiang@foxmail.com>
 ---
- include/hw/riscv/tt_atlantis.h | 14 ++++++++
- hw/riscv/tt_atlantis.c         | 59 ++++++++++++++++++++++++++++++++++
- hw/riscv/Kconfig               |  1 +
- 3 files changed, 74 insertions(+)
+Changes since v2:
+- Add else before the success path for readability.
+- Keep fault_addr as target_ulong since CPURISCVState::badaddr is target_ulong.
+- Add Philippe's Reviewed-by tag.
 
-diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-index a17732ce8114..7f7d4a5a5905 100644
---- a/include/hw/riscv/tt_atlantis.h
-+++ b/include/hw/riscv/tt_atlantis.h
-@@ -11,12 +11,15 @@
+Changes since v1:
+- Use a bit test for TLB_MMIO since probe_access_flags() returns a bitmask.
+- Keep Reviewed-by tags from v1.
+
+ target/riscv/op_helper.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 81873014cb..50fd1b73ea 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -218,6 +218,7 @@ static void check_zicbom_access(CPURISCVState *env,
+     void *phost;
+     int ret;
  
- #include "hw/core/boards.h"
- #include "hw/core/sysbus.h"
-+#include "hw/i2c/designware_i2c.h"
- #include "hw/intc/riscv_imsic.h"
- #include "hw/riscv/riscv_hart.h"
++    target_ulong fault_addr = address;
+     /* Mask off low-bits to align-down to the cache-block. */
+     address &= ~(cbomlen - 1);
  
- #define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
- OBJECT_DECLARE_SIMPLE_TYPE(TTAtlantisState, TT_ATLANTIS_MACHINE)
- 
-+#define TT_ATL_NUM_I2C 5
-+
- struct TTAtlantisState {
-     /*< private >*/
-     MachineState parent;
-@@ -27,11 +30,17 @@ struct TTAtlantisState {
- 
-     RISCVHartArrayState soc;
-     DeviceState *irqchip;
-+    DesignWareI2CState i2c[TT_ATL_NUM_I2C];
- 
-     int fdt_size;
- };
- 
- enum {
-+    TT_ATL_I2C0_IRQ = 33,
-+    TT_ATL_I2C1_IRQ = 34,
-+    TT_ATL_I2C2_IRQ = 35,
-+    TT_ATL_I2C3_IRQ = 36,
-+    TT_ATL_I2C4_IRQ = 37,
-     TT_ATL_UART1_IRQ = 39,
- };
- 
-@@ -40,6 +49,11 @@ enum {
-     TT_ATL_BOOTROM,
-     TT_ATL_DDR_LO,
-     TT_ATL_DDR_HI,
-+    TT_ATL_I2C0,
-+    TT_ATL_I2C1,
-+    TT_ATL_I2C2,
-+    TT_ATL_I2C3,
-+    TT_ATL_I2C4,
-     TT_ATL_MAPLIC,
-     TT_ATL_MIMSIC,
-     TT_ATL_SAPLIC,
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index c3016d6d4c9e..e6afd7627da8 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -54,6 +54,11 @@ static const MemMapEntry tt_atlantis_memmap[] = {
-     [TT_ATL_ACLINT] =           { 0xa2180000,       0x10000 },
-     [TT_ATL_SIMSIC] =           { 0xa4000000,      0x200000 },
-     [TT_ATL_MAPLIC] =           { 0xcc000000,     0x4000000 },
-+    [TT_ATL_I2C0] =             { 0xd4040000,       0x10000 },
-+    [TT_ATL_I2C1] =             { 0xd4050000,       0x10000 },
-+    [TT_ATL_I2C2] =             { 0xd4060000,       0x10000 },
-+    [TT_ATL_I2C3] =             { 0xd4070000,       0x10000 },
-+    [TT_ATL_I2C4] =             { 0xd4080000,       0x10000 },
-     [TT_ATL_UART1] =            { 0xd4110000,       0x10000 },
-     [TT_ATL_SAPLIC] =           { 0xe8000000,     0x4000000 },
-     [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
-@@ -275,10 +280,40 @@ static void create_fdt_rng(void *fdt)
-     qemu_fdt_setprop(fdt, "/chosen", "rng-seed", rng_seed, sizeof(rng_seed));
- }
- 
-+static void create_fdt_clk(void *fdt, const char *clock_name,
-+                           uint32_t freq, uint32_t phandle)
-+{
-+    g_autofree char *name = g_strdup_printf("/clocks/%s", clock_name);
-+
-+    qemu_fdt_add_path(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", "fixed-clock");
-+    qemu_fdt_setprop_string(fdt, name, "clock-output-names", clock_name);
-+    qemu_fdt_setprop_cell(fdt, name, "#clock-cells", 0);
-+    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", freq);
-+    qemu_fdt_setprop_cell(fdt, name, "phandle", phandle);
-+}
-+
-+static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
-+                           uint32_t irqchip_phandle, uint32_t clk_phandle)
-+{
-+    g_autofree char *name = g_strdup_printf("/soc/i2c@%"HWADDR_PRIX, mem->base);
-+
-+    qemu_fdt_add_subnode(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", "snps,designware-i2c");
-+    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
-+    qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irqchip_phandle);
-+    qemu_fdt_setprop_cells(fdt, name, "interrupts", irq, 0x4);
-+    qemu_fdt_setprop_cell(fdt, name, "clocks", clk_phandle);
-+    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 100000);
-+    qemu_fdt_setprop_cell(fdt, name, "#address-cells", 1);
-+    qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
-+}
-+
- static void finalize_fdt(TTAtlantisState *s)
- {
-     uint32_t aplic_s_phandle = next_phandle();
-     uint32_t imsic_s_phandle = next_phandle();
-+    uint32_t periph_clk_phandle = next_phandle();
-     void *fdt = MACHINE(s)->fdt;
- 
-     create_fdt_cpu(s, s->memmap, aplic_s_phandle, imsic_s_phandle);
-@@ -292,6 +327,15 @@ static void finalize_fdt(TTAtlantisState *s)
- 
-     create_fdt_uart(fdt, &s->memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
-                     aplic_s_phandle);
-+
-+    create_fdt_clk(fdt, "periph-clk", 100000000, periph_clk_phandle);
-+
-+    for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
-+        create_fdt_i2c(fdt,
-+                       &s->memmap[TT_ATL_I2C0 + i],
-+                       TT_ATL_I2C0_IRQ + i,
-+                       aplic_s_phandle, periph_clk_phandle);
-+    }
- }
- 
- static void create_fdt(TTAtlantisState *s)
-@@ -511,6 +555,21 @@ static void tt_atlantis_machine_init(MachineState *machine)
-                                 s->memmap[TT_ATL_UART1].base,
-                                 s->memmap[TT_ATL_UART1].size);
- 
-+    /* I2C */
-+    for (int i = 0; i < TT_ATL_NUM_I2C; i++) {
-+        SysBusDevice *sbd;
-+
-+        object_initialize_child(OBJECT(s), "i2c[*]", &s->i2c[i],
-+                                TYPE_DESIGNWARE_I2C);
-+        sbd = SYS_BUS_DEVICE(&s->i2c[i]);
-+        sysbus_realize(sbd, &error_fatal);
-+        memory_region_add_subregion(system_memory,
-+                                    s->memmap[TT_ATL_I2C0 + i].base,
-+                                    sysbus_mmio_get_region(sbd, 0));
-+        sysbus_connect_irq(sbd, 0,
-+                           qdev_get_gpio_in(s->irqchip, TT_ATL_I2C0_IRQ + i));
-+    }
-+
-     /* Load or create device tree */
-     if (machine->dtb) {
-         load_fdt(s);
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 5033415440d4..dcce819bf6e9 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -129,6 +129,7 @@ config TENSTORRENT
-     select RISCV_IMSIC
-     select SERIAL_MM
-     select DEVICE_TREE
-+    select DESIGNWARE_I2C
- 
- config XIANGSHAN_KUNMINGHU
-     bool
+@@ -235,7 +236,10 @@ static void check_zicbom_access(CPURISCVState *env,
+      */
+     ret = probe_access_flags(env, address, cbomlen, MMU_DATA_LOAD,
+                              mmu_idx, true, &phost, ra);
+-    if (ret != TLB_INVALID_MASK) {
++    if (ret & TLB_MMIO) {
++        env->badaddr = fault_addr;
++        riscv_raise_exception(env, RISCV_EXCP_STORE_AMO_ACCESS_FAULT, ra);
++    } else if (ret != TLB_INVALID_MASK) {
+         /* Success: readable */
+         return;
+     }
 -- 
-2.47.3
+2.43.0
 
 
