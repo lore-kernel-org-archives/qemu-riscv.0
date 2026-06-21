@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10F92CDB466
-	for <qemu-riscv@archiver.kernel.org>; Sun, 21 Jun 2026 23:58:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42A8DCD98F0
+	for <qemu-riscv@archiver.kernel.org>; Sun, 21 Jun 2026 23:59:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wbS3O-0001gx-AI; Sun, 21 Jun 2026 19:58:18 -0400
+	id 1wbS3x-0002DM-6g; Sun, 21 Jun 2026 19:58:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wbS3M-0001gU-BR
- for qemu-riscv@nongnu.org; Sun, 21 Jun 2026 19:58:16 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ id 1wbS3v-00020S-4k
+ for qemu-riscv@nongnu.org; Sun, 21 Jun 2026 19:58:51 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wbS3K-0004qG-OC
- for qemu-riscv@nongnu.org; Sun, 21 Jun 2026 19:58:16 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-6919f40a0c8so6845040a12.0
- for <qemu-riscv@nongnu.org>; Sun, 21 Jun 2026 16:58:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782086293; cv=none;
+ id 1wbS3t-0005DS-3y
+ for qemu-riscv@nongnu.org; Sun, 21 Jun 2026 19:58:50 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-697ad7f663cso536017a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 21 Jun 2026 16:58:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782086328; cv=none;
  d=google.com; s=arc-20240605;
- b=McZCow3MEziMt1GSlXmh1qf0y7w1qmypnlJyZnbIdEs+iHjh5Fe1543YXktGyuVXnI
- w0K16/hQ9hZgvUdAIfmDfBOE1wPTyFULEx/IZIvCQDCjfMh75/2MBDbcasNInvMVZuz7
- fdbnhm4Ro1mTkzCVLj7PYZ0CfZd9Hgq7Lu9i0K5p/8YaDTC+xVyAjhnPAbbkHxwGT17v
- TqE7do/Dlq29sDA9lYXEnvD8V3bFdYsQlnsvR8vg1+sxNlw41prnwj+0JOexrdANDln6
- LFVaZmuefCucYTGPn7ZHnQUIvnbDs8Gvrgbn3Xa2bsxaLXbE0fyFqBTFB+KF7aDavSHT
- Jz3g==
+ b=EkS4lY+oLaqtXIUvkNmSCWwQ+TnNkKJSumRoiNE1XDOztQCR+oGu44MFVrWMo8HCtC
+ 5mHPEtxyFiDVHdOeOIYPd6eqcan/Ze30WsXcSlARlfHSKQfk6XG/3yhk767uIQmgRze9
+ +ZWsB0Om4kCVekSWnzW1mgXbRvFqdp3rmW8kMKYafYtAj4TZVhUBmmlVlPTp8egPgGze
+ l3/DUHYjKqplMe6mX4GfRbya59+ovUJGgcfHQgjwDgaMMb0Gd4u3sKVEG6d1dUxx3P5J
+ yhVYgXd9m7MIQXkBItthMdTqr0rXDQEDwwMQpw6zipWmOiMJxyemB3J2tlXHZ6c8DKBp
+ wgkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=2M9dSVH3v4ANsnK5FFfYjMxt1yfWmN6H6XpeXKttUwU=;
- fh=34RNRiTM7bnRHdRZbVsIlH19RvPRCOTDznbID9mCQ98=;
- b=YfFyvSmJgXoFzicRooaEWJTMUVYDSSG8t0Z2RUBAaI2Iw0Hz5MhVDMS+3YyurwnHhF
- Zb4Zoof4Lu8S5wXVW+lJHjGjHKVR/M7odsKShu4Ns05JBdsXeHfqSjq8jq69hy2CFMOE
- xin7MBVMVWqU1yVJDQmJzWsgfJ0CiBVeGMrquJW8DZDnrX5V6P2wIAJGKkXQKm8MGUWf
- KIVm79mkrXAFgRN3e7qrr/Xut2n5fhCIjhqMCEztz4etVXDnApFhpHBZWvilGIc5YcW4
- 9YAdk48C59SnlgEksEEwvhMRS1SiPeTeY4hQ9m6Xz+UJhEueRopzL7npAbYC3n8WDgx/
- +jlg==; darn=nongnu.org
+ bh=EHPFtTicEuji0gMbdV8rYpEMYYOEvStiQqxpsqp7OnM=;
+ fh=MpINcvG8jYHe2U7kruTVoFxZmJstufymLJKzFTtpSJk=;
+ b=gKFmNwOzjq+FMRqkyxKfZ2rumlICrVrhB9haRNfG7kEDnb1A+6ZHTtgLcZkbUNk9yA
+ QWwoLjgTCaMmxAVFykaf3Z21jHIYjLHWeso34yS2SAmTs3vNs2h4x29hQtBupWtH52sd
+ yqvcRbYXq9q4X/TRvSXhEg2WE++tTlrI1jipP8rcri4FtCWRAC2Si2BVTXEGNTZVwFLk
+ 6/p32aOipZXA5xIuKtZ43s67hg45FBBLEsXFHJ/LR48cjwcJzrGhXFi8IenBu3fHM4+X
+ hzps2N7sbyKffbjW5EpauTB1iCSou1NaYguyCF5Q9B9GidOXdJl3K0zEWr+UtjZj5yXP
+ eeiw==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782086293; x=1782691093; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1782086327; x=1782691127; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2M9dSVH3v4ANsnK5FFfYjMxt1yfWmN6H6XpeXKttUwU=;
- b=F0dkTbFFVN8xkYgiOcRarUSQDmTN/SSrBxS2QwLqFIqfv6Ak57HqMdICamw9S8AEeh
- zeZNtKM8R+ZZVIW2sL77FU6ASeAgdRkhwJtcleRqR+6Dhk+y0xc3kIqyGIVnnZUHRUY3
- ypKU7ULrww5DrEaCSlaIhBQfpmAygg25rEr0a9vNbvAT5zoc+Rrh0+T7wysUiJrj4VLu
- JwhQ0+2sL0kMqLnzTc+YDgESykkVS/IEorXf6wzqBhGuNxJoFEmcoodjTTJ9sLWVjuMX
- 3iZ73Yo4OWVdxKO55AP/SGzN1dcuoNb/SrNU/7W8fqGKidwR77EI5E6fRiblTRZpq5hH
- 8GmQ==
+ bh=EHPFtTicEuji0gMbdV8rYpEMYYOEvStiQqxpsqp7OnM=;
+ b=LaAGizLzdayrHhGfe3mIWvjAgRNPcX7WdYDxBXW2KPmRiiu9+WvwmOOaTedpW0AF/X
+ 2kGdNluHez+dBSXYMT8BKW1el6gHWrViL92Q7sBxNDcNfrmtq0nk+MJNzHlHwzsbyWsL
+ 1W4D+uMOwDVA+DFZgXOl9y5sBjQTGutbpMOpc95CFx12dmEtyxySxNFNT3+rTTRknwm+
+ VqGstFHksc6hNh9FEUiPXN+QZt9bxFFkuR4IE23aa4vWVrZ1fk7D4PCBJHQEauS/Kl6U
+ rMm5OK/0t1XCjKBFA0zIoyKy4Gme8uTd4izVCOoRUu1IW7WF76CbTIWScANFmKYChvQA
+ LIFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782086293; x=1782691093;
+ d=1e100.net; s=20251104; t=1782086328; x=1782691128;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=2M9dSVH3v4ANsnK5FFfYjMxt1yfWmN6H6XpeXKttUwU=;
- b=O8SsVj22L/4Rki3SvFg/jli3nyckMC0MJklbxkMreXxia7QWLfG3v597hQXx/wr6F+
- 9v4Kz0/RLJeLx0csogsJ2DvhnnwjPc6WqjrNrwumVemgvtZFPedKkPl0eN1A1g2baWFL
- O2zcLTELTsdManBYah79VMC6qczabz8pPaBoFuAngyBBppL2RSAqdav8MrnKoip8Mr+T
- WU36iqU21eurGMEWJjiVMlldvB6fih3lLNNnwpaV0/2sD34uGQYO68Cpm1cbzbL7qqwb
- 78EJOymE+s0o/Y4xVls3RIXj+EbAUGxQAhZYVyHJmY0jzbfCXN5EZ9tohWnqRf1EdIrZ
- DcLA==
+ bh=EHPFtTicEuji0gMbdV8rYpEMYYOEvStiQqxpsqp7OnM=;
+ b=MeRfyhA246F6anAz04uDXVs5wAJl3Ox3hJApsxXV7AgKaNXSBuTUSOvtkJwNNnm1Ie
+ k1KreK1/NJFY77o3QJcBDSa2JStND6Otx3mEqsnysZwlL3G0vpnbSXbaENae5r+wTJww
+ 48mj2oC5auYqC4m+BJ38XflcuJYY/SfVAx/TFg3RXfZRm034M1JQ3QbSCzfhdBSUCc/M
+ ocTqpUWPCrctkJLPlKupHvbPnAO3l41k9ddIz5fqBPYGrLM147jLayi97Jo7pWu2ilMe
+ mfXBf00t+0n5KYe3O8TdH6AhjlAesGs1EUkfe00mW0jsfwkPOcBJHXalc+ts6BsZxBoW
+ 69hQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9AJlIi2QEpJyV4rN2WI3CjXOciibHtQ7cZic6W6TjVIv+FjXecUiANk9ttJPTr4HpgamofA9Zpv9fp@nongnu.org
-X-Gm-Message-State: AOJu0YxOQrgnTX3jpYqmsmBJ4Up44jv+dkoixzWflblI4kae5cgESu43
- n5kWmM42CXN9++tGr+wNsw0u/0z4CwRcfkag14IfwdG3pNTw0LEMJeBhyab4bN4OGux7W9Oh11F
- JV4ey3EBXOkA60q1ZKTClNlb67D47z6tXuG9ziWk=
-X-Gm-Gg: AfdE7ckLkojBX/C1hERm0wAMN3s+o4d3W9gdwm8fz5HcxXGXc/aBqEIub7WTLIo5cwY
- GHt/DRxpvYNJwEUJ0PPvKg517AF5MZkL5cPjAjCvfTth3JxDl0dqCVS/OcFB5dP89bS9rTyllxR
- oIm8sbRA8TQnq07M8rgEfQphHd9eKdS9D35HjBI1mixQajK1l0KctZVSwdxxAgSPv6qf29HzlTo
- p8LDPCxbG4AqiQrEC7PSKs6KoibrcwB4BMaFg/qWJzsMdFb/tv+I0ftEfbMf7FOVm3ifpwlOtgi
- KoSdSOTpjFbJEE1RovCLJIl3pzM=
-X-Received: by 2002:a05:6402:3705:b0:691:afd5:77e7 with SMTP id
- 4fb4d7f45d1cf-696e51067d0mr5733317a12.22.1782086292772; Sun, 21 Jun 2026
- 16:58:12 -0700 (PDT)
+ AFNElJ+OzZlHqJZblqFgMsZmY3RBuzD/fYoEYiX4PGgeAMxA7GkSPX4V1vPmlOOn3C5o7VX5ojojXqI+zGQX@nongnu.org
+X-Gm-Message-State: AOJu0Yw/D5hqu1xO6VQqYXkB1kDxFmgOzEbcDK6u8pE+ClCrIEFvq+pD
+ Uu+6G7Cy3PcD2hbqSe+JYRIuSw9eSCeWK11L7Ap4YpsvOZREaw0gOGIC0BE50F8oT/tQXojZqWq
+ C16VG14DQLOUaJbJ4kkm0uv/rsPi5SQ9yROKJffg=
+X-Gm-Gg: AfdE7ckKx6w4znfw8dkneGg70C+nImf8GTT92KDQHBU7kjSMPufoPu/JeG2Id89f8uA
+ 1Jd2Ze8GnQaEmiuCnOTv5HmZ2lWETjZh/euP4aY1i6hEy3ZMos8fVdmqX9mLSFAShOOoAw5G6ku
+ cU6oBVy3c5NDIuJzKbh56QCNgFDemIcR2q8JnHjsyldrospiuwGDlSiqKCpkUKn8f/8lL/FVKez
+ VX0qfR93brBAjihmBvNBDmL8WUz+8xOZjnXwjmXYK2LMNHeaBv3DjuAlC7d5EGeVtNYy/ehA6jV
+ ulaaOM1g6WCilv3b1YcXBCfMZVs=
+X-Received: by 2002:a05:6402:254c:b0:697:833b:8463 with SMTP id
+ 4fb4d7f45d1cf-697833b86e3mr2374559a12.2.1782086327401; Sun, 21 Jun 2026
+ 16:58:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260617054034.1020724-1-joel@jms.id.au>
- <20260617054034.1020724-3-joel@jms.id.au>
-In-Reply-To: <20260617054034.1020724-3-joel@jms.id.au>
+ <20260617054034.1020724-4-joel@jms.id.au>
+In-Reply-To: <20260617054034.1020724-4-joel@jms.id.au>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jun 2026 09:57:45 +1000
-X-Gm-Features: AVVi8CdZfgkHCFwtNXGQtx5vArKbqxAwAaTvMFid-_pX53iQTmXXW-LJzIg5kr8
-Message-ID: <CAKmqyKMFMtR4UQfNOtNB-GT8Pd9_WZKkA+ECpSv_cbBob60j7g@mail.gmail.com>
-Subject: Re: [PATCH 2/3] tests/functional/riscv64: Use newer kernel for tuxrun
- boot
+Date: Mon, 22 Jun 2026 09:58:21 +1000
+X-Gm-Features: AVVi8Cd5G5tpCXRPfl3wKhUjTuWteCkBv-QD1TjOQWiOTaIwPzTX0s2ej6cAOvU
+Message-ID: <CAKmqyKOnPotfp4HPx9gFmRPRbvH=vnjvacwoaA_qOH=aUj9dSg@mail.gmail.com>
+Subject: Re: [PATCH 3/3] tests/functional/riscv64: Add virt machine AIA boot
+ test
 To: Joel Stanley <joel@jms.id.au>
 Cc: alistair.francis@wdc.com, 
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
@@ -98,8 +98,8 @@ Cc: alistair.francis@wdc.com,
  qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -107,7 +107,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -126,17 +126,14 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Wed, Jun 17, 2026 at 3:42=E2=80=AFPM Joel Stanley <joel@jms.id.au> wrote=
 :
 >
-> The published tuxrun kernel is 6.4 which predates the introduction of
-> AIA support in Linux. Update it to a 6.11 kernel, the newest build
-> on the tuxrun site.
+> Add coverage of the riscv64 virt machine's Advanced Interrupt
+> Architecture models. With this the APLIC and IMSIC models are used by
+> Linux, catching regressions.
 >
-> Boot times on a laptop are slightly longer but still reasonable:
+> This test requires a kernel >=3D 6.10, as AIA drivers were added to Linux
+> in 6.10.
 >
->                        | v6.4.16 | v6.11.9
->   ---------------------|---------|--------
->    test_riscv64        | 4.82s   | 5.56s
->   ---------------------|---------|--------
->    test_riscv64_maxcpu | 4.94s   | 5.30s
+> Boot time is ~5s on a laptop.
 >
 > Signed-off-by: Joel Stanley <joel@jms.id.au>
 
@@ -145,29 +142,28 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  tests/functional/riscv64/test_tuxrun.py | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  tests/functional/riscv64/test_tuxrun.py | 7 +++++++
+>  1 file changed, 7 insertions(+)
 >
 > diff --git a/tests/functional/riscv64/test_tuxrun.py b/tests/functional/r=
 iscv64/test_tuxrun.py
-> index 0d8de36204a3..43d1242be52b 100755
+> index 43d1242be52b..6203a45060ce 100755
 > --- a/tests/functional/riscv64/test_tuxrun.py
 > +++ b/tests/functional/riscv64/test_tuxrun.py
-> @@ -17,8 +17,8 @@
->  class TuxRunRiscV64Test(TuxRunBaselineTest):
+> @@ -41,6 +41,13 @@ def test_riscv64_maxcpu(self):
+>          self.common_tuxrun(kernel_asset=3Dself.ASSET_RISCV64_KERNEL,
+>                             rootfs_asset=3Dself.ASSET_RISCV64_ROOTFS)
 >
->      ASSET_RISCV64_KERNEL =3D Asset(
-> -        'https://storage.tuxboot.com/buildroot/20241119/riscv64/Image',
-> -        '2bd8132a3bf21570290042324fff48c987f42f2a00c08de979f43f0662ebadb=
-a')
-> +        'https://storage.tuxboot.com/kernels/6.11.9/riscv64/Image',
-> +        '174f8bb87f08961e54fa3fcd954a8e31f4645f6d6af4dd43983d5e9841490fb=
-0')
->      ASSET_RISCV64_ROOTFS =3D Asset(
->          'https://storage.tuxboot.com/buildroot/20241119/riscv64/rootfs.e=
-xt4.zst',
->          'aa4736a9872651dfc0d95e709465eedf1134fd19d42b8cb305bfd776f980100=
-4')
+> +    def test_riscv64_aia(self):
+> +        self.set_machine('virt')
+> +        self.vm.set_machine('virt,aia=3Daplic-imsic')
+> +        self.cpu=3D'max'
+> +        self.common_tuxrun(kernel_asset=3Dself.ASSET_RISCV64_KERNEL,
+> +                           rootfs_asset=3Dself.ASSET_RISCV64_ROOTFS)
+> +
+>      def test_riscv64_rv32(self):
+>          self.set_machine('virt')
+>          self.cpu=3D'rv32'
 > --
 > 2.47.3
 >
