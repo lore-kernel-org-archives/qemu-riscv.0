@@ -4,93 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F99CD98F6
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jun 2026 04:19:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A99B5CDB46B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jun 2026 04:36:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wbW8I-0004qe-4n; Mon, 22 Jun 2026 00:19:38 -0400
+	id 1wbWO7-0007rD-Ed; Mon, 22 Jun 2026 00:35:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <inochiama@gmail.com>)
- id 1wbW8F-0004mm-No
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 00:19:35 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wbWO5-0007qR-7m
+ for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 00:35:57 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <inochiama@gmail.com>)
- id 1wbW8E-00012s-1s
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 00:19:35 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-37d826e9811so303869a91.1
- for <qemu-riscv@nongnu.org>; Sun, 21 Jun 2026 21:19:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wbWO3-0003rk-N9
+ for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 00:35:56 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-6974ef0c3b1so3552483a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 21 Jun 2026 21:35:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782102953; cv=none;
+ d=google.com; s=arc-20240605;
+ b=cCSQxOFx3nK5XKr+sQ3Hyd57LQuBlU5gTKo1GFNjwPLpbCaATwKXhYsO4mODCSdc16
+ 1cwP0qZ9mLpICWAhTsX4g6HvZT65TCw8THwtGQBGOqKqCMySbDL08yScFdGFrqHw3efz
+ ZKNWXOUzCtphKlTtXm6AlJNEIvf2vniQrnb1aKGCV7NEm+WklslYiPZ9kfvTUDtJeLpk
+ 5C1FZUEKMzWKgxHDatrcYODTiOIx4V4reCGUSctbjRDlAsVmlN2Dy201511bcL/QEgOR
+ N642hoyOMFWNhauQKTRrtx6J6djTcD0xDDDw3siC9EnpqQOMQuajUhSCLuaIgBxONlmW
+ EObA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=pcdmf7LZetcceItTLhB66mO0xEoFX0nY9YjUGjjs+C0=;
+ fh=wPp4dQRPpMSxIO9soe1frvR3OpHPCN4amXXereL/J3k=;
+ b=RKFYrBPnwZuzPdBwR/RqdbJcjTPZVUSbJTkmx0JoM6PLL2a9yjceQnW/m7yooBg4pi
+ t8rXZIMiGeMqj6fGjNGJ937NMkSq/2NUszhvjrb0PdL/ocoJa7liTpmv0AKlC2q5TLB3
+ Fc5O6LLGTcYCuZMW7S7fAUiThYkIWhPB8QVQFnUFd1+gJCxnUl5W/+VtLuH4Yy/Gqhy9
+ 6GB5u5jVjkquFfOXz6buPWqBgI2GDFKF+Y9GqQYTMBPm1mEIoFexGVKA2+AGruCpZjSb
+ iy70yO+/dRzxJaSntey+ql0D4tDI+7N2zblE4lV+JpQWNuohGc31JUIha6QXgWVOQNLT
+ sVHQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782101972; x=1782706772; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=QolTTkpVKd+7jeO+KKc3dw6Bbx7udM/Jl5yFeMhdKb0=;
- b=n7/rmW/tj7QkRpqGemhmauT/zT3rM2rmx9R0rlnyXE0YIgvKvcTa/t173yryAWOZrd
- QIZpKDyP3ErNeaGom3XW+UflvJka5iTx6s73NS2ULUs/ubFjdJo22NF/fRMNqPKpifnQ
- HUnXpwg6JQajSikRLy+V9hreS7Cd1nSFKa5vcdhEXF7y5ZtnKjl6W07Qatk4XeGVOQIA
- rTaCoe8shssJ6/Eo4nDT+LMpKK6LjGHtLZLm/hBSL3UhksdLLuZkNyTD2WU9Y5wVxQ24
- zSf0LK65/lBBwUbOF1TAmatS1TFPCbU1aq9f10/ZdxLw7eLbo2dhCV+bb/44pwMEAWlA
- cWXA==
+ d=gmail.com; s=20251104; t=1782102953; x=1782707753; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pcdmf7LZetcceItTLhB66mO0xEoFX0nY9YjUGjjs+C0=;
+ b=nNXWeiZnKx3gTAKvmD4Rr3FopLRTItVAOAZ2eGS2xsgNzlUjox9gQJrkOTQe8uJtBD
+ Uoq1f0WFJnn6dUsRtpN+EHmtNAPV5zzsc5xJtW3sjuyibWrBQOVGS9eaGGZl9NJ5oo1f
+ +0Aj51e9U3RUbVh3dF4aEgIS2y3xYzXjyoUWwAnOlbxqujhySGMwOKe+SKLJul+jPkgk
+ jPIkA3ecW31LqEtv0hpHuqE3sP4AI/T1/PXzoZ/k+AAVuh7WkaUwqua/wrz3BTohug+t
+ +349JQj7KpAu5MtG+BckTv9ouMLiRB99yrSf/l7vEk/BL7nRRrg1L9iGNHsN9QLcvmNM
+ Fj8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782101972; x=1782706772;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QolTTkpVKd+7jeO+KKc3dw6Bbx7udM/Jl5yFeMhdKb0=;
- b=X1RoLMlA4iTTvRuLmg2aPDz576sTnmD8q7mVZo94T55UgWme84EQ9gT+16AQH1vqD9
- dI2/q7+rg7c5HVQr7/pjcSbCxpdSDNXkIGEj5oMlVur+CUPJToZHd0qKBDvrPKYfgzRz
- q+2VRbkPXW0MJJbb1Fc7/0ghQs9nEWBOkJznG+TEpLcgxOzUqQg8IiJcIBPLErhahVb2
- SlnSOpD+SffMksP6egHj/kUiOTj3gEwKEl9aN6pN7+8nntm05J/rNgTDWcx5cRedgNY5
- J3vsUntFp035D5iPaR2bNo1OFdQnsEoPf6QJCoP3b/RP7WMrdnsnZOGTcgj3k1tYJs8j
- 5AXA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrWoZOJdPPP3xtAm9ghOzPYQbiADAOBm0c0EpLHkdSx8EvMnUTyuqGR9/kiC4goVRYK3iEItOFBNSr/@nongnu.org
-X-Gm-Message-State: AOJu0YxNL62595d8ot+JMlgvv4Zookt0lhPGx9vz7kM2jf+MjpM8CT8c
- 4DM9AVHsGn64VVdNsmqIXa+Cfmz9mRYGKLZMzA7IloCsbLdbwr7/l8pa
-X-Gm-Gg: AfdE7ckLBMAv9ZMU4LZmN5+xxUvbimsUir+Ur6xjIMcFpG4VgqMHNKIGUu7DNWhsMr8
- Y2lnrNpcm43jNlWicfBdW9HVjsgRhAo67qupm80nMjmfrY9xKzrMCN5z+vnLiC/6QRazQ7Wjfpg
- 4aXINHCew7/GbXnRnJf3UqETlL+wX/3c6trzZfN0w0ep+kAAT7ld4ud0eF9pOqDNeq8tO4xoET0
- BDZUYmJLQgoOZuyhb85He1/rFeSqwSMNFlZpQpJZlpbXXiSGTj/Rr8ehDAOCXARN8dj9EJqQq4R
- D+R79sJ91Cw6DR9S1AecthY1xrKYXJeghviiSHss2QRv/y1KHq4p0ycd4UCzVPNTyBctqDqTLsA
- 845khRsIYfTyIre5NmrtFRRO6ATdrgnl/F7aynwN61MBtSOWn+FeVV4V7RcMOYIQ+
-X-Received: by 2002:a17:90b:274d:b0:36a:8240:2477 with SMTP id
- 98e67ed59e1d1-37d15e8b6bcmr14363721a91.19.1782101972208; 
- Sun, 21 Jun 2026 21:19:32 -0700 (PDT)
-Received: from localhost ([2001:da8:7001:11::cb])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c8bc5a1d8acsm5665874a12.23.2026.06.21.21.19.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jun 2026 21:19:31 -0700 (PDT)
-Date: Mon, 22 Jun 2026 12:19:17 +0800
-From: Inochi Amaoto <inochiama@gmail.com>
-To: Alistair Francis <alistair23@gmail.com>, 
- Inochi Amaoto <inochiama@gmail.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH] target/riscv: Check PMP before updating PTE
-Message-ID: <aji3OBnXmA3J27I0@inochi.infowork>
-References: <20260511083105.641907-1-inochiama@gmail.com>
- <CAKmqyKO=bNBy447j_nxBLG+djeVGUKRfEmNmvS1T5nX2UgC4DQ@mail.gmail.com>
+ d=1e100.net; s=20251104; t=1782102953; x=1782707753;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=pcdmf7LZetcceItTLhB66mO0xEoFX0nY9YjUGjjs+C0=;
+ b=RdxrhMPE4fI+aegzrxlfnrIi/Xwo7NSZAD2f//SWHemFd7vEwreblOEJ0UMQkVcYGD
+ nOWap4tRSube0/sX3O39o/q1HTkm+/7SlzaYzNOl70NsN5V28iAe4u0Em3fEXtrR15Cg
+ PuEawe4r1nw+KNp2XMZfaieMWreBw3zGxS6buttX1fhB3Xsm5Dy0aYuMahHDMXu+ANzn
+ uX+9I2//ATvtn27F3zJHb4cOPehUUuZAf0rjHtoWprFscMz7DXBUBZ2ivTnE8On9yvy5
+ dwRMMg+XNereI5ER+l+faWQRpEMX4rgdoaTZ8NZWWfwBfyDIdvRrPzh0tRx0GBhG30Qz
+ u7JQ==
+X-Gm-Message-State: AOJu0YyzN54wOw0XldsgpPMkO5YK92fyYbklwTCEhxTFlDcQGoYs07KT
+ gGzSKyX2f53ybyeDsTda8Jc353jYRO4ayKa6cuwen7LzBDrg9GOtv8o7tzO2tzUStyl0C68Y9/u
+ OnJjpxPvWYtF3rApzAOqw5P/LzEmHAMWq4NfZOmA=
+X-Gm-Gg: AfdE7cn7D8txyT5fJJx/DQF8g7m+g2Rhdbe5LfDgDPMFmvdAa1kaT6QdaPWlf2Ueg5w
+ oy1jX1RWvxsnz9L9wkTBtF/DvB5JvxtjboQV9GLqWLegcJPtN+Ksw/qmACUUI6hEp1MZjr4sJxv
+ 5fCyQbYr6FtoK9pH6Mx89b2LWIRO9mFcuHekKng1RFihykJZUdUTNPisbkX94eGzkqDNqN0D/mF
+ froqxXcJEg1jRZiOkdx7SmLoA5+zj3kv2XwEmY7fppfI2MdcOSx7FHkFDl8To/045BmysCTgUO6
+ tGahV8Xl8FZbytdK4t2J+moDsRI=
+X-Received: by 2002:a05:6402:358e:b0:697:ad7f:58dc with SMTP id
+ 4fb4d7f45d1cf-697ad7f5a8cmr1075688a12.17.1782102953251; Sun, 21 Jun 2026
+ 21:35:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKmqyKO=bNBy447j_nxBLG+djeVGUKRfEmNmvS1T5nX2UgC4DQ@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=inochiama@gmail.com; helo=mail-pj1-x102c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+References: <20260518102118.2768383-1-mengzhuo@iscas.ac.cn>
+In-Reply-To: <20260518102118.2768383-1-mengzhuo@iscas.ac.cn>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 22 Jun 2026 14:35:27 +1000
+X-Gm-Features: AVVi8CfFe5rBGLDqM6tAIUlgXiFP9oO4K7wzOeuNit-DLLZHtAW7wJHchodUw6E
+Message-ID: <CAKmqyKMFkg_M1kRVzikZUsinBmU67tg9ie4us4Qdm-cqU1Tj1g@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv/kvm: skip FP/Vector sync on
+ KVM_PUT_RUNTIME_STATE
+To: Meng Zhuo <mengzhuo@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x529.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -108,64 +117,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jun 22, 2026 at 02:12:28PM +1000, Alistair Francis wrote:
-> On Mon, May 11, 2026 at 10:55 PM Inochi Amaoto <inochiama@gmail.com> wrote:
-> >
-> > According to the RISC-V spec, the PTE update is a supervisor write
-> > operations, and it should also follow the CPU PMP configuration like
-> > the PTE read.
-> >
-> > Signed-off-by: Inochi Amaoto <inochiama@gmail.com>
-> 
-> Logic looks good
-> 
-> > ---
-> >  target/riscv/cpu_helper.c | 8 ++++++++
-> >  1 file changed, 8 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index 39c3486ae0..6edce36138 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -1604,6 +1604,14 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-> >              return TRANSLATE_FAIL;
-> >          }
-> >
-> > +        int pmp_prot;
-> > +        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
-> > +                                               sxlen_bytes,
-> > +                                               MMU_DATA_STORE, PRV_S);
-> 
-> Please don't mix code statements and declarations inside a block:
-> https://qemu-project.gitlab.io/qemu/devel/style.html#declarations
-> 
-> ./scripts/checkpatch.pl should catch these type of errors
-> 
-> Alistair
+On Mon, May 18, 2026 at 8:23=E2=80=AFPM Meng Zhuo <mengzhuo@iscas.ac.cn> wr=
+ote:
 >
+> During KVM exit processing (KVM_PUT_RUNTIME_STATE), QEMU never modifies
+> FP or Vector registers =E2=80=94 only core GPRs/PC and CSRs are potential=
+ly
+> changed.  Re-syncing 32 FP and 32 Vector registers on every KVM exit
+> wastes 36-68 individual KVM_SET_ONE_REG ioctls per vCPU exit.
+>
+> Follow the s390x pattern: early return on RUNTIME after syncing core
+> registers and CSRs.  KVM_PUT_FULL_STATE and KVM_PUT_RESET_STATE continue
+> to sync everything for correctness during migration and initialization.
+>
+> Signed-off-by: Meng Zhuo <mengzhuo@iscas.ac.cn>
 
-Thanks, but something weird, the checkpatch does not catch this.
-Maybe the script need a update?
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-This is the output from my branch:
-$ ./scripts/checkpatch.pl --strict ./0001-target-riscv-Check-PMP-before-updating-PTE.patch 
-total: 0 errors, 0 warnings, 14 lines checked
+Alistair
 
-./0001-target-riscv-Check-PMP-before-updating-PTE.patch has no obvious style problems and is ready for submission.
-
-Regards,
-Inochi
-
-> > +        if (pmp_ret != TRANSLATE_SUCCESS) {
-> > +            return TRANSLATE_PMP_FAIL;
-> > +        }
-> > +
-> >          /*
-> >           * - if accessed or dirty bits need updating, and the PTE is
-> >           *   in RAM, then we do so atomically with a compare and swap.
-> > --
-> > 2.54.0
-> >
-> >
-> 
+> ---
+>  target/riscv/kvm/kvm-cpu.c | 19 ++++++++++++++-----
+>  1 file changed, 14 insertions(+), 5 deletions(-)
+>
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index b047ffa9c0..dd4193ea8b 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1385,6 +1385,17 @@ int kvm_arch_put_registers(CPUState *cs, KvmPutSta=
+te level, Error **errp)
+>          return ret;
+>      }
+>
+> +    /*
+> +     * For RUNTIME_STATE, KVM already has the correct FP and Vector stat=
+e
+> +     * from the preceding KVM_RUN exit. QEMU never modifies these regist=
+ers
+> +     * during exit handling, so re-syncing is unnecessary.  This saves ~=
+68
+> +     * KVM_SET_ONE_REG ioctls per vCPU exit.  See also s390x which uses
+> +     * the same pattern.
+> +     */
+> +    if (KVM_PUT_RUNTIME_STATE =3D=3D level) {
+> +        return ret;
+> +    }
+> +
+>      ret =3D kvm_riscv_put_regs_fp(cs);
+>      if (ret) {
+>          return ret;
+> @@ -1397,11 +1408,9 @@ int kvm_arch_put_registers(CPUState *cs, KvmPutSta=
+te level, Error **errp)
+>
+>      if (KVM_PUT_RESET_STATE =3D=3D level) {
+>          RISCVCPU *cpu =3D RISCV_CPU(cs);
+> -        if (cs->cpu_index =3D=3D 0) {
+> -            ret =3D kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_RUNN=
+ABLE);
+> -        } else {
+> -            ret =3D kvm_riscv_sync_mpstate_to_kvm(cpu, KVM_MP_STATE_STOP=
+PED);
+> -        }
+> +        int state =3D cs->cpu_index =3D=3D 0 ? KVM_MP_STATE_RUNNABLE
+> +                                       : KVM_MP_STATE_STOPPED;
+> +        ret =3D kvm_riscv_sync_mpstate_to_kvm(cpu, state);
+>          if (ret) {
+>              return ret;
+>          }
+> --
+> 2.47.3
+>
+>
 
