@@ -4,100 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C527BCDB46B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jun 2026 04:58:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9942CDB46B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jun 2026 05:00:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wbWje-0003eT-6D; Mon, 22 Jun 2026 00:58:14 -0400
+	id 1wbWl9-0004Jl-WB; Mon, 22 Jun 2026 00:59:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wbWjc-0003e6-VW
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 00:58:12 -0400
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ id 1wbWl7-0004JO-RD
+ for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 00:59:45 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wbWjb-0007nH-Fn
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 00:58:12 -0400
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-c07fd4dc2c8so399967566b.1
- for <qemu-riscv@nongnu.org>; Sun, 21 Jun 2026 21:58:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782104290; cv=none;
+ id 1wbWl6-00081R-4M
+ for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 00:59:45 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6976b6860bcso2728725a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 21 Jun 2026 21:59:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782104382; cv=none;
  d=google.com; s=arc-20240605;
- b=ASYA3ASyHdf7NKtWpjnzvJHbau42DRpLtiFQwx+K8YCD0iR83XNSqdW25rw0xYWZLH
- 6TJ/tya3OnNRh1RGkz0Iw2Isb+6idYRKhOsXUz68G7JX5pYMJjFs4K4hb/oT0YIBrY6W
- zpyklovMtRBglluBV6Ewka0tzMMwFGBR3HKqxxQ9ktcIwbng6nLCQge66Ino+gCg12VD
- AjFQw0YbH1RrvXgoqdj7RHwmNFbK6CGPRgeW2KpWZeFOyTG0V7JBkKIKDu6Bta9/thrp
- 1/PxUqFnzyolvGr+7ZJ0RVHUrl5s8qAnGlDlkVyhRGmyHn0HmQmghZdWzXaRBWnyIDNX
- Ix1Q==
+ b=GaZzxaJ8zxvshLa25KBEj5g4nwBsyDa0l8xH6Iu/KKG0Aqzn5VKqs0cAOEWJ4QzSOu
+ c3CWKg2g4SQgOKN91YEbOmUam7/jHhEkM10t1Qj2JQHxkH3k//25Hpgf4A/I7k9wbES1
+ OCCsAirww/Ta9uVpNs8FgsuXFnBxxe1Cg9hCETqQOyuFqs7mbjArjz/6OwOPG7kqX+Yl
+ L7dNU54niFyh2/SCreo6zaHDooixNdxJVAM2z25W+NgcqKdxu66CMXZjvkEGe3UcgBiY
+ o9fvIrNuTOeI1tG/SWgjTp/JrwvzWladzLLsSCqfEI6ZzSuF3iBtyegLLSJcdL4Jlxo3
+ UiYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=+rD8PZlTieOsJ6M0PjZbHuh4t2iX6CqsGlrKs8H6rcE=;
- fh=ChaY53diwBTlPGIX7antBvKusLCHTbRx8JHfSq88LhE=;
- b=TZTUzem6iAzzFaA+QCRZ9SFF3DENQsies1XGOx2NVGV+J2ss17rCyXl6G946ggtOGw
- mGqcMIuB2Hwgs2vgn0o+XG3mPKa5FacSUwN4w3kopG/vHyCztqXejj8lshMd9yVKI8rv
- 4jxPTex9KYU4xR6pvX47H/X4E0QMATedL4F0VyODh05sJ6MYcYGSwoyLmpaHDpgaSor2
- u59/xCtOt+Lir+IOz9mehXED0wWEklBcB9T1NZif/+kBg0BgZmSq9szUbn0dJPn55ShH
- +Di+jEcp2nP1ijdInSNwf7+3lfQS7Wnmy1yAGRyPOSbNhpjgL3Dra1m/y61Ul7baSlnP
- JFIQ==; darn=nongnu.org
+ bh=h5eRS3JBtzTis1RyBjwRpM8b3wRmaXjyAApR0YSW3GY=;
+ fh=ubzVdpsZ54ATYK5rA6Bl4cEy58kpFfxWyebRCgC9Nos=;
+ b=OO9Y+7pmzVxqFueE8rIPfocccchcP7pdhuotN8//TcB4uRX/N23UaqZ+2UGgjHH+qx
+ luuQJc46opXuWA04+dyqOlIoxHFIsD43GcMlP7yjTyUd+SK6HNEXGx36dcpdvexh74Hp
+ lWBlxuoRJB9HlTqoOwbBroLuANcKZqbxa2M4+pOT+VTaRcVhWawIdyCqSEpd34sewUCm
+ pOjp9ltaGTFYZxWCWyKD0WWaaRPPQCuTS3QrvfioRoIqjiZOpw1NDuO+ulo5pD4078lG
+ GobW2XqFNnFrlqlLjKIO6hUfoNJ+p3INoeS2S6ixNzPkDg9B6HpNovMDShOIPPoiDezN
+ b0AA==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782104290; x=1782709090; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1782104382; x=1782709182; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+rD8PZlTieOsJ6M0PjZbHuh4t2iX6CqsGlrKs8H6rcE=;
- b=goC1xwdu0CuLpUFWQzLxYmBzU3p06+fBHrT7nNggpC0wARS5NmZX/UYZe5E19SPIXh
- 7Dh+OWyAu87SZHwzQw4z/AsuBvULQ/uiOz+pxnI1q/12mLQ+jNapSmyBoKUm18IsSJFw
- mhSRYUzp80P4V/Sxyx/iRbJ8GK3EJbrvccIYcK0Y9rwhOCrtk6v8yfT+gii+JInTP0sU
- VjyNlIngSKZy6AeSIZHWjhzUA/XIudhRPRVz87e3eD+6Oyzi0ZLaBHBsVuowxmHxPpbO
- eHBh7koNoRQEwG584qxNDVO0BN5RUnQn+5zn4VSQBAoyXNB1yNfnhCvdzWz+LLnRzl4g
- P3wg==
+ bh=h5eRS3JBtzTis1RyBjwRpM8b3wRmaXjyAApR0YSW3GY=;
+ b=OcTJfgDMGP5N48SexuBMC125quFErITZ5N0NonQMe+1yDWnZtjKMY1MzUzvh8y8j/8
+ aPr2TLkXz7H/9wCa51TKYtNFihFGTicLtJOjXZvjI4bM9I4B1rY/9JZ0PSFgOqT0+3kV
+ 7qMvDpb0SsGEtCg9Z3B7oi3amPoCSq7FMlL5yyKTBk0agyxJn5F0eBNBupMwSDDD+bp0
+ 4o0mDBu1/h6lrMOX9DmmlCMl1+p8tzqHnZUUopV71qZ5mAPTFrLwDGAKAGlSgGS2gP2N
+ Uo3/k4cWkbaWE/8d0wyGT+QWiLJkAqbghac2SeRpdv1FTH6hGODtujI26oYZVOS1IGWr
+ xd0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782104290; x=1782709090;
+ d=1e100.net; s=20251104; t=1782104382; x=1782709182;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=+rD8PZlTieOsJ6M0PjZbHuh4t2iX6CqsGlrKs8H6rcE=;
- b=swlbMPzowxvFJK6ESxYFQTFzZmsCVpnrNHVCzkFDgp4H4+GLUONJsjUYNL+elEEb69
- foB2s+C3JGnmU4qTg1rH76t5pkOj59lSVpVPwOG/DA9GklUv5rlBXkEV/xxmIAL/4KYk
- DeBRBCwoKfCcJcP+sjeCvrumuJAKJw/DUSBBxXFVugE3+ncS0UQhMz275K87hF3JnPcv
- ccUbvSWX2dqx3o0cp3nn2yoicNgBUI8J6G5FlotW9e/NSUOiIVyVmgbHZgfxF+hWJ/Zc
- /GiY5LJFLN5fQjpn8eBkJnjZPgVYclYEdIqd+o+skFOfiJ+5IgSHBoFoSg3MRWt+R7yA
- GR9w==
+ bh=h5eRS3JBtzTis1RyBjwRpM8b3wRmaXjyAApR0YSW3GY=;
+ b=D08Ztgd7YYxWbDvvHGmd1iY5tLTp5pOE7dAGUzwApjQ6vjrURPgIJZjlm952Qs8yXu
+ EEdYYaQWt+Gn+d50cTeuyCbtmUQ+UAylrb/9JtEsmorBaNbNMvHfYN8N792m4FYEIXLw
+ R29ZgSIr/VbtMvPUyTXGuzghAnx6WsctW7htSFYsdB2ebC0B/wO9KxfKTNWvHU8gVyj8
+ rC+gVEgo+4qv2EnjF7KcJwQI73Cx4X81N2zTbms+7qvpIZnQOX/C/KvS8j5tYZMOfOQX
+ nmKWQYqD/K+Dw28U6l2UU3DpvIc1QQOpGksprqxpr4QRhqv/PIpF3DG4okjonUWciTDv
+ 1aNQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/O5fG8PBJdc4YeXmIXYyivsKAeAcbrpiDEcLTm28X9c7KICg3wWdgtvj6sZViGrspqutziN3aN0YCY@nongnu.org
-X-Gm-Message-State: AOJu0Yw2m9BElYD7JWwh2Hq1g+bEtSfYfo9dIXjNqf9IA6j8UBbuaCL1
- N8Bh3z33GcFe0p02ebXD0G335tSweIF+Gk96tO1p7LpNOwqMhp8HTnKcldM1ilu5NZs6294Grc4
- 9LfVmrCFJQwOtbaFHEPYPy7gMLjDFAnY=
-X-Gm-Gg: AfdE7cnuQEXWsc4Yw3y4g1ER2CdRwbIulL5hfkSqOpquAX01OuQ79wpuqN85qyccc/t
- CKvW9/Pg6k7ue07IGT7f4b/OgkuJVyxqJIwai9mNGoItkKF/rSj1rXz1Vcpfk0Upz9ajP36eyPm
- BdaJiTsGO2T7SsP298KK3mFKiKrnFhIaKkAT206mJUfZ7QjZ+iQlNJv9/fQdzQdHKhmBvxLJwJO
- h7lM8L6fIcZ2VZw9bGRKeXA89PWMd95jCwAHoO05rKrmelY/bO72nbHvAeeimWsKd9p27jlAl7g
- zRok2/8Cn6j3yMUk9KG1LcVt9HQ=
-X-Received: by 2002:a17:907:720a:b0:bb7:eb68:514e with SMTP id
- a640c23a62f3a-c097c5bafcbmr587833466b.36.1782104289554; Sun, 21 Jun 2026
- 21:58:09 -0700 (PDT)
+ AFNElJ/fMOM/XEhJ0m1rLuPUTsmmNVyWvcHx+VA1mf25+WqY6vIMnqgsann5DiqfmPRHIQ86ma3aG/GjPl25@nongnu.org
+X-Gm-Message-State: AOJu0YzhoFh+DVQHBC8OPL/vpt63LAHgX2MXwKghtJIhLNXwba/ssiyT
+ BHiOrgnAHzNOEz3VFT/o8lzMvcg81YgzdIAzMH8knQpv3H0SXd/LQATkfAYQtx8LYyaomWHCARu
+ R5UnFQpTxEmTN3XgnpxFsjpwg8dYOe7U=
+X-Gm-Gg: AfdE7ckj1yYDpbvb6pI/Jw5+LSP9ZHfjsernaqtuLqFP8EBbYCDtySMfbh9yLNoGd5X
+ qJjzMHijMVDLwV2pGJZ4HaxO1Fc0CyoeP+9Gto084hzyTaOtCfVgbiNVgUO9a2W1xGdRZav9Zut
+ dvXa3x2so6EGCDWOzE6TvOFDkG9z80R5KDTTY1kvZSYQBCt/KCb9Gx+i4f+AxeDxlJsGW1RI5AS
+ 6afyLF7K4AMtfrWDEdfHcC5HYcERSLPVJ2vdgZHfWm64ezSUFhRgQ055XrfNnanRV2BqsV6j0Js
+ ghPwt5N8Bw6gTrUmZjt2Vt7CB8M=
+X-Received: by 2002:a05:6402:5309:b0:696:9973:5cdb with SMTP id
+ 4fb4d7f45d1cf-697569b97d2mr4566333a12.28.1782104382592; Sun, 21 Jun 2026
+ 21:59:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260616235939.1358663-1-daniel.barboza@oss.qualcomm.com>
- <20260616235939.1358663-3-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260616235939.1358663-3-daniel.barboza@oss.qualcomm.com>
+ <20260616235939.1358663-4-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260616235939.1358663-4-daniel.barboza@oss.qualcomm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Jun 2026 14:57:42 +1000
-X-Gm-Features: AVVi8Cdq425k-q15zk7DLzxZFbZFt2XupHICSBakgtXTinvUdckC8c3k-C32EqQ
-Message-ID: <CAKmqyKNZ-EJNP1f=uxjFj39M38MhukphL8mvUH2w53Ou41aqtA@mail.gmail.com>
-Subject: Re: [PATCH 2/5] hw/riscv/sifive_u.c: use intc_phandle in plic creation
+Date: Mon, 22 Jun 2026 14:59:16 +1000
+X-Gm-Features: AVVi8CfyR0wIO0mWHwCEQdiwUG0QlsfDr3_nBqjEsU_eZMNBfMsA9lBY0BWt4W4
+Message-ID: <CAKmqyKNFAq27dm1iKUFWHwNHCftiNKp9vKjW=BcXmnEfjxzW8w@mail.gmail.com>
+Subject: Re: [PATCH 3/5] hw/riscv/sifive_u: add #address-cells in PLIC FDT
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x629.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -124,9 +124,14 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Wed, Jun 17, 2026 at 10:01=E2=80=AFAM Daniel Henrique Barboza
 <daniel.barboza@oss.qualcomm.com> wrote:
 >
-> The info about intc_phandles for each CPU is already stored in the
-> intc_phandles array.  We don't need to fetch them again using
-> qemu_fdt_get_phandle().
+> By Linux FDT docs in [1] the "address-cells" property is mandatory.  Set
+> it to zero.
+>
+> While we're at it let's also put this new value and the interrupt-cells
+> value in macros, like the 'virt' board is doing.
+>
+> [1] https://www.kernel.org/doc/Documentation/devicetree/bindings/interrup=
+t-controller/sifive%2Cplic-1.0.0.txt
 >
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
@@ -135,38 +140,40 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/sifive_u.c | 10 +++-------
->  1 file changed, 3 insertions(+), 7 deletions(-)
+>  hw/riscv/sifive_u.c         | 5 ++++-
+>  include/hw/riscv/sifive_u.h | 2 ++
+>  2 files changed, 6 insertions(+), 1 deletion(-)
 >
 > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index fda9a09f06..b3468254f5 100644
+> index b3468254f5..7dfc18d3ec 100644
 > --- a/hw/riscv/sifive_u.c
 > +++ b/hw/riscv/sifive_u.c
-> @@ -199,20 +199,16 @@ static void create_fdt(SiFiveUState *s, const MemMa=
-pEntry *memmap,
->      plic_phandle =3D phandle++;
->      cells =3D  g_new0(uint32_t, ms->smp.cpus * 4 - 2);
->      for (cpu =3D 0; cpu < ms->smp.cpus; cpu++) {
-> -        nodename =3D
-> -            g_strdup_printf("/cpus/cpu@%d/interrupt-controller", cpu);
-> -        uint32_t intc_phandle =3D qemu_fdt_get_phandle(fdt, nodename);
->          /* cpu 0 is the management hart that does not have S-mode */
->          if (cpu =3D=3D 0) {
-> -            cells[0] =3D cpu_to_be32(intc_phandle);
-> +            cells[0] =3D cpu_to_be32(intc_phandles[cpu]);
->              cells[1] =3D cpu_to_be32(IRQ_M_EXT);
->          } else {
-> -            cells[cpu * 4 - 2] =3D cpu_to_be32(intc_phandle);
-> +            cells[cpu * 4 - 2] =3D cpu_to_be32(intc_phandles[cpu]);
->              cells[cpu * 4 - 1] =3D cpu_to_be32(IRQ_M_EXT);
-> -            cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandle);
-> +            cells[cpu * 4 + 0] =3D cpu_to_be32(intc_phandles[cpu]);
->              cells[cpu * 4 + 1] =3D cpu_to_be32(IRQ_S_EXT);
->          }
-> -        g_free(nodename);
->      }
+> @@ -213,7 +213,10 @@ static void create_fdt(SiFiveUState *s, const MemMap=
+Entry *memmap,
 >      nodename =3D g_strdup_printf("/soc/interrupt-controller@%lx",
 >          (long)memmap[SIFIVE_U_DEV_PLIC].base);
+>      qemu_fdt_add_subnode(fdt, nodename);
+> -    qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells", 1);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells",
+> +                          SIFIVE_U_PLIC_INT_CELLS);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "#address-cells",
+> +                          SIFIVE_U_PLIC_ADDR_CELLS);
+>      qemu_fdt_setprop_string_array(fdt, nodename, "compatible",
+>          (char **)&plic_compat, ARRAY_SIZE(plic_compat));
+>      qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index e4c9860d50..aed966a62d 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -156,6 +156,8 @@ enum {
+>  #define SIFIVE_U_MANAGEMENT_CPU_COUNT   1
+>  #define SIFIVE_U_COMPUTE_CPU_COUNT      4
+>
+> +#define SIFIVE_U_PLIC_ADDR_CELLS   0
+> +#define SIFIVE_U_PLIC_INT_CELLS    1
+>  #define SIFIVE_U_PLIC_NUM_SOURCES 54
+>  #define SIFIVE_U_PLIC_NUM_PRIORITIES 7
+>  #define SIFIVE_U_PLIC_PRIORITY_BASE 0x00
 > --
 > 2.43.0
 >
