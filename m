@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD02ACDB476
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jun 2026 19:32:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98099CDB466
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jun 2026 19:33:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wbkNa-0000YP-F3; Mon, 22 Jun 2026 15:32:22 -0400
+	id 1wbkNn-0000fu-O2; Mon, 22 Jun 2026 15:32:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wbkNY-0000Y7-HZ
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 15:32:20 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1wbkNl-0000dB-Ct
+ for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 15:32:33 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wbkNW-0001py-C0
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 15:32:19 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ id 1wbkNj-0001r5-4k
+ for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 15:32:33 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65MFVktp2691570
- for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 19:32:17 GMT
+ 65MFWxDC1369971
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 19:32:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=4HJO01tRdn5
- 3xAdLjKeS39dTf9kvVhP9MmTvHhoHe8Y=; b=NOpYjdbBBFlIbUW2rbz4CKYmpCq
- y4ZuJn3LXsheihTS6CMmhD0GfXbFfgrNSTc964WmXm0LrjXMzVdsu7LEMnfMqTCQ
- /sFgl6CfPz6CTkWK/N74NqIc+PDqcCagunle64J3uI4y8Wo39jdD037sfTk6SOLf
- Yro50ei55YNQ3/hMGHHeQU+prF9EsVsn2ABJu+3WnjpapYGAmYuywsy6G4VDec6O
- vUf7O42LMuqzSQtLDKEp9MgnUDQPpVoKmExAOVFfnbcqN7PE7s6JR4TT9Hj9Hjsh
- tA0E880IqiITUCGH5BQilDnRwhmlP0w+zX1EPg7oW0LVNsagof03R5iKdlg==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ey5sn1d2j-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=d+x/KmfI7lK
+ 59cwgzYrYOT6TnQYFSTwXngaXEUCLYBY=; b=IExnaafeP1qhf8C5ivVQllNJPpD
+ lr91Xxvm7EUorwJXdzEws7orXDZGyjbI4oRcWXcT7EUpIiuGwmdCOG3mGcB+9hTF
+ Ojx0udyM2iG3Ro54WtSHV+E8DIj4iPEKFyEsO1BLxBOWnvXu6AJNBD29ck/5EdL2
+ LN30/py/DoP0/i6awYTOBwJHfP6KBcfqaMiLbToav7p95+52MqFfjtxM76yhNVeB
+ ow1ECbFzYSouFvwR/9i22IlcDEH025P4IK/KyxvkAEtwsZYEjBM9REj+OeMN3nuB
+ yJEskykyXKjQrgZS9EgMwrmysoULBA+VxLBVWhBLfiik6SWjYgOxu1jEveg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4exyn1u2bc-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 19:32:16 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-9254309dfd4so168358585a.2
- for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 12:32:16 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 19:32:29 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-9205e6b0bcaso586756885a.1
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 12:32:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782156736; x=1782761536; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1782156749; x=1782761549; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4HJO01tRdn53xAdLjKeS39dTf9kvVhP9MmTvHhoHe8Y=;
- b=WyOFEuTmufdKqRv/ERHWKv9Hj/jgQL9b59zT2DhuOVS6Lc5IwEkRp6d4U/CzeXM5OX
- 84lnNC+KZw4GTKE4tppskOphQaLPdPI14Flnrgkug5WHCccb0Wl4C+T6T8gm6WRa4vN0
- tpQ0/drTfrr969PPAtNrQ8SGbFHCYJmQ8l/2qjbMC7SYLnEQuEorcFEwO/YpwM4w02n/
- WI+gKcy8dRef7lqW11Y/HUdQEdFB9Sz41REegKqoWSh2McPtE8UJvmLFJ1fSddnf9rm/
- qWkOifz07jrEz++yEZ9q4sxkg84a/SX35ubHOFi//8EHgnQ49mTTfFFsNU1AfthxuAih
- ykAQ==
+ bh=d+x/KmfI7lK59cwgzYrYOT6TnQYFSTwXngaXEUCLYBY=;
+ b=NT51vfJCh9rr31OoRgLl1LSfOHdp5LHJna1YUUXT0TLkac5qFDc5HpcO8qXrsJtL0/
+ Ik0p2hjJ/xsq0QDkcIw9ZgsdkQCBweLcxid14kSuf9xtuOIcTQPbFW1MnXU1VwyROfSI
+ UW/TzLld2tghBz7iYB9o8uBwAWgMULGXHqL7OFCeA53JWB36OuD/LtItVbaTz7cUAElD
+ RMDaJX2Jd/L+TJzhze2nweq2Sm5it5qx0yBQhy0BU1HpB8mLKM5b1T7jfwZeFG173eph
+ QmJfbh0ehB0wCOzDZUmP8JvjvU/wRvb8OXwvDPTErNHTltgCooqnaDAQvAtT5xdZQ7Gh
+ x/tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782156736; x=1782761536;
+ d=1e100.net; s=20251104; t=1782156749; x=1782761549;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4HJO01tRdn53xAdLjKeS39dTf9kvVhP9MmTvHhoHe8Y=;
- b=hV5g+yL2069Y9V3W+lXM6m3u/CtiYTxburrfZdnFC5J2PHvda4RNg/ISmo64Parz6w
- jVJyfIefcsskdz32cGk/VJXlHvSZ5h36dLsa64wzHsJO2KpZFQRC9LM5lWuEu9FIM2JI
- 3N1qf/XmoTw9Jt6vEG9e2zrfz+ioqPWRmD7nyUX/lCQj2q7/MxTIqVtrLrX+dDh8sLlK
- SX/kdAf0fZFAW4scqq2BjNWWbLGYZEYrWGB4sX7g5QPwhplBv3VPuPogqsNsW06g7UPd
- zGku073aOZNUO7aku6qb3HNzaZBe+//CVG/Cee2zE+vF2uLKfhhSj9syvpSO5VMNXNng
- kkxQ==
-X-Gm-Message-State: AOJu0YzT/A/Q4FaIzAiB96diCQefNpqxjTL77xjnpPDDHhHcs6IAr883
- FV6Zp3yMHqIDBGCPsC80P350ncr4mkQNV+L1Qd8jnHECjZm/2nhHW3Fo0fyZ77mjkj1rZeE6B1B
- 5tQ5im59/K71iAliWO1bH2elqoHb5hhhsWVl2KIUehseXpjN/dEoGnEJUFEqUvM66dg==
-X-Gm-Gg: AfdE7clSx6WoRDjcMeB19gCF/kNLsXyd+KuheMUuq7JKj8v12heewPoakqbaedFB3IX
- cqBFyJBb4gv/sf6PRfQrUZNeNw3OOU0GyGbKfesjM43C/ALpmbdtvnDQKAFE7Fti+qhiQAPsW8F
- LPsL5xaS/nAD/JxLUW6nCZeoDq9H4YCa7UDCdAfBhu5TBOo0iFDCGTBYrQoJPuVhBtxd51Bgyzl
- 2O97vmMD2RbTlHVVzJq46Q6N/9rOIp8zbcxa1UzYhOb1CwQLUGIHlumoCU6um7N1zi1onpAvRrh
- OFeewxS2vtVAWVisqjHhWaXCNrlPtZ43UTAiVqzh6cLZusm0TWFbkGIXKXxzSIJ3DKxcUo6oRhn
- 0PhrYC3U/uptbfQyktKVEXBiKu8+oVbgGvDkwVK1DRKuC+g==
-X-Received: by 2002:a05:620a:4046:b0:920:56af:cef2 with SMTP id
- af79cd13be357-920d1cea613mr2390768985a.25.1782156735722; 
- Mon, 22 Jun 2026 12:32:15 -0700 (PDT)
-X-Received: by 2002:a05:620a:4046:b0:920:56af:cef2 with SMTP id
- af79cd13be357-920d1cea613mr2390761485a.25.1782156735015; 
- Mon, 22 Jun 2026 12:32:15 -0700 (PDT)
+ bh=d+x/KmfI7lK59cwgzYrYOT6TnQYFSTwXngaXEUCLYBY=;
+ b=maq/A4mNJmMCSqmU7FPOabWghzbhPwyjIZjnRl1kvKX/KQCmFPHRsABoBMpyPW+j0I
+ bj2q/LqQrTF9YbnDZDzDPIawvBu/F37eSGViQIAu5Y5QqlohHuPWmnTNrjpaj6HDlbgM
+ jq7sgdc5g/d3URLP0rwh2AeB/acYFzT9gNwu6NOmlKcYAK2Rs6+C7ocecsssoa2b0vvH
+ jYo31DUEbsnShKb2Mc6cj41XevLJ4z0dWZMyOszC7r3HM1myuZrtdHWRE/oeHKVJBH8W
+ IHYRJKUKl804q/o/JZVZ+eH1TTFIXWT03OwY++pa2+XZ6MbuScSs1Bj1v4b9fr7EUlXs
+ 3u+w==
+X-Gm-Message-State: AOJu0Yw1GL2awzhz3SPw2q6bpIhJE9cnWXC6J3btYdZXzaz9DU/T7sbC
+ 8Jw58r+MoWzqmqOKuOsGtBCjPlfcxQJsTTqZMgx3cEPsAbT8Rx55bNojTnv2z+kYM5JKozZQiVy
+ ZCTvbnjAwYcV58HSgla0dxcvVX4IWhN2GCKAGberAUdzW3ONHrwRSz4uoIg==
+X-Gm-Gg: AfdE7cm9BtW511GsTH7p1rSMbd7cHV75vxl3XUhmkBdXsSPKlSjXVT7r79eBMxFjufL
+ 0veDEGJtiUWyY8tXrE84ssJImBCVFwfPy8yZWLywutL8hNeY4ftyZw1drv1zXYoa9HFyYfhgdC3
+ GmPHyMnqWLWU1PzHAiRjoLFGaeWl8H6Yu4ezHwVoexP8bI2twPAzUsrH2Xotnqx6NoKAC3XX8En
+ dfILfXDHUcwLS6zaqx/LKkEfqJ/0Ghjrt4e41QQmQ2JHopYryx7jKb5c0zgmtYg6EGcDHaCu9MJ
+ PewfVF8T4Z9iJo5XGrTgsRlqs0SEKfomvEpjphD4gDl4H849Vp6JVjyFkBrthhZwGIFLyMcgj/e
+ XBFbjqPNnpbzRMNZFhgxk8ZJAjTnFZgjAmYA9liNVk1mvbA==
+X-Received: by 2002:a05:620a:4587:b0:915:8f76:8005 with SMTP id
+ af79cd13be357-920910a5ff2mr2445545485a.47.1782156749049; 
+ Mon, 22 Jun 2026 12:32:29 -0700 (PDT)
+X-Received: by 2002:a05:620a:4587:b0:915:8f76:8005 with SMTP id
+ af79cd13be357-920910a5ff2mr2445536985a.47.1782156748457; 
+ Mon, 22 Jun 2026 12:32:28 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.79.21.40])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-926004ab49csm61489585a.34.2026.06.22.12.32.12
+ af79cd13be357-926004ab49csm61489585a.34.2026.06.22.12.32.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jun 2026 12:32:14 -0700 (PDT)
+ Mon, 22 Jun 2026 12:32:27 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -92,42 +92,42 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  philmd@oss.qualcomm.com, pierrick.bouvier@oss.qualcomm.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 08/24] target/riscv: remove csr.h from kvm-cpu.c
-Date: Mon, 22 Jun 2026 16:31:24 -0300
-Message-ID: <20260622193141.1449724-9-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH 13/24] target/riscv: move some irq helpers to cpu.c
+Date: Mon, 22 Jun 2026 16:31:29 -0300
+Message-ID: <20260622193141.1449724-14-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260622193141.1449724-1-daniel.barboza@oss.qualcomm.com>
 References: <20260622193141.1449724-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: XAz-LzVSzMpbcnBmAutKuKf0LJdLrCho
-X-Proofpoint-ORIG-GUID: XAz-LzVSzMpbcnBmAutKuKf0LJdLrCho
-X-Authority-Analysis: v=2.4 cv=PuKjqQM3 c=1 sm=1 tr=0 ts=6a398dc0 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+X-Proofpoint-GUID: LesNKP5KvCUQaBhLIxQ-yShWqZrVqKy2
+X-Authority-Analysis: v=2.4 cv=EOU2FVZC c=1 sm=1 tr=0 ts=6a398dce cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
  a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
- a=iaHOtbHYuYo96Khm3VgA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIyMDE4OSBTYWx0ZWRfXxVAjyFXxqd1a
- s5XCCzKRBsnHZHy8tr/C40rglhfVpSJKpQh7kW6x6VFnXQfPs+zC9tW9gxMjhd34XbElGywh0HF
- JATKI2cGVZZYWriD+90/Ru6fz8h89yk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIyMDE4OSBTYWx0ZWRfX9S51EB0OE8U1
- O/kY9phB8kcumV8wV2kolUUZ2PKJf0pZpsaaL5j3tgt6Uk1rLZwg5QO1Mu/mx7KSfjmx0P4PV5H
- f1SrLznU9afglG08EXU53Zwru2W5rhEtHD9zDwd/Xkkl0NGkSdrUMXmz2Bcq2xNVHG8G8jszh8X
- b6xJUBPr0EKEr5t+fQ+FhQ2i+tUC2mJ7VJDs7mVPOZwq522sRvmPMm/dYURRyn3AJn9Aufmt5mf
- /Qn374lzJoG/2tNoPlDecHyeMJR13aOU0vwePxUJeVX87pM4We39S54weHAwhbDAr/PA2FQ+NXB
- PoZmn3hKJRefFwYnZR3Gs8Nb6+EUmLPvAdVBVBWeoErQ2X4x+f/h0/1G+BIswzWLmCfi42hVdb5
- HAOhu0k0G9yTyrsvjtIoKot31fMIWRo1wp4PBQle35lr/68JybLU6aBgQb3rSR7nspLwv8191E0
- pWy6CVESnnITfDtzabg==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
+ a=GPi4zPIJMbMzHxplyksA:9 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIyMDE4OSBTYWx0ZWRfX9pEg7LWIOtYY
+ AqI71M/3UWwlhBwisdCsQdXJE031aRpbwUgWMeUumhNAAHIE/pXDs3wTNitC/jdzUzxczWPyUz4
+ 3bUjcTl2J9wpBUtMP9yfmO9NOTw+dbI=
+X-Proofpoint-ORIG-GUID: LesNKP5KvCUQaBhLIxQ-yShWqZrVqKy2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIyMDE4OSBTYWx0ZWRfX1M4JDyy0jJcc
+ mDTTzgVzezA8zYH7pDo3T+ytGHnCBBPXF75ySKn2ep0PVEorsbSDZONL05IQDuwNj5PV6cEgnBk
+ i8BFsr3M3rzPH5iSlVeMucSZ2CKNxDSamAh5HN96XIC3Qd4+gmDf4j3QlVv0WoKIvxjh6wVnbYA
+ Mh0Eo4yTiyp7UPDBlbQB9GU5PXcPG6sTTHQrdrPfvARUS5bkZgax4jdv/6q/KVk+KKPIlrb8oNe
+ QjSu5yjKYyURQJuXbEEzWDNSSYQkGZFvRw03PNN34hCuJNfQYj1xLG7PmvPrEx/eJGLHOCFHMze
+ dqKhEeck/GrF6psWO1Vb4NPJ7WMdjiqOhdTJz3ao3QLVAEyNCfsSm9IzQs8aubWz+BniD5BrCAW
+ l2N+f0OFmlMIDrXqSwhEGeWLCUmr70Yc7wXeGQ1uW3MI5A//yIB53bL5NL4+LL0aYDD7qRhlsRH
+ 1Vd9nDGQ4oMWhF8D37Q==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-22_03,2026-06-22_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 priorityscore=1501 phishscore=0 impostorscore=0
- adultscore=0 clxscore=1015 bulkscore=0 spamscore=0 lowpriorityscore=0
+ impostorscore=0 bulkscore=0 priorityscore=1501 malwarescore=0 adultscore=0
+ lowpriorityscore=0 phishscore=0 clxscore=1015 spamscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606220189
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -150,153 +150,436 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move riscv_new_csr_seed from csr.c to cpu.c since this function is
-shared with KVM.  With that we can remove the csr.h from kvm-cpu.c.
+riscv_cpu_has_work() uses a handful of irq pending functions from
+cpu_helper.c.  There is a very high possibility that KVM doesn't need
+the current implermentation of has_work(), but the common accel code
+needs an implementation of this callback (see cpu_exec_class_post_init)
+otherwise the KVM driver won't initialize.
+
+Move the relevant irq helpers to cpu.c to allow KVM to keep using the
+current has_work implementation, allowing --disable-tcg to work.  We'll
+circle it back to evaluate a proper KVM implementation for it in a later
+date.
 
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- target/riscv/cpu.c         | 30 ++++++++++++++++++++++++++++++
- target/riscv/cpu.h         |  3 ++-
- target/riscv/csr.h         |  3 ---
- target/riscv/kvm/kvm-cpu.c |  1 -
- target/riscv/tcg/csr.c     | 29 -----------------------------
- 5 files changed, 32 insertions(+), 34 deletions(-)
+ target/riscv/cpu.c            | 187 ++++++++++++++++++++++++++++++++++
+ target/riscv/cpu.h            |   5 +
+ target/riscv/tcg/cpu_helper.c | 187 ----------------------------------
+ 3 files changed, 192 insertions(+), 187 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f999042178..8fe524be21 100644
+index f0ef4c5a4a..41646acfb5 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -21,6 +21,7 @@
- #include "qemu/qemu-print.h"
- #include "qemu/ctype.h"
- #include "qemu/log.h"
-+#include "qemu/guest-random.h"
- #include "cpu.h"
- #include "cpu_vendorid.h"
- #include "target/riscv/csr.h"
-@@ -536,6 +537,35 @@ static void riscv_register_custom_csrs(RISCVCPU *cpu, const RISCVCSR *csr_list)
+@@ -738,6 +738,193 @@ static vaddr riscv_cpu_get_pc(CPUState *cs)
  }
- #endif
  
-+/* Used by csr.c and the KVM driver */
-+target_ulong riscv_new_csr_seed(target_ulong new_value,
-+                                target_ulong write_mask)
-+{
-+    uint16_t random_v;
-+    Error *random_e = NULL;
-+    int random_r;
-+    target_ulong rval;
+ #ifndef CONFIG_USER_ONLY
++/*
++ * Default priorities of local interrupts are defined in the
++ * RISC-V Advanced Interrupt Architecture specification.
++ *
++ * ----------------------------------------------------------------
++ *  Default  |
++ *  Priority | Major Interrupt Numbers
++ * ----------------------------------------------------------------
++ *  Highest  | 47, 23, 46, 45, 22, 44,
++ *           | 43, 21, 42, 41, 20, 40
++ *           |
++ *           | 11 (0b),  3 (03),  7 (07)
++ *           |  9 (09),  1 (01),  5 (05)
++ *           | 12 (0c)
++ *           | 10 (0a),  2 (02),  6 (06)
++ *           |
++ *           | 39, 19, 38, 37, 18, 36,
++ *  Lowest   | 35, 17, 34, 33, 16, 32
++ * ----------------------------------------------------------------
++ */
++static const uint8_t default_iprio[64] = {
++    /* Custom interrupts 48 to 63 */
++    [63] = IPRIO_MMAXIPRIO,
++    [62] = IPRIO_MMAXIPRIO,
++    [61] = IPRIO_MMAXIPRIO,
++    [60] = IPRIO_MMAXIPRIO,
++    [59] = IPRIO_MMAXIPRIO,
++    [58] = IPRIO_MMAXIPRIO,
++    [57] = IPRIO_MMAXIPRIO,
++    [56] = IPRIO_MMAXIPRIO,
++    [55] = IPRIO_MMAXIPRIO,
++    [54] = IPRIO_MMAXIPRIO,
++    [53] = IPRIO_MMAXIPRIO,
++    [52] = IPRIO_MMAXIPRIO,
++    [51] = IPRIO_MMAXIPRIO,
++    [50] = IPRIO_MMAXIPRIO,
++    [49] = IPRIO_MMAXIPRIO,
++    [48] = IPRIO_MMAXIPRIO,
 +
-+    random_r = qemu_guest_getrandom(&random_v, 2, &random_e);
-+    if (unlikely(random_r < 0)) {
-+        /*
-+         * Failed, for unknown reasons in the crypto subsystem.
-+         * The best we can do is log the reason and return a
-+         * failure indication to the guest.  There is no reason
-+         * we know to expect the failure to be transitory, so
-+         * indicate DEAD to avoid having the guest spin on WAIT.
-+         */
-+        qemu_log_mask(LOG_UNIMP, "%s: Crypto failure: %s",
-+                      __func__, error_get_pretty(random_e));
-+        error_free(random_e);
-+        rval = SEED_OPST_DEAD;
-+    } else {
-+        rval = random_v | SEED_OPST_ES16;
++    /* Custom interrupts 24 to 31 */
++    [31] = IPRIO_MMAXIPRIO,
++    [30] = IPRIO_MMAXIPRIO,
++    [29] = IPRIO_MMAXIPRIO,
++    [28] = IPRIO_MMAXIPRIO,
++    [27] = IPRIO_MMAXIPRIO,
++    [26] = IPRIO_MMAXIPRIO,
++    [25] = IPRIO_MMAXIPRIO,
++    [24] = IPRIO_MMAXIPRIO,
++
++    [47] = IPRIO_DEFAULT_UPPER,
++    [23] = IPRIO_DEFAULT_UPPER + 1,
++    [46] = IPRIO_DEFAULT_UPPER + 2,
++    [45] = IPRIO_DEFAULT_UPPER + 3,
++    [22] = IPRIO_DEFAULT_UPPER + 4,
++    [44] = IPRIO_DEFAULT_UPPER + 5,
++
++    [43] = IPRIO_DEFAULT_UPPER + 6,
++    [21] = IPRIO_DEFAULT_UPPER + 7,
++    [42] = IPRIO_DEFAULT_UPPER + 8,
++    [41] = IPRIO_DEFAULT_UPPER + 9,
++    [20] = IPRIO_DEFAULT_UPPER + 10,
++    [40] = IPRIO_DEFAULT_UPPER + 11,
++
++    [11] = IPRIO_DEFAULT_M,
++    [3]  = IPRIO_DEFAULT_M + 1,
++    [7]  = IPRIO_DEFAULT_M + 2,
++
++    [9]  = IPRIO_DEFAULT_S,
++    [1]  = IPRIO_DEFAULT_S + 1,
++    [5]  = IPRIO_DEFAULT_S + 2,
++
++    [12] = IPRIO_DEFAULT_SGEXT,
++
++    [10] = IPRIO_DEFAULT_VS,
++    [2]  = IPRIO_DEFAULT_VS + 1,
++    [6]  = IPRIO_DEFAULT_VS + 2,
++
++    [39] = IPRIO_DEFAULT_LOWER,
++    [19] = IPRIO_DEFAULT_LOWER + 1,
++    [38] = IPRIO_DEFAULT_LOWER + 2,
++    [37] = IPRIO_DEFAULT_LOWER + 3,
++    [18] = IPRIO_DEFAULT_LOWER + 4,
++    [36] = IPRIO_DEFAULT_LOWER + 5,
++
++    [35] = IPRIO_DEFAULT_LOWER + 6,
++    [17] = IPRIO_DEFAULT_LOWER + 7,
++    [34] = IPRIO_DEFAULT_LOWER + 8,
++    [33] = IPRIO_DEFAULT_LOWER + 9,
++    [16] = IPRIO_DEFAULT_LOWER + 10,
++    [32] = IPRIO_DEFAULT_LOWER + 11,
++};
++
++uint8_t riscv_cpu_default_priority(int irq)
++{
++    if (irq < 0 || irq > 63) {
++        return IPRIO_MMAXIPRIO;
 +    }
 +
-+    return rval;
++    return default_iprio[irq] ? default_iprio[irq] : IPRIO_MMAXIPRIO;
++};
++
++int riscv_cpu_pending_to_irq(CPURISCVState *env,
++                             int extirq, unsigned int extirq_def_prio,
++                             uint64_t pending, uint8_t *iprio)
++{
++    int irq, best_irq = RISCV_EXCP_NONE;
++    unsigned int prio, best_prio = UINT_MAX;
++
++    if (!pending) {
++        return RISCV_EXCP_NONE;
++    }
++
++    irq = ctz64(pending);
++    if (!((extirq == IRQ_M_EXT) ? riscv_cpu_cfg(env)->ext_smaia :
++                                  riscv_cpu_cfg(env)->ext_ssaia)) {
++        return irq;
++    }
++
++    pending = pending >> irq;
++    while (pending) {
++        prio = iprio[irq];
++        if (!prio) {
++            if (irq == extirq) {
++                prio = extirq_def_prio;
++            } else {
++                prio = (riscv_cpu_default_priority(irq) < extirq_def_prio) ?
++                       1 : IPRIO_MMAXIPRIO;
++            }
++        }
++        if ((pending & 0x1) && (prio <= best_prio)) {
++            best_irq = irq;
++            best_prio = prio;
++        }
++        irq++;
++        pending = pending >> 1;
++    }
++
++    return best_irq;
 +}
 +
- static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
++/*
++ * Doesn't report interrupts inserted using mvip from M-mode firmware or
++ * using hvip bits 13:63 from HS-mode. Those are returned in
++ * riscv_cpu_sirq_pending() and riscv_cpu_vsirq_pending().
++ */
++uint64_t riscv_cpu_all_pending(CPURISCVState *env)
++{
++    uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
++    uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
++    uint64_t vstip = (env->vstime_irq) ? MIP_VSTIP : 0;
++
++    return (env->mip | vsgein | vstip) & env->mie;
++}
++
++int riscv_cpu_mirq_pending(CPURISCVState *env)
++{
++    uint64_t irqs = riscv_cpu_all_pending(env) & ~env->mideleg &
++                    ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
++
++    return riscv_cpu_pending_to_irq(env, IRQ_M_EXT, IPRIO_DEFAULT_M,
++                                    irqs, env->miprio);
++}
++
++int riscv_cpu_sirq_pending(CPURISCVState *env)
++{
++    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg & ~env->hideleg;
++    uint64_t irqs_f = env->mvip & env->mvien & ~env->mideleg & env->sie;
++
++    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
++                                    irqs | irqs_f, env->siprio);
++}
++
++int riscv_cpu_vsirq_pending(CPURISCVState *env)
++{
++    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg & env->hideleg;
++    uint64_t irqs_f_vs = env->hvip & env->hvien & ~env->hideleg & env->vsie;
++    uint64_t vsbits;
++
++    /* Bring VS-level bits to correct position */
++    vsbits = irqs & VS_MODE_INTERRUPTS;
++    irqs &= ~VS_MODE_INTERRUPTS;
++    irqs |= vsbits >> 1;
++
++    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
++                                    (irqs | irqs_f_vs), env->hviprio);
++}
++
+ bool riscv_cpu_has_work(CPUState *cs)
  {
-     ObjectClass *oc;
+     RISCVCPU *cpu = RISCV_CPU(cs);
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f0c78c1474..4fc82d2477 100644
+index ae6b166d46..c45ee228f4 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -971,7 +971,8 @@ bool riscv_cpu_accelerator_compatible(RISCVCPU *cpu);
- extern const bool valid_vm_1_10_32[], valid_vm_1_10_64[];
+@@ -638,6 +638,11 @@ uint64_t riscv_cpu_all_pending(CPURISCVState *env);
+ int riscv_cpu_mirq_pending(CPURISCVState *env);
+ int riscv_cpu_sirq_pending(CPURISCVState *env);
+ int riscv_cpu_vsirq_pending(CPURISCVState *env);
++int riscv_cpu_pending_to_irq(CPURISCVState *env,
++                             int extirq, unsigned int extirq_def_prio,
++                             uint64_t pending, uint8_t *iprio);
++
++
+ bool riscv_cpu_fp_enabled(CPURISCVState *env);
+ uint8_t riscv_cpu_get_geilen(CPURISCVState *env);
+ void riscv_cpu_set_geilen(CPURISCVState *env, uint8_t geilen);
+diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+index 9293d61024..09ac1aeda9 100644
+--- a/target/riscv/tcg/cpu_helper.c
++++ b/target/riscv/tcg/cpu_helper.c
+@@ -330,193 +330,6 @@ int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero)
+     return 0;
+ }
  
- void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+-/*
+- * Default priorities of local interrupts are defined in the
+- * RISC-V Advanced Interrupt Architecture specification.
+- *
+- * ----------------------------------------------------------------
+- *  Default  |
+- *  Priority | Major Interrupt Numbers
+- * ----------------------------------------------------------------
+- *  Highest  | 47, 23, 46, 45, 22, 44,
+- *           | 43, 21, 42, 41, 20, 40
+- *           |
+- *           | 11 (0b),  3 (03),  7 (07)
+- *           |  9 (09),  1 (01),  5 (05)
+- *           | 12 (0c)
+- *           | 10 (0a),  2 (02),  6 (06)
+- *           |
+- *           | 39, 19, 38, 37, 18, 36,
+- *  Lowest   | 35, 17, 34, 33, 16, 32
+- * ----------------------------------------------------------------
+- */
+-static const uint8_t default_iprio[64] = {
+-    /* Custom interrupts 48 to 63 */
+-    [63] = IPRIO_MMAXIPRIO,
+-    [62] = IPRIO_MMAXIPRIO,
+-    [61] = IPRIO_MMAXIPRIO,
+-    [60] = IPRIO_MMAXIPRIO,
+-    [59] = IPRIO_MMAXIPRIO,
+-    [58] = IPRIO_MMAXIPRIO,
+-    [57] = IPRIO_MMAXIPRIO,
+-    [56] = IPRIO_MMAXIPRIO,
+-    [55] = IPRIO_MMAXIPRIO,
+-    [54] = IPRIO_MMAXIPRIO,
+-    [53] = IPRIO_MMAXIPRIO,
+-    [52] = IPRIO_MMAXIPRIO,
+-    [51] = IPRIO_MMAXIPRIO,
+-    [50] = IPRIO_MMAXIPRIO,
+-    [49] = IPRIO_MMAXIPRIO,
+-    [48] = IPRIO_MMAXIPRIO,
 -
-+target_ulong riscv_new_csr_seed(target_ulong new_value,
-+                                target_ulong write_mask);
- const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
- 
- const char *priv_spec_to_str(int priv_version);
-diff --git a/target/riscv/csr.h b/target/riscv/csr.h
-index c791260f83..73d874ee98 100644
---- a/target/riscv/csr.h
-+++ b/target/riscv/csr.h
-@@ -12,9 +12,6 @@
- #include "exec/target_long.h"
- #include "cpu_bits.h"
- 
--target_ulong riscv_new_csr_seed(target_ulong new_value,
--                                target_ulong write_mask);
+-    /* Custom interrupts 24 to 31 */
+-    [31] = IPRIO_MMAXIPRIO,
+-    [30] = IPRIO_MMAXIPRIO,
+-    [29] = IPRIO_MMAXIPRIO,
+-    [28] = IPRIO_MMAXIPRIO,
+-    [27] = IPRIO_MMAXIPRIO,
+-    [26] = IPRIO_MMAXIPRIO,
+-    [25] = IPRIO_MMAXIPRIO,
+-    [24] = IPRIO_MMAXIPRIO,
 -
- RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-                           target_ulong *ret_value);
- 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 39d48a9db4..dcdaf7f2b3 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -31,7 +31,6 @@
- #include "system/kvm.h"
- #include "system/kvm_int.h"
- #include "cpu.h"
--#include "target/riscv/csr.h"
- #include "trace.h"
- #include "accel/accel-cpu-target.h"
- #include "hw/pci/pci.h"
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index b460860409..d447204721 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -29,7 +29,6 @@
- #include "exec/icount.h"
- #include "accel/tcg/cpu-loop.h"
- #include "accel/tcg/getpc.h"
--#include "qemu/guest-random.h"
- #include "qapi/error.h"
- #include "tcg/insn-start-words.h"
- #include "internals.h"
-@@ -5577,34 +5576,6 @@ static RISCVException write_mnstatus(CPURISCVState *env, int csrno,
- #endif
- 
- /* Crypto Extension */
--target_ulong riscv_new_csr_seed(target_ulong new_value,
--                                target_ulong write_mask)
+-    [47] = IPRIO_DEFAULT_UPPER,
+-    [23] = IPRIO_DEFAULT_UPPER + 1,
+-    [46] = IPRIO_DEFAULT_UPPER + 2,
+-    [45] = IPRIO_DEFAULT_UPPER + 3,
+-    [22] = IPRIO_DEFAULT_UPPER + 4,
+-    [44] = IPRIO_DEFAULT_UPPER + 5,
+-
+-    [43] = IPRIO_DEFAULT_UPPER + 6,
+-    [21] = IPRIO_DEFAULT_UPPER + 7,
+-    [42] = IPRIO_DEFAULT_UPPER + 8,
+-    [41] = IPRIO_DEFAULT_UPPER + 9,
+-    [20] = IPRIO_DEFAULT_UPPER + 10,
+-    [40] = IPRIO_DEFAULT_UPPER + 11,
+-
+-    [11] = IPRIO_DEFAULT_M,
+-    [3]  = IPRIO_DEFAULT_M + 1,
+-    [7]  = IPRIO_DEFAULT_M + 2,
+-
+-    [9]  = IPRIO_DEFAULT_S,
+-    [1]  = IPRIO_DEFAULT_S + 1,
+-    [5]  = IPRIO_DEFAULT_S + 2,
+-
+-    [12] = IPRIO_DEFAULT_SGEXT,
+-
+-    [10] = IPRIO_DEFAULT_VS,
+-    [2]  = IPRIO_DEFAULT_VS + 1,
+-    [6]  = IPRIO_DEFAULT_VS + 2,
+-
+-    [39] = IPRIO_DEFAULT_LOWER,
+-    [19] = IPRIO_DEFAULT_LOWER + 1,
+-    [38] = IPRIO_DEFAULT_LOWER + 2,
+-    [37] = IPRIO_DEFAULT_LOWER + 3,
+-    [18] = IPRIO_DEFAULT_LOWER + 4,
+-    [36] = IPRIO_DEFAULT_LOWER + 5,
+-
+-    [35] = IPRIO_DEFAULT_LOWER + 6,
+-    [17] = IPRIO_DEFAULT_LOWER + 7,
+-    [34] = IPRIO_DEFAULT_LOWER + 8,
+-    [33] = IPRIO_DEFAULT_LOWER + 9,
+-    [16] = IPRIO_DEFAULT_LOWER + 10,
+-    [32] = IPRIO_DEFAULT_LOWER + 11,
+-};
+-
+-uint8_t riscv_cpu_default_priority(int irq)
 -{
--    uint16_t random_v;
--    Error *random_e = NULL;
--    int random_r;
--    target_ulong rval;
--
--    random_r = qemu_guest_getrandom(&random_v, 2, &random_e);
--    if (unlikely(random_r < 0)) {
--        /*
--         * Failed, for unknown reasons in the crypto subsystem.
--         * The best we can do is log the reason and return a
--         * failure indication to the guest.  There is no reason
--         * we know to expect the failure to be transitory, so
--         * indicate DEAD to avoid having the guest spin on WAIT.
--         */
--        qemu_log_mask(LOG_UNIMP, "%s: Crypto failure: %s",
--                      __func__, error_get_pretty(random_e));
--        error_free(random_e);
--        rval = SEED_OPST_DEAD;
--    } else {
--        rval = random_v | SEED_OPST_ES16;
+-    if (irq < 0 || irq > 63) {
+-        return IPRIO_MMAXIPRIO;
 -    }
 -
--    return rval;
+-    return default_iprio[irq] ? default_iprio[irq] : IPRIO_MMAXIPRIO;
+-};
+-
+-static int riscv_cpu_pending_to_irq(CPURISCVState *env,
+-                                    int extirq, unsigned int extirq_def_prio,
+-                                    uint64_t pending, uint8_t *iprio)
+-{
+-    int irq, best_irq = RISCV_EXCP_NONE;
+-    unsigned int prio, best_prio = UINT_MAX;
+-
+-    if (!pending) {
+-        return RISCV_EXCP_NONE;
+-    }
+-
+-    irq = ctz64(pending);
+-    if (!((extirq == IRQ_M_EXT) ? riscv_cpu_cfg(env)->ext_smaia :
+-                                  riscv_cpu_cfg(env)->ext_ssaia)) {
+-        return irq;
+-    }
+-
+-    pending = pending >> irq;
+-    while (pending) {
+-        prio = iprio[irq];
+-        if (!prio) {
+-            if (irq == extirq) {
+-                prio = extirq_def_prio;
+-            } else {
+-                prio = (riscv_cpu_default_priority(irq) < extirq_def_prio) ?
+-                       1 : IPRIO_MMAXIPRIO;
+-            }
+-        }
+-        if ((pending & 0x1) && (prio <= best_prio)) {
+-            best_irq = irq;
+-            best_prio = prio;
+-        }
+-        irq++;
+-        pending = pending >> 1;
+-    }
+-
+-    return best_irq;
 -}
 -
- static RISCVException rmw_seed(CPURISCVState *env, int csrno,
-                                target_ulong *ret_value,
-                                target_ulong new_value,
+-/*
+- * Doesn't report interrupts inserted using mvip from M-mode firmware or
+- * using hvip bits 13:63 from HS-mode. Those are returned in
+- * riscv_cpu_sirq_pending() and riscv_cpu_vsirq_pending().
+- */
+-uint64_t riscv_cpu_all_pending(CPURISCVState *env)
+-{
+-    uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
+-    uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
+-    uint64_t vstip = (env->vstime_irq) ? MIP_VSTIP : 0;
+-
+-    return (env->mip | vsgein | vstip) & env->mie;
+-}
+-
+-int riscv_cpu_mirq_pending(CPURISCVState *env)
+-{
+-    uint64_t irqs = riscv_cpu_all_pending(env) & ~env->mideleg &
+-                    ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+-
+-    return riscv_cpu_pending_to_irq(env, IRQ_M_EXT, IPRIO_DEFAULT_M,
+-                                    irqs, env->miprio);
+-}
+-
+-int riscv_cpu_sirq_pending(CPURISCVState *env)
+-{
+-    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg & ~env->hideleg;
+-    uint64_t irqs_f = env->mvip & env->mvien & ~env->mideleg & env->sie;
+-
+-    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
+-                                    irqs | irqs_f, env->siprio);
+-}
+-
+-int riscv_cpu_vsirq_pending(CPURISCVState *env)
+-{
+-    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg & env->hideleg;
+-    uint64_t irqs_f_vs = env->hvip & env->hvien & ~env->hideleg & env->vsie;
+-    uint64_t vsbits;
+-
+-    /* Bring VS-level bits to correct position */
+-    vsbits = irqs & VS_MODE_INTERRUPTS;
+-    irqs &= ~VS_MODE_INTERRUPTS;
+-    irqs |= vsbits >> 1;
+-
+-    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
+-                                    (irqs | irqs_f_vs), env->hviprio);
+-}
+-
+ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+ {
+     uint64_t irqs, pending, mie, hsie, vsie, irqs_f, irqs_f_vs;
 -- 
 2.43.0
 
