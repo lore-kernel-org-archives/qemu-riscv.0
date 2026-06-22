@@ -4,148 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6690CDB46F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jun 2026 13:39:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC4DBCD98F2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 Jun 2026 16:32:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wbesJ-0006tX-2I; Mon, 22 Jun 2026 09:39:43 -0400
+	id 1wbhZo-0000cI-La; Mon, 22 Jun 2026 12:32:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wbesD-0006sW-0d
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 09:39:37 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wbhZm-0000bT-BP
+ for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 12:32:46 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wbesA-0001kH-22
- for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 09:39:36 -0400
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wbhZk-0000vy-9H
+ for qemu-riscv@nongnu.org; Mon, 22 Jun 2026 12:32:45 -0400
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65MDG6p31338365
- for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 13:39:31 GMT
+ 65MFXFxx1675326
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 16:32:41 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ftUD0ywO6GZfk9QBb/TgWrHziVNm8tIhNJIJNDciOIw=; b=n9Pljepu+vlm9FDK
- FXliGa0V/7nA0SwEtfRH+hzDbZRX49b5zTSVVVA7j8JD9jHGKVma+bvZS5d/HmyC
- gXc8hOFSye4HGz5fKu2X7d6hyrAs+M6yId7ig9pgeWLiVa/Hs9OqdbcDrNBfSyJf
- IMP1PoGc1D15HBJgOGaH2opIcyvVnhVk+N/be3W5lnsIi4B1+ezEMloYPh2RBxYp
- /cuqHBdOgttQecDQY3oUxDsgiAvXDFjopWLiywPWgYsUmsjxojlAziDN6P2APUmz
- 1JkThXKD0cBJbMwMcRJaho2/LOi7Q79YJz7MwaqS2DvS7IiE6oMcVu2kniRS2Syd
- lSjbsA==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ey37h8n4r-1
+ nRu4ta2kbnBOzeWFGWpWS2lhAoFs/peHy0ujPNwM6Ro=; b=oddR2rxmY33SVvt/
+ GbMJqvw50Uv45XmDqzLHcS45b0w72VM7LzTSpGi77pykEEvNVTjlRffPQx0mGGb5
+ BENkByWM8Viheta6iVMUuU0NvDE+UmOfitnxCwHuCoVtz4iseSwwMUciN0NrHzZW
+ AdBBiG7kzD9KplgGgOf6q3G8BB1KAFl2pEJ/SloL81KC+yooRarUV8qNKUwtehUM
+ hOPU7q6BYXPTZbe0gHFBXrvT/55+AwGfVOPFjx84abIW96FVGYssI7jnB//kZDd/
+ ZnKDrzCRBSi2zXuMfgYDAm/dXRlLckSJRUx6djEv2+rwaAt+Q7VZqKaD7D375lTu
+ sSCJbg==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com
+ [209.85.217.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ey6tmrhaq-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 13:39:31 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-922ff615c39so438064785a.0
- for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 06:39:31 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 16:32:41 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id
+ ada2fe7eead31-6751c50552dso3024921137.2
+ for <qemu-riscv@nongnu.org>; Mon, 22 Jun 2026 09:32:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782135570; x=1782740370; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=oss.qualcomm.com; s=google; t=1782145961; x=1782750761; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ftUD0ywO6GZfk9QBb/TgWrHziVNm8tIhNJIJNDciOIw=;
- b=EuUPJbfytZZQLMwSTmUhblorIkM13kKWydu8H6zRjfd40+hxt/WV32kubKC8WlVt7z
- FhOKuQBgqvG/77QD8bVX2oIxJpfQckFSsP6PAXL9ueLLeWOfq2LtByCWrSDVQ7vyVXe2
- gFAyjUpq414hxzWSsfI7524g8OnIttB/Ba/8YEVDZELL/yyZDXEDybvFL+73GfYI+s23
- 794+vkAPhqhFQPImY2+Q+XgW7OdTHCMHN8q/ZD2nA68a/fjAUygm9ETffzoAuel6fOU2
- qaeqJYWubxsBzwVO+9davsVjc1vccma35OHnCvY5+A7H3jaOrl0VSoyMMDLpkKTFIRIf
- M60w==
+ bh=nRu4ta2kbnBOzeWFGWpWS2lhAoFs/peHy0ujPNwM6Ro=;
+ b=JNgcj1xBsH9xZPLyrJWM2rGMHQ7qhjlJxwnaQ90VjT5xibzNp7IuPhZbXlqA5Pz7ap
+ 4iK9PBsp7u7WfI/OT3fml1wCDU4Z/BjtiKg7mwI4g7lcjIRP7iP60DjVGoco18ZuC1UG
+ /JQDOSmes1PjbNE4FUFAOxapZAczeg+9rXVuHHqfG+/U2qaOFkgdf11oAWVu2GEDK/nS
+ hqCnzC5LTEr+MHTryrVdsKYRQNwHoxypeaqZRW+dtZm0utp1NPPScpnZPCKpfZBbuLfJ
+ O7pRcdVLejmdkJHIH/YDIchaoEv57vD5a9j4GET6D//eMg+ouCVHDqgSqmRHefT9zYSX
+ O5Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782135570; x=1782740370;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20251104; t=1782145961; x=1782750761;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ftUD0ywO6GZfk9QBb/TgWrHziVNm8tIhNJIJNDciOIw=;
- b=G718fCwIW1aXtMQqSJ7G9ypuBtelPtfnevYETFrOizHSa0H1s4YnUfX5bvvUeMYZrj
- CKdjXdEOqhdQOsSs/P61wSHH2qA4gGFGfXaFRFRZUxCkjnybNPrcap2Om3KeHBzL6LTk
- sydJbemMpvIQi/lG/qBeJBGHvAWKgpOgX0sZzJ3oEo4Hnh/hVZ8YF4eXhd/mJs9Ro/+H
- O0DqNnFiyNv86SLnnjz48yLgi1WU15M8gG9yErUBju+wNrxKc5H6JNZXBY/mwvT/K+bx
- lN4kejWbOrvhH0PRtLn/cUkOkWDoO3FWC6w98U0YuSSsjSoosIimOR5soXGQ4k0EVFCb
- e3nA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/Q5XsZuo20OA00EGUwBsEAuJs1t3ZWaPgSpu6bNEnAiEwNw76U8p4SMYreTZEpkGMxgq5Hso6b3qkH@nongnu.org
-X-Gm-Message-State: AOJu0YyUNqSICpEnknQACZzOcfu4irznS938NCtcj8RRWeIOq8/SkqeW
- VaAa+17oe18k4cKHsRHLRMdsTu7its4Xgplz1mMDQv2EOdWZH+AdlwyIB+QwL4z8NNUSuexup1a
- yylzmrq1jvonQUyBzPZaGemJWWhO7TwVzXmGFxgBzkjkS3dViumhfMhIrFA==
-X-Gm-Gg: AfdE7ckhPFqBaBeC0UvSgfQ4nF85RFqPyMG57MzzhA0oUHYbBmnOgHuFfNPC6eDK2NX
- JpfcTFUBd/YRYaJReT/9RLl4TR0oN+2wXjuWlbcx1YNh9R6GR50oeSYtPYFcn6CVU57RsncwymS
- XNNcHvgodKo1mRao7cadhDNK27BxHsUarOYL+Dq5rjPXfBkBBw4g1f9YcGOfg+VQAxBz5xqEDeX
- te3VStGzbxIa9loFtuP93JbHjrwE5dq0ydXkV723QFirgWbswWQikPhoPYUAsmP6czhtvbWFivF
- q71zJiFZRIahBd0PJPMiqa6N9mNYg8rVjP0Gly1LjnfruVDtu/yne3eEcGYUWS4VfLlxpspKFt9
- 2X18qoHGSheHsZc5gjXj8b1czIgkYlvkQM/P/b+Bfc4rZVhQxSiZCxg1QEflCKg==
-X-Received: by 2002:a05:620a:2b4c:b0:914:e9eb:573e with SMTP id
- af79cd13be357-9208718fbd2mr1757503785a.0.1782135570412; 
- Mon, 22 Jun 2026 06:39:30 -0700 (PDT)
-X-Received: by 2002:a05:620a:2b4c:b0:914:e9eb:573e with SMTP id
- af79cd13be357-9208718fbd2mr1757499785a.0.1782135569877; 
- Mon, 22 Jun 2026 06:39:29 -0700 (PDT)
-Received: from [192.168.69.212] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c0c60ac7c1bsm360175366b.33.2026.06.22.06.39.28
+ bh=nRu4ta2kbnBOzeWFGWpWS2lhAoFs/peHy0ujPNwM6Ro=;
+ b=ZPHZyRWrev5KALRFHMwqjDCn5PS+0AInY33alKj3ZPsrWu+Au+wqsQ1oYuQ933t2Tj
+ RboiNndf377v4mJlNS4gFLHsaTL3pZMQJkmG1N6KSrwH+NKQe+IqLiLy/ufbJuIvNlt6
+ HIpd1PswbDYCUZ1Yx78mPVYhXuNuLL30IiLUKVvTmEQNQDlGNOYhciyu86WEMm1mZ/NL
+ 06Xl8HFUbpyN+98BKZj67arAoD2VC+w7LvxJW7ZfD7pEENa42DMGixYMRyVHFkG/s8eG
+ k8r8EXcfEmaZyRzLlGDHUs/IXSA5IKZiMcL1GZIO3r3d6/0c5yipsmQffHohfnXnEuW3
+ 74dQ==
+X-Gm-Message-State: AOJu0YzZh8XxFsRcl5LpHvea1BYMexBd70dKtqzYwQbIfTfWipN4CuOo
+ pktnwBKzoptgR85vS230UIO2jtmZ1tT7AKuaW+uXYocHgzn6zX2lSwXbhMoGbP8oHFgNmTzY9to
+ 2vCPeS+UDX/0ZgLzuHnJogC2bgJfYb5bXS8cqsoOAKD0u89pahrreu3UIdg==
+X-Gm-Gg: AfdE7cnH8qEBDBpg/5GlCdVCN7gI6h/F9a9SX6+u1AZEr7DlI0NOucrBu+Yhoa/rPzw
+ EU+fSSTYc+MnhZKOWMxXEdytkL8ItJ4LfTOJj3cd/mOncQMB+QJg/IQmTWz9NFbQw/aU+1Ta7Cd
+ m7LiQeogn730FfclZdUSj5hsFDQYjoKTk95Ca8b2ztFjR3f6T4t1r2ycrQ1j+ri0NbJzi6ceA0B
+ GLMZag553GOVB/RX8GKf6KBpbf80FlGSJX1bbweC43vD7l61isrQ4XFkVB/c9JINLnRI4w7PBwV
+ lvu+rVsg+675MD8AIlvYyPrXYJac3Jqj4K6orZSKAVDAhsNWvs6IwNiZBK7rxlIywMD+eoOikl4
+ OYHGcHlQ3Vo3G8l+UUdi2XOL2G+/0IYtbDnJNgdst6lII
+X-Received: by 2002:a05:6102:568d:b0:650:a5d1:ee1d with SMTP id
+ ada2fe7eead31-72b65088a76mr6166915137.10.1782145960774; 
+ Mon, 22 Jun 2026 09:32:40 -0700 (PDT)
+X-Received: by 2002:a05:6102:568d:b0:650:a5d1:ee1d with SMTP id
+ ada2fe7eead31-72b65088a76mr6166835137.10.1782145960182; 
+ Mon, 22 Jun 2026 09:32:40 -0700 (PDT)
+Received: from [192.168.68.106] ([189.79.21.40])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-51a51a9c533sm1457481cf.14.2026.06.22.09.32.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jun 2026 06:39:29 -0700 (PDT)
-Message-ID: <03156de5-9081-4b32-93ea-eaf363acf8ab@oss.qualcomm.com>
-Date: Mon, 22 Jun 2026 15:39:28 +0200
+ Mon, 22 Jun 2026 09:32:39 -0700 (PDT)
+Message-ID: <b69f982f-0af5-40af-b26c-2ac8e541db32@oss.qualcomm.com>
+Date: Mon, 22 Jun 2026 13:32:35 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] target/riscv: raise access fault for Zicbom MMIO-like
- accesses
+Subject: Re: [PATCH v3 0/6] target/riscv: Fix no-TCG build
+To: Zephyr Li <fritchleybohrer@gmail.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu.zevorn@gmail.com, alex.bennee@linaro.org,
+ pierrick.bouvier@oss.qualcomm.com, philmd@oss.qualcomm.com
+References: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>,
- ZhengXiang Qin <qinzhengxiang@foxmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <tencent_CA380CBF4A98C990C07BC04A9E748C438309@qq.com>
- <CAKmqyKN09Ut3BAnUpF4Fen=DzMcT=sNpGjTHa8yPeu58H5EpDg@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <CAKmqyKN09Ut3BAnUpF4Fen=DzMcT=sNpGjTHa8yPeu58H5EpDg@mail.gmail.com>
+In-Reply-To: <20260602091753.3209261-1-fritchleybohrer@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: d0VjydHYs73bEm-t5PIDYlM1yAOM_Hyv
-X-Authority-Analysis: v=2.4 cv=ecANubEH c=1 sm=1 tr=0 ts=6a393b13 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=p0WdMEafAAAA:8 a=bDN84i_9AAAA:8 a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8
- a=PpR6-8FN4503qITb6qEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22 a=J2PsDwZO0S0EpbpLmD-j:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIyMDEzNSBTYWx0ZWRfXyJcKPmaTceKH
- WBFvB35LQaDyGDXA2sfVNwWcMEneApAj9wjspheiCFBpTAReMm5Poxtq5ILAoYg7ZolFNKPn2ai
- R8wjBXIbFqMQ5GVXtW/qpjyI2hSYrcs=
-X-Proofpoint-GUID: d0VjydHYs73bEm-t5PIDYlM1yAOM_Hyv
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIyMDEzNSBTYWx0ZWRfX4CyZOal3GQPX
- p2Ccl9/8zNz5NVejb8I8pIG8DEbF3T4n0dijZy6Xiy3IbEkewl3zr2PKaA5KIKB9M7MdvB7dk4w
- 4FgdcQq+i2iIXTw/W1QZ8cQLNDLA0Ag27DyPLJY+fkMfHFF03w0s926cbBTNT06GTxGT870qK7Y
- CJe+S2awZGHpbQZ9rKo3txZieO4WczOMu+6GERAVLh5OdCJv2Xnc6mMYgXRqZktgnJqbxWaES2e
- 0pYqGY1TTFHh4vYglG+HHXEkQ7QVtmUm9GPLM0jseyk+OrESFu4jkP7cdi1tKl65Q/sNc19xxQi
- EOC5OGHei3x5P4V3E/ShPV+3agct7F4JCkif73b+0wbAwaKt1PbPNwMYjcxF3qpTgljM3UGJ+az
- VoqExFMYNYd+levay8CbEm6bwVYM+9wqlLNLSeqkYtphFdNwr6A1yZr1GSjNyWZgum4lHeQI6W1
- A06k8KpVXdMUwTfS8dw==
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIyMDE2MSBTYWx0ZWRfX/BIsB1ufUvs9
+ c6+mDOdpL4x4mtaPI+Q7GL/bJesHhEbR+0oZaDLEnZiB0KAL3By1BZoPU/JfXkkkPn0VTZjb947
+ TMY32lUN7i2bbMpXv3iELgUViwIjhio=
+X-Proofpoint-GUID: jcpQ2BiJM4autIAj_mXkUUxF9i_HuHau
+X-Proofpoint-ORIG-GUID: jcpQ2BiJM4autIAj_mXkUUxF9i_HuHau
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIyMDE2MSBTYWx0ZWRfX5Q3BREaaDdbu
+ ga6MS7YXPVc24F2iA+zdYDR1sfAfkzUtDmDn7IY1WFekj1/nho+KL2o/GGP5l4CfjjNca6xaRCX
+ oJvaKxHmZ5q/zf3MRnXxJZlP444VA9YxMNEnvojB5cTVlWyesy0uTOMDescDKrt3brTeJ+BspaL
+ thGUNBTzE9PDnAYVllgL64uHf4wLoFeNGDIZdnTiWyKamgVMZrRTJ++gDlsNIQohy3KUeSqRYcg
+ /hjl1ii7mS9dlxVzsNKKjRuCSCXt4HDqHPYYO0XttsjmTHCSHzvAF4J4zeUAVBnQOkeiceoR6I0
+ Gd7sR+QK3BsP3TrHcsD6MOW9Shqe/KebK+PuoSc3kXs7TYoG3g2y9iU0O98hVUMNwS/GpncyQYz
+ yJUsIOGbhpS5A2csfrCL0Pr0Eu/4UiXWhSKRHnSu95n8pBPGtYAVPelHeHSFKmvHB0qnf1fSud6
+ qDbxmI3Iz3p2OiSUfRQ==
+X-Authority-Analysis: v=2.4 cv=H4HrBeYi c=1 sm=1 tr=0 ts=6a3963a9 cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=hZQ7wMXsWLzBu-v2IBsA:9 a=QEXdDO2ut3YA:10
+ a=-aSRE8QhW-JAV6biHavz:22 a=cvBusfyB2V15izCimMoJ:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-22_02,2026-06-22_01,2025-10-01_01
+ definitions=2026-06-22_03,2026-06-22_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 priorityscore=1501 clxscore=1015 spamscore=0
- suspectscore=0 impostorscore=0 adultscore=0 malwarescore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606220135
+ spamscore=0 suspectscore=0 clxscore=1015 phishscore=0 bulkscore=0
+ priorityscore=1501 impostorscore=0 adultscore=0 malwarescore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2606220161
 Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -161,89 +155,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Alistair,
+Hi Zephyr,
 
-On 22/6/26 05:03, Alistair Francis wrote:
-> On Sun, Jun 21, 2026 at 10:48 PM ZhengXiang Qin
-> <qinzhengxiang@foxmail.com> wrote:
->>
->> check_zicbom_access() currently treats any probe_access_flags() result
->> other than TLB_INVALID_MASK as a successful access. However, a result
->> with TLB_MMIO means that the target is MMIO-like and should not be
->> treated as a normal cache block management target.
->>
->> Raise a store/AMO access fault for Zicbom accesses to MMIO-like regions
->> so that cbo.clean, cbo.flush and cbo.inval do not silently succeed on
->> non-cacheable/MMIO-like memory.
->>
->> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/3501
->> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->> Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
->> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
->> Signed-off-by: ZhengXiang Qin <qinzhengxiang@foxmail.com>
-> 
-> Thanks!
-> 
-> Applied to riscv-to-apply.next
-> 
-> Alistair
-> 
->> ---
->> Changes since v2:
->> - Add else before the success path for readability.
->> - Keep fault_addr as target_ulong since CPURISCVState::badaddr is target_ulong.
 
-This is not true, the fields is uint64_t since this commit:
+Sorry to take this long to take a look at this work.  I did it last Thursday.
+The overall idea is correct: we need to remove TCG exclusive bits out of the
+way of the KVM build.  Our current code layout is awful for it though, and
+this is the root cause that needs addressing.
 
-  commit f2287c7020f36e2f13622d9635a968d6f6fb507d
-  Author: Anton Johansson <anjo@rev.ng>
-  Date:   Wed May 20 14:53:43 2026 +0200
+We have too much stuff at the target/riscv dir which is supposed to be code
+that is accel agnostic, and unfortunately this led you to wrong conclusions.
+For example, in patch 1, where you're moving validation code to from tcg-cpu.c
+a cpu-validate.c common file.  KVM doesn't care about any of that - KVM
+validation is done at init time by the kernel module. It doesn't care about
+riscv_cpu_validate_set_extensions() and any of that.
 
-      target/riscv: Fix size of badaddr and bins
+For the record we had a series in 2023 that tried to fix --disable-tcg:
 
-Could you update the commit, or ask the contributor to repost,
-or clean on top, please?
+https://lore.kernel.org/qemu-devel/20230711121453.59138-1-philmd@linaro.org/
+
+but at that time we had other stuff going in parallel and the series eventually
+stopped applying and that was that.  Which is a shame because that series was
+closer to what we need, but I won't ask Phil to re-send that again because it's
+a rather unpleasant rebase.
+
+
+Unfortunately I don't see a sane way forward aside from doing the grunt and
+gruesome work first, i.e. putting TCG specific files in the TCG dir, like x86
+and loongarch is doing, then go through each problem that --disable-tcg points
+out, fix it, and do that over and over until we have a working build.  And
+there's a high chance that we might break some unintended stuff in the KVM
+driver regardless.
+
+
+I'll send such a series later today.  I ended up using 2 patches from your
+series (patch 1 from v2 and patch 6 from v3).  Hopefully we'll be able to
+put this --disable-tcg business to rest.
+
 
 Thanks,
+Daniel
 
-Phil.
 
->> - Add Philippe's Reviewed-by tag.
->>
->> Changes since v1:
->> - Use a bit test for TLB_MMIO since probe_access_flags() returns a bitmask.
->> - Keep Reviewed-by tags from v1.
->>
->>   target/riscv/op_helper.c | 6 +++++-
->>   1 file changed, 5 insertions(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
->> index 81873014cb..50fd1b73ea 100644
->> --- a/target/riscv/op_helper.c
->> +++ b/target/riscv/op_helper.c
->> @@ -218,6 +218,7 @@ static void check_zicbom_access(CPURISCVState *env,
->>       void *phost;
->>       int ret;
->>
->> +    target_ulong fault_addr = address;
->>       /* Mask off low-bits to align-down to the cache-block. */
->>       address &= ~(cbomlen - 1);
->>
->> @@ -235,7 +236,10 @@ static void check_zicbom_access(CPURISCVState *env,
->>        */
->>       ret = probe_access_flags(env, address, cbomlen, MMU_DATA_LOAD,
->>                                mmu_idx, true, &phost, ra);
->> -    if (ret != TLB_INVALID_MASK) {
->> +    if (ret & TLB_MMIO) {
->> +        env->badaddr = fault_addr;
->> +        riscv_raise_exception(env, RISCV_EXCP_STORE_AMO_ACCESS_FAULT, ra);
->> +    } else if (ret != TLB_INVALID_MASK) {
->>           /* Success: readable */
->>           return;
->>       }
->> --
->> 2.43.0
->>
->>
+On 6/2/2026 6:17 AM, Zephyr Li wrote:
+> This series fixes the riscv64-softmmu --disable-tcg build by keeping
+> TCG-only code out of no-TCG builds while preserving common RISC-V CPU
+> helpers for non-TCG configurations.
+> 
+> Compared with v2, this version replaces the no-TCG stub for
+> riscv_cpu_validate_set_extensions() with a common cpu-validate.c split.
+> The validator is used by common CSR code and should not live in TCG-only
+> code.
+> 
+> Changes in v3:
+> - Replace the no-TCG stub with a new cpu-validate.c common source file.
+> - Move common RISC-V extension validation and user-option tracking out of
+>    target/riscv/tcg/tcg-cpu.c.
+> - Move fflags and exception helpers out of TCG-only helper files.
+> - Reject x-misa-w outside TCG.
+> - Build RISC-V TCG-only sources only when CONFIG_TCG is enabled.
+> - Add GitLab CI coverage for riscv64 KVM-only --disable-tcg builds.
+> 
+> Testing:
+> - ../configure --target-list=riscv64-softmmu --enable-kvm --disable-tcg \
+>        --enable-debug
+>    ninja
+> 
+> - ../configure --target-list=riscv64-softmmu,riscv64-linux-user \
+>        --enable-debug
+>    ninja
+> 
+> - In the no-TCG build:
+>    qemu-system-riscv64 -M virt,accel=qtest -cpu rv64,x-misa-w=true \
+>        -nographic -S
+>    reports "x-misa-w requires TCG".
+> 
+> - In the TCG build:
+>    qemu-system-riscv64 -M virt -accel tcg -cpu rv64,x-misa-w=true \
+>        -nographic -S
+>    starts without reporting "x-misa-w requires TCG".
+> 
+> Zephyr Li (6):
+>    target/riscv: move extension validation out of TCG-only code
+>    target/riscv: move fflags helpers to common code
+>    target/riscv: move riscv_raise_exception() out of op_helper.c
+>    target/riscv: reject x-misa-w outside TCG
+>    target/riscv: build TCG-only sources only with TCG
+>    gitlab-ci.d/crossbuilds: add riscv64 KVM-only build job
+> 
+>   .gitlab-ci.d/crossbuilds.yml |   8 +
+>   target/riscv/cpu-validate.c  | 630 ++++++++++++++++++++++++++++++++++
+>   target/riscv/cpu.c           |  13 +-
+>   target/riscv/cpu.h           |   7 -
+>   target/riscv/cpu_helper.c    |  53 +++
+>   target/riscv/csr.c           |  12 +-
+>   target/riscv/debug.c         |   1 +
+>   target/riscv/fpu_helper.c    |  27 --
+>   target/riscv/internals.h     |  26 ++
+>   target/riscv/meson.build     |  10 +-
+>   target/riscv/op_helper.c     |  15 -
+>   target/riscv/tcg/tcg-cpu.c   | 637 ++---------------------------------
+>   target/riscv/tcg/tcg-cpu.h   |   1 -
+>   target/riscv/zce_helper.c    |   1 +
+>   14 files changed, 769 insertions(+), 672 deletions(-)
+>   create mode 100644 target/riscv/cpu-validate.c
+> 
+> 
+> base-commit: 5611a9268dae7b7ff99d478ed134052a9fc7e9f7
 
 
