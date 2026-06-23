@@ -4,151 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2023CCDB46F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jun 2026 16:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 393C2CD98F2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 Jun 2026 17:25:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wc3hc-0000yE-Nv; Tue, 23 Jun 2026 12:10:20 -0400
+	id 1wc4sL-0001ey-9Z; Tue, 23 Jun 2026 13:25:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1wc3hb-0000xm-5h
- for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 12:10:19 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wc4s7-0001S6-Ls
+ for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 13:25:18 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1wc3hX-0001cn-Ne
- for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 12:10:18 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wc4s5-0006m1-FV
+ for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 13:25:14 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65NBXbPl1155214
- for <qemu-riscv@nongnu.org>; Tue, 23 Jun 2026 16:10:12 GMT
+ 65NBZLg34017177
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jun 2026 17:25:11 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Nn68GzsSOPTN4V54dVGdEL6Il1YL42paCKU0WkAvG3o=; b=cjOigWNm6r5CFP8K
- Z3yE2KPZaImFdN8VAo/5lQPG5F7KN9JcI9zIYLwRgA4GhVHtn8M8MdF9328jPyTV
- HHOCoQJXhE1saoBR/Us0TpBP3OH/bEqUn/yJPkB7WAAfQtlcqOlD+V/3ZMSyOd7y
- U2Ry+5FRk2IfOe/cWnu9NPTFLXBLTkVADQosNW6LifiE6KIJDspiyUjbgCjIn7sg
- ZD0+1d2OO6uWMwMdbhif798ccyd5yQO8KZ2fJU5zUPwi/+IKe7LX24DdDVidLzIJ
- jKOnM2dES0guDJE9GntLQ+a6y3Ev6THsageo99rcc0goSQWnd7xlIY5Y3SU76aPD
- yFygnQ==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
- [74.125.82.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eyr28sgah-1
+ iw4cvxAF2r/b9VCDa1DZOKr3eOO4ZI2d1SoOoNYW2Q4=; b=LD8J9n8Elj3X9f1k
+ uEqCnlnYVnFKcCMuDk9IljvRmHDg6VJzQWF0Ks9i+j+KimFGE63zd+oIO37IWm7T
+ J20u5JOABzhPQB59P8heyfd2ptHcG5deBP2QS2NmbVDDh7hW9sGmxqI24qH6jEUP
+ s5M//x8I6J/VprAYhIxZ8nLIa5sJKEDSGaMNUKwbKHibxQHw6ezFXNPLM0reC+83
+ qG7mJUpZfBR/nDqIowo13y0vIsv3YjOHIzt0dXGuHR7itsRSVIy/DPmr3ViopSw2
+ b1JAB6M8H/zMZSO3V0WlMisd7flHRIIREkNS48JkFoyct1KW6e7GRTYipTxmBpdk
+ YSjfjw==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eygkjkjem-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 23 Jun 2026 16:10:12 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id
- 5a478bee46e88-30ba395b047so6157232eec.0
- for <qemu-riscv@nongnu.org>; Tue, 23 Jun 2026 09:10:12 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jun 2026 17:25:11 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-91931144870so4461685a.1
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jun 2026 10:25:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782231012; x=1782835812; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1782235511; x=1782840311; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Nn68GzsSOPTN4V54dVGdEL6Il1YL42paCKU0WkAvG3o=;
- b=eKtr7dg7sym+PAAlLiUGuFUy6dgaxbG9HdnEABxwzYpO69vgV5cIqgH4prS6C+LrvR
- UBGlBtmRiMHE3prB4naCYjb0t/4UDzuypDa+3J9TLbYo12O+MWLB55zGw/B+6vscOjSR
- 7X/2AI1ZX870rSKwJ2UQddOiDbf2azJAOPZigqRTdqYLhu40xQP1cuLU+AfBJ1FKdfMp
- mqbnggcSeunah5OtbTMVzrHF//4yoX87n/qcOW7GSAJAA4Ybk940hMZ6CmLMGprJsW9T
- Pin612fnMGlVTXoogJ/1vaJqpSbTacQIUxhAHQaVq3EUu8EiOV4Z8U3idVkwbxjLwl0B
- JdiQ==
+ bh=iw4cvxAF2r/b9VCDa1DZOKr3eOO4ZI2d1SoOoNYW2Q4=;
+ b=T8ylQvhA4sbFbmiE+lq5O0oHWAJMZuik+KMeTNQdpN3k7TcNgHlhHxVBJ3VJBI213h
+ GJ7v8vjMej6HqW25kUe8OgANQePhZ1uuyefOmOwjV3mRgxpVyieJ1NfTWeh9kHsEDmzS
+ DimjVg/pioum6AEEmaHX4FcMfAe8zyPj/2tVbKOSks3V540DKNhj4TIglDfl8EQG2r9B
+ jNHG+Yb3lrjIMjGzijVaRGQsdsKpdvuPInAQY5/HRKVlZ/BW6dK2dDEMXe/DmZ2SCF98
+ GQvDvsT8jtukpMYwrVEQK7L4+w/y/DXJreN5pYIcMzDDwkR4lYQwG9DgVQfpBN8PGq2q
+ OLDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782231012; x=1782835812;
+ d=1e100.net; s=20251104; t=1782235511; x=1782840311;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Nn68GzsSOPTN4V54dVGdEL6Il1YL42paCKU0WkAvG3o=;
- b=FdDKI30gLde1ZWxhEQhyAflCYxPZE+deciBbBroD3txzLol+y7h+7ppYuPYXtyFeVA
- CWnsAKM3rVzHToG0K7/XGa7+YrSDMxw9VMOYc7RKkPAMv9VLIYMBCd0jRhTd4HzOlBjk
- bPTqSkCs7DkesxCLYIekZ7DznLJilfkz0V2JFp0wX9amBeodx+QhqEZRO1DZCtcWYcXu
- JFJo9lSOASxVlqWut1nC3DMnAH9tHTx1FQJa9cvAQLT0YTSqbkH9fQecY+JVOFsNekxG
- VileT75+k+A0k+aBaVB7xi/4SlOKdQSGZbmuGyppskTJPPMUOu0HnxfmHcyZ+vw53k7y
- iZwg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrJBbZgq9qCK1IVPc+LFXgAv9WXXVI0DyiZXJ5Qm54SR864c6F1vcdHtUXrvxA208MEUNnREK+ZrWo6@nongnu.org
-X-Gm-Message-State: AOJu0YxVcRPkM9tfjp5Glw47vyZtaEzt1bhjIxJ6P65VW4Yxkl//zCd1
- UBkS5wXcIxExfJHW0s0RUlQwSUxuEy22QPBS2vLagSuafbzBREoi7r2xxrDT6E56rEtbynmJdsJ
- t90EAnbsH9FkubbprIG0D0+HBcYWvLQyjcfEtjH7DNvLzyOFafmMMb+nobQ==
-X-Gm-Gg: AfdE7cnRDFZgV9waTbGB8kV9VI5ME765ySIn0ou8rNlP0J5orZ0F8PcBmEKTnOMu40s
- /qY+gLKlwlAA/Bmhv2PL5DJ+Eo4J/t7mq33r43dxJBKre08o7BNoUFJNvHV8CJ+iKVclcyyrYSy
- I/rUywter5qDOKw8u34NRFbMXEaKpNlCWmEemvgm//qC3gMBQkf1G6NysahmKQeUIEPFSGIitVo
- R9Wd53roZh5PFdyMnPQFOlhxqzfeKOIMso+wr3lhmCZTlED6SbIPsJZ7vlt3Kd4c1/9CwtiYLvO
- 2Vt7FDbU4ZRgDiikaAOI1RLnjI/AY83L5/VKco9EEOqtZBK/FT+qKfJYLOC6E5FdaCaiIhWockW
- fHDrhxZyE8MD3iYXG945YAtzZwOWJE+O1ZBEcM5VeXg5a0sRTvx+noMvVrBjEDwBZ7PdTNSzXfC
- UPtGI=
-X-Received: by 2002:a05:7301:9f0f:b0:30c:5534:e6f1 with SMTP id
- 5a478bee46e88-30c5b962df4mr2726551eec.29.1782231011558; 
- Tue, 23 Jun 2026 09:10:11 -0700 (PDT)
-X-Received: by 2002:a05:7301:9f0f:b0:30c:5534:e6f1 with SMTP id
- 5a478bee46e88-30c5b962df4mr2726511eec.29.1782231010980; 
- Tue, 23 Jun 2026 09:10:10 -0700 (PDT)
-Received: from [192.168.1.170] (216-71-219-44.dyn.novuscom.net.
- [216.71.219.44]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c1bd8d779sm17030447eec.17.2026.06.23.09.10.08
+ bh=iw4cvxAF2r/b9VCDa1DZOKr3eOO4ZI2d1SoOoNYW2Q4=;
+ b=agDQsqLGbW9YWJs/BZ31npDXr/k/elhUvr5vCZWHPNUwhZmxKy94Sddy3H5llrQnRf
+ PHoxdUXeY/LF4SFKHLrI+32fOVnLaJzack/IsxmU3oDkiT/JgXwbe1QNBpHJkvpvLsN1
+ 5FjzBH2B7GK0sCgNktejzPXn3qItujeP8bdeDRxoMONZemWZ/zhWmDWA2YMlrYwGhrms
+ tzR9QnW2iToIygctlHG4Gf7bYUlX5De3byDs+j4MP060IRGD4YFg9sK+5dQqXknLMf1K
+ WET5xxR6L95/UN/OUxSH2j1R7Ezw6h8ygWMZ3NEhc5b7IZqar0jo9x/0Am1EFjV6d3ko
+ MUjw==
+X-Gm-Message-State: AOJu0YzxZfCMEpUTL528qS+iAcTfDTpQJtGB8FBgr0yuvjtIOZ8hoVgy
+ G8EWhungwa3PEx0WFb9wjvGOsjW76tHpSn/+lv82qJqzmZGqLJw0mvhUNJNCrVniuXf4TY/EPF9
+ e9zJw1IDaedd9U5j082v/+SRpAlQmN9rLvaj7cH1KFbVCiZ3y8b3IFAMumQ==
+X-Gm-Gg: AfdE7cln7NYflj6NrXtzciA7X8gmJqnwE7geh1v6zBjlFT/2XgC/ClNZDPOiTvMCCYs
+ aEOqdaNHMhw5rB+CIwFvzYhXYTZSzjXpVEmnbiNskqnXjTVEd6Yho9j4+rlwAPaOTQIH+NAt9Ou
+ GVi+aIvf6jfaAuRPKlBjOdr6pVSgmpxRCASVcbuHRlVb5UVOuyasV49fTiAFI9xQdybvXTfS/Ab
+ o0IYJPrIJZvveuNEHM85H8TSK1d736q3tjVm+iqgeQHUz/toxRFP2ujO+BlZS0pwIoJieDCzDkC
+ tkvgyh07W+LqtYirC63QdxYo5/osohSuF5krhfwQ+peuY9Y4YkcNd4VgyK+EJu9Drb1lyozCwtZ
+ NPkr0c87xkxwLFVDHDh5TQejXSZTO9HYZQxbAFs7pd5x+
+X-Received: by 2002:a05:620a:444d:b0:915:8594:68e8 with SMTP id
+ af79cd13be357-92647817629mr663778585a.56.1782235510824; 
+ Tue, 23 Jun 2026 10:25:10 -0700 (PDT)
+X-Received: by 2002:a05:620a:444d:b0:915:8594:68e8 with SMTP id
+ af79cd13be357-92647817629mr663700185a.56.1782235505578; 
+ Tue, 23 Jun 2026 10:25:05 -0700 (PDT)
+Received: from [192.168.68.103] ([189.79.21.40])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-925fda62183sm330640385a.13.2026.06.23.10.25.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 23 Jun 2026 09:10:10 -0700 (PDT)
-Message-ID: <0f2205d0-06b5-40ad-9952-e18a6a951078@oss.qualcomm.com>
-Date: Tue, 23 Jun 2026 09:10:08 -0700
+ Tue, 23 Jun 2026 10:25:05 -0700 (PDT)
+Message-ID: <3b91c2ad-479a-4d08-ada4-b9af24ebf697@oss.qualcomm.com>
+Date: Tue, 23 Jun 2026 14:25:01 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/24] target/riscv: move TCG files and fix --disable-tcg
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com
+Subject: Re: [PATCH 05/24] target/riscv: make some riscv_sysemu_ops TCG only
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ pierrick.bouvier@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
 References: <20260622193141.1449724-1-daniel.barboza@oss.qualcomm.com>
- <52c3605c-345f-43d2-8cc6-794980c805fa@oss.qualcomm.com>
- <50ce1e98-2c1f-4cbd-b191-1eac324b71b6@oss.qualcomm.com>
- <704cfba3-e92a-498d-928b-877f7f7641fe@oss.qualcomm.com>
- <9d2737e3-34f0-4f68-813b-37059615bced@oss.qualcomm.com>
- <CAFEAcA8660BZOmX_KXeF7JJaJwgKO3zSRDEmJURg27FK=tqbZg@mail.gmail.com>
- <df4a5857-ec4f-4d4f-bc08-1a9c5caae100@oss.qualcomm.com>
-From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+ <20260622193141.1449724-6-daniel.barboza@oss.qualcomm.com>
+ <5bbeb7ee-2826-453d-b50c-60240df47954@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <df4a5857-ec4f-4d4f-bc08-1a9c5caae100@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <5bbeb7ee-2826-453d-b50c-60240df47954@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIzMDEzMiBTYWx0ZWRfX5txLy19KISNu
- X2BcUfAgyTDlUkh8+TlolgK7jxD02+MI2u8lqD7QhlU9IEUhqghg/WpxBaUn/67mVftnZRvV5HR
- ZzmSmQW3MeKz0A1a7Gd9DKPWpBaOKsQ=
-X-Authority-Analysis: v=2.4 cv=b4KCJNGx c=1 sm=1 tr=0 ts=6a3aafe4 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=iLqgmErQAxjCjdq5jj1Aqg==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIzMDE0MyBTYWx0ZWRfX/vol5ENKSK3N
+ QCKxukvOX+CLIt7eDayEDIhaG0aa/Zw2y+15C5tQkEyROC56oSNo2WTrd9QT3JDx7ucR8/0783+
+ +TUI+5d1znzIsI7/w3vqsqHINcLSUchmP+mJaLANeR58FeRuuNulGjqqDCriJhJ9NrPjYi1UuxS
+ IHikbvMMVxOGtcTPH8Hxao5QnyPS/zq7wQaUHVYz4HGjHe/XzZXFtaRpQ5IDQkgW/1n+8KWe8SM
+ ZwuYR4YeU5Wv4ca6CaWfMsPPHhSmuh8uQrH81vcbz4ROFDo/qIoQ3NCLzgh/9o1NKKRNZbcN/ov
+ Ymq3bYVINYvTC5jGqDWQ7aIdKEaupLh4ab7J3QzS8Ou4Ws8vYyCmPSASNE2+4FR92veDca8AnAt
+ 8cvmseryAXNubfL1DZcJgr9rcjIx3RAEO2D1tB0u0MN3R7HGMxhZaCDXxiMphS466aiIFnoBnGd
+ f9x9AfXTKJdSz0dQ+0A==
+X-Proofpoint-GUID: FNdd-c4xWWHuoaO517YtoOax7uZlcil2
+X-Authority-Analysis: v=2.4 cv=SoKgLvO0 c=1 sm=1 tr=0 ts=6a3ac177 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=N8n3KahPn3zQMflmis8A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-GUID: v2jEupuA1vjiaqPOMpWVYvJxe-K0Fr5Z
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIzMDEzMiBTYWx0ZWRfXxWrNpfO0ekbK
- h3oOAA7fUVPjuVNJu0L7vtxL0wTT2p2ryKB8lC8/OCHfiScfQzdDgc86fTrWlDScolaAFD+4YDZ
- Pis8B5Bl06BpsMgsc48AIYcG6RY3MycgXn4t4BibN7hyiFGM6nTdelwO/UnPNpfh20GqZYNWcYh
- E2mfbwr9oNdPXi1TLUW4m6+8E1zGspeFIu8g/K+KCKKPLQobBYKmbvS+JTAcq+YpuFMtzZ757VS
- g2YL1lfIEzHfyWD2kmIGEZbmf6m1TiepZxJDa7MgZxJCHsxlvtBrTrr4sXvARe86ivsBoAZdWX/
- lNqlMHRgmocxDfJTVeCkZFIG5oERDjYpemRSRwbk/6S6YeFNH3GRLYUlcDMepip/BDBxtHVAGjH
- EHwO2GWSTwfmh/VJCRiZ+c+MW7mDdUj1m07WbqoQHfYHDwakCfNfUWeuRDcNWgQCzQEMON813d3
- XkP14Jy1X2z3I3LfaoQ==
-X-Proofpoint-ORIG-GUID: v2jEupuA1vjiaqPOMpWVYvJxe-K0Fr5Z
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=VaTl7tzlUKkYZzF-L0EA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIzMDE0MyBTYWx0ZWRfX48aUhzXq9BbO
+ QzlH7ltBmiK8i+Xt0tDV9pcVgrmg0N25W9H9rVfgSm/1OzuBCX6bmX31carEYdrtsJxEWSrMklI
+ 5ZmBgDArnpkz0E2aqhS/U+aI2EkgBdU=
+X-Proofpoint-ORIG-GUID: FNdd-c4xWWHuoaO517YtoOax7uZlcil2
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-23_03,2026-06-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 adultscore=0 impostorscore=0 spamscore=0
- suspectscore=0 phishscore=0 priorityscore=1501 clxscore=1015 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606230132
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=pierrick.bouvier@oss.qualcomm.com;
- helo=mx0a-0031df01.pphosted.com
+ lowpriorityscore=0 suspectscore=0 spamscore=0 malwarescore=0
+ priorityscore=1501 bulkscore=0 clxscore=1015 adultscore=0 phishscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2606230143
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -165,127 +157,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/23/2026 4:38 AM, Daniel Henrique Barboza wrote:
+
+
+On 6/22/2026 6:30 PM, Philippe Mathieu-Daudé wrote:
+> On 22/6/26 21:31, Daniel Henrique Barboza wrote:
+>> monitor_get_register and phys_add_debug are TCG only.
 > 
+> They aren't... And get_phys_addr_debug() seems mandatory.
 > 
-> On 6/23/2026 6:58 AM, Peter Maydell wrote:
->> On Tue, 23 Jun 2026 at 10:49, Daniel Henrique Barboza
->> <daniel.barboza@oss.qualcomm.com> wrote:
->>>
->>>
->>>
->>> On 6/22/2026 6:34 PM, Pierrick Bouvier wrote:
->>>> On 6/22/2026 2:23 PM, Philippe Mathieu-Daudé wrote:
->>>>> On 22/6/26 22:52, Pierrick Bouvier wrote:
->>>>>> On 6/22/2026 12:31 PM, Daniel Henrique Barboza wrote:
->>>>>>> Hello,
->>>>>>>
->>>>>>> This series looks scary but it's mostly trivial and mechanical work.
->>>>>>>
->>>>>>> It is yet another attempt at fixing --disable-tcg.  We have a recent
->>>>>>> work sent to the ML [1] and we had Phil's attempt back in 2023 [2].
->>>>>>> Phil's work didn't get merged and it's now too hard to rebase and
->>>>>>> revive, the most recent attempt got misled into the 'what is
->>>>>>> common code
->>>>>>> between TCG and KVM' dungeon.
->>>>>
->>>>>
->>>>>> It seems like series does not apply on top of master, would that be
->>>>>> possible to rebase it?
->>>>>
->>>>> For some reason the RISC-V series are handled distinctly than the
->>>>> rest of QEMU, Alistair queues work on his repository and developers
->>>>> are custome to base their series on top of it (otherwise Alistair
->>>>> can not apply them on his tree and asks for reposts), see the
->>>>> riscv-to-apply.next branch on https://github.com/alistair23/qemu.
->>>>
->>>> Unfortunately, it makes it hard to run any kind of automated testing,
->>>> especially for series like this that target specific configs.
->>>
->>> Don't we have ways of saying in the commit message "these patches
->>> applies
->>> on top of these other patches" and then the tooling would deal with it?
->>> I remember patchew doing stuff like that with that "Based-on:
->>> <message-id>"
->>> tag.
+> Maybe it happens the RISCV implementation only considers TCG?
+
+Yeah, the wording I used is bad.  What I wanted to say is that the RISC-V
+impls of these 2 interfaces are TCG only.
+
+> 
+> If so, maybe this patch is heading in the right direction,
+> but its description has to be reworded IMHO.
+> 
+> (while here, maybe we can convert to SysemuCPUOps::translate_for_debug?)
+
+Do you have an example? maybe we could squash it in this patch or, if needed,
+we can add a prep patch.
+
+
+Daniel
+
+> 
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> ---
+>>   target/riscv/cpu.c     | 6 ++++--
+>>   target/riscv/monitor.c | 2 ++
+>>   2 files changed, 6 insertions(+), 2 deletions(-)
 >>
->> Yes, Based-on: is our convention for marking "this patchset needs some
->> other one to be applied first". But that should be the exception rather
->> than a common case -- if patchsets regularly need to be based on
->> something other than head-of-git, this is I think a sign that
->> maintainers are not sending out pull requests frequently enough.
->>
->> I would prefer it if QEMU didn't develop kernel-style "subsystems
->> have their own particular workflows" fragmentation -- I don't
->> think we're big enough or that sub-parts of QEMU are sufficiently
->> well separated for it to work out well.
-> 
-> I agree that rebasing things on master is better than rebasing it on the
-> maintainer's tree.  And we could make a better job at informing
-> developers that
-> submitting a patch for qemu-riscv, vfio or any particular subtree, means
-> that
-> the patch should be based on a maintainer tree X.
-> 
-> The thing is that sending patches on master only works if master is
-> always up
-> to date, and that's not feasible with our current style of merging PRs. 
-> This
-> series we're commenting on is an example: it doesn't apply to master
-> because
-> there are pre-approved RISC-V patches in the maintainer's tree from 2
-> days ago
-> (also my patches, I might add) that caused conflicts that I wasn't aware
-> that
-> would happen.  This conflict would have to be dealt with at some point
-> by myself
-> or the maintainer, and it's not like 2 days is too much time without a PR.
-> 
-> We can argue "this is an exception that doesn't happen that often, we
-> should
-> stick with using master as a base", and to a certain extend that's
-> true.  But
-> then this sort of conflict happens again, then again, then again, it
-> comes to
-> a point where it's easier to tell developers to use the maintainer's
-> tree instead
-> of master.
-> 
-> Maybe I'm downplaying the problem because I've been sending stuff based
-> on the
-> maintainer's tree since forever and got used to it.  IMO, unless we
-> decide to be
-> like libvirt and create the "committer" role to allow trustworthy devs
-> to push
-> stuff to master after acks, making it more feasible to expect master to
-> be up to
-> date, I'm afraid we're closer to a kernel-style workflow.  For better or
-> worse.
-> 
-> 
-> Thanks,
-> Daniel
-> 
-> 
->>
->> thanks
->> -- PMM
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 4e96bbeb60..0a7e6f6ed0 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -2669,11 +2669,13 @@ static int64_t riscv_get_arch_id(CPUState *cs)
+>>   static const struct SysemuCPUOps riscv_sysemu_ops = {
+>>       .has_work = riscv_cpu_has_work,
+>> -    .get_phys_addr_debug = riscv_cpu_get_phys_addr_debug,
+>>       .write_elf64_note = riscv_cpu_write_elf64_note,
+>>       .write_elf32_note = riscv_cpu_write_elf32_note,
+>> -    .monitor_get_register = riscv_monitor_get_register_legacy,
+>>       .legacy_vmsd = &vmstate_riscv_cpu,
+>> +#ifdef CONFIG_TCG
+>> +    .get_phys_addr_debug = riscv_cpu_get_phys_addr_debug,
+>> +    .monitor_get_register = riscv_monitor_get_register_legacy,
+>> +#endif
+>>   };
+>>   #endif
+>> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
+>> index 3e89dcaf7c..7aacd1d89c 100644
+>> --- a/target/riscv/monitor.c
+>> +++ b/target/riscv/monitor.c
+>> @@ -245,6 +245,7 @@ void hmp_info_mem(Monitor *mon, const QDict *qdict)
+>>       mem_info_svxx(mon, env);
+>>   }
+>> +#ifdef CONFIG_TCG
+>>   static bool reg_is_ulong_integer(CPURISCVState *env, const char *name,
+>>                                    target_ulong *val, bool is_gprh)
+>>   {
+>> @@ -379,3 +380,4 @@ int riscv_monitor_get_register_legacy(CPUState *cs, const char *name,
+>>       return -EINVAL;
+>>   }
+>> +#endif
 > 
 
-In this very specific case, where base patches are needed, maybe it
-would be better to make the required commits appear in this series, and
-mention in cover letter that patches 1-N are just coming from another
-series and are already reviewed/approved. IMHO it doesn't hurt, and
-reviewers are free to skip commits already reviewed.
-
-Or, a solution I'm not fond of but I ended up adopting most of the time,
-just wait for required patches to be merged on master before posting the
-series, and work on something else meanwhile.
-
-Ideally, yes, it would be better if maintainers could send PR more
-frequently to avoid creating those intermediate staging trees. The
-faster we merge, the less conflicts we'll have.
-
-Regards,
-Pierrick
 
