@@ -4,107 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFA09CDB479
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 14:39:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52286CDB479
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 16:43:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wcOlU-0007Oe-G1; Wed, 24 Jun 2026 10:39:44 -0400
+	id 1wcQgr-0002Zn-W3; Wed, 24 Jun 2026 12:43:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
- id 1wcOlS-0007OE-LH
- for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 10:39:42 -0400
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
- id 1wcOlR-0002qV-2I
- for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 10:39:42 -0400
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-5aa61e3d3f3so1109165e87.0
- for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 07:39:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782311979; cv=none;
- d=google.com; s=arc-20240605;
- b=PwfHdh6kmiNrb9Kgg12lBSX26P/4u/o3OmmMyDtaQ83hZYUgvhRosGT2zp0/HQbuWH
- 6nd2+XJQCsk3P9q1iaNUghTbQubcsegyEusnhzVZ0/sxGQxi9a8GstEeX4ZW25Q/HQVv
- B27s3ZQZtyRlJcX3r5H9rSK6QvJic/BkS3u+FBr9mEqUPLsGgcC5FxNdd9bTHCdYw9i6
- sI29cZjkTIMxkXuT6XA0M3p2ZmQPECEc1XAhVWSby1qthk7TPmCtvfMAjs4m0197Me2T
- lcd1czWoEGAEG7A+GwqIi+7PEr/ALATyAc9q3XHMLpbJThyCNpMeFV4NaKb+10W+tXlB
- 0r5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=ToX7vzujzwu1ZERuBXKxJH0zW2dxltUXq9k0R/akn1s=;
- fh=6I7VcyjKDN+Okt9/KvSBc86ddDyXaSWPNoQ2jFbPgnM=;
- b=hqq5fsPnbYFFlD0VkH6rl5NPuCWeKLeghxsHaCW9bNClDTVc5hpD1VS8fxEmyhRUGC
- K7/wMW85EULL2H34SN1DqRYwuAmOKfA+ENy6Wmw6RFAjPtm7IROnJCRekA9Yv1PziIIZ
- uKEfdjKckuwYBasDHM1HmpBHHGzJCDQYIwLUeJjO+Yhm+XMW0F+hbS6a6jvTL02MC0tP
- MEK2v5btuuzSLWHaad9/qlkGTII9Lcr0pSojmTBOOiBTZslR1uuIIIGAjQ+87pvLKnWL
- EnX5x0QZoL4nHDHHtp+mGP4IL8FL+yFBeF8x827SBCeutBPaOplMtmaH2bb0DN4Rc3AI
- YzYw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wcQgq-0002ZR-E6
+ for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 12:43:04 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wcQgo-0002fi-A9
+ for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 12:43:04 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65OFfHpk3293799
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 16:43:00 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 08xMVtcPU9aNDwBr/6YtUFxpftYU+nnvK8OHIg9s0mk=; b=fui+YcFtBcrRvaZ9
+ SKYSbDMAFp/cM0zcwevjsWu89TN3LVkwZGTOoXvgp9KqwNR/4vLE25P71GHMaeLO
+ c1j+6K5pohkvx9QolAF0HMoYgw2NjB7DNJqRGLpeRT0Z220cJ7YLFAxZUH5FpvLH
+ 2xNiIyeYxdvp2SR6bmquxUttZVf3ssqUR3oC5SiqZXkwN5xFUpCcsr6IWe+XwQCy
+ MoUT5pPQLh0xecRW1HKBuuNroWPU2k7xFPZLyDjYI8O/A6/5hhnueMgbYmWZNlph
+ Z0K04tcYdlzqFgh8H6f97r6MkOb3EAEqLEZ95sKEEWgd0o83M2nUM71g3cYh1/Tc
+ 8VVlJg==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
+ [74.125.82.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f00evc4y0-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 16:42:59 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id
+ 5a478bee46e88-30c17f62afdso44068eec.0
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 09:42:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782311979; x=1782916779; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ToX7vzujzwu1ZERuBXKxJH0zW2dxltUXq9k0R/akn1s=;
- b=Y6DwHvj4Hi02c7dqQQOM3GCxVrCUj4UJHHJoRSkSicphG8xqun6fsJLRDb0PVJAI7C
- wFq0eugvuoGQQJlEZE27FJW/Ae1omjVkC1qAAtrDSl3QFIfj5u+2AzohQbhQQgPivowN
- +UnuBRcTuzK/O0nYi13TyRY6ZzOH2nas3/ckc/QHL03LP71jn38OCpiJWowGCFpnLQdI
- gU9RtBtZkGTTayne0rHrwH0Ld+w7+jHWnO2Ds0QlrEN1x2mpvDYp/kiKx7H4EgPJ3w/n
- Yhgz/Z8+B9XyDIJpt62qLDCuoxkq3c13e0RKsnxKRTrxWwB9aAXOCruJPZBGC4a6IjBM
- 5/wg==
+ d=oss.qualcomm.com; s=google; t=1782319379; x=1782924179; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=08xMVtcPU9aNDwBr/6YtUFxpftYU+nnvK8OHIg9s0mk=;
+ b=MOQivOJ0Wf/ELQ4YeotUHGmvHWNmDbYCvXQtoyWEp/66Bhve/IH8Rx4RoVhjki02IF
+ 4TGtXP56adtdcuRjlzic35iJ6qHumY4oOSjahjjP3aoRgqHkx0X6k7BdfeNWdYMKdLJC
+ +JW/IN5mhFuHPR91etDoSf3hFckAsgtcLt8bwp5i3BxPrz5wR9LCsan7GOZbGN02JNkj
+ vQbwtzkZWkLE7OQEYj/rvHLJRwze92haf/27PDOWPZ3/5dcB9FcsJdoHJlsYWFCMUsO8
+ 9p29ADsIYYqvKOPmbtAgG6UsOOq//KLAXdHYVmnZ8dFe9D9bUQY/ltvaZc7RhKt9AR9O
+ WbZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782311979; x=1782916779;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ToX7vzujzwu1ZERuBXKxJH0zW2dxltUXq9k0R/akn1s=;
- b=olHtf1Q4r9mqQv4dB64q4v+C0LUir44FVwLfVzxaMOhBoA2kwjTsbcfmgrYttz6+e7
- Pvto4VGQ25bHKhjWnTSR1nfMeGxVrh9fuvZh2bFBCN/o1phge+Rw/Aj4WM3/ExC6knKs
- wLCWp1i/borfJ8pPcARhN0w+QDRhWq4uGrefkjzeK0MDxymONna8moaMxQZ38YbxMyhz
- SA/pejr8oN+ZfYox+jaue56Lej7SZLurkOoLhtoo/LrUXV6AedLve/fYgrUmGbKwm29B
- vpmJcafPdia0nV2UnGxjkTEFMRxOMpzHnCMY/4oSeBh7wCBfbgujhaEJ676r9JtmrT0B
- JU7g==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoLqFYl1oIu6dWbA32lpMcOk+RV6x2/0OQgs39VYe4857qeYm9PnvZgBqfszEAhpc6XySShd/JBfRY2@nongnu.org
-X-Gm-Message-State: AOJu0YwghJzoE/6ocpV3YNm0G7aAhajqdOFeo/hR44Z50c+vM2Bb8TDA
- 8DFauvRvrQciawyLWdBPilMXuSEphRDvNysLRPQgkTLpeR9arT6gpLOtAI5TAGNrkpvYmYX0ADs
- SRnJOn7GNYo0jwePL3FnP8ii3RNshsEY=
-X-Gm-Gg: AfdE7cmgl9NQSMdFsqEjDOlhE2iUl8B5ZgTdjY803a95zDiKQiq9PHhlt3UryMauwZZ
- xg/rASWe0L4vh1mV7XP8T92pHeqB2AsfQHB/yFCJUH2AFkjUFadx6UlEGqSvILT8TUHEbCWUNHE
- 2YlnAwVqfZd3o3LxTpEmc4YaSSzHG2ZF53YtIbWYD5mP2oq/nnp1FRSkUNab6O1ujG3fy3O8HDR
- kiLCBvPod8dvozMeoAmDJOHNensvMpA2gN7tfzqdVIzfn+uAPdmPqwtxnT4h0KEEoXh0yzOuVOG
- azHw6M0jEg0x42nzchSXAbKrewba
-X-Received: by 2002:a05:6512:ac3:b0:5ad:5079:483a with SMTP id
- 2adb3069b0e04-5addb81cdc8mr2481854e87.12.1782311978267; Wed, 24 Jun 2026
- 07:39:38 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1782319379; x=1782924179;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=08xMVtcPU9aNDwBr/6YtUFxpftYU+nnvK8OHIg9s0mk=;
+ b=SiBqE5gKPZd1vIct3NCN6MnqTQSzZO12MLfHaow6IMcLYpu40q1VW9D/TZHFnBDmWq
+ ZdEVnKYzFwEw0cnBrpETVCV96fDJHau64RZ7FCCZQlqQtKc+bfRfFoDFsAYfvH60zh7J
+ eqHr/mQXz7DXxZ6ji/a/LpoTtuLhX9IG9JTZzlkrS3OvnITwnYPHq0U3ZTQtbkVfihav
+ Juto2OLMaV4UgDM3LQyCJSv3FfBIX0gHLPcdn3E0mdYd3ZTwRTI81pxjE1op+to/baDz
+ +8NGivOH4sBucVSIR4STqhva0lk6CoFCsP39ecoenYksyI7JrJZfVIg9IiDuY9XLul8D
+ huRw==
+X-Gm-Message-State: AOJu0YyOLLqB0hzRKo9ftcoNB52uGpq9oLOCdWN0U8faRUgm7dbZE/Fw
+ /hLXtuy3bI2pOnvRDiy0FpnPE8RD2SY3bJWoM/SeBVh04xnus8sbhBZxuUpsmCf6KUmPbaYiqiO
+ F+Xr2uu1X8R4yLJKCKt+cpekKNhDC4DXnYOQay8PmK1MTtDk58ccZVwtNsw==
+X-Gm-Gg: AfdE7cmKdm2EnApiH/clE0cPNrqjXQLa2C4X5ol0h+qco4Pz5ayYBWF7p8uNNRxNF3u
+ C/Rj7jy2BntUGRccyUFC/BfAOiIC5UecpSjcE85yWTZCMlMA+19CXCOYbVONJf8e1DRGOWvX1zk
+ a/YsAErAnYswmO0b3N4O5PIR7giaRPkUjNSAJtD/u8u90qMA/B9ZTPFhhyGhYw/vVK9/c7ooc1G
+ i9RZe5Jpf9h/xsdPcXg1IOxcRo0v8f4GvhJyhIvXTXOEOFXL5yhg/vDxw6kT3D/uteI/CMVE0ay
+ E0zSGylvRyLhHoQQeGWyU9wOWHv9VRm2PI3KnWCGgLxNovSHtEKvFieDGUMMV26J/WUwsuGXFDS
+ NWvnhGxDFk9onbS9fpT9TV4TeAM2OpWT5USDMTDpl4BR0
+X-Received: by 2002:a05:7301:7106:b0:2f4:d190:37bf with SMTP id
+ 5a478bee46e88-30c5563f2e8mr4507530eec.16.1782319378808; 
+ Wed, 24 Jun 2026 09:42:58 -0700 (PDT)
+X-Received: by 2002:a05:7301:7106:b0:2f4:d190:37bf with SMTP id
+ 5a478bee46e88-30c5563f2e8mr4507498eec.16.1782319378075; 
+ Wed, 24 Jun 2026 09:42:58 -0700 (PDT)
+Received: from [192.168.68.103] ([189.79.21.40])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30c7c8b1ae5sm400755eec.16.2026.06.24.09.42.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 24 Jun 2026 09:42:57 -0700 (PDT)
+Message-ID: <9279723a-b079-4749-b3a5-e6e7ecfd2121@oss.qualcomm.com>
+Date: Wed, 24 Jun 2026 13:42:48 -0300
 MIME-Version: 1.0
-References: <20260624090052.463075-1-suunj1331@gmail.com>
- <4e78cb10-dbed-4f22-b104-43f45595f86e@oss.qualcomm.com>
-In-Reply-To: <4e78cb10-dbed-4f22-b104-43f45595f86e@oss.qualcomm.com>
-From: SeungJu Cheon <suunj1331@gmail.com>
-Date: Wed, 24 Jun 2026 23:39:25 +0900
-X-Gm-Features: AVVi8Cfi9Fp5VXWps5xvboHpH-iCiLiocVwAL6y-rxjSIlQVuREeeA5h2QZ264M
-Message-ID: <CAGwK=3oHc_gep8fuoC8F7uQyEMxMvnrcJ_6F4HeSNOXtiJ_ggw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix vsstatus.UXL reserved value
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- chao.liu.zevorn@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
- envelope-from=suunj1331@gmail.com; helo=mail-lf1-x12c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/4] hw/riscv/virt: Add CXL support to the RISC-V virt
+ machine
+To: Chen Pei <cp0613@linux.alibaba.com>, jic23@kernel.org, pbonzini@redhat.com,
+ palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ sunilvl@ventanamicro.com, dave.jiang@intel.com,
+ alison.schofield@intel.com, imammedo@redhat.com, mst@redhat.com,
+ guoren@kernel.org
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
+References: <20260618093827.3507-1-cp0613@linux.alibaba.com>
+ <20260618093827.3507-2-cp0613@linux.alibaba.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260618093827.3507-2-cp0613@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI0MDE0MCBTYWx0ZWRfXyr0YHr6NIffy
+ /SC8hykBnhlU9T8mXSpMKxNlJhNGs1LjRsedRbkodyD5vDBho4vLS1jpPXaMw/ek8/COiL5Nd6k
+ NQaz28jMsFpAZT8/LBj375lkDOMudeE=
+X-Authority-Analysis: v=2.4 cv=JbaMa0KV c=1 sm=1 tr=0 ts=6a3c0913 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=SRrdq9N9AAAA:8 a=OKAgqmDqJgUB0MQQqyQA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI0MDE0MCBTYWx0ZWRfX7jvdjZFWDQ1N
+ ahr9YOKqHuSWPS7LoBCJmYOsjnsejcf2zxHiM1qk8QlFZSCSfYaQE1pIwyyGR2QfbDVRS6v/5Hb
+ 8+sVjdjlYzihBitzTG3zvIwOeQ6cVjnldAFyng/EUHrmI+971ONqmB474Faf8AoRciPqck1NOwR
+ SH3ayNXBgvn5M9XA4Z7BY2QvsPGeqceU+bW9L88w6w46rBdLvd0XOTkQKImF4TJopB8jYAZc8R6
+ zpxJJtAg9oeRNeFkwZZN6JeMHSEsJiORpxiuJmvG0UO9JZx6DVtDlg6zGpOvuLyv+UxXyU+c0fR
+ Omz5JZ5UldbBlWSP2a0JRBAYhIy4R6+X0v8rUWYxMLpk23tp5EXPHUfxk1POFmVNx2Bgd9X4613
+ 15QDCTvvT4lIQKA6Gl3/Cq8yNf8wjA==
+X-Proofpoint-ORIG-GUID: mlGPUo8fejudDGNOcGwzG0eJ2uJeC8U_
+X-Proofpoint-GUID: mlGPUo8fejudDGNOcGwzG0eJ2uJeC8U_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-24_03,2026-06-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 phishscore=0 lowpriorityscore=0 spamscore=0 malwarescore=0
+ suspectscore=0 adultscore=0 classifier=typeunknown authscore=0 authtc=
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2606150000 definitions=main-2606240140
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -121,103 +157,211 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thanks for the review, Daniel.
+Hi,
 
-I'll add a helper function and resend as v2.
-
-Best regards,
-SeungJu
-
-On Wed, Jun 24, 2026 at 9:34=E2=80=AFPM Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
->
-> Hello,
->
-> On 6/24/2026 6:00 AM, SeungJu Cheon wrote:
-> > By the priv spec the value "3" is marked as 'Reserved' for
-> > mstatus.UXL. write_mstatus() rejects this value, but
-> > write_vsstatus() does not, allowing the reserved value to be
-> > written and read back unchanged.
-> >
-> > Handle a vsstatus.UXL =3D 3 write by writing the current 'xl'
-> > instead.
-> >
-> > Fixes: f310df58bd2 ("target/riscv: Enable uxl field write")
-> > Signed-off-by: SeungJu Cheon <suunj1331@gmail.com>
-> > ---
-> >   target/riscv/csr.c | 8 ++++++++
-> >   1 file changed, 8 insertions(+)
-> >
-> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> > index dd9726fcf4..4c1da61824 100644
-> > --- a/target/riscv/csr.c
-> > +++ b/target/riscv/csr.c
-> > @@ -5226,7 +5226,15 @@ static RISCVException write_vsstatus(CPURISCVSta=
-te *env, int csrno,
-> >       uint64_t mask =3D (target_ulong)-1;
-> >       if ((val & VSSTATUS64_UXL) =3D=3D 0) {
-> >           mask &=3D ~VSSTATUS64_UXL;
-> > +    } else {
-> > +        uint64_t uxl =3D (val & VSSTATUS64_UXL) >> 32;
-> > +        if (uxl =3D=3D 3) {
-> > +            int xl =3D riscv_cpu_mxl(env);
-> > +            val =3D deposit64(val, 32, 2,
-> > +                            xl =3D=3D MXL_RV128 ? MXL_RV64 : xl);
-> > +        }
-> >       }
->
-> This is similar to what was done here:
->
-> commit ddfd33f1965804fc4a718d8d46bc150525c2f9db
-> Author: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Date:   Thu May 14 16:45:37 2026 -0300
->
->      target/riscv/csr.c: fix mstatus.UXL reserved value
->
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 83ca354bf0..d004a4bfb4 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2045,7 +2045,17 @@ static RISCVException write_mstatus(CPURISCVState =
-*env, int csrno,
->
->       if (xl !=3D MXL_RV32 || env->debugger) {
->           if ((val & MSTATUS64_UXL) !=3D 0) {
-> +            uint64_t uxl =3D val & MSTATUS64_UXL >> 32;
->               mask |=3D MSTATUS64_UXL;
-> +
-> +            /*
-> +             * uxl =3D 3 is reserved so write the current xl instead.
-> +             * In case xl =3D MXL_RV128 (3) write MXL_RV64.
-> +             */
-> +            if (uxl =3D=3D 3) {
-> +                uxl =3D xl =3D=3D MXL_RV128 ? MXL_RV64 : xl;
-> +                val =3D deposit64(val, 32, 2, uxl);
-> +            }
->           }
+On 6/18/2026 6:38 AM, Chen Pei wrote:
+> Enable CXL support on the RISC-V virt machine following the same
+> approach used by the ARM virt machine:
+> - Add PXB and ACPI_CXL Kconfig selections
+> - Add CXLState and PCIBus pointer to RISCVVirtState
+> - Register CXL machine properties via cxl_machine_init()
+> - Create CXL host register region above the PCIe high MMIO region
+> - Call cxl_hook_up_pxb_registers() and cxl_fmws_link_targets() at
+>    machine_done time
+> - Map Fixed Memory Windows above the CXL host register region
+> - Add ACPI0017 device in DSDT and build CEDT table in virt-acpi-build.c
+> 
+> Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
+> ---
+>   hw/riscv/Kconfig           |  2 ++
+>   hw/riscv/virt-acpi-build.c | 20 +++++++++++++++++++
+>   hw/riscv/virt.c            | 40 ++++++++++++++++++++++++++++++++++++++
+>   include/hw/riscv/virt.h    |  3 +++
+>   4 files changed, 65 insertions(+)
+> 
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index 2518b04175..ebd0355f09 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -66,8 +66,10 @@ config RISCV_VIRT
+>       select VIRTIO_MMIO
+>       select FW_CFG_DMA
+>       select PLATFORM_BUS
+> +    select PXB
+>       select ACPI
+>       select ACPI_PCI
+> +    select ACPI_CXL
+>   
+>   config SHAKTI_C
+>       bool
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 413d47d70e..309d64b322 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -29,12 +29,16 @@
+>   #include "hw/acpi/aml-build.h"
+>   #include "hw/acpi/pci.h"
+>   #include "hw/acpi/utils.h"
+> +#include "hw/acpi/cxl.h"
+>   #include "hw/intc/riscv_aclint.h"
+>   #include "hw/nvram/fw_cfg_acpi.h"
+>   #include "hw/pci-host/gpex.h"
+> +#include "hw/pci/pci_bus.h"
+>   #include "hw/riscv/virt.h"
+>   #include "hw/riscv/numa.h"
+>   #include "hw/virtio/virtio-acpi.h"
+> +#include "hw/cxl/cxl.h"
+> +#include "hw/cxl/cxl_host.h"
+>   #include "kvm/kvm_riscv.h"
+>   #include "migration/vmstate.h"
+>   #include "qapi/error.h"
+> @@ -503,6 +507,17 @@ static void build_dsdt(GArray *table_data,
+>           acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2);
 >       }
->
->
-> But that patch fixed just write_mstatus().
->
-> I suggest adding a local helper riscv_write_uxl (feel free to choose anot=
-her better
-> name) to encapsulate this logic and then use it in both mstatus and vssta=
-tus to
-> write UXL:
->
->   val =3D riscv_write_uxl(val)
->
->
-> Thanks,
-> Daniel
->
->
->
-> > +
-> >       if ((env->henvcfg & HENVCFG_DTE)) {
-> >           if ((val & SSTATUS_SDT) !=3D 0) {
-> >               val &=3D ~SSTATUS_SIE;
->
+>   
+> +    if (s->cxl_devices_state.is_enabled) {
+> +        Aml *cxl_dev = aml_device("CXLM");
+> +        aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
+> +        Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
+> +        aml_append(method, aml_return(aml_int(0x0B)));
+> +        aml_append(cxl_dev, method);
+> +        build_cxl_dsm_method(cxl_dev);
+> +
+> +        aml_append(scope, cxl_dev);
+> +    }
+> +
+>       aml_append(dsdt, scope);
+>   
+>       /* copy AML table into ACPI tables blob and patch header there */
+> @@ -910,6 +925,11 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
+>                      s->oem_table_id);
+>       }
+>   
+> +    if (s->cxl_devices_state.is_enabled) {
+> +        cxl_build_cedt(table_offsets, tables_blob, tables->linker,
+> +                       s->oem_id, s->oem_table_id, &s->cxl_devices_state);
+> +    }
+> +
+>       if (ms->numa_state->num_nodes > 0) {
+>           acpi_add_table(table_offsets, tables_blob);
+>           build_srat(tables_blob, tables->linker, s);
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index ce64eaaef7..84b91b4322 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -55,6 +55,8 @@
+>   #include "hw/pci/pci.h"
+>   #include "hw/pci-host/gpex.h"
+>   #include "hw/display/ramfb.h"
+> +#include "hw/cxl/cxl.h"
+> +#include "hw/cxl/cxl_host.h"
+>   #include "hw/acpi/aml-build.h"
+>   #include "qapi/qapi-visit-common.h"
+>   #include "hw/virtio/virtio-iommu.h"
+> @@ -1259,9 +1261,27 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+>       }
+>   
+>       GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
+> +    s->pci_bus = PCI_HOST_BRIDGE(dev)->bus;
+>       return dev;
+>   }
+>   
+> +static void create_cxl_host_reg_region(RISCVVirtState *s)
+> +{
+> +    MemoryRegion *sysmem = get_system_memory();
+> +    MemoryRegion *mr = &s->cxl_devices_state.host_mr;
+> +    hwaddr base;
+> +
+> +    if (!s->cxl_devices_state.is_enabled) {
+> +        return;
+> +    }
+> +
+> +    base = virt_high_pcie_memmap.base + virt_high_pcie_memmap.size;
+> +    base = ROUND_UP(base, 64 * KiB);
+> +
+> +    memory_region_init(mr, OBJECT(s), "cxl_host_reg", 64 * KiB * 16);
+> +    memory_region_add_subregion(sysmem, base, mr);
+> +}
+> +
+>   static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
+>   {
+>       FWCfgState *fw_cfg;
+> @@ -1426,6 +1446,13 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>                                        machine_done);
+>       MachineState *machine = MACHINE(s);
+>       hwaddr start_addr = s->memmap[VIRT_DRAM].base;
+> +
+> +    cxl_hook_up_pxb_registers(s->pci_bus, &s->cxl_devices_state,
+> +                              &error_fatal);
+> +
+> +    if (s->cxl_devices_state.is_enabled) {
+> +        cxl_fmws_link_targets(&error_fatal);
+> +    }
+>       hwaddr firmware_end_addr;
+>       vaddr kernel_start_addr;
+>       const char *firmware_name = riscv_default_firmware_name(&s->soc[0]);
+> @@ -1663,6 +1690,17 @@ static void virt_machine_init(MachineState *machine)
+>               ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
+>       }
+>   
+> +    create_cxl_host_reg_region(s);
+> +
+> +    if (s->cxl_devices_state.is_enabled) {
+> +        hwaddr cxl_base = virt_high_pcie_memmap.base +
+> +                          virt_high_pcie_memmap.size;
+> +        cxl_base += memory_region_size(&s->cxl_devices_state.host_mr);
+> +        cxl_base = ROUND_UP(cxl_base, 256 * MiB);
+> +        cxl_fmws_set_memmap(cxl_base, UINT64_MAX);
+> +        cxl_fmws_update_mmio();
+> +    }
+> +
+
+create_cxl_host_reg_region() is doing the same check:
+
+if (!s->cxl_devices_state.is_enabled) {
+(...)
+
+Maybe we could squash these update_mmio() lines in the same helper to have
+everything CXL related in the same place.  The helper would need to be
+renamed to something more appropriate (e.g. cxl_host_state_init() since we're
+at init time).
+
+
+Patch LGTM otherwise. Thanks,
+Daniel
+
+>       /* register system main memory (actual RAM) */
+>       memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
+>                                   machine->ram);
+> @@ -1769,6 +1807,8 @@ static void virt_machine_instance_init(Object *obj)
+>       s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
+>       s->acpi = ON_OFF_AUTO_AUTO;
+>       s->iommu_sys = ON_OFF_AUTO_AUTO;
+> +
+> +    cxl_machine_init(obj, &s->cxl_devices_state);
+>   }
+>   
+>   static char *virt_get_aia_guests(Object *obj, Error **errp)
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index 18a2a323a3..7d559ac610 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -24,6 +24,7 @@
+>   #include "hw/core/sysbus.h"
+>   #include "hw/block/flash.h"
+>   #include "hw/intc/riscv_imsic.h"
+> +#include "hw/cxl/cxl.h"
+>   
+>   #define VIRT_CPUS_MAX_BITS             9
+>   #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
+> @@ -64,6 +65,8 @@ struct RISCVVirtState {
+>       struct GPEXHost *gpex_host;
+>       OnOffAuto iommu_sys;
+>       uint16_t pci_iommu_bdf;
+> +    CXLState cxl_devices_state;
+> +    PCIBus *pci_bus;
+>   };
+>   
+>   enum {
+
 
