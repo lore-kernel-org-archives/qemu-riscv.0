@@ -4,95 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52286CDB479
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 16:43:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F915CDB47F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 17:22:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wcQgr-0002Zn-W3; Wed, 24 Jun 2026 12:43:06 -0400
+	id 1wcRID-0001RY-Iq; Wed, 24 Jun 2026 13:21:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wcQgq-0002ZR-E6
- for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 12:43:04 -0400
+ id 1wcRIC-0001PW-3c
+ for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 13:21:40 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wcQgo-0002fi-A9
- for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 12:43:04 -0400
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ id 1wcRI9-0008Rs-QV
+ for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 13:21:39 -0400
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65OFfHpk3293799
- for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 16:43:00 GMT
+ 65OFfJbw3301027
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 17:21:35 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 08xMVtcPU9aNDwBr/6YtUFxpftYU+nnvK8OHIg9s0mk=; b=fui+YcFtBcrRvaZ9
- SKYSbDMAFp/cM0zcwevjsWu89TN3LVkwZGTOoXvgp9KqwNR/4vLE25P71GHMaeLO
- c1j+6K5pohkvx9QolAF0HMoYgw2NjB7DNJqRGLpeRT0Z220cJ7YLFAxZUH5FpvLH
- 2xNiIyeYxdvp2SR6bmquxUttZVf3ssqUR3oC5SiqZXkwN5xFUpCcsr6IWe+XwQCy
- MoUT5pPQLh0xecRW1HKBuuNroWPU2k7xFPZLyDjYI8O/A6/5hhnueMgbYmWZNlph
- Z0K04tcYdlzqFgh8H6f97r6MkOb3EAEqLEZ95sKEEWgd0o83M2nUM71g3cYh1/Tc
- 8VVlJg==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
- [74.125.82.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f00evc4y0-1
+ z0A/4SjiYWXJjRjSBt/M4fA2Wa/xhI0L8g0aA+Jfe3s=; b=khfuI7kLkwbDgpQW
+ w9myvXDTjI6wobwlJs83UDKdvPiEW9lecdR9qAqFSDsnZPeIwGjhXO5hWMV/VEV5
+ qlnq99/Vudojh/7k2XllxoGs6XoiZh6tWHX1zbGeKibaWTiGnqKV/qY1LJ106qTt
+ pwgbwgFWylWaatHSmJZXMPDtbsSQaDYn2HsxwEqe96ft6S+iT4JG+qbwqYSaSq1p
+ eudreMFvzAqcH9q8KFC4HbvbeQs632/R8miqvEOhxyr70MX0SvuVM2gxzcGiailX
+ pUWdEOK0/ICaIv4853Srg6jtqbODRorAmWhX9ZDnCxtCjNWZ6/LxFLMFnsEgOhYO
+ 13dbnQ==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
+ [74.125.82.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f05aqbf2u-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 16:42:59 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id
- 5a478bee46e88-30c17f62afdso44068eec.0
- for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 09:42:59 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 17:21:35 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id
+ 5a478bee46e88-30c1f6c5559so1266678eec.0
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 10:21:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782319379; x=1782924179; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1782321695; x=1782926495; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=08xMVtcPU9aNDwBr/6YtUFxpftYU+nnvK8OHIg9s0mk=;
- b=MOQivOJ0Wf/ELQ4YeotUHGmvHWNmDbYCvXQtoyWEp/66Bhve/IH8Rx4RoVhjki02IF
- 4TGtXP56adtdcuRjlzic35iJ6qHumY4oOSjahjjP3aoRgqHkx0X6k7BdfeNWdYMKdLJC
- +JW/IN5mhFuHPR91etDoSf3hFckAsgtcLt8bwp5i3BxPrz5wR9LCsan7GOZbGN02JNkj
- vQbwtzkZWkLE7OQEYj/rvHLJRwze92haf/27PDOWPZ3/5dcB9FcsJdoHJlsYWFCMUsO8
- 9p29ADsIYYqvKOPmbtAgG6UsOOq//KLAXdHYVmnZ8dFe9D9bUQY/ltvaZc7RhKt9AR9O
- WbZg==
+ bh=z0A/4SjiYWXJjRjSBt/M4fA2Wa/xhI0L8g0aA+Jfe3s=;
+ b=kam6gClJhA4dCyLFuwCLhY0yncHK2bzX8jUaFqY96owu7WOrdt79QNPEXhrpggXbli
+ sTx+EPOr3QRaM2b0Zwu0UwkGYukzJ7ZqzFKrE+WmkgV6KPm9wnPuEWDHAUCx6BkR9J4n
+ jI2dAqXCX7Y2IVbMWk+AgvBVamacVLR2LfJC6jwcdI6pO8x5QrIqVDhexa5e4yzhKLe1
+ H5vhlX0UBvzxROAvSbVTGM6/MECTrSBC4hlJKT+cGNxphtfm7/t8nq0ElaMiQJ6gviOJ
+ tG3Mf6odKCSUZiIRs/li5Hy5mO35x4Jy9V+1FWPfticwwfoFkoK7K/HCSkP7aS7JO2QE
+ 3EUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782319379; x=1782924179;
+ d=1e100.net; s=20251104; t=1782321695; x=1782926495;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=08xMVtcPU9aNDwBr/6YtUFxpftYU+nnvK8OHIg9s0mk=;
- b=SiBqE5gKPZd1vIct3NCN6MnqTQSzZO12MLfHaow6IMcLYpu40q1VW9D/TZHFnBDmWq
- ZdEVnKYzFwEw0cnBrpETVCV96fDJHau64RZ7FCCZQlqQtKc+bfRfFoDFsAYfvH60zh7J
- eqHr/mQXz7DXxZ6ji/a/LpoTtuLhX9IG9JTZzlkrS3OvnITwnYPHq0U3ZTQtbkVfihav
- Juto2OLMaV4UgDM3LQyCJSv3FfBIX0gHLPcdn3E0mdYd3ZTwRTI81pxjE1op+to/baDz
- +8NGivOH4sBucVSIR4STqhva0lk6CoFCsP39ecoenYksyI7JrJZfVIg9IiDuY9XLul8D
- huRw==
-X-Gm-Message-State: AOJu0YyOLLqB0hzRKo9ftcoNB52uGpq9oLOCdWN0U8faRUgm7dbZE/Fw
- /hLXtuy3bI2pOnvRDiy0FpnPE8RD2SY3bJWoM/SeBVh04xnus8sbhBZxuUpsmCf6KUmPbaYiqiO
- F+Xr2uu1X8R4yLJKCKt+cpekKNhDC4DXnYOQay8PmK1MTtDk58ccZVwtNsw==
-X-Gm-Gg: AfdE7cmKdm2EnApiH/clE0cPNrqjXQLa2C4X5ol0h+qco4Pz5ayYBWF7p8uNNRxNF3u
- C/Rj7jy2BntUGRccyUFC/BfAOiIC5UecpSjcE85yWTZCMlMA+19CXCOYbVONJf8e1DRGOWvX1zk
- a/YsAErAnYswmO0b3N4O5PIR7giaRPkUjNSAJtD/u8u90qMA/B9ZTPFhhyGhYw/vVK9/c7ooc1G
- i9RZe5Jpf9h/xsdPcXg1IOxcRo0v8f4GvhJyhIvXTXOEOFXL5yhg/vDxw6kT3D/uteI/CMVE0ay
- E0zSGylvRyLhHoQQeGWyU9wOWHv9VRm2PI3KnWCGgLxNovSHtEKvFieDGUMMV26J/WUwsuGXFDS
- NWvnhGxDFk9onbS9fpT9TV4TeAM2OpWT5USDMTDpl4BR0
-X-Received: by 2002:a05:7301:7106:b0:2f4:d190:37bf with SMTP id
- 5a478bee46e88-30c5563f2e8mr4507530eec.16.1782319378808; 
- Wed, 24 Jun 2026 09:42:58 -0700 (PDT)
-X-Received: by 2002:a05:7301:7106:b0:2f4:d190:37bf with SMTP id
- 5a478bee46e88-30c5563f2e8mr4507498eec.16.1782319378075; 
- Wed, 24 Jun 2026 09:42:58 -0700 (PDT)
+ bh=z0A/4SjiYWXJjRjSBt/M4fA2Wa/xhI0L8g0aA+Jfe3s=;
+ b=cmK2N9AwwoJ/Gzbjpyx9lo3nQRb+q5jBIrAPmHDMF0ZBBDyVK5Gj63MQnUrZ3skNvF
+ CtjJX0pmSJU4yLIZoMurVFKgOth5iuAcbWx5pFFDc1M74io+7WrbK7d2QdYdt8LCOKrL
+ wQgKs+IlDjH+pYlJ0QjyHIcGIWXtfJafR13YvsIeGRayG4c3pLtASBYPuPoRjZCH1p3N
+ Ku3JagoBtAqavJU8+UOIEaI+AxCsxVWMxh2g9/Kd2NrbmxENYGMB96yJuNNm5Lky55et
+ /BB2hwvbKctVXJdxeyAkI8ihU/Zwn+XFYXOyoGzBLe32pF0sB2RbFPnncXqu2Q1+YTJ8
+ Q7qA==
+X-Gm-Message-State: AOJu0YzlYoPHuDJ9zhXzLUNmYfBBCtm1mutNBqTC3coss5PeGGa24L+3
+ oaJh614X7VfLefIGCf2Bu+TmOLonKUQe2MD5rCSbBcEYpi7XBwtmbQFSk4tJRMZofSHgApVyl6D
+ I2XZzsz7bwY0kgaLsyStijnjVVjxJGu1X0glvIwWfpu7IafStnONHjCAjow==
+X-Gm-Gg: AfdE7ckBc29Jc9I9sEFMc7HaM8gCSqF9nJNs7v1hJuPdvU3s7RDEbh5UdaP60okNuNt
+ 8L1ATE5foowZR5PudjJraacYzc9KvLG2vUlzuxvCooJ79GAVTcKfX+85+s3rNCLEOu25T4QXsrf
+ qJdLt8Ntw0hDiZNgyqORJMJfhy4ZovQOwhwAMRikakP+cG6XYLae+jrHOt3CFfr6eo+a9clLV1p
+ 9U+naK6O1AvpK71a1RejqCIrZOAqZRSWkgIHiygtejTfJb+jyjbZJIlOZDuHyaizC9lnKst80HF
+ O+T9z5dUEF5K5rBdrnY7vDAhIXaDae0084vUNE7w+7ax5pc47QtH87cTDYSR1FWRv/4MqEFMbWV
+ EFDz/JaRKHksuQ788fdaxbnankCvAkxBhYy0YrFTbQcH/
+X-Received: by 2002:a05:7300:3256:b0:304:2cc9:2ba8 with SMTP id
+ 5a478bee46e88-30c68e47e84mr4060550eec.30.1782321695090; 
+ Wed, 24 Jun 2026 10:21:35 -0700 (PDT)
+X-Received: by 2002:a05:7300:3256:b0:304:2cc9:2ba8 with SMTP id
+ 5a478bee46e88-30c68e47e84mr4060497eec.30.1782321694308; 
+ Wed, 24 Jun 2026 10:21:34 -0700 (PDT)
 Received: from [192.168.68.103] ([189.79.21.40])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c7c8b1ae5sm400755eec.16.2026.06.24.09.42.51
+ 5a478bee46e88-30c7ca87caasm483524eec.27.2026.06.24.10.21.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jun 2026 09:42:57 -0700 (PDT)
-Message-ID: <9279723a-b079-4749-b3a5-e6e7ecfd2121@oss.qualcomm.com>
-Date: Wed, 24 Jun 2026 13:42:48 -0300
+ Wed, 24 Jun 2026 10:21:32 -0700 (PDT)
+Message-ID: <79017627-4888-415a-9686-16367490b5b5@oss.qualcomm.com>
+Date: Wed, 24 Jun 2026 14:21:24 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] hw/riscv/virt: Add CXL support to the RISC-V virt
- machine
+Subject: Re: [PATCH v2 3/4] hw/riscv/virt, gpex: Provide 32-bit MMIO window for
+ CXL host bridges
 To: Chen Pei <cp0613@linux.alibaba.com>, jic23@kernel.org, pbonzini@redhat.com,
  palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
@@ -101,38 +101,37 @@ To: Chen Pei <cp0613@linux.alibaba.com>, jic23@kernel.org, pbonzini@redhat.com,
  guoren@kernel.org
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
 References: <20260618093827.3507-1-cp0613@linux.alibaba.com>
- <20260618093827.3507-2-cp0613@linux.alibaba.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+ <20260618093827.3507-4-cp0613@linux.alibaba.com>
 Content-Language: en-US
-In-Reply-To: <20260618093827.3507-2-cp0613@linux.alibaba.com>
+In-Reply-To: <20260618093827.3507-4-cp0613@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI0MDE0MCBTYWx0ZWRfXyr0YHr6NIffy
- /SC8hykBnhlU9T8mXSpMKxNlJhNGs1LjRsedRbkodyD5vDBho4vLS1jpPXaMw/ek8/COiL5Nd6k
- NQaz28jMsFpAZT8/LBj375lkDOMudeE=
-X-Authority-Analysis: v=2.4 cv=JbaMa0KV c=1 sm=1 tr=0 ts=6a3c0913 cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI0MDE0NCBTYWx0ZWRfX56wGc+Dcc/27
+ Z9YQPUlUY6Gu9EoZRy3N+HyoUeVQp9SWyualLo5d2hb02E70mptol4tD2rHP7LbBHriLnp11590
+ cEUj5ehbmrJFbgxhtxUsYM7YoxW8rqA=
+X-Proofpoint-GUID: NUWQwlN8UU4HtM9zm3_jrFOxGb58sqdh
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI0MDE0NCBTYWx0ZWRfX2LSv00NnePZ0
+ a30deFtf/YDTHXzkCp0xYXYHed69Q+OiMYN2nO2RZoQsWytCmrNXhxXwDv2pZgXFfVlZB/lTn+C
+ RSFpuQXzhimmWNdFaZe+hjq+r8hp7hq+G2eVIma03CNBnu+j4sS+xpRsAcTtpOXrlWJ0Hs7wWwA
+ EnX3FkH1Lz52tRZY54fj1/yeGdsUnlennR96XRfnvd1UxTzHXm2XD4KPPVU6ka1Hur931o0zRPe
+ kcChVpuTdLxlBBZmpoxo3NnkrN2+wn1yNOq7WETRg1gIf5weomcXJseR3X7J0vMSo3YnD2LT9xz
+ HwTVsV66zFsv1i8T5IpituQAFYMcw7CreVIbNs+S3vIWerHN6G8cKogLlnxor69k7C6A8e+9Bmd
+ g4O9fHbuNYN1JtW9FndLs04tVjZHDA==
+X-Authority-Analysis: v=2.4 cv=UphT8ewB c=1 sm=1 tr=0 ts=6a3c121f cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=SRrdq9N9AAAA:8 a=OKAgqmDqJgUB0MQQqyQA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI0MDE0MCBTYWx0ZWRfX7jvdjZFWDQ1N
- ahr9YOKqHuSWPS7LoBCJmYOsjnsejcf2zxHiM1qk8QlFZSCSfYaQE1pIwyyGR2QfbDVRS6v/5Hb
- 8+sVjdjlYzihBitzTG3zvIwOeQ6cVjnldAFyng/EUHrmI+971ONqmB474Faf8AoRciPqck1NOwR
- SH3ayNXBgvn5M9XA4Z7BY2QvsPGeqceU+bW9L88w6w46rBdLvd0XOTkQKImF4TJopB8jYAZc8R6
- zpxJJtAg9oeRNeFkwZZN6JeMHSEsJiORpxiuJmvG0UO9JZx6DVtDlg6zGpOvuLyv+UxXyU+c0fR
- Omz5JZ5UldbBlWSP2a0JRBAYhIy4R6+X0v8rUWYxMLpk23tp5EXPHUfxk1POFmVNx2Bgd9X4613
- 15QDCTvvT4lIQKA6Gl3/Cq8yNf8wjA==
-X-Proofpoint-ORIG-GUID: mlGPUo8fejudDGNOcGwzG0eJ2uJeC8U_
-X-Proofpoint-GUID: mlGPUo8fejudDGNOcGwzG0eJ2uJeC8U_
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=SRrdq9N9AAAA:8 a=YeOTPVOvUyn0jVLZ81oA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-ORIG-GUID: NUWQwlN8UU4HtM9zm3_jrFOxGb58sqdh
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-24_03,2026-06-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 phishscore=0 lowpriorityscore=0 spamscore=0 malwarescore=0
- suspectscore=0 adultscore=0 classifier=typeunknown authscore=0 authtc=
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.22.0-2606150000 definitions=main-2606240140
+ lowpriorityscore=0 adultscore=0 phishscore=0 spamscore=0 suspectscore=0
+ malwarescore=0 bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2606240144
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -154,214 +153,209 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+From:  Daniel Henrique Barboza via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+
 
 On 6/18/2026 6:38 AM, Chen Pei wrote:
-> Enable CXL support on the RISC-V virt machine following the same
-> approach used by the ARM virt machine:
-> - Add PXB and ACPI_CXL Kconfig selections
-> - Add CXLState and PCIBus pointer to RISCVVirtState
-> - Register CXL machine properties via cxl_machine_init()
-> - Create CXL host register region above the PCIe high MMIO region
-> - Call cxl_hook_up_pxb_registers() and cxl_fmws_link_targets() at
->    machine_done time
-> - Map Fixed Memory Windows above the CXL host register region
-> - Add ACPI0017 device in DSDT and build CEDT table in virt-acpi-build.c
+> CXL component register BAR (BAR0 on CXL Root Port and Type3 device)
+> and the CXL device register BAR (BAR2 on Type3 device) are declared
+> as 64-bit non-prefetchable memory.  Per the PCI-to-PCI Bridge
+> Architecture Specification Rev 1.2 (PCI-SIG, 2003):
+> 
+>    - §3.2.5.8 (Memory Base/Limit): the non-prefetchable window covers
+>      only 32-bit addresses (AD[31:20]); the Type 1 header defines no
+>      upper-32-bit extension for it.
+>    - §3.2.5.9 (Prefetchable Memory Base/Limit): the bottom 4 bits
+>      encode 64-bit support (01h), but this applies exclusively to the
+>      *prefetchable* window.
+>    - §3.2.5.10 (Prefetchable Base/Limit Upper 32 Bits): optional
+>      registers for AD[63:32] of the prefetchable range only.
+> 
+> The architecture therefore allows a 64-bit window only when it is also
+> prefetchable; there is no 64-bit non-prefetchable form.  PCIe inherits
+> this Type 1 header layout unchanged.  Linux thus places 64-bit
+> non-prefetchable BARs in the 32-bit non-prefetchable bridge window,
+> which requires the bridge to own enough address space below 4 GiB.
+> 
+> On RISC-V virt the 32-bit PCIe MMIO range (1 GiB at 0x40000000) is
+> currently consumed entirely by PCI0, so CXL host bridges (ACPI0016)
+> have no non-prefetchable window and Linux fails to assign these BARs.
+> Marking the BARs prefetchable would work around it, but the CXL
+> component registers have read/write side effects and are not
+> prefetchable per the PCIe specification.
+> 
+> Reserve the top 256 MiB of the 32-bit MMIO window exclusively for
+> CXL host bridges:
+> - Shrink PCI0's mmio32 window by 256 MiB in virt.c so that UEFI's
+>    PciHostBridgeDxe and the ACPI _CRS for PCI0 never claim that range
+> - Store the reserved range in a new gpex_cfg.cxl_mmio32 field
+> - In gpex-acpi.c, emit the cxl_mmio32 range as the Memory resource
+>    in the CXL host bridge _CRS instead of re-using build_crs() (which
+>    returns an empty set when UEFI has not assigned resources yet)
+> - Reduce the FDT 'ranges' for PCI0 by the same 256 MiB so that UEFI
+>    firmware driven by device-tree also respects the reservation
 > 
 > Signed-off-by: Chen Pei <cp0613@linux.alibaba.com>
 > ---
->   hw/riscv/Kconfig           |  2 ++
->   hw/riscv/virt-acpi-build.c | 20 +++++++++++++++++++
->   hw/riscv/virt.c            | 40 ++++++++++++++++++++++++++++++++++++++
->   include/hw/riscv/virt.h    |  3 +++
->   4 files changed, 65 insertions(+)
+>   hw/pci-host/gpex-acpi.c    | 36 +++++++++++++++++++++--
+>   hw/riscv/virt.c            | 58 +++++++++++++++++++++++++++++++-------
+>   include/hw/pci-host/gpex.h |  1 +
+>   3 files changed, 83 insertions(+), 12 deletions(-)
 > 
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 2518b04175..ebd0355f09 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -66,8 +66,10 @@ config RISCV_VIRT
->       select VIRTIO_MMIO
->       select FW_CFG_DMA
->       select PLATFORM_BUS
-> +    select PXB
->       select ACPI
->       select ACPI_PCI
-> +    select ACPI_CXL
->   
->   config SHAKTI_C
->       bool
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 413d47d70e..309d64b322 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -29,12 +29,16 @@
->   #include "hw/acpi/aml-build.h"
->   #include "hw/acpi/pci.h"
->   #include "hw/acpi/utils.h"
-> +#include "hw/acpi/cxl.h"
->   #include "hw/intc/riscv_aclint.h"
->   #include "hw/nvram/fw_cfg_acpi.h"
->   #include "hw/pci-host/gpex.h"
-> +#include "hw/pci/pci_bus.h"
->   #include "hw/riscv/virt.h"
->   #include "hw/riscv/numa.h"
->   #include "hw/virtio/virtio-acpi.h"
-> +#include "hw/cxl/cxl.h"
-> +#include "hw/cxl/cxl_host.h"
->   #include "kvm/kvm_riscv.h"
->   #include "migration/vmstate.h"
->   #include "qapi/error.h"
-> @@ -503,6 +507,17 @@ static void build_dsdt(GArray *table_data,
->           acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2);
->       }
->   
-> +    if (s->cxl_devices_state.is_enabled) {
-> +        Aml *cxl_dev = aml_device("CXLM");
-> +        aml_append(cxl_dev, aml_name_decl("_HID", aml_string("ACPI0017")));
-> +        Aml *method = aml_method("_STA", 0, AML_NOTSERIALIZED);
-> +        aml_append(method, aml_return(aml_int(0x0B)));
-> +        aml_append(cxl_dev, method);
-> +        build_cxl_dsm_method(cxl_dev);
+> diff --git a/hw/pci-host/gpex-acpi.c b/hw/pci-host/gpex-acpi.c
+> index d9820f9b41..d8b943b665 100644
+> --- a/hw/pci-host/gpex-acpi.c
+> +++ b/hw/pci-host/gpex-acpi.c
+> @@ -158,9 +158,41 @@ void acpi_dsdt_add_gpex(Aml *scope, struct GPEXConfig *cfg)
+>                * Resources defined for PXBs are composed of the following parts:
+>                * 1. The resources the pci-bridge/pcie-root-port need.
+>                * 2. The resources the devices behind pxb need.
+> +             *
+> +             * For CXL host bridges on platforms where UEFI (driven by
+> +             * FDT 'ranges') does not assign PCI resources for the CXL
+> +             * root bridge before ACPI table construction, build_crs()
+> +             * would return an empty resource set.  When the platform
+> +             * has reserved a dedicated MMIO window for CXL host bridges
+> +             * (cfg->cxl_mmio32), emit that window as a static _CRS
+> +             * instead.  The platform is responsible for shrinking PCI0's
+> +             * mmio32 window so the two do not overlap.
+>                */
+> -            crs = build_crs(PCI_HOST_BRIDGE(BUS(bus)->parent), &crs_range_set,
+> -                            cfg->pio.base, 0, 0, 0);
+> +            if (is_cxl && cfg->cxl_mmio32.size) {
+> +                uint64_t cxl_base = cfg->cxl_mmio32.base;
+> +                uint64_t cxl_size = cfg->cxl_mmio32.size;
 > +
-> +        aml_append(scope, cxl_dev);
-> +    }
+> +                crs = aml_resource_template();
 > +
->       aml_append(dsdt, scope);
->   
->       /* copy AML table into ACPI tables blob and patch header there */
-> @@ -910,6 +925,11 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
->                      s->oem_table_id);
->       }
->   
-> +    if (s->cxl_devices_state.is_enabled) {
-> +        cxl_build_cedt(table_offsets, tables_blob, tables->linker,
-> +                       s->oem_id, s->oem_table_id, &s->cxl_devices_state);
-> +    }
+> +                /* 32-bit MMIO range for CXL devices */
+> +                aml_append(crs,
+> +                    aml_dword_memory(AML_POS_DECODE, AML_MIN_FIXED,
+> +                                     AML_MAX_FIXED, AML_NON_CACHEABLE,
+> +                                     AML_READ_WRITE, 0,
+> +                                     cxl_base,
+> +                                     cxl_base + cxl_size - 1,
+> +                                     0, cxl_size));
 > +
->       if (ms->numa_state->num_nodes > 0) {
->           acpi_add_table(table_offsets, tables_blob);
->           build_srat(tables_blob, tables->linker, s);
+> +                /* Bus number range */
+> +                aml_append(crs,
+> +                    aml_word_bus_number(AML_MIN_FIXED, AML_MAX_FIXED,
+> +                                       AML_POS_DECODE, 0,
+> +                                       bus_num, bus_num + 15,
+> +                                       0, 16));
+> +            } else {
+> +                crs = build_crs(PCI_HOST_BRIDGE(BUS(bus)->parent),
+> +                                &crs_range_set, cfg->pio.base, 0, 0, 0);
+> +            }
+>               aml_append(dev, aml_name_decl("_CRS", crs));
+>   
+>               if (is_cxl) {
 > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index ce64eaaef7..84b91b4322 100644
+> index 84b91b4322..9c1a001553 100644
 > --- a/hw/riscv/virt.c
 > +++ b/hw/riscv/virt.c
-> @@ -55,6 +55,8 @@
->   #include "hw/pci/pci.h"
->   #include "hw/pci-host/gpex.h"
->   #include "hw/display/ramfb.h"
-> +#include "hw/cxl/cxl.h"
-> +#include "hw/cxl/cxl_host.h"
->   #include "hw/acpi/aml-build.h"
->   #include "qapi/qapi-visit-common.h"
->   #include "hw/virtio/virtio-iommu.h"
-> @@ -1259,9 +1261,27 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+> @@ -113,6 +113,9 @@ static const MemMapEntry virt_memmap[] = {
+>   /* PCIe high mmio for RV64, size is fixed but base depends on top of RAM */
+>   #define VIRT64_HIGH_PCIE_MMIO_SIZE  (16 * GiB)
+>   
+> +/* 32-bit MMIO range carved out of VIRT_PCIE_MMIO for CXL host bridges */
+> +#define VIRT_CXL_MMIO32_SIZE        (256 * MiB)
+> +
+>   static MemMapEntry virt_high_pcie_memmap;
+>   
+>   #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
+> @@ -890,15 +893,28 @@ static void create_fdt_pcie(RISCVVirtState *s,
 >       }
->   
->       GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
-> +    s->pci_bus = PCI_HOST_BRIDGE(dev)->bus;
->       return dev;
->   }
->   
-> +static void create_cxl_host_reg_region(RISCVVirtState *s)
-> +{
-> +    MemoryRegion *sysmem = get_system_memory();
-> +    MemoryRegion *mr = &s->cxl_devices_state.host_mr;
-> +    hwaddr base;
-> +
-> +    if (!s->cxl_devices_state.is_enabled) {
-> +        return;
+>       qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2,
+>           s->memmap[VIRT_PCIE_ECAM].base, 2, s->memmap[VIRT_PCIE_ECAM].size);
+> -    qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
+> -        1, FDT_PCI_RANGE_IOPORT, 2, 0,
+> -        2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO].size,
+> -        1, FDT_PCI_RANGE_MMIO,
+> -        2, s->memmap[VIRT_PCIE_MMIO].base,
+> -        2, s->memmap[VIRT_PCIE_MMIO].base, 2, s->memmap[VIRT_PCIE_MMIO].size,
+> -        1, FDT_PCI_RANGE_MMIO_64BIT,
+> -        2, virt_high_pcie_memmap.base,
+> -        2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
+> +    {
+> +        /*
+> +         * When CXL is enabled, reserve the last 256 MiB of the 32-bit
+> +         * MMIO window for CXL host bridges and exclude it from the main
+> +         * PCIe host bridge's FDT 'ranges' so UEFI's PciHostBridgeDxe
+> +         * does not allocate that range to PCI0.  The CXL host bridge
+> +         * _CRS declares this range independently.
+> +         */
+> +        hwaddr mmio32_size = s->memmap[VIRT_PCIE_MMIO].size;
+> +        if (s->cxl_devices_state.is_enabled) {
+> +            mmio32_size -= VIRT_CXL_MMIO32_SIZE;
+> +        }
+> +        qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
+> +            1, FDT_PCI_RANGE_IOPORT, 2, 0,
+> +            2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO].size,
+> +            1, FDT_PCI_RANGE_MMIO,
+> +            2, s->memmap[VIRT_PCIE_MMIO].base,
+> +            2, s->memmap[VIRT_PCIE_MMIO].base, 2, mmio32_size,
+> +            1, FDT_PCI_RANGE_MMIO_64BIT,
+> +            2, virt_high_pcie_memmap.base,
+> +            2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
 > +    }
-> +
-> +    base = virt_high_pcie_memmap.base + virt_high_pcie_memmap.size;
-> +    base = ROUND_UP(base, 64 * KiB);
-> +
-> +    memory_region_init(mr, OBJECT(s), "cxl_host_reg", 64 * KiB * 16);
-> +    memory_region_add_subregion(sysmem, base, mr);
-> +}
-> +
->   static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
->   {
->       FWCfgState *fw_cfg;
-> @@ -1426,6 +1446,13 @@ static void virt_machine_done(Notifier *notifier, void *data)
->                                        machine_done);
->       MachineState *machine = MACHINE(s);
->       hwaddr start_addr = s->memmap[VIRT_DRAM].base;
-> +
-> +    cxl_hook_up_pxb_registers(s->pci_bus, &s->cxl_devices_state,
-> +                              &error_fatal);
-> +
-> +    if (s->cxl_devices_state.is_enabled) {
-> +        cxl_fmws_link_targets(&error_fatal);
-> +    }
->       hwaddr firmware_end_addr;
->       vaddr kernel_start_addr;
->       const char *firmware_name = riscv_default_firmware_name(&s->soc[0]);
-> @@ -1663,6 +1690,17 @@ static void virt_machine_init(MachineState *machine)
->               ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
->       }
->   
-> +    create_cxl_host_reg_region(s);
-> +
-> +    if (s->cxl_devices_state.is_enabled) {
-> +        hwaddr cxl_base = virt_high_pcie_memmap.base +
-> +                          virt_high_pcie_memmap.size;
-> +        cxl_base += memory_region_size(&s->cxl_devices_state.host_mr);
-> +        cxl_base = ROUND_UP(cxl_base, 256 * MiB);
-> +        cxl_fmws_set_memmap(cxl_base, UINT64_MAX);
-> +        cxl_fmws_update_mmio();
-> +    }
-> +
 
-create_cxl_host_reg_region() is doing the same check:
+We can get rid of the braces - it's just adding an extra identation level while
+not doing anything special.  'mmio32_size' can be declared at the start
+of create_fdt_pcie().
 
-if (!s->cxl_devices_state.is_enabled) {
-(...)
-
-Maybe we could squash these update_mmio() lines in the same helper to have
-everything CXL related in the same place.  The helper would need to be
-renamed to something more appropriate (e.g. cxl_host_state_init() since we're
-at init time).
-
-
-Patch LGTM otherwise. Thanks,
+Thanks,
 Daniel
 
->       /* register system main memory (actual RAM) */
->       memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
->                                   machine->ram);
-> @@ -1769,6 +1807,8 @@ static void virt_machine_instance_init(Object *obj)
->       s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
->       s->acpi = ON_OFF_AUTO_AUTO;
->       s->iommu_sys = ON_OFF_AUTO_AUTO;
+>   
+>       if (virt_is_iommu_sys_enabled(s)) {
+>           qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
+> @@ -1728,7 +1744,29 @@ static void virt_machine_init(MachineState *machine)
+>               qdev_get_gpio_in(virtio_irqchip, VIRTIO_IRQ + i));
+>       }
+>   
+> -    gpex_pcie_init(system_memory, pcie_irqchip, s);
+> +    DeviceState *pcie_dev = gpex_pcie_init(system_memory, pcie_irqchip, s);
 > +
-> +    cxl_machine_init(obj, &s->cxl_devices_state);
->   }
+> +    /*
+> +     * If CXL is enabled, reserve the last 256 MiB of the 32-bit MMIO
+> +     * window for CXL host bridges so the bridge non-prefetchable window
+> +     * can hold CXL device BARs (component registers and similar 64-bit
+> +     * non-prefetchable BARs that need a < 4 GiB address).
+> +     *
+> +     * - Shrink PCI0's mmio32 advertised in the ACPI _CRS by the same
+> +     *   256 MiB so the two ranges do not overlap (the FDT 'ranges'
+> +     *   shrink happens in create_fdt_pcie()).
+> +     * - Store the reserved range in cxl_mmio32 so gpex-acpi.c can emit
+> +     *   a correct _CRS for the CXL host bridge (ACPI0016).
+> +     */
+> +    if (s->cxl_devices_state.is_enabled) {
+> +        GPEXHost *gpex = GPEX_HOST(pcie_dev);
+> +        gpex->gpex_cfg.cxl_mmio32.size = VIRT_CXL_MMIO32_SIZE;
+> +        gpex->gpex_cfg.cxl_mmio32.base =
+> +            s->memmap[VIRT_PCIE_MMIO].base +
+> +            s->memmap[VIRT_PCIE_MMIO].size - VIRT_CXL_MMIO32_SIZE;
+> +        /* Shrink PCI0's advertised 32-bit MMIO window to exclude CXL range */
+> +        gpex->gpex_cfg.mmio32.size -= VIRT_CXL_MMIO32_SIZE;
+> +    }
 >   
->   static char *virt_get_aia_guests(Object *obj, Error **errp)
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 18a2a323a3..7d559ac610 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -24,6 +24,7 @@
->   #include "hw/core/sysbus.h"
->   #include "hw/block/flash.h"
->   #include "hw/intc/riscv_imsic.h"
-> +#include "hw/cxl/cxl.h"
+>       create_platform_bus(s, mmio_irqchip);
 >   
->   #define VIRT_CPUS_MAX_BITS             9
->   #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
-> @@ -64,6 +65,8 @@ struct RISCVVirtState {
->       struct GPEXHost *gpex_host;
->       OnOffAuto iommu_sys;
->       uint16_t pci_iommu_bdf;
-> +    CXLState cxl_devices_state;
-> +    PCIBus *pci_bus;
->   };
->   
->   enum {
+> diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
+> index 1da9c85bce..d38fbbacd6 100644
+> --- a/include/hw/pci-host/gpex.h
+> +++ b/include/hw/pci-host/gpex.h
+> @@ -43,6 +43,7 @@ struct GPEXConfig {
+>       MemMapEntry mmio32;
+>       MemMapEntry mmio64;
+>       MemMapEntry pio;
+> +    MemMapEntry cxl_mmio32;
+>       int         irq;
+>       PCIBus      *bus;
+>       bool        pci_native_hotplug;
 
 
