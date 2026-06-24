@@ -4,138 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB79CDB47F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 12:34:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFA09CDB479
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 14:39:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wcMoA-0000GP-4p; Wed, 24 Jun 2026 08:34:22 -0400
+	id 1wcOlU-0007Oe-G1; Wed, 24 Jun 2026 10:39:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wcMnz-0000Am-Ax
- for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 08:34:11 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wcMnx-0004an-MZ
- for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 08:34:11 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65OANu2W3047485
- for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 12:34:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- nAPyGWX7faTZM0i2WPzASbgIb4XCxCXW52FicIh0EOM=; b=O27BRwLA9Gzp+U4D
- HDlpWCTCn0CWwkxDxw6jPhWqW4NAayqn1fNr8hRB17ighO9U4zgekk+Ac+2HvF9K
- aSivfqb2naspMKmvPtGtBaNMOVfBV7kV/PCtcWxD486PZd3dY8dCuHv6uBLHVeO5
- jiwfM2N71zGtGeiAe4nrX8gFEIuJ/GrGeDsxtjpeb63vMZjz+EQL9UAkqV9B9mRa
- nvYcjLlVPMiqZwEVY+Mg/87JNDnDSmUuZaVPA8YWHH9YOba6yML2oIBgkWQ4Z7/3
- vbbSHnLIrr4jnm9BBZZa590l1z2FdXfdIAGd0Co53wDEuweocN3Yn2Ms2UeoTrIo
- 1Hqayg==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
- [74.125.82.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f05ar26ut-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 12:34:06 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id
- 5a478bee46e88-30c0d568830so3492119eec.1
- for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 05:34:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
+ id 1wcOlS-0007OE-LH
+ for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 10:39:42 -0400
+Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
+ id 1wcOlR-0002qV-2I
+ for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 10:39:42 -0400
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5aa61e3d3f3so1109165e87.0
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 07:39:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782311979; cv=none;
+ d=google.com; s=arc-20240605;
+ b=PwfHdh6kmiNrb9Kgg12lBSX26P/4u/o3OmmMyDtaQ83hZYUgvhRosGT2zp0/HQbuWH
+ 6nd2+XJQCsk3P9q1iaNUghTbQubcsegyEusnhzVZ0/sxGQxi9a8GstEeX4ZW25Q/HQVv
+ B27s3ZQZtyRlJcX3r5H9rSK6QvJic/BkS3u+FBr9mEqUPLsGgcC5FxNdd9bTHCdYw9i6
+ sI29cZjkTIMxkXuT6XA0M3p2ZmQPECEc1XAhVWSby1qthk7TPmCtvfMAjs4m0197Me2T
+ lcd1czWoEGAEG7A+GwqIi+7PEr/ALATyAc9q3XHMLpbJThyCNpMeFV4NaKb+10W+tXlB
+ 0r5g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ToX7vzujzwu1ZERuBXKxJH0zW2dxltUXq9k0R/akn1s=;
+ fh=6I7VcyjKDN+Okt9/KvSBc86ddDyXaSWPNoQ2jFbPgnM=;
+ b=hqq5fsPnbYFFlD0VkH6rl5NPuCWeKLeghxsHaCW9bNClDTVc5hpD1VS8fxEmyhRUGC
+ K7/wMW85EULL2H34SN1DqRYwuAmOKfA+ENy6Wmw6RFAjPtm7IROnJCRekA9Yv1PziIIZ
+ uKEfdjKckuwYBasDHM1HmpBHHGzJCDQYIwLUeJjO+Yhm+XMW0F+hbS6a6jvTL02MC0tP
+ MEK2v5btuuzSLWHaad9/qlkGTII9Lcr0pSojmTBOOiBTZslR1uuIIIGAjQ+87pvLKnWL
+ EnX5x0QZoL4nHDHHtp+mGP4IL8FL+yFBeF8x827SBCeutBPaOplMtmaH2bb0DN4Rc3AI
+ YzYw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782304446; x=1782909246; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=nAPyGWX7faTZM0i2WPzASbgIb4XCxCXW52FicIh0EOM=;
- b=TkqcuTuXc7XXttWnp54qwKsRwuJlC2mQdJbYvCz3To6PdgE5Z37z2y5H7Ojml+K89T
- NCloQAiMZRfg8bitdLke8CmZ9UqhuxkUeFVUuD3b+BMVqoQ2xKobHQIEDeJqhVutSP3J
- WwW+ZPIFQ5KN1/S/5wxOT9+xrNwvrUdteUEIqtEr0YeyVaM6FV5HEy7d8NtmuM9RuFbb
- TD1WUr4OQPOiEn/FnToR0u1YLwO3I+VrLHqa+GcofDs+RJs7WL1Ymo6K7oir0YRIdupd
- Yk6BAt2TAcMwjqZdW9XBrO2eBArSRM2KWaGwbEVR54GRdGtfgJshVJsmHs/hluSHD6xX
- 5cyQ==
+ d=gmail.com; s=20251104; t=1782311979; x=1782916779; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ToX7vzujzwu1ZERuBXKxJH0zW2dxltUXq9k0R/akn1s=;
+ b=Y6DwHvj4Hi02c7dqQQOM3GCxVrCUj4UJHHJoRSkSicphG8xqun6fsJLRDb0PVJAI7C
+ wFq0eugvuoGQQJlEZE27FJW/Ae1omjVkC1qAAtrDSl3QFIfj5u+2AzohQbhQQgPivowN
+ +UnuBRcTuzK/O0nYi13TyRY6ZzOH2nas3/ckc/QHL03LP71jn38OCpiJWowGCFpnLQdI
+ gU9RtBtZkGTTayne0rHrwH0Ld+w7+jHWnO2Ds0QlrEN1x2mpvDYp/kiKx7H4EgPJ3w/n
+ Yhgz/Z8+B9XyDIJpt62qLDCuoxkq3c13e0RKsnxKRTrxWwB9aAXOCruJPZBGC4a6IjBM
+ 5/wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782304446; x=1782909246;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nAPyGWX7faTZM0i2WPzASbgIb4XCxCXW52FicIh0EOM=;
- b=tUP3YYSQtbFo4mnQ5HLYgWe1BV5nZcssE0F1jz53MAIvUOO0KaeHEcVyKDY7EkRDaN
- lPJoEOnQ6s2878qWgMwjWRIgJehu2m8XAesssv1K1JovsfIVenxYc8SkLU6qbxXDoLUT
- Iwe6jTMcOEAP0a/X0ubooPsZZm0oIgAbaIpUUCDN1cl2btWLcTgP5s/Oqn9FteZK0fYl
- IDl/OAn82Kgf5hnM0t/5SMce97FUR7O/87fEaweVRunmmwEZ/c9e+5+ynzYDFNETawNh
- DwuhHiBwyf0xbr4EUvBftMHigKUpHbYpoh9Ci+C3xBie5SvwNgsRTxYHHMX1MFb3umY/
- x9FQ==
-X-Gm-Message-State: AOJu0YxcfeV5LWpvBiriURQBrC1rfiy65iR8zVhYJGQ5XAJp3SuJK//V
- /yg7WQzMtOFA+yPEiaeEh07ghcqgpPfsQSxCOvb6kAtXAYGjOGrUc1E4YQ1uWkBueBTOWnil0op
- jZfSSHoSFK8ct2O8sqLItC5dgyDRYDFw4PleMx1PFSc5uwYzbfqP3DRKMOW1Q8Elx4A==
-X-Gm-Gg: AfdE7cl6t96M/9zV9aUbuxDTAXpM8N2TyzqBWB2EAd8J6fNi22DaRaWeHryFoAtCDV9
- pCduvP9bu70T3uswjc/a9EgJzxAdxh4ij3OpvuBlT4MdSKTj4yqUROiTPJHM9NX1J1CTlt8MlRY
- RlcKDBXrA7gRSnLp+T6p+QhMVu0G9Wf+bHeWf8rcZZ5t7G1SZ49rIH4+x/Qi1BXIKAZqhLvdqrP
- nHIQc0XKle/RS8V6ai8/zcnxfshXAxXJzK8ddFqcPYoI5OriMtS3roJlK3x8Zr9ByeBMRc2DE1F
- 6qz2sXb01ZtPIGjgGnlqG4BEBOLRQIuSUv1b1ZXxTHLV5DuPy5/KJ10KXqhAnTbRRk8ZlL6aDwm
- JKimEgVuMzbIDeVVCa+niufpnDPtAIDRb0UbEy9zzR76k
-X-Received: by 2002:a05:7300:2d15:b0:30b:c6f0:1cd9 with SMTP id
- 5a478bee46e88-30c58bb66c6mr7174420eec.26.1782304445889; 
- Wed, 24 Jun 2026 05:34:05 -0700 (PDT)
-X-Received: by 2002:a05:7300:2d15:b0:30b:c6f0:1cd9 with SMTP id
- 5a478bee46e88-30c58bb66c6mr7174387eec.26.1782304445385; 
- Wed, 24 Jun 2026 05:34:05 -0700 (PDT)
-Received: from [192.168.68.103] ([189.79.21.40])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c1be4b24esm22779655eec.27.2026.06.24.05.34.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jun 2026 05:34:04 -0700 (PDT)
-Message-ID: <4e78cb10-dbed-4f22-b104-43f45595f86e@oss.qualcomm.com>
-Date: Wed, 24 Jun 2026 09:34:01 -0300
+ d=1e100.net; s=20251104; t=1782311979; x=1782916779;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ToX7vzujzwu1ZERuBXKxJH0zW2dxltUXq9k0R/akn1s=;
+ b=olHtf1Q4r9mqQv4dB64q4v+C0LUir44FVwLfVzxaMOhBoA2kwjTsbcfmgrYttz6+e7
+ Pvto4VGQ25bHKhjWnTSR1nfMeGxVrh9fuvZh2bFBCN/o1phge+Rw/Aj4WM3/ExC6knKs
+ wLCWp1i/borfJ8pPcARhN0w+QDRhWq4uGrefkjzeK0MDxymONna8moaMxQZ38YbxMyhz
+ SA/pejr8oN+ZfYox+jaue56Lej7SZLurkOoLhtoo/LrUXV6AedLve/fYgrUmGbKwm29B
+ vpmJcafPdia0nV2UnGxjkTEFMRxOMpzHnCMY/4oSeBh7wCBfbgujhaEJ676r9JtmrT0B
+ JU7g==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoLqFYl1oIu6dWbA32lpMcOk+RV6x2/0OQgs39VYe4857qeYm9PnvZgBqfszEAhpc6XySShd/JBfRY2@nongnu.org
+X-Gm-Message-State: AOJu0YwghJzoE/6ocpV3YNm0G7aAhajqdOFeo/hR44Z50c+vM2Bb8TDA
+ 8DFauvRvrQciawyLWdBPilMXuSEphRDvNysLRPQgkTLpeR9arT6gpLOtAI5TAGNrkpvYmYX0ADs
+ SRnJOn7GNYo0jwePL3FnP8ii3RNshsEY=
+X-Gm-Gg: AfdE7cmgl9NQSMdFsqEjDOlhE2iUl8B5ZgTdjY803a95zDiKQiq9PHhlt3UryMauwZZ
+ xg/rASWe0L4vh1mV7XP8T92pHeqB2AsfQHB/yFCJUH2AFkjUFadx6UlEGqSvILT8TUHEbCWUNHE
+ 2YlnAwVqfZd3o3LxTpEmc4YaSSzHG2ZF53YtIbWYD5mP2oq/nnp1FRSkUNab6O1ujG3fy3O8HDR
+ kiLCBvPod8dvozMeoAmDJOHNensvMpA2gN7tfzqdVIzfn+uAPdmPqwtxnT4h0KEEoXh0yzOuVOG
+ azHw6M0jEg0x42nzchSXAbKrewba
+X-Received: by 2002:a05:6512:ac3:b0:5ad:5079:483a with SMTP id
+ 2adb3069b0e04-5addb81cdc8mr2481854e87.12.1782311978267; Wed, 24 Jun 2026
+ 07:39:38 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Fix vsstatus.UXL reserved value
-To: SeungJu Cheon <suunj1331@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com
 References: <20260624090052.463075-1-suunj1331@gmail.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260624090052.463075-1-suunj1331@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: 9fuw7izUq_ovzZvq9cplMZBSRSfHcF-K
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI0MDEwNCBTYWx0ZWRfX8gtIH+A2vij4
- /JKgHCn/S1OGKbqmE/Swo2FTQ6gFy8ZjYK+bYcbZmZcnZDE2oTY9xhMLBY3yvaLyArbB4v7EktC
- 31ImY2JHqEVJ0nLyZ+Hi0QP782CeVUk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI0MDEwNCBTYWx0ZWRfX9S/aNFDXX/fm
- QjgUybzKuBUVhp6H4DvlrwoU+PeSP0chg96aMuiJKfU6+n5Ykek239XeldmbXDBYlB2me/1OzSB
- eg3Ck5vEGdHX2PHzzK0aophQNTGbIrhRGhPwGhHowdzyWIDWYfAoWYZY5IAufHTURpm9YwcC4wk
- aob7AMMK8q/Azwj44Csluy21uZVHhNWRX31oXZnx4gHsWJWUXnhA/lzwQzGZ24aqurCb97PNFcH
- tLv07Ve2TcZrpcsegGX/iq9PDIiJaM4PKn6XiZ7ad5Z/4qH9f9QIVnyXCEvGJcFgM9WKLmDWfHO
- HotukC0ALAtKZw4oTNJ0YXzZkdhMwmTggs0wH02Zi8DJ9n6Gv9Lb/mpxGymGyUWvuP8FZsA3jhz
- uSx8JoBQOIqZK/+633vXeE5iuh/g3Q==
-X-Proofpoint-GUID: 9fuw7izUq_ovzZvq9cplMZBSRSfHcF-K
-X-Authority-Analysis: v=2.4 cv=EuLiaycA c=1 sm=1 tr=0 ts=6a3bcebe cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=ca-pEfRt2ID3f-_x_JYA:9 a=QEXdDO2ut3YA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-24_03,2026-06-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 malwarescore=0
- phishscore=0 spamscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2606240104
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ <4e78cb10-dbed-4f22-b104-43f45595f86e@oss.qualcomm.com>
+In-Reply-To: <4e78cb10-dbed-4f22-b104-43f45595f86e@oss.qualcomm.com>
+From: SeungJu Cheon <suunj1331@gmail.com>
+Date: Wed, 24 Jun 2026 23:39:25 +0900
+X-Gm-Features: AVVi8Cfi9Fp5VXWps5xvboHpH-iCiLiocVwAL6y-rxjSIlQVuREeeA5h2QZ264M
+Message-ID: <CAGwK=3oHc_gep8fuoC8F7uQyEMxMvnrcJ_6F4HeSNOXtiJ_ggw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix vsstatus.UXL reserved value
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu.zevorn@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
+ envelope-from=suunj1331@gmail.com; helo=mail-lf1-x12c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -152,89 +121,103 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hello,
+Thanks for the review, Daniel.
 
-On 6/24/2026 6:00 AM, SeungJu Cheon wrote:
-> By the priv spec the value "3" is marked as 'Reserved' for
-> mstatus.UXL. write_mstatus() rejects this value, but
-> write_vsstatus() does not, allowing the reserved value to be
-> written and read back unchanged.
-> 
-> Handle a vsstatus.UXL = 3 write by writing the current 'xl'
-> instead.
-> 
-> Fixes: f310df58bd2 ("target/riscv: Enable uxl field write")
-> Signed-off-by: SeungJu Cheon <suunj1331@gmail.com>
-> ---
->   target/riscv/csr.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
-> 
+I'll add a helper function and resend as v2.
+
+Best regards,
+SeungJu
+
+On Wed, Jun 24, 2026 at 9:34=E2=80=AFPM Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
+>
+> Hello,
+>
+> On 6/24/2026 6:00 AM, SeungJu Cheon wrote:
+> > By the priv spec the value "3" is marked as 'Reserved' for
+> > mstatus.UXL. write_mstatus() rejects this value, but
+> > write_vsstatus() does not, allowing the reserved value to be
+> > written and read back unchanged.
+> >
+> > Handle a vsstatus.UXL =3D 3 write by writing the current 'xl'
+> > instead.
+> >
+> > Fixes: f310df58bd2 ("target/riscv: Enable uxl field write")
+> > Signed-off-by: SeungJu Cheon <suunj1331@gmail.com>
+> > ---
+> >   target/riscv/csr.c | 8 ++++++++
+> >   1 file changed, 8 insertions(+)
+> >
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index dd9726fcf4..4c1da61824 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -5226,7 +5226,15 @@ static RISCVException write_vsstatus(CPURISCVSta=
+te *env, int csrno,
+> >       uint64_t mask =3D (target_ulong)-1;
+> >       if ((val & VSSTATUS64_UXL) =3D=3D 0) {
+> >           mask &=3D ~VSSTATUS64_UXL;
+> > +    } else {
+> > +        uint64_t uxl =3D (val & VSSTATUS64_UXL) >> 32;
+> > +        if (uxl =3D=3D 3) {
+> > +            int xl =3D riscv_cpu_mxl(env);
+> > +            val =3D deposit64(val, 32, 2,
+> > +                            xl =3D=3D MXL_RV128 ? MXL_RV64 : xl);
+> > +        }
+> >       }
+>
+> This is similar to what was done here:
+>
+> commit ddfd33f1965804fc4a718d8d46bc150525c2f9db
+> Author: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Date:   Thu May 14 16:45:37 2026 -0300
+>
+>      target/riscv/csr.c: fix mstatus.UXL reserved value
+>
+>
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index dd9726fcf4..4c1da61824 100644
+> index 83ca354bf0..d004a4bfb4 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -5226,7 +5226,15 @@ static RISCVException write_vsstatus(CPURISCVState *env, int csrno,
->       uint64_t mask = (target_ulong)-1;
->       if ((val & VSSTATUS64_UXL) == 0) {
->           mask &= ~VSSTATUS64_UXL;
-> +    } else {
-> +        uint64_t uxl = (val & VSSTATUS64_UXL) >> 32;
-> +        if (uxl == 3) {
-> +            int xl = riscv_cpu_mxl(env);
-> +            val = deposit64(val, 32, 2,
-> +                            xl == MXL_RV128 ? MXL_RV64 : xl);
-> +        }
->       }
-
-This is similar to what was done here:
-
-commit ddfd33f1965804fc4a718d8d46bc150525c2f9db
-Author: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Date:   Thu May 14 16:45:37 2026 -0300
-
-     target/riscv/csr.c: fix mstatus.UXL reserved value
-
-
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 83ca354bf0..d004a4bfb4 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -2045,7 +2045,17 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-
-      if (xl != MXL_RV32 || env->debugger) {
-          if ((val & MSTATUS64_UXL) != 0) {
-+            uint64_t uxl = val & MSTATUS64_UXL >> 32;
-              mask |= MSTATUS64_UXL;
-+
-+            /*
-+             * uxl = 3 is reserved so write the current xl instead.
-+             * In case xl = MXL_RV128 (3) write MXL_RV64.
-+             */
-+            if (uxl == 3) {
-+                uxl = xl == MXL_RV128 ? MXL_RV64 : xl;
-+                val = deposit64(val, 32, 2, uxl);
-+            }
-          }
-      }
-
-
-But that patch fixed just write_mstatus().
-
-I suggest adding a local helper riscv_write_uxl (feel free to choose another better
-name) to encapsulate this logic and then use it in both mstatus and vsstatus to
-write UXL:
-
-  val = riscv_write_uxl(val)
-
-
-Thanks,
-Daniel
-
-
-
+> @@ -2045,7 +2045,17 @@ static RISCVException write_mstatus(CPURISCVState =
+*env, int csrno,
+>
+>       if (xl !=3D MXL_RV32 || env->debugger) {
+>           if ((val & MSTATUS64_UXL) !=3D 0) {
+> +            uint64_t uxl =3D val & MSTATUS64_UXL >> 32;
+>               mask |=3D MSTATUS64_UXL;
 > +
->       if ((env->henvcfg & HENVCFG_DTE)) {
->           if ((val & SSTATUS_SDT) != 0) {
->               val &= ~SSTATUS_SIE;
-
+> +            /*
+> +             * uxl =3D 3 is reserved so write the current xl instead.
+> +             * In case xl =3D MXL_RV128 (3) write MXL_RV64.
+> +             */
+> +            if (uxl =3D=3D 3) {
+> +                uxl =3D xl =3D=3D MXL_RV128 ? MXL_RV64 : xl;
+> +                val =3D deposit64(val, 32, 2, uxl);
+> +            }
+>           }
+>       }
+>
+>
+> But that patch fixed just write_mstatus().
+>
+> I suggest adding a local helper riscv_write_uxl (feel free to choose anot=
+her better
+> name) to encapsulate this logic and then use it in both mstatus and vssta=
+tus to
+> write UXL:
+>
+>   val =3D riscv_write_uxl(val)
+>
+>
+> Thanks,
+> Daniel
+>
+>
+>
+> > +
+> >       if ((env->henvcfg & HENVCFG_DTE)) {
+> >           if ((val & SSTATUS_SDT) !=3D 0) {
+> >               val &=3D ~SSTATUS_SIE;
+>
 
