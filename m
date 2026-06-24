@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 719FFCDB479
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 00:09:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 771CDCDB47C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 00:09:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wcBA5-0000Ej-TZ; Tue, 23 Jun 2026 20:08:13 -0400
+	id 1wcB9h-0007rO-5x; Tue, 23 Jun 2026 20:07:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wcBA0-0008OI-Gk
- for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 20:08:09 -0400
+ id 1wcB9Z-0007cF-UJ
+ for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 20:07:45 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wcB9y-0003Ni-9R
- for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 20:08:07 -0400
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ id 1wcB9W-0003KN-Qk
+ for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 20:07:41 -0400
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65NJwqfK613897
- for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 00:07:54 GMT
+ 65NJwlXF706687
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 00:07:36 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=novCirPSAB+
- Ybo1QyBdlWXtDjYfXG49M7VvGodoMtJI=; b=MxqoyS5E0opbuHwGMPJbRD7EnkH
- FJrHR2nB6GcNJLUCaeFhOwNBExhmU/78LhM/EQaet3r2V3wiz9zxISDaR/zu3IUE
- 8iJqSF1tjMN6w3hjaDJVvy/xpQeV6KnCvD3dQuhXq58/h+9R5nrcxoZwhO7pMcew
- X972x98REP6zJyYAqETjaI/sX/V+NwVEVFt12TLyOE3Ua4RQ7dHRXLct1vGqQSjk
- XkGkQEqGqUJLmMIkC0GnhDn9wCZjt4g83MwlyoXSQbPkwvzeJgu+xDWrVOwQS9Nf
- 5i79ur90zJj5vogKBkz1gOq5Z9LT4jC2Lr4pRrWoiCg8y6NkITouvAXRzaA==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eyppykjgt-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=smrgu7dCfi0
+ trFw7Vp+kVKVNvhdzaDa2myQuk8ZtXAw=; b=pHSue+xyCeblrL+HwkixVy4y0y7
+ BaD7qZhTTbVhh/4n0PkwSETcmp6tAIQMS18Ni6dJCFGrkNu5Hnj/MMxkifyntK0I
+ uHbMLQFAUvTBCDMEZRs2sh8DZZJfolZS9iw6p9eLetstF9b/kX3xFXWh+5l8X3zV
+ BkqFWedhciJXaib8mGLiGd8SbgSBJH1Jddm61sF09Cwszp6D1FooL4oUSb4R6GlN
+ IM8aeLKfk2Os4156eH01b2YbjW4xnktAkzTzi01fUM5w+y9L5op5NtFCU5PXx7Rs
+ AzJXygIFep7ZeqbCB7577VNLzNSe6Grg4UGzqfu0FP2ul9FUnR2HBaLmqjQ==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eyp29ktb9-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 00:07:53 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-8dc3be1ebb4so31610416d6.0
- for <qemu-riscv@nongnu.org>; Tue, 23 Jun 2026 17:07:53 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 00:07:35 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-8dba00e17b5so7493936d6.3
+ for <qemu-riscv@nongnu.org>; Tue, 23 Jun 2026 17:07:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782259672; x=1782864472; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1782259654; x=1782864454; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=novCirPSAB+Ybo1QyBdlWXtDjYfXG49M7VvGodoMtJI=;
- b=Dq550JMq1ea9J9BEK47Qa11op59a/FYDivf3XMM1NA/v3s+rYUV8F9TI4bOrVrIGLs
- TAhwYEuL8UhMKe9QIaXEBIMyfYFTMNBb7/C17YJhAJHSlnyIbiR9kcccADSe6jMuAV0L
- iAJ6K90JEUDPKzjEZV/A6i0xHGOSPmOpI26XuwsFw9J+5r5R//XXJAu7adG3jRXZq5+y
- sFJ8hURI5ktBOrzZboW4bJte0KAOuIQDNX1aOh62mq19ctmPsF0xu9kEXSwUr/O9EUOA
- giaOkUHn4THn3gcBUE8goZX0mHvSGJ5GCIV+seweTtHmhFgafgQWoTa2QpLrLwjtv8kx
- EGyw==
+ bh=smrgu7dCfi0trFw7Vp+kVKVNvhdzaDa2myQuk8ZtXAw=;
+ b=Anq5oyllJS3z2CtkRNX6eTIkb6i17d7xi+QlhVUsBEkTWWf4g2YuyU13SrjavREmPR
+ aUKP2Z/DXOCsjspHFyFkA+qH+No9EwceOOA0u8yFiINcrIR8i03psNh/H/KupKF8Tcw8
+ GqoHN4XYpDNJNdS0hzO+LuUerZwwaU7g9jgwm5q9C38u0fTRIppzXf0jvhAv2TwwmjWH
+ RDRfbagSUXZlR8CNRWsFBMNiUwPcVBACVpY6kHwY1eVSDeUgZ4w8iYILmTWSOXD8kNFe
+ CKSW64ACEp7VtLcAPndBabIbFZVBEBXz57uSTGiTBLtf4nwFD1M720b4e2Nfhek0hGiJ
+ HMnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782259672; x=1782864472;
+ d=1e100.net; s=20251104; t=1782259654; x=1782864454;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=novCirPSAB+Ybo1QyBdlWXtDjYfXG49M7VvGodoMtJI=;
- b=oRjVwpugB7oCpIUltI7QMX5HReJlAjouomvGE66UaoQL2N6xQyolT7ztO4Y0S5MHym
- EsH2ci6U2UdOcVgP5jJvKzx7X+wKoGJynwVv+MA2uVK/ZPL45wO9pMVQEMuKBSTrj+DX
- mfvtElsgMUz2voQ10yX51n6263mMafFXf2VcLZupCq3sJmi/P5cI/M+uivg/Y/3raa/H
- wbWk8RGhghav8FuDcn/G0FyPyPms9M7RXSMdlpXWPuoefhhqv50ozXv0DvKAIc4QpNl+
- r/+f0NrpTorXcKDrikrsFmj8iqkkpp/cZH/VMkotxZMAjgIgbuACS876NP5TCgJTwYrz
- t1Nw==
-X-Gm-Message-State: AOJu0YyhA6Q0Ump9H6OKouFIbyzreLrxGB/n6r3dE96n3ol//7hxdGsx
- GV1L5yDyGEIr8W+kASS18yIXPNa0McUaHnD4Ym8/5zhrtrmyVkmrBZDLLqfKZBFXRknASKYdwPM
- WxwbUJA8PeW1PvgJVYmlEn3QqgZFUIUPiCI/ViUoB2b7jZHiDhSb3jvbW0g==
-X-Gm-Gg: AfdE7cnVf/L46DwdCsUGz3fVJ82oQCz0CP7iW6mhkHJm1lfumVp0sW3J3K+Yf0x8LJW
- CE5wA+Tsh67OcSAGEBRsuuUktnuZ8GNhCofQpB6A04uSUxURVm9qvacdq9WGX1vnZlazc76hGg0
- aIxA2GJ/2kXMjooclJgj28leclDLrzpec+LY7Oglf5/sSRuzwBs2VzGfVR0afu88cc0HFwJmnmO
- Jxtd6KzkVXkalewwnR9TjWN/YPTgbAlehqi4NnKlkiUAKchse/4X1c93M5RgnUCrCYLSklXDFQm
- LzGewqVHivzSe28g2KfnmqcIkbF0uVXZapFyrcRQ+kCnHeEtO9BfMNdJMin08x5rBDxQFBgYCZH
- dVCn4h42tudIQnLZjhEk16OBqv4gYa2p8csRRLhbY41UCXA==
-X-Received: by 2002:a05:6214:8087:b0:8cc:d74a:8dff with SMTP id
- 6a1803df08f44-8e3b44488b6mr86597946d6.5.1782259672388; 
- Tue, 23 Jun 2026 17:07:52 -0700 (PDT)
-X-Received: by 2002:a05:6214:8087:b0:8cc:d74a:8dff with SMTP id
- 6a1803df08f44-8e3b44488b6mr86597616d6.5.1782259672034; 
- Tue, 23 Jun 2026 17:07:52 -0700 (PDT)
+ bh=smrgu7dCfi0trFw7Vp+kVKVNvhdzaDa2myQuk8ZtXAw=;
+ b=tP7MnGD53b81KsU/BiBMmv3k3m1MmPgZfyxrqmMbmpsoXPiluLUrzaohaXd2/LaI2q
+ 6WUtvhu648dCfx+KwWK0yhuJUiXibaW3WyJyaPGx2+Fa7EtYzxRZfFHywnHXBQrbzKUV
+ GQbNwAD0xm83tWJs0ydGY7yyfWwOlct/chWWOB3R8nsjdNMr2kd56drRFtiz7hfJKY8X
+ 0MhlWCtWPzwmStW820CD1vrXMlJnKUaqnardDhQGAsnbtKoQL5ak9uja0WgSm3TdyG5E
+ nJMuLvWkO7NL4SKM44hQFLRjFtJIJudtdLd1v+3jFJWZDEGKqIjgB5Q/UQ/q2GERZv9X
+ CskA==
+X-Gm-Message-State: AOJu0YzCHmpckiaXn07vRcYTQKrx/zRnLrRkvkjWw8VE2jVqqikLKWY2
+ ufAUihyzIZ44JF7ZpFWPwOur6hfoj+uZ4vX5OgKHRHyMOJCTEOzk9TVIVIZSUG8af95UQKDI7PT
+ lKE9Yyu24ioTORSgu3YXQ9dMaozN4OcUPvWSEtcbae6CA9IKByqcUkdsvDg==
+X-Gm-Gg: AfdE7cnzf/OkDrcRHlHxX4lfe34a1qlTJ4LfEzQSOSl7juif/SnP71Cur6cBEE6dzi2
+ AlP2Ooegsk1Yzfg1fyTADEHdHZVw2Obf4ziCLWvDgBn3DAM5bQUKf8JpXJvrgFMi2O7m12iKUGe
+ /6UngkAbtVY0uG6pQlDkHd8i5VzGsH95wS6QZHYiMMYsiq2b7hGL+D1gT5j/Y6SisuBYGku5H4c
+ DNcp7nVeLzF/xsCyyWt678X8BDNH9bHAeu4UEGy+fe+i4n4YvELCXldrz+wb1bA345XWew7N9r6
+ NNimZG0IkbreP3giT9aQ/z8hoRoH03ADLd5frBZWhUYD3L8tO4UxuCMbvupX7p1fTs4bBOweDq0
+ Lt/4nLQYPJX+v9h1TKoq98xl8tLK9aBrlgyuXMe6nksBk3w==
+X-Received: by 2002:a05:6214:4019:b0:8ca:256b:8741 with SMTP id
+ 6a1803df08f44-8e53543c244mr24782716d6.27.1782259654081; 
+ Tue, 23 Jun 2026 17:07:34 -0700 (PDT)
+X-Received: by 2002:a05:6214:4019:b0:8ca:256b:8741 with SMTP id
+ 6a1803df08f44-8e53543c244mr24782096d6.27.1782259653651; 
+ Tue, 23 Jun 2026 17:07:33 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.79.21.40])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8df81cdec56sm142422976d6.32.2026.06.23.17.07.49
+ 6a1803df08f44-8df81cdec56sm142422976d6.32.2026.06.23.17.07.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jun 2026 17:07:51 -0700 (PDT)
+ Tue, 23 Jun 2026 17:07:33 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -92,39 +92,38 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  pierrick.bouvier@oss.qualcomm.com, philmd@oss.qualcomm.com,
  fritchleybohrer@gmail.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v2 24/24] gitlab-ci.d/crossbuilds: add riscv64 KVM-only build
- job
-Date: Tue, 23 Jun 2026 21:06:31 -0300
-Message-ID: <20260624000632.2149359-25-daniel.barboza@oss.qualcomm.com>
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v2 18/24] hw/riscv/riscv_hart.c isolate tcg only bits
+Date: Tue, 23 Jun 2026 21:06:25 -0300
+Message-ID: <20260624000632.2149359-19-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260624000632.2149359-1-daniel.barboza@oss.qualcomm.com>
 References: <20260624000632.2149359-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIzMDE5OSBTYWx0ZWRfXz0Sv4iNQl8pv
- DMBJUvCRstyhW+EVVY/o0qXOg2HXExAGWVuT6RZkEOgKcDQzZDIfcDGg2CnpRXtok+h6/3TIFll
- gsgukRMocaX/FLvEKbPiH9f1GuaXjI7ujMukiR0iqxC72pkQEcjLVwKf9TRvoI9vKP7TrU8mvK6
- Fzv6rXRkFfMB0OoHTXvpHVU9JYrJniF6REIdNinZQbnOzdA59YBEfROCuxbhqp7bvIpdNbwD7PO
- 9431xMoC1RSYbG7A8DM0GPIcCenJjHmv5HFN26L3qwQMkDpIzK74IEkCEIpuaPJ6PrPVzK9xfZ2
- 00PrZMHTjSflzhRYyncV+CzuKOfu6bDr3V5QwxaGHG8GoXu0kQbVOGOWWWcfYag/xwnkxSwPG+e
- 2M8NR8Qnplm26CM0y15mzrYutsn6XQ==
-X-Proofpoint-GUID: llDHF7RtS5QCPqj0sB3HMpPsaQjGwyua
-X-Authority-Analysis: v=2.4 cv=dvfrzVg4 c=1 sm=1 tr=0 ts=6a3b1fd9 cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+X-Authority-Analysis: v=2.4 cv=LdAMLDfi c=1 sm=1 tr=0 ts=6a3b1fc7 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
  a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=pGLkceISAAAA:8
- a=EUspDBNiAAAA:8 a=BEvAcZqKd-QGyfCP7A8A:9 a=OIgjcC2v60KrkQgK7BGD:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIzMDE5OSBTYWx0ZWRfXxvB6KvQDn0Nt
- /CWO6Sn0MNI3mw/YIs9mW6i343yWflcpvsLC0kyj02xGjJAUemhnlB3hRvy7Z9SOa0w9ZjgWSVm
- MLsjRuuIFxsnzyTMVuB+4E0PwI4NkCw=
-X-Proofpoint-ORIG-GUID: llDHF7RtS5QCPqj0sB3HMpPsaQjGwyua
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
+ a=0nQI16K_ZF54athspwIA:9 a=1HOtulTD9v-eNWfpl4qZ:22
+X-Proofpoint-GUID: qgNbgpbKdYMw2gDJfApHWRO_PzDriD8J
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjIzMDE5OSBTYWx0ZWRfX2UyeGi6NeX79
+ /SBE7HWJwezmRG86t4lGVV3kSdWIpLOJ+Ln6T73vGPy4fP5jmt+EcFL5wAbA0o01+KwzFrmy8bp
+ Q3GwaPtu4FGm5HVLpa11LPUimc3MvLU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjIzMDE5OSBTYWx0ZWRfX4gpOfPgn02bi
+ HCWhP4Kw1BcVHE/+MamDN4Nw8ntMV//kQVLwdkGE6TYK8PRKiFCoL3O/1EdRnmcFWibYTXkNn/w
+ Wr+cQVDxziOk45gLizugUw5smq7DjRAcIOYgK/PtSY53Yc5OPy/ZN2Xmk54bI974qEMIe0msDrD
+ vRo5FTnL7CDyjD+F9jJWulvLIWSQj6Kz2xsbpuFgUCFJBrki3jfJJRgRTvC7JpShvI87Tmjs0EB
+ 3ZT9A5+T7gtIXrgwIxpvWBy+XHdiwcF2gsDSe1WeqHPJHHhSwdF6IBMQVtBU7DamEGk4T+c7WRG
+ WAh/Ag6AzaRBc5ah1bwOq2z8wLVt45iHIPZhGd8xsoVCBvmIowCUTtQcZDabmlE5ugcGCdU5vhq
+ Klnj5R8ZwbjBbJo4hxZ35uCgIX9SKQ==
+X-Proofpoint-ORIG-GUID: qgNbgpbKdYMw2gDJfApHWRO_PzDriD8J
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-23_04,2026-06-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 phishscore=0 adultscore=0 spamscore=0 suspectscore=0
- malwarescore=0 bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 spamscore=0 adultscore=0
+ phishscore=0 bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
  definitions=main-2606230199
 Received-SPF: pass client-ip=205.220.168.131;
@@ -135,7 +134,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -151,40 +150,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Zephyr Li <fritchleybohrer@gmail.com>
+riscv_cpu_register_csr_qtest_callback(), vcsr_call() and
+csr_qtest_callback() are all TCG only and are not available in
+--disable-tcg builds.
 
-Add CI coverage for a riscv64 --disable-tcg cross build. This ensures that
-RISC-V no-TCG/KVM-only builds keep working and prevents TCG-only code from
-being accidentally pulled into common RISC-V sources again.
-
-The cross_accel_build_job template enables KVM by default via
---enable-${ACCEL:-kvm}, so the extra options only need to disable TCG.
-
-Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- .gitlab-ci.d/crossbuilds.yml | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ hw/riscv/riscv_hart.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/.gitlab-ci.d/crossbuilds.yml b/.gitlab-ci.d/crossbuilds.yml
-index eaeeb533ce..a823aaaa21 100644
---- a/.gitlab-ci.d/crossbuilds.yml
-+++ b/.gitlab-ci.d/crossbuilds.yml
-@@ -59,6 +59,14 @@ cross-riscv64-user:
-   variables:
-     IMAGE: debian-riscv64-cross
+diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+index d1c7188369..747754be61 100644
+--- a/hw/riscv/riscv_hart.c
++++ b/hw/riscv/riscv_hart.c
+@@ -61,7 +61,7 @@ static void riscv_harts_cpu_reset(void *opaque)
+     cpu_reset(CPU(cpu));
+ }
  
-+cross-riscv64-kvm-only:
-+  extends: .cross_accel_build_job
-+  needs:
-+    - job: riscv64-debian-cross-container
-+  variables:
-+    IMAGE: debian-riscv64-cross
-+    EXTRA_CONFIGURE_OPTS: --disable-tcg --without-default-features
-+
- cross-s390x-system:
-   extends: .cross_system_build_job
-   needs:
+-#ifndef CONFIG_USER_ONLY
++#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+ static void csr_call(char *cmd, uint64_t cpu_num, int csrno, uint64_t *val)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(cpu_num));
+@@ -151,8 +151,10 @@ static void riscv_harts_realize(DeviceState *dev, Error **errp)
+ 
+     s->harts = g_new0(RISCVCPU, s->num_harts);
+ 
+-#ifndef CONFIG_USER_ONLY
+-    riscv_cpu_register_csr_qtest_callback();
++#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
++    if (qtest_enabled()) {
++        riscv_cpu_register_csr_qtest_callback();
++    }
+ #endif
+ 
+     for (n = 0; n < s->num_harts; n++) {
 -- 
 2.43.0
 
