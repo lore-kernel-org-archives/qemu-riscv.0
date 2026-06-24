@@ -4,115 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B63CD4F26
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 00:22:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BC82CDB479
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 Jun 2026 11:20:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wcBNS-00023r-Hw; Tue, 23 Jun 2026 20:22:02 -0400
+	id 1wcLdg-0001RM-Ig; Wed, 24 Jun 2026 07:19:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wcBNQ-00022c-Ah
- for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 20:22:00 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wcBNN-0005Es-Gz
- for qemu-riscv@nongnu.org; Tue, 23 Jun 2026 20:22:00 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-697f6c67028so47614a12.1
- for <qemu-riscv@nongnu.org>; Tue, 23 Jun 2026 17:21:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782260515; cv=none;
- d=google.com; s=arc-20260327;
- b=XGSpPmxYOei54P1l6BXvCemq84BHTKHdih43FXIg/rRofaOX1LuVQJzys1FRSDshz3
- W6tB0xp6w31W8Af6P765/b8S8pOFDqspmLDsaSZuyFeYljuBgDJ5kx3TxzEnwaCQinuA
- dnZ3oGis9lZ6RxXJwKcDLc8GSnBBwDFQNnlkH+zJe6CZ9iV9X74uY3I7eB1v9SF6Oxmm
- ca+FcYZOqofKpe4RRVfu5jvP9MvwhP+j3ExbIS93/p7gDEimPgRcF7LLgof1arHkQ4Vw
- 230sWdsghE1MGfR10Y9VTjNeNovt3C0bisFUrJTn6HBi8EN7m43kzUgSFbs9ZiqlnSnc
- C2TQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=tsgZiXdkmETDqTAW5iKS/LbdFktw0x6WXcHKVU9Tljo=;
- fh=Bc+kVXMHY4L6m/4/RA71pUKA+3PkrbsMcNKbs6tXHRo=;
- b=rc76dI9daHOgetIx1dzyZPp97l6W2nf27HLJzOi9vc+cd96difYiDXAlA7XZQFE+tU
- YBrE6QIayvxYoG7/Lr/BIyRSBpekxAp3iG6KXwAWjzS44y0mJoBzhDprV7EHSJBfjCGQ
- KIHb1qX+5buOioLXRQ8/7hsRT+c3MmC2YwWwEHFTOMRnZD0Ytoa8rkQcBsXq/JVGTsM0
- NoHgvWUqu+rO4KxESYbUSlgqavqtcE9zLrKo5WblRP8yNZ7xJhbvOySYEDOr7OnILJtj
- 79IlMIvAQSlKe1nYFhGWPkcsNB2WwnYX4DSFYbwvt6F5SxP7lQU5wrzJdGIglwpD6uXf
- y+jg==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wcLde-0001Qa-PV
+ for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 07:19:26 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wcLdd-0002I8-4F
+ for qemu-riscv@nongnu.org; Wed, 24 Jun 2026 07:19:26 -0400
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65OANmb94180623
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 11:19:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ OVWgMC6Q+RpoXrJzM0oD8D4c/89GWCELuadcBgtwNEU=; b=eUsaNFDnFGLdpQV5
+ oVSHfDwJEbqlb0dYRAru8pzZu8KqbTlmO1YVEYLWNJmtAE0rfmAWaTYX2ysd0jYv
+ gw8OjVsOZBXLP8YAn8Be2CLKd2zF8SvXycnQWOl9XcPpmWsQR/EOwh3Hbm4joJVY
+ UN8WGf9Boj16YX57e15gxOlUkdXZQOF4hCvzu2G5MqmG3pwy7YjJR1StmTCxvA13
+ 9b/aShl+7mChpexGh4KrFT7vmlMKxz22PnHTRS5d76dl8OZ0pwq4unHtZL1AelNt
+ O/jSpkfJNx1YlExPDDKvlzLdKvbP09n9myjI8SLWfoptdF8NjB7gCvhFrsQHapiI
+ nEoJGA==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
+ [74.125.82.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f0aqp8x90-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 11:19:22 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id
+ 5a478bee46e88-30c011c7cb9so2328198eec.1
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 04:19:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782260515; x=1782865315; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tsgZiXdkmETDqTAW5iKS/LbdFktw0x6WXcHKVU9Tljo=;
- b=ah+KKONKACopiqtgzTcRjDnhVc7ehDeB5Kw6geG2B4j3+TgiG/6fvk0kzJpUAQrjCF
- S4UrJjvxRqYa73QPpIMBq+CrqWRqAatIEJr558mcSWv2uDpFs7P5ifNA+2H6Rw7VWZY1
- BeuOwj6/QyeSw5ala9chybCO5PqS5vsfiIEzEWxEgS8OorawXhYKkpJQWfZCVlMs8Ih7
- Fe+tE49F/pmf8J8i0tsVTgl5PX2Kh+EIQRVbtk+kDrrLuAQc0S76bneIV9zMkC3C5F+S
- Rj8Jwc5Ud5JEjFbrcaJGR3oceTpTp0WqllTgEODxQdKlOQD88Ur7QBQVj1HL+H1ie/ty
- u5CQ==
+ d=oss.qualcomm.com; s=google; t=1782299962; x=1782904762; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OVWgMC6Q+RpoXrJzM0oD8D4c/89GWCELuadcBgtwNEU=;
+ b=ZLsiE1vxTWuzRJbfBoDdNdUhjq3yBJXxfeQ1CNUNnwGSWSaKI0nxQhDFhRoF0N2Thx
+ fgsfzBv+Lk5QUvKiNvzCZskqQyf0qTP09KIuVImfxDeSWiHlCFSudlYRMJzLqL8SLvTM
+ AOH4LBFIcW4d+sX0/6RnfuxkkV3mQ0CjCCgLPI048kcDAo6l6GyoJ7R/TshzH7khbOo/
+ vs3Kp1TNU0NmJJfPljsihKCHyZZ4G+IBH5/uhlrM1j1eSGElZZQbIJuZXldabjLKKdKb
+ 3ln9aeV08EMXWMlvWQatZKL7khmvW1ZSklhm5uhRFLLmqNDZEPXnnBW3X21XmhhYaL+5
+ /HWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782260515; x=1782865315;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=tsgZiXdkmETDqTAW5iKS/LbdFktw0x6WXcHKVU9Tljo=;
- b=i1JFYew34Ax3DXQJhVLxBpmpKGw6P7n0Yp6YSNdjxd6J7iJeGGJBeNJjQYyQILM7+8
- TvI+qsO6cWpxDgEGQ+uTFvl8lCghA5gIJOGTeDvbDF+Lg8ZTa9OE6F4E3lO1wKmj9kQo
- SaLLfLah+wh0bWy15k6TdxnOo8UM7dzbe0e4rqTsHTfXP1wmcQ1bWZa5Ba+BX1xu33tv
- Ke7lJblO5gWKpRi98fJJWZ18sBAPcWtssCs+3x+TvjaVr9rqfp/RUcOqkr0NxkKiIsrS
- 6XyR/oydkmUZsQd57xHyaX6jY612zz0h9rYgO6fp5EDHOOhn4Jwp5cMzLOO+SaN4X+YI
- Ny8Q==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8wyrmjJs9wpEjAiMIE0KqbwG3Wl94eMiQPtXj7NUvbZCYXaxUvrXly/fqFlv26yvfBXKUFJfNfs8Js@nongnu.org
-X-Gm-Message-State: AOJu0YyYVt9XDRK5/m+nb2z1rIghKumuKn0Z+1cqLYcMBu74grriiuIq
- OMNk2Ww7vdol2B8Uu3hEU7FyLDbF9oIU8nYMJx6370mHswmmwe2WixzUtWRos7QKqcV1FJPn26+
- jMjb2PqPsGyvl3Z4CCESaWKVT0n5kvkI=
-X-Gm-Gg: AfdE7cnl8tRZNkmmndKA3SV9MfUgBxa4yOkmbKHoyahj6SULa1lM/zC4LuT3/Gx2/XI
- ITD1Ye7APH6dYyinLeBxD84x1EoSLqNjLS2GNsY/ArUJ1mJrqhrHcycXiJmjBMh9fISAI2rathC
- 0o6+3GjhXxLbQAEpPwDTATliwLT8GULY2ZN3uY/lHSE2Q+Kx4XteyDxWc8ZN/fDJ3JTHogEWWPK
- ysyNtWHV0TQuSTolXLpGtoIOw6XrHdEtBGOUx1x2EnrlYpdNq8jStelD6VZHUGSNT1vuyGppnp7
- Eer+LVIu1lUhe8L25BI6EzV+EVI=
-X-Received: by 2002:a05:6402:324d:b0:67c:34bb:1bd1 with SMTP id
- 4fb4d7f45d1cf-697d42cdddbmr2457811a12.1.1782260515235; Tue, 23 Jun 2026
- 17:21:55 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1782299962; x=1782904762;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=OVWgMC6Q+RpoXrJzM0oD8D4c/89GWCELuadcBgtwNEU=;
+ b=ElH9+2e0TPmy8oC6tQMhTr51m1SKAIuPlOPbhxLCQv+M0NlkBCl2zEtr1DJy08R/4n
+ oDzWUhbS3KyeuMy5MMT22Z4hHMeSApKCovVJy0ICCsvgEyp9KFhG8FbKl5loBR7Jpw9T
+ MeCArqIFMq3pRmOy+jRB44hcUVj3Pkt7Kig762wyaQWbeP4YFsIsCeIxUpN5afTi2f5c
+ EYdp2um661X1hfMEn05z8jdwiM3VabsmzLTe+4gBYsFUWfdNWwq+YjmSn4y5QK5+iHa3
+ EGygqXJie9e/D5XjPvW1TwlOp3hr5Zezu6lDakwWnd7eLeryNHxL/Dl2lzc8XZwm4bDu
+ 0CJg==
+X-Gm-Message-State: AOJu0YwLhufHFr5S0BSnFbwRMR02d0i+Y30f60mPGVU9zmf+tc24Qvu7
+ bc8t29b5GJsqj1h/P/T10/Fw3NuCOuko5c7mbKK4SGEcDbasTvBuxiTBPdel4EVjye1W9FNqHUQ
+ M3piJlcCMo7jQkhm7PqeP6AFkON8SynGrKQVbeMdIBjfzyrc5VlM0q+npkw==
+X-Gm-Gg: AfdE7cmb3B7MoRLvO1LpX6vFFCUlyH+b6lL09QAImkve5cdCql6ANCzLh1I04kWbzDM
+ xTTxwVjzBkYaoHIj5LN2fFGlu9HjGjazcg+FwRGwbUVWyBW5Kp5bdAkWNnV/fmSjIblEvS/6czr
+ 5juoU7F49mx0JDCLguBtth/RArlfQorETtU/mDYOpfRLgMPHDSCdWy3DpUDlOauYNbm/I3PxTkF
+ caQYy+6GO72n9OCzEZxKG3GyCnx2SylZHOft8WRZAsh5qKz6CITwW6pbU5tOYECvaK4+p99kgNi
+ 1SaQ5nSMPXSEVtH4hiIsfF93S3Gk9AU4PXz8/12ie7RYZZbsaVbGk1xCV6zo9DT7rbwWE4elH09
+ XE3TIYgupByoMtjuOloGl8wx3aFAQ9C2t0y98jfnAC18U
+X-Received: by 2002:a05:7300:2307:b0:30c:38ed:46b0 with SMTP id
+ 5a478bee46e88-30c692f5606mr2773090eec.16.1782299961777; 
+ Wed, 24 Jun 2026 04:19:21 -0700 (PDT)
+X-Received: by 2002:a05:7300:2307:b0:30c:38ed:46b0 with SMTP id
+ 5a478bee46e88-30c692f5606mr2773048eec.16.1782299961099; 
+ Wed, 24 Jun 2026 04:19:21 -0700 (PDT)
+Received: from [192.168.68.103] ([189.79.21.40])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30c1be4b24esm22364515eec.27.2026.06.24.04.19.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 24 Jun 2026 04:19:20 -0700 (PDT)
+Message-ID: <fbf36827-e12e-4d10-8cf3-8284ae903ccb@oss.qualcomm.com>
+Date: Wed, 24 Jun 2026 08:19:16 -0300
 MIME-Version: 1.0
-References: <20260623110209.26861-1-philmd@oss.qualcomm.com>
- <20260623110209.26861-5-philmd@oss.qualcomm.com>
-In-Reply-To: <20260623110209.26861-5-philmd@oss.qualcomm.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 24 Jun 2026 10:21:29 +1000
-X-Gm-Features: AVVi8CcYmPFKCDFnNH95O7BeLez0232hOhLNk45SccNIXpmPGvGQ9bTKM-VsXGQ
-Message-ID: <CAKmqyKMrDwdiC4ggZj4uq+nTTzMOOAtT-HeMUVECb9Sb3FO4ew@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 4/4] target/tcg: Rename set_rounding_mode() helpers
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
- qemu-ppc@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Brian Cain <brian.cain@oss.qualcomm.com>, 
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, Song Gao <gaosong@loongson.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x533.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 17/24] target/riscv/cpu.c: filter TCG only bits in
+ riscv_cpu_reset_hold()
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ pierrick.bouvier@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260622193141.1449724-1-daniel.barboza@oss.qualcomm.com>
+ <20260622193141.1449724-18-daniel.barboza@oss.qualcomm.com>
+ <dfcdd6dd-ed02-4225-8238-f9a78636057d@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <dfcdd6dd-ed02-4225-8238-f9a78636057d@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: S1ZY8B7Y0syW2WaVepE-QxcBcgZlSR1Z
+X-Proofpoint-GUID: S1ZY8B7Y0syW2WaVepE-QxcBcgZlSR1Z
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI0MDA5NCBTYWx0ZWRfX24kob7TypcTJ
+ n2Jh55KsWgHzYJtk7x0aNjZ27/wEa+4qhkTWDsSRkq+Ql4ujucB/p1JYNfH2ePMiPbV+wwo9jaB
+ QnPymle7Zm6LGy9jZtQEVutiIRbJOAFSe/EXYqSHTJ+fl2SpvAmhiJ3CJxoMRg6La3pjr8ogXUb
+ sAFBXzg1eo97UnSIH8IPuWpGD6WLthbJdRXhGTqAG3UqeMWqcaVdSYzK02RCrdiIuLajSiyuIYS
+ lrsDxICTcRLCSqU7871V/4MaJqQ54q2iBghypT0DWuQvEi989YtckKB1a1NQ1CJO0z+4Asnboto
+ 7l8GokbfBfj72CG0R43mQKBhdFb0Gv9Enmyhv1tx3jQRGFtqgmwwCO7Yy1vrnTSwuxw5LRw6CKe
+ wsH1pi0NhvRG2Hm2IfVoSb3/Rbu/5baZr/0Cv1IiwgCtFMkl04vT3ylTOeRQo8WiZU6SshzlymR
+ q40H/EH1IxPIlEXQs7A==
+X-Authority-Analysis: v=2.4 cv=QLhYgALL c=1 sm=1 tr=0 ts=6a3bbd3a cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=f1OD5SgU-hklIsKGyq4A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI0MDA5NCBTYWx0ZWRfX93edIRIV1Jvu
+ pYvpeXUmG8bHzB38uRPnM2IemyZqRkxZzmQFqSn13eKh6ksyvT+Pj1E0ms3ojTpMCN8H7aHlIV2
+ FUPkMu5vFBzlMjxm9U9PgJn5jUnfW/E=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-24_03,2026-06-23_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 malwarescore=0 priorityscore=1501 adultscore=0 suspectscore=0
+ lowpriorityscore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606240094
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -129,121 +157,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 23, 2026 at 9:04=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@oss.qualcomm.com> wrote:
->
-> From: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
->
-> In order to avoid symbol name clash when building
-> a single binary, rename TCG helpers prefixing with
-> the target name.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Reviewed-by: Brian Cain <brian.cain@oss.qualcomm.com>
-> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Alistair
+On 6/22/2026 6:13 PM, Philippe Mathieu-Daudé wrote:
+> On 22/6/26 21:31, Daniel Henrique Barboza wrote:
+>> We have a lot of TCG only initialization in the common cpu_reset_hold
+>> callback that prevents --disable-tcg to work.
+>>
+>> Put a CONFIG_TCG ifdef around those bits to make the build work.
+>> Eventually we'll create a TCG specific reset function in tcg-cpu.c but
+>> for now this suffices.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> ---
+>>   target/riscv/cpu.c | 11 ++++++-----
+>>   1 file changed, 6 insertions(+), 5 deletions(-)
+> 
+> 
+>> @@ -1013,6 +1009,10 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>>                       MENVCFG_ADUE : 0);
+>>       env->henvcfg = 0;
+>> +#ifdef CONFIG_TCG
+>> +    uint8_t iprio;
+>> +    int i, irq, rdzero;
+>> +
+>>       /* Initialized default priorities of local interrupts. */
+>>       for (i = 0; i < ARRAY_SIZE(env->miprio); i++) {
+>>           iprio = riscv_cpu_default_priority(i);
+>> @@ -1050,11 +1050,12 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>>       }
+>>       pmp_unlock_entries(env);
+>> +#endif /* ifdef CONFIG_TCG */
+>>   #else
+>>       env->priv = PRV_U;
+>>       env->senvcfg = 0;
+>>       env->menvcfg = 0;
+>> -#endif
+>> +#endif /* ifndef CONFIG_USER_ONLY */
+> 
+>    /* !CONFIG_USER_ONLY */
+> 
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 
-> ---
->  target/loongarch/tcg/helper.h                    | 2 +-
->  target/riscv/helper.h                            | 2 +-
->  target/loongarch/tcg/fpu_helper.c                | 2 +-
->  target/riscv/fpu_helper.c                        | 2 +-
->  target/riscv/translate.c                         | 2 +-
->  target/loongarch/tcg/insn_trans/trans_fmov.c.inc | 2 +-
->  6 files changed, 6 insertions(+), 6 deletions(-)
->
-> diff --git a/target/loongarch/tcg/helper.h b/target/loongarch/tcg/helper.=
-h
-> index 35b055eb3bc..154e70c0191 100644
-> --- a/target/loongarch/tcg/helper.h
-> +++ b/target/loongarch/tcg/helper.h
-> @@ -91,7 +91,7 @@ DEF_HELPER_2(ftint_w_d, i64, env, i64)
->  DEF_HELPER_2(frint_s, i64, env, i64)
->  DEF_HELPER_2(frint_d, i64, env, i64)
->
-> -DEF_HELPER_FLAGS_1(set_rounding_mode, TCG_CALL_NO_RWG, void, env)
-> +DEF_HELPER_FLAGS_1(loongarch_set_rounding_mode, TCG_CALL_NO_RWG, void, e=
-nv)
->
->  DEF_HELPER_1(rdtime_d, i64, env)
->
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 542b7c264fc..6f46e0d91d4 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -2,7 +2,7 @@
->  DEF_HELPER_2(raise_exception, noreturn, env, i32)
->
->  /* Floating Point - rounding mode */
-> -DEF_HELPER_FLAGS_2(set_rounding_mode, TCG_CALL_NO_WG, void, env, i32)
-> +DEF_HELPER_FLAGS_2(riscv_set_rounding_mode, TCG_CALL_NO_WG, void, env, i=
-32)
->  DEF_HELPER_FLAGS_2(set_rounding_mode_chkfrm, TCG_CALL_NO_WG, void, env, =
-i32)
->
->  /* Floating Point - fused */
-> diff --git a/target/loongarch/tcg/fpu_helper.c b/target/loongarch/tcg/fpu=
-_helper.c
-> index fc9c64c20a8..265f608cddd 100644
-> --- a/target/loongarch/tcg/fpu_helper.c
-> +++ b/target/loongarch/tcg/fpu_helper.c
-> @@ -878,7 +878,7 @@ uint64_t helper_ftint_w_d(CPULoongArchState *env, uin=
-t64_t fj)
->      return fd;
->  }
->
-> -void helper_set_rounding_mode(CPULoongArchState *env)
-> +void helper_loongarch_set_rounding_mode(CPULoongArchState *env)
->  {
->      set_float_rounding_mode(ieee_rm[(env->fcsr0 >> FCSR0_RM) & 0x3],
->                              &env->fp_status);
-> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-> index db1475271b6..88261b223cc 100644
-> --- a/target/riscv/fpu_helper.c
-> +++ b/target/riscv/fpu_helper.c
-> @@ -66,7 +66,7 @@ void riscv_cpu_check_fflags(CPURISCVState *env,
->                              FloatExceptionFlags pre_fflag) {}
->  #endif
->
-> -void helper_set_rounding_mode(CPURISCVState *env, uint32_t rm)
-> +void helper_riscv_set_rounding_mode(CPURISCVState *env, uint32_t rm)
->  {
->      FloatRoundMode softrm;
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 9684dbe7528..d5c3366fd94 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -759,7 +759,7 @@ static void gen_set_rm(DisasContext *ctx, uint8_t rm)
->
->      /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
->      decode_save_opc(ctx, 0);
-> -    gen_helper_set_rounding_mode(tcg_env, tcg_constant_i32(rm));
-> +    gen_helper_riscv_set_rounding_mode(tcg_env, tcg_constant_i32(rm));
->  }
->
->  static void gen_set_rm_chkfrm(DisasContext *ctx, uint8_t rm)
-> diff --git a/target/loongarch/tcg/insn_trans/trans_fmov.c.inc b/target/lo=
-ongarch/tcg/insn_trans/trans_fmov.c.inc
-> index 5cbd9d3f347..c4c4c2000f7 100644
-> --- a/target/loongarch/tcg/insn_trans/trans_fmov.c.inc
-> +++ b/target/loongarch/tcg/insn_trans/trans_fmov.c.inc
-> @@ -112,7 +112,7 @@ static bool trans_movgr2fcsr(DisasContext *ctx, arg_m=
-ovgr2fcsr *a)
->       * Note that FCSR3 is exactly the rounding mode field.
->       */
->      if (mask & FCSR0_M3) {
-> -        gen_helper_set_rounding_mode(tcg_env);
-> +        gen_helper_loongarch_set_rounding_mode(tcg_env);
->      }
->      return true;
->  }
-> --
-> 2.53.0
->
->
+Phil I forgot about this ack. My bad :(
+
+
+I'll make sure to add update it in v3.  Cheers,
+
+Daniel
+
+> 
+
 
