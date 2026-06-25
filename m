@@ -4,87 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19D1ACDB47F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jun 2026 08:16:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BF0DCDE000
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 Jun 2026 12:09:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wcfG7-0007B7-09; Thu, 25 Jun 2026 04:16:27 -0400
+	id 1wcitX-0008Uw-6u; Thu, 25 Jun 2026 08:09:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
- id 1wcfFh-00079z-GV
- for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 04:16:20 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ (Exim 4.90_1) (envelope-from <thecharlesjenkins@gmail.com>)
+ id 1wcdYG-0008Ee-15
+ for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 02:27:04 -0400
+Received: from mail-dy1-x1332.google.com ([2607:f8b0:4864:20::1332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
- id 1wcfFf-0001dz-HC
- for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 04:16:00 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-c891d27b10eso1147988a12.0
- for <qemu-riscv@nongnu.org>; Thu, 25 Jun 2026 01:15:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <thecharlesjenkins@gmail.com>)
+ id 1wcdYE-0004VD-8s
+ for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 02:27:03 -0400
+Received: by mail-dy1-x1332.google.com with SMTP id
+ 5a478bee46e88-30bf132969bso2671486eec.0
+ for <qemu-riscv@nongnu.org>; Wed, 24 Jun 2026 23:27:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782375357; x=1782980157; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2o7sKN6n20YLRxgIgS5cX38Zxp20rf7inv0GaVmEH7A=;
- b=ld9K9fG4irz9kDSyzyvCvvvM+yf0YNPpFoM1t4KweROEHnmrvwi5B9mEKNtRSvkf8d
- HUNRWfm+a733wEzYr7vR6El0NEnr5OcukXR1p24ynrPFCSB9RGdvYemdcbuns1Tx8lkK
- Hv/DNF+WlAwHBZM649WdLskwecKKAD/ekqfx6vv2pgihjIitXpvUs0yRqv2kXgzIQfAM
- 3GESnavij5qr3bzBJ/+rLn0DCwSCx2w/Jnxpkg672/J6FY+bXpgSe8B9040Vm8yWF1+C
- L1nawFnj0Udzmv73WcV9B9MHRC22e9nYyNNUNhBlSFlmfEK7SGidYrOy0NxzFzbuwcoi
- vJtA==
+ d=gmail.com; s=20251104; t=1782368820; x=1782973620; darn=nongnu.org;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GDLRd59EivhJ7a5tzoHgjhFn4U57GcbQRG1nCQC98KA=;
+ b=kdNIBUaDDrwpyBiELhxfhYKbm1qlc42Gwzm4YlORIRSOxWHfgGFe8nGLQMioludJi0
+ k6K0v8nlAqHhK5XpnXYiwqS+qgJm3Shye+e4Ri5vD6T9NfqfpP0tza1UdQpXo2y/H/x2
+ 5M2vVIubyaARZ4KrRtEdFBRAUp1q66PLDPEIblcT0DkFP7iQpp9YTvEjVVZvhW/4x+TK
+ XVkix176Lpz8VrVy/sqWmFb26bgcmDkKU4Y4NPBha2K2KX1EIuKQbEbO72muVvj+TYm0
+ u+iNtewjUWt/wguIkP00dK7qv4ujgHaFxhexUH7LjmI6cU0KWuGbdMGt2qVkMUmhR7NN
+ T8Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782375357; x=1782980157;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1782368820; x=1782973620;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2o7sKN6n20YLRxgIgS5cX38Zxp20rf7inv0GaVmEH7A=;
- b=raZ0dxvrjCDvkOj+UoCeAUOUC9NH2D3pKpt7IH1QUezMv2F8pQZYSIKgfzMkQA5xh1
- 9W1vSYrCebrOEMqkGkCcZNgEqt1bWZAf7IMiaEs+UH6NB3TEyy22wAg/FrpAfTr3uSZw
- ST9+xig0/LDUA366deYJDVNmYvi8p+xtjdhAqyV8VVSPRroEXSF883+79I5rxtjDOIbm
- IiJ9OQyTGz+oDBWtcNS4ymN8l2h227eeAC6A+VxpVIyi6d27/x6gvjn4mT2vkGGmaKdP
- Fml0zPYj2qNEul85rLCVO8zAkOydkxG+ohfnBz3+QN/UNNzlmhYwePVMcfXw+JH0O8Pw
- NUTw==
-X-Gm-Message-State: AOJu0YxWaZJR1qa5pg7/x2AwzNPLnYnsrXcZifgFvSobTII0zeO1MRxP
- JqmZvPIjSKKAqAuiDcFjXoCGYBFGy2Es6zcp6aMCuev9pWj6dyMlJPQ/
-X-Gm-Gg: AfdE7ckOB6wwlils3tUV+leaOAteTOsOYMBmNWcu89WvH7L0oyCBlAGnqd1X6udYlNG
- 9nSU7k4rbbdImqfMyTLaefQ5uxzu09JqOvSPLQGviUZNqS4BqDp6Ar+lzNnhkZ1Kfl3XmJUcfFz
- txX3vglwxEoQYTDN6V2Ta3AFGLCATBv5vlmCvr5lS9pkLTsekwcS1FTQ7zj9Rlm5fFfVnSjRTDD
- fjPdJMfi2qb5UEYP5MoVGhf5BwlDgPEPK+iU1a+Y92xObOxkcUJYeBqEfr4S+6TjYfI7eNf3yWa
- TF7sVPzabtMBOaZWIfL0XRJYeFypdJVbUzPkAATviptM5RwNFWDcAPlT1i5yoqOUHR/iBy7W2oa
- nBWOZMZN7qzACEIVyyq+qQb3OkRhm1JLm93wihHWLfFaTtouxDqkfHICoeR/YSW7o19B3iSJ9S1
- tvYGq2iGDNm3Go/6j0tYYRi3Xq1b+subDOBR8f
-X-Received: by 2002:a05:6a21:8cc7:b0:3bb:21ad:40d8 with SMTP id
- adf61e73a8af0-3bd4afac2acmr1982946637.39.1782375356831; 
- Thu, 25 Jun 2026 01:15:56 -0700 (PDT)
-Received: from fedora ([61.74.238.173]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c92bc1e0d10sm1188683a12.21.2026.06.25.01.15.54
+ bh=GDLRd59EivhJ7a5tzoHgjhFn4U57GcbQRG1nCQC98KA=;
+ b=kwBLg6aVCNAhdNwBzzp/4kc7upPjbzpUfOPuSFrM8BGp0WMwSeDtoLDmW7+Jgjanwy
+ p6pjudyinbKObdvKpxxLxYo6yYJnJcDCFpbHFfl7qF8BitpM1Z6BD5xRP416v2D1/I8f
+ fWj5pVGxfeY4gY5NzrTWEB40NPjacU5LUYnYke1SILcFQU/Xr5IYGPFX7+4g2isSmUP8
+ /hVNxTgEZKu7nBby9t+dz2crA820golKbE9Tu7/MtQCO5HPKP4+4a1e5DlxmYZbAmRA1
+ lZCInzMDY8B94SrdA/HIkvsGkGko3DFxAarP8jXEhZbYlAqti7jTkLxC5lKhjsw87RXD
+ q9gQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqUoVYL/3BCKiraV2sFNIZR2OhgBkJaMMnWPqC8OZaAVi07boZisZevt4Ylon+bBP+9rrDlr9h8feI5@nongnu.org
+X-Gm-Message-State: AOJu0Yz/LMQpywu4mmYLrYVfHNZF4yjScbNAM/m9DHJvKRL65wTH+BEy
+ jxOCdCt8VsGsk+uYyJiwGYPzsJRObQRscAZeKjxSWd/NWzJa5ekK1c3F
+X-Gm-Gg: AfdE7cm4ETNHzYbny4DQ7z3aMhBzJibLuEi9q/ZElPCeEh2g01eH4tilzEMtfo7cTdW
+ jvSMYOKQxS2pLsFAjYYUSC0Du/AKGrgUIToidvZ1tMiDbSmX+5xDimLLkrf99R2x7+G2Yf4/OAB
+ k8GO4YCyzjs0ESS7d6fQwBzC+u1I3OVd/juwjsLQ0k8j6zhEDMEfOmG+7p0hWWOoiTGo5vQUNWz
+ qtYWmkk0DCoEKJWHbQDFmCieNIbLwMYEjObt/58ea4PdYAse1iRPrbR19lkqCtwSdot+3odMysg
+ Vk+84/A6KMOiPuvkh6IRzgaStD0WXL0YaWcnwunqIg7XqZKFas1PTOPmDPNzzGaznNAc3/lAwj2
+ juAy6ol0MeC5UDbljrEz5UdLDPGYsY+rPtIMN0EKuH8Se3k6tyGcVhI4o1Ijbd8xRhbIbAzjFVa
+ 2A0z8ur38=
+X-Received: by 2002:a05:7301:4e8a:b0:30c:2432:7d7d with SMTP id
+ 5a478bee46e88-30c84d9e222mr1450798eec.23.1782368820205; 
+ Wed, 24 Jun 2026 23:27:00 -0700 (PDT)
+Received: from [10.0.0.65] ([2601:647:6700:64d0::1947])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30c7c8b1ab6sm7682972eec.15.2026.06.24.23.26.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jun 2026 01:15:56 -0700 (PDT)
-From: SeungJu Cheon <suunj1331@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- SeungJu Cheon <suunj1331@gmail.com>
-Subject: [PATCH v2] target/riscv: Apply UXL WARL handling to vsstatus
-Date: Thu, 25 Jun 2026 17:15:21 +0900
-Message-ID: <20260625081521.595683-1-suunj1331@gmail.com>
-X-Mailer: git-send-email 2.52.0
+ Wed, 24 Jun 2026 23:26:59 -0700 (PDT)
+From: Charlie Jenkins <thecharlesjenkins@gmail.com>
+Date: Wed, 24 Jun 2026 23:26:58 -0700
+Subject: [PATCH] target/riscv: Report QEMU CPU archid as 42
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=suunj1331@gmail.com; helo=mail-pg1-x52b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260624-marchid-v1-1-a0af7997071f@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDMyMT3dzEouSMzBRdC4MUQ3OzJAtz4xQLJaDqgqLUtMwKsEnRsRB+cWl
+ SVmpyCUi7Um0tABrpk5VrAAAA
+X-Change-ID: 20260624-marchid-80d176b873d8
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu.zevorn@gmail.com>, Atish Patra <atish.patra@linux.dev>, 
+ qemu-riscv@nongnu.org, Charlie Jenkins <thecharlesjenkins@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782368818; l=2894;
+ i=thecharlesjenkins@gmail.com; s=20260605; h=from:subject:message-id;
+ bh=i3lugvgwi4wk/h5CJjNv2v/O9jMvaAK6shErITKU7Lk=;
+ b=RfzL0vuvstQgO+amSp4BL4Fia7lFf5SqiWBTSGxmDs1jLIdkmkqKiWSnPpZT6+4Q5BEyt012Q
+ ELmvACAMwueC2ynddlhTMQR5laeoxUQ6kwZbXx2qrCcFGmCsn28q1vp
+X-Developer-Key: i=thecharlesjenkins@gmail.com; a=ed25519;
+ pk=ajnnRQ98PIdwKp4HeMkq9U32okYbnh6Zb4G3o5XXvkg=
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1332;
+ envelope-from=thecharlesjenkins@gmail.com; helo=mail-dy1-x1332.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 25 Jun 2026 08:09:22 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,76 +117,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-write_mstatus() already handles the reserved UXL value by writing a
-legal value instead.
+When a non-vendor CPU is used, report the archid as 42 which has been
+allocated for QEMU in the riscv isa manual [1]. This can help software
+check if it is running in QEMU.
 
-Apply the same handling when writing vsstatus so that reserved UXL
-values follow the same WARL behavior.
+[1] https://github.com/riscv/riscv-isa-manual/blob/main/marchid.md
 
-Factor the common logic into a local helper riscv_write_uxl() and use
-it for both mstatus and vsstatus.
-
-Suggested-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Fixes: f310df58bd2 ("target/riscv: Enable uxl field write")
-Signed-off-by: SeungJu Cheon <suunj1331@gmail.com>
+Signed-off-by: Charlie Jenkins <thecharlesjenkins@gmail.com>
 ---
- target/riscv/csr.c | 27 +++++++++++++++++----------
- 1 file changed, 17 insertions(+), 10 deletions(-)
+This series was original proposed by Palmer Dabbelt [1] with a follow up
+by Daniel Henrique Barboza. This patch implement's Daniel's suggestion.
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index dd9726fcf4..12f1ce5180 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -2012,6 +2012,20 @@ static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
-     return val;
- }
+When booting with a non-vendor CPU such as with the qemu arg "-cpu rv64"
+marchid will now be reported as 42.
+
+> qemu-system-riscv64 ... -cpu rv64
+
+processor       : 0
+hart            : 0
+isa             : rv64imafdch_zicbom_zicbop_zicboz_ziccrse_zicntr_zicsr_zifencei_zihintntl_zihintpause_zihpm_zaamo_zalrsc_zawrs_zfa_zca_zcd_zba_zbb_zbc_zbs_sstc_svadu_svvptc
+mmu             : sv57
+mvendorid       : 0x0
+marchid         : 0x2a
+mimpid          : 0x0
+hart isa        : rv64imafdch_zicbom_zicbop_zicboz_ziccrse_zicntr_zicsr_zifencei_zihintntl_zihintpause_zihpm_zaamo_zalrsc_zawrs_zfa_zca_zcd_zba_zbb_zbc_zbs_sstc_svadu_svvptc
+
+When booting with a vendor CPU like veyron-v1, the proper marchid will
+still appear.
+
+> qemu-system-riscv64 ... -cpu veyron-v1
+
+processor       : 0
+hart            : 0
+isa             : rv64imafdch_zicbom_zicboz_ziccrse_zicntr_zicsr_zifencei_zihpm_zaamo_zalrsc_zca_zcd_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt
+mmu             : sv48
+mvendorid       : 0x61f
+marchid         : 0x8000000000010000
+mimpid          : 0x111
+hart isa        : rv64imafdch_zicbom_zicboz_ziccrse_zicntr_zicsr_zifencei_zihpm_zaamo_zalrsc_zca_zcd_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt
+
+[1] https://lore.kernel.org/all/20240131182430.20174-1-palmer@rivosinc.com/
+---
+ target/riscv/cpu.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index fa497e5e8a..59d63f82c2 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -44,6 +44,9 @@
+ #endif
  
-+static uint64_t riscv_write_uxl(CPURISCVState *env, uint64_t val,
-+                                uint64_t field)
-+{
-+    RISCVMXL xl = riscv_cpu_mxl(env);
-+    uint64_t uxl = get_field(val, field);
-+
-+    if (uxl == MXL_RV128) {
-+        uxl = xl == MXL_RV128 ? MXL_RV64 : xl;
-+        val = set_field(val, field, uxl);
+ /* RISC-V CPU definitions */
++#define RISCV_CPU_MVENDORID 0
++#define RISCV_CPU_MARCHID 42
++#define RISCV_CPU_MIMPID 0
+ static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
+ const uint32_t misa_bits[] = {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
+                               RVC, RVS, RVU, RVH, RVG, RVB, 0};
+@@ -1198,6 +1201,12 @@ static void riscv_cpu_init(Object *obj)
+     }
+ #endif
+ 
++    if (!riscv_cpu_is_vendor(obj)) {
++        RISCV_CPU(obj)->cfg.mvendorid = RISCV_CPU_MVENDORID;
++        RISCV_CPU(obj)->cfg.marchid = RISCV_CPU_MARCHID;
++        RISCV_CPU(obj)->cfg.mimpid = RISCV_CPU_MIMPID;
 +    }
 +
-+    return val;
-+}
-+
- static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-                                     target_ulong val, uintptr_t ra)
- {
-@@ -2058,17 +2072,8 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+     accel_cpu_instance_init(CPU(obj));
+ }
  
-     if (xl != MXL_RV32 || env->debugger) {
-         if ((val & MSTATUS64_UXL) != 0) {
--            uint64_t uxl = val & MSTATUS64_UXL >> 32;
-             mask |= MSTATUS64_UXL;
--
--            /*
--             * uxl = 3 is reserved so write the current xl instead.
--             * In case xl = MXL_RV128 (3) write MXL_RV64.
--             */
--            if (uxl == 3) {
--                uxl = xl == MXL_RV128 ? MXL_RV64 : xl;
--                val = deposit64(val, 32, 2, uxl);
--            }
-+            val = riscv_write_uxl(env, val, MSTATUS64_UXL);
-         }
-     }
- 
-@@ -5226,6 +5231,8 @@ static RISCVException write_vsstatus(CPURISCVState *env, int csrno,
-     uint64_t mask = (target_ulong)-1;
-     if ((val & VSSTATUS64_UXL) == 0) {
-         mask &= ~VSSTATUS64_UXL;
-+    } else {
-+        val = riscv_write_uxl(env, val, VSSTATUS64_UXL);
-     }
-     if ((env->henvcfg & HENVCFG_DTE)) {
-         if ((val & SSTATUS_SDT) != 0) {
--- 
-2.52.0
+
+---
+base-commit: b83371668192a705b878e909c5ae9c1233cbd5fb
+change-id: 20260624-marchid-80d176b873d8
+
+Best regards,
+--  
+- Charlie
 
 
