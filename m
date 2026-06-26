@@ -4,144 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC66C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 20:05:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49ECC43211
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 20:05:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wdCnJ-00008b-Fb; Fri, 26 Jun 2026 16:05:00 -0400
+	id 1wdCnc-0000Hc-Qg; Fri, 26 Jun 2026 16:05:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wdCn7-0008Sf-1O
- for qemu-riscv@nongnu.org; Fri, 26 Jun 2026 16:04:47 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1wdCnH-0000AY-AX
+ for qemu-riscv@nongnu.org; Fri, 26 Jun 2026 16:04:55 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wdCn4-0001EF-HD
- for qemu-riscv@nongnu.org; Fri, 26 Jun 2026 16:04:44 -0400
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ id 1wdCnF-0001I9-MS
+ for qemu-riscv@nongnu.org; Fri, 26 Jun 2026 16:04:55 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65QJahHl2324890
- for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 20:04:40 GMT
+ 65QJ8Wui1616948
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 20:04:51 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- y38j6Xdah/A3WTELcJ8HGxsz1c+xI48ymFQrxLd+uok=; b=eaqYvklMWGfUrIkB
- vcWG8UzAjMjU3i5pjFXMxpmEiWo6lq8KaT2MHKhGnALorUAgpoMCKGAy2Wk9FyYw
- tvFNn4J2s6kRkB9XNFDyNALK2MvQy4NmGzVOhu9wQpC7m2aDGlpWryMuSsaaM2U5
- zeDTFPFsk99JP1U8+N88XQBUvLcJGlEvYHbjKRsvSK4+Jdbg9bc9sKw8eQh87ehF
- gCZWExaMe9ZG9/MxL3A+rGcaDTEOlz8ESHfpfLoHRGgxYSih6sLbX5sKTlCyPfUo
- D2q/wWo8z3+fOq1sLGjxrWx+YaiD0keN9Q+Pk958gzVhiH4XbRhkuUwD14R+RKkB
- groebg==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f1yqv02kf-1
+ A2/FU1xLbkYV+voT8ssCBTyWdlAce5DEF6tSBKrrm58=; b=LGRZruV9yePqZDOs
+ ZF6ReJFumsKC3VP7OkcxcZhkCaTu313AMvP10SBkN40/k3b/dWS+0NSFlBRhsGdb
+ J2973F/vPHrzcAoDx9VImWyFpBaeCLkRmqay7fazprlmwNsVbmehZTQbgf7/5+b3
+ O0C28rVJ8TkREvTbbe83E+dt1TCnkkbXtpnqQ4EKx2FKyYuJktwLFXMPz8naplUe
+ J+4a2PLwJWkEe+bXgSJabnVfu7NKf8HCuwn/rFDi0lwssuC3kVu4aveHsXUnE5IA
+ hSHenjHJzjjdFvFmbOGYpE6Z2ZZhvCrSMubLq3oEFMfTrK2ywrqlwbyIw+ZSrZz7
+ RBVdaw==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f1xxvg872-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 20:04:40 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-51a08feb103so23385981cf.2
- for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 13:04:40 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 20:04:51 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-51a08feb103so23389281cf.2
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 13:04:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782504280; x=1783109080; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1782504290; x=1783109090; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=y38j6Xdah/A3WTELcJ8HGxsz1c+xI48ymFQrxLd+uok=;
- b=H+JfuWapTSmWhR+C/aw7W2BlLPMrc+pzKZr9ajYHWyEYT+hVWxhDuhO2I7sLRjwQFi
- dkuxTKkBUULwNy+XRu4MJqeyLpTgiuKfn0EH2p5xajVepuda00dCyYWTMxcQ6jDU/D2p
- QUgJhkWJ69wiQl8rkJ5tGGgDfD9fB7G/X0nM0HktuIWaFHT4Tns/R6/xt1+4CmDeegtM
- mLY+Q99XAOz18ywhSpu+z/GRlaWwbQltlgSdAcJ6xDsZOfCEYyK0eWrLF21+CO6ULdx7
- 1wcw7XTT4l0T4KoQOtIiiu9D+AXrIi3DkyuQVYOtk2Vj9r9CkMmvTIY9Vry4tq4d3pCm
- bBKQ==
+ bh=A2/FU1xLbkYV+voT8ssCBTyWdlAce5DEF6tSBKrrm58=;
+ b=SvdJacSWirwmn1LIIbOJPznco5AW7qCEvZrRLL5uaJMZtBQPuJUt/8ZlsMAsq4UJ4u
+ dtqD7zpVwYp7K+lt0GaZ62O+nQHs3HyiYsmjBTGTdi2YB58cYdWMFt8fURtL07Hwd+DY
+ YNbeX5d7Zm3VXHcfctQpO7V8ceNFjZDobw8BeLAtHXlgmBXxBdjlGH1jTo8UGwt1Kz77
+ rYf7KIojBFn+8LAkI7VQbr5xc6+DvF/L9h23cGMmU6W6OMBU9M30sbpsjVb3lUfjPBSo
+ lsEi7W2a8HMy2DCv6Fs6P4joBs0c2+WINmc2I5J9ccMgH3ad1sKFxCV3aj5kBuYzXEs9
+ p7Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782504280; x=1783109080;
+ d=1e100.net; s=20251104; t=1782504290; x=1783109090;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=y38j6Xdah/A3WTELcJ8HGxsz1c+xI48ymFQrxLd+uok=;
- b=NU91KVmRA2vZs7eQS0k8N2zUQaoaZapu4gdsm9cixb2yCrPiQ7ckBC9uUGL1CFUCyi
- IdKPAzBNYxXiG7SvkwL/SJSNVNaQ+4isoR4EoO1nI46+oGTKQDazPA35N70M0ph3uO+5
- e1i5gvHsFFTzHmmqH/jWCvWmzzSwbhvTDWW7Kt5EhPbAFw8827qtvlu4W6SJfeK5MKrT
- 7XqKkuk+Z7dubQ9izs56DEDSHYpg5Ya8UQQPhLsDAmGM1B5eo8+swJiN4cdRa6c1A6bH
- mV+TpaHaOmkv0WmUgIVxgbUes6uxlwngjoB0V1Tuv98SamSp4ZIBTEHt2T+c9cH8MHtw
- 06LA==
+ bh=A2/FU1xLbkYV+voT8ssCBTyWdlAce5DEF6tSBKrrm58=;
+ b=BJ5fRm2OPhfX0j0Y1AxvAOvdVZ7+0h/ucl7s77FufSvedYx7YXtz/lbYFwf/G5YwK8
+ iKitsuaeozFS57VR5SY/gV7Mo4RO7fz0RdrKKXdnE20gpJV6zUGtCgvA/ZRmPczjpffw
+ KRbGEJBW3AP+MZ8lZE+vbRlXWlcAj2Lhxdo3jgU1BeWs/kP+qg2LHWa99aPYE1Y/YKne
+ YjSfv1pwRx8jCO43htiJNltM5J+/UJ7ho9FZ7E5iWreE+u5NH5RAoAMa9yUFaHk6RNAv
+ n37AxOjGjumvJTFRd+AGNg0KonD8tY1EZoiMIfZajrQKUEO2gG4LC2VDgucFfyR/ouDi
+ RqPQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ94yFW1nsPeytnwf726k/BsT+RCg9VtaWqpqiDySrpAt1iD3eSrorfLbgTzdi7+X5gVhx3NINKfHM5+@nongnu.org
-X-Gm-Message-State: AOJu0YyG4IXdJtr5vTXG/yo13zmzH+g/YOEwrsa1Iw+u/f5BHl0BH2J0
- eFbUlB19V+XWQF22mEUk9Tj5ZvF9OdoSS7YqN6Yge+R48INhrC4Ln1IX8KGeetfNupDH1vkZWCv
- /uILyh9YMgfqA0Pn585dmiPUWbe8AOHHgrsFLfyn2uE115vmWNC38Yhq6mg==
-X-Gm-Gg: AfdE7clP4uS7pIZPy6Gk4xsGYKv04mClHixjIKgSmfxbb7ycJjRLYTpcU0X/Zd2c6y/
- uAy3yMxRtDBEoHiCvQF9O2Woien6UUhtjjim2ZT3HtnPyXJod8/MtzRcuDqYrkCjTTDTIGLaCmP
- QqJIzaYNvrc+c8VCE3/5hxPBBrgh5b7N0RsReapAsHaxg1B4duJlbnFWxLD9qhCpGEOaKfzxzSa
- dms9+ngN8WAoUhD8wfAN4UIGUBAFN/E2iIiR0TYx06IzdmBZ0Se6I+Vhxc1jyKe6Rk9dyVmfTEW
- eHp7xtHSm9N7ZDQBbIVrClJXCr9p8Kq9cPJawTOMA3wEKwT+O8vTGMICeJ+4MDfb1Z6Cp9mc135
- HKpAZYeS8LNAZAwSJRiNUu1DFPx4A1vjexrqYGwUFHq90
-X-Received: by 2002:a05:622a:1a8d:b0:517:5e32:af23 with SMTP id
- d75a77b69052e-51a727ad929mr119369201cf.23.1782504279420; 
- Fri, 26 Jun 2026 13:04:39 -0700 (PDT)
-X-Received: by 2002:a05:622a:1a8d:b0:517:5e32:af23 with SMTP id
- d75a77b69052e-51a727ad929mr119368681cf.23.1782504278874; 
- Fri, 26 Jun 2026 13:04:38 -0700 (PDT)
+ AFNElJ8jJzksCOwcCdzN1eGAfo/jhX0rF+iaVQ6lOTfyAca2rjRrEGGolnt5ks1Qqw2ptg6io1XE5IMyAdpz@nongnu.org
+X-Gm-Message-State: AOJu0YxkRzelubBHeJbm6ER5uaUzZdsVmYpeqcvJ46lJ7CkY5J40MnPU
+ jmDY6pYVVm9V+XqmrWyLjf1Br+VIWkzTSLVvQBnl6oOF3hHsgKd9BImBOFGaX0Xkxc0YnHAlVxB
+ Ke7KaaNFZNz0x2wuKIUReL+CRrIgp9pauZ/tY3WK8ChS/6dB+SFt1psQ8Ww==
+X-Gm-Gg: AfdE7cnv82IsMUYA2YI3T3p0Aqm2inlD0qOVYkmqBZfr+Jd/jhA3SPGxwEDepKBgp70
+ juOTWgQDMKd0roytOT+IlzSRgTbX2emKTBjScNhdujCo6WVr/13Y4SdwkxswIzha5HADPWPmCvX
+ 7iWKWO7Zj7iDsvkmZ0iMaBGNr0FOM1wp+oYYu3JLpuJOIq1MVDx1ESS3/Xd1PR1xXfuo2lYWpMz
+ E+gI2HnG53ywctF6Dbb1R4lVWEu/nbyU/TKtix2zMNGnrlNIY50EAGkahRTDOTp7j44ousepplF
+ 2tsDcoyLwynL5+7jIWKMGSCUUhKQq1t7Y8U4+zxOD1KMTzAHJJu69zW2UkX6Y+VTh8e2MF1jK0w
+ 4TrDc2u56r3Rehq9mPkZ/Efqhaek8CiQ3BeL0sPs+Uahf
+X-Received: by 2002:ac8:7f8c:0:b0:517:5b22:f4ac with SMTP id
+ d75a77b69052e-51a72758a91mr114057281cf.5.1782504290342; 
+ Fri, 26 Jun 2026 13:04:50 -0700 (PDT)
+X-Received: by 2002:ac8:7f8c:0:b0:517:5b22:f4ac with SMTP id
+ d75a77b69052e-51a72758a91mr114056561cf.5.1782504289763; 
+ Fri, 26 Jun 2026 13:04:49 -0700 (PDT)
 Received: from [192.168.68.106] ([189.79.21.40])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-51a514b5271sm106828621cf.5.2026.06.26.13.04.36
+ d75a77b69052e-51a51b0cc9csm102941891cf.31.2026.06.26.13.04.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jun 2026 13:04:38 -0700 (PDT)
-Message-ID: <e3494fab-e080-456d-aa9f-db65ca947b89@oss.qualcomm.com>
-Date: Fri, 26 Jun 2026 17:04:34 -0300
+ Fri, 26 Jun 2026 13:04:49 -0700 (PDT)
+Message-ID: <1d9f53ca-4dbc-4d64-9811-17bf0328cb3a@oss.qualcomm.com>
+Date: Fri, 26 Jun 2026 17:04:46 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] disas/riscv: Fix th.srri decoding
+Subject: Re: [PATCH 2/2] disas/riscv: Fix 6-bit immediate extraction
 To: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
  LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org
 References: <20260626-b4-disas-xthead-fix-riscv-next-v1-0-74228a3c1b21@linux.alibaba.com>
- <20260626-b4-disas-xthead-fix-riscv-next-v1-1-74228a3c1b21@linux.alibaba.com>
+ <20260626-b4-disas-xthead-fix-riscv-next-v1-2-74228a3c1b21@linux.alibaba.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260626-b4-disas-xthead-fix-riscv-next-v1-1-74228a3c1b21@linux.alibaba.com>
+In-Reply-To: <20260626-b4-disas-xthead-fix-riscv-next-v1-2-74228a3c1b21@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=aoiCzyZV c=1 sm=1 tr=0 ts=6a3edb58 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+X-Proofpoint-ORIG-GUID: jpC5kP6LtsfekhulGcNtayWjQfo1nDIT
+X-Proofpoint-GUID: jpC5kP6LtsfekhulGcNtayWjQfo1nDIT
+X-Authority-Analysis: v=2.4 cv=BLyDalQG c=1 sm=1 tr=0 ts=6a3edb63 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=SRrdq9N9AAAA:8 a=EUspDBNiAAAA:8 a=QfbnSVPwDX3jWXLam8QA:9 a=QEXdDO2ut3YA:10
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-GUID: zd53ZR0KhZVYncyZerBefhUmpxDQRXX5
-X-Proofpoint-ORIG-GUID: zd53ZR0KhZVYncyZerBefhUmpxDQRXX5
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI2MDE2NiBTYWx0ZWRfX4kXss/r4iA0s
- K32YsynQq0s9RKvK4FZvN8/18g8cxIeOZOyJoEyXCDbZT7NQTbHJjFS+59PrgHZF0x/BRtdVwJ8
- uPkHan8DmGvsEq1S5fX3XUf8Znea544=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI2MDE2NiBTYWx0ZWRfXz9fH5MzJqcAS
- B2wwpleYHYAorfn5K0FAgLGqr4SyWgFXz37zM6OfnCmxfJx4DHWE3MYcpLxADtujBLwU+m3IFEY
- KaGLyTYle7hKjwCG5WFc8JCbs8o1lKeLeDR45/VYTEA313R9dBnCMOo/WN4DJyYbZQH6Gg/Tt6E
- 35RPfZK6sjVDvP8tWzMMhDdDljerY4zKdTxZ3L73wWIfbvVK3n83gyaTMkP/kpAxIQzhhj+GJMC
- 7lALNzvAjp0cnGj8JBLxPLMORCxenU8kaKWlckcmba0mou75cYtfkU0Hh62wHj6zNS6vmvFB6vI
- ZI6xLCcQ/FZ/5Fvv1cTjIjtUlbXzSgBUUAp4UZuRdez4EgQDImO2GvI2iJWanr7GD9+a9zVgXvf
- z/PD8lcCHdOLSzZ3/VEcXe+F1LHIm2cVU0PKv0+YZCd87OZ0DHmBgRWKQqgYSYgRRFwlHyDIZT+
- IT0WSS67hpIsH7ovC+A==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=SRrdq9N9AAAA:8 a=EUspDBNiAAAA:8 a=7u43oJkrPVBKl2x3A14A:9 a=QEXdDO2ut3YA:10
+ a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI2MDE2NiBTYWx0ZWRfX5f5hzO213uqp
+ AqLv1qyw+Lb8XH8Zjeu9rBJRZtYTBYYsWME9kOlS0hCFa+EtUSTNkrIDkmvJbm+4WyAX/K0d7Ng
+ 0VfMypIZkzcmJpOlDPutNmXyV0+V3dI+xMgmAv5Zj3JHSgFC/W4EX5SjNDXrkJfSTimMl0xNa6F
+ hJdsEhylE9utenRj6JP9f7zr3OhEH9lXIrfy7svkYxRZcBFkHklwVf+0nRtsb54sytQyBiAwnkt
+ 36GVTKcUcZsBRpgEmBInmQOXgPry8dPrTxa2L/1371zN7NznAwBrbEyQDeipcj7qfZdjA5hkZew
+ icE3r7qvPMXoo7BcJVirqCTDT5RzqLHPopZ0ISz4jkZn2yEh04HuMJSArSm7rolXbhTbHlVqZ0J
+ GLxIqk137+d/KCCuroiDpaY610zjX/WXGXutr/cVU5LC153zGd9ZgQ3RDT1ci1DZBviBkG69t5K
+ ljc323UwtccQdz1r74w==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI2MDE2NiBTYWx0ZWRfX+QKO45+NFsAV
+ 9Ov+B+1nDtezYjBtVC+Z5ESI5efaj/WKYv+cbX9h587y6MVZ/u2gLZeUdnSEViYeXg3Hkg7wOCx
+ obHCPuiKC8ZkISrr90vQmrRISYLN/CE=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-26_05,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
- impostorscore=0 bulkscore=0 malwarescore=0 spamscore=0 adultscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2606260166
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ adultscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 clxscore=1015
+ phishscore=0 bulkscore=0 suspectscore=0 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606260166
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -161,15 +160,14 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 6/26/2026 12:13 AM, TANG Tiancheng wrote:
-> target/riscv/xthead.decode defines th.srri as funct6=000100 in
-> bits 31:26, with the 6-bit immediate in bits 25:20.
+> rv_codec_r2_imm6 is used for XThead instructions whose 6-bit
+> immediate field is encoded in bits 25:20. The old expression
+> left-shifted by 38 and then right-shifted by 60, so it kept only
+> bits 25:22.
 > 
-> decode_xtheadbb() switches on bits 31:25, i.e. funct6 plus imm[5].
-> Therefore valid th.srri encodings are 0001000 and 0001001. The
-> current 0000100 and 0000101 cases use the wrong funct6 value and
-> decode valid th.srri instructions as illegal.
-> 
-> Fix the cases to match funct6=000100 with both imm[5] values.
+> Shift right by 58 instead, keeping the existing extraction style while
+> retaining the full bits 25:20 field. This fixes the immediate printed
+> for th.srri and th.tst.
 > 
 > Fixes: 318df7238b9f ("disas/riscv: Add support for XThead* instructions")
 > Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
@@ -178,26 +176,22 @@ On 6/26/2026 12:13 AM, TANG Tiancheng wrote:
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   disas/riscv-xthead.c | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
+>   disas/riscv.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/disas/riscv-xthead.c b/disas/riscv-xthead.c
-> index fcca326d1c398a6745984b9f5d90fc5f7d54dfd9..2f2ddb8dd9a13e17a28539b4179cd10fa93c5941 100644
-> --- a/disas/riscv-xthead.c
-> +++ b/disas/riscv-xthead.c
-> @@ -315,8 +315,10 @@ void decode_xtheadbb(rv_decode *dec, rv_isa isa)
->                           op = rv_op_th_revw;
->                       }
->                       break;
-> -                case 0b0000100:
-> -                case 0b0000101: op = rv_op_th_srri; break;
-> +                case 0b0001000:
-> +                case 0b0001001:
-> +                    op = rv_op_th_srri;
-> +                    break;
->                   }
->                   break;
->               case 2: op = rv_op_th_ext; break;
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 7f1b26277378c225c963d8f435cc7a2fc6e4a0b8..400a57083f90be18ccd12415797bce0df974784b 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -4546,7 +4546,7 @@ static uint32_t operand_zcmp_rlist(rv_inst inst)
+>   
+>   static uint32_t operand_imm6(rv_inst inst)
+>   {
+> -    return (inst << 38) >> 60;
+> +    return (inst << 38) >> 58;
+>   }
+>   
+>   static uint32_t operand_imm2(rv_inst inst)
 > 
 
 
