@@ -4,141 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD6B8CD4F26
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 09:42:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E62F1C43211
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 15:26:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wd34Y-0005MC-30; Fri, 26 Jun 2026 05:42:06 -0400
+	id 1wd8RL-0001ax-AS; Fri, 26 Jun 2026 11:25:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wd34W-0005LR-KW
- for qemu-riscv@nongnu.org; Fri, 26 Jun 2026 05:42:04 -0400
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1wd8R8-0001ZS-2V
+ for qemu-riscv@nongnu.org; Fri, 26 Jun 2026 11:25:48 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wd34U-0005Y6-O5
- for qemu-riscv@nongnu.org; Fri, 26 Jun 2026 05:42:04 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1wd8R5-0001Bm-57
+ for qemu-riscv@nongnu.org; Fri, 26 Jun 2026 11:25:45 -0400
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65Q6VMYm1680034
- for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 09:42:00 GMT
+ 65QF3qJB1194548
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 15:25:39 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- jDJC/0HDTXFtjGlDMT0xml2YFgsL3IOKr7Hd62sc6JI=; b=iLcbzZ8SFuPBUt/H
- uqTG5a+cGGZEM/BkrGiN3eY555J5ocwF/9pQNBkwGMdY5ezEpVnkycooJWwBT++x
- /M8KrFhoqOcjN38Pz3iNEi+MBqrxTOAym+svpQYpS/xkkBCBYQwCFE0ncDestK7G
- bXqRAu5CT6rwKrZ2i1lj8S44rjYmNK9M96PJRXMKtB0izJEPKcQIM9CvUBaCsjQl
- jVbjQlRfqMQznbjZKmx6vwtPduGoGQiso0f5a3I/Kp5hmQzCMKePIik88tQMovdw
- iynpXvidJlEjADlrfBcNhRQyu+U6wQYH9HYpCCqrVtsF75FycLYFn61uU2i9j0hS
- hSyvAA==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f1fgc1t3f-1
+ pmTPpcUP6+bGRKOlJ61wMwLG41VtmkKzGLDeUHsYHUQ=; b=fHP6SAApNd/mBdJb
+ JGENPFP17NHcy/dkav8YiloLrf7t+rtPR8WHOMPqLSob+TuHtwoeAHSKizVw7jIG
+ HKwap3nTpKi+CvyCRHw2lB+eJSjYYoBqWhULmEiyRwT/Fu4LyChTU3VvjHD3/9CX
+ glWx+ebli/fMN4qMF3HDpu1g/1BDldIb1yFisYDEhqp06mOYvW/mWlPOSdjGPbFu
+ O1fdxjYznvUvl6m9gdYHvaQGDG2/8aC4d2gSBettayi/0SdgI1mKGvE/jyBOG8sU
+ 9bBiZMkwAvwKqUZQqSgBZ5/ABVoYyG1a3RsDUSAMzIDEUN7qEiI+A7l1eEP4kUGy
+ hXwIrA==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
+ [74.125.82.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f1asjc448-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 09:42:00 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-8db3d8c8c0bso22252076d6.2
- for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 02:42:00 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 15:25:39 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id
+ 5a478bee46e88-30ca81e05bfso478184eec.1
+ for <qemu-riscv@nongnu.org>; Fri, 26 Jun 2026 08:25:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782466919; x=1783071719; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=oss.qualcomm.com; s=google; t=1782487538; x=1783092338; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=jDJC/0HDTXFtjGlDMT0xml2YFgsL3IOKr7Hd62sc6JI=;
- b=gesZEG/+Mnh51L4sor+d8SDH/YfHCX0xWMOJ0LJkJ3G1zkBwTvZYf52mzvnsiaLNps
- Y5FSfs7E9J+QoSuzyFzgf6AEP0kdIDeyjAquYK9LbBsOC5ah7yKODFwsCnBV6770v2MA
- 4GOVgzSdk9f3Y25FsmELtZ9xJnIOutb/O46rXGLZBa0Ryn/W1LutRXYNNx/OjilMs8C0
- AkjaxWgbrbpzqlg/lO2P5THSzP1KMDMZzi33kTcjwas3KJwUWH8p0/K8X5tJW5P3NrtH
- fiu8FrT13KDiTwPWwP8B4Qb9WI5tqY0wKY5DdH8k9sBf0+6E6V8yA+8P/zO9XsvI+jk0
- P0ew==
+ bh=pmTPpcUP6+bGRKOlJ61wMwLG41VtmkKzGLDeUHsYHUQ=;
+ b=kXLL1ngh5T6W+v9LlbUhVm//82i3/iV1BSPAVdU8uwRvNrQN26MPZLLOecNQ8q44dl
+ Md83lO0XWY1yEL2GKj68C7ftreWoOySYGRM1BlZPspt0qlBbrTXh/IQ+SjsI9d8Pcru2
+ w7wz8scAW/K/ib4/g1qsdIxexT5qV8RU21PRomnhx5EVAc32BUg4wc9S6lF2Ht3e9G7+
+ ZFxq7+kGNDuBKWVz/9ci+wA+4sp60g9bco7iRMOgs5glhY22WE7wvkr0prSrbiyl/L/t
+ 5//UjQCRqdUnbAT9jP3GnraSwwCsK7MZFJkAH6uE4+J8MenVy/aGSzD6GTI/OVyKXifB
+ j4Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782466919; x=1783071719;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20251104; t=1782487538; x=1783092338;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jDJC/0HDTXFtjGlDMT0xml2YFgsL3IOKr7Hd62sc6JI=;
- b=jqs8nt8Wph2Lc6s8Sy9HF/BR0nRzNgVLLnpyWc1Q+aujG796/IH0Ejx/LbrMtz/Q0o
- iqj9Xgy9/o02Tsm3az+sPX3IGYhvYx69dI1JVMG9lTNmaLnG2AJ3s0KKWB5zA+rpWG2y
- gDaIbI5KJFjeHfa7R+rErs1calRcH+XA3oOypI6AR9IS73DFTOyN5D4H4MbGz/DE4WwQ
- pZ4I6B2jgZq9GAZFDPgr+Y8fpgbDyzCCq3BDa0AUmbBWaCznzTJoFvR2CD8+gY35lnEw
- Dzqm5dJmo8qMfJDa78LUk5Tz6c/y8pXc9Rt3B6zYSVhApL6WKEdZhOv/Q4tyixC/gbu9
- ZnTg==
+ bh=pmTPpcUP6+bGRKOlJ61wMwLG41VtmkKzGLDeUHsYHUQ=;
+ b=RKg/M2UBb3yVzrqrVW7nKYZpCM2N+P/d1g79q7qd2FnnzO6mNsXxuRG1+iGkkDeAZ/
+ 6gJ7afJoKuUBj5AlKNOK4MTWBMXEPm9Rwh/mYSCC9SAgBt5hdkEdRU2HCiv/PzMPGgB/
+ UpSp4Swhudwv5kNqq3+rnH8uuOR9/XvyAdhqRc2j2mBdqkMP2UEgvaePB26SFHLp4Ild
+ 5EvsTNG2enTRVt95PLghCtSyVwlOwGduCBknmIsjwl+AHZLxdAo3C6va5L1zHvOyqk1L
+ QdyTV0dlBV+8LZ/gzp+ionPP8RwxceXZQxm3SCZ7StUu6ZRr26KYnsgB70wc0/cMqulo
+ dN3Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9H1xh+/EpwQn+14ebDOFofgqrfWNybTZd1DwiRXGI4O1V+DE48PBqmiUaQfFBWu/BUSh2QNtifvN6M@nongnu.org
-X-Gm-Message-State: AOJu0YwdhlgsmgNT06dvYbt9b3a9Dh1JLVGQR4gAL67GCjPaofahLU6R
- sLfbMiyGxD/jL2SDWIoxShBLDiUvUPKiJIFcNH/E61+Ew928/U0rZ1e8y096JMWKAsVxjy5OV1M
- Li5lFO4JY2s1fngRYqBpifMrFt6YABJgw2UJbGeXar8LgksxOSMD/VF8TCA==
-X-Gm-Gg: AfdE7ckqt6TFXl+YAiOWoKnLl5xkSbEmz6PNq7bXR/jcRc2G+xQbzcYxRv+m2P2fDxc
- V03DoXdXu9jD2g4YsVxxRUcb79VVzTxU/XqcAg+fNsT+Kg3Kkftj3PjbNKBvaI1+0fEwFJ+zas1
- Udpb25/QgkFRRcqM6CspdzsSzRnQyDUxB8Qz4UjWmDznwVt3XQUEgzI2fTXXTB/pBzyTlofwF1H
- YpJsk7UBJ1u7yVVzBHivx8M+aEJB/smf0IiM4ulSO+6R2UI+lag1mq6Tx63wS7Y9i7HYgMLKMhA
- 2pK/mcx+NkNBug1gRw2cHL7T6Zu5T5DfNJzVeuOnni8Yhbs3k6LhCMRn843D+YlVvlfKbq36/Eb
- JRZbBehSIMVeB8lyexQ7kXlVRc0klObhMiNePVbH0T07RekV3OWr3CBRY6l8mug==
-X-Received: by 2002:a05:620a:172c:b0:8cf:e0fe:f217 with SMTP id
- af79cd13be357-9293a9a25a3mr935631085a.20.1782466919243; 
- Fri, 26 Jun 2026 02:41:59 -0700 (PDT)
-X-Received: by 2002:a05:620a:172c:b0:8cf:e0fe:f217 with SMTP id
- af79cd13be357-9293a9a25a3mr935627885a.20.1782466918687; 
- Fri, 26 Jun 2026 02:41:58 -0700 (PDT)
-Received: from [192.168.69.212] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-46e95f3d71fsm7074254f8f.12.2026.06.26.02.41.57
+ AHgh+RoZu+Sok3dWBjz4EYh8+DfHtd5fmZQi30EV7hGC9OCbDRc+qRAmgJJFNVNlC04G00IMrQEwffMK0pdd@nongnu.org
+X-Gm-Message-State: AOJu0YyW5RFUnxqzeVxfNJR4QB4SqTXYiN0lyiLaOt0xoInkPTVzlqlZ
+ F0k7la2UayXxw/vGuB+41fHvaXhor1QSudRoA0pxw1c1caimId04Rxfh5RbJlo/E/iqUeCZ6O3f
+ LYUEh6Wxq5GXjI9C8V90AFUz0cJ2Wx/Kj2K2tRL75bhuq6stuJo6GXG+4dQ==
+X-Gm-Gg: AfdE7clw1te9XAc13ARM1MNbJRnF0lPYGSXnHJo9o2JbzZOy/KpJlohTNtitueGfzIy
+ k/Lcaa02pSGxnmGIebMPkFS6Io1esM2YTr6rOn3s05LPm/+zOxGOEv9afxTKf9fL5MRjbM+StLl
+ mUzHhg8SbpCgUpCBnw3PVu9mXuLwSlsijduoXfetDiPqgO/t1SIDVBSE1eYhEdpxRBr3DLkAmw0
+ yyWVWNtGGIvCnkwqA+wBuGZZx+adiQbbUcaRMXhjVPs16dl5VBCcfnUaEk63zk3XmiLDtp2ADZu
+ 33R/8Rh70NM0uCnxUJdWP2ifIuhdR+EGoCc0MsRvxWWBfQgVQGWg55M0JC3D3Xalg5hYjZ7s41s
+ ajmQKJSyCsaE5SYtUw70YFfSiBtFTiDxyIuel4mtzcH8cQPNyUHiuk2O8ywFnGWOln+1HLQYDY/
+ xyLBM=
+X-Received: by 2002:a05:7300:80ce:b0:30c:ab4f:46a2 with SMTP id
+ 5a478bee46e88-30cab4f490fmr737779eec.38.1782487538299; 
+ Fri, 26 Jun 2026 08:25:38 -0700 (PDT)
+X-Received: by 2002:a05:7300:80ce:b0:30c:ab4f:46a2 with SMTP id
+ 5a478bee46e88-30cab4f490fmr737743eec.38.1782487537608; 
+ Fri, 26 Jun 2026 08:25:37 -0700 (PDT)
+Received: from [192.168.1.170] (216-71-219-44.dyn.novuscom.net.
+ [216.71.219.44]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30c7c8b1ab6sm30337618eec.15.2026.06.26.08.25.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Jun 2026 02:41:57 -0700 (PDT)
-Message-ID: <47b47ca5-0a24-4c12-88d7-f32184728dad@oss.qualcomm.com>
-Date: Fri, 26 Jun 2026 11:41:56 +0200
+ Fri, 26 Jun 2026 08:25:36 -0700 (PDT)
+Message-ID: <bd41b617-c5f3-4b9b-a8e3-25d76d37bf13@oss.qualcomm.com>
+Date: Fri, 26 Jun 2026 08:25:34 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: Report QEMU CPU archid as 42
+Subject: Re: [PATCH 00/24] target/riscv: move TCG files and fix --disable-tcg
+To: Alistair Francis <alistair23@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu.zevorn@gmail.com
+References: <20260622193141.1449724-1-daniel.barboza@oss.qualcomm.com>
+ <52c3605c-345f-43d2-8cc6-794980c805fa@oss.qualcomm.com>
+ <50ce1e98-2c1f-4cbd-b191-1eac324b71b6@oss.qualcomm.com>
+ <704cfba3-e92a-498d-928b-877f7f7641fe@oss.qualcomm.com>
+ <9d2737e3-34f0-4f68-813b-37059615bced@oss.qualcomm.com>
+ <CAFEAcA8660BZOmX_KXeF7JJaJwgKO3zSRDEmJURg27FK=tqbZg@mail.gmail.com>
+ <df4a5857-ec4f-4d4f-bc08-1a9c5caae100@oss.qualcomm.com>
+ <CAKmqyKOJ4xgYq4G2DsZMocdXKBuekFxNUkvK0x6qJzZHjXN5QQ@mail.gmail.com>
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Content-Language: en-US
-To: Charlie Jenkins <thecharlesjenkins@gmail.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>,
- Atish Patra <atish.patra@linux.dev>, qemu-riscv@nongnu.org
-References: <20260625-marchid-v2-1-3821c351028b@gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260625-marchid-v2-1-3821c351028b@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <CAKmqyKOJ4xgYq4G2DsZMocdXKBuekFxNUkvK0x6qJzZHjXN5QQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI2MDA3NyBTYWx0ZWRfX5p49uVi93AWJ
- +Bmq/CvUCSJRn/pra/wDlgoAHjjkQhekj3i0baIk5eCsQWtgpxRFUrUcEN9pFW6nBNUBDXD7bcm
- 4ZPmvCiibX8/ZOorWld2TXQR+Diiws0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI2MDA3NyBTYWx0ZWRfX0sRoASaSZ6lt
- rc8XU3xMDQcW6t+/Jb4UjiDygysxhOtGUZJHoRH7OA3O3idqshQSTQTesSG7M9al3jlTHogdtDc
- H8VfGWp3t0Wrs5Yqk+vBmNwv8fKwbpWvfdwZfBmskoyijDDGsL/rj06weSD27NrBpC/+3MMJQMy
- 1vo/gOZj4nYSkkSgSvP/iivi0AprZ8qFkvN08jzWODwcmtV8XZkZiLV2rMyNcemOLVdbZpM75Kn
- z0mshJUj6jQBtgtrKoyqP7jgYKOeSdb+lxh+TF9jk8LICBeOrHHRNgSC5cRAStgyS3sub0zBwWM
- Mdo+PIXB7FNFuYpc61QAqZbz3IhBG8Grxywf+tCsKpwMgF7gmyKc8PyOGMK76XA8P9bsseOT+zx
- GIh2vuhH0rIcBzDzJt3ayB3ULv/7SAzbaVh/K1eFhy78d9gP0bBybdtxhq3Ftzl3zDw4NB9G6Ae
- 8Y62GTY+r83fuivP/4A==
-X-Authority-Analysis: v=2.4 cv=O4oJeh9W c=1 sm=1 tr=0 ts=6a3e4968 cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=xvfqbYfxAAAA:20 a=VwQbUJbxAAAA:8 a=h0uksLzaAAAA:8 a=pGLkceISAAAA:8
- a=EUspDBNiAAAA:8 a=PP3pwVRpa4UdzyismAsA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=OIgjcC2v60KrkQgK7BGD:22 a=MSi_79tMYmZZG2gvAgS0:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-ORIG-GUID: pjaXUh-RVOpucSSts8ciebLdzTk_y-fz
-X-Proofpoint-GUID: pjaXUh-RVOpucSSts8ciebLdzTk_y-fz
+X-Authority-Analysis: v=2.4 cv=TO11jVla c=1 sm=1 tr=0 ts=6a3e99f3 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=iLqgmErQAxjCjdq5jj1Aqg==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=IerRr1emMuI6M3M2-zUA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-ORIG-GUID: cuaIpasrgemXG6DsgPSZZVLGJAbXVJgi
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI2MDEyNyBTYWx0ZWRfX9PW1RJ34YxR/
+ pq+CDqvaMJYMiKdBMpUamTohmwAu/LlEAxeb+jIXfNlg1u9btmpQDMMUdt1B1Cu+ivWiki7Xbr2
+ CdgLYaWD1U48ixV5SwbAqN+H0d4aFs0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI2MDEyNyBTYWx0ZWRfX/F426Yg9Lnzq
+ UsyFKLai7/b3loqg47WTN6vFnr3J6EqDg2oj6+Qy4JakdrfSj+Rh76+5Jadam+FxJ0gFfZqZ+6Z
+ oJO390EUbfjAdFjIQYGg4tCaTCPO+QIBON25zTpplY4bbsjvY3Q7upyrkOZiVudVybqlVZsvwZW
+ HI2L+khIAA4BBW4WCek0ChA9itsw8FcMWWS+L6mWhPxel00GtVvlFFyAEiGuFPOOqd2yJQM+CL9
+ dgJDtQikQlDDt0oCD0AuoUTZ5lz9z0zqLKkKaL+cAqfiFkrKuQpbG3lQW9m0z+VWPNVHkXYNLI8
+ stVUCLVOmKIDr+E+V6T1dSN2/Nz1r0uP3KkxItcmQF++EyQBQDrXgBeTAtoppS5vs+cHUwpf1M+
+ yLLxzkVA0MSsGHlHFa0wRRkbjb7M7WcLp2zyn3JCmIkw4bbH3NYGfUHKAhTgJ2yw3x7702BzEd8
+ TFQ4WEKfBZqFCNI8U9w==
+X-Proofpoint-GUID: cuaIpasrgemXG6DsgPSZZVLGJAbXVJgi
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-26_02,2026-06-24_01,2025-10-01_01
+ definitions=2026-06-26_03,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 malwarescore=0 bulkscore=0 clxscore=1015 phishscore=0
- priorityscore=1501 impostorscore=0 spamscore=0 suspectscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2606260077
+ suspectscore=0 adultscore=0 phishscore=0 priorityscore=1501 impostorscore=0
+ bulkscore=0 clxscore=1015 spamscore=0 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606260127
 Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ envelope-from=pierrick.bouvier@oss.qualcomm.com;
+ helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -161,103 +167,139 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 26/6/26 07:12, Charlie Jenkins wrote:
-> When a non-vendor CPU is used, report the archid as 42 which has been
-> allocated for QEMU in the riscv isa manual [1]. This can help software
-> check if it is running in QEMU.
+On 6/25/2026 6:37 PM, Alistair Francis wrote:
+> On Tue, Jun 23, 2026 at 9:39 PM Daniel Henrique Barboza
+> <daniel.barboza@oss.qualcomm.com> wrote:
+>>
+>>
+>>
+>> On 6/23/2026 6:58 AM, Peter Maydell wrote:
+>>> On Tue, 23 Jun 2026 at 10:49, Daniel Henrique Barboza
+>>> <daniel.barboza@oss.qualcomm.com> wrote:
+>>>>
+>>>>
+>>>>
+>>>> On 6/22/2026 6:34 PM, Pierrick Bouvier wrote:
+>>>>> On 6/22/2026 2:23 PM, Philippe Mathieu-Daudé wrote:
+>>>>>> On 22/6/26 22:52, Pierrick Bouvier wrote:
+>>>>>>> On 6/22/2026 12:31 PM, Daniel Henrique Barboza wrote:
+>>>>>>>> Hello,
+>>>>>>>>
+>>>>>>>> This series looks scary but it's mostly trivial and mechanical work.
+>>>>>>>>
+>>>>>>>> It is yet another attempt at fixing --disable-tcg.  We have a recent
+>>>>>>>> work sent to the ML [1] and we had Phil's attempt back in 2023 [2].
+>>>>>>>> Phil's work didn't get merged and it's now too hard to rebase and
+>>>>>>>> revive, the most recent attempt got misled into the 'what is common code
+>>>>>>>> between TCG and KVM' dungeon.
+>>>>>>
+>>>>>>
+>>>>>>> It seems like series does not apply on top of master, would that be
+>>>>>>> possible to rebase it?
+>>>>>>
+>>>>>> For some reason the RISC-V series are handled distinctly than the
+>>>>>> rest of QEMU, Alistair queues work on his repository and developers
+>>>>>> are custome to base their series on top of it (otherwise Alistair
+>>>>>> can not apply them on his tree and asks for reposts), see the
+>>>>>> riscv-to-apply.next branch on https://github.com/alistair23/qemu.
+>>>>>
+>>>>> Unfortunately, it makes it hard to run any kind of automated testing,
+>>>>> especially for series like this that target specific configs.
+>>>>
+>>>> Don't we have ways of saying in the commit message "these patches applies
+>>>> on top of these other patches" and then the tooling would deal with it?
+>>>> I remember patchew doing stuff like that with that "Based-on: <message-id>"
+>>>> tag.
+>>>
+>>> Yes, Based-on: is our convention for marking "this patchset needs some
+>>> other one to be applied first". But that should be the exception rather
+>>> than a common case -- if patchsets regularly need to be based on
+>>> something other than head-of-git, this is I think a sign that
+>>> maintainers are not sending out pull requests frequently enough.
+>>>
+>>> I would prefer it if QEMU didn't develop kernel-style "subsystems
+>>> have their own particular workflows" fragmentation -- I don't
+>>> think we're big enough or that sub-parts of QEMU are sufficiently
+>>> well separated for it to work out well.
+>>
+>> I agree that rebasing things on master is better than rebasing it on the
+>> maintainer's tree.  And we could make a better job at informing developers that
+>> submitting a patch for qemu-riscv, vfio or any particular subtree, means that
+>> the patch should be based on a maintainer tree X.
 > 
-> [1] https://github.com/riscv/riscv-isa-manual/blob/main/marchid.md
-> 
-> Signed-off-by: Charlie Jenkins <thecharlesjenkins@gmail.com>
-> ---
-> This series was original proposed by Palmer Dabbelt [1] with a follow up
-> by Daniel Henrique Barboza. This patch implement's Daniel's suggestion.
-> 
-> When booting with a non-vendor CPU such as with the qemu arg "-cpu rv64"
-> marchid will now be reported as 42.
-> 
->> qemu-system-riscv64 ... -cpu rv64
-> 
-> processor       : 0
-> hart            : 0
-> isa             : rv64imafdch_zicbom_zicbop_zicboz_ziccrse_zicntr_zicsr_zifencei_zihintntl_zihintpause_zihpm_zaamo_zalrsc_zawrs_zfa_zca_zcd_zba_zbb_zbc_zbs_sstc_svadu_svvptc
-> mmu             : sv57
-> mvendorid       : 0x0
-> marchid         : 0x2a
-> mimpid          : 0x0
-> hart isa        : rv64imafdch_zicbom_zicbop_zicboz_ziccrse_zicntr_zicsr_zifencei_zihintntl_zihintpause_zihpm_zaamo_zalrsc_zawrs_zfa_zca_zcd_zba_zbb_zbc_zbs_sstc_svadu_svvptc
-> 
-> When booting with a vendor CPU like veyron-v1, the proper marchid will
-> still appear.
-> 
->> qemu-system-riscv64 ... -cpu veyron-v1
-> 
-> processor       : 0
-> hart            : 0
-> isa             : rv64imafdch_zicbom_zicboz_ziccrse_zicntr_zicsr_zifencei_zihpm_zaamo_zalrsc_zca_zcd_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt
-> mmu             : sv48
-> mvendorid       : 0x61f
-> marchid         : 0x8000000000010000
-> mimpid          : 0x111
-> hart isa        : rv64imafdch_zicbom_zicboz_ziccrse_zicntr_zicsr_zifencei_zihpm_zaamo_zalrsc_zca_zcd_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_sstc_svinval_svnapot_svpbmt
-> 
-> [1] https://lore.kernel.org/all/20240131182430.20174-1-palmer@rivosinc.com/
-> ---
-> Changes in v2:
-> - Added comment linking the spec allocating 42 to marchid
-> - Cleaned up the id setting
-> - Link to v1: https://lore.kernel.org/qemu-devel/20260624-marchid-v1-1-a0af7997071f@gmail.com
-> ---
->   target/riscv/cpu.c | 11 +++++++++++
->   1 file changed, 11 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index fa497e5e8a..94946d335f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -47,6 +47,13 @@
->   static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
->   const uint32_t misa_bits[] = {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
->                                 RVC, RVS, RVU, RVH, RVG, RVB, 0};
-> +#define RISCV_CPU_MVENDORID 0
-> +#define RISCV_CPU_MIMPID 0
-> +/*
-> + * marchid allocated for qemu:
-> + * https://github.com/riscv/riscv-isa-manual/blob/main/marchid.md
-> + */
-> +#define RISCV_CPU_MARCHID 42
->   
->   /*
->    * From vector_helper.c
-> @@ -1183,6 +1190,10 @@ static void riscv_cpu_init(Object *obj)
->           mcc->def->profile->enabled = true;
->       }
->   
-> +    cpu->cfg.mvendorid = RISCV_CPU_MVENDORID;
-> +    cpu->cfg.marchid = RISCV_CPU_MARCHID;
-> +    cpu->cfg.mimpid = RISCV_CPU_MIMPID;
-> +
->       env->misa_ext_mask = env->misa_ext = mcc->def->misa_ext;
+> I would prefer patches on master, the issue is it just creates a lot
+> of conflicts. That takes time for me to fix and I'm always worried
+> that I'll mess something up and it will go upstream with a bug that
+> wasn't in the original patch because no one gets a chance to verify
+> that I rebased it correctly.
+>
 
-I'd have put it here, then followed by a comment such:
+I agree it does not scale. It creates friction both for you and people
+who submit in the subsystem.
 
-         /* Let vendor override defaults */
-
->       riscv_cpu_cfg_merge(&cpu->cfg, &mcc->def->cfg);
-
-Regardless,
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-
->   
+>>
+>> The thing is that sending patches on master only works if master is always up
+>> to date, and that's not feasible with our current style of merging PRs.  This
+>> series we're commenting on is an example: it doesn't apply to master because
+>> there are pre-approved RISC-V patches in the maintainer's tree from 2 days ago
+>> (also my patches, I might add) that caused conflicts that I wasn't aware that
+>> would happen.  This conflict would have to be dealt with at some point by myself
+>> or the maintainer, and it's not like 2 days is too much time without a PR.
 > 
-> ---
-> base-commit: b83371668192a705b878e909c5ae9c1233cbd5fb
-> change-id: 20260624-marchid-80d176b873d8
-> 
-> Best regards,
-> --
-> - Charlie
-> 
+> Yeah, I try to send them every few weeks, but when all the patches are
+> touching the same few files it's hard not to hit conflicts.
+>
 
+Then simply apply a FIFO strategy. Take series as they come, and leave
+conflicting one out. IMHO, it should not be the responsibility of a
+maintainer.
+
+>>
+>> We can argue "this is an exception that doesn't happen that often, we should
+>> stick with using master as a base", and to a certain extend that's true.  But
+>> then this sort of conflict happens again, then again, then again, it comes to
+>> a point where it's easier to tell developers to use the maintainer's tree instead
+>> of master.
+> 
+> Which is exactly what happened. I think I have just asked people to
+> rebase on the RISC-V tree enough times that they just start with that
+> from the beginning.
+>
+
+How about merging things to master fast enough so people can just rebase
+on master? It seems like it would solve both people problems, and yours
+also. No need to do any rebase, and no wait time for developers.
+
+The only thing it requires is to increase PR frequency, and I would even
+go as far as suggesting to send one PR per series if you want to provide
+the best velocity possible for this subsystem. Just automate the push
+and CI triggering, so it does not take more than 2 min of your time.
+
+When a conflict happen or a test fail, simply ask "please rebase/fix",
+and wait for the next version. Not your problem anymore.
+
+What do you think?
+
+> Alistair
+> 
+>>
+>> Maybe I'm downplaying the problem because I've been sending stuff based on the
+>> maintainer's tree since forever and got used to it.  IMO, unless we decide to be
+>> like libvirt and create the "committer" role to allow trustworthy devs to push
+>> stuff to master after acks, making it more feasible to expect master to be up to
+>> date, I'm afraid we're closer to a kernel-style workflow.  For better or worse.
+>>
+>>
+>> Thanks,
+>> Daniel
+>>
+>>
+>>>
+>>> thanks
+>>> -- PMM
+>>
+>>
+
+Regards,
+Pierrick
 
