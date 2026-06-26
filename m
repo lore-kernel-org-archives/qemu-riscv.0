@@ -4,110 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A398ECDE00B
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 01:42:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53D04CDE00C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 02:43:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wcvaS-0004qn-9t; Thu, 25 Jun 2026 21:42:32 -0400
+	id 1wcwWm-00080L-Kp; Thu, 25 Jun 2026 22:42:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wcvaN-0004pu-IU
- for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 21:42:27 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ id 1wcwWk-0007zY-1N
+ for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 22:42:46 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wcvaH-0003BC-OV
- for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 21:42:23 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-697764213d6so716577a12.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Jun 2026 18:42:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782438139; cv=none;
+ id 1wcwWi-0006kT-7m
+ for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 22:42:45 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-693c51a8a19so830301a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 25 Jun 2026 19:42:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782441763; cv=none;
  d=google.com; s=arc-20260327;
- b=MJMVFLJQZ83uLGMp+EhtdVbEOudKzB3xamIt3955Cfa9nGp2S6Ty4dRfQis6fSV38Z
- Zx92/H+JeUErqrfeUtq8jL34h9CJfwuzTdSClr6qOlSC8J4yoUZYAQsKbGZ1SpGkknVX
- StyQNUyn3qlVrADk63Df83tWVkyYykmziV/oAsLRhp+fK8LrgQy6L35Uj0krtfBhMBuP
- 4RYhZKCRlPTbcESIKvrkJdidc+J6c1ss/E+JEuWGQWUyMEJUxRk/rkWQnFhr7LixShd/
- zqBIfGx9uXP4s2DcDO7dRkxr2ZbjrOtF4TS4Kn0wl4/upPnVwIMS4s9Sk8Ax992ltQ6t
- qavQ==
+ b=n7VFFggUkBpKLXUdeM/KsL6GolwMBZYZIiJNdIZWTs1SRYMV2OfI4VOk7RXg1KPkkA
+ xwBkaTQAzymXYaJVjvUCqW11f5fDnisJqEjrpS/B7l0sv8LyU9T3o7hgYG5HYbpI8KQM
+ UMFy7ItA1vlOfc0yjWVAPyFKBB+ssygBzFGo0raT9rgnpOSkQa3SYRFW1dy8lps/KsCY
+ 6aCDSVYYqMi/PZjI+qcEWl2GiWl3PTD+1vfBg0zudOYCwsn81k4o44j4XeX83JD2/yPO
+ 0pugfmVWyQuWZVeSnHJdsho59H0mvpSL2lS5FcLLQ3zc55siKgz/cUGXeR9ALIbuQgol
+ v9GA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=xTWb5xhqXKwHUgzuaUekT+uRCWkP2D/TuEgj4NFRxEY=;
- fh=IvWfLLBNOvCN78l9wC9Tcj55GnuyXQuIwEY4ydv1ulg=;
- b=Fr3TFMkId/dIv9lpkzfwS8CCBjxCGsHcc7HFPSXrZ1y5ITjeouuymOOGtTXgJSycIM
- NdF6oFmLMtz+9czhbTAgSGu2XrwCcuekq1Stv0rkEPl4sXOAmDjssDuZxcPNXtnKsFzP
- W3kob8I+XBmjf+EXqdMFTqnlirOjTgT/NYHm0ayBeWEBarUNIcxmIBxLhvOTw+zSdeNp
- FkJJpIlNldwoA81bnkue2wxdyJxpTh3brKWh3rYTVDrHqTvi1s7PWVM3lvQ8+wuq20k1
- XfznqTS81MP3ThU2K7s26W0AmevYcIaKnK8r8u9UYoBa4w8OyX7fdnspP+XNkLV1Ck1I
- eSOw==; darn=nongnu.org
+ bh=T2a8zslxJMFNeMrLeiKpQGxtzsvDdS7R2yRapoOAFJo=;
+ fh=ykMWHfNvdpyMIbBGJM3c9xJ4BSHfr+YUoGgjZo+Ox74=;
+ b=VClmyXeQML2vmp88v2dW/0y6Yy3CHVBEPw5Ya51UxQaD9kIesaCTtuXRnbda0ShDEn
+ Abbx2ZRl9tlFtOLddh8EhgBKItJkTj2cUQUVVKLUaPd4M+VjaUfPdulO4/DQm6Litz/o
+ 86ocRHVdL4oHknNHP2G6b8oZK/DWFSqFETjinbTcd/QjfI+8rhgROcbO3BLu2SlKxo36
+ AS5BjI1/KmI6Wuen3QZo+vR0mqleLyLtEYHbvLTH/u/IlZNJ1d2fODYB+wdMhBsnpsAW
+ s8Q2llf5TnH9/620n5/vjgfNnq0mKyI3Jxsz3v+2r/ZpTJgVTV+1ixzCVnoUJ/FJ/RBQ
+ CHGg==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782438139; x=1783042939; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1782441763; x=1783046563; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xTWb5xhqXKwHUgzuaUekT+uRCWkP2D/TuEgj4NFRxEY=;
- b=Tv8r3sOT6PBquRrIa1cXeliqCjWgo85T8Jnc0Itna7KsMy+mhAB4aeON255CM3cfrN
- iq06EHboMC3DdeSv6UGpAFccnKxg4kHlmVJiCaO7ovi6Wc0sHiBwrssFPJSM3iaGEecb
- EOKMotXqnDwYW0W/kV6HEFi8i64vrKiUEWrBsSoIFndY30lx2mVlBTQdNJFkSQcwWR0K
- 237TTrKv/071akwzfo2fWeDxtiFC19CXFsym8LXhRwSU1QbUfIMPAexybzLEQs27g2A9
- znH/srCS+3w/1D2AeBriOQo3SGXUfuQO8G7mkIP5R7M8zC9mY1l4vfxQMwKwR171hnG/
- MweA==
+ bh=T2a8zslxJMFNeMrLeiKpQGxtzsvDdS7R2yRapoOAFJo=;
+ b=b5rO8ndyQMpUNZdWQtsmOZGVBwF5vAgvrwHIurfq/Sf2yPo6CX8Pse6rP6QGNDzMvW
+ Cj93dnQxoNBsnGbzNtYlBiDVZukVIPuXKPtusuJUNWrYYTgFAHlbIBwDfTAZW2vTfbnh
+ IBDKfb4C39Xg2MCTYd/uObZIyhQnDoWvdztIys34b80Z9NbCzqNa0INZXBsWMiyZAONh
+ NO62mM12HmqzpG31cUbUtpgbMRFxoJJL3y//afefhMCJQHnVPSYdGgWBERg/NNG+c/wQ
+ slTwfgoE2H/yQR9CDZZhsG5qA+uvIDTJDDo8cQaJCGrVKm57NGBQa2oO+xpenKON2b34
+ oyFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782438139; x=1783042939;
+ d=1e100.net; s=20251104; t=1782441763; x=1783046563;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=xTWb5xhqXKwHUgzuaUekT+uRCWkP2D/TuEgj4NFRxEY=;
- b=LmI+zG+uqOU5NPMI48ngkvuxXYkOCOZdOCqg4L7XvENBogFGAi5+RGNdGsp9uLhi9a
- Jmm9+f9vrzhH63gxvT6AhnvRwpVvB2M7vcE1W8e6Rc4bxIPC9F3fmUjotSu/Ellq2m38
- G0VHffczoGg2JsTrq38VBeUCzWada5W0djloEtW18f7wiBA28exfHUVwvSoAYZp/CFTS
- a/nB7yZQlqBOnhm/f62H5VGsLvuNjJkvSCTgOllf5Pwv4GN3yK+Uf9VRKi8tsqVgsJgc
- xZWyb8+NAbSmWmewEzwQb80YL+pu59THblGqwK8TY2qfk57lIxM+4fmo8aRRegrd0umh
- qYxg==
+ bh=T2a8zslxJMFNeMrLeiKpQGxtzsvDdS7R2yRapoOAFJo=;
+ b=OxGfNLLCKcQYWvDERRotXFv+EOnrySsChous+OuAUb8OszIW9qQPaPpp1cDkoRuVW3
+ ACisg89VDpVqM0h0KnMyLPpb3K8PpFdX2AGhr60P6sSQxado7nRwbSeIWPfmwS9kN86S
+ R9RTR3bqUZ7/rBw78juvgRoRd4ujfArKdizjSpvwMWmW8RV3JS3L88tsrgJ1w7cBf95T
+ TEqKe3VUzOKY+0DXoLyiI/CLES7hjRTuqlHQcVnU0qcHly2M4CeMdEZdCxF4OGZMKeFA
+ stcJKnQWe6S9mPUKy88ghHOhco7+qHb5JYgd0HB3BE2GrsBrpCiJPh+oc9PyQ88+LiBL
+ 44DA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqLLa9COGn4IcGK5SX9c2Se+jetqAi3XOluBBJr2NrlC41l39Q28dDEk874F4wSzAoUk2akZ+85iiRx@nongnu.org
-X-Gm-Message-State: AOJu0YzJ2GLgVHCYfmcxwtcutn1ORkOeVJviMNgbDa0tVREsIcQ4toWf
- yzGqnT5L62i82WloQGV6JFOYl992TYzwuytvH/U3Ze19Rk/HQw2JyLqjPwkuwOzBFIpWRjEDNtW
- vSeBx0YSrLmfGIlSVKNonMpbysN9hPXU=
-X-Gm-Gg: AfdE7ckRrn2C4wlK6/CGKvJU7ZREkpNimEwtxgXoOZOfSHp3ux0GPk3/B8deOr3M/45
- jZp9SCc80TLXF1IVd8b1fddGIppOToCSSxtaaYrFXszbz5/SNROcBl/Jgu/vK6BEbG0pm3mT+By
- sXdNexc3eZ5S57QCyt8y7zjDd5TfDseEDvuzeJrm/GIvkaUO4kGCS1Z2Vdch8ItTxVQxoS8C6Cj
- ciyZnq6qVK38HoqMeCtAmjiNWURvRMGTN/Wt9NSk1eJPmiR6Cl/gt6jgNPTy4inlkppAeTjCpqt
- qAZJNkaELjen7OzqnTXOo9Oiz24=
-X-Received: by 2002:a05:6402:a294:20b0:698:1973:1daa with SMTP id
- 4fb4d7f45d1cf-698197327camr577561a12.18.1782438139487; Thu, 25 Jun 2026
- 18:42:19 -0700 (PDT)
+ AHgh+Rr4foC0HV/G5COkDpvPQsWSzL9ivfv4C/qfhGAduOZhBA7aTlE1gRQHyi29ESPbrw0znvsZtwsZX8ex@nongnu.org
+X-Gm-Message-State: AOJu0Yyc3CoQXNvw0sFnxHivgUeVtZnLxg+Rp2eSQh56Wj8E7w0wpIvI
+ 0/SdmZ9tJefao9X5CHMtWUriSDIKzj4aZRXsFDsAmVgQJM6vMOsHS5jYOvshLsY2//hXXuVRu3+
+ PBFb3hYkqx60e6TjGO8/0UJQEWZ7cQ4s=
+X-Gm-Gg: AfdE7cliFYvaBIE1Ccqw254zk/gd3TPbycGEEDYF+nVqZL7MXiRBfQXBeX7PTykO/YQ
+ QEjC83JV/eLQKN93OwvWfPx+UTmlLfM7x8IzY3QFC21N+tNlIbTBJV+z0sRc1+3gpUFEcE+UV+A
+ LRNxjeEBea7uOw9+brR8aPKN4T5F22bfzk2R5XIorv/vfGmyzIcMuHQojwa/093l7XkNcmETtME
+ nnncS1PVfoH2bGL0aeSWKkcfnuUOPQzIkLyxeEoLHqD1JICftcbj30W16tGkgg/abKfuoMduI5h
+ sIVnjUrg9Tld5tVOSAS4EcIShwg=
+X-Received: by 2002:a05:6402:5408:b0:697:decc:7f89 with SMTP id
+ 4fb4d7f45d1cf-69810a47dc5mr948463a12.10.1782441762596; Thu, 25 Jun 2026
+ 19:42:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260622193141.1449724-1-daniel.barboza@oss.qualcomm.com>
- <52c3605c-345f-43d2-8cc6-794980c805fa@oss.qualcomm.com>
- <50ce1e98-2c1f-4cbd-b191-1eac324b71b6@oss.qualcomm.com>
- <704cfba3-e92a-498d-928b-877f7f7641fe@oss.qualcomm.com>
- <9d2737e3-34f0-4f68-813b-37059615bced@oss.qualcomm.com>
- <CAFEAcA8660BZOmX_KXeF7JJaJwgKO3zSRDEmJURg27FK=tqbZg@mail.gmail.com>
- <df4a5857-ec4f-4d4f-bc08-1a9c5caae100@oss.qualcomm.com>
- <0f2205d0-06b5-40ad-9952-e18a6a951078@oss.qualcomm.com>
- <fe77f7a1-1a31-457c-9dec-e1b49cd35371@oss.qualcomm.com>
- <d83a2e21-403f-4146-b129-4d9ee264282a@oss.qualcomm.com>
-In-Reply-To: <d83a2e21-403f-4146-b129-4d9ee264282a@oss.qualcomm.com>
+References: <20260625210833.3294437-1-daniel.barboza@oss.qualcomm.com>
+ <20260625210833.3294437-3-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260625210833.3294437-3-daniel.barboza@oss.qualcomm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 Jun 2026 11:41:53 +1000
-X-Gm-Features: AVVi8CelTTp35t-8uVYriSDwDMItGZ7RpdLBC4dNgA8zr9VbY5b5theqYTzQ9EI
-Message-ID: <CAKmqyKOXPCWPFP7Htr5BByp=7jsDDp6kYXRhyn6Ycre0pjofCg@mail.gmail.com>
-Subject: Re: [PATCH 00/24] target/riscv: move TCG files and fix --disable-tcg
-To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Peter Maydell <peter.maydell@linaro.org>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com
+Date: Fri, 26 Jun 2026 12:42:14 +1000
+X-Gm-Features: AVVi8CfHEigQZqs5IlhjS-tFT9qsNUIyzG3zG3RXNRB0I0u6k2UwpNOaAWrn720
+Message-ID: <CAKmqyKPk1g=Owq1mm8t0H+XXUO3Wfrg239saE99RU=ky0WNbMw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw/riscv/riscv-iommu.c: make FCTL.BE read only 0
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
+ andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x534.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -131,224 +121,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 24, 2026 at 5:18=E2=80=AFAM Pierrick Bouvier
-<pierrick.bouvier@oss.qualcomm.com> wrote:
+On Fri, Jun 26, 2026 at 7:09=E2=80=AFAM Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
 >
-> On 6/23/2026 12:01 PM, Daniel Henrique Barboza wrote:
-> >
-> >
-> > On 6/23/2026 1:10 PM, Pierrick Bouvier wrote:
-> >> On 6/23/2026 4:38 AM, Daniel Henrique Barboza wrote:
-> >>>
-> >>>
-> >>> On 6/23/2026 6:58 AM, Peter Maydell wrote:
-> >>>> On Tue, 23 Jun 2026 at 10:49, Daniel Henrique Barboza
-> >>>> <daniel.barboza@oss.qualcomm.com> wrote:
-> >>>>>
-> >>>>>
-> >>>>>
-> >>>>> On 6/22/2026 6:34 PM, Pierrick Bouvier wrote:
-> >>>>>> On 6/22/2026 2:23 PM, Philippe Mathieu-Daud=C3=A9 wrote:
-> >>>>>>> On 22/6/26 22:52, Pierrick Bouvier wrote:
-> >>>>>>>> On 6/22/2026 12:31 PM, Daniel Henrique Barboza wrote:
-> >>>>>>>>> Hello,
-> >>>>>>>>>
-> >>>>>>>>> This series looks scary but it's mostly trivial and mechanical
-> >>>>>>>>> work.
-> >>>>>>>>>
-> >>>>>>>>> It is yet another attempt at fixing --disable-tcg.  We have a
-> >>>>>>>>> recent
-> >>>>>>>>> work sent to the ML [1] and we had Phil's attempt back in 2023
-> >>>>>>>>> [2].
-> >>>>>>>>> Phil's work didn't get merged and it's now too hard to rebase a=
-nd
-> >>>>>>>>> revive, the most recent attempt got misled into the 'what is
-> >>>>>>>>> common code
-> >>>>>>>>> between TCG and KVM' dungeon.
-> >>>>>>>
-> >>>>>>>
-> >>>>>>>> It seems like series does not apply on top of master, would that=
- be
-> >>>>>>>> possible to rebase it?
-> >>>>>>>
-> >>>>>>> For some reason the RISC-V series are handled distinctly than the
-> >>>>>>> rest of QEMU, Alistair queues work on his repository and develope=
-rs
-> >>>>>>> are custome to base their series on top of it (otherwise Alistair
-> >>>>>>> can not apply them on his tree and asks for reposts), see the
-> >>>>>>> riscv-to-apply.next branch on https://github.com/alistair23/qemu.
-> >>>>>>
-> >>>>>> Unfortunately, it makes it hard to run any kind of automated testi=
-ng,
-> >>>>>> especially for series like this that target specific configs.
-> >>>>>
-> >>>>> Don't we have ways of saying in the commit message "these patches
-> >>>>> applies
-> >>>>> on top of these other patches" and then the tooling would deal with
-> >>>>> it?
-> >>>>> I remember patchew doing stuff like that with that "Based-on:
-> >>>>> <message-id>"
-> >>>>> tag.
-> >>>>
-> >>>> Yes, Based-on: is our convention for marking "this patchset needs so=
-me
-> >>>> other one to be applied first". But that should be the exception rat=
-her
-> >>>> than a common case -- if patchsets regularly need to be based on
-> >>>> something other than head-of-git, this is I think a sign that
-> >>>> maintainers are not sending out pull requests frequently enough.
-> >>>>
-> >>>> I would prefer it if QEMU didn't develop kernel-style "subsystems
-> >>>> have their own particular workflows" fragmentation -- I don't
-> >>>> think we're big enough or that sub-parts of QEMU are sufficiently
-> >>>> well separated for it to work out well.
-> >>>
-> >>> I agree that rebasing things on master is better than rebasing it on =
-the
-> >>> maintainer's tree.  And we could make a better job at informing
-> >>> developers that
-> >>> submitting a patch for qemu-riscv, vfio or any particular subtree, me=
-ans
-> >>> that
-> >>> the patch should be based on a maintainer tree X.
-> >>>
-> >>> The thing is that sending patches on master only works if master is
-> >>> always up
-> >>> to date, and that's not feasible with our current style of merging PR=
-s.
-> >>> This
-> >>> series we're commenting on is an example: it doesn't apply to master
-> >>> because
-> >>> there are pre-approved RISC-V patches in the maintainer's tree from 2
-> >>> days ago
-> >>> (also my patches, I might add) that caused conflicts that I wasn't aw=
-are
-> >>> that
-> >>> would happen.  This conflict would have to be dealt with at some poin=
-t
-> >>> by myself
-> >>> or the maintainer, and it's not like 2 days is too much time without
-> >>> a PR.
-> >>>
-> >>> We can argue "this is an exception that doesn't happen that often, we
-> >>> should
-> >>> stick with using master as a base", and to a certain extend that's
-> >>> true.  But
-> >>> then this sort of conflict happens again, then again, then again, it
-> >>> comes to
-> >>> a point where it's easier to tell developers to use the maintainer's
-> >>> tree instead
-> >>> of master.
-> >>>
-> >>> Maybe I'm downplaying the problem because I've been sending stuff bas=
-ed
-> >>> on the
-> >>> maintainer's tree since forever and got used to it.  IMO, unless we
-> >>> decide to be
-> >>> like libvirt and create the "committer" role to allow trustworthy dev=
-s
-> >>> to push
-> >>> stuff to master after acks, making it more feasible to expect master =
-to
-> >>> be up to
-> >>> date, I'm afraid we're closer to a kernel-style workflow.  For better=
- or
-> >>> worse.
-> >>>
-> >>>
-> >>> Thanks,
-> >>> Daniel
-> >>>
-> >>>
-> >>>>
-> >>>> thanks
-> >>>> -- PMM
-> >>>
-> >>
-> >> In this very specific case, where base patches are needed, maybe it
-> >> would be better to make the required commits appear in this series, an=
-d
-> >> mention in cover letter that patches 1-N are just coming from another
-> >> series and are already reviewed/approved. IMHO it doesn't hurt, and
-> >> reviewers are free to skip commits already reviewed.
-> >
-> > That's fair enough but I wonder if that won't scare people away with
-> > even bigger series :D  in this case here I would need to either send al=
-l
-> > the queued patches, making the series go to 40+, or I would need to tri=
-age
-> > which patches from the queue creates a conflict with this work and send
-> > only those.
-> >
-> > Now, as for qemu-ci ...  How farfetched it is to make it read a specifi=
-c
-> > tag
-> > in the cover-letter, e.g. "branch-id", that can point to a gitlab/githu=
-b
-> > repo with the patches, and use that code base instead of applying the
-> > patches to the master branch?  Then for the next version of this work
-> > I could do
-> >
-> > "branch-id: https://gitlab.com/danielhb/qemu/-/tree/riscv_disabletcg_v2=
-"
-> >
+> We do not support FCTL.BE equal to 1 hence do not allow this bit to be
+> set by software.
 >
-> Based-on: is a QEMU specific tag, that is only understood by patchew,
-> and no other tool to my knowledge.
-> b4 has base_commit, which allows to give a specific base, but not a
-> specific repository. I'm not aware of any b4 tag that allows to mention
-> a base series. It makes sense, series are not branches, and stacking
-> them comes with a lot of problems.
+> While we're at it: the riscv-iommu spec allows FCTL.GXL to be set freely
+> and we do not have hardcoded restrictions on it, so make it writable.
 >
-> So it seems like email workflow is quite limited in this regard, and the
-> only way to deal with it properly is to wait for base patches to be
-> merged, or include them in the series.
->
-> From another perspective, the same problem would exist if we would use a
-> forge like GitHub or GitLab. It's not possible to stack PR on top of
-> others, and only solution is to wait, or duplicate patches. IMHO, it's a
-> sane default, as it forces correct ordering instead of allowing chaotic
-> development.
->
-> > and the tool would still work.  If there's no "branch-id" then it assum=
-es
-> > that the patches are to be applied on master.
-> >
-> >
-> > And yeah, in an ideal world the problem goes away if we just do more PR=
-s
-> > and
-> > strive to keep 'master' updated.  I'm just thinking out loud about poss=
-ible
-> > alternatives until we reach that point.
+> Fixes: 0c54acb824 ("hw/riscv: add RISC-V IOMMU base emulation")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3576
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-When you sent v2 of this series it had been one week since the last
-RISC-V PR. Are we really aiming for more than one PR a week?
-
-> >
-> >
-> > Cheers,
-> > Daniel
-> >
-> >>
-> >> Or, a solution I'm not fond of but I ended up adopting most of the tim=
-e,
-> >> just wait for required patches to be merged on master before posting t=
-he
-> >> series, and work on something else meanwhile.
-
-I do feel that a few people do that, just not Daniel :)
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> >>
-> >> Ideally, yes, it would be better if maintainers could send PR more
-> >> frequently to avoid creating those intermediate staging trees. The
-> >> faster we merge, the less conflicts we'll have.
-> >>
-> >> Regards,
-> >> Pierrick
-> >
+> ---
+>  hw/riscv/riscv-iommu.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 30f16b999c..c9687e01a8 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -2609,9 +2609,11 @@ static void riscv_iommu_realize(DeviceState *dev, =
+Error **errp)
+>
+>      /* Set power-on register state */
+>      stq_le_p(&s->regs[RISCV_IOMMU_REG_CAP], s->cap);
+> +
+>      stq_le_p(&s->regs[RISCV_IOMMU_REG_FCTL], 0);
+>      stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_FCTL],
+> -             ~(RISCV_IOMMU_FCTL_BE | RISCV_IOMMU_FCTL_WSI));
+> +             ~(RISCV_IOMMU_FCTL_GXL | RISCV_IOMMU_FCTL_WSI));
+> +
+>      stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_DDTP],
+>          ~(RISCV_IOMMU_DDTP_PPN | RISCV_IOMMU_DDTP_MODE));
+>      stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_CQB],
+> --
+> 2.43.0
 >
 >
 
