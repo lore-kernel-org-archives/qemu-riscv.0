@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93150CDE008
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 03:20:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A11ACDE00B
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 03:21:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wcx7G-0005kT-P3; Thu, 25 Jun 2026 23:20:31 -0400
+	id 1wcx7O-0005mf-Vj; Thu, 25 Jun 2026 23:20:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1wcx6L-0005TO-6T; Thu, 25 Jun 2026 23:19:34 -0400
-Received: from [115.124.30.118] (helo=out30-118.freemail.mail.aliyun.com)
+ id 1wcx6M-0005TR-5l; Thu, 25 Jun 2026 23:19:34 -0400
+Received: from [115.124.30.130] (helo=out30-130.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1wcx6H-0000wm-4f; Thu, 25 Jun 2026 23:19:32 -0400
+ id 1wcx6I-0000wh-JJ; Thu, 25 Jun 2026 23:19:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1782443952; h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To;
- bh=d6bdfkYHw18MNE5AEJW/5Zb8GlA89KYnZMTopAkUvq4=;
- b=u6Rn5rsRSjO85L1TG4K2AjdgDJWN0u7N/OlFkyGbFlNi+KHof2/oREqH05gnWgnxSVAG3muxcodA3tNtf1CfrcgpskTv0YblhTqqKU7qJU/KNEL877vFR3nbAJyeNd5jdBKLnhDpqz7JIWTNIwbYmCQSFm0JU5IdOywZsq7IQzU=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R481e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
+ t=1782443951; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=y0Pkf9yKOYz2bsN3TfmNmboIGPkXX+mGR+BIQbY7MVA=;
+ b=wYaijzZZHcAYexMa3OSohCIZaB+WVFyDEDLLREVIUfEYHJztAXlSHvNeKwQY6o1stJSfHAfVohq9h0uKVdH84zfkJYGposvENVKZSDwYi1clBPQsUaB22wSOp8yqTFB/ffsAymNz0voZIDsiGXUUZOzZ4fqNc1FN+kRYJ3HT9pw=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R681e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam011083073210;
  MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0X5dK-aa_1782443635; 
+ TI=SMTPD_---0X5dK-cI_1782443639; 
 Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0X5dK-aa_1782443635 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 26 Jun 2026 11:13:58 +0800
+ fp:SMTPD_---0X5dK-cI_1782443639 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 26 Jun 2026 11:13:59 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Subject: [PATCH 0/2] disas/riscv: Fix XThead immediate disassembly
-Date: Fri, 26 Jun 2026 11:13:21 +0800
-Message-Id: <20260626-b4-disas-xthead-fix-riscv-next-v1-0-74228a3c1b21@linux.alibaba.com>
+Date: Fri, 26 Jun 2026 11:13:23 +0800
+Subject: [PATCH 2/2] disas/riscv: Fix 6-bit immediate extraction
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAFLuPWoC/x2NQQqEMAwAvyI5G6jdpaBfEQ+xiWsuVRqRQvHvl
- j0ODDMVTLKKwdRVyHKr6ZEaDH0Hcaf0E1RuDN754IL/4PpFViPDcu1CjJsWzGrxxiTlwhhoC+R
- G9hyhRc4szfgP5uV5XmWVW6NwAAAA
-X-Change-ID: 20260623-b4-disas-xthead-fix-riscv-next-c6af6a09d2dc
+Message-Id: <20260626-b4-disas-xthead-fix-riscv-next-v1-2-74228a3c1b21@linux.alibaba.com>
+References: <20260626-b4-disas-xthead-fix-riscv-next-v1-0-74228a3c1b21@linux.alibaba.com>
+In-Reply-To: <20260626-b4-disas-xthead-fix-riscv-next-v1-0-74228a3c1b21@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: Christoph Muellner <christoph.muellner@vrull.eu>, 
  LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
@@ -49,17 +47,17 @@ Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
  qemu-riscv@nongnu.org, TANG Tiancheng <lyndra@linux.alibaba.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1782443638; l=945;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782443638; l=1082;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=M4UM2nY7BK3k57aNhxsDEQU/c3Ef1TUWDpY282mdkZA=;
- b=n8dm6QUgPXTg81x4LV7IEcEoQiJJUa64hj7Er+7Yq+zjzLvOpId93w/WDI1bj8UGz5yc2/V0/
- oja5M0loioDD0b7QTQv91ezb7cCgj7E3meHnv/NN7rYZLBj14D3Xdj1
+ bh=LlmMmYSqut4xC58h9yg2Vpe1qa9KR/FQMBK2qSzqNyE=;
+ b=SRSl312cXgtH99XCHjfGslei5xCf3BRWqNMGRpytviQlMYnfdj/VUXYkyJ7+KoPIgunGOfcYq
+ c5ka7C5nRh3Bv+Kcj26IYE2eXoqkdesQSnzxWBcjPDsBkhOnD4fVb9n
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.118 (deferred)
-Received-SPF: pass client-ip=115.124.30.118;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.130 (deferred)
+Received-SPF: pass client-ip=115.124.30.130;
  envelope-from=lyndra@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
+ helo=out30-130.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -83,33 +81,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Fix two XThead immediate decoding issues in the RISC-V disassembler.
+rv_codec_r2_imm6 is used for XThead instructions whose 6-bit
+immediate field is encoded in bits 25:20. The old expression
+left-shifted by 38 and then right-shifted by 60, so it kept only
+bits 25:22.
 
-The first patch aligns th.srri decoding with target/riscv/xthead.decode:
-th_srri uses bits 31:26 as 000100 and bit 25 as shamt[5], while the
-disassembler switches on bits 31:25.
+Shift right by 58 instead, keeping the existing extraction style while
+retaining the full bits 25:20 field. This fixes the immediate printed
+for th.srri and th.tst.
 
-The second patch extracts the full 6-bit immediate field for
-rv_codec_r2_imm6, which fixes the immediate printed for th.srri and
-th.tst.
-
-This series is based on Alistair's riscv-to-apply.next branch:
-05f8cb49b0f0 ("hw/riscv: add create_fdt_plic() helper")
-
+Fixes: 318df7238b9f ("disas/riscv: Add support for XThead* instructions")
+Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
-TANG Tiancheng (2):
-      disas/riscv: Fix th.srri decoding
-      disas/riscv: Fix 6-bit immediate extraction
+ disas/riscv.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- disas/riscv-xthead.c | 6 ++++--
- disas/riscv.c        | 2 +-
- 2 files changed, 5 insertions(+), 3 deletions(-)
----
-base-commit: 05f8cb49b0f02312abd34a019ff38b2c7c466a40
-change-id: 20260623-b4-disas-xthead-fix-riscv-next-c6af6a09d2dc
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 7f1b26277378c225c963d8f435cc7a2fc6e4a0b8..400a57083f90be18ccd12415797bce0df974784b 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -4546,7 +4546,7 @@ static uint32_t operand_zcmp_rlist(rv_inst inst)
+ 
+ static uint32_t operand_imm6(rv_inst inst)
+ {
+-    return (inst << 38) >> 60;
++    return (inst << 38) >> 58;
+ }
+ 
+ static uint32_t operand_imm2(rv_inst inst)
 
-Best regards,
 -- 
-TANG Tiancheng <lyndra@linux.alibaba.com>
+2.43.0
 
 
