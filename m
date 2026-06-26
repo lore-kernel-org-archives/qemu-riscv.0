@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE78DCDE00B
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 01:01:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE29CDE008
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 Jun 2026 01:02:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wcuwJ-0001ER-HA; Thu, 25 Jun 2026 21:01:03 -0400
+	id 1wcuxL-0001tz-Kt; Thu, 25 Jun 2026 21:02:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wcuwI-0001D6-JL
- for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 21:01:02 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1wcuxJ-0001sG-Va
+ for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 21:02:05 -0400
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wcuwG-0001Gb-TD
- for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 21:01:02 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-697764213d6so674868a12.1
- for <qemu-riscv@nongnu.org>; Thu, 25 Jun 2026 18:01:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782435659; cv=none;
+ id 1wcuxI-0001RG-5Z
+ for qemu-riscv@nongnu.org; Thu, 25 Jun 2026 21:02:05 -0400
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-697f6c67028so800999a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 25 Jun 2026 18:02:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782435722; cv=none;
  d=google.com; s=arc-20260327;
- b=Biw+4zIrnsiKp1Md8flnm2Lip0FW/u7DGPuc9BLUVkd0/i4SdK1Nn5pHWAMP0IRra4
- Gj8GoLQIVD/8WD+z6IfvmzYooclxh6eqS+qBi3Gi4bnzMeZ1ltdxPQRVbHM4DRz+h/AM
- 1TK9XG60Yor7q2H3Ggl8YW8870H13E/UIFvUJS+Idt9obv0Fkyyuuw95HlMq8mCzeg9t
- Kv6sa+LsoDg+jlwTfpw34omogCfyqmR0VnUyQb4dhWpQDfd6/PRRdUws+pSsubj4hOmK
- 83r5gMVYBkON3+h8lBIauvANptuJAdS2C3oMtFXXTO2Ux41jj4GpPH7DrVfGYnQO9hkH
- p6Lw==
+ b=SQw/nt1UXKFAWewV3jT3nAoh4vP1O9v4vw5ko33td+n5ifq0LDAXdsTPVFZ2A7StRG
+ nWiQZCOEUV8rtgtuDbiFblUQbnPTNHeTfgCH29CGxT3JRXCioG2jXrR+rlgax16gAGH+
+ w/RQuh+/O/y9iSV47+UCp5MfRkYcTVqjNJek5h3SDOdfdy1ISl7v14X9miYpBawGNaeJ
+ HBh9y7n7RfGxX0HNBYJ6fS5LBRRjKfM5hJx2qVdGyyD7lQyrTqw9X3/ky5cVpdKp9Bhq
+ 84Xp2kg0DgKikk9wohzkeOvkaOL4kUw7WoqwR7fAJteLn4EBeSYwAEzd+qJL2Bw0ynmo
+ zXyQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=PFVpYKN5vzxzJlKubmFg2Ec/OfpTirTNcJf1/3JAEOU=;
- fh=wemLOcrYqkxMiZ6oDMud7eebkWj1pHZ5oD11wx12Odg=;
- b=Y2KBtwXlXpx/z8x2rGRwgwYTcMYHM4CAMos3sCMgZNC5ktbmyJjcNqQHTGCvjwi7zh
- N0DiEK52l9PsoeYYtg/I4Cw1EaXRyN6IYHjlfiNOfDkT/8XqAeZrLTiFRBjc5SlSgIoI
- AFe8dr7oxHXNdQZGUguan9qndCcjseJWbD8FNqaIxAtzvcOw0YE8dbZwUTaJjdeGqPZm
- VB9W67pxTfD2I3JhaMdTRu7CJKZHajD7cTtn81AcIiEzhlbHiggoc9OM6jV8agTNfZPK
- lZaHDQ6gVcK5SZd7H0HpjTM2LoyIpq9LgYwaU1XxVtKZ68fMv62Bjaa32yyEfIZzwteG
- b+8g==; darn=nongnu.org
+ bh=RI7Ckbf1IsnE9Auvkon4RWke/SnMwstixlQALda0Lok=;
+ fh=eOFM52/CpbWIuOfcJ0eaMhmLicu54x5fXsT4M8SZ4yo=;
+ b=obZIZpD4rLrWOXAull9cTAgptxd0Olel7hGVN74t1BvKLikgRuR6HlaF3dhQNYH445
+ LaDFE2DfjLAKYhLal1b2Vf3nLlNivuRSkB1hZam9HyXTrUWKeOqAw5/6Z60gUlIl03t2
+ mErZB0wjbYWOGv0V3x/HtRntxc2dr0+LFkaolOXNqiumZHjrHmHeGrDwiTxW0G1UmO7g
+ C1fC4zxnjMAa89E6PmaB79aaPffjuuG0399X1PfTEh0ss8OmHcLuufP6edrQnxbXQjrk
+ pBhS8D5sC/Jj6FsD4hNuyfzcPjg+sSQ6yoHDOuqxrGWUfYNx2gSb0ER9Pc7s9QsQuXV2
+ h+gQ==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782435659; x=1783040459; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1782435722; x=1783040522; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PFVpYKN5vzxzJlKubmFg2Ec/OfpTirTNcJf1/3JAEOU=;
- b=THR2yWvVvqA1lmshRss9kp62p1+KjZKc7kDMXzeEvPSHFDsqrXbZ0IhSshCQzIFNEQ
- v7R8q2gYZ67/geDuSiyVtoEHzsu/54MAcjDIsz88PQfZVH71xHWY8VmXo3dmBfj/cePC
- CT+1T5QQHq6ild953lcar1Y589FE4d9pQsfqDm5Emgw54HNNieN0ck3W/DCNa+vMjuuH
- +x9f74mEdPF3sJB25I6HSst7DGi1yxnoZxaSzUI10RQS0OM+xj/fP7lnEbwQeNCTL122
- aoMO8fhfXYZwjpYv50amk1LIirB8uoCctZWIxTohStM+dWONxZPaSp9mDPtkA60RBVqn
- AN6w==
+ bh=RI7Ckbf1IsnE9Auvkon4RWke/SnMwstixlQALda0Lok=;
+ b=h46USnJQajKLXtHdrvq4ok34pvbCx5rXIIjEqv2/b5bcw1WvmtvlruQFPXOKFTkenp
+ qQNDQH6QS7SCaSe9XrEk4+aA0FR/jbiZprsHR1Vb2iMnKImdrr8EUva9FGs9pt1RueDy
+ bmKVKBFu3hK1N6xyxcUTrURD5X6vkExXCT2N77gMDZH0wk0XeETKgHLacaWIBgbQg0SG
+ pVmuQ1fvae99H2cdaOKtqRY2IHdmoJWHaIs4BAqykfExKQIzBdxJTN4pUGB9XGc4a3Nz
+ xp2bsOA9n6bPUY+4MxSqjDp8eZh7LAW9Ua4D5oqNP1PGzSAra9w3ECaUlp2cCR3v0ZO4
+ WcMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782435659; x=1783040459;
+ d=1e100.net; s=20251104; t=1782435722; x=1783040522;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=PFVpYKN5vzxzJlKubmFg2Ec/OfpTirTNcJf1/3JAEOU=;
- b=tQ0pKn4fnK1tPbv93owa8oi6rKsDJMN32WLYzBc1mLtRyqhAtYjne4fV0EcDOSydod
- eSFfCAJNanBiwu6xt392QlnW3kiwT6TOliJFv4qUfngTNTfTY//c321bxsZub5BRqAVG
- eUxsyCetaT3DWRV5ElcT50MojtCyZxe9R9ygcl2ZCVeQgtF8DGfE39ih9/FWfcfNOSWH
- sARSz5zbRA30F7FrjZt46Qn8/rmjS8TDe9wQfJHIkmXQuBs3LsxQR1HKtOc/9m5TWk5n
- gMg8vaLFj+OY0SKktJ2LtPIKaAbfSGruEeYAQ7tbajardnuYCAOopjqPNUjeMKe+/27T
- JCAA==
+ bh=RI7Ckbf1IsnE9Auvkon4RWke/SnMwstixlQALda0Lok=;
+ b=lKCEc4HQ1WQkHpWS7Ru93mBr1yUnAUGXducmbw5q+7rs0c/9VkkwB0jrj4Um6QLisz
+ N6odphbvrH8cLXFWEQ6aWhJ6hYoyNoRC3wLLBQZxQA6n9chCeMMIJf60IDHE5cFBbeuJ
+ i1FUlkfqiDbpn721hhvUYgbQCQlYWx4Zv03qAzCIJawBxp1NZEN33r546AYM8XPRtulx
+ yRCKlmaqcqXjcD+q4YstlAdmuUAXN3je6lqX/6RHyLxwmbE32hRR10Q9jOvkBenf1cuT
+ CRL17Cg0u538o5QPdsX0jnVO+mliDXASaX4sL+Oi9hWLIW7prQGxa6pUv5FX31tr/hJ9
+ m+VA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoV5TsbyIxXlrj51XTxmi8JqCbGqW/qqCdmkwQrk6Igh6T3AyadegTvbsTkEZ7JDQRF3oKHt52otymF@nongnu.org
-X-Gm-Message-State: AOJu0Yw4PWnzEoRpLr88TfXlkGoOQMzTq6rId3awAVMvrPcJoj/ncAf7
- KM36bwJgzFZMAmXzCsC5aiymiyapbkC2sUePy1f0AxzLSZaZo1OwVFUlgBbBU4NsWoRVrsfn/0S
- rbiwJbBCJ+p2KTX/Doi74mmYRoyDdcf0=
-X-Gm-Gg: AfdE7cnKUSzHf8WNVj9kYMF7y2LJaG0aTx7Mc/ziImEqcB9UHhpY0hnfkA585TIZcfn
- VJIp2GPl3OaTwqxib4QVKtr/WIj7hntI0C1ciWWZ8YphhF9BxVqVZF1A7epykjJI/7UhQAAmmd2
- WJThhPHwK9wA9aTGPhKM1imVwyEXxHW8giNu8SS4EKYbhqI/94JKpegaTS6FjsdXTCgd7Mze97a
- xW9/x3fRl44kNmNYgpyxtjTQ0TIvnYMhXSz5GrSc2UP5chQiYyqFD3wa8rtTaIm4C7Pz6YGomwm
- suC+37Yi32YUjZADufVdWqyo7pc=
-X-Received: by 2002:a05:6402:a512:20b0:698:1504:4cd9 with SMTP id
- 4fb4d7f45d1cf-69815044e44mr504782a12.30.1782435659068; Thu, 25 Jun 2026
- 18:00:59 -0700 (PDT)
+ AHgh+RpA1dyUYPtMXYFWAeSuXqV0wuRt6nW+BQkjOsU/9VojAXqQilabg/bSSrcZAg+yjr6t3vfNAxhoVJFg@nongnu.org
+X-Gm-Message-State: AOJu0YxKvzeIseryUCGZVQZAIQ4j7GAuC7Dtr4kNo/If71ozWWUel2fM
+ CcrSNvN3psJ6csfUcz9UHN3DzYnknw6l0Um05T4wwgBSYZD8F3W346eKx5IF57bWuNYraG1voV8
+ +wRV5Jyhbv4wAEvHQNxQ0LG5Qm+X/c3M2oUaqtIV/4g==
+X-Gm-Gg: AfdE7ckfKHVxGAoeIgK9GoCIPZIxLONwY65fLQdNpwPOgdmOG2N4aAAghau78lJ8gf6
+ p7dW8RECsRw4duL1Asb22iCjsigzPvCcc8sk/aF+3gRjZ+SEGSs8zA2tNQTpTbeV2fnl6kN25P3
+ UeAt/d4L6j3wMHWqoKaFILnPsMBod5bPR+qGLuII8kZaiUfJUiNx3fJfpQnRTKOuan/2uYpt9vd
+ KWYnCvsbdexfofJFctYZ7jIDPXjBss51h2FQedpJCOnpckX14Qsx4PJSrmT4mGlZBi/t80pBmSE
+ 7szYfYQ7td0tzm7/58RRssDIf4M=
+X-Received: by 2002:aa7:dc09:0:b0:697:9fd4:1433 with SMTP id
+ 4fb4d7f45d1cf-697d42d9a94mr4138721a12.7.1782435722174; Thu, 25 Jun 2026
+ 18:02:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260624000632.2149359-1-daniel.barboza@oss.qualcomm.com>
- <20260624000632.2149359-10-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260624000632.2149359-10-daniel.barboza@oss.qualcomm.com>
+ <20260624000632.2149359-11-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260624000632.2149359-11-daniel.barboza@oss.qualcomm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 Jun 2026 11:00:30 +1000
-X-Gm-Features: AVVi8CdVyHmn2YnUwDDG1oriF_DHv_2wDxRao4zknPl6F2woYH9NbWypqaimYtQ
-Message-ID: <CAKmqyKM6_Fq6SDO7qxDsqByFuaWw9rGZazhb2LjOW=pDfVbp5w@mail.gmail.com>
-Subject: Re: [PATCH v2 09/24] target/riscv: move csr.h to tcg subdir
+Date: Fri, 26 Jun 2026 11:01:36 +1000
+X-Gm-Features: AVVi8CdMEEoy-6vtAaiWe_Z0f3K03-S5Zsky5aeMSZHRHP14pgoaRTS8EwXc44I
+Message-ID: <CAKmqyKPxN0-YcuO=yeYgpk2nk=0KJRdUPk6gDOwyFkQ+SFRM3g@mail.gmail.com>
+Subject: Re: [PATCH v2 10/24] target/riscv: move custom_csrs logic to tcg-cpu.c
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
@@ -97,16 +97,16 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  fritchleybohrer@gmail.com, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52e.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::536;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x536.google.com
+X-Spam_score_int: -7
+X-Spam_score: -0.8
+X-Spam_bar: /
+X-Spam_report: (-0.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FORGED_GMAIL_RCVD=1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,10 +122,16 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 24, 2026 at 10:08=E2=80=AFAM Daniel Henrique Barboza
+On Wed, Jun 24, 2026 at 10:09=E2=80=AFAM Daniel Henrique Barboza
 <daniel.barboza@oss.qualcomm.com> wrote:
 >
-> After KVM is no longer reliant on csr.h move it to the TGC only land.
+> We have a couple of CPUs that has a set of custom CSRs that uses TCG
+> specific APIs.  Move the related code to tcg-cpu.c and do not set
+> .custom_csrs if we're not in a TCG build.
+>
+> What we'll end up doing, sooner or later, is punting all these CPUs to
+> tcg-cpu.c since they're all TCG specific and KVM has nothing to do with
+> them.  Another time.
 >
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 > Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
@@ -135,141 +141,150 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c            | 2 +-
->  target/riscv/gdbstub.c        | 2 +-
->  target/riscv/monitor.c        | 2 +-
->  target/riscv/riscv-qmp-cmds.c | 2 +-
->  target/riscv/tcg/csr.c        | 2 +-
->  target/riscv/{ =3D> tcg}/csr.h  | 0
->  target/riscv/tcg/mips_csr.c   | 2 +-
->  target/riscv/tcg/op_helper.c  | 2 +-
->  target/riscv/tcg/pmp.c        | 2 +-
->  target/riscv/tcg/th_csr.c     | 2 +-
->  10 files changed, 9 insertions(+), 9 deletions(-)
->  rename target/riscv/{ =3D> tcg}/csr.h (100%)
+>  target/riscv/cpu.c         | 26 +++++---------------------
+>  target/riscv/cpu.h         |  2 ++
+>  target/riscv/tcg/tcg-cpu.c | 21 +++++++++++++++++++++
+>  3 files changed, 28 insertions(+), 21 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 5d44f993e4..96c92de2ee 100644
+> index 96c92de2ee..5e951ea19c 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -24,7 +24,7 @@
->  #include "qemu/guest-random.h"
->  #include "cpu.h"
->  #include "cpu_vendorid.h"
-> -#include "target/riscv/csr.h"
-> +#include "target/riscv/tcg/csr.h"
->  #include "internals.h"
->  #include "qapi/error.h"
->  #include "qapi/visitor.h"
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index a2bbaf7f07..f0a5e0d86f 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -21,7 +21,7 @@
->  #include "gdbstub/helpers.h"
->  #include "cpu.h"
->  #include "internals.h"
-> -#include "target/riscv/csr.h"
-> +#include "target/riscv/tcg/csr.h"
+> @@ -524,19 +524,6 @@ static void set_satp_mode_default_map(RISCVCPU *cpu)
+>  }
+>  #endif
 >
->  struct TypeSize {
->      const char *gdb_type;
-> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
-> index 7aacd1d89c..f8042db9cd 100644
-> --- a/target/riscv/monitor.c
-> +++ b/target/riscv/monitor.c
-> @@ -22,7 +22,7 @@
->  #include "qemu/ctype.h"
->  #include "qemu/qemu-print.h"
->  #include "cpu.h"
-> -#include "target/riscv/csr.h"
-> +#include "target/riscv/tcg/csr.h"
->  #include "cpu_bits.h"
->  #include "monitor/monitor.h"
->  #include "monitor/hmp.h"
-> diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.=
-c
-> index b94e8391ed..2647deef91 100644
-> --- a/target/riscv/riscv-qmp-cmds.c
-> +++ b/target/riscv/riscv-qmp-cmds.c
-> @@ -35,7 +35,7 @@
+> -#ifndef CONFIG_USER_ONLY
+> -static void riscv_register_custom_csrs(RISCVCPU *cpu, const RISCVCSR *cs=
+r_list)
+> -{
+> -    for (size_t i =3D 0; csr_list[i].csr_ops.name; i++) {
+> -        int csrno =3D csr_list[i].csrno;
+> -        const riscv_csr_operations *csr_ops =3D &csr_list[i].csr_ops;
+> -        if (!csr_list[i].insertion_test || csr_list[i].insertion_test(cp=
+u)) {
+> -            riscv_set_csr_ops(csrno, csr_ops);
+> -        }
+> -    }
+> -}
+> -#endif
+> -
+>  /* Used by csr.c and the KVM driver */
+>  target_ulong riscv_new_csr_seed(target_ulong new_value,
+>                                  target_ulong write_mask)
+> @@ -1244,11 +1231,6 @@ static void riscv_cpu_init(Object *obj)
+>      if (mcc->def->vext_spec !=3D RISCV_PROFILE_ATTR_UNUSED) {
+>          cpu->env.vext_ver =3D mcc->def->vext_spec;
+>      }
+> -#ifndef CONFIG_USER_ONLY
+> -    if (mcc->def->custom_csrs) {
+> -        riscv_register_custom_csrs(cpu, mcc->def->custom_csrs);
+> -    }
+> -#endif
+>
+>      accel_cpu_instance_init(CPU(obj));
+>  }
+> @@ -2822,10 +2804,12 @@ static void riscv_cpu_class_base_init(ObjectClass=
+ *c, const void *data)
+>
+>          riscv_cpu_cfg_merge(&mcc->def->cfg, &def->cfg);
+>
+> +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>          if (def->custom_csrs) {
+>              assert(!mcc->def->custom_csrs);
+>              mcc->def->custom_csrs =3D def->custom_csrs;
+>          }
+> +#endif
+>      }
+>
+>      if (!object_class_is_abstract(c)) {
+> @@ -3178,7 +3162,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>          .cfg.mvendorid =3D THEAD_VENDOR_ID,
+>
+>          .cfg.max_satp_mode =3D VM_1_10_SV39,
+> -#ifndef CONFIG_USER_ONLY
+> +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>          .custom_csrs =3D th_csr_list,
+>  #endif
+>      ),
+> @@ -3224,7 +3208,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>
+>          .cfg.marchid =3D 0x8d143000,
+>          .cfg.mvendorid =3D THEAD_VENDOR_ID,
+> -#ifndef CONFIG_USER_ONLY
+> +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>          .custom_csrs =3D th_csr_list,
+>  #endif
+>      ),
+> @@ -3429,7 +3413,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>          .cfg.ext_xmipscmov =3D true,
+>          .cfg.marchid =3D 0x8000000000000201,
+>          .cfg.mvendorid =3D MIPS_VENDOR_ID,
+> -#ifndef CONFIG_USER_ONLY
+> +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>          .custom_csrs =3D mips_csr_list,
+>  #endif
+>      ),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index c0e9098728..34c63a3628 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -591,7 +591,9 @@ typedef struct RISCVCPUDef {
+>      int32_t vext_spec;
+>      RISCVCPUConfig cfg;
+>      bool bare;
+> +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>      const RISCVCSR *custom_csrs;
+> +#endif
+>      /* This is just a setter for env->num_triggers.  */
+>      uint32_t num_triggers;
+>  } RISCVCPUDef;
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index fe6350f497..fef66557c2 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -38,6 +38,7 @@
 >  #include "system/tcg.h"
->  #include "cpu-qom.h"
->  #include "cpu.h"
-> -#include "target/riscv/csr.h"
+>  #include "exec/icount.h"
+>  #include "target/riscv/tcg/debug.h"
 > +#include "target/riscv/tcg/csr.h"
+>  #endif
 >
->  static void riscv_cpu_add_definition(gpointer data, gpointer user_data)
+>  /* Hash that stores user set extensions */
+> @@ -1650,10 +1651,30 @@ static bool riscv_cpu_has_max_extensions(Object *=
+cpu_obj)
+>      return object_dynamic_cast(cpu_obj, TYPE_RISCV_CPU_MAX) !=3D NULL;
+>  }
+>
+> +#ifndef CONFIG_USER_ONLY
+> +static void riscv_register_custom_csrs(RISCVCPU *cpu, const RISCVCSR *cs=
+r_list)
+> +{
+> +    for (size_t i =3D 0; csr_list[i].csr_ops.name; i++) {
+> +        int csrno =3D csr_list[i].csrno;
+> +        const riscv_csr_operations *csr_ops =3D &csr_list[i].csr_ops;
+> +        if (!csr_list[i].insertion_test || csr_list[i].insertion_test(cp=
+u)) {
+> +            riscv_set_csr_ops(csrno, csr_ops);
+> +        }
+> +    }
+> +}
+> +#endif
+> +
+>  static void riscv_tcg_cpu_instance_init(CPUState *cs)
 >  {
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index d447204721..572a39d660 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -21,7 +21,7 @@
->  #include "qemu/log.h"
->  #include "qemu/timer.h"
->  #include "cpu.h"
-> -#include "target/riscv/csr.h"
-> +#include "target/riscv/tcg/csr.h"
->  #include "tcg/tcg-cpu.h"
->  #include "pmu.h"
->  #include "time_helper.h"
-> diff --git a/target/riscv/csr.h b/target/riscv/tcg/csr.h
-> similarity index 100%
-> rename from target/riscv/csr.h
-> rename to target/riscv/tcg/csr.h
-> diff --git a/target/riscv/tcg/mips_csr.c b/target/riscv/tcg/mips_csr.c
-> index 609718f288..884030e91d 100644
-> --- a/target/riscv/tcg/mips_csr.c
-> +++ b/target/riscv/tcg/mips_csr.c
-> @@ -10,7 +10,7 @@
->  #include "qemu/osdep.h"
->  #include "cpu.h"
->  #include "cpu_vendorid.h"
-> -#include "target/riscv/csr.h"
-> +#include "target/riscv/tcg/csr.h"
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+>      Object *obj =3D OBJECT(cpu);
+> +#ifndef CONFIG_USER_ONLY
+> +    RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(obj);
+> +
+> +    if (mcc->def->custom_csrs) {
+> +        riscv_register_custom_csrs(cpu, mcc->def->custom_csrs);
+> +    }
+> +#endif
 >
->  /* Static MIPS CSR state storage */
->  static struct {
-> diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
-> index 775fd431d6..003f6ebb31 100644
-> --- a/target/riscv/tcg/op_helper.c
-> +++ b/target/riscv/tcg/op_helper.c
-> @@ -20,7 +20,7 @@
->
->  #include "qemu/osdep.h"
->  #include "cpu.h"
-> -#include "target/riscv/csr.h"
-> +#include "target/riscv/tcg/csr.h"
->  #include "internals.h"
->  #include "exec/cputlb.h"
->  #include "accel/tcg/cpu-ldst.h"
-> diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c
-> index d93563c36b..41b55519a8 100644
-> --- a/target/riscv/tcg/pmp.c
-> +++ b/target/riscv/tcg/pmp.c
-> @@ -23,7 +23,7 @@
->  #include "qemu/log.h"
->  #include "qapi/error.h"
->  #include "cpu.h"
-> -#include "target/riscv/csr.h"
-> +#include "target/riscv/tcg/csr.h"
->  #include "trace.h"
->  #include "exec/cputlb.h"
->  #include "exec/page-protection.h"
-> diff --git a/target/riscv/tcg/th_csr.c b/target/riscv/tcg/th_csr.c
-> index 431f4cc286..e6f642991c 100644
-> --- a/target/riscv/tcg/th_csr.c
-> +++ b/target/riscv/tcg/th_csr.c
-> @@ -22,7 +22,7 @@
->  #include "qemu/osdep.h"
->  #include "cpu.h"
->  #include "cpu_vendorid.h"
-> -#include "target/riscv/csr.h"
-> +#include "target/riscv/tcg/csr.h"
->
->  /* Extended M-mode control registers of T-Head */
->  #define CSR_TH_MXSTATUS        0x7c0
+>      misa_ext_user_opts =3D g_hash_table_new(NULL, g_direct_equal);
+>      multi_ext_user_opts =3D g_hash_table_new(NULL, g_direct_equal);
 > --
 > 2.43.0
 >
