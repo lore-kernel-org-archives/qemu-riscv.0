@@ -4,88 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8883C43458
-	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Jun 2026 11:05:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90FADC43458
+	for <qemu-riscv@archiver.kernel.org>; Sat, 27 Jun 2026 11:46:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wdQqK-0007YR-Lv; Sat, 27 Jun 2026 07:05:00 -0400
+	id 1wdRTo-0006NE-DM; Sat, 27 Jun 2026 07:45:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wdQqC-0007X7-JK
- for qemu-riscv@nongnu.org; Sat, 27 Jun 2026 07:04:52 -0400
-Received: from mail-dl2-x01.google.com ([2607:f8b0:4864:38::1])
+ id 1wdRTn-0006MU-1m
+ for qemu-riscv@nongnu.org; Sat, 27 Jun 2026 07:45:47 -0400
+Received: from mail-dy1-x1343.google.com ([2607:f8b0:4864:20::1343])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wdQq9-0006SY-Jd
- for qemu-riscv@nongnu.org; Sat, 27 Jun 2026 07:04:52 -0400
-Received: by mail-dl2-x01.google.com with SMTP id
- a92af1059eb24-139f1de81f2so8972c88.0
- for <qemu-riscv@nongnu.org>; Sat, 27 Jun 2026 04:04:49 -0700 (PDT)
+ id 1wdRTl-0006Qp-LL
+ for qemu-riscv@nongnu.org; Sat, 27 Jun 2026 07:45:46 -0400
+Received: by mail-dy1-x1343.google.com with SMTP id
+ 5a478bee46e88-30c591fb1cbso2791134eec.1
+ for <qemu-riscv@nongnu.org>; Sat, 27 Jun 2026 04:45:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782558288; x=1783163088; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1782560744; x=1783165544; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=a3KbHYjxLH8hcw+GZqHNEj1iZ2biC4lHxrMStrrM4KA=;
- b=b3Hf0udGGMQ232ip7R7DaIoiqa+V1K1cWbL9o+hJ5drh/oXCNoCoaeHmXZ86LfoKN7
- esGYrJVMkTNr09ZB9VazWv02giYWZrhJpKR1XE4cIxRhsjNMqakHKZb6cKBVVXIqQ3ZW
- tHz7eOv8r6ww0o/fe/y5hKiDTn+n6cQNsJWkUk5fHoK77+aO68TsLMknNcZbVb0qEUdN
- CBOO36TPktOF6pXv5M1LoF6iqLQaNr2rnQxIKsK8ZJHZ/5IFHnUCoBf0MqRElxI2FZoZ
- aeRNIu+i9eVZJdRCvId8gm1PmdJIkyq1pIWE3nDgefGXQt9tfYuPsxlaTna1I0JQTUPe
- SdYg==
+ bh=rkXv6D9auk3lZVZiM3IZFGQaMX84TJkTgZbecVDR0CI=;
+ b=ZvLlG+h4h2YKa4CWRXolXZdH6rs7CC4aklswvwXals2SzYU6bPBCkYf1e5x+95uH1p
+ pUKQ3Fhweum1Fxiw75cp0sZSGF6oboz9zFoxkRkR/2voLLFDBEsfCjkIkrBqIH7IDBGz
+ D8ZzEBMHZBOj/YI4cJYVd21HA7l8smpNPHwPDN3xeIjWMccsmJe8wM5ZRV8X0E1vlkvl
+ Gz9gOB6Q4AnZBqgrUgZv4GfLSDX3JPW724Z619UgdB+GqMGD/mT2lo7wf86EBSSaaF1Y
+ CFRPaHCicd5vNeV1VCnumlwlfrQ3q8Ht0InlXVRAMNBhrYk95RaMd+lkQxuKMU2vyMaT
+ WxBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782558288; x=1783163088;
+ d=1e100.net; s=20251104; t=1782560744; x=1783165544;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a3KbHYjxLH8hcw+GZqHNEj1iZ2biC4lHxrMStrrM4KA=;
- b=pkrQzKTU4pUAFN91Tl2Z/HvjCBYNGnlqn+YbPqpfOIcbQOCv1rZ9nrXWHuzi8PEkvp
- jt3Z33mEBAHI3dhlhZeaYhfUc7b8XR0ELJQ+Cpuo5nr/PGfdNJx5t1IXPFfSmhhatDu4
- UyiYQUscUjxyyDgR1f/xuHxm13A1wFYU1BHV1J8ISNp5y9/3XgKgvB1HrMDxq/G6U+z3
- 3jT4mWS274qFWrMg3vdmYLZP+p8c7QV3KccckVnjfUOzXEPzDA2NmTdf3ReVkeekzq2N
- MyCUlyd3TNrDm8E8nkN3/mZNSxcO3EsKWuPHifbBoJhZT7kPkY8KR5rA+oPeU3QHhgn/
- hxXw==
+ bh=rkXv6D9auk3lZVZiM3IZFGQaMX84TJkTgZbecVDR0CI=;
+ b=efeGu0tcAX+xL1rnUQWEvAtjcJsvRcz7s8skFrJfu/y4bCwAITN6RDLdq+vjuwxp4y
+ 3Th9D7gzIcYMqZFs7NFYZ4UCIWeSHUh8dKo5OMFigDmoGa3Tc88ciSXFKLVQsLL2wjKv
+ IB6Tqvi1/WY1NOMu8ccX2gWNxex+lfOwgs1yyS8VIQzLLdHvagtauhir1Gd4oHuBYDvk
+ L/1uLA8fcitEgxFRu+vJSM0CciaKCl79r3Z2aGSm4DPnoHk03xQZUmnNqEuqO8hShplF
+ +R1QIFqCg0pnjTy08AerrgSBEfqXSSWC1Sn9vy32KRoWEEy1ECBsLAepYMfbFeaAJPEs
+ mKeg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/IyYYqcE8QglhpEMbJwxwNCtNHVtou14bMHiFFMl59wC8Umqyrh425FwUZ/1w/+dpoilMSGF/YrC9U@nongnu.org
-X-Gm-Message-State: AOJu0YzT0adJjtelTCm+Tkc4ma1XLNt0jeyfR13YCYit2KmXBIbmoOFy
- CvtvFQB5WFkdEVIL6QnAWfoaI0KOlv7G9BEj9betsNRKxspJU7wjdOgXFYdn53OW7Kw=
-X-Gm-Gg: AfdE7cnxs6BW5Z7EbK9Q+woDuEJHtCHtRmWmoD/9APS1mn7V/YwhQIw3fCHDpJSOjxu
- v4vb8J2+K022VqzecwQ5paOuijzj763UgqWnep2cjtG1WAtDBjXqSF/XdoIRU9lP4bzmg0jim3K
- Z5j8AvTqdrrPIi++t+AEvQjxTlNTROmGf29Yh9SWOJSY5Sdo1xSgfBhvvSsvo0TMzyMs9kk5onu
- TA7/jLsCvY/kcD+GZ+rRVY7dBkbwdPDaYIOE/JJUP7ywrNNo92ihWOBvq/uf0vl90YzirlbHzRV
- G8v6fgvm4Sbfp99BlU/Lpgr/pxIlF0qDJd5LEiuNNhaYLtVFsBqpqgPBBjRPIaToYtV5F8J0OWB
- FO1RBhf8/o6X1wElUCqRGxugUQpnakRb55DZx8ufkFdvMeia36CBZAEXf5+/M/d85xz6Fj2eBle
- CMHKxeq/j4eQs+lHNi8XktZIbjBOZOkb9suYIywoOo0NULZKV7I9CUmZPyxVs=
-X-Received: by 2002:a05:7022:41:b0:119:e569:f874 with SMTP id
- a92af1059eb24-139db9f54fcmr6745049c88.17.1782558287735; 
- Sat, 27 Jun 2026 04:04:47 -0700 (PDT)
+ AFNElJ/ml/AN46GVbfrwyYcqzZdi9Lr7/kl0FtxEbdLrWcEG5I6udzBNA5bmhlfeC4HvqT9iU5mnOzVmPxda@nongnu.org
+X-Gm-Message-State: AOJu0Yzpa4IrJHK0wRGmjT79o5VVQdujz0sIt9XYx65lTxWSF9AHdLC4
+ SDZwXOpTkJb5o7DHMnkFbirkSR1qzPLB+mACUoWkP6QK8JZpwWA7WCJ1
+X-Gm-Gg: AfdE7cl2XxYc0F9hLXRk17Yizds89XYaZi2/gWGRcWIGt6dXFb+2wqPR+8OAltbOAOQ
+ fonLG9UPKTMYfIeNuvHV8O0NXTVsoZnRc+HN8SIsfo2n5jhEsNPsbNF3Yn4/2DN7RRHBKgeP0nH
+ 12MFtXBMltHXgXak2z+cjqEKMfwY4MipnYZHTBLtycCGL2+XgyrvGF1oCh3U7YkvrWYzthGY0Ux
+ TGOb+MaCvVuDIKjqUpzy+d28RjKBYoCzRmakQR3yKtjxX736wDJPUXauWFLDATdXa7YdrRogslj
+ /nA455wFQTPqgkV/nIKKVEyXkwlowv97cK8cb5tuWiHSJ5fOnJJyQ3LuFzqa64/ffF1NJkm6KhK
+ npwsJViuMeoV4gQKGsV6HYjfDXqui+qGhKh5fBDfrV7UtfMxnzsTvWKVDxZFuHYrYJLblqTDlXR
+ lCUInUdqfBet1N2md+EfKt2npg3oXANVCSenBHIi7wHQloc49k
+X-Received: by 2002:a05:7022:6b9d:b0:136:6883:c4bf with SMTP id
+ a92af1059eb24-139dbb3030cmr8449782c88.15.1782560743569; 
+ Sat, 27 Jun 2026 04:45:43 -0700 (PDT)
 Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-139d8f31866sm37585713c88.1.2026.06.27.04.04.46
+ a92af1059eb24-139f5901f73sm600345c88.4.2026.06.27.04.45.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 27 Jun 2026 04:04:47 -0700 (PDT)
-Date: Sat, 27 Jun 2026 19:04:44 +0800
+ Sat, 27 Jun 2026 04:45:43 -0700 (PDT)
+Date: Sat, 27 Jun 2026 19:45:40 +0800
 From: Chao Liu <chao.liu.zevorn@gmail.com>
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, philmd@oss.qualcomm.com, 
  pierrick.bouvier@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH 02/24] target/riscv: move TCG only files to tcg subdir
-Message-ID: <aj-uQGobIWJ9PTam@ChaodeMacBook-Pro.local>
+Subject: Re: [PATCH 03/24] target/riscv/machine.c: do not migrate pmp state
+ with kvm
+Message-ID: <aj-311xeb7JZe4CY@ChaodeMacBook-Pro.local>
 References: <20260622193141.1449724-1-daniel.barboza@oss.qualcomm.com>
- <20260622193141.1449724-3-daniel.barboza@oss.qualcomm.com>
+ <20260622193141.1449724-4-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260622193141.1449724-3-daniel.barboza@oss.qualcomm.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:38::1;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-dl2-x01.google.com
+In-Reply-To: <20260622193141.1449724-4-daniel.barboza@oss.qualcomm.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1343;
+ envelope-from=chao.liu.zevorn@gmail.com; helo=mail-dy1-x1343.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,379 +103,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jun 22, 2026 at 04:31:18PM +0800, Daniel Henrique Barboza wrote:
-> We have *way* too much TCG-only code hanging around in target/riscv,
-> where ideally we would have things that are shared between accelerators.
-> 
-> We'll follow the example of other targets like i386 and loongarch and
-> move everything to the tcg subir.  This will not only cleanup target/riscv
-> but it will also expose what is common code but it's buried inside a TCG
-> helper.
-> 
-> We're leaving some stuff behind because these require a little more
-> case to not end up breaking KVM.  We'll take care of them next.
+On Mon, Jun 22, 2026 at 04:31:19PM +0800, Daniel Henrique Barboza wrote:
+> The PMP emulation isn't present in the KVM driver.
 > 
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
 
 > ---
->  target/riscv/meson.build                      | 16 ----------
->  target/riscv/{ => tcg}/bitmanip_helper.c      |  0
->  target/riscv/{ => tcg}/cpu_helper.c           |  0
->  target/riscv/{ => tcg}/crypto_helper.c        |  0
->  target/riscv/{ => tcg}/csr.c                  |  0
->  target/riscv/{ => tcg}/debug.c                |  0
->  target/riscv/{ => tcg}/fpu_helper.c           |  0
->  .../insn_trans/trans_privileged.c.inc         |  0
->  .../{ => tcg}/insn_trans/trans_rva.c.inc      |  0
->  .../{ => tcg}/insn_trans/trans_rvb.c.inc      |  0
->  .../{ => tcg}/insn_trans/trans_rvbf16.c.inc   |  0
->  .../{ => tcg}/insn_trans/trans_rvd.c.inc      |  0
->  .../{ => tcg}/insn_trans/trans_rvf.c.inc      |  0
->  .../{ => tcg}/insn_trans/trans_rvh.c.inc      |  0
->  .../{ => tcg}/insn_trans/trans_rvi.c.inc      |  0
->  .../{ => tcg}/insn_trans/trans_rvk.c.inc      |  0
->  .../{ => tcg}/insn_trans/trans_rvm.c.inc      |  0
->  .../{ => tcg}/insn_trans/trans_rvv.c.inc      |  0
->  .../{ => tcg}/insn_trans/trans_rvvk.c.inc     |  0
->  .../{ => tcg}/insn_trans/trans_rvzabha.c.inc  |  0
->  .../{ => tcg}/insn_trans/trans_rvzacas.c.inc  |  0
->  .../{ => tcg}/insn_trans/trans_rvzalasr.c.inc |  0
->  .../{ => tcg}/insn_trans/trans_rvzawrs.c.inc  |  0
->  .../{ => tcg}/insn_trans/trans_rvzce.c.inc    |  0
->  .../{ => tcg}/insn_trans/trans_rvzcmop.c.inc  |  0
->  .../{ => tcg}/insn_trans/trans_rvzfa.c.inc    |  0
->  .../{ => tcg}/insn_trans/trans_rvzfh.c.inc    |  0
->  .../{ => tcg}/insn_trans/trans_rvzicbo.c.inc  |  0
->  .../insn_trans/trans_rvzicfiss.c.inc          |  0
->  .../{ => tcg}/insn_trans/trans_rvzicond.c.inc |  0
->  .../{ => tcg}/insn_trans/trans_rvzimop.c.inc  |  0
->  .../{ => tcg}/insn_trans/trans_svinval.c.inc  |  0
->  .../{ => tcg}/insn_trans/trans_xlrbr.c.inc    |  0
->  .../{ => tcg}/insn_trans/trans_xmips.c.inc    |  0
->  .../{ => tcg}/insn_trans/trans_xthead.c.inc   |  0
->  .../insn_trans/trans_xventanacondops.c.inc    |  0
->  .../{ => tcg}/insn_trans/trans_zilsd.c.inc    |  0
->  target/riscv/{ => tcg}/m128_helper.c          |  0
->  target/riscv/tcg/meson.build                  | 30 +++++++++++++++++--
->  target/riscv/{ => tcg}/mips_csr.c             |  0
->  target/riscv/{ => tcg}/op_helper.c            |  0
->  target/riscv/{ => tcg}/pmu.c                  |  0
->  target/riscv/{ => tcg}/th_csr.c               |  0
->  target/riscv/{ => tcg}/translate.c            |  0
->  target/riscv/{ => tcg}/vcrypto_helper.c       |  0
->  target/riscv/{ => tcg}/vector_helper.c        |  0
->  target/riscv/{ => tcg}/vector_internals.c     |  0
->  target/riscv/{ => tcg}/vector_internals.h     |  0
->  target/riscv/{ => tcg}/zce_helper.c           |  0
->  49 files changed, 28 insertions(+), 18 deletions(-)
->  rename target/riscv/{ => tcg}/bitmanip_helper.c (100%)
->  rename target/riscv/{ => tcg}/cpu_helper.c (100%)
->  rename target/riscv/{ => tcg}/crypto_helper.c (100%)
->  rename target/riscv/{ => tcg}/csr.c (100%)
->  rename target/riscv/{ => tcg}/debug.c (100%)
->  rename target/riscv/{ => tcg}/fpu_helper.c (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_privileged.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rva.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvb.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvbf16.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvd.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvf.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvh.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvi.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvk.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvm.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvv.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvvk.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzabha.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzacas.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzalasr.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzawrs.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzce.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzcmop.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzfa.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzfh.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzicbo.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzicfiss.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzicond.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_rvzimop.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_svinval.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_xlrbr.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_xmips.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_xthead.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_xventanacondops.c.inc (100%)
->  rename target/riscv/{ => tcg}/insn_trans/trans_zilsd.c.inc (100%)
->  rename target/riscv/{ => tcg}/m128_helper.c (100%)
->  rename target/riscv/{ => tcg}/mips_csr.c (100%)
->  rename target/riscv/{ => tcg}/op_helper.c (100%)
->  rename target/riscv/{ => tcg}/pmu.c (100%)
->  rename target/riscv/{ => tcg}/th_csr.c (100%)
->  rename target/riscv/{ => tcg}/translate.c (100%)
->  rename target/riscv/{ => tcg}/vcrypto_helper.c (100%)
->  rename target/riscv/{ => tcg}/vector_helper.c (100%)
->  rename target/riscv/{ => tcg}/vector_internals.c (100%)
->  rename target/riscv/{ => tcg}/vector_internals.h (100%)
->  rename target/riscv/{ => tcg}/zce_helper.c (100%)
+>  target/riscv/machine.c | 13 ++++++++++---
+>  1 file changed, 10 insertions(+), 3 deletions(-)
 > 
-> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> index 79f36abd63..61874ed0af 100644
-> --- a/target/riscv/meson.build
-> +++ b/target/riscv/meson.build
-> @@ -16,31 +16,15 @@ riscv_ss.add(when: 'CONFIG_ARM_COMPATIBLE_SEMIHOSTING',
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index ba96ceceef..bd93d6f3a8 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -20,6 +20,7 @@
+>  #include "cpu.h"
+>  #include "qemu/error-report.h"
+>  #include "system/kvm.h"
+> +#include "system/tcg.h"
+>  #include "migration/cpu.h"
+>  #include "exec/icount.h"
+>  #include "target/riscv/debug.h"
+> @@ -29,6 +30,10 @@ static bool pmp_needed(void *opaque)
+>  {
+>      RISCVCPU *cpu = opaque;
 >  
->  riscv_ss.add(files(
->    'cpu.c',
-> -  'cpu_helper.c',
-> -  'csr.c',
-> -  'fpu_helper.c',
->    'gdbstub.c',
-> -  'op_helper.c',
-> -  'vector_helper.c',
-> -  'vector_internals.c',
-> -  'bitmanip_helper.c',
-> -  'translate.c',
-> -  'm128_helper.c',
-> -  'crypto_helper.c',
-> -  'zce_helper.c',
-> -  'vcrypto_helper.c'
->  ))
+> +    if (kvm_enabled()) {
+> +        return false;
+> +    }
+> +
+>      return cpu->cfg.pmp;
+>  }
 >  
->  riscv_system_ss = ss.source_set()
->  riscv_system_ss.add(files(
->    'arch_dump.c',
->    'pmp.c',
-> -  'debug.c',
->    'monitor.c',
->    'machine.c',
-> -  'mips_csr.c',
-> -  'pmu.c',
-> -  'th_csr.c',
->    'time_helper.c',
->    'riscv-qmp-cmds.c',
->  ))
-> diff --git a/target/riscv/bitmanip_helper.c b/target/riscv/tcg/bitmanip_helper.c
-> similarity index 100%
-> rename from target/riscv/bitmanip_helper.c
-> rename to target/riscv/tcg/bitmanip_helper.c
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-> similarity index 100%
-> rename from target/riscv/cpu_helper.c
-> rename to target/riscv/tcg/cpu_helper.c
-> diff --git a/target/riscv/crypto_helper.c b/target/riscv/tcg/crypto_helper.c
-> similarity index 100%
-> rename from target/riscv/crypto_helper.c
-> rename to target/riscv/tcg/crypto_helper.c
-> diff --git a/target/riscv/csr.c b/target/riscv/tcg/csr.c
-> similarity index 100%
-> rename from target/riscv/csr.c
-> rename to target/riscv/tcg/csr.c
-> diff --git a/target/riscv/debug.c b/target/riscv/tcg/debug.c
-> similarity index 100%
-> rename from target/riscv/debug.c
-> rename to target/riscv/tcg/debug.c
-> diff --git a/target/riscv/fpu_helper.c b/target/riscv/tcg/fpu_helper.c
-> similarity index 100%
-> rename from target/riscv/fpu_helper.c
-> rename to target/riscv/tcg/fpu_helper.c
-> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_privileged.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_privileged.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/tcg/insn_trans/trans_rva.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rva.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rva.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/tcg/insn_trans/trans_rvb.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvb.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvb.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvbf16.c.inc b/target/riscv/tcg/insn_trans/trans_rvbf16.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvbf16.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvbf16.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/tcg/insn_trans/trans_rvd.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvd.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvd.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/tcg/insn_trans/trans_rvf.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvf.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvf.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/tcg/insn_trans/trans_rvh.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvh.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvh.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/tcg/insn_trans/trans_rvi.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvi.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvi.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/tcg/insn_trans/trans_rvk.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvk.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvk.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/tcg/insn_trans/trans_rvm.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvm.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvm.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvv.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvvk.c.inc b/target/riscv/tcg/insn_trans/trans_rvvk.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvvk.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvvk.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzabha.c.inc b/target/riscv/tcg/insn_trans/trans_rvzabha.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzabha.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzabha.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc b/target/riscv/tcg/insn_trans/trans_rvzacas.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzacas.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzacas.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzalasr.c.inc b/target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzalasr.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzalasr.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzawrs.c.inc b/target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzawrs.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/tcg/insn_trans/trans_rvzce.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzce.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzce.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzcmop.c.inc b/target/riscv/tcg/insn_trans/trans_rvzcmop.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzcmop.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzcmop.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzfa.c.inc b/target/riscv/tcg/insn_trans/trans_rvzfa.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzfa.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzfa.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/tcg/insn_trans/trans_rvzfh.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzfh.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzfh.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv/tcg/insn_trans/trans_rvzicbo.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzicbo.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzicbo.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzicfiss.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzicfiss.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzicond.c.inc b/target/riscv/tcg/insn_trans/trans_rvzicond.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzicond.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzicond.c.inc
-> diff --git a/target/riscv/insn_trans/trans_rvzimop.c.inc b/target/riscv/tcg/insn_trans/trans_rvzimop.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_rvzimop.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_rvzimop.c.inc
-> diff --git a/target/riscv/insn_trans/trans_svinval.c.inc b/target/riscv/tcg/insn_trans/trans_svinval.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_svinval.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_svinval.c.inc
-> diff --git a/target/riscv/insn_trans/trans_xlrbr.c.inc b/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_xlrbr.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-> diff --git a/target/riscv/insn_trans/trans_xmips.c.inc b/target/riscv/tcg/insn_trans/trans_xmips.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_xmips.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_xmips.c.inc
-> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/tcg/insn_trans/trans_xthead.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_xthead.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_xthead.c.inc
-> diff --git a/target/riscv/insn_trans/trans_xventanacondops.c.inc b/target/riscv/tcg/insn_trans/trans_xventanacondops.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_xventanacondops.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_xventanacondops.c.inc
-> diff --git a/target/riscv/insn_trans/trans_zilsd.c.inc b/target/riscv/tcg/insn_trans/trans_zilsd.c.inc
-> similarity index 100%
-> rename from target/riscv/insn_trans/trans_zilsd.c.inc
-> rename to target/riscv/tcg/insn_trans/trans_zilsd.c.inc
-> diff --git a/target/riscv/m128_helper.c b/target/riscv/tcg/m128_helper.c
-> similarity index 100%
-> rename from target/riscv/m128_helper.c
-> rename to target/riscv/tcg/m128_helper.c
-> diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
-> index 061df3d74a..5684fcf985 100644
-> --- a/target/riscv/tcg/meson.build
-> +++ b/target/riscv/tcg/meson.build
-> @@ -1,2 +1,28 @@
-> -riscv_ss.add(when: 'CONFIG_TCG', if_true: files(
-> -  'tcg-cpu.c'))
-> +if 'CONFIG_TCG' not in config_all_accel
-> +  subdir_done()
-> +endif
-> +
-> +riscv_ss.add(files(
-> +  'bitmanip_helper.c',
-> + 'cpu_helper.c',
-> +  'csr.c',
-> +  'crypto_helper.c',
-> +  'fpu_helper.c',
-> +  'm128_helper.c',
-> +  'op_helper.c',
-> +  'translate.c',
-> +  'tcg-cpu.c',
-> +  'vcrypto_helper.c',
-> +  'vector_helper.c',
-> +  'vector_internals.c',
-> +  'zce_helper.c'))
-> +
-> +
-> +riscv_system_ss.add(files(
-> +  'debug.c',
-> +  'mips_csr.c',
-> +  'pmu.c',
-> +  'th_csr.c',
-> +))
-> +
-> +
-> diff --git a/target/riscv/mips_csr.c b/target/riscv/tcg/mips_csr.c
-> similarity index 100%
-> rename from target/riscv/mips_csr.c
-> rename to target/riscv/tcg/mips_csr.c
-> diff --git a/target/riscv/op_helper.c b/target/riscv/tcg/op_helper.c
-> similarity index 100%
-> rename from target/riscv/op_helper.c
-> rename to target/riscv/tcg/op_helper.c
-> diff --git a/target/riscv/pmu.c b/target/riscv/tcg/pmu.c
-> similarity index 100%
-> rename from target/riscv/pmu.c
-> rename to target/riscv/tcg/pmu.c
-> diff --git a/target/riscv/th_csr.c b/target/riscv/tcg/th_csr.c
-> similarity index 100%
-> rename from target/riscv/th_csr.c
-> rename to target/riscv/tcg/th_csr.c
-> diff --git a/target/riscv/translate.c b/target/riscv/tcg/translate.c
-> similarity index 100%
-> rename from target/riscv/translate.c
-> rename to target/riscv/tcg/translate.c
-> diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/tcg/vcrypto_helper.c
-> similarity index 100%
-> rename from target/riscv/vcrypto_helper.c
-> rename to target/riscv/tcg/vcrypto_helper.c
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/tcg/vector_helper.c
-> similarity index 100%
-> rename from target/riscv/vector_helper.c
-> rename to target/riscv/tcg/vector_helper.c
-> diff --git a/target/riscv/vector_internals.c b/target/riscv/tcg/vector_internals.c
-> similarity index 100%
-> rename from target/riscv/vector_internals.c
-> rename to target/riscv/tcg/vector_internals.c
-> diff --git a/target/riscv/vector_internals.h b/target/riscv/tcg/vector_internals.h
-> similarity index 100%
-> rename from target/riscv/vector_internals.h
-> rename to target/riscv/tcg/vector_internals.h
-> diff --git a/target/riscv/zce_helper.c b/target/riscv/tcg/zce_helper.c
-> similarity index 100%
-> rename from target/riscv/zce_helper.c
-> rename to target/riscv/tcg/zce_helper.c
+> @@ -39,10 +44,12 @@ static int pmp_post_load(void *opaque, int version_id)
+>      int i;
+>      uint8_t pmp_regions = riscv_cpu_cfg(env)->pmp_regions;
+>  
+> -    for (i = 0; i < pmp_regions; i++) {
+> -        pmp_update_rule_addr(env, i);
+> +    if (tcg_enabled()) {
+> +        for (i = 0; i < pmp_regions; i++) {
+> +            pmp_update_rule_addr(env, i);
+> +        }
+> +        pmp_update_rule_nums(env);
+>      }
+> -    pmp_update_rule_nums(env);
+>  
+>      return 0;
+>  }
 > -- 
 > 2.43.0
 > 
