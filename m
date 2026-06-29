@@ -4,110 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA81AC43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jun 2026 02:42:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80E58C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jun 2026 09:09:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1we1wI-0001Aq-MW; Sun, 28 Jun 2026 22:41:38 -0400
+	id 1we7z5-000627-TX; Mon, 29 Jun 2026 05:08:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1we1wA-0001AJ-8I
- for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 22:41:31 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1we1w8-0007Zd-MD
- for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 22:41:30 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-691c5776f95so4835515a12.3
- for <qemu-riscv@nongnu.org>; Sun, 28 Jun 2026 19:41:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782700887; cv=none;
- d=google.com; s=arc-20260327;
- b=XxCpqu/KjvrMRrpSedIFg5a/9mIC5m6vOjGoWlbHA4bAQRsgFNIIpobB33d11CvDOd
- gc1YWqoVV/+jAQ1C11MAezohmeENDd2lmrVK1dQfBJSVaf6PKgo8wmjzjRqco+7sR1Eb
- ShllYYkjlaJhboqbQfzWz9nmwwEmnZl3zi0WePC8bPMosYferMgitlLv9auOcW7/66rK
- ED8Y3vWz/aLcJoV1W/zqYEngOaKFg0rcle++k5SL4b+JclM+wQyFe1ZIrHQavrW0kIJO
- trZZ+qMKFobUQGWIx/AaB6fw909IJTyzyl5GIou/V8wl09HNSgQVT7ZGrjHKrTRbC0Hw
- BOPQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=bBv1I/ZO1y/i1zHZqaZCewy9Qr2VDqFLv9ENiF1z5zQ=;
- fh=3syI/4bwaTkZhioZOxk2vDA+oFf4S1RJ0OvAODZKdQ0=;
- b=V+EqT+CEV/snTaBWnwJj4YXfN2qV4nNDu3AOygY8BOtUUXD719fkZokC/ndJMwSOCv
- 9zzb8n432jWcwuCXZB2Uyx2GdgynL7xO41MBuQfqlVPsZj3hGsl+C8vHnyj/6xaWMuT4
- PuJwz76aS37B2ss+oHc/NVyHbr5tEWpg/1yxuR7sF15hcuwQrvI0cxOHv8Hv3MravI2y
- U5pigzlsY43ggEOQuG34Fv4ZISnMF3WYdQK2TM/p3Y24PoicfHBaZJIoLEi222wy0gqz
- CMa4kUY7FtG96iDNaPZjS3nz+WroYF+7wKo4WUge7a0xelvSdEnb3g5PZbTjAgITuQJ7
- iWbQ==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
+ id 1we7z3-00061b-S1; Mon, 29 Jun 2026 05:08:53 -0400
+Received: from [115.124.30.98] (helo=out30-98.freemail.mail.aliyun.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <cp0613@linux.alibaba.com>)
+ id 1we7yw-0004WW-4F; Mon, 29 Jun 2026 05:08:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782700887; x=1783305687; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bBv1I/ZO1y/i1zHZqaZCewy9Qr2VDqFLv9ENiF1z5zQ=;
- b=OGv93KUPHe75jNVBqM9wGrU4vQQiexXH3ehUY6Yhlosh2pzzgPUROqGSE8RGe0WPQS
- oOXVoUUWZxSuZ7qwToR7sGfGe+l5DtN3WMQ/OvJ7QrEYOZOfLngRMFIBEFyLsrFcazGH
- 4aSKMuD8HyMpImOGTpW1FeXsdTq8w1dbgOIx4Fvfo5tb0/zApmhSZ/vYl6Z5WwbiyA0b
- cxcpfJrCvCZtgTRcUZnoRP6+vSCcydqOsj2XjjvXL2KT54+0tFfohDGlismZ9llYnAM6
- JGFcNa6nViaqSO9k23iUhnjoFsKSiNWyB5yVbg5MX4njnHXPBrDPDMPCHL0eHMPIvPXr
- zBoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782700887; x=1783305687;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=bBv1I/ZO1y/i1zHZqaZCewy9Qr2VDqFLv9ENiF1z5zQ=;
- b=Gef04AmpW/QFWiVKh3Pn0z218LndnbS/Z6gnUAmxyFfTmN0cFCd1h20McSFT09QFkG
- Ssq1+zb98oNGjlbfzWzmEtJYatKfGw3TZbrqCQJmco0dyIMSC+E/rbyCAuzFMgCvMDKk
- xQGOJiN3b+ZyWNH50Qj18Yz/jP4cp5sw5dhc7omhDtHbe06kgLnkBiAf8EjnAftq3VwJ
- qWeYo1NNqq+3CEcmwXvcbv8DdmSKg7sBh9ohg/twchlowgHcO1atSel3i+8uCrK0muB7
- jItiVF2SnkRI2gdd7dshC9ZzPbIXwY4JG3LAZNznYoPjFBfz4lYHYb/J09Cs0fQHu9zi
- ywmw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrzlkptkJ+a16mstqENnk3gDX6TWDhYaL9g84x7ZQUqpHzO/DYE9viCZkOVBIX3X2cvqtYOVk5mgCu9@nongnu.org
-X-Gm-Message-State: AOJu0Yxz6domxM7nS86uk+2ZvFx8DfYdTK/OLl8PyT80I8diQTxPjTpc
- JpzCwX03CEeelyStk1PwpfI08ZULk86/aYKfUkLkg8Bdm0jrIFFhq4FcZkuVN3+Nfp1llZUXti8
- p4rKWdy6ZMLBfJIj12dhRSpM7mFbWL10=
-X-Gm-Gg: AfdE7clcscX7dsKOVYPnmOTO4NbzGhe8Eu/IEkAqisuJj5ob0Gt/qEKgNGCJYQ0TFh4
- 7LvaWEWAyGhfvnzu/LBC5W5sfainMDr410twqm8muv+5Bn1qv8HqwQ5d+iijDT87jXc/YGYB7rT
- 2g+zZ8CQDzz0sc/ao+gejzDQ2lOn/ZNnDbCxeYPXB76SNJuPLHovG3bDZm4alLSBtmliP3rXHyq
- lt6ZuAVRQGQupy1d3zk1zaMORuuu4ZASnXTtHT2IJ+bkpxavn1F4YFA1U2Al29aRnTbrjArGtrZ
- 018uVHtR+biWtdFJvadfXiX+nqE=
-X-Received: by 2002:a05:6402:5207:b0:697:560b:f6b2 with SMTP id
- 4fb4d7f45d1cf-69810a157dbmr5477045a12.4.1782700887069; Sun, 28 Jun 2026
- 19:41:27 -0700 (PDT)
+ d=linux.alibaba.com; s=default;
+ t=1782724096; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=sA9OP5Rc4bDJBSMnQRtXfrB+IycsWvdoBnf4BVsHUjM=;
+ b=hztNgKG9tdz4FnFcOURrGvm23x+c0TVzb+JLPfxfeH42H7mPfXq4BNptfhU8B3tst0xU5S7YrEonMNLBuv+l00SsVcDUZU8dktnktwI4YjzpWdkgydejj8plopC/XNTCo8FT/J17YzXT4aZ7/O31OKLZjKlzLsmKi8y2fM9KT5s=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam011083073210;
+ MF=cp0613@linux.alibaba.com; NM=1; PH=DS; RN=17; SR=0;
+ TI=SMTPD_---0X5qEOg5_1782724089; 
+Received: from DESKTOP-S9E58SO.localdomain(mailfrom:cp0613@linux.alibaba.com
+ fp:SMTPD_---0X5qEOg5_1782724089 cluster:ay36) by smtp.aliyun-inc.com;
+ Mon, 29 Jun 2026 17:08:14 +0800
+From: Chen Pei <cp0613@linux.alibaba.com>
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: jic23@kernel.org, pbonzini@redhat.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ sunilvl@ventanamicro.com, dave.jiang@intel.com, alison.schofield@intel.com,
+ imammedo@redhat.com, mst@redhat.com, guoren@kernel.org,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, linux-cxl@vger.kernel.org
+Subject: Re: [PATCH v2 1/4] hw/riscv/virt: Add CXL support to the RISC-V virt
+ machine
+Date: Mon, 29 Jun 2026 17:06:41 +0800
+Message-ID: <20260629090654.70869-1-cp0613@linux.alibaba.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <9279723a-b079-4749-b3a5-e6e7ecfd2121@oss.qualcomm.com>
+References: <20260618093827.3507-1-cp0613@linux.alibaba.com>
+ <20260618093827.3507-2-cp0613@linux.alibaba.com>
+ <9279723a-b079-4749-b3a5-e6e7ecfd2121@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <20260622065717.15386-1-wang.yechao255@zte.com.cn>
-In-Reply-To: <20260622065717.15386-1-wang.yechao255@zte.com.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 29 Jun 2026 12:41:00 +1000
-X-Gm-Features: AVVi8Cd1PPCiwz-wImhBZ3i32lzdKbi7DkqxbDKf41eQ5lhqgTo2l7_tAYxToOs
-Message-ID: <CAKmqyKMhqavLeDj7fy-JpY8WGKO0m_o+94UMPX2sBK5Ldsid4w@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv/kvm: add extensions after v7.1-rc4 update
-To: Wang Yechao <wang.yechao255@zte.com.cn>
-Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x533.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.98 (deferred)
+Received-SPF: pass client-ip=115.124.30.98;
+ envelope-from=cp0613@linux.alibaba.com; helo=out30-98.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,48 +75,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jun 22, 2026 at 4:59=E2=80=AFPM Wang Yechao <wang.yechao255@zte.com=
-.cn> wrote:
->
-> Expose zilsd, zclsd and zalasr.
->
-> Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Hi Daniel,
 
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
-> ---
-> Changes in v2:
-> - Rebase on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+On 6/24/2026 1:42 PM, Daniel Henrique Barboza wrote:
+> create_cxl_host_reg_region() is doing the same check:
 >
-> ---
->  target/riscv/kvm/kvm-cpu.c | 3 +++
->  1 file changed, 3 insertions(+)
+>     if (!s->cxl_devices_state.is_enabled) {
+>     (...)
 >
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index f0de5c3071..707b992d55 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -304,10 +304,13 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] =3D {
->      KVM_EXT_CFG("zihintntl", ext_zihintntl, KVM_RISCV_ISA_EXT_ZIHINTNTL)=
-,
->      KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHINT=
-PAUSE),
->      KVM_EXT_CFG("zihpm", ext_zihpm, KVM_RISCV_ISA_EXT_ZIHPM),
-> +    KVM_EXT_CFG("zilsd", ext_zilsd, KVM_RISCV_ISA_EXT_ZILSD),
->      KVM_EXT_CFG("zimop", ext_zimop, KVM_RISCV_ISA_EXT_ZIMOP),
->      KVM_EXT_CFG("zcmop", ext_zcmop, KVM_RISCV_ISA_EXT_ZCMOP),
-> +    KVM_EXT_CFG("zclsd", ext_zclsd, KVM_RISCV_ISA_EXT_ZCLSD),
->      KVM_EXT_CFG("zabha", ext_zabha, KVM_RISCV_ISA_EXT_ZABHA),
->      KVM_EXT_CFG("zacas", ext_zacas, KVM_RISCV_ISA_EXT_ZACAS),
-> +    KVM_EXT_CFG("zalasr", ext_zalasr, KVM_RISCV_ISA_EXT_ZALASR),
->      KVM_EXT_CFG("zawrs", ext_zawrs, KVM_RISCV_ISA_EXT_ZAWRS),
->      KVM_EXT_CFG("zfa", ext_zfa, KVM_RISCV_ISA_EXT_ZFA),
->      KVM_EXT_CFG("zfbfmin", ext_zfbfmin, KVM_RISCV_ISA_EXT_ZFBFMIN),
-> --
-> 2.43.5
+> Maybe we could squash these update_mmio() lines in the same helper to have
+> everything CXL related in the same place.  The helper would need to be
+> renamed to something more appropriate (e.g. cxl_host_state_init() since we're
+> at init time).
+
+Thanks for the review. You are right, the x86 pc_memory_init() path keeps
+the CXL host register region creation and the FMW address programming
+inside a single 'if (is_enabled)' block, and there is no reason for
+RISC-V to split them. I'll fold the cxl_fmws_set_memmap() and
+cxl_fmws_update_mmio() calls into create_cxl_host_reg_region(), rename
+the helper to cxl_host_state_init(), and drop the duplicate guard in
+virt_machine_init() in v3.
+
+Thanks,
+Pei
 
