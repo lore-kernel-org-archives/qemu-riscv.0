@@ -4,107 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AFEEC43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jun 2026 00:01:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63156C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jun 2026 00:17:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wdzQx-0001h8-EY; Sun, 28 Jun 2026 20:01:07 -0400
+	id 1wdzgS-0003pY-JY; Sun, 28 Jun 2026 20:17:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wdzQv-0001gk-K0
- for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 20:01:05 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ id 1wdzgR-0003pE-Kt
+ for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 20:17:07 -0400
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wdzQt-0008WB-Tg
- for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 20:01:05 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-69857dc1d5eso1363218a12.3
- for <qemu-riscv@nongnu.org>; Sun, 28 Jun 2026 17:01:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782691262; cv=none;
+ id 1wdzgQ-0007Qx-4V
+ for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 20:17:07 -0400
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-6976b0c5adbso5157297a12.2
+ for <qemu-riscv@nongnu.org>; Sun, 28 Jun 2026 17:17:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782692224; cv=none;
  d=google.com; s=arc-20260327;
- b=hnjOzDdNyje+lu1IIxcCzwJqOEXobL1aNMrd7XlYpGLj7HGk9yOWlchA5FhX33o7ax
- 0r1L8TdZbz4LwB7wQRRkJc/3HWzwAoywtQYayzORRV18wGTctgb3ODnLbs7KceMohf+4
- QE8/+PwCY+ohHNwd49sf5OOr3Th7RJeFhB2CutszMEfjgI3GbzyqEa1IaDENLI3thR55
- 1Fma6mjpsfBm2Go/rjik9xJ2xXdnLUFmqSmQCgVw96+GU4rbiiS5rmfPr62is9i3cuXw
- b1e99/6z3rtkqv2Br1HpvaiFM793b3Khshq7NDCkYXOscJcnhJ1pxNFlJobKF02G9bR5
- f0vQ==
+ b=ntm8hpjguDofJDOzCdgxFGZZYtuoHngkkSikW8cz9NCsdCijjrXjaQjf12NsPCQXjW
+ iH4krj8W+SrmsId/AuZZDiyB73jZ31UPIiSKasiKaYKE+kQZdDPnC1yTOi4HZZp5jwkE
+ DTaAbrIRRc2A8FCc60mjuqmGqZi2z4eMnLzvL3WwWsy3HQN+mcxmb9xPENbuKzoDN5SB
+ AlMNVzoIEY+vvbf2vkt0g9Of+d/OSTXEGxYBzczis8wpzNaBZXWXTdO4xRzQpDYIEQ+P
+ PubZ/fIti1Qw7WctYY9LNOhkbdqCm0GEByFFsFVVv8IB6L7pEruSkECFIz+NaZpoCDJT
+ UT3A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=2aarkSTCtP1tNWtsc+x4BsJLyqTOaYD/qR94YreBArI=;
- fh=+s3Bmvxkc1kkAyUb8gepyD6UJs89t8vyY198h4dR82Q=;
- b=M4buWvFUNAmE3B8WIuDOaiv3sigwkxET02FDSxou1LlUGNOENbcYgnVwkXPSCskwUX
- CD8T7adyImEGGHaZmRF83Wbv5+QO2A4t60olvjmwiX5u4twv5HuKOmAy9t7mD6Gb792q
- gUx71zVxqLMVwIW7BBKbwb2H30xbxh7P+sVNivVF4vkntbXOUU60nuxhzpD7dvwLihbK
- UHULhBS2Kt0BL+mKgHGAoa1ttp7AkseFsZs6cPYEcKdFXjq69jFUBfz50PyHsFaikR6o
- rvTjiBT2X+/2IzDHyjrxz0L4Q7gFGiUTFZQ2G/2UFs5TdsmnGlG/7cK8BMgEzf5qcUFn
- AKPg==; darn=nongnu.org
+ bh=TRyPeXcr6E5hSqOSHx3f/68BnkoL+hzcMTZ5s76Hkbo=;
+ fh=aSPLvpb/sjV93j9WEDI/iylmc6NqzfhAhr+IzbX+6iI=;
+ b=M1B0dX0q6X95QokfNJg1f/y8VdZsAogWq447S5Ym8ducTNPliHosoCUGYnwUyIasVS
+ C1N7ti/Z0crIi+pJjb3ZN5PTDOooqXXCWzHJweSoZDh9BQ3iESKlGKlHzR79AO49HB1T
+ KPKWjz4HR1j5xiwdWWYkHRY3rzHzrQmAjlEaIAGiXaWpE0/4ckIUXNHUOf2YEoaGlwli
+ IFoAEWqhT9flCih3GEESj8jep2kXHRVdo9wFPAeGqrHezKxOq5fdeGDrqREUZBCsj397
+ Bm6x4p+4ZUFVqTeHwtUOo9+Ot2bm9yuYmnPMbtFt6dB2ImUH0wwKwtZOH1eIOlh8siBs
+ BJcQ==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782691262; x=1783296062; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1782692224; x=1783297024; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2aarkSTCtP1tNWtsc+x4BsJLyqTOaYD/qR94YreBArI=;
- b=T85dfvJ8yC10Fh6dCKfjU4iCIrsuQ3+JdhmIqBNBk8QmzVfiEDOdLrtZraCNOmlIdA
- 4q9S23bLcZFsHqcvQv5e77TC6H0Q9V+ii1OjAx7tcN7NKZ0sdR65OOTmX18lHOul0+mf
- XY4358RHlaE4q8fb/NJ4Zz95fNwWzwZM7Q9YKj9/Lo5bFEn8lhES+ebheBOSvVb5qvru
- pBBcqUaqX/ql4WQQPFoBVtU7zi/Cw+KaB4hBsgKIrf6iCHNZ+DL1PjMsxnqfcSA++qkN
- VjDK9u3W5bvq/1sN2KCqI1/l9wz4bG75iaWs4UEWP8St8wikYwNOjKScH0Da75Kn6mEI
- ptzA==
+ bh=TRyPeXcr6E5hSqOSHx3f/68BnkoL+hzcMTZ5s76Hkbo=;
+ b=NPNn4d+8050LUIdUOCA+QjvShaGxTVlGkBtqrnZxg+0yXE+a+IM/kkH0RBpgHzTlIG
+ JDAfOXiqSw4bT8CN3aSAHeGcHqf9ncu6aJ/r4ume3PonYEh6RZzGHXrrSlP6uBhAwx2T
+ WE/a3JUHF0p5jL/NDiBCx/yksOjkZFVhcUmDL14/cnuAMHdFMuzx5U5nQ0KsQFjb6kRV
+ jCXYIwYj3XZDBJjodt/J290sSbDCbFDGJ5jVRKQgPjAUASzC/1oJgEL4Wc9jdxi2mnpk
+ BCPo0ajL5UiF/hHKWNILF9AvqFaftL2WawO6bF7ptsyx2dzNX3nUUm6X9D1UzN721m3m
+ 8l6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782691262; x=1783296062;
+ d=1e100.net; s=20251104; t=1782692224; x=1783297024;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=2aarkSTCtP1tNWtsc+x4BsJLyqTOaYD/qR94YreBArI=;
- b=lqCUHiZnQ0/eb12pfhlz1cFTbnD9fWlfdMtKcmx+OcebAD5gcxnxDlB2e/8J2hDbPQ
- QjB7jW0I3gVIvz2ixGdoWfGbzxkLZ5vXyhPlywE5bud+lRADFrW+NPtZ0BPD6/fHR5wo
- HxCQPADq7QNPBh0F5Yh37+ZsZZuoth+pdvE9T8dUJcbl7uJqo3jPF+tdSKM1Di2d+YR7
- z31S8SQCwlrFAMcBfY++v6ZuDgO2OosSqG8oVqNFZGS5UAHqVfEE3Jq9x7hFXOuJMIbI
- G+5nbVDDgWFQzlxwy4JPCOFJHfhbcJG0J5GDObeGsLp+pnlYiq9gwg7BZZfJ9SDLmqRW
- 4h+Q==
+ bh=TRyPeXcr6E5hSqOSHx3f/68BnkoL+hzcMTZ5s76Hkbo=;
+ b=KUUn0lrz518AgR3QGEJzosc+ZjzOxD6Ry/QcBi85cP8pZp14g1STBAAh6wAVal+hMF
+ A8U56V1BCrcvRw7ezHp/6X8gz9+FVPA6iHpPblM5uEoHNCKYWD7LNFaCcgc7zryo1vNv
+ CByIOgCZwNRHJJv2a3HSC3Tiu6KZ1dQfKo01Ebb07huWaPy9mwzcIgtjhiaI7O++LmRz
+ bIopOzWVQvAU2A84xHORmNdNwF9x2zTyG/ydQtD9XbfmZzAtvh0VRbkGfrMdQOR5wn1x
+ e64GMGjF63bEXyQwFohQsHrFjPbQRzdr4mAf9wqL5BIOF39kdPYIfiYQURCmZlvG5YZJ
+ O/Zg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpvTjliEzNqdq1l6k63UjcZvU3Csksj21mj3RvU3jLISRAK2Fan5UsIBUF1FHPznXUh5PWBAnGMr/YN@nongnu.org
-X-Gm-Message-State: AOJu0Yw08+BepeDTT2o27zpWaAAdmJ+F/nYsOgiKrmoQaEO1yzVb7E7j
- nXyAbV+IF9HAMgsP8eq0V2F8LByBYDn8GaYHf0p0AVdRzf2Co1O3DNwfWAqi9XmQaq0482fRsk1
- b75OPYUsffpNM0XPdonWqSkqtCC0R1M0=
-X-Gm-Gg: AfdE7cloxF/DjdqGFkGlIgUD17rBPKNAOOYLj1z0cHvA1grC/gzkIjpvcDi0q0tj125
- cgTce6VA6sGZ9jvkx3GW/Hv3pYxUcpYhXKGQl4q6hYPjtyhl/ZydiFe76+0SH0pILCLaAMP+eTf
- 0QYQ+6Sr5iwIZBOItHoI9ITeuYRdkYC3JdspUQruxl+qJ9Q2p4cUUud6WtS6up+IisHE4mXccui
- jgD8Q0EQWgGyiQW080d/0ETumuE+R7jYqJ6WGtMG18wjbEP/mjxtIh6eJBpxZQU69r7pRZtQkQO
- roxLJiCy7ZaB4PPBTzSdgfg3pG22/dEmfQ6RMg==
-X-Received: by 2002:a05:6402:3585:b0:695:9b77:7c3a with SMTP id
- 4fb4d7f45d1cf-69810ae8134mr4907717a12.24.1782691261869; Sun, 28 Jun 2026
- 17:01:01 -0700 (PDT)
+ AHgh+Rq9CmkARoAV/Qj4AqVzQdG4pipl3mElvBp0sJ0cJCiwJmLAFoYO4YGfxRJvJAo1V1nzWM0XGmansP1T@nongnu.org
+X-Gm-Message-State: AOJu0YzkDiUbqdKgPnQaTIKfFbwwLE97KYvI9rRmxDn/fZhCqQfG9seH
+ Kj3qcZBHU5HAL12hcED2YeGvwddE5zzrmfn/khjErL8AI6RrmIOpbd54tIn2zebuQ7fXx3JKmJq
+ iberBDvwwlsQXhanw+7rJ08fJ0qlThLA=
+X-Gm-Gg: AfdE7cnQX8bUuAcyr1QrBytHvLIVlk79eS6H10FAE++/Ytak1fKxADwmMFelj+62jSA
+ XmXzba4mqzfuubgsIOY9ZQdKaUxnYIJ7hus3wVpusA/t4lBHdJfVdEM4kOvifYV97OLoY3TYbP1
+ I6KGAEaGPjt0aZBB6IBLjVxTzX3hFQvAcA6zrq+Ys6WfhOpt8twu0kohHGozYLm0lj0qhvaNRtG
+ 1bNqP7bOmf8SOFxYAwOc5gh08KHvq/BRQJo9z+mpMqsEGLizF0Gj0sBx8QK+C2W6n2H2ZBCzhGs
+ al2Qw1wEaqWUCCtQuLAPGzta2WRUrdDLQDOkgg==
+X-Received: by 2002:aa7:c755:0:b0:698:3b7c:7e46 with SMTP id
+ 4fb4d7f45d1cf-6983b7c8059mr2210342a12.38.1782692224258; Sun, 28 Jun 2026
+ 17:17:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260627194640.4130073-1-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260627194640.4130073-1-daniel.barboza@oss.qualcomm.com>
+References: <20260625081521.595683-1-suunj1331@gmail.com>
+In-Reply-To: <20260625081521.595683-1-suunj1331@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 29 Jun 2026 10:00:34 +1000
-X-Gm-Features: AVVi8CeJ8Xxlmepx-apf0OTHzeJ9GpVbonRgxYAI_VBmVHwalzaYy376RFL-gec
-Message-ID: <CAKmqyKMT5ig-g0cny038UnYSAHfw4fP83YygEb-w-ekp_omnXg@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv/riscv-iommu: check DC.TC reserved bits
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
- andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
+Date: Mon, 29 Jun 2026 10:16:38 +1000
+X-Gm-Features: AVVi8Cf0G-T8EZwZHAfFiuLCOgI65AVLwf9ASqzRBHoxQ1dCoITUQIRo6ZeqvrM
+Message-ID: <CAKmqyKPgZxELoTpm32D5i_Q4egzP64UmF0RqKu=1yoSVmz2Jew@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Apply UXL WARL handling to vsstatus
+To: SeungJu Cheon <suunj1331@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, liwei1518@gmail.com, 
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu.zevorn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x535.google.com
+X-Spam_score_int: -7
+X-Spam_score: -0.8
+X-Spam_bar: /
+X-Spam_report: (-0.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FORGED_GMAIL_RCVD=1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,15 +121,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, Jun 28, 2026 at 5:48=E2=80=AFAM Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
+On Thu, Jun 25, 2026 at 6:17=E2=80=AFPM SeungJu Cheon <suunj1331@gmail.com>=
+ wrote:
 >
-> We are not checking for reserved TC bits being set during device context
-> validation.
+> write_mstatus() already handles the reserved UXL value by writing a
+> legal value instead.
 >
-> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3548
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Apply the same handling when writing vsstatus so that reserved UXL
+> values follow the same WARL behavior.
+>
+> Factor the common logic into a local helper riscv_write_uxl() and use
+> it for both mstatus and vsstatus.
+>
+> Suggested-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Fixes: f310df58bd2 ("target/riscv: Enable uxl field write")
+> Signed-off-by: SeungJu Cheon <suunj1331@gmail.com>
 
 Thanks!
 
@@ -137,42 +144,67 @@ Applied to riscv-to-apply.next
 Alistair
 
 > ---
->  hw/riscv/riscv-iommu-bits.h | 3 +++
->  hw/riscv/riscv-iommu.c      | 4 ++++
->  2 files changed, 7 insertions(+)
+>  target/riscv/csr.c | 27 +++++++++++++++++----------
+>  1 file changed, 17 insertions(+), 10 deletions(-)
 >
-> diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
-> index a938fd3eb4..f9b6f35170 100644
-> --- a/hw/riscv/riscv-iommu-bits.h
-> +++ b/hw/riscv/riscv-iommu-bits.h
-> @@ -308,6 +308,9 @@ struct riscv_iommu_dc {
->  #define RISCV_IOMMU_DC_IOHGATP_GSCID    GENMASK_ULL(59, 44)
->  #define RISCV_IOMMU_DC_IOHGATP_MODE     RISCV_IOMMU_ATP_MODE_FIELD
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index dd9726fcf4..12f1ce5180 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2012,6 +2012,20 @@ static target_ulong legalize_mpp(CPURISCVState *en=
+v, target_ulong old_mpp,
+>      return val;
+>  }
 >
-> +#define RISCV_IOMMU_DC_TC_RESERVED      (GENMASK_ULL(23, 12) \
-> +                                         | GENMASK_ULL(63, 32))
+> +static uint64_t riscv_write_uxl(CPURISCVState *env, uint64_t val,
+> +                                uint64_t field)
+> +{
+> +    RISCVMXL xl =3D riscv_cpu_mxl(env);
+> +    uint64_t uxl =3D get_field(val, field);
 > +
->  enum riscv_iommu_dc_iohgatp_modes {
->      RISCV_IOMMU_DC_IOHGATP_MODE_BARE =3D 0,
->      RISCV_IOMMU_DC_IOHGATP_MODE_SV32X4 =3D 8,
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index c9687e01a8..c2c470b5df 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -752,6 +752,10 @@ static bool riscv_iommu_validate_device_ctx(RISCVIOM=
-MUState *s,
->      uint32_t fsc_mode, msi_mode;
->      uint64_t gatp;
->
-> +    if (ctx->tc & RISCV_IOMMU_DC_TC_RESERVED) {
-> +        return false;
+> +    if (uxl =3D=3D MXL_RV128) {
+> +        uxl =3D xl =3D=3D MXL_RV128 ? MXL_RV64 : xl;
+> +        val =3D set_field(val, field, uxl);
 > +    }
 > +
->      if (!(s->cap & RISCV_IOMMU_CAP_ATS) &&
->          (ctx->tc & RISCV_IOMMU_DC_TC_EN_ATS ||
->           ctx->tc & RISCV_IOMMU_DC_TC_EN_PRI ||
+> +    return val;
+> +}
+> +
+>  static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>                                      target_ulong val, uintptr_t ra)
+>  {
+> @@ -2058,17 +2072,8 @@ static RISCVException write_mstatus(CPURISCVState =
+*env, int csrno,
+>
+>      if (xl !=3D MXL_RV32 || env->debugger) {
+>          if ((val & MSTATUS64_UXL) !=3D 0) {
+> -            uint64_t uxl =3D val & MSTATUS64_UXL >> 32;
+>              mask |=3D MSTATUS64_UXL;
+> -
+> -            /*
+> -             * uxl =3D 3 is reserved so write the current xl instead.
+> -             * In case xl =3D MXL_RV128 (3) write MXL_RV64.
+> -             */
+> -            if (uxl =3D=3D 3) {
+> -                uxl =3D xl =3D=3D MXL_RV128 ? MXL_RV64 : xl;
+> -                val =3D deposit64(val, 32, 2, uxl);
+> -            }
+> +            val =3D riscv_write_uxl(env, val, MSTATUS64_UXL);
+>          }
+>      }
+>
+> @@ -5226,6 +5231,8 @@ static RISCVException write_vsstatus(CPURISCVState =
+*env, int csrno,
+>      uint64_t mask =3D (target_ulong)-1;
+>      if ((val & VSSTATUS64_UXL) =3D=3D 0) {
+>          mask &=3D ~VSSTATUS64_UXL;
+> +    } else {
+> +        val =3D riscv_write_uxl(env, val, VSSTATUS64_UXL);
+>      }
+>      if ((env->henvcfg & HENVCFG_DTE)) {
+>          if ((val & SSTATUS_SDT) !=3D 0) {
 > --
-> 2.43.0
+> 2.52.0
 >
 >
 
