@@ -4,100 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFA76C43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jun 2026 00:50:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87009C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jun 2026 00:51:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1we0CB-0000w6-L5; Sun, 28 Jun 2026 20:49:55 -0400
+	id 1we0DL-0001VB-B9; Sun, 28 Jun 2026 20:51:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1we0C9-0000vo-LG
- for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 20:49:53 -0400
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ id 1we0DF-0001V1-OT
+ for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 20:51:01 -0400
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1we0C7-00040a-Tg
- for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 20:49:53 -0400
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6978f1eeb87so4875108a12.0
- for <qemu-riscv@nongnu.org>; Sun, 28 Jun 2026 17:49:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1782694190; cv=none;
+ id 1we0DD-0004ta-3R
+ for qemu-riscv@nongnu.org; Sun, 28 Jun 2026 20:51:01 -0400
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-697bd21fdc2so4855333a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 28 Jun 2026 17:50:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782694255; cv=none;
  d=google.com; s=arc-20260327;
- b=G8TgCzSuCZDc5BBc1A3AIdai8btNlJCVhj2vjhwf5lVTTAkCDkpzwt+hDfbqqbWtJT
- nZkuRRszrjXZUI8JTEq9bZ6qUDahTrJnMvyDAywgHY1UAvpYbTTlulH7ZRe1hj9csnGC
- k5tOBe7J7D9NDexbfVKe+cnXJmNyOBWQL22G50Tz9LDjUby0QG6RwQWIh2pcDFf8rvh9
- /Qt+jvFiknMgogSvQeSPbVkbEL6T19RaWTVOoKpLZsRWO7InmMOLkrrPbRLiElMpWE9H
- wDenXZHsvpGlDMJT7VkYBNGJram2I3nGhmqMNA6CB8K53c/G19gS1+e0z82ijGdjMGeP
- KMRg==
+ b=rbPsugZyXrVis9gJaPTnnMmSHL9vtyrxGKOjAGy93JfFeDEJ5xhehw4qSVruXMgEcY
+ d6UIDrDOpMvZlI/XdKvYNSBpph6eXCO8ktnpmRYQt2G46tUuOqhlveAbHUZGJE5349OZ
+ ygB7AlNSxD917o/E08qT6VvRhmB1ZYFORKRtLKwzullLC3mXDSbSx6cFGqE/MDVTTiJw
+ 2uscWpTGcxBs1n82Qkc+yWKBW1y/UMwKuyfVgVuxg7T7QQQSggzRNNoxYqMGej8rC+wV
+ DQvsnmbPlql/dXknc9XKxcJk0EEAZLzuzgnytrZXuCtMburSj0GDxtRzyJzgUnQKQrhp
+ PUZg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=7+Xd7dZ5ugKdPtOkhsNwyL7YPpzq/5LhT91DUyIqTA4=;
- fh=xfv+zx6S4d2zBIp+UYgg7YbBDCgqADw+6UA3312PMRc=;
- b=pvoQZYXpHoF1Ody/NxqGmoXxOB+NlMi7clqp6OGJALOLvG9fBAeYKOvRZecWbYuGSN
- KqTuoZNZO1Lt6BcrCFvEHzRGueLdW9P9260gYOoyGwMBlEwRQwprkmdlC+y4e8acQKIr
- 9JG2FwS+YtplQikBLIbwM6ZRpmXJpXOwOJy7XkGTl7CXOu4SqUIyK2n4Yvbi2PrEaovA
- yDgVvwBRFcqQ/zyBrPzto52B+Q2sKF3C3NPDBR23gN4slId9Av+2+2b1Fcb3n0/BYRon
- A8kiLYI9wVIrWotrhnKjQpAg+UHxbvmxwnIBJebt5x1LK0UZEiKPDZTN8XGg9WcHmu1j
- sJ3Q==; darn=nongnu.org
+ bh=LwzgFFmYXx5EzS6oTaFWg3iGy/aaClN4MZPlgQhAOQg=;
+ fh=sHta28Jao3DQpSaaEu0Ki7C6Chjqez6ozHsQWTTPxMo=;
+ b=hcE3s81osK81/TwG1+B62Gr9JjX1Tu1Wk3Dci9XxnRZ6houaMczL4Wv08kG/i37weo
+ KQjDVfRRDqmoHH/J0yT410T3y0bImlIcHNiyJkyDcpYGo+21Fgfm4HVXzKS3lm73irfy
+ yxUrMsQPqtFC+biwfbNrptKz3xPz6fiYTdDWiqW/CZnhyDLOzQ/eSc/7wT6kZJ0GPC9Q
+ wuhBBNkRDb8zdMFrjtO6FRdD5UKA6FxWUdhXXqwA03OZoCCETyYEsHPOOKqANjTe8+/7
+ 17euy2cbH02AsGV/bwVazrRMJb3vhRXSYaXudFHeU8mZqLybGGjUrufpdxB98W7VBSBf
+ BksA==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782694190; x=1783298990; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1782694255; x=1783299055; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7+Xd7dZ5ugKdPtOkhsNwyL7YPpzq/5LhT91DUyIqTA4=;
- b=KTPsiCB+g/fyxUTZMW8BxumRW0HZGgvwLP/bWGE4CJMEb7PX2wDJxD8kxVtsQ3rn71
- S951RyuyLJKMjlcyjwngMh5Xj5izHDFZeoyWcwP53FXVrx0YuNKMsm0gWX0K+ORrYSjQ
- nEPSMFwQccSQForB1IYu9hXC4kE6vmZfFCEKR3syzLkJQRCf54vSn+wZA8scd4tzhDzV
- wZBuPZNLoPGFavTpmNYMHR+j5KyQbg31Dm0QgV2w4wwNbAxYw4J5P9nBr5qQE306Ft9q
- Pp6wtaiqEqLKcUI0PpVQVMFYUkjNfCqtW2osV0OIBs85O8SXSAVyNGzHvmDq6NFnKhil
- VBTw==
+ bh=LwzgFFmYXx5EzS6oTaFWg3iGy/aaClN4MZPlgQhAOQg=;
+ b=EO23m/0KgRZmG4QM6VEQTumFyQKM2fOIXk9EqpTfRKTTsJxDaJz/I+8TZ+70zszbLb
+ m592PpoftK5xf5gXQGVRVu+ARw404EogPCv61prDu7IPNZiF2o6GYwolc0dWZjv00ZT6
+ dguRbdWdX8kwymxCswuKBYlcyEKnONWLBRw/PZGP9NrrHMuGq/RzQLkBqCT9g/WwDdhx
+ 8YAzTQ8f2heFtaSvkBanilN0dBOm/f0ZGK0RKu0yLPq9WybmX5Aw0LtbSUIFljvZd0WG
+ fvdjaMM1ED3tjucojOjp8mYhtiD/yNsGReIoRtNVUdIPdJMeeERXvGyGCWncr3sDxiA/
+ vxBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782694190; x=1783298990;
+ d=1e100.net; s=20251104; t=1782694255; x=1783299055;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=7+Xd7dZ5ugKdPtOkhsNwyL7YPpzq/5LhT91DUyIqTA4=;
- b=Y1AbQs0bSgekmUPzYMpwEkUZa8rhPgkFNKZIrgpeL0SlL+YGBsqP4DGwVtGdpXIPcs
- YhL2kOkqSYFHCo8UdxjniK6TR8033yRoPNEIIIbJc6ZXBPZeNnJ4tp6JQkOR+DYEmmCA
- AoP35PGouS6ICrk0Y8QpD8dGoynLTN7dc2oQ/p7sXEzy/ejE91m/Q2k11scdkZVTkNMN
- hphsN2fHQ3scHs6KQ9oYmQshwGzGm3miObEF3ggpiQKbDA7Acopt6wpsIcFO3isDmnVf
- 22lngdTIUph0dBU9ngTRuIadmVs0ikHgfb/f+aq95UGAqpsZ4gpD5LzwsTgzwjNrHhbZ
- W4Kw==
+ bh=LwzgFFmYXx5EzS6oTaFWg3iGy/aaClN4MZPlgQhAOQg=;
+ b=Oduq2fRGJeusd2nBiZu5mkH4ckD5Asr2/RVpk32WPcQl/ISy1Gs5fjTbw+cfTy8Q3w
+ biBNgLfG1F1BhvPN66DT0RKGnLD8FVYM+3GiKItLb6sp3YKg7nln8sJQ6gTDTU6i0Bi0
+ E2ptOctlgRBxqF7oJ/kr3lVjABhP510Wev7AJJIGPdBHtztMrDCRaDGLx1X3D/tUOOb1
+ kC64PAsZ5QFCRILHh2QSFBakNnY1U8T4vYLVZ7qg4b70e9mR3VaCvRmSio5LIpXLDpVt
+ 4WLUNrqwJw+dFX5gCn63TqCPY3CSp3YtX2x8Ob/hlZIcjX4cisHlSU5QZmkQJdUgjqhp
+ 2D0A==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqrIINEdnczHk2pOH+53Tqdg+dPAyVidEm1p1Bn+3DyPC7JCTTVUPMyYN3B4+ciwiU+Flgf3iGFbyhe@nongnu.org
-X-Gm-Message-State: AOJu0YwGbDnK7T7a5n8hqu0eyILNp9Xs1XJ18el+naHpZnThdFLTvyMY
- sEKQu1ibDMONSV91G/UOo8J7+xsH3a+ja4Op9nDAitvirRSBhpsJjiF6uMmpLbXCqB9WpI9W069
- rZ8YPoz6iPYp6aCGQ2fPSwo5SWXgwmzY=
-X-Gm-Gg: AfdE7cmqjgtJvhlaC70BuL4PzeqMM2R23gENh6zyTD92akYJCGVtfxTe7gJ6VhniqSc
- 08f7DLC8OsELbI3/bKSQlM5jQaVDSX7kdfzzZLXPhziYrvynysKAQyPBu07WplQIN+CldrgXwJh
- Agk8q/J1Sumg7AZHk4+fAn9xgxPQfihBhoT1ZSk56gbAC+LRhpTLmJ4PMMUCIDazr+/aoVTAsf0
- 9+M4XF0ZvahmawUqmC/DxFsOwQilFc5FQJZ6hK+XD0O/4YFf5Ge8SIJ2yK2ipq0LVkwQZq0myl9
- Ah1BPmsTCCRYRtOLWn+qCWLkIsVDAvPwGVseOA==
-X-Received: by 2002:a05:6402:401d:b0:698:3b7c:7e55 with SMTP id
- 4fb4d7f45d1cf-6983b7c7fabmr3720531a12.33.1782694190156; Sun, 28 Jun 2026
- 17:49:50 -0700 (PDT)
+ AHgh+RpC+FcrOTSTH+lID9Xr2jPfvzIaxUqwCNlBIVUIAK9J7+4B0NOshoX4LVz+HnNaPVBIgaxhtc/JHXkp@nongnu.org
+X-Gm-Message-State: AOJu0YyXNF/OmL0jJPJGqIRRA6YjYZf7aHCi5HMkdorRri1u4L1+P9T5
+ a0APLimPnvacdammoNolo3APsJbTVdfntchnzEMWkuQHIV0FWgn0y7NM4p4tEY/04EbGn7w/OxL
+ NXUI14g6nbZ3c2CAUSykuupUAd+z2NH8=
+X-Gm-Gg: AfdE7ckPcnnL2WQ47BibRXeaZUue/rhHadXwgK37C0hDO/KFmZ6ZR5xkIIV0Ze3upuC
+ YrUAGeDM9c6G5ubl2UbExTtz1bsL2hEvGfVLZsFvXIeGYeh0Of56BkRyUiFWwSXhXUi6mcfOmdv
+ jAO678yKK6qCy3Gq6A5k0XoEH/oF/1rMntAMkC6xhHlvpZVKYPIamNCSvZeA0G5VCkZmg8Q/Xcj
+ htbNFwTW30tfoi0biIlmVHJSSWrUYpKqNmQUsshbLUvA8ClBX9H3asOHd+j/GBcNQf2L6mq9wb+
+ BSxptRuBBnHkJdOheueAojbr0nA=
+X-Received: by 2002:a05:6402:5113:b0:683:e394:cc0c with SMTP id
+ 4fb4d7f45d1cf-69810a45891mr5278450a12.4.1782694255358; Sun, 28 Jun 2026
+ 17:50:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260626220529.3800372-1-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260626220529.3800372-1-daniel.barboza@oss.qualcomm.com>
+References: <20260625-marchid-v2-1-3821c351028b@gmail.com>
+In-Reply-To: <20260625-marchid-v2-1-3821c351028b@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 29 Jun 2026 10:49:23 +1000
-X-Gm-Features: AVVi8Ce5JbfS8IgjYkYBXYZRjk0AlO745IMGi3UQ0ob_K7GyPi1iDF4I-hGjSpg
-Message-ID: <CAKmqyKMf9Q3zVw_E5xLK7BbDywQofCW8gETW3+OVK9So5JVOzw@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv/riscv-iommu.c: fix MSI MRIF interrupt-pending
- offset
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
- andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
+Date: Mon, 29 Jun 2026 10:50:28 +1000
+X-Gm-Features: AVVi8Cfsp3EivFshtIbSQ8BCLnflCzLg2cCoR1E59koj_BUM6CGu6o4LxVHDf0A
+Message-ID: <CAKmqyKPu+F9xaNiXuTC4R0VnCNXZ=z9kPNCQnyYs-d=pksWUbA@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Report QEMU CPU archid as 42
+To: Charlie Jenkins <thecharlesjenkins@gmail.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu.zevorn@gmail.com>, Atish Patra <atish.patra@linux.dev>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x530.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::536;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x536.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -121,68 +124,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Jun 27, 2026 at 8:06=E2=80=AFAM Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
+On Fri, Jun 26, 2026 at 3:13=E2=80=AFPM Charlie Jenkins
+<thecharlesjenkins@gmail.com> wrote:
 >
-> We're doing a wrong shift when calculating the offset for the
-> interrupt-pending bits, off by one right shift order.
+> When a non-vendor CPU is used, report the archid as 42 which has been
+> allocated for QEMU in the riscv isa manual [1]. This can help software
+> check if it is running in QEMU.
 >
-> This went undercover for awhile because the calculation works for
-> interrupt entities 1 to 63.  The math goes wrong when using interrupt
-> entities 64 or greater.
+> [1] https://github.com/riscv/riscv-isa-manual/blob/main/marchid.md
 >
-> Instead of fixing the issue and running we're also adding some notes
-> on where this calc comes from.
->
-> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3561
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Signed-off-by: Charlie Jenkins <thecharlesjenkins@gmail.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/riscv-iommu.c | 21 ++++++++++++++++++++-
->  1 file changed, 20 insertions(+), 1 deletion(-)
+> This series was original proposed by Palmer Dabbelt [1] with a follow up
+> by Daniel Henrique Barboza. This patch implement's Daniel's suggestion.
 >
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 3ea9130860..792729cfd5 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -686,7 +686,26 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUS=
-tate *s,
+> When booting with a non-vendor CPU such as with the qemu arg "-cpu rv64"
+> marchid will now be reported as 42.
 >
->      /* MRIF pending bit address */
->      addr =3D get_field(pte[0], RISCV_IOMMU_MSI_PTE_MRIF_ADDR) << 9;
-> -    addr =3D addr | ((data & 0x7c0) >> 3);
-> +    /*
-> +     * AIA spec section "Format of a memory-resident interrupt file":
-> +     * address offset 0x000 contains interrupt-pending bits for
-> +     * identities 1-63, offfset 0x010 for identities 64-127, and
-> +     * so it goes up to 0x1F0 for identities 1984-2047.
-> +     *
-> +     * Hence each batch of identities advances offset by 16 (0x010)
-> +     * for every interrupt-pending bits.  This means that doing
-> +     * (data & 0x7c0) will filter out the first 6 bits, then
-> +     * a >> 2 will turn the result in the 0x10 steps we need.
-> +     *
-> +     * E.g:
-> +     *
-> +     * - (1-63 & 0x7c0) =3D 0, 0 >> 2 =3D 0, offset 0x000
-> +     * - (64-127 & 0x7c0) =3D 64, 64 >> 2 =3D 16, offset 0x010
-> +     * - (128-191 & 0x7c0) =3D 128, 128 >> 2 =3D 32, offset 0x020
-> +     *
-> +     * and so on.
-> +     */
-> +    addr =3D addr | ((data & 0x7c0) >> 2);
+> > qemu-system-riscv64 ... -cpu rv64
 >
->      trace_riscv_iommu_msi(s->parent_obj.id, PCI_BUS_NUM(ctx->devid),
->                            PCI_SLOT(ctx->devid), PCI_FUNC(ctx->devid),
+> processor       : 0
+> hart            : 0
+> isa             : rv64imafdch_zicbom_zicbop_zicboz_ziccrse_zicntr_zicsr_z=
+ifencei_zihintntl_zihintpause_zihpm_zaamo_zalrsc_zawrs_zfa_zca_zcd_zba_zbb_=
+zbc_zbs_sstc_svadu_svvptc
+> mmu             : sv57
+> mvendorid       : 0x0
+> marchid         : 0x2a
+> mimpid          : 0x0
+> hart isa        : rv64imafdch_zicbom_zicbop_zicboz_ziccrse_zicntr_zicsr_z=
+ifencei_zihintntl_zihintpause_zihpm_zaamo_zalrsc_zawrs_zfa_zca_zcd_zba_zbb_=
+zbc_zbs_sstc_svadu_svvptc
+>
+> When booting with a vendor CPU like veyron-v1, the proper marchid will
+> still appear.
+>
+> > qemu-system-riscv64 ... -cpu veyron-v1
+>
+> processor       : 0
+> hart            : 0
+> isa             : rv64imafdch_zicbom_zicboz_ziccrse_zicntr_zicsr_zifencei=
+_zihpm_zaamo_zalrsc_zca_zcd_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_=
+sstc_svinval_svnapot_svpbmt
+> mmu             : sv48
+> mvendorid       : 0x61f
+> marchid         : 0x8000000000010000
+> mimpid          : 0x111
+> hart isa        : rv64imafdch_zicbom_zicboz_ziccrse_zicntr_zicsr_zifencei=
+_zihpm_zaamo_zalrsc_zca_zcd_zba_zbb_zbc_zbs_smaia_smstateen_ssaia_sscofpmf_=
+sstc_svinval_svnapot_svpbmt
+>
+> [1] https://lore.kernel.org/all/20240131182430.20174-1-palmer@rivosinc.co=
+m/
+> ---
+> Changes in v2:
+> - Added comment linking the spec allocating 42 to marchid
+> - Cleaned up the id setting
+> - Link to v1: https://lore.kernel.org/qemu-devel/20260624-marchid-v1-1-a0=
+af7997071f@gmail.com
+> ---
+>  target/riscv/cpu.c | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index fa497e5e8a..94946d335f 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -47,6 +47,13 @@
+>  static const char riscv_single_letter_exts[] =3D "IEMAFDQCBPVH";
+>  const uint32_t misa_bits[] =3D {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
+>                                RVC, RVS, RVU, RVH, RVG, RVB, 0};
+> +#define RISCV_CPU_MVENDORID 0
+> +#define RISCV_CPU_MIMPID 0
+> +/*
+> + * marchid allocated for qemu:
+> + * https://github.com/riscv/riscv-isa-manual/blob/main/marchid.md
+> + */
+> +#define RISCV_CPU_MARCHID 42
+>
+>  /*
+>   * From vector_helper.c
+> @@ -1183,6 +1190,10 @@ static void riscv_cpu_init(Object *obj)
+>          mcc->def->profile->enabled =3D true;
+>      }
+>
+> +    cpu->cfg.mvendorid =3D RISCV_CPU_MVENDORID;
+> +    cpu->cfg.marchid =3D RISCV_CPU_MARCHID;
+> +    cpu->cfg.mimpid =3D RISCV_CPU_MIMPID;
+> +
+>      env->misa_ext_mask =3D env->misa_ext =3D mcc->def->misa_ext;
+>      riscv_cpu_cfg_merge(&cpu->cfg, &mcc->def->cfg);
+>
+>
+> ---
+> base-commit: b83371668192a705b878e909c5ae9c1233cbd5fb
+> change-id: 20260624-marchid-80d176b873d8
+>
+> Best regards,
 > --
-> 2.43.0
+> - Charlie
 >
 >
 
