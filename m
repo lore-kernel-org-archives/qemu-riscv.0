@@ -4,134 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B94D2C43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jun 2026 10:42:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E11F5C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 29 Jun 2026 11:34:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1we9RO-0004Eh-Sm; Mon, 29 Jun 2026 06:42:14 -0400
+	id 1weAFs-0008F8-Vr; Mon, 29 Jun 2026 07:34:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1we9RN-0004EH-A2
- for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 06:42:13 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1weAFr-0008ES-FA
+ for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 07:34:23 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1we9RL-0003n2-OI
- for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 06:42:13 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1weAFp-0000nv-8X
+ for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 07:34:23 -0400
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65TATBsK2647661
- for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 10:42:08 GMT
+ 65TAT3C92646904
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 11:34:19 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=zvM0Ja3Y1GzYh/xMuKQb7hl4fqjXmwMVadP
- uiO72iTM=; b=UzkbhM1KYyuizx4kqoEt2XJJJ2ByAQMu+Q2GCw3R/Uu5h/HGtXO
- q2qAvpLBpeNRIUmfPYwKQCpRe8fMWRR6CM/e1ZZzN3+Ooql6nK/tq3u4y51WWfEt
- n+esdUEKAC/zZzLLmRDkBlHiVIucH21xxg2DzBvZpjg52p7WgbcdqdmE2xV13+Nd
- rYz9TBFNhNEzzA9WpIKQECogUB2qeDKyuel063uRqF3o0poKwCktUOa0MIM9AWNR
- gonhTPpzOPRZmuKDsBIMRtksCsBgQ9HuUklj6rBMq34CY5Ju4SGgrAiTKmM3QJhc
- BUZM/EXuO1T4Xa73/1rOSQ2tPkZ/kB4lw5Q==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
- [74.125.82.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f3kyjgvkm-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ E7dEUYW5YIEKnb2lHcEuTk51u6NvRoisGq+CZn489Ec=; b=k2QUqgm76SDXnG6l
+ 6ZPjBPu/I9KCns4F0OZt/k64pZ0JirXFMxUm6vF2PzQ1qfShcwRfbkWyPQIMy59A
+ 1Y6e7iERBs+BFqBywMjhMhtHmAnzP56sFAaV2XRcsl74tyox32o270dEJv+oBurQ
+ n6xlxTz0EewJ+uoIf5KTt2WkFPBm9AIVtSAFQlMtKQQVZrnAxos2O1svWeWeFPdY
+ eghnLbAaitxJnmRim47hcYIt1uS7ZtFNmoWTNAV2GNHiTA/TwAC2DMDaZnMor2SG
+ zy6RbuZP9w4WP5z+J4i+i3NR5JNu6IWJtZnp87pLK66FxgQ4XBf8lELqVMz1gJBK
+ xzVsow==
+Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f3m4ts1ky-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 10:42:08 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id
- 5a478bee46e88-30c0a27ad86so7552270eec.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 03:42:08 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 11:34:19 +0000 (GMT)
+Received: by mail-dl1-f72.google.com with SMTP id
+ a92af1059eb24-139ca26403fso1417217c88.1
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 04:34:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782729728; x=1783334528; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=zvM0Ja3Y1GzYh/xMuKQb7hl4fqjXmwMVadPuiO72iTM=;
- b=jgyzXsZSDN60jJYTCmiE97qGIX4qmETf1sipkhUwUfA9GjMhlBQMBUbU4zRVj0Fnde
- uczKG35uT4UIY4YoYwEpeAcWWTZd1P0CGXLGFbkdIVLTecTaBTQaGMWtgkiVpRaTlMvy
- 0Uf7ae0U4CMEkPIXPmT6f4pDW+79FbsHgM/PpI2faWSJAHmBZ1IHXysApuyGmtLgPliY
- Y+1greT28yVIm5I7hmhCsIjODmavetqq9RXebvanQ/pbnaxx5lMG/MkPLarYQLW/Zj5W
- METQjtwMADgyMm+ypay9tcjUs5j2B7aG5AQuCj4/4uAmLM8KP/ljwVW2ymVk9ixsuzUb
- 7Oqw==
+ d=oss.qualcomm.com; s=google; t=1782732858; x=1783337658; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=E7dEUYW5YIEKnb2lHcEuTk51u6NvRoisGq+CZn489Ec=;
+ b=H1erz9Tg3VTTeKgHXSF81A8O6h67+HdzkRVRZxOAnpk9jOK24etshxdnPGxer0cBLd
+ rZ6EXS99GEGD5QKGh3zLksI77uO7es0br9gs7KRbZE3+WIaon/gaH8m8N/SoEmup4Pp0
+ g+pf7C53i97wGRwfIrFrSWSeC2mKqzWIrQivmoV4T3IpbyF2A61m5wXKFLFLO3UpTMrK
+ Q6npOJw5LnYR6Bg1M1G6h++d9JWM90TRE2EqhCMv1Xym8MxKIIjG2veTCMBHZ4t59oLs
+ F75url2jQqwfRls8f/Z7WABWsig3YIbmt/jPoJqNumr1AfJWzcFpXMKESrlZYV/ZET6u
+ 5DbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782729728; x=1783334528;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zvM0Ja3Y1GzYh/xMuKQb7hl4fqjXmwMVadPuiO72iTM=;
- b=Cw+zb0panfuCCaqN0ulqydlte4yipVJ8IA8GrrqRHHUUaMXNwZcs85rcgPhBm63siQ
- yL4DS4Wzx8LvZ0D0bsNliR77OuuKjMAB/j8qhXbHCwkCgxASAivE+6Byct4q8AKVofvl
- +GvHf962DRzofVm/E2fNuDezD05L9X+93dshd/sIBW3+d8yyEjE6qWJPpRQAKh0YPkX+
- UdJd1zQ5Vh6h1t77TE4f4lE2QaGrmQDz3rWEhjNeCQF550FAjuRjItbqzuWb1gOMSVPw
- IM5L/ZeGvvSorc5y9riyY14BxGrMsUyVrUwdVpTsOLnK8Er6nELQ1DBA6gPLzy574qqu
- yE8A==
-X-Gm-Message-State: AOJu0YxwZhv1fHMyQQ/vkOR0YNc3BPFFdGmggEnwnp+YpnU03XolggVZ
- KhjI6imsL523PMl5DOrRJ+nhNjNRXu3wl5S6Gj0WoEn/zZNr4f2qdJ0zBT7nB+/4/5u1Ucp7Qb1
- 2oH0adCkdGqM5VZeh7dYjJbxWJQE5Nc63lJudYCUBkrISB4Nb3TWXx/ggOA==
-X-Gm-Gg: AfdE7ckupTxLwka9JRnD0xtU+vIvtI0Og+KZws+g93lgnuKy++YxnjdV1DxL2PPpqyq
- J5ySQQEqCuY+DZ6NNCedbcAMDNL4qIE9Ox1Kl2IuJYSx8UAdmlnwnZPv48Jb9QoDohhHtB6imzF
- mAB5E0E1R6nk+QDxJ92O2vzlS3PQISA7/wEXJP3zXNJbjdwkT8v21kcRdQrOb7QVln+XN9Cd+Bx
- qwUAhFNZcrgo6OoPXUJvobBOVgbjtwNbsIdJxQTQMihZdrJ/IzE78nW7q8aFprkLvUK/V5LlJYb
- g0E4IUNyvWGDb4+BqQboWNbogjWDzmJ99cbija/e+gS9hYL5wuK4eVG2V+MsRJFmQKsed4gMXDk
- BRj5MP/1UtY9tjUnA/2QH1SxAZk6h3b7GAkJHFm/UoKGj/g==
-X-Received: by 2002:a05:7300:cb87:b0:30b:f888:7821 with SMTP id
- 5a478bee46e88-30c850a2bd2mr16917718eec.28.1782729727558; 
- Mon, 29 Jun 2026 03:42:07 -0700 (PDT)
-X-Received: by 2002:a05:7300:cb87:b0:30b:f888:7821 with SMTP id
- 5a478bee46e88-30c850a2bd2mr16917689eec.28.1782729727029; 
- Mon, 29 Jun 2026 03:42:07 -0700 (PDT)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.79.21.40])
+ d=1e100.net; s=20251104; t=1782732858; x=1783337658;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=E7dEUYW5YIEKnb2lHcEuTk51u6NvRoisGq+CZn489Ec=;
+ b=UMF7eIuS5WsXy/EwX40N1FljIp0g/6dfJn45gGi5f4gGns3AcJT5hl67S9y2VAynsI
+ d6e4md6Ol9OCdEL9qjXPBZZQod43hATQHB2nyppICQyAV8D3OWh/e3ghC82ZiH/Zw/5P
+ w3EpZYFvwZxSBg1vCIDn29WjxkQsy542gOX4sYQEIcAPVDvk+2AsgtTAmetAg9GpPwJb
+ TH5GPG5ugAShj+Q585AM8ffrKInMeNUokGFdzr2QNldgXcACETeptP5z3rVUfxA7lgo3
+ 1GBgviPR83iSICa3nx/sU8oNFRN2HuUEFjGfaFO2WP7xrlawp0/WC/PvIWJf1OW7SYmO
+ pvMA==
+X-Gm-Message-State: AOJu0Yye0NPWkesfMSfP6x1qQTfmsPdB6JVrYhwOpitaWL6Na0dN6NAa
+ nfPa9/lRIRpZc9NtumIxR+M8EJWEAtxiIOGJh/2zo2rW7keCR6bLjrnSs0eJW/n85hHxkm5CmqS
+ q+hSHLD2abtdwnEOpmFOJgt49Bclnf1p7zVTV6MZ+SUQY6JG/WOXSk8C3FQ==
+X-Gm-Gg: AfdE7ckx0k6mU7G2wFweZiR8+6YFMYcyudUXVHLf8eomkDYnjnNY++noJ05OxhtjLQb
+ 75QGNIgDOXTvJHMzsJqMIlttdE3Sv542fMboC29eTQShdV1FLAgUHy/10w4+1g4I5kusTZm0sPb
+ Mdf0Itpi/5eJ1yu/Wi03g0N8DP78V+jcuRVcyUVVtkhRLuhHlzUW0ePg1yxPnxJ5gPWRYA85+94
+ jnGb9QO4P2EqZRTyjAVZJvsCNP3NImBDGLmnH6sNnsHybuPmK3ewSDVmTA2zk+QD/4NqhR71XXt
+ sBsHEDJXwD7f1IqjWph14hAKXdMjXpPz9x5dXWmiSOLjYlusM2Wf1w6vmu7s45rLRoDOQOR5gKC
+ weUgopl5SLpqVqXOj/7fHYJvQg5da6r5fzPkdRPRTiAJo
+X-Received: by 2002:a05:7022:ff49:b0:132:ac76:9772 with SMTP id
+ a92af1059eb24-13b2271508cmr224863c88.34.1782732858273; 
+ Mon, 29 Jun 2026 04:34:18 -0700 (PDT)
+X-Received: by 2002:a05:7022:ff49:b0:132:ac76:9772 with SMTP id
+ a92af1059eb24-13b2271508cmr224836c88.34.1782732857698; 
+ Mon, 29 Jun 2026 04:34:17 -0700 (PDT)
+Received: from [192.168.68.106] ([189.79.21.40])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30c7c4ca240sm47727025eec.4.2026.06.29.03.42.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 03:42:06 -0700 (PDT)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+ a92af1059eb24-139d8f6d2e4sm44700495c88.7.2026.06.29.04.34.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Jun 2026 04:34:17 -0700 (PDT)
+Message-ID: <b0184774-3449-45b6-831b-de745a4c4d41@oss.qualcomm.com>
+Date: Mon, 29 Jun 2026 08:34:13 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] hw/riscv/riscv-iommu: fault when !PTE_U and no priv access
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- andrew.jones@oss.qualcomm.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH] hw/riscv/riscv-iommu: fault when !PTE_U and no priv access
-Date: Mon, 29 Jun 2026 07:42:00 -0300
-Message-ID: <20260629104201.349850-1-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: xvwkUtSARu99N900_6MyQYTZiTRen9vR
-X-Proofpoint-ORIG-GUID: xvwkUtSARu99N900_6MyQYTZiTRen9vR
-X-Authority-Analysis: v=2.4 cv=Ftk1OWrq c=1 sm=1 tr=0 ts=6a424c00 cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
- a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=z1aqH4CQ4Ijy_SfQUPkA:9 a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI5MDA4NiBTYWx0ZWRfX30kFZl607ZQh
- 08t2UeMFjaaSB6Kzqm4qsLndI4rEno5zSRrCV+KA+pjMUFQFZUk+/+tGSuVXh3k4saVVGbgbh7x
- hB7Iph2Wj+pBg623R3LQNbnsIn5QK4I=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI5MDA4NiBTYWx0ZWRfX+hqWJ59lUcaG
- rr4k6LbSby4EsPKwemNKB5pcfbV9aa98UPmWQWxW3/y8FlByy1wRNiECn5qaEBXoyKKcY4ertXI
- 88lT+n0nFOjEPJ41Bfac5a9Ae8TY43sd3fH+DcjgLCow6+5uAw+AWgXw6QD93ytilCwOa+IbP1E
- l5CNwVvsVghzcK4R7JNh/uhIPZFCeYqucoEl21S5jcbELIxUR7og7mAmHpon91Z1wWfea0OKNy8
- VsiegDvPZGQy3GMfRXd4NMHg0vwTwr43bxbpugbm7e46Bz7JrLpRHu9R436s1pU6H+SoFZ/kubj
- R9k/rzznX1XRWeMQZN5+gBArLqE2h095OUDQzRPCZDcmA/Mkkv9B6vfNAy2RgMSpGGKs6+vTnyy
- EUhUoYaL3PU0HG6XT2K/F0nK60m36gLRPaa6cxyaNDwYnYtahqaY3H3vbMYEQjLew5ZTtclrfVV
- Gp5zB5z1v5kq7dGNhng==
+ andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260629104201.349850-1-daniel.barboza@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260629104201.349850-1-daniel.barboza@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjI5MDA5NSBTYWx0ZWRfXwf2PtyudtxQn
+ fUY5uV9pWQ185jyecE0RpuSboOSazWKHEbXCj0uwQ0t14Rk7cOdefJteR2NVaZROPAoS0yeZWEX
+ eQs9jIFHJxIBvWy/344KClvwA8NheALNaXMOyWlFE35T//LTQavSNTUZ4VtQ7jNlC4eHDlbb+t3
+ B49bMGjLyYV/uewgBRKo/wXL1Sr/8Uiz1gMa7PbdWXxBd28kOpDyZ+2n2MvbvcrZKnH7eauAXMK
+ 9nUYJr9AhW+upOon66vBm++7NYpZF4Jx8XMk35TEtnTtZ0/F1Cm4PdAoqFLcUtxUYioh1ZAcwFP
+ TMRun0ODRqg4ljUOowR/yU6K07tLK6z+Tup1leNi3MEmlngRIqGVpQKlPuQY9q4qUx6b3HRxOrq
+ k3fMelugTK8pRye10A527GxRcaxKgbhm3M0BM+1rNQjVqrpDcbrp+aS1LfkUcbs69lMqJZsE6l8
+ PvBiYhVVXG1KYF/6jxw==
+X-Authority-Analysis: v=2.4 cv=R58z39RX c=1 sm=1 tr=0 ts=6a42583b cx=c_pps
+ a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=p0WdMEafAAAA:8 a=EUspDBNiAAAA:8 a=FUlGGrPokrg9S1BtQ9wA:9 a=QEXdDO2ut3YA:10
+ a=vBUdepa8ALXHeOFLBtFW:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjI5MDA5NSBTYWx0ZWRfX4OQZcigVA9qp
+ P8Cqk9mb8G9vqbEdyt6wGqR64ErhzHU+VGgJu1qPf10leSy27sINOcwZ+l5lO1IMbIesYeCQTCL
+ 7/BMnT6s7UqTE7lUGF7qybNnQdu+kGQ=
+X-Proofpoint-ORIG-GUID: ZTkOJUGQyGBUQg5pqknR11XDXjx0qjT5
+X-Proofpoint-GUID: ZTkOJUGQyGBUQg5pqknR11XDXjx0qjT5
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-29_03,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0 phishscore=0
- priorityscore=1501 malwarescore=0 spamscore=0 clxscore=1015 bulkscore=0
+ impostorscore=0 spamscore=0 suspectscore=0 phishscore=0 clxscore=1015
+ adultscore=0 malwarescore=0 priorityscore=1501 bulkscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606290086
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606290095
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -147,47 +152,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All IOMMU accesses are assumed to be user mode unless told otherwise,
-i.e. we have a process_id.  In case we have a non-user mode leaf PTE
-(PTE_U isn't set) and we are running in user mode, we need to throw a
-fault.
+Hello,
 
-Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3553
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- hw/riscv/riscv-iommu.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Please disregard this patch.
 
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index c2c470b5df..2bea770fbc 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -297,6 +297,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-         G_STAGE = 1,
-     } pass;
-     MemTxResult ret;
-+    bool pv = !!ctx->process_id;
- 
-     satp = get_field(ctx->satp, RISCV_IOMMU_ATP_MODE_FIELD);
-     gatp = get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
-@@ -468,6 +469,15 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
- 
-         if (!(pte & PTE_V)) {
-             break;                /* Invalid PTE */
-+        } else if (!(pte & PTE_U) && !pv) {
-+            /*
-+             * All accesses are assumed to be User mode unless
-+             * process_id is valid (pv).  In case we have a
-+             * non-user mode PTE and !pv we need to fault.
-+             */
-+            return (iotlb->perm & IOMMU_WO)
-+                    ? RISCV_IOMMU_FQ_CAUSE_WR_FAULT
-+                      : RISCV_IOMMU_FQ_CAUSE_RD_FAULT;
-         } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
-             base = PPN_PHYS(ppn); /* Inner PTE, continue walking */
-         } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
--- 
-2.43.0
+First because we don't need to explicitly call the fault code like I'm doing
+here - we can just add a 'break' and then we'll have the fault code doing the
+work for us outside of the loop:
+
+     } while (1);
+
+     return (iotlb->perm & IOMMU_WO) ?
+                 (pass ? RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS :
+                         RISCV_IOMMU_FQ_CAUSE_WR_FAULT_S) :
+                 (pass ? RISCV_IOMMU_FQ_CAUSE_RD_FAULT_VS :
+                         RISCV_IOMMU_FQ_CAUSE_RD_FAULT_S);
+
+
+Second, I just found another bug in the same code area and the patches ended up
+conflicting with one another.  I'll send both together in a short series.
+
+
+Thanks,
+Daniel
+
+
+On 6/29/2026 7:42 AM, Daniel Henrique Barboza wrote:
+> All IOMMU accesses are assumed to be user mode unless told otherwise,
+> i.e. we have a process_id.  In case we have a non-user mode leaf PTE
+> (PTE_U isn't set) and we are running in user mode, we need to throw a
+> fault.
+> 
+> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3553
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> ---
+>   hw/riscv/riscv-iommu.c | 10 ++++++++++
+>   1 file changed, 10 insertions(+)
+> 
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index c2c470b5df..2bea770fbc 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -297,6 +297,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>           G_STAGE = 1,
+>       } pass;
+>       MemTxResult ret;
+> +    bool pv = !!ctx->process_id;
+>   
+>       satp = get_field(ctx->satp, RISCV_IOMMU_ATP_MODE_FIELD);
+>       gatp = get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
+> @@ -468,6 +469,15 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>   
+>           if (!(pte & PTE_V)) {
+>               break;                /* Invalid PTE */
+> +        } else if (!(pte & PTE_U) && !pv) {
+> +            /*
+> +             * All accesses are assumed to be User mode unless
+> +             * process_id is valid (pv).  In case we have a
+> +             * non-user mode PTE and !pv we need to fault.
+> +             */
+> +            return (iotlb->perm & IOMMU_WO)
+> +                    ? RISCV_IOMMU_FQ_CAUSE_WR_FAULT
+> +                      : RISCV_IOMMU_FQ_CAUSE_RD_FAULT;
+>           } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+>               base = PPN_PHYS(ppn); /* Inner PTE, continue walking */
+>           } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
 
 
