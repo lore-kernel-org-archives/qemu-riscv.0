@@ -4,109 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA20AC43458
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 20:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AB74C43602
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 20:01:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1weee6-0000km-Kq; Tue, 30 Jun 2026 16:01:26 -0400
+	id 1weee6-0000kl-Ai; Tue, 30 Jun 2026 16:01:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <shivangu@linux.ibm.com>)
- id 1wecmL-0005Hy-Oy; Tue, 30 Jun 2026 14:01:52 -0400
+ id 1wec5U-0001d7-IQ; Tue, 30 Jun 2026 13:17:32 -0400
 Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <shivangu@linux.ibm.com>)
- id 1wecmK-0002Dp-CR; Tue, 30 Jun 2026 14:01:49 -0400
-Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
+ id 1wec5Q-0004W4-PE; Tue, 30 Jun 2026 13:17:31 -0400
+Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65UEJ1I12172253; Tue, 30 Jun 2026 18:01:36 GMT
+ 65UEIcwD2171251; Tue, 30 Jun 2026 17:17:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=0YnN8u
- 1p3qoq9Y+gxa+D7gDVaDKGHMCtCkBlAjRc4ls=; b=o7xqQaeN5GGRXFrVxMesLJ
- jcxn7quMnMkOUzD8bStkiUjLMSk3OCzJv3P8D1IDPu0Ph46EsJbXqbDzYhs9I7i3
- cjoLFocmyTlUqXuHq0iuOPqWG4uGx4B/p0ywgO72kTuCK+Ysq7baaS0oT39s4M87
- +VRiBNcxJpvTeyLPFdpN54iVsYJ0x6JKxvc8YzTrdZnUWBhCL2NhecuxjJq22qAQ
- 0wH6G+v7yudvGbCLKHwfSxNp2kswEjbcHfsejlxLNNdT2glnIKJUDm9iQIUT5lwn
- weCAfR11x6pqvXjooUPEOPB4efttlzf1YKuqnUDi5JQYmM1dbPuHvc/OZS+hBw+A
- ==
-Received: from ppma23.wdc07v.mail.ibm.com
- (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4f26qa03y6-1
+ :content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=pp1; bh=hsQLRkoDUImkQI7KVgcwWB+TMLnOhc4fN8moV2JGI
+ 4k=; b=GgAV0jLhi2LF3Lio5DRV/IzShgH0LQnQ+9Ty7MR7QxhXB/BpQfoXrW0vV
+ XHRWQY19KVTOwXrKCgrkZz8wJKmu5YDcolL+Io2XfDiEKXWEAlZ1CozVVN0fcEGM
+ HLJk73ZQuMfigyEJVLOrSR/wMTqaRV0079hdqkowsZlIkC+IgNEExOcC4oVFEukG
+ cGuSre9+yqQC1oQTa9FR5/kpASHvt0bF5U2n7VKk5Ggzta0Jodh+aBTiZIbqlR1R
+ qm46gdMSAem2AudufOdKidLh8Pegxv71a2fx+IiGgYpxDz0UW4T0iB3NbqK98kmJ
+ 3PvN/zU9NmfbVy/lJi9hj8Gn3oFiQ==
+Received: from ppma13.dal12v.mail.ibm.com
+ (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4f26reytvw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 30 Jun 2026 18:01:36 +0000 (GMT)
-Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma23.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 65UHnmpV013093;
- Tue, 30 Jun 2026 18:01:35 GMT
-Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
- by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4f2tbhbh0r-1
+ Tue, 30 Jun 2026 17:17:16 +0000 (GMT)
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma13.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 65UH4a87014984;
+ Tue, 30 Jun 2026 17:17:16 GMT
+Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
+ by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4f2u2gb7q8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 30 Jun 2026 18:01:35 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com
- [10.20.54.104])
- by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 65UI1VZl23724532
+ Tue, 30 Jun 2026 17:17:15 +0000 (GMT)
+Received: from smtpav04.fra02v.mail.ibm.com (smtpav04.fra02v.mail.ibm.com
+ [10.20.54.103])
+ by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 65UHHCf249545490
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 30 Jun 2026 18:01:31 GMT
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 333662004B;
- Tue, 30 Jun 2026 18:01:31 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 9373320040;
- Tue, 30 Jun 2026 18:01:26 +0000 (GMT)
-Received: from shivang.upadyay (unknown [9.39.22.48])
- by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTP;
- Tue, 30 Jun 2026 18:01:26 +0000 (GMT)
-Message-ID: <c20ec34b5d5546fa174a6a54309b01cd3c283062.camel@linux.ibm.com>
-Subject: Re: [RFC PATCH 1/2] accel/tcg: use GTree for faster breakpoint lookups
+ Tue, 30 Jun 2026 17:17:12 GMT
+Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 008AF20043;
+ Tue, 30 Jun 2026 17:17:12 +0000 (GMT)
+Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 252CA20040;
+ Tue, 30 Jun 2026 17:17:06 +0000 (GMT)
+Received: from shivang.com (unknown [9.39.22.216])
+ by smtpav04.fra02v.mail.ibm.com (Postfix) with ESMTP;
+ Tue, 30 Jun 2026 17:17:05 +0000 (GMT)
 From: Shivang Upadhyay <shivangu@linux.ibm.com>
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- pbarbuda@microsoft.com, mohamed@unpredictable.fr
-Cc: pbonzini@redhat.com, philmd@mailo.com, zhao1.liu@intel.com,
- laurent@vivier.eu, deller@gmx.de, pierrick.bouvier@oss.qualcomm.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+To: qemu-devel@nongnu.org, pbarbuda@microsoft.com, mohamed@unpredictable.fr
+Cc: richard.henderson@linaro.org, pbonzini@redhat.com, philmd@mailo.com,
+ zhao1.liu@intel.com, laurent@vivier.eu, deller@gmx.de,
+ pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  chao.liu.zevorn@gmail.com, qemu-riscv@nongnu.org, rathc@linux.ibm.com,
- harshpb@linux.ibm.com, adityag@linux.ibm.com
-Date: Tue, 30 Jun 2026 23:31:25 +0530
-In-Reply-To: <187d9a11-b1d0-44fa-bf91-43b723063a44@linaro.org>
-References: <20260630171555.114844-1-shivangu@linux.ibm.com>
- <20260630171555.114844-2-shivangu@linux.ibm.com>
- <187d9a11-b1d0-44fa-bf91-43b723063a44@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
+ harshpb@linux.ibm.com, adityag@linux.ibm.com,
+ Shivang Upadhyay <shivangu@linux.ibm.com>
+Subject: [RFC PATCH 0/2] change cpu->breakpoints to a GTree
+Date: Tue, 30 Jun 2026 22:45:53 +0530
+Message-ID: <20260630171555.114844-1-shivangu@linux.ibm.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
 X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjMwMDE3MCBTYWx0ZWRfX8SMhxQ/nXgOq
- qAn7KqYHo3hRIX34Rank1Q3ZuU5aInnEItfLkVQLj+xZC6fhtTu+4JdW4mWuYD1H/VJD5MVJbM1
- YvSmyqyBqUIb/JPuqoPHUC8SrBDLQ7Mn3hllDoNI2sY//d+U9uS1vxWm24xR3kPUcWL9rYVVLAl
- 8j2RxcFneDvt20rF0+ATfPeAR74ySY49GlkQddt9fLHXXGHXLMGlcpdwlKL1MKESgjALavPblQs
- FmTD/mKWfYxVIG4pDOwFFSv4illcnioqZLcD77mR8E1n82jegMIMfUQJ1ooEOHIzZ94JxV14ON8
- oJdg8H9yu4yeU0uiWxjTSJDw7Bm0/4gKGz+3Exo1u5vyBjk1jtHXnjQWN6qnr7cjzY1eqdsc9GS
- AFVP95kAA5pBWDNNnyS+ikrebMxlDf9kLa1/Z7eMtGSK/DDPKLe4TXNQesFZQuZ8iYYBTjsjKw8
- TX97iSg6mLbpSGkxBCg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjMwMDE3MCBTYWx0ZWRfX88fRh/DXkJxO
- 67s6kJ0/pwiW3wRq9Lp1iseJUQ9PJf8suMGcP6/2J4gb3tBfjCAhPUxzbskvaoNVBJUvkgZLPAe
- EDckfxaKI9LXaVwt5yaozh4pPJCN93Y=
-X-Proofpoint-GUID: xiqbCyAA9QqI3PBfCdflhy7b-l7iNEu5
-X-Proofpoint-ORIG-GUID: LM52eAl8aLWzzompMIx65iliBUxCSw4F
-X-Authority-Analysis: v=2.4 cv=WZ88rUhX c=1 sm=1 tr=0 ts=6a440480 cx=c_pps
- a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=Y2IxJ9c9Rs8Kov3niI8_:22 a=SAecnqFXDQIbCjAi4w0A:9
- a=QEXdDO2ut3YA:10
+X-Authority-Analysis: v=2.4 cv=a4kAM0SF c=1 sm=1 tr=0 ts=6a43fa1d cx=c_pps
+ a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
+ a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22
+ a=V8glGbnc2Ofi9Qvn3v5h:22 a=t_0_BxdfAAAA:20 a=4QNSBkfG2Dk2eB4mYasA:9
+ a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-ORIG-GUID: xfktXwgMulAPe7A8l15lOCItX_4lAbs3
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjMwMDE2MCBTYWx0ZWRfXxx3C4cgtWA/o
+ qHTBAhuiM/qMXgellhjgwFBeujPLZOG0IsnDE+8HFNo3z+tzHoP3bCqruDbruUvTifgPIJRJY3f
+ GS1txaLpcc7izedJUdePXi7zroz/JnNhoN18QA46WGGpgcgFShwssvLnGPymwdS42hzMg15RJ5q
+ dMZ1aXI9cGI4NmE0PWHWF4pZ31/+1hsohO5QFgh3O4a2I62GWFBbRq30R6ZabhiN77zRMyC0ZDS
+ pEYg67lHA8Xq8DOCZGXPNcPuVXrTjDU8hDhBNCBNoBY2okvzIHyu2z/Gz0pCiCxyn8d3RunL1pK
+ nFRpyR9tnpJo6OtZ3v8yHRO7dBN/N+FTcsHqewPt4i1QNiIt/RLpOvoS9looN9jiHqsHOfMnynO
+ 8SgAtHLJjvKqHR4QneGZtoOdAebzOwuIh62bZ9yBAPsANzoBghEwTNbx3Y41i0P1j1aj9S6n+wK
+ dF05NZhkoW3ZdvnY/eQ==
+X-Proofpoint-GUID: 0krZYqliyAo8JlLC53xZ6vcENsyTTH76
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjMwMDE2MCBTYWx0ZWRfXwXxhlFUuyYCV
+ pNuoV1acmdwYNumpA7IfXpKm+OysjK4TEahfX/Va8bQtJAEVAuCoAOk3VL5Z9KhN3EfE+keS2GD
+ 1CaStdQddTxZrWvJQRMe/u6J8Zcx0HQ=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-30_04,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0 phishscore=0 clxscore=1015 bulkscore=0
- impostorscore=0 priorityscore=1501 lowpriorityscore=0 suspectscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2606300170
+ clxscore=1011 bulkscore=0 suspectscore=0 lowpriorityscore=0 impostorscore=0
+ spamscore=0 priorityscore=1501 adultscore=0 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606300160
 Received-SPF: pass client-ip=148.163.158.5;
  envelope-from=shivangu@linux.ibm.com; helo=mx0b-001b2d01.pphosted.com
 X-Spam_score_int: -26
@@ -132,18 +126,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 2026-06-30 at 10:31 -0700, Richard Henderson wrote:
->=20
-> I think it would be better to use IntervalTree, so that we don't have
-> to keep that second=20
-> tree of pages.=C2=A0 Obviously, IntervalTree can query an interval, which
-> takes care of=20
-> querying for entries within a page.
->=20
-I will read about InteralTrees.
-Thanks for the suggestion.
->=20
-> r~
+Because of compiler inlining, a single source-level
+breakpoint may correspond to many guest physical addresses.
+For example, on ppc64:
 
-~Shivang
+    (gdb)
+        Breakpoint 1  at 0xc000000000019964: arch_set_bit (1846 locations)
+        Breakpoint 10 at 0xc00000000006fc80: eeh_readl     (1705 locations)
+
+qemu currently stores breakpoints in a QLIST. While
+insertion is O(1), every translated instruction must
+linearly scan the list to determine whether the current PC
+matches a breakpoint. As the number of breakpoints grows,
+this check becomes a significant execution bottleneck.
+
+This is particularly noticeable when debugging kernels built
+with heavy compiler inlining, where a relatively small
+number of logical breakpoints expand into thousands of
+breakpoint locations. On a ppc64 guest running under TCG on
+x86, firmware boot time increases from about 1 second to
+over 50 seconds with roughly 1800 breakpoint locations.
+
+Replace the QLIST with a GTree so breakpoint lookup becomes
+O(log n) instead of O(n), while preserving efficient
+insertion and removal.
+
+Measured on the same workload (ppc64 skiboot bringup):
+
+| Configuration             | Firmware boot time |
+| ------------------------- | -----------------: |
+| No breakpoints            |             ~1.0 s |
+| ~1846 breakpoints (QLIST) |              ~52 s |
+| ~1846 breakpoints (GTree) |             ~1.4 s |
+
+This removes the linear breakpoint lookup overhead and
+restores near-baseline TCG execution performance even with
+thousands of breakpoint locations.
+
+At present, this series has been tested only with TCG. I was
+unable to test other accelerators, such as WHPX, because I
+do not have access to a Windows environment. I would
+appreciate feedback from the WHPX maintainers, particularly
+regarding any accelerator-specific changes required for the
+migration of cpu->breakpoints from QLIST to GTree. I also
+noticed an existing code comment referencing a future
+migration of the breakpoint data structure from QLIST to a
+tree [1].
+
+[1] https://github.com/qemu/qemu/blob/master/target/i386/whpx/whpx-all.c#L1733
+
+Shivang Upadhyay (2):
+  accel/tcg: use GTree for faster breakpoint lookups
+  riscv/debug: migrate debug_check_breakpoint to use GTree breakpoints
+
+ accel/tcg/cpu-exec.c      |  26 +++++----
+ cpu-common.c              | 108 +++++++++++++++++++++++++++++++-------
+ hw/core/cpu-common.c      |   1 -
+ include/exec/breakpoint.h |   1 -
+ include/hw/core/cpu.h     |  14 ++---
+ linux-user/main.c         |  13 +++--
+ target/riscv/debug.c      |  71 ++++++++++++++-----------
+ 7 files changed, 159 insertions(+), 75 deletions(-)
+
+-- 
+2.54.0
+
 
