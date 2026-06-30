@@ -4,100 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB46FC43327
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 02:52:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB60C43458
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 07:09:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1weOYj-0004Ml-7H; Mon, 29 Jun 2026 22:50:49 -0400
+	id 1weSam-0000Yg-7Y; Tue, 30 Jun 2026 03:09:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1weOYh-0004KG-QU
- for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:50:47 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1weOYe-0002Wd-RN
- for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:50:47 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-37dedd62b90so95654a91.1
- for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 19:50:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782787843; x=1783392643; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0ulS4xGD+HdAOcdls1yd5oo2G+xv75Rb/XAwPAIO9Fo=;
- b=RgrsI1tt7R3bceVCD9JbtIbJi9kfD408P7HWXVUUK3yDRrnRiS9K+dpCWvihHipGMP
- uTVcKSNv9naLTNfnN8mm5Yy7cQPsarOqElotNx/LqBKiABhTLyp83XZCwsFiT9frEbRj
- VJVP2qxzXcoKh9l/p6+lx767G4PQXTOccCBICNDYCIeozDyWaxn89xYPcpw9m04ahmJZ
- /YBMD9eA5ll+24c3ozQ3JdbOGf2nX8IHgZdzyrL/7LDc5GKO/YO9zxMgzgYgOdRVO4RJ
- qrBbJdrIf6evj8unNb/2pWcy9dunfeceEX1qm3p0UAX957boTEnoSOnooWPIg32lSDhZ
- KRyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782787843; x=1783392643;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0ulS4xGD+HdAOcdls1yd5oo2G+xv75Rb/XAwPAIO9Fo=;
- b=K+9goXPtVWXqI4X4IllLUP+8Z/bNw0gp6IH6jKF7o5tQz3QNZhaxBH02ydnZ9AA0op
- z4/oIPv9DcFy37tnLH/UIadHJ6Q/mwo3U9S6EFRqvWX3pyc4kuqjens9yDadc9qqfOce
- ErxS6O1EHanD9a5ryPTE/HDY/DsFYrNLWNhxaoVXk5OiWgbl3HO4s/zXpx0PodWLu/+H
- sT8bgAdXduhvFv8UhD/g9DI2BejHjjTT/T6j/NE10TMBAuoy4TNQev2PLqlq79qOlWdj
- 2AtA04v03/DsYdYX3srKpE29M1oHib6QbJUc+lhzsPVmKRiJp2yqqJl59qYiR43W3HGX
- cREQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrvzizFSojih9ssJ+4zEXVzEkSw1PJa7V4/Pc3ubXYCafOgSGltmtAVbZ5qERwjd2cnjC3PhUJGv9Nj@nongnu.org
-X-Gm-Message-State: AOJu0YzaZFwVlg6baSFMgArv7Z8irIC/3T8C0z6pSJb1VpiDN3ZG2TT2
- bA8cxTQ/4rNzrtfNTK+bvdCgw9MfrKhKYEPTSHo4LkOG4eIF6z3OznxM
-X-Gm-Gg: AfdE7ckqzxHamzsKvxLqytV9+Fsdo5fuCUxmLciydallwdQ4QsTBLz/hISthplfhFE+
- Yo65gQyJ6fSdA6AD6Ki+XTdgFtdo4t641bdrn8eGTCc1kwEUKdQ1Tsbp7n5JLSpf5ohsITy7Xkm
- XV8PO4qFuw1vjkBYsOsL1yJTlEFemmEWoNbs86VrCehuhfTvY0ruMB7oFSfZbxch5AR7QDuIFCj
- 0BoK2hjBmffiwlBOHrFOt288L+H8dzbMChbvWoOgoUApmj5G1C92c0scnlz4me87pLa+0QXh3Rm
- kbVJrCqKMwYmdkIVFKYCFNzV5e7ZxCvXEnRahw3F3TNDDAX61O6yC0KypN55lcZUefzb2GCd6Ix
- owO7BeCTL1PJ+FWw6zTJ4lmOufVzc2sg7qiymKZJId56eKVJrVKaK4nzO6sLQDPbMKFesy26GZm
- qRKeHN4jJC/KMj+rUYAtVIFX7wDu+LZGPDhwD5utSi3aLYpf4ASXk13tEtIGEMVK5ixOMn/nUj8
- ciCQQFz7gBbjD5DClQalen9+L98Iw7kv15xFveBcS0=
-X-Received: by 2002:a17:90b:4b0d:b0:37f:9e21:91d7 with SMTP id
- 98e67ed59e1d1-380690b7028mr4665a91.14.1782787843250; 
- Mon, 29 Jun 2026 19:50:43 -0700 (PDT)
-Received: from donnager-debian.. ([45.124.203.15])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-38052f32661sm704545a91.9.2026.06.29.19.50.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 19:50:42 -0700 (PDT)
-From: Joel Stanley <joel@jms.id.au>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: Nicholas Piggin <npiggin@gmail.com>,
- Andrew Jones <andrew.jones@oss.qualcomm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, Michael Ellerman <mpe@kernel.org>,
- Joel Stanley <jms@oss.tenstorrent.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v10 07/12] hw/riscv: Add Tenstorrent Atlantis machine
-Date: Tue, 30 Jun 2026 12:19:45 +0930
-Message-ID: <20260630024952.1520546-8-joel@jms.id.au>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260630024952.1520546-1-joel@jms.id.au>
-References: <20260630024952.1520546-1-joel@jms.id.au>
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1weSaj-0000Xs-Nm; Tue, 30 Jun 2026 03:09:09 -0400
+Received: from mail-japaneastazolkn190120002.outbound.protection.outlook.com
+ ([2a01:111:f403:d405::2] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1weSah-0008JY-QS; Tue, 30 Jun 2026 03:09:09 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DKyuOBisumjFi4WzZPiZOLcEz3wyEHshYdOEIaeoy8VmjBb7V+ybRi/l3N6Fd3sT2i9rjffegVoYR4AvO5eG3JcmHY7wzSNusC5Mb87LNMxBKia/ZW/8cxM24yUd0GRv/gdMaJxfR73IjtGGfIeSvv8uqcq/SXNOq7N9HNyJeNffG29n36ykZhr7Qs5YuG6tVRVPLIL5/j8Z2jdxIn4J2M3jDtumbKVwLU/nUuT/ajBu9Ki8RJSavG0MXSpvwVrksgwDVlqoN12do4RkOQIv/GZ4QGr1vc0SS39v5Z/ETtoQgyNsUR8Artsn9v2Nr2pLuK5629+sWqf2s8sruNzqNA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QB5XzLtQVMhAgCaUCp7HC+UcVcDCdaF8MzpKqOr4qJQ=;
+ b=QXSS0kCm0bPpaKmNncrmDMtmJvEEj922S6zVOo4xXM3ajLSp6lc39QOYTQiL11Z0PcSMyS1ndNljoFVWYLoJeyWlx/txvppwPP3Auz5uz5QMnqjoYv7EL0ZABOSuJhyKqdxh6jDhAxZXeQgLQ/ak48xqwgUYyNqGZ5jNdrpD8ko89L9hKkNRdWZmwtuI9Ob76cTdZxPFvdPIDYec+M9JnFynMCOROI4w1leF8SygKMqyBUGDsGOEqD54wCeeT4coKXTOVSxFAglkE5XPFHKBdAcsbdVJ5eQnZn6eIyBQSmDEoLds+pklOQydvescgorK7O8m2tqVhOMiNKm7n/ITfA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QB5XzLtQVMhAgCaUCp7HC+UcVcDCdaF8MzpKqOr4qJQ=;
+ b=f6LkR33oQF1Ry7wfMamE0i8pLuvgIrEK9A8xwO8loF9n+/4mi3OFeGa80jwu9U7MWcznFiQQMIXj3PbBWrAAHHRed2JnVVCAs7Suq0EKF9yT2L11DxI3emEGbeuQD0YSyRhnvQRyUs5UWwo8uxmASDxtN2bl7Kh83AgzW3YmxI3pmQUbKCxUmq8JUxvOSZA5ox98RFlzzU/+Ot77BbfdBLEdgSSeJzjrfGcqYYz4A50Xp9iWgVm6nT7m9Hb3xL85bJZLdbOGheJSRXT0jd8AjcytW+WBOarefTEY5WdAfr8NpeMVj1lWGlJIWovXAxybdjwhvX/li9L3IYVrxdOvHA==
+Received: from SE3PR04MB8922.apcprd04.prod.outlook.com (2603:1096:101:2e9::7)
+ by TYZPR04MB6593.apcprd04.prod.outlook.com (2603:1096:400:28a::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.19; Tue, 30 Jun
+ 2026 07:08:59 +0000
+Received: from SE3PR04MB8922.apcprd04.prod.outlook.com
+ ([fe80::3450:f139:5238:8f58]) by SE3PR04MB8922.apcprd04.prod.outlook.com
+ ([fe80::3450:f139:5238:8f58%5]) with mapi id 15.21.0159.018; Tue, 30 Jun 2026
+ 07:08:59 +0000
+Message-ID: <SE3PR04MB892289A5CDB66EB6083A1456F3F72@SE3PR04MB8922.apcprd04.prod.outlook.com>
+Date: Tue, 30 Jun 2026 15:08:03 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] hw/riscv/riscv-iommu.c: check reserved MSI PTE basic bits
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260629125719.679626-1-daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+From: "Nutty.Liu" <nutty.liu@hotmail.com>
+In-Reply-To: <20260629125719.679626-1-daniel.barboza@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: TP0P295CA0053.TWNP295.PROD.OUTLOOK.COM (2603:1096:910:3::8)
+ To SE3PR04MB8922.apcprd04.prod.outlook.com
+ (2603:1096:101:2e9::7)
+X-Microsoft-Original-Message-ID: <255b3db7-44eb-4342-ba3e-a8fa1270d51b@hotmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1029.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SE3PR04MB8922:EE_|TYZPR04MB6593:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7cede8de-f16a-4c67-13a0-08ded676749f
+X-MS-Exchange-SLBlob-MailProps: suo+AMQROd7awkY+uqD1IG9kXGqTcr3cGjrnjmQFHPmv85Vtsb8uJXEumYeQz1OEfMWkeOurnSrlOtRCmD/M+FmDvU48/VECzYkY+xh2SoOyp1a5fQwjHg8RWyH+X49Is3XHGr1FEH3BKahvNunLSzXeBt2W/Drjo8oSpoOgHKq54h7ZixURVVE4bDxhUxro0lwuzaAa6ANnK0QmbEI1q4BB3fJ0puxLSxbng/OZJOtNnGaGI0WxWpqz6p5WWuZJlpLwjLw5PSJKt5UDpY/Y1dhuv2aMpf9wQZdapab1zVT5NdkDLj9DTeRSRo53E25rgthq7jRhcYN35/mW0HNPhNqNbUEk4tLVciGG9a6tLw3aHKub1DnxchX8dzCVMp6NEVfmaQ9r8FMokdSRLOPI9tPP+q1YbZT+wM2hF5BW2UDf5+zMqT4cF/f+BR7Izn1tF14G2zWeNlgXAt7b/iFoqlGwpLlPNTjfI6UmM84zk5ZHqjwqXltlT/6Wl0HxFJexmnr+OaeCu4RV3tOqYLPkfCANiNpJPTbIyqr8Wgg18LzCaoWXBGJST+3zF5fhyk1kcLcntBOesKuQNLR8iOJ5M25E/M7YJpI+DY4EQYY+qSFwRFBEHtDMlug2cempUFw+EynJMvrvuy/XlzPDbREPjcJ+BamA8CZpbx7b0tc5LtZHIWEEy/pu+f5/DrGCpVLK/RibkvILsbpLhVRSAJuYpLnPaUvQ6oPVUrfpTjBVN+s3K7mWFooQ5Yud+IRMjZtLv+RGK2nlW8IvB9ZnVt96Yq4ZUUCSUEtj7v6aN2dg8NDsPlPX3SrK2Fs11MIRJJmuXGn4eRV4HF+7bIpPolGuFA==
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|19101099003|6090799003|55001999006|51005399006|15080799012|19110799012|23021999003|8060799015|5072599009|25010399006|10035399007|40105399003|1602099012|12091999003|4302099013|3412199025|440099028;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VHN5N3hWUTRQL3ZSUERtSm5ubWhpcHRyMkJjeVJ3MGlMV2FhWjBaajg3bTU5?=
+ =?utf-8?B?Z012SUhhYkFsWFdSL3pBdHlrWTBobU9oaStxMEVpZ2N1RUpDSjFYVngyWlRL?=
+ =?utf-8?B?R0ZjWXg5M0lqVFBqNVNrS1lZZTBhV0k5QmF5L3hNL1RYWE9aSjJlMGVXaURz?=
+ =?utf-8?B?aWtCRml3U053TStUZ3lLQWFZRFhHV1VhOWU5UzlMQ1hPdFVBZkxYZ2pjNkxB?=
+ =?utf-8?B?Z0lldzFiV0tHRkpUS3V4b3g0a3ViZDc1T2tmV3JYWW9qZEcvSmF6Rmp6ZUNj?=
+ =?utf-8?B?VmJNL2Y4TzAwNWVmUUZKTkN4TDkzeDZtV0FUeG1tUDdMZGdUTVcvWnNzMjlx?=
+ =?utf-8?B?UFFJSzhZdjhseEhyN3FnTzhqNzA5RitwcWhIL25VL3hUUHE3N29NQVgxbFNN?=
+ =?utf-8?B?VWY2Q0pCWTVRNjJTamJlMmhWdGJ2d1VSUnZzS2JTbUp5Tkkvamx2cXVqalRW?=
+ =?utf-8?B?YnRCaEdOb3FHOVNjL3RJd2V4eGtFUE01MHptUUNxcU5sdU00ZXhTMnArVk1Y?=
+ =?utf-8?B?K0d2WW04SEpGQURuMnpybTBBbEhiTTZOeThkUUE3RXcveXVnb0k2TFNKdWpz?=
+ =?utf-8?B?cUZEVFhTUnJtZHJmcWM4VklmRXh4aFFOK21CV0krRHlQY3Q1clU3T2xtSVhs?=
+ =?utf-8?B?bWNndi9uMDBva3FPQ1FqaW9zVjdJSFRweHFUR2J5NlpYM2ZsNHlNTDV1TXJV?=
+ =?utf-8?B?dWVPTE0vbU00Rmp2cndCa2tFUzEyN2MrOTdwcUdLaUF3ZU1XZVlzYzJyVHJI?=
+ =?utf-8?B?VjdHd0NWbDFmU3A4RnpOQWw1QW41cFIvVHp0SDdqdEhobDlQb01EdDF6anZB?=
+ =?utf-8?B?cVdKSjdoeGVkZ0NjRkoraG9yTTkvK2dmNGlIMFdMalpqM1Z5RmFoZWk1T0li?=
+ =?utf-8?B?Y0IxSmJxczFVaFZKTkxYL0YrWDJUV2FKWGNuMmQwZE9ia0txTHp0alFmdGJx?=
+ =?utf-8?B?aTNZMjFkRGhMYkVoOVc1eHMwcFpRc00wVHFJelJZZTdhWFZ4YkhXNUhyL3VZ?=
+ =?utf-8?B?cEtXTEYvcGpFZmxrSkFyN3YrRm9LTk1zb2pHY0lrM3FGVUFhZ2paMFdUTjFT?=
+ =?utf-8?B?YWRVWUsrQmU0YlBCc01IdU9idHN3NjhzZ1pnUUsyUXBWa2w3S0NNSk1rS1RY?=
+ =?utf-8?B?aFhTRlhES2I5Mm1wNWh5VGp1UzkwM0pIZFowMldqVDNqVDUrSXlsNUlwMnpQ?=
+ =?utf-8?B?OFpKM2ZxUU5SenFZSlFsdVJXekNyeU1DRVBRREVUOU1CTXZDdzc4U0Q4MlVX?=
+ =?utf-8?B?djZpYzBGWW5VcUI3LzllbUp4emU1SlcvdmZyNGVYa0lOQVBVNXVKQ1VmZDR1?=
+ =?utf-8?B?QnFLcjl3SEJhUGFqRENtZFhuMlFBY243VWpSZTJqc0RsT3k1cStscFVIYW5X?=
+ =?utf-8?B?Nnh1akpsbUZ2QW1XaEtxQmV1Q3BDN3JVbmlpM0dhMCtNZDVBMzAwYmh6bDdm?=
+ =?utf-8?B?WlZ5SHNPc2UxZnlCWXlFNjEyVEV2Y0w4Y0pFamQ1K2lKKzBxNzN4OGhwc29a?=
+ =?utf-8?Q?4qHWDIBLKXZi/Tao2Lv0Daq84bt?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VmFWVkgxMExsaERTOEtiQko0d0lWKy9rVk5EOUd6M0tHR0VvWHh3NjBvZDhm?=
+ =?utf-8?B?cjVlRi9ua2Z3YmluTkx6aklSRUNsd3NqSGhZSkJZc1JwSVlTME4vMkEyV2Fk?=
+ =?utf-8?B?bHdlL3BTVGVQUmk5anFFM1cvWnA0Y0RSZ29TN0FhQkxsejVVcXZibE1DWU5G?=
+ =?utf-8?B?bFlNOHo0WktqajFValNReitEb1lBYXRkOXQvc1dJbmhHSmZjS2pCZXRIaS9V?=
+ =?utf-8?B?VkUvb2VJYTNtNGpUeCtMWVhCUGR1MTdodGRvdFNlSnFVSUkwdm1vVzVVbFJQ?=
+ =?utf-8?B?Z0RwOUhuYURyVVRheURDcDc0UVB1MHltQVRnb1J1WEZkbmxkQ2RDZGs2SWsx?=
+ =?utf-8?B?TmdDa1c0UmtNSzJOV2xNOFdEQ0I2c3BCa0VqTklHeVR5UStKQmxBZzh2V0kz?=
+ =?utf-8?B?OFJmbmx0akNRUndDZDBqNmdZc295N20xcHVaL0FNY215R3p4WXRXUHBkRVVn?=
+ =?utf-8?B?RXhwcUFPRUJZTHNBa2pyZ21iV08vcXo0b2dLQ1hEQWZMTnUwT1p2Y1lDQkdT?=
+ =?utf-8?B?YW1tWDh4b2ZMUlgya2p5YWk3WmxRdytKcUJQdUxnRjlYOHRzVlVkdlpqUnZl?=
+ =?utf-8?B?TDRSdURjTHVqdWVIU3EraWRvcCtZVC82ejA4WHNNZVFyN3FUSTl6SmtpeTda?=
+ =?utf-8?B?Ri9nMXozckdKZXlCWU14SHUxa0lFL2tiUlJtWmNKL3k2ZFFJZlE1c1BxT0pE?=
+ =?utf-8?B?SC9LemVDMFVORU9rNkZUT1VqdFlKZ0M2US9qU2ZvbG9DNWRLZ0gvbHRCbWFJ?=
+ =?utf-8?B?b1RPYndmaHhhWlRxWW9qNWdyR2k0Zit1QytVSkJoNFBaZVJoV1h3cVdpYjFS?=
+ =?utf-8?B?Y3ZhamNjSUd1UThGTVRRLzlMc0xEL2JmNEhKN0lJMzRYb0Y3Z1BJbEdyMURw?=
+ =?utf-8?B?dmhTZWgzMkpobWpHVElrU3UycmlpYkpYS1MxMjZKbmthUk5VOU14elRpOFE5?=
+ =?utf-8?B?UGpia3U5bmdZQWtQNGIvbDBLcEJ5OU9ZUWhBZnJKOFU0bGZMVC84MWFkMWpW?=
+ =?utf-8?B?SkRZNEJZcUI5a1JlVTNaeHBVN3ducmVCNmFLNTFEWDJ3TlgrTFhINnhPN3Vm?=
+ =?utf-8?B?U3UydVBsanRFMDBzYmNNWGFQK2puZnBsVWw0NGF3MjIvNndWU2Q1ZFVWWnJN?=
+ =?utf-8?B?aXNPakFBU2txK0ExOVoxTCtpdjhKa25HL0Nlcks5YTY5WHpOYTJBc3phdjB1?=
+ =?utf-8?B?WFhmVUJuOEVtdkFMRENTa3l3RzBsSWlYUDd4bks5UXYwMm5ZVmhMLzdiMHNy?=
+ =?utf-8?B?TjJURU41ZXJzaFl5TzM5NTNwa3NZNitXVTJDaDVmVnlsS0dtWm9PaHFIVDRU?=
+ =?utf-8?B?dmdraDNCL2p5ekNnSGpVbzhIMzh1SE41WVFFNVZUM0VFZitjKy9Zc3ZxMjY0?=
+ =?utf-8?B?c016a2h2REZMc2VpRHVQb2lURjk1S2RWblNBTUVObmpvZEdMSG96RXZFLzVG?=
+ =?utf-8?B?MEllbTdPMkJ4S21zd3ExakM2OEZRWWt3WStEM1JKUDR3b2lWT0VzTGYxeTQ2?=
+ =?utf-8?B?Z0FEWFFteHRab0k1MlRKQ0JBWnlUZU5BVUE2d2FEZkNmVmRaWkFKZEJCV0VJ?=
+ =?utf-8?B?bkxXUFhacWdLck92U0UrRzJtV2xab1h2SER5dlVkaFVsVlA1Ni9VUlJKZ0JW?=
+ =?utf-8?B?MXMzWktWcjh4aW55MzM4bTdRODJhQWIwVWNYOXk3UFlzU3VmNkMxam16UmZm?=
+ =?utf-8?B?WFVWWC8vaXRNbWNEUHRtTmxMMGp2SEo1VEVKcUNOQUJhZmNwSWtaaFB5S0pz?=
+ =?utf-8?B?MmxnZFJ2eVpWNEFiZXlaczB4dTcxemVYVzN5NGgyYjQ5bnhkVmVzMjZWTnFF?=
+ =?utf-8?B?MHpKWTU3RngvL25Gblh2WHVlRTlNVXdnNVczK01Qc2xTTHBkUGZuaUxtQ1ZL?=
+ =?utf-8?Q?j0lqKAnMIHWsw?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7cede8de-f16a-4c67-13a0-08ded676749f
+X-MS-Exchange-CrossTenant-AuthSource: SE3PR04MB8922.apcprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2026 07:08:59.3657 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR04MB6593
+Received-SPF: pass client-ip=2a01:111:f403:d405::2;
+ envelope-from=nutty.liu@hotmail.com;
+ helo=TYPPR03CU001.outbound.protection.outlook.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,743 +161,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Tenstorrent Atlantis platform is a collaboration between Tenstorrent
-and CoreLab Technology. It is based on the Atlantis SoC, which includes
-the Ascalon-X CPU and other IP from Tenstorrent and CoreLab Technology.
-The Tenstorrent Ascalon-X is a high performance 64-bit RVA23 compliant
-RISC-V CPU.
 
-Add the tt-atlantis machine containing serial console, interrupt
-controllers, and device tree support.
+On 6/29/2026 8:57 PM, Daniel Henrique Barboza wrote:
+> We need to throw an MSI_MISCONFIGURED error when any of the reserved PTE
+> bits (first doubleword only) are set.
+>
+> Fixes: Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3563
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
 
-The Atlantis boot images loaded from include OpenSBI and an initial DTB
-that is passed to OpenSBI. This is approximated in the model by having
-QEMU build the device tree rather than load a DTB image directly.
-Subsequent stages may use the modified DTB provided by OpenSBI or opt to
-supply their own.
-
-  qemu-system-riscv64 -M tt-atlantis -m 512M \
-   -kernel Image -initrd rootfs.cpio -nographic
-
-Co-Developed-by: Nicholas Piggin <npiggin@gmail.com>
-Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
-Signed-off-by: Joel Stanley <joel@jms.id.au>
----
- MAINTAINERS                       |  12 +
- docs/system/riscv/tt_atlantis.rst |  41 +++
- docs/system/target-riscv.rst      |   1 +
- include/hw/riscv/tt_atlantis.h    |  50 +++
- hw/riscv/tt_atlantis.c            | 523 ++++++++++++++++++++++++++++++
- hw/riscv/Kconfig                  |  10 +
- hw/riscv/meson.build              |   1 +
- 7 files changed, 638 insertions(+)
- create mode 100644 docs/system/riscv/tt_atlantis.rst
- create mode 100644 include/hw/riscv/tt_atlantis.h
- create mode 100644 hw/riscv/tt_atlantis.c
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 72357df7c4b7..0d7c7720d9f2 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1774,6 +1774,18 @@ F: hw/*/*sifive*.c
- F: include/hw/*/*sifive*.h
- F: tests/functional/riscv64/test_sifive_u.py
- 
-+Tenstorrent Machines
-+M: Joel Stanley <joel@jms.id.au>
-+M: Nicholas Piggin <npiggin@gmail.com>
-+R: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-+R: Michael Ellerman <mpe@kernel.org>
-+R: Portia Stephens <portias@oss.tenstorrent.com>
-+L: qemu-riscv@nongnu.org
-+S: Supported
-+F: docs/system/riscv/tt_*.rst
-+F: hw/riscv/tt_*.c
-+F: include/hw/riscv/tt_*.h
-+
- AMD Microblaze-V Generic Board
- M: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
- S: Maintained
-diff --git a/docs/system/riscv/tt_atlantis.rst b/docs/system/riscv/tt_atlantis.rst
-new file mode 100644
-index 000000000000..1f2880d61773
---- /dev/null
-+++ b/docs/system/riscv/tt_atlantis.rst
-@@ -0,0 +1,41 @@
-+Tenstorrent Atlantis (``tt-atlantis``)
-+======================================
-+
-+The Tenstorrent Atlantis platform is a collaboration between Tenstorrent
-+and CoreLab Technology. It is based on the Atlantis SoC, which includes
-+the Ascalon-X CPU and other IP from Tenstorrent and CoreLab Technology.
-+
-+The Tenstorrent Ascalon-X is a high performance 64-bit RVA23 compliant
-+RISC-V CPU.
-+
-+tt-atlantis QEMU model features
-+-------------------------------
-+
-+* 8-core Ascalon-X CPU Cluster
-+* RISC-V compliant Advanced Interrupt Architecture
-+* 16550A compatible UART
-+
-+Known limitations
-+-----------------
-+
-+The QEMU tt-atlantis machine does not yet model every device on the
-+real platform. Notably:
-+
-+* There is no PCI host bridge, so virtio-pci devices cannot be
-+  attached. Boots that need block storage must use ``-initrd`` with
-+  an initramfs.
-+* The DesignWare UART is modelled with QEMU's ns16550-compatible
-+  ``serial_mm`` device; DesignWare-specific registers beyond that
-+  set return 0.
-+
-+Supported software
-+------------------
-+
-+The Tenstorrent Ascalon CPUs avoid proprietary or non-standard
-+extensions, so compatibility with existing software is generally
-+good. The QEMU tt-atlantis machine works with upstream OpenSBI
-+and Linux with default configurations.
-+
-+The development board hardware will require some implementation
-+specific setup in firmware which is being developed and may
-+become a requirement or option for the tt-atlantis machine.
-diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-index 896f14e78bd0..2639866a3e8a 100644
---- a/docs/system/target-riscv.rst
-+++ b/docs/system/target-riscv.rst
-@@ -72,6 +72,7 @@ undocumented; you can get a complete list by running
-    riscv/mips
-    riscv/shakti-c
-    riscv/sifive_u
-+   riscv/tt_atlantis
-    riscv/virt
-    riscv/xiangshan-kunminghu
- 
-diff --git a/include/hw/riscv/tt_atlantis.h b/include/hw/riscv/tt_atlantis.h
-new file mode 100644
-index 000000000000..a17732ce8114
---- /dev/null
-+++ b/include/hw/riscv/tt_atlantis.h
-@@ -0,0 +1,50 @@
-+/*
-+ * Tenstorrent Atlantis RISC-V System on Chip
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright 2025 Tenstorrent, Joel Stanley <joel@jms.id.au>
-+ */
-+
-+#ifndef HW_RISCV_TT_ATLANTIS_H
-+#define HW_RISCV_TT_ATLANTIS_H
-+
-+#include "hw/core/boards.h"
-+#include "hw/core/sysbus.h"
-+#include "hw/intc/riscv_imsic.h"
-+#include "hw/riscv/riscv_hart.h"
-+
-+#define TYPE_TT_ATLANTIS_MACHINE MACHINE_TYPE_NAME("tt-atlantis")
-+OBJECT_DECLARE_SIMPLE_TYPE(TTAtlantisState, TT_ATLANTIS_MACHINE)
-+
-+struct TTAtlantisState {
-+    /*< private >*/
-+    MachineState parent;
-+
-+    /*< public >*/
-+    Notifier machine_done;
-+    const MemMapEntry *memmap;
-+
-+    RISCVHartArrayState soc;
-+    DeviceState *irqchip;
-+
-+    int fdt_size;
-+};
-+
-+enum {
-+    TT_ATL_UART1_IRQ = 39,
-+};
-+
-+enum {
-+    TT_ATL_ACLINT,
-+    TT_ATL_BOOTROM,
-+    TT_ATL_DDR_LO,
-+    TT_ATL_DDR_HI,
-+    TT_ATL_MAPLIC,
-+    TT_ATL_MIMSIC,
-+    TT_ATL_SAPLIC,
-+    TT_ATL_SIMSIC,
-+    TT_ATL_UART1,
-+};
-+
-+#endif
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-new file mode 100644
-index 000000000000..1f0cd08ac959
---- /dev/null
-+++ b/hw/riscv/tt_atlantis.c
-@@ -0,0 +1,523 @@
-+/*
-+ * Tenstorrent Atlantis RISC-V System on Chip
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright 2025 Tenstorrent, Joel Stanley <joel@jms.id.au>
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/cutils.h"
-+#include "qemu/error-report.h"
-+#include "qemu/guest-random.h"
-+#include "qemu/units.h"
-+
-+#include "hw/core/boards.h"
-+#include "hw/core/loader.h"
-+#include "hw/core/sysbus.h"
-+
-+#include "target/riscv/cpu.h"
-+#include "target/riscv/pmu.h"
-+
-+#include "hw/riscv/boot.h"
-+#include "hw/riscv/fdt-common.h"
-+#include "hw/riscv/machines-qom.h"
-+#include "hw/riscv/riscv_hart.h"
-+
-+#include "hw/char/serial-mm.h"
-+#include "hw/intc/riscv_aclint.h"
-+#include "hw/misc/unimp.h"
-+
-+#include "system/system.h"
-+#include "system/device_tree.h"
-+
-+#include "hw/riscv/tt_atlantis.h"
-+
-+#include "aia.h"
-+
-+#define TT_IRQCHIP_NUM_MSIS       255
-+#define TT_IRQCHIP_NUM_SOURCES    128
-+#define TT_IRQCHIP_NUM_PRIO_BITS  3
-+#define TT_IRQCHIP_GUESTS         63 /* aia_guests, gives guest_index_bits=6 */
-+#define TT_IRQCHIP_MIMSIC_STRIDE  0x40000
-+
-+#define TT_ACLINT_MTIME_SIZE    0x8050
-+#define TT_ACLINT_MTIME         0x0
-+#define TT_ACLINT_MTIMECMP      0x8000
-+#define TT_ACLINT_TIMEBASE_FREQ 1000000000
-+
-+static const MemMapEntry tt_atlantis_memmap[] = {
-+    /* Keep sorted with :'<,'>!sort -g -k 4 */
-+    [TT_ATL_DDR_LO] =           { 0x00000000,    0x80000000 },
-+    [TT_ATL_BOOTROM] =          { 0x80000000,        0x2000 },
-+    [TT_ATL_MIMSIC] =           { 0xa0000000,      0x200000 },
-+    [TT_ATL_ACLINT] =           { 0xa2180000,       0x10000 },
-+    [TT_ATL_SIMSIC] =           { 0xa4000000,      0x200000 },
-+    [TT_ATL_MAPLIC] =           { 0xcc000000,     0x4000000 },
-+    [TT_ATL_UART1] =            { 0xd4110000,       0x10000 },
-+    [TT_ATL_SAPLIC] =           { 0xe8000000,     0x4000000 },
-+    [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
-+};
-+
-+static uint32_t fdt_phandle = 1;
-+static uint32_t next_phandle(void)
-+{
-+    return fdt_phandle++;
-+}
-+
-+static void create_fdt_memory(TTAtlantisState *s)
-+{
-+    void *fdt = MACHINE(s)->fdt;
-+    hwaddr size_lo = MACHINE(s)->ram_size;
-+    hwaddr size_hi = 0;
-+
-+    if (size_lo > s->memmap[TT_ATL_DDR_LO].size) {
-+        size_lo = s->memmap[TT_ATL_DDR_LO].size;
-+        size_hi = MACHINE(s)->ram_size - size_lo;
-+    }
-+
-+    create_fdt_socket_memory(fdt, s->memmap[TT_ATL_DDR_LO].base, size_lo,
-+                             0, false);
-+    if (size_hi) {
-+        /*
-+         * The first part of the HI address is aliased at the LO address
-+         * so do not include that as usable memory. Is there any way
-+         * (or good reason) to describe that aliasing 2GB with DT?
-+         */
-+        create_fdt_socket_memory(fdt, s->memmap[TT_ATL_DDR_HI].base + size_lo,
-+                                 size_hi, 0, false);
-+    }
-+}
-+
-+static void create_fdt_aclint(TTAtlantisState *s, uint32_t *intc_phandles)
-+{
-+    void *fdt = MACHINE(s)->fdt;
-+    g_autofree char *name = NULL;
-+    g_autofree uint32_t *aclint_mtimer_cells = NULL;
-+    uint32_t aclint_cells_size;
-+    hwaddr addr;
-+
-+    aclint_mtimer_cells = g_new0(uint32_t, s->soc.num_harts * 2);
-+
-+    for (int cpu = 0; cpu < s->soc.num_harts; cpu++) {
-+        aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
-+    }
-+    aclint_cells_size = s->soc.num_harts * sizeof(uint32_t) * 2;
-+
-+    addr = s->memmap[TT_ATL_ACLINT].base;
-+
-+    name = g_strdup_printf("/soc/mtimer@%"HWADDR_PRIX, addr);
-+    qemu_fdt_add_subnode(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,aclint-mtimer");
-+    qemu_fdt_setprop_sized_cells(fdt, name, "reg",
-+                                 2, addr + TT_ACLINT_MTIME,
-+                                 2, 0x1000,
-+                                 2, addr + TT_ACLINT_MTIMECMP,
-+                                 2, 0x1000);
-+    qemu_fdt_setprop(fdt, name, "interrupts-extended",
-+                     aclint_mtimer_cells, aclint_cells_size);
-+}
-+
-+static void create_fdt_one_imsic(void *fdt, const MemMapEntry *mem, int cpus,
-+                                 uint32_t *intc_phandles, uint32_t msi_phandle,
-+                                 int irq_line, uint32_t imsic_guest_bits)
-+{
-+    g_autofree char *name = NULL;
-+    g_autofree uint32_t *imsic_cells = g_new0(uint32_t, cpus * 2);
-+
-+    for (int cpu = 0; cpu < cpus; cpu++) {
-+        imsic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        imsic_cells[cpu * 2 + 1] = cpu_to_be32(irq_line);
-+    }
-+
-+    name = g_strdup_printf("/soc/interrupt-controller@%"HWADDR_PRIX, mem->base);
-+    qemu_fdt_add_subnode(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,imsics");
-+
-+    qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", 0);
-+    qemu_fdt_setprop(fdt, name, "interrupt-controller", NULL, 0);
-+    qemu_fdt_setprop(fdt, name, "msi-controller", NULL, 0);
-+    qemu_fdt_setprop(fdt, name, "interrupts-extended",
-+                     imsic_cells, sizeof(uint32_t) * cpus * 2);
-+    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
-+    qemu_fdt_setprop_cell(fdt, name, "riscv,num-ids", TT_IRQCHIP_NUM_MSIS);
-+
-+    if (imsic_guest_bits) {
-+        qemu_fdt_setprop_cell(fdt, name, "riscv,guest-index-bits",
-+                              imsic_guest_bits);
-+    }
-+    qemu_fdt_setprop_cell(fdt, name, "phandle", msi_phandle);
-+}
-+
-+static void create_fdt_one_aplic(void *fdt,
-+                                 const MemMapEntry *mem,
-+                                 uint32_t msi_phandle,
-+                                 uint32_t *intc_phandles,
-+                                 uint32_t aplic_phandle,
-+                                 uint32_t aplic_child_phandle,
-+                                 int irq_line, int num_harts)
-+{
-+    g_autofree char *name =
-+        g_strdup_printf("/soc/interrupt-controller@%"HWADDR_PRIX, mem->base);
-+    g_autofree uint32_t *aplic_cells = g_new0(uint32_t, num_harts * 2);
-+
-+    for (int cpu = 0; cpu < num_harts; cpu++) {
-+        aplic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        aplic_cells[cpu * 2 + 1] = cpu_to_be32(irq_line);
-+    }
-+
-+    qemu_fdt_add_subnode(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", "riscv,aplic");
-+    qemu_fdt_setprop_cell(fdt, name, "#address-cells", 0);
-+    qemu_fdt_setprop_cell(fdt, name, "#interrupt-cells", 2);
-+    qemu_fdt_setprop(fdt, name, "interrupt-controller", NULL, 0);
-+
-+    qemu_fdt_setprop(fdt, name, "interrupts-extended",
-+                     aplic_cells, num_harts * sizeof(uint32_t) * 2);
-+    qemu_fdt_setprop_cell(fdt, name, "msi-parent", msi_phandle);
-+
-+    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
-+    qemu_fdt_setprop_cell(fdt, name, "riscv,num-sources",
-+                          TT_IRQCHIP_NUM_SOURCES);
-+
-+    if (aplic_child_phandle) {
-+        qemu_fdt_setprop_cell(fdt, name, "riscv,children",
-+                              aplic_child_phandle);
-+        qemu_fdt_setprop_cells(fdt, name, "riscv,delegation",
-+                               aplic_child_phandle, 1, TT_IRQCHIP_NUM_SOURCES);
-+    }
-+
-+    qemu_fdt_setprop_cell(fdt, name, "phandle", aplic_phandle);
-+}
-+
-+static void create_fdt_pmu(TTAtlantisState *s)
-+{
-+    char pmu_name[] = "/pmu";
-+    void *fdt = MACHINE(s)->fdt;
-+    RISCVCPU *hart = &s->soc.harts[0];
-+
-+    qemu_fdt_add_subnode(fdt, pmu_name);
-+    qemu_fdt_setprop_string(fdt, pmu_name, "compatible", "riscv,pmu");
-+    riscv_pmu_generate_fdt_node(fdt, hart->pmu_avail_ctrs, pmu_name);
-+}
-+
-+static void create_fdt_cpu(TTAtlantisState *s, const MemMapEntry *memmap,
-+                           uint32_t aplic_s_phandle,
-+                           uint32_t imsic_s_phandle)
-+{
-+    MachineState *ms = MACHINE(s);
-+    void *fdt = MACHINE(s)->fdt;
-+    g_autofree uint32_t *intc_phandles = g_new0(uint32_t, ms->smp.cpus);
-+
-+    fdt_create_cpu_socket_subnode(fdt, TT_ACLINT_TIMEBASE_FREQ);
-+
-+    create_fdt_socket_cpus(fdt, s->soc.harts, 0, s->soc.num_harts,
-+                           s->soc.hartid_base, &fdt_phandle, intc_phandles,
-+                           false, false);
-+
-+    create_fdt_memory(s);
-+
-+    create_fdt_aclint(s, intc_phandles);
-+
-+    uint32_t imsic_guest_bits = imsic_num_bits(TT_IRQCHIP_GUESTS + 1);
-+
-+    /* M-level IMSIC node */
-+    uint32_t msi_m_phandle = next_phandle();
-+    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_MIMSIC], ms->smp.cpus,
-+                         intc_phandles, msi_m_phandle,
-+                         IRQ_M_EXT, imsic_guest_bits);
-+
-+    /* S-level IMSIC node */
-+    create_fdt_one_imsic(fdt, &s->memmap[TT_ATL_SIMSIC], ms->smp.cpus,
-+                         intc_phandles, imsic_s_phandle,
-+                         IRQ_S_EXT, imsic_guest_bits);
-+
-+    uint32_t aplic_m_phandle = next_phandle();
-+
-+    /* M-level APLIC node */
-+    create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_MAPLIC],
-+                         msi_m_phandle, intc_phandles,
-+                         aplic_m_phandle, aplic_s_phandle,
-+                         IRQ_M_EXT, s->soc.num_harts);
-+
-+    /* S-level APLIC node */
-+    create_fdt_one_aplic(fdt, &s->memmap[TT_ATL_SAPLIC],
-+                         imsic_s_phandle, intc_phandles,
-+                         aplic_s_phandle, 0,
-+                         IRQ_S_EXT, s->soc.num_harts);
-+}
-+
-+static void create_fdt_uart(void *fdt, const MemMapEntry *mem, int irq,
-+                            int irqchip_phandle)
-+{
-+    g_autofree char *name = g_strdup_printf("/soc/serial@%"HWADDR_PRIX,
-+                                            mem->base);
-+
-+    qemu_fdt_add_subnode(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", "ns16550a");
-+    qemu_fdt_setprop_sized_cells(fdt, name, "reg", 2, mem->base, 2, mem->size);
-+    qemu_fdt_setprop_cell(fdt, name, "reg-shift", 2);
-+    qemu_fdt_setprop_cell(fdt, name, "reg-io-width", 4);
-+    qemu_fdt_setprop_cell(fdt, name, "clock-frequency", 3686400);
-+    qemu_fdt_setprop_cell(fdt, name, "interrupt-parent", irqchip_phandle);
-+    qemu_fdt_setprop_cells(fdt, name, "interrupts", irq, 0x4);
-+
-+    qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", name);
-+    qemu_fdt_setprop_string(fdt, "/aliases", "serial0", name);
-+}
-+
-+static void create_fdt_rng(void *fdt)
-+{
-+    uint8_t rng_seed[32];
-+
-+    qemu_guest_getrandom_nofail(rng_seed, sizeof(rng_seed));
-+    qemu_fdt_setprop(fdt, "/chosen", "rng-seed", rng_seed, sizeof(rng_seed));
-+}
-+
-+static void finalize_fdt(TTAtlantisState *s)
-+{
-+    uint32_t aplic_s_phandle = next_phandle();
-+    uint32_t imsic_s_phandle = next_phandle();
-+    void *fdt = MACHINE(s)->fdt;
-+
-+    create_fdt_cpu(s, s->memmap, aplic_s_phandle, imsic_s_phandle);
-+
-+    /*
-+     * We want to do this, but the Linux aplic driver was broken before v6.16
-+     *
-+     * qemu_fdt_setprop_cell(MACHINE(s)->fdt, "/soc", "interrupt-parent",
-+     *                       aplic_s_phandle);
-+     */
-+
-+    create_fdt_uart(fdt, &s->memmap[TT_ATL_UART1], TT_ATL_UART1_IRQ,
-+                    aplic_s_phandle);
-+}
-+
-+static void create_fdt(TTAtlantisState *s)
-+{
-+    MachineState *ms = MACHINE(s);
-+
-+    ms->fdt = create_board_device_tree("Tenstorrent Atlantis RISC-V Machine",
-+                                       "tenstorrent,atlantis", &s->fdt_size);
-+
-+    qemu_fdt_add_subnode(ms->fdt, "/chosen");
-+
-+    create_fdt_rng(ms->fdt);
-+
-+    qemu_fdt_add_subnode(ms->fdt, "/aliases");
-+
-+    create_fdt_pmu(s);
-+}
-+
-+static void load_fdt(TTAtlantisState *s)
-+{
-+    MachineState *ms = MACHINE(s);
-+    char **node_path;
-+    Error *err = NULL;
-+
-+    ms->fdt = load_device_tree(ms->dtb, &s->fdt_size);
-+    if (!ms->fdt) {
-+        error_report("load_device_tree() failed");
-+        exit(1);
-+    }
-+
-+    qemu_fdt_add_path(ms->fdt, "/chosen");
-+
-+    /* Clear memory nodes and update with the specified RAM size */
-+    node_path = qemu_fdt_node_unit_path(ms->fdt, "memory", &err);
-+    if (err) {
-+        warn_report_err(err);
-+    } else {
-+        for (int i = 0; node_path[i]; i++) {
-+            warn_report("Replacing device tree %s with the requested RAM size",
-+                        node_path[i]);
-+            qemu_fdt_nop_node(ms->fdt, node_path[i]);
-+        }
-+        g_strfreev(node_path);
-+    }
-+
-+    create_fdt_memory(s);
-+}
-+
-+static void tt_atlantis_machine_done(Notifier *notifier, void *data)
-+{
-+    TTAtlantisState *s = container_of(notifier, TTAtlantisState, machine_done);
-+    MachineState *machine = MACHINE(s);
-+    hwaddr start_addr = s->memmap[TT_ATL_DDR_LO].base;
-+    hwaddr mem_size;
-+    target_ulong firmware_end_addr, kernel_start_addr;
-+    const char *firmware_name = riscv_default_firmware_name(&s->soc);
-+    uint64_t fdt_load_addr;
-+    uint64_t kernel_entry;
-+    RISCVBootInfo boot_info;
-+
-+    /*
-+     * A user provided dtb must include everything, including
-+     * dynamic sysbus devices. Our FDT needs to be finalized.
-+     */
-+    if (machine->dtb == NULL) {
-+        finalize_fdt(s);
-+    }
-+
-+    mem_size = machine->ram_size;
-+    if (mem_size > s->memmap[TT_ATL_DDR_LO].size) {
-+        mem_size = s->memmap[TT_ATL_DDR_LO].size;
-+    }
-+    riscv_boot_info_init_discontig_mem(&boot_info, &s->soc,
-+                                       s->memmap[TT_ATL_DDR_LO].base,
-+                                       mem_size);
-+
-+    firmware_end_addr = riscv_find_and_load_firmware(machine, &boot_info,
-+                                                     firmware_name,
-+                                                     &start_addr, NULL);
-+
-+    kernel_start_addr = riscv_calc_kernel_start_addr(&boot_info,
-+                                                     firmware_end_addr);
-+    if (machine->kernel_filename) {
-+        riscv_load_kernel(machine, &boot_info, kernel_start_addr,
-+                          true, NULL);
-+    }
-+    kernel_entry = boot_info.image_low_addr;
-+
-+    fdt_load_addr = riscv_compute_fdt_addr(s->memmap[TT_ATL_DDR_LO].base,
-+                                           s->memmap[TT_ATL_DDR_LO].size,
-+                                           machine, &boot_info);
-+    riscv_load_fdt(fdt_load_addr, machine->fdt);
-+
-+    /* load the reset vector */
-+    riscv_setup_rom_reset_vec(machine, &s->soc, start_addr,
-+                              s->memmap[TT_ATL_BOOTROM].base,
-+                              s->memmap[TT_ATL_BOOTROM].size,
-+                              kernel_entry,
-+                              fdt_load_addr);
-+}
-+
-+static void tt_atlantis_machine_init(MachineState *machine)
-+{
-+    TTAtlantisState *s = TT_ATLANTIS_MACHINE(machine);
-+
-+    MemoryRegion *system_memory = get_system_memory();
-+    MemoryRegion *ram_hi = g_new(MemoryRegion, 1);
-+    MemoryRegion *ram_lo = g_new(MemoryRegion, 1);
-+    MemoryRegion *bootrom = g_new(MemoryRegion, 1);
-+    ram_addr_t lo_ram_size;
-+    int hart_count = machine->smp.cpus;
-+
-+    s->memmap = tt_atlantis_memmap;
-+
-+    object_initialize_child(OBJECT(machine), "soc", &s->soc,
-+                            TYPE_RISCV_HART_ARRAY);
-+    object_property_set_str(OBJECT(&s->soc), "cpu-type", machine->cpu_type,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->soc), "hartid-base", 0,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->soc), "num-harts", hart_count,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->soc), "resetvec",
-+                            s->memmap[TT_ATL_BOOTROM].base,
-+                            &error_abort);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->soc), &error_fatal);
-+
-+    s->irqchip = riscv_create_aia(true, TT_IRQCHIP_GUESTS,
-+                                  TT_IRQCHIP_MIMSIC_STRIDE,
-+                                  TT_IRQCHIP_NUM_SOURCES,
-+                                  &s->memmap[TT_ATL_MAPLIC],
-+                                  &s->memmap[TT_ATL_SAPLIC],
-+                                  &s->memmap[TT_ATL_MIMSIC],
-+                                  &s->memmap[TT_ATL_SIMSIC],
-+                                  0, 0, hart_count,
-+                                  TT_IRQCHIP_NUM_MSIS,
-+                                  TT_IRQCHIP_NUM_PRIO_BITS);
-+
-+    riscv_aclint_mtimer_create(s->memmap[TT_ATL_ACLINT].base,
-+            TT_ACLINT_MTIME_SIZE,
-+            0, hart_count,
-+            TT_ACLINT_MTIMECMP,
-+            TT_ACLINT_MTIME,
-+            TT_ACLINT_TIMEBASE_FREQ, true);
-+
-+    /*
-+     * DDR
-+     *
-+     * The high address is where RAM lives. It is always present and may be
-+     * up to 64GB. The low address is an alias of the first 2GB of that RAM.
-+     */
-+    if (machine->ram_size > s->memmap[TT_ATL_DDR_HI].size) {
-+        char *sz = size_to_str(s->memmap[TT_ATL_DDR_HI].size);
-+        error_report("RAM size is too large, maximum is %s", sz);
-+        g_free(sz);
-+        exit(EXIT_FAILURE);
-+    }
-+
-+    memory_region_init_alias(ram_hi, OBJECT(machine), "ram.high", machine->ram,
-+                             0, machine->ram_size);
-+    memory_region_add_subregion(system_memory,
-+                                s->memmap[TT_ATL_DDR_HI].base, ram_hi);
-+
-+    lo_ram_size = MIN(machine->ram_size, s->memmap[TT_ATL_DDR_LO].size);
-+    memory_region_init_alias(ram_lo, OBJECT(machine), "ram.low", machine->ram,
-+                             0, lo_ram_size);
-+    memory_region_add_subregion(system_memory,
-+                                s->memmap[TT_ATL_DDR_LO].base, ram_lo);
-+
-+    /* Boot ROM */
-+    memory_region_init_rom(bootrom, NULL, "tt-atlantis.bootrom",
-+                           s->memmap[TT_ATL_BOOTROM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory, s->memmap[TT_ATL_BOOTROM].base,
-+                                bootrom);
-+
-+    /* UART1, the soc console (UART0 is for the boot microcontroller) */
-+    serial_mm_init(system_memory, s->memmap[TT_ATL_UART1].base, 2,
-+                   qdev_get_gpio_in(s->irqchip, TT_ATL_UART1_IRQ),
-+                   115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
-+    /*
-+     * Atlantis contains a DesignWare uart while the QEMU machine
-+     * uses the serial_mm model with the base ns16550 register set.
-+     * Linux's dw driver writes outside of serial_mm's 0x20 sized
-+     * mapping and faults.
-+     *
-+     * Create an unimplemented device region so writes don't fault
-+     * and reads return zero, which keeps Linux happy.
-+     */
-+    create_unimplemented_device("tt-atlantis.uart0",
-+                                s->memmap[TT_ATL_UART1].base,
-+                                s->memmap[TT_ATL_UART1].size);
-+
-+    /* Load or create device tree */
-+    if (machine->dtb) {
-+        load_fdt(s);
-+    } else {
-+        create_fdt(s);
-+    }
-+
-+    s->machine_done.notify = tt_atlantis_machine_done;
-+    qemu_add_machine_init_done_notifier(&s->machine_done);
-+}
-+
-+static void tt_atlantis_machine_class_init(ObjectClass *oc, const void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-+    mc->desc = "Tenstorrent Atlantis RISC-V SoC (Experimental)";
-+    mc->init = tt_atlantis_machine_init;
-+    mc->max_cpus = 8;
-+    mc->default_cpus = 8;
-+    mc->default_ram_size = 4 * GiB;
-+    mc->default_cpu_type = TYPE_RISCV_CPU_TT_ASCALON;
-+    mc->block_default_type = IF_VIRTIO;
-+    mc->no_cdrom = 1;
-+    mc->default_ram_id = "tt_atlantis.ram";
-+}
-+
-+static const TypeInfo tt_atlantis_types[] = {
-+    {
-+        .name       = MACHINE_TYPE_NAME("tt-atlantis"),
-+        .parent     = TYPE_MACHINE,
-+        .class_init = tt_atlantis_machine_class_init,
-+        .instance_size = sizeof(TTAtlantisState),
-+        .interfaces = riscv64_machine_interfaces,
-+    },
-+};
-+
-+DEFINE_TYPES(tt_atlantis_types)
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 54e41a6afc90..5033415440d4 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -120,6 +120,16 @@ config SPIKE
-     select RISCV_ACLINT
-     select SIFIVE_PLIC
- 
-+config TENSTORRENT
-+    bool
-+    default y
-+    depends on RISCV64
-+    select RISCV_ACLINT
-+    select RISCV_APLIC
-+    select RISCV_IMSIC
-+    select SERIAL_MM
-+    select DEVICE_TREE
-+
- config XIANGSHAN_KUNMINGHU
-     bool
-     default y
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 798477b7882a..0d82ceacc430 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -11,6 +11,7 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
- riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
- riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
- riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
-+riscv_ss.add(when: 'CONFIG_TENSTORRENT', if_true: files('tt_atlantis.c'))
- riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
- 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
--- 
-2.47.3
-
+Thanks,
+Nutty
+> ---
+>   hw/riscv/riscv-iommu.c | 21 +++++++++++++++++++++
+>   1 file changed, 21 insertions(+)
+>
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index c9687e01a8..6828349fe3 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -648,6 +648,27 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
+>   
+>       switch (get_field(pte[0], RISCV_IOMMU_MSI_PTE_M)) {
+>       case RISCV_IOMMU_MSI_PTE_M_BASIC:
+> +        /*
+> +         * riscv-iommu spec MSI PTE basic translate mode:
+> +         * "When an MSI PTE has fields V = 1, C = 0, and M = 3
+> +         *  (basic translate mode), the PTE's complete format is:
+> +         *  First doubleword:  bit 63      C, = 0
+> +         *                     bits 53:10  PPN
+> +         *                     bits 2:1    M, = 3
+> +         *                     bit 0       V, = 1
+> +         *  All other bits of the first doubleword are reserved
+> +         *  and must be set to zeros by software.  The second
+> +         *  doubleword is ignored by an IOMMU so is free for
+> +         *  software to use."
+> +         *
+> +         * In other words, bits 62:54 and 9:3 of pte[0] are reserved.
+> +         */
+> +        if (pte[0] & (GENMASK_ULL(62, 54) | GENMASK_ULL(9, 3))) {
+> +            res = MEMTX_DECODE_ERROR;
+> +            cause = RISCV_IOMMU_FQ_CAUSE_MSI_MISCONFIGURED;
+> +            goto err;
+> +        }
+> +
+>           /* MSI Pass-through mode */
+>           addr = PPN_PHYS(get_field(pte[0], RISCV_IOMMU_MSI_PTE_PPN));
+>   
 
