@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F4E9C43602
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 17:34:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E016C43458
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 18:29:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wecLC-0006u4-E6; Tue, 30 Jun 2026 13:33:48 -0400
+	id 1wedCP-0003DT-J4; Tue, 30 Jun 2026 14:28:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wecKi-0006n2-Od
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 13:33:21 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1wedCO-0003DD-T1
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 14:28:44 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wecKf-0001qa-RC
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 13:33:16 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2c82538b6c0so30929995ad.2
- for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 10:33:12 -0700 (PDT)
+ id 1wedCN-0001jD-Cq
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 14:28:44 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-c96c92c0980so1094174a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 11:28:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782840791; x=1783445591; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YO+B+ZiXktj6oN262Vp+dQOZ7sT+QIXOTjCy7uqzCYw=;
- b=zR3YZskMYayX3XphggGmy8iOC55J7hCgNpFwIvo687fJpveOk8jIc3KRiow5NtTiiu
- A5HwkkMqfe11XDa+Q4MsnoLFhTCfiiLkasbI5Hqh0W0lVWIYmo8q19q2Vney8YJJcsOH
- ftPnBPV+C/kaXYfqtBM+XTPbLmoFCpqKG9MNasta+s093cqb2xu5+II9GWYwi4j3pqAr
- 3XTfCBdj/YxW9VK+dK+dreyIadRX0pSSjJojXpwlQpfYTXL9BzZ58byAsGBYK1QM2dAu
- 5UjwcxFMzAPHpnYBKbaP/C44FANTZzYWU50eXG7zMzxtLWMKqwPR7WXNRiKm2f9ha63A
- romw==
+ d=linaro.org; s=google; t=1782844122; x=1783448922; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=2Wc17ItNgaUDBvSNC3EzuTb8GqF3cZ/ioHshyrcjWxM=;
+ b=ArTls1SFEipn4zyYaxBi0TW7I3+qKxT+D5aKmUFeF6+HU8+m9HdNvrpbOPpJaDB2Yz
+ RUgu3jGO8z+SD+/kjs4t3OC6ta+IdnQPvfsTuuqQ/SYC0jcc/xOGo9MAOeXCBf592U/7
+ 5mZotKVC14wlU6MfifFou8Bj98J2NCZ9oFNQ+vyurts2yZymrKKMKh5j0ujQ2iVzTYXC
+ QMXu6NK2OkloWY6i0wJgsRVA/Cjzb1IYiEy2xdUHwrPEAH91n+Wj1jolICxK9cHgrsHb
+ kH3SpTTmxBuYxRA6yKZzO0Qd7HajuUNTGI9x28HFmGOGXWCV10tqFGLs6JWbmJyTMCXu
+ Le+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782840791; x=1783445591;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YO+B+ZiXktj6oN262Vp+dQOZ7sT+QIXOTjCy7uqzCYw=;
- b=SVqWmCVXaaKlTKiSoOp/jAfd+SaAF73vXOe5BRIp1PKG7k7lMLqnAnjYnUFz1jpS8w
- tTrISTQX7ryfq6bDSY9k3fyUpCdRnFBA75lW3OZbgSg6293K48wFync15NajQ3owHYZ0
- UlQ1WWjPZ/ibIczmxeuB8z3fuKH+5xdZt18D3g9YXQo5YfjBE59iCBObpX3YKfgTiXV+
- wm5BC/fc5gy4ogt03KSZUmSElpn1Mo1IE6YQfISJ+067Kfcy6Teg719XlSF1zFJyqkDP
- nF3yrmMMMfkJ95knYxB0fx7QQVC+EFQ7IJJfYgwkNUCLNXxuZA+h+I/N2kKqfOPiP86n
- nWCg==
+ d=1e100.net; s=20251104; t=1782844122; x=1783448922;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=2Wc17ItNgaUDBvSNC3EzuTb8GqF3cZ/ioHshyrcjWxM=;
+ b=ULCEfAsEn65tKp9bTLN6HFW5slSrSt+7DV1aQQVEfRPoCfMd6Ex+ckmXeOAmSlRuod
+ +Ci6XpLq/M3d89eUDQH2kLFPR2leKvwoFTqnHiK3b4HGBXzo7uCN2oe5eAx3lb8H3QWp
+ MzLe6C6mxjeHLUoQz+aSK8P2JeLT3gPuqlfuQ7Hl03DThic6KpclQ8BHPIQr/ZmTCwiO
+ N3ebUcNeAC7pfXmNdADzD8+ukyttWW4DhBgbp2aHjjinZGyZyu5s3vQtR0MQEcqFQiYi
+ Wyj/mqQEs+SL+LG30pB1uJld9zonlqtNQ5R42njIJoRSplaqpFdPOk41aQq5zcF+yz3O
+ miMw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoeDX3o0Bb05F9LfrLk41yYomdEiIDVlKDmERx69pFSDHsXreO1oq0p1xuvtiM/5j9rPiymR6MbErXX@nongnu.org
-X-Gm-Message-State: AOJu0Yye5gfHqDRTkbXM4DH60UdDCYKg/Ju5QBTuvCU9UMk8kvsBvE9/
- a1Nnqc1nueWm4Dt+DxK3PAej10HXjeiNFcshRbLVKj8etRC7bw4iNWPr/3nOcnMBVfo=
-X-Gm-Gg: AfdE7ck7aLE6V/YdVkFlpttF/um8zDZ8Q0c+SH0/HrpcRw4OGwD1Vl2yOmhdBR+cApn
- gK41kK4qe66A4v8URFFHM6kf30+vfcs4n0uKLVSNfSFUP4k0lXSUwALeiZqnrX9QWqa4CRfKkxw
- f8VzCUfOQM15gHQMJCi10oc3huzOKMuvaGcjwjr3Hyvk5AoCJMJ+w61lVgZTaCGOn6Ld9cFN6WD
- ojlJL6syjfjnJyuNhxFn5vQpKkoAIfnXMjJrh11qtickoW2cwTDT7Im9/cQgbj2M8e3qQRxYtUG
- AGU4Hqcal9awxJIbJLP4rtT5fcrg7LxhWPdkHg2vqhUfGY1LhTxPgwzVg+5t5nSBGlpaSIIc/J9
- UvWmEbjNc24ji3JZbuPZ8jRxhYwADkGPeObe10j5Iz06Fr2sBRibZOflbE5HfkdvZN2SbMwuMjG
- q1xetVcBLo2HYQzqyfzaX6VEcjT/bMRWLzi7lma2R1J8mQhQVqb3bZV1ZwfQ==
-X-Received: by 2002:a17:903:46ce:b0:2c9:c083:cd3f with SMTP id
- d9443c01a7336-2ca2d52b5cfmr34199875ad.1.1782840790896; 
- Tue, 30 Jun 2026 10:33:10 -0700 (PDT)
+ AHgh+RrfMlwK/Srjjmhp/thc5hHdjGBgfX/EHFeSn6Nisme5uG9iXmXCzICy4KsTEeMmYiUTxwCjEA/XFWt9@nongnu.org
+X-Gm-Message-State: AOJu0YwZgSOMEcp3PMFaC8mUAiIurW8Mbn/+JbnYYfmsZ8XCZYksTJnX
+ cIn/aUENs93cy/CARDdnSzMxghwO2g6NbiwPrjJl3/IVhFy0dWtGe+WXplmY2LsrIms=
+X-Gm-Gg: AfdE7cl+3oQK6XropXFw+lAI12sWLISihB4JnIWRmJzSuEYVmEqHdddZgjWvWkc2ruP
+ 0UPTEILmVParUkLsWaO3qBNfTHKZjisJknlkFiE9BST4apaPoMoUGl7ntfM9llp7LkW4dng0tDU
+ iApOEDGEirPOE+yjvpczBKpA+AcPfB5Hork/ZH0gV+XbwVBeeHsk0djIOHkQ0uXN1RtwEq0Bc9M
+ L+yBILo1JO3xEcevHShXs25QmG6RJxKMze8ATbU3KXK+2HpVqexRpfuvUYBpSL/bkh7T98IP8ik
+ +mWKoy9BCLuxL3EFiQ6xGIBAjMsm28iI+/mq6FcUtDaoEb1N/4pFWzPON2P4o14SWz2ikJgqbYb
+ EcHwyfHu2bWXTGgF889Jaylydhg/HdRieFZ7fyO9zX58yNWtE0kQ1KfJ3B0ibltiDWmh1CXYCq7
+ jSf/RmYYWzqZPsksHPjn9bNIG7QHjlHp+woGAKIgx1RppIBXxwBdR5NSrYpV0lte/V89km
+X-Received: by 2002:a05:6a00:c87:b0:847:8a64:29a5 with SMTP id
+ d2e1a72fcca58-8479eeccb86mr4077968b3a.12.1782844121695; 
+ Tue, 30 Jun 2026 11:28:41 -0700 (PDT)
 Received: from [192.168.0.4] (174-21-129-215.tukw.qwest.net. [174.21.129.215])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ca382acd0csm18696955ad.62.2026.06.30.10.33.10
+ d2e1a72fcca58-8479ff89f93sm2680657b3a.4.2026.06.30.11.28.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jun 2026 10:33:10 -0700 (PDT)
-Message-ID: <7a1ac883-82d0-441a-817f-440875f71afe@linaro.org>
-Date: Tue, 30 Jun 2026 10:33:08 -0700
+ Tue, 30 Jun 2026 11:28:41 -0700 (PDT)
+Message-ID: <46a6f923-ed24-48ab-8bab-7a8fc9956f36@linaro.org>
+Date: Tue, 30 Jun 2026 11:28:39 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 2/2] riscv/debug: migrate debug_check_breakpoint to
- use GTree breakpoints
+Subject: Re: [RFC PATCH 1/2] accel/tcg: use GTree for faster breakpoint lookups
 To: Shivang Upadhyay <shivangu@linux.ibm.com>, qemu-devel@nongnu.org,
  pbarbuda@microsoft.com, mohamed@unpredictable.fr
 Cc: pbonzini@redhat.com, philmd@mailo.com, zhao1.liu@intel.com,
@@ -82,14 +81,16 @@ Cc: pbonzini@redhat.com, philmd@mailo.com, zhao1.liu@intel.com,
  chao.liu.zevorn@gmail.com, qemu-riscv@nongnu.org, rathc@linux.ibm.com,
  harshpb@linux.ibm.com, adityag@linux.ibm.com
 References: <20260630171555.114844-1-shivangu@linux.ibm.com>
- <20260630171555.114844-3-shivangu@linux.ibm.com>
+ <20260630171555.114844-2-shivangu@linux.ibm.com>
+ <187d9a11-b1d0-44fa-bf91-43b723063a44@linaro.org>
+ <470cc3fdd99cfb62b41ed0238550a2b4f4fc4929.camel@linux.ibm.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <20260630171555.114844-3-shivangu@linux.ibm.com>
+In-Reply-To: <470cc3fdd99cfb62b41ed0238550a2b4f4fc4929.camel@linux.ibm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,118 +113,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/30/26 10:15, Shivang Upadhyay wrote:
-> as cpu->breakpoints is migrated to GTree, change the breakpoint
-> looping from QTAILQ_FOREACH to g_tree_foreach.
-> ---
->   target/riscv/debug.c | 71 +++++++++++++++++++++++++-------------------
->   1 file changed, 41 insertions(+), 30 deletions(-)
+On 6/30/26 11:17, Shivang Upadhyay wrote:
+> On Tue, 2026-06-30 at 10:31 -0700, Richard Henderson wrote:
+>>>     6 files changed, 118 insertions(+), 45 deletions(-)
+>>
+>> I think it would be better to use IntervalTree, so that we don't have
+>> to keep that second
+>> tree of pages.  Obviously, IntervalTree can query an interval, which
+>> takes care of
+>> querying for entries within a page.
+>>
+>>
+>> r~
+> 
+> As per my initial understanding of Interval trees, The primary goal of
+> them would be store intervals, and then query with point/intervals. But
+> current usecase is storing points and querring with intervals? maybe i
+> can be wrong with this idea.
 
-(1) This can't be a separate patch, because the first patch can't compile
-(2) You can't use a global variable for bp_found.
+A point is simply an interval of 1.  In this case, start = last = pc.
 
 
 r~
-
-> 
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index 30d39ee5cd..6b2ffd08db 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -939,53 +939,64 @@ void riscv_cpu_debug_excp_handler(CPUState *cs)
->       }
->   }
->   
-> -bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
-> +static bool bp_found;
-> +
-> +static gboolean check_breakpoints(gpointer key, gpointer value, gpointer cpu_state)
->   {
-> +    CPUState *cs = (CPUState*)cpu_state;
-> +    CPUBreakpoint *bp = (CPUBreakpoint*)value;
->       RISCVCPU *cpu = RISCV_CPU(cs);
->       CPURISCVState *env = &cpu->env;
-> -    CPUBreakpoint *bp;
-> +    int trigger_type;
->       target_ulong ctrl;
->       target_ulong pc;
-> -    int trigger_type;
->       int i;
->   
-> -    QTAILQ_FOREACH(bp, &cs->breakpoints, entry) {
-> -        for (i = 0; i < RV_MAX_TRIGGERS; i++) {
-> -            trigger_type = get_trigger_type(env, i);
-> +    for (i = 0; i < RV_MAX_TRIGGERS; i++) {
-> +        trigger_type = get_trigger_type(env, i);
-> +
-> +        if (!trigger_common_match(env, trigger_type, i)) {
-> +            continue;
-> +        }
-> +
-> +        switch (trigger_type) {
-> +        case TRIGGER_TYPE_AD_MATCH:
-> +            ctrl = env->tdata1[i];
-> +            pc = env->tdata2[i];
->   
-> -            if (!trigger_common_match(env, trigger_type, i)) {
-> -                continue;
-> +            if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
-> +                env->badaddr = pc;
-> +                bp_found = true;
-> +                return true;
->               }
-> +            break;
-> +        case TRIGGER_TYPE_AD_MATCH6:
-> +            ctrl = env->tdata1[i];
-> +            pc = env->tdata2[i];
->   
-> -            switch (trigger_type) {
-> -            case TRIGGER_TYPE_AD_MATCH:
-> -                ctrl = env->tdata1[i];
-> -                pc = env->tdata2[i];
-> -
-> -                if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
-> -                    env->badaddr = pc;
-> -                    return true;
-> -                }
-> -                break;
-> -            case TRIGGER_TYPE_AD_MATCH6:
-> -                ctrl = env->tdata1[i];
-> -                pc = env->tdata2[i];
-> -
-> -                if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
-> -                    env->badaddr = pc;
-> -                    return true;
-> -                }
-> -                break;
-> -            default:
-> -                /* other trigger types are not supported or irrelevant */
-> -                break;
-> +            if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
-> +                env->badaddr = pc;
-> +                bp_found = true;
-> +                return true;
->               }
-> +            break;
-> +        default:
-> +            /* other trigger types are not supported or irrelevant */
-> +            break;
->           }
->       }
->   
->       return false;
->   }
->   
-> +bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
-> +{
-> +    bp_found = false;
-> +    g_tree_foreach(cs->breakpoints, check_breakpoints, cs);
-> +
-> +    return bp_found;
-> +}
-> +
->   bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->   {
->       RISCVCPU *cpu = RISCV_CPU(cs);
-
 
