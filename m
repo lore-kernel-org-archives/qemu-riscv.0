@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 947D1C43327
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 02:52:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99496C43602
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 02:52:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1weOZH-0004fB-Df; Mon, 29 Jun 2026 22:51:23 -0400
+	id 1weOYW-0004GA-Mj; Mon, 29 Jun 2026 22:50:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1weOZA-0004bv-6h
- for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:51:16 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ id 1weOYV-0004F5-2n
+ for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:50:35 -0400
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1weOZ8-0002ls-2U
- for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:51:15 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-37fb434c547so1860850a91.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 19:51:12 -0700 (PDT)
+ id 1weOYT-0002Lf-3U
+ for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:50:34 -0400
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-37fc01a7835so1318905a91.3
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 19:50:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782787871; x=1783392671; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1782787831; x=1783392631; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5i2HJZAo+KK0Z/zDUj9Z8Rbai8WnFXe2qEi9yRXKlcw=;
- b=RlaGfpm06ZBJVi49yg6XafXXJQ2s9Qy0N/1JjfxoWciFPyTqj6NO2Ohu+mKn9x7tQw
- SuBOzb5w+PgdZGU7H6WpFKnB/JJJ7+dKePoh70a0XEKuzds/yuA60BmnGgzAeFt3Jmut
- GDayNadL9dXNA1sCel/oCLvy6iH8flcsQgVwPZTm7awMrFsVLWsk6fgmpnGNdsbmRoy3
- uAKdtIdAk+trTsJ5nGKZpzyYKxu/iU+QsY/nDWQ08siOswdMmzLbQQ2TqrHDG5WJSo9j
- DDkrfZJwxspWF4RirDETWxCQYVs7itFQRwYqiI2m8Ih6v3iT3BDZYFVF6YDf8P33QXGL
- 9rbA==
+ bh=skdYhJTqd6ST5O5dhp4YffIjdJRjr5no/Dx8UOIavo8=;
+ b=M0MZicOVTMIgWmua6tYVIC2/Oh52TN0i2LLvgCLthYvCKM97Iw1f1bzQwQxMs+pSYS
+ rb80SFYm8mKzuR3w7rEtHWgLDhGxDHft/jtCKsPfsUk54hXaeW3nmXancJow+lismd1j
+ t/qsuLSSyQWrEtB+tgROfxfynSB4Fq4DTds6F0jBKRshVtheJmaCJ/g8p8Uw42/p2poP
+ QO/Ik/AimcGfhNjP5mJHlCyIVZIdDVfCz4WKup6HH4tepilt2Y4GjXHXGL8xPy5vFbrR
+ 5RdIh9FgU9S3bI8YzJ+fikLnBoaGnM4LaQOAUjjpBuoX+Lv3YKUTcBLvD/sg1P0Gxdc/
+ Vm8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782787871; x=1783392671;
+ d=1e100.net; s=20251104; t=1782787831; x=1783392631;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5i2HJZAo+KK0Z/zDUj9Z8Rbai8WnFXe2qEi9yRXKlcw=;
- b=rp2Gs+mKpKg/KKnraR0D8OGgqHGYrs9MmJ0EkGSp3Hy5hlAOSq7zo1RHxwAFigHmnf
- nWflzN94JyKEDmZuwAjxuuFBXQXAUdFFmru704tim3Td+i7vxAfAhh3tzTO7k70cjm1z
- jHsnZ/kHpGuna1wdk55M0ltcXGa2bcYlvfsB/JwNjmsXfCYzrNk5ZT4AYSYB9csRtXBU
- Y2aYenIdBslqCE4GcrYGC5nnOXUIJtIMTvsEfBN5Riw7/nVppEaQK/fCWB9NyDRLmX7R
- EFhQzz9soCBLsk3aqPUuH/iX6O8ssFmAdf4bF3n5+oWw4WOz6F0DSWYPJn1fW30JHINb
- pIZg==
+ bh=skdYhJTqd6ST5O5dhp4YffIjdJRjr5no/Dx8UOIavo8=;
+ b=hijSqO7RE/eb2lXEtvz862lAL57mApg1ByT/IztL9nT0Jxs8ooa9QgO7ly/U1M66yH
+ A8eyv2w1O7tS+EvJKKFzI+8HcPNNxq7h+JwDBJe558G8KZGZ8lS7Olm+WQ1IECMRGSjj
+ EijQajVlzUvnaiP/PgkzfbJhFZtuNKbveqYw8b5VrWy30yG3Qiw4C387z2bl+n15tOfn
+ e6E5QgWwTtJo4n9g4t7ZEDLmUU4QR7s5UAb8MtIR9I41ebHAk6oYfzIGTXVbyvZC1gdo
+ dZLt98OOtMyhsFdqhV+hTdI1wrCuaNfEng15/KzjW+0snrgrHc2ztz/w959kDrYfjveA
+ jqUQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rp/vuvYVlNw8EM2GIjArTICR2rcjZ74j4Jg6eLPSEdV1xw48Xq0or1XncA0LOZnp/WGgNIrfXVUVbk5@nongnu.org
-X-Gm-Message-State: AOJu0YzvsUsBgJpb0j+dEV17tHVw4SAmgpJin7DykQc89hw9fh9VdY8W
- Z7OzDZnKM7bpqPhw3zZGRUGtYxfZU3g89UzHMo5ZgeGl8pNgeXSZRGEp
-X-Gm-Gg: AfdE7cmMQBN6VEXAn1vxomXMVeihB3JCrBcqj09MJo/uCxpMXtXGZVi9t73XWgGUXVm
- tVWGPY/OsaZS01vYqV6Wjp6xTCurZymI4ZCE1kBOwyxMd/O67Zv1bxKjZoHN7SADam20WgYjJRp
- /rEYiq8DlInW6Jdyp0s3yJqPE1H7Hyw/Erf9GSzPiNZdj3KaDBcf3dVWwBWGdIyADAR4JWaeDKn
- doSqO20Gat9o4UW/HcWP67r/5vdnbMyJtMSZVt1LqqwxE1KL64KI31TPozwjZJyulxgBH/w5clP
- qR1m5/zdnLHgUI8d5By3zW5ie/ffhaszYsdWnm4zuRXIiWpCOKOBiE/J8ZW51RhMPWC9gg7EMoj
- Y9ttf9KM00FqB9VN7j7m0pH44iXoAXmhaaudTo75Q2bLjA1XL/AOyaygK7zuSxQvYZTiEJslInh
- wJjanrB+Mkp3/lEJLQrblhboUMmxxGDR983iAnovZpfOq85X1hHF5Wv+/6oRQ7v1jReFak+mHBr
- EbG1BkKwEBgXkGtwdYJf+IgyGa1AaVAemrJXGwfC/A=
-X-Received: by 2002:a17:90b:3e4d:b0:37f:9ce2:348b with SMTP id
- 98e67ed59e1d1-380527fcd46mr1221775a91.28.1782787871441; 
- Mon, 29 Jun 2026 19:51:11 -0700 (PDT)
+ AHgh+Roag2Iwur0ebh7YzGWhQ0cq2pn2Mwo6rwil5lhS4Fn8681rV0X92BQZ8SMnyq7iqBNxdiN93BLeaSwJ@nongnu.org
+X-Gm-Message-State: AOJu0Yzo1c3tFe6wEDKq1dQcaLXGI3We9DFnVf3qtk52qoInqDfSlmLX
+ tii8wP/HJp6A7pdYDF5Eo/qC/jLk2P72qmvvmq9hWGl2zcPizMsShipg
+X-Gm-Gg: AfdE7cmIBPO5NJa/7eVaPzJ2bHdtV7dIhNSOIGGmwaoZNR6MfC6gpAYu9+ErrU1Jsd4
+ vNMp7QeRBYPEAtVi7PTWeOiPV4hBi3mVZyCq4qTyBRShtGKTcvHZviNWaGLsmDaZE85yn70wiN7
+ dPJ663TdDkSmvQ1uK63XJyKwROQgMkKfYRWYN08Rq3k4oNO2gqyHcBoZoYGOt6iFgfqYDNRc5e7
+ 1DrgIjlK7Ebjc1mD+WodXi1N99vSmCKW0nOW93OxXCMotLKgwD1aXkoDw0N4opPTJwLOaLyWwsa
+ 344RzX0aFLqRVQStb0R51NFCuxy4Fa0oSS8cDH65bBKzfZb1jY+9LFK4ILmL7ghlIgacMWrDQpF
+ KZ58DN9AXzpJT8lQ4YmPRkz7gvmFqlq0/AXRWHnYvTFRp2gXGqJSZgPJJ7mVMN/W+VM2Q9FlQQh
+ XmIKKKzzfqudNpe0Ug96lZPWkh0qWx+WpOsa19Yf+ZD5lZ9y3R7Dat5uQni0L83FdWoqfyWcGk3
+ +ZfqKqRP7z3Bq/mONCoOKjApeSOMH4D3h6+jqi75hM=
+X-Received: by 2002:a17:90b:554f:b0:37f:9cdf:f038 with SMTP id
+ 98e67ed59e1d1-380527a8ea4mr1175010a91.27.1782787831251; 
+ Mon, 29 Jun 2026 19:50:31 -0700 (PDT)
 Received: from donnager-debian.. ([45.124.203.15])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-38052f32661sm704545a91.9.2026.06.29.19.51.06
+ 98e67ed59e1d1-38052f32661sm704545a91.9.2026.06.29.19.50.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 19:51:10 -0700 (PDT)
+ Mon, 29 Jun 2026 19:50:30 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: Nicholas Piggin <npiggin@gmail.com>,
@@ -77,19 +77,18 @@ Cc: Nicholas Piggin <npiggin@gmail.com>,
  Joel Stanley <jms@oss.tenstorrent.com>,
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
  Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v10 12/12] hw/riscv/atlantis: Add some i2c peripherals
-Date: Tue, 30 Jun 2026 12:19:50 +0930
-Message-ID: <20260630024952.1520546-13-joel@jms.id.au>
+ qemu-devel@nongnu.org
+Subject: [PATCH v10 05/12] hw/riscv/aia: Configure stride for the M-mode IMSIC
+Date: Tue, 30 Jun 2026 12:19:43 +0930
+Message-ID: <20260630024952.1520546-6-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260630024952.1520546-1-joel@jms.id.au>
 References: <20260630024952.1520546-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x102d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1030.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -113,96 +112,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add an I2C RTC device and a temperature sensor. These are not present
-on the board but help for testing.
+riscv_create_aia() currently hard-codes the M-IMSIC at one 4 KiB page
+per hart and gives callers no way to widen it.
 
-The tmp105 is a lm75 compatible temperature sensor used by the
-SENSORS_LM75 Linux kernel driver.
+Add an m_imsic_stride parameter that supplies the per hart byte
+stride directly. The virt machine passes IMSIC_HART_SIZE(0)
+(= 4 KiB), preserving its existing compact layout.
 
-The ds1338 is a RTC device that is used by the RTC_DRV_DS1307 Linux
-kernel driver.
+The parameter only changes how the slots are spaced, with the rest of
+each slot reserved. This allows future platforms that have different
+layouts to control the stride.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@mailo.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- hw/riscv/tt_atlantis.c | 27 +++++++++++++++++++++++++++
- hw/riscv/Kconfig       |  2 ++
- 2 files changed, 29 insertions(+)
+ hw/riscv/aia.h  | 1 +
+ hw/riscv/aia.c  | 3 ++-
+ hw/riscv/virt.c | 1 +
+ 3 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 5ce150fff7e9..beaf64e0c114 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -64,6 +64,13 @@ static const MemMapEntry tt_atlantis_memmap[] = {
-     [TT_ATL_DDR_HI] =          { 0x100000000,  0x1000000000 },
- };
+diff --git a/hw/riscv/aia.h b/hw/riscv/aia.h
+index 5ad0a902be0d..565f91accc09 100644
+--- a/hw/riscv/aia.h
++++ b/hw/riscv/aia.h
+@@ -14,6 +14,7 @@
+ uint32_t imsic_num_bits(uint32_t count);
  
-+static I2CBus *i2c_get_bus(TTAtlantisState *s, unsigned busnr)
-+{
-+    assert(busnr < TT_ATL_NUM_I2C);
-+
-+    return s->i2c[busnr].bus;
-+}
-+
- static uint32_t fdt_phandle = 1;
- static uint32_t next_phandle(void)
- {
-@@ -309,6 +316,19 @@ static void create_fdt_i2c(void *fdt, const MemMapEntry *mem, uint32_t irq,
-     qemu_fdt_setprop_cell(fdt, name, "#size-cells", 0);
+ DeviceState *riscv_create_aia(bool msimode, int aia_guests,
++                             uint32_t m_imsic_stride,
+                              uint16_t num_sources,
+                              const MemMapEntry *aplic_m,
+                              const MemMapEntry *aplic_s,
+diff --git a/hw/riscv/aia.c b/hw/riscv/aia.c
+index 82ea9d48ea75..ed8916002945 100644
+--- a/hw/riscv/aia.c
++++ b/hw/riscv/aia.c
+@@ -25,6 +25,7 @@ uint32_t imsic_num_bits(uint32_t count)
  }
  
-+static void create_fdt_i2c_device(TTAtlantisState *s, int bus,
-+                                  const char *compat, int addr)
-+{
-+    void *fdt = MACHINE(s)->fdt;
-+    hwaddr base = s->memmap[TT_ATL_I2C0 + bus].base;
-+    g_autofree char *name = g_strdup_printf("/soc/i2c@%"HWADDR_PRIX"/sensor@%x",
-+                                            base, addr);
-+
-+    qemu_fdt_add_subnode(fdt, name);
-+    qemu_fdt_setprop_string(fdt, name, "compatible", compat);
-+    qemu_fdt_setprop_cell(fdt, name, "reg", addr);
-+}
-+
- static void finalize_fdt(TTAtlantisState *s)
- {
-     uint32_t aplic_s_phandle = next_phandle();
-@@ -336,6 +356,9 @@ static void finalize_fdt(TTAtlantisState *s)
-                        TT_ATL_I2C0_IRQ + i,
-                        aplic_s_phandle, periph_clk_phandle);
-     }
-+
-+    create_fdt_i2c_device(s, 0, "dallas,ds1338", 0x6f);
-+    create_fdt_i2c_device(s, 4, "ti,tmp105", 0x48);
- }
- 
- static void create_fdt(TTAtlantisState *s)
-@@ -551,6 +574,10 @@ static void tt_atlantis_machine_init(MachineState *machine)
-                            qdev_get_gpio_in(s->irqchip, TT_ATL_I2C0_IRQ + i));
-     }
- 
-+    /* I2C peripherals: qemu specific */
-+    i2c_slave_create_simple(i2c_get_bus(s, 0), "ds1338", 0x6f);
-+    i2c_slave_create_simple(i2c_get_bus(s, 4), "tmp105", 0x48);
-+
-     /* Load or create device tree */
-     if (machine->dtb) {
-         load_fdt(s);
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index dcce819bf6e9..de37c08caece 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -130,6 +130,8 @@ config TENSTORRENT
-     select SERIAL_MM
-     select DEVICE_TREE
-     select DESIGNWARE_I2C
-+    select DS1338
-+    select TMP105
- 
- config XIANGSHAN_KUNMINGHU
-     bool
+ DeviceState *riscv_create_aia(bool msimode, int aia_guests,
++                             uint32_t m_imsic_stride,
+                              uint16_t num_sources,
+                              const MemMapEntry *aplic_m,
+                              const MemMapEntry *aplic_s,
+@@ -47,7 +48,7 @@ DeviceState *riscv_create_aia(bool msimode, int aia_guests,
+             /* Per-socket M-level IMSICs */
+             addr = imsic_m->base + socket * (1U << IMSIC_MMIO_GROUP_MIN_SHIFT);
+             for (i = 0; i < hart_count; i++) {
+-                riscv_imsic_create(addr + i * IMSIC_HART_SIZE(0),
++                riscv_imsic_create(addr + i * m_imsic_stride,
+                                    base_hartid + i, true, 1,
+                                    num_msis);
+             }
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 8f80c0607b92..b68067cfddd4 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1401,6 +1401,7 @@ static void virt_machine_init(MachineState *machine)
+         } else {
+             s->irqchip[i] = riscv_create_aia(s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC,
+                                              s->aia_guests,
++                                             IMSIC_HART_SIZE(0),
+                                              s->num_sources,
+                                              &s->memmap[VIRT_APLIC_M],
+                                              &s->memmap[VIRT_APLIC_S],
 -- 
 2.47.3
 
