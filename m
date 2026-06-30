@@ -4,132 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E66A9C43458
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 21:11:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6658C43458
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 21:20:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wefjP-0002fD-4z; Tue, 30 Jun 2026 17:10:59 -0400
+	id 1wefs1-0004d8-5G; Tue, 30 Jun 2026 17:19:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wefjO-0002ed-34
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 17:10:58 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
+ id 1wefry-0004cb-BA; Tue, 30 Jun 2026 17:19:51 -0400
+Received: from xmbghk7.mail.qq.com ([43.163.128.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wefjM-0005Vj-ET
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 17:10:57 -0400
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65UJDZBW2942559
- for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 21:10:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=np0FPgcNdXo12h6KgyPs/L/R7a9BfjPi8l3
- oXXD/rvg=; b=ZdEe6rxJC7GzofwvDijW710NZx2p4rAVq+uJdVUQQssjXFSv9ss
- O6b5zQepaklT3aEWsmCrgF2KMKiWm5RNBD1NCq6oE5Xz5YrwgK3fEQOPM/+k54t2
- O5nJB1XP/7N+WoBT0qWsG1dqIghi8mGyxBS2Np1N1hEnuz/qVafZFfoKcO3JOfsi
- MW32lrwsOLrmF0xUsyFltH1DZCPiVBqz1yMxkY0V9saJV+hot9hwanDdztycQBlQ
- IS1HXWvSa7GJsorW1+NVThmIw9/o7o7U2D/HP7TUi1PfZhRsQrnd7UUv5bDda3cs
- h8ayL6YbNxSPhEU4b6sjZUQZRjgOgk6xLIA==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f4j99gxw9-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 21:10:53 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id
- a92af1059eb24-139871a52c2so7129080c88.1
- for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 14:10:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1782853853; x=1783458653; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=np0FPgcNdXo12h6KgyPs/L/R7a9BfjPi8l3oXXD/rvg=;
- b=Zdp35mBvJ+Bs/ge8xUZAuFw0qn8BIB2wzjvEdnNFfV7vL39TvHMKHPOJOv2vUXO8tn
- JdcsPiFV8LlnhpGcDhYnXgTXdSkQfhv5Tps4rNQI/KOjmFauCKPfvnXHbV9qhxZQuyww
- EPlzLVvJp9hDukscj7mcZvfphsctij7Nf9cp9LFjGro85rorOJvO2exDz1g4XU/XtRbW
- 3ZxyzDp1K4UhJZTv26Ii/0dk9gFjQper5Z8sXf1+NDo5ieV2IO3DBvyq0skC8Q4CuT+d
- JsNBhbjZMAEBAdAsT9YLxMzVMnUCVrKe60xyjRvhkNUZatFsFR/59RZfIFJf3JdPlwJw
- 9ywA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782853853; x=1783458653;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=np0FPgcNdXo12h6KgyPs/L/R7a9BfjPi8l3oXXD/rvg=;
- b=nS+FVlPeGDyLpsVZS20ly9HTnVoQGat1zhuB+AHwizKTJR6H5PYOM8WcIiT0zzUkWc
- z0Bv9/hcrCTTPIAwSHWvMhKPk4SYnlpNBAgCXDusvJRU6eyDxy+bigv4T5HB9ZWJrV1N
- 5mVnknMpwgL4Cv0MUt39HttyZP3Ry5XjqumjnacjUC0BCbv27KbNMf5gdjHWVMkaC8A0
- hfEbEGCpci8QnOZZ9E03OuA8jg9/3/rOm+C/eQ//lHyr1M3OEzfgX1xT/W7AwQmZDxy/
- L486H4jgNi2oKj2rRqSFp0jJXKLFpZGmzTruHulnCrXPlFO7WG0WENrOJeOOS3q+uGZG
- y8Hg==
-X-Gm-Message-State: AOJu0YyOqiE776d9tT5ZfCGlnN0UoHJwKZ+JbCoIIg+oeFXbDCpWjCSE
- 2kLK0BtNS9Y2lERlIPEJ+PKn+W5UkgyPKKbYUjNrfsfMbqB5sC8JH8IOriai6d2FeOJzBPTm8Xk
- P3FRqYRnJ4Wj/I3HL9KQl2TIPb2e5X53LvBuJih1HefrmlyZr60vKt1PJWw==
-X-Gm-Gg: AfdE7cmac8Y3KPGZAFnC0jbTwYMwGncxRmb7cKHrAbMmGbP/zcxg0EfbzY35RSJ1uH3
- tRP3H7Ryxpd36zqiJkwwx1jElEPcgGlmrxWc14FxnlH/qvbxQd97X3/+ic2S2NuHs267mdw8pTh
- u8Nf1oHjrXvCeMqtwXurhx05dmBGQ5EPeRf9fCnRt+oE0S6F+mrMZDbU1gsVbQSCXI2uWdpnykt
- 9RM8wymIOPjrU7Gq/HMbPaS75IzVBId2fsPhclHJ9Xq1XQbonhVpSKAh6qEAAQX5SGd5tkm+yCe
- J0qX3SU74exRIALadPPcbs5bqyR1F3we1m4Q1IgLKChXMEi34rhhqmD3jQyZTN/uK9jjlkHIsjg
- KFzY2uCqCew1X9UrOvYJLSc0vjp6ldVnTjohC66akCoFM4g==
-X-Received: by 2002:a05:7022:f686:b0:138:2239:be with SMTP id
- a92af1059eb24-13b2a142f8fmr3399254c88.8.1782853852920; 
- Tue, 30 Jun 2026 14:10:52 -0700 (PDT)
-X-Received: by 2002:a05:7022:f686:b0:138:2239:be with SMTP id
- a92af1059eb24-13b2a142f8fmr3399227c88.8.1782853852346; 
- Tue, 30 Jun 2026 14:10:52 -0700 (PDT)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.79.21.40])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13b2aba8008sm9364232c88.11.2026.06.30.14.10.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 14:10:51 -0700 (PDT)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- andrew.jones@oss.qualcomm.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH] hw/riscv/riscv-iommu.c: always fault with SADE=0 and A=0
-Date: Tue, 30 Jun 2026 18:10:44 -0300
-Message-ID: <20260630211044.82894-1-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
+ id 1wefrv-0000Fe-Pr; Tue, 30 Jun 2026 17:19:50 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1782854377; bh=C9JU5nYmpNBq44scWx9gShXAN2m+5opKU2KoGCuFvyk=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References;
+ b=C3q0sUJtI4f6lWNvKiFQBRy2LiOhW32+GeF58gPg/j2tN0FuaYYAcjvIn489JTw85
+ T/DYNk+XHCR5gjdrAeM1kGwJrQM1TVvjQEqStDJ/akSDmin7ndRW78VK8j9Y6nCVn5
+ Or4L68qnbicQv8jrXZZO/fdzwIH9WZqtrfXHPyAo=
+Received: from [192.168.1.10] ([220.166.214.112])
+ by newxmesmtplogicsvrsza63-0.qq.com (NewEsmtp) with SMTP
+ id 4E289658; Wed, 01 Jul 2026 05:19:34 +0800
+X-QQ-mid: xmsmtpt1782854374tr4hy914i
+Message-ID: <tencent_7F27F8BD919DB95B3CC8499DAEC9227DCD0A@qq.com>
+X-QQ-XMAILINFO: NC4p7XQIBeahXtGvXkf7zacvMTstsgmVIedma5m3VoZIk8VjssiokL2UHbRQp9
+ sLoX5Zi1LdrRbnxEN1b/ZSxezWvRG5HKZQ22UXX/qo/3EzxwXr/BGq0f6QQEdtH8FCNTSKNUG6L5
+ SQLe46Ws67nfEMwGUI3mM1d0H7q1ShDzsTUi24rawJIqXsTREhkRwPWQpO7a44F1cWdbzz63AjIz
+ IUQFkQlVWVGdJ3KxCwMCh1rJFRnZ7xfIdZI8+C50GiMl9eBieTXSBi7+Vy2oNnAb2zQ3NSsHIvzc
+ 6GIlTxjvlc2L9qvrTIAzzfn96r8BogMFYQbaZH/ZpRTSZKdMpzuQJUC8G43XEyHy815luyD1a1hR
+ OP9tlzE2ofrBGGLn4bJV9hR7HZNneJxIpOPJxN4b53jAV2yaPmWTg5RyLfc2VZbk7x0E4wi2ZH03
+ UJERW+cNiWa1y9Gsjm+DLFlKs9mFD6JwdsuN0HvXjhws6p88Zwm71dXsybZgK52vHkZUCVLJiOlK
+ +q6wqHRLeSZqxJfjcBAnMDrRBcD94L2NKXM9mabyQvHgAEkWWCXoMooQk1HWo8eGd+yV24GCC2bH
+ 590oGM4n89IhT6B/VsZ8b8CkJyAfjpJkJU+aTxSpfjWGoBPECHnc7mA/YARgPsrDiEsR3A+s+tFH
+ mw/UvQl6ncx1WECqsXE2U6ArOvmBAr3f3XqKPb9FqrDnrbsjd9DXho7GnHY2YxV29CD8nYu+YZf3
+ 8UDMrYBDrICQ1U6EC5hM4I5H8DfQ2r4+N0hZiYk7bgpQTthJsZN76+M0GaDSfmhCWz0e51UCSE4I
+ KfrSue5e6MVMOPA/L8uJcE/LUYpkr2ctLNEHPMHb+lG2iJg0fc/0QZTfxpvbXuDoCv3S1XRQKZ0J
+ nBeFIncjHeloovuecUXknLhWl4LrYl80O/t12ioQCH4zHLJJK5z3U5BeLPrwi1UTPz7vbo5T+f/H
+ DqfcccA82gezzkXSiHN//pbcIczsb6NhHPqbwNq2X8EvqZ5z2ysCet9wyoYkFz4yxf1QjP1HPt5P
+ rtFj8L+Q==
+X-QQ-XMRINFO: Nq+8W0+stu50tPAe92KXseR0ZZmBTk3gLg==
+X-OQ-MSGID: <8cbc0b95a652cd34f40979c94cd7c2df9ef9fc45.camel@qq.com>
+Subject: Re: [PATCH v1] riscv/virt: Add secondary UART
+From: Yanfeng Liu <yfliu2008@qq.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com,  zhiwei_liu@linux.alibaba.com,
+ chao.liu.zevorn@gmail.com
+Date: Wed, 01 Jul 2026 05:19:34 +0800
+In-Reply-To: <CAFEAcA9qpbF+hFpuYpqZrepozryA=ZuDhHLijYAZucumfAMkGQ@mail.gmail.com>
+References: <tencent_AB4D09097B1EC06F8C6CD11DF2C14E8A6D05@qq.com>
+ <CAFEAcA9qpbF+hFpuYpqZrepozryA=ZuDhHLijYAZucumfAMkGQ@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4-0ubuntu2.1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjMwMDIwNSBTYWx0ZWRfXz67CfTWLKoZg
- aRm72YIFP3mg9X76HCJSWSE2mOkkiTe3TDvpEynG1MwQuqf38KKXHaRgD3SxTHB1AgW5mL3AvW2
- IGIuVonNEnZhO9YmAX/lWOuAa4eUGeU=
-X-Proofpoint-ORIG-GUID: udxBpOp21FhHOA5agF8xXZrfPVQXUwiP
-X-Proofpoint-GUID: udxBpOp21FhHOA5agF8xXZrfPVQXUwiP
-X-Authority-Analysis: v=2.4 cv=bNcm5v+Z c=1 sm=1 tr=0 ts=6a4430dd cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
- a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=DKeKJJKbz6FZDBTM3_IA:9 a=vBUdepa8ALXHeOFLBtFW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjMwMDIwNSBTYWx0ZWRfX6sZIQhHc94O6
- zk1sirfOQ5yXXT9E7aZ9a+BlmSuhkcFElHrN9biyUSQfEbe/z102UglGIv/d7cncWku9WhKyOOa
- Ue4F46iHDTeeVC41UIVvojXPqCF94H94aHoTYqz0XuYrHg3MWH9HUuSRAPWtARs0Li1C29l0q2P
- 6xM5NS9gqueIBNKALlI2AyUHp1CUY3YR8YCFKyD7yBFULnnjc9FU4SoV3OxA8a6LyXgUC8yE4yl
- astY+c7WegdfI0GwiSfjfe9bbRO5g2sBU415q+0TYtWZalXdW40LlTJJGwNr0Hdbw+82YsSH2+r
- LqUCJbDSMyCHcM3sccCrW1vCBqTP0uyxXaHyPBrg4jCQZ69B3YnVhTfJerawP7QAOirnGwcmksY
- afebW5r1ghD/ybdnMx4hv5CxT7q07zJ0xoKG49EO0D/bzrl1YZwRC34pS4jaPb+SKKjwOCy5p7Y
- y0KJmyjOcyHRGzFzCxg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-30_05,2026-06-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 adultscore=0 clxscore=1015 priorityscore=1501
- suspectscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606300205
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=43.163.128.43; envelope-from=yfliu2008@qq.com;
+ helo=xmbghk7.mail.qq.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -146,36 +86,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-riscv-iommu spec: "If SADE is 1, the IOMMU updates A and D bits in
-first-stage PTEs atomically. If SADE is 0, the IOMMU causes a
-page-fault corresponding to the original access type if the
-A bit is 0 or if the memory access is a store and the D bit is 0.".
+Peter,
 
-Note that SADE=0 and A=0 will always cause a fault regardless of the
-original access type.  Right now we're faulting in this case just for
-reads.
+thanks a lot for the comments, will send v2 later.
 
-Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3551
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- hw/riscv/riscv-iommu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Regards,
+Yanfeng
 
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index c9687e01a8..70eede3f14 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -480,7 +480,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-             break;                /* Read access check failed */
-         } else if ((iotlb->perm & IOMMU_WO) && !(pte & PTE_W)) {
-             break;                /* Write access check failed */
--        } else if ((iotlb->perm & IOMMU_RO) && !ade && !(pte & PTE_A)) {
-+        } else if (!ade && !(pte & PTE_A)) {
-             break;                /* Access bit not set */
-         } else if ((iotlb->perm & IOMMU_WO) && !ade && !(pte & PTE_D)) {
-             break;                /* Dirty bit not set */
--- 
-2.43.0
+
+On Mon, 2026-06-29 at 10:37 +0100, Peter Maydell wrote:
+> On Sun, 28 Jun 2026 at 08:06, Yanfeng Liu <yfliu2008@qq.com> wrote:
+> >=20
+> > This adds secondary UART device to RiscV virt board to simplify
+> > multi-core bare-metal development as Virtio needs comparably
+> > more work.
+> >=20
+> > Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+> > ---
+>=20
+> Just a note that for other architectures we have seen the
+> addition of an extra UART cause breakage for previously
+> working guests, usually because they took the approach of
+> "find the first UART node in the DTB" and/or because
+> different software at different levels of the stack was
+> looking for the UART in the DTB differently and so you
+> ended up with e.g. UEFI outputting on one UART and the
+> kernel on the other. A particular trap is that the order
+> of nodes in the final DTB ends up being the reverse of the
+> order in which they are added in the code in QEMU.
+>=20
+> Compare commit 5d8a250f9068 (openrisc) and e7100972f2 (arm)
+> for descriptions of some of the things we've run into and
+> the measures we've taken as a result. It's possible that
+> not all of these will be relevant for riscv but it's quite
+> likely that some will.
+>=20
+> thanks
+> -- PMM
 
 
