@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A78C43458
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 02:51:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED0D7C43458
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 Jun 2026 02:51:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1weOYB-0004B9-PV; Mon, 29 Jun 2026 22:50:16 -0400
+	id 1weOYT-0004EW-F7; Mon, 29 Jun 2026 22:50:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1weOY4-00044R-E4
- for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:50:08 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ id 1weOYQ-0004Dm-QQ
+ for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:50:30 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1weOY0-0001mx-RT
- for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:50:07 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-37fc02e660bso1706000a91.0
- for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 19:50:03 -0700 (PDT)
+ id 1weOYM-00029E-UF
+ for qemu-riscv@nongnu.org; Mon, 29 Jun 2026 22:50:30 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-3804fd3cf71so244209a91.0
+ for <qemu-riscv@nongnu.org>; Mon, 29 Jun 2026 19:50:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782787803; x=1783392603; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
- bh=tsA7u0gy2zQ85DB4mmeBFkLon/HsDvZV1Oc9o3XQPGE=;
- b=qgPeVUAE0IdbHtey3tfbQOU4BwMWkS/k9zIND/KFr0V/AjZpPnNo/d3GRARHS6Hw5J
- JLMx0ilT7wNYk3vrEGNR52wLEUACfnPzOrZBXauoHsz5ul5hH/cLOS5N4U+0gQjy2RRu
- S9dfGirDgfXmvniR+W1Xs8Dju+SxsqgTaQ6PGmHmcH+yv9eXQd0ukHyEkpgCxBqbgyzj
- JiLhu3poT3Xe+6PoLJVDaa6AL1+K+KPrIHkx8oexRFZdMj9U9GJXdXtkZV/P7KrYB2Ny
- 9AoaR8pSPwz+g186M23+/HO1PbRPATckAhhrA1EWWCqZfDwN+3JEtUemXtUZvlOVtLWV
- Dq1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782787803; x=1783392603;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1782787826; x=1783392626; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tsA7u0gy2zQ85DB4mmeBFkLon/HsDvZV1Oc9o3XQPGE=;
- b=erhfSjsvfj5uulJ+j8Xypp1lJ+HpK70ddSFcuzbv1CkXDhqrey+Fzx+LtFu68+3sIb
- DsdDj0lhpYPpayj0bxAnTyMxIjcQD0xxLLBe7nu3ODVTC4ohu9p/KXMOkCDy27xdHON3
- tUvMtzor48jdatd74lrHWZO/g4KlZFdGedHOFpGxgtP6uO59WX4tqudS+6NAiwpjCBca
- C4luyblqtX2u7Bu6xPwUhZ59CCqFEX7LDo/c3QmzPiCFUeNA+Sx/fplOWjbNbZnK+9Rf
- EdZ5hDz10Y0XKwjENXkZ5f/PFO7uoiPg7/wW34NOkohX8wcAb5htQ+YSD6nJpU2/HFAh
- DpKg==
+ bh=t10Ezi/uwWFyoRD6k5OU/iZ8iwpW3lBUPBJKT84zHY0=;
+ b=WnWf82/mcL6LIYYoCVXamlUDgjCd0N1kxBkUZ6pFERxsmuDrrFnd1Xi4pTVTOvOJrt
+ o3N6uSIHUaY44aX5TjgXIarRzuTGOWY2IOky9/9xVz45F48PrwGuHtK7Ef0x3udz2dXg
+ SWL6HrfrTIWqifq8kj59W7N3uarULPfEzjDWb7Z9/WM8pvEbHD0ddVpfT6mvIrcTfpc2
+ N/lYB2TBgdSr7LrsqCSpRD7yUQwq2vVFEpYyk/SheKbPpczhVm6XCYcgY1VTY9d2sSz+
+ SFRlMlXeAp+y6VQcS25tGjzFU0ccANWuO+wj2CGfEGd0zFEGVA+PRZHgJpFFlW4m2dES
+ 0d0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782787826; x=1783392626;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:sender:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=t10Ezi/uwWFyoRD6k5OU/iZ8iwpW3lBUPBJKT84zHY0=;
+ b=VTHuO7e6shWzBhhSgu7ZpZrkPKo4poIeQ0HW25LFVoSdyhAvSbWirZMH+S26aU/kDt
+ FICDnpRKWUHw2/5WJWBG6zw2/EEWoidCBZhSHyeLLcBQGeRF3HmcFxGdGkWp1ATRhas+
+ FH/WAq65AyEmSM43HxeSRMDvyr4lZYbcSo7yshEmOKcRvpgGBEFYWMzbTzn/i65pW7H6
+ VI6EtvXP1w3J4BzvJVf5MKZ+NSDuIey2I2yXjR42LC4dGt/4kN+zzebycFEKaDF3A6TE
+ 9KnFZoBXxScQakrA0F7hQvL3xtEX+cVJtIBTWULObVdtEgGuLxbbCc4Blh34YAX4T1Qd
+ dYTA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoH9F+/IgQYjtSU6rr3KJw1cIIKw7BAAqzLmQ0+Z8zLdclipTzshEUmjA2qEJHPe1Zj9fsQJUecEn5o@nongnu.org
-X-Gm-Message-State: AOJu0YxJJ/TdMyzEBA0vyeNpCykY8myLybhJWtY3L/XkTn1GJYs0NZBL
- Yovs0XIrWYUKCmX5M5ZqymBTO1X8S1tLWUqQm98eGoHJWE5FrNWLN/sR
-X-Gm-Gg: AfdE7clsfhJrcBeb9SICjDN5wYe10tNoBV1cRPRIGnDhmakshuRGkjPnaEZAwiDjXN2
- E/V8NGhlNH+Qw3z4g63tWiqOJeH7GZj1gPvuWZf0qxvVNPPzK2dWSChbl44GQhk8Yqnza4Tq0iB
- WjoovYBJKez3AvM8n6RanmR/tN0VXyck5bxWlSc/wclpogbz5GaTLS4T21FKEIJTNXMeWpLBq/B
- fS4MxVR4fa3++wfaDcJiXODZzMx11n5I+oo65cYZZcbKenXuwDGbZXTNkPQebl7jidzLcRCZuyt
- wH2Vato9G2vLEoaNOXWwthuHbKzHNpLm8ZR4wmNj/Yz3hTUtft33/lpc4hGOy7H1nY+9okub9+G
- x/nEc2fGQu6TOoq9Xem88YwF5LR5O5BfOu0huxK2GGRIFS7sP47rPvVWM4cjgoWIEHxfdX0rZRF
- sOcPCKYoPmuWgNIWAIeHickAK6VN+WUK93YsDFhDQ+yukbmkgptxe9fJ+b2evQXuoIw5L9ZBV98
- wxDVnAAXZcSKTHNQn+AQ19EmIc0c3PAW5drV1kP9Do=
-X-Received: by 2002:a17:90b:4a0b:b0:37f:d70a:9610 with SMTP id
- 98e67ed59e1d1-38052758e97mr1282132a91.24.1782787802633; 
- Mon, 29 Jun 2026 19:50:02 -0700 (PDT)
+ AHgh+Rq2feK14mET0iRr+wtLNSItbuwbkhZ6WL6gD7pCShApwKSiDDvzMH/R9bbJ0GbtpPg8xB7O2s+jgddZ@nongnu.org
+X-Gm-Message-State: AOJu0YwL89tnjy8G0dEDxym+eB5+Eqxk+s+P/DZ8vRiRxgfU9GzVWelD
+ Sm/0LkvssZcnDHSJBBsoP8c4n4wagD4kYj9uK5ikx+At9T4r3ZDkLjBZ
+X-Gm-Gg: AfdE7ck42LelyM9S0rmJjcPPhSLhw7ogMW6Fgr5GaQTV5tsFqrUdaLXtJY0UmMdbfAW
+ wzMRfiq0Dt9PZI3LIhvoyd3UP8qf2eXh1HnuwiAzHxh6LuySIJJ+upLdkkKB8f4Q9Mm/aF7Y4B/
+ danQiYi4yN8d9lnigNxwcHhjfeOmnrXHdb66BhPDOE9Yj6vPKyy8ukw7ql0mZ3JBU6Lt2KtvH0k
+ xBIAhe/qaPf4NDaSS3YuB/nsAvyH23ng/BAusFo0PohKgbnBL7TaZPtArxBMAHeXeR74UXnXJPM
+ pZueT6dtP5SN7ZD7QkZA/fjmfazy7Oz8Qmgr6gVfN9z5Z/vC8i/o/DQqr/S4zVD2rE//9Ro2DEG
+ uqUa2WEwgOXOr7LPTpHId/JLV8qKutKjUbPn4WwkCijK9eU3TdEtb0+EykiFUJvKwQjMOOWaitx
+ ES/rujK0qkUVtQ4aLFzkJkjiyTxywwHq6I2N6kTQSIZ8DXg68IiFtbZqBP1UUVg1/qN2Yf039Sz
+ W9vLk5EvflLtf6jctZzkUi295ezE9r+i8yhYeoeCko=
+X-Received: by 2002:a17:90b:3f0f:b0:37f:eb45:e058 with SMTP id
+ 98e67ed59e1d1-380527a8a91mr1251367a91.19.1782787825532; 
+ Mon, 29 Jun 2026 19:50:25 -0700 (PDT)
 Received: from donnager-debian.. ([45.124.203.15])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-38052f32661sm704545a91.9.2026.06.29.19.49.57
+ 98e67ed59e1d1-38052f32661sm704545a91.9.2026.06.29.19.50.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jun 2026 19:50:01 -0700 (PDT)
+ Mon, 29 Jun 2026 19:50:24 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: Nicholas Piggin <npiggin@gmail.com>,
@@ -76,16 +77,19 @@ Cc: Nicholas Piggin <npiggin@gmail.com>,
  Joel Stanley <jms@oss.tenstorrent.com>,
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
  Portia Stephens <portias@oss.tenstorrent.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: [PATCH v10 00/12] hw/riscv: Add the Tenstorrent Atlantis machine
-Date: Tue, 30 Jun 2026 12:19:38 +0930
-Message-ID: <20260630024952.1520546-1-joel@jms.id.au>
+ qemu-devel@nongnu.org, Nutty Liu <nutty.liu@hotmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v10 04/12] hw/riscv/aia: Provide number of irq sources
+Date: Tue, 30 Jun 2026 12:19:42 +0930
+Message-ID: <20260630024952.1520546-5-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260630024952.1520546-1-joel@jms.id.au>
+References: <20260630024952.1520546-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1029.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=joel.stan@gmail.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -109,79 +113,187 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Introducing Tenstorrent Atlantis!
+Instead of hard coding the number of IRQ sources used by the APLIC pass
+it in as a parameter. This allows other machines to configure this as
+required.
 
- The Tenstorrent Atlantis platform is a collaboration between Tenstorrent
- and CoreLab Technology. It is based on the Atlantis SoC, which includes
- the Ascalon-X CPU and other IP from Tenstorrent and CoreLab Technology.
+The maximum number of sources is 1023.
 
- The Tenstorrent Ascalon-X is a high performance 64-bit RVA23 compliant
- RISC-V CPU.
+Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+Signed-off-by: Joel Stanley <joel@jms.id.au>
+---
+ hw/riscv/aia.h             |  3 +--
+ include/hw/riscv/virt.h    |  1 +
+ hw/riscv/aia.c             |  8 ++++++--
+ hw/riscv/virt-acpi-build.c | 25 ++++++++++++++++---------
+ hw/riscv/virt.c            |  2 ++
+ 5 files changed, 26 insertions(+), 13 deletions(-)
 
-v10 replaces patch 8 ("Provide a simple halting payload") with the
-version suggested by Alistair.
-
-v9: https://lore.kernel.org/qemu-riscv/20260619044838.1054677-1-joel@jms.id.au/
-
-Alistair Francis (1):
-  hw/riscv/atlantis: Ensure OpenSBI has a non-zero next_addr
-
-Chris Rauer (1):
-  hw/i2c: Add DesignWare I2C Controller
-
-Joel Stanley (6):
-  hw/riscv/virt: Move AIA initialisation to helper file
-  hw/riscv/aia: Provide number of irq sources
-  hw/riscv/aia: Configure stride for the M-mode IMSIC
-  hw/riscv: Add Tenstorrent Atlantis machine
-  hw/riscv/atlantis: Integrate i2c controllers
-  hw/riscv/atlantis: Add some i2c peripherals
-
-Nicholas Piggin (4):
-  hw/riscv/boot: Describe discontiguous memory in boot_info
-  hw/riscv/boot: Account for discontiguous memory when loading firmware
-  target/riscv: tt-ascalon: Enable Zkr extension
-  tests/functional/riscv64: Add tt-atlantis tests
-
- MAINTAINERS                                  |  21 +
- docs/system/riscv/tt_atlantis.rst            |  41 +
- docs/system/target-riscv.rst                 |   1 +
- hw/riscv/aia.h                               |  26 +
- include/hw/i2c/designware_i2c.h              |  56 ++
- include/hw/riscv/boot.h                      |  12 +-
- include/hw/riscv/tt_atlantis.h               |  64 ++
- include/hw/riscv/virt.h                      |   2 +-
- hw/i2c/designware_i2c.c                      | 745 +++++++++++++++++++
- hw/riscv/aia.c                               |  94 +++
- hw/riscv/boot.c                              |  34 +-
- hw/riscv/k230.c                              |   8 +-
- hw/riscv/microchip_pfsoc.c                   |   8 +-
- hw/riscv/opentitan.c                         |   6 +-
- hw/riscv/shakti_c.c                          |   6 +-
- hw/riscv/sifive_u.c                          |   6 +-
- hw/riscv/spike.c                             |   6 +-
- hw/riscv/tt_atlantis.c                       | 617 +++++++++++++++
- hw/riscv/virt-acpi-build.c                   |  27 +-
- hw/riscv/virt.c                              |  97 +--
- hw/riscv/xiangshan_kmh.c                     |   6 +-
- target/riscv/cpu.c                           |   1 +
- hw/i2c/Kconfig                               |   5 +
- hw/i2c/meson.build                           |   1 +
- hw/riscv/Kconfig                             |  13 +
- hw/riscv/meson.build                         |   2 +
- tests/functional/riscv64/meson.build         |   1 +
- tests/functional/riscv64/test_opensbi.py     |   4 +
- tests/functional/riscv64/test_tt_atlantis.py |  57 ++
- 29 files changed, 1859 insertions(+), 108 deletions(-)
- create mode 100644 docs/system/riscv/tt_atlantis.rst
- create mode 100644 hw/riscv/aia.h
- create mode 100644 include/hw/i2c/designware_i2c.h
- create mode 100644 include/hw/riscv/tt_atlantis.h
- create mode 100644 hw/i2c/designware_i2c.c
- create mode 100644 hw/riscv/aia.c
- create mode 100644 hw/riscv/tt_atlantis.c
- create mode 100755 tests/functional/riscv64/test_tt_atlantis.py
-
+diff --git a/hw/riscv/aia.h b/hw/riscv/aia.h
+index dbb833340276..5ad0a902be0d 100644
+--- a/hw/riscv/aia.h
++++ b/hw/riscv/aia.h
+@@ -11,11 +11,10 @@
+ 
+ #include "exec/hwaddr.h"
+ 
+-#define VIRT_IRQCHIP_NUM_SOURCES 96
+-
+ uint32_t imsic_num_bits(uint32_t count);
+ 
+ DeviceState *riscv_create_aia(bool msimode, int aia_guests,
++                             uint16_t num_sources,
+                              const MemMapEntry *aplic_m,
+                              const MemMapEntry *aplic_s,
+                              const MemMapEntry *imsic_m,
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index ad858deb76ad..36a2def41096 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -64,6 +64,7 @@ struct RISCVVirtState {
+     struct GPEXHost *gpex_host;
+     OnOffAuto iommu_sys;
+     uint16_t pci_iommu_bdf;
++    uint16_t num_sources;
+ };
+ 
+ enum {
+diff --git a/hw/riscv/aia.c b/hw/riscv/aia.c
+index c724612a50a5..82ea9d48ea75 100644
+--- a/hw/riscv/aia.c
++++ b/hw/riscv/aia.c
+@@ -25,6 +25,7 @@ uint32_t imsic_num_bits(uint32_t count)
+ }
+ 
+ DeviceState *riscv_create_aia(bool msimode, int aia_guests,
++                             uint16_t num_sources,
+                              const MemMapEntry *aplic_m,
+                              const MemMapEntry *aplic_s,
+                              const MemMapEntry *imsic_m,
+@@ -38,6 +39,9 @@ DeviceState *riscv_create_aia(bool msimode, int aia_guests,
+     DeviceState *aplic_s_dev = NULL;
+     DeviceState *aplic_m_dev = NULL;
+ 
++    /* The RISC-V Advanced Interrupt Architecture, Chapter 1.2. Limits */
++    g_assert(num_sources <= 1023);
++
+     if (msimode) {
+         if (!kvm_enabled()) {
+             /* Per-socket M-level IMSICs */
+@@ -66,7 +70,7 @@ DeviceState *riscv_create_aia(bool msimode, int aia_guests,
+                                      aplic_m->size,
+                                      (msimode) ? 0 : base_hartid,
+                                      (msimode) ? 0 : hart_count,
+-                                     VIRT_IRQCHIP_NUM_SOURCES,
++                                     num_sources,
+                                      num_prio_bits,
+                                      msimode, true, NULL);
+     }
+@@ -77,7 +81,7 @@ DeviceState *riscv_create_aia(bool msimode, int aia_guests,
+                                  aplic_s->size,
+                                  (msimode) ? 0 : base_hartid,
+                                  (msimode) ? 0 : hart_count,
+-                                 VIRT_IRQCHIP_NUM_SOURCES,
++                                 num_sources,
+                                  num_prio_bits,
+                                  msimode, false, aplic_m_dev);
+ 
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 02ab460e589c..59c454f4f94e 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -148,6 +148,7 @@ static void acpi_dsdt_add_cpus(Aml *scope, RISCVVirtState *s)
+ }
+ 
+ static void acpi_dsdt_add_plic_aplic(Aml *scope, uint8_t socket_count,
++                                     uint16_t num_sources,
+                                      uint64_t mmio_base, uint64_t mmio_size,
+                                      const char *hid)
+ {
+@@ -155,9 +156,12 @@ static void acpi_dsdt_add_plic_aplic(Aml *scope, uint8_t socket_count,
+     uint32_t gsi_base;
+     uint8_t  socket;
+ 
++    /* The RISC-V Advanced Interrupt Architecture, Chapter 1.2. Limits */
++    g_assert(num_sources <= 1023);
++
+     for (socket = 0; socket < socket_count; socket++) {
+         plic_aplic_addr = mmio_base + mmio_size * socket;
+-        gsi_base = VIRT_IRQCHIP_NUM_SOURCES * socket;
++        gsi_base = num_sources * socket;
+         Aml *dev = aml_device("IC%.02X", socket);
+         aml_append(dev, aml_name_decl("_HID", aml_string("%s", hid)));
+         aml_append(dev, aml_name_decl("_UID", aml_int(socket)));
+@@ -476,10 +480,13 @@ static void build_dsdt(GArray *table_data,
+     socket_count = riscv_socket_count(ms);
+ 
+     if (s->aia_type == VIRT_AIA_TYPE_NONE) {
+-        acpi_dsdt_add_plic_aplic(scope, socket_count, memmap[VIRT_PLIC].base,
+-                                 memmap[VIRT_PLIC].size, "RSCV0001");
++        acpi_dsdt_add_plic_aplic(scope, socket_count, s->num_sources,
++                                 memmap[VIRT_PLIC].base,
++                                 memmap[VIRT_PLIC].size,
++                                 "RSCV0001");
+     } else {
+-        acpi_dsdt_add_plic_aplic(scope, socket_count, memmap[VIRT_APLIC_S].base,
++        acpi_dsdt_add_plic_aplic(scope, socket_count, s->num_sources,
++                                 memmap[VIRT_APLIC_S].base,
+                                  memmap[VIRT_APLIC_S].size, "RSCV0002");
+     }
+ 
+@@ -496,15 +503,15 @@ static void build_dsdt(GArray *table_data,
+     } else if (socket_count == 2) {
+         virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
+                              memmap[VIRT_VIRTIO].size,
+-                             VIRTIO_IRQ + VIRT_IRQCHIP_NUM_SOURCES, 0,
++                             VIRTIO_IRQ + s->num_sources, 0,
+                              VIRTIO_COUNT);
+-        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES);
++        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + s->num_sources);
+     } else {
+         virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
+                              memmap[VIRT_VIRTIO].size,
+-                             VIRTIO_IRQ + VIRT_IRQCHIP_NUM_SOURCES, 0,
++                             VIRTIO_IRQ + s->num_sources, 0,
+                              VIRTIO_COUNT);
+-        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2);
++        acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + s->num_sources * 2);
+     }
+ 
+     aml_append(dsdt, scope);
+@@ -583,7 +590,7 @@ static void build_madt(GArray *table_data,
+         for (socket = 0; socket < riscv_socket_count(ms); socket++) {
+             aplic_addr = s->memmap[VIRT_APLIC_S].base +
+                              s->memmap[VIRT_APLIC_S].size * socket;
+-            gsi_base = VIRT_IRQCHIP_NUM_SOURCES * socket;
++            gsi_base = s->num_sources * socket;
+             build_append_int_noprefix(table_data, 0x1A, 1);    /* Type */
+             build_append_int_noprefix(table_data, 36, 1);      /* Length */
+             build_append_int_noprefix(table_data, 1, 1);       /* Version */
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index b76bbb62f888..8f80c0607b92 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1401,6 +1401,7 @@ static void virt_machine_init(MachineState *machine)
+         } else {
+             s->irqchip[i] = riscv_create_aia(s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC,
+                                              s->aia_guests,
++                                             s->num_sources,
+                                              &s->memmap[VIRT_APLIC_M],
+                                              &s->memmap[VIRT_APLIC_S],
+                                              &s->memmap[VIRT_IMSIC_M],
+@@ -1557,6 +1558,7 @@ static void virt_machine_instance_init(Object *obj)
+     s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
+     s->acpi = ON_OFF_AUTO_AUTO;
+     s->iommu_sys = ON_OFF_AUTO_AUTO;
++    s->num_sources = VIRT_IRQCHIP_NUM_SOURCES;
+ }
+ 
+ static char *virt_get_aia_guests(Object *obj, Error **errp)
 -- 
 2.47.3
 
