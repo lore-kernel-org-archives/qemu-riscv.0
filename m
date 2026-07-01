@@ -4,69 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76389C43458
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 01:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0899C43458
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 03:05:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wek7i-0003BY-OP; Tue, 30 Jun 2026 21:52:22 -0400
+	id 1welG3-0005pd-TD; Tue, 30 Jun 2026 23:05:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1wek7d-00037c-GN; Tue, 30 Jun 2026 21:52:17 -0400
-Received: from [115.124.30.101] (helo=out30-101.freemail.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1wek7U-0004aH-He; Tue, 30 Jun 2026 21:52:17 -0400
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1welFs-0005fr-5R
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:04:52 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1welFo-0002nQ-9h
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:04:51 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2c7ebfb63c6so1375555ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 20:04:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1782870707; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=jtbdk5iG5WqPu5oOXDmCOt9/eRNGNPDbyea6/KJsfeE=;
- b=G0L5Ar5vITXgMlVGPVXJWz2FhyUY4vasI2c+jbFixnEUhkZZfQhBAToQD2cISQqIV1jLFcewf3cx0ilG3S9ZCRu1512xMgaUuUXIcWKEgvvMgA6mSzv693RhRBtxTRac3uCy3EYgHqdXTn6wJ9ggAqIhhAzXY4nbpV4hFbK11cE=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam011083073210;
- MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0X61FrtD_1782870705; 
-Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0X61FrtD_1782870705 cluster:ay36) by smtp.aliyun-inc.com;
- Wed, 01 Jul 2026 09:51:46 +0800
-From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Wed, 01 Jul 2026 09:51:32 +0800
-Subject: [PATCH v2 2/5] disas/riscv: Fix 6-bit immediate extraction
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260701-b4-disas-xthead-fix-riscv-next-v2-2-e6e4ff5a7847@linux.alibaba.com>
-References: <20260701-b4-disas-xthead-fix-riscv-next-v2-0-e6e4ff5a7847@linux.alibaba.com>
-In-Reply-To: <20260701-b4-disas-xthead-fix-riscv-next-v2-0-e6e4ff5a7847@linux.alibaba.com>
+ d=linaro.org; s=google; t=1782875087; x=1783479887; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eKzv/F+MqToZ/Pnc1grvNtlQkuB0Qopo7yaWf0hhW0E=;
+ b=cDDbxA21tkTrtoGG70KF/788xMOol/1Ju3+fdPW900iy1NVYUfEByVhOXA0737XHr4
+ FYAdM62vo7woJLLlYWulkBHAimuDQnpxaWP6Gj3zHfgiQiVzHVC5r6c9JfoMn2lEgHYo
+ 3Drc4I+zVu4Sv0nhYYb15DRQMMYJ7Lzw7f8vbe+HSdK0DX6zc4lTUhEOZ3YzPYX71wOX
+ vTLhU8MvCqti4FLSQOlNNPOtnuhMZihDt/Tcbh4GfAGdR6nNMTQyW16G4SgmEw9cVWNy
+ PO7Cs6FXo4a2Tupvkm7we/Ov8YvvzN8JUbCrNhDxKoL8k4CpfgtdKw4Ll6PM6Nzl9LQK
+ ibQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782875087; x=1783479887;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=eKzv/F+MqToZ/Pnc1grvNtlQkuB0Qopo7yaWf0hhW0E=;
+ b=rWl9YLwIN1MKRD/eaxjo1UGssQTKtpOctXcs8nW1dqPYshZaZo25mGdJvwa1X0nfWk
+ r/sNFcfXXxrwSWjYLTbO2knxpTGe+6guyMgFgF4Vq9YLOG2njVP3n6TOeCeIzMD9ftGE
+ IYJqFh1stSE3IVE+mrSerjXZBpVYO6ZQD26AEPAsOLIDbF/YLgBFBoTtneif1oX1VlRF
+ 8ZAn36ovkRjWCmlvtO5m55pV0Mx4p4ES03H3o9JlDTFwP/qF/TlWkoYBJRHamnvADaj0
+ 8y52RDE3XBs9ktBde5wDF1gtLvuP8qSQF+gjPBJDMo1xJw9adWvGu5lBZCee2GnNGB7l
+ xOdQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqltdyGpyI/1Q6YG92w8DhTvR6d2cBllzgzPWqeZd4oIb244AdERyMRwSLnq9AfjzipElNuQ2HjjwGT@nongnu.org
+X-Gm-Message-State: AOJu0YyZ32xln2D5lpnvb0sQaLsCpE8nrscxVXz/3pMAeGR3UsImJtDa
+ ZKG82vkRNtjAAQd2IeABXOtKRL87rVbA/HzggXTbER0eKSf3e9IN8OtRmzCujDq5dNE=
+X-Gm-Gg: AfdE7cmhlOa6gdPez3BJu1ejD1u5rzuE5xdDt15SURjgLEeSDjvTUDGUBWTdrqYDg9X
+ bePr17keikCXxe56H+1Em+4YIg1UI9jgnwCozcN3isnp5yelSsgiK+/CihGw1DHZ8+N9KdA8iF4
+ 9hQ1onbJIcSOg6o+MtKvL7ZfrCkUjp2tYLT1K8aSM1FUaASrbK8PQgFgpzfX+41N3O77Tzhy7NH
+ P/zpTbagP7B/K2k35JAibzMH8HYO3smgge4UBnIBUOEVR0n14GUepDgH7Njt3M2wTQchtRjLmPX
+ ozuYPvG478p19oYDKF6b/3Uwrvs05RZHixRd6bZKZfwxABuD0cuDbSCF2r+AHmTa39xVrraIxvQ
+ MVOuHMCnxWqlQJh3JPtqGCRpUfvJ9BLPm8Y6djABN758VzUrKOS9VGZVOkHIefgKjnfhl38kHRf
+ p6zGifcQRlV5wiJrrRtmoFc2aeaHkLWfXjzyONXSm099+g7NhvOeZstNyFg3JS
+X-Received: by 2002:a17:902:eccd:b0:2ca:6514:9201 with SMTP id
+ d9443c01a7336-2ca6514ad48mr18691595ad.15.1782875086705; 
+ Tue, 30 Jun 2026 20:04:46 -0700 (PDT)
+Received: from stoup.. (174-21-129-215.tukw.qwest.net. [174.21.129.215])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2ca37c74261sm23758085ad.22.2026.06.30.20.04.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Jun 2026 20:04:46 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: Christoph Muellner <christoph.muellner@vrull.eu>, 
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org, 
- TANG Tiancheng <lyndra@linux.alibaba.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1782870704; l=1154;
- i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=fECxabHVg6J3QPrge6wP3Wo05THZjnLRqrtTjO6bXmk=;
- b=eYJ1vf/j5dWhHlJpGfhKNiCvroeN2VJ806O1TJj0OgeBPBX6GGgO/YNssP4OZAQKfCfNbTmPT
- EfJYe1GhRPTAc9PdZKH/ZScEF+5cKTGxbuSIw07Pim91I7PeSTLPJqh
-X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
- pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.101 (deferred)
-Received-SPF: pass client-ip=115.124.30.101;
- envelope-from=lyndra@linux.alibaba.com;
- helo=out30-101.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+Cc: shivangu@linux.ibm.com,
+	qemu-arm@nongnu.org,
+	qemu-riscv@nongnu.org
+Subject: [PATCH 02/17] accel/tcg: Constify CPUWatchpoint for
+ debug_check_watchpoint
+Date: Tue, 30 Jun 2026 20:04:28 -0700
+Message-ID: <20260701030443.1382447-3-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260701030443.1382447-1-richard.henderson@linaro.org>
+References: <20260701030443.1382447-1-richard.henderson@linaro.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,37 +104,108 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-rv_codec_r2_imm6 is used for XThead instructions whose 6-bit
-immediate field is encoded in bits 25:20. The old expression
-left-shifted by 38 and then right-shifted by 60, so it kept only
-bits 25:22.
-
-Shift right by 58 instead, keeping the existing extraction style while
-retaining the full bits 25:20 field. This fixes the immediate printed
-for th.srri and th.tst.
-
-Fixes: 318df7238b9f ("disas/riscv: Add support for XThead* instructions")
-Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- disas/riscv.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/accel/tcg/cpu-ops.h  | 2 +-
+ target/arm/internals.h       | 2 +-
+ target/ppc/internal.h        | 2 +-
+ target/riscv/debug.h         | 2 +-
+ target/arm/tcg/debug.c       | 2 +-
+ target/ppc/tcg-excp_helper.c | 2 +-
+ target/riscv/debug.c         | 2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 7f1b26277378c225c963d8f435cc7a2fc6e4a0b8..400a57083f90be18ccd12415797bce0df974784b 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -4546,7 +4546,7 @@ static uint32_t operand_zcmp_rlist(rv_inst inst)
+diff --git a/include/accel/tcg/cpu-ops.h b/include/accel/tcg/cpu-ops.h
+index d2b9079835..1e163176f7 100644
+--- a/include/accel/tcg/cpu-ops.h
++++ b/include/accel/tcg/cpu-ops.h
+@@ -259,7 +259,7 @@ struct TCGCPUOps {
+      * watchpoint whose address has matched should really fire, used by ARM
+      * and RISC-V
+      */
+-    bool (*debug_check_watchpoint)(CPUState *cpu, CPUWatchpoint *wp);
++    bool (*debug_check_watchpoint)(CPUState *cpu, const CPUWatchpoint *wp);
  
- static uint32_t operand_imm6(rv_inst inst)
- {
--    return (inst << 38) >> 60;
-+    return (inst << 38) >> 58;
+     /**
+      * @debug_check_breakpoint: return true if the architectural
+diff --git a/target/arm/internals.h b/target/arm/internals.h
+index c78c86a1fc..7a4f6938b7 100644
+--- a/target/arm/internals.h
++++ b/target/arm/internals.h
+@@ -683,7 +683,7 @@ void hw_breakpoint_update_all(ARMCPU *cpu);
+ bool arm_debug_check_breakpoint(CPUState *cs, const CPUBreakpoint *bp);
+ 
+ /* Callback function for checking if a watchpoint should trigger. */
+-bool arm_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
++bool arm_debug_check_watchpoint(CPUState *cs, const CPUWatchpoint *wp);
+ 
+ /* Adjust addresses (in BE32 mode) before testing against watchpoint
+  * addresses.
+diff --git a/target/ppc/internal.h b/target/ppc/internal.h
+index f3e694c4cd..fd089ebba5 100644
+--- a/target/ppc/internal.h
++++ b/target/ppc/internal.h
+@@ -305,7 +305,7 @@ void ppc_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
+                                    MemTxResult response, uintptr_t retaddr);
+ void ppc_cpu_debug_excp_handler(CPUState *cs);
+ bool ppc_cpu_debug_check_breakpoint(CPUState *cs, const CPUBreakpoint *bp);
+-bool ppc_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
++bool ppc_cpu_debug_check_watchpoint(CPUState *cs, const CPUWatchpoint *wp);
+ 
+ G_NORETURN void powerpc_checkstop(CPUPPCState *env, const char *reason);
+ void powerpc_excp(PowerPCCPU *cpu, int excp);
+diff --git a/target/riscv/debug.h b/target/riscv/debug.h
+index 91690404df..230d517f01 100644
+--- a/target/riscv/debug.h
++++ b/target/riscv/debug.h
+@@ -145,7 +145,7 @@ target_ulong tinfo_csr_read(CPURISCVState *env);
+ 
+ void riscv_cpu_debug_excp_handler(CPUState *cs);
+ bool riscv_cpu_debug_check_breakpoint(CPUState *cs, const CPUBreakpoint *bp);
+-bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
++bool riscv_cpu_debug_check_watchpoint(CPUState *cs, const CPUWatchpoint *wp);
+ 
+ void riscv_trigger_realize(CPURISCVState *env);
+ void riscv_trigger_reset_hold(CPURISCVState *env);
+diff --git a/target/arm/tcg/debug.c b/target/arm/tcg/debug.c
+index 565af7b985..ed94b20739 100644
+--- a/target/arm/tcg/debug.c
++++ b/target/arm/tcg/debug.c
+@@ -419,7 +419,7 @@ bool arm_debug_check_breakpoint(CPUState *cs, const CPUBreakpoint *bp)
+     return false;
  }
  
- static uint32_t operand_imm2(rv_inst inst)
-
+-bool arm_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
++bool arm_debug_check_watchpoint(CPUState *cs, const CPUWatchpoint *wp)
+ {
+     /*
+      * Called by core code when a CPU watchpoint fires; need to check if this
+diff --git a/target/ppc/tcg-excp_helper.c b/target/ppc/tcg-excp_helper.c
+index 7715cae342..7fbedbc8e3 100644
+--- a/target/ppc/tcg-excp_helper.c
++++ b/target/ppc/tcg-excp_helper.c
+@@ -358,7 +358,7 @@ bool ppc_cpu_debug_check_breakpoint(CPUState *cs, const CPUBreakpoint *bp)
+     return false;
+ }
+ 
+-bool ppc_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
++bool ppc_cpu_debug_check_watchpoint(CPUState *cs, const CPUWatchpoint *wp)
+ {
+ #if defined(TARGET_PPC64)
+     CPUPPCState *env = cpu_env(cs);
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index 1acec77caa..ad9df09cf7 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -983,7 +983,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs, const CPUBreakpoint *bp)
+     return false;
+ }
+ 
+-bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
++bool riscv_cpu_debug_check_watchpoint(CPUState *cs, const CPUWatchpoint *wp)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
 -- 
 2.43.0
 
