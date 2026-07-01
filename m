@@ -4,151 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 983F8C43458
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 04:03:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 455F6C43458
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 04:05:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wemAM-0006gz-TJ; Wed, 01 Jul 2026 00:03:16 -0400
+	id 1wemBo-00084T-IF; Wed, 01 Jul 2026 00:04:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1wemAG-0006fv-WD; Wed, 01 Jul 2026 00:03:09 -0400
-Received: from mail-koreacentralazolkn190130003.outbound.protection.outlook.com
- ([2a01:111:f403:d40f::3] helo=SEYPR02CU001.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1wemAF-000451-6N; Wed, 01 Jul 2026 00:03:08 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pxTMgb9KN49ltDWGu36ZneMuWtKMnGLRjeW/xIdU3qvHnuccEHQjf7/X8arAG7msYq6EBalsnCr2AvIRBDp/iXv4RMciTUVD4L1TYOY2+gM4/u2atiNy6uj1wb8EzG95xD4ZKF/UUex++zVUf9tRsWfAPitLYTIwvFENjAhdSzdaU+Qsgiw3Z8Gl0IaTvfpyqfG0IXquJgE8ZaxNHsSaSAx8pEOZ+l3RDnHo9ozkpem4qqC0FVS2f6Pei9wEJzCvPMTL0NEqNbqAEtQIndCqjHWfiRTQ7XmzfFPVJxXDLEly7YGyGoFkdG2+6IJPaCdamd+TdT47j4m/O0HIZRDh1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3eOtNNzqFsVBhUC4eEs+vRlGWPm7KvQVmrCvzIQhwSw=;
- b=pr9pOBcy4xmRDXuMRqEynWbz3XT9cBGHLa+OzJEigrHLDnUUcPUgalLG3omCrntvMBq1RTXxnOvyinb9kgVVSdbVGj9nfMAHoJH8I2EG7Vg2r8uUsIApWVOfDaM6ntK7dSd4gedmxwVhIHzr+AWo1qK685o4itdr28EnA1X1Hd1YBatjpCfn3BkDL06Jwosca6N6Epk2urtRK+aeI0wPn+cI9UlwRwG4AjHSrsswbIfYIk0v4T+D4o87DGvgrHiZV6KUlinc/E8SAKGTpufi//TD8fW4p4XgKQF0AkG4ZghX2He8Bu0Q5OE6yB0byMHLuLWoXRMKuvdK3rnm2N+ypQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3eOtNNzqFsVBhUC4eEs+vRlGWPm7KvQVmrCvzIQhwSw=;
- b=ZMuIf7BfuGd8/yj6WtW10cpDkJ5vKLzZmroVybJclsyPwFuN0F0eQOMYjD6UjuA2Ma+UJC1j+15wwSX+Pds6eDJZE4nIWty7m7w9iv+V0JceHSCKntSZIZIt3TTyP7cN+7lMXkxl8nZvhS4tqyI17Vb1ASOE+ZpfiY/ICGulQLhNKUcH1YZ+5tm0mZiuQ48BAskI1LF8Dmv47ifeX4W5mMkxIVD5qzR+ROEa9n4e+S28bYvXi13CEIKJKkS/VCqZOfgx+khbFSiyXuWtLpHHlBsy3G0+1jOOVzhWP8L5IEJXS4+A3zJj+8kTvYFwFJ5a5/KBnThd18wp6mcGbFRGOw==
-Received: from SE3PR04MB8922.apcprd04.prod.outlook.com (2603:1096:101:2e9::7)
- by SEZPR04MB7458.apcprd04.prod.outlook.com (2603:1096:101:1eb::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.8; Wed, 1 Jul 2026
- 04:02:58 +0000
-Received: from SE3PR04MB8922.apcprd04.prod.outlook.com
- ([fe80::3450:f139:5238:8f58]) by SE3PR04MB8922.apcprd04.prod.outlook.com
- ([fe80::3450:f139:5238:8f58%5]) with mapi id 15.21.0181.008; Wed, 1 Jul 2026
- 04:02:58 +0000
-Message-ID: <SE3PR04MB892210C486C30552B7FCCE09F3F62@SE3PR04MB8922.apcprd04.prod.outlook.com>
-Date: Wed, 1 Jul 2026 12:02:52 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/riscv-iommu.c: check for misaligned IOHGATP_PPN
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>,
- Tao Tang <tangtao1634@phytium.com.cn>, Fabiano Rosas <farosas@suse.de>,
- Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
-References: <20260630203155.2103084-1-daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-From: "Nutty.Liu" <nutty.liu@hotmail.com>
-In-Reply-To: <20260630203155.2103084-1-daniel.barboza@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI1PR02CA0021.apcprd02.prod.outlook.com
- (2603:1096:4:1f4::14) To SE3PR04MB8922.apcprd04.prod.outlook.com
- (2603:1096:101:2e9::7)
-X-Microsoft-Original-Message-ID: <ea550e57-95a7-4049-ba68-b83948403a70@hotmail.com>
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wemBm-00083b-D9
+ for qemu-riscv@nongnu.org; Wed, 01 Jul 2026 00:04:42 -0400
+Received: from mail-yx1-xb132.google.com ([2607:f8b0:4864:20::b132])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1wemBk-0004bk-6a
+ for qemu-riscv@nongnu.org; Wed, 01 Jul 2026 00:04:42 -0400
+Received: by mail-yx1-xb132.google.com with SMTP id
+ 956f58d0204a3-664cb440f9eso204053d50.1
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 21:04:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782878679; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Ypvk1ER+gREV5lCSfU9hOFy2VauxVV45IpqjbbTLVWBg4oho1SRoAKNRdTrlwEBerl
+ UphTkOBMFr69/yv1/CKOsPGwqEC9lPc0o8HuHEydMSK5IByhf2OD5X/JlmnwgZhXe78A
+ LRR2z2ft9ABQ9AFSZ8Vm6ojehnlqwC47Wg87r2a44rXmKD8IIj7sPjkX4PGOK/7VSb4D
+ u277bYRcKx7eeiHi9NyJz+Ra5JaueUAYvfS7iyQ4ncbjFINPBvi/fPWijzK+MzbBeoz/
+ jIdGPz5d7KYxgRM7sXp96RiJz9sJDff4icLf94NjIzUe60eJr+VZTLMY2KHWENOOe+vD
+ wUOQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=DIBdzQY6sxUM6BrayKIdWEh7ptRv+y4YFf2kvz45YG0=;
+ fh=oxuYhtsU7WCiTCV/zQb1e5Yl8du41Oj+CkVhdtaDqm0=;
+ b=L7gHBxZg3WwjxEz83Ro9xOs++dsxdOSRaAay++ztWOGJay8WlTjIyqU1XvW/+w2PmI
+ hr8ov0Yz0uOyP+Kj35oBDbgpo7Hk3v7WMCGnIGqyzdtYed2Z+uJf6SAfWHZurLJgap3L
+ CHMD+Z6qG8idwsHMP3wsckM68Iop7M/VXP/x2oJe/N71YvLASX2sAJI55U5Um3qV7KYD
+ ralJ4temb/lN5wUjalOtrX7o4PAQxnoe6d/1FziURVGHpVSFQBywyDIcEdOqKPwgU2XB
+ AjEVDqS76fegH/Q91X95D/23zai/5t4iEgUDHQa9qaaTQJGjkPWpu47hYS5Y5IMNQkng
+ WA4g==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=jms.id.au; s=google; t=1782878679; x=1783483479; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DIBdzQY6sxUM6BrayKIdWEh7ptRv+y4YFf2kvz45YG0=;
+ b=f1fz0qQ37taqsOIq9l7ELe25gCQ+DvDN/TPV41m0tTlZzO0sB1e2+PIMhoP0X7+EPm
+ 4dcytZTbIQCQk6u524iMhXMddl58ZR08Bm+cluMCxbpoObQsO4bEjX1fZQj2anjf/hRO
+ 0Hs+V60HtB00xC334IS1co9HS+900CqrI0Hq8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782878679; x=1783483479;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DIBdzQY6sxUM6BrayKIdWEh7ptRv+y4YFf2kvz45YG0=;
+ b=Lugz4GedjVSLKAce+G3XCsnx6/LTsS7uDCi5x30jP33bGua4O+4pp4T6kGFwjW15Y2
+ GcuL9kYyjnT62Sj7jhHuimoN/Gs9wGN67DFqjKu2ht0EelGqAihlULDvzM4JIcWBVN/d
+ gnTo90v3aFLrOMLzQzfSZPzd5RLuqjOSONqMEXbaWhdjOUveCRtYDZGnPdrwvfRWR6jP
+ ixz0tWOsUf+73vVjZ8oVoG6DoKEbcboIzUnEWfCbHnvTu1VeOwzPcshzvdTkPum3Wupf
+ 4b7ggZOht1KsrHzW/vEWUuU+r4423Tkg+cHU6KAWsTXtu1inlFpQ24paNZ69XxJo6V21
+ Kggg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoWekHQoy0hfglRfpMZP6BSyL0sbS7aAc8FJUI5/qc0v0rW2JT4zqpkRLK5dRuSYpywBnjxh/hiFZqS@nongnu.org
+X-Gm-Message-State: AOJu0Yx2O24Hiifr5X1EVn8G5QztIFjz46mTCfmTL1kV5JVbm3BK0C+H
+ g0cMr/qm/kMFr1uUEqqT/R2ZdNyuq39wFDVs8bCvlDVR2O94teUzrUdfVaDbKY40qSjPjSboWt6
+ w042geyYCJaHRyVjtCYmYnkXJ90kGS0o=
+X-Gm-Gg: AfdE7clN65BPkwniTEvtPXWpAPkWg4t2pGVALzoJw7ukwn4EqX56a9stDR+WPds9zoq
+ uKd6KDlIDiP4c/VNtFV3uWAPmPQvY7Js533jPybgAcAzDErhCGm5YoeGxpKV5Jw1docdKTO3X0x
+ GVeQLaY0pSycWgs9LeKm7u92L3gnwZnfsaokFgI1gOGverEdDdxPw+xDEG6sUTbq5vjuj3r8evg
+ jx+Bsq//pQLVo7h9Gge53FAnD/QRD0e43kDKwoWtqjZQRSNVN7vw0PfnGrtumat4tpCqwOBPRFd
+ tW7f7D/FZriehes4HimRUbXEFo+h2jAGetKMAQs4dL/lFRML3dl5FGqzUjz1xdWOfX5K6pPTayJ
+ jXHOyhcK4rGhPSg==
+X-Received: by 2002:a05:690e:d47:b0:660:48f6:89a3 with SMTP id
+ 956f58d0204a3-664f98adf0fmr5366131d50.41.1782878678816; Tue, 30 Jun 2026
+ 21:04:38 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SE3PR04MB8922:EE_|SEZPR04MB7458:EE_
-X-MS-Office365-Filtering-Correlation-Id: 671f50a4-102d-4498-cb0d-08ded725a2f8
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|51005399006|15080799012|8060799015|19110799012|41001999006|23021999003|19101099003|6090799003|12121999013|55001999006|5072599009|25010399006|10035399007|40105399003|1602099012|3412199025|4302099013|440099028;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SG5wWkZFVVdvZW96eGRFR3hLcWJCSHRPaDV0bW8zRFBJeHE0aHl0ZXI5MFdy?=
- =?utf-8?B?ZElFanpzQU93TEhrZlBUUW9tMys3Rk5xK05BRTV0eGE3d3N2NU9wb0lUdUdi?=
- =?utf-8?B?eW1MZHZtSThhcHI5TUs1bmI3Uk5GTjBSbHYxclJGV0hoWVNHZUJ4amd0K0pF?=
- =?utf-8?B?ZnZERmNQemxLL1hldEtEREMzM21QM1VKYlRnVnh1SDk2TjdRYlJ0U0hRYU9s?=
- =?utf-8?B?S3diVFAxUEFqa2Npa283TEJKRDJwZGpQSitlNjVPYzczdjBNcXZiMkkyUzVP?=
- =?utf-8?B?dHZ1U0s4K2ZPQmpldDdncnpyejBSOWlGZGZiK051RlpUSVZYZzFFTWVVZnVN?=
- =?utf-8?B?cUhudFR1N2ZoVzU0Q0MxMVVPS2N0dkwvTktyTE9QTzlWc1lFaGpEUWp1K1hV?=
- =?utf-8?B?bHBRMHJSZlJ6UDVqbnNrTmZLY1VmZFJVU1QwNk9HS0NmWTFoZXNRbDFQOXg1?=
- =?utf-8?B?WVBaT0o2UzFWN1Z1OHVJOHA3bkpoMnlDK083OWlua0pGeXVsc2MzZncyZDlS?=
- =?utf-8?B?NU45UHFUT0owUi9mZDVSbTZ0VEErUk9XUGl4MEVJNWQ2d1piZEtKK3JJYnYr?=
- =?utf-8?B?Zy92WlVTa2VTLzd0MW5PZFZTT2FMeWZRM0NWUHVvZkJna1kzbk1qbXJzalcv?=
- =?utf-8?B?YUFmOVNYODNxemhSVGtEU3lSK0RvSStydTEvVDJReGh5UUNWc3FHc1FnYUxr?=
- =?utf-8?B?L3JsQjlTaTFxa3FaaW1LM1JJYkFDaFFjZFREY092UHZ3d2pNT0xQOFFEMXgz?=
- =?utf-8?B?czVVMVBXcGFlK1NnMERINDZ2b01vZU5RSlZNZS9RVFhIRC9nZm1YTG9Xb2dn?=
- =?utf-8?B?MWt2OHZsdkVORkt2eVJwaFRPeXVwN0lobGp5YStTK0UvK3NLc3F0ZlFacGc4?=
- =?utf-8?B?SWhRWUhsQ2xMSjZLYW13cGlwWnVJWW1zMEVnT2sxS1NwVzh2S3lLTDZPUlVj?=
- =?utf-8?B?K2JieTNFbHVCaWpNWWtpSUxWdEJBUkFFZzBLYStGZlRMM1UwQTNRV2VDYmcz?=
- =?utf-8?B?Ujc5WWxwRkRtZk4zMUd5SmEvOGFSWkFlNmg4dW85US93eldNM3lJZ3FlYUxE?=
- =?utf-8?B?Wkt6dzVjMnhxK2g1eGRIU1B6M2hrYk5nbXM4NkI2Y3hEQVk1T2F3WXc1RlBm?=
- =?utf-8?B?YUM4TmZBVkVJdUJreDlRV25VKzc5Ly93YmdsQ29MMUFwSy9NNCtCZnlCL29k?=
- =?utf-8?B?SGtLclFUWHhlL3Z0anc4Q2xpbEFKeWpQd1dXeXRjSGhFQVlLTk9Oc0Y5MWFO?=
- =?utf-8?B?Y2JhNlNGL3laa1NRTnlQRk1tZms4aWVPdzlDLzYveUR3eHhVSHBwUDBSM3l2?=
- =?utf-8?B?S3l5WDcwMUVGZmxjdWhiS2FRWW1tMVFORGNRWWlKdTU2eERUTTJoZWpnSVJK?=
- =?utf-8?B?NWl6SUNxOFBWaHZ3cnJpLzY0cm1OTUhIVUhOSlRLNnU2UDIvalhVQzFLaW9s?=
- =?utf-8?B?eUtmSE1vY2o2WGV1SXZNODNCcWxkQXE2NmsrazcxOHIreDN0eUgxZ1lpU2Nr?=
- =?utf-8?B?OVZ4QW81N3l0dHJXRmFtS2VzdXJMdm5kdnhqTTgzRlNEdjVYZDhuWE5BYjl1?=
- =?utf-8?Q?H+sKvc67sy7nP5jteO/Ny8vMU=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c0FnQ29Ub3FuZElEeDMyQzlFVDd2ajA2eUdCZlZJUHNRbWdpVFhuR2UzQXJR?=
- =?utf-8?B?MlpxSnNsbjMxV3B6NUY5S05WNHl5YnVKNEExWVJaQzYvQkV3UFh1eEFNcW8v?=
- =?utf-8?B?ZFVvQXZWVWpsMnBLaFBTY0hQZTdzQzZiRFBZdVN0RTc0cENhcVhEcGdVeGpG?=
- =?utf-8?B?T3RWVStaRFlpckxMMFpKZ0pxL2hCb1o3NDBiRDl6M2RDQUNrRm8wV01tUlJF?=
- =?utf-8?B?RE4rR3hCVG9GVERienpVcXZvRlRwei9YNnBlTmsxeUxSQkhtcDFvenVLUXBw?=
- =?utf-8?B?S0FmTzR2R0RYUCtjNFlCbWJnZnFTYlpEY1V6d1ZTWFl3WE42TW9vcXJkT054?=
- =?utf-8?B?aW5jOTlmWGtiV1FmTXY3Yk04Zzh2eHZyS1N4OVpIN2kxVjlTQmM5anpGR2x4?=
- =?utf-8?B?c1V0Q3ZEN0N3UFBVK3R4dGFaWXhzaThyd0doWEFjdXFHMXB6RlRuQ21TNlBm?=
- =?utf-8?B?dlJrakFjNkU3aVF3WW11enlpTEx2MnlBdURrV1ZRaU0zOTNaRWYvdjFjRVYr?=
- =?utf-8?B?eWQ3RVhMSHZmc1IwdnZsZEZkZ3hTdUJFZHhNWnBhbE01b2prSkRuVXZsUE16?=
- =?utf-8?B?TDkwYVljRW5PeWQrdk9PZXlyM0doRUQ5c3RrOWVROFFwYW1Kd1ZORzJnUXdo?=
- =?utf-8?B?UC83djFrY1c1YzA4QWFkb1JCbGtxS0ViYk9aSWQ5U3pLN0IyOTdBbXhnNld6?=
- =?utf-8?B?cGZZbTZVNkNoYldkdFhjY3drRTVKeUNad3N1M2p1d0hERmRpS0lvQ1J0U0JG?=
- =?utf-8?B?Qk9nUUFFb3BWTjNla3ZNUGt2SkQrMWFNc05ETWg2N0FSaU9yQTZNTFZ0Vjh5?=
- =?utf-8?B?RjZUNEJBUVBTcHpDUHpvV1FqcVpmdzNvSkJqVTdvQWxFbmxZOE5RY2JvK0th?=
- =?utf-8?B?VzluZWREd1Y3UFZ4d1NJTE5VWitKd0JxZ1NBa2RPczVCRmRUTnJtcDQrZ0Fn?=
- =?utf-8?B?TkJWTkcwbHNqc3FmQUVsYUUydzJyYjJJZGFxNzRaZTgvU3JUT0w4RklEbFAx?=
- =?utf-8?B?SU1sWUpJVmhwRERLUk51TEpKRG1rTUdxRC81RXNtV3QwM2JMcGpuTVV5bldC?=
- =?utf-8?B?U3IrZkpRVGszK05yam93T1BPNHlwblFUNUx2dll0UDlOaEQ2bzRVVTdpTFBw?=
- =?utf-8?B?amdXK3M4Wk5kUE1RYkhsNk1GbkZ0SDFVblV3eTZlUnE4L2F0ZmQ0Z1JiZmUv?=
- =?utf-8?B?QU0vVGhzQVdSVDMwVWtrVzB0SVRLMGh5V2o2RjBTYXpXbXV3REpDampueXJT?=
- =?utf-8?B?M28zTnlKUW44RnFSby9nWEYyMmhZQnlTdjRjQXNhOGwvMGhRdW9IbGNJTDBC?=
- =?utf-8?B?aUYxN2FyekNMT0cwR0NidDdraEdyU1RwaFRzcXhXNEdneGd2NjJRblVnYVc2?=
- =?utf-8?B?R1RNanB0ZkNBMTY4U2pUcUY5anVET3YrcnhXdFNUaDVxVkJnQzY3WDNNbWFV?=
- =?utf-8?B?d09pMVd0QTZORSt4UEdzdHlXclNUM1lGN0hpT0dJMXIyTC9oS0c4Sy90OCtz?=
- =?utf-8?B?VnFFVkxnMVRXZm1jUys2dkFPNSt1QlFHa2NxdTQwNlpiZnJ0TFdkdHF2dy8w?=
- =?utf-8?B?M1UvcHE1TTgwS29mZkU3c1lWTlcva2dGZlZ5SjZOQXZSWXAyNnYrS09XcHpl?=
- =?utf-8?B?TVVMcVFFZUU4OFZFYjhBY3REY0YrT3JCS05QVUpDc042Qms1aWI2cGtENWth?=
- =?utf-8?B?Q2RVcmhVdTNiZFJZY1ZvTThvZnRodWdGMTlqajRQSXcrdWpaMjNrbFhaSEp6?=
- =?utf-8?B?SWNMdnUyZ3NhUWNMbmYxbGozbTBzanBPeXJCYkozdHNQTytjZW9jWVZUdnZ2?=
- =?utf-8?B?YThJTVRvUUFQejcrZDhPTVE5eHFJMjlpOXY5dEsxdGtxZnpqay9wY0pjUk53?=
- =?utf-8?Q?p8TJlctMhHNzS?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 671f50a4-102d-4498-cb0d-08ded725a2f8
-X-MS-Exchange-CrossTenant-AuthSource: SE3PR04MB8922.apcprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2026 04:02:58.7291 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR04MB7458
-Received-SPF: pass client-ip=2a01:111:f403:d40f::3;
- envelope-from=nutty.liu@hotmail.com;
- helo=SEYPR02CU001.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20260616190147.1286316-1-visitorckw@gmail.com>
+ <20260616190147.1286316-2-visitorckw@gmail.com>
+In-Reply-To: <20260616190147.1286316-2-visitorckw@gmail.com>
+From: Joel Stanley <joel@jms.id.au>
+Date: Wed, 1 Jul 2026 13:34:27 +0930
+X-Gm-Features: AVVi8CeWoqXgNaUGI2_4tLyAH_2SGzOer3IITzHNPX3AkzXEOa5z9c5MiVnwXo4
+Message-ID: <CACPK8Xc+AZyt9VJzvOCus4sGXEFT3VBmwLwLbsuaY2+CN_6oPA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/5] hw/char: Add dw8250 UART
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: pbonzini@redhat.com, marcandre.lureau@redhat.com, alistair.francis@wdc.com,
+ farosas@suse.de, lvivier@redhat.com, liwei1518@gmail.com, 
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu.zevorn@gmail.com, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, 
+ marscheng@google.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b132;
+ envelope-from=joel.stan@gmail.com; helo=mail-yx1-xb132.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -164,67 +119,146 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-On 7/1/2026 4:31 AM, Daniel Henrique Barboza wrote:
-> We must check if IOHGATP_PPN is 16kb aligned for non-bare GATP modes.
+On Wed, 17 Jun 2026 at 04:31, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
 >
-> qos-riscv-iommu.h needs change too since G_IOHGATP must now be 16kb
-> aligned too.
+> Add the dw8250 uart support. This hardware is a widely used 16550A
+> derivative that includes additional registers.
 >
-> Fixes: 69a9ae4836 ("hw/riscv/riscv-iommu: add ATS support")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3550
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> ---
->   hw/riscv/riscv-iommu.c               | 14 ++++++++++++++
->   tests/qtest/libqos/qos-riscv-iommu.h |  2 +-
->   2 files changed, 15 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 891a56e731..09990c640f 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -795,6 +795,20 @@ static bool riscv_iommu_validate_device_ctx(RISCVIOMMUState *s,
->           return false;
->       }
->   
-> +    if (gatp != RISCV_IOMMU_DC_IOHGATP_MODE_BARE) {
-> +        uint64_t iohgatp_ppn = get_field(ctx->gatp,
-> +                                         RISCV_IOMMU_DC_IOHGATP_PPN);
-Seems it should be like the following:
+> Without this specific device support, the Linux 8250_dw driver fails to
+> probe the extended registers (UCV, CPR, etc.), which are essential for
+> correct feature detection:
 
-+        uint64_t iohgatp_ppn = PPN_PHYS(get_field(ctx->gatp,
-+                                        RISCV_IOMMU_DC_IOHGATP_PPN));
+Nice. The atlantis board works around this by adding an uimp region,
+but having a real model is even better.
 
-Otherwise,
-Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+Some minor comments below.
 
-Thanks,
-Nutty
-> +        /*
-> +         * One of the conditions for a misconfigured DDT entry
-> +         * according to the riscv-spec: "DC.iohgatp.MODE is not
-> +         * Bare and the root page table determined by DC.iohgatp.PPN
-> +         * is not aligned to a 16-KiB boundary."
-> +         */
-> +        if (iohgatp_ppn & ((1ULL << 14) - 1)) {
-> +            return false;
-> +        }
-> +    }
+> [    0.293566] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+> [    0.306929] Oops - store (or AMO) access fault [#1]
+> [    0.307020] Modules linked in:
+> [    0.307192] CPU: 0 UID: 0 PID: 1 Comm: swapper/0 Not tainted 7.0.0 #1 PREEMPTLAZY
+> [    0.307250] Hardware name: Milk-V Duo (DT)
+> [    0.307294] epc : dw8250_setup_port+0x22/0x520
+> [    0.307504]  ra : dw8250_probe+0x57e/0x5b8
+> [    0.307518] epc : ffffffff80708dd6 ra : ffffffff8070a49e sp : ffffffc60000b820
+> [    0.307525]  gp : ffffffff81a32ba8 tp : ffffffd602180cc0 t0 : 0000000000000073
+> [    0.307533]  t1 : 000000000000006c t2 : 0000000000000000 s0 : ffffffc60000b830
+> [    0.307539]  s1 : ffffffd6028c8640 a0 : ffffffc60000b848 a1 : ffffffff813162c1
+> [    0.307546]  a2 : ffffffff813162c0 a3 : ffffffd6028c8640 a4 : ffffffc60002d0b4
+> [    0.307552]  a5 : 0000000000000001 a6 : 0000000000000094 a7 : 0000000000000060
+> [    0.307558]  s2 : ffffffd60225d410 s3 : ffffffd60225d400 s4 : 0000000000000000
+> [    0.307573]  s5 : ffffffff80e31a48 s6 : 0000000000000008 s7 : 0000000000000000
+> [    0.307584]  s8 : 0000000000000149 s9 : 0000000000000000 s10: 0000000000000000
+> [    0.307590]  s11: 0000000000000000 t3 : ffffffd602007c00 t4 : ffffffff81601540
+> [    0.307604]  t5 : 0000000000000003 t6 : ffffffd602a42f82 ssp : 0000000000000000
+> [    0.307611] status: 0000000200000120 badaddr: ffffffc60002d0b4 cause: 0000000000000007
+> [    0.307652] [<ffffffff80708dd6>] dw8250_setup_port+0x22/0x520
+> [    0.307695] [<ffffffff8070a49e>] dw8250_probe+0x57e/0x5b8
+> [    0.307702] [<ffffffff80731f0e>] platform_probe+0x46/0x80
+> [    0.307708] [<ffffffff8072f67c>] really_probe+0x84/0x22c
+> [    0.307715] [<ffffffff8072f880>] __driver_probe_device+0x5c/0xd4
+> [    0.307721] [<ffffffff8072f9be>] driver_probe_device+0x2e/0xf4
+> [    0.307727] [<ffffffff8072fbe6>] __driver_attach+0x6e/0x14c
+> [    0.307734] [<ffffffff8072d5f0>] bus_for_each_dev+0x60/0xb0
+> [    0.307740] [<ffffffff8072f1b2>] driver_attach+0x1a/0x24
+> [    0.307746] [<ffffffff8072e8da>] bus_add_driver+0xca/0x1d8
+> [    0.307752] [<ffffffff80730aaa>] driver_register+0x3e/0xdc
+> [    0.307757] [<ffffffff80731c54>] __platform_driver_register+0x1c/0x24
+> [    0.307779] [<ffffffff80c334f6>] dw8250_platform_driver_init+0x1a/0x24
+> [    0.307793] [<ffffffff80011992>] do_one_initcall+0x4e/0x2a4
+> [    0.307800] [<ffffffff80c01362>] kernel_init_freeable+0x226/0x2b0
+> [    0.307807] [<ffffffff80bc3798>] kernel_init+0x1c/0x144
+> [    0.307813] [<ffffffff8001361c>] ret_from_fork_kernel+0x18/0x164
+> [    0.307820] [<ffffffff80bcefb6>] ret_from_fork_kernel_asm+0x16/0x18
+> [    0.307914] Code: 3683 2085 0b63 32f7 000f 0140 6918 4785 0713 0b47 (c31c) 2583
+> [    0.308041] ---[ end trace 0000000000000000 ]---
+> [    0.308180] Kernel panic - not syncing: Fatal exception in interrupt
+> [    0.315760] ---[ end Kernel panic - not syncing: Fatal exception in interrupt ]---
+
+The kernel oops doesn't add much; I'd drop it from the commit message.
+But your call if you want to keep it.
+
+> --- /dev/null
+> +++ b/hw/char/dw8250.c
+
+> +#define DW_UART_RE_EN 0xB4 /* Receiver Output Enable Register */
+> +#define DW_UART_DLF   0xC0 /* Divisor Latch Fraction Register */
+> +#define DW_UART_CPR   0xF4 /* Component Parameter Register */
+> +#define DW_UART_UCV   0xF8 /* UART Component Version */
+> +#define DW_UART_CTR   0xFC /* Component Type Register */
 > +
->       fsc_mode = get_field(ctx->satp, RISCV_IOMMU_DC_FSC_MODE);
->   
->       if (ctx->tc & RISCV_IOMMU_DC_TC_PDTV) {
-> diff --git a/tests/qtest/libqos/qos-riscv-iommu.h b/tests/qtest/libqos/qos-riscv-iommu.h
-> index 90e69a5d73..4a972401f5 100644
-> --- a/tests/qtest/libqos/qos-riscv-iommu.h
-> +++ b/tests/qtest/libqos/qos-riscv-iommu.h
-> @@ -46,7 +46,7 @@
->   #define QRIOMMU_L1_PTE_VAL          0x0000000000012000ull
->   #define QRIOMMU_L2_PTE_VAL          0x0000000000013000ull
->   
-> -#define QRIOMMU_G_IOHGATP           0x0000000000020000ull
-> +#define QRIOMMU_G_IOHGATP           0x0000000008000000ull
->   #define QRIOMMU_G_L0_PTE_VAL        0x0000000000021000ull
->   #define QRIOMMU_G_L1_PTE_VAL        0x0000000000022000ull
->   
+> +#define DW_UART_UCV_VALUE 0x3332332A /* "323*" -> v3.23a */
+
+I was curious  what this was used for, and it seems Linux has a
+dev_dbg but otherwise it's not important. The values here should be
+fine.
+
+> +#define DW_UART_CTR_VALUE 0x44570110 /* "DW" */
+> +
+> +static uint64_t dw8250_ext_read(void *opaque, hwaddr addr, unsigned int size)
+> +{
+> +    switch (addr) {
+> +    case DW_UART_UCV:
+> +        return DW_UART_UCV_VALUE;
+> +    case DW_UART_CPR:
+> +        return 0x00000000; /* No advanced features (DMA, extra FIFOs) */
+
+Linux will detect zero and use a value from the platform data, but
+this is only to support a quirk on renesas rzn1, so again this should
+be fine.
+
+> +    case DW_UART_CTR:
+> +        return DW_UART_CTR_VALUE;
+> +
+> +    case DW_UART_RE_EN:
+> +    case DW_UART_DLF:
+> +        /*
+> +         * Return 0 to indicate these optional features
+> +         * (RS485 and Fractional Divisor) are not implemented.
+> +         */
+> +        return 0x00000000;
+> +
+> +    default:
+> +        return 0;
+> +    }
+> +}
+> +
+> +static void dw8250_ext_write(void *opaque, hwaddr addr, uint64_t val, unsigned int size)
+> +{
+
+LOG_UNIMP (or LOG_GUEST_ERROR)?
+
+
+> +static void dw8250_realize(DeviceState *dev, Error **errp)
+> +{
+> +    DW8250State *s = DW8250(dev);
+> +    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
+> +    SysBusDevice *serial_sbd = SYS_BUS_DEVICE(s->serial_mm);
+> +
+> +    memory_region_init(&s->container, OBJECT(dev), "dw8250-container",
+> +                       DW_UART_REGION_SIZE);
+> +    sysbus_init_mmio(sbd, &s->container);
+> +
+> +    qdev_prop_set_uint8(s->serial_mm, "regshift", s->regshift);
+> +    qdev_prop_set_uint8(s->serial_mm, "endianness", DEVICE_LITTLE_ENDIAN);
+> +    sysbus_realize(serial_sbd, errp);
+
+Return on error?
+
+> +
+> +    memory_region_init_io(&s->ext_iomem, OBJECT(dev), &dw8250_ext_ops, s,
+> +                          "dw8250-ext", DW_UART_REGION_SIZE);
+> +    memory_region_add_subregion(&s->container, 0, &s->ext_iomem);
+> +
+> +    memory_region_add_subregion_overlap(&s->container, 0,
+> +                                        sysbus_mmio_get_region(serial_sbd, 0), 1);
+> +
+> +    sysbus_pass_irq(sbd, serial_sbd);
+> +}
+> +
+> +static const Property dw8250_properties[] = {
+> +    DEFINE_PROP_UINT8("regshift", DW8250State, regshift, 2),
+
+When boards have a value other than 2, does this affect the DW
+extension registers too? Or only the 8250 ones?
 
