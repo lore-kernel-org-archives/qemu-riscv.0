@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AFAAC43458
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 14:35:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 288F6C43602
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 14:35:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wew0N-00022T-Uz; Wed, 01 Jul 2026 10:33:37 -0400
+	id 1wew0E-0001z2-DK; Wed, 01 Jul 2026 10:33:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1wew08-0001wu-VC; Wed, 01 Jul 2026 10:33:21 -0400
-Received: from [115.124.30.131] (helo=out30-131.freemail.mail.aliyun.com)
+ id 1wew09-0001wv-6I; Wed, 01 Jul 2026 10:33:21 -0400
+Received: from [115.124.30.132] (helo=out30-132.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1wew05-0000SP-0E; Wed, 01 Jul 2026 10:33:20 -0400
+ id 1wew04-0000Rk-Ri; Wed, 01 Jul 2026 10:33:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1782916379; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=SXjVdCGN0cA5Jj+IrBWQWgnMneXp9emPga8+CP/p0a4=;
- b=fYdWJD7Fty2vNR8U+xW1I5rOHwwVI0pY4AGolDaF4MBZNhfVVUMc2md9T7atkoIUSdTZ9Q64KmuXm5khzGwVXljumkZ2pik/7+lDzUEv5fncoqoCbbEJ7NGBJTcUQbQdLSEDXhs2DzqYaUvgDZOtLs3DtDeL5u0xPgRpSVBIrDw=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037033178;
+ t=1782916378; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=cFVSdKRxBxbWRYZb04r06GB3+hYX03AMc5Cn5Wd3z24=;
+ b=ukDH98iQyi62Dbs+HY7zVaXLiXvZDKCj/QEMgk+62OBEGqZ3l42reOR7scBlDMpixc9qs/klD8QhD3rS3FbY+JrJAOseH3MG54z5OH/JRAcUQ12m7rKWY9sKUacC+SSCe66OjHB4jTp76F5hwNJbWv9QENMeHdLSdXWjaMU9cOU=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R411e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
  MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0X6A2Trt_1782916376; 
+ TI=SMTPD_---0X6A2Trb_1782916375; 
 Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0X6A2Trt_1782916376 cluster:ay36) by smtp.aliyun-inc.com;
- Wed, 01 Jul 2026 22:32:57 +0800
+ fp:SMTPD_---0X6A2Trb_1782916375 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 01 Jul 2026 22:32:56 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Wed, 01 Jul 2026 22:32:11 +0800
-Subject: [PATCH v3 3/5] disas/riscv: Use signed type for vector immediates
+Date: Wed, 01 Jul 2026 22:32:09 +0800
+Subject: [PATCH v3 1/5] disas/riscv: Fix th.srri decoding
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260701-b4-disas-xthead-fix-riscv-next-v3-3-fc4f5f1b6c15@linux.alibaba.com>
+Message-Id: <20260701-b4-disas-xthead-fix-riscv-next-v3-1-fc4f5f1b6c15@linux.alibaba.com>
 References: <20260701-b4-disas-xthead-fix-riscv-next-v3-0-fc4f5f1b6c15@linux.alibaba.com>
 In-Reply-To: <20260701-b4-disas-xthead-fix-riscv-next-v3-0-fc4f5f1b6c15@linux.alibaba.com>
 To: qemu-devel@nongnu.org
@@ -48,17 +48,17 @@ Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org, 
  TANG Tiancheng <lyndra@linux.alibaba.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1782916375; l=911;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1782916375; l=1506;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=ITXOf+1LAM2NiTyNtuQuF3UTMPPL6Gn2c9yAeXo53pw=;
- b=1xu37Wm3vbI84OQN54CfAEXTlEhJmMNhTVGcJ6PdKBbgosajeDq6e1f1ws3GgUyV80pcn1x2d
- 9woVkTmGAqoAyN/uUHYgiajuZH0RNmCGTiKE0VIJI4Azu1mmNcR6N9H
+ bh=m/WPwWNlaTg0Hlf4CSq6Gcr7JvCTsC5AbG3EU9dKV6w=;
+ b=j8YqUAmQ43jsczS61QRECmlQcyuXScSJuQMvOdvF3OsT1FBOn8Q20R7amLqRRCPa5PCnBHeii
+ 7tk/utkG3PVDHot+/gvODZopWbz+3jG9OUBRiPAoIDdi3r0HiyLXEY4
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.131 (deferred)
-Received-SPF: pass client-ip=115.124.30.131;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.132 (deferred)
+Received-SPF: pass client-ip=115.124.30.132;
  envelope-from=lyndra@linux.alibaba.com;
- helo=out30-131.freemail.mail.aliyun.com
+ helo=out30-132.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -82,31 +82,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-operand_vimm() sign-extends the 5-bit vector immediate field in bits
-19:15, but returns uint32_t. This sends negative immediates through an
-unsigned type before they are assigned to rv_decode.imm.
+target/riscv/xthead.decode defines th.srri as funct6=000100 in
+bits 31:26, with the 6-bit immediate in bits 25:20.
 
-Return int32_t to match the signed value extracted by the helper.
+decode_xtheadbb() switches on bits 31:25, i.e. funct6 plus imm[5].
+Therefore valid th.srri encodings are 0001000 and 0001001. The
+current 0000100 and 0000101 cases use the wrong funct6 value and
+decode valid th.srri instructions as illegal.
 
+Fix the cases to match funct6=000100 with both imm[5] values.
+
+Fixes: 318df7238b9f ("disas/riscv: Add support for XThead* instructions")
 Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- disas/riscv.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ disas/riscv-xthead.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 400a57083f90be18ccd12415797bce0df974784b..e9dcc173d8fa2f89d85b76595a76931c4dddb462 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -4487,7 +4487,7 @@ static uint32_t operand_cimmq(rv_inst inst)
-         ((inst << 57) >> 62) << 6;
- }
- 
--static uint32_t operand_vimm(rv_inst inst)
-+static int32_t operand_vimm(rv_inst inst)
- {
-     return (int64_t)(inst << 44) >> 59;
- }
+diff --git a/disas/riscv-xthead.c b/disas/riscv-xthead.c
+index fcca326d1c398a6745984b9f5d90fc5f7d54dfd9..2f2ddb8dd9a13e17a28539b4179cd10fa93c5941 100644
+--- a/disas/riscv-xthead.c
++++ b/disas/riscv-xthead.c
+@@ -315,8 +315,10 @@ void decode_xtheadbb(rv_decode *dec, rv_isa isa)
+                         op = rv_op_th_revw;
+                     }
+                     break;
+-                case 0b0000100:
+-                case 0b0000101: op = rv_op_th_srri; break;
++                case 0b0001000:
++                case 0b0001001:
++                    op = rv_op_th_srri;
++                    break;
+                 }
+                 break;
+             case 2: op = rv_op_th_ext; break;
 
 -- 
 2.43.0
