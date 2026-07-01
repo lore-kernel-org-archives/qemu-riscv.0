@@ -4,91 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92D18C43458
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 03:09:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5DFBC43458
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 03:18:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1welG7-0005su-D1; Tue, 30 Jun 2026 23:05:07 -0400
+	id 1welSR-0007IA-ON; Tue, 30 Jun 2026 23:17:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1welFv-0005h1-Hp
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:04:56 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ id 1welSJ-0007HH-Ez
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:17:46 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1welFr-0002oT-It
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:04:55 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2ca64989e64so1423505ad.2
- for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 20:04:51 -0700 (PDT)
+ id 1welSH-0007Oa-Q4
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:17:43 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-37fa06b39b4so112736a91.2
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 20:17:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782875090; x=1783479890; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fYkR10xGijSj9NHAYmbf6T4A8YrwDfmmBe0qsSqt02A=;
- b=PlJh29MZG+wnIK3EdQOaafl/sF1UKw7yA0RgbRw/knE+ZRI4U6MBNDMyYeMPsElD5R
- CankjxBYkYOBtF2g/jKbdBsve97YVd214sEqHfjAfsJ2PTEpOoqK/tZCzL9luePyz6YC
- yjEAr//nAIYnnj26I+ef9qhBDOVNyRWgdyCjnTF9dv6eyWvd6WlllQiExy8d3pPDrH5S
- 0UlnQFt+hybYGklPWfiXl/DPj4LNdG+JbGlm06j1uBwrE+YvLp+OXmlRfHsZAA6tKt2s
- 0OINouPKuiFH33QvC0TdbdBgY+1TuUXwWCIXUsDpn2s1scpgObEVgK492Etw2k0+3tzp
- 5rWw==
+ d=linaro.org; s=google; t=1782875860; x=1783480660; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ULOQtr1YJTNJ4QgkNmEBvJ3hn7RftSvavRhuzQ74SFg=;
+ b=h/3aCX9OPqI8UROhTvFVNjdxYRdcDA6KvSD9kU1qOQxihZoSTr1EnwU7UvjT+6xLoo
+ zowKyL8RghWy61yyc/6bZxD8VNRVKGloHLCz32asbPiOBwfW+klpnZmlOOHndpUVLb0t
+ T9Ei+mnnw2OM+o9UUitkrUMDsS585OAQ74C6UUTGVkrQ5dF6iwmrWIGC98DD+Ul7GeF3
+ gV/GBNLETQ6ch6Y1NkA5w+NTQgNeo7YIvTlE+HffV6Q6F528VyHZ1DKuOcWXEMcZ2z66
+ pNp5pEuWVwOoWIyWYhc8t+c/76o7qGTYkRGCmTfK1rTgnM8ukZX6/sfIBJ+W5z2z9yZ8
+ LdQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782875090; x=1783479890;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=fYkR10xGijSj9NHAYmbf6T4A8YrwDfmmBe0qsSqt02A=;
- b=OBc0XvitEpLVry65tULfPWlvlDIODtQ0obxBOzMdsbx8tCgfSkqRzwELRwUteP3xNI
- Mta/fxBkW8+oVcdrBUbSmFWhdpAbWUxLrKx3IZ+Tmt+AYKGZw2bsILNcKaKOP/d2dsqo
- 4jKGFx63xz3OCSGPrm/62nn0rX+WUOQX8uaohuRsvfRMk1qMxrZkMMw+j/AY4whYOasQ
- drMc2I0ssx+v0PFddNKB1FiSaNs9LC71J8OPdJLhG6mAIKKfUPTqIgWKIS+Rk5eh3EQn
- nhAeBhhM9m5l6iFNvJq/GAjnR9DzB3YI/Di+ByI/ySO4gt2ibvP+9NraskdqzzW0ZL0c
- If8A==
+ d=1e100.net; s=20251104; t=1782875860; x=1783480660;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ULOQtr1YJTNJ4QgkNmEBvJ3hn7RftSvavRhuzQ74SFg=;
+ b=YbRKKBi8+IgZx0t8ZMrdULEfQoKVH/GlpaDu8Y/XWk2bDXQDMis6dhBtrn+v1l8F12
+ 7jxBBzRaUHUjBnwA3MExWPFsZz+5xOrVZnHcdXxKUgxDql92X/1wwJ/VF8MbsYnNXfza
+ pzoBbx9zOrtiZHIkik+wj6iyC6h+kzUAECUPsNhsvRot/PkDbRoOJ3E/1MjxytEUUTA2
+ ZkMRG7Il/DC06JA7y46MfI2ub85H5ZXrshHcPyw8bppR7Jq59xEySwKgfQ3bz686OFmW
+ tkVtD4sScMCaCvR+xo4JM9mUsKtgMuGgHREorQb07PkpfIaH0DBKQdvisLAjavYD9sF+
+ iCVQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RooLc1N5jzzvIPcWlsqlqi1wlhGeejq6YD3iB6GOM43qKPZBBuuBnWUeYRJpkLQ1zjfwlcPPV7SmPdc@nongnu.org
-X-Gm-Message-State: AOJu0Yy9ftacFJOXnhHkyPfoSEFjiIlRPOasyH4RTVHmPD9wUH4uzOM0
- x5HFoJT+W5KeeERE9si3kxjKNwREAE9CPtZ78xkn7pmqmcKfl0ptAZ+Clb1L+MrmHuvwl2dbO2G
- A6R2i
-X-Gm-Gg: AfdE7cnjPFG+ggdeFzm10T59G8ZnFsHpk9Z6MPOguhLiaas80k3obL1q8xGBE8M0hYO
- uhxvZ0UuoM8Vt5LtdpTe+7+TCknwjQ0pdV7HSxeNZz1V1DkhsBdnMCljJ7bAIjFunXx60gmdWNA
- M8uTyGnjtKRbFuFQe8B6jSkE2/oEaorQep570H9nLDimqlnmHyAWswVQbGLvK2E3wZzlu9gmsTD
- 3orZv71y28+/BwqqhuXtI+nfkOTNNL5goRvVVcC5CErp2oONhAlagGK4dOuAhZJZZxrCMLvco1P
- cCbXdhdn6BPQ03mNZ826X4uK7JU/ttbacMXxWweaoiDeaksl+GUIc4LwJuAeVScqw8I6rELNVsn
- 5iZ9MiD2Scd3cEsawmbWWN4bFQ/rFF1UDgtXhUYVptyL84vl4/dLbSbEbfHzq5UCcvqzMcRANbC
- VI5TlnBKxwGG9f965zJdat1tXGamp4xKDTCmliCOfp03yuXz2p5Q==
-X-Received: by 2002:a17:903:291:b0:2c9:bd64:8c81 with SMTP id
- d9443c01a7336-2ca5a58544dmr25847205ad.18.1782875089934; 
- Tue, 30 Jun 2026 20:04:49 -0700 (PDT)
-Received: from stoup.. (174-21-129-215.tukw.qwest.net. [174.21.129.215])
+ AHgh+RonEPCgOVjfPW5uHCawzEOVXaGyEKPjL6kTgG587TY+KhmdX7qCbRS3I/BaUBMw9N6EidtEcl4y0FKN@nongnu.org
+X-Gm-Message-State: AOJu0YxZ5CWMHVqt5gUkWSgYJ28Oiu8VVRYfIuTWaedwJ+9P+xfwMnPh
+ nf4FhX2TNq7M3Ub2KeRCgOgwLTHCwvwdKewAvgj9PE5GDwC9zbJlYPznxznk0SGI8tY=
+X-Gm-Gg: AfdE7clHvpTQiSF0RnTArAiSlGkVOExDkD2pThvw5DO+9JihMlJgP7Y9yVqtI9TpdfG
+ 4zIajxwesWy55OunmegmA0qpl54grZzQAdcafpETx9HZoco74RAuls/67UBUHFpnEa/n8wBbc2A
+ 9NuTZUCc4lwc5PXjmeRUNWwKu3MvXMQUPYnUJr17cwMUglCiAfOhYb5saiAbZkWLejSIc4fhvlZ
+ cb2g7SYasvKDEGarAo5U+p+m04ApcWufrfjUGZPAHWt1rHSu48gIENAliR/T023NuD8qIDzPJq2
+ tF14sKVyEsh5t2Pn+Vf/mRhl0xRujGxBL6iWRcTeHFq7rdw7wRB2z7y73PB4mTnjG4wZUggGzQz
+ 8fCgqXIn2oUNZTAODJdBQPeCaS7NDNoHrNRYRcZv2RzGLV//jd6Kj9KZfBvMCUexH5aowUYOp0e
+ HWgHXW7uoMTckRlJZ9md6FgSh7o79DdJO6x0hfUjvG0wo1upB5ctL14tcqULkspseiae59
+X-Received: by 2002:a17:90a:c10e:b0:37d:9874:9363 with SMTP id
+ 98e67ed59e1d1-3808bd3faa8mr2712959a91.2.1782875859811; 
+ Tue, 30 Jun 2026 20:17:39 -0700 (PDT)
+Received: from [192.168.0.4] (174-21-129-215.tukw.qwest.net. [174.21.129.215])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ca37c74261sm23758085ad.22.2026.06.30.20.04.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 20:04:49 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: shivangu@linux.ibm.com,
-	qemu-arm@nongnu.org,
-	qemu-riscv@nongnu.org
-Subject: [PATCH 06/17] *: Add missing include of exec/breakpoint.h
-Date: Tue, 30 Jun 2026 20:04:32 -0700
-Message-ID: <20260701030443.1382447-7-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260701030443.1382447-1-richard.henderson@linaro.org>
-References: <20260701030443.1382447-1-richard.henderson@linaro.org>
+ 41be03b00d2f7-c9bbcd9f5fbsm2480215a12.9.2026.06.30.20.17.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Jun 2026 20:17:39 -0700 (PDT)
+Message-ID: <f4235288-ef5f-4ae1-b5fe-eafcf1d19dc2@linaro.org>
+Date: Tue, 30 Jun 2026 20:17:37 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/5] disas/riscv: Use extract helpers for operand fields
+To: TANG Tiancheng <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-riscv@nongnu.org
+References: <20260701-b4-disas-xthead-fix-riscv-next-v2-0-e6e4ff5a7847@linux.alibaba.com>
+ <20260701-b4-disas-xthead-fix-riscv-next-v2-5-e6e4ff5a7847@linux.alibaba.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20260701-b4-disas-xthead-fix-riscv-next-v2-5-e6e4ff5a7847@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,167 +110,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- accel/tcg/tcg-accel-ops.c           | 1 +
- cpu-common.c                        | 1 +
- gdbstub/system.c                    | 1 +
- gdbstub/user.c                      | 1 +
- system/watchpoint.c                 | 1 +
- target/i386/cpu.c                   | 1 +
- target/i386/kvm/kvm.c               | 1 +
- target/i386/machine.c               | 1 +
- target/i386/tcg/system/bpt_helper.c | 1 +
- target/ppc/cpu.c                    | 1 +
- target/xtensa/dbg_helper.c          | 1 +
- target/xtensa/helper.c              | 1 +
- 12 files changed, 12 insertions(+)
+On 6/30/26 18:51, TANG Tiancheng wrote:
+>   static int32_t operand_imm20(rv_inst inst)
+>   {
+> -    return (((int64_t)inst << 32) >> 44) << 12;
+> +    return extract32(inst, 12, 20) << 12;
+>   }
 
-diff --git a/accel/tcg/tcg-accel-ops.c b/accel/tcg/tcg-accel-ops.c
-index c179cd4ade..c153bb3355 100644
---- a/accel/tcg/tcg-accel-ops.c
-+++ b/accel/tcg/tcg-accel-ops.c
-@@ -31,6 +31,7 @@
- #include "accel/tcg/cpu-loop.h"
- #include "system/tcg.h"
- #include "system/replay.h"
-+#include "exec/breakpoint.h"
- #include "exec/icount.h"
- #include "qemu/main-loop.h"
- #include "qemu/guest-random.h"
-diff --git a/cpu-common.c b/cpu-common.c
-index adb76b3a78..11ab32d64d 100644
---- a/cpu-common.c
-+++ b/cpu-common.c
-@@ -20,6 +20,7 @@
- #include "qemu/osdep.h"
- #include "qemu/main-loop.h"
- #include "exec/cpu-common.h"
-+#include "exec/breakpoint.h"
- #include "hw/core/cpu.h"
- #include "qemu/lockable.h"
- #include "trace/trace-root.h"
-diff --git a/gdbstub/system.c b/gdbstub/system.c
-index 2063b63b2f..6ff24312bf 100644
---- a/gdbstub/system.c
-+++ b/gdbstub/system.c
-@@ -18,6 +18,7 @@
- #include "gdbstub/syscalls.h"
- #include "gdbstub/commands.h"
- #include "exec/hwaddr.h"
-+#include "exec/breakpoint.h"
- #include "accel/accel-ops.h"
- #include "accel/accel-cpu-ops.h"
- #include "system/address-spaces.h"
-diff --git a/gdbstub/user.c b/gdbstub/user.c
-index 97eb13e796..05fe18f906 100644
---- a/gdbstub/user.c
-+++ b/gdbstub/user.c
-@@ -14,6 +14,7 @@
- #include "qemu/cutils.h"
- #include "qemu/sockets.h"
- #include "qapi/error.h"
-+#include "exec/breakpoint.h"
- #include "exec/hwaddr.h"
- #include "exec/gdbstub.h"
- #include "gdbstub/commands.h"
-diff --git a/system/watchpoint.c b/system/watchpoint.c
-index 21d0bb36ca..4c2543a7c9 100644
---- a/system/watchpoint.c
-+++ b/system/watchpoint.c
-@@ -21,6 +21,7 @@
- #include "qemu/error-report.h"
- #include "exec/cputlb.h"
- #include "exec/target_page.h"
-+#include "exec/breakpoint.h"
- #include "exec/watchpoint.h"
- #include "hw/core/cpu.h"
- 
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 5805d33ab9..422ca139af 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -39,6 +39,7 @@
- #include "standard-headers/asm-x86/kvm_para.h"
- #include "hw/core/qdev-properties.h"
- #include "hw/i386/topology.h"
-+#include "exec/breakpoint.h"
- #include "exec/watchpoint.h"
- #ifndef CONFIG_USER_ONLY
- #include "confidential-guest.h"
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 64cc421abe..739e21793d 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -70,6 +70,7 @@
- #include "migration/blocker.h"
- #include "exec/memattrs.h"
- #include "exec/target_page.h"
-+#include "exec/breakpoint.h"
- #include "trace.h"
- 
- #include CONFIG_DEVICES
-diff --git a/target/i386/machine.c b/target/i386/machine.c
-index 1f5c517e56..2b9cf3878d 100644
---- a/target/i386/machine.c
-+++ b/target/i386/machine.c
-@@ -7,6 +7,7 @@
- #include "hw/i386/x86.h"
- #include "kvm/kvm_i386.h"
- #include "hw/xen/xen.h"
-+#include "exec/breakpoint.h"
- #include "exec/watchpoint.h"
- #include "system/kvm.h"
- #include "system/kvm_xen.h"
-diff --git a/target/i386/tcg/system/bpt_helper.c b/target/i386/tcg/system/bpt_helper.c
-index 2feea69c8a..3b1ecd8735 100644
---- a/target/i386/tcg/system/bpt_helper.c
-+++ b/target/i386/tcg/system/bpt_helper.c
-@@ -21,6 +21,7 @@
- #include "accel/tcg/cpu-loop.h"
- #include "cpu.h"
- #include "exec/helper-proto.h"
-+#include "exec/breakpoint.h"
- #include "exec/watchpoint.h"
- #include "tcg/helper-tcg.h"
- 
-diff --git a/target/ppc/cpu.c b/target/ppc/cpu.c
-index 41edb18643..0bd6ebe39b 100644
---- a/target/ppc/cpu.c
-+++ b/target/ppc/cpu.c
-@@ -22,6 +22,7 @@
- #include "cpu-models.h"
- #include "cpu-qom.h"
- #include "exec/log.h"
-+#include "exec/breakpoint.h"
- #include "exec/watchpoint.h"
- #include "fpu/softfloat-helpers.h"
- #include "mmu-hash64.h"
-diff --git a/target/xtensa/dbg_helper.c b/target/xtensa/dbg_helper.c
-index 3d1143ad5e..160cdd798c 100644
---- a/target/xtensa/dbg_helper.c
-+++ b/target/xtensa/dbg_helper.c
-@@ -30,6 +30,7 @@
- #include "cpu.h"
- #include "exec/helper-proto.h"
- #include "qemu/host-utils.h"
-+#include "exec/breakpoint.h"
- #include "exec/watchpoint.h"
- #include "system/address-spaces.h"
- 
-diff --git a/target/xtensa/helper.c b/target/xtensa/helper.c
-index 5a0e865514..0db5502287 100644
---- a/target/xtensa/helper.c
-+++ b/target/xtensa/helper.c
-@@ -30,6 +30,7 @@
- #include "cpu.h"
- #include "exec/cputlb.h"
- #include "exec/target_page.h"
-+#include "exec/breakpoint.h"
- #include "gdbstub/helpers.h"
- #include "exec/helper-proto.h"
- #include "accel/tcg/cpu-loop.h"
--- 
-2.43.0
+sextract32.
 
+>   
+>   static int32_t operand_jimm20(rv_inst inst)
+>   {
+> -    return (((int64_t)inst << 32) >> 63) << 20 |
+> -        ((inst << 33) >> 54) << 1 |
+> -        ((inst << 43) >> 63) << 11 |
+> -        ((inst << 44) >> 56) << 12;
+> +    uint32_t imm = extract32(inst, 31, 1) << 20 |
+> +        extract32(inst, 21, 10) << 1 |
+> +        extract32(inst, 20, 1) << 11 |
+> +        extract32(inst, 12, 8) << 12;
+> +
+> +    return sextract32(imm, 0, 21);
+>   }
+
+You can use sextract32 on the first extraction, rather than re-extracting at the end:
+
+     return sextract(inst, 31, 1) << 20 |
+            ...
+
+
+>   static int32_t operand_simm12(rv_inst inst)
+>   {
+> -    return (((int64_t)inst << 32) >> 57) << 5 |
+> -        (inst << 52) >> 59;
+> +    uint32_t imm = extract32(inst, 25, 7) << 5 |
+> +        extract32(inst, 7, 5);
+> +
+> +    return sextract32(imm, 0, 12);
+>   }
+
+Likewise.
+
+>   
+>   static int32_t operand_sbimm12(rv_inst inst)
+>   {
+> -    return (((int64_t)inst << 32) >> 63) << 12 |
+> -        ((inst << 33) >> 58) << 5 |
+> -        ((inst << 52) >> 60) << 1 |
+> -        ((inst << 56) >> 63) << 11;
+> +    uint32_t imm = extract32(inst, 31, 1) << 12 |
+> +        extract32(inst, 25, 6) << 5 |
+> +        extract32(inst, 8, 4) << 1 |
+> +        extract32(inst, 7, 1) << 11;
+> +
+> +    return sextract32(imm, 0, 13);
+>   }
+
+Etc.
+
+
+r~
 
