@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96401C43458
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 03:07:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27137C43327
+	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 03:07:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1welGB-00060y-2o; Tue, 30 Jun 2026 23:05:11 -0400
+	id 1welG8-0005vd-JW; Tue, 30 Jun 2026 23:05:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1welFz-0005kX-H4
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:05:00 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1welFu-0005gv-1A
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:04:56 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1welFv-0002r3-7k
- for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:04:59 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2c9ed0c7fc7so1216785ad.1
- for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 20:04:54 -0700 (PDT)
+ id 1welFq-0002nt-LK
+ for qemu-riscv@nongnu.org; Tue, 30 Jun 2026 23:04:53 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-2c821a50615so953495ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 30 Jun 2026 20:04:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782875094; x=1783479894; darn=nongnu.org;
+ d=linaro.org; s=google; t=1782875088; x=1783479888; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m9lGyyAHN8LnCXhy7QmMc4S+kFAgGybyfRaIJ4iRcl0=;
- b=zdjq0bt2ZmV3HQrP3VgH6slMX9pLKqlDZ6i+eCxsAINylWvMsPU3+wmdphmQfXez3U
- MB0hFzz7ZCwCnXccUOXv6r93Pi8W8rxsAgYnHxh4e0XP7iu82bobZF2UsWuDuvzFa37G
- bu0JQ6auHu0tO356xsho5POCwccIkPVwXASxggLZMZsnh4Qi/0/QOISK1ykSKs5oxlyf
- T1S9scoUR/UtXYoZqCkhNi0SU87a0HNcz1B5GP5k0c/nvNWLZey4mpw5QvSYvBv+lkos
- 2rPSc6homa/bkXvnBjPf82Z+kF/DMDKlwcyVjU15oNT7BMv5kDhzjKVaQ2WD0YKAhnMl
- 3leA==
+ bh=QYQVNWpWGwmaVZc4jT8q1D8DLBPAuVdV88yXOr2IM3U=;
+ b=iabYDam/BRf1WY0sPLi64df++03gX1uJoSxWj+aPpA71NYglojakXsun5X1xPb48OU
+ /z6+FgRhHhroZiZAvSAVy8TrYB6wfUWJI7Um4NvdwoYfaAZhXnoCRPBFEmAK2Exz90fV
+ iswi1wCTtqg0Sa6sNOpa3vASyUEyEuA3+JcDXptd/mIBrr3Zjd2Rxs8bEEz8sDqpUsou
+ DivJh+8QwEpEP1lC6/Cr4XvZ1RVgxw/j5HdK7+zVTinm6Kza5bbA+5knuHFhyaLvG4xz
+ gnO5J6dEXXXF9vAetnAB/Ym8CEHwJQd0dPVKnhwwgvZ56I1/0OPuz+oIM/VOBz119Ipu
+ 15Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782875094; x=1783479894;
+ d=1e100.net; s=20251104; t=1782875088; x=1783479888;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=m9lGyyAHN8LnCXhy7QmMc4S+kFAgGybyfRaIJ4iRcl0=;
- b=J10E9/m6zmU+UQCJ3DkdP/0KlxTYMfe2vhVEiLD+Qa/kDc8D1fEHq50d5DKB4YyNLP
- qCEu+PQlSTP6CGVM+5E/Q0vfhnamu04tPVQ4vMb0/MRpRwO9WIJd3IUgAm97GI5iXOZy
- oD44c3zKxZtYrMi3oJ6ZtOHTzoKtwB/hjOqcXYM+0L9OjM77efPHmBA8ghV5Mhe87TqI
- rRnFM/4w0w5wTHOOj00s4ecV1/k3UDJ3a4zrivWjuXO28w170NT2cHZLvUwJqH43st+H
- 7M4oLJZhOMTSAUtzZ76gMtFYYybZTQTIMl/49iKVotP+clg/0uns1+jjM/grCwIOy1hN
- fFrQ==
+ bh=QYQVNWpWGwmaVZc4jT8q1D8DLBPAuVdV88yXOr2IM3U=;
+ b=gYz03i4RHCb9eueMdbcLLDIWt0pK12/gsa1V9WD9Zd1w2J+vcNz5IhQzOYbAOvk3wJ
+ XKQ3UraXk+vZmOkxT39tDUEopEGEZcB1KUpP4jWygYt6a6LoJty47LOFcRH0tfUj16zf
+ teUWepqZkcawZviUmaZGkPajZApFumVG93muyZfj04q5fna8Npek8vystiq5HHEotoQZ
+ FBmDX/mTfPfivJLBNc+idXeIgN2tI75YcAFX8qGfz8rxrVUU3/E0yafqhmqU+GUi8vQl
+ u97ofKm7X/GCt2S+FlElUEAjC0JqRmBJ6qmIh8QrSa6emMOvPxxJeg1MZO9+94ocBMo/
+ lmzw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RojRg2KlhxJdV4k4eNcpYneI2qMgEXL9wq790BaQXKsoODCswLWe/Ml13PDb2NX1aLl3mLSZE8sGsSQ@nongnu.org
-X-Gm-Message-State: AOJu0YwduGNwi6EjkAFf5K3HI7wOHym8U7j2ewOkUrWJlJ9Xr2GWs9/1
- nm+ov8FDNYSPL/jZMhlRyETX7twlFPnqPCg3+427AZtCAT5nF7MZZNfssYokxVSBuCg5/Nq/7qj
- vPDjN
-X-Gm-Gg: AfdE7cmSmAl08/i/99txb5VMdUAOJ+c1om0eyrOcejXUBkj46/S0qNzSMil8FhhHqAy
- nyLQ/2EQaIBt1zmdUyHn+C4U/QcSsoMDgY0T4XXoZzsOKNM0iBiE9d0hrHSGJdneHB6afFfNDTT
- HE8aqjKIVxntYm3GRTCzKunWJ4kCXEEt7wGiV3p65jZ3IW7mPmOdpBy1BPV2k9DsybPGsLZVp/t
- h2PZHKi/EMUzGnGJWSW5FmRTxCLfVAoXx+ymFeNjzXixQ2PrJXCDg7KHQPS9fkVv4ed9vSWYuRQ
- Y9xGvtSLNv8KVUCJsfuuRfutAeeM/NC8dtmKjjb7++p75ilEm9zoCwbJr1kl33XsRq9i7YBzrHF
- dmJ4J57hJNYw/QK2Q89xSkywKI61j7N6+Zt5OtT52bGOHywz4/q5Bg1nH1k2W65zR6FIFD0MRMA
- IuTr6CeYN8mndmS1udjsz9tc6HVtChObp9TzWJrrvQ4dsvYTPweHXpm8WSfzhR
-X-Received: by 2002:a17:902:f712:b0:2c9:aae1:a61a with SMTP id
- d9443c01a7336-2ca5a552530mr31604635ad.14.1782875093810; 
- Tue, 30 Jun 2026 20:04:53 -0700 (PDT)
+ AHgh+RrAITjlJU1yuCPf9FDWVMJbay3KDfrQ7pzf8BDRu1ImYVSmnUFfAuosFngZ96If0gM3BtkgNwVr5IaT@nongnu.org
+X-Gm-Message-State: AOJu0YxINGb5iWghw1ixdU5VjPFV7qO1M3TC4hQA59ruy1KStUfmnp1y
+ y19ilgRI0rfx5R6hL7Yyfw44XMB5FsLqTPMR8b4c7Ttm88dirgcMcD5BcuvwQFJer2Q=
+X-Gm-Gg: AfdE7cmRbPUTUWmyAl0szJtslxLJgPAGyLTg6sjpOHW7JADCVyJ+JZ4bZpz8Qo7pi+G
+ 83COEfw3/xzPc/N/l8xKJ8PG1mVnZD7wf76y+UUIP+CaZGmstjfAtTxQ5NxvU66892Y0Nq7o0ab
+ kjzmk79/sjb7rB9xk5AmDyy6pjlFyD/v3QldEh39SQtb4TxOTa5N8y+i7xFFUl9X1fUhMsIuBVL
+ erSfr4ks5tM3L144vCnk321kCh26wC13NuuVWhuIxpX6HJBQoiTKBarVFQ8HsUsXtbd4eA7zfvZ
+ 1gzzOnAtZO1F4eaauchudzkZTUGjpMbSdBaNJii3TdI+9XSYwt1QpbkYWdZfFy2JZgV6gihFQQy
+ W4YJXIufNOSxx7EdOS/LhMViej6gUxuOrmgSO4OMudG7V7R8Y4M4sGIuGmL38ohbPZ6PeeHrl85
+ b7+zOpqvtDlPjTUCEBq05GGW+TVhR/8TNbhWneDhNxEF2RtX32Cw==
+X-Received: by 2002:a17:903:41c8:b0:2c9:c952:6e9 with SMTP id
+ d9443c01a7336-2ca2d52ad0amr52835295ad.2.1782875088326; 
+ Tue, 30 Jun 2026 20:04:48 -0700 (PDT)
 Received: from stoup.. (174-21-129-215.tukw.qwest.net. [174.21.129.215])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ca37c74261sm23758085ad.22.2026.06.30.20.04.53
+ d9443c01a7336-2ca37c74261sm23758085ad.22.2026.06.30.20.04.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 20:04:53 -0700 (PDT)
+ Tue, 30 Jun 2026 20:04:47 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: shivangu@linux.ibm.com,
 	qemu-arm@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 11/17] target/arm: Use bp argument in
- arm_debug_check_breakpoint
-Date: Tue, 30 Jun 2026 20:04:37 -0700
-Message-ID: <20260701030443.1382447-12-richard.henderson@linaro.org>
+Subject: [PATCH 04/17] exec/breakpoint: Move BP declarations from hw/core/cpu.h
+Date: Tue, 30 Jun 2026 20:04:30 -0700
+Message-ID: <20260701030443.1382447-5-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260701030443.1382447-1-richard.henderson@linaro.org>
 References: <20260701030443.1382447-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,35 +103,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use the matched breakpoint instead of looping over all.
-
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/arm/tcg/debug.c | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
+ include/exec/breakpoint.h | 21 +++++++++++++++++++++
+ include/hw/core/cpu.h     | 21 ---------------------
+ 2 files changed, 21 insertions(+), 21 deletions(-)
 
-diff --git a/target/arm/tcg/debug.c b/target/arm/tcg/debug.c
-index 8bcce4a1b0..fc63d35d98 100644
---- a/target/arm/tcg/debug.c
-+++ b/target/arm/tcg/debug.c
-@@ -396,15 +396,8 @@ bool arm_debug_check_breakpoint(CPUState *cs, const CPUBreakpoint *bp)
-      * TODO: We would need to look up the page for PC and verify that
-      * it is present and executable.
-      */
--
--    for (n = 0; n < ARRAY_SIZE(env->cpu_breakpoint); n++) {
--        if (env->cpu_breakpoint[n] &&
--            env->cpu_breakpoint[n]->pc != pc &&
--            bp_wp_matches(cpu, env->cp15.dbgbcr[n], arm_current_el(env))) {
--            return true;
--        }
--    }
--    return false;
-+    n = bp->flags >> BP_CPU_ID_SHIFT;
-+    return bp_wp_matches(cpu, env->cp15.dbgbcr[n], arm_current_el(env));
- }
+diff --git a/include/exec/breakpoint.h b/include/exec/breakpoint.h
+index 95f0482e6d..4013d9a07c 100644
+--- a/include/exec/breakpoint.h
++++ b/include/exec/breakpoint.h
+@@ -12,6 +12,20 @@
+ #include "exec/vaddr.h"
+ #include "exec/memattrs.h"
  
- bool arm_debug_check_watchpoint(CPUState *cs, const CPUWatchpoint *wp)
++/* Breakpoint/watchpoint flags */
++#define BP_MEM_READ           0x01
++#define BP_MEM_WRITE          0x02
++#define BP_MEM_ACCESS         (BP_MEM_READ | BP_MEM_WRITE)
++#define BP_STOP_BEFORE_ACCESS 0x04
++/* 0x08 currently unused */
++#define BP_GDB                0x10
++#define BP_CPU                0x20
++#define BP_ANY                (BP_GDB | BP_CPU)
++#define BP_HIT_SHIFT          6
++#define BP_WATCHPOINT_HIT_READ  (BP_MEM_READ << BP_HIT_SHIFT)
++#define BP_WATCHPOINT_HIT_WRITE (BP_MEM_WRITE << BP_HIT_SHIFT)
++#define BP_WATCHPOINT_HIT       (BP_MEM_ACCESS << BP_HIT_SHIFT)
++
+ typedef struct CPUBreakpoint {
+     vaddr pc;
+     int flags; /* BP_* */
+@@ -27,4 +41,11 @@ typedef struct CPUWatchpoint {
+     QTAILQ_ENTRY(CPUWatchpoint) entry;
+ } CPUWatchpoint;
+ 
++int cpu_breakpoint_insert(CPUState *cpu, vaddr pc, int flags,
++                          CPUBreakpoint **breakpoint);
++int cpu_breakpoint_remove(CPUState *cpu, vaddr pc, int flags);
++void cpu_breakpoint_remove_by_ref(CPUState *cpu, CPUBreakpoint *breakpoint);
++void cpu_breakpoint_remove_all(CPUState *cpu, int mask);
++bool cpu_breakpoint_test(CPUState *cpu, vaddr pc, int mask);
++
+ #endif
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index b853824e47..e05e261883 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -1138,27 +1138,6 @@ void qemu_init_vcpu(CPUState *cpu);
+  */
+ void cpu_single_step(CPUState *cpu, int enabled);
+ 
+-/* Breakpoint/watchpoint flags */
+-#define BP_MEM_READ           0x01
+-#define BP_MEM_WRITE          0x02
+-#define BP_MEM_ACCESS         (BP_MEM_READ | BP_MEM_WRITE)
+-#define BP_STOP_BEFORE_ACCESS 0x04
+-/* 0x08 currently unused */
+-#define BP_GDB                0x10
+-#define BP_CPU                0x20
+-#define BP_ANY                (BP_GDB | BP_CPU)
+-#define BP_HIT_SHIFT          6
+-#define BP_WATCHPOINT_HIT_READ  (BP_MEM_READ << BP_HIT_SHIFT)
+-#define BP_WATCHPOINT_HIT_WRITE (BP_MEM_WRITE << BP_HIT_SHIFT)
+-#define BP_WATCHPOINT_HIT       (BP_MEM_ACCESS << BP_HIT_SHIFT)
+-
+-int cpu_breakpoint_insert(CPUState *cpu, vaddr pc, int flags,
+-                          CPUBreakpoint **breakpoint);
+-int cpu_breakpoint_remove(CPUState *cpu, vaddr pc, int flags);
+-void cpu_breakpoint_remove_by_ref(CPUState *cpu, CPUBreakpoint *breakpoint);
+-void cpu_breakpoint_remove_all(CPUState *cpu, int mask);
+-bool cpu_breakpoint_test(CPUState *cpu, vaddr pc, int mask);
+-
+ /**
+  * cpu_get_address_space:
+  * @cpu: CPU to get address space from
 -- 
 2.43.0
 
