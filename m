@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E6CBC43458
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 14:44:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE636C43458
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 14:48:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfIe5-0000V3-LT; Thu, 02 Jul 2026 10:44:05 -0400
+	id 1wfIiY-0001tL-56; Thu, 02 Jul 2026 10:48:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wfIe1-0000UV-Oq
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:44:02 -0400
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044])
+ id 1wfIiK-0001s8-SR
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:48:30 -0400
+Received: from mail-pj2-x04.google.com ([2607:f8b0:4864:39::4])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wfIdy-0006w2-MN
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:44:00 -0400
-Received: by mail-pj1-x1044.google.com with SMTP id
- 98e67ed59e1d1-37dedd62b90so785895a91.1
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 07:43:57 -0700 (PDT)
+ id 1wfIiJ-0000jo-BJ
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:48:28 -0400
+Received: by mail-pj2-x04.google.com with SMTP id
+ 98e67ed59e1d1-37d77008a28so1022013a91.0
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 07:48:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783003437; x=1783608237; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RLOtfSGUblu0N3KdaMUJZVLEUlaMk09G5r1IgsC7M1w=;
- b=eZEe68ebBtAUtm030xn1OdfDum/cVAvNSh48SWquZ5FaRryekauWeZ2RWIkb6uB8tw
- 5qDaN6BFLVJ3PchwBPkynVHhfFOSYvST0FgFzBQhehykCaOrjLTr350sbBes/JxHXQaz
- m1jNkioBio48tXCDEpcx3P15MHI4T/kMeQkdt9V9B/Km1sFbC/R3OcD2pu3r/5Qadk7b
- /mLLr2udfRWmcLnk7yY6JFfXkMFnff2hMAHNOuaTrUEz8mn/3v1WYHY6ChSSoaW+K9eM
- BI/bjfWPUdMOSvZ0Crqg2y5zp0aGAlK9cYPcCnVzcfYDr68qnr6b2hLq22njlsyFlT84
- +IMw==
+ d=gmail.com; s=20251104; t=1783003706; x=1783608506; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=SCeMv0MMAa9iI6Ds6fpjAC1GlUKqmp+8wT1cCzkDQOM=;
+ b=bT7/RvovRYI6TTdBtCDOMSPTh8FidaFoO4EppDxc79U3GgifAIXYJ4Zl+gOx86WQ6i
+ YWhclzWOL876oe8XGq81hkOfXYalkgm116CVfi4qd1Fdmtrc8VYuyap1zu775rGdg2+w
+ d37RjzR4ZeUMwvo//STx+20coC/yJmPdKVRddgUs2UejYRNvtzKJGiIyxkKj2vGeFzWc
+ 0ky9I4E/M0mJH+wFsPFtLv6twWPxL8f6hapiBr7gmRIuW5YlOZcH3E6m2TugmWekNiXa
+ O/baFKCvTAvZ4H5H0AfNx1zJuK5IgILSHi8dS0RrOBfVbFNGA2pqel0bgeS/avYRWcHf
+ baAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783003437; x=1783608237;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RLOtfSGUblu0N3KdaMUJZVLEUlaMk09G5r1IgsC7M1w=;
- b=Y1EaKmDbluZAayEK9D3lNh9pkLlCSns7/4y0uFgsCxtdatnxWewSEcLDoeKisqafsa
- IodDNlhHpYcnQbBl0okg+GL8dIQLKAAfrVEEoXqBKFzsMkhwHGC1r07fQsYVn/xzVw8A
- KkT370r4gSBlIVLFE3M5Z2jo9W19TCAHBiV/J5eiq8oernmcNThGXbW0UDURDHO4+sco
- 9yVwlrv6X+qcmX9IxKz+lqbUktYsPEN6Q2iyyy/VKUnLxW/FT/SBbtfJCyamtSjb6U0j
- JEj2clm08pk2xyJ+Dacwge2NeWS+TRMO1KuX165v8J4wtvx9wyS5UDzCH6ZgceNdB04r
- 64hw==
+ d=1e100.net; s=20251104; t=1783003706; x=1783608506;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SCeMv0MMAa9iI6Ds6fpjAC1GlUKqmp+8wT1cCzkDQOM=;
+ b=lhclrfbzGS2rv+Rc3afmvo4PB3gDRV3MHUtu9YtYyr5S+WyAHzi3BK9FaSRRmaQPME
+ P1vXj96jevtoIqBmjOK/gEex62uSo/Q0JPCLtUgfJXo1T+6RjPPGmqvk1bv4minsDY8+
+ fYSdfXDA3/xM6Itlghl1zawnHbtrJaj/eKyJ12AreJAquLwoVc3q/xoR/lreXV6JhThw
+ H2849cQnyaqe8+LQUYRddKAeLUYXKuEd6vm134c9v7pjpv/k86KDTWT8h+JCCXFv7AFZ
+ fWZXkwzFM8MRWJPkaSdGYLSoxZNphCmoYK5sweUv0BLIky3F7BLw8Z+Un1jyXmnoRBRv
+ HnAg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqxVqR/Ju7Ckb1zxniqByUAx0jekS3HfNXoUFdkv8wH+0391smmivojR9k3GUVT+0MQxyfyYVwaSg8r@nongnu.org
-X-Gm-Message-State: AOJu0YzSP0UMF/LY+gTG5mgDhVtmMP/RmMs6GLSE2EuXXK7gFjA+oaWU
- +1Nt7jzMTcnNvs1LwR+UtBFGrXw5HOuPT4xDcGZq+6Fry+ool8jDvINm
-X-Gm-Gg: AfdE7ckI2LebhxzQYPKnsYb+zbh2baz1LoF0aXCxb00gUSX5RTSsHofYeO9lBdPSCF+
- f4n1EW7uRSc++vCTPcJUSN8ar3MwiCQjfL7VqI9DPXBHhLTuIgiF2WffaMj5YCkIdu9RELvUeKN
- e83uE+CJ8mljV/7KHfExzYp2UgcN8FRYAz5+HHIq42xVBeVUw+GnnhyXjyvDwVyqe/sg32sYPve
- oLbz1g43lgea9OFXwcPH1CT76MaNYVho7OYwkZhDQ+MIFc3Aalxlqr29JrFnhuJObkUBgGG3j/+
- tP/nzbbvAZbx8TOR/1hFAW4q/+xMR+7aP498UlWq7yJaznP1c68BU1rKj40+3egcjK6vJr8RVM2
- GvtXGkTroYCjdQeLLNJ/bGoYROyKPfpqrvo+BF1pR097VmVV5mueo0z5eyK83JzyIzuOOgyErEl
- LQgqj35+R64vziIVXQF7UPTWiVLoDpC2Pc/aMx1A5Slg1hhRTl4CQpZFtcdhI=
-X-Received: by 2002:a17:90b:394e:b0:37f:a913:1554 with SMTP id
- 98e67ed59e1d1-3811236e007mr193745a91.16.1783003436504; 
- Thu, 02 Jul 2026 07:43:56 -0700 (PDT)
+ AFNElJ8vWRjeZGfof3I41o2jppnCN9jkc93qxZxbDX6+93dqZi8ZqSl00IcJv0nLJpvVWMnRQVOhBXWl1LNm@nongnu.org
+X-Gm-Message-State: AOJu0YzIJ3oDzDHUD5k/GjaeHPIEqGZoVG8OkLwT5/S96zNjdpPZdsj5
+ 4JnQrgnSducWOmiWxR4io3dKGr7Fso4nPpLddo0cT6D9m0+KXthdZRga
+X-Gm-Gg: AfdE7cmqOuHjCrAv6GyhX7aQWtA1bj/uaL9oy40MFQDfxwNT2HMPFKgSwlKWw/PkyVY
+ H2B7253cdE4wOEKYDfmVESODa8FLmGXFfAqEkfrDl0kh9h1JhFvodH0UOyQ7AuVGVd3numC0x3I
+ wqO9qZnHImyX1soyhlZMFKhTAxHSCf4OU2xxXZ3IUZh5u7+hGYrg4iXLpUsqjIq9G/SpxEFUNZj
+ ytsd/yVIfGANs0PZSOYckvgb/Nqp9JPwzEyFbOLJ4sB4HVTvtlfmm2+iZ01TaB/Rt67tTCDlFUt
+ ER/7Z6D5mVI3RpEYDeH/IERg24JtpQIAYuPs18J73sbEfgIuPoIVca0TjiSE8OBLtXQYeHta0tM
+ LLn0rsZBvVQycwT6tSnnu5ytwdyn7twUKCBVt9SnAH6F86gV1yVtiTBjr4B2lcgMblFPs84gfEo
+ huuvr3GtvpEWRG1YhTspqjBl4h3vDSE+eomdnjboXM5+sT0ufK
+X-Received: by 2002:a05:6a21:4ccb:b0:3bf:6c08:4ebb with SMTP id
+ adf61e73a8af0-3bfed592afamr7465642637.48.1783003705940; 
+ Thu, 02 Jul 2026 07:48:25 -0700 (PDT)
 Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f1595e912sm7318882eec.31.2026.07.02.07.43.55
+ 5a478bee46e88-30f0bbd223esm10673017eec.21.2026.07.02.07.48.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 07:43:56 -0700 (PDT)
-Date: Thu, 2 Jul 2026 22:43:53 +0800
+ Thu, 02 Jul 2026 07:48:25 -0700 (PDT)
+Date: Thu, 2 Jul 2026 22:48:22 +0800
 From: Chao Liu <chao.liu.zevorn@gmail.com>
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
  andrew.jones@oss.qualcomm.com, 
  leif.lindholm@oss.qualcomm.com, uwu@icenowy.me,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v8 5/7] hw/riscv/server_platform_ref.c: add platform bus
- and TPM support
-Message-ID: <akZ5GxYDiDv2_5yr@ChaodeMacBook-Pro.local>
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v8 6/7] tests/functional/riscv64: add riscv-server-ref
+ TPM selftest
+Message-ID: <akZ6LnH2X4NZ-cz8@ChaodeMacBook-Pro.local>
 References: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
- <20260610214133.1882563-6-daniel.barboza@oss.qualcomm.com>
+ <20260610214133.1882563-7-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260610214133.1882563-6-daniel.barboza@oss.qualcomm.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj1-x1044.google.com
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260610214133.1882563-7-daniel.barboza@oss.qualcomm.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:39::4;
+ envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj2-x04.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,255 +107,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 10, 2026 at 06:41:31PM +0800, Daniel Henrique Barboza wrote:
-> The RISC-V Server Platform spec requires a TPM device.  TPM devices in
-> QEMU comes usually in two flavors: emulated or passthrough.  A
-> passthrough device requires a host TPM device that the QEMU process can
-> borrow and it's usually coupled with KVM acceleration.
+On Wed, Jun 10, 2026 at 06:41:32PM +0800, Daniel Henrique Barboza wrote:
+> Add a TPM specific selftest for the riscv-server-ref board.  The test
+> will be skipped if there's no 'swtpm' in the host.
 > 
-> To use the TPM emulator we'll need help from an external TPM emulator
-> called swtpm.  More info can be found in [1].  For our purposes this is
-> a process that, if running Ubuntu, can be installed via 'swtpm' package.
-> We'll go back to it shortly.
-> 
-> For now, adding support for the emulated TPM device 'tpm-tis' (other TPM
-> flavors might work as well, 'tpm-tis' is the one tested with this work)
-> requires a platform bus.  Adding a platform bus will open the door for
-> more devices to be added in the board.  This is ok - a reference board
-> isn't a restricted board and users are free to add devices at their
-> leisure.
-> 
-> Here's how to use tpm-tis with the riscv-server-ref board after applying
-> this patch:
-> 
-> - in a separated shell/term run 'swtpm' (--log is optional):
-> 
-> $ mkdir /tmp/mytpm1
-> $ swtpm socket --tpmstate dir=/tmp/mytpm1 \
-> 	--ctrl type=unixio,path=/tmp/mytpm1/swtpm-sock \
-> 	--tpm2 \
-> 	--log level=20
-> 
-> Then start QEMU with:
-> 
-> $ qemu-system-riscv64 -M riscv-server-ref (...) \
-> 	-chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \
-> 	-tpmdev emulator,id=tpm0,chardev=chrtpm\
-> 	-device tpm-tis-device,tpmdev=tpm0
-> 
-> [1] https://qemu-project.gitlab.io/qemu/specs/tpm.html
+> The test has been basically cloned from our Aspeed ast2600 friends.
+> Shoutout to monsieur Cédric Le Goater for the code.
 > 
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
 
 > ---
->  hw/riscv/Kconfig               |  1 +
->  hw/riscv/server_platform_ref.c | 92 +++++++++++++++++++++++++++++++++-
->  2 files changed, 91 insertions(+), 2 deletions(-)
+>  tests/functional/riscv64/test_server_ref.py | 31 ++++++++++++++++++++-
+>  1 file changed, 30 insertions(+), 1 deletion(-)
 > 
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 1807c423ff..d3912cbb1e 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -73,6 +73,7 @@ config RISCV_SERVER_PLATFORM_REF
->      bool
->      default y
->      depends on RISCV64
-> +    imply TPM_TIS_SYSBUS
->      select RISCV_NUMA
->      select GOLDFISH_RTC
->      select PCI
-> diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
-> index 7e626c6eb7..790d9861f3 100644
-> --- a/hw/riscv/server_platform_ref.c
-> +++ b/hw/riscv/server_platform_ref.c
-> @@ -14,6 +14,7 @@
->  #include "qapi/error.h"
->  #include "qapi/qapi-visit-common.h"
->  #include "hw/core/boards.h"
-> +#include "hw/core/platform-bus.h"
->  #include "hw/core/loader.h"
->  #include "hw/core/sysbus.h"
->  #include "hw/core/qdev-properties.h"
-> @@ -39,6 +40,7 @@
->  #include "system/runstate.h"
->  #include "system/system.h"
->  #include "system/tcg.h"
-> +#include "system/tpm.h"
->  #include "system/qtest.h"
->  #include "target/riscv/cpu.h"
->  #include "target/riscv/pmu.h"
-> @@ -72,6 +74,8 @@
->  #define SYSCON_RESET     0x1
->  #define SYSCON_POWEROFF  0x2
+> diff --git a/tests/functional/riscv64/test_server_ref.py b/tests/functional/riscv64/test_server_ref.py
+> index 2ecfcf60ad..9b120628dc 100755
+> --- a/tests/functional/riscv64/test_server_ref.py
+> +++ b/tests/functional/riscv64/test_server_ref.py
+> @@ -8,8 +8,13 @@
+>  riscv-server-ref board test
+>  """
 >  
-> +#define RVSERVER_PLATFORM_BUS_NUM_IRQS 8
+> +import os
+> +import tempfile
+> +import subprocess
 > +
->  #define TYPE_RISCV_SERVER_REF_MACHINE MACHINE_TYPE_NAME("riscv-server-ref")
->  OBJECT_DECLARE_SIMPLE_TYPE(RISCVServerRefMachineState, RISCV_SERVER_REF_MACHINE)
+>  from qemu_test import QemuSystemTest, Asset
+>  from qemu_test import wait_for_console_pattern
+> +from qemu_test import skipIfMissingCommands
 >  
-> @@ -88,6 +92,8 @@ struct RISCVServerRefMachineState {
->      int fdt_size;
->      int aia_guests;
->      const MemMapEntry *memmap;
-> +
-> +    DeviceState *platform_bus_dev;
->  };
+>  class RiscvServerRefTest(QemuSystemTest):
+>      """
+> @@ -26,7 +31,7 @@ class RiscvServerRefTest(QemuSystemTest):
+>           'master/riscv/images/virt64/buildroot/rootfs.ext2'),
+>          'f00bb88749f945d80675540a1338bd1ccb226574685a5b6c65ab44027d0411a8')
 >  
->  enum {
-> @@ -106,6 +112,7 @@ enum {
->      RVSERVER_DRAM,
->      RVSERVER_PCIE_MMIO,
->      RVSERVER_PCIE_PIO,
-> +    RVSERVER_PLATFORM_BUS,
->      RVSERVER_PCIE_ECAM,
->      RVSERVER_PCIE_MMIO_HIGH
->  };
-> @@ -114,7 +121,8 @@ enum {
->      RVSERVER_UART0_IRQ = 10,
->      RVSERVER_RTC_IRQ = 11,
->      RVSERVER_PCIE_IRQ = 0x20, /* 32 to 35 */
-> -    IOMMU_SYS_IRQ = 0x24 /* 36 to 39 */
-> +    IOMMU_SYS_IRQ = 0x24, /* 36 to 39 */
-> +    RVSERVER_PLATFORM_BUS_IRQ = 40, /* 40 to 48 */
->  };
+> -    def test_boot_linux_test(self):
+> +    def _test_boot_linux_test(self, tpmstate_dir=None):
+>          self.set_machine('riscv-server-ref')
+>          kernel_path = self.ASSET_KERNEL.fetch()
+>          rootfs_path = self.ASSET_ROOTFS.fetch()
+> @@ -38,6 +43,22 @@ def test_boot_linux_test(self):
+>          self.vm.add_args('-device', 'ahci,id=ahci')
+>          self.vm.add_args('-device', 'ide-hd,drive=hd0,bus=ahci.0')
 >  
->  /*
-> @@ -147,6 +155,7 @@ static const MemMapEntry rvserver_ref_memmap[] = {
->      [RVSERVER_IOMMU_SYS] =      {   0x102000,        0x1000 },
->      [RVSERVER_ACLINT] =         {  0x2000000,       0x10000 },
->      [RVSERVER_PCIE_PIO] =       {  0x3000000,       0x10000 },
-> +    [RVSERVER_PLATFORM_BUS] =   {  0x4000000,     0x2000000 },
->      [RVSERVER_APLIC_M] =        {  0xc000000, APLIC_SIZE(RVSERVER_CPUS_MAX) },
->      [RVSERVER_APLIC_S] =        {  0xd000000, APLIC_SIZE(RVSERVER_CPUS_MAX) },
->      [RVSERVER_UART0] =          { 0x10000000,         0x100 },
-> @@ -214,6 +223,34 @@ static void rvserver_flash_maps(RISCVServerRefMachineState *s,
->      rvserver_flash_map(s->flash[1], flashbase + flashsize, flashsize, sysmem);
->  }
+> +        if tpmstate_dir is not None:
+> +            # Note: code taken verbatim from
+> +            # tests/functional/arm/test_aspeed_ast2600_buildroot_tpm.py
+> +
+> +            # We must put the TPM state dir in /tmp/, not the build dir,
+> +            # because some distros use AppArmor to lock down swtpm and
+> +            # restrict the set of locations it can access files in.
+> +            socket = os.path.join(tpmstate_dir, 'swtpm-socket')
+> +            subprocess.run(['swtpm', 'socket', '-d', '--tpm2',
+> +                            '--tpmstate', f'dir={tpmstate_dir}',
+> +                            '--ctrl', f'type=unixio,path={socket}'],
+> +                           check=True)
+> +            self.vm.add_args('-chardev', f'socket,id=chrtpm,path={socket}')
+> +            self.vm.add_args('-tpmdev', 'emulator,id=tpm0,chardev=chrtpm')
+> +            self.vm.add_args('-device', 'tpm-tis-device,tpmdev=tpm0')
+> +
+>          self.vm.set_console()
+>          self.vm.launch()
 >  
-> +static void create_platform_bus(RISCVServerRefMachineState *s,
-> +                                DeviceState *irqchip)
-> +{
-> +    DeviceState *dev;
-> +    SysBusDevice *sysbus;
-> +    int i;
-> +    MemoryRegion *sysmem = get_system_memory();
-> +
-> +    dev = qdev_new(TYPE_PLATFORM_BUS_DEVICE);
-> +    dev->id = g_strdup(TYPE_PLATFORM_BUS_DEVICE);
-> +    qdev_prop_set_uint32(dev, "num_irqs", RVSERVER_PLATFORM_BUS_NUM_IRQS);
-> +    qdev_prop_set_uint32(dev, "mmio_size",
-> +                         s->memmap[RVSERVER_PLATFORM_BUS].size);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +
-> +    s->platform_bus_dev = dev;
-> +
-> +    sysbus = SYS_BUS_DEVICE(dev);
-> +    for (i = 0; i < RVSERVER_PLATFORM_BUS_NUM_IRQS; i++) {
-> +        int irq = RVSERVER_PLATFORM_BUS_IRQ + i;
-> +        sysbus_connect_irq(sysbus, i, qdev_get_gpio_in(irqchip, irq));
-> +    }
-> +
-> +    memory_region_add_subregion(sysmem,
-> +                                s->memmap[RVSERVER_PLATFORM_BUS].base,
-> +                                sysbus_mmio_get_region(sysbus, 0));
-> +}
-> +
->  static void create_pcie_irq_map(RISCVServerRefMachineState *s,
->                                  void *fdt, char *nodename,
->                                  uint32_t irqchip_phandle)
-> @@ -585,6 +622,16 @@ static void create_fdt_socket_aplic(RISCVServerRefMachineState *s,
->                           aplic_s_phandle, 0,
->                           false, num_harts);
+> @@ -55,5 +76,13 @@ def test_boot_linux_test(self):
+>          # Wait for boot to complete - system reaches login prompt
+>          wait_for_console_pattern(self, 'Run /sbin/init as init process')
 >  
-> +    if (socket == 0) {
-> +        g_autofree char *aplic_name = fdt_get_aplic_nodename(aplic_addr);
-> +        MachineState *ms = MACHINE(s);
+> +    def test_boot_linux_test(self):
+> +        self._test_boot_linux_test()
 > +
-> +        platform_bus_add_all_fdt_nodes(ms->fdt, aplic_name,
-> +                                       s->memmap[RVSERVER_PLATFORM_BUS].base,
-> +                                       s->memmap[RVSERVER_PLATFORM_BUS].size,
-> +                                       RVSERVER_PLATFORM_BUS_IRQ);
-> +    }
+> +    @skipIfMissingCommands('swtpm')
+> +    def test_boot_linux_test_tpm(self):
+> +        with tempfile.TemporaryDirectory(prefix="qemu_") as tpmstate_dir:
+> +            self._test_boot_linux_test(tpmstate_dir)
 > +
->      aplic_phandles[socket] = aplic_s_phandle;
->  }
->  
-> @@ -1265,6 +1312,8 @@ static void rvserver_ref_machine_init(MachineState *machine)
->  
->      gpex_pcie_init(system_memory, pcie_irqchip, s);
->  
-> +    create_platform_bus(s, mmio_irqchip);
-> +
->      serial_mm_init(system_memory, memmap[RVSERVER_UART0].base,
->          0, qdev_get_gpio_in(mmio_irqchip, RVSERVER_UART0_IRQ), 399193,
->          serial_hd(0), DEVICE_LITTLE_ENDIAN);
-> @@ -1341,10 +1390,38 @@ static void rvserver_ref_set_aia_guests(Object *obj, const char *val,
->      }
->  }
->  
-> +static HotplugHandler *rvserver_machine_get_hotplug_handler(MachineState *ms,
-> +                                                            DeviceState *dev)
-> +{
-> +    MachineClass *mc = MACHINE_GET_CLASS(ms);
-> +
-> +    if (device_is_dynamic_sysbus(mc, dev)) {
-> +        return HOTPLUG_HANDLER(ms);
-> +    }
-> +
-> +    return NULL;
-> +}
-> +
-> +static void rvserver_machine_device_plug_cb(HotplugHandler *hotplug_dev,
-> +                                            DeviceState *dev, Error **errp)
-> +{
-> +    RISCVServerRefMachineState *s = RISCV_SERVER_REF_MACHINE(hotplug_dev);
-> +
-> +    if (s->platform_bus_dev) {
-> +        MachineClass *mc = MACHINE_GET_CLASS(s);
-> +
-> +        if (device_is_dynamic_sysbus(mc, dev)) {
-> +            platform_bus_link_device(PLATFORM_BUS_DEVICE(s->platform_bus_dev),
-> +                                     SYS_BUS_DEVICE(dev));
-> +        }
-> +    }
-> +}
-> +
->  static void rvserver_ref_machine_class_init(ObjectClass *oc, const void *data)
->  {
->      char str[128];
->      MachineClass *mc = MACHINE_CLASS(oc);
-> +    HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
->      static const char * const valid_cpu_types[] = {
->          TYPE_RISCV_CPU_RVSERVER_REF,
->      };
-> @@ -1370,6 +1447,13 @@ static void rvserver_ref_machine_class_init(ObjectClass *oc, const void *data)
->      sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid value "
->                   "should be between 0 and %d.", RVSERVER_IRQCHIP_MAX_GUESTS);
->      object_class_property_set_description(oc, "aia-guests", str);
-> +
-> +    assert(!mc->get_hotplug_handler);
-> +    mc->get_hotplug_handler = rvserver_machine_get_hotplug_handler;
-> +    hc->plug = rvserver_machine_device_plug_cb;
-> +#ifdef CONFIG_TPM
-> +    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
-> +#endif
->  }
->  
->  static const TypeInfo rvserver_ref_typeinfo = {
-> @@ -1378,7 +1462,11 @@ static const TypeInfo rvserver_ref_typeinfo = {
->      .class_init = rvserver_ref_machine_class_init,
->      .instance_init = rvserver_ref_machine_instance_init,
->      .instance_size = sizeof(RISCVServerRefMachineState),
-> -    .interfaces = riscv64_machine_interfaces,
-> +    .interfaces = (const InterfaceInfo[]) {
-> +         { TYPE_HOTPLUG_HANDLER },
-> +         { TYPE_TARGET_RISCV64_MACHINE },
-> +         { }
-> +    },
->  };
->  
->  static void rvserver_ref_init_register_types(void)
+>  if __name__ == '__main__':
+>      QemuSystemTest.main()
 > -- 
 > 2.43.0
 > 
