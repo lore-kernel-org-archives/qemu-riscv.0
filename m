@@ -4,94 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE636C43458
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 14:48:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B09B6C43458
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 14:49:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfIiY-0001tL-56; Thu, 02 Jul 2026 10:48:42 -0400
+	id 1wfIix-00020e-Gu; Thu, 02 Jul 2026 10:49:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wfIiK-0001s8-SR
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:48:30 -0400
-Received: from mail-pj2-x04.google.com ([2607:f8b0:4864:39::4])
+ id 1wfIiv-0001zp-W3
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:49:06 -0400
+Received: from mail-pj2-x01.google.com ([2607:f8b0:4864:39::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wfIiJ-0000jo-BJ
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:48:28 -0400
-Received: by mail-pj2-x04.google.com with SMTP id
- 98e67ed59e1d1-37d77008a28so1022013a91.0
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 07:48:27 -0700 (PDT)
+ id 1wfIit-0000sp-Ki
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:49:05 -0400
+Received: by mail-pj2-x01.google.com with SMTP id
+ 98e67ed59e1d1-37fb945f787so1370618a91.0
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 07:49:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783003706; x=1783608506; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=SCeMv0MMAa9iI6Ds6fpjAC1GlUKqmp+8wT1cCzkDQOM=;
- b=bT7/RvovRYI6TTdBtCDOMSPTh8FidaFoO4EppDxc79U3GgifAIXYJ4Zl+gOx86WQ6i
- YWhclzWOL876oe8XGq81hkOfXYalkgm116CVfi4qd1Fdmtrc8VYuyap1zu775rGdg2+w
- d37RjzR4ZeUMwvo//STx+20coC/yJmPdKVRddgUs2UejYRNvtzKJGiIyxkKj2vGeFzWc
- 0ky9I4E/M0mJH+wFsPFtLv6twWPxL8f6hapiBr7gmRIuW5YlOZcH3E6m2TugmWekNiXa
- O/baFKCvTAvZ4H5H0AfNx1zJuK5IgILSHi8dS0RrOBfVbFNGA2pqel0bgeS/avYRWcHf
- baAw==
+ d=gmail.com; s=20251104; t=1783003742; x=1783608542; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WqpL4s+8JOX7fCsS3YHLlRR8saME78FEECRlangOkMQ=;
+ b=QdTgo64IPFMAtcM23nMXbf+I3GbPHfJNFgij5v6WV+9jiG5ZRFhBJ7jFyvoBOSIpl+
+ 4aQbuMlDzm3DW4J1sgD4nBi7ZKKYampM8nb0RYUGkKQ6s/TiHAQWJVxX1wozdk1MAAa+
+ 7AqcbYAXdXcrkQP4hvLP43DPIJ/S153Wq6t/35GgpPvAykQy6LR6rMstzNMtG0fBIXWg
+ GmqfQEPRNwZkZeWWVMo7gCN6Ly5pVXZSzkLHGbJHJCmyJV8KrT42uVUVVfKEPazvihRw
+ fZdssXE2ysuDA3WmlJivzljUWIbc87cWOtGFJ4vmPgrzjBjgqY6vEqrqXDnhifrdwpvY
+ K9vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783003706; x=1783608506;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SCeMv0MMAa9iI6Ds6fpjAC1GlUKqmp+8wT1cCzkDQOM=;
- b=lhclrfbzGS2rv+Rc3afmvo4PB3gDRV3MHUtu9YtYyr5S+WyAHzi3BK9FaSRRmaQPME
- P1vXj96jevtoIqBmjOK/gEex62uSo/Q0JPCLtUgfJXo1T+6RjPPGmqvk1bv4minsDY8+
- fYSdfXDA3/xM6Itlghl1zawnHbtrJaj/eKyJ12AreJAquLwoVc3q/xoR/lreXV6JhThw
- H2849cQnyaqe8+LQUYRddKAeLUYXKuEd6vm134c9v7pjpv/k86KDTWT8h+JCCXFv7AFZ
- fWZXkwzFM8MRWJPkaSdGYLSoxZNphCmoYK5sweUv0BLIky3F7BLw8Z+Un1jyXmnoRBRv
- HnAg==
+ d=1e100.net; s=20251104; t=1783003742; x=1783608542;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WqpL4s+8JOX7fCsS3YHLlRR8saME78FEECRlangOkMQ=;
+ b=nxuRsWVJTvvyW8sLmFbj+jHopy70hRXLnYXze67nOXXigpuhTTINTdIPk86XV+J6l8
+ 3YpppnDnt14hPsH5heIJsj/i965W6Rotyr03OmxkqhZOfsMlizq9yItxZD0WxuJreVcg
+ bvkdsccT402UTQXwO+T+73LCEzJy77BHWg2sfycKfhJ89/MbKuEelCNKjb9zmV+dCQa+
+ jNF1/ySs88WeG84JpSUTxdqMF12TmadsMEFFKdZh3PDMLtXIukK1T+iUfon+5Oz1MbTx
+ s0wsrSddHAtsUiRLhJyHqxswYmbuFvZbdHE0NqJDFUnVWWhkWlTgeF7AoMi9wdDYckp8
+ qbkg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8vWRjeZGfof3I41o2jppnCN9jkc93qxZxbDX6+93dqZi8ZqSl00IcJv0nLJpvVWMnRQVOhBXWl1LNm@nongnu.org
-X-Gm-Message-State: AOJu0YzIJ3oDzDHUD5k/GjaeHPIEqGZoVG8OkLwT5/S96zNjdpPZdsj5
- 4JnQrgnSducWOmiWxR4io3dKGr7Fso4nPpLddo0cT6D9m0+KXthdZRga
-X-Gm-Gg: AfdE7cmqOuHjCrAv6GyhX7aQWtA1bj/uaL9oy40MFQDfxwNT2HMPFKgSwlKWw/PkyVY
- H2B7253cdE4wOEKYDfmVESODa8FLmGXFfAqEkfrDl0kh9h1JhFvodH0UOyQ7AuVGVd3numC0x3I
- wqO9qZnHImyX1soyhlZMFKhTAxHSCf4OU2xxXZ3IUZh5u7+hGYrg4iXLpUsqjIq9G/SpxEFUNZj
- ytsd/yVIfGANs0PZSOYckvgb/Nqp9JPwzEyFbOLJ4sB4HVTvtlfmm2+iZ01TaB/Rt67tTCDlFUt
- ER/7Z6D5mVI3RpEYDeH/IERg24JtpQIAYuPs18J73sbEfgIuPoIVca0TjiSE8OBLtXQYeHta0tM
- LLn0rsZBvVQycwT6tSnnu5ytwdyn7twUKCBVt9SnAH6F86gV1yVtiTBjr4B2lcgMblFPs84gfEo
- huuvr3GtvpEWRG1YhTspqjBl4h3vDSE+eomdnjboXM5+sT0ufK
-X-Received: by 2002:a05:6a21:4ccb:b0:3bf:6c08:4ebb with SMTP id
- adf61e73a8af0-3bfed592afamr7465642637.48.1783003705940; 
- Thu, 02 Jul 2026 07:48:25 -0700 (PDT)
+ AHgh+RrNQBShfP96XqHELZOanHrsRCGiAgc7JkAl3gmib6P+BtVfiJKkPklQWBb9tPJiVTNyPm/G4ZRvSAjC@nongnu.org
+X-Gm-Message-State: AOJu0Yy0fLnLE5rOGcxu5cmIuAOO50ipV9KqVWaucpU547l+Wvxns2dM
+ bvnoBegB4sa2X4DtR79vmSTpXhr/CG2h6KBOrVlN86KW4nxzCTbcFgTHogwfpjjN29m+fA==
+X-Gm-Gg: AfdE7clnlDG75GnEc0haHvnfXTfbIcN29HWIoz0GRL05OmXNkcTjpkJD9/H6GS1Uqkx
+ jfEXCcWp+ZfofpJFUANQoXy1rZn4feJuAK27CCiyQb9bgKs/NMMpwSrmr5IuN/u8UncUF58ZsYO
+ TMrfKoZhiIkqaHpE/HSZgadNyFI+aqCiQLdhijeJINlw+vYigRy49mpvfGlfR7mFvBT5Qxwp2O4
+ MFiwSpwwzz3qwoK57sFGBx0xP75/+wtLxiQ51ZKmMQRMaiZzqwgNFgBSG3vMm9kz5pPPkSwrnw/
+ 5qcQIrgJCRtY9L+iFCNuKJW6eFKf2nJSBGR1iBnNdwPQ4mBCmgwWYX/Qi3w3UZxRUTOiIvajbIN
+ HyCXDQ9e5dYOz/fXOzI6SKgO5b1XtqY2+lMJpOIc29q/bhTmJDwt+3G5C6eaFJdQUuB2JEbojUE
+ b1NKU6m9yT6Y2+tdLSzT6+FlytDg7CNEr1vjnkQWrAONmZ5XdD
+X-Received: by 2002:a17:90b:4f85:b0:37e:1bc4:b6ae with SMTP id
+ 98e67ed59e1d1-380ba868ebcmr6725507a91.8.1783003742106; 
+ Thu, 02 Jul 2026 07:49:02 -0700 (PDT)
 Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f0bbd223esm10673017eec.21.2026.07.02.07.48.25
+ 5a478bee46e88-30f0b85de12sm10735644eec.12.2026.07.02.07.49.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 07:48:25 -0700 (PDT)
-Date: Thu, 2 Jul 2026 22:48:22 +0800
+ Thu, 02 Jul 2026 07:49:01 -0700 (PDT)
+Date: Thu, 2 Jul 2026 22:48:58 +0800
 From: Chao Liu <chao.liu.zevorn@gmail.com>
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
  andrew.jones@oss.qualcomm.com, 
- leif.lindholm@oss.qualcomm.com, uwu@icenowy.me,
+ leif.lindholm@oss.qualcomm.com, uwu@icenowy.me, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v8 6/7] tests/functional/riscv64: add riscv-server-ref
- TPM selftest
-Message-ID: <akZ6LnH2X4NZ-cz8@ChaodeMacBook-Pro.local>
+Subject: Re: [PATCH v8 7/7] docs: add riscv-server-ref.rst
+Message-ID: <akZ6TwWeBWN1sEhD@ChaodeMacBook-Pro.local>
 References: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
- <20260610214133.1882563-7-daniel.barboza@oss.qualcomm.com>
+ <20260610214133.1882563-8-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260610214133.1882563-7-daniel.barboza@oss.qualcomm.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:39::4;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj2-x04.google.com
+In-Reply-To: <20260610214133.1882563-8-daniel.barboza@oss.qualcomm.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:39::1;
+ envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj2-x01.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,84 +105,98 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 10, 2026 at 06:41:32PM +0800, Daniel Henrique Barboza wrote:
-> Add a TPM specific selftest for the riscv-server-ref board.  The test
-> will be skipped if there's no 'swtpm' in the host.
-> 
-> The test has been basically cloned from our Aspeed ast2600 friends.
-> Shoutout to monsieur Cédric Le Goater for the code.
+On Wed, Jun 10, 2026 at 06:41:33PM +0800, Daniel Henrique Barboza wrote:
+> Add documentation for the new riscv-server-ref board.
 > 
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
 
 > ---
->  tests/functional/riscv64/test_server_ref.py | 31 ++++++++++++++++++++-
->  1 file changed, 30 insertions(+), 1 deletion(-)
+>  docs/system/riscv/riscv-server-ref.rst | 62 ++++++++++++++++++++++++++
+>  docs/system/target-riscv.rst           |  1 +
+>  2 files changed, 63 insertions(+)
+>  create mode 100644 docs/system/riscv/riscv-server-ref.rst
 > 
-> diff --git a/tests/functional/riscv64/test_server_ref.py b/tests/functional/riscv64/test_server_ref.py
-> index 2ecfcf60ad..9b120628dc 100755
-> --- a/tests/functional/riscv64/test_server_ref.py
-> +++ b/tests/functional/riscv64/test_server_ref.py
-> @@ -8,8 +8,13 @@
->  riscv-server-ref board test
->  """
->  
-> +import os
-> +import tempfile
-> +import subprocess
+> diff --git a/docs/system/riscv/riscv-server-ref.rst b/docs/system/riscv/riscv-server-ref.rst
+> new file mode 100644
+> index 0000000000..0573b4e07c
+> --- /dev/null
+> +++ b/docs/system/riscv/riscv-server-ref.rst
+> @@ -0,0 +1,62 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
 > +
->  from qemu_test import QemuSystemTest, Asset
->  from qemu_test import wait_for_console_pattern
-> +from qemu_test import skipIfMissingCommands
->  
->  class RiscvServerRefTest(QemuSystemTest):
->      """
-> @@ -26,7 +31,7 @@ class RiscvServerRefTest(QemuSystemTest):
->           'master/riscv/images/virt64/buildroot/rootfs.ext2'),
->          'f00bb88749f945d80675540a1338bd1ccb226574685a5b6c65ab44027d0411a8')
->  
-> -    def test_boot_linux_test(self):
-> +    def _test_boot_linux_test(self, tpmstate_dir=None):
->          self.set_machine('riscv-server-ref')
->          kernel_path = self.ASSET_KERNEL.fetch()
->          rootfs_path = self.ASSET_ROOTFS.fetch()
-> @@ -38,6 +43,22 @@ def test_boot_linux_test(self):
->          self.vm.add_args('-device', 'ahci,id=ahci')
->          self.vm.add_args('-device', 'ide-hd,drive=hd0,bus=ahci.0')
->  
-> +        if tpmstate_dir is not None:
-> +            # Note: code taken verbatim from
-> +            # tests/functional/arm/test_aspeed_ast2600_buildroot_tpm.py
+> +RISC-V Server Platform Reference board (``riscv-server-ref``)
+> +=============================================================
 > +
-> +            # We must put the TPM state dir in /tmp/, not the build dir,
-> +            # because some distros use AppArmor to lock down swtpm and
-> +            # restrict the set of locations it can access files in.
-> +            socket = os.path.join(tpmstate_dir, 'swtpm-socket')
-> +            subprocess.run(['swtpm', 'socket', '-d', '--tpm2',
-> +                            '--tpmstate', f'dir={tpmstate_dir}',
-> +                            '--ctrl', f'type=unixio,path={socket}'],
-> +                           check=True)
-> +            self.vm.add_args('-chardev', f'socket,id=chrtpm,path={socket}')
-> +            self.vm.add_args('-tpmdev', 'emulator,id=tpm0,chardev=chrtpm')
-> +            self.vm.add_args('-device', 'tpm-tis-device,tpmdev=tpm0')
+> +The RISC-V Server Platform specification `spec`_ defines a standardized
+> +set of hardware and software capabilities that portable system software,
+> +such as OS and hypervisors, can rely on being present in a RISC-V server
+> +platform.  This machine aims to emulate this specification, providing
+> +an environment for firmware/OS development and testing.
 > +
->          self.vm.set_console()
->          self.vm.launch()
+> +`spec`_ is version 1.0 at the introduction of this board.  New spec versions
+> +might trigger a revision of the emulation itself, which will strive to always
+> +match the latest version available.  In case the emulation changes aren't
+> +backwards compatible we'll introduce a versioning scheme, probably via
+> +a machine property, to allow older SW to run with older spec versions.
+> +
+> +The main features included in the riscv-server-ref board are:
+> +
+> +* IOMMU platform device (riscv-iommu-sys)
+> +* AIA
+> +* PCIe AHCI
+> +* PCIe NIC
+> +* No virtio mmio bus
+> +* No fw_cfg device
+> +* No ACPI table
+> +* Minimal device tree nodes
+> +
+> +There are multiple ways of using this reference board.  The spec compliant way
+> +is using an EDK2 image and a TPM device.  The board was tested with the TPM
+> +device ``tpm-tis`` that uses the external ``swtpm`` emulator.  More info on how
+> +to use this device can be found in `tpm`_.
+> +
+> +To use this board coupled with the tpm-tis device, first start the ``swtpm``
+> +process in a shell (the ``log`` parameter is optional):
+> +
+> +.. code-block:: bash
+> +
+> +    $ mkdir /tmp/mytpm1
+> +    $ swtpm socket --tpmstate dir=/tmp/mytpm1 \
+> +            --ctrl type=unixio,path=/tmp/mytpm1/swtpm-sock \
+> +            --tpm2 \
+> +            --log level=20
+> +
+> +And then start QEMU with:
+> +
+> +.. code-block:: bash
+> +
+> + qemu-system-riscv64 -M riscv-server-ref \
+> +     -bios fw_dynamic.bin \
+> +     -kernel EDK2.fd \
+> +     -drive file=nvme_disk.ext2,format=raw,id=hd0,if=none \
+> +     -device ahci,id=ahci \
+> +     -device ide-hd,drive=hd0,bus=ahci.0 \
+> +     -chardev socket,id=chrtpm,path=/tmp/mytpm1/swtpm-sock \
+> +     -tpmdev emulator,id=tpm0,chardev=chrtpm \
+> +     -device tpm-tis-device,tpmdev=tpm0 \
+> +     -nographic
+> +
+> +
+> +.. _spec: https://github.com/riscv-non-isa/riscv-server-platform
+> +.. _tpm: https://qemu-project.gitlab.io/qemu/specs/tpm.html
+> diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+> index afd86ca2ba..b2aeb39a8e 100644
+> --- a/docs/system/target-riscv.rst
+> +++ b/docs/system/target-riscv.rst
+> @@ -73,6 +73,7 @@ undocumented; you can get a complete list by running
+>     riscv/sifive_u
+>     riscv/virt
+>     riscv/xiangshan-kunminghu
+> +   riscv/riscv-server-ref
 >  
-> @@ -55,5 +76,13 @@ def test_boot_linux_test(self):
->          # Wait for boot to complete - system reaches login prompt
->          wait_for_console_pattern(self, 'Run /sbin/init as init process')
->  
-> +    def test_boot_linux_test(self):
-> +        self._test_boot_linux_test()
-> +
-> +    @skipIfMissingCommands('swtpm')
-> +    def test_boot_linux_test_tpm(self):
-> +        with tempfile.TemporaryDirectory(prefix="qemu_") as tpmstate_dir:
-> +            self._test_boot_linux_test(tpmstate_dir)
-> +
->  if __name__ == '__main__':
->      QemuSystemTest.main()
+>  RISC-V CPU firmware
+>  -------------------
 > -- 
 > 2.43.0
 > 
