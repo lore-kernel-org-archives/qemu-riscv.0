@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE629C43327
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 14:41:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B3D9C43458
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 14:42:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfIbC-0007xz-Sb; Thu, 02 Jul 2026 10:41:06 -0400
+	id 1wfIbx-00085A-Bf; Thu, 02 Jul 2026 10:41:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wfIbA-0007x2-FY
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:41:04 -0400
-Received: from mail-pz2-x00.google.com ([2607:f8b0:4864:3b::])
+ id 1wfIbo-00081v-HI
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:41:47 -0400
+Received: from mail-pj2-x04.google.com ([2607:f8b0:4864:39::4])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wfIb8-00062p-Fg
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:41:04 -0400
-Received: by mail-pz2-x00.google.com with SMTP id
- 41be03b00d2f7-c9e57167401so207997a12.1
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 07:41:02 -0700 (PDT)
+ id 1wfIbm-0006A8-NJ
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 10:41:44 -0400
+Received: by mail-pj2-x04.google.com with SMTP id
+ 98e67ed59e1d1-37e1ff48b94so496853a91.0
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 07:41:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783003261; x=1783608061; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=sdyciNnm/7kG67/fNn1tHNgqawBqEsjzEGL+IroabrA=;
- b=GDsH03TbQQ/ZWMwR8IBfuI+kOf/UsBb91FAR2lpbQRBtIo5nctRPvdTEuDHsHcq6NT
- XsjFFTc15rOSD8n7mXQU3wqYXIpS2WNTu1LA22AMJky7k3H0Y6/uGJ3l4qQfpC8isXMZ
- EIFRAFnAEHF47jbCDDQuZdRWb23djMr6iFttCGzIMDJSQuj5iBJns8do7iIBI6+9ixrz
- sR00R7wxb8KWH3B5mlt/qFJtHTLBXA/M77mqaHkU7zW5zRWw2rxjGT+hFkl1NuBblZbz
- UxxM1W6IBpw7AMkrpZtWK526r2Xs2GY8t5gnrY+heKYh7paL2TybEvnUSNaXJrnVQwx5
- jh0A==
+ d=gmail.com; s=20251104; t=1783003301; x=1783608101; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TR5Yj+jnC+eI/ZZxaHf3fwGoW6DrtKmYIMhR0sP7/ww=;
+ b=QlvkUEXB5759zN9Fe6Xpymx8jXoORmVXGLGqDq+tCWMF32oRWGkMG59VZqwcsecvZ4
+ GFcwECyPmwc6kFpjV0uSRo9rfbhYnlzAzkgdPyWVdNaUckOVVuXu/0800dCrf4t1Y/ns
+ 7xY2XSKUk9ni08E2lEnQTkSh24IWxSimlPj50ji4LLSo+Jrn/T7rfb5AFyxrl76r/DNo
+ 0yAwNKHosV0GPwhCqljHjfBOWsu22eUg5POJLeuPdMDqdU+a36U7Ri4YObdKDzvA02ZU
+ 5GX1YIvHbvsU/nEGq5nvOEr/lWNJaOOgS2nLsSTYAnD850PILFH/BQDQW7zIOcEIAcHt
+ U1KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783003261; x=1783608061;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=sdyciNnm/7kG67/fNn1tHNgqawBqEsjzEGL+IroabrA=;
- b=S01rXaUdME2m1rNy7XUkNKuM1ohTjEOMhzSreCvNh5+2AiNosExJym2twF+NKNp/Rk
- 7Ec4yvrO8fErOgpRHnfzgyc3uoUQc0tPrbdS6M4ckkGbSt76jGh1tizTkI8797vVo8k+
- 3QD8LcycXHt7L/H2UeQWlcJXWiahW9LFgYOiYh7PFXqnmYgMkOZ2Q3r+MVmrh7ffN9F6
- PMinv/Uv/7eDDtFVABU/8MgmM3xW+ZL/VcqAWIHo/T42IrMwAx8JMjNPcgavfvIgc09w
- u6RpPrPj8ZP9qZsGHwilpX+OQ1h2fLJUht33JpJ/SJZlWba5dMd3yXWmf6YIB6fvwE/1
- WOPA==
+ d=1e100.net; s=20251104; t=1783003301; x=1783608101;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TR5Yj+jnC+eI/ZZxaHf3fwGoW6DrtKmYIMhR0sP7/ww=;
+ b=nrL3OQTSR3Lh85/gJMJpK1lehuyW3t90hZtsJxTxQxITscgHkDw7tYmnKxcOnz4fqv
+ Dqdcv28ed1jsN2AiG3Gjp6MvVXFt86vDxX8psaUJtY4aiZeU1/VQBPuYKl7Mv+2E5qFu
+ cW45baW0KDrNBqPI3v+FoXMdFukbYi/lepCRU2woa8QP3EFVQt7cjtF4fLIFokK/wucN
+ ogNl9W/L43sV6nR85/zE5S2mn3ekCjPrCJ1FZHxn6sbztHGuHzTQNz0u5OXDnCd6DZ35
+ XN6pJKaE8kupZB1jgEZ2yStVMqQ6ylY8yLj3ZYt+pKc6bYnb5f/uzvHpTLiNvGx8PGDm
+ StsQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8Az6FtPQcqSBBPg9UnYFaDiB7gKDLHyKxuRVLYo/mGbdQQKkUraZvPsbcxTdq4b77h8S36dpDMyhgJ@nongnu.org
-X-Gm-Message-State: AOJu0Yx/cUXqRwtBwntqXmCWahs5CHbhYDF9Zz48gxk0Vo8r9ojMyRQx
- 8ujZaJFfH+GpM3Sy6KHoTNdsYP9znzzirmquAomBVyYaM0iMnJ3PcNv0
-X-Gm-Gg: AfdE7cn3MW0URnni+qqOg0GaQAfWAs/UCtTuH84Uij/VOturr9mjJ+HxnF+LizVaysk
- RBmeGPrI5OTArbW4EpneO1iw64astQLm5XOc8sqSgyD4jghV9exEvCGjGCJbhBdrTdD8kZ5ILMx
- H9bRfmL2Yx7Eb5l/LlBuUW5WXu40m69i+bbtd8POlwUVBIFL/rfV4O+SkKFkWIvDw9pGB/Ci6YI
- Q+VbPKX/CwQlX+EcUd8KUONJ2kNfCQySUJTEAbpIsAQPoVkFjWJZMHDbWkiwszr1R3qhl3kpAQb
- AcRXz6zYnPF1Nzh3lZMu/CLEQSQORDlT1UD2Rt651kLX4TdJUWGdR1sBJf0Jh03UlSkLF7m8llm
- XhDA5X7Poolq8hHzb2TrU6GWNvFel1uMo9ZWcKdSO+9ARrZQXRSOwx1SuhoyqWzurtNAj9CddM2
- vydl1r+y676+IohIeiQLFtz6zeybxzL+j31GGA77GZrg1AJQjaHyb1NNRa4uE=
-X-Received: by 2002:a05:6a21:4903:b0:3b3:241f:66c6 with SMTP id
- adf61e73a8af0-3bff4115630mr6596391637.26.1783003260711; 
- Thu, 02 Jul 2026 07:41:00 -0700 (PDT)
+ AFNElJ9bXH+TlsCRRyLDK19JkMQO0SfA5LRpKVQJHrU4qp2Co/Xja60l/ZJUFvHKTArjugoui+vQNoYHmfac@nongnu.org
+X-Gm-Message-State: AOJu0Yy2nlHA75DMXbmDAtC2gAslIv+MnnH3Y61zbiOp9bNlnNodJsML
+ LWpDSInFtHY7QuHuKXn1N8S77b2PcIy00w85m5fAwDF/MkHNICWVgeSu
+X-Gm-Gg: AfdE7clZ14DxaTWfdvuS4+kPXlbdimaUMDrKtBbSJflWI0+eKiyIzWo0SRYLjqJ+GbL
+ VBItBJ5hiXnlP17DXM2eb8S+WBeg4ERCydKeZTT2NKhi2j1V7MgPBj+ZF+2VU6AgRQxLm2PSbJH
+ ZYj8pvkM93sNkD5dKLPsP+81GgnIOVZRY9nvY4rYvK8tCvu6ChcCIdmVe8pl5NKF+IdQZe4Pymb
+ tWJMYqUMdaYmlWFxE/fejH6/7UKKrNjFtM0b0lkU5+XMSOKDX7K5Mc50f6REMNkOTaKYjv/TxaG
+ xU7eYrz0RTArlL4sMbQNGtDD6hJ6UoGeYhDYgnDKiiltElC9QDwRRMbuIYubH4ENlXKo1QQ1XsR
+ Sw2nx4aDZTL37+YhyDzck5yEUPy1H3Dlu08Qdav+kWOjcgDKf7Yn4j0dR+jLJWMrqdTX736Pwuj
+ 2zxcQDRLSb1iSt+Z+D94wAhVp2tW9RwAoZrCohOBM6DJoGLGoO
+X-Received: by 2002:a05:6a20:2589:b0:3b4:8300:7019 with SMTP id
+ adf61e73a8af0-3bff40dd9e9mr6158803637.18.1783003301090; 
+ Thu, 02 Jul 2026 07:41:41 -0700 (PDT)
 Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f116065c5sm8180042eec.11.2026.07.02.07.40.59
+ 5a478bee46e88-30f0bb84405sm14492228eec.17.2026.07.02.07.41.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 07:41:00 -0700 (PDT)
-Date: Thu, 2 Jul 2026 22:40:57 +0800
+ Thu, 02 Jul 2026 07:41:40 -0700 (PDT)
+Date: Thu, 2 Jul 2026 22:41:38 +0800
 From: Chao Liu <chao.liu.zevorn@gmail.com>
 To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
@@ -74,23 +72,24 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  andrew.jones@oss.qualcomm.com, 
  leif.lindholm@oss.qualcomm.com, uwu@icenowy.me,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [PATCH v8 2/7] target/riscv: add riscv-server-ref CPU
-Message-ID: <akZ4bFNKEZrVBStU@ChaodeMacBook-Pro.local>
+Subject: Re: [PATCH v8 4/7] tests/functional/riscv64: add riscv-server-ref
+ tests
+Message-ID: <akZ4mVkirzIknpZ-@ChaodeMacBook-Pro.local>
 References: <20260610214133.1882563-1-daniel.barboza@oss.qualcomm.com>
- <20260610214133.1882563-3-daniel.barboza@oss.qualcomm.com>
+ <20260610214133.1882563-5-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260610214133.1882563-3-daniel.barboza@oss.qualcomm.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:3b::;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pz2-x00.google.com
+In-Reply-To: <20260610214133.1882563-5-daniel.barboza@oss.qualcomm.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:39::4;
+ envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj2-x04.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,107 +105,123 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jun 10, 2026 at 06:41:28PM +0800, Daniel Henrique Barboza wrote:
-> The harts requirements of RISC-V server platform [1] require RVA23 ISA
-> profile support and others.
+On Wed, Jun 10, 2026 at 06:41:30PM +0800, Daniel Henrique Barboza wrote:
+> Add two tests for the recently added riscv-server-ref machine:
 > 
-> We're going for a profile-based implementation, instead of a regular CPU
-> that can inherit RVA23, to allow future CPUs to use it internally as a
-> starting base for their own extension sets.  There's also a new
-> 'rvserver-ref-1.0' flag that can be used to set the extensions in the
-> command line for other CPUs, which can be used for testing/debugging
-> purposes.
+> - a new test_opensbi.py test.  The idea is to have a quick test that can
+> catch trivial regressions that would prevent OpenSBI to finish;
+> - a new Linux boot "thorough" test that will boot the machine up to the
+> buildroot prompt.
 > 
-> Note that for all intents and purposes "riscv-server-ref" is a regular
-> CPU and no, we're not trying to set a precedent of calling the riscv
-> server platform spec a profile.
-> 
-> [1] defines in rule SEE_020 that we must support at least 11 debug
-> triggers (4 for insn address, 4 for insn load/store, 1 for icount,
-> one for int, one for excp).  We're going for the minimum.  If more
-> triggers are needed users can set any trigger amount with:
-> 
-> -cpu riscv-server-ref,trigger-count=N
-> 
-> Note that N must be <= 128.
-> 
-> [1] https://github.com/riscv-non-isa/riscv-server-platform/blob/main/server_platform_requirements.adoc
-> 
-> Suggested-by: Icenowy Zheng <uwu@icenowy.me>
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
 
 > ---
->  target/riscv/cpu-qom.h |  1 +
->  target/riscv/cpu.c     | 31 +++++++++++++++++++++++++++++++
->  2 files changed, 32 insertions(+)
+>  tests/functional/riscv64/meson.build        |  2 +
+>  tests/functional/riscv64/test_opensbi.py    |  4 ++
+>  tests/functional/riscv64/test_server_ref.py | 59 +++++++++++++++++++++
+>  3 files changed, 65 insertions(+)
+>  create mode 100755 tests/functional/riscv64/test_server_ref.py
 > 
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 30dcdcfaae..a150acd151 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -42,6 +42,7 @@
->  #define TYPE_RISCV_CPU_RVA22S64         RISCV_CPU_TYPE_NAME("rva22s64")
->  #define TYPE_RISCV_CPU_RVA23U64         RISCV_CPU_TYPE_NAME("rva23u64")
->  #define TYPE_RISCV_CPU_RVA23S64         RISCV_CPU_TYPE_NAME("rva23s64")
-> +#define TYPE_RISCV_CPU_RVSERVER_REF     RISCV_CPU_TYPE_NAME("riscv-server-ref")
->  #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
->  #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
->  #define TYPE_RISCV_CPU_SIFIVE_E         RISCV_CPU_TYPE_NAME("sifive-e")
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index e02d53cbba..63fbc4b98e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2063,11 +2063,35 @@ static RISCVCPUProfile RVA23S64 = {
->      }
->  };
+> diff --git a/tests/functional/riscv64/meson.build b/tests/functional/riscv64/meson.build
+> index 5871211e89..2eb12586bf 100644
+> --- a/tests/functional/riscv64/meson.build
+> +++ b/tests/functional/riscv64/meson.build
+> @@ -2,6 +2,7 @@
 >  
-> +/*
-> + * The riscv-server-ref spec isn't a profile per se but its
-> + * CPU definition can be modelled as a profile that extends
-> + * RVA23, with additional things on top of it, and allowing
-> + * future CPUs to derive from it via
-> + * ".profile = &RVServerRef1_0;".
-> + */
-> +static RISCVCPUProfile RVServerRef1_0 = {
-> +    .s_parent = &RVA22S64,
-> +    .name = "rvserver-ref-1.0",
-> +    .satp_mode = VM_1_10_SV48,
-> +    .ext_offsets = {
-> +        CPU_CFG_OFFSET(ext_zkr),
-> +        CPU_CFG_OFFSET(ext_sdtrig),
-> +        CPU_CFG_OFFSET(ext_ssaia),
-> +        CPU_CFG_OFFSET(ext_ssccfg),
-> +        /* ssstrict is always enabled for PRIV_VER_1_12 */
-> +
-> +        RISCV_PROFILE_EXT_LIST_END
-> +    }
-> +};
-> +
-> +
->  RISCVCPUProfile *riscv_profiles[] = {
->      &RVA22U64,
->      &RVA22S64,
->      &RVA23U64,
->      &RVA23S64,
-> +    &RVServerRef1_0,
->      NULL,
->  };
+>  test_riscv64_timeouts = {
+>    'boston' : 120,
+> +  'server_ref' : 120,
+>    'tuxrun' : 120,
+>  }
 >  
-> @@ -3326,6 +3350,13 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->  #endif
->      ),
+> @@ -13,6 +14,7 @@ tests_riscv64_system_quick = [
+>  tests_riscv64_system_thorough = [
+>    'endianness',
+>    'boston',
+> +  'server_ref',
+>    'sifive_u',
+>    'tuxrun',
+>  ]
+> diff --git a/tests/functional/riscv64/test_opensbi.py b/tests/functional/riscv64/test_opensbi.py
+> index d077e40f42..057f55f90b 100755
+> --- a/tests/functional/riscv64/test_opensbi.py
+> +++ b/tests/functional/riscv64/test_opensbi.py
+> @@ -32,5 +32,9 @@ def test_riscv_virt(self):
+>          self.set_machine('virt')
+>          self.boot_opensbi()
 >  
-> +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_RVSERVER_REF, TYPE_RISCV_BARE_CPU,
-> +        .profile = &RVServerRef1_0,
-> +        .misa_mxl_max = MXL_RV64,
-> +        .cfg.max_satp_mode = VM_1_10_SV57,
-> +        .num_triggers = 11,
-> +    ),
+> +    def test_riscv_server_ref(self):
+> +        self.set_machine('riscv-server-ref')
+> +        self.boot_opensbi()
 > +
->  #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
->      DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
->          .cfg.max_satp_mode = VM_1_10_SV57,
+>  if __name__ == '__main__':
+>      QemuSystemTest.main()
+> diff --git a/tests/functional/riscv64/test_server_ref.py b/tests/functional/riscv64/test_server_ref.py
+> new file mode 100755
+> index 0000000000..2ecfcf60ad
+> --- /dev/null
+> +++ b/tests/functional/riscv64/test_server_ref.py
+> @@ -0,0 +1,59 @@
+> +#!/usr/bin/env python3
+> +#
+> +# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> +#
+> +# SPDX-License-Identifier: GPL-2.0-or-later
+> +#
+> +"""
+> +riscv-server-ref board test
+> +"""
+> +
+> +from qemu_test import QemuSystemTest, Asset
+> +from qemu_test import wait_for_console_pattern
+> +
+> +class RiscvServerRefTest(QemuSystemTest):
+> +    """
+> +    Test the riscv-server-ref board
+> +    """
+> +
+> +    ASSET_KERNEL = Asset(
+> +        ('https://github.com/danielhb/qemu-machine-boot/raw/refs/heads/'
+> +         'master/riscv/images/virt64/buildroot/Image'),
+> +        '6bacc876c769c1bb6057d2bf549eba67fbe83916e8223f9fe21c8e8fff665a36')
+> +
+> +    ASSET_ROOTFS = Asset(
+> +        ('https://github.com/danielhb/qemu-machine-boot/raw/refs/heads/'
+> +         'master/riscv/images/virt64/buildroot/rootfs.ext2'),
+> +        'f00bb88749f945d80675540a1338bd1ccb226574685a5b6c65ab44027d0411a8')
+> +
+> +    def test_boot_linux_test(self):
+> +        self.set_machine('riscv-server-ref')
+> +        kernel_path = self.ASSET_KERNEL.fetch()
+> +        rootfs_path = self.ASSET_ROOTFS.fetch()
+> +
+> +        self.vm.add_args('-kernel', kernel_path)
+> +        self.vm.add_args('-append', 'rw rootwait root=/dev/sda')
+> +        self.vm.add_args('-drive',
+> +            f'file={rootfs_path},format=raw,id=hd0,snapshot=on,if=none')
+> +        self.vm.add_args('-device', 'ahci,id=ahci')
+> +        self.vm.add_args('-device', 'ide-hd,drive=hd0,bus=ahci.0')
+> +
+> +        self.vm.set_console()
+> +        self.vm.launch()
+> +
+> +        # Wait for OpenSBI
+> +        wait_for_console_pattern(self, 'OpenSBI')
+> +
+> +        # Wait for Linux kernel boot
+> +        wait_for_console_pattern(self, 'Linux version')
+> +        wait_for_console_pattern(self, 'Machine model: qemu,riscv-server-ref')
+> +
+> +        # Test e1000e network card functionality
+> +        wait_for_console_pattern(self, 'e1000e')
+> +        wait_for_console_pattern(self, 'Network Connection')
+> +
+> +        # Wait for boot to complete - system reaches login prompt
+> +        wait_for_console_pattern(self, 'Run /sbin/init as init process')
+> +
+> +if __name__ == '__main__':
+> +    QemuSystemTest.main()
 > -- 
 > 2.43.0
 > 
