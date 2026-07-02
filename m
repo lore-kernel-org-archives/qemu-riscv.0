@@ -4,129 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0090C43458
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 13:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 581B6C43327
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 13:53:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfHpx-0002Wt-Bs; Thu, 02 Jul 2026 09:52:17 -0400
+	id 1wfHpM-0001Vh-1t; Thu, 02 Jul 2026 09:51:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wfHpv-0002QS-BG
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 09:52:15 -0400
+ id 1wfHpK-0001VR-Rj
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 09:51:38 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wfHps-000879-CL
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 09:52:14 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ id 1wfHpI-0007tt-Ia
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 09:51:38 -0400
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 662DcfOi564799
- for <qemu-riscv@nongnu.org>; Thu, 2 Jul 2026 13:52:01 GMT
+ 662D0a0K522201
+ for <qemu-riscv@nongnu.org>; Thu, 2 Jul 2026 13:51:35 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 9lGD5GeHecb2OOSvUk0owk6VDTYeqc3BhhTyXlyS+eU=; b=Jxd7PI7AwguO/bAF
- QezDu0PFjcGpElkG/jHqMd58sFuc5GP1KSMOmrc3mnSP5/ZvHDjnTyb3B7ln9CO5
- jHdQLy4yBT82gsM4PLx7dzEgR7jBQZu6ll8A136UYTG/WapBws/JduHqSo2rW40e
- vGQadOo4Tg3e9u+hgq9LSYEnw5zXcBYjFsR1E+LReyeTDJObdQMSdQoSCV7g3spX
- /KlxvFKxx7ABEqxtTC29HLMZPjt6zCU2sEfsHkDRQmtgcvtqbRO09v/yaICyqs9I
- nsobq4iJbEZfh2CLkSFEOuBPwAKpv9+x/ceJIN01kelZhvuw6Axo7n7PRg7X9BP6
- iCDBzw==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
- [209.85.217.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f5s2501v7-1
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=LPH5MnBwkpml7nFlM8kpO5
+ YP50zMMUeNqtfcmuaJPMQ=; b=nIATx8i4FKyT9XSu771Pwz+5aATpFELgx/fR2r
+ tGS0PrabRPzRb88DHKR549c4jGClxEv5sY09HpDMB2XQLoYdxAQzajSn+JDHDQol
+ WshpnaPq+9RxH4aK6quvnUtj5IREFXFBgisqh25Q1WNjsAEYB8M7DR188Yr0NKqo
+ YwPGpmcD+L5tS8J2kNaWbykw8nmTRCbXuQluLZ8peDN9BGxXWzH8UlJzuDGLLzCg
+ AM1iGzXmYuu0WAHZ7Y2Ws1kayxhOipyymvAbQnIUzeHT7Gz0Zz7box5HwpgFEHfE
+ 97Msvh0jG2EFXBT/5J/EKqUS7dW5PxJh14tompoz/dKxUrDw==
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
+ [209.85.222.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f5knc1gex-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 13:52:01 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id
- ada2fe7eead31-738ffe90415so456672137.3
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 06:52:01 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 13:51:34 +0000 (GMT)
+Received: by mail-ua1-f71.google.com with SMTP id
+ a1e0cc1a2514c-9692731af28so213771241.3
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 06:51:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783000320; x=1783605120; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9lGD5GeHecb2OOSvUk0owk6VDTYeqc3BhhTyXlyS+eU=;
- b=bSMTooK7iSHoB8bhOWl+/keTp+QRyeNqZUfL01crExo8d4JuLaFWC6mybh0st0h6t6
- 9zk8GTeOLSFKu5XQkTyYRh0v72tlNdSpiM8/B+tT8wk2SMLe7ZdjjuErdbcULOby4mzE
- DWaGIz4KTKDcBLvRzJcaCLCsw+MMH6roOmLyxsaROl2Xe1kNjIkdA0MYx7XRdr1t8hT4
- b7VJiiZHjHBnJs8cAow4a5horhSxiRNDkvFnlsVJ33w3p101sZQDnwYk8+m+7hEBjUCq
- 6/h/Tm4dIFKipHBgJv2pZmTRtPEWnQgjWv3J7HTffEI17Dj8+NCJfreXaI/oaxpbvNS9
- g60A==
+ d=oss.qualcomm.com; s=google; t=1783000294; x=1783605094; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LPH5MnBwkpml7nFlM8kpO5YP50zMMUeNqtfcmuaJPMQ=;
+ b=T+hrEZMhzSo5nExJomiHUKr8JEPxR2YuUMyxht3t7B7LxKWumu5XEUixKKtcFeUqGS
+ 9auR8m9vJqf/NsvlWLI8ZWCT6Q206QY9HcuU9ZI+dgI2UE/qYbK7nXk2bZFyFVJraWro
+ Rk1KMFb9Zx/QPVx6ZMWwhA0kh/ye+uxZMb9v9zMpsqx+W7k1+dG4W0b7pgYfV/R7pMWF
+ qKy8ZXRGWRNISg8PSXhMD+Nf6PVq/wkYpkpkZfnEa5cFprRPGz8xtae6gxdoXo40wKH9
+ /TH0MSTGhFVjkiXW78tOP9gFSrIrf/AHRJPgX/CwBIArAzYWRBYocDPnQRkl+tw0QaMI
+ 1AbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783000320; x=1783605120;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=9lGD5GeHecb2OOSvUk0owk6VDTYeqc3BhhTyXlyS+eU=;
- b=RU+egipydzpgB1sGcj9Fj7Lp6Xh2/G4uCMBkdwN/1U0PXp39TrZSRIRR7QYFeHayEM
- KSU+U2rvDROu6P7o654S9BlbabUW19ZV3k1QM7uLj6EiLfbmYGoe6qT8CG6iLgFwkZsr
- HBmej4HNfIZWt2Q+DV53CB7Tg32pckUkD3x62YBzUzYInmJLogaxfdTXGVAksYDCKpN7
- Z/Waz2cWP+922U1t4fkwpRWIrhzoIsOxFwX72+H41xL+Hfq0v824tO2r+PaG4WadVhAy
- LdtSBGIPeY8UpJpxwk0kaljhcsnnd5mfrrnd+gVjxFEXw5j9ta1S/S2X8WESMWl1LxQs
- ByHg==
-X-Gm-Message-State: AOJu0YwFcAtxLu637F9pHdXk/JwRFt4cEYXRYlo8nBX5ByuiWmFvLGQI
- zckh0ptsACBv9q7fNbvwoDSNa/gSITCVE4c77fM5LxVi9DWOwxRDiqtltot4OVy2GE5ZUWN9tmI
- WiYpoJV0pkwHiZmgcNef9FLe63LT8nNOp6u4PwkHC5POTbMEjYL2JiV5BCg==
-X-Gm-Gg: AfdE7cnQ6+FD4v9B2J7rxh4T3elnwwuKkLDsP+dt/ANMiYdII4DecN3/S6CYbTp7h4Q
- i7v0PDj7rCmmV4dsCbF1Qya7niAqhGIa6evvt0u+fXQkicClXoPbPO+bItmmaD4rmKqL4p8FSQt
- afeT1uUQD0hipth0uUPgWien0xrqnmOtlGhzo0GAA9wc7sb1zyRPdHWVhDh/s+wqR9FNJTtM7sR
- KUcn3UT0ECvMxf4MQRU3GpBKy//4R5szY6HhRHMHZQpF9zi+0REx6PunTLjbkgVhk0fnyihCFRJ
- hGQDHJHLw5+SKScHaQG69lUvErSXdMcsLqeaKaHTnd0sAY35iwkCJcHwot9M/vZGroChF4AE++D
- njxD0h0/srJWUHaxwOMfJYVR42/AbPWpnjgdNtkVmOXAIEg==
-X-Received: by 2002:a05:6102:374d:b0:73a:128b:ea07 with SMTP id
- ada2fe7eead31-73dab0e668bmr2476551137.14.1783000320363; 
- Thu, 02 Jul 2026 06:52:00 -0700 (PDT)
-X-Received: by 2002:a05:6102:374d:b0:73a:128b:ea07 with SMTP id
- ada2fe7eead31-73dab0e668bmr2476540137.14.1783000319881; 
- Thu, 02 Jul 2026 06:51:59 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783000294; x=1783605094;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LPH5MnBwkpml7nFlM8kpO5YP50zMMUeNqtfcmuaJPMQ=;
+ b=Ss3qmERjm4by2fojC8vwEeAvaXyNKn3eH2LRZhYNMxORU2UNP76CETDttTrvJYYoh/
+ pYtWjyOSL4X1mRalJD7J3bqxKKqJCm4aVB7FBAWfucGz7vFfeasXeIS1OAsP0xmFs3mp
+ 1E+0y8o72teHVoWuNrlm2xRd1iUo79SWik4KJMD/EV6VMZNkD79BkNVPk+36iaY2gyd4
+ wSjNTtzSve8fuvfkPdGBRQhYO+86eCwqGwNMQg13UFCtSUkah9+kxE8l+iVGDG+2hzm1
+ wdbsKgxA8nD3khLZwBe0BPPjpXQ9JDeYZOnkThV5Wcf/Ox86/c/RFQVfxoqajW+JOqCR
+ jhKQ==
+X-Gm-Message-State: AOJu0YyvgCj5YU+iAafJiMKCGZG11YgDlFYkLBlZDdw7604RNjYBiuyK
+ IWNRBjuex7x1Gff689RF7QwFxcN1sq9yQI/WnJJ3VnyTFzZclVG37Et3ItpjAiU/aKI4hmkal59
+ pK5hMBT+qFwqf959jm55TL/WfGIorKnbZcqs3hHMjdV0MO5g8/XRBmgsKtA==
+X-Gm-Gg: AfdE7ck7oX0fJllB95qJx1EeKs1yQ/Q3p/qyOQ76rMx2Ek9jPmT28HLKxI962Rnt86j
+ 2oq1Ipyh//t6JHSt4cm7r/ik1sT5AH4DItnlcqv3HXn3DezygxZ3BfaSyhWJeIp8Iirka0sD3T2
+ ZluzEeo04sKT3abhUOM4RDVqjWNtd7pSMXYnYF/k6O3+c4hUDCyPLEW9l6PQ9JcS0ewjGqUnsx9
+ c8djs48xPEvi1okTd6w2mt9SEb3uUyJlSUMT6iMhyYTL7rhsbgJlJi5s2Vh1XW6pSkaX8w4o3Wj
+ qMeFGV26tA1HWHUW8f6GY/Xmh7IQlmQ1eCLKx0nabBCHyvf61Dm5uEce+HxoaEit2LDigiAmjw6
+ Gq01DMQStmosXkv3NDisM3kCc+/D4zYgoMgcEHi6QwPV3yQ==
+X-Received: by 2002:a05:6102:3748:b0:73a:e9b:26ec with SMTP id
+ ada2fe7eead31-73dbf89465bmr2222831137.16.1783000294119; 
+ Thu, 02 Jul 2026 06:51:34 -0700 (PDT)
+X-Received: by 2002:a05:6102:3748:b0:73a:e9b:26ec with SMTP id
+ ada2fe7eead31-73dbf89465bmr2222818137.16.1783000293498; 
+ Thu, 02 Jul 2026 06:51:33 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.79.21.40])
  by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-73e1c4e64a3sm1276462137.9.2026.07.02.06.51.57
+ ada2fe7eead31-73e1c4e64a3sm1276462137.9.2026.07.02.06.51.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 06:51:59 -0700 (PDT)
+ Thu, 02 Jul 2026 06:51:32 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v3 10/24] target/riscv: move custom_csrs logic to tcg-cpu.c
-Date: Thu,  2 Jul 2026 10:51:12 -0300
-Message-ID: <20260702135128.1188021-11-daniel.barboza@oss.qualcomm.com>
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v3 00/24] target/riscv: move TCG files and fix --disable-tcg
+Date: Thu,  2 Jul 2026 10:51:02 -0300
+Message-ID: <20260702135128.1188021-1-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260702135128.1188021-1-daniel.barboza@oss.qualcomm.com>
-References: <20260702135128.1188021-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=U7uiy+ru c=1 sm=1 tr=0 ts=6a466d01 cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+X-Proofpoint-ORIG-GUID: Mc4ackaMiA2GQ9x7deNxJu4SGqC_rH6S
+X-Authority-Analysis: v=2.4 cv=a4kAM0SF c=1 sm=1 tr=0 ts=6a466ce6 cx=c_pps
+ a=KB4UBwrhAZV1kjiGHFQexw==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=pNhwjiGmTFK0dS8zIOEA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=ODZdjJIeia2B_SHc_B0f:22 a=xVlTc564ipvMDusKsbsT:22
-X-Proofpoint-ORIG-GUID: c_GTNOMGXYdPfnS-9CF-QKjjH4piyT1u
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAyMDE0NCBTYWx0ZWRfX6F7uESzo0NfK
- T0Czdcst8QpbsxqtHLcNOFnxH6KPx5VkEor06yBj2kQ+nRlfRfy9pzcfJvT8a5lUL8Ig6meX6wO
- 5hiGR180/lVn0zdtBBa9etN//qRtTsHwZfbQb/l8gJ8+H48Z5zp9hVHPSoxPBYPvq4rZTH4GTs6
- UKTFW3vH6ZeVEfAsiMtbY3b98wxdQe2YXzKzPz4YIxGXrioBo2NhvEUOEFanF6WLOJY0agYEVfY
- 1Tcj9CbYtuEL7HvnTPkvm2OVLyMBqa9dcofI87r84DtXRc2IJzdfwm9OqfE3mvkZp8P+WiKUR/X
- R5ANOX34TfrVzjKlHxzpGTTL0deUF1IsHCzFEnF4S1KQs9B0Q+iVfqAs7ljtF+n2gJdH38yOw4j
- 19NOOHR+W/eY1er0E7lMV8JtL647hmbN+29si0cCCKAsZZhOmTIhTWeV8K79hz26kAT8biLHnzL
- /qu/6jYH1zUl7/9dcgg==
-X-Proofpoint-GUID: c_GTNOMGXYdPfnS-9CF-QKjjH4piyT1u
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAyMDE0NCBTYWx0ZWRfX0Xs9i788AwP0
- 4zpbqIREVeaBWEc+bxoD42yxMzHkv0ZP7UVnKIs8AY8XVefKsEM0czsuaXgfGa0XjyB7aRwJnIg
- 9OdxQ4mFbVWj1aWP7DZ0bQeIUt10x7s=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=p0WdMEafAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Qhm3AQCK7GAS0wBZXmgA:9
+ a=QEXdDO2ut3YA:10 a=o1xkdb1NAhiiM49bd1HK:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAyMDE0NCBTYWx0ZWRfX4/B558VkJBhw
+ pssrEdWjtD5QDzPKCod8tN7tA5vXLqmNSNwwhF2TkkzEJk/pmk43lJJ2d3Ukx1qPayCdUPJTHE7
+ EW+kbxJPBJh1YZzjTFs1Nod0y6cW7nR0qyM3Do7w0R8mI3OEfr3meXUD4DY/LgNVxZbtPER35Bq
+ YkoNN8rIYsTFlV1/nVH+y8d3dSoQaZgtS3f6Jgg9HiCxxuEGBCdCJx1GA3b7iXeRFXwBHt6P8H+
+ 9BTH0mrMDQRfPznMxgyfIKF77WYtLAuZSDhMRG7jSvAXtowrFdRZfS9vUwpDBbLLKR46xjyOaXP
+ EqfsxL079zSilbH+AUt6fSz+ZNHc8k5tsU00a92eygGGrGZaNrG1rlfEP3PybpZJThVXZd60fiW
+ Qf1AYuG/3LYTD9QN8077IxWy6rL7a2E/Gm1jVkSSZLIESK5h5882YA0v4JsHqEJEpOmy0FWNbiT
+ Jz3R2NHhFryVbRBAl/w==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAyMDE0NCBTYWx0ZWRfXwcFBtkaV6/6k
+ IgCBcByo3q+oFQFT0vht6l7VRfBtMfZNQ7wNi2LpCpy2Skf9BrDML09rU0M2M/xy5YgcePmVlGt
+ qcjTEu9uEROctNU8BJBe1d4Lu2Q3aMw=
+X-Proofpoint-GUID: Mc4ackaMiA2GQ9x7deNxJu4SGqC_rH6S
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-07-02_01,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 suspectscore=0 priorityscore=1501 malwarescore=0
- spamscore=0 lowpriorityscore=0 adultscore=0 phishscore=0 clxscore=1015
+ phishscore=0 clxscore=1015 impostorscore=0 malwarescore=0 adultscore=0
+ suspectscore=0 priorityscore=1501 bulkscore=0 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607020144
 Received-SPF: pass client-ip=205.220.180.131;
@@ -137,7 +131,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -153,156 +147,183 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We have a couple of CPUs that has a set of custom CSRs that uses TCG
-specific APIs.  Move the related code to tcg-cpu.c and do not set
-.custom_csrs if we're not in a TCG build.
+Hello,
 
-What we'll end up doing, sooner or later, is punting all these CPUs to
-tcg-cpu.c since they're all TCG specific and KVM has nothing to do with
-them.  Another time.
+This new version was rebased with 'master' after the last RISC-V PR got
+merged.  A trivial conflict with the recent Atlantis board was fixed
+(header file path changed).  Aside from that R-bs that were given in
+v1 and I forgot to add in v2 were added, along with r-bs given in v2.
 
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c         | 26 +++++---------------------
- target/riscv/cpu.h         |  2 ++
- target/riscv/tcg/tcg-cpu.c | 21 +++++++++++++++++++++
- 3 files changed, 28 insertions(+), 21 deletions(-)
+No other changes made.  Patches based on master.  They can also be found
+here:
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index cc739e3f38..feff7e62e9 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -531,19 +531,6 @@ static void set_satp_mode_default_map(RISCVCPU *cpu)
- }
- #endif
- 
--#ifndef CONFIG_USER_ONLY
--static void riscv_register_custom_csrs(RISCVCPU *cpu, const RISCVCSR *csr_list)
--{
--    for (size_t i = 0; csr_list[i].csr_ops.name; i++) {
--        int csrno = csr_list[i].csrno;
--        const riscv_csr_operations *csr_ops = &csr_list[i].csr_ops;
--        if (!csr_list[i].insertion_test || csr_list[i].insertion_test(cpu)) {
--            riscv_set_csr_ops(csrno, csr_ops);
--        }
--    }
--}
--#endif
--
- /* Used by csr.c and the KVM driver */
- target_ulong riscv_new_csr_seed(target_ulong new_value,
-                                 target_ulong write_mask)
-@@ -1255,11 +1242,6 @@ static void riscv_cpu_init(Object *obj)
-     if (mcc->def->vext_spec != RISCV_PROFILE_ATTR_UNUSED) {
-         cpu->env.vext_ver = mcc->def->vext_spec;
-     }
--#ifndef CONFIG_USER_ONLY
--    if (mcc->def->custom_csrs) {
--        riscv_register_custom_csrs(cpu, mcc->def->custom_csrs);
--    }
--#endif
- 
-     accel_cpu_instance_init(CPU(obj));
- }
-@@ -2833,10 +2815,12 @@ static void riscv_cpu_class_base_init(ObjectClass *c, const void *data)
- 
-         riscv_cpu_cfg_merge(&mcc->def->cfg, &def->cfg);
- 
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-         if (def->custom_csrs) {
-             assert(!mcc->def->custom_csrs);
-             mcc->def->custom_csrs = def->custom_csrs;
-         }
-+#endif
-     }
- 
-     if (!object_class_is_abstract(c)) {
-@@ -3189,7 +3173,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.mvendorid = THEAD_VENDOR_ID,
- 
-         .cfg.max_satp_mode = VM_1_10_SV39,
--#ifndef CONFIG_USER_ONLY
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-         .custom_csrs = th_csr_list,
- #endif
-     ),
-@@ -3235,7 +3219,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
- 
-         .cfg.marchid = 0x8d143000,
-         .cfg.mvendorid = THEAD_VENDOR_ID,
--#ifndef CONFIG_USER_ONLY
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-         .custom_csrs = th_csr_list,
- #endif
-     ),
-@@ -3441,7 +3425,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.ext_xmipscmov = true,
-         .cfg.marchid = 0x8000000000000201,
-         .cfg.mvendorid = MIPS_VENDOR_ID,
--#ifndef CONFIG_USER_ONLY
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-         .custom_csrs = mips_csr_list,
- #endif
-     ),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index c0e9098728..34c63a3628 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -591,7 +591,9 @@ typedef struct RISCVCPUDef {
-     int32_t vext_spec;
-     RISCVCPUConfig cfg;
-     bool bare;
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-     const RISCVCSR *custom_csrs;
-+#endif
-     /* This is just a setter for env->num_triggers.  */
-     uint32_t num_triggers;
- } RISCVCPUDef;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index fe6350f497..fef66557c2 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -38,6 +38,7 @@
- #include "system/tcg.h"
- #include "exec/icount.h"
- #include "target/riscv/tcg/debug.h"
-+#include "target/riscv/tcg/csr.h"
- #endif
- 
- /* Hash that stores user set extensions */
-@@ -1650,10 +1651,30 @@ static bool riscv_cpu_has_max_extensions(Object *cpu_obj)
-     return object_dynamic_cast(cpu_obj, TYPE_RISCV_CPU_MAX) != NULL;
- }
- 
-+#ifndef CONFIG_USER_ONLY
-+static void riscv_register_custom_csrs(RISCVCPU *cpu, const RISCVCSR *csr_list)
-+{
-+    for (size_t i = 0; csr_list[i].csr_ops.name; i++) {
-+        int csrno = csr_list[i].csrno;
-+        const riscv_csr_operations *csr_ops = &csr_list[i].csr_ops;
-+        if (!csr_list[i].insertion_test || csr_list[i].insertion_test(cpu)) {
-+            riscv_set_csr_ops(csrno, csr_ops);
-+        }
-+    }
-+}
-+#endif
-+
- static void riscv_tcg_cpu_instance_init(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     Object *obj = OBJECT(cpu);
-+#ifndef CONFIG_USER_ONLY
-+    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(obj);
-+
-+    if (mcc->def->custom_csrs) {
-+        riscv_register_custom_csrs(cpu, mcc->def->custom_csrs);
-+    }
-+#endif
- 
-     misa_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
-     multi_ext_user_opts = g_hash_table_new(NULL, g_direct_equal);
+https://gitlab.com/danielhb/qemu/-/tree/riscv_disabletcg_v3
+
+Usually I don't point this out but given that this patch is fixing
+--disable-tcg and adding a new KVM-only runner - CI status is green:
+https://gitlab.com/danielhb/qemu/-/pipelines/2646978060
+
+
+All patches acked/reviewed.
+
+Changes from v2:
+- rebased with 'master'
+- added r-bs given in v1 and v2
+- v2 link: https://lore.kernel.org/qemu-devel/20260624000632.2149359-1-daniel.barboza@oss.qualcomm.com/ 
+
+Daniel Henrique Barboza (22):
+  target/riscv: move TCG only files to tcg subdir
+  target/riscv/machine.c: do not migrate pmp state with kvm
+  target/riscv: move pmp files to tcg subdir
+  target/riscv: tidy up riscv_sysemu_ops
+  target/riscv: move pmu.h to tcg subdir
+  target/riscv: move debug.h to tcg subdir
+  target/riscv: remove csr.h from kvm-cpu.c
+  target/riscv: move csr.h to tcg subdir
+  target/riscv: move custom_csrs logic to tcg-cpu.c
+  target/riscv: move riscv_cpu_set_nmi() to tcg-cpu.c
+  target/riscv: move valid_vm_* satp arrays to cpu.c
+  target/riscv: move some irq helpers to cpu.c
+  target/riscv: move riscv_cpu_claim_interrupts to cpu.c
+  target/riscv/cpu.c: handle TCG bits of riscv_cpu_dump_state
+  target/riscv: gate riscv_cpu_update_mip with tcg_enabled()
+  target/riscv/cpu.c: filter TCG only bits in riscv_cpu_reset_hold()
+  hw/riscv/riscv_hart.c isolate tcg only bits
+  target/riscv/gdbstub.c: isolate TCG only checks
+  target/riscv: move riscv_cpu_set_rdtime_fn to riscv_aclint
+  target/riscv/tcg: remove unused riscv_cpu_get_geilen()
+  target/riscv: move riscv_cpu_set_geilen() to riscv-imsic
+  target/riscv: move riscv_cpu_set_aia_ireg_rmw_cb() to riscv_imsic
+
+Zephyr Li (2):
+  target/riscv: Remove unused tcg/tcg.h include
+  gitlab-ci.d/crossbuilds: add riscv64 KVM-only build job
+
+ .gitlab-ci.d/crossbuilds.yml                  |   8 +
+ hw/intc/riscv_aclint.c                        |   8 +
+ hw/intc/riscv_imsic.c                         |  24 ++
+ hw/riscv/fdt-common.c                         |  52 +++
+ hw/riscv/riscv_hart.c                         |   8 +-
+ hw/riscv/tt_atlantis.c                        |   1 -
+ hw/riscv/virt.c                               |   1 -
+ include/hw/riscv/fdt-common.h                 |   1 +
+ target/riscv/cpu.c                            | 318 +++++++++++++++---
+ target/riscv/cpu.h                            |  24 +-
+ target/riscv/gdbstub.c                        |  10 +-
+ target/riscv/kvm/kvm-cpu.c                    |   1 -
+ target/riscv/machine.c                        |  17 +-
+ target/riscv/meson.build                      |  17 -
+ target/riscv/monitor.c                        |   4 +-
+ target/riscv/riscv-qmp-cmds.c                 |   2 +-
+ target/riscv/{ => tcg}/bitmanip_helper.c      |   0
+ target/riscv/{ => tcg}/cpu_helper.c           | 253 +-------------
+ target/riscv/{ => tcg}/crypto_helper.c        |   0
+ target/riscv/{ => tcg}/csr.c                  |  45 +--
+ target/riscv/{ => tcg}/csr.h                  |   6 +-
+ target/riscv/{ => tcg}/debug.c                |   2 +-
+ target/riscv/{ => tcg}/debug.h                |   0
+ target/riscv/{ => tcg}/fpu_helper.c           |   0
+ .../insn_trans/trans_privileged.c.inc         |   0
+ .../{ => tcg}/insn_trans/trans_rva.c.inc      |   0
+ .../{ => tcg}/insn_trans/trans_rvb.c.inc      |   0
+ .../{ => tcg}/insn_trans/trans_rvbf16.c.inc   |   0
+ .../{ => tcg}/insn_trans/trans_rvd.c.inc      |   0
+ .../{ => tcg}/insn_trans/trans_rvf.c.inc      |   0
+ .../{ => tcg}/insn_trans/trans_rvh.c.inc      |   0
+ .../{ => tcg}/insn_trans/trans_rvi.c.inc      |   0
+ .../{ => tcg}/insn_trans/trans_rvk.c.inc      |   0
+ .../{ => tcg}/insn_trans/trans_rvm.c.inc      |   0
+ .../{ => tcg}/insn_trans/trans_rvv.c.inc      |   0
+ .../{ => tcg}/insn_trans/trans_rvvk.c.inc     |   0
+ .../{ => tcg}/insn_trans/trans_rvzabha.c.inc  |   0
+ .../{ => tcg}/insn_trans/trans_rvzacas.c.inc  |   0
+ .../{ => tcg}/insn_trans/trans_rvzalasr.c.inc |   0
+ .../{ => tcg}/insn_trans/trans_rvzawrs.c.inc  |   0
+ .../{ => tcg}/insn_trans/trans_rvzce.c.inc    |   0
+ .../{ => tcg}/insn_trans/trans_rvzcmop.c.inc  |   0
+ .../{ => tcg}/insn_trans/trans_rvzfa.c.inc    |   0
+ .../{ => tcg}/insn_trans/trans_rvzfh.c.inc    |   0
+ .../{ => tcg}/insn_trans/trans_rvzicbo.c.inc  |   0
+ .../insn_trans/trans_rvzicfiss.c.inc          |   0
+ .../{ => tcg}/insn_trans/trans_rvzicond.c.inc |   0
+ .../{ => tcg}/insn_trans/trans_rvzimop.c.inc  |   0
+ .../{ => tcg}/insn_trans/trans_svinval.c.inc  |   0
+ .../{ => tcg}/insn_trans/trans_xlrbr.c.inc    |   0
+ .../{ => tcg}/insn_trans/trans_xmips.c.inc    |   0
+ .../{ => tcg}/insn_trans/trans_xthead.c.inc   |   0
+ .../insn_trans/trans_xventanacondops.c.inc    |   0
+ .../{ => tcg}/insn_trans/trans_zilsd.c.inc    |   0
+ target/riscv/{ => tcg}/m128_helper.c          |   0
+ target/riscv/tcg/meson.build                  |  31 +-
+ target/riscv/{ => tcg}/mips_csr.c             |   2 +-
+ target/riscv/{ => tcg}/op_helper.c            |   2 +-
+ target/riscv/{ => tcg}/pmp.c                  |   2 +-
+ target/riscv/{ => tcg}/pmp.h                  |   0
+ target/riscv/{ => tcg}/pmu.c                  |  52 ---
+ target/riscv/{ => tcg}/pmu.h                  |   1 -
+ target/riscv/tcg/tcg-cpu.c                    |  30 +-
+ target/riscv/{ => tcg}/th_csr.c               |   2 +-
+ target/riscv/{ => tcg}/translate.c            |   0
+ target/riscv/{ => tcg}/vcrypto_helper.c       |   0
+ target/riscv/{ => tcg}/vector_helper.c        |   0
+ target/riscv/{ => tcg}/vector_internals.c     |   0
+ target/riscv/{ => tcg}/vector_internals.h     |   0
+ target/riscv/{ => tcg}/zce_helper.c           |   0
+ target/riscv/time_helper.c                    |  33 +-
+ 71 files changed, 515 insertions(+), 442 deletions(-)
+ rename target/riscv/{ => tcg}/bitmanip_helper.c (100%)
+ rename target/riscv/{ => tcg}/cpu_helper.c (92%)
+ rename target/riscv/{ => tcg}/crypto_helper.c (100%)
+ rename target/riscv/{ => tcg}/csr.c (99%)
+ rename target/riscv/{ => tcg}/csr.h (96%)
+ rename target/riscv/{ => tcg}/debug.c (99%)
+ rename target/riscv/{ => tcg}/debug.h (100%)
+ rename target/riscv/{ => tcg}/fpu_helper.c (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_privileged.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rva.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvb.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvbf16.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvd.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvf.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvh.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvi.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvk.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvm.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvv.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvvk.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzabha.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzacas.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzalasr.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzawrs.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzce.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzcmop.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzfa.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzfh.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzicbo.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzicfiss.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzicond.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_rvzimop.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_svinval.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_xlrbr.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_xmips.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_xthead.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_xventanacondops.c.inc (100%)
+ rename target/riscv/{ => tcg}/insn_trans/trans_zilsd.c.inc (100%)
+ rename target/riscv/{ => tcg}/m128_helper.c (100%)
+ rename target/riscv/{ => tcg}/mips_csr.c (99%)
+ rename target/riscv/{ => tcg}/op_helper.c (99%)
+ rename target/riscv/{ => tcg}/pmp.c (99%)
+ rename target/riscv/{ => tcg}/pmp.h (100%)
+ rename target/riscv/{ => tcg}/pmu.c (86%)
+ rename target/riscv/{ => tcg}/pmu.h (95%)
+ rename target/riscv/{ => tcg}/th_csr.c (99%)
+ rename target/riscv/{ => tcg}/translate.c (100%)
+ rename target/riscv/{ => tcg}/vcrypto_helper.c (100%)
+ rename target/riscv/{ => tcg}/vector_helper.c (100%)
+ rename target/riscv/{ => tcg}/vector_internals.c (100%)
+ rename target/riscv/{ => tcg}/vector_internals.h (100%)
+ rename target/riscv/{ => tcg}/zce_helper.c (100%)
+
 -- 
 2.43.0
 
