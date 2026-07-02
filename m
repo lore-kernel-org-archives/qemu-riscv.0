@@ -4,99 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9323BC43458
-	for <qemu-riscv@archiver.kernel.org>; Wed,  1 Jul 2026 15:02:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB99C43458
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 12:29:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wewST-0000Xx-VU; Wed, 01 Jul 2026 11:02:38 -0400
+	id 1wfGXE-0001nq-2z; Thu, 02 Jul 2026 08:28:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1wewSI-0000TE-FW
- for qemu-riscv@nongnu.org; Wed, 01 Jul 2026 11:02:26 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1wewSE-0003qk-Js
- for qemu-riscv@nongnu.org; Wed, 01 Jul 2026 11:02:25 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-493b691cb44so5238145e9.0
- for <qemu-riscv@nongnu.org>; Wed, 01 Jul 2026 08:02:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1782918140; x=1783522940; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rY/Wgt2gutollXF3U9M/fzk3WvrsjulIO/mrxF7AD38=;
- b=Or3EWciwdnJRGFH0yKzFISR0fnJFHsuAees/WwRr1qdbfm5f59C4OAxXJelu0QgkSL
- Ti+g2HEHKqQECDZQjYd6PIrt+dxsAo//BUwn7JItmNlAp/IIWfOU6K3xILVt+/jmjqe/
- qBBU1rTT4Y+Iqybz/+rvHJGB9wtS64g3rAOcvgaQ12VozJhcVkj+8WvNpaX03xKcZpRG
- XB1kS790x946NCBuVcmB8NRVZOe2w3LbYOM11AaatMk3woyvbhxWrUnvBOOEOrMw9GQm
- rrth9hBiBHnrYPMx9RpP/p1Ty3k4tsuT/EVOXu7C/9zU/alfGCaGWN2jl89WBpf62Ve+
- zm4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782918140; x=1783522940;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rY/Wgt2gutollXF3U9M/fzk3WvrsjulIO/mrxF7AD38=;
- b=jmkcMKMv3DSwOaSMbSpCyUeEm8m6dYxtDWH3LdbR3JpLut3eAPXrGee1k3Q1Kvx5eK
- CQxkeRgzo6EChxGvPC1B4WIof+0guFmO9NTHcxjTTevyUB2N8oCKQaqtRJjfdd0GvpQf
- EFUDWqISZAX0GV3XSIZqvm14jMxxYG2tEqIG444Qo1b6WTB99F5l7UmWl9ZB7sN0dBov
- W+aKUasDEtV83FJKjlrrhUYhspqWWZO9MoZ+b3aTeZk511RWWnm5KCz0rEBW0T2/zAOR
- 1xpP/d2ARIc+fgGWFnD8k4jfM6VqpjID0BuZRyRJBnorh/p1VHtHo9M8UFcr+lWUyNxr
- PEkQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8LAeTjNVqlT9evGRKl/KwVpzJEdHWqDN0nxbBFHJMoVNlUJF8RhrPBxM/Nnk0HMwMpT8Hi7cIJrIAJ@nongnu.org
-X-Gm-Message-State: AOJu0Yw56fHxElKNfXk9aZXTt4jTmNr5mF1yeYBghRbk+6KXWJVDlBzp
- vRVHqsiC3wxpRMSpQVr6AbB4oOA2qcROJwETArsTCshBHmmVmcK+4pkYo9mZ8JZHN7F6jBm+jSX
- yNmYRbxk=
-X-Gm-Gg: AfdE7ckws+wU4ig5NdSkOiDGYZd0OO8ygFcffdAnmn0jkZxM6AaBO9szfkKz1KvY6qV
- V/x8loGthCCDY4rLg4fARDxKz/K8OM+liK0UxMZbiPFXdP9xpB+2h5D23xXvAujGv0UcA8W8VAl
- v8oC2bb1C5wxmEgxH2sgPA9PBKhsctGlQjSr/RE7QUTFi8Z3ymJIcDFtzH+Y+7Rxpjoda4DZN+9
- exF9Ql9rZ68Hdyx9dXBPVggdSCbU79yQ5IRyqh6NH2KnVA5GTlbGS36JrdKwObfX7MB6ZuhdYlI
- 7OJuQCEywRsC2UOPkMjmKZKGWgqzebGmHk3ioJ9Z/r/etSsdym3DvqowHGSL8bXXOpPBjziPf/7
- EK0txFf+qlk1Tzs5RjB9ZPzSM4khOBV6OO675GgVgO9aF4JvrR04WtGEnwI2qRKEqbtwljSthR9
- MT86ld25a+diYseWqdIvIThWs=
-X-Received: by 2002:a05:600c:8214:b0:493:bacb:1341 with SMTP id
- 5b1f17b1804b1-493c2b3a681mr33244755e9.4.1782918140056; 
- Wed, 01 Jul 2026 08:02:20 -0700 (PDT)
-Received: from draig.lan ([185.124.0.114]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493be4da247sm79723765e9.7.2026.07.01.08.02.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jul 2026 08:02:19 -0700 (PDT)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 3A01A5F889;
- Wed, 01 Jul 2026 16:02:18 +0100 (BST)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: TANG Tiancheng <lyndra@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org,  Christoph Muellner
- <christoph.muellner@vrull.eu>,  LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,  Alistair Francis
- <Alistair.Francis@wdc.com>,  Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  qemu-riscv@nongnu.org
-Subject: Re: [PATCH v3 5/5] disas/riscv: Use extract helpers for operand fields
-In-Reply-To: <20260701-b4-disas-xthead-fix-riscv-next-v3-5-fc4f5f1b6c15@linux.alibaba.com>
- (TANG Tiancheng's message of "Wed, 01 Jul 2026 22:32:13 +0800")
-References: <20260701-b4-disas-xthead-fix-riscv-next-v3-0-fc4f5f1b6c15@linux.alibaba.com>
- <20260701-b4-disas-xthead-fix-riscv-next-v3-5-fc4f5f1b6c15@linux.alibaba.com>
-User-Agent: mu4e 1.14.2; emacs 30.1
-Date: Wed, 01 Jul 2026 16:02:18 +0100
-Message-ID: <87qzlmu51h.fsf@draig.linaro.org>
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1wfGXB-0001nH-7l
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 08:28:50 -0400
+Received: from out203-205-221-239.mail.qq.com ([203.205.221.239])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1wfGX8-0002xW-8q
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 08:28:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1782995317; bh=RiFgciQA3M+IJVq0hkzAXpzV8ZJ++rWFjIm3UOgjLFM=;
+ h=From:To:Cc:Subject:Date;
+ b=ZWQ47d6bxJZHKXRKnnA11Ad4Znv9tpBvcDomowGbzmRIFDcmiR2QcqhVo2ocTKXbA
+ q1s8ixXY3wklNQFEWUXEDlzjuBRXHNaVaDlbSpC1JH+ZVMO4eo/wqNebWjUKPLAwfn
+ CdfSrHs8QJYLVtCMu43NLxoib+zcnaiAnlQ0jgqI=
+Received: from qq.com ([118.116.35.199])
+ by newxmesmtplogicsvrsza53-0.qq.com (NewEsmtp) with SMTP
+ id 54E28C1E; Thu, 02 Jul 2026 20:21:14 +0800
+X-QQ-mid: xmsmtpt1782994874tr10ehu1p
+Message-ID: <tencent_2BD6F6903EE729FD5CC8E4DDDB1EE4A59809@qq.com>
+X-QQ-XMAILINFO: MllZffuBkEb5ZxK60Du8R7Z5g6Qm3TAIcTJoxX9YBy+WMxesLQwDQDseippyjt
+ mV8IFTn0t5o1wbzRC/2tTBLRbszLRHFbel+EXzvKyJAWxTxtNawqGoexKTTcXHqeJ5LkG5vdBSoo
+ NtzLJwg9XEUznDpaQGLZCj1PX8ahCpv4e5I/KcvJ3WzLDoq5nYXaxCahcFlSZHu71DYg6xUVX1iC
+ XBzvEKqKNAmoUjZ2cZ3oTK5m8b/ZYwKWjiP1q8FA8Pmu7eTuyFqNCMgAen3lFhs2JzinNaq3F1b1
+ Z23qbm6V4rFxR00LubnLUTe5wfn+GMCeC1TsofUJXibfRQQwXGC7v0N1t52lh2bc/fBulT93a29M
+ HUYbnoqpX4PB7U7HoywsOiSrafTysSHMf0ObbfPMm6lpb8L1ct2QCxBj/DBPH0YVNaYPC2CikZx7
+ BvF4/xmgIAWzlEc0PVqkeo54zLeqF7ylioE16bNdbSEErMT8dhxCMMUkY2GE+YfmY+/fgOSxDXPK
+ DWeWr6dFszOOFvLpZ5jw0dMQEziDwucDB3up2n4FbDILGVxljxc1oQoO3AxJaH143KYbK8evhfM+
+ PrSm01SSLfw1AbX3WKxX75JSbjKgIRNO5KABbReXoBVqw5humUuiPrcJeMwrFAGYebLeZCaG0ztN
+ pu+PCn9Ii7fKOB0+dOqB+PqJIcaCTazbPE5lOD4hQUsYCtNfHjK1Rkjwovd3crLGmd494b/GUiyo
+ kzD2Z0hXMFuZ2YIEiu4rViJ0O3K0e63SzbmmQZyprBoof5gq46KZAg7Z0XQIOnzpWlEVSt142G6R
+ E4d3TMjHay+bRMsPXihSqc6sziv+Mso6WJEMHUvu5PjVjK/0tqJkOU/Ic1FGp3wgHr/znx906m52
+ 10KUgnRVEgwCYZ0UJnwFDaWT6Ur6k2WloiztrpBJ47UPUVy8i8iqz6mbrtUjC00bxbBjvRT5NQWp
+ NkMPnmPp5Ep6H/hVUR5HExU8KPUpIK3F2+Rha0qaW8pYcQLrlSImqADW4MFXl4qnEUk1fEjGsvTk
+ Pl0cnVrkOHmNmzX8H8iwxKoyjAN/a2j3491uIgujSy6Xadc0+f
+X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
+From: Yanfeng Liu <yfliu2008@qq.com>
+To: qemu-riscv@nongnu.org,
+	peter.maydell@linaro.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ Yanfeng Liu <yfliu2008@qq.com>
+Subject: [PATCH v2] riscv/virt: Add optional UART1
+Date: Thu,  2 Jul 2026 20:21:05 +0800
+X-OQ-MSGID: <20260702122105.2529-1-yfliu2008@qq.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=203.205.221.239; envelope-from=yfliu2008@qq.com;
+ helo=out203-205-221-239.mail.qq.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HELO_STATIC_HOST=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,525 +81,200 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-TANG Tiancheng <lyndra@linux.alibaba.com> writes:
+This adds optional UART1 to RiscV virt board if required at
+runtime to simplify multicore development.
 
-> Replace shift-based operand extraction with extract32() and sextract32().
-> For signed immediates, use sextract32() on the field that carries the sign
-> bit and combine it with the remaining extract32() fields.
->
-> The RISC-V disassembler currently follows target/riscv/internals.h:
-> insn_len() and decodes only 16-bit or 32-bit instruction lengths, so the
-> converted fields are all in the low 32 bits of rv_inst.
->
-> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
->  disas/riscv.c | 216 +++++++++++++++++++++++++++++-----------------------=
-------
->  1 file changed, 108 insertions(+), 108 deletions(-)
->
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index 4b3f90418f8f17dd3fcb71f70c39607fa293eb0e..2ba0a6a73ad36c6263eed6211=
-9d2c4c864b61cb6 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -4202,82 +4202,82 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->=20=20
->  static uint32_t operand_rd(rv_inst inst)
->  {
-> -    return (inst << 52) >> 59;
-> +    return extract32(inst, 7, 5);
->  }
->=20=20
->  static uint32_t operand_rs1(rv_inst inst)
->  {
-> -    return (inst << 44) >> 59;
-> +    return extract32(inst, 15, 5);
->  }
->=20=20
->  static uint32_t operand_rs2(rv_inst inst)
->  {
-> -    return (inst << 39) >> 59;
-> +    return extract32(inst, 20, 5);
->  }
->=20=20
->  static uint32_t operand_rs3(rv_inst inst)
->  {
-> -    return (inst << 32) >> 59;
-> +    return extract32(inst, 27, 5);
->  }
->=20=20
->  static uint32_t operand_aq(rv_inst inst)
->  {
-> -    return (inst << 37) >> 63;
-> +    return extract32(inst, 26, 1);
->  }
->=20=20
->  static uint32_t operand_rl(rv_inst inst)
->  {
-> -    return (inst << 38) >> 63;
-> +    return extract32(inst, 25, 1);
->  }
->=20=20
->  static uint32_t operand_pred(rv_inst inst)
->  {
-> -    return (inst << 36) >> 60;
-> +    return extract32(inst, 24, 4);
->  }
->=20=20
->  static uint32_t operand_succ(rv_inst inst)
->  {
-> -    return (inst << 40) >> 60;
-> +    return extract32(inst, 20, 4);
->  }
->=20=20
->  static uint32_t operand_rm(rv_inst inst)
->  {
-> -    return (inst << 49) >> 61;
-> +    return extract32(inst, 12, 3);
->  }
->=20=20
->  static uint32_t operand_shamt5(rv_inst inst)
->  {
-> -    return (inst << 39) >> 59;
-> +    return extract32(inst, 20, 5);
->  }
->=20=20
->  static uint32_t operand_shamt6(rv_inst inst)
->  {
-> -    return (inst << 38) >> 58;
-> +    return extract32(inst, 20, 6);
->  }
->=20=20
->  static uint32_t operand_shamt7(rv_inst inst)
->  {
-> -    return (inst << 37) >> 57;
-> +    return extract32(inst, 20, 7);
->  }
->=20=20
->  static uint32_t operand_crdq(rv_inst inst)
->  {
-> -    return (inst << 59) >> 61;
-> +    return extract32(inst, 2, 3);
->  }
->=20=20
->  static uint32_t operand_crs1q(rv_inst inst)
->  {
-> -    return (inst << 54) >> 61;
-> +    return extract32(inst, 7, 3);
->  }
->=20=20
->  static uint32_t operand_crs1rdq(rv_inst inst)
->  {
-> -    return (inst << 54) >> 61;
-> +    return extract32(inst, 7, 3);
->  }
->=20=20
->  static uint32_t operand_crs2q(rv_inst inst)
->  {
-> -    return (inst << 59) >> 61;
-> +    return extract32(inst, 2, 3);
->  }
->=20=20
->  static uint32_t calculate_xreg(uint32_t sreg)
-> @@ -4287,80 +4287,80 @@ static uint32_t calculate_xreg(uint32_t sreg)
->=20=20
->  static uint32_t operand_sreg1(rv_inst inst)
->  {
-> -    return calculate_xreg((inst << 54) >> 61);
-> +    return calculate_xreg(extract32(inst, 7, 3));
->  }
->=20=20
->  static uint32_t operand_sreg2(rv_inst inst)
->  {
-> -    return calculate_xreg((inst << 59) >> 61);
-> +    return calculate_xreg(extract32(inst, 2, 3));
->  }
->=20=20
->  static uint32_t operand_crd(rv_inst inst)
->  {
-> -    return (inst << 52) >> 59;
-> +    return extract32(inst, 7, 5);
->  }
->=20=20
->  static uint32_t operand_crs1(rv_inst inst)
->  {
-> -    return (inst << 52) >> 59;
-> +    return extract32(inst, 7, 5);
->  }
->=20=20
->  static uint32_t operand_crs1rd(rv_inst inst)
->  {
-> -    return (inst << 52) >> 59;
-> +    return extract32(inst, 7, 5);
->  }
->=20=20
->  static uint32_t operand_crs2(rv_inst inst)
->  {
-> -    return (inst << 57) >> 59;
-> +    return extract32(inst, 2, 5);
->  }
->=20=20
->  static uint32_t operand_cimmsh5(rv_inst inst)
->  {
-> -    return (inst << 57) >> 59;
-> +    return extract32(inst, 2, 5);
->  }
->=20=20
->  static uint32_t operand_csr12(rv_inst inst)
->  {
-> -    return (inst << 32) >> 52;
-> +    return extract32(inst, 20, 12);
->  }
->=20=20
->  static int32_t operand_imm12(rv_inst inst)
->  {
-> -    return ((int64_t)inst << 32) >> 52;
-> +    return sextract32(inst, 20, 12);
->  }
->=20=20
->  static int32_t operand_imm20(rv_inst inst)
->  {
-> -    return (((int64_t)inst << 32) >> 44) << 12;
-> +    return sextract32(inst, 12, 20) << 12;
->  }
->=20=20
->  static int32_t operand_jimm20(rv_inst inst)
->  {
-> -    return (((int64_t)inst << 32) >> 63) << 20 |
-> -        ((inst << 33) >> 54) << 1 |
-> -        ((inst << 43) >> 63) << 11 |
-> -        ((inst << 44) >> 56) << 12;
-> +    return sextract32(inst, 31, 1) << 20 |
-> +        extract32(inst, 21, 10) << 1 |
-> +        extract32(inst, 20, 1) << 11 |
-> +        extract32(inst, 12, 8) << 12;
->  }
->=20=20
->  static int32_t operand_simm12(rv_inst inst)
->  {
-> -    return (((int64_t)inst << 32) >> 57) << 5 |
-> -        (inst << 52) >> 59;
-> +    return sextract32(inst, 25, 7) << 5 |
-> +        extract32(inst, 7, 5);
->  }
->=20=20
->  static int32_t operand_sbimm12(rv_inst inst)
->  {
-> -    return (((int64_t)inst << 32) >> 63) << 12 |
-> -        ((inst << 33) >> 58) << 5 |
-> -        ((inst << 52) >> 60) << 1 |
-> -        ((inst << 56) >> 63) << 11;
-> +    return sextract32(inst, 31, 1) << 12 |
-> +        extract32(inst, 25, 6) << 5 |
-> +        extract32(inst, 8, 4) << 1 |
-> +        extract32(inst, 7, 1) << 11;
->  }
->=20=20
->  static uint32_t operand_cimmshl6(rv_inst inst, rv_isa isa)
->  {
-> -    int imm =3D ((inst << 51) >> 63) << 5 |
-> -        (inst << 57) >> 59;
-> +    int imm =3D extract32(inst, 12, 1) << 5 |
-> +        extract32(inst, 2, 5);
->      if (isa =3D=3D rv128) {
->          imm =3D imm ? imm : 64;
->      }
-> @@ -4369,8 +4369,8 @@ static uint32_t operand_cimmshl6(rv_inst inst, rv_i=
-sa isa)
->=20=20
->  static uint32_t operand_cimmshr6(rv_inst inst, rv_isa isa)
->  {
-> -    int imm =3D ((inst << 51) >> 63) << 5 |
-> -        (inst << 57) >> 59;
-> +    int imm =3D extract32(inst, 12, 1) << 5 |
-> +        extract32(inst, 2, 5);
->      if (isa =3D=3D rv128) {
->          imm =3D imm | (imm & 32) << 1;
->          imm =3D imm ? imm : 64;
-> @@ -4380,116 +4380,116 @@ static uint32_t operand_cimmshr6(rv_inst inst, =
-rv_isa isa)
->=20=20
->  static int32_t operand_cimmi(rv_inst inst)
->  {
-> -    return (((int64_t)inst << 51) >> 63) << 5 |
-> -        (inst << 57) >> 59;
-> +    return sextract32(inst, 12, 1) << 5 |
-> +        extract32(inst, 2, 5);
->  }
->=20=20
->  static int32_t operand_cimmui(rv_inst inst)
->  {
-> -    return (((int64_t)inst << 51) >> 63) << 17 |
-> -        ((inst << 57) >> 59) << 12;
-> +    return sextract32(inst, 12, 1) << 17 |
-> +        extract32(inst, 2, 5) << 12;
->  }
->=20=20
->  static uint32_t operand_cimmlwsp(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 63) << 5 |
-> -        ((inst << 57) >> 61) << 2 |
-> -        ((inst << 60) >> 62) << 6;
-> +    return extract32(inst, 12, 1) << 5 |
-> +        extract32(inst, 4, 3) << 2 |
-> +        extract32(inst, 2, 2) << 6;
->  }
->=20=20
->  static uint32_t operand_cimmldsp(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 63) << 5 |
-> -        ((inst << 57) >> 62) << 3 |
-> -        ((inst << 59) >> 61) << 6;
-> +    return extract32(inst, 12, 1) << 5 |
-> +        extract32(inst, 5, 2) << 3 |
-> +        extract32(inst, 2, 3) << 6;
->  }
->=20=20
->  static uint32_t operand_cimmlqsp(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 63) << 5 |
-> -        ((inst << 57) >> 63) << 4 |
-> -        ((inst << 58) >> 60) << 6;
-> +    return extract32(inst, 12, 1) << 5 |
-> +        extract32(inst, 6, 1) << 4 |
-> +        extract32(inst, 2, 4) << 6;
->  }
->=20=20
->  static int32_t operand_cimm16sp(rv_inst inst)
->  {
-> -    return (((int64_t)inst << 51) >> 63) << 9 |
-> -        ((inst << 57) >> 63) << 4 |
-> -        ((inst << 58) >> 63) << 6 |
-> -        ((inst << 59) >> 62) << 7 |
-> -        ((inst << 61) >> 63) << 5;
-> +    return sextract32(inst, 12, 1) << 9 |
-> +        extract32(inst, 6, 1) << 4 |
-> +        extract32(inst, 5, 1) << 6 |
-> +        extract32(inst, 3, 2) << 7 |
-> +        extract32(inst, 2, 1) << 5;
->  }
->=20=20
->  static int32_t operand_cimmj(rv_inst inst)
->  {
-> -    return (((int64_t)inst << 51) >> 63) << 11 |
-> -        ((inst << 52) >> 63) << 4 |
-> -        ((inst << 53) >> 62) << 8 |
-> -        ((inst << 55) >> 63) << 10 |
-> -        ((inst << 56) >> 63) << 6 |
-> -        ((inst << 57) >> 63) << 7 |
-> -        ((inst << 58) >> 61) << 1 |
-> -        ((inst << 61) >> 63) << 5;
-> +    return sextract32(inst, 12, 1) << 11 |
-> +        extract32(inst, 11, 1) << 4 |
-> +        extract32(inst, 9, 2) << 8 |
-> +        extract32(inst, 8, 1) << 10 |
-> +        extract32(inst, 7, 1) << 6 |
-> +        extract32(inst, 6, 1) << 7 |
-> +        extract32(inst, 3, 3) << 1 |
-> +        extract32(inst, 2, 1) << 5;
->  }
->=20=20
->  static int32_t operand_cimmb(rv_inst inst)
->  {
-> -    return (((int64_t)inst << 51) >> 63) << 8 |
-> -        ((inst << 52) >> 62) << 3 |
-> -        ((inst << 57) >> 62) << 6 |
-> -        ((inst << 59) >> 62) << 1 |
-> -        ((inst << 61) >> 63) << 5;
-> +    return sextract32(inst, 12, 1) << 8 |
-> +        extract32(inst, 10, 2) << 3 |
-> +        extract32(inst, 5, 2) << 6 |
-> +        extract32(inst, 3, 2) << 1 |
-> +        extract32(inst, 2, 1) << 5;
->  }
->=20=20
->  static uint32_t operand_cimmswsp(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 60) << 2 |
-> -        ((inst << 55) >> 62) << 6;
-> +    return extract32(inst, 9, 4) << 2 |
-> +        extract32(inst, 7, 2) << 6;
->  }
->=20=20
->  static uint32_t operand_cimmsdsp(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 61) << 3 |
-> -        ((inst << 54) >> 61) << 6;
-> +    return extract32(inst, 10, 3) << 3 |
-> +        extract32(inst, 7, 3) << 6;
->  }
->=20=20
->  static uint32_t operand_cimmsqsp(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 62) << 4 |
-> -        ((inst << 53) >> 60) << 6;
-> +    return extract32(inst, 11, 2) << 4 |
-> +        extract32(inst, 7, 4) << 6;
->  }
->=20=20
->  static uint32_t operand_cimm4spn(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 62) << 4 |
-> -        ((inst << 53) >> 60) << 6 |
-> -        ((inst << 57) >> 63) << 2 |
-> -        ((inst << 58) >> 63) << 3;
-> +    return extract32(inst, 11, 2) << 4 |
-> +        extract32(inst, 7, 4) << 6 |
-> +        extract32(inst, 6, 1) << 2 |
-> +        extract32(inst, 5, 1) << 3;
->  }
->=20=20
->  static uint32_t operand_cimmw(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 61) << 3 |
-> -        ((inst << 57) >> 63) << 2 |
-> -        ((inst << 58) >> 63) << 6;
-> +    return extract32(inst, 10, 3) << 3 |
-> +        extract32(inst, 6, 1) << 2 |
-> +        extract32(inst, 5, 1) << 6;
->  }
->=20=20
->  static uint32_t operand_cimmd(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 61) << 3 |
-> -        ((inst << 57) >> 62) << 6;
-> +    return extract32(inst, 10, 3) << 3 |
-> +        extract32(inst, 5, 2) << 6;
->  }
->=20=20
->  static uint32_t operand_cimmq(rv_inst inst)
->  {
-> -    return ((inst << 51) >> 62) << 4 |
-> -        ((inst << 53) >> 63) << 8 |
-> -        ((inst << 57) >> 62) << 6;
-> +    return extract32(inst, 11, 2) << 4 |
-> +        extract32(inst, 10, 1) << 8 |
-> +        extract32(inst, 5, 2) << 6;
->  }
->=20=20
->  static int32_t operand_vimm(rv_inst inst)
->  {
-> -    return (int64_t)(inst << 44) >> 59;
-> +    return sextract32(inst, 15, 5);
->  }
->=20=20
->  static uint32_t operand_vuimm(rv_inst inst)
-> @@ -4499,74 +4499,74 @@ static uint32_t operand_vuimm(rv_inst inst)
->=20=20
->  static uint32_t operand_vzimm11(rv_inst inst)
->  {
-> -    return (inst << 33) >> 53;
-> +    return extract32(inst, 20, 11);
->  }
->=20=20
->  static uint32_t operand_vzimm10(rv_inst inst)
->  {
-> -    return (inst << 34) >> 54;
-> +    return extract32(inst, 20, 10);
->  }
->=20=20
->  static uint32_t operand_vzimm6(rv_inst inst)
->  {
-> -    return ((inst << 37) >> 63) << 5 |
-> -        ((inst << 44) >> 59);
-> +    return extract32(inst, 26, 1) << 5 |
-> +        extract32(inst, 15, 5);
->  }
->=20=20
->  static uint32_t operand_bs(rv_inst inst)
->  {
-> -    return (inst << 32) >> 62;
-> +    return extract32(inst, 30, 2);
->  }
->=20=20
->  static uint32_t operand_rnum(rv_inst inst)
->  {
-> -    return (inst << 40) >> 60;
-> +    return extract32(inst, 20, 4);
->  }
->=20=20
->  static uint32_t operand_vm(rv_inst inst)
->  {
-> -    return (inst << 38) >> 63;
-> +    return extract32(inst, 25, 1);
->  }
->=20=20
->  static uint32_t operand_uimm_c_lb(rv_inst inst)
->  {
-> -    return (((inst << 58) >> 63) << 1) |
-> -        ((inst << 57) >> 63);
-> +    return extract32(inst, 5, 1) << 1 |
-> +        extract32(inst, 6, 1);
->  }
->=20=20
->  static uint32_t operand_uimm_c_lh(rv_inst inst)
->  {
-> -    return (((inst << 58) >> 63) << 1);
-> +    return extract32(inst, 5, 1) << 1;
->  }
->=20=20
->  static uint32_t operand_zcmp_spimm(rv_inst inst)
->  {
-> -    return ((inst << 60) >> 62) << 4;
-> +    return extract32(inst, 2, 2) << 4;
->  }
->=20=20
->  static uint32_t operand_zcmp_rlist(rv_inst inst)
->  {
-> -    return ((inst << 56) >> 60);
-> +    return extract32(inst, 4, 4);
->  }
->=20=20
->  static uint32_t operand_imm6(rv_inst inst)
->  {
-> -    return (inst << 38) >> 58;
-> +    return extract32(inst, 20, 6);
->  }
+Note that UART0 remains default serial_hd(0) and it is:
 
-Ahh there it is, I would have just fixed it directly.
+- the lowest address UART
+- first serial in DTB
+- behind /aliases/serial0 in DTB
+- the /chosen/stdout-path in DTB
 
->=20=20
->  static uint32_t operand_imm2(rv_inst inst)
->  {
-> -    return (inst << 37) >> 62;
-> +    return extract32(inst, 25, 2);
->  }
->=20=20
->  static uint32_t operand_immh(rv_inst inst)
->  {
-> -    return (inst << 32) >> 58;
-> +    return extract32(inst, 26, 6);
->  }
->=20=20
->  static uint32_t operand_imml(rv_inst inst)
->  {
-> -    return (inst << 38) >> 58;
-> +    return extract32(inst, 20, 6);
->  }
->=20=20
->  static uint32_t calculate_stack_adj(rv_isa isa, uint32_t rlist, uint32_t=
- spimm)
-> @@ -4585,12 +4585,12 @@ static uint32_t operand_zcmp_stack_adj(rv_inst in=
-st, rv_isa isa)
->=20=20
->  static uint32_t operand_tbl_index(rv_inst inst)
->  {
-> -    return ((inst << 54) >> 56);
-> +    return extract32(inst, 2, 8);
->  }
->=20=20
->  static uint32_t operand_lpl(rv_inst inst)
->  {
-> -    return inst >> 12;
-> +    return extract32(inst, 12, 20);
->  }
->=20=20
->  /* decode operands */
+Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+---
+ docs/system/riscv/virt.rst |  5 ++++-
+ hw/riscv/virt-acpi-build.c | 12 ++++++++----
+ hw/riscv/virt.c            | 39 ++++++++++++++++++++++++++++----------
+ include/hw/riscv/virt.h    |  3 +++
+ 4 files changed, 44 insertions(+), 15 deletions(-)
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+index 60850970ce..45ac63ac77 100644
+--- a/docs/system/riscv/virt.rst
++++ b/docs/system/riscv/virt.rst
+@@ -16,7 +16,7 @@ The ``virt`` machine supports the following devices:
+ * Core Local Interruptor (CLINT)
+ * Platform-Level Interrupt Controller (PLIC)
+ * CFI parallel NOR flash memory
+-* 1 NS16550 compatible UART
++* Either 1 or 2 NS16550 compatible UARTs
+ * 1 Google Goldfish RTC
+ * 1 SiFive Test device
+ * 8 virtio-mmio transport devices
+@@ -27,6 +27,9 @@ The hypervisor extension has been enabled for the default CPU, so virtual
+ machines with hypervisor extension can simply be used without explicitly
+ declaring.
+ 
++The second UART only exists if a backend is configured explicitly (e.g.
++with a second `-serial` command line option).
++
+ Hardware configuration information
+ ----------------------------------
+ 
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 413d47d70e..597751c84a 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -169,11 +169,11 @@ static void acpi_dsdt_add_plic_aplic(Aml *scope, uint8_t socket_count,
+ 
+ static void
+ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
+-                    uint32_t uart_irq)
++                    uint32_t uart_irq, int uartidx)
+ {
+-    Aml *dev = aml_device("COM0");
++    Aml *dev = aml_device("COM%d", uartidx);
+     aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0003")));
+-    aml_append(dev, aml_name_decl("_UID", aml_int(0)));
++    aml_append(dev, aml_name_decl("_UID", aml_int(uartidx)));
+ 
+     Aml *crs = aml_resource_template();
+     aml_append(crs, aml_memory32_fixed(uart_memmap->base,
+@@ -479,7 +479,11 @@ static void build_dsdt(GArray *table_data,
+                                  memmap[VIRT_APLIC_S].size, "RSCV0002");
+     }
+ 
+-    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
++    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ, 0);
++    if (s->uart1_present) {
++        acpi_dsdt_add_uart(scope, &memmap[VIRT_UART1], UART1_IRQ, 1);
++    }
++
+     if (virt_is_iommu_sys_enabled(s)) {
+         acpi_dsdt_add_iommu_sys(scope, &memmap[VIRT_IOMMU_SYS], IOMMU_SYS_IRQ);
+     }
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 33775a61fd..9a112ccdef 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -96,6 +96,7 @@ static const MemMapEntry virt_memmap[] = {
+     [VIRT_APLIC_S] =      {  0xd000000, APLIC_SIZE(VIRT_CPUS_MAX) },
+     [VIRT_UART0] =        { 0x10000000,         0x100 },
+     [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
++    [VIRT_UART1] =        { 0x1000a000,         0x100 },
+     [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
+     [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
+     [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
+@@ -186,7 +187,8 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
+                           FDT_MAX_INT_MAP_WIDTH] = {};
+     uint32_t *irq_map = full_irq_map;
+ 
+-    /* This code creates a standard swizzle of interrupts such that
++    /*
++     * This code creates a standard swizzle of interrupts such that
+      * each device's first interrupt is based on it's PCI_SLOT number.
+      * (See pci_swizzle_map_irq_fn())
+      *
+@@ -832,28 +834,38 @@ static void create_fdt_reset(RISCVVirtState *s, uint32_t *phandle)
+ }
+ 
+ static void create_fdt_uart(RISCVVirtState *s,
+-                            uint32_t irq_mmio_phandle)
++                            uint32_t irq_mmio_phandle, int memId, int irqNo)
+ {
+     g_autofree char *name = NULL;
+     MachineState *ms = MACHINE(s);
+ 
+     name = g_strdup_printf("/soc/serial@%"HWADDR_PRIx,
+-                           s->memmap[VIRT_UART0].base);
++                           s->memmap[memId].base);
+     qemu_fdt_add_subnode(ms->fdt, name);
+     qemu_fdt_setprop_string(ms->fdt, name, "compatible", "ns16550a");
+     qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
+-                                 2, s->memmap[VIRT_UART0].base,
+-                                 2, s->memmap[VIRT_UART0].size);
++                                 2, s->memmap[memId].base,
++                                 2, s->memmap[memId].size);
+     qemu_fdt_setprop_cell(ms->fdt, name, "clock-frequency", 3686400);
+     qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent", irq_mmio_phandle);
+     if (s->aia_type == VIRT_AIA_TYPE_NONE) {
+-        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", UART0_IRQ);
++        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", irqNo);
+     } else {
+-        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", UART0_IRQ, 0x4);
++        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", irqNo, 0x4);
++    }
++
++    if (VIRT_UART0 == memId) {
++        qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
++        qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
+     }
++}
+ 
+-    qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
+-    qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
++static void create_fdt_uarts(RISCVVirtState *s, uint32_t irq_mmio_phandle)
++{
++    if (s->uart1_present) {
++        create_fdt_uart(s, irq_mmio_phandle, VIRT_UART1, UART1_IRQ);
++    }
++    create_fdt_uart(s, irq_mmio_phandle, VIRT_UART0, UART0_IRQ);
+ }
+ 
+ static void create_fdt_rtc(RISCVVirtState *s,
+@@ -1023,7 +1035,7 @@ static void finalize_fdt(RISCVVirtState *s)
+ 
+     create_fdt_reset(s, &phandle);
+ 
+-    create_fdt_uart(s, irq_mmio_phandle);
++    create_fdt_uarts(s, irq_mmio_phandle);
+ 
+     create_fdt_rtc(s, irq_mmio_phandle);
+ }
+@@ -1567,6 +1579,13 @@ static void virt_machine_init(MachineState *machine)
+         0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
+         serial_hd(0), DEVICE_LITTLE_ENDIAN);
+ 
++    if (serial_hd(1)) {
++        serial_mm_init(system_memory, s->memmap[VIRT_UART1].base,
++            0, qdev_get_gpio_in(mmio_irqchip, UART1_IRQ), 399193,
++            serial_hd(1), DEVICE_LITTLE_ENDIAN);
++        s->uart1_present = true;
++    }
++
+     sysbus_create_simple("goldfish_rtc", s->memmap[VIRT_RTC].base,
+         qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
+ 
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 18a2a323a3..7d57c8292e 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -59,6 +59,7 @@ struct RISCVVirtState {
+     int aia_guests;
+     char *oem_id;
+     char *oem_table_id;
++    bool uart1_present;
+     OnOffAuto acpi;
+     const MemMapEntry *memmap;
+     struct GPEXHost *gpex_host;
+@@ -78,6 +79,7 @@ enum {
+     VIRT_APLIC_S,
+     VIRT_UART0,
+     VIRT_VIRTIO,
++    VIRT_UART1,
+     VIRT_FW_CFG,
+     VIRT_IMSIC_M,
+     VIRT_IMSIC_S,
+@@ -93,6 +95,7 @@ enum {
+ enum {
+     UART0_IRQ = 10,
+     RTC_IRQ = 11,
++    UART1_IRQ = 12,
+     VIRTIO_IRQ = 1, /* 1 to 8 */
+     VIRTIO_COUNT = 8,
+     PCIE_IRQ = 0x20, /* 32 to 35 */
+-- 
+2.34.1
+
 
