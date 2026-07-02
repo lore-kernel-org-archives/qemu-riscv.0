@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B0E8C43458
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 13:57:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1113C43458
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jul 2026 13:58:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfHqV-0003Sv-8I; Thu, 02 Jul 2026 09:52:51 -0400
+	id 1wfHpr-0002DX-4x; Thu, 02 Jul 2026 09:52:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wfHqR-0003Fw-9W
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 09:52:47 -0400
+ id 1wfHpn-0001uM-Pf
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 09:52:09 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wfHqP-0008Hs-Nq
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 09:52:47 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1wfHpl-000800-Rr
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 09:52:07 -0400
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 662D0ZX7522842
- for <qemu-riscv@nongnu.org>; Thu, 2 Jul 2026 13:52:34 GMT
+ 662Dcb1w564727
+ for <qemu-riscv@nongnu.org>; Thu, 2 Jul 2026 13:51:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 0BdpKklJEsZFSAAVVOjqk88FpFD79mj7L+LnUNk4zJI=; b=DVQTSfmHzQhhNPx0
- AsyZjlMPFU2joGU4GgGcoHtw7lEJSrNqnlUH8n9yIkgovRpg8gYJOL3V/XksEQ79
- oCB6+zL9U9rumaEHRH5cDoeryo/BVYnfLcnGuZFgtLu19PTWUNvFqW28BdFuu9xO
- 2E/O3AkPWylEemfISOzOtFrwH/IXiaAu+PXMZYuMUsgyE6rZY3kvhc/SVWCdiGGQ
- mMV7RgeT5igr+WR16NP9Ecj9clF/VVg2QwN9GQVfjrUTSF+Ss8UrxET852ZtXTug
- lYwnh0QGZHdU2VvrRBxIOne2R6mqjCal1Mnhn6R0wKYgyaEXxcj6HzvAyj5TN1cD
- Iw1pDg==
-Received: from mail-ua1-f70.google.com (mail-ua1-f70.google.com
- [209.85.222.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f5541w1an-1
+ vbLW737oNQQrPNBx8WtyFR4N5LcmQHFE8I2qqIoK2bM=; b=iEt6odkxiYd6r/sx
+ 7TAyMNvrqVbQIO66f+CAGxLruIZ326R6SMvGJST0SxM2szUwackMLOAL8k4rKiJs
+ q+Xfv5h+ydZpWBj8QRD9Tg1M5T61VX6vsx+D2iHbJzeMG52YFzkxxe6AxjvtYLBa
+ DH70OsfMdbJ5dL9aan6mZ0jas0/uJ+lyg+7XBm0KuXxsmjmlM/ueXalrmhpLIaCZ
+ yH0J5e4qOVIcIL0a/0GQ90oDiuk/qMuEXr4423sYVsYwPYrjtrWW8aPgcLEvj3JC
+ XImi1r5Ld8YoucsDj/3E+XVaFlN1Zzlyw4tfaK9gEtLjO3bVpqb+wSLNG+uf1SyW
+ 0Cq/Wg==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com
+ [209.85.217.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f5s2501ug-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 13:52:34 +0000 (GMT)
-Received: by mail-ua1-f70.google.com with SMTP id
- a1e0cc1a2514c-96925b219aeso270704241.2
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 06:52:34 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 13:51:53 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id
+ ada2fe7eead31-73850dfc198so568618137.2
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 06:51:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783000354; x=1783605154; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1783000313; x=1783605113; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0BdpKklJEsZFSAAVVOjqk88FpFD79mj7L+LnUNk4zJI=;
- b=JDlZSise1dbmUd1MegKMLKN1zXoOvUueo3GxGH6i1FT+iERoLRbFpZoEIv8JvjXPCe
- RAPahEiupXYtUmzA+f+fhYnSGeI9OV9yxHLhDbnMoGHfjS33srr/phS2FyxwyKmQj8GE
- 6M5TQnzFfYW5Tw9SzEcmhM6U9sUqE4VEfBgk3sIUbDSQt/ZdlRjhLW1CG7lrEF+jYAkE
- 4HvVzH/7xQGbxnQO3ZzT3NuoxEiHLwVmpQy/GwzuWWqwgolmJZcCpHJXtneHMZqt+vii
- hCQoUzQj4SLRf1Gbrg+VtpzrSbk15ubzQauB21e5fzGEK2NkOz4kOwcTInPngXmymqop
- Qlpg==
+ bh=vbLW737oNQQrPNBx8WtyFR4N5LcmQHFE8I2qqIoK2bM=;
+ b=JWoPfDF3evSc1Nt24Jz6yYgn91gt9eOMI1s+9PMsruaxERe+TzviHQziOPi4GPbvbz
+ jv5PPsxFgkIG3vJcZrMpZn9DwfI19plqsoQlxkVuf1CPhoexzxA50vFQeD3Z+eWvq2Bv
+ QLQU8EH8ZLtmYyIGUxi/Pmu6RzOOtWghf/Vj86ZKosMCTeNG4rr4R2+KDcidFkzzxplU
+ Jo3yQ1eRvJkUg1pkdHUenMAIbZUZK3T9ZORg8UDZAQDLxMeTNzC4tbS1x4i01ekj+7je
+ SpDXEJS1zT+uP16LaOWk5zxcHr2qd68+Cnq4yIBDCeIOTXyWO6IuCdnB77iAalyLHecP
+ vAcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783000354; x=1783605154;
+ d=1e100.net; s=20251104; t=1783000313; x=1783605113;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=0BdpKklJEsZFSAAVVOjqk88FpFD79mj7L+LnUNk4zJI=;
- b=j+vKRFQgVCbLYEWx6fsiuniQo9Qx3zIVPuJYQsEfAo4m1PAKIDu1giFGa/Evtx7edX
- Wm9vdFVEdssRL3B0sUN/Z1VwUNJcKGqjoGf3VR4ibFjwKi9wCYL/YAtGvCkNuNVEWwKv
- xWIf05vkS5tCmekjIaYWo2r5t5rE1nGtHHBifNJxii2WLrUz7va59I40CZ8MwsWgcwHx
- Yhz73WbvuQQIDPpmYd07B2SRLcpsm/q4Y06Cp2xfD0qkTYFEb37Ko/dnb8P8R+nmxYPi
- NswtjtzafVvk9y35vQFZo6l8BgtL1KAsLqSo2++eDfM5Xjkbrjbze4FXwdQvmYN2YixW
- AHPw==
-X-Gm-Message-State: AOJu0YxWqXJuu2Jjyb3lUT6zotWc7hPJsoUOeFlYgGVmVRxfNEU9Mh6d
- IQk6o68TMqUXRj33GHCwiqL0EtW/513TTC/RNqavAoUwhKVG17yXkzzoAq5XrGl7bZxEQDUUJ9y
- XmqQcncIh2qM9JefOw7nEfpV45osKpkbWo5cBFmIjwgVAfASwrG/9FTw5LQ==
-X-Gm-Gg: AfdE7cn2NAbBFXYH7aIkM7HaCxlsl+u2lgET0d/lrKjSr+D4ANEUcQWMvR/NbM45hNj
- bS8WHkwRPTqXdqWUkQ+k1PDAMip47CgZTS4Bd1C0k1d75IskApaH1LgHDUrP9IPNsM2ySmaCPVN
- SDgKl301BKxmV71u34d9eTz1dmjlwV2Pf1aoMbTFtuGUVLtzE7wueC+ysrWg5oknHrGCczv9sPn
- FIN+1uuySOO1KynpSq5f46UPBTozhK8YsAdyDRMz6OMp4rXFgoSVvzwXIEXs7Jv5kE/FkA979O2
- NivDlr4e15eoZOVbZ2tfXhvqG+vSpCBtuPcvj/BLfKpozAbeVTTDaILffP1cvMNpKigY4j9KkLr
- UYBq0pZ3tsfUtIx+Ccu8dG+xjEtkckjgmTY+mjh4JZIid+Q==
-X-Received: by 2002:a05:6102:e0b:b0:737:ba2e:8a29 with SMTP id
- ada2fe7eead31-73dc05b5f94mr2028000137.27.1783000353868; 
- Thu, 02 Jul 2026 06:52:33 -0700 (PDT)
-X-Received: by 2002:a05:6102:e0b:b0:737:ba2e:8a29 with SMTP id
- ada2fe7eead31-73dc05b5f94mr2027973137.27.1783000353129; 
- Thu, 02 Jul 2026 06:52:33 -0700 (PDT)
+ bh=vbLW737oNQQrPNBx8WtyFR4N5LcmQHFE8I2qqIoK2bM=;
+ b=pAaXk75rfxnYTTbCDvqsjpF11m+W+Pp20ygWXoqAsIKmZAo6HrLpXyqQUQ9iSEwn8o
+ djIabcWSsOMIhd1VdNKS5NJUc5Px2bb92Wmp8JQVq8F1DslYXXnbY7VYZ+xdi/EpK6tE
+ V/HtDiWueOfupfPC5Y6RdrVvdpniZhsrZTbIXYe/xsuJtRWepUvKhkHGl/kfIulCNT8y
+ 2oqk86VYZh9fiuULrvw7DorDblfSshrGOFrNKivtfidfD/cnZOI47OZ/8o0o4utrgw8C
+ KnDERHPbBfsBxw1abq/FIJZZzkLqKci2x8/te6MTCvx7OPFHImPePMtd/8tLomPv03vd
+ k50g==
+X-Gm-Message-State: AOJu0YwhHxYiifay4dbNu1Tmm8Wb9AYNF8XoHjbq+aY/bv4ni27t5UHV
+ DzoiyldNeh/FkScNuqaJWhxyZoWPR9iwdy75+hA+jUVg+v1FIE5WW4wON66YJWIC2hQIoTfMuF9
+ jNIJzH/TlSeR3+iy48tkbycPtC0RT+6Fjn8fJ6wh3qgJNrsqxler3XKJ+zaE3irjwnA==
+X-Gm-Gg: AfdE7ckSahg7MOJQiVPLHj8dx0kvNTzfOe+72zk5ybEbJPDdmnE2PDJ5Vej5SM9rqvc
+ s8fTUhTY5MwmGw9NSzBXskYqGUiILP+3UGssLZgdjwRZi8FqCJlH+N9AsGc5s6dbrjSz3ZWHI5l
+ c80oZ2+Tql4OvWa39p/vZa5LT0Ns+GOzJOMhE2iCZu1XCjpKG3Cel4g+0gmjW/I5JiEYJAYggYs
+ UMHyuOv/3NvDiVCpQOJTSNSqi3A1JMRvaQKQfQb5R471196A6V2BdeJfdXJ4jCMsyAJUMNDlMpe
+ Ezi3xoNpRxDE/BmSp1Eprd1Y8nKXYJfFffkM6maXJjrDZc35GkimW5Oofqie2xdgjzOIUg/vNFW
+ UTzHoReLCR4XYrXlPZcGBYZBASXsVTxFwn/JQQz9d0j4WYg==
+X-Received: by 2002:a05:6102:5114:b0:739:5cfb:50f5 with SMTP id
+ ada2fe7eead31-73da99df13bmr2356856137.18.1783000312918; 
+ Thu, 02 Jul 2026 06:51:52 -0700 (PDT)
+X-Received: by 2002:a05:6102:5114:b0:739:5cfb:50f5 with SMTP id
+ ada2fe7eead31-73da99df13bmr2356838137.18.1783000312390; 
+ Thu, 02 Jul 2026 06:51:52 -0700 (PDT)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.79.21.40])
  by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-73e1c4e64a3sm1276462137.9.2026.07.02.06.52.30
+ ada2fe7eead31-73e1c4e64a3sm1276462137.9.2026.07.02.06.51.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jul 2026 06:52:32 -0700 (PDT)
+ Thu, 02 Jul 2026 06:51:51 -0700 (PDT)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -93,41 +93,40 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v3 23/24] target/riscv: move riscv_cpu_set_aia_ireg_rmw_cb()
- to riscv_imsic
-Date: Thu,  2 Jul 2026 10:51:25 -0300
-Message-ID: <20260702135128.1188021-24-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v3 07/24] target/riscv: move debug.h to tcg subdir
+Date: Thu,  2 Jul 2026 10:51:09 -0300
+Message-ID: <20260702135128.1188021-8-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260702135128.1188021-1-daniel.barboza@oss.qualcomm.com>
 References: <20260702135128.1188021-1-daniel.barboza@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: CSLIEJASUMH8zwOsHuzIesFLWsVQxcX0
-X-Proofpoint-ORIG-GUID: CSLIEJASUMH8zwOsHuzIesFLWsVQxcX0
-X-Authority-Analysis: v=2.4 cv=Xbm5Co55 c=1 sm=1 tr=0 ts=6a466d22 cx=c_pps
- a=R6oCqFB+Yf/t2GF8e0/dFg==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+X-Authority-Analysis: v=2.4 cv=U7uiy+ru c=1 sm=1 tr=0 ts=6a466cf9 cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=tRk87D2_djSq5c8C55gA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=TD8TdBvy0hsOASGTdmB-:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAyMDE0NCBTYWx0ZWRfX77gf+iqjOp06
- t1MWbFiNQe1ADb8dFNDRgmh8rdkx2U9+EfIKAZFqGq11hPYZgD/LHMb9nYPF77kiIipoefDSj9/
- eKLCFs7IbGacbw/9J5xLTR4nKTwevqISw2D+7PW4UThhW9rEtqEeqx4FT/ri8b+pMGebf/LGoQo
- H0WivMRi5984Acb72IUp9RiMdndj01MuEgt/FsrS5yG/mpfMcNIq7uH22DIu001MXSIRmOAqvyF
- ZkAzIGwXYAKeHst2xgQkXTxQN/7VAPiXnIJnZ2vwYZI13yvv4zMKmOreKJs0mHeu7xfIVEPguss
- I4J13NS5+Qf6k9xUoZnX6QlvqztNjnaMmsrAp2lbWpn1VubDIX6mD6zIpu+5rNINm8584ahgrq/
- LjA87G6QU7hk07ovXhG4R1IBtpsYezh8aM3HiwA3aU9Mfu5ucxY7nIcVB7NOz4xDV4MMZTDwkuU
- 72mF2C9/ZTQXgqL8xqw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAyMDE0NCBTYWx0ZWRfX3ViMAK0c+WKW
- 8nFIJCSdhaOaT2/gC7xUwf90Qt7EKDf1VH1DjxNdjPTK16iSmhxvlSuWuMpbQkUtsHdZGCbKGvD
- wnCN/FpkQsJ8pyT2ro7fybxnnhBSeuE=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=0TWWAF0crFuRuLJakD8A:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=gYDTvv6II1OnSo0itH1n:22 a=xVlTc564ipvMDusKsbsT:22
+X-Proofpoint-ORIG-GUID: o-MP6zikPoX_fLulIWXCGm-BPljXPS3N
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAyMDE0NCBTYWx0ZWRfX79WJAhwPfOUT
+ HHsgEJooieiMnFxE+Sjcr/Qr9U9o1+p0NIOchhIxlkH2rKZfBPnsRlipA477w/RqRMvdSYH3QbG
+ idnm+5OgpKxCio0bk/nv0BV9iy6ubuRL2ol04IB7nu+6XomOx4odskYVY4zRsR+PY7Xwi2HFqLi
+ UmS1qgu61To9Ne9n2oHsu1VUqUF8D+USoYI79TsOXmVmRFYr9BOqQO7QEYkbnR3GM1ER3h7KN/T
+ c0oe3InOagHaDKq1gn2P2dSl7TzAXu5IFFSXLKrgtYtm3tJHmd1ZhmXdQUtSreWnGYxMHs0F75q
+ pnzb5itC7X8I0OLUOiphqtd5TmqVYFyl+6r+v99wCVWZpc5lJJ336VaE40WknHeMnxTGK8st6WR
+ 9lNTL7Ngp4SIM7ZvVN67cEqWGQcr+1TGtkMiY5WQCtaB1OGInzuxQiMf8w2dyjAe+ezy7K8cRXA
+ 2h1k5JFLxAB0jZ7QKTA==
+X-Proofpoint-GUID: o-MP6zikPoX_fLulIWXCGm-BPljXPS3N
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAyMDE0NCBTYWx0ZWRfX47smLCh4qcNT
+ g0y7PkSaTxjnPFNIzYCrCN9ZpohrkhzdxE5bWb2bdkED3nv5ZtEcTt1T/FTSxlZ9IHLYBcad4lf
+ d7fPydq0sPSCpoc1f0PUibIn6nFEHos=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-07-02_01,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0
- adultscore=0 phishscore=0 priorityscore=1501 impostorscore=0 clxscore=1015
+ impostorscore=0 bulkscore=0 suspectscore=0 priorityscore=1501 malwarescore=0
+ spamscore=0 lowpriorityscore=0 adultscore=0 phishscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607020144
 Received-SPF: pass client-ip=205.220.180.131;
@@ -154,74 +153,138 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-riscv_imsic.c is the only caller.  Having it sitting in the TCG only
-cpu_helper.c gets in the way of --disable-tcg for no good reason.
+riscv_trigger_* APIs are TCG only.  Wrap the usages we have of them
+in cpu.c with CONFIG_TCG.
+
+After that we can move the header to the tcg subdir.  This will be
+enough to get this out of the way for the --disable-tcg build.
 
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/intc/riscv_imsic.c         | 11 +++++++++++
- target/riscv/cpu.h            |  3 ---
- target/riscv/tcg/cpu_helper.c | 10 ----------
- 3 files changed, 11 insertions(+), 13 deletions(-)
+ target/riscv/cpu.c             | 8 +++++---
+ target/riscv/machine.c         | 2 +-
+ target/riscv/tcg/cpu_helper.c  | 2 +-
+ target/riscv/tcg/csr.c         | 2 +-
+ target/riscv/tcg/debug.c       | 2 +-
+ target/riscv/{ => tcg}/debug.h | 0
+ target/riscv/tcg/tcg-cpu.c     | 2 +-
+ 7 files changed, 10 insertions(+), 8 deletions(-)
+ rename target/riscv/{ => tcg}/debug.h (100%)
 
-diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-index ebb55191c7..d6b46cdca2 100644
---- a/hw/intc/riscv_imsic.c
-+++ b/hw/intc/riscv_imsic.c
-@@ -376,6 +376,17 @@ static void riscv_imsic_reset_enter(Object *obj, ResetType type)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 65c6556c9f..301f4b3dc9 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -39,7 +39,7 @@
+ #include "kvm/kvm_riscv.h"
+ #include "tcg/tcg-cpu.h"
+ #if !defined(CONFIG_USER_ONLY)
+-#include "target/riscv/debug.h"
++#include "target/riscv/tcg/debug.h"
+ #endif
+ 
+ /* RISC-V CPU definitions */
+@@ -843,9 +843,11 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+     env->vill = true;
+ 
+ #ifndef CONFIG_USER_ONLY
++#ifdef CONFIG_TCG
+     if (cpu->cfg.debug) {
+         riscv_trigger_reset_hold(env);
      }
- }
++#endif
  
-+static void riscv_cpu_set_aia_ireg_rmw_cb(CPURISCVState *env,
-+                                          privilege_mode_t priv,
-+                                          aia_ireg_rmw_fn rmw_fn,
-+                                          void *rmw_fn_arg)
-+{
-+    if (priv <= PRV_M) {
-+        env->aia_ireg_rmw_cb[priv] = rmw_fn;
-+        env->aia_ireg_rmw_cb_arg[priv] = rmw_fn_arg;
-+    }
-+}
-+
- static void riscv_imsic_realize(DeviceState *dev, Error **errp)
+     if (cpu->cfg.ext_smrnmi) {
+         env->rnmip = 0;
+@@ -1003,7 +1005,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ 
+     riscv_cpu_register_gdb_regs_for_features(cs);
+ 
+-#ifndef CONFIG_USER_ONLY
++#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+     if (cpu->cfg.debug) {
+         riscv_trigger_realize(&cpu->env);
+     }
+@@ -1018,7 +1020,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ static void riscv_cpu_unrealize(DeviceState *dev)
  {
-     RISCVIMSICState *imsic = RISCV_IMSIC(dev);
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7a4d8abe07..c9dfa7daff 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -680,9 +680,6 @@ uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
- void riscv_cpu_set_rnmi(RISCVCPU *cpu, uint32_t irq, bool level);
- void riscv_cpu_interrupt(CPURISCVState *env);
- #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
--void riscv_cpu_set_aia_ireg_rmw_cb(CPURISCVState *env, privilege_mode_t priv,
--                                   aia_ireg_rmw_fn rmw_fn,
--                                   void *rmw_fn_arg);
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+-#ifndef CONFIG_USER_ONLY
++#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+     RISCVCPU *cpu = RISCV_CPU(dev);
  
- RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
- #endif /* !CONFIG_USER_ONLY */
+     if (cpu->cfg.debug) {
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index e1cbcaa349..11e869a9c1 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -23,7 +23,7 @@
+ #include "system/tcg.h"
+ #include "migration/cpu.h"
+ #include "exec/icount.h"
+-#include "target/riscv/debug.h"
++#include "target/riscv/tcg/debug.h"
+ #include "hw/riscv/machines-qom.h"
+ 
+ static bool pmp_needed(void *opaque)
 diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-index 71a96a20ef..07d9222652 100644
+index 885b4172c0..310c18db46 100644
 --- a/target/riscv/tcg/cpu_helper.c
 +++ b/target/riscv/tcg/cpu_helper.c
-@@ -590,16 +590,6 @@ uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask, uint64_t value)
-     return old;
- }
+@@ -35,7 +35,7 @@
+ #include "semihosting/common-semi.h"
+ #include "exec/icount.h"
+ #include "cpu_bits.h"
+-#include "target/riscv/debug.h"
++#include "target/riscv/tcg/debug.h"
+ #include "pmp.h"
+ #include "qemu/plugin.h"
  
--void riscv_cpu_set_aia_ireg_rmw_cb(CPURISCVState *env, privilege_mode_t priv,
--                                   aia_ireg_rmw_fn rmw_fn,
--                                   void *rmw_fn_arg)
--{
--    if (priv <= PRV_M) {
--        env->aia_ireg_rmw_cb[priv] = rmw_fn;
--        env->aia_ireg_rmw_cb_arg[priv] = rmw_fn_arg;
--    }
--}
--
- static void riscv_ctr_freeze(CPURISCVState *env, uint64_t freeze_mask,
-                              bool virt)
- {
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index 7168a4dc12..7da20b5500 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -34,7 +34,7 @@
+ #include "tcg/insn-start-words.h"
+ #include "internals.h"
+ #if !defined(CONFIG_USER_ONLY)
+-#include "target/riscv/debug.h"
++#include "target/riscv/tcg/debug.h"
+ #endif
+ 
+ /* CSR function table public API */
+diff --git a/target/riscv/tcg/debug.c b/target/riscv/tcg/debug.c
+index ba5bc6ae13..3c0fe70101 100644
+--- a/target/riscv/tcg/debug.c
++++ b/target/riscv/tcg/debug.c
+@@ -28,7 +28,7 @@
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+ #include "cpu.h"
+-#include "target/riscv/debug.h"
++#include "target/riscv/tcg/debug.h"
+ #include "trace.h"
+ #include "exec/helper-proto.h"
+ #include "exec/watchpoint.h"
+diff --git a/target/riscv/debug.h b/target/riscv/tcg/debug.h
+similarity index 100%
+rename from target/riscv/debug.h
+rename to target/riscv/tcg/debug.h
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index b73e3e9dd4..fe6350f497 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -37,7 +37,7 @@
+ #include "hw/core/boards.h"
+ #include "system/tcg.h"
+ #include "exec/icount.h"
+-#include "target/riscv/debug.h"
++#include "target/riscv/tcg/debug.h"
+ #endif
+ 
+ /* Hash that stores user set extensions */
 -- 
 2.43.0
 
