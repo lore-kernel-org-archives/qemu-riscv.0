@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E215FC43458
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC419C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:24:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfWMi-0005d4-HI; Fri, 03 Jul 2026 01:23:04 -0400
+	id 1wfWMb-0005Wv-1L; Fri, 03 Jul 2026 01:22:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wfWMc-0005Xi-21; Fri, 03 Jul 2026 01:22:58 -0400
+ id 1wfWMX-0005Tj-2r; Fri, 03 Jul 2026 01:22:53 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wfWMa-0005yH-47; Fri, 03 Jul 2026 01:22:57 -0400
+ id 1wfWMS-0005s2-78; Fri, 03 Jul 2026 01:22:52 -0400
 Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.183]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 6635LT8S018373
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 6635LT8R018373
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 3 Jul 2026 14:21:45 +0900 (JST)
+ Fri, 3 Jul 2026 14:21:44 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=WU1hr20De0lfszJxA0uPYsBXpl0cfWRc8y3s2m5DLyo=; 
+DKIM-Signature: a=rsa-sha256; bh=1XctemCKId3obTQH3ZovbZHJwhFnldkwzVWAd9daGoI=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Message-Id:To:Subject:Date;
  s=rs20250326; t=1783056105; v=1;
- b=gEgffcsnVdi4RhMOLhBBOniG1feoYZwJT9L5utV6OW+IZhP80LZjkYDeME0aTo3l
- 1W16YXUzbn5FUpKcST6EH+3m8+bykMSx5KwFS4+QPzJyIng2Szk/RVurI+V/lIC5
- qkyvSM6hexvMZdwVTbBuiqurNIwrIhX2Srp8j0je94K3O/xub+Bl4hxOpPHfEYSM
- 1T/pl6z1nUPTVms6uMYKRsADoT7HwDZyomv04fuCLCZjUbeK/tj5Uv8mhZyXDeGn
- 9Bq3BUNw6y9YyrczlqYF/RZWSQayNsUBMdD1hXSff9mmKwL4gso7ZztRW9IW3mux
- skjYUOGS72p628LwPYl1kw==
+ b=lOmH1V74tPa8qWyAGMoaN8+qD3tmBei04vq78uHgb7l7b+WQ+3zM3PMIvHn8/TRa
+ 8syfLjgTgpV3X4fDZTMtdlX9OB5m77mosQeHcbazz5H5/+uZA1YDmZFEbQVHkjoT
+ gS++fCJokYCR2F1pYfmWCykRXaEyGYi22kvdR0vdcUD+0pvotWc3SdOBV6ynAMUf
+ hUA0RO+9PpLiXohv0CPrbaolxXAACX433bsOBBF7iCX3l1BFjMscT7Gv/4JvSyU+
+ +vUSl/TznH+WSOYbj0ni1MZx+My0o0Q3xm2kKaN8uQ8fa3oW1wMwp2YDfDqc5BLP
+ OzItrwUOnlAgGDW79VMvMA==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Fri, 03 Jul 2026 14:19:21 +0900
-Subject: [PATCH v2 5/7] system/physmem: Notify RAMBlock migratable and
- idstr changes
+Date: Fri, 03 Jul 2026 14:19:20 +0900
+Subject: [PATCH v2 4/7] system/physmem: Pass RAMBlock to RAMBlockNotifier
+ callbacks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260703-ram-v2-5-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20260703-ram-v2-4-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
 References: <20260703-ram-v2-0-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20260703-ram-v2-0-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -74,13 +74,13 @@ Cc: Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 X-Mailer: b4 0.16-dev-925f5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4261;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=13441;
  i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
- bh=Vv3pUHunatuIlFi+mPBDZxRdUfxT6q4pEQh1tsUM+Qo=;
- b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ5a726ND9w/dXfQpO81K6NZK4facBVzav74u1818Y1XX4
- lIfGVLQUcrCIMbFICumyJJStJtbI7r2U2FCfAvMHFYmkCEMXJwCMBEnDYb/6fOf2K58tvDttid3
- V5/6czJNMrJ+bnzsu6Kt7qe/pNmc+MTI8OLW3dSjm0Qmrrf/suSZ5XzV5Uv2CSTeWhm8qPuW4OU
- dL5kB
+ bh=A4x2pli6Z2hhm28AnwmhhlYROeELntD3dbuFAdERfwE=;
+ b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ5a728PquWdc0iI3ML86sGPnrt/i77oNF3dtnRmyeOkGt
+ j8adzq3dpSyMIhxMciKKbKkFO3m1oiu/VSYEN8CM4eVCWQIAxenAEykVpOR4clX5cu1D58ERBgI
+ un5fvulmsmjCoyKZuqOtHPFG9ba81Qz/Q6IKL5zONHw0T2GLYPO+vfJbJ9We+fBmwZJ/T1Sbnix
+ ZxAwA
 X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
  fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
 Received-SPF: pass client-ip=49.212.243.89;
@@ -106,122 +106,330 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The RAM migration code assumes that the set of migratable RAMBlocks and
-their idstr values do not change while migration is running. Add
-RAMBlockNotifier callbacks for RAM_MIGRATABLE flag and idstr changes so
-migration can detect attempts to make such changes at runtime and abort
-with a clear error.
+The RAM save/restore code needs the RAMBlock in RAMBlockNotifier
+callbacks to decide whether migration must be aborted and to update
+RAMBlock state for postcopy. Looking up the RAMBlock inside callbacks is
+hazardous: with Xen mapcache it can deadlock, and it also leaves the
+callback contract unclear.
+
+Pass the RAMBlock explicitly to RAMBlockNotifier callbacks. The
+ram_block_resized callback takes a non-const RAMBlock because it may
+modify the RAMBlock, while the other callbacks take const RAMBlock.
+
+Xen mapcache passes NULL because mapcache entries do not have a
+one-to-one relationship with RAMBlocks. ram_block_resized() is never
+called from Xen mapcache, so its RAMBlock argument is always non-NULL.
+
+Drop redundant parameters from ram_block_resized() because they can be
+derived from the RAMBlock. Keep them for the other callbacks because
+their RAMBlock argument may be NULL.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- include/system/ramlist.h |  6 ++++++
- hw/core/numa.c           | 36 ++++++++++++++++++++++++++++++++++++
- system/physmem.c         |  9 +++++++++
- 3 files changed, 51 insertions(+)
+ include/system/ramlist.h    | 18 ++++++++++--------
+ block/block-ram-registrar.c |  8 ++++----
+ hw/core/numa.c              | 18 ++++++++++--------
+ hw/xen/xen-mapcache.c       |  6 +++---
+ migration/ram.c             | 12 +++---------
+ system/physmem.c            |  7 +++----
+ target/i386/nvmm/nvmm-all.c |  4 ++--
+ target/i386/sev.c           |  8 ++++----
+ util/vfio-helpers.c         |  7 ++++---
+ 9 files changed, 43 insertions(+), 45 deletions(-)
 
 diff --git a/include/system/ramlist.h b/include/system/ramlist.h
-index 32157cc84305..e96de5573eed 100644
+index c7f388f487d7..32157cc84305 100644
 --- a/include/system/ramlist.h
 +++ b/include/system/ramlist.h
-@@ -66,6 +66,9 @@ struct RAMBlockNotifier {
-                             void *host, size_t size, size_t max_size);
-     void (*ram_block_removed)(RAMBlockNotifier *n, const RAMBlock *rb,
-                               void *host, size_t size, size_t max_size);
-+    void (*ram_block_set_migratable)(RAMBlockNotifier *n, const RAMBlock *rb);
-+    void (*ram_block_unset_migratable)(RAMBlockNotifier *n, const RAMBlock *rb);
-+    void (*ram_block_set_idstr)(RAMBlockNotifier *n, const RAMBlock *rb);
-     void (*ram_block_resized)(RAMBlockNotifier *n, RAMBlock *rb,
+@@ -62,11 +62,11 @@ void qemu_mutex_lock_ramlist(void);
+ void qemu_mutex_unlock_ramlist(void);
+ 
+ struct RAMBlockNotifier {
+-    void (*ram_block_added)(RAMBlockNotifier *n, void *host, size_t size,
+-                            size_t max_size);
+-    void (*ram_block_removed)(RAMBlockNotifier *n, void *host, size_t size,
+-                              size_t max_size);
+-    void (*ram_block_resized)(RAMBlockNotifier *n, void *host, size_t old_size,
++    void (*ram_block_added)(RAMBlockNotifier *n, const RAMBlock *rb,
++                            void *host, size_t size, size_t max_size);
++    void (*ram_block_removed)(RAMBlockNotifier *n, const RAMBlock *rb,
++                              void *host, size_t size, size_t max_size);
++    void (*ram_block_resized)(RAMBlockNotifier *n, RAMBlock *rb,
                                size_t new_size);
      QLIST_ENTRY(RAMBlockNotifier) next;
-@@ -81,6 +84,9 @@ void ram_block_notify_add(const RAMBlock *rb,
-                           void *host, size_t size, size_t max_size);
- void ram_block_notify_remove(const RAMBlock *rb,
-                              void *host, size_t size, size_t max_size);
-+void ram_block_notify_set_migratable(const RAMBlock *rb);
-+void ram_block_notify_unset_migratable(const RAMBlock *rb);
-+void ram_block_notify_set_idstr(const RAMBlock *rb);
- void ram_block_notify_resize(RAMBlock *rb, size_t new_size);
+ };
+@@ -77,9 +77,11 @@ int qemu_ram_foreach_block(RAMBlockIterFunc func, void *opaque);
+ 
+ void ram_block_notifier_add(RAMBlockNotifier *n);
+ void ram_block_notifier_remove(RAMBlockNotifier *n);
+-void ram_block_notify_add(void *host, size_t size, size_t max_size);
+-void ram_block_notify_remove(void *host, size_t size, size_t max_size);
+-void ram_block_notify_resize(void *host, size_t old_size, size_t new_size);
++void ram_block_notify_add(const RAMBlock *rb,
++                          void *host, size_t size, size_t max_size);
++void ram_block_notify_remove(const RAMBlock *rb,
++                             void *host, size_t size, size_t max_size);
++void ram_block_notify_resize(RAMBlock *rb, size_t new_size);
  
  GString *ram_block_format(void);
-diff --git a/hw/core/numa.c b/hw/core/numa.c
-index 40acb98bdd0b..0685cd1c6ccc 100644
---- a/hw/core/numa.c
-+++ b/hw/core/numa.c
-@@ -887,6 +887,42 @@ void ram_block_notify_remove(const RAMBlock *rb,
+ 
+diff --git a/block/block-ram-registrar.c b/block/block-ram-registrar.c
+index fcda2b86afb2..5b938de22587 100644
+--- a/block/block-ram-registrar.c
++++ b/block/block-ram-registrar.c
+@@ -9,8 +9,8 @@
+ #include "system/block-ram-registrar.h"
+ #include "qapi/error.h"
+ 
+-static void ram_block_added(RAMBlockNotifier *n, void *host, size_t size,
+-                            size_t max_size)
++static void ram_block_added(RAMBlockNotifier *n, const RAMBlock *rb,
++                            void *host, size_t size, size_t max_size)
+ {
+     BlockRAMRegistrar *r = container_of(n, BlockRAMRegistrar, notifier);
+     Error *err = NULL;
+@@ -26,8 +26,8 @@ static void ram_block_added(RAMBlockNotifier *n, void *host, size_t size,
      }
  }
  
-+void ram_block_notify_set_migratable(const RAMBlock *rb)
-+{
-+    RAMBlockNotifier *notifier;
-+    RAMBlockNotifier *next;
-+
-+    QLIST_FOREACH_SAFE(notifier, &ram_list.ramblock_notifiers, next, next) {
-+        if (notifier->ram_block_set_migratable) {
-+            notifier->ram_block_set_migratable(notifier, rb);
-+        }
-+    }
-+}
-+
-+void ram_block_notify_unset_migratable(const RAMBlock *rb)
-+{
-+    RAMBlockNotifier *notifier;
-+    RAMBlockNotifier *next;
-+
-+    QLIST_FOREACH_SAFE(notifier, &ram_list.ramblock_notifiers, next, next) {
-+        if (notifier->ram_block_unset_migratable) {
-+            notifier->ram_block_unset_migratable(notifier, rb);
-+        }
-+    }
-+}
-+
-+void ram_block_notify_set_idstr(const RAMBlock *rb)
-+{
-+    RAMBlockNotifier *notifier;
-+    RAMBlockNotifier *next;
-+
-+    QLIST_FOREACH_SAFE(notifier, &ram_list.ramblock_notifiers, next, next) {
-+        if (notifier->ram_block_set_idstr) {
-+            notifier->ram_block_set_idstr(notifier, rb);
-+        }
-+    }
-+}
-+
- void ram_block_notify_resize(RAMBlock *rb, size_t new_size)
+-static void ram_block_removed(RAMBlockNotifier *n, void *host, size_t size,
+-                              size_t max_size)
++static void ram_block_removed(RAMBlockNotifier *n, const RAMBlock *rb,
++                              void *host, size_t size, size_t max_size)
+ {
+     BlockRAMRegistrar *r = container_of(n, BlockRAMRegistrar, notifier);
+     blk_unregister_buf(r->blk, host, max_size);
+diff --git a/hw/core/numa.c b/hw/core/numa.c
+index f462883c87cf..40acb98bdd0b 100644
+--- a/hw/core/numa.c
++++ b/hw/core/numa.c
+@@ -824,7 +824,7 @@ static int ram_block_notify_add_single(RAMBlock *rb, void *opaque)
+     RAMBlockNotifier *notifier = opaque;
+ 
+     if (host) {
+-        notifier->ram_block_added(notifier, host, size, max_size);
++        notifier->ram_block_added(notifier, rb, host, size, max_size);
+     }
+     return 0;
+ }
+@@ -837,7 +837,7 @@ static int ram_block_notify_remove_single(RAMBlock *rb, void *opaque)
+     RAMBlockNotifier *notifier = opaque;
+ 
+     if (host) {
+-        notifier->ram_block_removed(notifier, host, size, max_size);
++        notifier->ram_block_removed(notifier, rb, host, size, max_size);
+     }
+     return 0;
+ }
+@@ -861,38 +861,40 @@ void ram_block_notifier_remove(RAMBlockNotifier *n)
+     }
+ }
+ 
+-void ram_block_notify_add(void *host, size_t size, size_t max_size)
++void ram_block_notify_add(const RAMBlock *rb,
++                          void *host, size_t size, size_t max_size)
  {
      RAMBlockNotifier *notifier;
+     RAMBlockNotifier *next;
+ 
+     QLIST_FOREACH_SAFE(notifier, &ram_list.ramblock_notifiers, next, next) {
+         if (notifier->ram_block_added) {
+-            notifier->ram_block_added(notifier, host, size, max_size);
++            notifier->ram_block_added(notifier, rb, host, size, max_size);
+         }
+     }
+ }
+ 
+-void ram_block_notify_remove(void *host, size_t size, size_t max_size)
++void ram_block_notify_remove(const RAMBlock *rb,
++                             void *host, size_t size, size_t max_size)
+ {
+     RAMBlockNotifier *notifier;
+     RAMBlockNotifier *next;
+ 
+     QLIST_FOREACH_SAFE(notifier, &ram_list.ramblock_notifiers, next, next) {
+         if (notifier->ram_block_removed) {
+-            notifier->ram_block_removed(notifier, host, size, max_size);
++            notifier->ram_block_removed(notifier, rb, host, size, max_size);
+         }
+     }
+ }
+ 
+-void ram_block_notify_resize(void *host, size_t old_size, size_t new_size)
++void ram_block_notify_resize(RAMBlock *rb, size_t new_size)
+ {
+     RAMBlockNotifier *notifier;
+     RAMBlockNotifier *next;
+ 
+     QLIST_FOREACH_SAFE(notifier, &ram_list.ramblock_notifiers, next, next) {
+         if (notifier->ram_block_resized) {
+-            notifier->ram_block_resized(notifier, host, old_size, new_size);
++            notifier->ram_block_resized(notifier, rb, new_size);
+         }
+     }
+ }
+diff --git a/hw/xen/xen-mapcache.c b/hw/xen/xen-mapcache.c
+index 85cf0cf359ca..f321c65b630e 100644
+--- a/hw/xen/xen-mapcache.c
++++ b/hw/xen/xen-mapcache.c
+@@ -222,7 +222,7 @@ static void xen_remap_bucket(MapCache *mc,
+ 
+     if (entry->vaddr_base != NULL) {
+         if (!(entry->flags & XEN_MAPCACHE_ENTRY_DUMMY)) {
+-            ram_block_notify_remove(entry->vaddr_base, entry->size,
++            ram_block_notify_remove(NULL, entry->vaddr_base, entry->size,
+                                     entry->size);
+         }
+ 
+@@ -308,7 +308,7 @@ static void xen_remap_bucket(MapCache *mc,
+     }
+ 
+     if (!(entry->flags & XEN_MAPCACHE_ENTRY_DUMMY)) {
+-        ram_block_notify_add(vaddr_base, size, size);
++        ram_block_notify_add(NULL, vaddr_base, size, size);
+     }
+ 
+     entry->vaddr_base = vaddr_base;
+@@ -601,7 +601,7 @@ static void xen_invalidate_map_cache_entry_unlocked(MapCache *mc,
+         return;
+     }
+ 
+-    ram_block_notify_remove(entry->vaddr_base, entry->size, entry->size);
++    ram_block_notify_remove(NULL, entry->vaddr_base, entry->size, entry->size);
+     if (entry->flags & XEN_MAPCACHE_ENTRY_GRANT) {
+         rc = xengnttab_unmap(xen_region_gnttabdev, entry->vaddr_base,
+                              entry->size >> mc->bucket_shift);
+diff --git a/migration/ram.c b/migration/ram.c
+index fc38ffbf8af1..6bc7f705d31a 100644
+--- a/migration/ram.c
++++ b/migration/ram.c
+@@ -4699,18 +4699,12 @@ static SaveVMHandlers savevm_ram_handlers = {
+     .save_postcopy_prepare = ram_save_postcopy_prepare,
+ };
+ 
+-static void ram_mig_ram_block_resized(RAMBlockNotifier *n, void *host,
+-                                      size_t old_size, size_t new_size)
++static void ram_mig_ram_block_resized(RAMBlockNotifier *n, RAMBlock *rb,
++                                      size_t new_size)
+ {
+     PostcopyState ps = postcopy_state_get();
+-    ram_addr_t offset;
+-    RAMBlock *rb = qemu_ram_block_from_host(host, false, &offset);
+     Error *err = NULL;
+-
+-    if (!rb) {
+-        error_report("RAM block not found");
+-        return;
+-    }
++    ram_addr_t old_size = qemu_ram_get_used_length(rb);
+ 
+     if (migrate_ram_is_ignored(rb)) {
+         return;
 diff --git a/system/physmem.c b/system/physmem.c
-index 1427949b72cd..e8ec6a152af4 100644
+index 54fe820ce828..1427949b72cd 100644
 --- a/system/physmem.c
 +++ b/system/physmem.c
-@@ -1911,11 +1911,17 @@ bool qemu_ram_is_migratable(const RAMBlock *rb)
- 
- void qemu_ram_set_migratable(RAMBlock *rb)
+@@ -2019,7 +2019,6 @@ static int memory_try_enable_merging(void *addr, size_t len)
+  */
+ int qemu_ram_resize(RAMBlock *block, ram_addr_t newsize, Error **errp)
  {
-+    /* Notify before modifying the ram block. */
-+    ram_block_notify_set_migratable(rb);
-+
-     rb->flags |= RAM_MIGRATABLE;
+-    const ram_addr_t oldsize = block->used_length;
+     const ram_addr_t unaligned_size = newsize;
+ 
+     newsize = TARGET_PAGE_ALIGN(newsize);
+@@ -2054,7 +2053,7 @@ int qemu_ram_resize(RAMBlock *block, ram_addr_t newsize, Error **errp)
+ 
+     /* Notify before modifying the ram block and touching the bitmaps. */
+     if (block->host) {
+-        ram_block_notify_resize(block->host, oldsize, newsize);
++        ram_block_notify_resize(block, newsize);
+     }
+ 
+     physical_memory_clear_dirty_range(block->offset, block->used_length);
+@@ -2277,7 +2276,7 @@ static void ram_block_add(RAMBlock *new_block, Error **errp)
+             qemu_madvise(new_block->host, new_block->max_length,
+                          QEMU_MADV_DONTFORK);
+         }
+-        ram_block_notify_add(new_block->host, new_block->used_length,
++        ram_block_notify_add(new_block, new_block->host, new_block->used_length,
+                              new_block->max_length);
+     }
+     return;
+@@ -2588,7 +2587,7 @@ void qemu_ram_free(RAMBlock *block)
+     }
+ 
+     if (block->host) {
+-        ram_block_notify_remove(block->host, block->used_length,
++        ram_block_notify_remove(block, block->host, block->used_length,
+                                 block->max_length);
+     }
+ 
+diff --git a/target/i386/nvmm/nvmm-all.c b/target/i386/nvmm/nvmm-all.c
+index 8a1af35ed32b..f29b9c504ea8 100644
+--- a/target/i386/nvmm/nvmm-all.c
++++ b/target/i386/nvmm/nvmm-all.c
+@@ -1134,8 +1134,8 @@ static MemoryListener nvmm_memory_listener = {
+ };
+ 
+ static void
+-nvmm_ram_block_added(RAMBlockNotifier *n, void *host, size_t size,
+-                     size_t max_size)
++nvmm_ram_block_added(RAMBlockNotifier *n, const RAMBlock *rb,
++                     void *host, size_t size, size_t max_size)
+ {
+     struct nvmm_machine *mach = get_nvmm_mach();
+     uintptr_t hva = (uintptr_t)host;
+diff --git a/target/i386/sev.c b/target/i386/sev.c
+index 99cf30806be7..55e74f1c8f9c 100644
+--- a/target/i386/sev.c
++++ b/target/i386/sev.c
+@@ -329,8 +329,8 @@ sev_set_guest_state(SevCommonState *sev_common, SevState new_state)
  }
  
- void qemu_ram_unset_migratable(RAMBlock *rb)
+ static void
+-sev_ram_block_added(RAMBlockNotifier *n, void *host, size_t size,
+-                    size_t max_size)
++sev_ram_block_added(RAMBlockNotifier *n, const RAMBlock *rb,
++                    void *host, size_t size, size_t max_size)
  {
-+    /* Notify before modifying the ram block. */
-+    ram_block_notify_unset_migratable(rb);
-+
-     rb->flags &= ~RAM_MIGRATABLE;
+     int r;
+     struct kvm_enc_region range;
+@@ -359,8 +359,8 @@ sev_ram_block_added(RAMBlockNotifier *n, void *host, size_t size,
  }
  
-@@ -1937,6 +1943,9 @@ void qemu_ram_set_idstr(RAMBlock *new_block, const char *name, DeviceState *dev)
-     assert(new_block);
-     assert(!new_block->idstr[0]);
+ static void
+-sev_ram_block_removed(RAMBlockNotifier *n, void *host, size_t size,
+-                      size_t max_size)
++sev_ram_block_removed(RAMBlockNotifier *n, const RAMBlock *rb,
++                      void *host, size_t size, size_t max_size)
+ {
+     int r;
+     struct kvm_enc_region range;
+diff --git a/util/vfio-helpers.c b/util/vfio-helpers.c
+index aab0bf9d485d..5059ed44b8af 100644
+--- a/util/vfio-helpers.c
++++ b/util/vfio-helpers.c
+@@ -465,8 +465,8 @@ fail_container:
+     return ret;
+ }
  
-+    /* Notify before modifying the ram block. */
-+    ram_block_notify_set_idstr(new_block);
-+
-     if (dev) {
-         char *id = qdev_get_dev_path(dev);
-         if (id) {
+-static void qemu_vfio_ram_block_added(RAMBlockNotifier *n, void *host,
+-                                      size_t size, size_t max_size)
++static void qemu_vfio_ram_block_added(RAMBlockNotifier *n, const RAMBlock *rb,
++                                      void *host, size_t size, size_t max_size)
+ {
+     QEMUVFIOState *s = container_of(n, QEMUVFIOState, ram_notifier);
+     Error *local_err = NULL;
+@@ -481,7 +481,8 @@ static void qemu_vfio_ram_block_added(RAMBlockNotifier *n, void *host,
+     }
+ }
+ 
+-static void qemu_vfio_ram_block_removed(RAMBlockNotifier *n, void *host,
++static void qemu_vfio_ram_block_removed(RAMBlockNotifier *n, const RAMBlock *rb,
++                                        void *host,
+                                         size_t size, size_t max_size)
+ {
+     QEMUVFIOState *s = container_of(n, QEMUVFIOState, ram_notifier);
 
 -- 
 2.54.0
