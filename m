@@ -4,106 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8745C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:38:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D423C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 06:05:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfWbJ-0003Ir-78; Fri, 03 Jul 2026 01:38:09 -0400
+	id 1wfX18-00020v-2R; Fri, 03 Jul 2026 02:04:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wfWbE-0003IB-4K
- for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 01:38:05 -0400
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ (Exim 4.90_1) (envelope-from <danlam@g.hmc.edu>) id 1wfX17-00020f-1z
+ for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 02:04:49 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wfWbB-0001Q6-G9
- for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 01:38:03 -0400
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-69531108f25so378075a12.2
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 22:37:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783057078; cv=none;
+ (Exim 4.90_1) (envelope-from <danlam@g.hmc.edu>) id 1wfX14-0007tI-Ms
+ for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 02:04:48 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-693c51a8a19so327850a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 23:04:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783058684; cv=none;
  d=google.com; s=arc-20260327;
- b=Xs4AJgE/KWZEPmAJLb+yIcByAnup6Ny5sZIAU/VsrU9tDAoLLmsgU4/mGrTeYvvHe8
- +vs5SJzI5+Q0TtY4IrJ1SPbKC5C/3Esf+qDhT/kTyLSijxwD6IlR8572itarVjPNQIAb
- tzkUw3eEr/OmvwnilgwVfL5G+DHqwJBSr0nB2rBgqWPcN8ClFgw67Zu8zGAl5gsm4wlQ
- Y3rE2nFgaYjoGIwSzehFElHOP14w7dIh7Q5q9shpLHV4pJKdmV/vlL7sa8mIeaKkiT3K
- /BvG8N8XRlr792wjJxEJ9Ybs2QDzK0hM0MUP1hjaW5xJWQY19UvqwVl17oZdvlciTDCE
- uxlA==
+ b=ON4Oomi8aaWLzg67bxPOOuLVZztY6aFt1hFAxa3TX+4XIa3JG71G8NL/L5l7tx9NQv
+ 0QIW3Kh+GDYYcxbcMLT5j4nzUy1Gi/2adWotO0CkL898qCz1qU/YSNlb6u9Rm2eOX4Sn
+ T0aRMXauIBCy0t2CK7VlDnzjHImZThLJc1nI6dIo8T5AZOUxyKpSneMNbF03yHAZ08ff
+ 6S1wLLblJg/bIAOZAWfnOC2mk89o4vcaYA/YH+3RMbAv5n+6x6Sx+71NIrcc9CTjnH4N
+ qXx+RHeTQldHPz1S6jMaHarXXoGfl698+DeN7/CnVL6+AjObMwD8NmxFhyfSAds5jBdj
+ yIrA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=GivYgMkXrvPeyJM6z4daeIyp29wkIg8ZlMKrnTpJvsQ=;
- fh=qiBrum0ZZa9wQZfumq7uIdWuJz+oJAR7hOTIkwb15Jc=;
- b=Iy5MxEurMBOU3Kp/YO2mGKM5oVPH09JAfoeDXfGXx+aQSMPDw4s6rkGPjwU31PmPyJ
- vrvPBsCkNtYNQXGkF8agMNvEEMcsIMPn5pdepM4rqkL6PoOAC1ptwko2Lua5n9mQN8Vs
- nN1GEPwXhRPflNcqT+gys1abiSQM97dvHEdqjIxtWAQxu1+t9xAuwWGJ5JoX/ZBqdyXc
- X1z2wP1nHkoaZaaLbK2+J58OY+dqQpGm+78fY8jF4REAyR9VN2MgX/pQEldqpMXdnyOz
- djz42U6Ev081fqWhI9R3pVYDC2am3HIGWvJhMPyjO8A9lP6RFN2qVaErVjrCRf8Ff4nw
- Oylw==; darn=nongnu.org
+ h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=C08T+uadq+qbzoYfgmxzhcjS37RlU5vx+ESq897iTPU=;
+ fh=uNWL65ATogYzbDseIKH9YqPXO90giPkSXO0Rl5cHpOs=;
+ b=kphUIpZpx7GbvmENfiysIgbeU4kA/i0h74tcHK/Izx30Ze0orFtZ8oMxz9dacKesh9
+ BGJUHtCwxezxEzdslne+KKTZJaj19WPQwZZBql6NVOZnbZ6zXXWGCx04P1yq0rXInYOi
+ /K+cf1Kl6KLYnuL8sgzl6OBhnahEup6mogqPzz8+dXi9oaT8pY9zajkMRpfz0hrL3LhB
+ IdirEGW0JA1Iww+9ZqWypJxdBsEa8JiRIeKnlOHlHQ19W6g/dk4Pu0vYjxUQ3G5ADudI
+ mQZb7aa9i7Zd0L0fogATsKna4j/Tz+sPPpySBvwmpNG6GWySqXxPymOKRUjD+HmSM68N
+ oqdQ==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783057078; x=1783661878; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GivYgMkXrvPeyJM6z4daeIyp29wkIg8ZlMKrnTpJvsQ=;
- b=dx1ePKwuXSoWaLT0Oq0jEVvGwhXsDiHje5yQhCKUzL5/2Lx9s6ZqbGmOkl2HIpT4l+
- mVqQe/cchsKgExn1E08exbAC4dBH5mWA+s9eGlNGmjXAXt9ZC01s30fUS+QVG9a5M/N3
- puIjySYqeDAmP+519yYXwVmZ+9+UxzopeSqw/PzrjNzwb+vWYSQgCnop0A6AS6yzUnsH
- 8YWo6SLMth8rF2L65z5XVctvNJ4lpPyNw7sH3wSsbcOxF5wX2YkHErCSfU7/fYNEtvOE
- BtpMVqpeFj4vBOraV4LqDoC3qQ29SvBTVRwM62KtnhJiVLTUhG9NhJVYTG6kJ11Dw3rQ
- 5qxw==
+ d=g.hmc.edu; s=google; t=1783058684; x=1783663484; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=C08T+uadq+qbzoYfgmxzhcjS37RlU5vx+ESq897iTPU=;
+ b=izq+anz/rMF06i2knGV1XxfMJOxdSOgWVc6MSgi4RL37vn7jU8++twT6N1e+ZA/O9q
+ XXpfvnkcc/udEefAdQKsDJ6SKU1dvdKh8FhcP6QLCy3TJJ4w++0EoDPWe7r8CvJqcGdk
+ YYCXVEgVdAp7NJBTk0uGEjVz/F6OP/4jH2Few=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783057078; x=1783661878;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=GivYgMkXrvPeyJM6z4daeIyp29wkIg8ZlMKrnTpJvsQ=;
- b=G0EBp5pUH7rZzvp7YaUjtPKvpWaxgkDsInSYqhi2w96mrt9Y6w8VCB2LOmZtHdXFDH
- cp0D+c3jPdumihk7FDK1+DqZ8jdZrjztdB+iQFadRmeTkgeJdLZv1lhW9yu6n5u6FzWq
- 6HfygdXl8U4fPcWJfbVwb1RbcZl++IJB5CHzKpwTtSYudzsYbf3WB24gRvw+2ZgFY8mT
- 6ge5KrMce3cLnGJbikYgrOT70qg7TxDRPhn7DYAgFKypBjGMzHi4quPGe5F1fl87Vdhv
- 57X5uoUfnG7M5JOjrx04/MUNa2/+dlEVAmwlZLSvx3eRd93B2GyYk1BQMcHv/xiv/6mV
- wi6A==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrV/2IzOjR/8xcH0SNR5px1OQJ7q3PoRI6/mAp+IhBeD6Aj0z/n7W9t437dckAR/hoZ7LwQKZZlMJ8i@nongnu.org
-X-Gm-Message-State: AOJu0YyjfcDnh7TmmyilnCI9OrMQgx1/w7jjZW7S1ngwYRweYQk+U5Sq
- qG0l31E9nyW+S8Iv4pkMfFIA/v2OafmYcmRqeJ3mcS7tXSYhIrK7Th1Dni/mQ6EcBRntRPubrLN
- kw5pHNwfoWLf3dRG/0KcfprbD5EQyGxs=
-X-Gm-Gg: AfdE7cm5E+TkhF2EDCn+F+wG4eEZPFm5m+tHAB2zXaLnUS1YAQ9Kd/EoJRp5TAVL7rh
- jCSk3y5W1Q7nh+hVNzbKYtWbtOVlgCOoODO357uEhr5EAZEzZDEQ8YN7Z5kQkVh72KicbRdmwXR
- Ro8RfcqH8YIDuRqUlyiW/hJH1rQ/YHKprT4AL9Y/p3rbrw9dcysKM1dTD+skFy4x93xD/Wgf2kt
- LqgY4bfWnGaAAp+7pNeRNxLdZ51Y9Ae9nE6gSLtZ881lMGGUaps5wJ7ohfDYI4fleV3uTWUxwu+
- J/5iqPDCwnNCAC6S6/0VEBOpYW0=
-X-Received: by 2002:a05:6402:5409:b0:697:df42:2633 with SMTP id
- 4fb4d7f45d1cf-6989f35319bmr3780592a12.24.1783057077863; Thu, 02 Jul 2026
- 22:37:57 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783058684; x=1783663484;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=C08T+uadq+qbzoYfgmxzhcjS37RlU5vx+ESq897iTPU=;
+ b=MGt48IepSjvI5tUjJlSBk6tb8940qj3IgkFaAuG5tMEKCutH5skVuVAxq+h6a0d0SG
+ gaitKqsqmgQhju46QTkz68EMsCUrF1/rifNEKMYshtKCITWaYPOQSkoeyfAi6wKjoVET
+ +RV+3WJCXMB9MnbSPOshXIqyAIz5L6ddatHOzydF4PiZvaMgnLckU+ts1R8nq4hSQIgL
+ N4km4kcoayZ/9zu9w6F2o0EjVxK30MqKNtVh2HWvuYzST4lkLecWrf1uZL6GYJJKQNbl
+ bmYxnt6kQ/P3zBtRJSm08tKGpAJTOfHXdt0HGF5ibpJZiIRI6ggrnMSLsXRo58e32/xP
+ S/Fw==
+X-Gm-Message-State: AOJu0YwBevBAcV5X1PQDaUokmXCXYj4/iKpP2iB8RyosYQmqXazUXSCQ
+ PJfLM8uxqc2FP0ddyo6JcvtMufvRcklhJjFWrWekGG7u+uQC0tIsipsIRDSGPLsyvHOkgvBKptC
+ oOIpbiiPjXOdIUWDg8ROaRP/MjDCVDfvtD8i87tXIlA==
+X-Gm-Gg: AfdE7cmY1sBxrFMziCfHia0IpAt3FxiumG4iZeN2y1o/HLMyhFNdBoVuRt5q2KYMnMO
+ 90MJN6yY2PS0bkAhqnOBr+R5l8kj8x0uQcgiLfn9pDHGN3/servEJ2SsSJEFcXps771Nn5oxwrZ
+ nRBsjvd3hFU8k+Piz5go1e7vYSdZX+Ew6eIjdbq+fM5vkZWDICvv7vWe8803CArUfgJToFSLF4Y
+ yC2vOhYxtsoQa/wJs7cfh1K08TH3eVo0Bl5M0SRSh5H5MGG+ps37C3SMoqAuMxVj06GWirOxcQh
+ kkZ1EyiT83ATEK0=
+X-Received: by 2002:a05:6402:a294:20b0:698:bf45:cd45 with SMTP id
+ 4fb4d7f45d1cf-698bf45ce42mr950533a12.17.1783058684385; Thu, 02 Jul 2026
+ 23:04:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260629165954.1018123-1-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260629165954.1018123-1-daniel.barboza@oss.qualcomm.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 3 Jul 2026 15:37:31 +1000
-X-Gm-Features: AVVi8Cfbd-3OZwnxzxdkhinTU_9CkJEKeW5OelNysCWLTS-1WjSaKO7Lf0I9jsw
-Message-ID: <CAKmqyKOzznSG8wNjmCLyroArEXvp0FirteP03h-1DKZ9RFRPDg@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv/riscv-iommu-sys.c: record fault on
- IOMMU-generated MSI write
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
- andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+From: Danielle Lam <danlam@g.hmc.edu>
+Date: Fri, 3 Jul 2026 13:04:32 +0700
+X-Gm-Features: AVVi8CdkziVE1w7O84ivvCdfRQLNBT_7ovo05dKc9LMwnoOhfxMLcnSat6rPLAM
+Message-ID: <CABoArmZgZN+s6Mha7Y=8WPcWmwwj9f4Yq-tU3zwPJZGA1mq8eA@mail.gmail.com>
+Subject: [PATCH] target/riscv: fix amocas with rd = x0 followed by beq
+ involving x0 is not taken when it should be
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
+ zhiwei_liu@linux.alibaba.com
+Content-Type: multipart/alternative; boundary="0000000000007f2b180655aeb3fb"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=danlam@g.hmc.edu; helo=mail-ed1-x52f.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -121,99 +107,236 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 30, 2026 at 3:02=E2=80=AFAM Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
->
-> The riscv-iommu spec requires that the IOMMU records its own generated
-> MSI write faults.
->
-> Fixes: 01c1caa9d1 ("hw/riscv/virt.c, riscv-iommu-sys.c: add MSIx support"=
-)
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3572
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+--0000000000007f2b180655aeb3fb
+Content-Type: text/plain; charset="UTF-8"
 
-Thanks!
+From 048ca4fcaa826f0ba025b5da5087534939dc74bd Mon Sep 17 00:00:00 2001
+From: Danielle Lam <danlam@g.hmc.edu>
+Date: Fri, 3 Jul 2026 03:34:29 +0100
+Subject: [PATCH] target/riscv: fix amocas with rd = x0 followed by beq
+ involving x0 is not taken when it should be
 
-Applied to riscv-to-apply.next
+amocas.{w,d,q,b,h} implement compare and swap by reusing rd current value
+as both comparator input and as the output that tcg_gen_atomic_cmpxchg_*
+writes the old memory into. Before the fix, ret == cmpv and we name that
+variable dest. When rd = x0, dest was ctx->zero. Then since ret == cmpv in
+the first place, the atomic op overwrites ret with ctx->zero which is not
+the same zero value. Any later instructions that refer back to ret for the
+initial zero value which is now changed, resulting in 0xbaaaaaad00000000.
 
-Alistair
+The fix is to use different variables for ret and cmpv and assign that to
+atomic op to run.
 
-> ---
->  hw/riscv/riscv-iommu-sys.c | 16 +++++++++++++++-
->  hw/riscv/riscv-iommu.c     |  3 +--
->  hw/riscv/riscv-iommu.h     |  1 +
->  3 files changed, 17 insertions(+), 3 deletions(-)
->
-> diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
-> index bf87b0b4ea..3314adeed2 100644
-> --- a/hw/riscv/riscv-iommu-sys.c
-> +++ b/hw/riscv/riscv-iommu-sys.c
-> @@ -26,6 +26,7 @@
->  #include "qemu/host-utils.h"
->  #include "qemu/module.h"
->  #include "qom/object.h"
-> +#include "target/riscv/cpu_bits.h"
->  #include "trace.h"
->
->  #include "riscv-iommu.h"
-> @@ -143,7 +144,20 @@ static void riscv_iommu_sysdev_send_MSI(RISCVIOMMUSt=
-ateSys *s,
->
->      address_space_stl_le(&address_space_memory, msi_addr,
->                           msi_data, MEMTXATTRS_UNSPECIFIED, &result);
-> -    trace_riscv_iommu_sys_msi_sent(vector, msi_addr, msi_data, result);
-> +
-> +    if (result =3D=3D MEMTX_OK) {
-> +        trace_riscv_iommu_sys_msi_sent(vector, msi_addr, msi_data, resul=
-t);
-> +    } else {
-> +        /* Record an access fault error in the fault queue */
-> +        struct riscv_iommu_fq_record ev =3D { 0 };
-> +        RISCVIOMMUState *iommu =3D &s->iommu;
-> +
-> +        ev.hdr =3D set_field(ev.hdr, RISCV_IOMMU_FQ_HDR_CAUSE,
-> +                           RISCV_IOMMU_FQ_CAUSE_MSI_WR_FAULT);
-> +        ev.hdr =3D set_field(ev.hdr, RISCV_IOMMU_FQ_HDR_TTYPE,
-> +                           RISCV_IOMMU_FQ_TTYPE_UADDR_WR);
-> +        riscv_iommu_fault(iommu, &ev);
-> +    }
->  }
->
->  static void riscv_iommu_sysdev_notify(RISCVIOMMUState *iommu,
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index c9687e01a8..a962926688 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -118,8 +118,7 @@ void riscv_iommu_notify(RISCVIOMMUState *s, int vec_t=
-ype)
->      }
->  }
->
-> -static void riscv_iommu_fault(RISCVIOMMUState *s,
-> -                              struct riscv_iommu_fq_record *ev)
-> +void riscv_iommu_fault(RISCVIOMMUState *s, struct riscv_iommu_fq_record =
-*ev)
->  {
->      uint32_t ctrl =3D riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FQCSR);
->      uint32_t head =3D riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FQH) & s-=
->fq_mask;
-> diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-> index a778e86fb7..da70e8bfa8 100644
-> --- a/hw/riscv/riscv-iommu.h
-> +++ b/hw/riscv/riscv-iommu.h
-> @@ -103,6 +103,7 @@ void riscv_iommu_pci_setup_iommu(RISCVIOMMUState *iom=
-mu, PCIBus *bus,
->  void riscv_iommu_set_cap_igs(RISCVIOMMUState *s, riscv_iommu_igs_mode mo=
-de);
->  void riscv_iommu_reset(RISCVIOMMUState *s);
->  void riscv_iommu_notify(RISCVIOMMUState *s, int vec_type);
-> +void riscv_iommu_fault(RISCVIOMMUState *s, struct riscv_iommu_fq_record =
-*ev);
->
->  typedef struct RISCVIOMMUContext RISCVIOMMUContext;
->  /* Device translation context state. */
-> --
-> 2.43.0
->
->
+**TESTING**
+gen_cmpxchg
+.d was tested and it passed. .w/.b/.h use the same logic so the fix was
+similar.
+
+gen_cmpxchg64
+.d was not tested
+
+trans_amocas_q
+.q had its own custom test: test_amocasq.S
+
+.section .text
+.globl _start
+_start:
+    la      t0, scratch
+    li      t1, 0x1111
+    li      t2, 0x2222
+    sd      t1, 0(t0)
+    sd      t2, 8(t0)
+
+    li      a0, 0x3333
+    li      a1, 0x4444
+    amocas.q x0, a0, (t0)
+
+    addi    a2, x0, 0
+
+spin:
+    j       spin
+
+.section .bss
+.align 4
+scratch:
+    .space 16
+
+Then searching the trace log:
+grep -n "x12/a2" amocasq-test.trace.log
+
+I found that all matches read zero.
+10612696: x12/a2   0 x13/a3   0 x14/a4   0 x15/a5   0
+...
+10613892: x12/a2   0 x13/a3   0 x14/a4   0 x15/a5   0
+
+Run against the unpatched code, a2 read back as 0x2222. This confirms the
+test run as intended and the fix works.
+
+Signed-off-by: Danielle Lam <danlam@g.hmc.edu>
+---
+ target/riscv/insn_trans/trans_rvzacas.c.inc | 13 ++++++++-----
+ target/riscv/translate.c                    |  5 +++--
+ 2 files changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc
+b/target/riscv/insn_trans/trans_rvzacas.c.inc
+index 79bca1e957..867f5e5ade 100644
+--- a/target/riscv/insn_trans/trans_rvzacas.c.inc
++++ b/target/riscv/insn_trans/trans_rvzacas.c.inc
+@@ -72,13 +72,14 @@ static bool gen_cmpxchg64(DisasContext *ctx, arg_atomic
+*a, MemOp mop)
+         return false;
+     }
+
+-    TCGv_i64 dest = get_gpr_pair(ctx, a->rd);
+     TCGv src1 = get_address(ctx, a->rs1, 0);
+     TCGv_i64 src2 = get_gpr_pair(ctx, a->rs2);
++    TCGv_i64 cmpv = get_gpr_pair(ctx, a->rd);
++    TCGv_i64 dest = tcg_temp_new_i64();
+
+     mop |= ctx->mo_endianness;
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+-    tcg_gen_atomic_cmpxchg_i64(dest, src1, dest, src2, ctx->mem_idx, mop);
++    tcg_gen_atomic_cmpxchg_i64(dest, src1, cmpv, src2, ctx->mem_idx, mop);
+
+     gen_set_gpr_pair(ctx, a->rd, dest);
+     return true;
+@@ -117,13 +118,15 @@ static bool trans_amocas_q(DisasContext *ctx,
+arg_amocas_q *a)
+     TCGv_i128 src2 = tcg_temp_new_i128();
+     TCGv_i64 src2l = get_gpr(ctx, a->rs2, EXT_NONE);
+     TCGv_i64 src2h = get_gpr(ctx, a->rs2 == 0 ? 0 : a->rs2 + 1, EXT_NONE);
+-    TCGv_i64 destl = get_gpr(ctx, a->rd, EXT_NONE);
+-    TCGv_i64 desth = get_gpr(ctx, a->rd == 0 ? 0 : a->rd + 1, EXT_NONE);
++    TCGv_i64 cmpl = get_gpr(ctx, a->rd, EXT_NONE);
++    TCGv_i64 cmph = get_gpr(ctx, a->rd == 0 ? 0 : a->rd + 1, EXT_NONE);
++    TCGv_i64 destl = tcg_temp_new_i64();
++    TCGv_i64 desth = tcg_temp_new_i64();
+     MemOp memop = MO_ALIGN | MO_UO;
+
+     memop |= ctx->mo_endianness;
+     tcg_gen_concat_i64_i128(src2, src2l, src2h);
+-    tcg_gen_concat_i64_i128(dest, destl, desth);
++    tcg_gen_concat_i64_i128(dest, cmpl, cmph);
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+     tcg_gen_atomic_cmpxchg_i128(dest, src1, dest, src2, ctx->mem_idx,
+memop);
+
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 9684dbe752..62a9af9b56 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1166,13 +1166,14 @@ static bool gen_amo(DisasContext *ctx, arg_atomic
+*a,
+
+ static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
+ {
+-    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
+     TCGv src1 = get_address(ctx, a->rs1, 0);
+     TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++    TCGv cmpv = get_gpr(ctx, a->rd, EXT_NONE);
++    TCGv dest = dest_gpr(ctx, a->rd);
+
+     mop |= ctx->mo_endianness;
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+-    tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop);
++    tcg_gen_atomic_cmpxchg_tl(dest, src1, cmpv, src2, ctx->mem_idx, mop);
+
+     gen_set_gpr(ctx, a->rd, dest);
+     return true;
+-- 
+2.47.3
+
+--0000000000007f2b180655aeb3fb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">From 048ca4fcaa826f0ba025b5da5087534939dc=
+74bd Mon Sep 17 00:00:00 2001<br>From: Danielle Lam &lt;<a href=3D"mailto:d=
+anlam@g.hmc.edu" target=3D"_blank">danlam@g.hmc.edu</a>&gt;<br>Date: Fri, 3=
+ Jul 2026 03:34:29 +0100<br>Subject: [PATCH] target/riscv: fix amocas with =
+rd =3D x0 followed by beq<br>=C2=A0involving x0 is not taken when it should=
+ be<br><br>amocas.{w,d,q,b,h} implement compare and swap by reusing rd curr=
+ent value as both comparator input and as the output that tcg_gen_atomic_cm=
+pxchg_* writes the old memory into. Before the fix, ret =3D=3D cmpv and we =
+name that variable dest. When rd =3D x0, dest was ctx-&gt;zero. Then since =
+ret =3D=3D cmpv in the first place, the atomic op overwrites ret with ctx-&=
+gt;zero which is not the same zero value. Any later instructions that refer=
+ back to ret for the initial zero value which is now changed, resulting in =
+0xbaaaaaad00000000.<br><br>The fix is to use different variables for ret an=
+d cmpv and assign that to atomic op to run.<br><br>**TESTING**<br>gen_cmpxc=
+hg<br>.d was tested and it passed. .w/.b/.h use the same logic so the fix w=
+as similar.<br><br>gen_cmpxchg64<br>.d was not tested<br><br>trans_amocas_q=
+<br>.q had its own custom test: test_amocasq.S<br><br>.section .text<br>.gl=
+obl _start<br>_start:<br>=C2=A0 =C2=A0 la =C2=A0 =C2=A0 =C2=A0t0, scratch<b=
+r>=C2=A0 =C2=A0 li =C2=A0 =C2=A0 =C2=A0t1, 0x1111<br>=C2=A0 =C2=A0 li =C2=
+=A0 =C2=A0 =C2=A0t2, 0x2222<br>=C2=A0 =C2=A0 sd =C2=A0 =C2=A0 =C2=A0t1, 0(t=
+0)<br>=C2=A0 =C2=A0 sd =C2=A0 =C2=A0 =C2=A0t2, 8(t0)<br><br>=C2=A0 =C2=A0 l=
+i =C2=A0 =C2=A0 =C2=A0a0, 0x3333<br>=C2=A0 =C2=A0 li =C2=A0 =C2=A0 =C2=A0a1=
+, 0x4444<br>=C2=A0 =C2=A0 amocas.q x0, a0, (t0)<br><br>=C2=A0 =C2=A0 addi =
+=C2=A0 =C2=A0a2, x0, 0<br><br>spin:<br>=C2=A0 =C2=A0 j =C2=A0 =C2=A0 =C2=A0=
+ spin<br><br>.section .bss<br>.align 4<br>scratch:<br>=C2=A0 =C2=A0 .space =
+16<br><br>Then searching the trace log:<br>grep -n &quot;x12/a2&quot; amoca=
+sq-test.trace.log<br><br>I found that all matches read zero.<br>10612696: x=
+12/a2 =C2=A0 0 x13/a3 =C2=A0 0 x14/a4 =C2=A0 0 x15/a5 =C2=A0 0<br>...<br>10=
+613892: x12/a2 =C2=A0 0 x13/a3 =C2=A0 0 x14/a4 =C2=A0 0 x15/a5 =C2=A0 0<br>=
+<br>Run against the unpatched code, a2 read back as 0x2222. This confirms t=
+he test run as intended and the fix works.<br><br>Signed-off-by: Danielle L=
+am &lt;<a href=3D"mailto:danlam@g.hmc.edu" target=3D"_blank">danlam@g.hmc.e=
+du</a>&gt;<br>---<br>=C2=A0target/riscv/insn_trans/trans_rvzacas.c.inc | 13=
+ ++++++++-----<br>=C2=A0target/riscv/translate.c =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A05 +++--<br>=C2=A02 fil=
+es changed, 11 insertions(+), 7 deletions(-)<br><br>diff --git a/target/ris=
+cv/insn_trans/trans_rvzacas.c.inc b/target/riscv/insn_trans/trans_rvzacas.c=
+.inc<br>index 79bca1e957..867f5e5ade 100644<br>--- a/target/riscv/insn_tran=
+s/trans_rvzacas.c.inc<br>+++ b/target/riscv/insn_trans/trans_rvzacas.c.inc<=
+br>@@ -72,13 +72,14 @@ static bool gen_cmpxchg64(DisasContext *ctx, arg_ato=
+mic *a, MemOp mop)<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return false;<br>=
+=C2=A0 =C2=A0 =C2=A0}<br>=C2=A0<br>- =C2=A0 =C2=A0TCGv_i64 dest =3D get_gpr=
+_pair(ctx, a-&gt;rd);<br>=C2=A0 =C2=A0 =C2=A0TCGv src1 =3D get_address(ctx,=
+ a-&gt;rs1, 0);<br>=C2=A0 =C2=A0 =C2=A0TCGv_i64 src2 =3D get_gpr_pair(ctx, =
+a-&gt;rs2);<br>+ =C2=A0 =C2=A0TCGv_i64 cmpv =3D get_gpr_pair(ctx, a-&gt;rd)=
+;<br>+ =C2=A0 =C2=A0TCGv_i64 dest =3D tcg_temp_new_i64();<br>=C2=A0<br>=C2=
+=A0 =C2=A0 =C2=A0mop |=3D ctx-&gt;mo_endianness;<br>=C2=A0 =C2=A0 =C2=A0dec=
+ode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);<br>- =C2=A0 =C2=A0tcg_gen_at=
+omic_cmpxchg_i64(dest, src1, dest, src2, ctx-&gt;mem_idx, mop);<br>+ =C2=A0=
+ =C2=A0tcg_gen_atomic_cmpxchg_i64(dest, src1, cmpv, src2, ctx-&gt;mem_idx, =
+mop);<br>=C2=A0<br>=C2=A0 =C2=A0 =C2=A0gen_set_gpr_pair(ctx, a-&gt;rd, dest=
+);<br>=C2=A0 =C2=A0 =C2=A0return true;<br>@@ -117,13 +118,15 @@ static bool=
+ trans_amocas_q(DisasContext *ctx, arg_amocas_q *a)<br>=C2=A0 =C2=A0 =C2=A0=
+TCGv_i128 src2 =3D tcg_temp_new_i128();<br>=C2=A0 =C2=A0 =C2=A0TCGv_i64 src=
+2l =3D get_gpr(ctx, a-&gt;rs2, EXT_NONE);<br>=C2=A0 =C2=A0 =C2=A0TCGv_i64 s=
+rc2h =3D get_gpr(ctx, a-&gt;rs2 =3D=3D 0 ? 0 : a-&gt;rs2 + 1, EXT_NONE);<br=
+>- =C2=A0 =C2=A0TCGv_i64 destl =3D get_gpr(ctx, a-&gt;rd, EXT_NONE);<br>- =
+=C2=A0 =C2=A0TCGv_i64 desth =3D get_gpr(ctx, a-&gt;rd =3D=3D 0 ? 0 : a-&gt;=
+rd + 1, EXT_NONE);<br>+ =C2=A0 =C2=A0TCGv_i64 cmpl =3D get_gpr(ctx, a-&gt;r=
+d, EXT_NONE);<br>+ =C2=A0 =C2=A0TCGv_i64 cmph =3D get_gpr(ctx, a-&gt;rd =3D=
+=3D 0 ? 0 : a-&gt;rd + 1, EXT_NONE);<br>+ =C2=A0 =C2=A0TCGv_i64 destl =3D t=
+cg_temp_new_i64();<br>+ =C2=A0 =C2=A0TCGv_i64 desth =3D tcg_temp_new_i64();=
+<br>=C2=A0 =C2=A0 =C2=A0MemOp memop =3D MO_ALIGN | MO_UO;<br>=C2=A0<br>=C2=
+=A0 =C2=A0 =C2=A0memop |=3D ctx-&gt;mo_endianness;<br>=C2=A0 =C2=A0 =C2=A0t=
+cg_gen_concat_i64_i128(src2, src2l, src2h);<br>- =C2=A0 =C2=A0tcg_gen_conca=
+t_i64_i128(dest, destl, desth);<br>+ =C2=A0 =C2=A0tcg_gen_concat_i64_i128(d=
+est, cmpl, cmph);<br>=C2=A0 =C2=A0 =C2=A0decode_save_opc(ctx, RISCV_UW2_ALW=
+AYS_STORE_AMO);<br>=C2=A0 =C2=A0 =C2=A0tcg_gen_atomic_cmpxchg_i128(dest, sr=
+c1, dest, src2, ctx-&gt;mem_idx, memop);<br>=C2=A0<br>diff --git a/target/r=
+iscv/translate.c b/target/riscv/translate.c<br>index 9684dbe752..62a9af9b56=
+ 100644<br>--- a/target/riscv/translate.c<br>+++ b/target/riscv/translate.c=
+<br>@@ -1166,13 +1166,14 @@ static bool gen_amo(DisasContext *ctx, arg_atom=
+ic *a,<br>=C2=A0<br>=C2=A0static bool gen_cmpxchg(DisasContext *ctx, arg_at=
+omic *a, MemOp mop)<br>=C2=A0{<br>- =C2=A0 =C2=A0TCGv dest =3D get_gpr(ctx,=
+ a-&gt;rd, EXT_NONE);<br>=C2=A0 =C2=A0 =C2=A0TCGv src1 =3D get_address(ctx,=
+ a-&gt;rs1, 0);<br>=C2=A0 =C2=A0 =C2=A0TCGv src2 =3D get_gpr(ctx, a-&gt;rs2=
+, EXT_NONE);<br>+ =C2=A0 =C2=A0TCGv cmpv =3D get_gpr(ctx, a-&gt;rd, EXT_NON=
+E);<br>+ =C2=A0 =C2=A0TCGv dest =3D dest_gpr(ctx, a-&gt;rd);<br>=C2=A0<br>=
+=C2=A0 =C2=A0 =C2=A0mop |=3D ctx-&gt;mo_endianness;<br>=C2=A0 =C2=A0 =C2=A0=
+decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);<br>- =C2=A0 =C2=A0tcg_gen=
+_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx-&gt;mem_idx, mop);<br>+ =C2=
+=A0 =C2=A0tcg_gen_atomic_cmpxchg_tl(dest, src1, cmpv, src2, ctx-&gt;mem_idx=
+, mop);<br>=C2=A0<br>=C2=A0 =C2=A0 =C2=A0gen_set_gpr(ctx, a-&gt;rd, dest);<=
+br>=C2=A0 =C2=A0 =C2=A0return true;<br>-- <br>2.47.3<br><div><br></div></di=
+v>
+</div>
+
+--0000000000007f2b180655aeb3fb--
 
