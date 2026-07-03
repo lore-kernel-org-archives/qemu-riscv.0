@@ -4,93 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF698C44500
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:25:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8745C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:38:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfWMZ-0005W8-UD; Fri, 03 Jul 2026 01:22:55 -0400
+	id 1wfWbJ-0003Ir-78; Fri, 03 Jul 2026 01:38:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wfWMW-0005TL-La; Fri, 03 Jul 2026 01:22:53 -0400
-Received: from www3579.sakura.ne.jp ([49.212.243.89])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wfWMS-0005rz-4H; Fri, 03 Jul 2026 01:22:52 -0400
-Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp
- [133.11.54.183]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 6635LT8U018373
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 3 Jul 2026 14:21:46 +0900 (JST)
- (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=5vN8LLN1cwVkJSeHOFH42uOAevgNgauoNhfEjaG1Qa4=; 
- c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
- h=From:Message-Id:To:Subject:Date;
- s=rs20250326; t=1783056106; v=1;
- b=BsX3PEyPKdeLkzVfmBzo06LGKElOOo4+ah4cn6ElKvQv6pS3I84i72LCh2Ygd+Q+
- KDaWQ2m+tZvx46uoqZBXBA4+Vty4ktd2u9uauB1cfyhLfLoaBEnOYKKv9+yWx+p6
- 3i0Eas/wc80ZCw251oDLMWVlgt/Vx1XwCf/TOiXxicyTTNmn2pAT8fE1RMmaLcWX
- 3p8uy0kElZYeIjYLDbBDv0L+dDdmMW/+7Omnq9KGsCivqBGdFhH0wzbn5P+3pBFL
- RS7JDgp5oZl6wxwExWswamp7PU2OUWFfa3kxg/WDgcGq16bt+dUCBvBCdocCqspz
- XyyALYQIlcPWHOF0OvmrhQ==
-From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Fri, 03 Jul 2026 14:19:23 +0900
-Subject: [PATCH v2 7/7] migration/ram: Assert RAMBlock stability while
- streaming RAM
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wfWbE-0003IB-4K
+ for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 01:38:05 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wfWbB-0001Q6-G9
+ for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 01:38:03 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-69531108f25so378075a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 22:37:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783057078; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Xs4AJgE/KWZEPmAJLb+yIcByAnup6Ny5sZIAU/VsrU9tDAoLLmsgU4/mGrTeYvvHe8
+ +vs5SJzI5+Q0TtY4IrJ1SPbKC5C/3Esf+qDhT/kTyLSijxwD6IlR8572itarVjPNQIAb
+ tzkUw3eEr/OmvwnilgwVfL5G+DHqwJBSr0nB2rBgqWPcN8ClFgw67Zu8zGAl5gsm4wlQ
+ Y3rE2nFgaYjoGIwSzehFElHOP14w7dIh7Q5q9shpLHV4pJKdmV/vlL7sa8mIeaKkiT3K
+ /BvG8N8XRlr792wjJxEJ9Ybs2QDzK0hM0MUP1hjaW5xJWQY19UvqwVl17oZdvlciTDCE
+ uxlA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=GivYgMkXrvPeyJM6z4daeIyp29wkIg8ZlMKrnTpJvsQ=;
+ fh=qiBrum0ZZa9wQZfumq7uIdWuJz+oJAR7hOTIkwb15Jc=;
+ b=Iy5MxEurMBOU3Kp/YO2mGKM5oVPH09JAfoeDXfGXx+aQSMPDw4s6rkGPjwU31PmPyJ
+ vrvPBsCkNtYNQXGkF8agMNvEEMcsIMPn5pdepM4rqkL6PoOAC1ptwko2Lua5n9mQN8Vs
+ nN1GEPwXhRPflNcqT+gys1abiSQM97dvHEdqjIxtWAQxu1+t9xAuwWGJ5JoX/ZBqdyXc
+ X1z2wP1nHkoaZaaLbK2+J58OY+dqQpGm+78fY8jF4REAyR9VN2MgX/pQEldqpMXdnyOz
+ djz42U6Ev081fqWhI9R3pVYDC2am3HIGWvJhMPyjO8A9lP6RFN2qVaErVjrCRf8Ff4nw
+ Oylw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783057078; x=1783661878; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GivYgMkXrvPeyJM6z4daeIyp29wkIg8ZlMKrnTpJvsQ=;
+ b=dx1ePKwuXSoWaLT0Oq0jEVvGwhXsDiHje5yQhCKUzL5/2Lx9s6ZqbGmOkl2HIpT4l+
+ mVqQe/cchsKgExn1E08exbAC4dBH5mWA+s9eGlNGmjXAXt9ZC01s30fUS+QVG9a5M/N3
+ puIjySYqeDAmP+519yYXwVmZ+9+UxzopeSqw/PzrjNzwb+vWYSQgCnop0A6AS6yzUnsH
+ 8YWo6SLMth8rF2L65z5XVctvNJ4lpPyNw7sH3wSsbcOxF5wX2YkHErCSfU7/fYNEtvOE
+ BtpMVqpeFj4vBOraV4LqDoC3qQ29SvBTVRwM62KtnhJiVLTUhG9NhJVYTG6kJ11Dw3rQ
+ 5qxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783057078; x=1783661878;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=GivYgMkXrvPeyJM6z4daeIyp29wkIg8ZlMKrnTpJvsQ=;
+ b=G0EBp5pUH7rZzvp7YaUjtPKvpWaxgkDsInSYqhi2w96mrt9Y6w8VCB2LOmZtHdXFDH
+ cp0D+c3jPdumihk7FDK1+DqZ8jdZrjztdB+iQFadRmeTkgeJdLZv1lhW9yu6n5u6FzWq
+ 6HfygdXl8U4fPcWJfbVwb1RbcZl++IJB5CHzKpwTtSYudzsYbf3WB24gRvw+2ZgFY8mT
+ 6ge5KrMce3cLnGJbikYgrOT70qg7TxDRPhn7DYAgFKypBjGMzHi4quPGe5F1fl87Vdhv
+ 57X5uoUfnG7M5JOjrx04/MUNa2/+dlEVAmwlZLSvx3eRd93B2GyYk1BQMcHv/xiv/6mV
+ wi6A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrV/2IzOjR/8xcH0SNR5px1OQJ7q3PoRI6/mAp+IhBeD6Aj0z/n7W9t437dckAR/hoZ7LwQKZZlMJ8i@nongnu.org
+X-Gm-Message-State: AOJu0YyjfcDnh7TmmyilnCI9OrMQgx1/w7jjZW7S1ngwYRweYQk+U5Sq
+ qG0l31E9nyW+S8Iv4pkMfFIA/v2OafmYcmRqeJ3mcS7tXSYhIrK7Th1Dni/mQ6EcBRntRPubrLN
+ kw5pHNwfoWLf3dRG/0KcfprbD5EQyGxs=
+X-Gm-Gg: AfdE7cm5E+TkhF2EDCn+F+wG4eEZPFm5m+tHAB2zXaLnUS1YAQ9Kd/EoJRp5TAVL7rh
+ jCSk3y5W1Q7nh+hVNzbKYtWbtOVlgCOoODO357uEhr5EAZEzZDEQ8YN7Z5kQkVh72KicbRdmwXR
+ Ro8RfcqH8YIDuRqUlyiW/hJH1rQ/YHKprT4AL9Y/p3rbrw9dcysKM1dTD+skFy4x93xD/Wgf2kt
+ LqgY4bfWnGaAAp+7pNeRNxLdZ51Y9Ae9nE6gSLtZ881lMGGUaps5wJ7ohfDYI4fleV3uTWUxwu+
+ J/5iqPDCwnNCAC6S6/0VEBOpYW0=
+X-Received: by 2002:a05:6402:5409:b0:697:df42:2633 with SMTP id
+ 4fb4d7f45d1cf-6989f35319bmr3780592a12.24.1783057077863; Thu, 02 Jul 2026
+ 22:37:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260703-ram-v2-7-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
-References: <20260703-ram-v2-0-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
-In-Reply-To: <20260703-ram-v2-0-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
-To: qemu-devel@nongnu.org
-Cc: Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Zhao Liu <zhao1.liu@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Peter Xu <peterx@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Paolo Bonzini <pbonzini@redhat.com>, Reinoud Zandijk <reinoud@netbsd.org>,
- Marcelo Tosatti <mtosatti@redhat.com>, Alex Williamson <alex@shazbot.org>,
- =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>,
- qemu-block@nongnu.org, xen-devel@lists.xenproject.org,
- kvm@vger.kernel.org, Gerd Hoffmann <kraxel@redhat.com>,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, linux-edac@vger.kernel.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-X-Mailer: b4 0.16-dev-925f5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9631;
- i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
- bh=6rxiBJMURMDjjavfjxxSoOmIDh11hItlYvDbOT13ApM=;
- b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ5a725OdNgt3n132cuXK3IPcvbM95i8M/lib9V949hfxi
- 2+e9s7o6yhlYRDjYpAVU2RJKdrNrRFd+6kwIb4FZg4rE8gQBi5OAZiImCsjw8KbEy5yn/oeJTav
- meUWYw37tlkyRrvuyUSd/21sWsMbI8Dw35fBlYORNSrL/VeSf4bcXpujDyZKxTxJe8zvt3/93Qk
- neAE=
-X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
- fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
-Received-SPF: pass client-ip=49.212.243.89;
- envelope-from=odaki@rsg.ci.i.u-tokyo.ac.jp; helo=www3579.sakura.ne.jp
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+References: <20260629165954.1018123-1-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260629165954.1018123-1-daniel.barboza@oss.qualcomm.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 3 Jul 2026 15:37:31 +1000
+X-Gm-Features: AVVi8Cfbd-3OZwnxzxdkhinTU_9CkJEKeW5OelNysCWLTS-1WjSaKO7Lf0I9jsw
+Message-ID: <CAKmqyKOzznSG8wNjmCLyroArEXvp0FirteP03h-1DKZ9RFRPDg@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv/riscv-iommu-sys.c: record fault on
+ IOMMU-generated MSI write
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
+ andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x529.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,266 +121,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-RAM migration sends the RAMBlock list and sizes before transferring page
-contents. The RAM code cannot cope with migratable RAMBlocks being
-added, removed, renamed, made migratable/non-migratable, or resized
-while that stream is active, because the destination has already parsed
-the stream layout.
+On Tue, Jun 30, 2026 at 3:02=E2=80=AFAM Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
+>
+> The riscv-iommu spec requires that the IOMMU records its own generated
+> MSI write faults.
+>
+> Fixes: 01c1caa9d1 ("hw/riscv/virt.c, riscv-iommu-sys.c: add MSIx support"=
+)
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3572
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-Add RAMBlock notifier checks so such changes are caught immediately.
-Ignored RAMBlocks remain exempt because they are not represented in the
-RAM migration stream.
+Thanks!
 
-Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
----
- include/migration/misc.h |  2 +-
- migration/ram.c          | 94 ++++++++++++++++++++++++++++++++++--------------
- 2 files changed, 68 insertions(+), 28 deletions(-)
+Applied to riscv-to-apply.next
 
-diff --git a/include/migration/misc.h b/include/migration/misc.h
-index 3159a5e53c3c..91015524a83d 100644
---- a/include/migration/misc.h
-+++ b/include/migration/misc.h
-@@ -40,7 +40,7 @@ void precopy_remove_notifier(NotifierWithReturn *n);
- int precopy_notify(PrecopyNotifyReason reason, Error **errp);
- 
- void qemu_guest_free_page_hint(void *addr, size_t len);
--bool migrate_ram_is_ignored(RAMBlock *block);
-+bool migrate_ram_is_ignored(const RAMBlock *block);
- 
- /* migration/block.c */
- 
-diff --git a/migration/ram.c b/migration/ram.c
-index e1c191ec4383..3cfc1461f13e 100644
---- a/migration/ram.c
-+++ b/migration/ram.c
-@@ -224,7 +224,7 @@ static bool postcopy_preempt_active(void)
-     return migrate_postcopy_preempt() && migration_in_postcopy();
- }
- 
--bool migrate_ram_is_ignored(RAMBlock *block)
-+bool migrate_ram_is_ignored(const RAMBlock *block)
- {
-     MigMode mode = migrate_mode();
-     return !qemu_ram_is_migratable(block) ||
-@@ -364,6 +364,12 @@ struct RAMSrcPageRequest {
-     QSIMPLEQ_ENTRY(RAMSrcPageRequest) next_req;
- };
- 
-+typedef enum RAMStateStage {
-+    RAM_STATE_STAGE_ITERATING,
-+    RAM_STATE_STAGE_COMPLETING,
-+    RAM_STATE_STAGE_COMPLETED,
-+} RAMStateStage;
-+
- /* State of RAM for migration */
- struct RAMState {
-     /*
-@@ -398,8 +404,8 @@ struct RAMState {
-     uint64_t xbzrle_bytes_prev;
-     /* Are we really using XBZRLE (e.g., after the first round). */
-     bool xbzrle_started;
--    /* Are we on the last stage of migration */
--    bool last_stage;
-+    /* Migration stage */
-+    RAMStateStage stage;
- 
-     /* total handled target pages at the beginning of period */
-     uint64_t target_page_count_prev;
-@@ -635,7 +641,7 @@ static int save_xbzrle_page(RAMState *rs, PageSearchStatus *pss,
- 
-     if (!cache_is_cached(XBZRLE.cache, current_addr, generation)) {
-         xbzrle_counters.cache_miss++;
--        if (!rs->last_stage) {
-+        if (rs->stage == RAM_STATE_STAGE_ITERATING) {
-             if (cache_insert(XBZRLE.cache, current_addr, *current_data,
-                              generation) == -1) {
-                 return -1;
-@@ -674,7 +680,7 @@ static int save_xbzrle_page(RAMState *rs, PageSearchStatus *pss,
-      * Update the cache contents, so that it corresponds to the data
-      * sent, in all cases except where we skip the page.
-      */
--    if (!rs->last_stage && encoded_len != 0) {
-+    if (rs->stage == RAM_STATE_STAGE_ITERATING && encoded_len != 0) {
-         memcpy(prev_cached_page, XBZRLE.current_buf, TARGET_PAGE_SIZE);
-         /*
-          * In the case where we couldn't compress, ensure that the caller
-@@ -840,7 +846,8 @@ static inline bool migration_bitmap_clear_dirty(RAMState *rs,
-      *
-      * Do the same for postcopy due to the same reason.
-      */
--    if (!rs->last_stage && !migration_in_postcopy()) {
-+    if (rs->stage == RAM_STATE_STAGE_ITERATING &&
-+        !migration_in_postcopy()) {
-         /*
-          * Clear dirty bitmap if needed.  This _must_ be called before we
-          * send any of the page in the chunk because we need to make sure
-@@ -1316,7 +1323,7 @@ static int ram_save_page(RAMState *rs, PageSearchStatus *pss)
-     if (rs->xbzrle_started && !migration_in_postcopy()) {
-         pages = save_xbzrle_page(rs, pss, &p, current_addr,
-                                  block, offset);
--        if (!rs->last_stage) {
-+        if (rs->stage == RAM_STATE_STAGE_ITERATING) {
-             /* Can't send this cached data async, since the cache page
-              * might get updated before it gets to the wire
-              */
-@@ -2920,6 +2927,8 @@ static void ram_state_resume_prepare(RAMState *rs, QEMUFile *out)
-     RAMBlock *block;
-     uint64_t pages = 0;
- 
-+    rs->stage = RAM_STATE_STAGE_ITERATING;
-+
-     /*
-      * Postcopy is not using xbzrle/compression, so no need for that.
-      * Also, since source are already halted, we don't need to care
-@@ -3373,7 +3382,9 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
- 
-     trace_ram_save_complete(rs->migration_dirty_pages, 0);
- 
--    rs->last_stage = !migration_in_colo_state();
-+    if (!migration_in_colo_state()) {
-+        rs->stage = RAM_STATE_STAGE_COMPLETING;
-+    }
- 
-     WITH_RCU_READ_LOCK_GUARD() {
-         if (!migration_in_postcopy()) {
-@@ -3383,7 +3394,7 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
-         ret = rdma_registration_start(f, RAM_CONTROL_FINISH);
-         if (ret < 0) {
-             qemu_file_set_error(f, ret);
--            return ret;
-+            goto err;
-         }
- 
-         /* try transferring iterative blocks of memory */
-@@ -3400,7 +3411,8 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
-             }
-             if (pages < 0) {
-                 qemu_mutex_unlock(&rs->bitmap_mutex);
--                return pages;
-+                ret = pages;
-+                goto err;
-             }
-         }
-         qemu_mutex_unlock(&rs->bitmap_mutex);
-@@ -3408,7 +3420,7 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
-         ret = rdma_registration_stop(f, RAM_CONTROL_FINISH);
-         if (ret < 0) {
-             qemu_file_set_error(f, ret);
--            return ret;
-+            goto err;
-         }
-     }
- 
-@@ -3419,7 +3431,7 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
-          */
-         ret = multifd_ram_flush_and_sync(f);
-         if (ret < 0) {
--            return ret;
-+            goto err;
-         }
-     }
- 
-@@ -3428,10 +3440,10 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
- 
-         if (qemu_file_get_error(f)) {
-             Error *local_err = NULL;
--            int err = qemu_file_get_error_obj(f, &local_err);
-+            ret = qemu_file_get_error_obj(f, &local_err);
- 
-             error_reportf_err(local_err, "Failed to write bitmap to file: ");
--            return err;
-+            goto err;
-         }
-     }
- 
-@@ -3439,7 +3451,14 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
- 
-     trace_ram_save_complete(rs->migration_dirty_pages, 1);
- 
--    return qemu_fflush(f);
-+    ret = qemu_fflush(f);
-+
-+err:
-+    if (!migration_in_colo_state()) {
-+        rs->stage = RAM_STATE_STAGE_COMPLETED;
-+    }
-+
-+    return ret;
- }
- 
- static void ram_state_pending(void *opaque, MigPendingData *pending,
-@@ -4699,28 +4718,45 @@ static SaveVMHandlers savevm_ram_handlers = {
-     .save_postcopy_prepare = ram_save_postcopy_prepare,
- };
- 
-+static bool ram_migration_is_running(void)
-+{
-+    return ram_state && ram_state->stage != RAM_STATE_STAGE_COMPLETED;
-+}
-+
-+static void ram_mig_ram_block_set_migratable(RAMBlockNotifier *n,
-+                                             const RAMBlock *rb)
-+{
-+    assert(!ram_migration_is_running());
-+}
-+
-+static void ram_mig_ram_block_unset_migratable(RAMBlockNotifier *n,
-+                                               const RAMBlock *rb)
-+{
-+    assert(!ram_migration_is_running());
-+}
-+
-+static void ram_mig_ram_block_set_idstr(RAMBlockNotifier *n, const RAMBlock *rb)
-+{
-+    assert(!ram_migration_is_running() || migrate_ram_is_ignored(rb));
-+}
-+
-+static void ram_mig_ram_block_removed(RAMBlockNotifier *n, const RAMBlock *rb,
-+                                      void *host, size_t size, size_t max_size)
-+{
-+    assert(!rb || !ram_migration_is_running() || migrate_ram_is_ignored(rb));
-+}
-+
- static void ram_mig_ram_block_resized(RAMBlockNotifier *n, RAMBlock *rb,
-                                       size_t new_size)
- {
-     PostcopyState ps = postcopy_state_get();
--    Error *err = NULL;
-     ram_addr_t old_size = qemu_ram_get_used_length(rb);
- 
-     if (migrate_ram_is_ignored(rb)) {
-         return;
-     }
- 
--    if (migration_is_running()) {
--        /*
--         * Precopy code on the source cannot deal with the size of RAM blocks
--         * changing at random points in time - especially after sending the
--         * RAM block sizes in the migration stream, they must no longer change.
--         * Abort and indicate a proper reason.
--         */
--        error_setg(&err, "RAM block '%s' resized during precopy.", rb->idstr);
--        migrate_error_propagate(migrate_get_current(), err);
--        migration_cancel();
--    }
-+    assert(!ram_migration_is_running());
- 
-     switch (ps) {
-     case POSTCOPY_INCOMING_ADVISE:
-@@ -4754,6 +4790,10 @@ static void ram_mig_ram_block_resized(RAMBlockNotifier *n, RAMBlock *rb,
- }
- 
- static RAMBlockNotifier ram_mig_ram_notifier = {
-+    .ram_block_removed = ram_mig_ram_block_removed,
-+    .ram_block_set_migratable = ram_mig_ram_block_set_migratable,
-+    .ram_block_unset_migratable = ram_mig_ram_block_unset_migratable,
-+    .ram_block_set_idstr = ram_mig_ram_block_set_idstr,
-     .ram_block_resized = ram_mig_ram_block_resized,
- };
- 
+Alistair
 
--- 
-2.54.0
-
+> ---
+>  hw/riscv/riscv-iommu-sys.c | 16 +++++++++++++++-
+>  hw/riscv/riscv-iommu.c     |  3 +--
+>  hw/riscv/riscv-iommu.h     |  1 +
+>  3 files changed, 17 insertions(+), 3 deletions(-)
+>
+> diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
+> index bf87b0b4ea..3314adeed2 100644
+> --- a/hw/riscv/riscv-iommu-sys.c
+> +++ b/hw/riscv/riscv-iommu-sys.c
+> @@ -26,6 +26,7 @@
+>  #include "qemu/host-utils.h"
+>  #include "qemu/module.h"
+>  #include "qom/object.h"
+> +#include "target/riscv/cpu_bits.h"
+>  #include "trace.h"
+>
+>  #include "riscv-iommu.h"
+> @@ -143,7 +144,20 @@ static void riscv_iommu_sysdev_send_MSI(RISCVIOMMUSt=
+ateSys *s,
+>
+>      address_space_stl_le(&address_space_memory, msi_addr,
+>                           msi_data, MEMTXATTRS_UNSPECIFIED, &result);
+> -    trace_riscv_iommu_sys_msi_sent(vector, msi_addr, msi_data, result);
+> +
+> +    if (result =3D=3D MEMTX_OK) {
+> +        trace_riscv_iommu_sys_msi_sent(vector, msi_addr, msi_data, resul=
+t);
+> +    } else {
+> +        /* Record an access fault error in the fault queue */
+> +        struct riscv_iommu_fq_record ev =3D { 0 };
+> +        RISCVIOMMUState *iommu =3D &s->iommu;
+> +
+> +        ev.hdr =3D set_field(ev.hdr, RISCV_IOMMU_FQ_HDR_CAUSE,
+> +                           RISCV_IOMMU_FQ_CAUSE_MSI_WR_FAULT);
+> +        ev.hdr =3D set_field(ev.hdr, RISCV_IOMMU_FQ_HDR_TTYPE,
+> +                           RISCV_IOMMU_FQ_TTYPE_UADDR_WR);
+> +        riscv_iommu_fault(iommu, &ev);
+> +    }
+>  }
+>
+>  static void riscv_iommu_sysdev_notify(RISCVIOMMUState *iommu,
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index c9687e01a8..a962926688 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -118,8 +118,7 @@ void riscv_iommu_notify(RISCVIOMMUState *s, int vec_t=
+ype)
+>      }
+>  }
+>
+> -static void riscv_iommu_fault(RISCVIOMMUState *s,
+> -                              struct riscv_iommu_fq_record *ev)
+> +void riscv_iommu_fault(RISCVIOMMUState *s, struct riscv_iommu_fq_record =
+*ev)
+>  {
+>      uint32_t ctrl =3D riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FQCSR);
+>      uint32_t head =3D riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FQH) & s-=
+>fq_mask;
+> diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
+> index a778e86fb7..da70e8bfa8 100644
+> --- a/hw/riscv/riscv-iommu.h
+> +++ b/hw/riscv/riscv-iommu.h
+> @@ -103,6 +103,7 @@ void riscv_iommu_pci_setup_iommu(RISCVIOMMUState *iom=
+mu, PCIBus *bus,
+>  void riscv_iommu_set_cap_igs(RISCVIOMMUState *s, riscv_iommu_igs_mode mo=
+de);
+>  void riscv_iommu_reset(RISCVIOMMUState *s);
+>  void riscv_iommu_notify(RISCVIOMMUState *s, int vec_type);
+> +void riscv_iommu_fault(RISCVIOMMUState *s, struct riscv_iommu_fq_record =
+*ev);
+>
+>  typedef struct RISCVIOMMUContext RISCVIOMMUContext;
+>  /* Device translation context state. */
+> --
+> 2.43.0
+>
+>
 
