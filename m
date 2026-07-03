@@ -4,45 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11D69C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:23:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00698C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:23:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfWMe-0005ZK-G9; Fri, 03 Jul 2026 01:23:00 -0400
+	id 1wfWMf-0005Zq-T5; Fri, 03 Jul 2026 01:23:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wfWMY-0005VI-G2; Fri, 03 Jul 2026 01:22:54 -0400
+ id 1wfWMZ-0005WF-TZ; Fri, 03 Jul 2026 01:22:55 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wfWMW-0005w9-LJ; Fri, 03 Jul 2026 01:22:54 -0400
+ id 1wfWMX-0005w6-0j; Fri, 03 Jul 2026 01:22:55 -0400
 Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.183]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 6635LT8T018373
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 6635LT8N018373
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 3 Jul 2026 14:21:45 +0900 (JST)
+ Fri, 3 Jul 2026 14:21:42 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=6SxS8nVg3xnGkGVZhxJ3G3DZU8jRBJGr+RtAwqpbPdU=; 
+DKIM-Signature: a=rsa-sha256; bh=eRgDwmfqLOROSsM7iDfNfv4dTa1BcJ8KBiEORkeKTHc=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Message-Id:To:Subject:Date;
- s=rs20250326; t=1783056106; v=1;
- b=QgYN2xsCcD3xLna//lkUa8qytMBfIhKXr/m/42WJSe23dJFVmFc8yRSPhU5iHenl
- OZo6Vl9ITdMn+SLCFkupO4MY+6oQg9Sc+S0X+8aLSXo7WIg1kHpXhlL2Yn2aOZfy
- J2zWXQsg9T7VQmRg9umr+me0rHqZD634DFtCKEzEJC/Ay3/lp+gOBphyJ2UTlY8F
- J/WMZcB5vh7ReK9I2StGrBSGxpXdNQRufr2y3gfv80If2ATSAD/9pC9f6QzyjXiD
- g9wjXkQXuVaCnS4h3iqzXu843CfMCjL5FURg/d0yNvmc8z06Ey+Az1PSbDIt89b8
- cOfEwrXXkc073eh77wa3Hw==
+ s=rs20250326; t=1783056102; v=1;
+ b=JPcyGAj3IGq8xd9orzIITQJi+gi2gUCskbFRmBaBPLfurfUDsag8SmirzClB8To7
+ 0TrJohL3Gh/OxsWy8VmFmegHgpVTvRHuEn+tA6xBqRwIlF5B72DhpYw80LWjK49C
+ ZDUdV4fP1+p4SviIgGbM/rVEluugBRhaOQl2XwmxV2X3QSt6/Bq2saDPdUNW7fgR
+ 52RHLJBlEirIoo/jk4A9Ufs/pADk7oC6aVWWcCfCYC3aK6jj44WybkqR9Z5mtTWk
+ XrRrkrRhElS8A1rd+r2a8+hJKncVpMz8BkfkLh2r33DYO9iSzUaRaiVEDj8y7PUr
+ qBmT70n9/whlLtWnyZRQZg==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Fri, 03 Jul 2026 14:19:22 +0900
-Subject: [PATCH v2 6/7] migration/ram: Fix ram_save_complete() return value
+Subject: [PATCH v2 0/7] migration/ram: Assert RAMBlock stability while
+ streaming RAM
+Date: Fri, 03 Jul 2026 14:19:16 +0900
+Message-Id: <20260703-ram-v2-0-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260703-ram-v2-6-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
-References: <20260703-ram-v2-0-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
-In-Reply-To: <20260703-ram-v2-0-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2NQQqDMBBFryKzbkImFFu76j3ERYwTHUuNJCoV8
+ e6NtszqwftvNogUmCI8sg0CLRzZDwn0JQPbmaElwU1i0ErnKp0I5i0aSw6vTil0NSRzDOT4c1b
+ K6sdxrnuy0zE9jI7j5MN6vlnw8P5FxLO4oFDC6MZYlxfFDe/PEFtpWbKcxeRfq5fGyn6Eat/3L
+ +7bNhe1AAAA
+X-Change-ID: 20260606-ram-dcef14f001fb
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
@@ -73,13 +77,13 @@ Cc: Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 X-Mailer: b4 0.16-dev-925f5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=813;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2770;
  i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
- bh=/MegIW1B5Ph/z9o6j3vpknjkTxLfDtRU9G3pSaGuRSs=;
- b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ5a72+M7k1Jrb37eu8tUIZdTP/fDhrsTP61dfWWHw81ej
- daUOadjOkpZGMS4GGTFFFlSinZza0TXfipMiG+BmcPKBDKEgYtTACbyWIGRYb35lvigt8rvKyvE
- 9bymzzeZZbXGY4aDYdXFyOD70p3r2xn+6cSvM9obe2Pl/b7mtusfv7tx/UrJSzz61v/wL9mbbfb
- WLAA=
+ bh=NNkYV0KyYReVgPGgyQOKUoe4QJmGzhT1a38kyn3oGx4=;
+ b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ5a72+0ve/+nVHHc23tBX1w+LfJai3yJbPn3vpW7OKeVz
+ T4QePFjRykLgxgXg6yYIktK0W5ujejaT4UJ8S0wc1iZQIYwcHEKwEROzGFkeLbAjTX068LrLueM
+ KswOfu42s9/yStvoa9CZhogPX4TWyDEyHFuz6vamT0kxGq9VE8uc3Vf8mGXD+dExUlaBL1hp15F
+ HXAA=
 X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
  fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
 Received-SPF: pass client-ip=49.212.243.89;
@@ -105,31 +109,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-ram_save_complete() and qemu_file_get_error_obj() are documented to
-return negative values on error, but ram_save_complete() inverts the
-sign of qemu_file_get_error_obj()'s return value. Remove the sign
-inversion.
+RAM migration sends the RAMBlock list and sizes before transferring page
+contents. The RAM code cannot cope with migratable RAMBlocks being
+added, removed, renamed, made migratable/non-migratable, or resized
+while that stream is active, because the destination has already parsed
+the stream layout.
+
+Add RAMBlock notifier checks so such changes are caught immediately.
+Ignored RAMBlocks remain exempt because they are not represented in the
+RAM migration stream.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- migration/ram.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v2:
+- Added patch "hw/nvram/fw_cfg: Remove acpi-mr-restore".
+- Added patch "hw/nvram/fw_cfg: Avoid resizing RAM at runtime".
+- Added patch "migration/ram: Fix ram_save_complete() return value".
+- Link to v1: https://lore.kernel.org/qemu-devel/20260611-ram-v1-0-a2dacf699718@rsg.ci.i.u-tokyo.ac.jp
 
-diff --git a/migration/ram.c b/migration/ram.c
-index 6bc7f705d31a..e1c191ec4383 100644
---- a/migration/ram.c
-+++ b/migration/ram.c
-@@ -3431,7 +3431,7 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
-             int err = qemu_file_get_error_obj(f, &local_err);
- 
-             error_reportf_err(local_err, "Failed to write bitmap to file: ");
--            return -err;
-+            return err;
-         }
-     }
- 
+---
+Akihiko Odaki (7):
+      hw/nvram/fw_cfg: Remove acpi-mr-restore
+      hw/nvram/fw_cfg: Avoid resizing RAM at runtime
+      system/memory: Remove the resized callback
+      system/physmem: Pass RAMBlock to RAMBlockNotifier callbacks
+      system/physmem: Notify RAMBlock migratable and idstr changes
+      migration/ram: Fix ram_save_complete() return value
+      migration/ram: Assert RAMBlock stability while streaming RAM
 
--- 
-2.54.0
+ include/hw/core/loader.h       |   1 +
+ include/hw/nvram/fw_cfg.h      |   5 +-
+ include/migration/misc.h       |   2 +-
+ include/system/memory.h        |   4 --
+ include/system/ramblock.h      |   7 +--
+ include/system/ramlist.h       |  24 ++++++----
+ block/block-ram-registrar.c    |   8 ++--
+ hw/acpi/ghes.c                 |   6 ++-
+ hw/acpi/vmgenid.c              |   1 +
+ hw/arm/virt-acpi-build.c       |   3 +-
+ hw/core/loader.c               |  14 +++---
+ hw/core/machine.c              |   1 -
+ hw/core/numa.c                 |  54 +++++++++++++++++----
+ hw/display/ramfb.c             |   2 +-
+ hw/i386/acpi-build.c           |   3 +-
+ hw/isa/lpc_ich9.c              |   2 +
+ hw/loongarch/virt-acpi-build.c |   3 +-
+ hw/misc/vmcoreinfo.c           |   3 +-
+ hw/nvram/fw_cfg.c              |  80 ++++++++++++++++++-------------
+ hw/riscv/virt-acpi-build.c     |   3 +-
+ hw/xen/xen-mapcache.c          |   6 +--
+ migration/ram.c                | 106 +++++++++++++++++++++++++++--------------
+ system/memory.c                |   7 +--
+ system/physmem.c               |  40 +++++++---------
+ target/i386/nvmm/nvmm-all.c    |   4 +-
+ target/i386/sev.c              |   8 ++--
+ util/vfio-helpers.c            |   7 +--
+ 27 files changed, 247 insertions(+), 157 deletions(-)
+---
+base-commit: b83371668192a705b878e909c5ae9c1233cbd5fb
+change-id: 20260606-ram-dcef14f001fb
+
+Best regards,
+--  
+Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 
 
