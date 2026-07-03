@@ -4,89 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5F0EC43458
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 11:53:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CB25C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 13:22:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfcRP-0006Js-QB; Fri, 03 Jul 2026 07:52:19 -0400
+	id 1wfdqS-00024K-OV; Fri, 03 Jul 2026 09:22:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phuong.lamthanhthao@gmail.com>)
- id 1wfXkr-0002lI-EG
- for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 02:52:05 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phuong.lamthanhthao@gmail.com>)
- id 1wfXko-0005Uh-CI
- for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 02:52:05 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2c9878bbe88so9058855ad.0
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 23:52:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wfdqR-000245-7J
+ for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 09:22:15 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wfdqP-00025j-N3
+ for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 09:22:14 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6637IZ8o3195362
+ for <qemu-riscv@nongnu.org>; Fri, 3 Jul 2026 13:22:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ pVHuRStHudNkoKHplW8emHlKSlT6Mn8WyW3SNIHJhMQ=; b=k8zYZcdoNUYdboo1
+ Esw3dLF12C0H5hRrfN2JOHjwIhB4GDNuPrp8AP27qkiOLkpNWD8lggRZ83OsHktI
+ KLgIh3qRVViEyJCOtKn7Wp4oDk7aw810SDUqNOTJFjyBgbkOaFKjlry2CDF28nIC
+ oke/3HzOGVebo86s71mcYaWOV8bX/HAhZWe0u2ZbN19bp99fpFkkONPDI/DyMBjv
+ wh7IodkJW4tyfts/NAw0H8tfOKU2saPn/ZxZAsHdYWrkI1iLcW5myz8KYtIm017p
+ 4M4qN9lehGsKsc3vdK06G4aXqqMiiUrSaH+sbB7hg/QWB1OgnKtnkxrG+JtR4l8A
+ GpmvJA==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f68jysbsk-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 03 Jul 2026 13:22:09 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-92158791d14so49784185a.2
+ for <qemu-riscv@nongnu.org>; Fri, 03 Jul 2026 06:22:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783061520; x=1783666320; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=M8kLYSgktLJ3ie5On1W2+Zuae5nVZDma9beK+vOmmMY=;
- b=RtY89xx/qtmVb64ee6SnMrs8loagBaWW4VsgJ7gErNImUTMufF/kWk/f8qyfK0fVlg
- k2BK+JAoli2oUCtkUbAgi556CLinkiWksaHjezVfhu/cOB+mcs9Zwyag70DHLxOtYJ2B
- IxxS8r4lHqeUQwqmNSzjWBVXTkvdcZ+lEp9tCFXj+uybD1AxiA1/qqp/IMJmW6Tkwf85
- Cg09mx7tTPtM0jl+6SnG+Oor3pXMYBlRiq5WP9UHlQFV+HCaiCkIxkRKysIYe+Qoy5gb
- ERHW8UyHNTXGoNSwJ8rOjcrWC7+zklvWqSNzKrVVHuMtSVTxfA+eZcoR5lnkP5f+gkxo
- qWIA==
+ d=oss.qualcomm.com; s=google; t=1783084928; x=1783689728; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=pVHuRStHudNkoKHplW8emHlKSlT6Mn8WyW3SNIHJhMQ=;
+ b=VBO2ZgzrRrMVLQeh11sV8ipTDg+NcuSeDXRB+F5BhBkLgIBDDrED8Ep9nEIvpPexwt
+ zHimz3p2ml+H4/oSjZQLfpVBYaakU7UmSAULePGrG6n11IXzdNeEjqSzUkmsmvvlOUny
+ O2qw9upiVAe6khC2sLskXUMQszTkB6SChp1nmrnvbZuI/FkS4ygfyXI07xLwMCOj+Gf0
+ JaDfJj/htt18m+DmG8M8xGcTorwtixH4YBjE2pMCQVHMJgRYuQdkA5E67hIX3P7FK7GW
+ 0bhv6l6Itq6jtLkkGsc2Zpt2RBeHXc899oUatSkPt2SobJkyzHUgkWUd9QeOe+ToMSyA
+ JYUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783061520; x=1783666320;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M8kLYSgktLJ3ie5On1W2+Zuae5nVZDma9beK+vOmmMY=;
- b=bjPOmSUAYxwpr0Ad7FMtH2INTSY7j7ZermCENvZkbKN0l9wnIsGPxNftgU2zSjFBqi
- KGLeCPmcbrMNOS4aNJCugOPDl5X3UyEggTzA53pX+a6OMgW9S2O2MRvTd+RCMQv1llou
- kXGEUwdvTf3y3AITVLb5lXitpCPrQbAs2J9l2a/ab2AZiiy232pTrCS2NKylxYF2EDO+
- cdu8mSZDtu4lxuLTFxFZp00DZr3H/evSEwi0imTo70NoDk8FjGUd/vNb275G5LOa1OBL
- PsR2lfYTc5KOperRrAmd/WLBnJSTIREtt9ScZTU0gctB+e135FoFfirxiN8as4qZ8xla
- rekQ==
-X-Gm-Message-State: AOJu0YxFjqhZoJj/i9LRIdQ3xgUKQr4pFB+HNyNIqsG3pBBWs8Uy9/0I
- 9yszsAj7IWEyGLHF5Zw3+Utj0DawASc/iW0EawFOjFvZEAvJFEGbAF98
-X-Gm-Gg: AfdE7cl+VIRTkDP29fLi48BX/8trtm226v9qmG70730/5zb2hZnkm6VGd/VXzRRN0wM
- NH3KDNQ627KzYpvxtAVISES9ZlVYzTaoyOzKjxDs0QVBZVgDxQYNtrIzo4dsAv/8f+qOUwAc0iM
- LJvxxpPDIjnoZFLL+NMnnqiCg1D+frk4M/1L8EDh64R23MVGm64TfcmxAk/t9e0vug/TFq+OtAA
- Yzo723UwndWWRLZEybg8dDPQfQmo3SEwtMDfLhpgAD/WDMlljIMlHCu5YOUui0nFH3AmqKo2x/Q
- ixwwIfv50FtKyMJVRSNL2FzaGaQP5Tl9BAxKO5Cfhyfn1gYT2s4NbpYiNjugS3twzGI35wr/z7j
- xl95iGXuwHdSKe1Ob7Oazc2BIDytMNb0utSbgvnxBlD568npUJVqal0xqp8w+A1bDP7Apbyok1h
- ItP5TLAne+760n1eGyYuYv3c3KbDWXqfxPoRkK
-X-Received: by 2002:a17:903:1b4f:b0:2c8:5de:a84e with SMTP id
- d9443c01a7336-2cacacc0634mr31964135ad.10.1783061520432; 
- Thu, 02 Jul 2026 23:52:00 -0700 (PDT)
-Received: from localhost.localdomain ([171.243.49.251])
+ d=1e100.net; s=20251104; t=1783084928; x=1783689728;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=pVHuRStHudNkoKHplW8emHlKSlT6Mn8WyW3SNIHJhMQ=;
+ b=gpiH4nWZYllaMFBIJNMdfk9DJCizneQxy3hmvHSI/foa+TOn5iifUxBJxolF9r/GJC
+ POBOOk+GJkPE+nXtmwcCx/0vhdj456ed4dQaDeGDH7Mj9Go23excjZPpTt+6yoAKaWKA
+ O421AUI2hbxCP/vljhengxLyLMsSDgdu6U9GPrzC+lafzpDv+eVsrTI6zzoc3SflOK3M
+ X2kv1ml13XHomookv8eu5pxfV5HSdbEGudmIiijPOt0oJNyC8EsldCg/XCBkOD41UPn9
+ BmJC6tIFy3wLmoCbnR61U69uCHsMtnC38T79KyW+ueWoCsdu6ho516Lo8iXJ3HdgmE/H
+ ZCew==
+X-Gm-Message-State: AOJu0Yzjcntow3cds8+V/gMBTFr9gtv9yb6RejNYIMBEZYjxUPA+iIVL
+ EgKB4odFQI6whucsu+crT4ScEwZv+ciW9SmfeZEV5AE/qdUHld6//KGMeFelXYHiz0+PshhbsRZ
+ +dLaw2D+Z5mWS7erz93QtuKZ9uphaTWrkFqGBcyr5u8YE1V8chnWk9bvYHA==
+X-Gm-Gg: AfdE7cn0/+hGHpUY3Fvedfwe0VwlWuauaffeqHRozfTaZmGMIla4etNzZLWRQEdhGxO
+ +5Y77Ybe35Iu1MHalRH3QfrT1VyMuSLB9QX80oW3R+HS51WFBoCQGRrAVYwl1WXH6B5MzbJnqJA
+ YE5yZLdwkZlqCl3I4Hi10abbfCF/GVqZ+3FDboZl49jRkNAdlJbii7buUQTv0ysOZcZOG+42vI6
+ GZvEQ5cryd6AuHj2gIBvmqx3YoqZ7rZlIy3ruFb9sIHJ+ElNn7Fldtmf20YRBBmfwwvM6LaiW4G
+ E51gCPocH4HNccQGr7oeyeXA6Ju7WezT3gFvQcGQqgXGrffzXfsfaJ4CuEcah7BpodHgAGws4Pm
+ Ficw8pCIGoeaIddwENF86jblJ+IbnfweS45b7FF0KPxEW
+X-Received: by 2002:a05:620a:269b:b0:92b:7420:bd7b with SMTP id
+ af79cd13be357-92e7b473345mr1225296085a.66.1783084928413; 
+ Fri, 03 Jul 2026 06:22:08 -0700 (PDT)
+X-Received: by 2002:a05:620a:269b:b0:92b:7420:bd7b with SMTP id
+ af79cd13be357-92e7b473345mr1225286885a.66.1783084927571; 
+ Fri, 03 Jul 2026 06:22:07 -0700 (PDT)
+Received: from [192.168.68.106] ([189.79.21.40])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13b3ececfe4sm17238693c88.8.2026.07.02.23.51.57
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 02 Jul 2026 23:52:00 -0700 (PDT)
-From: Danielle Lam <phuong.lamthanhthao@gmail.com>
-X-Google-Original-From: Danielle Lam <danlam@g.hmc.edu>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, Danielle Lam <danlam@g.hmc.edu>
-Subject: [PATCH] target/riscv: fix amocas with rd = x0 followed by beq
- involving x0 is not taken when it should be
-Date: Fri,  3 Jul 2026 13:51:52 +0700
-Message-ID: <20260703065152.23024-1-danlam@g.hmc.edu>
-X-Mailer: git-send-email 2.54.0
+ af79cd13be357-92e90cc18f1sm153855585a.40.2026.07.03.06.22.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 03 Jul 2026 06:22:07 -0700 (PDT)
+Message-ID: <da9d6da1-bc2a-4108-a522-5e8e41ad9c6f@oss.qualcomm.com>
+Date: Fri, 3 Jul 2026 10:22:02 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 06/24] target/riscv: move pmu.h to tcg subdir
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ Palmer Dabbelt <palmer@dabbelt.com>, Joel Stanley <joel@jms.id.au>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>
+References: <20260702135128.1188021-1-daniel.barboza@oss.qualcomm.com>
+ <20260702135128.1188021-7-daniel.barboza@oss.qualcomm.com>
+ <374abf50-4593-4888-bb9c-2ef731b6d7a8@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <374abf50-4593-4888-bb9c-2ef731b6d7a8@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=phuong.lamthanhthao@gmail.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAzMDEzMSBTYWx0ZWRfX/JLnlgUmS5f+
+ CvCuiKT/TDB52rs+pQxnJ8gAKdk2L1o9iK/BqVIdv0sNhpp4Wdk/1jdLRc1mWYjbEReSK7z03Rn
+ EipoWrdbbAXCZvvQjOCFEcjlmPhoJCdE+csowhulNYHOzX8pQbftxl4IuZUPHqW0KyV0Rb8KH7V
+ O0OHxF2Wv6ynbjb4PLJUQjgb+07PF0xO77RNykMEep++mVjBkMaGyWSReQxxWM0iDT1afCDx7ai
+ ytNR9JVLYR+lGX+wCv5P+YhtHZCn8Sxf9BU/LtZ4x1xw1VIcKSWeiEq1hFwePMJ9dGRVq9qR0Ym
+ ncdccU4KXfaCOaOOXRynLYWEejusDjhfQ6LoMYU4oz0Vevu72eMIyYPjyOGtY1mgMWR8yfsIbPY
+ nSIGpx3sEc5rMW2AhqgQ6jPweMwRUbWHHDiXG+mA+hJ3pubtCNy3WtqdZItjojwlJxi2K2+0Ejs
+ /yMgcsqTz2zV0LB/vJg==
+X-Proofpoint-GUID: PMmtqgs1gFy7lqUIsM4mkOrJX22tk899
+X-Authority-Analysis: v=2.4 cv=QbFWeMbv c=1 sm=1 tr=0 ts=6a47b781 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=2aFWFHZrbJ7EhV8P2DAA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22 a=xVlTc564ipvMDusKsbsT:22
+X-Proofpoint-ORIG-GUID: PMmtqgs1gFy7lqUIsM4mkOrJX22tk899
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAzMDEzMSBTYWx0ZWRfX8PkUWLu8SGxJ
+ fOt+mloMtPQRNodI3eJlsf6IoI4kQCoShSKVFIbg0aySNqPJhibSVPRarJsbXwyXL4r51rSv1DL
+ RAqrnowF4dbWEBhgVwe/ywD3eIJqt7I=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-07-03_02,2026-06-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 phishscore=0 malwarescore=0 suspectscore=0 clxscore=1015
+ bulkscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607030131
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 03 Jul 2026 07:52:18 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,121 +160,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-amocas.{w,d,q,b,h} implement compare and swap by reusing rd current value as both comparator input and as the output that tcg_gen_atomic_cmpxchg_* writes the old memory into. Before the fix, ret == cmpv and we name that variable dest. When rd = x0, dest was ctx->zero. Then since ret == cmpv in the first place, the atomic op overwrites ret with ctx->zero which is not the same zero value. Any later instructions that refer back to ret for the initial zero value which is now changed, resulting in 0xbaaaaaad00000000.
 
-The fix is to use different variables for ret and cmpv and assign that to atomic op to run.
 
-**TESTING**
-gen_cmpxchg
-.d was tested and it passed. .w/.b/.h use the same logic so the fix was similar.
+On 7/3/2026 7:44 AM, Philippe Mathieu-Daudé wrote:
+> On 2/7/26 15:51, Daniel Henrique Barboza wrote:
+>> riscv_pmu_generate_fdt_node() can be moved to fdt_common.c since it has
+>> no PMU TCG internals.
+>>
+>> With this change we can remove pmu.h from 'virt.c', which is now
+>> becoming a tcg header since we're moving it to the tcg subdir.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>> ---
+>>   hw/riscv/fdt-common.c         | 52 +++++++++++++++++++++++++++++++++++
+>>   hw/riscv/tt_atlantis.c        |  1 -
+>>   hw/riscv/virt.c               |  1 -
+>>   include/hw/riscv/fdt-common.h |  1 +
+>>   target/riscv/tcg/pmu.c        | 52 -----------------------------------
+>>   target/riscv/{ => tcg}/pmu.h  |  1 -
+>>   6 files changed, 53 insertions(+), 55 deletions(-)
+>>   rename target/riscv/{ => tcg}/pmu.h (95%)
+> 
+> Preferrably before patch #2 "target/riscv: move TCG only files to tcg
+> subdir" if not too much trouble:
 
-gen_cmpxchg64
-.d was not tested
+Done.  The helper is now being moved before patch #2 and pmu.h is now being
+moved in patch #2.
 
-trans_amocas_q
-.q had its own custom test: test_amocasq.S
+Thanks,
+Daniel
 
-.section .text
-.globl _start
-_start:
-    la      t0, scratch
-    li      t1, 0x1111
-    li      t2, 0x2222
-    sd      t1, 0(t0)
-    sd      t2, 8(t0)
-
-    li      a0, 0x3333
-    li      a1, 0x4444
-    amocas.q x0, a0, (t0)
-
-    addi    a2, x0, 0
-
-spin:
-    j       spin
-
-.section .bss
-.align 4
-scratch:
-    .space 16
-
-Then searching the trace log:
-grep -n "x12/a2" amocasq-test.trace.log
-
-I found that all matches read zero.
-10612696: x12/a2   0 x13/a3   0 x14/a4   0 x15/a5   0
-...
-10613892: x12/a2   0 x13/a3   0 x14/a4   0 x15/a5   0
-
-Run against the unpatched code, a2 read back as 0x2222. This confirms the test run as intended and the fix works.
-
-Signed-off-by: Danielle Lam <danlam@g.hmc.edu>
----
- target/riscv/insn_trans/trans_rvzacas.c.inc | 13 ++++++++-----
- target/riscv/translate.c                    |  5 +++--
- 2 files changed, 11 insertions(+), 7 deletions(-)
-
-diff --git a/target/riscv/insn_trans/trans_rvzacas.c.inc b/target/riscv/insn_trans/trans_rvzacas.c.inc
-index 79bca1e957..867f5e5ade 100644
---- a/target/riscv/insn_trans/trans_rvzacas.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzacas.c.inc
-@@ -72,13 +72,14 @@ static bool gen_cmpxchg64(DisasContext *ctx, arg_atomic *a, MemOp mop)
-         return false;
-     }
- 
--    TCGv_i64 dest = get_gpr_pair(ctx, a->rd);
-     TCGv src1 = get_address(ctx, a->rs1, 0);
-     TCGv_i64 src2 = get_gpr_pair(ctx, a->rs2);
-+    TCGv_i64 cmpv = get_gpr_pair(ctx, a->rd);
-+    TCGv_i64 dest = tcg_temp_new_i64();
- 
-     mop |= ctx->mo_endianness;
-     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
--    tcg_gen_atomic_cmpxchg_i64(dest, src1, dest, src2, ctx->mem_idx, mop);
-+    tcg_gen_atomic_cmpxchg_i64(dest, src1, cmpv, src2, ctx->mem_idx, mop);
- 
-     gen_set_gpr_pair(ctx, a->rd, dest);
-     return true;
-@@ -117,13 +118,15 @@ static bool trans_amocas_q(DisasContext *ctx, arg_amocas_q *a)
-     TCGv_i128 src2 = tcg_temp_new_i128();
-     TCGv_i64 src2l = get_gpr(ctx, a->rs2, EXT_NONE);
-     TCGv_i64 src2h = get_gpr(ctx, a->rs2 == 0 ? 0 : a->rs2 + 1, EXT_NONE);
--    TCGv_i64 destl = get_gpr(ctx, a->rd, EXT_NONE);
--    TCGv_i64 desth = get_gpr(ctx, a->rd == 0 ? 0 : a->rd + 1, EXT_NONE);
-+    TCGv_i64 cmpl = get_gpr(ctx, a->rd, EXT_NONE);
-+    TCGv_i64 cmph = get_gpr(ctx, a->rd == 0 ? 0 : a->rd + 1, EXT_NONE);
-+    TCGv_i64 destl = tcg_temp_new_i64();
-+    TCGv_i64 desth = tcg_temp_new_i64();
-     MemOp memop = MO_ALIGN | MO_UO;
- 
-     memop |= ctx->mo_endianness;
-     tcg_gen_concat_i64_i128(src2, src2l, src2h);
--    tcg_gen_concat_i64_i128(dest, destl, desth);
-+    tcg_gen_concat_i64_i128(dest, cmpl, cmph);
-     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
-     tcg_gen_atomic_cmpxchg_i128(dest, src1, dest, src2, ctx->mem_idx, memop);
- 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 9684dbe752..62a9af9b56 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1166,13 +1166,14 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
- 
- static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
- {
--    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
-     TCGv src1 = get_address(ctx, a->rs1, 0);
-     TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+    TCGv cmpv = get_gpr(ctx, a->rd, EXT_NONE);
-+    TCGv dest = dest_gpr(ctx, a->rd);
- 
-     mop |= ctx->mo_endianness;
-     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
--    tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop);
-+    tcg_gen_atomic_cmpxchg_tl(dest, src1, cmpv, src2, ctx->mem_idx, mop);
- 
-     gen_set_gpr(ctx, a->rd, dest);
-     return true;
--- 
-2.47.3
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> 
 
 
