@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E6E7C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF698C44500
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:25:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfWMg-0005aw-TU; Fri, 03 Jul 2026 01:23:02 -0400
+	id 1wfWMZ-0005W8-UD; Fri, 03 Jul 2026 01:22:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wfWMZ-0005WO-VZ; Fri, 03 Jul 2026 01:22:56 -0400
+ id 1wfWMW-0005TL-La; Fri, 03 Jul 2026 01:22:53 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wfWMW-0005vx-Kz; Fri, 03 Jul 2026 01:22:55 -0400
+ id 1wfWMS-0005rz-4H; Fri, 03 Jul 2026 01:22:52 -0400
 Received: from h183.csg.ci.i.u-tokyo.ac.jp (h183.csg.ci.i.u-tokyo.ac.jp
  [133.11.54.183]) (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 6635LT8P018373
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 6635LT8U018373
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 3 Jul 2026 14:21:43 +0900 (JST)
+ Fri, 3 Jul 2026 14:21:46 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=yI7z983L2jKLplCj01xQZlmdHreHtJMxOkjcK5D3Uhg=; 
+DKIM-Signature: a=rsa-sha256; bh=5vN8LLN1cwVkJSeHOFH42uOAevgNgauoNhfEjaG1Qa4=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
  h=From:Message-Id:To:Subject:Date;
- s=rs20250326; t=1783056104; v=1;
- b=eA+u+b5Pn/F6Fsu4XPL2Fil+YxYg1ZkQ4++IfHV0CZAegdmINv/jec+3gJCku6sS
- 1Kgpnin6bB3a3dKwGxXYGzMFW0yn2kSvLDRJhbYW6gNMl45KzgJUA5tKmCHwgCSk
- f+IEKE214HwMehUnBmsvSTUaJXjU9iJmVJ3UYsaxlKNbAnQckH5wIPNhsyk7jwuH
- ufv2SYJDdz1XC7HnPTzFKX/oKmtFL9DMPxfozld5JtnfqYEh5V3JK6epFJQYzkIY
- 2Oj/IWFYlmHYiy5KblnCVeIwkAuOfStcpVUtczbk42Y87GNMCuDCMkNBm1h34uA6
- fqVOF77PetcRnkg4/nn5fw==
+ s=rs20250326; t=1783056106; v=1;
+ b=BsX3PEyPKdeLkzVfmBzo06LGKElOOo4+ah4cn6ElKvQv6pS3I84i72LCh2Ygd+Q+
+ KDaWQ2m+tZvx46uoqZBXBA4+Vty4ktd2u9uauB1cfyhLfLoaBEnOYKKv9+yWx+p6
+ 3i0Eas/wc80ZCw251oDLMWVlgt/Vx1XwCf/TOiXxicyTTNmn2pAT8fE1RMmaLcWX
+ 3p8uy0kElZYeIjYLDbBDv0L+dDdmMW/+7Omnq9KGsCivqBGdFhH0wzbn5P+3pBFL
+ RS7JDgp5oZl6wxwExWswamp7PU2OUWFfa3kxg/WDgcGq16bt+dUCBvBCdocCqspz
+ XyyALYQIlcPWHOF0OvmrhQ==
 From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Fri, 03 Jul 2026 14:19:18 +0900
-Subject: [PATCH v2 2/7] hw/nvram/fw_cfg: Avoid resizing RAM at runtime
+Date: Fri, 03 Jul 2026 14:19:23 +0900
+Subject: [PATCH v2 7/7] migration/ram: Assert RAMBlock stability while
+ streaming RAM
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260703-ram-v2-2-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
+Message-Id: <20260703-ram-v2-7-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
 References: <20260703-ram-v2-0-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
 In-Reply-To: <20260703-ram-v2-0-7f07fc06fba9@rsg.ci.i.u-tokyo.ac.jp>
 To: qemu-devel@nongnu.org
@@ -73,13 +74,13 @@ Cc: Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 X-Mailer: b4 0.16-dev-925f5
-X-Developer-Signature: v=1; a=openpgp-sha256; l=19046;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9631;
  i=odaki@rsg.ci.i.u-tokyo.ac.jp; h=from:subject:message-id;
- bh=ccy6opZLwUXKw1fFsJIq/3ZXHcSwmcArvoTXP9WAi+0=;
- b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ5a72z3zK461+97OmDpTvi9l0bklb0+z3bYv1f54sjWfX
- WrvcfHojlIWBjEuBlkxRZaUot3cGtG1nwoT4ltg5rAygQxh4OIUgInEKzD89zaprCy8/LN69qYr
- CxdKmMr9Pi0Xv04h877g7W097KrC0xl+s0tJXjefVnx68x7j59pp5zKvXOdS57/pdO30fYu5vIE
- nGAE=
+ bh=6rxiBJMURMDjjavfjxxSoOmIDh11hItlYvDbOT13ApM=;
+ b=owGbwMvMwCWmMbc20y1CyJDxtFoSQ5a725OdNgt3n132cuXK3IPcvbM95i8M/lib9V949hfxi
+ 2+e9s7o6yhlYRDjYpAVU2RJKdrNrRFd+6kwIb4FZg4rE8gQBi5OAZiImCsjw8KbEy5yn/oeJTav
+ meUWYw37tlkyRrvuyUSd/21sWsMbI8Dw35fBlYORNSrL/VeSf4bcXpujDyZKxTxJe8zvt3/93Qk
+ neAE=
 X-Developer-Key: i=odaki@rsg.ci.i.u-tokyo.ac.jp; a=openpgp;
  fpr=AEDC03C9AF734F2EC26A7BFFA4BAEAA73536753C
 Received-SPF: pass client-ip=49.212.243.89;
@@ -105,464 +106,264 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-There is a chance that migration is aborted when the following
-conditions are met:
-1. The machine has not booted yet, or devices have been hotplugged since
-   the last boot.
-2. The machine is (re)booting.
-3. Migration is running concurrently.
+RAM migration sends the RAMBlock list and sizes before transferring page
+contents. The RAM code cannot cope with migratable RAMBlocks being
+added, removed, renamed, made migratable/non-migratable, or resized
+while that stream is active, because the destination has already parsed
+the stream layout.
 
-This is because the size of ACPI data is determined after the firmware
-configures the machine at boot time, and that may change the size of
-backing RAM. This aborts migration if the RAM is concurrently being
-copied. It is rare that all three conditions are met at the same time,
-but migrating after device hotplug and migrating during reboot are
-supported, so ideally their combination should be supported.
-
-To support this scenario, allocate RAM for the maximum ACPI data size
-up front, while exposing only the current ACPI data size through fw_cfg.
-This avoids runtime RAMBlock resize during ACPI rebuilds and lets the
-memory and migration code handle the RAMBlock like any other fixed-size
-RAMBlock.
-
-The ACPI data still uses resizable RAM for migration compatibility. The
-destination may resize it while loading migration streams from older
-QEMU versions, but it immediately grows the RAM back to the maximum
-size. This destination-side resize does not cause migration to abort.
+Add RAMBlock notifier checks so such changes are caught immediately.
+Ignored RAMBlocks remain exempt because they are not represented in the
+RAM migration stream.
 
 Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- include/hw/core/loader.h       |  1 +
- include/hw/nvram/fw_cfg.h      |  4 ++-
- hw/acpi/ghes.c                 |  6 ++--
- hw/acpi/vmgenid.c              |  1 +
- hw/arm/virt-acpi-build.c       |  3 +-
- hw/core/loader.c               | 14 +++++---
- hw/display/ramfb.c             |  2 +-
- hw/i386/acpi-build.c           |  3 +-
- hw/isa/lpc_ich9.c              |  2 ++
- hw/loongarch/virt-acpi-build.c |  3 +-
- hw/misc/vmcoreinfo.c           |  3 +-
- hw/nvram/fw_cfg.c              | 74 ++++++++++++++++++++++++++----------------
- hw/riscv/virt-acpi-build.c     |  3 +-
- 13 files changed, 77 insertions(+), 42 deletions(-)
+ include/migration/misc.h |  2 +-
+ migration/ram.c          | 94 ++++++++++++++++++++++++++++++++++--------------
+ 2 files changed, 68 insertions(+), 28 deletions(-)
 
-diff --git a/include/hw/core/loader.h b/include/hw/core/loader.h
-index d9431e8a8d12..d563acc1f1dd 100644
---- a/include/hw/core/loader.h
-+++ b/include/hw/core/loader.h
-@@ -259,6 +259,7 @@ void pstrcpy_targphys(const char *name,
-                       hwaddr dest, int buf_size,
-                       const char *source);
+diff --git a/include/migration/misc.h b/include/migration/misc.h
+index 3159a5e53c3c..91015524a83d 100644
+--- a/include/migration/misc.h
++++ b/include/migration/misc.h
+@@ -40,7 +40,7 @@ void precopy_remove_notifier(NotifierWithReturn *n);
+ int precopy_notify(PrecopyNotifyReason reason, Error **errp);
  
-+void rom_resize(const MemoryRegion *mr, size_t len);
- ssize_t rom_add_file(const char *file, const char *fw_dir,
-                      hwaddr addr, int32_t bootindex,
-                      bool has_option_rom, MemoryRegion *mr, AddressSpace *as);
-diff --git a/include/hw/nvram/fw_cfg.h b/include/hw/nvram/fw_cfg.h
-index 6aad9aad7694..201b33434a3c 100644
---- a/include/hw/nvram/fw_cfg.h
-+++ b/include/hw/nvram/fw_cfg.h
-@@ -240,6 +240,7 @@ void fw_cfg_add_file(FWCfgState *s, const char *filename, void *data,
-  * @callback_opaque: argument to be passed into callback function
-  * @data: pointer to start of item data
-  * @len: size of item data
-+ * @max_len: maximum size of item data
-  * @read_only: is file read only
-  *
-  * Add a new NAMED fw_cfg item as a raw "blob" of the given size. The data
-@@ -258,7 +259,8 @@ void fw_cfg_add_file_callback(FWCfgState *s, const char *filename,
-                               FWCfgCallback select_cb,
-                               FWCfgWriteCallback write_cb,
-                               void *callback_opaque,
--                              void *data, size_t len, bool read_only);
-+                              void *data, size_t len, size_t max_len,
-+                              bool read_only);
+ void qemu_guest_free_page_hint(void *addr, size_t len);
+-bool migrate_ram_is_ignored(RAMBlock *block);
++bool migrate_ram_is_ignored(const RAMBlock *block);
  
- /**
-  * fw_cfg_modify_file:
-diff --git a/hw/acpi/ghes.c b/hw/acpi/ghes.c
-index b2d5e3499320..9679059100e5 100644
---- a/hw/acpi/ghes.c
-+++ b/hw/acpi/ghes.c
-@@ -415,11 +415,13 @@ void acpi_ghes_add_fw_cfg(AcpiGhesState *ags, FWCfgState *s,
+ /* migration/block.c */
  
-     if (ags->use_hest_addr) {
-         fw_cfg_add_file_callback(s, ACPI_HEST_ADDR_FW_CFG_FILE, NULL, NULL,
--            NULL, &(ags->hest_addr_le), sizeof(ags->hest_addr_le), false);
-+            NULL, &(ags->hest_addr_le),
-+            sizeof(ags->hest_addr_le), sizeof(ags->hest_addr_le), false);
-     } else {
-         /* Create a read-write fw_cfg file for Address */
-         fw_cfg_add_file_callback(s, ACPI_HW_ERROR_ADDR_FW_CFG_FILE, NULL, NULL,
--            NULL, &(ags->hw_error_le), sizeof(ags->hw_error_le), false);
-+            NULL, &(ags->hw_error_le),
-+            sizeof(ags->hw_error_le), sizeof(ags->hw_error_le), false);
-     }
+diff --git a/migration/ram.c b/migration/ram.c
+index e1c191ec4383..3cfc1461f13e 100644
+--- a/migration/ram.c
++++ b/migration/ram.c
+@@ -224,7 +224,7 @@ static bool postcopy_preempt_active(void)
+     return migrate_postcopy_preempt() && migration_in_postcopy();
  }
  
-diff --git a/hw/acpi/vmgenid.c b/hw/acpi/vmgenid.c
-index 27cc0128d117..c2a4eb7ac394 100644
---- a/hw/acpi/vmgenid.c
-+++ b/hw/acpi/vmgenid.c
-@@ -130,6 +130,7 @@ void vmgenid_add_fw_cfg(VmGenIdState *vms, FWCfgState *s, GArray *guid)
-     /* Create a read-write fw_cfg file for Address */
-     fw_cfg_add_file_callback(s, VMGENID_ADDR_FW_CFG_FILE, NULL, NULL, NULL,
-                              vms->vmgenid_addr_le,
-+                             ARRAY_SIZE(vms->vmgenid_addr_le),
-                              ARRAY_SIZE(vms->vmgenid_addr_le), false);
- }
- 
-diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-index 99490aa7b1fb..9e3ae08f1f8e 100644
---- a/hw/arm/virt-acpi-build.c
-+++ b/hw/arm/virt-acpi-build.c
-@@ -32,6 +32,7 @@
- #include "qemu/error-report.h"
- #include "trace.h"
- #include "hw/core/cpu.h"
-+#include "hw/core/loader.h"
- #include "hw/acpi/acpi-defs.h"
- #include "hw/acpi/acpi.h"
- #include "hw/acpi/pcihp.h"
-@@ -1469,7 +1470,7 @@ static void acpi_ram_update(MemoryRegion *mr, GArray *data)
- 
-     /* Make sure RAM size is correct - in case it got changed
-      * e.g. by migration */
--    memory_region_ram_resize(mr, size, &error_abort);
-+    rom_resize(mr, size);
- 
-     memcpy(memory_region_get_ram_ptr(mr), data->data, size);
-     memory_region_set_dirty(mr, 0, size);
-diff --git a/hw/core/loader.c b/hw/core/loader.c
-index 5cbfba0a86d2..14d56f52e4ec 100644
---- a/hw/core/loader.c
-+++ b/hw/core/loader.c
-@@ -1051,10 +1051,14 @@ static void rom_insert(Rom *rom)
-     QTAILQ_INSERT_TAIL(&roms, rom, next);
- }
- 
--static void fw_cfg_resized(const char *id, uint64_t length, void *host)
-+void rom_resize(const MemoryRegion *mr, size_t len)
+-bool migrate_ram_is_ignored(RAMBlock *block)
++bool migrate_ram_is_ignored(const RAMBlock *block)
  {
-     if (fw_cfg) {
--        fw_cfg_modify_file(fw_cfg, id + strlen("/rom@"), host, length);
-+        const char *name = memory_region_name(mr);
-+        void *host = memory_region_get_ram_ptr(mr);
+     MigMode mode = migrate_mode();
+     return !qemu_ram_is_migratable(block) ||
+@@ -364,6 +364,12 @@ struct RAMSrcPageRequest {
+     QSIMPLEQ_ENTRY(RAMSrcPageRequest) next_req;
+ };
+ 
++typedef enum RAMStateStage {
++    RAM_STATE_STAGE_ITERATING,
++    RAM_STATE_STAGE_COMPLETING,
++    RAM_STATE_STAGE_COMPLETED,
++} RAMStateStage;
 +
-+        assert(len <= memory_region_size(mr));
-+        fw_cfg_modify_file(fw_cfg, name + strlen("/rom@"), host, len);
-     }
- }
- 
-@@ -1064,8 +1068,8 @@ static void *rom_set_mr(Rom *rom, Object *owner, const char *name, bool ro)
- 
-     rom->mr = g_malloc(sizeof(*rom->mr));
-     memory_region_init_resizeable_ram(rom->mr, owner, name,
--                                      rom->datasize, rom->romsize,
--                                      fw_cfg_resized,
-+                                      rom->romsize, rom->romsize,
-+                                      NULL,
-                                       &error_fatal);
-     memory_region_set_readonly(rom->mr, ro);
-     vmstate_register_ram_global(rom->mr);
-@@ -1196,7 +1200,7 @@ MemoryRegion *rom_add_blob(const char *name, const void *blob, size_t len,
- 
-         fw_cfg_add_file_callback(fw_cfg, fw_file_name,
-                                  fw_callback, NULL, callback_opaque,
--                                 data, rom->datasize, read_only);
-+                                 data, rom->datasize, rom->romsize, read_only);
-     }
-     return mr;
- }
-diff --git a/hw/display/ramfb.c b/hw/display/ramfb.c
-index f477bdcc2186..3c4be28072fb 100644
---- a/hw/display/ramfb.c
-+++ b/hw/display/ramfb.c
-@@ -154,6 +154,6 @@ RAMFBState *ramfb_setup(bool romfile, Error **errp)
-     }
-     fw_cfg_add_file_callback(fw_cfg, "etc/ramfb",
-                              NULL, ramfb_fw_cfg_write, s,
--                             &s->cfg, sizeof(s->cfg), false);
-+                             &s->cfg, sizeof(s->cfg), sizeof(s->cfg), false);
-     return s;
- }
-diff --git a/hw/i386/acpi-build.c b/hw/i386/acpi-build.c
-index 2ee061558c08..a83a9893a827 100644
---- a/hw/i386/acpi-build.c
-+++ b/hw/i386/acpi-build.c
-@@ -30,6 +30,7 @@
- #include "hw/pci/pci_bridge.h"
- #include "hw/cxl/cxl.h"
- #include "hw/core/cpu.h"
-+#include "hw/core/loader.h"
- #include "target/i386/cpu.h"
- #include "hw/timer/hpet.h"
- #include "hw/acpi/acpi-defs.h"
-@@ -2138,7 +2139,7 @@ static void acpi_ram_update(MemoryRegion *mr, GArray *data)
-     uint32_t size = acpi_data_len(data);
- 
-     /* Make sure RAM size is correct - in case it got changed e.g. by migration */
--    memory_region_ram_resize(mr, size, &error_abort);
-+    rom_resize(mr, size);
- 
-     memcpy(memory_region_get_ram_ptr(mr), data->data, size);
-     memory_region_set_dirty(mr, 0, size);
-diff --git a/hw/isa/lpc_ich9.c b/hw/isa/lpc_ich9.c
-index 9cec18a378c2..fe5c8d6f44f4 100644
---- a/hw/isa/lpc_ich9.c
-+++ b/hw/isa/lpc_ich9.c
-@@ -449,11 +449,13 @@ static void ich9_lpc_pm_init(ICH9LPCState *lpc)
-                                  NULL, NULL, NULL,
-                                  lpc->smi_guest_features_le,
-                                  sizeof lpc->smi_guest_features_le,
-+                                 sizeof lpc->smi_guest_features_le,
-                                  false);
-         fw_cfg_add_file_callback(fw_cfg, "etc/smi/features-ok",
-                                  smi_features_ok_callback, NULL, lpc,
-                                  &lpc->smi_features_ok,
-                                  sizeof lpc->smi_features_ok,
-+                                 sizeof lpc->smi_features_ok,
-                                  true);
-     }
- }
-diff --git a/hw/loongarch/virt-acpi-build.c b/hw/loongarch/virt-acpi-build.c
-index a0b445f297b4..4be390189637 100644
---- a/hw/loongarch/virt-acpi-build.c
-+++ b/hw/loongarch/virt-acpi-build.c
-@@ -11,6 +11,7 @@
- #include "qemu/bitmap.h"
- #include "hw/pci/pci.h"
- #include "hw/core/cpu.h"
-+#include "hw/core/loader.h"
- #include "target/loongarch/cpu.h"
- #include "hw/acpi/acpi-defs.h"
- #include "hw/acpi/acpi.h"
-@@ -630,7 +631,7 @@ static void acpi_ram_update(MemoryRegion *mr, GArray *data)
-      * Make sure RAM size is correct - in case it got changed
-      * e.g. by migration
-      */
--    memory_region_ram_resize(mr, size, &error_abort);
-+    rom_resize(mr, size);
- 
-     memcpy(memory_region_get_ram_ptr(mr), data->data, size);
-     memory_region_set_dirty(mr, 0, size);
-diff --git a/hw/misc/vmcoreinfo.c b/hw/misc/vmcoreinfo.c
-index 9c2e9005ad32..8cb1763c1a44 100644
---- a/hw/misc/vmcoreinfo.c
-+++ b/hw/misc/vmcoreinfo.c
-@@ -59,7 +59,8 @@ static void vmcoreinfo_realize(DeviceState *dev, Error **errp)
- 
-     fw_cfg_add_file_callback(fw_cfg, FW_CFG_VMCOREINFO_FILENAME,
-                              NULL, fw_cfg_vmci_write, s,
--                             &s->vmcoreinfo, sizeof(s->vmcoreinfo), false);
-+                             &s->vmcoreinfo, sizeof(s->vmcoreinfo),
-+                             sizeof(s->vmcoreinfo), false);
- 
+ /* State of RAM for migration */
+ struct RAMState {
      /*
-      * This device requires to register a global reset because it is
-diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
-index f4e3e50224ca..03fb4b569fe7 100644
---- a/hw/nvram/fw_cfg.c
-+++ b/hw/nvram/fw_cfg.c
-@@ -60,6 +60,7 @@
+@@ -398,8 +404,8 @@ struct RAMState {
+     uint64_t xbzrle_bytes_prev;
+     /* Are we really using XBZRLE (e.g., after the first round). */
+     bool xbzrle_started;
+-    /* Are we on the last stage of migration */
+-    bool last_stage;
++    /* Migration stage */
++    RAMStateStage stage;
  
- struct FWCfgEntry {
-     uint32_t len;
-+    uint32_t max_len;
-     bool allow_write;
-     uint8_t *data;
-     void *callback_opaque;
-@@ -604,20 +605,8 @@ bool fw_cfg_dma_enabled(void *opaque)
-     return s->dma_enabled;
+     /* total handled target pages at the beginning of period */
+     uint64_t target_page_count_prev;
+@@ -635,7 +641,7 @@ static int save_xbzrle_page(RAMState *rs, PageSearchStatus *pss,
+ 
+     if (!cache_is_cached(XBZRLE.cache, current_addr, generation)) {
+         xbzrle_counters.cache_miss++;
+-        if (!rs->last_stage) {
++        if (rs->stage == RAM_STATE_STAGE_ITERATING) {
+             if (cache_insert(XBZRLE.cache, current_addr, *current_data,
+                              generation) == -1) {
+                 return -1;
+@@ -674,7 +680,7 @@ static int save_xbzrle_page(RAMState *rs, PageSearchStatus *pss,
+      * Update the cache contents, so that it corresponds to the data
+      * sent, in all cases except where we skip the page.
+      */
+-    if (!rs->last_stage && encoded_len != 0) {
++    if (rs->stage == RAM_STATE_STAGE_ITERATING && encoded_len != 0) {
+         memcpy(prev_cached_page, XBZRLE.current_buf, TARGET_PAGE_SIZE);
+         /*
+          * In the case where we couldn't compress, ensure that the caller
+@@ -840,7 +846,8 @@ static inline bool migration_bitmap_clear_dirty(RAMState *rs,
+      *
+      * Do the same for postcopy due to the same reason.
+      */
+-    if (!rs->last_stage && !migration_in_postcopy()) {
++    if (rs->stage == RAM_STATE_STAGE_ITERATING &&
++        !migration_in_postcopy()) {
+         /*
+          * Clear dirty bitmap if needed.  This _must_ be called before we
+          * send any of the page in the chunk because we need to make sure
+@@ -1316,7 +1323,7 @@ static int ram_save_page(RAMState *rs, PageSearchStatus *pss)
+     if (rs->xbzrle_started && !migration_in_postcopy()) {
+         pages = save_xbzrle_page(rs, pss, &p, current_addr,
+                                  block, offset);
+-        if (!rs->last_stage) {
++        if (rs->stage == RAM_STATE_STAGE_ITERATING) {
+             /* Can't send this cached data async, since the cache page
+              * might get updated before it gets to the wire
+              */
+@@ -2920,6 +2927,8 @@ static void ram_state_resume_prepare(RAMState *rs, QEMUFile *out)
+     RAMBlock *block;
+     uint64_t pages = 0;
+ 
++    rs->stage = RAM_STATE_STAGE_ITERATING;
++
+     /*
+      * Postcopy is not using xbzrle/compression, so no need for that.
+      * Also, since source are already halted, we don't need to care
+@@ -3373,7 +3382,9 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
+ 
+     trace_ram_save_complete(rs->migration_dirty_pages, 0);
+ 
+-    rs->last_stage = !migration_in_colo_state();
++    if (!migration_in_colo_state()) {
++        rs->stage = RAM_STATE_STAGE_COMPLETING;
++    }
+ 
+     WITH_RCU_READ_LOCK_GUARD() {
+         if (!migration_in_postcopy()) {
+@@ -3383,7 +3394,7 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
+         ret = rdma_registration_start(f, RAM_CONTROL_FINISH);
+         if (ret < 0) {
+             qemu_file_set_error(f, ret);
+-            return ret;
++            goto err;
+         }
+ 
+         /* try transferring iterative blocks of memory */
+@@ -3400,7 +3411,8 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
+             }
+             if (pages < 0) {
+                 qemu_mutex_unlock(&rs->bitmap_mutex);
+-                return pages;
++                ret = pages;
++                goto err;
+             }
+         }
+         qemu_mutex_unlock(&rs->bitmap_mutex);
+@@ -3408,7 +3420,7 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
+         ret = rdma_registration_stop(f, RAM_CONTROL_FINISH);
+         if (ret < 0) {
+             qemu_file_set_error(f, ret);
+-            return ret;
++            goto err;
+         }
+     }
+ 
+@@ -3419,7 +3431,7 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
+          */
+         ret = multifd_ram_flush_and_sync(f);
+         if (ret < 0) {
+-            return ret;
++            goto err;
+         }
+     }
+ 
+@@ -3428,10 +3440,10 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
+ 
+         if (qemu_file_get_error(f)) {
+             Error *local_err = NULL;
+-            int err = qemu_file_get_error_obj(f, &local_err);
++            ret = qemu_file_get_error_obj(f, &local_err);
+ 
+             error_reportf_err(local_err, "Failed to write bitmap to file: ");
+-            return err;
++            goto err;
+         }
+     }
+ 
+@@ -3439,7 +3451,14 @@ static int ram_save_complete(QEMUFile *f, void *opaque)
+ 
+     trace_ram_save_complete(rs->migration_dirty_pages, 1);
+ 
+-    return qemu_fflush(f);
++    ret = qemu_fflush(f);
++
++err:
++    if (!migration_in_colo_state()) {
++        rs->stage = RAM_STATE_STAGE_COMPLETED;
++    }
++
++    return ret;
  }
  
--static bool fw_cfg_acpi_mr_restore(void *opaque)
-+static MemoryRegion *fw_cfg_get_mr(FWCfgState *s, uint16_t key)
- {
--    FWCfgState *s = opaque;
--    bool mr_aligned;
--
--    mr_aligned = QEMU_IS_ALIGNED(s->table_mr_size, qemu_real_host_page_size()) &&
--                 QEMU_IS_ALIGNED(s->linker_mr_size, qemu_real_host_page_size()) &&
--                 QEMU_IS_ALIGNED(s->rsdp_mr_size, qemu_real_host_page_size());
--    return !mr_aligned;
--}
--
--static void fw_cfg_update_mr(FWCfgState *s, uint16_t key, size_t size)
--{
--    MemoryRegion *mr;
-     ram_addr_t offset;
-     int arch = !!(key & FW_CFG_ARCH_LOCAL);
-     void *ptr;
-@@ -626,31 +615,57 @@ static void fw_cfg_update_mr(FWCfgState *s, uint16_t key, size_t size)
-     assert(key < fw_cfg_max_entry(s));
+ static void ram_state_pending(void *opaque, MigPendingData *pending,
+@@ -4699,28 +4718,45 @@ static SaveVMHandlers savevm_ram_handlers = {
+     .save_postcopy_prepare = ram_save_postcopy_prepare,
+ };
  
-     ptr = s->entries[arch][key].data;
--    mr = memory_region_from_host(ptr, &offset);
-+    return memory_region_from_host(ptr, &offset);
++static bool ram_migration_is_running(void)
++{
++    return ram_state && ram_state->stage != RAM_STATE_STAGE_COMPLETED;
 +}
 +
-+static bool fw_cfg_pre_load_errp(void *opaque, Error **errp)
++static void ram_mig_ram_block_set_migratable(RAMBlockNotifier *n,
++                                             const RAMBlock *rb)
 +{
-+    FWCfgState *s = opaque;
++    assert(!ram_migration_is_running());
++}
 +
-+    s->table_mr_size = UINT64_MAX;
-+    s->linker_mr_size = UINT64_MAX;
-+    s->rsdp_mr_size = UINT64_MAX;
- 
--    memory_region_ram_resize(mr, size, &error_abort);
-+    return true;
- }
- 
--static int fw_cfg_acpi_mr_restore_post_load(void *opaque, int version_id)
-+static bool fw_cfg_post_load_errp(void *opaque, int version_id, Error **errp)
++static void ram_mig_ram_block_unset_migratable(RAMBlockNotifier *n,
++                                               const RAMBlock *rb)
++{
++    assert(!ram_migration_is_running());
++}
++
++static void ram_mig_ram_block_set_idstr(RAMBlockNotifier *n, const RAMBlock *rb)
++{
++    assert(!ram_migration_is_running() || migrate_ram_is_ignored(rb));
++}
++
++static void ram_mig_ram_block_removed(RAMBlockNotifier *n, const RAMBlock *rb,
++                                      void *host, size_t size, size_t max_size)
++{
++    assert(!rb || !ram_migration_is_running() || migrate_ram_is_ignored(rb));
++}
++
+ static void ram_mig_ram_block_resized(RAMBlockNotifier *n, RAMBlock *rb,
+                                       size_t new_size)
  {
-     FWCfgState *s = opaque;
-     int i, index;
-+    uint64_t *size;
+     PostcopyState ps = postcopy_state_get();
+-    Error *err = NULL;
+     ram_addr_t old_size = qemu_ram_get_used_length(rb);
  
-     assert(s->files);
- 
-     index = be32_to_cpu(s->files->count);
- 
-     for (i = 0; i < index; i++) {
-+        uint16_t key = FW_CFG_FILE_FIRST + i;
-+        MemoryRegion *mr;
-+        int arch = !!(key & FW_CFG_ARCH_LOCAL);
-+
-         if (!strcmp(s->files->f[i].name, ACPI_BUILD_TABLE_FILE)) {
--            fw_cfg_update_mr(s, FW_CFG_FILE_FIRST + i, s->table_mr_size);
-+            size = &s->table_mr_size;
-         } else if (!strcmp(s->files->f[i].name, ACPI_BUILD_LOADER_FILE)) {
--            fw_cfg_update_mr(s, FW_CFG_FILE_FIRST + i, s->linker_mr_size);
-+            size = &s->linker_mr_size;
-         } else if (!strcmp(s->files->f[i].name, ACPI_BUILD_RSDP_FILE)) {
--            fw_cfg_update_mr(s, FW_CFG_FILE_FIRST + i, s->rsdp_mr_size);
-+            size = &s->rsdp_mr_size;
-+        } else {
-+            continue;
-         }
-+
-+        mr = fw_cfg_get_mr(s, key);
-+
-+        if (*size == UINT64_MAX) {
-+            *size = memory_region_size(mr);
-+        }
-+
-+        rom_resize(mr, *size);
-+        memory_region_ram_resize(mr, s->entries[arch][key].max_len,
-+                                 &error_abort);
+     if (migrate_ram_is_ignored(rb)) {
+         return;
      }
  
--    return 0;
-+    return true;
+-    if (migration_is_running()) {
+-        /*
+-         * Precopy code on the source cannot deal with the size of RAM blocks
+-         * changing at random points in time - especially after sending the
+-         * RAM block sizes in the migration stream, they must no longer change.
+-         * Abort and indicate a proper reason.
+-         */
+-        error_setg(&err, "RAM block '%s' resized during precopy.", rb->idstr);
+-        migrate_error_propagate(migrate_get_current(), err);
+-        migration_cancel();
+-    }
++    assert(!ram_migration_is_running());
+ 
+     switch (ps) {
+     case POSTCOPY_INCOMING_ADVISE:
+@@ -4754,6 +4790,10 @@ static void ram_mig_ram_block_resized(RAMBlockNotifier *n, RAMBlock *rb,
  }
  
- static const VMStateDescription vmstate_fw_cfg_dma = {
-@@ -666,8 +681,6 @@ static const VMStateDescription vmstate_fw_cfg_acpi_mr = {
-     .name = "fw_cfg/acpi_mr",
-     .version_id = 1,
-     .minimum_version_id = 1,
--    .needed = fw_cfg_acpi_mr_restore,
--    .post_load = fw_cfg_acpi_mr_restore_post_load,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINT64(table_mr_size, FWCfgState),
-         VMSTATE_UINT64(linker_mr_size, FWCfgState),
-@@ -680,6 +693,8 @@ static const VMStateDescription vmstate_fw_cfg = {
-     .name = "fw_cfg",
-     .version_id = 2,
-     .minimum_version_id = 1,
-+    .pre_load_errp = fw_cfg_pre_load_errp,
-+    .post_load_errp = fw_cfg_post_load_errp,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINT16(cur_entry, FWCfgState),
-         VMSTATE_UINT16_HACK(cur_offset, FWCfgState, is_version_1),
-@@ -697,7 +712,7 @@ static void fw_cfg_add_bytes_callback(FWCfgState *s, uint16_t key,
-                                       FWCfgCallback select_cb,
-                                       FWCfgWriteCallback write_cb,
-                                       void *callback_opaque,
--                                      void *data, size_t len,
-+                                      void *data, size_t len, size_t max_len,
-                                       bool read_only)
- {
-     int arch = !!(key & FW_CFG_ARCH_LOCAL);
-@@ -709,6 +724,7 @@ static void fw_cfg_add_bytes_callback(FWCfgState *s, uint16_t key,
+ static RAMBlockNotifier ram_mig_ram_notifier = {
++    .ram_block_removed = ram_mig_ram_block_removed,
++    .ram_block_set_migratable = ram_mig_ram_block_set_migratable,
++    .ram_block_unset_migratable = ram_mig_ram_block_unset_migratable,
++    .ram_block_set_idstr = ram_mig_ram_block_set_idstr,
+     .ram_block_resized = ram_mig_ram_block_resized,
+ };
  
-     s->entries[arch][key].data = data;
-     s->entries[arch][key].len = (uint32_t)len;
-+    s->entries[arch][key].max_len = (uint32_t)max_len;
-     s->entries[arch][key].select_cb = select_cb;
-     s->entries[arch][key].write_cb = write_cb;
-     s->entries[arch][key].callback_opaque = callback_opaque;
-@@ -737,7 +753,7 @@ static void *fw_cfg_modify_bytes_read(FWCfgState *s, uint16_t key,
- void fw_cfg_add_bytes(FWCfgState *s, uint16_t key, void *data, size_t len)
- {
-     trace_fw_cfg_add_bytes(key, trace_key_name(key), len);
--    fw_cfg_add_bytes_callback(s, key, NULL, NULL, NULL, data, len, true);
-+    fw_cfg_add_bytes_callback(s, key, NULL, NULL, NULL, data, len, len, true);
- }
- 
- void fw_cfg_add_string(FWCfgState *s, uint16_t key, const char *value)
-@@ -838,7 +854,8 @@ void fw_cfg_add_file_callback(FWCfgState *s,  const char *filename,
-                               FWCfgCallback select_cb,
-                               FWCfgWriteCallback write_cb,
-                               void *callback_opaque,
--                              void *data, size_t len, bool read_only)
-+                              void *data, size_t len, size_t max_len,
-+                              bool read_only)
- {
-     int i, index, count;
-     size_t dsize;
-@@ -889,7 +906,7 @@ void fw_cfg_add_file_callback(FWCfgState *s,  const char *filename,
- 
-     fw_cfg_add_bytes_callback(s, FW_CFG_FILE_FIRST + index,
-                               select_cb, write_cb,
--                              callback_opaque, data, len,
-+                              callback_opaque, data, len, max_len,
-                               read_only);
- 
-     s->files->f[index].size   = cpu_to_be32(len);
-@@ -904,7 +921,8 @@ void fw_cfg_add_file_callback(FWCfgState *s,  const char *filename,
- void fw_cfg_add_file(FWCfgState *s,  const char *filename,
-                      void *data, size_t len)
- {
--    fw_cfg_add_file_callback(s, filename, NULL, NULL, NULL, data, len, true);
-+    fw_cfg_add_file_callback(s, filename, NULL, NULL, NULL,
-+                             data, len, len, true);
- }
- 
- void *fw_cfg_modify_file(FWCfgState *s, const char *filename,
-@@ -930,7 +948,7 @@ void *fw_cfg_modify_file(FWCfgState *s, const char *filename,
-     assert(index < fw_cfg_file_slots(s));
- 
-     /* add new one */
--    fw_cfg_add_file_callback(s, filename, NULL, NULL, NULL, data, len, true);
-+    fw_cfg_add_file(s, filename, data, len);
-     return NULL;
- }
- 
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 413d47d70ef1..10825fa37769 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -29,6 +29,7 @@
- #include "hw/acpi/aml-build.h"
- #include "hw/acpi/pci.h"
- #include "hw/acpi/utils.h"
-+#include "hw/core/loader.h"
- #include "hw/intc/riscv_aclint.h"
- #include "hw/nvram/fw_cfg_acpi.h"
- #include "hw/pci-host/gpex.h"
-@@ -961,7 +962,7 @@ static void acpi_ram_update(MemoryRegion *mr, GArray *data)
-      * Make sure RAM size is correct - in case it got changed
-      * e.g. by migration
-      */
--    memory_region_ram_resize(mr, size, &error_abort);
-+    rom_resize(mr, size);
- 
-     memcpy(memory_region_get_ram_ptr(mr), data->data, size);
-     memory_region_set_dirty(mr, 0, size);
 
 -- 
 2.54.0
