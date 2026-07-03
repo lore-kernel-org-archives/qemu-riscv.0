@@ -4,97 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D8BC43458
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 13:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C865BC43602
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 14:27:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfePt-0008DS-Va; Fri, 03 Jul 2026 09:58:54 -0400
+	id 1wfer3-0007WH-LU; Fri, 03 Jul 2026 10:26:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wfePq-0008Cn-FD
- for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 09:58:50 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wfer1-0007RX-VC
+ for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 10:26:55 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wfePo-0007MM-PR
- for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 09:58:50 -0400
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wfer0-0006Xm-3T
+ for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 10:26:55 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 663DBoQf3195143
- for <qemu-riscv@nongnu.org>; Fri, 3 Jul 2026 13:58:46 GMT
+ 663BITX23108960
+ for <qemu-riscv@nongnu.org>; Fri, 3 Jul 2026 14:26:51 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- xwOJ6c9ApN6oCJWZ20hHRQ8ber0OuBFlNjJbbxVUtEg=; b=ZhaffRysCtAjHPMk
- 6iOoz4SSfcgEvjIKg8uftP/LaWB/zLZU2J+89sfxM6UGmeqBcrbCJ6Nd00muIWZ2
- xvdivHWLHa9FSHFqKiO8qVMpR/hsORJte6NSvMIm3a6YjGci2k3DpYEQ3mSWxOQB
- 13EYTujg0vc6LLxAa5qyA1b0CNW24M/XDNySHUGdHnwUAnvP5R0vm45IQNO8JgIk
- f/XlGYeHbF4dlObQSJ4Sdh3BvsH6VJbv6Z2lD+gbcyr3hv02RhL7HrYhqdIKMu+E
- 7XMMDqdNTiMAoWwzsMSU0AoVbQstoDaDPBpQh15AQ/MopTImFElI+w8mJBgqCRC6
- Jg6P8g==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f68jysf5s-1
+ Owbz78uKnwRwhavIKjpjKyFK7eTJ5vvGWDJKxRHA2hE=; b=nQ/nXdOIDESWulTz
+ BSeJ7X6Xt0Uc8KHR58RvJM84nkK8uo1szeVFl09yZwc5Ok4t2ZajNmUb/M02ezz1
+ PtSjKYdKgxKlh5kcy70o/EEXUDKZcOipkJtbtjhI4YyVph55mrGqmQy78LMvFWQl
+ Udcqd0QEZsQ2Fip5c6Z+u4w5fs4rDAOSHme9GHe8Zofp2UJmzedqnCrZK30L9Rmf
+ 8ABc6wUOM96kTecqXX9CR8nbDEVfbFECnOzNIPXU17rFgvJv2sNHno0bobaIc822
+ 0AC+0YZ6F9q4lHluaNaQ3zOXD2CmqpqQlF5/loWYAvaFyd9cPfIhSiidaS2TfZ7D
+ uvFsdQ==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f60eybes3-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 03 Jul 2026 13:58:46 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-915d3261c5cso59285185a.3
- for <qemu-riscv@nongnu.org>; Fri, 03 Jul 2026 06:58:46 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Fri, 03 Jul 2026 14:26:51 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-8ec45d9628aso14175596d6.1
+ for <qemu-riscv@nongnu.org>; Fri, 03 Jul 2026 07:26:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783087126; x=1783691926; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xwOJ6c9ApN6oCJWZ20hHRQ8ber0OuBFlNjJbbxVUtEg=;
- b=X1NFazCvPekaw808tMNFt0mL7hlDhwNlL8t0Cqb6N6w00+wM+ngC3Ip5sC6n2Aafg5
- NhgSX3VCFLJCg26+EOtb2beV/T1GcOASOS6zuDHxvonr5yOn4rjZNrwB+RepqAWW3sQQ
- D+LsF+36x3UtRb/9U13vWSZUxwkxBKyAdwvEVHb+YGwKzfSccDBwuvTihFrpkO2y7Dko
- D21Oo0GcQRZfdzTM6wus+bv/G37BvRsAUB9iSZURk7JSR2vg0CIno40vhijHz63cbSlu
- lEuquMuuaFLXt/aArY31bhTehZBsCPDpmQvBMJCnlwWWD7tBYsygJk5tUeZY8zrpILWI
- z0OQ==
+ d=oss.qualcomm.com; s=google; t=1783088811; x=1783693611; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Owbz78uKnwRwhavIKjpjKyFK7eTJ5vvGWDJKxRHA2hE=;
+ b=Klj2sMJDQkcg+ofU1X3Km7IuxiQ2qRL39Gd18hv/NkzaSKlYCRtStGJYKm4aZo5zSl
+ 26MCphdz66IW529A1lE0v2/W+U+XJdWYK/S/09P1Gcab/7I08UOCDIqpMJPdrEtI018Z
+ 27VMQU5nVn24EG21PMj+MBBocx2pFTvuCl/R1TZ6JVaBKP5bWMF5+FOpZia0ToVlmBGz
+ Mn5ygAi53CMXRSzQrifQpsKhpAMMT0aExLLP305N5VXgxdD78z7pmAB93A3jN6rosia0
+ YBOBj6HkUcH2QTzK/JeLdvfuFbNv3WRK2wAR7lvhuxDS0T6fqCpmQdWBJqyomt/cdeoY
+ Y+Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783087126; x=1783691926;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xwOJ6c9ApN6oCJWZ20hHRQ8ber0OuBFlNjJbbxVUtEg=;
- b=tLSaTTHCEWLRTGMDo+ulU5zirN30+EJK/0xqmt6jSurr4/uBvIj3+j39e7rUKjDjZs
- +l2KaHEB451wF3k6rYChO0YnGP3bsfTxOiX75RgAKrUmciQiAKzHGc2C5rKq0OQs3/fD
- 1bACXLwluih30Rr1KAsHktIRMpbuN6EYVEuGW1SN5+EBLs/Ng5VhiIsjZkiiXm7zulu1
- VNZTAKHSKKCYaKzq2aamePHIq74eT6xJjvVKxFcFJKkwvWXdiFV0F0iSJuudVVH31fJY
- QPbDmhkMxDke0a6UBKgfopZs2Qwb3o/aFLGvxunBInKE78oX8oWFvXgvKjfpy+UXB+sS
- Wm9Q==
-X-Gm-Message-State: AOJu0YzjDawjSAKgjsqUvXO6cmZEAuXg3EKJuvXgyrMV08n350O+UZs5
- JlihCp7GC5V9rU4iXD3JLgx8yNEaumPe+wRwtvu/ctxQ5JvIw90NbnNVOUDXGbFs3Awxk7vz2wJ
- U0r9UV88u8Q+rFGbvXLXzcKWoKDidkNzPpNDMEedIs5JwfuaClgI+oEE+Vw==
-X-Gm-Gg: AfdE7cnqNJbGAvVO3k79mpGKs8vnxiMFPL5eUTuo8PHUexE67FnW4ksl4vSV5kolhvG
- 6S3XyBU3/oMkjIf38Ak/i2e2sf2hwILT5TGtZdMrCZUjL268+yWlciyxDj8HyNr2zAZcE0zdT73
- HUNRR/+X0xQivt3IkWgYZbsXAid4I3fn7kjxoGz8gzkwq3i7Di4ESP2otbPWGEQbygItlD8Zfds
- 6KJk9eDKzzQrORyZdLJZaCkQsWdO7YFB2k2nrL18sljnup1UG0Xev1HlfuIibYUML8GQFZKUfJu
- z+U2N0m5UViDLWgH+PP1oYS84IPH/W0y2+EBgvrI1u14eI/DQeyhaHHGOshf3ilWBMRijm71FrD
- HMrYyAQxNayKg1O4zvVHwU+pow11DeSPCY0JL19STp9lsCJ24jMjpM1Q6XPwG7Q==
-X-Received: by 2002:a05:620a:45aa:b0:915:a457:bf94 with SMTP id
- af79cd13be357-92e7b422de7mr1149265085a.48.1783087125529; 
- Fri, 03 Jul 2026 06:58:45 -0700 (PDT)
-X-Received: by 2002:a05:620a:45aa:b0:915:a457:bf94 with SMTP id
- af79cd13be357-92e7b422de7mr1149260685a.48.1783087125005; 
- Fri, 03 Jul 2026 06:58:45 -0700 (PDT)
-Received: from [192.168.69.212] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493cfb6f199sm26085395e9.3.2026.07.03.06.58.43
+ d=1e100.net; s=20251104; t=1783088811; x=1783693611;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Owbz78uKnwRwhavIKjpjKyFK7eTJ5vvGWDJKxRHA2hE=;
+ b=CRKccAHB7Ck780dGlKKzRiXROPAjD1H9kSdlqBtEkAalieGGxeJxa6LX9fMaw/CUWq
+ /NkEnKTITL77jmc3XM4xiIAzRHE3w8mxcQI97ii9vC6kVqIi8SemnnuINDDzYY3rZbJN
+ dMsg1hL1Otf5+BlV/92z+syJ9SwVG+AsM0QEaO41n4ozT39iYbKDG8gnHuiI6gtIX+l2
+ s5+On2pdWXmilalJMV0I4KZ5Hbjp7gZtpdw5RVbA322gqk1w1urrtkHR+L/37HB9i5Tw
+ bubLgzqT6xbgDPvrPc2kVxyxCDWRjBAROziSe2FCTO5dWu0AAC32p8JD7pQlPkHeJxJv
+ lE4g==
+X-Gm-Message-State: AOJu0YxgIRVTpHpgdl5BILn+qwMmgtlV1p33nwoBu2c9KqYjbK+JX1UN
+ 1S1XfEP9E8GrNYcX8xvVpe9LSwWDJJyxsl7abnmOglpPlRYTwPr8z4uUcDg0TgFOC7285MAnVQW
+ 6VfXRNuqum6ETB2FugNzbyFccFK3fU7vHdznwHQ+jV3q/4XYwHwpBCYEMZg==
+X-Gm-Gg: AfdE7cl5fv2MNSDi7AQT1hlC1vvK51wxFdmnJEEAfz0Cn0gPvbehndUPCuVp36oLn9/
+ aP2iYXNekk2Bd19iZ5MMozudXzdh3+McHLyvw8w3EJYXfkKs3koOn2m7EScrf6Spywo+4m/yoVt
+ MAlMTPWCw1o4IphdURCWfD4XIwx5fRE/EhYnkXq/VySPjYkS/cCRDeZbMLqNHKznBnnq/58rSaG
+ mPHQtWBgvvd8IPpZvHSVwuQerkiUSkC17eJcWI7RDaWiubP6upQUjx6+X433Ij94OvO5+ZfYlb3
+ 31LnxTP3zHJkn0lclxtC49fdbm+ZX9Sf1TBdvGECZHcHaui5rPwPT4QB163QEQ2kbDgnKKQNySz
+ BxoTtQDdXpuFC43SQ/iItifIBZ39ya1tx1cFx/lG7f2wN
+X-Received: by 2002:a05:6214:ac5:b0:8f4:4d6:8ad7 with SMTP id
+ 6a1803df08f44-8f42353027dmr137440906d6.31.1783088810991; 
+ Fri, 03 Jul 2026 07:26:50 -0700 (PDT)
+X-Received: by 2002:a05:6214:ac5:b0:8f4:4d6:8ad7 with SMTP id
+ 6a1803df08f44-8f42353027dmr137440326d6.31.1783088810434; 
+ Fri, 03 Jul 2026 07:26:50 -0700 (PDT)
+Received: from [192.168.68.106] ([189.79.21.40])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-8f471815818sm56866246d6.31.2026.07.03.07.26.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Jul 2026 06:58:44 -0700 (PDT)
-Message-ID: <37525427-720b-48af-a906-8cc1062e7ed0@oss.qualcomm.com>
-Date: Fri, 3 Jul 2026 15:58:42 +0200
+ Fri, 03 Jul 2026 07:26:49 -0700 (PDT)
+Message-ID: <104fa6b5-fb9e-42b3-b74b-a31fc554ffc6@oss.qualcomm.com>
+Date: Fri, 3 Jul 2026 11:26:47 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 03/24] target/riscv/machine.c: do not migrate pmp state
  with kvm
-Content-Language: en-US
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
@@ -103,47 +102,49 @@ References: <20260702135128.1188021-1-daniel.barboza@oss.qualcomm.com>
  <20260702135128.1188021-4-daniel.barboza@oss.qualcomm.com>
  <18ce4e8c-bb35-49c2-abee-9145a33d95ec@oss.qualcomm.com>
  <10315dfc-37f1-40fb-bbf5-b2c5f460c956@oss.qualcomm.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <10315dfc-37f1-40fb-bbf5-b2c5f460c956@oss.qualcomm.com>
+ <37525427-720b-48af-a906-8cc1062e7ed0@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <37525427-720b-48af-a906-8cc1062e7ed0@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAzMDEzOCBTYWx0ZWRfX4bmnUyQnbva5
- VuhgP+Lzz6AxfqCst2gOhQJO278dpHiXVfcs3YyK7O6kDEGIy8Ubrj0vO+Cx6kClRbt3sVuzvwG
- BSrEZL5FDjTaruH5ZLeJHAaKaPuTvEIDwUbN47XMm1MEnxHExb/CcCKtrEPILGrftJEI35li7KG
- 6tPYX1loSKeerzXy7XQhSwByER5fCkc+xpI6iePaQml93yCI6WgqdQ7oFncx7Y0DAepIyrAn6az
- cWQDMuGgiIOY005zgPG5G/wWMaEvR2XCXGiRSWYI7lsgGbcmrUZex7KUTF8yxEnWvM+1Cjmugij
- bJN5L/8RoFn916iEyHitWmTm75GOWirPnKlOPYWWeWRPa3fXNavKrccgsLbPqXC7nZ2hHvRRSOF
- ADbZ7N3H1/FltrHi4EFPLz/RCr6iQ/8ArnqMMdOkfQFq+0dBmameNrll9vxWDxfummIp6G6yWZZ
- +VmsfYPA6dBBJdDxUpw==
-X-Proofpoint-GUID: _Aa_dVFN5MuAgJFvuprPIeIrqYRPrHol
-X-Authority-Analysis: v=2.4 cv=QbFWeMbv c=1 sm=1 tr=0 ts=6a47c016 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=pGLkceISAAAA:8 a=BP7IqNw7tyCuCp4NixIA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAzMDE0MiBTYWx0ZWRfX0WOGYOuNY2Nd
+ z8CSe6Yl9PJuV9HUMU+3tpiTY7Ubmc107qXCeSzIbrEOdvLJJLJajcmL7MXxqHyCbwbByRReqGh
+ +f7ZJUzR0E/sDfDMp0z/Aa3bT8zqj65O4ZyX0RLqDOFRzPpg8pQsMz4swRK6mPx25scs8ngieHp
+ nVA3yx9wv87N77c2t689AFQpjn7vqVGpADJEx29HbSmF1yWCkuD5LJXmwC8MiwzOt+ZOOGaZMM5
+ fh0wOh1YSVJCYAVLdEbAidFXsUZ9pd7yi+UGYkHm5XCpc+7Ij+RAlG5oX8wUV9UhzMLVYhLrShk
+ zioOwmw9kTivlP87AZeENVhgQdlC8VAR/FV8TyjWL8fQvjQmTr54LxW9WYi3HctvIajPigKPLCB
+ O5+esbAHGPuKXmZ7v1EMNkRJKnQ9FNMEuTTcM492CEePhXx+MUF3IRLTerMJq7X8cyWvezUzZKv
+ 5uySOYs+1WyB5ERgvDA==
+X-Proofpoint-GUID: ixK5clld2oq2C3IXO3L3o2EqkQ22Cyq2
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAzMDE0MiBTYWx0ZWRfX8BNE1jTHlNv+
+ axwASw24ZSZqxIrZVibpQygg9ho0YVHm0Mc+JTMjKkJQ39XvYArx47jGzSrHtlULIlLCbYu2Uje
+ KzcGs1Atb3JsuBnx7R9VeFbkwgGhjCg=
+X-Authority-Analysis: v=2.4 cv=SPRykuvH c=1 sm=1 tr=0 ts=6a47c6ab cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=sHJf4AwOIoU3qjeHFPlg6Q==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=pGLkceISAAAA:8 a=i4LRvFJOLUBMW-A5C7QA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=iYH6xdkBrDN1Jqds4HTS:22
  a=xVlTc564ipvMDusKsbsT:22
-X-Proofpoint-ORIG-GUID: _Aa_dVFN5MuAgJFvuprPIeIrqYRPrHol
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAzMDEzOCBTYWx0ZWRfX35pB9CRUf3A7
- wpbqX3YgvXaXSXZuyUDDgn7ytwO5Ug+vFv/H4gy9vF39vM27hx6cyT8CUdSE9N7ddIl2Nbyx6Qr
- 4ZkRf7EtSZXul8ybJaxz/J62hNXP55U=
+X-Proofpoint-ORIG-GUID: ixK5clld2oq2C3IXO3L3o2EqkQ22Cyq2
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-07-03_02,2026-06-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 phishscore=0 malwarescore=0 suspectscore=0 clxscore=1015
- bulkscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 priorityscore=1501
+ clxscore=1015 adultscore=0 malwarescore=0 bulkscore=0 priorityscore=1501
+ lowpriorityscore=0 phishscore=0 spamscore=0 suspectscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607030138
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607030142
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -159,108 +160,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 3/7/26 15:46, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 7/3/2026 7:58 AM, Philippe Mathieu-Daudé wrote:
->> On 2/7/26 15:51, Daniel Henrique Barboza wrote:
->>> The PMP emulation isn't present in the KVM driver.
+
+
+On 7/3/2026 10:58 AM, Philippe Mathieu-Daudé wrote:
+> On 3/7/26 15:46, Daniel Henrique Barboza wrote:
+>>
+>>
+>> On 7/3/2026 7:58 AM, Philippe Mathieu-Daudé wrote:
+>>> On 2/7/26 15:51, Daniel Henrique Barboza wrote:
+>>>> The PMP emulation isn't present in the KVM driver.
+>>>>
+>>>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>>>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>>>> Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+>>>> ---
+>>>>   target/riscv/machine.c | 15 +++++++++++----
+>>>>   1 file changed, 11 insertions(+), 4 deletions(-)
+>>>>
+>>>> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+>>>> index ba96ceceef..e1cbcaa349 100644
+>>>> --- a/target/riscv/machine.c
+>>>> +++ b/target/riscv/machine.c
+>>>> @@ -20,6 +20,7 @@
+>>>>   #include "cpu.h"
+>>>>   #include "qemu/error-report.h"
+>>>>   #include "system/kvm.h"
+>>>> +#include "system/tcg.h"
+>>>>   #include "migration/cpu.h"
+>>>>   #include "exec/icount.h"
+>>>>   #include "target/riscv/debug.h"
+>>>> @@ -29,7 +30,11 @@ static bool pmp_needed(void *opaque)
+>>>>   {
+>>>>       RISCVCPU *cpu = opaque;
+>>>> -    return cpu->cfg.pmp;
+>>>> +    if (kvm_enabled()) {
+>>>> +        return false;
+>>>> +    }
+>>>> +
+>>>> +    return tcg_enabled() && cpu->cfg.pmp;
+>>>>   }
+>>>>   static int pmp_post_load(void *opaque, int version_id)
+>>>> @@ -39,10 +44,12 @@ static int pmp_post_load(void *opaque, int version_id)
+>>>>       int i;
+>>>>       uint8_t pmp_regions = riscv_cpu_cfg(env)->pmp_regions;
 >>>
->>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->>> Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
->>> ---
->>>   target/riscv/machine.c | 15 +++++++++++----
->>>   1 file changed, 11 insertions(+), 4 deletions(-)
+>>> Maybe we can use:
 >>>
->>> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
->>> index ba96ceceef..e1cbcaa349 100644
->>> --- a/target/riscv/machine.c
->>> +++ b/target/riscv/machine.c
->>> @@ -20,6 +20,7 @@
->>>   #include "cpu.h"
->>>   #include "qemu/error-report.h"
->>>   #include "system/kvm.h"
->>> +#include "system/tcg.h"
->>>   #include "migration/cpu.h"
->>>   #include "exec/icount.h"
->>>   #include "target/riscv/debug.h"
->>> @@ -29,7 +30,11 @@ static bool pmp_needed(void *opaque)
->>>   {
->>>       RISCVCPU *cpu = opaque;
->>> -    return cpu->cfg.pmp;
->>> +    if (kvm_enabled()) {
->>> +        return false;
->>> +    }
->>> +
->>> +    return tcg_enabled() && cpu->cfg.pmp;
->>>   }
->>>   static int pmp_post_load(void *opaque, int version_id)
->>> @@ -39,10 +44,12 @@ static int pmp_post_load(void *opaque, int 
->>> version_id)
->>>       int i;
->>>       uint8_t pmp_regions = riscv_cpu_cfg(env)->pmp_regions;
+>>>    if (!pmp_needed(opaque)) {
+>>>        return 0;
+>>>    }
 >>
->> Maybe we can use:
+>> Hmmmm I thought that pmp_post_load() already infers pmp_needed() == true.
+>> In migration/main.rst we have:
 >>
->>    if (!pmp_needed(opaque)) {
->>        return 0;
->>    }
+>> ---
+>> The 'pre_load' and 'post_load' functions on subsections are only
+>> called if the subsection is loaded.
+>> ---
+>>
+>> Hence we'll only execute the post_load() cb for a section/subsection if
+>> the section was transferred, and that is determined by the .needed cb.
+>> In this particular case we'll only reach pmp_post_load() if
+>> pmp_needed() is already true.
 > 
-> Hmmmm I thought that pmp_post_load() already infers pmp_needed() == true.
-> In migration/main.rst we have:
+> OK.
 > 
-> ---
-> The 'pre_load' and 'post_load' functions on subsections are only
-> called if the subsection is loaded.
-> ---
+>>
+>>
+>> Or am I wrong?  It has been awhile since I last read migration code and
+>> I'm not finding docs w.r.t how .needed and .pre/post_load interact
+>> with each other.
 > 
-> Hence we'll only execute the post_load() cb for a section/subsection if
-> the section was transferred, and that is determined by the .needed cb.
-> In this particular case we'll only reach pmp_post_load() if
-> pmp_needed() is already true.
+> Maybe check 'if (cpu->cfg.pmp)' then? What confuses me is the
+> 'if (tcg_enabled)' since we already checked that in needed().
 
-OK.
+That's in there because pmp_update_rule_addr() and pmp_update_rule_nums()
+are TCG only and it won't build with --disable-tcg.
+
+And now that I said it out loud maybe this would be clearer:
+
+static int pmp_post_load(void *opaque, int version_id)
+{
+#ifdef CONFIG_TCG
+     RISCVCPU *cpu = opaque;
+     CPURISCVState *env = &cpu->env;
+     int i;
+     uint8_t pmp_regions = riscv_cpu_cfg(env)->pmp_regions;
+
+     for (i = 0; i < pmp_regions; i++) {
+         pmp_update_rule_addr(env, i);
+     }
+     pmp_update_rule_nums(env);
+#endif
+
+     return 0;
+}
+
+I just checked it and it works with --disable-tcg.  Let me know
+if you're ok with it and I'll change it for v4.
+
+
+Cheers,
+Daniel
+
+
+
+
 
 > 
-> 
-> Or am I wrong?  It has been awhile since I last read migration code and
-> I'm not finding docs w.r.t how .needed and .pre/post_load interact
-> with each other.
-
-Maybe check 'if (cpu->cfg.pmp)' then? What confuses me is the
-'if (tcg_enabled)' since we already checked that in needed().
-
-> 
-> 
-> 
 >>
->>> -    for (i = 0; i < pmp_regions; i++) {
->>> -        pmp_update_rule_addr(env, i);
->>> +    if (tcg_enabled()) {
 >>
->> or use it here; also restrict pmp_regions variable scope?
-> 
-> Just moved pmp_regions.  Thanks,
-> 
-> Daniel
-> 
 >>
->> Anyhow:
->> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+>>>
+>>>> -    for (i = 0; i < pmp_regions; i++) {
+>>>> -        pmp_update_rule_addr(env, i);
+>>>> +    if (tcg_enabled()) {
+>>>
+>>> or use it here; also restrict pmp_regions variable scope?
 >>
->>> +        for (i = 0; i < pmp_regions; i++) {
->>> +            pmp_update_rule_addr(env, i);
->>> +        }
->>> +        pmp_update_rule_nums(env);
->>>       }
->>> -    pmp_update_rule_nums(env);
->>>       return 0;
->>>   }
+>> Just moved pmp_regions.  Thanks,
 >>
->> Since you are working in multi-accelerators frontier, keep in
->> mind in the future we might have some targets migrating between
->> different accelerators 🤯 :)
+>> Daniel
+>>
+>>>
+>>> Anyhow:
+>>> Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+>>>
+>>>> +        for (i = 0; i < pmp_regions; i++) {
+>>>> +            pmp_update_rule_addr(env, i);
+>>>> +        }
+>>>> +        pmp_update_rule_nums(env);
+>>>>       }
+>>>> -    pmp_update_rule_nums(env);
+>>>>       return 0;
+>>>>   }
+>>>
+>>> Since you are working in multi-accelerators frontier, keep in
+>>> mind in the future we might have some targets migrating between
+>>> different accelerators 🤯 :)
+>>
 > 
 
 
