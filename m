@@ -4,108 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4079C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 02:16:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA47C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 03:05:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfTS5-0001TS-6v; Thu, 02 Jul 2026 22:16:25 -0400
+	id 1wfUD5-0005jz-0O; Thu, 02 Jul 2026 23:04:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wfTRy-0001SW-Cg
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 22:16:18 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wfTRv-0008Gr-5v
- for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 22:16:17 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-698e5859a3cso172592a12.0
- for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 19:16:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783044973; cv=none;
- d=google.com; s=arc-20260327;
- b=kQslAPlXE/L/2UxdOEC1NExgEnXtAPDD5z0DAdhjPWB9Nrelli/rZ7/rHnGp3ZcBRR
- 2qk9c/e2nC8Tf6cuTa3YnhB48nPRgG0B4mqcDf5hgMxknesaritAEm/EUatJ0XIP8a+r
- TwrIZL9UNqn+Mi+8oW6pML1+ZleEIWfkPxF/OPAyzRhNpnJA0R4x1aB4k3gAsa8mAW5J
- ydx2THrGhrJwAr1JCHVSVCHCT4VDBkcnSPh4gjHSBOOjb7/zWzpgAF6ne3WaxRs8PmP9
- di4bq4OaHYuUounWV35mNQUtfy7icl1RkxAuxZYu/d4LLf6+yv0d/0AXU2BNashkGf12
- IZ9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Hi3BG2S4Oq2JxEk9R6XNSK8TycyPNIWjCMmsfwGzv9U=;
- fh=GqJSyCt0NIQEcRSXcM4ZQuDVdVGgY3lYRVXKoS5u59Q=;
- b=Vx0MiBV7jD2/H0dDJpR19Vb21WtY4OGwQmj1xIIxLk59lbQLHevPLNPpv7mHhYid0x
- FK+Al9i2A9noTJFoHt1DEw5juuOGQOWZENdVGaT+itCUQdGTFkeEc0ezAliJqtnzbFrN
- D0X0uXPrw/7EBudb9BQHtLtYB2Jd25u4fMYsPk43JQmB1+dxnbkFAOjEybbrXy1/Uymm
- gjIfepwtocUonIZL/sGaite3wFqYqVSMxGMpkB4N3WASQyBebnEAFcYDNNoVOBbijcm+
- 2L1AnDnxRjAJMlPSr7lJS5xWDxfECUnpmQGGh1IZjk/R/lPdWh7aAWhWriUsjUZdc/I7
- CJ+A==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wfUD2-0005ji-Kn
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 23:04:56 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wfUD1-0004Wm-4V
+ for qemu-riscv@nongnu.org; Thu, 02 Jul 2026 23:04:56 -0400
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6632rZNM2633491
+ for <qemu-riscv@nongnu.org>; Fri, 3 Jul 2026 03:04:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ v1lhVfM/300NTlXe/6sdbliDaxbAiPLGf0cogvRfTec=; b=TsHCIvirlNK33Bm0
+ lQ3e5A653xYvLltTUn3ucpoyLN7+Knbt8vG7T6Jo+pK85E+RIk/o2uzlIqzXpBof
+ GgLaOXdlI02GIq8krhZzsMZOj9I24gv5GMff6HKA0wR29gsyFXxDaIeoV4z43UPe
+ mLgcfeOKo+paOhXLxhbomG7yn/MgLvgapi2qWyWsvSiM2bVW3ZMBOAPYV0CntwjR
+ GNbRsTTobxzmeP5oCURbZSU1U/OfzQisw8A+C5x1B2baKZVfG0L9WuBIiLCd3CX0
+ UctEQiV59+lTfjzcc2Tc//FDHrzjZ9TipiVzMhS8SIA2TLv+Ka4X+2hqtEyVnpGn
+ nvddCw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f5tpnj714-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 03 Jul 2026 03:04:53 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-92e82060977so11840185a.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jul 2026 20:04:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783044973; x=1783649773; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Hi3BG2S4Oq2JxEk9R6XNSK8TycyPNIWjCMmsfwGzv9U=;
- b=RE18Eh+NJSQjdRosjdurdNruQ08k0iUZSlDPkDc+QffVD0/vBeD34S4cyEc3xgLfBD
- WHOq9GwfEjadDq1bEHddWt1aIm5u/yr/ZJ32iihtARhJ8vQTdhUjpakQHsWdWgrd9jxi
- erBvEhwT99mURuuHlI/JxfZuWhFUtq3/3K/Vwc0tR2h8573GpY9CmVAP8VjohZFVXotZ
- dE5KUsUqfVeakEL6Vihw1wkqhhb3l5dTK0vuxjvBPoCTj0+Os0BnlrkwdA5Zn84ZPuz/
- gHjzbyQpoArw/dHagDL+LFgaMebh5EyrQzI1uJ77Uqr4wu8y9jY0/YZVeoG7YT8DHcN3
- hqGw==
+ d=oss.qualcomm.com; s=google; t=1783047892; x=1783652692; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=v1lhVfM/300NTlXe/6sdbliDaxbAiPLGf0cogvRfTec=;
+ b=PVSdVjy6n5Jx4U+yMSZ56l7IKTwBDLsGinLCSIe742ev5Ge7mJ7SUhimHbEg3eXnLw
+ 71tPsnV7v94Z990eQCmIbCmP5ZvXuDJFXSmBXjLmgrjg3QWNZS2Hd1UJsFRSFGNSYg+J
+ iwbDgqnu9MbuqoX+eG+fEG5o32CxYv90MKpsysa0jSN4PVlGbRNuwYvJI/DVn/daWjWz
+ B9gN4uPqh7SfaMx7k+Nu4yVjoCMNjcJ5NBwKkaUnAQ6I0CbNNUkCzEp7LTRuHrHv8I40
+ S738xL1TLf0VcXWcvvLvexgPdDHtKOvtHCkhwDizI9AoB/Jt8hS7gRG3HxU9t5xrBi+i
+ K/Hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783044973; x=1783649773;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Hi3BG2S4Oq2JxEk9R6XNSK8TycyPNIWjCMmsfwGzv9U=;
- b=d3SlTKLqb9qiIOZ7gxbrzkEKGMZQmzvoptWhPtsVBPNddVoqoUK9zZ4OvzE/mxzJTk
- qyLsSlPvMVZ6+hPECuVfRrHqMj8tWopR7ras/5MNAFjsGApOHW/v7a3S7Ui7AM65QWKX
- J4qObsguXuTz7J2MO9UnF9+5Gkx8kIxvEVbMshNzXCUfUCrTphb5ylGJbajR1jtVN+g1
- 8oOS44Es0FoqrFzb9u7NNLqsPdybOGC4s6UYuMxJH9wUxpEynyhiwNNKjq8rvVrMQ0R3
- /An6w1EMxeLWNg1Bo6QYMRt+8f+LEyZhLB6XVShb7jfJcPv399KkFTTyxHlMNIZG/LLg
- w6UQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RolT94YGl16eZKjL1BAZMeO0AcsFhjNnLVQOjVuZxX7NzTHx8zuVFx+gJsoce3UdhYGbhqCr5Zzuxzb@nongnu.org
-X-Gm-Message-State: AOJu0YzFYtNJvRH+6Ef5IwQo4xgY/kMza//eeQGV7d1Q2BE1StGmE8Fl
- 26pVqo/yeMUK35CMI34f9pJET+otJRLbz7nNnFs4YIvYgVt3ipmxaYknbr3p0iB2AcyRPeJJc/Q
- NSpaFVSO9aCtVPjDGr0qodS6xDequmlQ=
-X-Gm-Gg: AfdE7clTlftqf9NmBf3G61LyjZerHjrl8G+o20DVWaocnsVfgCYkFdsbP30NAL/yYGf
- tzQOF3b4EAx/dGvT8bSTZj1Fe05+mQSh0VzO9mTzivdBbMQtivrVTkbCCLpjzSpoYkaCbw6Rxou
- GxluaMTznGU7aJtrLoa82NsYtfAHtx6ZwfY9j0xOh2tt7ib6QJYyYezUdODs78Z43gKd5n2hX+v
- mpwkyE7jFL/qT+pAh+TLSiPD28Gd9kQ1+1hzrukDUvRxV52K4EsNMxgQFbNynbkXP7ohFaBSot/
- FGnzm7dVqg0r/E730w9H4LVV2kU=
-X-Received: by 2002:aa7:cd75:0:b0:698:aeaf:2d9 with SMTP id
- 4fb4d7f45d1cf-698c1039a8amr611045a12.2.1783044972587; Thu, 02 Jul 2026
- 19:16:12 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783047892; x=1783652692;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=v1lhVfM/300NTlXe/6sdbliDaxbAiPLGf0cogvRfTec=;
+ b=VICAkTnHOf3UJbK043NwtuEm8qC7zmgRYwL66PH4n+r5Asdp8/swhIr3QS8ItPUH6N
+ yaV6LWUrlyEPd6OE2vJC/kJAu/a6/yuW6zfX69Ug6ZH7LAi/YkaV9tti/dLKw/w5mZvr
+ BVd+2Uhl0A6dHzwE7CktMyKixRqWsKWGiyxRSlrWvdQhdoM3qazwvjDvdcHaugsRTxrN
+ M0ottAtUlP5pS7CRcoTwa3xtBBwGmUMicR/g2nGjaFNlB3OM27OrmceTtPLiuO9isEVn
+ ARRM4VFb+ToWbx1xNg5Lfi6dcy4sDYuq7OB3JmRX7WYfPC1B6tcZrQMc1u6uJkalpu9s
+ zmWg==
+X-Gm-Message-State: AOJu0YwzUgAPOhqBmt1F1/vIu95Dd7SINCLVbNJR+dV06KPshpscUJzi
+ EZfYUEzwjMv58pFcLtIk286uvpliNnkmFAS+1gl0WMQ4ZsMRVKt1xfU4QMSStGp0uTGU0VwD2iL
+ AudSJaWlJ9pWbhcmK2nyxJqwa+Cwb2I0gWGEC3ST5SO6q8iy6AONeVPOc9Q==
+X-Gm-Gg: AfdE7cm62StUtF6gfdTCmnBrTUeF+wc5b5Cl5tEU52cWevNXQbk7GBBLkkeRIpQWPuj
+ RZP1oYMTx7XA6eMmpTU1zGbsDNOta3st7bJu2YOHxg1eO/+L0i+MnU8UxRLNkbQhu34L/TOGM89
+ pGWd4zvzbmzWZqzySFCstFaLyC3zQH/xmsF6roC2KQnxDboBzRNP6v2+94yqulgayDYfzdYkFrP
+ +tW/PGbQavoit/MA+oIRHpLqmwPVEfdlvpY8nRLePigrRZ9z2aKOIHbTewvqEyDOZUwpeTCoVE3
+ IkyjN+ymOCl844n9cB7GhV9rR86TjEN/oQeLUqmCry+bM0lRXBsBK3ENZjE78+AjUtQb5M9mz4H
+ AoRs7TIXB0r87o5m0Xo1y/0x81R8mc4vDWPbW+pBWpogYWJwCGovT4/T4S6ifpw==
+X-Received: by 2002:a05:620a:271a:b0:91e:712d:f79d with SMTP id
+ af79cd13be357-92e8b5b2815mr274386485a.40.1783047892071; 
+ Thu, 02 Jul 2026 20:04:52 -0700 (PDT)
+X-Received: by 2002:a05:620a:271a:b0:91e:712d:f79d with SMTP id
+ af79cd13be357-92e8b5b2815mr274382285a.40.1783047891522; 
+ Thu, 02 Jul 2026 20:04:51 -0700 (PDT)
+Received: from [192.168.69.212] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-477d766e0b4sm13444082f8f.0.2026.07.02.20.04.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 02 Jul 2026 20:04:50 -0700 (PDT)
+Message-ID: <a558d31d-84ba-484c-80d5-c4a9e295ff5c@oss.qualcomm.com>
+Date: Fri, 3 Jul 2026 05:04:48 +0200
 MIME-Version: 1.0
-References: <20260701124034.552271-1-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20260701124034.552271-1-daniel.barboza@oss.qualcomm.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 3 Jul 2026 12:15:44 +1000
-X-Gm-Features: AVVi8CdRN8JpEpdu-8OGjC9yOJHwoMtShyYL0ewZLKP3dioqEOfRzznMAYzFzP4
-Message-ID: <CAKmqyKPTWMmO4p0Rc1rfinDc0vP-JQkrR5X3UPkEuwvmv1dXjQ@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv/riscv-iommu.c: fix fault type for spa_fetch()
- faults
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
- andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x535.google.com
-X-Spam_score_int: -7
-X-Spam_score: -0.8
-X-Spam_bar: /
-X-Spam_report: (-0.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FORGED_GMAIL_RCVD=1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 13/24] target/riscv: move some irq helpers to cpu.c
+Content-Language: en-US
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260702135128.1188021-1-daniel.barboza@oss.qualcomm.com>
+ <20260702135128.1188021-14-daniel.barboza@oss.qualcomm.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20260702135128.1188021-14-daniel.barboza@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: nrEn4Q9do5yZXRPl5O6Wgy5pLAx6ejxu
+X-Proofpoint-ORIG-GUID: nrEn4Q9do5yZXRPl5O6Wgy5pLAx6ejxu
+X-Authority-Analysis: v=2.4 cv=UMft2ify c=1 sm=1 tr=0 ts=6a4726d5 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=_IOKp0FnopO0b47MFCYA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22 a=xVlTc564ipvMDusKsbsT:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAzMDAyNiBTYWx0ZWRfXxl41d064gzLo
+ wYroxfOPsIZYS0nzJgo81O/5eM9NowjualfuYD2KWyocBT7KWTbYO6pSVKV6BSvCcT2tTX7F7Q0
+ XXbBK/JkXuZdGv6Alx6c7Jw0eBSRjyg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAzMDAyNiBTYWx0ZWRfXz55zj9flKxGO
+ uXtGM8zi1jov1Uwik4FqlEoGbYpPFDZqAdk3fBe63FDhA/NumdXnTAx07y0VhRqzzNSaQ5QdUke
+ mdaagczcIoClHApdnCZ3A0iF3LQgN4BDCruU5ANbw+0rIh2oAo4D6lHJDCNxRxrQ6cJisIeOMwJ
+ dBBCK/rXTZuNldVeRcieMr7J61fVV6zqOWuImvV9f4YrXRvCpF/FWK3XTRuQIRLhjcLGyU4Vwpg
+ oHf/9PlGG3u7x1544h7ZGeyRjQkjLaENYrO3QmtvVYfdkwESxH+Dkcs9FFuh8GLzxVS+imb4g0n
+ UDk+VLOoGN0u4odEShrenr6m6b4kuQeSc3/nV4kWCKlWYv0PB9HmPrEN7+LyK9NzPJe8S/JKNYQ
+ NTf0BAy2EBhi5VWvdIbzhYis1lwXNY0O1Bg9P1EZTpWvYo7DA1K0CCfxU9HGqTsZQ3hvdoE/ADy
+ 5vyIYlEoaVIqNI3YQVQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-07-03_01,2026-06-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 lowpriorityscore=0 suspectscore=0 phishscore=0
+ priorityscore=1501 bulkscore=0 impostorscore=0 spamscore=0 adultscore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607030026
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,104 +158,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jul 1, 2026 at 10:41=E2=80=AFPM Daniel Henrique Barboza
-<daniel.barboza@oss.qualcomm.com> wrote:
->
-> Under certain circunstances, like the one described in [1] and [2],
-> a read operation that faults will be logged as a write fault instead,
-> and vice-versa, if they happen after the translation phase in
-> riscv_iommu_spa_fetch().
->
-> The first problem is that we're overwriting iotlb->perm with PTE flags,
-> so an IOMMU_RO access flag can be overwritten by whatever flags
-> the PTE has.  This will cause the wrong fault type to be thrown at
-> the end of the function in case a fault happens.
->
-> To solve the iotlb->perm overwrite we'll bit_and the original
-> iotlb->perm access flags with the PTE access flags, preserving the
-> original access type.  So a IOMMU_RO access in a R+W PTE will result in
-> a IOMMU_RO perm.
->
-> Second, the resulting fault is received by riscv_iommu_translate(), which
-> will then report the fault.  To do that we require a transaction type
-> (ttype).  We're prioritizing checking "perm & IOMMU_RW" to set a
-> UADDR_WR ttype, and then checking "perm & IOMMU_RO" to set UADDR_RD
-> ttype.  The issue with that is IOMMU_RO=3D1 and IOMMU_RW=3D3, thus checki=
-ng
-> "perm & IOMMU_RW" for a write then "perm & IOMMU_RO" for a read will
-> cause the read fault to always be diagnosed as write.
->
-> Make the iotlb->perm matches more strict: "perm & IOMMU_RW" must be
-> exactly IOMMU_RW, ensuring that 'perm' has both flags.  Then we can
-> check perm & IOMMU_WO and perm & IOMMU_RO without worrying about
-> overlapping with the RW flag.
->
-> [1] https://gitlab.com/qemu-project/qemu/-/work_items/3557
-> [2] https://gitlab.com/qemu-project/qemu/-/work_items/3577
->
-> Fixes: 69a9ae4836 ("hw/riscv/riscv-iommu: add ATS support")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3557
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3577
++Peter, Paolo, Richard
+
+On 2/7/26 15:51, Daniel Henrique Barboza wrote:
+> riscv_cpu_has_work() uses a handful of irq pending functions from
+> cpu_helper.c.  There is a very high possibility that KVM doesn't need
+> the current implermentation of has_work(), but the common accel code
+> needs an implementation of this callback (see cpu_exec_class_post_init)
+> otherwise the KVM driver won't initialize.
+
+See commits 408b2b3d9df ("accel/tcg: Make TCGCPUOps::cpu_exec_halt
+return bool for whether to halt") and  0487c631801 ("accel/tcg: Make
+TCGCPUOps::cpu_exec_halt mandatory").
+
+Looking at cpu_thread_is_idle(), TCG could register its 
+AccelOpsClass::cpu_thread_is_idle handler as !cpu_exec_halt, allowing
+to restrict cpu_has_work() to TCG?
+
+> Move the relevant irq helpers to cpu.c to allow KVM to keep using the
+> current has_work implementation, allowing --disable-tcg to work.  We'll
+> circle it back to evaluate a proper KVM implementation for it in a later
+> date.
+> 
 > Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/riscv/riscv-iommu.c | 16 +++++++++++++---
->  1 file changed, 13 insertions(+), 3 deletions(-)
->
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 974042d017..7f94ce152e 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -282,6 +282,7 @@ static hwaddr riscv_iommu_napot_page_mask(hwaddr ppn,=
- hwaddr addr, hwaddr *out)
->  static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *=
-ctx,
->      IOMMUTLBEntry *iotlb)
->  {
-> +    IOMMUAccessFlags pte_perm;
->      dma_addr_t addr, base;
->      uint64_t satp, gatp, pte;
->      bool en_s, en_g;
-> @@ -509,8 +510,16 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s,=
- RISCVIOMMUContext *ctx,
->              }
->              /* Translation phase completed (GPA or SPA) */
->              iotlb->translated_addr =3D base;
-> -            iotlb->perm =3D (pte & PTE_W) ? ((pte & PTE_R) ? IOMMU_RW : =
-IOMMU_WO)
-> -                                                         : IOMMU_RO;
-> +
-> +            /*
-> +             * Do a bit_and between the PTE bits and the original
-> +             * request flags to determine the exact permission we
-> +             * need, i.e. if the original request is RO and the
-> +             * PTE has RW flags the actual perm is RO.
-> +             */
-> +            pte_perm =3D (pte & PTE_W) ? ((pte & PTE_R) ? IOMMU_RW : IOM=
-MU_WO)
-> +                                     : IOMMU_RO;
-> +            iotlb->perm &=3D pte_perm;
->
->              /* Check MSI GPA address match */
->              if (pass =3D=3D S_STAGE && (iotlb->perm & IOMMU_WO) &&
-> @@ -1727,7 +1736,8 @@ done:
->      if (fault) {
->          unsigned ttype =3D RISCV_IOMMU_FQ_TTYPE_PCIE_ATS_REQ;
->
-> -        if (iotlb->perm & IOMMU_RW) {
-> +        if ((iotlb->perm & IOMMU_RW) =3D=3D IOMMU_RW
-> +            || iotlb->perm & IOMMU_WO) {
->              ttype =3D RISCV_IOMMU_FQ_TTYPE_UADDR_WR;
->          } else if (iotlb->perm & IOMMU_RO) {
->              ttype =3D RISCV_IOMMU_FQ_TTYPE_UADDR_RD;
-> --
-> 2.43.0
->
->
+>   target/riscv/cpu.c            | 187 ++++++++++++++++++++++++++++++++++
+>   target/riscv/cpu.h            |   5 +
+>   target/riscv/tcg/cpu_helper.c | 187 ----------------------------------
+>   3 files changed, 192 insertions(+), 187 deletions(-)
+
 
