@@ -4,42 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4817C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:05:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B263EC43458
+	for <qemu-riscv@archiver.kernel.org>; Fri,  3 Jul 2026 05:05:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfW4N-0008NL-PM; Fri, 03 Jul 2026 01:04:07 -0400
+	id 1wfW4N-0008NN-T5; Fri, 03 Jul 2026 01:04:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1wfW4L-0008Lc-I2; Fri, 03 Jul 2026 01:04:05 -0400
-Received: from [115.124.30.118] (helo=out30-118.freemail.mail.aliyun.com)
+ id 1wfW4M-0008M5-Gw; Fri, 03 Jul 2026 01:04:06 -0400
+Received: from [115.124.30.98] (helo=out30-98.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1wfW4F-0007a1-Ak; Fri, 03 Jul 2026 01:04:05 -0400
+ id 1wfW4G-0007Zg-F5; Fri, 03 Jul 2026 01:04:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1783055023; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=nAoo8gdXRU00vuljAAmYUygXjKLUAY8dDYFKQW8GJPU=;
- b=pQ86z4lTEWbxoBBtOBV3Id6VeHdOijkmBGXHBmsflT92dHkusfQ856/3wWjxw4x4iaPJkpNcIjHAbAyAjxGAOQwOAbTqitK0sXjYRRaXWLQ6xRimlhCPnXykK421qasnunv39xxAZ0VwvEtq+gfYrORI7AtBdI4poY+Zqti9lig=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037033178;
- MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0X6I8MsS_1783055021; 
+ t=1783055020; h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To;
+ bh=9Wta3rC7sfrG0e3gcxaRsalYud44a/QVpaRYkyPK5Vs=;
+ b=Qjq/2U8YqNCdLsptWDbWh9AUyVlZ30994imaXH8XKjT+EMdvtUMzXiCPvFKA/wbQgvyzSn05GzbPovp8RMW+dd2ttplY4mtPMRK37Xebi0yRfA1SamLCqz96pZHtM+vyymULhX5xMBWTA+XRKfSWmaj3nf8v902M46gHlpMf6cQ=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
+ MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0X6I8MrX_1783055019; 
 Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0X6I8MsS_1783055021 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 03 Jul 2026 13:03:42 +0800
+ fp:SMTPD_---0X6I8MrX_1783055019 cluster:ay36) by smtp.aliyun-inc.com;
+ Fri, 03 Jul 2026 13:03:40 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Fri, 03 Jul 2026 13:03:39 +0800
-Subject: [PATCH v4 4/5] disas/riscv: Decode unsigned vector immediates as
- unsigned
+Subject: [PATCH v4 0/5] disas/riscv: Fix immediate decoding and extraction
+Date: Fri, 03 Jul 2026 13:03:35 +0800
+Message-Id: <20260703-b4-disas-xthead-fix-riscv-next-v4-0-84c566330bc7@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260703-b4-disas-xthead-fix-riscv-next-v4-4-84c566330bc7@linux.alibaba.com>
-References: <20260703-b4-disas-xthead-fix-riscv-next-v4-0-84c566330bc7@linux.alibaba.com>
-In-Reply-To: <20260703-b4-disas-xthead-fix-riscv-next-v4-0-84c566330bc7@linux.alibaba.com>
+X-B4-Tracking: v=1; b=H4sIAKdCR2oC/5XNwWrDMAzG8VcpPk/FVhyn22nvMXqQbXkRdEmxM
+ 5NS8u5zC2OXjbLjJ8Tvf1WFs3BRL7urylylyDy1YZ92Kow0vTNIbFuhRqcdduAtRClUYF1Gpgh
+ JVshSQoWJ1wWCo+RIP0eMQTXknLl93ANvx7ZHKcucL/deNbfrN+0e0dWAhsEiHqgLxqN5Pcn0u
+ e7pJJ487cP8oW6Jij/soM1DFhvLjm1KPQ0HO/zFdv9ju8amYFOfjHfB9L+x27Z9AX3yCg6CAQA
+ A
+X-Change-ID: 20260623-b4-disas-xthead-fix-riscv-next-c6af6a09d2dc
 To: qemu-devel@nongnu.org
 Cc: Christoph Muellner <christoph.muellner@vrull.eu>, 
  LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
@@ -47,19 +50,19 @@ Cc: Christoph Muellner <christoph.muellner@vrull.eu>,
  Alistair Francis <Alistair.Francis@wdc.com>, 
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org, 
- TANG Tiancheng <lyndra@linux.alibaba.com>
+ TANG Tiancheng <lyndra@linux.alibaba.com>, 
+ =?utf-8?q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783055019; l=9235;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783055019; l=3746;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=KJkW70igxzmT7ApDB+NVIKjPZpv0F8fccAYBfRba5m4=;
- b=DuMgEoIkgj7t0mg+vdRg5bB+p2a7N1m34xU2okRoPd3Zppy/BVCiOECdK0zaoabMHvwULAv+B
- NXttLnyHhVlCmnBGGggtb4ySHGJrLvVMW9F0GkIR8G7O+7smH/EvsIu
+ bh=XxoPZ6tqW5OrwVmHuOeyr0F9T2iqTaZtLIKWWmepg/U=;
+ b=zcCbz6+mxIlj+JsPRQxKWnLMCkjiLD4ZmvQWacgltsif7yML8eD685xuFY8Zg0hVjko9q8QZF
+ ECKoAwsDonRADMrMdsGn5Zonmme4ct/0FSllSIr7KhWiA5814ruSOAT
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.118 (deferred)
-Received-SPF: pass client-ip=115.124.30.118;
- envelope-from=lyndra@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.98 (deferred)
+Received-SPF: pass client-ip=115.124.30.98;
+ envelope-from=lyndra@linux.alibaba.com; helo=out30-98.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -83,163 +86,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-rv_codec_v_i decodes all .vi operands with operand_vimm(), which
-sign-extends bits 19:15. That matches spec operands named imm, but not the
-.vi forms whose operand is uimm; uimm=31 is decoded as -1 and printed by
-the shared 6-bit 'u' formatter as 63.
+Fix two XThead immediate decoding issues in the RISC-V disassembler, fix
+vector immediate signedness handling, and make operand extraction more
+explicit.
 
-Add rv_codec_v_i_u/operand_vuimm() for the 5-bit uimm forms: vsll.vi,
-vsrl.vi, vsra.vi, vnsrl.wi, vnsra.wi, vssrl.vi, vssra.vi, vnclipu.wi,
-vnclip.wi, vslideup.vi, vslidedown.vi, vrgather.vi, vaeskf1.vi,
-vaeskf2.vi, vsm3c.vi, vsm4k.vi and vwsll.vi. The remaining rv_codec_v_i
-entries are the signed imm forms.
+The first patch aligns th.srri decoding with target/riscv/xthead.decode:
+th_srri uses bits 31:26 as 000100 and bit 25 as shamt[5], while the
+disassembler switches on bits 31:25.
 
-Fixes: 07f4964d1785 ("disas/riscv.c: rvv: Add disas support for vector instructions")
-Fixes: 9d92f56d4a44 ("disas/riscv: Add support for vector crypto extensions")
-Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+The second patch extracts the full 6-bit immediate field for
+rv_codec_r2_imm6, which fixes the immediate printed for th.srri and
+th.tst.
+
+The third patch makes operand_vimm() return int32_t, matching the signed
+5-bit vector immediate value it extracts.
+
+The fourth patch decodes unsigned 5-bit vector immediates with a separate
+codec, matching the target translator paths that zero-extend or truncate
+those fields.
+
+The fifth patch follows Richard's review suggestion by converting operand
+helper bit extraction to extract32() or sextract32(). Signed immediates use
+sextract32() on the sign-bearing field and combine it with the remaining
+extract32() fields.
+
+This series is based on Alistair's riscv-to-apply.next branch:
+64ce9ac18757 ("hw/riscv/riscv-iommu.c: always fault with SADE=0 and A=0")
+
+Testing:
+- Applied and tested on top of Alistair's riscv-to-apply.next branch.
+- Verified with an external test branch that adds unit coverage:
+  https://github.com/LLyndra/qemu.git b4-disas-riscv-v2-tests
+
+  The added tests cover XThead th.srri/th.tst immediate decoding,
+  signed vector immediates, unsigned vector immediate operands, and
+  signed base ISA I-immediate extraction.
+- Commands run:
+    ./configure --target-list=riscv64-softmmu --disable-docs \
+        --prefix=/tmp/qemu-riscv-disas-test --cross-prefix=
+    ninja -C build tests/unit/test-riscv-disas
+    build/tests/unit/test-riscv-disas --tap -k
+- Result:
+    test-riscv-disas passed: 37/37 TAP tests ok.
+
 ---
- disas/riscv.c | 45 ++++++++++++++++++++++++++++-----------------
- disas/riscv.h |  1 +
- 2 files changed, 29 insertions(+), 17 deletions(-)
+Changes in v4:
+- Rebased on current Alistair's riscv-to-apply.next branch.
+- Folded Alex's extract32() suggestion into the 6-bit immediate
+  fix patch, so it directly uses extract32(inst, 20, 6).
+- Link to v3: https://lore.kernel.org/qemu-devel/20260701-b4-disas-xthead-fix-riscv-next-v3-0-fc4f5f1b6c15@linux.alibaba.com
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 967739bdbbf31e85fd28f2eaaf567c76c0d1fa6c..82b962dc71feee28584b9ae98bbabe11d40fd102 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -1803,19 +1803,19 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "vxor.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, 0, 0, 0 },
-     { "vsll.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vsll.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vsll.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vsll.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vsrl.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vsrl.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vsrl.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vsrl.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vsra.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vsra.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vsra.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vsra.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vnsrl.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vnsrl.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vnsrl.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vnsrl.wi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vnsra.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vnsra.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vnsra.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vnsra.wi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vmseq.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vmseq.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
-     { "vmseq.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, 0, 0, 0 },
-@@ -1909,16 +1909,16 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "vsmul.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
-     { "vssrl.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vssrl.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vssrl.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vssrl.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vssra.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vssra.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vssra.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vssra.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vnclipu.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vnclipu.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vnclipu.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vnclipu.wi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vnclip.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vnclip.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vnclip.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vnclip.wi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vfadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vfadd.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, 0, 0, 0 },
-     { "vfsub.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-@@ -2048,15 +2048,15 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "vfmv.f.s", rv_codec_v_r, rv_fmt_fd_vs2, NULL, 0, 0, 0 },
-     { "vfmv.s.f", rv_codec_v_r, rv_fmt_vd_fs1, NULL, 0, 0, 0 },
-     { "vslideup.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vslideup.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vslideup.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vslide1up.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
-     { "vslidedown.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vslidedown.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vslidedown.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vslide1down.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
-     { "vrgather.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vrgatherei16.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vrgather.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vrgather.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vrgather.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "vcompress.vm", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
-     { "vmv1r.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
-     { "vmv2r.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
-@@ -2144,8 +2144,8 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "vaesef.vs", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
-     { "vaesem.vv", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
-     { "vaesem.vs", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
--    { "vaeskf1.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
--    { "vaeskf2.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
-+    { "vaeskf1.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
-+    { "vaeskf2.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
-     { "vaesz.vs", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
-     { "vandn.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vandn.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
-@@ -2169,14 +2169,14 @@ const rv_opcode_data rvi_opcode_data[] = {
-     { "vsha2ch.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
-     { "vsha2cl.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
-     { "vsha2ms.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
--    { "vsm3c.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
-+    { "vsm3c.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
-     { "vsm3me.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, 0, 0, 0 },
--    { "vsm4k.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
-+    { "vsm4k.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm, NULL, 0, 0, 0 },
-     { "vsm4r.vv", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
-     { "vsm4r.vs", rv_codec_v_r, rv_fmt_vd_vs2, NULL, 0, 0, 0 },
-     { "vwsll.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, 0, 0, 0 },
-     { "vwsll.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, 0, 0, 0 },
--    { "vwsll.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-+    { "vwsll.vi", rv_codec_v_i_u, rv_fmt_vd_vs2_uimm_vm, NULL, 0, 0, 0 },
-     { "amocas.w", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.d", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-     { "amocas.q", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
-@@ -4492,6 +4492,11 @@ static int32_t operand_vimm(rv_inst inst)
-     return (int64_t)(inst << 44) >> 59;
- }
- 
-+static uint32_t operand_vuimm(rv_inst inst)
-+{
-+    return extract32(inst, 15, 5);
-+}
-+
- static uint32_t operand_vzimm11(rv_inst inst)
- {
-     return (inst << 33) >> 53;
-@@ -4895,6 +4900,12 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-         dec->imm = operand_vimm(inst);
-         dec->vm = operand_vm(inst);
-         break;
-+    case rv_codec_v_i_u:
-+        dec->rd = operand_rd(inst);
-+        dec->rs2 = operand_rs2(inst);
-+        dec->imm = operand_vuimm(inst);
-+        dec->vm = operand_vm(inst);
-+        break;
-     case rv_codec_vror_vi:
-         dec->rd = operand_rd(inst);
-         dec->rs2 = operand_rs2(inst);
-diff --git a/disas/riscv.h b/disas/riscv.h
-index 379e642ec84e2da12ffd7905b590cdcee7bf215f..91ada8b531eb9a03bae49d8d36fc42c497f277ed 100644
---- a/disas/riscv.h
-+++ b/disas/riscv.h
-@@ -149,6 +149,7 @@ typedef enum {
-     rv_codec_v_r,
-     rv_codec_v_ldst,
-     rv_codec_v_i,
-+    rv_codec_v_i_u,
-     rv_codec_vsetvli,
-     rv_codec_vsetivli,
-     rv_codec_vror_vi,
+Changes in v3:
+- Updated the extract-helper cleanup patch to use sextract32() on the
+  sign-bearing field directly, as suggested by Richard.
+- Link to v2: https://lore.kernel.org/qemu-devel/20260701-b4-disas-xthead-fix-riscv-next-v2-0-e6e4ff5a7847@linux.alibaba.com
 
+Changes in v2:
+- Collected Reviewed-by tags from Daniel.
+- Kept the 6-bit immediate fix as a minimal correctness change.
+- Added a patch making the signed vector immediate helper return a signed
+  type.
+- Added a patch decoding unsigned vector immediates separately from signed
+  vector immediates.
+- Added a cleanup patch using extract32()/sextract32() for replaceable
+  operand helper field extraction, including split immediates, as
+  suggested by Richard.
+- Link to v1: https://lore.kernel.org/qemu-devel/20260626-b4-disas-xthead-fix-riscv-next-v1-0-74228a3c1b21@linux.alibaba.com
+
+---
+TANG Tiancheng (5):
+      disas/riscv: Fix th.srri decoding
+      disas/riscv: Fix 6-bit immediate extraction
+      disas/riscv: Use signed type for vector immediates
+      disas/riscv: Decode unsigned vector immediates as unsigned
+      disas/riscv: Use extract helpers for operand fields
+
+ disas/riscv-xthead.c |   6 +-
+ disas/riscv.c        | 263 +++++++++++++++++++++++++++------------------------
+ disas/riscv.h        |   1 +
+ 3 files changed, 142 insertions(+), 128 deletions(-)
+---
+base-commit: 64ce9ac18757d79f3b5b337f7bcbdd0dabef3ce1
+change-id: 20260623-b4-disas-xthead-fix-riscv-next-c6af6a09d2dc
+
+Best regards,
 -- 
-2.43.0
+TANG Tiancheng <lyndra@linux.alibaba.com>
 
 
