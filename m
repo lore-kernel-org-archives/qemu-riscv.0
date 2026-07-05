@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CCACC43458
-	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 04:39:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22A33C43602
+	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 04:39:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgEbo-0004h3-2u; Sun, 05 Jul 2026 00:37:36 -0400
+	id 1wgEdP-00072e-GF; Sun, 05 Jul 2026 00:39:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wgEbk-0004fL-Tu
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:37:32 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1wgEc7-0004uN-Tt
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:37:56 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wgEbh-0003wo-HD
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:37:32 -0400
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2cacf197759so28984065ad.2
- for <qemu-riscv@nongnu.org>; Sat, 04 Jul 2026 21:37:28 -0700 (PDT)
+ id 1wgEbu-0004BH-5H
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:37:55 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2cc61541f8cso9873315ad.0
+ for <qemu-riscv@nongnu.org>; Sat, 04 Jul 2026 21:37:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783226247; x=1783831047; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=kjTtIsN3nY1hYvokr33aF50VbP0gmCj1u2mZaTHrD68=;
- b=bUeFw1ZxzZQeg+x/HR5Rw4uxaK9DkGBkPsP1y9Rbm6rEzjvZY8jhBrrpflwU1d53pe
- YC4BDHoX8AK4LvdGvhD+bHgFNoWIZ+MJbrcU9jog+jkr1gIgiKi58gQZ2KPONNc0KTDd
- xZT7LtndnDMwEtRJpEUddohLJEGRvMICQ5MnCHgHgD778cejT34sxeMHYc4LxAaQyeD5
- l83DW4mBR0fzdlwNH9hO8XtaqFGu5PDEljIbcGp1ShIk4ctfw9VWc4nk+dYq7TYrQozH
- u02GQSS0bt1jWzH23H5XXAPHkfdunDfHjd9zLyKeMq/DfO3P7XJ9JpuJ9rXlIMuAEaIX
- wuDQ==
+ d=linaro.org; s=google; t=1783226261; x=1783831061; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=w/QoPchMBLEoPNwVaZS+xZRRFREK+x04Oz5t5RgPWdc=;
+ b=Tf9aT3Gs3ol5ms8gia9ihB6o55s9u46Py3omuAAliBt8w2dIJETgppMjNEscfCbh6m
+ 3mjCNSQi2GUIkCQkElK6O6Cu63hGszNeDWe3vWw9bjNjc3J33DBuFk81oQvbqKDPlMcn
+ UCIESibt35rvSLlawKd9WqSxhawWSpOXB6R14vDYJQF7ncSF8aT5tYhfVpn8n9/AWAJz
+ HD3FHKN0ZgnPyy9xVsK/sR4Mp+C563GmBBi2fu6U+6J5crP+UERjoiG+/1iH6VA3Dame
+ DO1AJ3OgHu3IRsThLRU4OBjogWw5fCB59htUlw1cGGB6CRZMwetcS68ZpWEmr31cWMSi
+ 9Xmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783226247; x=1783831047;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=kjTtIsN3nY1hYvokr33aF50VbP0gmCj1u2mZaTHrD68=;
- b=U+hpzEWTQq2V5xxppCRPlb8kkOHnTflyAxtIt2ohaPJhigb2t9zKkfNgrGU/5ne3yt
- 9DA4P8+JwHgnpLzpQ3HVMImtvJuWbSDTPPOuryBSJWII7drHAlV96mh5hCFbwLNLDDRl
- hHzG9uOSOpcBBZbAjZgMnpsVgVAPmlVCJadlWq/n2XgjjxSi96oEl778FVv5/xiCaxpB
- KYCtx22D6V1hoztXmvlvfEIKOcsK1VQ7rJpc27hYom7vxqi/qmD8oVCSLwgEBvlVILfz
- 9DCRaVU4K/fYTWc1w5QaEZDA3YPj7Q4YF+k7xTeAOsVGAxbTdOT0ZCOi6x6PxiFJNvrr
- jfiw==
+ d=1e100.net; s=20251104; t=1783226261; x=1783831061;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=w/QoPchMBLEoPNwVaZS+xZRRFREK+x04Oz5t5RgPWdc=;
+ b=d5vXeeVHrL2yoZw+C/uGpt8kQBqsd60QJn2lfB8q/OxwWfkA8okk2poj/SH45FelPc
+ PVmg5BlUM5aYsoEmpOirKc6kMtkGKTGG5CAscrAGiCEW4jbLu3I/LJAN6fQmgL1VNrTv
+ YueP28n1jUu6coBy8pUlVstCTZpe+q3iUNcv+6JPfxSyzl9cKduaJK/MyiMeMkRNQdWX
+ BpXu6I/61ShuwyZVRfrhXY5zW9YsNnrYGaYG9zoz3Va7iaccehHDreKJRvpglw/mG8pd
+ 7EnPWA8zVlAeSKE/Kk2Ok1UzOAGIO0tagiGDPAw0IHA73lpRysf+ezAcqVAwYNh3+78a
+ ogjg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrTLnQDOLMrn1Asrq84ZoadDvLMgiUu51HdZUlHPXUa/HgGkFxVblRvCOrL1CAWj6UWRe5sPMzF5Zkh@nongnu.org
-X-Gm-Message-State: AOJu0YwToxNxr0O4P5tSpFSoALfZzP6QLwtVhka84tQIc9AraTidgrLH
- u8pgphxMCwHY6PdbMSq4eY652sfVTFe5JJ829T/6mttDlNLAfXwN8wbBaa158l4xU3E=
-X-Gm-Gg: AfdE7ckynQLnUDkp2oiLODrmtgfDnLgRJ091lKsY9KjtqwLpI1SIbHWm9w1p36s8dZG
- k/7116QrfCOByvmQp7VCoudyS41699I9Wsrlo3N36VwI/bCYYlgGiLnqQH6Mx2r8NgSiNxAQIKw
- BWeVlaVZkuQo0MZdTb5EEV0ri2rH+asEYuN2sBxcZHHnV8kI+DpwK52biai5JyY80+IVEoybZn8
- zm+4DQ6X6HLVgfVVae8EbQFZ/zvwuAQ2dfrbfkECpthmP8U2Sh48a7B2z26Y7p/yrUv30UNItz3
- tk372cX/CcNjAZies4ps3dYEZJ0i8FERMM3QLFBiC7rLUyKXJKlTnG5bOiuT/XWi7wPrEtPmPeu
- A64Euio5B4+7ouGmmn9xZJ7PqnmGGziENUCFGV8/p6E8RGojMppI/i8QKlW+RoucRFxkElSSvNY
- u3XL2oFSAwTd3tTQfZWkQ9CAXRiPMIa5vkFPnMLv5uOjnK8C8=
-X-Received: by 2002:a17:902:d551:b0:2c9:d55d:2d1 with SMTP id
- d9443c01a7336-2cbb9ebc1admr53990035ad.33.1783226247220; 
- Sat, 04 Jul 2026 21:37:27 -0700 (PDT)
+ AHgh+Rpw5CAGRARdt6YprpOSYpI2eqc3ZCJu69VyLnl2F/NfpGdzmOVjJ+DVQmCzXBjhQOfI70KZX3h30+dI@nongnu.org
+X-Gm-Message-State: AOJu0YyT3/3K0yZvJo3tWmUt9sVPYoLNSJgZrTIXYzfy1FE1sKjxGwgg
+ 7w3PfJBBn1Ih8PAtnYPsBgIWaCbrn7u5TpThrE8tMJo92w2wqKRQ79T1EE1V0jV0Enk=
+X-Gm-Gg: AfdE7clo6N3oUJNHk6kM8BxZ3ULWbToI008HNGXznFa5Z8HGbEb2xMG7a0uiQFYxfG3
+ iOqTOzszTVpq8nxXnUPav28EsYKaZnrmdDLdEzUf47W01OIaULGvu330F7LzafEuM38zTNCst0k
+ ObfROSnFiYy0nQgTEF/QAN5+zfpMBuZJvAMNaf/0nszSC+J9f86LHQuA4ayHUGhwZlAxsysNDo1
+ 0tEYTwzXXTzoJFFse0WXYRbVdLgzZKJgclfUmjIDSGr+/oY8guR2p+klG7uSq69dipfVsficu0m
+ yYzX5B3+n5vGDVl2wxZM5g3H6VGLyFWYNYLED0rciKkdSUg1elYQWx6nsD4Rv4RFPQTL+2o94oX
+ WLQuc1ClnpJ1yyLIELSul5Dk0Z6/fLx3fsv3kar3vfTgtwfAdgbaDg2PSLunXrha8BhTyMyUMyY
+ IMdVyQGGube7iwoAJdzXLCqUFizJYpk1dYJd1mtG47X8wBTnk=
+X-Received: by 2002:a17:903:90b:b0:2c9:d277:2cdb with SMTP id
+ d9443c01a7336-2cc08df17bcmr41444215ad.9.1783226260602; 
+ Sat, 04 Jul 2026 21:37:40 -0700 (PDT)
 Received: from stoup.. (71-212-39-188.tukw.qwest.net. [71.212.39.188])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cad712ca17sm29863785ad.28.2026.07.04.21.37.26
+ d9443c01a7336-2cad712ca17sm29863785ad.28.2026.07.04.21.37.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 21:37:26 -0700 (PDT)
+ Sat, 04 Jul 2026 21:37:40 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, philmd@oss.qualcomm.com
-Subject: [PATCH v2 00/46] accel/tcg: Use IntervalTree for breakpoints and
- watchpoints
-Date: Sat,  4 Jul 2026 21:36:39 -0700
-Message-ID: <20260705043725.1373137-1-richard.henderson@linaro.org>
+Subject: [PATCH v2 15/46] target/arm: Use wp argument in
+ arm_debug_check_watchpoint
+Date: Sat,  4 Jul 2026 21:36:54 -0700
+Message-ID: <20260705043725.1373137-16-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260705043725.1373137-1-richard.henderson@linaro.org>
+References: <20260705043725.1373137-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x632.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -101,136 +103,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Beyond using interval-tree for breakpoints:
+Use the matched watchpoint instead of looping over all.
 
-  - Pass the matching breakpoint to the target debug hook,
-  - Allow the target to record an id/index for each BP or WP
-    so that the target doesn't have to search for which item
-    triggered, so that the target doesn't have to search again.
-  - Convert both BP and WP to IntervalTree.
-  - Merge CPUBreakpoint and CPUWatchpoint.
-  - Clean up tcg_ops->debug_excp_hander implementations.
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/arm/tcg/debug.c | 35 ++++++-----------------------------
+ 1 file changed, 6 insertions(+), 29 deletions(-)
 
-On the to-do list:
-
-  - Handle ARMv6 BE-32 within debug_check_watchpoint,
-    which will allow dropping adjust_watchpoint_address.
-  - Change cpu_watchpoint_insert from addr+len to first+last.
-    This will allow the entire address space to be covered with
-    a single call (existing workaround in s390x; also possible with
-    unimplemented Arm not-matched address trigger).
-  - Breakpoint ranges, for Arm FEAT_BWE.
-
-
-r~
-
-
-Philippe Mathieu-Daudé (4):
-  cpu: Move BREAKPOINT definitions to 'exec/breakpoint.h'
-  cpu: Define BreakpointFlags type
-  target/arm: Inline check_watchpoints() in arm_debug_check_watchpoint()
-  accel/tcg: Improve docstrings around TCGCPUOps::*watchpoint* handlers
-
-Richard Henderson (42):
-  cpu: Move cpu_breakpoint_test out of line
-  exec/breakpoint: Move BP declarations from hw/core/cpu.h
-  exec/breakpoint: Merge watchpoint.h
-  qemu/typedefs: Declare CPUBreakpoint and CPUWatchpoint globally
-  hw/core/cpu: Remove exec/breakpoint.h include
-  exec/breakpoint: Add CPUBreakpoint.id
-  exec/watchpoint: Add CPUWatchpoint.id
-  accel/tcg: Pass CPUBreakpoint to debug_check_breakpoint
-  target/arm: Split is_wp out of bp_wp_matches
-  target/arm: Use bp argument in arm_debug_check_breakpoint
-  target/arm: Use wp argument in arm_debug_check_watchpoint
-  target/riscv: Use bp argument in riscv_cpu_debug_check_breakpoint
-  target/riscv: Use bp argument in riscv_cpu_debug_check_watchpoint
-  target/xtensa: Use bp argument in xtensa_debug_check_breakpoint
-  cpu: Use interval-tree for CPUBreakpoint
-  target/arm: Make check_watchpoint_in_range static
-  gdbstub: Report actual watchpoint trigger address
-  cpu: Use interval-tree for CPUWatchpoint
-  exec/breakpoint: Return the new bp from cpu_breakpoint_insert
-  system: Remove cpu_watchpoint_insert error return path
-  exec/breakpoint: Return the new wp from cpu_watchpoint_insert
-  system: Validate flags in cpu_watchpoint_insert
-  cpu-common: Validate flags in cpu_breakpoint_insert
-  exec/breakpoint: Add CPUWatchpoint.hitlast
-  exec/breakpoint: Merge CPUBreakpoint and CPUWatchpoint
-  accel/tcg: Pass watchpoint hit to debug_excp_handler
-  accel/tcg: Pass breakpoint hit to debug_excp_handler
-  target/arm: Use CPUBreakpoint arg in arm_debug_excp_handler
-  target/i386: Pass wp_hit to check_hw_breakpoints
-  target/i386: Use CPUBreakpoint arg in breakpoint_handler
-  target/ppc: Use CPUBreakpoint arg in breakpoint_handler
-  target/ppc: Simplify ppc_cpu_debug_check_breakpoint
-  target/ppc: Simplify ppc_cpu_debug_check_watchpoint
-  target/s390x: Use CPUBreakpoint arg in breakpoint_handler
-  target/riscv: Simplify riscv_cpu_debug_excp_handler
-  target/riscv: Set badaddr in riscv_cpu_debug_excp_handler
-  target/riscv: Merge riscv_cpu_debug_check_{break,watch}point
-  target/xtensa: Restrict xtensa_breakpoint_handler to system mode
-  target/xtensa: Rename xtensa_breakpoint_handler
-  target/xtensa: Simplify xtensa_cpu_debug_excp_handler
-  accel/tcg: Clear BP_WATCHPOINT_HIT after use
-  accel/tcg: Merge CPUState.{break,watch}point_hit
-
- include/accel/tcg/cpu-ops.h         |  17 +--
- include/exec/breakpoint.h           |  47 ++++++--
- include/exec/watchpoint.h           |  18 ---
- include/hw/core/cpu.h               |  46 +-------
- include/qemu/typedefs.h             |   1 +
- target/arm/cpu.h                    |   4 +-
- target/arm/internals.h              |  13 +--
- target/i386/cpu.h                   |   4 +-
- target/i386/tcg/helper-tcg.h        |   4 +-
- target/ppc/cpu.h                    |   4 +-
- target/ppc/internal.h               |   6 +-
- target/riscv/cpu.h                  |   4 +-
- target/riscv/debug.h                |   5 +-
- target/s390x/tcg/tcg_s390x.h        |   2 +-
- target/xtensa/cpu.h                 |   8 +-
- accel/tcg/cpu-exec.c                |  76 +++++++------
- accel/tcg/cputlb.c                  |  12 +-
- accel/tcg/tcg-accel-ops.c           |  34 +++---
- accel/tcg/user-exec-stub.c          |  19 ++--
- accel/tcg/watchpoint.c              | 166 ++++++++++++++++------------
- accel/whpx/whpx-common.c            |   9 +-
- cpu-common.c                        |  69 +++++++-----
- gdbstub/system.c                    |  50 +++++----
- gdbstub/user.c                      |   9 +-
- hw/core/cpu-common.c                |   2 -
- linux-user/main.c                   |  14 ++-
- system/watchpoint.c                 |  73 ++++++------
- target/arm/debug_helper.c           |   2 +-
- target/arm/hvf/hvf.c                |   6 +-
- target/arm/hyp_gdbstub.c            |   7 +-
- target/arm/kvm.c                    |   5 +-
- target/arm/tcg/debug.c              | 120 +++++---------------
- target/arm/tcg/mte_helper.c         |   3 +-
- target/i386/cpu.c                   |   2 +-
- target/i386/kvm/kvm.c               |  11 +-
- target/i386/machine.c               |   2 +-
- target/i386/tcg/bpt_helper.c        |   2 +-
- target/i386/tcg/system/bpt_helper.c |  81 ++++++--------
- target/i386/tcg/tcg-cpu.c           |   2 +-
- target/i386/whpx/whpx-all.c         |  15 +--
- target/ppc/cpu.c                    |   9 +-
- target/ppc/cpu_init.c               |   2 +-
- target/ppc/kvm.c                    |  14 ++-
- target/ppc/tcg-excp_helper.c        |  85 ++++++--------
- target/riscv/cpu_helper.c           |   6 +-
- target/riscv/debug.c                | 159 ++++----------------------
- target/riscv/tcg/tcg-cpu.c          |   4 +-
- target/s390x/helper.c               |   1 -
- target/s390x/kvm/kvm.c              |   7 +-
- target/s390x/tcg/debug.c            |  22 ++--
- target/xtensa/cpu.c                 |   2 +-
- target/xtensa/dbg_helper.c          |  31 ++----
- target/xtensa/helper.c              |  46 +++-----
- 53 files changed, 568 insertions(+), 794 deletions(-)
- delete mode 100644 include/exec/watchpoint.h
-
+diff --git a/target/arm/tcg/debug.c b/target/arm/tcg/debug.c
+index 2389830b2a..daad2ac440 100644
+--- a/target/arm/tcg/debug.c
++++ b/target/arm/tcg/debug.c
+@@ -365,7 +365,7 @@ bool arm_debug_check_breakpoint(CPUState *cs, CPUBreakpoint *bp)
+     return bp_wp_matches(cpu, env->cp15.dbgbcr[bp->id], arm_current_el(env));
+ }
+ 
+-bool arm_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *ignore)
++bool arm_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+ {
+     /*
+      * Called by core code when a CPU watchpoint fires; need to check if this
+@@ -373,37 +373,14 @@ bool arm_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *ignore)
+      */
+     ARMCPU *cpu = ARM_CPU(cs);
+     CPUARMState *env = &cpu->env;
+-    int n;
+-
+     /*
+-     * If watchpoints are disabled globally or we can't take debug
+-     * exceptions here then watchpoint firings are ignored.
++     * The LDRT/STRT/LDT/STT "unprivileged access" instructions should
++     * match watchpoints as if they were accesses done at EL0, even if
++     * the CPU is at EL1 or higher.
+      */
+-    if (extract32(env->cp15.mdscr_el1, 15, 1) == 0
+-        || !arm_generate_debug_exceptions(env)) {
+-        return false;
+-    }
++    int access_el = wp->hitattrs.user ? 0 : arm_current_el(env);
+ 
+-    for (n = 0; n < ARRAY_SIZE(env->cpu_watchpoint); n++) {
+-        CPUWatchpoint *wp = env->cpu_watchpoint[n];
+-        int access_el;
+-
+-        if (!wp || !(wp->flags & BP_WATCHPOINT_HIT)) {
+-            continue;
+-        }
+-
+-        /*
+-         * The LDRT/STRT/LDT/STT "unprivileged access" instructions should
+-         * match watchpoints as if they were accesses done at EL0, even if
+-         * the CPU is at EL1 or higher.
+-         */
+-        access_el = (wp->hitattrs.user ? 0 : arm_current_el(env));
+-
+-        if (bp_wp_matches(cpu, env->cp15.dbgwcr[n], access_el)) {
+-            return true;
+-        }
+-    }
+-    return false;
++    return bp_wp_matches(cpu, env->cp15.dbgwcr[wp->id], access_el);
+ }
+ 
+ /*
 -- 
 2.43.0
 
