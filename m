@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60906C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 04:43:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AD87C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 04:44:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgEec-00014A-FS; Sun, 05 Jul 2026 00:40:30 -0400
+	id 1wgEdw-0008UN-ET; Sun, 05 Jul 2026 00:39:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wgEcY-0005KM-04
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:38:22 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1wgEcX-0005J9-Da
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:38:21 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wgEcC-0004I9-K3
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:38:21 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2cabc0a1ab6so18044025ad.0
- for <qemu-riscv@nongnu.org>; Sat, 04 Jul 2026 21:37:50 -0700 (PDT)
+ id 1wgEcB-0004Vx-Nr
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:38:20 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2caf228a910so9151405ad.2
+ for <qemu-riscv@nongnu.org>; Sat, 04 Jul 2026 21:37:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783226269; x=1783831069; darn=nongnu.org;
+ d=linaro.org; s=google; t=1783226278; x=1783831078; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FgdeNV+kSDtwWzzSUG7k6o21nzzJqi9iKyuHEyE17qI=;
- b=Nhnt3moBKGl9Biusc2l6zMQqGogOZDw681FOZ9fZxVu0svtf9RUyP5OkeWg842CM2Y
- AHqFubYUHM2uH79FmTO1PWQ2DV4uOmZpWpduZJiRcrd340RUZbQC7OKs51xoZOQ9lBC9
- +xJvqm/yHH3kAbqcvHu00fK0YnzLT4oKM8ROhXLtYk2DoUfZ5Mtj+Fiocc9nTrj8P0Q6
- yS17b/gCpYkWciqDVrx9g78jijPGbAYBG0haVgDdVgFOaKvxGksFYfLa8BpxPdtlmldd
- gwU70yOEp56AzYAG22lBe+hauNYruEPyDQRejXRykWcb8DdSWj6wyr14tNEY3aXl5bKe
- 0KoQ==
+ :message-id:reply-to:content-type;
+ bh=Gu1/Z4NGRci2zl7OUGsQFq715jKZAcS9WoRfcTkKu9k=;
+ b=Su/JF5JrKq1V8q1V/FaNCvHr4pcFgGbupwdxgqCAVKJMC9YzCrUrHykerA2mkDwYha
+ LfdoegNXxtMptpEisy0bBC+drwMGYAA3A3Ew4BZOa5I/N06zmxhwqBqogci+xngUBOjr
+ 4r8TyfwfDNsxZIbnrziwZcypZcSd63ohASa0KH7qYpvjIWWqFMzHWWTTL/6nIY4DxTnC
+ d1ZA+9wsVl4r1J+Z/h00weZTQP2fRnWUMR2KiRFixq6W0WT3ZzCSDvCKGMNpAUCTQFnS
+ zvd+xMGd106RC5XArwFYi54bL3CUKfsPBdKs/BOfNiaB870lDH7Olt3nvnFlqdIwK21l
+ 6euw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783226269; x=1783831069;
+ d=1e100.net; s=20251104; t=1783226278; x=1783831078;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=FgdeNV+kSDtwWzzSUG7k6o21nzzJqi9iKyuHEyE17qI=;
- b=Gdz41W51NfqnaWrr3O1lrtDRg292bdP8t3MAQVrQtFrzpEzIqrTPc0mwR7u6naUZzp
- nrAaCLvYM6whz8gt9iBihEEG9lGGvK8BUR7HeAWEA75vhL3439RBCTkWUNv50nvIPbsN
- LyKsQzp+gh1f+RRer/Da0JRHWzJgJ+lpKUcZZK7Tnvz0w6QPXh8P/aFXL8m8lrNC7aIm
- 55NqE/yFTlMOO5+f1Pb91ZFX3fIuWMeh0IyYnebth0KRnHPhzRQKtIVzryT9QL02vc8J
- J3+H2LiiB7fQw5xRLEGrVLXuQrP6AgPhqzVOT9BifAmC9eMUw0x5mleb5anQSOFrwWY0
- ryzw==
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Gu1/Z4NGRci2zl7OUGsQFq715jKZAcS9WoRfcTkKu9k=;
+ b=Cr+ejVQFdRCRJJ0URqm495dmVtjJzqZReOjq3+V6V9Fp8RB/80jZxmywHrXfQZLOec
+ lfzmw2TvQ+6Q+JkmaSUYunkiOG8k5OwoQ/vlsecMDJDQ5qqWUTtmYlgZRZQExTBup/xw
+ qDd84U6ei3YI+6ly6XgY7MPRi4QJjgMd4Rtx47zsdY6LaYSVclsM4L3/1sLnPA8kFbWb
+ whahBC2cp/jN6nUK5+sKIKlSfoq6jdOxPUXwWbcnpb2GAr5ZRRbvgQmhdpVwxNYx1WqX
+ LeZnMqy7ELTDoNPb4eAAdFij8J4EHN+xukiDipgkqm32zfM5p7pJqQyfC+OuKoXLDgUE
+ PrMA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoPgmrUVPBnlRZKfYzjE83fmmNjSSVkKP50lKOmg8Rgpqy4txkOrcBUbY6scMDttNngKCaFV+6oDfQp@nongnu.org
-X-Gm-Message-State: AOJu0YwaCFJPZ9oKmfdLyEOQnmBowgD6mnTpA9wrc+Cqn4tHUYRESIh5
- qhYAN2CCjlrrWDMDuqG9tIO5Sd0sh4jOUPsdJe+s/LeMAr0bxzMfgVXtfp/tFp02pXc=
-X-Gm-Gg: AfdE7cmslwSz01M3gR5K9mLyMld3EsteZ9HNzjMk5G/AKW29dL/u5JzjiAV/vtpY6x1
- omAee2Q9VYl2bkS+qrjATrVLK5AuUj1Xj4CyT/yZyTr9gGdFYiKjC7oUS7rMReHyEVdG9GthsgO
- r685lMgUAEKNC8xDIcRf1/Ek0nXPTytBonuQHhQgWto7jgAgwz6RpTwxmc6hHd4C+3zMM443y+D
- vtQYoK5OY/ZO/2uOXMBRRY+53ex7Z8Gjh6Z2Z9LNmTP5r+ZjVUoRsX5uQnRlUmMH/Gct3HwRT+d
- o7PNj71OlPeAsDnTFUa5addkvi6flZNwIouuw8ECiAkEA1J9nIZHfh+unYautdJu2M3XRVbcxhB
- rDZ/sVJ4kZzdrqtZI/Wx+1ltq7pgAjE9bX1/p5/m5UUhwcr5iQTXYRK+BWigsClcRSH7ihKzT5Y
- vKVn1GCE+A4ic3p0y7k/+qt5v3GrCcRRRqNGVIApXukLINC5E=
-X-Received: by 2002:a17:903:3bcb:b0:2ca:e08e:9e70 with SMTP id
- d9443c01a7336-2cbb9f479a9mr54297515ad.46.1783226269175; 
- Sat, 04 Jul 2026 21:37:49 -0700 (PDT)
+ AHgh+RohbFoZD6ds7DnjTEhoLl2wA6TzZiJELYr9aZ6+8mm/gmB2+vxDt3Bqgony7QGJa9hJswXtHcaqbWEI@nongnu.org
+X-Gm-Message-State: AOJu0Yzsx8z0jFnkcXxbqXSzxf+mrTdd9mh/3CTb7WiBhcX7DcAxUNPR
+ ZHC0C1YvN8Pf1ZWRFOAXM6Q2FatM4NCpSFBaKUc8j53EcEILEg/Kh/A84FcyvAOsdWI=
+X-Gm-Gg: AfdE7cnHq6Rr5qUkNBJI6I5gyTENn3YJlLu1waCRvVnzVlC18wDBAeIdlvWShzfOp4F
+ ckgeR1uzrTKDOU+nuD2+zUSvAVkbucOHxhL6Z3imJbijf9ua0XBcJlpnD8Dj0B8kcPNjdlZ7H8D
+ 6TY6fPz54SgDmN3Hhf/MC38krUqUGBCsVm3PuFgdB4UZckazyFdlLzP1GF+/3X6qgrS5G96FSVz
+ NcuoeIQ0prrFjQsgdhAz8yDa0dUHUljYv/fnlAOslgfmDLlYzxk+ZnTl43n6w53FLTdmePo5reD
+ sz8QVCisLGa1cauo4Z+NVI3GlLzCcLLiDus2LgNaUm611UplL5hipofqXL9W+Z2nWFukVP8f/EG
+ pHvOj+tleOTL1s1SuyQRIH6ZS/1j8mHgSix3/lz0SAXNjIuwcPSEogCCFQLzJ2ZUcygo1e2xKIU
+ 7g7fx5fcpWSX7H36EjOV9CdxWBZx5L4Fc/aqU38oWAH1gi+A4=
+X-Received: by 2002:a17:903:198e:b0:2c6:9f14:c50c with SMTP id
+ d9443c01a7336-2cbb7cba325mr55750965ad.13.1783226278227; 
+ Sat, 04 Jul 2026 21:37:58 -0700 (PDT)
 Received: from stoup.. (71-212-39-188.tukw.qwest.net. [71.212.39.188])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cad712ca17sm29863785ad.28.2026.07.04.21.37.48
+ d9443c01a7336-2cad712ca17sm29863785ad.28.2026.07.04.21.37.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 21:37:48 -0700 (PDT)
+ Sat, 04 Jul 2026 21:37:57 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, philmd@oss.qualcomm.com
-Subject: [PATCH v2 26/46] system: Validate flags in cpu_watchpoint_insert
-Date: Sat,  4 Jul 2026 21:37:05 -0700
-Message-ID: <20260705043725.1373137-27-richard.henderson@linaro.org>
+Subject: [PATCH v2 37/46] target/ppc: Simplify ppc_cpu_debug_check_watchpoint
+Date: Sat,  4 Jul 2026 21:37:16 -0700
+Message-ID: <20260705043725.1373137-38-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260705043725.1373137-1-richard.henderson@linaro.org>
 References: <20260705043725.1373137-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -102,29 +102,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Flags must watch reads, writes, or both.
-Flags must specify GDB or CPU but not both.
-Flags must not contain extraneous bits.
+We don't need to check either ISA bit, because that's already
+done starting with SPR registration.  Replace target_ulong with
+uint64_t, as we're under TARGET_PPC64.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- system/watchpoint.c | 3 +++
- 1 file changed, 3 insertions(+)
+ target/ppc/tcg-excp_helper.c | 30 +++++++++---------------------
+ 1 file changed, 9 insertions(+), 21 deletions(-)
 
-diff --git a/system/watchpoint.c b/system/watchpoint.c
-index 183b194403..fbaebba7cf 100644
---- a/system/watchpoint.c
-+++ b/system/watchpoint.c
-@@ -33,6 +33,9 @@ CPUWatchpoint *cpu_watchpoint_insert(CPUState *cpu, vaddr addr, vaddr len,
+diff --git a/target/ppc/tcg-excp_helper.c b/target/ppc/tcg-excp_helper.c
+index 99ffe4a820..4065440949 100644
+--- a/target/ppc/tcg-excp_helper.c
++++ b/target/ppc/tcg-excp_helper.c
+@@ -353,35 +353,23 @@ bool ppc_cpu_debug_check_watchpoint(CPUState *cs, CPUBreakpoint *wp)
+ {
+ #if defined(TARGET_PPC64)
+     CPUPPCState *env = cpu_env(cs);
+-    bool wt, wti, hv, sv, pr;
+-    uint32_t dawrx;
++    uint32_t dawrx = env->spr[wp->id ? SPR_DAWRX1 : SPR_DAWRX0];
++    bool wt = extract32(dawrx, PPC_BIT_NR(59), 1);
++    bool wti = extract32(dawrx, PPC_BIT_NR(60), 1);
++    bool hv = extract32(dawrx, PPC_BIT_NR(61), 1);
++    bool sv = extract32(dawrx, PPC_BIT_NR(62), 1);
++    bool pr = extract32(dawrx, PPC_BIT_NR(62), 1);
  
-     assert(len != 0);
-     assert(last >= addr);
-+    assert(flags & BP_MEM_ACCESS);
-+    assert(ctpop32(flags & BP_ANY) == 1);
-+    assert(!(flags & ~(BP_ANY | BP_MEM_ACCESS | BP_STOP_BEFORE_ACCESS)));
+-    if ((env->insns_flags2 & PPC2_ISA207S) &&
+-        (wp == env->dawr_watchpoint[0])) {
+-        dawrx = env->spr[SPR_DAWRX0];
+-    } else if ((env->insns_flags2 & PPC2_ISA310) &&
+-               (wp == env->dawr_watchpoint[1])) {
+-        dawrx = env->spr[SPR_DAWRX1];
+-    } else {
++    if ((env->msr & (1ull << MSR_PR)) && !pr) {
+         return false;
+-    }
+-
+-    wt = extract32(dawrx, PPC_BIT_NR(59), 1);
+-    wti = extract32(dawrx, PPC_BIT_NR(60), 1);
+-    hv = extract32(dawrx, PPC_BIT_NR(61), 1);
+-    sv = extract32(dawrx, PPC_BIT_NR(62), 1);
+-    pr = extract32(dawrx, PPC_BIT_NR(62), 1);
+-
+-    if ((env->msr & ((target_ulong)1 << MSR_PR)) && !pr) {
+-        return false;
+-    } else if ((env->msr & ((target_ulong)1 << MSR_HV)) && !hv) {
++    } else if ((env->msr & (1ull << MSR_HV)) && !hv) {
+         return false;
+     } else if (!sv) {
+         return false;
+     }
  
-     wp = g_new0(CPUWatchpoint, 1);
- 
+     if (!wti) {
+-        if (env->msr & ((target_ulong)1 << MSR_DR)) {
++        if (env->msr & (1ull << MSR_DR)) {
+             return wt;
+         } else {
+             return !wt;
 -- 
 2.43.0
 
