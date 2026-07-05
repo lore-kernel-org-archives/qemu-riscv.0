@@ -4,95 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D0D6C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 14:05:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2F91C44500
+	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 22:02:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgNTb-0004UK-Cg; Sun, 05 Jul 2026 10:05:43 -0400
+	id 1wgUv8-0007E2-7z; Sun, 05 Jul 2026 18:02:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imaginos32@gmail.com>)
- id 1wgNTT-0004Po-Pe
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 10:05:36 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <imaginos32@gmail.com>)
- id 1wgNTR-00051H-Ir
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 10:05:35 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-493bfe9f886so11293455e9.0
- for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 07:05:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wgUv5-0006w4-RN
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 18:02:35 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wgUv3-0001TJ-G7
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 18:02:35 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 665M02Rh2648709
+ for <qemu-riscv@nongnu.org>; Sun, 5 Jul 2026 22:02:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ l+Cb4Du/dcN++8nK3fDGL9BijxWyWk8X7pjSAGD/v30=; b=aMHAHRF5sn61ieZ+
+ jG9oNVEVXmkZMszRzoPGI4purM8yhS38yBCfGkUnYINLwn9XDZZjf8oFrPebCrC6
+ Wh9U8fCSVY9gArKrO1oLoG7I4v29bSGjvk31IWPEvuUKfVfuUCCB06gjf126xn0W
+ U7PD3RGH4Z90faJGsBxygNlVHumLZzoLTZbr2Ns4EwTrIvX4qRKKAv9ALV6rAivH
+ kc6FnaWqSi192MXS8aBvgu+KvAijGusR5lsQgShLPkWeChgZkwciNY95AhIeNU7t
+ IA6yZSSmE37AD8wk2+khtgCbs/sDFtwzTDOaO6lWEFmx/G2iPqRL6xA96icmFkwV
+ 9UevLQ==
+Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com
+ [209.85.221.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f6ubgkc9x-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 22:02:31 +0000 (GMT)
+Received: by mail-vk1-f197.google.com with SMTP id
+ 71dfb90a1353d-5bdda66a906so3356910e0c.1
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 15:02:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783260330; x=1783865130; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UTgD4XU6nX98udZAcwuur62Dr9OUg4XQkoqc7W/QL9U=;
- b=G2dOHInyXRmIzKKNVy63rf5ilC/dW2MwT3RWG59gsPCRSYvlVuJ53ioD9iujMQAIok
- lR6JQHrQvdtTua8bVUXElS1tdaeR459b5k7Dqs/BDkK4g7H6VjEIBrRaNrjI25Jnte40
- DswrJ1csvB5MrK7qJEGuIWgNNOZqVNj3EwpwhMhaO1AgWJKSZGxkA+AsqrkVa2o9zb6g
- cnoQkzT4NzWNJvFnmiu5MJMgp7trP/kha6Wc85rdFrd+05fSWBk1jQ0DbQBa759Hs1Q2
- kTBrxekxhxR5/Al9lW8NFbXe8MC7aBkIopKBrGm3g0iYf78S5aQ70HM2KSlAni3+fB7K
- l7EQ==
+ d=oss.qualcomm.com; s=google; t=1783288951; x=1783893751; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=l+Cb4Du/dcN++8nK3fDGL9BijxWyWk8X7pjSAGD/v30=;
+ b=iUj+PFNKbm68Kvr+R4+rL64u/Lfk7xTacqwzieAdcKE92poIYZP2dn6gBWr4k6SVH7
+ 27xUA6XRitX5ib9uGgp4NQOnH/+HuSStj48EUvvZ4heytRF+wAVQfyoH5q5ImN52p7B3
+ TBInaR8dfcWbFzkEP12LB5YNCBmj/3f6V8fVpSrbDDHj7D6m/PRotqO6i/pboXju18E9
+ V76gUhTFNj7eRh7c4+9cqwv4ws+z0nOuSRKed/RvDJVHW6f2uiwAxNUT+l8VyA+Pxhzk
+ X8YSVjr0T8HLqDuEBL8jfg8wMZ9CwySDOkLrM24jOFvzEMBP5monf+e6PjNJzFu1fnUS
+ DNYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783260330; x=1783865130;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=UTgD4XU6nX98udZAcwuur62Dr9OUg4XQkoqc7W/QL9U=;
- b=A1H15XGGSFl0OXQLiGCHRP4YYYkWoj20AcELytKvl/ch8kXfnrBlWaET6r8d6Xrk7A
- irOpMppepwdNElxFabvSXYAkvn64Qh2CiRIp8lDOE43L69k/vxqG2HMkwthHYR932d3C
- FC5XA+o8E89y/ZU+EJCor4+ytwmu9kGRUzdD/bp3jUER6N4KvRTH6HWobsPC6lvct3sc
- zkGjo/8ybXwpEHVAAta7/72nGPciMEdSIFPNmEoNDrdmV41tbK6OLZ8gJmqmeB36aDc2
- 3miWKNo8MDof9ZMouUmBYAvczHOBG4bZEr7JP9JFpHEr3U2DF3fd0o1zr8ihaKrmxvPT
- lGnA==
+ d=1e100.net; s=20251104; t=1783288951; x=1783893751;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=l+Cb4Du/dcN++8nK3fDGL9BijxWyWk8X7pjSAGD/v30=;
+ b=kuZXcliJ1N3t35mFv7WgExNRHACIUf9o4nsk5MunKcC46ZB7V0oSpxXiiI2dvfN4Ne
+ RrLFO44r/gvi7RzSOvqEK8p6BXyzrYh5i1+GtFzwMmdp5HsK+uNZGt5fpTsnqZsyPh0j
+ NP8vUh/P3yYX5336nLJfBikaNZsvIjwB36KBfuzxqGdQeR9I10NNNgwJFNniUhpSouit
+ uF2lHp8OZedGA3xWIHyadlo2KZg8IWW5bkbMcGSMx4p8dVugTu/9OYBHAR7wUdRKGuJG
+ i/xcL/lle2geLhCsDneNPWX2OHseV9mxs04P1oLz8/GhPYh6TlDeIHWcJ/gcBrryAUkv
+ xOnQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9lfvWQNW7wROOpDEPUiFu+o1CNlhgN9s2xwlFdqnEvtq8W0WuNfcfqLrxQwKs52ONMIOEIIJX38LRm@nongnu.org
-X-Gm-Message-State: AOJu0YxXXRAAsJxg5PowICAWabxmqcNAkqzbqbegSku0fmO9L7UK1NiY
- EE2JOg7sDhZlZ93bVpnlSqc2Yrnc5KmKVoU1BEH7YxF/yuC+QgeTq+v3
-X-Gm-Gg: AfdE7ckAr+N6ICX69DwBt5IJRTwSRKEbNrEdsmsVdDog0osnE0Rmasr4FlcSNLn4zTI
- /cIqs33UG+RQgqy0TjlphfuH/Z6UY/pRz8US4StdleowRnANFJpJMXqK9Omy+WEyesEd4YEMn7W
- v70aYouX7dhDurIODNLtkGqsZ9HwMpMQ6ZcUFYplbLJOz/koXpB66uedbcJJiCDJwVaZ7aDNvWJ
- 0dqbL4qaxr3YLMArwpclMrOrQbQmTP0WE/g6fJDds83GG11SqHnDCChmi638zRIn1zZn+RTqOLz
- SthZOEdgdVEZH/Yb2tv3u8ucUdvXz4uLDMIOWQiEpwG5xH6bnEbrZm97cb1sE2T6f2rItdqLqHD
- 7JB3mXLf2MJ4+U1qnBkRG0gM1I+lUkGrjDFvzlvfLAiN6GjIuDKVv9p0Nh5t2r/Cf4B2XhpO8Ij
- 8BlUw7wdKSzd3tnvlUypjg9nFs/Luw5+7rNWYkCjSW1L9p+eSssR/bPT9nljTIleBGH/Z2
-X-Received: by 2002:a7b:cd15:0:b0:493:b87c:c87d with SMTP id
- 5b1f17b1804b1-493d11d81fdmr46963715e9.11.1783260329523; 
- Sun, 05 Jul 2026 07:05:29 -0700 (PDT)
-Received: from user-Legion-Pro-5-16ARX8.. (cable-94-189-254-58.dynamic.sbb.rs.
- [94.189.254.58]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47aa0a558easm16346149f8f.27.2026.07.05.07.05.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jul 2026 07:05:29 -0700 (PDT)
-From: imaginos <imaginos32@gmail.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Cc: Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, imaginos <imaginos32@gmail.com>
-Subject: [PATCH v2] target/riscv: check G-stage write permission for VS-stage
- A/D updates
-Date: Sun,  5 Jul 2026 16:02:10 +0200
-Message-ID: <20260705140508.17692-1-imaginos32@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <v1-Message-ID>
-References: <v1-Message-ID>
+ AHgh+Ro5k8Z/MRoJsDX2fwtEzbUG/fF0sfTc6Brb7aWBe9ajNTN9H5t5LHQRCQzWFY2ha4K0Fyz3hYSKVdQl@nongnu.org
+X-Gm-Message-State: AOJu0YxWxrzXX9Eqjv8BtT6McLnVY0TA1rcC3NJcIIftgUQLkmXl0Lv4
+ XKBj8caFOhsW8HNslfgN7FLO0EYhjlu+0gLEahg5InHdAwwZwGl6+T91mI5xB2Uvo4R2xEf7uLj
+ HyojfdSaxJ6k5rKCv8CXWD5hr4wZUcWvd0JvXOHicT+jeWPBquCHM9M+aOA==
+X-Gm-Gg: AfdE7cmVw/BXjrlW4ctBUYIUnaf9lruJj4pB7nV7d1MRC88k523sVP83OWpr8Iei08h
+ 4+T7IDX3Hx7cl6lsLlTYZkl05gKVW4X8sbWDTcxZLH0J5Lr23tcB6II9MMwXXX3wvyfQjOe6zfX
+ Kw2Htp0RsU0+Qj+VaPIHiylEgczIjYW7GxOqybMQXxsp8ipq8XXI461XQPXr8ZzUjFJ55zJ8JmN
+ o2WRncKBkm9S7Ln42uLHQC429BBmZzSidikbbm6ZRDkLo46ccNBnyQiuEpiVTqZ7GlyoxhRRF/R
+ mrLpzItLTWhFfvy4cIcXM8hXD2rop2veIQhF6eZSxVtMSAGPoFMTSkc2pBREh4wfP69c79JFTc0
+ 8IylN/mxLk1eC4DToSIOU1Gu2oMPFCxC5iMxTPTyFvONpahD7xa91CN7IVqfbFw==
+X-Received: by 2002:a05:6122:6610:b0:56b:9b7b:83e7 with SMTP id
+ 71dfb90a1353d-5be101fdf17mr2943727e0c.7.1783288950855; 
+ Sun, 05 Jul 2026 15:02:30 -0700 (PDT)
+X-Received: by 2002:a05:6122:6610:b0:56b:9b7b:83e7 with SMTP id
+ 71dfb90a1353d-5be101fdf17mr2943667e0c.7.1783288950234; 
+ Sun, 05 Jul 2026 15:02:30 -0700 (PDT)
+Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493c637bc21sm568891265e9.7.2026.07.05.15.02.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 05 Jul 2026 15:02:29 -0700 (PDT)
+Message-ID: <942c974f-3b7b-40f1-a5fd-75d3432aa384@oss.qualcomm.com>
+Date: Mon, 6 Jul 2026 00:02:28 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 02/46] cpu: Define BreakpointFlags type
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+References: <20260705043725.1373137-1-richard.henderson@linaro.org>
+ <20260705043725.1373137-3-richard.henderson@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20260705043725.1373137-3-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=imaginos32@gmail.com; helo=mail-wm1-x329.google.com
-X-Spam_score_int: -7
-X-Spam_score: -0.8
-X-Spam_bar: /
-X-Spam_report: (-0.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FORGED_GMAIL_RCVD=1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA1MDIzOCBTYWx0ZWRfX/wiPk2av9WWz
+ xw/fKXX0HAYJv9A3UaETjDT9fxRrGYv/pOiJjE3/u1s+aRVfZ5Odtyvy7/wXOT5kZhDxgMGgIHM
+ oFuRhxKTZgGpiGJG7/WpnMSpzYT6/rE=
+X-Proofpoint-ORIG-GUID: 9QxBY0nd6HEBBjLgj-Y45rpUihDjBhGN
+X-Proofpoint-GUID: 9QxBY0nd6HEBBjLgj-Y45rpUihDjBhGN
+X-Authority-Analysis: v=2.4 cv=FJwrAeos c=1 sm=1 tr=0 ts=6a4ad477 cx=c_pps
+ a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=6XGGRaPhJGb0HrX91toA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=tNoRWFLymzeba-QzToBc:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA1MDIzOCBTYWx0ZWRfXwRx/qHyjK34F
+ UNUyLX9Iy/sgjqf/uh76/JRfiQYt7YFInDQVG50aA/VGL2BFdJ9naa+nTwUNPrsLzB6uZqo61R7
+ 5HeRWe/aMxYHOP0rG1f72wyZZgO8Yn/oGNKT3TMTgEDWNvaLBlS1sfOc3NeCU/oaJCivYnhNZrq
+ GNMr5HbMpvXvC63nVRxkHHv+q+vkX0lwJitCOqihrdBO4KZL432AJi9AYeazvI3om4lIiRYd7r+
+ x0/j0Bl5KmKVKgb0VrjfMZMcMOYCZ+3DYSchYK8EYrLAUyDoJIWpivLz+8qiT3zj5Iw9oyXkfR0
+ t9RdTkWWxZK64e2q8nxfivywijSXbwayjAxak5KOcJa1sGKRUMaisLDbnMu95+HfdW0y4eppKcx
+ MRBjbDosqetmX0VWo/Kr9mxtAT9VBl7gJ6VCCHh6bHBxpJuGPwZZ6I7pTc37139xlz+e0Wec2wN
+ TJvcxas9BWSqKIKCQ/Q==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-07-05_02,2026-07-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 adultscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
+ lowpriorityscore=0 clxscore=1015 spamscore=0 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607050238
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,100 +156,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-During a two-stage (VS-stage + G-stage) page-table walk with hardware
-A/D updating enabled (Svadu / menvcfg.ADUE), a store that reaches a
-VS-stage leaf PTE whose accessed or dirty bit is clear triggers a
-hardware write-back of those bits into the PTE. That write-back is an
-implicit store to the PTE's guest-physical address, so it must be
-permitted by G-stage.
+On 5/7/26 06:36, Richard Henderson wrote:
+> From: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> 
+> Use the BreakpointFlags typedef to better follow when
+> we deal with breakpoint flags (BP_*).
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> [rth: Don't rename mask variables to flags]
+> Message-ID: <20260630220100.1289-19-philmd@oss.qualcomm.com>
+> ---
+>   include/accel/tcg/cpu-ops.h |  6 ++++--
+>   include/exec/breakpoint.h   |  3 ++-
+>   include/exec/watchpoint.h   |  8 +++++---
+>   include/hw/core/cpu.h       |  9 +++++----
+>   accel/tcg/cputlb.c          | 12 +++++++-----
+>   accel/tcg/tcg-accel-ops.c   | 10 +++++-----
+>   accel/tcg/user-exec-stub.c  | 11 ++++++-----
+>   accel/tcg/watchpoint.c      |  9 +++++----
+>   cpu-common.c                |  6 +++---
+>   system/watchpoint.c         |  6 +++---
+>   target/arm/tcg/debug.c      |  4 ++--
+>   target/arm/tcg/mte_helper.c |  3 ++-
+>   target/ppc/cpu.c            |  2 +-
+>   target/ppc/kvm.c            |  5 +++--
+>   target/riscv/cpu_helper.c   |  2 +-
+>   target/riscv/debug.c        |  6 +++---
+>   target/s390x/tcg/debug.c    |  3 ++-
+>   target/xtensa/dbg_helper.c  |  2 +-
+>   18 files changed, 60 insertions(+), 47 deletions(-)
 
-Fix this by re-running the G-stage translation of the guest PTE's
-address with store semantics. get_physical_address() then also checks
-that G-stage permits the guest PTE to be written, and raises a
-guest-page store fault when it does not.
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3426
-Signed-off-by: imaginos <imaginos32@gmail.com>
----
- target/riscv/cpu_helper.c | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
-
- v2:
-   Reword an incomplete sentence in the code comment.
-
- Verified against Spike, with this patch QEMU's
- reported values match Spike.
-
- Spike (reference):        QEMU, before this patch:
-    mcause 0x17               mcause 0x17
-    mtval  0x80000000         mtval  0x80000000
-    mtval2 0x20001004         mtval2 0x20000000
-    mtinst 0x3020             mtinst 0x6a704073
-
- If I've misread any of the A/D-update semantics here, I'd appreciate the
- correction.
-
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 2db07f5dfb..eb34ba19e1 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1370,6 +1370,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     int ptshift;
-     target_ulong pte;
-     hwaddr pte_addr;
-+    hwaddr pte_gpa = 0;
-     const hwaddr base_root = base;
-     const bool be = mo_endian_env(env) == MO_BE;
-     int i;
-@@ -1407,6 +1408,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-             }
- 
-             pte_addr = vbase + idx * ptesize;
-+            pte_gpa = base + idx * ptesize;
-         } else {
-             pte_addr = base + idx * ptesize;
-         }
-@@ -1661,6 +1663,28 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-             return TRANSLATE_FAIL;
-         }
- 
-+        /*
-+         * The implicit store that writes updated A/D bits back to a VS-stage
-+         * (first-stage) PTE must itself be permitted by G-stage. Re-run the
-+         * second-stage translation of the PTE's guest-physical address with
-+         * store semantics. If G-stage denies write, raise G-stage store fault
-+         * against the PTE address.
-+         */
-+        if (two_stage && first_stage) {
-+            int gpa_prot;
-+            hwaddr gpa_paddr;
-+            int gpa_ret = get_physical_address(env, &gpa_paddr, &gpa_prot,
-+                                               pte_gpa, NULL, MMU_DATA_STORE,
-+                                               MMUIdx_U, false, true,
-+                                               is_debug, false);
-+            if (gpa_ret != TRANSLATE_SUCCESS) {
-+                if (fault_pte_addr) {
-+                    *fault_pte_addr = pte_gpa >> 2;
-+                }
-+                return TRANSLATE_G_STAGE_FAIL;
-+            }
-+        }
-+
-         pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
-                                            sxlen_bytes, MMU_DATA_STORE, PRV_S);
-         if (pmp_ret != TRANSLATE_SUCCESS) {
-@@ -2345,6 +2369,10 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-                  * doing VS-stage page table walk.
-                  */
-                 tinst = (riscv_cpu_xlen(env) == 32) ? 0x00002000 : 0x00003000;
-+
-+                if (cause == RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT) {
-+                    tinst |= 0x20;
-+                }
-             } else {
-                 /*
-                  * The "Addr. Offset" field in transformed instruction is
--- 
-2.43.0
-
+Bah I'm just noticing this after addressing your previous review
+comments and posting as v3. I think in order to avoid demotivating
+duplicated work I'll merge the first part and let you manage the rest.
 
