@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE79C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 04:39:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F2CC44500
+	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 04:39:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgEcp-0005hy-DL; Sun, 05 Jul 2026 00:38:40 -0400
+	id 1wgEd7-0006N9-Mv; Sun, 05 Jul 2026 00:38:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wgEbx-0004np-OJ
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:37:46 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1wgEc8-0004w6-Kp
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:37:57 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wgEbn-00043f-QL
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:37:45 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2ca1479dfe0so21655185ad.1
- for <qemu-riscv@nongnu.org>; Sat, 04 Jul 2026 21:37:35 -0700 (PDT)
+ id 1wgEbu-0004Bz-QE
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:37:55 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2ca70925c25so22576175ad.1
+ for <qemu-riscv@nongnu.org>; Sat, 04 Jul 2026 21:37:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783226254; x=1783831054; darn=nongnu.org;
+ d=linaro.org; s=google; t=1783226261; x=1783831061; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HOLBFbN0uOhvFbQGnMluLfThJPMU4L7hEEZlVe52VyI=;
- b=J8+4iAwUSOzyiEobgLUyIIP8HviJ3PzRh0Rlyh5fpvpzzAcXox2JhYcIw9V62we0vE
- 0649N4GEcAE5dmQY38jXy+OEiREQnNZw2Lf2YEQZTQjkSpaulwNH+DhmqPYeCp0Sk/up
- oNh+5W6E92TwbaKGE1ybyhxeyZRSzHeq8XMNPlLSme08DkAKplM/GMzzDI+kt6naVGUd
- KAk5qZ3G5GxPqRHzK3vgjCYvjW/49vSHfNI/CgXahZJiOL7LIuhdvCU4iqBoaO4yDMjv
- u/rG7JKkB7aINosgK3ElzSBStLhrfwZmB6yoG4i96i6AJh5hVDg9AdWmJ870R00IR4pl
- FNKA==
+ :message-id:reply-to:content-type;
+ bh=k40Ct/scLRA6POY4s+1/g3ylMfrjfxUVUANTHep1r88=;
+ b=PGN7yxEMwlbmTnowoonLDItVi2yHqLlUsxChCb286X8cfSQXLL/iVUt/5GD6/3api5
+ /y4KKFj8f/+plalKgU/N1iWr0tVmDP7wNdXvfmNRYLdlximaC7WBnnbmbUC6l8cbVWu1
+ 5KcxT5UT/sjtMkgzhgyX1e2J/H9I5vgml0jwevHT3QaBSOftnNr69Z8zJvCVBITvqrSa
+ f9NvT7G+xjdCqfrBXutW0sukCClx1fo6ESmqUySaEAI/+KaZv5gTMWxpNVgNfxNz+KCF
+ 8ENpMYH50YwmNIT0rAZJ9Lwe41ScF/ZkOHdbADzgXjaluDJx3YP78+CjOvJXCC58q8dw
+ GN6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783226254; x=1783831054;
+ d=1e100.net; s=20251104; t=1783226261; x=1783831061;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=HOLBFbN0uOhvFbQGnMluLfThJPMU4L7hEEZlVe52VyI=;
- b=OjNFoZ3ZREfMjeIdRUCsHybxBzpBh977KsavZIq7dAZvLOqBIDG+8Pwx6KPGQ7B8DI
- ghXlJvkI1NOrHjfRCTg4wjaJP7NcJNqypqcGN9OnrVmjVOSAeIgqoS47V+6zUO1HhjlF
- 50XR+cq3q7st8Oq1gTbiZf+Oo4bZrcP39H00yRaMBtQpsTKF65pw6qytmzP6L2j3t7aT
- Vq17KnXTmpapLrGQmFPw/LRUEZhBPoyZlEHnKaeE6A3XPoofF8MuNSFSZESaPpQ6HPso
- aUre2h1oE3gJ31/tkhenxa7Ec9F42iwD045QmaDZr+ty6IWXL1YotdlUUCJqjvVvlWeH
- VHVw==
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=k40Ct/scLRA6POY4s+1/g3ylMfrjfxUVUANTHep1r88=;
+ b=gsdJENzbBtfGZBAKhfPdOeFcAAN3TGjNQ9+iXGmyH9bA8fLZGrjPfaHmHMvvSB74hg
+ xucd+BB6yENS+yQvjqHawbwX0HydlSfHV89RtBPjhRo3Z94aCkvZnbADFdkH1IrTNGxK
+ PRuF2e/qM57ablx565oe3niywUwuiTk5dj9smNsFBubvqHSRw4fHFzMHz4S7sh0fzbe1
+ krSggH3ltDV51Y3wVdjOFNx9J2gLvOOihRik9/LO8/39vagqTs8wqlKsp88dbuNtyrNE
+ XuQxqcc6X/yqVkKJMpZ5jyUJj0wJbPFYuYTUUK0Lwbyrg6A450Q+lVmvCqP/M1JadFre
+ kqjA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq/A0upKtIzsaOQtmhWZS4JEtKVy0rLJal2R6cXFGk3sEdz45q0XwBg9Rn7raPV/WSP/bmcn7RQRqms@nongnu.org
-X-Gm-Message-State: AOJu0Yw+OyMn76oV0olGLF8G6/Dvp7nCt5CJAFeHa9k5hQM7wDhOMAVa
- XZti44ORccBL7gn5gXOPehXCSkZgiYygKxvtuXMCb6FEAGP6+c2QzZdavDAXQa4Ufh8=
-X-Gm-Gg: AfdE7clSTsKHct9oxzxvTU0fnF5RYgYB4Njsd5pIZlEbULw/08doTiG4vNbH/fU9rLd
- MUk6qVRWwfJRAVtUvInb+H5PoFXG7iI7+pzAIt80rh4O6fDtHJA/TQSsEbj8Fuzt/uPIUCB3KLw
- jKU9BA16fnmo5lX3BOFCqG+RNhM2d4nXv1wYT2fKAtp0Hl9EQMdw74OeFP/ie+7Kkar1KSyQB27
- iPbxtDocGRoGZ1eAiIjiA5axRcAUavjLGOWNgyo+Zf1nZrXIubi3p+XGVxHt/IGSXZuUbSTKztk
- whwF9O1yy0QzIOaJXQSwtxdjAqP+LreZlJdvOd+25HxLwAIX3BtCkn40Kn9FXt310Hx9jjEdWZz
- x9i5Fr1spHuOOnKX/9uca2WNluH2t0QhbVJnnSsl29RoPYSZRJhx29LeWO9LFLa0A+uPVe5fSos
- wErT3Nl1p0oLNXZX0z/Jfbw7Yf+6wL24xVmFTX8ySJ4SBJBGE=
-X-Received: by 2002:a17:903:2c8:b0:2c8:25c8:85a6 with SMTP id
- d9443c01a7336-2cbb83679b2mr51676015ad.2.1783226254013; 
- Sat, 04 Jul 2026 21:37:34 -0700 (PDT)
+ AHgh+RrL8FzyMNKmqHYxUZrYxEEiwY7O5WTIeWFzwnzrYugnMTs2cVKRFT0DjFEl6Lt4ahua0bvLP0l6/9ly@nongnu.org
+X-Gm-Message-State: AOJu0YwWzLAdgBye3Db6waHQKxNuNNeyMrEFq4N2yEEh7jj0XAHoDyjX
+ SFkdHziKMwzJt3+jE5BQfOZZf/ihXxcNaq448DxVntRC62gpmJf37L5w73XNhz7IqRU=
+X-Gm-Gg: AfdE7cn3N2KUGw55AXeLLCEIm+0sImJ+8scXVLjyZMnkqmLOwJ3Ef8Gs/Ox0V+luocV
+ ApbtUSSgW3RrpWeEYHxyB3G3YJt/zklsEgbBT5EQ3wTcn3eKIxmsYcM77Xn+EcQvIpZqP9Bw0vt
+ ab6quTDwVH3Pc4hDbE1cxLEF4UU+HtZttzd0DmKTJxbJU35FdfdU2gHiOCe1jemq18CH5dJZgoJ
+ MZ7r58eH4BHMAXEfx0yPpgb9LtW9tsG+RNeQFO/K6134PW3msBzGWk+ZZ59b/BPc45mQ14hfJ3e
+ GDDF7e7mdtbLRu4RLOqc+AuOw2FSo4c2PFS/wql+rfb4b+tnURGBUvhCeqRCm2R81lMjiO6h4kU
+ NGJSBNjo9eiLZwjaGn2Vwt7t4LBb/xM9dhoTl9SR/O3HIA9yrQSw+KjsJ4tRK/6AxYkyCYnkK8L
+ x6NamlwiKlKprMgl+QDHdBWL6GMFPpFf8BQ2Q0SpoQGEOjnvg=
+X-Received: by 2002:a17:903:1746:b0:2bd:c925:3a16 with SMTP id
+ d9443c01a7336-2cb97e43356mr58462405ad.2.1783226261455; 
+ Sat, 04 Jul 2026 21:37:41 -0700 (PDT)
 Received: from stoup.. (71-212-39-188.tukw.qwest.net. [71.212.39.188])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cad712ca17sm29863785ad.28.2026.07.04.21.37.33
+ d9443c01a7336-2cad712ca17sm29863785ad.28.2026.07.04.21.37.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 21:37:33 -0700 (PDT)
+ Sat, 04 Jul 2026 21:37:40 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, philmd@oss.qualcomm.com
-Subject: [PATCH v2 08/46] qemu/typedefs: Declare CPUBreakpoint and
- CPUWatchpoint globally
-Date: Sat,  4 Jul 2026 21:36:47 -0700
-Message-ID: <20260705043725.1373137-9-richard.henderson@linaro.org>
+Subject: [PATCH v2 16/46] target/riscv: Use bp argument in
+ riscv_cpu_debug_check_breakpoint
+Date: Sat,  4 Jul 2026 21:36:55 -0700
+Message-ID: <20260705043725.1373137-17-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260705043725.1373137-1-richard.henderson@linaro.org>
 References: <20260705043725.1373137-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x633.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -103,170 +103,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Adjust all uses of 'struct' in the uses of this type.
+Use the ID of the breakpoint instead of a loop over all.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/exec/breakpoint.h | 8 ++++----
- include/hw/core/cpu.h     | 2 --
- include/qemu/typedefs.h   | 2 ++
- target/arm/cpu.h          | 4 ++--
- target/i386/cpu.h         | 4 ++--
- target/ppc/cpu.h          | 4 ++--
- target/riscv/cpu.h        | 4 ++--
- target/xtensa/cpu.h       | 4 ++--
- target/riscv/debug.c      | 4 ++--
- 9 files changed, 18 insertions(+), 18 deletions(-)
+ target/riscv/debug.c | 44 ++++++--------------------------------------
+ 1 file changed, 6 insertions(+), 38 deletions(-)
 
-diff --git a/include/exec/breakpoint.h b/include/exec/breakpoint.h
-index 4a025edc96..1a3391ac09 100644
---- a/include/exec/breakpoint.h
-+++ b/include/exec/breakpoint.h
-@@ -27,20 +27,20 @@ typedef int BreakpointFlags;
- #define BP_WATCHPOINT_HIT_WRITE (BP_MEM_WRITE << BP_HIT_SHIFT)
- #define BP_WATCHPOINT_HIT       (BP_MEM_ACCESS << BP_HIT_SHIFT)
- 
--typedef struct CPUBreakpoint {
-+struct CPUBreakpoint {
-     vaddr pc;
-     BreakpointFlags flags;
-     QTAILQ_ENTRY(CPUBreakpoint) entry;
--} CPUBreakpoint;
-+};
- 
--typedef struct CPUWatchpoint {
-+struct CPUWatchpoint {
-     vaddr vaddr;
-     vaddr len;
-     vaddr hitaddr;
-     MemTxAttrs hitattrs;
-     int flags; /* BP_* */
-     QTAILQ_ENTRY(CPUWatchpoint) entry;
--} CPUWatchpoint;
-+};
- 
- int cpu_breakpoint_insert(CPUState *cpu, vaddr pc, BreakpointFlags flags,
-                           CPUBreakpoint **breakpoint);
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index e05e261883..160db776d8 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -84,8 +84,6 @@ DECLARE_CLASS_CHECKERS(CPUClass, CPU,
-     typedef struct ArchCPU CpuInstanceType; \
-     OBJECT_DECLARE_TYPE(ArchCPU, CpuClassType, CPU_MODULE_OBJ_NAME);
- 
--typedef struct CPUWatchpoint CPUWatchpoint;
--
- /* see physmem.c */
- struct CPUAddressSpace;
- 
-diff --git a/include/qemu/typedefs.h b/include/qemu/typedefs.h
-index 2344c92182..919fe8ebff 100644
---- a/include/qemu/typedefs.h
-+++ b/include/qemu/typedefs.h
-@@ -39,9 +39,11 @@ typedef struct Chardev Chardev;
- typedef struct Clock Clock;
- typedef struct ConfidentialGuestSupport ConfidentialGuestSupport;
- typedef struct CPUArchState CPUArchState;
-+typedef struct CPUBreakpoint CPUBreakpoint;
- typedef struct CPUPluginState CPUPluginState;
- typedef struct CPUState CPUState;
- typedef struct CPUTLBEntryFull CPUTLBEntryFull;
-+typedef struct CPUWatchpoint CPUWatchpoint;
- typedef struct DeviceState DeviceState;
- typedef struct DirtyBitmapSnapshot DirtyBitmapSnapshot;
- typedef struct DisasContextBase DisasContextBase;
-diff --git a/target/arm/cpu.h b/target/arm/cpu.h
-index 84d33e87dc..973522cd55 100644
---- a/target/arm/cpu.h
-+++ b/target/arm/cpu.h
-@@ -754,8 +754,8 @@ typedef struct CPUArchState {
-         ARMVectorReg za[ARM_MAX_VQ * 16];
-     } za_state;
- 
--    struct CPUBreakpoint *cpu_breakpoint[16];
--    struct CPUWatchpoint *cpu_watchpoint[16];
-+    CPUBreakpoint *cpu_breakpoint[16];
-+    CPUWatchpoint *cpu_watchpoint[16];
- 
-     /* Optional fault info across tlb lookup. */
-     ARMMMUFaultInfo *tlb_fi;
-diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-index e6a197602d..9dbfa7c9b9 100644
---- a/target/i386/cpu.h
-+++ b/target/i386/cpu.h
-@@ -2185,8 +2185,8 @@ typedef struct CPUArchState {
-     target_ulong exception_next_eip;
-     target_ulong dr[8]; /* debug registers; note dr4 and dr5 are unused */
-     union {
--        struct CPUBreakpoint *cpu_breakpoint[4];
--        struct CPUWatchpoint *cpu_watchpoint[4];
-+        CPUBreakpoint *cpu_breakpoint[4];
-+        CPUWatchpoint *cpu_watchpoint[4];
-     }; /* break/watchpoints for dr[0..3] */
-     int old_exception;  /* exception in flight */
- 
-diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
-index 057c54bbb8..d06f3dfd7f 100644
---- a/target/ppc/cpu.h
-+++ b/target/ppc/cpu.h
-@@ -1320,8 +1320,8 @@ struct CPUArchState {
-     /* MMU context, only relevant for full system emulation */
- #if defined(TARGET_PPC64)
-     ppc_slb_t slb[MAX_SLB_ENTRIES]; /* PowerPC 64 SLB area */
--    struct CPUBreakpoint *ciabr_breakpoint;
--    struct CPUWatchpoint *dawr_watchpoint[2];
-+    CPUBreakpoint *ciabr_breakpoint;
-+    CPUWatchpoint *dawr_watchpoint[2];
- #endif
-     target_ulong sr[32];   /* segment registers */
-     uint32_t nb_BATs;      /* number of BATs */
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index bdd28d329b..9cd38d10a3 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -491,8 +491,8 @@ struct CPUArchState {
-     uint64_t *tdata1;
-     uint64_t *tdata2;
-     uint64_t *tdata3;
--    struct CPUBreakpoint **cpu_breakpoint;
--    struct CPUWatchpoint **cpu_watchpoint;
-+    CPUBreakpoint **cpu_breakpoint;
-+    CPUWatchpoint **cpu_watchpoint;
-     QEMUTimer **itrigger_timer;
-     int64_t last_icount;
-     bool itrigger_enabled;
-diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
-index 442e98bd1b..ab42b4be00 100644
---- a/target/xtensa/cpu.h
-+++ b/target/xtensa/cpu.h
-@@ -545,9 +545,9 @@ struct CPUArchState {
-     unsigned static_vectors;
- 
-     /* Watchpoints for DBREAK registers */
--    struct CPUWatchpoint *cpu_watchpoint[MAX_NDBREAK];
-+    CPUWatchpoint *cpu_watchpoint[MAX_NDBREAK];
-     /* Breakpoints for IBREAK registers */
--    struct CPUBreakpoint *cpu_breakpoint[MAX_NIBREAK];
-+    CPUBreakpoint *cpu_breakpoint[MAX_NIBREAK];
- };
- 
- /**
 diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index b8fea64bec..67c09b1a53 100644
+index 5c378dd2e8..511a69c28d 100644
 --- a/target/riscv/debug.c
 +++ b/target/riscv/debug.c
-@@ -1060,8 +1060,8 @@ void riscv_trigger_realize(CPURISCVState *env)
-     env->tdata1 = g_new0(uint64_t, env->num_triggers);
-     env->tdata2 = g_new0(uint64_t, env->num_triggers);
-     env->tdata3 = g_new0(uint64_t, env->num_triggers);
--    env->cpu_breakpoint = g_new0(struct CPUBreakpoint *, env->num_triggers);
--    env->cpu_watchpoint = g_new0(struct CPUWatchpoint *, env->num_triggers);
-+    env->cpu_breakpoint = g_new0(CPUBreakpoint *, env->num_triggers);
-+    env->cpu_watchpoint = g_new0(CPUWatchpoint *, env->num_triggers);
-     env->itrigger_timer = g_new0(QEMUTimer *, env->num_triggers);
+@@ -941,48 +941,16 @@ void riscv_cpu_debug_excp_handler(CPUState *cs)
+     }
+ }
  
-     for (i = 0; i < env->num_triggers; i++) {
+-bool riscv_cpu_debug_check_breakpoint(CPUState *cs, CPUBreakpoint *ignore)
++bool riscv_cpu_debug_check_breakpoint(CPUState *cs, CPUBreakpoint *bp)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+-    CPUBreakpoint *bp;
+-    target_ulong ctrl;
+-    target_ulong pc;
+-    int trigger_type;
+-    int i;
++    int i = bp->id;
++    trigger_type_t trigger_type = get_trigger_type(env, i);
+ 
+-    QTAILQ_FOREACH(bp, &cs->breakpoints, entry) {
+-        for (i = 0; i < env->num_triggers; i++) {
+-            trigger_type = get_trigger_type(env, i);
+-
+-            if (!trigger_common_match(env, trigger_type, i)) {
+-                continue;
+-            }
+-
+-            switch (trigger_type) {
+-            case TRIGGER_TYPE_AD_MATCH:
+-                ctrl = env->tdata1[i];
+-                pc = env->tdata2[i];
+-
+-                if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
+-                    env->badaddr = pc;
+-                    return true;
+-                }
+-                break;
+-            case TRIGGER_TYPE_AD_MATCH6:
+-                ctrl = env->tdata1[i];
+-                pc = env->tdata2[i];
+-
+-                if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
+-                    env->badaddr = pc;
+-                    return true;
+-                }
+-                break;
+-            default:
+-                /* other trigger types are not supported or irrelevant */
+-                break;
+-            }
+-        }
++    if (trigger_common_match(env, trigger_type, i)) {
++        env->badaddr = env->tdata2[i];
++        return true;
+     }
+ 
+     return false;
 -- 
 2.43.0
 
