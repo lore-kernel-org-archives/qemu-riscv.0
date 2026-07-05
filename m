@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1CCC43458
-	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 13:18:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D0D6C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 14:05:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgMjY-0002Jt-Su; Sun, 05 Jul 2026 09:18:08 -0400
+	id 1wgNTb-0004UK-Cg; Sun, 05 Jul 2026 10:05:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imaginos32@gmail.com>)
- id 1wgMjY-0002Je-15
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 09:18:08 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ id 1wgNTT-0004Po-Pe
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 10:05:36 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <imaginos32@gmail.com>)
- id 1wgMjV-0003po-RK
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 09:18:07 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-493b77b150aso19488685e9.2
- for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 06:18:04 -0700 (PDT)
+ id 1wgNTR-00051H-Ir
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 10:05:35 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-493bfe9f886so11293455e9.0
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 07:05:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783257483; x=1783862283; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=3iQ6foKp7BWXNI7l7JdIldcj04hpvpDIkEePupB9eIQ=;
- b=poaQrKri+3Fu+zOE//3MG5qV8kAkwGsqKRDOWI0YPxQXR1gZ+9SfnYxHjRhQx296/2
- jrpPNJponyqhVczUTLpQEUaxRvO5ZhcMVT9Qo4x7B0lvgi/3kYbGJ+T9SRk3vTjC5QYO
- gFgiuAcSSyr54luC7ELLa37tPUf6RFviU6skqEl9frWV86x4KopIDoPKLlSvGc2etCf+
- RXj1Wmo1YwzwL9Ycv1uKKbcWG22ZLZi2n336jf9RpbIn02yJcpPv30QAo42SQuvZfNB+
- rfncCTR90YVJw8j/YvBHVTTbG1/hXxlXmMKcC0rELkx5KuLkWDZSAhP7ZQ6kRvsPLroa
- NKmw==
+ d=gmail.com; s=20251104; t=1783260330; x=1783865130; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UTgD4XU6nX98udZAcwuur62Dr9OUg4XQkoqc7W/QL9U=;
+ b=G2dOHInyXRmIzKKNVy63rf5ilC/dW2MwT3RWG59gsPCRSYvlVuJ53ioD9iujMQAIok
+ lR6JQHrQvdtTua8bVUXElS1tdaeR459b5k7Dqs/BDkK4g7H6VjEIBrRaNrjI25Jnte40
+ DswrJ1csvB5MrK7qJEGuIWgNNOZqVNj3EwpwhMhaO1AgWJKSZGxkA+AsqrkVa2o9zb6g
+ cnoQkzT4NzWNJvFnmiu5MJMgp7trP/kha6Wc85rdFrd+05fSWBk1jQ0DbQBa759Hs1Q2
+ kTBrxekxhxR5/Al9lW8NFbXe8MC7aBkIopKBrGm3g0iYf78S5aQ70HM2KSlAni3+fB7K
+ l7EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783257483; x=1783862283;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=3iQ6foKp7BWXNI7l7JdIldcj04hpvpDIkEePupB9eIQ=;
- b=j6dG9mTr+aYR9I7Vl8Nj2+/1sT9kL0boDZfhZY561+NdaGKA3dbcX80cKZzrTAUqcI
- sgqHQi0JljIddGu0wMMwMjTmt3OOnAntxZjQTGHCQGlxVx8RQ3jLCsTpGjT9I+vsbIpM
- D2pK2gIqV6BrNixDUQVjkZ8CaNPm0bDnsOIiZvu4shKFgXIb6CmMhywCFLL0J8KcI3qc
- Ik/7g9SvPRaaFktqtI3XILpL58+ypU9ZG59fZj2KtznKcH/tZRrDlZUeKZSA3BUW/4qX
- Lr+/GO5YixYkmBc1gtAtr1cfNTW15uTX1w/DsyekJDJyPMtwfT0ArDi1JrXAUH6UTyVA
- QiKg==
+ d=1e100.net; s=20251104; t=1783260330; x=1783865130;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=UTgD4XU6nX98udZAcwuur62Dr9OUg4XQkoqc7W/QL9U=;
+ b=A1H15XGGSFl0OXQLiGCHRP4YYYkWoj20AcELytKvl/ch8kXfnrBlWaET6r8d6Xrk7A
+ irOpMppepwdNElxFabvSXYAkvn64Qh2CiRIp8lDOE43L69k/vxqG2HMkwthHYR932d3C
+ FC5XA+o8E89y/ZU+EJCor4+ytwmu9kGRUzdD/bp3jUER6N4KvRTH6HWobsPC6lvct3sc
+ zkGjo/8ybXwpEHVAAta7/72nGPciMEdSIFPNmEoNDrdmV41tbK6OLZ8gJmqmeB36aDc2
+ 3miWKNo8MDof9ZMouUmBYAvczHOBG4bZEr7JP9JFpHEr3U2DF3fd0o1zr8ihaKrmxvPT
+ lGnA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ96Isl9pieYQKgiv1xmXBBLOdRq0upHYSfAEGxmCcaC70xSQllL8XOEEUksss61jQ2Xr6afXg/w7JYo@nongnu.org
-X-Gm-Message-State: AOJu0YwoWRhWVaubQlwH+vU+9qVFK5Megb08+hpYj4idTB2rC0kzBwZv
- qeEYFBLzOhv1xQegvlWYhmsgVpPNjKXGNIeYG1vg5eGZ76EUqlMxd2tY
-X-Gm-Gg: AfdE7ckvqucoen416HN/3+IrtQ5zID0VPqvTBb8WsbAYwzqCQtSB0i53YWCqMkU3DG3
- enlj3R9TfxNYiA08RviRT4UygET+/cjRBkvjKnL2snzOgVHDVfW0a1gGVYKbR+PVLa9Fc2UVcV8
- x/TwKQfAgRQB8+3F5FC39THe2r23IqKaFoEyww6XJhgvExQltFW/ZWvoSaMC0HSsCKFdg/JWUEa
- zM25QyQ3zDJn8geeF+FFbOCJSFYKMOvTq3ej7ZKEbH2jJWB9h1SnLFOyxgcs30Lve38FmAIlb79
- ahZBd2OB5faBCVeXtCVNsPKWPZlJwiT6Ah6SDdYirs2wmLZykzq6aOrEJL+s+xGs88ItH6oJhSQ
- 9ROxKtQJHsbASTeL1N2mjQtN010UOAhfHJn0jEA5jbo04otZnRASjjfL7ThAV4R1+Io2dry1Wfj
- 0ZA5+UrkYTMF3bIy9v9edmfckst33tAVXsW40PPpQCloQkpxlximSQEnw1I6fMjWWupYmF
-X-Received: by 2002:a05:600c:529a:b0:493:b7cb:c5f with SMTP id
- 5b1f17b1804b1-493d11d7f58mr79902045e9.11.1783257482717; 
- Sun, 05 Jul 2026 06:18:02 -0700 (PDT)
+ AFNElJ9lfvWQNW7wROOpDEPUiFu+o1CNlhgN9s2xwlFdqnEvtq8W0WuNfcfqLrxQwKs52ONMIOEIIJX38LRm@nongnu.org
+X-Gm-Message-State: AOJu0YxXXRAAsJxg5PowICAWabxmqcNAkqzbqbegSku0fmO9L7UK1NiY
+ EE2JOg7sDhZlZ93bVpnlSqc2Yrnc5KmKVoU1BEH7YxF/yuC+QgeTq+v3
+X-Gm-Gg: AfdE7ckAr+N6ICX69DwBt5IJRTwSRKEbNrEdsmsVdDog0osnE0Rmasr4FlcSNLn4zTI
+ /cIqs33UG+RQgqy0TjlphfuH/Z6UY/pRz8US4StdleowRnANFJpJMXqK9Omy+WEyesEd4YEMn7W
+ v70aYouX7dhDurIODNLtkGqsZ9HwMpMQ6ZcUFYplbLJOz/koXpB66uedbcJJiCDJwVaZ7aDNvWJ
+ 0dqbL4qaxr3YLMArwpclMrOrQbQmTP0WE/g6fJDds83GG11SqHnDCChmi638zRIn1zZn+RTqOLz
+ SthZOEdgdVEZH/Yb2tv3u8ucUdvXz4uLDMIOWQiEpwG5xH6bnEbrZm97cb1sE2T6f2rItdqLqHD
+ 7JB3mXLf2MJ4+U1qnBkRG0gM1I+lUkGrjDFvzlvfLAiN6GjIuDKVv9p0Nh5t2r/Cf4B2XhpO8Ij
+ 8BlUw7wdKSzd3tnvlUypjg9nFs/Luw5+7rNWYkCjSW1L9p+eSssR/bPT9nljTIleBGH/Z2
+X-Received: by 2002:a7b:cd15:0:b0:493:b87c:c87d with SMTP id
+ 5b1f17b1804b1-493d11d81fdmr46963715e9.11.1783260329523; 
+ Sun, 05 Jul 2026 07:05:29 -0700 (PDT)
 Received: from user-Legion-Pro-5-16ARX8.. (cable-94-189-254-58.dynamic.sbb.rs.
  [94.189.254.58]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493ccd9d607sm259916135e9.2.2026.07.05.06.18.00
+ ffacd0b85a97d-47aa0a558easm16346149f8f.27.2026.07.05.07.05.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jul 2026 06:18:02 -0700 (PDT)
+ Sun, 05 Jul 2026 07:05:29 -0700 (PDT)
 From: imaginos <imaginos32@gmail.com>
 To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>
@@ -73,23 +74,25 @@ Cc: Weiwei Li <liwei1518@gmail.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu.zevorn@gmail.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, imaginos <imaginos32@gmail.com>
-Subject: [PATCH] target/riscv: check G-stage write permission for VS-stage A/D
- updates
-Date: Sun,  5 Jul 2026 15:16:40 +0200
-Message-ID: <20260705131734.13792-1-imaginos32@gmail.com>
+Subject: [PATCH v2] target/riscv: check G-stage write permission for VS-stage
+ A/D updates
+Date: Sun,  5 Jul 2026 16:02:10 +0200
+Message-ID: <20260705140508.17692-1-imaginos32@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <v1-Message-ID>
+References: <v1-Message-ID>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=imaginos32@gmail.com; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=imaginos32@gmail.com; helo=mail-wm1-x329.google.com
+X-Spam_score_int: -7
+X-Spam_score: -0.8
+X-Spam_bar: /
+X-Spam_report: (-0.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FORGED_GMAIL_RCVD=1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,6 +126,9 @@ Signed-off-by: imaginos <imaginos32@gmail.com>
  target/riscv/cpu_helper.c | 28 ++++++++++++++++++++++++++++
  1 file changed, 28 insertions(+)
 
+ v2:
+   Reword an incomplete sentence in the code comment.
+
  Verified against Spike, with this patch QEMU's
  reported values match Spike.
 
@@ -136,7 +142,7 @@ Signed-off-by: imaginos <imaginos32@gmail.com>
  correction.
 
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 2db07f5dfb..3b4d2aea96 100644
+index 2db07f5dfb..eb34ba19e1 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
 @@ -1370,6 +1370,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
@@ -163,7 +169,7 @@ index 2db07f5dfb..3b4d2aea96 100644
 +         * The implicit store that writes updated A/D bits back to a VS-stage
 +         * (first-stage) PTE must itself be permitted by G-stage. Re-run the
 +         * second-stage translation of the PTE's guest-physical address with
-+         * store semantics; if G-stage denies write, G-stage store fault
++         * store semantics. If G-stage denies write, raise G-stage store fault
 +         * against the PTE address.
 +         */
 +        if (two_stage && first_stage) {
