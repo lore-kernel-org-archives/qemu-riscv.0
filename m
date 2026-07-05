@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE95C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 04:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06938C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 04:49:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgEfN-00046W-Co; Sun, 05 Jul 2026 00:41:17 -0400
+	id 1wgEdN-0006ua-Mh; Sun, 05 Jul 2026 00:39:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wgEfJ-0003v7-Fn
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:41:13 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ id 1wgEcC-000518-IS
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:38:02 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wgEfF-0006Pa-7Z
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:41:13 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-847a69ba83dso1432074b3a.2
- for <qemu-riscv@nongnu.org>; Sat, 04 Jul 2026 21:41:08 -0700 (PDT)
+ id 1wgEbw-0004Dr-JX
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:37:59 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2c9bd2f8bf7so29047835ad.1
+ for <qemu-riscv@nongnu.org>; Sat, 04 Jul 2026 21:37:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783226468; x=1783831268; darn=nongnu.org;
+ d=linaro.org; s=google; t=1783226263; x=1783831063; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gI8TJyVj//txxRRFeEfE8QbpaSNpGX4bw5i0vl11MXk=;
- b=l/mcXxbViPdpyYG2Z442l0785fzu/Kg/8sys0O6nEyqVk2SZAjUQEXE/ITolPTW0tu
- TGi35J0lBrkdYACkCA723cq5NyfOjRMXR5p+uOPaAX56IWS2Yw8vzS+K2q8jKajJ8zAU
- AaWgSEi7KpFN1XafV6dwotQxYiPdRICn4a7uyWVbwUaL2TXBH/dbfQmjoLkfjKXxlKNr
- TUKBJa3YuO9gTi5Cz4oWlzRfOfPrZ3WikKqMPcev6haAKUMlIUqMETwpD7GqikDG1a3y
- BhQjqc2EMWXgzy97ZpJHBMu6BLFRRjh/l0ckH284L/URuDx84sF2tMdhzFhzrOdLpAq+
- JE0w==
+ bh=sqD0i4B4xHusdPHG8dIAD4vZ8p3PsgamfaStAkj5bxU=;
+ b=AzRG0dZYLvts+avzH/A+mJrVNbhh+ARKRpJMI+794bitl6nnhGFag5yCuc3mBDqXR2
+ LSulufFK91D721ToyE3xdd1kxJU2HTzeMLMQAPWNv7HEbdONqZxZHI5ZHzhVVEaT5xYn
+ gIg58jOhjPmD3vT9c8RsZCIcwr5En0TODqxna/xQPaSu2Mn3yAuVvWBR+JurRFq93Huz
+ bkNCX3EGwXU6ftljpz+zncBrlPT/ZN0DHzQdZFBviefJncNw9AkM+Mz2vyQzTzIfBLER
+ 2T3RogMQBtSYlTtQsuh8hFi6JAHbP/RxR85ROYq6Gedj/VzFeyBwxdfrUtCC+OTRh8h6
+ WwdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783226468; x=1783831268;
+ d=1e100.net; s=20251104; t=1783226263; x=1783831063;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=gI8TJyVj//txxRRFeEfE8QbpaSNpGX4bw5i0vl11MXk=;
- b=dqQGSK7mQELeuMv1/KoPA8GoQdoM83oUcp1r3nHOD6ZPK8pZheb7x6I9oPP6EvCyQE
- 6hMB+Hb+gjJY74DXdvQmjKWfO1xqYS5ETsemiBsFVOM+5y+7DE90ZWgR8PDymhTxhElD
- fMM/lByyJmZMacpWegko0YuWGNBv26NCi7xYJxVVe0e+SjTgER1bhFZBrRq2Y39Kl2rB
- rRzUSWxc+Uybk7k1ZAV20xRy2EC5ZAzqgfxIqphV/lFskBK+/s86aZrrYDHyabMmZLue
- YyiKeH+5VLg06FX4qljNfin6LYWwdqQ71G0qy5wPc+mHnx5ZA4mQ/RfOAAylLvUYnHLJ
- OUXA==
+ bh=sqD0i4B4xHusdPHG8dIAD4vZ8p3PsgamfaStAkj5bxU=;
+ b=nhd0zWge/vHCsA+PIc142d1gpVWhibbycm+T9SZovlCCTl5/vObwh30Y9619wmC81w
+ NsilD3TvIzRJgsIR1kvT4/FnmlhnnMdvdaLciR2a82XZ5Oi/xgSJ96PH/MIj11kqybcc
+ GHwMO8j2L/nwnNhHI4WBnoF77d/j8FMlaVAIo0ckB19SemgHWQrcGZPu0QhHFWBZ4nzl
+ lcwiewV+b8RQlJxhORM2PIt8OBBs0kM86x56jPhDmlsDGxp/8qD9xuKYNbkNCt1lrGyn
+ fm6C5IJq8E7+g1SCGviMzfBd6Pl6h97UTKf7KoofC3L00Kr3w8Kr5zPDd1aVRMw3e3bY
+ HSFg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpYmLHlfjRhli+dE69wMVJn1Iku0AWZEAqyCFgN9z0f/5f1z7iylnxe3ttuQO0cMTEBF7a5qPGz90IS@nongnu.org
-X-Gm-Message-State: AOJu0YxsUvdii8xZKBUss2hhcJOAY8iFZMmA5Q2G+ismFBpJTOlnOzuv
- hXyahY9+CqxI9zodhZqEO/jcNskAEUaSGPtKYLdOwX502CQyRwivknyV9DBsl94ECTI=
-X-Gm-Gg: AfdE7clmhRaYQf1og7LZ5EgOxZ0CWS4iXCHAJ/vxXHl6kUyrR4bUaScwkXqbd1ssTg2
- rATfYPa/WU03NsaKLAiQuQmzuC8ssw6Ij8ydtLysrbMqlhjPUlVAcVHa/sEV6X8ON3c+UHpEGL/
- IWOf3Y788UyATvsxL5vLFs7iBYx3jW8XVapBUWm1f4BAkTCXxINDXaJiitLUyd8WNIn8yz/ugws
- a8I04lu+uaS6rVs+50BNvsoViYOo/ckLDjQk3gmDmKMp41YEILgNXMmw8sLT5zxIPr/tve3eksn
- vbkvJoadzMJsxt1O8KpM302E6BmRx3BgyaU9wzkwO6GYfcnB8V9LKFIMyn3i0SSYLeVIzU64yF0
- mM+66STS6VdbT0HYiFqphLbc5Fg4AkclXWNUOxtpcmk71ElmfnwT05LaodyOGNGsLjHFsJRM3kW
- SJZ5eNI8ek2I6EmQdDSm/zlvzQEmFNYLmkyJrT2LG6k+hcNj4=
-X-Received: by 2002:a05:6a00:2914:b0:847:8f8a:a055 with SMTP id
- d2e1a72fcca58-847f6dd6d35mr5137805b3a.17.1783226467780; 
- Sat, 04 Jul 2026 21:41:07 -0700 (PDT)
+ AHgh+RpesEaqFntZi5tES/8g64CNMlIvEIgX2oqs96sPLbSCViNfW0hc+YzTB0UsriOSLXBmnblZwwgt6ZlJ@nongnu.org
+X-Gm-Message-State: AOJu0YwhzMiSmfOf6XYM5D27SHxnjCy/RLUFOUW1PGh44EQkijJ8ylEt
+ Fuoz1J+kiyVVHtwcQ3eDreTS+ojedN8SuwiZvXQR49CBFHRDvlOBoP30E6uDj+M3E+w=
+X-Gm-Gg: AfdE7cm9pbZjgbmv4dKOrJiXVgBFyzKeitI18Z/DuYKA2l7u+lYhWim2QCTN/iHzt9g
+ FJ2Ej+as3wYEKMN1Xief/O4vafrpPDkO+pDYuxDGz/EeYVYomVBiY5w2czlUyFnokLDmMpeOMqv
+ NPq5fzy6uCnO3pnU+d2Bn1kzJ63F0V5IAwu0baS1TQIBkEVZYNjv8Bgzz6/fyxBuyil65sJAgv9
+ smbXWQqp8imsrCal9cHG4qDmRdGnHU4GFzGSQvi2JH2B7Y4VSmIIg8nO6Q0klpvKlBiuxHsY8/E
+ nl5NjNa48IocT0cnibUblYuUD1oRT77Db+hJZA08B1enYIeoLlI6g6CQp1gFl3GVnrOOX/gtLyv
+ XjdEsKTWfTpLEJGWe3FwUg5FYaAEOZR9sqVdGAj4Qi0GB0NNguC0f0c2A+ZeNf30e22L5Q+Z8U1
+ Jo2ieSGShk8BPbqRg3Jy/Cf3Z0a866ReRG2m9Ys77yeSCgicE=
+X-Received: by 2002:a17:902:d551:b0:2c9:c517:d08b with SMTP id
+ d9443c01a7336-2cc0b23ef33mr42159675ad.22.1783226263046; 
+ Sat, 04 Jul 2026 21:37:43 -0700 (PDT)
 Received: from stoup.. (71-212-39-188.tukw.qwest.net. [71.212.39.188])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-847f6952a0dsm1952615b3a.0.2026.07.04.21.41.07
+ d9443c01a7336-2cad712ca17sm29863785ad.28.2026.07.04.21.37.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2026 21:41:07 -0700 (PDT)
+ Sat, 04 Jul 2026 21:37:42 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, philmd@oss.qualcomm.com
-Subject: [PATCH v2 46/46] accel/tcg: Merge CPUState.{break,watch}point_hit
-Date: Sat,  4 Jul 2026 21:37:25 -0700
-Message-ID: <20260705043725.1373137-47-richard.henderson@linaro.org>
+Subject: [PATCH v2 18/46] target/xtensa: Use bp argument in
+ xtensa_debug_check_breakpoint
+Date: Sat,  4 Jul 2026 21:36:57 -0700
+Message-ID: <20260705043725.1373137-19-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260705043725.1373137-1-richard.henderson@linaro.org>
 References: <20260705043725.1373137-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -102,240 +103,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Merge and name bp_wp_hit.  Now that all targets have been
-converted to use debug_excp_handler hit argument, we only
-need one pointer to an outstanding debug event.
+Use the ID of the breakpoint instead of a loop over all.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/hw/core/cpu.h  |  3 +--
- accel/tcg/cpu-exec.c   |  7 +++---
- accel/tcg/watchpoint.c |  4 ++--
- gdbstub/system.c       | 51 ++++++++++++++++++++++--------------------
- target/arm/hvf/hvf.c   |  5 ++---
- target/arm/kvm.c       |  2 +-
- target/i386/kvm/kvm.c  |  4 ++--
- target/ppc/kvm.c       |  2 +-
- target/s390x/kvm/kvm.c |  2 +-
- 9 files changed, 40 insertions(+), 40 deletions(-)
+ target/xtensa/dbg_helper.c | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index dc1c634258..34f2850879 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -526,8 +526,7 @@ struct CPUState {
-     /* ice debug support */
-     IntervalTreeRoot breakpoints;
-     IntervalTreeRoot watchpoints;
--    CPUBreakpoint *breakpoint_hit;
--    CPUBreakpoint *watchpoint_hit;
-+    CPUBreakpoint *bp_wp_hit;
- 
-     void *opaque;
- 
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index c1e4cdbc19..f1dc130bfa 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -366,7 +366,7 @@ static bool check_for_breakpoints_slow(CPUState *cpu, vaddr pc,
-     bp->hitaddr = pc;
-     bp->hitlast = pc;
-     bp->hitattrs = MEMTXATTRS_UNSPECIFIED;
--    cpu->breakpoint_hit = bp;
-+    cpu->bp_wp_hit = bp;
-     cpu->exception_index = EXCP_DEBUG;
-     return true;
- }
-@@ -685,14 +685,13 @@ static inline bool cpu_handle_halt(CPUState *cpu)
- 
- static inline void cpu_handle_debug_exception(CPUState *cpu)
+diff --git a/target/xtensa/dbg_helper.c b/target/xtensa/dbg_helper.c
+index 557a7852c8..b08bd03435 100644
+--- a/target/xtensa/dbg_helper.c
++++ b/target/xtensa/dbg_helper.c
+@@ -67,18 +67,11 @@ void HELPER(wsr_ibreaka)(CPUXtensaState *env, uint32_t i, uint32_t v)
+ bool xtensa_debug_check_breakpoint(CPUState *cs, CPUBreakpoint *bp)
  {
--    CPUBreakpoint *hit = cpu->watchpoint_hit ? : cpu->breakpoint_hit;
-+    CPUBreakpoint *hit = cpu->bp_wp_hit;
+     CPUXtensaState *env = cpu_env(cs);
+-    unsigned int i;
  
-     if (hit && hit->flags & BP_CPU) {
-         cpu->cc->tcg_ops->debug_excp_handler(cpu, hit);
- 
-         hit->flags &= ~BP_WATCHPOINT_HIT;
--        cpu->watchpoint_hit = NULL;
--        cpu->breakpoint_hit = NULL;
-+        cpu->bp_wp_hit = NULL;
+     if (xtensa_get_cintlevel(env) >= env->config->debug_level) {
+         return false;
      }
+-    for (i = 0; i < env->config->nibreak; ++i) {
+-        if (env->sregs[IBREAKENABLE] & (1 << i) &&
+-            env->sregs[IBREAKA + i] == env->pc) {
+-            return true;
+-        }
+-    }
+-    return false;
++    return (env->sregs[IBREAKENABLE] >> bp->id) & 1;
  }
  
-diff --git a/accel/tcg/watchpoint.c b/accel/tcg/watchpoint.c
-index bf4c46c393..f96ffc018d 100644
---- a/accel/tcg/watchpoint.c
-+++ b/accel/tcg/watchpoint.c
-@@ -56,7 +56,7 @@ void cpu_check_watchpoint(CPUState *cpu, vaddr addr, vaddr len,
-     bool have_cpu_wp = false;
- 
-     assert(tcg_enabled());
--    if (cpu->watchpoint_hit) {
-+    if (cpu->bp_wp_hit) {
-         /*
-          * We re-entered the check after replacing the TB.
-          * Now raise the debug interrupt so that it will
-@@ -146,7 +146,7 @@ void cpu_check_watchpoint(CPUState *cpu, vaddr addr, vaddr len,
-         return;
-     }
- 
--    cpu->watchpoint_hit = found_wp;
-+    cpu->bp_wp_hit = found_wp;
- 
-     /* This call also restores vCPU state */
-     tb_check_watchpoint(cpu, ra);
-diff --git a/gdbstub/system.c b/gdbstub/system.c
-index cbb72be33b..f7d6df5e77 100644
---- a/gdbstub/system.c
-+++ b/gdbstub/system.c
-@@ -126,7 +126,6 @@ static void gdb_vm_state_change(void *opaque, bool running, RunState state)
-     CPUState *cpu = gdbserver_state.c_cpu;
-     g_autoptr(GString) buf = g_string_new(NULL);
-     g_autoptr(GString) tid = g_string_new(NULL);
--    const char *type;
-     int ret;
- 
-     if (running || gdbserver_state.state == RS_INACTIVE) {
-@@ -151,32 +150,36 @@ static void gdb_vm_state_change(void *opaque, bool running, RunState state)
- 
-     switch (state) {
-     case RUN_STATE_DEBUG:
--        if (cpu->watchpoint_hit) {
--            switch (cpu->watchpoint_hit->flags & BP_MEM_ACCESS) {
--            case BP_MEM_READ:
--                type = "r";
--                break;
--            case BP_MEM_ACCESS:
--                type = "a";
--                break;
--            default:
--                type = "";
--                break;
--            }
--            trace_gdbstub_hit_watchpoint(type,
--                                         gdb_get_cpu_index(cpu),
--                                         cpu->watchpoint_hit->hitaddr);
--            g_string_printf(buf, "T%02xthread:%s;%swatch:%" VADDR_PRIx ";",
--                            GDB_SIGNAL_TRAP, tid->str, type,
--                            cpu->watchpoint_hit->hitaddr);
-+        {
-+            CPUBreakpoint *hit = cpu->bp_wp_hit;
- 
--            cpu->watchpoint_hit->flags &= ~BP_WATCHPOINT_HIT;
--            cpu->watchpoint_hit = NULL;
--            goto send_packet;
--        } else {
-+            if (hit) {
-+                unsigned watch = hit->flags & BP_MEM_ACCESS;
-+
-+                hit->flags &= ~BP_WATCHPOINT_HIT;
-+                cpu->bp_wp_hit = NULL;
-+
-+                if (watch) {
-+                    static const char hit_type[4][2] = {
-+                        [BP_MEM_READ] = "r",
-+                        [BP_MEM_WRITE] = "",
-+                        [BP_MEM_ACCESS] = "a",
-+                    };
-+                    const char *type = hit_type[watch];
-+
-+                    trace_gdbstub_hit_watchpoint(type, gdb_get_cpu_index(cpu),
-+                                                 hit->hitaddr);
-+                    g_string_printf(buf, "T%02xthread:%s;%swatch:%"
-+                                    VADDR_PRIx ";",
-+                                    GDB_SIGNAL_TRAP, tid->str, type,
-+                                    hit->hitaddr);
-+                    goto send_packet;
-+                }
-+                /* else breakpoint */
-+            }
-             trace_gdbstub_hit_break();
-+            ret = GDB_SIGNAL_TRAP;
-         }
--        ret = GDB_SIGNAL_TRAP;
-         break;
-     case RUN_STATE_PAUSED:
-         trace_gdbstub_hit_paused();
-diff --git a/target/arm/hvf/hvf.c b/target/arm/hvf/hvf.c
-index 48c2a02bfb..10d707a452 100644
---- a/target/arm/hvf/hvf.c
-+++ b/target/arm/hvf/hvf.c
-@@ -2372,13 +2372,12 @@ static int hvf_handle_exception(CPUState *cpu, hv_vcpu_exit_exception_t *excp)
- 
-         cpu_synchronize_state(cpu);
- 
--        CPUBreakpoint *wp =
--            find_hw_watchpoint(cpu, excp->virtual_address);
-+        CPUBreakpoint *wp = find_hw_watchpoint(cpu, excp->virtual_address);
-         if (!wp) {
-             error_report("EXCP_DEBUG but unknown hw watchpoint");
-         }
-         wp->hitaddr = excp->virtual_address;
--        cpu->watchpoint_hit = wp;
-+        cpu->bp_wp_hit = wp;
-         break;
-     }
-     case EC_DATAABORT: {
-diff --git a/target/arm/kvm.c b/target/arm/kvm.c
-index 7670041423..20c9631ccb 100644
---- a/target/arm/kvm.c
-+++ b/target/arm/kvm.c
-@@ -1520,7 +1520,7 @@ static bool kvm_arm_handle_debug(ARMCPU *cpu,
-         CPUBreakpoint *wp = find_hw_watchpoint(cs, debug_exit->far);
-         if (wp) {
-             wp->hitaddr = debug_exit->far;
--            cs->watchpoint_hit = wp;
-+            cs->bp_wp_hit = wp;
-             return true;
-         }
-         break;
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 3cc941cf00..c7a326e560 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -6261,13 +6261,13 @@ static int kvm_handle_debug(X86CPU *cpu,
-                         break;
-                     case 0x1:
-                         ret = EXCP_DEBUG;
--                        cs->watchpoint_hit = &hw_watchpoint;
-+                        cs->bp_wp_hit = &hw_watchpoint;
-                         hw_watchpoint.hitaddr = hw_breakpoint[n].addr;
-                         hw_watchpoint.flags = BP_MEM_WRITE;
-                         break;
-                     case 0x3:
-                         ret = EXCP_DEBUG;
--                        cs->watchpoint_hit = &hw_watchpoint;
-+                        cs->bp_wp_hit = &hw_watchpoint;
-                         hw_watchpoint.hitaddr = hw_breakpoint[n].addr;
-                         hw_watchpoint.flags = BP_MEM_ACCESS;
-                         break;
-diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
-index 8f9c16fcef..0050bd7648 100644
---- a/target/ppc/kvm.c
-+++ b/target/ppc/kvm.c
-@@ -1590,7 +1590,7 @@ static int kvm_handle_hw_breakpoint(CPUState *cs,
-             n = find_hw_watchpoint(arch_info->address, &flag);
-             if (n >= 0) {
-                 handle = DEBUG_RETURN_GDB;
--                cs->watchpoint_hit = &hw_watchpoint;
-+                cs->bp_wp_hit = &hw_watchpoint;
-                 hw_watchpoint.hitaddr = arch_info->address;
-                 hw_watchpoint.flags = flag;
-             }
-diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
-index aff4d26096..8c56074304 100644
---- a/target/s390x/kvm/kvm.c
-+++ b/target/s390x/kvm/kvm.c
-@@ -1861,7 +1861,7 @@ static int kvm_arch_handle_debug_exit(S390CPU *cpu)
-     switch (arch_info->type) {
-     case KVM_HW_WP_WRITE:
-         if (find_hw_breakpoint(arch_info->addr, -1, arch_info->type)) {
--            cs->watchpoint_hit = &hw_watchpoint;
-+            cs->bp_wp_hit = &hw_watchpoint;
-             hw_watchpoint.hitaddr = arch_info->addr;
-             hw_watchpoint.flags = BP_MEM_WRITE;
-             ret = EXCP_DEBUG;
+ static void set_dbreak(CPUXtensaState *env, unsigned i, uint32_t dbreaka,
 -- 
 2.43.0
 
