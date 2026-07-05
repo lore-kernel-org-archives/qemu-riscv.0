@@ -4,72 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9ACAC44500
-	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 08:38:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1CCC43458
+	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 13:18:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgIMh-00053u-Lt; Sun, 05 Jul 2026 04:38:15 -0400
+	id 1wgMjY-0002Jt-Su; Sun, 05 Jul 2026 09:18:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
- id 1wgIMf-00053H-Ef; Sun, 05 Jul 2026 04:38:13 -0400
-Received: from out162-62-57-210.mail.qq.com ([162.62.57.210])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
- id 1wgIMb-0004Ka-R9; Sun, 05 Jul 2026 04:38:13 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1783240677; bh=sRWiZQefGv8WeptAlHH3G8SJBlcfpjAileWd9a1oEfE=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References;
- b=OvL57mF2rxqb6MiXblUGiMOrj8FBM5fkOsxt5Lo8CRNTY7FZ7TwB3dTf1uvQ68Zgj
- W96WqY7qbklVZXC0oiluGGv0fIAhhpp5blhEcmIYWVN0DyA8lExQtzgif/jMAOxvu/
- /lkz88U+xqM9EIfRjrHyCec/CJhitGRXrJTrK4jU=
-Received: from [192.168.1.10] ([118.116.35.199])
- by newxmesmtplogicsvrszb51-1.qq.com (NewEsmtp) with SMTP
- id 97729437; Sun, 05 Jul 2026 16:37:55 +0800
-X-QQ-mid: xmsmtpt1783240675tf068a468
-Message-ID: <tencent_A1FCB4C882DC8F1F98A462D6F490DCE75309@qq.com>
-X-QQ-XMAILINFO: MTHjzKFGhY7IJLgJhXfExtWpIlF6PQOvZ/A4sVOpfnljFlxRAK+12cJxyzGp+p
- BWqByUHdGswnH6LrBO3jcocLS8iGFx6OJsxP7vXl6JaXGJ1VkaV/sAFJNfPyZ481I8lTT19rgM2D
- Ha2tHu55h/wsR+B6W0bT5h0dYFt2P0NEE5M78sx9nC564xvalGsktU3mK+asNKiwYaiC0fMHfR9O
- RAF69UKugFOMmCWf4UnDzD66B+R0u9mH2DjYXzv7lEdvqKGhPmIlAw0loTpg7R8yTGWckUfhF1aL
- OFQ5pCTZq1Cle/2Rg7oKklB1liQgGlPNM4aJq6r/7zq6algdVxCPy1ouy9iTBQ4MnXfIrxsJGmXM
- MBLNv3gaZvpJjoJk+4x07gkGscJgdQyxHREUBQV40j0hX67QPDGuKWI5I+FVhR3nQ9MBkP0dKu6a
- lR81cLUXc/JtDdAl47tiKuFKkddTrDAdpYzoV5QXxlq1rtNfsP73+zTneEq8W3xnQStUZTf1zDvk
- iEnMpCJgC4HZcioU+vOOYcMnWoOWueERtM+ZGlPu/4uYpFIXhf5YqMNGRZa+Aq7uPOxIz2qhYAaF
- TnIxWL1197gaxUe3vtPHAOJ4QO6zBylT5Y5H7w+wg2sF7zfNxBeLMaeo7B6TFmSkdsqkokTccmVq
- t8hMvIPSFWsIVse/ygsYRU0+sWJiAIRXj+x1cuuemxaeu9SeWyvavNkwycYji2KG8h/v1puddF7I
- yyDc3bVVhqEtyfqVXIDRIMXCi75h+Zr9x3Z7/omfDq6sC22dncVbYMIBj/pOjhqgV9zPd7hlzvnm
- Y41MxlfZrDUgL38eRdQ8N9KHmz/3Ksu22C8YRv2Oq/mPGkE1yAG14VnPDbpvg+5JXSsje28nyYWj
- xqyYs1VeTDdv/JVetQK1k9Xw3SRc/CSXQ9yFZWhCFpjdeCXB3IyzRLVVu5Y3rZGeCNwpeAISTwhK
- JHlsrvnjI7jBRqLHczyZKT44NhPVxQ96TtfCkb0MOSpa/SxGPUq/4Q0fwE9S6fqlCIwDKaL4bCdA
- p6u/p9IA==
-X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
-X-OQ-MSGID: <42ff47f5510e4e5fc1f47c5062887af34f045372.camel@qq.com>
-Subject: Re: [PATCH v2] riscv/virt: Add optional UART1
-From: Yanfeng Liu <yfliu2008@qq.com>
-To: Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>, 
- qemu-riscv@nongnu.org, peter.maydell@linaro.org
-Cc: qemu-devel@nongnu.org
-Date: Sun, 05 Jul 2026 16:37:54 +0800
-In-Reply-To: <tencent_C1EF85ECC23DFCE1482A6EAD0489775ED405@qq.com>
-References: <tencent_06551FAEA44CD75E915AE611FCA0C99CDD09@qq.com>
- <24329582-f5cf-41de-aabe-c2c3d54f03ea@oss.qualcomm.com>
- <tencent_C1EF85ECC23DFCE1482A6EAD0489775ED405@qq.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2.1 
+ (Exim 4.90_1) (envelope-from <imaginos32@gmail.com>)
+ id 1wgMjY-0002Je-15
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 09:18:08 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <imaginos32@gmail.com>)
+ id 1wgMjV-0003po-RK
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 09:18:07 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-493b77b150aso19488685e9.2
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 06:18:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783257483; x=1783862283; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=3iQ6foKp7BWXNI7l7JdIldcj04hpvpDIkEePupB9eIQ=;
+ b=poaQrKri+3Fu+zOE//3MG5qV8kAkwGsqKRDOWI0YPxQXR1gZ+9SfnYxHjRhQx296/2
+ jrpPNJponyqhVczUTLpQEUaxRvO5ZhcMVT9Qo4x7B0lvgi/3kYbGJ+T9SRk3vTjC5QYO
+ gFgiuAcSSyr54luC7ELLa37tPUf6RFviU6skqEl9frWV86x4KopIDoPKLlSvGc2etCf+
+ RXj1Wmo1YwzwL9Ycv1uKKbcWG22ZLZi2n336jf9RpbIn02yJcpPv30QAo42SQuvZfNB+
+ rfncCTR90YVJw8j/YvBHVTTbG1/hXxlXmMKcC0rELkx5KuLkWDZSAhP7ZQ6kRvsPLroa
+ NKmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783257483; x=1783862283;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=3iQ6foKp7BWXNI7l7JdIldcj04hpvpDIkEePupB9eIQ=;
+ b=j6dG9mTr+aYR9I7Vl8Nj2+/1sT9kL0boDZfhZY561+NdaGKA3dbcX80cKZzrTAUqcI
+ sgqHQi0JljIddGu0wMMwMjTmt3OOnAntxZjQTGHCQGlxVx8RQ3jLCsTpGjT9I+vsbIpM
+ D2pK2gIqV6BrNixDUQVjkZ8CaNPm0bDnsOIiZvu4shKFgXIb6CmMhywCFLL0J8KcI3qc
+ Ik/7g9SvPRaaFktqtI3XILpL58+ypU9ZG59fZj2KtznKcH/tZRrDlZUeKZSA3BUW/4qX
+ Lr+/GO5YixYkmBc1gtAtr1cfNTW15uTX1w/DsyekJDJyPMtwfT0ArDi1JrXAUH6UTyVA
+ QiKg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ96Isl9pieYQKgiv1xmXBBLOdRq0upHYSfAEGxmCcaC70xSQllL8XOEEUksss61jQ2Xr6afXg/w7JYo@nongnu.org
+X-Gm-Message-State: AOJu0YwoWRhWVaubQlwH+vU+9qVFK5Megb08+hpYj4idTB2rC0kzBwZv
+ qeEYFBLzOhv1xQegvlWYhmsgVpPNjKXGNIeYG1vg5eGZ76EUqlMxd2tY
+X-Gm-Gg: AfdE7ckvqucoen416HN/3+IrtQ5zID0VPqvTBb8WsbAYwzqCQtSB0i53YWCqMkU3DG3
+ enlj3R9TfxNYiA08RviRT4UygET+/cjRBkvjKnL2snzOgVHDVfW0a1gGVYKbR+PVLa9Fc2UVcV8
+ x/TwKQfAgRQB8+3F5FC39THe2r23IqKaFoEyww6XJhgvExQltFW/ZWvoSaMC0HSsCKFdg/JWUEa
+ zM25QyQ3zDJn8geeF+FFbOCJSFYKMOvTq3ej7ZKEbH2jJWB9h1SnLFOyxgcs30Lve38FmAIlb79
+ ahZBd2OB5faBCVeXtCVNsPKWPZlJwiT6Ah6SDdYirs2wmLZykzq6aOrEJL+s+xGs88ItH6oJhSQ
+ 9ROxKtQJHsbASTeL1N2mjQtN010UOAhfHJn0jEA5jbo04otZnRASjjfL7ThAV4R1+Io2dry1Wfj
+ 0ZA5+UrkYTMF3bIy9v9edmfckst33tAVXsW40PPpQCloQkpxlximSQEnw1I6fMjWWupYmF
+X-Received: by 2002:a05:600c:529a:b0:493:b7cb:c5f with SMTP id
+ 5b1f17b1804b1-493d11d7f58mr79902045e9.11.1783257482717; 
+ Sun, 05 Jul 2026 06:18:02 -0700 (PDT)
+Received: from user-Legion-Pro-5-16ARX8.. (cable-94-189-254-58.dynamic.sbb.rs.
+ [94.189.254.58]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493ccd9d607sm259916135e9.2.2026.07.05.06.18.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Jul 2026 06:18:02 -0700 (PDT)
+From: imaginos <imaginos32@gmail.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Cc: Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, imaginos <imaginos32@gmail.com>
+Subject: [PATCH] target/riscv: check G-stage write permission for VS-stage A/D
+ updates
+Date: Sun,  5 Jul 2026 15:16:40 +0200
+Message-ID: <20260705131734.13792-1-imaginos32@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Received-SPF: pass client-ip=162.62.57.210; envelope-from=yfliu2008@qq.com;
- helo=out162-62-57-210.mail.qq.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=imaginos32@gmail.com; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HELO_STATIC_HOST=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,101 +105,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+During a two-stage (VS-stage + G-stage) page-table walk with hardware
+A/D updating enabled (Svadu / menvcfg.ADUE), a store that reaches a
+VS-stage leaf PTE whose accessed or dirty bit is clear triggers a
+hardware write-back of those bits into the PTE. That write-back is an
+implicit store to the PTE's guest-physical address, so it must be
+permitted by G-stage.
 
-Resending below as I haven't seen this in mail list.
+Fix this by re-running the G-stage translation of the guest PTE's
+address with store semantics. get_physical_address() then also checks
+that G-stage permits the guest PTE to be written, and raises a
+guest-page store fault when it does not.
 
-On Sat, 2026-07-04 at 09:51 +0800, Yanfeng Liu wrote:
->=20
-> Philippe,
->=20
-> Thank you!
->=20
-> Actually v1 creates UART1 carelessly, then Peter suggested following
-> 5d8a250f9068 (openrisc) and e7100972f2 (arm) to reduce breakage of
-> existing guests.
->=20
-> I looked around and noticed the `if (serial_hd())` pattern is still
-> used in arm/virt, arm/msf2-soc, arm/kzm, xrtensa/sim, and ppc/e500
-> etc.
->=20
-> Guess I need consensus before moving ahead.
->=20
-> Regards,
-> Yanfeng
->=20
->=20
-> On Fri, 2026-07-03 at 11:31 +0200, Philippe Mathieu-Daud=C3=A9 wrote:
-> > Hi,
-> >=20
-> > On 3/7/26 06:24, Yanfeng Liu wrote:
-> > > This adds optional UART1 to RiscV virt board if required at
-> > > runtime to simplify multicore development.
-> > >=20
-> > > Note that UART0 remains default serial_hd(0) and it is:
-> > >=20
-> > > - the lowest address UART
-> > > - first serial in DTB
-> > > - behind /aliases/serial0 in DTB
-> > > - the /chosen/stdout-path in DTB
-> > >=20
-> > > Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
-> > > ---
-> > > =C2=A0 docs/system/riscv/virt.rst |=C2=A0 5 ++++-
-> > > =C2=A0 hw/riscv/virt-acpi-build.c | 12 ++++++++----
-> > > =C2=A0 hw/riscv/virt.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 | 39 ++++++++++++++++++++++++++++---
-> > > --
-> > > -----
-> > > =C2=A0 include/hw/riscv/virt.h=C2=A0=C2=A0=C2=A0 |=C2=A0 3 +++
-> > > =C2=A0 4 files changed, 44 insertions(+), 15 deletions(-)
-> >=20
-> >=20
-> > > @@ -1567,6 +1579,13 @@ static void virt_machine_init(MachineState
-> > > *machine)
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0, qdev_get_gp=
-io_in(mmio_irqchip, UART0_IRQ), 399193,
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 serial_hd(0), =
-DEVICE_LITTLE_ENDIAN);
-> > > =C2=A0=20
-> > > +=C2=A0=C2=A0=C2=A0 if (serial_hd(1)) {
-> >=20
-> > Checking for chardev backend connected to map a peripheral block
-> > is an anti-pattern; the block exists on HW regardless.
-> >=20
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 serial_mm_init(system_mem=
-ory, s-
-> > > >memmap[VIRT_UART1].base,
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0=
-, qdev_get_gpio_in(mmio_irqchip, UART1_IRQ),
-> > > 399193,
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s=
-erial_hd(1), DEVICE_LITTLE_ENDIAN);
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s->uart1_present =3D true=
-;
-> >=20
-> > Thus we want to always instantiate all UART peripherals.
-> >=20
-> > If you drop the uart1_present field then the patch LGTM.
-> >=20
-> > > +=C2=A0=C2=A0=C2=A0 }
-> > > +
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sysbus_create_simple("goldfish_rtc", s=
--
-> > > > memmap[VIRT_RTC].base,
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 qdev_get_gpio_=
-in(mmio_irqchip, RTC_IRQ));
-> > > =C2=A0=20
-> > > diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> > > index 18a2a323a3..7d57c8292e 100644
-> > > --- a/include/hw/riscv/virt.h
-> > > +++ b/include/hw/riscv/virt.h
-> > > @@ -59,6 +59,7 @@ struct RISCVVirtState {
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int aia_guests;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 char *oem_id;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 char *oem_table_id;
-> > > +=C2=A0=C2=A0=C2=A0 bool uart1_present;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 OnOffAuto acpi;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 const MemMapEntry *memmap;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct GPEXHost *gpex_host;
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3426
+Signed-off-by: imaginos <imaginos32@gmail.com>
+---
+ target/riscv/cpu_helper.c | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+ Verified against Spike, with this patch QEMU's
+ reported values match Spike.
+
+ Spike (reference):        QEMU, before this patch:
+    mcause 0x17               mcause 0x17
+    mtval  0x80000000         mtval  0x80000000
+    mtval2 0x20001004         mtval2 0x20000000
+    mtinst 0x3020             mtinst 0x6a704073
+
+ If I've misread any of the A/D-update semantics here, I'd appreciate the
+ correction.
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 2db07f5dfb..3b4d2aea96 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1370,6 +1370,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     int ptshift;
+     target_ulong pte;
+     hwaddr pte_addr;
++    hwaddr pte_gpa = 0;
+     const hwaddr base_root = base;
+     const bool be = mo_endian_env(env) == MO_BE;
+     int i;
+@@ -1407,6 +1408,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+             }
+ 
+             pte_addr = vbase + idx * ptesize;
++            pte_gpa = base + idx * ptesize;
+         } else {
+             pte_addr = base + idx * ptesize;
+         }
+@@ -1661,6 +1663,28 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+             return TRANSLATE_FAIL;
+         }
+ 
++        /*
++         * The implicit store that writes updated A/D bits back to a VS-stage
++         * (first-stage) PTE must itself be permitted by G-stage. Re-run the
++         * second-stage translation of the PTE's guest-physical address with
++         * store semantics; if G-stage denies write, G-stage store fault
++         * against the PTE address.
++         */
++        if (two_stage && first_stage) {
++            int gpa_prot;
++            hwaddr gpa_paddr;
++            int gpa_ret = get_physical_address(env, &gpa_paddr, &gpa_prot,
++                                               pte_gpa, NULL, MMU_DATA_STORE,
++                                               MMUIdx_U, false, true,
++                                               is_debug, false);
++            if (gpa_ret != TRANSLATE_SUCCESS) {
++                if (fault_pte_addr) {
++                    *fault_pte_addr = pte_gpa >> 2;
++                }
++                return TRANSLATE_G_STAGE_FAIL;
++            }
++        }
++
+         pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
+                                            sxlen_bytes, MMU_DATA_STORE, PRV_S);
+         if (pmp_ret != TRANSLATE_SUCCESS) {
+@@ -2345,6 +2369,10 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                  * doing VS-stage page table walk.
+                  */
+                 tinst = (riscv_cpu_xlen(env) == 32) ? 0x00002000 : 0x00003000;
++
++                if (cause == RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT) {
++                    tinst |= 0x20;
++                }
+             } else {
+                 /*
+                  * The "Addr. Offset" field in transformed instruction is
+-- 
+2.43.0
 
 
