@@ -4,95 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C198C43458
-	for <qemu-riscv@archiver.kernel.org>; Sat,  4 Jul 2026 03:23:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65F0EC43458
+	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 04:39:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wfqy4-0006Oh-Se; Fri, 03 Jul 2026 23:23:00 -0400
+	id 1wgEdP-00072D-EP; Sun, 05 Jul 2026 00:39:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wfqxx-0006NP-Mk
- for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 23:22:53 -0400
-Received: from mail-pg1-x541.google.com ([2607:f8b0:4864:20::541])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wgEcK-00056p-4S
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:38:09 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wfqxv-0004x0-5q
- for qemu-riscv@nongnu.org; Fri, 03 Jul 2026 23:22:52 -0400
-Received: by mail-pg1-x541.google.com with SMTP id
- 41be03b00d2f7-c88973b6965so1632236a12.1
- for <qemu-riscv@nongnu.org>; Fri, 03 Jul 2026 20:22:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wgEc1-0004Gz-5H
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 00:38:07 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2ca70925c25so22576655ad.1
+ for <qemu-riscv@nongnu.org>; Sat, 04 Jul 2026 21:37:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783135368; x=1783740168; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mx+KQQuIfqPu/Tv5czRYZc4G5HYqgiOoLgIGzdshTxQ=;
- b=BgRk6peF5MlQECVlG1MLMllALcRWjImItjf9zbz/N3jzWwd+z2uxCR/iZrf//YqXmJ
- uWb/hsR2WZtLbUZ++G8JhO3yPhTWPaXC1z8V4e8Lt7ElUzYlb4XeaMEyPvEahhNPIB95
- fHcPpQF9uFk5QOco4PYC+QrNSi6NGikENcw0b/oLHHYMmKrvkvOOgqV/MQiWqg6CP0Ua
- bClziGz5X/BUYAzZrIe0EjVC15b5r+Yt5I+giAcnfUVSL30oJHWfXG7982vj2yShJRiE
- b2VtrEucmy73K4LTOxefj2tC3Zg4anFPwhuFD/qFwbZvbIYmjyS3rBkoKPrBdeQMn16E
- 15kg==
+ d=linaro.org; s=google; t=1783226268; x=1783831068; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=G80BIhmHv+bQcepwqHTSRclxi+Da20PNHFYyztrE4Ag=;
+ b=OPXd7n894wMc9G86nZH9X43zeGoYmSvwR/pWoInvilPNa9T3jom+XtozXNl+rGwFpE
+ YP+sJJUqeCnRI7RLyDWY8zoMPFf1SNZOGUrHr8WXx8dRtGaIxLm+K1E3Fg2fjlJElhJ2
+ jtOEAIF+TOgQ8G1sYLaqlOCUmVWDDCD1FnZJ0f52++hTxpu3ZW0DX34I0z2TsJHZUOqO
+ AMSLUCPtl4fB2dSJbepoU7DNrjLNgGaNoIOSj9yuHUABSGScIhPmk/tweEE5enL1cYd4
+ eQSRdPXX2gvj//sCykcmQ3uZJp5q0Pmj8gUzl21dzKr2P8QuSZNQtwcqHCU01MUt6Qb5
+ +IyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783135368; x=1783740168;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mx+KQQuIfqPu/Tv5czRYZc4G5HYqgiOoLgIGzdshTxQ=;
- b=GsSgzx+dvhyG+VmDpJNAViHNr18n28kNcT1cSyZy7MaAZrrsBlkzalH6G3V+Ypm552
- HhIG1HcPRzPjrDcTYdKIv20WkuTCugOXevahchQ7UEbq3XhXwERyOxAjmoKJOw3C8jUC
- 459YgSNg7j6Bi464vt9AQpd32VFENSY2VR1XICguQfeUGnTob7JEHlkEdTFt37lCnqkj
- 6UpZ8zEiHfnupbX7Wr/Z+jxam7UdLssdtL2udCqWue3aMkBg1VsBW1sM6N2jIET9TXeI
- tUMvAYaS5eOQZYUv0iYmgLj3alpezKoHh3NIS9R0Ihj3n8SMutDEwEZCIvknyL3gVp/F
- MCKQ==
+ d=1e100.net; s=20251104; t=1783226268; x=1783831068;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=G80BIhmHv+bQcepwqHTSRclxi+Da20PNHFYyztrE4Ag=;
+ b=jDOYttKFOkhR+VnJTD2zYxnnaJaBSubu8GcDe/XM/ihLCxxyjMEdEjkd/1Uulrih68
+ cV8zHLZ2xH4R1Z4ddfZkmrLxYuyIzA6mg+JFJy5gpLzCwbe4v4JeH5CnnrIfd/tzi9vQ
+ cLEGKeW4CTEOiLein64WJ8y/6kuIUsV4pV/TjbGohYM5NeSrZnjdaQSwiVcZ/jFLWA1N
+ LZmfpFNn+T60ar8WOY3wk3wjvB+z5CndgjEibIKWWgasJn6aP/hP3ndJ+ptZfa4JHF0R
+ XpNFL1Ep+gXwPGM8PV/2dBlIUYt3Kc8oX+legXN+vyVoTFeShpQddQ+wHr6F2UbmJUtG
+ EUBQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqnL/5u34U4jCcaDCM0dbhmYXmGB7hhQKwlb/jttC2hi1HOqXxt1lNygwKKwFSkb2JW1PhZ3aKA6pNO@nongnu.org
-X-Gm-Message-State: AOJu0Yws1i+ZNVzOoXcsai2o5A6TUZ+EmWPp1Km2Me45FEz0WS/n4dyJ
- ToPf2cgsjPsT8GSxPKbdCvpXTxHX7stEly6U2nHlUiW/G5Y22mox6Y2M
-X-Gm-Gg: AfdE7cmBtHcjHXZU9DskQhP0VBwzmp7+FU2xWgt0dpIogMtBTKLo2z08Xfjpu7kvjOc
- iM3uDh69C82mX+3R7lsJjPzKhEe1fEYnz8CVo/c6AOu5Nbzdu6Se/++tfQhj/wvxhEqIrESxs4m
- FgnSutCOrRvElkTXj+G+ktAbT799Vo608DZhaV/odpHkQmKrmTnj6+TFMiMKkr4v0n3nGcHO5jQ
- +4u285f1xd8pw793yOZqV4fyRMeLL3dhlg8PlvBgqoyGLs7r+LVkfSc082/KahSKCgJ0G9WKIy3
- JGUPw0bv1Z1+jBt2W47Goqy2mtVNoDAZNLhUWQapksIyDm3dKbMjeh7dxOMux2V8N8oLdqfwUa6
- tvAO16JVW3bYEx8e7zJF1tIqHyC16ogl6FULOJW09lNZd9RLBdoBsG4ayjg+tojKSbuowzpymsJ
- qzPGB8wliC+ndyPgWGLBhyO0SBzrjEMBl+Utdh1WX8GMneJfTH
-X-Received: by 2002:a17:90b:394e:b0:37f:a913:1554 with SMTP id
- 98e67ed59e1d1-3811236e007mr7727293a91.16.1783135367891; 
- Fri, 03 Jul 2026 20:22:47 -0700 (PDT)
-Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f0bb843fasm25995577eec.18.2026.07.03.20.22.46
+ AHgh+RoTc9nHgL3DXIMrSqup736ab21IeFOPJCDZjBhHG646m9tZSj9KarQh2s7xPWg91iFo1ejiVEolw7w4@nongnu.org
+X-Gm-Message-State: AOJu0YwICJ3Yg7OhtXJjEYcpxFDBc0MHHAL62wSCJx0UuQj7xrrLAfD3
+ uJOi0pgJ7mvXGkij4tJgEMc3SeF8qCprgcbWtEytfQutl+9jA1dlUkTqaS2Y1b/d0uo=
+X-Gm-Gg: AfdE7cntVB3DCUUl3xPBxr+GEwl0iFjcH5RpXLkXLsVz8ovJkcjzUGJtJhfv6x2N3WP
+ 0uu+OQccLh2zokQu2iYxKbrlg9xlNNLKt1rVHacco81gsRD9uDAeqweZn5iVvMo3v3K7KQV9XQR
+ IN2eASPpvbqUmaldYEGvKZN5y8VkjnEFbu9YQ5CzcPfdNaLKxpSv2FXYWUcj1SoYuhLIQE3xM3Y
+ RbCh04GiAHtPT51gmLOY2oKwcNpopuAAipsxMbdnYanXsLRH5OYuPx90olE5JK6ReozAJDr7p/c
+ 4ax86jUS2Qw/LkGASkOP1tocADhNkO5j3WAEO81B8XURmPymvEgvP2Rg7LH1TuOyK8RaYIn1V8+
+ mNzn7PyslAZdYfkuiXnJ9p+F+XLDowVCd53dvROWOhtcWehZpXsIajV2iXMmUMCR07NzlCJr17g
+ Fv1tWEFhcqYCsxTTFWhIS9AN9o0z+rZanSm/SBudwTF/N+o1E=
+X-Received: by 2002:a17:902:f78c:b0:2c9:c95e:5836 with SMTP id
+ d9443c01a7336-2cb97e42fedmr53057565ad.5.1783226267658; 
+ Sat, 04 Jul 2026 21:37:47 -0700 (PDT)
+Received: from stoup.. (71-212-39-188.tukw.qwest.net. [71.212.39.188])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2cad712ca17sm29863785ad.28.2026.07.04.21.37.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Jul 2026 20:22:47 -0700 (PDT)
-Date: Sat, 4 Jul 2026 11:22:44 +0800
-From: Chao Liu <chao.liu.zevorn@gmail.com>
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- bin.meng@windriver.com, vivahavey@gmail.com,
- Alvin Chang <alvinga@andestech.com>, 
- Yu-Ming Chang <yumin686@andestech.com>, Joel Stanley <joel@jms.id.au>
-Subject: Re: [RFC PATCH 00/25] target/riscv/debug: Sdtrig fixes and TT
- Ascalon support
-Message-ID: <akh7ajryQNtpb0ho@ChaodeMacBook-Pro.local>
-References: <20260114044701.1173347-1-npiggin@gmail.com>
- <ab8cd5ab-97bc-4c62-8225-6fd9d00e82da@oss.qualcomm.com>
+ Sat, 04 Jul 2026 21:37:47 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, philmd@oss.qualcomm.com
+Subject: [PATCH v2 24/46] system: Remove cpu_watchpoint_insert error return
+ path
+Date: Sat,  4 Jul 2026 21:37:03 -0700
+Message-ID: <20260705043725.1373137-25-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260705043725.1373137-1-richard.henderson@linaro.org>
+References: <20260705043725.1373137-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ab8cd5ab-97bc-4c62-8225-6fd9d00e82da@oss.qualcomm.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::541;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pg1-x541.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: 4
+X-Spam_score: 0.4
+X-Spam_bar: /
+X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ SUSPICIOUS_RECIPS=2.51 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,120 +103,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 03, 2026 at 06:36:13PM +0800, Daniel Henrique Barboza wrote:
-> Greetings,
-> 
-> 
-> My current understanding is that this series is an official dependency of
-> the riscv-server-ref board, currently on v8:
-> 
-> [PATCH v8 0/7] hw/riscv: Server Platform Reference Board
-> 
-> Because we decided that we want to keep 0.13 and 1.0 instead of deprecating
-> debug 1.0 (see [1]).
-> 
-> We missed the 11.1 boat with this work and with riscv-server-ref.  No big
-> deal TBH since the server-ref board can use improvements before upstreaming.
-> But I would like to not miss the 11.2 train in the end of the year.
-> 
-> Nick, I already reviewed a bunch of patches that seems to be fixes that we
-> can use right away.  If you're ok with it I'll pick them all and re-send in
-> your behalf, rebased and with acks.  My hope is that this will reduce
-> the amount of work needed for the rest of the 0.13/1.0 debug code and
-> we can get that sorted it out.  Then Chao can use the new 1.0 infrastructure
-> for his 'sdext' patches, and then we can lend the riscv-server-ref board on
-That's great news. I'll follow up on this series next week and start updating
-my 'sdext' patches.
+Move the validation of the address range to tcg_insert_breakpoint,
+which has to deal with gdbstub inputs.  Leave assertions behind
+in cpu_watchpoint_insert, but no error return path.
 
-> top of it all.
-> 
-> Let me know if that works for you.  Chao, not sure if you were aware of this
-> series so feel free to comment.
-I'm no longer being blocked by anything, and I feel like our work is basically
-nearing completion. 
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ accel/tcg/tcg-accel-ops.c | 3 +++
+ system/watchpoint.c       | 9 ++-------
+ 2 files changed, 5 insertions(+), 7 deletions(-)
 
-The main thing missing right now relates to the debug spec features, but I don't
-think those will be an issue. We should be able to push them upstream before
-the 11.2 release.
+diff --git a/accel/tcg/tcg-accel-ops.c b/accel/tcg/tcg-accel-ops.c
+index 9d9ecf542c..8954514f24 100644
+--- a/accel/tcg/tcg-accel-ops.c
++++ b/accel/tcg/tcg-accel-ops.c
+@@ -147,6 +147,9 @@ static int tcg_insert_breakpoint(CPUState *cs, int type, vaddr addr, vaddr len)
+     case GDB_WATCHPOINT_WRITE:
+     case GDB_WATCHPOINT_READ:
+     case GDB_WATCHPOINT_ACCESS:
++        if (len == 0 || addr + (len - 1) < addr) {
++            return -EINVAL;
++        }
+         CPU_FOREACH(cpu) {
+             err = cpu_watchpoint_insert(cpu, addr, len,
+                                         xlat_gdb_type(cpu, type), 0, NULL);
+diff --git a/system/watchpoint.c b/system/watchpoint.c
+index ed505da403..01cf0f61a8 100644
+--- a/system/watchpoint.c
++++ b/system/watchpoint.c
+@@ -18,7 +18,6 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "qemu/error-report.h"
+ #include "exec/cputlb.h"
+ #include "exec/target_page.h"
+ #include "exec/breakpoint.h"
+@@ -33,12 +32,8 @@ int cpu_watchpoint_insert(CPUState *cpu, vaddr addr, vaddr len,
+     vaddr last = addr + len - 1;
+     vaddr in_page;
+ 
+-    /* forbid ranges which are empty or run off the end of the address space */
+-    if (len == 0 || last < addr) {
+-        error_report("tried to set invalid watchpoint at %"
+-                     VADDR_PRIx ", len=%" VADDR_PRIu, addr, len);
+-        return -EINVAL;
+-    }
++    assert(len != 0);
++    assert(last >= addr);
+ 
+     wp = g_new0(CPUWatchpoint, 1);
+ 
+-- 
+2.43.0
 
-Thanks,
-Chao
-> 
-> 
-> [1] https://lore.kernel.org/qemu-devel/383936e5-fcdf-488b-8f77-17fdee41243e@oss.qualcomm.com/
-> 
-> 
-> Thanks,
-> 
-> Daniel
-> 
-> On 1/14/2026 1:46 AM, Nicholas Piggin wrote:
-> > Hi,
-> > 
-> > Sorry for the big series. The Ascalon CPU implements Sdtrig with 2
-> > different types of mcontrol6 trigger and the icount trigger, so in
-> > the course of testing and bringing up OpenSBI and Linux support for
-> > this, I've accumulated quite a lot.
-> > 
-> > My new year resolution is to start being better upstream contributor,
-> > it's taken me a while with changing jobs and architectures. So I don't
-> > expect others to drop everything to review this! Joel has been
-> > prodding me, and noted there is some other Sdtrig work going on
-> > with the v1.0 support patches.
-> > 
-> > I think the debug v1.0 patches are somewhat orthogonal to this series,
-> > but both are addressing aspects of a common problem of Sdtrig
-> > implementation specifics. I wonder if these should be reconciled or
-> > left separate. Sdtrig v1.00/v0.13 configuration is a single boolean
-> > which is feasible as a CPU property. Whereas the entire space of
-> > Sdtrig implementation seems like too much to make configurable in that
-> > way.
-> > 
-> > Any thoughts would be welcome.
-> > 
-> > Thanks,
-> > Nick
-> > 
-> > Nicholas Piggin (25):
-> >    target/riscv/debug: Check only mcontrol triggers for break/watchpoint
-> >      matching
-> >    target/riscv/debug: Handle changing trigger types
-> >    target/riscv/debug: Implement permissive type unavailable trigger
-> >    target/riscv/debug: Fix icount trigger privilege check
-> >    target/riscv/debug: Update itrigger_enabled after changing privilege
-> >    target/riscv/debug: Implement get_trigger_action for icount type
-> >      trigger
-> >    target/riscv/debug: Fix migration post_load icount_enabled() test
-> >    target/riscv/debug: Fix icount privilege matching icount_enabled()
-> >      test
-> >    target/riscv/debug: Implement icount trigger textra matching
-> >    target/riscv/debug: Maintain itrigger_enabled in
-> >      helper_itrigger_match()
-> >    target/riscv/debug: Fix breakpoint matching action
-> >    target/riscv/debug: Put mcontrol load/store match address into tval
-> >    target/riscv/debug: Remove breakpoints on reset
-> >    target/riscv/debug: Move debug CPU post_load details into debug.c
-> >    target/riscv/debug: Insert breakpoints after migration
-> >    target/riscv/debug: Remove itrigger icount-enabled mode
-> >    target/riscv/debug: Advertise icount trigger type in tinfo
-> >    target/riscv/debug: Reset trigger type to unavailable
-> >    target/riscv/debug: Add new debug state format
-> >    target/riscv/debug: Migrate mcontext using new sdtrig vmstate
-> >    target/riscv/debug: Implementation specific Sdtrig configuration
-> >    target/riscv/debug: Support heterogeneous trigger types
-> >    target/riscv/debug: Support heterogeneous mcontrol access types
-> >    target/riscv/debug: Emulate TT Ascalon Sdtrig
-> >    target/riscv/debug: Fix minor comment typos
-> > 
-> >   target/riscv/cpu.c         |  65 ++++-
-> >   target/riscv/cpu.h         |  41 ++-
-> >   target/riscv/cpu_helper.c  |  10 +-
-> >   target/riscv/csr.c         |   7 +-
-> >   target/riscv/debug.c       | 571 ++++++++++++++++++++-----------------
-> >   target/riscv/debug.h       |  19 +-
-> >   target/riscv/machine.c     |  96 ++++++-
-> >   target/riscv/tcg/tcg-cpu.c |   5 +-
-> >   8 files changed, 510 insertions(+), 304 deletions(-)
-> > 
-> 
 
