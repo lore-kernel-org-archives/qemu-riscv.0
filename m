@@ -4,104 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FB2AC43458
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 02:41:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C983C44500
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 02:48:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgZGD-0002Uu-FQ; Sun, 05 Jul 2026 22:40:41 -0400
+	id 1wgZNL-0004Bu-DF; Sun, 05 Jul 2026 22:48:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wgZGB-0002S6-6v
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 22:40:39 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ id 1wgZNJ-0004Be-Vo
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 22:48:01 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wgZG9-0007sO-Kx
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 22:40:38 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-698b558a792so2628929a12.1
- for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 19:40:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783305636; cv=none;
+ id 1wgZNH-0000oy-Mt
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 22:48:01 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-698acd36d67so4634040a12.0
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 19:47:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783306078; cv=none;
  d=google.com; s=arc-20260327;
- b=F+/zqrzpQyTiZVEaQBnKcfOyxfueBi2Q/6UC3CqlT2zMYLGblOIq2aY77ziuPQ1Y5b
- zygxwGNOSljD8kBDl31fMHs68QtifTg+mquRwqcNCPEffR65mQDPGTtMaqXoLfxBXtz4
- 4xr8Q5dBoRnrHVnKlXy0rQMl5mcyBuXpfUlLMYsJC/4tyo2x651/AezoQkvs0Dq78pvy
- z+vcTuAEuufwBhRbSLVXej9+3zd1j/HkLS8peiDaUJgc10CA5feVQO0M8URUfVQgT7jW
- dG2ilRmwPn5HMK1j84tn3aVh6OyPFLqp8/+rc44u6pvVkcLvGBapNIcZpSwEEEnM1tGS
- 6kAg==
+ b=oS2XQ0FxdDXBO1leQarDdjphLNEFdjCVgDnQcymkqW3nemBD3k79q5QByyWzHO6WgX
+ uISP4uiVtjfkk3PN4nq94AkbizA6VAK+GFkoXr0pQP0wwmxmfVhNh6lcMx9KFuQJh/Dp
+ PoKUzt29kW4qdd6zutVgE5RuccCSYJuf/W1hJQw27nSDh7ekXP4toTlJBP5JZyZHkpAR
+ PB+jB4U5URvudl7aYiAUMBSZsVYRINgfFMnxPtUFDZgvCzLuGdrOHF8LTf7C8e20uiWI
+ n9OdWklswnn0r/8iuYaEFhUI3IEHqkJdDtQ0ugb+CNvngPm5rgy8DtvraAF12doQk9pN
+ bFbg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=TjWdQKwOQpOYEu0iBnBkOGVpSpN1dx6eBdCbU/HeHYI=;
- fh=A9BAHf4JEsS4GjBhn0BEjMx9+PvVkl0Fi8pFkW9wpO0=;
- b=SCT38UhPy4jj6N7rikWzNwnc2a4f8arR4Qux9SyhtWwNEvkv97qCneyjDmIGpuY7f4
- Iug7He2Rk+YYBKsL11rlQFwDnyu/k4BM1ENiKccNifpIhDBpjmMWhoUdvu9diKaw9zYl
- SjlxPH+VXSVwu5tJ6lU35HjM0mkMlwIgpVtDu3xp0ts0K2Ogz1vcSCvzcTip7iBl6ycC
- gPVFbAhNjDlCbibSe7SjX48RogkLo3YrLchEIjCGrjzUiTe1TVmAUfwpcg52YN5jUmMj
- i9voSAgIxkNgQIVzdt8Hx75us1KUHXojtg9Ok6wrvstdgAEilQ747MMBF07vevhzDFUS
- iaBg==; darn=nongnu.org
+ bh=w5/0NXa9HSugiv6hw4tHhtMykE/NIFThL0bmySBOzx4=;
+ fh=mvqClan+oBPLk4eWUumUGvNOa8zoPtNNcUzfnTk2KO4=;
+ b=j1HNiEBODhZnNd1YGbHaTrzI9qLcPrW5NXjeDzucFBGUVVR0FL3gro+rRCiaEfAAcQ
+ uT/w9oGOMIXAamqwCt89RNT48BFZd8v8h8/f7If14wm6UG38wyTqO56cq9FmZOVHWVLC
+ pCel/z5IfzSJ+YzYU7qCNRtmh0cJER6qTWIRtzJ5y62WcwmsW1CZViiYmzVMh5opjqIn
+ xDqYBCLjBVdRdfUUSzVT4iAmoYHF+3VgE7c8amMIePO1RKGgbofn0/QdHcpc/0j1dZq/
+ gkCR7GmntsQjslHzH884o7OtVicUH7LlbTOEbgHEZzNpHL1HPk9loBQWPrP00rYbzCnH
+ 649A==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783305636; x=1783910436; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1783306078; x=1783910878; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TjWdQKwOQpOYEu0iBnBkOGVpSpN1dx6eBdCbU/HeHYI=;
- b=aGJrCLzoRaqnRQ0ogj+9HESSPBy/6UxjvOjLOFq2QARgDUBz7na3VuOau9A05380/u
- wGSarE8QDrp4eV9lYo92XdGXgt5hT/CxqJCP7uEplO+0flfGJmcXNPXPr77cbAxfjRqg
- QXQkYWxF5v9uFOw09AE/+/8ylmoo9LtQGgjfok4jiU/jO6ICZPadvym29okjKrwqDtde
- jypkUnxGo95ft6VmH7+uKqe+T1bfO4w24Cx6e1PvCZPhY80DmG5Bz62Cm0AOos/3u4Vs
- siuVWlzRekQ9QW77erFMAVOl8HzOBL0fQWxV+RQ2VsZryzS3tYLPFycsm8AB3daALjt9
- 9AMQ==
+ bh=w5/0NXa9HSugiv6hw4tHhtMykE/NIFThL0bmySBOzx4=;
+ b=L/5kxqQjSBGhkaVbQ50tES3Oeq9kbew2eJV/9boABiN0FzR02vd0JyETU1kTgs5KsV
+ 4MbTCDBKjL0NSZCtT3RmdnzeBVAsUr47lX08CeAgV2mGuqbUL65opp8B57I05WJJIzkK
+ UXw4UpPVO8NmWxJFGAMJ5S0/BqQmic7R81O4PjHNfkZbDG/uFlMC1yMhrZXU2VWOPqgI
+ Ew+0hiboXBID7zVVyEU06B2Rrz3cWSGzXZZbh1zrbbKILL1Dp6HXP38cJAdINrHKv3hM
+ b4MhzLFcWKBdWMdP+i6nbDkPKRRtKw1HFrc7uV1kM4K1orKQRihSuf7G7PlrK2TM50qF
+ td6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783305636; x=1783910436;
+ d=1e100.net; s=20251104; t=1783306078; x=1783910878;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=TjWdQKwOQpOYEu0iBnBkOGVpSpN1dx6eBdCbU/HeHYI=;
- b=FgCFJIZUXnXJghkh6yR6NkRqDdBF4dmQGeW2t6SF4cEIRJsHFWml+EhRa59u+aTbUQ
- 7fDMYIezMquiUyXTkH+Iodqksw+JNxJt7c2U75NO/g8ZslQQN9iw037O4d0qMSsxL/TX
- Lmod2I6f67qEHLydqn96OpqkQDjKdtKhAmHVoTotFT9inXHajaHRamiAP+aPKc3mW1YX
- F9iFAVexdtCQM4cV36wXWuCTd1fkWEJcyMMyx24XPbKLiqOKcIpaXr4Xv1ydZFGGxGl9
- s77i48NvZsk9R1WlZV6O8IcL3EWX6JSbB1K9hPhYlLTyRiG0rTv6NIFTxRoCEI6/hIte
- C8Hg==
+ bh=w5/0NXa9HSugiv6hw4tHhtMykE/NIFThL0bmySBOzx4=;
+ b=IVWfZ7b+L9AEPugYSA+lcoZTevvw9ofvKn8CMvD7603V2QHnnIyrTqHSfxNtUHdtkN
+ 2DoW8Nn28lRy1F7g/vtTRDpR9t/65iQ38Ix0ieOiAlq95QKjzoEmfPRB5mCkwSVSUd7N
+ 4uKvSYuoiS5BZ6tu3MSAitTeGmUR9VGL00xLOLW9rOt43a9itZus7Ldkl2+PzGXCRld3
+ YqHyuui0Z2rFrYCxiLs3FPe/ZOb1P0ETal9+nTCggYfnvlnYcDZnbqUf+QcxZdDuexgu
+ XAuUrdy+Rgjr7uNAkZWR0dGKdE3UwJNBJI2rmK2pMhm3MuuDS0IXXurxkGzR7WDuPAF0
+ N6Fg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RohbPgRhQCuRt+cRB6o6pLdLzzD7x1zuKBYnmHoA78zr0UAKTt3GFQ3cn/M/K4ps33aN2byaCRw/cj3@nongnu.org
-X-Gm-Message-State: AOJu0YwMJKkrbNHeFsCq4Tg1uOCVCFTxeyuaU8QKb8uyU8MR1qZQitTR
- WwQcQRsFcijwbcnH0CvZqjX7Uipwv9rf39mRBoE4aNGi07XqaPXs9k5MUHo5HhvYDezgmxriL6l
- ZpADpTeQ78FmF9+px2sEbYlr5tB12WrVx89Pa
-X-Gm-Gg: AfdE7ckMdjhA81eSq+ww1dkkSc/PKzb0haVTppJ5r/mv6jYhopcOswLt3dRGWRVP9r7
- 9gIRD/vlfGA7IUPSFgiHrf4dVTGSEMMkGXOXOo7xlzbaIsQmNTBvfmQRUTH+yPFzj3DMAtnGA33
- KyMvQnEo7jpDOD/TZpB7+5Mlu82Evmg341rS8Q1V/JSS2BWZBVJ01JcuPUCV6O2LVONCztOcmqD
- xwYjCHv9UmBWNFNMTE/0xiaRpxaTmXJow9ULXOjLT6TGXfLa9z0KKdG1wAExG2OCaEHT4/zhafa
- DrVDITTXNZ5rh6NqpnT7eSlSX1iy5QZd/8RNYA==
-X-Received: by 2002:a05:6402:34c6:b0:699:fbe4:16d5 with SMTP id
- 4fb4d7f45d1cf-69a1a24b446mr2603213a12.1.1783305636446; Sun, 05 Jul 2026
- 19:40:36 -0700 (PDT)
+ AHgh+Rr84h9elE8RQUHK3EZCzDv5qMByOh4jf1MRcB70y0S7F+CY088U6AhXGUcO4dBQOK787z+Gcw001emj@nongnu.org
+X-Gm-Message-State: AOJu0Ywgzyx1pMuAEgJRmoIjHkJ/w7hrR2caYGTt69hHGkBEJBIf1P29
+ +Ph3nKJt1aKvpqVSLMVQQgPKeD+KZ0McWF4CZqfDyoBuyTAQUr2gC4LuoajkSHSQ+5WFYGBaYU9
+ DK0lAmrWcAAt1Nf67jdgQ1wmewQNueqk=
+X-Gm-Gg: AfdE7ckvV/reb6xQQ7/5JuQeUbJIX+IoqkRuKzIYi6H690X5FmHAs81uKi7Zd9iXY1I
+ t1nk0dneLs1Kgrw7L2/+lRFPmVySel5m3CC9ao11ywKvMGcAR24Qp0VSMJv42L5rVvMoRy3/IvW
+ u9QtBSfk5yEIxEZZyyxSm8t7QgKSoUrg1nlYzlKiPXaGNUR/gL20UrSDomtEHOL/N8I93CjzeA8
+ KEsAOQWEoBj9kzBQqI6Rj6E7t2Xxx2MsI5U4SP5UBGjNDtv5RrAV5ugTZz30xs+SofvTByaE9RX
+ p+fJqGZHtm3zVUhBrLKc5KSxpe/wZHiRRjQmNQ==
+X-Received: by 2002:a05:6402:5418:b0:695:dcb2:7438 with SMTP id
+ 4fb4d7f45d1cf-69a1a3ad324mr2746611a12.28.1783306078115; Sun, 05 Jul 2026
+ 19:47:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260630104350.748267-1-frank.chang@sifive.com>
- <20260630104350.748267-5-frank.chang@sifive.com>
-In-Reply-To: <20260630104350.748267-5-frank.chang@sifive.com>
+References: <20260702171202.1322493-1-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260702171202.1322493-1-daniel.barboza@oss.qualcomm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 6 Jul 2026 12:40:10 +1000
-X-Gm-Features: AVVi8Cf8Yx6Q4VFdK-gMpWpoaUEYbUOUGcA9_lyTEc1IFQkJLnSORh0HL9RWTQ8
-Message-ID: <CAKmqyKPwQ_TgTNF=k6h_H+o9EE9F+97gyDDuPFY1hXnNdq7_OQ@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] target/riscv: Enable Zicclsm for the compatible
- CPUs
-To: frank.chang@sifive.com
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Date: Mon, 6 Jul 2026 12:47:31 +1000
+X-Gm-Features: AVVi8CeSQD-wtHPdO_Xaz7mlBZizzXcrD5iLwX8J7x7_xvAf5NhymDwj6IuEzqQ
+Message-ID: <CAKmqyKNQ4k90C9viNJaArX7GgMhHXN_+PuZw1W6-6DJ+3jVWbA@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv/riscv-iommu.c: update ioval2 when faulting in
+ spa_fetch()
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
+ andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x533.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -125,93 +121,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 30, 2026 at 8:46=E2=80=AFPM <frank.chang@sifive.com> wrote:
+On Fri, Jul 3, 2026 at 3:12=E2=80=AFAM Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> riscv_iommu_translate(), the only caller of riscv_iommu_spa_fetch(),
+> will use riscv_iommu_report_fault() for all faults it detects.  And it
+> will use iotlb->translated_addr as 'iotval2' every time.
 >
-> Now that Zicclsm is supported, let's enable it for the following
-> compatible CPUs:
+> At this moment we're updating iotlb->translated_addr only after a
+> translation step is completed, meaning any fault that occur before that
+> will have a zeroed iotlb->translated_addr, and as a result iotval2 will
+> also be zero later on.
 >
-> - Base 32 CPU (to be backward compatible)
-> - Base 64 CPU (to be backward compatible)
-> - XuanTie (T-Head) C908
-> - Tenstorrent Ascalon
-> - Ventana Veyron V1
-> - XiangShan Kunminghu
-> - MIPS P8700 (ISA doesn't include Zicclsm, but their datasheet claims tha=
-t
->   it has unaligned load/store support in hardware)
+> Keep iotlb->translated_addr updated with the latest translated addr we
+> have.
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3559
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 7 +++++++
->  1 file changed, 7 insertions(+)
+>  hw/riscv/riscv-iommu.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index bff3ed5de14..a3cccdfed3c 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -3021,6 +3021,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
->          .cfg.ext_zicbom =3D true,
->          .cfg.ext_zicbop =3D true,
->          .cfg.ext_zicboz =3D true,
-> +        .cfg.ext_zicclsm =3D true,
->          .cfg.ext_zicntr =3D true,
->          .cfg.ext_zicsr =3D true,
->          .cfg.ext_zifencei =3D true,
-> @@ -3093,6 +3094,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
->          .cfg.ext_zicbom =3D true,
->          .cfg.ext_zicbop =3D true,
->          .cfg.ext_zicboz =3D true,
-> +        .cfg.ext_zicclsm =3D true,
->          .cfg.ext_zicntr =3D true,
->          .cfg.ext_zicsr =3D true,
->          .cfg.ext_zifencei =3D true,
-> @@ -3179,6 +3181,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
->          .cfg.ext_zbs =3D true,
->          .cfg.ext_zkt =3D true,
->          .cfg.ext_zbkc =3D true,
-> +        .cfg.ext_zicclsm =3D true,
->          .cfg.ext_zicsr =3D true,
->          .cfg.ext_zifencei =3D true,
->          .cfg.ext_zihintpause =3D true,
-> @@ -3222,6 +3225,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
->          .cfg.ext_zicbom =3D true,
->          .cfg.ext_zicbop =3D true,
->          .cfg.ext_zicboz =3D true,
-> +        .cfg.ext_zicclsm =3D true,
->          .cfg.ext_zicntr =3D true,
->          .cfg.ext_zicond =3D true,
->          .cfg.ext_zicsr =3D true,
-> @@ -3270,6 +3274,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 974042d017..6761b77f95 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -546,6 +546,14 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s,=
+ RISCVIOMMUContext *ctx,
+>          }
+>      } while (1);
 >
->          /* ISA extensions */
->          .cfg.mmu =3D true,
-> +        .cfg.ext_zicclsm =3D true,
->          .cfg.ext_zifencei =3D true,
->          .cfg.ext_zicsr =3D true,
->          .cfg.pmp =3D true,
-> @@ -3329,6 +3334,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
->       * The RISC-V Instruction Set Manual: Volume I
->       * Unprivileged Architecture
->       */
-> +    .cfg.ext_zicclsm =3D true,
->      .cfg.ext_zicntr =3D true,
->      .cfg.ext_zihpm =3D true,
->      .cfg.ext_zihintntl =3D true,
-> @@ -3385,6 +3391,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
->          .misa_ext =3D RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU,
->          .priv_spec =3D PRIV_VERSION_1_12_0,
->          .cfg.max_satp_mode =3D VM_1_10_SV48,
-> +        .cfg.ext_zicclsm =3D true,
->          .cfg.ext_zifencei =3D true,
->          .cfg.ext_zicsr =3D true,
->          .cfg.mmu =3D true,
+> +    /*
+> +     * riscv_iommu_translate() will receive a fault and then call
+> +     * riscv_iommu_report_fault() using iotlb->translated_addr
+> +     * as iotval2.  Update translated_addr it with the latest
+> +     * translated addr we have.
+> +     */
+> +    iotlb->translated_addr =3D addr;
+> +
+>      return (iotlb->perm & IOMMU_WO) ?
+>                  (pass ? RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS :
+>                          RISCV_IOMMU_FQ_CAUSE_WR_FAULT_S) :
 > --
 > 2.43.0
 >
