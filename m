@@ -4,113 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37EE3C44500
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 05:32:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73E75C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 06:07:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgbwe-0006SC-7Y; Mon, 06 Jul 2026 01:32:40 -0400
+	id 1wgcTj-0003Fi-9V; Mon, 06 Jul 2026 02:06:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wgbwb-0006Ra-2B
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 01:32:37 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wgbwZ-0008J0-Gh
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 01:32:36 -0400
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-697564cb69eso5068822a12.0
- for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 22:32:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783315954; cv=none;
- d=google.com; s=arc-20260327;
- b=Bn0thFraJj/wqW6eULDRlnSOh0T7teNk5IA9VZ7VCjjz/q5mwpacVYq7f1xfdJEUs1
- 2UfxnxvNmueq10aoI8zLP1BFing5ZhLOfI+LbD0iZTESsdMemEVtvNZdm1fxBHhTwBCJ
- toI8xXJAIuSLghkGSKfZuEUO8MWt7pYn3bZ9JYwGjnaHunhWcsR55NRv3GsUs9kCoKfj
- vdcBDV4F0yAQtDOevyoT2+t5LcbOpJGXj8NarRhwTMtUaeWaSR4k72Q8JtqzGbOG+9j1
- WEanNsTyg2temR1t/q7evMI2ly5N60QGXEhdLkZSHJkAjANyglrqyRlTqlcfUdmRP0ZS
- 0UBA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=zaQmt+1CRY38HjRif+W7XAPqNUJ2db9Xfdb0awJ4AqE=;
- fh=8fXwqOajYiKrsjW2lbmh4Kz/Y5uXnwzzfe76Yt2u6fw=;
- b=GFl/CZ9sb5sdGCs8l7/gSDQcKbp0mVkRhwBQyo7ncH+RqAtnGSujpqWe2etu4Dn9wK
- xJLovsGrR9yp2dL9LW8C3I1g9hVtAnPAJkmIbO4hV8YjyMGlFaoO/XexxbWOH785RStD
- +Ru9s8PWEXsUQTeHoSi/edHssuI9R2vskqa7HpNFqTEhGbdV3Fgce6AJnoLI1Sck6FgQ
- NDDVjnN87IvTes65R471YPa+hxuHDyCygesyB3TPQJUCxV8E9B7ynfEgqOwZjNo6Msa9
- KCGmZJCBJ6RirF2HlOqo/m0v+O80I4PpjrBx6YmCNPcoEwFwJYu9mNbNhv7l47bs+MX4
- 9jWQ==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783315954; x=1783920754; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zaQmt+1CRY38HjRif+W7XAPqNUJ2db9Xfdb0awJ4AqE=;
- b=WsLl2C9dDkpJDHV04xmYmW9heDAdGWRqTtgr0AqtSlrcHt3f4GXSr4oahgbnysSg7K
- qriHfRMxAjyuHayhMvWu7VV07Ggda28Uk3getK0EQku/iaRlDiIp1w+7CrBDD+2L+Yw4
- XeBuWvWc3uiIWxEGxi+m0h5ywQt69g7Ewc+WBDSTBVfugG3aWiAcrz3BvIqofwQ0W6lI
- 5vNUBtnxxuEk6xs7Q6VTvZZDX3nBdYJ8hrleLyGt3cNizbjjIC7ZQnbZCWlnaK3m3OKF
- N/0TW+EtIyrKaF/Nbux6ye72AxqmwAve2EX9MDQu4ocwgqZEQNRnNUEqTZX93s1u/DcS
- sgpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783315954; x=1783920754;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=zaQmt+1CRY38HjRif+W7XAPqNUJ2db9Xfdb0awJ4AqE=;
- b=BMydRhlr0rRbsP3Ah98bhGzn3M0bxXC2Zup99X7zEi5zOyiRiqUwbZRL49eOAmPpXt
- vftqw3O7wMNOmirMsOcDrFCmW9cVv+OZcVyf3DhZ4gxKV5lJHlcjJw5Fal0oJgT4zkvb
- +4jOZ9E11cALitfFJyYOC3SV13YaIVA8EQTzPcV5FHkY5mJ8YkjcQCyHPnTniYo4ic0k
- 497IGpf+c/BAbH3yw4+A9pOHcwXDSkSfj1eyNAhGGBfDnz8LYtmxfEOaurblo3QIBnL1
- yJB6eke0IkGHKHIPxIBgryEtEtjdVXsLvZ6TzBdGqqyrIZOZUa8oIOW4mPjkQzspfXFc
- tVWQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrrqldCL/T5TQJxL3DAfThySaJcpVvtJQaNHDTSJB2WU95TpNCUHdLuB0+7oK989guImLc0PgOU0pbW@nongnu.org
-X-Gm-Message-State: AOJu0YzvMY0N3Y44zY4DmCIMlj71atj1W8DQA3C6E4hB8cPLBxsgja2h
- FiTVRPsqgCUHaOZPLx02IURhw4OK+DU08/PGd1cVfoQAlykVyDx5dDCzdkBLw59D4p9UPZNparw
- c11IgQ8YetZHaxVvGN41AxklA0+ENlLs=
-X-Gm-Gg: AfdE7cnN/YO3q91nqYjQDi0Bl5JGRgkLN11tt2wQnl9RalCz/fE38zgkJUA6dcqogpH
- uvbeINSfCcmShdGninvi5H77cx/RePAWFVxVRFRTyUSlc9LOZCkMFpfFa01/YZP6isDOzJc5+x+
- wXvledkMyuU5Wd2LnBhn7PHED5GbLf/VtXkZ7yaNEw9lIrKVYwL/AIBepTNIGfQrdnQ4HOALLUD
- YpLwptwl4FDpWd/JzKRVNeOFb1Gxi+uqFNVFSKSRSWtWQoSqNa+0eSiZE9KNeHos0fx40rNXh9H
- VgU2YyHy4lpeykhP7MWJw6LjWOo=
-X-Received: by 2002:a05:6402:34c6:b0:68c:3439:1340 with SMTP id
- 4fb4d7f45d1cf-69a1a3aa17amr2834253a12.22.1783315953625; Sun, 05 Jul 2026
- 22:32:33 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260630104350.748267-1-frank.chang@sifive.com>
- <20260630104350.748267-3-frank.chang@sifive.com>
-In-Reply-To: <20260630104350.748267-3-frank.chang@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 6 Jul 2026 15:32:06 +1000
-X-Gm-Features: AVVi8CcRk1B7JEiWmk4gvQFaTNsu9QBU8e51ga9q873ml6L9gOIMsCl7A_Ir0Kk
-Message-ID: <CAKmqyKPFV++zTuzWSWdMLbj1gb+VaLdrW6TEEo29+7jLz=0+ZA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/5] target/riscv: Support raising misaligned
- exceptions for scalar loads/stores
-To: frank.chang@sifive.com
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Max Chou <max.chou@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x532.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
+ id 1wgcTh-0003Eu-7Q; Mon, 06 Jul 2026 02:06:49 -0400
+Received: from mxhk.zte.com.cn ([160.30.148.35])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <wang.yechao255@zte.com.cn>)
+ id 1wgcTc-0006Qd-Bw; Mon, 06 Jul 2026 02:06:48 -0400
+Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4gtv4n3b9hz8XrrZ;
+ Mon, 06 Jul 2026 14:06:33 +0800 (CST)
+Received: from szxlzmapp03.zte.com.cn ([10.5.231.207])
+ by mse-fl1.zte.com.cn with SMTP id 66666MAR059389;
+ Mon, 6 Jul 2026 14:06:22 +0800 (+08)
+ (envelope-from wang.yechao255@zte.com.cn)
+Received: from mapi (szxlzmapp03[null]) by mapi (Zmail) with MAPI id mid12;
+ Mon, 6 Jul 2026 14:06:24 +0800 (CST)
+X-Zmail-TransId: 2b056a4b45e0e54-7f916
+X-Mailer: Zmail v1.0
+Message-ID: <202607061406240161qB8UHkhWxKejNM4p23xn@zte.com.cn>
+In-Reply-To: <CAKmqyKMhqavLeDj7fy-JpY8WGKO0m_o+94UMPX2sBK5Ldsid4w@mail.gmail.com>
+References: 20260622065717.15386-1-wang.yechao255@zte.com.cn,
+ CAKmqyKMhqavLeDj7fy-JpY8WGKO0m_o+94UMPX2sBK5Ldsid4w@mail.gmail.com
+Date: Mon, 6 Jul 2026 14:06:24 +0800 (CST)
+Mime-Version: 1.0
+From: <wang.yechao255@zte.com.cn>
+To: <alistair23@gmail.com>
+Cc: <alistair.francis@wdc.com>, <qemu-devel@nongnu.org>,
+ <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <liwei1518@gmail.com>,
+ <daniel.barboza@oss.qualcomm.com>, <zhiwei_liu@linux.alibaba.com>,
+ <chao.liu.zevorn@gmail.com>
+Subject: =?UTF-8?B?UmU6IFtQQVRDSCB2Ml0gdGFyZ2V0L3Jpc2N2L2t2bTogYWRkIGV4dGVuc2lvbnMgYWZ0ZXIgdjcuMS1yYzQgdXBkYXRl?=
+Content-Type: text/plain;
+	charset="UTF-8"
+X-MAIL: mse-fl1.zte.com.cn 66666MAR059389
+X-TLS: YES
+X-ENVELOPE-SENDER: wang.yechao255@zte.com.cn
+X-SOURCE-IP: 10.5.228.132 unknown Mon, 06 Jul 2026 14:06:33 +0800
+X-CLEAN: YES
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-MID-QID: 6A4B45E9.001/4gtv4n3b9hz8XrrZ
+Received-SPF: pass client-ip=160.30.148.35;
+ envelope-from=wang.yechao255@zte.com.cn; helo=mxhk.zte.com.cn
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, CTE_8BIT_MISMATCH=1,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -126,55 +77,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 30, 2026 at 8:46=E2=80=AFPM <frank.chang@sifive.com> wrote:
+> On Mon, Jun 22, 2026 at 4:59 PM Wang Yechao <wang.yechao255@zte.com..cn> wrote:
+> >
+> > Expose zilsd, zclsd and zalasr.
+> >
+> > Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
+> > Acked-by: Alistair Francis <alistair.francis@wdc.com>
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> Thanks!
 >
-> When the Zicclsm extension is not enabled, raise misaligned load/store
-> exceptions for misaligned accesses from scalar load/store instructions.
+> Applied to riscv-to-apply.next
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Max Chou <max.chou@sifive.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Alistair
+>
 
-This patch breaks the `func-riscv64-opensbi` test, which you can run
-with `make check-functional-riscv64`
+Hi Alistair, could you please confirm if this patch was applied to the 
+riscv-to-apply.next branch? I can't seem to find it.
 
-Alistair
-
-> ---
->  target/riscv/insn_trans/trans_rvi.c.inc | 6 ++++++
->  1 file changed, 6 insertions(+)
+Regards,
+Yechao
 >
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
-trans/trans_rvi.c.inc
-> index e47b16a7fa2..cc1b5dbbadc 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -413,6 +413,9 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, Me=
-mOp memop)
->      if (ctx->cfg_ptr->ext_zama16b) {
->          memop |=3D MO_ATOM_WITHIN16;
->      }
-> +    if (!ctx->cfg_ptr->ext_zicclsm) {
-> +        memop |=3D MO_ALIGN;
-> +    }
->      decode_save_opc(ctx, 0);
->      if (get_xl(ctx) =3D=3D MXL_RV128) {
->          out =3D gen_load_i128(ctx, a, memop);
-> @@ -524,6 +527,9 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, M=
-emOp memop)
->      if (ctx->cfg_ptr->ext_zama16b) {
->          memop |=3D MO_ATOM_WITHIN16;
->      }
-> +    if (!ctx->cfg_ptr->ext_zicclsm) {
-> +        memop |=3D MO_ALIGN;
-> +    }
->      decode_save_opc(ctx, 0);
->      if (get_xl(ctx) =3D=3D MXL_RV128) {
->          return gen_store_i128(ctx, a, memop);
-> --
-> 2.43.0
->
->
+> > ---
+> > Changes in v2:
+> > - Rebase on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+> >
+> > ---
+> >  target/riscv/kvm/kvm-cpu.c | 3 +++
+> >  1 file changed, 3 insertions(+)
+> >
+> > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> > index f0de5c3071..707b992d55 100644
+> > --- a/target/riscv/kvm/kvm-cpu.c
+> > +++ b/target/riscv/kvm/kvm-cpu.c
+> > @@ -304,10 +304,13 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] = {
+> >      KVM_EXT_CFG("zihintntl", ext_zihintntl, KVM_RISCV_ISA_EXT_ZIHINTNTL),
+> >      KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHINTPAUSE),
+> >      KVM_EXT_CFG("zihpm", ext_zihpm, KVM_RISCV_ISA_EXT_ZIHPM),
+> > +    KVM_EXT_CFG("zilsd", ext_zilsd, KVM_RISCV_ISA_EXT_ZILSD),
+> >      KVM_EXT_CFG("zimop", ext_zimop, KVM_RISCV_ISA_EXT_ZIMOP),
+> >      KVM_EXT_CFG("zcmop", ext_zcmop, KVM_RISCV_ISA_EXT_ZCMOP),
+> > +    KVM_EXT_CFG("zclsd", ext_zclsd, KVM_RISCV_ISA_EXT_ZCLSD),
+> >      KVM_EXT_CFG("zabha", ext_zabha, KVM_RISCV_ISA_EXT_ZABHA),
+> >      KVM_EXT_CFG("zacas", ext_zacas, KVM_RISCV_ISA_EXT_ZACAS),
+> > +    KVM_EXT_CFG("zalasr", ext_zalasr, KVM_RISCV_ISA_EXT_ZALASR),
+> >      KVM_EXT_CFG("zawrs", ext_zawrs, KVM_RISCV_ISA_EXT_ZAWRS),
+> >      KVM_EXT_CFG("zfa", ext_zfa, KVM_RISCV_ISA_EXT_ZFA),
+> >      KVM_EXT_CFG("zfbfmin", ext_zfbfmin, KVM_RISCV_ISA_EXT_ZFBFMIN),
+> > --
+> > 2.43.5
 
