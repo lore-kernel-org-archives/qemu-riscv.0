@@ -4,67 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF5D7C43458
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 06:14:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 492D5C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 06:14:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgcaG-0004mR-JS; Mon, 06 Jul 2026 02:13:36 -0400
+	id 1wgcak-00053U-Oy; Mon, 06 Jul 2026 02:14:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wgcaB-0004kh-U9
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 02:13:32 -0400
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044])
+ id 1wgcag-00050u-O3
+ for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 02:14:02 -0400
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wgcaA-0007lZ-74
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 02:13:31 -0400
-Received: by mail-pj1-x1044.google.com with SMTP id
- 98e67ed59e1d1-36b9d265355so1817495a91.2
- for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 23:13:29 -0700 (PDT)
+ id 1wgcaf-0007nY-4n
+ for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 02:14:02 -0400
+Received: by mail-pj1-x1042.google.com with SMTP id
+ 98e67ed59e1d1-37defb2f231so1688811a91.2
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 23:14:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783318409; x=1783923209; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=vq0w1E+1RJuXVhbPh5o40ncgrvOoL/BDcPSl1NkuUu4=;
- b=BFH6YGesKY31z2N4jrfd4DTEuI+mlcgM+XJdpcxb5bphKd4ADSeMGjx8ZMcQ2vPA4X
- tazfqB7scYrZTchbRRYMP/oh17MeZA9p/aEgL7FDcK1z51scYayIKjRVXiVF9tGOpgW5
- aqXvYiDoHqcLJ7MFUN/AubndXgKR3IgbJOYFvcRkXx8lTmrEiFlrbrd6EVljr+jkx6hw
- v8cIInSACkU5uAiEwGyYFBHEgcCY+UpEOgUsHkimv9LlertjdoGP4Fu+4K5GrTIVSM/k
- qN7bIc6hTL3NnekREpOJh6F6M38FeZmWQ0l5stJTzws8NT943VfPIiRm25vTI4HfzhW+
- LC/Q==
+ d=gmail.com; s=20251104; t=1783318440; x=1783923240; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LC4i6Rn70QJclSXE79Emy/z1KOJHaUpm3Xya2Fn3rzg=;
+ b=E2bGXFed6GGpCQGkuljAAwhzOvxwlDSsh6FhTtJ/BdzhoA1aMdNmSpd3aq7mPiyF5L
+ 5D/Yv0P9+RFKy+7KjGqCNlfFmdnDXYsRbv+ShfDUWyh0ZvjvF1Q0xCqRPlKclJWzlwO8
+ +4gLQj/pY2eUzIWkObcBubYKNULjzcSHBzuCKiCn/t8QHu+MLtDVJpOCnLqMk6tmhpMI
+ seEKVL5OZOgilcHf07lt4hJBElV4cODw9NyXcg86VxZRWPYXF7Ba2X0G8Mk+zyaHOd6z
+ eu6aYqLgnYnBPyefvnagWiNCYxDIuGdeH9RdU1OPAD15bHa0Ccxm88PSzKz8O3eqvx/N
+ XCPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783318409; x=1783923209;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=vq0w1E+1RJuXVhbPh5o40ncgrvOoL/BDcPSl1NkuUu4=;
- b=hxYqSHsehs0HjSYm5oGubH7WQxdx7v3XCb1LEjHZus06Nx04W6CE0xuVUT+4OiQg4p
- h7awwnCOlA1w4A4nUTs82CPGICWMdSP0SFrhGXJGvm35rTh20v/LDYLUFNlwKlGctiUv
- +pb9fcbk5sDusYq/8VGUBAprtoF0Iw2JPcHnsbZF4z2hJB9doHiElb5EyA8l1dO5ZSkP
- NJdcgt2evGJzxS2m/iJeBIUrMjrb2xtaRCv2fnCn+PGnCF2HP9dIANlKNtvlwqhUOvGH
- H7VdQjBaj/31VjU2xhv1CDtUC/BhQYwscw4Zd/iYO24fk5qh+wtXq7lMMfDAMoPkzYoq
- M8eg==
-X-Gm-Message-State: AOJu0Yw3jncqWfTrdMs/wSUVgn7c05cC+gSf2HbeaxOXa8VD5JQUJfY8
- dVyOepHDd/nielbgc8y85DF37xEllIBo38K4Q2YkZJM/xeWcQN7iOSoM
-X-Gm-Gg: AfdE7ckVTuTkYMtJZfc0G3U8YRKhJSJ5+TwWf1wyWpbL03RT89XW7mcelfIZ631DjRh
- PEJPSHH1tU7u47aV/+V+AHNNKDXF8puJ+rj/pkb1j3T/NkuvcQqo8PkZcwwN7seTfnE/IzQoSIN
- eUyiBDPQ+USQTWau5/R3v2mTv/L9niNdJHIoxp3na67mDHK3TdhfURBlINwVGuwWRD0wlmWoS5C
- u+hVaFoR+d2PeUe6OYPgOTOTP+XaTMTz1zwMf6fSzJ6XoK4D72VAHUS3X8lfPcHgHIPzux3os4h
- sO1EilBDLC+gst8c3N6fKD96Tv9TeCmoFeP+2nauWVkFxkr0naGlJ4mMXa2xCks6vcYViaFQR56
- 5M5t4D8XDE6DPhv2GbG4R3RZp+PKprvmulUUGSQzgi3ILXYmT6W7DZmxTjlEJdvh5b5kKyeOBdz
- W0UYhwqhGIAXukwQH5aGIya9xkqoX4HwpGa8Dl6JIscaaZN+fH
-X-Received: by 2002:a17:90b:3f46:b0:382:1a6f:ba3b with SMTP id
- 98e67ed59e1d1-382803b65f9mr8777679a91.5.1783318408439; 
- Sun, 05 Jul 2026 23:13:28 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1783318440; x=1783923240;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LC4i6Rn70QJclSXE79Emy/z1KOJHaUpm3Xya2Fn3rzg=;
+ b=BmCj7lfTmB23GBi6gCaxOFrgPylvGwqF3N2ahVJHZ1bJyhlM3l4W5ml6bWNSNyx1Il
+ 1XkcdKcDTvaeX8+zy7mwlpAhrJxtkb6nhaDmezcDrwYxSX/HE0/1kSE11rFb+R+JwJ97
+ pUvzT015vtU8fU0/Exri7RjjdiohGk/rzahQ2La8rA21MzQ4Cx4oLjwRANBXfp25PvJy
+ T8h4vMBhFo3PC5796CCRQROBz1broiDTO1GQXLm0+kSWC1fFeP5FgZSmRvqZWpUSv57/
+ j8/PRYa2EAVq1y9dma2iCSnoT9OfbaCbtUwnyERK2Gl1k9yt5l0tFVqPPhhtX/wD4CES
+ 4fGA==
+X-Gm-Message-State: AOJu0YwElpnur5Ttc5lejq/TSZh1yY4XJgrv2PT8dVDD+AK+NpDYKach
+ IMtFbD6dVb0Jlqf6mkvDyMpC5kuLyLt5vOKrM8NqiJL8cGrWqw7KlQQb
+X-Gm-Gg: AfdE7cnoE53ix1zpkfWNPD7WENvSi6lD+C1+r16iCnPBb/6cE0QEbl4u6+xyMeDcVJp
+ kP64mLTwh6qm25SJa4cInk1pNHZ3Vpv16OlKjwxIrc+1cboxyAuuOsAomWlh8jsqS88CjxPd0vE
+ ksYSnGcTiwWiDlirsne5byrEDIPxJN/PYROuJu1wb65Ip/YuuSZhveLqZ/MjzbBFoLVw1K6JgSH
+ QKZNP2jJ04H+yVV0Z6lOfHh183RPe8VliRmE2GqQG9eYLMgUCbN96AioGDaiLt7F+7xkp8FU0Lg
+ EFH20BS3+12QRdtlC+kPmo8wnCkP5bDY6DQoRU/BAr3hzytk6w/+sOSDR4pbm2JYNm41IuVHjQ1
+ dZx2//31WapKjkiPGUIOlTOdsw0ChxQ/OQEI86Crwpyhuft6LsSP6z2gDyV0gwO660CayhnpLxn
+ N4C0ODBEyBz438jdAigdfE0QLU4023OvzXoOgZ+1Am41gj5ZMzEHMZSrxtUnQ=
+X-Received: by 2002:a17:90a:e7c4:b0:37c:607b:2cd9 with SMTP id
+ 98e67ed59e1d1-3825c4072c0mr8284677a91.0.1783318439656; 
+ Sun, 05 Jul 2026 23:13:59 -0700 (PDT)
 Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f0bc2e119sm49261940eec.28.2026.07.05.23.13.27
+ 5a478bee46e88-30f376bf710sm29185120eec.6.2026.07.05.23.13.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jul 2026 23:13:27 -0700 (PDT)
-Date: Mon, 6 Jul 2026 14:13:24 +0800
+ Sun, 05 Jul 2026 23:13:59 -0700 (PDT)
+Date: Mon, 6 Jul 2026 14:13:56 +0800
 From: Chao Liu <chao.liu.zevorn@gmail.com>
 To: Nicholas Piggin <npiggin@gmail.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
@@ -76,17 +74,17 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  vivahavey@gmail.com, 
  Alvin Chang <alvinga@andestech.com>, Yu-Ming Chang <yumin686@andestech.com>, 
  Joel Stanley <joel@jms.id.au>
-Subject: Re: [RFC PATCH 02/25] target/riscv/debug: Handle changing trigger
- types
-Message-ID: <aktHeE11h_RXWQ29@ChaodeMacBook-Pro.local>
+Subject: Re: [RFC PATCH 03/25] target/riscv/debug: Implement permissive type
+ unavailable trigger
+Message-ID: <aktHmmmRu6cb_Jav@ChaodeMacBook-Pro.local>
 References: <20260114044701.1173347-1-npiggin@gmail.com>
- <20260114044701.1173347-3-npiggin@gmail.com>
+ <20260114044701.1173347-4-npiggin@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260114044701.1173347-3-npiggin@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj1-x1044.google.com
+In-Reply-To: <20260114044701.1173347-4-npiggin@gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
+ envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj1-x1042.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,160 +107,98 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 14, 2026 at 02:46:35PM +0800, Nicholas Piggin wrote:
-> Updating debug registers will first remove the existing TCG breakpoint /
-> watchpoint, then adds it back with new values.
+On Wed, Jan 14, 2026 at 02:46:36PM +0800, Nicholas Piggin wrote:
+> When a trigger type is "disabled", tdata2 and tdata3 must accept values
+> that are valid for some supported trigger type. Additionally, writing 0
+> to tdata1 must result in the type becoming "disabled". This is important
+> for the prescribed sequences for updating triggers.
 > 
-> Writing TDATA1 with a value that changes the trigger type attempts to
-> remove the facility for the new trigger type rather than the existing
-> one. That is, it will not remove a breakpoint if the type is changed to
-> a non-breakpoint type.
+> Implement write tdata=0 -> disabled behaviour and permissive accepting
+> of tdata2/3 values in disabled state. This implementation could be
+> improved by checking tdata2/3 values against supported trigger types,
+> but it is good enough to be usable by software.
 > 
-> Fix this by removing based on the old trigger type, then inserting based
-> on the new type.
+> From the RISC-V Debug Specification for tdata1:
+> 
+>   Writing 0 to this register must result in a trigger that is disabled.
+>   If this trigger supports multiple types, then the hardware should
+>   disable it by changing type to 15.
+> 
+> and, when type=15:
+> 
+>   This trigger is disabled. In this state, tdata2 and tdata3 can be
+>   written with any value that is supported for any of the types this
+>   trigger implements.
 > 
 > Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
 Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
 
 > ---
->  target/riscv/debug.c | 64 +++++++++++++++++++++++---------------------
->  1 file changed, 33 insertions(+), 31 deletions(-)
+>  target/riscv/debug.c | 30 +++++++++++++++++++++++++++++-
+>  1 file changed, 29 insertions(+), 1 deletion(-)
 > 
 > diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index 4273ab7a8d..2190c25f23 100644
+> index 2190c25f23..c92bd9860e 100644
 > --- a/target/riscv/debug.c
 > +++ b/target/riscv/debug.c
-> @@ -528,23 +528,12 @@ static void type2_breakpoint_remove(CPURISCVState *env, target_ulong index)
->  static void type2_reg_write(CPURISCVState *env, target_ulong index,
->                              int tdata_index, target_ulong val)
->  {
-> -    target_ulong new_val;
-> -
->      switch (tdata_index) {
->      case TDATA1:
-> -        new_val = type2_mcontrol_validate(env, val);
-> -        if (new_val != env->tdata1[index]) {
-> -            env->tdata1[index] = new_val;
-> -            type2_breakpoint_remove(env, index);
-> -            type2_breakpoint_insert(env, index);
-> -        }
-> +        env->tdata1[index] = type2_mcontrol_validate(env, val);
->          break;
->      case TDATA2:
-> -        if (val != env->tdata2[index]) {
-> -            env->tdata2[index] = val;
-> -            type2_breakpoint_remove(env, index);
-> -            type2_breakpoint_insert(env, index);
-> -        }
-> +        env->tdata2[index] = val;
->          break;
->      case TDATA3:
->          env->tdata3[index] = textra_validate(env, val);
-> @@ -552,6 +541,8 @@ static void type2_reg_write(CPURISCVState *env, target_ulong index,
->      default:
->          g_assert_not_reached();
+> @@ -827,6 +827,28 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
 >      }
-> +
-> +    type2_breakpoint_insert(env, index);
 >  }
 >  
->  /* type 6 trigger */
-> @@ -642,23 +633,12 @@ static void type6_breakpoint_remove(CPURISCVState *env, target_ulong index)
->  static void type6_reg_write(CPURISCVState *env, target_ulong index,
->                              int tdata_index, target_ulong val)
->  {
-> -    target_ulong new_val;
-> -
->      switch (tdata_index) {
->      case TDATA1:
-> -        new_val = type6_mcontrol6_validate(env, val);
-> -        if (new_val != env->tdata1[index]) {
-> -            env->tdata1[index] = new_val;
-> -            type6_breakpoint_remove(env, index);
-> -            type6_breakpoint_insert(env, index);
-> -        }
-> +        env->tdata1[index] = type6_mcontrol6_validate(env, val);
->          break;
->      case TDATA2:
-> -        if (val != env->tdata2[index]) {
-> -            env->tdata2[index] = val;
-> -            type6_breakpoint_remove(env, index);
-> -            type6_breakpoint_insert(env, index);
-> -        }
-> +        env->tdata2[index] = val;
->          break;
->      case TDATA3:
->          env->tdata3[index] = textra_validate(env, val);
-> @@ -666,6 +646,7 @@ static void type6_reg_write(CPURISCVState *env, target_ulong index,
->      default:
->          g_assert_not_reached();
->      }
-> +    type6_breakpoint_insert(env, index);
->  }
->  
->  /* icount trigger type */
-> @@ -831,8 +812,6 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
->                  /* set the count to timer */
->                  timer_mod(env->itrigger_timer[index],
->                            env->last_icount + itrigger_get_count(env, index));
-> -            } else {
-> -                env->itrigger_enabled = riscv_itrigger_enabled(env);
->              }
->          }
->          break;
-> @@ -881,12 +860,30 @@ target_ulong tdata_csr_read(CPURISCVState *env, int tdata_index)
->  
->  void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
->  {
-> -    int trigger_type;
-> +    int trigger_type = get_trigger_type(env, env->trigger_cur);
-> +    bool check_itrigger = false;
-> +
-> +    switch (trigger_type) {
-> +    case TRIGGER_TYPE_AD_MATCH:
-> +        type2_breakpoint_remove(env, env->trigger_cur);
+> +static void anytype_reg_write(CPURISCVState *env, target_ulong index,
+> +                              int tdata_index, target_ulong val)
+> +{
+> +    /*
+> +     * This should check the value is valid for at least one of the supported
+> +     * trigger types.
+> +     */
+> +    switch (tdata_index) {
+> +    case TDATA1:
+> +        env->tdata1[env->trigger_cur] = val;
 > +        break;
-> +    case TRIGGER_TYPE_AD_MATCH6:
-> +        type6_breakpoint_remove(env, env->trigger_cur);
+> +    case TDATA2:
+> +        env->tdata2[env->trigger_cur] = val;
 > +        break;
-> +    case TRIGGER_TYPE_INST_CNT:
-> +        /*
-> +         * itrigger_enabled is the union of all enabled icount triggers,
-> +         * so it's easiest to recheck all if any have changed (removed or
-> +         * added or modified).
-> +         */
-> +        check_itrigger = true;
+> +    case TDATA3:
+> +        env->tdata3[env->trigger_cur] = val;
 > +        break;
 > +    default:
-> +        break;
+> +        g_assert_not_reached();
 > +    }
+> +}
+> +
+>  static int itrigger_get_adjust_count(CPURISCVState *env)
+>  {
+>      int count = itrigger_get_count(env, env->trigger_cur), executed;
+> @@ -883,6 +905,10 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
+>      }
 >  
 >      if (tdata_index == TDATA1) {
+> +        if (val == 0) {
+> +            /* special case, writing 0 results in disabled trigger */
+> +            val = build_tdata1(env, TRIGGER_TYPE_UNAVAIL, 0, 0);
+> +        }
 >          trigger_type = extract_trigger_type(env, val);
-> -    } else {
-> -        trigger_type = get_trigger_type(env, env->trigger_cur);
 >      }
 >  
->      switch (trigger_type) {
-> @@ -898,6 +895,7 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
->          break;
->      case TRIGGER_TYPE_INST_CNT:
+> @@ -897,6 +923,9 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
 >          itrigger_reg_write(env, env->trigger_cur, tdata_index, val);
-> +        check_itrigger = true;
+>          check_itrigger = true;
 >          break;
+> +    case TRIGGER_TYPE_UNAVAIL:
+> +        anytype_reg_write(env, env->trigger_cur, tdata_index, val);
+> +        break;
 >      case TRIGGER_TYPE_INT:
 >      case TRIGGER_TYPE_EXCP:
-> @@ -913,6 +911,10 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
->      default:
->          g_assert_not_reached();
->      }
-> +
-> +    if (check_itrigger && !icount_enabled()) {
-> +        env->itrigger_enabled = riscv_itrigger_enabled(env);
-> +    }
->  }
->  
->  target_ulong tinfo_csr_read(CPURISCVState *env)
+>      case TRIGGER_TYPE_EXT_SRC:
+> @@ -904,7 +933,6 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
+>                        trigger_type);
+>          break;
+>      case TRIGGER_TYPE_NO_EXIST:
+> -    case TRIGGER_TYPE_UNAVAIL:
+>          qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
+>                        trigger_type);
+>          break;
 > -- 
 > 2.51.0
 > 
