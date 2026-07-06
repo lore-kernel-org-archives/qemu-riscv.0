@@ -4,94 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E0CBC43458
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 05:00:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37EE3C44500
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 05:32:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgbRk-00005R-Mo; Mon, 06 Jul 2026 01:00:44 -0400
+	id 1wgbwe-0006SC-7Y; Mon, 06 Jul 2026 01:32:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wgbRY-0008WS-A9
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 01:00:33 -0400
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wgbwb-0006Ra-2B
+ for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 01:32:37 -0400
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wgbRW-0001kn-7I
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 01:00:32 -0400
-Received: by mail-pg1-x544.google.com with SMTP id
- 41be03b00d2f7-c96c92c0980so1305130a12.3
- for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 22:00:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wgbwZ-0008J0-Gh
+ for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 01:32:36 -0400
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-697564cb69eso5068822a12.0
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 22:32:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783315954; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Bn0thFraJj/wqW6eULDRlnSOh0T7teNk5IA9VZ7VCjjz/q5mwpacVYq7f1xfdJEUs1
+ 2UfxnxvNmueq10aoI8zLP1BFing5ZhLOfI+LbD0iZTESsdMemEVtvNZdm1fxBHhTwBCJ
+ toI8xXJAIuSLghkGSKfZuEUO8MWt7pYn3bZ9JYwGjnaHunhWcsR55NRv3GsUs9kCoKfj
+ vdcBDV4F0yAQtDOevyoT2+t5LcbOpJGXj8NarRhwTMtUaeWaSR4k72Q8JtqzGbOG+9j1
+ WEanNsTyg2temR1t/q7evMI2ly5N60QGXEhdLkZSHJkAjANyglrqyRlTqlcfUdmRP0ZS
+ 0UBA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=zaQmt+1CRY38HjRif+W7XAPqNUJ2db9Xfdb0awJ4AqE=;
+ fh=8fXwqOajYiKrsjW2lbmh4Kz/Y5uXnwzzfe76Yt2u6fw=;
+ b=GFl/CZ9sb5sdGCs8l7/gSDQcKbp0mVkRhwBQyo7ncH+RqAtnGSujpqWe2etu4Dn9wK
+ xJLovsGrR9yp2dL9LW8C3I1g9hVtAnPAJkmIbO4hV8YjyMGlFaoO/XexxbWOH785RStD
+ +Ru9s8PWEXsUQTeHoSi/edHssuI9R2vskqa7HpNFqTEhGbdV3Fgce6AJnoLI1Sck6FgQ
+ NDDVjnN87IvTes65R471YPa+hxuHDyCygesyB3TPQJUCxV8E9B7ynfEgqOwZjNo6Msa9
+ KCGmZJCBJ6RirF2HlOqo/m0v+O80I4PpjrBx6YmCNPcoEwFwJYu9mNbNhv7l47bs+MX4
+ 9jWQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783314028; x=1783918828; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=CH9zxXaJecOaIafp6Y6g5MamIPgX8tEUj6zW19omUb8=;
- b=DVlPfhyMEvbniFeXKopU6zglyD9GbVgStVXNK6RxwoXjheNkYuCFWgEPgEND8PuPYQ
- KJkLkoKCE2cgqnEzdcPqDEh1H+P39RsmZ70Q05Ptcj+QAXw6j0Y+YPeizM4GrDRR6brE
- sD1+mjA4IUZ3D7rBxTmzBL1TJ8gHpeyJUhshiYQEot7ispBiE0TR3JPBYDirmX6up6F3
- TXMOmZqeVGmD7Q0Xx94SvkBUEZCpYKoqX54dLsh4BkqTaW2p81Q6NykcgNJoGzPRHCJJ
- heA/GFWn/ajfmUy4cajCt0WdzC+B+S2pd+U00KubqfOP524gGhk1nqkfF64THhep3K3r
- stAA==
+ d=gmail.com; s=20251104; t=1783315954; x=1783920754; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zaQmt+1CRY38HjRif+W7XAPqNUJ2db9Xfdb0awJ4AqE=;
+ b=WsLl2C9dDkpJDHV04xmYmW9heDAdGWRqTtgr0AqtSlrcHt3f4GXSr4oahgbnysSg7K
+ qriHfRMxAjyuHayhMvWu7VV07Ggda28Uk3getK0EQku/iaRlDiIp1w+7CrBDD+2L+Yw4
+ XeBuWvWc3uiIWxEGxi+m0h5ywQt69g7Ewc+WBDSTBVfugG3aWiAcrz3BvIqofwQ0W6lI
+ 5vNUBtnxxuEk6xs7Q6VTvZZDX3nBdYJ8hrleLyGt3cNizbjjIC7ZQnbZCWlnaK3m3OKF
+ N/0TW+EtIyrKaF/Nbux6ye72AxqmwAve2EX9MDQu4ocwgqZEQNRnNUEqTZX93s1u/DcS
+ sgpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783314028; x=1783918828;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=CH9zxXaJecOaIafp6Y6g5MamIPgX8tEUj6zW19omUb8=;
- b=A/2p1ecz7yAOONfwNNUwc98P0IQbmzaAuZBD0CFTqbJm+IYAZD53ZRUmQXO8em5WF3
- JBAGn5UOZScR7V85CQbN8lBYqAbokZIBWP0owfheD5CJcTaADEi5PNO8kvkmvYij1/DR
- T24raRSlCvFDRF7soYxqNTSIj76IXGafBdpICFB585ujIyZOBXobX6hM2EncucI9FauL
- LwvBjPc3ULwULYbvhRX2KsWJmwJUeZPTTRNVoPctHaQF8i2ffqv9xKSuyL8y/t5VH38I
- 3xymLZ8CPjt4iNCJQF2kIw1p2HB+gx7DqozkqXTD7GuG1YWUwV88ao7BJIwGVr56KGF2
- LQkg==
-X-Gm-Message-State: AOJu0YyiDdhgVCguIaWKIjrSwB6bdNPfzipkZQBbwI1uSbsqmjIrjt2T
- JxG4tSNYylehniTvOiqBH5nTWdPn6HcuBCKaIPNw5cMV3M7VrE+R+ktC
-X-Gm-Gg: AfdE7ck31r2OcaaykDfn9907k93L0dNIrO8A8vpiavHHQ/0m0VyzO5QOfULfsVtzYCb
- Q1DboaKEZADLtH0Lqe3ueMMJrkID/J79ZHVGjcoJxXXY8+XvIe9Aolw4N2Ywcdxo22ULr54ENot
- ol1KQIl8SlSeAm4uDPcrADswDRrYhvWBa298wDYV6/VVmXH7LkAcaJ/kgqgHJWh1wvf3HNRG8P2
- kQ7UdBkrbXK1Bs/NccvIqflrIonIWycJhaq7ChI2gvpV9sbpfphnyDTHmvkAIdwviojliQXE4aM
- lbmgaew758T3rZxzU+GPOcYkX3qQ7yT7yxt4NOWJAK1WfA+7ZAnkXjCmRuzmM9E1nNZOx7AINkn
- 4HBjZPEfQZubf3149YdPcB6v4/GC0J3y0ZhriwiXGm992BPF0cn8rXvRazCD7FBHomKnPpaCoXo
- dfereFgBGE0fxN4G1S/P0JzWaswL1gR4HaJYkNciqMLQSdmhhSD4+ZkllX3mI=
-X-Received: by 2002:a05:6a21:32a3:b0:3b4:b24e:27b4 with SMTP id
- adf61e73a8af0-3c03e1ff0b4mr10957041637.1.1783314027728; 
- Sun, 05 Jul 2026 22:00:27 -0700 (PDT)
-Received: from localhost ([64.186.250.142]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-30f1cbfc285sm38937415eec.5.2026.07.05.22.00.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jul 2026 22:00:27 -0700 (PDT)
-Date: Mon, 6 Jul 2026 13:00:24 +0800
-From: Chao Liu <chao.liu.zevorn@gmail.com>
-To: Nicholas Piggin <npiggin@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, bin.meng@windriver.com,
- vivahavey@gmail.com, 
- Alvin Chang <alvinga@andestech.com>, Yu-Ming Chang <yumin686@andestech.com>, 
- Joel Stanley <joel@jms.id.au>
-Subject: Re: [RFC PATCH 04/25] target/riscv/debug: Fix icount trigger
- privilege check
-Message-ID: <aksuyTm7d3N7URTj@ChaodeMacBook-Pro.local>
-References: <20260114044701.1173347-1-npiggin@gmail.com>
- <20260114044701.1173347-5-npiggin@gmail.com>
+ d=1e100.net; s=20251104; t=1783315954; x=1783920754;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=zaQmt+1CRY38HjRif+W7XAPqNUJ2db9Xfdb0awJ4AqE=;
+ b=BMydRhlr0rRbsP3Ah98bhGzn3M0bxXC2Zup99X7zEi5zOyiRiqUwbZRL49eOAmPpXt
+ vftqw3O7wMNOmirMsOcDrFCmW9cVv+OZcVyf3DhZ4gxKV5lJHlcjJw5Fal0oJgT4zkvb
+ +4jOZ9E11cALitfFJyYOC3SV13YaIVA8EQTzPcV5FHkY5mJ8YkjcQCyHPnTniYo4ic0k
+ 497IGpf+c/BAbH3yw4+A9pOHcwXDSkSfj1eyNAhGGBfDnz8LYtmxfEOaurblo3QIBnL1
+ yJB6eke0IkGHKHIPxIBgryEtEtjdVXsLvZ6TzBdGqqyrIZOZUa8oIOW4mPjkQzspfXFc
+ tVWQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrrqldCL/T5TQJxL3DAfThySaJcpVvtJQaNHDTSJB2WU95TpNCUHdLuB0+7oK989guImLc0PgOU0pbW@nongnu.org
+X-Gm-Message-State: AOJu0YzvMY0N3Y44zY4DmCIMlj71atj1W8DQA3C6E4hB8cPLBxsgja2h
+ FiTVRPsqgCUHaOZPLx02IURhw4OK+DU08/PGd1cVfoQAlykVyDx5dDCzdkBLw59D4p9UPZNparw
+ c11IgQ8YetZHaxVvGN41AxklA0+ENlLs=
+X-Gm-Gg: AfdE7cnN/YO3q91nqYjQDi0Bl5JGRgkLN11tt2wQnl9RalCz/fE38zgkJUA6dcqogpH
+ uvbeINSfCcmShdGninvi5H77cx/RePAWFVxVRFRTyUSlc9LOZCkMFpfFa01/YZP6isDOzJc5+x+
+ wXvledkMyuU5Wd2LnBhn7PHED5GbLf/VtXkZ7yaNEw9lIrKVYwL/AIBepTNIGfQrdnQ4HOALLUD
+ YpLwptwl4FDpWd/JzKRVNeOFb1Gxi+uqFNVFSKSRSWtWQoSqNa+0eSiZE9KNeHos0fx40rNXh9H
+ VgU2YyHy4lpeykhP7MWJw6LjWOo=
+X-Received: by 2002:a05:6402:34c6:b0:68c:3439:1340 with SMTP id
+ 4fb4d7f45d1cf-69a1a3aa17amr2834253a12.22.1783315953625; Sun, 05 Jul 2026
+ 22:32:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260114044701.1173347-5-npiggin@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::544;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pg1-x544.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+References: <20260630104350.748267-1-frank.chang@sifive.com>
+ <20260630104350.748267-3-frank.chang@sifive.com>
+In-Reply-To: <20260630104350.748267-3-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 6 Jul 2026 15:32:06 +1000
+X-Gm-Features: AVVi8CcRk1B7JEiWmk4gvQFaTNsu9QBU8e51ga9q873ml6L9gOIMsCl7A_Ir0Kk
+Message-ID: <CAKmqyKPFV++zTuzWSWdMLbj1gb+VaLdrW6TEEo29+7jLz=0+ZA@mail.gmail.com>
+Subject: Re: [PATCH v3 2/5] target/riscv: Support raising misaligned
+ exceptions for scalar loads/stores
+To: frank.chang@sifive.com
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu.zevorn@gmail.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Max Chou <max.chou@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::532;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x532.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -109,216 +126,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 14, 2026 at 02:46:37PM +0800, Nicholas Piggin wrote:
-> The check_itrigger_priv() did not check privilege bits properly. Move
-> all priv checks into functions and have the icount check follow the same
-> form as the others.
-> 
-> Signed-off-by: Nicholas Piggin <npiggin@gmail.com>
+On Tue, Jun 30, 2026 at 8:46=E2=80=AFPM <frank.chang@sifive.com> wrote:
+>
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> When the Zicclsm extension is not enabled, raise misaligned load/store
+> exceptions for misaligned accesses from scalar load/store instructions.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Max Chou <max.chou@sifive.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+This patch breaks the `func-riscv64-opensbi` test, which you can run
+with `make check-functional-riscv64`
+
+Alistair
+
 > ---
->  target/riscv/debug.c | 82 ++++++++++++++++++++------------------------
->  1 file changed, 37 insertions(+), 45 deletions(-)
-> 
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index c92bd9860e..2effbb49af 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -306,48 +306,50 @@ static void do_trigger_action(CPURISCVState *env, target_ulong trigger_index)
->   * Check the privilege level of specific trigger matches CPU's current privilege
->   * level.
->   */
-> +static bool type2_priv_match(CPURISCVState *env, target_ulong tdata1)
-> +{
-> +    /* type 2 trigger cannot be fired in VU/VS mode */
-> +    if (env->virt_enabled) {
-> +        return false;
+>  target/riscv/insn_trans/trans_rvi.c.inc | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
+trans/trans_rvi.c.inc
+> index e47b16a7fa2..cc1b5dbbadc 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -413,6 +413,9 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, Me=
+mOp memop)
+>      if (ctx->cfg_ptr->ext_zama16b) {
+>          memop |=3D MO_ATOM_WITHIN16;
+>      }
+> +    if (!ctx->cfg_ptr->ext_zicclsm) {
+> +        memop |=3D MO_ALIGN;
 > +    }
-> +    /* check U/S/M bit against current privilege level */
-> +    return (((tdata1 >> 3) & 0b1011) & BIT(env->priv));
-> +}
-> +
-> +static bool type6_priv_match(CPURISCVState *env, target_ulong tdata1)
-> +{
-> +    if (env->virt_enabled) {
-> +        /* check VU/VS bit against current privilege level */
-> +        return (((tdata1 >> 23) & 0b11) & BIT(env->priv));
-> +    } else {
-> +        /* check U/S/M bit against current privilege level */
-> +        return (((tdata1 >> 3) & 0b1011) & BIT(env->priv));
+>      decode_save_opc(ctx, 0);
+>      if (get_xl(ctx) =3D=3D MXL_RV128) {
+>          out =3D gen_load_i128(ctx, a, memop);
+> @@ -524,6 +527,9 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, M=
+emOp memop)
+>      if (ctx->cfg_ptr->ext_zama16b) {
+>          memop |=3D MO_ATOM_WITHIN16;
+>      }
+> +    if (!ctx->cfg_ptr->ext_zicclsm) {
+> +        memop |=3D MO_ALIGN;
 > +    }
-> +}
-The new logic looks correct to me, but now it uses open-coded shifts
-and masks to check the privilege bits.
-
-Since we already have these bits defined in debug.h, like `TYPE2_U/S/M`,
-`TYPE6_VU/VS/U/S/M` and `ITRIGGER_VU/VS/U/S/M`, I think it would be
-better to use those masks through a small helper instead of spelling
-out `>> 3`, `>> 6`, `>> 23` and `0b1011` here.
-
-That would make the code easier to read and maintain later.
-
-like:
-
-```
-static bool trigger_priv_bit_match(target_ulong tdata1,
-                                   target_ulong u_mask,
-                                   target_ulong s_mask,
-                                   target_ulong m_mask,
-                                   target_ulong priv)
-{
-    switch (priv) {
-    case PRV_U:
-        return (tdata1 & u_mask) != 0;
-    case PRV_S:
-        return (tdata1 & s_mask) != 0;
-    case PRV_M:
-        return (tdata1 & m_mask) != 0;
-    default:
-        g_assert_not_reached();
-    }
-}
-
-static bool trigger_vpriv_bit_match(target_ulong tdata1,
-                                    target_ulong vu_mask,
-                                    target_ulong vs_mask,
-                                    target_ulong priv)
-{
-    switch (priv) {
-    case PRV_U:
-        return (tdata1 & vu_mask) != 0;
-    case PRV_S:
-        return (tdata1 & vs_mask) != 0;
-    default:
-        return false;
-    }
-}
-```
-
-So we can call it this way:
-
-```
-static bool type2_priv_match(CPURISCVState *env, target_ulong tdata1)
-{
-    /* type 2 trigger cannot be fired in VU/VS mode */
-    if (env->virt_enabled) {
-        return false;
-    }
-
-    return trigger_priv_bit_match(tdata1, TYPE2_U, TYPE2_S, TYPE2_M,
-                                  env->priv);
-}
-
-static bool type6_priv_match(CPURISCVState *env, target_ulong tdata1)
-{
-    if (env->virt_enabled) {
-        return trigger_vpriv_bit_match(tdata1, TYPE6_VU, TYPE6_VS,
-                                       env->priv);
-    }
-
-    return trigger_priv_bit_match(tdata1, TYPE6_U, TYPE6_S, TYPE6_M,
-                                  env->priv);
-}
-
-static bool icount_priv_match(CPURISCVState *env, target_ulong tdata1)
-{
-    if (env->virt_enabled) {
-        return trigger_vpriv_bit_match(tdata1, ITRIGGER_VU, ITRIGGER_VS,
-                                       env->priv);
-    }
-
-    return trigger_priv_bit_match(tdata1, ITRIGGER_U, ITRIGGER_S, ITRIGGER_M,
-                                  env->priv);
-}
-```
-
-And I don't mean going back to `get_field(mask) == env->priv`; that pattern
-is easy to get wrong for `PRV_U == 0`. The helper should just test the mask
-selected by the current privilege.
-
-Thanks,
-Chao
-> +
-> +static bool icount_priv_match(CPURISCVState *env, target_ulong tdata1)
-> +{
-> +    if (env->virt_enabled) {
-> +        /* check VU/VS bit against current privilege level */
-> +        return (((tdata1 >> 25) & 0b11) & BIT(env->priv));
-> +    } else {
-> +        /* check U/S/M bit against current privilege level */
-> +        return (((tdata1 >> 6) & 0b1011) & BIT(env->priv));
-> +    }
-> +}
-> +
->  static bool trigger_priv_match(CPURISCVState *env, trigger_type_t type,
->                                 int trigger_index)
->  {
-> -    target_ulong ctrl = env->tdata1[trigger_index];
-> +    target_ulong tdata1 = env->tdata1[trigger_index];
->  
->      switch (type) {
->      case TRIGGER_TYPE_AD_MATCH:
-> -        /* type 2 trigger cannot be fired in VU/VS mode */
-> -        if (env->virt_enabled) {
-> -            return false;
-> -        }
-> -        /* check U/S/M bit against current privilege level */
-> -        if ((ctrl >> 3) & BIT(env->priv)) {
-> -            return true;
-> -        }
-> -        break;
-> +        return type2_priv_match(env, tdata1);
->      case TRIGGER_TYPE_AD_MATCH6:
-> -        if (env->virt_enabled) {
-> -            /* check VU/VS bit against current privilege level */
-> -            if ((ctrl >> 23) & BIT(env->priv)) {
-> -                return true;
-> -            }
-> -        } else {
-> -            /* check U/S/M bit against current privilege level */
-> -            if ((ctrl >> 3) & BIT(env->priv)) {
-> -                return true;
-> -            }
-> -        }
-> -        break;
-> +        return type6_priv_match(env, tdata1);
->      case TRIGGER_TYPE_INST_CNT:
-> -        if (env->virt_enabled) {
-> -            /* check VU/VS bit against current privilege level */
-> -            if ((ctrl >> 25) & BIT(env->priv)) {
-> -                return true;
-> -            }
-> -        } else {
-> -            /* check U/S/M bit against current privilege level */
-> -            if ((ctrl >> 6) & BIT(env->priv)) {
-> -                return true;
-> -            }
-> -        }
-> -        break;
-> +        return icount_priv_match(env, tdata1);
->      case TRIGGER_TYPE_INT:
->      case TRIGGER_TYPE_EXCP:
->      case TRIGGER_TYPE_EXT_SRC:
-> @@ -665,17 +667,7 @@ itrigger_set_count(CPURISCVState *env, int index, int value)
->  
->  static bool check_itrigger_priv(CPURISCVState *env, int index)
->  {
-> -    target_ulong tdata1 = env->tdata1[index];
-> -    if (env->virt_enabled) {
-> -        /* check VU/VS bit against current privilege level */
-> -        return (get_field(tdata1, ITRIGGER_VS) == env->priv) ||
-> -               (get_field(tdata1, ITRIGGER_VU) == env->priv);
-> -    } else {
-> -        /* check U/S/M bit against current privilege level */
-> -        return (get_field(tdata1, ITRIGGER_M) == env->priv) ||
-> -               (get_field(tdata1, ITRIGGER_S) == env->priv) ||
-> -               (get_field(tdata1, ITRIGGER_U) == env->priv);
-> -    }
-> +    return icount_priv_match(env, index);
->  }
->  
->  bool riscv_itrigger_enabled(CPURISCVState *env)
-> -- 
-> 2.51.0
-> 
-> 
+>      decode_save_opc(ctx, 0);
+>      if (get_xl(ctx) =3D=3D MXL_RV128) {
+>          return gen_store_i128(ctx, a, memop);
+> --
+> 2.43.0
+>
+>
 
