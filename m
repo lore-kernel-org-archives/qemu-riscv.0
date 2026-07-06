@@ -4,143 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85A47C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun,  5 Jul 2026 22:05:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9BE1C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 00:43:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgUy6-0002xn-FN; Sun, 05 Jul 2026 18:05:42 -0400
+	id 1wgXQi-0005mN-Q2; Sun, 05 Jul 2026 20:43:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wgUxn-0002hg-OM
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 18:05:26 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wgUxl-0002X0-Vm
- for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 18:05:23 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 665Lxhtt2841074
- for <qemu-riscv@nongnu.org>; Sun, 5 Jul 2026 22:05:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- DH8pzOmc9lSj+TaHJtAy1BByOmTt0UHjszdsdLBbFUc=; b=Xa2lIRZEUheZhQWP
- fMfx4AnDGWzO7sKLT2FpY6fT2d+x3Q5fB4w2pt/lybee7IAwpb4Vyp+rv0Y2RGlv
- BnsltYRhOCDEfuz78j+tT8BeJAeUexDujoG/ApPAF0dYoyebHlxlVSQV8xA9szkN
- 5gOzEiMyFxLHlWjiF7awXvrwOqM7n2Yf27fdVp+Q+NoaEBsrF7JIAi219Taw1EM5
- esywovRBM/hxR4hMlLr4IGV4e9IoHmvyWvYtu7XkHGUSrFs2rgDbEeGO5pu7PRer
- hmdJmtvtE3jVMZ0G4+//sM4PcK9RtU24vllqvzRbmPNcT1UQ53YSyY4qF5AsXg6s
- Ya2ymg==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f6sgh3kju-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 22:05:19 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-92e61b38eddso437278485a.2
- for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 15:05:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wgXQc-0005lx-Sd
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 20:43:19 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wgXQb-0004kx-BM
+ for qemu-riscv@nongnu.org; Sun, 05 Jul 2026 20:43:18 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-698aa7ba320so4285088a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jul 2026 17:43:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783298595; cv=none;
+ d=google.com; s=arc-20260327;
+ b=eMVjZyeXWLOdJSdAFcPcnV/J4xGuKOopBP7OAQx8PMGD3VG35oBb1KnSXzJpmTRo44
+ 0ctYmtKyccNcyGG5boX3JL2ORS0AcNrqOM0eR0uP/qpILYsGC84gUrtT32+Iy+42Xflu
+ vEqT7ypdOcLdfMJFkdJ68NXeCLM8i6zSAoIQQ+qjsiTgWswZTXzjkXDSxn4kggkRcgf1
+ xrGUJz1N3Xaau9n8/26e68GOEFxKWdrkPEWGzGjy+TdPJeJFbxQvMU65Iqc1IH+HhVv8
+ GRa1BWxfkhzmjD4hQ82NR26P9hGd8dzTRWZkd0LAsy6uz4KZaZsI00gqWAKNzc09ytl1
+ 41ng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Vip14HjtKGQOtuQkxEUIST0A0gAK0vfI2mPhzNy0LQA=;
+ fh=xi/8HoIi9fSkxL3CqrqWmjHi56479GDbeRpcUfeZkkQ=;
+ b=ruKimKyE6RE/hZ7ewcSiXW5aTgV6ZY5t8InRCtpS7rbLkqJG2Mj1GAOFDeKBCMNDID
+ GSZzmgySc1yPikJhCosyYKGMJrihrGgdiskl4HOqxQ6XtUYdjLMpI5QCtmJdjd/kFtE0
+ uAk0/LwKnE6Zhe200wb37HnKg2kUw7gDnUG2QpJI+aJw5ivQUnL7bCljTd1GwUvO50Jk
+ HopgRUnbhNPl6BbIciUieACdg7fTiVLo2NxKdYBNXQ3tPhGzcOejsloMT+XW+Vnv6Ot9
+ McoOZeFUATzwEA6FD4/+1oITKxzujCmRQ8umnDg6T16WkrPcCqZpPnJQzn2GYrOhkwSG
+ WRQw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783289119; x=1783893919; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DH8pzOmc9lSj+TaHJtAy1BByOmTt0UHjszdsdLBbFUc=;
- b=CWNtGIJjkG5X/ab/ZGrpgsX2XKqm4IzIrYcL9kY1++McxWCMW1U4zR8yK6+WI24KGh
- 5psHN01g1MFG8TBcXX6NaTuVETsdftaRAQSzq4T7p17N26LRDpSjmVix1+5DE9Wf7h0a
- 4i6e37OTKs8zGEsh/oYTSAbzL/rLOD7xWiKoIJzxGA5q1RZf8Fx7fD9WErz+OzKQS1F5
- CMrjtqQSze/W8oS7ZrSTwkBgYnxVn1jZOM2U9ZcDvEu5TQTa1jE7s2Yg/Fq6Ai85kBAB
- yhXAaKjfofhHISmaZ7Q34mEW+RJ3DoCo0+GrMWyfBY1UcCRV+xj3lXANVAsLLZhSR861
- ExeQ==
+ d=gmail.com; s=20251104; t=1783298595; x=1783903395; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Vip14HjtKGQOtuQkxEUIST0A0gAK0vfI2mPhzNy0LQA=;
+ b=IxwU3+SyUWhl5xe8jFRfcdcbvye5NbkD8trsvgZ8zNZWZWApQ58AvDmWEKLOaepCph
+ P+6OcDHicZ+7VZ4xDbRHacvhkESPfNt1d9rMJDjKD4NGNpTvkfkmKDNDugj98gJyb2eO
+ 2ZpMaSwKl/6+PaRqB6XSFlW3cwH3ogUwqvhSpz29GHR6LCH+IurE7xMG024BxZuBFDK6
+ PQJoMqDpte5eiHm3rqJ9E2bat5s5xZv6sykWC/+f0EOP/W/fEWAmFa7izyGjo25WafLQ
+ aGcHlrHFSzcv6DdfqwLzGQ7+HkwH/Kk+KOmwF57iQE1q8UD0lIvFfI92+/3ze/O2YW0i
+ Ca7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783289119; x=1783893919;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DH8pzOmc9lSj+TaHJtAy1BByOmTt0UHjszdsdLBbFUc=;
- b=bgvssR2nrHnQGFYsjIcAUuQra965FrF/yQ4G269tVpTO5rlOfGPs3qH886DabN4QvU
- TLrinwdCbLI2/6Htno5XlPaucVJ+h8LrBwGY7D+pDQbeb/u2V5Qjnd1SXQkbxMjiWyrr
- NRt/wY6P2+yg8B9gPSa13sklqbGbt3NLvyJaB6gNXnqrmX+I1zVWbx4z5OL1rmePflOB
- 4N3hsrpZNTVfBAMZTJYpHUEHyIQN3I9z3dA7o9YiWTM2tpt81ttSClwS5MmieovNG2Px
- FkMbht7Yy7ZD4Har8Hri5lPaIxyWSKvi8nDBQep7kiPgx0O7J72mynvXBDPIvRZHTdtA
- mvww==
+ d=1e100.net; s=20251104; t=1783298595; x=1783903395;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Vip14HjtKGQOtuQkxEUIST0A0gAK0vfI2mPhzNy0LQA=;
+ b=LEgHZjodiJX3I+KWK1qvNpB9diR9DVudn+zvNmIOO/Z4bUyflfg6Ww3DErvVBFpTsX
+ xDRdmYQDGliR8Sq70+vE1XS0JkKhltb6h2ZiExO74qH27g+V+UryAugPZRsw8erRIKhQ
+ MvIHIgpHND9orLDOIHC6FbKSCQjkt9rAtoyBGXxK4I9GD9SqH/WQ+vOpnkRHSpZA3MJb
+ cx18JDANVgzbmaIL5vaYmX7aZ9zd66nihfuke0F3FS0TAmQCj/nf17X4h6JQhsryMrnV
+ csaoekIUiO6gbvYde1m3qPd6Wsf5IDcSsj4am9B3mFcaCtW32wHfpCk80GyK3MhFsMEv
+ xQcQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpwN99vYFnZbumONaMFeLz7/j/pnUnYbWXTjcpbYO+FbX3K+k4D0u6HDQneLCsBKbijL02E4eJ2EElQ@nongnu.org
-X-Gm-Message-State: AOJu0YyRDDsm2x6YYyAuTRYvh1DJqOKbbayvcFK/GrHDwv2AtfRpwYTf
- HgWS/BQSKBg+1q0xYtj9M5RrFrmp4ABlXmqMfXKMJq9HXyUYzn/KQeDa3bQyL2ctER9JZihxYTK
- /CPA3d/wcIFgNTObS/40/w8ze0SJqB6d4HeEOjGdhKSzZODyejhzLwZ/kKA==
-X-Gm-Gg: AfdE7cmdoy4F0X2UVQOPMEpi0qYWGp4/2rb5+xVn6L8VKOUNGlIhZKcBLxWyO0ItLdR
- fDqZf6Ghd8yU2gpEeKXnAYpHeNcIG8FLNisfPCQPrOpBT5yx8/80sMnFl+/Djte8j43YBri1cnP
- owiaIg2hTYLJD6jsfsIIJC8lsC8x7DU5R/pAwz9u6JEPqsPXCkcrdyXB1uFaHIzjXsFeRJ0Udf6
- CEl9g3CHEIwk7qjdfzQwUBucpawRhRAqjokOW/lQf9to/h/7ZFIB8ViUiS518aXycocbhGOFNik
- 2eH0O0pk7gCxWxHNT9IOSGj4EVOm0jp0jA4YpBCSk8U0mHUOYm8sGEgW0zBSl8vb6/kLqpjkbzi
- QiMipmybcYinHCAGW+a8E7D4/xlPsHGZWO2K4tMsjT+aXLo0=
-X-Received: by 2002:a05:620a:4693:b0:915:c7ad:8bd2 with SMTP id
- af79cd13be357-92e9a3be669mr1067116385a.30.1783289119374; 
- Sun, 05 Jul 2026 15:05:19 -0700 (PDT)
-X-Received: by 2002:a05:620a:4693:b0:915:c7ad:8bd2 with SMTP id
- af79cd13be357-92e9a3be669mr1067111985a.30.1783289118768; 
- Sun, 05 Jul 2026 15:05:18 -0700 (PDT)
-Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c12b62c53c1sm610661066b.45.2026.07.05.15.05.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 05 Jul 2026 15:05:17 -0700 (PDT)
-Message-ID: <6c0ff642-8125-4c35-8ed0-8f89da555ee9@oss.qualcomm.com>
-Date: Mon, 6 Jul 2026 00:05:15 +0200
+ AHgh+Rr0+Nbz7CyrdhQrNRu/b5SQXppVBS6rEh7MRasggh6KfwYIS/K0dbTrSUCFE1l7f309BvPEalmZbdcm@nongnu.org
+X-Gm-Message-State: AOJu0Yx0b96CSwqO1E96Lcw+s2wd61RqHNFl40joLgc8i9W8kXKHfqks
+ hgxP5emWSnO5Ol1bOWWCaVzYOBh40ghb/UylGs4NRG4HokWZIaeVGrQvFyI7ro8riCgBbClKWtZ
+ TnmYDPoc/8Bc7eESbvQ49IGINhA+XE+o=
+X-Gm-Gg: AfdE7clAB1RGaKcVQL4Lzlu9wF2LfSIQufFFcO8idAaacadsXle4d1a1LE9YXVlXC6r
+ 0/8K5ZAipzUEE2JRWVic1CydhwPIsAqh8N5U+aoNl9cENu2QW+l9hBbLXB8Nk6+nWU2w7R+vyV8
+ /y6vdh7Ax86BYQhlWgHJEZR2+Juv2J3ZgDLQJEl4z50T6mo3DZypPb3RyhP4NrklxnFqioh6zL8
+ HZE+BoKjjvlodIZTUifZw58PUk5FGhf9RLmiGIbNVwBASh0qFeIaDkqLP9jQ0SjhxttTQhT6ZRh
+ nue6wNVioqphnse7gmAazH4w8g4=
+X-Received: by 2002:a05:6402:4345:b0:698:ec2f:d6c9 with SMTP id
+ 4fb4d7f45d1cf-69a1ab2a74bmr2664158a12.14.1783298594475; Sun, 05 Jul 2026
+ 17:43:14 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] riscv/virt: Add optional UART1
-Content-Language: en-US
-To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv@nongnu.org,
- peter.maydell@linaro.org
-Cc: qemu-devel@nongnu.org
-References: <tencent_06551FAEA44CD75E915AE611FCA0C99CDD09@qq.com>
- <24329582-f5cf-41de-aabe-c2c3d54f03ea@oss.qualcomm.com>
- <tencent_3045B23CF7A9872F29FC351E24D8F9373F07@qq.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <tencent_3045B23CF7A9872F29FC351E24D8F9373F07@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=bLkm5v+Z c=1 sm=1 tr=0 ts=6a4ad520 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=dZbOZ2KzAAAA:8 a=4iFUP5XX9WVA2vuhWywA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA1MDIzOSBTYWx0ZWRfX9qCBGO3ZgIJB
- 6WJSd4M2scU/bfgMGoiuiorGr0OujMIbueXsTUb6+4AhYklyg7z2K8CkHCkfLsy4o6joWLKMbsW
- LeInHvCci9Bzf8hM2jBxQsP60E79hMXbs2xjiLASxkv7LL6Yx0dqPUxQ6pAUR2JiW+18sa1H9sp
- D74zy3+DdRASkO15ynze7/WmpeWftQV1e0PBwfuxYZSJawtSNZnVb1L0/qrYAB4UH7F/c/P4fAJ
- f+zjbqwyvfqg5xOO4hCkuK2b0/6d79W4LXxaxSBNsmGAl8F5DDEnwhux1418gdYNjKjNqqEgLo1
- Jy/ScK5XuUuY1TglgI6xOxmWeDN9jsipGXs7d0y24trKQUjQ89rfHKt7ZTjizhnIWbAP609Xxyn
- FA0rBwpSNls9A34pgBS1BthbOvNurijmWjtQnTn3jtZbpyLyNBEf8jYcyUrXPjr46Ivr4CfM3QV
- j6xmyMVb0iUKZu4z6pQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA1MDIzOSBTYWx0ZWRfX1TF10McWqoRf
- ur60SnHHsdLqv72VF+qch+Mqn9EFGGVOvBng6Edc/mn7Fv8zPkHQa3xGTT+KLBZVVr64iKrHyNN
- 84vzfvD3w6GGXLjliibo4koj/HE64Ao=
-X-Proofpoint-ORIG-GUID: IW_X09enQJ0pQNiCLRWbVDt29gG3ZE-1
-X-Proofpoint-GUID: IW_X09enQJ0pQNiCLRWbVDt29gG3ZE-1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-05_02,2026-07-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 impostorscore=0 spamscore=0 clxscore=1015
- adultscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607050239
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20260702135128.1188021-1-daniel.barboza@oss.qualcomm.com>
+ <20260702135128.1188021-18-daniel.barboza@oss.qualcomm.com>
+In-Reply-To: <20260702135128.1188021-18-daniel.barboza@oss.qualcomm.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 6 Jul 2026 10:42:47 +1000
+X-Gm-Features: AVVi8Ce3wfHYya6HsvEyV6rXok7TBCKfr_5x-Wdy4fErHydDCSAacTXGzfakX2k
+Message-ID: <CAKmqyKPRQVBBwsPX_+m3K4o10UdRYAqv=de_VJAA1_SC4dW8NA@mail.gmail.com>
+Subject: Re: [PATCH v3 17/24] target/riscv/cpu.c: filter TCG only bits in
+ riscv_cpu_reset_hold()
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,95 +123,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 4/7/26 03:41, Yanfeng Liu wrote:
-> 
-> Philippe,
-> 
-> The v1 always creates UART1 carelessly, then Peter suggested following
-> 5d8a250f9068 (openrisc) and e7100972f2 (arm) to reduce guest breakage.
+On Thu, Jul 2, 2026 at 11:53=E2=80=AFPM Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
+>
+> We have a lot of TCG only initialization in the common cpu_reset_hold
+> callback that prevents --disable-tcg to work.
+>
+> Put a CONFIG_TCG ifdef around those bits to make the build work.
+> Eventually we'll create a TCG specific reset function in tcg-cpu.c but
+> for now this suffices.
+>
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
 
-Oh I missed that. I'm confused because I thought not checking for
-backend use of a chardev (in particular calling serial_hd) was part
-of Peter's recommendations, since he did that cleanup years ago. I'll
-let him finish his review of your series then; simply ignore my
-comments.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Regards,
+Alistair
 
-Phil.
-
-> 
-> I looked around and noticed the pattern is used in arm/virt, arm/msf2-
-> soc, arm/kzm, xrtensa/sim, and ppc/e500 etc.
-> 
-> Please give me clear direction here.
-> 
-> Regards,
-> Yanfeng
-> 
-> 
-> On Fri, 2026-07-03 at 11:31 +0200, Philippe Mathieu-Daudé wrote:
->> Hi,
->>
->> On 3/7/26 06:24, Yanfeng Liu wrote:
->>> This adds optional UART1 to RiscV virt board if required at
->>> runtime to simplify multicore development.
->>>
->>> Note that UART0 remains default serial_hd(0) and it is:
->>>
->>> - the lowest address UART
->>> - first serial in DTB
->>> - behind /aliases/serial0 in DTB
->>> - the /chosen/stdout-path in DTB
->>>
->>> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
->>> ---
->>>    docs/system/riscv/virt.rst |  5 ++++-
->>>    hw/riscv/virt-acpi-build.c | 12 ++++++++----
->>>    hw/riscv/virt.c            | 39 ++++++++++++++++++++++++++++-----
->>> -----
->>>    include/hw/riscv/virt.h    |  3 +++
->>>    4 files changed, 44 insertions(+), 15 deletions(-)
->>
->>
->>> @@ -1567,6 +1579,13 @@ static void virt_machine_init(MachineState
->>> *machine)
->>>            0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
->>>            serial_hd(0), DEVICE_LITTLE_ENDIAN);
->>>    
->>> +    if (serial_hd(1)) {
->>
->> Checking for chardev backend connected to map a peripheral block
->> is an anti-pattern; the block exists on HW regardless.
->>
->>> +        serial_mm_init(system_memory, s->memmap[VIRT_UART1].base,
->>> +            0, qdev_get_gpio_in(mmio_irqchip, UART1_IRQ), 399193,
->>> +            serial_hd(1), DEVICE_LITTLE_ENDIAN);
->>> +        s->uart1_present = true;
->>
->> Thus we want to always instantiate all UART peripherals.
->>
->> If you drop the uart1_present field then the patch LGTM.
->>
->>> +    }
->>> +
->>>        sysbus_create_simple("goldfish_rtc", s-
->>>> memmap[VIRT_RTC].base,
->>>            qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
->>>    
->>> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
->>> index 18a2a323a3..7d57c8292e 100644
->>> --- a/include/hw/riscv/virt.h
->>> +++ b/include/hw/riscv/virt.h
->>> @@ -59,6 +59,7 @@ struct RISCVVirtState {
->>>        int aia_guests;
->>>        char *oem_id;
->>>        char *oem_table_id;
->>> +    bool uart1_present;
->>>        OnOffAuto acpi;
->>>        const MemMapEntry *memmap;
->>>        struct GPEXHost *gpex_host;
-> 
-> 
-
+> ---
+>  target/riscv/cpu.c | 11 ++++++-----
+>  1 file changed, 6 insertions(+), 5 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6b79dcc5ee..5a82e6563b 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -965,10 +965,6 @@ bool riscv_cpu_has_work(CPUState *cs)
+>
+>  static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>  {
+> -#ifndef CONFIG_USER_ONLY
+> -    uint8_t iprio;
+> -    int i, irq, rdzero;
+> -#endif
+>      CPUState *cs =3D CPU(obj);
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+>      RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(obj);
+> @@ -1020,6 +1016,10 @@ static void riscv_cpu_reset_hold(Object *obj, Rese=
+tType type)
+>                      MENVCFG_ADUE : 0);
+>      env->henvcfg =3D 0;
+>
+> +#ifdef CONFIG_TCG
+> +    uint8_t iprio;
+> +    int i, irq, rdzero;
+> +
+>      /* Initialized default priorities of local interrupts. */
+>      for (i =3D 0; i < ARRAY_SIZE(env->miprio); i++) {
+>          iprio =3D riscv_cpu_default_priority(i);
+> @@ -1057,11 +1057,12 @@ static void riscv_cpu_reset_hold(Object *obj, Res=
+etType type)
+>      }
+>
+>      pmp_unlock_entries(env);
+> +#endif /* ifdef CONFIG_TCG */
+>  #else
+>      env->priv =3D PRV_U;
+>      env->senvcfg =3D 0;
+>      env->menvcfg =3D 0;
+> -#endif
+> +#endif /* !CONFIG_USER_ONLY */
+>
+>      /* on reset elp is clear */
+>      env->elp =3D false;
+> --
+> 2.43.0
+>
+>
 
