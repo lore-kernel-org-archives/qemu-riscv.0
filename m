@@ -4,62 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C89E1C43458
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jul 2026 15:32:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B151FC43458
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jul 2026 17:47:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wh7md-0000g8-IE; Tue, 07 Jul 2026 11:32:27 -0400
+	id 1wh9sd-0004UX-Tl; Tue, 07 Jul 2026 13:46:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tangtao1634@phytium.com.cn>)
- id 1wh7mb-0000am-01; Tue, 07 Jul 2026 11:32:25 -0400
-Received: from zg8tmtyylji0my4xnjqumte4.icoremail.net ([162.243.164.118])
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <tangtao1634@phytium.com.cn>)
- id 1wh7mY-0000x7-Rf; Tue, 07 Jul 2026 11:32:24 -0400
-Received: from prodtpl.icoremail.net (unknown [10.12.1.20])
- by hzbj-icmmx-6 (Coremail) with SMTP id AQAAfwAnrpABHE1qx+47AA--.49832S2;
- Tue, 07 Jul 2026 23:32:17 +0800 (CST)
-Received: from [192.168.2.6] (unknown [113.246.116.136])
- by mail (Coremail) with SMTP id AQAAf8DwFXX_G01qgzsRAA--.28542S2;
- Tue, 07 Jul 2026 23:32:16 +0800 (CST)
-Message-ID: <bd8282ca-9df9-49c4-90dd-82742a442459@phytium.com.cn>
-Date: Tue, 7 Jul 2026 23:32:14 +0800
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wh9sc-0004U9-OU
+ for qemu-riscv@nongnu.org; Tue, 07 Jul 2026 13:46:46 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wh9sb-0000Y8-3L
+ for qemu-riscv@nongnu.org; Tue, 07 Jul 2026 13:46:46 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2cacf197759so71814825ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jul 2026 10:46:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1783446401; x=1784051201; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=3sMdVol0gdjWLFJmeU/sL5ExcaNLdVxgwXus46FfxVs=;
+ b=RQzAmGR+GTDz++MpkikxbJJaVkos+SCboT1TOWfT9Qow9Ik4nGJECwyjlOd/ADXi0D
+ YJhrNKt+tQhw/7BYVJkEWPqkN/V9o1n1i1AAcjoIVuXFAN0AiO/6ObUaP6SzbVtPqFDQ
+ LKWraahhx7BT33gMF9BTU74rXADc8oXyPT+a0mRjRFVPDThA290fNmZ/iy23ZspyEeKb
+ cEQ1FQkXv4dh4rnF6VV1jlynV+Dv7eHl5XoyyvUHIInGbXVJs0MzdLCrYQsUHSL4XNfI
+ ISY9K5oT/e7CruKjFNPmgoRjUWguLwSLsONCrXSrnvjvVe5Ae0DpxOPle5EMvhfGBkLn
+ IVnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783446401; x=1784051201;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=3sMdVol0gdjWLFJmeU/sL5ExcaNLdVxgwXus46FfxVs=;
+ b=bu5bDNgiYaeFbQkcx0VVE/Rl7hMRGMzUqh+y0FeFK87RiZAjudsnc2BDfiUWtrwZox
+ wbyyKJGoy8+TuTItN8Hhzph7AWbu8lgt0J8uzcT9V728Xphui8FJcnW2P1os60xtw6Qy
+ 4ChUdAoaWtl+zFGHl6ib8gGLjwWQP31TTgFsrKR+iN+P+2pkJ8n1KW6QSPrLt4aBEKwL
+ Y2YntuRvG0I7xeSUD4GZTxb7BIKtLwn/nIsLGQSRaXpD3/9hTsf79J3UTKnBfqmNZSTx
+ F3Glk6GndGuvRrqXFj3tRFmM7CwZc9K5krMiXiG/av7iZCsaxwcGsGYgX3cgxk5ikmNo
+ G6QA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Ro+TG56A7rjmqfgNRwvRdQ7YbDXaNoINDtj0pgLyj8fpfkbbQd2jig+6WOT1Tu5yUf6xFhOfruKp5zF@nongnu.org
+X-Gm-Message-State: AOJu0YzODVMaZC7MQkK4PIessQIKQU4JjHsGR0N5kybeOzcnGtbwIPcS
+ WDTwoRuXjUh9rE0pthd/D7m9QowK0wXMTNWMxwUgWpk1MzwXNej0YxTy/I98V4ASe8c=
+X-Gm-Gg: AfdE7cluH0P1bRi10DMGPsvBtV3aOE0Q8uDY3LPnIDiUuusy/7ZXxIXdpvrgR87BfOg
+ KTQuwE6ceiwnX+OlI+f+tszo+caGr7ziOP1kxI7NLXfhIBTVJdz12xK/o9bjGnLovMQNyWx7ahu
+ hHtspRVU9NhYDAzTik85Qf7Sw93xk9ivHGijWYX9CDh7EIi6xXTa4jYolP08npMIrWzBCOPik/G
+ JrBgnyMOwkt1Pd493XZWS/wTioAwUIOzAxGl/635JSENeuJK27U+Rsrt86tPbrmaQW2dnwgxAtK
+ Ke/UNlt3euZ7zS00KOy3bSdNXaR6kHvZ1ZSMnGTTCgU5X/1Qt7CGVCEWIjSC0HwqXD8WL26cqgq
+ iqyhPXkE3tXsJsOy8ptCtbtxaiWlW0byG/SlypV9YsEX789tQ67NdNuWP4keRM20RwTrsA4+I7Y
+ lky8x0uoV+HuUNcunnvTNTjqAsWUha2AKjd8Su5y2Gibo5j5FUJ8A6sjI=
+X-Received: by 2002:a17:902:e84e:b0:2c9:e5ff:995d with SMTP id
+ d9443c01a7336-2ccbf051374mr67932065ad.31.1783446400546; 
+ Tue, 07 Jul 2026 10:46:40 -0700 (PDT)
+Received: from [192.168.0.4] (71-212-39-188.tukw.qwest.net. [71.212.39.188])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2ccc9d3b906sm16173925ad.56.2026.07.07.10.46.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 07 Jul 2026 10:46:40 -0700 (PDT)
+Message-ID: <38651779-9181-4f22-93cc-23fc508ac9ce@linaro.org>
+Date: Tue, 7 Jul 2026 10:46:38 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] hw/riscv/riscv-iommu.c: fault when !PTE_U and no
- priv access
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- andrew.jones@oss.qualcomm.com, nutty.liu@hotmail.com,
- Palmer Dabbelt <palmer@dabbelt.com>, Fabiano Rosas <farosas@suse.de>,
- Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
-References: <20260701121111.537654-1-daniel.barboza@oss.qualcomm.com>
- <20260701121111.537654-3-daniel.barboza@oss.qualcomm.com>
-From: Tao Tang <tangtao1634@phytium.com.cn>
-In-Reply-To: <20260701121111.537654-3-daniel.barboza@oss.qualcomm.com>
+Subject: Re: [PATCH] tcg/x86_64: declare MO_ATOM_WITHIN16 host atomicity
+ support
+To: Andrew Jones <andrew.jones@oss.qualcomm.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: daniel.barboza@oss.qualcomm.com, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20260707122819.114105-1-andrew.jones@oss.qualcomm.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20260707122819.114105-1-andrew.jones@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: AQAAf8DwFXX_G01qgzsRAA--.28542S2
-X-CM-SenderInfo: pwdqw3tdrrljuu6sx5pwlxzhxfrphubq/1tbiAQAJBWpMAPoKAgAAsZ
-Authentication-Results: hzbj-icmmx-6; spf=neutral smtp.mail=tangtao163
- 4@phytium.com.cn;
-X-Coremail-Antispam: 1Uk129KBjvdXoW7Xw43Jw17tFykJF4rWF15urg_yoW3CFg_Jr
- 48KF93uw47Aw1I9w43tFWa9rWrWw48Cry5GF4kGry3uF9Fkw4DXFZ8Kw1Fvayj9397urW3
- Zw1rXF4kJw15XjkaLaAFLSUrUUUUbb8apTn2vfkv8UJUUUU8wcxFpf9Il3svdxBIdaVrnU
- Uv73VFW2AGmfu7jjvjm3AaLaJ3UjIYCTnIWjDUYxBIdaVFxhVjvjDU0xZFpf9x0zRUUUUU
- UUUU=
-Received-SPF: pass client-ip=162.243.164.118;
- envelope-from=tangtao1634@phytium.com.cn;
- helo=zg8tmtyylji0my4xnjqumte4.icoremail.net
-X-Spam_score_int: -25
-X-Spam_score: -2.6
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -76,22 +106,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 7/7/26 05:28, Andrew Jones wrote:
+> Just like aarch64's prepare_host_addr(), x86_64 should use
+> MO_ATOM_WITHIN16 for the memop when it's capable. Unlike aarch64,
+> which needs to check a CPU feature, x86 has been capable since P6
+> family processors and newer (see Intel SDM Vol. 3 §11.1.1).
+> 
+> Since a 16-byte aligned region always fits within a 16-byte multiple
+> sized cache line (x86_64 implementations always have cache lines of
+> at least 64 bytes), then this enables riscv cpu models with Zama16b
+> to use the fast path, just as cpu models without Zama16b do.
+> 
+> Cc: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Signed-off-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
+> ---
+>   tcg/x86_64/tcg-target.c.inc | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/tcg/x86_64/tcg-target.c.inc b/tcg/x86_64/tcg-target.c.inc
+> index 92251f832738..99b6559eed88 100644
+> --- a/tcg/x86_64/tcg-target.c.inc
+> +++ b/tcg/x86_64/tcg-target.c.inc
+> @@ -1934,7 +1934,7 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, HostAddress *h,
+>           *h = x86_guest_base;
+>       }
+>       h->base = addr;
+> -    h->aa = atom_and_align_for_opc(s, opc, MO_ATOM_IFALIGN, s_bits == MO_128);
+> +    h->aa = atom_and_align_for_opc(s, opc, MO_ATOM_WITHIN16, s_bits == MO_128);
+>       a_mask = (1 << h->aa.align) - 1;
+>   
+>       if (tcg_use_softmmu) {
 
-On 7/1/2026 8:11 PM, Daniel Henrique Barboza wrote:
-> All IOMMU accesses are assumed to be user mode unless told otherwise,
-> i.e. we have a process_id.  In case we have a non-user mode leaf PTE
-> (PTE_U isn't set) and we are running in user mode, we need to throw a
-> fault.
->
-> This also reflects on qos-riscv-iommu tests: the tests always run in
-> user mode so our PTEs must have PTE_U (bit 0x10) set.
->
-> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3553
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
-> Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+You should update both uses of atom_and_align_for_opc.
 
-Reviewed-by: Tao Tang <tangtao1634@phytium.com.cn>
+With that,
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
+
+r~
 
