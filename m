@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00F62C43458
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jul 2026 09:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D933BC43458
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jul 2026 09:11:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wh1pV-0003Xr-PV; Tue, 07 Jul 2026 05:11:01 -0400
+	id 1wh1pR-0003Wv-Ex; Tue, 07 Jul 2026 05:10:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wh1pU-0003XT-1x
- for qemu-riscv@nongnu.org; Tue, 07 Jul 2026 05:11:00 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1wh1pP-0003Wi-Vl
+ for qemu-riscv@nongnu.org; Tue, 07 Jul 2026 05:10:55 -0400
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wh1pS-0002GW-LD
- for qemu-riscv@nongnu.org; Tue, 07 Jul 2026 05:10:59 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-493b27c7451so4405465e9.0
- for <qemu-riscv@nongnu.org>; Tue, 07 Jul 2026 02:10:58 -0700 (PDT)
+ id 1wh1pO-0002Fw-Kx
+ for qemu-riscv@nongnu.org; Tue, 07 Jul 2026 05:10:55 -0400
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-493c19bad03so36595845e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jul 2026 02:10:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1783415457; x=1784020257; darn=nongnu.org;
+ d=sifive.com; s=google; t=1783415453; x=1784020253; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5lNhqIEO4Y4/uK8KijQuDX0PHP8gR1qrz5+KexoydX0=;
- b=PSXd9LlxSU6SGBweGu+TPpbTlApyFki3k45psmS3Y7AhYsFQBK6wwy2JASQ/i0tXox
- HEl1XxrAgtvnr/f3Frc/R6ajxIH6alz6DNDAFnikBm8vemxIOOc6SU3/Z781WMw4ScPI
- c/ckmz0TwAlNDBon2yiMYqkhXIxABtGxkggNUyY1XNiLEe3HnmMm3niszLWvIMFGMNcR
- gOUhE8wgN7R87btmTOWKzklb3dFygqEL/CzegsidYRfkBY2WKnbNOzJYzLLBNLLU3Yy1
- w1ON08xm+kUplKpCiC0VGQGxGSG+TT76DgTHncn4DUfAfjaETtwVV5aftl6u/nYYns5h
- MGqw==
+ bh=9Gykh+5P8EC5j4uZxNdjyOMe+zEXw26y8NMVO5QDhqI=;
+ b=cxatRAXzoUzygniV8/H1CytEEsCrbTRphgAHumnujwwHCtgM31o/N7nCPkaMlOudQf
+ ZcQpnTIWVNcILRDW3+Y7lMM7vE3iAksGwZtuwkwFO2/3d1nhRyzfH5Lf9c/xdtT2mU+8
+ 0q8hIvgO9NVmtjUssb/ZdqQfkHHfOXGpV93PqIaQ7fqXclGOpwX6dJtKolxVBrgod9fL
+ LxXTbUdc+auSkeAHIV0gEVXEJyZp6CfsW8zgHRqJMGMjm6Wc+SmsJzYjtUxx03di3Pj7
+ 2p8ikand+WU1jdhZ9EunPG9q3avZ3UAmaNufKZfNnHKlX3ku6DeTISuHmmLYjnHHjLJB
+ HcMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783415457; x=1784020257;
+ d=1e100.net; s=20251104; t=1783415453; x=1784020253;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=5lNhqIEO4Y4/uK8KijQuDX0PHP8gR1qrz5+KexoydX0=;
- b=o9n91k6WDph6y5u5cppj06SPWNO3GUBacLyDFtRXL7iD+MmAVJbmXdfw8ugpOPJu57
- mh10+HKToY47mwqER8byLuNZohRKrXUKeQHM7p4L7CBUHgnfa9sSJPynXXztjV48UEGN
- ZvKAQcmaBaJ71greqsOtiC38YlVIbWy3OAyoV9ULYuWTfNuwfS1sNn8RDFOQJs/cVGOi
- OfUBhziTdcD4HKGC2GgK63RLmktV+nomQbu0A5YDCYQ/Bg95N3+DJXRRY/0efSdlSfPC
- 4vkgFBvwvvCDQKjlsIwKfjFVEkmD3mkVISXoD5khiyBQmO1xIWhqGpUDOtECjZbSp4Aq
- TmTA==
+ bh=9Gykh+5P8EC5j4uZxNdjyOMe+zEXw26y8NMVO5QDhqI=;
+ b=jUWOaygmf/mk+7g6U5dJUDnFeK687OVNqakOf1vaHXG9RjQFtOm/reWM+GWsOoSIk2
+ mX7X6HiD1uYhxziG/GTvXJvjrJ4nwYE/cbLKDstmWyxlpT/+8fgH6UKuOsHbP7rMf00l
+ aROqpGZT7t6Xi+QXzbeC0P77/GlcPaJMQGAsH2cqwA/AKDlb4tV+89p+Wf07TLHrO71D
+ HTmm5cOkkirzhDKWpYgk3ZqRpHBkkrZQ9mxvC09RDYhLEfPK97SXRSzyE9BjTXS4zWNO
+ W2jxsLt81me80ne5kfhTPH6KRoGMpx0QDBtfUx+flkP0i1j1WSTNACzVRNNKx1NyZuIq
+ MMww==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rp4JE2fJuKQfFVnM+0MP5OYA39/zyfbDuDB9eq/qV9eBD15m70fB1+ldA/9+J2C45BknmZeVRIpp46a@nongnu.org
-X-Gm-Message-State: AOJu0YwWTtzeXZ1w0bilLyRV3vE2ZKyTjnEVufCtjqf3sqnKwKUY5tkU
- 2IiIf9Z0LkTZGoGRcXLmiLn/u7iNVy4CwZjFy3l5r5E2n6s0GJZYDPe5nT0xzaiPRA4=
-X-Gm-Gg: AfdE7cknCfsZzPc8kAsJWZGVjl1WISKMB6aoL3uPZu7RWwKLEkpJ8NxUEnJKsABBkwc
- rm6tARncjGnrq1K2zLToQDERJWKqha75m5dtX+twUMFGxDVYFtC/O6HYwvRhlcFpk2hJTvNmJIY
- r0yKh4P92y3v5QWKYapFtKwtk66yfa4ac/iioTcjC42TTIn7V1pQgg6nzl5lrgdaLmuotPzokoY
- xx9UjKqRnzGFMtcbFMDp12oduJLbzS9CM7N6kyp3qh+IWSyqImMyKO+AzAeb4Qvuw/2pi07OkBd
- xSjNhA+O2vkw5TGRutjFhJx7lrzr+YZFksYv85+4reN+Jrfr+ZCH20eiawEcvlo70Agjs4tEnyw
- nJzF4AFRgYQ0r/86de+K70oHDesRvdyqDi1GSlC3rIaPsO6iu8dgH7BYtpUZ+mrAeKTQ6C5yMct
- g6IdJjz41X9fROjC+LWDLUDPLrgCrWuIeXeRpF6/8=
-X-Received: by 2002:a05:600c:8010:b0:493:d117:18a8 with SMTP id
- 5b1f17b1804b1-493e1011e8bmr17829465e9.9.1783415457146; 
- Tue, 07 Jul 2026 02:10:57 -0700 (PDT)
+ AHgh+RoGNNlnQIZpEnztjQCH42k72jHi5JVv+v1ZZ8/8Xue7Qto+95smAsdf0zzmaMMTqcjLXCQPRN1mzFnt@nongnu.org
+X-Gm-Message-State: AOJu0Ywg2ds6VWYxQw9vCnieUo32EI2GpofUT+c60ikqiy/AjDxSiTTB
+ 7QM5ZFEZxw8Foi9e6n6D1xCjlt6o5ULY7qU+xA4metFajzckidhoF+KNYkmv4J/c2sM=
+X-Gm-Gg: AfdE7cl3nMq658lqciNdEwIUDLt+3RshB2dYKhKNi9+Ac+CihVU+55AkY0AjC4eNz4K
+ /YyIST5ghDRORpkVFpUTghqOMsyuW76WN5OeQrdBHNYapnRrKQyC2lZcNMzsNQRj2LkADul2gfO
+ sZCUD2JHZFkz+0RmUTUMdG4NJbN93ZD6bG2fsng+nZWoXv/QlMupV8Xd2v4JbFFsUaL+EQ07wHK
+ W5FKK5En6hCCTlCdrvuhnTvpoD0Nn8ZxQAeUCgl4EJ6ZhWk7xcukxlnp9+R46q+o57Fw52p3zB1
+ G8iHABaUigUfL+Xm9qN+V9a+oF58qmytpKkiL4Oh5A94MjyaE41CBXi/+gvWPPrkYB0mvGfysae
+ qMYDWt5qV6RxzysFRd2V9F76UwqCOabgJdZzgAU3ZPBv5XdGXOFGJ01i2+eLFOT9SuK/nBOKWMF
+ X5lbF1Er+I3b+cNZevvLE2N5bVU1GvfE6eH+fOy44=
+X-Received: by 2002:a05:600c:350a:b0:492:e5a5:5a46 with SMTP id
+ 5b1f17b1804b1-493df080753mr43212645e9.35.1783415452609; 
+ Tue, 07 Jul 2026 02:10:52 -0700 (PDT)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493e0f32660sm41004665e9.2.2026.07.07.02.10.52
+ 5b1f17b1804b1-493e0f32660sm41004665e9.2.2026.07.07.02.10.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jul 2026 02:10:56 -0700 (PDT)
+ Tue, 07 Jul 2026 02:10:51 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
@@ -76,24 +76,23 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  qemu-riscv@nongnu.org (open list:SiFive Machines),
  Frank Chang <frank.chang@sifive.com>, Max Chou <max.chou@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v4 2/6] target/riscv: Support raising misaligned exceptions
- for scalar loads/stores
-Date: Tue,  7 Jul 2026 17:10:35 +0800
-Message-ID: <20260707091039.2574638-3-frank.chang@sifive.com>
+Subject: [PATCH v4 1/6] target/riscv: Add Zicclsm CPU option
+Date: Tue,  7 Jul 2026 17:10:34 +0800
+Message-ID: <20260707091039.2574638-2-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260707091039.2574638-1-frank.chang@sifive.com>
 References: <20260707091039.2574638-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=frank.chang@sifive.com; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=frank.chang@sifive.com; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,40 +110,29 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Frank Chang <frank.chang@sifive.com>
 
-When the Zicclsm extension is not enabled, raise misaligned load/store
-exceptions for misaligned accesses from scalar load/store instructions.
+Add Zicclsm CPU option so that user can turn on/off misaligned loads
+and stores support.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Max Chou <max.chou@sifive.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 6 ++++++
- 1 file changed, 6 insertions(+)
+ target/riscv/cpu_cfg_fields.h.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index e47b16a7fa2..cc1b5dbbadc 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -413,6 +413,9 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-     if (ctx->cfg_ptr->ext_zama16b) {
-         memop |= MO_ATOM_WITHIN16;
-     }
-+    if (!ctx->cfg_ptr->ext_zicclsm) {
-+        memop |= MO_ALIGN;
-+    }
-     decode_save_opc(ctx, 0);
-     if (get_xl(ctx) == MXL_RV128) {
-         out = gen_load_i128(ctx, a, memop);
-@@ -524,6 +527,9 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-     if (ctx->cfg_ptr->ext_zama16b) {
-         memop |= MO_ATOM_WITHIN16;
-     }
-+    if (!ctx->cfg_ptr->ext_zicclsm) {
-+        memop |= MO_ALIGN;
-+    }
-     decode_save_opc(ctx, 0);
-     if (get_xl(ctx) == MXL_RV128) {
-         return gen_store_i128(ctx, a, memop);
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+index 9eb47af0a76..f8c27a574f8 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -139,6 +139,8 @@ BOOL_FIELD(has_priv_1_11)
+ /* Always enabled for TCG if has_priv_1_11 */
+ BOOL_FIELD(ext_ziccrse)
+ 
++BOOL_FIELD(ext_zicclsm)
++
+ /* Vendor-specific custom extensions */
+ BOOL_FIELD(ext_xtheadba)
+ BOOL_FIELD(ext_xtheadbb)
 -- 
 2.43.0
 
