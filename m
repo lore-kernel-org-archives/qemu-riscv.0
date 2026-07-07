@@ -4,92 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 822A1C43458
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jul 2026 18:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46DB4C43458
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jul 2026 01:34:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgnwT-0003aY-VB; Mon, 06 Jul 2026 14:21:17 -0400
+	id 1wgugx-0007c3-QQ; Mon, 06 Jul 2026 21:33:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
- id 1wgnwS-0003aD-82
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 14:21:16 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wgugw-0007bJ-Ac
+ for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 21:33:42 -0400
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
- id 1wgnwQ-0001bq-A1
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 14:21:15 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-38101f85591so77731a91.1
- for <qemu-riscv@nongnu.org>; Mon, 06 Jul 2026 11:21:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1wgugt-0005DI-26
+ for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 21:33:42 -0400
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-698aa7ba320so337108a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 06 Jul 2026 18:33:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783388016; cv=none;
+ d=google.com; s=arc-20260327;
+ b=jm62QXvyf+QdCvryzL4ll/hrHqygW708+g24Kii1lLVxcGopnZdQbk8lVo7x5ekhlH
+ d+MusN+FnT6GtqqvibmVvXjLyGHURURMs/qnoAaZizvkgQO7AtXeu3LK/GXTrFrWdwWb
+ fWW5sNxR8l9IsPi2jenjgQtsGuxXWOruQvKsx57mAwcIeXhbaV8gIoYu6cE53Mz5u4Bz
+ 75v1RPC1ZCL2icLz41qcyMDoreUmLBQo05xdVnm5+XsGDmjiSdT3CGkZEwhQl1tTl+Ya
+ I3ZOOVSQu9AQofMFtw5UFibM/AKArjkRZxfzyfeEqtoC/C+MeL+r8N/gwgpMw8j3+qUX
+ q2/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=r7m03jgquoE+FYAtpgC/OHjgtuI+9mUnN8AC3QyOv80=;
+ fh=tk2HDMW4feu9B9G+JVp4Kg3lA+KRwrCEbKNJP0tMOkQ=;
+ b=qBGQloXiXOOHyaCnZFFxcImn8oxo4oX9r1ZG5bzDFbLIU/jWE2Ul9GaI1ki5DtQcK7
+ JyfCoXHhdlKGvmGePRYL3rToDL5xpQPpvWTpWrdKlvKYixZeMt6+rJBe93mKBax3bp06
+ YQ6gEjOhTiX1vUOKY1GzEcFuqEGQvLF9jsGOcfqmyvG+BmZyWqkLkcMA7kG9/1Yqnu4o
+ oIZF3NPklZg13nr4K09QPtrljFOuhC3y6C1Q28ABZXezYT7yatN2jhFjWGAtPsTcHw+k
+ HwqH5XPX2RpmnNgHjVPflnZpG6VE6dzlCF9vCBICGxgA+dl/870FUCc1zfNobzexcIQ0
+ 6vOQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783362073; x=1783966873; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GriSkIGDui5yjwnMkhCIUYjRUaaEmOV86zeoJYH5WCE=;
- b=mfNZQLytcNTJFHFGxFvEZQuftHcRDlQcsUyRk1Uu4e5MUqz2X6CBxiY65rfN+Ui5T0
- uRICSW1SAP4OoD8YM+yX8zZQ3oToJDEYHyFU/PLOZO5BrUmRp89/IRhbCTDNaShSvMti
- zKhlB7DNgbxmqsLZy+D646Cz8Np7+Oab171vwjGhUQTCnlWHlIEyMyJivzmyZqvYDw8p
- wVGsI309BKUOYkYgCXxNh3afjIk/oXHXQxujriRVgCmrGzhQIqX+1+gi36ubSnyPFoPN
- blyT7lQDNEbJHsWKHR6ai0Xy71jgFifY72dmTv9G1REiBeFYCz7jiSeRDcBoW4r20jVr
- Tjuw==
+ d=gmail.com; s=20251104; t=1783388016; x=1783992816; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r7m03jgquoE+FYAtpgC/OHjgtuI+9mUnN8AC3QyOv80=;
+ b=ntx975HO9RklZDSSjPdgKi4frPil90S1aqyvMFbI+r2k2f8UvBMMxNArmz094Hnh3D
+ Py7bNJ+l/TdoWCdjOrBA2Q2Jtb4LRB1eiLRU3RnNJDZHNOB4XrK/gyFtpTOrgGvncJzs
+ wYmix2pGYDCwCvcSD3mmQIsTRGX3DF8s/cgElk95SK1ltZBfXqOYBkWCfCrGw10y5Vm3
+ WHRqL3yo7IFKgIQ1yiYfDjp/XA2o7rUOEoMulcXv0DgZcV1dn2mgFZboP/CHZ39lTBbA
+ nDaFuQzwfw8MrCFvU2z8uHvYTose1zBR13g9a1H/+NerZvpXdV+b+aYQ5ct/BvPBPNjF
+ gJeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783362073; x=1783966873;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GriSkIGDui5yjwnMkhCIUYjRUaaEmOV86zeoJYH5WCE=;
- b=AUUef8ZsOSvgjka+r6Fc2yzs5/xw/5YVRUWtVN1JQuY4ezr5I8F/emESb5ojNwc7i0
- QDAiLarfVl4VLdMld79rZ5g2ledlcYkdYluaxmCKdeGRbGg24IqnJKykP1nS0wNyt8bQ
- 6dEEalg52jKPTYxgkaF5mB/+swxYBWOGoE/jCV2Ii3Sa4chwDYBdHCycyEasRjGx62VK
- txRNgZudf6l+bj44t6OpGDKUeK6pYxRrDDCmQa3N7IK8/wCfz2eHfmrzmO33tIuewPG/
- pVDw+ReW1EMQuV5WXGwGMtvweYoL8zFsqMOHNcSFA08ry08nxpzhJPgJJVvcn80T9qXd
- aRyw==
+ d=1e100.net; s=20251104; t=1783388016; x=1783992816;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=r7m03jgquoE+FYAtpgC/OHjgtuI+9mUnN8AC3QyOv80=;
+ b=oIb9BdPcj8E80EdBnxtOa6ys9n5tbG8o5Kebyw2yecxJ0vYUG4ADt0VegoMwNYdQf7
+ Bqj9QtUwks/ZnxDdb3UxU5QZICmuhjQ/NKbT3DjA5iRJZ5GzvJ6UtmMGAKXzZKgMl/ou
+ VL0IbO/1KIo5pW7acR+O8G98ipnji7pYN2kn0GWaMUGo+r2NWu+HI2w2idNTi0C/Ap73
+ 9QvEm6ZPXZyTInrqDNrauaQRLpfWC6OJgKfm3JiR09dO0zzH8HAF21bfOmPBKTexUCIz
+ 0vuGPEtEzMmP9ifh5d0DM+HBCO8x+URaaJ4qUrx+D0gMSmREM7Xgsjb12kfJsVsopXav
+ 0rLA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rp6KPf9M2GpRWQ0h7gSrPozC/wE8vrk37qBUxc7Baf3czyOCN5NobpVHGOTLr7E106HUYipB6LuIYVY@nongnu.org
-X-Gm-Message-State: AOJu0Yx0438vSXYWd8PXGJZHmEQ3humtg2dmV3V7GnKlq+T82SwDTJba
- xtmWtvonVqeEMN+XKTVLe/Ym0kQRvcsw4Pn8G1Lxat783degmD+JH7Zz
-X-Gm-Gg: AfdE7clHiZBpWKPcs5a84VT1/4N5Ctoq7FJCZddKELD8Q/3lLkihPAnD1P2zf68RzYy
- pB+djMQD6aBxPkqyCbO1rxsmM/OiIp0pYQZo/ygCyaXTPLyZGsRFyPC6FJH12FHHsaAAcOyZrxx
- qojYBA6p1Xh20KkIs0hgbnf2+QYmD2DfEkUNOx3P0nc/BbZlM5V2xzgUb2IdMXfHEUoNQlIkom4
- m9BRR6d3PWToA3L86OZDZqZmqkxhQwkI5X0Ehu72eDeje3dgP2KxkFG/i++Ce1bDgeCQzaUCZID
- pf6VIzob3wV8axAlqZUsC7wr71d9uHusqRAymdSHaJPDCgbQJi5euHiqfjOA8wsQ8kuNcH3OXfj
- aoI/uSkyCAvERAmA4YworRhfdHzoLgci+jAx/aTxqId5Lj3YNvr5T46BP0qt0xoX/ai5JRehCki
- qM4EYV42B0RmcARRnFS+rAH0rBRA==
-X-Received: by 2002:a05:6a20:c996:b0:3a3:adea:83bc with SMTP id
- adf61e73a8af0-3c08e7f7ccemr2018610637.15.1783362072416; 
- Mon, 06 Jul 2026 11:21:12 -0700 (PDT)
-Received: from google.com ([2402:7500:46a:881a:bfa6:b3b2:ab12:133b])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c9e8eb0ec76sm6475208a12.1.2026.07.06.11.21.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jul 2026 11:21:12 -0700 (PDT)
-Date: Tue, 7 Jul 2026 02:21:07 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Joel Stanley <joel@jms.id.au>
-Cc: pbonzini@redhat.com, marcandre.lureau@redhat.com,
- alistair.francis@wdc.com, farosas@suse.de, lvivier@redhat.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, marscheng@google.com,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Subject: Re: [PATCH v3 1/5] hw/char: Add dw8250 UART
-Message-ID: <akvyEywAnPu1FPyt@google.com>
-References: <20260616190147.1286316-1-visitorckw@gmail.com>
- <20260616190147.1286316-2-visitorckw@gmail.com>
- <CACPK8Xc+AZyt9VJzvOCus4sGXEFT3VBmwLwLbsuaY2+CN_6oPA@mail.gmail.com>
+ AHgh+RqZMSQ0nFpWmwHTkOD/4XoVYECMA0BPOjuIXBD2zBMm0gS0LPwIhrh6ZKptNB4dFSROSfJiFvL/fgIe@nongnu.org
+X-Gm-Message-State: AOJu0YxFldCGNQUUg0xl2RoWOD3APMojJ7KH2Xksdd3CfuSkWx72Cd2K
+ qOin0gDyfn2h8Ng4DLDcsGGDY/Alfuw3A1XtUXl/5ftARwrHqKHgmoD35L8fCfoHxzgkHMSZaBw
+ Rx7dombhW1P1ynnZu2ESgQmaZ56VJXUk=
+X-Gm-Gg: AfdE7cmWUBM12PublzsIC/PC59Qik0geS2+dHwhywBE4+XE3jr6245XzEkSmoqduvMD
+ KpLnHnOTN/2TMSplxSapeozjuIxVnqyI6PnhWmrJWOLu5ueCzPa6hPfaulyKTZV1UmnVoP4qNqL
+ xOSwEPQr3EGBqlqdzYk7s2bfSCoBtJty2me+xGpqtykmWH6Acvx6T2Ekca/nDZb5Hq8Rg0Jyajw
+ wELmE58NgL54Jzkg2dReJBadhpASEaOmJYViQ3AeP60XlnMnI7vkdNeEoAQ/H3dHBPuIoJA0wDT
+ 7AaHqH2d8DpK0HEZDKscg30QF1c=
+X-Received: by 2002:a05:6402:2109:b0:698:4501:3a8e with SMTP id
+ 4fb4d7f45d1cf-69a910bd1ddmr314470a12.9.1783388015962; Mon, 06 Jul 2026
+ 18:33:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CACPK8Xc+AZyt9VJzvOCus4sGXEFT3VBmwLwLbsuaY2+CN_6oPA@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=visitorckw@gmail.com; helo=mail-pj1-x1033.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+References: <20260616190147.1286316-1-visitorckw@gmail.com>
+ <20260616190147.1286316-6-visitorckw@gmail.com>
+ <CAKmqyKMXyrtFeruxxsy2NNTeCeqQfkM4khYuWN+Qu9Zhb0ebMg@mail.gmail.com>
+ <CACPK8Xes3v8zoq4d35vLCHe8hs71nP87nAmkgvyr6WOMj9s4Ew@mail.gmail.com>
+ <akvruoEI-PbAJ9es@google.com>
+In-Reply-To: <akvruoEI-PbAJ9es@google.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 7 Jul 2026 11:33:08 +1000
+X-Gm-Features: AVVi8CdUEZlFG67WcexbHXU-8m2HfYnH6Ao4hJoWuIV6UTX8mcAiWmZmqo3hes0
+Message-ID: <CAKmqyKNDDuYnXxPo-gxJ=VWxwF1a5xJpgEZzdb3bCSxUE=ec-w@mail.gmail.com>
+Subject: Re: [PATCH v3 5/5] tests/qtest: Add qtest for Milk-V Duo board
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: Joel Stanley <joel@jms.id.au>, pbonzini@redhat.com,
+ marcandre.lureau@redhat.com, 
+ alistair.francis@wdc.com, farosas@suse.de, lvivier@redhat.com, 
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
+ jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, marscheng@google.com, 
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::536;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x536.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -107,165 +128,175 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jul 01, 2026 at 01:34:27PM +0930, Joel Stanley wrote:
-> On Wed, 17 Jun 2026 at 04:31, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+On Tue, Jul 7, 2026 at 3:54=E2=80=AFAM Kuan-Wei Chiu <visitorckw@gmail.com>=
+ wrote:
+>
+> i Joel and Alistair,
+>
+> On Wed, Jul 01, 2026 at 01:05:55PM +0930, Joel Stanley wrote:
+> > On Mon, 29 Jun 2026 at 11:21, Alistair Francis <alistair23@gmail.com> w=
+rote:
+> > >
+> > > On Wed, Jun 17, 2026 at 5:04=E2=80=AFAM Kuan-Wei Chiu <visitorckw@gma=
+il.com> wrote:
+> > > >
+> > > > Add minimal qtest coverage for the Milk-V Duo machine to validate b=
+asic
+> > > > MMIO mapping and register access.
+> > > >
+> > > > Currently tested:
+> > > > - Verify DW8250 UART component version and type signatures.
+> > > > - Test read/write access to CV1800B clock bypass register.
+> > > >
+> > > > Tested with:
+> > > > $ meson test -C build -v qemu:qtest-riscv64/milkv-duo-test
+> > > > [...]
+> > > > Ok:                 1
+> > > > Fail:               0
+> > > >
+> > > > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> > > > ---
+> > > >  MAINTAINERS                  |  1 +
+> > > >  tests/qtest/meson.build      |  3 +-
+> > > >  tests/qtest/milkv-duo-test.c | 70 ++++++++++++++++++++++++++++++++=
+++++
+> > > >  3 files changed, 73 insertions(+), 1 deletion(-)
+> > > >  create mode 100644 tests/qtest/milkv-duo-test.c
+> > > >
+> > > > diff --git a/MAINTAINERS b/MAINTAINERS
+> > > > index e197dcb5b2..472513537f 100644
+> > > > --- a/MAINTAINERS
+> > > > +++ b/MAINTAINERS
+> > > > @@ -1807,6 +1807,7 @@ F: hw/riscv/milkv_duo.c
+> > > >  F: include/hw/char/dw8250.h
+> > > >  F: include/hw/misc/cv1800b_clk.h
+> > > >  F: include/hw/riscv/cv1800b.h
+> > > > +F: tests/qtest/milkv-duo-test.c
+> > > >
+> > > >  RX Machines
+> > > >  -----------
+> > > > diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+> > > > index 4897325d84..38acbdc0c8 100644
+> > > > --- a/tests/qtest/meson.build
+> > > > +++ b/tests/qtest/meson.build
+> > > > @@ -293,7 +293,8 @@ qtests_riscv64 =3D ['riscv-csr-test'] + \
+> > > >    (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
+> > > >     config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
+> > > >     ['iommu-riscv-test'] : []) + \
+> > > > -  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] :=
+ [])
+> > > > +  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] :=
+ []) + \
+> > > > +   ['milkv-duo-test']
+> > > >
+> > > >  qos_test_ss =3D ss.source_set()
+> > > >  qos_test_ss.add(
+> > > > diff --git a/tests/qtest/milkv-duo-test.c b/tests/qtest/milkv-duo-t=
+est.c
+> > > > new file mode 100644
+> > > > index 0000000000..06064b8733
+> > > > --- /dev/null
+> > > > +++ b/tests/qtest/milkv-duo-test.c
+> > > > @@ -0,0 +1,70 @@
+> > > > +/*
+> > > > + * QTest for Milk-V Duo Board
+> > > > + *
+> > > > + * Copyright (c) 2026 Kuan-Wei Chiu <visitorckw@gmail.com>
+> > > > + *
+> > > > + * SPDX-License-Identifier: GPL-2.0-or-later
+> > > > + */
+> > > > +
+> > > > +#include "qemu/osdep.h"
+> > > > +#include "libqtest.h"
+> > > > +
+> > > > +#define CV1800B_CLK_BASE            0x03002000
+> > > > +#define CV1800B_CLK_BYPASS          0x030
+> > > > +#define CV1800B_CLK_BYPASS_RESET    0xFFFFFFFF
+> > > > +#define TEST_PATTERN_5A             0x5A5A5A5A
+> > > > +#define TEST_PATTERN_A5             0xA5A5A5A5
+> > > > +
+> > > > +#define CV1800B_UART0_BASE          0x04140000
+> > > > +#define DW_UART_UCV                 0xF8
+> > > > +#define DW_UART_CTR                 0xFC
+> > > > +#define DW_UART_VERSION_3_23A       0x3332332A
+> > > > +#define DW_UART_TYPE_SIGNATURE      0x44570110
+> > > > +
+> > > > +static void test_milkv_duo_uart(void)
+> > > > +{
+> > > > +    QTestState *qts;
+> > > > +    uint32_t component_version;
+> > > > +    uint32_t component_type;
+> > > > +
+> > > > +    qts =3D qtest_init("-M milkv-duo");
+> > > > +
+> > > > +    component_version =3D qtest_readl(qts, CV1800B_UART0_BASE + DW=
+_UART_UCV);
+> > > > +    g_assert_cmphex(component_version, =3D=3D, DW_UART_VERSION_3_2=
+3A);
+> > > > +
+> > > > +    component_type =3D qtest_readl(qts, CV1800B_UART0_BASE + DW_UA=
+RT_CTR);
+> > > > +    g_assert_cmphex(component_type, =3D=3D, DW_UART_TYPE_SIGNATURE=
+);
+> > > > +
+> > > > +    qtest_quit(qts);
+> > > > +}
+> > > > +
+> > > > +static void test_milkv_duo_clk(void)
+> > > > +{
+> > > > +    QTestState *qts;
+> > > > +    uint32_t clk_bypass_val;
+> > > > +
+> > > > +    qts =3D qtest_init("-M milkv-duo");
+> > > > +
+> > > > +    clk_bypass_val =3D qtest_readl(qts, CV1800B_CLK_BASE + CV1800B=
+_CLK_BYPASS);
+> > > > +    g_assert_cmphex(clk_bypass_val, =3D=3D, CV1800B_CLK_BYPASS_RES=
+ET);
+> > > > +
+> > > > +    qtest_writel(qts, CV1800B_CLK_BASE + CV1800B_CLK_BYPASS, TEST_=
+PATTERN_5A);
+> > > > +    clk_bypass_val =3D qtest_readl(qts, CV1800B_CLK_BASE + CV1800B=
+_CLK_BYPASS);
+> > > > +    g_assert_cmphex(clk_bypass_val, =3D=3D, TEST_PATTERN_5A);
+> > > > +
+> > > > +    qtest_writel(qts, CV1800B_CLK_BASE + CV1800B_CLK_BYPASS, TEST_=
+PATTERN_A5);
+> > > > +    clk_bypass_val =3D qtest_readl(qts, CV1800B_CLK_BASE + CV1800B=
+_CLK_BYPASS);
+> > > > +    g_assert_cmphex(clk_bypass_val, =3D=3D, TEST_PATTERN_A5);
+> > > > +
+> > > > +    qtest_quit(qts);
+> > > > +}
+> > > > +
+> > > > +int main(int argc, char **argv)
+> > > > +{
+> > > > +    g_test_init(&argc, &argv, NULL);
+> > > > +
+> > > > +    qtest_add_func("/riscv/milkv-duo/uart", test_milkv_duo_uart);
+> > > > +    qtest_add_func("/riscv/milkv-duo/clk", test_milkv_duo_clk);
+> > >
+> > > Thanks for the tests. These are just checking some static values
+> > > though. Can you also add a boot test?
 > >
-> > Add the dw8250 uart support. This hardware is a widely used 16550A
-> > derivative that includes additional registers.
+> > +1
 > >
-> > Without this specific device support, the Linux 8250_dw driver fails to
-> > probe the extended registers (UCV, CPR, etc.), which are essential for
-> > correct feature detection:
-> 
-> Nice. The atlantis board works around this by adding an uimp region,
-> but having a real model is even better.
-> 
-> Some minor comments below.
-> 
-> > [    0.293566] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
-> > [    0.306929] Oops - store (or AMO) access fault [#1]
-> > [    0.307020] Modules linked in:
-> > [    0.307192] CPU: 0 UID: 0 PID: 1 Comm: swapper/0 Not tainted 7.0.0 #1 PREEMPTLAZY
-> > [    0.307250] Hardware name: Milk-V Duo (DT)
-> > [    0.307294] epc : dw8250_setup_port+0x22/0x520
-> > [    0.307504]  ra : dw8250_probe+0x57e/0x5b8
-> > [    0.307518] epc : ffffffff80708dd6 ra : ffffffff8070a49e sp : ffffffc60000b820
-> > [    0.307525]  gp : ffffffff81a32ba8 tp : ffffffd602180cc0 t0 : 0000000000000073
-> > [    0.307533]  t1 : 000000000000006c t2 : 0000000000000000 s0 : ffffffc60000b830
-> > [    0.307539]  s1 : ffffffd6028c8640 a0 : ffffffc60000b848 a1 : ffffffff813162c1
-> > [    0.307546]  a2 : ffffffff813162c0 a3 : ffffffd6028c8640 a4 : ffffffc60002d0b4
-> > [    0.307552]  a5 : 0000000000000001 a6 : 0000000000000094 a7 : 0000000000000060
-> > [    0.307558]  s2 : ffffffd60225d410 s3 : ffffffd60225d400 s4 : 0000000000000000
-> > [    0.307573]  s5 : ffffffff80e31a48 s6 : 0000000000000008 s7 : 0000000000000000
-> > [    0.307584]  s8 : 0000000000000149 s9 : 0000000000000000 s10: 0000000000000000
-> > [    0.307590]  s11: 0000000000000000 t3 : ffffffd602007c00 t4 : ffffffff81601540
-> > [    0.307604]  t5 : 0000000000000003 t6 : ffffffd602a42f82 ssp : 0000000000000000
-> > [    0.307611] status: 0000000200000120 badaddr: ffffffc60002d0b4 cause: 0000000000000007
-> > [    0.307652] [<ffffffff80708dd6>] dw8250_setup_port+0x22/0x520
-> > [    0.307695] [<ffffffff8070a49e>] dw8250_probe+0x57e/0x5b8
-> > [    0.307702] [<ffffffff80731f0e>] platform_probe+0x46/0x80
-> > [    0.307708] [<ffffffff8072f67c>] really_probe+0x84/0x22c
-> > [    0.307715] [<ffffffff8072f880>] __driver_probe_device+0x5c/0xd4
-> > [    0.307721] [<ffffffff8072f9be>] driver_probe_device+0x2e/0xf4
-> > [    0.307727] [<ffffffff8072fbe6>] __driver_attach+0x6e/0x14c
-> > [    0.307734] [<ffffffff8072d5f0>] bus_for_each_dev+0x60/0xb0
-> > [    0.307740] [<ffffffff8072f1b2>] driver_attach+0x1a/0x24
-> > [    0.307746] [<ffffffff8072e8da>] bus_add_driver+0xca/0x1d8
-> > [    0.307752] [<ffffffff80730aaa>] driver_register+0x3e/0xdc
-> > [    0.307757] [<ffffffff80731c54>] __platform_driver_register+0x1c/0x24
-> > [    0.307779] [<ffffffff80c334f6>] dw8250_platform_driver_init+0x1a/0x24
-> > [    0.307793] [<ffffffff80011992>] do_one_initcall+0x4e/0x2a4
-> > [    0.307800] [<ffffffff80c01362>] kernel_init_freeable+0x226/0x2b0
-> > [    0.307807] [<ffffffff80bc3798>] kernel_init+0x1c/0x144
-> > [    0.307813] [<ffffffff8001361c>] ret_from_fork_kernel+0x18/0x164
-> > [    0.307820] [<ffffffff80bcefb6>] ret_from_fork_kernel_asm+0x16/0x18
-> > [    0.307914] Code: 3683 2085 0b63 32f7 000f 0140 6918 4785 0713 0b47 (c31c) 2583
-> > [    0.308041] ---[ end trace 0000000000000000 ]---
-> > [    0.308180] Kernel panic - not syncing: Fatal exception in interrupt
-> > [    0.315760] ---[ end Kernel panic - not syncing: Fatal exception in interrupt ]---
-> 
-> The kernel oops doesn't add much; I'd drop it from the commit message.
-> But your call if you want to keep it.
-> 
+> >  A functional test that exercises -bios -kernel -dtb, as well as the
+> > sd device would be great.
+>
+> I'll try to add the boot test.
+>
+> I assume this means the test will need a way to fetch the kernel image
+> and dtb from somewhere. Would it be acceptable to host these files on
+> my personal github, or is there a more appropriate place I should
+> upload them to?
 
-will drop the stack trace.
+I think personal GitHub is fine, from memory that is what others do.
+If there is some official source that would be better though
 
-> > --- /dev/null
-> > +++ b/hw/char/dw8250.c
-> 
-> > +#define DW_UART_RE_EN 0xB4 /* Receiver Output Enable Register */
-> > +#define DW_UART_DLF   0xC0 /* Divisor Latch Fraction Register */
-> > +#define DW_UART_CPR   0xF4 /* Component Parameter Register */
-> > +#define DW_UART_UCV   0xF8 /* UART Component Version */
-> > +#define DW_UART_CTR   0xFC /* Component Type Register */
-> > +
-> > +#define DW_UART_UCV_VALUE 0x3332332A /* "323*" -> v3.23a */
-> 
-> I was curious  what this was used for, and it seems Linux has a
-> dev_dbg but otherwise it's not important. The values here should be
-> fine.
-> 
-> > +#define DW_UART_CTR_VALUE 0x44570110 /* "DW" */
-> > +
-> > +static uint64_t dw8250_ext_read(void *opaque, hwaddr addr, unsigned int size)
-> > +{
-> > +    switch (addr) {
-> > +    case DW_UART_UCV:
-> > +        return DW_UART_UCV_VALUE;
-> > +    case DW_UART_CPR:
-> > +        return 0x00000000; /* No advanced features (DMA, extra FIFOs) */
-> 
-> Linux will detect zero and use a value from the platform data, but
-> this is only to support a quirk on renesas rzn1, so again this should
-> be fine.
-> 
-> > +    case DW_UART_CTR:
-> > +        return DW_UART_CTR_VALUE;
-> > +
-> > +    case DW_UART_RE_EN:
-> > +    case DW_UART_DLF:
-> > +        /*
-> > +         * Return 0 to indicate these optional features
-> > +         * (RS485 and Fractional Divisor) are not implemented.
-> > +         */
-> > +        return 0x00000000;
-> > +
-> > +    default:
-> > +        return 0;
-> > +    }
-> > +}
-> > +
-> > +static void dw8250_ext_write(void *opaque, hwaddr addr, uint64_t val, unsigned int size)
-> > +{
-> 
-> LOG_UNIMP (or LOG_GUEST_ERROR)?
+Alistair
 
-Ack. Will add it in the next version.
-
-> 
-> 
-> > +static void dw8250_realize(DeviceState *dev, Error **errp)
-> > +{
-> > +    DW8250State *s = DW8250(dev);
-> > +    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
-> > +    SysBusDevice *serial_sbd = SYS_BUS_DEVICE(s->serial_mm);
-> > +
-> > +    memory_region_init(&s->container, OBJECT(dev), "dw8250-container",
-> > +                       DW_UART_REGION_SIZE);
-> > +    sysbus_init_mmio(sbd, &s->container);
-> > +
-> > +    qdev_prop_set_uint8(s->serial_mm, "regshift", s->regshift);
-> > +    qdev_prop_set_uint8(s->serial_mm, "endianness", DEVICE_LITTLE_ENDIAN);
-> > +    sysbus_realize(serial_sbd, errp);
-> 
-> Return on error?
-
-Ack.
-
-> 
-> > +
-> > +    memory_region_init_io(&s->ext_iomem, OBJECT(dev), &dw8250_ext_ops, s,
-> > +                          "dw8250-ext", DW_UART_REGION_SIZE);
-> > +    memory_region_add_subregion(&s->container, 0, &s->ext_iomem);
-> > +
-> > +    memory_region_add_subregion_overlap(&s->container, 0,
-> > +                                        sysbus_mmio_get_region(serial_sbd, 0), 1);
-> > +
-> > +    sysbus_pass_irq(sbd, serial_sbd);
-> > +}
-> > +
-> > +static const Property dw8250_properties[] = {
-> > +    DEFINE_PROP_UINT8("regshift", DW8250State, regshift, 2),
-> 
-> When boards have a value other than 2, does this affect the DW
-> extension registers too? Or only the 8250 ones?
-
-I current use hardcoded byte offsets which inherently assumes
-regshift = 2. 
-
-I'll update the switch statements in the extension memory region to
-shift the addresses based on s->regshift.
-
-Regards,
-Kuan-Wei
+>
+> Regards,
+> Kuan-Wei
 
