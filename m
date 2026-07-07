@@ -4,107 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46DB4C43458
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jul 2026 01:34:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 926BBC43458
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jul 2026 04:13:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wgugx-0007c3-QQ; Mon, 06 Jul 2026 21:33:43 -0400
+	id 1wgxBE-0002oK-Eb; Tue, 07 Jul 2026 00:13:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wgugw-0007bJ-Ac
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 21:33:42 -0400
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1wgxBC-0002no-O4
+ for qemu-riscv@nongnu.org; Tue, 07 Jul 2026 00:13:06 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1wgugt-0005DI-26
- for qemu-riscv@nongnu.org; Mon, 06 Jul 2026 21:33:42 -0400
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-698aa7ba320so337108a12.1
- for <qemu-riscv@nongnu.org>; Mon, 06 Jul 2026 18:33:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783388016; cv=none;
+ id 1wgxBB-0001Wh-9B
+ for qemu-riscv@nongnu.org; Tue, 07 Jul 2026 00:13:06 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-698aa8d4dafso3694852a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 06 Jul 2026 21:13:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783397583; cv=none;
  d=google.com; s=arc-20260327;
- b=jm62QXvyf+QdCvryzL4ll/hrHqygW708+g24Kii1lLVxcGopnZdQbk8lVo7x5ekhlH
- d+MusN+FnT6GtqqvibmVvXjLyGHURURMs/qnoAaZizvkgQO7AtXeu3LK/GXTrFrWdwWb
- fWW5sNxR8l9IsPi2jenjgQtsGuxXWOruQvKsx57mAwcIeXhbaV8gIoYu6cE53Mz5u4Bz
- 75v1RPC1ZCL2icLz41qcyMDoreUmLBQo05xdVnm5+XsGDmjiSdT3CGkZEwhQl1tTl+Ya
- I3ZOOVSQu9AQofMFtw5UFibM/AKArjkRZxfzyfeEqtoC/C+MeL+r8N/gwgpMw8j3+qUX
- q2/w==
+ b=EA5uW9Korh2REwF5mueuzOByz8IlS2bohjhfXYyun4UWdt5rN0QgxzFsdZpze5oDgf
+ c+NCx1eWV7wGjKuDrKhyUcsO+WzzdGfztEyS2Gs9Yt6eltPJjehDhEXF7v190aTkA/Ac
+ dVTFGfTOQAqJSP0moUPlEbtVhu0JssVkmQ6deIauaiqjas+VJrIzu2gWAmb9MbpQpx11
+ P+0gOivrE0gMxlRhbwGukj+xZkKOWNjKXsSs+NqVnUqXx3mSjwELfNDVp/og2PFiM1gc
+ 9IGMgb0YvokQm/JqVXGWC6hfrjC3qvDt4zdEtYMy+Znx3dW6LSZVpV5c6LDiSBS9MAoj
+ Zudg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=r7m03jgquoE+FYAtpgC/OHjgtuI+9mUnN8AC3QyOv80=;
- fh=tk2HDMW4feu9B9G+JVp4Kg3lA+KRwrCEbKNJP0tMOkQ=;
- b=qBGQloXiXOOHyaCnZFFxcImn8oxo4oX9r1ZG5bzDFbLIU/jWE2Ul9GaI1ki5DtQcK7
- JyfCoXHhdlKGvmGePRYL3rToDL5xpQPpvWTpWrdKlvKYixZeMt6+rJBe93mKBax3bp06
- YQ6gEjOhTiX1vUOKY1GzEcFuqEGQvLF9jsGOcfqmyvG+BmZyWqkLkcMA7kG9/1Yqnu4o
- oIZF3NPklZg13nr4K09QPtrljFOuhC3y6C1Q28ABZXezYT7yatN2jhFjWGAtPsTcHw+k
- HwqH5XPX2RpmnNgHjVPflnZpG6VE6dzlCF9vCBICGxgA+dl/870FUCc1zfNobzexcIQ0
- 6vOQ==; darn=nongnu.org
+ bh=qFyHEuJbiZnwi15luGVMLUH15sNsiwcdRKnHqR67fzE=;
+ fh=mMbPNVJqN8tTZfoeiKI4kgO+tgCk8Pvx8O/sj104MlU=;
+ b=XOVptA5pzOvxlI7u78pezln46JljyfPUrrwyl7W0K7sfEUlJ8u719iWT2oAWHSXz+K
+ zzJRm7jsul+1317izUxDoDjiMsYACYzSPyf+k6ErBk2JgopaDWcre+tbaFvikP0z4qqK
+ 9k3mG8VmAs/JoI9l6sRreK0DJfrnVTGD6w69bOhhwtLU0iiJbmn9frxeBV2ExYTdlJ7b
+ yWB5ZX9UFjilWUfMdwouyRTi3ylkm+ICmkRjUGBpqkJ1zQGBQT4cDmR/RXfPJN0qf0Jz
+ Rzn/Slyosscu5nhNjLZP2W6/UeDxuzpGvhWn7hnX9/XGDYJ3QsfDZmj9d0vT+uhXgl6i
+ W4jA==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783388016; x=1783992816; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1783397583; x=1784002383; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r7m03jgquoE+FYAtpgC/OHjgtuI+9mUnN8AC3QyOv80=;
- b=ntx975HO9RklZDSSjPdgKi4frPil90S1aqyvMFbI+r2k2f8UvBMMxNArmz094Hnh3D
- Py7bNJ+l/TdoWCdjOrBA2Q2Jtb4LRB1eiLRU3RnNJDZHNOB4XrK/gyFtpTOrgGvncJzs
- wYmix2pGYDCwCvcSD3mmQIsTRGX3DF8s/cgElk95SK1ltZBfXqOYBkWCfCrGw10y5Vm3
- WHRqL3yo7IFKgIQ1yiYfDjp/XA2o7rUOEoMulcXv0DgZcV1dn2mgFZboP/CHZ39lTBbA
- nDaFuQzwfw8MrCFvU2z8uHvYTose1zBR13g9a1H/+NerZvpXdV+b+aYQ5ct/BvPBPNjF
- gJeA==
+ bh=qFyHEuJbiZnwi15luGVMLUH15sNsiwcdRKnHqR67fzE=;
+ b=WUljKFlxtYGNCSegMjqcSq/LXFBIhGDAViKPVAr1Ue3uVdruOIo8Kgtb90IByDNUXg
+ 6Tdlo0AbLQmhlRfdm6uj3lbQ7m6hUID1Bjjzdm1vx8rkM2LXyWGDpLcejs+TvhezgdpX
+ tGtJ1O8C4NXTMns0P4vWTXqFQbH1ppfzhVNitG4LmbapyQAEkJiKFQuxHqMCPRtZa9sV
+ e6hzVnthVq35afRBxkkUK1/mZeE2ewFa0GzSF5eEbJmUxR7o/SiUxRzV5q8l559pt2mR
+ K9lp4KVtPpdBMAL0MmY2TcAx8qLMTGdSjkSWccI/lREFZv8w/Kvb9rXIs1ZP0a1BDRsv
+ IMkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783388016; x=1783992816;
+ d=1e100.net; s=20251104; t=1783397583; x=1784002383;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=r7m03jgquoE+FYAtpgC/OHjgtuI+9mUnN8AC3QyOv80=;
- b=oIb9BdPcj8E80EdBnxtOa6ys9n5tbG8o5Kebyw2yecxJ0vYUG4ADt0VegoMwNYdQf7
- Bqj9QtUwks/ZnxDdb3UxU5QZICmuhjQ/NKbT3DjA5iRJZ5GzvJ6UtmMGAKXzZKgMl/ou
- VL0IbO/1KIo5pW7acR+O8G98ipnji7pYN2kn0GWaMUGo+r2NWu+HI2w2idNTi0C/Ap73
- 9QvEm6ZPXZyTInrqDNrauaQRLpfWC6OJgKfm3JiR09dO0zzH8HAF21bfOmPBKTexUCIz
- 0vuGPEtEzMmP9ifh5d0DM+HBCO8x+URaaJ4qUrx+D0gMSmREM7Xgsjb12kfJsVsopXav
- 0rLA==
+ bh=qFyHEuJbiZnwi15luGVMLUH15sNsiwcdRKnHqR67fzE=;
+ b=CrZHuvJtfYa63qmfyZvJEw0xlgspP4je+Ykj3Ljh1j1LckzxBqXJgpE7tDvgrQycGF
+ 5Y4CwaarCZ6ifYAUDN7uXlUcomY7vKX3O2B7+ymk6QrAJfRXZAsc5qoRW+yR9TAhxEG/
+ KAlp91wu9FKXiPP5uHBU9Imn1pnHPl7xiY3G/ZAtcSuDeMuyJcaPbnD497MZUJqZ2zkK
+ bn3veXtt+7X3EDu7QCQnMiIm6h4sHKlyl1byiOwSz8ZdSlDGiSDcJ5SHQg5NyIx34aQQ
+ Nt487bXY0/fQatFtwx4gKnGJEj2FYFxXA/y1OvaQPE4EfjtAAK/AZsure4E5oFIdVgAK
+ Lpcg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqZMSQ0nFpWmwHTkOD/4XoVYECMA0BPOjuIXBD2zBMm0gS0LPwIhrh6ZKptNB4dFSROSfJiFvL/fgIe@nongnu.org
-X-Gm-Message-State: AOJu0YxFldCGNQUUg0xl2RoWOD3APMojJ7KH2Xksdd3CfuSkWx72Cd2K
- qOin0gDyfn2h8Ng4DLDcsGGDY/Alfuw3A1XtUXl/5ftARwrHqKHgmoD35L8fCfoHxzgkHMSZaBw
- Rx7dombhW1P1ynnZu2ESgQmaZ56VJXUk=
-X-Gm-Gg: AfdE7cmWUBM12PublzsIC/PC59Qik0geS2+dHwhywBE4+XE3jr6245XzEkSmoqduvMD
- KpLnHnOTN/2TMSplxSapeozjuIxVnqyI6PnhWmrJWOLu5ueCzPa6hPfaulyKTZV1UmnVoP4qNqL
- xOSwEPQr3EGBqlqdzYk7s2bfSCoBtJty2me+xGpqtykmWH6Acvx6T2Ekca/nDZb5Hq8Rg0Jyajw
- wELmE58NgL54Jzkg2dReJBadhpASEaOmJYViQ3AeP60XlnMnI7vkdNeEoAQ/H3dHBPuIoJA0wDT
- 7AaHqH2d8DpK0HEZDKscg30QF1c=
-X-Received: by 2002:a05:6402:2109:b0:698:4501:3a8e with SMTP id
- 4fb4d7f45d1cf-69a910bd1ddmr314470a12.9.1783388015962; Mon, 06 Jul 2026
- 18:33:35 -0700 (PDT)
+ AHgh+RoEdB4go850aU7ASsQNtedYI9M4yxp5Vna7P56jVBGa7/sBBFiZwkRq/SwEtDauv9Up3S96oiqln/pJ@nongnu.org
+X-Gm-Message-State: AOJu0YwfhcnlJVzJS5oSi0PXfq/V/DgLI5mzcLpp6Gf5vfqB13JPS2cv
+ aInnqwt7TtLjRGLHp6/mBkmLtIpPJINX4uQU3GHtGnz6FEJi5CF7C/fv2P0efN4vV+ToFs7oo1j
+ Nnribj37SyYijGzzdAD3OEmwOtcrXQks=
+X-Gm-Gg: AfdE7cnuCVY43hl1eu94eB/e7m9F8i4v0LC62GkpR/geFTqRv8+dQXwqnvwJS/874XW
+ 8IA/iOa3HLmzX0IWGChWsNYqrkSL0d7mKq4tKIx/zmsN9n7VcD/f6qPPrTMurrXxW2jF1qegxUU
+ 4GdzEYg/wu4Bm5Q2xu/NK7XFBo2yoxcNryQbk7xfw6EEyg4mm0CDc71FngBLatZe5gIrYtPsUFO
+ pkojl5ukU5fffGV3oyV6CFI7uc4uYKyc6UqV43tB32JdBnCpnOeFV02I0mmC60jZdqagLRR5HDx
+ KvxIxVfq8SPd8jkmX/Xyo9bkm3M=
+X-Received: by 2002:a05:6402:11ce:b0:69a:9355:d1c2 with SMTP id
+ 4fb4d7f45d1cf-69a9355d291mr264738a12.42.1783397583237; Mon, 06 Jul 2026
+ 21:13:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260616190147.1286316-1-visitorckw@gmail.com>
- <20260616190147.1286316-6-visitorckw@gmail.com>
- <CAKmqyKMXyrtFeruxxsy2NNTeCeqQfkM4khYuWN+Qu9Zhb0ebMg@mail.gmail.com>
- <CACPK8Xes3v8zoq4d35vLCHe8hs71nP87nAmkgvyr6WOMj9s4Ew@mail.gmail.com>
- <akvruoEI-PbAJ9es@google.com>
-In-Reply-To: <akvruoEI-PbAJ9es@google.com>
+References: <CAKmqyKMhqavLeDj7fy-JpY8WGKO0m_o+94UMPX2sBK5Ldsid4w@mail.gmail.com>
+ <202607061406240161qB8UHkhWxKejNM4p23xn@zte.com.cn>
+In-Reply-To: <202607061406240161qB8UHkhWxKejNM4p23xn@zte.com.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 7 Jul 2026 11:33:08 +1000
-X-Gm-Features: AVVi8CdUEZlFG67WcexbHXU-8m2HfYnH6Ao4hJoWuIV6UTX8mcAiWmZmqo3hes0
-Message-ID: <CAKmqyKNDDuYnXxPo-gxJ=VWxwF1a5xJpgEZzdb3bCSxUE=ec-w@mail.gmail.com>
-Subject: Re: [PATCH v3 5/5] tests/qtest: Add qtest for Milk-V Duo board
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: Joel Stanley <joel@jms.id.au>, pbonzini@redhat.com,
- marcandre.lureau@redhat.com, 
- alistair.francis@wdc.com, farosas@suse.de, lvivier@redhat.com, 
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com, 
- jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, marscheng@google.com, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Date: Tue, 7 Jul 2026 14:12:36 +1000
+X-Gm-Features: AVVi8CdIZvwztsB195yDproBcHgCj89Lj2XvO0vTrsyLZQJdNZTRYUjiN4Ayd8w
+Message-ID: <CAKmqyKOp_SQkQF4i7BYxdGSPELCTBGymJrHGz4S2pWpvt3JUOw@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv/kvm: add extensions after v7.1-rc4 update
+To: wang.yechao255@zte.com.cn
+Cc: alistair.francis@wdc.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ palmer@dabbelt.com, liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com, 
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x536.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -128,175 +121,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 7, 2026 at 3:54=E2=80=AFAM Kuan-Wei Chiu <visitorckw@gmail.com>=
- wrote:
+On Mon, Jul 6, 2026 at 4:06=E2=80=AFPM <wang.yechao255@zte.com.cn> wrote:
 >
-> i Joel and Alistair,
->
-> On Wed, Jul 01, 2026 at 01:05:55PM +0930, Joel Stanley wrote:
-> > On Mon, 29 Jun 2026 at 11:21, Alistair Francis <alistair23@gmail.com> w=
-rote:
+> > On Mon, Jun 22, 2026 at 4:59=E2=80=AFPM Wang Yechao <wang.yechao255@zte=
+.com..cn> wrote:
 > > >
-> > > On Wed, Jun 17, 2026 at 5:04=E2=80=AFAM Kuan-Wei Chiu <visitorckw@gma=
-il.com> wrote:
-> > > >
-> > > > Add minimal qtest coverage for the Milk-V Duo machine to validate b=
-asic
-> > > > MMIO mapping and register access.
-> > > >
-> > > > Currently tested:
-> > > > - Verify DW8250 UART component version and type signatures.
-> > > > - Test read/write access to CV1800B clock bypass register.
-> > > >
-> > > > Tested with:
-> > > > $ meson test -C build -v qemu:qtest-riscv64/milkv-duo-test
-> > > > [...]
-> > > > Ok:                 1
-> > > > Fail:               0
-> > > >
-> > > > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> > > > ---
-> > > >  MAINTAINERS                  |  1 +
-> > > >  tests/qtest/meson.build      |  3 +-
-> > > >  tests/qtest/milkv-duo-test.c | 70 ++++++++++++++++++++++++++++++++=
-++++
-> > > >  3 files changed, 73 insertions(+), 1 deletion(-)
-> > > >  create mode 100644 tests/qtest/milkv-duo-test.c
-> > > >
-> > > > diff --git a/MAINTAINERS b/MAINTAINERS
-> > > > index e197dcb5b2..472513537f 100644
-> > > > --- a/MAINTAINERS
-> > > > +++ b/MAINTAINERS
-> > > > @@ -1807,6 +1807,7 @@ F: hw/riscv/milkv_duo.c
-> > > >  F: include/hw/char/dw8250.h
-> > > >  F: include/hw/misc/cv1800b_clk.h
-> > > >  F: include/hw/riscv/cv1800b.h
-> > > > +F: tests/qtest/milkv-duo-test.c
-> > > >
-> > > >  RX Machines
-> > > >  -----------
-> > > > diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> > > > index 4897325d84..38acbdc0c8 100644
-> > > > --- a/tests/qtest/meson.build
-> > > > +++ b/tests/qtest/meson.build
-> > > > @@ -293,7 +293,8 @@ qtests_riscv64 =3D ['riscv-csr-test'] + \
-> > > >    (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
-> > > >     config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
-> > > >     ['iommu-riscv-test'] : []) + \
-> > > > -  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] :=
- [])
-> > > > +  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] :=
- []) + \
-> > > > +   ['milkv-duo-test']
-> > > >
-> > > >  qos_test_ss =3D ss.source_set()
-> > > >  qos_test_ss.add(
-> > > > diff --git a/tests/qtest/milkv-duo-test.c b/tests/qtest/milkv-duo-t=
-est.c
-> > > > new file mode 100644
-> > > > index 0000000000..06064b8733
-> > > > --- /dev/null
-> > > > +++ b/tests/qtest/milkv-duo-test.c
-> > > > @@ -0,0 +1,70 @@
-> > > > +/*
-> > > > + * QTest for Milk-V Duo Board
-> > > > + *
-> > > > + * Copyright (c) 2026 Kuan-Wei Chiu <visitorckw@gmail.com>
-> > > > + *
-> > > > + * SPDX-License-Identifier: GPL-2.0-or-later
-> > > > + */
-> > > > +
-> > > > +#include "qemu/osdep.h"
-> > > > +#include "libqtest.h"
-> > > > +
-> > > > +#define CV1800B_CLK_BASE            0x03002000
-> > > > +#define CV1800B_CLK_BYPASS          0x030
-> > > > +#define CV1800B_CLK_BYPASS_RESET    0xFFFFFFFF
-> > > > +#define TEST_PATTERN_5A             0x5A5A5A5A
-> > > > +#define TEST_PATTERN_A5             0xA5A5A5A5
-> > > > +
-> > > > +#define CV1800B_UART0_BASE          0x04140000
-> > > > +#define DW_UART_UCV                 0xF8
-> > > > +#define DW_UART_CTR                 0xFC
-> > > > +#define DW_UART_VERSION_3_23A       0x3332332A
-> > > > +#define DW_UART_TYPE_SIGNATURE      0x44570110
-> > > > +
-> > > > +static void test_milkv_duo_uart(void)
-> > > > +{
-> > > > +    QTestState *qts;
-> > > > +    uint32_t component_version;
-> > > > +    uint32_t component_type;
-> > > > +
-> > > > +    qts =3D qtest_init("-M milkv-duo");
-> > > > +
-> > > > +    component_version =3D qtest_readl(qts, CV1800B_UART0_BASE + DW=
-_UART_UCV);
-> > > > +    g_assert_cmphex(component_version, =3D=3D, DW_UART_VERSION_3_2=
-3A);
-> > > > +
-> > > > +    component_type =3D qtest_readl(qts, CV1800B_UART0_BASE + DW_UA=
-RT_CTR);
-> > > > +    g_assert_cmphex(component_type, =3D=3D, DW_UART_TYPE_SIGNATURE=
-);
-> > > > +
-> > > > +    qtest_quit(qts);
-> > > > +}
-> > > > +
-> > > > +static void test_milkv_duo_clk(void)
-> > > > +{
-> > > > +    QTestState *qts;
-> > > > +    uint32_t clk_bypass_val;
-> > > > +
-> > > > +    qts =3D qtest_init("-M milkv-duo");
-> > > > +
-> > > > +    clk_bypass_val =3D qtest_readl(qts, CV1800B_CLK_BASE + CV1800B=
-_CLK_BYPASS);
-> > > > +    g_assert_cmphex(clk_bypass_val, =3D=3D, CV1800B_CLK_BYPASS_RES=
-ET);
-> > > > +
-> > > > +    qtest_writel(qts, CV1800B_CLK_BASE + CV1800B_CLK_BYPASS, TEST_=
-PATTERN_5A);
-> > > > +    clk_bypass_val =3D qtest_readl(qts, CV1800B_CLK_BASE + CV1800B=
-_CLK_BYPASS);
-> > > > +    g_assert_cmphex(clk_bypass_val, =3D=3D, TEST_PATTERN_5A);
-> > > > +
-> > > > +    qtest_writel(qts, CV1800B_CLK_BASE + CV1800B_CLK_BYPASS, TEST_=
-PATTERN_A5);
-> > > > +    clk_bypass_val =3D qtest_readl(qts, CV1800B_CLK_BASE + CV1800B=
-_CLK_BYPASS);
-> > > > +    g_assert_cmphex(clk_bypass_val, =3D=3D, TEST_PATTERN_A5);
-> > > > +
-> > > > +    qtest_quit(qts);
-> > > > +}
-> > > > +
-> > > > +int main(int argc, char **argv)
-> > > > +{
-> > > > +    g_test_init(&argc, &argv, NULL);
-> > > > +
-> > > > +    qtest_add_func("/riscv/milkv-duo/uart", test_milkv_duo_uart);
-> > > > +    qtest_add_func("/riscv/milkv-duo/clk", test_milkv_duo_clk);
+> > > Expose zilsd, zclsd and zalasr.
 > > >
-> > > Thanks for the tests. These are just checking some static values
-> > > though. Can you also add a boot test?
+> > > Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
+> > > Acked-by: Alistair Francis <alistair.francis@wdc.com>
 > >
-> > +1
+> > Thanks!
 > >
-> >  A functional test that exercises -bios -kernel -dtb, as well as the
-> > sd device would be great.
+> > Applied to riscv-to-apply.next
+> >
+> > Alistair
+> >
 >
-> I'll try to add the boot test.
->
-> I assume this means the test will need a way to fetch the kernel image
-> and dtb from somewhere. Would it be acceptable to host these files on
-> my personal github, or is there a more appropriate place I should
-> upload them to?
+> Hi Alistair, could you please confirm if this patch was applied to the
+> riscv-to-apply.next branch? I can't seem to find it.
 
-I think personal GitHub is fine, from memory that is what others do.
-If there is some official source that would be better though
+Oh sorry, it didn't get applied. It doesn't seem to apply to master or
+my branch though, are you able to rebase it
 
 Alistair
-
->
-> Regards,
-> Kuan-Wei
 
