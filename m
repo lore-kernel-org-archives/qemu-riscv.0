@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B27C43458
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jul 2026 16:19:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0253DC44501
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jul 2026 16:19:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1whUzP-000107-GM; Wed, 08 Jul 2026 12:19:11 -0400
+	id 1whUzU-00011t-OR; Wed, 08 Jul 2026 12:19:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1whUzO-0000zx-HZ
- for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 12:19:10 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1whUzT-00011O-43
+ for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 12:19:15 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1whUzM-0006ss-B3
- for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 12:19:10 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2caed617615so9214435ad.3
- for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 09:19:07 -0700 (PDT)
+ id 1whUzR-0006uf-Ks
+ for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 12:19:14 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2c7c61b5292so16977235ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 09:19:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1783527546; x=1784132346; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=5fqipkyWSeoyAFF1Lx9OCugXn/sgrEYvlKLpBmqiR3s=;
- b=TkOfuS1QNBXGhhBOWAl5c88NyEpgnKD2ptNz1xbsrogvxaY3LUr1h951aoAxMVJqaD
- XUBCmtOO/aQPZ2PVePX2t55KJ0H08JnSt9F2IoSbhx+MHW22rRV0ckUkJcEzydrIcapp
- 0yx8rJrhx9xKQ0EzP0acr+19agseRes/TC4+cLJixVs8ki4X61/0TrQUJi8GXkd9ntdo
- f9wFoZlYG9ofkdlYOMoCidliGBrNf5IcwFtXzQ/dnl9qfQS6csQtBQlxUfVJBZco/u+m
- PW4d9wtBmNjc4QwgdgcrvLiF0OAgTjBqLeBdsTtrVZ9XzXyb+nfgQ9Ut01+Bptopa31O
- xq2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783527546; x=1784132346;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=sifive.com; s=google; t=1783527552; x=1784132352; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=5fqipkyWSeoyAFF1Lx9OCugXn/sgrEYvlKLpBmqiR3s=;
- b=RrWa0MP1zKmd/HygWqx+UzTDiCFqNtdqiYttyp7aPqxPWwXMpR/+wfm1BpVsr7QTLI
- 93ha5T5vdeqIF4D5kiKsw8AcTln3VUP1jxrlUHD+RTVyB/b6v2BDMRE+hXjv/zf5EAUb
- ERw58Ju8AKbpLX6wyOr+mHxLenpJ1jZlQ6d8kpgHbvSPvDPWkReyNbCbHufHraM9S5Bi
- 8VTVsQYLYr1lmrPbrRzBOXyV650aF9tZkH9t+lBqwWKFHeboFKg9B1Qu3C/r2hF8+76V
- Eo6QjFJIVY2OJaIXkYzUTxooeuXHhzeHT5YrAw7nT3zxuAMp4UyAbmJ+2s3IZiEmdE4S
- 2LNg==
+ bh=wOTSrgzdmW81FbSSZ8dvQUirGsFshJAMK+kjjwsYBAg=;
+ b=GA/tMHgF4Pcv1EIfc8ce7hzA5W8ydLqqPWNj91QmS1QNA/eJneSYm2rjdv0zYQtNZI
+ rTl1hnlZQcBWAabvU5bOPtGtWnAvm25Y72J9vGYfeH0V9bKWmrnMKoRYw3SJmFwbDQpR
+ VrC42fDHNtVeGfAdBUK/XLJ1MJKq+VNEjAlyNs7MJ+adZwelu/qoCMhsEZxyK4nix/wp
+ HD/yVOqREXbL/nmCz87e4JAJSnU7QqrtlWsrfNosVUkq1yZqRZiryvZWZgGmV2RSmS1V
+ JY1Mr0s4pEOgs2RE6snI148MNpyAdndVqHMvevwnhr2mV/tGZwHt9ubecXPjTZOSYMBt
+ DLlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783527552; x=1784132352;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=wOTSrgzdmW81FbSSZ8dvQUirGsFshJAMK+kjjwsYBAg=;
+ b=c5LKy+T2N/u5eyF8I+8iOWl0rlWwK74vs5wxWdfiQrsJtfawxlBUXAPBUGGHBVp0U4
+ pleB1E1yunoA3eauh8A1aAcZEE1s7fv2Sr5OTk7LMIkf6sHVlLWgBHcnOIUgVz0AoPeU
+ u3vI+FueDzkGa1nxbalrQzNw/AF22HwoW+JMipGUeF0YbFn0PYPUgy/ppzSVeV09W75+
+ t6/5z37GtpjT9K3/yEFuIxVPfeMCLJE44GvRgIUTrwzeI7DCkOd43enpZzbVpdshFRuU
+ cQHd7CYszxrbPQOdqYSKKOpPOEWd6un/QcEi2Pf8bBCt9cU8Y6xMO6AC970Yg8cQOsGt
+ 66xg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqkk2VyhrjxU8DoSqQ69o72jjAsNktkLfkqVimOfL9Hw2C/UTUQvTiqNZ70nypYauBRe7YUeKhL0aFp@nongnu.org
-X-Gm-Message-State: AOJu0YxdL+nMCizNEcU6hrfAGs+7GIKiB07pvMLFMVuZZnm97NO8dOES
- DAgr+P6TQG6as1pPSijQWTL9OJ5F5C/w5F/h1pvmymo0nHvPZiByowRXvWA/ZvH3J0U=
-X-Gm-Gg: AfdE7cncSW9Zng0Z0FHPkCQJkFVxqxOMdTbWI+hXMKmg6Ha0GtwmH6ULnAJ554BHjRa
- uDDASBgQM9Zmwb7ot6ESy5/d6aYTz3DYUKJeCcg7TErQhbqffUO0SywypQVDnj4+Fz/FAWJ0Son
- UaVMRJUiLTaSJ4DafUoyOg/3G6a1swtlAykjZXKEcAkIcHiYaljaupd/zNB81WFp/UMwIx8tSuC
- uuYcAhfPt6oceO++sR3bUvy+54RCSTbPoyMkNEcsGYm8D09BLo10rQdYa5kGSM3s4/1YucIDDWk
- unZE0V+hohScd2A+hrfDyaJSbu0Z5t87SVgysp2RgEPuJ1jfMp6Axl9WC8e6z03mC8qlkbl1QQ2
- 7dpUpUzHsqK3GVjpjfCSVB7EuDKikzO8Pf5qulsatIb6X9BeA5vgek0RMpdNhnuWzGVkx0tjArk
- 5n/8taLgrm8qjYrehdcYEizuVQgPXtedNn25XfRNVxat3pKmTdGvC93P4EgDeKC+d1R/j1ru/B4
- duvDkF6bXIlNqlGnyZ+nYUL0x0=
-X-Received: by 2002:a17:902:db04:b0:2cc:ae2b:b6d2 with SMTP id
- d9443c01a7336-2ccea3c852dmr29581475ad.15.1783527546298; 
- Wed, 08 Jul 2026 09:19:06 -0700 (PDT)
+ AHgh+RrWgW+V0R3pqzYbq6M4Vlnd8SgqITgKyo0p8+oKcANtX64GFibkhjAD+v4nm6LE53+MZOlrZwA1/WK3@nongnu.org
+X-Gm-Message-State: AOJu0YzzgrTHglHxB47YppkEAkBtuDoVlTDllghde28D2H5WfBqn2Vem
+ TXjcmVxR7b6m4UVeJENxGQFqBCtfPCg6p4Ct4WIom0qKe8vqsJqt/uf1GYc/NvfdlyU=
+X-Gm-Gg: AfdE7ckqndxTThPTs1wEL84NauA/c4T6EwOJQ+aQkSWS5Hn/w9D0sb2zAM0jLoPztMu
+ soMs5fAQDCUI0Bin7LgBq0Q5kK3m/kwN2x1YkAR42ynYfWc9Q59z2aijWjiUxUBg129It3SrFjc
+ fRKaklXUb68llxRp0UjpPgkPNHORFc691jBv9qfsV6UBqHtZ5LLHnXK/O5b+/IFz64TH9eN+Zwb
+ c88kzVebuMcqAKaPgWois3cPs5l9ujdRLXf4wtfOH9KBQWM7Rgs+3fVdNaAsACV1D7ujEX1HxbZ
+ FF/PXM7xczpiyyuXSba6hP54exdQFUOkdZP6F/IA1OYYvAu5X4vyAsjKi7HgmKhXJV/eRFTFy0c
+ OEim1jAMmY+ReP+i5hmamhXfgmFLpbi/ef/lHr+vhIzU3oHjp2YUdmAEp00cX6wsFZVMEpmqfH2
+ QwKu/LlvX0OqzHm7cQ4ttkz1HVuACjXWmxJNBdjM5Y4YNWyUPf7pHhkTQmu3q8BYD+qMk5sEIqV
+ DuTtsX5D779TeuI
+X-Received: by 2002:a17:902:ecc4:b0:2c8:1c05:16bb with SMTP id
+ d9443c01a7336-2ccea3488damr31135865ad.24.1783527552282; 
+ Wed, 08 Jul 2026 09:19:12 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ccc9bdb56fsm30789265ad.15.2026.07.08.09.19.03
+ d9443c01a7336-2ccc9bdb56fsm30789265ad.15.2026.07.08.09.19.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 09:19:05 -0700 (PDT)
+ Wed, 08 Jul 2026 09:19:11 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -76,15 +77,18 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, Max Chou <max.chou@sifive.com>
-Subject: [PATCH v6 0/9] target/riscv: Add RISC-V Zvfofp8min extension support
-Date: Thu,  9 Jul 2026 00:18:50 +0800
-Message-ID: <20260708161859.1124848-1-max.chou@sifive.com>
+ Chao Liu <chao.liu.zevorn@gmail.com>, Max Chou <max.chou@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v6 2/9] target/riscv: rvv: Fix NOP_UU_B vs2 width
+Date: Thu,  9 Jul 2026 00:18:52 +0800
+Message-ID: <20260708161859.1124848-3-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260708161859.1124848-1-max.chou@sifive.com>
+References: <20260708161859.1124848-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,135 +111,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patchset adds support for the RISC-V Zvfofp8min ISA extension that
-provides conversion operations for OCP FP8 formats which provide the
-foundation for the future vector matrix extensions.
+Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ target/riscv/tcg/vector_helper.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Ratification status:
-- Zvfofp8min is currently v0.9 and is going through the RVIA ratification
-  process. This series tracks the v0.9 isa-manual tag below.
-- riscv-isa-manual tag:
-  https://github.com/riscv/riscv-isa-manual/releases/tag/zvfofp8min-0.9
-
-Zvfofp8min (v0.9):
-- The Zvfofp8min extension provides minimal vector conversion support for
-  the OFP8 formats. It requires the Zve32f extension and leverages the
-  altfmt field in the VTYPE CSR (introduced by Zvfbfa) to select between
-  E4M3 (altfmt=0) and E5M2 (altfmt=1) formats. Per the OCP FP8 spec and
-  the extension definition:
-  - Canonical NaN for both E4M3 and E5M2 is 0x7f.
-  - All NaNs are treated as quiet NaNs.
-  - Widening conversions are exact: no rounding and no exception flags.
-- These conversions are the data-movement primitives that feed and drain
-  the OFP8 vector/matrix compute pipeline.
-- The LLVM RISC-V backend emits these instructions as of LLVM 22.1.0:
-  https://releases.llvm.org/22.1.0/docs/ReleaseNotes.html#changes-to-the-risc-v-backend
-
-Instructions:
-  Extended (existing instructions taught to handle OFP8):
-  - vfwcvtbf16.f.f.v   : OFP8 to BF16 widening conversion
-  - vfncvtbf16.f.f.w   : BF16 to OFP8 narrowing conversion
-  New:
-  - vfncvtbf16.sat.f.f.w : BF16 to OFP8 narrowing with saturation
-  - vfncvt.f.f.q         : FP32 to OFP8 quad-width (4x) narrowing conversion
-  - vfncvt.sat.f.f.q     : FP32 to OFP8 quad-width narrowing with saturation
-
-Verification:
-- riscv-tests (fork https://github.com/riscv-software-src/riscv-tests):
-  https://github.com/rnax/riscv-tests/tree/dev/rnax/support_zvfofp8min
-  - Require LLVM 22.1.0
-    https://releases.llvm.org/22.1.0/docs/ReleaseNotes.html#changes-to-the-risc-v-backend
-  - Zvfofp8min test target: rv64uzvfofp8min/rv32uzvfofp8min
-  - Both Spike and QEMU applied this patchset could pass the riscv-tests
-
-References:
-- OCP FP8 specification:
-  https://www.opencompute.org/documents/ocp-8-bit-floating-point-specification-ofp8-revision-1-0-2023-12-01-pdf-1
-
-
-Changes in v6
-- Add patch 1 to fix the biased exponent write bug in the
-  parts_float_to_e5m2() saturate path. FloatParts64.exp holds an
-  unbiased exponent, so exp_bias must be subtracted when storing
-  the max-normal biased exponent value.
-- Initialize float_e4m3_nan_is_snan to false in riscv_cpu_reset_hold()
-  to ensure consistent NaN handling for OFP8 E4M3 operations.
-- Merge "Expose Zvfofp8min property" into "Add cfg property for
-  Zvfofp8min extension" to keep the property registration together
-  with the cfg field definition.
-- Fix indentation of cbo.* opcode table entries in the disas patch.
-- Rebase on riscv-to-apply.next (commit 267b5a2)
-
-Changes in v5
-- Drop Zvfofp4min which is not going through the RVIA ratification
-  process yet.
-- Fix typos.
-- Rebase on riscv-to-apply.next (commit bf76a00)
-
-Changes in v4
-- Rebase on riscv-to-apply.next (commit 21101a7)
-- Remove the softfloat library related patches (Thanks for RH's help to
-  split this part)
-- Add missing illegal ALTFMT SEW pattern checking for Zvfofp8min in
-  patch 4 (target/riscv: rvv: Make vfwcvtbf16.f.f.v support OFP8 to BF16
-  conversion for Zvfofp8min extension)
-
-Changes in v3
-- Add floatN_nan_is_snan to simply the quiet/signaling NaN checking flow
-  in patch 2 & 3
-- Add patch 4 to fix pseudo-NaN handling in FPATAN/FYL2XP1/FYL2X helpers
-
-Changes in v2
-- Merged v1 patch 2 & 3 to v2 patch 3, v1 patch 4 & 5 to v2 patch 4
-- Added new v2 patch 2 to refactor the IEEE format NaN classification
-  functions (float16, bfloat16, float32, float64) to use internal helper
-  functions, reducing code duplication and improving maintainability.
-  The OCP FP8 NaN classification functions follow the same pattern.
-- Refactored softfloat implementation to use capability-based FloatFmt
-  flags (no_infinity, limited_nan, overflow_raises_invalid, normal_frac_max)
-  instead of monolithic flags
-- Removed ocp_fp8e5m2_no_signal_nan and ocp_fp8_same_canonical_nan flags
-  from float_status; now using local float_status with no_signaling_nans
-  and default_nan_pattern for RISC-V Zvfofp8min instructions
-- Rebased on latest riscv-to-apply.next with zvfbfa v3 patchset
-
-v5: 20260427060928.2322570-1-max.chou@sifive.com
-v4: 20260304134006.2908449-1-max.chou@sifive.com
-v3: 20260204051756.667397-1-max.chou@sifive.com
-v2: 20260127063723.442734-1-max.chou@sifive.com
-v1: 20260108151650.16329-1-max.chou@sifive.com
-
-
-Max Chou (9):
-  fpu: Fix biased exponent write in parts_float_to_e5m2 saturate path
-  target/riscv: rvv: Fix NOP_UU_B vs2 width
-  target/riscv: Add cfg property for Zvfofp8min extension
-  target/riscv: Add implied rules for Zvfofp8min extension
-  target/riscv: rvv: Make vfwcvtbf16.f.f.v support OFP8 to BF16
-    conversion for Zvfofp8min extension
-  target/riscv: rvv: Make vfncvtbf16.f.f.w support BF16 to OFP8
-    conversion for Zvfofp8min extension
-  target/riscv: rvv: Add vfncvtbf16.sat.f.f.w instruction for Zvfofp8min
-    extension
-  target/riscv: rvv: Add vfncvt.f.f.q and vfncvt.sat.f.f.q instructions
-    for Zvfofp8min extension
-  disas/riscv: Add support of Zvfofp8min extension
-
- disas/riscv.c                                 |  19 ++-
- fpu/softfloat.c                               |   3 +-
- target/riscv/cpu.c                            |  13 +-
- target/riscv/cpu_cfg_fields.h.inc             |   1 +
- target/riscv/helper.h                         |  12 ++
- target/riscv/insn32.decode                    |   5 +
- .../riscv/tcg/insn_trans/trans_rvbf16.c.inc   |  32 +++--
- .../riscv/tcg/insn_trans/trans_rvofp8.c.inc   | 105 +++++++++++++++
- target/riscv/tcg/insn_trans/trans_rvv.c.inc   |  40 ++++++
- target/riscv/tcg/tcg-cpu.c                    |   5 +
- target/riscv/tcg/translate.c                  |   1 +
- target/riscv/tcg/vector_helper.c              | 120 +++++++++++++++++-
- 12 files changed, 338 insertions(+), 18 deletions(-)
- create mode 100644 target/riscv/tcg/insn_trans/trans_rvofp8.c.inc
-
+diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+index e321ca2616..944f176b74 100644
+--- a/target/riscv/tcg/vector_helper.c
++++ b/target/riscv/tcg/vector_helper.c
+@@ -5019,7 +5019,7 @@ GEN_VEXT_V_ENV(vfwcvtbf16_f_f_v, 4)
+ 
+ /* Narrowing Floating-Point/Integer Type-Convert Instructions */
+ /* (TD, T2, TX2) */
+-#define NOP_UU_B uint8_t,  uint16_t, uint32_t
++#define NOP_UU_B uint8_t,  uint16_t, uint16_t
+ #define NOP_UU_H uint16_t, uint32_t, uint32_t
+ #define NOP_UU_W uint32_t, uint64_t, uint64_t
+ /* vfncvt.xu.f.v vd, vs2, vm # Convert float to unsigned integer. */
 -- 
 2.55.0
 
