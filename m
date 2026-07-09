@@ -4,103 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCFAFC43458
-	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jul 2026 04:59:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F184FC43458
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jul 2026 05:23:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1whgqA-0003GI-L2; Thu, 09 Jul 2026 00:58:26 -0400
+	id 1whhEM-0002li-3x; Thu, 09 Jul 2026 01:23:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1whgq8-0003Fr-Vs
- for qemu-riscv@nongnu.org; Thu, 09 Jul 2026 00:58:24 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
+ id 1whhEI-0002kW-CF
+ for qemu-riscv@nongnu.org; Thu, 09 Jul 2026 01:23:23 -0400
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1whgq6-0002Oc-VU
- for qemu-riscv@nongnu.org; Thu, 09 Jul 2026 00:58:24 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-69532288224so916697a12.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 21:58:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783573098; cv=none;
+ id 1whhEF-0008MJ-AX
+ for qemu-riscv@nongnu.org; Thu, 09 Jul 2026 01:23:20 -0400
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-698aa7ba3e6so2715369a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 22:23:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783574596; cv=none;
  d=google.com; s=arc-20260327;
- b=VqRGaK6kmLjdbMFSCzSjvGEeDBkqcLKuZFrqQGCy3Y1F5XbP6j2WxREbEFqWPCVeJB
- JKPFAOIUbKR8QCHGlFRV7ONi620k2sHIeW9Z3kT2ZcyrOGezvUbnXD9ibw5RvIXmoVnE
- Dth5NPJ4j+VM/LWxnPqvqrbE88bqOe4G5WGATFOUr8/ZpqPYGLLjqXNAa23T8AldxvXx
- JOcpUdyd/wU75sKG1fb9tZw/YsoCD4A9wwtRxe4B64xBmJk3zOUc1NqV7ERtR/jByoCH
- /r8pyrCa9lXnFTG09kz+4hRG2tW35Xp7iKdIJOhFy9rTShbZJQQrgx9U9B9C3iNQ/u92
- xAvg==
+ b=SMQ2NFW4m/YMcV33tZnVq2BwiYiSTCFEzolykcknHlSYc9C3capf9NFQybY3g0jUk9
+ ypqgeY0N7XDjpVQQ0Y1JEKsjHwDQ8yxtCyfUkDVJAYFGXUnqE9kNYyVbE+CHziYP12fU
+ 19VreVvuBaVVjxWvsh6PIaDwEHa8mJTAkjNv6dsi4mimguZJuWxwnl+TM1KzC/debIUk
+ ARgkWnE9B3HsC245imzuiRuAWQoquxTEIsGCqZO2Ui15cvO0YmZVvO2pG5dLkkHdavcX
+ jureQGTIhNCdhTYyyJJTKSc2DyTEDsG3+alTfg9AtvMHgS3R30ZT925so3HabJAN66L+
+ XqEQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=6M7152Ey+cLEt8trzGQhwm7E7uUgPw9+yf5f13TRVxQ=;
- fh=MVktyZ6D9l1stU62AEnkHT5hRd7o+bvXOXgnDSQj4x0=;
- b=WfYnqcJlGrCjrjEHz7cBz8oiiwupU+arvNRjikdhWVW/eEpSVcIU5YkBbLUBFnbIlt
- 7o1TPzuqr5UY7rfeoeqXsLSzZqMeRErmcgIjWU7PHV+EpgwAniUCxnvjrwn8/2w3sCW6
- aYw7V5UsaIuU+GUJDY+GzKEiORyp0+eUXw76lwxlJ5w9sj8CMk/ZrRoqjo0UoXQU40JS
- 3aNOzb2NERS77u2u4fuGvT838tFsToZwupzcrGGUlhTomXMktUJjc7lL8OHmIcZtpi0g
- PDmbl8mAY/EgQ72A/krzOBcVs/uvVM+Mg9+s52KnwjU1XNbPuig+VCfvxeXaq4gzRVoP
- FfJw==; darn=nongnu.org
+ bh=xndrcRuhepZhzYUiBoWpSUf8i+jjiQ+COEmMXWTn91g=;
+ fh=NNlDQCVt2BDNcd4OWYb8wrMtLlBhyOi/Tt0G/9AhM8Y=;
+ b=nWePH72vfmK9Vhm7c+Xop4gTXpeKCobDfZ9V9sJhhHI3Vu8mTRi56H/s1LwpE9TTQo
+ /rj7z+d83nNZjLqV9qpB8Gto7w4Nv6Imz3uEbPGAf+7YxjegmupyAVqjm4Lc2e5CN1Hw
+ 8eEnChbkek6R+Z75gIklFOKjY48xZ77pkTHQF8T5dgZMFRTKaAmfV1ukkv32dNiHp0Ra
+ Oa0DiJroviB7CcZ7gdzxWwRqVVsqd8u5tqkPErrNKBUaN3UlnVawvVjuEojxVjvbaHXF
+ 1rW5Xieq7rjncqBGWu68uBRut8lSP89KnZJ9ps6cbQXsAJPw3te5I0my3AFC8vmTy+7O
+ 0FjQ==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783573098; x=1784177898; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1783574596; x=1784179396; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=6M7152Ey+cLEt8trzGQhwm7E7uUgPw9+yf5f13TRVxQ=;
- b=O5GwlWK+n5sB4tu95eA6RDoJqf7+Yt+xJmRkmbMBIlZL1k+5lVHw8eIKAXK7rKXZbP
- UCqw1CkuHv/cKLkLpmxS3FfMbD2gl5rXAanP1iSbKDlNJXJe3cOn1Sf58N1rNocPHR+E
- 7VmJHBAHuCEkIhITQ/dwtfs5OTedsOg5qTVAAAGYnIBoPoTPS3lqQOtxxPdFFWeQeKbO
- UpkSzXMZqyi1Df1px7EiqjUxtTCoRpEYKgL+KOtJTh+kg4FGH8w3anKHCjM0W7V9wmbj
- bCh29nFr0ghG3WbqKrGa0TH0nkPZlKpBn/QsT9m523A+efAaNQWiQmg84gNFZaXMFOGe
- 2s1w==
+ bh=xndrcRuhepZhzYUiBoWpSUf8i+jjiQ+COEmMXWTn91g=;
+ b=gZ7ctdaokGZQ1qEVGAST4QBsgY4SAzxx0yyzKNps4GfYLlZVkQNt74UKxWKEXisPRK
+ Nr5CM9nqsNIJx/pmaWXjKgtgCSehadHNCx8vA9Fsjbkebhh/fDXJIGwGs+2my5UBP/Ay
+ teAj9Bdw+IUODWmP5jaoDitlO/xQLq3CafAcuyPiec6vJAD5nNpdlzuDkFoDQhmdQcKN
+ W+WhJI/0S6jehn8KynDxdvOiNhnf2HfjtWgPQ8+vummBxIVBxLzH0em00vO61pFwicHa
+ KUEmtiKopk7Y/ENYg4gkWS+faK+jk+5PLXrlJ2QyRZijggppV8G6Be2ppLMDRMLPdq68
+ vu5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783573098; x=1784177898;
+ d=1e100.net; s=20251104; t=1783574596; x=1784179396;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=6M7152Ey+cLEt8trzGQhwm7E7uUgPw9+yf5f13TRVxQ=;
- b=iPjBclHF2VMZNWgMrYmA5l34GEywOkFhtljgJ8OXKGtwFpdt95o/wRF9cWvQivLV8J
- QTowuF1qocZwuzn1UfWmmEn8uza5XJkbiyG2uEH+CR2yxVKrPzGqHSGBkA80gWFUodjM
- OOe3qnaNbXOxa34FZVOdL3Swopr3pV0X0bB1OY/I89emhrqJks6x+4945OTvN7oW9EOP
- ST+zE8Z2PR/qtyxZa8xDunRqP+jcLRvQh/K/ufVQv3+Zl5uQty2Uee+QQI69O4ZdeqPf
- qZYyOgErjoghQOm9Hl6PJsUdWmoXSfLHlL8Ns4O244kwTBx4DY6nqhXglhBRmtcaiBi5
- fttQ==
+ bh=xndrcRuhepZhzYUiBoWpSUf8i+jjiQ+COEmMXWTn91g=;
+ b=rPLUkX5+yTtiHIES9yecKT9F78+4FRN9At5G4Afq5nD2R841C79aTIRYkhYhViNa8b
+ Va7kyMnO9IgxBbmKfa9FEVEGnYKD5FeR7v+ZafUJ48KRIDw2gaxdPoEgkr9B5aHjC6Bs
+ vcTHxyaC/oEMYDLiJy7eIpIAdB5Y8v4KcckXRpudCoU02JLHq9Kbo72M1INmvH03kdeS
+ 3K6iOwQMstd2m1QhhaCV4q31lV/oZznDeA/53NiTS6yj9F7qvjKM+wbTa40v671P/hvA
+ I/GPFC1jee/kTQg0p8sKQYCaW7AODVywtMYhtVqqo+gOmCMi91N7KtP/Q6BhFuLoRZi5
+ 3xdA==
 X-Forwarded-Encrypted: i=1;
- AHgh+RolzlDjHDD0wsTEswVeNkPYH+BkOpVbBcs4Z/lNBLi9ZB514C3N2OWf2dJfQn1jumgHvKvRH3ZlTv/h@nongnu.org
-X-Gm-Message-State: AOJu0YzZhsoftegky8iGVeRozRLoOduzufXovxVIPZNOXBsO74zZCJ+K
- TyEKrfNZ867qTHF23L8JmYFVFnGfcyujVec9Q1vu/tRVgNJvWuGjalm+IaA4gKfw047E4Gbz+t6
- Bdak8K8XLTSGvbh8rlHT7j9rjhyeZvjs=
-X-Gm-Gg: AfdE7cnWm08wAj+lMDSreJ9meZa92j+PumIWSxPGKGGHb1Rh9fGcqsEGF+rDZNixYaN
- ay9g9PZMSxKYIPdlke/u0GNDZkBnHcsY84k+GyJm7kmLotP9tAQfZbUVtPG4SdYI4Q+jhYMpuTr
- iK3K2jiDuR3EAiiorZWnqB/07VZJWgge2UGyfy6RM1zhF5UPOGTYIQI37xeFYt0mJQir5g3V4Pv
- FL+QDDY0RpxyLpKsntFLo1Nh/sHU5QjW+hkMeTNg7P0Tt2BzSDcvoKZM6AGQFz83QpHEMp1HaVD
- qtLP4ckMoTCCHBQFzHA4IALrgP0n/ebD54N81A==
-X-Received: by 2002:a05:6402:320c:b0:698:b9ca:e662 with SMTP id
- 4fb4d7f45d1cf-69ab4453bb1mr2302494a12.6.1783573097867; Wed, 08 Jul 2026
- 21:58:17 -0700 (PDT)
+ AHgh+RoR5XrnE6rjOI+2N10vhU18F017n9tjmdCGYL8wzmtC7BeCH1bNF8cXtzeunRUQZBFybdqiSASs0Jaj@nongnu.org
+X-Gm-Message-State: AOJu0YwyqjZi/yCW4bda8Xx7EuGn8jSTqrVUwWRWSfjZy7iFqrazzc59
+ uS/U6Jtm0delT186/n7dGYBjR4Ec6KqlC4uiOQ2WCXyUVJnsA5KqBLJFmB6I1hfkBagtSbh67KV
+ XLDXv1ReAvHtK8iLGOkt4UY4PJ1jczU0=
+X-Gm-Gg: AfdE7cmkSNNINgoaTlVZj9QdL4NINPu8X/aOngCEn/Zzc0qpOqD1vJ9WwOtRxl1zZ78
+ rW0KzG1+H1/qDbomRv9brKG5WOEC8AdFyNaBXxcr86awvwle0GF0IxZDuOYxem9awAg1VRL/T3B
+ ZctgGGt4dPw1t4o76LAqJiQ3ksqCdlEYjWEMc+FLzvrdm3iNK6s+vcMXedUDUJJheFNzB0HOWQE
+ WPcVo4URWlLSM7M4Ppwg8MUfAgvVxRZk7cryHGK4arKyQujgxHe4QJX1ceg6fRHDIaObd+wyiDq
+ HEUko/YvrK/1EbZ/iBEVNM4Syn1Lm/DsNJ+Dyg==
+X-Received: by 2002:a05:6402:268d:b0:698:9251:2f72 with SMTP id
+ 4fb4d7f45d1cf-69ab44b563bmr2402766a12.35.1783574595411; Wed, 08 Jul 2026
+ 22:23:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260707091039.2574638-1-frank.chang@sifive.com>
-In-Reply-To: <20260707091039.2574638-1-frank.chang@sifive.com>
+References: <20260511124828.3210477-1-vulab@iscas.ac.cn>
+ <bcc0aaa1-8d1c-4f52-a681-85bc903c8d66@tls.msk.ru>
+ <6e42ecc1026a057e07e73386463bd57e1467a46f.camel@wdc.com>
+ <bf46f39c-6173-4cfd-b374-63529892a1fb@tls.msk.ru>
+ <87ecix59j9.fsf@suse.de> <da24799f-dd23-49b6-8e7f-65d757721d3d@tls.msk.ru>
+In-Reply-To: <da24799f-dd23-49b6-8e7f-65d757721d3d@tls.msk.ru>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 9 Jul 2026 14:57:51 +1000
-X-Gm-Features: AUfX_myY6X8vr7HbYLrAXMhBWylHKAwonF1jcsVNDJOdMVgSaySvkcpL-cA3kWc
-Message-ID: <CAKmqyKNVo-rdOtN0t9XzRB3teF6nNEgh_twkf9s8zX2q0dPU=w@mail.gmail.com>
-Subject: Re: [PATCH v4 0/6] target/riscv: Support the true Zicclsm extension
-To: frank.chang@sifive.com
-Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>, 
- "open list:SiFive Machines" <qemu-riscv@nongnu.org>
+Date: Thu, 9 Jul 2026 15:22:47 +1000
+X-Gm-Features: AUfX_mxGYHk7g7UScX8Vc2vmOqesUdLNCoKIBD18idkhq0-NKDEREsFLgvka2wE
+Message-ID: <CAKmqyKNmb1J86B1TXqZ8xK8=4Q0VoUBUSWcoc6QSis+7nFv2Cg@mail.gmail.com>
+Subject: Re: [PATCH v1] target/riscv: Add mseccfg to VMStateDescription
+To: Michael Tokarev <mjt@tls.msk.ru>
+Cc: Fabiano Rosas <farosas@suse.de>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Zishun Yi <vulab@iscas.ac.cn>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-stable@nongnu.org" <qemu-stable@nongnu.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
+ Peter Xu <peterx@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -108,7 +112,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,90 +128,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 7, 2026 at 7:11=E2=80=AFPM <frank.chang@sifive.com> wrote:
+On Fri, May 29, 2026 at 5:44=E2=80=AFPM Michael Tokarev <mjt@tls.msk.ru> wr=
+ote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> [Trimmed the Cc list a bit]
 >
-> Support the true Zicclsm extension so that we can trap misaligned accesse=
-s
-> when Zicclsm is disabled.
+> On 27.05.2026 15:20, Fabiano Rosas wrote:
 >
-> To enable/disable Zicclsm, simply set zicclsm=3D[true|false], e.g.:
->   -cpu rv64,zicclsm=3D[true|false]
+> > There are no migration compatibility guarantees for an unversioned
+> > machine type. Only migration and snapshots from same-version QEMUs are
+> > expected to work in this case. Other scenarios may or may not work.
+> ..
+> >
+> > The addition from this patch is in a subsection, so .needed will
+> > determine whether it will be put on the stream. If we backport the
+> > change, then the stable QEMU build will (likely) start sending this
+> > subsection, which the old, non-stable QEMU will not recognize and
+> > migration will fail. Migration from stable-stable would likely work.
+> >
+> > So any stable versions that (would) contain this patch are likely to
+> > block migration from that version into an unpatched QEMU.
+> >
+> > Note that since the machine is unversioned, migration from QEMU x to
+> > QEMU x+1 is already prone to being broken.
+
+Sorry, I forgot to reply to this one.
+
+Yep, that's fine. AFAIK no one expects this to work, so we are still
+avoiding adding versioned machines.
+
 >
-> QEMU will raise a misaligned load/store exception when executing misalign=
-ed
-> load/store instructions if Zicclsm is disabled.
+> Yeah, this was my understanding too.
 >
-> Changelog:
->   v4:
->     * Align ROM reset vector data at 8-byte aligned offsets.
->   v3:
->     * Enable Zicclsm for the compatible CPUs.
->     * Rebase to the latest riscv-to-apply.next.
->   v2:
->     * Use (size_memop(size) | mo_endian_env(env)) to calculate MemOp.
->     * Use (log2_esz << MO_ASHIFT) to calculate aligment MemOp for
->       vector load/store whole register instructions.
+> And given all the above, I think we should apply the fixes to the
+> stable series, and treat this as changing version (the version is
+> actually changed, but only the minor version).  Yes, the VMs wont
+> be migratable between 10.0.9 and 10.0.10, exactly like it was
+> not-migratable between 10.0.x and 10.1.x.  Because basically, with
+> no versioned machines, there's basically no migration capability
+> between different qemus *at all*.
 >
-> Frank Chang (6):
->   target/riscv: Add Zicclsm CPU option
->   target/riscv: Support raising misaligned exceptions for scalar
->     loads/stores
->   target/riscv: Support raising misaligned exceptions for vector
->     loads/stores
->   target/riscv: Enable Zicclsm for the compatible CPUs
->   hw/riscv: sifive_u: Align ROM reset vector data
->   target/riscv: Update Zicclsm ISA string and expose it as a CPU
->     property
+> When we do have versioned machines, we can't add fields to previous
+> versions anymore, exactly because of the migration guarantees.  But
+> as long as we don't, there's no guarantees at all.  And the only
+> place where migration can be done is between different hosts with
+> the same qemu versions.
+>
+> The above description leaves one question still.  What happens when
+> migrating from unpatched qemu to a patched qemu?  Will the migration
+> fail due to missing field, or succeed, making the missing field to
+> have a default value?
+>
+> If it will succeed, then we definitely should add the field to fix
+> the original issue.
+>
+> BTW, can't we just skip, at the receive end, fields we don't know about?
+>
+> But all this is.. well... sort of moot for this very change already.
+>
+> I haven't realized that this discussion is about a change which I
+> *already* applied (I wanted to revert it until this question settles,
+> but I forgot to do that!).  And meanwhile, I released the next set
+> of stable qemu releases, with the changes in question (two of them)
+> applied.  It wasn't my intention (or else I'd not start this
+> discussion in the first place, obviously).
+>
+> So we do have this migration breakage already, "thanks" to my sloppiness.
+>
+> And I don't want to break things for users for no reason.  The original
+> issue were described as a security issue even, so there's a reason to
+> fix it.  I think.
+>
+> But in the future I'll try to be more careful about such things.
+> Again, understanding the machinery and consequences helps here too.
 
-Hmmm.... Still seeing failures
-
-556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi
-               TIMEOUT         90.02s   killed by signal 15 SIGTERM
->>> LD_LIBRARY_PATH=3D/var/mnt/scratch/alistair/software/qemu/build/contrib=
-/plugins:/var/mnt/scratch/alistair/software/qemu/build/tests/tcg/plugins MS=
-AN_OPTIO
-NS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:print_stacktrac=
-e=3D1
-QEMU_TEST_QEMU_BINARY=3D/var/mnt/scratch/alistair/software/qemu/build/qemu-=
-system-riscv
-64 RUST_BACKTRACE=3D1
-MESON_BUILD_ROOT=3D/var/mnt/scratch/alistair/software/qemu/build
-UBSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:prin=
-t_stac
-ktrace=3D1 ASAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summar=
-y=3D1
-MESON_TEST_ITERATION=3D1 MALLOC_PERTURB_=3D7
-QEMU_TEST_QEMU_IMG=3D/var/mnt/scratch/alistair
-/software/qemu/build/qemu-img QEMU_TEST_GDB=3D/usr/bin/gdb
-PYTHONPATH=3D/var/mnt/scratch/alistair/software/qemu/python:/var/mnt/scratc=
-h/alistair/software/qemu/t
-ests/functional
-/var/mnt/scratch/alistair/software/qemu/build/pyvenv/bin/python3
-/var/mnt/scratch/alistair/software/qemu/tests/functional/riscv64/test_opens
-bi.py
-
-
-Summary of Failures:
-
-556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi
-      TIMEOUT         90.02s   killed by signal 15 SIGTERM
-
+That's much more my fault than yours. I nominated it for inclusion. It
+does sound like in future including breaking migration changes like
+this is ok though
 
 Alistair
-
->
->  hw/riscv/sifive_u.c                     | 11 +++--
->  target/riscv/cpu.c                      |  9 +++-
->  target/riscv/cpu_cfg_fields.h.inc       |  2 +
->  target/riscv/insn_trans/trans_rvi.c.inc |  6 +++
->  target/riscv/insn_trans/trans_rvv.c.inc | 18 +++++--
->  target/riscv/vector_helper.c            | 65 +++++++++++++++++++------
->  6 files changed, 87 insertions(+), 24 deletions(-)
->
-> --
-> 2.43.0
->
->
 
