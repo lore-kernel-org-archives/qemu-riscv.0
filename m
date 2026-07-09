@@ -4,113 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FDF6C43458
-	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jul 2026 04:11:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E60EC43458
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jul 2026 04:32:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1whg5r-0007cy-8s; Thu, 09 Jul 2026 00:10:36 -0400
+	id 1whgQn-0003Dj-O6; Thu, 09 Jul 2026 00:32:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1whg5i-0007cU-M2
- for qemu-riscv@nongnu.org; Thu, 09 Jul 2026 00:10:26 -0400
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
+ id 1whfCD-0005PO-BV
+ for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 23:13:05 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1whg5h-00055X-44
- for qemu-riscv@nongnu.org; Thu, 09 Jul 2026 00:10:26 -0400
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-697564cb69eso2469246a12.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 21:10:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783570223; cv=none;
- d=google.com; s=arc-20260327;
- b=bzPuOOUWteylt6A+vZwXC64dVsnis4VCesdnwGBVPS4bMB/W1ETM1nzq2E+CR8RvsF
- /0WJo24j2gzh5kpXgsnKkFPrru6QoTQ3tbJAVMO5AEnWKjm5HMIduOjxoF1icGRT/XfL
- x/j2ePq3Z3iU9AwnaEKJI47qaWB+2GJY47WTzv2G8f0oVcLCZUghXRcjF168vMDirQTH
- j5jB2nZpxnJm/klpQK3bK16/RNMeAoqg09HQkERbBUiJjielK/4cHtWnE/Q3HXgPUoNf
- keR0kssCzJmS7UQ2l5MMiIj9vJqKB8XXssQCElAC2jqtadWwNEUHiekiURlqcyQnfKVh
- n2Ag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=dpzQuBKyGdg5EcK/lIOSzea7B50CLOo74uMhRoPTEKY=;
- fh=LEtyp+mR7OZgdbeAS2zUcrhyNFnLCfAr1MeUloQMbfs=;
- b=bEGMJDvrRIMq48lGnz6tFZP485vEvrfcebgeAyz0zQqbJsbQVX62liGL7HdkoO5Re5
- QCfe2twbI9okJCdYLfvaW71RANuHTZOAJEsz3irs7+nAODZ8JfKzu6iZMpywNCAeLgFw
- O4rYTvdzRnb/103w2Ix8FMtdjOjp/bzFvPj3Bkcu3ferfXTYWM3LcTLXuNDLL0RXaSsK
- i6NEcLFxoQIRQWMpW+O8AjgTQQHUotrGaf6ZKMzD63+rG3iVPo5cBKfDRYQAfQ2c2PwP
- 7rYGA6xehsDfdIo8ClWsReEkAuwyf6zFUPD+GF9Aleomo+fU7qtO9PjjSUphA4FMRtTy
- CZJQ==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
+ id 1whfCB-0005yY-OZ
+ for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 23:13:05 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-381216921aaso453758a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 20:13:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783570223; x=1784175023; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=dpzQuBKyGdg5EcK/lIOSzea7B50CLOo74uMhRoPTEKY=;
- b=ABpHFd3gWVskojeKH/qJEof8c8Ntwr1IL03Kx77UFg6OH5ZGoelX1D25TOzgPmbY/x
- z7Irn9uwU29FIzurWjQbN/AsiysM0Stgy134DEos+6GTVabu5s2vtePbzZpRwg7vS5kx
- TdaAsYAE6ka8rNvICD+oujrjDuAWiIvlSCHmKaqWDbGJQd0xvsJe2OzWQ7xx7+cXbYpM
- bkvQsyOnZ3Vl2Tc3FaVQptH7MTqIHrYDyQKTG5GUcDve15hva/TDBN68HfpD58OJlutc
- w2a1phZx2H0cBioVWN2WjrcjVe2GSdv5lpM5sJfA4tp8hiIaekrVEWlnCYRiv1JubeQT
- s4tw==
+ d=gmail.com; s=20251104; t=1783566782; x=1784171582; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=dOlaHkDVo2fS7llYKd3HgpxhrbHqdexVmAk0QASwx1Q=;
+ b=BcCY2DkE7J5aEUhCBbYwc4I1T2dDyuO2OOLLDG1P+HqtpzxS/te9dEcqUesCpRh0s0
+ xuflX1kyo6m/97qcL8cLwq8hghIPRPLhLsTWwRf2H0ZM8J4EmSSgCEHyCUufVXSrGwaj
+ hYOuyeXdixLYc3u6XWkHLDrMfL8V3lgE04nYFbeNFd+tonEiyvEgrRf61DwWkvwbYoDn
+ HiDfGPfWgnVjTpcFGZGQX4fOWu/TXnUlEgvBEy7+FTspjD59/5GzAifZx+CwKyVP0ZjS
+ yNz66iGoL3Jo60ls/iopkVPSjbOor0OTRYkXSRfiGHbe96k+mzP/k7RDO0wbBkdobSJQ
+ mKuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783570223; x=1784175023;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=dpzQuBKyGdg5EcK/lIOSzea7B50CLOo74uMhRoPTEKY=;
- b=GcpEBU0yXR8kRNTA/JG3JrvS5DnBCKn98J4hBg4a9wPYL2EtkXbvxB/sXrs+HE5M7g
- Fgaz0SxfK0qmM8eHW5HB+fWvgi8asC4gs2U6AQNevoJ66k0AL7XzlIsc9GhE9C91YuJ2
- HfBlCqte1nrS7UxPgDekondpv0zi9skseH+B3sfRuCgs9agyCsq/EXq/K/faDI/Lnk8I
- jQshDMzNfHjwfAbW2siT1nZNlLvt3vfJizhcVj9jDDGTuFL+J7dKwr4STATt8Ehrezyv
- 37AIXnYoo56hvkyC4K1et2nyuESP/HHkPoVdxt/riG+BqitdQLpuFxId4sTaIC64JMq4
- OJeg==
+ d=1e100.net; s=20251104; t=1783566782; x=1784171582;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=dOlaHkDVo2fS7llYKd3HgpxhrbHqdexVmAk0QASwx1Q=;
+ b=nrKAuBejnYYih1MdiDSX+4k/3rxJgREW5q7nJwHjHX7lJ+IN9JdDgZokJPbz+mCOzw
+ 4A/CDNzPMgBCHvWBEJVWcagQw36D10o2c5kTah17nx7mkE7XNily3O6+Zp5cr7MRERLI
+ Jhj0SMb90qalUkWrBPl2XzNySDL9eSIocJ3Z/Cieu2CQqEl2oM/ri7Vmk6hIUCahJxQJ
+ LCviGhSQPD02qqpnw+6q8pw5KA6RDZ6Ri3Gcgyq08UC0k+PWdM8vsSB3ciC4pERkSozp
+ qbj8ddZ1E3/gFpWGHgzQwpfImF7wWV/YmVFSrQaHeBUvR8/u38/mOcvT3QUbe5osRVZr
+ FuMw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rrw1nOsDsMO8ESi8ItcMHHtfMVD7Bm6hudWfyd3oeGQuJHWgDtF3g7zWdYSMGaEBzhH7bMgYSSc9Wiu@nongnu.org
-X-Gm-Message-State: AOJu0Yxfpkt5Qs/1nbF+E9K61JynorCgVd+49iBpvf2wnkyPQ7cu6Ogu
- LBhGO9/HJvmzE6G7ODriTH/DwaJTouN3x6BTNjXK/VNbQ0hv8tPNnfBe3E7d0cqA9nPwQZPl0zm
- tlFZzveuv9rQEsisiuq6kzqGUnO9oceE=
-X-Gm-Gg: AfdE7cnXtvXpgSnBDWtJH8j49VBVzIDrJtvx+iRgPd1jkNMOFmJplTwA6YC7jyzGqma
- L0KrWq3WLjvwprkFCYBkhd2oHitaeSCGJs5r8VIic0AdSnEudR+6eIwmBNYLeVfmri34owRU2V4
- kFAGR8YxMxwwCGbJCPn2oio5y26OxQdoNfO+TQukO8XOtRuaJO6k+RCpd0pvrejqpn2nARjpDj1
- 1Wv0nK6D6hjsLHtz+1gJaaRL48lpzeJtI8wFYM3uc37C4OGWNFIpO3J2+BmR7mcDxfa+tgOMo7X
- q4G8oYi+bhr7I1n4YYzS/iT4rOo=
-X-Received: by 2002:a05:6402:254a:b0:69a:b407:608a with SMTP id
- 4fb4d7f45d1cf-69ab445e328mr2227138a12.3.1783570223381; Wed, 08 Jul 2026
- 21:10:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260707072610.403595-1-wang.yechao255@zte.com.cn>
-In-Reply-To: <20260707072610.403595-1-wang.yechao255@zte.com.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 9 Jul 2026 14:09:57 +1000
-X-Gm-Features: AUfX_mwdaBMqu56Uw8Ay-i_wFnOSfuIB1K14iz-k3Og_8gQfzi-ILVJEDpEmC5E
-Message-ID: <CAKmqyKMkMsAiAetyZ2Rcs3vrkOfiJGfzVTOSAp2G9aMQG2DcGw@mail.gmail.com>
-Subject: Re: [PATCH v2 RESEND] target/riscv/kvm: add extensions after v7.1-rc4
- update
-To: Wang Yechao <wang.yechao255@zte.com.cn>
-Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
+ AHgh+RpH/TQRZbRuPZVB3Yvd+jrPCydRfSmbTNMsLyUdBlx4eS/op2RKQ/rUiqSVK+Gekfv3dpKDvKBYS3VZ@nongnu.org
+X-Gm-Message-State: AOJu0YwC0MMSS80KTy3HNcTNrDPhbDxXGAqSBIrptVJuX2nzIot7WUoG
+ w16iqF7XKhS9v/Lf4WMP7Lfm2c3uHcJP/wmHGbDLJUrT5VPg7lRu4BxWMb9pX908
+X-Gm-Gg: AfdE7cmJTsQWx328i+QSVTEeimQ39vqroBHI7mAHlW7KiMFbpVTGF3PvI3UL84d7Yrs
+ M6AMZtNXGh77bO2Gcw4PnTiD265aMpiVqsnVcuWfypMsizbVjHk74kzITEiX5u0IBod+FjzHQuo
+ uEfJkiUqOhY5dddQPZ50lhf4OQSAhBk9B+NMwwbT5Tl/a6IXLZ/k8quiRz2CkudijX7LUSlcX3v
+ Ut+RsrihAsjzKz0YnYXqZG/1LujhKtjNcOqsfDYjS0diPwH9UK426qKP9aa73z+8klxWJIrFaut
+ Z6JYYoFpWS26pP47CrpqQFyK2aSjKh+GJ2RqjXepnbIZqwUQ+gyk1n9pX828a4VN91V11zjcdMH
+ SGTWEbCry4scSmU56nevC2m4E0/1aCH5qTKY5vHqy0qdAnkGIVVMr5tgvUoH9wupXn0FrSzckTc
+ qGtX54zF1aTlxxuIXz8fujNiXKbjJo
+X-Received: by 2002:a17:90b:4b86:b0:381:610b:e77d with SMTP id
+ 98e67ed59e1d1-38941cc4c9cmr5085387a91.29.1783566782424; 
+ Wed, 08 Jul 2026 20:13:02 -0700 (PDT)
+Received: from localhost.localdomain ([212.135.212.213])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-38a5516949asm392988a91.1.2026.07.08.20.12.59
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 08 Jul 2026 20:13:01 -0700 (PDT)
+From: jack wang <163wangjack@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Jack Wang <163wangjack@gmail.com>, Chao Liu <chao.liu.zevorn@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu.zevorn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52a.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:K230 Machines)
+Subject: [RFC PATCH 2/2] hw/riscv/k230: wire up the RMU device
+Date: Thu,  9 Jul 2026 11:12:37 +0800
+Message-ID: <20260709031237.21284-3-163wangjack@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260709031237.21284-1-163wangjack@gmail.com>
+References: <20260709031237.21284-1-163wangjack@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=163wangjack@gmail.com; helo=mail-pj1-x1031.google.com
+X-Spam_score_int: -13
+X-Spam_score: -1.4
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 09 Jul 2026 00:32:08 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -125,45 +109,98 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jul 7, 2026 at 5:28=E2=80=AFPM Wang Yechao <wang.yechao255@zte.com.=
-cn> wrote:
->
-> Expose zilsd, zclsd and zalasr.
->
-> Signed-off-by: Wang Yechao <wang.yechao255@zte.com.cn>
+From: Jack Wang <163wangjack@gmail.com>
 
-Thanks!
+Replace the "rmu" create_unimplemented_device() stub with a real
+K230RmuState instance mapped at the K230_DEV_RMU memmap entry, select
+K230_RMU from the K230 Kconfig, and document the device.
 
-Applied to riscv-to-apply.next
+Closes: gevico/qemu-camp-2026-k230#11
+Signed-off-by: Jack Wang <163wangjack@gmail.com>
+---
+ docs/system/riscv/k230.rst |  1 +
+ hw/riscv/Kconfig           |  1 +
+ hw/riscv/k230.c            | 10 +++++++---
+ include/hw/riscv/k230.h    |  2 ++
+ 4 files changed, 11 insertions(+), 3 deletions(-)
 
-Alistair
+diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
+index cea8202e55..3f2313a127 100644
+--- a/docs/system/riscv/k230.rst
++++ b/docs/system/riscv/k230.rst
+@@ -19,6 +19,7 @@ The ``k230`` machine supports the following devices:
+ * Core Local Interruptor (CLINT)
+ * Platform-Level Interrupt Controller (PLIC)
+ * 2 K230 Watchdog Timer
++* K230 Reset Management Unit (RMU)
+ * 5 UART
+ 
+ Boot options
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 54e41a6afc..bffa4e69c8 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -149,3 +149,4 @@ config K230
+     select SERIAL_MM
+     select UNIMP
+     select K230_WDT
++    select K230_RMU
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 502281c52c..b55e90c0d2 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -110,6 +110,7 @@ static void k230_soc_init(Object *obj)
+     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
+     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
+     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
++    object_initialize_child(obj, "k230-rmu",  &s->rmu,    TYPE_K230_RMU);
+ 
+     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
+@@ -206,6 +207,12 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
+                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
+ 
++    /* RMU (reset management unit) */
++    if (!sysbus_realize(SYS_BUS_DEVICE(&s->rmu), errp)) {
++        return;
++    }
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->rmu), 0, memmap[K230_DEV_RMU].base);
++
+     /* unimplemented devices */
+     create_unimplemented_device("kpu.l2-cache",
+                                 memmap[K230_DEV_KPU_L2_CACHE].base,
+@@ -268,9 +275,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     create_unimplemented_device("cmu", memmap[K230_DEV_CMU].base,
+                                 memmap[K230_DEV_CMU].size);
+ 
+-    create_unimplemented_device("rmu", memmap[K230_DEV_RMU].base,
+-                                memmap[K230_DEV_RMU].size);
+-
+     create_unimplemented_device("boot", memmap[K230_DEV_BOOT].base,
+                                 memmap[K230_DEV_BOOT].size);
+ 
+diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+index 592e1c26bf..13f2a1ab0b 100644
+--- a/include/hw/riscv/k230.h
++++ b/include/hw/riscv/k230.h
+@@ -18,6 +18,7 @@
+ #include "hw/core/boards.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/watchdog/k230_wdt.h"
++#include "hw/misc/k230_rmu.h"
+ 
+ #define C908_CPU_HARTID   (0)
+ 
+@@ -33,6 +34,7 @@ typedef struct K230SoCState {
+     RISCVHartArrayState c908_cpu; /* Small core */
+ 
+     K230WdtState wdt[2];
++    K230RmuState rmu;
+     MemoryRegion sram;
+     MemoryRegion bootrom;
+ 
+-- 
+2.53.0
 
-> ---
->  target/riscv/kvm/kvm-cpu.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index dcdaf7f2b3..e2c6a4b3aa 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -303,10 +303,13 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] =3D {
->      KVM_EXT_CFG("zihintntl", ext_zihintntl, KVM_RISCV_ISA_EXT_ZIHINTNTL)=
-,
->      KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHINT=
-PAUSE),
->      KVM_EXT_CFG("zihpm", ext_zihpm, KVM_RISCV_ISA_EXT_ZIHPM),
-> +    KVM_EXT_CFG("zilsd", ext_zilsd, KVM_RISCV_ISA_EXT_ZILSD),
->      KVM_EXT_CFG("zimop", ext_zimop, KVM_RISCV_ISA_EXT_ZIMOP),
->      KVM_EXT_CFG("zcmop", ext_zcmop, KVM_RISCV_ISA_EXT_ZCMOP),
-> +    KVM_EXT_CFG("zclsd", ext_zclsd, KVM_RISCV_ISA_EXT_ZCLSD),
->      KVM_EXT_CFG("zabha", ext_zabha, KVM_RISCV_ISA_EXT_ZABHA),
->      KVM_EXT_CFG("zacas", ext_zacas, KVM_RISCV_ISA_EXT_ZACAS),
-> +    KVM_EXT_CFG("zalasr", ext_zalasr, KVM_RISCV_ISA_EXT_ZALASR),
->      KVM_EXT_CFG("zawrs", ext_zawrs, KVM_RISCV_ISA_EXT_ZAWRS),
->      KVM_EXT_CFG("zfa", ext_zfa, KVM_RISCV_ISA_EXT_ZFA),
->      KVM_EXT_CFG("zfbfmin", ext_zfbfmin, KVM_RISCV_ISA_EXT_ZFBFMIN),
-> --
-> 2.27.0
->
->
 
