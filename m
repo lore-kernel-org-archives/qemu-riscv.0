@@ -4,97 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E60EC43458
-	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jul 2026 04:32:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCFAFC43458
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jul 2026 04:59:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1whgQn-0003Dj-O6; Thu, 09 Jul 2026 00:32:15 -0400
+	id 1whgqA-0003GI-L2; Thu, 09 Jul 2026 00:58:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
- id 1whfCD-0005PO-BV
- for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 23:13:05 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1whgq8-0003Fr-Vs
+ for qemu-riscv@nongnu.org; Thu, 09 Jul 2026 00:58:24 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
- id 1whfCB-0005yY-OZ
- for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 23:13:05 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-381216921aaso453758a91.1
- for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 20:13:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1whgq6-0002Oc-VU
+ for qemu-riscv@nongnu.org; Thu, 09 Jul 2026 00:58:24 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-69532288224so916697a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 21:58:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783573098; cv=none;
+ d=google.com; s=arc-20260327;
+ b=VqRGaK6kmLjdbMFSCzSjvGEeDBkqcLKuZFrqQGCy3Y1F5XbP6j2WxREbEFqWPCVeJB
+ JKPFAOIUbKR8QCHGlFRV7ONi620k2sHIeW9Z3kT2ZcyrOGezvUbnXD9ibw5RvIXmoVnE
+ Dth5NPJ4j+VM/LWxnPqvqrbE88bqOe4G5WGATFOUr8/ZpqPYGLLjqXNAa23T8AldxvXx
+ JOcpUdyd/wU75sKG1fb9tZw/YsoCD4A9wwtRxe4B64xBmJk3zOUc1NqV7ERtR/jByoCH
+ /r8pyrCa9lXnFTG09kz+4hRG2tW35Xp7iKdIJOhFy9rTShbZJQQrgx9U9B9C3iNQ/u92
+ xAvg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=6M7152Ey+cLEt8trzGQhwm7E7uUgPw9+yf5f13TRVxQ=;
+ fh=MVktyZ6D9l1stU62AEnkHT5hRd7o+bvXOXgnDSQj4x0=;
+ b=WfYnqcJlGrCjrjEHz7cBz8oiiwupU+arvNRjikdhWVW/eEpSVcIU5YkBbLUBFnbIlt
+ 7o1TPzuqr5UY7rfeoeqXsLSzZqMeRErmcgIjWU7PHV+EpgwAniUCxnvjrwn8/2w3sCW6
+ aYw7V5UsaIuU+GUJDY+GzKEiORyp0+eUXw76lwxlJ5w9sj8CMk/ZrRoqjo0UoXQU40JS
+ 3aNOzb2NERS77u2u4fuGvT838tFsToZwupzcrGGUlhTomXMktUJjc7lL8OHmIcZtpi0g
+ PDmbl8mAY/EgQ72A/krzOBcVs/uvVM+Mg9+s52KnwjU1XNbPuig+VCfvxeXaq4gzRVoP
+ FfJw==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1783566782; x=1784171582; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=dOlaHkDVo2fS7llYKd3HgpxhrbHqdexVmAk0QASwx1Q=;
- b=BcCY2DkE7J5aEUhCBbYwc4I1T2dDyuO2OOLLDG1P+HqtpzxS/te9dEcqUesCpRh0s0
- xuflX1kyo6m/97qcL8cLwq8hghIPRPLhLsTWwRf2H0ZM8J4EmSSgCEHyCUufVXSrGwaj
- hYOuyeXdixLYc3u6XWkHLDrMfL8V3lgE04nYFbeNFd+tonEiyvEgrRf61DwWkvwbYoDn
- HiDfGPfWgnVjTpcFGZGQX4fOWu/TXnUlEgvBEy7+FTspjD59/5GzAifZx+CwKyVP0ZjS
- yNz66iGoL3Jo60ls/iopkVPSjbOor0OTRYkXSRfiGHbe96k+mzP/k7RDO0wbBkdobSJQ
- mKuA==
+ d=gmail.com; s=20251104; t=1783573098; x=1784177898; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=6M7152Ey+cLEt8trzGQhwm7E7uUgPw9+yf5f13TRVxQ=;
+ b=O5GwlWK+n5sB4tu95eA6RDoJqf7+Yt+xJmRkmbMBIlZL1k+5lVHw8eIKAXK7rKXZbP
+ UCqw1CkuHv/cKLkLpmxS3FfMbD2gl5rXAanP1iSbKDlNJXJe3cOn1Sf58N1rNocPHR+E
+ 7VmJHBAHuCEkIhITQ/dwtfs5OTedsOg5qTVAAAGYnIBoPoTPS3lqQOtxxPdFFWeQeKbO
+ UpkSzXMZqyi1Df1px7EiqjUxtTCoRpEYKgL+KOtJTh+kg4FGH8w3anKHCjM0W7V9wmbj
+ bCh29nFr0ghG3WbqKrGa0TH0nkPZlKpBn/QsT9m523A+efAaNQWiQmg84gNFZaXMFOGe
+ 2s1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783566782; x=1784171582;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=dOlaHkDVo2fS7llYKd3HgpxhrbHqdexVmAk0QASwx1Q=;
- b=nrKAuBejnYYih1MdiDSX+4k/3rxJgREW5q7nJwHjHX7lJ+IN9JdDgZokJPbz+mCOzw
- 4A/CDNzPMgBCHvWBEJVWcagQw36D10o2c5kTah17nx7mkE7XNily3O6+Zp5cr7MRERLI
- Jhj0SMb90qalUkWrBPl2XzNySDL9eSIocJ3Z/Cieu2CQqEl2oM/ri7Vmk6hIUCahJxQJ
- LCviGhSQPD02qqpnw+6q8pw5KA6RDZ6Ri3Gcgyq08UC0k+PWdM8vsSB3ciC4pERkSozp
- qbj8ddZ1E3/gFpWGHgzQwpfImF7wWV/YmVFSrQaHeBUvR8/u38/mOcvT3QUbe5osRVZr
- FuMw==
+ d=1e100.net; s=20251104; t=1783573098; x=1784177898;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=6M7152Ey+cLEt8trzGQhwm7E7uUgPw9+yf5f13TRVxQ=;
+ b=iPjBclHF2VMZNWgMrYmA5l34GEywOkFhtljgJ8OXKGtwFpdt95o/wRF9cWvQivLV8J
+ QTowuF1qocZwuzn1UfWmmEn8uza5XJkbiyG2uEH+CR2yxVKrPzGqHSGBkA80gWFUodjM
+ OOe3qnaNbXOxa34FZVOdL3Swopr3pV0X0bB1OY/I89emhrqJks6x+4945OTvN7oW9EOP
+ ST+zE8Z2PR/qtyxZa8xDunRqP+jcLRvQh/K/ufVQv3+Zl5uQty2Uee+QQI69O4ZdeqPf
+ qZYyOgErjoghQOm9Hl6PJsUdWmoXSfLHlL8Ns4O244kwTBx4DY6nqhXglhBRmtcaiBi5
+ fttQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpH/TQRZbRuPZVB3Yvd+jrPCydRfSmbTNMsLyUdBlx4eS/op2RKQ/rUiqSVK+Gekfv3dpKDvKBYS3VZ@nongnu.org
-X-Gm-Message-State: AOJu0YwC0MMSS80KTy3HNcTNrDPhbDxXGAqSBIrptVJuX2nzIot7WUoG
- w16iqF7XKhS9v/Lf4WMP7Lfm2c3uHcJP/wmHGbDLJUrT5VPg7lRu4BxWMb9pX908
-X-Gm-Gg: AfdE7cmJTsQWx328i+QSVTEeimQ39vqroBHI7mAHlW7KiMFbpVTGF3PvI3UL84d7Yrs
- M6AMZtNXGh77bO2Gcw4PnTiD265aMpiVqsnVcuWfypMsizbVjHk74kzITEiX5u0IBod+FjzHQuo
- uEfJkiUqOhY5dddQPZ50lhf4OQSAhBk9B+NMwwbT5Tl/a6IXLZ/k8quiRz2CkudijX7LUSlcX3v
- Ut+RsrihAsjzKz0YnYXqZG/1LujhKtjNcOqsfDYjS0diPwH9UK426qKP9aa73z+8klxWJIrFaut
- Z6JYYoFpWS26pP47CrpqQFyK2aSjKh+GJ2RqjXepnbIZqwUQ+gyk1n9pX828a4VN91V11zjcdMH
- SGTWEbCry4scSmU56nevC2m4E0/1aCH5qTKY5vHqy0qdAnkGIVVMr5tgvUoH9wupXn0FrSzckTc
- qGtX54zF1aTlxxuIXz8fujNiXKbjJo
-X-Received: by 2002:a17:90b:4b86:b0:381:610b:e77d with SMTP id
- 98e67ed59e1d1-38941cc4c9cmr5085387a91.29.1783566782424; 
- Wed, 08 Jul 2026 20:13:02 -0700 (PDT)
-Received: from localhost.localdomain ([212.135.212.213])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-38a5516949asm392988a91.1.2026.07.08.20.12.59
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 08 Jul 2026 20:13:01 -0700 (PDT)
-From: jack wang <163wangjack@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Jack Wang <163wangjack@gmail.com>, Chao Liu <chao.liu.zevorn@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:K230 Machines)
-Subject: [RFC PATCH 2/2] hw/riscv/k230: wire up the RMU device
-Date: Thu,  9 Jul 2026 11:12:37 +0800
-Message-ID: <20260709031237.21284-3-163wangjack@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260709031237.21284-1-163wangjack@gmail.com>
-References: <20260709031237.21284-1-163wangjack@gmail.com>
+ AHgh+RolzlDjHDD0wsTEswVeNkPYH+BkOpVbBcs4Z/lNBLi9ZB514C3N2OWf2dJfQn1jumgHvKvRH3ZlTv/h@nongnu.org
+X-Gm-Message-State: AOJu0YzZhsoftegky8iGVeRozRLoOduzufXovxVIPZNOXBsO74zZCJ+K
+ TyEKrfNZ867qTHF23L8JmYFVFnGfcyujVec9Q1vu/tRVgNJvWuGjalm+IaA4gKfw047E4Gbz+t6
+ Bdak8K8XLTSGvbh8rlHT7j9rjhyeZvjs=
+X-Gm-Gg: AfdE7cnWm08wAj+lMDSreJ9meZa92j+PumIWSxPGKGGHb1Rh9fGcqsEGF+rDZNixYaN
+ ay9g9PZMSxKYIPdlke/u0GNDZkBnHcsY84k+GyJm7kmLotP9tAQfZbUVtPG4SdYI4Q+jhYMpuTr
+ iK3K2jiDuR3EAiiorZWnqB/07VZJWgge2UGyfy6RM1zhF5UPOGTYIQI37xeFYt0mJQir5g3V4Pv
+ FL+QDDY0RpxyLpKsntFLo1Nh/sHU5QjW+hkMeTNg7P0Tt2BzSDcvoKZM6AGQFz83QpHEMp1HaVD
+ qtLP4ckMoTCCHBQFzHA4IALrgP0n/ebD54N81A==
+X-Received: by 2002:a05:6402:320c:b0:698:b9ca:e662 with SMTP id
+ 4fb4d7f45d1cf-69ab4453bb1mr2302494a12.6.1783573097867; Wed, 08 Jul 2026
+ 21:58:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=163wangjack@gmail.com; helo=mail-pj1-x1031.google.com
-X-Spam_score_int: -13
-X-Spam_score: -1.4
+References: <20260707091039.2574638-1-frank.chang@sifive.com>
+In-Reply-To: <20260707091039.2574638-1-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 9 Jul 2026 14:57:51 +1000
+X-Gm-Features: AUfX_myY6X8vr7HbYLrAXMhBWylHKAwonF1jcsVNDJOdMVgSaySvkcpL-cA3kWc
+Message-ID: <CAKmqyKNVo-rdOtN0t9XzRB3teF6nNEgh_twkf9s8zX2q0dPU=w@mail.gmail.com>
+Subject: Re: [PATCH v4 0/6] target/riscv: Support the true Zicclsm extension
+To: frank.chang@sifive.com
+Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu.zevorn@gmail.com>, 
+ "open list:SiFive Machines" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x52d.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 09 Jul 2026 00:32:08 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,98 +124,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Jack Wang <163wangjack@gmail.com>
+On Tue, Jul 7, 2026 at 7:11=E2=80=AFPM <frank.chang@sifive.com> wrote:
+>
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> Support the true Zicclsm extension so that we can trap misaligned accesse=
+s
+> when Zicclsm is disabled.
+>
+> To enable/disable Zicclsm, simply set zicclsm=3D[true|false], e.g.:
+>   -cpu rv64,zicclsm=3D[true|false]
+>
+> QEMU will raise a misaligned load/store exception when executing misalign=
+ed
+> load/store instructions if Zicclsm is disabled.
+>
+> Changelog:
+>   v4:
+>     * Align ROM reset vector data at 8-byte aligned offsets.
+>   v3:
+>     * Enable Zicclsm for the compatible CPUs.
+>     * Rebase to the latest riscv-to-apply.next.
+>   v2:
+>     * Use (size_memop(size) | mo_endian_env(env)) to calculate MemOp.
+>     * Use (log2_esz << MO_ASHIFT) to calculate aligment MemOp for
+>       vector load/store whole register instructions.
+>
+> Frank Chang (6):
+>   target/riscv: Add Zicclsm CPU option
+>   target/riscv: Support raising misaligned exceptions for scalar
+>     loads/stores
+>   target/riscv: Support raising misaligned exceptions for vector
+>     loads/stores
+>   target/riscv: Enable Zicclsm for the compatible CPUs
+>   hw/riscv: sifive_u: Align ROM reset vector data
+>   target/riscv: Update Zicclsm ISA string and expose it as a CPU
+>     property
 
-Replace the "rmu" create_unimplemented_device() stub with a real
-K230RmuState instance mapped at the K230_DEV_RMU memmap entry, select
-K230_RMU from the K230 Kconfig, and document the device.
+Hmmm.... Still seeing failures
 
-Closes: gevico/qemu-camp-2026-k230#11
-Signed-off-by: Jack Wang <163wangjack@gmail.com>
----
- docs/system/riscv/k230.rst |  1 +
- hw/riscv/Kconfig           |  1 +
- hw/riscv/k230.c            | 10 +++++++---
- include/hw/riscv/k230.h    |  2 ++
- 4 files changed, 11 insertions(+), 3 deletions(-)
+556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi
+               TIMEOUT         90.02s   killed by signal 15 SIGTERM
+>>> LD_LIBRARY_PATH=3D/var/mnt/scratch/alistair/software/qemu/build/contrib=
+/plugins:/var/mnt/scratch/alistair/software/qemu/build/tests/tcg/plugins MS=
+AN_OPTIO
+NS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:print_stacktrac=
+e=3D1
+QEMU_TEST_QEMU_BINARY=3D/var/mnt/scratch/alistair/software/qemu/build/qemu-=
+system-riscv
+64 RUST_BACKTRACE=3D1
+MESON_BUILD_ROOT=3D/var/mnt/scratch/alistair/software/qemu/build
+UBSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:prin=
+t_stac
+ktrace=3D1 ASAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summar=
+y=3D1
+MESON_TEST_ITERATION=3D1 MALLOC_PERTURB_=3D7
+QEMU_TEST_QEMU_IMG=3D/var/mnt/scratch/alistair
+/software/qemu/build/qemu-img QEMU_TEST_GDB=3D/usr/bin/gdb
+PYTHONPATH=3D/var/mnt/scratch/alistair/software/qemu/python:/var/mnt/scratc=
+h/alistair/software/qemu/t
+ests/functional
+/var/mnt/scratch/alistair/software/qemu/build/pyvenv/bin/python3
+/var/mnt/scratch/alistair/software/qemu/tests/functional/riscv64/test_opens
+bi.py
 
-diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
-index cea8202e55..3f2313a127 100644
---- a/docs/system/riscv/k230.rst
-+++ b/docs/system/riscv/k230.rst
-@@ -19,6 +19,7 @@ The ``k230`` machine supports the following devices:
- * Core Local Interruptor (CLINT)
- * Platform-Level Interrupt Controller (PLIC)
- * 2 K230 Watchdog Timer
-+* K230 Reset Management Unit (RMU)
- * 5 UART
- 
- Boot options
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 54e41a6afc..bffa4e69c8 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -149,3 +149,4 @@ config K230
-     select SERIAL_MM
-     select UNIMP
-     select K230_WDT
-+    select K230_RMU
-diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-index 502281c52c..b55e90c0d2 100644
---- a/hw/riscv/k230.c
-+++ b/hw/riscv/k230.c
-@@ -110,6 +110,7 @@ static void k230_soc_init(Object *obj)
-     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
-     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
-     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
-+    object_initialize_child(obj, "k230-rmu",  &s->rmu,    TYPE_K230_RMU);
- 
-     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
-     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
-@@ -206,6 +207,12 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
-                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
- 
-+    /* RMU (reset management unit) */
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->rmu), errp)) {
-+        return;
-+    }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->rmu), 0, memmap[K230_DEV_RMU].base);
-+
-     /* unimplemented devices */
-     create_unimplemented_device("kpu.l2-cache",
-                                 memmap[K230_DEV_KPU_L2_CACHE].base,
-@@ -268,9 +275,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     create_unimplemented_device("cmu", memmap[K230_DEV_CMU].base,
-                                 memmap[K230_DEV_CMU].size);
- 
--    create_unimplemented_device("rmu", memmap[K230_DEV_RMU].base,
--                                memmap[K230_DEV_RMU].size);
--
-     create_unimplemented_device("boot", memmap[K230_DEV_BOOT].base,
-                                 memmap[K230_DEV_BOOT].size);
- 
-diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-index 592e1c26bf..13f2a1ab0b 100644
---- a/include/hw/riscv/k230.h
-+++ b/include/hw/riscv/k230.h
-@@ -18,6 +18,7 @@
- #include "hw/core/boards.h"
- #include "hw/riscv/riscv_hart.h"
- #include "hw/watchdog/k230_wdt.h"
-+#include "hw/misc/k230_rmu.h"
- 
- #define C908_CPU_HARTID   (0)
- 
-@@ -33,6 +34,7 @@ typedef struct K230SoCState {
-     RISCVHartArrayState c908_cpu; /* Small core */
- 
-     K230WdtState wdt[2];
-+    K230RmuState rmu;
-     MemoryRegion sram;
-     MemoryRegion bootrom;
- 
--- 
-2.53.0
 
+Summary of Failures:
+
+556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi
+      TIMEOUT         90.02s   killed by signal 15 SIGTERM
+
+
+Alistair
+
+>
+>  hw/riscv/sifive_u.c                     | 11 +++--
+>  target/riscv/cpu.c                      |  9 +++-
+>  target/riscv/cpu_cfg_fields.h.inc       |  2 +
+>  target/riscv/insn_trans/trans_rvi.c.inc |  6 +++
+>  target/riscv/insn_trans/trans_rvv.c.inc | 18 +++++--
+>  target/riscv/vector_helper.c            | 65 +++++++++++++++++++------
+>  6 files changed, 87 insertions(+), 24 deletions(-)
+>
+> --
+> 2.43.0
+>
+>
 
