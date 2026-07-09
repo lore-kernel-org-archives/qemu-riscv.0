@@ -4,97 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2C8C43602
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jul 2026 16:20:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93038C43458
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jul 2026 03:57:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1whUzn-00018X-CT; Wed, 08 Jul 2026 12:19:35 -0400
+	id 1whfst-00058i-Gw; Wed, 08 Jul 2026 23:57:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1whUzl-00018E-WA
- for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 12:19:34 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1whfsr-00058S-PK
+ for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 23:57:09 -0400
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1whUzk-00074Z-23
- for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 12:19:33 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2caed617615so9218955ad.3
- for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 09:19:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1whfsp-00037x-4G
+ for qemu-riscv@nongnu.org; Wed, 08 Jul 2026 23:57:08 -0400
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-698e5859a3cso991812a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jul 2026 20:57:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783569425; cv=none;
+ d=google.com; s=arc-20260327;
+ b=Ch0/tcQeomNyXNvUQVJeUb9DYgeaC8gFX/oB8EnA9S0NI09MxaL6rn3IESpwPwKxEN
+ E/OH8OmCezZwB8lS90NfIuEN/3VjnnBYbZ4mLLhwtIZoR995NsOLYD78sNuBws2mHHYF
+ 0xw/0v5QpGn62bhoaGbXMogDUoLsAQwR/RLqVcPfwm/q3q87SRHNi5qjHSbESzm8mNA8
+ 0ND/n4e0JPFcJc+qIiOBznAnVE5ls52/Qjw9en6KhgBOX1+IyVO9qvnD0pP1pVLYjGpA
+ ycEIj3/rwJ1baxt3DYc/I231O3jRyEUDsNpDX/V4RyMZsFpKiM5okvMw5Jmk6v8ILZb4
+ qg0w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=nLplJtHM2neuMqbdGc8BysGwibKRIQ2sUJ9QDSTjj9U=;
+ fh=NtHaSjEX/TMdd22CDVYzGpJkhCkCwJJYD6Alz5qPJ40=;
+ b=j7aPAMVa1UiT8KjdB3Y1O7l+y6FSL/wH8aCeBGUwCd/5xjbrPi7nLud9Vxu03QEb1x
+ 5C4JL63fbNRf3WVyzyD09j/f/WBZw6eHYAPkq8JWStEhSneWdkp3dCD6qLGhyg/oxN4m
+ 6EM0XBhqeJwVePkYlFp5YYsagPvPlvOXsDpUXGFr4WpOvrWpvw8DVq+YzAZmD0w+8n1J
+ zu4TNpYjBI8aOMlZ/xcNL/iAJV6Qc7V0OmsCj+37FeFJMRp7wrOYj1i0I5DfxbOvQnoh
+ VwMsm7HDRZ+QP8vxcH4UvMEuTc/9nyCdXm7hK/JXXvp9KfT0qGEZ6RXhZSeStFSPlz2Z
+ 40qQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1783527571; x=1784132371; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=d1KhmcESwLH150n44WbyB6xyj+p1NFPfgYQqqrbdI3E=;
- b=GTnS9q/etdkmKXpsePweYXyyW02fY7Odi2E88GNJhwyJFrP6bj70OXlY5iW1pR06gG
- CZTLQkr1S6m847lr+zOYJus6ikhwCUb+wjVdpyS3g4sGkdq1Uuo0pk95mmAEswWyUlvO
- zfHFgbSYTPNEGp6a2lVmW63dgoqnsGJjVTD2CrYIxTR6r6i9FtfFoHY4a4svT3b3zxqI
- FkS1RqlrG3J8Dth1RIMa/KJZYHH/F4WpA5UWNXYHZaI/7aRMI6r1AnQLbpH5zQHFhWPU
- JGYdqgiMA2ANAqGdcpULNm0MINUNY/3JbZLrGrEAq5xnqXCbZtvHvaYjeywumpxhfTQ9
- /JPw==
+ d=gmail.com; s=20251104; t=1783569425; x=1784174225; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=nLplJtHM2neuMqbdGc8BysGwibKRIQ2sUJ9QDSTjj9U=;
+ b=TwNwBiUuuKT9EaHqnkwdnc2cAkI3wy8559dabWOToqxbSOOonBXCJSYBu3W2IECdHr
+ n2macz1tdbptP+Bc8IxA+aAl//7w1N219BDRnYYotah+sJiXYhbvdreVExnAkFuUk/Zy
+ +7wtBM9DvreXJcuWAqUOzqwtAFtvMIGUv0vaKL7BuwARMdQnuOVmW5KwMYsr4vjl5E7x
+ tKUF0roTH6lbtTmVgvZGhICO3OASxSKxxG3agUzuSgAeKJdljHoazPpWyQf6afknH1lv
+ 5raFhfviE9Zt1easFwqjbrpgToY9sZUv7wMDIh1hlqkCMJgQAlKXfoCLxbdL3JxvC5oF
+ ImWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783527571; x=1784132371;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=d1KhmcESwLH150n44WbyB6xyj+p1NFPfgYQqqrbdI3E=;
- b=mhhnLCtSetJ+D3b5NJ2tQaDw4pVXL3DczVvK60mkK6kCNEd95w18Tz6Ln8kHs5gh1J
- NLP9F0SRLu+dps3j7BrfDSu9bSW9/BlfbsFDOkebbbQuc+gvP63jZCrAz/r/HegVmICp
- JeTeooCObuKh5ZZc0FxSraGwT2K4n2jd5RAtPgqqdCNlMh8h88sHzgvNpHBxZcCUH4WI
- CiLYzIM3E3yW8q7bISpc1BVF2jKsci0jxkgT5tBlVVtXX6OHymOsQGhxoZZMj/9o7t11
- zqXbZkn9j6MWMIWensXV7baNl27vux/Tszqia2r33fCna5JcpkF6yKhrNoROn1zxjT0v
- XGFQ==
+ d=1e100.net; s=20251104; t=1783569425; x=1784174225;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=nLplJtHM2neuMqbdGc8BysGwibKRIQ2sUJ9QDSTjj9U=;
+ b=Rwv5JOnCLuD7D7fNP9TJ4GWsB/mudIV3jpwXd8D+dpyTWIT4NBVOuT5XLoOOnmFvjQ
+ 9GY9RiBsMn2mOwbOcOj68qPc1xUPsu2bLtKp4GAdh4pk1OTdkYH8LhRfLLqhuMaSxGSN
+ WIP0UY3BCzXCAQSIbqVChbJTGIONduQLKrq4Dua8hw9jtVqiNSuSGXOdMs2NoQpxPR4i
+ GNf2MOueW0SvWYVk3WVDankvh0dLiW4FKttk/EN3z+I41bjlIBtbm9/WFjUtLI2sIOeR
+ UfCwPUqhFleclQmyV8MbFiiHuChcbmEcUNAQT1GQ4kC1F6jjzfqI/yPlpnPCMzDlPsrR
+ /1hQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoDjr5pgyWff/pX5R4maZNFefgSYJqSgKgtHogxXplr21RjSCpVLNrrASyM0MtROkHU/0EXNFVQG8tm@nongnu.org
-X-Gm-Message-State: AOJu0YyVQ+JPK1Ns06Yz0vgaMVfEn6qhdrdfTA8uGFj1Hvffh6p4NWNU
- F+Eb4KgfngV/mQO/mSIQTEZm3+oCj962eZoe/0mBrtD9eKkKzXNvM0EdHcPxabqz2gU=
-X-Gm-Gg: AfdE7clyfIDbkTsMJ7s/JzHqchLPYUJqPS2MOLnbqnPW3+fS0J9qcsL2xowEMGWXUHC
- mvVoKRKUxzz/FtDHcXIZXhHH0oOHKnUE2QZkrL3qW6WjE1v1ALimvI+zw135hb02JzT+FyH3kXD
- P+en/gOmsGWDJIPUTZxl0QGcDfrNxdYTsCnCsJD8JEeUyYp8baLmC+x34Uzn6LAIoHSn349lrqi
- FPV1q4KoLdKV8M5OYBNjUdIzDIP+46meKDRfXVmGCTiDo+x8MG/fH5nlE5IZdND6WyqPmi194FM
- +6cKmV8mearTl0tQWZ9x1AR1SPgAyJdfVWNLNplzKDvRRCf+S4v9DEeMOJ8VPePehDrUlOsq+iM
- IH9bduhCEqn/EG/G1F4+MIJTTgFFFOdYMxzbV2TGosYqwOncDkI17Kz/ws79op+bKawz6O0OXSx
- dccdXkBGs9GDJVQ2R3Fo36yrhA6iGXouYpJ9JqaMcL2NZuMZX5aACGotbc7HAazd8xWqROlDIEp
- EEZEZ5zl6ZupAu+
-X-Received: by 2002:a17:902:f68d:b0:2c9:960c:f73b with SMTP id
- d9443c01a7336-2ccea4645ddmr32597665ad.24.1783527570688; 
- Wed, 08 Jul 2026 09:19:30 -0700 (PDT)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ccc9bdb56fsm30789265ad.15.2026.07.08.09.19.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2026 09:19:30 -0700 (PDT)
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, Max Chou <max.chou@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v6 8/9] target/riscv: rvv: Add vfncvt.f.f.q and
- vfncvt.sat.f.f.q instructions for Zvfofp8min extension
-Date: Thu,  9 Jul 2026 00:18:58 +0800
-Message-ID: <20260708161859.1124848-9-max.chou@sifive.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260708161859.1124848-1-max.chou@sifive.com>
-References: <20260708161859.1124848-1-max.chou@sifive.com>
+ AHgh+RrEXR7UmFnstKWE7YH4aWwrTusqWHmZdnz+yezq90dpKIKYVhdffNyLa/dhPbyLxuMZdMYcBqpwE324@nongnu.org
+X-Gm-Message-State: AOJu0YycClJbYPyHW8WgTVrptyz3x+dKhW4THkd2LAWYX3fI7SZs7Cxh
+ qYIqsv+QQrjdxAyPLaOXIcZAKfbWSUJ99zHeP+PrwPmA9Ah2NwZaN8Kwi41KB9iBH47aIEP2eND
+ FBmRdvMIQL1HAnovErpbt5YbgMA3ODZQ=
+X-Gm-Gg: AfdE7clSF0CL+m8yIg83ua78xGMBJiV65974L5Ka2pKAV03W0q9WROhEyC2MhDu4wdE
+ i7wrAra3Erzx9/2fXkTP0qFmVdqbT3vUWBpTaXVyuDjhyHVkPONfDRQkTgnoPRqD/wsdUP5K8tU
+ aPqOYMPL1EAKRHWL56B+GOH8OdN5YWIfSIhUd5Yy6DWV7PbV2nKh/+pGjg50KzV2ueYiTIDuPHh
+ K3J5QnKdF+4r509ZInLud3dYPoEykNWnXLZVTKCflhSBelkLu0jkA5Q3Eryi9QIFaxCUuGSq7HL
+ xooZQ5iJEsz0dcxYLKiMIB4gijU=
+X-Received: by 2002:a05:6402:3814:b0:698:7418:57a9 with SMTP id
+ 4fb4d7f45d1cf-69c032a82a1mr376176a12.17.1783569425398; Wed, 08 Jul 2026
+ 20:57:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20260618093827.3507-1-cp0613@linux.alibaba.com>
+ <20260618093827.3507-3-cp0613@linux.alibaba.com>
+ <CAKmqyKNmFdJRUegowCGggk+4fOmY7vBxOH+_gnmTSpNhyqWqHg@mail.gmail.com>
+ <20260707115030.5161-1-cp0613@linux.alibaba.com>
+In-Reply-To: <20260707115030.5161-1-cp0613@linux.alibaba.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 9 Jul 2026 13:56:36 +1000
+X-Gm-Features: AUfX_mzGPIZl7w4I_sfMBRvqxgaPOqutCMZGwIBH_MVFtTqZr67SNShdej1XIes
+Message-ID: <CAKmqyKPskHLaQMs1SCNjNRzhZjX-E=4KO4x_KS8kAc+LvSh3qQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] hw/riscv/virt-acpi-build: Add _DEP to ACPI0017 for
+ CXL host bridge dependency
+To: Chen Pei <cp0613@linux.alibaba.com>
+Cc: jic23@kernel.org, pbonzini@redhat.com, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, liwei1518@gmail.com, 
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu.zevorn@gmail.com, sunilvl@ventanamicro.com, dave.jiang@intel.com, 
+ alison.schofield@intel.com, imammedo@redhat.com, mst@redhat.com, 
+ guoren@kernel.org, qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ linux-cxl@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::532;
+ envelope-from=alistair23@gmail.com; helo=mail-ed1-x532.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -112,164 +129,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The vfncvt.f.f.q and vfncvt.sat.f.f.q instructions convert a vector of
-FP32 elements to a vector of OFP8 elements. The vfncvt.sat.f.f.q instruction
-converts a vector of FP32 elements to a vector of OFP8 elements with saturation.
-The VTYPE.altfmt field is used to select the OFP8 format.
-* altfmt = 0: FP32 to OFP8.e4m3
-* altfmt = 1: FP32 to OFP8.e5m2
+On Tue, Jul 7, 2026 at 9:51=E2=80=AFPM Chen Pei <cp0613@linux.alibaba.com> =
+wrote:
+>
+> Hi Alistair,
+>
+> On Mon, 6 Jul 2026 14:08:45 +1000, Alistair Francis wrote:
+> > What happens to kernels that don't have this change?
+>
+> Good question. The behavior depends on how old the kernel is:
+>
+> - Kernels that support _DEP processing but lack the
+>   acpi_dev_clear_dependencies() call in acpi_pci_root_add(): the
+>   ACPI0017 (CXLM) device will remain deferred indefinitely because
+>   its declared dependency on ACPI0016 is never cleared. CXL memory
+>   would be unusable on such kernels with this QEMU.
+>
+> - Very old kernels that ignore _DEP entirely: the behavior is the
+>   same as v1 =E2=80=94 the probe-ordering race between acpi_pci_root and
+>   cxl_acpi remains, but nothing is worse than before.
+>
+> The kernel-side fix has already merged:
+>   https://lore.kernel.org/linux-pci/20260526025118.38935-1-cp0613@linux.a=
+libaba.com/
+>
+> So this is effectively a "new QEMU requires a sufficiently new kernel
+> for CXL to work" situation, similar to other QEMU features that depend
+> on kernel support.
 
-Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
-Signed-off-by: Max Chou <max.chou@sifive.com>
----
- target/riscv/insn32.decode                    |  2 +
- .../riscv/tcg/insn_trans/trans_rvofp8.c.inc   | 63 +++++++++++++++++++
- target/riscv/tcg/insn_trans/trans_rvv.c.inc   | 40 ++++++++++++
- 3 files changed, 105 insertions(+)
+That's fine, we can say you need a new kernel for this new feature to
+work, as long as it doesn't break existing PCIe for old kernels
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index d690dc3bc1..8a0551abd7 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -974,6 +974,8 @@ vfwmaccbf16_vv    111011 . ..... ..... 001 ..... 1010111 @r_vm
- vfwmaccbf16_vf    111011 . ..... ..... 101 ..... 1010111 @r_vm
- 
- # *** Zvfofp8min Extension ***
-+vfncvt_f_f_q          010010 . ..... 11001 001 ..... 1010111 @r2_vm
-+vfncvt_sat_f_f_q      010010 . ..... 11011 001 ..... 1010111 @r2_vm
- vfncvtbf16_sat_f_f_w  010010 . ..... 11111 001 ..... 1010111 @r2_vm
- 
- # *** Zvbc vector crypto extension ***
-diff --git a/target/riscv/tcg/insn_trans/trans_rvofp8.c.inc b/target/riscv/tcg/insn_trans/trans_rvofp8.c.inc
-index d28f92e050..619ee4d773 100644
---- a/target/riscv/tcg/insn_trans/trans_rvofp8.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvofp8.c.inc
-@@ -12,6 +12,13 @@
-     }                                       \
- } while (0)
- 
-+static bool zvfofp8min_narrow_quad_check(DisasContext *s, arg_rmr *a)
-+{
-+    return require_rvv(s) &&
-+           vext_check_isa_ill(s) &&
-+           vext_check_sq(s, a->rd, a->rs2, a->vm) &&
-+           (s->sew == MO_8);
-+}
- 
- static bool trans_vfncvtbf16_sat_f_f_w(DisasContext *ctx, arg_rmr *a)
- {
-@@ -40,3 +47,59 @@ static bool trans_vfncvtbf16_sat_f_f_w(DisasContext *ctx, arg_rmr *a)
-     }
-     return false;
- }
-+
-+static bool trans_vfncvt_f_f_q(DisasContext *ctx, arg_rmr *a)
-+{
-+    REQUIRE_FPU;
-+    REQUIRE_ZVFOFP8MIN(ctx);
-+
-+    if (zvfofp8min_narrow_quad_check(ctx, a)) {
-+        gen_helper_gvec_3_ptr *fn;
-+        uint32_t data = 0;
-+
-+        fn = ctx->altfmt ? gen_helper_vfncvt_f_f_q_ofp8e5m2 :
-+                           gen_helper_vfncvt_f_f_q_ofp8e4m3;
-+
-+        gen_set_rm_chkfrm(ctx, RISCV_FRM_DYN);
-+
-+        data = FIELD_DP32(data, VDATA, VM, a->vm);
-+        data = FIELD_DP32(data, VDATA, LMUL, ctx->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, ctx->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, ctx->vma);
-+        tcg_gen_gvec_3_ptr(vreg_ofs(ctx, a->rd), vreg_ofs(ctx, 0),
-+                           vreg_ofs(ctx, a->rs2), tcg_env,
-+                           ctx->cfg_ptr->vlenb,
-+                           ctx->cfg_ptr->vlenb, data, fn);
-+        finalize_rvv_inst(ctx);
-+        return true;
-+    }
-+    return false;
-+}
-+
-+static bool trans_vfncvt_sat_f_f_q(DisasContext *ctx, arg_rmr *a)
-+{
-+    REQUIRE_FPU;
-+    REQUIRE_ZVFOFP8MIN(ctx);
-+
-+    if (zvfofp8min_narrow_quad_check(ctx, a)) {
-+        gen_helper_gvec_3_ptr *fn;
-+        uint32_t data = 0;
-+
-+        fn = ctx->altfmt ? gen_helper_vfncvt_sat_f_f_q_ofp8e5m2 :
-+                           gen_helper_vfncvt_sat_f_f_q_ofp8e4m3;
-+
-+        gen_set_rm_chkfrm(ctx, RISCV_FRM_DYN);
-+
-+        data = FIELD_DP32(data, VDATA, VM, a->vm);
-+        data = FIELD_DP32(data, VDATA, LMUL, ctx->lmul);
-+        data = FIELD_DP32(data, VDATA, VTA, ctx->vta);
-+        data = FIELD_DP32(data, VDATA, VMA, ctx->vma);
-+        tcg_gen_gvec_3_ptr(vreg_ofs(ctx, a->rd), vreg_ofs(ctx, 0),
-+                           vreg_ofs(ctx, a->rs2), tcg_env,
-+                           ctx->cfg_ptr->vlenb,
-+                           ctx->cfg_ptr->vlenb, data, fn);
-+        finalize_rvv_inst(ctx);
-+        return true;
-+    }
-+    return false;
-+}
-diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-index 23262b1d03..cccd0f5a25 100644
---- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-@@ -621,6 +621,46 @@ static bool vext_check_sds(DisasContext *s, int vd, int vs1, int vs2, int vm)
-            require_align(vs1, s->lmul);
- }
- 
-+/*
-+ * Common check function for vector narrowing instructions
-+ * of single-width result (SEW) and quad-width source (4*SEW).
-+ *
-+ * Rules to be checked here:
-+ *   1. The largest vector register group used by an instruction
-+ *      can not be greater than 8 vector registers
-+ *      (Section 31.5.2)
-+ *   2. Quad-width SEW cannot greater than ELEN.
-+ *      (Section 31.2)
-+ *   3. Source vector register number is multiples of 4 * LMUL.
-+ *      (Section 31.3.4.2)
-+ *   4. Destination vector register number is multiples of LMUL.
-+ *      (Section 31.3.4.2)
-+ *   5. Destination vector register group for a masked vector
-+ *      instruction cannot overlap the source mask register (v0).
-+ *      (Section 31.5.3)
-+ * risc-v unprivileged spec
-+ */
-+static bool vext_quad_narrow_check_common(DisasContext *s, int vd, int vs2,
-+                                          int vm)
-+{
-+    return (s->lmul <= 1) &&
-+           (s->sew < MO_32) &&
-+           ((s->sew + 2) <= (s->cfg_ptr->elen >> 4)) &&
-+           require_align(vs2, s->lmul + 2) &&
-+           require_align(vd, s->lmul) &&
-+           require_vm(vm, vd);
-+}
-+
-+static bool vext_check_sq(DisasContext *s, int vd, int vs, int vm)
-+{
-+    bool ret = vext_quad_narrow_check_common(s, vd, vs, vm) &&
-+               vext_check_input_eew(s, vs, s->sew + 2, -1, 0, vm);
-+    if (vd != vs) {
-+        ret &= require_noover(vd, s->lmul, vs, s->lmul + 2);
-+    }
-+    return ret;
-+}
-+
- /*
-  * Check function for vector reduction instructions.
-  *
--- 
-2.55.0
+Alistair
 
+>
+> Thanks,
+> Pei
 
