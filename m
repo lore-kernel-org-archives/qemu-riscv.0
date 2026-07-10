@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8452AC43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 06:10:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B83C5C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 06:10:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wi4R1-0001Cx-7l; Fri, 10 Jul 2026 02:10:03 -0400
+	id 1wi4R1-0001Cj-38; Fri, 10 Jul 2026 02:10:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wi4Qh-00017m-MO
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:44 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ id 1wi4QZ-00013Z-Tq
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:35 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wi4Qf-0001tm-9N
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:43 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2cace91f112so4695065ad.0
- for <qemu-riscv@nongnu.org>; Thu, 09 Jul 2026 23:09:40 -0700 (PDT)
+ id 1wi4QX-0001sn-6h
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:34 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2cc7ef7ec27so5411375ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jul 2026 23:09:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1783663780; x=1784268580; darn=nongnu.org;
+ d=sifive.com; s=google; t=1783663772; x=1784268572; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=QdAr9D/AKWbbgVhux8nSZTA92u/F5FOChbkl4ZDK1HI=;
- b=iKkl1krAs3LtTmiGf7eSqgygWbH6dpQmZxFwQD/TaI69T8X5lDeF3HBiGAI96u7wuf
- 45zIUASKnu6MstwWMdqOsY8jrvl8xZgzHky19ELU4TE9QuuKbb5w56/xPczrkWIoIfaC
- oTJT2KpvbmcAqxo3EQ4DerHkVF8xLd7i+OjcFwpOL+PpbuiF/U/V+9/jfGcGhXNsB6EL
- ZfcFaZ1DlgauZPBIAHCdcsaJzYATzAsjhnx2SKrudZpNJJffoEyHm3jbHi3iFi8jmrk5
- MBTnwg9j8Thc8k4HtN5jJZpVpUfOaKyE9MMJ9KEv0tVG/T/QTCuIqpGvFzT/3bmDHXcO
- 7TLQ==
+ bh=9Gykh+5P8EC5j4uZxNdjyOMe+zEXw26y8NMVO5QDhqI=;
+ b=XGA7lzMNiYE8g01AQjE3iUjEtTLpC1mZ0V4/zmcm3jhJPmx4UK4Sb7fxDmJkmMw6Vo
+ I+SpKDNWb00+AXIWIukwb7fAYm2OyuxgD7nApenavbGI7x4YhaMQKD+0XFbkIql6/8el
+ 24+p3kXpTvtoKZH8W2tegmPKc2Nuw3FSJ8Wuxd1aoNGxdGGM8CaLjvyFdaBEXK14Kyje
+ mG1DSYdRqTEgmkuEQNNvWxf+yJi+ud4VAQDlx07nRmnIr7jNspYW1vDeIPWlwpcBIgtR
+ NsACCK76SSCAEMNxOa1kW7S/eWnW9U+WwcNfFqJEyMEK+IbcTG1bXgbMolqtewoHI8eq
+ DxUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783663780; x=1784268580;
+ d=1e100.net; s=20251104; t=1783663772; x=1784268572;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=QdAr9D/AKWbbgVhux8nSZTA92u/F5FOChbkl4ZDK1HI=;
- b=EtGnSpRHI6qssXJ8K3ext/roaIi6xLq0EQfaBro7oaHLW9jKav5glQpZEVq/DREYnp
- H4rSIGWrchrjKBsvEW104N9tUtCu7OWRB/BoYcn0cOoWgK1XeYBP8d1Ewuo9XhSQPVOS
- RqkTb2iVC9QvfFIZ+T7JbaVa1QFvh6zhNAABy7f7ry4QNbhwktlQY1nLJ1AigF4PRw/k
- 8jppY9NQUe6jqXORQrclEKgGexzKg1E/ZK50Rb7j5OilcM5j+z8YReYcjtlxrvyT4om5
- Cb5OYwDon1hcxe7b9/iNK/PKiZVDdTJkuxYjdOcvXyrvTa6JuD5PNFCvmeoDKxtQOhXa
- Mw0Q==
+ bh=9Gykh+5P8EC5j4uZxNdjyOMe+zEXw26y8NMVO5QDhqI=;
+ b=Azw3lpYlIsJ0l7fnxzRf8OqnxR6qoKNryUpbr9YJ5Mu3PwDdvOBrqFPqXq/0Sp1aoG
+ utL5s9745FF1YjRSJlKQPn4w0drso/qpulr3k+i69OxddvZsw3YyK8lGsB5r0PIr78Zj
+ XKkk7xOCI9J71I93QJgw869Hc+bemvjrB4xjDHckWc4UvThIQtBbqCZ6HtiWX/M3PhdE
+ Aqc+1MaxGgnT9/xhyRL6aA58LMSwzdKSZkjePpoXD9Wfldl6Pjo6T9ZlKeTYQelGtcD3
+ PoOkrJaVc3yTbfjLhPLY83Lni2hCZSmaC1hHBTuJSKZfGakPvG+GVv7ERTqkKWOJFveE
+ r66g==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rr6TH2m+HUo+E08GH7sPzvjokEOW9t+4yb6+Rbz/MuDG9dadGvDrDwiL6GcC4Vg2BGLnogrRjPRFoo1@nongnu.org
-X-Gm-Message-State: AOJu0Yy7JbApSQB/p8z9+HSm6ZrLvO2chy4RNZ9fpiu1IratWsYUCOw+
- xksr0gusUg8WauIHUMgRDGIYvf2ELBA1awPkX56KrtVsyKTLFUBxU7QLG05vGNrJ6cb8RysWCaT
- c0+T5SpLgGQ==
-X-Gm-Gg: AfdE7cn6KlNGSE/t6HN3pGNTJ452gr0YSb120NfURmDgkWJdy7nTiaLC7ccoidse/j+
- NiEnlQc5J6tLQLc6bqEH8PEQhiqx/FZLYot9lvL7xMLSRC5a1bJ+GZsY12wwD8vN1l3r96M/hav
- 93PpQIKUI5WbePQr7+cygvLFNOCKIs05vGWvd6o2Cbl74F4OvPgONOL7x85Fm0vllJpwBFniWiL
- xZmGbOdMdtRZGUoPl2UriFxfU5eNl/A14hwRC9/zZYMB9lKPBNFEYPeD2KEO6aqnMsl/HL9kToK
- 2yiYjg2RjkmWqbz67H76KQW9jYO42rSapqeXXVTuPD7slxU02PkqhxdSFHn/3SIwbD8kDpqbABm
- SU3oLO1ddsNvvTI40zoV+cbxjjN2H1lwrlpNSrRW1N/xz01nT2gTs9LkKKpY0/qQd/MRGfxI4no
- xakf5Yg2arDlIXMKH8Ki0eB7YoL4LuZzCeBO2spjo=
-X-Received: by 2002:a17:903:1670:b0:2ca:52ce:6f74 with SMTP id
- d9443c01a7336-2ccea464790mr119302695ad.29.1783663779961; 
- Thu, 09 Jul 2026 23:09:39 -0700 (PDT)
+ AHgh+RqxvSHzBggqIQKLaPt9uQdGX0NQKpxGAXt5NVbYLjl8syZWy3DCy6O1c4+kV36DHqjheRbK+ppGG+4U@nongnu.org
+X-Gm-Message-State: AOJu0YwAFFarL+I9y9Ajfr6i2CPEdTqqWzlrGdwO7aoA2NReoMsivg8k
+ ehglPVN+xj8Cifr7Y640zOj07IVgqA5ggcASlw4b66782R1q3IWJwoJzA7CpLrVikro=
+X-Gm-Gg: AfdE7ckVCzpmM2VRfFAPFNUk2Q7bRhaUhihsZE6OkiCyrToYzXiTkotF4O9lI0CqXO8
+ LculvYAgUppyPqN7QOkVHRpcGFfFxYCOboOUFgrIJI8bidjqhBQjTboU2T0DUdrFZQwwS9kQkBY
+ H+oVdScHDECcrhpSULL9LT2WHi+fCea4phPPtvqR0iBQ68HtNBBFNf7o5sXoFjEVXLfIxmC9Ou+
+ stWY6E6qCoMu0pSsgeWIQ5C/meV3qVOJR1m5lSu0tLIcFhzq35nbE7BMMNE6u37mdsPs2euvYSQ
+ YB/LjZrjoeNsPw2hIA0X52DBCY4RJKkqkxXxMvAlbUIXh+JkaFQuKZ5+sJjM81H22ODnpSdDwP7
+ fzk7gg/xnhn6gEe7/Zw9wZHbMcXRT3ylKI7bikgt/CaKszxQ5z3+QJRnmwldZmssrPLc+1ulTKV
+ 9yIt12S2biC3KrhO7GY6zAPnVMlu7LQYwqhKBxZXE=
+X-Received: by 2002:a17:902:c408:b0:2ca:d172:7228 with SMTP id
+ d9443c01a7336-2ccea38767dmr114367875ad.11.1783663771850; 
+ Thu, 09 Jul 2026 23:09:31 -0700 (PDT)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ccc9d59e33sm53344255ad.74.2026.07.09.23.09.37
+ d9443c01a7336-2ccc9d59e33sm53344255ad.74.2026.07.09.23.09.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 23:09:39 -0700 (PDT)
+ Thu, 09 Jul 2026 23:09:31 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
@@ -75,18 +74,18 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
  qemu-riscv@nongnu.org (open list:SiFive Machines),
- Frank Chang <frank.chang@sifive.com>,
+ Frank Chang <frank.chang@sifive.com>, Max Chou <max.chou@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v5 4/7] target/riscv: Enable Zicclsm for the compatible CPUs
-Date: Fri, 10 Jul 2026 14:09:11 +0800
-Message-ID: <20260710060914.1227027-5-frank.chang@sifive.com>
+Subject: [PATCH v5 1/7] target/riscv: Add Zicclsm CPU option
+Date: Fri, 10 Jul 2026 14:09:08 +0800
+Message-ID: <20260710060914.1227027-2-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260710060914.1227027-1-frank.chang@sifive.com>
 References: <20260710060914.1227027-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,84 +110,29 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Now that Zicclsm is supported, let's enable it for the following
-compatible CPUs:
-
-- Base 32 CPU (to be backward compatible)
-- Base 64 CPU (to be backward compatible)
-- XuanTie (T-Head) C908
-- Tenstorrent Ascalon
-- Ventana Veyron V1
-- XiangShan Kunminghu
-- MIPS P8700 (ISA doesn't include Zicclsm, but their datasheet claims that
-  it has unaligned load/store support in hardware)
+Add Zicclsm CPU option so that user can turn on/off misaligned loads
+and stores support.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Max Chou <max.chou@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ target/riscv/cpu_cfg_fields.h.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 5a82e6563bf..7ee89f6fc4b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -3268,6 +3268,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.ext_zicbom = true,
-         .cfg.ext_zicbop = true,
-         .cfg.ext_zicboz = true,
-+        .cfg.ext_zicclsm = true,
-         .cfg.ext_zicntr = true,
-         .cfg.ext_zicsr = true,
-         .cfg.ext_zifencei = true,
-@@ -3340,6 +3341,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.ext_zicbom = true,
-         .cfg.ext_zicbop = true,
-         .cfg.ext_zicboz = true,
-+        .cfg.ext_zicclsm = true,
-         .cfg.ext_zicntr = true,
-         .cfg.ext_zicsr = true,
-         .cfg.ext_zifencei = true,
-@@ -3426,6 +3428,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.ext_zbs = true,
-         .cfg.ext_zkt = true,
-         .cfg.ext_zbkc = true,
-+        .cfg.ext_zicclsm = true,
-         .cfg.ext_zicsr = true,
-         .cfg.ext_zifencei = true,
-         .cfg.ext_zihintpause = true,
-@@ -3469,6 +3472,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.ext_zicbom = true,
-         .cfg.ext_zicbop = true,
-         .cfg.ext_zicboz = true,
-+        .cfg.ext_zicclsm = true,
-         .cfg.ext_zicntr = true,
-         .cfg.ext_zicond = true,
-         .cfg.ext_zicsr = true,
-@@ -3518,6 +3522,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+index 9eb47af0a76..f8c27a574f8 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -139,6 +139,8 @@ BOOL_FIELD(has_priv_1_11)
+ /* Always enabled for TCG if has_priv_1_11 */
+ BOOL_FIELD(ext_ziccrse)
  
-         /* ISA extensions */
-         .cfg.mmu = true,
-+        .cfg.ext_zicclsm = true,
-         .cfg.ext_zifencei = true,
-         .cfg.ext_zicsr = true,
-         .cfg.pmp = true,
-@@ -3577,6 +3582,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-      * The RISC-V Instruction Set Manual: Volume I
-      * Unprivileged Architecture
-      */
-+    .cfg.ext_zicclsm = true,
-     .cfg.ext_zicntr = true,
-     .cfg.ext_zihpm = true,
-     .cfg.ext_zihintntl = true,
-@@ -3633,6 +3639,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU,
-         .priv_spec = PRIV_VERSION_1_12_0,
-         .cfg.max_satp_mode = VM_1_10_SV48,
-+        .cfg.ext_zicclsm = true,
-         .cfg.ext_zifencei = true,
-         .cfg.ext_zicsr = true,
-         .cfg.mmu = true,
++BOOL_FIELD(ext_zicclsm)
++
+ /* Vendor-specific custom extensions */
+ BOOL_FIELD(ext_xtheadba)
+ BOOL_FIELD(ext_xtheadbb)
 -- 
 2.43.0
 
