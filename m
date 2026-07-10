@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B83C5C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 06:10:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8519C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 06:10:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wi4R1-0001Cj-38; Fri, 10 Jul 2026 02:10:03 -0400
+	id 1wi4R2-0001DL-7B; Fri, 10 Jul 2026 02:10:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wi4QZ-00013Z-Tq
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:35 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1wi4Qj-00018B-7J
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:46 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wi4QX-0001sn-6h
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:34 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2cc7ef7ec27so5411375ad.1
- for <qemu-riscv@nongnu.org>; Thu, 09 Jul 2026 23:09:32 -0700 (PDT)
+ id 1wi4Qh-0001uA-Op
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:44 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-37df72c9984so948385a91.3
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jul 2026 23:09:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1783663772; x=1784268572; darn=nongnu.org;
+ d=sifive.com; s=google; t=1783663782; x=1784268582; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=9Gykh+5P8EC5j4uZxNdjyOMe+zEXw26y8NMVO5QDhqI=;
- b=XGA7lzMNiYE8g01AQjE3iUjEtTLpC1mZ0V4/zmcm3jhJPmx4UK4Sb7fxDmJkmMw6Vo
- I+SpKDNWb00+AXIWIukwb7fAYm2OyuxgD7nApenavbGI7x4YhaMQKD+0XFbkIql6/8el
- 24+p3kXpTvtoKZH8W2tegmPKc2Nuw3FSJ8Wuxd1aoNGxdGGM8CaLjvyFdaBEXK14Kyje
- mG1DSYdRqTEgmkuEQNNvWxf+yJi+ud4VAQDlx07nRmnIr7jNspYW1vDeIPWlwpcBIgtR
- NsACCK76SSCAEMNxOa1kW7S/eWnW9U+WwcNfFqJEyMEK+IbcTG1bXgbMolqtewoHI8eq
- DxUA==
+ bh=Qi3Cab8K1e60CRoLYMLAsESl91lzJkvRFZK117KQQXA=;
+ b=WqqV0+ESnkEL25enTzLdQRTP3e2WuIb+9lKlhyGyNvzxePNy4XtgUFs9H0S5wZHxIe
+ wyzki12+Lq7ZxNdiBNBUzKv6VuATc9JzRNhfVCfER84jXCfZ//zyHB/5r7wAajEETFG5
+ rxmxbQsCwF8UrvhVkRYXZP3JTF1zpxfeeomZ4GrWfEVAgrsTJer2rbqaN1/PqvQ+lzXk
+ SY+aQG+68/i2P7CxjK1c7IOX40ITQx5CBiOrxBeoINvD2KskcqhHNcw7b2HTomj/t5ty
+ R7fiFPFkNq9Y8yh1/jW9wcGAZe2BYV1XFXwl3FcKDZXKxDRA1/3UgvG53efOzWNA1+99
+ J2jA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783663772; x=1784268572;
+ d=1e100.net; s=20251104; t=1783663782; x=1784268582;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=9Gykh+5P8EC5j4uZxNdjyOMe+zEXw26y8NMVO5QDhqI=;
- b=Azw3lpYlIsJ0l7fnxzRf8OqnxR6qoKNryUpbr9YJ5Mu3PwDdvOBrqFPqXq/0Sp1aoG
- utL5s9745FF1YjRSJlKQPn4w0drso/qpulr3k+i69OxddvZsw3YyK8lGsB5r0PIr78Zj
- XKkk7xOCI9J71I93QJgw869Hc+bemvjrB4xjDHckWc4UvThIQtBbqCZ6HtiWX/M3PhdE
- Aqc+1MaxGgnT9/xhyRL6aA58LMSwzdKSZkjePpoXD9Wfldl6Pjo6T9ZlKeTYQelGtcD3
- PoOkrJaVc3yTbfjLhPLY83Lni2hCZSmaC1hHBTuJSKZfGakPvG+GVv7ERTqkKWOJFveE
- r66g==
+ bh=Qi3Cab8K1e60CRoLYMLAsESl91lzJkvRFZK117KQQXA=;
+ b=HX8d39x3ui+J7ugbQ04XmV4oSXJFlJlonCN9qX2lOEhIE7LuoysxCHbtIHBsLGw8zZ
+ zudy59p8FJ2UwjILkNLQbk2vVFnTgh8pUtpQILKk+kgssjMyJ2Apmx+MTXJrLWwIu6+0
+ SAHheeAVYQvPReyFLUwYu/5Jqcp+AqYsyNB7d3BlrPY3D6SUvDFI4nC5mP8o10V/b+P9
+ B7noWdd8PGwxfl7iGOpAC4QPBI0IKiLcj43GHQvKeACx3hjKe9vBevPGiIpltsjNCKdc
+ q6IuJZM+CH5bOPb+XshbGROSKvS+/jICfJlUJjK59W61edbFg3Jriu+aVZ4AMmFAKzI6
+ p02Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqxvSHzBggqIQKLaPt9uQdGX0NQKpxGAXt5NVbYLjl8syZWy3DCy6O1c4+kV36DHqjheRbK+ppGG+4U@nongnu.org
-X-Gm-Message-State: AOJu0YwAFFarL+I9y9Ajfr6i2CPEdTqqWzlrGdwO7aoA2NReoMsivg8k
- ehglPVN+xj8Cifr7Y640zOj07IVgqA5ggcASlw4b66782R1q3IWJwoJzA7CpLrVikro=
-X-Gm-Gg: AfdE7ckVCzpmM2VRfFAPFNUk2Q7bRhaUhihsZE6OkiCyrToYzXiTkotF4O9lI0CqXO8
- LculvYAgUppyPqN7QOkVHRpcGFfFxYCOboOUFgrIJI8bidjqhBQjTboU2T0DUdrFZQwwS9kQkBY
- H+oVdScHDECcrhpSULL9LT2WHi+fCea4phPPtvqR0iBQ68HtNBBFNf7o5sXoFjEVXLfIxmC9Ou+
- stWY6E6qCoMu0pSsgeWIQ5C/meV3qVOJR1m5lSu0tLIcFhzq35nbE7BMMNE6u37mdsPs2euvYSQ
- YB/LjZrjoeNsPw2hIA0X52DBCY4RJKkqkxXxMvAlbUIXh+JkaFQuKZ5+sJjM81H22ODnpSdDwP7
- fzk7gg/xnhn6gEe7/Zw9wZHbMcXRT3ylKI7bikgt/CaKszxQ5z3+QJRnmwldZmssrPLc+1ulTKV
- 9yIt12S2biC3KrhO7GY6zAPnVMlu7LQYwqhKBxZXE=
-X-Received: by 2002:a17:902:c408:b0:2ca:d172:7228 with SMTP id
- d9443c01a7336-2ccea38767dmr114367875ad.11.1783663771850; 
- Thu, 09 Jul 2026 23:09:31 -0700 (PDT)
+ AHgh+Ro3SW7ak5vDZHRCgV5gaZzQb3KdD3Y9RiCYyi80cGrzfvJ8BPhGrB1wwALnoZ4HFBonwDj0+UOKd+ci@nongnu.org
+X-Gm-Message-State: AOJu0Yzy4gtNkZSs7dVj0vHP2SLsQnRTgbrwC/A0SweNE7faJmIHoesJ
+ +mu79CTxavPyC0dP6BK9qHefS4vEFfinwee5s1CZh7UuJ5sL8xjz9SIvSijn5AqF/Jw=
+X-Gm-Gg: AfdE7ck6rOzG/phK7qcFHA2hHj8eVTQqInFpwSsdf7qQ2Rt0F6XDza6Xj+22eSJ0pqb
+ 6/tuzt7oDGUSA0rTWqfF/G0I9aUse6fdYrOVdPvpw24ZjjCRzvQTmykGPuuykDyAIWZD4hsTfbv
+ tbrnN8k2EmGLtsZrPpHG/ntU2uw0ofsxmCZPJzVdAvxlSFsDlCVzN5odn54FpMiX0OftXQGKFgt
+ DQ/h4rUTukD0381lTqTyQZ064wRlAIKH1igRiZb3m4TFnNSYU0bErzrh3WTpBuGgDqOJVlHxN4N
+ 4AYvUyPW00nChsb0lODha0Fg8xYnVEWkzsbMGGnTJZ3BOBm8tx5hQIxsrUX7yMmYFfuifXmRHXh
+ TWBFdT8FPCOy7zeB8QVZmNjXBQeLcMulRJ5qeialciQJmGUNvf2xK4jmBndEh4a6i3pu9ETRrrt
+ rZhzkwX7l1yQsJdP93CKfModRhUXZBX+yzwGSKmLY=
+X-Received: by 2002:a17:90b:3946:b0:38d:56aa:6f32 with SMTP id
+ 98e67ed59e1d1-38d56aa73cemr1388335a91.38.1783663782373; 
+ Thu, 09 Jul 2026 23:09:42 -0700 (PDT)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ccc9d59e33sm53344255ad.74.2026.07.09.23.09.29
+ d9443c01a7336-2ccc9d59e33sm53344255ad.74.2026.07.09.23.09.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 23:09:31 -0700 (PDT)
+ Thu, 09 Jul 2026 23:09:41 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
@@ -74,18 +74,17 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
  qemu-riscv@nongnu.org (open list:SiFive Machines),
- Frank Chang <frank.chang@sifive.com>, Max Chou <max.chou@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v5 1/7] target/riscv: Add Zicclsm CPU option
-Date: Fri, 10 Jul 2026 14:09:08 +0800
-Message-ID: <20260710060914.1227027-2-frank.chang@sifive.com>
+ Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v5 5/7] hw/riscv: sifive_u: Align ROM reset vector data
+Date: Fri, 10 Jul 2026 14:09:12 +0800
+Message-ID: <20260710060914.1227027-6-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260710060914.1227027-1-frank.chang@sifive.com>
 References: <20260710060914.1227027-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,29 +109,49 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Add Zicclsm CPU option so that user can turn on/off misaligned loads
-and stores support.
+The SiFive U ROM reset vector data needs proper 8-byte alignment for
+RV64 ld instructions. Without Zicclsm support, misaligned loads will
+cause exceptions.
+
+Add padding to ensure start_addr and fdt_load_addr are placed at 8-byte
+aligned offsets and adjust the load instruction offsets to match the new
+data layout.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Max Chou <max.chou@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_cfg_fields.h.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ hw/riscv/sifive_u.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index 9eb47af0a76..f8c27a574f8 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -139,6 +139,8 @@ BOOL_FIELD(has_priv_1_11)
- /* Always enabled for TCG if has_priv_1_11 */
- BOOL_FIELD(ext_ziccrse)
- 
-+BOOL_FIELD(ext_zicclsm)
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 99423ef472d..57a57c96e16 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -564,19 +564,20 @@ static void sifive_u_machine_init(MachineState *machine)
+         0,
+         0,
+         0x00028067,                    /*     jr     t0 */
++        0x00000000,                    /* padding for alignment */
+         start_addr,                    /* start: .dword */
+         start_addr_hi32,
+         fdt_load_addr,                 /* fdt_laddr: .dword */
+         fdt_load_addr_hi32,
+-        0x00000000,
+                                        /* fw_dyn: */
+     };
 +
- /* Vendor-specific custom extensions */
- BOOL_FIELD(ext_xtheadba)
- BOOL_FIELD(ext_xtheadbb)
+     if (riscv_is_32bit(&s->soc.u_cpus)) {
+-        reset_vec[4] = 0x0202a583;     /*     lw     a1, 32(t0) */
+-        reset_vec[5] = 0x0182a283;     /*     lw     t0, 24(t0) */
++        reset_vec[4] = 0x0242a583;     /*     lw     a1, 36(t0) */
++        reset_vec[5] = 0x01c2a283;     /*     lw     t0, 28(t0) */
+     } else {
+-        reset_vec[4] = 0x0202b583;     /*     ld     a1, 32(t0) */
+-        reset_vec[5] = 0x0182b283;     /*     ld     t0, 24(t0) */
++        reset_vec[4] = 0x0242b583;     /*     ld     a1, 36(t0) */
++        reset_vec[5] = 0x01c2b283;     /*     ld     t0, 28(t0) */
+     }
+ 
+ 
 -- 
 2.43.0
 
