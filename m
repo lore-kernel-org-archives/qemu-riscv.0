@@ -4,97 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBD8BC43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 12:13:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BFB6C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 12:22:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiA6f-0003uT-UX; Fri, 10 Jul 2026 08:13:25 -0400
+	id 1wiAFK-00083o-Fn; Fri, 10 Jul 2026 08:22:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1wiA6c-0003rY-W5; Fri, 10 Jul 2026 08:13:23 -0400
-Received: from zero.eik.bme.hu ([152.66.115.2])
+ (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
+ id 1wi6mo-0000ZS-CY
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 04:40:42 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1wiA6a-0001ok-2Z; Fri, 10 Jul 2026 08:13:22 -0400
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 3F761596762;
- Fri, 10 Jul 2026 14:13:16 +0200 (CEST)
-X-Virus-Scanned: amavis at eik.bme.hu
-Received: from zero.eik.bme.hu ([127.0.0.1])
- by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
- id cCrqJcYrD_wU; Fri, 10 Jul 2026 14:13:13 +0200 (CEST)
-Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id A50F959675D; Fri, 10 Jul 2026 14:13:13 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id A0F9859675C;
- Fri, 10 Jul 2026 14:13:13 +0200 (CEST)
-Date: Fri, 10 Jul 2026 14:13:13 +0200 (CEST)
-From: BALATON Zoltan <balaton@eik.bme.hu>
-To: Markus Armbruster <armbru@redhat.com>
-cc: qemu-devel@nongnu.org, Aditya Gupta <adityag@linux.ibm.com>, 
- Alexander Graf <graf@amazon.com>, Alexandre Iooss <erdnaxe@crans.org>, 
- Alexey Kardashevskiy <aik@ozlabs.ru>, 
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Alistair Francis <alistair@alistair23.me>, 
- Antony Pavlov <antonynpavlov@gmail.com>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, 
- Bernhard Beschow <shentey@gmail.com>, Bibo Mao <maobibo@loongson.cn>, 
- Brian Cain <brian.cain@oss.qualcomm.com>, 
- Chao Liu <chao.liu@processmission.com>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>, 
- =?ISO-8859-15?Q?Cl=E9ment_Chigot?= <chigot@adacore.com>, 
- =?ISO-8859-15?Q?C=E9dric_Le_Goater?= <clg@kaod.org>, 
- Dorjoy Chowdhury <dorjoychy111@gmail.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Eric Farman <farman@linux.ibm.com>, Farhan Ali <alifm@linux.ibm.com>, 
- Felipe Balbi <balbi@kernel.org>, 
- Francisco Iglesias <francisco.iglesias@amd.com>, 
- Frederic Konrad <konrad.frederic@yahoo.fr>, 
- Gaurav Sharma <gaurav.sharma_7@nxp.com>, Gautam Gala <ggala@linux.ibm.com>, 
- Glenn Miles <milesg@linux.ibm.com>, Halil Pasic <pasic@linux.ibm.com>, 
- Hao Wu <wuhaotsh@google.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>, 
- Helge Deller <deller@gmx.de>, Hendrik Brueckner <brueckner@linux.ibm.com>, 
- =?ISO-8859-15?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>, 
- Huacai Chen <chenhuacai@kernel.org>, Jan Kiszka <jan.kiszka@web.de>, 
- Jared Rossi <jrossi@linux.ibm.com>, Joel Stanley <joel@jms.id.au>, 
- Laurent Vivier <laurent@vivier.eu>, 
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Matthew Rosato <mjrosato@linux.ibm.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- Michael Rolnik <mrolnik@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
- Nicholas Piggin <npiggin@gmail.com>, 
- Niek Linnenbank <nieklinnenbank@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Peter Maydell <peter.maydell@linaro.org>, 
- =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@mailo.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Ran Wang <wangran@bosc.ac.cn>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Sai Pavan Boddu <sai.pavan.boddu@amd.com>, 
- Samuel Tardieu <sam@rfc1149.net>, Sergio Lopez <slp@redhat.com>, 
- Song Gao <17746591750@163.com>, Stafford Horne <shorne@gmail.com>, 
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- Thomas Huth <th.huth+qemu@posteo.eu>, Tyrone Ting <kfting@nuvoton.com>, 
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
- qemu-s390x@nongnu.org
-Subject: Re: Call to clean up QOM onboard devices lacking a parent
-In-Reply-To: <87a4rzxr1q.fsf@pond.sub.org>
-Message-ID: <69d31293-b6db-a411-141b-234c7d823bbe@eik.bme.hu>
-References: <87se5scipx.fsf@pond.sub.org>
- <17c7f91b-8935-8ebf-a982-f91df755af81@eik.bme.hu>
- <87a4rzxr1q.fsf@pond.sub.org>
+ (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
+ id 1wi6mm-0001tt-4y
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 04:40:42 -0400
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66A7dWfD056474
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 08:40:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=qFuBB0Bw7YS
+ tlxeNVzx+8nAmHvyJXWpNlRBHLBri/AU=; b=Eu0zYaPBH1x9Kkrn5SNUGigg6xP
+ 73UcNwL862SPIaKBg+RPr37Ter6CunYiWdNkiEUTIIKTAYrRBne2FtWP+dV6av8E
+ o72d7iukod6D5rFV41yzmeFELb6rB1Mg038pZ3iGzRiL2IXK/KBm3ocA5lILx+mS
+ hUDUxYg837zjPra7Cbt9Hde5m07jcGw7soZvUReapH3FyJPEFu16XoOFv5pjjKCz
+ 3+RDyFX2zzSQGDK6rUE5HUkR8CyGmes0CseJBEujtBPuWm3Y8zfMa1dfWX1mm/mH
+ bB2iMC/nzijMPt4o/1gBTLyOv9Q/pauhw8y9zBTn2xfbkDzzy52zL3OwpRg==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fajwta5v7-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 08:40:38 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-37fec882754so188098a91.3
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 01:40:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1783672837; x=1784277637; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=qFuBB0Bw7YStlxeNVzx+8nAmHvyJXWpNlRBHLBri/AU=;
+ b=Y06Cj5552jvT6Li+pIUyR9QkbMKgOYpfJ7D3cbObZvPPVMquUWQkUkPLR/vgTJf5Yd
+ rVl4t9QfFOFwm38VmE/oXS0tmYB+LQ9n4CIx9LGzsKrLUzmPbx40hPEtCTMeDqN4k8t0
+ BMs7N69j9lkPc7y+75uIxKSdhzfZecwESVHexajRBOOFMENCVWPNvBf4z0+Bb65hsVry
+ Zk98XjsV8aUAqYykZ8kbSXgGo7Pu19aEnhX71+YmU2F0MRDmSoZB7waUE4W46/FampA7
+ 1brNbwbhCAlUQX0GE2Kyts2w0NVWz6x6g5egaONmDoWCPZaB3hkJ917KgERdw8JtfFtT
+ CbPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783672837; x=1784277637;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=qFuBB0Bw7YStlxeNVzx+8nAmHvyJXWpNlRBHLBri/AU=;
+ b=eW5jwA44vnrGD2ji8Y6JW30gEKoRDi9N2f2dAVQVkq88belTnBO/ZXiPEvnDHimcm0
+ o1e+uZQI+gSYMRmwtKK29jTRN1T62i/WrUgyHjCd5K7bC1G5mtMWTtpHZjO5swyrQPJT
+ JooQ0L9bz13Y2oSi8Sg8S3HnPjk6erqY3io76HO/q4/tuTQWApEVUt3xBqBA5RAN65BG
+ jG4Szo5LSaR12YNuyEDHIC7mnvU9Q7IKP5Ay398EWCJc8j5R5wXAPYjzk5r01KJQb2VD
+ oTSosUSbA88i2MVWulZUFtuWKTjw2/4DxGVkUr+tWhvx9ddEOjFYIpiHF1yQPYZQHSTQ
+ YV4A==
+X-Gm-Message-State: AOJu0YwbReFuy2gsZz9ri+mdaR5WUMzlbyrKMjw6/i3yWlfiXD7r9WYc
+ DQEFbAf1DaQ256CaFPmQfWGDgEq3j/xhK2XyQ4gyvFEupp4DagBw18+7HdU3C3Okh9vHiq7ijOA
+ TxgRuK2NOtwVHGYeI9akmn8u2eVCool1uJMHbal7LoeSmuu7XVeDsN1aefxULDdCnfQ==
+X-Gm-Gg: AfdE7ckYalv3/mBajrTlakMojaDOzR3zMRppLl6241WiHaaheIWFqol1bmcNptl+ES2
+ HlKb0Yp8MoPoKRXrd1hIaXcb+THyQ19U0V9fplaw6pbQo91Lh3lO+60Qu00rNygXLJqtScU4Bhp
+ kXYxkO2GH4G/ZbWLyHz3TW92FNl0EiFcwnkvgvBSUZWGtDQasG6sYWDGgboFFO+lxtlMpHfh1wm
+ ilUG5lj10QYxvU5nJl+NdwqZNwZncEQ6TKPRZEmEgir59bOMtaIpiCle1IWjh7IyVF15lXNw6rq
+ c8mmYhqWSvCbCyNlaH+tfnSVWgyI/Rigw4738TEEIyDkCDq3s39IZ8S+SdHLogtzYQa/7lQUPFn
+ gSFmWaFNKYKQekkk6dgnxMCJFBsVckIPBUpvQfRJPEYqUkue1EcWoTQdMObCoACxdPl75Agr2za
+ 1IdAEyrVy4/9MCjk32JPV+TQfhyYI0VF5EBVnQlNo+6g==
+X-Received: by 2002:a17:90a:bf17:b0:38d:90c1:2485 with SMTP id
+ 98e67ed59e1d1-38d90c136bamr750905a91.5.1783672837494; 
+ Fri, 10 Jul 2026 01:40:37 -0700 (PDT)
+X-Received: by 2002:a17:90a:bf17:b0:38d:90c1:2485 with SMTP id
+ 98e67ed59e1d1-38d90c136bamr750877a91.5.1783672836674; 
+ Fri, 10 Jul 2026 01:40:36 -0700 (PDT)
+Received: from hu-slingapp-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3118389d9bcsm29164925eec.20.2026.07.10.01.40.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Jul 2026 01:40:36 -0700 (PDT)
+From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, daniel.barboza@oss.qualcomm.com,
+ Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+Subject: [PATCH v2 07/10] riscv: add RPMI system suspend service
+Date: Fri, 10 Jul 2026 14:09:49 +0530
+Message-ID: <1362f2b24fc65169cf916bd3be4ef107f8d0c000.1783660209.git.subrahmanya.lingappa@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1783660209.git.subrahmanya.lingappa@oss.qualcomm.com>
+References: <cover.1783660209.git.subrahmanya.lingappa@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII; format=flowed
-Received-SPF: pass client-ip=152.66.115.2; envelope-from=balaton@eik.bme.hu;
- helo=zero.eik.bme.hu
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=XOYAjwhE c=1 sm=1 tr=0 ts=6a50b006 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
+ a=YpNgDGc-obDsCk2VH-MA:9 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-GUID: 07UomsyXTCxrDBLWptZeFe1YiP3HpmWn
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDA4MyBTYWx0ZWRfX4iDxHD33peul
+ efHj053tKFeiOrXEVwQnnZYKp6vHvAu4ayEuZva5nepVmougUdtByFsILhny59CWyK9pXaGcOZO
+ nwmzwCdHT0Q2sYGGxc8RcSGNiBnUHRg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDA4MyBTYWx0ZWRfX8uyN351glcFP
+ 58BjCYkRfOYSLFfgDHPD05ORwOOHFOmgP5ptEOnFrLHMFIrliYo7mjcna3mLUVTo/d9AyUGI/hh
+ Zb4bqJ8wvoAwauIeQCjXRzUR73cAIiANDO+WncthTLMm/OzjwvlZsqe1zlT/24czbq7RxivprIz
+ WppUSYY7qh3jHQHKQ3SRoFBDuE5SEQNRIC+Q4/95K9f1KH9+I7SRx7OCZLMu1ghlVUcsPLuZ3gK
+ DPcP8J3p6EsoODlC1eU+N5Rz0wjvnf45iVqqUc5yPhsivn5Ah+YZ6dpJdu3bFaPq+XFEw8plhI3
+ 6HD7w57KK5d8+lP/5trDtN5lLXbPTI47tRmFssP+20gsbX0f1EGSt3bfmcSmvMoxhleM8kO1XXG
+ NaND13EOBJe9DqS0JriUt5787GNpFJA7mDhJ4r1cXoUNnqWNUrjuaN4MKMybl0ErWhIx8qw24vG
+ 9bYZo5aZyl6C/KjhZTA==
+X-Proofpoint-ORIG-GUID: 07UomsyXTCxrDBLWptZeFe1YiP3HpmWn
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-10_02,2026-07-09_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 adultscore=0 bulkscore=0
+ spamscore=0 priorityscore=1501 clxscore=1011 phishscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607100083
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
+ helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 10 Jul 2026 08:21:46 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,139 +151,386 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
 
-On Fri, 10 Jul 2026, Markus Armbruster wrote:
-> BALATON Zoltan <balaton@eik.bme.hu> writes:
->
->> On Thu, 9 Jul 2026, Markus Armbruster wrote:
->>> A QOM object must be the child of exactly one parent.  This defines the
->>> QOM composition tree.  The link from parent to child is a property of
->>> the parent, and therefore has a name that is unique within its parent.
->>> An object's canonical QOM path is these names on the path from root to
->>> object in the QOM composition tree separated by '/'.
->>>
->>> For devices:
->>>
->>> * If a device is plugged in with -device / device_add, and it has an ID,
->>>  we make it a child of /machine/peripheral/ with name ID.  If it
->>>  doesn't have an ID, we make it a child of /machine/peripheral-anon/
->>>  with name device[N], where N counts up from zero.  The canonical QOM
->>>  path /machine/peripheral/ID is stable.  The canonical QOM path
->>>  /machine/peripheral-anon/device[N] isn't: it depends on the number of
->>>  devices already there.
->>>
->>> * If a device is part of another device, it should be its child.  The
->>>  child's canonical QOM path is the parent's plus '/CHILD-NAME'.  Stable
->>>  as long as the parent's path and the child name are.
->>>
->>> * "Should" because we have a lot of code that fails to pick the parent.
->>>  When such a device gets realized, we make it a child of
->>>  /machine/unattached/ orphanage with name device[N], where N counts up
->>>  from zero.  The canonical QOM path /machine/unattached/device[N]
->>>  depends on the number of children already in the orphanage, which
->>>  makes it unstable.
->>>
->>>  Letting code get away with not picking a parent was a mistake.  I
->>>  guess it "saved" us some thinking about what's part of what when
->>>  converting existing devices to QOM.  In other words, it enabled sloppy
->>>  hardware modeling.  We've been "saving" thinking ever since.
->>>
->>>  I want /machine/unattached/ to be empty.  If an onboard device isn't
->>>  part of another device, put it into /machine/ with a sensible name.
->>
->> The last time this came up I've asked a few questions but did not get an answer:
->>
->> 1. What's the use of the QOM composition tree? I never needed it and apart from being able to admire it in info qom-tree I don't know if it's used for anything. For a long time I did not even know about info qom-tree because I only needed info qtree and info mtree and rarely if ever need to look at the qom-tree. If it has no real use I'm happy to not think about it.
->>
->> 2. What is a QOM parent? There were proposals to parent devices to their bus if they have any, that's what qtree shows anyway. If it's something else it should be better defined somewhere.
->>
->> Without getting answers for these questions I don't think I'm able to fix the machines I maintain.
->
-> Unfortunately, I don't have the time to teach a class on QOM basics
-> today.  The text you quoted explains what QOM parent and canonical QOM
-> path are, albeit briefly.  It also explains how to pick the QOM parent
-> properly, what happens when you neglect to pick one, and why that's
-> undesirable.  I'm going to elaborate a bit.
+Add the RPMI System Suspend service group for RISC-V virt.
 
-I read that text but understood it describes what is done now and missed 
-the part where it says how to pick a parent.
+The service advertises suspend-to-RAM support through librpmi,
+registers QEMU wakeup support, and routes the suspend finalize callback
+to the machine suspend path. On wakeup it processes RPMI group events
+and defers the HSM hart resume until vCPUs are ready to run again.
 
-> A fully constructed QOM object is part of the QOM composition tree.
-> This is a fundamental property of QOM's design.
->
-> A QOM object can be composed of sub-objects.  Its sub-objects are its
-> children in the composition tree.  That's why it's named *composition*
-> tree.
+Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+---
+ hw/misc/meson.build           |   1 +
+ hw/misc/riscv_rpmi.c          |   4 +
+ hw/misc/riscv_rpmi_hsm.c      |   9 +-
+ hw/misc/riscv_rpmi_internal.h |   5 +
+ hw/misc/riscv_rpmi_syssusp.c  | 191 ++++++++++++++++++++++++++++++++++
+ hw/riscv/virt.c               |  25 +++++
+ include/hw/misc/riscv_rpmi.h  |  11 ++
+ 7 files changed, 245 insertions(+), 1 deletion(-)
+ create mode 100644 hw/misc/riscv_rpmi_syssusp.c
 
-OK so this is clear for a SoC or a multifunction device where we mostly do 
-that now, for example hw/isa/vt82c686.c has object_initialize_child for 
-its parts (which is the only reason we need an init method and could do 
-without it otherwise). For PPC460EX we don't model the SoC as this is old 
-code that was cleaned up a bit but never completed to convert everything 
-so the machine still creates the SoC parts and wires them as a lot of 
-older machines did. I intended to improve the PCIe emulation on sam460ex 
-and clean up that part during that but haven't got to it yet. I guess 
-other devices like isa have the same problem that they predate even QOM so 
-was not fully converted yet.
+diff --git a/hw/misc/meson.build b/hw/misc/meson.build
+index fc5b11ed57..cb093a8642 100644
+--- a/hw/misc/meson.build
++++ b/hw/misc/meson.build
+@@ -172,4 +172,5 @@ system_ss.add(when: 'CONFIG_RISCV_RPMI', if_true: [files(
+   'riscv_rpmi.c',
+   'riscv_rpmi_sysreset.c',
+   'riscv_rpmi_hsm.c',
++  'riscv_rpmi_syssusp.c',
+ ), librpmi])
+diff --git a/hw/misc/riscv_rpmi.c b/hw/misc/riscv_rpmi.c
+index 820b1d5d63..08691861b0 100644
+--- a/hw/misc/riscv_rpmi.c
++++ b/hw/misc/riscv_rpmi.c
+@@ -187,6 +187,10 @@ static const RiscvRpmiServiceOps riscv_rpmi_service_ops[] = {
+         .kind = RISCV_RPMI_SERVICE_HSM,
+         .add = riscv_rpmi_hsm_add,
+         .remove = riscv_rpmi_hsm_remove,
++    }, {
++        .kind = RISCV_RPMI_SERVICE_SYSSUSP,
++        .add = riscv_rpmi_syssusp_add,
++        .remove = riscv_rpmi_syssusp_remove,
+     },
+ };
+ 
+diff --git a/hw/misc/riscv_rpmi_hsm.c b/hw/misc/riscv_rpmi_hsm.c
+index 9a9859b10c..bacdabcac6 100644
+--- a/hw/misc/riscv_rpmi_hsm.c
++++ b/hw/misc/riscv_rpmi_hsm.c
+@@ -235,7 +235,6 @@ static void riscv_rpmi_hsm_destroy(RiscvRpmiState *s)
+     g_clear_pointer(&s->hsm_hw_states, g_free);
+ }
+ 
+-
+ bool riscv_rpmi_hsm_add(RiscvRpmiState *s, Error **errp)
+ {
+     struct rpmi_service_group *group;
+@@ -278,3 +277,11 @@ void riscv_rpmi_hsm_reset(RiscvRpmiState *s)
+         rpmi_hsm_process_state_changes(s->hsm);
+     }
+ }
++
++void riscv_rpmi_hsm_resume(RiscvRpmiState *s, uint32_t hart_index)
++{
++    riscv_rpmi_hsm_set_hw_state(s, hart_index, RPMI_HART_HW_STATE_STARTED);
++    if (s->hsm) {
++        rpmi_hsm_process_state_changes(s->hsm);
++    }
++}
+diff --git a/hw/misc/riscv_rpmi_internal.h b/hw/misc/riscv_rpmi_internal.h
+index 42a6708907..34cab35c32 100644
+--- a/hw/misc/riscv_rpmi_internal.h
++++ b/hw/misc/riscv_rpmi_internal.h
+@@ -33,5 +33,10 @@ void riscv_rpmi_sysreset_remove(RiscvRpmiState *s);
+ bool riscv_rpmi_hsm_add(RiscvRpmiState *s, Error **errp);
+ void riscv_rpmi_hsm_remove(RiscvRpmiState *s);
+ void riscv_rpmi_hsm_reset(RiscvRpmiState *s);
++void riscv_rpmi_hsm_resume(RiscvRpmiState *s, uint32_t hart_index);
++
++bool riscv_rpmi_syssusp_add(RiscvRpmiState *s, Error **errp);
++void riscv_rpmi_syssusp_remove(RiscvRpmiState *s);
++
+ 
+ #endif
+diff --git a/hw/misc/riscv_rpmi_syssusp.c b/hw/misc/riscv_rpmi_syssusp.c
+new file mode 100644
+index 0000000000..d455e08163
+--- /dev/null
++++ b/hw/misc/riscv_rpmi_syssusp.c
+@@ -0,0 +1,191 @@
++/*
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * RISC-V RPMI System Suspend service.
++ *
++ * Copyright (c) 2026 Qualcomm Technologies, Inc.
++ * Author:
++ *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
++ */
++
++#include "qemu/osdep.h"
++#include "riscv_rpmi_internal.h"
++#include "qemu/timer.h"
++#include "system/runstate.h"
++
++static const struct rpmi_system_suspend_type riscv_rpmi_syssusp_types[] = {
++    {
++        .type = RPMI_SYSSUSP_TYPE_SUSPEND_TO_RAM,
++        .attr = RPMI_SYSSUSP_ATTRS_FLAGS_RESUMEADDR,
++    },
++};
++
++static enum rpmi_error riscv_rpmi_syssusp_prepare(
++    void *priv, rpmi_uint32_t hart_index,
++    const struct rpmi_system_suspend_type *syssusp_type,
++    rpmi_uint64_t resume_addr)
++{
++    RiscvRpmiState *s = priv;
++
++    if (s->machine_ops && s->machine_ops->register_wakeup_support) {
++        s->machine_ops->register_wakeup_support(s->machine_opaque);
++    }
++    return RPMI_SUCCESS;
++}
++
++static rpmi_bool_t riscv_rpmi_syssusp_ready(void *priv,
++                                            rpmi_uint32_t hart_index)
++{
++    return true;
++}
++
++static void riscv_rpmi_syssusp_finalize(
++    void *priv, rpmi_uint32_t hart_index,
++    const struct rpmi_system_suspend_type *syssusp_type,
++    rpmi_uint64_t resume_addr)
++{
++    RiscvRpmiState *s = priv;
++
++    if (s->machine_ops && s->machine_ops->system_suspend) {
++        s->machine_ops->system_suspend(s->machine_opaque);
++    }
++}
++
++static rpmi_bool_t riscv_rpmi_syssusp_can_resume(void *priv,
++                                                 rpmi_uint32_t hart_index)
++{
++    RiscvRpmiState *s = priv;
++
++    if (s->machine_ops && s->machine_ops->system_can_resume) {
++        return s->machine_ops->system_can_resume(s->machine_opaque);
++    }
++
++    return true;
++}
++
++static enum rpmi_error riscv_rpmi_syssusp_resume(
++    void *priv, rpmi_uint32_t hart_index,
++    const struct rpmi_system_suspend_type *syssusp_type,
++    rpmi_uint64_t resume_addr)
++{
++    RiscvRpmiState *s = priv;
++
++    s->syssusp_resume_hart_index = hart_index;
++    s->syssusp_resume_pending = true;
++    return RPMI_SUCCESS;
++}
++
++static const struct rpmi_syssusp_platform_ops riscv_rpmi_syssusp_ops = {
++    .system_suspend_prepare = riscv_rpmi_syssusp_prepare,
++    .system_suspend_ready = riscv_rpmi_syssusp_ready,
++    .system_suspend_finalize = riscv_rpmi_syssusp_finalize,
++    .system_suspend_can_resume = riscv_rpmi_syssusp_can_resume,
++    .system_suspend_resume = riscv_rpmi_syssusp_resume,
++};
++
++static void riscv_rpmi_wakeup_timer(void *opaque)
++{
++    RiscvRpmiState *s = opaque;
++
++    if (s->syssusp_resume_pending) {
++        riscv_rpmi_hsm_resume(s, s->syssusp_resume_hart_index);
++        s->syssusp_resume_pending = false;
++    }
++}
++
++static void riscv_rpmi_wakeup_notify(Notifier *notifier, void *data)
++{
++    RiscvRpmiState *s = container_of(notifier, RiscvRpmiState,
++                                     wakeup_notifier);
++
++    if (s->context) {
++        rpmi_context_process_group_events(s->context,
++                                          RPMI_SRVGRP_SYSTEM_SUSPEND);
++    }
++    if (s->wakeup_timer) {
++        /*
++         * Wakeup notifiers run before vCPUs resume. Defer the HSM
++         * kick so OpenSBI can leave WFI after QEMU restarts execution.
++         */
++        timer_mod(s->wakeup_timer, qemu_clock_get_ms(QEMU_CLOCK_REALTIME) + 10);
++    }
++}
++
++static bool riscv_rpmi_syssusp_create(RiscvRpmiState *s,
++                                      struct rpmi_service_group **group,
++                                      Error **errp)
++{
++    if (!s->hsm) {
++        error_setg(errp, "RPMI system suspend service requires HSM service");
++        return false;
++    }
++
++    if (s->machine_ops && s->machine_ops->register_wakeup_support) {
++        s->machine_ops->register_wakeup_support(s->machine_opaque);
++    }
++    if (!s->wakeup_timer) {
++        s->wakeup_timer = timer_new_ms(QEMU_CLOCK_REALTIME,
++                                       riscv_rpmi_wakeup_timer, s);
++    }
++    if (!s->wakeup_notifier_registered) {
++        s->wakeup_notifier.notify = riscv_rpmi_wakeup_notify;
++        qemu_register_wakeup_notifier(&s->wakeup_notifier);
++        s->wakeup_notifier_registered = true;
++    }
++
++    *group = rpmi_service_group_syssusp_create(
++        s->hsm, ARRAY_SIZE(riscv_rpmi_syssusp_types),
++        riscv_rpmi_syssusp_types, &riscv_rpmi_syssusp_ops, s);
++    if (!*group) {
++        error_setg(errp, "failed to create RPMI system suspend service group");
++        return false;
++    }
++
++    return true;
++}
++
++static void riscv_rpmi_syssusp_destroy(RiscvRpmiState *s)
++{
++    if (s->wakeup_notifier_registered) {
++        notifier_remove(&s->wakeup_notifier);
++        s->wakeup_notifier_registered = false;
++    }
++    if (s->wakeup_timer) {
++        timer_free(s->wakeup_timer);
++        s->wakeup_timer = NULL;
++    }
++
++    if (s->syssusp_group) {
++        rpmi_service_group_syssusp_destroy(s->syssusp_group);
++        s->syssusp_group = NULL;
++    }
++}
++
++bool riscv_rpmi_syssusp_add(RiscvRpmiState *s, Error **errp)
++{
++    struct rpmi_service_group *group;
++
++    if (s->syssusp_group) {
++        error_setg(errp, "duplicate RPMI system suspend descriptor");
++        return false;
++    }
++
++    if (!riscv_rpmi_syssusp_create(s, &group, errp)) {
++        return false;
++    }
++
++    if (!riscv_rpmi_context_add_group(s, group, "system suspend", errp)) {
++        s->syssusp_group = group;
++        riscv_rpmi_syssusp_destroy(s);
++        return false;
++    }
++
++    s->syssusp_group = group;
++    return true;
++}
++
++void riscv_rpmi_syssusp_remove(RiscvRpmiState *s)
++{
++    riscv_rpmi_context_remove_group(s, s->syssusp_group);
++    riscv_rpmi_syssusp_destroy(s);
++}
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 2b5f367bdb..21c218a78d 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -51,6 +51,7 @@
+ #include "chardev/char.h"
+ #include "system/device_tree.h"
+ #include "system/system.h"
++#include "system/runstate.h"
+ #include "system/tcg.h"
+ #include "system/kvm.h"
+ #include "system/tpm.h"
+@@ -1020,6 +1021,12 @@ static const RiscvRpmiServiceConfig virt_rpmi_services[] = {
+         .compatible = "riscv,rpmi-hsm",
+         .service_group = RISCV_RPMI_SRVGRP_HSM,
+     },
++    {
++        .kind = RISCV_RPMI_SERVICE_SYSSUSP,
++        .node_name = "suspend",
++        .compatible = "riscv,rpmi-system-suspend",
++        .service_group = RISCV_RPMI_SRVGRP_SYSTEM_SUSPEND,
++    },
+ };
+ 
+ static uint32_t virt_rpmi_service_count(RISCVVirtState *s)
+@@ -1037,9 +1044,27 @@ static void virt_rpmi_system_shutdown(void *opaque)
+     qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
+ }
+ 
++static void virt_rpmi_system_suspend(void *opaque)
++{
++    qemu_system_suspend_request();
++}
++
++static void virt_rpmi_register_wakeup_support(void *opaque)
++{
++    qemu_register_wakeup_support();
++}
++
++static bool virt_rpmi_system_can_resume(void *opaque)
++{
++    return runstate_check(RUN_STATE_RUNNING);
++}
++
+ static const RiscvRpmiMachineOps virt_rpmi_machine_ops = {
+     .system_reset = virt_rpmi_system_reset,
+     .system_shutdown = virt_rpmi_system_shutdown,
++    .system_suspend = virt_rpmi_system_suspend,
++    .register_wakeup_support = virt_rpmi_register_wakeup_support,
++    .system_can_resume = virt_rpmi_system_can_resume,
+ };
+ 
+ static RiscvRpmiConfig virt_rpmi_config(RISCVVirtState *s,
+diff --git a/include/hw/misc/riscv_rpmi.h b/include/hw/misc/riscv_rpmi.h
+index 37c56ea2e8..a4fe2aac63 100644
+--- a/include/hw/misc/riscv_rpmi.h
++++ b/include/hw/misc/riscv_rpmi.h
+@@ -29,6 +29,7 @@
+ 
+ #define RISCV_RPMI_SRVGRP_SYSTEM_RESET   3
+ #define RISCV_RPMI_SRVGRP_HSM            5
++#define RISCV_RPMI_SRVGRP_SYSTEM_SUSPEND 4
+ 
+ #define TYPE_RISCV_RPMI "riscv-rpmi"
+ OBJECT_DECLARE_SIMPLE_TYPE(RiscvRpmiState, RISCV_RPMI)
+@@ -43,11 +44,15 @@ typedef enum RiscvRpmiServiceKind {
+     RISCV_RPMI_SERVICE_INVALID = 0,
+     RISCV_RPMI_SERVICE_SYSRESET,
+     RISCV_RPMI_SERVICE_HSM,
++    RISCV_RPMI_SERVICE_SYSSUSP,
+ } RiscvRpmiServiceKind;
+ 
+ typedef struct RiscvRpmiMachineOps {
+     void (*system_reset)(void *opaque);
+     void (*system_shutdown)(void *opaque);
++    void (*system_suspend)(void *opaque);
++    void (*register_wakeup_support)(void *opaque);
++    bool (*system_can_resume)(void *opaque);
+ } RiscvRpmiMachineOps;
+ typedef struct RiscvRpmiServiceConfig {
+     RiscvRpmiServiceKind kind;
+@@ -86,9 +91,15 @@ struct RiscvRpmiState {
+     const RiscvRpmiMachineOps *machine_ops;
+     void *machine_opaque;
+     struct rpmi_service_group *sysreset_group;
++    struct rpmi_service_group *syssusp_group;
+     struct rpmi_hsm *hsm;
+     struct rpmi_service_group *hsm_group;
+     uint32_t *hsm_hw_states;
++    Notifier wakeup_notifier;
++    bool wakeup_notifier_registered;
++    QEMUTimer *wakeup_timer;
++    bool syssusp_resume_pending;
++    uint32_t syssusp_resume_hart_index;
+     uint32_t *hart_ids;
+     uint32_t hart_count;
+     const RiscvRpmiServiceConfig *services;
+-- 
+2.43.0
 
-What should own sysbus devices? The machine? Or is it the bus which owns 
-the devices connected to it? Another problem is that machines usually use 
-convenience functions to create devices such as sysbus_create_simple and 
-pci_create_simple so if these devices need to be attached to the machine 
-then these convenience functions should take care of that not the board 
-code. It's rare that a device does object_new or object_initialize to get 
-a device and it would be inconvenient to then cast the result to object 
-and parent it somewhere where the functions that created the device could 
-do this.
-
-> Canonical QOM paths are visible at external interfaces both as input and
-> as output.  A few quick examples:
->
-> * QMP command query-cpus-fast reports a CPU's canonical QOM path.  For
->  some machines, we get something like "/machine/unattached/device[0]".
->  Fine as long as the client treats it as an opaque handle.  For other
->  machines, we get something like "/machine/soc/cpu", which is clearly
->  better.
-
-As you say does not matter what is it called if it's just a handle.
-
-> * Error messages use canonical QOM paths to identify devices.  With
->  properly modeled hardware, these paths are actually helpful for
->  humans.  Something like "/machine/unattached/device[7]" not so much.
-
-Never seen such error message. Usually errors also say what device it is 
-from so usually straightforward to know where it comes from.
-
-> * QMP command device-sync-config accepts a QOM path argument.  With
->  properly modeled hardware, you can use a stable canonical QOM path.
->  But when the device is in the /machine/unattached orphanage, its
->  canonical QOM path is unstable.  A client has to first search the
->  orphanage to find today's path.
-
-Never needed to use device-sync-config. It's not even documented at 
-https://www.qemu.org/docs/master/system/monitor.html#qemu-monitor so I 
-have no idea what this command does. Found some info here:
-https://www.qemu.org/docs/master/devel/qdev-api.html but I don't know 
-about any device implementing that so it's probably a rare thing.
-
-> Further questions?
-
-Basically the question was why should I think about this if things work 
-now and nobody complained about it so it looked like it just bothers you 
-that there are some unparented objects that could be put in some other 
-category, but it's not a real issue for any common problem other than 
-esthetics. I'm OK with solving that within QOM or qdev or somewhere where 
-I don't have to think about it when writing board code. Imposing it on the 
-board code looks like additional complexity and yet another thing to 
-confuse new people trying to create a machine so unless there's a good 
-reason to require that I'd do without it.
-
-Where are stable QOM paths needed? If you can't predict them and still 
-need to query it first then it likely does not matter what is the path as 
-it's just used to query and refer to a device as a handle so in that case 
-we may just forget the path hierarchy and make it flat and that would also 
-solve your issue with unparented devices.
-
-Regards,
-BALATON Zoltan
 
