@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B144C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:03:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F7A8C44506
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:04:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiIIE-0000Ot-O4; Fri, 10 Jul 2026 16:57:54 -0400
+	id 1wiIHO-0005vH-8I; Fri, 10 Jul 2026 16:57:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiIIC-0000FF-3d
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:57:52 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ id 1wiIFT-00029G-SW
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:55:04 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiII6-0001r3-R0
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:57:51 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-381018b9375so1737996a91.0
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:57:46 -0700 (PDT)
+ id 1wiIFC-0000wG-9D
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:55:03 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-8487b7b3fc7so798114b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:54:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783717065; x=1784321865; darn=nongnu.org;
+ d=linaro.org; s=google; t=1783716875; x=1784321675; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=9Z8VyrlNOS3AtUzlV7fFAEANc3KY/TwCjUicBVUQopA=;
- b=NCElr68YS9piSHtJUMjfvpqYzpoHGLcEBEJLrndO+kjGtoPbbclWiPUxqUwYl04lFw
- pptH5MGygnufRYYyuZOrPYQuWNA+uDuOVQrjWRWbcatrOUg0gQj1iljOvWDAcV+yiOJQ
- g8pxlbQXCtAfimrWOJXCJX7SMMfGPc2BSJMqRjpe/s8vsaldXMF8+6BkF5amg4ipeITu
- gAmR1GHTX7Cn3EQpmaqMCZ0WG1jXMdT7gRwyAPs+5jGpv3nu89V9eSjEEiT43IyHYU4V
- aMM/1ZRbqPIDlFalf28tNDhtgTf0k8gb1/Bu7TLHxdEA+EIZrLNncKF/iiD6yJXjVr1P
- 4V/A==
+ bh=aii0dYUlzhh0daweMydBIrcsyG896sPYULsiw+pFWxo=;
+ b=rLiEaUxP01vMQwKnrM8/kl5XPl7DzHJu8bE/aSe21MdFxjmLpZg/NwJXmdi8C2sz/T
+ F1i1rbtO+fSVrJP5UXv10sjEG99VgEi2tLfsfV/ZIYkfpImN+3RsN61/DrbzXGqtI0Fv
+ nHYVxitiZP3Sj/v0Qyua/+umztATp+eorr0Yb38/PVci+V2C0bU1L62IOVIGD7qvO6oX
+ qRtLJVJmP/6QUM/8ok04JGbh/kaiu8rKZ5EyRbw0e1wnQV4SCag5znPrIDzKgqjutFv/
+ qCB/zKS7UphUp2PZv/oE0j7E6GKMeisLDKzzKylp9nuMQ9l4sPIQMFLm4Wl7pkIF04Qj
+ gAuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783717065; x=1784321865;
+ d=1e100.net; s=20251104; t=1783716875; x=1784321675;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=9Z8VyrlNOS3AtUzlV7fFAEANc3KY/TwCjUicBVUQopA=;
- b=jb2GHCwmbTS3DjHe8w5DVTFRwmQaRu9+GDRE2S87kZZ/5AOH3X2FA6GJAFHVb37HYp
- Pne89oZJYBcdfPZBIMTv6QW54CnPqzapwgqE5+T2LETCI3dO5RTfY6ZxdLk26Wu6HorN
- GanhDJkF9vsm1Zh05w3PUouJ7MTvw29IJq7t9iDluM5p+fryZZNNRuMyn7PhN2HPe4Z1
- bwe8Oz7805A3WPTwsggxOaFJ6R3HLHGY066Vq8C9PVOnHgbG6QEY3CgjIjdE5Pk58y9S
- 99/bFCmUOc04JZXJ+4Flx+E4PhUMFVSYS582CzSMlcxQsZnUkQbaFJ0p5+jaQpeEoIxh
- 55GQ==
+ bh=aii0dYUlzhh0daweMydBIrcsyG896sPYULsiw+pFWxo=;
+ b=Xqgf3CSOUvPjJ+u9Y5Cp3Ia2wj7q84mQLTuspnVkqDu9gUr+fAlWq5ZpUAEK71DqKw
+ Sk7g2o2vQFdYchkbwM8T/rM4n929c9kdN87dederqp5nYOLyq6h29pxCnOnmqgd+vsak
+ X+AAjpxWoeKo75vVxXHu5G8CRuklDJ6TufhAV6ddadgX1aPhdtHoRTtgqfQS5lhFMprG
+ 5ubmci8r99m153WMr6l8ZJ2CZM5TNJqymNuBzl/XAx/sltHJBf7h/JiidcRuiQ6a31yp
+ IPKTtJqVDRLvpfSfpyYUq/KAGRvhhnnT46utA+ovpTeXhXLOUSsub/n0N4SSt5ncfaaa
+ po7g==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rrdqq7iKMUMYLKnA4YWaGFUJb0fmOW5JehZRlyMDrUuCa60R14LMqR+brfImVIyn+KIRNiPdR7kOq8p@nongnu.org
-X-Gm-Message-State: AOJu0YwH7ob8aN5n+305/5RunaMghNStkgQfCO+AxL4FVKXenIVLAKmn
- xawS/jrZi2TDw61C9z5xtC8g0XFbCOxP+r4wO4QzA6HmnkOzwte1Rh1ZOSJWJx2C8l4=
-X-Gm-Gg: AfdE7ckR2B1Kaa6pE5bOymjl/fyLFUkkp+1WJE/ETW0Jrz7ZUdMs/GeWF+K0IRQ57aS
- MSOOuvrpsrGmVRl/nJAvonIsX3a57rlDr9MI3ewoaNyKIWhhykbtL4jylOVntZDfyVzc7Mg2LUU
- NFwYY+gaJ21YCHKcgmPEScVgQRY5YR/JOfZaVVZFK4zOB4hnbWo0eH3TCK+dRJOZ0BXWh72Ee5i
- ISMsm5ysUJPMkOSSY3AMXyFXN6jYGd1gMA2Qk8jHF7IsKQbd2W6Q1m2GYHqAu3sQrATUZ4eiOwK
- Dvx3Rv6JdSKf9u42cKA0V71tW6vWmywewXIPP5lB3WH+fDWjZVdfcuLkjGGzh1sX+s7aqGd86b9
- ERgoZwlLi/NnbMeIVZaoV+nuOakjU480Zfozj11EdRFe5clQb/JwgXb1fJuhF2szVspY3qYoNF8
- L3b3m+8rEawamsq0bJOg==
-X-Received: by 2002:a17:90b:2750:b0:387:df8f:1405 with SMTP id
- 98e67ed59e1d1-38dc77badd3mr469550a91.38.1783717065021; 
- Fri, 10 Jul 2026 13:57:45 -0700 (PDT)
+ AHgh+Rpgl1zyd9qkPdR2I+N5ET6bS4DWaBxMaT20mmhrrS1zN7fMRNOWBE/lytmdnlYDnY6jPcdEjElX3l1E@nongnu.org
+X-Gm-Message-State: AOJu0YxGO0ajJaylbn5TTzPvQZBmVuv1GmfUDDeHaBXZAoxsHhNhovkj
+ 1bfTM7jDTEF08un3GeDa+zD9gsTaTJ6TMbNvzP4E9UC8HP0aFm0cDokT0Cu0Dkz4i6Y=
+X-Gm-Gg: AfdE7ck4YQ90g20jEgCdJEp7c4OAFaXKUXuD/TKPhEvyZSqWstSqbFEubB+GarACYsz
+ UABjCQU7OOIdUVO3WeWIGm2EUGin8n1Q8roVSb9cvN4HdzeMNgJGUPpdQmI84BifluW0wXZw4aM
+ /+LEaSV4mJXZ0cETaj4LffM6wqWeFuMm3svaJrGjxFExbguIYj1rhdaYCIo4Ne6ZvY+YUGDhLea
+ 1MH/tbmbwf6z6M9jxYwbuM/8sTH6ZG8/co8gUR7RcmNbe7hsnEcbTYTv/I7uXght991QvWoFzS6
+ uyBSOk5YKf9VJ7l44XicWvL1ure6Lr+CxxfSDU3wcnCNBrHmAtwSY4d1OoJEl1FN5hAczV/QPNe
+ pOBbkxJ1hStJFyYI1lYKWK+ltmUh2ulaP95iGmt3QYr0X7JAeqdsV5oBuhZ1kuVvPGfVPUR8ARZ
+ CvVuSAqD8yNbNPOfhS9gOiq3F7fkoo
+X-Received: by 2002:a05:6a00:450f:b0:848:2f71:b65b with SMTP id
+ d2e1a72fcca58-848897d5cc1mr491288b3a.70.1783716874801; 
+ Fri, 10 Jul 2026 13:54:34 -0700 (PDT)
 Received: from stoup.. ([71.212.146.49]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-38a58792cdasm3256221a91.16.2026.07.10.13.57.44
+ d2e1a72fcca58-847f6d76106sm10780574b3a.40.2026.07.10.13.54.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 13:57:44 -0700 (PDT)
+ Fri, 10 Jul 2026 13:54:34 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
-Subject: [PATCH v3 40/51] target/xtensa: Simplify xtensa_cpu_debug_excp_handler
-Date: Fri, 10 Jul 2026 13:53:50 -0700
-Message-ID: <20260710205401.836304-41-richard.henderson@linaro.org>
+Subject: [PATCH v3 29/51] target/i386: Pass wp_hit to check_hw_breakpoints
+Date: Fri, 10 Jul 2026 13:53:39 -0700
+Message-ID: <20260710205401.836304-30-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260710205401.836304-1-richard.henderson@linaro.org>
 References: <20260710205401.836304-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -101,77 +101,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-No longer need to check BP_CPU.
-Use hit->id instead of a search over ndbreak.
-Unify the raising of the exception.
+Since force_dr6_update is set exclusively for breakpoints,
+replace force_dr6_update with wp_hit == NULL.
+
+Use the value of wp_hit to notice which watchpoint is hit.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/xtensa/helper.c | 41 ++++++++++-------------------------------
- 1 file changed, 10 insertions(+), 31 deletions(-)
+ target/i386/tcg/helper-tcg.h        |  2 +-
+ target/i386/tcg/bpt_helper.c        |  2 +-
+ target/i386/tcg/system/bpt_helper.c | 32 ++++++++++++-----------------
+ 3 files changed, 15 insertions(+), 21 deletions(-)
 
-diff --git a/target/xtensa/helper.c b/target/xtensa/helper.c
-index 7643e97b2c..f66d0bff04 100644
---- a/target/xtensa/helper.c
-+++ b/target/xtensa/helper.c
-@@ -207,47 +207,26 @@ void xtensa_register_core(XtensaConfigList *node)
+diff --git a/target/i386/tcg/helper-tcg.h b/target/i386/tcg/helper-tcg.h
+index 01f4a8bcd0..2227712e2e 100644
+--- a/target/i386/tcg/helper-tcg.h
++++ b/target/i386/tcg/helper-tcg.h
+@@ -114,7 +114,7 @@ int exception_has_error_code(int intno);
+ void do_smm_enter(X86CPU *cpu);
+ 
+ /* system/bpt_helper.c */
+-bool check_hw_breakpoints(CPUX86State *env, bool force_dr6_update);
++bool check_hw_breakpoints(CPUX86State *env, CPUBreakpoint *wp_hit);
+ 
+ /*
+  * Do the tasks usually performed by gen_eob().  Callers of this function
+diff --git a/target/i386/tcg/bpt_helper.c b/target/i386/tcg/bpt_helper.c
+index bc34ac27fe..bcb9869c86 100644
+--- a/target/i386/tcg/bpt_helper.c
++++ b/target/i386/tcg/bpt_helper.c
+@@ -25,7 +25,7 @@
+ G_NORETURN void helper_single_step(CPUX86State *env)
+ {
+ #ifndef CONFIG_USER_ONLY
+-    check_hw_breakpoints(env, true);
++    check_hw_breakpoints(env, NULL);
+     env->dr[6] |= DR6_BS;
+ #endif
+     raise_exception(env, EXCP01_DB);
+diff --git a/target/i386/tcg/system/bpt_helper.c b/target/i386/tcg/system/bpt_helper.c
+index 8ba5dfcfc1..5dab77b2c4 100644
+--- a/target/i386/tcg/system/bpt_helper.c
++++ b/target/i386/tcg/system/bpt_helper.c
+@@ -160,34 +160,27 @@ void cpu_x86_update_dr7(CPUX86State *env, uint32_t new_dr7)
+     env->hflags = (env->hflags & ~HF_IOBPT_MASK) | iobpt;
  }
  
- #ifndef CONFIG_USER_ONLY
--static uint32_t check_hw_breakpoints(CPUXtensaState *env)
--{
--    unsigned i;
--
--    for (i = 0; i < env->config->ndbreak; ++i) {
--        if (env->cpu_watchpoint[i] &&
--                env->cpu_watchpoint[i]->flags & BP_WATCHPOINT_HIT) {
--            return DEBUGCAUSE_DB | (i << DEBUGCAUSE_DBNUM_SHIFT);
--        }
--    }
--    return 0;
--}
--
- void xtensa_cpu_debug_excp_handler(CPUState *cs, CPUBreakpoint *hit)
+-bool check_hw_breakpoints(CPUX86State *env, bool force_dr6_update)
++bool check_hw_breakpoints(CPUX86State *env, CPUBreakpoint *wp_hit)
  {
-     CPUXtensaState *env = cpu_env(cs);
-+    uint32_t cause;
+-    target_ulong dr6;
+-    int reg;
++    target_ulong dr6 = env->dr[6] & ~0xf;
++    bool force_dr6_update = wp_hit == NULL;
+     bool hit_enabled = false;
+ 
+-    dr6 = env->dr[6] & ~0xf;
+-    for (reg = 0; reg < DR7_MAX_BP; reg++) {
+-        bool bp_match = false;
+-        bool wp_match = false;
++    for (int reg = 0; reg < DR7_MAX_BP; reg++) {
++        bool match = false;
+ 
+         switch (hw_breakpoint_type(env->dr[7], reg)) {
+         case DR7_TYPE_BP_INST:
+-            if (env->dr[reg] == env->eip) {
+-                bp_match = true;
+-            }
++            match = env->dr[reg] == env->eip;
+             break;
+         case DR7_TYPE_DATA_WR:
+         case DR7_TYPE_DATA_RW:
+-            if (env->cpu_watchpoint[reg] &&
+-                env->cpu_watchpoint[reg]->flags & BP_WATCHPOINT_HIT) {
+-                wp_match = true;
+-            }
++            match = wp_hit == env->cpu_watchpoint[reg];
+             break;
+         case DR7_TYPE_IO_RW:
+             break;
+         }
+-        if (bp_match || wp_match) {
++        if (match) {
+             dr6 |= 1 << reg;
+             if (hw_breakpoint_enabled(env->dr[7], reg)) {
+                 hit_enabled = true;
+@@ -207,10 +200,11 @@ void breakpoint_handler(CPUState *cs, CPUBreakpoint *hit)
+     X86CPU *cpu = X86_CPU(cs);
+     CPUX86State *env = &cpu->env;
  
 -    if (cs->watchpoint_hit) {
 -        if (cs->watchpoint_hit->flags & BP_CPU) {
--            uint32_t cause;
--
--            cs->watchpoint_hit = NULL;
--            cause = check_hw_breakpoints(env);
--            if (cause) {
--                debug_exception_env(env, cause);
--            }
--            cpu_loop_exit_noexc(cs);
--        }
-+    if (hit->flags & BP_MEM_ACCESS) {
-+        /* watchpoint */
-+        cause = DEBUGCAUSE_DB | (hit->id << DEBUGCAUSE_DBNUM_SHIFT);
-     } else {
--        if (cpu_breakpoint_test(cs, env->pc, BP_GDB)
--            || !cpu_breakpoint_test(cs, env->pc, BP_CPU)) {
--            return;
--        }
-+        /* breakpoint */
-         if (env->sregs[ICOUNT] == 0xffffffff &&
-             xtensa_get_cintlevel(env) < env->sregs[ICOUNTLEVEL]) {
--            debug_exception_env(env, DEBUGCAUSE_IC);
-+            cause = DEBUGCAUSE_IC;
-         } else {
--            debug_exception_env(env, DEBUGCAUSE_IB);
-+            cause = DEBUGCAUSE_IB;
++    hit = cs->watchpoint_hit;
++    if (hit) {
++        if (hit->flags & BP_CPU) {
+             cs->watchpoint_hit = NULL;
+-            if (check_hw_breakpoints(env, false)) {
++            if (check_hw_breakpoints(env, hit)) {
+                 /*
+                  * FIXME: #DB should be delayed by one instruction if
+                  * INHIBIT_IRQ is set (STI cannot trigger a watchpoint).
+@@ -224,7 +218,7 @@ void breakpoint_handler(CPUState *cs, CPUBreakpoint *hit)
          }
--        cpu_loop_exit_noexc(cs);
+     } else {
+         if (cpu_breakpoint_test(cs, env->eip, BP_CPU)) {
+-            check_hw_breakpoints(env, true);
++            check_hw_breakpoints(env, NULL);
+             raise_exception(env, EXCP01_DB);
+         }
      }
-+
-+    debug_exception_env(env, cause);
-+    cpu_loop_exit_noexc(cs);
- }
- 
- void xtensa_cpu_do_unaligned_access(CPUState *cs,
 -- 
 2.43.0
 
