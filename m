@@ -4,144 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58EBEC43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 13:04:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58715C44501
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 19:21:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiAsA-0006cV-LI; Fri, 10 Jul 2026 09:02:30 -0400
+	id 1wiGk3-0000go-IO; Fri, 10 Jul 2026 15:18:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wiArI-00068c-Tk
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 09:01:42 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
+ id 1wiGk1-0000g7-EU; Fri, 10 Jul 2026 15:18:29 -0400
+Received: from forwardcorp1d.mail.yandex.net ([178.154.239.200])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wiArG-00062V-W2
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 09:01:36 -0400
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66AAnCtp570608
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:01:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=xfihhQahT18
- tqw16GN07qOdNHK6O56x78Dza3ykZ+F8=; b=ejIOubgOS7KC76YvktDYMvNKmfc
- Quv4GzlDqTypLd2RFlX0Aw4i5aRfoBhLC3sBDic+8kkyfnFTAoinHmz/PjvWQsME
- 20zYtemE1TbwYXFaRX0BDhr8OD/CBGbCb/i/Bpjm31sBWkgHiKRWYUvt9qNvVxW/
- 6t8Hl+bAz5iv6UqCx3sQS9KMzSTWrugif0Pcgn5Q0E08naAywW+zmR8dlBuEhFyO
- I1Llxs43HyVj4GVAd8Nnoj4N9LwftGm8TW1XqCTVGbul8QEJQz7ZXhp/Nr9su/eR
- ukLarz+mTW/w/XXu+FloytFHTOWfF6amfdTaJyx4tD9CNmEY+ERFgenQ+WA==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fax5f8qpu-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:01:33 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-38105cc58e1so254701a91.3
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 06:01:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783688492; x=1784293292; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=xfihhQahT18tqw16GN07qOdNHK6O56x78Dza3ykZ+F8=;
- b=AljFfuInOtl6uMmm7fUqLrc7wajkFkOa03Vw5BCdV0BoO3b9AQAXGPr/z5Dk056h3q
- cs8uFKImLc96EcE9Wr1OpPN4S0hDjW/kNPTeSyjq89tq+voJcPvMd66PKHF3GI7IlNy4
- uXrvOrrJ6S7b1CAGjCfsd0otwHLoaK23Pmal2xWXT272VK9YxUSMwY/2DA+bZTBwJ6kO
- r8IUCcZYADcCPJf3IJK3RihrIABFkNnS0PPjsUzhWGHXuGx7x4eMCU7izKeHCXNZkjst
- WiIXCWiQgf4gbJvaOmOPSVb6SD+7ie3Yk3dRJ8yXg3Z8Ri8RLUMSjv+1qy9gRd+oMmVH
- vB4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783688492; x=1784293292;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=xfihhQahT18tqw16GN07qOdNHK6O56x78Dza3ykZ+F8=;
- b=ljdDWcDmYs6JcRRMaNl95PYrQBYqHdgJ5RxLqsHVgiFo4w2A3K9QaJCRgTDAf6Y/bw
- CKr22ecZC2OQ3P14qgj+eO3zsJCdARfQm2Z4j1+kPfTPd+k0YkyWmTn2g8sFnxgG0LWD
- C0csLPGbE2DH9iBdfYMhyF2/BDOMi/U4HQdlmmMR7PljQJ2UrB2zFMWj6rzX6laSbThH
- s8R7hiJCj9HWq08uC1zPvPB2nRAy8dvwoVB8DUg4bdeGLD326AaLfCVZ+1yI6Z4s6tdB
- gepnywA4y9+Sf8zbBsRayf2Fm/V0bjqnB5GRburxmf4NzjWm8BBCV3HGYKrxOe2riOtB
- 17xQ==
-X-Gm-Message-State: AOJu0YwHJxH+TZKKJ7zof+kfix0KR5TRbxm6UvilXDO2m8WmCu/M+jxD
- GqUXrgA07bzvs+VMvCabBc2NFvQaXoFeHes5PDwRmyeNeGMsv89aW8g9UAA0TWn/ha+qWFBMIj2
- aM/ovtfLelBDCWBCPjwsGZFUdhY/qW2p515pM1Z6NwiZ4NlilxbxPkyiQtvUXMkqxKw==
-X-Gm-Gg: AfdE7cl2Nk6B0HMw2RZo1sbNNyf1z3Yf1UNryAaTL3WSENRc+u15KXvGx7baTcDrncK
- A59VbI53VmNc326CvArhch15oi2ErDHZjDlZqD/av7zr7scmWA8G8kEYQe1226h5Lpu/yw1tW+l
- 6hGe5J/x4+rmKM52v95Gvv78ICj3uQPK7/oKuyu11W5IYj81u54aHDO7JE2qeOGTHIQx3sJzFU2
- oH57BJbc3rrZHUK6TBuXIYwhht7hk5/LASlF5mCNt/t/oFB9Hq12PC7uH1xT2qpTOJbVTlvf2ZN
- XZHedPjLpVg18QVO2/NPG3edTY0J7c49qRLMmC/DcRuhBx+1xjZxx4k2zHGzr5uuNuh7fHJA6sp
- c3A2w5gVsZznjl2mcRiL77+awovogfTnjaK+06Qky5+ZdJ8thNq2hDG2a9WDH0wOmQO+EvBoul6
- U3vc+My+H5OHXhhUwQJmG5RD5m8E40ARfiSOzwQgnFmg==
-X-Received: by 2002:a17:90a:e70e:b0:37f:e7e7:ad1 with SMTP id
- 98e67ed59e1d1-38a2103a8a8mr7065530a91.5.1783688491947; 
- Fri, 10 Jul 2026 06:01:31 -0700 (PDT)
-X-Received: by 2002:a17:90a:e70e:b0:37f:e7e7:ad1 with SMTP id
- 98e67ed59e1d1-38a2103a8a8mr7065493a91.5.1783688491335; 
- Fri, 10 Jul 2026 06:01:31 -0700 (PDT)
-Received: from hu-slingapp-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-313b4cbafa1sm9611839eec.6.2026.07.10.06.01.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 06:01:30 -0700 (PDT)
-From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-To: qemu-riscv@nongnu.org
-Cc: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
+ (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
+ id 1wiGjz-00055D-Dc; Fri, 10 Jul 2026 15:18:29 -0400
+Received: from mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
+ (mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
+ [IPv6:2a02:6b8:c42:94a9:0:640:a3fa:0])
+ by forwardcorp1d.mail.yandex.net (postfix) with ESMTPS id 84770808B9;
+ Fri, 10 Jul 2026 22:18:24 +0300 (MSK)
+Received: from i115954770.yandex-team.ru (unknown [2a02:6bf:8080:c7d::1:20])
+ by mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net (smtpcorp) with ESMTPSA
+ id AIRXsO0a8eA0-gmOl9KC0; Fri, 10 Jul 2026 22:18:23 +0300
+Precedence: bulk
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+ s=default; t=1783711103;
+ bh=XU6rFdMa6qjuR/yF7DSa18zwJcjKZIiGNqq4ynL/1x8=;
+ h=Cc:Message-ID:References:Date:In-Reply-To:Subject:To:From;
+ b=Huru2vOhEY5FtAh3de7SS4ROuzpqxri8ELZL2ZgVKslOnDU0DfKT5P+IwqV4USFGL
+ CvZLpUZro8P/Zgi3ps9C+mqz0Pc30RJOFPDxFJt15QMj4aX1tSTvuE4ybn2GgV/p6X
+ SisTpLxIrfspR/+wKaBJUCssDt0CSapYm9zxq/u4=
+Authentication-Results: mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net;
+ dkim=pass header.i=@yandex-team.ru
+From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+To: jasowang@redhat.com,
+	mst@redhat.com
+Cc: armbru@redhat.com, peterx@redhat.com, farosas@suse.de,
+ raphael.s.norwitz@gmail.com, bchaney@akamai.com, vsementsov@yandex-team.ru,
+ qemu-devel@nongnu.org, berrange@redhat.com, pbonzini@redhat.com,
+ yc-core@yandex-team.ru, mark.caveayland@nutanix.com,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- qemu-devel@nongnu.org (open list:All patches CC here)
-Subject: [PATCH 08/10] docs/system/riscv: document initial virt RPMI support
-Date: Fri, 10 Jul 2026 18:30:42 +0530
-Message-ID: <10f13dfad6528556a3bb4aa077aca8c38e34bc24.1783660209.git.subrahmanya.lingappa@oss.qualcomm.com>
+ Sergio Lopez <slp@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Bernhard Beschow <shentey@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Jason Wang <jasowangio@gmail.com>,
+ Eric Blake <eblake@redhat.com>,
+ devel@lists.libvirt.org (open list:Incompatible changes),
+ xen-devel@lists.xenproject.org (open list:X86 Xen CPUs),
+ qemu-ppc@nongnu.org (open list:e500),
+ qemu-riscv@nongnu.org (open list:Microchip PolarFi...)
+Subject: [PATCH v18 03/14] net/tap: deprecate "no" as special value for
+ script/downscript
+Date: Fri, 10 Jul 2026 22:17:52 +0300
+Message-ID: <20260710191809.721154-4-vsementsov@yandex-team.ru>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1783660209.git.subrahmanya.lingappa@oss.qualcomm.com>
-References: <cover.1783660209.git.subrahmanya.lingappa@oss.qualcomm.com>
+In-Reply-To: <20260710191809.721154-1-vsementsov@yandex-team.ru>
+References: <20260710191809.721154-1-vsementsov@yandex-team.ru>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=Ab2B2XXG c=1 sm=1 tr=0 ts=6a50ed2d cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=V1jnuoLLAAAA:20
- a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=RyhCfiGMEKD-kOZgqhYA:9
- a=uKXjsCUrEbL0IQVhDsJ9:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-ORIG-GUID: 07YhKYMX8e-tw5mHS8ejXKqlwOi5-pb8
-X-Proofpoint-GUID: 07YhKYMX8e-tw5mHS8ejXKqlwOi5-pb8
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDEyOSBTYWx0ZWRfX/shR+nc4CaaU
- j89SK3qrLFE7OXC7te81qORk/FIZ1qU8sg3oBVUAQaz6zJ+cWsISytAMmQSmOEJZXzQ7+q7o6C3
- sMop5VXMqEM2rISXC9EgWaqXF4+tHLg=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDEyOSBTYWx0ZWRfX/BNVa6nEkQae
- ZaT299N6su8+DPt3IY2HrIt4YeGOyu90XqbCdAQ6fk5biCmAqKnDoTFvE9r9/HWyZppn9IQfJmP
- T/I45eX+9QtopRAL4NDNDdzUHXzfSMX3/J0wU+UewbpuCxk8tFcOjunXSBEQHDB05vVvHDHDNzn
- xX6HRClyM55U0HkeQxNy2nPMb+NER6M2GVwB3ZgM+l2RsW56g0oAhnAeKfXI9HuYFeA44yUtIpl
- 6JtScHh3ApkRM/lWfhqp1fWdkkmx+3afsLtLmoDVTXaAxPBAO9L0Iq9wO3SmpLVrPFAzjxwuFGn
- 5Uvor9EAxofvhWpJiPJUJPN97Y8rtnuycv5eDEJd4gTQrztneAcARCNEuIvxCR2fBHKhv51hJXj
- ZxTomfCF+nEw86bbjD2lKvh2W9ucd8SVUxowMA9YXS6eWWKRv9zOFaN8sxiuEENY0/GeMAtGORi
- dLA+TmvGd5WKtYvWg5g==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-10_03,2026-07-09_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 malwarescore=0 phishscore=0 bulkscore=0
- suspectscore=0 impostorscore=0 lowpriorityscore=0 priorityscore=1501
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607100129
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Received-SPF: pass client-ip=178.154.239.200;
+ envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1d.mail.yandex.net
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
-Precedence: list
 List-Id: <qemu-riscv.nongnu.org>
 List-Unsubscribe: <https://lists.nongnu.org/mailman/options/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=unsubscribe>
@@ -152,79 +88,215 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-Message-ID: <20260710130042.KwT4tXe_xmEW7SdGbYa5P1LSbBGn2U0KtUnSpFz-4pU@z>
 
-From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+The interface is ambiguous, as "no" is valid file name. So,
+using "no" as a special value to disable script is deprecated.
+Use an empty string ("script=" / "downscript=") instead.
 
-Document the opt-in virt RPMI transport and the initial HSM, system
-reset, and system suspend service groups.
+In a future version, "no" will be treated as a plain file name, just
+like any other non-empty value.
 
-Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
+and qemu-options.hx. Update other docs to use empty string instead of
+"no". Add a warning.
+
+Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
 ---
- docs/system/riscv/virt.rst | 50 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 50 insertions(+)
+ docs/about/deprecated.rst                  | 18 ++++++++++++++++++
+ docs/system/i386/microvm.rst               |  4 ++--
+ docs/system/i386/xenpvh.rst                |  2 +-
+ docs/system/ppc/ppce500.rst                |  4 ++--
+ docs/system/riscv/microchip-icicle-kit.rst |  2 +-
+ docs/system/riscv/sifive_u.rst             |  2 +-
+ net/tap.c                                  |  2 ++
+ qapi/net.json                              | 12 ++++++++----
+ qemu-options.hx                            |  7 +++++--
+ 9 files changed, 40 insertions(+), 13 deletions(-)
 
-diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-index 60850970ce..8e88f780e1 100644
---- a/docs/system/riscv/virt.rst
-+++ b/docs/system/riscv/virt.rst
-@@ -146,6 +146,56 @@ The following machine-specific options are supported:
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 0c656a968fc..c4929317e3a 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
+ ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
+ short convenience options are not deprecated, only ``-mon``.
  
-   Enables the riscv-iommu-sys platform device. Defaults to 'off'.
++``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``-netdev tap`` disables script execution.  This special
++treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
++or ``downscript=``) to disable script execution instead.  In a future
++version, ``"no"`` will be treated as a plain file name.
++
+ QEMU Machine Protocol (QMP) commands
+ ------------------------------------
  
-+- rpmi=[on|off]
-+
-+  Enables the RISC-V RPMI shared-memory transport. This option defaults to
-+  "off", is TCG-only, and is available only when QEMU is built with librpmi
-+  support. This support targets the RISC-V Platform Management Interface
-+  (RPMI) Specification v1.0 Ratified (`RPMI v1.0 specification`_). The initial
-+  ``virt`` implementation exposes RPMI system reset, system suspend, and HSM
-+  service groups. System reset can request shutdown or cold reboot through
-+  RPMI. HSM uses the ``virt`` hart IDs and supports hart discovery, status,
-+  start, stop, and suspend commands. System suspend uses QEMU's suspend and
-+  wakeup path. Migration is currently blocked while RPMI transport and service
-+  VMState support is being designed.
-+
-+  The build dependency is provided by `librpmi`_. Install librpmi so that
-+  ``pkg-config`` can find ``librpmi.pc``, then configure QEMU with
-+  ``--enable-librpmi`` or ``-Dlibrpmi=enabled``.
-+
-+.. _RPMI v1.0 specification: https://github.com/riscv-non-isa/riscv-rpmi/releases/download/v1.0/riscv-rpmi.pdf
-+.. _librpmi: https://github.com/riscv-software-src/librpmi
-+
-+RPMI firmware and guest smoke
-+-----------------------------
-+
-+A firmware-level RPMI smoke test can be run with OpenSBI, a Linux kernel, and a
-+RISC-V disk image:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 \
-+      -machine virt,rpmi=on \
-+      -cpu rv64 -smp 4 -m 4G -nographic \
-+      -bios /path/to/fw_jump.bin \
-+      -kernel /path/to/Image \
-+      -append "root=/dev/vda rw console=ttyS0 earlycon=sbi" \
-+      -drive file=/path/to/rootfs.img,format=raw,if=virtio,snapshot=on
-+
-+The OpenSBI banner should report RPMI-backed HSM and system suspend support.
-+After the guest reaches a shell, normal guest reboot/poweroff commands exercise
-+the RPMI system reset path.
-+
-+RPMI device tree policy
-+-----------------------
-+
-+RPMI is currently described through FDT only; no ACPI representation is emitted
-+for the RPMI transport or service groups. The ``virt`` machine uses the
-+``riscv,rpmi-shmem-mbox`` shared-memory mailbox node plus child service nodes
-+with ``riscv,rpmi-*`` compatible strings. These binding names are part of the
-+RPMI RFC surface and may be revised if the RISC-V RPMI bindings change during
-+review.
-+
- Running Linux kernel
- --------------------
+@@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
  
+ Use ``query-accelerators`` instead.
+ 
++``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``netdev_add`` with ``type=tap`` disables script
++execution.  This special treatment of ``"no"`` is deprecated.  Use an
++empty string instead.  In a future version, ``"no"`` will be treated as
++a plain file name.
++
+ Human Machine Protocol (HMP) commands
+ -------------------------------------
+ 
+diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
+index 1675e37d3e7..077ea15751e 100644
+--- a/docs/system/i386/microvm.rst
++++ b/docs/system/i386/microvm.rst
+@@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
+      -serial stdio \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ While the example above works, you might be interested in reducing the
+@@ -103,7 +103,7 @@ disabled::
+      -device virtconsole,chardev=virtiocon0 \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ 
+diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
+index 904778e3f5c..862f38830b1 100644
+--- a/docs/system/i386/xenpvh.rst
++++ b/docs/system/i386/xenpvh.rst
+@@ -42,7 +42,7 @@ case you need to construct one manually:
+       -vnc none                                       \
+       -display none                                   \
+       -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
+-      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
++      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
+       -smp 4,maxcpus=4                                \
+       -nographic                                      \
+       -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
+diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
+index c9fe0915dc5..ec5aaf14fd9 100644
+--- a/docs/system/ppc/ppce500.rst
++++ b/docs/system/ppc/ppce500.rst
+@@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
+   $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
+                       -display none -serial stdio \
+                       -bios u-boot \
+-                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
++                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
+ 
+ The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
+ if “-device eTSEC” is given to QEMU:
+ 
+ .. code-block:: bash
+ 
+-  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
++  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
+ 
+ Root file system on flash drive
+ -------------------------------
+diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+index 9809e94b84b..7fdb96601ad 100644
+--- a/docs/system/riscv/microchip-icicle-kit.rst
++++ b/docs/system/riscv/microchip-icicle-kit.rst
+@@ -84,7 +84,7 @@ Then we can boot the machine by:
+   $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
+       -sd path/to/sdcard.img \
+       -nic user,model=cadence_gem \
+-      -nic tap,ifname=tap,model=cadence_gem,script=no \
++      -nic tap,ifname=tap,model=cadence_gem,script= \
+       -display none -serial stdio \
+       -kernel path/to/u-boot/build/dir/u-boot.bin \
+       -dtb path/to/u-boot/build/dir/u-boot.dtb
+diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+index 8f55ae8e313..0e4dcf3e70c 100644
+--- a/docs/system/riscv/sifive_u.rst
++++ b/docs/system/riscv/sifive_u.rst
+@@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
+ 
+   $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
+       -display none -serial stdio \
+-      -nic tap,ifname=tap0,script=no,downscript=no \
++      -nic tap,ifname=tap0,script=,downscript= \
+       -kernel /path/to/vxWorks \
+       -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
+ 
+diff --git a/net/tap.c b/net/tap.c
+index fedd48c48d2..1ec9e5ebe6f 100644
+--- a/net/tap.c
++++ b/net/tap.c
+@@ -103,6 +103,8 @@ static bool tap_is_explicit_no_script(const char *script_arg)
+     }
+ 
+     if (strcmp(script_arg, "no") == 0) {
++        warn_report("script=no/downscript=no is deprecated; "
++                    "use script=/downscript= instead");
+         return true;
+     }
+ 
+diff --git a/qapi/net.json b/qapi/net.json
+index 8f0915c4d86..ada0329ef9d 100644
+--- a/qapi/net.json
++++ b/qapi/net.json
+@@ -399,15 +399,19 @@
+ # @fds: multiple file descriptors of already opened multiqueue capable
+ #     tap
+ #
+-# @script: script to initialize the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @script: script to initialize the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.
+ #
+-# @downscript: script to shut down the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @downscript: script to shut down the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.
+ #
+ # @br: bridge name (since 2.8)
+ #
+diff --git a/qemu-options.hx b/qemu-options.hx
+index 200949655ea..7b9a14f5b38 100644
+--- a/qemu-options.hx
++++ b/qemu-options.hx
+@@ -3014,7 +3014,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
+     "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
+     "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
+     "                to deconfigure it\n"
+-    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
++    "                use '[down]script=' to disable script execution\n"
++    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
+     "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
+     "                configure it\n"
+     "                use 'fd=h' to connect to an already opened TAP interface\n"
+@@ -3553,7 +3554,9 @@ SRST
+     ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
+     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
+     configuration directory at build time (typically ``/etc``).
+-    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
++    Use ``[down]script=`` to disable script execution.
++    Using ``[down]script=no`` is deprecated; in a future version it will
++    be treated as a plain file name.
+ 
+     If running QEMU as an unprivileged user, use the network helper
+     to configure the TAP interface and attach it to the bridge.
 -- 
 2.43.0
 
