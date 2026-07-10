@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9EDFC44507
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:01:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B29C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:01:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiIEb-00011x-6a; Fri, 10 Jul 2026 16:54:09 -0400
+	id 1wiIGd-0004Bm-2C; Fri, 10 Jul 2026 16:56:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiIEZ-00011V-7a
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:54:07 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1wiIFU-00029x-5K
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:55:05 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiIEX-0000ar-AO
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:54:06 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-8487b7b3fc8so957325b3a.3
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:54:04 -0700 (PDT)
+ id 1wiIFD-0000wv-1h
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:55:03 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-8486672f03cso1251253b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:54:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783716844; x=1784321644; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=fEZ0JdYQPiF4MtB15bZdOuQ7ReQG0VTLPTQcrU1J7Cc=;
- b=gysxetSOvhfUCa9SJXAnasldheiJfNqY5h6Nblfgas6/N7GMWKx4Eue7v8KMOJTq9T
- U+/whYnABGF5ylOpsp4Bs1yXf9mYjnfCTFPWig0tk7JoaCIca4qgeMlOZN/ZznPlX9ri
- +VmJSkLjqi+AlE2wFfnpM1vl3rgkbKiuZ/p6slwL4J7n/b8soeLhEKseUqsRmhhHz2Al
- UEJfbdi4+YlSDPLgdtvKhaHyTtQrI8sEQOD8h1pcaiuZECq906bcSHDK5Jo/ouJJIO5a
- ly/2LbuKmetYWUMRcBQ980VNY18qHWdXS4EgN82i8BI3uGRtxDzt6OIVkHHULueLjOnJ
- ogNg==
+ d=linaro.org; s=google; t=1783716876; x=1784321676; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=+m7+GFqYgO2mGhurSu+ZocnMlHw4aq+wKZ/1FbPF0Jg=;
+ b=k9BuvJNqRVPNMnAukEYi/4dD3JhPqrWIQdrhoSfsNGgiGRJFBE563nFX6mvAKpgfIr
+ gabu9btlTZaebRqVV4M2Antc4gHDFJbBAx6F/m3RXA09pUqyrpjW98SodJ6+3Qeuh+27
+ jn7KyCM1Yms5DJgtcD2EWzyOPKPJcrg7Vwmkd0ECvPbOOWg8T6IPj32Glvy+MWxRPqlO
+ xFIX2tW9WCzQjVKE93BmmGjTsSrpT6WEKeNy8GoTUSRkXs5E6Rt/+gjqjSXP+BRdbFSB
+ JXXAYbXVFahqKdYhC8Co0fW8BigXJhK699f84AxlHuZdmLRzm792Bb9W6UJIpXdBE9hY
+ 8g4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783716844; x=1784321644;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=fEZ0JdYQPiF4MtB15bZdOuQ7ReQG0VTLPTQcrU1J7Cc=;
- b=GxIxJeNQTb7GHqmX486ha32/HRQb2da3vaWl/sbPEx5twIxXD9kZv9hfSOgloao5kY
- rLYHdFe/JCSHJriScpIKjcXzD/rhmZ8l2nJZ3L6Gr3ZMFFNPzIbRTOPCtupclNS5fKzX
- lsH4MV/sM+lQZXrz9NFSXamktk5TL07e1YsZTJOKwOOxKJg5EMchyGSizL8sW4WFBK3e
- DBfurdvFSxvxmIcXw9PCVQvHVYobz9oSG2WQFw26aS8LLRVAEX1eKrmZjN7xectZKzGf
- CUBIDdheqJ+QVdAPnZn9UkmWECnbrHhwx6tfIQ3PGNKyO1M4eMvpAaZuW4vXVML11xmw
- B8ew==
+ d=1e100.net; s=20251104; t=1783716876; x=1784321676;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=+m7+GFqYgO2mGhurSu+ZocnMlHw4aq+wKZ/1FbPF0Jg=;
+ b=K8XNfk2rP+WFXV40NdPCzsA7Uyt1WRqFo6+hipSbtOrZuP1GCHv+vVS4b+bhqSYbH0
+ AeEBlPY2unJY96gajrraN/1DTK6lJ8xuKjZbPKY6LiD1i9dR5CcVgmYdsNJMZknB5Int
+ X2NQQetk5iLa06TUNGReYnChcU7X69BXfM3kzjkvpbZh2VBJ9/6lWuW05KEsa/T6A/9i
+ HehHnoqdXriBFj2PVWA3XwPtMaz8nkx3fmONvP3xdIq1U28H6uavZi9KxK4Tz60bi0Ho
+ 79xTzoyXa2ylt3/fyWvSnTvjOE74enLWAv726iOY+C/2M47QkreMDuaFlhZxVZms3gk9
+ UV0w==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqTdUyJZzaCbZJ5SjkSsiz8dow9SDFlP89qia9CDiS0DZG5jNGGqxnu7zGfng1ggDhwXaPQ8/4Lk/I3@nongnu.org
-X-Gm-Message-State: AOJu0Yzd38xFC+VatyA0TGgM8DQQqrK0DydZhn19252W6O9gNxIR+D64
- MKCLdRR8eWe8e0Hm0KQXoBhASMIaB0RQUOLc+W27/tuKtslM1Q80GqYo09OUTr/OXDI=
-X-Gm-Gg: AfdE7cnGZ5Nc4jfCcuzni6L0bLqmcfRU6UzELPSS94DBpkJxUaXcsRnepomUKAD42iw
- O70bLqliX6BVS/CVTUJzAU7oVcKw6kNJH0wiFU55ZgZGFju9IZOLvmXDP9GBnS/BCcTzSZEJAjO
- Ei5ql0BPyoOYjzSBi2sgJj+RKobbJbbatihqbyV6CXEZ2OVXX3CG68/4GXFEypkrx8PEaa7b2/F
- 0wy+ttV5qXjQFzSM4kyPlsDJAF7hQW/N6gCljH4cbd4xYeNwIsPgcz2MLUFUa48UbeChNq5aSh7
- gFPZcd+PlTaiZNXifQapkM8R8sT17g2AULMZZ9i468655Nh1/DXClGrRKsHa2O997sIOHe+7M4s
- qGuVPD4n9OwQv+S8sD+3LY9bKzdm3Izd/x9WI64Zqtr7YTsVeIypOlxRbYQE4T4vUpaw6VxYtWr
- gWgDsMEOiMFDmIPVfuiQ==
-X-Received: by 2002:a05:6a00:21cc:b0:848:7443:f2de with SMTP id
- d2e1a72fcca58-8488961c141mr519521b3a.13.1783716843457; 
- Fri, 10 Jul 2026 13:54:03 -0700 (PDT)
+ AHgh+Rrmwa1FcdTHlmqKLbP9hHx0kyGMd+E7m7LjCwrPO/scc8m21EfvMAK57xav+Ds8RkrFG1LdEe1CU5Zk@nongnu.org
+X-Gm-Message-State: AOJu0Yxsyw4vYSrjynvU3aO9pA4lU5Oam71aCuMmZlLbgTVaFoiGKhvV
+ nK8r/NSGW49nUYOG5NBWsd0lIEC++Z8GBk8YNtou/GotIMWfuB/nrTt3Wvb7wA/8fnE=
+X-Gm-Gg: AfdE7ckjlQ5C5JjdqjFBobUNhpqmCLvBVfrMN2sf6O25Mlh5voVpX5DnRMbxBOFT155
+ m05E8qpIb+jEuJ4bk4HsyRVeJ3aDToag00/oD4/w7GQsAwb8lk8sWD0w1Xd5XbK1WflvuHb7IWL
+ dCE7886StDr2T6yyHgVL3GaCj35lNpiRM9iy4GO5GxwfETI/f1nvfzLMmd892n4fcv2CMV3Crv7
+ ybifW+bKzf5ZOFd1+oCIGMBSo1G9h8MqYnwuJk/aTP/Sia6JEOp6A2h2EioXyRoGvEsTkebZl8A
+ w84jqSxW3UH4r7uekqMHLDT9Z2Gd8NU1VDlXK34fAmSB7lxuQd59T1q/tAfpFdYU4RfBKWhOinz
+ JJ4GSCYDu2kH6OxRvOcJZ6oCMVJpjOrDjABCuhaoNB2k2Fvl7zE03pklDmwo1JGfmnrCe8pSFrk
+ nfznQOUSdX34qiQtUGXQ==
+X-Received: by 2002:a05:6a00:3d11:b0:848:55a6:fce with SMTP id
+ d2e1a72fcca58-848897276d2mr531163b3a.62.1783716875574; 
+ Fri, 10 Jul 2026 13:54:35 -0700 (PDT)
 Received: from stoup.. ([71.212.146.49]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-847f6d76106sm10780574b3a.40.2026.07.10.13.54.02
+ d2e1a72fcca58-847f6d76106sm10780574b3a.40.2026.07.10.13.54.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 13:54:02 -0700 (PDT)
+ Fri, 10 Jul 2026 13:54:35 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
-Subject: [PATCH v3 00/51] accel/tcg: Use IntervalTree for breakpoints and
- watchpoints
-Date: Fri, 10 Jul 2026 13:53:10 -0700
-Message-ID: <20260710205401.836304-1-richard.henderson@linaro.org>
+Subject: [PATCH v3 30/51] target/i386: Use CPUBreakpoint arg in
+ breakpoint_handler
+Date: Fri, 10 Jul 2026 13:53:40 -0700
+Message-ID: <20260710205401.836304-31-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260710205401.836304-1-richard.henderson@linaro.org>
+References: <20260710205401.836304-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -100,135 +102,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Changes for v3:
-  - Handle ARMv6 BE-32 within debug_check_watchpoint.
-  - Drop adjust_watchpoint_address.
-  - Change cpu_watchpoint_insert from addr+len to first+last.
-    - Change tlb_flush_range_by_mmuidx to use first+last.
-    - Use tlb_flush_range_by_mmuidx in cpu_watchpoint_insert.
+We no longer need to test for BP_CPU, or clear watchpoint_hit.
 
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/i386/tcg/system/bpt_helper.c | 32 ++++++++++++-----------------
+ 1 file changed, 13 insertions(+), 19 deletions(-)
 
-r~
-
-
-Philippe Mathieu-Daudé (1):
-  cpu: Define BreakpointFlags type
-
-Richard Henderson (50):
-  exec/breakpoint: Move BP declarations from hw/core/cpu.h
-  exec/breakpoint: Merge watchpoint.h
-  qemu/typedefs: Declare CPUBreakpoint and CPUWatchpoint globally
-  hw/core/cpu: Remove exec/breakpoint.h include
-  exec/breakpoint: Add CPUBreakpoint.id
-  exec/watchpoint: Add CPUWatchpoint.id
-  accel/tcg: Pass CPUBreakpoint to debug_check_breakpoint
-  target/arm: Split is_wp out of bp_wp_matches
-  target/arm: Use bp argument in arm_debug_check_breakpoint
-  target/arm: Use wp argument in arm_debug_check_watchpoint
-  target/riscv: Use bp argument in riscv_cpu_debug_check_breakpoint
-  target/riscv: Use bp argument in riscv_cpu_debug_check_watchpoint
-  target/xtensa: Use bp argument in xtensa_debug_check_breakpoint
-  cpu: Use interval-tree for CPUBreakpoint
-  target/arm: Make check_watchpoint_in_range static
-  gdbstub: Report actual watchpoint trigger address
-  cpu: Use interval-tree for CPUWatchpoint
-  exec/breakpoint: Return the new bp from cpu_breakpoint_insert
-  system: Remove cpu_watchpoint_insert error return path
-  exec/breakpoint: Return the new wp from cpu_watchpoint_insert
-  system: Validate flags in cpu_watchpoint_insert
-  cpu-common: Validate flags in cpu_breakpoint_insert
-  exec/breakpoint: Add CPUWatchpoint.hitlast
-  exec/breakpoint: Merge CPUBreakpoint and CPUWatchpoint
-  accel/tcg: Pass watchpoint hit to debug_excp_handler
-  accel/tcg: Pass breakpoint hit to debug_excp_handler
-  target/arm: Use CPUBreakpoint arg in arm_debug_excp_handler
-  target/i386: Pass wp_hit to check_hw_breakpoints
-  target/i386: Use CPUBreakpoint arg in breakpoint_handler
-  target/ppc: Use CPUBreakpoint arg in breakpoint_handler
-  target/ppc: Simplify ppc_cpu_debug_check_breakpoint
-  target/ppc: Simplify ppc_cpu_debug_check_watchpoint
-  target/s390x: Use CPUBreakpoint arg in breakpoint_handler
-  target/riscv: Simplify riscv_cpu_debug_excp_handler
-  target/riscv: Set badaddr in riscv_cpu_debug_excp_handler
-  target/riscv: Merge riscv_cpu_debug_check_{break,watch}point
-  target/xtensa: Restrict xtensa_breakpoint_handler to system mode
-  target/xtensa: Rename xtensa_breakpoint_handler
-  target/xtensa: Simplify xtensa_cpu_debug_excp_handler
-  accel/tcg: Clear BP_WATCHPOINT_HIT after use
-  accel/tcg: Merge CPUState.{break,watch}point_hit
-  target/arm: Simplify v6 watchpoints
-  accel/tcg: Remove TCGCPUOps.adjust_watchpoint_address
-  accel/tcg: Move ALL_MMUIDX_BITS to hw/core/cpu.h
-  accel/tcg: Drop stale assert for vaddr
-  accel/tcg: Use addr/last in tlb_flush_range_locked
-  target/arm: Be more defensive for invalid tlbi_aa64_get_range
-  accel/tcg: Change tlb_flush_range_* to use addr/last
-  system: Use tlb_flush_range_by_mmuidx in cpu_watchpoint_insert
-  accel/tcg: Change cpu_watchpoint_insert to use addr/last
-
- include/accel/tcg/cpu-ops.h         |  17 +-
- include/exec/breakpoint.h           |  36 ++--
- include/exec/cputlb.h               |  12 +-
- include/exec/watchpoint.h           |  18 --
- include/hw/core/cpu.h               |  21 +--
- include/qemu/typedefs.h             |   1 +
- target/arm/cpu.h                    |   4 +-
- target/arm/internals.h              |  18 +-
- target/i386/cpu.h                   |   4 +-
- target/i386/tcg/helper-tcg.h        |   4 +-
- target/ppc/cpu.h                    |   4 +-
- target/ppc/internal.h               |   6 +-
- target/riscv/cpu.h                  |   4 +-
- target/riscv/debug.h                |   5 +-
- target/s390x/tcg/tcg_s390x.h        |   2 +-
- target/xtensa/cpu.h                 |   8 +-
- accel/tcg/cpu-exec.c                |  76 ++++----
- accel/tcg/cputlb.c                  | 113 ++++++------
- accel/tcg/tcg-accel-ops.c           |  37 ++--
- accel/tcg/user-exec-stub.c          |  19 +-
- accel/tcg/watchpoint.c              | 170 +++++++++---------
- accel/whpx/whpx-common.c            |   9 +-
- cpu-common.c                        |  68 +++----
- gdbstub/system.c                    |  49 +++---
- gdbstub/user.c                      |   9 +-
- hw/core/cpu-common.c                |   2 -
- linux-user/main.c                   |  14 +-
- system/watchpoint.c                 |  80 ++++-----
- target/arm/cpu.c                    |   1 -
- target/arm/debug_helper.c           |  14 +-
- target/arm/hvf/hvf.c                |   6 +-
- target/arm/hyp_gdbstub.c            |   7 +-
- target/arm/kvm.c                    |   5 +-
- target/arm/tcg/cpu-v7m.c            |   1 -
- target/arm/tcg/debug.c              | 263 +++++++++++++---------------
- target/arm/tcg/mte_helper.c         |   3 +-
- target/arm/tcg/tlb-insns.c          |  23 +--
- target/hppa/mem_helper.c            |   3 +-
- target/i386/cpu.c                   |   2 +-
- target/i386/kvm/kvm.c               |  11 +-
- target/i386/machine.c               |   2 +-
- target/i386/tcg/bpt_helper.c        |   2 +-
- target/i386/tcg/system/bpt_helper.c |  81 ++++-----
- target/i386/tcg/tcg-cpu.c           |   2 +-
- target/i386/whpx/whpx-all.c         |  15 +-
- target/loongarch/tcg/tlb_helper.c   |   5 +-
- target/ppc/cpu.c                    |   9 +-
- target/ppc/cpu_init.c               |   2 +-
- target/ppc/kvm.c                    |  14 +-
- target/ppc/mmu_helper.c             |   4 +-
- target/ppc/tcg-excp_helper.c        |  85 ++++-----
- target/riscv/cpu_helper.c           |   6 +-
- target/riscv/debug.c                | 159 +++--------------
- target/riscv/tcg/tcg-cpu.c          |   4 +-
- target/s390x/helper.c               |   1 -
- target/s390x/kvm/kvm.c              |   7 +-
- target/s390x/tcg/debug.c            |  28 +--
- target/xtensa/cpu.c                 |   2 +-
- target/xtensa/dbg_helper.c          |  31 ++--
- target/xtensa/helper.c              |  46 ++---
- 60 files changed, 732 insertions(+), 922 deletions(-)
- delete mode 100644 include/exec/watchpoint.h
-
+diff --git a/target/i386/tcg/system/bpt_helper.c b/target/i386/tcg/system/bpt_helper.c
+index 5dab77b2c4..86562fc946 100644
+--- a/target/i386/tcg/system/bpt_helper.c
++++ b/target/i386/tcg/system/bpt_helper.c
+@@ -200,28 +200,22 @@ void breakpoint_handler(CPUState *cs, CPUBreakpoint *hit)
+     X86CPU *cpu = X86_CPU(cs);
+     CPUX86State *env = &cpu->env;
+ 
+-    hit = cs->watchpoint_hit;
+-    if (hit) {
+-        if (hit->flags & BP_CPU) {
+-            cs->watchpoint_hit = NULL;
+-            if (check_hw_breakpoints(env, hit)) {
+-                /*
+-                 * FIXME: #DB should be delayed by one instruction if
+-                 * INHIBIT_IRQ is set (STI cannot trigger a watchpoint).
+-                 * The delayed #DB should also fuse with one generated
+-                 * by ICEBP (aka INT1).
+-                 */
+-                raise_exception(env, EXCP01_DB);
+-            } else {
+-                cpu_loop_exit_noexc(cs);
+-            }
++    if (hit->flags & BP_MEM_ACCESS) {
++        /* watchpoint */
++        if (!check_hw_breakpoints(env, hit)) {
++            cpu_loop_exit_noexc(cs);
+         }
++        /*
++         * FIXME: #DB should be delayed by one instruction if
++         * INHIBIT_IRQ is set (STI cannot trigger a watchpoint).
++         * The delayed #DB should also fuse with one generated
++         * by ICEBP (aka INT1).
++         */
+     } else {
+-        if (cpu_breakpoint_test(cs, env->eip, BP_CPU)) {
+-            check_hw_breakpoints(env, NULL);
+-            raise_exception(env, EXCP01_DB);
+-        }
++        /* breakpoint */
++        check_hw_breakpoints(env, NULL);
+     }
++    raise_exception(env, EXCP01_DB);
+ }
+ 
+ target_ulong helper_get_dr(CPUX86State *env, int reg)
 -- 
 2.43.0
 
