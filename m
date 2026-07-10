@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFF52C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:00:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58E7BC43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:00:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiIGQ-0003Tb-Pw; Fri, 10 Jul 2026 16:56:03 -0400
+	id 1wiIGb-000417-Hd; Fri, 10 Jul 2026 16:56:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiIFM-000213-Si
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:54:59 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1wiIFR-00026T-Ey
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:55:03 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiIF7-0000yT-D5
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:54:56 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-842338c18e0so1091711b3a.1
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:54:39 -0700 (PDT)
+ id 1wiIFA-0000ze-L4
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:55:01 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-8423f236418so1050759b3a.1
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:54:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783716878; x=1784321678; darn=nongnu.org;
+ d=linaro.org; s=google; t=1783716881; x=1784321681; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Gu1/Z4NGRci2zl7OUGsQFq715jKZAcS9WoRfcTkKu9k=;
- b=UflPqKgUWWqvS5/ScDzpkjsvQ/vUNSh1u2K2BIn/lkpW1RVl28bL1aOew19yzLdS3p
- 9d/oFdtfWRNJYQWVfYCSOy3Qki6DK+W8rqEMjq0Fity4DLJFGXe5ZVD1f9+AA9YRpBQD
- Zj99E49j30a0eYM4Md8zvUY3tZiSvngcBBzG5jHNzU6DwZI4W8im/uRv+Fe7QN0eYmRI
- yziA/YNzCKpJymvGN4lU9+pODIxUDaVH6215FECpip59vCUhObtRXJ6D4DVu7PQucDlZ
- aW/Uc+VqnDiC3qtxSKWMnL1QMlN1muzo5KX9OSrB8KidMqf/H+1OiyQdg/AFrmIcZT/O
- uKFw==
+ bh=zEoEbldckN16OhTsR6Zaa+zbm5X/cyDm4W7LiW18RHY=;
+ b=VYTlhnARxmlw5k8I3xYPU9OMaokf2nMP227KKz4mvQtjTPuaZmxTavwzU/lvsW4Kb1
+ 9LK0EHeCA9Y92HNseFLkfvsazTlZ2UdzGwH9hzVtG8LByl0AphQ6G1FvzQnGnHXSMX2r
+ Lx8ZTkObBNiLhtOYZ5XcbtfxKAEzi8Em+5XQjR+5dJTrvCoR/8YQbmgpnBHphb9JYwlE
+ 8iiqOWTyKQCulMjVFOy6o+45sB3lyLrS8P1M5zV4w7UL6e9w+hB87XOp0OnB7bUIziKm
+ bu5wzCC+oQ/CMoiNlFarSsLLaQXjvjpCHUaDa9zepd16vxVVHLq/n1xPsriOdLDy1L8Q
+ q7Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783716878; x=1784321678;
+ d=1e100.net; s=20251104; t=1783716881; x=1784321681;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Gu1/Z4NGRci2zl7OUGsQFq715jKZAcS9WoRfcTkKu9k=;
- b=jUgAwQjXhnn1CD2kXI4SyVlOX+aUu3ewMQ7kAEMAIm3X1R7KjyhzXz/AEiJmTUs6on
- zcXwE6hUz6milPotA6AtDFEOhpakiLmWiJrFfJbplvTmr64GHC75WBw9VHKnYFD78d5t
- aLIzEcHB5UZq8qcvxhRNywjciCE480/ENeoR8bvcaJqYnNMdjna6KJltG36BbQyaqBJt
- yC05MDuqXZ/k7xx3iJDe/fRVal4LECyDwWpOqZ8npb5m/iFTQfh0+SUc9rYdqjmFsDnn
- fygjMr86vYA0m3BluvXeYGbP//cC5cfXdgFco1y/0CZuTnxbCA8yJK09UB61I54EJ+H4
- +h9A==
+ bh=zEoEbldckN16OhTsR6Zaa+zbm5X/cyDm4W7LiW18RHY=;
+ b=sdvJrWvjfW/6AmTH+aoL6TjCLHvQV+6UpZaIAaUoQmO3Hn6dt6uwIea4zvjrekGU/X
+ 3lWEeI43vyvy/wC8MjYU+vW311bl98k98vsZrYM0KxeH5PTevrgAAfVA7n3AvHOUX4DZ
+ EKOTrG5NlQWhVMIMqdk1W1G+7mx6oGzAf/p4MoNgkpOj9tWqJFpNOA0oITnzTF+Lgpp8
+ Kg/Xnmp5/Nds2rNMKY+yRwnIoXUc7/POV4AeDkRPYV/X7Dv6+ePvUS1okWl03VWe/1ks
+ Laai1lM4C1UNqmyBV7HLnjn9pE8fG9AI5QssLvbf2BbLbfey13QgRFujVXVcRkMfkFT/
+ Ajew==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro3uQ7yCJKHLHHMvEk71P4IVEkBo52qNwtIS6rW9eCSAZroPt6WVRCS7Bk6npOU5GJuFa2YHQjnwUE9@nongnu.org
-X-Gm-Message-State: AOJu0YzRSxbLXYM3nTsz8J6kQcJatqTXcYlvAIKWjV59BYxJDAgGIekw
- aZwIMjKSHxDzSRFEaEs3vwifxesMkcGdZH9oC55hUoOXfWyt2U6lH29+HYCAnK1qOU0=
-X-Gm-Gg: AfdE7cmwZF5at8ONozxDA3wm6KO/BFf5xO03bkn+G9PWcPp8RyRL5AIKT3wzzRxP/r0
- 8CbUpsAyRXY/rw0CKoBZ9HSp/ec8hXpgKgYlKJ7z26Aq5NWMmTyamJ01g8loh37LjbAmjmrjndP
- +sh6pVfbNXPLx8Qt/CtfYFXejZyIlhC8K96OBGAx/Nlo7KFj/7/BH4ZyUKjYLtvMJTVRXpaAQiv
- qt9GI2Md/09yThKGv2q9vlMMCRxV5YlG3nJThrJaUMTR+CiXIxQg7DKA7LUTz0Iwj7MqRhoDtQo
- 0RUTkiZ3FXAseDXFKuD87jGmBEdEpo+C9Z4VTjdko0e8TquuUSsTdQ+GAJYXj167O4VEUOaIvvc
- Kc8PPTnV5iusc3L3HiztLEfvYIcHtWHRjd1GFh/x7V6QXUEvpxNgm7IAyak39doP8ATl9x1tTtu
- aGrRxwEN0NC9Edx82NuQ==
-X-Received: by 2002:a05:6a00:178e:b0:847:77e9:acbb with SMTP id
- d2e1a72fcca58-84889611685mr564261b3a.13.1783716878244; 
- Fri, 10 Jul 2026 13:54:38 -0700 (PDT)
+ AHgh+RrAU5CXNQt5ZhfPUjb2+DsrSaQT85JmE1g1bPzzj21F4xW/W8+qjeUdTCJaULA4p1/NpEBInZI9vVBC@nongnu.org
+X-Gm-Message-State: AOJu0YyH4uFc4UJKiHKsOIsy7XEfzXq4dSMITJlY4r0S484LD2KCP4xa
+ Cwhu99STk/2bIoLOVtt8pWW9u+6b+iYRK8RTpBj/L1hmpeRQ1JC9ZYXzPeViAJAHtGo=
+X-Gm-Gg: AfdE7cmLU+jvi+z07I6ClZqMMyyHnEdXu2x5KrPalW5/3lasUuByMwZuYqBgeLUnf3h
+ cpf01OOHjAWj5Nrf7YGaH/S0qHj2jnkuYnSjrhPR6C/+edta5UjwcyqI4xKlqv1Zo+mmgdhS33H
+ 6bK/pBaZePIojNM6MlFXMTMf3OJuAHsjWjAch35HSTjhpJFrod+cvOU6LMhr4W6phKEKYghsmte
+ vB/eALDkGalQbM42K36feofEakt21w6zIbmCtXNuozTl/lwRdB6Y+QbGp4r3Ub5txBg3OSovU+y
+ n6EYu1AW0jXinlnlheX28GOpcT7K+eJh2mLVDCrjReUvRawhqIfclcnTc32ql/SPgZcRlqHJASH
+ rJnrPgr7vj3bH8nXTaGqSn2FFhTwkY2T8UO2pQANF6m08r01UkiGSUw3ywdli/YwGFVQg9S/Y3u
+ w2JF0QYcQj84I/8JaCUg==
+X-Received: by 2002:a05:6a00:3691:b0:848:5935:2e11 with SMTP id
+ d2e1a72fcca58-848896b9a7cmr617803b3a.48.1783716880557; 
+ Fri, 10 Jul 2026 13:54:40 -0700 (PDT)
 Received: from stoup.. ([71.212.146.49]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-847f6d76106sm10780574b3a.40.2026.07.10.13.54.37
+ d2e1a72fcca58-847f6d76106sm10780574b3a.40.2026.07.10.13.54.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 13:54:37 -0700 (PDT)
+ Fri, 10 Jul 2026 13:54:40 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
-Subject: [PATCH v3 33/51] target/ppc: Simplify ppc_cpu_debug_check_watchpoint
-Date: Fri, 10 Jul 2026 13:53:43 -0700
-Message-ID: <20260710205401.836304-34-richard.henderson@linaro.org>
+Subject: [PATCH v3 35/51] target/riscv: Simplify riscv_cpu_debug_excp_handler
+Date: Fri, 10 Jul 2026 13:53:45 -0700
+Message-ID: <20260710205401.836304-36-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260710205401.836304-1-richard.henderson@linaro.org>
 References: <20260710205401.836304-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -101,64 +101,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We don't need to check either ISA bit, because that's already
-done starting with SPR registration.  Replace target_ulong with
-uint64_t, as we're under TARGET_PPC64.
+We no longer need to test for BP_CPU.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/ppc/tcg-excp_helper.c | 30 +++++++++---------------------
- 1 file changed, 9 insertions(+), 21 deletions(-)
+ target/riscv/debug.c | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
 
-diff --git a/target/ppc/tcg-excp_helper.c b/target/ppc/tcg-excp_helper.c
-index 99ffe4a820..4065440949 100644
---- a/target/ppc/tcg-excp_helper.c
-+++ b/target/ppc/tcg-excp_helper.c
-@@ -353,35 +353,23 @@ bool ppc_cpu_debug_check_watchpoint(CPUState *cs, CPUBreakpoint *wp)
- {
- #if defined(TARGET_PPC64)
-     CPUPPCState *env = cpu_env(cs);
--    bool wt, wti, hv, sv, pr;
--    uint32_t dawrx;
-+    uint32_t dawrx = env->spr[wp->id ? SPR_DAWRX1 : SPR_DAWRX0];
-+    bool wt = extract32(dawrx, PPC_BIT_NR(59), 1);
-+    bool wti = extract32(dawrx, PPC_BIT_NR(60), 1);
-+    bool hv = extract32(dawrx, PPC_BIT_NR(61), 1);
-+    bool sv = extract32(dawrx, PPC_BIT_NR(62), 1);
-+    bool pr = extract32(dawrx, PPC_BIT_NR(62), 1);
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index a8429778f6..994a77fd31 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -919,15 +919,7 @@ void riscv_cpu_debug_excp_handler(CPUState *cs, CPUBreakpoint *hit)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
  
--    if ((env->insns_flags2 & PPC2_ISA207S) &&
--        (wp == env->dawr_watchpoint[0])) {
--        dawrx = env->spr[SPR_DAWRX0];
--    } else if ((env->insns_flags2 & PPC2_ISA310) &&
--               (wp == env->dawr_watchpoint[1])) {
--        dawrx = env->spr[SPR_DAWRX1];
+-    if (cs->watchpoint_hit) {
+-        if (cs->watchpoint_hit->flags & BP_CPU) {
+-            do_trigger_action(env, DBG_ACTION_BP);
+-        }
 -    } else {
-+    if ((env->msr & (1ull << MSR_PR)) && !pr) {
-         return false;
+-        if (cpu_breakpoint_test(cs, env->pc, BP_CPU)) {
+-            do_trigger_action(env, DBG_ACTION_BP);
+-        }
 -    }
--
--    wt = extract32(dawrx, PPC_BIT_NR(59), 1);
--    wti = extract32(dawrx, PPC_BIT_NR(60), 1);
--    hv = extract32(dawrx, PPC_BIT_NR(61), 1);
--    sv = extract32(dawrx, PPC_BIT_NR(62), 1);
--    pr = extract32(dawrx, PPC_BIT_NR(62), 1);
--
--    if ((env->msr & ((target_ulong)1 << MSR_PR)) && !pr) {
--        return false;
--    } else if ((env->msr & ((target_ulong)1 << MSR_HV)) && !hv) {
-+    } else if ((env->msr & (1ull << MSR_HV)) && !hv) {
-         return false;
-     } else if (!sv) {
-         return false;
-     }
++    do_trigger_action(env, DBG_ACTION_BP);
+ }
  
-     if (!wti) {
--        if (env->msr & ((target_ulong)1 << MSR_DR)) {
-+        if (env->msr & (1ull << MSR_DR)) {
-             return wt;
-         } else {
-             return !wt;
+ bool riscv_cpu_debug_check_breakpoint(CPUState *cs, CPUBreakpoint *bp)
 -- 
 2.43.0
 
