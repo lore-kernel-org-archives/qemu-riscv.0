@@ -4,96 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EE13C44506
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 06:11:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1717EC44501
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 06:26:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wi4R2-0001El-TQ; Fri, 10 Jul 2026 02:10:04 -0400
+	id 1wi4gC-0007z2-MG; Fri, 10 Jul 2026 02:25:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wi4Qg-00017i-Gu
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:44 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wi4Qe-0001tZ-6x
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:42 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2cabc0a1ab6so7179755ad.0
- for <qemu-riscv@nongnu.org>; Thu, 09 Jul 2026 23:09:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1783663777; x=1784268577; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=goBibbm903IrHGlQ25HxbHDhM5i9maTD/frlb0Y55Zo=;
- b=JLPMm1Ky4u0ZWns9oDStOM8HyXFbMdw8R6lq/h9zCFZXTlUQgjrc225yJ9+/t7Slk7
- 6S699NQlA+bTTiZdORxv3RMI3c3wc3RlW4FOBB0z2eV0vhxL8pxVqALRhgE6FFd1xGX0
- wA85opmkUwoNF3eXoEoasSPu7hn0nJ10Qx/hA2xTMT2xjFwW8XIppnAKNGrQileTH4Ge
- qgUueINr4ICUrN1L4VPtkd+M9J1YevTSUc0SO7pXArN1QmYDBezP/TpCx4slBBhH9Nu5
- kJ/gJ54u4pmIeroqZ43mlCAZMC2bNmsHMSDl/yNZjGMO9uYFait3ff+3yvGtR34rxA0s
- C1Ww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783663777; x=1784268577;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=goBibbm903IrHGlQ25HxbHDhM5i9maTD/frlb0Y55Zo=;
- b=XTFyQjOzHGtt4Jc9YBKu5M1s9/0ZP/FgiZcyv90nqgsgkaXrAN3GcI1el2zZCKKql7
- 4m7GAxh8gpivgM9fwUVLi0Axe2lJoSPvi3RXvFmooqzuYlNk0clgk5xHhNFPiZPrEfNe
- oxToelHAqXP4qf9IYThd9syoVMMhJbR55p7YXJXMHeDf8j3KlxJTs7JtLGRvVj5wcbEe
- wAAxQ3mtouPBlFthF5lASMDKLuZkB4mdXP6O2TS3redcRYH5wxBSL+ql6YWbNH9ntecH
- TZJ2gYYlvP/ng2D+qnhz4ncoH94+KiwuaS7cBgRt+TgZSUbwNeBSdCOaTQJ8nEsfnvZ2
- Hjcg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RossYVByuO/tmdzIR2f9sRK38tNoaSJLjnN7V2X7tuqiZrsWIlD42jJZbxciXqXMChrKKxz0fDkcIaS@nongnu.org
-X-Gm-Message-State: AOJu0YzHif62AH+Anjt9mLYEqY5CMW03vY6qBpqzx0GvXspv0gOjc55z
- f2KmFYgMrAr20siJ9RqPaKsSfOdsau1FquyBShQmKVXdrpY3C7LeloUSRXnfL9pY6q0=
-X-Gm-Gg: AfdE7cnM99pNx/PTeRENeZLwm/Dn7t5FnTADPgTdy7TZsckYpeJuBOBCxmWZ8FeBukj
- LE1DAIpQhkY+v5Jvze4cB3J0RHl2Tn8yT+o/vtd8xmFmEhenyHpnvxrzHGqIjwZCkC71uuprFWm
- dPvF50APM85UtseHLCBdVG/O8Q0PJMVPGEheqneQcVrvhn//YnXe3U2/EjqvCA7SsauL2/iBeea
- PKzRoZnxYBz8ByHRjdcoHVM7aTZMywVT7ejiGlpCsQqwBJmfID85N5TIbtSZHH/8TlFGBxNNL27
- JwWb6FLL/d/vATWuaZ0J4Mk6Ec4lknN3HAW4crNTxksxQrVcsyxzVJ3ANpZEz5jKShpRz9RpA9H
- lKlGacldFIiQrTR42XvKNojGZTt9KEdAI/GH1tMLnyjJTAAqk8tuzZQ3uRQ/2LzwwClYV2R087U
- ouq8xxLLBIYgtXvqXeEnp/tig8aIUYY4NO9SqBmAc=
-X-Received: by 2002:a17:903:11c7:b0:2c9:deec:f564 with SMTP id
- d9443c01a7336-2ccea373a8cmr110909905ad.13.1783663777346; 
- Thu, 09 Jul 2026 23:09:37 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ccc9d59e33sm53344255ad.74.2026.07.09.23.09.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 23:09:36 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- qemu-riscv@nongnu.org (open list:SiFive Machines),
- Frank Chang <frank.chang@sifive.com>, Max Chou <max.chou@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v5 3/7] target/riscv: Support raising misaligned exceptions
- for vector loads/stores
-Date: Fri, 10 Jul 2026 14:09:10 +0800
-Message-ID: <20260710060914.1227027-4-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260710060914.1227027-1-frank.chang@sifive.com>
-References: <20260710060914.1227027-1-frank.chang@sifive.com>
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wi4g0-0007kh-7N
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:25:35 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wi4fy-0005oz-0h
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:25:31 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1783664729;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=v8q+3lUkMrowihgNvWTsOWIW9MlqhSBHDx1C+VszfsU=;
+ b=eG85j2RjEPODu0f5RWkLlNOaBjsVLYBBBmsN+L6AeLOV7URKZ9p737h8gP2iPNMA4hhmGi
+ zkdYYP+eHE4AZPE/wNF5Dcr7k4qGNYkXylCHfztR67DGQP6/dxk1g750ROUWfr0L4EzVtn
+ DulxVhD6gAXY8QhRJh0HNJWXS/Ejgwg=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-612-C-trBSPRMYWc0_bCbg-Gww-1; Fri,
+ 10 Jul 2026 02:25:27 -0400
+X-MC-Unique: C-trBSPRMYWc0_bCbg-Gww-1
+X-Mimecast-MFC-AGG-ID: C-trBSPRMYWc0_bCbg-Gww_1783664721
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 370881955F76; Fri, 10 Jul 2026 06:25:19 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.44.22.4])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id A8F05180058C; Fri, 10 Jul 2026 06:25:15 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 380D421E6920; Fri, 10 Jul 2026 08:25:13 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: "Graf (AWS), Alexander" <graf@amazon.de>
+Cc: BALATON Zoltan <balaton@eik.bme.hu>,  Markus Armbruster
+ <armbru@redhat.com>,  "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ Aditya Gupta <adityag@linux.ibm.com>,  Alexandre Iooss
+ <erdnaxe@crans.org>,  "Alexey Kardashevskiy" <aik@ozlabs.ru>,  Alistair
+ Francis <Alistair.Francis@wdc.com>,  Alistair Francis
+ <alistair@alistair23.me>,  Antony Pavlov <antonynpavlov@gmail.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,  "Bernhard Beschow"
+ <shentey@gmail.com>,  Bibo Mao <maobibo@loongson.cn>,  Brian Cain
+ <brian.cain@oss.qualcomm.com>,  Chao Liu <chao.liu@processmission.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,  =?utf-8?Q?Cl=C3=A9me?=
+ =?utf-8?Q?nt?= Chigot
+ <chigot@adacore.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,
+ Dorjoy Chowdhury
+ <dorjoychy111@gmail.com>,  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Eric Farman <farman@linux.ibm.com>,  Farhan Ali <alifm@linux.ibm.com>,
+ "Felipe Balbi" <balbi@kernel.org>,  Francisco Iglesias
+ <francisco.iglesias@amd.com>,  Frederic Konrad <konrad.frederic@yahoo.fr>,
+ Gaurav Sharma <gaurav.sharma_7@nxp.com>,  Gautam Gala
+ <ggala@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Halil Pasic
+ <pasic@linux.ibm.com>,  Hao Wu <wuhaotsh@google.com>,  Harsh Prateek Bora
+ <harshpb@linux.ibm.com>,  "Helge Deller" <deller@gmx.de>,  Hendrik
+ Brueckner <brueckner@linux.ibm.com>,  =?utf-8?Q?Herv=C3=A9?= Poussineau
+ <hpoussin@reactos.org>,  Huacai Chen <chenhuacai@kernel.org>,  Jan Kiszka
+ <jan.kiszka@web.de>,  Jared Rossi <jrossi@linux.ibm.com>,  Joel Stanley
+ <joel@jms.id.au>,  Laurent Vivier <laurent@vivier.eu>,  Manos
+ Pitsidianakis <manos.pitsidianakis@linaro.org>,  Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>,  Matthew Rosato <mjrosato@linux.ibm.com>,
+ Max Filippov <jcmvbkbc@gmail.com>,  Michael Rolnik <mrolnik@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,  Nicholas Piggin
+ <npiggin@gmail.com>,  Niek Linnenbank <nieklinnenbank@gmail.com>,  "Palmer
+ Dabbelt" <palmer@dabbelt.com>,  Paolo Bonzini <pbonzini@redhat.com>,
+ "Peter Maydell" <peter.maydell@linaro.org>,  Philippe =?utf-8?Q?Mathieu-?=
+ =?utf-8?Q?Daud=C3=A9?= <philmd@mailo.com>,  "Pierrick Bouvier"
+ <pierrick.bouvier@oss.qualcomm.com>,  Ran Wang <wangran@bosc.ac.cn>,
+ Richard Henderson <richard.henderson@linaro.org>,  Sai Pavan Boddu
+ <sai.pavan.boddu@amd.com>,  Samuel Tardieu <sam@rfc1149.net>,  Sergio
+ Lopez <slp@redhat.com>,  Song Gao <17746591750@163.com>,  Stafford Horne
+ <shorne@gmail.com>,  Subbaraya Sundeep <sundeep.lkml@gmail.com>,  Thomas
+ Huth <th.huth+qemu@posteo.eu>,  Tyrone Ting <kfting@nuvoton.com>,
+ "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,  "qemu-ppc@nongnu.org"
+ <qemu-ppc@nongnu.org>,  "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>
+Subject: Re: Call to clean up QOM onboard devices lacking a parent
+In-Reply-To: <fee18020-dcfe-4d91-8384-5cc5f8321ff7@amazon.com> (Graf
+ Alexander's message of "Thu, 9 Jul 2026 16:45:42 +0000")
+References: <87se5scipx.fsf@pond.sub.org>
+ <17c7f91b-8935-8ebf-a982-f91df755af81@eik.bme.hu>
+ <fee18020-dcfe-4d91-8384-5cc5f8321ff7@amazon.com>
+Date: Fri, 10 Jul 2026 08:25:13 +0200
+Message-ID: <87h5m7xsxi.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: zWOzZTCO6s22VyuBGDYBtmWlyfoF3FI-y1poN5CVAEg_1783664721
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 8
+X-Spam_score: 0.8
+X-Spam_bar: /
+X-Spam_report: (0.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,185 +129,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frank Chang <frank.chang@sifive.com>
+"Graf (AWS), Alexander" <graf@amazon.de> writes:
 
-When the Zicclsm extension is not enabled, raise misaligned load/store
-exceptions for misaligned accesses from vector load/store instructions.
+> Hi Markus,
 
-We will skip the host fast-path and fall back to the slow TLB-path to
-raise misaligned load/store exceptions for the misaligned accesses when
-Zicclsm extension is disabled.
+[...]
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Max Chou <max.chou@sifive.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/tcg/insn_trans/trans_rvv.c.inc | 18 +++++-
- target/riscv/tcg/vector_helper.c            | 65 ++++++++++++++++-----
- 2 files changed, 65 insertions(+), 18 deletions(-)
+> I'm also curious on whether there is anything that makes sysbus device 
+> spawns both easy (as they are today) and at the same time fully QOM 
+> parent compliant.
+>
+> I had a quick look at the vmapple machine and most of the offenders are 
+> sysbus devices I spawn via qdev_new(). Would you want all of these to 
+> get their parent declared via object_property_add_child()? If that's the 
+> case, why don't we introduce a new qdev_new_child() which does that 
+> automatically?
 
-diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-index 23262b1d036..a22e2cae6ce 100644
---- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-@@ -1191,26 +1191,38 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
-      * Use the helper function if either:
-      * - vstart is not 0.
-      */
--
-     bool use_helper_fn = !s->vstart_eq_zero;
- 
-     if (!use_helper_fn) {
-         uint32_t size = s->cfg_ptr->vlenb * nf;
-         TCGv_i64 t8 = tcg_temp_new_i64();
-         MemOp atomicity = MO_ATOM_NONE;
-+        MemOp alignment = MO_UNALN;
-+
-+        /*
-+         * If Zicclsm is disabled, require alignment based on element size.
-+         * Use MO_ALIGN_* based on log2_esz (0 = MO_UNALN, 1 = MO_ALIGN_2, etc).
-+         */
-+        if (!s->cfg_ptr->ext_zicclsm) {
-+            alignment = log2_esz << MO_ASHIFT;
-+        }
-+
-         if (log2_esz == 0) {
-             atomicity = MO_ATOM_NONE;
-         } else {
-             atomicity = MO_ATOM_IFALIGN_PAIR;
-         }
-+
-         for (int i = 0; i < size; i += 8) {
-             TCGv addr = get_address(s, rs1, i);
-             if (is_load) {
--                tcg_gen_qemu_ld_i64(t8, addr, s->mem_idx, MO_LEUQ | atomicity);
-+                tcg_gen_qemu_ld_i64(t8, addr, s->mem_idx,
-+                                    MO_LEUQ | atomicity | alignment);
-                 tcg_gen_st_i64(t8, tcg_env, vreg_ofs(s, vd) + i);
-             } else {
-                 tcg_gen_ld_i64(t8, tcg_env, vreg_ofs(s, vd) + i);
--                tcg_gen_qemu_st_i64(t8, addr, s->mem_idx, MO_LEUQ | atomicity);
-+                tcg_gen_qemu_st_i64(t8, addr, s->mem_idx,
-+                                    MO_LEUQ | atomicity | alignment);
-             }
-             if (i == size - 8) {
-                 tcg_gen_movi_i32(cpu_vstart, 0);
-diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index e321ca26161..e28d8a3d9fd 100644
---- a/target/riscv/tcg/vector_helper.c
-+++ b/target/riscv/tcg/vector_helper.c
-@@ -199,20 +199,34 @@ static inline void vext_set_elem_mask(void *v0, int index,
-     ((uint64_t *)v0)[idx] = deposit64(old, pos, 1, value);
- }
- 
-+static inline MemOpIdx vext_make_memop_idx(CPURISCVState *env, size_t size)
-+{
-+    int mmu_idx = riscv_env_mmu_index(env, false);
-+    MemOp memop = size_memop(size) | mo_endian_env(env);
-+
-+    if (!riscv_cpu_cfg(env)->ext_zicclsm) {
-+        memop |= MO_ALIGN;
-+    }
-+
-+    return make_memop_idx(memop, mmu_idx);
-+}
-+
- /* elements operations for load and store */
- typedef void vext_ldst_elem_fn_tlb(CPURISCVState *env, abi_ptr addr,
-                                    uint32_t idx, void *vd, uintptr_t retaddr);
- typedef void vext_ldst_elem_fn_host(void *vd, uint32_t idx, void *host);
- 
--#define GEN_VEXT_LD_ELEM(NAME, ETYPE, H, LDSUF)             \
-+#define GEN_VEXT_TLB_LD_ELEM(NAME, ETYPE, H, LDSUF)         \
- static inline QEMU_ALWAYS_INLINE                            \
- void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
-                 uint32_t idx, void *vd, uintptr_t retaddr)  \
- {                                                           \
-     ETYPE *cur = ((ETYPE *)vd + H(idx));                    \
--    *cur = cpu_##LDSUF##_data_ra(env, addr, retaddr);       \
-+    MemOpIdx oi = vext_make_memop_idx(env, sizeof(ETYPE));  \
-+    *cur = cpu_##LDSUF##_mmu(env, addr, oi, retaddr);       \
- }                                                           \
--                                                            \
-+
-+#define GEN_VEXT_HOST_LD_ELEM(NAME, ETYPE, H, LDSUF)        \
- static inline QEMU_ALWAYS_INLINE                            \
- void NAME##_host(void *vd, uint32_t idx, void *host)        \
- {                                                           \
-@@ -220,20 +234,27 @@ void NAME##_host(void *vd, uint32_t idx, void *host)        \
-     *cur = (ETYPE)LDSUF##_p(host);                          \
- }
- 
--GEN_VEXT_LD_ELEM(lde_b, uint8_t,  H1, ldub)
--GEN_VEXT_LD_ELEM(lde_h, uint16_t, H2, lduw_le)
--GEN_VEXT_LD_ELEM(lde_w, uint32_t, H4, ldl_le)
--GEN_VEXT_LD_ELEM(lde_d, uint64_t, H8, ldq_le)
-+GEN_VEXT_TLB_LD_ELEM(lde_b, uint8_t,  H1, ldb)
-+GEN_VEXT_TLB_LD_ELEM(lde_h, uint16_t, H2, ldw)
-+GEN_VEXT_TLB_LD_ELEM(lde_w, uint32_t, H4, ldl)
-+GEN_VEXT_TLB_LD_ELEM(lde_d, uint64_t, H8, ldq)
- 
--#define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)             \
-+GEN_VEXT_HOST_LD_ELEM(lde_b, uint8_t,  H1, ldub)
-+GEN_VEXT_HOST_LD_ELEM(lde_h, uint16_t, H2, lduw_le)
-+GEN_VEXT_HOST_LD_ELEM(lde_w, uint32_t, H4, ldl_le)
-+GEN_VEXT_HOST_LD_ELEM(lde_d, uint64_t, H8, ldq_le)
-+
-+#define GEN_VEXT_TLB_ST_ELEM(NAME, ETYPE, H, STSUF)         \
- static inline QEMU_ALWAYS_INLINE                            \
- void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
-                 uint32_t idx, void *vd, uintptr_t retaddr)  \
- {                                                           \
-     ETYPE data = *((ETYPE *)vd + H(idx));                   \
--    cpu_##STSUF##_data_ra(env, addr, data, retaddr);        \
-+    MemOpIdx oi = vext_make_memop_idx(env, sizeof(ETYPE));  \
-+    cpu_##STSUF##_mmu(env, addr, data, oi, retaddr);        \
- }                                                           \
--                                                            \
-+
-+#define GEN_VEXT_HOST_ST_ELEM(NAME, ETYPE, H, STSUF)        \
- static inline QEMU_ALWAYS_INLINE                            \
- void NAME##_host(void *vd, uint32_t idx, void *host)        \
- {                                                           \
-@@ -241,10 +262,15 @@ void NAME##_host(void *vd, uint32_t idx, void *host)        \
-     STSUF##_p(host, data);                                  \
- }
- 
--GEN_VEXT_ST_ELEM(ste_b, uint8_t,  H1, stb)
--GEN_VEXT_ST_ELEM(ste_h, uint16_t, H2, stw_le)
--GEN_VEXT_ST_ELEM(ste_w, uint32_t, H4, stl_le)
--GEN_VEXT_ST_ELEM(ste_d, uint64_t, H8, stq_le)
-+GEN_VEXT_TLB_ST_ELEM(ste_b, uint8_t,  H1, stb)
-+GEN_VEXT_TLB_ST_ELEM(ste_h, uint16_t, H2, stw)
-+GEN_VEXT_TLB_ST_ELEM(ste_w, uint32_t, H4, stl)
-+GEN_VEXT_TLB_ST_ELEM(ste_d, uint64_t, H8, stq)
-+
-+GEN_VEXT_HOST_ST_ELEM(ste_b, uint8_t,  H1, stb)
-+GEN_VEXT_HOST_ST_ELEM(ste_h, uint16_t, H2, stw_le)
-+GEN_VEXT_HOST_ST_ELEM(ste_w, uint32_t, H4, stl_le)
-+GEN_VEXT_HOST_ST_ELEM(ste_d, uint64_t, H8, stq_le)
- 
- static inline QEMU_ALWAYS_INLINE void
- vext_continuous_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
-@@ -398,7 +424,16 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
-     probe_pages(env, addr, size, ra, access_type, mmu_index, &host, &flags,
-                 true);
- 
--    if (flags == 0) {
-+    bool misaligned = addr & (esz - 1);
-+
-+    /*
-+     * Allow the host fast-pash when:
-+     *   1. Page permission/pmp/watchpoint are checked and we have a contigous
-+     *      host mapping.
-+     *   2. Zicclsm is enabled or load/store is not a misaligned access.
-+     * Otherwise, we will fall back to the slow TLB-path.
-+     */
-+    if (flags == 0 && (riscv_cpu_cfg(env)->ext_zicclsm || !misaligned)) {
-         if (nf == 1) {
-             vext_continuous_ldst_host(env, ldst_host, vd, evl, env->vstart,
-                                       host, esz, is_load);
--- 
-2.43.0
+We do have such convenience functions at the QOM layer: object_new() and
+object_property_add_child() etc., are basic building blocks, and
+object_new_with_props() etc. combine them in useful ways.
+
+We don't have such convenience functions at the qdev layer.  Can't see
+why we couldn't add them.
+
+Number of orphaned device types I see by bus_type:
+
+    69      busless
+    15      ISA
+    33      PCI
+    11      SSI
+    209     System
+    2       apple-desktop-bus
+    23      i2c-bus
+    2       sd-bus
+    1       spapr-vio-bus
+    2       usb-bus
+
+Again, not a problem with the device types, but the code that creates
+and realizes them.
+
+Bus types commonly provide a layer above qdev for that.  Perhaps these
+layers could also use convenience functions to more easily deal with
+setting the QOM parent.
 
 
