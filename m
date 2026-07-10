@@ -4,104 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1717EC44501
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 06:26:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09ADFC43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 07:07:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wi4gC-0007z2-MG; Fri, 10 Jul 2026 02:25:46 -0400
+	id 1wi5JN-0001bQ-RJ; Fri, 10 Jul 2026 03:06:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wi4g0-0007kh-7N
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:25:35 -0400
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wi5JM-0001b5-Sn
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 03:06:12 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wi4fy-0005oz-0h
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:25:31 -0400
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wi5JK-0002mP-IE
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 03:06:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1783664729;
+ s=mimecast20190719; t=1783667168;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=v8q+3lUkMrowihgNvWTsOWIW9MlqhSBHDx1C+VszfsU=;
- b=eG85j2RjEPODu0f5RWkLlNOaBjsVLYBBBmsN+L6AeLOV7URKZ9p737h8gP2iPNMA4hhmGi
- zkdYYP+eHE4AZPE/wNF5Dcr7k4qGNYkXylCHfztR67DGQP6/dxk1g750ROUWfr0L4EzVtn
- DulxVhD6gAXY8QhRJh0HNJWXS/Ejgwg=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ bh=BA3zZUPyelCMWKs4FcfDK0ObJLwr6OM7SdxtcjefBws=;
+ b=E+wGXKG92MwmoTBF9jcOIteBQhtl8FfwU/WowJBllxUenHCQjVN5GRMU1f3AYuGicOeU7d
+ HkFLqj+7J/Na5onE7y9pg8WzMrRwN+wnbJsoxjnM64k6DcvpNust/PP8Zoy+nc/9T5H0UY
+ DPmo4wICU7ezlkjeOzQmb6uKlreTaxU=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-612-C-trBSPRMYWc0_bCbg-Gww-1; Fri,
- 10 Jul 2026 02:25:27 -0400
-X-MC-Unique: C-trBSPRMYWc0_bCbg-Gww-1
-X-Mimecast-MFC-AGG-ID: C-trBSPRMYWc0_bCbg-Gww_1783664721
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-616-6nRvkKPhNkCrIGKJnm5cjA-1; Fri,
+ 10 Jul 2026 03:06:06 -0400
+X-MC-Unique: 6nRvkKPhNkCrIGKJnm5cjA-1
+X-Mimecast-MFC-AGG-ID: 6nRvkKPhNkCrIGKJnm5cjA_1783667161
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 370881955F76; Fri, 10 Jul 2026 06:25:19 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 887111955D5E; Fri, 10 Jul 2026 07:05:59 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.44.22.4])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id A8F05180058C; Fri, 10 Jul 2026 06:25:15 +0000 (UTC)
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 3723E180029C; Fri, 10 Jul 2026 07:05:56 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 380D421E6920; Fri, 10 Jul 2026 08:25:13 +0200 (CEST)
+ id C233521E6920; Fri, 10 Jul 2026 09:05:53 +0200 (CEST)
 From: Markus Armbruster <armbru@redhat.com>
-To: "Graf (AWS), Alexander" <graf@amazon.de>
-Cc: BALATON Zoltan <balaton@eik.bme.hu>,  Markus Armbruster
- <armbru@redhat.com>,  "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- Aditya Gupta <adityag@linux.ibm.com>,  Alexandre Iooss
- <erdnaxe@crans.org>,  "Alexey Kardashevskiy" <aik@ozlabs.ru>,  Alistair
- Francis <Alistair.Francis@wdc.com>,  Alistair Francis
- <alistair@alistair23.me>,  Antony Pavlov <antonynpavlov@gmail.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>,  "Bernhard Beschow"
- <shentey@gmail.com>,  Bibo Mao <maobibo@loongson.cn>,  Brian Cain
- <brian.cain@oss.qualcomm.com>,  Chao Liu <chao.liu@processmission.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,  =?utf-8?Q?Cl=C3=A9me?=
- =?utf-8?Q?nt?= Chigot
- <chigot@adacore.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,
- Dorjoy Chowdhury
- <dorjoychy111@gmail.com>,  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eric Farman <farman@linux.ibm.com>,  Farhan Ali <alifm@linux.ibm.com>,
- "Felipe Balbi" <balbi@kernel.org>,  Francisco Iglesias
- <francisco.iglesias@amd.com>,  Frederic Konrad <konrad.frederic@yahoo.fr>,
- Gaurav Sharma <gaurav.sharma_7@nxp.com>,  Gautam Gala
- <ggala@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Halil Pasic
- <pasic@linux.ibm.com>,  Hao Wu <wuhaotsh@google.com>,  Harsh Prateek Bora
- <harshpb@linux.ibm.com>,  "Helge Deller" <deller@gmx.de>,  Hendrik
- Brueckner <brueckner@linux.ibm.com>,  =?utf-8?Q?Herv=C3=A9?= Poussineau
- <hpoussin@reactos.org>,  Huacai Chen <chenhuacai@kernel.org>,  Jan Kiszka
- <jan.kiszka@web.de>,  Jared Rossi <jrossi@linux.ibm.com>,  Joel Stanley
- <joel@jms.id.au>,  Laurent Vivier <laurent@vivier.eu>,  Manos
- Pitsidianakis <manos.pitsidianakis@linaro.org>,  Mark Cave-Ayland
+To: BALATON Zoltan <balaton@eik.bme.hu>
+Cc: qemu-devel@nongnu.org,  Aditya Gupta <adityag@linux.ibm.com>,  Alexander
+ Graf <graf@amazon.com>,  Alexandre Iooss <erdnaxe@crans.org>,  Alexey
+ Kardashevskiy <aik@ozlabs.ru>,  Alistair Francis
+ <Alistair.Francis@wdc.com>,  Alistair Francis <alistair@alistair23.me>,
+ Antony Pavlov <antonynpavlov@gmail.com>,  Artyom Tarasenko
+ <atar4qemu@gmail.com>,  Bernhard Beschow <shentey@gmail.com>,  Bibo Mao
+ <maobibo@loongson.cn>,  Brian Cain <brian.cain@oss.qualcomm.com>,  Chao
+ Liu <chao.liu@processmission.com>,  Christian Borntraeger
+ <borntraeger@linux.ibm.com>,  =?utf-8?Q?Cl=C3=A9ment?= Chigot
+ <chigot@adacore.com>,  =?utf-8?Q?C=C3=A9dric?=
+ Le Goater <clg@kaod.org>,  Dorjoy Chowdhury <dorjoychy111@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,  Eric Farman
+ <farman@linux.ibm.com>,  Farhan Ali <alifm@linux.ibm.com>,  Felipe Balbi
+ <balbi@kernel.org>,  Francisco Iglesias <francisco.iglesias@amd.com>,
+ Frederic Konrad <konrad.frederic@yahoo.fr>,  Gaurav Sharma
+ <gaurav.sharma_7@nxp.com>,  Gautam Gala <ggala@linux.ibm.com>,  Glenn
+ Miles <milesg@linux.ibm.com>,  Halil Pasic <pasic@linux.ibm.com>,  Hao Wu
+ <wuhaotsh@google.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Helge
+ Deller <deller@gmx.de>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
+ =?utf-8?Q?Herv=C3=A9?= Poussineau <hpoussin@reactos.org>,  Huacai Chen
+ <chenhuacai@kernel.org>,  Jan Kiszka <jan.kiszka@web.de>,  Jared Rossi
+ <jrossi@linux.ibm.com>,  Joel Stanley <joel@jms.id.au>,  Laurent Vivier
+ <laurent@vivier.eu>,  Manos Pitsidianakis
+ <manos.pitsidianakis@linaro.org>,  Mark Cave-Ayland
  <mark.cave-ayland@ilande.co.uk>,  Matthew Rosato <mjrosato@linux.ibm.com>,
  Max Filippov <jcmvbkbc@gmail.com>,  Michael Rolnik <mrolnik@gmail.com>,
  "Michael S. Tsirkin" <mst@redhat.com>,  Nicholas Piggin
- <npiggin@gmail.com>,  Niek Linnenbank <nieklinnenbank@gmail.com>,  "Palmer
- Dabbelt" <palmer@dabbelt.com>,  Paolo Bonzini <pbonzini@redhat.com>,
- "Peter Maydell" <peter.maydell@linaro.org>,  Philippe =?utf-8?Q?Mathieu-?=
- =?utf-8?Q?Daud=C3=A9?= <philmd@mailo.com>,  "Pierrick Bouvier"
- <pierrick.bouvier@oss.qualcomm.com>,  Ran Wang <wangran@bosc.ac.cn>,
- Richard Henderson <richard.henderson@linaro.org>,  Sai Pavan Boddu
+ <npiggin@gmail.com>,  Niek Linnenbank <nieklinnenbank@gmail.com>,  Palmer
+ Dabbelt <palmer@dabbelt.com>,  Paolo Bonzini <pbonzini@redhat.com>,  Peter
+ Maydell <peter.maydell@linaro.org>,  Philippe =?utf-8?Q?Mathieu-Daud?=
+ =?utf-8?Q?=C3=A9?=
+ <philmd@mailo.com>,  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Ran Wang <wangran@bosc.ac.cn>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Sai Pavan Boddu
  <sai.pavan.boddu@amd.com>,  Samuel Tardieu <sam@rfc1149.net>,  Sergio
  Lopez <slp@redhat.com>,  Song Gao <17746591750@163.com>,  Stafford Horne
  <shorne@gmail.com>,  Subbaraya Sundeep <sundeep.lkml@gmail.com>,  Thomas
  Huth <th.huth+qemu@posteo.eu>,  Tyrone Ting <kfting@nuvoton.com>,
- "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,  "qemu-ppc@nongnu.org"
- <qemu-ppc@nongnu.org>,  "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>
+ qemu-arm@nongnu.org,  qemu-ppc@nongnu.org,  qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org
 Subject: Re: Call to clean up QOM onboard devices lacking a parent
-In-Reply-To: <fee18020-dcfe-4d91-8384-5cc5f8321ff7@amazon.com> (Graf
- Alexander's message of "Thu, 9 Jul 2026 16:45:42 +0000")
+In-Reply-To: <17c7f91b-8935-8ebf-a982-f91df755af81@eik.bme.hu> (BALATON
+ Zoltan's message of "Thu, 9 Jul 2026 18:02:58 +0200 (CEST)")
 References: <87se5scipx.fsf@pond.sub.org>
  <17c7f91b-8935-8ebf-a982-f91df755af81@eik.bme.hu>
- <fee18020-dcfe-4d91-8384-5cc5f8321ff7@amazon.com>
-Date: Fri, 10 Jul 2026 08:25:13 +0200
-Message-ID: <87h5m7xsxi.fsf@pond.sub.org>
+Date: Fri, 10 Jul 2026 09:05:53 +0200
+Message-ID: <87a4rzxr1q.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: zWOzZTCO6s22VyuBGDYBtmWlyfoF3FI-y1poN5CVAEg_1783664721
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: 9m3LPBia1IOxeoovGgCkc_z1gpjdBHtM1sz-FFJZiIc_1783667161
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
@@ -129,47 +126,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-"Graf (AWS), Alexander" <graf@amazon.de> writes:
+BALATON Zoltan <balaton@eik.bme.hu> writes:
 
-> Hi Markus,
-
-[...]
-
-> I'm also curious on whether there is anything that makes sysbus device 
-> spawns both easy (as they are today) and at the same time fully QOM 
-> parent compliant.
+> On Thu, 9 Jul 2026, Markus Armbruster wrote:
+>> A QOM object must be the child of exactly one parent.  This defines the
+>> QOM composition tree.  The link from parent to child is a property of
+>> the parent, and therefore has a name that is unique within its parent.
+>> An object's canonical QOM path is these names on the path from root to
+>> object in the QOM composition tree separated by '/'.
+>>
+>> For devices:
+>>
+>> * If a device is plugged in with -device / device_add, and it has an ID,
+>>  we make it a child of /machine/peripheral/ with name ID.  If it
+>>  doesn't have an ID, we make it a child of /machine/peripheral-anon/
+>>  with name device[N], where N counts up from zero.  The canonical QOM
+>>  path /machine/peripheral/ID is stable.  The canonical QOM path
+>>  /machine/peripheral-anon/device[N] isn't: it depends on the number of
+>>  devices already there.
+>>
+>> * If a device is part of another device, it should be its child.  The
+>>  child's canonical QOM path is the parent's plus '/CHILD-NAME'.  Stable
+>>  as long as the parent's path and the child name are.
+>>
+>> * "Should" because we have a lot of code that fails to pick the parent.
+>>  When such a device gets realized, we make it a child of
+>>  /machine/unattached/ orphanage with name device[N], where N counts up
+>>  from zero.  The canonical QOM path /machine/unattached/device[N]
+>>  depends on the number of children already in the orphanage, which
+>>  makes it unstable.
+>>
+>>  Letting code get away with not picking a parent was a mistake.  I
+>>  guess it "saved" us some thinking about what's part of what when
+>>  converting existing devices to QOM.  In other words, it enabled sloppy
+>>  hardware modeling.  We've been "saving" thinking ever since.
+>>
+>>  I want /machine/unattached/ to be empty.  If an onboard device isn't
+>>  part of another device, put it into /machine/ with a sensible name.
 >
-> I had a quick look at the vmapple machine and most of the offenders are 
-> sysbus devices I spawn via qdev_new(). Would you want all of these to 
-> get their parent declared via object_property_add_child()? If that's the 
-> case, why don't we introduce a new qdev_new_child() which does that 
-> automatically?
+> The last time this came up I've asked a few questions but did not get an answer:
+>
+> 1. What's the use of the QOM composition tree? I never needed it and apart from being able to admire it in info qom-tree I don't know if it's used for anything. For a long time I did not even know about info qom-tree because I only needed info qtree and info mtree and rarely if ever need to look at the qom-tree. If it has no real use I'm happy to not think about it.
+>
+> 2. What is a QOM parent? There were proposals to parent devices to their bus if they have any, that's what qtree shows anyway. If it's something else it should be better defined somewhere.
+>
+> Without getting answers for these questions I don't think I'm able to fix the machines I maintain.
 
-We do have such convenience functions at the QOM layer: object_new() and
-object_property_add_child() etc., are basic building blocks, and
-object_new_with_props() etc. combine them in useful ways.
+Unfortunately, I don't have the time to teach a class on QOM basics
+today.  The text you quoted explains what QOM parent and canonical QOM
+path are, albeit briefly.  It also explains how to pick the QOM parent
+properly, what happens when you neglect to pick one, and why that's
+undesirable.  I'm going to elaborate a bit.
 
-We don't have such convenience functions at the qdev layer.  Can't see
-why we couldn't add them.
+A fully constructed QOM object is part of the QOM composition tree.
+This is a fundamental property of QOM's design.
 
-Number of orphaned device types I see by bus_type:
+A QOM object can be composed of sub-objects.  Its sub-objects are its
+children in the composition tree.  That's why it's named *composition*
+tree.
 
-    69      busless
-    15      ISA
-    33      PCI
-    11      SSI
-    209     System
-    2       apple-desktop-bus
-    23      i2c-bus
-    2       sd-bus
-    1       spapr-vio-bus
-    2       usb-bus
+Canonical QOM paths are visible at external interfaces both as input and
+as output.  A few quick examples:
 
-Again, not a problem with the device types, but the code that creates
-and realizes them.
+* QMP command query-cpus-fast reports a CPU's canonical QOM path.  For
+  some machines, we get something like "/machine/unattached/device[0]".
+  Fine as long as the client treats it as an opaque handle.  For other
+  machines, we get something like "/machine/soc/cpu", which is clearly
+  better.
 
-Bus types commonly provide a layer above qdev for that.  Perhaps these
-layers could also use convenience functions to more easily deal with
-setting the QOM parent.
+* Error messages use canonical QOM paths to identify devices.  With
+  properly modeled hardware, these paths are actually helpful for
+  humans.  Something like "/machine/unattached/device[7]" not so much.
+
+* QMP command device-sync-config accepts a QOM path argument.  With
+  properly modeled hardware, you can use a stable canonical QOM path.
+  But when the device is in the /machine/unattached orphanage, its
+  canonical QOM path is unstable.  A client has to first search the
+  orphanage to find today's path.
+
+Further questions?
 
 
