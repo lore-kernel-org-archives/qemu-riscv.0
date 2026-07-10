@@ -4,172 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47FC7C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 02:23:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ECCDC43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 04:39:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wi0u4-0002O4-6s; Thu, 09 Jul 2026 22:23:48 -0400
+	id 1wi31h-0001yV-MH; Fri, 10 Jul 2026 00:39:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=64494dccb=Alistair.Francis@wdc.com>)
- id 1wi0u3-0002Ns-A8; Thu, 09 Jul 2026 22:23:47 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=64494dccb=Alistair.Francis@wdc.com>)
- id 1wi0u0-0002PR-UL; Thu, 09 Jul 2026 22:23:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1783650224; x=1815186224;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=CUMWqjIv4ygZq168WWsgVL247cqo330ZZ9RSSOvHtE0=;
- b=EzhWVodSvzzNLLNqRlM+RkQPR2eOYgKTM3LVnGcfjRdnNVsbKc4GxK+t
- 8IdS3kfpWXF4hwWsnCFWHU1fbrJbjy25Zbp+3UJA4rLbLvKrj20awJf7v
- R0sX2Bv8uMCPBSCrGkJg8WlgvvJ+3pA3PsR6CUSqrzRnef+qijecaCdWT
- prz9VT+wtWwrBtuTWvpXytX67d4Lte2rsOJLXxVwHVipJzocBgEMNOKe5
- krwTjpYSAy+2NMCV9vaD2/GxmYVPzMxWScrIXuRuEXtHMO4EnIF6QAirz
- Nkvry4PiAGF0d/qDqm0ALTf0uvafC+tKpZaC+tlljruU2cQrTIm7vkGw1 Q==;
-X-CSE-ConnectionGUID: xfSRjbKyQB+lbaLUhC6VrQ==
-X-CSE-MsgGUID: DEerYL+hS0ylLDsBCCH21w==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779120000"; d="scan'208";a="149206656"
-Received: from mail-westus2azon11010011.outbound.protection.outlook.com (HELO
- CO1PR03CU002.outbound.protection.outlook.com) ([52.101.46.11])
- by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 10 Jul 2026 10:23:39 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nTzu70NYljqjHbJhpDaJc0Qb9FOOz3gB9g8wW3RbbEasWHpvfd+F+VvFmE+e+Ew6GwlzwrGej74mXEW24Y797+204LX6tn5OhdM2uZw5fdFDjT6gq5McxF2buEaURC51ut94kQDfEkr7AGuQl0A6lNkaz6prn/VAZChXkmFxMHrxmM0G3DpqW4gb7FlS/SDbLfTmk2xF/ueAQRHlmwFr6W30rmktmkN2R/xSynXNnTU/2t2cBUp5SmSjXKtPsSEwY7qeOkvQ59BGjehjpAQIp4KKxv4EVVYx8R1DLeDv6ijt0vnpoBuokbjYrWz8yRgsE3sd+LHwNkCQHI6V6JIuMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CUMWqjIv4ygZq168WWsgVL247cqo330ZZ9RSSOvHtE0=;
- b=YQemivkMnVEH9Kp5aVx92SI6lctNEN2kg1qg4j0dYfXpDj7SrW68eTvQekSX6DjiagIKcGT4kIBjnlt6ITasbWasuPQYZTwZTM94KUFtaWBEGrYHKGbjm6A2xzRIDe7dQdzh7cdiB8QbCjjIKyysALFu+8jG2OMVp7lsQAukwMZC7nwxehbthw3vBdzBILvcO77bp0RvfW8IaO+Wt9Y95TS1NwdqMGdpJbIMeGhNJ6X0bY2qzzmIb0KqkhnDUD50oVGXMTS4tkWxn56kIFPhcYCd0dNHaf4XJLh0FhSqA7TjAzWkrp2KXoRAIyEuCAWTVjhe1THa5RjHTzHFNwuQmg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1wi31c-0001xz-MZ
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 00:39:45 -0400
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1wi31Z-000680-5N
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 00:39:44 -0400
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-c15cd3fd760so59674366b.2
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jul 2026 21:39:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783658378; cv=none;
+ d=google.com; s=arc-20260327;
+ b=pPvzWMC1R4wR0pYSnK0kM34wiqR+1t95OB1js3P+T06MNNAeLTk3Hp6xrscZTM+3VL
+ JamnDpobWEUdPcn1c0lVfq3DtOnd2HkzcnKlRWQxp8TZW5Gsa0ZA8flxyrtCrZT/kj0h
+ ro+hSKXPn7aw/9mpdE/e9YzK4GUC+44pq6rrD3d2ZHzDm6N1fs5FJMGug5sVNSZZo4qj
+ fbPVLU8Q9KRSFeZdYiuKQV1xQNEgnrqMKKBjT9nqTKyVQkXhiPLNBfFfny+KrEvWos8c
+ vjpsWSnabDzu8XjxBJbFqXibvxaigOyJQdpjGPNKf4zP40UfHjjUgrR9QeSBukgp0WIN
+ a+4w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=56w1ROGo3BaSolaKRmb5VJ7qKRqPAZAcXntmgsb80Hg=;
+ fh=/RLWQba6/vYRe371Q7GwSP+OBJNXdYLJ1tnndjNgjhw=;
+ b=XmCJM9MebJ1va8Kh/H4lSnMCACZO6BmiAsHQnTEfgCa6TBdimw2LszSOO5Jwx/pkN/
+ dGGum+qvIPh7ft8BpOcGS+0G9PHRfqr2mFVioc8BSe4qaKzwOC5u78yTb67j8dBAUYes
+ wFZEMLtxN71qVqMEkDOXC7v8ZPP45Ufe5AbqfIBgEFHYopVo/oN4tR9+JvhH5kUf/LVi
+ NSyDAuGwHNmVdLZ87IMe/7rCp+AUolRFDec/AROOaVV8jVb3MdW41ooASDMJtsjxGquo
+ RirlNMrp6/dAyeEETnTFF8PPO9PLqTZ1WVdFHBDSV+Yx+bowr4AioAxklUU+87z6sN46
+ 4jwQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CUMWqjIv4ygZq168WWsgVL247cqo330ZZ9RSSOvHtE0=;
- b=VR8PTufDvV4bmGiHLUNJg/M82brI5XkbOz/T9c3FRhPVZ0+rIg8dWcdPSkyWZPuhZC2CONXtcVBchlGMZDDuGHr83otX7aPQgXWjLmc+pOSa6eQkT0xC4FVm+mrGWPY9arjcCS4pOOIcq7onV83tYLEgRxDSBcMhTqp7q7nPFo4=
-Received: from BY1PR04MB9561.namprd04.prod.outlook.com (2603:10b6:a03:5b6::11)
- by LV3PR04MB9218.namprd04.prod.outlook.com (2603:10b6:408:26c::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.16; Fri, 10 Jul
- 2026 02:23:36 +0000
-Received: from BY1PR04MB9561.namprd04.prod.outlook.com
- ([fe80::3869:e494:2fa8:9888]) by BY1PR04MB9561.namprd04.prod.outlook.com
- ([fe80::3869:e494:2fa8:9888%5]) with mapi id 15.21.0181.016; Fri, 10 Jul 2026
- 02:23:30 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "imaginos32@gmail.com" <imaginos32@gmail.com>, "palmer@dabbelt.com"
- <palmer@dabbelt.com>
-CC: "chao.liu.zevorn@gmail.com" <chao.liu.zevorn@gmail.com>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "liwei1518@gmail.com"
- <liwei1518@gmail.com>, "zhiwei_liu@linux.alibaba.com"
- <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH v2] target/riscv: check G-stage write permission for
- VS-stage A/D updates
-Thread-Topic: [PATCH v2] target/riscv: check G-stage write permission for
- VS-stage A/D updates
-Thread-Index: AQHdDIdajV4aiA/i+0yvLJG7BgoQ6LZmDSAA
-Date: Fri, 10 Jul 2026 02:23:29 +0000
-Message-ID: <8dc3208da0af8ecf733c4dad287090b66bf76fd5.camel@wdc.com>
-References: <v1-Message-ID> <20260705140508.17692-1-imaginos32@gmail.com>
-In-Reply-To: <20260705140508.17692-1-imaginos32@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.60.2 (by Flathub.org) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wdc.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BY1PR04MB9561:EE_|LV3PR04MB9218:EE_
-x-ms-office365-filtering-correlation-id: 275ceb17-a53a-40af-9b6d-08dede2a3b69
-wdcipoutbound: EOP-TRUE
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|19092799006|376014|1800799024|366016|10070799003|23010399003|11063799006|4143699003|6133799003|22082099003|56012099006|18002099003|3023799007|38070700021;
-x-microsoft-antispam-message-info: jViurRfRqHOxw25E65fKqetQ6gYkKTX6JUq0yXriz6nzxQitVVgco0kZFx5q5Q31GwPdq7JETcaPFOytq8g60Lzm8VyJeef10SkgP0hWQWAK4HF6PfyXvJ9BSDsmcnxMorEjwXe6iARmYf5GOoZRSeBYX7rqIypEaxPM4dzYEQVdqcJzfGeYLFTQGhWIwR/nqFTFkvjxNTX1deXr383GXVZqgve9pyvEsWbB0etR4v9aEb/GanRPGN5t1jYZUIYd4lQoqqeK3AiwA+LdqR/dOQdImnePvmjlTIgMFLglVTOoDd3j+QFB0w1WaEpuW0ne1+U6U1Ar0TPCjMNUXIaqh6V/V3LPbZvWuxneI5IeSpQCjp00047q8F56VcNKyobO2JOMSm5NdcpKWNXPKgsNNUS8MPDM91qNS/DGhcze9jE6ri2iNgVrLd92Slg1OALMZys93VoYiFeSQK3DgzLmh79tFFIIsag7+Y834rTEvwgZr+jWRR1WmwCqS+XhUzNG7xQ9E7ecrv6PyA+BdLr4DJbO5U6udu1RRYPL4pUGbndakbC5AoL98iBkJO31T585jMK4LD5MSNH4z0itMPgWOFvFQDt17O99Un304iCYq+k6i/5kghRyI7M5bUJx9iYB6IFSlOewWrQ1AVRU96TOUanrCCcDPKQXJhJr5nKejgzowGSpNZyZ2DUrN/f52FjoCyF3PAnBmWekvgFQsYply41PWxFwLevSQb+6ODsgqck=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BY1PR04MB9561.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(376014)(1800799024)(366016)(10070799003)(23010399003)(11063799006)(4143699003)(6133799003)(22082099003)(56012099006)(18002099003)(3023799007)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ZzlUMld1ZDdKZEdpWmdQeWwyNmZKdFU5Y0tocHNvZlRpbGR3RXJHaWJIN09m?=
- =?utf-8?B?SitLZ2FPWnl5TjNMZnNNZ3lPZVI4a1MyQjNFZ05aRWlueUpDN3Ivd2FQK2Ez?=
- =?utf-8?B?dEx6WXBZL0ZxcE5LSkt6alYzUFhRM1RZRkE1aVlkNFRrY3g3bGtFckJsSjMz?=
- =?utf-8?B?bjdJV0hYTlp3YTRtUThlK3IrZmhaL2pBU3k0dyt5TE95bERseEU4NXd6RG1l?=
- =?utf-8?B?UzEvaGtvSjRxdkdKVXhGZ2NlRXBXL0FCR3BiNjA2bXdDUWdPNVQySlZVQlA0?=
- =?utf-8?B?dU12ZTZFU3J5NW1veWVnNFhNc21FUm1tYmdyMFhvdUZxVmw2aUpFMXBtRjZQ?=
- =?utf-8?B?VXJUOU5VRkU5VEs2Z3JKVk1ERzgxS045Uy84VE42Z3J3Sk5MbTM2M0dzbWph?=
- =?utf-8?B?b294S2QwR3hkcWFTL1Z4MHUvM0FsUXMwSHNmT3NFWE1aVmFRYVNQeGNDZGxj?=
- =?utf-8?B?dFg0c3lIaGxXdjcvZE1TNXBYKzg5NWFVQSs4MmdCdk5COEwvSXdKZmlwRHRq?=
- =?utf-8?B?TStLN2hvVzhnS1Zrd09zWks4TUFFZUl6TDhudnFkY21WV2lPMlhJRWpXSm04?=
- =?utf-8?B?dmJqTG9tZ2lXVWcza3V0MHFnYng5c1dkR1NMUWpHYldMYXhFTHVsMDRFVUNI?=
- =?utf-8?B?TkJaTHY4TVQveVVzWEN6MDFpb0tuUkh2L2lIb2F2bVd5S2dQY3RnM3dUYUhY?=
- =?utf-8?B?cFRFTEhLNGxsMDJ4S29qZDNLNmllbytMdUE5MldKemdXZjJ6YThJb1A0andV?=
- =?utf-8?B?SG05TGRUeXA3OXgyYXBYMEwwZUR6WWh5dWdTMlkvT1lPZTB4UFZWM09RWXVa?=
- =?utf-8?B?bmlzZHdGbGwzN2YwSFAwQ3ZLcWJoRi96VGJId0hld1pjUElxSXB2M0dseFZ4?=
- =?utf-8?B?NmlOT0dvaHFNZ1hSOExkZkJ6SVg1OW1SbjR0R0VCWjMwNElYbFNvU3ZBYmU3?=
- =?utf-8?B?ZXZuNWkvdFhINnpRSXd3ZEhDTXdEaW5lSHpHL3k4SlJQZk9wVFhOUnFJQ0tz?=
- =?utf-8?B?T042OHN6dmlBblBQd3hkR3E3RjBsL013WWI3cGZzV2FSYUZoVUt5M2dCU3NV?=
- =?utf-8?B?SE5lSHNSa1FFUzkrSXlWanRMamZkS3BQeExMT3UvTzN5Zm8vbGsraXBHMFBJ?=
- =?utf-8?B?TlhXcFhyQzJNeThEYUdNK3lib0JKZXRBOC9qWU5PcllSVkQ2VzhLV0JuaWdV?=
- =?utf-8?B?ZmJVZzlhak5vc0FVODRGWnF5SEdReGk0YlNxTVY5N0wzVG5Ud1NYUEV6NCtI?=
- =?utf-8?B?MWtlOGVmVGl6QSttV1FPd0lteGNxdWpobThLS29ndmU1MXRKQVkrODFNUnpI?=
- =?utf-8?B?UzVSZG5lSFlYOXowK094V3Q3aS9GR0lDQkJkbExGeS9JVTFjbzJYM3VBS2dL?=
- =?utf-8?B?OTVmcDRBWGI2WGxnVkFUMmRzMmhZRDVKdXNMVXowdyt2RVBMdmc5bUlVZENy?=
- =?utf-8?B?Y1hvWnl1WExCMTRUVVMzczFXZFgrNjRyRC85M1dKbThOL2pBcmtsOTZXZnJ1?=
- =?utf-8?B?d0NseHpqbUFnS1NHYzY3MjdOZ2E1eDlPeldqdzBsNzhXMjZIdHFiWDhXVmZK?=
- =?utf-8?B?N2pPMWNsT0I5T1g5V1pGZDVQOUZnQktjcUQyb1EyZkVhYmQ1dUN0ZGI1Wkow?=
- =?utf-8?B?d0M1OFVWOGRrMTIzcDBkNlo2R2w0cWN1OTRvYmVUa1VPMXFiSmdGczlyQkN6?=
- =?utf-8?B?dUE1U0tya0VIeTYzR1k4RS96RXp0aUxJY1JkVitYdWVvRUo5T2J6RzF0Z3ZG?=
- =?utf-8?B?VG11Q2xxY1IycWhsWjJrNVpHNFRHenhQSW9zSjE1Nm5UK0VCckdzWUx1ODAz?=
- =?utf-8?B?VUZKUkdEcUcwVm5TSGM5VGxTSnBqUFRrZE1BWmtQRDNCRkROL21PNFpZWjk5?=
- =?utf-8?B?QWwwWENySWEyZ2p1VEVBcHl3NFZRclJNbTE5UHI5OUNpbjlJY2VSd2I3V3FP?=
- =?utf-8?B?UFlmblMxZ1hzV0dTaXJ4eTF0dStNNjZEcTRmOWtSU05wNE1WVmllMnRGWHhs?=
- =?utf-8?B?ckloaXJ5dUVDOE51TUlvdEI5eUlMa2xML1BHV3JBWUVZMmp2Mk11d1pUNkRH?=
- =?utf-8?B?aUNSZWk4YjJpRjFNRStMdWorZEQ1ZURydWlqeGxCdDkyNHdrZktVcWtoendn?=
- =?utf-8?B?TWkxZDhmb3I4K0xnWVZQYUxRVGZKb1NzMCs2a0hvVVN5OUJVcTJhT3VlVjFn?=
- =?utf-8?B?RmVuNVZ5M0xIVTZjYkNlVnNXUkVjamNFMkFrT2xUZEpQNlJCMXFPMUpWMTNJ?=
- =?utf-8?B?R1lzNktjajk4K081alNweUUzNW9oZ2JTUWxQVmgwQXp6NDNlL1B3NG9IWkly?=
- =?utf-8?B?M2IyMWswcDkwdHZmeDRlWUVjU1I0VHJKMzNjT1cxcGMzc2huMDVCcTZOcTNX?=
- =?utf-8?Q?/Ky/R1cBpsLHAs3Txz8jImNSeKYQFtUu6iFvCjxdCPhui?=
-x-ms-exchange-antispam-messagedata-1: WZuj851dnxP7vq4RcWL/4CKrELVtI4fwF/k=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <53609F044688D54384DFD5EC8B1D8B84@namprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ d=sifive.com; s=google; t=1783658378; x=1784263178; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=56w1ROGo3BaSolaKRmb5VJ7qKRqPAZAcXntmgsb80Hg=;
+ b=VKj4BpTPP9I/AHBr8VrYEfcOILMaM5oFbBHl1eCaMeP2xd5xCYwQIXrw8Et3Q7mCEN
+ VHfojm0SiMSsSzP72r0kmpb9YCSnoiahDHmXUn2ToNl3HKswL14td9zq+75a6FqFPd7W
+ UPjwrlZWsELmOx3XGxVowwA8rgc11LbLS3BgwgiXhtD+uWX+5gKRpuz/wUku/xsVv7zj
+ 0ipJeqne4Y8XsUUe7AT0fR2yT39eLilxrzSYGq27nZL+R/B4NW3ZQmI0LYX+0cHcGW0E
+ pEXJiXQdvXThaNoSJm71xvyMCab8xfz8xadNyi8k7kcR+FUvFphFatUUFHk1dt71O1K2
+ ve/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783658378; x=1784263178;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=56w1ROGo3BaSolaKRmb5VJ7qKRqPAZAcXntmgsb80Hg=;
+ b=b1I110i3G/Nwu0fzRKX0W/1Tdk8pytEP5HL20xdcnqmoHNxyM6L+Lf8J1UI3Tm4T6M
+ kQ7R7YpzHTBW6DfN8fxBsR/Ub+Ixga9RMX+jzCXF1RuG8G/Ho+/aGdox7io/ZcwBOLCj
+ D2YFA90SdFYRKwy3tEQvEWCaM7G73ihcd/GNzNx7S4eEP+O3g1ivfR6h+3HPgNex50nP
+ gGmzd7TVWDps6eMhFmwp7PzdlLOKSuGOuPU2uAf0ldvXf8lhDj8+dK+TqdXe/zlqCb9H
+ Qy8gUPJFecMWPeRvjN/eqRvRcKb8gX7zePAaXC/m29LfM1/Wm0nURMGxmySmeUB9AjnZ
+ vgIg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RoAT3E4cDhuH+D7KiWhLGfjRmjE74dWaRwvT3Ntex5VDprnU2irHrk1Ft78Dl2IGj4lS1NWmZPrPzvK@nongnu.org
+X-Gm-Message-State: AOJu0YyBnwn/cTfn9hh/+vKmM0KETew8q0XK+HCwSEAffpBYXlqVxGwg
+ a1u9epjVC+aELIc/Zq77UhXXzuPfUSZWryNFmnCGh5QTwfTD3M1F48wStEeXH6z6rQnr9rmNrYb
+ WoMoKfOHJna3zKXseUtGqBVQq+2QSvLIpzChfWoPbwg==
+X-Gm-Gg: AfdE7clj6Dtgh/g0utIWfjv2sizlTxmnZKIsrcUfsvwX84tzID3+Tn76TR8CgC6x2RV
+ UDPrKTKFWSfkdDH3fBUYavUBfBEb7BijFiZ53PWMRVObO7kK+irRviIcK4f0FaPjvH8BKyInS28
+ WIBB85d+3fzDzCUbW/S4Q1EoHc3KS2vav4mZFA7NuWp05fg92E3w58nxCQDLeU9sGZJctf9gM5Z
+ w2AuqJNzOloW85yjcD4D8E/NcUj4AbIFA0n+SOtagLuu8MOSo+4YuRxE3xQBylTFf6Wu9MLogE=
+X-Received: by 2002:a17:907:94c9:b0:c12:abd3:38c3 with SMTP id
+ a640c23a62f3a-c15cdec53ecmr426570066b.5.1783658377835; Thu, 09 Jul 2026
+ 21:39:37 -0700 (PDT)
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: exRgFef03lmyGHMLOgcHPl5l1mfQDJKA+qg8NPqRYVWhKv0/b4ADJba9iTtm6wQMRzCcvV97PkqDPHna9npFnM7sgcQ0gm0zT6qXKAivLi7HxMBxjT4xmjunTSy+M59CinJvAYlw0zzzS5l7uglhD+jkQzA2yMRsZCAShRovI08emu5S9cCCdpPqu2xdzDBDMtfz1++pJQPFx+MjXFAwPTnlqYqHt7hnXc2Abopu0yNo8u/eGY6amUzqLAuAIPbkzjs8C01FPUpWsGwv25j/9ES3pzPu1+IBU2PieW+o+3SyYd3kqZGeUv7GQYRiST6lsj1HuiIH2HeGlS5TdRoHKQ==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: L8cLZxEmoGgia0ac9auggzJ6cUGlxvq4Qsjnji7rLbcExBW24Y8M1jQIBTKiXQNPkiEaK2wYE8JXX99u4/UAgmWIo+XEEyVYs1Ceh84zAPcS0IWBsfqMUzQuO63C7kszWw067JW6yVnHSDgmGmsGDKETHkP9SLorPUhWuYKc8qiRRvB9zzPk8LcLc6A8pLAK8z4gqyUiD/4meNL7Ugi+eFmOFhhUXCH3se45/OFmwtmZJrBzDvmsQ4HVVjPC8wnoUmdYmDnsMcFKwnNKVadVAlGA/t/GRFyMKD8V/fvrkBsOmjkuEAK2UlZH/Znmw0oIkhTicJOIo7Ql5aorSQXjEMt9LKvkN2hUIbFEvUK/rAxb9hAp3AEST+jdPoZeQQ3HWy6zrTF+nDrPX3MBQ1JtjW0pdd71yrEJVj581wMP8LdB1RrrF0E9NMY9TPR3N4+rEpAFwIBR85WxNXKNsCKXiM8x5g23QtsUbFQZNOgHv2zqU6QxoKnecBsDNQJQ8plwFXnu1pWnwCXWgvuSeDwbRWYTr3a77aYcgmu8EOZgEJt6ys20xzcQ2Qz7swzfXbgFkwszYYU426IPHCwYLJnCxd0JsgDj/N0aHeyEsGErXF+q4sz6CSWZw8LC7gjuk/+Y
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BY1PR04MB9561.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 275ceb17-a53a-40af-9b6d-08dede2a3b69
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Jul 2026 02:23:29.9620 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 01XB+VqnbSeta2xmGXP1MONyisX1hJs5oc5T1FgNczkvTmgVGalrJ1Plkl7oqLHFtqM8AiWHqqm+LM6SXiJGkNIwiCH/eNExrP1iu6wZxJ8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR04MB9218
-Received-SPF: pass client-ip=216.71.154.45;
- envelope-from=prvs=64494dccb=Alistair.Francis@wdc.com;
- helo=esa6.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20260707091039.2574638-1-frank.chang@sifive.com>
+ <CAKmqyKNVo-rdOtN0t9XzRB3teF6nNEgh_twkf9s8zX2q0dPU=w@mail.gmail.com>
+In-Reply-To: <CAKmqyKNVo-rdOtN0t9XzRB3teF6nNEgh_twkf9s8zX2q0dPU=w@mail.gmail.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Fri, 10 Jul 2026 12:39:26 +0800
+X-Gm-Features: AUfX_mzFNorKhiVFUEucspakxUkU6g1vVDbP-CJ0JeCgvy80vIzvmwkJ57Tgdus
+Message-ID: <CAE_xrPiD1d8jRfz9fcjZaNGEp1uuDn8PMO-=RzMLipt3CnBGPw@mail.gmail.com>
+Subject: Re: [PATCH v4 0/6] target/riscv: Support the true Zicclsm extension
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu.zevorn@gmail.com>, 
+ "open list:SiFive Machines" <qemu-riscv@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000030b5d06563a543f"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=frank.chang@sifive.com; helo=mail-ej1-x62b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_KAM_HTML_FONT_INVALID=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -185,90 +120,767 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gU3VuLCAyMDI2LTA3LTA1IGF0IDE2OjAyICswMjAwLCBpbWFnaW5vcyB3cm90ZToKPiBEdXJp
-bmcgYSB0d28tc3RhZ2UgKFZTLXN0YWdlICsgRy1zdGFnZSkgcGFnZS10YWJsZSB3YWxrIHdpdGgg
-aGFyZHdhcmUKPiBBL0QgdXBkYXRpbmcgZW5hYmxlZCAoU3ZhZHUgLyBtZW52Y2ZnLkFEVUUpLCBh
-IHN0b3JlIHRoYXQgcmVhY2hlcyBhCj4gVlMtc3RhZ2UgbGVhZiBQVEUgd2hvc2UgYWNjZXNzZWQg
-b3IgZGlydHkgYml0IGlzIGNsZWFyIHRyaWdnZXJzIGEKPiBoYXJkd2FyZSB3cml0ZS1iYWNrIG9m
-IHRob3NlIGJpdHMgaW50byB0aGUgUFRFLiBUaGF0IHdyaXRlLWJhY2sgaXMgYW4KPiBpbXBsaWNp
-dCBzdG9yZSB0byB0aGUgUFRFJ3MgZ3Vlc3QtcGh5c2ljYWwgYWRkcmVzcywgc28gaXQgbXVzdCBi
-ZQo+IHBlcm1pdHRlZCBieSBHLXN0YWdlLgo+IAo+IEZpeCB0aGlzIGJ5IHJlLXJ1bm5pbmcgdGhl
-IEctc3RhZ2UgdHJhbnNsYXRpb24gb2YgdGhlIGd1ZXN0IFBURSdzCj4gYWRkcmVzcyB3aXRoIHN0
-b3JlIHNlbWFudGljcy4gZ2V0X3BoeXNpY2FsX2FkZHJlc3MoKSB0aGVuIGFsc28gY2hlY2tzCj4g
-dGhhdCBHLXN0YWdlIHBlcm1pdHMgdGhlIGd1ZXN0IFBURSB0byBiZSB3cml0dGVuLCBhbmQgcmFp
-c2VzIGEKPiBndWVzdC1wYWdlIHN0b3JlIGZhdWx0IHdoZW4gaXQgZG9lcyBub3QuCj4gCj4gUmVz
-b2x2ZXM6IGh0dHBzOi8vZ2l0bGFiLmNvbS9xZW11LXByb2plY3QvcWVtdS8tL3dvcmtfaXRlbXMv
-MzQyNgo+IFNpZ25lZC1vZmYtYnk6IGltYWdpbm9zIDxpbWFnaW5vczMyQGdtYWlsLmNvbT4KClJl
-dmlld2VkLWJ5OiBBbGlzdGFpciBGcmFuY2lzIDxhbGlzdGFpci5mcmFuY2lzQHdkYy5jb20+CgpB
-bGlzdGFpcgoKPiAtLS0KPiDCoHRhcmdldC9yaXNjdi9jcHVfaGVscGVyLmMgfCAyOCArKysrKysr
-KysrKysrKysrKysrKysrKysrKysrCj4gwqAxIGZpbGUgY2hhbmdlZCwgMjggaW5zZXJ0aW9ucygr
-KQo+IAo+IMKgdjI6Cj4gwqDCoCBSZXdvcmQgYW4gaW5jb21wbGV0ZSBzZW50ZW5jZSBpbiB0aGUg
-Y29kZSBjb21tZW50Lgo+IAo+IMKgVmVyaWZpZWQgYWdhaW5zdCBTcGlrZSwgd2l0aCB0aGlzIHBh
-dGNoIFFFTVUncwo+IMKgcmVwb3J0ZWQgdmFsdWVzIG1hdGNoIFNwaWtlLgo+IAo+IMKgU3Bpa2Ug
-KHJlZmVyZW5jZSk6wqDCoMKgwqDCoMKgwqAgUUVNVSwgYmVmb3JlIHRoaXMgcGF0Y2g6Cj4gwqDC
-oMKgIG1jYXVzZSAweDE3wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBtY2F1c2UgMHgxNwo+
-IMKgwqDCoCBtdHZhbMKgIDB4ODAwMDAwMDDCoMKgwqDCoMKgwqDCoMKgIG10dmFswqAgMHg4MDAw
-MDAwMAo+IMKgwqDCoCBtdHZhbDIgMHgyMDAwMTAwNMKgwqDCoMKgwqDCoMKgwqAgbXR2YWwyIDB4
-MjAwMDAwMDAKPiDCoMKgwqAgbXRpbnN0IDB4MzAyMMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBt
-dGluc3QgMHg2YTcwNDA3Mwo+IAo+IMKgSWYgSSd2ZSBtaXNyZWFkIGFueSBvZiB0aGUgQS9ELXVw
-ZGF0ZSBzZW1hbnRpY3MgaGVyZSwgSSdkIGFwcHJlY2lhdGUKPiB0aGUKPiDCoGNvcnJlY3Rpb24u
-Cj4gCj4gZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi9jcHVfaGVscGVyLmMgYi90YXJnZXQvcmlz
-Y3YvY3B1X2hlbHBlci5jCj4gaW5kZXggMmRiMDdmNWRmYi4uZWIzNGJhMTllMSAxMDA2NDQKPiAt
-LS0gYS90YXJnZXQvcmlzY3YvY3B1X2hlbHBlci5jCj4gKysrIGIvdGFyZ2V0L3Jpc2N2L2NwdV9o
-ZWxwZXIuYwo+IEBAIC0xMzcwLDYgKzEzNzAsNyBAQCBzdGF0aWMgaW50IGdldF9waHlzaWNhbF9h
-ZGRyZXNzKENQVVJJU0NWU3RhdGUKPiAqZW52LCBod2FkZHIgKnBoeXNpY2FsLAo+IMKgwqDCoMKg
-IGludCBwdHNoaWZ0Owo+IMKgwqDCoMKgIHRhcmdldF91bG9uZyBwdGU7Cj4gwqDCoMKgwqAgaHdh
-ZGRyIHB0ZV9hZGRyOwo+ICvCoMKgwqAgaHdhZGRyIHB0ZV9ncGEgPSAwOwo+IMKgwqDCoMKgIGNv
-bnN0IGh3YWRkciBiYXNlX3Jvb3QgPSBiYXNlOwo+IMKgwqDCoMKgIGNvbnN0IGJvb2wgYmUgPSBt
-b19lbmRpYW5fZW52KGVudikgPT0gTU9fQkU7Cj4gwqDCoMKgwqAgaW50IGk7Cj4gQEAgLTE0MDcs
-NiArMTQwOCw3IEBAIHN0YXRpYyBpbnQgZ2V0X3BoeXNpY2FsX2FkZHJlc3MoQ1BVUklTQ1ZTdGF0
-ZQo+ICplbnYsIGh3YWRkciAqcGh5c2ljYWwsCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0K
-PiDCoAo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwdGVfYWRkciA9IHZiYXNlICsgaWR4ICog
-cHRlc2l6ZTsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwdGVfZ3BhID0gYmFzZSArIGlkeCAq
-IHB0ZXNpemU7Cj4gwqDCoMKgwqDCoMKgwqDCoCB9IGVsc2Ugewo+IMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoCBwdGVfYWRkciA9IGJhc2UgKyBpZHggKiBwdGVzaXplOwo+IMKgwqDCoMKgwqDCoMKg
-wqAgfQo+IEBAIC0xNjYxLDYgKzE2NjMsMjggQEAgc3RhdGljIGludCBnZXRfcGh5c2ljYWxfYWRk
-cmVzcyhDUFVSSVNDVlN0YXRlCj4gKmVudiwgaHdhZGRyICpwaHlzaWNhbCwKPiDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgcmV0dXJuIFRSQU5TTEFURV9GQUlMOwo+IMKgwqDCoMKgwqDCoMKgwqAg
-fQo+IMKgCj4gK8KgwqDCoMKgwqDCoMKgIC8qCj4gK8KgwqDCoMKgwqDCoMKgwqAgKiBUaGUgaW1w
-bGljaXQgc3RvcmUgdGhhdCB3cml0ZXMgdXBkYXRlZCBBL0QgYml0cyBiYWNrIHRvIGEKPiBWUy1z
-dGFnZQo+ICvCoMKgwqDCoMKgwqDCoMKgICogKGZpcnN0LXN0YWdlKSBQVEUgbXVzdCBpdHNlbGYg
-YmUgcGVybWl0dGVkIGJ5IEctc3RhZ2UuCj4gUmUtcnVuIHRoZQo+ICvCoMKgwqDCoMKgwqDCoMKg
-ICogc2Vjb25kLXN0YWdlIHRyYW5zbGF0aW9uIG9mIHRoZSBQVEUncyBndWVzdC1waHlzaWNhbAo+
-IGFkZHJlc3Mgd2l0aAo+ICvCoMKgwqDCoMKgwqDCoMKgICogc3RvcmUgc2VtYW50aWNzLiBJZiBH
-LXN0YWdlIGRlbmllcyB3cml0ZSwgcmFpc2UgRy1zdGFnZQo+IHN0b3JlIGZhdWx0Cj4gK8KgwqDC
-oMKgwqDCoMKgwqAgKiBhZ2FpbnN0IHRoZSBQVEUgYWRkcmVzcy4KPiArwqDCoMKgwqDCoMKgwqDC
-oCAqLwo+ICvCoMKgwqDCoMKgwqDCoCBpZiAodHdvX3N0YWdlICYmIGZpcnN0X3N0YWdlKSB7Cj4g
-K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGdwYV9wcm90Owo+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIGh3YWRkciBncGFfcGFkZHI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGdw
-YV9yZXQgPSBnZXRfcGh5c2ljYWxfYWRkcmVzcyhlbnYsICZncGFfcGFkZHIsCj4gJmdwYV9wcm90
-LAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwdGVfZ3BhLCBOVUxMLAo+
-IE1NVV9EQVRBX1NUT1JFLAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBN
-TVVJZHhfVSwgZmFsc2UsCj4gdHJ1ZSwKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgaXNfZGVidWcsIGZhbHNlKTsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoZ3Bh
-X3JldCAhPSBUUkFOU0xBVEVfU1VDQ0VTUykgewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgaWYgKGZhdWx0X3B0ZV9hZGRyKSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgICpmYXVsdF9wdGVfYWRkciA9IHB0ZV9ncGEgPj4gMjsKPiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0KPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IHJldHVybiBUUkFOU0xBVEVfR19TVEFHRV9GQUlMOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IH0KPiArwqDCoMKgwqDCoMKgwqAgfQo+ICsKPiDCoMKgwqDCoMKgwqDCoMKgIHBtcF9yZXQgPSBn
-ZXRfcGh5c2ljYWxfYWRkcmVzc19wbXAoZW52LCAmcG1wX3Byb3QsIHB0ZV9hZGRyLAo+IMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN4bGVuX2J5dGVzLAo+IE1NVV9EQVRBX1NUT1JFLCBQ
-UlZfUyk7Cj4gwqDCoMKgwqDCoMKgwqDCoCBpZiAocG1wX3JldCAhPSBUUkFOU0xBVEVfU1VDQ0VT
-Uykgewo+IEBAIC0yMzQ1LDYgKzIzNjksMTAgQEAgdm9pZCByaXNjdl9jcHVfZG9faW50ZXJydXB0
-KENQVVN0YXRlICpjcykKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICogZG9p
-bmcgVlMtc3RhZ2UgcGFnZSB0YWJsZSB3YWxrLgo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgKi8KPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB0aW5zdCA9IChy
-aXNjdl9jcHVfeGxlbihlbnYpID09IDMyKSA/IDB4MDAwMDIwMDAgOgo+IDB4MDAwMDMwMDA7Cj4g
-Kwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKGNhdXNlID09Cj4gUklTQ1Zf
-RVhDUF9TVE9SRV9HVUVTVF9BTU9fQUNDRVNTX0ZBVUxUKSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHRpbnN0IHw9IDB4MjA7Cj4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCB9Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0gZWxzZSB7Cj4gwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLyoKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgICogVGhlICJBZGRyLiBPZmZzZXQiIGZpZWxkIGluIHRyYW5zZm9ybWVkCj4g
-aW5zdHJ1Y3Rpb24gaXMK
+--000000000000030b5d06563a543f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jul 9, 2026 at 12:58=E2=80=AFPM Alistair Francis <alistair23@gmail.=
+com>
+wrote:
+
+> On Tue, Jul 7, 2026 at 7:11=E2=80=AFPM <frank.chang@sifive.com> wrote:
+> >
+> > From: Frank Chang <frank.chang@sifive.com>
+> >
+> > Support the true Zicclsm extension so that we can trap misaligned
+> accesses
+> > when Zicclsm is disabled.
+> >
+> > To enable/disable Zicclsm, simply set zicclsm=3D[true|false], e.g.:
+> >   -cpu rv64,zicclsm=3D[true|false]
+> >
+> > QEMU will raise a misaligned load/store exception when executing
+> misaligned
+> > load/store instructions if Zicclsm is disabled.
+> >
+> > Changelog:
+> >   v4:
+> >     * Align ROM reset vector data at 8-byte aligned offsets.
+> >   v3:
+> >     * Enable Zicclsm for the compatible CPUs.
+> >     * Rebase to the latest riscv-to-apply.next.
+> >   v2:
+> >     * Use (size_memop(size) | mo_endian_env(env)) to calculate MemOp.
+> >     * Use (log2_esz << MO_ASHIFT) to calculate aligment MemOp for
+> >       vector load/store whole register instructions.
+> >
+> > Frank Chang (6):
+> >   target/riscv: Add Zicclsm CPU option
+> >   target/riscv: Support raising misaligned exceptions for scalar
+> >     loads/stores
+> >   target/riscv: Support raising misaligned exceptions for vector
+> >     loads/stores
+> >   target/riscv: Enable Zicclsm for the compatible CPUs
+> >   hw/riscv: sifive_u: Align ROM reset vector data
+> >   target/riscv: Update Zicclsm ISA string and expose it as a CPU
+> >     property
+>
+> Hmmm.... Still seeing failures
+>
+> 556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi
+>                TIMEOUT         90.02s   killed by signal 15 SIGTERM
+> >>>
+> LD_LIBRARY_PATH=3D/var/mnt/scratch/alistair/software/qemu/build/contrib/p=
+lugins:/var/mnt/scratch/alistair/software/qemu/build/tests/tcg/plugins
+> MSAN_OPTIO
+> NS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:print_stacktr=
+ace=3D1
+>
+> QEMU_TEST_QEMU_BINARY=3D/var/mnt/scratch/alistair/software/qemu/build/qem=
+u-system-riscv
+> 64 RUST_BACKTRACE=3D1
+> MESON_BUILD_ROOT=3D/var/mnt/scratch/alistair/software/qemu/build
+> UBSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:pr=
+int_stac
+> ktrace=3D1 ASAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summ=
+ary=3D1
+> MESON_TEST_ITERATION=3D1 MALLOC_PERTURB_=3D7
+> QEMU_TEST_QEMU_IMG=3D/var/mnt/scratch/alistair
+> /software/qemu/build/qemu-img QEMU_TEST_GDB=3D/usr/bin/gdb
+>
+> PYTHONPATH=3D/var/mnt/scratch/alistair/software/qemu/python:/var/mnt/scra=
+tch/alistair/software/qemu/t
+> ests/functional
+> /var/mnt/scratch/alistair/software/qemu/build/pyvenv/bin/python3
+> /var/mnt/scratch/alistair/software/qemu/tests/functional/riscv64/test_ope=
+ns
+> bi.py
+>
+>
+> Summary of Failures:
+>
+> 556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi
+>       TIMEOUT         90.02s   killed by signal 15 SIGTERM
+>
+>
+Hi Alistair,
+
+That's weird.
+
+I ran:
+$ meson test -C build qemu:func-riscv64-opensbi -v --print-errorlog
+
+.....
+
+=E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_sifive_u            OK
+
+=E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_spike               OK
+
+=E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_tt_atlantis         OK
+
+=E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_virt                OK
+
+1/1 func-quick+func-riscv64 - qemu:func-riscv64-opensbi        OK
+   1.53s   4 subtests passed
+
+
+Ok:                1
+Fail:              0
+
+func-riscv64-opensbi test passed.
+
+However, I did find another issue when I ran:
+$ meson test -C build "qemu:*riscv*"
+
+[1/9] Generating qemu-version.h with a custom command (wrapped by meson to
+capture output)
+ 1/39 func-quick+func-riscv64 - qemu:func-riscv64-linters
+      SKIP             0.15s   0 subtests passed
+ 2/39 func-quick+func-riscv64 - qemu:func-riscv64-empty_cpu_model
+      OK               0.21s   1 subtests passed
+ 3/39 func-quick+func-riscv64 - qemu:func-riscv64-version
+      OK               0.25s   1 subtests passed
+ 4/39 func-quick+func-riscv32 - qemu:func-riscv32-linters
+      SKIP             0.23s   0 subtests passed
+ 5/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/machine-none-test
+       OK               0.17s   1 subtests passed
+ 6/39 func-quick+func-riscv64 - qemu:func-riscv64-info_usernet
+       OK               0.33s   1 subtests passed
+ 7/39 func-quick+func-riscv32 - qemu:func-riscv32-empty_cpu_model
+      OK               0.29s   1 subtests passed
+ 8/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/readconfig-test
+       OK               0.19s   1 subtests passed
+ 9/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/cdrom-test
+      OK               0.41s   1 subtests passed
+10/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/cdrom-test
+      OK               0.41s   1 subtests passed
+11/39 func-quick+func-riscv32 - qemu:func-riscv32-info_usernet
+       OK               0.31s   1 subtests passed
+12/39 func-quick+func-riscv32 - qemu:func-riscv32-version
+      OK               0.29s   1 subtests passed
+13/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/riscv-csr-test
+      OK               0.30s   1 subtests passed
+14/39 func-quick+func-riscv64 - qemu:func-riscv64-vnc
+      SKIP             0.39s   0 subtests passed
+15/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/machine-none-test
+       OK               0.15s   1 subtests passed
+16/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/readconfig-test
+       OK               0.13s   1 subtests passed
+17/39 func-quick+func-riscv32 - qemu:func-riscv32-vnc
+      SKIP             0.40s   0 subtests passed
+18/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-test
+      OK               0.54s   4 subtests passed
+19/39 func-quick+func-riscv64 - qemu:func-riscv64-migration
+      OK               0.80s   3 subtests passed
+20/39 func-quick+func-riscv32 - qemu:func-riscv32-migration
+      OK               0.77s   3 subtests passed
+21/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-test
+      OK               0.52s   4 subtests passed
+22/39 func-quick+func-riscv64 - qemu:func-riscv64-opensbi
+      OK               0.85s   3 subtests passed
+23/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/iommu-riscv-test
+      OK               0.76s   4 subtests passed
+24/39 func-quick+func-riscv32 - qemu:func-riscv32-opensbi
+      OK               0.87s   3 subtests passed
+25/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/k230-wdt-test
+       OK               1.06s   7 subtests passed
+26/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/sifive-e-aon-watchdog-test
+      OK               1.29s   10 subtests passed
+27/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qom-test
+      OK               2.22s   8 subtests passed
+28/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/device-introspect-test
+      OK               2.28s   6 subtests passed
+29/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/device-introspect-test
+      OK               2.58s   6 subtests passed
+30/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/test-hmp
+      OK               3.26s   8 subtests passed
+31/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/netdev-socket
+       OK               3.32s   10 subtests passed
+32/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/netdev-socket
+       OK               3.30s   10 subtests passed
+33/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qom-test
+      OK               3.80s   12 subtests passed
+34/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/test-hmp
+      OK               5.48s   12 subtests passed
+35/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-cmd-test
+      OK               8.44s   64 subtests passed
+36/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-cmd-test
+      OK               8.43s   64 subtests passed
+37/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/bios-tables-test
+      ERROR           17.02s   killed by signal 6 SIGABRT
+>>> MESON_TEST_ITERATION=3D1
+PYTHON=3D/scratch3/yihaoc/sifive/qemu/build/pyvenv/bin/python3
+QTEST_QEMU_IMG=3D./qemu-img
+ASAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1
+MSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:print=
+_stacktrace=3D1
+G_TEST_DBUS_DAEMON=3D/scratch3/yihaoc/sifive/qemu/tests/dbus-daemon.sh
+QTEST_QEMU_STORAGE_DAEMON_BINARY=3D./storage-daemon/qemu-storage-daemon
+UBSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:prin=
+t_stacktrace=3D1
+RUST_BACKTRACE=3D1 MALLOC_PERTURB_=3D162
+QTEST_QEMU_BINARY=3D./qemu-system-riscv64
+/scratch3/yihaoc/sifive/qemu/build/tests/qtest/bios-tables-test --tap -k
+
+38/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qos-test
+      OK              43.47s   191 subtests passed
+39/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qos-test
+      OK              43.82s   191 subtests passed
+
+Ok:                34
+Fail:              1
+Skipped:           4
+
+The failure is because Zicclsm is mandatory in the RVA22U64 profile.
+But before this patchset, ZIcclsm was enabled automatically when
+has_priv_1_11 was true.
+With this patchset, Zicclsm must be explicitly added to the RVA22U64
+profile's extension list.
+
+After the fix, running:
+$ meson test -C build "qemu:*riscv*"
+
+[1/9] Generating qemu-version.h with a custom command (wrapped by meson to
+capture output)
+ 1/41 func-quick+func-riscv64 - qemu:func-riscv64-linters
+      SKIP             0.15s   0 subtests passed
+ 2/41 func-quick+func-riscv64 - qemu:func-riscv64-empty_cpu_model
+      OK               0.19s   1 subtests passed
+ 3/41 func-quick+func-riscv64 - qemu:func-riscv64-info_usernet
+       OK               0.26s   1 subtests passed
+ 4/41 func-quick+func-riscv32 - qemu:func-riscv32-linters
+      SKIP             0.21s   0 subtests passed
+ 5/41 func-quick+func-riscv32 - qemu:func-riscv32-empty_cpu_model
+      OK               0.24s   1 subtests passed
+ 6/41 func-quick+func-riscv64 - qemu:func-riscv64-version
+      OK               0.30s   1 subtests passed
+ 7/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/cdrom-test
+      OK               0.39s   1 subtests passed
+ 8/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/machine-none-test
+       OK               0.17s   1 subtests passed
+ 9/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/cdrom-test
+      OK               0.42s   1 subtests passed
+10/41 func-quick+func-riscv32 - qemu:func-riscv32-version
+      OK               0.28s   1 subtests passed
+11/41 func-quick+func-riscv32 - qemu:func-riscv32-info_usernet
+       OK               0.32s   1 subtests passed
+12/41 func-quick+func-riscv64 - qemu:func-riscv64-vnc
+      SKIP             0.35s   0 subtests passed
+13/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/riscv-csr-test
+      OK               0.30s   1 subtests passed
+14/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/readconfig-test
+       OK               0.15s   1 subtests passed
+15/41 func-quick+func-riscv32 - qemu:func-riscv32-vnc
+      SKIP             0.33s   0 subtests passed
+16/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/machine-none-test
+       OK               0.14s   1 subtests passed
+17/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/readconfig-test
+       OK               0.14s   1 subtests passed
+18/41 func-quick+func-riscv64 - qemu:func-riscv64-migration
+      OK               0.75s   3 subtests passed
+19/41 func-quick+func-riscv32 - qemu:func-riscv32-migration
+      OK               0.78s   3 subtests passed
+20/41 func-quick+func-riscv32 - qemu:func-riscv32-opensbi
+      OK               0.84s   3 subtests passed
+21/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/iommu-riscv-test
+      OK               0.78s   4 subtests passed
+22/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/k230-wdt-test
+       OK               1.08s   7 subtests passed
+23/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-test
+      OK               1.16s   9 subtests passed
+24/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-test
+      OK               1.14s   9 subtests passed
+25/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/sifive-e-aon-watchdog-test
+      OK               1.28s   10 subtests passed
+26/41 func-quick+func-riscv64 - qemu:func-riscv64-opensbi
+      OK               1.81s   4 subtests passed
+27/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qom-test
+      OK               2.06s   8 subtests passed
+28/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/device-introspect-test
+      OK               2.19s   6 subtests passed
+29/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/device-introspect-test
+      OK               2.48s   6 subtests passed
+30/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/test-hmp
+      OK               3.27s   8 subtests passed
+31/41 func-quick+func-riscv32 - qemu:func-riscv32-monitor_hotplug
+      OK               3.46s   7 subtests passed
+32/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/netdev-socket
+       OK               3.32s   10 subtests passed
+33/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/netdev-socket
+       OK               3.31s   10 subtests passed
+34/41 func-quick+func-riscv64 - qemu:func-riscv64-monitor_hotplug
+      OK               4.00s   7 subtests passed
+35/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qom-test
+      OK               4.40s   13 subtests passed
+36/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/test-hmp
+      OK               6.63s   13 subtests passed
+37/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-cmd-test
+      OK               8.45s   64 subtests passed
+38/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-cmd-test
+      OK               8.50s   64 subtests passed
+39/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/bios-tables-test
+      OK              35.13s   3 subtests passed
+40/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qos-test
+      OK              46.41s   192 subtests passed
+41/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qos-test
+      OK              46.45s   192 subtests passed
+
+Ok:                37
+Fail:              0
+Skipped:           4
+
+All the tests passed.
+
+I will send out the v5 patchset to fix the issue.
+
+BTW, I noticed you ran more tests than I did.
+Could you please share your test command so I can reproduce it on my end?
+
+Regards,
+Frank Chang
+
+
+>
+> Alistair
+>
+> >
+> >  hw/riscv/sifive_u.c                     | 11 +++--
+> >  target/riscv/cpu.c                      |  9 +++-
+> >  target/riscv/cpu_cfg_fields.h.inc       |  2 +
+> >  target/riscv/insn_trans/trans_rvi.c.inc |  6 +++
+> >  target/riscv/insn_trans/trans_rvv.c.inc | 18 +++++--
+> >  target/riscv/vector_helper.c            | 65 +++++++++++++++++++------
+> >  6 files changed, 87 insertions(+), 24 deletions(-)
+> >
+> > --
+> > 2.43.0
+> >
+> >
+>
+
+--000000000000030b5d06563a543f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><span style=3D"background-color:transpare=
+nt">On Thu, Jul 9, 2026 at 12:58=E2=80=AFPM Alistair Francis &lt;<a href=3D=
+"mailto:alistair23@gmail.com">alistair23@gmail.com</a>&gt; wrote:</span></d=
+iv><div class=3D"gmail_quote gmail_quote_container"><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex">On Tue, Jul 7, 2026 at 7:11=E2=80=AFPM &lt;<a hr=
+ef=3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.c=
+om</a>&gt; wrote:<br>
+&gt;<br>
+&gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=
+=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt;<br>
+&gt; Support the true Zicclsm extension so that we can trap misaligned acce=
+sses<br>
+&gt; when Zicclsm is disabled.<br>
+&gt;<br>
+&gt; To enable/disable Zicclsm, simply set zicclsm=3D[true|false], e.g.:<br=
+>
+&gt;=C2=A0 =C2=A0-cpu rv64,zicclsm=3D[true|false]<br>
+&gt;<br>
+&gt; QEMU will raise a misaligned load/store exception when executing misal=
+igned<br>
+&gt; load/store instructions if Zicclsm is disabled.<br>
+&gt;<br>
+&gt; Changelog:<br>
+&gt;=C2=A0 =C2=A0v4:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0* Align ROM reset vector data at 8-byte aligned off=
+sets.<br>
+&gt;=C2=A0 =C2=A0v3:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0* Enable Zicclsm for the compatible CPUs.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0* Rebase to the latest riscv-to-apply.next.<br>
+&gt;=C2=A0 =C2=A0v2:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0* Use (size_memop(size) | mo_endian_env(env)) to ca=
+lculate MemOp.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0* Use (log2_esz &lt;&lt; MO_ASHIFT) to calculate al=
+igment MemOp for<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0vector load/store whole register instruction=
+s.<br>
+&gt;<br>
+&gt; Frank Chang (6):<br>
+&gt;=C2=A0 =C2=A0target/riscv: Add Zicclsm CPU option<br>
+&gt;=C2=A0 =C2=A0target/riscv: Support raising misaligned exceptions for sc=
+alar<br>
+&gt;=C2=A0 =C2=A0 =C2=A0loads/stores<br>
+&gt;=C2=A0 =C2=A0target/riscv: Support raising misaligned exceptions for ve=
+ctor<br>
+&gt;=C2=A0 =C2=A0 =C2=A0loads/stores<br>
+&gt;=C2=A0 =C2=A0target/riscv: Enable Zicclsm for the compatible CPUs<br>
+&gt;=C2=A0 =C2=A0hw/riscv: sifive_u: Align ROM reset vector data<br>
+&gt;=C2=A0 =C2=A0target/riscv: Update Zicclsm ISA string and expose it as a=
+ CPU<br>
+&gt;=C2=A0 =C2=A0 =C2=A0property<br>
+<br>
+Hmmm.... Still seeing failures<br>
+<br>
+556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0TIMEOUT=C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A090.02s=C2=A0 =C2=A0killed by signal 15 SIGTERM<br>
+&gt;&gt;&gt; LD_LIBRARY_PATH=3D/var/mnt/scratch/alistair/software/qemu/buil=
+d/contrib/plugins:/var/mnt/scratch/alistair/software/qemu/build/tests/tcg/p=
+lugins MSAN_OPTIO<br>
+NS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:print_stacktrac=
+e=3D1<br>
+QEMU_TEST_QEMU_BINARY=3D/var/mnt/scratch/alistair/software/qemu/build/qemu-=
+system-riscv<br>
+64 RUST_BACKTRACE=3D1<br>
+MESON_BUILD_ROOT=3D/var/mnt/scratch/alistair/software/qemu/build<br>
+UBSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:prin=
+t_stac<br>
+ktrace=3D1 ASAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summar=
+y=3D1<br>
+MESON_TEST_ITERATION=3D1 MALLOC_PERTURB_=3D7<br>
+QEMU_TEST_QEMU_IMG=3D/var/mnt/scratch/alistair<br>
+/software/qemu/build/qemu-img QEMU_TEST_GDB=3D/usr/bin/gdb<br>
+PYTHONPATH=3D/var/mnt/scratch/alistair/software/qemu/python:/var/mnt/scratc=
+h/alistair/software/qemu/t<br>
+ests/functional<br>
+/var/mnt/scratch/alistair/software/qemu/build/pyvenv/bin/python3<br>
+/var/mnt/scratch/alistair/software/qemu/tests/functional/riscv64/test_opens=
+<br>
+bi.py<br>
+<br>
+<br>
+Summary of Failures:<br>
+<br>
+556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi<br>
+=C2=A0 =C2=A0 =C2=A0 TIMEOUT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A090.02s=C2=A0 =
+=C2=A0killed by signal 15 SIGTERM<br>
+<br></blockquote><div><br></div><div>Hi Alistair,</div><div><br></div><div>=
+That&#39;s weird.</div><div><br></div><div>I ran:</div><div><span style=3D"=
+background-color:transparent">$ meson test -C build qemu:func-riscv64-opens=
+bi -v --print-errorlog</span></div><div><br></div><div>.....</div><div><br>=
+</div><div>=E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_sifive_u =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0<br>=E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_spike =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0<br>=E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_tt_atla=
+ntis =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0<br>=E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_virt =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0<br>1/1 func-quick+func-riscv64 - qemu:func-riscv64-opensbi =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A01.53s =C2=A0 4 subtests passed<br><br><br>Ok: =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01 =C2=A0 <br>Fail: =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A00</div><div><br></div></div><div class=3D"gmail_quo=
+te gmail_quote_container"><span class=3D"Q6ibn ng" style=3D"border-style:no=
+ne;background:none">func-riscv64-opensbi</span> test=C2=A0passed.</div><div=
+ class=3D"gmail_quote gmail_quote_container"><br></div><div class=3D"gmail_=
+quote gmail_quote_container">However, I did find another issue when I ran:<=
+/div><div class=3D"gmail_quote gmail_quote_container">$=C2=A0meson test -C =
+build &quot;qemu:*riscv*&quot;</div><div class=3D"gmail_quote gmail_quote_c=
+ontainer"><br></div><div class=3D"gmail_quote gmail_quote_container">[1/9] =
+Generating qemu-version.h with a custom command (wrapped by meson to captur=
+e output)<br>=C2=A01/39 func-quick+func-riscv64 - qemu:func-riscv64-linters=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.15s =C2=A0 0 su=
+btests passed<br>=C2=A02/39 func-quick+func-riscv64 - qemu:func-riscv64-emp=
+ty_cpu_model =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.21s =C2=A0 1 subtests passe=
+d<br>=C2=A03/39 func-quick+func-riscv64 - qemu:func-riscv64-version =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.25s =C2=A0 1 subt=
+ests passed<br>=C2=A04/39 func-quick+func-riscv32 - qemu:func-riscv32-linte=
+rs =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.23s =C2=A0 0=
+ subtests passed<br>=C2=A05/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/mac=
+hine-none-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.17s =C2=A0 1 subte=
+sts passed<br>=C2=A06/39 func-quick+func-riscv64 - qemu:func-riscv64-info_u=
+sernet =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.33s =C2=A0 1 subte=
+sts passed<br>=C2=A07/39 func-quick+func-riscv32 - qemu:func-riscv32-empty_=
+cpu_model =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.29s =C2=A0 1 subtests passed<b=
+r>=C2=A08/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/readconfig-test =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.19s =C2=A0 1 subtests passed<b=
+r>=C2=A09/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/cdrom-test =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 O=
+K =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.41s =C2=A0 1 subtests =
+passed<br>10/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/cdrom-test =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.41s =C2=A0 1 subt=
+ests passed<br>11/39 func-quick+func-riscv32 - qemu:func-riscv32-info_usern=
+et =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.31s =C2=A0 1 subtests pa=
+ssed<br>12/39 func-quick+func-riscv32 - qemu:func-riscv32-version =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.29s =C2=A0 1 subt=
+ests passed<br>13/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/riscv-csr-tes=
+t =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.30s =C2=A0 1 subtests pa=
+ssed<br>14/39 func-quick+func-riscv64 - qemu:func-riscv64-vnc =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.39s =C2=A0 0 su=
+btests passed<br>15/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/machine-non=
+e-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.15s =C2=A0 1 subtests passe=
+d<br>16/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/readconfig-test =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.13s =C2=A0 1 subtests passed<br>17=
+/39 func-quick+func-riscv32 - qemu:func-riscv32-vnc =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.40s =C2=A0 0 subtests =
+passed<br>18/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-test =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.54s =C2=A0=
+ 4 subtests passed<br>19/39 func-quick+func-riscv64 - qemu:func-riscv64-mig=
+ration =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.80s =C2=A0=
+ 3 subtests passed<br>20/39 func-quick+func-riscv32 - qemu:func-riscv32-mig=
+ration =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.77s =C2=A0=
+ 3 subtests passed<br>21/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-te=
+st =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.=
+52s =C2=A0 4 subtests passed<br>22/39 func-quick+func-riscv64 - qemu:func-r=
+iscv64-opensbi =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 0.85s =C2=A0 3 subtests passed<br>23/39 qtest+qtest-riscv64 - qemu:qtes=
+t-riscv64/iommu-riscv-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.76s =
+=C2=A0 4 subtests passed<br>24/39 func-quick+func-riscv32 - qemu:func-riscv=
+32-opensbi =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.=
+87s =C2=A0 3 subtests passed<br>25/39 qtest+qtest-riscv64 - qemu:qtest-risc=
+v64/k230-wdt-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 1.0=
+6s =C2=A0 7 subtests passed<br>26/39 qtest+qtest-riscv32 - qemu:qtest-riscv=
+32/sifive-e-aon-watchdog-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 1.29s =C2=A0 10 subtests passed<br>27/39=
+ qtest+qtest-riscv32 - qemu:qtest-riscv32/qom-test =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 2.22s =C2=A0 8 subtests passe=
+d<br>28/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/device-introspect-test =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 2.28s =C2=A0 6 subtests passed<br>29/39 qtest+qtest-ri=
+scv64 - qemu:qtest-riscv64/device-introspect-test =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 2.58s=
+ =C2=A0 6 subtests passed<br>30/39 qtest+qtest-riscv32 - qemu:qtest-riscv32=
+/test-hmp =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 3.26s =C2=A0 8 subtests passed<br>31/39 qtest+qtest-riscv64 - qemu:q=
+test-riscv64/netdev-socket =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 3.32s =C2=A0 10 subtests passed<br>32/39 qtest+qtest-riscv32 - qemu:=
+qtest-riscv32/netdev-socket =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 3.30s =C2=A0 10 subtests passed<br>33/39 qtest+qtest-riscv64 - qemu=
+:qtest-riscv64/qom-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 3.80s =C2=A0 12 subtests passed<br>34/39 qtest+qtest-r=
+iscv64 - qemu:qtest-riscv64/test-hmp =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 5.48s =C2=A0 12 subtests passed<br>35/39 qt=
+est+qtest-riscv64 - qemu:qtest-riscv64/qmp-cmd-test =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 8.44s =C2=A0 64 subtests passed<br>36/39=
+ qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-cmd-test =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 8.43s =C2=A0 64 subtests passed<br>37/39=
+ qtest+qtest-riscv64 - qemu:qtest-riscv64/bios-tables-test =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ERROR =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 17.02s =C2=A0 killed by signal 6 SIGABRT<br>&gt;&gt;&gt; MES=
+ON_TEST_ITERATION=3D1 PYTHON=3D/scratch3/yihaoc/sifive/qemu/build/pyvenv/bi=
+n/python3 QTEST_QEMU_IMG=3D./qemu-img ASAN_OPTIONS=3Dhalt_on_error=3D1:abor=
+t_on_error=3D1:print_summary=3D1 MSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_=
+error=3D1:print_summary=3D1:print_stacktrace=3D1 G_TEST_DBUS_DAEMON=3D/scra=
+tch3/yihaoc/sifive/qemu/tests/dbus-daemon.sh QTEST_QEMU_STORAGE_DAEMON_BINA=
+RY=3D./storage-daemon/qemu-storage-daemon UBSAN_OPTIONS=3Dhalt_on_error=3D1=
+:abort_on_error=3D1:print_summary=3D1:print_stacktrace=3D1 RUST_BACKTRACE=
+=3D1 MALLOC_PERTURB_=3D162 QTEST_QEMU_BINARY=3D./qemu-system-riscv64 /scrat=
+ch3/yihaoc/sifive/qemu/build/tests/qtest/bios-tables-test --tap -k<br><br>3=
+8/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qos-test =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A043.47s =C2=A0 191 subtests =
+passed<br>39/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qos-test =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A043.82s =C2=A0=
+ 191 subtests passed<br><br>Ok: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A034 =C2=A0<br>Fail: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A01 =C2=A0 <br>Skipped: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 4=C2=A0=C2=
+=A0</div><div class=3D"gmail_quote gmail_quote_container"><br></div><div cl=
+ass=3D"gmail_quote gmail_quote_container"><span style=3D"background-color:t=
+ransparent">The failure is because=C2=A0</span>Zicclsm is mandatory in the =
+RVA22U64<span style=3D"background-color:transparent">=C2=A0profile.</span><=
+/div><div class=3D"gmail_quote gmail_quote_container"><span style=3D"backgr=
+ound-color:transparent">But before this patchset, ZIcclsm was enabled=C2=A0=
+</span><span style=3D"background-color:transparent">automatically when has_=
+priv_1_11 was true.</span></div><div class=3D"gmail_quote gmail_quote_conta=
+iner"><span style=3D"background-color:transparent">With this patchset, Zicc=
+lsm must be=C2=A0</span><span style=3D"background-color:transparent">explic=
+itly added to the RVA22U64 profile&#39;s extension list.</span></div><div c=
+lass=3D"gmail_quote gmail_quote_container"><br></div><div class=3D"gmail_qu=
+ote gmail_quote_container">After the fix, running:</div><div class=3D"gmail=
+_quote gmail_quote_container">$=C2=A0meson test -C build &quot;qemu:*riscv*=
+&quot;</div><div class=3D"gmail_quote gmail_quote_container"><br></div><div=
+ class=3D"gmail_quote gmail_quote_container">[1/9] Generating qemu-version.=
+h with a custom command (wrapped by meson to capture output)<br>=C2=A01/41 =
+func-quick+func-riscv64 - qemu:func-riscv64-linters =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.15s =C2=A0 0 subtests passed<br>=C2=A0=
+2/41 func-quick+func-riscv64 - qemu:func-riscv64-empty_cpu_model =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 0.19s =C2=A0 1 subtests passed<br>=C2=A03/41 func-=
+quick+func-riscv64 - qemu:func-riscv64-info_usernet =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 0.26s =C2=A0 1 subtests passed<br>=C2=A04/41 func-=
+quick+func-riscv32 - qemu:func-riscv32-linters =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 0.21s =C2=A0 0 subtests passed<br>=C2=A05/41 fu=
+nc-quick+func-riscv32 - qemu:func-riscv32-empty_cpu_model =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 0.24s =C2=A0 1 subtests passed<br>=C2=A06/41 func-quick+f=
+unc-riscv64 - qemu:func-riscv64-version =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 0.30s =C2=A0 1 subtests passed<br>=C2=A07/41 qt=
+est+qtest-riscv64 - qemu:qtest-riscv64/cdrom-test =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.39s =C2=A0 1 subtests passed<br>=
+=C2=A08/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/machine-none-test =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.17s =C2=A0 1 subtests passed<br>=C2=
+=A09/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/cdrom-test =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.42s =C2=A0 1 subtests pa=
+ssed<br>10/41 func-quick+func-riscv32 - qemu:func-riscv32-version =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.28s =C2=A0 1 subt=
+ests passed<br>11/41 func-quick+func-riscv32 - qemu:func-riscv32-info_usern=
+et =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.32s =C2=A0 1 subtests pa=
+ssed<br>12/41 func-quick+func-riscv64 - qemu:func-riscv64-vnc =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.35s =C2=A0 0 su=
+btests passed<br>13/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/riscv-csr-t=
+est =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 O=
+K =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.30s =C2=A0 1 subtests =
+passed<br>14/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/readconfig-test =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.15s =C2=A0 1 subtests passe=
+d<br>15/41 func-quick+func-riscv32 - qemu:func-riscv32-vnc =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.33s =C2=A0 0 su=
+btests passed<br>16/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/machine-non=
+e-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.14s =C2=A0 1 subtests passe=
+d<br>17/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/readconfig-test =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.14s =C2=A0 1 subtests passed<br>18=
+/41 func-quick+func-riscv64 - qemu:func-riscv64-migration =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.75s =C2=A0 3 subtests passed<br>19=
+/41 func-quick+func-riscv32 - qemu:func-riscv32-migration =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.78s =C2=A0 3 subtests passed<br>20=
+/41 func-quick+func-riscv32 - qemu:func-riscv32-opensbi =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.84s =C2=A0 3 subtests passe=
+d<br>21/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/iommu-riscv-test =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.78s =C2=A0 4 subtests passed<br>22/41 =
+qtest+qtest-riscv64 - qemu:qtest-riscv64/k230-wdt-test =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 1.08s =C2=A0 7 subtests passed<br>23/41 =
+qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-test =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 1.16s =C2=A0 9 subtests passe=
+d<br>24/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-test =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 1.14s =C2=A0 9 subt=
+ests passed<br>25/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/sifive-e-aon-=
+watchdog-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 1.28s =C2=A0 10 subtests passed<br>26/41 func-quick+fu=
+nc-riscv64 - qemu:func-riscv64-opensbi =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 1.81s =C2=A0 4 subtests passed<br>27/41 qtest+q=
+test-riscv32 - qemu:qtest-riscv32/qom-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 2.06s =C2=A0 8 subtests passed<br>28=
+/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/device-introspect-test =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 2.19s =C2=A0 6 subtests passed<br>29/41 qtest+qtest-riscv64 -=
+ qemu:qtest-riscv64/device-introspect-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 2.48s =C2=A0=
+ 6 subtests passed<br>30/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/test-h=
+mp =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 3.=
+27s =C2=A0 8 subtests passed<br>31/41 func-quick+func-riscv32 - qemu:func-r=
+iscv32-monitor_hotplug =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 3.46s =C2=A0 7 subt=
+ests passed<br>32/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/netdev-socket=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 3.32s =C2=A0 10 subt=
+ests passed<br>33/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/netdev-socket=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 3.31s =C2=A0 10 subt=
+ests passed<br>34/41 func-quick+func-riscv64 - qemu:func-riscv64-monitor_ho=
+tplug =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 4.00s =C2=A0 7 subtests passed<br>35=
+/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qom-test =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 4.40s =C2=A0 13 subtests p=
+assed<br>36/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/test-hmp =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 6.63s =C2=A0 13 =
+subtests passed<br>37/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-cmd-t=
+est =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 8.45s =C2=A0 64 =
+subtests passed<br>38/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-cmd-t=
+est =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 8.50s =C2=A0 64 =
+subtests passed<br>39/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/bios-tabl=
+es-test =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A035.13s =C2=A0 3 subtests pa=
+ssed<br>40/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qos-test =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A046.41s =C2=A0 192=
+ subtests passed<br>41/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qos-test=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A046.45s=
+ =C2=A0 192 subtests passed<br><br>Ok: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A037 =C2=A0<br>Fail: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A00 =C2=A0 <br>Skipped: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 4</di=
+v><div class=3D"gmail_quote gmail_quote_container"><br></div><div class=3D"=
+gmail_quote gmail_quote_container">All the tests=C2=A0passed.</div><div cla=
+ss=3D"gmail_quote gmail_quote_container"><br></div><div class=3D"gmail_quot=
+e gmail_quote_container">I will send out=C2=A0the v5 patchset to fix the is=
+sue.</div><div class=3D"gmail_quote gmail_quote_container"><br></div><div c=
+lass=3D"gmail_quote gmail_quote_container">BTW, I noticed you ran more test=
+s than I did.</div><div class=3D"gmail_quote gmail_quote_container"><span s=
+tyle=3D"background-color:transparent">Could you please share your test comm=
+and so I can reproduce <span class=3D"Asgive ng" style=3D"border-style:none=
+;background:none">it on my end?</span></span></div><div class=3D"gmail_quot=
+e gmail_quote_container"><br></div><div class=3D"gmail_quote gmail_quote_co=
+ntainer">Regards,</div><div class=3D"gmail_quote gmail_quote_container">Fra=
+nk Chang<div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+Alistair<br>
+<br>
+&gt;<br>
+&gt;=C2=A0 hw/riscv/sifive_u.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 11 +++--<br>
+&gt;=C2=A0 target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 9 +++-<br>
+&gt;=C2=A0 target/riscv/cpu_cfg_fields.h.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 2 +<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rvi.c.inc |=C2=A0 6 +++<br>
+&gt;=C2=A0 target/riscv/insn_trans/trans_rvv.c.inc | 18 +++++--<br>
+&gt;=C2=A0 target/riscv/vector_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 | 65 +++++++++++++++++++------<br>
+&gt;=C2=A0 6 files changed, 87 insertions(+), 24 deletions(-)<br>
+&gt;<br>
+&gt; --<br>
+&gt; 2.43.0<br>
+&gt;<br>
+&gt;<br>
+</blockquote></div></div>
+
+--000000000000030b5d06563a543f--
 
