@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0E20C44501
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:01:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A9C1C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:01:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiIJs-0001NB-IE; Fri, 10 Jul 2026 16:59:37 -0400
+	id 1wiIKN-0003s0-7G; Fri, 10 Jul 2026 17:00:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiIII-0000fV-J4
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:57:58 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ id 1wiIIR-0000yN-Gu
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:58:13 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiII9-0001tK-UO
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:57:58 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-38a0c7e841fso1646823a91.2
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:57:49 -0700 (PDT)
+ id 1wiIIE-0001yH-6i
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:58:07 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-37df72c9984so2350976a91.3
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:57:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783717068; x=1784321868; darn=nongnu.org;
+ d=linaro.org; s=google; t=1783717072; x=1784321872; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=6DlcOURZ8Vq6FHB8e3m8GHkjsu8dVLmyFcRV/xT55GA=;
- b=IlcDt8GypjmeRkoGkm1036T85xesu/lwtKMyumcYjc6DTn1rTP2kX/Yp85+bsV6r0I
- XtTavvrzgGvNP6c2AquwR5wGk8TQCY+XbgLkTqjedRr9yLg4Thv0LXuehQ6ppasgGKfl
- u8v3cJQ/mMtmw8cEnBNTp8vR9Pot0Zh8Nm42rlqT7QXvDwBhY7hjbheZGRz8dV9DuXB2
- L8fU5clY6Yc+u3tdDYQlarQXW/SKSMH7Z7J0O2wSlbPOaQ9BKywslHL8RK62FmyfzUHV
- IEJdPkplSuDLxNiIsDrjb10OBp5IRuWvzWnV17H/fWINCM1mF4WDuS7xaNKAcGEqogJH
- DXWw==
+ bh=KpnTdJpquXSGqeXOM/ODDLLKulghlNdrEhAgoBJAG/g=;
+ b=O4odXN0/2FJ2BI+krkEQzvAGSglPW4QlsfSykLmYMmLjnt0CoZ7ScRcI/kgFhQInIQ
+ 04OY0JmsXsoUY8+Wz5ze5ZTiEgFy7veAmgwkMp3aL5CD+1iVzmBuzZhjoML+e/4zKg4q
+ 9ajILiGTEFtCnX0yK89dBsKxowbQFLKaDKxDlVYnNHrerAb3OMc+/pk66dFNJrWKwXk0
+ bkW/ImIQkHDvNa/17rbtAKddFcZIg/5QAUMRa9abldb5x6RzrjxabduL7l0VwaPIxzTp
+ de+UJ6yofvcr/xNZAEeCJLrScp5mMGJveccugz3SEp9GItqgoQ7uvTV1b6Tf05lLLsVF
+ Xnzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783717068; x=1784321868;
+ d=1e100.net; s=20251104; t=1783717072; x=1784321872;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=6DlcOURZ8Vq6FHB8e3m8GHkjsu8dVLmyFcRV/xT55GA=;
- b=a7ZvFRUEng0U3Pj/K//D6vGFxQbFI6d+ffOQYzanzJAI9oSTUafN+DIyiLw4s3HBnc
- pLw5rDb3OUAfGKk87Y7WCTVz4l+r8Zq8USun9XPNt+9YZSupZ5qRPoDQcEjq7chfOWw9
- 0+vh2JOdd1DGFUymyHcA6cttWA4+0zagvO/9fIddYVbWBo+ULDmxVE8pzi2fP7XYHH4x
- fkXGIJpPpn3IJXlJjYgFnovYR90c0B2LaBeKxjE92hNQEnSFBd1GOYNbC8O09vprRuaV
- TFYpeyPpK3OXaOhRH+GD1FXUH5O8MediL6kLckAPRq0XzolxWPSZ3g1Phk+CIe82s+AS
- Hg/A==
+ bh=KpnTdJpquXSGqeXOM/ODDLLKulghlNdrEhAgoBJAG/g=;
+ b=RZ4gEHYUC29nF7YbJIN+OL0gBNbJ5LgEC9Nu7IQSeWciUlilV1oZH1J2CZ5qOt1Ysb
+ BlU6jwxelQdWcFfOK5ZkVIxqL6brx0UKGF5Mvre9fn3/u3lEz4+7mDe1PW73+tVB4YWx
+ oKP3Q3/g0gxRJjlTFFjomwu/UKStMAb9+H4H/YrhZfJYWhhht/wlV5OzI/m2ni2WsB5A
+ DmtSEr8ggK36eO0EXfMb5fjbB+MmM4htSXE8a4rVpoO/wnrVOOka+igRrstOwrQjNRqG
+ 9JBlUiUqDoiPvFLygHtauJP8iJHYdX/Fpr1QUHEqvjQgX5nhBDu4LyHT5O3cqTu+EbOI
+ rvng==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rp3SSEd5zk0r+OQR+UjzbrytiSbFIkI7gKfTjTYooAbkuxRhwhoP3a1fmj5DWbnpYyIEeUnQHhh4Emr@nongnu.org
-X-Gm-Message-State: AOJu0YxKRXErJZ9VOqC50LYK7yhbQPs+Sn9gtaxIiek8rN/atbYwC9sy
- 6lrArv8Le495vsf9XCXzxUDjOeDG0Ajcxp29IX7rX56dZFnE8L3bT+cAxWUqplSX69w=
-X-Gm-Gg: AfdE7ckVmUSvWlHimMvceIQupch7CyjPisSuqj4LPiUNIM3elWJoNJPp5Tp9H07VvfR
- j6iEY69Cn0wxoCE/K8Ezd+wiMpZSzaWNMMeTti/yqZdnIIa3++J5qv5M5usR76kjUZcwEMPTJgA
- 4RRDPfGVhfriKIKLgFv2UXs0OyEFVCfnL7tqNUwR6ARsm+XMVYkrMs5gMlkk2EkdaofAUfGqNew
- l1nNIa5hBr0NzVj5SyXaWmH+WZkCv52PMwEg5jv9dFARMa4ClhXRou7Tjry4BGiVkFX00PO8MSQ
- l+JgiWtFK35BVjoPoYSWiT/9I+zSZRU/mkrppBt99wenmumxd/93PyovscyP8H4F47rctNdQI75
- yJOYh0EHVYBDp/BbSd9UlL0b2+axroZzMaS3se+sxwVtZoS8PvO4Cl4cASgocIkbSx9Z0eRBZ0M
- GALRz7KXkg3tjjtWjOvQ==
-X-Received: by 2002:a17:90b:3b89:b0:387:e0db:3fad with SMTP id
- 98e67ed59e1d1-38dc7778aedmr450010a91.38.1783717068048; 
- Fri, 10 Jul 2026 13:57:48 -0700 (PDT)
+ AHgh+Rrgcb9JkQaANgkq5OzfSGqmYQUSJiaLYmFPOTActqaX/ADM8uBZpZUgSRpkR8+TDL/IggIblmgTKUe+@nongnu.org
+X-Gm-Message-State: AOJu0YzsCtiBambj3DIXMIzPCtgZtgn1gRpYKboj8oxmw73hPUUt+toa
+ Mc9jaLyu3FT66e9L8eW9Dt85+dyaP2T/epO7aqHwW78hsN9+LwE4LpaGiKoQu3QjGp7YO+xbt5G
+ u4Pez
+X-Gm-Gg: AfdE7ckEbxQfFKOkS1a9/bRKlcl8QPyoBBrvS7wjcUQ467SPrOrE9tqeExmfeUSNNVu
+ cotkA9uzlRXa/XXeIvxODIQIhym3IZyq6hNuJdegFqDLZF7isGnUqjT40xcKseKN945liexGaVG
+ +TVSsu9oVyw/twDQMgCPJnYgDgzK1IvbS/Nf5b5QB8yzZINO34rLsRQkm8Ip0UJTZpnEQn4rMLw
+ ri+ZIBYd8HgjPB8yQd7DDHpTdlueH8xKnWLIuuGf5txafMC6UcG8JwvecESjUMghekMw2WhQHp3
+ C81DCy3VuPDpzbpZIeBGT7nCnzggzFvrwMkS3ORKXdNI4YDA+GBGhPlwke8/v+ssXKyRJyMvaUn
+ bhLj7OVcuhffjiz4BSQsuHpqZR6h5DFNIVGRiG9Y7kjB/mBFMqrd+wnRNbfXtRKbUHs4yhUr7zW
+ 4/69rTLwO2XJIPMet9aQwiQMWFWmaH
+X-Received: by 2002:a17:90b:164b:b0:37f:ceed:e1d8 with SMTP id
+ 98e67ed59e1d1-38dc7730cbdmr483202a91.12.1783717072370; 
+ Fri, 10 Jul 2026 13:57:52 -0700 (PDT)
 Received: from stoup.. ([71.212.146.49]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-38a58792cdasm3256221a91.16.2026.07.10.13.57.47
+ 98e67ed59e1d1-38a58792cdasm3256221a91.16.2026.07.10.13.57.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 13:57:47 -0700 (PDT)
+ Fri, 10 Jul 2026 13:57:51 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
-Subject: [PATCH v3 44/51] accel/tcg: Remove TCGCPUOps.adjust_watchpoint_address
-Date: Fri, 10 Jul 2026 13:53:54 -0700
-Message-ID: <20260710205401.836304-45-richard.henderson@linaro.org>
+Subject: [PATCH v3 49/51] accel/tcg: Change tlb_flush_range_* to use addr/last
+Date: Fri, 10 Jul 2026 13:53:59 -0700
+Message-ID: <20260710205401.836304-50-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260710205401.836304-1-richard.henderson@linaro.org>
 References: <20260710205401.836304-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -101,59 +102,253 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Plugs a hole in the API by which one cannot flush the
+entire address space with one range.  There are only a
+few users, so it's easy to update them all at once.
+
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/accel/tcg/cpu-ops.h | 5 -----
- include/hw/core/cpu.h       | 2 --
- accel/tcg/watchpoint.c      | 6 ------
- 3 files changed, 13 deletions(-)
+ include/exec/cputlb.h             | 12 ++++++------
+ accel/tcg/cputlb.c                | 27 ++++++++++++++++-----------
+ target/arm/tcg/tlb-insns.c        | 21 +++++++++++----------
+ target/hppa/mem_helper.c          |  3 +--
+ target/loongarch/tcg/tlb_helper.c |  5 +++--
+ target/ppc/mmu_helper.c           |  4 ++--
+ 6 files changed, 39 insertions(+), 33 deletions(-)
 
-diff --git a/include/accel/tcg/cpu-ops.h b/include/accel/tcg/cpu-ops.h
-index 734bcd537b..a232288152 100644
---- a/include/accel/tcg/cpu-ops.h
-+++ b/include/accel/tcg/cpu-ops.h
-@@ -249,11 +249,6 @@ struct TCGCPUOps {
-                                            MMUAccessType access_type,
-                                            int mmu_idx, uintptr_t retaddr);
+diff --git a/include/exec/cputlb.h b/include/exec/cputlb.h
+index f7f7020382..30e1d1f93e 100644
+--- a/include/exec/cputlb.h
++++ b/include/exec/cputlb.h
+@@ -209,21 +209,21 @@ void tlb_flush_page_bits_by_mmuidx_all_cpus_synced(CPUState *cpu, vaddr addr,
+  * tlb_flush_range_by_mmuidx
+  * @cpu: CPU whose TLB should be flushed
+  * @addr: virtual address of the start of the range to be flushed
+- * @len: length of range to be flushed
++ * @last: virtual address of the end of the range to be flushed, inclusive
+  * @idxmap: bitmap of mmu indexes to flush
+  * @bits: number of significant bits in address
+  *
+- * For each mmuidx in @idxmap, flush all pages within [@addr,@addr+@len),
++ * For each mmuidx in @idxmap, flush all pages within [@addr,@last]
+  * comparing only the low @bits worth of each virtual page.
+  */
+ void tlb_flush_range_by_mmuidx(CPUState *cpu, vaddr addr,
+-                               vaddr len, MMUIdxMap idxmap,
++                               vaddr last, MMUIdxMap idxmap,
+                                unsigned bits);
  
--    /**
--     * @adjust_watchpoint_address: hack for cpu_check_watchpoint (used by ARM)
--     */
--    vaddr (*adjust_watchpoint_address)(CPUState *cpu, vaddr addr, int len);
--
-     /**
-      * @debug_check_watchpoint: return true if the architectural
-      * watchpoint whose address has matched should really fire.
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 5401d7c14b..c4c86b8595 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -139,8 +139,6 @@ struct SysemuCPUOps;
-  * to GDB. The returned value is expected to be a simple constant string:
-  * the caller will not g_free() it.
-  * @disas_set_info: Setup architecture specific components of disassembly info
-- * @adjust_watchpoint_address: Perform a target-specific adjustment to an
-- * address before attempting to match it against watchpoints.
-  * @deprecation_note: If this CPUClass is deprecated, this field provides
-  *                    related information.
-  * @max_as: Maximum valid index used to refer to the address spaces supported by
-diff --git a/accel/tcg/watchpoint.c b/accel/tcg/watchpoint.c
-index f96ffc018d..b8a49b7567 100644
---- a/accel/tcg/watchpoint.c
-+++ b/accel/tcg/watchpoint.c
-@@ -68,12 +68,6 @@ void cpu_check_watchpoint(CPUState *cpu, vaddr addr, vaddr len,
-         return;
+ /* Similarly, with broadcast and syncing. */
+ void tlb_flush_range_by_mmuidx_all_cpus_synced(CPUState *cpu,
+                                                vaddr addr,
+-                                               vaddr len,
++                                               vaddr last,
+                                                MMUIdxMap idxmap,
+                                                unsigned bits);
+ #else
+@@ -268,13 +268,13 @@ tlb_flush_page_bits_by_mmuidx_all_cpus_synced(CPUState *cpu, vaddr addr,
+ {
+ }
+ static inline void tlb_flush_range_by_mmuidx(CPUState *cpu, vaddr addr,
+-                                             vaddr len, MMUIdxMap idxmap,
++                                             vaddr last, MMUIdxMap idxmap,
+                                              unsigned bits)
+ {
+ }
+ static inline void tlb_flush_range_by_mmuidx_all_cpus_synced(CPUState *cpu,
+                                                              vaddr addr,
+-                                                             vaddr len,
++                                                             vaddr last,
+                                                              MMUIdxMap idxmap,
+                                                              unsigned bits)
+ {
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index 2c0f7bed52..0a49b87bcb 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -761,13 +761,12 @@ static void tlb_flush_range_by_mmuidx_async_1(CPUState *cpu,
+     g_free(d);
+ }
+ 
+-void tlb_flush_range_by_mmuidx(CPUState *cpu, vaddr addr,
+-                               vaddr len, MMUIdxMap idxmap,
+-                               unsigned bits)
++void tlb_flush_range_by_mmuidx(CPUState *cpu, vaddr addr, vaddr last,
++                               MMUIdxMap idxmap, unsigned bits)
+ {
+     TLBFlushRangeData d = {
+         .addr = addr & TARGET_PAGE_MASK,
+-        .last = (addr + len - 1) & TARGET_PAGE_MASK,
++        .last = last & TARGET_PAGE_MASK,
+         .idxmap = idxmap,
+         .bits = bits,
+     };
+@@ -795,18 +794,20 @@ void tlb_flush_range_by_mmuidx(CPUState *cpu, vaddr addr,
+ void tlb_flush_page_bits_by_mmuidx(CPUState *cpu, vaddr addr,
+                                    MMUIdxMap idxmap, unsigned bits)
+ {
+-    tlb_flush_range_by_mmuidx(cpu, addr, TARGET_PAGE_SIZE, idxmap, bits);
++    /*
++     * The implementation above only cares about the page of @last,
++     * so we don't need to find the end of the page for @addr.
++     */
++    tlb_flush_range_by_mmuidx(cpu, addr, addr, idxmap, bits);
+ }
+ 
+ void tlb_flush_range_by_mmuidx_all_cpus_synced(CPUState *src_cpu,
+-                                               vaddr addr,
+-                                               vaddr len,
+-                                               MMUIdxMap idxmap,
+-                                               unsigned bits)
++                                               vaddr addr, vaddr last,
++                                               MMUIdxMap idxmap, unsigned bits)
+ {
+     TLBFlushRangeData d = {
+         .addr = addr & TARGET_PAGE_MASK,
+-        .last = (addr + len - 1) & TARGET_PAGE_MASK,
++        .last = last & TARGET_PAGE_MASK,
+         .idxmap = idxmap,
+         .bits = bits,
+     };
+@@ -847,7 +848,11 @@ void tlb_flush_page_bits_by_mmuidx_all_cpus_synced(CPUState *src_cpu,
+                                                    MMUIdxMap idxmap,
+                                                    unsigned bits)
+ {
+-    tlb_flush_range_by_mmuidx_all_cpus_synced(src_cpu, addr, TARGET_PAGE_SIZE,
++    /*
++     * The implementation above only cares about the page of @last,
++     * so we don't need to find the end of the page for @addr.
++     */
++    tlb_flush_range_by_mmuidx_all_cpus_synced(src_cpu, addr, addr,
+                                               idxmap, bits);
+ }
+ 
+diff --git a/target/arm/tcg/tlb-insns.c b/target/arm/tcg/tlb-insns.c
+index b24eb57788..cf1698941c 100644
+--- a/target/arm/tcg/tlb-insns.c
++++ b/target/arm/tcg/tlb-insns.c
+@@ -819,7 +819,7 @@ static const ARMCPRegInfo tlbi_el3_cp_reginfo[] = {
+ 
+ typedef struct {
+     uint64_t base;
+-    uint64_t length;
++    uint64_t last;
+ } TLBIRange;
+ 
+ static ARMGranuleSize tlbi_range_tg_to_gran_size(int tg)
+@@ -847,8 +847,8 @@ static TLBIRange tlbi_aa64_get_range(CPUARMState *env, ARMMMUIdx mmuidx,
+     /* Extract one bit to represent the va selector in use. */
+     uint64_t select = sextract64(value, 36, 1);
+     ARMVAParameters param = aa64_va_parameters(env, select, mmuidx, true, false);
+-    TLBIRange ret = { };
+     ARMGranuleSize gran;
++    uint64_t base, length;
+ 
+     page_size_granule = extract64(value, 46, 2);
+     gran = tlbi_range_tg_to_gran_size(page_size_granule);
+@@ -857,7 +857,8 @@ static TLBIRange tlbi_aa64_get_range(CPUARMState *env, ARMMMUIdx mmuidx,
+     if (gran != param.gran || gran == GranInvalid) {
+         qemu_log_mask(LOG_GUEST_ERROR, "Invalid tlbi page size granule %d\n",
+                       page_size_granule);
+-        return ret;
++        /* The behaviour of the insn is undefined. */
++        return (TLBIRange) { 0, 0 };
      }
  
--    if (cpu->cc->tcg_ops->adjust_watchpoint_address) {
--        /* this is currently used only by ARM BE32 */
--        addr = cpu->cc->tcg_ops->adjust_watchpoint_address(cpu, addr, len);
--        last = addr + len - 1;
--    }
--
-     assert((flags & ~BP_MEM_ACCESS) == 0);
+     page_shift = arm_granule_bits(gran);
+@@ -865,12 +866,12 @@ static TLBIRange tlbi_aa64_get_range(CPUARMState *env, ARMMMUIdx mmuidx,
+     scale = extract64(value, 44, 2);
+     exponent = (5 * scale) + 1;
  
-     for (n = interval_tree_iter_first(&cpu->watchpoints, addr, last); n;
+-    ret.length = (num + 1) << (exponent + page_shift);
++    length = (num + 1) << (exponent + page_shift);
+ 
+     if (param.select) {
+-        ret.base = sextract64(value, 0, 37);
++        base = sextract64(value, 0, 37);
+     } else {
+-        ret.base = extract64(value, 0, 37);
++        base = extract64(value, 0, 37);
+     }
+     if (param.ds) {
+         /*
+@@ -880,9 +881,9 @@ static TLBIRange tlbi_aa64_get_range(CPUARMState *env, ARMMMUIdx mmuidx,
+          */
+         page_shift = 16;
+     }
+-    ret.base <<= page_shift;
++    base <<= page_shift;
+ 
+-    return ret;
++    return (TLBIRange){ .base = base, .last = base + length - 1 };
+ }
+ 
+ static void do_rvae_write(CPUARMState *env, uint64_t value,
+@@ -898,12 +899,12 @@ static void do_rvae_write(CPUARMState *env, uint64_t value,
+     if (synced) {
+         tlb_flush_range_by_mmuidx_all_cpus_synced(env_cpu(env),
+                                                   range.base,
+-                                                  range.length,
++                                                  range.last,
+                                                   idxmap,
+                                                   bits);
+     } else {
+         tlb_flush_range_by_mmuidx(env_cpu(env), range.base,
+-                                  range.length, idxmap, bits);
++                                  range.last, idxmap, bits);
+     }
+ }
+ 
+diff --git a/target/hppa/mem_helper.c b/target/hppa/mem_helper.c
+index 01e6149c81..394e975533 100644
+--- a/target/hppa/mem_helper.c
++++ b/target/hppa/mem_helper.c
+@@ -106,8 +106,7 @@ static void hppa_flush_tlb_ent(CPUHPPAState *env, HPPATLBEntry *ent,
+     trace_hppa_tlb_flush_ent(env, ent, ent->itree.start,
+                              ent->itree.last, ent->pa);
+ 
+-    tlb_flush_range_by_mmuidx(cs, ent->itree.start,
+-                              ent->itree.last - ent->itree.start + 1,
++    tlb_flush_range_by_mmuidx(cs, ent->itree.start, ent->itree.last,
+                               HPPA_MMU_FLUSH_MASK, TARGET_LONG_BITS);
+ 
+     /* Never clear BTLBs, unless forced to do so. */
+diff --git a/target/loongarch/tcg/tlb_helper.c b/target/loongarch/tcg/tlb_helper.c
+index a4b90beca6..3a708ebf3a 100644
+--- a/target/loongarch/tcg/tlb_helper.c
++++ b/target/loongarch/tcg/tlb_helper.c
+@@ -130,13 +130,14 @@ static void invalidate_tlb_entry(CPULoongArchState *env, int index)
+ 
+     tlb_v = pte_present(env, tlb->tlb_entry0);
+     if (tlb_v) {
+-        tlb_flush_range_by_mmuidx(env_cpu(env), addr, pagesize,
++        tlb_flush_range_by_mmuidx(env_cpu(env), addr, addr + pagesize - 1,
+                                   idxmap, TARGET_LONG_BITS);
+     }
+ 
+     tlb_v = pte_present(env, tlb->tlb_entry1);
+     if (tlb_v) {
+-        tlb_flush_range_by_mmuidx(env_cpu(env), addr + pagesize, pagesize,
++        tlb_flush_range_by_mmuidx(env_cpu(env), addr + pagesize,
++                                  addr + 2 * pagesize - 1,
+                                   idxmap, TARGET_LONG_BITS);
+     }
+ }
+diff --git a/target/ppc/mmu_helper.c b/target/ppc/mmu_helper.c
+index ac60705402..c881191749 100644
+--- a/target/ppc/mmu_helper.c
++++ b/target/ppc/mmu_helper.c
+@@ -734,8 +734,8 @@ static void ppcemb_tlb_flush(CPUState *cs, ppcemb_tlb_t *tlb)
+         mmu_idx <<= 2;
+     }
+ 
+-    tlb_flush_range_by_mmuidx(cs, tlb->EPN, tlb->size, mmu_idx,
+-                              TARGET_LONG_BITS);
++    tlb_flush_range_by_mmuidx(cs, tlb->EPN, tlb->EPN + tlb->size - 1,
++                              mmu_idx, TARGET_LONG_BITS);
+ }
+ 
+ void helper_4xx_tlbwe_hi(CPUPPCState *env, target_ulong entry,
 -- 
 2.43.0
 
