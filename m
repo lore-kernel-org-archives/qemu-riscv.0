@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58524C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 06:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422C8C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 06:11:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wi4R4-0001GX-No; Fri, 10 Jul 2026 02:10:06 -0400
+	id 1wi4R2-0001E8-Nh; Fri, 10 Jul 2026 02:10:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wi4Qo-00019T-DW
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:53 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1wi4Qm-00019C-AZ
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:50 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wi4Qn-0001va-1w
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:50 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2ccf2360620so4184175ad.3
- for <qemu-riscv@nongnu.org>; Thu, 09 Jul 2026 23:09:48 -0700 (PDT)
+ id 1wi4Qk-0001ue-Py
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 02:09:48 -0400
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2cc7e86e7aeso4384365ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jul 2026 23:09:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1783663788; x=1784268588; darn=nongnu.org;
+ d=sifive.com; s=google; t=1783663785; x=1784268585; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=p3NJB/BD9o3McPFMsI4fHEIir4MrFnImKCe32i/p8+g=;
- b=Mz+mKub6TPWpY5JbGDIilYoNcPzYWg1tGykL8FLOB+mlJufgurk0zLzqsppMTuURCy
- l3j91hTm4eenUwwHzD8MAy15tdl8dUzSMGeMXjuHBRPwFQqEVGbBLjofY+9oSIBrTdoK
- qO/YeB7XzJ9UoxhC6YrYtJSJ4vzypFBdCB2+F65t73QnYmdDUNcagFGSWPwxSrfRA3Ya
- 0Hob19Nex8rotYNJud+Q42B3ZG/mERor6wtorTL50i+ctgu3uTxhOttrZU0LhcExDyHX
- 2dX+I0EIgX2Qxz9iAc6fOGw05Wv9O884Le1BB4fzeoHYwKj7B2T007qkAx/gwYXujyop
- 8Sug==
+ bh=O/7FEaWq6GSW5DMyLSgoZ6CKEjGk7z8oVAnel2Qt41s=;
+ b=Cym43GzWRc4C+ZRQhUf7PObP+vYyVDJt50UjO5xjKw69g9wB/7FzBpIhA41jjFGY+s
+ pD85GgnLLryqTJyokJtCre/X/7uGmKhkePl9fm62uUTO/F/hQ8vwP4pGbQpnrnsEQd3F
+ mO/BmndDVsMRvp5rbEswg1xk9iSDkXpquEpfmuUkcoeN9l8d1ZAXMS9FK+2foQDcitub
+ rE9YjdhtTLtC7i7qWQ6RvY6I9gidalB+T/r/0r1CwQklLWtPSUlcSMxa/inQ0bSboTIr
+ n1tJROL3tDAwerMJCtuiRhBQ9XoS0x1SuvjRFuybGfYsR3aUcCcUFnKuEjrtOQ0wa01L
+ tzdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783663788; x=1784268588;
+ d=1e100.net; s=20251104; t=1783663785; x=1784268585;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=p3NJB/BD9o3McPFMsI4fHEIir4MrFnImKCe32i/p8+g=;
- b=IuN3GnkR9SU8fs72Q1NWi5H0Yr9Le0Pj8WBceS+p3xt9MyO+OBEljYtOachCzswkOx
- YiJ8GmUqJ6LP3Y3hh6eHTomOzklnSTG/94ZyEGwz6Ct4J0et8rAEhudu/rxyny9nrd+d
- jdSEQtjg3RNkoODGn/lpFb9awzIIJrc4Z4Ep3hsBrE3b06mLM2i5aaAG3f89LO/vJ7eT
- 52W2Q7u15M3pXbxQwltxxkUkVJsFOtMlQtA259FJW8hKxwaSWbuxSoApyPqpymmfY6cW
- Lk5NntC+ms1venSFpcyTA2scmmGBsebInMUMe5rKxPxn82QSemEL0NwGouZrAnYK7UOw
- 8OYQ==
+ bh=O/7FEaWq6GSW5DMyLSgoZ6CKEjGk7z8oVAnel2Qt41s=;
+ b=gxPg4QQ2Fd149zpP8msFdgwDIpuhym7Es+IUd2oYqH/tjCDX3iZ5RKVsmomhHtaFkZ
+ QXwtl3rDhvn0pqUB6RgBsp0ZzhJ6ToyxUld4sPLSN+x9Fchky3s1Q5RNisaynJnxSzQo
+ h/Tlwpb8rn62/jNX+ZL0ZeHcmT/IaSioVFr4sQmu9VFUP3yOo0Z7BAeZWy2eNTlJ9/+W
+ 9nXgVmEhAUIijlH3bC5V49IBNyhdlnrIYJkCwPazybRE06QWo1LCwJikAVOu3n8uGFfD
+ ebovJu6hW10uaf00J5NgjaN5uip6mY/OJ4mdbpa2bunNreuzQqpSe07F5KFh83ZN0hkO
+ VixQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+RqPTzED3QihWBuMbBEQjBdbZPQ1+P97ZIuAgDb3cvS4YsHFt+TB1dqiXmhvNoPOj4CJl2NMMfvKWNBM@nongnu.org
-X-Gm-Message-State: AOJu0YzZTK4PeZ/MplP+zr1lMSyW2S2oAjZJLr2CU7PhCKhyveE1jOsv
- a2flWgU1RFkZBFbrEZQ42bNpwOE8M36z6oPTqzpp4BIHMKH2kctgaEW8/V07uAOm9c8=
-X-Gm-Gg: AfdE7clkKlbqn9l8GABN2mHM+qbtBaLcLBACh6efi+QEkCaB4js4PyY5RzA1fBhwpb2
- ah+D5eZ6QqzGM/WGTdR5ZGqIlzUGNYt351ekBp20WZ4KRshU72SQAgj9mPoNZAgoZCPSsnX9wvr
- h3GQaJuO0c1fW4BrhQAbp/XO3ndbZoox1RmQmayIpRqA97rn4OnVs5GB7ySQhTR5Go9y9VUUKZg
- Bm5aV8tbSwaltJEDitaZV35i0xjJ9Us5jURBqOPy76UzvWGRIGlAix+cmlVRSOXgMjL7SgIhUa6
- 39lHihYHniqV3UkspBuA1dTW64AeSpIMx/PWtmk4m+vIiRsoMhCuZ+1owggsjMndFOLyxqCJhJI
- PmjOEQVyyqJpr4bWklqi0S7EZQWkR1pGdx7Hpv5yyN6FjfA3Ru4I31q2KhdCfcSpTbpbGNkXF9D
- Olonk1Yj3+W99akMwEhO6bLT1URfM+aZdjp3vSPo8=
-X-Received: by 2002:a17:903:234f:b0:2cc:f4d4:29a6 with SMTP id
- d9443c01a7336-2ccf4d46bfbmr83096455ad.23.1783663787721; 
- Thu, 09 Jul 2026 23:09:47 -0700 (PDT)
+ AHgh+RqAABQu87CF7/UF8j5+Br0o9F8xm7hnR6cZmjntBGgDf008viA50IpVFAyTM+4jNM7Zcp4JGywQ2PGZ@nongnu.org
+X-Gm-Message-State: AOJu0YyjLKWBWBOhvkGPjZ+/Daz/fTJ33X/mjtsR6aIEjysAcD4Tw7Sj
+ y81iY84Ctb/F6poOdgoh4c1qW30d7Zk81UGL2EAQCBcjF5Sudtlzp/AQUoEBMOdI9DFnl8XmAdl
+ wdbgGmXPCOw==
+X-Gm-Gg: AfdE7cnzRPC9ThrrbKUMRpNbg9U+pD3Y49R+jsVeUqtFEIxI3GvF3TQMemBkmLEL9BD
+ 5UhMpuvCOhvWpqiRLqb8YPvSSOmeDjCt589sqz6TeiA2Cqfn+vlZ6hu1zCxi6XGoBxAwGTduen6
+ nnkMc4yxdW7vsfv7ka3Ti6Dan85CO/xAWDhCkdJxNHGR8GkKEK3ZljwTmJz8xH1PiSvByKx7nx1
+ FJ4xf4Wptj/sF84x63dtyfJVSKewPkmL7FXFZTVYfIMhQeTR/Yg+05/7GtD8nxdaa+ncxa83uNl
+ 3PbqqJQG4HgkRx3nTbaB4UAAKB78qjCEyJgd+DRHJ+pVgBLjCIHmM5pFU6obqNcnJah3sKN3cx0
+ mKTEJu4uJdQ3Htg9/zDtK2bparWvSWey6hueoRDylILYxgYvQfGG/PqQEl239u3K/0EzsGrP7VG
+ K90yiVZBk3Y9HkKk5rectj7NGdmWhu6Y+NkTA4NLM=
+X-Received: by 2002:a17:903:110f:b0:2c9:bd64:8c8b with SMTP id
+ d9443c01a7336-2ccea40dd61mr111099385ad.31.1783663785285; 
+ Thu, 09 Jul 2026 23:09:45 -0700 (PDT)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ccc9d59e33sm53344255ad.74.2026.07.09.23.09.45
+ d9443c01a7336-2ccc9d59e33sm53344255ad.74.2026.07.09.23.09.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jul 2026 23:09:47 -0700 (PDT)
+ Thu, 09 Jul 2026 23:09:44 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
@@ -74,24 +75,26 @@ Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
  qemu-riscv@nongnu.org (open list:SiFive Machines),
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v5 7/7] target/riscv: Enable Zicclsm for RVA22U64 profile
-Date: Fri, 10 Jul 2026 14:09:14 +0800
-Message-ID: <20260710060914.1227027-8-frank.chang@sifive.com>
+ Frank Chang <frank.chang@sifive.com>, Max Chou <max.chou@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v5 6/7] target/riscv: Update Zicclsm ISA string and expose it
+ as a CPU property
+Date: Fri, 10 Jul 2026 14:09:13 +0800
+Message-ID: <20260710060914.1227027-7-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260710060914.1227027-1-frank.chang@sifive.com>
 References: <20260710060914.1227027-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,29 +112,29 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Zicclsm extension is mandatory for the RVA22U64 profile. Previously,
-Zicclsm was enabled automatically when has_priv_1_11 was true. Now that
-Zicclsm has been converted to an explicit CPU option, it must be
-explicitly added to the RVA22U64 profile's extension list to ensure the
-profile remains compliant with the specification.
+Update Zicclsm ISA string and expose it as a CPU property to allow user
+to turn on/off Zicclsm extension.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Max Chou <max.chou@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/cpu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 04b1ac22f11..19b93f9c979 100644
+index 7ee89f6fc4b..04b1ac22f11 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -2237,6 +2237,7 @@ static RISCVCPUProfile RVA22U64 = {
-         CPU_CFG_OFFSET(ext_zkt), CPU_CFG_OFFSET(ext_zicntr),
-         CPU_CFG_OFFSET(ext_zihpm), CPU_CFG_OFFSET(ext_zicbom),
-         CPU_CFG_OFFSET(ext_zicbop), CPU_CFG_OFFSET(ext_zicboz),
-+        CPU_CFG_OFFSET(ext_zicclsm),
- 
-         /* mandatory named features for this profile */
-         CPU_CFG_OFFSET(ext_zic64b),
+@@ -164,7 +164,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zicboz, PRIV_VERSION_1_12_0, ext_zicboz),
+     ISA_INTERNAL_EXT_DATA_ENTRY(ziccamoa, PRIV_VERSION_1_11_0, has_priv_1_11),
+     ISA_INTERNAL_EXT_DATA_ENTRY(ziccif, PRIV_VERSION_1_11_0, has_priv_1_11),
+-    ISA_INTERNAL_EXT_DATA_ENTRY(zicclsm, PRIV_VERSION_1_11_0, has_priv_1_11),
++    ISA_EXT_DATA_ENTRY(zicclsm, PRIV_VERSION_1_11_0, ext_zicclsm),
+     ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, ext_ziccrse),
+     ISA_EXT_DATA_ENTRY(zicfilp, PRIV_VERSION_1_12_0, ext_zicfilp),
+     ISA_EXT_DATA_ENTRY(zicfiss, PRIV_VERSION_1_13_0, ext_zicfiss),
 -- 
 2.43.0
 
