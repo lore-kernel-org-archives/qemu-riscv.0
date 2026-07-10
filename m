@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4C70C44507
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:02:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32472C43458
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 21:02:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiIK6-0002AV-NC; Fri, 10 Jul 2026 16:59:51 -0400
+	id 1wiIHM-0005q9-RK; Fri, 10 Jul 2026 16:57:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiIIM-0000rP-6M
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:58:02 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ id 1wiIFZ-0002Mx-GH
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:55:12 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wiIIC-0001vO-0b
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:58:01 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-3811f512167so1817160a91.3
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:57:51 -0700 (PDT)
+ id 1wiIFK-00011U-Jz
+ for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 16:55:09 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-8487b7b3fc7so798191b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 13:54:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1783717070; x=1784321870; darn=nongnu.org;
+ d=linaro.org; s=google; t=1783716883; x=1784321683; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wQlUvhVxYxUBBJ0TpgUPbHv3TSyy1Fi4wFktbhNSBoc=;
- b=sFiLLpEAbUq+7VZQrTOSdsRMd2vtmu5Y2sLEJYPiXxfXTpoEyyK1COEHZCb1FUnK9o
- swjl/bZ80RlFcCcin1Q2aTJTgftdUGOY5lg0KrYwv+ypInSF6xjVy7pGEnc/ULudU/4F
- dDrgbbsyZnY3mibrAXap8927f7IJ4Ui8eXxVY6VUJ5n2LzVDJqMwTY5rw37ugms+qRGI
- pB8I6XcwnzJWl/nkO+JYtlw3YNm482RXfg0l3rU3FsffsoDd5lq46ELBRq6QOAnH0oPP
- gkhEjyy8U3K2D4WDd2+TTBN1ZCNDA3l9o0VrOPXBpsfQ9k0sOAplRzL4i2CdaUAHLRN5
- fAIg==
+ bh=Oi77c4t6mTRvDij0KOLon4zdhMhjLviMYDkRz5tIy7Q=;
+ b=xMG8b3H/EZ+V7aRc+e50ajp7Hx3dnazQx79ChhbiMrrL4KMw0H/3jRAMLHPJYxRtBy
+ 3VwlFkyRpmrHIZMlCWJP85wlzn+kuI8iCAhm36Zxjsa7FrDgfvp0H4fKpz14EbD3/NQU
+ n9lMeiXHsCX4m9RY/n68MDV7yOriYd/4hfY+kXGQzC9Gdby7xZW3M2PUphsU6hDzARWU
+ dsdmfWDQnE9FGI6gQdhvoqNzSYPIpm9rehj+776KsJqguDk16Zw1uDtA6xQs1qr9hwER
+ XECmx2xZSuYN7z/8zWVukspJsLcih9rYmp62Xd+JhdLVY8aoJtBkZ7tKbr2HvKpCOO7I
+ 9ekQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783717070; x=1784321870;
+ d=1e100.net; s=20251104; t=1783716883; x=1784321683;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=wQlUvhVxYxUBBJ0TpgUPbHv3TSyy1Fi4wFktbhNSBoc=;
- b=LPo/+uhsweC0CgxuT6nSuVHcvyNzkaiR2WhoNi+yGO6bXV9ulTDc5XocIMRjnljI2G
- bFSDdOCLS1RgeYgem7seJQ8+M2HfXyyPI1hGY0I3g1Or/zuqhGdfDEwf6nQ22xZ4/P/v
- qm2xqSooSlMxQmlGfCb/jFHzGsdj/knJ1RrAl6ITrooi5wKRbHY9mkbz0qUucKHsjqRw
- A8gCBnP8zxznx5C6ekvSGDGHwuYb8IuAZ23afC05c8URqSpI9GtgSWT0dWZ1T3XnFz+S
- 9T2ub9mEYtflABLQaz0S6te3tCC7M5iBkaxKWGgkUhqE3Gmekog+5VDvsBxmgeuzq+7R
- zpgg==
+ bh=Oi77c4t6mTRvDij0KOLon4zdhMhjLviMYDkRz5tIy7Q=;
+ b=oF27NKCSr4BUXeqbIWs756+6+61myZGy/KFaAii5JFBKLsiPDWCxrxaxCLaMAHG/xA
+ 3X+Zxdt2U5h8GPhf9/IMFioz5XoJfWdjUaXFQP5Crt8x/NjuZCxzVGo2AQJ93oDDmYyh
+ s97yYyDvqyQjxPd5dNe1rKY2Dkr05q0K679nBpa8bmWRQ2vpCKXyr6VAqQbSqKCNyT4V
+ WwrkjiDE0xO6CRz5uXNB0C2LbjYsewb9sglj7AtWdPJNRN4lE7mw8PQ7lekAfyE46USk
+ SPvA7e47S6UM3elYZ+StzdYusJm3NM6CNV0l8/4vAF78O46f5FrNY7LFz37vB7tlZij8
+ cS9Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rr9QY3SF6HWFycoWtfY0bSlZvzkv9Y6aMoXcvcm1pwAO630vCbE/v0gBDMQWqCbFWxEQCeRiLuRpeKW@nongnu.org
-X-Gm-Message-State: AOJu0YwGarf45f5ALLnh5JsQdAengUPHNMNMG7r+U528/6hYGfcN1TpW
- DNsZNhy5Yak4Tx3MnC7poLBFLxVOWu1fP+zIY8U5o/HJPoZor9mn2c3pyMDYq11fRWSdeNxGNCz
- KRhdj
-X-Gm-Gg: AfdE7cnQmsnl3FQ5sy+tpfRHIpi37+kuiVicP/9c57epezzBRSXUotAq6hqhmXPG4LO
- OIMXNnghHCfG00VvlLURZny04imXIv1mnOIShZpV/hviSLq3ZCftL2eC80gugPXMBr4qgMaD1JD
- m1z7+DC1IyzuVTMcj6d4rSmFWJHQqRRZXqP5JQs5Cui8jvqPD52gCPBwM2mfsmfrCSL1zxwTX5g
- kc0yR3NQQongO0fbaACAONM/4Rr9+BZ7b7j7DDqt0MVbQodn90lKJllx6Sblg3Oj4PyK0wjTV42
- qVqWW+kcAevPaw3q8RrBleklBYnIPskxrg7e4Mtmcj49msolWsp2e/JxON8qTZ4smCgsAK3niBX
- gdkIvT4wmaskNnctz15Mf9p9U6zI/oyFkqlaKD6b2ymgrLtQ0HKd08tkTbsbHgp+vDAYZJo0i8B
- m1CrKjjG32nBxQK4Jg3g==
-X-Received: by 2002:a17:90b:58ce:b0:381:152b:d596 with SMTP id
- 98e67ed59e1d1-38dc74cff62mr495341a91.11.1783717070129; 
- Fri, 10 Jul 2026 13:57:50 -0700 (PDT)
+ AHgh+Rp5jJ9GaQEOHglSYx/cJqrN+yJTFfBDFGtUiYjnDy3CKtVIKi4bemnz9P03Vl9WHrJkJuNQ2I0M0YTJ@nongnu.org
+X-Gm-Message-State: AOJu0YwN3vkhPujasPNooFJ1m1K/UlRt9a7tTVpQQ9RRyBbBzVu9tYTL
+ 49NR3K91w+gnwzPZj067bWAQlP4XXzau06cDbVBlfToGoeTNLQlp5L7AqTGQegLPZ1A=
+X-Gm-Gg: AfdE7cmFoIDRDqXpeBTEuVvg77E6eoEERbH+UibhcIxAXloK2HsU0nq0OKiMYGhCYzr
+ RigiHwDPWK4Lm5Yj1VypjukNUTQDEjQwDRkgL+biYNOlpCokT1lUXXTBm9ED+zZOG1VwPzDr/Wa
+ iALm12GsQLtHoVMjteCFWuxwFijq0tEzSsdb3/noUiZOSs42gAtQNBUFF014KZ+jHubFDTByMCh
+ vU/Sbr1+qD2IfkIiH3R48m4ircCJeiNwCZSqCCHggrvKsWImswbCyLyDucOY6zX75r+eXw6p/5c
+ VNx9TDK8apcHRPyq31UerBZq8ZqiTR3btCE3+tbLoNcx/pdrBc/UmglRDu4HZF3jSpSV2V4pXH4
+ MF75Snk1MLke0gRSxR8F3Eq0WVfGl7W+N6fZUlLR769c1VVlcv7nX0vOlMBFWXLT2g9puSCBxOy
+ 6H2EkfuUGbAW136iBMPA==
+X-Received: by 2002:a05:6a00:94f5:b0:82f:2b0:2809 with SMTP id
+ d2e1a72fcca58-84889637281mr545510b3a.1.1783716882973; 
+ Fri, 10 Jul 2026 13:54:42 -0700 (PDT)
 Received: from stoup.. ([71.212.146.49]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-38a58792cdasm3256221a91.16.2026.07.10.13.57.49
+ d2e1a72fcca58-847f6d76106sm10780574b3a.40.2026.07.10.13.54.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jul 2026 13:57:49 -0700 (PDT)
+ Fri, 10 Jul 2026 13:54:42 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
-Subject: [PATCH v3 46/51] accel/tcg: Drop stale assert for vaddr
-Date: Fri, 10 Jul 2026 13:53:56 -0700
-Message-ID: <20260710205401.836304-47-richard.henderson@linaro.org>
+Subject: [PATCH v3 38/51] target/xtensa: Restrict xtensa_breakpoint_handler to
+ system mode
+Date: Fri, 10 Jul 2026 13:53:48 -0700
+Message-ID: <20260710205401.836304-39-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260710205401.836304-1-richard.henderson@linaro.org>
 References: <20260710205401.836304-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -102,29 +102,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We no longer support 32-bit hosts.
-
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- accel/tcg/cputlb.c | 5 -----
- 1 file changed, 5 deletions(-)
+ target/xtensa/cpu.h    | 2 +-
+ target/xtensa/cpu.c    | 2 +-
+ target/xtensa/helper.c | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index 695476eef1..c8ba727859 100644
---- a/accel/tcg/cputlb.c
-+++ b/accel/tcg/cputlb.c
-@@ -86,11 +86,6 @@
-         }                                                         \
-     } while (0)
+diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
+index 663ee23dc4..119a0b8187 100644
+--- a/target/xtensa/cpu.h
++++ b/target/xtensa/cpu.h
+@@ -592,6 +592,7 @@ void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
+                                       MemTxResult response, uintptr_t retaddr);
+ hwaddr xtensa_cpu_get_phys_addr_debug(CPUState *cpu, vaddr addr);
+ bool xtensa_debug_check_breakpoint(CPUState *cs, CPUBreakpoint *bp);
++void xtensa_breakpoint_handler(CPUState *cs, CPUBreakpoint *hit);
+ #endif
+ void xtensa_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ void xtensa_count_regs(const XtensaConfig *config,
+@@ -621,7 +622,6 @@ void xtensa_translate_init(void);
+ void xtensa_translate_code(CPUState *cs, TranslationBlock *tb,
+                            int *max_insns, vaddr pc, void *host_pc);
+ void **xtensa_get_regfile_by_name(const char *name, int entries, int bits);
+-void xtensa_breakpoint_handler(CPUState *cs, CPUBreakpoint *hit);
+ void xtensa_register_core(XtensaConfigList *node);
+ void xtensa_sim_open_console(Chardev *chr);
+ void check_interrupts(CPUXtensaState *s);
+diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
+index 2015a4e3d0..eb6758b694 100644
+--- a/target/xtensa/cpu.c
++++ b/target/xtensa/cpu.c
+@@ -316,7 +316,6 @@ static const TCGCPUOps xtensa_tcg_ops = {
  
--/* run_on_cpu_data.target_ptr should always be big enough for a
-- * vaddr even on 32 bit builds
-- */
--QEMU_BUILD_BUG_ON(sizeof(vaddr) > sizeof(run_on_cpu_data));
--
- static inline size_t tlb_n_entries(CPUTLBDescFast *fast)
+     .initialize = xtensa_translate_init,
+     .translate_code = xtensa_translate_code,
+-    .debug_excp_handler = xtensa_breakpoint_handler,
+     .get_tb_cpu_state = xtensa_get_tb_cpu_state,
+     .restore_state_to_opc = xtensa_restore_state_to_opc,
+     .mmu_index = xtensa_cpu_mmu_index,
+@@ -331,6 +330,7 @@ static const TCGCPUOps xtensa_tcg_ops = {
+     .do_transaction_failed = xtensa_cpu_do_transaction_failed,
+     .do_unaligned_access = xtensa_cpu_do_unaligned_access,
+     .debug_check_breakpoint = xtensa_debug_check_breakpoint,
++    .debug_excp_handler = xtensa_breakpoint_handler,
+ #endif /* !CONFIG_USER_ONLY */
+ };
+ 
+diff --git a/target/xtensa/helper.c b/target/xtensa/helper.c
+index 02627ada7c..aa012068de 100644
+--- a/target/xtensa/helper.c
++++ b/target/xtensa/helper.c
+@@ -206,6 +206,7 @@ void xtensa_register_core(XtensaConfigList *node)
+     g_free((gpointer)type.name);
+ }
+ 
++#ifndef CONFIG_USER_ONLY
+ static uint32_t check_hw_breakpoints(CPUXtensaState *env)
  {
-     return (fast->mask >> CPU_TLB_ENTRY_BITS) + 1;
+     unsigned i;
+@@ -249,7 +250,6 @@ void xtensa_breakpoint_handler(CPUState *cs, CPUBreakpoint *hit)
+     }
+ }
+ 
+-#ifndef CONFIG_USER_ONLY
+ void xtensa_cpu_do_unaligned_access(CPUState *cs,
+                                     vaddr addr, MMUAccessType access_type,
+                                     int mmu_idx, uintptr_t retaddr)
 -- 
 2.43.0
 
