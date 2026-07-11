@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13968C44506
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72904C44501
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiE2-0001kB-F5; Sat, 11 Jul 2026 20:39:18 -0400
+	id 1wiiFz-0006Wy-Tr; Sat, 11 Jul 2026 20:41:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigej-0005wE-4k; Sat, 11 Jul 2026 18:58:45 -0400
-Received: from pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.26.1.71])
+ id 1wigkx-0001TX-Mb; Sat, 11 Jul 2026 19:05:11 -0400
+Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.77.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigeg-0001XH-Nv; Sat, 11 Jul 2026 18:58:44 -0400
+ id 1wigkv-00035U-Mc; Sat, 11 Jul 2026 19:05:11 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810723; x=1815346723;
+ t=1783811109; x=1815347109;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=XOPf9T+GRqou3ohjMhRytKrWr3YRkmJayT9N6zuaqro=;
- b=ieK2yNgfTG35ExfqUSGqQ0Crqlik2QRbFGBKRaUpUj3dWDZO8jBXEzsi
- 0vuJdogQIiWJ99JHgnOf3sUv1+Iz/4bjnPO4RqhzeCa4aysMRTTUQPmXx
- X9cnCQFrh4zsqXtqZkoOdx0BmJLXm9I4KZSBhFalzihR926Ov6SYfu9R1
- /GAlgaedQTSYujVW470IqJNJD+m0CrO43y//y0Tf8i3jpSVb3wuob+28M
- AhL/MXDBmSkmzuyxDC2WUOb/VuQg43lS9M+zq4VA7O4un23MHCKfP8yd3
- rg52Xho3fCMITjs6+UIlGH1wzexHVXQPuXXtBth+DmhDpdgLHYoAPuG4J A==;
-X-CSE-ConnectionGUID: LQP+PG6jQe+f2jEHBQRrAg==
-X-CSE-MsgGUID: yGfKPggQS3yblmiFUODA9w==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23522428"
+ bh=W9NMUE63sGoBFljEfTdcDeegt56zvHAcCeou8uRTEx4=;
+ b=OmlmvqFiFRFfn6+nCgo9QR2CQVtCUzqQIg/OVYmPb04iswc2xLoslINj
+ kavBRN7JgwT2QX4qjuXy6e/pn7rp8yDc/PPwGsx5u5vQeYoYSdAbbk7kj
+ lrZI/eQX4JeOZW39rKnZAre0WQelXa+fvDAK9BfpRv7AeGWsafrWyNOGd
+ 9FKnBV7DFDc/DDEG96n/rpGckviEQwqJJHLrVinysQk4ROIrs/Syek2Uf
+ yIUqVD7M9/37y3W3HGbaSsMMp39LvWVgx4Lo7xVKuhOdyXtOI29cfMUZ2
+ dzYbfV5nOfbs3TxZDDtOjnd56SQRcRfwH9FWdyqv79xXOsS0L3xK3xbxJ Q==;
+X-CSE-ConnectionGUID: 7IU69walTnKon8eXDZp++w==
+X-CSE-MsgGUID: jQB4ERe0Tu22dq9WaEpJOg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23493370"
 Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:58:38 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:20654]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.115:2525]
+ by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:05:06 +0000
+Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:26831]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.68:2525]
  with esmtp (Farcaster)
- id 5e51aef8-8b4d-47bc-850d-82ff609a3365; Sat, 11 Jul 2026 22:58:38 +0000 (UTC)
-X-Farcaster-Flow-ID: 5e51aef8-8b4d-47bc-850d-82ff609a3365
+ id 77b236db-b737-411d-9117-2c00d568d606; Sat, 11 Jul 2026 23:05:05 +0000 (UTC)
+X-Farcaster-Flow-ID: 77b236db-b737-411d-9117-2c00d568d606
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
+ EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:58:38 +0000
+ Sat, 11 Jul 2026 23:05:05 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:58:29 +0000
+ Sat, 11 Jul 2026 23:04:57 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 081/134] hw/isa: Give the isabus-bridge a QOM parent
-Date: Sat, 11 Jul 2026 22:36:14 +0000
-Message-ID: <20260711223707.42139-82-graf@amazon.com>
+Subject: [RFC PATCH 106/134] hw/ide: Let ide_init_ioport() take an explicit
+ owner
+Date: Sat, 11 Jul 2026 22:36:39 +0000
+Message-ID: <20260711223707.42139-107-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,18 +102,18 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D036UWC003.ant.amazon.com (10.13.139.214) To
+X-ClientProxiedBy: EX19D046UWA001.ant.amazon.com (10.13.139.112) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.26.1.71;
+Received-SPF: pass client-ip=44.246.77.92;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
@@ -130,160 +131,122 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-isa_bus_new(NULL, ...) implicitly created a sysbus "isabus-bridge"
-and put the ISA bus on it.  That bridge ended up under
-/machine/unattached, which this series is deleting.
+hw/ide/piix.c calls ide_init_ioport() with a NULL ISADevice because
+the PIIX IDE function is a PCI device, not an ISA one.  That NULL
+propagates to isa_register_portio_list() and from there to
+portio_list_init() as owner==NULL, which the following commit turns
+into a hard error.
 
-Split out an explicit isa_bus_new_bridge(parent, ...) helper for
-the five boards that don't already have a south-bridge device to
-own the ISA bus, and make plain isa_bus_new() require a non-NULL
-device.  Callers own the bridge in the composition tree:
-
-  hw/i386/microvm.c   OBJECT(mms)
-  hw/i386/isapc.c     OBJECT(machine)
-  hw/mips/jazz.c      OBJECT(machine)
-  hw/hppa/machine.c   parent (already threaded)
-  hw/ppc/pnv_lpc.c    OBJECT(lpc)   -- the LPC controller
+Change ide_init_ioport() to take an Object *owner directly.  When the
+owner is an ISADevice, keep the existing isa_register_portio_list()
+path so isa_init_ioport() still records the base I/O port for firmware
+paths.  When it is not (the PIIX case), register the port lists with
+the given owner directly.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/hppa/machine.c    |  2 +-
- hw/i386/isapc.c      |  2 +-
- hw/i386/microvm.c    |  2 +-
- hw/isa/isa-bus.c     | 21 +++++++++++----------
- hw/mips/jazz.c       |  2 +-
- hw/ppc/pnv_lpc.c     |  4 ++--
- include/hw/isa/isa.h |  2 ++
- 7 files changed, 19 insertions(+), 16 deletions(-)
+ hw/ide/ide-internal.h |  2 +-
+ hw/ide/ioport.c       | 37 ++++++++++++++++++++++++++-----------
+ hw/ide/isa.c          |  2 +-
+ hw/ide/piix.c         |  2 +-
+ 4 files changed, 29 insertions(+), 14 deletions(-)
 
-diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
-index 002f4299cc..d52f27c51c 100644
---- a/hw/hppa/machine.c
-+++ b/hw/hppa/machine.c
-@@ -108,7 +108,7 @@ static ISABus *hppa_isa_bus(Object *parent, hwaddr addr)
-                           NULL, "isa-io", 0x800);
-     memory_region_add_subregion(get_system_memory(), addr, isa_region);
+diff --git a/hw/ide/ide-internal.h b/hw/ide/ide-internal.h
+index 281d07c9d5..3f48335cdf 100644
+--- a/hw/ide/ide-internal.h
++++ b/hw/ide/ide-internal.h
+@@ -419,7 +419,7 @@ uint32_t ide_data_readl(void *opaque, uint32_t addr);
+ int ide_init_drive(IDEState *s, IDEDevice *dev, IDEDriveKind kind, Error **errp);
+ void ide_exit(IDEState *s);
+ void ide_bus_init_output_irq(IDEBus *bus, qemu_irq irq_out);
+-int ide_init_ioport(IDEBus *bus, ISADevice *isa, int iobase, int iobase2);
++int ide_init_ioport(IDEBus *bus, Object *owner, int iobase, int iobase2);
+ void ide_bus_set_irq(IDEBus *bus);
+ void ide_bus_register_restart_cb(IDEBus *bus);
  
--    isa_bus = isa_bus_new(NULL, get_system_memory(), isa_region,
-+    isa_bus = isa_bus_new_bridge(parent, get_system_memory(), isa_region,
-                           &error_abort);
-     isa_irqs = i8259_init(parent, isa_bus, NULL);
-     isa_bus_register_input_irqs(isa_bus, isa_irqs);
-diff --git a/hw/i386/isapc.c b/hw/i386/isapc.c
-index 842ae94acb..e8d5767b80 100644
---- a/hw/i386/isapc.c
-+++ b/hw/i386/isapc.c
-@@ -108,7 +108,7 @@ static void pc_init_isa(MachineState *machine)
+diff --git a/hw/ide/ioport.c b/hw/ide/ioport.c
+index a2f457f0bd..afafe6844c 100644
+--- a/hw/ide/ioport.c
++++ b/hw/ide/ioport.c
+@@ -1,5 +1,5 @@
+ /*
+- * QEMU IDE disk and CD/DVD-ROM Emulator
++ * QEMU IDE Emulation: PIO ioport registration.
+  *
+  * Copyright (c) 2003 Fabrice Bellard
+  * Copyright (c) 2006 Openedhand Ltd.
+@@ -28,19 +28,34 @@
+ #include "ide-internal.h"
+ #include "trace.h"
  
-     gsi_state = pc_gsi_create(&x86ms->gsi, false);
- 
--    isa_bus = isa_bus_new(NULL, system_memory, system_io,
-+    isa_bus = isa_bus_new_bridge(OBJECT(machine), system_memory, system_io,
-                           &error_abort);
-     isa_bus_register_input_irqs(isa_bus, x86ms->gsi);
- 
-diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
-index 8c61106516..aa0e1ef155 100644
---- a/hw/i386/microvm.c
-+++ b/hw/i386/microvm.c
-@@ -171,7 +171,7 @@ static void microvm_devices_init(MicrovmMachineState *mms)
-     x86ms->gsi = qemu_allocate_irqs(gsi_handler, gsi_state,
-                                     IOAPIC_NUM_PINS * ioapics);
- 
--    isa_bus = isa_bus_new(NULL, get_system_memory(), get_system_io(),
-+    isa_bus = isa_bus_new_bridge(OBJECT(mms), get_system_memory(), get_system_io(),
-                           &error_abort);
-     isa_bus_register_input_irqs(isa_bus, x86ms->gsi);
- 
-diff --git a/hw/isa/isa-bus.c b/hw/isa/isa-bus.c
-index fb20c43869..7a6a595ce7 100644
---- a/hw/isa/isa-bus.c
-+++ b/hw/isa/isa-bus.c
-@@ -52,28 +52,29 @@ static const TypeInfo isa_bus_info = {
- ISABus *isa_bus_new(DeviceState *dev, MemoryRegion* address_space,
-                     MemoryRegion *address_space_io, Error **errp)
+-int ide_init_ioport(IDEBus *bus, ISADevice *dev, int iobase, int iobase2)
++int ide_init_ioport(IDEBus *bus, Object *owner, int iobase, int iobase2)
  {
--    DeviceState *bridge = NULL;
++    ISADevice *isa = ISA_DEVICE(object_dynamic_cast(owner, TYPE_ISA_DEVICE));
+     int ret;
+ 
+-    /* ??? Assume only ISA and PCI configurations, and that the PCI-ISA
+-       bridge has been setup properly to always register with ISA.  */
+-    ret = isa_register_portio_list(dev, &bus->portio_list,
+-                                   iobase, ide_portio_list, bus, "ide");
 -
-     if (isabus) {
-         error_setg(errp, "Can't create a second ISA bus");
-         return NULL;
+-    if (ret == 0 && iobase2) {
+-        ret = isa_register_portio_list(dev, &bus->portio2_list,
+-                                       iobase2, ide_portio2_list, bus, "ide");
++    if (isa) {
++        ret = isa_register_portio_list(isa, &bus->portio_list,
++                                       iobase, ide_portio_list, bus, "ide");
++        if (ret == 0 && iobase2) {
++            ret = isa_register_portio_list(isa, &bus->portio2_list,
++                                           iobase2, ide_portio2_list, bus,
++                                           "ide");
++        }
++        return ret;
      }
--    if (!dev) {
--        bridge = qdev_new_orphan("isabus-bridge");
--        dev = bridge;
--    }
-+    g_assert(dev);
  
-     isabus = ISA_BUS(qbus_new(TYPE_ISA_BUS, dev, NULL));
-     isabus->address_space = address_space;
-     isabus->address_space_io = address_space_io;
- 
--    if (bridge) {
--        sysbus_realize_and_unref(SYS_BUS_DEVICE(bridge), &error_fatal);
--    }
--
-     return isabus;
+-    return ret;
++    /* PIIX3/4: no ISADevice, but ISA I/O space is set up by the PCI-ISA */
++    /* bridge; register the port lists directly with the given owner.   */
++    if (!isa_address_space_io(NULL)) {
++        return -ENODEV;
++    }
++    portio_list_init(&bus->portio_list, owner, ide_portio_list, bus, "ide");
++    portio_list_add(&bus->portio_list, isa_address_space_io(NULL), iobase);
++    if (iobase2) {
++        portio_list_init(&bus->portio2_list, owner,
++                         ide_portio2_list, bus, "ide");
++        portio_list_add(&bus->portio2_list,
++                        isa_address_space_io(NULL), iobase2);
++    }
++    return 0;
  }
+diff --git a/hw/ide/isa.c b/hw/ide/isa.c
+index 37457be035..7949625e00 100644
+--- a/hw/ide/isa.c
++++ b/hw/ide/isa.c
+@@ -71,7 +71,7 @@ static void isa_ide_realizefn(DeviceState *dev, Error **errp)
+     ISAIDEState *s = ISA_IDE(dev);
  
-+ISABus *isa_bus_new_bridge(Object *parent, MemoryRegion *address_space,
-+                           MemoryRegion *address_space_io, Error **errp)
-+{
-+    DeviceState *bridge = qdev_new(parent, "isabus-bridge", "isabus-bridge");
-+    ISABus *bus = isa_bus_new(bridge, address_space, address_space_io, errp);
-+
-+    sysbus_realize(SYS_BUS_DEVICE(bridge), &error_fatal);
-+    return bus;
-+}
-+
- void isa_bus_register_input_irqs(ISABus *bus, qemu_irq *irqs_in)
- {
-     bus->irqs_in = irqs_in;
-diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
-index 23d717d96a..8c52608913 100644
---- a/hw/mips/jazz.c
-+++ b/hw/mips/jazz.c
-@@ -283,7 +283,7 @@ static void mips_jazz_init(MachineState *machine,
-     memory_region_init(isa_mem, NULL, "isa-mem", 0x01000000);
-     memory_region_add_subregion(address_space, 0x90000000, isa_io);
-     memory_region_add_subregion(address_space, 0x91000000, isa_mem);
--    isa_bus = isa_bus_new(NULL, isa_mem, isa_io, &error_abort);
-+    isa_bus = isa_bus_new_bridge(OBJECT(machine), isa_mem, isa_io, &error_abort);
+     ide_bus_init(&s->bus, sizeof(s->bus), dev, 0, 2);
+-    ide_init_ioport(&s->bus, isadev, s->iobase, s->iobase2);
++    ide_init_ioport(&s->bus, OBJECT(isadev), s->iobase, s->iobase2);
+     ide_bus_init_output_irq(&s->bus, isa_get_irq(isadev, s->irqnum));
+     vmstate_register_any(VMSTATE_IF(dev), &vmstate_ide_isa, s);
+     ide_bus_register_restart_cb(&s->bus);
+diff --git a/hw/ide/piix.c b/hw/ide/piix.c
+index a0f2709c69..5c5b91fa52 100644
+--- a/hw/ide/piix.c
++++ b/hw/ide/piix.c
+@@ -134,7 +134,7 @@ static bool pci_piix_init_bus(PCIIDEState *d, unsigned i, Error **errp)
+     int ret;
  
-     /* ISA devices */
-     i8259 = i8259_init(OBJECT(machine), isa_bus, env->irq[4]);
-diff --git a/hw/ppc/pnv_lpc.c b/hw/ppc/pnv_lpc.c
-index d1357dd359..6ae228088f 100644
---- a/hw/ppc/pnv_lpc.c
-+++ b/hw/ppc/pnv_lpc.c
-@@ -972,11 +972,11 @@ ISABus *pnv_lpc_isa_create(PnvLpcController *lpc, bool use_cpld, Error **errp)
-     qemu_irq *irqs;
-     qemu_irq_handler handler;
- 
--    /* let isa_bus_new() create its own bridge on SysBus otherwise
-+    /* let isa_bus_new_bridge() create the bridge as a child of the LPC;
-      * devices specified on the command line won't find the bus and
-      * will fail to create.
-      */
--    isa_bus = isa_bus_new(NULL, &lpc->isa_mem, &lpc->isa_io, &local_err);
-+    isa_bus = isa_bus_new_bridge(OBJECT(lpc), &lpc->isa_mem, &lpc->isa_io, &local_err);
-     if (local_err) {
-         error_propagate(errp, local_err);
-         return NULL;
-diff --git a/include/hw/isa/isa.h b/include/hw/isa/isa.h
-index 9e35d88b1e..79bfe16361 100644
---- a/include/hw/isa/isa.h
-+++ b/include/hw/isa/isa.h
-@@ -69,6 +69,8 @@ struct ISADevice {
- 
- ISABus *isa_bus_new(DeviceState *dev, MemoryRegion *address_space,
-                     MemoryRegion *address_space_io, Error **errp);
-+ISABus *isa_bus_new_bridge(Object *parent, MemoryRegion *address_space,
-+                           MemoryRegion *address_space_io, Error **errp);
- void isa_bus_register_input_irqs(ISABus *bus, qemu_irq *irqs_in);
- void isa_bus_dma(ISABus *bus, IsaDma *dma8, IsaDma *dma16);
- IsaDma *isa_bus_get_dma(ISABus *bus, int nchan);
+     ide_bus_init(&d->bus[i], sizeof(d->bus[i]), DEVICE(d), i, 2);
+-    ret = ide_init_ioport(&d->bus[i], NULL, port_info[i].iobase,
++    ret = ide_init_ioport(&d->bus[i], OBJECT(d), port_info[i].iobase,
+                           port_info[i].iobase2);
+     if (ret) {
+         error_setg_errno(errp, -ret, "Failed to realize %s port %u",
 -- 
 2.47.1
 
