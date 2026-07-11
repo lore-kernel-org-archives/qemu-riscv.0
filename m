@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E9A0C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:39:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 591ABC44501
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:40:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiDp-0001gd-RD; Sat, 11 Jul 2026 20:39:05 -0400
+	id 1wiiDn-0001fX-38; Sat, 11 Jul 2026 20:39:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigqJ-0003p4-0n; Sat, 11 Jul 2026 19:10:44 -0400
+ id 1wigou-0000V5-An; Sat, 11 Jul 2026 19:09:16 -0400
 Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
  ([52.13.214.179])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigqF-0004k2-Iy; Sat, 11 Jul 2026 19:10:41 -0400
+ id 1wigos-0004Ck-B0; Sat, 11 Jul 2026 19:09:16 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811439; x=1815347439;
+ t=1783811354; x=1815347354;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=TbZxnvlCgqxRYbSkjD7PiKw4zwtBC/AGap9WXjlv7fc=;
- b=RgAx2SN/P0w94yf0G1ySDTwUtI9xuGRPZ7utcQEVA7eWppvsL1LwSQTe
- JNDNPHYLSJVWncG0Y+8+1vhFdn1r0M71WUBklLfBk0SYaCseJ++7BT2ie
- heeNrilDiNFP//pzWOqB+4J1g64LRxAK2YL0kvQ4XijJjXle2ysiQilCN
- gcuzN3GsB2PfWPdb7tyxNP6jfnTWmdLWtypCukKfnz4lbgJaaTisEcih+
- Xwf2GZ20jOIA3Cla9wT3A7hyOV3HTYVkZFcFYRvEG3wPPS+FPJ8ffEUXg
- kwggE/lpOZ7SPsLfaQ3M+eYTZbL2OoiaaYVIz5Ee0QwSbm83f0RCO6uLK A==;
-X-CSE-ConnectionGUID: WpYrxjzTR7u+9OBIRIisvw==
-X-CSE-MsgGUID: 4CZpgdhRS7eavosU1qdfEA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23479783"
+ bh=58vuEDPWBKeVxQ+J6iDweV7dM3CK5c5aTeYxd9agUu8=;
+ b=a72pp/4igNW3weucaIV/93T7FqDct6apSzpdUri6DVZqNagV1CdsyD/O
+ YJP5pKJlCCxzRVJTtoz9romzapBn5tunwzKvyUFg65b+orcosQsvre8+r
+ JZsPdPQ2WVGgqZy306A4r0rRCHdvN8w3dFh0arpQ0DyzhMShQc2o1cGbd
+ /lgLQxjP2yMaEr7cirKs8X5FRhCranwmMvGHRItKgosc83HYfhfVh5QnL
+ VI1mQj5E/M4pdqsyV0KPXXGwrJz5YhmQDfMO9x71KKnPdS7NZusGF8hUS
+ TPQDTLNGtM+Doo9KZChi5DScTnZlqfL4QeBRtUZhZEX3CA2o3zYeutCd5 g==;
+X-CSE-ConnectionGUID: nmXXdLb6Sw6HHVzIQV9dOQ==
+X-CSE-MsgGUID: EdW55aA4QoqwLoho2ZfuAw==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23479768"
 Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
  by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:10:36 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:4383]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.42.69:2525]
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:09:10 +0000
+Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.178:17227]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.26.212:2525]
  with esmtp (Farcaster)
- id a19a5bb4-8115-4bef-ad77-f89fe96dee66; Sat, 11 Jul 2026 23:10:36 +0000 (UTC)
-X-Farcaster-Flow-ID: a19a5bb4-8115-4bef-ad77-f89fe96dee66
+ id 97d868e9-9a29-44c2-9832-a89ef0a585d0; Sat, 11 Jul 2026 23:09:10 +0000 (UTC)
+X-Farcaster-Flow-ID: 97d868e9-9a29-44c2-9832-a89ef0a585d0
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:10:35 +0000
+ Sat, 11 Jul 2026 23:09:09 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:10:27 +0000
+ Sat, 11 Jul 2026 23:09:01 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 127/134] hw/microblaze: Parent the CPU under the machine
-Date: Sat, 11 Jul 2026 22:37:00 +0000
-Message-ID: <20260711223707.42139-128-graf@amazon.com>
+Subject: [RFC PATCH 122/134] hw/i386/amd_iommu: Parent internally-created
+ AMDVI-PCI under the IOMMU
+Date: Sat, 11 Jul 2026 22:36:55 +0000
+Message-ID: <20260711223707.42139-123-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,7 +102,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D044UWB002.ant.amazon.com (10.13.139.188) To
+X-ClientProxiedBy: EX19D033UWC002.ant.amazon.com (10.13.139.196) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
 Received-SPF: pass client-ip=52.13.214.179;
  envelope-from=prvs=645f258d4=graf@amazon.de;
@@ -115,7 +116,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:58 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,45 +131,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Both petalogix boards create exactly one MicroBlaze CPU via
-object_new(); parent it as /machine/cpu[0] like every other
-single-CPU board.
+When the AMD IOMMU creates its own PCI companion device (no pci-id
+supplied by the user), parent it under the sysbus IOMMU so it has a
+canonical path at <iommu>/pci.  The user-supplied path already
+parents via -device.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/microblaze/petalogix_ml605_mmu.c      | 3 ++-
- hw/microblaze/petalogix_s3adsp1800_mmu.c | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ hw/i386/amd_iommu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-index 26470b0251..cfc76bf518 100644
---- a/hw/microblaze/petalogix_ml605_mmu.c
-+++ b/hw/microblaze/petalogix_ml605_mmu.c
-@@ -82,7 +82,8 @@ petalogix_ml605_init(MachineState *machine)
-     qemu_irq irq[32];
- 
-     /* init CPUs */
--    cpu = MICROBLAZE_CPU(object_new(TYPE_MICROBLAZE_CPU));
-+    cpu = MICROBLAZE_CPU(object_new_child(OBJECT(machine), "cpu[0]",
-+                                          TYPE_MICROBLAZE_CPU));
-     object_property_set_str(OBJECT(cpu), "version", "8.10.a", &error_abort);
-     /* Use FPU but don't use floating point conversion and square
-      * root instructions
-diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-index 83bf325b2b..82e486e716 100644
---- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
-+++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-@@ -85,7 +85,8 @@ petalogix_s3adsp1800_init(MachineState *machine)
-     MemoryRegion *sysmem = get_system_memory();
-     EndianMode endianness = psms->endianness;
- 
--    cpu = MICROBLAZE_CPU(object_new(TYPE_MICROBLAZE_CPU));
-+    cpu = MICROBLAZE_CPU(object_new_child(OBJECT(machine), "cpu[0]",
-+                                          TYPE_MICROBLAZE_CPU));
-     object_property_set_str(OBJECT(cpu), "version", "7.10.d", &error_abort);
-     object_property_set_bool(OBJECT(cpu), "little-endian",
-                              endianness == ENDIAN_MODE_LITTLE, &error_abort);
+diff --git a/hw/i386/amd_iommu.c b/hw/i386/amd_iommu.c
+index 90252c52af..e3394bad6e 100644
+--- a/hw/i386/amd_iommu.c
++++ b/hw/i386/amd_iommu.c
+@@ -2698,7 +2698,8 @@ static void amdvi_sysbus_realize(DeviceState *dev, Error **errp)
+         s->pci = AMD_IOMMU_PCI(pdev);
+         dc->vmsd = &vmstate_amdvi_sysbus_migratable;
+     } else {
+-        s->pci = AMD_IOMMU_PCI(object_new(TYPE_AMD_IOMMU_PCI));
++        s->pci = AMD_IOMMU_PCI(object_new_child(OBJECT(s), "pci",
++                                                TYPE_AMD_IOMMU_PCI));
+         /* This device should take care of IOMMU PCI properties */
+         if (!qdev_realize(DEVICE(s->pci), &bus->qbus, errp)) {
+             return;
 -- 
 2.47.1
 
