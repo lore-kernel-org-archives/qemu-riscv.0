@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B09F1C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E158C44507
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEN-00020P-An; Sat, 11 Jul 2026 20:39:39 -0400
+	id 1wiiDj-0001cm-3z; Sat, 11 Jul 2026 20:38:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigVg-0002wm-0b; Sat, 11 Jul 2026 18:49:27 -0400
-Received: from pdx-out-015.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([50.112.246.219])
+ id 1wigKC-0006ir-Kj; Sat, 11 Jul 2026 18:37:32 -0400
+Received: from pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.35.192.45])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigVc-0007nk-MM; Sat, 11 Jul 2026 18:49:23 -0400
+ id 1wigKA-00053A-O1; Sat, 11 Jul 2026 18:37:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810160; x=1815346160;
+ t=1783809450; x=1815345450;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=uTqgR4UdH4oJzbAyZN9Bzv3ttav7Q2A0k359yMiyx7Q=;
- b=pzSipITh7PhF0bw1nivMucxA+pCGOhU2Ombv4LshjtuJ0N5f37WrhRv4
- ju7dNVN0U1KuiLRt/+nSHP+MM0axtWYYxSXDOgULkuLqFyj/G4LejsKky
- rYX++zRGqFD/9SNvWgaXetD5Nl1jMZMcrlSrIuk2NUFldQ1JZSsZvTAMp
- Jv4ONpC1F16cY8UaC7YcyZ8bltwgvi2QNKjfFWX6w+paoYqV5vdSTzdk2
- YfV2saLffkwvwygOJ3ajS7XGEQWUP6kpdSsjNg33IbgX+svQvy7ShNQe9
- oeR3G29TKItd7w1kmR6iGFFqfNLXMHSQ4WMiyiwtVhrSNWAST+UPigImM A==;
-X-CSE-ConnectionGUID: IGt1uzYMR8aZ+gt+cFdLlA==
-X-CSE-MsgGUID: zOrW5ybxTCGTFFCgl3hj5Q==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23299967"
-Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-015.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:49:17 +0000
-Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.234:31314]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.115:2525]
+ bh=rb5gq6ZHZBxOqKEpOZvFqZlQVBtfnTT7/ZsZ/2gLzGg=;
+ b=Wt1kToVz+LWCPn0Rbg004ANfb1RhoqIBvVFVxRqW7K5n0Vpdg6rcMZxE
+ N6PiPdd4r4KfBkBH0ehpQnAAUoni2xTmAMgo2+EmVJh+m0bKonenjcyll
+ HOrq/kJNql3N+cljm3UAEnF0hRmU9/v20JhlWFwQPB4K57LNWf/DDrzV8
+ sXJkMxeDLSTBHqI0bGNrOTphsAEAmLfq22exor8qJKErTf33v+ro1T+bq
+ FyRqGBbgLOpkJLXXeIxk0cIQdxrcXzIiDEv9527kOchBUgztb1/sU5Omi
+ 799J3u0TA4F49F99Gi/nMFZj41IxcHvFvYkIeD4o1IEnOLtyX1SgKA0ll g==;
+X-CSE-ConnectionGUID: YXV/bHzRTb+Zoo+Uf0BTOA==
+X-CSE-MsgGUID: TGUJ1lNQTMG0RHrO4RPxHw==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23269516"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
+ by internal-pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:37:27 +0000
+Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.178:25475]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.51.175:2525]
  with esmtp (Farcaster)
- id 6d5a7054-6e9e-4248-a3f0-90d5232929f7; Sat, 11 Jul 2026 22:49:16 +0000 (UTC)
-X-Farcaster-Flow-ID: 6d5a7054-6e9e-4248-a3f0-90d5232929f7
+ id bf881622-812b-48a4-bdae-9e8d4d470b98; Sat, 11 Jul 2026 22:37:26 +0000 (UTC)
+X-Farcaster-Flow-ID: bf881622-812b-48a4-bdae-9e8d4d470b98
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
  EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:49:16 +0000
+ Sat, 11 Jul 2026 22:37:26 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:49:08 +0000
+ Sat, 11 Jul 2026 22:37:17 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 046/134] hw/i2c: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:39 +0000
-Message-ID: <20260711223707.42139-47-graf@amazon.com>
+Subject: [RFC PATCH 001/134] qom: Introduce object_new_child()
+Date: Sat, 11 Jul 2026 22:34:54 +0000
+Message-ID: <20260711223707.42139-2-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D039UWA003.ant.amazon.com (10.13.139.49) To
+X-ClientProxiedBy: EX19D042UWB002.ant.amazon.com (10.13.139.175) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=50.112.246.219;
+Received-SPF: pass client-ip=52.35.192.45;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-015.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -130,330 +130,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/i2c to the new
-parented API introduced earlier in this series, so every onboard
-device gets a stable path in the composition tree instead of landing
-in /machine/unattached with an unstable device[N] name.
+We already have two ways of creating a QOM object with a parent set
+from birth: object_initialize_child() for objects embedded in the
+parent struct, and object_new_with_props() for heap-allocated objects
+that also want a list of string properties applied.  What we do not
+have is the plain heap-allocated dual of object_initialize_child():
+create the object, add it as a child<> of a given parent under a given
+name, and hand the reference to the parent.
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing device for
-composite children.  Names follow existing QOM conventions.
+Board and composite-device code that heap-allocates children today
+therefore either open-codes object_new()+object_property_add_child()
++object_unref(), or skips the parenting step entirely and lets
+device_set_realized() dump the object into /machine/unattached.
 
-Per-site rationale (reviewers: dispute the modeling here):
+Add object_new_child(parent, id, typename) as that missing primitive.
+The reference created by object_new() is transferred to the parent's
+child<> property, so on return the sole reference is held by @parent
+and the caller does not need to unref.  Later patches build the qdev
+and per-bus creation helpers on top of this.
 
-hw/i2c/aspeed_i2c.c:1521 | i2c_slave_create_simple | OBJECT(s) | "slave" | inside AspeedI2CBus DeviceClass.realize(); slave belongs to the bus device
-hw/i2c/core.c:367 | - | ORPHAN-JUSTIFIED | - | i2c_slave_new_orphan() is the orphan-API implementation itself; parented sibling already exists at :376
-hw/i2c/core.c:371 | - | ORPHAN-JUSTIFIED | - | body of i2c_slave_new_orphan(); intentional orphan wrapper
-hw/i2c/core.c:401 | - | ORPHAN-JUSTIFIED | - | i2c_slave_create_simple_orphan() is the orphan-API implementation itself; parented sibling already exists at :386
-hw/i2c/core.c:403 | - | ORPHAN-JUSTIFIED | - | body of i2c_slave_create_simple_orphan(); intentional orphan wrapper
-hw/i2c/smbus_eeprom.c:167 | qdev_new | parent | "eeprom[*]" | helper called from many board inits; thread Object *parent through smbus_eeprom_init_one() and smbus_eeprom_init() and update all 17 callers
-
+Suggested-by: Markus Armbruster <armbru@redhat.com>
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/arm/aspeed_ast1040_evb.c               |  3 ++-
- hw/arm/aspeed_ast10x0_evb.c               |  3 ++-
- hw/arm/aspeed_ast2400_palmetto.c          |  2 +-
- hw/arm/aspeed_ast2400_supermicrox11.c     |  2 +-
- hw/arm/aspeed_ast2500_evb.c               |  2 +-
- hw/arm/aspeed_ast2500_g220a.c             |  2 +-
- hw/arm/aspeed_ast2500_supermicro-x11spi.c |  2 +-
- hw/arm/aspeed_ast2500_witherspoon.c       |  2 +-
- hw/arm/aspeed_ast2600_evb.c               |  2 +-
- hw/i2c/aspeed_i2c.c                       |  4 ++--
- hw/i2c/smbus_eeprom.c                     | 11 ++++++-----
- hw/i386/pc_piix.c                         |  2 +-
- hw/i386/pc_q35.c                          |  2 +-
- hw/mips/fuloong2e.c                       |  2 +-
- hw/mips/malta.c                           |  2 +-
- hw/ppc/amigaone.c                         |  4 ++--
- hw/ppc/pegasos.c                          |  2 +-
- hw/ppc/sam460ex.c                         |  2 +-
- include/hw/i2c/smbus_eeprom.h             |  5 +++--
- 19 files changed, 30 insertions(+), 26 deletions(-)
+ include/qom/object.h | 25 +++++++++++++++++++++++++
+ qom/object.c         | 13 +++++++++++++
+ 2 files changed, 38 insertions(+)
 
-diff --git a/hw/arm/aspeed_ast1040_evb.c b/hw/arm/aspeed_ast1040_evb.c
-index d0326d39f9..fb83087b13 100644
---- a/hw/arm/aspeed_ast1040_evb.c
-+++ b/hw/arm/aspeed_ast1040_evb.c
-@@ -54,7 +54,8 @@ static void ast1040_evb_i2c_init(AspeedMachineState *bmc)
-     AspeedSoCState *soc = bmc->soc;
-     uint8_t *eeprom_buf = g_malloc0(256);
+diff --git a/include/qom/object.h b/include/qom/object.h
+index 11f55613fc..ce6a23b5a1 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -632,6 +632,31 @@ Object *object_new_with_class(ObjectClass *klass);
+  */
+ Object *object_new(const char *typename);
  
--    smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 0), 0x50, eeprom_buf);
-+    smbus_eeprom_init_one(OBJECT(bmc), aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
-+                          eeprom_buf);
-     i2c_slave_create_simple_orphan(aspeed_i2c_get_bus(&soc->i2c, 1), "tmp105", 0x4d);
++/**
++ * object_new_child:
++ * @parent: the QOM composition-tree parent
++ * @id: the child<> property name; the object's canonical QOM path
++ *      becomes @parent's path plus "/" plus @id
++ * @typename: the name of the type of the object to instantiate
++ *
++ * Create a heap-allocated object and immediately add it to the QOM
++ * composition tree as a child of @parent.
++ *
++ * This is the heap-allocated dual of object_initialize_child(): use
++ * this when the child is a pointer member of the parent, and use
++ * object_initialize_child() when the child is embedded in the parent
++ * struct.  See also object_new_with_props() for the variant that
++ * additionally sets a list of properties.
++ *
++ * The reference returned by object_new() is transferred to the child<>
++ * property of @parent, so the object has a reference count of 1 held
++ * by @parent, and the caller does not need to unref.
++ *
++ * Returns: the newly allocated, instantiated and parented object.
++ */
++Object *object_new_child(Object *parent, const char *id,
++                         const char *typename);
++
+ /**
+  * object_new_with_props:
+  * @typename:  The name of the type of the object to instantiate.
+diff --git a/qom/object.c b/qom/object.c
+index f79b2cf361..b4d181b617 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -718,6 +718,19 @@ Object *object_new(const char *typename)
+     return object_new_with_type(ti);
  }
  
-diff --git a/hw/arm/aspeed_ast10x0_evb.c b/hw/arm/aspeed_ast10x0_evb.c
-index 52ead37bc7..dc134b555c 100644
---- a/hw/arm/aspeed_ast10x0_evb.c
-+++ b/hw/arm/aspeed_ast10x0_evb.c
-@@ -70,7 +70,8 @@ static void ast1030_evb_i2c_init(AspeedMachineState *bmc)
++Object *object_new_child(Object *parent, const char *id,
++                          const char *typename)
++{
++    Object *obj;
++
++    g_assert(parent);
++    g_assert(id);
++
++    obj = object_new(typename);
++    object_property_add_child(parent, id, obj);
++    object_unref(obj);
++    return obj;
++}
  
-     /* U10 24C08 connects to SDA/SCL Group 1 by default */
-     uint8_t *eeprom_buf = g_malloc0(32 * 1024);
--    smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 0), 0x50, eeprom_buf);
-+    smbus_eeprom_init_one(OBJECT(bmc), aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
-+                          eeprom_buf);
- 
-     /* U11 LM75 connects to SDA/SCL Group 2 by default */
-     i2c_slave_create_simple_orphan(aspeed_i2c_get_bus(&soc->i2c, 1), "tmp105", 0x4d);
-diff --git a/hw/arm/aspeed_ast2400_palmetto.c b/hw/arm/aspeed_ast2400_palmetto.c
-index d89d042ce2..80f9c911b8 100644
---- a/hw/arm/aspeed_ast2400_palmetto.c
-+++ b/hw/arm/aspeed_ast2400_palmetto.c
-@@ -39,7 +39,7 @@ static void palmetto_bmc_i2c_init(AspeedMachineState *bmc)
-      */
-     i2c_slave_create_simple_orphan(aspeed_i2c_get_bus(&soc->i2c, 0), "ds1338", 0x68);
- 
--    smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
-+    smbus_eeprom_init_one(OBJECT(bmc), aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
-                           eeprom_buf);
- 
-     /* add a TMP423 temperature sensor */
-diff --git a/hw/arm/aspeed_ast2400_supermicrox11.c b/hw/arm/aspeed_ast2400_supermicrox11.c
-index 9c90998754..b18adf3981 100644
---- a/hw/arm/aspeed_ast2400_supermicrox11.c
-+++ b/hw/arm/aspeed_ast2400_supermicrox11.c
-@@ -39,7 +39,7 @@ static void supermicrox11_bmc_i2c_init(AspeedMachineState *bmc)
-      */
-     i2c_slave_create_simple_orphan(aspeed_i2c_get_bus(&soc->i2c, 0), "ds1338", 0x68);
- 
--    smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
-+    smbus_eeprom_init_one(OBJECT(bmc), aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
-                           eeprom_buf);
- 
-     /* add a TMP423 temperature sensor */
-diff --git a/hw/arm/aspeed_ast2500_evb.c b/hw/arm/aspeed_ast2500_evb.c
-index e46ce4a5aa..ba8a56bafd 100644
---- a/hw/arm/aspeed_ast2500_evb.c
-+++ b/hw/arm/aspeed_ast2500_evb.c
-@@ -30,7 +30,7 @@ static void ast2500_evb_i2c_init(AspeedMachineState *bmc)
-     AspeedSoCState *soc = bmc->soc;
-     uint8_t *eeprom_buf = g_malloc0(8 * 1024);
- 
--    smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 3), 0x50,
-+    smbus_eeprom_init_one(OBJECT(bmc), aspeed_i2c_get_bus(&soc->i2c, 3), 0x50,
-                           eeprom_buf);
- 
-     /* The AST2500 EVB expects a LM75 but a TMP105 is compatible */
-diff --git a/hw/arm/aspeed_ast2500_g220a.c b/hw/arm/aspeed_ast2500_g220a.c
-index 577ee0aff4..27c9dc436a 100644
---- a/hw/arm/aspeed_ast2500_g220a.c
-+++ b/hw/arm/aspeed_ast2500_g220a.c
-@@ -59,7 +59,7 @@ static void g220a_bmc_i2c_init(AspeedMachineState *bmc)
-             0x46, 0x46, 0xc4, 0x48, 0x48, 0x47, 0x47, 0xc1,
-             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xa7,
-     };
--    smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 4), 0x57,
-+    smbus_eeprom_init_one(OBJECT(bmc), aspeed_i2c_get_bus(&soc->i2c, 4), 0x57,
-                           eeprom_buf);
- }
- 
-diff --git a/hw/arm/aspeed_ast2500_supermicro-x11spi.c b/hw/arm/aspeed_ast2500_supermicro-x11spi.c
-index 9e95d26901..bea459eeaa 100644
---- a/hw/arm/aspeed_ast2500_supermicro-x11spi.c
-+++ b/hw/arm/aspeed_ast2500_supermicro-x11spi.c
-@@ -35,7 +35,7 @@ static void supermicro_x11spi_bmc_i2c_init(AspeedMachineState *bmc)
-      */
-     i2c_slave_create_simple_orphan(aspeed_i2c_get_bus(&soc->i2c, 0), "ds1338", 0x68);
- 
--    smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
-+    smbus_eeprom_init_one(OBJECT(bmc), aspeed_i2c_get_bus(&soc->i2c, 0), 0x50,
-                           eeprom_buf);
- 
-     /* add a TMP423 temperature sensor */
-diff --git a/hw/arm/aspeed_ast2500_witherspoon.c b/hw/arm/aspeed_ast2500_witherspoon.c
-index cb57cb421a..dda090ab60 100644
---- a/hw/arm/aspeed_ast2500_witherspoon.c
-+++ b/hw/arm/aspeed_ast2500_witherspoon.c
-@@ -73,7 +73,7 @@ static void witherspoon_bmc_i2c_init(AspeedMachineState *bmc)
-      */
-     i2c_slave_create_simple_orphan(aspeed_i2c_get_bus(&soc->i2c, 11), "ds1338", 0x32);
- 
--    smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 11), 0x51,
-+    smbus_eeprom_init_one(OBJECT(bmc), aspeed_i2c_get_bus(&soc->i2c, 11), 0x51,
-                           eeprom_buf);
-     dev = DEVICE(i2c_slave_new_orphan(TYPE_PCA9552, 0x60));
-     qdev_prop_set_string(dev, "description", "pca0");
-diff --git a/hw/arm/aspeed_ast2600_evb.c b/hw/arm/aspeed_ast2600_evb.c
-index cf1e2b006c..ab7667da75 100644
---- a/hw/arm/aspeed_ast2600_evb.c
-+++ b/hw/arm/aspeed_ast2600_evb.c
-@@ -23,7 +23,7 @@ static void ast2600_evb_i2c_init(AspeedMachineState *bmc)
-     AspeedSoCState *soc = bmc->soc;
-     uint8_t *eeprom_buf = g_malloc0(8 * 1024);
- 
--    smbus_eeprom_init_one(aspeed_i2c_get_bus(&soc->i2c, 7), 0x50,
-+    smbus_eeprom_init_one(OBJECT(bmc), aspeed_i2c_get_bus(&soc->i2c, 7), 0x50,
-                           eeprom_buf);
- 
-     /* LM75 is compatible with TMP105 driver */
-diff --git a/hw/i2c/aspeed_i2c.c b/hw/i2c/aspeed_i2c.c
-index ac09e5f706..c58ecea011 100644
---- a/hw/i2c/aspeed_i2c.c
-+++ b/hw/i2c/aspeed_i2c.c
-@@ -1518,8 +1518,8 @@ static void aspeed_i2c_bus_realize(DeviceState *dev, Error **errp)
-     sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
- 
-     s->bus = i2c_init_bus(dev, s->name);
--    s->slave = i2c_slave_create_simple_orphan(s->bus, TYPE_ASPEED_I2C_BUS_SLAVE,
--                                       0xff);
-+    s->slave = i2c_slave_create_simple(OBJECT(s), "slave", s->bus,
-+                                       TYPE_ASPEED_I2C_BUS_SLAVE, 0xff);
- 
-     memory_region_init_io(&s->mr, OBJECT(s), &aspeed_i2c_bus_ops,
-                           s, s->name, aic->reg_size);
-diff --git a/hw/i2c/smbus_eeprom.c b/hw/i2c/smbus_eeprom.c
-index 59fe07b16b..aaf90a10da 100644
---- a/hw/i2c/smbus_eeprom.c
-+++ b/hw/i2c/smbus_eeprom.c
-@@ -160,18 +160,19 @@ static const TypeInfo smbus_eeprom_types[] = {
- 
- DEFINE_TYPES(smbus_eeprom_types)
- 
--void smbus_eeprom_init_one(I2CBus *smbus, uint8_t address, uint8_t *eeprom_buf)
-+void smbus_eeprom_init_one(Object *parent, I2CBus *smbus, uint8_t address,
-+                           uint8_t *eeprom_buf)
- {
-     DeviceState *dev;
- 
--    dev = qdev_new_orphan(TYPE_SMBUS_EEPROM);
-+    dev = qdev_new(parent, "eeprom[*]", TYPE_SMBUS_EEPROM);
-     qdev_prop_set_uint8(dev, "address", address);
-     /* FIXME: use an array of byte or block backend property? */
-     SMBUS_EEPROM(dev)->init_data = eeprom_buf;
--    qdev_realize_and_unref(dev, (BusState *)smbus, &error_fatal);
-+    qdev_realize(dev, (BusState *)smbus, &error_fatal);
- }
- 
--void smbus_eeprom_init(I2CBus *smbus, int nb_eeprom,
-+void smbus_eeprom_init(Object *parent, I2CBus *smbus, int nb_eeprom,
-                        const uint8_t *eeprom_spd, int eeprom_spd_size)
- {
-     int i;
-@@ -184,7 +185,7 @@ void smbus_eeprom_init(I2CBus *smbus, int nb_eeprom,
-     }
- 
-     for (i = 0; i < nb_eeprom; i++) {
--        smbus_eeprom_init_one(smbus, 0x50 + i,
-+        smbus_eeprom_init_one(parent, smbus, 0x50 + i,
-                               eeprom_buf + (i * SMBUS_EEPROM_SIZE));
-     }
- }
-diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-index 3f361c8396..44ce592ea2 100644
---- a/hw/i386/pc_piix.c
-+++ b/hw/i386/pc_piix.c
-@@ -304,7 +304,7 @@ static void pc_init1(MachineState *machine, const char *pci_type)
-         qdev_connect_gpio_out_named(DEVICE(piix4_pm), "smi-irq", 0, smi_irq);
-         pcms->smbus = I2C_BUS(qdev_get_child_bus(DEVICE(piix4_pm), "i2c"));
-         /* TODO: Populate SPD eeprom data.  */
--        smbus_eeprom_init(pcms->smbus, 8, NULL, 0);
-+        smbus_eeprom_init(OBJECT(machine), pcms->smbus, 8, NULL, 0);
- 
-         object_property_add_link(OBJECT(machine), PC_MACHINE_ACPI_DEVICE_PROP,
-                                  TYPE_HOTPLUG_HANDLER,
-diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
-index a4a7169398..bfea390825 100644
---- a/hw/i386/pc_q35.c
-+++ b/hw/i386/pc_q35.c
-@@ -317,7 +317,7 @@ static void pc_q35_init(MachineState *machine)
-                                               TYPE_ICH9_SMB_DEVICE);
-         pcms->smbus = I2C_BUS(qdev_get_child_bus(DEVICE(smb), "i2c"));
- 
--        smbus_eeprom_init(pcms->smbus, 8, NULL, 0);
-+        smbus_eeprom_init(OBJECT(machine), pcms->smbus, 8, NULL, 0);
-     }
- 
-     /* the rest devices to which pci devfn is automatically assigned */
-diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
-index 5e5ade46f3..0046423d40 100644
---- a/hw/mips/fuloong2e.c
-+++ b/hw/mips/fuloong2e.c
-@@ -322,7 +322,7 @@ static void mips_fuloong2e_init(MachineState *machine)
- 
-     /* Populate SPD eeprom data */
-     spd_data = spd_data_generate(DDR, machine->ram_size);
--    smbus_eeprom_init_one(smbus, 0x50, spd_data);
-+    smbus_eeprom_init_one(OBJECT(machine), smbus, 0x50, spd_data);
- 
-     /* Network card: RTL8139D */
-     network_init(pci_bus);
-diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-index da6dd15a59..52aae144da 100644
---- a/hw/mips/malta.c
-+++ b/hw/mips/malta.c
-@@ -1249,7 +1249,7 @@ void mips_malta_init(MachineState *machine)
-     smbus = I2C_BUS(qdev_get_child_bus(dev, "i2c"));
-     generate_eeprom_spd(&smbus_eeprom_buf[0 * 256], ram_size);
-     generate_eeprom_serial(&smbus_eeprom_buf[6 * 256]);
--    smbus_eeprom_init(smbus, 8, smbus_eeprom_buf, smbus_eeprom_size);
-+    smbus_eeprom_init(OBJECT(machine), smbus, 8, smbus_eeprom_buf, smbus_eeprom_size);
-     g_free(smbus_eeprom_buf);
- 
-     /* Super I/O: SMS FDC37M817 */
-diff --git a/hw/ppc/amigaone.c b/hw/ppc/amigaone.c
-index 80802d42c6..866e5547d6 100644
---- a/hw/ppc/amigaone.c
-+++ b/hw/ppc/amigaone.c
-@@ -338,9 +338,9 @@ static void amigaone_init(MachineState *machine)
-         spd_data = spd_data_generate(SDR, machine->ram_size);
-     }
-     fix_spd_data(spd_data);
--    smbus_eeprom_init_one(i2c_bus, 0x51, spd_data);
-+    smbus_eeprom_init_one(OBJECT(machine), i2c_bus, 0x51, spd_data);
-     if (machine->ram_size > 512 * MiB) {
--        smbus_eeprom_init_one(i2c_bus, 0x52, spd_data);
-+        smbus_eeprom_init_one(OBJECT(machine), i2c_bus, 0x52, spd_data);
-     }
- 
-     pci_mem = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
-diff --git a/hw/ppc/pegasos.c b/hw/ppc/pegasos.c
-index bba73f60c8..2974625f1c 100644
---- a/hw/ppc/pegasos.c
-+++ b/hw/ppc/pegasos.c
-@@ -261,7 +261,7 @@ static void pegasos_init(MachineState *machine)
-     dev = PCI_DEVICE(object_resolve_path_component(via, "pm"));
-     i2c_bus = I2C_BUS(qdev_get_child_bus(DEVICE(dev), "i2c"));
-     spd_data = spd_data_generate(DDR, machine->ram_size);
--    smbus_eeprom_init_one(i2c_bus, 0x57, spd_data);
-+    smbus_eeprom_init_one(OBJECT(machine), i2c_bus, 0x57, spd_data);
- 
-     /* other PC hardware */
-     pci_vga_init(pci_bus);
-diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
-index d23d2c2bd8..8623848633 100644
---- a/hw/ppc/sam460ex.c
-+++ b/hw/ppc/sam460ex.c
-@@ -343,7 +343,7 @@ static void sam460ex_init(MachineState *machine)
-     spd_data = spd_data_generate(machine->ram_size < 128 * MiB ? DDR : DDR2,
-                                  machine->ram_size);
-     spd_data[20] = 4; /* SO-DIMM module */
--    smbus_eeprom_init_one(i2c, 0x50, spd_data);
-+    smbus_eeprom_init_one(OBJECT(machine), i2c, 0x50, spd_data);
-     /* RTC */
-     i2c_slave_create_simple_orphan(i2c, "m41t80", 0x68);
- 
-diff --git a/include/hw/i2c/smbus_eeprom.h b/include/hw/i2c/smbus_eeprom.h
-index 61a54cda76..f3aefada42 100644
---- a/include/hw/i2c/smbus_eeprom.h
-+++ b/include/hw/i2c/smbus_eeprom.h
-@@ -26,8 +26,9 @@
- #include "system/ram_addr.h"
- #include "hw/i2c/i2c.h"
- 
--void smbus_eeprom_init_one(I2CBus *bus, uint8_t address, uint8_t *eeprom_buf);
--void smbus_eeprom_init(I2CBus *bus, int nb_eeprom,
-+void smbus_eeprom_init_one(Object *parent, I2CBus *bus, uint8_t address,
-+                           uint8_t *eeprom_buf);
-+void smbus_eeprom_init(Object *parent, I2CBus *bus, int nb_eeprom,
-                        const uint8_t *eeprom_spd, int size);
- 
- enum sdram_type { SDR = 0x4, DDR = 0x7, DDR2 = 0x8 };
+ Object *object_new_with_props(const char *typename,
+                               Object *parent,
 -- 
 2.47.1
 
