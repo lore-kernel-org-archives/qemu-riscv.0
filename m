@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCF1C44506
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8736BC43458
 	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:42:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEO-000299-W9; Sat, 11 Jul 2026 20:39:41 -0400
+	id 1wiiEK-0001u7-VR; Sat, 11 Jul 2026 20:39:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigU1-0000Yz-Fc; Sat, 11 Jul 2026 18:47:43 -0400
+ id 1wigVY-0002sQ-6j; Sat, 11 Jul 2026 18:49:18 -0400
 Received: from pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com
  ([52.26.1.71])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigTx-0007Td-IH; Sat, 11 Jul 2026 18:47:40 -0400
+ id 1wigVV-0007nK-J5; Sat, 11 Jul 2026 18:49:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810057; x=1815346057;
+ t=1783810153; x=1815346153;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=zLaJZbstl8kCaT47m5gOMY1Yj7cW3tZOc71HipZg02k=;
- b=BEgVXP6CUp9JzgDnM/L9BleklE+aLt9bsTIZRM3VpgOHc3H32F4qmI1B
- CQrn0KMG2xlVIraHhKaBmMPlgqEzepHkgAaqHHFsSN55wVErvx7mWv7fZ
- 00P8WiKrj/KIvYJuF7yr4SM6vvo0UlxQ6Uz3ndFHdAwkGT0fpSrWdPLxM
- q8kZthShfhKZuB7Q23S4PV747gfI9B0IuwQxMDoO0mByRhjPLzQdSkzzY
- XZveXF5CrQZ/FLxuxKNMPZxSfzB8Ex+Pvlv+uNoF0bmNVc3qXR7EuPD9J
- ASi+kkLAewLTrm3ygNWAUyUYH6DqNatfJ6HMlqLcs5VJC+kl/vG6N8opk g==;
-X-CSE-ConnectionGUID: BMLkUgHzSReyuYV8Q3q0dQ==
-X-CSE-MsgGUID: Z0LYEda1Qz2xFcxbk7MKXA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23522210"
-Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
+ bh=nsryrza8hPhJXkUM7VI0bGZh0HwRx2yl3wY+S42Hlgk=;
+ b=dGUCvO5YLNENdYnvl4U3Q1UNdxuJ6i+hvcVq2WKvzaLqZMZb8CUyqcUz
+ 0xYhE6utixoclcGiMsB8CcyjYqK2XxNtRbTO0AdU+If7vUpkAbWq1OpXD
+ 8Hx2ytKyceu0ghUYL0tN0Rgo3jRuM2KOO/kQ8FTV7ltTsw4Hyf9pkXUd4
+ PhCEDKkP+wf4JvZ2PpDH+M2uSiKMyfK/sKLfEseY3I/x5k7TLK+AV9MzS
+ QRfSBNmzApeAiShHI7+Y3H67Hn3oabNQqUVe/v9e161u2jiERbRx7ricw
+ lrBtrwGetV4lJagUPDgZtvLQh6siIxgmC6Q8lZlL1DHk+EXt9N1kwFOFl A==;
+X-CSE-ConnectionGUID: qp0aeglXRCOno4e0p411hQ==
+X-CSE-MsgGUID: UNOW2f/KQYCtKhSeq8X8jg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23522270"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
  by internal-pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:47:34 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:17375]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.115:2525]
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:49:08 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:7900]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.26.212:2525]
  with esmtp (Farcaster)
- id 9086ab23-efe1-4c8d-a00a-cedf7874375c; Sat, 11 Jul 2026 22:47:33 +0000 (UTC)
-X-Farcaster-Flow-ID: 9086ab23-efe1-4c8d-a00a-cedf7874375c
+ id b50487ec-7378-4377-a95e-1f438a473bcc; Sat, 11 Jul 2026 22:49:08 +0000 (UTC)
+X-Farcaster-Flow-ID: b50487ec-7378-4377-a95e-1f438a473bcc
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
  EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:47:33 +0000
+ Sat, 11 Jul 2026 22:49:08 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:47:25 +0000
+ Sat, 11 Jul 2026 22:48:59 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 039/134] hw/ide: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:32 +0000
-Message-ID: <20260711223707.42139-40-graf@amazon.com>
+Subject: [RFC PATCH 045/134] hw/rtc: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:38 +0000
+Message-ID: <20260711223707.42139-46-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,7 +101,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D040UWA002.ant.amazon.com (10.13.139.113) To
+X-ClientProxiedBy: EX19D039UWA003.ant.amazon.com (10.13.139.49) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
 Received-SPF: pass client-ip=52.26.1.71;
  envelope-from=prvs=645f258d4=graf@amazon.de;
@@ -130,7 +130,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/ide to the new
+Convert the *_orphan() device-creation calls in hw/rtc to the new
 parented API introduced earlier in this series, so every onboard
 device gets a stable path in the composition tree instead of landing
 in /machine/unattached with an unstable device[N] name.
@@ -141,92 +141,162 @@ composite children.  Names follow existing QOM conventions.
 
 Per-site rationale (reviewers: dispute the modeling here):
 
-hw/ide/ide-bus.c:78 | qdev_new | OBJECT(bus->qbus.parent) | "drive[*]" | drive is child of the IDE controller device that owns the bus; helper called from many controllers so use bus->qbus.parent
-hw/ide/isa.c:87 | isa_new | parent | "ide[*]" | helper called from isapc board init loop; thread Object *parent through isa_ide_init()
+hw/rtc/mc146818rtc.c:933 | isa_new | parent | "rtc" | helper called from board init; thread Object *parent through mc146818_rtc_init() and its 4 callers (microvm, pnv, jazz, dp264)
+hw/rtc/sun4v-rtc.c:60 | qdev_new | parent | "rtc" | helper called from niagara board init; thread Object *parent through sun4v_rtc_init()
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/i386/isapc.c      | 3 ++-
- hw/ide/ide-bus.c     | 5 +++--
- hw/ide/isa.c         | 7 ++++---
- include/hw/ide/isa.h | 3 ++-
- 4 files changed, 11 insertions(+), 7 deletions(-)
+ hw/alpha/dp264.c             | 2 +-
+ hw/i386/microvm.c            | 3 ++-
+ hw/mips/jazz.c               | 2 +-
+ hw/ppc/pnv.c                 | 2 +-
+ hw/rtc/mc146818rtc.c         | 6 +++---
+ hw/rtc/sun4v-rtc.c           | 6 +++---
+ hw/sparc64/niagara.c         | 2 +-
+ include/hw/rtc/mc146818rtc.h | 2 +-
+ include/hw/rtc/sun4v-rtc.h   | 2 +-
+ 9 files changed, 14 insertions(+), 13 deletions(-)
 
-diff --git a/hw/i386/isapc.c b/hw/i386/isapc.c
-index 655ec599b5..c2a3f23f2c 100644
---- a/hw/i386/isapc.c
-+++ b/hw/i386/isapc.c
-@@ -142,7 +142,8 @@ static void pc_init_isa(MachineState *machine)
-     for (i = 0; i < MAX_IDE_BUS; i++) {
-         ISADevice *dev;
-         char busname[] = "ide.0";
--        dev = isa_ide_init(isa_bus, ide_iobase[i], ide_iobase2[i],
-+        dev = isa_ide_init(OBJECT(machine), isa_bus,
-+                            ide_iobase[i], ide_iobase2[i],
-                             ide_irq[i],
-                             hd[MAX_IDE_DEVS * i], hd[MAX_IDE_DEVS * i + 1]);
-         /*
-diff --git a/hw/ide/ide-bus.c b/hw/ide/ide-bus.c
-index 40ba94235f..4473709a04 100644
---- a/hw/ide/ide-bus.c
-+++ b/hw/ide/ide-bus.c
-@@ -75,11 +75,12 @@ IDEDevice *ide_bus_create_drive(IDEBus *bus, int unit, DriveInfo *drive)
- {
-     DeviceState *dev;
+diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
+index 9cd448cff1..40dee88f2d 100644
+--- a/hw/alpha/dp264.c
++++ b/hw/alpha/dp264.c
+@@ -119,7 +119,7 @@ static void clipper_init(MachineState *machine)
+     qdev_connect_gpio_out(i82378_dev, 0, isa_irq);
  
--    dev = qdev_new_orphan(drive->media_cd ? "ide-cd" : "ide-hd");
-+    dev = qdev_new(OBJECT(bus->qbus.parent), "drive[*]",
-+                   drive->media_cd ? "ide-cd" : "ide-hd");
-     qdev_prop_set_uint32(dev, "unit", unit);
-     qdev_prop_set_drive_err(dev, "drive", blk_by_legacy_dinfo(drive),
-                             &error_fatal);
--    qdev_realize_and_unref(dev, &bus->qbus, &error_fatal);
-+    qdev_realize(dev, &bus->qbus, &error_fatal);
-     return DO_UPCAST(IDEDevice, qdev, dev);
+     /* Since we have an SRM-compatible PALcode, use the SRM epoch.  */
+-    mc146818_rtc_init(isa_bus, 1900, rtc_irq);
++    mc146818_rtc_init(mo, isa_bus, 1900, rtc_irq);
+ 
+     /* VGA setup.  Don't bother loading the bios.  */
+     pci_vga_init(pci_bus);
+diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
+index 16bd885541..d13036bd73 100644
+--- a/hw/i386/microvm.c
++++ b/hw/i386/microvm.c
+@@ -268,7 +268,8 @@ static void microvm_devices_init(MicrovmMachineState *mms)
+ 
+     if (mms->rtc == ON_OFF_AUTO_ON ||
+         (mms->rtc == ON_OFF_AUTO_AUTO && !kvm_enabled())) {
+-        microvm_set_rtc(mms, mc146818_rtc_init(isa_bus, 2000, NULL));
++        microvm_set_rtc(mms, mc146818_rtc_init(OBJECT(mms), isa_bus,
++                                               2000, NULL));
+     }
+ 
+     if (mms->isa_serial) {
+diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
+index 62f2350d36..938aaf3fe1 100644
+--- a/hw/mips/jazz.c
++++ b/hw/mips/jazz.c
+@@ -354,7 +354,7 @@ static void mips_jazz_init(MachineState *machine,
+     fdctrl_init_sysbus(qdev_get_gpio_in(rc4030, 1), 0x80003000, fds);
+ 
+     /* Real time clock */
+-    mc146818_rtc_init(isa_bus, 1980, NULL);
++    mc146818_rtc_init(OBJECT(machine), isa_bus, 1980, NULL);
+     memory_region_init_io(rtc, NULL, &rtc_ops, NULL, "rtc", 0x1000);
+     memory_region_add_subregion(address_space, 0x80004000, rtc);
+ 
+diff --git a/hw/ppc/pnv.c b/hw/ppc/pnv.c
+index 0a22d854d7..1eb3c09672 100644
+--- a/hw/ppc/pnv.c
++++ b/hw/ppc/pnv.c
+@@ -1314,7 +1314,7 @@ static void pnv_init(MachineState *machine)
+     serial_hds_isa_init(pnv->isa_bus, 0, MAX_ISA_SERIAL_PORTS);
+ 
+     /* Create an RTC ISA device too */
+-    mc146818_rtc_init(pnv->isa_bus, 2000, NULL);
++    mc146818_rtc_init(OBJECT(machine), pnv->isa_bus, 2000, NULL);
+ 
+     /*
+      * Create the machine BMC simulator and the IPMI BT device for
+diff --git a/hw/rtc/mc146818rtc.c b/hw/rtc/mc146818rtc.c
+index b9e5ec6ff6..a4d6d59502 100644
+--- a/hw/rtc/mc146818rtc.c
++++ b/hw/rtc/mc146818rtc.c
+@@ -923,18 +923,18 @@ static void rtc_realizefn(DeviceState *dev, Error **errp)
+     qdev_init_gpio_out(dev, &s->irq, 1);
  }
  
-diff --git a/hw/ide/isa.c b/hw/ide/isa.c
-index c9c997344b..37457be035 100644
---- a/hw/ide/isa.c
-+++ b/hw/ide/isa.c
-@@ -77,19 +77,20 @@ static void isa_ide_realizefn(DeviceState *dev, Error **errp)
-     ide_bus_register_restart_cb(&s->bus);
- }
- 
--ISADevice *isa_ide_init(ISABus *bus, int iobase, int iobase2, int irqnum,
-+ISADevice *isa_ide_init(Object *parent, ISABus *bus,
-+                        int iobase, int iobase2, int irqnum,
-                         DriveInfo *hd0, DriveInfo *hd1)
+-MC146818RtcState *mc146818_rtc_init(ISABus *bus, int base_year,
++MC146818RtcState *mc146818_rtc_init(Object *parent, ISABus *bus, int base_year,
+                                     qemu_irq intercept_irq)
  {
      DeviceState *dev;
      ISADevice *isadev;
-     ISAIDEState *s;
+     MC146818RtcState *s;
  
--    isadev = isa_new_orphan(TYPE_ISA_IDE);
-+    isadev = isa_new(parent, "ide[*]", TYPE_ISA_IDE);
+-    isadev = isa_new_orphan(TYPE_MC146818_RTC);
++    isadev = isa_new(parent, "rtc[*]", TYPE_MC146818_RTC);
      dev = DEVICE(isadev);
-     qdev_prop_set_uint32(dev, "iobase",  iobase);
-     qdev_prop_set_uint32(dev, "iobase2", iobase2);
-     qdev_prop_set_uint32(dev, "irq",     irqnum);
+     s = MC146818_RTC(isadev);
+     qdev_prop_set_int32(dev, "base_year", base_year);
 -    isa_realize_and_unref(isadev, bus, &error_fatal);
 +    qdev_realize(dev, BUS(bus), &error_fatal);
+     if (intercept_irq) {
+         qdev_connect_gpio_out(dev, 0, intercept_irq);
+     } else {
+diff --git a/hw/rtc/sun4v-rtc.c b/hw/rtc/sun4v-rtc.c
+index 257f70885d..ee07b7a979 100644
+--- a/hw/rtc/sun4v-rtc.c
++++ b/hw/rtc/sun4v-rtc.c
+@@ -52,15 +52,15 @@ static const MemoryRegionOps sun4v_rtc_ops = {
+     .endianness = DEVICE_BIG_ENDIAN,
+ };
  
-     s = ISA_IDE(dev);
-     if (hd0) {
-diff --git a/include/hw/ide/isa.h b/include/hw/ide/isa.h
-index 1cd0ff1fa6..18fe363a1a 100644
---- a/include/hw/ide/isa.h
-+++ b/include/hw/ide/isa.h
-@@ -14,7 +14,8 @@
- #define TYPE_ISA_IDE "isa-ide"
- OBJECT_DECLARE_SIMPLE_TYPE(ISAIDEState, ISA_IDE)
+-void sun4v_rtc_init(hwaddr addr)
++void sun4v_rtc_init(Object *parent, hwaddr addr)
+ {
+     DeviceState *dev;
+     SysBusDevice *s;
  
--ISADevice *isa_ide_init(ISABus *bus, int iobase, int iobase2, int irqnum,
-+ISADevice *isa_ide_init(Object *parent, ISABus *bus,
-+                        int iobase, int iobase2, int irqnum,
-                         DriveInfo *hd0, DriveInfo *hd1);
+-    dev = qdev_new_orphan(TYPE_SUN4V_RTC);
++    dev = qdev_new(parent, "rtc", TYPE_SUN4V_RTC);
+     s = SYS_BUS_DEVICE(dev);
+ 
+-    sysbus_realize_and_unref(s, &error_fatal);
++    sysbus_realize(s, &error_fatal);
+ 
+     sysbus_mmio_map(s, 0, addr);
+ }
+diff --git a/hw/sparc64/niagara.c b/hw/sparc64/niagara.c
+index 1211ecb82d..d47d62dac7 100644
+--- a/hw/sparc64/niagara.c
++++ b/hw/sparc64/niagara.c
+@@ -154,7 +154,7 @@ static void niagara_init(MachineState *machine)
+     serial_mm_init(sysmem, NIAGARA_UART_BASE, 0, NULL,
+                    115200, serial_hd(0), DEVICE_BIG_ENDIAN);
+     create_unimplemented_device("sun4v-iob", NIAGARA_IOBBASE, NIAGARA_IOBSIZE);
+-    sun4v_rtc_init(NIAGARA_RTC_BASE);
++    sun4v_rtc_init(OBJECT(machine), NIAGARA_RTC_BASE);
+ }
+ 
+ static void niagara_class_init(ObjectClass *oc, const void *data)
+diff --git a/include/hw/rtc/mc146818rtc.h b/include/hw/rtc/mc146818rtc.h
+index 64893be151..1bdd63cf5c 100644
+--- a/include/hw/rtc/mc146818rtc.h
++++ b/include/hw/rtc/mc146818rtc.h
+@@ -51,7 +51,7 @@ struct MC146818RtcState {
+ 
+ #define RTC_ISA_IRQ 8
+ 
+-MC146818RtcState *mc146818_rtc_init(ISABus *bus, int base_year,
++MC146818RtcState *mc146818_rtc_init(Object *parent, ISABus *bus, int base_year,
+                                     qemu_irq intercept_irq);
+ void mc146818rtc_set_cmos_data(MC146818RtcState *s, int addr, int val);
+ int mc146818rtc_get_cmos_data(MC146818RtcState *s, int addr);
+diff --git a/include/hw/rtc/sun4v-rtc.h b/include/hw/rtc/sun4v-rtc.h
+index 26a9eb6196..9152a0082f 100644
+--- a/include/hw/rtc/sun4v-rtc.h
++++ b/include/hw/rtc/sun4v-rtc.h
+@@ -14,6 +14,6 @@
+ 
+ #include "exec/hwaddr.h"
+ 
+-void sun4v_rtc_init(hwaddr addr);
++void sun4v_rtc_init(Object *parent, hwaddr addr);
  
  #endif
 -- 
