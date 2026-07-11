@@ -4,107 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35C15C44501
-	for <qemu-riscv@archiver.kernel.org>; Sat, 11 Jul 2026 08:30:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6527EC43458
+	for <qemu-riscv@archiver.kernel.org>; Sat, 11 Jul 2026 08:48:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiT6h-0003Hk-Ut; Sat, 11 Jul 2026 04:30:44 -0400
+	id 1wiTNL-0006te-JD; Sat, 11 Jul 2026 04:47:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1wiT6V-0003G5-7w; Sat, 11 Jul 2026 04:30:31 -0400
-Received: from isrv.corpit.ru ([212.248.84.144])
+ (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
+ id 1wiTNC-0006tC-ER; Sat, 11 Jul 2026 04:47:46 -0400
+Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1wiT6P-0004BC-P5; Sat, 11 Jul 2026 04:30:30 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
- t=1783758607; bh=zGz3VDc160ny151OAihPD4teyPbJC4Q2DvJja5CBKmw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=IDAgla+YkLlyYFerZMKXXLlU6ED+TpY/4A9aynxmYW+WgdTB4gIxRGg28GctQ80Mo
- jKz1xLPp7dzErjCGJG1hyGoKAeUxpRibYaz9sGn1YAxHa52+V4FhjQre3+1+mvANio
- SEW09vjn7DHDlVBPWQ0iSYydDXTkcXy8jWuCAd60QONieHGJ6ScbYndbh/BEr91doN
- EIm207O1fR815DxNVlnouUIYocP2FQ8rqyegoWaXikVumtYyIb7sCZ/d5psz9wZsZL
- BTbjg0x4j27M4tHwtb8rgd4irXhqcZmkwqsM9q5EQMgVWJ342Jamh4CGxU6pk1mqRM
- lFPVL4u645F9A==
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 1C81C1C0718;
- Sat, 11 Jul 2026 11:30:07 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 875143EAAAC;
- Sat, 11 Jul 2026 11:30:15 +0300 (MSK)
-Message-ID: <731566cb-bbdd-418f-b80e-f68750f24212@tls.msk.ru>
-Date: Sat, 11 Jul 2026 11:30:15 +0300
+ (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
+ id 1wiTN8-00021H-1f; Sat, 11 Jul 2026 04:47:44 -0400
+Received: from [133.11.54.183] (h183.csg.ci.i.u-tokyo.ac.jp [133.11.54.183])
+ (authenticated bits=0)
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 66B8lCIF059829
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Sat, 11 Jul 2026 17:47:12 +0900 (JST)
+ (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=oLHuqQNm7x08Ep5efDS1zs9hdSdwQTbHqCe/xY3u7GE=; 
+ c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+ h=From:Message-ID:To:Subject:Date;
+ s=rs20250326; t=1783759632; v=1;
+ b=wJcnK17Cv+8oMMt+KCTXmROyrljZPy7nl15jNHVJsAORYGvVLaVBryOfcO+z9rH6
+ oD0jUi4NTzB2ZjqtyMwN7P+82IpaScgxvaKgAk8dkntDam/sQfbOQkLvK1rrHIAt
+ iFtncK1XDAy6rJw6h2KIUTX+rC/dPluKmSd1xx7krcgmcxb0NP+Xqg53IokBqXlm
+ dJ2Dc9lEnyZCQ3ZUPNvB7GUoe9KX41T69SUL2q+LUsvVl9jN3xLfu+R+tiMqf1JE
+ CB/v33MTy5apwcAlrZy3vW4F6ybpJAY7xq9wi/D3EXCGpMFMiV1Wbw+LylU5FZ9p
+ 9BdmusMzEzPPXQwezQgKsQ==
+Message-ID: <6b4f41b6-6a72-4378-950d-b8884e7dd839@rsg.ci.i.u-tokyo.ac.jp>
+Date: Sat, 11 Jul 2026 17:47:11 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] hw/riscv/riscv-iommu.c: fault when !PTE_U and no
- priv access
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+Subject: Re: [PATCH] hw/riscv/riscv-iommu.c: set ftype and iova in
+ riscv_iommu_ctx()
+To: Michael Tokarev <mjt@tls.msk.ru>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- andrew.jones@oss.qualcomm.com, nutty.liu@hotmail.com,
- Palmer Dabbelt <palmer@dabbelt.com>, Tao Tang <tangtao1634@phytium.com.cn>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-stable <qemu-stable@nongnu.org>
-References: <20260701121111.537654-1-daniel.barboza@oss.qualcomm.com>
- <20260701121111.537654-3-daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US, ru-RU
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- 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
-In-Reply-To: <20260701121111.537654-3-daniel.barboza@oss.qualcomm.com>
+ andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>,
+ Chengbo Gao <gaochengbo@bosc.ac.cn>, qemu-stable <qemu-stable@nongnu.org>,
+ Frank Chang <frank.chang@sifive.com>
+References: <20260701092241.307801-1-daniel.barboza@oss.qualcomm.com>
+ <59d0a99c-8eb2-4192-a388-331d0dd93358@tls.msk.ru>
+Content-Language: en-US
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <59d0a99c-8eb2-4192-a388-331d0dd93358@tls.msk.ru>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=49.212.243.89;
+ envelope-from=odaki@rsg.ci.i.u-tokyo.ac.jp; helo=www3579.sakura.ne.jp
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,52 +78,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/1/26 15:11, Daniel Henrique Barboza wrote:
-> All IOMMU accesses are assumed to be user mode unless told otherwise,
-> i.e. we have a process_id.  In case we have a non-user mode leaf PTE
-> (PTE_U isn't set) and we are running in user mode, we need to throw a
-> fault.
+Hi,
+
+First, thank you for your work maintaining the stable series.
+
+On 2026/07/11 16:47, Michael Tokarev wrote:
+> On 7/1/26 12:22, Daniel Henrique Barboza wrote:
+>> We're hardcoding faulting type as READ, where it could very well be a
+>> write access, and we're not recording the faulting addr/iova.
+>>
+>> A note was added in the fault_type logic because I wasn't able to
+>> trivially handle a probable code repeitition it in this same patch.
+>> Something to do in a later date.
+>>
+>> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+>> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3564
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> ---
+>>   hw/riscv/riscv-iommu.c | 29 +++++++++++++++++++++++------
+>>   1 file changed, 23 insertions(+), 6 deletions(-)
 > 
-> This also reflects on qos-riscv-iommu tests: the tests always run in
-> user mode so our PTEs must have PTE_U (bit 0x10) set.
+> For the stable qemu series (currently 10.0.x-LTS and 11.0.x), in order
+> to pick this commit, I also picked v11.0.0-1212-gca7bac51e04
+> "hw/riscv/riscv-iommu: Avoid caching PCI device IDs" by Chengbo Gao
+> (Cc'ed) - because it touched the same code and there's a merge conflict.
+> I can edit this patch ("set ftype and iova in riscv_iommu_ctx()") instead,
+> but it felt that ca7bac51e04 is also a good pick for the stable series.
 > 
-> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3553
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
-> Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+> Additionally for 10.0.x-LTS series, I also picked 2 more commits:
+> 
+> v10.2.0-323-g15406cc593a "hw/riscv: riscv-iommu: Don't look up DDT cache
+>   in Off and Bare modes" by Frank Chang (Cc'ed), which avoids a merge
+>   conflict and also looks like a (maybe missing) bugfix.
+> 
+> v10.2.0-312-gc497ef6739c "hw/riscv/riscv-iommu: Fix MemoryRegion owner"
+>   by Akihiko Odaki, which I spotted when looking for the history of
+>   changes, and which looked like an obvious bugfix.
 
-...
-> --- a/tests/qtest/libqos/qos-riscv-iommu.h
-> +++ b/tests/qtest/libqos/qos-riscv-iommu.h
-> @@ -54,8 +54,8 @@
->    * PTE masks for RISC-V IOMMU page tables.
->    * Values match PTE_V, PTE_R, PTE_W, PTE_A, PTE_D in target/riscv/cpu_bits.h
->    */
-> -#define QRIOMMU_NON_LEAF_PTE_MASK   0x001  /* PTE_V */
-> -#define QRIOMMU_LEAF_PTE_RW_MASK    0x0c7  /* V|R|W|A|D */
-> +#define QRIOMMU_NON_LEAF_PTE_MASK   0x011  /* PTE_V | PTE_U */
-> +#define QRIOMMU_LEAF_PTE_RW_MASK    0x0d7  /* V | R | W | A | D | PTE_U */
->   #define QRIOMMU_PTE_PPN_MASK        0x003ffffffffffc00ull
->   
->   /* Address-space base offset for test tables */
+This particular change is somewhat orthogonal to the broader issue you 
+describe with RISC-V patches. I found it through a codebase-wide search 
+for incorrect MemoryRegion ownership, rather than while following the 
+evolution of the RISC-V code. The same search found a similar issue 
+elsewhere, which you have already picked up:
 
-So, this patch adds a fix for the testing bits.
+https://lore.kernel.org/qemu-devel/20251121184424.1137669-18-mjt@tls.msk.ru/
+("[Stable-10.0.7 18/81] hw/nvram/ds1225y: Fix nvram MemoryRegion owner")
 
-When trying to pick this one up for 10.0.x (LTS) series, I've another doubt.
-This testing fix fixes v10.2.0-1299-g9d8ffbfc1d3 "tests/qtest/libqos: Add RISC-V
-IOMMU helper library".  Quite some tests were added based on that library.
-It doesn't exist in 10.0.x, and neither is v10.2.0-656-g489812e32df
-"tests/qtest/libqos: Add SMMUv3 helper library".
-Sure I can drop the parts of this change which touches the tests.  But this
-means we don't have tests to cover the issues being fixed, and I don't know
-if the result of these fixes actually works or not.
+Unfortunately, there are several recurring patterns of MemoryRegion 
+misuse, and in some cases I am not entirely sure what the correct 
+ownership should be. In any case, this is separate from the concerns 
+around fast-moving RISC-V development.
 
-Should we pick up some testing bits in this area for 10.0.x (especially
-9d8ffbfc1d3 and some subsequent commits which use this library)?  Or just
-ignore all riscv iommu patches in there?
+This particular change is trivial; it corrects semantically incorrect 
+code, but I am not sure whether the bug has any user-visible effect.
 
-Thanks,
+Regards,
+Akihiko Odaki
 
-/mjt
+> 
+> Hopefully this is okay.  Unfortunately even the simpler changes brings
+> up quite a lot of missing fixes just by a chance - this means that we
+> either not doing a good job keeping stable series up to date (by marking
+> commits fixing stuff for-stable), or we should not try fixing stuff in
+> previous series for a too-fast-moving target.
+> 
+> I'm sorry I'm bringing up this more general question in a very narrow
+> context of this particular fix (which might not even be important
+> enough).  Maybe I should discuss this separately.  Overall, I'm
+> having some.. issues with riscv pullreqs in context of stable series,
+> it's always more time-consuming to handle these and a bit more difficult
+> to decide what is imortant and what can be skipped.
+> 
+> Thanks,
+> 
+> /mjt
+> 
+
 
