@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A818C44501
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9453C44507
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiDo-0001fk-QN; Sat, 11 Jul 2026 20:39:04 -0400
+	id 1wiiEt-000372-Qp; Sat, 11 Jul 2026 20:40:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigkL-0000Ec-8o; Sat, 11 Jul 2026 19:04:33 -0400
-Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.77.92])
+ id 1wigR5-0003ay-Bh; Sat, 11 Jul 2026 18:44:39 -0400
+Received: from pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.1.125])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigkJ-0002rm-BW; Sat, 11 Jul 2026 19:04:32 -0400
+ id 1wigR3-0006kk-C4; Sat, 11 Jul 2026 18:44:39 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811071; x=1815347071;
+ t=1783809877; x=1815345877;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=n8EvPM4JcXpYSayZRgeREEgwZhhcy95t1AHvCdmHV5k=;
- b=ppeGZFPhPUrC+/IXk1gsd29Hxi3rU67TEUXxv6lF0Rb5S/qN5pKM0t79
- +9nO1EX4+ayFz9akYUmPQ/GFyguxq2PZ4M42EEg3BWAf8xv41+c4VOtkl
- wXlyCeKqmO5ZsfHb+i03nrJ79fjbBFpu8I4DUNMo+lQrIUdDzBiAbqyyV
- GTdE3C8AJeslA8v6nYM3z9CWXzjoUfke8pbjZmBnDdM6Q2C6ATRzarBOE
- prY7VdZ/48QYY9f0gWGY4FbcpSDfZ8mzt7bn9ZH5IZP4oH62uzKOJ5ckX
- Y3hr/DdRa9vMzRuISru/F5HE/FCbTrfcZmVF2miySQ9q+Ro34Zxqs20yM A==;
-X-CSE-ConnectionGUID: gGF/P07gQXO38gsa/uetTA==
-X-CSE-MsgGUID: WPW6qZGbQ8CPqgEEH4HNBw==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23493364"
+ bh=5cfdeGZ94ng1f2/yrbZLU9UstuUxwClCVLdCpyQUfcM=;
+ b=CG2bqF1FHX/jNrBRss1cgeIYruC2ViduX3Kun3X7HfNKcjeWoMXJgze8
+ yJTXTuByLx/kBDw++6DG9WSZ/6vNc6Ay8d0RIei4NHCGoWs3iIC9SMcK2
+ vKn0zne452bBdmvdMlAFA+cZuuLvRMiSkWoOYcLbzKH48ovszzSnfuevo
+ aQbDlvAvjgXSQIptwWDRF14MNU7aHBdCFhnaxkuNgV3hy4mi2ttykGJv6
+ CaAwWEmFHJ/eoSNIyAt3RpJ9WZ6dhD68pZ2RjbnIH9VZENb3dIiwxf9tC
+ MjDzUgYYR+UUMYSOvOoYbeZvXEvBvI8ZDN9v6g4uG5DZFNB210a5qtBus A==;
+X-CSE-ConnectionGUID: xKPxoZ/CTferNMWVeOapLw==
+X-CSE-MsgGUID: krGVRDxXTm++oGWCgeATew==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23505532"
 Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:04:27 +0000
-Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:11463]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525]
+ by internal-pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:44:33 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.111:14182]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.35.214:2525]
  with esmtp (Farcaster)
- id dba23c15-67d5-4a9c-a7ed-a62a6bafc7ff; Sat, 11 Jul 2026 23:04:27 +0000 (UTC)
-X-Farcaster-Flow-ID: dba23c15-67d5-4a9c-a7ed-a62a6bafc7ff
+ id 815c1d41-7761-4924-8c54-6c06a012abd1; Sat, 11 Jul 2026 22:44:33 +0000 (UTC)
+X-Farcaster-Flow-ID: 815c1d41-7761-4924-8c54-6c06a012abd1
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:04:27 +0000
+ Sat, 11 Jul 2026 22:44:33 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:04:18 +0000
+ Sat, 11 Jul 2026 22:44:24 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 104/134] hw/remote: Give memory regions an explicit owner
-Date: Sat, 11 Jul 2026 22:36:37 +0000
-Message-ID: <20260711223707.42139-105-graf@amazon.com>
+Subject: [RFC PATCH 028/134] hw/vfio: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:21 +0000
+Message-ID: <20260711223707.42139-29-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,21 +101,21 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D043UWC001.ant.amazon.com (10.13.139.202) To
+X-ClientProxiedBy: EX19D046UWB004.ant.amazon.com (10.13.139.164) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.77.92;
+Received-SPF: pass client-ip=44.246.1.125;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,69 +130,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-remote_machine_init() passes OBJECT(machine). remote_sysmem_reconfig()
-runs in the multi-process remote and creates system-memory subregions
-on behalf of the machine; use qdev_get_machine() as owner.
-dma_register() in the vfio-user server creates DMA windows for a
-VfuObject; use it as owner.
+Convert the *_orphan() device-creation calls in hw/vfio to the new
+parented API introduced earlier in this series, so every onboard
+device gets a stable path in the composition tree instead of landing
+in /machine/unattached with an unstable device[N] name.
 
-No functional change intended.
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing device for
+composite children.  Names follow existing QOM conventions.
 
+Per-site rationale (reviewers: dispute the modeling here):
+
+hw/vfio/igd.c:337 | pci_create_simple | OBJECT(vdev) | "igd-lpc-bridge" | Called from IGD quirk during vfio-pci realize; the LPC stub is created by and lives with the passed-through IGD device
+
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/remote/machine.c       | 2 +-
- hw/remote/memory.c        | 3 ++-
- hw/remote/vfio-user-obj.c | 2 +-
- 3 files changed, 4 insertions(+), 3 deletions(-)
+ hw/vfio/igd.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/hw/remote/machine.c b/hw/remote/machine.c
-index e8e9cf259f..09154fa122 100644
---- a/hw/remote/machine.c
-+++ b/hw/remote/machine.c
-@@ -37,7 +37,7 @@ static void remote_machine_init(MachineState *machine)
-     system_io = get_system_io();
+diff --git a/hw/vfio/igd.c b/hw/vfio/igd.c
+index bea0d57a11..aee40646ed 100644
+--- a/hw/vfio/igd.c
++++ b/hw/vfio/igd.c
+@@ -334,8 +334,9 @@ static int vfio_pci_igd_lpc_init(VFIOPCIDevice *vdev,
+     lpc_bridge = pci_find_device(pci_device_root_bus(pdev),
+                                  0, PCI_DEVFN(0x1f, 0));
+     if (!lpc_bridge) {
+-        lpc_bridge = pci_create_simple_orphan(pci_device_root_bus(pdev),
+-                                 PCI_DEVFN(0x1f, 0), "vfio-pci-igd-lpc-bridge");
++        lpc_bridge = pci_create_simple(OBJECT(vdev), "igd-lpc-bridge",
++                                       pci_device_root_bus(pdev),
++                                       PCI_DEVFN(0x1f, 0), "vfio-pci-igd-lpc-bridge");
+     }
  
-     pci_memory = g_new(MemoryRegion, 1);
--    memory_region_init(pci_memory, NULL, "pci", UINT64_MAX);
-+    memory_region_init(pci_memory, OBJECT(machine), "pci", UINT64_MAX);
- 
-     rem_host = REMOTE_PCIHOST(qdev_new(OBJECT(s), "remote-pcihost",
-                                        TYPE_REMOTE_PCIHOST));
-diff --git a/hw/remote/memory.c b/hw/remote/memory.c
-index 8195aa5fb8..3f8fe54bac 100644
---- a/hw/remote/memory.c
-+++ b/hw/remote/memory.c
-@@ -12,6 +12,7 @@
- 
- #include "hw/remote/memory.h"
- #include "qapi/error.h"
-+#include "hw/core/qdev.h"
- 
- static void remote_sysmem_reset(void)
- {
-@@ -42,7 +43,7 @@ void remote_sysmem_reconfig(MPQemuMsg *msg, Error **errp)
-     for (region = 0; region < msg->num_fds; region++, suffix++) {
-         g_autofree char *name = g_strdup_printf("remote-mem-%u", suffix);
-         subregion = g_new(MemoryRegion, 1);
--        memory_region_init_ram_from_fd(subregion, NULL,
-+        memory_region_init_ram_from_fd(subregion, qdev_get_machine(),
-                                        name, sysmem_info->sizes[region],
-                                        RAM_SHARED, msg->fds[region],
-                                        sysmem_info->offsets[region],
-diff --git a/hw/remote/vfio-user-obj.c b/hw/remote/vfio-user-obj.c
-index 87fa7b6572..685d4c2baf 100644
---- a/hw/remote/vfio-user-obj.c
-+++ b/hw/remote/vfio-user-obj.c
-@@ -324,7 +324,7 @@ static void dma_register(vfu_ctx_t *vfu_ctx, vfu_dma_info_t *info)
- 
-     subregion = g_new0(MemoryRegion, 1);
- 
--    memory_region_init_ram_ptr(subregion, NULL, name,
-+    memory_region_init_ram_ptr(subregion, OBJECT(o), name,
-                                iov->iov_len, info->vaddr);
- 
-     dma_as = pci_device_iommu_address_space(o->pci_dev);
+     ret = vfio_pci_igd_copy(vdev, lpc_bridge, info, igd_lpc_bridge_infos,
 -- 
 2.47.1
 
