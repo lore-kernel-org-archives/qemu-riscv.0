@@ -4,144 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F79C43458
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jul 2026 22:20:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E4BC43458
+	for <qemu-riscv@archiver.kernel.org>; Sat, 11 Jul 2026 07:48:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiJa0-00060R-IY; Fri, 10 Jul 2026 18:20:20 -0400
+	id 1wiSR1-00078s-Kp; Sat, 11 Jul 2026 03:47:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wiJZy-0005xB-Tb
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 18:20:18 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wiSQz-00078X-Vf; Sat, 11 Jul 2026 03:47:38 -0400
+Received: from isrv.corpit.ru ([212.248.84.144])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wiJZw-0005YC-2n
- for qemu-riscv@nongnu.org; Fri, 10 Jul 2026 18:20:18 -0400
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66AKDcDP1811720
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 22:20:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- EXunoHqOgcq+e6ruDWuc6fgIe60dFPD2aPrHMzdaIdU=; b=k1QACYPFzr+/g3yp
- 364g+VWo4CD5QHnEvkm/hBcrupAaJSbtebtXFW3dwxB0Qw1wiAjhLkF+y7VRhVTH
- wUt9Ily6TY+ptHjFdr1VaX5XD3AqElElLiLsmM7NaR/gAW41p2XJ61YBz0GnNtwf
- umyBNsh2jBHVMYYKaWbwVQrGdT8aYSF+pVFZKnIuC4SuXzlv5TyMh70dpaHySVFU
- nK+2aATS9d2EXDvPmql3dZmDxcL64TSdjZVlFi/1GxLzlfgRIJr9RCNYr0KGaHCO
- 7ms/8J01GqiAPcY4VvmFKRMOfhtxQNp5TBODx+Th5ZnVVHjqVj+UlBZmgD8zC6Fj
- gt3hCw==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fax5fams7-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 22:20:15 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-51c1a9764f0so15746451cf.1
- for <qemu-riscv@nongnu.org>; Fri, 10 Jul 2026 15:20:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783722014; x=1784326814; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=EXunoHqOgcq+e6ruDWuc6fgIe60dFPD2aPrHMzdaIdU=;
- b=eFAsXsZrmYJd+9lwLCg4x4vR7b/M6R8pwdlQyCmDfuv9Ux6/x/c1JkRC7PH5YJScG6
- x32T8+O487vhQxChMqpozd3Ojj95k2UzjmHa1qaZie/thpOMWOuYFoKXTE6O1WXW5gAi
- PAmjUi72Dr/pHpyiBqlRkZs7WDGWsS+Tc1Y5Me2Rm13Jv1EBTAsRcGQnsjCT05MY5qq/
- 3ITFev55StY6p3Ibg281VIVMfipGUu9ldRUFhzduKdsPmkRViqew27/zSi13LP6egLrs
- 7ViNBVmwYxSpWFU8LtashrNc8mmToMV85sK9P2kfhw+E5ifcEjabE2NWcZUYxSK2D8Yf
- P2Uw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783722014; x=1784326814;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=EXunoHqOgcq+e6ruDWuc6fgIe60dFPD2aPrHMzdaIdU=;
- b=rQ3kHa2TJjclq6weESZNDcjcmDMSzZfhffitCEaIMafT5kpQAvKgzEQcgBorSuH8sW
- hNNozCwZZUqCo/FfPUDy8KeXB+350xI0y45EVx5eXySLkOqb7rk0IM81isiZSiLyHoe+
- nKtd38ulhzSv1FrrTcOCcf4Em52bkc7939HL8+WqfdAbexn+KFY6StTg75BHPTUDi7E3
- iXlY6Wb9/TYmJyMtAq4imEfLOmY0o4tGva1VNTHfhKI8nxG1w789zRvgF8ytNkyPD0/u
- Pesu0bpGJpdzKnVDnznPysA/96SdweEHZoFjfyNs7xyt1RA/pB3GkSTAmapHTHvtxe5W
- zR8g==
-X-Forwarded-Encrypted: i=1;
- AHgh+RrQE2pKdFDVZPAHAo+LvrH+Z1maqyfqXbaGKlOnwD291lUkYFgW3tL+lLbxe3iT4clikhNSZHMmaWKx@nongnu.org
-X-Gm-Message-State: AOJu0YwY+YwvepYOJQDmNWNUCWnY4vfF+rVx1tLbMsvkmFMApjkFQcWB
- vg31shpvmEG4meUua5FIa0RlYjFsWCBA4I8n1VyYxvmuI+Vidil3EL9y42u9FAOdQPxNq2ssups
- 8eDr239pnF1xz8Gnf36TSEI1VHCaVp2I0ttc1ytrA2P3+hax0WyBK+mf9RQ==
-X-Gm-Gg: AfdE7ckdig0k5Q72rPc/MY6YYbGHOxkrqwo+SL80ASCxzGkU20IhqQdfxDZaajlV3uz
- w9EmRlPRkWEeT6+Uouw6aNgm4+MJPtDLrTx0tluw8OdhEPGuP5dkea+WY7R6MGcHRRNU8dFO8mt
- 78mwBSDw/DCz76WSYCi+ObBCCN4apV3+Hy5YICidbK/rc2jeb2N7/IH29lxxPETn9p7qktr2Ij/
- 7gDo0JUJJeP8ejsjd4ic8zx3S5QQLDvBhTLdl4E2+OCQtXAzeCoZN0U7/xguHOMHPDGduXHhT9Y
- KYnkOOlJDHTrn4758NATM+l/6z2ALEFy3XKAHdRe8PSFdQuii099MljnoHllM1FB5ae7a7eivPr
- +OqSRnPyi8f3GwcRZgdSHagXIrxrwNWEZPQzeEmXmZu7dweZWaO77z25Jm6k7CQ==
-X-Received: by 2002:a05:622a:1b17:b0:51c:c37:df31 with SMTP id
- d75a77b69052e-51cbf16dc65mr8091301cf.7.1783722014484; 
- Fri, 10 Jul 2026 15:20:14 -0700 (PDT)
-X-Received: by 2002:a05:622a:1b17:b0:51c:c37:df31 with SMTP id
- d75a77b69052e-51cbf16dc65mr8091061cf.7.1783722014078; 
- Fri, 10 Jul 2026 15:20:14 -0700 (PDT)
-Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47a9de1d910sm61420318f8f.6.2026.07.10.15.20.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Jul 2026 15:20:13 -0700 (PDT)
-Message-ID: <84421cdb-00c1-4999-9c60-79d61a75641b@oss.qualcomm.com>
-Date: Sat, 11 Jul 2026 00:20:12 +0200
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wiSQw-0005OM-Mt; Sat, 11 Jul 2026 03:47:37 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
+ t=1783756041; bh=0LXG6DgFh5qLxzkbcW2qQygnF4AbrnSqdes4fG1hweo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=d3eE/jIuqb/QTazblY+x5/+YcLGigAARMyTIIJD7ijtNbwvi46j6zH1dg+upeBjbO
+ k0MSdp2o1Bc715ohZpk4b2ORpsXDotwKuhwRnRRJdIzl2nDN5/Ke1GvaDLjnR8n3t/
+ 8GgXEUsy/VAxcaN1cMi//T9ULrJzGsBDYznh025s6VgtDceAaUCyS+l3ApgdsY4nvD
+ 9Nl5sbsSZw8HehyMEzDp0OCs9Pzt5HV1ac1BUHD8ut6NLhHrAcJDAOxAT5Z+atcgvx
+ vM1YAlKJsvDka9TsfPrc3Ubvm0mgkg9B1IZYrbS25aqdtBaXYYeb5JdwUeCzTId4Q2
+ SwIJoyxeNEBFA==
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 348711C0703;
+ Sat, 11 Jul 2026 10:47:21 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 874A13EAA7E;
+ Sat, 11 Jul 2026 10:47:29 +0300 (MSK)
+Message-ID: <59d0a99c-8eb2-4192-a388-331d0dd93358@tls.msk.ru>
+Date: Sat, 11 Jul 2026 10:47:29 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 50/51] system: Use tlb_flush_range_by_mmuidx in
- cpu_watchpoint_insert
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
-References: <20260710205401.836304-1-richard.henderson@linaro.org>
- <20260710205401.836304-51-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260710205401.836304-51-richard.henderson@linaro.org>
+Subject: Re: [PATCH] hw/riscv/riscv-iommu.c: set ftype and iova in
+ riscv_iommu_ctx()
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>,
+ Chengbo Gao <gaochengbo@bosc.ac.cn>, qemu-stable <qemu-stable@nongnu.org>,
+ Frank Chang <frank.chang@sifive.com>,
+ Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+References: <20260701092241.307801-1-daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US, ru-RU
+From: Michael Tokarev <mjt@tls.msk.ru>
+Autocrypt: addr=mjt@tls.msk.ru; keydata=
+ xsFNBGYpLkcBEACsajkUXU2lngbm6RyZuCljo19q/XjZTMikctzMoJnBGVSmFV66kylUghxs
+ HDQQF2YZJbnhSVt/mP6+V7gG6MKR5gYXYxLmypgu2lJdqelrtGf1XtMrobG6kuKFiD8OqV6l
+ 2M5iyOZT3ydIFOUX0WB/B9Lz9WcQ6zYO9Ohm92tiWWORCqhAnwZy4ua/nMZW3RgO7bM6GZKt
+ /SFIorK9rVqzv40D6KNnSyeWfqf4WN3EvEOozMfWrXbEqA7kvd6ShjJoe1FzCEQ71Fj9dQHL
+ DZG+44QXvN650DqEtQ4RW9ozFk3Du9u8lbrXC5cqaCIO4dx4E3zxIddqf6xFfu4Oa5cotCM6
+ /4dgxDoF9udvmC36qYta+zuDsnAXrYSrut5RBb0moez/AR8HD/cs/dS360CLMrl67dpmA+XD
+ 7KKF+6g0RH46CD4cbj9c2egfoBOc+N5XYyr+6ejzeZNf40yjMZ9SFLrcWp4yQ7cpLsSz08lk
+ a0RBKTpNWJdblviPQaLW5gair3tyJR+J1ER1UWRmKErm+Uq0VgLDBDQoFd9eqfJjCwuWZECp
+ z2JUO+zBuGoKDzrDIZH2ErdcPx3oSlVC2VYOk6H4cH1CWr9Ri8i91ClivRAyVTbs67ha295B
+ y4XnxIVaZU+jJzNgLvrXrkI1fTg4FJSQfN4W5BLCxT4sq8BDtwARAQABzSBNaWNoYWVsIFRv
+ a2FyZXYgPG1qdEB0bHMubXNrLnJ1PsLBlAQTAQoAPhYhBJ2L4U4/Kp3XkZko8WGtPZjs3yyO
+ BQJmKS5HAhsDBQkSzAMABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEGGtPZjs3yyOZSAP
+ /ibilK1gbHqEI2zR2J59Dc0tjtbByVmQ8IMh0SYU3j1jeUoku2UCgdnGKpwvLXtwZINgdl6Q
+ cEaDBRX6drHLJFAi/sdgwVgdnDxaWVJO/ZIN/uJI0Tx7+FSAk8CWSa4IWUOzPNmtrDfb4z6v
+ G36rppY8bTNKbX6nWFXuv2LXQr7g6+kKnbwv4QFpD+UFF1CrLm3byMq4ikdBXpZx030qBL61
+ b7PrfXcBLao0357kWGH6C2Zu4wBnDUJwGi68pI5rzSRAFyAQsE89sjLdR1yFoBH8NiFnAQXP
+ LA8Am9FMsC7D/bi/kwKTJdcZvzdGU1HG6tJvXLWC+nqGpJNBzRdDpjqtxNuL76vVd/JbsFMS
+ JchLN+01fNQ5FHglvkd6md7vO+ULq+r9An5hMiDoRbYVUOBN8uiYNk+qKbdgSfbhsgPURqHi
+ 1bXkgMeMasqWbGMe7iBW/YH2ePfZ6HuKLNQDCkiWZYPQZvyXHvQHjuJJ5+US81tkqM+Q6Snq
+ 0L/O/LD0qLlbinHrcx0abg06VXBoYmGICJpf/3hhWQM4f+B/5w4vpl8q0B6Osz01pBUBfYak
+ CiYCNHMWWVZkW9ZnY7FWiiPOu8iE1s5oPYqBljk3FNUk04SDKMF5TxL87I2nMBnVnvp0ZAuY
+ k9ojiLqlhaKnZ1+zwmwmPmXzFSwlyMczPUMSzsFNBGYpLkcBEAC0mxV2j5M1x7GiXqxNVyWy
+ OnlWqJkbkoyMlWFSErf+RUYlC9qVGwUihgsgEhQMg0nJiSISmU3vsNEx5j0T13pTEyWXWBdS
+ XtZpNEW1lZ2DptoGg+6unpvxd2wn+dqzJqlpr4AY3vc95q4Za/NptWtSCsyJebZ7DxCCkzET
+ tzbbnCjW1souCETrMy+G916w1gJkz4V1jLlRMEEoJHLrr1XKDdJRk/34AqXPKOzILlWRFK6s
+ zOWa80/FNQV5cvjc2eN1HsTMFY5hjG3zOZb60WqwTisJwArjQbWKF49NLHp/6MpiSXIxF/FU
+ jcVYrEk9sKHN+pERnLqIjHA8023whDWvJide7f1V9lrVcFt0zRIhZOp0IAE86E3stSJhZRhY
+ xyIAx4dpDrw7EURLOhu+IXLeEJbtW89tp2Ydm7TVAt5iqBubpHpGTWV7hwPRQX2w2MBq1hCn
+ K5Xx79omukJisbLqG5xUCR1RZBUfBlYnArssIZSOpdJ9wWMK+fl5gn54cs+yziUYU3Tgk0fJ
+ t0DzQsgfd2JkxOEzJACjJWti2Gh3szmdgdoPEJH1Og7KeqbOu2mVCJm+2PrNlzCybOZuHOV5
+ +vSarkb69qg9nU+4ZGX1m+EFLDqVUt1g0SjY6QmM5yjGBA46G3dwTEV0/u5Wh7idNT0mRg8R
+ eP/62iTL55AM6QARAQABwsF8BBgBCgAmFiEEnYvhTj8qndeRmSjxYa09mOzfLI4FAmYpLkcC
+ GwwFCRLMAwAACgkQYa09mOzfLI53ag/+ITb3WW9iqvbjDueV1ZHwUXYvebUEyQV7BFofaJbJ
+ Sr7ek46iYdV4Jdosvq1FW+mzuzrhT+QzadEfYmLKrQV4EK7oYTyQ5hcch55eX00o+hyBHqM2
+ RR/B5HGLYsuyQNv7a08dAUmmi9eAktQ29IfJi+2Y+S1okAEkWFxCUs4EE8YinCrVergB/MG5
+ S7lN3XxITIaW00faKbqGtNqij3vNxua7UenN8NHNXTkrCgA+65clqYI3MGwpqkPnXIpTLGl+
+ wBI5S540sIjhgrmWB0trjtUNxe9QcTGHoHtLeGX9QV5KgzNKoUNZsyqh++CPXHyvcN3OFJXm
+ VUNRs/O3/b1capLdrVu+LPd6Zi7KAyWUqByPkK18+kwNUZvGsAt8WuVQF5telJ6TutfO8xqT
+ FUzuTAHE+IaRU8DEnBpqv0LJ4wqqQ2MeEtodT1icXQ/5EDtM7OTH231lJCR5JxXOnWPuG6el
+ YPkzzso6HT7rlapB5nulYmplJZSZ4RmE1ATZKf+wUPocDu6N10LtBNbwHWTT5NLtxNJAJAvl
+ ojis6H1kRWZE/n5buyPY2NYeyWfjjrerOYt3er55n4C1I88RSCTGeejVmXWuo65QD2epvzE6
+ 3GgKngeVm7shlp7+d3D3+fAAHTvulQQqV3jOodz+B4yzuZ7WljkNrmrWrH8aI4uA98c=
+In-Reply-To: <20260701092241.307801-1-daniel.barboza@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=Ab2B2XXG c=1 sm=1 tr=0 ts=6a51701f cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=1tSEMpTH9XP_W59IOagA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: AzuLvYCvoCWwYG_7cD78CFqLhFjN1uBg
-X-Proofpoint-GUID: AzuLvYCvoCWwYG_7cD78CFqLhFjN1uBg
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDIyNCBTYWx0ZWRfXyq7cgrZfB/M2
- d1Zw9vPvMHROBgjBW5fVwtfcjCEQYhJfTD1K9nXVMW2q9ZYf+KEzVyziCNAj4qXp1njoZ4+W/8l
- lIpMg0/4+5WWnFTWIhtdcgq47iDG0rA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDIyNCBTYWx0ZWRfX/H6EVnU94UtG
- HMfLbHVkSrO5o12ahG69qyYqhtouR/y1FckmOjNq9hcguG8I/L42cm0Thohev4XhRkZ9++y1slL
- tCQ7lXiVg8bqINyK1FYIjkO0RwdEyyuazAORRqGxk/23HDYWI8Dq9OMhuq/lVy++fQDGVJ4eE3l
- 497oEXBnuSUe7ZhLS498efjfUdMPOvgXUC2pzj17xCp6Us/pcAkNi2i75NniPjuUWijvntw7w2k
- g2syYZ4uaQjTF585HONLvsSeau/qZHTXTt5mhPIkdcq77lEWPUevT3G19KSBxz0P9YsmQXRZ3u5
- dj0yAp8eO3jI73FM0Fql6iS2byjW8BYmWEjhIcyM0DWbtQ4XneJkcA5X/hVgqRf76SfWKa+iFwa
- mmCpi6JzZjv8kac9gcA2mknSeboC62UmRoi7kp20kIbfXFLc08mQrCS30OT3UpWsTsOon5CTzcZ
- p4BsSwvMTVr/XR4Pe1g==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-10_06,2026-07-10_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 malwarescore=0 phishscore=0 bulkscore=0
- suspectscore=0 impostorscore=0 lowpriorityscore=0 priorityscore=1501
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607100224
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -157,14 +119,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/7/26 22:54, Richard Henderson wrote:
-> Update to newer tlb_flush api and flush exactly what is required,
-> not single-page vs everything.
+On 7/1/26 12:22, Daniel Henrique Barboza wrote:
+> We're hardcoding faulting type as READ, where it could very well be a
+> write access, and we're not recording the faulting addr/iova.
 > 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> A note was added in the fault_type logic because I wasn't able to
+> trivially handle a probable code repeitition it in this same patch.
+> Something to do in a later date.
+> 
+> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3564
+> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 > ---
->   system/watchpoint.c | 9 ++-------
->   1 file changed, 2 insertions(+), 7 deletions(-)
+>   hw/riscv/riscv-iommu.c | 29 +++++++++++++++++++++++------
+>   1 file changed, 23 insertions(+), 6 deletions(-)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+For the stable qemu series (currently 10.0.x-LTS and 11.0.x), in order
+to pick this commit, I also picked v11.0.0-1212-gca7bac51e04
+"hw/riscv/riscv-iommu: Avoid caching PCI device IDs" by Chengbo Gao
+(Cc'ed) - because it touched the same code and there's a merge conflict.
+I can edit this patch ("set ftype and iova in riscv_iommu_ctx()") instead,
+but it felt that ca7bac51e04 is also a good pick for the stable series.
+
+Additionally for 10.0.x-LTS series, I also picked 2 more commits:
+
+v10.2.0-323-g15406cc593a "hw/riscv: riscv-iommu: Don't look up DDT cache
+  in Off and Bare modes" by Frank Chang (Cc'ed), which avoids a merge
+  conflict and also looks like a (maybe missing) bugfix.
+
+v10.2.0-312-gc497ef6739c "hw/riscv/riscv-iommu: Fix MemoryRegion owner"
+  by Akihiko Odaki, which I spotted when looking for the history of
+  changes, and which looked like an obvious bugfix.
+
+Hopefully this is okay.  Unfortunately even the simpler changes brings
+up quite a lot of missing fixes just by a chance - this means that we
+either not doing a good job keeping stable series up to date (by marking
+commits fixing stuff for-stable), or we should not try fixing stuff in
+previous series for a too-fast-moving target.
+
+I'm sorry I'm bringing up this more general question in a very narrow
+context of this particular fix (which might not even be important
+enough).  Maybe I should discuss this separately.  Overall, I'm
+having some.. issues with riscv pullreqs in context of stable series,
+it's always more time-consuming to handle these and a bit more difficult
+to decide what is imortant and what can be skipped.
+
+Thanks,
+
+/mjt
+
 
