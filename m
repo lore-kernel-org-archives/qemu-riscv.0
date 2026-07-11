@@ -4,65 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6527EC43458
-	for <qemu-riscv@archiver.kernel.org>; Sat, 11 Jul 2026 08:48:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 097E4C43458
+	for <qemu-riscv@archiver.kernel.org>; Sat, 11 Jul 2026 10:55:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiTNL-0006te-JD; Sat, 11 Jul 2026 04:47:55 -0400
+	id 1wiVLl-0006MZ-1i; Sat, 11 Jul 2026 06:54:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wiTNC-0006tC-ER; Sat, 11 Jul 2026 04:47:46 -0400
-Received: from www3579.sakura.ne.jp ([49.212.243.89])
+ (Exim 4.90_1) (envelope-from <harshpb@linux.ibm.com>)
+ id 1wiVLj-0006Le-5F; Sat, 11 Jul 2026 06:54:23 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1wiTN8-00021H-1f; Sat, 11 Jul 2026 04:47:44 -0400
-Received: from [133.11.54.183] (h183.csg.ci.i.u-tokyo.ac.jp [133.11.54.183])
- (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 66B8lCIF059829
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Sat, 11 Jul 2026 17:47:12 +0900 (JST)
- (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=oLHuqQNm7x08Ep5efDS1zs9hdSdwQTbHqCe/xY3u7GE=; 
- c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
- h=From:Message-ID:To:Subject:Date;
- s=rs20250326; t=1783759632; v=1;
- b=wJcnK17Cv+8oMMt+KCTXmROyrljZPy7nl15jNHVJsAORYGvVLaVBryOfcO+z9rH6
- oD0jUi4NTzB2ZjqtyMwN7P+82IpaScgxvaKgAk8dkntDam/sQfbOQkLvK1rrHIAt
- iFtncK1XDAy6rJw6h2KIUTX+rC/dPluKmSd1xx7krcgmcxb0NP+Xqg53IokBqXlm
- dJ2Dc9lEnyZCQ3ZUPNvB7GUoe9KX41T69SUL2q+LUsvVl9jN3xLfu+R+tiMqf1JE
- CB/v33MTy5apwcAlrZy3vW4F6ybpJAY7xq9wi/D3EXCGpMFMiV1Wbw+LylU5FZ9p
- 9BdmusMzEzPPXQwezQgKsQ==
-Message-ID: <6b4f41b6-6a72-4378-950d-b8884e7dd839@rsg.ci.i.u-tokyo.ac.jp>
-Date: Sat, 11 Jul 2026 17:47:11 +0900
+ (Exim 4.90_1) (envelope-from <harshpb@linux.ibm.com>)
+ id 1wiVLg-0004n2-Nb; Sat, 11 Jul 2026 06:54:22 -0400
+Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66B7C2DE338248; Sat, 11 Jul 2026 10:54:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=pp1; bh=1bY6K3
+ UqPRO4dAUO+HpvCp1rtWfs40kUevSQqr93Ag4=; b=H4bYNHAxW8wgK5c3hQvVR8
+ 8UMx5t34qOCVU2zXIyD0+s8jYiDMZVRc/n8KduXgSm/m6Pj2vJd+l/vsA5gHjWlX
+ Sofk0mu1OWdA0bkWYMBBbKwD0wx77BeMbUzxDD79JY86EABX/ch1JmKFnjPoPo7R
+ ckoEiNEkNLeYn2YKmry0g+UYjqasdLufrwGOdCHSH4eVBrDn1PymBvrFC9EAiASm
+ Gqwi84WqL9hwalRLIGADrnALTIaL7iOV6bUaGnjs5XMZ2zgUXlNTW7QSoX9v88/2
+ qdOD5RJFT81Auy7cV72krQXtBcIDa7XoWKepBh46jX7tjTQPu2ERhDnWFIiu3bEw
+ ==
+Received: from ppma12.dal12v.mail.ibm.com
+ (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fber80uw3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Sat, 11 Jul 2026 10:54:08 +0000 (GMT)
+Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma12.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66BAo8NJ014999;
+ Sat, 11 Jul 2026 10:54:07 GMT
+Received: from smtprelay03.dal12v.mail.ibm.com ([172.16.1.5])
+ by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 4f7cgqpap8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Sat, 11 Jul 2026 10:54:07 +0000 (GMT)
+Received: from smtpav04.wdc07v.mail.ibm.com (smtpav04.wdc07v.mail.ibm.com
+ [10.39.53.231])
+ by smtprelay03.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 66BAs6Rw64684502
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sat, 11 Jul 2026 10:54:07 GMT
+Received: from smtpav04.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id BA22E58052;
+ Sat, 11 Jul 2026 10:54:06 +0000 (GMT)
+Received: from smtpav04.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 936AA5805E;
+ Sat, 11 Jul 2026 10:54:02 +0000 (GMT)
+Received: from [9.124.217.8] (unknown [9.124.217.8])
+ by smtpav04.wdc07v.mail.ibm.com (Postfix) with ESMTP;
+ Sat, 11 Jul 2026 10:54:02 +0000 (GMT)
+Message-ID: <bf1b73da-919c-4b02-8b46-78b939077610@linux.ibm.com>
+Date: Sat, 11 Jul 2026 16:24:00 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/riscv-iommu.c: set ftype and iova in
- riscv_iommu_ctx()
-To: Michael Tokarev <mjt@tls.msk.ru>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- andrew.jones@oss.qualcomm.com, Palmer Dabbelt <palmer@dabbelt.com>,
- Chengbo Gao <gaochengbo@bosc.ac.cn>, qemu-stable <qemu-stable@nongnu.org>,
- Frank Chang <frank.chang@sifive.com>
-References: <20260701092241.307801-1-daniel.barboza@oss.qualcomm.com>
- <59d0a99c-8eb2-4192-a388-331d0dd93358@tls.msk.ru>
-Content-Language: en-US
-From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-In-Reply-To: <59d0a99c-8eb2-4192-a388-331d0dd93358@tls.msk.ru>
+Subject: Re: [PATCH v3 33/51] target/ppc: Simplify
+ ppc_cpu_debug_check_watchpoint
+Content-Language: en-GB
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ Shivaprasad G Bhat <sbhat@linux.ibm.com>
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, jcmvbkbc@gmail.com,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
+References: <20260710205401.836304-1-richard.henderson@linaro.org>
+ <20260710205401.836304-34-richard.henderson@linaro.org>
+From: Harsh Prateek Bora <harshpb@linux.ibm.com>
+In-Reply-To: <20260710205401.836304-34-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=49.212.243.89;
- envelope-from=odaki@rsg.ci.i.u-tokyo.ac.jp; helo=www3579.sakura.ne.jp
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzExMDEwMyBTYWx0ZWRfXxmWsMFLwdcsX
+ uhz3GHAULuMgWSOBO7Au8D/bFxpOSbEpJFTgnzDqTLIwUIQC4wbOI7SvphKl7Uu3egmUVc8Blzj
+ Gdugmj4t+J4cgQw4fFZSizW+0qQlGAnCAI2oln7NTEqe0zakdeEdFKcogCwXgeurh4iSqp1FsEk
+ NYrs94FLiagHFD02QH/qAJGbJ6ECkOkqOkukv2dLzjcs50ytScxaYk4MgtodMrq5V7NyLj3ATKz
+ yeTaxboijTd0s7J0M7oTvJHsWBvRYDkhJ6+OtJZlhglRG1WYru3c2rAydSSxB7KFmvU2TTUu0aM
+ Gn1xfUs8N++am9lLdCxE30riB2xLwcfVUc5w1x3qNCjuatx5Y7Vn2m1Ay0RxGhMZBspQspDHUAH
+ wBStOFnfSzogeQBMb0uAWLhV8x/l+tb35Rk4M8Qk2gZosdzAoZXA1XEQ+mfuHimA8HYD+auup0u
+ dQkHCyYRDnlSl1dDjmg==
+X-Proofpoint-ORIG-GUID: iWJg-ygSVRxyX3VOYnyDnMidPbtqxkMb
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzExMDEwMyBTYWx0ZWRfX+GeqnUHqSLse
+ 6oljsSK4ZnFCXQTzA3rZrQ8lUlI8Y7RPzLZfAEtpoUrLkLp2AMe9259thXoTE/cIfjGGaQ4sl2q
+ UW/fPUSDG3ZPSMFlcoDuXjmC4q4gCJk=
+X-Authority-Analysis: v=2.4 cv=TpzWQjXh c=1 sm=1 tr=0 ts=6a5220d0 cx=c_pps
+ a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=f7IdgyKtn90A:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22
+ a=KKAkSRfTAAAA:8 a=Y4SOClW3IRnDOyVZwr4A:9 a=QEXdDO2ut3YA:10
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: devqyiRefFQzmcR5m3z8-QfZgPqT59HE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-11_02,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 priorityscore=1501 impostorscore=0 malwarescore=0 bulkscore=0
+ lowpriorityscore=0 adultscore=0 spamscore=0 clxscore=1011 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607110103
+Received-SPF: pass client-ip=148.163.156.1; envelope-from=harshpb@linux.ibm.com;
+ helo=mx0a-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
+X-Spam_bar: --
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,80 +129,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
++ Cedric, Shiva
 
-First, thank you for your work maintaining the stable series.
+On 11/07/26 2:23 am, Richard Henderson wrote:
+> We don't need to check either ISA bit, because that's already
+> done starting with SPR registration.  Replace target_ulong with
+> uint64_t, as we're under TARGET_PPC64.
+> 
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   target/ppc/tcg-excp_helper.c | 30 +++++++++---------------------
+>   1 file changed, 9 insertions(+), 21 deletions(-)
+> 
+> diff --git a/target/ppc/tcg-excp_helper.c b/target/ppc/tcg-excp_helper.c
+> index 99ffe4a820..4065440949 100644
+> --- a/target/ppc/tcg-excp_helper.c
+> +++ b/target/ppc/tcg-excp_helper.c
+> @@ -353,35 +353,23 @@ bool ppc_cpu_debug_check_watchpoint(CPUState *cs, CPUBreakpoint *wp)
+>   {
+>   #if defined(TARGET_PPC64)
+>       CPUPPCState *env = cpu_env(cs);
+> -    bool wt, wti, hv, sv, pr;
+> -    uint32_t dawrx;
+> +    uint32_t dawrx = env->spr[wp->id ? SPR_DAWRX1 : SPR_DAWRX0];
+> +    bool wt = extract32(dawrx, PPC_BIT_NR(59), 1);
+> +    bool wti = extract32(dawrx, PPC_BIT_NR(60), 1);
+> +    bool hv = extract32(dawrx, PPC_BIT_NR(61), 1);
+> +    bool sv = extract32(dawrx, PPC_BIT_NR(62), 1);
+> +    bool pr = extract32(dawrx, PPC_BIT_NR(62), 1);
+>   
+> -    if ((env->insns_flags2 & PPC2_ISA207S) &&
+> -        (wp == env->dawr_watchpoint[0])) {
+> -        dawrx = env->spr[SPR_DAWRX0];
+> -    } else if ((env->insns_flags2 & PPC2_ISA310) &&
+> -               (wp == env->dawr_watchpoint[1])) {
+> -        dawrx = env->spr[SPR_DAWRX1];
+> -    } else {
 
-On 2026/07/11 16:47, Michael Tokarev wrote:
-> On 7/1/26 12:22, Daniel Henrique Barboza wrote:
->> We're hardcoding faulting type as READ, where it could very well be a
->> write access, and we're not recording the faulting addr/iova.
->>
->> A note was added in the fault_type logic because I wasn't able to
->> trivially handle a probable code repeitition it in this same patch.
->> Something to do in a later date.
->>
->> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
->> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3564
->> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->> ---
->>   hw/riscv/riscv-iommu.c | 29 +++++++++++++++++++++++------
->>   1 file changed, 23 insertions(+), 6 deletions(-)
-> 
-> For the stable qemu series (currently 10.0.x-LTS and 11.0.x), in order
-> to pick this commit, I also picked v11.0.0-1212-gca7bac51e04
-> "hw/riscv/riscv-iommu: Avoid caching PCI device IDs" by Chengbo Gao
-> (Cc'ed) - because it touched the same code and there's a merge conflict.
-> I can edit this patch ("set ftype and iova in riscv_iommu_ctx()") instead,
-> but it felt that ca7bac51e04 is also a good pick for the stable series.
-> 
-> Additionally for 10.0.x-LTS series, I also picked 2 more commits:
-> 
-> v10.2.0-323-g15406cc593a "hw/riscv: riscv-iommu: Don't look up DDT cache
->   in Off and Bare modes" by Frank Chang (Cc'ed), which avoids a merge
->   conflict and also looks like a (maybe missing) bugfix.
-> 
-> v10.2.0-312-gc497ef6739c "hw/riscv/riscv-iommu: Fix MemoryRegion owner"
->   by Akihiko Odaki, which I spotted when looking for the history of
->   changes, and which looked like an obvious bugfix.
+Previously, there were different ISA version checks resulting in 
+different behaviour, now with this change we are allowing for both ISA 
+versions. Not sure if this would be an expected behaviour?
 
-This particular change is somewhat orthogonal to the broader issue you 
-describe with RISC-V patches. I found it through a codebase-wide search 
-for incorrect MemoryRegion ownership, rather than while following the 
-evolution of the RISC-V code. The same search found a similar issue 
-elsewhere, which you have already picked up:
+Shiva, Could you also please check and confirm?
 
-https://lore.kernel.org/qemu-devel/20251121184424.1137669-18-mjt@tls.msk.ru/
-("[Stable-10.0.7 18/81] hw/nvram/ds1225y: Fix nvram MemoryRegion owner")
+Also, there seems to be a copy-paste mistake in existing code as 
+identified in another thread, may be we can fix along?
 
-Unfortunately, there are several recurring patterns of MemoryRegion 
-misuse, and in some cases I am not entirely sure what the correct 
-ownership should be. In any case, this is separate from the concerns 
-around fast-moving RISC-V development.
+bool pr = extract32(dawrx, PPC_BIT_NR(63), 1);
 
-This particular change is trivial; it corrects semantically incorrect 
-code, but I am not sure whether the bug has any user-visible effect.
-
-Regards,
-Akihiko Odaki
-
-> 
-> Hopefully this is okay.  Unfortunately even the simpler changes brings
-> up quite a lot of missing fixes just by a chance - this means that we
-> either not doing a good job keeping stable series up to date (by marking
-> commits fixing stuff for-stable), or we should not try fixing stuff in
-> previous series for a too-fast-moving target.
-> 
-> I'm sorry I'm bringing up this more general question in a very narrow
-> context of this particular fix (which might not even be important
-> enough).  Maybe I should discuss this separately.  Overall, I'm
-> having some.. issues with riscv pullreqs in context of stable series,
-> it's always more time-consuming to handle these and a bit more difficult
-> to decide what is imortant and what can be skipped.
-> 
-> Thanks,
-> 
-> /mjt
-> 
+regards,
+Harsh
+> +    if ((env->msr & (1ull << MSR_PR)) && !pr) {
+>           return false;
+> -    }
+> -
+> -    wt = extract32(dawrx, PPC_BIT_NR(59), 1);
+> -    wti = extract32(dawrx, PPC_BIT_NR(60), 1);
+> -    hv = extract32(dawrx, PPC_BIT_NR(61), 1);
+> -    sv = extract32(dawrx, PPC_BIT_NR(62), 1);
+> -    pr = extract32(dawrx, PPC_BIT_NR(62), 1);
+> -
+> -    if ((env->msr & ((target_ulong)1 << MSR_PR)) && !pr) {
+> -        return false;
+> -    } else if ((env->msr & ((target_ulong)1 << MSR_HV)) && !hv) {
+> +    } else if ((env->msr & (1ull << MSR_HV)) && !hv) {
+>           return false;
+>       } else if (!sv) {
+>           return false;
+>       }
+>   
+>       if (!wti) {
+> -        if (env->msr & ((target_ulong)1 << MSR_DR)) {
+> +        if (env->msr & (1ull << MSR_DR)) {
+>               return wt;
+>           } else {
+>               return !wt;
 
 
