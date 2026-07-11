@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90E69C44507
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF11C44506
 	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:42:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiG2-0006vj-MX; Sat, 11 Jul 2026 20:41:22 -0400
+	id 1wiiEO-00027E-Eb; Sat, 11 Jul 2026 20:39:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigr3-0004lW-Je; Sat, 11 Jul 2026 19:11:34 -0400
-Received: from pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.26.1.71])
+ id 1wigYc-00017D-Gl; Sat, 11 Jul 2026 18:52:27 -0400
+Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.77.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigqt-0004oT-4g; Sat, 11 Jul 2026 19:11:26 -0400
+ id 1wigYY-0008Tx-V9; Sat, 11 Jul 2026 18:52:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811479; x=1815347479;
+ t=1783810343; x=1815346343;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=pDDCIg5+J6t1aKjwBKaum3v23g0Lhipp3/n7uMQNZGw=;
- b=hJpE+RmkCl2pBFvYs7s2BOgs2ldwxUHMVZkU6r5B1vnKoTXu/KwU5sNd
- OawZVq1kBi6OAKOgwZbFr87S3D0OIniz7ubAnfBs77EORrbdSx4rLVELp
- ZOHWLPUpnebQMNn6n/M39fQ3sNgUO6mb/gbVvWYqkyuyXRXvHigEnnSek
- YWpJkJH0U6a6smnwXdne0qczyPEc6CLZj9oiZWaeUtrC0CZxzz324F079
- V2pB2ITtt+KMKytc81VLMCIQvPnUW6t934wGRvZzR7cygSadEpo/Jh+kY
- Vb9SDZuj7cA8ZV3COLbmVTCsprwpr3fa/ZVrizq7lV8D0cGAQ4zoz2Si2 w==;
-X-CSE-ConnectionGUID: v0vWqlHxT1++gg9sKfbu6Q==
-X-CSE-MsgGUID: ZD7y+3XFRlmA7tCWGGe9LA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23522651"
-Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
- by internal-pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:11:15 +0000
-Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:15565]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.33:2525]
+ bh=qJ9SPZd6KqKT0DByIkveEz5n2P2u8Ab+W4C2Tdl7jYU=;
+ b=RaQia3awJ9VURokJD/SJpdT5RmyuQIi9OzMik2N9DQGN/CRREhUdD/vC
+ yK7Ahl/4PcylV0VfAljIfFQ+WPbgFrruvhevlbspTkEqPNYMxwoNPo5xw
+ eobvM/v7GllIn4tLurNatE+cmZkVZU4EqQqlfaTQvqLpZKlMa6+VN77xs
+ VtQEIMulGneHMqtFJSJGCVC/6ly8XqTynghEOi4ezRiJDF1ikwX1sMvNq
+ xFN2SKArBFl2SqJN4eeFFh85/2CB3EhvSH3y1DTg/lm+ZD0Ypkp9w9CXE
+ RflYbU7HSGAbfG5xBcBA5u4eDo8/HbMawfAcGfY/gikuA3t3i1WwRqs+6 w==;
+X-CSE-ConnectionGUID: jjHQ2GzHTxyUeU25lbK3Pg==
+X-CSE-MsgGUID: 290MNva6RYilvvSdP7ceRA==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23493166"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:52:18 +0000
+Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.51:25417]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525]
  with esmtp (Farcaster)
- id d00aa24b-fc60-4e21-b454-ed90061296a0; Sat, 11 Jul 2026 23:11:14 +0000 (UTC)
-X-Farcaster-Flow-ID: d00aa24b-fc60-4e21-b454-ed90061296a0
+ id 1520f47c-e749-4a59-a4bb-753b46ca57be; Sat, 11 Jul 2026 22:52:18 +0000 (UTC)
+X-Farcaster-Flow-ID: 1520f47c-e749-4a59-a4bb-753b46ca57be
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
+ EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:11:14 +0000
+ Sat, 11 Jul 2026 22:52:18 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:11:05 +0000
+ Sat, 11 Jul 2026 22:52:09 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 129/134] hw: Parent board-created CPUs under the machine
-Date: Sat, 11 Jul 2026 22:37:02 +0000
-Message-ID: <20260711223707.42139-130-graf@amazon.com>
+Subject: [RFC PATCH 057/134] hw/arm/sbsa-ref: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:50 +0000
+Message-ID: <20260711223707.42139-58-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,21 +101,21 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D045UWC002.ant.amazon.com (10.13.139.230) To
+X-ClientProxiedBy: EX19D043UWA003.ant.amazon.com (10.13.139.31) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.26.1.71;
+Received-SPF: pass client-ip=44.246.77.92;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:58 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,491 +130,280 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A number of boards create CPUs via object_new(cpu_type) followed
-by property setting and qdev_realize(NULL), rather than through
-cpu_create().  These CPUs currently fall into /machine/unattached
-via the device_set_realized() fallback.  Parent them explicitly
-under the machine (or the CPS/SoC container that owns them) as
-"cpu[*]", matching the naming convention used by cpu_create().
+Convert the *_orphan() device-creation calls in the hw/arm sbsa-ref
+board files to the new parented API introduced earlier in this
+series, so every onboard device gets a stable path in the
+composition tree instead of landing in /machine/unattached with an
+unstable device[N] name.
 
-The subsequent object_unref() and qdev_realize_and_unref() calls
-are converted to plain qdev_realize() (or dropped) since the
-parent's child<> property now holds the reference.  Error paths
-switch to object_unparent().
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing SoC device for
+composite children.  Names follow existing QOM conventions.
 
-The transient introspection object_new() in hw/arm/virt.c
-machvirt_init() (probing pa_bits) is deliberately left as-is;
-it is unref'd immediately without being realized.
+Per-site rationale (reviewers: dispute the modeling here):
 
-  hw/arm:       integratorcp mps3r realview sbsa-ref versatilepb
-                vexpress virt xilinx-zynq
-  hw/hexagon:   hexagon_dsp virt
-  hw/i386:      x86-common xen-pvh
-  hw/loongarch: virt
-  hw/mips:      cps
-  hw/ppc:       e500 spapr (cpu-core)
-  hw/riscv:     cps microblaze-v-generic
-  hw/s390x:     s390-virtio-ccw
-  hw/sparc:     leon3 sun4m
-  hw/sparc64:   sparc64
+hw/arm/sbsa-ref.c:299 | qdev_new | OBJECT(sms) | name | collapse existing object_property_add_child(OBJECT(sms), name, ...); keep existing name; sbsa_flash_map1 realize -> sysbus_realize
+hw/arm/sbsa-ref.c:424 | qdev_new | OBJECT(sms) | "its" | helper receives SBSAMachineState* board pointer
+hw/arm/sbsa-ref.c:443 | qdev_new | OBJECT(sms) | "gic" | helper receives SBSAMachineState* board pointer
+hw/arm/sbsa-ref.c:525 | qdev_new | OBJECT(sms) | "uart[*]" | helper called 3x from board init -> auto-index; drop const
+hw/arm/sbsa-ref.c:540 | sysbus_create_simple | OBJECT(sms) | "rtc" | helper receives SBSAMachineState*; drop const
+hw/arm/sbsa-ref.c:547 | qdev_new | OBJECT(sms) | "wdt" | helper receives SBSAMachineState*; drop const
+hw/arm/sbsa-ref.c:575 | sysbus_create_simple | OBJECT(sms) | "gpio" | helper receives SBSAMachineState*; drop const
+hw/arm/sbsa-ref.c:578 | sysbus_create_simple | OBJECT(sms) | "gpio-key" | helper receives SBSAMachineState*
+hw/arm/sbsa-ref.c:593 | qdev_new | OBJECT(sms) | "ahci" | helper receives SBSAMachineState*; drop const
+hw/arm/sbsa-ref.c:608 | qdev_new | OBJECT(sms) | "xhci" | helper receives SBSAMachineState*; drop const
+hw/arm/sbsa-ref.c:625 | qdev_new | OBJECT(sms) | "smmuv3" | helper receives SBSAMachineState*; drop const
+hw/arm/sbsa-ref.c:661 | qdev_new | OBJECT(sms) | "pcie" | helper receives SBSAMachineState*
+hw/arm/sbsa-ref.c:698 | pci_create_simple | OBJECT(sms) | "bochs-display" | board owns lifetime; bus is plug location not parent
+hw/arm/sbsa-ref.c:715 | qdev_new | parent | "sbsa-ec" | helper lacks parent-capable pointer -> thread Object *parent from sbsa_ref_init
 
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/arm/integratorcp.c           |  3 ++-
- hw/arm/mps3r.c                  |  4 ++--
- hw/arm/realview.c               |  3 ++-
- hw/arm/sbsa-ref.c               |  4 ++--
- hw/arm/versatilepb.c            |  3 ++-
- hw/arm/vexpress.c               |  3 ++-
- hw/arm/virt.c                   |  4 ++--
- hw/arm/xilinx_zynq.c            |  3 ++-
- hw/hexagon/hexagon_dsp.c        |  5 +++--
- hw/hexagon/virt.c               |  5 +++--
- hw/i386/x86-common.c            |  9 ++++-----
- hw/i386/xen/xen-pvh.c           |  5 ++---
- hw/loongarch/virt.c             |  5 +++--
- hw/mips/cps.c                   |  5 +++--
- hw/ppc/e500.c                   |  5 +++--
- hw/ppc/spapr.c                  |  4 ++--
- hw/riscv/cps.c                  |  5 +++--
- hw/riscv/microblaze-v-generic.c |  3 ++-
- hw/s390x/s390-virtio-ccw.c      | 16 +++++++---------
- hw/sparc/leon3.c                |  3 ++-
- hw/sparc/sun4m.c                |  5 +++--
- hw/sparc64/sparc64.c            |  3 ++-
- 22 files changed, 58 insertions(+), 47 deletions(-)
+ hw/arm/sbsa-ref.c | 70 ++++++++++++++++++++++++-----------------------
+ 1 file changed, 36 insertions(+), 34 deletions(-)
 
-diff --git a/hw/arm/integratorcp.c b/hw/arm/integratorcp.c
-index 81c0bce8f9..30a6a940c5 100644
---- a/hw/arm/integratorcp.c
-+++ b/hw/arm/integratorcp.c
-@@ -598,7 +598,8 @@ static void integratorcp_init(MachineState *machine)
-     DriveInfo *dinfo;
-     int i;
- 
--    cpuobj = object_new(machine->cpu_type);
-+    cpuobj = object_new_child(OBJECT(machine), "cpu[0]",
-+                                        machine->cpu_type);
- 
-     /* By default ARM1176 CPUs have EL3 enabled.  This board does not
-      * currently support EL3 so the CPU EL3 property is disabled before
-diff --git a/hw/arm/mps3r.c b/hw/arm/mps3r.c
-index d6c29c1172..dd434eaefd 100644
---- a/hw/arm/mps3r.c
-+++ b/hw/arm/mps3r.c
-@@ -388,13 +388,13 @@ static void mps3r_common_init(MachineState *machine)
-         memory_region_add_subregion_overlap(&mms->cpu_sysmem[i], 0,
-                                             &mms->sysmem_alias[i], -1);
- 
--        mms->cpu[i] = object_new(machine->cpu_type);
-+        mms->cpu[i] = object_new_child(OBJECT(mms), "cpu[*]",
-+                                        machine->cpu_type);
-         object_property_set_link(mms->cpu[i], "memory",
-                                  OBJECT(&mms->cpu_sysmem[i]), &error_abort);
-         object_property_set_int(mms->cpu[i], "reset-cbar",
-                                 PERIPHBASE, &error_abort);
-         qdev_realize(DEVICE(mms->cpu[i]), NULL, &error_fatal);
--        object_unref(mms->cpu[i]);
- 
-         /* Per-CPU RAM */
-         memory_region_init_ram(&mms->cpu_ram[i], OBJECT(mms), ramname,
-diff --git a/hw/arm/realview.c b/hw/arm/realview.c
-index 99591e7d80..f938367131 100644
---- a/hw/arm/realview.c
-+++ b/hw/arm/realview.c
-@@ -119,7 +119,8 @@ static void realview_init(MachineState *machine,
-     }
- 
-     for (n = 0; n < smp_cpus; n++) {
--        Object *cpuobj = object_new(machine->cpu_type);
-+        Object *cpuobj = object_new_child(OBJECT(machine), "cpu[*]",
-+                                        machine->cpu_type);
- 
-         /* By default A9,A15 and ARM1176 CPUs have EL3 enabled.  This board
-          * does not currently support EL3 so the CPU EL3 property is disabled
 diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index c9adc972c1..3b759d9209 100644
+index f9fb681d31..f632df742b 100644
 --- a/hw/arm/sbsa-ref.c
 +++ b/hw/arm/sbsa-ref.c
-@@ -783,7 +783,8 @@ static void sbsa_ref_init(MachineState *machine)
-             break;
-         }
+@@ -296,7 +296,7 @@ static PFlashCFI01 *sbsa_flash_create1(SBSAMachineState *sms,
+      * Create a single flash device.  We use the same parameters as
+      * the flash devices on the Versatile Express board.
+      */
+-    DeviceState *dev = qdev_new_orphan(TYPE_PFLASH_CFI01);
++    DeviceState *dev = qdev_new(OBJECT(sms), name, TYPE_PFLASH_CFI01);
  
--        cpuobj = object_new(possible_cpus->cpus[n].type);
-+        cpuobj = object_new_child(OBJECT(sms), "cpu[*]",
-+                                        possible_cpus->cpus[n].type);
-         object_property_set_int(cpuobj, "mp-affinity",
-                                 possible_cpus->cpus[n].arch_id, NULL);
+     qdev_prop_set_uint64(dev, "sector-length", SBSA_FLASH_SECTOR_SIZE);
+     qdev_prop_set_uint8(dev, "width", 4);
+@@ -307,7 +307,6 @@ static PFlashCFI01 *sbsa_flash_create1(SBSAMachineState *sms,
+     qdev_prop_set_uint16(dev, "id2", 0x00);
+     qdev_prop_set_uint16(dev, "id3", 0x00);
+     qdev_prop_set_string(dev, "name", name);
+-    object_property_add_child(OBJECT(sms), name, OBJECT(dev));
+     object_property_add_alias(OBJECT(sms), alias_prop_name,
+                               OBJECT(dev), "drive");
+     return PFLASH_CFI01(dev);
+@@ -328,7 +327,7 @@ static void sbsa_flash_map1(PFlashCFI01 *flash,
+     assert(QEMU_IS_ALIGNED(size, SBSA_FLASH_SECTOR_SIZE));
+     assert(size / SBSA_FLASH_SECTOR_SIZE <= UINT32_MAX);
+     qdev_prop_set_uint32(dev, "num-blocks", size / SBSA_FLASH_SECTOR_SIZE);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
  
-@@ -808,7 +809,6 @@ static void sbsa_ref_init(MachineState *machine)
-                                  OBJECT(secure_sysmem), &error_abort);
+     memory_region_add_subregion(sysmem, base,
+                                 sysbus_mmio_get_region(SYS_BUS_DEVICE(dev),
+@@ -421,11 +420,11 @@ static void create_its(SBSAMachineState *sms)
+     const char *itsclass = its_class_name();
+     DeviceState *dev;
  
-         qdev_realize(DEVICE(cpuobj), NULL, &error_fatal);
--        object_unref(cpuobj);
-     }
+-    dev = qdev_new_orphan(itsclass);
++    dev = qdev_new(OBJECT(sms), "its", itsclass);
  
-     memory_region_add_subregion(sysmem, sbsa_ref_memmap[SBSA_MEM].base,
-diff --git a/hw/arm/versatilepb.c b/hw/arm/versatilepb.c
-index f68c4765c6..8d93fff207 100644
---- a/hw/arm/versatilepb.c
-+++ b/hw/arm/versatilepb.c
-@@ -208,7 +208,8 @@ static void versatile_init(MachineState *machine, int board_id)
-         exit(1);
-     }
- 
--    cpuobj = object_new(machine->cpu_type);
-+    cpuobj = object_new_child(OBJECT(machine), "cpu[0]",
-+                                        machine->cpu_type);
- 
-     /* By default ARM1176 CPUs have EL3 enabled.  This board does not
-      * currently support EL3 so the CPU EL3 property is disabled before
-diff --git a/hw/arm/vexpress.c b/hw/arm/vexpress.c
-index f877ccf330..986525b9ce 100644
---- a/hw/arm/vexpress.c
-+++ b/hw/arm/vexpress.c
-@@ -219,7 +219,8 @@ static void init_cpus(MachineState *ms, const char *cpu_type,
- 
-     /* Create the actual CPUs */
-     for (n = 0; n < smp_cpus; n++) {
--        Object *cpuobj = object_new(cpu_type);
-+        Object *cpuobj = object_new_child(qdev_get_machine(), "cpu[*]",
-+                                        cpu_type);
- 
-         if (!secure) {
-             object_property_set_bool(cpuobj, "has_el3", false, NULL);
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index f2249a0b72..95e087d692 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -3039,7 +3039,8 @@ static void machvirt_init(MachineState *machine)
-             break;
-         }
- 
--        cpuobj = object_new(possible_cpus->cpus[n].type);
-+        cpuobj = object_new_child(OBJECT(vms), "cpu[*]",
-+                                  possible_cpus->cpus[n].type);
-         object_property_set_int(cpuobj, "mp-affinity",
-                                 possible_cpus->cpus[n].arch_id, NULL);
- 
-@@ -3139,7 +3140,6 @@ static void machvirt_init(MachineState *machine)
-         }
- 
-         qdev_realize(DEVICE(cpuobj), NULL, &error_fatal);
--        object_unref(cpuobj);
-     }
- 
-     /* Now we've created the CPUs we can see if they have the hypvirt timer */
-diff --git a/hw/arm/xilinx_zynq.c b/hw/arm/xilinx_zynq.c
-index 441289e63f..a2dcdd422d 100644
---- a/hw/arm/xilinx_zynq.c
-+++ b/hw/arm/xilinx_zynq.c
-@@ -222,7 +222,8 @@ static void zynq_init(MachineState *machine)
-     }
- 
-     for (n = 0; n < smp_cpus; n++) {
--        Object *cpuobj = object_new(machine->cpu_type);
-+        Object *cpuobj = object_new_child(OBJECT(machine), "cpu[*]",
-+                                        machine->cpu_type);
- 
-         object_property_set_int(cpuobj, "midr", ZYNQ_BOARD_MIDR,
-                                 &error_fatal);
-diff --git a/hw/hexagon/hexagon_dsp.c b/hw/hexagon/hexagon_dsp.c
-index 53dfe6741e..d78a987dca 100644
---- a/hw/hexagon/hexagon_dsp.c
-+++ b/hw/hexagon/hexagon_dsp.c
-@@ -143,7 +143,8 @@ static void hexagon_common_init(MachineState *machine, Rev_t rev,
-     sysbus_realize(SYS_BUS_DEVICE(tlb_dev), &error_fatal);
- 
-     for (int i = 0; i < machine->smp.cpus; i++) {
--        HexagonCPU *cpu = HEXAGON_CPU(object_new(machine->cpu_type));
-+        HexagonCPU *cpu = HEXAGON_CPU(object_new_child(OBJECT(machine), "cpu[*]",
-+                                        machine->cpu_type));
-         qemu_register_reset(do_cpu_reset, cpu);
- 
-         /*
-@@ -158,7 +159,7 @@ static void hexagon_common_init(MachineState *machine, Rev_t rev,
-                                  OBJECT(glob_regs_dev), &error_fatal);
-         object_property_set_link(OBJECT(cpu), "tlb",
-                                  OBJECT(tlb_dev), &error_fatal);
--        qdev_realize_and_unref(DEVICE(cpu), NULL, &error_fatal);
-+        qdev_realize(DEVICE(cpu), NULL, &error_fatal);
-     }
- 
-     rom_add_blob_fixed_as("config_table.rom", &m_cfg->cfgtable,
-diff --git a/hw/hexagon/virt.c b/hw/hexagon/virt.c
-index fb23cda19f..48f1e35dd3 100644
---- a/hw/hexagon/virt.c
-+++ b/hw/hexagon/virt.c
-@@ -280,7 +280,8 @@ static void virt_init(MachineState *ms)
- 
-     cpu0 = NULL;
-     for (int i = 0; i < ms->smp.cpus; i++) {
--        HexagonCPU *cpu = HEXAGON_CPU(object_new(ms->cpu_type));
-+        HexagonCPU *cpu = HEXAGON_CPU(object_new_child(OBJECT(ms), "cpu[*]",
-+                                        ms->cpu_type));
-         qemu_register_reset(do_cpu_reset, cpu);
- 
-         if (i == 0) {
-@@ -300,7 +301,7 @@ static void virt_init(MachineState *ms)
-         object_property_set_link(OBJECT(cpu), "tlb",
-                                  OBJECT(tlb_dev), &error_fatal);
- 
--        qdev_realize_and_unref(DEVICE(cpu), NULL, &error_fatal);
-+        qdev_realize(DEVICE(cpu), NULL, &error_fatal);
-     }
-     fdt_add_cpu_nodes(vms);
-     clk_phandle = fdt_add_clocks(vms);
-diff --git a/hw/i386/x86-common.c b/hw/i386/x86-common.c
-index 151a67ee5f..5bbfee737e 100644
---- a/hw/i386/x86-common.c
-+++ b/hw/i386/x86-common.c
-@@ -55,15 +55,14 @@ static size_t pvh_start_addr;
- 
- static void x86_cpu_new(X86MachineState *x86ms, int64_t apic_id, Error **errp)
- {
--    Object *cpu = object_new(MACHINE(x86ms)->cpu_type);
-+    Object *cpu = object_new_child(OBJECT(x86ms), "cpu[*]",
-+                                        MACHINE(x86ms)->cpu_type);
- 
-     if (!object_property_set_uint(cpu, "apic-id", apic_id, errp)) {
--        goto out;
-+        object_unparent(cpu);
-+        return;
-     }
-     qdev_realize(DEVICE(cpu), NULL, errp);
--
--out:
--    object_unref(cpu);
- }
- 
- void x86_cpus_init(X86MachineState *x86ms, int default_cpu_version)
-diff --git a/hw/i386/xen/xen-pvh.c b/hw/i386/xen/xen-pvh.c
-index ab90c83a83..7aef48ad61 100644
---- a/hw/i386/xen/xen-pvh.c
-+++ b/hw/i386/xen/xen-pvh.c
-@@ -29,12 +29,11 @@ struct XenPVHx86State {
- static DeviceState *xen_pvh_cpu_new(MachineState *ms,
-                                     int64_t apic_id)
- {
--    Object *cpu = object_new(ms->cpu_type);
-+    Object *cpu = object_new_child(OBJECT(ms), "cpu[*]",
-+                                        ms->cpu_type);
- 
--    object_property_add_child(OBJECT(ms), "cpu[*]", cpu);
-     object_property_set_uint(cpu, "apic-id", apic_id, &error_fatal);
-     qdev_realize(DEVICE(cpu), NULL, &error_fatal);
--    object_unref(cpu);
- 
-     return DEVICE(cpu);
- }
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 580ef0bb3e..b749aafdbe 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -948,13 +948,14 @@ static void virt_init(MachineState *machine)
-     /* Init CPUs */
-     mc->possible_cpu_arch_ids(machine);
-     for (i = 0; i < machine->smp.cpus; i++) {
--        cpuobj = object_new(machine->cpu_type);
-+        cpuobj = object_new_child(OBJECT(machine), "cpu[*]",
-+                                        machine->cpu_type);
-         if (cpuobj == NULL) {
-             error_report("Fail to create object with type %s ",
-                          machine->cpu_type);
-             exit(EXIT_FAILURE);
-         }
--        qdev_realize_and_unref(DEVICE(cpuobj), NULL, &error_fatal);
-+        qdev_realize(DEVICE(cpuobj), NULL, &error_fatal);
-     }
-     virt_check_dmsi(machine);
-     fw_cfg_add_memory(machine);
-diff --git a/hw/mips/cps.c b/hw/mips/cps.c
-index 620ee972f8..b997608373 100644
---- a/hw/mips/cps.c
-+++ b/hw/mips/cps.c
-@@ -74,7 +74,8 @@ static void mips_cps_realize(DeviceState *dev, Error **errp)
-     }
- 
-     for (int i = 0; i < s->num_vp; i++) {
--        MIPSCPU *cpu = MIPS_CPU(object_new(s->cpu_type));
-+        MIPSCPU *cpu = MIPS_CPU(object_new_child(OBJECT(s), "cpu[*]",
-+                                        s->cpu_type));
-         CPUMIPSState *env = &cpu->env;
- 
-         object_property_set_bool(OBJECT(cpu), "big-endian", s->cpu_is_bigendian,
-@@ -87,7 +88,7 @@ static void mips_cps_realize(DeviceState *dev, Error **errp)
-         /* All cores use the same clock tree */
-         qdev_connect_clock_in(DEVICE(cpu), "clk-in", s->clock);
- 
--        if (!qdev_realize_and_unref(DEVICE(cpu), NULL, errp)) {
-+        if (!qdev_realize(DEVICE(cpu), NULL, errp)) {
-             return;
-         }
- 
-diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
-index f3917c0755..a0eb25e956 100644
---- a/hw/ppc/e500.c
-+++ b/hw/ppc/e500.c
-@@ -941,7 +941,8 @@ void ppce500_init(MachineState *machine)
-         PowerPCCPU *cpu;
-         CPUState *cs;
- 
--        cpu = POWERPC_CPU(object_new(machine->cpu_type));
-+        cpu = POWERPC_CPU(object_new_child(OBJECT(machine), "cpu[*]",
-+                                        machine->cpu_type));
-         env = &cpu->env;
-         cs = CPU(cpu);
- 
-@@ -956,7 +957,7 @@ void ppce500_init(MachineState *machine)
-          */
-         object_property_set_bool(OBJECT(cs), "start-powered-off", i != 0,
-                                  &error_abort);
--        qdev_realize_and_unref(DEVICE(cs), NULL, &error_fatal);
-+        qdev_realize(DEVICE(cs), NULL, &error_fatal);
- 
-         if (!firstenv) {
-             firstenv = env;
-diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
-index 9b6b5e7257..e6c1b7f0b1 100644
---- a/hw/ppc/spapr.c
-+++ b/hw/ppc/spapr.c
-@@ -2776,7 +2776,8 @@ static void spapr_init_cpus(SpaprMachineState *spapr)
-         }
- 
-         if (i < boot_cores_nr) {
--            Object *core  = object_new(type);
-+            Object *core  = object_new_child(OBJECT(spapr), "cpu-core[*]",
-+                                        type);
-             int nr_threads = smp_threads;
- 
-             /* Handle the partially filled core for older machine types */
-@@ -2790,7 +2791,6 @@ static void spapr_init_cpus(SpaprMachineState *spapr)
-                                     &error_fatal);
-             qdev_realize(DEVICE(core), NULL, &error_fatal);
- 
--            object_unref(core);
-         }
-     }
- }
-diff --git a/hw/riscv/cps.c b/hw/riscv/cps.c
-index b6b30e05e1..2bf506b61a 100644
---- a/hw/riscv/cps.c
-+++ b/hw/riscv/cps.c
-@@ -63,13 +63,14 @@ static void riscv_cps_realize(DeviceState *dev, Error **errp)
-     int harts_in_cluster = s->num_hart * s->num_core;
-     int num_of_clusters = s->num_vp / harts_in_cluster;
-     for (i = 0; i < s->num_vp; i++) {
--        cpu = RISCV_CPU(object_new(s->cpu_type));
-+        cpu = RISCV_CPU(object_new_child(OBJECT(s), "cpu[*]",
-+                                        s->cpu_type));
- 
-         /* All VPs are halted on reset. Leave powering up to CPC. */
-         object_property_set_bool(OBJECT(cpu), "start-powered-off", true,
-                                  &error_abort);
- 
--        if (!qdev_realize_and_unref(DEVICE(cpu), NULL, errp)) {
-+        if (!qdev_realize(DEVICE(cpu), NULL, errp)) {
-             return;
-         }
- 
-diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-generic.c
-index 0a83932405..f97ce402e6 100644
---- a/hw/riscv/microblaze-v-generic.c
-+++ b/hw/riscv/microblaze-v-generic.c
-@@ -65,7 +65,8 @@ static void mb_v_generic_init(MachineState *machine)
-     qemu_irq irq[32];
-     MemoryRegion *sysmem = get_system_memory();
- 
--    cpu = RISCV_CPU(object_new(machine->cpu_type));
-+    cpu = RISCV_CPU(object_new_child(OBJECT(machine), "cpu[0]",
-+                                        machine->cpu_type));
-     object_property_set_bool(OBJECT(cpu), "h", false, NULL);
-     object_property_set_bool(OBJECT(cpu), "d", false, NULL);
-     qdev_realize(DEVICE(cpu), NULL, &error_abort);
-diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
-index 037cb6eb5e..0625d4a8df 100644
---- a/hw/s390x/s390-virtio-ccw.c
-+++ b/hw/s390x/s390-virtio-ccw.c
-@@ -56,20 +56,18 @@ static Error *pv_mig_blocker;
- static S390CPU *s390x_new_cpu(const char *typename, uint32_t core_id,
-                               Error **errp)
- {
--    S390CPU *cpu = S390_CPU(object_new(typename));
--    S390CPU *ret = NULL;
-+    S390CPU *cpu = S390_CPU(object_new_child(qdev_get_machine(), "cpu[*]",
-+                                        typename));
- 
-     if (!object_property_set_int(OBJECT(cpu), "core-id", core_id, errp)) {
--        goto out;
-+        object_unparent(OBJECT(cpu));
-+        return NULL;
-     }
-     if (!qdev_realize(DEVICE(cpu), NULL, errp)) {
--        goto out;
-+        object_unparent(OBJECT(cpu));
-+        return NULL;
-     }
--    ret = cpu;
--
--out:
--    object_unref(OBJECT(cpu));
--    return ret;
-+    return cpu;
- }
- 
- static void s390_init_cpus(MachineState *machine)
-diff --git a/hw/sparc/leon3.c b/hw/sparc/leon3.c
-index f9ef2758e1..a2781bcc32 100644
---- a/hw/sparc/leon3.c
-+++ b/hw/sparc/leon3.c
-@@ -278,7 +278,8 @@ static void leon3_generic_hw_init(MachineState *machine)
- 
-     for (i = 0; i < machine->smp.cpus; i++) {
-         /* Init CPU */
--        cpu = SPARC_CPU(object_new(machine->cpu_type));
-+        cpu = SPARC_CPU(object_new_child(OBJECT(machine), "cpu[*]",
-+                                        machine->cpu_type));
-         qdev_init_gpio_in_named(DEVICE(cpu), leon3_start_cpu, "start_cpu", 1);
-         qdev_init_gpio_in_named(DEVICE(cpu), leon3_set_pil_in, "pil", 1);
-         qdev_realize(DEVICE(cpu), NULL, &error_fatal);
-diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
-index 51f5468a02..1ae9d834ca 100644
---- a/hw/sparc/sun4m.c
-+++ b/hw/sparc/sun4m.c
-@@ -787,7 +787,8 @@ static DeviceState *cpu_devinit(const char *cpu_type, unsigned int id,
-     CPUSPARCState *env;
-     DeviceState *cpudev;
- 
--    cpu = SPARC_CPU(object_new(cpu_type));
-+    cpu = SPARC_CPU(object_new_child(qdev_get_machine(), "cpu[*]",
-+                                        cpu_type));
-     env = &cpu->env;
-     cpudev = DEVICE(cpu);
- 
-@@ -795,7 +796,7 @@ static DeviceState *cpu_devinit(const char *cpu_type, unsigned int id,
-     object_property_set_bool(OBJECT(cpu), "start-powered-off", id != 0,
+     object_property_set_link(OBJECT(dev), "parent-gicv3", OBJECT(sms->gic),
                               &error_abort);
-     qdev_init_gpio_in_named(cpudev, cpu_set_irq, "pil", MAX_PILS);
--    qdev_realize_and_unref(cpudev, NULL, &error_fatal);
-+    qdev_realize(cpudev, NULL, &error_fatal);
-     cpu_sparc_set_id(env, id);
-     env->prom_addr = prom_addr;
-     return cpudev;
-diff --git a/hw/sparc64/sparc64.c b/hw/sparc64/sparc64.c
-index 16f4aa052b..9092c4193e 100644
---- a/hw/sparc64/sparc64.c
-+++ b/hw/sparc64/sparc64.c
-@@ -272,7 +272,8 @@ SPARCCPU *sparc64_cpu_devinit(const char *cpu_type, uint64_t prom_addr)
-     uint32_t  stick_frequency = 100 * 1000000;
-     uint32_t hstick_frequency = 100 * 1000000;
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, sbsa_ref_memmap[SBSA_GIC_ITS].base);
+ }
  
--    cpu = SPARC_CPU(object_new(cpu_type));
-+    cpu = SPARC_CPU(object_new_child(qdev_get_machine(), "cpu[0]",
-+                                        cpu_type));
-     qdev_init_gpio_in_named(DEVICE(cpu), sparc64_cpu_set_ivec_irq,
-                             "ivec-irq", IVEC_MAX);
-     qdev_realize(DEVICE(cpu), NULL, &error_fatal);
+@@ -440,7 +439,7 @@ static void create_gic(SBSAMachineState *sms, MemoryRegion *mem)
+ 
+     gictype = gicv3_class_name();
+ 
+-    sms->gic = qdev_new_orphan(gictype);
++    sms->gic = qdev_new(OBJECT(sms), "gic", gictype);
+     qdev_prop_set_uint32(sms->gic, "revision", 3);
+     qdev_prop_set_uint32(sms->gic, "num-cpu", smp_cpus);
+     /*
+@@ -463,7 +462,7 @@ static void create_gic(SBSAMachineState *sms, MemoryRegion *mem)
+     qdev_prop_set_bit(sms->gic, "has-lpi", true);
+ 
+     gicbusdev = SYS_BUS_DEVICE(sms->gic);
+-    sysbus_realize_and_unref(gicbusdev, &error_fatal);
++    sysbus_realize(gicbusdev, &error_fatal);
+     sysbus_mmio_map(gicbusdev, 0, sbsa_ref_memmap[SBSA_GIC_DIST].base);
+     sysbus_mmio_map(gicbusdev, 1, sbsa_ref_memmap[SBSA_GIC_REDIST].base);
+ 
+@@ -517,39 +516,40 @@ static void create_gic(SBSAMachineState *sms, MemoryRegion *mem)
+     create_its(sms);
+ }
+ 
+-static void create_uart(const SBSAMachineState *sms, int uart,
++static void create_uart(SBSAMachineState *sms, int uart,
+                         MemoryRegion *mem, Chardev *chr)
+ {
+     hwaddr base = sbsa_ref_memmap[uart].base;
+     int irq = sbsa_ref_irqmap[uart];
+-    DeviceState *dev = qdev_new_orphan(TYPE_PL011);
++    DeviceState *dev = qdev_new(OBJECT(sms), "uart[*]", TYPE_PL011);
+     SysBusDevice *s = SYS_BUS_DEVICE(dev);
+ 
+     qdev_prop_set_chr(dev, "chardev", chr);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     memory_region_add_subregion(mem, base,
+                                 sysbus_mmio_get_region(s, 0));
+     sysbus_connect_irq(s, 0, qdev_get_gpio_in(sms->gic, irq));
+ }
+ 
+-static void create_rtc(const SBSAMachineState *sms)
++static void create_rtc(SBSAMachineState *sms)
+ {
+     hwaddr base = sbsa_ref_memmap[SBSA_RTC].base;
+     int irq = sbsa_ref_irqmap[SBSA_RTC];
+ 
+-    sysbus_create_simple_orphan("pl031", base, qdev_get_gpio_in(sms->gic, irq));
++    sysbus_create_simple(OBJECT(sms), "rtc", "pl031", base,
++                         qdev_get_gpio_in(sms->gic, irq));
+ }
+ 
+-static void create_wdt(const SBSAMachineState *sms)
++static void create_wdt(SBSAMachineState *sms)
+ {
+     hwaddr rbase = sbsa_ref_memmap[SBSA_GWDT_REFRESH].base;
+     hwaddr cbase = sbsa_ref_memmap[SBSA_GWDT_CONTROL].base;
+-    DeviceState *dev = qdev_new_orphan(TYPE_WDT_SBSA);
++    DeviceState *dev = qdev_new(OBJECT(sms), "wdt", TYPE_WDT_SBSA);
+     SysBusDevice *s = SYS_BUS_DEVICE(dev);
+     int irq = sbsa_ref_irqmap[SBSA_GWDT_WS0];
+ 
+     qdev_prop_set_uint64(dev, "clock-frequency", SBSA_GTIMER_HZ);
+-    sysbus_realize_and_unref(s, &error_fatal);
++    sysbus_realize(s, &error_fatal);
+     sysbus_mmio_map(s, 0, rbase);
+     sysbus_mmio_map(s, 1, cbase);
+     sysbus_connect_irq(s, 0, qdev_get_gpio_in(sms->gic, irq));
+@@ -566,23 +566,23 @@ static Notifier sbsa_ref_powerdown_notifier = {
+     .notify = sbsa_ref_powerdown_req
+ };
+ 
+-static void create_gpio(const SBSAMachineState *sms)
++static void create_gpio(SBSAMachineState *sms)
+ {
+     DeviceState *pl061_dev;
+     hwaddr base = sbsa_ref_memmap[SBSA_GPIO].base;
+     int irq = sbsa_ref_irqmap[SBSA_GPIO];
+ 
+-    pl061_dev = sysbus_create_simple_orphan("pl061", base,
++    pl061_dev = sysbus_create_simple(OBJECT(sms), "gpio", "pl061", base,
+                                      qdev_get_gpio_in(sms->gic, irq));
+ 
+-    gpio_key_dev = sysbus_create_simple_orphan("gpio-key", -1,
+-                                        qdev_get_gpio_in(pl061_dev, 3));
++    gpio_key_dev = sysbus_create_simple(OBJECT(sms), "gpio-key", "gpio-key",
++                                        -1, qdev_get_gpio_in(pl061_dev, 3));
+ 
+     /* connect powerdown request */
+     qemu_register_powerdown_notifier(&sbsa_ref_powerdown_notifier);
+ }
+ 
+-static void create_ahci(const SBSAMachineState *sms)
++static void create_ahci(SBSAMachineState *sms)
+ {
+     hwaddr base = sbsa_ref_memmap[SBSA_AHCI].base;
+     int irq = sbsa_ref_irqmap[SBSA_AHCI];
+@@ -590,9 +590,9 @@ static void create_ahci(const SBSAMachineState *sms)
+     DriveInfo *hd[NUM_SATA_PORTS];
+     SysbusAHCIState *sysahci;
+ 
+-    dev = qdev_new_orphan("sysbus-ahci");
++    dev = qdev_new(OBJECT(sms), "ahci", "sysbus-ahci");
+     qdev_prop_set_uint32(dev, "num-ports", NUM_SATA_PORTS);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, base);
+     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, qdev_get_gpio_in(sms->gic, irq));
+ 
+@@ -601,19 +601,19 @@ static void create_ahci(const SBSAMachineState *sms)
+     ahci_ide_create_devs(&sysahci->ahci, hd);
+ }
+ 
+-static void create_xhci(const SBSAMachineState *sms)
++static void create_xhci(SBSAMachineState *sms)
+ {
+     hwaddr base = sbsa_ref_memmap[SBSA_XHCI].base;
+     int irq = sbsa_ref_irqmap[SBSA_XHCI];
+-    DeviceState *dev = qdev_new_orphan(TYPE_XHCI_SYSBUS);
++    DeviceState *dev = qdev_new(OBJECT(sms), "xhci", TYPE_XHCI_SYSBUS);
+     qdev_prop_set_uint32(dev, "slots", XHCI_MAXSLOTS);
+ 
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, base);
+     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, qdev_get_gpio_in(sms->gic, irq));
+ }
+ 
+-static void create_smmu(const SBSAMachineState *sms, PCIBus *bus,
++static void create_smmu(SBSAMachineState *sms, PCIBus *bus,
+                         MemoryRegion *sysmem,
+                         MemoryRegion *secure_sysmem)
+ {
+@@ -622,7 +622,7 @@ static void create_smmu(const SBSAMachineState *sms, PCIBus *bus,
+     DeviceState *dev;
+     int i;
+ 
+-    dev = qdev_new_orphan(TYPE_ARM_SMMUV3);
++    dev = qdev_new(OBJECT(sms), "smmuv3", TYPE_ARM_SMMUV3);
+ 
+     object_property_set_str(OBJECT(dev), "stage", "nested", &error_abort);
+     object_property_set_link(OBJECT(dev), "primary-bus", OBJECT(bus),
+@@ -631,7 +631,7 @@ static void create_smmu(const SBSAMachineState *sms, PCIBus *bus,
+                              &error_abort);
+     object_property_set_link(OBJECT(dev), "secure-memory", OBJECT(secure_sysmem),
+                              &error_abort);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, base);
+     for (i = 0; i < NUM_SMMU_IRQS; i++) {
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
+@@ -658,8 +658,8 @@ static void create_pcie(SBSAMachineState *sms,
+     PCIHostState *pci;
+     int i;
+ 
+-    dev = qdev_new_orphan(TYPE_GPEX_HOST);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    dev = qdev_new(OBJECT(sms), "pcie", TYPE_GPEX_HOST);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     /* Map ECAM space */
+     ecam_alias = g_new0(MemoryRegion, 1);
+@@ -695,7 +695,7 @@ static void create_pcie(SBSAMachineState *sms,
+ 
+     pci_init_nic_devices(pci->bus, mc->default_nic);
+ 
+-    pci_create_simple_orphan(pci->bus, -1, "bochs-display");
++    pci_create_simple(OBJECT(sms), "bochs-display", pci->bus, -1, "bochs-display");
+ 
+     create_smmu(sms, pci->bus, sysmem, secure_sysmem);
+ }
+@@ -709,12 +709,14 @@ static void *sbsa_ref_dtb(const struct arm_boot_info *binfo, int *fdt_size)
+     return board->fdt;
+ }
+ 
+-static void create_secure_ec(MemoryRegion *mem)
++static void create_secure_ec(Object *parent, MemoryRegion *mem)
+ {
+     hwaddr base = sbsa_ref_memmap[SBSA_SECURE_EC].base;
+-    DeviceState *dev = qdev_new_orphan("sbsa-ec");
++    DeviceState *dev = qdev_new(parent, "sbsa-ec", "sbsa-ec");
+     SysBusDevice *s = SYS_BUS_DEVICE(dev);
+ 
++    sysbus_realize(s, &error_fatal);
++
+     memory_region_add_subregion(mem, base,
+                                 sysbus_mmio_get_region(s, 0));
+ }
+@@ -835,7 +837,7 @@ static void sbsa_ref_init(MachineState *machine)
+ 
+     create_pcie(sms, sysmem, secure_sysmem);
+ 
+-    create_secure_ec(secure_sysmem);
++    create_secure_ec(OBJECT(sms), secure_sysmem);
+ 
+     sms->bootinfo.ram_size = machine->ram_size;
+     sms->bootinfo.board_id = -1;
 -- 
 2.47.1
 
