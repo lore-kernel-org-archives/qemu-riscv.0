@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7EEC44506
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25AD2C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:40:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiE3-0001kD-45; Sat, 11 Jul 2026 20:39:19 -0400
+	id 1wiiEN-00023w-Pe; Sat, 11 Jul 2026 20:39:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigdT-0002kM-ND; Sat, 11 Jul 2026 18:57:28 -0400
-Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.13.214.179])
+ id 1wigro-0007D7-7U; Sat, 11 Jul 2026 19:12:16 -0400
+Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.245.243.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigdR-0001MP-Bc; Sat, 11 Jul 2026 18:57:27 -0400
+ id 1wigrm-0004zp-5z; Sat, 11 Jul 2026 19:12:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810645; x=1815346645;
+ t=1783811534; x=1815347534;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=jOWQ3MPKNOWbOTZvD1jfyggpxHQg9YeLUu3eSDISNmU=;
- b=LMUGEkfpeGM7UdCSUyMyyMmeZ08rL0jfwj/F8f2UkTHdnGkQZST4EMw3
- sKSVsPuzpByHKJjXTWs3WOgT9JLp3ul81OKCUk3RBMw2JG2zQgeeeh+H6
- m8yrw7kP4nT7LzRkd7Dv0HGaGaK80+Cq/CkCDnBg1jArcufwrriWo2Rhe
- SicIH2JXdjAy61gRruHWpROP6WZsKxQevQuckQnAEIA+1Gy5H17ccm2ap
- OQonhvADI4JHFD34n3KVz9mBIoblXwqC5xwv+JziO/8afwD+BMpLsfRyn
- z0YKHmCzMOZzkPMhID139Zum7tgK93EkNhaGCfoLAe5QTsWCjcSsdrZo1 A==;
-X-CSE-ConnectionGUID: qzQbjqiTQWSbTGEt3b6D3Q==
-X-CSE-MsgGUID: STEgFdRuR3qcPoDsdwU3VA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23479604"
-Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
- by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:57:21 +0000
-Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:12053]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.40.123:2525]
+ bh=XeZQT88wIcncKcWqQFOrz0CkgYPwdm06RFCiYUu+uZU=;
+ b=qYFTYAgMg2sXIQKPTx8HAAet93GNO7HxWuvsNi1I9qny8cRogLEzgVyG
+ KLUCdaqpFCNG2hbLk+cLRhQfu6XYVGP5yIChCjVABvFooTOID36GCqJ5O
+ D6R+Vwi7ps5z1YTOVl3/hcUdYU8s1sRgHKH8Q3KrToFwXMvvUEQ3zgp2I
+ W51HThIj1o122ixA27cFzgD2o6rA5JOssaCDZYrMcZHBWfmAN74j700PK
+ Ukp1ItAWPT4I3fdBI6LLAujL+u5qnWQ3H6bREa097iDzyxTyFfTewZ4Xg
+ Ju2C7ialqHJ0DeH4BpqSY+PTjt29Obt+tsC6jvsbDeFu05olSI7B/xYwm g==;
+X-CSE-ConnectionGUID: 6zYogTNzTQulN2hza0vT3g==
+X-CSE-MsgGUID: ftXU9H+/SJ6T5zVwcmsB7Q==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="22997919"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
+ by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:12:10 +0000
+Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:4432]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.47.135:2525]
  with esmtp (Farcaster)
- id 978060d7-e4f5-46cc-a897-f56672c31de4; Sat, 11 Jul 2026 22:57:21 +0000 (UTC)
-X-Farcaster-Flow-ID: 978060d7-e4f5-46cc-a897-f56672c31de4
+ id dcc1ebd5-c3fb-43da-b8cb-1f5134ba6bd5; Sat, 11 Jul 2026 23:12:10 +0000 (UTC)
+X-Farcaster-Flow-ID: dcc1ebd5-c3fb-43da-b8cb-1f5134ba6bd5
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
+ EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:57:21 +0000
+ Sat, 11 Jul 2026 23:12:10 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:57:12 +0000
+ Sat, 11 Jul 2026 23:12:01 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 077/134] hw/usb: Give -usbdevice and auto-hub devices a
- QOM parent
-Date: Sat, 11 Jul 2026 22:36:10 +0000
-Message-ID: <20260711223707.42139-78-graf@amazon.com>
+Subject: [RFC PATCH 133/134] docs/devel/qom: Document the composition-tree
+ parenting contract
+Date: Sat, 11 Jul 2026 22:37:06 +0000
+Message-ID: <20260711223707.42139-134-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,11 +102,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D038UWC002.ant.amazon.com (10.13.139.238) To
+X-ClientProxiedBy: EX19D039UWB004.ant.amazon.com (10.13.138.57) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.13.214.179;
+Received-SPF: pass client-ip=44.245.243.92;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -116,7 +116,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:58 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,79 +131,126 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The three remaining orphan-creating sites in hw/usb are all
-command-line and hotplug-adjacent code paths that always run after
-the machine is up:
-
-  usb_claim_port() auto-hub  -> child of the USB host controller
-                                 (bus->qbus.parent)
-  usbdevice_create()         -> /machine/peripheral-anon, same as
-                                 -device without id=
-  usb_braille_init()          -> ditto (a .usbdevice_init callback)
-
-Switch to qdev_new()/qdev_try_new() with an explicit parent and use
-plain qdev_realize() since the reference is now held by the parent's
-child<> property.
+Add a section to the QOM developer documentation explaining that
+every object must have a composition-tree parent before use, how
+to pick the parent (creator owns lifetime), how to name children,
+the reference-count contract for parented creators, and where the
+contract is enforced (device_set_realized, memory_region_do_init,
+qdev_connect_gpio_out_named).
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/usb/bus.c        | 15 ++++++++++-----
- hw/usb/dev-serial.c |  3 ++-
- 2 files changed, 12 insertions(+), 6 deletions(-)
+ docs/devel/qom.rst | 96 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 96 insertions(+)
 
-diff --git a/hw/usb/bus.c b/hw/usb/bus.c
-index d45cce7666..725b0303b1 100644
---- a/hw/usb/bus.c
-+++ b/hw/usb/bus.c
-@@ -410,9 +410,10 @@ void usb_claim_port(USBDevice *dev, Error **errp)
-     } else {
-         if (bus->nfree == 1 && strcmp(object_get_typename(OBJECT(dev)), "usb-hub") != 0) {
-             /* Create a new hub and chain it on */
--            hub = USB_DEVICE(qdev_try_new_orphan("usb-hub"));
-+            hub = USB_DEVICE(qdev_try_new(OBJECT(bus->qbus.parent),
-+                                          "auto-hub[*]", "usb-hub"));
-             if (hub) {
--                usb_realize_and_unref(hub, bus, NULL);
-+                qdev_realize(DEVICE(hub), &bus->qbus, NULL);
-             }
-         }
-         if (bus->nfree == 0) {
-@@ -661,13 +662,17 @@ USBDevice *usbdevice_create(const char *driver)
-         return NULL;
-     }
+diff --git a/docs/devel/qom.rst b/docs/devel/qom.rst
+index 935bb1004a..ffcb3333b5 100644
+--- a/docs/devel/qom.rst
++++ b/docs/devel/qom.rst
+@@ -27,6 +27,102 @@ that make up a QEMU "machine". You can view this tree by running
+ objects created by the machine itself as well those created due to
+ user configuration.
  
--    dev = f->usbdevice_init ? f->usbdevice_init()
--                            : USB_DEVICE(qdev_new_orphan(f->name));
-+    if (f->usbdevice_init) {
-+        dev = f->usbdevice_init();
-+    } else {
-+        dev = USB_DEVICE(qdev_new(machine_get_container("peripheral-anon"),
-+                                  "usbdevice[*]", f->name));
-+    }
-     if (!dev) {
-         error_report("Failed to create USB device '%s'", f->name);
-         return NULL;
-     }
--    if (!usb_realize_and_unref(dev, bus, &err)) {
-+    if (!qdev_realize(DEVICE(dev), &bus->qbus, &err)) {
-         error_reportf_err(err, "Failed to initialize USB device '%s': ",
-                           f->name);
-         object_unparent(OBJECT(dev));
-diff --git a/hw/usb/dev-serial.c b/hw/usb/dev-serial.c
-index 81897b2d76..4ae3faf656 100644
---- a/hw/usb/dev-serial.c
-+++ b/hw/usb/dev-serial.c
-@@ -622,7 +622,8 @@ static USBDevice *usb_braille_init(void)
-         return NULL;
-     }
++Composition-tree parenting contract
++====================================
++
++Every QOM object that participates in the running system must have a
++composition-tree parent before it is used.  The parent gives the object
++a stable, canonical path such as ``/machine/soc/uart[0]`` that is
++visible in ``info qom-tree`` and addressable via ``qom-get`` and
++``qom-set``.  Objects that reach ``realize`` (for devices), that are
++wired to another object (for IRQ lines), or that are given a name (for
++memory regions) without a parent are programming errors.
++
++Creating parented objects
++-------------------------
++
++The standard creation helpers all take the composition-tree parent and
++the child name as their first two arguments:
++
++.. code-block:: c
++
++    Object      *object_new_child(Object *parent, const char *id,
++                                  const char *typename);
++    DeviceState *qdev_new(Object *parent, const char *id,
++                          const char *typename);
++    DeviceState *sysbus_create_simple(Object *parent, const char *id,
++                                      const char *type, hwaddr, qemu_irq);
++    PCIDevice   *pci_new(Object *parent, const char *id, ...);
++    ISADevice   *isa_new(Object *parent, const char *id, ...);
++    /* i2c_slave_new(), ssi_create_peripheral(), usb_new(),
++       cpu_create() etc. follow the same pattern. */
++
++``object_new()`` remains available as the primitive allocator for
++transient introspection objects and for ``qdev_device_add()``, which
++parents the device via ``qdev_set_id()``.  All other callers should use
++one of the parented helpers above, or ``object_initialize_child()`` for
++objects that are embedded by value in the parent's instance struct.
++
++Choosing the parent
++-------------------
++
++The QOM parent is the object that owns the child's lifetime.  In
++practice this is the object whose code is creating the child:
++
++* Board code (``MachineClass.init``) parents onboard devices to the
++  machine: ``OBJECT(machine)``.
++* A composite device's ``DeviceClass.realize`` parents the sub-devices
++  it creates to itself: ``OBJECT(dev)``.
++* An SoC container likewise parents the devices it creates to the SoC
++  object.
++
++The bus a device is plugged into is *not* its composition-tree parent.
++A device may sit on a bus owned by ``B`` without being a child of
++``B``; the bus relationship is expressed through the ``parent_bus``
++link, not the ``child<>`` property.
++
++Choosing the child name
++-----------------------
++
++* A single instance takes a bare noun: ``"uart"``, ``"gic"``, ``"rtc"``.
++* A fixed number of identical instances take an explicit index:
++  ``"uart[0]"``, ``"uart[1]"``.
++* When the caller does not care about the index, ``"uart[*]"`` lets
++  QOM allocate the next free slot in the ``uart[]`` array.
++* Address-based names such as ``"eth@0x30000000"`` should only be used
++  when the address is genuinely the identity of the device.
++
++Child names share the parent's property namespace, so avoid names that
++collide with class-defined properties of the parent (in particular,
++machine class properties visible on ``/machine``).
++
++Reference-count contract
++------------------------
++
++``object_new_child()``, ``qdev_new()`` and the per-bus creators return
++with the object's single reference held by the parent's ``child<>``
++property.  The caller does *not* hold a reference of its own and must
++therefore pair creation with plain ``qdev_realize()`` rather than
++``qdev_realize_and_unref()``.  The object is finalized when the parent
++drops its ``child<>`` property, typically via ``object_unparent()``.
++
++Enforcement
++-----------
++
++The parenting contract is enforced at the points where an unparented
++object would first become visible or entangled with another object:
++
++* ``device_set_realized()`` fails with an ``Error`` if the device has
++  no composition-tree parent.
++* ``memory_region_do_init()`` asserts that a memory region given a
++  non-empty name also has an owner.
++* ``qdev_connect_gpio_out_named()`` asserts that the outbound IRQ
++  line being connected already has a composition-tree parent.
++
++There is no ``/machine/unattached`` fallback container; an object that
++would previously have landed there now triggers one of the errors
++above instead.
++
+ Creating a QOM class
+ ====================
  
--    dev = USB_DEVICE(qdev_new_orphan("usb-braille"));
-+    dev = USB_DEVICE(qdev_new(machine_get_container("peripheral-anon"),
-+                              "usbdevice[*]", "usb-braille"));
-     qdev_prop_set_chr(&dev->qdev, "chardev", cdrv);
-     return dev;
- }
 -- 
 2.47.1
 
