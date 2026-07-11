@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E51C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 463F0C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:42:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiFp-0006If-JZ; Sat, 11 Jul 2026 20:41:09 -0400
+	id 1wiiEO-00026f-BX; Sat, 11 Jul 2026 20:39:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigik-0005PS-GD; Sat, 11 Jul 2026 19:02:56 -0400
-Received: from pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.34.181.151])
+ id 1wigeD-0004Cu-8r; Sat, 11 Jul 2026 18:58:13 -0400
+Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.245.243.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigie-0002ae-8I; Sat, 11 Jul 2026 19:02:54 -0400
+ id 1wigeB-0001QT-CD; Sat, 11 Jul 2026 18:58:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810968; x=1815346968;
+ t=1783810691; x=1815346691;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=kIRDMMYQoAbVbR+Yb/nq/CG8IV16g3zCWr2Me2GLW6M=;
- b=sUfzUOvrQkXfianEQf6XpKIjfw6GTnGndKfxbQuP6PAG9P8W7x3ao94L
- a+ut8WNGBUf7Jczye+n/vGYRFnd7TWecy0XZr9aB0/gx2iDK7UYFuT3F6
- 7o6zysR+mmUYqDKgvxwXiOs41NS8+wBypuVomJ+oam3Ws6AsndFzfgHXt
- MsJrXIm+NygTZxrfX1y8LOPbLidZFtlP8rVKPclFVDIkMSepmHHrTLs1b
- 09L7EeEER0EvOztkwOOmI5UDwHTWiuAWzIU726QhdD/H/d3eTyESzX0du
- o22ZFYDN1HJcCRad7iKlLyfW1xH0ReufgQiS6mzEuInq0wFEB6JfF3q60 g==;
-X-CSE-ConnectionGUID: UnS3OulPSI22PLwrbrOoMw==
-X-CSE-MsgGUID: rqh8YVmBRDC1yM2K3LZ0kg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23483611"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:02:44 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:23292]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.47.135:2525]
+ bh=zNqLOx2x0I9gZElFzToX/WDwD+3MyIg002yqWRyyMKE=;
+ b=DQyuHtcIPwrLO5qk8M+VeVMXjC2ALmM4CPp9lpUAxrXw6igQCWAjQgfn
+ jTM1291dPJcYUVWi+m3Mq+UIuBmOomqI4rc8zrJUDGVkcTXPMKKBBxkNy
+ Gyj5BdQ+Nt/8N8BNo5Ngfm8v/T+WTiWVf+DYFCIwEMNc60jP4B01nyUZ1
+ jdqL/iaIqYMjU/JhIiPiRebWr8CCNyQClckGppWKZ9C2woIVZ41HGX33Z
+ iNL/QiFbNJsX4rJPUoqmVhCHI7vxCaj/xTr2gtLigYRU5OJzOnP2mtfD5
+ fvKOpBPBoECn7baJGJVQDRVdVYFfRSabBC/gwf8idzV6sNz19YlVUT/YU w==;
+X-CSE-ConnectionGUID: OUYYIaILTuSOvJTRPR+sIg==
+X-CSE-MsgGUID: VekgXWuRSZ6Ypbmk+wdovQ==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="22997667"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
+ by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:58:08 +0000
+Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:8221]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525]
  with esmtp (Farcaster)
- id c3cb8fca-4aa2-4924-8f15-6db4f3d24a39; Sat, 11 Jul 2026 23:02:44 +0000 (UTC)
-X-Farcaster-Flow-ID: c3cb8fca-4aa2-4924-8f15-6db4f3d24a39
+ id 4e9f9928-008a-42bb-b64d-d988d99267b3; Sat, 11 Jul 2026 22:58:08 +0000 (UTC)
+X-Farcaster-Flow-ID: 4e9f9928-008a-42bb-b64d-d988d99267b3
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:02:43 +0000
+ Sat, 11 Jul 2026 22:58:08 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:02:35 +0000
+ Sat, 11 Jul 2026 22:57:59 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 097/134] hw/m68k: Give memory regions an explicit owner
-Date: Sat, 11 Jul 2026 22:36:30 +0000
-Message-ID: <20260711223707.42139-98-graf@amazon.com>
+Subject: [RFC PATCH 080/134] hw/nitro: Give the vsock bridge a QOM parent
+Date: Sat, 11 Jul 2026 22:36:13 +0000
+Message-ID: <20260711223707.42139-81-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D046UWA003.ant.amazon.com (10.13.139.18) To
+X-ClientProxiedBy: EX19D036UWC003.ant.amazon.com (10.13.139.214) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.34.181.151;
+Received-SPF: pass client-ip=44.245.243.92;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -130,195 +130,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert memory_region_init*() calls that pass NULL owner to pass
-the enclosing machine or device instead.
+nitro_vsock_bridge_create() was using qdev_set_id() to slot the
+bridge under /machine/peripheral.  The bridge is a board-owned
+singleton created from nitro_machine_init(), so make it a plain
+child of the machine and drop the qdev_set_id() indirection.
 
-Thread Object *owner through the static mcf5208_sys_init() helper. mcf5206_mbar_realize() already has DeviceState *dev in scope.
+The heartbeat device that hangs off the bridge is already a child<>
+of it, so the composition tree becomes:
 
-No functional change intended.
+  /machine/nitro-vsock (nitro-vsock-bridge)
+  /machine/nitro-vsock/heartbeat (nitro-heartbeat)
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/m68k/an5206.c    |  2 +-
- hw/m68k/mcf5206.c   |  2 +-
- hw/m68k/mcf5208.c   | 15 ++++++++-------
- hw/m68k/next-cube.c | 10 +++++-----
- hw/m68k/q800.c      | 10 +++++-----
- 5 files changed, 20 insertions(+), 19 deletions(-)
+ hw/nitro/machine.c                 | 2 +-
+ hw/nitro/nitro-vsock-bus.c         | 9 ++++-----
+ include/hw/nitro/nitro-vsock-bus.h | 2 +-
+ 3 files changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/hw/m68k/an5206.c b/hw/m68k/an5206.c
-index 5027311cad..6c6c7d7248 100644
---- a/hw/m68k/an5206.c
-+++ b/hw/m68k/an5206.c
-@@ -60,7 +60,7 @@ static void an5206_init(MachineState *machine)
-     memory_region_add_subregion(address_space_mem, 0, machine->ram);
+diff --git a/hw/nitro/machine.c b/hw/nitro/machine.c
+index 6b61de911f..e522eae5ba 100644
+--- a/hw/nitro/machine.c
++++ b/hw/nitro/machine.c
+@@ -194,7 +194,7 @@ static void nitro_machine_init(MachineState *machine)
+                         MEMTXATTRS_UNSPECIFIED, eif_data, eif_size);
  
-     /* Internal SRAM.  */
--    memory_region_init_ram(sram, NULL, "an5206.sram", 512, &error_fatal);
-+    memory_region_init_ram(sram, OBJECT(machine), "an5206.sram", 512, &error_fatal);
-     memory_region_add_subregion(address_space_mem, AN5206_RAMBAR_ADDR, sram);
+     if (defaults_enabled()) {
+-        NitroVsockBridge *bridge = nitro_vsock_bridge_create();
++        NitroVsockBridge *bridge = nitro_vsock_bridge_create(OBJECT(machine));
+         DeviceState *dev;
  
-     mcf5206_init(OBJECT(machine), cpu, address_space_mem, AN5206_MBAR_ADDR);
-diff --git a/hw/m68k/mcf5206.c b/hw/m68k/mcf5206.c
-index b3c745d3f9..ee39a6ac30 100644
---- a/hw/m68k/mcf5206.c
-+++ b/hw/m68k/mcf5206.c
-@@ -589,7 +589,7 @@ static void mcf5206_mbar_realize(DeviceState *dev, Error **errp)
- {
-     m5206_mbar_state *s = MCF5206_MBAR(dev);
+         /* Nitro Enclaves require a heartbeat device. Provide one. */
+diff --git a/hw/nitro/nitro-vsock-bus.c b/hw/nitro/nitro-vsock-bus.c
+index f7540eaa54..2c4b66931f 100644
+--- a/hw/nitro/nitro-vsock-bus.c
++++ b/hw/nitro/nitro-vsock-bus.c
+@@ -20,7 +20,6 @@
  
--    memory_region_init_io(&s->iomem, NULL, &m5206_mbar_ops, s,
-+    memory_region_init_io(&s->iomem, OBJECT(dev), &m5206_mbar_ops, s,
-                           "mbar", 0x00001000);
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->iomem);
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+-#include "monitor/qdev.h"
+ #include "hw/core/sysbus.h"
+ #include "hw/nitro/nitro-vsock-bus.h"
  
-diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
-index a955efebeb..93aee5ebd5 100644
---- a/hw/m68k/mcf5208.c
-+++ b/hw/m68k/mcf5208.c
-@@ -227,7 +227,8 @@ static const MemoryRegionOps m5208_rcm_ops = {
-     .endianness = DEVICE_BIG_ENDIAN,
- };
- 
--static void mcf5208_sys_init(MemoryRegion *address_space, DeviceState *intc,
-+static void mcf5208_sys_init(Object *owner, MemoryRegion *address_space,
-+                             DeviceState *intc,
-                              M68kCPU *cpu)
- {
-     MemoryRegion *iomem = g_new(MemoryRegion, 1);
-@@ -236,17 +237,17 @@ static void mcf5208_sys_init(MemoryRegion *address_space, DeviceState *intc,
-     int i;
- 
-     /* RCM */
--    memory_region_init_io(iomem_rcm, NULL, &m5208_rcm_ops, cpu,
-+    memory_region_init_io(iomem_rcm, owner, &m5208_rcm_ops, cpu,
-                           "m5208-rcm", 0x00000080);
-     memory_region_add_subregion(address_space, 0xfc0a0000, iomem_rcm);
-     /* SDRAMC.  */
--    memory_region_init_io(iomem, NULL, &m5208_sys_ops, NULL, "m5208-sys", 0x00004000);
-+    memory_region_init_io(iomem, owner, &m5208_sys_ops, NULL, "m5208-sys", 0x00004000);
-     memory_region_add_subregion(address_space, 0xfc0a8000, iomem);
-     /* Timers.  */
-     for (i = 0; i < 2; i++) {
-         s = g_new0(m5208_timer_state, 1);
-         s->timer = ptimer_init(m5208_timer_trigger, s, PTIMER_POLICY_LEGACY);
--        memory_region_init_io(&s->iomem, NULL, &m5208_timer_ops, s,
-+        memory_region_init_io(&s->iomem, owner, &m5208_timer_ops, s,
-                               "m5208-timer", 0x00004000);
-         memory_region_add_subregion(address_space, 0xfc080000 + 0x4000 * i,
-                                     &s->iomem);
-@@ -296,14 +297,14 @@ static void mcf5208evb_init(MachineState *machine)
-     /* TODO: Configure BARs.  */
- 
-     /* ROM at 0x00000000 */
--    memory_region_init_rom(rom, NULL, "mcf5208.rom", ROM_SIZE, &error_fatal);
-+    memory_region_init_rom(rom, OBJECT(machine), "mcf5208.rom", ROM_SIZE, &error_fatal);
-     memory_region_add_subregion(address_space_mem, 0x00000000, rom);
- 
-     /* DRAM at 0x40000000 */
-     memory_region_add_subregion(address_space_mem, 0x40000000, machine->ram);
- 
-     /* Internal SRAM.  */
--    memory_region_init_ram(sram, NULL, "mcf5208.sram", 16 * KiB, &error_fatal);
-+    memory_region_init_ram(sram, OBJECT(machine), "mcf5208.sram", 16 * KiB, &error_fatal);
-     memory_region_add_subregion(address_space_mem, 0x80000000, sram);
- 
-     /* Internal peripherals.  */
-@@ -316,7 +317,7 @@ static void mcf5208evb_init(MachineState *machine)
-     mcf_uart_create_mmap(OBJECT(machine), 0xfc068000,
-                          qdev_get_gpio_in(intc, 28), serial_hd(2));
- 
--    mcf5208_sys_init(address_space_mem, intc, cpu);
-+    mcf5208_sys_init(OBJECT(machine), address_space_mem, intc, cpu);
- 
-     mcf_fec_init(address_space_mem, 0xfc030000, intc);
- 
-diff --git a/hw/m68k/next-cube.c b/hw/m68k/next-cube.c
-index c80d32ef29..564a10a69e 100644
---- a/hw/m68k/next-cube.c
-+++ b/hw/m68k/next-cube.c
-@@ -1310,11 +1310,11 @@ static void next_cube_init(MachineState *machine)
-     sysbus_mmio_map(SYS_BUS_DEVICE(pcdev), 5, 0x0211a000);
- 
-     /* BMAP memory */
--    memory_region_init_ram_flags_nomigrate(&m->bmapm1, NULL, "next.bmapmem",
-+    memory_region_init_ram_flags_nomigrate(&m->bmapm1, OBJECT(machine), "next.bmapmem",
-                                            64, RAM_SHARED, &error_fatal);
-     memory_region_add_subregion(sysmem, 0x020c0000, &m->bmapm1);
-     /* The Rev_2.5_v66.bin firmware accesses it at 0x820c0020, too */
--    memory_region_init_alias(&m->bmapm2, NULL, "next.bmapmem2", &m->bmapm1,
-+    memory_region_init_alias(&m->bmapm2, OBJECT(machine), "next.bmapmem2", &m->bmapm1,
-                              0x0, 64);
-     memory_region_add_subregion(sysmem, 0x820c0000, &m->bmapm2);
- 
-@@ -1322,9 +1322,9 @@ static void next_cube_init(MachineState *machine)
-     sysbus_create_simple(OBJECT(machine), "kbd", TYPE_NEXTKBD, 0x0200e000, NULL);
- 
-     /* Load ROM here */
--    memory_region_init_rom(&m->rom, NULL, "next.rom", 0x20000, &error_fatal);
-+    memory_region_init_rom(&m->rom, OBJECT(machine), "next.rom", 0x20000, &error_fatal);
-     memory_region_add_subregion(sysmem, 0x01000000, &m->rom);
--    memory_region_init_alias(&m->rom2, NULL, "next.rom2", &m->rom, 0x0,
-+    memory_region_init_alias(&m->rom2, OBJECT(machine), "next.rom2", &m->rom, 0x0,
-                              0x20000);
-     memory_region_add_subregion(sysmem, 0x0, &m->rom2);
-     Error *local_err = NULL;
-@@ -1352,7 +1352,7 @@ static void next_cube_init(MachineState *machine)
+@@ -46,12 +45,12 @@ void nitro_vsock_bridge_start_enclave(NitroVsockBridge *bridge,
      }
- 
-     /* DMA */
--    memory_region_init_io(&m->dmamem, NULL, &next_dma_ops, machine,
-+    memory_region_init_io(&m->dmamem, OBJECT(machine), &next_dma_ops, machine,
-                           "next.dma", 0x5000);
-     memory_region_add_subregion(sysmem, 0x02000000, &m->dmamem);
  }
-diff --git a/hw/m68k/q800.c b/hw/m68k/q800.c
-index 15b3bcab5f..954cdf8489 100644
---- a/hw/m68k/q800.c
-+++ b/hw/m68k/q800.c
-@@ -309,7 +309,7 @@ static void q800_machine_init(MachineState *machine)
-     memory_region_add_subregion(get_system_memory(), IO_BASE + IO_SLICE,
-                                 &m->macio_alias);
  
--    memory_region_init_io(&m->machine_id, NULL, &machine_id_ops, NULL,
-+    memory_region_init_io(&m->machine_id, OBJECT(machine), &machine_id_ops, NULL,
-                           "Machine ID", 4);
-     memory_region_add_subregion(get_system_memory(), 0x5ffffffc,
-                                 &m->machine_id);
-@@ -407,7 +407,7 @@ static void q800_machine_init(MachineState *machine)
-     sysbus_connect_irq(sysbus, 0,
-                        qdev_get_gpio_in(DEVICE(&m->glue), GLUE_IRQ_IN_SONIC));
+-NitroVsockBridge *nitro_vsock_bridge_create(void)
++NitroVsockBridge *nitro_vsock_bridge_create(Object *parent)
+ {
+-    DeviceState *dev = qdev_new_orphan(TYPE_NITRO_VSOCK_BRIDGE);
++    DeviceState *dev = qdev_new(parent, "nitro-vsock",
++                                TYPE_NITRO_VSOCK_BRIDGE);
  
--    memory_region_init_rom(&m->dp8393x_prom, NULL, "dp8393x-q800.prom",
-+    memory_region_init_rom(&m->dp8393x_prom, OBJECT(machine), "dp8393x-q800.prom",
-                            SONIC_PROM_SIZE, &error_fatal);
-     memory_region_add_subregion(get_system_memory(), SONIC_PROM_BASE,
-                                 &m->dp8393x_prom);
-@@ -606,7 +606,7 @@ static void q800_machine_init(MachineState *machine)
-         BOOTINFO1(param_ptr, BI_MAC_VROW, macfb_mode->stride);
-         BOOTINFO1(param_ptr, BI_MAC_SCCBASE, SCC_BASE);
+-    qdev_set_id(dev, g_strdup("nitro-vsock"), &error_fatal);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
  
--        memory_region_init_ram_ptr(&m->rom, NULL, "m68k_fake_mac.rom",
-+        memory_region_init_ram_ptr(&m->rom, OBJECT(machine), "m68k_fake_mac.rom",
-                                    sizeof(fake_mac_rom), fake_mac_rom);
-         memory_region_set_readonly(&m->rom, true);
-         memory_region_add_subregion(get_system_memory(), MACROM_ADDR, &m->rom);
-@@ -651,12 +651,12 @@ static void q800_machine_init(MachineState *machine)
-     } else {
-         uint8_t *ptr;
-         /* allocate and load BIOS */
--        memory_region_init_rom(&m->rom, NULL, "m68k_mac.rom", MACROM_SIZE,
-+        memory_region_init_rom(&m->rom, OBJECT(machine), "m68k_mac.rom", MACROM_SIZE,
-                                &error_abort);
-         filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, bios_name);
-         memory_region_add_subregion(get_system_memory(), MACROM_ADDR, &m->rom);
+     return NITRO_VSOCK_BRIDGE(dev);
+ }
+diff --git a/include/hw/nitro/nitro-vsock-bus.h b/include/hw/nitro/nitro-vsock-bus.h
+index 064260aa41..36f4dde78f 100644
+--- a/include/hw/nitro/nitro-vsock-bus.h
++++ b/include/hw/nitro/nitro-vsock-bus.h
+@@ -50,7 +50,7 @@ struct NitroVsockDeviceClass {
+ /*
+  * Machine helper to create the Nitro vsock bridge sysbus device.
+  */
+-NitroVsockBridge *nitro_vsock_bridge_create(void);
++NitroVsockBridge *nitro_vsock_bridge_create(Object *parent);
  
--        memory_region_init_alias(&m->rom_alias, NULL, "m68k_mac.rom-alias",
-+        memory_region_init_alias(&m->rom_alias, OBJECT(machine), "m68k_mac.rom-alias",
-                                  &m->rom, 0, MACROM_SIZE);
-         memory_region_add_subregion(get_system_memory(), 0x40000000,
-                                     &m->rom_alias);
+ /*
+  * Find the Nitro vsock bridge on the sysbus.
 -- 
 2.47.1
 
