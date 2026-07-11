@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F34C3C44507
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA879C44506
 	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiE3-0001kE-4F; Sat, 11 Jul 2026 20:39:19 -0400
+	id 1wiiER-0002F9-BL; Sat, 11 Jul 2026 20:39:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigk6-0007ks-Qp; Sat, 11 Jul 2026 19:04:18 -0400
-Received: from pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.68.102])
+ id 1wigjK-0005g9-9f; Sat, 11 Jul 2026 19:03:30 -0400
+Received: from pdx-out-014.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([35.83.148.184])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigk2-0002oO-CS; Sat, 11 Jul 2026 19:04:18 -0400
+ id 1wigjH-0002gY-Ky; Sat, 11 Jul 2026 19:03:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811054; x=1815347054;
+ t=1783811007; x=1815347007;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=rW304WD8m6eC/9oh/zviljvTS+3YODW4+WlFj2/NhOM=;
- b=UFdXdzOLBsXzPnqKrr1FTHC6r6nZvMvk+z6IC/bIguAEDcEfq+x1Zlrc
- 4/wbTSi8ZX58qMr8kgU11WVZKS9TtdY86xPZ2AEr9GwAoEsFG5wgeHfel
- 4/nFumLiNo4sKyXY9e/SKe6jK93j/8GNr9BJ5dGkPZLZvR/DICxg3qyg4
- mawV6CevliAoHzkXIX+n155765DeD8af8l0emdrBVwxr+nxMvJA3FFtWz
- mqF7vH3bpk1XBXioTeLb8tc2eJ8nm4o3rrwrwibw4hZ/3BrRGwyZknLNV
- PQWmCuq7IZzaiflN3HnP1yW6plrMlpWt1AXslBp1jtSkbCKEsZYSewFUA g==;
-X-CSE-ConnectionGUID: 6tIA76JPR3mMnMBZ0VgdZg==
-X-CSE-MsgGUID: 1zPiy3USRBi7VRafESsQOg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23517391"
-Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
- by internal-pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:04:10 +0000
-Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:20638]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.51.175:2525]
+ bh=citDJO/IgAyEM0d7gOprPaAJwEL9dlx4/AYZ8X4e0X8=;
+ b=KxbIHQ/GD7lC4slz88QcRYjYUVks3k+YYbvM9ef35E+CsjkSZRuBfQvR
+ QnAEYJ7mpbxNXiKSSAWMpjoZYG/VrwPImWfVJZLWyeURlDwjUejWJFNYu
+ H+s4Ub9eUrZ7CtP4GPhOwxwPPNDLP77yqSX1hXzqoBe1v1uEkSka2hU46
+ 2/AypuWMTnJXXJQCXmGOIiw/1wT09SLhkeNq7G8o5gAaJX/oaWFTpqWhk
+ 8nd9G5tlypW/G+hHO872sRwq/LdpAlX/DVx/I3v6goudOvVVV/h3fuF/H
+ z+txNoCku4SeDa2fso1BborUB97O8w6k3kQaILxR+EJ/dmix2PCxwwt8D w==;
+X-CSE-ConnectionGUID: /3KBkcdFRc6GZDoKyWj5Ww==
+X-CSE-MsgGUID: E5fapg9mShqcDSogambTYA==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23287862"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-014.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:03:23 +0000
+Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:2970]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.26.212:2525]
  with esmtp (Farcaster)
- id 926cf72b-e496-47ae-9227-8b4bcc4d2808; Sat, 11 Jul 2026 23:04:10 +0000 (UTC)
-X-Farcaster-Flow-ID: 926cf72b-e496-47ae-9227-8b4bcc4d2808
+ id 58563f03-7203-4cb6-8bde-513e859732de; Sat, 11 Jul 2026 23:03:22 +0000 (UTC)
+X-Farcaster-Flow-ID: 58563f03-7203-4cb6-8bde-513e859732de
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
+ EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:04:10 +0000
+ Sat, 11 Jul 2026 23:03:22 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:04:01 +0000
+ Sat, 11 Jul 2026 23:03:13 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 102/134] hw/arm/omap: Give lcdc and dma memory regions an
- explicit owner
-Date: Sat, 11 Jul 2026 22:36:35 +0000
-Message-ID: <20260711223707.42139-103-graf@amazon.com>
+Subject: [RFC PATCH 099/134] hw/tricore: Give memory regions an explicit owner
+Date: Sat, 11 Jul 2026 22:36:32 +0000
+Message-ID: <20260711223707.42139-100-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D043UWC001.ant.amazon.com (10.13.139.202) To
+X-ClientProxiedBy: EX19D044UWB003.ant.amazon.com (10.13.139.168) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.68.102;
+Received-SPF: pass client-ip=35.83.148.184;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-014.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -131,111 +130,206 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thread Object *owner as the first argument through omap_lcdc_init()
-and omap_dma_init(), matching the earlier conversion of omap1.c
-sub-block helpers. omap310_mpu_init() passes its parent through.
+Convert memory_region_init*() calls that pass NULL owner to pass
+the enclosing machine or device instead.
+
+Thread Object *owner through the static make_rom() / make_ram() / make_alias() helpers in tc27x_soc.c. All callers are inside tc27x_soc_init_memory_mapping(DeviceState *dev_soc).
 
 No functional change intended.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/arm/omap1.c         | 4 ++--
- hw/display/omap_lcdc.c | 5 +++--
- hw/dma/omap_dma.c      | 4 ++--
- include/hw/arm/omap.h  | 5 +++--
- 4 files changed, 10 insertions(+), 8 deletions(-)
+ hw/tricore/tc27x_soc.c         | 77 +++++++++++++++++-----------------
+ hw/tricore/tricore_testboard.c | 12 +++---
+ 2 files changed, 45 insertions(+), 44 deletions(-)
 
-diff --git a/hw/arm/omap1.c b/hw/arm/omap1.c
-index be6af35e26..474a3902fe 100644
---- a/hw/arm/omap1.c
-+++ b/hw/arm/omap1.c
-@@ -3800,7 +3800,7 @@ struct omap_mpu_state_s *omap310_mpu_init(Object *parent, MemoryRegion *dram,
-         dma_irqs[i] = qdev_get_gpio_in(s->ih[omap1_dma_irq_map[i].ih],
-                                        omap1_dma_irq_map[i].intr);
-     }
--    s->dma = omap_dma_init(0xfffed800, dma_irqs, system_memory,
-+    s->dma = omap_dma_init(parent, 0xfffed800, dma_irqs, system_memory,
-                            qdev_get_gpio_in(s->ih[0], OMAP_INT_DMA_LCD),
-                            s, omap_findclk(s, "dma_ck"));
- 
-@@ -3835,7 +3835,7 @@ struct omap_mpu_state_s *omap310_mpu_init(Object *parent, MemoryRegion *dram,
-                     qdev_get_gpio_in(s->ih[1], OMAP_INT_OS_TIMER),
-                     omap_findclk(s, "clk32-kHz"));
- 
--    s->lcd = omap_lcdc_init(system_memory, 0xfffec000,
-+    s->lcd = omap_lcdc_init(parent, system_memory, 0xfffec000,
-                             qdev_get_gpio_in(s->ih[0], OMAP_INT_LCD_CTRL),
-                             omap_dma_get_lcdch(s->dma),
-                             omap_findclk(s, "lcd_ck"));
-diff --git a/hw/display/omap_lcdc.c b/hw/display/omap_lcdc.c
-index b88ea5f2f1..3f6066e3a8 100644
---- a/hw/display/omap_lcdc.c
-+++ b/hw/display/omap_lcdc.c
-@@ -489,7 +489,8 @@ static const GraphicHwOps omap_ops = {
-     .gfx_update  = omap_update_display,
- };
- 
--struct omap_lcd_panel_s *omap_lcdc_init(MemoryRegion *sysmem,
-+struct omap_lcd_panel_s *omap_lcdc_init(Object *owner,
-+                                        MemoryRegion *sysmem,
-                                         hwaddr base,
-                                         qemu_irq irq,
-                                         struct omap_dma_lcd_channel_s *dma,
-@@ -502,7 +503,7 @@ struct omap_lcd_panel_s *omap_lcdc_init(MemoryRegion *sysmem,
-     s->sysmem = sysmem;
-     omap_lcdc_reset(s);
- 
--    memory_region_init_io(&s->iomem, NULL, &omap_lcdc_ops, s, "omap.lcdc", 0x100);
-+    memory_region_init_io(&s->iomem, owner, &omap_lcdc_ops, s, "omap.lcdc", 0x100);
-     memory_region_add_subregion(sysmem, base, &s->iomem);
- 
-     s->con = qemu_graphic_console_create(NULL, 0, &omap_ops, s);
-diff --git a/hw/dma/omap_dma.c b/hw/dma/omap_dma.c
-index 77f1441498..b130ba2480 100644
---- a/hw/dma/omap_dma.c
-+++ b/hw/dma/omap_dma.c
-@@ -1089,7 +1089,7 @@ static void omap_dma_clk_update(void *opaque, int line, int on)
-             soc_dma_set_request(s->ch[i].dma, on);
+diff --git a/hw/tricore/tc27x_soc.c b/hw/tricore/tc27x_soc.c
+index 5b1b07cee1..0475698b29 100644
+--- a/hw/tricore/tc27x_soc.c
++++ b/hw/tricore/tc27x_soc.c
+@@ -67,10 +67,10 @@ const MemmapEntry tc27x_soc_memmap[] = {
+  * Initialize the auxiliary ROM region @mr and map it into
+  * the memory map at @base.
+  */
+-static void make_rom(MemoryRegion *mr, const char *name,
++static void make_rom(Object *owner, MemoryRegion *mr, const char *name,
+                      hwaddr base, hwaddr size)
+ {
+-    memory_region_init_rom(mr, NULL, name, size, &error_fatal);
++    memory_region_init_rom(mr, owner, name, size, &error_fatal);
+     memory_region_add_subregion(get_system_memory(), base, mr);
  }
  
--struct soc_dma_s *omap_dma_init(hwaddr base, qemu_irq *irqs,
-+struct soc_dma_s *omap_dma_init(Object *owner, hwaddr base, qemu_irq *irqs,
-                                 MemoryRegion *sysmem,
-                                 qemu_irq lcd_irq,
-                                 struct omap_mpu_state_s *mpu, omap_clk clk)
-@@ -1127,7 +1127,7 @@ struct soc_dma_s *omap_dma_init(hwaddr base, qemu_irq *irqs,
-     omap_dma_reset(s->dma);
-     omap_dma_clk_update(s, 0, 1);
+@@ -78,10 +78,10 @@ static void make_rom(MemoryRegion *mr, const char *name,
+  * Initialize the auxiliary RAM region @mr and map it into
+  * the memory map at @base.
+  */
+-static void make_ram(MemoryRegion *mr, const char *name,
++static void make_ram(Object *owner, MemoryRegion *mr, const char *name,
+                      hwaddr base, hwaddr size)
+ {
+-    memory_region_init_ram(mr, NULL, name, size, &error_fatal);
++    memory_region_init_ram(mr, owner, name, size, &error_fatal);
+     memory_region_add_subregion(get_system_memory(), base, mr);
+ }
  
--    memory_region_init_io(&s->iomem, NULL, &omap_dma_ops, s, "omap.dma", memsize);
-+    memory_region_init_io(&s->iomem, owner, &omap_dma_ops, s, "omap.dma", memsize);
-     memory_region_add_subregion(sysmem, base, &s->iomem);
+@@ -89,10 +89,10 @@ static void make_ram(MemoryRegion *mr, const char *name,
+  * Create an alias of an entire original MemoryRegion @orig
+  * located at @base in the memory map.
+  */
+-static void make_alias(MemoryRegion *mr, const char *name,
++static void make_alias(Object *owner, MemoryRegion *mr, const char *name,
+                            MemoryRegion *orig, hwaddr base)
+ {
+-    memory_region_init_alias(mr, NULL, name, orig, 0,
++    memory_region_init_alias(mr, owner, name, orig, 0,
+                              memory_region_size(orig));
+     memory_region_add_subregion(get_system_memory(), base, mr);
+ }
+@@ -101,81 +101,82 @@ static void tc27x_soc_init_memory_mapping(DeviceState *dev_soc)
+ {
+     TC27XSoCState *s = TC27X_SOC(dev_soc);
+     TC27XSoCClass *sc = TC27X_SOC_GET_CLASS(s);
++    Object *obj = OBJECT(dev_soc);
  
-     mpu->drq = s->dma->drq;
-diff --git a/include/hw/arm/omap.h b/include/hw/arm/omap.h
-index e000dffe13..591abf752b 100644
---- a/include/hw/arm/omap.h
-+++ b/include/hw/arm/omap.h
-@@ -173,7 +173,7 @@ void omap_gpio_set_clk(Omap1GpioState *gpio, omap_clk clk);
+-    make_ram(&s->cpu0mem.dspr, "CPU0.DSPR",
++    make_ram(obj, &s->cpu0mem.dspr, "CPU0.DSPR",
+         sc->memmap[TC27XD_DSPR0].base, sc->memmap[TC27XD_DSPR0].size);
+-    make_ram(&s->cpu0mem.pspr, "CPU0.PSPR",
++    make_ram(obj, &s->cpu0mem.pspr, "CPU0.PSPR",
+         sc->memmap[TC27XD_PSPR0].base, sc->memmap[TC27XD_PSPR0].size);
+-    make_ram(&s->cpu1mem.dspr, "CPU1.DSPR",
++    make_ram(obj, &s->cpu1mem.dspr, "CPU1.DSPR",
+         sc->memmap[TC27XD_DSPR1].base, sc->memmap[TC27XD_DSPR1].size);
+-    make_ram(&s->cpu1mem.pspr, "CPU1.PSPR",
++    make_ram(obj, &s->cpu1mem.pspr, "CPU1.PSPR",
+         sc->memmap[TC27XD_PSPR1].base, sc->memmap[TC27XD_PSPR1].size);
+-    make_ram(&s->cpu2mem.dspr, "CPU2.DSPR",
++    make_ram(obj, &s->cpu2mem.dspr, "CPU2.DSPR",
+         sc->memmap[TC27XD_DSPR2].base, sc->memmap[TC27XD_DSPR2].size);
+-    make_ram(&s->cpu2mem.pspr, "CPU2.PSPR",
++    make_ram(obj, &s->cpu2mem.pspr, "CPU2.PSPR",
+         sc->memmap[TC27XD_PSPR2].base, sc->memmap[TC27XD_PSPR2].size);
  
- /* omap_dma.c */
- struct soc_dma_s;
--struct soc_dma_s *omap_dma_init(hwaddr base, qemu_irq *irqs,
-+struct soc_dma_s *omap_dma_init(Object *owner, hwaddr base, qemu_irq *irqs,
-                                 MemoryRegion *sysmem,
-                                 qemu_irq lcd_irq,
-                                 struct omap_mpu_state_s *mpu, omap_clk clk);
-@@ -296,7 +296,8 @@ void omap_mcbsp_i2s_attach(struct omap_mcbsp_s *s, I2SCodec *slave);
- /* omap_lcdc.c */
- struct omap_lcd_panel_s;
- void omap_lcdc_reset(struct omap_lcd_panel_s *s);
--struct omap_lcd_panel_s *omap_lcdc_init(MemoryRegion *sysmem,
-+struct omap_lcd_panel_s *omap_lcdc_init(Object *owner,
-+                                        MemoryRegion *sysmem,
-                                         hwaddr base,
-                                         qemu_irq irq,
-                                         struct omap_dma_lcd_channel_s *dma,
+     /* TODO: Control Cache mapping with Memory Test Unit (MTU) */
+-    make_ram(&s->cpu2mem.dcache, "CPU2.DCACHE",
++    make_ram(obj, &s->cpu2mem.dcache, "CPU2.DCACHE",
+         sc->memmap[TC27XD_DCACHE2].base, sc->memmap[TC27XD_DCACHE2].size);
+-    make_ram(&s->cpu2mem.dtag,   "CPU2.DTAG",
++    make_ram(obj, &s->cpu2mem.dtag,   "CPU2.DTAG",
+         sc->memmap[TC27XD_DTAG2].base, sc->memmap[TC27XD_DTAG2].size);
+-    make_ram(&s->cpu2mem.pcache, "CPU2.PCACHE",
++    make_ram(obj, &s->cpu2mem.pcache, "CPU2.PCACHE",
+         sc->memmap[TC27XD_PCACHE2].base, sc->memmap[TC27XD_PCACHE2].size);
+-    make_ram(&s->cpu2mem.ptag,   "CPU2.PTAG",
++    make_ram(obj, &s->cpu2mem.ptag,   "CPU2.PTAG",
+         sc->memmap[TC27XD_PTAG2].base, sc->memmap[TC27XD_PTAG2].size);
+ 
+-    make_ram(&s->cpu1mem.dcache, "CPU1.DCACHE",
++    make_ram(obj, &s->cpu1mem.dcache, "CPU1.DCACHE",
+         sc->memmap[TC27XD_DCACHE1].base, sc->memmap[TC27XD_DCACHE1].size);
+-    make_ram(&s->cpu1mem.dtag,   "CPU1.DTAG",
++    make_ram(obj, &s->cpu1mem.dtag,   "CPU1.DTAG",
+         sc->memmap[TC27XD_DTAG1].base, sc->memmap[TC27XD_DTAG1].size);
+-    make_ram(&s->cpu1mem.pcache, "CPU1.PCACHE",
++    make_ram(obj, &s->cpu1mem.pcache, "CPU1.PCACHE",
+         sc->memmap[TC27XD_PCACHE1].base, sc->memmap[TC27XD_PCACHE1].size);
+-    make_ram(&s->cpu1mem.ptag,   "CPU1.PTAG",
++    make_ram(obj, &s->cpu1mem.ptag,   "CPU1.PTAG",
+         sc->memmap[TC27XD_PTAG1].base, sc->memmap[TC27XD_PTAG1].size);
+ 
+-    make_ram(&s->cpu0mem.pcache, "CPU0.PCACHE",
++    make_ram(obj, &s->cpu0mem.pcache, "CPU0.PCACHE",
+         sc->memmap[TC27XD_PCACHE0].base, sc->memmap[TC27XD_PCACHE0].size);
+-    make_ram(&s->cpu0mem.ptag,   "CPU0.PTAG",
++    make_ram(obj, &s->cpu0mem.ptag,   "CPU0.PTAG",
+         sc->memmap[TC27XD_PTAG0].base, sc->memmap[TC27XD_PTAG0].size);
+ 
+     /*
+      * TriCore QEMU executes CPU0 only, thus it is sufficient to map
+      * LOCAL.PSPR/LOCAL.DSPR exclusively onto PSPR0/DSPR0.
+      */
+-    make_alias(&s->psprX, "LOCAL.PSPR", &s->cpu0mem.pspr,
++    make_alias(obj, &s->psprX, "LOCAL.PSPR", &s->cpu0mem.pspr,
+         sc->memmap[TC27XD_PSPRX].base);
+-    make_alias(&s->dsprX, "LOCAL.DSPR", &s->cpu0mem.dspr,
++    make_alias(obj, &s->dsprX, "LOCAL.DSPR", &s->cpu0mem.dspr,
+         sc->memmap[TC27XD_DSPRX].base);
+ 
+-    make_ram(&s->flashmem.pflash0_c, "PF0",
++    make_ram(obj, &s->flashmem.pflash0_c, "PF0",
+         sc->memmap[TC27XD_PFLASH0_C].base, sc->memmap[TC27XD_PFLASH0_C].size);
+-    make_ram(&s->flashmem.pflash1_c, "PF1",
++    make_ram(obj, &s->flashmem.pflash1_c, "PF1",
+         sc->memmap[TC27XD_PFLASH1_C].base, sc->memmap[TC27XD_PFLASH1_C].size);
+-    make_ram(&s->flashmem.dflash0,   "DF0",
++    make_ram(obj, &s->flashmem.dflash0,   "DF0",
+         sc->memmap[TC27XD_DFLASH0].base, sc->memmap[TC27XD_DFLASH0].size);
+-    make_ram(&s->flashmem.dflash1,   "DF1",
++    make_ram(obj, &s->flashmem.dflash1,   "DF1",
+         sc->memmap[TC27XD_DFLASH1].base, sc->memmap[TC27XD_DFLASH1].size);
+-    make_ram(&s->flashmem.olda_c,    "OLDA",
++    make_ram(obj, &s->flashmem.olda_c,    "OLDA",
+         sc->memmap[TC27XD_OLDA_C].base, sc->memmap[TC27XD_OLDA_C].size);
+-    make_rom(&s->flashmem.brom_c,    "BROM",
++    make_rom(obj, &s->flashmem.brom_c,    "BROM",
+         sc->memmap[TC27XD_BROM_C].base, sc->memmap[TC27XD_BROM_C].size);
+-    make_ram(&s->flashmem.lmuram_c,  "LMURAM",
++    make_ram(obj, &s->flashmem.lmuram_c,  "LMURAM",
+         sc->memmap[TC27XD_LMURAM_C].base, sc->memmap[TC27XD_LMURAM_C].size);
+-    make_ram(&s->flashmem.emem_c,    "EMEM",
++    make_ram(obj, &s->flashmem.emem_c,    "EMEM",
+         sc->memmap[TC27XD_EMEM_C].base, sc->memmap[TC27XD_EMEM_C].size);
+ 
+-    make_alias(&s->flashmem.pflash0_u, "PF0.U",    &s->flashmem.pflash0_c,
++    make_alias(obj, &s->flashmem.pflash0_u, "PF0.U",    &s->flashmem.pflash0_c,
+         sc->memmap[TC27XD_PFLASH0_U].base);
+-    make_alias(&s->flashmem.pflash1_u, "PF1.U",    &s->flashmem.pflash1_c,
++    make_alias(obj, &s->flashmem.pflash1_u, "PF1.U",    &s->flashmem.pflash1_c,
+         sc->memmap[TC27XD_PFLASH1_U].base);
+-    make_alias(&s->flashmem.olda_u,    "OLDA.U",   &s->flashmem.olda_c,
++    make_alias(obj, &s->flashmem.olda_u,    "OLDA.U",   &s->flashmem.olda_c,
+         sc->memmap[TC27XD_OLDA_U].base);
+-    make_alias(&s->flashmem.brom_u,    "BROM.U",   &s->flashmem.brom_c,
++    make_alias(obj, &s->flashmem.brom_u,    "BROM.U",   &s->flashmem.brom_c,
+         sc->memmap[TC27XD_BROM_U].base);
+-    make_alias(&s->flashmem.lmuram_u,  "LMURAM.U", &s->flashmem.lmuram_c,
++    make_alias(obj, &s->flashmem.lmuram_u,  "LMURAM.U", &s->flashmem.lmuram_c,
+         sc->memmap[TC27XD_LMURAM_U].base);
+-    make_alias(&s->flashmem.emem_u,    "EMEM.U",   &s->flashmem.emem_c,
++    make_alias(obj, &s->flashmem.emem_u,    "EMEM.U",   &s->flashmem.emem_c,
+         sc->memmap[TC27XD_EMEM_U].base);
+ }
+ 
+diff --git a/hw/tricore/tricore_testboard.c b/hw/tricore/tricore_testboard.c
+index 9e8cccbd59..4b5398ab95 100644
+--- a/hw/tricore/tricore_testboard.c
++++ b/hw/tricore/tricore_testboard.c
+@@ -70,17 +70,17 @@ static void tricore_testboard_init(MachineState *machine, int board_id)
+ 
+     cpu = TRICORE_CPU(cpu_create(mo, "cpu", machine->cpu_type));
+     env = &cpu->env;
+-    memory_region_init_ram(ext_cram, NULL, "powerlink_ext_c.ram",
++    memory_region_init_ram(ext_cram, OBJECT(machine), "powerlink_ext_c.ram",
+                            2 * MiB, &error_fatal);
+-    memory_region_init_ram(ext_dram, NULL, "powerlink_ext_d.ram",
++    memory_region_init_ram(ext_dram, OBJECT(machine), "powerlink_ext_d.ram",
+                            4 * MiB, &error_fatal);
+-    memory_region_init_ram(int_cram, NULL, "powerlink_int_c.ram", 48 * KiB,
++    memory_region_init_ram(int_cram, OBJECT(machine), "powerlink_int_c.ram", 48 * KiB,
+                            &error_fatal);
+-    memory_region_init_ram(int_dram, NULL, "powerlink_int_d.ram", 48 * KiB,
++    memory_region_init_ram(int_dram, OBJECT(machine), "powerlink_int_d.ram", 48 * KiB,
+                            &error_fatal);
+-    memory_region_init_ram(pcp_data, NULL, "powerlink_pcp_data.ram",
++    memory_region_init_ram(pcp_data, OBJECT(machine), "powerlink_pcp_data.ram",
+                            16 * KiB, &error_fatal);
+-    memory_region_init_ram(pcp_text, NULL, "powerlink_pcp_text.ram",
++    memory_region_init_ram(pcp_text, OBJECT(machine), "powerlink_pcp_text.ram",
+                            32 * KiB, &error_fatal);
+ 
+     memory_region_add_subregion(sysmem, 0x80000000, ext_cram);
 -- 
 2.47.1
 
