@@ -4,116 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 097E4C43458
-	for <qemu-riscv@archiver.kernel.org>; Sat, 11 Jul 2026 10:55:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA5F2C43458
+	for <qemu-riscv@archiver.kernel.org>; Sat, 11 Jul 2026 11:04:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiVLl-0006MZ-1i; Sat, 11 Jul 2026 06:54:25 -0400
+	id 1wiVVV-0000k6-Iw; Sat, 11 Jul 2026 07:04:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <harshpb@linux.ibm.com>)
- id 1wiVLj-0006Le-5F; Sat, 11 Jul 2026 06:54:23 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <harshpb@linux.ibm.com>)
- id 1wiVLg-0004n2-Nb; Sat, 11 Jul 2026 06:54:22 -0400
-Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66B7C2DE338248; Sat, 11 Jul 2026 10:54:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=1bY6K3
- UqPRO4dAUO+HpvCp1rtWfs40kUevSQqr93Ag4=; b=H4bYNHAxW8wgK5c3hQvVR8
- 8UMx5t34qOCVU2zXIyD0+s8jYiDMZVRc/n8KduXgSm/m6Pj2vJd+l/vsA5gHjWlX
- Sofk0mu1OWdA0bkWYMBBbKwD0wx77BeMbUzxDD79JY86EABX/ch1JmKFnjPoPo7R
- ckoEiNEkNLeYn2YKmry0g+UYjqasdLufrwGOdCHSH4eVBrDn1PymBvrFC9EAiASm
- Gqwi84WqL9hwalRLIGADrnALTIaL7iOV6bUaGnjs5XMZ2zgUXlNTW7QSoX9v88/2
- qdOD5RJFT81Auy7cV72krQXtBcIDa7XoWKepBh46jX7tjTQPu2ERhDnWFIiu3bEw
- ==
-Received: from ppma12.dal12v.mail.ibm.com
- (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fber80uw3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Sat, 11 Jul 2026 10:54:08 +0000 (GMT)
-Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
- by ppma12.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66BAo8NJ014999;
- Sat, 11 Jul 2026 10:54:07 GMT
-Received: from smtprelay03.dal12v.mail.ibm.com ([172.16.1.5])
- by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 4f7cgqpap8-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Sat, 11 Jul 2026 10:54:07 +0000 (GMT)
-Received: from smtpav04.wdc07v.mail.ibm.com (smtpav04.wdc07v.mail.ibm.com
- [10.39.53.231])
- by smtprelay03.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 66BAs6Rw64684502
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 11 Jul 2026 10:54:07 GMT
-Received: from smtpav04.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id BA22E58052;
- Sat, 11 Jul 2026 10:54:06 +0000 (GMT)
-Received: from smtpav04.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 936AA5805E;
- Sat, 11 Jul 2026 10:54:02 +0000 (GMT)
-Received: from [9.124.217.8] (unknown [9.124.217.8])
- by smtpav04.wdc07v.mail.ibm.com (Postfix) with ESMTP;
- Sat, 11 Jul 2026 10:54:02 +0000 (GMT)
-Message-ID: <bf1b73da-919c-4b02-8b46-78b939077610@linux.ibm.com>
-Date: Sat, 11 Jul 2026 16:24:00 +0530
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1wiVVU-0000jW-ST
+ for qemu-riscv@nongnu.org; Sat, 11 Jul 2026 07:04:28 -0400
+Received: from mail-yx1-xb132.google.com ([2607:f8b0:4864:20::b132])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1wiVVT-0008RU-1G
+ for qemu-riscv@nongnu.org; Sat, 11 Jul 2026 07:04:28 -0400
+Received: by mail-yx1-xb132.google.com with SMTP id
+ 956f58d0204a3-664a09bc459so2531995d50.1
+ for <qemu-riscv@nongnu.org>; Sat, 11 Jul 2026 04:04:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783767865; cv=none;
+ d=google.com; s=arc-20260327;
+ b=gZEhlJzcgwPO2cdSmublbXRShxT4+PDK8KTRo2O1C7j2uyoJ4ncRECy/XVB9vx36Qk
+ 3TKPuLFaaGWV7qGVu0vsOpbDHSJHIh/0lV2fKn4tpmtuvLxWrd5svOaDF+KPBZip55kL
+ wIr0sScDBJg2FCNioVO3GXR91yxITKkgZoldVrGY9n5njCwulMgqw+md0aQGzVqf6hnN
+ m93jjKswEZGo7on3An5LOKWTIQxjCYrKJxdX2ZbgfAhf6eajqQg/D6rHdHuWyK481EL6
+ a4+3ujGfphFLD3crj0ZU4QoV9QDNMlen+MZtNCyuVDAX1MRRttoV586z+10MbhhLn6/F
+ cjSQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=NLECCsMWXnqpvQBUgmVChXHrgMKE08qUHwIWNPzAbKM=;
+ fh=Rj0nQ6DHEZZyqdvbRC4JAe4tzJFusjT4rPF8+kpFZG0=;
+ b=muxoyv8j7u+If8iZnt1Gw/e3C9C3MwllOus26vBtnJTY4NFWOLjtSwcf24DmqDo+zW
+ Spr8xwemRC7UUNJSKT9m2NFu+2vlBvpx88Vjg+xLrDPL/fy2U7BtVI83WZxOD7U7K6w9
+ /be91DzVwHYKCgMS30KOk7kwCgpM9m1oeQws+uwcyO1kbulvUdi1XB4v5Z1/ZOhvqyz2
+ vjaNWKFVvxsSd2JfqUCV9k0yJOBCeqvMUZkmUQYARQDWKHTZMUhLuanJrrKK0kMa/XoN
+ 3wlk8ey9oup39sbdyIn3hy+u5R1UMXLgTM2CVQa85wH027GcjOXqaEtjBk0/9eyvixC2
+ XE4w==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783767865; x=1784372665; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=NLECCsMWXnqpvQBUgmVChXHrgMKE08qUHwIWNPzAbKM=;
+ b=dPBkIn6HmmhDBZ/HoUV2MmhkDVq+k0Y/VnESGUURl2xU1GjvlfYCO8wcuoJIwl3iol
+ Vo/3xwmuVOi20Lv1e3jeG7uizH96cV8K1GFNNCi/aXr6bsxPxN3B03P9uf67WJgf+EZ+
+ 4xruwbqwyr730gwEc4edWFHT2AXZzjqUk9zu80fQdUuddm7YtLqw2lKEgjlNlcR74z8K
+ vJ0pi6mZj88wPuEUNCtqbm30LGkrW98NH2bCScl3+fE/k77jKrp6ebHz1aEOKSFJ2ujs
+ pktaFBBJCcn8niSYU2WdZmctpfa+lKeee3qt2MG/J2xgRhTcAfbfQX09uWKYJqdOMTFi
+ VX8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783767865; x=1784372665;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=NLECCsMWXnqpvQBUgmVChXHrgMKE08qUHwIWNPzAbKM=;
+ b=q3LfQ145aeEh+G0/SSHwzrDjpP9OSXBAYB7PdbU/zUnYnGqgSw7Ea6jW/+F7rHCWyt
+ VSX1kwwaUsIPjU4KVN0ANGf9qY9jMBk5eEshfK9rr3LPXQZzO2raXDUJ9RamkFLdIYTT
+ xOoI+Bh46sqS3pnm8KWusRMEkp7UoZldeslNI31vQW3o6VIgiYN+VnzZ/k1TUpPqh7jK
+ uDw+hBv8hQeqbW9d2GP11DS0C2OubLX5MgxM6a/45UDpi0zSoiO5LbwIQ0ofQtWuF3h0
+ l3+1OSo7x7QHvRIXXUCiypTiy8r0NejQHLIKdA9/AM3RqBRLXPSE03p/0FTzwT/a1WXH
+ K0gQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rr1ys2rPuQdEW/TLkyrl+BDiPB8uz8pzl65iFFnXwaK/0xaU5yEUQ+6OsYK2IEb2C3Jxw1xccZuU4ot@nongnu.org
+X-Gm-Message-State: AOJu0Yyu6YN/RxKvpvCjtiXlbAQTiMgOivXzfJX9lyANaVY69bobJzQH
+ PRdSKDUUdjjnQmZtLL6LAfAo/I/pyxmIvKgHmd8oXB+tbCcVMCtb1MZLVkrphOsEAd+0qHSP9Oy
+ S+W3+spY8xNk+1p/v5QxsoiGb4IYepe0=
+X-Gm-Gg: AfdE7cnvXZMrcS0meMNTHVRUdcBEaY+BfQ4xVxX0WwGf+GCgcKGh4ccGBUdwoGdFtQd
+ 4nxDgR+K5tsKZB5QtUMJzUDQFevy8wwn98MFU8kgoSWGYwwgyL2kyytd1nltwGu0M2ztShc+u2P
+ hMNFrgqVOFua3qpH5keP3NNCRNrYBVDNORuIv2Ap2hxrIKr7zXl3ydr3aj2bvMP+SxsD83Lgo/0
+ JKsiIPpqBCO8xVsWyDO9XDkF1Q16rsEwvwsWr3SsaJMsCD9n4KWOSNVkJkmRyexsJc80aY=
+X-Received: by 2002:a05:690e:21d1:b0:664:ae6b:b498 with SMTP id
+ 956f58d0204a3-667d7c9f133mr1302147d50.77.1783767865460; Sat, 11 Jul 2026
+ 04:04:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 33/51] target/ppc: Simplify
- ppc_cpu_debug_check_watchpoint
-Content-Language: en-GB
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- Shivaprasad G Bhat <sbhat@linux.ibm.com>
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, jcmvbkbc@gmail.com,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-References: <20260710205401.836304-1-richard.henderson@linaro.org>
- <20260710205401.836304-34-richard.henderson@linaro.org>
-From: Harsh Prateek Bora <harshpb@linux.ibm.com>
-In-Reply-To: <20260710205401.836304-34-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzExMDEwMyBTYWx0ZWRfXxmWsMFLwdcsX
- uhz3GHAULuMgWSOBO7Au8D/bFxpOSbEpJFTgnzDqTLIwUIQC4wbOI7SvphKl7Uu3egmUVc8Blzj
- Gdugmj4t+J4cgQw4fFZSizW+0qQlGAnCAI2oln7NTEqe0zakdeEdFKcogCwXgeurh4iSqp1FsEk
- NYrs94FLiagHFD02QH/qAJGbJ6ECkOkqOkukv2dLzjcs50ytScxaYk4MgtodMrq5V7NyLj3ATKz
- yeTaxboijTd0s7J0M7oTvJHsWBvRYDkhJ6+OtJZlhglRG1WYru3c2rAydSSxB7KFmvU2TTUu0aM
- Gn1xfUs8N++am9lLdCxE30riB2xLwcfVUc5w1x3qNCjuatx5Y7Vn2m1Ay0RxGhMZBspQspDHUAH
- wBStOFnfSzogeQBMb0uAWLhV8x/l+tb35Rk4M8Qk2gZosdzAoZXA1XEQ+mfuHimA8HYD+auup0u
- dQkHCyYRDnlSl1dDjmg==
-X-Proofpoint-ORIG-GUID: iWJg-ygSVRxyX3VOYnyDnMidPbtqxkMb
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzExMDEwMyBTYWx0ZWRfX+GeqnUHqSLse
- 6oljsSK4ZnFCXQTzA3rZrQ8lUlI8Y7RPzLZfAEtpoUrLkLp2AMe9259thXoTE/cIfjGGaQ4sl2q
- UW/fPUSDG3ZPSMFlcoDuXjmC4q4gCJk=
-X-Authority-Analysis: v=2.4 cv=TpzWQjXh c=1 sm=1 tr=0 ts=6a5220d0 cx=c_pps
- a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=f7IdgyKtn90A:10
- a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22
- a=KKAkSRfTAAAA:8 a=Y4SOClW3IRnDOyVZwr4A:9 a=QEXdDO2ut3YA:10
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: devqyiRefFQzmcR5m3z8-QfZgPqT59HE
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-11_02,2026-07-10_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 impostorscore=0 malwarescore=0 bulkscore=0
- lowpriorityscore=0 adultscore=0 spamscore=0 clxscore=1011 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607110103
-Received-SPF: pass client-ip=148.163.156.1; envelope-from=harshpb@linux.ibm.com;
- helo=mx0a-001b2d01.pphosted.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
+References: <20260710114305.2961898-1-armbru@redhat.com>
+ <20260710114305.2961898-2-armbru@redhat.com>
+In-Reply-To: <20260710114305.2961898-2-armbru@redhat.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sat, 11 Jul 2026 19:04:14 +0800
+X-Gm-Features: AVVi8Cfvp826Yl-iAwVGKj0WWndEsEh3T9PRgpIf3rpW0I2JuKzS_dD7a8WM1KI
+Message-ID: <CAEUhbmXaA6wpyUeVGL4Vn-zaP9LBFfmpTuWxDB=aMaXez_p=1w@mail.gmail.com>
+Subject: Re: [PATCH 1/2] MAINTAINERS: Mark "Microchip PolarFire SoC Icicle
+ Kit" orphaned
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, alistair23@gmail.com, qemu-riscv@nongnu.org, 
+ bin.meng@processmission.com, mzamazal@redhat.com, mst@redhat.com, 
+ sgarzare@redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b132;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yx1-xb132.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,80 +121,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-+ Cedric, Shiva
-
-On 11/07/26 2:23 am, Richard Henderson wrote:
-> We don't need to check either ISA bit, because that's already
-> done starting with SPR registration.  Replace target_ulong with
-> uint64_t, as we're under TARGET_PPC64.
-> 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+On Fri, Jul 10, 2026 at 7:44=E2=80=AFPM Markus Armbruster <armbru@redhat.co=
+m> wrote:
+>
+> Commit 4a16a1a7ad (MAINTAINERS: Remove Bin Meng from RISC-V
+> maintainers, 2025-01-28) removed the only M:, but left S: Supported.
+> This makes no sense.  Downgrade to S: Orphan.
+>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
 > ---
->   target/ppc/tcg-excp_helper.c | 30 +++++++++---------------------
->   1 file changed, 9 insertions(+), 21 deletions(-)
-> 
-> diff --git a/target/ppc/tcg-excp_helper.c b/target/ppc/tcg-excp_helper.c
-> index 99ffe4a820..4065440949 100644
-> --- a/target/ppc/tcg-excp_helper.c
-> +++ b/target/ppc/tcg-excp_helper.c
-> @@ -353,35 +353,23 @@ bool ppc_cpu_debug_check_watchpoint(CPUState *cs, CPUBreakpoint *wp)
->   {
->   #if defined(TARGET_PPC64)
->       CPUPPCState *env = cpu_env(cs);
-> -    bool wt, wti, hv, sv, pr;
-> -    uint32_t dawrx;
-> +    uint32_t dawrx = env->spr[wp->id ? SPR_DAWRX1 : SPR_DAWRX0];
-> +    bool wt = extract32(dawrx, PPC_BIT_NR(59), 1);
-> +    bool wti = extract32(dawrx, PPC_BIT_NR(60), 1);
-> +    bool hv = extract32(dawrx, PPC_BIT_NR(61), 1);
-> +    bool sv = extract32(dawrx, PPC_BIT_NR(62), 1);
-> +    bool pr = extract32(dawrx, PPC_BIT_NR(62), 1);
->   
-> -    if ((env->insns_flags2 & PPC2_ISA207S) &&
-> -        (wp == env->dawr_watchpoint[0])) {
-> -        dawrx = env->spr[SPR_DAWRX0];
-> -    } else if ((env->insns_flags2 & PPC2_ISA310) &&
-> -               (wp == env->dawr_watchpoint[1])) {
-> -        dawrx = env->spr[SPR_DAWRX1];
-> -    } else {
+>  MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 576ef6fff5..aa2df9cbe3 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1761,7 +1761,7 @@ F: tests/tcg/riscv64/test-crc32.S
+>
+>  Microchip PolarFire SoC Icicle Kit
+>  L: qemu-riscv@nongnu.org
+> -S: Supported
+> +S: Orphan
+>  F: docs/system/riscv/microchip-icicle-kit.rst
+>  F: hw/riscv/microchip_pfsoc.c
+>  F: hw/char/mchp_pfsoc_mmuart.c
+> --
 
-Previously, there were different ISA version checks resulting in 
-different behaviour, now with this change we are allowing for both ISA 
-versions. Not sure if this would be an expected behaviour?
+I plan to send a patch series to resurrect PolarFire SoC support.
 
-Shiva, Could you also please check and confirm?
-
-Also, there seems to be a copy-paste mistake in existing code as 
-identified in another thread, may be we can fix along?
-
-bool pr = extract32(dawrx, PPC_BIT_NR(63), 1);
-
-regards,
-Harsh
-> +    if ((env->msr & (1ull << MSR_PR)) && !pr) {
->           return false;
-> -    }
-> -
-> -    wt = extract32(dawrx, PPC_BIT_NR(59), 1);
-> -    wti = extract32(dawrx, PPC_BIT_NR(60), 1);
-> -    hv = extract32(dawrx, PPC_BIT_NR(61), 1);
-> -    sv = extract32(dawrx, PPC_BIT_NR(62), 1);
-> -    pr = extract32(dawrx, PPC_BIT_NR(62), 1);
-> -
-> -    if ((env->msr & ((target_ulong)1 << MSR_PR)) && !pr) {
-> -        return false;
-> -    } else if ((env->msr & ((target_ulong)1 << MSR_HV)) && !hv) {
-> +    } else if ((env->msr & (1ull << MSR_HV)) && !hv) {
->           return false;
->       } else if (!sv) {
->           return false;
->       }
->   
->       if (!wti) {
-> -        if (env->msr & ((target_ulong)1 << MSR_DR)) {
-> +        if (env->msr & (1ull << MSR_DR)) {
->               return wt;
->           } else {
->               return !wt;
-
+Regards,
+Bin
 
