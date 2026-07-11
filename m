@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB47C44506
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7692C44501
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiE2-0001kA-DN; Sat, 11 Jul 2026 20:39:18 -0400
+	id 1wiiEr-00032P-10; Sat, 11 Jul 2026 20:40:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigbf-00089m-1R; Sat, 11 Jul 2026 18:55:35 -0400
+ id 1wigRD-0003k1-T0; Sat, 11 Jul 2026 18:44:47 -0400
 Received: from pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com
  ([35.155.198.111])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigbc-0000oF-LQ; Sat, 11 Jul 2026 18:55:34 -0400
+ id 1wigRC-0006lc-0Z; Sat, 11 Jul 2026 18:44:47 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810532; x=1815346532;
+ t=1783809886; x=1815345886;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=lQU7Pqv5BEyEBZMur78N9gmhRUgMQYfgLuXugUnzrlw=;
- b=VpHrB4mCufNL4sa7UKClZ3l1BoCZg41QJzPLpMAzlxTS3/6jcpdK485Q
- b0D0yI1mbjINqa1ve9frzY7kpYoH7hwG4R/2yD0lUc98tP02TJMX94E9J
- G9baXvSn5ht/EVr2c6Jeopnw1RZfpwbOiPvn3qPX2f0Q8fqdJSAcq5EAo
- 4zOGil++5bqKkZ/UAkppERIvGAvlw4UgzGNQW+WJKtS95DGcxvrHr9KhJ
- rL7SK0SeoK8ZK0E76OawBvcDmNlFoY1jDREbXSOrQ4OCOm2bMaAGYIFsr
- LHgQ7BCRJyxEv9ampOgpEpTG9s+QTfBUQY/uObhPeRr5SFS9mdFfL60DQ g==;
-X-CSE-ConnectionGUID: FNOToU6FTzejBL/BtwFkVg==
-X-CSE-MsgGUID: Cn1LriflQ32Vd5/cL5kUHg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23390577"
-Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+ bh=pI9W8gUYIlE2xZtcksTB6RU3dYY5+SFf4yvlIvjioLY=;
+ b=NHB44su4veey9mZ1iQoe/huAs9YHeqgMPbcMqTn1wMEbmnJ/THdV9mOt
+ kw4J+AV2jEkCqIOPdbWW5OJXgb3QLnv+nZKWE6y9FCpZ0tB3x/1jLR0Ly
+ 3YpsapaD6ZoNCLFxwMnG/penFowLFbvx35M9XY4zWkGyWiuFlzBDdIkns
+ eDKJ3+fzSrY1IcKYzL7WcxZVbDJ7nPwnssLY6bswxxY1rJ/31xULVKPAP
+ zqPYzgvBHWjF6iF9MIZd3G384gk4dhKBFsgBWXWnDAf4ZHvQsmN/mwm8y
+ Bmm7mdRyFT9MtFldEX/K5ER1CX/8TV1JRqz+ltGCu1xuc2rMDq7med+M1 w==;
+X-CSE-ConnectionGUID: XFGaawobRpGcB6dEP7gOfw==
+X-CSE-MsgGUID: pF/TPiavT46xqRmpGGAnZw==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23390403"
+Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
  by internal-pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:55:28 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:20358]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.68:2525]
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:44:42 +0000
+Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.234:28538]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.26.212:2525]
  with esmtp (Farcaster)
- id ba66bd41-fa63-49b8-ac5b-11e015e0ef0d; Sat, 11 Jul 2026 22:55:28 +0000 (UTC)
-X-Farcaster-Flow-ID: ba66bd41-fa63-49b8-ac5b-11e015e0ef0d
+ id 8a449a25-6e8e-4d82-870f-85d7bf33146b; Sat, 11 Jul 2026 22:44:42 +0000 (UTC)
+X-Farcaster-Flow-ID: 8a449a25-6e8e-4d82-870f-85d7bf33146b
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
+ EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:55:28 +0000
+ Sat, 11 Jul 2026 22:44:41 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:55:19 +0000
+ Sat, 11 Jul 2026 22:44:33 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 069/134] hw/arm/imx: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:36:02 +0000
-Message-ID: <20260711223707.42139-70-graf@amazon.com>
+Subject: [RFC PATCH 029/134] hw/mem: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:22 +0000
+Message-ID: <20260711223707.42139-30-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,7 +101,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D035UWA003.ant.amazon.com (10.13.139.86) To
+X-ClientProxiedBy: EX19D046UWB004.ant.amazon.com (10.13.139.164) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
 Received-SPF: pass client-ip=35.155.198.111;
  envelope-from=prvs=645f258d4=graf@amazon.de;
@@ -115,7 +115,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,154 +130,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in the hw/arm imx
-board files to the new parented API introduced earlier in this
-series, so every onboard device gets a stable path in the
-composition tree instead of landing in /machine/unattached with an
-unstable device[N] name.
+Convert the *_orphan() device-creation calls in hw/mem to the new
+parented API introduced earlier in this series, so every onboard
+device gets a stable path in the composition tree instead of landing
+in /machine/unattached with an unstable device[N] name.
 
 The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing SoC device for
+machine for board-created devices, the containing device for
 composite children.  Names follow existing QOM conventions.
 
 Per-site rationale (reviewers: dispute the modeling here):
 
-hw/arm/fsl-imx6.c:171 | sysbus_create_simple_orphan | OBJECT(dev) | "l2x0" | SoC DeviceClass.realize(DeviceState *dev); parent is the SoC device being realized; single instance
-hw/arm/imx25_pdk.c:130 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init(MachineState *machine); loop over ESDHC slots; auto-index; drop _and_unref
-hw/arm/imx8mm-evk.c:100 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init; loop over USDHC slots; auto-index; drop _and_unref
-hw/arm/imx8mp-evk.c:113 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init; loop over USDHC slots; auto-index; drop _and_unref
-hw/arm/mcimx6ul-evk.c:62 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init; loop over USDHC slots; auto-index; drop _and_unref
-hw/arm/mcimx7d-sabre.c:62 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init; loop over USDHC slots; auto-index; drop _and_unref
-hw/arm/sabrelite.c:99 | qdev_new_orphan | OBJECT(machine) | "spi-flash" | board init; single NOR flash on SPI bus; drop _and_unref
+hw/mem/sparse-mem.c:111 | qdev_new | parent (new arg) | "sparse-mem" | Public helper; thread Object *parent through. Only caller is generic_fuzz which passes qdev_get_machine()
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/arm/fsl-imx6.c      | 3 ++-
- hw/arm/imx25_pdk.c     | 4 ++--
- hw/arm/imx8mm-evk.c    | 4 ++--
- hw/arm/imx8mp-evk.c    | 4 ++--
- hw/arm/mcimx6ul-evk.c  | 4 ++--
- hw/arm/mcimx7d-sabre.c | 4 ++--
- hw/arm/sabrelite.c     | 5 +++--
- 7 files changed, 15 insertions(+), 13 deletions(-)
+ hw/mem/sparse-mem.c             | 6 +++---
+ include/hw/mem/sparse-mem.h     | 2 +-
+ tests/qtest/fuzz/generic_fuzz.c | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/hw/arm/fsl-imx6.c b/hw/arm/fsl-imx6.c
-index 103adcc2bd..44046953be 100644
---- a/hw/arm/fsl-imx6.c
-+++ b/hw/arm/fsl-imx6.c
-@@ -168,7 +168,8 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
-     }
+diff --git a/hw/mem/sparse-mem.c b/hw/mem/sparse-mem.c
+index 3310504578..fbf94eb8e7 100644
+--- a/hw/mem/sparse-mem.c
++++ b/hw/mem/sparse-mem.c
+@@ -104,14 +104,14 @@ static const Property sparse_mem_properties[] = {
+     DEFINE_PROP_UINT64("maxsize", SparseMemState, maxsize, 10 * MiB),
+ };
  
-     /* L2 cache controller */
--    sysbus_create_simple_orphan("l2x0", FSL_IMX6_PL310_ADDR, NULL);
-+    sysbus_create_simple(OBJECT(dev), "l2x0", "l2x0", FSL_IMX6_PL310_ADDR,
-+                         NULL);
+-MemoryRegion *sparse_mem_init(uint64_t addr, uint64_t length)
++MemoryRegion *sparse_mem_init(Object *parent, uint64_t addr, uint64_t length)
+ {
+     DeviceState *dev;
  
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->ccm), errp)) {
-         return;
-diff --git a/hw/arm/imx25_pdk.c b/hw/arm/imx25_pdk.c
-index 6976652370..9351d53850 100644
---- a/hw/arm/imx25_pdk.c
-+++ b/hw/arm/imx25_pdk.c
-@@ -127,9 +127,9 @@ static void imx25_pdk_init(MachineState *machine)
-         di = drive_get(IF_SD, 0, i);
-         blk = di ? blk_by_legacy_dinfo(di) : NULL;
-         bus = qdev_get_child_bus(DEVICE(&s->soc.esdhc[i]), "sd-bus");
--        carddev = qdev_new_orphan(TYPE_SD_CARD);
-+        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
-         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
--        qdev_realize_and_unref(carddev, bus, &error_fatal);
-+        qdev_realize(carddev, bus, &error_fatal);
-     }
+-    dev = qdev_new_orphan(TYPE_SPARSE_MEM);
++    dev = qdev_new(parent, "sparse-mem", TYPE_SPARSE_MEM);
+     qdev_prop_set_uint64(dev, "baseaddr", addr);
+     qdev_prop_set_uint64(dev, "length", length);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_mmio_map_overlap(SYS_BUS_DEVICE(dev), 0, addr, -10000);
+     return &SPARSE_MEM(dev)->mmio;
+ }
+diff --git a/include/hw/mem/sparse-mem.h b/include/hw/mem/sparse-mem.h
+index f9863b154b..79c30cf412 100644
+--- a/include/hw/mem/sparse-mem.h
++++ b/include/hw/mem/sparse-mem.h
+@@ -14,6 +14,6 @@
+ #define SPARSE_MEM_H
+ #define TYPE_SPARSE_MEM "sparse-mem"
  
-     /*
-diff --git a/hw/arm/imx8mm-evk.c b/hw/arm/imx8mm-evk.c
-index ce7693ca7a..72fa1930ae 100644
---- a/hw/arm/imx8mm-evk.c
-+++ b/hw/arm/imx8mm-evk.c
-@@ -97,9 +97,9 @@ static void imx8mm_evk_init(MachineState *machine)
+-MemoryRegion *sparse_mem_init(uint64_t addr, uint64_t length);
++MemoryRegion *sparse_mem_init(Object *parent, uint64_t addr, uint64_t length);
  
-         blk = blk_by_legacy_dinfo(di);
-         bus = qdev_get_child_bus(DEVICE(&s->usdhc[i]), "sd-bus");
--        carddev = qdev_new_orphan(TYPE_SD_CARD);
-+        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
-         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
--        qdev_realize_and_unref(carddev, bus, &error_fatal);
-+        qdev_realize(carddev, bus, &error_fatal);
-     }
+ #endif
+diff --git a/tests/qtest/fuzz/generic_fuzz.c b/tests/qtest/fuzz/generic_fuzz.c
+index e48f868775..99b38a7fd4 100644
+--- a/tests/qtest/fuzz/generic_fuzz.c
++++ b/tests/qtest/fuzz/generic_fuzz.c
+@@ -788,7 +788,7 @@ static void generic_pre_fuzz(QTestState *s)
+      * Create a special device that we can use to back DMA buffers at very
+      * high memory addresses
+      */
+-    sparse_mem_mr = sparse_mem_init(0, UINT64_MAX);
++    sparse_mem_mr = sparse_mem_init(qdev_get_machine(), 0, UINT64_MAX);
  
-     if (!qtest_enabled()) {
-diff --git a/hw/arm/imx8mp-evk.c b/hw/arm/imx8mp-evk.c
-index 90cda63b49..6116e6e9dc 100644
---- a/hw/arm/imx8mp-evk.c
-+++ b/hw/arm/imx8mp-evk.c
-@@ -110,9 +110,9 @@ static void imx8mp_evk_init(MachineState *machine)
- 
-         blk = blk_by_legacy_dinfo(di);
-         bus = qdev_get_child_bus(DEVICE(&s->soc.usdhc[i]), "sd-bus");
--        carddev = qdev_new_orphan(TYPE_SD_CARD);
-+        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
-         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
--        qdev_realize_and_unref(carddev, bus, &error_fatal);
-+        qdev_realize(carddev, bus, &error_fatal);
-     }
- 
-     if (!qtest_enabled()) {
-diff --git a/hw/arm/mcimx6ul-evk.c b/hw/arm/mcimx6ul-evk.c
-index 96309e1bfc..be4c4ca316 100644
---- a/hw/arm/mcimx6ul-evk.c
-+++ b/hw/arm/mcimx6ul-evk.c
-@@ -59,9 +59,9 @@ static void mcimx6ul_evk_init(MachineState *machine)
-         di = drive_get(IF_SD, 0, i);
-         blk = di ? blk_by_legacy_dinfo(di) : NULL;
-         bus = qdev_get_child_bus(DEVICE(&s->usdhc[i]), "sd-bus");
--        carddev = qdev_new_orphan(TYPE_SD_CARD);
-+        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
-         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
--        qdev_realize_and_unref(carddev, bus, &error_fatal);
-+        qdev_realize(carddev, bus, &error_fatal);
-     }
- 
-     if (!qtest_enabled()) {
-diff --git a/hw/arm/mcimx7d-sabre.c b/hw/arm/mcimx7d-sabre.c
-index be9d0d6993..d8b1e7fc7e 100644
---- a/hw/arm/mcimx7d-sabre.c
-+++ b/hw/arm/mcimx7d-sabre.c
-@@ -59,9 +59,9 @@ static void mcimx7d_sabre_init(MachineState *machine)
-         di = drive_get(IF_SD, 0, i);
-         blk = di ? blk_by_legacy_dinfo(di) : NULL;
-         bus = qdev_get_child_bus(DEVICE(&s->usdhc[i]), "sd-bus");
--        carddev = qdev_new_orphan(TYPE_SD_CARD);
-+        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
-         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
--        qdev_realize_and_unref(carddev, bus, &error_fatal);
-+        qdev_realize(carddev, bus, &error_fatal);
-     }
- 
-     if (!qtest_enabled()) {
-diff --git a/hw/arm/sabrelite.c b/hw/arm/sabrelite.c
-index af4dfef7f2..04c764f82f 100644
---- a/hw/arm/sabrelite.c
-+++ b/hw/arm/sabrelite.c
-@@ -96,13 +96,14 @@ static void sabrelite_init(MachineState *machine)
-                 qemu_irq cs_line;
-                 DriveInfo *dinfo = drive_get(IF_MTD, 0, 0);
- 
--                flash_dev = qdev_new_orphan("sst25vf016b");
-+                flash_dev = qdev_new(OBJECT(machine), "spi-flash",
-+                                     "sst25vf016b");
-                 if (dinfo) {
-                     qdev_prop_set_drive_err(flash_dev, "drive",
-                                             blk_by_legacy_dinfo(dinfo),
-                                             &error_fatal);
-                 }
--                qdev_realize_and_unref(flash_dev, BUS(spi_bus), &error_fatal);
-+                qdev_realize(flash_dev, BUS(spi_bus), &error_fatal);
- 
-                 cs_line = qdev_get_gpio_in_named(flash_dev, SSI_GPIO_CS, 0);
-                 qdev_connect_gpio_out(DEVICE(&s->soc.gpio[2]), 19, cs_line);
+     dma_regions = g_array_new(false, false, sizeof(address_range));
+     dma_patterns = g_array_new(false, false, sizeof(pattern));
 -- 
 2.47.1
 
