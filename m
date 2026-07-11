@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12283C44501
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD1D4C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:42:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiG1-0006ou-HR; Sat, 11 Jul 2026 20:41:21 -0400
+	id 1wiiFP-0004Oe-Fx; Sat, 11 Jul 2026 20:40:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wignN-00069t-Qa; Sat, 11 Jul 2026 19:07:41 -0400
-Received: from pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.68.102])
+ id 1wigTF-0008B3-0B; Sat, 11 Jul 2026 18:46:53 -0400
+Received: from pdx-out-012.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([35.162.73.231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wignM-0003rD-0s; Sat, 11 Jul 2026 19:07:41 -0400
+ id 1wigTC-0007N8-BP; Sat, 11 Jul 2026 18:46:52 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811260; x=1815347260;
+ t=1783810010; x=1815346010;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=0t83vrkzVA8QS1Yf+f3mopksiJFjcP4RLaXceTkVB2I=;
- b=cY887D1Aqus0vXDC0Pk7BRJcSymdxKbUgP01n5MAp9Yzvyxy9+ZrEUyK
- vhqkTFLWXt1bnSnwCHzWHGaumxNX2FexTvBZ4/iAYRLYV9+WgZJMxVP9/
- vwCzj4H67oD93lk4eHYsVAFckLAxs3bxWiSEesf/WBhiLuW4bl64sR256
- d/NSGVg1IGMRQdp/8gJKQ6IqdIbadK88r4wBZ3ycp9zE4HgbOT0WUW61U
- t7roA4fZPwztOZBQzHh4cP2Ihx1ii5PLMl4hw52QNbEgLGJxFPnG0OeaM
- 2IDpamVQCyAX8p+Cp7Tz9u8M9REP06i0tiHwUKg+2ozqlBXsPpbbXrrcX w==;
-X-CSE-ConnectionGUID: 5u04uP+7TEuOwNHNrVv/tA==
-X-CSE-MsgGUID: Y0mHu6VwTWCfSVSdDKh0jw==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23517425"
-Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:07:36 +0000
-Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.178:16436]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.26.212:2525]
+ bh=meFsLf47H5P+7QoX1jJ2rNzaffdsteXUDRvG8BWlryM=;
+ b=gF8nPVo10cbk50q81vlv7h705yGfLC+S9Rag3flHCwdvDC5s2c/dlNG+
+ dYf1Vbh6gddBRCXqKIjwstL0Hq1/R/X+kEy5WyQCgmBRglT+5+eQAm9oB
+ l0Sku0NeIaa02fj4CMoo12Dz7Vg70w+QLArMdqmI2RV1YnikYYhRoyaX5
+ kjnH7P671uIxMDnfSM2tfeApRrIstqdBgLWzIJyLunrks95VmQpOGPrGy
+ I/HFUf95DCoalk334VF5t/Q9d7EPfDcFNt6F2LLA5BegnsDtyrIzMtkvS
+ t8tyTu7yMLaRsXWQZeehPsQh++YKHJQkUTB6lWVExYHidn41GQPaKX7E5 w==;
+X-CSE-ConnectionGUID: nqogrhn+R9yzWAPUXMxucg==
+X-CSE-MsgGUID: w4WGZkGoQDyXp/ZeTWooMw==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23293923"
+Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
+ by internal-pdx-out-012.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:46:46 +0000
+Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.51:24258]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.51.175:2525]
  with esmtp (Farcaster)
- id 749f953e-1a47-49c4-9433-cae2ef12f849; Sat, 11 Jul 2026 23:07:35 +0000 (UTC)
-X-Farcaster-Flow-ID: 749f953e-1a47-49c4-9433-cae2ef12f849
+ id 736a152e-b649-4d60-a25a-67d8e3159c80; Sat, 11 Jul 2026 22:46:46 +0000 (UTC)
+X-Farcaster-Flow-ID: 736a152e-b649-4d60-a25a-67d8e3159c80
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
+ EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:07:35 +0000
+ Sat, 11 Jul 2026 22:46:46 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:07:27 +0000
+ Sat, 11 Jul 2026 22:46:37 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 116/134] irq: Delete the *_orphan() IRQ allocation variants
-Date: Sat, 11 Jul 2026 22:36:49 +0000
-Message-ID: <20260711223707.42139-117-graf@amazon.com>
+Subject: [RFC PATCH 036/134] hw/misc: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:29 +0000
+Message-ID: <20260711223707.42139-37-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,21 +101,21 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D046UWB003.ant.amazon.com (10.13.139.174) To
+X-ClientProxiedBy: EX19D031UWC001.ant.amazon.com (10.13.139.241) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.68.102;
+Received-SPF: pass client-ip=35.162.73.231;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-012.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ SPF_HELO_NONE=0.001, T_FILL_THIS_FORM_SHORT=0.01, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,112 +130,281 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Every caller has been converted to the parented form; drop the
-transitional *_orphan() helpers.
+Convert the *_orphan() device-creation calls in hw/misc to the new
+parented API introduced earlier in this series, so every onboard
+device gets a stable path in the composition tree instead of landing
+in /machine/unattached with an unstable device[N] name.
 
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing device for
+composite children.  Names follow existing QOM conventions.
+
+Per-site rationale (reviewers: dispute the modeling here):
+
+hw/misc/empty_slot.c:61 | qdev_new | parent | name | thread Object *parent as first arg; use existing name arg as child name; 7 callers updated (m68k next-cube, sparc sun4m, gt64120 realize)
+hw/misc/led.c:144 | qdev_new | parentobj | name | already receives parentobj; collapse existing object_property_add_child(); compute name before create
+hw/misc/sifive_e_prci.c:120 | qdev_new | parent | "prci" | thread Object *parent as first arg; single caller in sifive_e_soc_realize passes OBJECT(dev)
+hw/misc/sifive_test.c:100 | qdev_new | parent | "test" | thread Object *parent as first arg; 2 callers (riscv virt, or1k virt) pass machine-state
+
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/core/irq.c         | 35 -----------------------------------
- include/hw/core/irq.h | 20 +-------------------
- 2 files changed, 1 insertion(+), 54 deletions(-)
+ hw/m68k/next-cube.c             |  6 +++---
+ hw/misc/empty_slot.c            |  7 ++++---
+ hw/misc/led.c                   | 15 ++++++++-------
+ hw/misc/sifive_e_prci.c         |  6 +++---
+ hw/misc/sifive_test.c           |  6 +++---
+ hw/or1k/virt.c                  |  2 +-
+ hw/pci-host/gt64120.c           |  2 +-
+ hw/riscv/sifive_e.c             |  2 +-
+ hw/riscv/virt.c                 |  2 +-
+ hw/sparc/sun4m.c                |  7 ++++---
+ include/hw/misc/empty_slot.h    |  3 ++-
+ include/hw/misc/sifive_e_prci.h |  2 +-
+ include/hw/misc/sifive_test.h   |  2 +-
+ 13 files changed, 33 insertions(+), 29 deletions(-)
 
-diff --git a/hw/core/irq.c b/hw/core/irq.c
-index ee954eaf62..a93c64e6ae 100644
---- a/hw/core/irq.c
-+++ b/hw/core/irq.c
-@@ -68,34 +68,6 @@ void qemu_init_irqs(IRQState irq[], size_t count,
+diff --git a/hw/m68k/next-cube.c b/hw/m68k/next-cube.c
+index d97168d9f3..530dc1ab59 100644
+--- a/hw/m68k/next-cube.c
++++ b/hw/m68k/next-cube.c
+@@ -1292,9 +1292,9 @@ static void next_cube_init(MachineState *machine)
+     sysbus_mmio_map(SYS_BUS_DEVICE(pcdev), 1, 0x02106000);
+ 
+     /* unknown: Brightness control register? */
+-    empty_slot_init("next.unknown.0", 0x02110000, 0x10);
++    empty_slot_init(OBJECT(machine), "next.unknown.0", 0x02110000, 0x10);
+     /* unknown: Magneto-Optical drive controller? */
+-    empty_slot_init("next.unknown.1", 0x02112000, 0x10);
++    empty_slot_init(OBJECT(machine), "next.unknown.1", 0x02112000, 0x10);
+ 
+     /* SCSI */
+     sysbus_mmio_map(SYS_BUS_DEVICE(pcdev), 2, 0x02114000);
+@@ -1304,7 +1304,7 @@ static void next_cube_init(MachineState *machine)
+     sysbus_mmio_map(SYS_BUS_DEVICE(pcdev), 4, 0x02118000);
+ 
+     /* unknown: Serial clock configuration register? */
+-    empty_slot_init("next.unknown.2", 0x02118004, 0x10);
++    empty_slot_init(OBJECT(machine), "next.unknown.2", 0x02118004, 0x10);
+ 
+     /* Timer */
+     sysbus_mmio_map(SYS_BUS_DEVICE(pcdev), 5, 0x0211a000);
+diff --git a/hw/misc/empty_slot.c b/hw/misc/empty_slot.c
+index 182211fdcc..64764dfd92 100644
+--- a/hw/misc/empty_slot.c
++++ b/hw/misc/empty_slot.c
+@@ -52,16 +52,17 @@ static const MemoryRegionOps empty_slot_ops = {
+     .endianness = DEVICE_NATIVE_ENDIAN,
+ };
+ 
+-void empty_slot_init(const char *name, hwaddr addr, uint64_t slot_size)
++void empty_slot_init(Object *parent, const char *name, hwaddr addr,
++                     uint64_t slot_size)
+ {
+     if (slot_size > 0) {
+         /* Only empty slots larger than 0 byte need handling. */
+         DeviceState *dev;
+ 
+-        dev = qdev_new_orphan(TYPE_EMPTY_SLOT);
++        dev = qdev_new(parent, name, TYPE_EMPTY_SLOT);
+ 
+         qdev_prop_set_uint64(dev, "size", slot_size);
+-        sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++        sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+         sysbus_mmio_map_overlap(SYS_BUS_DEVICE(dev), 0, addr, -10000);
      }
+diff --git a/hw/misc/led.c b/hw/misc/led.c
+index 620284063b..bed85ec3c6 100644
+--- a/hw/misc/led.c
++++ b/hw/misc/led.c
+@@ -141,20 +141,21 @@ LEDState *led_create_simple(Object *parentobj,
+     g_autofree char *name = NULL;
+     DeviceState *dev;
+ 
+-    dev = qdev_new_orphan(TYPE_LED);
+-    qdev_prop_set_bit(dev, "gpio-active-high",
+-                      gpio_polarity == GPIO_POLARITY_ACTIVE_HIGH);
+-    qdev_prop_set_string(dev, "color", led_color_name[color]);
+     if (!description) {
+         static unsigned undescribed_led_id;
+         name = g_strdup_printf("undescribed-led-#%u", undescribed_led_id++);
+     } else {
+-        qdev_prop_set_string(dev, "description", description);
+         name = g_ascii_strdown(description, -1);
+         name = g_strdelimit(name, " #", '-');
+     }
+-    object_property_add_child(parentobj, name, OBJECT(dev));
+-    qdev_realize_and_unref(dev, NULL, &error_fatal);
++    dev = qdev_new(parentobj, name, TYPE_LED);
++    qdev_prop_set_bit(dev, "gpio-active-high",
++                      gpio_polarity == GPIO_POLARITY_ACTIVE_HIGH);
++    qdev_prop_set_string(dev, "color", led_color_name[color]);
++    if (description) {
++        qdev_prop_set_string(dev, "description", description);
++    }
++    qdev_realize(dev, NULL, &error_fatal);
+ 
+     return LED(dev);
  }
- 
--qemu_irq *qemu_extend_irqs_orphan(qemu_irq *old, int n_old, qemu_irq_handler handler,
--                           void *opaque, int n)
--{
--    qemu_irq *s;
--    int i;
--
--    if (!old) {
--        n_old = 0;
--    }
--    s = old ? g_renew(qemu_irq, old, n + n_old) : g_new(qemu_irq, n);
--    for (i = n_old; i < n + n_old; i++) {
--        s[i] = qemu_allocate_irq_orphan(handler, opaque, i);
--    }
--    return s;
--}
--
--qemu_irq *qemu_allocate_irqs_orphan(qemu_irq_handler handler, void *opaque, int n)
--{
--    return qemu_extend_irqs_orphan(NULL, 0, handler, opaque, n);
--}
--
--qemu_irq qemu_allocate_irq_orphan(qemu_irq_handler handler, void *opaque, int n)
--{
--    IRQState *irq = IRQ(object_new(TYPE_IRQ));
--    init_irq_fields(irq, handler, opaque, n);
--    return irq;
--}
--
- qemu_irq qemu_allocate_irq(Object *owner, const char *name,
-                            qemu_irq_handler handler, void *opaque, int n)
- {
-@@ -153,13 +125,6 @@ static void qemu_notirq(void *opaque, int line, int level)
-     qemu_set_irq(irq, !level);
- }
- 
--qemu_irq qemu_irq_invert_orphan(qemu_irq irq)
--{
--    /* The default state for IRQs is low, so raise the output now.  */
--    qemu_irq_raise(irq);
--    return qemu_allocate_irq_orphan(qemu_notirq, irq, 0);
--}
--
- qemu_irq qemu_irq_invert(Object *owner, const char *name, qemu_irq irq)
- {
-     /* The default state for IRQs is low, so raise the output now.  */
-diff --git a/include/hw/core/irq.h b/include/hw/core/irq.h
-index 5ccccd2697..89923cf4a8 100644
---- a/include/hw/core/irq.h
-+++ b/include/hw/core/irq.h
-@@ -74,19 +74,8 @@ void qemu_init_irq_child(Object *parent, const char *propname,
- void qemu_init_irqs(IRQState irq[], size_t count,
-                     qemu_irq_handler handler, void *opaque);
- 
--/* Returns an array of N IRQs. Each IRQ is assigned the argument handler and
-- * opaque data.
-- */
--qemu_irq *qemu_allocate_irqs_orphan(qemu_irq_handler handler, void *opaque, int n);
--
+diff --git a/hw/misc/sifive_e_prci.c b/hw/misc/sifive_e_prci.c
+index 7ac5db5933..a466d37735 100644
+--- a/hw/misc/sifive_e_prci.c
++++ b/hw/misc/sifive_e_prci.c
+@@ -115,10 +115,10 @@ type_init(sifive_e_prci_register_types)
  /*
-- * Allocates a single IRQ. The irq is assigned with a handler, an opaque
-- * data and the interrupt number.
-- */
--qemu_irq qemu_allocate_irq_orphan(qemu_irq_handler handler, void *opaque, int n);
--
--/*
-- * Same as the *_orphan() variants above, but the new IRQ objects are
-+ * Allocate IRQ objects with an explicit QOM parent.  The new objects are
-  * parented under @owner with property name @name (or @name[*] for the
-  * array/extend variants).  The reference is held by @owner; call
-  * qemu_free_irq() to unparent and free.
-@@ -99,17 +88,10 @@ qemu_irq *qemu_extend_irqs(Object *owner, const char *name,
-                            qemu_irq *old, int n_old,
-                            qemu_irq_handler handler, void *opaque, int n);
+  * Create PRCI device.
+  */
+-DeviceState *sifive_e_prci_create(hwaddr addr)
++DeviceState *sifive_e_prci_create(Object *parent, hwaddr addr)
+ {
+-    DeviceState *dev = qdev_new_orphan(TYPE_SIFIVE_E_PRCI);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    DeviceState *dev = qdev_new(parent, "prci", TYPE_SIFIVE_E_PRCI);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+     return dev;
+ }
+diff --git a/hw/misc/sifive_test.c b/hw/misc/sifive_test.c
+index f861858d9b..81ae00a110 100644
+--- a/hw/misc/sifive_test.c
++++ b/hw/misc/sifive_test.c
+@@ -95,10 +95,10 @@ type_init(sifive_test_register_types)
+ /*
+  * Create Test device.
+  */
+-DeviceState *sifive_test_create(hwaddr addr)
++DeviceState *sifive_test_create(Object *parent, hwaddr addr)
+ {
+-    DeviceState *dev = qdev_new_orphan(TYPE_SIFIVE_TEST);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    DeviceState *dev = qdev_new(parent, "test", TYPE_SIFIVE_TEST);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+     return dev;
+ }
+diff --git a/hw/or1k/virt.c b/hw/or1k/virt.c
+index 7362433a02..276be32648 100644
+--- a/hw/or1k/virt.c
++++ b/hw/or1k/virt.c
+@@ -264,7 +264,7 @@ static void openrisc_virt_test_init(OR1KVirtState *state, hwaddr base,
+     char *nodename;
  
--/* Extends an Array of IRQs. Old IRQs have their handlers and opaque data
-- * preserved. New IRQs are assigned the argument handler and opaque data.
-- */
--qemu_irq *qemu_extend_irqs_orphan(qemu_irq *old, int n_old, qemu_irq_handler handler,
--                                void *opaque, int n);
--
- void qemu_free_irqs(qemu_irq *s, int n);
- void qemu_free_irq(qemu_irq irq);
+     /* SiFive Test MMIO device */
+-    sifive_test_create(base);
++    sifive_test_create(OBJECT(state), base);
  
- /* Returns a new IRQ with opposite polarity.  */
--qemu_irq qemu_irq_invert_orphan(qemu_irq irq);
- qemu_irq qemu_irq_invert(Object *owner, const char *name, qemu_irq irq);
+     /* SiFive Test MMIO Reset device FDT */
+     nodename = g_strdup_printf("/soc/test@%" HWADDR_PRIx, base);
+diff --git a/hw/pci-host/gt64120.c b/hw/pci-host/gt64120.c
+index 780c86cd9a..0c49e51ad0 100644
+--- a/hw/pci-host/gt64120.c
++++ b/hw/pci-host/gt64120.c
+@@ -1224,7 +1224,7 @@ static void gt64120_realize(DeviceState *dev, Error **errp)
+      * exception when accessing invalid memory. Create an empty slot to
+      * emulate this feature.
+      */
+-    empty_slot_init("GT64120", 0, 0x20000000);
++    empty_slot_init(OBJECT(dev), "GT64120", 0, 0x20000000);
+ }
  
- /* For internal use in qtest. */
+ static void gt64120_pci_realize(PCIDevice *d, Error **errp)
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index dfdb7ae4c1..d07edde237 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -233,7 +233,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
+         RISCV_ACLINT_DEFAULT_MTIMER_SIZE, 0, ms->smp.cpus,
+         RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
+         SIFIVE_E_LFCLK_DEFAULT_FREQ, false);
+-    sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
++    sifive_e_prci_create(OBJECT(dev), memmap[SIFIVE_E_DEV_PRCI].base);
+ 
+     /* AON */
+ 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 3ceb476b84..d7ce57069a 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1477,7 +1477,7 @@ static void virt_machine_init(MachineState *machine)
+     rom_set_fw(s->fw_cfg);
+ 
+     /* SiFive Test MMIO device */
+-    sifive_test_create(s->memmap[VIRT_TEST].base);
++    sifive_test_create(OBJECT(machine), s->memmap[VIRT_TEST].base);
+ 
+     /* VirtIO MMIO devices */
+     for (i = 0; i < VIRTIO_COUNT; i++) {
+diff --git a/hw/sparc/sun4m.c b/hw/sparc/sun4m.c
+index 80e37555b1..52627dbdec 100644
+--- a/hw/sparc/sun4m.c
++++ b/hw/sparc/sun4m.c
+@@ -842,7 +842,7 @@ static void sun4m_hw_init(MachineState *machine)
+ 
+     /* models without ECC don't trap when missing ram is accessed */
+     if (!hwdef->ecc_base) {
+-        empty_slot_init("ecc", machine->ram_size,
++        empty_slot_init(OBJECT(machine), "ecc", machine->ram_size,
+                         hwdef->max_mem - machine->ram_size);
+     }
+ 
+@@ -875,7 +875,7 @@ static void sun4m_hw_init(MachineState *machine)
+            Software shouldn't use aliased addresses, neither should it crash
+            when does. Using empty_slot instead of aliasing can help with
+            debugging such accesses */
+-        empty_slot_init("iommu.alias",
++        empty_slot_init(OBJECT(machine), "iommu.alias",
+                         hwdef->iommu_pad_base, hwdef->iommu_pad_len);
+     }
+ 
+@@ -937,7 +937,8 @@ static void sun4m_hw_init(MachineState *machine)
+         /* vsimm registers probed by OBP */
+         if (hwdef->vsimm[i].reg_base) {
+             char *name = g_strdup_printf("vsimm[%d]", i);
+-            empty_slot_init(name, hwdef->vsimm[i].reg_base, 0x2000);
++            empty_slot_init(OBJECT(machine), name,
++                            hwdef->vsimm[i].reg_base, 0x2000);
+             g_free(name);
+         }
+     }
+diff --git a/include/hw/misc/empty_slot.h b/include/hw/misc/empty_slot.h
+index dec56e56ae..12f03aa16a 100644
+--- a/include/hw/misc/empty_slot.h
++++ b/include/hw/misc/empty_slot.h
+@@ -14,6 +14,7 @@
+ 
+ #include "exec/hwaddr.h"
+ 
+-void empty_slot_init(const char *name, hwaddr addr, uint64_t slot_size);
++void empty_slot_init(Object *parent, const char *name, hwaddr addr,
++                     uint64_t slot_size);
+ 
+ #endif
+diff --git a/include/hw/misc/sifive_e_prci.h b/include/hw/misc/sifive_e_prci.h
+index d0abd59f4b..6221e95d36 100644
+--- a/include/hw/misc/sifive_e_prci.h
++++ b/include/hw/misc/sifive_e_prci.h
+@@ -69,6 +69,6 @@ struct SiFiveEPRCIState {
+     uint32_t plloutdiv;
+ };
+ 
+-DeviceState *sifive_e_prci_create(hwaddr addr);
++DeviceState *sifive_e_prci_create(Object *parent, hwaddr addr);
+ 
+ #endif
+diff --git a/include/hw/misc/sifive_test.h b/include/hw/misc/sifive_test.h
+index 85afd35263..fd079cfd4c 100644
+--- a/include/hw/misc/sifive_test.h
++++ b/include/hw/misc/sifive_test.h
+@@ -42,6 +42,6 @@ enum {
+     FINISHER_RESET = 0x7777
+ };
+ 
+-DeviceState *sifive_test_create(hwaddr addr);
++DeviceState *sifive_test_create(Object *parent, hwaddr addr);
+ 
+ #endif
 -- 
 2.47.1
 
