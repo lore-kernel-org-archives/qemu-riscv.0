@@ -4,109 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF344C43458
-	for <qemu-riscv@archiver.kernel.org>; Sat, 11 Jul 2026 22:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81CF5C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:39:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wifst-0007AO-Pf; Sat, 11 Jul 2026 18:09:19 -0400
+	id 1wiiDk-0001dO-8i; Sat, 11 Jul 2026 20:39:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1wifsa-0006ZD-2V; Sat, 11 Jul 2026 18:09:03 -0400
-Received: from isrv.corpit.ru ([212.248.84.144])
+ (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
+ id 1wigRz-0005Y5-A4; Sat, 11 Jul 2026 18:45:35 -0400
+Received: from pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.42.203.116])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1wifsU-0001Sj-TE; Sat, 11 Jul 2026 18:08:58 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
- t=1783807721; bh=SJq5Z5NjEbxFtsS4GR1oGKNAnvmy40ucyh7dAmUf35M=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To;
- b=XwzBasEb1xZwW83HAVJjHp+pX/u39QImGKeBJDtLkVQ/fz9o2mgWUCqkMg96+tDnd
- yA4saffZMpVfaGd9QrXQIMTh5aOB98HbHsMHl3Z4UzDIS5sxdHYLJ7R832iDhyRCJI
- 67qpjw/SUDmqC7q8helJ3pOkNzVASerkLED8M7e4PEKzg6Uq0lk5cUf8O5mIYLDC2r
- Ehf/ssuTqGvZU3GH9TqUcGU6888+R/Tohyjo9I49DfMPm+mfE7m0JjCSKbzgOLEdst
- G4t1KNO4WtjORmqTlM59on6Ywxog0RPBsAv0r5BmgqB4s6YG9i2JiA2r0moR2NtcGS
- lvvM7WE/2h6Pg==
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 038771C0AEC;
- Sun, 12 Jul 2026 01:08:41 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 83E413EAF73;
- Sun, 12 Jul 2026 01:08:50 +0300 (MSK)
-Message-ID: <a1d7b003-4a4e-44ec-b240-be4edd263387@tls.msk.ru>
-Date: Sun, 12 Jul 2026 01:08:50 +0300
+ (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
+ id 1wigRx-00078c-5x; Sat, 11 Jul 2026 18:45:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
+ t=1783809933; x=1815345933;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Yjj6bjc52hJrvGNoYEgZZOaZL70oE4aLasfwIgRs9Yc=;
+ b=YIE93Qpj7iHJbINzEhNK5gGNeOxyB230xUi6YGu4DMTLQcONVsazxvgt
+ bcRxEY1EN6Dmgmdj2U3GesiplqS+6SqDdbXCcGwOVyFGg0LxMT/VWErpn
+ 5FfGhgO1wGtcVOclPXOjYD3vT/lvk2B9yAqLMLbVO7/DF0gUBCEVYUZG2
+ YyFl/mqN742Feea17hBnfBolphjgfITv0oTq7SN0fTs1bGUSWYeq4xB/F
+ z1n63vTPSl3hAgav8ohcyqvZCBY6lj1xXe0Tpqzx6/lwG92PAOl5KWTLC
+ 8CIGgLg07J73q4Ch+UbTOBgW1wmr9+YA0ed19hSB1TsTOcRZ4/rNhLGaN w==;
+X-CSE-ConnectionGUID: 9aEUzVSDQJefVn+WDWwBBQ==
+X-CSE-MsgGUID: nqWeb9+BSrSaT3C9ZULJig==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23517779"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
+ by internal-pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:45:29 +0000
+Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:19086]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.33:2525]
+ with esmtp (Farcaster)
+ id 727577cc-1245-4712-83ba-d12936fa9405; Sat, 11 Jul 2026 22:45:29 +0000 (UTC)
+X-Farcaster-Flow-ID: 727577cc-1245-4712-83ba-d12936fa9405
+Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
+ EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
+ Sat, 11 Jul 2026 22:45:28 +0000
+Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
+ EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
+ Sat, 11 Jul 2026 22:45:20 +0000
+From: Alexander Graf <graf@amazon.com>
+To: <qemu-devel@nongnu.org>
+CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
+ <qemu-s390x@nongnu.org>, Song Gao <17746591750@163.com>, Aditya Gupta
+ <adityag@linux.ibm.com>, Alexey Kardashevskiy <aik@ozlabs.ru>, Farhan Ali
+ <alifm@linux.ibm.com>, Alistair Francis <alistair.francis@wdc.com>, "Alistair
+ Francis" <alistair@alistair23.me>, Antony Pavlov <antonynpavlov@gmail.com>,
+ Markus Armbruster <armbru@redhat.com>, Artyom Tarasenko
+ <atar4qemu@gmail.com>, BALATON Zoltan <balaton@eik.bme.hu>, Felipe Balbi
+ <balbi@kernel.org>, Christian Borntraeger <borntraeger@linux.ibm.com>, "Brian
+ Cain" <brian.cain@oss.qualcomm.com>, Hendrik Brueckner
+ <brueckner@linux.ibm.com>, Chao Liu <chao.liu@processmission.com>, "Huacai
+ Chen" <chenhuacai@kernel.org>, =?UTF-8?q?Cl=C3=A9ment=20Chigot?=
+ <chigot@adacore.com>, =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Helge Deller <deller@gmx.de>, Dorjoy Chowdhury <dorjoychy111@gmail.com>,
+ "Edgar E . Iglesias" <edgar.iglesias@gmail.com>, Alexandre Iooss
+ <erdnaxe@crans.org>, Eric Farman <farman@linux.ibm.com>, Francisco Iglesias
+ <francisco.iglesias@amd.com>, Gaurav Sharma <gaurav.sharma_7@nxp.com>,
+ "Gautam Gala" <ggala@linux.ibm.com>, Harsh Prateek Bora
+ <harshpb@linux.ibm.com>, =?UTF-8?q?Herv=C3=A9=20Poussineau?=
+ <hpoussin@reactos.org>, Jan Kiszka <jan.kiszka@web.de>, Max Filippov
+ <jcmvbkbc@gmail.com>, Joel Stanley <joel@jms.id.au>, Jared Rossi
+ <jrossi@linux.ibm.com>, Tyrone Ting <kfting@nuvoton.com>, Frederic Konrad
+ <konrad.frederic@yahoo.fr>, "Laurent Vivier" <laurent@vivier.eu>, Manos
+ Pitsidianakis <manos.pitsidianakis@linaro.org>, Bibo Mao
+ <maobibo@loongson.cn>, "Mark Cave-Ayland" <mark.cave-ayland@ilande.co.uk>,
+ Glenn Miles <milesg@linux.ibm.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
+ "Michael Rolnik" <mrolnik@gmail.com>, "Michael S . Tsirkin" <mst@redhat.com>, 
+ "Niek Linnenbank" <nieklinnenbank@gmail.com>, Nicholas Piggin
+ <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Halil Pasic
+ <pasic@linux.ibm.com>, "Paolo Bonzini" <pbonzini@redhat.com>, Peter Maydell
+ <peter.maydell@linaro.org>, =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?=
+ <philmd@mailo.com>, "Pierrick Bouvier" <pierrick.bouvier@oss.qualcomm.com>,
+ Richard Henderson <richard.henderson@linaro.org>, Sai Pavan Boddu
+ <sai.pavan.boddu@amd.com>, Samuel Tardieu <sam@rfc1149.net>, Bernhard Beschow
+ <shentey@gmail.com>, Stafford Horne <shorne@gmail.com>, Sergio Lopez
+ <slp@redhat.com>, "Subbaraya Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth
+ <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
+ <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
+ <berrange@redhat.com>
+Subject: [RFC PATCH 032/134] hw/xen: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:25 +0000
+Message-ID: <20260711223707.42139-33-graf@amazon.com>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
+References: <20260711223707.42139-1-graf@amazon.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] hw/riscv/riscv-iommu.c: fault when !PTE_U and no
- priv access
-From: Michael Tokarev <mjt@tls.msk.ru>
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- andrew.jones@oss.qualcomm.com, nutty.liu@hotmail.com,
- Palmer Dabbelt <palmer@dabbelt.com>, Tao Tang <tangtao1634@phytium.com.cn>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-stable <qemu-stable@nongnu.org>
-References: <20260701121111.537654-1-daniel.barboza@oss.qualcomm.com>
- <20260701121111.537654-3-daniel.barboza@oss.qualcomm.com>
- <731566cb-bbdd-418f-b80e-f68750f24212@tls.msk.ru>
-Content-Language: en-US, ru-RU
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- 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
-In-Reply-To: <731566cb-bbdd-418f-b80e-f68750f24212@tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+Content-Type: text/plain
+X-Originating-IP: [172.19.99.218]
+X-ClientProxiedBy: EX19D032UWB001.ant.amazon.com (10.13.139.152) To
+ EX19D001UWA001.ant.amazon.com (10.13.138.214)
+Received-SPF: pass client-ip=52.42.203.116;
+ envelope-from=prvs=645f258d4=graf@amazon.de;
+ helo=pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, RCVD_IN_MSPIKE_H2=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -121,57 +130,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/11/26 11:30, Michael Tokarev wrote:
-> On 7/1/26 15:11, Daniel Henrique Barboza wrote:
->> All IOMMU accesses are assumed to be user mode unless told otherwise,
->> i.e. we have a process_id.  In case we have a non-user mode leaf PTE
->> (PTE_U isn't set) and we are running in user mode, we need to throw a
->> fault.
->>
->> This also reflects on qos-riscv-iommu tests: the tests always run in
->> user mode so our PTEs must have PTE_U (bit 0x10) set.
->>
->> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
->> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3553
->> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
->> Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
->> Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
-> 
-> ...
->> --- a/tests/qtest/libqos/qos-riscv-iommu.h
->> +++ b/tests/qtest/libqos/qos-riscv-iommu.h
->> @@ -54,8 +54,8 @@
->>    * PTE masks for RISC-V IOMMU page tables.
->>    * Values match PTE_V, PTE_R, PTE_W, PTE_A, PTE_D in target/riscv/cpu_bits.h
->>    */
->> -#define QRIOMMU_NON_LEAF_PTE_MASK   0x001  /* PTE_V */
->> -#define QRIOMMU_LEAF_PTE_RW_MASK    0x0c7  /* V|R|W|A|D */
->> +#define QRIOMMU_NON_LEAF_PTE_MASK   0x011  /* PTE_V | PTE_U */
->> +#define QRIOMMU_LEAF_PTE_RW_MASK    0x0d7  /* V | R | W | A | D | PTE_U */
->>   #define QRIOMMU_PTE_PPN_MASK        0x003ffffffffffc00ull
->>   /* Address-space base offset for test tables */
-> 
-> So, this patch adds a fix for the testing bits.
-> 
-> When trying to pick this one up for 10.0.x (LTS) series, I've another doubt.
-> This testing fix fixes v10.2.0-1299-g9d8ffbfc1d3 "tests/qtest/libqos: Add RISC-V
-> IOMMU helper library".  Quite some tests were added based on that library.
-> It doesn't exist in 10.0.x, and neither is v10.2.0-656-g489812e32df
-> "tests/qtest/libqos: Add SMMUv3 helper library".
-> Sure I can drop the parts of this change which touches the tests.  But this
-> means we don't have tests to cover the issues being fixed, and I don't know
-> if the result of these fixes actually works or not.
-> 
-> Should we pick up some testing bits in this area for 10.0.x (especially
-> 9d8ffbfc1d3 and some subsequent commits which use this library)?  Or just
-> ignore all riscv iommu patches in there?
+Convert the *_orphan() device-creation calls in hw/xen to the new
+parented API introduced earlier in this series, so every onboard
+device gets a stable path in the composition tree instead of landing
+in /machine/unattached with an unstable device[N] name.
 
-I've dropped this patch from 10.0.x (lts) series for now,
-while picking up other patches - in order to go with this
-at least somewhere.  But I really don't know what to do
-with all this :)  Lemme sleep on that for some time :)
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing device for
+composite children.  Names follow existing QOM conventions.
 
-Thanks,
+Per-site rationale (reviewers: dispute the modeling here):
 
-/mjt
+hw/xen/xen-bus.c:1152 | qdev_new | qdev_get_machine() | "xen-bridge" | init helper called from 3 board paths with no parent arg; use qdev_get_machine() (already used in this subsystem)
+hw/xen/xen-legacy-backend.c:601 | qdev_new | qdev_get_machine() | "xen-sysdev" | init helper with no parent arg; qdev_get_machine() already used just above in xen_set_dynamic_sysbus()
+hw/xen/xen-pvh-common.c:176 | sysbus_create_simple | OBJECT(s) | "virtio-mmio[*]" | board-init helper receives XenPVHMachineState *s; loop-created
+hw/xen/xen-pvh-common.c:196 | qdev_new | OBJECT(s) | "tpm" | board-init helper receives XenPVHMachineState *s
+hw/xen/xen_pt_graphics.c:402 | pci_create_simple | OBJECT(s) | "isa-bridge" | called from XenPCIPassthroughState realize; s is the composite passthrough device
+
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
+Assisted-by: Kiro
+Signed-off-by: Alexander Graf <graf@amazon.com>
+---
+ hw/xen/xen-bus.c            | 5 +++--
+ hw/xen/xen-legacy-backend.c | 5 +++--
+ hw/xen/xen-pvh-common.c     | 7 ++++---
+ hw/xen/xen_pt_graphics.c    | 3 ++-
+ 4 files changed, 12 insertions(+), 8 deletions(-)
+
+diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
+index 746014416b..934ff33402 100644
+--- a/hw/xen/xen-bus.c
++++ b/hw/xen/xen-bus.c
+@@ -1149,10 +1149,11 @@ type_init(xen_register_types)
+ 
+ void xen_bus_init(void)
+ {
+-    DeviceState *dev = qdev_new_orphan(TYPE_XEN_BRIDGE);
++    DeviceState *dev = qdev_new(qdev_get_machine(), "xen-bridge",
++                                TYPE_XEN_BRIDGE);
+     BusState *bus = qbus_new(TYPE_XEN_BUS, dev, NULL);
+ 
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     qbus_set_bus_hotplug_handler(bus);
+ 
+     qemu_create_nic_bus_devices(bus, TYPE_XEN_DEVICE, "xen-net-device",
+diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
+index 29c90a388c..0e1da18d12 100644
+--- a/hw/xen/xen-legacy-backend.c
++++ b/hw/xen/xen-legacy-backend.c
+@@ -598,8 +598,9 @@ void xen_be_init(void)
+         exit(1);
+     }
+ 
+-    xen_sysdev = qdev_new_orphan(TYPE_XENSYSDEV);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(xen_sysdev), &error_fatal);
++    xen_sysdev = qdev_new(qdev_get_machine(), "xen-sysdev",
++                          TYPE_XENSYSDEV);
++    sysbus_realize(SYS_BUS_DEVICE(xen_sysdev), &error_fatal);
+     xen_sysbus = qbus_new(TYPE_XENSYSBUS, xen_sysdev, "xen-sysbus");
+     qbus_set_bus_hotplug_handler(xen_sysbus);
+ 
+diff --git a/hw/xen/xen-pvh-common.c b/hw/xen/xen-pvh-common.c
+index 17f545d07c..dae523f723 100644
+--- a/hw/xen/xen-pvh-common.c
++++ b/hw/xen/xen-pvh-common.c
+@@ -173,7 +173,8 @@ static void xen_create_virtio_mmio_devices(XenPVHMachineState *s)
+         qemu_irq irq = qemu_allocate_irq(xen_set_irq, NULL,
+                                          s->cfg.virtio_mmio_irq_base + i);
+ 
+-        sysbus_create_simple_orphan("virtio-mmio", base, irq);
++        sysbus_create_simple(OBJECT(s), "virtio-mmio[*]", "virtio-mmio",
++                             base, irq);
+ 
+         trace_xen_create_virtio_mmio_devices(i,
+                                              s->cfg.virtio_mmio_irq_base + i,
+@@ -193,7 +194,7 @@ static void xen_enable_tpm(XenPVHMachineState *s)
+         error_report("Couldn't find tmp0 backend");
+         return;
+     }
+-    dev = qdev_new_orphan(TYPE_TPM_TIS_SYSBUS);
++    dev = qdev_new(OBJECT(s), "tpm", TYPE_TPM_TIS_SYSBUS);
+     /*
+      * FIXME This use of &err is is wrong.  If both calls fail, the
+      * second will trip error_setv()'s assertion.  If just one call
+@@ -204,7 +205,7 @@ static void xen_enable_tpm(XenPVHMachineState *s)
+     object_property_set_link(OBJECT(dev), "tpmdev", OBJECT(be), &err);
+     object_property_set_str(OBJECT(dev), "tpmdev", be->id, &err);
+     busdev = SYS_BUS_DEVICE(dev);
+-    sysbus_realize_and_unref(busdev, &error_fatal);
++    sysbus_realize(busdev, &error_fatal);
+     sysbus_mmio_map(busdev, 0, s->cfg.tpm.base);
+ 
+     trace_xen_enable_tpm(s->cfg.tpm.base);
+diff --git a/hw/xen/xen_pt_graphics.c b/hw/xen/xen_pt_graphics.c
+index 4457209e83..2841b45ca1 100644
+--- a/hw/xen/xen_pt_graphics.c
++++ b/hw/xen/xen_pt_graphics.c
+@@ -399,7 +399,8 @@ void xen_igd_passthrough_isa_bridge_create(XenPCIPassthroughState *s,
+     }
+ 
+     /* Currently IGD drivers always need to access PCH by 1f.0. */
+-    bridge_dev = pci_create_simple_orphan(bus, PCI_DEVFN(0x1f, 0),
++    bridge_dev = pci_create_simple(OBJECT(s), "isa-bridge", bus,
++                                   PCI_DEVFN(0x1f, 0),
+                                    "igd-passthrough-isa-bridge");
+ 
+     /*
+-- 
+2.47.1
+
 
