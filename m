@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEF9C44501
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:40:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA0D8C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:40:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiDk-0001dQ-Av; Sat, 11 Jul 2026 20:39:00 -0400
+	id 1wiiDn-0001ff-E9; Sat, 11 Jul 2026 20:39:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigMe-00030G-1a; Sat, 11 Jul 2026 18:40:04 -0400
-Received: from pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.68.102])
+ id 1wigo8-0007SE-Cj; Sat, 11 Jul 2026 19:08:29 -0400
+Received: from pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.42.203.116])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigMb-0005Sw-UM; Sat, 11 Jul 2026 18:40:03 -0400
+ id 1wigo6-00043Q-K9; Sat, 11 Jul 2026 19:08:28 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783809601; x=1815345601;
+ t=1783811306; x=1815347306;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=pS7iG2bsIwkaLvQewcv7m52mBuYuTvRxQA0zQErAcsM=;
- b=lwrJ5jbFjBINMTdA1IYKTHwORHACy5B3c5WLubzKXYa1CSKMJDe2CZd+
- mk5VuUFInHX3dA5lP4GT9zCneBjIOz/8MypSH/vm11NQk95oS8FfZgJoj
- 6Kw2iPkey8nHnTkKziyIyv3bFs2KKuQqQNeJxVmJbUsFULvqp6vzO+WL6
- MzOYBs13rsQzWun+hT/dYrsvNJdc3yd6w1ZSmYlLPoh6CUUBP8gc46Yrg
- 42gXcRrtr/qzJr02yReyHq9pTBX5QDMD22ykKNYPMzYo0XAjuN6vwfQTf
- NO6rmju/zdPTvvlUzALPlFGytZ0BKrXyj6q/g5eqgAAFfrZAPpK9YDM3J w==;
-X-CSE-ConnectionGUID: BzEh911sT7uHA1IuDS8Whw==
-X-CSE-MsgGUID: gFPIJ2TTS/mF2zw0ChF3hA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23517006"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:39:58 +0000
-Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.178:18359]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.68:2525]
+ bh=Z9jEjZXxPXlMJqbiHIRBDdPowd0FRoDuIoH9/d4zUSc=;
+ b=XCuquQOiTrbrU5LLYEObM2TtvrgHqR7wuT5OAMYrJMablcFtBcxC5z4z
+ A9Xzdlre1Ja7pmHL6mVLeXlRA1pMaANbv4tBgYwgbtVKNcULuievnUJ6r
+ iNUQPZlTawzglsMCVSMGMEQ9bxARuu8RuXzirHyOLhdbRqqAmLjmm798L
+ BsnUpdpHlhQpinLcOWIOOk6GgkHzr9YmmqHTJGDZp3zRBBZalwJs6O4AH
+ hh22wj36qGnkTD3pLWuMkR+Zpr1uHvqa0EklozDznhqILsHF4afAq3/LE
+ 1woEXRF8If48s7wxHUT1tFY5GwywnJ7w07T8gxBfoVKygbF0GqytMv9DH A==;
+X-CSE-ConnectionGUID: xEw6ybjpR9ScqvbkC6e2Bw==
+X-CSE-MsgGUID: B1bQ1VuZQimt/IgX0fVpjg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23518195"
+Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+ by internal-pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:08:23 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:8809]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.115:2525]
  with esmtp (Farcaster)
- id dd6e14e6-0b00-46aa-b610-7ced99dedd08; Sat, 11 Jul 2026 22:39:58 +0000 (UTC)
-X-Farcaster-Flow-ID: dd6e14e6-0b00-46aa-b610-7ced99dedd08
+ id 04fffb0f-cf34-4624-a838-41849e58edce; Sat, 11 Jul 2026 23:08:22 +0000 (UTC)
+X-Farcaster-Flow-ID: 04fffb0f-cf34-4624-a838-41849e58edce
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
+ EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:39:57 +0000
+ Sat, 11 Jul 2026 23:08:22 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:39:49 +0000
+ Sat, 11 Jul 2026 23:08:13 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 011/134] hw/tricore: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:04 +0000
-Message-ID: <20260711223707.42139-12-graf@amazon.com>
+Subject: [RFC PATCH 119/134] hw/core/reset: Give the root reset container and
+ legacy shims a QOM path
+Date: Sat, 11 Jul 2026 22:36:52 +0000
+Message-ID: <20260711223707.42139-120-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +102,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D039UWA004.ant.amazon.com (10.13.139.68) To
+X-ClientProxiedBy: EX19D044UWB002.ant.amazon.com (10.13.139.188) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.68.102;
+Received-SPF: pass client-ip=52.42.203.116;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -115,7 +116,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,59 +131,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/tricore to the new
-parented API introduced earlier in this series, so every onboard
-device gets a stable path in the composition tree instead of landing
-in /machine/unattached with an unstable device[N] name.
+The root ResettableContainer and the LegacyReset shim objects are
+long-lived singletons held only by static pointers and refcounts.
+Give them a canonical path in the composition tree so
+qom-tree/qom-list can enumerate them and so device_set_realized()
+can require a QOM parent for every object.
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing device for
-composite children.  Names follow existing QOM conventions.
+  /machine/reset-container                (ResettableContainer)
+  /machine/reset-container/legacy-reset[N] (LegacyReset shims)
 
-Per-site rationale (reviewers: dispute the modeling here):
+get_root_reset_container() is first reached from configure_accelerators()
+or machine_run_board_init(), both of which run after qemu_create_machine(),
+so qdev_get_machine() is available.  qemu_unregister_reset() switches
+from object_unref() to object_unparent() to release the child<> ref.
 
-  file:line                | parent           | name         | rationale
-  tricore_testboard.c:70   | OBJECT(machine)  | "cpu"        | single CPU created by board init(); machine owns it
-  tricore_testboard.c:92   | OBJECT(machine)  | "testdevice" | onboard test device created by board init()
-
-Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/tricore/tricore_testboard.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ hw/core/reset.c | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
-diff --git a/hw/tricore/tricore_testboard.c b/hw/tricore/tricore_testboard.c
-index 69794d3445..9e8cccbd59 100644
---- a/hw/tricore/tricore_testboard.c
-+++ b/hw/tricore/tricore_testboard.c
-@@ -55,6 +55,7 @@ static void tricore_load_kernel(CPUTriCoreState *env)
+diff --git a/hw/core/reset.c b/hw/core/reset.c
+index e7230b49b7..34c1ab84d9 100644
+--- a/hw/core/reset.c
++++ b/hw/core/reset.c
+@@ -27,6 +27,7 @@
+ #include "system/reset.h"
+ #include "hw/core/resettable.h"
+ #include "hw/core/resetcontainer.h"
++#include "hw/core/qdev.h"
  
- static void tricore_testboard_init(MachineState *machine, int board_id)
+ /*
+  * Return a pointer to the singleton container that holds all the Resettable
+@@ -38,7 +39,9 @@ static ResettableContainer *get_root_reset_container(void)
+ 
+     if (!root_reset_container) {
+         root_reset_container =
+-            RESETTABLE_CONTAINER(object_new(TYPE_RESETTABLE_CONTAINER));
++            RESETTABLE_CONTAINER(object_new_child(qdev_get_machine(),
++                                          "reset-container",
++                                          TYPE_RESETTABLE_CONTAINER));
+     }
+     return root_reset_container;
+ }
+@@ -94,7 +97,8 @@ static void legacy_reset_class_init(ObjectClass *klass, const void *data)
+ 
+ void qemu_register_reset(QEMUResetHandler *func, void *opaque)
  {
-+    Object *mo = OBJECT(machine);
-     TriCoreCPU *cpu;
-     CPUTriCoreState *env;
-     TriCoreTestDeviceState *test_dev;
-@@ -67,7 +68,7 @@ static void tricore_testboard_init(MachineState *machine, int board_id)
-     MemoryRegion *pcp_data = g_new(MemoryRegion, 1);
-     MemoryRegion *pcp_text = g_new(MemoryRegion, 1);
+-    Object *obj = object_new(TYPE_LEGACY_RESET);
++    Object *obj = object_new_child(OBJECT(get_root_reset_container()),
++                                   "legacy-reset[*]", TYPE_LEGACY_RESET);
+     LegacyReset *lr = LEGACY_RESET(obj);
  
--    cpu = TRICORE_CPU(cpu_create_orphan(machine->cpu_type));
-+    cpu = TRICORE_CPU(cpu_create(mo, "cpu", machine->cpu_type));
-     env = &cpu->env;
-     memory_region_init_ram(ext_cram, NULL, "powerlink_ext_c.ram",
-                            2 * MiB, &error_fatal);
-@@ -89,7 +90,9 @@ static void tricore_testboard_init(MachineState *machine, int board_id)
-     memory_region_add_subregion(sysmem, 0xf0050000, pcp_data);
-     memory_region_add_subregion(sysmem, 0xf0060000, pcp_text);
+     lr->func = func;
+@@ -104,7 +108,8 @@ void qemu_register_reset(QEMUResetHandler *func, void *opaque)
  
--    test_dev = TRICORE_TESTDEVICE(qdev_new_orphan(TYPE_TRICORE_TESTDEVICE));
-+    test_dev = TRICORE_TESTDEVICE(qdev_new(mo, "testdevice",
-+                                           TYPE_TRICORE_TESTDEVICE));
-+    sysbus_realize(SYS_BUS_DEVICE(test_dev), &error_fatal);
-     memory_region_add_subregion(sysmem, 0xf0000000, &test_dev->iomem);
+ void qemu_register_reset_nosnapshotload(QEMUResetHandler *func, void *opaque)
+ {
+-    Object *obj = object_new(TYPE_LEGACY_RESET);
++    Object *obj = object_new_child(OBJECT(get_root_reset_container()),
++                                   "legacy-reset[*]", TYPE_LEGACY_RESET);
+     LegacyReset *lr = LEGACY_RESET(obj);
  
+     lr->func = func;
+@@ -156,7 +161,7 @@ void qemu_unregister_reset(QEMUResetHandler *func, void *opaque)
+ 
+     if (obj) {
+         qemu_unregister_resettable(obj);
+-        object_unref(obj);
++        object_unparent(obj);
+     }
+ }
  
 -- 
 2.47.1
