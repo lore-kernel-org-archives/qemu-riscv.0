@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9453C44507
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ECE6C43458
 	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEt-000372-Qp; Sat, 11 Jul 2026 20:40:11 -0400
+	id 1wiiEs-00033T-9j; Sat, 11 Jul 2026 20:40:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigR5-0003ay-Bh; Sat, 11 Jul 2026 18:44:39 -0400
+ id 1wigOn-0007J3-TY; Sat, 11 Jul 2026 18:42:19 -0400
 Received: from pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
  ([44.246.1.125])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigR3-0006kk-C4; Sat, 11 Jul 2026 18:44:39 -0400
+ id 1wigOl-0006Go-F2; Sat, 11 Jul 2026 18:42:17 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783809877; x=1815345877;
+ t=1783809735; x=1815345735;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=5cfdeGZ94ng1f2/yrbZLU9UstuUxwClCVLdCpyQUfcM=;
- b=CG2bqF1FHX/jNrBRss1cgeIYruC2ViduX3Kun3X7HfNKcjeWoMXJgze8
- yJTXTuByLx/kBDw++6DG9WSZ/6vNc6Ay8d0RIei4NHCGoWs3iIC9SMcK2
- vKn0zne452bBdmvdMlAFA+cZuuLvRMiSkWoOYcLbzKH48ovszzSnfuevo
- aQbDlvAvjgXSQIptwWDRF14MNU7aHBdCFhnaxkuNgV3hy4mi2ttykGJv6
- CaAwWEmFHJ/eoSNIyAt3RpJ9WZ6dhD68pZ2RjbnIH9VZENb3dIiwxf9tC
- MjDzUgYYR+UUMYSOvOoYbeZvXEvBvI8ZDN9v6g4uG5DZFNB210a5qtBus A==;
-X-CSE-ConnectionGUID: xKPxoZ/CTferNMWVeOapLw==
-X-CSE-MsgGUID: krGVRDxXTm++oGWCgeATew==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23505532"
+ bh=+t5EqzySplPJ9N7zbCElMsPochR+1J86mJG1fCoxn+8=;
+ b=HUpn6saBeSzBur3JXupl438RVecVWnwEcA/gHJ3OmPTLzBU32/E7bWfu
+ voKHeTOl9lX9PPZ8+iSOwLrw05Q6veyGybPSFnrBK9aGZDblwQ9Rt+wEB
+ W/G4ZmUeq/7qjfdlhvMRlPj9/QOAwMJxb4ZxQbWtsVZ9mGQsUZa9QkRlH
+ H8QL4pfTLInEITKvZRxVdPHhZC6bn80P0lxeqkzQdyH+Se0HZDRUdsvwc
+ 2V5i1FFyc97KsnH68Wr3TW7YtmxglH8/nQbMc0C1hA5+VKY4KNQSHYLyq
+ kuD6QzyAWaqvTDEYy6cfbnypiUAdMvN4jstwMShWnr+I/UsQN60sotg5i Q==;
+X-CSE-ConnectionGUID: vyCgnje4QJu4A00k6ahqxA==
+X-CSE-MsgGUID: pDv8qLWYRUqLmJClqabsgg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23505489"
 Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
  by internal-pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:44:33 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.111:14182]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.35.214:2525]
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:42:11 +0000
+Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:13943]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.51.175:2525]
  with esmtp (Farcaster)
- id 815c1d41-7761-4924-8c54-6c06a012abd1; Sat, 11 Jul 2026 22:44:33 +0000 (UTC)
-X-Farcaster-Flow-ID: 815c1d41-7761-4924-8c54-6c06a012abd1
+ id 05fab316-0cc3-4779-b2dc-88fa9d38af89; Sat, 11 Jul 2026 22:42:11 +0000 (UTC)
+X-Farcaster-Flow-ID: 05fab316-0cc3-4779-b2dc-88fa9d38af89
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
+ EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:44:33 +0000
+ Sat, 11 Jul 2026 22:42:11 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:44:24 +0000
+ Sat, 11 Jul 2026 22:42:02 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 028/134] hw/vfio: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:21 +0000
-Message-ID: <20260711223707.42139-29-graf@amazon.com>
+Subject: [RFC PATCH 019/134] hw/s390x: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:12 +0000
+Message-ID: <20260711223707.42139-20-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,7 +101,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D046UWB004.ant.amazon.com (10.13.139.164) To
+X-ClientProxiedBy: EX19D040UWA001.ant.amazon.com (10.13.139.22) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
 Received-SPF: pass client-ip=44.246.1.125;
  envelope-from=prvs=645f258d4=graf@amazon.de;
@@ -130,7 +130,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/vfio to the new
+Convert the *_orphan() device-creation calls in hw/s390x to the new
 parented API introduced earlier in this series, so every onboard
 device gets a stable path in the composition tree instead of landing
 in /machine/unattached with an unstable device[N] name.
@@ -141,31 +141,131 @@ composite children.  Names follow existing QOM conventions.
 
 Per-site rationale (reviewers: dispute the modeling here):
 
-hw/vfio/igd.c:337 | pci_create_simple | OBJECT(vdev) | "igd-lpc-bridge" | Called from IGD quirk during vfio-pci realize; the LPC stub is created by and lives with the passed-through IGD device
+  file:line              | parent              | name        | rationale
+  ap-bridge.c:52         | qdev_get_machine()  | TYPE_AP_BRIDGE | already parented via object_property_add_child(); collapse into qdev_new() and keep the same name for QOM-path stability
+  css-bridge.c:95        | qdev_get_machine()  | TYPE_VIRTUAL_CSS_BRIDGE | already parented via object_property_add_child(); collapse into qdev_new()
+  s390-pci-bus.c:970     | OBJECT(s)           | "zpci[*]"   | auto-created zPCI companion for a hot-plugged PCI device; the S390pciState host bridge owns it; auto-index name
+  s390-virtio-ccw.c:256  | OBJECT(ef)          | type        | already parented to the SCLP event facility; collapse into qdev_new() and keep the type-derived name
+  s390-virtio-ccw.c:268  | OBJECT(ef)          | "sclpcpi"   | already parented; collapse into qdev_new()
+  s390-virtio-ccw.c:312  | OBJECT(machine)     | TYPE_S390_PCI_HOST_BRIDGE | already parented to machine; collapse into qdev_new() with the same name
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/vfio/igd.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ hw/s390x/ap-bridge.c       |  6 ++----
+ hw/s390x/css-bridge.c      |  7 +++----
+ hw/s390x/s390-pci-bus.c    |  4 ++--
+ hw/s390x/s390-virtio-ccw.c | 17 +++++++----------
+ 4 files changed, 14 insertions(+), 20 deletions(-)
 
-diff --git a/hw/vfio/igd.c b/hw/vfio/igd.c
-index bea0d57a11..aee40646ed 100644
---- a/hw/vfio/igd.c
-+++ b/hw/vfio/igd.c
-@@ -334,8 +334,9 @@ static int vfio_pci_igd_lpc_init(VFIOPCIDevice *vdev,
-     lpc_bridge = pci_find_device(pci_device_root_bus(pdev),
-                                  0, PCI_DEVFN(0x1f, 0));
-     if (!lpc_bridge) {
--        lpc_bridge = pci_create_simple_orphan(pci_device_root_bus(pdev),
--                                 PCI_DEVFN(0x1f, 0), "vfio-pci-igd-lpc-bridge");
-+        lpc_bridge = pci_create_simple(OBJECT(vdev), "igd-lpc-bridge",
-+                                       pci_device_root_bus(pdev),
-+                                       PCI_DEVFN(0x1f, 0), "vfio-pci-igd-lpc-bridge");
+diff --git a/hw/s390x/ap-bridge.c b/hw/s390x/ap-bridge.c
+index ce9b09240a..d7b2c4bddc 100644
+--- a/hw/s390x/ap-bridge.c
++++ b/hw/s390x/ap-bridge.c
+@@ -49,10 +49,8 @@ void s390_init_ap(void)
      }
  
-     ret = vfio_pci_igd_copy(vdev, lpc_bridge, info, igd_lpc_bridge_infos,
+     /* Create bridge device */
+-    dev = qdev_new_orphan(TYPE_AP_BRIDGE);
+-    object_property_add_child(qdev_get_machine(), TYPE_AP_BRIDGE,
+-                              OBJECT(dev));
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    dev = qdev_new(qdev_get_machine(), TYPE_AP_BRIDGE, TYPE_AP_BRIDGE);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     /* Create bus on bridge device */
+     bus = qbus_new(TYPE_AP_BUS, dev, TYPE_AP_BUS);
+diff --git a/hw/s390x/css-bridge.c b/hw/s390x/css-bridge.c
+index c6be24e5cb..8929d47b1b 100644
+--- a/hw/s390x/css-bridge.c
++++ b/hw/s390x/css-bridge.c
+@@ -92,9 +92,8 @@ VirtualCssBus *virtual_css_bus_init(void)
+     DeviceState *dev;
+ 
+     /* Create bridge device */
+-    dev = qdev_new_orphan(TYPE_VIRTUAL_CSS_BRIDGE);
+-    object_property_add_child(qdev_get_machine(), TYPE_VIRTUAL_CSS_BRIDGE,
+-                              OBJECT(dev));
++    dev = qdev_new(qdev_get_machine(), TYPE_VIRTUAL_CSS_BRIDGE,
++                   TYPE_VIRTUAL_CSS_BRIDGE);
+ 
+     /* Create bus on bridge device */
+     bus = qbus_new(TYPE_VIRTUAL_CSS_BUS, dev, "virtual-css");
+@@ -102,7 +101,7 @@ VirtualCssBus *virtual_css_bus_init(void)
+     /* Enable hotplugging */
+     qbus_set_hotplug_handler(bus, OBJECT(dev));
+ 
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     css_register_io_adapters(CSS_IO_ADAPTER_VIRTIO, true, false,
+                              0, &error_abort);
+diff --git a/hw/s390x/s390-pci-bus.c b/hw/s390x/s390-pci-bus.c
+index bc335ca883..4f0a8a787b 100644
+--- a/hw/s390x/s390-pci-bus.c
++++ b/hw/s390x/s390-pci-bus.c
+@@ -967,7 +967,7 @@ static S390PCIBusDevice *s390_pci_device_new(S390pciState *s,
+     Error *local_err = NULL;
+     DeviceState *dev;
+ 
+-    dev = qdev_try_new_orphan(TYPE_S390_PCI_DEVICE);
++    dev = qdev_try_new(OBJECT(s), "zpci[*]", TYPE_S390_PCI_DEVICE);
+     if (!dev) {
+         error_setg(errp, "zPCI device could not be created");
+         return NULL;
+@@ -979,7 +979,7 @@ static S390PCIBusDevice *s390_pci_device_new(S390pciState *s,
+                                 "zPCI device could not be created: ");
+         return NULL;
+     }
+-    if (!qdev_realize_and_unref(dev, BUS(s->bus), &local_err)) {
++    if (!qdev_realize(dev, BUS(s->bus), &local_err)) {
+         object_unparent(OBJECT(dev));
+         error_propagate_prepend(errp, local_err,
+                                 "zPCI device could not be created: ");
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index f9eb6cb411..1848cde0c4 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -253,10 +253,9 @@ static void s390_create_sclpconsole(SCLPDevice *sclp,
+     BusState *ev_fac_bus = sclp_get_event_facility_bus(ef);
+     DeviceState *dev;
+ 
+-    dev = qdev_new_orphan(type);
+-    object_property_add_child(OBJECT(ef), type, OBJECT(dev));
++    dev = qdev_new(OBJECT(ef), type, type);
+     qdev_prop_set_chr(dev, "chardev", chardev);
+-    qdev_realize_and_unref(dev, ev_fac_bus, &error_fatal);
++    qdev_realize(dev, ev_fac_bus, &error_fatal);
+ }
+ 
+ static void s390_create_sclpcpi(SCLPDevice *sclp)
+@@ -265,9 +264,8 @@ static void s390_create_sclpcpi(SCLPDevice *sclp)
+     BusState *ev_fac_bus = sclp_get_event_facility_bus(ef);
+     DeviceState *dev;
+ 
+-    dev = qdev_new_orphan(TYPE_SCLP_EVENT_CPI);
+-    object_property_add_child(OBJECT(ef), "sclpcpi", OBJECT(dev));
+-    qdev_realize_and_unref(dev, ev_fac_bus, &error_fatal);
++    dev = qdev_new(OBJECT(ef), "sclpcpi", TYPE_SCLP_EVENT_CPI);
++    qdev_realize(dev, ev_fac_bus, &error_fatal);
+ }
+ 
+ static void ccw_init(MachineState *machine)
+@@ -309,10 +307,9 @@ static void ccw_init(MachineState *machine)
+                       machine->firmware ?: "s390-ccw.img",
+                       true);
+ 
+-    dev = qdev_new_orphan(TYPE_S390_PCI_HOST_BRIDGE);
+-    object_property_add_child(qdev_get_machine(), TYPE_S390_PCI_HOST_BRIDGE,
+-                              OBJECT(dev));
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    dev = qdev_new(OBJECT(machine), TYPE_S390_PCI_HOST_BRIDGE,
++                   TYPE_S390_PCI_HOST_BRIDGE);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     s390_enable_css_support(s390_cpu_addr2state(0));
+ 
 -- 
 2.47.1
 
