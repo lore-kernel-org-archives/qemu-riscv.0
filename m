@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08A68C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12283C44501
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:42:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiG2-0006uN-89; Sat, 11 Jul 2026 20:41:22 -0400
+	id 1wiiG1-0006ou-HR; Sat, 11 Jul 2026 20:41:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigqB-0003lq-8e; Sat, 11 Jul 2026 19:10:35 -0400
-Received: from pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.1.125])
+ id 1wignN-00069t-Qa; Sat, 11 Jul 2026 19:07:41 -0400
+Received: from pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.68.102])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigq7-0004ia-S1; Sat, 11 Jul 2026 19:10:34 -0400
+ id 1wignM-0003rD-0s; Sat, 11 Jul 2026 19:07:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811431; x=1815347431;
+ t=1783811260; x=1815347260;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=oAsTJm8UePllS+N3B1DT86A+5/4rIAv8xkaDDvGLiWo=;
- b=sXMzt1AQSnJCtDjhbpU/lx1fgiYe3kM2Jp8JxyrRpm+xKaxXNDKfHiyS
- PSo7HlYo6Mj+joJvJk0MtinSwFTV5F7YK6hc/b8Q3XCTreR2cB7Mu8faN
- ifAIF4yj9OGqSYhU0YUB+IjY/k/NPTMNfg3VGmrOxY7IZRLglfc/Ciuoj
- wOgmHJUOlgeYEy3/tQ5BUZqOwW7erU78PRy2NCbmrlDLou1fnqba8KLjz
- KwvJL758S7Wa0V9a2HBozA8It3n5s4UKFVZM94QiJaNPWKRRWCs6NSYSm
- k66mG65n7AtosB1itilZo0g8dzpb8ww83cyX2Us8iODaVcf1gG205qOXv g==;
-X-CSE-ConnectionGUID: kpVH7fgiQOq7TiazCDKBHQ==
-X-CSE-MsgGUID: iILQwvX+SG+AXb7FylCt5A==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23506063"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:10:27 +0000
-Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:20036]
+ bh=0t83vrkzVA8QS1Yf+f3mopksiJFjcP4RLaXceTkVB2I=;
+ b=cY887D1Aqus0vXDC0Pk7BRJcSymdxKbUgP01n5MAp9Yzvyxy9+ZrEUyK
+ vhqkTFLWXt1bnSnwCHzWHGaumxNX2FexTvBZ4/iAYRLYV9+WgZJMxVP9/
+ vwCzj4H67oD93lk4eHYsVAFckLAxs3bxWiSEesf/WBhiLuW4bl64sR256
+ d/NSGVg1IGMRQdp/8gJKQ6IqdIbadK88r4wBZ3ycp9zE4HgbOT0WUW61U
+ t7roA4fZPwztOZBQzHh4cP2Ihx1ii5PLMl4hw52QNbEgLGJxFPnG0OeaM
+ 2IDpamVQCyAX8p+Cp7Tz9u8M9REP06i0tiHwUKg+2ozqlBXsPpbbXrrcX w==;
+X-CSE-ConnectionGUID: 5u04uP+7TEuOwNHNrVv/tA==
+X-CSE-MsgGUID: Y0mHu6VwTWCfSVSdDKh0jw==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23517425"
+Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+ by internal-pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:07:36 +0000
+Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.178:16436]
  by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.26.212:2525]
  with esmtp (Farcaster)
- id 6ee212c7-23a7-4427-9277-35f30099ae79; Sat, 11 Jul 2026 23:10:27 +0000 (UTC)
-X-Farcaster-Flow-ID: 6ee212c7-23a7-4427-9277-35f30099ae79
+ id 749f953e-1a47-49c4-9433-cae2ef12f849; Sat, 11 Jul 2026 23:07:35 +0000 (UTC)
+X-Farcaster-Flow-ID: 749f953e-1a47-49c4-9433-cae2ef12f849
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
+ EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:10:27 +0000
+ Sat, 11 Jul 2026 23:07:35 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:10:18 +0000
+ Sat, 11 Jul 2026 23:07:27 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 126/134] hw/arm/digic: Parent the DIGIC SoC under the
- machine
-Date: Sat, 11 Jul 2026 22:36:59 +0000
-Message-ID: <20260711223707.42139-127-graf@amazon.com>
+Subject: [RFC PATCH 116/134] irq: Delete the *_orphan() IRQ allocation variants
+Date: Sat, 11 Jul 2026 22:36:49 +0000
+Message-ID: <20260711223707.42139-117-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D044UWB002.ant.amazon.com (10.13.139.188) To
+X-ClientProxiedBy: EX19D046UWB003.ant.amazon.com (10.13.139.174) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.1.125;
+Received-SPF: pass client-ip=44.246.68.102;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -116,7 +115,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:58 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,29 +130,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Bring digic in line with cubieboard/orangepi/bpim2u/imx6ul/imx7,
-which all parent their SoC as /machine/soc.
+Every caller has been converted to the parented form; drop the
+transitional *_orphan() helpers.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/arm/digic_boards.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ hw/core/irq.c         | 35 -----------------------------------
+ include/hw/core/irq.h | 20 +-------------------
+ 2 files changed, 1 insertion(+), 54 deletions(-)
 
-diff --git a/hw/arm/digic_boards.c b/hw/arm/digic_boards.c
-index 92b66f34f7..bdc5f7324b 100644
---- a/hw/arm/digic_boards.c
-+++ b/hw/arm/digic_boards.c
-@@ -50,7 +50,8 @@ typedef struct DigicBoard {
- static void digic4_board_init(MachineState *machine, DigicBoard *board)
- {
-     Error *err = NULL;
--    DigicState *s = DIGIC(object_new(TYPE_DIGIC));
-+    DigicState *s = DIGIC(object_new_child(OBJECT(machine), "soc",
-+                                           TYPE_DIGIC));
-     MachineClass *mc = MACHINE_GET_CLASS(machine);
+diff --git a/hw/core/irq.c b/hw/core/irq.c
+index ee954eaf62..a93c64e6ae 100644
+--- a/hw/core/irq.c
++++ b/hw/core/irq.c
+@@ -68,34 +68,6 @@ void qemu_init_irqs(IRQState irq[], size_t count,
+     }
+ }
  
-     if (machine->ram_size != mc->default_ram_size) {
+-qemu_irq *qemu_extend_irqs_orphan(qemu_irq *old, int n_old, qemu_irq_handler handler,
+-                           void *opaque, int n)
+-{
+-    qemu_irq *s;
+-    int i;
+-
+-    if (!old) {
+-        n_old = 0;
+-    }
+-    s = old ? g_renew(qemu_irq, old, n + n_old) : g_new(qemu_irq, n);
+-    for (i = n_old; i < n + n_old; i++) {
+-        s[i] = qemu_allocate_irq_orphan(handler, opaque, i);
+-    }
+-    return s;
+-}
+-
+-qemu_irq *qemu_allocate_irqs_orphan(qemu_irq_handler handler, void *opaque, int n)
+-{
+-    return qemu_extend_irqs_orphan(NULL, 0, handler, opaque, n);
+-}
+-
+-qemu_irq qemu_allocate_irq_orphan(qemu_irq_handler handler, void *opaque, int n)
+-{
+-    IRQState *irq = IRQ(object_new(TYPE_IRQ));
+-    init_irq_fields(irq, handler, opaque, n);
+-    return irq;
+-}
+-
+ qemu_irq qemu_allocate_irq(Object *owner, const char *name,
+                            qemu_irq_handler handler, void *opaque, int n)
+ {
+@@ -153,13 +125,6 @@ static void qemu_notirq(void *opaque, int line, int level)
+     qemu_set_irq(irq, !level);
+ }
+ 
+-qemu_irq qemu_irq_invert_orphan(qemu_irq irq)
+-{
+-    /* The default state for IRQs is low, so raise the output now.  */
+-    qemu_irq_raise(irq);
+-    return qemu_allocate_irq_orphan(qemu_notirq, irq, 0);
+-}
+-
+ qemu_irq qemu_irq_invert(Object *owner, const char *name, qemu_irq irq)
+ {
+     /* The default state for IRQs is low, so raise the output now.  */
+diff --git a/include/hw/core/irq.h b/include/hw/core/irq.h
+index 5ccccd2697..89923cf4a8 100644
+--- a/include/hw/core/irq.h
++++ b/include/hw/core/irq.h
+@@ -74,19 +74,8 @@ void qemu_init_irq_child(Object *parent, const char *propname,
+ void qemu_init_irqs(IRQState irq[], size_t count,
+                     qemu_irq_handler handler, void *opaque);
+ 
+-/* Returns an array of N IRQs. Each IRQ is assigned the argument handler and
+- * opaque data.
+- */
+-qemu_irq *qemu_allocate_irqs_orphan(qemu_irq_handler handler, void *opaque, int n);
+-
+ /*
+- * Allocates a single IRQ. The irq is assigned with a handler, an opaque
+- * data and the interrupt number.
+- */
+-qemu_irq qemu_allocate_irq_orphan(qemu_irq_handler handler, void *opaque, int n);
+-
+-/*
+- * Same as the *_orphan() variants above, but the new IRQ objects are
++ * Allocate IRQ objects with an explicit QOM parent.  The new objects are
+  * parented under @owner with property name @name (or @name[*] for the
+  * array/extend variants).  The reference is held by @owner; call
+  * qemu_free_irq() to unparent and free.
+@@ -99,17 +88,10 @@ qemu_irq *qemu_extend_irqs(Object *owner, const char *name,
+                            qemu_irq *old, int n_old,
+                            qemu_irq_handler handler, void *opaque, int n);
+ 
+-/* Extends an Array of IRQs. Old IRQs have their handlers and opaque data
+- * preserved. New IRQs are assigned the argument handler and opaque data.
+- */
+-qemu_irq *qemu_extend_irqs_orphan(qemu_irq *old, int n_old, qemu_irq_handler handler,
+-                                void *opaque, int n);
+-
+ void qemu_free_irqs(qemu_irq *s, int n);
+ void qemu_free_irq(qemu_irq irq);
+ 
+ /* Returns a new IRQ with opposite polarity.  */
+-qemu_irq qemu_irq_invert_orphan(qemu_irq irq);
+ qemu_irq qemu_irq_invert(Object *owner, const char *name, qemu_irq irq);
+ 
+ /* For internal use in qtest. */
 -- 
 2.47.1
 
