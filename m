@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14475C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7CC4C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiDw-0001j8-S9; Sat, 11 Jul 2026 20:39:13 -0400
+	id 1wiiDj-0001dK-Tp; Sat, 11 Jul 2026 20:38:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigUL-0000kA-Ao; Sat, 11 Jul 2026 18:48:01 -0400
-Received: from pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.35.192.45])
+ id 1wigO4-0005y9-RV; Sat, 11 Jul 2026 18:41:32 -0400
+Received: from pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.26.1.71])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigUE-0007XR-H6; Sat, 11 Jul 2026 18:47:56 -0400
+ id 1wigO0-0005vV-Oi; Sat, 11 Jul 2026 18:41:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810074; x=1815346074;
+ t=1783809688; x=1815345688;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=6/uUnSgnZmJBm5T2o5OPuJjkNENFoH1An9ZTNcC61IY=;
- b=nUndGGtKOqQYYjaQAMLtrHuC3H9HTpkmBsMfGLdIt+gWsUNjjSR0g40K
- 2519WNZL1SPmr+htDWe2Wm1Dw/Lpldd6Kdt0vXU4bzu1zZVPI9S4JBp/t
- 5PIyZ+629Ti13FF/iBci/hwqeV2Yquj9pgmfizaoYGfJD32cjlCf1VOLP
- GwFUQwFU5lJQ1lByG/3NpEBHStMpVWVcRVpVHQlIZGDD1tWhrSh2NaQx3
- 5cYXcBoDMV+8fNEl2CtmRg8uuWNCXgCz9Zcr099BUi4q/61OK+Y35WdFf
- 0QnihDXiLwSziMPD1dW/Lsb2W2MWQ8GMuoVOE7QdtahOkzKbS0pMCF+J3 g==;
-X-CSE-ConnectionGUID: OdDvNDRGQgew3sQ+azLArA==
-X-CSE-MsgGUID: onkKNhqZSkCSzgGziWgpkA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23269697"
-Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
- by internal-pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:47:50 +0000
-Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:13244]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.40.123:2525]
+ bh=RncaBp9AWxGSftZuWkeLsuFC+aVbpad6KBOmlHbCn0g=;
+ b=PfTCjpIkkKisgkp7wgYa9Uqm5uT7wIT8JLBlEZsf0A9elnwE9LPRDyXG
+ a/NnCpPD0PucoAQ0dpQ+ydeTDwzogJO/cqHjY4x0/O8IZybJXlmbtPPRK
+ ZzA7nyIbeXdqTqrOm0xJv5+nfFD4MRzSC2XwQwB/0XudIbkUr5DHQgwUE
+ 61kX6YFRE5VFiwJH8jELxu8nGLHcVxxtPJAcASUGcI6zNKa4DZueoQM2u
+ HAZVDSGa16H5c9OxfnSsuqFsKxeZoIf9G7ZrtKg1JBTkOPH22SO9YAHSj
+ OQh/VeEaN3c2oHc4P4KMCItLcj0wgYaSWuvXI7cQPyiaVrVY2dact5QPm A==;
+X-CSE-ConnectionGUID: lePvNfXFSIWjokDUljhAPQ==
+X-CSE-MsgGUID: hLPlCHmoSZa8jfJ5+5+dFg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23522100"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:41:24 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.111:3368]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.51.175:2525]
  with esmtp (Farcaster)
- id 6a46bbc3-e7ff-48af-8a80-60bb425c2dde; Sat, 11 Jul 2026 22:47:50 +0000 (UTC)
-X-Farcaster-Flow-ID: 6a46bbc3-e7ff-48af-8a80-60bb425c2dde
+ id b8ce2edb-8dd9-4367-a36d-b9ae8d54b95c; Sat, 11 Jul 2026 22:41:24 +0000 (UTC)
+X-Farcaster-Flow-ID: b8ce2edb-8dd9-4367-a36d-b9ae8d54b95c
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:47:50 +0000
+ Sat, 11 Jul 2026 22:41:24 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:47:41 +0000
+ Sat, 11 Jul 2026 22:41:15 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 041/134] hw/pci-bridge: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:34 +0000
-Message-ID: <20260711223707.42139-42-graf@amazon.com>
+Subject: [RFC PATCH 016/134] hw/hppa: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:09 +0000
+Message-ID: <20260711223707.42139-17-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D040UWA002.ant.amazon.com (10.13.139.113) To
+X-ClientProxiedBy: EX19D045UWA002.ant.amazon.com (10.13.139.12) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.35.192.45;
+Received-SPF: pass client-ip=52.26.1.71;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -130,7 +130,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/pci-bridge to the new
+Convert the *_orphan() device-creation calls in hw/hppa to the new
 parented API introduced earlier in this series, so every onboard
 device gets a stable path in the composition tree instead of landing
 in /machine/unattached with an unstable device[N] name.
@@ -141,62 +141,216 @@ composite children.  Names follow existing QOM conventions.
 
 Per-site rationale (reviewers: dispute the modeling here):
 
-hw/pci-bridge/pci_expander_bridge.c:362 | qdev_new | OBJECT(dev) | "pxb-host" | pxb_dev_realize_common() is DeviceClass.realize of PXB PCIDevice; child host bridge owned by PXB device
-hw/pci-bridge/pci_expander_bridge.c:371 | qdev_new | OBJECT(dev) | "pci-bridge" | same realize(); internal pci-bridge owned by PXB device; error path unref->unparent
+  hw/hppa/machine.c:268 | OBJECT(machine) | "lasi" | lasi_init() static helper called from board init; thread Object *parent from caller
+  hw/hppa/machine.c:278 | OBJECT(machine) | "dino" | dino_init() static helper called from board init; thread Object *parent from caller
+  hw/hppa/machine.c:301 | OBJECT(machine) | "cpu[*]" | board init CPU creation loop; auto-index child of machine
+  hw/hppa/machine.c:414 | OBJECT(machine) | "artist" | board init tail; on-board Artist graphics owned by machine
+  hw/hppa/machine.c:431 | OBJECT(machine) | "diva-gsp" | board init tail; on-board Diva GSP PCI card owned by machine
+  hw/hppa/machine.c:446 | OBJECT(machine) | "ohci" | board init tail; on-board OHCI USB controller owned by machine
+  hw/hppa/machine.c:449 | OBJECT(pci_dev) | "usb-kbd" | USB keyboard is child of the OHCI controller it plugs into
+  hw/hppa/machine.c:450 | OBJECT(pci_dev) | "usb-mouse" | USB mouse is child of the OHCI controller it plugs into
+  hw/hppa/machine.c:617 | OBJECT(machine) | "lasips2" | HP 715 board init; on-board Lasi PS/2 controller
+  hw/hppa/machine.c:709 | OBJECT(machine) | "lasips2" | HP B160L board init; on-board Lasi PS/2 controller
+  hw/hppa/machine.c:724 | OBJECT(machine) | "scsi" | HP B160L board init; on-board LSI SCSI HBA
+  hw/hppa/machine.c:736 | OBJECT(machine) | "astro" | astro_init() static helper called from board init; thread Object *parent from caller
+  hw/hppa/machine.c:776 | OBJECT(machine) | "scsi" | HP C3700 board init; on-board LSI SCSI HBA
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/pci-bridge/pci_expander_bridge.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ hw/hppa/machine.c | 60 ++++++++++++++++++++++++++---------------------
+ 1 file changed, 33 insertions(+), 27 deletions(-)
 
-diff --git a/hw/pci-bridge/pci_expander_bridge.c b/hw/pci-bridge/pci_expander_bridge.c
-index 11a28b5503..bf970dae76 100644
---- a/hw/pci-bridge/pci_expander_bridge.c
-+++ b/hw/pci-bridge/pci_expander_bridge.c
-@@ -359,7 +359,8 @@ static bool pxb_dev_realize_common(PCIDevice *dev, enum BusType type,
-         dev_name = dev->qdev.id;
-     }
- 
--    ds = qdev_new_orphan(type == CXL ? TYPE_PXB_CXL_HOST : TYPE_PXB_HOST);
-+    ds = qdev_new(OBJECT(dev), "pxb-host",
-+                  type == CXL ? TYPE_PXB_CXL_HOST : TYPE_PXB_HOST);
-     if (type == PCIE) {
-         bus = pci_root_bus_new(ds, dev_name, NULL, NULL, 0, TYPE_PXB_PCIE_BUS);
-     } else if (type == CXL) {
-@@ -368,7 +369,7 @@ static bool pxb_dev_realize_common(PCIDevice *dev, enum BusType type,
-         PXB_CXL_DEV(dev)->cxl_host_bridge = PXB_CXL_HOST(ds);
-     } else {
-         bus = pci_root_bus_new(ds, "pxb-internal", NULL, NULL, 0, TYPE_PXB_BUS);
--        bds = qdev_new_orphan("pci-bridge");
-+        bds = qdev_new(OBJECT(dev), "pci-bridge", "pci-bridge");
-         bds->id = g_strdup(dev_name);
-         qdev_prop_set_uint8(bds, PCI_BRIDGE_DEV_PROP_CHASSIS_NR, pxb->bus_nr);
-         qdev_prop_set_bit(bds, PCI_BRIDGE_DEV_PROP_SHPC, false);
-@@ -388,9 +389,9 @@ static bool pxb_dev_realize_common(PCIDevice *dev, enum BusType type,
-         goto err_register_bus;
-     }
- 
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(ds), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(ds), &error_fatal);
-     if (bds) {
--        qdev_realize_and_unref(bds, &bus->qbus, &error_fatal);
-+        qdev_realize(bds, &bus->qbus, &error_fatal);
-     }
- 
-     pci_word_test_and_set_mask(dev->config + PCI_STATUS,
-@@ -401,9 +402,9 @@ static bool pxb_dev_realize_common(PCIDevice *dev, enum BusType type,
-     return true;
- 
- err_register_bus:
--    object_unref(OBJECT(bds));
-+    object_unparent(OBJECT(bds));
-     object_unparent(OBJECT(bus));
--    object_unref(OBJECT(ds));
-+    object_unparent(OBJECT(ds));
-     return false;
+diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
+index a4b8e9ee77..729524e065 100644
+--- a/hw/hppa/machine.c
++++ b/hw/hppa/machine.c
+@@ -261,24 +261,24 @@ static FWCfgState *create_fw_cfg(MachineState *ms, PCIBus *pci_bus,
+     return fw_cfg;
  }
+ 
+-static LasiState *lasi_init(void)
++static LasiState *lasi_init(Object *parent)
+ {
+     DeviceState *dev;
+ 
+-    dev = qdev_new_orphan(TYPE_LASI_CHIP);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    dev = qdev_new(parent, "lasi", TYPE_LASI_CHIP);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     return LASI_CHIP(dev);
+ }
+ 
+-static DinoState *dino_init(MemoryRegion *addr_space)
++static DinoState *dino_init(Object *parent, MemoryRegion *addr_space)
+ {
+     DeviceState *dev;
+ 
+-    dev = qdev_new_orphan(TYPE_DINO_PCI_HOST_BRIDGE);
++    dev = qdev_new(parent, "dino", TYPE_DINO_PCI_HOST_BRIDGE);
+     object_property_set_link(OBJECT(dev), "memory-as", OBJECT(addr_space),
+                              &error_fatal);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     return DINO_PCI_HOST_BRIDGE(dev);
+ }
+@@ -298,7 +298,8 @@ static TranslateFn *machine_HP_common_init_cpus(MachineState *machine)
+ 
+     /* Create CPUs.  */
+     for (unsigned int i = 0; i < smp_cpus; i++) {
+-        cpu[i] = HPPA_CPU(cpu_create_orphan(machine->cpu_type));
++        cpu[i] = HPPA_CPU(cpu_create(OBJECT(machine), "cpu[*]",
++                                     machine->cpu_type));
+     }
+ 
+     /* Initialize memory */
+@@ -411,11 +412,11 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
+     lasi_dev = hpm->lasi_dev;
+     if (lasi_dev && machine->enable_graphics &&
+         vga_interface_type != VGA_NONE) {
+-        dev = qdev_new_orphan("artist");
++        dev = qdev_new(OBJECT(machine), "artist", "artist");
+         s = SYS_BUS_DEVICE(dev);
+         bool disabled = object_property_get_bool(OBJECT(dev), "disable", NULL);
+         if (!disabled) {
+-            sysbus_realize_and_unref(s, &error_fatal);
++            sysbus_realize(s, &error_fatal);
+             vga_interface_created = true;
+             sysbus_mmio_map(s, 0, translate(NULL, LASI_GFX_HPA));
+             sysbus_mmio_map(s, 1, translate(NULL, ARTIST_FB_ADDR));
+@@ -428,7 +429,8 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
+ 
+     if (pci_bus && hppa_is_pa20(&cpu[0]->env)) {
+         /* BMC board: HP Diva GSP PCI card */
+-        pci_dev = pci_new_multifunction_orphan(PCI_DEVFN(2, 0), "diva-gsp");
++        pci_dev = pci_new_multifunction(OBJECT(machine), "diva-gsp",
++                                        PCI_DEVFN(2, 0), "diva-gsp");
+         if (!lasi_dev) {
+             /* bind default keyboard/serial to Diva card */
+             qdev_prop_set_chr(DEVICE(pci_dev), "chardev1", serial_hd(0));
+@@ -436,18 +438,19 @@ static void machine_HP_common_init_tail(MachineState *machine, PCIBus *pci_bus,
+             qdev_prop_set_chr(DEVICE(pci_dev), "chardev3", serial_hd(2));
+             qdev_prop_set_chr(DEVICE(pci_dev), "chardev4", serial_hd(3));
+         }
+-        pci_realize_and_unref(pci_dev, pci_bus, &error_fatal);
++        qdev_realize(DEVICE(pci_dev), BUS(pci_bus), &error_fatal);
+     }
+ 
+     /* create USB OHCI controller for USB keyboard & mouse on Astro machines */
+     if (!lasi_dev && machine->enable_graphics && defaults_enabled()) {
+         USBBus *usb_bus;
+ 
+-        pci_create_simple_orphan(pci_bus, -1, "pci-ohci");
++        pci_dev = pci_create_simple(OBJECT(machine), "ohci", pci_bus, -1,
++                                    "pci-ohci");
+         usb_bus = USB_BUS(object_resolve_type_unambiguous(TYPE_USB_BUS,
+                                                           &error_abort));
+-        usb_create_simple_orphan(usb_bus, "usb-kbd");
+-        usb_create_simple_orphan(usb_bus, "usb-mouse");
++        usb_create_simple(OBJECT(pci_dev), "usb-kbd", usb_bus, "usb-kbd");
++        usb_create_simple(OBJECT(pci_dev), "usb-mouse", usb_bus, "usb-mouse");
+     }
+ 
+     /* register power switch emulation */
+@@ -597,7 +600,7 @@ static void machine_HP_715_init(MachineState *machine)
+     assert(isa_bus);
+ 
+     /* Init Lasi chip */
+-    lasi_dev = DEVICE(lasi_init());
++    lasi_dev = DEVICE(lasi_init(OBJECT(machine)));
+     hpm->lasi_dev = lasi_dev;
+     memory_region_add_subregion(addr_space, translate(NULL, LASI_HPA_715),
+                                 sysbus_mmio_get_region(
+@@ -614,8 +617,8 @@ static void machine_HP_715_init(MachineState *machine)
+                      parallel_hds[0]);
+ 
+     /* PS/2 Keyboard/Mouse */
+-    dev = qdev_new_orphan(TYPE_LASIPS2);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    dev = qdev_new(OBJECT(machine), "lasips2", TYPE_LASIPS2);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0,
+                        qdev_get_gpio_in(lasi_dev, LASI_IRQ_PS2KBD_HPA));
+     memory_region_add_subregion(addr_space,
+@@ -672,14 +675,14 @@ static void machine_HP_B160L_init(MachineState *machine)
+     }
+ 
+     /* Init Lasi chip */
+-    lasi_dev = DEVICE(lasi_init());
++    lasi_dev = DEVICE(lasi_init(OBJECT(machine)));
+     hpm->lasi_dev = lasi_dev;
+     memory_region_add_subregion(addr_space, translate(NULL, LASI_HPA),
+                                 sysbus_mmio_get_region(
+                                     SYS_BUS_DEVICE(lasi_dev), 0));
+ 
+     /* Init Dino (PCI host bus chip).  */
+-    dino_dev = DEVICE(dino_init(addr_space));
++    dino_dev = DEVICE(dino_init(OBJECT(machine), addr_space));
+     memory_region_add_subregion(addr_space, translate(NULL, DINO_HPA),
+                                 sysbus_mmio_get_region(
+                                     SYS_BUS_DEVICE(dino_dev), 0));
+@@ -706,8 +709,8 @@ static void machine_HP_B160L_init(MachineState *machine)
+                      parallel_hds[0]);
+ 
+     /* PS/2 Keyboard/Mouse */
+-    dev = qdev_new_orphan(TYPE_LASIPS2);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    dev = qdev_new(OBJECT(machine), "lasips2", TYPE_LASIPS2);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0,
+                        qdev_get_gpio_in(lasi_dev, LASI_IRQ_PS2KBD_HPA));
+     memory_region_add_subregion(addr_space,
+@@ -721,7 +724,8 @@ static void machine_HP_B160L_init(MachineState *machine)
+ 
+     /* SCSI disk setup. */
+     if (drive_get_max_bus(IF_SCSI) >= 0) {
+-        dev = DEVICE(pci_create_simple_orphan(pci_bus, -1, "lsi53c895a"));
++        dev = DEVICE(pci_create_simple(OBJECT(machine), "scsi", pci_bus, -1,
++                                       "lsi53c895a"));
+         lsi53c8xx_handle_legacy_cmdline(dev);
+     }
+ 
+@@ -729,15 +733,15 @@ static void machine_HP_B160L_init(MachineState *machine)
+     machine_HP_common_init_tail(machine, pci_bus, translate);
+ }
+ 
+-static AstroState *astro_init(void)
++static AstroState *astro_init(Object *parent)
+ {
+     DeviceState *dev;
+ 
+-    dev = qdev_new_orphan(TYPE_ASTRO_CHIP);
++    dev = qdev_new(parent, "astro", TYPE_ASTRO_CHIP);
+     object_property_set_int(OBJECT(dev), "phys-addr-bits",
+                             hppa_phys_addr_bits(&cpu[0]->env),
+                             &error_abort);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     return ASTRO_CHIP(dev);
+ }
+@@ -763,7 +767,7 @@ static void machine_HP_C3700_init(MachineState *machine)
+     }
+ 
+     /* Init Astro and the Elroys (PCI host bus chips).  */
+-    astro = astro_init();
++    astro = astro_init(OBJECT(machine));
+     astro_dev = DEVICE(astro);
+     memory_region_add_subregion(addr_space, translate(NULL, ASTRO_HPA),
+                                 sysbus_mmio_get_region(
+@@ -773,7 +777,9 @@ static void machine_HP_C3700_init(MachineState *machine)
+ 
+     /* SCSI disk setup. */
+     if (drive_get_max_bus(IF_SCSI) >= 0) {
+-        DeviceState *dev = DEVICE(pci_create_simple_orphan(pci_bus, -1, "lsi53c895a"));
++        DeviceState *dev = DEVICE(pci_create_simple(OBJECT(machine), "scsi",
++                                                    pci_bus, -1,
++                                                    "lsi53c895a"));
+         lsi53c8xx_handle_legacy_cmdline(dev);
+     }
  
 -- 
 2.47.1
