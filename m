@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53003C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0585AC44506
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiFm-00064E-BJ; Sat, 11 Jul 2026 20:41:06 -0400
+	id 1wiiEP-0002Ay-C9; Sat, 11 Jul 2026 20:39:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigf5-0006ie-0k; Sat, 11 Jul 2026 18:59:07 -0400
-Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.245.243.92])
+ id 1wigV9-0002Y7-13; Sat, 11 Jul 2026 18:48:55 -0400
+Received: from pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.42.203.116])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigex-0001b6-9I; Sat, 11 Jul 2026 18:59:06 -0400
+ id 1wigV1-0007is-86; Sat, 11 Jul 2026 18:48:49 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810739; x=1815346739;
+ t=1783810123; x=1815346123;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=5wJX8HTlMWOp+CthdhWDxuxqwHRCoNy4439GbPHkYpo=;
- b=LptMTme+m0VP3RaEsLxStA1JAYk5FIRr0Bh3hbGA6zgBiIUeuPXuaaSe
- EN14Yp7ND6xqaCn3ZrVxuOo8w5/rD0MSUunatCeiAbXoJlG0zFyVIDpyx
- hTyn1m+VaF4sPEJ6sU25b+ru2ShS0kjjo/Ny56/U9BGGMhlogOZ1xRjio
- FE53JbN5A2AnNaUiz9jKVWCX7ZTdGcnO1i4Lt74E/xNPuWTIIHy/MIEsh
- IzeVj7a1Ltd837wMIGTFy/S1ASL5W3GtvYx0GwYqxpifPcrLSQbQuznlm
- /qy7uq+BYFyS6HgTC5PNkpCLbU/xFnKRa3yDtaJQS8b6pQ1P3xvuSeJFB g==;
-X-CSE-ConnectionGUID: tyYwmJWCSuS6lTSk5SivTw==
-X-CSE-MsgGUID: p/V0nDvLSw+97JVEWtpETg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="22997678"
-Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
- by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:58:55 +0000
-Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:5669]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525]
+ bh=cjOww6QiL/hj8HgD2cr+EQ+VepUESTbjn+BqiEs27nA=;
+ b=h3wrQeE1I9ckTaifeL7/6bg0zfK6CRJTNHFGNI2DsskgMWHDb8CY/e02
+ 4dG+8hmcdHvyxpTZpJjhBaJRPs3MBBBrhKkSx6aELu6m8iMSsjlc+cd3O
+ wU+P+a7aL8eXnB1Djc15zin4phx5dutbaPFjYW8k9Ld8nagALRqMVQUqY
+ ox6vEGbuhoq9ydENGjubBpQGEliSpgz0sM7LGxuVGLqg704FCo5uA1pfA
+ WlcozaX1+3Z4z1yVdWVfn7s4c70YjSJtHW1GqQGG9tSS7OwNkOi/Osbun
+ awTay7dG/M84GRCl2BF55gJQ5fjDoM7Pw6uSZC+POzqqmJvscGro3WrZy w==;
+X-CSE-ConnectionGUID: JaqDw82jTSGnvPoGO1WnqQ==
+X-CSE-MsgGUID: WAcGKIUSQIWblKnMKEanug==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23517833"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:48:38 +0000
+Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:26735]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.26.212:2525]
  with esmtp (Farcaster)
- id 3046c674-944c-4dc9-9a2e-17595cc7fb99; Sat, 11 Jul 2026 22:58:55 +0000 (UTC)
-X-Farcaster-Flow-ID: 3046c674-944c-4dc9-9a2e-17595cc7fb99
+ id cddc9e8b-19e1-4c5f-bb80-c9b3b8827e07; Sat, 11 Jul 2026 22:48:38 +0000 (UTC)
+X-Farcaster-Flow-ID: cddc9e8b-19e1-4c5f-bb80-c9b3b8827e07
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
+ EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:58:55 +0000
+ Sat, 11 Jul 2026 22:48:37 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:58:46 +0000
+ Sat, 11 Jul 2026 22:48:29 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 083/134] usb, ssi, i2c: Remove *_orphan() creator variants
-Date: Sat, 11 Jul 2026 22:36:16 +0000
-Message-ID: <20260711223707.42139-84-graf@amazon.com>
+Subject: [RFC PATCH 044/134] hw/m68k: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:37 +0000
+Message-ID: <20260711223707.42139-45-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D036UWC003.ant.amazon.com (10.13.139.214) To
+X-ClientProxiedBy: EX19D042UWB001.ant.amazon.com (10.13.139.160) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.245.243.92;
+Received-SPF: pass client-ip=52.42.203.116;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -115,7 +115,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,187 +130,292 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All external callers now go through the parented usb_new()/
-usb_create_simple(), ssi_create_peripheral(), i2c_slave_new()/
-i2c_slave_create_simple() introduced earlier in the series.
-Remove the transitional *_orphan() spellings.
+Convert the *_orphan() device-creation calls in hw/m68k to the new
+parented API introduced earlier in this series, so every onboard
+device gets a stable path in the composition tree instead of landing
+in /machine/unattached with an unstable device[N] name.
 
-The corresponding *_realize_and_unref() helpers stay for now: they
-are still valid for callers that reach for object_new() directly
-and hold a floating reference (qdev_device_add() being the primary
-example one layer down).
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing device for
+composite children.  Names follow existing QOM conventions.
 
+Per-site rationale (reviewers: dispute the modeling here):
+
+hw/m68k/an5206.c:28 | qdev_new | parent | "mbar" | mcf5206_init() helper: thread Object *parent from board init
+hw/m68k/an5206.c:49 | cpu_create | OBJECT(machine) | "cpu" | an5206_init() board init
+hw/m68k/mcf5208.c:291 | cpu_create | OBJECT(machine) | "cpu" | mcf5208evb_init() board init
+hw/m68k/mcf_intc.c:214 | qdev_new | parent | "intc" | mcf_intc_init() global helper: add Object *parent, update header + caller
+hw/m68k/next-cube.c:1263 | cpu_create | OBJECT(machine) | "cpu" | next_cube_init() board init
+hw/m68k/next-cube.c:1275 | qdev_new | OBJECT(machine) | "pc" | next_cube_init() board init; peripheral controller
+hw/m68k/next-cube.c:1283 | sysbus_create_simple | OBJECT(machine) | "fb" | next_cube_init() board init; framebuffer
+hw/m68k/next-cube.c:1322 | sysbus_create_simple | OBJECT(machine) | "kbd" | next_cube_init() board init
+hw/m68k/q800.c:358 | qdev_new | OBJECT(machine) | "adb-keyboard" | q800_machine_init() board init; drop _and_unref
+hw/m68k/q800.c:360 | qdev_new | OBJECT(machine) | "adb-mouse" | q800_machine_init() board init; drop _and_unref
+hw/m68k/virt.c:148 | cpu_create | OBJECT(machine) | "cpu" | virt_init() board init
+hw/m68k/virt.c:158 | qdev_new | OBJECT(machine) | "irqc" | virt_init() board init
+hw/m68k/virt.c:172 | qdev_new | OBJECT(machine) | "pic[*]" | virt_init() board init; loop
+hw/m68k/virt.c:186 | qdev_new | OBJECT(machine) | "rtc[*]" | virt_init() board init; loop
+hw/m68k/virt.c:197 | qdev_new | OBJECT(machine) | "tty" | virt_init() board init
+hw/m68k/virt.c:205 | sysbus_create_simple | OBJECT(machine) | "virt-ctrl" | virt_init() board init
+hw/m68k/virt.c:211 | qdev_new | OBJECT(machine) | "virtio-mmio[*]" | virt_init() board init; loop
+
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/i2c/core.c        | 18 ------------------
- hw/ssi/ssi.c         |  8 --------
- include/hw/i2c/i2c.h | 31 ++++---------------------------
- include/hw/ssi/ssi.h |  5 ++---
- include/hw/usb/usb.h |  9 ---------
- 5 files changed, 6 insertions(+), 65 deletions(-)
+ hw/m68k/an5206.c      | 11 ++++++-----
+ hw/m68k/mcf5208.c     |  4 ++--
+ hw/m68k/mcf_intc.c    |  7 ++++---
+ hw/m68k/next-cube.c   | 10 +++++-----
+ hw/m68k/q800.c        |  8 ++++----
+ hw/m68k/virt.c        | 25 +++++++++++++------------
+ include/hw/m68k/mcf.h |  2 +-
+ 7 files changed, 35 insertions(+), 32 deletions(-)
 
-diff --git a/hw/i2c/core.c b/hw/i2c/core.c
-index fba21fdfad..f333df3760 100644
---- a/hw/i2c/core.c
-+++ b/hw/i2c/core.c
-@@ -364,15 +364,6 @@ const VMStateDescription vmstate_i2c_slave = {
+diff --git a/hw/m68k/an5206.c b/hw/m68k/an5206.c
+index b649605140..5027311cad 100644
+--- a/hw/m68k/an5206.c
++++ b/hw/m68k/an5206.c
+@@ -20,16 +20,17 @@
+ #define AN5206_MBAR_ADDR 0x10000000
+ #define AN5206_RAMBAR_ADDR 0x20000000
+ 
+-static void mcf5206_init(M68kCPU *cpu, MemoryRegion *sysmem, uint32_t base)
++static void mcf5206_init(Object *parent, M68kCPU *cpu, MemoryRegion *sysmem,
++                         uint32_t base)
+ {
+     DeviceState *dev;
+     SysBusDevice *s;
+ 
+-    dev = qdev_new_orphan(TYPE_MCF5206_MBAR);
++    dev = qdev_new(parent, "mbar", TYPE_MCF5206_MBAR);
+     object_property_set_link(OBJECT(dev), "m68k-cpu",
+                              OBJECT(cpu), &error_abort);
+     s = SYS_BUS_DEVICE(dev);
+-    sysbus_realize_and_unref(s, &error_fatal);
++    sysbus_realize(s, &error_fatal);
+ 
+     memory_region_add_subregion(sysmem, base, sysbus_mmio_get_region(s, 0));
+ }
+@@ -46,7 +47,7 @@ static void an5206_init(MachineState *machine)
+     MemoryRegion *address_space_mem = get_system_memory();
+     MemoryRegion *sram = g_new(MemoryRegion, 1);
+ 
+-    cpu = M68K_CPU(cpu_create_orphan(machine->cpu_type));
++    cpu = M68K_CPU(cpu_create(OBJECT(machine), "cpu", machine->cpu_type));
+     env = &cpu->env;
+ 
+     /* Initialize CPU registers.  */
+@@ -62,7 +63,7 @@ static void an5206_init(MachineState *machine)
+     memory_region_init_ram(sram, NULL, "an5206.sram", 512, &error_fatal);
+     memory_region_add_subregion(address_space_mem, AN5206_RAMBAR_ADDR, sram);
+ 
+-    mcf5206_init(cpu, address_space_mem, AN5206_MBAR_ADDR);
++    mcf5206_init(OBJECT(machine), cpu, address_space_mem, AN5206_MBAR_ADDR);
+ 
+     /* Load kernel.  */
+     if (!kernel_filename) {
+diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
+index d79ec173e6..0b8636daa9 100644
+--- a/hw/m68k/mcf5208.c
++++ b/hw/m68k/mcf5208.c
+@@ -288,7 +288,7 @@ static void mcf5208evb_init(MachineState *machine)
+     MemoryRegion *sram = g_new(MemoryRegion, 1);
+     DeviceState *intc;
+ 
+-    cpu = M68K_CPU(cpu_create_orphan(machine->cpu_type));
++    cpu = M68K_CPU(cpu_create(OBJECT(machine), "cpu", machine->cpu_type));
+     env = &cpu->env;
+ 
+     /* Initialize CPU registers.  */
+@@ -307,7 +307,7 @@ static void mcf5208evb_init(MachineState *machine)
+     memory_region_add_subregion(address_space_mem, 0x80000000, sram);
+ 
+     /* Internal peripherals.  */
+-    intc = mcf_intc_init(address_space_mem, 0xfc048000, cpu);
++    intc = mcf_intc_init(OBJECT(machine), address_space_mem, 0xfc048000, cpu);
+ 
+     mcf_uart_create_mmap(0xfc060000, qdev_get_gpio_in(intc, 26), serial_hd(0));
+     mcf_uart_create_mmap(0xfc064000, qdev_get_gpio_in(intc, 27), serial_hd(1));
+diff --git a/hw/m68k/mcf_intc.c b/hw/m68k/mcf_intc.c
+index 123bd7e385..5ae8fddc52 100644
+--- a/hw/m68k/mcf_intc.c
++++ b/hw/m68k/mcf_intc.c
+@@ -207,14 +207,15 @@ static void mcf_intc_register_types(void)
+ 
+ type_init(mcf_intc_register_types)
+ 
+-DeviceState *mcf_intc_init(MemoryRegion *sysmem, hwaddr base, M68kCPU *cpu)
++DeviceState *mcf_intc_init(Object *parent, MemoryRegion *sysmem, hwaddr base,
++                           M68kCPU *cpu)
+ {
+     DeviceState  *dev;
+ 
+-    dev = qdev_new_orphan(TYPE_MCF_INTC);
++    dev = qdev_new(parent, "intc", TYPE_MCF_INTC);
+     object_property_set_link(OBJECT(dev), "m68k-cpu",
+                              OBJECT(cpu), &error_abort);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     memory_region_add_subregion(sysmem, base,
+                                 sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
+     return dev;
+diff --git a/hw/m68k/next-cube.c b/hw/m68k/next-cube.c
+index 530dc1ab59..c80d32ef29 100644
+--- a/hw/m68k/next-cube.c
++++ b/hw/m68k/next-cube.c
+@@ -1260,7 +1260,7 @@ static void next_cube_init(MachineState *machine)
+     DeviceState *pcdev;
+ 
+     /* Initialize the cpu core */
+-    cpu = M68K_CPU(cpu_create_orphan(machine->cpu_type));
++    cpu = M68K_CPU(cpu_create(OBJECT(machine), "cpu", machine->cpu_type));
+     if (!cpu) {
+         error_report("Unable to find m68k CPU definition");
+         exit(1);
+@@ -1272,15 +1272,15 @@ static void next_cube_init(MachineState *machine)
+     env->sr  = 0x2700;
+ 
+     /* Peripheral Controller */
+-    pcdev = qdev_new_orphan(TYPE_NEXT_PC);
++    pcdev = qdev_new(OBJECT(machine), "pc", TYPE_NEXT_PC);
+     object_property_set_link(OBJECT(pcdev), "cpu", OBJECT(cpu), &error_abort);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(pcdev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(pcdev), &error_fatal);
+ 
+     /* 64MB RAM starting at 0x04000000  */
+     memory_region_add_subregion(sysmem, 0x04000000, machine->ram);
+ 
+     /* Framebuffer */
+-    sysbus_create_simple_orphan(TYPE_NEXTFB, 0x0B000000, NULL);
++    sysbus_create_simple(OBJECT(machine), "fb", TYPE_NEXTFB, 0x0B000000, NULL);
+ 
+     /* MMIO */
+     sysbus_mmio_map(SYS_BUS_DEVICE(pcdev), 0, 0x02005000);
+@@ -1319,7 +1319,7 @@ static void next_cube_init(MachineState *machine)
+     memory_region_add_subregion(sysmem, 0x820c0000, &m->bmapm2);
+ 
+     /* KBD */
+-    sysbus_create_simple_orphan(TYPE_NEXTKBD, 0x0200e000, NULL);
++    sysbus_create_simple(OBJECT(machine), "kbd", TYPE_NEXTKBD, 0x0200e000, NULL);
+ 
+     /* Load ROM here */
+     memory_region_init_rom(&m->rom, NULL, "next.rom", 0x20000, &error_fatal);
+diff --git a/hw/m68k/q800.c b/hw/m68k/q800.c
+index 688299ee2d..15b3bcab5f 100644
+--- a/hw/m68k/q800.c
++++ b/hw/m68k/q800.c
+@@ -355,10 +355,10 @@ static void q800_machine_init(MachineState *machine)
+                                                  "auxmode", 0));
+ 
+     adb_bus = qdev_get_child_bus(DEVICE(&m->via1), "adb.0");
+-    dev = qdev_new_orphan(TYPE_ADB_KEYBOARD);
+-    qdev_realize_and_unref(dev, adb_bus, &error_fatal);
+-    dev = qdev_new_orphan(TYPE_ADB_MOUSE);
+-    qdev_realize_and_unref(dev, adb_bus, &error_fatal);
++    dev = qdev_new(OBJECT(machine), "adb-keyboard", TYPE_ADB_KEYBOARD);
++    qdev_realize(dev, adb_bus, &error_fatal);
++    dev = qdev_new(OBJECT(machine), "adb-mouse", TYPE_ADB_MOUSE);
++    qdev_realize(dev, adb_bus, &error_fatal);
+ 
+     /* VIA 2 */
+     object_initialize_child(OBJECT(machine), "via2", &m->via2,
+diff --git a/hw/m68k/virt.c b/hw/m68k/virt.c
+index 64ac8c8166..5d5ea72314 100644
+--- a/hw/m68k/virt.c
++++ b/hw/m68k/virt.c
+@@ -145,7 +145,7 @@ static void virt_init(MachineState *machine)
+     reset_info = g_new0(ResetInfo, 1);
+ 
+     /* init CPUs */
+-    cpu = M68K_CPU(cpu_create_orphan(machine->cpu_type));
++    cpu = M68K_CPU(cpu_create(OBJECT(machine), "cpu", machine->cpu_type));
+ 
+     reset_info->cpu = cpu;
+     qemu_register_reset(main_cpu_reset, reset_info);
+@@ -155,10 +155,10 @@ static void virt_init(MachineState *machine)
+ 
+     /* IRQ Controller */
+ 
+-    irqc_dev = qdev_new_orphan(TYPE_M68K_IRQC);
++    irqc_dev = qdev_new(OBJECT(machine), "irqc", TYPE_M68K_IRQC);
+     object_property_set_link(OBJECT(irqc_dev), "m68k-cpu",
+                              OBJECT(cpu), &error_abort);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(irqc_dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(irqc_dev), &error_fatal);
+ 
+     /*
+      * 6 goldfish-pic
+@@ -169,10 +169,10 @@ static void virt_init(MachineState *machine)
+      */
+     io_base = VIRT_GF_PIC_MMIO_BASE;
+     for (i = 0; i < VIRT_GF_PIC_NB; i++) {
+-        pic_dev[i] = qdev_new_orphan(TYPE_GOLDFISH_PIC);
++        pic_dev[i] = qdev_new(OBJECT(machine), "pic[*]", TYPE_GOLDFISH_PIC);
+         sysbus = SYS_BUS_DEVICE(pic_dev[i]);
+         qdev_prop_set_uint8(pic_dev[i], "index", i);
+-        sysbus_realize_and_unref(sysbus, &error_fatal);
++        sysbus_realize(sysbus, &error_fatal);
+ 
+         sysbus_mmio_map(sysbus, 0, io_base);
+         sysbus_connect_irq(sysbus, 0, qdev_get_gpio_in(irqc_dev, i));
+@@ -183,10 +183,10 @@ static void virt_init(MachineState *machine)
+     /* goldfish-rtc */
+     io_base = VIRT_GF_RTC_MMIO_BASE;
+     for (i = 0; i < VIRT_GF_RTC_NB; i++) {
+-        dev = qdev_new_orphan(TYPE_GOLDFISH_RTC);
++        dev = qdev_new(OBJECT(machine), "rtc[*]", TYPE_GOLDFISH_RTC);
+         qdev_prop_set_bit(dev, "big-endian", true);
+         sysbus = SYS_BUS_DEVICE(dev);
+-        sysbus_realize_and_unref(sysbus, &error_fatal);
++        sysbus_realize(sysbus, &error_fatal);
+         sysbus_mmio_map(sysbus, 0, io_base);
+         sysbus_connect_irq(sysbus, 0, PIC_GPIO(VIRT_GF_RTC_IRQ_BASE + i));
+ 
+@@ -194,24 +194,25 @@ static void virt_init(MachineState *machine)
      }
- };
  
--I2CSlave *i2c_slave_new_orphan(const char *name, uint8_t addr)
--{
--    DeviceState *dev;
--
--    dev = qdev_new_orphan(name);
--    qdev_prop_set_uint8(dev, "address", addr);
--    return I2C_SLAVE(dev);
--}
--
- I2CSlave *i2c_slave_new(Object *parent, const char *id,
-                         const char *type, uint8_t addr)
- {
-@@ -398,15 +389,6 @@ bool i2c_slave_realize_and_unref(I2CSlave *dev, I2CBus *bus, Error **errp)
-     return qdev_realize_and_unref(&dev->qdev, &bus->qbus, errp);
- }
+     /* goldfish-tty */
+-    dev = qdev_new_orphan(TYPE_GOLDFISH_TTY);
++    dev = qdev_new(OBJECT(machine), "tty", TYPE_GOLDFISH_TTY);
+     sysbus = SYS_BUS_DEVICE(dev);
+     qdev_prop_set_chr(dev, "chardev", serial_hd(0));
+-    sysbus_realize_and_unref(sysbus, &error_fatal);
++    sysbus_realize(sysbus, &error_fatal);
+     sysbus_mmio_map(sysbus, 0, VIRT_GF_TTY_MMIO_BASE);
+     sysbus_connect_irq(sysbus, 0, PIC_GPIO(VIRT_GF_TTY_IRQ_BASE));
  
--I2CSlave *i2c_slave_create_simple_orphan(I2CBus *bus, const char *name, uint8_t addr)
--{
--    I2CSlave *dev = i2c_slave_new_orphan(name, addr);
--
--    i2c_slave_realize_and_unref(dev, bus, &error_abort);
--
--    return dev;
--}
--
- static bool i2c_slave_match(I2CSlave *candidate, uint8_t address,
-                             bool broadcast, I2CNodeList *current_devs)
- {
-diff --git a/hw/ssi/ssi.c b/hw/ssi/ssi.c
-index 6031cde7b0..07188d87bb 100644
---- a/hw/ssi/ssi.c
-+++ b/hw/ssi/ssi.c
-@@ -147,14 +147,6 @@ DeviceState *ssi_create_peripheral(Object *parent, const char *id,
-     return dev;
- }
+     /* virt controller */
+-    dev = sysbus_create_simple_orphan(TYPE_VIRT_CTRL, VIRT_CTRL_MMIO_BASE,
++    dev = sysbus_create_simple(OBJECT(machine), "virt-ctrl", TYPE_VIRT_CTRL,
++                               VIRT_CTRL_MMIO_BASE,
+                                PIC_GPIO(VIRT_CTRL_IRQ_BASE));
  
--DeviceState *ssi_create_peripheral_orphan(SSIBus *bus, const char *name)
--{
--    DeviceState *dev = qdev_new_orphan(name);
--
--    ssi_realize_and_unref(dev, bus, &error_fatal);
--    return dev;
--}
--
- SSIBus *ssi_create_bus(DeviceState *parent, const char *name)
- {
-     BusState *bus;
-diff --git a/include/hw/i2c/i2c.h b/include/hw/i2c/i2c.h
-index 0bba1a7c20..c0829edf8f 100644
---- a/include/hw/i2c/i2c.h
-+++ b/include/hw/i2c/i2c.h
-@@ -154,17 +154,6 @@ uint8_t i2c_recv(I2CBus *bus);
- bool i2c_scan_bus(I2CBus *bus, uint8_t address, bool broadcast,
-                   I2CNodeList *current_devs);
+     /* virtio-mmio */
+     io_base = VIRT_VIRTIO_MMIO_BASE;
+     for (i = 0; i < 128; i++) {
+-        dev = qdev_new_orphan(TYPE_VIRTIO_MMIO);
++        dev = qdev_new(OBJECT(machine), "virtio-mmio[*]", TYPE_VIRTIO_MMIO);
+         qdev_prop_set_bit(dev, "force-legacy", false);
+         sysbus = SYS_BUS_DEVICE(dev);
+-        sysbus_realize_and_unref(sysbus, &error_fatal);
++        sysbus_realize(sysbus, &error_fatal);
+         sysbus_connect_irq(sysbus, 0, PIC_GPIO(VIRT_VIRTIO_IRQ_BASE + i));
+         sysbus_mmio_map(sysbus, 0, io_base);
+         io_base += 0x200;
+diff --git a/include/hw/m68k/mcf.h b/include/hw/m68k/mcf.h
+index b2a599adaa..ff818c55d0 100644
+--- a/include/hw/m68k/mcf.h
++++ b/include/hw/m68k/mcf.h
+@@ -14,7 +14,7 @@ DeviceState *mcf_uart_create(qemu_irq irq, Chardev *chr);
+ DeviceState *mcf_uart_create_mmap(hwaddr base, qemu_irq irq, Chardev *chr);
  
--/**
-- * Create an I2C slave device on the heap.
-- * @name: a device type name
-- * @addr: I2C address of the slave when put on a bus
-- *
-- * This only initializes the device state structure and allows
-- * properties to be set. Type @name must exist. The device still
-- * needs to be realized. See qdev-core.h.
-- */
--I2CSlave *i2c_slave_new_orphan(const char *name, uint8_t addr);
--
- /**
-  * Create a parented I2C slave device on the heap.
-  * @parent: the QOM parent
-@@ -172,24 +161,12 @@ I2CSlave *i2c_slave_new_orphan(const char *name, uint8_t addr);
-  * @type: I2C slave device type name
-  * @addr: I2C address of the slave when put on a bus
-  *
-- * Like i2c_slave_new_orphan(), but the returned device is owned by
-+ * Like i2c_slave_new(), but the returned device is owned by
-  * @parent's child<> property.  Pair with qdev_realize().
-  */
- I2CSlave *i2c_slave_new(Object *parent, const char *id,
-                         const char *type, uint8_t addr);
+ /* mcf_intc.c */
+-DeviceState *mcf_intc_init(struct MemoryRegion *sysmem,
++DeviceState *mcf_intc_init(Object *parent, struct MemoryRegion *sysmem,
+                            hwaddr base, M68kCPU *cpu);
  
--/**
-- * Create and realize an I2C slave device on the heap.
-- * @bus: I2C bus to put it on
-- * @name: I2C slave device type name
-- * @addr: I2C address of the slave when put on a bus
-- *
-- * Create the device state structure, initialize it, put it on the
-- * specified @bus, and drop the reference to it (the device is realized).
-- */
--I2CSlave *i2c_slave_create_simple_orphan(I2CBus *bus, const char *name,
--                                         uint8_t addr);
--
- /**
-  * Create, parent and realize an I2C slave device on the heap.
-  * @parent: the QOM parent
-@@ -218,11 +195,11 @@ I2CSlave *i2c_slave_create_simple(Object *parent, const char *id,
-  * Call 'realize' on @dev, put it on the specified @bus, and drop the
-  * reference to it.
-  *
-- * This function is useful if you have created @dev via qdev_new_orphan(),
-- * i2c_slave_new_orphan() or i2c_slave_try_new() (which take a reference to
-+ * This function is useful if you have created @dev via qdev_new(),
-+ * i2c_slave_new() or i2c_slave_try_new() (which take a reference to
-  * the device it returns to you), so that you can set properties on it
-  * before realizing it. If you don't need to set properties then
-- * i2c_slave_create_simple_orphan() is probably better (as it does the create,
-+ * i2c_slave_create_simple() is probably better (as it does the create,
-  * init and realize in one step).
-  *
-  * If you are embedding the I2C slave into another QOM device and
-diff --git a/include/hw/ssi/ssi.h b/include/hw/ssi/ssi.h
-index 36ed002281..b2a264bb55 100644
---- a/include/hw/ssi/ssi.h
-+++ b/include/hw/ssi/ssi.h
-@@ -83,7 +83,6 @@ extern const VMStateDescription vmstate_ssi_peripheral;
- 
- DeviceState *ssi_create_peripheral(Object *parent, const char *id,
-                                     SSIBus *bus, const char *type);
--DeviceState *ssi_create_peripheral_orphan(SSIBus *bus, const char *name);
- /**
-  * ssi_realize_and_unref: realize and unref an SSI peripheral
-  * @dev: SSI peripheral to realize
-@@ -94,10 +93,10 @@ DeviceState *ssi_create_peripheral_orphan(SSIBus *bus, const char *name);
-  * reference to it. Errors are reported via @errp and by returning
-  * false.
-  *
-- * This function is useful if you have created @dev via qdev_new_orphan()
-+ * This function is useful if you have created @dev via qdev_new()
-  * (which takes a reference to the device it returns to you), so that
-  * you can set properties on it before realizing it. If you don't need
-- * to set properties then ssi_create_peripheral_orphan() is probably better (as it
-+ * to set properties then ssi_create_peripheral() is probably better (as it
-  * does the create, init and realize in one step).
-  *
-  * If you are embedding the SSI peripheral into another QOM device and
-diff --git a/include/hw/usb/usb.h b/include/hw/usb/usb.h
-index 1ae1f40aa9..d2e59bc83b 100644
---- a/include/hw/usb/usb.h
-+++ b/include/hw/usb/usb.h
-@@ -599,13 +599,4 @@ static inline USBDevice *usb_create_simple(Object *parent, const char *id,
-     return dev;
- }
- 
--static inline USBDevice *usb_create_simple_orphan(USBBus *bus,
--                                                    const char *name)
--{
--    USBDevice *dev = USB_DEVICE(qdev_new_orphan(name));
--
--    usb_realize_and_unref(dev, bus, &error_abort);
--    return dev;
--}
--
- #endif
+ /* mcf5206.c */
 -- 
 2.47.1
 
