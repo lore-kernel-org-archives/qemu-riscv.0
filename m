@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C557FC43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:39:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6192BC43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:39:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiDz-0001ja-OW; Sat, 11 Jul 2026 20:39:17 -0400
+	id 1wiiEF-0001qF-99; Sat, 11 Jul 2026 20:39:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigRk-0005Ir-6T; Sat, 11 Jul 2026 18:45:21 -0400
-Received: from pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.35.192.45])
+ id 1wigo1-0007OD-6N; Sat, 11 Jul 2026 19:08:21 -0400
+Received: from pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([35.155.198.111])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigRi-0006va-BY; Sat, 11 Jul 2026 18:45:19 -0400
+ id 1wignx-00040w-Sd; Sat, 11 Jul 2026 19:08:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783809918; x=1815345918;
+ t=1783811297; x=1815347297;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Y2TUUu2qqLIXNp2cpfe0Ogcsy7/erOc56olEpJ6irWc=;
- b=j7eqN1kATrAtBaCh0+07OfbFnEU8jZALVWL10Pt1qQZmGA7fT+vQtMni
- wmDfr0X82SGId+Fn6B/3L36pVQXjUo68MF8CY1+Ee2yeE6PeCZjWHsFZe
- 9Xq5kVIirWFekkW9dmUodwdeS9cjy+V6XTrOZXX3iBi4MKDAMTA+cNOXn
- URbLjX59I+UcN8WmR+cTptAEn9y5f5pS1v34kTIe2Wpqp55iwDy/0tlnY
- KUKtLNmBJMzHM68O7er6lbZExSbqP0sr/92bC98Zmf/jLjHV/9c4fkcRG
- 7B97ycO0Gd6mE9W8iZf1ryzXouBk3mQ3WuYl1blHY4DnWVgM0Kl5SHtQe g==;
-X-CSE-ConnectionGUID: Jz2PoMFgSUiJP8SpcAJJ1Q==
-X-CSE-MsgGUID: kppH2PwkRhy2zEEJRBO3yg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23269649"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:45:12 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:30324]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.40.123:2525]
+ bh=i/Hf/CC9n0E6uWWRloIhxXYo3/PHlHdMS6c+m1UmphE=;
+ b=pIgpMdOd5zwIiwnvodRBl11CpGpI9CE6Tz3lKuTuJ5/31BqBpbWig8Q6
+ ZPLvezAKgKXeVHplTzMtvjBGcPNozxHJBfHy5b8nBfAh7OUmob3r+/VJ2
+ 3GV7yKGtiqskfG9ZAmrF/0ddbawBnIqv/EgARGSaPS4Q7r/swW/Iru5OF
+ dmZn7HNRQAmS9RJM7XORu2XyIqG/CXSVZxAD3O2BnCAt+MgoPymrKg0r4
+ kWdvI7on/PJ+yiE/GKPnDBaBAGXsNCFyseo/qM9sUVd9v2nuxf8we3HWq
+ Vcx/q9sUrOD8AhszgNi9M9YlYWcboIGNKadx3EY+bQRejm9DLMNI3DFKE Q==;
+X-CSE-ConnectionGUID: zyMz+3qfQKq9jVsUr9v0Vg==
+X-CSE-MsgGUID: gB76WvxdS7q26FgZ8F47qQ==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23390775"
+Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
+ by internal-pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:08:14 +0000
+Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:16608]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525]
  with esmtp (Farcaster)
- id abcfa963-2c60-46be-bee0-51f676f104bd; Sat, 11 Jul 2026 22:45:12 +0000 (UTC)
-X-Farcaster-Flow-ID: abcfa963-2c60-46be-bee0-51f676f104bd
+ id 0bb4526d-b27c-4c11-afaa-8f6891211b52; Sat, 11 Jul 2026 23:08:14 +0000 (UTC)
+X-Farcaster-Flow-ID: 0bb4526d-b27c-4c11-afaa-8f6891211b52
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
  EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:45:11 +0000
+ Sat, 11 Jul 2026 23:08:14 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:45:03 +0000
+ Sat, 11 Jul 2026 23:08:05 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 030/134] hw/cxl: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:23 +0000
-Message-ID: <20260711223707.42139-31-graf@amazon.com>
+Subject: [RFC PATCH 118/134] accel: Parent the accelerator singleton under
+ /machine
+Date: Sat, 11 Jul 2026 22:36:51 +0000
+Message-ID: <20260711223707.42139-119-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +102,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D032UWB001.ant.amazon.com (10.13.139.152) To
+X-ClientProxiedBy: EX19D044UWB002.ant.amazon.com (10.13.139.188) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.35.192.45;
+Received-SPF: pass client-ip=35.155.198.111;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -115,7 +116,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,63 +131,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/cxl to the new
-parented API introduced earlier in this series, so every onboard
-device gets a stable path in the composition tree instead of landing
-in /machine/unattached with an unstable device[N] name.
+do_configure_accelerator() runs after qemu_create_machine(), so
+current_machine is available.  Give the AccelState singleton a
+canonical path at /machine/accel and drop the floating caller
+reference; on init failure, unparent instead of unref.
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing device for
-composite children.  Names follow existing QOM conventions.
-
-Per-site rationale (reviewers: dispute the modeling here):
-
-hw/cxl/cxl-host.c:29 | qdev_new | parent (new arg) | "cxl-fmw[*]" | Property setter machine_set_cfmw() has Object *obj = machine; thread it through as parent for each fixed memory window
-
-Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/cxl/cxl-host.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ accel/accel-system.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/hw/cxl/cxl-host.c b/hw/cxl/cxl-host.c
-index c7a40a81f0..91ccd0d57c 100644
---- a/hw/cxl/cxl-host.c
-+++ b/hw/cxl/cxl-host.c
-@@ -22,11 +22,12 @@
- #include "hw/pci/pcie_port.h"
- #include "hw/pci-bridge/pci_expander_bridge.h"
- 
--static void cxl_fixed_memory_window_config(CXLFixedMemoryWindowOptions *object,
-+static void cxl_fixed_memory_window_config(Object *parent,
-+                                           CXLFixedMemoryWindowOptions *object,
-                                            int index, Error **errp)
- {
-     ERRP_GUARD();
--    DeviceState *dev = qdev_new_orphan(TYPE_CXL_FMW);
-+    DeviceState *dev = qdev_new(parent, "cxl-fmw[*]", TYPE_CXL_FMW);
-     CXLFixedWindow *fw = CXL_FMW(dev);
-     strList *target;
-     int i;
-@@ -67,7 +68,7 @@ static void cxl_fixed_memory_window_config(CXLFixedMemoryWindowOptions *object,
-         fw->targets[i] = g_strdup(target->value);
+diff --git a/accel/accel-system.c b/accel/accel-system.c
+index 9176665202..987c982c16 100644
+--- a/accel/accel-system.c
++++ b/accel/accel-system.c
+@@ -41,12 +41,14 @@ int accel_init_machine(AccelState *accel, MachineState *ms)
+     AccelClass *acc = ACCEL_GET_CLASS(accel);
+     int ret;
+     ms->accelerator = accel;
++    object_property_add_child(OBJECT(ms), "accel", OBJECT(accel));
++    object_unref(OBJECT(accel));
+     *(acc->allowed) = true;
+     ret = acc->init_machine(accel, ms);
+     if (ret < 0) {
+         ms->accelerator = NULL;
+         *(acc->allowed) = false;
+-        object_unref(OBJECT(accel));
++        object_unparent(OBJECT(accel));
+     } else {
+         object_set_accelerator_compat_props(acc->compat_props);
      }
- 
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), errp);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), errp);
- }
- 
- static int cxl_fmws_link(Object *obj, void *opaque)
-@@ -557,7 +558,7 @@ static void machine_set_cfmw(Object *obj, Visitor *v, const char *name,
-     }
- 
-     for (it = cfmw_list, index = 0; it; it = it->next, index++) {
--        cxl_fixed_memory_window_config(it->value, index, errp);
-+        cxl_fixed_memory_window_config(obj, it->value, index, errp);
-     }
-     state->cfmw_list = cfmw_list;
- }
 -- 
 2.47.1
 
