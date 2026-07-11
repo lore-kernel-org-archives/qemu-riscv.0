@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55EBC44506
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33693C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEs-000348-NU; Sat, 11 Jul 2026 20:40:10 -0400
+	id 1wiiEP-00029k-85; Sat, 11 Jul 2026 20:39:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigPR-00083V-NZ; Sat, 11 Jul 2026 18:42:59 -0400
-Received: from pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.35.192.45])
+ id 1wighH-0002cn-C6; Sat, 11 Jul 2026 19:01:25 -0400
+Received: from pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([34.218.115.239])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigPN-0006N2-Q3; Sat, 11 Jul 2026 18:42:57 -0400
+ id 1wighF-0002LG-2R; Sat, 11 Jul 2026 19:01:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783809773; x=1815345773;
+ t=1783810881; x=1815346881;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=amUTtS63hZcSlS7OoveApwBcr3wy0b53OLhAMkpFVuY=;
- b=gsR6QgCsFYKQv6FnrtFNwcTpmeP66PjcZ/nn5NN9VFLCpLPJTi7k0CjO
- huzAwYKGLuHHURA1SUurIq1KXu5aJEhfIh6vWnVKYyR23mM6nGUqJNI4M
- 9yRh4nSceui2bc5e4/cnnpl1EGde6geaHveTzqOJiOXcdt1P26lCG5ddT
- UIcVs4ILdIYWjN/E4cE/RJBb4xmIgOD1PMHx1pr0RngoiwTnmVUwSERLy
- hFd+qMxekzK2ce3k+4YNBfrpvuNk2PgreUPJ9cVz9MMbpGlC/k9QR/DYY
- Sb0K03HUR2IJgEFnPLajRaRc+yNC1Ow4fyraZSy8hujUTThdZMSh4OcLb w==;
-X-CSE-ConnectionGUID: MWq9QtFtQgy8xqEt9S2dPw==
-X-CSE-MsgGUID: U34BOxd1Qg6i19uikBh5vg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23269615"
-Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
- by internal-pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:42:50 +0000
-Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:27198]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.33:2525]
+ bh=yIUqaaVOKyW6WE6UpNA0Yu8tEW8Hhu7gGasqeX93vnc=;
+ b=oxEsD8U2WTbH5qoq/ruBchlVu2RJ9YQCoeGRwiCzMb6YbxQVvPGPKtZT
+ dc315JpdRwbNutxg05g5ZMmNfitgTbvsQFhE7TNbVU2NceWXKc7ec+q08
+ P9FlClRH4V/DVYC55zskKyH/g028esflNZA1RvUnkEEO9pxyeFOdNo/Uu
+ eoC/sbQ9x3Tk1P7awa9VgEIPeB6A94Tq5ucsodv3a3hrE8p+E7NO8fEk6
+ XcU1ABnjL3xRaYdS36Zb9yC/NF7+Ia0eteQRSVdBzHLTj0FQJphKD6gzo
+ uoeL3Vg8OgFViYkCp4Qe2A1VogFWb1aLcAJOLmaqhiTvCO+QhjrSmrUGo Q==;
+X-CSE-ConnectionGUID: fuMYKtZcRkObAiwvL/1PQQ==
+X-CSE-MsgGUID: CHb0sgUEQRK3FrClhaPqQQ==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23296882"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:01:17 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:24263]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.115:2525]
  with esmtp (Farcaster)
- id a184983d-b27e-49e2-acad-b48f7b292003; Sat, 11 Jul 2026 22:42:50 +0000 (UTC)
-X-Farcaster-Flow-ID: a184983d-b27e-49e2-acad-b48f7b292003
+ id 36bfcfa6-394a-47cd-9a76-514b4182d1bb; Sat, 11 Jul 2026 23:01:17 +0000 (UTC)
+X-Farcaster-Flow-ID: 36bfcfa6-394a-47cd-9a76-514b4182d1bb
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
+ EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:42:49 +0000
+ Sat, 11 Jul 2026 23:01:17 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:42:41 +0000
+ Sat, 11 Jul 2026 23:01:08 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 021/134] hw/loongarch: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:14 +0000
-Message-ID: <20260711223707.42139-22-graf@amazon.com>
+Subject: [RFC PATCH 092/134] hw/riscv: Give memory regions an explicit owner
+Date: Sat, 11 Jul 2026 22:36:25 +0000
+Message-ID: <20260711223707.42139-93-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D044UWB001.ant.amazon.com (10.13.139.171) To
+X-ClientProxiedBy: EX19D032UWB002.ant.amazon.com (10.13.139.190) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.35.192.45;
+Received-SPF: pass client-ip=34.218.115.239;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -115,7 +115,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,180 +130,204 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/loongarch to the new
-parented API introduced earlier in this series, so every onboard
-device gets a stable path in the composition tree instead of landing
-in /machine/unattached with an unstable device[N] name.
+Convert memory_region_init*() calls that pass NULL owner to pass
+the enclosing machine or SoC device instead. All sites are inside
+board init (MachineState *machine) or SoC realize (DeviceState *dev)
+functions.
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing device for
-composite children.  Names follow existing QOM conventions.
+No functional change intended.
 
-Per-site rationale (reviewers: dispute the modeling here):
-
-file:line | creator | parent | name | rationale
-hw/loongarch/virt.c:153 | qdev_new | OBJECT(lvms) | name | board-init helper already receives lvms + child name; drop redundant object_property_add_child()
-hw/loongarch/virt.c:298 | qdev_new | OBJECT(lvms) | "acpi-ged" | board-init helper receives LoongArchVirtMachineState *lvms
-hw/loongarch/virt.c:325 | qdev_new | parent | "platform-bus" | static helper w/o parent ptr; add Object *parent first arg, thread OBJECT(lvms) from caller
-hw/loongarch/virt.c:403 | qdev_new | OBJECT(lvms) | "pci-host" | board-init helper receives lvms
-hw/loongarch/virt.c:488 | sysbus_create_simple | OBJECT(lvms) | "rtc" | board-init helper receives lvms
-hw/loongarch/virt.c:604 | qdev_new | OBJECT(lvms) | "ipi" | virt_irq_init() receives lvms
-hw/loongarch/virt.c:610 | qdev_new | OBJECT(lvms) | "dintc" | virt_irq_init() receives lvms
-hw/loongarch/virt.c:617 | qdev_new | OBJECT(lvms) | "extioi" | virt_irq_init() receives lvms
-hw/loongarch/virt.c:625 | qdev_new | OBJECT(lvms) | "pch-pic" | virt_irq_init() receives lvms
-hw/loongarch/virt.c:631 | qdev_new | OBJECT(lvms) | "pch-msi" | virt_irq_init() receives lvms
-
-Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/loongarch/virt.c | 43 +++++++++++++++++++++----------------------
- 1 file changed, 21 insertions(+), 22 deletions(-)
+ hw/riscv/boston-aia.c           |  8 ++++----
+ hw/riscv/microblaze-v-generic.c |  4 ++--
+ hw/riscv/microchip_pfsoc.c      | 14 +++++++-------
+ hw/riscv/sifive_u.c             |  4 ++--
+ hw/riscv/spike.c                |  2 +-
+ hw/riscv/tt_atlantis.c          |  2 +-
+ hw/riscv/virt.c                 |  2 +-
+ 7 files changed, 18 insertions(+), 18 deletions(-)
 
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 45acdc3ec1..6ba693874f 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -150,7 +150,7 @@ static PFlashCFI01 *virt_flash_create1(LoongArchVirtMachineState *lvms,
-                                        const char *name,
-                                        const char *alias_prop_name)
- {
--    DeviceState *dev = qdev_new_orphan(TYPE_PFLASH_CFI01);
-+    DeviceState *dev = qdev_new(OBJECT(lvms), name, TYPE_PFLASH_CFI01);
+diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
+index 5a9ec28068..ef41f53aac 100644
+--- a/hw/riscv/boston-aia.c
++++ b/hw/riscv/boston-aia.c
+@@ -374,7 +374,7 @@ static void boston_mach_init(MachineState *machine)
+     sysbus_mmio_map_overlap(SYS_BUS_DEVICE(&s->cps), 0, 0, 1);
  
-     qdev_prop_set_uint64(dev, "sector-length", VIRT_FLASH_SECTOR_SIZE);
-     qdev_prop_set_uint8(dev, "width", 4);
-@@ -161,7 +161,6 @@ static PFlashCFI01 *virt_flash_create1(LoongArchVirtMachineState *lvms,
-     qdev_prop_set_uint16(dev, "id2", 0x00);
-     qdev_prop_set_uint16(dev, "id3", 0x00);
-     qdev_prop_set_string(dev, "name", name);
--    object_property_add_child(OBJECT(lvms), name, OBJECT(dev));
-     object_property_add_alias(OBJECT(lvms), alias_prop_name,
-                               OBJECT(dev), "drive");
-     return PFLASH_CFI01(dev);
-@@ -191,7 +190,7 @@ static void virt_flash_map1(PFlashCFI01 *flash,
-     assert(real_size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
+     flash =  g_new(MemoryRegion, 1);
+-    memory_region_init_rom(flash, NULL, "boston.flash",
++    memory_region_init_rom(flash, OBJECT(machine), "boston.flash",
+                            boston_memmap[BOSTON_FLASH].size, &error_fatal);
+     memory_region_add_subregion_overlap(sys_mem,
+                                         boston_memmap[BOSTON_FLASH].base,
+@@ -385,7 +385,7 @@ static void boston_mach_init(MachineState *machine)
+                                         machine->ram, 0);
  
-     qdev_prop_set_uint32(dev, "num-blocks", real_size / VIRT_FLASH_SECTOR_SIZE);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
-     memory_region_add_subregion(sysmem, base,
-                                 sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
- }
-@@ -295,9 +294,9 @@ static DeviceState *create_acpi_ged(DeviceState *pch_pic,
-         event |= ACPI_GED_CPU_HOTPLUG_EVT;
-     }
+     ddr_low_alias = g_new(MemoryRegion, 1);
+-    memory_region_init_alias(ddr_low_alias, NULL, "boston_low.ddr",
++    memory_region_init_alias(ddr_low_alias, OBJECT(machine), "boston_low.ddr",
+                              machine->ram, 0,
+                              MIN(machine->ram_size, (256 * MiB)));
+     memory_region_add_subregion_overlap(sys_mem, 0, ddr_low_alias, 0);
+@@ -398,7 +398,7 @@ static void boston_mach_init(MachineState *machine)
+                              qdev_get_gpio_in(s->cps.aplic, PCIE2_INT));
  
--    dev = qdev_new_orphan(TYPE_ACPI_GED);
-+    dev = qdev_new(OBJECT(lvms), "acpi-ged", TYPE_ACPI_GED);
-     qdev_prop_set_uint32(dev, "ged-event", event);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     platreg = g_new(MemoryRegion, 1);
+-    memory_region_init_io(platreg, NULL, &boston_platreg_ops, s,
++    memory_region_init_io(platreg, OBJECT(machine), &boston_platreg_ops, s,
+                           "boston-platregs",
+                           boston_memmap[BOSTON_PLATREG].size);
+     memory_region_add_subregion_overlap(sys_mem,
+@@ -410,7 +410,7 @@ static void boston_mach_init(MachineState *machine)
+                              serial_hd(0), DEVICE_LITTLE_ENDIAN);
  
-     /* ged event */
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, VIRT_GED_EVT_ADDR);
-@@ -315,18 +314,18 @@ static DeviceState *create_acpi_ged(DeviceState *pch_pic,
-     return dev;
- }
+     lcd = g_new(MemoryRegion, 1);
+-    memory_region_init_io(lcd, NULL, &boston_lcd_ops, s, "boston-lcd", 0x8);
++    memory_region_init_io(lcd, OBJECT(machine), &boston_lcd_ops, s, "boston-lcd", 0x8);
+     memory_region_add_subregion_overlap(sys_mem,
+                                         boston_memmap[BOSTON_LCD].base, lcd, 0);
  
--static DeviceState *create_platform_bus(DeviceState *pch_pic)
-+static DeviceState *create_platform_bus(Object *parent, DeviceState *pch_pic)
- {
-     DeviceState *dev;
-     SysBusDevice *sysbus;
-     int i, irq;
-     MemoryRegion *sysmem = get_system_memory();
+diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-generic.c
+index 7253ae7822..0a83932405 100644
+--- a/hw/riscv/microblaze-v-generic.c
++++ b/hw/riscv/microblaze-v-generic.c
+@@ -70,12 +70,12 @@ static void mb_v_generic_init(MachineState *machine)
+     object_property_set_bool(OBJECT(cpu), "d", false, NULL);
+     qdev_realize(DEVICE(cpu), NULL, &error_abort);
+     /* Attach emulated BRAM through the LMB.  */
+-    memory_region_init_ram(phys_lmb_bram, NULL,
++    memory_region_init_ram(phys_lmb_bram, OBJECT(machine),
+                            "mb_v.lmb_bram", LMB_BRAM_SIZE,
+                            &error_fatal);
+     memory_region_add_subregion(sysmem, 0x00000000, phys_lmb_bram);
  
--    dev = qdev_new_orphan(TYPE_PLATFORM_BUS_DEVICE);
-+    dev = qdev_new(parent, "platform-bus", TYPE_PLATFORM_BUS_DEVICE);
-     dev->id = g_strdup(TYPE_PLATFORM_BUS_DEVICE);
-     qdev_prop_set_uint32(dev, "num_irqs", VIRT_PLATFORM_BUS_NUM_IRQS);
-     qdev_prop_set_uint32(dev, "mmio_size", VIRT_PLATFORM_BUS_SIZE);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+-    memory_region_init_ram(phys_ram, NULL, "mb_v.ram",
++    memory_region_init_ram(phys_ram, OBJECT(machine), "mb_v.ram",
+                            ram_size, &error_fatal);
+     memory_region_add_subregion(sysmem, ddr_base, phys_ram);
  
-     sysbus = SYS_BUS_DEVICE(dev);
-     for (i = 0; i < VIRT_PLATFORM_BUS_NUM_IRQS; i++) {
-@@ -400,9 +399,9 @@ static void virt_devices_init(DeviceState *pch_pic,
-     hwaddr mmio_base, mmio_size;
-     int i, irq;
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index 0a98ac1c5e..f1ee64ef86 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -219,14 +219,14 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     qdev_realize(DEVICE(&s->u_cluster), NULL, &error_abort);
  
--    gpex_dev = qdev_new_orphan(TYPE_GPEX_HOST);
-+    gpex_dev = qdev_new(OBJECT(lvms), "pci-host", TYPE_GPEX_HOST);
-     d = SYS_BUS_DEVICE(gpex_dev);
--    sysbus_realize_and_unref(d, &error_fatal);
-+    sysbus_realize(d, &error_fatal);
-     pci_bus = PCI_HOST_BRIDGE(gpex_dev)->bus;
-     lvms->gpex.pio.base = VIRT_PCI_IO_BASE;
-     lvms->gpex.pio.size = VIRT_PCI_IO_SIZE;
-@@ -485,14 +484,14 @@ static void virt_devices_init(DeviceState *pch_pic,
-      * Create some unimplemented devices to emulate this.
+     /* Reserved Memory at address 0 */
+-    memory_region_init_ram(rsvd0_mem, NULL, "microchip.pfsoc.rsvd0_mem",
++    memory_region_init_ram(rsvd0_mem, OBJECT(dev), "microchip.pfsoc.rsvd0_mem",
+                            memmap[MICROCHIP_PFSOC_RSVD0].size, &error_fatal);
+     memory_region_add_subregion(system_memory,
+                                 memmap[MICROCHIP_PFSOC_RSVD0].base,
+                                 rsvd0_mem);
+ 
+     /* E51 DTIM */
+-    memory_region_init_ram(e51_dtim_mem, NULL, "microchip.pfsoc.e51_dtim_mem",
++    memory_region_init_ram(e51_dtim_mem, OBJECT(dev), "microchip.pfsoc.e51_dtim_mem",
+                            memmap[MICROCHIP_PFSOC_E51_DTIM].size, &error_fatal);
+     memory_region_add_subregion(system_memory,
+                                 memmap[MICROCHIP_PFSOC_E51_DTIM].base,
+@@ -271,7 +271,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+      * leave it enabled all the time. This won't break anything, but will be
+      * too generous to misbehaving guests.
       */
-     create_unimplemented_device("pci-dma-cfg", 0x1001041c, 0x4);
--    sysbus_create_simple_orphan("ls7a_rtc", VIRT_RTC_REG_BASE,
-+    sysbus_create_simple(OBJECT(lvms), "rtc", "ls7a_rtc", VIRT_RTC_REG_BASE,
-                          qdev_get_gpio_in(pch_pic,
-                          VIRT_RTC_IRQ - VIRT_GSI_BASE));
+-    memory_region_init_ram(l2lim_mem, NULL, "microchip.pfsoc.l2lim",
++    memory_region_init_ram(l2lim_mem, OBJECT(dev), "microchip.pfsoc.l2lim",
+                            memmap[MICROCHIP_PFSOC_L2LIM].size, &error_fatal);
+     memory_region_add_subregion(system_memory,
+                                 memmap[MICROCHIP_PFSOC_L2LIM].base,
+@@ -549,10 +549,10 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+     /* Split RAM into low and high regions using aliases to machine->ram */
+     mem_low_size = memmap[MICROCHIP_PFSOC_DRAM_LO].size;
+     mem_high_size = machine->ram_size - mem_low_size;
+-    memory_region_init_alias(mem_low, NULL,
++    memory_region_init_alias(mem_low, OBJECT(machine),
+                              "microchip.icicle.kit.ram_low", machine->ram,
+                              0, mem_low_size);
+-    memory_region_init_alias(mem_high, NULL,
++    memory_region_init_alias(mem_high, OBJECT(machine),
+                              "microchip.icicle.kit.ram_high", machine->ram,
+                              mem_low_size, mem_high_size);
  
-     /* acpi ged */
-     lvms->acpi_ged = create_acpi_ged(pch_pic, lvms);
-     /* platform bus */
--    lvms->platform_bus_dev = create_platform_bus(pch_pic);
-+    lvms->platform_bus_dev = create_platform_bus(OBJECT(lvms), pch_pic);
- }
+@@ -565,13 +565,13 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+                                 mem_high);
  
- static void virt_cpu_irq_init(LoongArchVirtMachineState *lvms)
-@@ -601,40 +600,40 @@ static void virt_irq_init(LoongArchVirtMachineState *lvms)
+     /* Create aliases for the low and high RAM regions */
+-    memory_region_init_alias(mem_low_alias, NULL,
++    memory_region_init_alias(mem_low_alias, OBJECT(machine),
+                              "microchip.icicle.kit.ram_low.alias",
+                              mem_low, 0, mem_low_size);
+     memory_region_add_subregion(system_memory,
+                                 memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
+                                 mem_low_alias);
+-    memory_region_init_alias(mem_high_alias, NULL,
++    memory_region_init_alias(mem_high_alias, OBJECT(machine),
+                              "microchip.icicle.kit.ram_high.alias",
+                              mem_high, 0, mem_high_size);
+     memory_region_add_subregion(system_memory,
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index aba6716b73..9d3f5c8f59 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -477,7 +477,7 @@ static void sifive_u_machine_init(MachineState *machine)
+                                 machine->ram);
+ 
+     /* register QSPI0 Flash */
+-    memory_region_init_ram(flash0, NULL, "riscv.sifive.u.flash0",
++    memory_region_init_ram(flash0, OBJECT(machine), "riscv.sifive.u.flash0",
+                            memmap[SIFIVE_U_DEV_FLASH0].size, &error_fatal);
+     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_DEV_FLASH0].base,
+                                 flash0);
+@@ -763,7 +763,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+      * leave it enabled all the time. This won't break anything, but will be
+      * too generous to misbehaving guests.
       */
+-    memory_region_init_ram(l2lim_mem, NULL, "riscv.sifive.u.l2lim",
++    memory_region_init_ram(l2lim_mem, OBJECT(dev), "riscv.sifive.u.l2lim",
+                            memmap[SIFIVE_U_DEV_L2LIM].size, &error_fatal);
+     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_DEV_L2LIM].base,
+                                 l2lim_mem);
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index c53409e4f1..9f1a1b5898 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -179,7 +179,7 @@ static void spike_board_init(MachineState *machine)
+         machine->ram);
  
-     /* Create IPI device */
--    ipi = qdev_new_orphan(TYPE_LOONGARCH_IPI);
-+    ipi = qdev_new(OBJECT(lvms), "ipi", TYPE_LOONGARCH_IPI);
-     lvms->ipi = ipi;
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(ipi), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(ipi), &error_fatal);
+     /* boot rom */
+-    memory_region_init_rom(mask_rom, NULL, "riscv.spike.mrom",
++    memory_region_init_rom(mask_rom, OBJECT(machine), "riscv.spike.mrom",
+                            memmap[SPIKE_MROM].size, &error_fatal);
+     memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
+                                 mask_rom);
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 9ae5af3162..f068d8751e 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -539,7 +539,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
+                                 s->memmap[TT_ATL_DDR_LO].base, ram_lo);
  
-     /* Create DINTC device*/
-     if (virt_has_dmsi(lvms)) {
--        dintc = qdev_new_orphan(TYPE_LOONGARCH_DINTC);
-+        dintc = qdev_new(OBJECT(lvms), "dintc", TYPE_LOONGARCH_DINTC);
-         lvms->dintc = dintc;
--        sysbus_realize_and_unref(SYS_BUS_DEVICE(dintc), &error_fatal);
-+        sysbus_realize(SYS_BUS_DEVICE(dintc), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dintc), 0, VIRT_DINTC_BASE);
-     }
+     /* Boot ROM */
+-    memory_region_init_rom(bootrom, NULL, "tt-atlantis.bootrom",
++    memory_region_init_rom(bootrom, OBJECT(machine), "tt-atlantis.bootrom",
+                            s->memmap[TT_ATL_BOOTROM].size, &error_fatal);
+     memory_region_add_subregion(system_memory, s->memmap[TT_ATL_BOOTROM].base,
+                                 bootrom);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 7e5bdaf210..d1de8bb2be 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1463,7 +1463,7 @@ static void virt_machine_init(MachineState *machine)
+                                 machine->ram);
  
-     /* Create EXTIOI device */
--    extioi = qdev_new_orphan(TYPE_LOONGARCH_EXTIOI);
-+    extioi = qdev_new(OBJECT(lvms), "extioi", TYPE_LOONGARCH_EXTIOI);
-     lvms->extioi = extioi;
-     if (virt_is_veiointc_enabled(lvms)) {
-         qdev_prop_set_bit(extioi, "has-virtualization-extension", true);
-     }
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(extioi), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(extioi), &error_fatal);
- 
-     virt_cpu_irq_init(lvms);
--    pch_pic = qdev_new_orphan(TYPE_LOONGARCH_PIC);
-+    pch_pic = qdev_new(OBJECT(lvms), "pch-pic", TYPE_LOONGARCH_PIC);
-     num = VIRT_PCH_PIC_IRQ_NUM;
-     qdev_prop_set_uint32(pch_pic, "pch_pic_irq_num", num);
-     d = SYS_BUS_DEVICE(pch_pic);
--    sysbus_realize_and_unref(d, &error_fatal);
-+    sysbus_realize(d, &error_fatal);
- 
--    pch_msi = qdev_new_orphan(TYPE_LOONGARCH_PCH_MSI);
-+    pch_msi = qdev_new(OBJECT(lvms), "pch-msi", TYPE_LOONGARCH_PCH_MSI);
-     start   =  num;
-     num = EXTIOI_IRQS - start;
-     qdev_prop_set_uint32(pch_msi, "msi_irq_base", start);
-     qdev_prop_set_uint32(pch_msi, "msi_irq_num", num);
-     d = SYS_BUS_DEVICE(pch_msi);
--    sysbus_realize_and_unref(d, &error_fatal);
-+    sysbus_realize(d, &error_fatal);
-     sysbus_mmio_map(d, 0, VIRT_PCH_MSI_ADDR_LOW);
- 
-     if (kvm_irqchip_in_kernel()) {
+     /* boot rom */
+-    memory_region_init_rom(mask_rom, NULL, "riscv_virt_board.mrom",
++    memory_region_init_rom(mask_rom, OBJECT(machine), "riscv_virt_board.mrom",
+                            s->memmap[VIRT_MROM].size, &error_fatal);
+     memory_region_add_subregion(system_memory, s->memmap[VIRT_MROM].base,
+                                 mask_rom);
 -- 
 2.47.1
 
