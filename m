@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C540C44501
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B44B0C44506
 	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:45:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiDm-0001fU-Pw; Sat, 11 Jul 2026 20:39:02 -0400
+	id 1wiiDm-0001f4-EP; Sat, 11 Jul 2026 20:39:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigfZ-0007hk-CR; Sat, 11 Jul 2026 18:59:38 -0400
-Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.13.214.179])
+ id 1wigch-0001Jj-Ah; Sat, 11 Jul 2026 18:56:39 -0400
+Received: from pdx-out-014.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([35.83.148.184])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigfR-0001gL-I9; Sat, 11 Jul 2026 18:59:32 -0400
+ id 1wigcf-00019T-Fe; Sat, 11 Jul 2026 18:56:39 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810769; x=1815346769;
+ t=1783810597; x=1815346597;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=kt2dEn9aFlPZ6cjaknzUQGuWA9n/MANpwwYTiQOngoY=;
- b=oVq7QlZv+1VWqJn4McSglzjUVaGd2CF7CgY3nEk1TzsFlAtRNaIfBo8g
- Qg8DqFaBrpGgQJwsS+6yWofNvVd5Ps3SFJcc7C+dGS0kYrFkMiLBjLvJ8
- FKj4O0U6bzmW4bIxfzNQhGNdyn49BGzJgPE06X3rpj0+587cAakPU26A8
- KYoWw+sE2Vr31CaOFeVVZltyr8gkHb4hL7Luq25xx2PRbzI5ukL7XHdUZ
- /fvAvVY1mBrM23MBUvak3bvJeYXN/0kVsEQC/83kv/qE30xYH1A3IZjXa
- GKkch7DIYAML3icvENIoLr1mnWuZueioO6p42+hLAgMUUmdDY/ctodWVM w==;
-X-CSE-ConnectionGUID: zl8Tf5aETLSFqDSBef0EaQ==
-X-CSE-MsgGUID: q7hwJd+rTQKjRsMPAeBvzQ==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23479632"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:59:26 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:25563]
+ bh=E9dRs0FfS2zHvxRHxP6oqDuGETedFCsJ5GMIpWF1/Fw=;
+ b=Usr6BjO6opDSrasA42RNCOgl2JZNhrUhhTRY8ACv1xp9ca2zMjVRk4BI
+ gCVsu2vT6w5HjD/4IyNg3aVQk6YCtP5xzKW8mOyGadc41Qw6+glTMRLet
+ ADTYfqOfJ99GZ7kDQ4oiVlWsH4JMd9N81SQ/5U2Sok1L5Ou0TKr66nuym
+ xh4l6eOgqrlEfvuxWlK5+/w4H45WUCvwYz2vT2ZPurIo1eYP4o6r1GsSs
+ P8wVxmZSXjLsp+q8onxT12rF6I5Uksox8QsMGtBcr6qxItLcXbCRmm1L3
+ 75w9lvmpn9Ls1RUtbgDGnXkFul0824AB+pq+tPIkTatnDGb4vMLWDgKVs Q==;
+X-CSE-ConnectionGUID: zD9FUu7zR3Ov7S2RzixzMQ==
+X-CSE-MsgGUID: E09Toe5xTimzPC48FDhyqA==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23287747"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
+ by internal-pdx-out-014.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:56:33 +0000
+Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:2093]
  by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525]
  with esmtp (Farcaster)
- id c2daffbb-ed4d-49a0-935c-ffded380deb5; Sat, 11 Jul 2026 22:59:25 +0000 (UTC)
-X-Farcaster-Flow-ID: c2daffbb-ed4d-49a0-935c-ffded380deb5
+ id 78730497-ad64-435f-a383-db7843ba4d0c; Sat, 11 Jul 2026 22:56:33 +0000 (UTC)
+X-Farcaster-Flow-ID: 78730497-ad64-435f-a383-db7843ba4d0c
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:59:25 +0000
+ Sat, 11 Jul 2026 22:56:33 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:59:16 +0000
+ Sat, 11 Jul 2026 22:56:24 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 084/134] isa: Remove *_orphan() creator variants
-Date: Sat, 11 Jul 2026 22:36:17 +0000
-Message-ID: <20260711223707.42139-85-graf@amazon.com>
+Subject: [RFC PATCH 074/134] hw/i386/pc: Give pcspk a QOM parent
+Date: Sat, 11 Jul 2026 22:36:07 +0000
+Message-ID: <20260711223707.42139-75-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D031UWA004.ant.amazon.com (10.13.139.19) To
+X-ClientProxiedBy: EX19D043UWA001.ant.amazon.com (10.13.139.45) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.13.214.179;
+Received-SPF: pass client-ip=35.83.148.184;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-014.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -130,62 +130,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All boards create their ISA devices with an explicit QOM parent
-now.  Drop isa_new_orphan(), isa_try_new_orphan() and
-isa_create_simple_orphan().
+pcspk was created in pc_machine_initfn() as an orphan and manually
+unref'd in pc_machine_finalize() when the machine was never realized
+(e.g. -M pc,help).  Making it a child<> of the machine at creation
+time lets the QOM property teardown in object_property_del_all()
+handle that lifecycle for free, so pc_machine_finalize() and its
+open-coded refcount juggling can go.
+
+The realize path switches from isa_realize_and_unref() to plain
+qdev_realize() because the reference is now held by the parent's
+child<> property, not the caller.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/isa/isa-bus.c     | 19 -------------------
- include/hw/isa/isa.h |  3 ---
- 2 files changed, 22 deletions(-)
+ hw/i386/pc.c | 14 ++------------
+ 1 file changed, 2 insertions(+), 12 deletions(-)
 
-diff --git a/hw/isa/isa-bus.c b/hw/isa/isa-bus.c
-index 7a6a595ce7..22452e5048 100644
---- a/hw/isa/isa-bus.c
-+++ b/hw/isa/isa-bus.c
-@@ -172,25 +172,6 @@ ISADevice *isa_create_simple(Object *parent, const char *id,
-     return dev;
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index 0c89310ab7..a00d53b582 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -1128,7 +1128,7 @@ void pc_basic_device_init(struct PCMachineState *pcms,
+         }
+         object_property_set_link(OBJECT(pcms->pcspk), "pit",
+                                  OBJECT(pit), &error_fatal);
+-        isa_realize_and_unref(pcms->pcspk, isa_bus, &error_fatal);
++        qdev_realize(DEVICE(pcms->pcspk), BUS(isa_bus), &error_fatal);
+     }
+ 
+     if (pcms->vmport == ON_OFF_AUTO_AUTO) {
+@@ -1640,7 +1640,7 @@ static void pc_machine_initfn(Object *obj)
+     pcms->default_bus_bypass_iommu = false;
+ 
+     pc_system_flash_create(pcms);
+-    pcms->pcspk = isa_new_orphan(TYPE_PC_SPEAKER);
++    pcms->pcspk = isa_new(obj, "pcspk", TYPE_PC_SPEAKER);
+     object_property_add_alias(OBJECT(pcms), "pcspk-audiodev",
+                               OBJECT(pcms->pcspk), "audiodev");
+     if (pcmc->pci_enabled) {
+@@ -1648,15 +1648,6 @@ static void pc_machine_initfn(Object *obj)
+     }
  }
  
--ISADevice *isa_new_orphan(const char *name)
+-static void pc_machine_finalize(Object *obj)
 -{
--    return ISA_DEVICE(qdev_new_orphan(name));
+-    PCMachineState *pcms = PC_MACHINE(obj);
+-
+-    if (pcms->pcspk && !qdev_is_realized(DEVICE(pcms->pcspk))) {
+-        object_unref(OBJECT(pcms->pcspk));
+-    }
 -}
 -
--ISADevice *isa_try_new_orphan(const char *name)
--{
--    return ISA_DEVICE(qdev_try_new_orphan(name));
--}
--
--ISADevice *isa_create_simple_orphan(ISABus *bus, const char *name)
--{
--    ISADevice *dev;
--
--    dev = isa_new_orphan(name);
--    isa_realize_and_unref(dev, bus, &error_fatal);
--    return dev;
--}
--
- bool isa_realize_and_unref(ISADevice *dev, ISABus *bus, Error **errp)
+ static void pc_machine_reset(MachineState *machine, ResetType type)
  {
-     return qdev_realize_and_unref(&dev->parent_obj, &bus->parent_obj, errp);
-diff --git a/include/hw/isa/isa.h b/include/hw/isa/isa.h
-index 79bfe16361..9bbaa3c258 100644
---- a/include/hw/isa/isa.h
-+++ b/include/hw/isa/isa.h
-@@ -86,10 +86,7 @@ ISADevice *isa_new(Object *parent, const char *id, const char *type);
- ISADevice *isa_try_new(Object *parent, const char *id, const char *type);
- ISADevice *isa_create_simple(Object *parent, const char *id,
-                              ISABus *bus, const char *type);
--ISADevice *isa_new_orphan(const char *name);
--ISADevice *isa_try_new_orphan(const char *name);
- bool isa_realize_and_unref(ISADevice *dev, ISABus *bus, Error **errp);
--ISADevice *isa_create_simple_orphan(ISABus *bus, const char *name);
- 
- ISADevice *isa_vga_init(Object *parent, ISABus *bus);
- 
+     CPUState *cs;
+@@ -1795,7 +1786,6 @@ static const TypeInfo pc_machine_info = {
+     .abstract = true,
+     .instance_size = sizeof(PCMachineState),
+     .instance_init = pc_machine_initfn,
+-    .instance_finalize = pc_machine_finalize,
+     .class_size = sizeof(PCMachineClass),
+     .class_init = pc_machine_class_init,
+     .interfaces = (const InterfaceInfo[]) {
 -- 
 2.47.1
 
