@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33693C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 469E3C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEP-00029k-85; Sat, 11 Jul 2026 20:39:41 -0400
+	id 1wiiFn-0006A3-Fx; Sat, 11 Jul 2026 20:41:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wighH-0002cn-C6; Sat, 11 Jul 2026 19:01:25 -0400
-Received: from pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([34.218.115.239])
+ id 1wigip-0005Q0-Ea; Sat, 11 Jul 2026 19:03:11 -0400
+Received: from pdx-out-015.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([50.112.246.219])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wighF-0002LG-2R; Sat, 11 Jul 2026 19:01:23 -0400
+ id 1wigim-0002e4-Mx; Sat, 11 Jul 2026 19:02:59 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810881; x=1815346881;
+ t=1783810976; x=1815346976;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=yIUqaaVOKyW6WE6UpNA0Yu8tEW8Hhu7gGasqeX93vnc=;
- b=oxEsD8U2WTbH5qoq/ruBchlVu2RJ9YQCoeGRwiCzMb6YbxQVvPGPKtZT
- dc315JpdRwbNutxg05g5ZMmNfitgTbvsQFhE7TNbVU2NceWXKc7ec+q08
- P9FlClRH4V/DVYC55zskKyH/g028esflNZA1RvUnkEEO9pxyeFOdNo/Uu
- eoC/sbQ9x3Tk1P7awa9VgEIPeB6A94Tq5ucsodv3a3hrE8p+E7NO8fEk6
- XcU1ABnjL3xRaYdS36Zb9yC/NF7+Ia0eteQRSVdBzHLTj0FQJphKD6gzo
- uoeL3Vg8OgFViYkCp4Qe2A1VogFWb1aLcAJOLmaqhiTvCO+QhjrSmrUGo Q==;
-X-CSE-ConnectionGUID: fuMYKtZcRkObAiwvL/1PQQ==
-X-CSE-MsgGUID: CHb0sgUEQRK3FrClhaPqQQ==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23296882"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:01:17 +0000
-Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:24263]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.115:2525]
+ bh=mupvrQmP/1C1UdxWHHAvm3q1pIt62nT2Ls7KUj9l5W0=;
+ b=EyaAULhx6OsniDGQG3xwcorlwaQa0ypo/QXhBAjji6JPDcS4zLPPSRfI
+ gnQXh88hgasNkcs32WM1AOYh5gLWUuBZ0SR5eL57TPDTsDMocC9j44aXs
+ 1sOtEShPxcSo8n3rRSrS/ZK4fbEsGt3M6cIz53TTsaF9E7TMQ0XIy1k1z
+ UVssiBod98bPo6YzlH4LnnqT0oPK6tz+mo7MV9WpSHPL7XM5bfJw5q2C9
+ WB0x9zYUm0caR9MNBDyurKn1awQuFZAJwJmvQXf8JDXtlI+kztCl9bwLE
+ s4B9+mgoOrxfx/gql7bu92naRPS1DwrMWtIup8mKj6TxPKqLxQs1xYZV4 w==;
+X-CSE-ConnectionGUID: UDC2m+UhTiKl4q5hXhYg2A==
+X-CSE-MsgGUID: mvHw0ARjRPWJ3xmb/Qexzg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23300211"
+Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
+ by internal-pdx-out-015.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:02:52 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:19391]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.68:2525]
  with esmtp (Farcaster)
- id 36bfcfa6-394a-47cd-9a76-514b4182d1bb; Sat, 11 Jul 2026 23:01:17 +0000 (UTC)
-X-Farcaster-Flow-ID: 36bfcfa6-394a-47cd-9a76-514b4182d1bb
+ id 6d9a9e20-2426-4635-8be1-dc4a457f5021; Sat, 11 Jul 2026 23:02:52 +0000 (UTC)
+X-Farcaster-Flow-ID: 6d9a9e20-2426-4635-8be1-dc4a457f5021
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
  EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:01:17 +0000
+ Sat, 11 Jul 2026 23:02:52 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:01:08 +0000
+ Sat, 11 Jul 2026 23:02:43 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 092/134] hw/riscv: Give memory regions an explicit owner
-Date: Sat, 11 Jul 2026 22:36:25 +0000
-Message-ID: <20260711223707.42139-93-graf@amazon.com>
+Subject: [RFC PATCH 098/134] hw/ppc: Give memory regions an explicit owner
+Date: Sat, 11 Jul 2026 22:36:31 +0000
+Message-ID: <20260711223707.42139-99-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D032UWB002.ant.amazon.com (10.13.139.190) To
+X-ClientProxiedBy: EX19D046UWA003.ant.amazon.com (10.13.139.18) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=34.218.115.239;
+Received-SPF: pass client-ip=50.112.246.219;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-015.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -131,203 +131,322 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Convert memory_region_init*() calls that pass NULL owner to pass
-the enclosing machine or SoC device instead. All sites are inside
-board init (MachineState *machine) or SoC realize (DeviceState *dev)
-functions.
+the enclosing machine or device instead.
+
+Thread Object *owner through ppc4xx_l2sram_init() (called from sam460ex board init) and the static ppc4xx_sdram_banks() / sdram_bank_map() / sdram_bank_set_bcr() helpers (called from ppc4xx-sdram-ddr[2] realize and DCR write callbacks that already carry the device state).
 
 No functional change intended.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/riscv/boston-aia.c           |  8 ++++----
- hw/riscv/microblaze-v-generic.c |  4 ++--
- hw/riscv/microchip_pfsoc.c      | 14 +++++++-------
- hw/riscv/sifive_u.c             |  4 ++--
- hw/riscv/spike.c                |  2 +-
- hw/riscv/tt_atlantis.c          |  2 +-
- hw/riscv/virt.c                 |  2 +-
- 7 files changed, 18 insertions(+), 18 deletions(-)
+ hw/ppc/amigaone.c      |  6 +++---
+ hw/ppc/mac_newworld.c  |  2 +-
+ hw/ppc/mac_oldworld.c  |  2 +-
+ hw/ppc/pegasos.c       |  2 +-
+ hw/ppc/ppc440.h        |  2 +-
+ hw/ppc/ppc440_bamboo.c |  2 +-
+ hw/ppc/ppc440_uc.c     | 10 +++++-----
+ hw/ppc/ppc4xx_sdram.c  | 34 +++++++++++++++++-----------------
+ hw/ppc/prep.c          |  2 +-
+ hw/ppc/sam460ex.c      |  4 ++--
+ 10 files changed, 33 insertions(+), 33 deletions(-)
 
-diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
-index 5a9ec28068..ef41f53aac 100644
---- a/hw/riscv/boston-aia.c
-+++ b/hw/riscv/boston-aia.c
-@@ -374,7 +374,7 @@ static void boston_mach_init(MachineState *machine)
-     sysbus_mmio_map_overlap(SYS_BUS_DEVICE(&s->cps), 0, 0, 1);
+diff --git a/hw/ppc/amigaone.c b/hw/ppc/amigaone.c
+index 60aed15a6e..4a4e52c1fe 100644
+--- a/hw/ppc/amigaone.c
++++ b/hw/ppc/amigaone.c
+@@ -130,7 +130,7 @@ static void nvram_realize(DeviceState *dev, Error **errp)
+     void *p;
+     uint32_t crc, *c;
  
-     flash =  g_new(MemoryRegion, 1);
--    memory_region_init_rom(flash, NULL, "boston.flash",
-+    memory_region_init_rom(flash, OBJECT(machine), "boston.flash",
-                            boston_memmap[BOSTON_FLASH].size, &error_fatal);
-     memory_region_add_subregion_overlap(sys_mem,
-                                         boston_memmap[BOSTON_FLASH].base,
-@@ -385,7 +385,7 @@ static void boston_mach_init(MachineState *machine)
-                                         machine->ram, 0);
+-    memory_region_init_rom_device(&s->mr, NULL, &nvram_ops, s, "nvram",
++    memory_region_init_rom_device(&s->mr, OBJECT(dev), &nvram_ops, s, "nvram",
+                                   NVRAM_SIZE, &error_fatal);
+     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mr);
+     c = p = memory_region_get_ram_ptr(&s->mr);
+@@ -297,7 +297,7 @@ static void amigaone_init(MachineState *machine)
+     if (machine->ram_size < 1 * GiB + 32 * KiB) {
+         /* Firmware uses this area for startup */
+         mr = g_new(MemoryRegion, 1);
+-        memory_region_init_ram(mr, NULL, "init-cache", 32 * KiB, &error_fatal);
++        memory_region_init_ram(mr, OBJECT(machine), "init-cache", 32 * KiB, &error_fatal);
+         memory_region_add_subregion(get_system_memory(), INIT_RAM_ADDR, mr);
+     }
  
-     ddr_low_alias = g_new(MemoryRegion, 1);
--    memory_region_init_alias(ddr_low_alias, NULL, "boston_low.ddr",
-+    memory_region_init_alias(ddr_low_alias, OBJECT(machine), "boston_low.ddr",
-                              machine->ram, 0,
-                              MIN(machine->ram_size, (256 * MiB)));
-     memory_region_add_subregion_overlap(sys_mem, 0, ddr_low_alias, 0);
-@@ -398,7 +398,7 @@ static void boston_mach_init(MachineState *machine)
-                              qdev_get_gpio_in(s->cps.aplic, PCIE2_INT));
+@@ -313,7 +313,7 @@ static void amigaone_init(MachineState *machine)
  
-     platreg = g_new(MemoryRegion, 1);
--    memory_region_init_io(platreg, NULL, &boston_platreg_ops, s,
-+    memory_region_init_io(platreg, OBJECT(machine), &boston_platreg_ops, s,
-                           "boston-platregs",
-                           boston_memmap[BOSTON_PLATREG].size);
-     memory_region_add_subregion_overlap(sys_mem,
-@@ -410,7 +410,7 @@ static void boston_mach_init(MachineState *machine)
-                              serial_hd(0), DEVICE_LITTLE_ENDIAN);
+     /* allocate and load firmware */
+     rom = g_new(MemoryRegion, 1);
+-    memory_region_init_rom(rom, NULL, "rom", PROM_SIZE, &error_fatal);
++    memory_region_init_rom(rom, OBJECT(machine), "rom", PROM_SIZE, &error_fatal);
+     memory_region_add_subregion(get_system_memory(), PROM_ADDR, rom);
+     if (!machine->firmware) {
+         rom_add_blob_fixed("dummy-fw", dummy_fw, sizeof(dummy_fw),
+diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
+index a6af53e21a..392a1fb87d 100644
+--- a/hw/ppc/mac_newworld.c
++++ b/hw/ppc/mac_newworld.c
+@@ -176,7 +176,7 @@ static void ppc_core99_init(MachineState *machine)
+     memory_region_add_subregion(get_system_memory(), 0, machine->ram);
  
-     lcd = g_new(MemoryRegion, 1);
--    memory_region_init_io(lcd, NULL, &boston_lcd_ops, s, "boston-lcd", 0x8);
-+    memory_region_init_io(lcd, OBJECT(machine), &boston_lcd_ops, s, "boston-lcd", 0x8);
-     memory_region_add_subregion_overlap(sys_mem,
-                                         boston_memmap[BOSTON_LCD].base, lcd, 0);
- 
-diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-generic.c
-index 7253ae7822..0a83932405 100644
---- a/hw/riscv/microblaze-v-generic.c
-+++ b/hw/riscv/microblaze-v-generic.c
-@@ -70,12 +70,12 @@ static void mb_v_generic_init(MachineState *machine)
-     object_property_set_bool(OBJECT(cpu), "d", false, NULL);
-     qdev_realize(DEVICE(cpu), NULL, &error_abort);
-     /* Attach emulated BRAM through the LMB.  */
--    memory_region_init_ram(phys_lmb_bram, NULL,
-+    memory_region_init_ram(phys_lmb_bram, OBJECT(machine),
-                            "mb_v.lmb_bram", LMB_BRAM_SIZE,
+     /* allocate and load firmware ROM */
+-    memory_region_init_rom(bios, NULL, "ppc_core99.bios", PROM_SIZE,
++    memory_region_init_rom(bios, OBJECT(machine), "ppc_core99.bios", PROM_SIZE,
                             &error_fatal);
-     memory_region_add_subregion(sysmem, 0x00000000, phys_lmb_bram);
+     memory_region_add_subregion(get_system_memory(), PROM_BASE, bios);
  
--    memory_region_init_ram(phys_ram, NULL, "mb_v.ram",
-+    memory_region_init_ram(phys_ram, OBJECT(machine), "mb_v.ram",
-                            ram_size, &error_fatal);
-     memory_region_add_subregion(sysmem, ddr_base, phys_ram);
+diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+index f9b62a518a..0fe8dfaf8c 100644
+--- a/hw/ppc/mac_oldworld.c
++++ b/hw/ppc/mac_oldworld.c
+@@ -130,7 +130,7 @@ static void ppc_heathrow_init(MachineState *machine)
+     memory_region_add_subregion(get_system_memory(), 0, machine->ram);
  
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index 0a98ac1c5e..f1ee64ef86 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -219,14 +219,14 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     qdev_realize(DEVICE(&s->u_cluster), NULL, &error_abort);
+     /* allocate and load firmware ROM */
+-    memory_region_init_rom(bios, NULL, "ppc_heathrow.bios", PROM_SIZE,
++    memory_region_init_rom(bios, OBJECT(machine), "ppc_heathrow.bios", PROM_SIZE,
+                            &error_fatal);
+     memory_region_add_subregion(get_system_memory(), PROM_BASE, bios);
  
-     /* Reserved Memory at address 0 */
--    memory_region_init_ram(rsvd0_mem, NULL, "microchip.pfsoc.rsvd0_mem",
-+    memory_region_init_ram(rsvd0_mem, OBJECT(dev), "microchip.pfsoc.rsvd0_mem",
-                            memmap[MICROCHIP_PFSOC_RSVD0].size, &error_fatal);
-     memory_region_add_subregion(system_memory,
-                                 memmap[MICROCHIP_PFSOC_RSVD0].base,
-                                 rsvd0_mem);
+diff --git a/hw/ppc/pegasos.c b/hw/ppc/pegasos.c
+index 4917d8137a..426a54d8ee 100644
+--- a/hw/ppc/pegasos.c
++++ b/hw/ppc/pegasos.c
+@@ -194,7 +194,7 @@ static void pegasos_init(MachineState *machine)
+     if (pm->type == PEGASOS1) {
+         prom_addr += PROM_SIZE;
+     }
+-    memory_region_init_rom(rom, NULL, "rom", PROM_SIZE, &error_fatal);
++    memory_region_init_rom(rom, OBJECT(machine), "rom", PROM_SIZE, &error_fatal);
+     memory_region_add_subregion(get_system_memory(), prom_addr, rom);
+     sz = load_elf(filename, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                   ELFDATA2MSB, PPC_ELF_MACHINE, 0, 0);
+diff --git a/hw/ppc/ppc440.h b/hw/ppc/ppc440.h
+index 909373fb38..192b76adc4 100644
+--- a/hw/ppc/ppc440.h
++++ b/hw/ppc/ppc440.h
+@@ -13,7 +13,7 @@
  
-     /* E51 DTIM */
--    memory_region_init_ram(e51_dtim_mem, NULL, "microchip.pfsoc.e51_dtim_mem",
-+    memory_region_init_ram(e51_dtim_mem, OBJECT(dev), "microchip.pfsoc.e51_dtim_mem",
-                            memmap[MICROCHIP_PFSOC_E51_DTIM].size, &error_fatal);
-     memory_region_add_subregion(system_memory,
-                                 memmap[MICROCHIP_PFSOC_E51_DTIM].base,
-@@ -271,7 +271,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-      * leave it enabled all the time. This won't break anything, but will be
-      * too generous to misbehaving guests.
-      */
--    memory_region_init_ram(l2lim_mem, NULL, "microchip.pfsoc.l2lim",
-+    memory_region_init_ram(l2lim_mem, OBJECT(dev), "microchip.pfsoc.l2lim",
-                            memmap[MICROCHIP_PFSOC_L2LIM].size, &error_fatal);
-     memory_region_add_subregion(system_memory,
-                                 memmap[MICROCHIP_PFSOC_L2LIM].base,
-@@ -549,10 +549,10 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-     /* Split RAM into low and high regions using aliases to machine->ram */
-     mem_low_size = memmap[MICROCHIP_PFSOC_DRAM_LO].size;
-     mem_high_size = machine->ram_size - mem_low_size;
--    memory_region_init_alias(mem_low, NULL,
-+    memory_region_init_alias(mem_low, OBJECT(machine),
-                              "microchip.icicle.kit.ram_low", machine->ram,
-                              0, mem_low_size);
--    memory_region_init_alias(mem_high, NULL,
-+    memory_region_init_alias(mem_high, OBJECT(machine),
-                              "microchip.icicle.kit.ram_high", machine->ram,
-                              mem_low_size, mem_high_size);
+ #include "hw/ppc/ppc.h"
  
-@@ -565,13 +565,13 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-                                 mem_high);
+-void ppc4xx_l2sram_init(CPUPPCState *env);
++void ppc4xx_l2sram_init(Object *owner, CPUPPCState *env);
+ void ppc4xx_cpr_init(CPUPPCState *env);
+ void ppc4xx_sdr_init(CPUPPCState *env);
+ void ppc4xx_ahb_init(CPUPPCState *env);
+diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
+index 2d9efeba77..5aad2a504b 100644
+--- a/hw/ppc/ppc440_bamboo.c
++++ b/hw/ppc/ppc440_bamboo.c
+@@ -194,7 +194,7 @@ static void bamboo_init(MachineState *machine)
+         exit(1);
+     }
  
-     /* Create aliases for the low and high RAM regions */
--    memory_region_init_alias(mem_low_alias, NULL,
-+    memory_region_init_alias(mem_low_alias, OBJECT(machine),
-                              "microchip.icicle.kit.ram_low.alias",
-                              mem_low, 0, mem_low_size);
-     memory_region_add_subregion(system_memory,
-                                 memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
-                                 mem_low_alias);
--    memory_region_init_alias(mem_high_alias, NULL,
-+    memory_region_init_alias(mem_high_alias, OBJECT(machine),
-                              "microchip.icicle.kit.ram_high.alias",
-                              mem_high, 0, mem_high_size);
-     memory_region_add_subregion(system_memory,
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index aba6716b73..9d3f5c8f59 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -477,7 +477,7 @@ static void sifive_u_machine_init(MachineState *machine)
-                                 machine->ram);
+-    memory_region_init_alias(isa, NULL, "isa_mmio",
++    memory_region_init_alias(isa, OBJECT(machine), "isa_mmio",
+                              get_system_io(), 0, PPC440EP_PCI_IOLEN);
+     memory_region_add_subregion(get_system_memory(), PPC440EP_PCI_IO, isa);
  
-     /* register QSPI0 Flash */
--    memory_region_init_ram(flash0, NULL, "riscv.sifive.u.flash0",
-+    memory_region_init_ram(flash0, OBJECT(machine), "riscv.sifive.u.flash0",
-                            memmap[SIFIVE_U_DEV_FLASH0].size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_DEV_FLASH0].base,
-                                 flash0);
-@@ -763,7 +763,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-      * leave it enabled all the time. This won't break anything, but will be
-      * too generous to misbehaving guests.
-      */
--    memory_region_init_ram(l2lim_mem, NULL, "riscv.sifive.u.l2lim",
-+    memory_region_init_ram(l2lim_mem, OBJECT(dev), "riscv.sifive.u.l2lim",
-                            memmap[SIFIVE_U_DEV_L2LIM].size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_DEV_L2LIM].base,
-                                 l2lim_mem);
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index c53409e4f1..9f1a1b5898 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -179,7 +179,7 @@ static void spike_board_init(MachineState *machine)
-         machine->ram);
+diff --git a/hw/ppc/ppc440_uc.c b/hw/ppc/ppc440_uc.c
+index 016c756c19..e86519326e 100644
+--- a/hw/ppc/ppc440_uc.c
++++ b/hw/ppc/ppc440_uc.c
+@@ -167,19 +167,19 @@ static void l2sram_reset(void *opaque)
+     memset(l2sram->isram0, 0, sizeof(l2sram->isram0));
+ }
  
-     /* boot rom */
--    memory_region_init_rom(mask_rom, NULL, "riscv.spike.mrom",
-+    memory_region_init_rom(mask_rom, OBJECT(machine), "riscv.spike.mrom",
-                            memmap[SPIKE_MROM].size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
-                                 mask_rom);
-diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
-index 9ae5af3162..f068d8751e 100644
---- a/hw/riscv/tt_atlantis.c
-+++ b/hw/riscv/tt_atlantis.c
-@@ -539,7 +539,7 @@ static void tt_atlantis_machine_init(MachineState *machine)
-                                 s->memmap[TT_ATL_DDR_LO].base, ram_lo);
+-void ppc4xx_l2sram_init(CPUPPCState *env)
++void ppc4xx_l2sram_init(Object *owner, CPUPPCState *env)
+ {
+     ppc4xx_l2sram_t *l2sram;
  
-     /* Boot ROM */
--    memory_region_init_rom(bootrom, NULL, "tt-atlantis.bootrom",
-+    memory_region_init_rom(bootrom, OBJECT(machine), "tt-atlantis.bootrom",
-                            s->memmap[TT_ATL_BOOTROM].size, &error_fatal);
-     memory_region_add_subregion(system_memory, s->memmap[TT_ATL_BOOTROM].base,
-                                 bootrom);
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 7e5bdaf210..d1de8bb2be 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1463,7 +1463,7 @@ static void virt_machine_init(MachineState *machine)
-                                 machine->ram);
+     l2sram = g_malloc0(sizeof(*l2sram));
+     /* XXX: Size is 4*64kB for 460ex, cf. U-Boot, ppc4xx-isram.h */
+-    memory_region_init_ram(&l2sram->bank[0], NULL, "ppc4xx.l2sram_bank0",
++    memory_region_init_ram(&l2sram->bank[0], owner, "ppc4xx.l2sram_bank0",
+                            64 * KiB, &error_abort);
+-    memory_region_init_ram(&l2sram->bank[1], NULL, "ppc4xx.l2sram_bank1",
++    memory_region_init_ram(&l2sram->bank[1], owner, "ppc4xx.l2sram_bank1",
+                            64 * KiB, &error_abort);
+-    memory_region_init_ram(&l2sram->bank[2], NULL, "ppc4xx.l2sram_bank2",
++    memory_region_init_ram(&l2sram->bank[2], owner, "ppc4xx.l2sram_bank2",
+                            64 * KiB, &error_abort);
+-    memory_region_init_ram(&l2sram->bank[3], NULL, "ppc4xx.l2sram_bank3",
++    memory_region_init_ram(&l2sram->bank[3], owner, "ppc4xx.l2sram_bank3",
+                            64 * KiB, &error_abort);
+     qemu_register_reset(&l2sram_reset, l2sram);
+     ppc_dcr_register(env, DCR_L2CACHE_CFG,
+diff --git a/hw/ppc/ppc4xx_sdram.c b/hw/ppc/ppc4xx_sdram.c
+index b2c8f96d5f..8be3bb3160 100644
+--- a/hw/ppc/ppc4xx_sdram.c
++++ b/hw/ppc/ppc4xx_sdram.c
+@@ -53,7 +53,7 @@
+  * must be one of a small set of sizes. The number of banks and the supported
+  * sizes varies by SoC.
+  */
+-static bool ppc4xx_sdram_banks(MemoryRegion *ram, int nr_banks,
++static bool ppc4xx_sdram_banks(Object *owner, MemoryRegion *ram, int nr_banks,
+                                Ppc4xxSdramBank ram_banks[],
+                                const ram_addr_t sdram_bank_sizes[],
+                                Error **errp)
+@@ -76,7 +76,7 @@ static bool ppc4xx_sdram_banks(MemoryRegion *ram, int nr_banks,
+                 base += bank_size;
+                 size_left -= bank_size;
+                 snprintf(name, sizeof(name), "ppc4xx.sdram%d", i);
+-                memory_region_init_alias(&ram_banks[i].ram, NULL, name, ram,
++                memory_region_init_alias(&ram_banks[i].ram, owner, name, ram,
+                                          ram_banks[i].base, ram_banks[i].size);
+                 break;
+             }
+@@ -108,10 +108,10 @@ static bool ppc4xx_sdram_banks(MemoryRegion *ram, int nr_banks,
+     return true;
+ }
  
-     /* boot rom */
--    memory_region_init_rom(mask_rom, NULL, "riscv_virt_board.mrom",
-+    memory_region_init_rom(mask_rom, OBJECT(machine), "riscv_virt_board.mrom",
-                            s->memmap[VIRT_MROM].size, &error_fatal);
-     memory_region_add_subregion(system_memory, s->memmap[VIRT_MROM].base,
-                                 mask_rom);
+-static void sdram_bank_map(Ppc4xxSdramBank *bank)
++static void sdram_bank_map(Object *owner, Ppc4xxSdramBank *bank)
+ {
+     trace_ppc4xx_sdram_map(bank->base, bank->size);
+-    memory_region_init(&bank->container, NULL, "sdram-container", bank->size);
++    memory_region_init(&bank->container, owner, "sdram-container", bank->size);
+     memory_region_add_subregion(&bank->container, 0, &bank->ram);
+     memory_region_add_subregion(get_system_memory(), bank->base,
+                                 &bank->container);
+@@ -125,7 +125,7 @@ static void sdram_bank_unmap(Ppc4xxSdramBank *bank)
+     object_unparent(OBJECT(&bank->container));
+ }
+ 
+-static void sdram_bank_set_bcr(Ppc4xxSdramBank *bank, uint32_t bcr,
++static void sdram_bank_set_bcr(Object *owner, Ppc4xxSdramBank *bank, uint32_t bcr,
+                                hwaddr base, hwaddr size, int enabled)
+ {
+     if (memory_region_is_mapped(&bank->container)) {
+@@ -135,7 +135,7 @@ static void sdram_bank_set_bcr(Ppc4xxSdramBank *bank, uint32_t bcr,
+     bank->base = base;
+     bank->size = size;
+     if (enabled && (bcr & 1)) {
+-        sdram_bank_map(bank);
++        sdram_bank_map(owner, bank);
+     }
+ }
+ 
+@@ -296,7 +296,7 @@ static void sdram_ddr_dcr_write(void *opaque, int dcrn, uint32_t val)
+                 /* validate all RAM mappings */
+                 for (i = 0; i < s->nbanks; i++) {
+                     if (s->bank[i].size) {
+-                        sdram_bank_set_bcr(&s->bank[i], s->bank[i].bcr,
++                        sdram_bank_set_bcr(OBJECT(s), &s->bank[i], s->bank[i].bcr,
+                                            s->bank[i].base, s->bank[i].size,
+                                            1);
+                     }
+@@ -307,7 +307,7 @@ static void sdram_ddr_dcr_write(void *opaque, int dcrn, uint32_t val)
+                 /* invalidate all RAM mappings */
+                 for (i = 0; i < s->nbanks; i++) {
+                     if (s->bank[i].size) {
+-                        sdram_bank_set_bcr(&s->bank[i], s->bank[i].bcr,
++                        sdram_bank_set_bcr(OBJECT(s), &s->bank[i], s->bank[i].bcr,
+                                            s->bank[i].base, s->bank[i].size,
+                                            0);
+                     }
+@@ -337,7 +337,7 @@ static void sdram_ddr_dcr_write(void *opaque, int dcrn, uint32_t val)
+             i = (s->addr - 0x40) / 4;
+             val &= SDRAM_DDR_BCR_MASK;
+             if (s->bank[i].size) {
+-                sdram_bank_set_bcr(&s->bank[i], val,
++                sdram_bank_set_bcr(OBJECT(s), &s->bank[i], val,
+                                    sdram_ddr_base(val), sdram_ddr_size(val),
+                                    s->cfg & 0x80000000);
+             }
+@@ -400,17 +400,17 @@ static void ppc4xx_sdram_ddr_realize(DeviceState *dev, Error **errp)
+         error_setg(errp, "Missing dram memory region");
+         return;
+     }
+-    if (!ppc4xx_sdram_banks(s->dram_mr, s->nbanks, s->bank,
++    if (!ppc4xx_sdram_banks(OBJECT(s), s->dram_mr, s->nbanks, s->bank,
+                             valid_bank_sizes, errp)) {
+         return;
+     }
+     for (i = 0; i < s->nbanks; i++) {
+         if (s->bank[i].size) {
+             s->bank[i].bcr = sdram_ddr_bcr(s->bank[i].base, s->bank[i].size);
+-            sdram_bank_set_bcr(&s->bank[i], s->bank[i].bcr,
++            sdram_bank_set_bcr(OBJECT(s), &s->bank[i], s->bank[i].bcr,
+                                s->bank[i].base, s->bank[i].size, 0);
+         } else {
+-            sdram_bank_set_bcr(&s->bank[i], 0, 0, 0, 0);
++            sdram_bank_set_bcr(OBJECT(s), &s->bank[i], 0, 0, 0, 0);
+         }
+         trace_ppc4xx_sdram_init(sdram_ddr_base(s->bank[i].bcr),
+                                 sdram_ddr_size(s->bank[i].bcr),
+@@ -607,7 +607,7 @@ static void sdram_ddr2_dcr_write(void *opaque, int dcrn, uint32_t val)
+                 /* validate all RAM mappings */
+                 for (i = 0; i < s->nbanks; i++) {
+                     if (s->bank[i].size) {
+-                        sdram_bank_set_bcr(&s->bank[i], s->bank[i].bcr,
++                        sdram_bank_set_bcr(OBJECT(s), &s->bank[i], s->bank[i].bcr,
+                                            s->bank[i].base, s->bank[i].size,
+                                            1);
+                     }
+@@ -619,7 +619,7 @@ static void sdram_ddr2_dcr_write(void *opaque, int dcrn, uint32_t val)
+                 /* invalidate all RAM mappings */
+                 for (i = 0; i < s->nbanks; i++) {
+                     if (s->bank[i].size) {
+-                        sdram_bank_set_bcr(&s->bank[i], s->bank[i].bcr,
++                        sdram_bank_set_bcr(OBJECT(s), &s->bank[i], s->bank[i].bcr,
+                                            s->bank[i].base, s->bank[i].size,
+                                            0);
+                     }
+@@ -666,7 +666,7 @@ static void ppc4xx_sdram_ddr2_realize(DeviceState *dev, Error **errp)
+         error_setg(errp, "Missing dram memory region");
+         return;
+     }
+-    if (!ppc4xx_sdram_banks(s->dram_mr, s->nbanks, s->bank,
++    if (!ppc4xx_sdram_banks(OBJECT(s), s->dram_mr, s->nbanks, s->bank,
+                             valid_bank_sizes, errp)) {
+         return;
+     }
+@@ -674,10 +674,10 @@ static void ppc4xx_sdram_ddr2_realize(DeviceState *dev, Error **errp)
+         if (s->bank[i].size) {
+             s->bank[i].bcr = sdram_ddr2_bcr(s->bank[i].base, s->bank[i].size);
+             s->bank[i].bcr &= SDRAM_DDR2_BCR_MASK;
+-            sdram_bank_set_bcr(&s->bank[i], s->bank[i].bcr,
++            sdram_bank_set_bcr(OBJECT(s), &s->bank[i], s->bank[i].bcr,
+                                s->bank[i].base, s->bank[i].size, 0);
+         } else {
+-            sdram_bank_set_bcr(&s->bank[i], 0, 0, 0, 0);
++            sdram_bank_set_bcr(OBJECT(s), &s->bank[i], 0, 0, 0, 0);
+         }
+         trace_ppc4xx_sdram_init(sdram_ddr2_base(s->bank[i].bcr),
+                                 sdram_ddr2_size(s->bank[i].bcr),
+diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
+index 52f94b206a..c79736a1f3 100644
+--- a/hw/ppc/prep.c
++++ b/hw/ppc/prep.c
+@@ -274,7 +274,7 @@ static void ibm_40p_init(MachineState *machine)
+         error_report("Could not find bios image '%s'", bios_name);
+         exit(1);
+     }
+-    memory_region_init_rom(bios, NULL, "bios", BIOS_SIZE, &error_fatal);
++    memory_region_init_rom(bios, OBJECT(machine), "bios", BIOS_SIZE, &error_fatal);
+     memory_region_add_subregion(get_system_memory(), BIOS_ADDR, bios);
+     bios_size = load_elf(filename, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                          ELFDATA2MSB, PPC_ELF_MACHINE, 0, 0);
+diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
+index 59c217e2b2..20b2acb40b 100644
+--- a/hw/ppc/sam460ex.c
++++ b/hw/ppc/sam460ex.c
+@@ -375,9 +375,9 @@ static void sam460ex_init(MachineState *machine)
+     ppc4xx_dma_init(env, 0x200);
+ 
+     /* 256K of L2 cache as memory */
+-    ppc4xx_l2sram_init(env);
++    ppc4xx_l2sram_init(OBJECT(machine), env);
+     /* FIXME: remove this after fixing l2sram mapping in ppc440_uc.c? */
+-    memory_region_init_ram(l2cache_ram, NULL, "ppc440.l2cache_ram", 256 * KiB,
++    memory_region_init_ram(l2cache_ram, OBJECT(machine), "ppc440.l2cache_ram", 256 * KiB,
+                            &error_abort);
+     memory_region_add_subregion(get_system_memory(), 0x400000000LL,
+                                 l2cache_ram);
 -- 
 2.47.1
 
