@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72904C44501
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E51C43458
 	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiFz-0006Wy-Tr; Sat, 11 Jul 2026 20:41:19 -0400
+	id 1wiiFp-0006If-JZ; Sat, 11 Jul 2026 20:41:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigkx-0001TX-Mb; Sat, 11 Jul 2026 19:05:11 -0400
-Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.77.92])
+ id 1wigik-0005PS-GD; Sat, 11 Jul 2026 19:02:56 -0400
+Received: from pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.34.181.151])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigkv-00035U-Mc; Sat, 11 Jul 2026 19:05:11 -0400
+ id 1wigie-0002ae-8I; Sat, 11 Jul 2026 19:02:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811109; x=1815347109;
+ t=1783810968; x=1815346968;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=W9NMUE63sGoBFljEfTdcDeegt56zvHAcCeou8uRTEx4=;
- b=OmlmvqFiFRFfn6+nCgo9QR2CQVtCUzqQIg/OVYmPb04iswc2xLoslINj
- kavBRN7JgwT2QX4qjuXy6e/pn7rp8yDc/PPwGsx5u5vQeYoYSdAbbk7kj
- lrZI/eQX4JeOZW39rKnZAre0WQelXa+fvDAK9BfpRv7AeGWsafrWyNOGd
- 9FKnBV7DFDc/DDEG96n/rpGckviEQwqJJHLrVinysQk4ROIrs/Syek2Uf
- yIUqVD7M9/37y3W3HGbaSsMMp39LvWVgx4Lo7xVKuhOdyXtOI29cfMUZ2
- dzYbfV5nOfbs3TxZDDtOjnd56SQRcRfwH9FWdyqv79xXOsS0L3xK3xbxJ Q==;
-X-CSE-ConnectionGUID: 7IU69walTnKon8eXDZp++w==
-X-CSE-MsgGUID: jQB4ERe0Tu22dq9WaEpJOg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23493370"
+ bh=kIRDMMYQoAbVbR+Yb/nq/CG8IV16g3zCWr2Me2GLW6M=;
+ b=sUfzUOvrQkXfianEQf6XpKIjfw6GTnGndKfxbQuP6PAG9P8W7x3ao94L
+ a+ut8WNGBUf7Jczye+n/vGYRFnd7TWecy0XZr9aB0/gx2iDK7UYFuT3F6
+ 7o6zysR+mmUYqDKgvxwXiOs41NS8+wBypuVomJ+oam3Ws6AsndFzfgHXt
+ MsJrXIm+NygTZxrfX1y8LOPbLidZFtlP8rVKPclFVDIkMSepmHHrTLs1b
+ 09L7EeEER0EvOztkwOOmI5UDwHTWiuAWzIU726QhdD/H/d3eTyESzX0du
+ o22ZFYDN1HJcCRad7iKlLyfW1xH0ReufgQiS6mzEuInq0wFEB6JfF3q60 g==;
+X-CSE-ConnectionGUID: UnS3OulPSI22PLwrbrOoMw==
+X-CSE-MsgGUID: rqh8YVmBRDC1yM2K3LZ0kg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23483611"
 Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:05:06 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:26831]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.68:2525]
+ by internal-pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:02:44 +0000
+Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:23292]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.47.135:2525]
  with esmtp (Farcaster)
- id 77b236db-b737-411d-9117-2c00d568d606; Sat, 11 Jul 2026 23:05:05 +0000 (UTC)
-X-Farcaster-Flow-ID: 77b236db-b737-411d-9117-2c00d568d606
+ id c3cb8fca-4aa2-4924-8f15-6db4f3d24a39; Sat, 11 Jul 2026 23:02:44 +0000 (UTC)
+X-Farcaster-Flow-ID: c3cb8fca-4aa2-4924-8f15-6db4f3d24a39
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
  EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:05:05 +0000
+ Sat, 11 Jul 2026 23:02:43 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:04:57 +0000
+ Sat, 11 Jul 2026 23:02:35 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 106/134] hw/ide: Let ide_init_ioport() take an explicit
- owner
-Date: Sat, 11 Jul 2026 22:36:39 +0000
-Message-ID: <20260711223707.42139-107-graf@amazon.com>
+Subject: [RFC PATCH 097/134] hw/m68k: Give memory regions an explicit owner
+Date: Sat, 11 Jul 2026 22:36:30 +0000
+Message-ID: <20260711223707.42139-98-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,18 +101,18 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D046UWA001.ant.amazon.com (10.13.139.112) To
+X-ClientProxiedBy: EX19D046UWA003.ant.amazon.com (10.13.139.18) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.77.92;
+Received-SPF: pass client-ip=52.34.181.151;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
@@ -131,122 +130,195 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-hw/ide/piix.c calls ide_init_ioport() with a NULL ISADevice because
-the PIIX IDE function is a PCI device, not an ISA one.  That NULL
-propagates to isa_register_portio_list() and from there to
-portio_list_init() as owner==NULL, which the following commit turns
-into a hard error.
+Convert memory_region_init*() calls that pass NULL owner to pass
+the enclosing machine or device instead.
 
-Change ide_init_ioport() to take an Object *owner directly.  When the
-owner is an ISADevice, keep the existing isa_register_portio_list()
-path so isa_init_ioport() still records the base I/O port for firmware
-paths.  When it is not (the PIIX case), register the port lists with
-the given owner directly.
+Thread Object *owner through the static mcf5208_sys_init() helper. mcf5206_mbar_realize() already has DeviceState *dev in scope.
+
+No functional change intended.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/ide/ide-internal.h |  2 +-
- hw/ide/ioport.c       | 37 ++++++++++++++++++++++++++-----------
- hw/ide/isa.c          |  2 +-
- hw/ide/piix.c         |  2 +-
- 4 files changed, 29 insertions(+), 14 deletions(-)
+ hw/m68k/an5206.c    |  2 +-
+ hw/m68k/mcf5206.c   |  2 +-
+ hw/m68k/mcf5208.c   | 15 ++++++++-------
+ hw/m68k/next-cube.c | 10 +++++-----
+ hw/m68k/q800.c      | 10 +++++-----
+ 5 files changed, 20 insertions(+), 19 deletions(-)
 
-diff --git a/hw/ide/ide-internal.h b/hw/ide/ide-internal.h
-index 281d07c9d5..3f48335cdf 100644
---- a/hw/ide/ide-internal.h
-+++ b/hw/ide/ide-internal.h
-@@ -419,7 +419,7 @@ uint32_t ide_data_readl(void *opaque, uint32_t addr);
- int ide_init_drive(IDEState *s, IDEDevice *dev, IDEDriveKind kind, Error **errp);
- void ide_exit(IDEState *s);
- void ide_bus_init_output_irq(IDEBus *bus, qemu_irq irq_out);
--int ide_init_ioport(IDEBus *bus, ISADevice *isa, int iobase, int iobase2);
-+int ide_init_ioport(IDEBus *bus, Object *owner, int iobase, int iobase2);
- void ide_bus_set_irq(IDEBus *bus);
- void ide_bus_register_restart_cb(IDEBus *bus);
+diff --git a/hw/m68k/an5206.c b/hw/m68k/an5206.c
+index 5027311cad..6c6c7d7248 100644
+--- a/hw/m68k/an5206.c
++++ b/hw/m68k/an5206.c
+@@ -60,7 +60,7 @@ static void an5206_init(MachineState *machine)
+     memory_region_add_subregion(address_space_mem, 0, machine->ram);
  
-diff --git a/hw/ide/ioport.c b/hw/ide/ioport.c
-index a2f457f0bd..afafe6844c 100644
---- a/hw/ide/ioport.c
-+++ b/hw/ide/ioport.c
-@@ -1,5 +1,5 @@
- /*
-- * QEMU IDE disk and CD/DVD-ROM Emulator
-+ * QEMU IDE Emulation: PIO ioport registration.
-  *
-  * Copyright (c) 2003 Fabrice Bellard
-  * Copyright (c) 2006 Openedhand Ltd.
-@@ -28,19 +28,34 @@
- #include "ide-internal.h"
- #include "trace.h"
+     /* Internal SRAM.  */
+-    memory_region_init_ram(sram, NULL, "an5206.sram", 512, &error_fatal);
++    memory_region_init_ram(sram, OBJECT(machine), "an5206.sram", 512, &error_fatal);
+     memory_region_add_subregion(address_space_mem, AN5206_RAMBAR_ADDR, sram);
  
--int ide_init_ioport(IDEBus *bus, ISADevice *dev, int iobase, int iobase2)
-+int ide_init_ioport(IDEBus *bus, Object *owner, int iobase, int iobase2)
+     mcf5206_init(OBJECT(machine), cpu, address_space_mem, AN5206_MBAR_ADDR);
+diff --git a/hw/m68k/mcf5206.c b/hw/m68k/mcf5206.c
+index b3c745d3f9..ee39a6ac30 100644
+--- a/hw/m68k/mcf5206.c
++++ b/hw/m68k/mcf5206.c
+@@ -589,7 +589,7 @@ static void mcf5206_mbar_realize(DeviceState *dev, Error **errp)
  {
-+    ISADevice *isa = ISA_DEVICE(object_dynamic_cast(owner, TYPE_ISA_DEVICE));
-     int ret;
+     m5206_mbar_state *s = MCF5206_MBAR(dev);
  
--    /* ??? Assume only ISA and PCI configurations, and that the PCI-ISA
--       bridge has been setup properly to always register with ISA.  */
--    ret = isa_register_portio_list(dev, &bus->portio_list,
--                                   iobase, ide_portio_list, bus, "ide");
--
--    if (ret == 0 && iobase2) {
--        ret = isa_register_portio_list(dev, &bus->portio2_list,
--                                       iobase2, ide_portio2_list, bus, "ide");
-+    if (isa) {
-+        ret = isa_register_portio_list(isa, &bus->portio_list,
-+                                       iobase, ide_portio_list, bus, "ide");
-+        if (ret == 0 && iobase2) {
-+            ret = isa_register_portio_list(isa, &bus->portio2_list,
-+                                           iobase2, ide_portio2_list, bus,
-+                                           "ide");
-+        }
-+        return ret;
+-    memory_region_init_io(&s->iomem, NULL, &m5206_mbar_ops, s,
++    memory_region_init_io(&s->iomem, OBJECT(dev), &m5206_mbar_ops, s,
+                           "mbar", 0x00001000);
+     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->iomem);
+ 
+diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
+index a955efebeb..93aee5ebd5 100644
+--- a/hw/m68k/mcf5208.c
++++ b/hw/m68k/mcf5208.c
+@@ -227,7 +227,8 @@ static const MemoryRegionOps m5208_rcm_ops = {
+     .endianness = DEVICE_BIG_ENDIAN,
+ };
+ 
+-static void mcf5208_sys_init(MemoryRegion *address_space, DeviceState *intc,
++static void mcf5208_sys_init(Object *owner, MemoryRegion *address_space,
++                             DeviceState *intc,
+                              M68kCPU *cpu)
+ {
+     MemoryRegion *iomem = g_new(MemoryRegion, 1);
+@@ -236,17 +237,17 @@ static void mcf5208_sys_init(MemoryRegion *address_space, DeviceState *intc,
+     int i;
+ 
+     /* RCM */
+-    memory_region_init_io(iomem_rcm, NULL, &m5208_rcm_ops, cpu,
++    memory_region_init_io(iomem_rcm, owner, &m5208_rcm_ops, cpu,
+                           "m5208-rcm", 0x00000080);
+     memory_region_add_subregion(address_space, 0xfc0a0000, iomem_rcm);
+     /* SDRAMC.  */
+-    memory_region_init_io(iomem, NULL, &m5208_sys_ops, NULL, "m5208-sys", 0x00004000);
++    memory_region_init_io(iomem, owner, &m5208_sys_ops, NULL, "m5208-sys", 0x00004000);
+     memory_region_add_subregion(address_space, 0xfc0a8000, iomem);
+     /* Timers.  */
+     for (i = 0; i < 2; i++) {
+         s = g_new0(m5208_timer_state, 1);
+         s->timer = ptimer_init(m5208_timer_trigger, s, PTIMER_POLICY_LEGACY);
+-        memory_region_init_io(&s->iomem, NULL, &m5208_timer_ops, s,
++        memory_region_init_io(&s->iomem, owner, &m5208_timer_ops, s,
+                               "m5208-timer", 0x00004000);
+         memory_region_add_subregion(address_space, 0xfc080000 + 0x4000 * i,
+                                     &s->iomem);
+@@ -296,14 +297,14 @@ static void mcf5208evb_init(MachineState *machine)
+     /* TODO: Configure BARs.  */
+ 
+     /* ROM at 0x00000000 */
+-    memory_region_init_rom(rom, NULL, "mcf5208.rom", ROM_SIZE, &error_fatal);
++    memory_region_init_rom(rom, OBJECT(machine), "mcf5208.rom", ROM_SIZE, &error_fatal);
+     memory_region_add_subregion(address_space_mem, 0x00000000, rom);
+ 
+     /* DRAM at 0x40000000 */
+     memory_region_add_subregion(address_space_mem, 0x40000000, machine->ram);
+ 
+     /* Internal SRAM.  */
+-    memory_region_init_ram(sram, NULL, "mcf5208.sram", 16 * KiB, &error_fatal);
++    memory_region_init_ram(sram, OBJECT(machine), "mcf5208.sram", 16 * KiB, &error_fatal);
+     memory_region_add_subregion(address_space_mem, 0x80000000, sram);
+ 
+     /* Internal peripherals.  */
+@@ -316,7 +317,7 @@ static void mcf5208evb_init(MachineState *machine)
+     mcf_uart_create_mmap(OBJECT(machine), 0xfc068000,
+                          qdev_get_gpio_in(intc, 28), serial_hd(2));
+ 
+-    mcf5208_sys_init(address_space_mem, intc, cpu);
++    mcf5208_sys_init(OBJECT(machine), address_space_mem, intc, cpu);
+ 
+     mcf_fec_init(address_space_mem, 0xfc030000, intc);
+ 
+diff --git a/hw/m68k/next-cube.c b/hw/m68k/next-cube.c
+index c80d32ef29..564a10a69e 100644
+--- a/hw/m68k/next-cube.c
++++ b/hw/m68k/next-cube.c
+@@ -1310,11 +1310,11 @@ static void next_cube_init(MachineState *machine)
+     sysbus_mmio_map(SYS_BUS_DEVICE(pcdev), 5, 0x0211a000);
+ 
+     /* BMAP memory */
+-    memory_region_init_ram_flags_nomigrate(&m->bmapm1, NULL, "next.bmapmem",
++    memory_region_init_ram_flags_nomigrate(&m->bmapm1, OBJECT(machine), "next.bmapmem",
+                                            64, RAM_SHARED, &error_fatal);
+     memory_region_add_subregion(sysmem, 0x020c0000, &m->bmapm1);
+     /* The Rev_2.5_v66.bin firmware accesses it at 0x820c0020, too */
+-    memory_region_init_alias(&m->bmapm2, NULL, "next.bmapmem2", &m->bmapm1,
++    memory_region_init_alias(&m->bmapm2, OBJECT(machine), "next.bmapmem2", &m->bmapm1,
+                              0x0, 64);
+     memory_region_add_subregion(sysmem, 0x820c0000, &m->bmapm2);
+ 
+@@ -1322,9 +1322,9 @@ static void next_cube_init(MachineState *machine)
+     sysbus_create_simple(OBJECT(machine), "kbd", TYPE_NEXTKBD, 0x0200e000, NULL);
+ 
+     /* Load ROM here */
+-    memory_region_init_rom(&m->rom, NULL, "next.rom", 0x20000, &error_fatal);
++    memory_region_init_rom(&m->rom, OBJECT(machine), "next.rom", 0x20000, &error_fatal);
+     memory_region_add_subregion(sysmem, 0x01000000, &m->rom);
+-    memory_region_init_alias(&m->rom2, NULL, "next.rom2", &m->rom, 0x0,
++    memory_region_init_alias(&m->rom2, OBJECT(machine), "next.rom2", &m->rom, 0x0,
+                              0x20000);
+     memory_region_add_subregion(sysmem, 0x0, &m->rom2);
+     Error *local_err = NULL;
+@@ -1352,7 +1352,7 @@ static void next_cube_init(MachineState *machine)
      }
  
--    return ret;
-+    /* PIIX3/4: no ISADevice, but ISA I/O space is set up by the PCI-ISA */
-+    /* bridge; register the port lists directly with the given owner.   */
-+    if (!isa_address_space_io(NULL)) {
-+        return -ENODEV;
-+    }
-+    portio_list_init(&bus->portio_list, owner, ide_portio_list, bus, "ide");
-+    portio_list_add(&bus->portio_list, isa_address_space_io(NULL), iobase);
-+    if (iobase2) {
-+        portio_list_init(&bus->portio2_list, owner,
-+                         ide_portio2_list, bus, "ide");
-+        portio_list_add(&bus->portio2_list,
-+                        isa_address_space_io(NULL), iobase2);
-+    }
-+    return 0;
+     /* DMA */
+-    memory_region_init_io(&m->dmamem, NULL, &next_dma_ops, machine,
++    memory_region_init_io(&m->dmamem, OBJECT(machine), &next_dma_ops, machine,
+                           "next.dma", 0x5000);
+     memory_region_add_subregion(sysmem, 0x02000000, &m->dmamem);
  }
-diff --git a/hw/ide/isa.c b/hw/ide/isa.c
-index 37457be035..7949625e00 100644
---- a/hw/ide/isa.c
-+++ b/hw/ide/isa.c
-@@ -71,7 +71,7 @@ static void isa_ide_realizefn(DeviceState *dev, Error **errp)
-     ISAIDEState *s = ISA_IDE(dev);
+diff --git a/hw/m68k/q800.c b/hw/m68k/q800.c
+index 15b3bcab5f..954cdf8489 100644
+--- a/hw/m68k/q800.c
++++ b/hw/m68k/q800.c
+@@ -309,7 +309,7 @@ static void q800_machine_init(MachineState *machine)
+     memory_region_add_subregion(get_system_memory(), IO_BASE + IO_SLICE,
+                                 &m->macio_alias);
  
-     ide_bus_init(&s->bus, sizeof(s->bus), dev, 0, 2);
--    ide_init_ioport(&s->bus, isadev, s->iobase, s->iobase2);
-+    ide_init_ioport(&s->bus, OBJECT(isadev), s->iobase, s->iobase2);
-     ide_bus_init_output_irq(&s->bus, isa_get_irq(isadev, s->irqnum));
-     vmstate_register_any(VMSTATE_IF(dev), &vmstate_ide_isa, s);
-     ide_bus_register_restart_cb(&s->bus);
-diff --git a/hw/ide/piix.c b/hw/ide/piix.c
-index a0f2709c69..5c5b91fa52 100644
---- a/hw/ide/piix.c
-+++ b/hw/ide/piix.c
-@@ -134,7 +134,7 @@ static bool pci_piix_init_bus(PCIIDEState *d, unsigned i, Error **errp)
-     int ret;
+-    memory_region_init_io(&m->machine_id, NULL, &machine_id_ops, NULL,
++    memory_region_init_io(&m->machine_id, OBJECT(machine), &machine_id_ops, NULL,
+                           "Machine ID", 4);
+     memory_region_add_subregion(get_system_memory(), 0x5ffffffc,
+                                 &m->machine_id);
+@@ -407,7 +407,7 @@ static void q800_machine_init(MachineState *machine)
+     sysbus_connect_irq(sysbus, 0,
+                        qdev_get_gpio_in(DEVICE(&m->glue), GLUE_IRQ_IN_SONIC));
  
-     ide_bus_init(&d->bus[i], sizeof(d->bus[i]), DEVICE(d), i, 2);
--    ret = ide_init_ioport(&d->bus[i], NULL, port_info[i].iobase,
-+    ret = ide_init_ioport(&d->bus[i], OBJECT(d), port_info[i].iobase,
-                           port_info[i].iobase2);
-     if (ret) {
-         error_setg_errno(errp, -ret, "Failed to realize %s port %u",
+-    memory_region_init_rom(&m->dp8393x_prom, NULL, "dp8393x-q800.prom",
++    memory_region_init_rom(&m->dp8393x_prom, OBJECT(machine), "dp8393x-q800.prom",
+                            SONIC_PROM_SIZE, &error_fatal);
+     memory_region_add_subregion(get_system_memory(), SONIC_PROM_BASE,
+                                 &m->dp8393x_prom);
+@@ -606,7 +606,7 @@ static void q800_machine_init(MachineState *machine)
+         BOOTINFO1(param_ptr, BI_MAC_VROW, macfb_mode->stride);
+         BOOTINFO1(param_ptr, BI_MAC_SCCBASE, SCC_BASE);
+ 
+-        memory_region_init_ram_ptr(&m->rom, NULL, "m68k_fake_mac.rom",
++        memory_region_init_ram_ptr(&m->rom, OBJECT(machine), "m68k_fake_mac.rom",
+                                    sizeof(fake_mac_rom), fake_mac_rom);
+         memory_region_set_readonly(&m->rom, true);
+         memory_region_add_subregion(get_system_memory(), MACROM_ADDR, &m->rom);
+@@ -651,12 +651,12 @@ static void q800_machine_init(MachineState *machine)
+     } else {
+         uint8_t *ptr;
+         /* allocate and load BIOS */
+-        memory_region_init_rom(&m->rom, NULL, "m68k_mac.rom", MACROM_SIZE,
++        memory_region_init_rom(&m->rom, OBJECT(machine), "m68k_mac.rom", MACROM_SIZE,
+                                &error_abort);
+         filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, bios_name);
+         memory_region_add_subregion(get_system_memory(), MACROM_ADDR, &m->rom);
+ 
+-        memory_region_init_alias(&m->rom_alias, NULL, "m68k_mac.rom-alias",
++        memory_region_init_alias(&m->rom_alias, OBJECT(machine), "m68k_mac.rom-alias",
+                                  &m->rom, 0, MACROM_SIZE);
+         memory_region_add_subregion(get_system_memory(), 0x40000000,
+                                     &m->rom_alias);
 -- 
 2.47.1
 
