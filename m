@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2977C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C540C44501
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:45:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEm-0002q8-3E; Sat, 11 Jul 2026 20:40:04 -0400
+	id 1wiiDm-0001fU-Pw; Sat, 11 Jul 2026 20:39:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigMV-0002q4-P0; Sat, 11 Jul 2026 18:39:55 -0400
-Received: from pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.12.53.23])
+ id 1wigfZ-0007hk-CR; Sat, 11 Jul 2026 18:59:38 -0400
+Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.13.214.179])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigMT-0005PG-Ps; Sat, 11 Jul 2026 18:39:55 -0400
+ id 1wigfR-0001gL-I9; Sat, 11 Jul 2026 18:59:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783809593; x=1815345593;
+ t=1783810769; x=1815346769;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=MEhdqOfPkkhqCMQm9ucJ2rRitXNb0sc0jREmbOfT4hA=;
- b=Ia+/epJTaCpegrLY100cB09P2JxrQwu74JF5Jbh2b9h0JmpNQ3jaAPrV
- k3SdV6FfedvmR6Y87L22ud15zyAL0YGfLlpHWi4808Oe0KMt+LZGqVpVx
- BgAvSdRqJxdmBF9B4jiYUcdF2BXhRIbQyBlYm55ZNjunQwm3dyPFiNTSf
- 7bLjWFJXh7QRaF9mjd0mixqxVQGy0qq5fD1fUhRPnz0ayRw9lJTJQ+1E+
- PJQoOH1B4BOo/h4osJnTPZIrE2bEiD5PrTOvayWDklcH5jca/2toZIZpW
- +6DmKyA7ZQXVKn07jol4QJe1EAknIX4CylC6HvRq1xQjlHXDPsTfERzEK A==;
-X-CSE-ConnectionGUID: deYkzdk0Qj6o3oXBvmMsYg==
-X-CSE-MsgGUID: 7wc9fV8YQquLtQE2jbrTzg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23369659"
-Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
- by internal-pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:39:50 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.111:6067]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.115:2525]
+ bh=kt2dEn9aFlPZ6cjaknzUQGuWA9n/MANpwwYTiQOngoY=;
+ b=oVq7QlZv+1VWqJn4McSglzjUVaGd2CF7CgY3nEk1TzsFlAtRNaIfBo8g
+ Qg8DqFaBrpGgQJwsS+6yWofNvVd5Ps3SFJcc7C+dGS0kYrFkMiLBjLvJ8
+ FKj4O0U6bzmW4bIxfzNQhGNdyn49BGzJgPE06X3rpj0+587cAakPU26A8
+ KYoWw+sE2Vr31CaOFeVVZltyr8gkHb4hL7Luq25xx2PRbzI5ukL7XHdUZ
+ /fvAvVY1mBrM23MBUvak3bvJeYXN/0kVsEQC/83kv/qE30xYH1A3IZjXa
+ GKkch7DIYAML3icvENIoLr1mnWuZueioO6p42+hLAgMUUmdDY/ctodWVM w==;
+X-CSE-ConnectionGUID: zl8Tf5aETLSFqDSBef0EaQ==
+X-CSE-MsgGUID: q7hwJd+rTQKjRsMPAeBvzQ==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23479632"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:59:26 +0000
+Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:25563]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525]
  with esmtp (Farcaster)
- id 11688c6e-7d1d-4082-8f33-6052c953fb94; Sat, 11 Jul 2026 22:39:49 +0000 (UTC)
-X-Farcaster-Flow-ID: 11688c6e-7d1d-4082-8f33-6052c953fb94
+ id c2daffbb-ed4d-49a0-935c-ffded380deb5; Sat, 11 Jul 2026 22:59:25 +0000 (UTC)
+X-Farcaster-Flow-ID: c2daffbb-ed4d-49a0-935c-ffded380deb5
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
+ EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:39:49 +0000
+ Sat, 11 Jul 2026 22:59:25 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:39:41 +0000
+ Sat, 11 Jul 2026 22:59:16 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 010/134] hw/avr: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:03 +0000
-Message-ID: <20260711223707.42139-11-graf@amazon.com>
+Subject: [RFC PATCH 084/134] isa: Remove *_orphan() creator variants
+Date: Sat, 11 Jul 2026 22:36:17 +0000
+Message-ID: <20260711223707.42139-85-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D039UWA004.ant.amazon.com (10.13.139.68) To
+X-ClientProxiedBy: EX19D031UWA004.ant.amazon.com (10.13.139.19) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.12.53.23;
+Received-SPF: pass client-ip=52.13.214.179;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -115,7 +115,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,44 +130,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/avr to the new
-parented API introduced earlier in this series, so every onboard
-device gets a stable path in the composition tree instead of landing
-in /machine/unattached with an unstable device[N] name.
+All boards create their ISA devices with an explicit QOM parent
+now.  Drop isa_new_orphan(), isa_try_new_orphan() and
+isa_create_simple_orphan().
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing device for
-composite children.  Names follow existing QOM conventions.
-
-Per-site rationale (reviewers: dispute the modeling here):
-
-  file:line       | parent       | name | rationale
-  atmega.c:287    | OBJECT(dev)  | "io" | unimplemented I/O placeholder is a fixed child of the Atmega SoC; SoC realize() creates it, SoC owns it
-
-Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/avr/atmega.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ hw/isa/isa-bus.c     | 19 -------------------
+ include/hw/isa/isa.h |  3 ---
+ 2 files changed, 22 deletions(-)
 
-diff --git a/hw/avr/atmega.c b/hw/avr/atmega.c
-index a85bdf929a..5eb640f628 100644
---- a/hw/avr/atmega.c
-+++ b/hw/avr/atmega.c
-@@ -284,10 +284,10 @@ static void atmega_realize(DeviceState *dev, Error **errp)
-      * 0x20 - 0x5f: I/O memory
-      * 0x60 - 0xff: Extended I/O
-      */
--    s->io = qdev_new_orphan(TYPE_UNIMPLEMENTED_DEVICE);
-+    s->io = qdev_new(OBJECT(dev), "io", TYPE_UNIMPLEMENTED_DEVICE);
-     qdev_prop_set_string(s->io, "name", "I/O");
-     qdev_prop_set_uint64(s->io, "size", mc->io_size);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(s->io), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(s->io), &error_fatal);
-     sysbus_mmio_map_overlap(SYS_BUS_DEVICE(s->io), 0, OFFSET_DATA, -1234);
+diff --git a/hw/isa/isa-bus.c b/hw/isa/isa-bus.c
+index 7a6a595ce7..22452e5048 100644
+--- a/hw/isa/isa-bus.c
++++ b/hw/isa/isa-bus.c
+@@ -172,25 +172,6 @@ ISADevice *isa_create_simple(Object *parent, const char *id,
+     return dev;
+ }
  
-     /* Power Reduction */
+-ISADevice *isa_new_orphan(const char *name)
+-{
+-    return ISA_DEVICE(qdev_new_orphan(name));
+-}
+-
+-ISADevice *isa_try_new_orphan(const char *name)
+-{
+-    return ISA_DEVICE(qdev_try_new_orphan(name));
+-}
+-
+-ISADevice *isa_create_simple_orphan(ISABus *bus, const char *name)
+-{
+-    ISADevice *dev;
+-
+-    dev = isa_new_orphan(name);
+-    isa_realize_and_unref(dev, bus, &error_fatal);
+-    return dev;
+-}
+-
+ bool isa_realize_and_unref(ISADevice *dev, ISABus *bus, Error **errp)
+ {
+     return qdev_realize_and_unref(&dev->parent_obj, &bus->parent_obj, errp);
+diff --git a/include/hw/isa/isa.h b/include/hw/isa/isa.h
+index 79bfe16361..9bbaa3c258 100644
+--- a/include/hw/isa/isa.h
++++ b/include/hw/isa/isa.h
+@@ -86,10 +86,7 @@ ISADevice *isa_new(Object *parent, const char *id, const char *type);
+ ISADevice *isa_try_new(Object *parent, const char *id, const char *type);
+ ISADevice *isa_create_simple(Object *parent, const char *id,
+                              ISABus *bus, const char *type);
+-ISADevice *isa_new_orphan(const char *name);
+-ISADevice *isa_try_new_orphan(const char *name);
+ bool isa_realize_and_unref(ISADevice *dev, ISABus *bus, Error **errp);
+-ISADevice *isa_create_simple_orphan(ISABus *bus, const char *name);
+ 
+ ISADevice *isa_vga_init(Object *parent, ISABus *bus);
+ 
 -- 
 2.47.1
 
