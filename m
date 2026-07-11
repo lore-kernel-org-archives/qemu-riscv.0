@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAD23C44507
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EFCBC43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiFn-0006BG-Mu; Sat, 11 Jul 2026 20:41:07 -0400
+	id 1wiiDv-0001iR-N0; Sat, 11 Jul 2026 20:39:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigkE-0008HB-FP; Sat, 11 Jul 2026 19:04:26 -0400
-Received: from pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([35.155.198.111])
+ id 1wigNJ-00043m-EO; Sat, 11 Jul 2026 18:40:45 -0400
+Received: from pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.68.102])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigkB-0002pi-0P; Sat, 11 Jul 2026 19:04:26 -0400
+ id 1wigNF-0005mV-87; Sat, 11 Jul 2026 18:40:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811063; x=1815347063;
+ t=1783809641; x=1815345641;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=0/nsBnKgWUlON7W258sp5IjMJ0xeaJFkP12OrTIw2Mo=;
- b=aRbldrnzMsCNYZL6q9vJcfVLh0DMyZv07Cyy9BBTw4vd/ThZRli5BhHl
- wS9wvguTmwpD+Omwdn59DgGJRCKB/oOFPslPTldeytwcBdTrm5Vkvx/ce
- T66SfWDfsjJse+hMHVRj3fulF4oEafil7044Ar4HAG8BGO1EML0WSMBTa
- VQgaMIlrNta7RYjHR1JHTtdD5xDeqN7pJKQUw25CiWXc0fAxSrJQBd6uq
- hq+DfxYLYC2DRN3xo65koLJt4/sWDt6yHxoTFA6SdwGcPSN/UJ5oYKe+T
- g0lbmH9k1cd+OcY7cgmfGWljrzlfBAfGACf3xBQu9XdDwKTQr5O/W96cc A==;
-X-CSE-ConnectionGUID: AGbXCP+9RtCoOqHxGe6ViQ==
-X-CSE-MsgGUID: l+4ZrixzSSer7JzOoCq3og==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23390719"
+ bh=eSRbV7G7G+bleKDtHv/YImdHl7QlpX/35p7U7LwVHOw=;
+ b=dR2pg7wnLXoUfifgOoWcvHjGsNTK5Ejej1Jn8C7+2v81fZxgOBSRLwOD
+ DXJ+EVyJQgEoa8UUbEldr51NeBYRyHnNR2fhaTWr3YTCyFamAlwHmsuXu
+ qTUfYiVfQUM1EaUOLAolkE4hdpfIBpDrJEzP+vin1s2iFPsnUL1fQ2U3/
+ cjoN2sn2roJ8Rd1IwlRS8IhU3qElMi2wbn1QT8hzNsrLgL58YE0ZGhYQL
+ tem5eVr1G14T/6hNIu6Fo1MyYF6jmuZb8bP72YoBEMelcYHSvGZC6cutU
+ NKe41UkqOoLZV9tiUUtF+aJwBjlP6wpCAePy0vDAi7oD1cZGPAaDEGcjE g==;
+X-CSE-ConnectionGUID: OBrRkZmQRha2ZyFwcTJHng==
+X-CSE-MsgGUID: fkAkwbXFSC2hofj4r1cHcA==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23517013"
 Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:04:19 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:17774]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.51.175:2525]
+ by internal-pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:40:28 +0000
+Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:31681]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.35.214:2525]
  with esmtp (Farcaster)
- id f5231cf3-4194-4805-81c5-b5267b89a834; Sat, 11 Jul 2026 23:04:18 +0000 (UTC)
-X-Farcaster-Flow-ID: f5231cf3-4194-4805-81c5-b5267b89a834
+ id 69686bc1-4ec4-41c7-a277-8d93fb6fae40; Sat, 11 Jul 2026 22:40:28 +0000 (UTC)
+X-Farcaster-Flow-ID: 69686bc1-4ec4-41c7-a277-8d93fb6fae40
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:04:18 +0000
+ Sat, 11 Jul 2026 22:40:28 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:04:10 +0000
+ Sat, 11 Jul 2026 22:40:19 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 103/134] hw/char: Give parallel and htif memory regions an
- explicit owner
-Date: Sat, 11 Jul 2026 22:36:36 +0000
-Message-ID: <20260711223707.42139-104-graf@amazon.com>
+Subject: [RFC PATCH 012/134] hw/xtensa: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:05 +0000
+Message-ID: <20260711223707.42139-13-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D043UWC001.ant.amazon.com (10.13.139.202) To
+X-ClientProxiedBy: EX19D031UWC004.ant.amazon.com (10.13.139.246) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=35.155.198.111;
+Received-SPF: pass client-ip=44.246.68.102;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -116,7 +115,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,147 +130,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thread Object *owner as the first argument through parallel_mm_init()
-and htif_mm_init(). All callers are inside board init functions
-and pass OBJECT(machine).
+Convert the *_orphan() device-creation calls in hw/xtensa to the new
+parented API introduced earlier in this series, so every onboard
+device gets a stable path in the composition tree instead of landing
+in /machine/unattached with an unstable device[N] name.
 
-No functional change intended.
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing device for
+composite children.  Names follow existing QOM conventions.
 
+Per-site rationale (reviewers: dispute the modeling here):
+
+  file:line       | parent           | name     | rationale
+  sim.c:66        | OBJECT(machine)  | "cpu[*]" | SMP CPUs created by board init(); machine owns them
+  virt.c:64       | OBJECT(ms)       | "pcie"   | GPEX PCIe host is a fixed onboard device of the virt machine; create_pcie() already receives MachineState
+  xtfpga.c:176    | OBJECT(machine)  | "flash"  | onboard CFI flash; thread an Object *parent argument through the static xtfpga_flash_init() helper from board init()
+  xtfpga.c:253    | OBJECT(machine)  | "cpu[*]" | SMP CPUs created by board init()
+
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/char/parallel.c           | 5 +++--
- hw/char/riscv_htif.c         | 5 +++--
- hw/hppa/machine.c            | 5 +++--
- hw/mips/jazz.c               | 2 +-
- hw/riscv/spike.c             | 2 +-
- include/hw/char/parallel.h   | 3 ++-
- include/hw/char/riscv_htif.h | 3 ++-
- 7 files changed, 15 insertions(+), 10 deletions(-)
+ hw/xtensa/sim.c    |  2 +-
+ hw/xtensa/virt.c   |  4 ++--
+ hw/xtensa/xtfpga.c | 13 ++++++++-----
+ 3 files changed, 11 insertions(+), 8 deletions(-)
 
-diff --git a/hw/char/parallel.c b/hw/char/parallel.c
-index 07bbc9443f..39a1d77e9f 100644
---- a/hw/char/parallel.c
-+++ b/hw/char/parallel.c
-@@ -585,7 +585,8 @@ static const MemoryRegionOps parallel_mm_ops = {
- };
+diff --git a/hw/xtensa/sim.c b/hw/xtensa/sim.c
+index 17245a0388..ad1439a0b4 100644
+--- a/hw/xtensa/sim.c
++++ b/hw/xtensa/sim.c
+@@ -63,7 +63,7 @@ XtensaCPU *xtensa_sim_common_init(MachineState *machine)
+     int n;
  
- /* If fd is zero, it means that the parallel device uses the console */
--bool parallel_mm_init(MemoryRegion *address_space,
-+bool parallel_mm_init(Object *owner,
-+                      MemoryRegion *address_space,
-                       hwaddr base, int it_shift, qemu_irq irq,
-                       Chardev *chr)
- {
-@@ -597,7 +598,7 @@ bool parallel_mm_init(MemoryRegion *address_space,
-     s->it_shift = it_shift;
-     qemu_register_reset(parallel_reset, s);
+     for (n = 0; n < machine->smp.cpus; n++) {
+-        cpu = XTENSA_CPU(cpu_create_orphan(machine->cpu_type));
++        cpu = XTENSA_CPU(cpu_create(OBJECT(machine), "cpu[*]", machine->cpu_type));
+         env = &cpu->env;
  
--    memory_region_init_io(&s->iomem, NULL, &parallel_mm_ops, s,
-+    memory_region_init_io(&s->iomem, owner, &parallel_mm_ops, s,
-                           "parallel", 8 << it_shift);
-     memory_region_add_subregion(address_space, base, &s->iomem);
-     return true;
-diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-index 488f938d98..f9e39c31aa 100644
---- a/hw/char/riscv_htif.c
-+++ b/hw/char/riscv_htif.c
-@@ -329,7 +329,8 @@ static const MemoryRegionOps htif_mm_ops = {
-     },
- };
+         env->sregs[PRID] = n;
+diff --git a/hw/xtensa/virt.c b/hw/xtensa/virt.c
+index e31b783b91..6b1271d0d5 100644
+--- a/hw/xtensa/virt.c
++++ b/hw/xtensa/virt.c
+@@ -61,8 +61,8 @@ static void create_pcie(MachineState *ms, CPUXtensaState *env, int irq_base,
+     qemu_irq *extints;
+     int i;
  
--HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
-+HTIFState *htif_mm_init(Object *owner,
-+                        MemoryRegion *address_space, Chardev *chr,
-                         uint64_t nonelf_base, bool custom_base)
- {
-     uint64_t base, size, tohost_offset, fromhost_offset;
-@@ -359,7 +360,7 @@ HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
-     qemu_chr_fe_set_handlers(&s->chr, htif_can_recv, htif_recv, htif_event,
-         htif_be_change, s, NULL, true);
+-    dev = qdev_new_orphan(TYPE_GPEX_HOST);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    dev = qdev_new(OBJECT(ms), "pcie", TYPE_GPEX_HOST);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
  
--    memory_region_init_io(&s->mmio, NULL, &htif_mm_ops, s,
-+    memory_region_init_io(&s->mmio, owner, &htif_mm_ops, s,
-                           TYPE_HTIF_UART, size);
-     memory_region_add_subregion_overlap(address_space, base,
-                                         &s->mmio, 1);
-diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
-index 233cf6318b..ea02b9e70e 100644
---- a/hw/hppa/machine.c
-+++ b/hw/hppa/machine.c
-@@ -613,7 +613,8 @@ static void machine_HP_715_init(MachineState *machine)
-         serial_hd(0), DEVICE_BIG_ENDIAN);
- 
-     /* Parallel port */
--    parallel_mm_init(addr_space, translate(NULL, LASI_HPA_715 + LASI_LPT + 0x800), 0,
-+    parallel_mm_init(OBJECT(machine), addr_space,
-+                     translate(NULL, LASI_HPA_715 + LASI_LPT + 0x800), 0,
-                      qdev_get_gpio_in(lasi_dev, LASI_IRQ_LPT_HPA),
-                      parallel_hds[0]);
- 
-@@ -706,7 +707,7 @@ static void machine_HP_B160L_init(MachineState *machine)
-         serial_hd(1), DEVICE_BIG_ENDIAN);
- 
-     /* Parallel port */
--    parallel_mm_init(addr_space,
-+    parallel_mm_init(OBJECT(machine), addr_space,
-                      translate(NULL, LASI_HPA + LASI_LPT + 0x800), 0,
-                      qdev_get_gpio_in(lasi_dev, LASI_IRQ_LPT_HPA),
-                      parallel_hds[0]);
-diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
-index 8999efb352..ff18b28c86 100644
---- a/hw/mips/jazz.c
-+++ b/hw/mips/jazz.c
-@@ -385,7 +385,7 @@ static void mips_jazz_init(MachineState *machine,
- 
-     /* Parallel port */
-     if (parallel_hds[0])
--        parallel_mm_init(address_space, 0x80008000, 0,
-+        parallel_mm_init(OBJECT(machine), address_space, 0x80008000, 0,
-                          qdev_get_gpio_in(rc4030, 0), parallel_hds[0]);
- 
-     /* FIXME: missing Jazz sound at 0x8000c000, rc4030[2] */
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 9f1a1b5898..cd9a2ee0df 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -247,7 +247,7 @@ static void spike_board_init(MachineState *machine)
-                               fdt_load_addr);
- 
-     /* initialize HTIF using symbols found in load_kernel */
--    htif_mm_init(system_memory, serial_hd(0), memmap[SPIKE_HTIF].base,
-+    htif_mm_init(OBJECT(machine), system_memory, serial_hd(0), memmap[SPIKE_HTIF].base,
-                  htif_custom_base);
+     /* Map only the first size_ecam bytes of ECAM space. */
+     ecam_alias = g_new0(MemoryRegion, 1);
+diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
+index 0ee7350945..07b791b9bf 100644
+--- a/hw/xtensa/xtfpga.c
++++ b/hw/xtensa/xtfpga.c
+@@ -168,12 +168,13 @@ static void xtfpga_net_init(MemoryRegion *address_space,
+     memory_region_add_subregion(address_space, buffers, ram);
  }
  
-diff --git a/include/hw/char/parallel.h b/include/hw/char/parallel.h
-index 782cc12602..7e8b9c9012 100644
---- a/include/hw/char/parallel.h
-+++ b/include/hw/char/parallel.h
-@@ -25,7 +25,8 @@ typedef struct ParallelState {
+-static PFlashCFI01 *xtfpga_flash_init(MemoryRegion *address_space,
++static PFlashCFI01 *xtfpga_flash_init(Object *parent,
++                                      MemoryRegion *address_space,
+                                       const XtfpgaBoardDesc *board,
+                                       DriveInfo *dinfo, int be)
+ {
+     SysBusDevice *s;
+-    DeviceState *dev = qdev_new_orphan(TYPE_PFLASH_CFI01);
++    DeviceState *dev = qdev_new(parent, "flash", TYPE_PFLASH_CFI01);
  
- void parallel_hds_isa_init(Object *parent, ISABus *bus, int n);
+     qdev_prop_set_drive(dev, "drive", blk_by_legacy_dinfo(dinfo));
+     qdev_prop_set_uint32(dev, "num-blocks",
+@@ -183,7 +184,7 @@ static PFlashCFI01 *xtfpga_flash_init(MemoryRegion *address_space,
+     qdev_prop_set_bit(dev, "big-endian", be);
+     qdev_prop_set_string(dev, "name", "xtfpga.io.flash");
+     s = SYS_BUS_DEVICE(dev);
+-    sysbus_realize_and_unref(s, &error_fatal);
++    sysbus_realize(s, &error_fatal);
+     memory_region_add_subregion(address_space, board->flash->base,
+                                 sysbus_mmio_get_region(s, 0));
+     return PFLASH_CFI01(dev);
+@@ -250,7 +251,8 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
+     for (n = 0; n < smp_cpus; n++) {
+         CPUXtensaState *cenv = NULL;
  
--bool parallel_mm_init(MemoryRegion *address_space,
-+bool parallel_mm_init(Object *owner,
-+                      MemoryRegion *address_space,
-                       hwaddr base, int it_shift, qemu_irq irq,
-                       Chardev *chr);
+-        cpu = XTENSA_CPU(cpu_create_orphan(machine->cpu_type));
++        cpu = XTENSA_CPU(cpu_create(OBJECT(machine), "cpu[*]",
++                                    machine->cpu_type));
+         cenv = &cpu->env;
+         if (!env) {
+             env = cenv;
+@@ -315,7 +317,8 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
  
-diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
-index 9d61e60d0a..40516adc08 100644
---- a/include/hw/char/riscv_htif.h
-+++ b/include/hw/char/riscv_htif.h
-@@ -48,7 +48,8 @@ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
-     uint64_t st_size);
+     dinfo = drive_get(IF_PFLASH, 0, 0);
+     if (dinfo) {
+-        flash = xtfpga_flash_init(system_io, board, dinfo, TARGET_BIG_ENDIAN);
++        flash = xtfpga_flash_init(OBJECT(machine), system_io, board, dinfo,
++                                  TARGET_BIG_ENDIAN);
+     }
  
- /* legacy pre qom */
--HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
-+HTIFState *htif_mm_init(Object *owner,
-+                        MemoryRegion *address_space, Chardev *chr,
-                         uint64_t nonelf_base, bool custom_base);
- 
- #endif
+     /* Use presence of kernel file name as 'boot from SRAM' switch. */
 -- 
 2.47.1
 
