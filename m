@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D59BC43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73799C44506
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEQ-0002EE-T6; Sat, 11 Jul 2026 20:39:42 -0400
+	id 1wiiFa-0005Bj-4V; Sat, 11 Jul 2026 20:40:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigpO-0001my-4d; Sat, 11 Jul 2026 19:09:46 -0400
-Received: from pdx-out-014.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([35.83.148.184])
+ id 1wigb2-0006Ab-53; Sat, 11 Jul 2026 18:54:56 -0400
+Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.77.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigpM-0004J1-EU; Sat, 11 Jul 2026 19:09:45 -0400
+ id 1wigb0-0000aB-2Y; Sat, 11 Jul 2026 18:54:55 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811384; x=1815347384;
+ t=1783810494; x=1815346494;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=x8e6PZxUhb790ARPbhW5JeHe4VOlr3birYehijCm6Kg=;
- b=YtqVAwxVkDyZdAjYLFeEuiyuuJljhej0uhW1cW6ss4s82hPtM3xRGudG
- rePEEuSyxqRqJrFPo2RU5/eTORh31cKRL9toJUzDqH+dhTFkbfAZ4DlMP
- b31t9fiHxETSn9rgGW9zQoPkbJedJ3rAIM6Ur1lKb6kOti6gMF5GKk45h
- yLMskrfkgein1hst2vKTXwaCOmFAbROYlvH5n2Rav8XdaN4F6QjftK3qy
- iA2FRvn4tHQxJdUZIEyz2CqMrYSawL1pqwN//UoXjyV5F8Y6igpd6h3qM
- f1QaGlMJP6g06UKLbtGohr/ENYDuFcSwQJY49q1QJvcXtOg3jfhHcTMb7 w==;
-X-CSE-ConnectionGUID: 1tb6duz1TSOzpqyKN/esAw==
-X-CSE-MsgGUID: YFqcqexnR9CUypRdueR7zg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23287941"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-014.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:09:40 +0000
-Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:23993]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.42.69:2525]
+ bh=D9g+aVM94UMznw+s65uqey3AbIXgNoxopxgQZq/AO70=;
+ b=nXVxqUVUtHVT3sO8/NxjzcJFuJ79tLuE+7+5FSWe0424erB8sShQ1R0R
+ C7riTDegrDVrR8q1fnOBDJdrOWu55vc7pal/9HUCuxWF/AEXCxGjp6w+t
+ ppFXbGat8pZPFijIj8ILNRgN+1G/28SF5wfMDrAbV3pSQIWW9LuhAe15F
+ o3qntbjIms1bTMuBHbOi9IuWFJiotcElfyiIcDphdemrqexW6QqnWkw73
+ GzN5vga6pI4GKJCVvQcue0KQQVEspxb4NnQoI9sG+PfmaE54fydTNh/Qn
+ waHA6mjO2x1zzRqiqtjRXGbQk0zFM70dRHGcwoijr//cG2YrCqdwFXvul g==;
+X-CSE-ConnectionGUID: r5i9ri9kQw+Ggemfhy22Mw==
+X-CSE-MsgGUID: 3PM/+ZQ1RKqgJn08eMY1vQ==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23493179"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
+ by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:54:50 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.182:10930]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.26.212:2525]
  with esmtp (Farcaster)
- id 7ec8e06f-56ca-4e7f-b9b6-b85acefa29be; Sat, 11 Jul 2026 23:09:40 +0000 (UTC)
-X-Farcaster-Flow-ID: 7ec8e06f-56ca-4e7f-b9b6-b85acefa29be
+ id bdb2d29d-60c8-4ef1-ad63-10db65981f50; Sat, 11 Jul 2026 22:54:49 +0000 (UTC)
+X-Farcaster-Flow-ID: bdb2d29d-60c8-4ef1-ad63-10db65981f50
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
+ EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:09:40 +0000
+ Sat, 11 Jul 2026 22:54:49 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:09:31 +0000
+ Sat, 11 Jul 2026 22:54:40 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 123/134] hw/s390x,
- hw/remote: Parent per-devfn IOMMU objects
-Date: Sat, 11 Jul 2026 22:36:56 +0000
-Message-ID: <20260711223707.42139-124-graf@amazon.com>
+Subject: [RFC PATCH 067/134] hw/arm/omap: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:36:00 +0000
+Message-ID: <20260711223707.42139-68-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,18 +101,18 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D036UWC004.ant.amazon.com (10.13.139.205) To
+X-ClientProxiedBy: EX19D033UWC003.ant.amazon.com (10.13.139.217) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=35.83.148.184;
+Received-SPF: pass client-ip=44.246.77.92;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-014.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
@@ -131,58 +130,124 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Give the per-devfn S390 PCI IOMMU object a canonical path under the
-S390 PCI host state.  s390_pci_iommu_free() already calls
-object_unparent(), which was previously a no-op; it now performs
-the actual release.
+Convert the *_orphan() device-creation calls in the hw/arm omap
+board files to the new parented API introduced earlier in this
+series, so every onboard device gets a stable path in the
+composition tree instead of landing in /machine/unattached with an
+unstable device[N] name.
 
-For the multi-process remote IOMMU, replace the raw
-object_new(TYPE_MEMORY_REGION) with a proper memory_region_init()
-under the RemoteIommu object so the MR gets an owner like every
-other MR in the tree.
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing SoC device for
+composite children.  Names follow existing QOM conventions.
 
+Per-site rationale (reviewers: dispute the modeling here):
+
+hw/arm/omap1.c:3752 | cpu_create | parent | "cpu" | omap310_mpu_init() already receives Object *parent; use it directly.
+hw/arm/omap1.c:3766 | qdev_new | parent | "intc[0]" | Two interrupt controllers, explicit index. Paired sysbus_realize_and_unref -> sysbus_realize.
+hw/arm/omap1.c:3776 | qdev_new | parent | "intc[1]" | Second intc. Paired sysbus_realize_and_unref -> sysbus_realize.
+hw/arm/omap1.c:3879 | qdev_new | parent | "mmc" | Single MMC. Paired sysbus_realize_and_unref -> sysbus_realize.
+hw/arm/omap1.c:3891 | qdev_new | parent | "sd-card" | Single SD card (bus is not parent). Paired qdev_realize_and_unref -> qdev_realize.
+hw/arm/omap1.c:3903 | qdev_new | parent | "gpio" | Single GPIO. Paired sysbus_realize_and_unref -> sysbus_realize.
+hw/arm/omap1.c:3920 | qdev_new | parent | "i2c" | Single i2c (only i2c[0] populated on omap1). Paired sysbus_realize_and_unref -> sysbus_realize.
+
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/remote/iommu.c       | 5 +++--
- hw/s390x/s390-pci-bus.c | 8 +++++++-
- 2 files changed, 10 insertions(+), 3 deletions(-)
+ hw/arm/omap1.c | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/hw/remote/iommu.c b/hw/remote/iommu.c
-index 3e0758a21e..09f79e805c 100644
---- a/hw/remote/iommu.c
-+++ b/hw/remote/iommu.c
-@@ -52,8 +52,9 @@ static AddressSpace *remote_iommu_find_add_as(PCIBus *pci_bus,
+diff --git a/hw/arm/omap1.c b/hw/arm/omap1.c
+index c86914a464..e5e092e074 100644
+--- a/hw/arm/omap1.c
++++ b/hw/arm/omap1.c
+@@ -3749,7 +3749,7 @@ struct omap_mpu_state_s *omap310_mpu_init(Object *parent, MemoryRegion *dram,
+     MemoryRegion *system_memory = get_system_memory();
+ 
+     /* Core */
+-    s->cpu = ARM_CPU(cpu_create_orphan(cpu_type));
++    s->cpu = ARM_CPU(cpu_create(parent, "cpu", cpu_type));
+     s->sdram_size = memory_region_size(dram);
+     s->sram_size = OMAP15XX_SRAM_SIZE;
+ 
+@@ -3763,21 +3763,21 @@ struct omap_mpu_state_s *omap310_mpu_init(Object *parent, MemoryRegion *dram,
+ 
+     omap_clkm_init(system_memory, 0xfffece00, 0xe1008000, s);
+ 
+-    s->ih[0] = qdev_new_orphan("omap-intc");
++    s->ih[0] = qdev_new(parent, "intc[0]", "omap-intc");
+     qdev_prop_set_uint32(s->ih[0], "size", 0x100);
+     omap_intc_set_iclk(OMAP_INTC(s->ih[0]), omap_findclk(s, "arminth_ck"));
+     busdev = SYS_BUS_DEVICE(s->ih[0]);
+-    sysbus_realize_and_unref(busdev, &error_fatal);
++    sysbus_realize(busdev, &error_fatal);
+     sysbus_connect_irq(busdev, 0,
+                        qdev_get_gpio_in(DEVICE(s->cpu), ARM_CPU_IRQ));
+     sysbus_connect_irq(busdev, 1,
+                        qdev_get_gpio_in(DEVICE(s->cpu), ARM_CPU_FIQ));
+     sysbus_mmio_map(busdev, 0, 0xfffecb00);
+-    s->ih[1] = qdev_new_orphan("omap-intc");
++    s->ih[1] = qdev_new(parent, "intc[1]", "omap-intc");
+     qdev_prop_set_uint32(s->ih[1], "size", 0x800);
+     omap_intc_set_iclk(OMAP_INTC(s->ih[1]), omap_findclk(s, "arminth_ck"));
+     busdev = SYS_BUS_DEVICE(s->ih[1]);
+-    sysbus_realize_and_unref(busdev, &error_fatal);
++    sysbus_realize(busdev, &error_fatal);
+     sysbus_connect_irq(busdev, 0,
+                        qdev_get_gpio_in(s->ih[0], OMAP_INT_15XX_IH2_IRQ));
+     /* The second interrupt controller's FIQ output is not wired up */
+@@ -3876,8 +3876,8 @@ struct omap_mpu_state_s *omap310_mpu_init(Object *parent, MemoryRegion *dram,
+         warn_report("missing SecureDigital device");
      }
  
-     if (!elem->mr) {
--        elem->mr = MEMORY_REGION(object_new(TYPE_MEMORY_REGION));
--        memory_region_set_size(elem->mr, UINT64_MAX);
-+        g_autofree char *name = g_strdup_printf("mr-devfn-%02x", devfn);
-+        elem->mr = g_new0(MemoryRegion, 1);
-+        memory_region_init(elem->mr, OBJECT(iommu), name, UINT64_MAX);
-         address_space_init(&elem->as, elem->mr, NULL);
+-    s->mmc = qdev_new_orphan(TYPE_OMAP_MMC);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(s->mmc), &error_fatal);
++    s->mmc = qdev_new(parent, "mmc", TYPE_OMAP_MMC);
++    sysbus_realize(SYS_BUS_DEVICE(s->mmc), &error_fatal);
+     omap_mmc_set_clk(s->mmc, omap_findclk(s, "mmc_ck"));
+ 
+     memory_region_add_subregion(system_memory, 0xfffb7800,
+@@ -3888,11 +3888,11 @@ struct omap_mpu_state_s *omap310_mpu_init(Object *parent, MemoryRegion *dram,
+                        qdev_get_gpio_in(s->ih[1], OMAP_INT_OQN));
+ 
+     if (dinfo) {
+-        DeviceState *card = qdev_new_orphan(TYPE_SD_CARD);
++        DeviceState *card = qdev_new(parent, "sd-card", TYPE_SD_CARD);
+         qdev_prop_set_drive_err(card, "drive", blk_by_legacy_dinfo(dinfo),
+                                 &error_fatal);
+-        qdev_realize_and_unref(card, qdev_get_child_bus(s->mmc, "sd-bus"),
+-                               &error_fatal);
++        qdev_realize(card, qdev_get_child_bus(s->mmc, "sd-bus"),
++                     &error_fatal);
      }
  
-diff --git a/hw/s390x/s390-pci-bus.c b/hw/s390x/s390-pci-bus.c
-index 4f0a8a787b..557ecbb977 100644
---- a/hw/s390x/s390-pci-bus.c
-+++ b/hw/s390x/s390-pci-bus.c
-@@ -618,7 +618,13 @@ static S390PCIIOMMU *s390_pci_get_iommu(S390pciState *s, PCIBus *bus,
+     s->mpuio = omap_mpuio_init(system_memory, 0xfffb5000,
+@@ -3900,9 +3900,9 @@ struct omap_mpu_state_s *omap310_mpu_init(Object *parent, MemoryRegion *dram,
+                                qdev_get_gpio_in(s->ih[1], OMAP_INT_MPUIO),
+                                omap_findclk(s, "clk32-kHz"));
  
-     iommu = table->iommu[PCI_SLOT(devfn)];
-     if (!iommu) {
--        iommu = S390_PCI_IOMMU(object_new(TYPE_S390_PCI_IOMMU));
-+        char *ch_name = g_strdup_printf("iommu[%02x:%02x.%01x]",
-+                                        pci_bus_num(bus),
-+                                        PCI_SLOT(devfn),
-+                                        PCI_FUNC(devfn));
-+        iommu = S390_PCI_IOMMU(object_new_child(OBJECT(s), ch_name,
-+                                                TYPE_S390_PCI_IOMMU));
-+        g_free(ch_name);
+-    s->gpio = qdev_new_orphan("omap-gpio");
++    s->gpio = qdev_new(parent, "gpio", "omap-gpio");
+     omap_gpio_set_clk(OMAP1_GPIO(s->gpio), omap_findclk(s, "arm_gpio_ck"));
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(s->gpio), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(s->gpio), &error_fatal);
+     sysbus_connect_irq(SYS_BUS_DEVICE(s->gpio), 0,
+                        qdev_get_gpio_in(s->ih[0], OMAP_INT_GPIO_BANK1));
+     sysbus_mmio_map(SYS_BUS_DEVICE(s->gpio), 0, 0xfffce000);
+@@ -3917,11 +3917,11 @@ struct omap_mpu_state_s *omap310_mpu_init(Object *parent, MemoryRegion *dram,
+     s->pwt = omap_pwt_init(system_memory, 0xfffb6000,
+                            omap_findclk(s, "armxor_ck"));
  
-         char *mr_name = g_strdup_printf("iommu-root-%02x:%02x.%01x",
-                                         pci_bus_num(bus),
+-    s->i2c[0] = qdev_new_orphan("omap_i2c");
++    s->i2c[0] = qdev_new(parent, "i2c", "omap_i2c");
+     qdev_prop_set_uint8(s->i2c[0], "revision", 0x11);
+     omap_i2c_set_fclk(OMAP_I2C(s->i2c[0]), omap_findclk(s, "mpuper_ck"));
+     busdev = SYS_BUS_DEVICE(s->i2c[0]);
+-    sysbus_realize_and_unref(busdev, &error_fatal);
++    sysbus_realize(busdev, &error_fatal);
+     sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(s->ih[1], OMAP_INT_I2C));
+     sysbus_connect_irq(busdev, 1, s->drq[OMAP_DMA_I2C_TX]);
+     sysbus_connect_irq(busdev, 2, s->drq[OMAP_DMA_I2C_RX]);
 -- 
 2.47.1
 
