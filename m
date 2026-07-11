@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BBD7C44506
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:45:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE0B0C4450B
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:45:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiDq-0001gk-43; Sat, 11 Jul 2026 20:39:07 -0400
+	id 1wiiEQ-0002D0-FX; Sat, 11 Jul 2026 20:39:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigof-00008h-2M; Sat, 11 Jul 2026 19:09:01 -0400
-Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.245.243.92])
+ id 1wigmc-0004uF-55; Sat, 11 Jul 2026 19:06:54 -0400
+Received: from pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([34.218.115.239])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigob-00047n-2S; Sat, 11 Jul 2026 19:09:00 -0400
+ id 1wigma-0003fy-77; Sat, 11 Jul 2026 19:06:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811337; x=1815347337;
+ t=1783811212; x=1815347212;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=RjzyzstKMqEdpWpECl8E1JcahBO6m41j6mbqUJjb658=;
- b=h0Kt1uI3I3XTOf6ZragpUP2VlZc8BpzRxINLQYvuck/pDscy0JVJUJrO
- gyH5n+t3iRL2MYuXQjH8t/a3fS8w7serfKY3SNxB71asodQYpteDk9YmS
- b+KPF+JlSzuQYQhxKtUYeAfWTRmMKkBVspOL0T35lES1dLvsoVKWfYSlL
- 5vO8fvAWdGJS2KngGNM9ityr6fXKzMWqTUmMF0giZtL74VGecvfp1RvCN
- pdKdKWVG+1jrFbBNdOzDUawXRrZaWshS3S3M7H6sQgezb0YADcs+plbWO
- wR0VIaApZvlq2yLDslZ/DJwhiN1l9Or0Pm+A3UOTr757rggtbxCtgyV7T Q==;
-X-CSE-ConnectionGUID: 4V/jQ0cnRo2wHIvGpDl6aA==
-X-CSE-MsgGUID: Y1BgZRbrRamvEsi+WCujQQ==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="22997855"
-Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
- by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:08:53 +0000
-Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:7144]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.68:2525]
+ bh=w/aD5NYnau+ZnTk1eR1BTVjPeFMEELMMhtgZGkb5Ouw=;
+ b=RMe1bLab3OKPoeFgDc+HVPQYcV/VP14uV8BXzTWpRsmT/LrVkyMt1/6N
+ IkO+tacN3KLKuqN8OjueYv/KRJ5+Jh7Ft0srHPWOBF874aFHzirnyNSyi
+ 83ZsVQtrZsOpJ3nOrN3dZVhRA65SJUrmwYnp3rpfsdr9oXk2I+vJvS4DQ
+ B/4w6MIg1KgUj7b1Wl7zjXwMYpK6gMlAo6e7jbRnHXpQ9uMvTEjFJ3AAJ
+ dcwx2pPtUXxPrsFQxT/h7dK0PdSFNhDo4+IPSOK54y0a6xOVwlXhlUFqI
+ 2ZolBpiWkwYjpA0MC+07gkh18GKaTkjzYWWd3TQtQ1x7fS23n6sy7DF8u g==;
+X-CSE-ConnectionGUID: AVox5K2eSWySgUbgACtvMg==
+X-CSE-MsgGUID: UZWzl86rQBa180H3fG962A==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23296948"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:06:48 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:21852]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.115:2525]
  with esmtp (Farcaster)
- id b70aa7fb-e9b8-4175-b273-0d4dd83d31cc; Sat, 11 Jul 2026 23:08:52 +0000 (UTC)
-X-Farcaster-Flow-ID: b70aa7fb-e9b8-4175-b273-0d4dd83d31cc
+ id b5137696-ae70-469a-9448-dc736f7daa37; Sat, 11 Jul 2026 23:06:48 +0000 (UTC)
+X-Farcaster-Flow-ID: b5137696-ae70-469a-9448-dc736f7daa37
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
+ EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:08:52 +0000
+ Sat, 11 Jul 2026 23:06:48 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:08:44 +0000
+ Sat, 11 Jul 2026 23:06:39 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 120/134] system: Parent per-MR helper objects under their
- owner
-Date: Sat, 11 Jul 2026 22:36:53 +0000
-Message-ID: <20260711223707.42139-121-graf@amazon.com>
+Subject: [RFC PATCH 113/134] hw/xtensa: Give allocated IRQs an owner and name
+Date: Sat, 11 Jul 2026 22:36:46 +0000
+Message-ID: <20260711223707.42139-114-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D033UWC002.ant.amazon.com (10.13.139.196) To
+X-ClientProxiedBy: EX19D039UWB002.ant.amazon.com (10.13.138.79) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.245.243.92;
+Received-SPF: pass client-ip=34.218.115.239;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -131,82 +130,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-RamBlockAttributes and MemoryRegionPortioList objects are long-lived
-helpers whose lifetime is already tied to a MemoryRegion or its owner.
-Give each a canonical path under that owner instead of leaving them
-as floating refcounted objects:
-
-  <mr-path>/attributes           (RamBlockAttributes)
-  <owner-path>/portio-list[N]    (MemoryRegionPortioList)
-
-The destroy paths switch from object_unref() to object_unparent()
-now that the parent holds the reference.
-
-RamDiscardManager is deliberately left as-is: it is unref'd from
-memory_region_finalize() itself, so making it a child<> of the MR
-would introduce a use-after-free during MR teardown.  It can move
-under a different owner in a follow-up once the RDM lifecycle is
-untangled from MR finalize.
+Thread an Object *owner through xtensa_mx_pic_init() and use the CPU
+object as owner for the per-CPU IRQ input arrays.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- system/ioport.c               | 5 +++--
- system/ram-block-attributes.c | 7 ++++---
- 2 files changed, 7 insertions(+), 5 deletions(-)
+ hw/xtensa/mx_pic.c         | 4 ++--
+ hw/xtensa/pic_cpu.c        | 5 +++--
+ hw/xtensa/xtfpga.c         | 2 +-
+ include/hw/xtensa/mx_pic.h | 2 +-
+ 4 files changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/system/ioport.c b/system/ioport.c
-index 0415b3cd60..77ab77d7be 100644
---- a/system/ioport.c
-+++ b/system/ioport.c
-@@ -145,7 +145,7 @@ void portio_list_destroy(PortioList *piolist)
-     for (i = 0; i < piolist->nr; ++i) {
-         mrpio = container_of(piolist->regions[i], MemoryRegionPortioList, mr);
-         object_unparent(OBJECT(&mrpio->mr));
--        object_unref(mrpio);
-+        object_unparent(OBJECT(mrpio));
+diff --git a/hw/xtensa/mx_pic.c b/hw/xtensa/mx_pic.c
+index 9959bec5f2..f698d592f0 100644
+--- a/hw/xtensa/mx_pic.c
++++ b/hw/xtensa/mx_pic.c
+@@ -341,12 +341,12 @@ static void xtensa_mx_pic_set_irq(void *opaque, int irq, int active)
      }
-     g_free(piolist->regions);
- }
-@@ -228,7 +228,8 @@ static void portio_list_add_1(PortioList *piolist,
- 
-     /* Copy the sub-list and null-terminate it.  */
-     mrpio = MEMORY_REGION_PORTIO_LIST(
--                object_new(TYPE_MEMORY_REGION_PORTIO_LIST));
-+                object_new_child(piolist->owner, "portio-list[*]",
-+                                 TYPE_MEMORY_REGION_PORTIO_LIST));
-     mrpio->portio_opaque = piolist->opaque;
-     mrpio->ports = g_new0(MemoryRegionPortio, count + 1);
-     memcpy(mrpio->ports, pio_init, sizeof(MemoryRegionPortio) * count);
-diff --git a/system/ram-block-attributes.c b/system/ram-block-attributes.c
-index 59ec7a28eb..0967bed6d3 100644
---- a/system/ram-block-attributes.c
-+++ b/system/ram-block-attributes.c
-@@ -182,12 +182,13 @@ RamBlockAttributes *ram_block_attributes_create(RAMBlock *ram_block)
-     RamBlockAttributes *attr;
-     MemoryRegion *mr = ram_block->mr;
- 
--    attr = RAM_BLOCK_ATTRIBUTES(object_new(TYPE_RAM_BLOCK_ATTRIBUTES));
-+    attr = RAM_BLOCK_ATTRIBUTES(object_new_child(OBJECT(mr), "attributes",
-+                                                 TYPE_RAM_BLOCK_ATTRIBUTES));
- 
-     attr->ram_block = ram_block;
- 
-     if (memory_region_add_ram_discard_source(mr, RAM_DISCARD_SOURCE(attr))) {
--        object_unref(OBJECT(attr));
-+        object_unparent(OBJECT(attr));
-         return NULL;
-     }
-     attr->bitmap_size = DIV_ROUND_UP(int128_get64(mr->size), block_size);
-@@ -202,7 +203,7 @@ void ram_block_attributes_destroy(RamBlockAttributes *attr)
- 
-     g_free(attr->bitmap);
-     memory_region_del_ram_discard_source(attr->ram_block->mr, RAM_DISCARD_SOURCE(attr));
--    object_unref(OBJECT(attr));
-+    object_unparent(OBJECT(attr));
  }
  
- static void ram_block_attributes_init(Object *obj)
+-XtensaMxPic *xtensa_mx_pic_init(unsigned n_irq)
++XtensaMxPic *xtensa_mx_pic_init(Object *owner, unsigned n_irq)
+ {
+     XtensaMxPic *mx = g_new0(XtensaMxPic, 1);
+ 
+     mx->n_irq = n_irq + 1;
+-    mx->irq_inputs = qemu_allocate_irqs_orphan(xtensa_mx_pic_set_irq, mx,
++    mx->irq_inputs = qemu_allocate_irqs(owner, "irq", xtensa_mx_pic_set_irq, mx,
+                                         mx->n_irq);
+     return mx;
+ }
+diff --git a/hw/xtensa/pic_cpu.c b/hw/xtensa/pic_cpu.c
+index c3163a8b6c..496c83a298 100644
+--- a/hw/xtensa/pic_cpu.c
++++ b/hw/xtensa/pic_cpu.c
+@@ -100,9 +100,10 @@ static void xtensa_set_runstall(void *opaque, int irq, int active)
+ 
+ void xtensa_irq_init(CPUXtensaState *env)
+ {
++    Object *cpu = OBJECT(env_cpu(env));
+     unsigned i;
+ 
+-    env->irq_inputs = qemu_allocate_irqs_orphan(xtensa_set_irq, env,
++    env->irq_inputs = qemu_allocate_irqs(cpu, "irq-in", xtensa_set_irq, env,
+                                          env->config->ninterrupt);
+     if (xtensa_option_enabled(env->config, XTENSA_OPTION_TIMER_INTERRUPT)) {
+         env->time_base = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+@@ -118,7 +119,7 @@ void xtensa_irq_init(CPUXtensaState *env)
+ 
+         env->ext_irq_inputs[i] = env->irq_inputs[irq];
+     }
+-    env->runstall_irq = qemu_allocate_irq_orphan(xtensa_set_runstall, env, 0);
++    env->runstall_irq = qemu_allocate_irq(cpu, "runstall", xtensa_set_runstall, env, 0);
+ }
+ 
+ qemu_irq *xtensa_get_extints(CPUXtensaState *env)
+diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
+index f0c21180a2..6ec0822a96 100644
+--- a/hw/xtensa/xtfpga.c
++++ b/hw/xtensa/xtfpga.c
+@@ -247,7 +247,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
+     Object *mo = OBJECT(machine);
+ 
+     if (smp_cpus > 1) {
+-        mx_pic = xtensa_mx_pic_init(31);
++        mx_pic = xtensa_mx_pic_init(mo, 31);
+         qemu_register_reset(xtensa_mx_pic_reset, mx_pic);
+     }
+     for (n = 0; n < smp_cpus; n++) {
+diff --git a/include/hw/xtensa/mx_pic.h b/include/hw/xtensa/mx_pic.h
+index 01d5ea884e..212cf91e78 100644
+--- a/include/hw/xtensa/mx_pic.h
++++ b/include/hw/xtensa/mx_pic.h
+@@ -33,7 +33,7 @@
+ struct XtensaMxPic;
+ typedef struct XtensaMxPic XtensaMxPic;
+ 
+-XtensaMxPic *xtensa_mx_pic_init(unsigned n_extint);
++XtensaMxPic *xtensa_mx_pic_init(Object *owner, unsigned n_extint);
+ void xtensa_mx_pic_reset(void *opaque);
+ MemoryRegion *xtensa_mx_pic_register_cpu(Object *owner, XtensaMxPic *mx,
+                                          qemu_irq *irq,
 -- 
 2.47.1
 
