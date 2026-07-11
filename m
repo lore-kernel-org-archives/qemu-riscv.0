@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA0D8C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:40:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC132C44501
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:40:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiDn-0001ff-E9; Sat, 11 Jul 2026 20:39:03 -0400
+	id 1wiiDv-0001j4-Pq; Sat, 11 Jul 2026 20:39:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigo8-0007SE-Cj; Sat, 11 Jul 2026 19:08:29 -0400
-Received: from pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.42.203.116])
+ id 1wigUB-0000bs-AO; Sat, 11 Jul 2026 18:47:54 -0400
+Received: from pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.1.125])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigo6-00043Q-K9; Sat, 11 Jul 2026 19:08:28 -0400
+ id 1wigU6-0007UR-Pw; Sat, 11 Jul 2026 18:47:51 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811306; x=1815347306;
+ t=1783810066; x=1815346066;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Z9jEjZXxPXlMJqbiHIRBDdPowd0FRoDuIoH9/d4zUSc=;
- b=XCuquQOiTrbrU5LLYEObM2TtvrgHqR7wuT5OAMYrJMablcFtBcxC5z4z
- A9Xzdlre1Ja7pmHL6mVLeXlRA1pMaANbv4tBgYwgbtVKNcULuievnUJ6r
- iNUQPZlTawzglsMCVSMGMEQ9bxARuu8RuXzirHyOLhdbRqqAmLjmm798L
- BsnUpdpHlhQpinLcOWIOOk6GgkHzr9YmmqHTJGDZp3zRBBZalwJs6O4AH
- hh22wj36qGnkTD3pLWuMkR+Zpr1uHvqa0EklozDznhqILsHF4afAq3/LE
- 1woEXRF8If48s7wxHUT1tFY5GwywnJ7w07T8gxBfoVKygbF0GqytMv9DH A==;
-X-CSE-ConnectionGUID: xEw6ybjpR9ScqvbkC6e2Bw==
-X-CSE-MsgGUID: B1bQ1VuZQimt/IgX0fVpjg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23518195"
-Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:08:23 +0000
-Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:8809]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.115:2525]
+ bh=urslx+F+1DcIG3WUi4fMfYT2/zRrg9pAEDrsh9YargQ=;
+ b=izSq6CFs3F6ndSae3lsgI27z+khf3AxUlyHYfP8Bts9XfTaNIXvBFXID
+ Q5bU3MH9Cqn2gCdmlyC3EKjSS/rdamoycyInva76OUNT6Q9XWYeat0T1n
+ s2E/myT8vAD/bXuUQiXoyBo0grdtOu5Zg3YSdNUAdQ2e35xq9qiN1Z4vz
+ /1o+kkhoQl0oRbVrHvOkNzylYyvmeziqkL8KTyhGzZApEslfxcj6aEYko
+ 9VlXn7rF69kAJpO4BkPjRYHurS+5PViW4GflvreCzP5300gWC7AiDbHG3
+ ueKSFQwK1KhgekwkVU6oEpb0JsSeOjMEY468vFFWumH9N/pCqIC52s765 A==;
+X-CSE-ConnectionGUID: k2DGPdOOTCSGAO5S8+UCUw==
+X-CSE-MsgGUID: fpsjUdf1Sx2W5u6wG68Dog==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23505584"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
+ by internal-pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:47:42 +0000
+Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.234:25187]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.47.135:2525]
  with esmtp (Farcaster)
- id 04fffb0f-cf34-4624-a838-41849e58edce; Sat, 11 Jul 2026 23:08:22 +0000 (UTC)
-X-Farcaster-Flow-ID: 04fffb0f-cf34-4624-a838-41849e58edce
+ id 8f9145b8-4259-41d4-b720-ba37100c3c08; Sat, 11 Jul 2026 22:47:42 +0000 (UTC)
+X-Farcaster-Flow-ID: 8f9145b8-4259-41d4-b720-ba37100c3c08
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
+ EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:08:22 +0000
+ Sat, 11 Jul 2026 22:47:41 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:08:13 +0000
+ Sat, 11 Jul 2026 22:47:33 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 119/134] hw/core/reset: Give the root reset container and
- legacy shims a QOM path
-Date: Sat, 11 Jul 2026 22:36:52 +0000
-Message-ID: <20260711223707.42139-120-graf@amazon.com>
+Subject: [RFC PATCH 040/134] hw/i3c: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:33 +0000
+Message-ID: <20260711223707.42139-41-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D044UWB002.ant.amazon.com (10.13.139.188) To
+X-ClientProxiedBy: EX19D040UWA002.ant.amazon.com (10.13.139.113) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.42.203.116;
+Received-SPF: pass client-ip=44.246.1.125;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -116,7 +115,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,77 +130,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The root ResettableContainer and the LegacyReset shim objects are
-long-lived singletons held only by static pointers and refcounts.
-Give them a canonical path in the composition tree so
-qom-tree/qom-list can enumerate them and so device_set_realized()
-can require a QOM parent for every object.
+Convert the *_orphan() device-creation calls in hw/i3c to the new
+parented API introduced earlier in this series, so every onboard
+device gets a stable path in the composition tree instead of landing
+in /machine/unattached with an unstable device[N] name.
 
-  /machine/reset-container                (ResettableContainer)
-  /machine/reset-container/legacy-reset[N] (LegacyReset shims)
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing device for
+composite children.  Names follow existing QOM conventions.
 
-get_root_reset_container() is first reached from configure_accelerators()
-or machine_run_board_init(), both of which run after qemu_create_machine(),
-so qdev_get_machine() is available.  qemu_unregister_reset() switches
-from object_unref() to object_unparent() to release the child<> ref.
+Per-site rationale (reviewers: dispute the modeling here):
 
+hw/i3c/core.c:550 | qdev_new | parent | id | public helper; thread Object *parent + const char *id through i3c_target_new() and its caller i3c_target_create_simple()
+hw/i3c/core.c:626 | i2c_slave_new | parent | id | public helper; thread Object *parent + const char *id through legacy_i2c_device_create_simple()
+
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/core/reset.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+ hw/i3c/core.c        | 19 +++++++++++--------
+ include/hw/i3c/i3c.h |  9 ++++++---
+ 2 files changed, 17 insertions(+), 11 deletions(-)
 
-diff --git a/hw/core/reset.c b/hw/core/reset.c
-index e7230b49b7..34c1ab84d9 100644
---- a/hw/core/reset.c
-+++ b/hw/core/reset.c
-@@ -27,6 +27,7 @@
- #include "system/reset.h"
- #include "hw/core/resettable.h"
- #include "hw/core/resetcontainer.h"
-+#include "hw/core/qdev.h"
- 
- /*
-  * Return a pointer to the singleton container that holds all the Resettable
-@@ -38,7 +39,9 @@ static ResettableContainer *get_root_reset_container(void)
- 
-     if (!root_reset_container) {
-         root_reset_container =
--            RESETTABLE_CONTAINER(object_new(TYPE_RESETTABLE_CONTAINER));
-+            RESETTABLE_CONTAINER(object_new_child(qdev_get_machine(),
-+                                          "reset-container",
-+                                          TYPE_RESETTABLE_CONTAINER));
-     }
-     return root_reset_container;
+diff --git a/hw/i3c/core.c b/hw/i3c/core.c
+index 469d66f1fb..23b32290e5 100644
+--- a/hw/i3c/core.c
++++ b/hw/i3c/core.c
+@@ -542,12 +542,13 @@ static bool i3c_addr_is_rsvd(uint8_t addr)
+     return is_rsvd[addr];
  }
-@@ -94,7 +97,8 @@ static void legacy_reset_class_init(ObjectClass *klass, const void *data)
  
- void qemu_register_reset(QEMUResetHandler *func, void *opaque)
+-I3CTarget *i3c_target_new(const char *name, uint8_t addr, uint8_t dcr,
++I3CTarget *i3c_target_new(Object *parent, const char *id,
++                          const char *name, uint8_t addr, uint8_t dcr,
+                           uint8_t bcr, uint64_t pid)
  {
--    Object *obj = object_new(TYPE_LEGACY_RESET);
-+    Object *obj = object_new_child(OBJECT(get_root_reset_container()),
-+                                   "legacy-reset[*]", TYPE_LEGACY_RESET);
-     LegacyReset *lr = LEGACY_RESET(obj);
+     DeviceState *dev;
  
-     lr->func = func;
-@@ -104,7 +108,8 @@ void qemu_register_reset(QEMUResetHandler *func, void *opaque)
- 
- void qemu_register_reset_nosnapshotload(QEMUResetHandler *func, void *opaque)
- {
--    Object *obj = object_new(TYPE_LEGACY_RESET);
-+    Object *obj = object_new_child(OBJECT(get_root_reset_container()),
-+                                   "legacy-reset[*]", TYPE_LEGACY_RESET);
-     LegacyReset *lr = LEGACY_RESET(obj);
- 
-     lr->func = func;
-@@ -156,7 +161,7 @@ void qemu_unregister_reset(QEMUResetHandler *func, void *opaque)
- 
-     if (obj) {
-         qemu_unregister_resettable(obj);
--        object_unref(obj);
-+        object_unparent(obj);
-     }
+-    dev = qdev_new_orphan(name);
++    dev = qdev_new(parent, id, name);
+     qdev_prop_set_uint8(dev, "static-address", addr);
+     qdev_prop_set_uint8(dev, "dcr", dcr);
+     qdev_prop_set_uint8(dev, "bcr", bcr);
+@@ -566,12 +567,13 @@ bool i3c_target_realize_and_unref(I3CTarget *dev, I3CBus *bus, Error **errp)
+     return qdev_realize_and_unref(&dev->parent_obj, &bus->parent_obj, errp);
  }
+ 
+-I3CTarget *i3c_target_create_simple(I3CBus *bus, const char *name, uint8_t addr,
++I3CTarget *i3c_target_create_simple(Object *parent, const char *id,
++                                    I3CBus *bus, const char *name, uint8_t addr,
+                                     uint8_t dcr, uint8_t bcr, uint64_t pid)
+ {
+-    I3CTarget *dev = i3c_target_new(name, addr, dcr, bcr, pid);
++    I3CTarget *dev = i3c_target_new(parent, id, name, addr, dcr, bcr, pid);
+     dev->address = 0;
+-    i3c_target_realize_and_unref(dev, bus, &error_abort);
++    qdev_realize(DEVICE(dev), BUS(bus), &error_abort);
+ 
+     return dev;
+ }
+@@ -620,12 +622,13 @@ void legacy_i2c_end_transfer(I3CBus *bus)
+     i2c_end_transfer(bus->i2c_bus);
+ }
+ 
+-I2CSlave *legacy_i2c_device_create_simple(I3CBus *bus, const char *name,
++I2CSlave *legacy_i2c_device_create_simple(Object *parent, const char *id,
++                                          I3CBus *bus, const char *name,
+                                           uint8_t addr)
+ {
+-    I2CSlave *dev = i2c_slave_new_orphan(name, addr);
++    I2CSlave *dev = i2c_slave_new(parent, id, name, addr);
+ 
+-    i2c_slave_realize_and_unref(dev, bus->i2c_bus, &error_abort);
++    qdev_realize(DEVICE(dev), BUS(bus->i2c_bus), &error_abort);
+     return dev;
+ }
+ 
+diff --git a/include/hw/i3c/i3c.h b/include/hw/i3c/i3c.h
+index dcf8d9b143..d0edf7d8bd 100644
+--- a/include/hw/i3c/i3c.h
++++ b/include/hw/i3c/i3c.h
+@@ -257,7 +257,8 @@ int legacy_i2c_start_transfer(I3CBus *bus, uint8_t address, bool is_recv);
+ int legacy_i2c_start_recv(I3CBus *bus, uint8_t address);
+ int legacy_i2c_start_send(I3CBus *bus, uint8_t address);
+ void legacy_i2c_end_transfer(I3CBus *bus);
+-I2CSlave *legacy_i2c_device_create_simple(I3CBus *bus, const char *name,
++I2CSlave *legacy_i2c_device_create_simple(Object *parent, const char *id,
++                                          I3CBus *bus, const char *name,
+                                           uint8_t addr);
+ 
+ /**
+@@ -265,7 +266,8 @@ I2CSlave *legacy_i2c_device_create_simple(I3CBus *bus, const char *name,
+  *
+  * The target returned from this function still needs to be realized.
+  */
+-I3CTarget *i3c_target_new(const char *name, uint8_t addr, uint8_t dcr,
++I3CTarget *i3c_target_new(Object *parent, const char *id,
++                          const char *name, uint8_t addr, uint8_t dcr,
+                           uint8_t bcr, uint64_t pid);
+ 
+ /**
+@@ -274,7 +276,8 @@ I3CTarget *i3c_target_new(const char *name, uint8_t addr, uint8_t dcr,
+  * Create the target, initialize it, put it on the specified I3C bus, and
+  * realize it.
+  */
+-I3CTarget *i3c_target_create_simple(I3CBus *bus, const char *name,
++I3CTarget *i3c_target_create_simple(Object *parent, const char *id,
++                                    I3CBus *bus, const char *name,
+                                     uint8_t addr, uint8_t dcr, uint8_t bcr,
+                                     uint64_t pid);
  
 -- 
 2.47.1
