@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25AD2C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:40:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30B10C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:40:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEN-00023w-Pe; Sat, 11 Jul 2026 20:39:39 -0400
+	id 1wiiDn-0001fY-3M; Sat, 11 Jul 2026 20:39:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigro-0007D7-7U; Sat, 11 Jul 2026 19:12:16 -0400
-Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.245.243.92])
+ id 1wignt-0007BG-2B; Sat, 11 Jul 2026 19:08:13 -0400
+Received: from pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([34.218.115.239])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigrm-0004zp-5z; Sat, 11 Jul 2026 19:12:15 -0400
+ id 1wignq-0003yo-Az; Sat, 11 Jul 2026 19:08:12 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811534; x=1815347534;
+ t=1783811290; x=1815347290;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=XeZQT88wIcncKcWqQFOrz0CkgYPwdm06RFCiYUu+uZU=;
- b=qYFTYAgMg2sXIQKPTx8HAAet93GNO7HxWuvsNi1I9qny8cRogLEzgVyG
- KLUCdaqpFCNG2hbLk+cLRhQfu6XYVGP5yIChCjVABvFooTOID36GCqJ5O
- D6R+Vwi7ps5z1YTOVl3/hcUdYU8s1sRgHKH8Q3KrToFwXMvvUEQ3zgp2I
- W51HThIj1o122ixA27cFzgD2o6rA5JOssaCDZYrMcZHBWfmAN74j700PK
- Ukp1ItAWPT4I3fdBI6LLAujL+u5qnWQ3H6bREa097iDzyxTyFfTewZ4Xg
- Ju2C7ialqHJ0DeH4BpqSY+PTjt29Obt+tsC6jvsbDeFu05olSI7B/xYwm g==;
-X-CSE-ConnectionGUID: 6zYogTNzTQulN2hza0vT3g==
-X-CSE-MsgGUID: ftXU9H+/SJ6T5zVwcmsB7Q==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="22997919"
-Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
- by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:12:10 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:4432]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.47.135:2525]
+ bh=tPMmk224u2umsl8me1FiHvbMiJivmP9hfh/70Zj6vFI=;
+ b=jZ6CiOpERBlruOdDJ7AemH3VwwRV9XmiSkqTP7L/8M32j7hxlt4cF9/M
+ zz3uPd7sbE2yzhjtbcFdEstkZtjK25KTxz/uqKkiUfU4Og3DC4cRQkLEO
+ jdNxERSvpTtp0iImJn/cM36AbKdGuOj1DLQch67Vxgx98xa5YzYOtV+kj
+ JwJKBXtlEtV+EyMqfwq/aILBk95a8uyW7M8Z0lZR/W+jH6ELNHpCJR2rS
+ aPRF7GBYC+HJdOwb/27KHtu5gF1BxX+b6SH6tUYMad+9Vra0YTvwd17/9
+ gWwcB2xTDzzSEVPCBpEPHCbsLzuljIIPuNMtKnqHcoZVqFItxVMf+wnEu Q==;
+X-CSE-ConnectionGUID: ILu1D4OTQNiaaASA3l3rlg==
+X-CSE-MsgGUID: VCgiFJwOQjqPkICgdRiK9g==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23296956"
+Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+ by internal-pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:08:06 +0000
+Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:25963]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525]
  with esmtp (Farcaster)
- id dcc1ebd5-c3fb-43da-b8cb-1f5134ba6bd5; Sat, 11 Jul 2026 23:12:10 +0000 (UTC)
-X-Farcaster-Flow-ID: dcc1ebd5-c3fb-43da-b8cb-1f5134ba6bd5
+ id 0176f3c0-559c-45c9-948b-39f3e11e643e; Sat, 11 Jul 2026 23:08:06 +0000 (UTC)
+X-Farcaster-Flow-ID: 0176f3c0-559c-45c9-948b-39f3e11e643e
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:12:10 +0000
+ Sat, 11 Jul 2026 23:08:05 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:12:01 +0000
+ Sat, 11 Jul 2026 23:07:57 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 133/134] docs/devel/qom: Document the composition-tree
- parenting contract
-Date: Sat, 11 Jul 2026 22:37:06 +0000
-Message-ID: <20260711223707.42139-134-graf@amazon.com>
+Subject: [RFC PATCH 117/134] sysbus: Parent main-system-bus directly under
+ /machine
+Date: Sat, 11 Jul 2026 22:36:50 +0000
+Message-ID: <20260711223707.42139-118-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,11 +102,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D039UWB004.ant.amazon.com (10.13.138.57) To
+X-ClientProxiedBy: EX19D044UWB002.ant.amazon.com (10.13.139.188) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.245.243.92;
+Received-SPF: pass client-ip=34.218.115.239;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -116,7 +116,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:58 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,126 +131,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a section to the QOM developer documentation explaining that
-every object must have a composition-tree parent before use, how
-to pick the parent (creator owns lifetime), how to name children,
-the reference-count contract for parented creators, and where the
-contract is enforced (device_set_realized, memory_region_do_init,
-qdev_connect_gpio_out_named).
+The main system bus is the only object deliberately placed under
+/machine/unattached; every other resident is an accidental orphan.
+Promoting it to /machine/sysbus makes /machine/unattached a pure
+bug indicator that later commits can turn into a hard error.
+
+The canonical path changes from /machine/unattached/sysbus to
+/machine/sysbus.  qom-list users that hard-code the old path need
+to be updated; the hmp/qmp qom-tree output naturally follows.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- docs/devel/qom.rst | 96 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 96 insertions(+)
+ system/vl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/docs/devel/qom.rst b/docs/devel/qom.rst
-index 935bb1004a..ffcb3333b5 100644
---- a/docs/devel/qom.rst
-+++ b/docs/devel/qom.rst
-@@ -27,6 +27,102 @@ that make up a QEMU "machine". You can view this tree by running
- objects created by the machine itself as well those created due to
- user configuration.
+diff --git a/system/vl.c b/system/vl.c
+index 061cbdf860..b4434839df 100644
+--- a/system/vl.c
++++ b/system/vl.c
+@@ -2211,7 +2211,7 @@ static void qemu_create_machine(QDict *qdict)
+     object_property_add_child(object_get_root(), "machine",
+                               OBJECT(current_machine));
+     qemu_create_machine_containers(OBJECT(current_machine));
+-    object_property_add_child(machine_get_container("unattached"),
++    object_property_add_child(OBJECT(current_machine),
+                               "sysbus", OBJECT(sysbus_get_default()));
  
-+Composition-tree parenting contract
-+====================================
-+
-+Every QOM object that participates in the running system must have a
-+composition-tree parent before it is used.  The parent gives the object
-+a stable, canonical path such as ``/machine/soc/uart[0]`` that is
-+visible in ``info qom-tree`` and addressable via ``qom-get`` and
-+``qom-set``.  Objects that reach ``realize`` (for devices), that are
-+wired to another object (for IRQ lines), or that are given a name (for
-+memory regions) without a parent are programming errors.
-+
-+Creating parented objects
-+-------------------------
-+
-+The standard creation helpers all take the composition-tree parent and
-+the child name as their first two arguments:
-+
-+.. code-block:: c
-+
-+    Object      *object_new_child(Object *parent, const char *id,
-+                                  const char *typename);
-+    DeviceState *qdev_new(Object *parent, const char *id,
-+                          const char *typename);
-+    DeviceState *sysbus_create_simple(Object *parent, const char *id,
-+                                      const char *type, hwaddr, qemu_irq);
-+    PCIDevice   *pci_new(Object *parent, const char *id, ...);
-+    ISADevice   *isa_new(Object *parent, const char *id, ...);
-+    /* i2c_slave_new(), ssi_create_peripheral(), usb_new(),
-+       cpu_create() etc. follow the same pattern. */
-+
-+``object_new()`` remains available as the primitive allocator for
-+transient introspection objects and for ``qdev_device_add()``, which
-+parents the device via ``qdev_set_id()``.  All other callers should use
-+one of the parented helpers above, or ``object_initialize_child()`` for
-+objects that are embedded by value in the parent's instance struct.
-+
-+Choosing the parent
-+-------------------
-+
-+The QOM parent is the object that owns the child's lifetime.  In
-+practice this is the object whose code is creating the child:
-+
-+* Board code (``MachineClass.init``) parents onboard devices to the
-+  machine: ``OBJECT(machine)``.
-+* A composite device's ``DeviceClass.realize`` parents the sub-devices
-+  it creates to itself: ``OBJECT(dev)``.
-+* An SoC container likewise parents the devices it creates to the SoC
-+  object.
-+
-+The bus a device is plugged into is *not* its composition-tree parent.
-+A device may sit on a bus owned by ``B`` without being a child of
-+``B``; the bus relationship is expressed through the ``parent_bus``
-+link, not the ``child<>`` property.
-+
-+Choosing the child name
-+-----------------------
-+
-+* A single instance takes a bare noun: ``"uart"``, ``"gic"``, ``"rtc"``.
-+* A fixed number of identical instances take an explicit index:
-+  ``"uart[0]"``, ``"uart[1]"``.
-+* When the caller does not care about the index, ``"uart[*]"`` lets
-+  QOM allocate the next free slot in the ``uart[]`` array.
-+* Address-based names such as ``"eth@0x30000000"`` should only be used
-+  when the address is genuinely the identity of the device.
-+
-+Child names share the parent's property namespace, so avoid names that
-+collide with class-defined properties of the parent (in particular,
-+machine class properties visible on ``/machine``).
-+
-+Reference-count contract
-+------------------------
-+
-+``object_new_child()``, ``qdev_new()`` and the per-bus creators return
-+with the object's single reference held by the parent's ``child<>``
-+property.  The caller does *not* hold a reference of its own and must
-+therefore pair creation with plain ``qdev_realize()`` rather than
-+``qdev_realize_and_unref()``.  The object is finalized when the parent
-+drops its ``child<>`` property, typically via ``object_unparent()``.
-+
-+Enforcement
-+-----------
-+
-+The parenting contract is enforced at the points where an unparented
-+object would first become visible or entangled with another object:
-+
-+* ``device_set_realized()`` fails with an ``Error`` if the device has
-+  no composition-tree parent.
-+* ``memory_region_do_init()`` asserts that a memory region given a
-+  non-empty name also has an owner.
-+* ``qdev_connect_gpio_out_named()`` asserts that the outbound IRQ
-+  line being connected already has a composition-tree parent.
-+
-+There is no ``/machine/unattached`` fallback container; an object that
-+would previously have landed there now triggers one of the errors
-+above instead.
-+
- Creating a QOM class
- ====================
- 
+     if (machine_class->minimum_page_bits) {
 -- 
 2.47.1
 
