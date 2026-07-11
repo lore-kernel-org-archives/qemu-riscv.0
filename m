@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF11C44506
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:42:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B252C44506
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:42:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEO-00027E-Eb; Sat, 11 Jul 2026 20:39:40 -0400
+	id 1wiiER-0002G5-Ol; Sat, 11 Jul 2026 20:39:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigYc-00017D-Gl; Sat, 11 Jul 2026 18:52:27 -0400
-Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.77.92])
+ id 1wigrD-000529-Ae; Sat, 11 Jul 2026 19:11:39 -0400
+Received: from pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.26.1.71])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigYY-0008Tx-V9; Sat, 11 Jul 2026 18:52:26 -0400
+ id 1wigrA-0004oT-6D; Sat, 11 Jul 2026 19:11:39 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810343; x=1815346343;
+ t=1783811496; x=1815347496;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=qJ9SPZd6KqKT0DByIkveEz5n2P2u8Ab+W4C2Tdl7jYU=;
- b=RaQia3awJ9VURokJD/SJpdT5RmyuQIi9OzMik2N9DQGN/CRREhUdD/vC
- yK7Ahl/4PcylV0VfAljIfFQ+WPbgFrruvhevlbspTkEqPNYMxwoNPo5xw
- eobvM/v7GllIn4tLurNatE+cmZkVZU4EqQqlfaTQvqLpZKlMa6+VN77xs
- VtQEIMulGneHMqtFJSJGCVC/6ly8XqTynghEOi4ezRiJDF1ikwX1sMvNq
- xFN2SKArBFl2SqJN4eeFFh85/2CB3EhvSH3y1DTg/lm+ZD0Ypkp9w9CXE
- RflYbU7HSGAbfG5xBcBA5u4eDo8/HbMawfAcGfY/gikuA3t3i1WwRqs+6 w==;
-X-CSE-ConnectionGUID: jjHQ2GzHTxyUeU25lbK3Pg==
-X-CSE-MsgGUID: 290MNva6RYilvvSdP7ceRA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23493166"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:52:18 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.51:25417]
+ bh=Q5N6fawkyuDtUnNYJxBdgz/csX5+RhQ+sY6295/LuDg=;
+ b=VSjZQPL51Hhqhi6QKkSBJ4Nq8a/9ULuyyR2cu+A6r9IFY3W+Aiyfrv0E
+ 8lNTb44ITQOm9w51QLcbeQiRQAhUTCLGEAfYuDiXEUH5CJqFat11yKTtA
+ AQOsFSCeY9Kc6Az6T5oL8zKKe1F1VssW7e6tc9NQeJSRxvNYPVXXd5/GF
+ E4g2LK3HVrEGWIijQKFzTIm0LxRmOpEB39OV2MGejFcGxCbNuCTegcG45
+ e8a6xATHO4UUtx4JeTFl1SWEQWhOJ8BtgUlIlezXBeBdvx+oEjWpGrF8M
+ QldfgbyS8ji0cOsdG31K/SpsSc4atA0/hOsCLIAPRPBOQzMg8TjcASkTD Q==;
+X-CSE-ConnectionGUID: ksplJDb0QJq8pfX8kY0HZg==
+X-CSE-MsgGUID: IQ5j94ieRSyIIyLX0WMynw==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23522671"
+Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
+ by internal-pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:11:32 +0000
+Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.178:7336]
  by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.54:2525]
  with esmtp (Farcaster)
- id 1520f47c-e749-4a59-a4bb-753b46ca57be; Sat, 11 Jul 2026 22:52:18 +0000 (UTC)
-X-Farcaster-Flow-ID: 1520f47c-e749-4a59-a4bb-753b46ca57be
+ id 2cacee7a-8c8d-4b5a-8116-d8e6772a127e; Sat, 11 Jul 2026 23:11:31 +0000 (UTC)
+X-Farcaster-Flow-ID: 2cacee7a-8c8d-4b5a-8116-d8e6772a127e
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:52:18 +0000
+ Sat, 11 Jul 2026 23:11:31 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:52:09 +0000
+ Sat, 11 Jul 2026 23:11:23 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 057/134] hw/arm/sbsa-ref: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:50 +0000
-Message-ID: <20260711223707.42139-58-graf@amazon.com>
+Subject: [RFC PATCH 131/134] docs, qapi, scripts,
+ iotests: Update /machine/unattached path references
+Date: Sat, 11 Jul 2026 22:37:04 +0000
+Message-ID: <20260711223707.42139-132-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,21 +102,21 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D043UWA003.ant.amazon.com (10.13.139.31) To
+X-ClientProxiedBy: EX19D045UWC002.ant.amazon.com (10.13.139.230) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.77.92;
+Received-SPF: pass client-ip=52.26.1.71;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-006.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:58 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,280 +131,608 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in the hw/arm sbsa-ref
-board files to the new parented API introduced earlier in this
-series, so every onboard device gets a stable path in the
-composition tree instead of landing in /machine/unattached with an
-unstable device[N] name.
+Board-created devices no longer land in /machine/unattached and the
+next commit removes the container entirely.  Update the in-tree
+consumers of the old paths:
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing SoC device for
-composite children.  Names follow existing QOM conventions.
+  scripts/arm_processor_error.py, scripts/qmp_helper.py
+    Search for CPUs directly under /machine.
+  docs/devel/s390-cpu-topology.rst, docs/system/cpu-hotplug.rst
+  qapi/{block-core,block,machine,qom}.json
+    Refresh example qom-path strings.
+  tests/qemu-iotests/common.filter
+    _filter_qom_path() now normalizes any /machine/... device path
+    so the reference outputs are stable across board naming changes.
+  tests/qemu-iotests/{172,186}.out
+    Regenerated against the new filter.
 
-Per-site rationale (reviewers: dispute the modeling here):
-
-hw/arm/sbsa-ref.c:299 | qdev_new | OBJECT(sms) | name | collapse existing object_property_add_child(OBJECT(sms), name, ...); keep existing name; sbsa_flash_map1 realize -> sysbus_realize
-hw/arm/sbsa-ref.c:424 | qdev_new | OBJECT(sms) | "its" | helper receives SBSAMachineState* board pointer
-hw/arm/sbsa-ref.c:443 | qdev_new | OBJECT(sms) | "gic" | helper receives SBSAMachineState* board pointer
-hw/arm/sbsa-ref.c:525 | qdev_new | OBJECT(sms) | "uart[*]" | helper called 3x from board init -> auto-index; drop const
-hw/arm/sbsa-ref.c:540 | sysbus_create_simple | OBJECT(sms) | "rtc" | helper receives SBSAMachineState*; drop const
-hw/arm/sbsa-ref.c:547 | qdev_new | OBJECT(sms) | "wdt" | helper receives SBSAMachineState*; drop const
-hw/arm/sbsa-ref.c:575 | sysbus_create_simple | OBJECT(sms) | "gpio" | helper receives SBSAMachineState*; drop const
-hw/arm/sbsa-ref.c:578 | sysbus_create_simple | OBJECT(sms) | "gpio-key" | helper receives SBSAMachineState*
-hw/arm/sbsa-ref.c:593 | qdev_new | OBJECT(sms) | "ahci" | helper receives SBSAMachineState*; drop const
-hw/arm/sbsa-ref.c:608 | qdev_new | OBJECT(sms) | "xhci" | helper receives SBSAMachineState*; drop const
-hw/arm/sbsa-ref.c:625 | qdev_new | OBJECT(sms) | "smmuv3" | helper receives SBSAMachineState*; drop const
-hw/arm/sbsa-ref.c:661 | qdev_new | OBJECT(sms) | "pcie" | helper receives SBSAMachineState*
-hw/arm/sbsa-ref.c:698 | pci_create_simple | OBJECT(sms) | "bochs-display" | board owns lifetime; bus is plug location not parent
-hw/arm/sbsa-ref.c:715 | qdev_new | parent | "sbsa-ec" | helper lacks parent-capable pointer -> thread Object *parent from sbsa_ref_init
-
-Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/arm/sbsa-ref.c | 70 ++++++++++++++++++++++++-----------------------
- 1 file changed, 36 insertions(+), 34 deletions(-)
+ docs/devel/s390-cpu-topology.rst |  2 +-
+ docs/system/cpu-hotplug.rst      |  4 +-
+ qapi/block-core.json             | 12 +++---
+ qapi/block.json                  |  2 +-
+ qapi/machine.json                | 12 +++---
+ qapi/qom.json                    |  4 +-
+ scripts/arm_processor_error.py   |  3 +-
+ scripts/qmp_helper.py            |  2 +-
+ tests/qemu-iotests/172.out       | 72 ++++++++++++++++----------------
+ tests/qemu-iotests/186.out       | 10 ++---
+ tests/qemu-iotests/common.filter |  2 +-
+ 11 files changed, 62 insertions(+), 63 deletions(-)
 
-diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index f9fb681d31..f632df742b 100644
---- a/hw/arm/sbsa-ref.c
-+++ b/hw/arm/sbsa-ref.c
-@@ -296,7 +296,7 @@ static PFlashCFI01 *sbsa_flash_create1(SBSAMachineState *sms,
-      * Create a single flash device.  We use the same parameters as
-      * the flash devices on the Versatile Express board.
-      */
--    DeviceState *dev = qdev_new_orphan(TYPE_PFLASH_CFI01);
-+    DeviceState *dev = qdev_new(OBJECT(sms), name, TYPE_PFLASH_CFI01);
+diff --git a/docs/devel/s390-cpu-topology.rst b/docs/devel/s390-cpu-topology.rst
+index 48313b92d4..26be230969 100644
+--- a/docs/devel/s390-cpu-topology.rst
++++ b/docs/devel/s390-cpu-topology.rst
+@@ -40,7 +40,7 @@ modifiers for all configured vCPUs.
+       },
+       "cpu-state": "operating",
+       "entitlement": "medium",
+-      "qom-path": "/machine/unattached/device[0]",
++      "qom-path": "/machine/cpu[0]",
+       "cpu-index": 0,
+       "target": "s390x"
+     },
+diff --git a/docs/system/cpu-hotplug.rst b/docs/system/cpu-hotplug.rst
+index cc50937c36..f838faba6f 100644
+--- a/docs/system/cpu-hotplug.rst
++++ b/docs/system/cpu-hotplug.rst
+@@ -47,7 +47,7 @@ vCPU hotplug
+                       "socket-id": 0,
+                       "thread-id": 0
+                   },
+-                  "qom-path": "/machine/unattached/device[0]",
++                  "qom-path": "/machine/cpu[0]",
+                   "type": "IvyBridge-IBRS-x86_64-cpu",
+                   "vcpus-count": 1
+               }
+@@ -95,7 +95,7 @@ vCPU hotplug
+                       "socket-id": 0,
+                       "thread-id": 0
+                   },
+-                  "qom-path": "/machine/unattached/device[0]",
++                  "qom-path": "/machine/cpu[0]",
+                   "target": "x86_64",
+                   "thread-id": 28957
+               },
+diff --git a/qapi/block-core.json b/qapi/block-core.json
+index 1f87b07850..28487f7cae 100644
+--- a/qapi/block-core.json
++++ b/qapi/block-core.json
+@@ -928,7 +928,7 @@
+ #                 "device":"ide1-cd0",
+ #                 "locked":false,
+ #                 "removable":true,
+-#                 "qdev": "/machine/unattached/device[23]",
++#                 "qdev": "/machine/ide[1]/ide.1/cd0",
+ #                 "tray_open": false,
+ #                 "type":"unknown"
+ #              },
+@@ -936,7 +936,7 @@
+ #                 "device":"floppy0",
+ #                 "locked":false,
+ #                 "removable":true,
+-#                 "qdev": "/machine/unattached/device[20]",
++#                 "qdev": "/machine/fdc/floppy[0]",
+ #                 "type":"unknown"
+ #              },
+ #              {
+@@ -1310,7 +1310,7 @@
+ #                    "account_invalid":true,
+ #                    "account_failed":false
+ #                 },
+-#                 "qdev": "/machine/unattached/device[23]"
++#                 "qdev": "/machine/ide[0]/ide.0/hd0"
+ #              },
+ #              {
+ #                 "device":"ide1-cd0",
+@@ -1329,7 +1329,7 @@
+ #                    "account_invalid":false,
+ #                    "account_failed":false
+ #                 },
+-#                 "qdev": "/machine/unattached/device[24]"
++#                 "qdev": "/machine/ide[1]/ide.1/cd0"
+ #              },
+ #              {
+ #                 "device":"floppy0",
+@@ -1348,7 +1348,7 @@
+ #                    "account_invalid":false,
+ #                    "account_failed":false
+ #                 },
+-#                 "qdev": "/machine/unattached/device[16]"
++#                 "qdev": "/machine/fdc/floppy[0]"
+ #              },
+ #              {
+ #                 "device":"sd0",
+@@ -5750,7 +5750,7 @@
+ # .. qmp-example::
+ #
+ #     <- { "event": "BLOCK_IO_ERROR",
+-#          "data": { "qom-path": "/machine/unattached/device[0]",
++#          "data": { "qom-path": "/machine/ide[0]/ide.0/hd1",
+ #                    "device": "ide0-hd1",
+ #                    "node-name": "#block212",
+ #                    "operation": "write",
+diff --git a/qapi/block.json b/qapi/block.json
+index 46955bbb3e..cb177180e7 100644
+--- a/qapi/block.json
++++ b/qapi/block.json
+@@ -404,7 +404,7 @@
+ #
+ #     <- { "event": "DEVICE_TRAY_MOVED",
+ #          "data": { "device": "ide1-cd0",
+-#                    "id": "/machine/unattached/device[22]",
++#                    "id": "/machine/ide[1]/ide.1/cd0",
+ #                    "tray-open": true
+ #          },
+ #          "timestamp": { "seconds": 1265044230, "microseconds": 450486 } }
+diff --git a/qapi/machine.json b/qapi/machine.json
+index 9b2248038f..2d39d650ce 100644
+--- a/qapi/machine.json
++++ b/qapi/machine.json
+@@ -121,7 +121,7 @@
+ #                     "thread-id": 0,
+ #                     "socket-id": 0
+ #                 },
+-#                 "qom-path": "/machine/unattached/device[0]",
++#                 "qom-path": "/machine/cpu[0]",
+ #                 "target":"x86_64",
+ #                 "cpu-index": 0
+ #             },
+@@ -132,7 +132,7 @@
+ #                     "thread-id": 0,
+ #                     "socket-id": 1
+ #                 },
+-#                 "qom-path": "/machine/unattached/device[2]",
++#                 "qom-path": "/machine/cpu[1]",
+ #                 "target":"x86_64",
+ #                 "cpu-index": 1
+ #             }
+@@ -1028,7 +1028,7 @@
+ #          { "props": { "core-id": 8 }, "type": "POWER8-spapr-cpu-core",
+ #            "vcpus-count": 1 },
+ #          { "props": { "core-id": 0 }, "type": "POWER8-spapr-cpu-core",
+-#            "vcpus-count": 1, "qom-path": "/machine/unattached/device[0]"}
++#            "vcpus-count": 1, "qom-path": "/machine/cpu[0]"}
+ #        ]}
+ #
+ # .. qmp-example::
+@@ -1043,7 +1043,7 @@
+ #             "props": {"core-id": 0, "socket-id": 1, "thread-id": 0}
+ #          },
+ #          {
+-#             "qom-path": "/machine/unattached/device[0]",
++#             "qom-path": "/machine/cpu[0]",
+ #             "type": "qemu64-x86_64-cpu", "vcpus-count": 1,
+ #             "props": {"core-id": 0, "socket-id": 0, "thread-id": 0}
+ #          }
+@@ -1062,7 +1062,7 @@
+ #             "props": { "core-id": 1 }
+ #          },
+ #          {
+-#             "qom-path": "/machine/unattached/device[0]",
++#             "qom-path": "/machine/cpu[0]",
+ #             "type": "qemu-s390x-cpu", "vcpus-count": 1,
+ #             "props": { "core-id": 0 }
+ #          }
+@@ -1617,7 +1617,7 @@
+ #
+ #     <- { "event": "MEMORY_DEVICE_SIZE_CHANGE",
+ #          "data": { "id": "vm0", "size": 1073741824,
+-#                    "qom-path": "/machine/unattached/device[2]" },
++#                    "qom-path": "/machine/peripheral/vm0" },
+ #          "timestamp": { "seconds": 1588168529, "microseconds": 201316 } }
+ ##
+ { 'event': 'MEMORY_DEVICE_SIZE_CHANGE',
+diff --git a/qapi/qom.json b/qapi/qom.json
+index d96cc5aa21..62f9fd5492 100644
+--- a/qapi/qom.json
++++ b/qapi/qom.json
+@@ -135,7 +135,7 @@
+ #    :title: Use absolute path
+ #
+ #     -> { "execute": "qom-get",
+-#          "arguments": { "path": "/machine/unattached/device[0]",
++#          "arguments": { "path": "/machine/cpu[0]",
+ #                         "property": "hotplugged" } }
+ #     <- { "return": false }
+ #
+@@ -143,7 +143,7 @@
+ #    :title: Use partial path
+ #
+ #     -> { "execute": "qom-get",
+-#          "arguments": { "path": "unattached/sysbus",
++#          "arguments": { "path": "machine/sysbus",
+ #                         "property": "type" } }
+ #     <- { "return": "System" }
+ ##
+diff --git a/scripts/arm_processor_error.py b/scripts/arm_processor_error.py
+index 73d069f070..2636837ce3 100644
+--- a/scripts/arm_processor_error.py
++++ b/scripts/arm_processor_error.py
+@@ -244,8 +244,7 @@ def send_cper(self, args):
+         qmp_cmd.set_args(args)
  
-     qdev_prop_set_uint64(dev, "sector-length", SBSA_FLASH_SECTOR_SIZE);
-     qdev_prop_set_uint8(dev, "width", 4);
-@@ -307,7 +307,6 @@ static PFlashCFI01 *sbsa_flash_create1(SBSAMachineState *sms,
-     qdev_prop_set_uint16(dev, "id2", 0x00);
-     qdev_prop_set_uint16(dev, "id3", 0x00);
-     qdev_prop_set_string(dev, "name", name);
--    object_property_add_child(OBJECT(sms), name, OBJECT(dev));
-     object_property_add_alias(OBJECT(sms), alias_prop_name,
-                               OBJECT(dev), "drive");
-     return PFLASH_CFI01(dev);
-@@ -328,7 +327,7 @@ static void sbsa_flash_map1(PFlashCFI01 *flash,
-     assert(QEMU_IS_ALIGNED(size, SBSA_FLASH_SECTOR_SIZE));
-     assert(size / SBSA_FLASH_SECTOR_SIZE <= UINT32_MAX);
-     qdev_prop_set_uint32(dev, "num-blocks", size / SBSA_FLASH_SECTOR_SIZE);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+         is_cpu_type = re.compile(r"^([\w+]+\-)?arm\-cpu$")
+-        cpus = qmp_cmd.search_qom("/machine/unattached/device",
+-                                  "type", is_cpu_type)
++        cpus = qmp_cmd.search_qom("/machine/cpu", "type", is_cpu_type)
  
-     memory_region_add_subregion(sysmem, base,
-                                 sysbus_mmio_get_region(SYS_BUS_DEVICE(dev),
-@@ -421,11 +420,11 @@ static void create_its(SBSAMachineState *sms)
-     const char *itsclass = its_class_name();
-     DeviceState *dev;
+         cper = {}
+         pei = {}
+diff --git a/scripts/qmp_helper.py b/scripts/qmp_helper.py
+index 521612fb94..b7e9ad86b9 100755
+--- a/scripts/qmp_helper.py
++++ b/scripts/qmp_helper.py
+@@ -601,7 +601,7 @@ def search_qom(self, path, prop, regex):
+         """
+         Return a list of devices that match path array like:
  
--    dev = qdev_new_orphan(itsclass);
-+    dev = qdev_new(OBJECT(sms), "its", itsclass);
+-            /machine/unattached/device
++            /machine/cpu
+             /machine/peripheral-anon/device
+             ...
+         """
+diff --git a/tests/qemu-iotests/172.out b/tests/qemu-iotests/172.out
+index a023cd407d..b2adec97c8 100644
+--- a/tests/qemu-iotests/172.out
++++ b/tests/qemu-iotests/172.out
+@@ -63,12 +63,12 @@ Testing: -fda TEST_DIR/t.qcow2
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
  
-     object_property_set_link(OBJECT(dev), "parent-gicv3", OBJECT(sms->gic),
-                              &error_abort);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, sbsa_ref_memmap[SBSA_GIC_ITS].base);
- }
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
  
-@@ -440,7 +439,7 @@ static void create_gic(SBSAMachineState *sms, MemoryRegion *mem)
+@@ -115,16 +115,16 @@ Testing: -fdb TEST_DIR/t.qcow2
+                 stats-intervals = <null>
+                 drive-type = "288"
+ floppy1 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
  
-     gictype = gicv3_class_name();
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
  
--    sms->gic = qdev_new_orphan(gictype);
-+    sms->gic = qdev_new(OBJECT(sms), "gic", gictype);
-     qdev_prop_set_uint32(sms->gic, "revision", 3);
-     qdev_prop_set_uint32(sms->gic, "num-cpu", smp_cpus);
-     /*
-@@ -463,7 +462,7 @@ static void create_gic(SBSAMachineState *sms, MemoryRegion *mem)
-     qdev_prop_set_bit(sms->gic, "has-lpi", true);
+ floppy0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
  
-     gicbusdev = SYS_BUS_DEVICE(sms->gic);
--    sysbus_realize_and_unref(gicbusdev, &error_fatal);
-+    sysbus_realize(gicbusdev, &error_fatal);
-     sysbus_mmio_map(gicbusdev, 0, sbsa_ref_memmap[SBSA_GIC_DIST].base);
-     sysbus_mmio_map(gicbusdev, 1, sbsa_ref_memmap[SBSA_GIC_REDIST].base);
+@@ -171,17 +171,17 @@ Testing: -fda TEST_DIR/t.qcow2 -fdb TEST_DIR/t.qcow2.2
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
  
-@@ -517,39 +516,40 @@ static void create_gic(SBSAMachineState *sms, MemoryRegion *mem)
-     create_its(sms);
- }
+ floppy1 (NODE_NAME): TEST_DIR/t.qcow2.2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
  
--static void create_uart(const SBSAMachineState *sms, int uart,
-+static void create_uart(SBSAMachineState *sms, int uart,
-                         MemoryRegion *mem, Chardev *chr)
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -258,12 +258,12 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -310,16 +310,16 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2,index=1
+                 stats-intervals = <null>
+                 drive-type = "288"
+ floppy1 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ 
+ floppy0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -366,17 +366,17 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2 -drive if=floppy,file=TEST_DIR/t
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+ floppy1 (NODE_NAME): TEST_DIR/t.qcow2.2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -416,7 +416,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -453,7 +453,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -510,7 +510,7 @@ none1 (NODE_NAME): TEST_DIR/t.qcow2.2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -566,7 +566,7 @@ Testing: -fda TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -device fl
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+@@ -576,7 +576,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2.2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -623,7 +623,7 @@ Testing: -fda TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -device fl
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+@@ -633,7 +633,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2.2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -680,7 +680,7 @@ Testing: -fdb TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -device fl
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy1 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+@@ -690,7 +690,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2.2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -737,7 +737,7 @@ Testing: -fdb TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -device fl
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy1 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+@@ -747,7 +747,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2.2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -803,7 +803,7 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.q
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+@@ -813,7 +813,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2.2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -860,7 +860,7 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.q
+                 stats-intervals = <null>
+                 drive-type = "144"
+ floppy0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ 
+@@ -870,7 +870,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2.2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -913,7 +913,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -1091,7 +1091,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -1128,7 +1128,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -1168,7 +1168,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -1205,7 +1205,7 @@ none0 (NODE_NAME): TEST_DIR/t.qcow2 (qcow2)
+     Cache mode:       writeback
+ 
+ ide1-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+diff --git a/tests/qemu-iotests/186.out b/tests/qemu-iotests/186.out
+index 01530040e5..a2fdb0a915 100644
+--- a/tests/qemu-iotests/186.out
++++ b/tests/qemu-iotests/186.out
+@@ -404,7 +404,7 @@ Testing: -drive if=floppy
+ QEMU X.Y.Z monitor - type 'help' for more information
+ (qemu) info block
+ floppy0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -412,7 +412,7 @@ Testing: -drive if=floppy,driver=null-co,read-zeroes=on
+ QEMU X.Y.Z monitor - type 'help' for more information
+ (qemu) info block
+ floppy0 (NODE_NAME): json:{"read-zeroes": "on", "driver": "null-co"} (null-co)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ (qemu) quit
+@@ -421,7 +421,7 @@ Testing: -drive if=ide,driver=null-co,read-zeroes=on
+ QEMU X.Y.Z monitor - type 'help' for more information
+ (qemu) info block
+ ide0-hd0 (NODE_NAME): json:{"read-zeroes": "on", "driver": "null-co"} (null-co)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Cache mode:       writeback
+ (qemu) quit
+ 
+@@ -429,7 +429,7 @@ Testing: -drive if=ide,media=cdrom
+ QEMU X.Y.Z monitor - type 'help' for more information
+ (qemu) info block
+ ide0-cd0: [not inserted]
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+ (qemu) quit
+ 
+@@ -437,7 +437,7 @@ Testing: -drive if=ide,driver=null-co,read-zeroes=on,media=cdrom
+ QEMU X.Y.Z monitor - type 'help' for more information
+ (qemu) info block
+ ide0-cd0 (NODE_NAME): json:{"read-zeroes": "on", "driver": "null-co"} (null-co, read-only)
+-    Attached to:      /machine/unattached/device[N]
++    Attached to:      PATH
+     Removable device: not locked, tray closed
+     Cache mode:       writeback
+ (qemu) quit
+diff --git a/tests/qemu-iotests/common.filter b/tests/qemu-iotests/common.filter
+index ce4213cb97..9a5994a3a5 100644
+--- a/tests/qemu-iotests/common.filter
++++ b/tests/qemu-iotests/common.filter
+@@ -37,7 +37,7 @@ _filter_generated_node_ids()
+ 
+ _filter_qom_path()
  {
-     hwaddr base = sbsa_ref_memmap[uart].base;
-     int irq = sbsa_ref_irqmap[uart];
--    DeviceState *dev = qdev_new_orphan(TYPE_PL011);
-+    DeviceState *dev = qdev_new(OBJECT(sms), "uart[*]", TYPE_PL011);
-     SysBusDevice *s = SYS_BUS_DEVICE(dev);
- 
-     qdev_prop_set_chr(dev, "chardev", chr);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
-     memory_region_add_subregion(mem, base,
-                                 sysbus_mmio_get_region(s, 0));
-     sysbus_connect_irq(s, 0, qdev_get_gpio_in(sms->gic, irq));
+-    gsed -e '/Attached to:/s/\device[[0-9]\+\]/device[N]/g'
++    gsed -e '/Attached to:/s#/machine/.*#PATH#'
  }
  
--static void create_rtc(const SBSAMachineState *sms)
-+static void create_rtc(SBSAMachineState *sms)
- {
-     hwaddr base = sbsa_ref_memmap[SBSA_RTC].base;
-     int irq = sbsa_ref_irqmap[SBSA_RTC];
- 
--    sysbus_create_simple_orphan("pl031", base, qdev_get_gpio_in(sms->gic, irq));
-+    sysbus_create_simple(OBJECT(sms), "rtc", "pl031", base,
-+                         qdev_get_gpio_in(sms->gic, irq));
- }
- 
--static void create_wdt(const SBSAMachineState *sms)
-+static void create_wdt(SBSAMachineState *sms)
- {
-     hwaddr rbase = sbsa_ref_memmap[SBSA_GWDT_REFRESH].base;
-     hwaddr cbase = sbsa_ref_memmap[SBSA_GWDT_CONTROL].base;
--    DeviceState *dev = qdev_new_orphan(TYPE_WDT_SBSA);
-+    DeviceState *dev = qdev_new(OBJECT(sms), "wdt", TYPE_WDT_SBSA);
-     SysBusDevice *s = SYS_BUS_DEVICE(dev);
-     int irq = sbsa_ref_irqmap[SBSA_GWDT_WS0];
- 
-     qdev_prop_set_uint64(dev, "clock-frequency", SBSA_GTIMER_HZ);
--    sysbus_realize_and_unref(s, &error_fatal);
-+    sysbus_realize(s, &error_fatal);
-     sysbus_mmio_map(s, 0, rbase);
-     sysbus_mmio_map(s, 1, cbase);
-     sysbus_connect_irq(s, 0, qdev_get_gpio_in(sms->gic, irq));
-@@ -566,23 +566,23 @@ static Notifier sbsa_ref_powerdown_notifier = {
-     .notify = sbsa_ref_powerdown_req
- };
- 
--static void create_gpio(const SBSAMachineState *sms)
-+static void create_gpio(SBSAMachineState *sms)
- {
-     DeviceState *pl061_dev;
-     hwaddr base = sbsa_ref_memmap[SBSA_GPIO].base;
-     int irq = sbsa_ref_irqmap[SBSA_GPIO];
- 
--    pl061_dev = sysbus_create_simple_orphan("pl061", base,
-+    pl061_dev = sysbus_create_simple(OBJECT(sms), "gpio", "pl061", base,
-                                      qdev_get_gpio_in(sms->gic, irq));
- 
--    gpio_key_dev = sysbus_create_simple_orphan("gpio-key", -1,
--                                        qdev_get_gpio_in(pl061_dev, 3));
-+    gpio_key_dev = sysbus_create_simple(OBJECT(sms), "gpio-key", "gpio-key",
-+                                        -1, qdev_get_gpio_in(pl061_dev, 3));
- 
-     /* connect powerdown request */
-     qemu_register_powerdown_notifier(&sbsa_ref_powerdown_notifier);
- }
- 
--static void create_ahci(const SBSAMachineState *sms)
-+static void create_ahci(SBSAMachineState *sms)
- {
-     hwaddr base = sbsa_ref_memmap[SBSA_AHCI].base;
-     int irq = sbsa_ref_irqmap[SBSA_AHCI];
-@@ -590,9 +590,9 @@ static void create_ahci(const SBSAMachineState *sms)
-     DriveInfo *hd[NUM_SATA_PORTS];
-     SysbusAHCIState *sysahci;
- 
--    dev = qdev_new_orphan("sysbus-ahci");
-+    dev = qdev_new(OBJECT(sms), "ahci", "sysbus-ahci");
-     qdev_prop_set_uint32(dev, "num-ports", NUM_SATA_PORTS);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, base);
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, qdev_get_gpio_in(sms->gic, irq));
- 
-@@ -601,19 +601,19 @@ static void create_ahci(const SBSAMachineState *sms)
-     ahci_ide_create_devs(&sysahci->ahci, hd);
- }
- 
--static void create_xhci(const SBSAMachineState *sms)
-+static void create_xhci(SBSAMachineState *sms)
- {
-     hwaddr base = sbsa_ref_memmap[SBSA_XHCI].base;
-     int irq = sbsa_ref_irqmap[SBSA_XHCI];
--    DeviceState *dev = qdev_new_orphan(TYPE_XHCI_SYSBUS);
-+    DeviceState *dev = qdev_new(OBJECT(sms), "xhci", TYPE_XHCI_SYSBUS);
-     qdev_prop_set_uint32(dev, "slots", XHCI_MAXSLOTS);
- 
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, base);
-     sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, qdev_get_gpio_in(sms->gic, irq));
- }
- 
--static void create_smmu(const SBSAMachineState *sms, PCIBus *bus,
-+static void create_smmu(SBSAMachineState *sms, PCIBus *bus,
-                         MemoryRegion *sysmem,
-                         MemoryRegion *secure_sysmem)
- {
-@@ -622,7 +622,7 @@ static void create_smmu(const SBSAMachineState *sms, PCIBus *bus,
-     DeviceState *dev;
-     int i;
- 
--    dev = qdev_new_orphan(TYPE_ARM_SMMUV3);
-+    dev = qdev_new(OBJECT(sms), "smmuv3", TYPE_ARM_SMMUV3);
- 
-     object_property_set_str(OBJECT(dev), "stage", "nested", &error_abort);
-     object_property_set_link(OBJECT(dev), "primary-bus", OBJECT(bus),
-@@ -631,7 +631,7 @@ static void create_smmu(const SBSAMachineState *sms, PCIBus *bus,
-                              &error_abort);
-     object_property_set_link(OBJECT(dev), "secure-memory", OBJECT(secure_sysmem),
-                              &error_abort);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, base);
-     for (i = 0; i < NUM_SMMU_IRQS; i++) {
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
-@@ -658,8 +658,8 @@ static void create_pcie(SBSAMachineState *sms,
-     PCIHostState *pci;
-     int i;
- 
--    dev = qdev_new_orphan(TYPE_GPEX_HOST);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    dev = qdev_new(OBJECT(sms), "pcie", TYPE_GPEX_HOST);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     /* Map ECAM space */
-     ecam_alias = g_new0(MemoryRegion, 1);
-@@ -695,7 +695,7 @@ static void create_pcie(SBSAMachineState *sms,
- 
-     pci_init_nic_devices(pci->bus, mc->default_nic);
- 
--    pci_create_simple_orphan(pci->bus, -1, "bochs-display");
-+    pci_create_simple(OBJECT(sms), "bochs-display", pci->bus, -1, "bochs-display");
- 
-     create_smmu(sms, pci->bus, sysmem, secure_sysmem);
- }
-@@ -709,12 +709,14 @@ static void *sbsa_ref_dtb(const struct arm_boot_info *binfo, int *fdt_size)
-     return board->fdt;
- }
- 
--static void create_secure_ec(MemoryRegion *mem)
-+static void create_secure_ec(Object *parent, MemoryRegion *mem)
- {
-     hwaddr base = sbsa_ref_memmap[SBSA_SECURE_EC].base;
--    DeviceState *dev = qdev_new_orphan("sbsa-ec");
-+    DeviceState *dev = qdev_new(parent, "sbsa-ec", "sbsa-ec");
-     SysBusDevice *s = SYS_BUS_DEVICE(dev);
- 
-+    sysbus_realize(s, &error_fatal);
-+
-     memory_region_add_subregion(mem, base,
-                                 sysbus_mmio_get_region(s, 0));
- }
-@@ -835,7 +837,7 @@ static void sbsa_ref_init(MachineState *machine)
- 
-     create_pcie(sms, sysmem, secure_sysmem);
- 
--    create_secure_ec(secure_sysmem);
-+    create_secure_ec(OBJECT(sms), secure_sysmem);
- 
-     sms->bootinfo.ram_size = machine->ram_size;
-     sms->bootinfo.board_id = -1;
+ # replace occurrences of the actual TEST_DIR value with TEST_DIR
 -- 
 2.47.1
 
