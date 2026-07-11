@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5E04C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB47C44506
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEN-00020K-Ah; Sat, 11 Jul 2026 20:39:39 -0400
+	id 1wiiE2-0001kA-DN; Sat, 11 Jul 2026 20:39:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigrg-00073O-8u; Sat, 11 Jul 2026 19:12:08 -0400
+ id 1wigbf-00089m-1R; Sat, 11 Jul 2026 18:55:35 -0400
 Received: from pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com
  ([35.155.198.111])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigrd-0004xT-UY; Sat, 11 Jul 2026 19:12:07 -0400
+ id 1wigbc-0000oF-LQ; Sat, 11 Jul 2026 18:55:34 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811525; x=1815347525;
+ t=1783810532; x=1815346532;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=HUh3AhjbxdYbQQBQLAwLY6e2h8D1o6fDnZPkSJ/q8nk=;
- b=iqeIFU5UMuIKS9hzVXWLVFuaWE2E3RJG8Ci+3/5DGUo1vmCuHfT9BxZq
- j+StDvZQ+KOFXuHVX0a5uPsmqV0g2ZEeT5IQxGTPYvcYxnpYevIGsyvwb
- iMA7Pqec8fUvomkhLsFL8+p4n0QM5sLDG11I8VlDeGXQdrKOdOGRK4ML1
- +M8JTzMTBU8ExCWe53tgaFcpGefGQWfrncCh9Z2DnOXT94lWVD6Md56Mt
- WBTRW6MPhuJdnnTaAYoPoHlugwV8Bmxg/SYEmFkCNdZJhNn4KvOwm4jQE
- 8AuTKH6ZDRSa+HRK1/1wZQp4+FEVbht04tfrxiG6un8WPtf0usYqH2K2j w==;
-X-CSE-ConnectionGUID: qgxiEoI8TNC22c5uFahBQQ==
-X-CSE-MsgGUID: uOgsjy5STk6+3YM4B5PqbA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23390828"
-Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
+ bh=lQU7Pqv5BEyEBZMur78N9gmhRUgMQYfgLuXugUnzrlw=;
+ b=VpHrB4mCufNL4sa7UKClZ3l1BoCZg41QJzPLpMAzlxTS3/6jcpdK485Q
+ b0D0yI1mbjINqa1ve9frzY7kpYoH7hwG4R/2yD0lUc98tP02TJMX94E9J
+ G9baXvSn5ht/EVr2c6Jeopnw1RZfpwbOiPvn3qPX2f0Q8fqdJSAcq5EAo
+ 4zOGil++5bqKkZ/UAkppERIvGAvlw4UgzGNQW+WJKtS95DGcxvrHr9KhJ
+ rL7SK0SeoK8ZK0E76OawBvcDmNlFoY1jDREbXSOrQ4OCOm2bMaAGYIFsr
+ LHgQ7BCRJyxEv9ampOgpEpTG9s+QTfBUQY/uObhPeRr5SFS9mdFfL60DQ g==;
+X-CSE-ConnectionGUID: FNOToU6FTzejBL/BtwFkVg==
+X-CSE-MsgGUID: Cn1LriflQ32Vd5/cL5kUHg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23390577"
+Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
  by internal-pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:12:02 +0000
-Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:2822]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.35.214:2525]
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:55:28 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:20358]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.68:2525]
  with esmtp (Farcaster)
- id 45ddd563-d3ea-4aa1-8df6-d144a2cc8f07; Sat, 11 Jul 2026 23:12:02 +0000 (UTC)
-X-Farcaster-Flow-ID: 45ddd563-d3ea-4aa1-8df6-d144a2cc8f07
+ id ba66bd41-fa63-49b8-ac5b-11e015e0ef0d; Sat, 11 Jul 2026 22:55:28 +0000 (UTC)
+X-Farcaster-Flow-ID: ba66bd41-fa63-49b8-ac5b-11e015e0ef0d
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:12:01 +0000
+ Sat, 11 Jul 2026 22:55:28 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:11:53 +0000
+ Sat, 11 Jul 2026 22:55:19 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,10 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 132/134] qom: Delete /machine/unattached and error on
- unparented realize
-Date: Sat, 11 Jul 2026 22:37:05 +0000
-Message-ID: <20260711223707.42139-133-graf@amazon.com>
+Subject: [RFC PATCH 069/134] hw/arm/imx: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:36:02 +0000
+Message-ID: <20260711223707.42139-70-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -102,7 +101,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D039UWB004.ant.amazon.com (10.13.138.57) To
+X-ClientProxiedBy: EX19D035UWA003.ant.amazon.com (10.13.139.86) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
 Received-SPF: pass client-ip=35.155.198.111;
  envelope-from=prvs=645f258d4=graf@amazon.de;
@@ -116,7 +115,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:58 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,254 +130,154 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-With every board-created device, memory region, IRQ, and singleton
-now given an explicit QOM parent, the /machine/unattached container
-serves no legitimate purpose.  Remove it and turn the
-device_set_realized() fallback into a hard error, so that any
-future orphan is caught at realize time rather than silently
-adopted into an anonymous bucket.
+Convert the *_orphan() device-creation calls in the hw/arm imx
+board files to the new parented API introduced earlier in this
+series, so every onboard device gets a stable path in the
+composition tree instead of landing in /machine/unattached with an
+unstable device[N] name.
 
-  hw/core/qdev.c   error out on !obj->parent instead of adopting
-  hw/core/qdev-user.c   drop the fake unattached container
-  system/vl.c      drop "unattached" from machine container list
-  hw/i386/pc.c     search /machine recursively for the FDC instead
-                   of the (unattached, peripheral, peripheral-anon)
-                   container triple
-  tests/unit/      parent test devices explicitly under /machine
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing SoC device for
+composite children.  Names follow existing QOM conventions.
 
-After this commit, `info qom-tree` no longer shows
-/machine/unattached on any target/machine combination, and
-`git grep '"unattached"'` returns zero hits.
+Per-site rationale (reviewers: dispute the modeling here):
 
+hw/arm/fsl-imx6.c:171 | sysbus_create_simple_orphan | OBJECT(dev) | "l2x0" | SoC DeviceClass.realize(DeviceState *dev); parent is the SoC device being realized; single instance
+hw/arm/imx25_pdk.c:130 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init(MachineState *machine); loop over ESDHC slots; auto-index; drop _and_unref
+hw/arm/imx8mm-evk.c:100 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init; loop over USDHC slots; auto-index; drop _and_unref
+hw/arm/imx8mp-evk.c:113 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init; loop over USDHC slots; auto-index; drop _and_unref
+hw/arm/mcimx6ul-evk.c:62 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init; loop over USDHC slots; auto-index; drop _and_unref
+hw/arm/mcimx7d-sabre.c:62 | qdev_new_orphan | OBJECT(machine) | "sd-card[*]" | board init; loop over USDHC slots; auto-index; drop _and_unref
+hw/arm/sabrelite.c:99 | qdev_new_orphan | OBJECT(machine) | "spi-flash" | board init; single NOR flash on SPI bus; drop _and_unref
+
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/core/qdev-user.c                 |  6 +-----
- hw/core/qdev.c                      | 20 ++++----------------
- hw/i386/pc.c                        | 11 +----------
- include/hw/core/qdev.h              |  2 +-
- system/vl.c                         |  1 -
- tests/unit/test-qdev-global-props.c | 17 +++++++----------
- tests/unit/test-qdev.c              | 12 ++++--------
- 7 files changed, 18 insertions(+), 51 deletions(-)
+ hw/arm/fsl-imx6.c      | 3 ++-
+ hw/arm/imx25_pdk.c     | 4 ++--
+ hw/arm/imx8mm-evk.c    | 4 ++--
+ hw/arm/imx8mp-evk.c    | 4 ++--
+ hw/arm/mcimx6ul-evk.c  | 4 ++--
+ hw/arm/mcimx7d-sabre.c | 4 ++--
+ hw/arm/sabrelite.c     | 5 +++--
+ 7 files changed, 15 insertions(+), 13 deletions(-)
 
-diff --git a/hw/core/qdev-user.c b/hw/core/qdev-user.c
-index 051f8fbd02..592a8369a3 100644
---- a/hw/core/qdev-user.c
-+++ b/hw/core/qdev-user.c
-@@ -11,9 +11,5 @@
+diff --git a/hw/arm/fsl-imx6.c b/hw/arm/fsl-imx6.c
+index 103adcc2bd..44046953be 100644
+--- a/hw/arm/fsl-imx6.c
++++ b/hw/arm/fsl-imx6.c
+@@ -168,7 +168,8 @@ static void fsl_imx6_realize(DeviceState *dev, Error **errp)
+     }
  
- void qdev_create_fake_machine(void)
- {
--    Object *fake_machine_obj;
--
--    fake_machine_obj = object_property_add_new_container(object_get_root(),
--                                                         "machine");
--    object_property_add_new_container(fake_machine_obj, "unattached");
-+    object_property_add_new_container(object_get_root(), "machine");
- }
-diff --git a/hw/core/qdev.c b/hw/core/qdev.c
-index 44a44862fd..7d7d08733d 100644
---- a/hw/core/qdev.c
-+++ b/hw/core/qdev.c
-@@ -485,8 +485,6 @@ static void device_set_realized(Object *obj, bool value, Error **errp)
-     BusState *bus;
-     NamedClockList *ncl;
-     Error *local_err = NULL;
--    bool unattached_parent = false;
--    static int unattached_count;
+     /* L2 cache controller */
+-    sysbus_create_simple_orphan("l2x0", FSL_IMX6_PL310_ADDR, NULL);
++    sysbus_create_simple(OBJECT(dev), "l2x0", "l2x0", FSL_IMX6_PL310_ADDR,
++                         NULL);
  
-     if (dev->hotplugged && !dc->hotpluggable) {
-         error_setg(errp, "Device '%s' does not support hotplugging",
-@@ -500,12 +498,10 @@ static void device_set_realized(Object *obj, bool value, Error **errp)
-         }
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->ccm), errp)) {
+         return;
+diff --git a/hw/arm/imx25_pdk.c b/hw/arm/imx25_pdk.c
+index 6976652370..9351d53850 100644
+--- a/hw/arm/imx25_pdk.c
++++ b/hw/arm/imx25_pdk.c
+@@ -127,9 +127,9 @@ static void imx25_pdk_init(MachineState *machine)
+         di = drive_get(IF_SD, 0, i);
+         blk = di ? blk_by_legacy_dinfo(di) : NULL;
+         bus = qdev_get_child_bus(DEVICE(&s->soc.esdhc[i]), "sd-bus");
+-        carddev = qdev_new_orphan(TYPE_SD_CARD);
++        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
+         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
+-        qdev_realize_and_unref(carddev, bus, &error_fatal);
++        qdev_realize(carddev, bus, &error_fatal);
+     }
  
-         if (!obj->parent) {
--            gchar *name = g_strdup_printf("device[%d]", unattached_count++);
--
--            object_property_add_child(machine_get_container("unattached"),
--                                      name, obj);
--            unattached_parent = true;
--            g_free(name);
-+            error_setg(errp, "device type '%s' has no QOM parent; "
-+                       "use qdev_new() with a parent",
-+                       object_get_typename(obj));
-+            return;
-         }
+     /*
+diff --git a/hw/arm/imx8mm-evk.c b/hw/arm/imx8mm-evk.c
+index ce7693ca7a..72fa1930ae 100644
+--- a/hw/arm/imx8mm-evk.c
++++ b/hw/arm/imx8mm-evk.c
+@@ -97,9 +97,9 @@ static void imx8mm_evk_init(MachineState *machine)
  
-         hotplug_ctrl = qdev_get_hotplug_handler(dev);
-@@ -633,14 +629,6 @@ post_realize_fail:
+         blk = blk_by_legacy_dinfo(di);
+         bus = qdev_get_child_bus(DEVICE(&s->usdhc[i]), "sd-bus");
+-        carddev = qdev_new_orphan(TYPE_SD_CARD);
++        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
+         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
+-        qdev_realize_and_unref(carddev, bus, &error_fatal);
++        qdev_realize(carddev, bus, &error_fatal);
+     }
  
- fail:
-     error_propagate(errp, local_err);
--    if (unattached_parent) {
--        /*
--         * Beware, this doesn't just revert
--         * object_property_add_child(), it also runs bus_remove()!
--         */
--        object_unparent(OBJECT(dev));
--        unattached_count--;
--    }
- }
+     if (!qtest_enabled()) {
+diff --git a/hw/arm/imx8mp-evk.c b/hw/arm/imx8mp-evk.c
+index 90cda63b49..6116e6e9dc 100644
+--- a/hw/arm/imx8mp-evk.c
++++ b/hw/arm/imx8mp-evk.c
+@@ -110,9 +110,9 @@ static void imx8mp_evk_init(MachineState *machine)
  
- static bool device_get_hotpluggable(Object *obj, Error **errp)
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 398371ff6f..bab8ee453f 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -368,24 +368,15 @@ static int check_fdc(Object *obj, void *opaque)
-     return 0;
- }
+         blk = blk_by_legacy_dinfo(di);
+         bus = qdev_get_child_bus(DEVICE(&s->soc.usdhc[i]), "sd-bus");
+-        carddev = qdev_new_orphan(TYPE_SD_CARD);
++        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
+         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
+-        qdev_realize_and_unref(carddev, bus, &error_fatal);
++        qdev_realize(carddev, bus, &error_fatal);
+     }
  
--static const char * const fdc_container_path[] = {
--    "unattached", "peripheral", "peripheral-anon"
--};
--
- /*
-  * Locate the FDC at IO address 0x3f0, in order to configure the CMOS registers
-  * and ACPI objects.
-  */
- static ISADevice *pc_find_fdc0(void)
- {
--    int i;
--    Object *container;
-     CheckFdcState state = { 0 };
+     if (!qtest_enabled()) {
+diff --git a/hw/arm/mcimx6ul-evk.c b/hw/arm/mcimx6ul-evk.c
+index 96309e1bfc..be4c4ca316 100644
+--- a/hw/arm/mcimx6ul-evk.c
++++ b/hw/arm/mcimx6ul-evk.c
+@@ -59,9 +59,9 @@ static void mcimx6ul_evk_init(MachineState *machine)
+         di = drive_get(IF_SD, 0, i);
+         blk = di ? blk_by_legacy_dinfo(di) : NULL;
+         bus = qdev_get_child_bus(DEVICE(&s->usdhc[i]), "sd-bus");
+-        carddev = qdev_new_orphan(TYPE_SD_CARD);
++        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
+         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
+-        qdev_realize_and_unref(carddev, bus, &error_fatal);
++        qdev_realize(carddev, bus, &error_fatal);
+     }
  
--    for (i = 0; i < ARRAY_SIZE(fdc_container_path); i++) {
--        container = machine_get_container(fdc_container_path[i]);
--        object_child_foreach(container, check_fdc, &state);
--    }
-+    object_child_foreach_recursive(qdev_get_machine(), check_fdc, &state);
+     if (!qtest_enabled()) {
+diff --git a/hw/arm/mcimx7d-sabre.c b/hw/arm/mcimx7d-sabre.c
+index be9d0d6993..d8b1e7fc7e 100644
+--- a/hw/arm/mcimx7d-sabre.c
++++ b/hw/arm/mcimx7d-sabre.c
+@@ -59,9 +59,9 @@ static void mcimx7d_sabre_init(MachineState *machine)
+         di = drive_get(IF_SD, 0, i);
+         blk = di ? blk_by_legacy_dinfo(di) : NULL;
+         bus = qdev_get_child_bus(DEVICE(&s->usdhc[i]), "sd-bus");
+-        carddev = qdev_new_orphan(TYPE_SD_CARD);
++        carddev = qdev_new(OBJECT(machine), "sd-card[*]", TYPE_SD_CARD);
+         qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
+-        qdev_realize_and_unref(carddev, bus, &error_fatal);
++        qdev_realize(carddev, bus, &error_fatal);
+     }
  
-     if (state.multiple) {
-         warn_report("multiple floppy disk controllers with "
-diff --git a/include/hw/core/qdev.h b/include/hw/core/qdev.h
-index 9220e9e3b1..eded1b715d 100644
---- a/include/hw/core/qdev.h
-+++ b/include/hw/core/qdev.h
-@@ -462,7 +462,7 @@ static inline bool qdev_is_realized(DeviceState *dev)
-  * initialization.
-  * @dev must not be plugged into a bus already.
-  * If @bus, plug @dev into @bus.  This takes a reference to @dev.
-- * If @dev has no QOM parent, make one up, taking another reference.
-+ * @dev must already have a QOM parent (see qdev_new()).
-  *
-  * If you created @dev via object_new() directly (holding a floating
-  * reference), you probably want to use qdev_realize_and_unref() instead.
-diff --git a/system/vl.c b/system/vl.c
-index b4434839df..e51399d389 100644
---- a/system/vl.c
-+++ b/system/vl.c
-@@ -2192,7 +2192,6 @@ static void parse_memory_options(void)
- static void qemu_create_machine_containers(Object *machine)
- {
-     static const char *const containers[] = {
--        "unattached",
-         "peripheral",
-         "peripheral-anon",
-     };
-diff --git a/tests/unit/test-qdev-global-props.c b/tests/unit/test-qdev-global-props.c
-index 8ea362cbb9..a941774b9d 100644
---- a/tests/unit/test-qdev-global-props.c
-+++ b/tests/unit/test-qdev-global-props.c
-@@ -78,25 +78,22 @@ static const TypeInfo subclass_type = {
-  * inherit the global states of the parent process) will try to create qdev
-  * and realize the device.
-  *
-- * Realization of such anonymous qdev (with no parent object) requires both
-- * the machine object and its "unattached" container to be at least present.
-+ * Realization requires that the device already has a QOM parent.
-  */
- static void test_init_machine(void)
- {
-     /* This is a fake machine - it doesn't need to be a machine object */
--    Object *machine = object_property_add_new_container(
-+    object_property_add_new_container(
-         object_get_root(), "machine");
+     if (!qtest_enabled()) {
+diff --git a/hw/arm/sabrelite.c b/hw/arm/sabrelite.c
+index af4dfef7f2..04c764f82f 100644
+--- a/hw/arm/sabrelite.c
++++ b/hw/arm/sabrelite.c
+@@ -96,13 +96,14 @@ static void sabrelite_init(MachineState *machine)
+                 qemu_irq cs_line;
+                 DriveInfo *dinfo = drive_get(IF_MTD, 0, 0);
  
--    /* This container must exist for anonymous qdevs to realize() */
--    object_property_add_new_container(machine, "unattached");
--}
-+    }
+-                flash_dev = qdev_new_orphan("sst25vf016b");
++                flash_dev = qdev_new(OBJECT(machine), "spi-flash",
++                                     "sst25vf016b");
+                 if (dinfo) {
+                     qdev_prop_set_drive_err(flash_dev, "drive",
+                                             blk_by_legacy_dinfo(dinfo),
+                                             &error_fatal);
+                 }
+-                qdev_realize_and_unref(flash_dev, BUS(spi_bus), &error_fatal);
++                qdev_realize(flash_dev, BUS(spi_bus), &error_fatal);
  
- /* Test simple static property setting to default value */
- static void test_static_prop_subprocess(void)
- {
-     MyType *mt;
- 
--    mt = STATIC_TYPE(object_new(TYPE_STATIC_PROPS));
-+    mt = STATIC_TYPE(object_new_child(qdev_get_machine(), "dev[*]", TYPE_STATIC_PROPS));
-     qdev_realize(DEVICE(mt), NULL, &error_fatal);
- 
-     g_assert_cmpuint(mt->prop1, ==, PROP_DEFAULT);
-@@ -131,7 +128,7 @@ static void test_static_globalprop_subprocess(void)
- 
-     register_global_properties(props);
- 
--    mt = STATIC_TYPE(object_new(TYPE_STATIC_PROPS));
-+    mt = STATIC_TYPE(object_new_child(qdev_get_machine(), "dev[*]", TYPE_STATIC_PROPS));
-     qdev_realize(DEVICE(mt), NULL, &error_fatal);
- 
-     g_assert_cmpuint(mt->prop1, ==, 200);
-@@ -249,7 +246,7 @@ static void test_dynamic_globalprop_subprocess(void)
- 
-     register_global_properties(props);
- 
--    mt = DYNAMIC_TYPE(object_new(TYPE_DYNAMIC_PROPS));
-+    mt = DYNAMIC_TYPE(object_new_child(qdev_get_machine(), "dev[*]", TYPE_DYNAMIC_PROPS));
-     qdev_realize(DEVICE(mt), NULL, &error_fatal);
- 
-     g_assert_cmpuint(mt->prop1, ==, 101);
-@@ -295,7 +292,7 @@ static void test_subclass_global_props(void)
- 
-     register_global_properties(props);
- 
--    mt = STATIC_TYPE(object_new(TYPE_SUBCLASS));
-+    mt = STATIC_TYPE(object_new_child(qdev_get_machine(), "dev[*]", TYPE_SUBCLASS));
-     qdev_realize(DEVICE(mt), NULL, &error_fatal);
- 
-     g_assert_cmpuint(mt->prop1, ==, 102);
-diff --git a/tests/unit/test-qdev.c b/tests/unit/test-qdev.c
-index 20eae38e03..eafffb7175 100644
---- a/tests/unit/test-qdev.c
-+++ b/tests/unit/test-qdev.c
-@@ -44,24 +44,21 @@ static const TypeInfo my_dev_type_info = {
- /*
-  * Initialize a fake machine, being prepared for future tests.
-  *
-- * Realization of anonymous qdev (with no parent object) requires both
-- * the machine object and its "unattached" container to be at least present.
-+ * Realization requires that the device already has a QOM parent.
-  */
- static void test_init_machine(void)
- {
-     /* This is a fake machine - it doesn't need to be a machine object */
--    Object *machine = object_property_add_new_container(
-+    object_property_add_new_container(
-         object_get_root(), "machine");
- 
--    /* This container must exist for anonymous qdevs to realize() */
--    object_property_add_new_container(machine, "unattached");
--}
-+    }
- 
- static void test_qdev_free_properties(void)
- {
-     MyDev *mt;
- 
--    mt = STATIC_TYPE(object_new(TYPE_MY_DEV));
-+    mt = STATIC_TYPE(object_new_child(qdev_get_machine(), "dev[*]", TYPE_MY_DEV));
-     object_set_props(OBJECT(mt), &error_fatal,
-                      "string", "something",
-                      "array-u32", "12,13",
-@@ -75,7 +72,6 @@ static void test_qdev_free_properties(void)
-     g_assert_cmpuint(mt->prop_array_u32[1], ==, 13);
- 
-     object_unparent(OBJECT(mt));
--    object_unref(mt);
- }
- 
- 
+                 cs_line = qdev_get_gpio_in_named(flash_dev, SSI_GPIO_CS, 0);
+                 qdev_connect_gpio_out(DEVICE(&s->soc.gpio[2]), 19, cs_line);
 -- 
 2.47.1
 
