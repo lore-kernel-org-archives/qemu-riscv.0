@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70450C44508
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BBD7C44506
 	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:45:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEq-000326-C7; Sat, 11 Jul 2026 20:40:08 -0400
+	id 1wiiDq-0001gk-43; Sat, 11 Jul 2026 20:39:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigQJ-00022K-W5; Sat, 11 Jul 2026 18:43:52 -0400
-Received: from pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.34.181.151])
+ id 1wigof-00008h-2M; Sat, 11 Jul 2026 19:09:01 -0400
+Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.245.243.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigQI-0006aa-3N; Sat, 11 Jul 2026 18:43:51 -0400
+ id 1wigob-00047n-2S; Sat, 11 Jul 2026 19:09:00 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783809830; x=1815345830;
+ t=1783811337; x=1815347337;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=CoS5Dj2E0LgqlKQAVHErckFrZBKKr6KJ0lTnLP0iMEc=;
- b=da50/Ag8Aya+doFX372mN/zOaSQAHkRy2XFlx9OxKvrgZ4LLrbUr0cLb
- yoOHBI895+zUbHmn+WIcf+Tcb8u4ji+PnIjTrVC0/eTmLglVaWL+PugO8
- Vr+hbQkDVhaQ83ffXkZK+O1pJo61khoAQ9k9sZIdXVEUZ+8zw20r9KhOf
- dLQwmPgqYbMzCD0gA5O4/xs63sw6F0hRDOHhkEKljgBrGgU/f/MfnE8cb
- aaEkgQw8lAIOt9qgyZEW5V4byBlXkxWKaLWHckrp+DZwFfd4IOxyUJbxW
- oBJG1OqjyjWn8caW5Gjak8IqCZn/af/1FdfB6BCQJKXXUi+lhYwKETL4I A==;
-X-CSE-ConnectionGUID: AEGJ0GL0RuWkvtCuxY5+gw==
-X-CSE-MsgGUID: 4P9nnzO2TQ2TvlV6uPcq+Q==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23483259"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:43:46 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.111:4252]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.26.212:2525]
+ bh=RjzyzstKMqEdpWpECl8E1JcahBO6m41j6mbqUJjb658=;
+ b=h0Kt1uI3I3XTOf6ZragpUP2VlZc8BpzRxINLQYvuck/pDscy0JVJUJrO
+ gyH5n+t3iRL2MYuXQjH8t/a3fS8w7serfKY3SNxB71asodQYpteDk9YmS
+ b+KPF+JlSzuQYQhxKtUYeAfWTRmMKkBVspOL0T35lES1dLvsoVKWfYSlL
+ 5vO8fvAWdGJS2KngGNM9ityr6fXKzMWqTUmMF0giZtL74VGecvfp1RvCN
+ pdKdKWVG+1jrFbBNdOzDUawXRrZaWshS3S3M7H6sQgezb0YADcs+plbWO
+ wR0VIaApZvlq2yLDslZ/DJwhiN1l9Or0Pm+A3UOTr757rggtbxCtgyV7T Q==;
+X-CSE-ConnectionGUID: 4V/jQ0cnRo2wHIvGpDl6aA==
+X-CSE-MsgGUID: Y1BgZRbrRamvEsi+WCujQQ==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="22997855"
+Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
+ by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:08:53 +0000
+Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:7144]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.68:2525]
  with esmtp (Farcaster)
- id 9e6cfa11-1f3b-4793-8d50-388a03c819aa; Sat, 11 Jul 2026 22:43:46 +0000 (UTC)
-X-Farcaster-Flow-ID: 9e6cfa11-1f3b-4793-8d50-388a03c819aa
+ id b70aa7fb-e9b8-4175-b273-0d4dd83d31cc; Sat, 11 Jul 2026 23:08:52 +0000 (UTC)
+X-Farcaster-Flow-ID: b70aa7fb-e9b8-4175-b273-0d4dd83d31cc
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:43:45 +0000
+ Sat, 11 Jul 2026 23:08:52 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:43:37 +0000
+ Sat, 11 Jul 2026 23:08:44 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 025/134] hw/remote: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:18 +0000
-Message-ID: <20260711223707.42139-26-graf@amazon.com>
+Subject: [RFC PATCH 120/134] system: Parent per-MR helper objects under their
+ owner
+Date: Sat, 11 Jul 2026 22:36:53 +0000
+Message-ID: <20260711223707.42139-121-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +102,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D033UWC004.ant.amazon.com (10.13.139.225) To
+X-ClientProxiedBy: EX19D033UWC002.ant.amazon.com (10.13.139.196) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.34.181.151;
+Received-SPF: pass client-ip=44.245.243.92;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -115,7 +116,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,48 +131,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/remote to the new
-parented API introduced earlier in this series, so every onboard
-device gets a stable path in the composition tree instead of landing
-in /machine/unattached with an unstable device[N] name.
+RamBlockAttributes and MemoryRegionPortioList objects are long-lived
+helpers whose lifetime is already tied to a MemoryRegion or its owner.
+Give each a canonical path under that owner instead of leaving them
+as floating refcounted objects:
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing device for
-composite children.  Names follow existing QOM conventions.
+  <mr-path>/attributes           (RamBlockAttributes)
+  <owner-path>/portio-list[N]    (MemoryRegionPortioList)
 
-Per-site rationale (reviewers: dispute the modeling here):
+The destroy paths switch from object_unref() to object_unparent()
+now that the parent holds the reference.
 
-hw/remote/machine.c:42 | qdev_new | OBJECT(s) | "remote-pcihost" | Board init; collapses existing object_property_add_child() with same name
+RamDiscardManager is deliberately left as-is: it is unref'd from
+memory_region_finalize() itself, so making it a child<> of the MR
+would introduce a use-after-free during MR teardown.  It can move
+under a different owner in a follow-up once the RDM lifecycle is
+untangled from MR finalize.
 
-Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/remote/machine.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ system/ioport.c               | 5 +++--
+ system/ram-block-attributes.c | 7 ++++---
+ 2 files changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/hw/remote/machine.c b/hw/remote/machine.c
-index 28cb48a4f6..e8e9cf259f 100644
---- a/hw/remote/machine.c
-+++ b/hw/remote/machine.c
-@@ -39,7 +39,8 @@ static void remote_machine_init(MachineState *machine)
-     pci_memory = g_new(MemoryRegion, 1);
-     memory_region_init(pci_memory, NULL, "pci", UINT64_MAX);
+diff --git a/system/ioport.c b/system/ioport.c
+index 0415b3cd60..77ab77d7be 100644
+--- a/system/ioport.c
++++ b/system/ioport.c
+@@ -145,7 +145,7 @@ void portio_list_destroy(PortioList *piolist)
+     for (i = 0; i < piolist->nr; ++i) {
+         mrpio = container_of(piolist->regions[i], MemoryRegionPortioList, mr);
+         object_unparent(OBJECT(&mrpio->mr));
+-        object_unref(mrpio);
++        object_unparent(OBJECT(mrpio));
+     }
+     g_free(piolist->regions);
+ }
+@@ -228,7 +228,8 @@ static void portio_list_add_1(PortioList *piolist,
  
--    rem_host = REMOTE_PCIHOST(qdev_new_orphan(TYPE_REMOTE_PCIHOST));
-+    rem_host = REMOTE_PCIHOST(qdev_new(OBJECT(s), "remote-pcihost",
-+                                       TYPE_REMOTE_PCIHOST));
+     /* Copy the sub-list and null-terminate it.  */
+     mrpio = MEMORY_REGION_PORTIO_LIST(
+-                object_new(TYPE_MEMORY_REGION_PORTIO_LIST));
++                object_new_child(piolist->owner, "portio-list[*]",
++                                 TYPE_MEMORY_REGION_PORTIO_LIST));
+     mrpio->portio_opaque = piolist->opaque;
+     mrpio->ports = g_new0(MemoryRegionPortio, count + 1);
+     memcpy(mrpio->ports, pio_init, sizeof(MemoryRegionPortio) * count);
+diff --git a/system/ram-block-attributes.c b/system/ram-block-attributes.c
+index 59ec7a28eb..0967bed6d3 100644
+--- a/system/ram-block-attributes.c
++++ b/system/ram-block-attributes.c
+@@ -182,12 +182,13 @@ RamBlockAttributes *ram_block_attributes_create(RAMBlock *ram_block)
+     RamBlockAttributes *attr;
+     MemoryRegion *mr = ram_block->mr;
  
-     rem_host->mr_pci_mem = pci_memory;
-     rem_host->mr_sys_mem = system_memory;
-@@ -47,7 +48,6 @@ static void remote_machine_init(MachineState *machine)
+-    attr = RAM_BLOCK_ATTRIBUTES(object_new(TYPE_RAM_BLOCK_ATTRIBUTES));
++    attr = RAM_BLOCK_ATTRIBUTES(object_new_child(OBJECT(mr), "attributes",
++                                                 TYPE_RAM_BLOCK_ATTRIBUTES));
  
-     s->host = rem_host;
+     attr->ram_block = ram_block;
  
--    object_property_add_child(OBJECT(s), "remote-pcihost", OBJECT(rem_host));
-     memory_region_add_subregion_overlap(system_memory, 0x0, pci_memory, -1);
+     if (memory_region_add_ram_discard_source(mr, RAM_DISCARD_SOURCE(attr))) {
+-        object_unref(OBJECT(attr));
++        object_unparent(OBJECT(attr));
+         return NULL;
+     }
+     attr->bitmap_size = DIV_ROUND_UP(int128_get64(mr->size), block_size);
+@@ -202,7 +203,7 @@ void ram_block_attributes_destroy(RamBlockAttributes *attr)
  
-     qdev_realize(DEVICE(rem_host), sysbus_get_default(), &error_fatal);
+     g_free(attr->bitmap);
+     memory_region_del_ram_discard_source(attr->ram_block->mr, RAM_DISCARD_SOURCE(attr));
+-    object_unref(OBJECT(attr));
++    object_unparent(OBJECT(attr));
+ }
+ 
+ static void ram_block_attributes_init(Object *obj)
 -- 
 2.47.1
 
