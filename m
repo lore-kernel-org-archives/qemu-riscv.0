@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8763DC43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7304C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:44:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiFl-000628-J3; Sat, 11 Jul 2026 20:41:05 -0400
+	id 1wiiG0-0006Yv-5B; Sat, 11 Jul 2026 20:41:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigbp-0008I6-6s; Sat, 11 Jul 2026 18:55:45 -0400
-Received: from pdx-out-012.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([35.162.73.231])
+ id 1wiglj-0002vr-B1; Sat, 11 Jul 2026 19:05:59 -0400
+Received: from pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.34.181.151])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigbk-0000qC-Vt; Sat, 11 Jul 2026 18:55:44 -0400
+ id 1wiglh-0003NC-7X; Sat, 11 Jul 2026 19:05:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810541; x=1815346541;
+ t=1783811157; x=1815347157;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=UZrWJEtfb1lP/2siccXAPIJZ1bnr7X5Yw8WsjnCiiHs=;
- b=Yq/Fr9KSgsc+M5jBnYuLlJtnpKyC2HryIVgHNsnx+d+UbgiIz4jO894a
- 16Tgpgb/Xw1/NQLVVIVC5Sf58kxbhc/2fcR63NjHN16iMgHaSjEotpdRO
- QG3mtRW33PYYb+Sz4IWkKolE2Gh8EE4xyLzmaLDJkkuf/jocz1Rs9/Rzr
- G8tqIjJXYJ+oMY7BWSQHnbwED3su9RST0495lXC5bzjmBIZraXxjns4KB
- NQuEwzkLYS5/gO47SAeEaGeMep2g//tDkaIEgusVltaiX7am/IAHHBdsP
- mhhsgtc/iyJHNX7Z5triICWPgwgUfVEGgUfsruT1y+TkeRMzEIYM8/N5h w==;
-X-CSE-ConnectionGUID: lxP5FfnhQimTsWQRZWwBsA==
-X-CSE-MsgGUID: 4mihwK3pSlGx3mziuIFCqA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23294002"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-012.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:55:37 +0000
-Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.178:29960]
+ bh=muI5dEyqzqqFCvV0Mx5cUYEs7ERUUjkM8aKOhV7cnrg=;
+ b=f1q8u0uuGw4618t9Ds5Czo8dt3CkzCFwjIf80jhwXpdUho3v5jm1uR+j
+ DeEIdJ/iVUOCufCe4rR8i79gD79BBYyhZLH2EoBffZbAKeoCt/DMPaUNi
+ 9rPWk3yOWoXAmxtf3qAmbXSuaJS820baVepZFs8KJf5NurU4ze7M5NwYK
+ xhYLjKkbZJaWO+XAgb6R4pOppooeukjCrxwZKcJnxlccR1PuknWd4ApcG
+ GnXhStS4jhXThBNHhbSMzgiL7PZkTCEw4N6ElDre64aEkzGPB4KwAYwZg
+ VS1LsEcZ5EtvIHylxZsw9U3IxZxUoU3TvkDm/vjI+q6OQKNJCOGTcqz9N Q==;
+X-CSE-ConnectionGUID: go8APNENSYez8fwgs7DenQ==
+X-CSE-MsgGUID: jipw6+yHRXmyGo9aww1U7Q==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23483656"
+Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
+ by internal-pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:05:53 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.111:27500]
  by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.47.135:2525]
  with esmtp (Farcaster)
- id 1b6f25cd-8869-4bc6-9867-9928325a6c52; Sat, 11 Jul 2026 22:55:37 +0000 (UTC)
-X-Farcaster-Flow-ID: 1b6f25cd-8869-4bc6-9867-9928325a6c52
+ id 09b0fb71-566c-4cff-a2f0-04d9be53f3bd; Sat, 11 Jul 2026 23:05:53 +0000 (UTC)
+X-Farcaster-Flow-ID: 09b0fb71-566c-4cff-a2f0-04d9be53f3bd
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:55:36 +0000
+ Sat, 11 Jul 2026 23:05:52 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:55:28 +0000
+ Sat, 11 Jul 2026 23:05:44 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 070/134] hw/arm/misc: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:36:03 +0000
-Message-ID: <20260711223707.42139-71-graf@amazon.com>
+Subject: [RFC PATCH 109/134] irq: Reintroduce qemu_allocate_irq*() with a
+ mandatory owner and name
+Date: Sat, 11 Jul 2026 22:36:42 +0000
+Message-ID: <20260711223707.42139-110-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +102,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D035UWA003.ant.amazon.com (10.13.139.86) To
+X-ClientProxiedBy: EX19D046UWA004.ant.amazon.com (10.13.139.76) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=35.162.73.231;
+Received-SPF: pass client-ip=52.34.181.151;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-012.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-007.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -130,179 +131,137 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in the hw/arm misc
-board files to the new parented API introduced earlier in this
-series, so every onboard device gets a stable path in the
-composition tree instead of landing in /machine/unattached with an
-unstable device[N] name.
+Add parented variants of the IRQ allocation helpers under the
+well-known names, taking (Object *owner, const char *name, ...) as
+their first two arguments:
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing SoC device for
-composite children.  Names follow existing QOM conventions.
+  qemu_allocate_irq(owner, name, handler, opaque, n)
+  qemu_allocate_irqs(owner, name, handler, opaque, n)
+  qemu_extend_irqs(owner, name, old, n_old, handler, opaque, n)
+  qemu_irq_invert(owner, name, irq)
 
-Per-site rationale (reviewers: dispute the modeling here):
+The new IRQ object is created via object_new_child() so it lands
+under @owner with a stable path.  The array/extend variants suffix
+"[*]" so callers pass a bare name and get name[0], name[1], ...
 
-hw/arm/max78000fthr.c:29 | qdev_new_orphan | OBJECT(machine) | "soc" | board init; existing add_child(machine,"soc") collapsed; drop _and_unref
-hw/arm/msf2-som.c:62 | qdev_new_orphan | OBJECT(machine) | "soc" | board init; existing add_child(machine,"soc") collapsed; drop _and_unref
-hw/arm/msf2-som.c:86 | qdev_new_orphan | OBJECT(machine) | "spi-flash" | board init; single m25p80 flash on SPI bus; drop _and_unref
-hw/arm/netduino2.c:47 | qdev_new_orphan | OBJECT(machine) | "soc" | board init; existing add_child(machine,"soc") collapsed; drop _and_unref
-hw/arm/netduinoplus2.c:47 | qdev_new_orphan | OBJECT(machine) | "soc" | board init; existing add_child(machine,"soc") collapsed; drop _and_unref
-hw/arm/olimex-stm32-h405.c:50 | qdev_new_orphan | OBJECT(machine) | "soc" | board init; existing add_child(machine,"soc") collapsed; drop _and_unref
-hw/arm/raspi.c:286 | qdev_new_orphan | OBJECT(machine) | "sd-card" | raspi_base_machine_init(MachineState *machine); single SD card; drop _and_unref
-hw/arm/stm32vldiscovery.c:50 | qdev_new_orphan | OBJECT(machine) | "soc" | board init; existing add_child(machine,"soc") collapsed; drop _and_unref
+qemu_free_irq() is taught to unparent when the IRQ has a QOM parent,
+so it works for both the *_orphan() and the parented allocation
+paths during the transition.
 
-Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
+The *_orphan() variants stay for now; later commits convert every
+caller and delete them, at which point the /machine/unattached
+fallback in qdev_connect_gpio_out_named() also goes away.
+
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/arm/max78000fthr.c      |  5 ++---
- hw/arm/msf2-som.c          | 10 +++++-----
- hw/arm/netduino2.c         |  5 ++---
- hw/arm/netduinoplus2.c     |  5 ++---
- hw/arm/olimex-stm32-h405.c |  5 ++---
- hw/arm/raspi.c             |  4 ++--
- hw/arm/stm32vldiscovery.c  |  5 ++---
- 7 files changed, 17 insertions(+), 22 deletions(-)
+ hw/core/irq.c         | 45 ++++++++++++++++++++++++++++++++++++++++++-
+ include/hw/core/irq.h | 15 +++++++++++++++
+ 2 files changed, 59 insertions(+), 1 deletion(-)
 
-diff --git a/hw/arm/max78000fthr.c b/hw/arm/max78000fthr.c
-index d2fb4c018b..e38a3340a4 100644
---- a/hw/arm/max78000fthr.c
-+++ b/hw/arm/max78000fthr.c
-@@ -26,10 +26,9 @@ static void max78000_init(MachineState *machine)
-     sysclk = clock_new(OBJECT(machine), "SYSCLK");
-     clock_set_hz(sysclk, SYSCLK_FRQ);
+diff --git a/hw/core/irq.c b/hw/core/irq.c
+index f8fdeb7e02..ee954eaf62 100644
+--- a/hw/core/irq.c
++++ b/hw/core/irq.c
+@@ -96,6 +96,38 @@ qemu_irq qemu_allocate_irq_orphan(qemu_irq_handler handler, void *opaque, int n)
+     return irq;
+ }
  
--    dev = qdev_new_orphan(TYPE_MAX78000_SOC);
--    object_property_add_child(OBJECT(machine), "soc", OBJECT(dev));
-+    dev = qdev_new(OBJECT(machine), "soc", TYPE_MAX78000_SOC);
-     qdev_connect_clock_in(dev, "sysclk", sysclk);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
++qemu_irq qemu_allocate_irq(Object *owner, const char *name,
++                           qemu_irq_handler handler, void *opaque, int n)
++{
++    IRQState *irq = IRQ(object_new_child(owner, name, TYPE_IRQ));
++    init_irq_fields(irq, handler, opaque, n);
++    return irq;
++}
++
++qemu_irq *qemu_extend_irqs(Object *owner, const char *name,
++                           qemu_irq *old, int n_old,
++                           qemu_irq_handler handler, void *opaque, int n)
++{
++    g_autofree char *propname = g_strdup_printf("%s[*]", name);
++    qemu_irq *s;
++    int i;
++
++    if (!old) {
++        n_old = 0;
++    }
++    s = old ? g_renew(qemu_irq, old, n + n_old) : g_new(qemu_irq, n);
++    for (i = n_old; i < n + n_old; i++) {
++        s[i] = qemu_allocate_irq(owner, propname, handler, opaque, i);
++    }
++    return s;
++}
++
++qemu_irq *qemu_allocate_irqs(Object *owner, const char *name,
++                             qemu_irq_handler handler, void *opaque, int n)
++{
++    return qemu_extend_irqs(owner, name, NULL, 0, handler, opaque, n);
++}
++
+ void qemu_free_irqs(qemu_irq *s, int n)
+ {
+     int i;
+@@ -107,7 +139,11 @@ void qemu_free_irqs(qemu_irq *s, int n)
  
-     armv7m_load_kernel(ARM_CPU(first_cpu),
-                        machine->kernel_filename,
-diff --git a/hw/arm/msf2-som.c b/hw/arm/msf2-som.c
-index bb1e774764..0d0e2514dd 100644
---- a/hw/arm/msf2-som.c
-+++ b/hw/arm/msf2-som.c
-@@ -59,8 +59,7 @@ static void emcraft_sf2_s2s010_init(MachineState *machine)
-                            &error_fatal);
-     memory_region_add_subregion(sysmem, DDR_BASE_ADDRESS, ddr);
+ void qemu_free_irq(qemu_irq irq)
+ {
+-    object_unref(OBJECT(irq));
++    if (irq && OBJECT(irq)->parent) {
++        object_unparent(OBJECT(irq));
++    } else {
++        object_unref(OBJECT(irq));
++    }
+ }
  
--    dev = qdev_new_orphan(TYPE_MSF2_SOC);
--    object_property_add_child(OBJECT(machine), "soc", OBJECT(dev));
-+    dev = qdev_new(OBJECT(machine), "soc", TYPE_MSF2_SOC);
-     qdev_prop_set_string(dev, "part-name", "M2S010");
-     qdev_prop_set_uint64(dev, "eNVM-size", M2S010_ENVM_SIZE);
-     qdev_prop_set_uint64(dev, "eSRAM-size", M2S010_ESRAM_SIZE);
-@@ -77,19 +76,20 @@ static void emcraft_sf2_s2s010_init(MachineState *machine)
-     qdev_prop_set_uint32(dev, "apb0div", 2);
-     qdev_prop_set_uint32(dev, "apb1div", 2);
+ static void qemu_notirq(void *opaque, int line, int level)
+@@ -124,6 +160,13 @@ qemu_irq qemu_irq_invert_orphan(qemu_irq irq)
+     return qemu_allocate_irq_orphan(qemu_notirq, irq, 0);
+ }
  
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
++qemu_irq qemu_irq_invert(Object *owner, const char *name, qemu_irq irq)
++{
++    /* The default state for IRQs is low, so raise the output now.  */
++    qemu_irq_raise(irq);
++    return qemu_allocate_irq(owner, name, qemu_notirq, irq, 0);
++}
++
+ void qemu_irq_set_observer(qemu_irq *gpio_in, qemu_irq_handler handler, int n)
+ {
+     int i;
+diff --git a/include/hw/core/irq.h b/include/hw/core/irq.h
+index f984c02c14..5ccccd2697 100644
+--- a/include/hw/core/irq.h
++++ b/include/hw/core/irq.h
+@@ -85,6 +85,20 @@ qemu_irq *qemu_allocate_irqs_orphan(qemu_irq_handler handler, void *opaque, int
+  */
+ qemu_irq qemu_allocate_irq_orphan(qemu_irq_handler handler, void *opaque, int n);
  
-     soc = MSF2_SOC(dev);
++/*
++ * Same as the *_orphan() variants above, but the new IRQ objects are
++ * parented under @owner with property name @name (or @name[*] for the
++ * array/extend variants).  The reference is held by @owner; call
++ * qemu_free_irq() to unparent and free.
++ */
++qemu_irq qemu_allocate_irq(Object *owner, const char *name,
++                           qemu_irq_handler handler, void *opaque, int n);
++qemu_irq *qemu_allocate_irqs(Object *owner, const char *name,
++                             qemu_irq_handler handler, void *opaque, int n);
++qemu_irq *qemu_extend_irqs(Object *owner, const char *name,
++                           qemu_irq *old, int n_old,
++                           qemu_irq_handler handler, void *opaque, int n);
++
+ /* Extends an Array of IRQs. Old IRQs have their handlers and opaque data
+  * preserved. New IRQs are assigned the argument handler and opaque data.
+  */
+@@ -96,6 +110,7 @@ void qemu_free_irq(qemu_irq irq);
  
-     /* Attach SPI flash to SPI0 controller */
-     spi_bus = qdev_get_child_bus(dev, "spi0");
--    spi_flash = qdev_new_orphan("s25sl12801"); /* Spansion S25FL128SDPBHICO */
-+    /* Spansion S25FL128SDPBHICO */
-+    spi_flash = qdev_new(OBJECT(machine), "spi-flash", "s25sl12801");
-     qdev_prop_set_uint8(spi_flash, "spansion-cr2nv", 0x8);
-     if (dinfo) {
-         qdev_prop_set_drive_err(spi_flash, "drive",
-                                 blk_by_legacy_dinfo(dinfo), &error_fatal);
-     }
--    qdev_realize_and_unref(spi_flash, spi_bus, &error_fatal);
-+    qdev_realize(spi_flash, spi_bus, &error_fatal);
-     cs_line = qdev_get_gpio_in_named(spi_flash, SSI_GPIO_CS, 0);
-     sysbus_connect_irq(SYS_BUS_DEVICE(&soc->spi[0]), 1, cs_line);
+ /* Returns a new IRQ with opposite polarity.  */
+ qemu_irq qemu_irq_invert_orphan(qemu_irq irq);
++qemu_irq qemu_irq_invert(Object *owner, const char *name, qemu_irq irq);
  
-diff --git a/hw/arm/netduino2.c b/hw/arm/netduino2.c
-index cee887c194..9a1caf06a1 100644
---- a/hw/arm/netduino2.c
-+++ b/hw/arm/netduino2.c
-@@ -44,10 +44,9 @@ static void netduino2_init(MachineState *machine)
-     sysclk = clock_new(OBJECT(machine), "SYSCLK");
-     clock_set_hz(sysclk, SYSCLK_FRQ);
- 
--    dev = qdev_new_orphan(TYPE_STM32F205_SOC);
--    object_property_add_child(OBJECT(machine), "soc", OBJECT(dev));
-+    dev = qdev_new(OBJECT(machine), "soc", TYPE_STM32F205_SOC);
-     qdev_connect_clock_in(dev, "sysclk", sysclk);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     armv7m_load_kernel(STM32F205_SOC(dev)->armv7m.cpu, machine->kernel_filename,
-                        0, FLASH_SIZE);
-diff --git a/hw/arm/netduinoplus2.c b/hw/arm/netduinoplus2.c
-index 65251dfe96..564dae1f16 100644
---- a/hw/arm/netduinoplus2.c
-+++ b/hw/arm/netduinoplus2.c
-@@ -44,10 +44,9 @@ static void netduinoplus2_init(MachineState *machine)
-     sysclk = clock_new(OBJECT(machine), "SYSCLK");
-     clock_set_hz(sysclk, SYSCLK_FRQ);
- 
--    dev = qdev_new_orphan(TYPE_STM32F405_SOC);
--    object_property_add_child(OBJECT(machine), "soc", OBJECT(dev));
-+    dev = qdev_new(OBJECT(machine), "soc", TYPE_STM32F405_SOC);
-     qdev_connect_clock_in(dev, "sysclk", sysclk);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     armv7m_load_kernel(STM32F405_SOC(dev)->armv7m.cpu,
-                        machine->kernel_filename,
-diff --git a/hw/arm/olimex-stm32-h405.c b/hw/arm/olimex-stm32-h405.c
-index 70f7791695..b24142e909 100644
---- a/hw/arm/olimex-stm32-h405.c
-+++ b/hw/arm/olimex-stm32-h405.c
-@@ -47,10 +47,9 @@ static void olimex_stm32_h405_init(MachineState *machine)
-     sysclk = clock_new(OBJECT(machine), "SYSCLK");
-     clock_set_hz(sysclk, SYSCLK_FRQ);
- 
--    dev = qdev_new_orphan(TYPE_STM32F405_SOC);
--    object_property_add_child(OBJECT(machine), "soc", OBJECT(dev));
-+    dev = qdev_new(OBJECT(machine), "soc", TYPE_STM32F405_SOC);
-     qdev_connect_clock_in(dev, "sysclk", sysclk);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     armv7m_load_kernel(STM32F405_SOC(dev)->armv7m.cpu,
-                        machine->kernel_filename,
-diff --git a/hw/arm/raspi.c b/hw/arm/raspi.c
-index 2d5f51506d..55ca84cd1d 100644
---- a/hw/arm/raspi.c
-+++ b/hw/arm/raspi.c
-@@ -283,9 +283,9 @@ void raspi_base_machine_init(MachineState *machine,
-         error_report("No SD bus found in SOC object");
-         exit(1);
-     }
--    carddev = qdev_new_orphan(TYPE_SD_CARD);
-+    carddev = qdev_new(OBJECT(machine), "sd-card", TYPE_SD_CARD);
-     qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
--    qdev_realize_and_unref(carddev, bus, &error_fatal);
-+    qdev_realize(carddev, bus, &error_fatal);
- 
-     vcram_size = object_property_get_uint(OBJECT(soc), "vcram-size",
-                                           &error_abort);
-diff --git a/hw/arm/stm32vldiscovery.c b/hw/arm/stm32vldiscovery.c
-index 8c37d41e63..69503805cb 100644
---- a/hw/arm/stm32vldiscovery.c
-+++ b/hw/arm/stm32vldiscovery.c
-@@ -47,10 +47,9 @@ static void stm32vldiscovery_init(MachineState *machine)
-     sysclk = clock_new(OBJECT(machine), "SYSCLK");
-     clock_set_hz(sysclk, SYSCLK_FRQ);
- 
--    dev = qdev_new_orphan(TYPE_STM32F100_SOC);
--    object_property_add_child(OBJECT(machine), "soc", OBJECT(dev));
-+    dev = qdev_new(OBJECT(machine), "soc", TYPE_STM32F100_SOC);
-     qdev_connect_clock_in(dev, "sysclk", sysclk);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     armv7m_load_kernel(STM32F100_SOC(dev)->armv7m.cpu,
-                        machine->kernel_filename,
+ /* For internal use in qtest. */
+ void qemu_irq_set_observer(qemu_irq *gpio_in, qemu_irq_handler handler, int n);
 -- 
 2.47.1
 
