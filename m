@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD4A3C44508
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C54EC44506
 	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEO-000281-Mh; Sat, 11 Jul 2026 20:39:40 -0400
+	id 1wiiDp-0001gW-Om; Sat, 11 Jul 2026 20:39:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigfk-0007ll-Az; Sat, 11 Jul 2026 18:59:49 -0400
-Received: from pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.35.192.45])
+ id 1wigl6-0001Yn-IW; Sat, 11 Jul 2026 19:05:21 -0400
+Received: from pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.1.125])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigfi-0001k0-Ly; Sat, 11 Jul 2026 18:59:48 -0400
+ id 1wigl4-00036j-Or; Sat, 11 Jul 2026 19:05:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810786; x=1815346786;
+ t=1783811118; x=1815347118;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=fGAsGEmjfX3MBpOp6h3ry6kdNBxY7rLmYSvCKtAP6K8=;
- b=sNmYG+4yIGGNhrX4qdAeyBFQi1biajHUT7Mav40qPWBI3rp5bNqSj7bd
- kamYrGV3ySBoYLEiCsh/NFLjJCBdNPZf1GxFG9fNZGZBunf7U2Z7qkfXC
- 4oy0kWYt8bMb5A/nESeaHNqTewBXGJR3zODpkgO6OOqeVnoAdCPKSBV+M
- gGcgImZHA7g4jKd0/1kH7Fz0zxthJa+HKzW+q2OOLzkvPm08EXin+0Cgv
- MxONYH9bqLD77sILnPd/JSQD4OAp1f4E/ykFJgFePh1q+q69+o848sCfA
- 6xhhaGzc/gHtwbI/TX65dt6mtEG0bz9UbkGsyc5d8NYoYoTtdTLBivwh5 A==;
-X-CSE-ConnectionGUID: Ji1NepCmRmK8JLTtELBBXQ==
-X-CSE-MsgGUID: 1Wa+D6v3SvOFDfHTF6lPYg==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23269909"
-Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:59:43 +0000
-Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:13464]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.47.135:2525]
+ bh=w6Pfk1xQ4FRrAQkKCewEEwHD3O/ZvRglgXd3sI9Xt2w=;
+ b=Kd4SRqrtGjq9pzaQCUjBGCMScmc6Zp3Un/gXfkXWGYokoBCWKoMQbiCh
+ fGPqBvRu3R/BQN+qiZJzZV0z8aLZWBJ54mK5kRQzAoYJZfLw6hXgVC5nr
+ lDikpH3omgu2xvkQysgsUiz2R6ek2Quz9I7ebsFPa1XH/ZwnxJSAVEiZb
+ WcTIWOMKEq8n4MtgyffbCxthgg0kgYjCK75LXgTxJbY80OoGPdVQTJ8z1
+ pTC4TAaWxgEI0s/sSViw748HMDDwX5EBUkiUYAO5pycuaS4FbG6Ez6/pP
+ 15Mp8azznpM22afIY71PwpwtSOzUMXa/wIEihaHNBpyeCQ4vz+K0PUbZa Q==;
+X-CSE-ConnectionGUID: jM3fguWESOa8NRPPJu6GuA==
+X-CSE-MsgGUID: 2c1ADUXITy6CHgCzBRxWKw==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23505942"
+Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
+ by internal-pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:05:14 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:20840]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.35.214:2525]
  with esmtp (Farcaster)
- id cf93b9d5-a49c-4a91-9642-236675a40b9d; Sat, 11 Jul 2026 22:59:42 +0000 (UTC)
-X-Farcaster-Flow-ID: cf93b9d5-a49c-4a91-9642-236675a40b9d
+ id 78f9f4e0-ab2a-413a-9444-aaf789afd760; Sat, 11 Jul 2026 23:05:14 +0000 (UTC)
+X-Farcaster-Flow-ID: 78f9f4e0-ab2a-413a-9444-aaf789afd760
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
+ EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:59:42 +0000
+ Sat, 11 Jul 2026 23:05:14 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:59:34 +0000
+ Sat, 11 Jul 2026 23:05:05 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 086/134] cpu: Remove cpu_create_orphan()
-Date: Sat, 11 Jul 2026 22:36:19 +0000
-Message-ID: <20260711223707.42139-87-graf@amazon.com>
+Subject: [RFC PATCH 107/134] memory: Require an owner for named memory regions
+Date: Sat, 11 Jul 2026 22:36:40 +0000
+Message-ID: <20260711223707.42139-108-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D031UWA004.ant.amazon.com (10.13.139.19) To
+X-ClientProxiedBy: EX19D046UWA001.ant.amazon.com (10.13.139.112) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.35.192.45;
+Received-SPF: pass client-ip=44.246.1.125;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -130,59 +130,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All targets create their CPUs with an explicit parent now.
+Now that every named memory region in the tree passes an explicit
+owner, replace the /machine/unattached fallback in
+memory_region_do_init() and portio_list_add_1() with an assertion.
+
+Anonymous (name==NULL) regions such as subpages and io_mem_unassigned
+are never QOM-parented and continue to accept a NULL owner.
 
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/core/cpu-common.c  | 12 ------------
- include/hw/core/cpu.h | 10 ----------
- 2 files changed, 22 deletions(-)
+ system/ioport.c | 7 ++-----
+ system/memory.c | 7 +++----
+ 2 files changed, 5 insertions(+), 9 deletions(-)
 
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index eef243c1ad..829a044e9e 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -68,18 +68,6 @@ CPUState *cpu_create(Object *parent, const char *id, const char *typename)
-     return cpu;
- }
- 
--CPUState *cpu_create_orphan(const char *typename)
--{
--    Error *err = NULL;
--    CPUState *cpu = CPU(object_new(typename));
--    if (!qdev_realize(DEVICE(cpu), NULL, &err)) {
--        error_report_err(err);
--        object_unref(OBJECT(cpu));
--        exit(EXIT_FAILURE);
+diff --git a/system/ioport.c b/system/ioport.c
+index 0a1b80f299..0415b3cd60 100644
+--- a/system/ioport.c
++++ b/system/ioport.c
+@@ -248,11 +248,8 @@ static void portio_list_add_1(PortioList *piolist,
+     /* Reparent the MemoryRegion to the piolist owner */
+     object_ref(&mrpio->mr);
+     object_unparent(OBJECT(&mrpio->mr));
+-    if (!piolist->owner) {
+-        owner = machine_get_container("unattached");
+-    } else {
+-        owner = piolist->owner;
 -    }
--    return cpu;
--}
--
- void cpu_reset_interrupt(CPUState *cpu, int mask)
- {
-     qatomic_and(&cpu->interrupt_request, ~mask);
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 1b2ec1ab1e..544740a699 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -857,16 +857,6 @@ char *cpu_model_from_type(const char *typename);
-  */
- CPUState *cpu_create(Object *parent, const char *id, const char *typename);
++    g_assert(piolist->owner);
++    owner = piolist->owner;
+     name = g_strdup_printf("%s[*]", piolist->name);
+     object_property_add_child(owner, name, OBJECT(&mrpio->mr));
+     g_free(name);
+diff --git a/system/memory.c b/system/memory.c
+index e3ee0416cc..f3a77197df 100644
+--- a/system/memory.c
++++ b/system/memory.c
+@@ -1230,14 +1230,13 @@ static void memory_region_do_init(MemoryRegion *mr,
+     mr->dev = (DeviceState *) object_dynamic_cast(mr->owner, TYPE_DEVICE);
+     mr->ram_block = NULL;
  
--/**
-- * cpu_create_orphan:
-- * @typename: The CPU type.
-- *
-- * Instantiates a CPU and realizes the CPU.
-- *
-- * Returns: A #CPUState or %NULL if an error occurred.
-- */
--CPUState *cpu_create_orphan(const char *typename);
++    /* A named MemoryRegion is a QOM child of @owner */
++    g_assert(!name || owner);
++
+     if (name) {
+         char *escaped_name = memory_region_escape_name(name);
+         char *name_array = g_strdup_printf("%s[*]", escaped_name);
+ 
+-        if (!owner) {
+-            owner = machine_get_container("unattached");
+-        }
 -
- /**
-  * parse_cpu_option:
-  * @cpu_option: The -cpu option including optional parameters.
+         object_property_add_child(owner, name_array, OBJECT(mr));
+         object_unref(OBJECT(mr));
+         g_free(name_array);
 -- 
 2.47.1
 
