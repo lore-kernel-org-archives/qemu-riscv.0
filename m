@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF8DAC43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55EBC44506
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:43:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEN-0001z8-5v; Sat, 11 Jul 2026 20:39:39 -0400
+	id 1wiiEs-000348-NU; Sat, 11 Jul 2026 20:40:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigjR-0005lZ-RD; Sat, 11 Jul 2026 19:03:37 -0400
-Received: from pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.12.53.23])
+ id 1wigPR-00083V-NZ; Sat, 11 Jul 2026 18:42:59 -0400
+Received: from pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.35.192.45])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigjP-0002hL-HW; Sat, 11 Jul 2026 19:03:37 -0400
+ id 1wigPN-0006N2-Q3; Sat, 11 Jul 2026 18:42:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783811015; x=1815347015;
+ t=1783809773; x=1815345773;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=CXOxm0VQ3ug8i73JP92Gty/a5Axf9FdIYmMv6MEY07k=;
- b=bk9rXJ46IXtBVAVnBDWj1gPWPnGphi/OqnwDg8IUwNVMeIBWc2FPIksH
- o4WzxRd/BHeBQUcxiBKXEkF90O9FyUYQHFBCX86JgXTdOoooW/V5jg6JZ
- v424oUl0svyKU/nPRI4Yyhnuw5wqPJd9dgD2IMLaYNDIjatTCBdxYtNCw
- cNeK6TzdCfBkopGfK/IsyDY7i95X4umCWELXU+Qgp7D2ck/6wCMkYO2V/
- 2DMbgUocyqL2w+5Z2gVXhsRu9wTwRPG9aLbcSBZL8Xaq1/nOMvPQI9N+d
- jFZWi/QiI+KYgjzEgfPGQBd9DyYgOhtLYYHhu6UaT4K1pdmnsc7fZBBJd Q==;
-X-CSE-ConnectionGUID: YQViRy3tQXaepJdQIfyQ3A==
-X-CSE-MsgGUID: BgXdbXLFREOiUpzQ3XJoMQ==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23370040"
-Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:03:32 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:13504]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.51.175:2525]
+ bh=amUTtS63hZcSlS7OoveApwBcr3wy0b53OLhAMkpFVuY=;
+ b=gsR6QgCsFYKQv6FnrtFNwcTpmeP66PjcZ/nn5NN9VFLCpLPJTi7k0CjO
+ huzAwYKGLuHHURA1SUurIq1KXu5aJEhfIh6vWnVKYyR23mM6nGUqJNI4M
+ 9yRh4nSceui2bc5e4/cnnpl1EGde6geaHveTzqOJiOXcdt1P26lCG5ddT
+ UIcVs4ILdIYWjN/E4cE/RJBb4xmIgOD1PMHx1pr0RngoiwTnmVUwSERLy
+ hFd+qMxekzK2ce3k+4YNBfrpvuNk2PgreUPJ9cVz9MMbpGlC/k9QR/DYY
+ Sb0K03HUR2IJgEFnPLajRaRc+yNC1Ow4fyraZSy8hujUTThdZMSh4OcLb w==;
+X-CSE-ConnectionGUID: MWq9QtFtQgy8xqEt9S2dPw==
+X-CSE-MsgGUID: U34BOxd1Qg6i19uikBh5vg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23269615"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
+ by internal-pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:42:50 +0000
+Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:27198]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.33:2525]
  with esmtp (Farcaster)
- id 956b4a00-99b6-4257-9ef4-046b18028040; Sat, 11 Jul 2026 23:03:31 +0000 (UTC)
-X-Farcaster-Flow-ID: 956b4a00-99b6-4257-9ef4-046b18028040
+ id a184983d-b27e-49e2-acad-b48f7b292003; Sat, 11 Jul 2026 22:42:50 +0000 (UTC)
+X-Farcaster-Flow-ID: a184983d-b27e-49e2-acad-b48f7b292003
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
+ EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:03:31 +0000
+ Sat, 11 Jul 2026 22:42:49 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:03:22 +0000
+ Sat, 11 Jul 2026 22:42:41 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 100/134] hw/xtensa: Give memory regions an explicit owner
-Date: Sat, 11 Jul 2026 22:36:33 +0000
-Message-ID: <20260711223707.42139-101-graf@amazon.com>
+Subject: [RFC PATCH 021/134] hw/loongarch: Give onboard devices a QOM parent
+Date: Sat, 11 Jul 2026 22:35:14 +0000
+Message-ID: <20260711223707.42139-22-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,11 +101,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D044UWB003.ant.amazon.com (10.13.139.168) To
+X-ClientProxiedBy: EX19D044UWB001.ant.amazon.com (10.13.139.171) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.12.53.23;
+Received-SPF: pass client-ip=52.35.192.45;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-011.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -115,7 +115,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,238 +130,180 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert memory_region_init*() calls that pass NULL owner to pass
-the enclosing machine or device instead.
+Convert the *_orphan() device-creation calls in hw/loongarch to the new
+parented API introduced earlier in this series, so every onboard
+device gets a stable path in the composition tree instead of landing
+in /machine/unattached with an unstable device[N] name.
 
-Thread Object *owner through xtensa_create_memory_regions(), xtensa_mx_pic_register_cpu() and the static xtfpga_fpga_init() helper. All callers are inside board init functions.
+The parent for each device is the object that owns its lifetime: the
+machine for board-created devices, the containing device for
+composite children.  Names follow existing QOM conventions.
 
-No functional change intended.
+Per-site rationale (reviewers: dispute the modeling here):
 
+file:line | creator | parent | name | rationale
+hw/loongarch/virt.c:153 | qdev_new | OBJECT(lvms) | name | board-init helper already receives lvms + child name; drop redundant object_property_add_child()
+hw/loongarch/virt.c:298 | qdev_new | OBJECT(lvms) | "acpi-ged" | board-init helper receives LoongArchVirtMachineState *lvms
+hw/loongarch/virt.c:325 | qdev_new | parent | "platform-bus" | static helper w/o parent ptr; add Object *parent first arg, thread OBJECT(lvms) from caller
+hw/loongarch/virt.c:403 | qdev_new | OBJECT(lvms) | "pci-host" | board-init helper receives lvms
+hw/loongarch/virt.c:488 | sysbus_create_simple | OBJECT(lvms) | "rtc" | board-init helper receives lvms
+hw/loongarch/virt.c:604 | qdev_new | OBJECT(lvms) | "ipi" | virt_irq_init() receives lvms
+hw/loongarch/virt.c:610 | qdev_new | OBJECT(lvms) | "dintc" | virt_irq_init() receives lvms
+hw/loongarch/virt.c:617 | qdev_new | OBJECT(lvms) | "extioi" | virt_irq_init() receives lvms
+hw/loongarch/virt.c:625 | qdev_new | OBJECT(lvms) | "pch-pic" | virt_irq_init() receives lvms
+hw/loongarch/virt.c:631 | qdev_new | OBJECT(lvms) | "pch-msi" | virt_irq_init() receives lvms
+
+Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/xtensa/mx_pic.c         |  4 ++--
- hw/xtensa/sim.c            | 15 ++++++++-------
- hw/xtensa/xtensa_memory.c  |  5 +++--
- hw/xtensa/xtensa_memory.h  |  3 ++-
- hw/xtensa/xtfpga.c         | 30 ++++++++++++++++--------------
- include/hw/xtensa/mx_pic.h |  2 +-
- 6 files changed, 32 insertions(+), 27 deletions(-)
+ hw/loongarch/virt.c | 43 +++++++++++++++++++++----------------------
+ 1 file changed, 21 insertions(+), 22 deletions(-)
 
-diff --git a/hw/xtensa/mx_pic.c b/hw/xtensa/mx_pic.c
-index 8ded3bc79b..f349fb125c 100644
---- a/hw/xtensa/mx_pic.c
-+++ b/hw/xtensa/mx_pic.c
-@@ -299,7 +299,7 @@ static const MemoryRegionOps xtensa_mx_pic_ops = {
-     },
- };
- 
--MemoryRegion *xtensa_mx_pic_register_cpu(XtensaMxPic *mx,
-+MemoryRegion *xtensa_mx_pic_register_cpu(Object *owner, XtensaMxPic *mx,
-                                          qemu_irq *irq,
-                                          qemu_irq runstall)
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index 45acdc3ec1..6ba693874f 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -150,7 +150,7 @@ static PFlashCFI01 *virt_flash_create1(LoongArchVirtMachineState *lvms,
+                                        const char *name,
+                                        const char *alias_prop_name)
  {
-@@ -309,7 +309,7 @@ MemoryRegion *xtensa_mx_pic_register_cpu(XtensaMxPic *mx,
-     mx_cpu->irq = irq;
-     mx_cpu->runstall = runstall;
+-    DeviceState *dev = qdev_new_orphan(TYPE_PFLASH_CFI01);
++    DeviceState *dev = qdev_new(OBJECT(lvms), name, TYPE_PFLASH_CFI01);
  
--    memory_region_init_io(&mx_cpu->reg, NULL, &xtensa_mx_pic_ops, mx_cpu,
-+    memory_region_init_io(&mx_cpu->reg, owner, &xtensa_mx_pic_ops, mx_cpu,
-                           "mx_pic", 0x280);
+     qdev_prop_set_uint64(dev, "sector-length", VIRT_FLASH_SECTOR_SIZE);
+     qdev_prop_set_uint8(dev, "width", 4);
+@@ -161,7 +161,6 @@ static PFlashCFI01 *virt_flash_create1(LoongArchVirtMachineState *lvms,
+     qdev_prop_set_uint16(dev, "id2", 0x00);
+     qdev_prop_set_uint16(dev, "id3", 0x00);
+     qdev_prop_set_string(dev, "name", name);
+-    object_property_add_child(OBJECT(lvms), name, OBJECT(dev));
+     object_property_add_alias(OBJECT(lvms), alias_prop_name,
+                               OBJECT(dev), "drive");
+     return PFLASH_CFI01(dev);
+@@ -191,7 +190,7 @@ static void virt_flash_map1(PFlashCFI01 *flash,
+     assert(real_size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
  
-     ++mx->n_cpu;
-diff --git a/hw/xtensa/sim.c b/hw/xtensa/sim.c
-index ad1439a0b4..e3cd69ceca 100644
---- a/hw/xtensa/sim.c
-+++ b/hw/xtensa/sim.c
-@@ -60,10 +60,11 @@ XtensaCPU *xtensa_sim_common_init(MachineState *machine)
-     XtensaCPU *cpu = NULL;
-     CPUXtensaState *env = NULL;
-     ram_addr_t ram_size = machine->ram_size;
-+    Object *mo = OBJECT(machine);
-     int n;
- 
-     for (n = 0; n < machine->smp.cpus; n++) {
--        cpu = XTENSA_CPU(cpu_create(OBJECT(machine), "cpu[*]", machine->cpu_type));
-+        cpu = XTENSA_CPU(cpu_create(mo, "cpu[*]", machine->cpu_type));
-         env = &cpu->env;
- 
-         env->sregs[PRID] = n;
-@@ -78,17 +79,17 @@ XtensaCPU *xtensa_sim_common_init(MachineState *machine)
-         XtensaMemory sysram = env->config->sysram;
- 
-         sysram.location[0].size = ram_size;
--        xtensa_create_memory_regions(&env->config->instrom, "xtensa.instrom",
-+        xtensa_create_memory_regions(mo, &env->config->instrom, "xtensa.instrom",
-                                      get_system_memory());
--        xtensa_create_memory_regions(&env->config->instram, "xtensa.instram",
-+        xtensa_create_memory_regions(mo, &env->config->instram, "xtensa.instram",
-                                      get_system_memory());
--        xtensa_create_memory_regions(&env->config->datarom, "xtensa.datarom",
-+        xtensa_create_memory_regions(mo, &env->config->datarom, "xtensa.datarom",
-                                      get_system_memory());
--        xtensa_create_memory_regions(&env->config->dataram, "xtensa.dataram",
-+        xtensa_create_memory_regions(mo, &env->config->dataram, "xtensa.dataram",
-                                      get_system_memory());
--        xtensa_create_memory_regions(&env->config->sysrom, "xtensa.sysrom",
-+        xtensa_create_memory_regions(mo, &env->config->sysrom, "xtensa.sysrom",
-                                      get_system_memory());
--        xtensa_create_memory_regions(&sysram, "xtensa.sysram",
-+        xtensa_create_memory_regions(mo, &sysram, "xtensa.sysram",
-                                      get_system_memory());
+     qdev_prop_set_uint32(dev, "num-blocks", real_size / VIRT_FLASH_SECTOR_SIZE);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     memory_region_add_subregion(sysmem, base,
+                                 sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0));
+ }
+@@ -295,9 +294,9 @@ static DeviceState *create_acpi_ged(DeviceState *pch_pic,
+         event |= ACPI_GED_CPU_HOTPLUG_EVT;
      }
-     if (serial_hd(0)) {
-diff --git a/hw/xtensa/xtensa_memory.c b/hw/xtensa/xtensa_memory.c
-index 13a6077d86..4477eea0ad 100644
---- a/hw/xtensa/xtensa_memory.c
-+++ b/hw/xtensa/xtensa_memory.c
-@@ -31,7 +31,8 @@
- #include "qemu/error-report.h"
- #include "xtensa_memory.h"
  
--void xtensa_create_memory_regions(const XtensaMemory *memory,
-+void xtensa_create_memory_regions(Object *owner,
-+                                  const XtensaMemory *memory,
-                                   const char *name,
-                                   MemoryRegion *super)
+-    dev = qdev_new_orphan(TYPE_ACPI_GED);
++    dev = qdev_new(OBJECT(lvms), "acpi-ged", TYPE_ACPI_GED);
+     qdev_prop_set_uint32(dev, "ged-event", event);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     /* ged event */
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, VIRT_GED_EVT_ADDR);
+@@ -315,18 +314,18 @@ static DeviceState *create_acpi_ged(DeviceState *pch_pic,
+     return dev;
+ }
+ 
+-static DeviceState *create_platform_bus(DeviceState *pch_pic)
++static DeviceState *create_platform_bus(Object *parent, DeviceState *pch_pic)
  {
-@@ -43,7 +44,7 @@ void xtensa_create_memory_regions(const XtensaMemory *memory,
+     DeviceState *dev;
+     SysBusDevice *sysbus;
+     int i, irq;
+     MemoryRegion *sysmem = get_system_memory();
  
-         g_string_printf(num_name, "%s%u", name, i);
-         m = g_new(MemoryRegion, 1);
--        memory_region_init_ram(m, NULL, num_name->str,
-+        memory_region_init_ram(m, owner, num_name->str,
-                                memory->location[i].size, &error_fatal);
-         memory_region_add_subregion(super, memory->location[i].addr, m);
-     }
-diff --git a/hw/xtensa/xtensa_memory.h b/hw/xtensa/xtensa_memory.h
-index c86ad06685..b8b2d4b8b4 100644
---- a/hw/xtensa/xtensa_memory.h
-+++ b/hw/xtensa/xtensa_memory.h
-@@ -30,7 +30,8 @@
+-    dev = qdev_new_orphan(TYPE_PLATFORM_BUS_DEVICE);
++    dev = qdev_new(parent, "platform-bus", TYPE_PLATFORM_BUS_DEVICE);
+     dev->id = g_strdup(TYPE_PLATFORM_BUS_DEVICE);
+     qdev_prop_set_uint32(dev, "num_irqs", VIRT_PLATFORM_BUS_NUM_IRQS);
+     qdev_prop_set_uint32(dev, "mmio_size", VIRT_PLATFORM_BUS_SIZE);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
  
- #include "target/xtensa/cpu.h"
+     sysbus = SYS_BUS_DEVICE(dev);
+     for (i = 0; i < VIRT_PLATFORM_BUS_NUM_IRQS; i++) {
+@@ -400,9 +399,9 @@ static void virt_devices_init(DeviceState *pch_pic,
+     hwaddr mmio_base, mmio_size;
+     int i, irq;
  
--void xtensa_create_memory_regions(const XtensaMemory *memory,
-+void xtensa_create_memory_regions(Object *owner,
-+                                  const XtensaMemory *memory,
-                                   const char *name,
-                                   MemoryRegion *super);
+-    gpex_dev = qdev_new_orphan(TYPE_GPEX_HOST);
++    gpex_dev = qdev_new(OBJECT(lvms), "pci-host", TYPE_GPEX_HOST);
+     d = SYS_BUS_DEVICE(gpex_dev);
+-    sysbus_realize_and_unref(d, &error_fatal);
++    sysbus_realize(d, &error_fatal);
+     pci_bus = PCI_HOST_BRIDGE(gpex_dev)->bus;
+     lvms->gpex.pio.base = VIRT_PCI_IO_BASE;
+     lvms->gpex.pio.size = VIRT_PCI_IO_SIZE;
+@@ -485,14 +484,14 @@ static void virt_devices_init(DeviceState *pch_pic,
+      * Create some unimplemented devices to emulate this.
+      */
+     create_unimplemented_device("pci-dma-cfg", 0x1001041c, 0x4);
+-    sysbus_create_simple_orphan("ls7a_rtc", VIRT_RTC_REG_BASE,
++    sysbus_create_simple(OBJECT(lvms), "rtc", "ls7a_rtc", VIRT_RTC_REG_BASE,
+                          qdev_get_gpio_in(pch_pic,
+                          VIRT_RTC_IRQ - VIRT_GSI_BASE));
  
-diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
-index 1c48283f5d..f0c21180a2 100644
---- a/hw/xtensa/xtfpga.c
-+++ b/hw/xtensa/xtfpga.c
-@@ -125,12 +125,13 @@ static const MemoryRegionOps xtfpga_fpga_ops = {
-     .endianness = DEVICE_NATIVE_ENDIAN,
- };
+     /* acpi ged */
+     lvms->acpi_ged = create_acpi_ged(pch_pic, lvms);
+     /* platform bus */
+-    lvms->platform_bus_dev = create_platform_bus(pch_pic);
++    lvms->platform_bus_dev = create_platform_bus(OBJECT(lvms), pch_pic);
+ }
  
--static XtfpgaFpgaState *xtfpga_fpga_init(MemoryRegion *address_space,
-+static XtfpgaFpgaState *xtfpga_fpga_init(Object *owner,
-+                                         MemoryRegion *address_space,
-                                          hwaddr base, uint32_t freq)
- {
-     XtfpgaFpgaState *s = g_new(XtfpgaFpgaState, 1);
+ static void virt_cpu_irq_init(LoongArchVirtMachineState *lvms)
+@@ -601,40 +600,40 @@ static void virt_irq_init(LoongArchVirtMachineState *lvms)
+      */
  
--    memory_region_init_io(&s->iomem, NULL, &xtfpga_fpga_ops, s,
-+    memory_region_init_io(&s->iomem, owner, &xtfpga_fpga_ops, s,
-                           "xtfpga.fpga", 0x10000);
-     memory_region_add_subregion(address_space, base, &s->iomem);
-     s->freq = freq;
-@@ -243,6 +244,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-     uint32_t freq = 10000000;
-     int n;
-     unsigned int smp_cpus = machine->smp.cpus;
-+    Object *mo = OBJECT(machine);
+     /* Create IPI device */
+-    ipi = qdev_new_orphan(TYPE_LOONGARCH_IPI);
++    ipi = qdev_new(OBJECT(lvms), "ipi", TYPE_LOONGARCH_IPI);
+     lvms->ipi = ipi;
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(ipi), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(ipi), &error_fatal);
  
-     if (smp_cpus > 1) {
-         mx_pic = xtensa_mx_pic_init(31);
-@@ -262,7 +264,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-         if (mx_pic) {
-             MemoryRegion *mx_eri;
- 
--            mx_eri = xtensa_mx_pic_register_cpu(mx_pic,
-+            mx_eri = xtensa_mx_pic_register_cpu(OBJECT(machine), mx_pic,
-                                                 xtensa_get_extints(cenv),
-                                                 xtensa_get_runstall(cenv));
-             memory_region_add_subregion(xtensa_get_er_region(cenv),
-@@ -286,30 +288,30 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-         XtensaMemory sysram = env->config->sysram;
- 
-         sysram.location[0].size = machine->ram_size;
--        xtensa_create_memory_regions(&env->config->instrom, "xtensa.instrom",
-+        xtensa_create_memory_regions(mo, &env->config->instrom, "xtensa.instrom",
-                                      system_memory);
--        xtensa_create_memory_regions(&env->config->instram, "xtensa.instram",
-+        xtensa_create_memory_regions(mo, &env->config->instram, "xtensa.instram",
-                                      system_memory);
--        xtensa_create_memory_regions(&env->config->datarom, "xtensa.datarom",
-+        xtensa_create_memory_regions(mo, &env->config->datarom, "xtensa.datarom",
-                                      system_memory);
--        xtensa_create_memory_regions(&env->config->dataram, "xtensa.dataram",
-+        xtensa_create_memory_regions(mo, &env->config->dataram, "xtensa.dataram",
-                                      system_memory);
--        xtensa_create_memory_regions(&sysram, "xtensa.sysram",
-+        xtensa_create_memory_regions(mo, &sysram, "xtensa.sysram",
-                                      system_memory);
+     /* Create DINTC device*/
+     if (virt_has_dmsi(lvms)) {
+-        dintc = qdev_new_orphan(TYPE_LOONGARCH_DINTC);
++        dintc = qdev_new(OBJECT(lvms), "dintc", TYPE_LOONGARCH_DINTC);
+         lvms->dintc = dintc;
+-        sysbus_realize_and_unref(SYS_BUS_DEVICE(dintc), &error_fatal);
++        sysbus_realize(SYS_BUS_DEVICE(dintc), &error_fatal);
+         sysbus_mmio_map(SYS_BUS_DEVICE(dintc), 0, VIRT_DINTC_BASE);
      }
  
-     system_io = g_malloc(sizeof(*system_io));
--    memory_region_init_io(system_io, NULL, &xtfpga_io_ops, NULL, "xtfpga.io",
-+    memory_region_init_io(system_io, OBJECT(machine), &xtfpga_io_ops, NULL, "xtfpga.io",
-                           system_io_size);
-     memory_region_add_subregion(system_memory, board->io[0], system_io);
-     if (board->io[1]) {
-         MemoryRegion *io = g_malloc(sizeof(*io));
- 
--        memory_region_init_alias(io, NULL, "xtfpga.io.cached",
-+        memory_region_init_alias(io, OBJECT(machine), "xtfpga.io.cached",
-                                  system_io, 0, system_io_size);
-         memory_region_add_subregion(system_memory, board->io[1], io);
+     /* Create EXTIOI device */
+-    extioi = qdev_new_orphan(TYPE_LOONGARCH_EXTIOI);
++    extioi = qdev_new(OBJECT(lvms), "extioi", TYPE_LOONGARCH_EXTIOI);
+     lvms->extioi = extioi;
+     if (virt_is_veiointc_enabled(lvms)) {
+         qdev_prop_set_bit(extioi, "has-virtualization-extension", true);
      }
--    xtfpga_fpga_init(system_io, 0x0d020000, freq);
-+    xtfpga_fpga_init(OBJECT(machine), system_io, 0x0d020000, freq);
-     xtfpga_net_init(system_io, 0x0d030000, 0x0d030400, 0x0d800000, extints[1]);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(extioi), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(extioi), &error_fatal);
  
-     serial_mm_init(OBJECT(machine), system_io, 0x0d050020, 2, extints[0],
-@@ -341,7 +343,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-         lowmem_end += env->config->sysram.location[0].addr;
-         cur_lowmem += env->config->sysram.location[0].addr;
+     virt_cpu_irq_init(lvms);
+-    pch_pic = qdev_new_orphan(TYPE_LOONGARCH_PIC);
++    pch_pic = qdev_new(OBJECT(lvms), "pch-pic", TYPE_LOONGARCH_PIC);
+     num = VIRT_PCH_PIC_IRQ_NUM;
+     qdev_prop_set_uint32(pch_pic, "pch_pic_irq_num", num);
+     d = SYS_BUS_DEVICE(pch_pic);
+-    sysbus_realize_and_unref(d, &error_fatal);
++    sysbus_realize(d, &error_fatal);
  
--        xtensa_create_memory_regions(&env->config->sysrom, "xtensa.sysrom",
-+        xtensa_create_memory_regions(mo, &env->config->sysrom, "xtensa.sysrom",
-                                      system_memory);
+-    pch_msi = qdev_new_orphan(TYPE_LOONGARCH_PCH_MSI);
++    pch_msi = qdev_new(OBJECT(lvms), "pch-msi", TYPE_LOONGARCH_PCH_MSI);
+     start   =  num;
+     num = EXTIOI_IRQS - start;
+     qdev_prop_set_uint32(pch_msi, "msi_irq_base", start);
+     qdev_prop_set_uint32(pch_msi, "msi_irq_num", num);
+     d = SYS_BUS_DEVICE(pch_msi);
+-    sysbus_realize_and_unref(d, &error_fatal);
++    sysbus_realize(d, &error_fatal);
+     sysbus_mmio_map(d, 0, VIRT_PCH_MSI_ADDR_LOW);
  
-         if (kernel_cmdline) {
-@@ -465,13 +467,13 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-                 size = board->flash->size - board->flash->boot_base;
-             }
- 
--            memory_region_init_alias(flash_io, NULL, "xtfpga.flash",
-+            memory_region_init_alias(flash_io, OBJECT(machine), "xtfpga.flash",
-                                      flash_mr, board->flash->boot_base, size);
-             memory_region_add_subregion(system_memory,
-                                         env->config->sysrom.location[0].addr,
-                                         flash_io);
-         } else {
--            xtensa_create_memory_regions(&env->config->sysrom, "xtensa.sysrom",
-+            xtensa_create_memory_regions(mo, &env->config->sysrom, "xtensa.sysrom",
-                                          system_memory);
-         }
-     }
-diff --git a/include/hw/xtensa/mx_pic.h b/include/hw/xtensa/mx_pic.h
-index cd316d86eb..01d5ea884e 100644
---- a/include/hw/xtensa/mx_pic.h
-+++ b/include/hw/xtensa/mx_pic.h
-@@ -35,7 +35,7 @@ typedef struct XtensaMxPic XtensaMxPic;
- 
- XtensaMxPic *xtensa_mx_pic_init(unsigned n_extint);
- void xtensa_mx_pic_reset(void *opaque);
--MemoryRegion *xtensa_mx_pic_register_cpu(XtensaMxPic *mx,
-+MemoryRegion *xtensa_mx_pic_register_cpu(Object *owner, XtensaMxPic *mx,
-                                          qemu_irq *irq,
-                                          qemu_irq runstall);
- qemu_irq *xtensa_mx_pic_get_extints(XtensaMxPic *mx);
+     if (kvm_irqchip_in_kernel()) {
 -- 
 2.47.1
 
