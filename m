@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCC6C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B489EC44501
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:41:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiEO-00027e-In; Sat, 11 Jul 2026 20:39:40 -0400
+	id 1wiiER-0002EF-09; Sat, 11 Jul 2026 20:39:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigTN-0008Fr-3j; Sat, 11 Jul 2026 18:47:01 -0400
-Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.245.243.92])
+ id 1wiggN-0000X3-Oc; Sat, 11 Jul 2026 19:00:27 -0400
+Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.77.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigTK-0007Nw-Qc; Sat, 11 Jul 2026 18:47:00 -0400
+ id 1wiggL-00023V-O9; Sat, 11 Jul 2026 19:00:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810018; x=1815346018;
+ t=1783810825; x=1815346825;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=mdOsMUFO/NU8q1XiktFg86KqJ+PNpvF4Jt1vctgje9g=;
- b=ObryqyVo8GEJ3cOwN26wJ40kDjRNdoLU4jr5ztoK9Qzb+OJO0qbAsPNZ
- BDyR7sxXDxYA0EE+UFDQjVGHE47NbNsd9md8V/fFHyLCcrMjsCaD1k0C3
- Gk1pBxLOvmt8VSXdmXdZsMBR/mwRV+gFnLg0b/HlFe7IOe30oVgxI/Aa9
- dBDNsTwduD8ynNNXzTn7K60FFqLLNAm8e7o6HHGVn0g2z+E/6JWw9+7BL
- R1VLD0hSAfunVQEdkCIWBzxvE0exn5ZFLgVdaMioHc50Xwn6HH+PE3joc
- gkdiwgVT4+rPA3GDd4CJLUYxHAaZ/weoVExqkfuGBjRu/89H43IXLIsfM Q==;
-X-CSE-ConnectionGUID: 0qfZ9PztQ1Wo4RbpC6xzmw==
-X-CSE-MsgGUID: wxTjDXMFTPOf4o53CSElRw==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="22997502"
-Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
- by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 22:46:55 +0000
-Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:24563]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.51.175:2525]
+ bh=+NW1ede9jkU8iAzaiVlSKGRb2pU5g+Y9Xr/bJHaR448=;
+ b=Rys3SkRwUoX0MoipnvTdznOY5Zzt50+QyEWhYEWo7sLCO8btHWHxr6cK
+ 5/yj2iigetIxT2NtN/oUthA9Q6lT29XcFDNe5qMZe1eUiODxTQDEdMNr+
+ pjoqMexrnUUCZFHb4Y/pXOSjmMJRKdB6AKn2tVuaVEShA+0sWKBe60Cfz
+ ZsfnSlFQxjClfoRosbsumQFMvsUcpUKV4F0LXgZyKoIFoqRe5YfnvRSU4
+ QCr8WVpw0xeoaHqhS/hDTJ8SZdUox/3iNHOtGu3zHyzJZKqDNkVynbdAd
+ 040bMY+Qv4mUgh+hddxbXKCm5hh6hDCNHiDGwPkeuTOWJTZs//Wrftnlm g==;
+X-CSE-ConnectionGUID: eX6CSNs4Ququ9+xsBVz6eQ==
+X-CSE-MsgGUID: rgVFLvIETs6RKI+BR4UKzg==
+X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23493273"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:00:21 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:8893]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.35.214:2525]
  with esmtp (Farcaster)
- id 1c2cdcaf-e3c4-4985-b77a-d079dffc5609; Sat, 11 Jul 2026 22:46:55 +0000 (UTC)
-X-Farcaster-Flow-ID: 1c2cdcaf-e3c4-4985-b77a-d079dffc5609
+ id 472d9e64-4c19-49da-9c5e-f3552fdb6959; Sat, 11 Jul 2026 23:00:21 +0000 (UTC)
+X-Farcaster-Flow-ID: 472d9e64-4c19-49da-9c5e-f3552fdb6959
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA001.ant.amazon.com (10.250.64.217) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:46:54 +0000
+ Sat, 11 Jul 2026 23:00:21 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 22:46:46 +0000
+ Sat, 11 Jul 2026 23:00:12 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -91,9 +91,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
  <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
  <berrange@redhat.com>
-Subject: [RFC PATCH 037/134] hw/scsi: Give onboard devices a QOM parent
-Date: Sat, 11 Jul 2026 22:35:30 +0000
-Message-ID: <20260711223707.42139-38-graf@amazon.com>
+Subject: [RFC PATCH 088/134] qdev: Remove qdev_new_orphan() and
+ qdev_try_new_orphan()
+Date: Sat, 11 Jul 2026 22:36:21 +0000
+Message-ID: <20260711223707.42139-89-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -101,21 +102,21 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D031UWC001.ant.amazon.com (10.13.139.241) To
+X-ClientProxiedBy: EX19D037UWB004.ant.amazon.com (10.13.138.84) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.245.243.92;
+Received-SPF: pass client-ip=44.246.77.92;
  envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:56 -0400
+X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,228 +131,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/scsi to the new
-parented API introduced earlier in this series, so every onboard
-device gets a stable path in the composition tree instead of landing
-in /machine/unattached with an unstable device[N] name.
+Every bus-layer *_orphan() wrapper is gone and the last direct
+caller, qdev_device_add_from_qdict(), now uses object_new() plus
+qdev_set_id() to place -device instances under
+/machine/peripheral{,-anon} as before.  There is no remaining
+legitimate way to create a device without picking its parent, so
+drop the transitional *_orphan() spellings and update the doc
+comments that still referenced them.
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing device for
-composite children.  Names follow existing QOM conventions.
-
-Per-site rationale (reviewers: dispute the modeling here):
-
-hw/scsi/lasi_ncr710.c:234 | qdev_new | parent | "scsi" | thread Object *parent as first arg; single caller in hw/hppa/machine.c board init passes OBJECT(machine)
-hw/scsi/ncr53c710.c:2379 | qdev_new | parent | "scsi" | thread Object *parent as first arg; no in-tree callers, header updated
-hw/scsi/ncr53c710.c:2397 | qdev_new | parent | "scsi" | thread Object *parent as first arg; no in-tree callers, header updated
-hw/scsi/scsi-bus.c:448 | qdev_new | OBJECT(bus) | name | collapse existing object_property_add_child(OBJECT(bus), name, dev); keep dynamic legacy[%d] name
-hw/scsi/spapr_vscsi.c:1238 | qdev_new | parent | "vscsi[*]" | thread Object *parent as first arg; single caller in hw/ppc/spapr.c board init loop passes OBJECT(spapr)
-
-Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 Assisted-by: Kiro
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/hppa/machine.c          |  2 +-
- hw/ppc/spapr.c             |  2 +-
- hw/scsi/lasi_ncr710.c      |  8 ++++----
- hw/scsi/lasi_ncr710.h      |  4 ++--
- hw/scsi/ncr53c710.c        | 15 ++++++++-------
- hw/scsi/ncr53c710.h        |  7 ++++---
- hw/scsi/scsi-bus.c         |  5 ++---
- hw/scsi/spapr_vscsi.c      |  6 +++---
- include/hw/ppc/spapr_vio.h |  2 +-
- 9 files changed, 26 insertions(+), 25 deletions(-)
+ hw/core/qdev.c         | 13 -------------
+ include/hw/core/qdev.h | 30 +++---------------------------
+ system/qdev-monitor.c  |  2 +-
+ 3 files changed, 4 insertions(+), 41 deletions(-)
 
-diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
-index e50f9adf41..e3c9053bf2 100644
---- a/hw/hppa/machine.c
-+++ b/hw/hppa/machine.c
-@@ -631,7 +631,7 @@ static void machine_HP_715_init(MachineState *machine)
-                                                        1));
-     /* SCSI disk setup. */
-     if (drive_get_max_bus(IF_SCSI) >= 0) {
--        dev = lasi_ncr710_init(addr_space,
-+        dev = lasi_ncr710_init(OBJECT(machine), addr_space,
-                                translate(NULL, LASI_HPA_715 + 0x6000),
-                                qdev_get_gpio_in(lasi_dev, LASI_IRQ_SCSI_HPA));
-         assert(dev);
-diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
-index e09b529ebc..91f9d873b8 100644
---- a/hw/ppc/spapr.c
-+++ b/hw/ppc/spapr.c
-@@ -3062,7 +3062,7 @@ static void spapr_machine_init(MachineState *machine)
-     pci_init_nic_devices(phb->bus, NULL);
- 
-     for (i = 0; i <= drive_get_max_bus(IF_SCSI); i++) {
--        spapr_vscsi_create(spapr->vio_bus);
-+        spapr_vscsi_create(OBJECT(spapr), spapr->vio_bus);
-     }
- 
-     /* Graphics */
-diff --git a/hw/scsi/lasi_ncr710.c b/hw/scsi/lasi_ncr710.c
-index e1a1f68aaa..d40bc62157 100644
---- a/hw/scsi/lasi_ncr710.c
-+++ b/hw/scsi/lasi_ncr710.c
-@@ -224,18 +224,18 @@ void lasi_ncr710_handle_legacy_cmdline(DeviceState *lasi_dev)
-     }
+diff --git a/hw/core/qdev.c b/hw/core/qdev.c
+index d2c89d0310..f7b512eb35 100644
+--- a/hw/core/qdev.c
++++ b/hw/core/qdev.c
+@@ -164,19 +164,6 @@ DeviceState *qdev_try_new(Object *parent, const char *id, const char *type)
+     return DEVICE(obj);
  }
  
--DeviceState *lasi_ncr710_init(MemoryRegion *addr_space, hwaddr hpa,
--                               qemu_irq irq)
-+DeviceState *lasi_ncr710_init(Object *parent, MemoryRegion *addr_space,
-+                              hwaddr hpa, qemu_irq irq)
- {
-     DeviceState *dev;
-     LasiNCR710State *s;
-     SysBusDevice *sbd;
+-DeviceState *qdev_new_orphan(const char *name)
+-{
+-    return DEVICE(object_new(name));
+-}
+-
+-DeviceState *qdev_try_new_orphan(const char *name)
+-{
+-    ObjectClass *oc = module_object_class_by_name(name);
+-    if (!oc) {
+-        return NULL;
+-    }
+-    return DEVICE(object_new_with_class(oc));
+-}
  
--    dev = qdev_new_orphan(TYPE_LASI_NCR710);
-+    dev = qdev_new(parent, "scsi", TYPE_LASI_NCR710);
-     s = LASI_NCR710(dev);
-     sbd = SYS_BUS_DEVICE(dev);
-     s->lasi_irq = irq;
--    sysbus_realize_and_unref(sbd, &error_fatal);
-+    sysbus_realize(sbd, &error_fatal);
-     memory_region_add_subregion(addr_space, hpa,
-                                sysbus_mmio_get_region(sbd, 0));
-     return dev;
-diff --git a/hw/scsi/lasi_ncr710.h b/hw/scsi/lasi_ncr710.h
-index 450fb7e1c3..e963a6511f 100644
---- a/hw/scsi/lasi_ncr710.h
-+++ b/hw/scsi/lasi_ncr710.h
-@@ -48,8 +48,8 @@ typedef struct LasiNCR710State {
-     NCR710State ncr710;
- } LasiNCR710State;
+ static QTAILQ_HEAD(, DeviceListener) device_listeners
+     = QTAILQ_HEAD_INITIALIZER(device_listeners);
+diff --git a/include/hw/core/qdev.h b/include/hw/core/qdev.h
+index e692a1d48e..9220e9e3b1 100644
+--- a/include/hw/core/qdev.h
++++ b/include/hw/core/qdev.h
+@@ -440,30 +440,6 @@ DeviceState *qdev_new(Object *parent, const char *id, const char *type);
+  */
+ DeviceState *qdev_try_new(Object *parent, const char *id, const char *type);
  
--DeviceState *lasi_ncr710_init(MemoryRegion *addr_space, hwaddr hpa,
--                               qemu_irq irq);
-+DeviceState *lasi_ncr710_init(Object *parent, MemoryRegion *addr_space,
-+                              hwaddr hpa, qemu_irq irq);
- void lasi_ncr710_handle_legacy_cmdline(DeviceState *lasi_dev);
- 
- #endif
-diff --git a/hw/scsi/ncr53c710.c b/hw/scsi/ncr53c710.c
-index 54ce2df641..633a76c70b 100644
---- a/hw/scsi/ncr53c710.c
-+++ b/hw/scsi/ncr53c710.c
-@@ -2371,22 +2371,23 @@ static const VMStateDescription vmstate_sysbus_ncr710 = {
+-/**
+- * qdev_new_orphan: Create a device on the heap
+- * @name: device type to create (we assert() that this type exists)
+- *
+- * This only allocates the memory and initializes the device state
+- * structure, ready for the caller to set properties if they wish.
+- * The device still needs to be realized.
+- *
+- * Return: a derived DeviceState object with a reference count of 1.
+- */
+-DeviceState *qdev_new_orphan(const char *name);
+-
+-/**
+- * qdev_try_new_orphan: Try to create a device on the heap
+- * @name: device type to create
+- *
+- * This is like qdev_new_orphan(), except it returns %NULL when type @name
+- * does not exist, rather than asserting.
+- *
+- * Return: a derived DeviceState object with a reference count of 1 or
+- * NULL if type @name does not exist.
+- */
+-DeviceState *qdev_try_new_orphan(const char *name);
+-
+ /**
+  * qdev_is_realized() - check if device is realized
+  * @dev: The device to check.
+@@ -488,8 +464,8 @@ static inline bool qdev_is_realized(DeviceState *dev)
+  * If @bus, plug @dev into @bus.  This takes a reference to @dev.
+  * If @dev has no QOM parent, make one up, taking another reference.
+  *
+- * If you created @dev using qdev_new_orphan(), you probably want to use
+- * qdev_realize_and_unref() instead.
++ * If you created @dev via object_new() directly (holding a floating
++ * reference), you probably want to use qdev_realize_and_unref() instead.
+  *
+  * Return: true on success, else false setting @errp with error
+  */
+@@ -506,7 +482,7 @@ bool qdev_realize(DeviceState *dev, BusState *bus, Error **errp);
+  * (private) reference, which is dropped on return regardless of
+  * success or failure.  Intended use::
+  *
+- *     dev = qdev_new_orphan();
++ *     dev = DEVICE(object_new(TYPE_FOO));
+  *     [...]
+  *     qdev_realize_and_unref(dev, bus, errp);
+  *
+diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
+index adc37d6a89..0e13b1540c 100644
+--- a/system/qdev-monitor.c
++++ b/system/qdev-monitor.c
+@@ -707,7 +707,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts,
      }
- };
  
--DeviceState *ncr710_device_create_sysbus(hwaddr addr, qemu_irq irq)
-+DeviceState *ncr710_device_create_sysbus(Object *parent, hwaddr addr,
-+                                          qemu_irq irq)
- {
-     DeviceState *dev;
-     SysBusDevice *sysbus;
- 
--    dev = qdev_new_orphan(TYPE_SYSBUS_NCR710_SCSI);
-+    dev = qdev_new(parent, "scsi", TYPE_SYSBUS_NCR710_SCSI);
-     sysbus = SYS_BUS_DEVICE(dev);
- 
--    qdev_realize_and_unref(dev, NULL, &error_abort);
-+    qdev_realize(dev, NULL, &error_abort);
-     sysbus_mmio_map(sysbus, 0, addr);
-     sysbus_connect_irq(sysbus, 0, irq);
-     return dev;
- }
- 
--DeviceState *ncr53c710_init(MemoryRegion *address_space, hwaddr addr,
--                             qemu_irq irq)
-+DeviceState *ncr53c710_init(Object *parent, MemoryRegion *address_space,
-+                            hwaddr addr, qemu_irq irq)
- {
-     DeviceState *dev;
-     SysBusDevice *sysbus;
-@@ -2394,10 +2395,10 @@ DeviceState *ncr53c710_init(MemoryRegion *address_space, hwaddr addr,
- 
-     /* trace_ncr710_device_init(addr); */
- 
--    dev = qdev_new_orphan(TYPE_SYSBUS_NCR710_SCSI);
-+    dev = qdev_new(parent, "scsi", TYPE_SYSBUS_NCR710_SCSI);
-     sysbus = SYS_BUS_DEVICE(dev);
- 
--    qdev_realize_and_unref(dev, NULL, &error_abort);
-+    qdev_realize(dev, NULL, &error_abort);
-     sysbus_mmio_map(sysbus, 0, addr);
-     sysbus_connect_irq(sysbus, 0, irq);
- 
-diff --git a/hw/scsi/ncr53c710.h b/hw/scsi/ncr53c710.h
-index 00b6a01577..6e466d6a36 100644
---- a/hw/scsi/ncr53c710.h
-+++ b/hw/scsi/ncr53c710.h
-@@ -229,9 +229,10 @@ static inline SysBusNCR710State *sysbus_from_ncr710(NCR710State *s)
-     return container_of(s, SysBusNCR710State, ncr710);
- }
- 
--DeviceState *ncr53c710_init(MemoryRegion *address_space, hwaddr addr,
--                             qemu_irq irq);
--DeviceState *ncr710_device_create_sysbus(hwaddr addr, qemu_irq irq);
-+DeviceState *ncr53c710_init(Object *parent, MemoryRegion *address_space,
-+                            hwaddr addr, qemu_irq irq);
-+DeviceState *ncr710_device_create_sysbus(Object *parent, hwaddr addr,
-+                                          qemu_irq irq);
- void ncr710_reg_write(void *opaque, hwaddr addr, uint64_t val, unsigned size);
- uint64_t ncr710_reg_read(void *opaque, hwaddr addr, unsigned size);
- void ncr710_soft_reset(NCR710State *s);
-diff --git a/hw/scsi/scsi-bus.c b/hw/scsi/scsi-bus.c
-index 806a20baee..bc7cfea6ed 100644
---- a/hw/scsi/scsi-bus.c
-+++ b/hw/scsi/scsi-bus.c
-@@ -445,9 +445,8 @@ SCSIDevice *scsi_bus_legacy_add_drive(SCSIBus *bus, BlockBackend *blk,
-             driver = "scsi-hd";
-         }
-     }
+     /* create device */
 -    dev = qdev_new_orphan(driver);
-     name = g_strdup_printf("legacy[%d]", unit);
--    object_property_add_child(OBJECT(bus), name, OBJECT(dev));
-+    dev = qdev_new(OBJECT(bus), name, driver);
-     g_free(name);
++    dev = DEVICE(object_new(driver));
  
-     s = SCSI_DEVICE(dev);
-@@ -473,7 +472,7 @@ SCSIDevice *scsi_bus_legacy_add_drive(SCSIBus *bus, BlockBackend *blk,
-         return NULL;
-     }
- 
--    if (!qdev_realize_and_unref(dev, &bus->qbus, errp)) {
-+    if (!qdev_realize(dev, &bus->qbus, errp)) {
-         object_unparent(OBJECT(dev));
-         return NULL;
-     }
-diff --git a/hw/scsi/spapr_vscsi.c b/hw/scsi/spapr_vscsi.c
-index 492d7d18a2..95cd21ffbb 100644
---- a/hw/scsi/spapr_vscsi.c
-+++ b/hw/scsi/spapr_vscsi.c
-@@ -1231,13 +1231,13 @@ static void spapr_vscsi_realize(SpaprVioDevice *dev, Error **errp)
-     qbus_set_hotplug_handler(BUS(&s->bus), NULL);
- }
- 
--void spapr_vscsi_create(SpaprVioBus *bus)
-+void spapr_vscsi_create(Object *parent, SpaprVioBus *bus)
- {
-     DeviceState *dev;
- 
--    dev = qdev_new_orphan("spapr-vscsi");
-+    dev = qdev_new(parent, "vscsi[*]", "spapr-vscsi");
- 
--    qdev_realize_and_unref(dev, &bus->bus, &error_fatal);
-+    qdev_realize(dev, &bus->bus, &error_fatal);
-     scsi_bus_legacy_handle_cmdline(&VIO_SPAPR_VSCSI_DEVICE(dev)->bus);
- }
- 
-diff --git a/include/hw/ppc/spapr_vio.h b/include/hw/ppc/spapr_vio.h
-index 0ea0dbae8b..72baef6919 100644
---- a/include/hw/ppc/spapr_vio.h
-+++ b/include/hw/ppc/spapr_vio.h
-@@ -139,7 +139,7 @@ SpaprVioDevice *vty_lookup(SpaprMachineState *spapr, target_ulong reg);
- void vty_putchars(SpaprVioDevice *sdev, uint8_t *buf, int len);
- void spapr_vty_create(SpaprVioBus *bus, Chardev *chardev);
- void spapr_vlan_create(SpaprVioBus *bus, NICInfo *nd);
--void spapr_vscsi_create(SpaprVioBus *bus);
-+void spapr_vscsi_create(Object *parent, SpaprVioBus *bus);
- 
- SpaprVioDevice *spapr_vty_get_default(SpaprVioBus *bus);
- 
+     /* Check whether the hotplug is allowed by the machine */
+     if (phase_check(PHASE_MACHINE_READY) &&
 -- 
 2.47.1
 
