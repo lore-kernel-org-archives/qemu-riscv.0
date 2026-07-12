@@ -4,111 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38507C43458
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 09:24:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4246AC44501
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 11:15:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiqQH-0008Fr-Vl; Sun, 12 Jul 2026 05:24:30 -0400
+	id 1wis8w-00057H-IP; Sun, 12 Jul 2026 07:14:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wiqQF-0008FG-Iu
- for qemu-riscv@nongnu.org; Sun, 12 Jul 2026 05:24:27 -0400
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1wis8s-00056n-QJ
+ for qemu-riscv@nongnu.org; Sun, 12 Jul 2026 07:14:39 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1wiqQ8-000383-C4
- for qemu-riscv@nongnu.org; Sun, 12 Jul 2026 05:24:23 -0400
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-697564cb69eso4893569a12.0
- for <qemu-riscv@nongnu.org>; Sun, 12 Jul 2026 02:24:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783848257; cv=none;
- d=google.com; s=arc-20260327;
- b=heQ97MP4trbZhVKnkfKQuF7pzbyiZEZVtgGbYXze2qEc08G5KGQz0Oy+iEwQvpttw7
- thE9Ho1QnOoNwM1ZUvPBwU0OZih+N6lMFPpKisUCGgnbwD6knVgUL9yICzPtQcjsrUNT
- nmy24MCkJnDVsiuoEj4vhRYMygECrVXbhHjRnmK9zDdKXdBH7cqE0GTAFjBeFshzf6L+
- iq7zDDPeKWvEr2ZFKKgow0LxeZxpPbxyCrnVaWv1WsjS6UqYIPkfVbLEM1dzftyVEG/H
- NB48chfdUEZkhzpA0j5PX5KtlMoOfkAIFdRfIWdP9gCrvlsClVU8rYal3w/kcHWu4tBZ
- vfqw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=HnIobeCO9RFfEeOZf8KX3PSFquu3Jeny+cYOu6i244Y=;
- fh=ysm4RoT7FurQq0NA1dV/EP1ztF/f6w3GaGg58YfNnA8=;
- b=Z+h2w3Fg1UbcDMm8E4XSosFKMO37+NHgV2X/0DE8h9F2bQ3YDMu+cc69NKWmPQYCuc
- Gjv0g9N07SiK4OzgCwrowV9UysxDEjrwq/WrLHkNtAtMFMxMd1aJwdtKBDC+ly8VHdi5
- 9q8EW+kb9+LRmR+/1z+2e0oDrWvdGe8iFmuCkImeW0C0KejY3iOz7p8yjvAI7iT+g5B6
- cQ0updkaVW8vJjhwL3nXieVEhCc7JTenCH1BD0UU5q+ZBe0FluERhGMVqJMJDoik+AXX
- 7O4EvSr8aMp3jByVCH1sg+zkHA0OLwP+LoCgx4Vli/6MoEfOehDD9eBKCeucnl6c9PgJ
- jl7g==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1wis8n-00020W-3w
+ for qemu-riscv@nongnu.org; Sun, 12 Jul 2026 07:14:37 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-493b77b150aso19572615e9.2
+ for <qemu-riscv@nongnu.org>; Sun, 12 Jul 2026 04:14:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1783848257; x=1784453057; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=HnIobeCO9RFfEeOZf8KX3PSFquu3Jeny+cYOu6i244Y=;
- b=bAYxAEWTv4YIJ0aFI5xT9Bpy7uBv0wFOI/sb1QvyOJzSMlU6GV18o/WT4sVIOgkbf9
- ePCvmUPQJD+edDGovLrB2aAXQlWyrq87/LfE3/AtQyXoVx/56mhggduFNob5n8dCe4lq
- Hmq8BvyXpUvz1TMozBblFo3FdM8T2FUWiafoiYAItwObWrsWlEUZ3akAN6ym9Dp76RNS
- cpfWfil1W8n+tQ8dyKJ83C8TY+gtnR+OKHBxr8SX9d/CAdCFwjBSGDZ6HIVfQS3Z/uVL
- 0RllP7Sotf/IE1c8hFbbnmNSBB43q/GkYpRM8GBWWAbw+qICahhIzxTMUYGr6/gIga7H
- DHbA==
+ d=gmail.com; s=20251104; t=1783854870; x=1784459670; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id
+ :references:in-reply-to:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=txB549w4KR0PpzC0YxNe3SwaUOSzTzvBdT8zykEgehg=;
+ b=s4zviEqOUbKtHEuHbtclD9C+Lj6i2uo6ATkMxFpNOPFV4G0+nQawiEs9Gz9I/as8SB
+ CX7QWRjzwyUjKDS7YQHFkJ+5DqMxEP/eLg1kZlIcEDnn6jCcK8l6Hi8LSHvN/eCzi2dL
+ 1dZi276s5UEXdxvbO3lsTEgPueyMuUQlZlYOMGIXKPr3Xog5PU8dYR1H1W6JAU7YMEpT
+ hI7ZzE+FlbEjKX0Dk/5adQ4hfYzeE0zvjYPDxkU8FUf3htZvTh6zFLtxfhixHJY77W3O
+ KC0hMCjkb6WGEm90F5NKfivzaMm7yxXGK++cCH5CFGAlx+cjp3Ie3nEoqA6CH+XGA5P4
+ XFwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783848257; x=1784453057;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=HnIobeCO9RFfEeOZf8KX3PSFquu3Jeny+cYOu6i244Y=;
- b=REsAkqjc8cCAZkwwyM/1hktpFTwO7QUsYLnc7L4jFTI8Oz2H74TYA6jkTFzNyYDL1t
- AXMcpRqdJc1dwn6re12eD8L9C+EOc0DiHDb2e5v+JoCC9J2mklREsQfGFKR5tIzL946t
- BvSlE10+D3NGS+HWkMDApYZygOALKdejZsTi+qJNpCYYFecZAwAjibQhQ+Ypv/0rDV8N
- jJPAcFQerbZ/UjfKoXKM5ezIYFmlx8l8L0RZLzugDJ0INtC4CFPWXB+ZcNQAEwY3pYQ0
- M1gYOw/k92hQR9e3EUDT/s3PIrjvRyw6h6+RPtZ0mAu1e319zBFpzcqOV8WEmMSFKvDt
- n5UA==
+ d=1e100.net; s=20251104; t=1783854870; x=1784459670;
+ h=content-transfer-encoding:content-type:mime-version:message-id
+ :references:in-reply-to:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=txB549w4KR0PpzC0YxNe3SwaUOSzTzvBdT8zykEgehg=;
+ b=K4qgGATgFqbwl72C2FJYdC7xhvhI0vdh6zpTtawKaq9C1eUcdcVbIupl5SwUVeQAUd
+ gA99FG8n1AQH9zx06dUeif4pb8zi/CJEqP/YkKcnTFHP/BAVb13vG8slvAWd5Cdpv++T
+ m082012uezq72KIpPcA0j3A+qrLqo4UeaR12admivOKlQYQUL3M2D9b4uSB3urRYaACx
+ YYoiI3sLlYVJqhi9BKlkApS2d72R2OXO/k2oVsDZIyqVjm8HYJHgbuNrV4uNkX2ToOBa
+ Kw40Is93tYt+kREw84H3s9xVlmXs1Loo/3k+d1HMCLXn7e6nbTwTVS4yPdPLY/FUtgsm
+ A2+g==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrvEHUrUKvF7NJQH8ufYOonhDZlw9sCE56nob8q+mS93KvudWCUUSLkCr7P3YixyraGI2HjDOnRQqFw@nongnu.org
-X-Gm-Message-State: AOJu0YzEyC2UshWrb06o2CVzQ3heOw8DDGpj6j+CBq0ve46qLP4a6xP6
- ohC+FTwpIUlnc24Kij0P53TOFGI56r0eGmAxYUUmm2r3IAfBWbOKsqLSwrqyMiZJUUb8JoOF+5Z
- h6n4XzU6BauAouw6gjFCnDivWEMvsfQlOu29bBdWVJw==
-X-Gm-Gg: AfdE7ckBCK1jW0CgQmY4Rasu72LCmqgkHqYLttNeewRVZG4LiMkeWWJvWLB7gFX2hcM
- LpgRtkU8Rrz4nxs5dYyk0tQfvxVBcxns1H51UqhNBqHH8NqswGNShzGGqnR9i57jMymE/htig8T
- +DM1avOxkNX+BDZLFf/15vpSTy2zv4v0rkW0F9IonFOw5B1G5+EtM3UECNSTDM5YJHpCwS0n8oL
- 7KUfTJ1jS6iXvUIfpFyfLNcStCiNTrEyEU82Iwaliw9mHimYnA72obRcz5CYDGXh5aDMqBZo/c=
-X-Received: by 2002:a17:907:3cc5:b0:c12:dd72:933c with SMTP id
- a640c23a62f3a-c161f353b50mr242872266b.33.1783848257178; Sun, 12 Jul 2026
- 02:24:17 -0700 (PDT)
+ AHgh+Rr0v2KhRpd1MdEc1uN/J1VzM7e1aIyCGfyktlC7OghRsFO8F1EFoQE2LhH7qUln1TjCXHO+fmg5Td89@nongnu.org
+X-Gm-Message-State: AOJu0YxohSJ8NqVS5991W6i3Vpw2xEMIeYkyB83LJP4UhPlvxy+AQSc3
+ C9wgDmap0WzSuuhxKwxXPl5UCNnXdw05p5W6Dp126MZo8z6Fua8FH7Z+
+X-Gm-Gg: AfdE7cnfkm2HyLp84JGNquGTWHk8OglO2jXZdVf2EyDqkmkgNoVXT8QD74JlLlYTPOW
+ lKg7avxebRm5aYOBasVPe6elTZAXGtndCva08jtPvl3fooKKTEiGKADWi4tfVRn79jLRixCmNQJ
+ LdNy2k+5QeVSbnOcWOckH5c3RldAimMuZlujpaDwxPxpYrMJmSrJdGEtr0PwJj5I9tI7vp86/S/
+ 8LQ6yOqBOA9dChL/csLdGNJanQPIg+2+HsCcoPqcniXfrnmvb0HXXn0jv7IypoAdGnwDnrdxk1A
+ d0daVqEbJLSloojRgWt027n7I+olrJZLt6Qf7x4NBvMz5r0VB1SQ1ubnG6U7varxqdeaxISG7vJ
+ uSU8m89UX77wTfqorhl+n1Vbx1eZtZ9N6tFe3gzkPXATHRGerQKG156cFgz20ctU4/7ZMit+6fo
+ or5/H1buAqVTbP9We1yQGO2kP5vuqx/ulx0oe+YiEAuTumEDI=
+X-Received: by 2002:a05:600c:1d0e:b0:492:68bc:3237 with SMTP id
+ 5b1f17b1804b1-493f88333c0mr51860835e9.32.1783854869333; 
+ Sun, 12 Jul 2026 04:14:29 -0700 (PDT)
+Received: from ehlo.thunderbird.net (p5b3df423.dip0.t-ipconnect.de.
+ [91.61.244.35]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493f2a38b19sm146581545e9.0.2026.07.12.04.14.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 12 Jul 2026 04:14:28 -0700 (PDT)
+Date: Sun, 12 Jul 2026 10:56:24 +0000
+From: Bernhard Beschow <shentey@gmail.com>
+To: Alexander Graf <graf@amazon.com>, qemu-devel@nongnu.org
+CC: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, Song Gao <17746591750@163.com>,
+ Aditya Gupta <adityag@linux.ibm.com>, Alexey Kardashevskiy <aik@ozlabs.ru>,
+ Farhan Ali <alifm@linux.ibm.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Antony Pavlov <antonynpavlov@gmail.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, BALATON Zoltan <balaton@eik.bme.hu>,
+ Felipe Balbi <balbi@kernel.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>,
+ Hendrik Brueckner <brueckner@linux.ibm.com>,
+ Chao Liu <chao.liu@processmission.com>, Huacai Chen <chenhuacai@kernel.org>,
+ =?ISO-8859-1?Q?Cl=E9ment_Chigot?= <chigot@adacore.com>,
+ =?ISO-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>,
+ Helge Deller <deller@gmx.de>, Dorjoy Chowdhury <dorjoychy111@gmail.com>,
+ "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Eric Farman <farman@linux.ibm.com>,
+ Francisco Iglesias <francisco.iglesias@amd.com>,
+ Gaurav Sharma <gaurav.sharma_7@nxp.com>, Gautam Gala <ggala@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ =?ISO-8859-1?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>,
+ Jan Kiszka <jan.kiszka@web.de>, Max Filippov <jcmvbkbc@gmail.com>,
+ Joel Stanley <joel@jms.id.au>, Jared Rossi <jrossi@linux.ibm.com>,
+ Tyrone Ting <kfting@nuvoton.com>, Frederic Konrad <konrad.frederic@yahoo.fr>, 
+ Laurent Vivier <laurent@vivier.eu>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Bibo Mao <maobibo@loongson.cn>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Glenn Miles <milesg@linux.ibm.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
+ Michael Rolnik <mrolnik@gmail.com>, "Michael S . Tsirkin" <mst@redhat.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@mailo.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sai Pavan Boddu <sai.pavan.boddu@amd.com>, Samuel Tardieu <sam@rfc1149.net>,
+ Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Thomas Huth <th.huth+qemu@posteo.eu>, Ran Wang <wangran@bosc.ac.cn>,
+ Hao Wu <wuhaotsh@google.com>,
+ =?ISO-8859-1?Q?Daniel_P_=2E_Berrang=E9?= <berrange@redhat.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BRFC_PATCH_000/134=5D_qom=3A_Make_c?=
+ =?US-ASCII?Q?omposition-tree_parenting_mandatory?=
+In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
+References: <20260711223707.42139-1-graf@amazon.com>
+Message-ID: <B1CF8FC2-114E-4B1C-9F45-3A41F60505A5@gmail.com>
 MIME-Version: 1.0
-References: <20260707091039.2574638-1-frank.chang@sifive.com>
- <CAKmqyKNVo-rdOtN0t9XzRB3teF6nNEgh_twkf9s8zX2q0dPU=w@mail.gmail.com>
- <CAE_xrPiD1d8jRfz9fcjZaNGEp1uuDn8PMO-=RzMLipt3CnBGPw@mail.gmail.com>
- <55cce2d7f992ac95719f04b6b8d8923c95900df5.camel@wdc.com>
-In-Reply-To: <55cce2d7f992ac95719f04b6b8d8923c95900df5.camel@wdc.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Sun, 12 Jul 2026 17:24:04 +0800
-X-Gm-Features: AUfX_mxdEVVyZymw86KAwwCKZo2IPPY1IbHS4tubD9cyIlbRuDIPrmzvAAzVAyg
-Message-ID: <CAE_xrPirgG8eN8O8njdP8_pqjEQUBdmAmRjNZ=G+9G-jj_qcew@mail.gmail.com>
-Subject: Re: [PATCH v4 0/6] target/riscv: Support the true Zicclsm extension
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: "alistair23@gmail.com" <alistair23@gmail.com>,
- "palmer@dabbelt.com" <palmer@dabbelt.com>, 
- "chao.liu.zevorn@gmail.com" <chao.liu.zevorn@gmail.com>, 
- "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>, 
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
- "liwei1518@gmail.com" <liwei1518@gmail.com>, 
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
-Content-Type: multipart/alternative; boundary="000000000000b3de6e065666891e"
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=frank.chang@sifive.com; helo=mail-ed1-x530.google.com
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=shentey@gmail.com; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_KAM_HTML_FONT_INVALID=0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,983 +146,754 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000b3de6e065666891e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 10, 2026 at 7:23=E2=80=AFPM Alistair Francis <Alistair.Francis@=
-wdc.com>
-wrote:
 
-> On Fri, 2026-07-10 at 12:39 +0800, Frank Chang wrote:
-> > On Thu, Jul 9, 2026 at 12:58=E2=80=AFPM Alistair Francis
-> > <alistair23@gmail.com> wrote:
-> > > On Tue, Jul 7, 2026 at 7:11=E2=80=AFPM <frank.chang@sifive.com> wrote=
+Am 11=2E Juli 2026 22:34:53 UTC schrieb Alexander Graf <graf@amazon=2Ecom>=
 :
-> > > >
-> > > > From: Frank Chang <frank.chang@sifive.com>
-> > > >
-> > > > Support the true Zicclsm extension so that we can trap misaligned
-> > > > accesses
-> > > > when Zicclsm is disabled.
-> > > >
-> > > > To enable/disable Zicclsm, simply set zicclsm=3D[true|false], e.g.:
-> > > >    -cpu rv64,zicclsm=3D[true|false]
-> > > >
-> > > > QEMU will raise a misaligned load/store exception when executing
-> > > > misaligned
-> > > > load/store instructions if Zicclsm is disabled.
-> > > >
-> > > > Changelog:
-> > > >    v4:
-> > > >      * Align ROM reset vector data at 8-byte aligned offsets.
-> > > >    v3:
-> > > >      * Enable Zicclsm for the compatible CPUs.
-> > > >      * Rebase to the latest riscv-to-apply.next.
-> > > >    v2:
-> > > >      * Use (size_memop(size) | mo_endian_env(env)) to calculate
-> > > > MemOp.
-> > > >      * Use (log2_esz << MO_ASHIFT) to calculate aligment MemOp
-> > > > for
-> > > >        vector load/store whole register instructions.
-> > > >
-> > > > Frank Chang (6):
-> > > >    target/riscv: Add Zicclsm CPU option
-> > > >    target/riscv: Support raising misaligned exceptions for scalar
-> > > >      loads/stores
-> > > >    target/riscv: Support raising misaligned exceptions for vector
-> > > >      loads/stores
-> > > >    target/riscv: Enable Zicclsm for the compatible CPUs
-> > > >    hw/riscv: sifive_u: Align ROM reset vector data
-> > > >    target/riscv: Update Zicclsm ISA string and expose it as a CPU
-> > > >      property
-> > >
-> > > Hmmm.... Still seeing failures
-> > >
-> > > 556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi
-> > >                TIMEOUT         90.02s   killed by signal 15 SIGTERM
-> > > > > > LD_LIBRARY_PATH=3D/var/mnt/scratch/alistair/software/qemu/build
-> > > > > > /contrib/plugins:/var/mnt/scratch/alistair/software/qemu/buil
-> > > > > > d/tests/tcg/plugins MSAN_OPTIO
-> > > NS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:print_sta=
-cktrac
-> > > e=3D1
-> > > QEMU_TEST_QEMU_BINARY=3D/var/mnt/scratch/alistair/software/qemu/build
-> > > /qemu-system-riscv
-> > > 64 RUST_BACKTRACE=3D1
-> > > MESON_BUILD_ROOT=3D/var/mnt/scratch/alistair/software/qemu/build
-> > > UBSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D=
-1:prin
-> > > t_stac
-> > > ktrace=3D1
-> > > ASAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1
-> > > MESON_TEST_ITERATION=3D1 MALLOC_PERTURB_=3D7
-> > > QEMU_TEST_QEMU_IMG=3D/var/mnt/scratch/alistair
-> > > /software/qemu/build/qemu-img QEMU_TEST_GDB=3D/usr/bin/gdb
-> > > PYTHONPATH=3D/var/mnt/scratch/alistair/software/qemu/python:/var/mnt/
-> > > scratch/alistair/software/qemu/t
-> > > ests/functional
-> > > /var/mnt/scratch/alistair/software/qemu/build/pyvenv/bin/python3
-> > > /var/mnt/scratch/alistair/software/qemu/tests/functional/riscv64/te
-> > > st_opens
-> > > bi.py
-> > >
-> > >
-> > > Summary of Failures:
-> > >
-> > > 556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi
-> > >       TIMEOUT         90.02s   killed by signal 15 SIGTERM
-> > >
-> > >
-> >
-> >
-> > Hi Alistair,
-> >
-> > That's weird.
-> >
-> > I ran:
-> > $ meson test -C build qemu:func-riscv64-opensbi -v --print-errorlog
-> >
-> > .....
-> >
-> > =E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_sifive_u            =
-OK
-> >
-> > =E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_spike               =
-OK
-> >
-> > =E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_tt_atlantis         =
-OK
-> >
-> > =E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_virt                =
-OK
-> >
-> > 1/1 func-quick+func-riscv64 - qemu:func-riscv64-opensbi        OK
-> >          1.53s   4 subtests passed
-> >
-> >
-> > Ok:                1
-> > Fail:              0
-> >
-> > func-riscv64-opensbi test passed.
-> >
-> > However, I did find another issue when I ran:
-> > $ meson test -C build "qemu:*riscv*"
-> >
-> > [1/9] Generating qemu-version.h with a custom command (wrapped by
-> > meson to capture output)
-> >  1/39 func-quick+func-riscv64 - qemu:func-riscv64-linters
-> >             SKIP             0.15s   0 subtests passed
-> >  2/39 func-quick+func-riscv64 - qemu:func-riscv64-empty_cpu_model
-> >             OK               0.21s   1 subtests passed
-> >  3/39 func-quick+func-riscv64 - qemu:func-riscv64-version
-> >             OK               0.25s   1 subtests passed
-> >  4/39 func-quick+func-riscv32 - qemu:func-riscv32-linters
-> >             SKIP             0.23s   0 subtests passed
-> >  5/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/machine-none-test
-> >              OK               0.17s   1 subtests passed
-> >  6/39 func-quick+func-riscv64 - qemu:func-riscv64-info_usernet
-> >              OK               0.33s   1 subtests passed
-> >  7/39 func-quick+func-riscv32 - qemu:func-riscv32-empty_cpu_model
-> >             OK               0.29s   1 subtests passed
-> >  8/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/readconfig-test
-> >              OK               0.19s   1 subtests passed
-> >  9/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/cdrom-test
-> >             OK               0.41s   1 subtests passed
-> > 10/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/cdrom-test
-> >             OK               0.41s   1 subtests passed
-> > 11/39 func-quick+func-riscv32 - qemu:func-riscv32-info_usernet
-> >              OK               0.31s   1 subtests passed
-> > 12/39 func-quick+func-riscv32 - qemu:func-riscv32-version
-> >             OK               0.29s   1 subtests passed
-> > 13/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/riscv-csr-test
-> >             OK               0.30s   1 subtests passed
-> > 14/39 func-quick+func-riscv64 - qemu:func-riscv64-vnc
-> >             SKIP             0.39s   0 subtests passed
-> > 15/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/machine-none-test
-> >              OK               0.15s   1 subtests passed
-> > 16/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/readconfig-test
-> >              OK               0.13s   1 subtests passed
-> > 17/39 func-quick+func-riscv32 - qemu:func-riscv32-vnc
-> >             SKIP             0.40s   0 subtests passed
-> > 18/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-test
-> >             OK               0.54s   4 subtests passed
-> > 19/39 func-quick+func-riscv64 - qemu:func-riscv64-migration
-> >             OK               0.80s   3 subtests passed
-> > 20/39 func-quick+func-riscv32 - qemu:func-riscv32-migration
-> >             OK               0.77s   3 subtests passed
-> > 21/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-test
-> >             OK               0.52s   4 subtests passed
-> > 22/39 func-quick+func-riscv64 - qemu:func-riscv64-opensbi
-> >             OK               0.85s   3 subtests passed
-> > 23/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/iommu-riscv-test
-> >             OK               0.76s   4 subtests passed
-> > 24/39 func-quick+func-riscv32 - qemu:func-riscv32-opensbi
-> >             OK               0.87s   3 subtests passed
-> > 25/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/k230-wdt-test
-> >              OK               1.06s   7 subtests passed
-> > 26/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/sifive-e-aon-watchdog-
-> > test         OK               1.29s   10 subtests passed
-> > 27/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qom-test
-> >             OK               2.22s   8 subtests passed
-> > 28/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/device-introspect-test
-> >             OK               2.28s   6 subtests passed
-> > 29/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/device-introspect-test
-> >             OK               2.58s   6 subtests passed
-> > 30/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/test-hmp
-> >             OK               3.26s   8 subtests passed
-> > 31/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/netdev-socket
-> >              OK               3.32s   10 subtests passed
-> > 32/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/netdev-socket
-> >              OK               3.30s   10 subtests passed
-> > 33/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qom-test
-> >             OK               3.80s   12 subtests passed
-> > 34/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/test-hmp
-> >             OK               5.48s   12 subtests passed
-> > 35/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-cmd-test
-> >             OK               8.44s   64 subtests passed
-> > 36/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-cmd-test
-> >             OK               8.43s   64 subtests passed
-> > 37/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/bios-tables-test
-> >             ERROR           17.02s   killed by signal 6 SIGABRT
-> > > > > MESON_TEST_ITERATION=3D1
-> > > > > PYTHON=3D/scratch3/yihaoc/sifive/qemu/build/pyvenv/bin/python3
-> > > > > QTEST_QEMU_IMG=3D./qemu-img
-> > > > > ASAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=
-=3D1
-> > > > > MSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=
-=3D1:p
-> > > > > rint_stacktrace=3D1
-> > > > > G_TEST_DBUS_DAEMON=3D/scratch3/yihaoc/sifive/qemu/tests/dbus-
-> > > > > daemon.sh QTEST_QEMU_STORAGE_DAEMON_BINARY=3D./storage-
-> > > > > daemon/qemu-storage-daemon
-> > > > > UBSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summar=
-y=3D1:
-> > > > > print_stacktrace=3D1 RUST_BACKTRACE=3D1 MALLOC_PERTURB_=3D162
-> > > > > QTEST_QEMU_BINARY=3D./qemu-system-riscv64
-> > > > > /scratch3/yihaoc/sifive/qemu/build/tests/qtest/bios-tables-test
-> > > > > --tap -k
-> >
-> > 38/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qos-test
-> >             OK              43.47s   191 subtests passed
-> > 39/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qos-test
-> >             OK              43.82s   191 subtests passed
-> >
-> > Ok:                34
-> > Fail:              1
-> > Skipped:           4
-> >
-> > The failure is because Zicclsm is mandatory in the RVA22U64 profile.
-> > But before this patchset, ZIcclsm was enabled automatically when
-> > has_priv_1_11 was true.
-> > With this patchset, Zicclsm must be explicitly added to the RVA22U64
-> > profile's extension list.
-> >
-> > After the fix, running:
-> > $ meson test -C build "qemu:*riscv*"
-> >
-> > [1/9] Generating qemu-version.h with a custom command (wrapped by
-> > meson to capture output)
-> >  1/41 func-quick+func-riscv64 - qemu:func-riscv64-linters
-> >             SKIP             0.15s   0 subtests passed
-> >  2/41 func-quick+func-riscv64 - qemu:func-riscv64-empty_cpu_model
-> >             OK               0.19s   1 subtests passed
-> >  3/41 func-quick+func-riscv64 - qemu:func-riscv64-info_usernet
-> >              OK               0.26s   1 subtests passed
-> >  4/41 func-quick+func-riscv32 - qemu:func-riscv32-linters
-> >             SKIP             0.21s   0 subtests passed
-> >  5/41 func-quick+func-riscv32 - qemu:func-riscv32-empty_cpu_model
-> >             OK               0.24s   1 subtests passed
-> >  6/41 func-quick+func-riscv64 - qemu:func-riscv64-version
-> >             OK               0.30s   1 subtests passed
-> >  7/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/cdrom-test
-> >             OK               0.39s   1 subtests passed
-> >  8/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/machine-none-test
-> >              OK               0.17s   1 subtests passed
-> >  9/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/cdrom-test
-> >             OK               0.42s   1 subtests passed
-> > 10/41 func-quick+func-riscv32 - qemu:func-riscv32-version
-> >             OK               0.28s   1 subtests passed
-> > 11/41 func-quick+func-riscv32 - qemu:func-riscv32-info_usernet
-> >              OK               0.32s   1 subtests passed
-> > 12/41 func-quick+func-riscv64 - qemu:func-riscv64-vnc
-> >             SKIP             0.35s   0 subtests passed
-> > 13/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/riscv-csr-test
-> >             OK               0.30s   1 subtests passed
-> > 14/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/readconfig-test
-> >              OK               0.15s   1 subtests passed
-> > 15/41 func-quick+func-riscv32 - qemu:func-riscv32-vnc
-> >             SKIP             0.33s   0 subtests passed
-> > 16/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/machine-none-test
-> >              OK               0.14s   1 subtests passed
-> > 17/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/readconfig-test
-> >              OK               0.14s   1 subtests passed
-> > 18/41 func-quick+func-riscv64 - qemu:func-riscv64-migration
-> >             OK               0.75s   3 subtests passed
-> > 19/41 func-quick+func-riscv32 - qemu:func-riscv32-migration
-> >             OK               0.78s   3 subtests passed
-> > 20/41 func-quick+func-riscv32 - qemu:func-riscv32-opensbi
-> >             OK               0.84s   3 subtests passed
-> > 21/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/iommu-riscv-test
-> >             OK               0.78s   4 subtests passed
-> > 22/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/k230-wdt-test
-> >              OK               1.08s   7 subtests passed
-> > 23/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-test
-> >             OK               1.16s   9 subtests passed
-> > 24/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-test
-> >             OK               1.14s   9 subtests passed
-> > 25/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/sifive-e-aon-watchdog-
-> > test         OK               1.28s   10 subtests passed
-> > 26/41 func-quick+func-riscv64 - qemu:func-riscv64-opensbi
-> >             OK               1.81s   4 subtests passed
-> > 27/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qom-test
-> >             OK               2.06s   8 subtests passed
-> > 28/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/device-introspect-test
-> >             OK               2.19s   6 subtests passed
-> > 29/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/device-introspect-test
-> >             OK               2.48s   6 subtests passed
-> > 30/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/test-hmp
-> >             OK               3.27s   8 subtests passed
-> > 31/41 func-quick+func-riscv32 - qemu:func-riscv32-monitor_hotplug
-> >             OK               3.46s   7 subtests passed
-> > 32/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/netdev-socket
-> >              OK               3.32s   10 subtests passed
-> > 33/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/netdev-socket
-> >              OK               3.31s   10 subtests passed
-> > 34/41 func-quick+func-riscv64 - qemu:func-riscv64-monitor_hotplug
-> >             OK               4.00s   7 subtests passed
-> > 35/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qom-test
-> >             OK               4.40s   13 subtests passed
-> > 36/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/test-hmp
-> >             OK               6.63s   13 subtests passed
-> > 37/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-cmd-test
-> >             OK               8.45s   64 subtests passed
-> > 38/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-cmd-test
-> >             OK               8.50s   64 subtests passed
-> > 39/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/bios-tables-test
-> >             OK              35.13s   3 subtests passed
-> > 40/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qos-test
-> >             OK              46.41s   192 subtests passed
-> > 41/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qos-test
-> >             OK              46.45s   192 subtests passed
-> >
-> > Ok:                37
-> > Fail:              0
-> > Skipped:           4
-> >
-> > All the tests passed.
-> >
-> > I will send out the v5 patchset to fix the issue.
-> >
-> > BTW, I noticed you ran more tests than I did.
-> > Could you please share your test command so I can reproduce it on my
-> > end?
 >
-> I'm just running `make check`.
+>Motivation
+>----------
+>Markus observed [1] that a device reaching realize without a
+>composition-tree parent is a modeling bug, and that the
+>/machine/unattached container that catches such devices today is a
+>bug attractor rather than a safety net: it hides the fact that nobody
+>decided "what is part of what", and it gives the object an unstable,
+>implementation-defined QOM path that is useless for qom-get/qom-set and
+>for management tools that want to address board-created devices=2E
 >
-> Even your v5 is failing make check on the `target/riscv: Support
-> raising misaligned exceptions for scalar loads/stores` patch
->
+>This series makes composition-tree parenting mandatory=2E  After it,
+>device_set_realized() errors on a device with no parent,
+>memory_region_do_init() asserts that a named region has an owner,
+>qdev_connect_gpio_out_named() asserts that the pin being wired has a
+>parent, and /machine/unattached is deleted=2E  Every board-created object
+>has a stable, human-chosen path=2E
 
-Hi Alistair,
+Hi Alex,
 
-Does every single patch in the patchset need to pass `make check`, or is it
-enough for the final patchset to pass?
-
-I only ran the `make check` for the final patchset:
-
----
-
-345/352 softfloat+softfloat-ops - qemu:fp-test-log2
-          OK               0.11s
-346/352 qapi-schema+qapi-frontend - qemu:QAPI schema regression tests
-          OK               0.14s
-347/352 tracetool - qemu:dtrace
-          OK               0.22s
-348/352 tracetool - qemu:ftrace
-          OK               0.11s
-349/352 tracetool - qemu:log
-           OK               0.12s
-350/352 tracetool - qemu:simple
-          OK               0.12s
-351/352 tracetool - qemu:syslog
-          OK               0.12s
-352/352 tracetool - qemu:ust
-           OK               0.14s
-
-Ok:                341
-Fail:              0
-Skipped:           11
-
----
-
-If we need to pass every single patch in the patchset,
-then I'll have to move patch #4, #5, #7 before patch #2 in v5 patchset,
-so that everything is ready before Zicclsm is implemented.
-
-
-Regards,
-Frank Chang
-
+Thanks for the cleanup! I hope the series will eventually find its way int=
+o the codebase=2E
 
 >
-> Alistair
+>[1] https://lore=2Ekernel=2Eorg/qemu-devel/87jyr3w9tc=2Efsf@pond=2Esub=2E=
+org/
 >
+>Approach
+>--------
+>Rather than add a parallel "parented" API and migrate callers over
+>years, each creation helper is converted in a single rename->reintroduce
+>pair: a tree-wide Coccinelle rename of foo() to foo_orphan(), followed
+>immediately by a patch that reintroduces foo() with a leading
+>(Object *parent, const char *id, =2E=2E=2E) signature=2E
 
---000000000000b3de6e065666891e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Perhaps I'd have appended the two parameters at the end=2E This way, the m=
+ost interesting parameters, especially the type, stand out most, helping me=
+ mentally "parse" the code more easily=2E But maybe this is just me, so thi=
+s comment shall be no blocker=2E
 
-<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><span style=3D"backgroun=
-d-color:transparent">On Fri, Jul 10, 2026 at 7:23=E2=80=AFPM Alistair Franc=
-is &lt;</span><a href=3D"mailto:Alistair.Francis@wdc.com" target=3D"_blank"=
- style=3D"background-color:transparent">Alistair.Francis@wdc.com</a><span s=
-tyle=3D"background-color:transparent">&gt; wrote:</span></div><div class=3D=
-"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Fri, 202=
-6-07-10 at 12:39 +0800, Frank Chang wrote:<br>
-&gt; On Thu, Jul 9, 2026 at 12:58=E2=80=AFPM Alistair Francis<br>
-&gt; &lt;<a href=3D"mailto:alistair23@gmail.com" target=3D"_blank">alistair=
-23@gmail.com</a>&gt; wrote:<br>
-&gt; &gt; On Tue, Jul 7, 2026 at 7:11=E2=80=AFPM &lt;<a href=3D"mailto:fran=
-k.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a>&gt; wrote:=
-<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.c=
-om" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; Support the true Zicclsm extension so that we can trap misal=
-igned<br>
-&gt; &gt; &gt; accesses<br>
-&gt; &gt; &gt; when Zicclsm is disabled.<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; To enable/disable Zicclsm, simply set zicclsm=3D[true|false]=
-, e.g.:<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0-cpu rv64,zicclsm=3D[true|false]<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; QEMU will raise a misaligned load/store exception when execu=
-ting<br>
-&gt; &gt; &gt; misaligned<br>
-&gt; &gt; &gt; load/store instructions if Zicclsm is disabled.<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; Changelog:<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0v4:<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0 =C2=A0* Align ROM reset vector data at 8-byte =
-aligned offsets.<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0v3:<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0 =C2=A0* Enable Zicclsm for the compatible CPUs=
-.<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0 =C2=A0* Rebase to the latest riscv-to-apply.ne=
-xt.<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0v2:<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0 =C2=A0* Use (size_memop(size) | mo_endian_env(=
-env)) to calculate<br>
-&gt; &gt; &gt; MemOp.<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0 =C2=A0* Use (log2_esz &lt;&lt; MO_ASHIFT) to c=
-alculate aligment MemOp<br>
-&gt; &gt; &gt; for<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0vector load/store whole register =
-instructions.<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; Frank Chang (6):<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0target/riscv: Add Zicclsm CPU option<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0target/riscv: Support raising misaligned except=
-ions for scalar<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0 =C2=A0loads/stores<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0target/riscv: Support raising misaligned except=
-ions for vector<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0 =C2=A0loads/stores<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0target/riscv: Enable Zicclsm for the compatible=
- CPUs<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0hw/riscv: sifive_u: Align ROM reset vector data=
-<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0target/riscv: Update Zicclsm ISA string and exp=
-ose it as a CPU<br>
-&gt; &gt; &gt; =C2=A0 =C2=A0 =C2=A0property<br>
-&gt; &gt; <br>
-&gt; &gt; Hmmm.... Still seeing failures<br>
-&gt; &gt; <br>
-&gt; &gt; 556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi<br>
-&gt; &gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0TIMEOUT=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A090.02s=C2=A0 =C2=A0killed by signal 15 SIGTE=
-RM<br>
-&gt; &gt; &gt; &gt; &gt; LD_LIBRARY_PATH=3D/var/mnt/scratch/alistair/softwa=
-re/qemu/build<br>
-&gt; &gt; &gt; &gt; &gt; /contrib/plugins:/var/mnt/scratch/alistair/softwar=
-e/qemu/buil<br>
-&gt; &gt; &gt; &gt; &gt; d/tests/tcg/plugins MSAN_OPTIO<br>
-&gt; &gt; NS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=3D1:print=
-_stacktrac<br>
-&gt; &gt; e=3D1<br>
-&gt; &gt; QEMU_TEST_QEMU_BINARY=3D/var/mnt/scratch/alistair/software/qemu/b=
-uild<br>
-&gt; &gt; /qemu-system-riscv<br>
-&gt; &gt; 64 RUST_BACKTRACE=3D1<br>
-&gt; &gt; MESON_BUILD_ROOT=3D/var/mnt/scratch/alistair/software/qemu/build<=
-br>
-&gt; &gt; UBSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summar=
-y=3D1:prin<br>
-&gt; &gt; t_stac<br>
-&gt; &gt; ktrace=3D1<br>
-&gt; &gt; ASAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:print_summary=
-=3D1<br>
-&gt; &gt; MESON_TEST_ITERATION=3D1 MALLOC_PERTURB_=3D7<br>
-&gt; &gt; QEMU_TEST_QEMU_IMG=3D/var/mnt/scratch/alistair<br>
-&gt; &gt; /software/qemu/build/qemu-img QEMU_TEST_GDB=3D/usr/bin/gdb<br>
-&gt; &gt; PYTHONPATH=3D/var/mnt/scratch/alistair/software/qemu/python:/var/=
-mnt/<br>
-&gt; &gt; scratch/alistair/software/qemu/t<br>
-&gt; &gt; ests/functional<br>
-&gt; &gt; /var/mnt/scratch/alistair/software/qemu/build/pyvenv/bin/python3<=
-br>
-&gt; &gt; /var/mnt/scratch/alistair/software/qemu/tests/functional/riscv64/=
-te<br>
-&gt; &gt; st_opens<br>
-&gt; &gt; bi.py<br>
-&gt; &gt; <br>
-&gt; &gt; <br>
-&gt; &gt; Summary of Failures:<br>
-&gt; &gt; <br>
-&gt; &gt; 556/556 qemu:func-quick+func-riscv64 / func-riscv64-opensbi<br>
-&gt; &gt; =C2=A0 =C2=A0 =C2=A0 TIMEOUT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A090.=
-02s=C2=A0 =C2=A0killed by signal 15 SIGTERM<br>
-&gt; &gt; <br>
-&gt; &gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; Hi Alistair,<br>
-&gt; <br>
-&gt; That&#39;s weird.<br>
-&gt; <br>
-&gt; I ran:<br>
-&gt; $ meson test -C build qemu:func-riscv64-opensbi -v --print-errorlog<br=
+>The tree builds after
+>every patch and never carries two spellings of the same helper=2E
 >
-&gt; <br>
-&gt; .....<br>
-&gt; <br>
-&gt; =E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_sifive_u =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_spike =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_tt_atlantis =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =E2=96=B6 1/1 test_opensbi.RiscvOpenSBI.test_riscv_virt =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; 1/1 func-quick+func-riscv64 - qemu:func-riscv64-opensbi =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0OK =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01.53s =C2=A0 4 subtests passed<br>
-&gt; <br>
-&gt; <br>
-&gt; Ok: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01 =C2=A0 <b=
-r>
-&gt; Fail: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00<br>
-&gt; <br>
-&gt; func-riscv64-opensbi test=C2=A0passed.<br>
-&gt; <br>
-&gt; However, I did find another issue when I ran:<br>
-&gt; $=C2=A0meson test -C build &quot;qemu:*riscv*&quot;<br>
-&gt; <br>
-&gt; [1/9] Generating qemu-version.h with a custom command (wrapped by<br>
-&gt; meson to capture output)<br>
-&gt; =C2=A01/39 func-quick+func-riscv64 - qemu:func-riscv64-linters =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0.15s =C2=A0 0 subtests passed<br>
-&gt; =C2=A02/39 func-quick+func-riscv64 - qemu:func-riscv64-empty_cpu_model=
- =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.21s =C2=A0 1 subtests passed<br>
-&gt; =C2=A03/39 func-quick+func-riscv64 - qemu:func-riscv64-version =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.25s =C2=A0 1 subtests passed<br>
-&gt; =C2=A04/39 func-quick+func-riscv32 - qemu:func-riscv32-linters =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0.23s =C2=A0 0 subtests passed<br>
-&gt; =C2=A05/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/machine-none-test =
-=C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.17s =C2=A0 1 subtests passed<br>
-&gt; =C2=A06/39 func-quick+func-riscv64 - qemu:func-riscv64-info_usernet =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.33s =C2=A0 1 subtests passed<br>
-&gt; =C2=A07/39 func-quick+func-riscv32 - qemu:func-riscv32-empty_cpu_model=
- =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.29s =C2=A0 1 subtests passed<br>
-&gt; =C2=A08/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/readconfig-test =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.19s =C2=A0 1 subtests passed<br>
-&gt; =C2=A09/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/cdrom-test =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.41s =C2=A0 1 subtests passed<br>
-&gt; 10/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/cdrom-test =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.41s =C2=A0 1 subtests passed<br>
-&gt; 11/39 func-quick+func-riscv32 - qemu:func-riscv32-info_usernet =C2=A0 =
-=C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.31s =C2=A0 1 subtests passed<br>
-&gt; 12/39 func-quick+func-riscv32 - qemu:func-riscv32-version =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.29s =C2=A0 1 subtests passed<br>
-&gt; 13/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/riscv-csr-test =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.30s =C2=A0 1 subtests passed<br>
-&gt; 14/39 func-quick+func-riscv64 - qemu:func-riscv64-vnc =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0.39s =C2=A0 0 subtests passed<br>
-&gt; 15/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/machine-none-test =C2=
-=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.15s =C2=A0 1 subtests passed<br>
-&gt; 16/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/readconfig-test =C2=A0 =
-=C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.13s =C2=A0 1 subtests passed<br>
-&gt; 17/39 func-quick+func-riscv32 - qemu:func-riscv32-vnc =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0.40s =C2=A0 0 subtests passed<br>
-&gt; 18/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.54s =C2=A0 4 subtests passed<br>
-&gt; 19/39 func-quick+func-riscv64 - qemu:func-riscv64-migration =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.80s =C2=A0 3 subtests passed<br>
-&gt; 20/39 func-quick+func-riscv32 - qemu:func-riscv32-migration =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.77s =C2=A0 3 subtests passed<br>
-&gt; 21/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.52s =C2=A0 4 subtests passed<br>
-&gt; 22/39 func-quick+func-riscv64 - qemu:func-riscv64-opensbi =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.85s =C2=A0 3 subtests passed<br>
-&gt; 23/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/iommu-riscv-test =C2=A0=
- =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.76s =C2=A0 4 subtests passed<br>
-&gt; 24/39 func-quick+func-riscv32 - qemu:func-riscv32-opensbi =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.87s =C2=A0 3 subtests passed<br>
-&gt; 25/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/k230-wdt-test =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 1.06s =C2=A0 7 subtests passed<br>
-&gt; 26/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/sifive-e-aon-watchdog-<=
-br>
-&gt; test =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 1.29s =C2=A0 10 subtests passed<br>
-&gt; 27/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qom-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 2.22s =C2=A0 8 subtests passed<br>
-&gt; 28/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/device-introspect-test<=
-br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 2.28s =C2=A0 6 subtests passed<br>
-&gt; 29/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/device-introspect-test<=
-br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 2.58s =C2=A0 6 subtests passed<br>
-&gt; 30/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/test-hmp =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 3.26s =C2=A0 8 subtests passed<br>
-&gt; 31/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/netdev-socket =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 3.32s =C2=A0 10 subtests passed<br>
-&gt; 32/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/netdev-socket =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 3.30s =C2=A0 10 subtests passed<br>
-&gt; 33/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qom-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 3.80s =C2=A0 12 subtests passed<br>
-&gt; 34/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/test-hmp =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 5.48s =C2=A0 12 subtests passed<br>
-&gt; 35/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-cmd-test =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 8.44s =C2=A0 64 subtests passed<br>
-&gt; 36/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-cmd-test =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 8.43s =C2=A0 64 subtests passed<br>
-&gt; 37/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/bios-tables-test =C2=A0=
- =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ERROR =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 17.02s =C2=A0 killed by signal 6 SIGABRT<br>
-&gt; &gt; &gt; &gt; MESON_TEST_ITERATION=3D1<br>
-&gt; &gt; &gt; &gt; PYTHON=3D/scratch3/yihaoc/sifive/qemu/build/pyvenv/bin/=
-python3<br>
-&gt; &gt; &gt; &gt; QTEST_QEMU_IMG=3D./qemu-img<br>
-&gt; &gt; &gt; &gt; ASAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:pri=
-nt_summary=3D1<br>
-&gt; &gt; &gt; &gt; MSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:pri=
-nt_summary=3D1:p<br>
-&gt; &gt; &gt; &gt; rint_stacktrace=3D1<br>
-&gt; &gt; &gt; &gt; G_TEST_DBUS_DAEMON=3D/scratch3/yihaoc/sifive/qemu/tests=
-/dbus-<br>
-&gt; &gt; &gt; &gt; daemon.sh QTEST_QEMU_STORAGE_DAEMON_BINARY=3D./storage-=
-<br>
-&gt; &gt; &gt; &gt; daemon/qemu-storage-daemon<br>
-&gt; &gt; &gt; &gt; UBSAN_OPTIONS=3Dhalt_on_error=3D1:abort_on_error=3D1:pr=
-int_summary=3D1:<br>
-&gt; &gt; &gt; &gt; print_stacktrace=3D1 RUST_BACKTRACE=3D1 MALLOC_PERTURB_=
-=3D162<br>
-&gt; &gt; &gt; &gt; QTEST_QEMU_BINARY=3D./qemu-system-riscv64<br>
-&gt; &gt; &gt; &gt; /scratch3/yihaoc/sifive/qemu/build/tests/qtest/bios-tab=
-les-test<br>
-&gt; &gt; &gt; &gt; --tap -k<br>
-&gt; <br>
-&gt; 38/39 qtest+qtest-riscv32 - qemu:qtest-riscv32/qos-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A043.47s =C2=A0 191 subtests passed<br>
-&gt; 39/39 qtest+qtest-riscv64 - qemu:qtest-riscv64/qos-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A043.82s =C2=A0 191 subtests passed<br>
-&gt; <br>
-&gt; Ok: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A034 =C2=A0<b=
-r>
-&gt; Fail: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01 =C2=A0 <br>
-&gt; Skipped: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 4=C2=A0=C2=A0<br>
-&gt; <br>
-&gt; The failure is because=C2=A0Zicclsm is mandatory in the RVA22U64=C2=A0=
-profile.<br>
-&gt; But before this patchset, ZIcclsm was enabled=C2=A0automatically when<=
-br>
-&gt; has_priv_1_11 was true.<br>
-&gt; With this patchset, Zicclsm must be=C2=A0explicitly added to the RVA22=
-U64<br>
-&gt; profile&#39;s extension list.<br>
-&gt; <br>
-&gt; After the fix, running:<br>
-&gt; $=C2=A0meson test -C build &quot;qemu:*riscv*&quot;<br>
-&gt; <br>
-&gt; [1/9] Generating qemu-version.h with a custom command (wrapped by<br>
-&gt; meson to capture output)<br>
-&gt; =C2=A01/41 func-quick+func-riscv64 - qemu:func-riscv64-linters =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0.15s =C2=A0 0 subtests passed<br>
-&gt; =C2=A02/41 func-quick+func-riscv64 - qemu:func-riscv64-empty_cpu_model=
- =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.19s =C2=A0 1 subtests passed<br>
-&gt; =C2=A03/41 func-quick+func-riscv64 - qemu:func-riscv64-info_usernet =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.26s =C2=A0 1 subtests passed<br>
-&gt; =C2=A04/41 func-quick+func-riscv32 - qemu:func-riscv32-linters =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0.21s =C2=A0 0 subtests passed<br>
-&gt; =C2=A05/41 func-quick+func-riscv32 - qemu:func-riscv32-empty_cpu_model=
- =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.24s =C2=A0 1 subtests passed<br>
-&gt; =C2=A06/41 func-quick+func-riscv64 - qemu:func-riscv64-version =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.30s =C2=A0 1 subtests passed<br>
-&gt; =C2=A07/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/cdrom-test =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.39s =C2=A0 1 subtests passed<br>
-&gt; =C2=A08/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/machine-none-test =
-=C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.17s =C2=A0 1 subtests passed<br>
-&gt; =C2=A09/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/cdrom-test =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.42s =C2=A0 1 subtests passed<br>
-&gt; 10/41 func-quick+func-riscv32 - qemu:func-riscv32-version =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.28s =C2=A0 1 subtests passed<br>
-&gt; 11/41 func-quick+func-riscv32 - qemu:func-riscv32-info_usernet =C2=A0 =
-=C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.32s =C2=A0 1 subtests passed<br>
-&gt; 12/41 func-quick+func-riscv64 - qemu:func-riscv64-vnc =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0.35s =C2=A0 0 subtests passed<br>
-&gt; 13/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/riscv-csr-test =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.30s =C2=A0 1 subtests passed<br>
-&gt; 14/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/readconfig-test =C2=A0 =
-=C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.15s =C2=A0 1 subtests passed<br>
-&gt; 15/41 func-quick+func-riscv32 - qemu:func-riscv32-vnc =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 SKIP =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0.33s =C2=A0 0 subtests passed<br>
-&gt; 16/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/machine-none-test =C2=
-=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.14s =C2=A0 1 subtests passed<br>
-&gt; 17/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/readconfig-test =C2=A0 =
-=C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.14s =C2=A0 1 subtests passed<br>
-&gt; 18/41 func-quick+func-riscv64 - qemu:func-riscv64-migration =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.75s =C2=A0 3 subtests passed<br>
-&gt; 19/41 func-quick+func-riscv32 - qemu:func-riscv32-migration =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.78s =C2=A0 3 subtests passed<br>
-&gt; 20/41 func-quick+func-riscv32 - qemu:func-riscv32-opensbi =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.84s =C2=A0 3 subtests passed<br>
-&gt; 21/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/iommu-riscv-test =C2=A0=
- =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.78s =C2=A0 4 subtests passed<br>
-&gt; 22/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/k230-wdt-test =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 1.08s =C2=A0 7 subtests passed<br>
-&gt; 23/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 1.16s =C2=A0 9 subtests passed<br>
-&gt; 24/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 1.14s =C2=A0 9 subtests passed<br>
-&gt; 25/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/sifive-e-aon-watchdog-<=
-br>
-&gt; test =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 1.28s =C2=A0 10 subtests passed<br>
-&gt; 26/41 func-quick+func-riscv64 - qemu:func-riscv64-opensbi =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 1.81s =C2=A0 4 subtests passed<br>
-&gt; 27/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qom-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 2.06s =C2=A0 8 subtests passed<br>
-&gt; 28/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/device-introspect-test<=
-br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 2.19s =C2=A0 6 subtests passed<br>
-&gt; 29/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/device-introspect-test<=
-br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 2.48s =C2=A0 6 subtests passed<br>
-&gt; 30/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/test-hmp =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 3.27s =C2=A0 8 subtests passed<br>
-&gt; 31/41 func-quick+func-riscv32 - qemu:func-riscv32-monitor_hotplug =C2=
-=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 3.46s =C2=A0 7 subtests passed<br>
-&gt; 32/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/netdev-socket =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 3.32s =C2=A0 10 subtests passed<br>
-&gt; 33/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/netdev-socket =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 3.31s =C2=A0 10 subtests passed<br>
-&gt; 34/41 func-quick+func-riscv64 - qemu:func-riscv64-monitor_hotplug =C2=
-=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 4.00s =C2=A0 7 subtests passed<br>
-&gt; 35/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qom-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 4.40s =C2=A0 13 subtests passed<br>
-&gt; 36/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/test-hmp =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 6.63s =C2=A0 13 subtests passed<br>
-&gt; 37/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qmp-cmd-test =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 8.45s =C2=A0 64 subtests passed<br>
-&gt; 38/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qmp-cmd-test =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 8.50s =C2=A0 64 subtests passed<br>
-&gt; 39/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/bios-tables-test =C2=A0=
- =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A035.13s =C2=A0 3 subtests passed<br>
-&gt; 40/41 qtest+qtest-riscv64 - qemu:qtest-riscv64/qos-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A046.41s =C2=A0 192 subtests passed<br>
-&gt; 41/41 qtest+qtest-riscv32 - qemu:qtest-riscv32/qos-test =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A046.45s =C2=A0 192 subtests passed<br>
-&gt; <br>
-&gt; Ok: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A037 =C2=A0<b=
-r>
-&gt; Fail: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00 =C2=A0 <br>
-&gt; Skipped: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 4<br>
-&gt; <br>
-&gt; All the tests=C2=A0passed.<br>
-&gt; <br>
-&gt; I will send out=C2=A0the v5 patchset to fix the issue.<br>
-&gt; <br>
-&gt; BTW, I noticed you ran more tests than I did.<br>
-&gt; Could you please share your test command so I can reproduce it on my<b=
-r>
-&gt; end?<br>
-<br>
-I&#39;m just running `make check`.<br>
-<br>
-Even your v5 is failing make check on the `target/riscv: Support<br>
-raising misaligned exceptions for scalar loads/stores` patch<br></blockquot=
-e><div><br></div><div>Hi Alistair,</div><div><br></div><div>Does every sing=
-le patch in the patchset need to pass `make check`,=C2=A0<span style=3D"bac=
-kground-color:transparent">or is it enough for the final patchset to pass?<=
-/span></div><div><span style=3D"background-color:transparent"><br></span></=
-div><div><span style=3D"background-color:transparent">I only ran the `make =
-check` for the final patchset:</span></div><div><span style=3D"background-c=
-olor:transparent"><br></span></div><div><span style=3D"background-color:tra=
-nsparent">---</span></div><div><span style=3D"background-color:transparent"=
-><br></span></div><div>345/352 softfloat+softfloat-ops - qemu:fp-test-log2 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 0.11s<br>346/352 qapi-schema+qapi-frontend - qemu:=
-QAPI schema regression tests =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.14s<br>347=
-/352 tracetool - qemu:dtrace =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.22s<br>348/352 tracetool=
- - qemu:ftrace =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.11s<br>349/352 tracetool - qemu:log =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.12s<br>350/352 tracetool - qemu:simple =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 0.12s<br>351/352 tracetool - qemu:syslog =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 0.12s<br>352/352 tracetool - qemu:ust =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0OK =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 0.14s<br><br>Ok: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0341 <br>Fail: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00 =C2=A0 <=
-br>Skipped: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 11=C2=A0</div><div><br></div=
-><div>---</div><div><span style=3D"background-color:transparent"><br></span=
-></div><div><span style=3D"background-color:transparent">If we need to pass=
- every single patch in the patchset,</span></div><div><span style=3D"backgr=
-ound-color:transparent">then I&#39;ll have to move patch #4, #5, #7 before =
-patch #2 in v5 patchset,</span></div><div><span style=3D"background-color:t=
-ransparent">so that everything is ready before Zicclsm is implemented.</spa=
-n></div><div><br></div><div><br></div><div>Regards,</div><div>Frank Chang</=
-div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-Alistair<br>
-</blockquote></div></div>
-</div>
+>The bulk of the series then converts *_orphan() call sites to the
+>parented form, one hw/ subdirectory per patch=2E  Most of those commits
+>carry a per-callsite table in the commit message giving the chosen
+>parent expression, the chosen child name, and the one-line reason
+>("board init -> machine", "realize of X -> X", =2E=2E=2E); the smaller on=
+es
+>carry a prose summary of the same=2E  Those tables are the substance the
+>RFC is asking maintainers to review: the mechanical part is trivial,
+>the modeling decisions are not=2E
+>
+>Some hw/arm commit messages carry wide per-callsite tables that exceed
+>76 columns; please view with a fixed-width, non-wrapping mail reader=2E
+>
+>Once no *_orphan() callers remain the _orphan variants are deleted, the
+>enforcement checks are armed, and /machine/unattached is removed=2E
+>
+>Series shape
+>------------
+>  001-009   core API: object_new_child(); rename->reintroduce for
+>            qdev_new, sysbus_create_*, pci_new*, isa_new*,
+>            i2c_slave_*, ssi/usb/sd/adb/virtio/hda/aux/spapr-vio,
+>            cpu_create
+>  010-082   hw/*: convert *_orphan() call sites to the parented form,
+>            one subdirectory per patch, each with a per-callsite
+>            reasoning table (or prose summary) in the commit message
+>  083-088   delete the qdev/sysbus/pci/isa/i2c/ssi/usb/cpu *_orphan()
+>            creator variants
+>  089-107   memory: give the remaining owner=3D=3DNULL memory regions an
+>            owner, then assert on owner=3D=3DNULL for named regions
+>  108-116   irq: rename->reintroduce qemu_allocate_irq*() with an
+>            owner and name; convert callers; delete _orphan variants
+>  117-130   parent the remaining non-device singletons and per-device
+>            helper objects (main-system-bus, accel, reset container,
+>            per-MR helpers, per-devfn IOMMU objects, board-created
+>            CPUs, =2E=2E=2E)
+>  131-132   arm the enforcement checks and delete /machine/unattached
+>  133-134   docs/devel/qom=2Erst: parenting contract; MAINTAINERS
+>
+>The Coccinelle scripts used for the rename steps are included under
+>scripts/coccinelle/qom-parent/ and referenced from the corresponding
+>commit messages=2E
+>
+>Not converted in this series
+>----------------------------
+>A handful of long-lived objects are deliberately left path-less for
+>now, each for a specific lifecycle reason called out in the relevant
+>commit message:
+>
+>  * TYPE_MIGRATION is a TYPE_DEVICE that is never realized, per the
+>    upstream comment "TODO make this TYPE_OBJECT once QOM provides
+>    -global for objects"=2E  Parenting it under /machine trips the
+>    qdev_assert_realized_properly() walk=2E  It can move under /machine
+>    once it becomes a plain TYPE_OBJECT=2E
+>  * RamDiscardManager is unref'd from memory_region_finalize() itself,
+>    so making it a child<> of the MR would use-after-free during MR
+>    teardown=2E
+>  * TPM backends and VFIO IOMMU containers are user-configurable and
+>    dynamically created; they belong under /objects/<id> or a
+>    dedicated /machine/vfio container respectively, and are best
+>    handled in a follow-up on top of this series=2E
+>  * QIOChannel* and per-mapping virtio-shmem objects remain path-less
+>    by design (transient, refcounted, no stable identity)=2E
+>
+>Verification
+>------------
+>  * The tree builds for 20 softmmu targets after every patch=2E
+>  * Every machine type across those targets was smoke-tested with
+>    "-M <machine> -S"; none abort on the new assertions=2E
+>  * "info qom-tree" on q35 and on aarch64 virt shows no
+>    /machine/unattached node after the final patch=2E
+>  * grep -r 'machine_get_container("unattached")' returns no hits=2E
+>
+>AI-assistance disclosure (docs/devel/code-provenance=2Erst)
 
---000000000000b3de6e065666891e--
+This series seems to affect migration=2E For example, it gives the "ocram"=
+ memory region in various imx devices a parent which has been identified as=
+ migration breaking before [1]=2E Migration isn't an issue for imx devices,=
+ so no objection there=2E
+
+How shall we deal with machines where we do care about migration compatibi=
+lity? Or was migration always broken there due to unstable QOM paths, and s=
+o far we were just lucky?
+
+
+Best regards,
+Bernhard
+
+[1] https://lore=2Ekernel=2Eorg/qemu-devel/CAFEAcA9cfiDB3+=3DK+MsHptujVhcP=
+exwaf+1y8kHaV692ORAdgQ@mail=2Egmail=2Ecom/
+
+
+>----------------------------------------------------------
+>Every patch in this series was produced with AI assistance and
+>reviewed by the human submitter=2E  Each commit carries an
+>
+>    Assisted-by: Kiro
+>
+>trailer following the format documented in the Linux kernel's
+>Documentation/process/coding-assistants=2Erst=2E  The tree-wide rename
+>patches are Coccinelle-equivalent mechanical transforms; the
+>per-callsite parent/name choices in the hw/* commits are the
+>AI-assisted modeling decisions this RFC is asking maintainers to
+>review=2E
+>
+>QEMU's current policy in docs/devel/code-provenance=2Erst is to decline
+>AI-generated contributions absent an explicit exception=2E  This RFC is
+>therefore posted to open that discussion: I am requesting an exception
+>for this series (or, if the community prefers, will reauthor the parts
+>the policy requires) and will not post a non-RFC v1 until that is
+>resolved on qemu-devel=2E  The Signed-off-by DCO certification is mine
+>as the human reviewer taking full responsibility for the contribution=2E
+>
+>
+>Alexander Graf (134):
+>  qom: Introduce object_new_child()
+>  qdev: Rename qdev_new()/qdev_try_new() to *_orphan()
+>  qdev: Reintroduce qdev_new() with a mandatory QOM parent
+>  sysbus: Make sysbus_create_simple()/_varargs() take a QOM parent
+>  pci: Make pci_new*()/pci_create_simple*() take a QOM parent
+>  isa: Make isa_new()/isa_try_new()/isa_create_simple() take a QOM
+>    parent
+>  i2c: Make i2c_slave_new()/i2c_slave_create_simple() take a QOM parent
+>  ssi, usb: Make bus-layer creators take a QOM parent
+>  cpu: Make cpu_create() take a QOM parent
+>  hw/avr: Give onboard devices a QOM parent
+>  hw/tricore: Give onboard devices a QOM parent
+>  hw/xtensa: Give onboard devices a QOM parent
+>  hw/alpha: Give onboard devices a QOM parent
+>  hw/nitro: Give onboard devices a QOM parent
+>  hw/vmapple: Give onboard devices a QOM parent
+>  hw/hppa: Give onboard devices a QOM parent
+>  hw/microblaze: Give onboard devices a QOM parent
+>  hw/sh4: Give onboard devices a QOM parent
+>  hw/s390x: Give onboard devices a QOM parent
+>  hw/or1k: Give onboard devices a QOM parent
+>  hw/loongarch: Give onboard devices a QOM parent
+>  hw/intc: Give onboard devices a QOM parent
+>  hw/pci-host: Give onboard devices a QOM parent
+>  hw/core: Give onboard devices a QOM parent
+>  hw/remote: Give onboard devices a QOM parent
+>  hw/ufs: Give onboard devices a QOM parent
+>  hw/nvme: Give onboard devices a QOM parent
+>  hw/vfio: Give onboard devices a QOM parent
+>  hw/mem: Give onboard devices a QOM parent
+>  hw/cxl: Give onboard devices a QOM parent
+>  hw/hexagon: Give onboard devices a QOM parent
+>  hw/xen: Give onboard devices a QOM parent
+>  hw/display: Give onboard devices a QOM parent
+>  hw/nvram: Give onboard devices a QOM parent
+>  hw/dma: Give onboard devices a QOM parent
+>  hw/misc: Give onboard devices a QOM parent
+>  hw/scsi: Give onboard devices a QOM parent
+>  hw/net: Give onboard devices a QOM parent
+>  hw/ide: Give onboard devices a QOM parent
+>  hw/i3c: Give onboard devices a QOM parent
+>  hw/pci-bridge: Give onboard devices a QOM parent
+>  hw/sparc64: Give onboard devices a QOM parent
+>  hw/sparc: Give onboard devices a QOM parent
+>  hw/m68k: Give onboard devices a QOM parent
+>  hw/rtc: Give onboard devices a QOM parent
+>  hw/i2c: Give onboard devices a QOM parent
+>  hw/block: Give onboard devices a QOM parent
+>  hw/char: Give onboard devices a QOM parent
+>  hw/isa: Give onboard devices a QOM parent
+>  hw/pci: Give onboard devices a QOM parent
+>  hw/riscv: Give onboard devices a QOM parent
+>  hw/mips: Give onboard devices a QOM parent
+>  hw/i386: Give onboard devices a QOM parent
+>  hw/ppc: Give onboard devices a QOM parent
+>  hw/pci, hw/isa: Give VGA and slot-NIC helpers a QOM parent
+>  hw/arm/virt: Give onboard devices a QOM parent
+>  hw/arm/sbsa-ref: Give onboard devices a QOM parent
+>  hw/arm/xilinx-zynq: Give onboard devices a QOM parent
+>  hw/arm/xlnx-versal, xlnx-zynqmp: Give onboard devices a QOM parent
+>  hw/arm/realview, integratorcp: Give onboard devices a QOM parent
+>  hw/arm/npcm: Give onboard devices a QOM parent
+>  hw/arm/versatile, vexpress: Give onboard devices a QOM parent
+>  hw/arm/stellaris, musicpal: Give onboard devices a QOM parent
+>  hw/arm/exynos: Give onboard devices a QOM parent
+>  hw/arm/allwinner: Give onboard devices a QOM parent
+>  hw/arm/strongarm: Give onboard devices a QOM parent
+>  hw/arm/omap: Give onboard devices a QOM parent
+>  hw/arm/mps2: Give onboard devices a QOM parent
+>  hw/arm/imx: Give onboard devices a QOM parent
+>  hw/arm/misc: Give onboard devices a QOM parent
+>  hw/arm/aspeed: Give onboard devices a QOM parent (part 1)
+>  hw/arm/aspeed: Give onboard devices a QOM parent (part 2)
+>  hw/nvram/at24c: Give at24c_eeprom_init() a QOM parent
+>  hw/i386/pc: Give pcspk a QOM parent
+>  hw/timer, hw/net: Give i8254 and isa-ne2000 helpers a QOM parent
+>  hw/misc/unimp: Give create_unimplemented_device() a QOM parent
+>  hw/usb: Give -usbdevice and auto-hub devices a QOM parent
+>  hw/audio: Give -audio model=3D devices a QOM parent
+>  hw/xen: Give xenstore-driven backend devices a QOM parent
+>  hw/nitro: Give the vsock bridge a QOM parent
+>  hw/isa: Give the isabus-bridge a QOM parent
+>  net, target/mips: Give -nic and CPU-with-clock helpers a QOM parent
+>  usb, ssi, i2c: Remove *_orphan() creator variants
+>  isa: Remove *_orphan() creator variants
+>  pci: Remove *_orphan() creator variants
+>  cpu: Remove cpu_create_orphan()
+>  sysbus: Remove *_orphan() creator variants
+>  qdev: Remove qdev_new_orphan() and qdev_try_new_orphan()
+>  memory: Accept non-device owners in memory_region_init_ram()
+>  hw/misc-boards: Give memory regions an explicit owner
+>  hw/mips: Give memory regions an explicit owner
+>  hw/riscv: Give memory regions an explicit owner
+>  hw/i386: Give memory regions an explicit owner
+>  hw/arm: Give memory regions an explicit owner
+>  hw/arm/omap1: Give memory regions an explicit owner
+>  hw/sh4: Give memory regions an explicit owner
+>  hw/m68k: Give memory regions an explicit owner
+>  hw/ppc: Give memory regions an explicit owner
+>  hw/tricore: Give memory regions an explicit owner
+>  hw/xtensa: Give memory regions an explicit owner
+>  hw/display: Give memory regions an explicit owner
+>  hw/arm/omap: Give lcdc and dma memory regions an explicit owner
+>  hw/char: Give parallel and htif memory regions an explicit owner
+>  hw/remote: Give memory regions an explicit owner
+>  system, backends: Give named memory regions an explicit owner
+>  hw/ide: Let ide_init_ioport() take an explicit owner
+>  memory: Require an owner for named memory regions
+>  irq: Rename qemu_allocate_irq*() and friends to *_orphan()
+>  irq: Reintroduce qemu_allocate_irq*() with a mandatory owner and name
+>  hw/pci, hw/usb, system: Give allocated IRQs an owner and name
+>  hw/i386, hw/xen: Give allocated IRQs an owner and name
+>  hw/arm: Give allocated IRQs an owner and name
+>  hw/xtensa: Give allocated IRQs an owner and name
+>  hw: Give allocated IRQs an owner and name
+>  hw/core: Parent GPIO input IRQs and embedded IRQState via QOM
+>  irq: Delete the *_orphan() IRQ allocation variants
+>  sysbus: Parent main-system-bus directly under /machine
+>  accel: Parent the accelerator singleton under /machine
+>  hw/core/reset: Give the root reset container and legacy shims a QOM
+>    path
+>  system: Parent per-MR helper objects under their owner
+>  hw/virtio, hw/display: Parent per-device helper objects
+>  hw/i386/amd_iommu: Parent internally-created AMDVI-PCI under the IOMMU
+>  hw/s390x, hw/remote: Parent per-devfn IOMMU objects
+>  hw/pci-host/raven: Parent the OR-IRQ under the host bridge
+>  hw/arm/mps2: Parent the OR-IRQ gates under the machine
+>  hw/arm/digic: Parent the DIGIC SoC under the machine
+>  hw/microblaze: Parent the CPU under the machine
+>  hw: Pair object_initialize_child() with plain realize()
+>  hw: Parent board-created CPUs under the machine
+>  hw/pci-host/versatile: Use object_initialize_child() for pci_dev
+>  docs, qapi, scripts, iotests: Update /machine/unattached path
+>    references
+>  qom: Delete /machine/unattached and error on unparented realize
+>  docs/devel/qom: Document the composition-tree parenting contract
+>  MAINTAINERS: Add scripts/coccinelle/qom-parent/ under QOM
+>
+> MAINTAINERS                                   |   1 +
+> accel/accel-system=2Ec                          |   4 +-
+> backends/igvm=2Ec                               |   6 +-
+> bsd-user/main=2Ec                               |   3 +-
+> docs/devel/qom=2Erst                            |  96 +++++++
+> docs/devel/s390-cpu-topology=2Erst              |   2 +-
+> docs/system/cpu-hotplug=2Erst                   |   4 +-
+> hw/alpha/alpha_sys=2Eh                          |   3 +-
+> hw/alpha/dp264=2Ec                              |  16 +-
+> hw/alpha/typhoon=2Ec                            |  10 +-
+> hw/arm/allwinner-a10=2Ec                        |   4 +-
+> hw/arm/allwinner-h3=2Ec                         |  34 ++-
+> hw/arm/allwinner-r40=2Ec                        |   4 +-
+> hw/arm/armsse=2Ec                               |  13 +-
+> hw/arm/aspeed=2Ec                               |  39 +--
+> hw/arm/aspeed_ast1040_evb=2Ec                   |   6 +-
+> hw/arm/aspeed_ast10x0_evb=2Ec                   |  12 +-
+> hw/arm/aspeed_ast2400_palmetto=2Ec              |   8 +-
+> hw/arm/aspeed_ast2400_quanta-q71l=2Ec           |  18 +-
+> hw/arm/aspeed_ast2400_supermicrox11=2Ec         |   8 +-
+> hw/arm/aspeed_ast2500_evb=2Ec                   |   7 +-
+> hw/arm/aspeed_ast2500_g220a=2Ec                 |  11 +-
+> hw/arm/aspeed_ast2500_romulus=2Ec               |   3 +-
+> hw/arm/aspeed_ast2500_supermicro-x11spi=2Ec     |   8 +-
+> hw/arm/aspeed_ast2500_tiogapass=2Ec             |  13 +-
+> hw/arm/aspeed_ast2500_witherspoon=2Ec           |  34 +--
+> hw/arm/aspeed_ast2500_yosemitev2=2Ec            |  13 +-
+> hw/arm/aspeed_ast2600_anacapa=2Ec               |  51 ++--
+> hw/arm/aspeed_ast2600_bletchley=2Ec             |  33 ++-
+> hw/arm/aspeed_ast2600_catalina=2Ec              |  99 +++----
+> hw/arm/aspeed_ast2600_evb=2Ec                   |   7 +-
+> hw/arm/aspeed_ast2600_fby35=2Ec                 |  20 +-
+> hw/arm/aspeed_ast2600_fuji=2Ec                  | 111 ++++----
+> hw/arm/aspeed_ast2600_gb200nvl=2Ec              |  24 +-
+> hw/arm/aspeed_ast2600_rainier=2Ec               | 188 ++++++++------
+> hw/arm/aspeed_ast27x0-fc=2Ec                    |   9 +-
+> hw/arm/aspeed_ast27x0_evb=2Ec                   |   3 +-
+> hw/arm/aspeed_soc_common=2Ec                    |  14 +-
+> hw/arm/bananapi_m2u=2Ec                         |   6 +-
+> hw/arm/collie=2Ec                               |   6 +-
+> hw/arm/cubieboard=2Ec                           |   6 +-
+> hw/arm/digic_boards=2Ec                         |   5 +-
+> hw/arm/exynos4210=2Ec                           |  70 ++---
+> hw/arm/exynos4_boards=2Ec                       |  15 +-
+> hw/arm/fsl-imx25=2Ec                            |   2 +-
+> hw/arm/fsl-imx31=2Ec                            |   2 +-
+> hw/arm/fsl-imx6=2Ec                             |   7 +-
+> hw/arm/fsl-imx6ul=2Ec                           |  37 +--
+> hw/arm/fsl-imx7=2Ec                             |  41 +--
+> hw/arm/fsl-imx8mm=2Ec                           |   2 +-
+> hw/arm/fsl-imx8mp=2Ec                           |   2 +-
+> hw/arm/imx25_pdk=2Ec                            |   6 +-
+> hw/arm/imx8mm-evk=2Ec                           |   6 +-
+> hw/arm/imx8mp-evk=2Ec                           |   6 +-
+> hw/arm/integratorcp=2Ec                         |  56 ++--
+> hw/arm/kzm=2Ec                                  |   6 +-
+> hw/arm/max78000_soc=2Ec                         | 107 ++++----
+> hw/arm/max78000fthr=2Ec                         |   5 +-
+> hw/arm/mcimx6ul-evk=2Ec                         |   4 +-
+> hw/arm/mcimx7d-sabre=2Ec                        |   4 +-
+> hw/arm/mps2-tz=2Ec                              |  27 +-
+> hw/arm/mps2=2Ec                                 |  91 ++++---
+> hw/arm/mps3r=2Ec                                |  20 +-
+> hw/arm/msf2-soc=2Ec                             |  24 +-
+> hw/arm/msf2-som=2Ec                             |  12 +-
+> hw/arm/musca=2Ec                                |   4 +-
+> hw/arm/musicpal=2Ec                             |  50 ++--
+> hw/arm/netduino2=2Ec                            |   5 +-
+> hw/arm/netduinoplus2=2Ec                        |   5 +-
+> hw/arm/npcm7xx=2Ec                              |  95 +++----
+> hw/arm/npcm7xx_boards=2Ec                       | 117 +++++----
+> hw/arm/npcm8xx=2Ec                              | 147 +++++------
+> hw/arm/npcm8xx_boards=2Ec                       |  19 +-
+> hw/arm/nrf51_soc=2Ec                            |   4 +-
+> hw/arm/olimex-stm32-h405=2Ec                    |   5 +-
+> hw/arm/omap1=2Ec                                | 244 ++++++++++--------
+> hw/arm/omap_sx1=2Ec                             |  20 +-
+> hw/arm/orangepi=2Ec                             |   4 +-
+> hw/arm/raspi=2Ec                                |   4 +-
+> hw/arm/realview=2Ec                             | 113 ++++----
+> hw/arm/sabrelite=2Ec                            |   5 +-
+> hw/arm/sbsa-ref=2Ec                             |  76 +++---
+> hw/arm/stellaris=2Ec                            |  99 ++++---
+> hw/arm/stm32f100_soc=2Ec                        |  62 ++---
+> hw/arm/stm32f205_soc=2Ec                        |   2 +-
+> hw/arm/stm32f405_soc=2Ec                        |  88 +++----
+> hw/arm/stm32l4x5_soc=2Ec                        |  88 +++----
+> hw/arm/stm32vldiscovery=2Ec                     |   5 +-
+> hw/arm/strongarm=2Ec                            |  27 +-
+> hw/arm/strongarm=2Eh                            |   2 +-
+> hw/arm/versatilepb=2Ec                          |  85 +++---
+> hw/arm/vexpress=2Ec                             |  87 ++++---
+> hw/arm/virt=2Ec                                 |  97 +++----
+> hw/arm/xilinx_zynq=2Ec                          | 160 ++++++------
+> hw/arm/xlnx-versal-virt=2Ec                     |   5 +-
+> hw/arm/xlnx-versal=2Ec                          | 197 ++++++--------
+> hw/arm/xlnx-zcu102=2Ec                          |  14 +-
+> hw/arm/xlnx-zynqmp=2Ec                          |   8 +-
+> hw/audio/intel-hda=2Ec                          |   4 +-
+> hw/audio/model=2Ec                              |   5 +-
+> hw/avr/atmega=2Ec                               |  24 +-
+> hw/block/fdc-sysbus=2Ec                         |  13 +-
+> hw/block/fdc=2Ec                                |   4 +-
+> hw/block/pflash_cfi01=2Ec                       |   6 +-
+> hw/block/pflash_cfi02=2Ec                       |   6 +-
+> hw/block/xen-block=2Ec                          |   5 +-
+> hw/char/diva-gsp=2Ec                            |   3 +-
+> hw/char/exynos4210_uart=2Ec                     |   6 +-
+> hw/char/mcf_uart=2Ec                            |  11 +-
+> hw/char/mchp_pfsoc_mmuart=2Ec                   |   4 +-
+> hw/char/omap_uart=2Ec                           |   4 +-
+> hw/char/parallel-isa=2Ec                        |  10 +-
+> hw/char/parallel=2Ec                            |   5 +-
+> hw/char/pl011=2Ec                               |   6 +-
+> hw/char/riscv_htif=2Ec                          |   5 +-
+> hw/char/serial-isa=2Ec                          |  11 +-
+> hw/char/serial-mm=2Ec                           |   6 +-
+> hw/char/sifive_uart=2Ec                         |   8 +-
+> hw/char/spapr_vty=2Ec                           |   6 +-
+> hw/char/xen_console=2Ec                         |   7 +-
+> hw/core/cpu-common=2Ec                          |   6 +-
+> hw/core/gpio=2Ec                                |  24 +-
+> hw/core/irq=2Ec                                 |  38 +--
+> hw/core/null-machine=2Ec                        |   2 +-
+> hw/core/qdev-user=2Ec                           |   6 +-
+> hw/core/qdev=2Ec                                |  39 ++-
+> hw/core/reset=2Ec                               |  13 +-
+> hw/core/sysbus=2Ec                              |  22 +-
+> hw/cxl/cxl-host=2Ec                             |   9 +-
+> hw/display/cg3=2Ec                              |   2 +-
+> hw/display/g364fb=2Ec                           |   2 +-
+> hw/display/macfb=2Ec                            |   2 +-
+> hw/display/omap_lcdc=2Ec                        |   5 +-
+> hw/display/sii9022=2Ec                          |   2 +-
+> hw/display/sm501=2Ec                            |   6 +-
+> hw/display/vhost-user-gpu=2Ec                   |  12 +-
+> hw/display/virtio-gpu-gl=2Ec                    |   2 +-
+> hw/display/vmware_vga=2Ec                       |   2 +-
+> hw/display/xlnx_dp=2Ec                          |  14 +-
+> hw/dma/i8257=2Ec                                |  10 +-
+> hw/dma/omap_dma=2Ec                             |   9 +-
+> hw/dma/rc4030=2Ec                               |   7 +-
+> hw/hexagon/hexagon_dsp=2Ec                      |  21 +-
+> hw/hexagon/virt=2Ec                             |  29 +--
+> hw/hppa/machine=2Ec                             |  96 ++++---
+> hw/i2c/aspeed_i2c=2Ec                           |   4 +-
+> hw/i2c/core=2Ec                                 |  22 +-
+> hw/i2c/smbus_eeprom=2Ec                         |  11 +-
+> hw/i386/amd_iommu=2Ec                           |   3 +-
+> hw/i386/isapc=2Ec                               |  17 +-
+> hw/i386/kvm/clock=2Ec                           |   4 +-
+> hw/i386/kvm/clock=2Eh                           |   2 +-
+> hw/i386/kvm/i8259=2Ec                           |   8 +-
+> hw/i386/kvm/xen-stubs=2Ec                       |   2 +-
+> hw/i386/kvm/xen_evtchn=2Ec                      |   6 +-
+> hw/i386/kvm/xen_evtchn=2Eh                      |   3 +-
+> hw/i386/kvm/xen_gnttab=2Ec                      |   6 +-
+> hw/i386/kvm/xen_gnttab=2Eh                      |   2 +-
+> hw/i386/kvm/xen_overlay=2Ec                     |   6 +-
+> hw/i386/kvm/xen_overlay=2Eh                     |   2 +-
+> hw/i386/kvm/xen_primary_console=2Ec             |   5 +-
+> hw/i386/kvm/xen_primary_console=2Eh             |   2 +-
+> hw/i386/kvm/xen_xenstore=2Ec                    |   5 +-
+> hw/i386/kvm/xen_xenstore=2Eh                    |   2 +-
+> hw/i386/microvm=2Ec                             |  34 +--
+> hw/i386/nitro_enclave=2Ec                       |   9 +-
+> hw/i386/pc=2Ec                                  |  96 +++----
+> hw/i386/pc_piix=2Ec                             |  28 +-
+> hw/i386/pc_q35=2Ec                              |  42 +--
+> hw/i386/pc_sysfw=2Ec                            |  16 +-
+> hw/i386/sgx=2Ec                                 |   5 +-
+> hw/i386/x86-common=2Ec                          |  33 ++-
+> hw/i386/x86-cpu=2Ec                             |   4 +-
+> hw/i386/xen/xen-hvm=2Ec                         |  12 +-
+> hw/i386/xen/xen-pvh=2Ec                         |   5 +-
+> hw/i386/xen/xen_pvdevice=2Ec                    |   2 +-
+> hw/i3c/core=2Ec                                 |  19 +-
+> hw/ide/ahci=2Ec                                 |   2 +-
+> hw/ide/ide-bus=2Ec                              |   5 +-
+> hw/ide/ide-internal=2Eh                         |   2 +-
+> hw/ide/ioport=2Ec                               |  37 ++-
+> hw/ide/isa=2Ec                                  |   9 +-
+> hw/ide/pci=2Ec                                  |   2 +-
+> hw/ide/piix=2Ec                                 |   2 +-
+> hw/intc/apic_common=2Ec                         |   3 +-
+> hw/intc/exynos4210_gic=2Ec                      |   4 +-
+> hw/intc/i8259=2Ec                               |   6 +-
+> hw/intc/i8259_common=2Ec                        |   7 +-
+> hw/intc/riscv_aclint=2Ec                        |  16 +-
+> hw/intc/riscv_aplic=2Ec                         |  13 +-
+> hw/intc/riscv_imsic=2Ec                         |   7 +-
+> hw/intc/s390_flic=2Ec                           |  12 +-
+> hw/intc/sh_intc=2Ec                             |  21 +-
+> hw/intc/sifive_plic=2Ec                         |   7 +-
+> hw/ipack/ipack=2Ec                              |  11 +-
+> hw/ipmi/ipmi_bt=2Ec                             |   2 +-
+> hw/ipmi/ipmi_kcs=2Ec                            |   2 +-
+> hw/isa/i82378=2Ec                               |  13 +-
+> hw/isa/isa-bus=2Ec                              |  44 ++--
+> hw/isa/isa-superio=2Ec                          |  25 +-
+> hw/isa/lpc_ich9=2Ec                             |   2 +-
+> hw/isa/piix=2Ec                                 |   4 +-
+> hw/isa/vt82c686=2Ec                             |   7 +-
+> hw/loongarch/virt=2Ec                           |  56 ++--
+> hw/m68k/an5206=2Ec                              |  13 +-
+> hw/m68k/mcf5206=2Ec                             |   8 +-
+> hw/m68k/mcf5208=2Ec                             |  32 ++-
+> hw/m68k/mcf_intc=2Ec                            |   7 +-
+> hw/m68k/next-cube=2Ec                           |  26 +-
+> hw/m68k/q800=2Ec                                |  28 +-
+> hw/m68k/virt=2Ec                                |  25 +-
+> hw/mem/sparse-mem=2Ec                           |   6 +-
+> hw/microblaze/petalogix_ml605_mmu=2Ec           |  40 ++-
+> hw/microblaze/petalogix_s3adsp1800_mmu=2Ec      |  27 +-
+> hw/microblaze/xlnx-zynqmp-pmu=2Ec               |   4 +-
+> hw/mips/boston=2Ec                              |  32 +--
+> hw/mips/cps=2Ec                                 |   5 +-
+> hw/mips/fuloong2e=2Ec                           |  24 +-
+> hw/mips/jazz=2Ec                                |  73 +++---
+> hw/mips/loongson3_virt=2Ec                      |  40 +--
+> hw/mips/malta=2Ec                               |  49 ++--
+> hw/mips/mips_int=2Ec                            |   2 +-
+> hw/misc/empty_slot=2Ec                          |   7 +-
+> hw/misc/led=2Ec                                 |  15 +-
+> hw/misc/macio/macio=2Ec                         |   2 +-
+> hw/misc/sifive_e_prci=2Ec                       |   6 +-
+> hw/misc/sifive_test=2Ec                         |   6 +-
+> hw/net/can/can_kvaser_pci=2Ec                   |   2 +-
+> hw/net/imx_fec=2Ec                              |   4 +-
+> hw/net/lan9118=2Ec                              |  10 +-
+> hw/net/smc91c111=2Ec                            |   6 +-
+> hw/net/spapr_llan=2Ec                           |   6 +-
+> hw/net/xen_nic=2Ec                              |   5 +-
+> hw/nitro/machine=2Ec                            |  11 +-
+> hw/nitro/nitro-vsock-bus=2Ec                    |   9 +-
+> hw/nubus/nubus-virtio-mmio=2Ec                  |   2 +-
+> hw/nvme/ctrl=2Ec                                |   2 +-
+> hw/nvram/eeprom_at24c=2Ec                       |  12 +-
+> hw/nvram/fw_cfg=2Ec                             |  16 +-
+> hw/or1k/or1k-sim=2Ec                            |  25 +-
+> hw/or1k/virt=2Ec                                |  43 +--
+> hw/pci-bridge/pci_expander_bridge=2Ec           |  13 +-
+> hw/pci-host/articia=2Ec                         |   6 +-
+> hw/pci-host/astro=2Ec                           |   8 +-
+> hw/pci-host/bonito=2Ec                          |  28 +-
+> hw/pci-host/grackle=2Ec                         |   2 +-
+> hw/pci-host/gt64120=2Ec                         |   5 +-
+> hw/pci-host/i440fx=2Ec                          |   2 +-
+> hw/pci-host/mv64361=2Ec                         |   4 +-
+> hw/pci-host/pnv_phb=2Ec                         |   5 +-
+> hw/pci-host/pnv_phb3=2Ec                        |   3 +-
+> hw/pci-host/pnv_phb3_msi=2Ec                    |   3 +-
+> hw/pci-host/pnv_phb4=2Ec                        |   3 +-
+> hw/pci-host/pnv_phb4_pec=2Ec                    |   3 +-
+> hw/pci-host/ppc4xx_pci=2Ec                      |   2 +-
+> hw/pci-host/ppce500=2Ec                         |   2 +-
+> hw/pci-host/raven=2Ec                           |   6 +-
+> hw/pci-host/sabre=2Ec                           |  12 +-
+> hw/pci-host/sh_pci=2Ec                          |   3 +-
+> hw/pci-host/uninorth=2Ec                        |  11 +-
+> hw/pci-host/versatile=2Ec                       |   3 +-
+> hw/pci/pci=2Ec                                  |  60 +++--
+> hw/pci/pcie_sriov=2Ec                           |   3 +-
+> hw/ppc/amigaone=2Ec                             |  24 +-
+> hw/ppc/e500=2Ec                                 |  70 ++---
+> hw/ppc/mac_newworld=2Ec                         |  58 +++--
+> hw/ppc/mac_oldworld=2Ec                         |  32 +--
+> hw/ppc/pegasos=2Ec                              |  22 +-
+> hw/ppc/pnv=2Ec                                  |  33 +--
+> hw/ppc/pnv_bmc=2Ec                              |   4 +-
+> hw/ppc/pnv_lpc=2Ec                              |   6 +-
+> hw/ppc/pnv_psi=2Ec                              |   6 +-
+> hw/ppc/ppc440=2Eh                               |   2 +-
+> hw/ppc/ppc440_bamboo=2Ec                        |  17 +-
+> hw/ppc/ppc440_uc=2Ec                            |  10 +-
+> hw/ppc/ppc4xx_sdram=2Ec                         |  34 +--
+> hw/ppc/prep=2Ec                                 |  50 ++--
+> hw/ppc/sam460ex=2Ec                             |  72 +++---
+> hw/ppc/spapr=2Ec                                |  37 +--
+> hw/ppc/spapr_irq=2Ec                            |   6 +-
+> hw/ppc/spapr_vio=2Ec                            |   6 +-
+> hw/ppc/virtex_ml507=2Ec                         |  23 +-
+> hw/remote/iommu=2Ec                             |   5 +-
+> hw/remote/machine=2Ec                           |   6 +-
+> hw/remote/memory=2Ec                            |   3 +-
+> hw/remote/vfio-user-obj=2Ec                     |   2 +-
+> hw/riscv/aia=2Ec                                |  12 +-
+> hw/riscv/aia=2Eh                                |   3 +-
+> hw/riscv/boston-aia=2Ec                         |  31 ++-
+> hw/riscv/cps=2Ec                                |  14 +-
+> hw/riscv/k230=2Ec                               | 127 ++++-----
+> hw/riscv/microblaze-v-generic=2Ec               |  51 ++--
+> hw/riscv/microchip_pfsoc=2Ec                    |  90 +++----
+> hw/riscv/opentitan=2Ec                          |  52 ++--
+> hw/riscv/shakti_c=2Ec                           |   8 +-
+> hw/riscv/sifive_e=2Ec                           |  25 +-
+> hw/riscv/sifive_u=2Ec                           |  39 +--
+> hw/riscv/spike=2Ec                              |   8 +-
+> hw/riscv/tt_atlantis=2Ec                        |  17 +-
+> hw/riscv/virt=2Ec                               |  57 ++--
+> hw/riscv/xiangshan_kmh=2Ec                      |  20 +-
+> hw/rtc/ls7a_rtc=2Ec                             |   2 +-
+> hw/rtc/mc146818rtc=2Ec                          |   6 +-
+> hw/rtc/sun4v-rtc=2Ec                            |   6 +-
+> hw/s390x/ap-bridge=2Ec                          |   6 +-
+> hw/s390x/css-bridge=2Ec                         |   7 +-
+> hw/s390x/s390-pci-bus=2Ec                       |  12 +-
+> hw/s390x/s390-virtio-ccw=2Ec                    |  41 ++-
+> hw/scsi/esp-pci=2Ec                             |   2 +-
+> hw/scsi/lasi_ncr710=2Ec                         |   8 +-
+> hw/scsi/lasi_ncr710=2Eh                         |   4 +-
+> hw/scsi/ncr53c710=2Ec                           |  15 +-
+> hw/scsi/ncr53c710=2Eh                           |   7 +-
+> hw/scsi/scsi-bus=2Ec                            |   5 +-
+> hw/scsi/spapr_vscsi=2Ec                         |   6 +-
+> hw/sh4/r2d=2Ec                                  |  38 +--
+> hw/sh4/sh7750=2Ec                               |  35 +--
+> hw/sparc/leon3=2Ec                              |  27 +-
+> hw/sparc/sun4m=2Ec                              | 167 ++++++------
+> hw/sparc64/niagara=2Ec                          |  20 +-
+> hw/sparc64/sparc64=2Ec                          |   3 +-
+> hw/sparc64/sun4u=2Ec                            |  69 ++---
+> hw/ssi/ssi=2Ec                                  |   7 +-
+> hw/timer/arm_timer=2Ec                          |   6 +-
+> hw/timer/sh_timer=2Ec                           |   9 +-
+> hw/tricore/tc27x_soc=2Ec                        |  77 +++---
+> hw/tricore/tricore_testboard=2Ec                |  19 +-
+> hw/ufs/lu=2Ec                                   |   5 +-
+> hw/usb/bus=2Ec                                  |  15 +-
+> hw/usb/dev-serial=2Ec                           |   3 +-
+> hw/usb/vt82c686-uhci-pci=2Ec                    |   4 +-
+> hw/vfio/igd=2Ec                                 |   5 +-
+> hw/virtio/virtio-mem=2Ec                        |   5 +-
+> hw/vmapple/vmapple=2Ec                          |  66 ++---
+> hw/xen/xen-bus=2Ec                              |   5 +-
+> hw/xen/xen-legacy-backend=2Ec                   |   5 +-
+> hw/xen/xen-pvh-common=2Ec                       |  26 +-
+> hw/xen/xen_pt_graphics=2Ec                      |   3 +-
+> hw/xtensa/mx_pic=2Ec                            |   8 +-
+> hw/xtensa/pic_cpu=2Ec                           |   5 +-
+> hw/xtensa/sim=2Ec                               |  15 +-
+> hw/xtensa/virt=2Ec                              |   4 +-
+> hw/xtensa/xtensa_memory=2Ec                     |   5 +-
+> hw/xtensa/xtensa_memory=2Eh                     |   3 +-
+> hw/xtensa/xtfpga=2Ec                            |  51 ++--
+> include/hw/arm/aspeed=2Eh                       |   6 +-
+> include/hw/arm/aspeed_soc=2Eh                   |   3 +-
+> include/hw/arm/exynos4210=2Eh                   |   2 +-
+> include/hw/arm/omap=2Eh                         |  11 +-
+> include/hw/block/fdc=2Eh                        |   5 +-
+> include/hw/block/flash=2Eh                      |   4 +-
+> include/hw/char/mchp_pfsoc_mmuart=2Eh           |   2 +-
+> include/hw/char/parallel=2Eh                    |   5 +-
+> include/hw/char/pl011=2Eh                       |   2 +-
+> include/hw/char/riscv_htif=2Eh                  |   3 +-
+> include/hw/char/serial-isa=2Eh                  |   2 +-
+> include/hw/char/serial-mm=2Eh                   |   2 +-
+> include/hw/char/sifive_uart=2Eh                 |   4 +-
+> include/hw/core/cpu=2Eh                         |  11 +-
+> include/hw/core/irq=2Eh                         |  27 +-
+> include/hw/core/qdev=2Eh                        |  50 ++--
+> include/hw/core/sysbus=2Eh                      |  29 ++-
+> include/hw/i2c/i2c=2Eh                          |  29 ++-
+> include/hw/i2c/smbus_eeprom=2Eh                 |   5 +-
+> include/hw/i386/pc=2Eh                          |   6 +-
+> include/hw/i386/vmport=2Eh                      |   5 -
+> include/hw/i386/x86=2Eh                         |   7 +-
+> include/hw/i3c/i3c=2Eh                          |   9 +-
+> include/hw/ide/isa=2Eh                          |   3 +-
+> include/hw/intc/i8259=2Eh                       |   4 +-
+> include/hw/intc/riscv_aclint=2Eh                |   6 +-
+> include/hw/intc/riscv_aplic=2Eh                 |   5 +-
+> include/hw/intc/riscv_imsic=2Eh                 |   3 +-
+> include/hw/intc/sifive_plic=2Eh                 |   3 +-
+> include/hw/isa/i8259_internal=2Eh               |   3 +-
+> include/hw/isa/isa=2Eh                          |  11 +-
+> include/hw/m68k/mcf=2Eh                         |   7 +-
+> include/hw/mem/sparse-mem=2Eh                   |   2 +-
+> include/hw/mips/mips=2Eh                        |   5 +-
+> include/hw/misc/empty_slot=2Eh                  |   3 +-
+> include/hw/misc/sifive_e_prci=2Eh               |   2 +-
+> include/hw/misc/sifive_test=2Eh                 |   2 +-
+> include/hw/misc/unimp=2Eh                       |   9 +-
+> include/hw/net/lan9118=2Eh                      |   2 +-
+> include/hw/net/ne2000-isa=2Eh                   |   8 +-
+> include/hw/net/smc91c111=2Eh                    |   2 +-
+> include/hw/nitro/nitro-vsock-bus=2Eh            |   2 +-
+> include/hw/nvram/eeprom_at24c=2Eh               |   6 +-
+> include/hw/pci/pci=2Eh                          |  19 +-
+> include/hw/ppc/pnv=2Eh                          |   2 +-
+> include/hw/ppc/spapr_vio=2Eh                    |   8 +-
+> include/hw/rtc/mc146818rtc=2Eh                  |   2 +-
+> include/hw/rtc/sun4v-rtc=2Eh                    |   2 +-
+> include/hw/sh4/sh=2Eh                           |   3 +-
+> include/hw/sh4/sh_intc=2Eh                      |   3 +-
+> include/hw/ssi/ssi=2Eh                          |   3 +-
+> include/hw/timer/i8254=2Eh                      |  13 +-
+> include/hw/timer/tmu012=2Eh                     |   3 +-
+> include/hw/usb/usb=2Eh                          |  13 +-
+> include/hw/xen/xen=2Eh                          |   2 +-
+> include/hw/xtensa/mx_pic=2Eh                    |   4 +-
+> include/net/net=2Eh                             |   5 +-
+> include/qom/object=2Eh                          |  25 ++
+> linux-user/main=2Ec                             |   6 +-
+> net/net=2Ec                                     |  10 +-
+> qapi/block-core=2Ejson                          |  12 +-
+> qapi/block=2Ejson                               |   2 +-
+> qapi/machine=2Ejson                             |  12 +-
+> qapi/qom=2Ejson                                 |   4 +-
+> qom/object=2Ec                                  |  13 +
+> scripts/arm_processor_error=2Epy                |   3 +-
+> =2E=2E=2E/qom-parent/cpu-create-orphan=2Ecocci        |  13 +
+> =2E=2E=2E/qom-parent/i2c-slave-new-orphan=2Ecocci     |  18 ++
+> =2E=2E=2E/coccinelle/qom-parent/irq-rename=2Ecocci    |  14 +
+> =2E=2E=2E/qom-parent/isa-new-orphan=2Ecocci           |  23 ++
+> =2E=2E=2E/qom-parent/pci-new-orphan=2Ecocci           |  28 ++
+> =2E=2E=2E/qom-parent/qdev-new-orphan=2Ecocci          |  18 ++
+> =2E=2E=2E/qom-parent/ssi-usb-orphan=2Ecocci           |  18 ++
+> =2E=2E=2E/qom-parent/sysbus-create-orphan=2Ecocci     |  18 ++
+> scripts/qmp_helper=2Epy                         |   2 +-
+> stubs/xen-hw-stub=2Ec                           |   2 +-
+> system/ioport=2Ec                               |  12 +-
+> system/memory=2Ec                               |  23 +-
+> system/physmem=2Ec                              |   4 +-
+> system/qdev-monitor=2Ec                         |   2 +-
+> system/qtest=2Ec                                |   2 +-
+> system/ram-block-attributes=2Ec                 |   7 +-
+> system/vl=2Ec                                   |   3 +-
+> target/mips/cpu=2Ec                             |   5 +-
+> target/mips/cpu=2Eh                             |   3 +-
+> target/xtensa/cpu=2Ec                           |  11 -
+> target/xtensa/cpu=2Eh                           |   2 -
+> tests/qemu-iotests/172=2Eout                    |  72 +++---
+> tests/qemu-iotests/186=2Eout                    |  10 +-
+> tests/qemu-iotests/common=2Efilter              |   2 +-
+> tests/qtest/fuzz/generic_fuzz=2Ec               |   2 +-
+> tests/unit/test-qdev-global-props=2Ec           |  17 +-
+> tests/unit/test-qdev=2Ec                        |  12 +-
+> 438 files changed, 4515 insertions(+), 3784 deletions(-)
+> create mode 100644 scripts/coccinelle/qom-parent/cpu-create-orphan=2Ecoc=
+ci
+> create mode 100644 scripts/coccinelle/qom-parent/i2c-slave-new-orphan=2E=
+cocci
+> create mode 100644 scripts/coccinelle/qom-parent/irq-rename=2Ecocci
+> create mode 100644 scripts/coccinelle/qom-parent/isa-new-orphan=2Ecocci
+> create mode 100644 scripts/coccinelle/qom-parent/pci-new-orphan=2Ecocci
+> create mode 100644 scripts/coccinelle/qom-parent/qdev-new-orphan=2Ecocci
+> create mode 100644 scripts/coccinelle/qom-parent/ssi-usb-orphan=2Ecocci
+> create mode 100644 scripts/coccinelle/qom-parent/sysbus-create-orphan=2E=
+cocci
+>
 
