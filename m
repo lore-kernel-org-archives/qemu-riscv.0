@@ -4,118 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 620AEC44506
-	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 00:45:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9C34C43458
+	for <qemu-riscv@archiver.kernel.org>; Sun, 12 Jul 2026 08:46:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wiiDm-0001f8-Fu; Sat, 11 Jul 2026 20:39:02 -0400
+	id 1wippT-0001OA-Mo; Sun, 12 Jul 2026 04:46:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigil-0005PW-6T; Sat, 11 Jul 2026 19:02:56 -0400
-Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.13.214.179])
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
+ id 1wippQ-0001Ns-Gy; Sun, 12 Jul 2026 04:46:25 -0400
+Received: from out162-62-57-64.mail.qq.com ([162.62.57.64])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <prvs=645f258d4=graf@amazon.de>)
- id 1wigih-0002YQ-51; Sat, 11 Jul 2026 19:02:54 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1783810971; x=1815346971;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=Gmd15+SAabzX07bY28nlbu8cJDEIsIgNIuco93iaCqQ=;
- b=F88hCuDiu8RIudgXO4Y7Fs7+DqV7NZ+IB9NkB/SDb1xn2qMxZTzPxNT5
- U6z/2/I6zvbRzyukDWLC3hsqmxzuNDHqo6DI46MmqaoRemqaqPU0mH1/2
- BS61OlQsAiMjP1TOSHFdYLh0rmtCfE8Dd7tBLQCaj19qE29ZAWVdbbVMV
- DH73aLFzuQKdPWu/+hvFHiCcxmWG5KazSShzDVsYIt7wW/DcAdobFsVmm
- LDwBfRIx5OurB3fBh+U8oLeRVqy1JC2+5Qw8+QSaz+vULzlaX4igFIusa
- HsEBBquRpLrAmKZTohYOZDge4nDAoMKomBuCcU5SqfWmCE/eOJI4qfKMq A==;
-X-CSE-ConnectionGUID: MeB5+qhvQF2Rr25YL0++zQ==
-X-CSE-MsgGUID: orOXU9YyQrWoBFg4QEyMuA==
-X-IronPort-AV: E=Sophos;i="6.25,154,1779148800"; d="scan'208";a="23479679"
-Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jul 2026 23:02:35 +0000
-Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.51:6838]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.33:2525]
- with esmtp (Farcaster)
- id e319b4ac-40a7-4496-a248-a2413f3e68db; Sat, 11 Jul 2026 23:02:35 +0000 (UTC)
-X-Farcaster-Flow-ID: e319b4ac-40a7-4496-a248-a2413f3e68db
-Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:02:35 +0000
-Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
- EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 11 Jul 2026 23:02:26 +0000
-From: Alexander Graf <graf@amazon.com>
-To: <qemu-devel@nongnu.org>
-CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
- <qemu-s390x@nongnu.org>, Song Gao <17746591750@163.com>, Aditya Gupta
- <adityag@linux.ibm.com>, Alexey Kardashevskiy <aik@ozlabs.ru>, Farhan Ali
- <alifm@linux.ibm.com>, Alistair Francis <alistair.francis@wdc.com>, "Alistair
- Francis" <alistair@alistair23.me>, Antony Pavlov <antonynpavlov@gmail.com>,
- Markus Armbruster <armbru@redhat.com>, Artyom Tarasenko
- <atar4qemu@gmail.com>, BALATON Zoltan <balaton@eik.bme.hu>, Felipe Balbi
- <balbi@kernel.org>, Christian Borntraeger <borntraeger@linux.ibm.com>, "Brian
- Cain" <brian.cain@oss.qualcomm.com>, Hendrik Brueckner
- <brueckner@linux.ibm.com>, Chao Liu <chao.liu@processmission.com>, "Huacai
- Chen" <chenhuacai@kernel.org>, =?UTF-8?q?Cl=C3=A9ment=20Chigot?=
- <chigot@adacore.com>, =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Helge Deller <deller@gmx.de>, Dorjoy Chowdhury <dorjoychy111@gmail.com>,
- "Edgar E . Iglesias" <edgar.iglesias@gmail.com>, Alexandre Iooss
- <erdnaxe@crans.org>, Eric Farman <farman@linux.ibm.com>, Francisco Iglesias
- <francisco.iglesias@amd.com>, Gaurav Sharma <gaurav.sharma_7@nxp.com>,
- "Gautam Gala" <ggala@linux.ibm.com>, Harsh Prateek Bora
- <harshpb@linux.ibm.com>, =?UTF-8?q?Herv=C3=A9=20Poussineau?=
- <hpoussin@reactos.org>, Jan Kiszka <jan.kiszka@web.de>, Max Filippov
- <jcmvbkbc@gmail.com>, Joel Stanley <joel@jms.id.au>, Jared Rossi
- <jrossi@linux.ibm.com>, Tyrone Ting <kfting@nuvoton.com>, Frederic Konrad
- <konrad.frederic@yahoo.fr>, "Laurent Vivier" <laurent@vivier.eu>, Manos
- Pitsidianakis <manos.pitsidianakis@linaro.org>, Bibo Mao
- <maobibo@loongson.cn>, "Mark Cave-Ayland" <mark.cave-ayland@ilande.co.uk>,
- Glenn Miles <milesg@linux.ibm.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
- "Michael Rolnik" <mrolnik@gmail.com>, "Michael S . Tsirkin" <mst@redhat.com>, 
- "Niek Linnenbank" <nieklinnenbank@gmail.com>, Nicholas Piggin
- <npiggin@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Halil Pasic
- <pasic@linux.ibm.com>, "Paolo Bonzini" <pbonzini@redhat.com>, Peter Maydell
- <peter.maydell@linaro.org>, =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?=
- <philmd@mailo.com>, "Pierrick Bouvier" <pierrick.bouvier@oss.qualcomm.com>,
- Richard Henderson <richard.henderson@linaro.org>, Sai Pavan Boddu
- <sai.pavan.boddu@amd.com>, Samuel Tardieu <sam@rfc1149.net>, Bernhard Beschow
- <shentey@gmail.com>, Stafford Horne <shorne@gmail.com>, Sergio Lopez
- <slp@redhat.com>, "Subbaraya Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth
- <th.huth+qemu@posteo.eu>, "Ran Wang" <wangran@bosc.ac.cn>, Hao Wu
- <wuhaotsh@google.com>, =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?=
- <berrange@redhat.com>
-Subject: [RFC PATCH 096/134] hw/sh4: Give memory regions an explicit owner
-Date: Sat, 11 Jul 2026 22:36:29 +0000
-Message-ID: <20260711223707.42139-97-graf@amazon.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20260711223707.42139-1-graf@amazon.com>
-References: <20260711223707.42139-1-graf@amazon.com>
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
+ id 1wippH-0006W4-9N; Sun, 12 Jul 2026 04:46:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1783845959; bh=tIyBoHf8hCygG64lLbiB7PHGpQj5vYvBFiB0gG4+0mo=;
+ h=From:To:Cc:Subject:Date;
+ b=WE50viD/f+upav8kKFOGQg1F9QmSsLW/LBjlNIBPSluBvgS6CdUIXPdvq2bcHOBvl
+ LAxrO1yCDamUyynxBY5q+iQ+wjWV9YCWFbNsAVkLy/CPIek25zCuvNTZjwJeBPs3uL
+ oEivSJyhNsd/LvmQuSlOT9K6HC1+3DW/GAF6v3a4=
+Received: from qq.com ([125.69.26.119])
+ by newxmesmtplogicsvrszb51-0.qq.com (NewEsmtp) with SMTP
+ id B788DC29; Sun, 12 Jul 2026 16:45:56 +0800
+X-QQ-mid: xmsmtpt1783845956trs47i4pw
+Message-ID: <tencent_E17E8F6494EE130F71527C6BCE481AF33E08@qq.com>
+X-QQ-XMAILINFO: ORaMKMferCiA4x1ImdjLE6WMn4e5k0Qo3Omhia1aKi68X01F+j8PACFQXJ+OyX
+ gWM2IfTY2Vyry+vyoCawPRJSA0a5+21J3V1xG0FMzxvF92+rVCiuIJ1DbOxk40BBIVMXj12Ti7r5
+ UV9NUFwwGT2cXvhqdAOCEgDAzXN7toR/KvfQmtkPnIuWZaSGvb0mRxLNa+4P/X3TQ9ZnrPPpyRyL
+ Z2rPdMdLmDPX5DOY+YQsc8RNpN3bLaL80XCkTCE+CPFiYxCkESAu+NT+K35qnvcRAAGxmmkKpoZJ
+ dgoFLUavJIsddFLLMAhKrlH7sOu5MGqr85qfGVwo5gDalceOgtJUnNi1/2SUhoSHX5FleNYTUKxc
+ x/P9C77AdQeDL/ntfqQCAFc31gwfbUGvrFAqzzj3LlSrdQvlpzCJLNrqQMbpdXpQaZMjyhzeRC4X
+ zQ75lu40IMsyP5VMGahwRvMfTFE0JaV5IuWmjM3U3WG+0j9wT3T68/VBoKr4MJJ3UVmAQul42tAg
+ //q69IpS6zAdhgaoDoFb22d+Bi7+WaGY2l1EExTw1pyU89pu3B1Qnsd047XY7D6y2dIF6V9TeQ62
+ f1tUwIalZjt/Ddrd3q0GPFW84abipPYpebb7cTlhCTnqjWmr36NHS7KXHMgojpd+uYYoYlfbIo2C
+ Je+TSbZIaZzawsETrMuU9CMo/B4OwdfmBUwtZqdieZFksJZ8iPROR1FUJ7lr70LBtOiZ8LOtabpH
+ rz8O3pRM4ZwtHE2piDV6uMHBOBxG5RUXEXvHB7rPP+nFRQ+1sIQkpOlgUlmVI0TtFQRYg9DB4yvZ
+ K9sa9QTqCFoeBMJHWZsC8hZltS+DXu1YyUe8MTzWeHdI1DClpP6iwoS9EL80EzwdffagQ9QFpvYK
+ lFY/k7tS2vXeOW8A2gdLjxcSN47TDdQfiweSZ9FIKDfVWmUsU7p547THC/lKpovv4sRuWb9gVw4s
+ bGrHHViD2zTcpfYjgNm72XD0uxe7jXPOvGNgVOvesDZ+rccyFYggW5PdEhypcE3xRILRWqEv97Xb
+ m/0B0fReSfTSW/o3CPEEXgH90DMRMKrDy499xpItalF4Kcl+q9brimFj7MdEGBaUTmLL1OLw==
+X-QQ-XMRINFO: NI4Ajvh11aEjEMj13RCX7UuhPEoou2bs1g==
+From: Yanfeng Liu <yfliu2008@qq.com>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, alex.bennee@linaro.org, erdnaxe@crans.org,
+ pierrick.bouvier@oss.qualcomm.com, Yanfeng Liu <yfliu2008@qq.com>
+Subject: [PATCH v1] uftrace: riscv privilege level
+Date: Sun, 12 Jul 2026 16:45:53 +0800
+X-OQ-MSGID: <20260712084553.2945-1-yfliu2008@qq.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D046UWA003.ant.amazon.com (10.13.139.18) To
- EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.13.214.179;
- envelope-from=prvs=645f258d4=graf@amazon.de;
- helo=pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
-X-Spam_score_int: -28
-X-Spam_score: -2.9
-X-Spam_bar: --
-X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.445,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
- HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=162.62.57.64; envelope-from=yfliu2008@qq.com;
+ helo=out162-62-57-64.mail.qq.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HELO_STATIC_HOST=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 11 Jul 2026 20:38:57 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,273 +80,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert memory_region_init*() calls in the SH7750 SoC model and
-its non-QOM sub-block helpers (tmu012_init, sh_intc_init,
-r2d_fpga_init) to pass an explicit owner instead of NULL.
+This adds RiscV virtual user and supervisor privilege levels to
+uftrace plugin to avoid crashing with H extension guests.
 
-Thread Object *owner as the first argument through tmu012_init(),
-sh_intc_init() and its static sh_intc_register() helper, and
-r2d_fpga_init(). sh7750_init() already carries an Object *parent
-from the earlier device conversion; pass it through.
-
-No functional change intended.
-
-Assisted-by: Kiro
-Signed-off-by: Alexander Graf <graf@amazon.com>
+Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
 ---
- hw/intc/sh_intc.c         | 19 ++++++++++---------
- hw/sh4/r2d.c              |  9 +++++----
- hw/sh4/sh7750.c           | 22 +++++++++++-----------
- hw/timer/sh_timer.c       |  9 +++++----
- include/hw/sh4/sh_intc.h  |  3 ++-
- include/hw/timer/tmu012.h |  3 ++-
- 6 files changed, 35 insertions(+), 30 deletions(-)
+ contrib/plugins/uftrace.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
-diff --git a/hw/intc/sh_intc.c b/hw/intc/sh_intc.c
-index 0da82f9d5e..37feb6a813 100644
---- a/hw/intc/sh_intc.c
-+++ b/hw/intc/sh_intc.c
-@@ -349,7 +349,8 @@ void sh_intc_register_sources(struct intc_desc *desc,
-     }
- }
+diff --git a/contrib/plugins/uftrace.c b/contrib/plugins/uftrace.c
+index 9b0a4963ae..063e32220b 100644
+--- a/contrib/plugins/uftrace.c
++++ b/contrib/plugins/uftrace.c
+@@ -109,6 +109,8 @@ typedef enum {
+     RISCV64_SUPERVISOR,
+     RISCV64_RESERVED,
+     RISCV64_MACHINE,
++    RISCV64_VUSER,
++    RISCV64_VSUPERVISOR,
+     RISCV64_PRIVILEGE_LEVEL_MAX,
+ } Riscv64PrivilegeLevel;
  
--static unsigned int sh_intc_register(MemoryRegion *sysmem,
-+static unsigned int sh_intc_register(Object *owner,
-+                                     MemoryRegion *sysmem,
-                                      struct intc_desc *desc,
-                                      const unsigned long address,
-                                      const char *type,
-@@ -368,18 +369,18 @@ static unsigned int sh_intc_register(MemoryRegion *sysmem,
-     iomem_a7 = iomem_p4 + 1;
+@@ -153,8 +155,10 @@ static void uftrace_write_map(bool system_emulation)
+     const char *path = "./uftrace.data/sid-0.map";
  
-     snprintf(name, sizeof(name), "intc-%s-%s-%s", type, action, "p4");
--    memory_region_init_alias(iomem_p4, NULL, name, iomem, A7ADDR(address), 4);
-+    memory_region_init_alias(iomem_p4, owner, name, iomem, A7ADDR(address), 4);
-     memory_region_add_subregion(sysmem, P4ADDR(address), iomem_p4);
- 
-     snprintf(name, sizeof(name), "intc-%s-%s-%s", type, action, "a7");
--    memory_region_init_alias(iomem_a7, NULL, name, iomem, A7ADDR(address), 4);
-+    memory_region_init_alias(iomem_a7, owner, name, iomem, A7ADDR(address), 4);
-     memory_region_add_subregion(sysmem, A7ADDR(address), iomem_a7);
- 
-     /* used to increment aliases index */
-     return 2;
- }
- 
--int sh_intc_init(MemoryRegion *sysmem,
-+int sh_intc_init(Object *owner, MemoryRegion *sysmem,
-                  struct intc_desc *desc,
-                  int nr_sources,
-                  struct intc_mask_reg *mask_regs,
-@@ -403,15 +404,15 @@ int sh_intc_init(MemoryRegion *sysmem,
-         desc->sources[i].parent = desc;
-     }
-     desc->irqs = qemu_allocate_irqs(sh_intc_set_irq, desc, nr_sources);
--    memory_region_init_io(&desc->iomem, NULL, &sh_intc_ops, desc, "intc",
-+    memory_region_init_io(&desc->iomem, owner, &sh_intc_ops, desc, "intc",
-                           0x100000000ULL);
-     j = 0;
-     if (desc->mask_regs) {
-         for (i = 0; i < desc->nr_mask_regs; i++) {
-             struct intc_mask_reg *mr = &desc->mask_regs[i];
- 
--            j += sh_intc_register(sysmem, desc, mr->set_reg, "mask", "set", j);
--            j += sh_intc_register(sysmem, desc, mr->clr_reg, "mask", "clr", j);
-+            j += sh_intc_register(owner, sysmem, desc, mr->set_reg, "mask", "set", j);
-+            j += sh_intc_register(owner, sysmem, desc, mr->clr_reg, "mask", "clr", j);
-         }
+     if (system_emulation && access(path, F_OK) == 0) {
+-        /* do not erase existing map in system emulation, as a custom one might
+-         * already have been generated by uftrace_symbols.py */
++        /*
++         * do not erase existing map in system emulation, as a custom one might
++         * already have been generated by uftrace_symbols.py
++         */
+         return;
      }
  
-@@ -419,8 +420,8 @@ int sh_intc_init(MemoryRegion *sysmem,
-         for (i = 0; i < desc->nr_prio_regs; i++) {
-             struct intc_prio_reg *pr = &desc->prio_regs[i];
- 
--            j += sh_intc_register(sysmem, desc, pr->set_reg, "prio", "set", j);
--            j += sh_intc_register(sysmem, desc, pr->clr_reg, "prio", "clr", j);
-+            j += sh_intc_register(owner, sysmem, desc, pr->set_reg, "prio", "set", j);
-+            j += sh_intc_register(owner, sysmem, desc, pr->clr_reg, "prio", "clr", j);
-         }
+@@ -706,6 +710,8 @@ static const char *riscv64_get_privilege_level_name(uint8_t pl)
+     case RISCV64_SUPERVISOR: return "Supervisor";
+     case RISCV64_RESERVED: return "Unknown";
+     case RISCV64_MACHINE: return "Machine";
++    case RISCV64_VUSER: return "VUser";
++    case RISCV64_VSUPERVISOR: return "VSupervisor";
+     default:
+         g_assert_not_reached();
      }
+@@ -986,7 +992,8 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
  
-diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
-index 6154aed2c4..8deda6e5f4 100644
---- a/hw/sh4/r2d.c
-+++ b/hw/sh4/r2d.c
-@@ -187,7 +187,8 @@ static const MemoryRegionOps r2d_fpga_ops = {
-     .endianness = DEVICE_NATIVE_ENDIAN,
- };
+     score = qemu_plugin_scoreboard_new(sizeof(Cpu));
+     qemu_plugin_register_vcpu_init_cb(id, vcpu_init, NULL);
+-    qemu_plugin_register_atexit_cb(id, at_exit, (void *) info->system_emulation);
++    qemu_plugin_register_atexit_cb(id, at_exit,
++                                   (void *) info->system_emulation);
+     qemu_plugin_register_vcpu_tb_trans_cb(id, vcpu_tb_trans, NULL);
  
--static r2d_fpga_t *r2d_fpga_init(MemoryRegion *sysmem,
-+static r2d_fpga_t *r2d_fpga_init(Object *owner,
-+                                 MemoryRegion *sysmem,
-                                  hwaddr base, qemu_irq irl)
- {
-     r2d_fpga_t *s;
-@@ -196,7 +197,7 @@ static r2d_fpga_t *r2d_fpga_init(MemoryRegion *sysmem,
- 
-     s->irl = irl;
- 
--    memory_region_init_io(&s->iomem, NULL, &r2d_fpga_ops, s, "r2d-fpga", 0x40);
-+    memory_region_init_io(&s->iomem, owner, &r2d_fpga_ops, s, "r2d-fpga", 0x40);
-     memory_region_add_subregion(sysmem, base, &s->iomem);
- 
-     qemu_init_irqs(s->irq, NR_IRQS, r2d_fpga_irq_set, s);
-@@ -261,11 +262,11 @@ static void r2d_init(MachineState *machine)
-     qemu_register_reset(main_cpu_reset, reset_info);
- 
-     /* Allocate memory space */
--    memory_region_init_ram(sdram, NULL, "r2d.sdram", SDRAM_SIZE, &error_fatal);
-+    memory_region_init_ram(sdram, OBJECT(machine), "r2d.sdram", SDRAM_SIZE, &error_fatal);
-     memory_region_add_subregion(address_space_mem, SDRAM_BASE, sdram);
-     /* Register peripherals */
-     s = sh7750_init(OBJECT(machine), cpu, address_space_mem);
--    fpga = r2d_fpga_init(address_space_mem, 0x04000000, sh7750_irl(s));
-+    fpga = r2d_fpga_init(OBJECT(machine), address_space_mem, 0x04000000, sh7750_irl(s));
- 
-     dev = qdev_new(OBJECT(machine), "pci-host", "sh_pci");
-     busdev = SYS_BUS_DEVICE(dev);
-diff --git a/hw/sh4/sh7750.c b/hw/sh4/sh7750.c
-index ff9724fadf..ea55a3a9cc 100644
---- a/hw/sh4/sh7750.c
-+++ b/hw/sh4/sh7750.c
-@@ -721,38 +721,38 @@ SH7750State *sh7750_init(Object *parent, SuperHCPU *cpu,
-     s = g_new0(SH7750State, 1);
-     s->cpu = cpu;
-     s->periph_freq = 60000000; /* 60MHz */
--    memory_region_init_io(&s->iomem, NULL, &sh7750_mem_ops, s,
-+    memory_region_init_io(&s->iomem, parent, &sh7750_mem_ops, s,
-                           "memory", 0x1fc01000);
- 
--    memory_region_init_alias(&s->iomem_1f0, NULL, "memory-1f0",
-+    memory_region_init_alias(&s->iomem_1f0, parent, "memory-1f0",
-                              &s->iomem, 0x1f000000, 0x1000);
-     memory_region_add_subregion(sysmem, 0x1f000000, &s->iomem_1f0);
- 
--    memory_region_init_alias(&s->iomem_ff0, NULL, "memory-ff0",
-+    memory_region_init_alias(&s->iomem_ff0, parent, "memory-ff0",
-                              &s->iomem, 0x1f000000, 0x1000);
-     memory_region_add_subregion(sysmem, 0xff000000, &s->iomem_ff0);
- 
--    memory_region_init_alias(&s->iomem_1f8, NULL, "memory-1f8",
-+    memory_region_init_alias(&s->iomem_1f8, parent, "memory-1f8",
-                              &s->iomem, 0x1f800000, 0x1000);
-     memory_region_add_subregion(sysmem, 0x1f800000, &s->iomem_1f8);
- 
--    memory_region_init_alias(&s->iomem_ff8, NULL, "memory-ff8",
-+    memory_region_init_alias(&s->iomem_ff8, parent, "memory-ff8",
-                              &s->iomem, 0x1f800000, 0x1000);
-     memory_region_add_subregion(sysmem, 0xff800000, &s->iomem_ff8);
- 
--    memory_region_init_alias(&s->iomem_1fc, NULL, "memory-1fc",
-+    memory_region_init_alias(&s->iomem_1fc, parent, "memory-1fc",
-                              &s->iomem, 0x1fc00000, 0x1000);
-     memory_region_add_subregion(sysmem, 0x1fc00000, &s->iomem_1fc);
- 
--    memory_region_init_alias(&s->iomem_ffc, NULL, "memory-ffc",
-+    memory_region_init_alias(&s->iomem_ffc, parent, "memory-ffc",
-                              &s->iomem, 0x1fc00000, 0x1000);
-     memory_region_add_subregion(sysmem, 0xffc00000, &s->iomem_ffc);
- 
--    memory_region_init_io(&s->mmct_iomem, NULL, &sh7750_mmct_ops, s,
-+    memory_region_init_io(&s->mmct_iomem, parent, &sh7750_mmct_ops, s,
-                           "cache-and-tlb", 0x08000000);
-     memory_region_add_subregion(sysmem, 0xf0000000, &s->mmct_iomem);
- 
--    sh_intc_init(sysmem, &s->intc, NR_SOURCES,
-+    sh_intc_init(parent, sysmem, &s->intc, NR_SOURCES,
-                  _INTC_ARRAY(mask_registers),
-                  _INTC_ARRAY(prio_registers));
- 
-@@ -797,7 +797,7 @@ SH7750State *sh7750_init(Object *parent, SuperHCPU *cpu,
-     qdev_connect_gpio_out_named(dev, "txi", 0, s->intc.irqs[SCIF_TXI]);
-     qdev_connect_gpio_out_named(dev, "bri", 0, s->intc.irqs[SCIF_BRI]);
- 
--    tmu012_init(sysmem, 0x1fd80000,
-+    tmu012_init(parent, sysmem, 0x1fd80000,
-                 TMU012_FEAT_TOCR | TMU012_FEAT_3CHAN | TMU012_FEAT_EXTCLK,
-                 s->periph_freq,
-                 s->intc.irqs[TMU0],
-@@ -821,7 +821,7 @@ SH7750State *sh7750_init(Object *parent, SuperHCPU *cpu,
-         sh_intc_register_sources(&s->intc,
-                                  _INTC_ARRAY(vectors_tmu34),
-                                  NULL, 0);
--        tmu012_init(sysmem, 0x1e100000, 0, s->periph_freq,
-+        tmu012_init(parent, sysmem, 0x1e100000, 0, s->periph_freq,
-                     s->intc.irqs[TMU3],
-                     s->intc.irqs[TMU4],
-                     NULL, NULL);
-diff --git a/hw/timer/sh_timer.c b/hw/timer/sh_timer.c
-index 41ece9c613..ac71d11a0a 100644
---- a/hw/timer/sh_timer.c
-+++ b/hw/timer/sh_timer.c
-@@ -344,7 +344,8 @@ static const MemoryRegionOps tmu012_ops = {
-     .endianness = DEVICE_NATIVE_ENDIAN,
- };
- 
--void tmu012_init(MemoryRegion *sysmem, hwaddr base, int feat, uint32_t freq,
-+void tmu012_init(Object *owner, MemoryRegion *sysmem, hwaddr base,
-+                 int feat, uint32_t freq,
-                  qemu_irq ch0_irq, qemu_irq ch1_irq,
-                  qemu_irq ch2_irq0, qemu_irq ch2_irq1)
- {
-@@ -360,13 +361,13 @@ void tmu012_init(MemoryRegion *sysmem, hwaddr base, int feat, uint32_t freq,
-                                     ch2_irq0); /* ch2_irq1 not supported */
-     }
- 
--    memory_region_init_io(&s->iomem, NULL, &tmu012_ops, s, "timer", 0x30);
-+    memory_region_init_io(&s->iomem, owner, &tmu012_ops, s, "timer", 0x30);
- 
--    memory_region_init_alias(&s->iomem_p4, NULL, "timer-p4",
-+    memory_region_init_alias(&s->iomem_p4, owner, "timer-p4",
-                              &s->iomem, 0, memory_region_size(&s->iomem));
-     memory_region_add_subregion(sysmem, P4ADDR(base), &s->iomem_p4);
- 
--    memory_region_init_alias(&s->iomem_a7, NULL, "timer-a7",
-+    memory_region_init_alias(&s->iomem_a7, owner, "timer-a7",
-                              &s->iomem, 0, memory_region_size(&s->iomem));
-     memory_region_add_subregion(sysmem, A7ADDR(base), &s->iomem_a7);
-     /* ??? Save/restore.  */
-diff --git a/include/hw/sh4/sh_intc.h b/include/hw/sh4/sh_intc.h
-index 94f183121e..d391710987 100644
---- a/include/hw/sh4/sh_intc.h
-+++ b/include/hw/sh4/sh_intc.h
-@@ -2,6 +2,7 @@
- #define SH_INTC_H
- 
- #include "system/memory.h"
-+#include "qom/object.h"
- 
- typedef unsigned char intc_enum;
- 
-@@ -68,7 +69,7 @@ void sh_intc_register_sources(struct intc_desc *desc,
-                               struct intc_group *groups,
-                               int nr_groups);
- 
--int sh_intc_init(MemoryRegion *sysmem,
-+int sh_intc_init(Object *owner, MemoryRegion *sysmem,
-                  struct intc_desc *desc,
-                  int nr_sources,
-                  struct intc_mask_reg *mask_regs,
-diff --git a/include/hw/timer/tmu012.h b/include/hw/timer/tmu012.h
-index 808ed8de1d..fb24c00d3b 100644
---- a/include/hw/timer/tmu012.h
-+++ b/include/hw/timer/tmu012.h
-@@ -10,12 +10,13 @@
- #define HW_TIMER_TMU012_H
- 
- #include "exec/hwaddr.h"
-+#include "qom/object.h"
- 
- #define TMU012_FEAT_TOCR   (1 << 0)
- #define TMU012_FEAT_3CHAN  (1 << 1)
- #define TMU012_FEAT_EXTCLK (1 << 2)
- 
--void tmu012_init(MemoryRegion *sysmem, hwaddr base,
-+void tmu012_init(Object *owner, MemoryRegion *sysmem, hwaddr base,
-                  int feat, uint32_t freq,
-                  qemu_irq ch0_irq, qemu_irq ch1_irq,
-                  qemu_irq ch2_irq0, qemu_irq ch2_irq1);
+     return 0;
 -- 
-2.47.1
+2.34.1
 
 
