@@ -4,49 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA6B8C43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 09:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDFDCC43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 09:48:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjD73-0007zD-4g; Mon, 13 Jul 2026 05:38:09 -0400
+	id 1wjDGu-0001pH-87; Mon, 13 Jul 2026 05:48:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1wjD71-0007yc-1F; Mon, 13 Jul 2026 05:38:07 -0400
-Received: from forwardcorp1d.mail.yandex.net ([178.154.239.200])
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1wjDGl-0001oY-NR
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 05:48:15 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1wjD6y-0002Q3-Bh; Mon, 13 Jul 2026 05:38:06 -0400
-Received: from mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- (mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- [IPv6:2a02:6b8:c42:94a9:0:640:a3fa:0])
- by forwardcorp1d.mail.yandex.net (postfix) with ESMTPS id 0B8BD80D23;
- Mon, 13 Jul 2026 12:37:58 +0300 (MSK)
-Received: from [IPV6:2a02:6bf:8080:c5a::1:8] (unknown [2a02:6bf:8080:c5a::1:8])
- by mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net (smtpcorp) with ESMTPSA
- id sbKrT10a84Y0-nOS8gQZY; Mon, 13 Jul 2026 12:37:57 +0300
-Precedence: bulk
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
- s=default; t=1783935477;
- bh=CTcAYbgj/3lc1gK9l4ZVRRXqBQQM2jCl6PzUptJwolI=;
- h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
- b=EH+sRfASNV1d5CFYkTftwEXBhDoGEt6XsF0SygT6ZdOLSfYH1FyP1Fjbq1Vg4PSzk
- pSFh1wuhrml/eqZ5oFxLccEtjrLCnSXddTt/TeusIY/TkhltWaAybsFD1E5MbCNG5b
- BSz3uoFWpf3uXREd+fqVoM20dDFL14ppCRni+uN8=
-Authentication-Results: mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net;
- dkim=pass header.i=@yandex-team.ru
-Message-ID: <d1ea2c42-7990-4529-b9f8-d0d9e35ffd51@yandex-team.ru>
-Date: Mon, 13 Jul 2026 12:37:54 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v18 03/14] net/tap: deprecate "no" as special value for
- script/downscript
-To: Markus Armbruster <armbru@redhat.com>
-Cc: jasowang@redhat.com, mst@redhat.com, peterx@redhat.com, farosas@suse.de,
- raphael.s.norwitz@gmail.com, bchaney@akamai.com, qemu-devel@nongnu.org,
- berrange@redhat.com, pbonzini@redhat.com, yc-core@yandex-team.ru,
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1wjDGj-0003gA-Or
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 05:48:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1783936089;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:in-reply-to:in-reply-to:  references:references;
+ bh=f7npngFV1AQ2QwhoSPTXSrhzAwvyxpkZUaMlsdowmIw=;
+ b=CBlv+yRp05ZGGN6wXA1fiC5RkumfKNRNVmZhtpuVvbQtNRWeAU2jBTm4iYYd+YN/qHcKWD
+ Wm6OtDE0odcsfP1bjkZK+7pTnAa4na/PsLgqNZ3EmMrafXl5ddV99B93rB7KHXLZWwYYfW
+ A4ooRfQgybYxbXFpO85F2gdeXS7UbMM=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-578-2WXUjvIHNqGIPGVhxRUOPw-1; Mon,
+ 13 Jul 2026 05:48:05 -0400
+X-MC-Unique: 2WXUjvIHNqGIPGVhxRUOPw-1
+X-Mimecast-MFC-AGG-ID: 2WXUjvIHNqGIPGVhxRUOPw_1783936083
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 79E7D18052F2; Mon, 13 Jul 2026 09:48:01 +0000 (UTC)
+Received: from redhat.com (unknown [10.44.50.22])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id CA4BC195604B; Mon, 13 Jul 2026 09:47:52 +0000 (UTC)
+Date: Mon, 13 Jul 2026 10:47:49 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+Cc: Markus Armbruster <armbru@redhat.com>, jasowang@redhat.com,
+ mst@redhat.com, peterx@redhat.com, farosas@suse.de,
+ raphael.s.norwitz@gmail.com, bchaney@akamai.com,
+ qemu-devel@nongnu.org, pbonzini@redhat.com, yc-core@yandex-team.ru,
  mark.caveayland@nutanix.com,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Sergio Lopez <slp@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
@@ -55,31 +61,41 @@ Cc: jasowang@redhat.com, mst@redhat.com, peterx@redhat.com, farosas@suse.de,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Bernhard Beschow <shentey@gmail.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Jason Wang <jasowangio@gmail.com>,
- Eric Blake <eblake@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Jason Wang <jasowangio@gmail.com>, Eric Blake <eblake@redhat.com>,
  "open list:Incompatible changes" <devel@lists.libvirt.org>,
  "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>,
  "open list:e500" <qemu-ppc@nongnu.org>,
  "open list:Microchip PolarFi..." <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH v18 03/14] net/tap: deprecate "no" as special value for
+ script/downscript
+Message-ID: <alS0RZqeyEOVy6e8@redhat.com>
 References: <20260710191809.721154-1-vsementsov@yandex-team.ru>
  <20260710191809.721154-4-vsementsov@yandex-team.ru>
  <87ech7uycy.fsf@pond.sub.org>
-Content-Language: en-US
-From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-In-Reply-To: <87ech7uycy.fsf@pond.sub.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=178.154.239.200;
- envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1d.mail.yandex.net
+ <d1ea2c42-7990-4529-b9f8-d0d9e35ffd51@yandex-team.ru>
+MIME-Version: 1.0
+In-Reply-To: <d1ea2c42-7990-4529-b9f8-d0d9e35ffd51@yandex-team.ru>
+User-Agent: Mutt/2.3.2 (2026-04-26)
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: lN7h0OCZTfF6jKkF0H4oYOYojtEehYgR0uEgrb2RH9I_1783936083
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Received-SPF: permerror client-ip=170.10.133.124;
+ envelope-from=berrange@redhat.com; helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ SPF_HELO_PASS=-0.001,
+ T_SPF_PERMERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
+Precedence: list
 List-Id: <qemu-riscv.nongnu.org>
 List-Unsubscribe: <https://lists.nongnu.org/mailman/options/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=unsubscribe>
@@ -88,59 +104,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 13.07.26 10:45, Markus Armbruster wrote:
-> Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
+On Mon, Jul 13, 2026 at 12:37:54PM +0300, Vladimir Sementsov-Ogievskiy wrote:
+> On 13.07.26 10:45, Markus Armbruster wrote:
+> > Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
+> > 
+> > > The interface is ambiguous, as "no" is valid file name. So,
+> > > using "no" as a special value to disable script is deprecated.
+> > > Use an empty string ("script=" / "downscript=") instead.
+> > > 
+> > > In a future version, "no" will be treated as a plain file name, just
+> > > like any other non-empty value.
+> > > 
+> > > Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
+> > > and qemu-options.hx. Update other docs to use empty string instead of
+> > > "no". Add a warning.
+> > > 
+> > > Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+> > 
+> > [...]
+> > 
+> > > diff --git a/net/tap.c b/net/tap.c
+> > > index fedd48c48d2..1ec9e5ebe6f 100644
+> > > --- a/net/tap.c
+> > > +++ b/net/tap.c
+> > > @@ -103,6 +103,8 @@ static bool tap_is_explicit_no_script(const char *script_arg)
+> > >       }
+> > >       if (strcmp(script_arg, "no") == 0) {
+> > > +        warn_report("script=no/downscript=no is deprecated; "
+> > > +                    "use script=/downscript= instead");
+> > 
+> > net_init_tap() could pass the parameter name for a simpler error
+> > message.  Probably not worth the bother.
+> > 
+> > >           return true;
+> > >       }
+> > 
+> > In net_init_tap_one():
+> > 
+> >             qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
+> >                               script ?: "no", downscript ?: "no");
+> > 
+> > This sets nc->info_str, which is shown by "info network".  Should we
+> > replace "no" by ""?
+> > 
 > 
->> The interface is ambiguous, as "no" is valid file name. So,
->> using "no" as a special value to disable script is deprecated.
->> Use an empty string ("script=" / "downscript=") instead.
->>
->> In a future version, "no" will be treated as a plain file name, just
->> like any other non-empty value.
->>
->> Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
->> and qemu-options.hx. Update other docs to use empty string instead of
->> "no". Add a warning.
->>
->> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-> 
-> [...]
-> 
->> diff --git a/net/tap.c b/net/tap.c
->> index fedd48c48d2..1ec9e5ebe6f 100644
->> --- a/net/tap.c
->> +++ b/net/tap.c
->> @@ -103,6 +103,8 @@ static bool tap_is_explicit_no_script(const char *script_arg)
->>       }
->>   
->>       if (strcmp(script_arg, "no") == 0) {
->> +        warn_report("script=no/downscript=no is deprecated; "
->> +                    "use script=/downscript= instead");
-> 
-> net_init_tap() could pass the parameter name for a simpler error
-> message.  Probably not worth the bother.
-> 
->>           return true;
->>       }
->>   
-> 
-> In net_init_tap_one():
-> 
->             qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
->                               script ?: "no", downscript ?: "no");
-> 
-> This sets nc->info_str, which is shown by "info network".  Should we
-> replace "no" by ""?
-> 
+> Agree, will do.
 
+Would it be better to not include the script/downscript parameters at
+all if they're disabled ?
 
-Agree, will do.
-
-
+With regards,
+Daniel
 -- 
-Best regards,
-Vladimir
+|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
+|: https://libvirt.org          ~~          https://entangle-photo.org :|
+|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+
 
