@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 803BCC43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 07:45:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77CDAC43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 08:18:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjBM6-0000Ml-Tf; Mon, 13 Jul 2026 03:45:35 -0400
+	id 1wjBrZ-0000Fy-OT; Mon, 13 Jul 2026 04:18:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wjBM4-0000MR-G0
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 03:45:32 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wjBqp-0000B5-GL
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 04:17:27 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wjBM2-0003pD-DY
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 03:45:32 -0400
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wjBqm-0000HT-IY
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 04:17:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1783928729;
+ s=mimecast20190719; t=1783930635;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mKVnbI611gExUMjuzjUm1eZVIqPdwDXtnBh9poHdS4c=;
- b=WTbC5ZbJ3RLe7K2qQigHMY+ZtUBvFWA45sG8OsvjTc2DAU9U2IPiv5vgn96UK4ctQVNOPI
- CAyNpkEvRLMuNW1o7QiiP6vYn+OvEttt32GAbIo+m2+mCrsgEUnuvqqdhsOq2jaqOG/t5D
- qPHcWaQNmWHgm2WaK3+XEb9U5ZGvSqg=
+ bh=n7+cgzFKPkYQX3yBAkydO3mKZsnuRctVg0sZJ8aNOkI=;
+ b=SWM7ZlXb3AtgTuLY25IG7+pxKvkB0Il0QG8J24qrVJuBe3skC8pWtA+H449O4YC2Rqxrem
+ gbvXz2p2yZQuFAEsTPoNl0PSqEEzSgVZROXMo71AdYNBp6tChA7Urwm/uaSWz4iZ6YmT0/
+ lupGnChY5ytOhNOKkYyemPzlQ0Ql7Yc=
 Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-245-IZooiFzcPA6IroMRGoyIwg-1; Mon,
- 13 Jul 2026 03:45:24 -0400
-X-MC-Unique: IZooiFzcPA6IroMRGoyIwg-1
-X-Mimecast-MFC-AGG-ID: IZooiFzcPA6IroMRGoyIwg_1783928722
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-180-VlHAnnX3MxWTkaYABm_7jQ-1; Mon,
+ 13 Jul 2026 04:17:12 -0400
+X-MC-Unique: VlHAnnX3MxWTkaYABm_7jQ-1
+X-Mimecast-MFC-AGG-ID: VlHAnnX3MxWTkaYABm_7jQ_1783930631
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4EE9B18002C3; Mon, 13 Jul 2026 07:45:21 +0000 (UTC)
+ id 13B7B180064A; Mon, 13 Jul 2026 08:17:11 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.44.22.4])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 1509E765; Mon, 13 Jul 2026 07:45:20 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 66EDF30001A1; Mon, 13 Jul 2026 08:17:10 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id A638D21E6920; Mon, 13 Jul 2026 09:45:17 +0200 (CEST)
+ id EA00221E6920; Mon, 13 Jul 2026 10:17:07 +0200 (CEST)
 From: Markus Armbruster <armbru@redhat.com>
-To: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-Cc: jasowang@redhat.com,  mst@redhat.com,  peterx@redhat.com,
- farosas@suse.de,  raphael.s.norwitz@gmail.com,  bchaney@akamai.com,
- qemu-devel@nongnu.org,  berrange@redhat.com,  pbonzini@redhat.com,
- yc-core@yandex-team.ru,  mark.caveayland@nutanix.com,  Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,  Sergio Lopez <slp@redhat.com>,  Zhao
- Liu <zhao1.liu@intel.com>,  Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,  "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>,  Bernhard Beschow <shentey@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Jason Wang <jasowangio@gmail.com>,  Eric Blake
- <eblake@redhat.com>,  devel@lists.libvirt.org (open list:Incompatible
- changes),  xen-devel@lists.xenproject.org (open list:X86 Xen CPUs),
- qemu-ppc@nongnu.org (open list:e500),  qemu-riscv@nongnu.org (open
- list:Microchip PolarFi...)
-Subject: Re: [PATCH v18 03/14] net/tap: deprecate "no" as special value for
- script/downscript
-In-Reply-To: <20260710191809.721154-4-vsementsov@yandex-team.ru> (Vladimir
- Sementsov-Ogievskiy's message of "Fri, 10 Jul 2026 22:17:52 +0300")
-References: <20260710191809.721154-1-vsementsov@yandex-team.ru>
- <20260710191809.721154-4-vsementsov@yandex-team.ru>
-Date: Mon, 13 Jul 2026 09:45:17 +0200
-Message-ID: <87ech7uycy.fsf@pond.sub.org>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,  qemu-devel@nongnu.org,
+ alistair23@gmail.com,  qemu-riscv@nongnu.org,
+ bin.meng@processmission.com,  mzamazal@redhat.com,  sgarzare@redhat.com
+Subject: Re: [PATCH 2/2] MAINTAINERS: Mark "vhost-user-scmi" orphaned
+In-Reply-To: <650b9d5c-ca79-447c-b91d-a83d017f42a6@oss.qualcomm.com>
+ ("Philippe =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Mon, 13 Jul 2026
+ 09:11:34 +0200")
+References: <20260710114305.2961898-1-armbru@redhat.com>
+ <20260710114305.2961898-3-armbru@redhat.com>
+ <20260711035848-mutt-send-email-mst@kernel.org>
+ <65079ad4-3ab9-4ad6-b683-09d46c72b266@oss.qualcomm.com>
+ <20260713025003-mutt-send-email-mst@kernel.org>
+ <650b9d5c-ca79-447c-b91d-a83d017f42a6@oss.qualcomm.com>
+Date: Mon, 13 Jul 2026 10:17:07 +0200
+Message-ID: <87mrvvtibg.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: CIMojFUvvBgFuBS09sQep9o0-gJ8ti5br-RsSR_fylg_1783928722
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: 0Z9XNR-Q3IoVL4FNi7w7zKJ2M_DJbyjeRKKK3Uauk0M_1783930631
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
-Received-SPF: permerror client-ip=170.10.129.124;
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: permerror client-ip=170.10.133.124;
  envelope-from=armbru@redhat.com; helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
  SPF_HELO_PASS=-0.001,
  T_SPF_PERMERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -101,48 +96,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
+Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com> writes:
 
-> The interface is ambiguous, as "no" is valid file name. So,
-> using "no" as a special value to disable script is deprecated.
-> Use an empty string ("script=" / "downscript=") instead.
+> On 13/7/26 08:52, Michael S. Tsirkin wrote:
+>> On Mon, Jul 13, 2026 at 08:13:38AM +0200, Philippe Mathieu-Daud=C3=A9 wr=
+ote:
+>>> On 11/7/26 10:00, Michael S. Tsirkin wrote:
+>>>> On Fri, Jul 10, 2026 at 01:43:05PM +0200, Markus Armbruster wrote:
+>>>>> Commit a5dab090e1 (hw/virtio: Add boilerplate for vhost-user-scmi
+>>>>> device, 2023-06-28) added the section with S: Supported, but no M:.
+>>>>> This makes no sense.  Downgrade to S: Orphan.
+>>>>>
+>>>>> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+>>>>
+>>>>
+>>>> No, this makes sense. The reason this section was added is so that Mil=
+an can
+>>>> get copied on vhost-user-scmi but not other virtio stuff:
+>>>>
+>>>> ./scripts/get_maintainer.pl -f hw/virtio/vhost-user-scmi.c
+>>>> Milan Zamazal <mzamazal@redhat.com> (reviewer:vhost-user-scmi)
+>>>> "Michael S. Tsirkin" <mst@redhat.com> (supporter:vhost)
+>>>> Stefano Garzarella <sgarzare@redhat.com> (reviewer:vhost)
+>>>> qemu-devel@nongnu.org (open list:All patches CC here)
+>>>>
+>>>> Pls drop this patch.
+>>>>
+>>>>> ---
+>>>>>    MAINTAINERS | 2 +-
+>>>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>>
+>>>>> diff --git a/MAINTAINERS b/MAINTAINERS
+>>>>> index aa2df9cbe3..4d558ddee9 100644
+>>>>> --- a/MAINTAINERS
+>>>>> +++ b/MAINTAINERS
+>>>>> @@ -2622,7 +2622,7 @@ F: include/hw/virtio/vhost-user-snd.h
+>>>>>    vhost-user-scmi
+>>>
+>>> So what we want is to add here:
+>>>
+>>>    M: Michael S. Tsirkin <mst@redhat.com>
+>>>    R: Stefano Garzarella <sgarzare@redhat.com>
+>>
+>> But these files already get M from the match against hw/virtio/ -
+>> what am I missing?
 >
-> In a future version, "no" will be treated as a plain file name, just
-> like any other non-empty value.
->
-> Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
-> and qemu-options.hx. Update other docs to use empty string instead of
-> "no". Add a warning.
->
-> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+> Yeah, just trying to make Markus script happy ;)
 
-[...]
+Appreciate the kindness!
 
-> diff --git a/net/tap.c b/net/tap.c
-> index fedd48c48d2..1ec9e5ebe6f 100644
-> --- a/net/tap.c
-> +++ b/net/tap.c
-> @@ -103,6 +103,8 @@ static bool tap_is_explicit_no_script(const char *script_arg)
->      }
->  
->      if (strcmp(script_arg, "no") == 0) {
-> +        warn_report("script=no/downscript=no is deprecated; "
-> +                    "use script=/downscript= instead");
+In decreasing importance:
 
-net_init_tap() could pass the parameter name for a simpler error
-message.  Probably not worth the bother.
+1. Correct get_maintainers.pl output
 
->          return true;
->      }
->  
+2. Legible MAINTAINERS
 
-In net_init_tap_one():
-
-           qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
-                             script ?: "no", downscript ?: "no");
-
-This sets nc->info_str, which is shown by "info network".  Should we
-replace "no" by ""?
+99. My script is happy.
 
 [...]
 
