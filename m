@@ -4,190 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D1C7C43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 10:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9897C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 12:03:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjEK9-0004Q7-GL; Mon, 13 Jul 2026 06:55:45 -0400
+	id 1wjFNW-00077o-3n; Mon, 13 Jul 2026 08:03:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wjEJn-00043k-P8
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 06:55:24 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
+ id 1wjFNS-00075l-MJ; Mon, 13 Jul 2026 08:03:14 -0400
+Received: from mail-koreacentralazlp170130006.outbound.protection.outlook.com
+ ([2a01:111:f403:c40f::6] helo=SEYPR02CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wjEJk-0004e1-RJ
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 06:55:23 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66D9M1Ef1090406
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 10:55:19 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Xn3S2PvtzozBUUcxgsDoJvy0/X/Pjk+r9GG0gXpZTzA=; b=LuZkT2fmn+UMJ46d
- gDUpBDnZL4ygj7XF5a9Cu8rpRrFRcqdHJGU3F+SjoGj8gLkxl0z1h1snlhQggW8w
- gZQm/fmdUCKGRCLXvkKeEpLIdf7HHcXq7n2aR0EdS60SxKxLdX4tQIifyF2/sbFh
- AM6FHtdjx+09NOzfiqDBmCjgOnQzGF0VEXk3mjKOeNMdDZ5IzlwpSmv0arCuEH45
- iace3G28+R44E7Sia1OjRNxWjoHPcbqfrkdTfj/1limULqfY+MnRvF0BsdDfqBmR
- lcarmzV8H+OKZr7B2Yi76qu5pQnhla+oVFsWQyEf1p5UZ37dWOXD8NHS282q7eH6
- rqh72Q==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fcwavrau6-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 10:55:19 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-51c0f0a0760so66953691cf.2
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 03:55:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783940118; x=1784544918; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Xn3S2PvtzozBUUcxgsDoJvy0/X/Pjk+r9GG0gXpZTzA=;
- b=dhNHPgav0FEX4+Znbo0LsDSULtm2DH29Ly+lOzh19HoRWdWxos+qnwlGHMZ33dO82b
- IC1wGUfsXzyH1HaTwxgqtaI83V/wnYgOe4dDQfv3CFJPJ41j1FJJBQWLuVIo4bZvPlus
- mAPZnbz0aw0V2dUjdFQHCkz+31q+CtobIE8MLiQMEHlLyZrNTmS3jYzG9J6SNW6AUGZw
- eKAis1zukgQYwAzFF75CUIJbddmjBN5dBwczrD7B2z6RV9KPfJfTP6puGgXezXu4JwMX
- ZWITa++JXJXopjECCGdFmtdPSjEEO3MgcRO8DSytFXkoLq2NNt3wOSRdljE0dzjr9ALB
- lLdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783940118; x=1784544918;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Xn3S2PvtzozBUUcxgsDoJvy0/X/Pjk+r9GG0gXpZTzA=;
- b=cmFLHbbXXAGPXxPrNI4VWrcZSEHBQhKYyuyiN/mrOH3ztGZl3yODAWg4rzPpbmx3jG
- oYJEMSyeWml+jqhrdM4LrupLky8elIpycRY9RiRvQL/a0lyID6sIaiU0KO+FXxsUSiKe
- VsUdmJwD5Wi92wqxfvcAOXqqhz9Fdmu+NMLLYOMKAbKjqr8Hgsq28K+nROrc/18o6d9v
- MVMUgp67K+yb0cF8vVKRUm0vlyHswpJVYCAW87IokWvEv3GTiRGDUWr9dmzvtT9qgiKP
- 1lnm2gRiNonkOvvWIOamGNuPJJP3YaywDe6rxkzYygkQat/0ye6bqnH1W+9L3w/LyGnc
- NtQg==
-X-Forwarded-Encrypted: i=1;
- AHgh+RpqGCXD4ml4iKdN5ZqU1LNIRh7WVHJSo0KOoRtxQ8/f+VAO0yydDz04Vz5qs3D+MTp263GQfgQImJOr@nongnu.org
-X-Gm-Message-State: AOJu0YzY2iNQk4ESw+ZIV1yRwcxDYakvib3Fu/pQr/oYj3ePnQISxZzJ
- K3e7Yizk6CoPi1CxV1KKQfPcXrcYntETmh18HgkzWryNLQQNEkVNNWIaxnkKxFfSKL5oU2kBbhA
- DyAK/f8kQmRNeWqjYmYW8W18TY8rUBRRF/JOVmbcIUZrkTd9zK0ZZoQwIUA==
-X-Gm-Gg: AfdE7cnYQlHbC4xswbfPjIotsoZ8SxPBk74QA8eRVCKfuzkrLM/HMuqukJztPxXJqd0
- K19HpNAcv9WmrnN+X+CpCjwG2EPi8qG6agTxnQ5TYz7vtH8ecZyhd1jpnW4UrYsBGD0uCXKFgO+
- +tu7b+0BM03ehdbBd2yOoDbIl3msyNSoTDPavkkyRpky8VsBsk/Yd+hAXUuBEIzUl6WcPnu71r3
- GDIMfIKXvUvAyQqm7qbD3+slHUMVzBR5ppM/M1vH3qBrMTjnK0h1Hd1fSipJNUjmOO3GgFVeXMp
- U2gN5EPfLSLmV942ymsoOzzxLQ6Kp+bJmpfK74QnXJg1R02I67TgNIVoZEAzerylTZx6Fd55ndU
- hTOSTk5W0CTKOQrVpjh/kYD9jYGySVWoUFx84POCGGUb/SH5bsYgSqtM/ITLJFw==
-X-Received: by 2002:a05:622a:ce:b0:50d:3e1e:7998 with SMTP id
- d75a77b69052e-51cbf1bf868mr89378451cf.37.1783940118148; 
- Mon, 13 Jul 2026 03:55:18 -0700 (PDT)
-X-Received: by 2002:a05:622a:ce:b0:50d:3e1e:7998 with SMTP id
- d75a77b69052e-51cbf1bf868mr89378271cf.37.1783940117742; 
- Mon, 13 Jul 2026 03:55:17 -0700 (PDT)
-Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493eb6ccaf1sm630091325e9.2.2026.07.13.03.55.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Jul 2026 03:55:17 -0700 (PDT)
-Message-ID: <63a772b4-caaf-4708-9014-dc40e5b03bcf@oss.qualcomm.com>
-Date: Mon, 13 Jul 2026 12:55:13 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 003/134] qdev: Reintroduce qdev_new() with a mandatory
- QOM parent
-Content-Language: en-US
-To: Alexander Graf <graf@amazon.com>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, Song Gao <17746591750@163.com>,
- Aditya Gupta <adityag@linux.ibm.com>,
- Alexey Kardashevskiy <aik@ozlabs.ru>, Farhan Ali <alifm@linux.ibm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <alistair@alistair23.me>,
- Antony Pavlov <antonynpavlov@gmail.com>,
- Markus Armbruster <armbru@redhat.com>, Artyom Tarasenko
- <atar4qemu@gmail.com>,
- BALATON Zoltan <balaton@eik.bme.hu>, Felipe Balbi <balbi@kernel.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Brian Cain <brian.cain@oss.qualcomm.com>,
- Hendrik Brueckner <brueckner@linux.ibm.com>,
+ (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
+ id 1wjFNR-0005bn-1D; Mon, 13 Jul 2026 08:03:14 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Zsg7xe1obnD1/1WgwT6UPUzlYZgIIl/P9olPFcPpIHweEJmfSR/aWu8zE2/lOkySWLx8yJegauR/gROuFp2D18jtHohPLxnHQnS+riauMa8HTKwAY9n6oJHROxMLDd4sNdR79xLMEPUrepBAkQIa5ezWEEyHs5BrP6ftHjovyxaRjTdDm/Hpj9QEcjbnsDLTntfPljdIS4aHgEwQrTaCAZSdj/wAIDK4pOCHzJBI88OEke0AePXWRwc9uFq0nx/gK3Uz0p+03sdgPRGEdvOcNGEUyQF2eK8hD8bylxgfbtw6E5+4dmqlehfkGFMeqeeaZFhzaM9j03CNyYnQMdT5eg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ltYObs53du3reAhlAkewgRUST/IgwpzhJT/qTN66TkI=;
+ b=wrCubOcrJpidt3yZGjvcGoBIV1wCB9Z4aAD/sBpjSNyXQpn63f1zKcHZ6FW0c/JnkMDckx6eya/Nd7P9rE4aoWGrXzf+Rs830KhA4aEs1i2irU/IVc03pOObQqiEBUUpAX6+yDR92xN6QZL6haPoBgW4DS1FzDxQq74xOTECCffBYarfN0maK4Q2GBDbWpNHe9N9on6xnYm0Vl/FFA8vFPQja5Wc1zzmAtMTrOYx7pysHwOEQNgJlS2gynErC6iSO1jUzpNWCR+FJGsnkdKxw/L990LS6h1mhCtO1iGfyYyqSR25bM+8N2NS4WMy5C0nQyvjdY2Ju85uGyYzdF8HTA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=processmission.com; dmarc=pass action=none
+ header.from=processmission.com; dkim=pass header.d=processmission.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ltYObs53du3reAhlAkewgRUST/IgwpzhJT/qTN66TkI=;
+ b=QlPblmKNrpdp7BQ5STM+xg3pDP1WMp5ONzcmXA6/sRRHMwe3A4TodN+wV30Tu9i6GK5PIEK78Smb/IyPpVrtJQBxkBC5d6v6v6QaW/mlSRH1ooaD6BWUmwfR7rk9+7TL1zioExdwlJiEkRb+7hpOKQmMTHNgUe2XlJsHAaehzGV7znL/YKT+vxtZa7WLu6R6b97lGAeu4y3T2OVAC1twGmVrp/GWrx6DUOYHxT08YHcNpRd6/AzZ2PUKYkO1cwVcs4vlPeglyAMG7miOGlieYy8xPM7xjDIX6uJnTg5d0RlLU6lliOj5e6jPoObv6eg9dqYPE3q0y+2Qn1LbNpkOHA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=processmission.com;
+Received: from KL1PR02MB4977.apcprd02.prod.outlook.com (2603:1096:820:71::8)
+ by SEZPR02MB6411.apcprd02.prod.outlook.com (2603:1096:101:126::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.202.18; Mon, 13 Jul
+ 2026 12:03:02 +0000
+Received: from KL1PR02MB4977.apcprd02.prod.outlook.com
+ ([fe80::9fdf:2557:8351:6c03]) by KL1PR02MB4977.apcprd02.prod.outlook.com
+ ([fe80::9fdf:2557:8351:6c03%4]) with mapi id 15.21.0202.014; Mon, 13 Jul 2026
+ 12:03:02 +0000
+From: Bin Meng <bin.meng@processmission.com>
+To: QEMU <qemu-devel@nongnu.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Chao Liu <chao.liu@processmission.com>,
- Huacai Chen <chenhuacai@kernel.org>,
- =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Helge Deller <deller@gmx.de>, Dorjoy Chowdhury <dorjoychy111@gmail.com>,
- "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
- Alexandre Iooss <erdnaxe@crans.org>, Eric Farman <farman@linux.ibm.com>,
- Francisco Iglesias <francisco.iglesias@amd.com>,
- Gaurav Sharma <gaurav.sharma_7@nxp.com>, Gautam Gala <ggala@linux.ibm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
- Jan Kiszka <jan.kiszka@web.de>, Max Filippov <jcmvbkbc@gmail.com>,
- Joel Stanley <joel@jms.id.au>, Jared Rossi <jrossi@linux.ibm.com>,
- Tyrone Ting <kfting@nuvoton.com>, Frederic Konrad
- <konrad.frederic@yahoo.fr>, Laurent Vivier <laurent@vivier.eu>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Bibo Mao <maobibo@loongson.cn>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Glenn Miles <milesg@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- Michael Rolnik <mrolnik@gmail.com>, "Michael S . Tsirkin" <mst@redhat.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Halil Pasic <pasic@linux.ibm.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
- Samuel Tardieu <sam@rfc1149.net>, Bernhard Beschow <shentey@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Thomas Huth <th.huth+qemu@posteo.eu>, Ran Wang <wangran@bosc.ac.cn>,
- Hao Wu <wuhaotsh@google.com>, =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?=
- <berrange@redhat.com>
-References: <20260711223707.42139-1-graf@amazon.com>
- <20260711223707.42139-4-graf@amazon.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260711223707.42139-4-graf@amazon.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH] tests/functional/riscv64: sifive_u: Fix kernel command line
+Date: Mon, 13 Jul 2026 20:02:44 +0800
+Message-ID: <20260713120245.781959-1-bin.meng@processmission.com>
+X-Mailer: git-send-email 2.53.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: tsW3fW35DEHxnjy30mkgD7qvU8zLYXEs
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDExMyBTYWx0ZWRfXxdEc7P+Qib7P
- nVqp+p4NNkdrADTH1q+Rk6B5xUvmTt9qqEb8tca0iz9IOg/i1YU5l68xK+/ZIvTyqfqlU3x3wtu
- m2zktkCE3XA73liCHDPMP3hsQRXkWatb51I0dRWvU2Q7SZyf9EVT/GJgt2CvRVMeo8qhtWzuxP8
- +5CnXtSihijsh3fbXLjNtQR6kyqHdXafVBQoMWDnUrJ4/Iptow3Kk+ugA832HkXL22NlabA1a7+
- YzGayc6HKnYUzS4LYvG95yynO+Y7RFCOu4Zyx2vmL+5oRyAAhGFOxjCQdNpf6quTcfmuGKxg+CX
- jxkr5YNhLwnzSsm8eRjG7MQYMNU89LRjKqWGohFGwls3WHx/W0EAn58+u7vrMSC4fITROK0VGsS
- z+rftEjHKzzU5zOHnxTJ+FABJvcMw74fQZDM28oyVruKsQ1vdnUc2dE9isLKxWTybvfRNWz589t
- 00G1rWeRe3dVc2jij/A==
-X-Proofpoint-ORIG-GUID: tsW3fW35DEHxnjy30mkgD7qvU8zLYXEs
-X-Authority-Analysis: v=2.4 cv=dZSwG3Xe c=1 sm=1 tr=0 ts=6a54c417 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=20KFwNOVAAAA:8 a=vggBfdFIAAAA:8 a=EUspDBNiAAAA:8 a=LfsA7Cq2GQzuzbZ-N0YA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDExMyBTYWx0ZWRfX2hYtEX5Fc3lN
- G+H60YA4o1+p+cFt8w5cYvSuRofN+K8QZe2ME6vw8FoAQuHqKXCsnmz55W5GmgR2tcgjDb9Y28f
- 2SxuuQb9KecuVXfeDjMEv/D+qO2D2Ic=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-13_02,2026-07-10_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 adultscore=0 malwarescore=0 spamscore=0
- phishscore=0 impostorscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130113
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain
+X-ClientProxiedBy: SL2P216CA0073.KORP216.PROD.OUTLOOK.COM (2603:1096:101:2::6)
+ To KL1PR02MB4977.apcprd02.prod.outlook.com
+ (2603:1096:820:71::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: KL1PR02MB4977:EE_|SEZPR02MB6411:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e59cb10-f6db-422a-af4f-08dee0d6b05b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|34096008|23010399003|1800799024|366016|376014|56012099006|5023799004|18002099003;
+X-Microsoft-Antispam-Message-Info: T39CVyvYXmEBWvskgmDSx2/Awfi0vC5kXHizL2y71Aa+2YiewixvaWXghrR6lqk1GslngOylvZQ9v1A6b3rk4per8b3ByrOPsPOP/gwedClW1zxtAclm7iFiEU32ggLFI0CIwG6tZNXeZD8F/n6ZwVEYBEBjIkVWBH95U+j1G/zs32Y+aiKacLz3F954Cf3D8G+pVUIbCLAbUfRRr02h+qmg9wwfvbUEcY3cOMxFSKjlrv6VKcwR+3xTRzoVjZf75dHI/2tdjgbMNIv7B2YvVRCYnUKkBg42FzfsUB2uX+d9mmhpk29+bt2b0RHs0qf/3QhYvtAEHXJuMTVbQV0YsGL1e3vYEIjk5TLlCdEsJW2UG+EmpGpPxJ0uxWBMkQjQxxfU90q0LMZB7Le5tu5ycpGuzfTYQg/rrHzPC+Owax/Ewr7AcEW3mb9sFCyPJdFTXOIZySso+jQwIJL8urd1NVMTKUVi6rrdnH0UrkEl753Uz4Y7LjI1+PQeMXzQwn6WrWSOyyRR5+nLrRte+cA69b/oMN6njUAg46yi6Lea3nykJbQKq/iRuBOLx0BstFzqj8GuI+jLA7Bdg72+pZV4xhvZrV3bWpIjf+269RyNe7D3PSaoYqk+SmWtSeTfmgkjrmT0VYqReNJJfZShH/1g6ZqqdBFc9+k32406zXKDRXE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:KL1PR02MB4977.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(34096008)(23010399003)(1800799024)(366016)(376014)(56012099006)(5023799004)(18002099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?rUNcFBO3HlUM7hRnBwBGxJp2cb6SPdlA5kOafCgnwBy5YTmp4+w6N7KG/zch?=
+ =?us-ascii?Q?3KMwD+aIwoUZyLKO3SGNQwOnjC3juZEez4NmwuJFkWrxoWHhiPgyJVR0EtlK?=
+ =?us-ascii?Q?flmoAQvgQzlXTPGkiQkBsI6/6IiRhgv5yekkjqvPESO2tD7FXZX1jYx5fRXm?=
+ =?us-ascii?Q?RNHggeHtRqCcHKEL+l58DnWnapNt+4KQAscnUtcmRAYDJLYtXBzBo7WNG4dB?=
+ =?us-ascii?Q?SiYA07/zNPdjQlwH2CElLwzGeZOwDaEi7SfI1zP3JFYxIZ8ZMKcjW+jXT4gf?=
+ =?us-ascii?Q?py/raO2LIyyws8AyH/DZaNZQ1O776jqPrfXmc4lWYdJzy0FJdObwn2kjuqji?=
+ =?us-ascii?Q?XlELBakwRsExSep6nJwa9IraYWze1mZ+bOiVWRjAjpHvzlRQh0FSfGH9T3tW?=
+ =?us-ascii?Q?jt/9koX4ylp77cswrlm6tt6k1wYug7RHU2WOpQRA1NOL83RamJN9FlPbgY5C?=
+ =?us-ascii?Q?g5f+S4ojY9XlnsYXB/BNAFm6mBe5BWEgYGeB+MNV6FaO8srsCKhCoTGKypkD?=
+ =?us-ascii?Q?5stU5TeSul1BVUFo5oXukk7MEvTSMAgq17t0B0Rceei6kk3rtOYDFTHg0cw8?=
+ =?us-ascii?Q?5iyJa1Hlivfob6Hgpv4FCRwBRWnj5W8UVkLsRhbKSufoRYXKs9urfc9ZuEGQ?=
+ =?us-ascii?Q?nnBwbX51S7AEFg2FoAab/pNC5iZFcoDHIsmMLXT3yI4aHRidewW9iu5izCfi?=
+ =?us-ascii?Q?17EpEynRT2G84oFN4ZaFGOSeGf8OhVlwQjY9UkAmeYLk7ma9zu1wb7VZwFvs?=
+ =?us-ascii?Q?BUaLi3bjxB/5SLkpnAy6XDsbOTK8wvgu9HBPDeTaeUC3xcyiGV6IiMbqCES3?=
+ =?us-ascii?Q?5F12SLpqT3oYjMKph96Kb5EfaS/OZN5BippziaeNuzX5Wm4XWL0H8D6actNw?=
+ =?us-ascii?Q?shbrL1146Xbp4HikmexIA4U+a4f5y/8mVuIvYiGtnol/plKzFfYvQJm8NXGQ?=
+ =?us-ascii?Q?aSlB8VLib2vUhoN440PiwmmfYzH8eta45OaLG+Ogj2psa0yPcNSdvUjvWAv0?=
+ =?us-ascii?Q?IM13o8rsV6HUE5yvloaihjK4gshwzzPO0Q0PYf71DikiBkZEVCGs2YLJTDp+?=
+ =?us-ascii?Q?1iVg/S8VIpexdn/NO+ZDuG6gOsWyHHsZsWWalEAOU8h4qY3EbFk99J8xfYpx?=
+ =?us-ascii?Q?b4+0qF/P5fqhC4wrLQEsJ9+rqg3Rviu93h2bHaB1ZYpKCRBE6VtTTjQGQcEX?=
+ =?us-ascii?Q?vOPpFMe8j+NSuLkF7usVF8vZF17rml+71KwcsMd5WwIL6g9PM2BTaMC8yX1k?=
+ =?us-ascii?Q?2Kh7DQagbclpCQ4SA8CIwl9qV7++M7eE26WOJQjAgAZJOX4lj51YAsFWzfNR?=
+ =?us-ascii?Q?cNjUU7zFzO1G7xStL341ZAiOYjWKnLUWXcGloiJoGkcUn+bEQHmG8AzpZ1Om?=
+ =?us-ascii?Q?kG70B/KVKimc/yDAHrSFZHW6yABIDYUcKEqsFsHEGVo7i11DXx6NwOBLB1Sj?=
+ =?us-ascii?Q?oDAEsSj6W50gc1U01rbnjhiiMKOt4MeLKn642bOoao50NpV4M7XdU68nEGSD?=
+ =?us-ascii?Q?QjJIy5xjLs9wQlxePXiy98VV6zcr4PSTCUpqoGqqkt/yGAb2qqwuZaF8/yTe?=
+ =?us-ascii?Q?rYgqVsLJ7E1eu83txhDQwkw3oGKA9N/QXqJey+Thw2wkiUhIKJnBdJpN16Hg?=
+ =?us-ascii?Q?vi7mrS/FjNYk9CDSeD1XA5AStIhy0CiO2M17LKcJ9hRpY81atVyeXwUIYZyp?=
+ =?us-ascii?Q?LHY8Q0UtDHFaDXsdV74lbRsjBMkMLG/6zL6HtYy9eOoB+nqBwwXt/IPheIQD?=
+ =?us-ascii?Q?IrAHKPC8RU8ohROFmIT7tawuVBvAAAw=3D?=
+X-OriginatorOrg: processmission.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e59cb10-f6db-422a-af4f-08dee0d6b05b
+X-MS-Exchange-CrossTenant-AuthSource: KL1PR02MB4977.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2026 12:03:02.2174 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mOjzL3ixovO04/XkD3nXLHU+Fmw0aRxgo37hOEMXMqnIa8McJzeuff0DBY47HbPhEwTjuEFLtaTUEr1WgBb0dp1EPDUphcm5htzppALA74c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR02MB6411
+Received-SPF: pass client-ip=2a01:111:f403:c40f::6;
+ envelope-from=bin.meng@processmission.com;
+ helo=SEYPR02CU001.outbound.protection.outlook.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -203,35 +141,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/7/26 00:34, Alexander Graf wrote:
-> The previous commit vacated the qdev_new()/qdev_try_new() names.
-> Reintroduce them with the signature we actually want:
-> 
->    DeviceState *qdev_new(Object *parent, const char *id,
->                          const char *type);
-> 
-> which is the qdev-layer, heap-allocated dual of
-> object_initialize_child(): the returned device is created and
-> immediately added to the QOM composition tree as a child of @parent
-> under @id.
-> 
-> Refcount contract: the initial reference is transferred to the
-> child<> property of @parent, so on return the caller does not hold a
-> reference.  Pair with qdev_realize() (not qdev_realize_and_unref()),
-> matching object_initialize_child()'s convention.
-> 
-> qdev_new_orphan() remains for callers that set the parent themselves
-> before realize (notably qdev_device_add(), which parents under
-> /machine/peripheral via qdev_set_id()).  Later patches convert the
-> remaining orphan callers subsystem by subsystem.
-> 
-> Suggested-by: Markus Armbruster <armbru@redhat.com>
-> Assisted-by: Kiro
-> Signed-off-by: Alexander Graf <graf@amazon.com>
-> ---
->   hw/core/qdev.c         | 19 +++++++++++++++++++
->   include/hw/core/qdev.h | 34 ++++++++++++++++++++++++++++++++++
->   2 files changed, 53 insertions(+)
+Build the complete kernel command line before adding it to the QEMU
+arguments. This ensures the panic, noreboot and rootwait options are
+passed to the guest.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Fixes: 7db162fa0138 ("tests/functional: Test SPI-SD adapter without SD card connected")
+Signed-off-by: Bin Meng <bin.meng@processmission.com>
+
+---
+
+ tests/functional/riscv64/test_sifive_u.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tests/functional/riscv64/test_sifive_u.py b/tests/functional/riscv64/test_sifive_u.py
+index 847f709da1..54a0f9c648 100755
+--- a/tests/functional/riscv64/test_sifive_u.py
++++ b/tests/functional/riscv64/test_sifive_u.py
+@@ -35,9 +35,6 @@ def do_test_riscv64_sifive_u_mmc_spi(self, connect_card):
+         kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+                                'earlycon=sbi console=ttySIF0 '
+                                'root=/dev/mmcblk0 ')
+-        self.vm.add_args('-kernel', kernel_path,
+-                         '-append', kernel_command_line,
+-                         '-no-reboot')
+         if connect_card:
+             kernel_command_line += 'panic=-1 noreboot rootwait '
+             self.vm.add_args('-drive', f'file={rootfs_path},if=sd,format=raw')
+@@ -46,6 +43,9 @@ def do_test_riscv64_sifive_u_mmc_spi(self, connect_card):
+             kernel_command_line += 'panic=0 noreboot '
+             pattern = 'Cannot open root device "mmcblk0" or unknown-block(0,0)'
+ 
++        self.vm.add_args('-kernel', kernel_path,
++                         '-append', kernel_command_line,
++                         '-no-reboot')
+         self.vm.launch()
+         self.wait_for_console_pattern(pattern)
+ 
+---
+base-commit: a759542a2c62f0fd3b65f5a66ad9868201014669
+branch: sifive_u
+
+-- 
+2.53.0
+
 
