@@ -4,85 +4,194 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59485C43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 10:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 162E1C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 10:55:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjDqk-00062i-OJ; Mon, 13 Jul 2026 06:25:22 -0400
+	id 1wjEJ8-0003e3-4r; Mon, 13 Jul 2026 06:54:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1wjDqc-0005tv-Vs; Mon, 13 Jul 2026 06:25:15 -0400
-Received: from forwardcorp1d.mail.yandex.net
- ([2a02:6b8:c41:1300:1:45:d181:df01])
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wjEJ6-0003cS-Ba
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 06:54:40 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1wjDqa-00009W-BS; Mon, 13 Jul 2026 06:25:14 -0400
-Received: from mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- (mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- [IPv6:2a02:6b8:c42:94a9:0:640:a3fa:0])
- by forwardcorp1d.mail.yandex.net (postfix) with ESMTPS id E245480A6F;
- Mon, 13 Jul 2026 13:25:06 +0300 (MSK)
-Received: from [IPV6:2a02:6bf:8080:c5a::1:8] (unknown [2a02:6bf:8080:c5a::1:8])
- by mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net (smtpcorp) with ESMTPSA
- id 5PLwO20aCOs0-DjAPAf6i; Mon, 13 Jul 2026 13:25:06 +0300
-Precedence: bulk
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
- s=default; t=1783938306;
- bh=Xb6lTjMjgoo21SCvMGQmRN28gYkol6ja+M50LeEPL2Y=;
- h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
- b=n9xOuQpm6GoMlPI1FK7FCzud2bBqTOOjHsNOgKE4vGLewqx7WWln0nMUBvZLnFPCU
- F1/+B1MVtUNPVonAy3O/5V90V9eJkcpbzi9EZXBqqGAXrLOR/a2/y0lD0ozskJLxif
- 25nRapiDDO3NFqrsQwZdhPAl7mUnlxtFtPioRJkM=
-Authentication-Results: mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net;
- dkim=pass header.i=@yandex-team.ru
-Message-ID: <4062b9a2-be54-4a32-8d7d-8eb101576afb@yandex-team.ru>
-Date: Mon, 13 Jul 2026 13:25:05 +0300
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wjEJ3-0004MW-AW
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 06:54:40 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66D9dZM0952964
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 10:54:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ LW3fYohk/aaKNf9gFX7XJAGrK7Rod9ZwfEsbUEYpc0k=; b=TAs3HUWcKq3c4dR1
+ pBV3PfPnOs49dDkaDFeAiuoKfk+IfXVqQeAFNXYssHj6LesQwEWOuktlLq+8EYvf
+ j5/kNgTo5mIKFstpKNeiYnN9sm0bDDJODab1KswSIv5eH2Dh7QgVW6Hzk+ADBUm0
+ RZgFtt4q0VWMrPqzgSfFd/4YlvZ6V9D4c2L9j1MX72VhpEKnGSjj3NSlDM1Pt8eY
+ B4YnxJ/ghWHop+hZe4q99TdmRKla1iRA7Q0UeXQWZhAJTWJUtzKk1dYM730MWHi4
+ 8ahXBbRcRa8NE9WAs21U+azV0vdz7z/4LGgwgwgi2moaYpFU7iwLiqH22X4OjTV2
+ hbT1VQ==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fcwk3g8ey-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 10:54:35 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-51c0d6a2f4cso41886581cf.3
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 03:54:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1783940074; x=1784544874; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=LW3fYohk/aaKNf9gFX7XJAGrK7Rod9ZwfEsbUEYpc0k=;
+ b=bbXJ9jajDgbLOJrh5rP0iWzOaegs67Cqp7LOqQCnWNbDsyeTN/yJUL3JLNQIKE5jt+
+ OEX5/HnhMF4MFetJbQ6i1K5GakvZGHHX0E2qU4BYHWOCykTl0ifuSzcxvhpVLuSsptgl
+ 2IJJdN1uYwkTuVnU0NGhd3U5hxqlrG6nHmEqCnGOxT213ECnwgyqpbvDAFl83hE1jDqk
+ cnmasReAdIg4xS6dKJHm6n98HlShrxv8j3vBOnh01e67zEpO2eQy9X/79QY7RR/9YV+G
+ WfH7vsjXKyHFi/0Qt0rhTe9RAtoOytnyix+5UpTJ/zxTK4Ve8B1/FSeqQfYPW1xhLW0g
+ dMvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783940074; x=1784544874;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=LW3fYohk/aaKNf9gFX7XJAGrK7Rod9ZwfEsbUEYpc0k=;
+ b=ilelccxY9XLxvhxxTSKxTGn+pyQwcHt71yAlwqMrtHjMxEM6t79MqpREdrIdH10xLQ
+ kWRRV8rTAwQTw+tbQxGROGi5YVexhT1ifniE3zE9RhACTk71+8QbsX0oafXJw/WN1rOP
+ aVnNtKLYg4TwnkC30NQHYPdIIRZhqz2Ztnyf1UxscCOXuQXWX2i7VqQkbQTWCxEFOZ1n
+ AD95RQaypFdc0R+or0ayzyjMQ6qSOU82flddAH5//Wq3YRPnJHIVk62IvEwnJY6PEcAx
+ GTUCNSg9l2DvShZ8dKaosDEBgSFCHDaCjmGAsHaiZ/o307D0yAqWZ6dtz4t2S+gn6iJF
+ 9eSg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rox0RxHzkNPDXdxO4t2EcmGTy80cFQtGqh02RS+wfn2oxU8K5K5yeycDc5aCbznesFUSjWouKaAcJQf@nongnu.org
+X-Gm-Message-State: AOJu0YwbEGAN/yecKiN/5aX6ILVUV6vDI/MM8RmIfWCK2y6EbYtz7jrJ
+ 3/DZmTbGbIKKw6zBhkuuoLXfnVUBMZPngHvF8MjW48t2Jdn+rQjs1ff4WxKU4bcLVm0NVxQCpZD
+ 1WcSqZ5vyA+eN3S6UReDzNbSyanj9iS9bmg+jZsyzVKX5/aG4C/6JL4MsOA==
+X-Gm-Gg: AfdE7cmZ4Vo09POklMmmVWc8WdKBo6b1seiKivjLKaCyUcAm3yww/aAL5Y2WWvXa8YY
+ Z+Zhv/jUWS6fDlxSxVYQHMiFPn2VMxe9bL/mRUv83l8Gf5VmllMJbMT4EbhPWtNu0bHSNeBslv6
+ 8FHQF4mvnoviB8ZglWEPpJWGJ/+JDsNZVIXAID+mL22orYb7fx4/kE7k5VHiZ/BzQ76FYO98geo
+ hPkldP1p1kjTk7dQehR0GKV0bsxoWdGsaUYgQaEmaT4+urfmx95vzsx7NLFOAA3K/gg5PX2oRI9
+ fUJp9M4oa6rEesx47yWkKMfvuCoqhYXtuoCbyIn58GRr7m26ta2Ah7VuARcDqWeI0IiAcS8Szdt
+ naPd3MXDz49DGaomb8Eac30eM+Ij5aktsYZvzBV5nCAlg9jvqIHR5SrQwO/INyw==
+X-Received: by 2002:a05:622a:1456:b0:51c:f3:34de with SMTP id
+ d75a77b69052e-51cbf0bf820mr77332521cf.20.1783940074391; 
+ Mon, 13 Jul 2026 03:54:34 -0700 (PDT)
+X-Received: by 2002:a05:622a:1456:b0:51c:f3:34de with SMTP id
+ d75a77b69052e-51cbf0bf820mr77332081cf.20.1783940073910; 
+ Mon, 13 Jul 2026 03:54:33 -0700 (PDT)
+Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493fbae1cdbsm178692545e9.10.2026.07.13.03.54.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Jul 2026 03:54:33 -0700 (PDT)
+Message-ID: <c8081b11-b38e-4662-97a4-46734cd9d92e@oss.qualcomm.com>
+Date: Mon, 13 Jul 2026 12:54:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v18 03/14] net/tap: deprecate "no" as special value for
- script/downscript
-To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: Markus Armbruster <armbru@redhat.com>, jasowang@redhat.com,
- mst@redhat.com, peterx@redhat.com, farosas@suse.de,
- raphael.s.norwitz@gmail.com, bchaney@akamai.com, qemu-devel@nongnu.org,
- pbonzini@redhat.com, yc-core@yandex-team.ru, mark.caveayland@nutanix.com,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Sergio Lopez <slp@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Bernhard Beschow <shentey@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Jason Wang <jasowangio@gmail.com>,
- Eric Blake <eblake@redhat.com>,
- "open list:Incompatible changes" <devel@lists.libvirt.org>,
- "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>,
- "open list:e500" <qemu-ppc@nongnu.org>,
- "open list:Microchip PolarFi..." <qemu-riscv@nongnu.org>
-References: <20260710191809.721154-1-vsementsov@yandex-team.ru>
- <20260710191809.721154-4-vsementsov@yandex-team.ru>
- <87ech7uycy.fsf@pond.sub.org>
- <d1ea2c42-7990-4529-b9f8-d0d9e35ffd51@yandex-team.ru>
- <alS0RZqeyEOVy6e8@redhat.com>
+Subject: Re: [RFC PATCH 004/134] sysbus: Make
+ sysbus_create_simple()/_varargs() take a QOM parent
 Content-Language: en-US
-From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-In-Reply-To: <alS0RZqeyEOVy6e8@redhat.com>
+To: Alexander Graf <graf@amazon.com>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, Song Gao <17746591750@163.com>,
+ Aditya Gupta <adityag@linux.ibm.com>,
+ Alexey Kardashevskiy <aik@ozlabs.ru>, Farhan Ali <alifm@linux.ibm.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Antony Pavlov <antonynpavlov@gmail.com>,
+ Markus Armbruster <armbru@redhat.com>, Artyom Tarasenko
+ <atar4qemu@gmail.com>,
+ BALATON Zoltan <balaton@eik.bme.hu>, Felipe Balbi <balbi@kernel.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>,
+ Hendrik Brueckner <brueckner@linux.ibm.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Huacai Chen <chenhuacai@kernel.org>,
+ =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ Helge Deller <deller@gmx.de>, Dorjoy Chowdhury <dorjoychy111@gmail.com>,
+ "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Eric Farman <farman@linux.ibm.com>,
+ Francisco Iglesias <francisco.iglesias@amd.com>,
+ Gaurav Sharma <gaurav.sharma_7@nxp.com>, Gautam Gala <ggala@linux.ibm.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+ Jan Kiszka <jan.kiszka@web.de>, Max Filippov <jcmvbkbc@gmail.com>,
+ Joel Stanley <joel@jms.id.au>, Jared Rossi <jrossi@linux.ibm.com>,
+ Tyrone Ting <kfting@nuvoton.com>, Frederic Konrad
+ <konrad.frederic@yahoo.fr>, Laurent Vivier <laurent@vivier.eu>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Bibo Mao <maobibo@loongson.cn>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Glenn Miles <milesg@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Michael Rolnik <mrolnik@gmail.com>, "Michael S . Tsirkin" <mst@redhat.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@mailo.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
+ Samuel Tardieu <sam@rfc1149.net>, Bernhard Beschow <shentey@gmail.com>,
+ Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Thomas Huth <th.huth+qemu@posteo.eu>, Ran Wang <wangran@bosc.ac.cn>,
+ Hao Wu <wuhaotsh@google.com>, =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>
+References: <20260711223707.42139-1-graf@amazon.com>
+ <20260711223707.42139-5-graf@amazon.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <20260711223707.42139-5-graf@amazon.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a02:6b8:c41:1300:1:45:d181:df01;
- envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1d.mail.yandex.net
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Proofpoint-ORIG-GUID: HJUcxuFbVkmAfZFLt2pmwT1En2CE5Cy1
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDExMyBTYWx0ZWRfX+QVq63eX9VDf
+ 1e2b5p6V4GTDs6tDucyqwAUIOJNklWBZGbhcE2HrG2wdx3uX0TcEcPLDQmssuGUPjaNuZX+R8Md
+ sMrBnp5Ax3FEJ91JdpWeeXbn/JvfQOo=
+X-Authority-Analysis: v=2.4 cv=e6c2j6p/ c=1 sm=1 tr=0 ts=6a54c3eb cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=vggBfdFIAAAA:8 a=EUspDBNiAAAA:8 a=e-WwYK0FPL1hkuWrF-MA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDExMyBTYWx0ZWRfX8dzY2ETK8vT1
+ FkThld7CffHDteQ8He+oKKArZwy/RUr8KNNqj5GhKDhZ597KRhMBm3wLffdlOiHeuHhRu3f8Gkl
+ OgNB02Uwb13MXIOKuS7bvQixhdbN57uxM9V8eADUjdYt0xNgCTwhd846MVhvUpR6miGWPk9WB61
+ 2dCT3iorSLT1NzC31admQidJFvjMqNClhe8Hy/K7PPYZuMw49QPKY/9KYTDWOXuHyZDOC+Io2i7
+ dn29mDLK/+S1E6mmIeYInnHyoogbFTh9wvMME4fEHK1cn51+E7d+XIMXJpb9DB3iI6esk+L++Le
+ uEkODeCnngwsO+IOtdo2vrepNxzJSsG7uZqroiVmnqouDyh4NvCP7EVj/iSLls/12EXKQSdBj7t
+ bNTzy9oVOUMsxl7bUKcT8/bO36JwJHvA3BzX1cwCuelvxx4gcsSfUtI5Pi8WEkJ7bOI5X4Po557
+ yon7VqhLn4JsiRAeC8A==
+X-Proofpoint-GUID: HJUcxuFbVkmAfZFLt2pmwT1En2CE5Cy1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-13_02,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 clxscore=1015 phishscore=0 lowpriorityscore=0 spamscore=0
+ adultscore=0 malwarescore=0 impostorscore=0 suspectscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130113
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
+Precedence: list
 List-Id: <qemu-riscv.nongnu.org>
 List-Unsubscribe: <https://lists.nongnu.org/mailman/options/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=unsubscribe>
@@ -94,62 +203,121 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 13.07.26 12:47, Daniel P. Berrangé wrote:
-> On Mon, Jul 13, 2026 at 12:37:54PM +0300, Vladimir Sementsov-Ogievskiy wrote:
->> On 13.07.26 10:45, Markus Armbruster wrote:
->>> Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
->>>
->>>> The interface is ambiguous, as "no" is valid file name. So,
->>>> using "no" as a special value to disable script is deprecated.
->>>> Use an empty string ("script=" / "downscript=") instead.
->>>>
->>>> In a future version, "no" will be treated as a plain file name, just
->>>> like any other non-empty value.
->>>>
->>>> Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
->>>> and qemu-options.hx. Update other docs to use empty string instead of
->>>> "no". Add a warning.
->>>>
->>>> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
->>>
->>> [...]
->>>
->>>> diff --git a/net/tap.c b/net/tap.c
->>>> index fedd48c48d2..1ec9e5ebe6f 100644
->>>> --- a/net/tap.c
->>>> +++ b/net/tap.c
->>>> @@ -103,6 +103,8 @@ static bool tap_is_explicit_no_script(const char *script_arg)
->>>>        }
->>>>        if (strcmp(script_arg, "no") == 0) {
->>>> +        warn_report("script=no/downscript=no is deprecated; "
->>>> +                    "use script=/downscript= instead");
->>>
->>> net_init_tap() could pass the parameter name for a simpler error
->>> message.  Probably not worth the bother.
->>>
->>>>            return true;
->>>>        }
->>>
->>> In net_init_tap_one():
->>>
->>>              qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
->>>                                script ?: "no", downscript ?: "no");
->>>
->>> This sets nc->info_str, which is shown by "info network".  Should we
->>> replace "no" by ""?
->>>
->>
->> Agree, will do.
+On 12/7/26 00:34, Alexander Graf wrote:
+> Sysbus is by far the largest producer of orphaned onboard devices:
+> of the ~1180 unparented device creation sites in the tree, well over
+> half go through sysbus_create_simple(), sysbus_create_varargs(), or
+> qdev_new_orphan()+sysbus_realize_and_unref() open-coded.
 > 
-> Would it be better to not include the script/downscript parameters at
-> all if they're disabled ?
+> Apply the same rename-and-reintroduce treatment as qdev_new():
+> mechanically rename the existing helpers to *_orphan() and
+> reintroduce the short names with a leading (parent, id, ...) pair
+> that plumbs down to the new qdev_new().  The parented versions call
+> sysbus_realize() (not _and_unref) since the child<> property already
+> holds the sole reference.
 > 
+> The mechanical rename part is generated by
+> 
+>    spatch --sp-file \
+>        scripts/coccinelle/qom-parent/sysbus-create-orphan.cocci \
+>        --in-place --include-headers --dir .
+> 
+> or equivalently
+> 
+>    git ls-files '*.[ch]' '*.[ch].inc' '*.rst' '*.py' | \
+>        grep -v '^subprojects/' | \
+>        xargs sed -i \
+>            's/\bsysbus_create_simple\b/sysbus_create_simple_orphan/g;
+>             s/\bsysbus_create_varargs\b/sysbus_create_varargs_orphan/g'
+> 
+> Assisted-by: Kiro
+> Signed-off-by: Alexander Graf <graf@amazon.com>
+> ---
+>   hw/arm/allwinner-h3.c                         | 16 ++++-----
+>   hw/arm/collie.c                               |  2 +-
+>   hw/arm/exynos4210.c                           | 14 ++++----
+>   hw/arm/fsl-imx6.c                             |  2 +-
+>   hw/arm/integratorcp.c                         | 18 +++++-----
+>   hw/arm/mps2.c                                 |  6 ++--
+>   hw/arm/musicpal.c                             | 18 +++++-----
+>   hw/arm/npcm7xx.c                              |  2 +-
+>   hw/arm/realview.c                             | 24 ++++++-------
+>   hw/arm/sbsa-ref.c                             |  6 ++--
+>   hw/arm/stellaris.c                            |  8 ++---
+>   hw/arm/strongarm.c                            | 10 +++---
+>   hw/arm/versatilepb.c                          | 28 +++++++--------
+>   hw/arm/vexpress.c                             | 20 +++++------
+>   hw/arm/virt.c                                 |  8 ++---
+>   hw/arm/xilinx_zynq.c                          | 10 +++---
+>   hw/core/sysbus.c                              | 35 ++++++++++++++++++-
+>   hw/i386/kvm/clock.c                           |  2 +-
+>   hw/i386/kvm/xen_evtchn.c                      |  2 +-
+>   hw/i386/kvm/xen_gnttab.c                      |  2 +-
+>   hw/i386/kvm/xen_overlay.c                     |  2 +-
+>   hw/i386/kvm/xen_primary_console.c             |  2 +-
+>   hw/i386/kvm/xen_xenstore.c                    |  2 +-
+>   hw/i386/microvm.c                             |  2 +-
+>   hw/intc/apic_common.c                         |  2 +-
+>   hw/loongarch/virt.c                           |  2 +-
+>   hw/m68k/next-cube.c                           |  4 +--
+>   hw/m68k/virt.c                                |  2 +-
+>   hw/mips/jazz.c                                |  2 +-
+>   hw/mips/loongson3_virt.c                      |  2 +-
+>   hw/or1k/virt.c                                |  2 +-
+>   hw/ppc/amigaone.c                             |  2 +-
+>   hw/ppc/e500.c                                 |  2 +-
+>   hw/ppc/pegasos.c                              |  4 +--
+>   hw/ppc/ppc440_bamboo.c                        |  2 +-
+>   hw/ppc/sam460ex.c                             |  8 ++---
+>   hw/riscv/virt.c                               |  4 +--
+>   hw/sparc/sun4m.c                              |  2 +-
+>   hw/vmapple/vmapple.c                          |  4 +--
+>   hw/xen/xen-pvh-common.c                       |  2 +-
+>   include/hw/core/sysbus.h                      | 32 ++++++++++++++---
+>   .../qom-parent/sysbus-create-orphan.cocci     | 18 ++++++++++
+>   42 files changed, 206 insertions(+), 131 deletions(-)
+>   create mode 100644 scripts/coccinelle/qom-parent/sysbus-create-orphan.cocci
 
-Unfortunately current default is: use <sysconfdir>/qemu-ifup and
-<sysconfdir>/qemu-ifdown if these options are unset. So, omitting
-them in info-string would be ambiguous.
 
--- 
-Best regards,
-Vladimir
+> diff --git a/include/hw/core/sysbus.h b/include/hw/core/sysbus.h
+> index f3c4259d29..7737c959c5 100644
+> --- a/include/hw/core/sysbus.h
+> +++ b/include/hw/core/sysbus.h
+> @@ -91,15 +91,39 @@ bool sysbus_realize_and_unref(SysBusDevice *dev, Error **errp);
+>   /* Call func for every dynamically created sysbus device in the system */
+>   void foreach_dynamic_sysbus_device(FindSysbusDeviceFunc *func, void *opaque);
+>   
+> -/* Legacy helper function for creating devices.  */
+> -DeviceState *sysbus_create_varargs(const char *name,
+> +/**
+> + * sysbus_create_varargs: Create, parent and realize a sysbus device
+> + * @parent: the QOM parent (usually the machine or containing device)
+> + * @id: child<> property name
+> + * @type: sysbus device type to create
+> + * @addr: MMIO region 0 address, or -1 for none
+> + * @...: NULL-terminated list of qemu_irq to connect
+> + *
+> + * Create a sysbus device via qdev_new(@parent, @id, @type), realize
+> + * it, optionally map MMIO region 0 at @addr, and connect the given
+> + * IRQs.  The returned device is owned by @parent.
+> + */
+> +DeviceState *sysbus_create_varargs(Object *parent, const char *id,
+> +                                   const char *type, hwaddr addr, ...);
+> +
+> +static inline DeviceState *sysbus_create_simple(Object *parent,
+
+Both are legacy. Updating the doc:
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+
+> +                                                 const char *id,
+> +                                                 const char *type,
+> +                                                 hwaddr addr,
+> +                                                 qemu_irq irq)
+> +{
+> +    return sysbus_create_varargs(parent, id, type, addr, irq, NULL);
+> +}
+> +
+> +/* Legacy helper function for creating unparented devices.  */
+> +DeviceState *sysbus_create_varargs_orphan(const char *name,
+>                                    hwaddr addr, ...);
 
