@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 162E1C43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 10:55:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D1C7C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 10:56:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjEJ8-0003e3-4r; Mon, 13 Jul 2026 06:54:42 -0400
+	id 1wjEK9-0004Q7-GL; Mon, 13 Jul 2026 06:55:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wjEJ6-0003cS-Ba
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 06:54:40 -0400
+ id 1wjEJn-00043k-P8
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 06:55:24 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wjEJ3-0004MW-AW
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 06:54:40 -0400
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ id 1wjEJk-0004e1-RJ
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 06:55:23 -0400
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66D9dZM0952964
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 10:54:35 GMT
+ 66D9M1Ef1090406
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 10:55:19 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- LW3fYohk/aaKNf9gFX7XJAGrK7Rod9ZwfEsbUEYpc0k=; b=TAs3HUWcKq3c4dR1
- pBV3PfPnOs49dDkaDFeAiuoKfk+IfXVqQeAFNXYssHj6LesQwEWOuktlLq+8EYvf
- j5/kNgTo5mIKFstpKNeiYnN9sm0bDDJODab1KswSIv5eH2Dh7QgVW6Hzk+ADBUm0
- RZgFtt4q0VWMrPqzgSfFd/4YlvZ6V9D4c2L9j1MX72VhpEKnGSjj3NSlDM1Pt8eY
- B4YnxJ/ghWHop+hZe4q99TdmRKla1iRA7Q0UeXQWZhAJTWJUtzKk1dYM730MWHi4
- 8ahXBbRcRa8NE9WAs21U+azV0vdz7z/4LGgwgwgi2moaYpFU7iwLiqH22X4OjTV2
- hbT1VQ==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fcwk3g8ey-1
+ Xn3S2PvtzozBUUcxgsDoJvy0/X/Pjk+r9GG0gXpZTzA=; b=LuZkT2fmn+UMJ46d
+ gDUpBDnZL4ygj7XF5a9Cu8rpRrFRcqdHJGU3F+SjoGj8gLkxl0z1h1snlhQggW8w
+ gZQm/fmdUCKGRCLXvkKeEpLIdf7HHcXq7n2aR0EdS60SxKxLdX4tQIifyF2/sbFh
+ AM6FHtdjx+09NOzfiqDBmCjgOnQzGF0VEXk3mjKOeNMdDZ5IzlwpSmv0arCuEH45
+ iace3G28+R44E7Sia1OjRNxWjoHPcbqfrkdTfj/1limULqfY+MnRvF0BsdDfqBmR
+ lcarmzV8H+OKZr7B2Yi76qu5pQnhla+oVFsWQyEf1p5UZ37dWOXD8NHS282q7eH6
+ rqh72Q==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fcwavrau6-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 10:54:35 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-51c0d6a2f4cso41886581cf.3
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 03:54:35 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 10:55:19 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-51c0f0a0760so66953691cf.2
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 03:55:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783940074; x=1784544874; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1783940118; x=1784544918; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=LW3fYohk/aaKNf9gFX7XJAGrK7Rod9ZwfEsbUEYpc0k=;
- b=bbXJ9jajDgbLOJrh5rP0iWzOaegs67Cqp7LOqQCnWNbDsyeTN/yJUL3JLNQIKE5jt+
- OEX5/HnhMF4MFetJbQ6i1K5GakvZGHHX0E2qU4BYHWOCykTl0ifuSzcxvhpVLuSsptgl
- 2IJJdN1uYwkTuVnU0NGhd3U5hxqlrG6nHmEqCnGOxT213ECnwgyqpbvDAFl83hE1jDqk
- cnmasReAdIg4xS6dKJHm6n98HlShrxv8j3vBOnh01e67zEpO2eQy9X/79QY7RR/9YV+G
- WfH7vsjXKyHFi/0Qt0rhTe9RAtoOytnyix+5UpTJ/zxTK4Ve8B1/FSeqQfYPW1xhLW0g
- dMvQ==
+ bh=Xn3S2PvtzozBUUcxgsDoJvy0/X/Pjk+r9GG0gXpZTzA=;
+ b=dhNHPgav0FEX4+Znbo0LsDSULtm2DH29Ly+lOzh19HoRWdWxos+qnwlGHMZ33dO82b
+ IC1wGUfsXzyH1HaTwxgqtaI83V/wnYgOe4dDQfv3CFJPJ41j1FJJBQWLuVIo4bZvPlus
+ mAPZnbz0aw0V2dUjdFQHCkz+31q+CtobIE8MLiQMEHlLyZrNTmS3jYzG9J6SNW6AUGZw
+ eKAis1zukgQYwAzFF75CUIJbddmjBN5dBwczrD7B2z6RV9KPfJfTP6puGgXezXu4JwMX
+ ZWITa++JXJXopjECCGdFmtdPSjEEO3MgcRO8DSytFXkoLq2NNt3wOSRdljE0dzjr9ALB
+ lLdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783940074; x=1784544874;
+ d=1e100.net; s=20251104; t=1783940118; x=1784544918;
  h=content-transfer-encoding:content-type:in-reply-to:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=LW3fYohk/aaKNf9gFX7XJAGrK7Rod9ZwfEsbUEYpc0k=;
- b=ilelccxY9XLxvhxxTSKxTGn+pyQwcHt71yAlwqMrtHjMxEM6t79MqpREdrIdH10xLQ
- kWRRV8rTAwQTw+tbQxGROGi5YVexhT1ifniE3zE9RhACTk71+8QbsX0oafXJw/WN1rOP
- aVnNtKLYg4TwnkC30NQHYPdIIRZhqz2Ztnyf1UxscCOXuQXWX2i7VqQkbQTWCxEFOZ1n
- AD95RQaypFdc0R+or0ayzyjMQ6qSOU82flddAH5//Wq3YRPnJHIVk62IvEwnJY6PEcAx
- GTUCNSg9l2DvShZ8dKaosDEBgSFCHDaCjmGAsHaiZ/o307D0yAqWZ6dtz4t2S+gn6iJF
- 9eSg==
+ bh=Xn3S2PvtzozBUUcxgsDoJvy0/X/Pjk+r9GG0gXpZTzA=;
+ b=cmFLHbbXXAGPXxPrNI4VWrcZSEHBQhKYyuyiN/mrOH3ztGZl3yODAWg4rzPpbmx3jG
+ oYJEMSyeWml+jqhrdM4LrupLky8elIpycRY9RiRvQL/a0lyID6sIaiU0KO+FXxsUSiKe
+ VsUdmJwD5Wi92wqxfvcAOXqqhz9Fdmu+NMLLYOMKAbKjqr8Hgsq28K+nROrc/18o6d9v
+ MVMUgp67K+yb0cF8vVKRUm0vlyHswpJVYCAW87IokWvEv3GTiRGDUWr9dmzvtT9qgiKP
+ 1lnm2gRiNonkOvvWIOamGNuPJJP3YaywDe6rxkzYygkQat/0ye6bqnH1W+9L3w/LyGnc
+ NtQg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rox0RxHzkNPDXdxO4t2EcmGTy80cFQtGqh02RS+wfn2oxU8K5K5yeycDc5aCbznesFUSjWouKaAcJQf@nongnu.org
-X-Gm-Message-State: AOJu0YwbEGAN/yecKiN/5aX6ILVUV6vDI/MM8RmIfWCK2y6EbYtz7jrJ
- 3/DZmTbGbIKKw6zBhkuuoLXfnVUBMZPngHvF8MjW48t2Jdn+rQjs1ff4WxKU4bcLVm0NVxQCpZD
- 1WcSqZ5vyA+eN3S6UReDzNbSyanj9iS9bmg+jZsyzVKX5/aG4C/6JL4MsOA==
-X-Gm-Gg: AfdE7cmZ4Vo09POklMmmVWc8WdKBo6b1seiKivjLKaCyUcAm3yww/aAL5Y2WWvXa8YY
- Z+Zhv/jUWS6fDlxSxVYQHMiFPn2VMxe9bL/mRUv83l8Gf5VmllMJbMT4EbhPWtNu0bHSNeBslv6
- 8FHQF4mvnoviB8ZglWEPpJWGJ/+JDsNZVIXAID+mL22orYb7fx4/kE7k5VHiZ/BzQ76FYO98geo
- hPkldP1p1kjTk7dQehR0GKV0bsxoWdGsaUYgQaEmaT4+urfmx95vzsx7NLFOAA3K/gg5PX2oRI9
- fUJp9M4oa6rEesx47yWkKMfvuCoqhYXtuoCbyIn58GRr7m26ta2Ah7VuARcDqWeI0IiAcS8Szdt
- naPd3MXDz49DGaomb8Eac30eM+Ij5aktsYZvzBV5nCAlg9jvqIHR5SrQwO/INyw==
-X-Received: by 2002:a05:622a:1456:b0:51c:f3:34de with SMTP id
- d75a77b69052e-51cbf0bf820mr77332521cf.20.1783940074391; 
- Mon, 13 Jul 2026 03:54:34 -0700 (PDT)
-X-Received: by 2002:a05:622a:1456:b0:51c:f3:34de with SMTP id
- d75a77b69052e-51cbf0bf820mr77332081cf.20.1783940073910; 
- Mon, 13 Jul 2026 03:54:33 -0700 (PDT)
+ AHgh+RpqGCXD4ml4iKdN5ZqU1LNIRh7WVHJSo0KOoRtxQ8/f+VAO0yydDz04Vz5qs3D+MTp263GQfgQImJOr@nongnu.org
+X-Gm-Message-State: AOJu0YzY2iNQk4ESw+ZIV1yRwcxDYakvib3Fu/pQr/oYj3ePnQISxZzJ
+ K3e7Yizk6CoPi1CxV1KKQfPcXrcYntETmh18HgkzWryNLQQNEkVNNWIaxnkKxFfSKL5oU2kBbhA
+ DyAK/f8kQmRNeWqjYmYW8W18TY8rUBRRF/JOVmbcIUZrkTd9zK0ZZoQwIUA==
+X-Gm-Gg: AfdE7cnYQlHbC4xswbfPjIotsoZ8SxPBk74QA8eRVCKfuzkrLM/HMuqukJztPxXJqd0
+ K19HpNAcv9WmrnN+X+CpCjwG2EPi8qG6agTxnQ5TYz7vtH8ecZyhd1jpnW4UrYsBGD0uCXKFgO+
+ +tu7b+0BM03ehdbBd2yOoDbIl3msyNSoTDPavkkyRpky8VsBsk/Yd+hAXUuBEIzUl6WcPnu71r3
+ GDIMfIKXvUvAyQqm7qbD3+slHUMVzBR5ppM/M1vH3qBrMTjnK0h1Hd1fSipJNUjmOO3GgFVeXMp
+ U2gN5EPfLSLmV942ymsoOzzxLQ6Kp+bJmpfK74QnXJg1R02I67TgNIVoZEAzerylTZx6Fd55ndU
+ hTOSTk5W0CTKOQrVpjh/kYD9jYGySVWoUFx84POCGGUb/SH5bsYgSqtM/ITLJFw==
+X-Received: by 2002:a05:622a:ce:b0:50d:3e1e:7998 with SMTP id
+ d75a77b69052e-51cbf1bf868mr89378451cf.37.1783940118148; 
+ Mon, 13 Jul 2026 03:55:18 -0700 (PDT)
+X-Received: by 2002:a05:622a:ce:b0:50d:3e1e:7998 with SMTP id
+ d75a77b69052e-51cbf1bf868mr89378271cf.37.1783940117742; 
+ Mon, 13 Jul 2026 03:55:17 -0700 (PDT)
 Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493fbae1cdbsm178692545e9.10.2026.07.13.03.54.30
+ 5b1f17b1804b1-493eb6ccaf1sm630091325e9.2.2026.07.13.03.55.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Jul 2026 03:54:33 -0700 (PDT)
-Message-ID: <c8081b11-b38e-4662-97a4-46734cd9d92e@oss.qualcomm.com>
-Date: Mon, 13 Jul 2026 12:54:29 +0200
+ Mon, 13 Jul 2026 03:55:17 -0700 (PDT)
+Message-ID: <63a772b4-caaf-4708-9014-dc40e5b03bcf@oss.qualcomm.com>
+Date: Mon, 13 Jul 2026 12:55:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 004/134] sysbus: Make
- sysbus_create_simple()/_varargs() take a QOM parent
+Subject: Re: [RFC PATCH 003/134] qdev: Reintroduce qdev_new() with a mandatory
+ QOM parent
 Content-Language: en-US
 To: Alexander Graf <graf@amazon.com>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -147,36 +147,36 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  Hao Wu <wuhaotsh@google.com>, =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?=
  <berrange@redhat.com>
 References: <20260711223707.42139-1-graf@amazon.com>
- <20260711223707.42139-5-graf@amazon.com>
+ <20260711223707.42139-4-graf@amazon.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260711223707.42139-5-graf@amazon.com>
+In-Reply-To: <20260711223707.42139-4-graf@amazon.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: HJUcxuFbVkmAfZFLt2pmwT1En2CE5Cy1
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDExMyBTYWx0ZWRfX+QVq63eX9VDf
- 1e2b5p6V4GTDs6tDucyqwAUIOJNklWBZGbhcE2HrG2wdx3uX0TcEcPLDQmssuGUPjaNuZX+R8Md
- sMrBnp5Ax3FEJ91JdpWeeXbn/JvfQOo=
-X-Authority-Analysis: v=2.4 cv=e6c2j6p/ c=1 sm=1 tr=0 ts=6a54c3eb cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+X-Proofpoint-GUID: tsW3fW35DEHxnjy30mkgD7qvU8zLYXEs
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDExMyBTYWx0ZWRfXxdEc7P+Qib7P
+ nVqp+p4NNkdrADTH1q+Rk6B5xUvmTt9qqEb8tca0iz9IOg/i1YU5l68xK+/ZIvTyqfqlU3x3wtu
+ m2zktkCE3XA73liCHDPMP3hsQRXkWatb51I0dRWvU2Q7SZyf9EVT/GJgt2CvRVMeo8qhtWzuxP8
+ +5CnXtSihijsh3fbXLjNtQR6kyqHdXafVBQoMWDnUrJ4/Iptow3Kk+ugA832HkXL22NlabA1a7+
+ YzGayc6HKnYUzS4LYvG95yynO+Y7RFCOu4Zyx2vmL+5oRyAAhGFOxjCQdNpf6quTcfmuGKxg+CX
+ jxkr5YNhLwnzSsm8eRjG7MQYMNU89LRjKqWGohFGwls3WHx/W0EAn58+u7vrMSC4fITROK0VGsS
+ z+rftEjHKzzU5zOHnxTJ+FABJvcMw74fQZDM28oyVruKsQ1vdnUc2dE9isLKxWTybvfRNWz589t
+ 00G1rWeRe3dVc2jij/A==
+X-Proofpoint-ORIG-GUID: tsW3fW35DEHxnjy30mkgD7qvU8zLYXEs
+X-Authority-Analysis: v=2.4 cv=dZSwG3Xe c=1 sm=1 tr=0 ts=6a54c417 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=vggBfdFIAAAA:8 a=EUspDBNiAAAA:8 a=e-WwYK0FPL1hkuWrF-MA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDExMyBTYWx0ZWRfX8dzY2ETK8vT1
- FkThld7CffHDteQ8He+oKKArZwy/RUr8KNNqj5GhKDhZ597KRhMBm3wLffdlOiHeuHhRu3f8Gkl
- OgNB02Uwb13MXIOKuS7bvQixhdbN57uxM9V8eADUjdYt0xNgCTwhd846MVhvUpR6miGWPk9WB61
- 2dCT3iorSLT1NzC31admQidJFvjMqNClhe8Hy/K7PPYZuMw49QPKY/9KYTDWOXuHyZDOC+Io2i7
- dn29mDLK/+S1E6mmIeYInnHyoogbFTh9wvMME4fEHK1cn51+E7d+XIMXJpb9DB3iI6esk+L++Le
- uEkODeCnngwsO+IOtdo2vrepNxzJSsG7uZqroiVmnqouDyh4NvCP7EVj/iSLls/12EXKQSdBj7t
- bNTzy9oVOUMsxl7bUKcT8/bO36JwJHvA3BzX1cwCuelvxx4gcsSfUtI5Pi8WEkJ7bOI5X4Po557
- yon7VqhLn4JsiRAeC8A==
-X-Proofpoint-GUID: HJUcxuFbVkmAfZFLt2pmwT1En2CE5Cy1
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=20KFwNOVAAAA:8 a=vggBfdFIAAAA:8 a=EUspDBNiAAAA:8 a=LfsA7Cq2GQzuzbZ-N0YA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDExMyBTYWx0ZWRfX2hYtEX5Fc3lN
+ G+H60YA4o1+p+cFt8w5cYvSuRofN+K8QZe2ME6vw8FoAQuHqKXCsnmz55W5GmgR2tcgjDb9Y28f
+ 2SxuuQb9KecuVXfeDjMEv/D+qO2D2Ic=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-13_02,2026-07-10_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 phishscore=0 lowpriorityscore=0 spamscore=0
- adultscore=0 malwarescore=0 impostorscore=0 suspectscore=0 bulkscore=0
+ bulkscore=0 priorityscore=1501 adultscore=0 malwarescore=0 spamscore=0
+ phishscore=0 impostorscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130113
 Received-SPF: pass client-ip=205.220.168.131;
@@ -204,120 +204,34 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 12/7/26 00:34, Alexander Graf wrote:
-> Sysbus is by far the largest producer of orphaned onboard devices:
-> of the ~1180 unparented device creation sites in the tree, well over
-> half go through sysbus_create_simple(), sysbus_create_varargs(), or
-> qdev_new_orphan()+sysbus_realize_and_unref() open-coded.
+> The previous commit vacated the qdev_new()/qdev_try_new() names.
+> Reintroduce them with the signature we actually want:
 > 
-> Apply the same rename-and-reintroduce treatment as qdev_new():
-> mechanically rename the existing helpers to *_orphan() and
-> reintroduce the short names with a leading (parent, id, ...) pair
-> that plumbs down to the new qdev_new().  The parented versions call
-> sysbus_realize() (not _and_unref) since the child<> property already
-> holds the sole reference.
+>    DeviceState *qdev_new(Object *parent, const char *id,
+>                          const char *type);
 > 
-> The mechanical rename part is generated by
+> which is the qdev-layer, heap-allocated dual of
+> object_initialize_child(): the returned device is created and
+> immediately added to the QOM composition tree as a child of @parent
+> under @id.
 > 
->    spatch --sp-file \
->        scripts/coccinelle/qom-parent/sysbus-create-orphan.cocci \
->        --in-place --include-headers --dir .
+> Refcount contract: the initial reference is transferred to the
+> child<> property of @parent, so on return the caller does not hold a
+> reference.  Pair with qdev_realize() (not qdev_realize_and_unref()),
+> matching object_initialize_child()'s convention.
 > 
-> or equivalently
+> qdev_new_orphan() remains for callers that set the parent themselves
+> before realize (notably qdev_device_add(), which parents under
+> /machine/peripheral via qdev_set_id()).  Later patches convert the
+> remaining orphan callers subsystem by subsystem.
 > 
->    git ls-files '*.[ch]' '*.[ch].inc' '*.rst' '*.py' | \
->        grep -v '^subprojects/' | \
->        xargs sed -i \
->            's/\bsysbus_create_simple\b/sysbus_create_simple_orphan/g;
->             s/\bsysbus_create_varargs\b/sysbus_create_varargs_orphan/g'
-> 
+> Suggested-by: Markus Armbruster <armbru@redhat.com>
 > Assisted-by: Kiro
 > Signed-off-by: Alexander Graf <graf@amazon.com>
 > ---
->   hw/arm/allwinner-h3.c                         | 16 ++++-----
->   hw/arm/collie.c                               |  2 +-
->   hw/arm/exynos4210.c                           | 14 ++++----
->   hw/arm/fsl-imx6.c                             |  2 +-
->   hw/arm/integratorcp.c                         | 18 +++++-----
->   hw/arm/mps2.c                                 |  6 ++--
->   hw/arm/musicpal.c                             | 18 +++++-----
->   hw/arm/npcm7xx.c                              |  2 +-
->   hw/arm/realview.c                             | 24 ++++++-------
->   hw/arm/sbsa-ref.c                             |  6 ++--
->   hw/arm/stellaris.c                            |  8 ++---
->   hw/arm/strongarm.c                            | 10 +++---
->   hw/arm/versatilepb.c                          | 28 +++++++--------
->   hw/arm/vexpress.c                             | 20 +++++------
->   hw/arm/virt.c                                 |  8 ++---
->   hw/arm/xilinx_zynq.c                          | 10 +++---
->   hw/core/sysbus.c                              | 35 ++++++++++++++++++-
->   hw/i386/kvm/clock.c                           |  2 +-
->   hw/i386/kvm/xen_evtchn.c                      |  2 +-
->   hw/i386/kvm/xen_gnttab.c                      |  2 +-
->   hw/i386/kvm/xen_overlay.c                     |  2 +-
->   hw/i386/kvm/xen_primary_console.c             |  2 +-
->   hw/i386/kvm/xen_xenstore.c                    |  2 +-
->   hw/i386/microvm.c                             |  2 +-
->   hw/intc/apic_common.c                         |  2 +-
->   hw/loongarch/virt.c                           |  2 +-
->   hw/m68k/next-cube.c                           |  4 +--
->   hw/m68k/virt.c                                |  2 +-
->   hw/mips/jazz.c                                |  2 +-
->   hw/mips/loongson3_virt.c                      |  2 +-
->   hw/or1k/virt.c                                |  2 +-
->   hw/ppc/amigaone.c                             |  2 +-
->   hw/ppc/e500.c                                 |  2 +-
->   hw/ppc/pegasos.c                              |  4 +--
->   hw/ppc/ppc440_bamboo.c                        |  2 +-
->   hw/ppc/sam460ex.c                             |  8 ++---
->   hw/riscv/virt.c                               |  4 +--
->   hw/sparc/sun4m.c                              |  2 +-
->   hw/vmapple/vmapple.c                          |  4 +--
->   hw/xen/xen-pvh-common.c                       |  2 +-
->   include/hw/core/sysbus.h                      | 32 ++++++++++++++---
->   .../qom-parent/sysbus-create-orphan.cocci     | 18 ++++++++++
->   42 files changed, 206 insertions(+), 131 deletions(-)
->   create mode 100644 scripts/coccinelle/qom-parent/sysbus-create-orphan.cocci
+>   hw/core/qdev.c         | 19 +++++++++++++++++++
+>   include/hw/core/qdev.h | 34 ++++++++++++++++++++++++++++++++++
+>   2 files changed, 53 insertions(+)
 
-
-> diff --git a/include/hw/core/sysbus.h b/include/hw/core/sysbus.h
-> index f3c4259d29..7737c959c5 100644
-> --- a/include/hw/core/sysbus.h
-> +++ b/include/hw/core/sysbus.h
-> @@ -91,15 +91,39 @@ bool sysbus_realize_and_unref(SysBusDevice *dev, Error **errp);
->   /* Call func for every dynamically created sysbus device in the system */
->   void foreach_dynamic_sysbus_device(FindSysbusDeviceFunc *func, void *opaque);
->   
-> -/* Legacy helper function for creating devices.  */
-> -DeviceState *sysbus_create_varargs(const char *name,
-> +/**
-> + * sysbus_create_varargs: Create, parent and realize a sysbus device
-> + * @parent: the QOM parent (usually the machine or containing device)
-> + * @id: child<> property name
-> + * @type: sysbus device type to create
-> + * @addr: MMIO region 0 address, or -1 for none
-> + * @...: NULL-terminated list of qemu_irq to connect
-> + *
-> + * Create a sysbus device via qdev_new(@parent, @id, @type), realize
-> + * it, optionally map MMIO region 0 at @addr, and connect the given
-> + * IRQs.  The returned device is owned by @parent.
-> + */
-> +DeviceState *sysbus_create_varargs(Object *parent, const char *id,
-> +                                   const char *type, hwaddr addr, ...);
-> +
-> +static inline DeviceState *sysbus_create_simple(Object *parent,
-
-Both are legacy. Updating the doc:
 Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-
-> +                                                 const char *id,
-> +                                                 const char *type,
-> +                                                 hwaddr addr,
-> +                                                 qemu_irq irq)
-> +{
-> +    return sysbus_create_varargs(parent, id, type, addr, irq, NULL);
-> +}
-> +
-> +/* Legacy helper function for creating unparented devices.  */
-> +DeviceState *sysbus_create_varargs_orphan(const char *name,
->                                    hwaddr addr, ...);
 
