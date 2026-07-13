@@ -4,127 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72A1BC43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 15:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF24C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 16:00:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjIuC-0005NX-5q; Mon, 13 Jul 2026 11:49:16 -0400
+	id 1wjJ4R-00018c-2q; Mon, 13 Jul 2026 11:59:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wjIuA-0005NI-De; Mon, 13 Jul 2026 11:49:14 -0400
-Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
- ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1wjJ4P-00018M-LS
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 11:59:49 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wjIu8-00036w-SJ; Mon, 13 Jul 2026 11:49:14 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RZnIG7bYM8x0jLTjVx8TN8gedNE7P+dCvrlwaBiSIk9bdwvuSilEQ+m2bM4FIaI07PbXqMekBOUuJqgrSaclVU3Cn0Zl3SRLvjafQEDduJvtiguH0HbLedk9MG7LnPRXCYgrRaGBT8nDrspW73dTdCvKlqoMpDjk964xpfCztf6yzg2alTwVCtngQUlmIYXYpmjtGw35ezO62dJgmlQYCePVV9C+0hn1RoY9DVfo8DkPnq+RKe7RNvxcloVgOYLszA+laP+oyxZ7xtYxYUCPdBz0YvL0ki0z3KVTEKw3eVdMBDhOeqD7CLJD0b/Al2Kf3wQUqddcv3wdX0IgQP69Eg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=STswuIPX2BTcNisG8hlPpRBKI9UID2jYHx74Y14bY7A=;
- b=K8HF4DInEpPJGRNLP3/7eBX+HkbVcaMGNDKaDsXS5IDx0B7dZxITg82eEppT9t3LrKHQROKeS/YpzP/FDIeGBMYTevhnapdNhpH4uORcWLfMKlls9H+hDkHkf7sA4LljQojLEsLNbTFJm1aOM5YoxuAbMFmmVNTnGeu9vbPOQDNJgXQ2Y0A7iGi6TNEtAizXQbtXswVxU86OtfmcYVHcMTPmJ4q2x81UIcqm8DmjyB6CQBZWZH2YxENustUyGojeDEaxn9xlTAYGvadrJsebiqHNW6asaZCYQi3jggnpdtoZ9U8pagisB2e9kP66ofzZX6uGmMeFVGxZHRI6FYPIfA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=STswuIPX2BTcNisG8hlPpRBKI9UID2jYHx74Y14bY7A=;
- b=moCZVT9LoPP7qire/xkpUT0V2les9B2+K2oAc8cdruiK97pZQnDD1DWONI1yRzVXgIs5SDkrQGT/4bqFH19hYrBATAwVKur76FNcLA6dxzguxt/KaPR3GQRyPa7R5zZmngCXHHrL+1OEYt+wNubtEw4rkMOnKrlnqDK14K07xnDnldsNarbkiA3KbUliWRKfRFGfR3fxVaFWrajj5ZFene7YJ/pdhrRh3VCXkqZ6z+kvskZycLLOW0nokudS08frYOXihNP41WNdwk6pCuy/WiRlQfZHZCe2tWy9EuGibsFk5sO4f1rv+EPuyxtO+kwsSmrOW+I7cxoci9fz7JhP1A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by TY0PR02MB6839.apcprd02.prod.outlook.com (2603:1096:405:10::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.19; Mon, 13 Jul
- 2026 15:49:03 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%4]) with mapi id 15.21.0181.014; Mon, 13 Jul 2026
- 15:49:03 +0000
-Date: Mon, 13 Jul 2026 23:48:57 +0800
-From: Chao Liu <chao.liu@processmission.com>
-To: Bin Meng <bin.meng@processmission.com>
-Cc: QEMU <qemu-devel@nongnu.org>, Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
-Subject: Re: [PATCH] tests/functional/riscv64: sifive_u: Fix kernel command
- line
-Message-ID: <alUI0-8uDmNVSXGw@ChaodeMacBook-Pro.local>
-References: <20260713120245.781959-1-bin.meng@processmission.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260713120245.781959-1-bin.meng@processmission.com>
-X-ClientProxiedBy: PH0P220CA0018.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:510:d3::33) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1wjJ4N-0004VY-K9
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 11:59:49 -0400
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66DF8lc11908370
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 15:59:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 5XGWAXlmBj+DYiOqhlUA2DBl6zFdr2IWLooI5QodJ5E=; b=kCwZJ3af5hsiutWH
+ TqRdqNf+5vOVW5eVEN/nebQu603RhgwILnKwJi6WrirwxwldPdLVsowC0bWOTqez
+ TO1NyHcc18XEoRNpBMrChrHgikSMblxV3CQ+JihooBe6W/uVbWYL5ix9oYRNOBSk
+ +c6AVkz+n0qh0R4VGnaYhVqhX7UcwTxptU9GK5cQ8TA+x0Hyi80jomrEIG1i54Pd
+ bAgM6EsrsfiJnMJBep8vyqjQs96r/mjq8wZWS8vlBC989Aqwdid3VbTrj2A+FPhB
+ XzsjsysN2hgzvB4bycK6TluiqYpTrN8nLmdhTztjAf/yZcjrf6IX5jK0I+ssPLpR
+ mdAA8Q==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
+ [209.85.215.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fcwda1hxk-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 15:59:44 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id
+ 41be03b00d2f7-c894c1c4aa9so4848487a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 08:59:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1783958384; x=1784563184; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=5XGWAXlmBj+DYiOqhlUA2DBl6zFdr2IWLooI5QodJ5E=;
+ b=gfhVdWIZEJUuTKUIGP/2tqgefAX8/Vn8etxH4fFMLTqJpRPHPm+OGtuEYF98aOH4+Q
+ pGf/SW3UUzrrEp7f1CksVQz/mUU1seNa1inZDPPCu1DRXn1NKEX9vfv6uGUFZb1TuLAA
+ sS6HCj4RHzCfTBFXZCTwTI24sxZYFtyu5Q+lWab1S/0xbCqOD+PVG4Loms/Fq/c4Wp6N
+ 4eP+/CwdIbCJDsapUID5vGtPJk/prWhT23+1NklrxtyoKg0wWTXEzSGBFdoj2L+DO6lN
+ KbCq5hhQKVrJUO+m59iIp+UBQTy18TKifbzMAkV7GZQnI/0ehaZqY++EnxYjdasAa3Vv
+ /HWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783958384; x=1784563184;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=5XGWAXlmBj+DYiOqhlUA2DBl6zFdr2IWLooI5QodJ5E=;
+ b=mmYhzoQrmC8YnA0E9fxdlW2suNYEtqR4MbUypum/wixZaAMoGggoD2OcgYi0x69GuB
+ eIqPXDWGQxBvqxUeZK0lXh7PYrqPoaXEhYIpwjkLD4KKPD3oa9t4EJ9Cz5h8xtYOQXHX
+ 2DfY5aYjwYWhMw0CQd1YTBL4zl8D5lIllZ0FjXYWPO3k7a9+SQ8pUU6BSWdabTprwsdI
+ UDHT8DABZjbpR8yPtDdtBUwFN7r5iS76jJjIc+K7o9MYYpaL656b1B9ZPM0QTjQI5Oju
+ XttBLwa/57LRNbfPIZ1CK4men4TUDqB2ZAhseAXvZ8pVkkVDJsXCOTQuFYin5jg4eUL6
+ ZrSA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rq1DGjbkl0p+KD/LthiqXOfDDC1aLjigIIJtY+l8PrjjJQk4Xnm2HtGg+Bse3yxPmPO6+/R9duTdKJT@nongnu.org
+X-Gm-Message-State: AOJu0YxmsbU8Rjzq+dGVGJVIztcQTF+Lx/PA+iNvCxBeQKiWcbAtDPGf
+ A02Cirtzyd8826MeLSmevGox2C6vIqKM2FNDh5SrIT5IfG8lTC8Y9fuzKqXdr94javH6Y1TWxgS
+ 5dt3OIzU8+AnA7FV+nPclDB53khqpi0m6iDci7bJ/3GoVNbbE1xCbv+n/7w==
+X-Gm-Gg: AfdE7cmHBXZAHJWSgQNKcxLR6hC2/dn5hiswxRlZzUSNoA7Igw2Rh0vSjS8L5y7JhJl
+ HDZfMDLuNfoQ4v+3rTAkPOzETUAG9I0TsAlB/zraT5LaGIAk8aZL/waGVeL3DCf+1Yz6Yu48DMl
+ e1i8UNL0f00jwqX3Xu3lQhb4Elt7sT/o8qC1ARneQ4leR4fqpIzrZNNPnDSK6kTNBFlLYvxJzyK
+ LrgV6zxLwV1mKp9G5vlrQSb4XE7MrYUJUOwKAp7gvPwR8HgFlvJjEPRQrZ0c6pFmiq0NrkJ3jHf
+ C5eVEGwxgpPg4exJ2gxNidi1kgCey4tVrXpjmyqrqh4aD2WOsIVnISYL7pMN11CXmGfpH+1Jbun
+ oMrALzlBmnxJMNu19GYVR/hOuKXWCNgMOtMGIhuW2URiD+AIJ621bS9yg8isJ+D9fPkuCo3C2bb
+ IalL4=
+X-Received: by 2002:a05:6a21:6b12:b0:3b4:6f7e:d0f4 with SMTP id
+ adf61e73a8af0-3c1109e29c6mr9694452637.15.1783958384075; 
+ Mon, 13 Jul 2026 08:59:44 -0700 (PDT)
+X-Received: by 2002:a05:6a21:6b12:b0:3b4:6f7e:d0f4 with SMTP id
+ adf61e73a8af0-3c1109e29c6mr9694423637.15.1783958383599; 
+ Mon, 13 Jul 2026 08:59:43 -0700 (PDT)
+Received: from [192.168.1.170] (216-71-219-44.dyn.novuscom.net.
+ [216.71.219.44]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-311747f7293sm69276381eec.3.2026.07.13.08.59.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Jul 2026 08:59:43 -0700 (PDT)
+Message-ID: <ae18fa27-a1c7-42d1-864e-5a9a30c1215f@oss.qualcomm.com>
+Date: Mon, 13 Jul 2026 08:59:41 -0700
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|TY0PR02MB6839:EE_
-X-MS-Office365-Filtering-Correlation-Id: 85bc40de-ec92-4745-4d20-08dee0f64360
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|366016|34096008|1800799024|22082099003|18002099003|5023799004|56012099006;
-X-Microsoft-Antispam-Message-Info: 2F2Vgqd+z2uh8l+yBKHzEIZkpgawzMKYHf7z94nB8Mbi7Ztsihp7ugcyBIeTq9MbrAd0HKqFieAxG2TV89PZKKTxbhNSHQ9JWgSCeqCqYDi1tQAEaKccJKu5ibIikSE83/DdMkecwckMutiDVs6x5r1M+xqQZEMdwCrkeDqc+ziMwgFwD6/mvA5FmiFeLWFWLZbHwWKFS8UYIT58CI3NSoWYAKT/nnElrYCKpV12uiHY+74j7klmuwJqC6Y3TbfMhWXhN60A3L+gF3rM7BClbiVJL1azlRrcgP3WTci6dvUitZe5fa64JgX90NBb1jGry5bpFDvpxBJVaYyPmYE6P7hgvDojlLNaV1D7kiK6AGVpsk0D4Ur119J+Qqe5PvDKiVNocR4FNItkNpT46uIrl9d2JS7uhyoK4rIdMa6WqfBsGc0YQMWaIwTPXQi2XXXfSRUaFxa18hSzePnJOAqv0wAR0DOzkv28hjcI8h2WYbI1cojG0ZyuU6eHL4d+1S/ItoNdeJPG007NWSHmJ5jSR0/vG5tyChTbcqSFy5kqkrOYvnnwGktmFiDINXjT8y8BEqyG33FQ04m/7V4Zt4W6FQidd2aAyJTsmcEDXZWlpBvfGjDR2o4Pqpdv38lbkgtwXwK3iQz0H7/ngZr7z+7Kq+1eWSq84efsl0yJtgsTrbA=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(366016)(34096008)(1800799024)(22082099003)(18002099003)(5023799004)(56012099006);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KZbWns4chraM7sxpdKgHfj6JkaBWg08pk5I7lMI4tovIaSjA9kp0ChpWCoDC?=
- =?us-ascii?Q?QNA5Gz2AoA5eq+Y9s8Z25Wr5tFfMqEF2zkYXX2AebfRnTtckJYm5IF9IqohA?=
- =?us-ascii?Q?iXRVaEm8z1So3/1aQxZTRSM7FxtwUOBE/M//T8QJdN/cYGzGKmzOespz5d4J?=
- =?us-ascii?Q?8EEnLc1/SSEwguSIvwsxYrTXsaJy7u6qkf8VQ6tHZDeGa8wXJ115Si0/+kwc?=
- =?us-ascii?Q?O6FyeEU2uq6vl/+RJEFnwZ9lqZg7dyMTTxYzDOxmsVy+mlQkjLffuGu8S65K?=
- =?us-ascii?Q?5UXv4SFQb+F5NTcyMrLWu5OJD76h8PXOy5hVtm2pdIH2JNwPv15G2Qy05xDc?=
- =?us-ascii?Q?QpnEJsKw0O+W/lyVL3t6cf0FBilXmTpnBZZSYGXufKmvyBb3P+qwG/3nQ0/3?=
- =?us-ascii?Q?V2/SI6CjiC27nSC7gxlkbpxSLsSPZ68rpupVGoXD3jcGm+tdfLXxa5YjIfPo?=
- =?us-ascii?Q?N/j1HjcDHEvjSY0YvJ4oPojhIpb/Vt71P1q6HBfLmft5uCgqEdiIYUDFQjSk?=
- =?us-ascii?Q?n7q4rfZ/aRCNjTyBNaowa/d5OdDLX7ywAuK0s1IXma4hdPruUHtuwI2QHkZp?=
- =?us-ascii?Q?Ib3V+KnqMWjt8hyiYU9k2+r0jlmX1ouo5XdlFyqSaO5v2zaBll5pKCcCs4PZ?=
- =?us-ascii?Q?6dparXhCG9pFPdoK37XM5fVZuebISKw4lqngrOXwqzwui2FsmT6sBn3mqixB?=
- =?us-ascii?Q?KaFSxFlUf7uxn6iIuSgGPj/3Jo31vHmgCLWoyiOhBrRm2v1f7CVEOrVs3hub?=
- =?us-ascii?Q?OqOi6fd4VD+IRvvmtvDNBQDJZJTK+qTt9aj8unXmGzRjJAfep1RihDyzfGnN?=
- =?us-ascii?Q?0ggW6W2XyjUVGO0Sp/CV6YE8F8Y385MVMkfp/WL6GWG7gqNZG1TzJPGwHU8U?=
- =?us-ascii?Q?5PYDnjuHjnypTGyO0le9LLPIzS1m+DWxjcaxzZpskhmu3A9TOXgSJQo7ZQ4j?=
- =?us-ascii?Q?kJtLh/Y1TsVp3l4471+S2UZIbGcZejYRDvGXhnXZVyH0QMLFvJ2D+FoKVRUX?=
- =?us-ascii?Q?zbNjB7x+jXcngG2gM+G7yZ4EfxG7PK91cP7wclecVCs2w15iMCpyeBK401NI?=
- =?us-ascii?Q?EqHEB50wurbktfzsXk6YddseTk6BkM0pFkhTZR7YrQPiKKibu0JvnBanSfTd?=
- =?us-ascii?Q?LkoLUITndsPXhhglTv6pAT6gW99/0TG6Pfmf3+6QzCWJoVJcAwG2twCNZNdR?=
- =?us-ascii?Q?aJN+Z74a3YzNe1r8uqUj82wsvrpLseOHSXw7s/ESx3Xd45mxEzJ8WV+9auGF?=
- =?us-ascii?Q?Wx3VbWUpe8wklpKfZFd2vVdCr14z5vSCePT15J45RlqzE0Yj4vyXp7gZdRqH?=
- =?us-ascii?Q?QnzawdqtJDdp1W7QNBSQvU0ksfHe9noUerf+Ipl4GXBKLizMvdYuTn8K908n?=
- =?us-ascii?Q?cgCuFVjWdZtzcUPtFCpKOrp3UL406ID/3xDpU/2MFx0a9YgRhHulrzOkLdId?=
- =?us-ascii?Q?dcBs4Aw+s/IdWFmnXsYPCLI/51g2SNOp8fNv2kn3onXugr4lvyW+limDz9RE?=
- =?us-ascii?Q?T5mwNsc/SOJCbvpe9n1yXLX8OaKcfQ2IvfZa0FGwSZmT9LDN3i4o0UXiniPH?=
- =?us-ascii?Q?NPDWoL64WtI6do0JVTOZ2YskCwsoQYyFnhkJjvX/eL7xwNZJKNkv6oLQL8jU?=
- =?us-ascii?Q?Tnx9Bzg1xW5nkTN9qaJkbNrNEP3zxxDOnMiA+sYWgpXTgovP1S4RLS6/F/8h?=
- =?us-ascii?Q?nPfND3Q6BpfMAPfuJWykebYujBeORxWHTbY+IIMVRAlK5yfec6yb5ypN5lOD?=
- =?us-ascii?Q?Xs4vz5hIuSFMHVgoTCMJU62ztkpRZV8=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85bc40de-ec92-4745-4d20-08dee0f64360
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2026 15:49:03.1726 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7Y/Wg+0lreoj8Uv3NTPa9mcndxh7W2n99zg+sUMAbZFRy4FXqW9SuonMz8Qwvd3MCoyZ0nOl4V0OnKDpSXX7/3e4Z+vAJEX6DX2I6D5c2lE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR02MB6839
-Received-SPF: pass client-ip=2a01:111:f403:c406::3;
- envelope-from=chao.liu@processmission.com;
- helo=OS8PR02CU002.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] uftrace: riscv privilege level
+To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, alex.bennee@linaro.org, erdnaxe@crans.org
+References: <tencent_E17E8F6494EE130F71527C6BCE481AF33E08@qq.com>
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <tencent_E17E8F6494EE130F71527C6BCE481AF33E08@qq.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDE2NiBTYWx0ZWRfXxs0r90Jl7clz
+ AW0s6uWbIX4aCq+JPUTZzEwqhpyZjcTlVxZcXjUXmlJJUjfL1BScFfUEN8E3C13TnYY7XbZ9Al1
+ NjiLECaBINfU3p4tKimp4C58A855SoI=
+X-Authority-Analysis: v=2.4 cv=cNbQdFeN c=1 sm=1 tr=0 ts=6a550b71 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=iLqgmErQAxjCjdq5jj1Aqg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=dZbOZ2KzAAAA:8 a=2EAK0dWcFSsNEvSIV9MA:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-GUID: ht-svVH66YpWWxguiUDJdAXeZoT05r2P
+X-Proofpoint-ORIG-GUID: ht-svVH66YpWWxguiUDJdAXeZoT05r2P
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDE2NiBTYWx0ZWRfX/DzlBqJ60/M+
+ QRQTNQxKkTNkl6SBOLOWV+4XX9L3VuUqYtWe1IUjkOeDFcKLTzXiTbHJxUIjn0TU95RuVXdVGCc
+ 6Co8VK9E3anYpy9T90yAc6SZYG4vERDF809RouuuYc8JJkUaUzeKgUlINtCwh/KsnmNDVMlsd7e
+ KFcUbIiNv3UNq9bjzxoe8dy9yj+xT7DgilU+8bZ9eAUuG3qJpCOvL5AHWn7vaKKewA10D4ZSHF9
+ ELL0Qrr9OQbZq20kWHZX3A+GRXFxoZXgnPuBWfKuWj2iZIuve0skyV8X3LYlUvuYwPCHuSCDof9
+ GciEcNK7H/Ov4hOgnpWo31eiXTC5Jm3b56ITH0F0w9HpD+ZaymLvXfxoOMh1USBxbrk4nB7UVso
+ XTH56DpgZsMWuzLH1VFly1egcI/n5rcMLXx0fbUuqILOUH4C8L6DERFYjiiBi2mYk3yG2cHP9jO
+ nPt7V5+W1s7KL3mIYGQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-13_04,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 spamscore=0 suspectscore=0 impostorscore=0
+ phishscore=0 clxscore=1015 adultscore=0 malwarescore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130166
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=pierrick.bouvier@oss.qualcomm.com;
+ helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -141,53 +155,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jul 13, 2026 at 08:02:44PM +0800, Bin Meng wrote:
-> Build the complete kernel command line before adding it to the QEMU
-> arguments. This ensures the panic, noreboot and rootwait options are
-> passed to the guest.
-> 
-> Fixes: 7db162fa0138 ("tests/functional: Test SPI-SD adapter without SD card connected")
-> Signed-off-by: Bin Meng <bin.meng@processmission.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
+Hi,
 
-Thanks
-Chao
+On 7/12/2026 1:45 AM, Yanfeng Liu wrote:
+> This adds RiscV virtual user and supervisor privilege levels to
+> uftrace plugin to avoid crashing with H extension guests.
+> 
+> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+> ---
+>  contrib/plugins/uftrace.c | 13 ++++++++++---
+>  1 file changed, 10 insertions(+), 3 deletions(-)
+> 
+> diff --git a/contrib/plugins/uftrace.c b/contrib/plugins/uftrace.c
+> index 9b0a4963ae..063e32220b 100644
+> --- a/contrib/plugins/uftrace.c
+> +++ b/contrib/plugins/uftrace.c
+> @@ -109,6 +109,8 @@ typedef enum {
+>      RISCV64_SUPERVISOR,
+>      RISCV64_RESERVED,
+>      RISCV64_MACHINE,
+> +    RISCV64_VUSER,
+> +    RISCV64_VSUPERVISOR,
+>      RISCV64_PRIVILEGE_LEVEL_MAX,
+>  } Riscv64PrivilegeLevel;
+>  
+> @@ -153,8 +155,10 @@ static void uftrace_write_map(bool system_emulation)
+>      const char *path = "./uftrace.data/sid-0.map";
+>  
+>      if (system_emulation && access(path, F_OK) == 0) {
+> -        /* do not erase existing map in system emulation, as a custom one might
+> -         * already have been generated by uftrace_symbols.py */
+> +        /*
+> +         * do not erase existing map in system emulation, as a custom one might
+> +         * already have been generated by uftrace_symbols.py
+> +         */
+>          return;
+>      }
+>  
+> @@ -706,6 +710,8 @@ static const char *riscv64_get_privilege_level_name(uint8_t pl)
+>      case RISCV64_SUPERVISOR: return "Supervisor";
+>      case RISCV64_RESERVED: return "Unknown";
+>      case RISCV64_MACHINE: return "Machine";
+> +    case RISCV64_VUSER: return "VUser";
+> +    case RISCV64_VSUPERVISOR: return "VSupervisor";
+>      default:
+>          g_assert_not_reached();
+>      }
+> @@ -986,7 +992,8 @@ QEMU_PLUGIN_EXPORT int qemu_plugin_install(qemu_plugin_id_t id,
+>  
+>      score = qemu_plugin_scoreboard_new(sizeof(Cpu));
+>      qemu_plugin_register_vcpu_init_cb(id, vcpu_init, NULL);
+> -    qemu_plugin_register_atexit_cb(id, at_exit, (void *) info->system_emulation);
+> +    qemu_plugin_register_atexit_cb(id, at_exit,
+> +                                   (void *) info->system_emulation);
+>      qemu_plugin_register_vcpu_tb_trans_cb(id, vcpu_tb_trans, NULL);
+>  
+>      return 0;
 
-> 
-> ---
-> 
->  tests/functional/riscv64/test_sifive_u.py | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/tests/functional/riscv64/test_sifive_u.py b/tests/functional/riscv64/test_sifive_u.py
-> index 847f709da1..54a0f9c648 100755
-> --- a/tests/functional/riscv64/test_sifive_u.py
-> +++ b/tests/functional/riscv64/test_sifive_u.py
-> @@ -35,9 +35,6 @@ def do_test_riscv64_sifive_u_mmc_spi(self, connect_card):
->          kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
->                                 'earlycon=sbi console=ttySIF0 '
->                                 'root=/dev/mmcblk0 ')
-> -        self.vm.add_args('-kernel', kernel_path,
-> -                         '-append', kernel_command_line,
-> -                         '-no-reboot')
->          if connect_card:
->              kernel_command_line += 'panic=-1 noreboot rootwait '
->              self.vm.add_args('-drive', f'file={rootfs_path},if=sd,format=raw')
-> @@ -46,6 +43,9 @@ def do_test_riscv64_sifive_u_mmc_spi(self, connect_card):
->              kernel_command_line += 'panic=0 noreboot '
->              pattern = 'Cannot open root device "mmcblk0" or unknown-block(0,0)'
->  
-> +        self.vm.add_args('-kernel', kernel_path,
-> +                         '-append', kernel_command_line,
-> +                         '-no-reboot')
->          self.vm.launch()
->          self.wait_for_console_pattern(pattern)
->  
-> ---
-> base-commit: a759542a2c62f0fd3b65f5a66ad9868201014669
-> branch: sifive_u
-> 
-> -- 
-> 2.53.0
-> 
+
+Is that something we have implemented in upstream QEMU for riscv64
+target? From what I can see, priv register only can have M,S,U values.
+
+Regards,
+Pierrick
 
