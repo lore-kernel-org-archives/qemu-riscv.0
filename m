@@ -4,147 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC46C43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 12:11:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CCFEC43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 13:01:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjFVS-0000tp-Ei; Mon, 13 Jul 2026 08:11:30 -0400
+	id 1wjGHr-0000Nm-66; Mon, 13 Jul 2026 09:01:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wjFVQ-0000qY-AX
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 08:11:28 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wjFVO-0006eb-W4
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 08:11:28 -0400
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66D77QMb810532
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 12:11:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- GF1nzRiJdqWJEt6VpXrCC9Dp7BJLUS11lP9x00Lf9es=; b=JRrKhPpb9X4N9Ll9
- 0cpLZfiCWIHZZhURaxWRVC4U/iNq96Q5O/Bvy91UNhqs5TH8WdEXA03kTQqlq7DA
- ogIGast/ACPhvEZe0SjhL05UewOziNks8j6J3HKCcylbxkUnVlMX7ucg4Wij9Fo1
- mRyofhnpJ5Awq0y9W7qQkmJUgQZxG7QnCWsfj4yLVTWo8zuFir39nqJSQ5rppa8i
- O8Qgy+0bTe/E4/iInTAlbD9BDsUkhfx+Eiy/E+01HeqYIf5Y9MrlaQdBhd5Ni4SW
- tuRB3Nzg8Crv28ufa+tog/PbTBPE1Ge2n7pzMgPjewTs7B2jMReoAXTl1TI7G/V9
- ticFQQ==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fcubss3hf-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 12:11:25 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-5174a236220so46246941cf.3
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 05:11:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783944685; x=1784549485; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=GF1nzRiJdqWJEt6VpXrCC9Dp7BJLUS11lP9x00Lf9es=;
- b=krXoG/K1EBbIQ8KqlN+Mt4ysNJehJpD2ghSC9ma/EBftiRwqlQtNW3/OWPJ6Lo949f
- agEebloMm+AXrLxYuDVj9Bck7CiWw9F7GoyacknqWIfUGClU0JVYqUzIGI7wMimZDcw+
- m60YxwTRG3gJj/rsRoVCftYgAs+4ZbA2qJqDuZwkqNvmZxpc9vtJVYuktPCC2rw2VBQe
- YJ/SMelPmjebcjFHTc+OVhJhPnPWa6z7RqHhELecUPqftDQMVAS03ulhInZq1/Rk9wcO
- EqG1MR4gBDIb2ExWJYyeL3gmKHNqN+j/uJkWj1Q/TCh8mzl16Wo0Qzh96lLGuQ9klyTK
- mqpw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783944685; x=1784549485;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=GF1nzRiJdqWJEt6VpXrCC9Dp7BJLUS11lP9x00Lf9es=;
- b=Kw6QSnam72EmF2EeDFDmfLhURQaT0l2Ar9gzj3m+d6Cr7PLKF6/UqDTIntm8bF62zT
- OiaVV4tihB2d13i7Mq92oPdKOWg8s24JfwvtmxeRt+iJdzZ+ZOwnhU+T4jk3xgIfOElJ
- j3BCXW617etBFEUtXG6/zwJbyqT8K+8YlJPzWgwEeyK2AtbGK69BUqSRBjjdj77x/Xn0
- yTqcRkTq3YuF9L1s1N+OxwpMQ7e6tfek0gr2+Kd2BnMomqV4GIALb+Wdm9XEyKrItE4+
- AcvdGUEto+wgTovx5PzTYK4PgWf5SK5j5bG4p+DVUC9lKyHAuPQ5EQ/kryDedRjDs4sL
- yZ9w==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqjYYouE23kKbsM8yfQ1L8J/oIrZ+h4oWSH9PDinuE9cfY/fXd9Ii3wZmRV/yk2kDyLx26JuveOnEbr@nongnu.org
-X-Gm-Message-State: AOJu0Yzy+WZtiw6v1RxCQYQxqW5IFABM9kvlBYptpss6H/g5hrHvgEUa
- C1uHPnsmXX4RIi82Vgu8Fj4ZuNrGCA90/vMFVGe6aNWQvoPMxwnEhB3Zc/o3wgOaTRR+Yd+tigK
- cfH0icloHA2+2yQq4hSDiOwsASbJMEIiJARY5o4z1bja2gwNEisI0Db/jfA==
-X-Gm-Gg: AfdE7ckPAqQmxchGt0Mc90uA7+6iT+p6eWOPWRLmINsAKAxn/vDy3tSdsaIAp/TtZ37
- 8JojZMtUoOWjADUvOgjsEo8yjubP1Re0iGkTgcuokyf01BKDfr7mM+nC0mmp0yUWtSiHDuq+Zq6
- yobgPxBIMGweW9G73u2XHySo2tvmSVaqwcOQLfvUJw8wXwnl3OL4AFhppOo2453zD9xkkoTgv2z
- 3bv+X6UuXPExNLUAV6k6Hnj7mJi7umYo7Td2SP6PQHPatAy4MsTpiTYhnBDq20RBdJXPHHJ6Up6
- P12nYPof4AQ5Z9QUsoGV5j3Yd8x2H9Sf7STm4qQTU4fmBl+ejtBh5qX+/Br5G7L+7GZz2fnh7tm
- dB/p55GCjU5LEdXraejYOWsbmAQS6NXLPo232ADKSfdkKJLc5ngGo6RaSrLILzg==
-X-Received: by 2002:a05:622a:5a05:b0:51c:e14:87a7 with SMTP id
- d75a77b69052e-51cbf1628d3mr88398741cf.28.1783944685352; 
- Mon, 13 Jul 2026 05:11:25 -0700 (PDT)
-X-Received: by 2002:a05:622a:5a05:b0:51c:e14:87a7 with SMTP id
- d75a77b69052e-51cbf1628d3mr88398531cf.28.1783944684932; 
- Mon, 13 Jul 2026 05:11:24 -0700 (PDT)
-Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-493eb6f3b85sm581267955e9.2.2026.07.13.05.11.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Jul 2026 05:11:24 -0700 (PDT)
-Message-ID: <cff0ca65-ced2-4304-83dd-c2786a2297e0@oss.qualcomm.com>
-Date: Mon, 13 Jul 2026 14:11:23 +0200
+ (Exim 4.90_1) (envelope-from <farosas@suse.de>) id 1wjGHM-0000GV-J8
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 09:01:07 -0400
+Received: from smtp-out1.suse.de ([2a07:de40:b251:101:10:150:64:1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <farosas@suse.de>) id 1wjGHK-0007Ln-Rl
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 09:01:00 -0400
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id CF8C57781A;
+ Mon, 13 Jul 2026 13:00:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1783947650; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Qv96/5guzHxPYoLinf47l1CjzkjcX3/nWNpsisGpUIo=;
+ b=iyP+EEKaY2yKlNq4O4UJ13JnEHHLaJU9Evzv3v/ImMeJdFmJvqYl1OKJA/FRfBRyJcxtKE
+ rs/H3rpJZwWPllYn9zE1VL7KkFotjiwplnfYQqiVqtb36fD9J5sSS/Awp36tddUZEoqfTl
+ zplsyuHyQZWMkwCMffSVsA1OhcopeFE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1783947650;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Qv96/5guzHxPYoLinf47l1CjzkjcX3/nWNpsisGpUIo=;
+ b=9U0Yd/Lw7ojpASCpwhp5fwXho8BoBUxo+PixMKWTlNdBlPUzx96aAfwgcWFbk9QksRAlUO
+ u3nIEOvC0vQR1CBw==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1783947645; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Qv96/5guzHxPYoLinf47l1CjzkjcX3/nWNpsisGpUIo=;
+ b=VJZxZaKwD/WzCN1wNcYcO+6pzqJ4DJ0YejsMikDjvpS17GP37neOcsmakD4TwgK73Ln7eg
+ jXzuI9dL+yL7BEqZMZ7+bVb5j4mDYhpySri3TnWAu8EdP616tdqU7stSbGbKxDSSXwWBJu
+ bL192Ybi9hElszv1YuC5xa7VuuUVcPM=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1783947645;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Qv96/5guzHxPYoLinf47l1CjzkjcX3/nWNpsisGpUIo=;
+ b=0gFxOXzjCWvk0lbyGdxmAdRndcpwwjbMJIUafot4UDWlsne3Ot+tcp0QaZ38M8lRxQC9Yv
+ m6Nc196Rs27vqGCg==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 676DD779AE;
+ Mon, 13 Jul 2026 13:00:45 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id dkh9Dn3hVGp9UQAAD6G6ig
+ (envelope-from <farosas@suse.de>); Mon, 13 Jul 2026 13:00:45 +0000
+From: Fabiano Rosas <farosas@suse.de>
+To: Michael Tokarev <mjt@tls.msk.ru>, Daniel Henrique Barboza
+ <daniel.barboza@oss.qualcomm.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ andrew.jones@oss.qualcomm.com, nutty.liu@hotmail.com, Palmer Dabbelt
+ <palmer@dabbelt.com>, Tao Tang <tangtao1634@phytium.com.cn>, Laurent
+ Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-stable <qemu-stable@nongnu.org>
+Subject: Re: [PATCH v2 2/3] hw/riscv/riscv-iommu.c: fault when !PTE_U and no
+ priv access
+In-Reply-To: <731566cb-bbdd-418f-b80e-f68750f24212@tls.msk.ru>
+References: <20260701121111.537654-1-daniel.barboza@oss.qualcomm.com>
+ <20260701121111.537654-3-daniel.barboza@oss.qualcomm.com>
+ <731566cb-bbdd-418f-b80e-f68750f24212@tls.msk.ru>
+Date: Mon, 13 Jul 2026 10:00:43 -0300
+Message-ID: <87tsq3doxw.fsf@suse.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] tests/functional/riscv64: sifive_u: Fix kernel command
- line
-Content-Language: en-US
-To: Bin Meng <bin.meng@processmission.com>, QEMU <qemu-devel@nongnu.org>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Chao Liu <chao.liu@processmission.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- qemu-riscv@nongnu.org
-References: <20260713120245.781959-1-bin.meng@processmission.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260713120245.781959-1-bin.meng@processmission.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=Oq9/DS/t c=1 sm=1 tr=0 ts=6a54d5ed cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=FRSEYCzRAAAA:8 a=EUspDBNiAAAA:8 a=1tSEMpTH9XP_W59IOagA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=zgiPjhLxNE0A:10 a=uxP6HrT_eTzRwkO_Te1X:22
- a=H4N_Y-AU75W7NKDNhZlT:22
-X-Proofpoint-ORIG-GUID: luB_cf6MwvuOrm2IZ59mZ8tPwU5T0v1n
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDEyNyBTYWx0ZWRfX6tE9FztAtp+Z
- cjKs8IZkBZ0X2rWWJj7dH5ldtx2FUE3U2Xe2zmf4mZQT+sotWDnXi5T4Xf1JyY7koUUi/99bjyA
- qnn865KyycY5EIUXIRsKKRWymhMDT60=
-X-Proofpoint-GUID: luB_cf6MwvuOrm2IZ59mZ8tPwU5T0v1n
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDEyNyBTYWx0ZWRfXzdU+Ag634r1M
- nG8REBrGFTUpPQt8FoXNsjBVR8T2Ut9oLl66iJ4ej+gmOMqHvJHL5VCi2Teu1joWQgPm8L8klWH
- QGdqtUb8fr+dlC8ATPr3gIKEqjEWrFqUxZSq/VCt6NDsjX5ylzxBgNpOn4RUOsCjOSOgy9jbrx+
- 1ARQx/HQAae/H8tm1QgiHlsxehE2sEOg9DYo7iD0bQlhJiRwx3rDWLsugKr5HReGqXxoqghiyYu
- IJ/LITEzs5a1LPCT0o0Ipg4i3qdsHNk8eALa5fI+a7tHhpag/hv7ZAEAJOSGm64Kll+jDi++i1D
- VcdDsjiv27881bbN5PYvtIf1DPvWAminVBId/SMrqO1UkExN4+iAqVgqkOSNGXa6d1kpGpYz0uz
- +avm/YUJHRGvrVXUU32VEpcwHzfzDgWaHCQ1D+F435eePpzbiB0sCmBw366Q4oIlNssn4nY0l+R
- 0L/lSD8H4VW50bzaj5w==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-13_02,2026-07-10_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 spamscore=0 malwarescore=0 bulkscore=0
- adultscore=0 clxscore=1015 phishscore=0 suspectscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130127
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain
+X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_VIA_SMTP_AUTH(0.00)[];
+ FUZZY_RATELIMITED(0.00)[rspamd.com];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com,hotmail.com];
+ MISSING_XM_UA(0.00)[]; TAGGED_RCPT(0.00)[]; ARC_NA(0.00)[];
+ RCPT_COUNT_TWELVE(0.00)[15]; MIME_TRACE(0.00)[0:+];
+ RCVD_TLS_ALL(0.00)[]; SUBJECT_HAS_EXCLAIM(0.00)[];
+ TO_DN_SOME(0.00)[]; FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[nongnu.org,wdc.com,gmail.com,linux.alibaba.com,oss.qualcomm.com,hotmail.com,dabbelt.com,phytium.com.cn,redhat.com];
+ MID_RHS_MATCH_FROM(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
+ RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, gitlab.com:url,
+ qualcomm.com:email, suse.de:mid]
+Received-SPF: pass client-ip=2a07:de40:b251:101:10:150:64:1;
+ envelope-from=farosas@suse.de; helo=smtp-out1.suse.de
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -160,18 +125,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 13/7/26 14:02, Bin Meng wrote:
-> Build the complete kernel command line before adding it to the QEMU
-> arguments. This ensures the panic, noreboot and rootwait options are
-> passed to the guest.
-> 
-> Fixes: 7db162fa0138 ("tests/functional: Test SPI-SD adapter without SD card connected")
-> Signed-off-by: Bin Meng <bin.meng@processmission.com>
-> 
-> ---
-> 
->   tests/functional/riscv64/test_sifive_u.py | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
+Michael Tokarev <mjt@tls.msk.ru> writes:
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+> On 7/1/26 15:11, Daniel Henrique Barboza wrote:
+>> All IOMMU accesses are assumed to be user mode unless told otherwise,
+>> i.e. we have a process_id.  In case we have a non-user mode leaf PTE
+>> (PTE_U isn't set) and we are running in user mode, we need to throw a
+>> fault.
+>> 
+>> This also reflects on qos-riscv-iommu tests: the tests always run in
+>> user mode so our PTEs must have PTE_U (bit 0x10) set.
+>> 
+>> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+>> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3553
+>> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+>> Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+>> Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+>
+> ...
+>> --- a/tests/qtest/libqos/qos-riscv-iommu.h
+>> +++ b/tests/qtest/libqos/qos-riscv-iommu.h
+>> @@ -54,8 +54,8 @@
+>>    * PTE masks for RISC-V IOMMU page tables.
+>>    * Values match PTE_V, PTE_R, PTE_W, PTE_A, PTE_D in target/riscv/cpu_bits.h
+>>    */
+>> -#define QRIOMMU_NON_LEAF_PTE_MASK   0x001  /* PTE_V */
+>> -#define QRIOMMU_LEAF_PTE_RW_MASK    0x0c7  /* V|R|W|A|D */
+>> +#define QRIOMMU_NON_LEAF_PTE_MASK   0x011  /* PTE_V | PTE_U */
+>> +#define QRIOMMU_LEAF_PTE_RW_MASK    0x0d7  /* V | R | W | A | D | PTE_U */
+>>   #define QRIOMMU_PTE_PPN_MASK        0x003ffffffffffc00ull
+>>   
+>>   /* Address-space base offset for test tables */
+>
+> So, this patch adds a fix for the testing bits.
+>
+> When trying to pick this one up for 10.0.x (LTS) series, I've another doubt.
+> This testing fix fixes v10.2.0-1299-g9d8ffbfc1d3 "tests/qtest/libqos: Add RISC-V
+> IOMMU helper library".  Quite some tests were added based on that library.
+> It doesn't exist in 10.0.x, and neither is v10.2.0-656-g489812e32df
+> "tests/qtest/libqos: Add SMMUv3 helper library".
+> Sure I can drop the parts of this change which touches the tests.  But this
+> means we don't have tests to cover the issues being fixed, and I don't know
+> if the result of these fixes actually works or not.
+>
+> Should we pick up some testing bits in this area for 10.0.x (especially
+> 9d8ffbfc1d3 and some subsequent commits which use this library)?  Or just
+> ignore all riscv iommu patches in there?
+>
+
+I worry picking tests for stable could become a development task,
+requiring new code to make tests suitable for an older codebase/test
+codebase.
+
+The test frameworks and their supporting infrastructure (such as the
+riscv iommu lib) don't ensure a stable abi so that a test from one
+version will run without issues when backported to an earlier
+version.
+
+Also, the tests are usually not structured in a way that allow us to
+pick just the part that tests the code fixes being backported, so we
+risk trying to test in an earlier version features that don't even exist
+at that point. There could also exist a complex graph of what's broken
+vs. what is being tested (e.g. broken in v10, fixed partially in v11,
+then test needs change, then fixed properly in v12, test needs change
+again, etc).
+
+> Thanks,
+>
+> /mjt
 
