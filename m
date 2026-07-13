@@ -4,144 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED4AC43458
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 06:14:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10DA5C43458
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jul 2026 06:44:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wj9vL-0006tP-VR; Mon, 13 Jul 2026 02:13:52 -0400
+	id 1wjAO5-00049K-Pv; Mon, 13 Jul 2026 02:43:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wj9vG-0006rP-Uf
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 02:13:46 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wjAO0-00048H-4I
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 02:43:28 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1wj9vD-0005eM-Ia
- for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 02:13:45 -0400
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66D3AVEi137033
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 06:13:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- P/IMXcUmMiGrcKUzVTRDJjn3c7VrwXkTEa5XQzOl9So=; b=K+kebJ1OMalfLK1m
- tYwGBkRjwCUxFFnNvPFn/ewS3F8bYIlKFhIDz/pG4REryelnFUzTrWyki3gf8u3B
- PK5pAgCe2V+xXnutoRm47Cl6qPJ6RhQp23j00OagvRgbVbh0IkqjwGaX57wkuQw5
- CJbwumURtavBG2u47uRhshW4rOR4HJzrRkZDr121fPRUABYxqW7pt3k7kDH7X3At
- GPgwZ+kTVo1gF8qz69K7fA3k4YYnJuNSidQTR+tcB5NeyOO3KMITfHxPmD465kja
- lyYMu/Sn/3ktuTUn6k1QCdt6DSpNVBG65WU8+qOBpObEXElWW3lZkZiVVFEe52Po
- Bblv2w==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fbe914kbv-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 13 Jul 2026 06:13:41 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-51a8c689b5fso39898861cf.0
- for <qemu-riscv@nongnu.org>; Sun, 12 Jul 2026 23:13:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1783923220; x=1784528020; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=P/IMXcUmMiGrcKUzVTRDJjn3c7VrwXkTEa5XQzOl9So=;
- b=JkgDnVkWPGHrrkQqEaA87JkAmixvoI90my6KQdHp75vKHpGMWrb+f1Ie7+GZZf2I2G
- 7qsvApIPhqVNvQhhh1555QRDuxEutsCWaXACThERrBPTreUaxJOHVyCZywpoQszo+ORI
- 7SshJu8jPPTwe5k6IShuxMB5ACskwKh5uUd7vy143zokMaxB47igoyWyiSv71pzL1s0f
- KK2PjS6FklcFjimIlPVSTle8pgkY+x1xYLwLSRx2sTSWL77KDOwty9qBal8/omNmvTri
- lJ43cuiidCEExaQhy3wcGNwy8z5otNMNka1eWvTwr6Cpv70vfTTp5iI+S+TLva39CsHG
- Xitw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1783923220; x=1784528020;
- h=content-transfer-encoding:content-type:in-reply-to:from:references
- :cc:to:content-language:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=P/IMXcUmMiGrcKUzVTRDJjn3c7VrwXkTEa5XQzOl9So=;
- b=Od/dKA+ngZPUoEQBlkxfnmtwmXApRs/x/4xNyciPekWKYthI/aM0T/GZieMxtD219r
- dWXngB4g6noy1l7Yj9P77vBTAnnwpt8aeh4oo96qMe6afEXfzANahL5WpaucOaSlc/PG
- kiExq+6Vu8KWOIvo10cL20kwOrQKk0LAUlTlf02qZj1NefrFPqBZTpyAH0s0q/B30cJn
- KM97Lo3kYZEkstro7ydsBuJKkCdk6vvh+Uw5kcKhjFvj8dGAHtD3ny7xIk3s/qf9jmbe
- aBco6vsHI3dBhpFTNqYZfrJo+G29ipd+PWpIxiVHTF4otxBr8LGkGwnfmUUPifXpqLLK
- a/Lw==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqzBlrlCDoMlN0DefBbbG1E0guwJbghBFpjZkWyP/a0KUqlodkL4QC+djxr5MQNM59Q7x7cQpd9Ak39@nongnu.org
-X-Gm-Message-State: AOJu0Yy6VAANzAynxGNiMVAUr/z9VJK94WuTcNtfvH6/3NUyEgafbpkR
- rB7N6whNizA5iA38M0sJDgyA0dDBj4I45tdRoDqgBzmJv8d/9kBSJ639a0CZTNCQnGEGJF2376f
- 8/RiZ3nkH1sooqZDAQAkCOnlm9W/ht0Ch5EmIWQu6qna1lsVTbM5lsoTCqg==
-X-Gm-Gg: AfdE7cmUqcTwN/9FrCl4GijE1O9u2bSjftiYGtQJ/PRq2Dljdq/9QAduhwz8ofnyHvP
- kyQA2AhzS6qo9ltT4BUQdog8FInoxhL188jEU2IDbcUqgYS1rhldTovZmSxztIFiEw2cRKJKcP1
- /RdGOd4GjHboJhfDf5EkJMDqBIzbPxcgg+vbSAFKWBfOmv7WFQn2Zl2oij5lEOIVp5K03FafUyF
- EHhCbI8wzzoI+rv0ygXKcUT6UrOQVZacTYtRGS5zKyCpiF01T1895Ia7k6vUM0itBrEPCwb/0Rk
- YCvHvI8prJVUkNxyoPKdUm5S5i1Go36G+iMvwdg7V0Biu6diCLja5dOaBlRgRmYHXi+er7D04nE
- vKw/1lmc8aN28c9UWGUFIV0soa4HRLMDmRz9aEUcGyiBxmp+iLRdSXANGrmq/rQ==
-X-Received: by 2002:a05:622a:230d:b0:51a:8c9c:7f3d with SMTP id
- d75a77b69052e-51cbf26c037mr78137251cf.64.1783923220584; 
- Sun, 12 Jul 2026 23:13:40 -0700 (PDT)
-X-Received: by 2002:a05:622a:230d:b0:51a:8c9c:7f3d with SMTP id
- d75a77b69052e-51cbf26c037mr78137161cf.64.1783923220186; 
- Sun, 12 Jul 2026 23:13:40 -0700 (PDT)
-Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-47a9e4d8410sm83028276f8f.15.2026.07.12.23.13.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 12 Jul 2026 23:13:39 -0700 (PDT)
-Message-ID: <65079ad4-3ab9-4ad6-b683-09d46c72b266@oss.qualcomm.com>
-Date: Mon, 13 Jul 2026 08:13:38 +0200
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1wjANv-0002ho-TG
+ for qemu-riscv@nongnu.org; Mon, 13 Jul 2026 02:43:27 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1783925001;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=j9vYIB74rM68BpOWfIuu0QmU0qqoQaQGhMQ6kywzOWY=;
+ b=AD9b5Fwy92AnWT3xd7GBIbq7pUZr/++dyi14Uc5KchOpmqVc/7YZhvBr408LedarsvoQ2o
+ Xdo+tZQHrZyjyMX6vPk5h/aANAnyGMBeifXA/qgyJeMdGfB3M8W+UY6F9OedS8Yl+MVAQ+
+ 8Bd2slgysq4UbY9d3tr07R9G+g/7EY8=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-382-fBD_d9cYOBC8fv5i4lp8mw-1; Mon,
+ 13 Jul 2026 02:43:18 -0400
+X-MC-Unique: fBD_d9cYOBC8fv5i4lp8mw-1
+X-Mimecast-MFC-AGG-ID: fBD_d9cYOBC8fv5i4lp8mw_1783924993
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 0844118009EF; Mon, 13 Jul 2026 06:43:11 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.44.22.4])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id A5BB830001A1; Mon, 13 Jul 2026 06:43:06 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 4564C21E6920; Mon, 13 Jul 2026 08:43:04 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: BALATON Zoltan <balaton@eik.bme.hu>
+Cc: qemu-devel@nongnu.org,  Aditya Gupta <adityag@linux.ibm.com>,  Alexander
+ Graf <graf@amazon.com>,  Alexandre Iooss <erdnaxe@crans.org>,  Alexey
+ Kardashevskiy <aik@ozlabs.ru>,  Alistair Francis
+ <Alistair.Francis@wdc.com>,  Alistair Francis <alistair@alistair23.me>,
+ Antony Pavlov <antonynpavlov@gmail.com>,  Artyom Tarasenko
+ <atar4qemu@gmail.com>,  Bernhard Beschow <shentey@gmail.com>,  Bibo Mao
+ <maobibo@loongson.cn>,  Brian Cain <brian.cain@oss.qualcomm.com>,  Chao
+ Liu <chao.liu@processmission.com>,  Christian Borntraeger
+ <borntraeger@linux.ibm.com>,  =?utf-8?Q?Cl=C3=A9ment?= Chigot
+ <chigot@adacore.com>,  =?utf-8?Q?C=C3=A9dric?=
+ Le Goater <clg@kaod.org>,  Dorjoy Chowdhury <dorjoychy111@gmail.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,  Eric Farman
+ <farman@linux.ibm.com>,  Farhan Ali <alifm@linux.ibm.com>,  Felipe Balbi
+ <balbi@kernel.org>,  Francisco Iglesias <francisco.iglesias@amd.com>,
+ Frederic Konrad <konrad.frederic@yahoo.fr>,  Gaurav Sharma
+ <gaurav.sharma_7@nxp.com>,  Gautam Gala <ggala@linux.ibm.com>,  Glenn
+ Miles <milesg@linux.ibm.com>,  Halil Pasic <pasic@linux.ibm.com>,  Hao Wu
+ <wuhaotsh@google.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Helge
+ Deller <deller@gmx.de>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
+ =?utf-8?Q?Herv=C3=A9?= Poussineau <hpoussin@reactos.org>,  Huacai Chen
+ <chenhuacai@kernel.org>,  Jan Kiszka <jan.kiszka@web.de>,  Jared Rossi
+ <jrossi@linux.ibm.com>,  Joel Stanley <joel@jms.id.au>,  Laurent Vivier
+ <laurent@vivier.eu>,  Manos Pitsidianakis
+ <manos.pitsidianakis@linaro.org>,  Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>,  Matthew Rosato <mjrosato@linux.ibm.com>,
+ Max Filippov <jcmvbkbc@gmail.com>,  Michael Rolnik <mrolnik@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,  Nicholas Piggin
+ <npiggin@gmail.com>,  Niek Linnenbank <nieklinnenbank@gmail.com>,  Palmer
+ Dabbelt <palmer@dabbelt.com>,  Paolo Bonzini <pbonzini@redhat.com>,  Peter
+ Maydell <peter.maydell@linaro.org>,  Philippe =?utf-8?Q?Mathieu-Daud?=
+ =?utf-8?Q?=C3=A9?=
+ <philmd@mailo.com>,  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Ran Wang <wangran@bosc.ac.cn>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Sai Pavan Boddu
+ <sai.pavan.boddu@amd.com>,  Samuel Tardieu <sam@rfc1149.net>,  Sergio
+ Lopez <slp@redhat.com>,  Song Gao <17746591750@163.com>,  Stafford Horne
+ <shorne@gmail.com>,  Subbaraya Sundeep <sundeep.lkml@gmail.com>,  Thomas
+ Huth <th.huth+qemu@posteo.eu>,  Tyrone Ting <kfting@nuvoton.com>,
+ qemu-arm@nongnu.org,  qemu-ppc@nongnu.org,  qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org
+Subject: Re: Call to clean up QOM onboard devices lacking a parent
+In-Reply-To: <69d31293-b6db-a411-141b-234c7d823bbe@eik.bme.hu> (BALATON
+ Zoltan's message of "Fri, 10 Jul 2026 14:13:13 +0200 (CEST)")
+References: <87se5scipx.fsf@pond.sub.org>
+ <17c7f91b-8935-8ebf-a982-f91df755af81@eik.bme.hu>
+ <87a4rzxr1q.fsf@pond.sub.org>
+ <69d31293-b6db-a411-141b-234c7d823bbe@eik.bme.hu>
+Date: Mon, 13 Jul 2026 08:43:04 +0200
+Message-ID: <874ii3wft3.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] MAINTAINERS: Mark "vhost-user-scmi" orphaned
-Content-Language: en-US
-To: "Michael S. Tsirkin" <mst@redhat.com>,
- Markus Armbruster <armbru@redhat.com>
-Cc: qemu-devel@nongnu.org, alistair23@gmail.com, qemu-riscv@nongnu.org,
- bin.meng@processmission.com, mzamazal@redhat.com, sgarzare@redhat.com
-References: <20260710114305.2961898-1-armbru@redhat.com>
- <20260710114305.2961898-3-armbru@redhat.com>
- <20260711035848-mutt-send-email-mst@kernel.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20260711035848-mutt-send-email-mst@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=TbymcxQh c=1 sm=1 tr=0 ts=6a548215 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=20KFwNOVAAAA:8 a=69wJf7TsAAAA:8 a=zdFt2-FTdirmDjd2dogA:9 a=QEXdDO2ut3YA:10
- a=kacYvNCVWA4VmyqE58fU:22 a=Fg1AiH1G6rFz08G2ETeA:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDA2MSBTYWx0ZWRfX3uUB7qejzNgm
- BONvKrqnRHhaZGdci8jPLaCSM4MfD43UFt4T7cSNYyhOMuULTryWwP7Sayeomav2mQ/k8kTzUgK
- c7Xj9K5l+ZGPd6q7QLHhT+hv3n9djfA=
-X-Proofpoint-GUID: tSFDxo3sd40K9eWwhWz_c64uqKV4Zv2Q
-X-Proofpoint-ORIG-GUID: tSFDxo3sd40K9eWwhWz_c64uqKV4Zv2Q
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDA2MSBTYWx0ZWRfX6ahiTu3RD+i3
- oVheoesPHuEG1jG+EFmWN+I9ItTe8OYbRKwvBB7hAuKx5sfuYSogVrBIFfJIjcQgK3pXWVVq762
- CJJ7kr8Oab7dTlSsSMxpyUP0DXjl+8S6tMhW2uwSAb1QKTiMi7KIHVmEgL+mavis6Ic9Pqu3tkD
- HfYlIPAlOuCSuhwBtUYtiheR/pBnfGh5R7IWDebX6EnJzVgxqhAiMyJMSGGV8Sq1GM/cX5z+u86
- ZJJJuCuEh7W+T/nsGZp9epMKiy0lPDNFx0gjOcnPfYCxbM9lHhSP6muarIUvgDdj991PtcQyn9P
- actzXHgu7G5S9xbDwkkfde5HBbcSNqqVMBU3rzFeKzcdix1biXrVSeybDHshu8qvHv+6hDLNx7k
- jVwWdqqLNWI+oleBANvFNv9B1o3CaCUjkmPThFFPOpaEKda7o8hVVHoy66QxSdNwgGlgfAQ3eOw
- Kk3qsgcjDMk7YjMn7QQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-13_01,2026-07-10_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 bulkscore=0 priorityscore=1501 suspectscore=0 impostorscore=0
- adultscore=0 lowpriorityscore=0 phishscore=0 spamscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130061
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: 9RG-MZyYzjTuXAJhWTjVam_mHZ4j1crO2gdShbNO_1s_1783924993
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
+Received-SPF: permerror client-ip=170.10.133.124;
+ envelope-from=armbru@redhat.com; helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ SPF_HELO_PASS=-0.001,
+ T_SPF_PERMERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -157,52 +128,153 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11/7/26 10:00, Michael S. Tsirkin wrote:
-> On Fri, Jul 10, 2026 at 01:43:05PM +0200, Markus Armbruster wrote:
->> Commit a5dab090e1 (hw/virtio: Add boilerplate for vhost-user-scmi
->> device, 2023-06-28) added the section with S: Supported, but no M:.
->> This makes no sense.  Downgrade to S: Orphan.
+BALATON Zoltan <balaton@eik.bme.hu> writes:
+
+> On Fri, 10 Jul 2026, Markus Armbruster wrote:
+>> BALATON Zoltan <balaton@eik.bme.hu> writes:
 >>
->> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> 
-> 
-> No, this makes sense. The reason this section was added is so that Milan can
-> get copied on vhost-user-scmi but not other virtio stuff:
-> 
-> ./scripts/get_maintainer.pl -f hw/virtio/vhost-user-scmi.c
-> Milan Zamazal <mzamazal@redhat.com> (reviewer:vhost-user-scmi)
-> "Michael S. Tsirkin" <mst@redhat.com> (supporter:vhost)
-> Stefano Garzarella <sgarzare@redhat.com> (reviewer:vhost)
-> qemu-devel@nongnu.org (open list:All patches CC here)
-> 
-> Pls drop this patch.
-> 
->> ---
->>   MAINTAINERS | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>> On Thu, 9 Jul 2026, Markus Armbruster wrote:
+>>>> A QOM object must be the child of exactly one parent.  This defines the
+>>>> QOM composition tree.  The link from parent to child is a property of
+>>>> the parent, and therefore has a name that is unique within its parent.
+>>>> An object's canonical QOM path is these names on the path from root to
+>>>> object in the QOM composition tree separated by '/'.
+>>>>
+>>>> For devices:
+>>>>
+>>>> * If a device is plugged in with -device / device_add, and it has an ID,
+>>>>   we make it a child of /machine/peripheral/ with name ID.  If it
+>>>>   doesn't have an ID, we make it a child of /machine/peripheral-anon/
+>>>>   with name device[N], where N counts up from zero.  The canonical QOM
+>>>>   path /machine/peripheral/ID is stable.  The canonical QOM path
+>>>>   /machine/peripheral-anon/device[N] isn't: it depends on the number of
+>>>>   devices already there.
+>>>>
+>>>> * If a device is part of another device, it should be its child.  The
+>>>>   child's canonical QOM path is the parent's plus '/CHILD-NAME'.  Stable
+>>>>   as long as the parent's path and the child name are.
+>>>>
+>>>> * "Should" because we have a lot of code that fails to pick the parent.
+>>>>   When such a device gets realized, we make it a child of
+>>>>   /machine/unattached/ orphanage with name device[N], where N counts up
+>>>>   from zero.  The canonical QOM path /machine/unattached/device[N]
+>>>>   depends on the number of children already in the orphanage, which
+>>>>   makes it unstable.
+>>>>
+>>>>   Letting code get away with not picking a parent was a mistake.  I
+>>>>   guess it "saved" us some thinking about what's part of what when
+>>>>   converting existing devices to QOM.  In other words, it enabled sloppy
+>>>>   hardware modeling.  We've been "saving" thinking ever since.
+>>>>
+>>>>   I want /machine/unattached/ to be empty.  If an onboard device isn't
+>>>>   part of another device, put it into /machine/ with a sensible name.
+>>>
+>>> The last time this came up I've asked a few questions but did not get an answer:
+>>>
+>>> 1. What's the use of the QOM composition tree? I never needed it and apart from being able to admire it in info qom-tree I don't know if it's used for anything. For a long time I did not even know about info qom-tree because I only needed info qtree and info mtree and rarely if ever need to look at the qom-tree. If it has no real use I'm happy to not think about it.
+>>>
+>>> 2. What is a QOM parent? There were proposals to parent devices to their bus if they have any, that's what qtree shows anyway. If it's something else it should be better defined somewhere.
+>>>
+>>> Without getting answers for these questions I don't think I'm able to fix the machines I maintain.
 >>
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index aa2df9cbe3..4d558ddee9 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -2622,7 +2622,7 @@ F: include/hw/virtio/vhost-user-snd.h
->>   
->>   vhost-user-scmi
+>> Unfortunately, I don't have the time to teach a class on QOM basics
+>> today.  The text you quoted explains what QOM parent and canonical QOM
+>> path are, albeit briefly.  It also explains how to pick the QOM parent
+>> properly, what happens when you neglect to pick one, and why that's
+>> undesirable.  I'm going to elaborate a bit.
+>
+> I read that text but understood it describes what is done now and missed the part where it says how to pick a parent.
+>
+>> A fully constructed QOM object is part of the QOM composition tree.
+>> This is a fundamental property of QOM's design.
+>>
+>> A QOM object can be composed of sub-objects.  Its sub-objects are its
+>> children in the composition tree.  That's why it's named *composition*
+>> tree.
+>
+> OK so this is clear for a SoC or a multifunction device where we mostly do that now, for example hw/isa/vt82c686.c has object_initialize_child for its parts (which is the only reason we need an init method and could do without it otherwise). For PPC460EX we don't model the SoC as this is old code that was cleaned up a bit but never completed to convert everything so the machine still creates the SoC parts and wires them as a lot of older machines did. I intended to improve the PCIe emulation on sam460ex and clean up that part during that but haven't got to it yet. I guess other devices like isa have the same problem that they predate even QOM so was not fully converted yet.
 
-So what we want is to add here:
+Yes, many of the early conversions were superficial.
 
-   M: Michael S. Tsirkin <mst@redhat.com>
-   R: Stefano Garzarella <sgarzare@redhat.com>
+Once problematic code exists, it gets imitated.  We shouldn't blame the
+victims.
 
->>   R: Milan Zamazal <mzamazal@redhat.com>
->> -S: Supported
->> +S: Orphan
->>   F: hw/virtio/vhost-user-scmi*
->>   F: include/hw/virtio/vhost-user-scmi.h
->>   F: tests/qtest/libqos/virtio-scmi.*
->> -- 
->> 2.54.0
-> 
-> 
+> What should own sysbus devices? The machine? Or is it the bus which owns the devices connected to it?
+
+If the sysbus device is part of another device, it should be below it in
+the composition tree.  Whether to connect it directly or via its bus is
+arguably a matter of taste.  Would be nice if we could agree on a
+convention there.
+
+If it's not part of another device (say a chip soldered onto the
+mainboard), then put it into /machine with a sensible name.
+
+> Another problem is that machines usually use convenience functions to create devices such as sysbus_create_simple and pci_create_simple so if these devices need to be attached to the machine then these convenience functions should take care of that not the board code. It's rare that a device does object_new or object_initialize to get a device and it would be inconvenient to then cast the result to object and parent it somewhere where the functions that created the device could do this.
+
+Alex Graf just posted RFC patches "qom: Make composition-tree parenting
+mandatory".  I haven't hat a chance to examine them, but patch titles
+suggest the series takes care of that.
+
+>> Canonical QOM paths are visible at external interfaces both as input and
+>> as output.  A few quick examples:
+>>
+>> * QMP command query-cpus-fast reports a CPU's canonical QOM path.  For
+>>   some machines, we get something like "/machine/unattached/device[0]".
+>>   Fine as long as the client treats it as an opaque handle.  For other
+>>   machines, we get something like "/machine/soc/cpu", which is clearly
+>>   better.
+>
+> As you say does not matter what is it called if it's just a handle.
+
+True!  Still, nice names help humans with debugging and such.  We should
+go for them whenever practical.
+
+>> * Error messages use canonical QOM paths to identify devices.  With
+>>   properly modeled hardware, these paths are actually helpful for
+>>   humans.  Something like "/machine/unattached/device[7]" not so much.
+>
+> Never seen such error message. Usually errors also say what device it is from so usually straightforward to know where it comes from.
+
+Such error messages definitely exist.  Random pick,
+hw/net/can/flexcan.c:
+
+            error_setg(errp, "%s: flexcan_connect_to_bus failed",
+                       dev->canonical_path);
+
+Many trace points and log entries show canonical QOM paths, too.
+
+>> * QMP command device-sync-config accepts a QOM path argument.  With
+>>   properly modeled hardware, you can use a stable canonical QOM path.
+>>   But when the device is in the /machine/unattached orphanage, its
+>>   canonical QOM path is unstable.  A client has to first search the
+>>   orphanage to find today's path.
+>
+> Never needed to use device-sync-config. It's not even documented at https://www.qemu.org/docs/master/system/monitor.html#qemu-monitor so I have no idea what this command does. Found some info here:
+> https://www.qemu.org/docs/master/devel/qdev-api.html but I don't know about any device implementing that so it's probably a rare thing.
+
+To learn what a QMP command does, start with the "QEMU QMP Reference
+Manual".  All commands are documented there, or else QEMU fails to
+build.  Can't enforce the documentation to be *good*, though.  So if you
+find something that's bad, post a patch or file a bug.
+
+If my point was "device-sync-config needs this", an argument "who cares
+for device-sync-config" could perhaps be made.  It is not.  My point is
+that canonical QOM paths are part of external interfaces *by design*.
+device-sync-config is merely the first example I found for use of QOM
+paths in QMP input.
+
+>> Further questions?
+>
+> Basically the question was why should I think about this if things work now and nobody complained about it so it looked like it just bothers you that there are some unparented objects that could be put in some other category, but it's not a real issue for any common problem other than esthetics. I'm OK with solving that within QOM or qdev or somewhere where I don't have to think about it when writing board code. Imposing it on the board code looks like additional complexity and yet another thing to confuse new people trying to create a machine so unless there's a good reason to require that I'd do without it.
+>
+> Where are stable QOM paths needed?
+
+Once again: they are part of external interfaces.
+
+> If you can't predict them and still need to query it first then it likely does not matter what is the path as it's just used to query and refer to a device as a handle so in that case we may just forget the path hierarchy and make it flat and that would also solve your issue with unparented devices.
+
+That's not how QOM works.
+
+You are welcome to propose a redesign of QOM.
 
 
