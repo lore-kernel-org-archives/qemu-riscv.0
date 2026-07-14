@@ -4,121 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EBE4C43458
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jul 2026 13:11:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 969F0C44508
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jul 2026 14:46:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjcuL-0005cV-Vy; Tue, 14 Jul 2026 09:10:46 -0400
+	id 1wjeOx-0002fj-42; Tue, 14 Jul 2026 10:46:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <farosas@suse.de>) id 1wjcuK-0005bw-9t
- for qemu-riscv@nongnu.org; Tue, 14 Jul 2026 09:10:44 -0400
-Received: from smtp-out1.suse.de ([2a07:de40:b251:101:10:150:64:1])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wjeOp-0002eb-KO
+ for qemu-riscv@nongnu.org; Tue, 14 Jul 2026 10:46:19 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <farosas@suse.de>) id 1wjcuI-0005OZ-9i
- for qemu-riscv@nongnu.org; Tue, 14 Jul 2026 09:10:44 -0400
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A2DED77E69;
- Tue, 14 Jul 2026 13:10:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1784034638; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=OYlbjUJnEWgZjnu4KdQ0oYnvV7siLWirY008CXmAf/o=;
- b=kHym1ilCmbsZ9n23qZyFc/L8uY9yVoP7Spbx43AlqdWTUHxHGBtSDhhvrdc5rD28wfL7nF
- euTnoFVgpiW1Qs/c0iDfOm/gM0001zQx5nzixVzU8ovS9XChDpvdXP/abt8+6tbeJq2Muu
- 6FPV1Uajrqocvwc7x9tD9iLhnRpZOeo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1784034638;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=OYlbjUJnEWgZjnu4KdQ0oYnvV7siLWirY008CXmAf/o=;
- b=cd8qsQ69bD0rA6F0xpF8uKUXtj6fc6gV6wHsz92VBVDi7ZlMljTvANmcKOjz8awuXrvjol
- dKqdcUErrA+evMBQ==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=GbWXsFsN;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=wxlNae5a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1784034637; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=OYlbjUJnEWgZjnu4KdQ0oYnvV7siLWirY008CXmAf/o=;
- b=GbWXsFsNwB2Xw061un7Rd6xs62h04fHQmpa3vme2iDx0j9TJODXeCLubGx8EBLbh20NE3g
- Dkj9jg4xU6B3FIefl4di7QDuigUkg7ICwqP/adobzMr66ar1NBHhH+K0jivvIczAXAtLo1
- 51702K5lZ06BwcWbNTLjUthaWkilF+M=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1784034637;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=OYlbjUJnEWgZjnu4KdQ0oYnvV7siLWirY008CXmAf/o=;
- b=wxlNae5a3KBNLkf3tlu9n+FulQcXlLBSrvROPiyIvloVxBtB+TiM0JckE4Rt1Ad0lwMnD1
- Ow4L4W9W4jAlAfCg==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3B479779AE;
- Tue, 14 Jul 2026 13:10:37 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id YbWzA001VmquSwAAD6G6ig
- (envelope-from <farosas@suse.de>); Tue, 14 Jul 2026 13:10:37 +0000
-From: Fabiano Rosas <farosas@suse.de>
-To: Michael Tokarev <mjt@tls.msk.ru>, Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- andrew.jones@oss.qualcomm.com, nutty.liu@hotmail.com, Palmer Dabbelt
- <palmer@dabbelt.com>, Tao Tang <tangtao1634@phytium.com.cn>, Laurent
- Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-stable <qemu-stable@nongnu.org>
-Subject: Re: [PATCH v2 2/3] hw/riscv/riscv-iommu.c: fault when !PTE_U and no
- priv access
-In-Reply-To: <c5a9e4fb-5715-4805-8376-8ea13f5b48c5@tls.msk.ru>
-References: <20260701121111.537654-1-daniel.barboza@oss.qualcomm.com>
- <20260701121111.537654-3-daniel.barboza@oss.qualcomm.com>
- <731566cb-bbdd-418f-b80e-f68750f24212@tls.msk.ru> <87tsq3doxw.fsf@suse.de>
- <c5a9e4fb-5715-4805-8376-8ea13f5b48c5@tls.msk.ru>
-Date: Tue, 14 Jul 2026 10:10:26 -0300
-Message-ID: <87zezt4szh.fsf@suse.de>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1wjeOl-0007cK-Ko
+ for qemu-riscv@nongnu.org; Tue, 14 Jul 2026 10:46:18 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2cab973140bso49999195ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 14 Jul 2026 07:46:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1784040373; x=1784645173; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=pEuwMejFowMdCWNPLFyEu643LtN1cXWGJNAAG/USFAQ=;
+ b=IqSsibt16KVed41yGtVKxAGb1XYhHGDCXe7nKaHierpqLoRcOWMN1Gsdok7Axa6BXH
+ FKTALV9W1K6iT6HQU5QyMiNzlsIjtOKLL/nyCu2DY6z/giR1dc1v8TPZ5Zjsy8kjybKx
+ c3SA6tiU3SakhHxjC7MIUw+V6Zg+pHZ6nAPuWLYh22JQv/UkLjIz7nE9IO4+Me+LlsTT
+ PfBBC+3pkT/m275bjQ/incxjgyR9jJLykoAWTzgjaqMukrvpREZRa6yc0xFZ2zKMwR7l
+ QYmvLGl6lzckHH148D7QqNJFzjg7KvBIXDbyFk/B/sVFkee2Rd4AlDwjg2i87iOR/i6X
+ qxyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784040373; x=1784645173;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=pEuwMejFowMdCWNPLFyEu643LtN1cXWGJNAAG/USFAQ=;
+ b=IljaS+mKeW/gSQsufSvGKGYKxFyfVllR9ufFyHNVcLUuwvpVVlvVe6BX98v+XDLqeO
+ HB7Rho90cJ9VXQ2oR89UwLs2QfpXsHjSv8rxniCLdp4zzCjy4i0Qudn4n1oUdZFNSZoG
+ GfcqgNnPSd19vLv6CDyczqQhsbRKja3YM6IOo/SdbE8LHIdc7imKmdTP0Xl0RS1umyOd
+ FB4/1SXNeImR5Xy8ODjARBgwbX1RvYZqh/3+Ojqfyac8i7lC1yCz7SkU+82yrLOhzd0t
+ gHWyORK62I1oq414/ppuk+v0LPlLjE226TwGubyabfGSH16kxvdBHenRkuXqipS3Tyg8
+ tgfQ==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrU/8AbBSBU60CGArOje00gX838hG2YzATGLeEmCZg+FW4MrmWolgFFpQJEwZIubrQ7SDI18SXBg9P2@nongnu.org
+X-Gm-Message-State: AOJu0YyQlS7IzIz3AU/zcH18xzJrW6gkjEHqNKvo2Y5IN8pAVPD2SQEA
+ AIEwV3GFwrT04VwUCgbvEspQeU6BOUtqDqHb5EI+hKqfVJ7XanSYg1FpppzV95jRJ4U=
+X-Gm-Gg: AfdE7cmnEVpX1iySROW4rw5YhSpRdS6rz9X5S3qPAD678Fh2lKCNvksB7FQ6UjCA4Mh
+ 9HZmmZmZjXJ+t3usI0guWYSamJoK+0v+CvNLWiVQkWHD3mUOzx5n9NFP+A5lk7JdbKhomzzUioR
+ bY0Kk3TFaxIYrf+CVZ4aQFTIGQ5oXuQN9zpes0DuKj7W3uSWLXs6BdOdERp7dA92X8xFN1FPQKm
+ UwW4LBPOWEqcosJ/b/0QfLs7NqzYE4QUHeAAJvcK++NXYaOnbGxwdC1jyaQFtOJqBptWaUbdMVT
+ pGoN0YwqMo9jnu8YvufyCUG3b29R3W56LCpsby33Pgc6WGpERuKXeb8sdf0eOeTL/kGGUgp/czl
+ TvsOar4lb4zdbadYliWHrxWPBq833XT8sJzmXHZ+eA3O2nHM93mWbbnLVPSu61cInS7/YK4fk80
+ M+OrpSIuPN+NqibZZymztG1/p66Q==
+X-Received: by 2002:a17:902:f68b:b0:2cc:7c36:2c23 with SMTP id
+ d9443c01a7336-2ce9f178346mr124367455ad.43.1784040372874; 
+ Tue, 14 Jul 2026 07:46:12 -0700 (PDT)
+Received: from [192.168.0.4] ([71.212.146.49])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2ccc9d1edb0sm116971485ad.53.2026.07.14.07.46.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Jul 2026 07:46:12 -0700 (PDT)
+Message-ID: <b709599a-c1f4-4e24-853b-f7da06981f6b@linaro.org>
+Date: Tue, 14 Jul 2026 07:46:10 -0700
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- FUZZY_RATELIMITED(0.00)[rspamd.com];
- RCPT_COUNT_TWELVE(0.00)[15]; SUBJECT_HAS_EXCLAIM(0.00)[];
- MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,hotmail.com];
- FREEMAIL_CC(0.00)[nongnu.org,wdc.com,gmail.com,linux.alibaba.com,oss.qualcomm.com,hotmail.com,dabbelt.com,phytium.com.cn,redhat.com];
- RCVD_TLS_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
- MID_RHS_MATCH_FROM(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- RCVD_VIA_SMTP_AUTH(0.00)[]; TAGGED_RCPT(0.00)[];
- DKIM_TRACE(0.00)[suse.de:+]; MISSING_XM_UA(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid, suse.de:dkim, tls.msk.ru:email,
- imap1.dmz-prg2.suse.org:helo, imap1.dmz-prg2.suse.org:rdns]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: A2DED77E69
-Received-SPF: pass client-ip=2a07:de40:b251:101:10:150:64:1;
- envelope-from=farosas@suse.de; helo=smtp-out1.suse.de
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 15/51] cpu: Use interval-tree for CPUBreakpoint
+To: Ilya Leoshkevich <iii@linux.ibm.com>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
+References: <20260710205401.836304-1-richard.henderson@linaro.org>
+ <20260710205401.836304-16-richard.henderson@linaro.org>
+ <f64a5bc8-870e-492f-9a89-cbbb4c2e204f@linux.ibm.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Content-Language: en-US
+In-Reply-To: <f64a5bc8-870e-492f-9a89-cbbb4c2e204f@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -135,92 +107,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Michael Tokarev <mjt@tls.msk.ru> writes:
+On 7/14/26 05:39, Ilya Leoshkevich wrote:
+> 
+> 
+> On 7/10/26 22:53, Richard Henderson wrote:
+>> Use a balanced binary tree rather than a simple list for breakpoints.
+>> Using an interval tree makes it easy to probe for all breakpoints on
+>> a virtual page.
+>>
+>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>> ---
+>>   include/exec/breakpoint.h   |  4 +--
+>>   include/hw/core/cpu.h       |  3 +-
+>>   accel/tcg/cpu-exec.c        | 58 +++++++++++++++++++++----------------
+>>   accel/whpx/whpx-common.c    |  9 +++---
+>>   cpu-common.c                | 46 +++++++++++++++--------------
+>>   hw/core/cpu-common.c        |  1 -
+>>   linux-user/main.c           | 14 ++++++---
+>>   target/i386/whpx/whpx-all.c | 15 +++++-----
+>>   8 files changed, 84 insertions(+), 66 deletions(-)
+> 
+> [...]
+> 
+>> @@ -312,33 +312,34 @@ static bool check_for_breakpoints_slow(CPUState *cpu, vaddr pc,
+>>           return false;
+>>       }
+>> -    QTAILQ_FOREACH(bp, &cpu->breakpoints, entry) {
+>> -        /*
+>> -         * If we have an exact pc match, trigger the breakpoint.
+>> -         * Otherwise, note matches within the page.
+>> -         */
+>> -        if (pc == bp->pc) {
+>> -            bool match_bp = false;
+>> -
+>> -            if (bp->flags & BP_GDB) {
+>> -                match_bp = true;
+>> -            } else if (bp->flags & BP_CPU) {
+>> +    n = interval_tree_iter_first(&cpu->breakpoints, pc, pc);
+>> +    if (n) {
+>>   #ifdef CONFIG_USER_ONLY
+>> -                g_assert_not_reached();
+>> +        bp = container_of(n, CPUBreakpoint, itree);
+>> +        assert(bp->flags & BP_GDB);
+>> +        goto found;
+>>   #else
+>> -                const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
+>> -                assert(tcg_ops->debug_check_breakpoint);
+>> -                match_bp = tcg_ops->debug_check_breakpoint(cpu, bp);
+>> -#endif
+>> +        /* Prefer GDB breakpoint over architectural breakpoint. */
+>> +        do {
+>> +            bp = container_of(n, CPUBreakpoint, itree);
+>> +            if (bp->flags & BP_GDB) {
+>> +                goto found;
+>>               }
+>> +            n = interval_tree_iter_next(n, pc, pc);
+>> +        } while (n);
+>> -            if (match_bp) {
+>> -                cpu->exception_index = EXCP_DEBUG;
+>> -                return true;
+>> +        const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
+>> +        assert(tcg_ops->debug_check_breakpoint);
+>> +
+>> +        for (n = interval_tree_iter_first(&cpu->breakpoints, pc, pc); n;
+>> +             n = interval_tree_iter_next(n, pc, pc)) {
+>> +            bp = container_of(n, CPUBreakpoint, itree);
+>> +            if ((bp->flags & BP_CPU) &&
+>> +                tcg_ops->debug_check_breakpoint(cpu, bp)) {
+>> +                goto found;
+>>               }
+> 
+> 
+> Walking the tree twice feels slightly inefficient, but the only
+> alternative I can think of entails calling
+> tcg_ops->debug_check_breakpoint() for each node, which may be even
+> worse.
 
-> On 7/13/26 16:00, Fabiano Rosas wrote:
->> Michael Tokarev <mjt@tls.msk.ru> writes:
->> 
->
-> [..]
->>> So, this patch adds a fix for the testing bits.
->>>
->>> When trying to pick this one up for 10.0.x (LTS) series, I've another doubt.
->>> This testing fix fixes v10.2.0-1299-g9d8ffbfc1d3 "tests/qtest/libqos: Add RISC-V
->>> IOMMU helper library".  Quite some tests were added based on that library.
->>> It doesn't exist in 10.0.x, and neither is v10.2.0-656-g489812e32df
->>> "tests/qtest/libqos: Add SMMUv3 helper library".
->>> Sure I can drop the parts of this change which touches the tests.  But this
->>> means we don't have tests to cover the issues being fixed, and I don't know
->>> if the result of these fixes actually works or not.
->>>
->>> Should we pick up some testing bits in this area for 10.0.x (especially
->>> 9d8ffbfc1d3 and some subsequent commits which use this library)?  Or just
->>> ignore all riscv iommu patches in there?
->> 
->> I worry picking tests for stable could become a development task,
->> requiring new code to make tests suitable for an older codebase/test
->> codebase.
->> 
->> The test frameworks and their supporting infrastructure (such as the
->> riscv iommu lib) don't ensure a stable abi so that a test from one
->> version will run without issues when backported to an earlier
->> version.
->
->> Also, the tests are usually not structured in a way that allow us to
->> pick just the part that tests the code fixes being backported, so we
->> risk trying to test in an earlier version features that don't even exist
->> at that point. There could also exist a complex graph of what's broken
->> vs. what is being tested (e.g. broken in v10, fixed partially in v11,
->> then test needs change, then fixed properly in v12, test needs change
->> again, etc).
->
-> Things aren't that bad in practice.  Even a large new test lib with
-> some significant amount of tests built on top mostly Just Works (tm).
-> A bigger problem is to pick them up across various restructuring of
-> code, moving and splitting files, etc.
->
+That's what I thought -- if we ever called debug_check_breakpoint when a gdb breakpoint 
+exists, then we're doing something wrong.  The only alternative is to separate the two 
+types of breakpoints into two different interval trees.
 
-Well, for qtest I rely a lot on the maintainers of the actual code being
-tested knowing what they're doing, I can't keep up with every single
-test that's added, so I think even somewhat trivial shuffling of code
-would be disruptive. You're probably quite used to dealing with these
-things during normal (non-test) backporting, so it's probably fine.
 
-> Also, if a test fails due to old code, we can look and fix it, - it
-> is just a test after all.  Or even mark it as "ok to fail" - if we know
-> it's due to the old code.
->
+r~
 
-Right, but this requires carrying stable-only patches, which makes me
-confused. Again, my own lack of understanding.
+> 
+> Reviewed-by: Ilya Leoskevich <iii@linux.ibm.com>
 
-> But having no tests at all - in my view - is worse.  Besides the tests
-> which also needs some back-porting/reviewing work when picked up for
-> older releases, the main code needs the same.  And without the tests
-> in place -- no tests in place at all -- we just don't know if something
-> is broken until users start reporting it.  Provided there *are* users
-> of this code in the older releases to begin with :)
->
-
-Sure, if you think the effort is not that big, having tests makes
-everything easier, I agree.
-
-> And actually, this last one is a good question, I think.  As in - do
-> we really need the fixed iommu stuff in 10.0.x, when a lot of other
-> development happened in this and other parts of riscv64 since then?
-> 10.0.x is used in debian trixie (current stable), and probably that's
-> it, - not even ubuntu uses it (which is derived from debian).  So, I
-> wonder, if this stuff is really interesting to someone outside of the
-> most active riscv community, who most likely uses the current qemu
-> anyway?
->
-> I'll pick this particular change to 10.0.x as the last missing one from
-> this pull request, since all the others has been picked up (but without
-> the change to tests).  Speaking of the future changes, lemme send a
-> separate email summarizing all this in a single place.  It feels like
-> we don't actually need many riscv changes in older 10.0.x at least.
->
-> Thanks,
->
-> /mjt
 
