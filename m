@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 969F0C44508
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jul 2026 14:46:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1238CC44508
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jul 2026 14:56:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjeOx-0002fj-42; Tue, 14 Jul 2026 10:46:27 -0400
+	id 1wjeYq-0006Fi-8b; Tue, 14 Jul 2026 10:56:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wjeOp-0002eb-KO
- for qemu-riscv@nongnu.org; Tue, 14 Jul 2026 10:46:19 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1wjeYF-0006Bo-8B
+ for qemu-riscv@nongnu.org; Tue, 14 Jul 2026 10:56:05 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wjeOl-0007cK-Ko
- for qemu-riscv@nongnu.org; Tue, 14 Jul 2026 10:46:18 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2cab973140bso49999195ad.3
- for <qemu-riscv@nongnu.org>; Tue, 14 Jul 2026 07:46:14 -0700 (PDT)
+ id 1wjeYB-0000TD-ED
+ for qemu-riscv@nongnu.org; Tue, 14 Jul 2026 10:56:02 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-8487088510aso4295319b3a.0
+ for <qemu-riscv@nongnu.org>; Tue, 14 Jul 2026 07:55:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784040373; x=1784645173; darn=nongnu.org;
+ d=linaro.org; s=google; t=1784040958; x=1784645758; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=pEuwMejFowMdCWNPLFyEu643LtN1cXWGJNAAG/USFAQ=;
- b=IqSsibt16KVed41yGtVKxAGb1XYhHGDCXe7nKaHierpqLoRcOWMN1Gsdok7Axa6BXH
- FKTALV9W1K6iT6HQU5QyMiNzlsIjtOKLL/nyCu2DY6z/giR1dc1v8TPZ5Zjsy8kjybKx
- c3SA6tiU3SakhHxjC7MIUw+V6Zg+pHZ6nAPuWLYh22JQv/UkLjIz7nE9IO4+Me+LlsTT
- PfBBC+3pkT/m275bjQ/incxjgyR9jJLykoAWTzgjaqMukrvpREZRa6yc0xFZ2zKMwR7l
- QYmvLGl6lzckHH148D7QqNJFzjg7KvBIXDbyFk/B/sVFkee2Rd4AlDwjg2i87iOR/i6X
- qxyw==
+ bh=ThIpk0R/Ci9elKZrr6NOqcvpp/B+UnxtqFIuAhRTtSg=;
+ b=lgCOfwr/djAZrWZ6wZ/7A+XYusRNcRLV6WsnvH5lnVmvUNYD5O+YbelexgzKfUpoib
+ FHHaXdV1zA7Gt+l8i7kisUO7+RlF/fnX58w11BYwrzlqjMwU3H66JtmKRQ5nHQzyXFtx
+ hU2VbAfTo/6LuGXCN0D7t/MGt/ZLCoXmpJzEzhmmrxSeVz/TYNn67rleq7gY4IJ+Rxrp
+ ynndYKMJMCcUnxBkcCIXzNnzTH7n9CbCwgdKoqsLM4S5GPrpMdULQn2TbkDJT8HB7lIg
+ UK3DFs0rAVvGtd35Xyxh30YiuxIBIZQYJ0e76JI0Mmv31If2IvolqWFUuYrFLJwCdYp9
+ MQGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784040373; x=1784645173;
+ d=1e100.net; s=20251104; t=1784040958; x=1784645758;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=pEuwMejFowMdCWNPLFyEu643LtN1cXWGJNAAG/USFAQ=;
- b=IljaS+mKeW/gSQsufSvGKGYKxFyfVllR9ufFyHNVcLUuwvpVVlvVe6BX98v+XDLqeO
- HB7Rho90cJ9VXQ2oR89UwLs2QfpXsHjSv8rxniCLdp4zzCjy4i0Qudn4n1oUdZFNSZoG
- GfcqgNnPSd19vLv6CDyczqQhsbRKja3YM6IOo/SdbE8LHIdc7imKmdTP0Xl0RS1umyOd
- FB4/1SXNeImR5Xy8ODjARBgwbX1RvYZqh/3+Ojqfyac8i7lC1yCz7SkU+82yrLOhzd0t
- gHWyORK62I1oq414/ppuk+v0LPlLjE226TwGubyabfGSH16kxvdBHenRkuXqipS3Tyg8
- tgfQ==
+ bh=ThIpk0R/Ci9elKZrr6NOqcvpp/B+UnxtqFIuAhRTtSg=;
+ b=VzDpmEGSf/FNvXo16OP14OcS4j33wJxPu5aLgpDWGEtnwv7wwWaiLmdvZ2AZLAg+wA
+ XotJVPCaPqlfiCQ+EgXyGwcHocCuYc6ORx0+Zk7AL7KzbbdH75u2Jh/CekixwMNIqANh
+ sjff5QfiodvqyCXIu9Lal4JqBGzc4HCN/qEwp9bq0fUkNPhhwyKu9N7EqyhQrQT2rlSy
+ Kk7YEyuFOWjWyG4oZ3uM0LeosX//3p3+adazBo26WNgSYeesWrJBaQ9Vm6+I07UtxCaT
+ E3pobGibCJjPVuwyPPS/9FSwfe+9xPMTWUrPAuvTXaWQtyXyQz+UQG2VVB8UP2beosD9
+ OyFg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrU/8AbBSBU60CGArOje00gX838hG2YzATGLeEmCZg+FW4MrmWolgFFpQJEwZIubrQ7SDI18SXBg9P2@nongnu.org
-X-Gm-Message-State: AOJu0YyQlS7IzIz3AU/zcH18xzJrW6gkjEHqNKvo2Y5IN8pAVPD2SQEA
- AIEwV3GFwrT04VwUCgbvEspQeU6BOUtqDqHb5EI+hKqfVJ7XanSYg1FpppzV95jRJ4U=
-X-Gm-Gg: AfdE7cmnEVpX1iySROW4rw5YhSpRdS6rz9X5S3qPAD678Fh2lKCNvksB7FQ6UjCA4Mh
- 9HZmmZmZjXJ+t3usI0guWYSamJoK+0v+CvNLWiVQkWHD3mUOzx5n9NFP+A5lk7JdbKhomzzUioR
- bY0Kk3TFaxIYrf+CVZ4aQFTIGQ5oXuQN9zpes0DuKj7W3uSWLXs6BdOdERp7dA92X8xFN1FPQKm
- UwW4LBPOWEqcosJ/b/0QfLs7NqzYE4QUHeAAJvcK++NXYaOnbGxwdC1jyaQFtOJqBptWaUbdMVT
- pGoN0YwqMo9jnu8YvufyCUG3b29R3W56LCpsby33Pgc6WGpERuKXeb8sdf0eOeTL/kGGUgp/czl
- TvsOar4lb4zdbadYliWHrxWPBq833XT8sJzmXHZ+eA3O2nHM93mWbbnLVPSu61cInS7/YK4fk80
- M+OrpSIuPN+NqibZZymztG1/p66Q==
-X-Received: by 2002:a17:902:f68b:b0:2cc:7c36:2c23 with SMTP id
- d9443c01a7336-2ce9f178346mr124367455ad.43.1784040372874; 
- Tue, 14 Jul 2026 07:46:12 -0700 (PDT)
+ AHgh+RpSVVK5hNg+zKyQHcgPDopDinUeOBGBBV1FqUJRkhT+erj7Wzs4G6ZlEcGJ2MC1CxwAqHvnOejnQb3w@nongnu.org
+X-Gm-Message-State: AOJu0YwOQRACWdJRbfmFkvu17HJuKuhxVHzYeRezyGxxQRfA4y4Z/9SG
+ 5Tgdj6G0/eqlgf2mPzcTH8r+sC8JCCGT1Eb5H4vumGtG2bKx63saDcPoD62bmZ1gJ+I=
+X-Gm-Gg: AfdE7cntwMeMjv1n/8dqw751+CL9iza1A/tXoFp/keWFlE/B+lbeAf0cpG04eaVmEK9
+ 5YSRCF/r4U6WMU7ddFpA6raYrA/e1OiI6yU3dVtzCcOjPDdJZqOW+udKMnChTcavC4RWA2KFYJM
+ qCDWGJca+gmEw9IzKclAaaa8pTdtN3lUmT/rbQQLkT3GhvFOo3p6eVZgXM6zk3W0OMtRqyZfLIo
+ 9C5RpCoeWG6SffZFj4OKzxeXso+d9ZiOKxISlwz6xrLxPIov8JOmNAPn4EbZz6kK3Y1h6RcUAxR
+ RqlqELbuONnkCtdaK/y9RRpptRfZHnbcxFGYZRh7lc4eSVZF51knLUg4bbbPKv11vW85CH0Kzd/
+ EvpGzeZCo+kZQBjjZvuWV/KvkIYlPDNzvTWS78nwela3DFrc/lk5iwTGdY/fBlAOVwiKpYuV5bn
+ SFItJnJpfAyE0nW3gz2fxdz/o8TrM/SJhkBFDKSTGq2dMvNvI=
+X-Received: by 2002:a05:6a00:3405:b0:847:8f8a:a05d with SMTP id
+ d2e1a72fcca58-84a5146b46cmr3409035b3a.29.1784040957421; 
+ Tue, 14 Jul 2026 07:55:57 -0700 (PDT)
 Received: from [192.168.0.4] ([71.212.146.49])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ccc9d1edb0sm116971485ad.53.2026.07.14.07.46.12
+ d2e1a72fcca58-84a4f818ec4sm1670325b3a.57.2026.07.14.07.55.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Jul 2026 07:46:12 -0700 (PDT)
-Message-ID: <b709599a-c1f4-4e24-853b-f7da06981f6b@linaro.org>
-Date: Tue, 14 Jul 2026 07:46:10 -0700
+ Tue, 14 Jul 2026 07:55:57 -0700 (PDT)
+Message-ID: <01b9590c-2243-46f8-8f5a-de3ba0709ad8@linaro.org>
+Date: Tue, 14 Jul 2026 07:55:55 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 15/51] cpu: Use interval-tree for CPUBreakpoint
+Subject: Re: [PATCH v3 18/51] cpu: Use interval-tree for CPUWatchpoint
 To: Ilya Leoshkevich <iii@linux.ibm.com>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
 References: <20260710205401.836304-1-richard.henderson@linaro.org>
- <20260710205401.836304-16-richard.henderson@linaro.org>
- <f64a5bc8-870e-492f-9a89-cbbb4c2e204f@linux.ibm.com>
+ <20260710205401.836304-19-richard.henderson@linaro.org>
+ <9aed7950-405a-4414-a951-9d044a8c9d53@linux.ibm.com>
 From: Richard Henderson <richard.henderson@linaro.org>
 Content-Language: en-US
-In-Reply-To: <f64a5bc8-870e-492f-9a89-cbbb4c2e204f@linux.ibm.com>
+In-Reply-To: <9aed7950-405a-4414-a951-9d044a8c9d53@linux.ibm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,90 +107,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/14/26 05:39, Ilya Leoshkevich wrote:
+On 7/14/26 06:02, Ilya Leoshkevich wrote:
 > 
 > 
 > On 7/10/26 22:53, Richard Henderson wrote:
->> Use a balanced binary tree rather than a simple list for breakpoints.
->> Using an interval tree makes it easy to probe for all breakpoints on
->> a virtual page.
+>> Use a balanced binary tree rather than a simple list for watchpoints.
+>> Using an interval tree makes it easy to probe for any overlapping address.
 >>
 >> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 >> ---
->>   include/exec/breakpoint.h   |  4 +--
->>   include/hw/core/cpu.h       |  3 +-
->>   accel/tcg/cpu-exec.c        | 58 +++++++++++++++++++++----------------
->>   accel/whpx/whpx-common.c    |  9 +++---
->>   cpu-common.c                | 46 +++++++++++++++--------------
->>   hw/core/cpu-common.c        |  1 -
->>   linux-user/main.c           | 14 ++++++---
->>   target/i386/whpx/whpx-all.c | 15 +++++-----
->>   8 files changed, 84 insertions(+), 66 deletions(-)
+>>   include/exec/breakpoint.h |   7 +-
+>>   include/hw/core/cpu.h     |   3 +-
+>>   accel/tcg/cpu-exec.c      |   8 +-
+>>   accel/tcg/watchpoint.c    | 155 +++++++++++++++++++++-----------------
+>>   hw/core/cpu-common.c      |   1 -
+>>   system/watchpoint.c       |  43 ++++++-----
+>>   target/arm/hyp_gdbstub.c  |   3 +-
+>>   7 files changed, 119 insertions(+), 101 deletions(-)
+>>
+>> diff --git a/include/exec/breakpoint.h b/include/exec/breakpoint.h
+>> index bb7cbc626d..e0826a1a2d 100644
+>> --- a/include/exec/breakpoint.h
+>> +++ b/include/exec/breakpoint.h
+>> @@ -9,7 +9,6 @@
+>>   #define EXEC_BREAKPOINT_H
+>>   #include "qemu/interval-tree.h"
+>> -#include "qemu/queue.h"
+>>   #include "exec/vaddr.h"
+>>   #include "exec/memattrs.h"
+>> @@ -36,13 +35,11 @@ struct CPUBreakpoint {
+>>   };
+>>   struct CPUWatchpoint {
+>> -    vaddr vaddr;
+>> -    vaddr len;
+>> +    IntervalTreeNode itree;
+>>       vaddr hitaddr;
+>>       MemTxAttrs hitattrs;
+>> -    int flags; /* BP_* */
+>> +    BreakpointFlags flags;
 > 
-> [...]
+> Should this go into 1/51?
 > 
->> @@ -312,33 +312,34 @@ static bool check_for_breakpoints_slow(CPUState *cpu, vaddr pc,
->>           return false;
->>       }
->> -    QTAILQ_FOREACH(bp, &cpu->breakpoints, entry) {
->> -        /*
->> -         * If we have an exact pc match, trigger the breakpoint.
->> -         * Otherwise, note matches within the page.
->> -         */
->> -        if (pc == bp->pc) {
->> -            bool match_bp = false;
+>>       unsigned id;
+>> -    QTAILQ_ENTRY(CPUWatchpoint) entry;
+>>   };
+>>   int cpu_breakpoint_insert(CPUState *cpu, vaddr pc, BreakpointFlags flags,
+>> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+>> index b8a1419860..7e19ea418d 100644
+>> --- a/include/hw/core/cpu.h
+>> +++ b/include/hw/core/cpu.h
+>> @@ -525,8 +525,7 @@ struct CPUState {
+>>       /* ice debug support */
+>>       IntervalTreeRoot breakpoints;
 >> -
->> -            if (bp->flags & BP_GDB) {
->> -                match_bp = true;
->> -            } else if (bp->flags & BP_CPU) {
->> +    n = interval_tree_iter_first(&cpu->breakpoints, pc, pc);
->> +    if (n) {
->>   #ifdef CONFIG_USER_ONLY
->> -                g_assert_not_reached();
->> +        bp = container_of(n, CPUBreakpoint, itree);
->> +        assert(bp->flags & BP_GDB);
->> +        goto found;
->>   #else
->> -                const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
->> -                assert(tcg_ops->debug_check_breakpoint);
->> -                match_bp = tcg_ops->debug_check_breakpoint(cpu, bp);
->> -#endif
->> +        /* Prefer GDB breakpoint over architectural breakpoint. */
->> +        do {
->> +            bp = container_of(n, CPUBreakpoint, itree);
->> +            if (bp->flags & BP_GDB) {
->> +                goto found;
->>               }
->> +            n = interval_tree_iter_next(n, pc, pc);
->> +        } while (n);
->> -            if (match_bp) {
->> -                cpu->exception_index = EXCP_DEBUG;
->> -                return true;
->> +        const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
->> +        assert(tcg_ops->debug_check_breakpoint);
->> +
->> +        for (n = interval_tree_iter_first(&cpu->breakpoints, pc, pc); n;
->> +             n = interval_tree_iter_next(n, pc, pc)) {
->> +            bp = container_of(n, CPUBreakpoint, itree);
->> +            if ((bp->flags & BP_CPU) &&
->> +                tcg_ops->debug_check_breakpoint(cpu, bp)) {
->> +                goto found;
->>               }
+>> -    QTAILQ_HEAD(, CPUWatchpoint) watchpoints;
+>> +    IntervalTreeRoot watchpoints;
+>>       CPUWatchpoint *watchpoint_hit;
+>>       void *opaque;
+>> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+>> index 2762cf6705..ab299387e3 100644
+>> --- a/accel/tcg/cpu-exec.c
+>> +++ b/accel/tcg/cpu-exec.c
+>> @@ -682,10 +682,12 @@ static inline bool cpu_handle_halt(CPUState *cpu)
+>>   static inline void cpu_handle_debug_exception(CPUState *cpu)
+>>   {
+>>       const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
+>> -    CPUWatchpoint *wp;
+>> +    IntervalTreeNode *n;
+>> -    if (!cpu->watchpoint_hit) {
 > 
-> 
-> Walking the tree twice feels slightly inefficient, but the only
-> alternative I can think of entails calling
-> tcg_ops->debug_check_breakpoint() for each node, which may be even
-> worse.
+> Isn't it reasonable to continue checking for this, or can it never be
+> NULL if we come here?
 
-That's what I thought -- if we ever called debug_check_breakpoint when a gdb breakpoint 
-exists, then we're doing something wrong.  The only alternative is to separate the two 
-types of breakpoints into two different interval trees.
+Intermediate steps.
+
+Before this patch we walk the entire watchpoint list performing this same clearing in 
+cpu_check_watchpoint.  With this patch, we no longer walk every element in 
+cpu_check_watchpoint, but have not yet eliminated some manual checks for BP_WATCHPOINT_HIT 
+in the target code.  By the end of the patch series, this loop is gone completely.
+
+Helpful if I add a /* Will be cleaned up */ comment at this point in the series?
 
 
 r~
-
-> 
-> Reviewed-by: Ilya Leoskevich <iii@linux.ibm.com>
-
 
