@@ -4,80 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C932AC44501
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jul 2026 15:44:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61847C4450A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jul 2026 18:34:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjfHj-0001Nc-Q3; Tue, 14 Jul 2026 11:43:03 -0400
+	id 1wjhxZ-0007Vc-D3; Tue, 14 Jul 2026 14:34:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1wjfHe-0001KT-Mv; Tue, 14 Jul 2026 11:42:58 -0400
-Received: from forwardcorp1b.mail.yandex.net ([178.154.239.136])
+ (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
+ id 1wjhxG-0007LC-Di; Tue, 14 Jul 2026 14:34:08 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1wjfHa-00082l-Di; Tue, 14 Jul 2026 11:42:58 -0400
-Received: from mail-nwsmtp-smtp-corp-canary-81.sas.yp-c.yandex.net
- (mail-nwsmtp-smtp-corp-canary-81.sas.yp-c.yandex.net
- [IPv6:2a02:6b8:c1b:16:0:640:bc52:0])
- by forwardcorp1b.mail.yandex.net (postfix) with ESMTPS id 7553980B02;
- Tue, 14 Jul 2026 18:42:52 +0300 (MSK)
-Received: from i115954770.yandex-team.ru (unknown [2a02:6bf:8080:c5a::1:8])
- by mail-nwsmtp-smtp-corp-canary-81.sas.yp-c.yandex.net (smtpcorp) with ESMTPSA
- id lgRdV71YDKo0-yjZTDoCd; Tue, 14 Jul 2026 18:42:51 +0300
-Precedence: bulk
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
- s=default; t=1784043771;
- bh=8IBno91zziUb/fdDS9K9Wa1s/YUk+db4puIIa61K9LM=;
- h=Cc:Message-ID:References:Date:In-Reply-To:Subject:To:From;
- b=OD8W5Yad/qB98ASEgLzXI4OGC/Ofal7KTdsGtoMKbIVzXm4YWRfpAp97Q8dm6ZYJU
- I8B1yuvzZv6GdYn22Jd3+wzMdVJZwHJvaCXcyrWSkiAgutwIMuqjM9xkjpc9A0cnY8
- fb+6SJ3Y9B6Ii0b0Uj6UNwM/nmci6FM5RSwtbTa0=
-Authentication-Results: mail-nwsmtp-smtp-corp-canary-81.sas.yp-c.yandex.net;
- dkim=pass header.i=@yandex-team.ru
-From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-To: jasowang@redhat.com,
-	mst@redhat.com
-Cc: armbru@redhat.com, peterx@redhat.com, farosas@suse.de,
- raphael.s.norwitz@gmail.com, bchaney@akamai.com, vsementsov@yandex-team.ru,
- qemu-devel@nongnu.org, berrange@redhat.com, pbonzini@redhat.com,
- yc-core@yandex-team.ru, mark.caveayland@nutanix.com,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Sergio Lopez <slp@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Bernhard Beschow <shentey@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Jason Wang <jasowangio@gmail.com>,
- Eric Blake <eblake@redhat.com>,
- devel@lists.libvirt.org (open list:Incompatible changes),
- xen-devel@lists.xenproject.org (open list:X86 Xen CPUs),
- qemu-ppc@nongnu.org (open list:e500),
- qemu-riscv@nongnu.org (open list:Microchip PolarFi...)
-Subject: [PATCH v19 03/15] net/tap: deprecate "no" as special value for
- script/downscript
-Date: Tue, 14 Jul 2026 18:42:31 +0300
-Message-ID: <20260714154246.1242856-4-vsementsov@yandex-team.ru>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260714154246.1242856-1-vsementsov@yandex-team.ru>
-References: <20260714154246.1242856-1-vsementsov@yandex-team.ru>
+ (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
+ id 1wjhxB-0002FF-Jw; Tue, 14 Jul 2026 14:34:04 -0400
+Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66EGBcKF4103608; Tue, 14 Jul 2026 18:33:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=pp1; bh=86qTFA
+ K1/QdkfNqPUYdKEPTPi/W5jroQzWFJfYgCnnU=; b=N4xn3AUfTnUnQ6N2VovsgI
+ LKjqB4PoBXs57PEaBCyHqedrZ4OX8VI80OJk6AR+B87RNbLIpTJvDihB9sMgRDMd
+ 13PTEbaniQEPX94zYvdwOnBfyf7ZcVJVyXo4bHJMFNaTWUcWbnNa5JwdqAJ2iR+R
+ pPxgCDO8s74b8b9YQw8gUe2MizaQnsPWPC4SRi6qNkB8Bm3125ZzfI1JMJvodyXo
+ LiQHUdX8JbFXY3r4RQ/em26M1KWH9yuNqbkDwXPETHlSkO+KFYWAx3HcdTXSu2wg
+ /mcNpDS77OS8p+DIlJjd7tXM86gut5XOzjvWhlWz9cQsAi8DEoU5heu/UuSObxLw
+ ==
+Received: from ppma23.wdc07v.mail.ibm.com
+ (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fcv3389m9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 14 Jul 2026 18:33:56 +0000 (GMT)
+Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma23.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66EIJh4B007652;
+ Tue, 14 Jul 2026 18:33:55 GMT
+Received: from smtprelay03.fra02v.mail.ibm.com ([9.218.2.224])
+ by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4fc1nhc3f3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 14 Jul 2026 18:33:54 +0000 (GMT)
+Received: from smtpav03.fra02v.mail.ibm.com (smtpav03.fra02v.mail.ibm.com
+ [10.20.54.102])
+ by smtprelay03.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 66EIXqGS47251926
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 14 Jul 2026 18:33:52 GMT
+Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id B2AC320043;
+ Tue, 14 Jul 2026 18:33:52 +0000 (GMT)
+Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 4A65C20040;
+ Tue, 14 Jul 2026 18:33:52 +0000 (GMT)
+Received: from [0.0.0.0] (unknown [9.111.27.233])
+ by smtpav03.fra02v.mail.ibm.com (Postfix) with ESMTP;
+ Tue, 14 Jul 2026 18:33:52 +0000 (GMT)
+Message-ID: <6006c93c-601b-48cc-ab8e-41b66b835fac@linux.ibm.com>
+Date: Tue, 14 Jul 2026 20:33:52 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 18/51] cpu: Use interval-tree for CPUWatchpoint
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
+References: <20260710205401.836304-1-richard.henderson@linaro.org>
+ <20260710205401.836304-19-richard.henderson@linaro.org>
+ <9aed7950-405a-4414-a951-9d044a8c9d53@linux.ibm.com>
+ <01b9590c-2243-46f8-8f5a-de3ba0709ad8@linaro.org>
+Content-Language: en-US
+From: Ilya Leoshkevich <iii@linux.ibm.com>
+In-Reply-To: <01b9590c-2243-46f8-8f5a-de3ba0709ad8@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=178.154.239.136;
- envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1b.mail.yandex.net
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDE4OCBTYWx0ZWRfX2QrKqIVCaCaC
+ GbxJ+QMAflzsk6569+TE5l9S4ZsX2yR6rugH25WL2OfBwU2UI3v4hSe/AlP2eSKfH6Se5s+qfSv
+ /YlOwIrJI1esSd2O0av9DXzR5v3UilM=
+X-Authority-Analysis: v=2.4 cv=Mp1iLWae c=1 sm=1 tr=0 ts=6a568114 cx=c_pps
+ a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=KKAkSRfTAAAA:8
+ a=rPfxHH-IYxZcdQw-WsUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: NV6cL6hzN0ccdMUW4jG5FpzrfdFFr0_q
+X-Proofpoint-ORIG-GUID: Umx8IPlZnFnj4932mjkz97vqEwyxSm3i
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDE4OCBTYWx0ZWRfXwaoq5LaDLfn6
+ AScrOjpgVH5eBrIjAF7La2XaJa49OIgMz57hrVrzX3itfL/Y1M3+4Mghf9I5eSC0WOIBjsbWrIz
+ AFlpAO8RgP1MmBdXhB9L3biLsZ7zFeuhNA7tSM1vyP07+fakUdz+0C5emUKFQu5I6nU2pX1uYMt
+ meaJWvs5GiuV1v5myNyjeXMoYhv5j1BVM5zF42/YlpLX60KIM2VYqrCFcycbhAw8cVeX6yqfUrB
+ Jpb+ndyEQDtExdLM1kEgw/WGo2AmsVCNCom7E2SQqNpmh8mIa7XlkE3zek/PAyGAKmJ2Op5o8fx
+ /VzI5G8KOWOHvzZJk1w/6qii/afrMmpShmSv/zzgCr/YBWs6zmsoS0cpHE/mdh+9CIs2+9s3Ax0
+ d+ZMYC3SqdSrLNNQwZKMo/k7Vh2B/NOuGtL3BddVQi0ZBfX/x6oaZmtQQpSxkjKAApYuRWuReiZ
+ ZojpLnDnnLy64WF6hJg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-14_04,2026-07-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 bulkscore=0 spamscore=0 malwarescore=0 lowpriorityscore=0
+ impostorscore=0 priorityscore=1501 suspectscore=0 clxscore=1015 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607140188
+Received-SPF: pass client-ip=148.163.156.1; envelope-from=iii@linux.ibm.com;
+ helo=mx0a-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
+Precedence: list
 List-Id: <qemu-riscv.nongnu.org>
 List-Unsubscribe: <https://lists.nongnu.org/mailman/options/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=unsubscribe>
@@ -89,277 +128,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The interface is ambiguous, as "no" is valid file name. So,
-using "no" as a special value to disable script is deprecated.
-Use an empty string ("script=" / "downscript=") instead.
 
-In a future version, "no" will be treated as a plain file name, just
-like any other non-empty value.
 
-Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
-and qemu-options.hx. Update other docs to use empty string instead of
-"no". Add a warning.
+On 7/14/26 16:55, Richard Henderson wrote:
+> On 7/14/26 06:02, Ilya Leoshkevich wrote:
+>>
+>>
+>> On 7/10/26 22:53, Richard Henderson wrote:
+>>> Use a balanced binary tree rather than a simple list for watchpoints.
+>>> Using an interval tree makes it easy to probe for any overlapping 
+>>> address.
+>>>
+>>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>>> ---
+>>>   include/exec/breakpoint.h |   7 +-
+>>>   include/hw/core/cpu.h     |   3 +-
+>>>   accel/tcg/cpu-exec.c      |   8 +-
+>>>   accel/tcg/watchpoint.c    | 155 +++++++++++++++++++++-----------------
+>>>   hw/core/cpu-common.c      |   1 -
+>>>   system/watchpoint.c       |  43 ++++++-----
+>>>   target/arm/hyp_gdbstub.c  |   3 +-
+>>>   7 files changed, 119 insertions(+), 101 deletions(-)
+>>>
+>>> diff --git a/include/exec/breakpoint.h b/include/exec/breakpoint.h
+>>> index bb7cbc626d..e0826a1a2d 100644
+>>> --- a/include/exec/breakpoint.h
+>>> +++ b/include/exec/breakpoint.h
+>>> @@ -9,7 +9,6 @@
+>>>   #define EXEC_BREAKPOINT_H
+>>>   #include "qemu/interval-tree.h"
+>>> -#include "qemu/queue.h"
+>>>   #include "exec/vaddr.h"
+>>>   #include "exec/memattrs.h"
+>>> @@ -36,13 +35,11 @@ struct CPUBreakpoint {
+>>>   };
+>>>   struct CPUWatchpoint {
+>>> -    vaddr vaddr;
+>>> -    vaddr len;
+>>> +    IntervalTreeNode itree;
+>>>       vaddr hitaddr;
+>>>       MemTxAttrs hitattrs;
+>>> -    int flags; /* BP_* */
+>>> +    BreakpointFlags flags;
+>>
+>> Should this go into 1/51?
+>>
+>>>       unsigned id;
+>>> -    QTAILQ_ENTRY(CPUWatchpoint) entry;
+>>>   };
+>>>   int cpu_breakpoint_insert(CPUState *cpu, vaddr pc, BreakpointFlags 
+>>> flags,
+>>> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+>>> index b8a1419860..7e19ea418d 100644
+>>> --- a/include/hw/core/cpu.h
+>>> +++ b/include/hw/core/cpu.h
+>>> @@ -525,8 +525,7 @@ struct CPUState {
+>>>       /* ice debug support */
+>>>       IntervalTreeRoot breakpoints;
+>>> -
+>>> -    QTAILQ_HEAD(, CPUWatchpoint) watchpoints;
+>>> +    IntervalTreeRoot watchpoints;
+>>>       CPUWatchpoint *watchpoint_hit;
+>>>       void *opaque;
+>>> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+>>> index 2762cf6705..ab299387e3 100644
+>>> --- a/accel/tcg/cpu-exec.c
+>>> +++ b/accel/tcg/cpu-exec.c
+>>> @@ -682,10 +682,12 @@ static inline bool cpu_handle_halt(CPUState *cpu)
+>>>   static inline void cpu_handle_debug_exception(CPUState *cpu)
+>>>   {
+>>>       const TCGCPUOps *tcg_ops = cpu->cc->tcg_ops;
+>>> -    CPUWatchpoint *wp;
+>>> +    IntervalTreeNode *n;
+>>> -    if (!cpu->watchpoint_hit) {
+>>
+>> Isn't it reasonable to continue checking for this, or can it never be
+>> NULL if we come here?
+> 
+> Intermediate steps.
+> 
+> Before this patch we walk the entire watchpoint list performing this 
+> same clearing in cpu_check_watchpoint.  With this patch, we no longer 
+> walk every element in cpu_check_watchpoint, but have not yet eliminated 
+> some manual checks for BP_WATCHPOINT_HIT in the target code.  By the end 
+> of the patch series, this loop is gone completely.
+> 
+> Helpful if I add a /* Will be cleaned up */ comment at this point in the 
+> series?
+> 
+> 
+> r~
 
-Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
----
- docs/about/deprecated.rst                  | 18 ++++++++++++++
- docs/system/i386/microvm.rst               |  4 +--
- docs/system/i386/xenpvh.rst                |  2 +-
- docs/system/ppc/ppce500.rst                |  4 +--
- docs/system/riscv/microchip-icicle-kit.rst |  2 +-
- docs/system/riscv/sifive_u.rst             |  2 +-
- net/tap.c                                  | 29 ++++++++++++++--------
- qapi/net.json                              | 12 ++++++---
- qemu-options.hx                            |  7 ++++--
- 9 files changed, 56 insertions(+), 24 deletions(-)
-
-diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-index 0c656a968fc..c4929317e3a 100644
---- a/docs/about/deprecated.rst
-+++ b/docs/about/deprecated.rst
-@@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
- ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
- short convenience options are not deprecated, only ``-mon``.
- 
-+``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
-+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-+
-+The special value ``"no"`` for the ``script`` and ``downscript``
-+parameters of ``-netdev tap`` disables script execution.  This special
-+treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
-+or ``downscript=``) to disable script execution instead.  In a future
-+version, ``"no"`` will be treated as a plain file name.
-+
- QEMU Machine Protocol (QMP) commands
- ------------------------------------
- 
-@@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
- 
- Use ``query-accelerators`` instead.
- 
-+``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
-+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-+
-+The special value ``"no"`` for the ``script`` and ``downscript``
-+parameters of ``netdev_add`` with ``type=tap`` disables script
-+execution.  This special treatment of ``"no"`` is deprecated.  Use an
-+empty string instead.  In a future version, ``"no"`` will be treated as
-+a plain file name.
-+
- Human Machine Protocol (HMP) commands
- -------------------------------------
- 
-diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
-index 1675e37d3e7..077ea15751e 100644
---- a/docs/system/i386/microvm.rst
-+++ b/docs/system/i386/microvm.rst
-@@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
-      -serial stdio \
-      -drive id=test,file=test.img,format=raw,if=none \
-      -device virtio-blk-device,drive=test \
--     -netdev tap,id=tap0,script=no,downscript=no \
-+     -netdev tap,id=tap0,script=,downscript= \
-      -device virtio-net-device,netdev=tap0
- 
- While the example above works, you might be interested in reducing the
-@@ -103,7 +103,7 @@ disabled::
-      -device virtconsole,chardev=virtiocon0 \
-      -drive id=test,file=test.img,format=raw,if=none \
-      -device virtio-blk-device,drive=test \
--     -netdev tap,id=tap0,script=no,downscript=no \
-+     -netdev tap,id=tap0,script=,downscript= \
-      -device virtio-net-device,netdev=tap0
- 
- 
-diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
-index 904778e3f5c..862f38830b1 100644
---- a/docs/system/i386/xenpvh.rst
-+++ b/docs/system/i386/xenpvh.rst
-@@ -42,7 +42,7 @@ case you need to construct one manually:
-       -vnc none                                       \
-       -display none                                   \
-       -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
--      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
-+      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
-       -smp 4,maxcpus=4                                \
-       -nographic                                      \
-       -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
-diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
-index c9fe0915dc5..ec5aaf14fd9 100644
---- a/docs/system/ppc/ppce500.rst
-+++ b/docs/system/ppc/ppce500.rst
-@@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
-   $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
-                       -display none -serial stdio \
-                       -bios u-boot \
--                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
-+                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
- 
- The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
- if “-device eTSEC” is given to QEMU:
- 
- .. code-block:: bash
- 
--  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
-+  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
- 
- Root file system on flash drive
- -------------------------------
-diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
-index 9809e94b84b..7fdb96601ad 100644
---- a/docs/system/riscv/microchip-icicle-kit.rst
-+++ b/docs/system/riscv/microchip-icicle-kit.rst
-@@ -84,7 +84,7 @@ Then we can boot the machine by:
-   $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
-       -sd path/to/sdcard.img \
-       -nic user,model=cadence_gem \
--      -nic tap,ifname=tap,model=cadence_gem,script=no \
-+      -nic tap,ifname=tap,model=cadence_gem,script= \
-       -display none -serial stdio \
-       -kernel path/to/u-boot/build/dir/u-boot.bin \
-       -dtb path/to/u-boot/build/dir/u-boot.dtb
-diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
-index 8f55ae8e313..0e4dcf3e70c 100644
---- a/docs/system/riscv/sifive_u.rst
-+++ b/docs/system/riscv/sifive_u.rst
-@@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
- 
-   $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
-       -display none -serial stdio \
--      -nic tap,ifname=tap0,script=no,downscript=no \
-+      -nic tap,ifname=tap0,script=,downscript= \
-       -kernel /path/to/vxWorks \
-       -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
- 
-diff --git a/net/tap.c b/net/tap.c
-index fedd48c48d2..2e94b4015f6 100644
---- a/net/tap.c
-+++ b/net/tap.c
-@@ -92,34 +92,40 @@ static void launch_script(const char *setup_script, const char *ifname,
- static void tap_send(void *opaque);
- static void tap_writable(void *opaque);
- 
--static bool tap_is_explicit_no_script(const char *script_arg)
-+static bool tap_is_explicit_no_script(const char *script_arg_name,
-+                                      const char *script_arg_value)
- {
--    if (!script_arg) {
-+    if (!script_arg_value) {
-         return false;
-     }
- 
--    if (script_arg[0] == '\0') {
-+    if (script_arg_value[0] == '\0') {
-         return true;
-     }
- 
--    if (strcmp(script_arg, "no") == 0) {
-+    if (strcmp(script_arg_value, "no") == 0) {
-+        warn_report("%s=no is deprecated; use %s= instead "
-+                    "(empty string instead of 'no')",
-+                    script_arg_name, script_arg_name);
-         return true;
-     }
- 
-     return false;
- }
- 
--static char *tap_parse_script(const char *script_arg, const char *default_path)
-+static char *tap_parse_script(const char *script_arg_name,
-+                              const char *script_arg_value,
-+                              const char *default_path)
- {
--    if (tap_is_explicit_no_script(script_arg)) {
-+    if (tap_is_explicit_no_script(script_arg_name, script_arg_value)) {
-         return NULL;
-     }
- 
--    if (!script_arg) {
-+    if (!script_arg_value) {
-         return get_relocated_path(default_path);
-     }
- 
--    return g_strdup(script_arg);
-+    return g_strdup(script_arg_value);
- }
- 
- static void tap_update_fd_handler(TAPState *s)
-@@ -740,7 +746,7 @@ static bool net_init_tap_one(const NetdevTapOptions *tap, NetClientState *peer,
-         qemu_set_info_str(&s->nc, "helper=%s", tap->helper);
-     } else {
-         qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
--                          script ?: "no", downscript ?: "no");
-+                          script ?: "", downscript ?: "");
- 
-         if (downscript) {
-             snprintf(s->down_script, sizeof(s->down_script), "%s", downscript);
-@@ -946,9 +952,10 @@ int net_init_tap(const Netdev *netdev, const char *name,
-         }
-     } else {
-         g_autofree char *script =
--            tap_parse_script(tap->script, DEFAULT_NETWORK_SCRIPT);
-+            tap_parse_script("script", tap->script, DEFAULT_NETWORK_SCRIPT);
-         g_autofree char *downscript =
--            tap_parse_script(tap->downscript, DEFAULT_NETWORK_DOWN_SCRIPT);
-+            tap_parse_script("downscript", tap->downscript,
-+                             DEFAULT_NETWORK_DOWN_SCRIPT);
- 
-         if (tap->ifname) {
-             pstrcpy(ifname, sizeof ifname, tap->ifname);
-diff --git a/qapi/net.json b/qapi/net.json
-index 8f0915c4d86..ada0329ef9d 100644
---- a/qapi/net.json
-+++ b/qapi/net.json
-@@ -399,15 +399,19 @@
- # @fds: multiple file descriptors of already opened multiqueue capable
- #     tap
- #
--# @script: script to initialize the interface.  An empty string or
--#     "no" disables script execution.  Defaults to
-+# @script: script to initialize the interface.  An empty string
-+#     disables script execution.  Defaults to
- #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
- #     system configuration directory at build time (typically /etc).
-+#     Using "no" to disable script execution is deprecated (since
-+#     11.2); use an empty string instead.
- #
--# @downscript: script to shut down the interface.  An empty string or
--#     "no" disables script execution.  Defaults to
-+# @downscript: script to shut down the interface.  An empty string
-+#     disables script execution.  Defaults to
- #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
- #     system configuration directory at build time (typically /etc).
-+#     Using "no" to disable script execution is deprecated (since
-+#     11.2); use an empty string instead.
- #
- # @br: bridge name (since 2.8)
- #
-diff --git a/qemu-options.hx b/qemu-options.hx
-index 200949655ea..7b9a14f5b38 100644
---- a/qemu-options.hx
-+++ b/qemu-options.hx
-@@ -3014,7 +3014,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
-     "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
-     "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
-     "                to deconfigure it\n"
--    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
-+    "                use '[down]script=' to disable script execution\n"
-+    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
-     "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
-     "                configure it\n"
-     "                use 'fd=h' to connect to an already opened TAP interface\n"
-@@ -3553,7 +3554,9 @@ SRST
-     ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
-     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
-     configuration directory at build time (typically ``/etc``).
--    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
-+    Use ``[down]script=`` to disable script execution.
-+    Using ``[down]script=no`` is deprecated; in a future version it will
-+    be treated as a plain file name.
- 
-     If running QEMU as an unprivileged user, use the network helper
-     to configure the TAP interface and attach it to the bridge.
--- 
-2.43.0
-
+I think it's fine as is, I just haven't read the series until the
+end yet. Thanks for the explanation.
 
