@@ -4,96 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1A52C43458
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jul 2026 12:28:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8D8EC43458
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jul 2026 12:32:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjcFY-0003JW-Hc; Tue, 14 Jul 2026 08:28:36 -0400
+	id 1wjcIb-0004Xj-OW; Tue, 14 Jul 2026 08:31:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
- id 1wjcFU-0003Hs-IS; Tue, 14 Jul 2026 08:28:32 -0400
+ id 1wjcIY-0004WO-8m; Tue, 14 Jul 2026 08:31:42 -0400
 Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
- id 1wjcFT-0004vS-4g; Tue, 14 Jul 2026 08:28:32 -0400
+ id 1wjcIW-00061D-UQ; Tue, 14 Jul 2026 08:31:42 -0400
 Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66EBgE1Y1195386; Tue, 14 Jul 2026 12:28:28 GMT
+ 66EBfxF11195041; Tue, 14 Jul 2026 12:31:38 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=mpa7L6
- GpXZe/xgjQRF5U/+NbZJaVtJrK4g2sYpzfE1w=; b=WYqxYUbqJVGInCyRJ6cuaO
- fcrGwRAMpmq6zoK8/LGIeyLfGmcKFqPbpZEC85xf7xg2wVfqSPDmQqivW5D7GkQp
- xB41CgycEUx2MFfgUgncgDK66F1gGHcGfTMI8sji7y+Zb27StZsVCSJC1LolLQZy
- xeeqeYf0OxMyzfXO/PMMMYnFmEwGbo+gYrfdlZ6a8g0ChMBok5MvmPb2RR+VJgc6
- tOaqT2rsjZuAfW/Atg13rgLs9tPaqiiz9ShlfTyiILuXP5yhvHHjO9dCa1zp4yLh
- 6qSn0f4NmoWWwVK302ikrOCVLyhQjmvcby1kK5TieWnVdLO/Vwn4yTZsj19tV+sg
+ :message-id:mime-version:references:subject:to; s=pp1; bh=G8Dxo0
+ MpK88fylkJIJ3K1mG8PcFruZu58aQIq+mV6Zs=; b=PZZcaEueBVZxIatdsZI6j8
+ AFW+QETGoSytTKgnksjL5TEVys79CeIRFGMtAGrOGXQOcqY3377i/ETeSRQgKPnY
+ cnK97R01JkkoOV0d3WdUlFqikSQCKhP/60rBkGuHf9aaY3U+EAeLMIUwiwXd9Vh2
+ 2Oolh1UJnlCYuqnuJ4jCescAv0rS8etRKi8T6g9v0WfdpeG4GdvcmAYXI5phl7tu
+ YotZf2tJQtvSxefLjoVuor7B4R+ogtXJXNxoJL8TmlrzAOS1XkVKfTJRWEUFmeJj
+ CgNcHboavsyzWptwFcvLLDprpm00e65KGFu+czi3iJYqNyyqJDbpoCnZhlJaN8wA
  ==
-Received: from ppma12.dal12v.mail.ibm.com
- (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fbegbnmms-1
+Received: from ppma22.wdc07v.mail.ibm.com
+ (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fbegbnn88-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Jul 2026 12:28:27 +0000 (GMT)
-Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
- by ppma12.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66ECJesX019358;
- Tue, 14 Jul 2026 12:28:27 GMT
-Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
- by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 4fc05q2wx6-1
+ Tue, 14 Jul 2026 12:31:37 +0000 (GMT)
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma22.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66EC4cY1008454;
+ Tue, 14 Jul 2026 12:31:37 GMT
+Received: from smtprelay03.fra02v.mail.ibm.com ([9.218.2.224])
+ by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4fc0hw2v7x-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Jul 2026 12:28:27 +0000 (GMT)
-Received: from smtpav01.fra02v.mail.ibm.com (smtpav01.fra02v.mail.ibm.com
- [10.20.54.100])
- by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 66ECSP4Z25100782
+ Tue, 14 Jul 2026 12:31:36 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com
+ [10.20.54.101])
+ by smtprelay03.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 66ECVY7L57868776
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 14 Jul 2026 12:28:25 GMT
-Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 488CA20043;
- Tue, 14 Jul 2026 12:28:25 +0000 (GMT)
-Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 0FE3520040;
- Tue, 14 Jul 2026 12:28:25 +0000 (GMT)
+ Tue, 14 Jul 2026 12:31:34 GMT
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id BBEAE2004E;
+ Tue, 14 Jul 2026 12:31:34 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 7C74B20040;
+ Tue, 14 Jul 2026 12:31:34 +0000 (GMT)
 Received: from [0.0.0.0] (unknown [9.111.75.242])
- by smtpav01.fra02v.mail.ibm.com (Postfix) with ESMTP;
- Tue, 14 Jul 2026 12:28:24 +0000 (GMT)
-Message-ID: <4842810e-21e8-452f-8b49-2a0c4dbb8e68@linux.ibm.com>
-Date: Tue, 14 Jul 2026 14:28:24 +0200
+ by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
+ Tue, 14 Jul 2026 12:31:34 +0000 (GMT)
+Message-ID: <ab04cf16-78c8-4acb-b128-1ebb545f601b@linux.ibm.com>
+Date: Tue, 14 Jul 2026 14:31:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 07/51] exec/watchpoint: Add CPUWatchpoint.id
+Subject: Re: [PATCH v3 08/51] accel/tcg: Pass CPUBreakpoint to
+ debug_check_breakpoint
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
 References: <20260710205401.836304-1-richard.henderson@linaro.org>
- <20260710205401.836304-8-richard.henderson@linaro.org>
+ <20260710205401.836304-9-richard.henderson@linaro.org>
 Content-Language: en-US
 From: Ilya Leoshkevich <iii@linux.ibm.com>
-In-Reply-To: <20260710205401.836304-8-richard.henderson@linaro.org>
+In-Reply-To: <20260710205401.836304-9-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-TM-AS-GCONF: 00
 X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Authority-Analysis: v=2.4 cv=fOcJG5ae c=1 sm=1 tr=0 ts=6a562b6c cx=c_pps
- a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17
+X-Authority-Analysis: v=2.4 cv=fOcJG5ae c=1 sm=1 tr=0 ts=6a562c2a cx=c_pps
+ a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=KKAkSRfTAAAA:8
- a=VnNF1IyMAAAA:8 a=Bs_vCHwtGeDls6627E8A:9 a=QEXdDO2ut3YA:10
+ a=VnNF1IyMAAAA:8 a=DBjf2mWvJUT8b9tJvREA:9 a=QEXdDO2ut3YA:10
  a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDEyNyBTYWx0ZWRfXx1Fm/fA762xU
- KCah4Ty42PVYArTA0qgpPfgZUpV/pa2QwJtiz2ow3rmA1/XeaKwY2T2cXLVwOOOV5u1DTjSA3B/
- O6CinyAtUA2o3e837emp9TE0PX8H/ayUmVK9dcD7CWOi/R16wcCtFfgRAhHJn+872XivzrDmcLV
- pUeRS2nQAMqe3wX/FazO/LT+L0Yp9Vm6MNO5hsFnsN/bR7toDRgNrKHVfBq8GbK7HlApGYIrdJO
- czXG/92utDnBUCK0v5yE64CSz//cXxu1W1Z8syG4GoaE2HAw2f8c8ItNE/sldL2yJRwHgntF8Yv
- DXESmSeodfHWNsEiJF4P3JB1033ukOMlBxj6V9IbHgK14InugRqw5X9XHMrCr8bvMZKSj4WnPGS
- OgWRndqEKXh2PBeoIfQfmBKb15E1OZICIUPpx7msMPKfCkSyutiyP6QdAOpK6EP3ZHbSkvYmLi6
- ed8A4cC+m39KS2am9Xw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDEyNyBTYWx0ZWRfX7ZMAn29o+xda
- tSD37yRKXLPo/IDBt32lYqvvwPJ4sUnJaNIFIKiC25eDrpacyzdirz5NHt+/SvmUBS2fvVVpbr7
- C+U3ufbgxjd4aUPZFA7eWiTqAyeu6PU=
-X-Proofpoint-GUID: av0yhXGf3gPjn5rFcm2RHJsVDJV11Nmd
-X-Proofpoint-ORIG-GUID: aUs36QupULD5kwa0cAaHFxZ0WB6-b1gL
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDEyNyBTYWx0ZWRfX/786Xynj0BA2
+ 7s9c3SO7SIRiOH+uhs8E/A0yg7YYxRFW9RgYLlBmgxLuxzaDYoXGlA1XM6CGQ99WYU9ETuZQ+jk
+ Si8cskE0mrhfOmMivXguE3S0t44wXyFwOtpmJO6y2pN2lNDa7JEv8WwUf9aq5sXwP3smodi+VVG
+ GMQxWWMBAOPYdWTV1rgp7KUGk87RvMchnVINUHKhRhJRe+nzPD9kLtfY/KNjCB7Rz9/fne8A0z+
+ gBu9PF/QRezUyZi09cWRWG/2wLcR9RC/yOgUNtnNQTwJfh10fDfLQCUmc4o/3OiSDCNC4Pyrm8a
+ 7EaBrXb9v/odsFpAPwwMDj7VIffB1IyyBXlip6g3QxlXJFoRArTINvE4dHbBmvaNmhkwnXTwu8m
+ qgQG+JY8+ag8wjSHgVi+qO7PFTbwQ47TEZgioWjOS32J2pUFA+X5KgW11aOMXirOfUDjpTprCO3
+ ul4LBdLWWCy5UIRl+EA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDEyNyBTYWx0ZWRfX505xLkJxllzO
+ ohzR680N2y2i3IOVrLndMr9W/Nvfpsw7bQAYjd7y4r+wc+XYaRwETY4azrboK2Yt5rm3MG4k/fi
+ sVXqubM4BJAQg1vHltDgLuyIeICm9rk=
+X-Proofpoint-GUID: 5DiA-J3iBAwOuRA8uHXvvvi9d74t0NwI
+X-Proofpoint-ORIG-GUID: LLA9Bktz273eQnPq2dQc5MnEVatmtpn0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-14_03,2026-07-10_01,2025-10-01_01
@@ -130,25 +131,22 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 7/10/26 22:53, Richard Henderson wrote:
-> Add an identifier for use by targets with BP_CPU.  For most targets
-> the index of the hardware breakpoint resource is to hand.  For s390x,
-> there is only one resource so use id 0.
+> Add the argument and ignore it so far in all targets.
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   include/exec/breakpoint.h           |  4 +++-
->   accel/tcg/tcg-accel-ops.c           |  2 +-
->   accel/tcg/user-exec-stub.c          |  3 ++-
->   system/watchpoint.c                 |  3 ++-
->   target/arm/tcg/debug.c              |  2 +-
->   target/i386/tcg/system/bpt_helper.c |  4 ++--
->   target/ppc/cpu.c                    |  3 ++-
->   target/riscv/debug.c                |  8 ++++----
->   target/s390x/tcg/debug.c            | 11 +++++------
->   target/xtensa/dbg_helper.c          |  2 +-
->   10 files changed, 23 insertions(+), 19 deletions(-)
-s390x does have only one resource, but it can cover any range :-)
-
+>   include/accel/tcg/cpu-ops.h  | 2 +-
+>   target/arm/internals.h       | 2 +-
+>   target/ppc/internal.h        | 2 +-
+>   target/riscv/debug.h         | 2 +-
+>   target/xtensa/cpu.h          | 2 +-
+>   accel/tcg/cpu-exec.c         | 2 +-
+>   target/arm/tcg/debug.c       | 2 +-
+>   target/i386/tcg/tcg-cpu.c    | 2 +-
+>   target/ppc/tcg-excp_helper.c | 2 +-
+>   target/riscv/debug.c         | 2 +-
+>   target/xtensa/dbg_helper.c   | 2 +-
+>   11 files changed, 11 insertions(+), 11 deletions(-)
 
 Reviewed-by: Ilya Leoskevich <iii@linux.ibm.com>
 
