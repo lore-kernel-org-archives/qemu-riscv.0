@@ -4,95 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE72CC44507
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Jul 2026 11:56:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12459C44501
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Jul 2026 12:31:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wjyDy-0001pF-Nz; Wed, 15 Jul 2026 07:56:26 -0400
+	id 1wjylR-0000Q9-0u; Wed, 15 Jul 2026 08:31:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
- id 1wjyDw-0001om-8U
- for qemu-riscv@nongnu.org; Wed, 15 Jul 2026 07:56:24 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
- id 1wjyDu-0007aL-KD
- for qemu-riscv@nongnu.org; Wed, 15 Jul 2026 07:56:24 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2cea3004256so56460035ad.0
- for <qemu-riscv@nongnu.org>; Wed, 15 Jul 2026 04:56:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784116581; x=1784721381; darn=nongnu.org;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:content-type:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=BfvSbRRqaZG2jTmiyYHm9QGHvFmytONzwXXR0lKzL00=;
- b=ol8+YF6ixYUTgZWZJoMm9juc6b86O7zNNLs3/thaaGH8QbGWfJLN1x/k1FVch+5h5n
- rVk+X2z/qAelbZ06eR5zFDUZKgXUUGl8clzJR+RMXlG7GQ6OsmPA8P7peI5yohDzs4yn
- oxFC3dfcpKCI7pWnV6YN4l6lLZYMFkMHWahRliFotdU0xauFvFCaYXc9Wu6Cyfs5lnF8
- MxwBK6PWELVrC12GId55lX7vRSjtSvcpqQYQStmj5XHo4tAuSM5Z1BW/0NgG/KVAmK9j
- T/5CadQwXDGyvYiRair4raXqYLiLuOcGfxeOPli3Jak9qL+z1mtsjbVBZNWqHCBthvQx
- 3ALg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784116581; x=1784721381;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=BfvSbRRqaZG2jTmiyYHm9QGHvFmytONzwXXR0lKzL00=;
- b=JZHjawUjVugmnKsNo/nzEVSQti59l275raMk2WG57P5SiPROKEtlTBd/+//D0WoKc2
- uDxeZzSjTV0CMVhMsAj5WrTXl7y6+8gFxcy0Qyw5aHBGhEF4mGosBgnGO4ZEnxntDsn9
- RnZp21Ej+5FZJ20/qlg0kxWMYZ/b6pA9NID17KH/KMMS90S99drj2rcWMP6Kdi0M7KIE
- dTmnNg+8RaLl6OKb38RbTAns5pKe8tiFr5shT5u9T0oD1nAh0Xqm7IMVaMFzZE5IApw/
- bGdx71tNOJOeIEQ3tLcmUPaDgBl3g+eYVOciQLPPab9h1WIvbxmTpbFS2ZBOTeAKVnqK
- ERuA==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqstBytFD1sQMsB0vjwwz/6Y2pBQ1DeoRpCpCIDjtPOkCDAihVensSWpEb/3kdChMBMrm/Hn9JHaqKN@nongnu.org
-X-Gm-Message-State: AOJu0YzddCOD57qEXRAVsbB7INQ6SDkoQpbl01p1zC8hSOyWs1erJY5d
- 0r6y21jy+tnuO8jMZRlXlWBvbImeuTbi301QpSgqO1BT4cxXraaA0H8U
-X-Gm-Gg: AfdE7ckTyqVl/Y56EucnB1ClyZUhS5+0VyKG0a4n0QSAUlVC9Cdld9ydhps9MHneWOL
- AW3a6CQhMfvv0Fn1uptbTrtSUe9lDztOMqMq2EWuoRJwvTklEY3ZoiIIJ7sBFXtEQlp5MR9e/mc
- QUjiE774+bKMuplSUCsIo2ZcbwO7LZ88u/frJ0xczHmoHXcJ3bbN9j0Wphz2ogvL7y4sg3Bp4M9
- /GGbk0ib4wUL++2didBC0DP33layLyfqV+bhySpwW2oJ9thYKuTG9El8Y2swG9AyX6nUm4p0YUJ
- caok5p/2bfV29AUsRjI0PoQTyI0wCU0lJfEw/ASqQCjgzU7DCK/PrtAYZXMUFjDGmnfgMO8Ge7h
- QnupLMPI6CGyWM2i2mowmcPQAr9gYi68mLJIfiuunICd6NjJJTUeXPdYC10cC/91HuJwbAU7kDi
- r5rR0jtRgRZnk6eO1rhw==
-X-Received: by 2002:a17:902:d552:b0:2c9:9a2e:dab0 with SMTP id
- d9443c01a7336-2cef12e8eb7mr66198755ad.3.1784116580587; 
- Wed, 15 Jul 2026 04:56:20 -0700 (PDT)
-Received: from smtpclient.apple ([82.40.42.115])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2cf10120441sm1295865ad.20.2026.07.15.04.56.16
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 15 Jul 2026 04:56:20 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.600.51.1.1\))
-Subject: Re: [RFC PATCH 0/2] *** Add k230 reset management unit support ***
-From: Jack wang <163wangjack@gmail.com>
-In-Reply-To: <20260709031237.21284-1-163wangjack@gmail.com>
-Date: Wed, 15 Jul 2026 19:56:03 +0800
-Cc: chao.liu.zevorn@gmail.com, pierrick.bouvier@oss.qualcomm.com,
- pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, farosas@suse.de, lvivier@redhat.com,
- qemu-riscv@nongnu.org
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <60AE661F-44A2-41A4-9E59-6F5F8DB99769@gmail.com>
-References: <20260709031237.21284-1-163wangjack@gmail.com>
-To: qemu-devel@nongnu.org
-X-Mailer: Apple Mail (2.3864.600.51.1.1)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=163wangjack@gmail.com; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -13
-X-Spam_score: -1.4
-X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wjylF-0000Og-1k; Wed, 15 Jul 2026 08:30:50 -0400
+Received: from isrv.corpit.ru ([212.248.84.144])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1wjylC-0005Jw-7G; Wed, 15 Jul 2026 08:30:48 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tls.msk.ru; s=202602;
+ t=1784118636; bh=+URfXWZ0Cyvj1OLmGzGpIojMJ+XqsqK0RYPYCXp1BuY=;
+ h=Date:Subject:To:References:From:Cc:In-Reply-To;
+ b=qmo8/OanZxcBiFg8sllpTj7Yu09J4VMBAPC6GCm3UYy7FcNXQAkddkCixkbh6NaCB
+ bIPsJ+oskqnt92/fJGMad3TrAiP1WZVe2CzlDBYJv5/SFY4JS0dXBQKEbEfC7lwVS1
+ 2eBH5mtVE1yvU46+aYJjU9JxpxMlF9PKY4UFZOWwf+z6vYfBcCmReLgYzBt5SIMkXw
+ FHB6fHYCdXEdbfUSuJwTV44jRxohPfEhnkYVVXcTepMh7cenOSc6t/AmOjLFZCmpCk
+ Z23WuLftu1X3E+GpNe8DW5WAt2H32VgQevSRyJO+ewJiOwJbYvHPiPUlZvELRgrDTo
+ /o/3EXnS84bgA==
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 298C01C1DAE;
+ Wed, 15 Jul 2026 15:30:36 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 8E64F3EF31B;
+ Wed, 15 Jul 2026 15:30:39 +0300 (MSK)
+Message-ID: <e375775e-9450-4725-b124-e5a6d3b50ac9@tls.msk.ru>
+Date: Wed, 15 Jul 2026 15:30:33 +0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: riscv & qemu-stable (was: [PULL 0/4] riscv-to-apply queue)
+To: Alistair Francis <Alistair.Francis@wdc.com>,
+ "alistair23@gmail.com" <alistair23@gmail.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ QEMU RISC-V TCG CPUs <qemu-riscv@nongnu.org>
+References: <20260714040758.28332-1-alistair.francis@wdc.com>
+ <a6c5b847faea8793440e4e0aa7334e7b02b838b3.camel@wdc.com>
+Content-Language: en-US, ru-RU
+From: Michael Tokarev <mjt@tls.msk.ru>
+Autocrypt: addr=mjt@tls.msk.ru; keydata=
+ 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
+Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ qemu-stable <qemu-stable@nongnu.org>
+In-Reply-To: <a6c5b847faea8793440e4e0aa7334e7b02b838b3.camel@wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=212.248.84.144; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,65 +117,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi all,
+On 7/14/26 07:19, Alistair Francis wrote:
+[..]
+> Assuming that we don't backport plugin fixes then nothing in this PR
+> should be backported to stable.
 
-A polite ping for this RFC series.=20
-Could anyone please take a look when you have a moment? Any feedback or =
-guidance would be greatly appreciated.
+I was afraid you might feel uncomfortable, after recent my emails
+about qemu-stable in context of riscv.  But everything I'm trying
+to do are attempts to make things easier, not more complicated :)
+Maybe I wanted too much, asking if there's something for stable
+in every riscv pullreq in the past :)
+
+I learned about the riscv pull requests - everything with Fixes and
+Resolves should be picked up.  That's okay with me.  I think I'll
+take it easier - pick things up for the most recent stable series
+(currently 11.0.x), and for older/LTS series, I'll take just what
+can be easily applied - to avoid losing everyone's time and patience
+in long discussions about what needs to be picked up and what should
+not.  As long as riscv don't have versioned machines in qemu, I
+assume it is a fast-moving target, so older qemu is not very relevant
+for it anymore (because besides fixes, older versions don't have many
+required features too, developed later), and there's no need to spend
+significant resources in that area.
+
+Hopefully this roadmap will work :)
 
 Thanks,
-Jack Wang
 
-> 2026=E5=B9=B47=E6=9C=889=E6=97=A5 11:12=EF=BC=8Cjack wang =
-<163wangjack@gmail.com> =E5=86=99=E9=81=93=EF=BC=9A
->=20
-> From: Jack Wang <163wangjack@gmail.com>
->=20
-> This series adds support for reset management unit found on k230 soc =
-and=20
-> successfully  wires it up to k230 machine;
->=20
-> The register design are implemented based on k230 trm and linux reset =
-driver
-> (drivers/reset/reset-k230.c)
->=20
-> detailed implementations:
-> 1. write-enable mask for control registers(strobe in the upper 16 =
-bits)
-> 2. hardware auto-clearing for reset and flush request bits
-> 3. latching of Done bits and w1c logic
-> 4. qtest coverage for register read/write behaviors and hardware state =
-modelin
->=20
-> There are some checkpatch style warnings (line length, comment
-> formatting) that will be addressed in v2 based on reviewer feedback.
->=20
-> this is my first time for hardware-unit modeling so apologies for =
-possible mistake.
-> I am apprecitated for any feedback
->=20
-> Jack Wang (2):
->  hw/misc/k230_rmu: add Kendryte K230 Reset Management Unit model
->  hw/riscv/k230: wire up the RMU device
->=20
-> docs/system/riscv/k230.rst  |   1 +
-> hw/misc/Kconfig             |   3 +
-> hw/misc/k230_rmu.c          | 280 ++++++++++++++++++++++++++++++++++++
-> hw/misc/meson.build         |   1 +
-> hw/misc/trace-events        |   6 +
-> hw/riscv/Kconfig            |   1 +
-> hw/riscv/k230.c             |  10 +-
-> include/hw/misc/k230_rmu.h  |  76 ++++++++++
-> include/hw/riscv/k230.h     |   2 +
-> tests/qtest/k230-rmu-test.c | 125 ++++++++++++++++
-> tests/qtest/meson.build     |   3 +-
-> 11 files changed, 504 insertions(+), 4 deletions(-)
-> create mode 100644 hw/misc/k230_rmu.c
-> create mode 100644 include/hw/misc/k230_rmu.h
-> create mode 100644 tests/qtest/k230-rmu-test.c
->=20
-> --=20
-> 2.53.0
->=20
-
+/mjt
 
