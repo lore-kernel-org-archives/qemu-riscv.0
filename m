@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F61EC44512
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jul 2026 15:48:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA990C44512
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jul 2026 15:48:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkOJK-0004RK-2h; Thu, 16 Jul 2026 11:47:43 -0400
+	id 1wkOJJ-0004H7-3O; Thu, 16 Jul 2026 11:47:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wkOIg-00049F-I9; Thu, 16 Jul 2026 11:47:07 -0400
+ id 1wkOIT-00048c-Ri; Thu, 16 Jul 2026 11:47:07 -0400
 Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1wkOIa-0002NJ-Um; Thu, 16 Jul 2026 11:46:58 -0400
+ id 1wkOIK-0002MH-6M; Thu, 16 Jul 2026 11:46:42 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1784216808;
- bh=rslQ9alLFFA5W9cWtD262id/j27w+aRzGV3v6dT27ao=;
+ d=univ-grenoble-alpes.fr; s=2020; t=1784216797;
+ bh=jSuRj9IRW0QigeZa4bLZgDPiu+5R/Vid2SH/Mkyex04=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gQRX3snJ1my8Uqw2sko5JBmqR5h0/80oYhkos5OM8BNgYSfznviK+/bOEUg9u69qU
- 9u+BcGM/w8bWMnk09uljyw4Dg6rwAsgOdXT4lyV9JZKzgKbX0ThLLFatSKNEYgLFcW
- 1SbyXhCCQwN7U3vyB2RWMu9zsNOmMwid7/48aALhLh34SVN+noMLEaO+2H0rzOilWx
- R5M9npOcOqdkmzdQFNIGgY576zvkCdHQtjKHIvrjq8EZ+bjRqv3wB1dsoG8GXpk3jx
- M8hMZsP48Ovh2YrNuHIDmZRxp7tAbYssjZQstm5TyM+57jWAuv/5FBlDrrWii0qtSf
- 6pcBpAzlbqbrw==
-Received: from mailhub-2.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id D607240297;
- Thu, 16 Jul 2026 17:46:48 +0200 (CEST)
+ b=QBbb6R7rj4pRAe9pMvBbtat+nTXaVfL9ezqVDFpUYWv25a5vlJNpo/yjvZqifV3TT
+ l+4Wk31HTNkJuHUr+9FNOhIdz7PCzwrCYGhU39kGSacT5in8DvAaakua63bfqQ9Bmd
+ QhdZUs0nB0fJ4gNZoN/XIHwxwUGxfSElMT5ZzsCvg6wkx3Z/I3r97EySoALalxJVWE
+ dnuJvG5oho0Nk9ucezm5S8ZCeWInsLm05eGn5oCgVFlJU9NV8PNM684TW5utfQezhD
+ W4f6WrMd51pKaEf3vFbXf5TBVX9IOGo9k8zWhF1sSQlHzbce4381eRk2UKp3f9kZbN
+ BmCY+k+SkwA+g==
+Received: from mailhub-1.u-ga.fr (mailhub-1.u-ga.fr [129.88.178.98])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id CC3104028E;
+ Thu, 16 Jul 2026 17:46:37 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhub-2.u-ga.fr (Postfix) with ESMTP id D1B88FF85F;
- Thu, 16 Jul 2026 17:46:48 +0200 (CEST)
+ by mailhub-1.u-ga.fr (Postfix) with ESMTP id C7C78FF85D;
+ Thu, 16 Jul 2026 17:46:37 +0200 (CEST)
 Received: from naga.tima.u-ga.fr (naga.tima.u-ga.fr [147.171.132.150])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id AA2E7400E7;
- Thu, 16 Jul 2026 17:46:48 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 9CCBC400E7;
+ Thu, 16 Jul 2026 17:46:37 +0200 (CEST)
 From: frederic.petrot@univ-grenoble-alpes.fr
 To: daniel.barboza@oss.qualcomm.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, liwei1518@gmail.com,
@@ -51,9 +51,9 @@ To: daniel.barboza@oss.qualcomm.com, palmer@dabbelt.com,
 Cc: julien.thillard@univ-grenoble-alpes.fr,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v2 2/3] disas/riscv.c: Correct wrong shifts for cbo
-Date: Thu, 16 Jul 2026 17:46:14 +0200
-Message-ID: <20260716154615.1545145-3-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v2 1/3] disas/riscv.c: Correct indent for checkpatch
+Date: Thu, 16 Jul 2026 17:46:13 +0200
+Message-ID: <20260716154615.1545145-2-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260716154615.1545145-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20260716154615.1545145-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -89,41 +89,63 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 
-The cache block operations are specified on bits 31:20, but for
-some reason a shift of 17 and a 5 bit masking were performed.
-Make this a raw shift of 20 prior to test for the cbo operation.
+Trival indentation patch on the cbo/lq relevant code, in preparation
+for modifications in that part.
 
-Fixes: 9273cda722 ("disas/riscv.c: add 'cbo' insns to disassembler")
-Reported-by: Julien Thillard <julien.thillard@univ-grenoble-alpes.fr>
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- disas/riscv.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ disas/riscv.c | 38 +++++++++++++++++++-------------------
+ 1 file changed, 19 insertions(+), 19 deletions(-)
 
 diff --git a/disas/riscv.c b/disas/riscv.c
-index 689502f083..b32a040745 100644
+index 7f1b262773..689502f083 100644
 --- a/disas/riscv.c
 +++ b/disas/riscv.c
-@@ -2889,8 +2889,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+@@ -2887,25 +2887,25 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 0: op = rv_op_fence; break;
+             case 1: op = rv_op_fence_i; break;
              case 2:
-                 /*
-                  * 'lq' shares the "(...) 010 ..... 0001111" opcode space
--                 * with 'cbo' insns.  Check the next 5 bits to select
--                 * what we want:
-+                 * with 'cbo' insns.
-                  *
-                  * cbo_inval  0000000 00000 ..... 010 00000 0001111
-                  * cbo_clean  0000000 00001 ..... 010 00000 0001111
-@@ -2899,7 +2898,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                  *
-                  * Anything that doesn't match these will default to 'lq'.
-                  */
--                switch ((inst >> 17) & 0b11111) {
-+                switch (inst >> 20) {
-                 case 0: op = rv_op_cbo_inval; break;
-                 case 1: op = rv_op_cbo_clean; break;
-                 case 2: op = rv_op_cbo_flush; break;
+-               /*
+-                * 'lq' shares the "(...) 010 ..... 0001111" opcode space
+-                * with 'cbo' insns.  Check the next 5 bits to select
+-                * what we want:
+-                *
+-                * cbo_inval  0000000 00000 ..... 010 00000 0001111
+-                * cbo_clean  0000000 00001 ..... 010 00000 0001111
+-                * cbo_flush  0000000 00010 ..... 010 00000 0001111
+-                * cbo_zero   0000000 00100 ..... 010 00000 0001111
+-                *
+-                * Anything that doesn't match these will default to 'lq'.
+-                */
+-               switch ((inst >> 17) & 0b11111) {
+-               case 0: op = rv_op_cbo_inval; break;
+-               case 1: op = rv_op_cbo_clean; break;
+-               case 2: op = rv_op_cbo_flush; break;
+-               case 4: op = rv_op_cbo_zero; break;
+-               default: op = rv_op_lq; break;
+-               }
++                /*
++                 * 'lq' shares the "(...) 010 ..... 0001111" opcode space
++                 * with 'cbo' insns.  Check the next 5 bits to select
++                 * what we want:
++                 *
++                 * cbo_inval  0000000 00000 ..... 010 00000 0001111
++                 * cbo_clean  0000000 00001 ..... 010 00000 0001111
++                 * cbo_flush  0000000 00010 ..... 010 00000 0001111
++                 * cbo_zero   0000000 00100 ..... 010 00000 0001111
++                 *
++                 * Anything that doesn't match these will default to 'lq'.
++                 */
++                switch ((inst >> 17) & 0b11111) {
++                case 0: op = rv_op_cbo_inval; break;
++                case 1: op = rv_op_cbo_clean; break;
++                case 2: op = rv_op_cbo_flush; break;
++                case 4: op = rv_op_cbo_zero; break;
++                default: op = rv_op_lq; break;
++                }
+             }
+             break;
+         case 4:
 -- 
 2.43.0
 
