@@ -4,145 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79869C44515
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jul 2026 18:07:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33990C44515
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jul 2026 18:25:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkQUj-0000vW-Gk; Thu, 16 Jul 2026 14:07:37 -0400
+	id 1wkQle-0001L9-9w; Thu, 16 Jul 2026 14:25:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <matheus.bernardino@oss.qualcomm.com>)
- id 1wkQUh-0000v2-P4
- for qemu-riscv@nongnu.org; Thu, 16 Jul 2026 14:07:35 -0400
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wkQlc-0001Ka-AG
+ for qemu-riscv@nongnu.org; Thu, 16 Jul 2026 14:25:04 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <matheus.bernardino@oss.qualcomm.com>)
- id 1wkQUg-0001Vc-31
- for qemu-riscv@nongnu.org; Thu, 16 Jul 2026 14:07:35 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wkQla-0004Wx-Ab
+ for qemu-riscv@nongnu.org; Thu, 16 Jul 2026 14:25:04 -0400
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66GHZQqK385140
- for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 18:07:32 GMT
+ 66GHZd6w3281003
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 18:25:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=2OJRRCmADXE
- 01Dx5EKXd0WPcwnmtWnKChRhNUdIjxw0=; b=hxZt87zp4H4O5tQ5uRRDhIXT2A+
- yzj5TQuaSxky5nMeJBPqvxRdS2j1RSTk5O5gMW81HTX/IMZv0Czpyxvr+r7N4A6o
- tFpqrSO7Q5riVNTt3ap5QkEiJh2S4V1ATInYxqZ3Rv8CD0qmLDYFW7sY/IF2d1kx
- bwMpBu/K6OpBVKrO7s2s3qMR4n2ijDnHoepNrq3z7RI3heYm0hVE3pwD5erYFX4T
- BYZ3cy3VqWuIO0fgwKH6PjUln38E8T/MSSGQln9qKI1WY5k4TIbnC/QFCBC3Q01V
- Kp1iS2K2Sfeq4c9qyotA244b1ok0DM+X7DtYGOkIARaMQG3lTAaO1VZRlOA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ff3u6g3vf-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ KIOst/QVY/uMwNwrWmJdwqpr5OV9vYaDLLOs+fIzpdQ=; b=ffJ8CPYPxPW3W2Rv
+ yqqOptf3XIe80RsyW3lRf9r3jlpOeXeJfPScXwiwQFSSiUhdnlXg82V94NKVA4W4
+ mEI0dcSgei9d99RtdRUzXeq8PAZZl6Vcer0agHMZ3q8GV5zDzMbGMfozQGdzzz8g
+ sXezWKxeMx9wmWlmf1OgDPYkgyEJXtBXXboYatn78pyJZdCQV3f990CNo4cS3f/b
+ 2ZvmSNABwytQBezmGiuNIO8af1oklx/RQc+0d/oYS3n4FWTDAcZspALVkcyMlDcT
+ GQgbpBVlciW5jS0du3JvtCgeLU6V85oIEHo5bTOLD2UrHggJhuxUdMHMFcgxR1KL
+ JGvWzA==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ff3u8g65g-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 18:07:32 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-384419c6c74so8826797a91.1
- for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 11:07:32 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 18:25:00 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-8f0f45415cfso68974626d6.2
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 11:25:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784225252; x=1784830052; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=2OJRRCmADXE01Dx5EKXd0WPcwnmtWnKChRhNUdIjxw0=;
- b=G4Luz6kViRES3MlDa8rTTD+knFthPxyfLO39syt54rAVsZA6759A6jw+3EtCdZgjuy
- dTuqWVHCUv+lqlFjC1a2OWNWONlPVhP5ul0k5VWARCPqt9c/tqhGRAXwgVYCcJhZhbOq
- GZpQKwRja9QGId/w6zbWzPgR6HQfq6lQySHLOx9SSDSrgf9T92zFaW90efkZUmWWmRxy
- avqX0JlNaZJDbEgntXwIPIYm5/soyR9/EcG5/+A4enETDRm/M8/bl140wdyvKr+XLr2j
- VHyAvcxKUkbAETcMOnkvj2vvHvF2J/VvBQZVsDFXAOAYv6EtJIJzwI4UsB/8qF0c/trB
- JWsg==
+ d=oss.qualcomm.com; s=google; t=1784226299; x=1784831099; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=KIOst/QVY/uMwNwrWmJdwqpr5OV9vYaDLLOs+fIzpdQ=;
+ b=U6CNB1vK/wK+8VUQOw0BZkmtackZ6yhDX121QURzS2orhQy9F3S1RBlhOijHD4PRRu
+ ZCb9E52FYiHC1dl28Ue7qkDxz1KWRPhYTRxtVO1BGTPF2VlC/tiieAqTZuxn+sHHrRxy
+ bC/AbyY1xZcmXq62x51URz6h4QQ4p/Xq6CTxM3MY5mrW7GIuW7tTOGYEOKtinbmX/VBv
+ 84xomqnSveiTrz9h/IDRuEtqVpwHfF0Fr0qiwLX4Bzxd1hqL9ai6Aw7pX9fv1bfJacYj
+ bQOgki/U+sB0lF1+y9mRBp0/wXbiaJNfEII951YDCQDInbONhom8Fs2UAN1tG+GDXCA9
+ 0Ubg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784225252; x=1784830052;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=2OJRRCmADXE01Dx5EKXd0WPcwnmtWnKChRhNUdIjxw0=;
- b=lOrO5YcXr0GfbDZRFVna7Q3oerz8cHKFv9SUe/kzZajbCZ0yYB6wBJOgoi6GuSKqKC
- o4TjWqCwbY45Ysj4lEQgBAqTLuX3NGWfXsF8oEOLWO3NUMCmN6WL8P77Bs/GejLoMC8N
- QsCC13SSSn1cyUzawRCLmTk/kPg6aoVdRTUHaB1mr4/Bv50dZ8dclbDQyjWYSqUtqh4/
- 105o7+5Qk/rcHI+u6wTSIcBs8UxvsZsVpqvDeWfTjrURaCf3nN732KJcijkeIDgL6Dh8
- Bapi6iAI2ThXvZ5DIi1tKQZ+7s23qgz6pH0kAnmQflubrc9n9aaTssIQtj4dNIs02lJN
- jwGQ==
+ d=1e100.net; s=20251104; t=1784226299; x=1784831099;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=KIOst/QVY/uMwNwrWmJdwqpr5OV9vYaDLLOs+fIzpdQ=;
+ b=p83YJ5C/GVSnmakIvQE+fqT0zWayQ/j2cpLJbGQXOrlRhbzQwY2vxBwr5FBG6HZ/CA
+ /r1YIIFAdDG1QX/uX7Fo6+6gmCsAUcRUtTgV5QVgRVo2O7eUdIQQuiVlyzbHrekEtQq3
+ w65chrZ2bwULINkaHlbPZ3tXlM+Vjo7bnIWS29y6v4OmWhGL+pedBUP5iDTSVe0TeNLF
+ tWDwunHYGki5q0coHewdFZe3s8Cx0vzK3p/r3k2iIDbBWBikMtoZ43rvwCgge6NP4KOB
+ dTqnEyeNpf9tI8VhXSAPfjrAZi7f1yymMYIr8IFaLP68G8DXsYuQ5fePd/UmgI8Dm1VE
+ zI0Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rra9Ji7G41VqDIXcBVK/fzxPGeDPD5baa5ZMcEv0+RYzq1mr/4VThrTD9c+WEZFB3nMSsc7frkq8XRP@nongnu.org
-X-Gm-Message-State: AOJu0YxasIWTLlC77y2QtG28zJxA2H1M3tO0cY0lw1aGEh3/qTZdhgxn
- GG3fYbqgfZQCRxRQaaV11obHVSmwR8i0/tXvg6rZVBam1UorwSv6zlkxu41YlRgbzhh1Rc+JkE5
- n23j6Bgrqg6Z0eIb7rBWfe/Pvdhh5Nqys/n/TdTUAK7g8G43CO5Ee1oWnpYi3inhMFQ==
-X-Gm-Gg: AfdE7cnH8mlI3TfQgj13dbRBpOMH4IORZtm/Kp+29nqbcT25fNpstpVH7OgSm/H8dp4
- YxBDktLRFZW0d20NfVwIr9ka9LFa6oa/wzH50gAl/rkARID8YVKWhPF28AmieqY+g9EWM3kp8nW
- 3vnZSkcboy95rjwzp7yif+Bv2GrvzIqUTMaMJv80PNYeRG0jaHYL0JRyqLkIVcbPpHhekXRVf18
- ERgy/EZvofFBDZe0hdiKpmytxuTpsA5AHeMZPoMXeoVixxtlPqcQ6PUQAId9rWldrludBEZcLAz
- qmiwAK2pd3xvkYPryHfuCcnpZvPt2rKCzuPf6kpLn5k2BrrPfDPVeNSZmT3aeU8U+Jo4bR73Bv/
- SfufGsik7/D9yv7GZHR7Df+ZM9Am+AqWMJIGjLWzogNctSPlSBrFUYE35F8mY+Rg=
-X-Received: by 2002:a17:90b:2808:b0:38d:e5d0:9bd with SMTP id
- 98e67ed59e1d1-38e2a0780c5mr8148928a91.26.1784225251796; 
- Thu, 16 Jul 2026 11:07:31 -0700 (PDT)
-X-Received: by 2002:a17:90b:2808:b0:38d:e5d0:9bd with SMTP id
- 98e67ed59e1d1-38e2a0780c5mr8148883a91.26.1784225251323; 
- Thu, 16 Jul 2026 11:07:31 -0700 (PDT)
-Received: from hu-mathbern-lv.qualcomm.com (Global_NAT1.qualcomm.com.
- [129.46.96.20]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3140e5326c0sm17131184eec.11.2026.07.16.11.07.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jul 2026 11:07:30 -0700 (PDT)
-From: Matheus Tavares Bernardino <matheus.bernardino@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: brian.cain@oss.qualcomm.com, pierrick.bouvier@oss.qualcomm.com,
- marco.liebel@oss.qualcomm.com, philmd@oss.qualcomm.com, ale@rev.ng,
- anjo@rev.ng, Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v2 07/14] semihosting: add callback to set error
-Date: Thu, 16 Jul 2026 11:06:51 -0700
-Message-Id: <a08d1e274e722c7072740838fbb596c8dfb67b10.1784225209.git.matheus.bernardino@oss.qualcomm.com>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <cover.1784225209.git.matheus.bernardino@oss.qualcomm.com>
-References: <cover.1784225209.git.matheus.bernardino@oss.qualcomm.com>
+ AHgh+Rr5GhZDSHpzgTdDL+gnR0+7/tCOScJcWm/G9DWqyV0S0Svj+mmcJLl/by8dcqKQHDrR7QtWBudOakWp@nongnu.org
+X-Gm-Message-State: AOJu0YzeoEyCoobZx/hm0pgbu1YGs0ZChY0jDhqT2pCgnltV5W+kWIPM
+ mwYPHpgREoszllvJMqKysV1JUiRCQaolkagy2iJ+wT1XbaHL2I0YNRjoPTvL5TH/ih6SOYaj0fD
+ 9GodZpqlkqApr9K0caXT7yLhjGxEKnlIMT3ASx8LLMKIelM7iGpAyY8xiLg==
+X-Gm-Gg: AfdE7cnIBwq+mq8lRmyUk7Y0ysBzudbFohAJNa4RIRvLKqk2D+DV2mC/MlVAsoCdEQK
+ 9PoUk1R7sYAehmVwrHEEBHzu8QenxCNddX61foNpK5qYtquDrwRccF2q9Dt/EDGjXujDIU/Of4L
+ Bln2slXGIug+ZP/g5v4Yffv2y3JQ2rq+83hOlEFRBRnpgIsBkXLljyvVevjvhJ8yV3hckGWUKRq
+ kbPJhaf2eJTzPJq/LY/zT+da6/0zykcKO0fSu6OdC33xBt9m+rpAExvzHpUXhtDEp4lpaUowAkv
+ SgOUgLzbExRA9OJPp3NnuMYo6Cb/d0zMw1+/Mpb5cj4T9IxM/DJJL4otpka5xAwYiqzInXhoVKv
+ uHuiUhvQGcCnfngFXYpaPZbClTTLfdpNl1fvhcw==
+X-Received: by 2002:a05:620a:640a:b0:92e:529b:b802 with SMTP id
+ af79cd13be357-930b0827c95mr63498585a.70.1784226299470; 
+ Thu, 16 Jul 2026 11:24:59 -0700 (PDT)
+X-Received: by 2002:a05:620a:640a:b0:92e:529b:b802 with SMTP id
+ af79cd13be357-930b0827c95mr63493985a.70.1784226298806; 
+ Thu, 16 Jul 2026 11:24:58 -0700 (PDT)
+Received: from [192.168.68.105] ([152.234.123.183])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-8ffd248e666sm223119276d6.0.2026.07.16.11.24.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Jul 2026 11:24:58 -0700 (PDT)
+Message-ID: <ba4ea9a1-dd4d-4a96-aca5-1c14193420cb@oss.qualcomm.com>
+Date: Thu, 16 Jul 2026 15:24:55 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] disas/riscv.c: Correct indent for checkpatch
+To: frederic.petrot@univ-grenoble-alpes.fr, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: julien.thillard@univ-grenoble-alpes.fr
+References: <20260716154615.1545145-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20260716154615.1545145-2-frederic.petrot@univ-grenoble-alpes.fr>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260716154615.1545145-2-frederic.petrot@univ-grenoble-alpes.fr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDE4NSBTYWx0ZWRfX1AXmSGpprqph
- TvnfwlTV43MXCAcn3lx6rS9XVkhJ0SBJBmyqni7+oS50TmwhKshmNNASbWn4tk702qx+vtjKfWv
- m9ms7ybw+Ia1dmgaJqAZf+xSG91X9d45faFLDuOBuGJzIsl/mzQmgnlCnOfoEKoAiKU1ihAd8tH
- kufAX07obRdcYJk9Hfl6VrTHdhi/8UqYnNIirNL0tozP6QXQB/1nf6qWuKhX6PiK40Oa3R2ZhHZ
- UCw/eZ7ZmgowkHtnLyQoK9LoekQHVmyvgwGEUXoSqpp5ZCvW2wZdAozhkliWarq+g/R/jUqSQzd
- 2j0IIEVfySSZQJxawOXGkvmQkvW1xsxw1lYEe3EwBm6sCluAARNw0YwNbCHR68/KblXmcqo6cHp
- w9xM2ohsfmMBmZxaYGSwBWQRy8QjO6ti/fcVZg/D0frZaBAqE7RZ8OOGRcW7C5ynAEEF2GrPls3
- qWEv8NOLTkG93bGtXjw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDE4NSBTYWx0ZWRfXwprG/9Q+IFZx
- oKWzOehHhOcmYtWyOor3sNiyq/XG65pcOgUIuaBfbtb7IQIUxRLcGCN/iR0CoAksOipKGhVBe00
- TsZhkjXEb4qrzUiop12Qh+I92xCiaJ4=
-X-Authority-Analysis: v=2.4 cv=DYMnbPtW c=1 sm=1 tr=0 ts=6a591de4 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=8ndNYmkutmpv_8xOvXsA:9 a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-GUID: 3C8oMQO4QExtReNURigzBrpH7iUH6ddX
-X-Proofpoint-ORIG-GUID: 3C8oMQO4QExtReNURigzBrpH7iUH6ddX
+X-Proofpoint-GUID: PUz856prdrMSpI5VEuBuxt9OEppoyiQE
+X-Proofpoint-ORIG-GUID: PUz856prdrMSpI5VEuBuxt9OEppoyiQE
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDE4OSBTYWx0ZWRfX00Dxkre86Mv4
+ qMNM1gzEDgwwldlo0gI1qqhRVXX6iqv+EguF8aAhuUemm5Tooap/MCbIu7bnRDlpm1p17p8Asey
+ yrMPuj3xtW+MJwVpMwO0s78sa9dzsFw=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDE4OSBTYWx0ZWRfX3jsS7fFchQJH
+ uN0G2E2zpHgIuzBRqne8GZL7lPV8hbK5FoBAT7g5Flr6xs4onDZ6Fapxaolk7eER6PxiWXO6gTK
+ h1NGigdan49nZ5JSugIuJ6WM80AjhH7zUiHh7sfPZfbX2/rs6L0xHaq1GIDyq9vTCSqiZCVDpeI
+ zRJNotfaFaoeUZ26PlVuwj/MaYWtNmLJKokkA1KPcqIkpCoKfGhRUhtQ8/eWX86GtrInlSP11fR
+ fWBUhUIN0aqmOJiSoq+UtaNVppZv2l9OgrUyieVUbTF9YP7z8A6uYvyxV9+sklBnpYdiiqdo9hv
+ ejhatSQeKZANEuuZWeVqaY4+iqcjp87vM/Dk8+xqmpfjnoZiXc9jbdOtZbONPewiHJ4CPyNltSm
+ IeAjV6iBtsqvlxWekaDYoc/bs3TUhhG1eCi7gUu0COwr6roE1wHNuOYUXo9bqUAQHlLjQZiMKjS
+ gG/Mqdo0f7JGzhhaCWQ==
+X-Authority-Analysis: v=2.4 cv=TL11jVla c=1 sm=1 tr=0 ts=6a5921fc cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=szoPuAicwqWYzOEwwuIrwA==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=9Zw2DNSAMAMWkiGVaAMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=iYH6xdkBrDN1Jqds4HTS:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-16_06,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0 phishscore=0
- adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160185
+ impostorscore=0 priorityscore=1501 clxscore=1015 lowpriorityscore=0
+ spamscore=0 bulkscore=0 malwarescore=0 suspectscore=0 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607160189
 Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=matheus.bernardino@oss.qualcomm.com;
- helo=mx0a-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -158,74 +158,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is currently unused by existing semihosting targets, but it will be
-used by hexagon in the following commit.
 
-Signed-off-by: Brian Cain <brian.cain@oss.qualcomm.com>
+
+On 7/16/2026 12:46 PM, frederic.petrot@univ-grenoble-alpes.fr wrote:
+> From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+> 
+> Trival indentation patch on the cbo/lq relevant code, in preparation
+
+s/Trival/Trivial
+
+
+> for modifications in that part.
+> 
+
+
+Fixes: 9273cda722 ("disas/riscv.c: add 'cbo' insns to disassembler")
+
+> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+> ---
+
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Signed-off-by: Matheus Tavares Bernardino <matheus.bernardino@oss.qualcomm.com>
----
- include/semihosting/common-semi.h | 1 +
- semihosting/arm-compat-semi.c     | 1 +
- target/arm/common-semi-target.c   | 4 ++++
- target/riscv/common-semi-target.c | 4 ++++
- 4 files changed, 10 insertions(+)
 
-diff --git a/include/semihosting/common-semi.h b/include/semihosting/common-semi.h
-index aa511a46f42..a11905ef4ef 100644
---- a/include/semihosting/common-semi.h
-+++ b/include/semihosting/common-semi.h
-@@ -37,6 +37,7 @@
- void do_common_semihosting(CPUState *cs);
- uint64_t common_semi_arg(CPUState *cs, int argno);
- void common_semi_set_ret(CPUState *cs, uint64_t ret);
-+void common_semi_set_err(CPUState *cs, int err);
- bool is_64bit_semihosting(CPUArchState *env);
- bool common_semi_sys_exit_is_extended(CPUState *cs);
- uint64_t common_semi_stack_bottom(CPUState *cs);
-diff --git a/semihosting/arm-compat-semi.c b/semihosting/arm-compat-semi.c
-index 5e5f181b908..c54753f696f 100644
---- a/semihosting/arm-compat-semi.c
-+++ b/semihosting/arm-compat-semi.c
-@@ -237,6 +237,7 @@ static void common_semi_cb(CPUState *cs, uint64_t ret, int err)
-         ts->swi_errno = err;
- #else
-         syscall_err = err;
-+        common_semi_set_err(cs, err);
- #endif
-     }
-     common_semi_set_ret(cs, ret);
-diff --git a/target/arm/common-semi-target.c b/target/arm/common-semi-target.c
-index 2b77ce9c17b..38d52deb3d6 100644
---- a/target/arm/common-semi-target.c
-+++ b/target/arm/common-semi-target.c
-@@ -34,6 +34,10 @@ void common_semi_set_ret(CPUState *cs, uint64_t ret)
-     }
- }
- 
-+void common_semi_set_err(CPUState *cs, int err)
-+{
-+}
-+
- bool common_semi_sys_exit_is_extended(CPUState *cs)
- {
-     return is_a64(cpu_env(cs));
-diff --git a/target/riscv/common-semi-target.c b/target/riscv/common-semi-target.c
-index aeaeb88d536..38a00e160c3 100644
---- a/target/riscv/common-semi-target.c
-+++ b/target/riscv/common-semi-target.c
-@@ -26,6 +26,10 @@ void common_semi_set_ret(CPUState *cs, uint64_t ret)
-     env->gpr[xA0] = ret;
- }
- 
-+void common_semi_set_err(CPUState *cs, int err)
-+{
-+}
-+
- bool is_64bit_semihosting(CPUArchState *env)
- {
-     return riscv_cpu_mxl(env) != MXL_RV32;
--- 
-2.37.2
+
+
+If no more changes are need I believe the maintainer can fixup the typo before
+queuing. No need to send a v3 because of it.
+
+
+Cheers,
+Daniel
+
+
+
+
+>   disas/riscv.c | 38 +++++++++++++++++++-------------------
+>   1 file changed, 19 insertions(+), 19 deletions(-)
+> 
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 7f1b262773..689502f083 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -2887,25 +2887,25 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+>               case 0: op = rv_op_fence; break;
+>               case 1: op = rv_op_fence_i; break;
+>               case 2:
+> -               /*
+> -                * 'lq' shares the "(...) 010 ..... 0001111" opcode space
+> -                * with 'cbo' insns.  Check the next 5 bits to select
+> -                * what we want:
+> -                *
+> -                * cbo_inval  0000000 00000 ..... 010 00000 0001111
+> -                * cbo_clean  0000000 00001 ..... 010 00000 0001111
+> -                * cbo_flush  0000000 00010 ..... 010 00000 0001111
+> -                * cbo_zero   0000000 00100 ..... 010 00000 0001111
+> -                *
+> -                * Anything that doesn't match these will default to 'lq'.
+> -                */
+> -               switch ((inst >> 17) & 0b11111) {
+> -               case 0: op = rv_op_cbo_inval; break;
+> -               case 1: op = rv_op_cbo_clean; break;
+> -               case 2: op = rv_op_cbo_flush; break;
+> -               case 4: op = rv_op_cbo_zero; break;
+> -               default: op = rv_op_lq; break;
+> -               }
+> +                /*
+> +                 * 'lq' shares the "(...) 010 ..... 0001111" opcode space
+> +                 * with 'cbo' insns.  Check the next 5 bits to select
+> +                 * what we want:
+> +                 *
+> +                 * cbo_inval  0000000 00000 ..... 010 00000 0001111
+> +                 * cbo_clean  0000000 00001 ..... 010 00000 0001111
+> +                 * cbo_flush  0000000 00010 ..... 010 00000 0001111
+> +                 * cbo_zero   0000000 00100 ..... 010 00000 0001111
+> +                 *
+> +                 * Anything that doesn't match these will default to 'lq'.
+> +                 */
+> +                switch ((inst >> 17) & 0b11111) {
+> +                case 0: op = rv_op_cbo_inval; break;
+> +                case 1: op = rv_op_cbo_clean; break;
+> +                case 2: op = rv_op_cbo_flush; break;
+> +                case 4: op = rv_op_cbo_zero; break;
+> +                default: op = rv_op_lq; break;
+> +                }
+>               }
+>               break;
+>           case 4:
 
 
