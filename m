@@ -4,146 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ABD8C44515
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jul 2026 17:56:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79869C44515
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jul 2026 18:07:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkQKF-0007qW-3S; Thu, 16 Jul 2026 13:56:47 -0400
+	id 1wkQUj-0000vW-Gk; Thu, 16 Jul 2026 14:07:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wkQKD-0007pv-9P
- for qemu-riscv@nongnu.org; Thu, 16 Jul 2026 13:56:45 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <matheus.bernardino@oss.qualcomm.com>)
+ id 1wkQUh-0000v2-P4
+ for qemu-riscv@nongnu.org; Thu, 16 Jul 2026 14:07:35 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wkQKB-0007OW-Bl
- for qemu-riscv@nongnu.org; Thu, 16 Jul 2026 13:56:45 -0400
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <matheus.bernardino@oss.qualcomm.com>)
+ id 1wkQUg-0001Vc-31
+ for qemu-riscv@nongnu.org; Thu, 16 Jul 2026 14:07:35 -0400
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66GGTb7b3413280
- for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 17:56:40 GMT
+ 66GHZQqK385140
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 18:07:32 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- uth6HxSHLVTBtnzhYD3gU2jGBzxiUdED6sir8hW69DM=; b=fyae1m1VE/bu15nt
- QuOCCGyWZs4j9UvJfbkqIf8mi1THWF+NFsyuQOyZbD0pyMrvSMHN5Mj3A21MdUtB
- k3Az0SQlg7kZkq7Wc/pl1x6WBOQyhE+KRpRz6DnCEyqwgePYop6Gcxd46tPf/QeP
- Fz5aNjM3h8cuaYWWtVDtdOpxCpw2fqGuWmbx+jvUPI0QZc08ZeqdmAkBl0b/UwQU
- uhC5a87WlED07k4LAC4qPngjEbvzLDdjrDycz0elTfyKZUa0AU9ejI9Uyw/k1lJ/
- +v8++8VO5cu/Y8N52uYrTcUVlGPNd6JFynbQrLcfNAYSJYUohG3GbJ9FgHWLFbSM
- icz2TQ==
-Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com
- [74.125.224.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feu10aqc6-1
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=2OJRRCmADXE
+ 01Dx5EKXd0WPcwnmtWnKChRhNUdIjxw0=; b=hxZt87zp4H4O5tQ5uRRDhIXT2A+
+ yzj5TQuaSxky5nMeJBPqvxRdS2j1RSTk5O5gMW81HTX/IMZv0Czpyxvr+r7N4A6o
+ tFpqrSO7Q5riVNTt3ap5QkEiJh2S4V1ATInYxqZ3Rv8CD0qmLDYFW7sY/IF2d1kx
+ bwMpBu/K6OpBVKrO7s2s3qMR4n2ijDnHoepNrq3z7RI3heYm0hVE3pwD5erYFX4T
+ BYZ3cy3VqWuIO0fgwKH6PjUln38E8T/MSSGQln9qKI1WY5k4TIbnC/QFCBC3Q01V
+ Kp1iS2K2Sfeq4c9qyotA244b1ok0DM+X7DtYGOkIARaMQG3lTAaO1VZRlOA==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ff3u6g3vf-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 17:56:39 +0000 (GMT)
-Received: by mail-yx1-f70.google.com with SMTP id
- 956f58d0204a3-6679810031fso407195d50.2
- for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 10:56:39 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 18:07:32 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-384419c6c74so8826797a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jul 2026 11:07:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784224596; x=1784829396; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=uth6HxSHLVTBtnzhYD3gU2jGBzxiUdED6sir8hW69DM=;
- b=GFdjEe3NFbxI1QvHhxBtH2+sh/DLLXeH7TqOf+X4mnHAuV6hcD5ju9Zm++6vQ51vjl
- c/XbEhTIz0SBQRzH3xQiQqnGPjOJWE5Hrla+eEuQy9o4D+85BU+NrHGxu9L1dsSnak1A
- gFXolh9hyyCKSWZt7t99oXBVlnusRi/kP7UXbDMi1TuHvhGk0IzieIq4WDq1FqABk2fO
- YFmDscuFnNWzBtBr+ayqUkO+8AvbDUNBdoxTZrPqVQ+j1ILg+WKWEVACypFKPlwD6X9d
- oK1BENLe+uyj7dDU2SkF0vnEmAIcjuqygPnaXceiGnm+2CmRoak1VBTpn7wqIK8ka4Os
- 7xAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784224596; x=1784829396;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=oss.qualcomm.com; s=google; t=1784225252; x=1784830052; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=uth6HxSHLVTBtnzhYD3gU2jGBzxiUdED6sir8hW69DM=;
- b=ac+v7fO5HRyR/2PvUFfm02krU6W+K28ownhT5RRpmkDmDVtCHmXZrcEfFC22INn/2O
- S5bJto/YhdiEkrXob1WfA4RUfe2kE4ylm9KKbqTESOmF/3qvGPfrI+ZBmkWnZGW36RO/
- /YIGB1NEV0AC5nMZQwOb3rJwL6AjXuTwrpUDmeICur8xhe6JZ+NoOT4OWwL1Ipq7HW2E
- 8fuPWhU8qb2qq4iaW768RZonPJLmTnEXsctqwMsiqUcCGsTvIExRYzLYVoJRAEr3oBUv
- yzPyUyXgRB37sQT8SSvAoIvQ8T5YuwtLv57cM9Nnbc9tYtOLKhkBqdelKVclLA62FghW
- m+Zg==
+ bh=2OJRRCmADXE01Dx5EKXd0WPcwnmtWnKChRhNUdIjxw0=;
+ b=G4Luz6kViRES3MlDa8rTTD+knFthPxyfLO39syt54rAVsZA6759A6jw+3EtCdZgjuy
+ dTuqWVHCUv+lqlFjC1a2OWNWONlPVhP5ul0k5VWARCPqt9c/tqhGRAXwgVYCcJhZhbOq
+ GZpQKwRja9QGId/w6zbWzPgR6HQfq6lQySHLOx9SSDSrgf9T92zFaW90efkZUmWWmRxy
+ avqX0JlNaZJDbEgntXwIPIYm5/soyR9/EcG5/+A4enETDRm/M8/bl140wdyvKr+XLr2j
+ VHyAvcxKUkbAETcMOnkvj2vvHvF2J/VvBQZVsDFXAOAYv6EtJIJzwI4UsB/8qF0c/trB
+ JWsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784225252; x=1784830052;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=2OJRRCmADXE01Dx5EKXd0WPcwnmtWnKChRhNUdIjxw0=;
+ b=lOrO5YcXr0GfbDZRFVna7Q3oerz8cHKFv9SUe/kzZajbCZ0yYB6wBJOgoi6GuSKqKC
+ o4TjWqCwbY45Ysj4lEQgBAqTLuX3NGWfXsF8oEOLWO3NUMCmN6WL8P77Bs/GejLoMC8N
+ QsCC13SSSn1cyUzawRCLmTk/kPg6aoVdRTUHaB1mr4/Bv50dZ8dclbDQyjWYSqUtqh4/
+ 105o7+5Qk/rcHI+u6wTSIcBs8UxvsZsVpqvDeWfTjrURaCf3nN732KJcijkeIDgL6Dh8
+ Bapi6iAI2ThXvZ5DIi1tKQZ+7s23qgz6pH0kAnmQflubrc9n9aaTssIQtj4dNIs02lJN
+ jwGQ==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rq7CvtUXzqSPIO2w92IaSLBmHxiCkKJmBi5FAvrc0ujOKeLhvoEG48w96h+Veh2GRrCDplBrty+APss@nongnu.org
-X-Gm-Message-State: AOJu0YyYLLbqcxZt/k/VIikuEQFd/wVrWl3nhXBWHSMUfSlOnjFTrG8h
- 9C1XZB0x6uMiNhcSmrRDnlEcvgiMyhaRJSJ+0Ebt1a/Ieju928HZ+LjC9UakqK2lzuVglXandD7
- 4vW3iJrmbkTIg2KWXU6pDxYVLPqj2FVASfSMF4m5Lk3leCEdjMVM8cmhATA==
-X-Gm-Gg: AfdE7cnpGfw1MqYtwThs+WG/873+l9Us/HqvLcRi/dSqwwTe+AR+LcF8xI1qS4ofATM
- IZI9E/OTB2IuNRknw77aVT4uU4rw49hLlFOXqq/vMLsRqQNaMANWYVjAXvj099qXFVR7x02ZSpl
- cNW3DGe8IbYkCT3dlZRUlnh5Jr6p8z6cdwcBT4fkPoSK3DpsSC+nkKytwa3vzEjj5yhByYcmRE3
- 74XcHYsEFJltmjsgKCjuC7Kiq5A/IthsTV9WQLJDx1NozWENCmF3ASA0oei1wrTp5NF2kXQktRz
- M1+5XqmEkDQD6ShLJ6gsWVIdh+cIKUNP3JUsx5tosWbVaqsbI9j10nRlv0AuCKNy3gZ3elZ69JI
- hWbP7gqDLhmnNf8jC0q/NTAmZWLc6YpO4gDHg/g==
-X-Received: by 2002:a53:ad89:0:b0:667:b91e:cdd6 with SMTP id
- 956f58d0204a3-668133c6f08mr4578041d50.64.1784224596309; 
- Thu, 16 Jul 2026 10:56:36 -0700 (PDT)
-X-Received: by 2002:a53:ad89:0:b0:667:b91e:cdd6 with SMTP id
- 956f58d0204a3-668133c6f08mr4578018d50.64.1784224595769; 
- Thu, 16 Jul 2026 10:56:35 -0700 (PDT)
-Received: from [192.168.68.105] ([152.234.123.183])
- by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-6681fbd8c5esm4064458d50.3.2026.07.16.10.56.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jul 2026 10:56:35 -0700 (PDT)
-Message-ID: <9e600f36-96ac-4eb9-a901-47d4ea6cc748@oss.qualcomm.com>
-Date: Thu, 16 Jul 2026 14:56:30 -0300
+ AHgh+Rra9Ji7G41VqDIXcBVK/fzxPGeDPD5baa5ZMcEv0+RYzq1mr/4VThrTD9c+WEZFB3nMSsc7frkq8XRP@nongnu.org
+X-Gm-Message-State: AOJu0YxasIWTLlC77y2QtG28zJxA2H1M3tO0cY0lw1aGEh3/qTZdhgxn
+ GG3fYbqgfZQCRxRQaaV11obHVSmwR8i0/tXvg6rZVBam1UorwSv6zlkxu41YlRgbzhh1Rc+JkE5
+ n23j6Bgrqg6Z0eIb7rBWfe/Pvdhh5Nqys/n/TdTUAK7g8G43CO5Ee1oWnpYi3inhMFQ==
+X-Gm-Gg: AfdE7cnH8mlI3TfQgj13dbRBpOMH4IORZtm/Kp+29nqbcT25fNpstpVH7OgSm/H8dp4
+ YxBDktLRFZW0d20NfVwIr9ka9LFa6oa/wzH50gAl/rkARID8YVKWhPF28AmieqY+g9EWM3kp8nW
+ 3vnZSkcboy95rjwzp7yif+Bv2GrvzIqUTMaMJv80PNYeRG0jaHYL0JRyqLkIVcbPpHhekXRVf18
+ ERgy/EZvofFBDZe0hdiKpmytxuTpsA5AHeMZPoMXeoVixxtlPqcQ6PUQAId9rWldrludBEZcLAz
+ qmiwAK2pd3xvkYPryHfuCcnpZvPt2rKCzuPf6kpLn5k2BrrPfDPVeNSZmT3aeU8U+Jo4bR73Bv/
+ SfufGsik7/D9yv7GZHR7Df+ZM9Am+AqWMJIGjLWzogNctSPlSBrFUYE35F8mY+Rg=
+X-Received: by 2002:a17:90b:2808:b0:38d:e5d0:9bd with SMTP id
+ 98e67ed59e1d1-38e2a0780c5mr8148928a91.26.1784225251796; 
+ Thu, 16 Jul 2026 11:07:31 -0700 (PDT)
+X-Received: by 2002:a17:90b:2808:b0:38d:e5d0:9bd with SMTP id
+ 98e67ed59e1d1-38e2a0780c5mr8148883a91.26.1784225251323; 
+ Thu, 16 Jul 2026 11:07:31 -0700 (PDT)
+Received: from hu-mathbern-lv.qualcomm.com (Global_NAT1.qualcomm.com.
+ [129.46.96.20]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3140e5326c0sm17131184eec.11.2026.07.16.11.07.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Jul 2026 11:07:30 -0700 (PDT)
+From: Matheus Tavares Bernardino <matheus.bernardino@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: brian.cain@oss.qualcomm.com, pierrick.bouvier@oss.qualcomm.com,
+ marco.liebel@oss.qualcomm.com, philmd@oss.qualcomm.com, ale@rev.ng,
+ anjo@rev.ng, Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v2 07/14] semihosting: add callback to set error
+Date: Thu, 16 Jul 2026 11:06:51 -0700
+Message-Id: <a08d1e274e722c7072740838fbb596c8dfb67b10.1784225209.git.matheus.bernardino@oss.qualcomm.com>
+X-Mailer: git-send-email 2.37.2
+In-Reply-To: <cover.1784225209.git.matheus.bernardino@oss.qualcomm.com>
+References: <cover.1784225209.git.matheus.bernardino@oss.qualcomm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 2/2] hw/riscv/k230: wire up the RMU device
-To: jack wang <163wangjack@gmail.com>, qemu-devel@nongnu.org
-Cc: Chao Liu <chao.liu.zevorn@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:K230 Machines" <qemu-riscv@nongnu.org>
-References: <20260709031237.21284-1-163wangjack@gmail.com>
- <20260709031237.21284-3-163wangjack@gmail.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260709031237.21284-3-163wangjack@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: u4PWFbcYD_GIK8CoaM7dL7zXsGvnzxBO
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDE4MyBTYWx0ZWRfX4QNaym0rgSww
- R1pv9Uur7Ob4EGtYa8LVp1APQr8ZSH6tSRkdqduQrCoNlitcbGywOdGllpInoTPyHSaaHYSmmRF
- z5vZYZBnfmEayykp6fQVxMF2wYUc366nlYp4a46JpLqu4xDxBCyE1TiNKG44rGJACbk11lmbW8p
- AdMMx3wOE/tx40XLQzm7MLslwC2ciZ0fZd0BAp7nw0KV73Clrf8+9D9/cD6bPQqSFbdczjWCOgv
- rBSxFcLmVCkzpsCtUeTLShPmyxpVAYyBI+p6t7qe+hPH7Noaxr3i5AUi4kEC3hGY27yuD2fJ3el
- P5aTJg7DzGQZE0ZekEWQSc/oXHENWFbXjVH6JWya/eo/vti0vor8Ik5dXNShYWqXerLPAsUTmVz
- A5tjv1jsV3adGRCoFPf5ZDeh+qmh9rGEf1iYUkLq9MTT+6sYoayFoG9hOi3ADGcPklmIb2kKi1e
- Z8xhgG56ctlWgL/oiYQ==
-X-Proofpoint-GUID: u4PWFbcYD_GIK8CoaM7dL7zXsGvnzxBO
-X-Authority-Analysis: v=2.4 cv=BPODalQG c=1 sm=1 tr=0 ts=6a591b57 cx=c_pps
- a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=szoPuAicwqWYzOEwwuIrwA==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=pGLkceISAAAA:8 a=zbSpUncYuYwdhI30rcEA:9 a=QEXdDO2ut3YA:10
- a=nd2WpGr1bMy9NW-iytEl:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDE4MyBTYWx0ZWRfXwGCm4mTbcrMt
- 4niR6w3Fb3i7GJ/pDUfC13piJu6bdEaLkGI29GjmzqqB2A9WD2kvjRDCG/WkK+TLaiCGtzVWzi3
- EQFGw9IBMmY/qyNm50BG9GPc+TH7xaM=
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDE4NSBTYWx0ZWRfX1AXmSGpprqph
+ TvnfwlTV43MXCAcn3lx6rS9XVkhJ0SBJBmyqni7+oS50TmwhKshmNNASbWn4tk702qx+vtjKfWv
+ m9ms7ybw+Ia1dmgaJqAZf+xSG91X9d45faFLDuOBuGJzIsl/mzQmgnlCnOfoEKoAiKU1ihAd8tH
+ kufAX07obRdcYJk9Hfl6VrTHdhi/8UqYnNIirNL0tozP6QXQB/1nf6qWuKhX6PiK40Oa3R2ZhHZ
+ UCw/eZ7ZmgowkHtnLyQoK9LoekQHVmyvgwGEUXoSqpp5ZCvW2wZdAozhkliWarq+g/R/jUqSQzd
+ 2j0IIEVfySSZQJxawOXGkvmQkvW1xsxw1lYEe3EwBm6sCluAARNw0YwNbCHR68/KblXmcqo6cHp
+ w9xM2ohsfmMBmZxaYGSwBWQRy8QjO6ti/fcVZg/D0frZaBAqE7RZ8OOGRcW7C5ynAEEF2GrPls3
+ qWEv8NOLTkG93bGtXjw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDE4NSBTYWx0ZWRfXwprG/9Q+IFZx
+ oKWzOehHhOcmYtWyOor3sNiyq/XG65pcOgUIuaBfbtb7IQIUxRLcGCN/iR0CoAksOipKGhVBe00
+ TsZhkjXEb4qrzUiop12Qh+I92xCiaJ4=
+X-Authority-Analysis: v=2.4 cv=DYMnbPtW c=1 sm=1 tr=0 ts=6a591de4 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
+ a=8ndNYmkutmpv_8xOvXsA:9 a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-GUID: 3C8oMQO4QExtReNURigzBrpH7iUH6ddX
+X-Proofpoint-ORIG-GUID: 3C8oMQO4QExtReNURigzBrpH7iUH6ddX
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-16_06,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0
- priorityscore=1501 phishscore=0 bulkscore=0 spamscore=0 impostorscore=0
+ clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0 phishscore=0
+ adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160183
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160185
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=matheus.bernardino@oss.qualcomm.com;
+ helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_BL_SPAMCOP_NET=1.347, RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -159,114 +158,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+This is currently unused by existing semihosting targets, but it will be
+used by hexagon in the following commit.
 
-On 7/9/2026 12:12 AM, jack wang wrote:
-> From: Jack Wang <163wangjack@gmail.com>
-> 
-> Replace the "rmu" create_unimplemented_device() stub with a real
-> K230RmuState instance mapped at the K230_DEV_RMU memmap entry, select
-> K230_RMU from the K230 Kconfig, and document the device.
+Signed-off-by: Brian Cain <brian.cain@oss.qualcomm.com>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Signed-off-by: Matheus Tavares Bernardino <matheus.bernardino@oss.qualcomm.com>
+---
+ include/semihosting/common-semi.h | 1 +
+ semihosting/arm-compat-semi.c     | 1 +
+ target/arm/common-semi-target.c   | 4 ++++
+ target/riscv/common-semi-target.c | 4 ++++
+ 4 files changed, 10 insertions(+)
 
-So, as I said in patch 1, applying this patch will fix the qtest that you
-introduced there.  I believe we want to either squash this patch in patch
-1 or move the qtest creation to this patch.  Both are fine to me.
-
-> 
-> Closes: gevico/qemu-camp-2026-k230#11
-
-Not sure what gevico is (seems like a bootcamp, according to Google at least)  but
-the "Closes" tag usually contains a gitlab bug or any other link that is publicly
-available.  It's better to remove it.
-
-
-Thanks,
-Daniel
-
-
-> Signed-off-by: Jack Wang <163wangjack@gmail.com>
-> ---
->   docs/system/riscv/k230.rst |  1 +
->   hw/riscv/Kconfig           |  1 +
->   hw/riscv/k230.c            | 10 +++++++---
->   include/hw/riscv/k230.h    |  2 ++
->   4 files changed, 11 insertions(+), 3 deletions(-)
-> 
-> diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
-> index cea8202e55..3f2313a127 100644
-> --- a/docs/system/riscv/k230.rst
-> +++ b/docs/system/riscv/k230.rst
-> @@ -19,6 +19,7 @@ The ``k230`` machine supports the following devices:
->   * Core Local Interruptor (CLINT)
->   * Platform-Level Interrupt Controller (PLIC)
->   * 2 K230 Watchdog Timer
-> +* K230 Reset Management Unit (RMU)
->   * 5 UART
->   
->   Boot options
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 54e41a6afc..bffa4e69c8 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -149,3 +149,4 @@ config K230
->       select SERIAL_MM
->       select UNIMP
->       select K230_WDT
-> +    select K230_RMU
-> diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-> index 502281c52c..b55e90c0d2 100644
-> --- a/hw/riscv/k230.c
-> +++ b/hw/riscv/k230.c
-> @@ -110,6 +110,7 @@ static void k230_soc_init(Object *obj)
->       object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
->       object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
->       object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
-> +    object_initialize_child(obj, "k230-rmu",  &s->rmu,    TYPE_K230_RMU);
->   
->       qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
->       qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
-> @@ -206,6 +207,12 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
->       sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
->                          qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
->   
-> +    /* RMU (reset management unit) */
-> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->rmu), errp)) {
-> +        return;
-> +    }
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->rmu), 0, memmap[K230_DEV_RMU].base);
-> +
->       /* unimplemented devices */
->       create_unimplemented_device("kpu.l2-cache",
->                                   memmap[K230_DEV_KPU_L2_CACHE].base,
-> @@ -268,9 +275,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
->       create_unimplemented_device("cmu", memmap[K230_DEV_CMU].base,
->                                   memmap[K230_DEV_CMU].size);
->   
-> -    create_unimplemented_device("rmu", memmap[K230_DEV_RMU].base,
-> -                                memmap[K230_DEV_RMU].size);
-> -
->       create_unimplemented_device("boot", memmap[K230_DEV_BOOT].base,
->                                   memmap[K230_DEV_BOOT].size);
->   
-> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-> index 592e1c26bf..13f2a1ab0b 100644
-> --- a/include/hw/riscv/k230.h
-> +++ b/include/hw/riscv/k230.h
-> @@ -18,6 +18,7 @@
->   #include "hw/core/boards.h"
->   #include "hw/riscv/riscv_hart.h"
->   #include "hw/watchdog/k230_wdt.h"
-> +#include "hw/misc/k230_rmu.h"
->   
->   #define C908_CPU_HARTID   (0)
->   
-> @@ -33,6 +34,7 @@ typedef struct K230SoCState {
->       RISCVHartArrayState c908_cpu; /* Small core */
->   
->       K230WdtState wdt[2];
-> +    K230RmuState rmu;
->       MemoryRegion sram;
->       MemoryRegion bootrom;
->   
+diff --git a/include/semihosting/common-semi.h b/include/semihosting/common-semi.h
+index aa511a46f42..a11905ef4ef 100644
+--- a/include/semihosting/common-semi.h
++++ b/include/semihosting/common-semi.h
+@@ -37,6 +37,7 @@
+ void do_common_semihosting(CPUState *cs);
+ uint64_t common_semi_arg(CPUState *cs, int argno);
+ void common_semi_set_ret(CPUState *cs, uint64_t ret);
++void common_semi_set_err(CPUState *cs, int err);
+ bool is_64bit_semihosting(CPUArchState *env);
+ bool common_semi_sys_exit_is_extended(CPUState *cs);
+ uint64_t common_semi_stack_bottom(CPUState *cs);
+diff --git a/semihosting/arm-compat-semi.c b/semihosting/arm-compat-semi.c
+index 5e5f181b908..c54753f696f 100644
+--- a/semihosting/arm-compat-semi.c
++++ b/semihosting/arm-compat-semi.c
+@@ -237,6 +237,7 @@ static void common_semi_cb(CPUState *cs, uint64_t ret, int err)
+         ts->swi_errno = err;
+ #else
+         syscall_err = err;
++        common_semi_set_err(cs, err);
+ #endif
+     }
+     common_semi_set_ret(cs, ret);
+diff --git a/target/arm/common-semi-target.c b/target/arm/common-semi-target.c
+index 2b77ce9c17b..38d52deb3d6 100644
+--- a/target/arm/common-semi-target.c
++++ b/target/arm/common-semi-target.c
+@@ -34,6 +34,10 @@ void common_semi_set_ret(CPUState *cs, uint64_t ret)
+     }
+ }
+ 
++void common_semi_set_err(CPUState *cs, int err)
++{
++}
++
+ bool common_semi_sys_exit_is_extended(CPUState *cs)
+ {
+     return is_a64(cpu_env(cs));
+diff --git a/target/riscv/common-semi-target.c b/target/riscv/common-semi-target.c
+index aeaeb88d536..38a00e160c3 100644
+--- a/target/riscv/common-semi-target.c
++++ b/target/riscv/common-semi-target.c
+@@ -26,6 +26,10 @@ void common_semi_set_ret(CPUState *cs, uint64_t ret)
+     env->gpr[xA0] = ret;
+ }
+ 
++void common_semi_set_err(CPUState *cs, int err)
++{
++}
++
+ bool is_64bit_semihosting(CPUArchState *env)
+ {
+     return riscv_cpu_mxl(env) != MXL_RV32;
+-- 
+2.37.2
 
 
