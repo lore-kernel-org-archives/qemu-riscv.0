@@ -4,113 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22365C44514
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jul 2026 21:08:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 168D4C44514
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jul 2026 21:09:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkTJ2-0003ib-JK; Thu, 16 Jul 2026 17:07:44 -0400
+	id 1wkTKM-0004Hh-8R; Thu, 16 Jul 2026 17:09:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
- id 1wkTIz-0003hs-0s; Thu, 16 Jul 2026 17:07:41 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
+ id 1wkTKK-0004Gy-KM; Thu, 16 Jul 2026 17:09:04 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
- id 1wkTIx-00027F-CQ; Thu, 16 Jul 2026 17:07:40 -0400
-Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
+ id 1wkTKJ-0002AO-9Z; Thu, 16 Jul 2026 17:09:04 -0400
+Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66GKC25N2320899; Thu, 16 Jul 2026 21:07:36 GMT
+ 66GKBqxP4130227; Thu, 16 Jul 2026 21:09:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=S3VYnm
- aXIHXaWn88Q9VNxXFeKZbq8YvHf341r1PPFao=; b=deCirSMXRCxzB9ekCuLQn7
- zC0Cy8MUHNfpVZXJWsBT4spIaBDKIMJnLNnbli8qilGLvYvv0rS0JjiBfRUbiTk1
- t+piXiFUUNktEhZWmQXPGwkrW/rZh8whi3vbxKIRxnh1vK5KV73oTvo27qo53F12
- J8eK0IvyImmbwjcrtQd3KoK5BIRbDsmnzKMs/6viIfIwpW90EkyyDg5e19mifLZi
- WD4n8SUGmgK8FRNTPd8/4qk7NNeyc9+BZDVvElgEuFyrF9XXJT2n92gg/Sfz1Kt4
- kxH0mL2yLl8e1FVWvKxtoMW0WJgYjnjEThtEAT/fh4xrddRvFD17HSHmVPFsQ2cQ
+ :message-id:mime-version:references:subject:to; s=pp1; bh=VJhXCL
+ YXLlIibIlf4e+lSfQ5uddyhyNEkPixBjsXZQI=; b=HLcQ6mcFhs23/2fFteij99
+ Qof1UroOlQQNOnMIlrqoqWeprkfrrsifIybHSIWANPTA7SaB+Gm1gDOyls8abCbm
+ N3MlGy6MdEd8R3xN9S9PbiEi6zbZW06MGbbYOrZWKzJ4ibREz/lxK9IETzQTHQAu
+ ubvpvYBOB2LYCEBQHl6kKONtktxL0uzeHCC/fCb9iDueN5RhEgM2TbPTchU5wiGt
+ BtfLaWq78pRXRX8+exx2AOD8jnna88SERryrSJ+EFLS62EYI7VSpnKFFfi8raw8g
+ PJcdTexUQ5idUi5LKCAcLcisrjRwCYnM19/niVyaapTD/OK2ZhqTWVZRKeLdC73w
  ==
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fcv33kn25-1
+Received: from ppma12.dal12v.mail.ibm.com
+ (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fbf2aj9xd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 16 Jul 2026 21:07:35 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66GL4b5N016346;
- Thu, 16 Jul 2026 21:07:34 GMT
-Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4fc15k6thw-1
+ Thu, 16 Jul 2026 21:09:00 +0000 (GMT)
+Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma12.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66GL4bWa012522;
+ Thu, 16 Jul 2026 21:08:59 GMT
+Received: from smtprelay07.fra02v.mail.ibm.com ([9.218.2.229])
+ by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 4fc05qf209-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 16 Jul 2026 21:07:34 +0000 (GMT)
-Received: from smtpav01.fra02v.mail.ibm.com (smtpav01.fra02v.mail.ibm.com
- [10.20.54.100])
- by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 66GL7W8o49676686
+ Thu, 16 Jul 2026 21:08:59 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com
+ [10.20.54.101])
+ by smtprelay07.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 66GL8vUa41877856
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 16 Jul 2026 21:07:32 GMT
-Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 358E020043;
- Thu, 16 Jul 2026 21:07:32 +0000 (GMT)
-Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 7816620040;
- Thu, 16 Jul 2026 21:07:31 +0000 (GMT)
+ Thu, 16 Jul 2026 21:08:57 GMT
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 6DC7320043;
+ Thu, 16 Jul 2026 21:08:57 +0000 (GMT)
+Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 1A96420040;
+ Thu, 16 Jul 2026 21:08:57 +0000 (GMT)
 Received: from [0.0.0.0] (unknown [9.111.65.221])
- by smtpav01.fra02v.mail.ibm.com (Postfix) with ESMTP;
- Thu, 16 Jul 2026 21:07:31 +0000 (GMT)
-Message-ID: <4bf52b08-b835-496b-a90e-fe9a597b0cd2@linux.ibm.com>
-Date: Thu, 16 Jul 2026 23:07:31 +0200
+ by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
+ Thu, 16 Jul 2026 21:08:57 +0000 (GMT)
+Message-ID: <7396fc58-8692-4003-844b-88b124b318df@linux.ibm.com>
+Date: Thu, 16 Jul 2026 23:08:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 21/51] exec/breakpoint: Return the new wp from
- cpu_watchpoint_insert
+Subject: Re: [PATCH v3 22/51] system: Validate flags in cpu_watchpoint_insert
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
 References: <20260710205401.836304-1-richard.henderson@linaro.org>
- <20260710205401.836304-22-richard.henderson@linaro.org>
+ <20260710205401.836304-23-richard.henderson@linaro.org>
 Content-Language: en-US
 From: Ilya Leoshkevich <iii@linux.ibm.com>
-In-Reply-To: <20260710205401.836304-22-richard.henderson@linaro.org>
+In-Reply-To: <20260710205401.836304-23-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-TM-AS-GCONF: 00
 X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDIxMSBTYWx0ZWRfX3a4ewpbYJj04
- f1A1bXusZCj7Q96eOaDTVVCpAiJ9VlrpUDrpiJL59WyAYybkzLW+9S908WsT+P77NztfSZW2QVi
- 75Q+oqB8gqYOnN4Z4+CupWgf2dyuCL8=
-X-Authority-Analysis: v=2.4 cv=Mp1iLWae c=1 sm=1 tr=0 ts=6a594817 cx=c_pps
- a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDIxMSBTYWx0ZWRfX/1s09l/DWQ9p
+ L6cx4lRH9cbRvOJzlCtZk1DOTGLbgju/9GhCGeOW4jq6Yx0EGZZytz0OcNO6k85t6ypYXeTtwYM
+ ygn8PqSa/LrzSECgOVQbX3gfH8Hm/zY=
+X-Proofpoint-GUID: 44fA0hdDax-WWPQHZ-2JGv6fB9YcSVxU
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDIxMSBTYWx0ZWRfXytYIb989Y6qH
+ SuBpexVJ84uxWd2dU8Paxafmpt32gugkVPbHvKjHALjIsNW9uh2xfleWI9bRVSAim/DskeRYfq8
+ PST3zrzv0ulG2MUJoCYjv7GRwUfznD6R4DMHcRQZZadIjSH1uqx18DAlkuqHPv4EioRcuqDf1IF
+ U+eHYJnaMMsc/8dIHyY+mtlilHYDlMHShxZdq/9yHW855lpT4EdeD6vuSK4NLs1f/L1uojWTYky
+ xxvaht87W0dxmObGarUzmZAD3ytGzAxvCsOYN5XE7cQmm78O+HhzY72JfcmWQwgvE+Quc1QMk0C
+ pHYVgkdQAsKspgYK7CO011/HooMMTh9rbovn0lw1HnzmNXbz7J8ZYgMlxxfOPlV4g0DHga5PoX1
+ /2Z1DoBL2YyMA+U5C6S45IjBhk7MJYmAPJC89Fec0sErQASunLwcjpqE4MstTwOdOw16iLoMd5R
+ gEi2REFI7dKAhZiE1Tw==
+X-Proofpoint-ORIG-GUID: Yt1n6dpGi5sqXFYqqpm2jw1hTcMS7OlB
+X-Authority-Analysis: v=2.4 cv=PvajqQM3 c=1 sm=1 tr=0 ts=6a59486c cx=c_pps
+ a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22 a=KKAkSRfTAAAA:8
- a=VnNF1IyMAAAA:8 a=iEHWvvDq4-ptc5kxTzQA:9 a=QEXdDO2ut3YA:10
+ a=RnoormkPH1_aCDwRdu11:22 a=Y2IxJ9c9Rs8Kov3niI8_:22 a=KKAkSRfTAAAA:8
+ a=VnNF1IyMAAAA:8 a=YsH3jjYhZO1Zdoctmk0A:9 a=QEXdDO2ut3YA:10
  a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: b_FDPyRgQQDhaiP9PnnqrRkFan185wAO
-X-Proofpoint-ORIG-GUID: SLo9WSkeY1RgG0k9scm7WjFUJ_8gsJj3
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDIxMSBTYWx0ZWRfX1p61ouNT2EX4
- uhmLlQbU0JSraSmCwhtceVkQBEqtHfIpTzVygcd0IBZG7TvD4ZNyBF/ltzfHQRnUCT5V8Qy+AeA
- 99mjO5K4tkneIaUVZnkF5o7bU40pRDsM6PNB7+34HvL18utkPTUwlPSJL9wZ5G1uMZ4m2zQTIQV
- BXR0TIIGpwtPPua+5WskkGX5NUaehyRY77X0bAmGEEnUbYbHT162ucLYqwb7OLL8nsZjJraY6MM
- cCRzrili6bPocpRgruQbmW8EODcir2/vT/72LUPny64faYwz6OSPSC4Drse59vAlvpd/nGLkli7
- DsVjX/GI4IXlPC5qbL0W7M29ZyJetY7+QqT6f7yE6ycCKY5AC0vI4dXr58FGknoz+IRptn3pcar
- pBTXBlZsriamiv4G2YQZqndgB3d3dvQ2/KWr3+J6siolKZRIU7wUIDrY5YdxfSKmW18ApjOTipY
- wHJczDbpI1bOVoPO9BA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-16_07,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 bulkscore=0 spamscore=0 malwarescore=0 lowpriorityscore=0
- impostorscore=0 priorityscore=1501 suspectscore=0 clxscore=1015 phishscore=0
+ priorityscore=1501 malwarescore=0 bulkscore=0 impostorscore=0 adultscore=0
+ clxscore=1015 lowpriorityscore=0 spamscore=0 suspectscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160211
-Received-SPF: pass client-ip=148.163.156.1; envelope-from=iii@linux.ibm.com;
- helo=mx0a-001b2d01.pphosted.com
+Received-SPF: pass client-ip=148.163.158.5; envelope-from=iii@linux.ibm.com;
+ helo=mx0b-001b2d01.pphosted.com
 X-Spam_score_int: -26
 X-Spam_score: -2.7
 X-Spam_bar: --
 X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
+ RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -130,25 +129,14 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 7/10/26 22:53, Richard Henderson wrote:
-> The cpu_watchpoint_insert function cannot fail, so the error
-> return value isn't actually used.  Instead of returning the
-> new watchpoint by reference, return it directly.
+> Flags must watch reads, writes, or both.
+> Flags must specify GDB or CPU but not both.
+> Flags must not contain extraneous bits.
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   include/exec/breakpoint.h           |  5 ++---
->   accel/tcg/tcg-accel-ops.c           |  9 ++-------
->   accel/tcg/user-exec-stub.c          |  7 +++----
->   system/watchpoint.c                 | 11 +++--------
->   target/arm/tcg/debug.c              |  4 ++--
->   target/i386/tcg/system/bpt_helper.c | 20 ++++++++------------
->   target/ppc/cpu.c                    |  4 ++--
->   target/riscv/debug.c                | 28 +++++++++-------------------
->   target/s390x/tcg/debug.c            | 10 +++++-----
->   target/xtensa/dbg_helper.c          | 10 +++-------
->   10 files changed, 39 insertions(+), 69 deletions(-)
-
+>   system/watchpoint.c | 3 +++
+>   1 file changed, 3 insertions(+)
 Reviewed-by: Ilya Leoshkevich <iii@linux.ibm.com>
-
 
 
