@@ -4,109 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C519EC44507
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 08:55:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FA2EC44514
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 08:59:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkeM1-00082j-55; Fri, 17 Jul 2026 04:55:33 -0400
+	id 1wkePk-0000Oa-K7; Fri, 17 Jul 2026 04:59:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1wkeLy-000824-08
- for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 04:55:30 -0400
-Received: from mail-yw1-x1129.google.com ([2607:f8b0:4864:20::1129])
+ id 1wkePj-0000OJ-BL
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 04:59:23 -0400
+Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1wkeLv-0005Ll-G8
- for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 04:55:29 -0400
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-81ecf499af9so43773257b3.1
- for <qemu-riscv@nongnu.org>; Fri, 17 Jul 2026 01:55:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784278526; cv=none;
+ id 1wkePh-0005W0-75
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 04:59:22 -0400
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-80cebd41372so72345397b3.3
+ for <qemu-riscv@nongnu.org>; Fri, 17 Jul 2026 01:59:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784278760; cv=none;
  d=google.com; s=arc-20260327;
- b=R3rHCwjX0KZO5NkPaMEGykBXdmQ+IXlWUBVGcnJ7MC39dTP39sWhPjPaBOvp27fz23
- QfpcmN7y/CkFihx4HHuwUd8jArfMixPDL/2wvGvcUtYcaPiEXEB2LbSzMxUUUYDlvUGj
- YYHn/5nNM/xkLI5k+jJrBCTXASLCKobbXcJBcQWhJQUDSnUmJPkdw37xs+d2Fdlecztf
- MZbzlAjcBfiotxILj7EJOTl0caM25OU70OuQJFN1W87TKNvM+k5b2nIn3+VM6uH4d0O/
- Oi9/u8p4oi8pFpF9aF8mmmWl+WvZchIDguKljYafWcopzDnE7elHcG4HScTG7Q5SrQ3a
- hiZQ==
+ b=VQkwsixy7en11N7aQRz+xGOckLFHRi2oyyroTU1k6yBK6oW5TdiAcaKbJ0jFA6ybEf
+ tG/PcJF1tZFr0+uRwa8bWdYT/FgpFNaq/i1AJqTwHZYiBWH0YZxsRPRsyAKTwYToqDBy
+ DCV3xywb6HixBqIziIWGGd1iRXDq8uoeOS8m9ex2ZGVGaUU5oCJXuEyi2CFGo9rBc2nC
+ euo5USa0SNFaQ/xWQPZ2wI8KVSLPdg4qF1XerEoVYL7nkxvk8gPcbr6LszIIN+imSnaO
+ 0GRnQm2i6wRKt8fw5mxsvtEt+D9HvyQTjaFhbbGQPxQImNuSDQv0FQ6IW9BGduCl5kj5
+ g/SA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=qfDpFj5sI7c1lMBs2+vjZfAUb2p+bBhzlM8dFQ160u8=;
- fh=aJr00jAe+lJp5LnH4N5mdANg0ahKSOLFkPhriqIZcwU=;
- b=Dk5onTjeVpThTpfrFVoV/eCrGrSl5uc2+JU4xd4URQDdmcrQ+vT2N82ETcrBifln5u
- 1/goV0wfIbb7aps9dONo7qwinuezM9fcjWxKK3nE/xxe/klVMn8GTzpqhrcaihJMyLz6
- 5bgKq0m1NV6zUqboedWVg9RvOIroFeHJTSVb87QQJRfoLlKKgeyJ8usxLuf9uENjdTpp
- y3QShIf2s7wRSugVBf3fxLurAG5nZL8w7VY3PD9PzZUUxMiBfiVVpmnVgpbf1MN2l3hX
- 6/5fGLimlAcuUQEkfw1tlrP3/PVsDBWEts4f7aoLnQQdE2hhMLulGUZwtIkmdDC0LJlk
- vFAQ==; darn=nongnu.org
+ bh=sJMXREwvtC/rxQdqhMhaVjtcHLxTGkOlCOWZOOIddAg=;
+ fh=ryw4ktzgzOCN/PQPxUMP0upjyN9KxOGUkgaQ8HypLVs=;
+ b=JG5JYwVtYvNzi+vBJD2KinLGS2LXN76OIyk8hb8xmsuaAi4aRMflenkfwG/bnRVXOV
+ mF9gymIls4zWVqlhSFu1qRQw5BaUXmXAPYNYL+sg+zp97aVTCW288E4GwLmfBGAgOFRA
+ Hk/8eXhW0f5bigx/pWhgQZdVoZiTyZkycfY34wHKQbw7vKYAehI2AyEee74oqgevuO+I
+ eowY0EuB2XFbP7XvkiqcfS3msKjrntirY2x6GjquQVhg39BV2Yo13VJ7G1aYVcXcf6Tz
+ Ne0yXF5FZSfUGruE/hXa7wqCZqm7AXqGrGWD+cxosBVGUW6ShPeK0rxNRzu8nqO+D6nM
+ 5s3g==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784278526; x=1784883326; darn=nongnu.org;
+ d=linaro.org; s=google; t=1784278760; x=1784883560; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=qfDpFj5sI7c1lMBs2+vjZfAUb2p+bBhzlM8dFQ160u8=;
- b=KoF3yKPQSFaDe/Kt9avpmfj9d79tX7MyBbJlpIIdS4xdGSj9ixIhkOcqJdFMIFMmck
- Qb3kXoUMAWE7D7Do6biMTkNE0d+iNkIneYch2kWbxM3V9CfVa8XlkM3Mv2Wld5/MAdGw
- dwOfK9PfdRVECKody5pbhUlhZ1RecDsBKHaS1eSV65y2nIvQhGTdkeZsYRNgteVfE23W
- pKwsvHwUZuUb29RU108TExmbpOf1g+ABFArL5zwUYCW9W2rfyg2PsZnG3O+COX/zYLd4
- 8bHtjMbH1va2YeESeNsz3fr9/Kfafh4NeBiQS/HRJseCUHaJqdcpt5oPM8x301r8bRMQ
- 6Vxg==
+ bh=sJMXREwvtC/rxQdqhMhaVjtcHLxTGkOlCOWZOOIddAg=;
+ b=w0ZUrA4QuAS32U8GQRvrRNygH7zhqLLAaw3AK0aPka06sThOh3tfAIoOYQZ9e+6W2N
+ r0xJ+JrOjW5mLAiCl19jaaARGsLbprhyIPONIaODyX47ahfvhg7WVuA7NnvuchfvYudN
+ h7b2yPlfy91ti7CDCVyKNYoTvvLxWVcig4FFIx1dcKUZLzKp/+ZiF1aTLEMWJ0ROOU8b
+ o98FMXop6LsPWs2mLwtpVVrFuqCtmNM8/uoU/WKigAysdXQV29yoHfVnio4MKQWdpP/s
+ F8kukVvXlMq3nsx+b+vfyWOZfioX7INdmg8LhNXQz97rwYW3Y/qH1Ld51LIHVMFgw1SO
+ yOQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784278526; x=1784883326;
+ d=1e100.net; s=20251104; t=1784278760; x=1784883560;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=qfDpFj5sI7c1lMBs2+vjZfAUb2p+bBhzlM8dFQ160u8=;
- b=KGg7W/oM1f1ANVMY+kcrH7sxa96YnJejCu3w8eqa5RvKqQJaiCkqkX4d4taYgpaXip
- JPyl4c8ihNe1fVhtazePQ8sp804mWXWKnAM6994ZvzWegTKdTlS21Y+S68G20kJREtdX
- uhstnvzBYBuqSzgYLBz4R3w0eUGwewH20vDXlHf9zAar1tMhf0P/1IkOrk42zX1+FCQ5
- 1Rb7TM98BqJek9E6gb8gq/NrLYFfaJV/0uZ3uawY9tCzd61ybiVbJfqO+5SwJ0bbEI4a
- Yzgnc3ZRtbnOpdkIRxi5cACInLC7XeAKodz3XFxx66PY6hpJyM9AgvROhwy/XGJ5e831
- TNzg==
+ bh=sJMXREwvtC/rxQdqhMhaVjtcHLxTGkOlCOWZOOIddAg=;
+ b=LwadHTWxOPYI7VB9cU8RCuKVU4tvpuNkNSIJsSQe0+mPVflSY8G5IGMPzodOTaSI0G
+ gghsX4YoJTe0XyAOSJfSYDVriB+76XLvLNmiYBoqL3hDQcZM1Ks6NLPX/j9rVMKDxpqS
+ 6S9bi+j9LHNmo+Rf7Y/xi5VLjQlCZtGhTNOjMvlvVlJD3E//4lv4HJ3m99YoU/Hoou5G
+ 8a39ACbSaFkCV2UFcetylFubNppL8xAs/IxZhCj9LHpShd4zQ2WOyDHlZLmwze6w4rF4
+ 8JZMiebJeDhiw0A6JYIlvo5wrxGaXKfN3C3xOBrfXTAHpDAF1GaNGKrfKYd7KgwC8dAP
+ HkPg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RplM05WI++WxsKABacUuJR5b2kgQwMM8QzsSAs/oW4xO9rvum6EzHQ7ShHWlauOBdZzzDKR0Mn3X8hA@nongnu.org
-X-Gm-Message-State: AOJu0YxjhWQ9lrdIV+kYUsmfc4d5F6FV9V827iYlZrA/aqxcUsj86ym1
- FNmnyb69KdbolsUkXDm4WtRoZJhayCqQxFe2FHjnu6BIZh9dOs2HmnyLNE78h4gckZMl08WSxt5
- h+l7CtLGvs06FOOe6VDuMzmDw0aPcOFAu+4518Ou1tg==
-X-Gm-Gg: AfdE7clx5xIOz+zGvzt+d5okeh10zQfEA3qK+E4X6GBDs8LaCGlX/FR82VF8x3Rf1NC
- bhK5Mkn/cLuj8/MEW8CkNHiPlOZn5KeHPL6kuvMpVKgpPkB+2SO9oXd8fdGzuHhUw7UOxcfqdhl
- uNma2d/zrBNKxSnXNGAZbXugInxBKBJ+hgEyTmPVbV5xZFsRSiwrhw5sDi0yvNewqZYlKOHxQzJ
- 01zSQPUWRAWfN2Aq0s5hYYlY9lrnNdrGExTwCQrraf8RKQk97uTkK9RofaJ7XT7X9p0c71frEd/
- mj+Mdm36iGziSZjx+uOVZ+lUMqFFAQpjE5NN7O1kUAPBhTITWYDHAveo
-X-Received: by 2002:a05:690c:3a0:b0:81e:b981:3eb5 with SMTP id
- 00721157ae682-81ef25ae906mr4941747b3.23.1784278525669; Fri, 17 Jul 2026
- 01:55:25 -0700 (PDT)
+ AHgh+RrCBo8f6fQd+9JBUlbqfF2gDMTIn5pTrnRdsreRJjONPRLXtffsNpMabUMVaKn1sRMosatn61wwUIqy@nongnu.org
+X-Gm-Message-State: AOJu0Yw4he0OG7Cc3dZlP2ZfbTXS7Uhkf1fRWPQRTXdxoI5r6bsOZ0LP
+ J7Q7rjp2auU7A2h2aDFL8T0/YDOp2+BJ+hS6UxFEwvPjdD+qY0G4G7USnCyclB0FxsidvjfAoHV
+ GwplfVD2/ubs3enp/VHf3J0hZMNqb2BCVFfImnfASyw==
+X-Gm-Gg: AfdE7cllpsTiY1s4KGoh1NGODW6B17PWqfiaXnAA93Xk1ZZ1EsenmxdO1mn6uNbmH4I
+ h+NNipZteSmV8TjQnQY40GYzMSQdNnvak1vnikIwd3NToNXP9xaUIOUkTGL5bBSv1pLYH1rsziP
+ j2ib3A1QyOAfweBdEOJGafN52yshyafjiuK6IZr3nW7AhKeRcNtTThysAQJPCUSg+iUEh1esQDy
+ SW3Veq6u4FxgXuJlA04YQ2Dh/RBuyYO+bItZvnnBz1LfR7dHH+zigjJEJjmUBmrO+j7AgeEcYXO
+ vsAmiV0p/SwLsaHPeFwsaWlpNck8tJKXIDApD958Daf8eA==
+X-Received: by 2002:a05:690c:4807:b0:81e:97e2:2210 with SMTP id
+ 00721157ae682-81ef26932d1mr5393847b3.69.1784278759917; Fri, 17 Jul 2026
+ 01:59:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260715190737.1381701-1-frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <20260715190737.1381701-1-frederic.petrot@univ-grenoble-alpes.fr>
+References: <20260209115846.2276651-1-jim.shu@sifive.com>
+ <7be3b4f7-7516-40ab-8a95-b3b4a2aea095@linaro.org>
+ <CALw707rbMvg1mf1S_3qiqDWbZ0qjzgx4UJ9pUGmQODKWttKFyQ@mail.gmail.com>
+ <08c5f243-5aaa-4fe2-bc71-6a3fd9a1914e@linaro.org>
+ <CALw707pP_5a_EeUQLRw51nLCoFo4vKkKPGaVtJJdWEqR8K-u-A@mail.gmail.com>
+ <CAFEAcA8V-eNMTF6dmR2AHwSjWj_MWaijgG_inepf62BRLYo8DQ@mail.gmail.com>
+ <CALw707pb5iKy-CAnVn-npdP8NRGwaz+yZKGi2ZbjafqNLNJtKw@mail.gmail.com>
+ <CALw707ozF4se+s7CUYNHY+f7xHCc5mqMiQQf+GK8eM1WrjN1qg@mail.gmail.com>
+In-Reply-To: <CALw707ozF4se+s7CUYNHY+f7xHCc5mqMiQQf+GK8eM1WrjN1qg@mail.gmail.com>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 17 Jul 2026 09:55:14 +0100
-X-Gm-Features: AUfX_mzIBdcuIA0_XiDSTG-R6hxX7SXzzbEIjX6Yf0tDT0ixLrWe6e-nujP8a_0
-Message-ID: <CAFEAcA9FoE33wE9HqcsmP8Xe=g6-JYCGgGyw8YnaEJs8Z5Kbbw@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Correct cbo and lq disassembly
-To: frederic.petrot@univ-grenoble-alpes.fr
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, 
- daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- julien.thillard@univ-grenoble-alpes.fr
+Date: Fri, 17 Jul 2026 09:59:08 +0100
+X-Gm-Features: AUfX_mzUVFf4Xt_sPeCH0jQdOXQqHkNW2yaoA_K4bB13m6mJMl_DGMh3rwkUiiM
+Message-ID: <CAFEAcA-O1OsvisDF9CiFXvKS-2FDG=+mrxU27w+HfyQpRiF1eQ@mail.gmail.com>
+Subject: Re: [PATCH] exec: Add RISC-V WorldGuard WID field to MemTxAttrs
+To: Jim Shu <jim.shu@sifive.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org, 
+ qemu-riscv@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ Peter Xu <peterx@redhat.com>, David Hildenbrand <david@kernel.org>, 
+ =?UTF-8?Q?Cl=C3=A9ment_Mathieu=2D=2DDrif?= <clement.mathieu--drif@eviden.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Zhao Liu <zhao1.liu@intel.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>, 
+ Frederic Konrad <konrad.frederic@yahoo.fr>, philmd@mailo.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1129;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1129.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1133.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,27 +134,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 15 Jul 2026 at 20:08, <frederic.petrot@univ-grenoble-alpes.fr> wrot=
-e:
+On Thu, 16 Jul 2026 at 04:12, Jim Shu <jim.shu@sifive.com> wrote:
 >
-> From: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-grenoble-alpes=
-.fr>
+> On Thu, Jul 16, 2026 at 10:47=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wro=
+te:
+> >
+> > CC: philmd@mailo.com
+> >
+> >
+> >
+> >
+> > On Wed, Jul 15, 2026 at 5:57=E2=80=AFPM Peter Maydell <peter.maydell@li=
+naro.org> wrote:
+> > >
+> > > On Wed, 15 Jul 2026 at 07:52, Jim Shu <jim.shu@sifive.com> wrote:
+> > > >
+> > > > Hi all,
+> > > >
+> > > > I'd like to discuss this issue again.
+> > > >
+> > > > On Wed, Mar 18, 2026 at 2:42=E2=80=AFPM Philippe Mathieu-Daud=C3=A9=
+ <philmd@linaro.org> wrote:
+> > > >>
+> > > >> On 18/3/26 05:40, Jim Shu wrote:
+> > > >> > On Tue, Feb 10, 2026 at 8:25=E2=80=AFAM Richard Henderson
+> > > >> > <richard.henderson@linaro.org> wrote:
+> > > >> > ...
+> > > >> >> Hmm.  This really overlaps the secure and space fields from arm=
+, and possibly some of the
+> > > >> >> others as well (e.g. user, requester_id, pid).
+> > > >> >>
+> > > >> >> I don't really have a good suggestion for that right now, but i=
+t would be nice to not keep
+> > > >> >> expanding the count of these sorts of fields that somehow speci=
+fy the originator, but
+> > > >> >> clearly cannot overlap.
+> > > >> >>
+> > > >> >> I'm reasonably sure we've had this discussion before, but nothi=
+ng has come of it.
+> > > >> >>
+> > > >> >> Time to paint the bikeshed again?
+> > > >>
+> > > >> Last discussion IIRC:
+> > > >> https://lore.kernel.org/qemu-devel/CAFEAcA8vKNkfKgp_Yymo9NA1=3DE2X=
+JYXAMTgO3z6q6DHgqkAwRw@mail.gmail.com/
+> > > >
+> > > >
+> > > > Follow the idea in the above thread. I'd plan to add the 'src_cpu_i=
+d' field to 'MemTxAttr', so we can get the CPUState from MemTxAttr. Thus, w=
+e can retrieve the RISC-V world_id from CPU and we don't need to add world_=
+id to 'MemTxAttr'. If other security attributes are stored in CPU states, t=
+hey can also reuse this w/o adding more data to 'MemTxAttr'.
+> > >
+> > > We already have a requester_id field, which is basically
+> > > "what is the thing that is sending this request?". We
+> > > shouldn't have memory transactions that happen to be
+> > > from CPUs indicate the source in a totally different way.
 >
-> The CBO instructions were, AFAIU, disassembled erroneously.
-> In addition, lq (load-quad, a RV128 instruction) shares the same
-> opcode space as the CBOs, which also led to incorrect dasm for that
-> instruction (understandable since RV128 is an experimental feature).
-> To avoid overlaps, we now require that lq is decoded only if
-> rd is not 0, as CBO requires the field corresponding to rd to be zero,
-> both in dasm and decodetree.
-> The last patch corrects the original indentation that was making
-> checkpatch unhappy.
+> Thanks for mentioning it! I think re-use requester_id is better.
+> Then, I think we only need a boolean flag `src_is_cpu` and we can
+> rename it to `requester_is_cpu` to match the naming of `requester_id`.
 
-Reminder: please put some disambiguator in the subject lines
-of cover letter emails. "Correct cbo and lq disassembly" doesn't
-say it's riscv related so you can't tell without looking into
-the email body. Doing this assists people in easily scanning
-through the list to find or skip over topics.
+But, what do you now want it for? If we put the world ID in the
+MemTxAttrs, do you still need a CPU ID? (There are some situations
+where it might be useful, but if we don't need it right now we
+shouldn't put doing that rework in the path of implementing
+the worldguard work you want to do.)
+
+> > > > The whole plan is to add the following 2 fields
+> > > > ::
+> > > >     unsigned int src_is_cpu:1;
+> > > >     uint16_t src_cpu_id;
+> > > >
+> > > > src_cpu_id is the CPU ID from 'CPUState->cpu_index'. src_is_cpu is =
+a boolean flag to check if the transaction is from CPU.
+> > > >
+> > > > Moreover, I think this idea is extensible. DMA device transactions =
+can also have security attributes like world_id. We can also add src_device=
+ field to 'MemTxAttr' to store the 'DeviceState *', so we can get the Devic=
+eState from MemTxAttr to get security attributes. If 'DeviceState *' is too=
+ large to add to 'MemTxAttr', re-use requester_id as DMA device ID is anoth=
+er possible method to support this.
+> > >
+> > > I don't think that having the thing that receives the memory
+> > > transaction get or get hold of a pointer to the source of the
+> > > transaction that it then uses to get the world ID is a good idea.
+> > > (Especially not putting a DeviceState* into MemTxAttrs: the
+> > > size of the type needs to be kept small so we can conveniently
+> > > pass it around by value: we currently assert that it is 8 bytes.)
+>
+> OK, I think store the DMA device ID in the `requester_id` is another
+> way to keep the small size.
+> However, IIUC, the current SysbusDevice doesn't have the concept of a
+> device ID. We need to add an additional device ID to the device to
+> support this idea.
+
+What exactly is it that you need a device ID for? Earlier you
+suggest that you would want it to get the world ID -- but we
+should just put the world ID directly in the MemTxAttrs.
 
 thanks
 -- PMM
