@@ -4,98 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5FAFC4451C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 14:04:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ABC7C4451B
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 14:09:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkjAl-0003Po-2H; Fri, 17 Jul 2026 10:04:15 -0400
+	id 1wkjFV-00059u-EL; Fri, 17 Jul 2026 10:09:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wkjAi-0003Oo-Go
- for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 10:04:12 -0400
-Received: from mail-pj2-x0b.google.com ([2607:f8b0:4864:39::b])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1wkjFT-00057X-IW
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 10:09:07 -0400
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chao.liu.zevorn@gmail.com>)
- id 1wkjAg-0003tV-Gp
- for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 10:04:12 -0400
-Received: by mail-pj2-x0b.google.com with SMTP id
- 98e67ed59e1d1-38e47da25f8so532121a91.1
- for <qemu-riscv@nongnu.org>; Fri, 17 Jul 2026 07:04:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1wkjFR-0004ho-Ev
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 10:09:07 -0400
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-47db714766aso834608f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 17 Jul 2026 07:09:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784297049; x=1784901849; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=9Tlh1p+0MpBUPZUeJtfhE0GG60qOpcOT+2efT1WP/J4=;
- b=ODjOJlDfm5jlv2z5AEOlb2nDJtnBemGiMPkEHA/Y7GtJqrcEA1eErIFDEOGwxWVzUv
- MbXnXrNgo78NYLsi4+OUsBl2ceSmOxSbQsABIdNgN3BdGxqitqp8iB++tqvkmd4RfPzJ
- kl9rNtWvgj0lYU7zAmEU/5yTEQwjDUIPuQakshe4YU0J10HesQx90nhYcu7a6H9L2AKm
- JKtfhzpVUvlV2+AXpx1BKYYMWOrnchUOtjOU3SDGZp9fYW76A/qOSWnx45SDqm09TzRv
- 6iw0Q/z+foSq8jIWqJLUWzrQzgI1VTHc9pqqXAJlJuGuc4zXcqb4DaVUAVMalT29z2sF
- EKjA==
+ d=linaro.org; s=google; t=1784297343; x=1784902143; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :user-agent:references:in-reply-to:subject:cc:to:from:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=feehZpSqlao23lIspLk0fQHWhNzLDlJiQx9HauxpcYQ=;
+ b=mnqA/F3WApHxI3w0E/SYG6EsoFdi3LDbWsik/MOoq3hFO6qJJ/GkDz/xob/31F13JI
+ 0OLYjcLiELjaGTX7imILdqzcoLmVSsr8paz7UA7KrhDM8JUsfRROe35pZjw+57rGiUyn
+ 8bDhoYW0Zr0yRqNCWnuwnMmj7AGBuZTggoOX/jNPB/17wO1dnoM+gFbzE9NE3sDb+CkJ
+ PpGy53Fl43f1IeSTS8lJSP5Bmx9qAjeViJqob3gcV3EpDSXmsJMUf/Y456wL3V82NCkT
+ /Rm/xzAKy7MMXfsX+heHm60U5VXRMgwNmWGteXs6yV0q0YEhn0Tcp0EfK7gARcBV0rNL
+ hHyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784297049; x=1784901849;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=9Tlh1p+0MpBUPZUeJtfhE0GG60qOpcOT+2efT1WP/J4=;
- b=N5hzkNCPLeTUSst+ScWItjn68f/bNTbfp5C+UvvNVQ7DCP4m6XOs/+V/FjeJAtpkYH
- nmuHTyVzmgN3hKJ0PMAr6DNDSgibwpjZ8eZ3XC/hmFeAd1rDDtN/7sDC5haArgOzbT4P
- 1guZ18COdRFlUckWqA5q3PMobxJSoM7O1QwrQb3XAACYXIQ3NZu0tiue3/7oVS6zJGVO
- X4NkGZ5V59RMXCr8et1DIt1gWrY43ucOy6/o6jgMede69OFmXPmv3fGQGFwBtLj/WKGZ
- qtXLkrBc38eQJuSVjk5k7eW6VaCr7bp4STZFZPBv4SobL6eYGJPdpMmEXFHsuZki1V+Y
- ML8g==
+ d=1e100.net; s=20251104; t=1784297343; x=1784902143;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :user-agent:references:in-reply-to:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=feehZpSqlao23lIspLk0fQHWhNzLDlJiQx9HauxpcYQ=;
+ b=moJ3JsuCSpt8tpgN3jxeCZhwd6t7t2xZIDRE3JIOvGBJBq0yQOY+wZ6MWaLxW8eRfV
+ PltuH6aY3IM0XNnKutO1t1AV0O6YtgbQeEM196jOVg4aTTCXCt0BZP2i32s4SOVg3FfP
+ BL1/v7zOnTtrar08R0HEvhWkTeXGMUhisXrrby6fd719SfuxnnYaOZRVlylKCJmJrWLf
+ c5tCr/p7xNks16vEHWHmW06KLBrIvXdPyT6e7lWRB1dd+z+RmxlrrPg+hj8S9svGFFso
+ mAWf2EjSScmaPVaRHqdAoX9hdEfxMMN/7YCI4IrfRYu9u1/WLT+mKlVbddje7ruvOsSQ
+ 0uEg==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rord0P1h+TJStJ02FAfmhXfM2+5vmtB/u9bm57tL0MZ/vUwHZ6fuTot9NMGy3+0Uw60MHN2//7hBc4C@nongnu.org
-X-Gm-Message-State: AOJu0YzmXbZ/iLPbOC32FPOHJXYgn+eryR4KbEancqjWYEOefrMQcFeK
- p9znQJqkMgeFhOlW3sSjkGx54mKcz49Fm0xYucr6mwppnk7c0caoA971
-X-Gm-Gg: AfdE7cl7EP3bXGu01ZvgqgvAX9geUOTsNDFATJclcw7elsfV7JeAQeLwAz+3h0uzSUc
- RtOwF8/A5VUVZolATtTu1PGYJnrw3Ptq77XQ8NuvxqHMbAapxFPoXXwQhJ7HUWwAVtVmrVWvowu
- siA9dbL04lM9jxqdPoKNuG9uY7SFcmCyy+akq+/Gyci5hStEO+IjwcDZVUwNLBwDl+BLPVQlzDO
- PxkOtB7vs+mf5QvEbRJbVklGh4IN9vtHEzIxMZk57T4too0/+uYdrwqRTeDDs6sCjYhtb+vl9Qt
- 7whobMqlNojBt12XqzENpYQS0cHQibQdD1TNvR/R2tzaj1ZzL0u7LUwDkSAungc5UPds6ZmBLV2
- Bqo4AblqTn7EjWEemeP1a5nqe7/iTe26hd+4DKzqMsECpU7msy5IIV8aPHjrhqMUvUh4fm2xAGv
- UJZQo01a/2u1EYN9JwF2S7MkfE1Wrso3DrRm917GVW
-X-Received: by 2002:a17:90b:5606:b0:36a:a16b:5f6d with SMTP id
- 98e67ed59e1d1-38e4b41f4ffmr2816230a91.7.1784297048650; 
- Fri, 17 Jul 2026 07:04:08 -0700 (PDT)
-Received: from localhost ([179.255.148.148]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3142a1bb77csm8316828eec.18.2026.07.17.07.04.07
+ AHgh+RoXW+tlaW1GsT3xgDSFMbtaN9aaj9h7v9YB/b6xtFKZowkaJJoAaQhTJYnoUGL0kxZ52ErmkQfno69O@nongnu.org
+X-Gm-Message-State: AOJu0Yxrou7u6Q1LtrV4vE364Jmy5MwgPZvvOytncwz2+8XngMuh2ucP
+ LkxNtcBHgJy+5wo2GcFmzm/HXVReDlfPl03SJadTwBKXMJCBhFg47kOmyow0+wO5N9g=
+X-Gm-Gg: AfdE7cltB33SAWj0WN3r28PmrJIHw7CsH2HiJhdh65SQaeBUrew6XOWgwQUvzdT6v4D
+ 6UELbzKi9cYVtGUxVHEth61vPT3MUhvEyOZy/GDFY+Bu8ofYYvXgzXH1Cds2zuHIJqO+nKmCLit
+ yRTe6zDeD1eHOJTlwdnvCVSsGiOPgXET5w7tUaxb2mOR53bVPzK1cR7Ds0TXLzsHnFvAecBQ05p
+ mixzZiYqz8AIbjhPztZ6dGLUiii2xaCejQEVG7MOOWGJ0F08Ezeu2kmvuuf1QXCM+loVT1TCS/u
+ T6x1JT1cSx/wd7RuxHVy1n31wVwf/XNUFzb0C90gWG+YpCwv73zehFDGULDFDGgVnynZhROv2R3
+ NL67o11pY+02708CwOEcFLQEJUxaoJn5gYi20eEStlOmFgHwbo+uNHgbCuqSLr0SXkj5oDYsLEG
+ 3VqTlHgrmWak27
+X-Received: by 2002:a05:6000:4904:b0:475:f0c2:75b2 with SMTP id
+ ffacd0b85a97d-47f623f1e84mr3728629f8f.29.1784297343252; 
+ Fri, 17 Jul 2026 07:09:03 -0700 (PDT)
+Received: from draig.lan ([185.124.0.114]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f63ec7f55sm3825779f8f.18.2026.07.17.07.09.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jul 2026 07:04:08 -0700 (PDT)
-Date: Fri, 17 Jul 2026 22:04:05 +0800
-From: Chao Liu <chao.liu.zevorn@gmail.com>
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: jack wang <163wangjack@gmail.com>, qemu-devel@nongnu.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "open list:K230 Machines" <qemu-riscv@nongnu.org>
-Subject: Re: [RFC PATCH 2/2] hw/riscv/k230: wire up the RMU device
-Message-ID: <alo1wgC0ExaLLznS@ChaodeMacBook-Pro.local>
-References: <20260709031237.21284-1-163wangjack@gmail.com>
- <20260709031237.21284-3-163wangjack@gmail.com>
- <9e600f36-96ac-4eb9-a901-47d4ea6cc748@oss.qualcomm.com>
- <aloupwOnk4bggOy5@ChaodeMacBook-Pro.local>
- <6225b3ef-461f-458e-9275-ec471d6fd2d6@oss.qualcomm.com>
+ Fri, 17 Jul 2026 07:09:02 -0700 (PDT)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 424A35F7DB;
+ Fri, 17 Jul 2026 15:09:01 +0100 (BST)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Jim Shu
+ <jim.shu@sifive.com>,  Richard Henderson <richard.henderson@linaro.org>,
+ qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  "Michael S. Tsirkin"
+ <mst@redhat.com>,  Peter Xu <peterx@redhat.com>,  David Hildenbrand
+ <david@kernel.org>,  =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif
+ <clement.mathieu--drif@eviden.com>,  Paolo Bonzini <pbonzini@redhat.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,  Zhao Liu
+ <zhao1.liu@intel.com>,  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?utf-8?Q?Cl=C3=A9ment?= Chigot <chigot@adacore.com>,  Frederic Konrad
+ <konrad.frederic@yahoo.fr>
+Subject: Re: [PATCH] exec: Add RISC-V WorldGuard WID field to MemTxAttrs
+In-Reply-To: <CAFEAcA_q7jtebfD0EFXUh6VOdqMjy0WGo7ZOfvpA3W8p4=tkMA@mail.gmail.com>
+ (Peter Maydell's message of "Fri, 17 Jul 2026 12:14:49 +0100")
+References: <20260209115846.2276651-1-jim.shu@sifive.com>
+ <7be3b4f7-7516-40ab-8a95-b3b4a2aea095@linaro.org>
+ <CALw707rbMvg1mf1S_3qiqDWbZ0qjzgx4UJ9pUGmQODKWttKFyQ@mail.gmail.com>
+ <08c5f243-5aaa-4fe2-bc71-6a3fd9a1914e@linaro.org>
+ <87ik6e2ajn.fsf@draig.linaro.org>
+ <CAFEAcA_q7jtebfD0EFXUh6VOdqMjy0WGo7ZOfvpA3W8p4=tkMA@mail.gmail.com>
+User-Agent: mu4e 1.14.3-pre1; emacs 30.1
+Date: Fri, 17 Jul 2026 15:09:01 +0100
+Message-ID: <871pd13dz6.fsf@draig.linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <6225b3ef-461f-458e-9275-ec471d6fd2d6@oss.qualcomm.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:39::b;
- envelope-from=chao.liu.zevorn@gmail.com; helo=mail-pj2-x0b.google.com
-X-Spam_score_int: 0
-X-Spam_score: -0.1
-X-Spam_bar: /
-X-Spam_report: (-0.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- PDS_OTHER_BAD_TLD=2, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,150 +120,150 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 17, 2026 at 10:56:17AM +0800, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 7/17/2026 10:41 AM, Chao Liu wrote:
-> > On Thu, Jul 16, 2026 at 02:56:30PM +0800, Daniel Henrique Barboza wrote:
-> > 
-> > Hi Daniel,
-> > > Hi,
-> > > 
-> > > On 7/9/2026 12:12 AM, jack wang wrote:
-> > > > From: Jack Wang <163wangjack@gmail.com>
-> > > > 
-> > > > Replace the "rmu" create_unimplemented_device() stub with a real
-> > > > K230RmuState instance mapped at the K230_DEV_RMU memmap entry, select
-> > > > K230_RMU from the K230 Kconfig, and document the device.
-> > > 
-> > > So, as I said in patch 1, applying this patch will fix the qtest that you
-> > > introduced there.  I believe we want to either squash this patch in patch
-> > > 1 or move the qtest creation to this patch.  Both are fine to me.
-> > > 
-> > > > 
-> > > > Closes: gevico/qemu-camp-2026-k230#11
-> > > 
-> > > Not sure what gevico is (seems like a bootcamp, according to Google at least)  but
-> > > the "Closes" tag usually contains a gitlab bug or any other link that is publicly
-> > > available.  It's better to remove it.
-> > > 
-> > I believe this link refers to:
-> > https://github.com/gevico/qemu-camp-2026-k230/issues/11
-> > 
-> > However, according to the QEMU development collaboration workflow,
-> > we don't need to add it.
-> > 
-> > Gevico, here is the English transliteration for the Chinese "格维". This
-> > is a major open-source community in China focused on technical software,
-> > which I currently organize and own.
-> > 
-> > Within our community, we run a QEMU technical training camp primarily
-> > centered on the RISC-V architecture and exploratory work regarding
-> > GPGPU microarchitecture.
-> > 
-> > One of our key projects involves hardware modeling for the K230, where
-> > we are implementing a digital satellite-borne computer. The recent
-> > contributions seen upstream were primarily patches sent by participants
-> > of this project. We are currently in the process of contributing our
-> > results from this stage to the QEMU upstream.
-> 
-> Thanks for the info.  This seems very interesting indeed, and please keep
-> the QEMU contributions flowing :D
-> 
-Yes, sir. :)
+Peter Maydell <peter.maydell@linaro.org> writes:
 
-Thanks,
-Chao
+> On Fri, 17 Jul 2026 at 11:08, Alex Benn=C3=A9e <alex.bennee@linaro.org> w=
+rote:
+>>
+>> Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+>>
+>> > On 18/3/26 05:40, Jim Shu wrote:
+>> >> On Tue, Feb 10, 2026 at 8:25=E2=80=AFAM Richard Henderson
+>> >> <richard.henderson@linaro.org> wrote:
+>> >> ...
+>> >>> Hmm.  This really overlaps the secure and space fields from arm, and=
+ possibly some of the
+>> >>> others as well (e.g. user, requester_id, pid).
+>> >>>
+>> >>> I don't really have a good suggestion for that right now, but it wou=
+ld be nice to not keep
+>> >>> expanding the count of these sorts of fields that somehow specify th=
+e originator, but
+>> >>> clearly cannot overlap.
+>> >>>
+>> >>> I'm reasonably sure we've had this discussion before, but nothing ha=
+s come of it.
+>> >>>
+>> >>> Time to paint the bikeshed again?
+>> >
+>> > Last discussion IIRC:
+>> > https://lore.kernel.org/qemu-devel/CAFEAcA8vKNkfKgp_Yymo9NA1=3DE2XJYXA=
+MTgO3z6q6DHgqkAwRw@mail.gmail.com/
+>> >
+>> > (see also a suggestion in
+>> > https://lore.kernel.org/qemu-devel/Z4+P3eHXqcU4Dqdx@intel.com/)
+>>
+>> Also somewhat related:
+>>
+>>   Message-Id: <20221111182535.64844-1-alex.bennee@linaro.org>
+>>   Date: Fri, 11 Nov 2022 18:25:15 +0000
+>>   Subject: [PATCH for 8.0 v5 00/20] use MemTxAttrs to avoid current_cpu =
+in hw/
+>>
+>> Another case that was mentioned in a Core Collective meeting was
+>> handling MMIO devices with IOMMUs (currently requester_id is tied to
+>> PCI). I guess the WorldGuard WID field is a similar thing.
+>
+> The worldguard ID is more like the Arm security space field, as I
+> understand it -- it encodes what the request should or should
+> not be able to access, and multiple different transaction masters
+> might be able to send with the same worldguard ID. A requester_id
+> on the other hand is intended to identify a unique sender.
+> (In AXI these things turn up in different signals.)
+>
+> I think the trick with requester_id is that we need to identify
+> what we need to encode here and make sure we don't confuse things.
+> (e.g. a CPU needs to not be able to emit something that looks like
+> a PCI request by accident, because some devices need to be able
+> to tell "this really did come from a PCI device" from "this is a
+> CPU doing a normal load/store insn"). So we probably want some
+> kind of "this is what the requester_id is" enum rather than just
+> a convention.
 
-> Cheers,
-> Daniel
-> 
-> > 
-> > If you are interested in this, you can visit the link below.
-> > https://qemu.gevico.online/tutorial/2026/ch3/qemu-k230/
-> > 
-> > Thanks,
-> > Chao
-> > > 
-> > > Thanks,
-> > > Daniel
-> > > 
-> > > 
-> > > > Signed-off-by: Jack Wang <163wangjack@gmail.com>
-> > > > ---
-> > > >    docs/system/riscv/k230.rst |  1 +
-> > > >    hw/riscv/Kconfig           |  1 +
-> > > >    hw/riscv/k230.c            | 10 +++++++---
-> > > >    include/hw/riscv/k230.h    |  2 ++
-> > > >    4 files changed, 11 insertions(+), 3 deletions(-)
-> > > > 
-> > > > diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
-> > > > index cea8202e55..3f2313a127 100644
-> > > > --- a/docs/system/riscv/k230.rst
-> > > > +++ b/docs/system/riscv/k230.rst
-> > > > @@ -19,6 +19,7 @@ The ``k230`` machine supports the following devices:
-> > > >    * Core Local Interruptor (CLINT)
-> > > >    * Platform-Level Interrupt Controller (PLIC)
-> > > >    * 2 K230 Watchdog Timer
-> > > > +* K230 Reset Management Unit (RMU)
-> > > >    * 5 UART
-> > > >    Boot options
-> > > > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> > > > index 54e41a6afc..bffa4e69c8 100644
-> > > > --- a/hw/riscv/Kconfig
-> > > > +++ b/hw/riscv/Kconfig
-> > > > @@ -149,3 +149,4 @@ config K230
-> > > >        select SERIAL_MM
-> > > >        select UNIMP
-> > > >        select K230_WDT
-> > > > +    select K230_RMU
-> > > > diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-> > > > index 502281c52c..b55e90c0d2 100644
-> > > > --- a/hw/riscv/k230.c
-> > > > +++ b/hw/riscv/k230.c
-> > > > @@ -110,6 +110,7 @@ static void k230_soc_init(Object *obj)
-> > > >        object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
-> > > >        object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
-> > > >        object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
-> > > > +    object_initialize_child(obj, "k230-rmu",  &s->rmu,    TYPE_K230_RMU);
-> > > >        qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
-> > > >        qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
-> > > > @@ -206,6 +207,12 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-> > > >        sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
-> > > >                           qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
-> > > > +    /* RMU (reset management unit) */
-> > > > +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->rmu), errp)) {
-> > > > +        return;
-> > > > +    }
-> > > > +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->rmu), 0, memmap[K230_DEV_RMU].base);
-> > > > +
-> > > >        /* unimplemented devices */
-> > > >        create_unimplemented_device("kpu.l2-cache",
-> > > >                                    memmap[K230_DEV_KPU_L2_CACHE].base,
-> > > > @@ -268,9 +275,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-> > > >        create_unimplemented_device("cmu", memmap[K230_DEV_CMU].base,
-> > > >                                    memmap[K230_DEV_CMU].size);
-> > > > -    create_unimplemented_device("rmu", memmap[K230_DEV_RMU].base,
-> > > > -                                memmap[K230_DEV_RMU].size);
-> > > > -
-> > > >        create_unimplemented_device("boot", memmap[K230_DEV_BOOT].base,
-> > > >                                    memmap[K230_DEV_BOOT].size);
-> > > > diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-> > > > index 592e1c26bf..13f2a1ab0b 100644
-> > > > --- a/include/hw/riscv/k230.h
-> > > > +++ b/include/hw/riscv/k230.h
-> > > > @@ -18,6 +18,7 @@
-> > > >    #include "hw/core/boards.h"
-> > > >    #include "hw/riscv/riscv_hart.h"
-> > > >    #include "hw/watchdog/k230_wdt.h"
-> > > > +#include "hw/misc/k230_rmu.h"
-> > > >    #define C908_CPU_HARTID   (0)
-> > > > @@ -33,6 +34,7 @@ typedef struct K230SoCState {
-> > > >        RISCVHartArrayState c908_cpu; /* Small core */
-> > > >        K230WdtState wdt[2];
-> > > > +    K230RmuState rmu;
-> > > >        MemoryRegion sram;
-> > > >        MemoryRegion bootrom;
-> > > 
-> 
+Yeah I had a type:
+
+  /**
+   * typedef MemTxRequesterType - source of memory transaction
+   *
+   * Every memory transaction comes from a specific place which defines
+   * how requester_id should be handled if at all.
+   *
+   * UNSPECIFIED: the default for otherwise undefined MemTxAttrs
+   * CPU: requester_id is the global cpu_index
+   *      This needs further processing if you need to work out which
+   *      socket or complex it comes from
+   * PCI: indicates the requester_id is a PCI id
+   * MACHINE: indicates a machine specific encoding
+   *          This will require further processing to decode into its
+   *          constituent parts.
+   */
+  typedef enum MemTxRequesterType {
+      MTRT_UNSPECIFIED =3D 0,
+      MTRT_CPU,
+      MTRT_PCI,
+      MTRT_MACHINE
+  } MemTxRequesterType;
+
+  /**
+   * typedef MemTxAttrs - attributes of a memory transaction
+   *
+   * Every memory transaction has associated with it a set of
+   * attributes. Some of these are generic (such as the ID of
+   * the bus master); some are specific to a particular kind of
+   * bus (such as the ARM Secure/NonSecure bit). We define them
+   * all as non-overlapping bitfields in a single struct to avoid
+   * confusion if different parts of QEMU used the same bit for
+   * different semantics.
+   */
+  typedef struct MemTxAttrs {
+      /* Requester type (e.g. CPU or PCI MSI) */
+      MemTxRequesterType requester_type:2;
+      /* Requester ID */
+      unsigned int requester_id:16;
+      /*
+       * ARM/AMBA: TrustZone Secure access
+       * x86: System Management Mode access
+       */
+      unsigned int secure:1;
+      /*
+       * ARM: ArmSecuritySpace.  This partially overlaps secure, but it is
+       * easier to have both fields to assist code that does not understand
+       * ARMv9 RME, or no specific knowledge of ARM at all (e.g. pflash).
+       */
+      unsigned int space:2;
+      /* Memory access is usermode (unprivileged) */
+      unsigned int user:1;
+      /*
+       * Bus interconnect and peripherals can access anything (memories,
+       * devices) by default. By setting the 'memory' bit, bus transaction
+       * are restricted to "normal" memories (per the AMBA documentation)
+       * versus devices. Access to devices will be logged and rejected
+       * (see MEMTX_ACCESS_ERROR).
+       */
+      unsigned int memory:1;
+      /* Debug access that can even write to ROM. */
+      unsigned int debug:1;
+      /*
+       * PID (PCI PASID) support: Limited to 8 bits process identifier.
+       */
+      unsigned int pid:8;
+
+      /* PCI - IOMMU operations, see PCIAddressType */
+      unsigned int address_type:1;
+
+      uint8_t _reserved1;
+      uint16_t _reserved2;
+  } MemTxAttrs;
+
+But I suspect MTRT_MACHINE might be a bit too much of a blunt
+instrument. I never used in my series but the idea is it would call back
+to the machine to work out how it interpreted requester_id.
+
+>
+> thanks
+> -- PMM
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
