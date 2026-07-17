@@ -4,79 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A59C44521
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 12:33:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F66EC44521
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 12:34:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkhkD-0000FW-Dy; Fri, 17 Jul 2026 08:32:45 -0400
+	id 1wkhlY-00011g-6C; Fri, 17 Jul 2026 08:34:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1wkhk6-0000F4-51
- for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 08:32:38 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wkhlV-00010i-Nn
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 08:34:05 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1wkhk3-0000Ox-Tb
- for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 08:32:37 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1784291555;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=J0gbHxwTiJEEBoIgLT2zLS6z14N7yrgOoEPjZ26S1iA=;
- b=UaxogMFyyYDrH+h8Fk8ThvLAXHxcE8tiqsuoh8QQ71SXCa4WU3Ipo3U8caKKoq58gau7KJ
- 2nQHrSU4MuNi46IXXQDj+Y0pwinBvYXTh6/Tj06UnAl/L/g+nSUOqltoDD5WbpYVw3s0c7
- IYjcw+u28OzGXgdQ7/38zzTt3jJV30c=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-650-RmNkef_xN9mt1CGGgJoqJA-1; Fri,
- 17 Jul 2026 08:32:32 -0400
-X-MC-Unique: RmNkef_xN9mt1CGGgJoqJA-1
-X-Mimecast-MFC-AGG-ID: RmNkef_xN9mt1CGGgJoqJA_1784291550
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 3534B1955DC7; Fri, 17 Jul 2026 12:32:30 +0000 (UTC)
-Received: from redhat.com (unknown [10.44.34.221])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id B5D13180058F; Fri, 17 Jul 2026 12:32:26 +0000 (UTC)
-Date: Fri, 17 Jul 2026 13:32:23 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com, pbonzini@redhat.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: Re: [PATCH 5/5] qom/object.c: rename
- object_class_property_uint*_ptr() to
- object_class_static_property_uint*_ptr()
-Message-ID: <alog1_vFOi0agPww@redhat.com>
-References: <20260717112022.444367-1-mark.caveayland@nutanix.com>
- <20260717112022.444367-6-mark.caveayland@nutanix.com>
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wkhlS-0000Vb-KK
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 08:34:05 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66HCT6lg1824517
+ for <qemu-riscv@nongnu.org>; Fri, 17 Jul 2026 12:34:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ irwPvkl8b0yZTQ+eDfTrHiU1/R5uLZoCSXHK9QNgr9I=; b=Bb15rEODqP9tQz8W
+ LaZAz5T+7BcllnbldfQbsJhtXoD/CYYg5Z7OFyuYsHFxC9lIX00AU4O2GDf/pbPK
+ 0npr7lNI5XGB4WB2lQPORDU+r6I/vYTcuLYDGf5HX1F4cxozQj9gAdziEVVQd+F6
+ bjRpbkDZCPOg0HFXSZq8WVfV+IZ8R/riod0peemy4r7yZNleXM9iayqAiqu6chYY
+ UnCr8/2WLvqQhA7p79/OFC2eaP0Apg9CozhFmFwLYTkGno89dm8D430l6PyyeyQP
+ 0j8v9LYR66p0hvG+yEPjQsdMnX8Fm9cDvAyWfanBJdyZYIet/GRM1bwKv58zjU6+
+ Be22JQ==
+Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com
+ [209.85.128.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fff811a62-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 17 Jul 2026 12:34:00 +0000 (GMT)
+Received: by mail-yw1-f200.google.com with SMTP id
+ 00721157ae682-81e68b02459so200852527b3.2
+ for <qemu-riscv@nongnu.org>; Fri, 17 Jul 2026 05:34:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1784291640; x=1784896440; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=irwPvkl8b0yZTQ+eDfTrHiU1/R5uLZoCSXHK9QNgr9I=;
+ b=QI+o7koB312SLd/wZDLtHcOMQmwBWSIgWJB++t7Qr3MELMS54T23KIp02EXAkQnOaR
+ IC4okUyhY0E1sChvv/ppMS7ompP8SC7tsC9SflgjSY5+Jcso5R6mivWa5QXy1qYwuawv
+ 4dTWWs6k+sHMM+zZDJpLlaRbFr5eJ2z6nZPYlwE3sBRD4TPf5VE25EpqOFpq4OSbOizQ
+ cavkafPETbDpKc9gyX3eV7q2GcWN0KLfGDB4hJ6hDsXHssf4QZ47EQn/jNPe6Uw5hhqM
+ RSnslIuyRY6oCBSyN9+orT/Ud6I1Jmf0xCygb5sNf9LL/7glMF3aa9UHOx5mw3kJrQch
+ YRqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784291640; x=1784896440;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=irwPvkl8b0yZTQ+eDfTrHiU1/R5uLZoCSXHK9QNgr9I=;
+ b=q4yFR535/EACjJeKyttKzkVu1hteSPpSYrdWg2HCwsstOS8Zk2rSkLG1smCWJRQoxd
+ iCJe1kABopl97qdeGRW4IDU7BiLj/MFU/3pSfbvUAM+XCA6JoT8K5R5T4Gu5pzjMt4vF
+ XXopTnqLc+/rEQtHe09IE0Y271WogZ0aoKq6FoCt4wsRa4XeKF+/HH2cMqWyCYmlfLZr
+ 2HldCv2qRLQDBBclRKYNEjJXP1/VS5IMZdSa8Izn9ZdLuU68ZQwE4fXD1P37M4RS+pJA
+ 4oOiu2zeMAKewDjeef7MWaA/XMum1bNT6qOTrs+UXEqrKEzxxq4HqlHDIO/4kHQUeqPy
+ ubkA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rp77EwjLKKr7W5NO3rw1/qcaWCDjZmH72Hnkiz22QJR0f3/hJcbXkSJINTtcvo1Xe/WKTj+ovQ9x1x/@nongnu.org
+X-Gm-Message-State: AOJu0YzBV7NBLsXDwVnFvl20zQZPlU7vLIvBBfxo1VbtYfLpJ/+pIOaL
+ hKSFHxGNmnUZtjBWPSbxg6ath9JLuNCCC2Lnu5b16FRKd+rFApZ92ZJoc75YOBbxAXPtIbFjxIx
+ yObI3NKhrwGs/YBGVt26/JbHEvOtnv8g3ipKOg8wfig/ptKM9zePl6Y2hXw==
+X-Gm-Gg: AfdE7cnrS2Hk1rOFBXHPlta4kIk9EgK8ENhKU7+EU4Po+J3A+wWHP4fMMluKBLaiMlv
+ ug85FNmdC/2e2rZQSgyqqJyza119hl78belah6SK0zKjvGa4tPEm+TrpbMM9abl82O9PQDwTP3O
+ XHetpzOK598VNzCSGNCq2v0LKNA1oSHsVjcQ4Fhv6+VH8viaXJ6QITn1LApRccDaF4+Gg9rTfDA
+ FIv0YGOBok5SfyHwtpG99WZzkl8YABnj5oJZ2j7sI5KlxFtDlRyRlticzcJtr6nSZtvO4/3LByD
+ AxTECg0jMO7l5996AlOqa4rRbqW8N72MwRgCwedko/HXtByzeeoTtMO9WyQQZ2JGAS6aRtjdBO1
+ EVubAQwEQyQUtm42QN+5sn7+jyKWNMuPlEKHwHg==
+X-Received: by 2002:a05:690c:6b06:b0:816:b469:ccec with SMTP id
+ 00721157ae682-81ef25a187dmr7368527b3.15.1784291640524; 
+ Fri, 17 Jul 2026 05:34:00 -0700 (PDT)
+X-Received: by 2002:a05:690c:6b06:b0:816:b469:ccec with SMTP id
+ 00721157ae682-81ef25a187dmr7368387b3.15.1784291640096; 
+ Fri, 17 Jul 2026 05:34:00 -0700 (PDT)
+Received: from [192.168.68.105] ([152.234.122.204])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-81ef42e85f5sm7833937b3.45.2026.07.17.05.33.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 Jul 2026 05:33:59 -0700 (PDT)
+Message-ID: <1f0df921-7575-49fc-805f-e18de5edfbb8@oss.qualcomm.com>
+Date: Fri, 17 Jul 2026 09:33:55 -0300
 MIME-Version: 1.0
-In-Reply-To: <20260717112022.444367-6-mark.caveayland@nutanix.com>
-User-Agent: Mutt/2.4.0 (2026-06-19)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: f_MUXNQdoliObQGWyRMjiBc0YpyiIOl11bWiBWhsmAw_1784291550
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Received-SPF: permerror client-ip=170.10.133.124;
- envelope-from=berrange@redhat.com; helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
- T_SPF_PERMERROR=0.01 autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] hw/riscv/riscv-iommu: fix U-bit check to apply only to
+ leaf S/VS-stage PTEs
+To: Andrew Jones <andrew.jones@oss.qualcomm.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, palmer@dabbelt.com
+References: <20260717112340.1071148-1-andrew.jones@oss.qualcomm.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260717112340.1071148-1-andrew.jones@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=RbqgzVtv c=1 sm=1 tr=0 ts=6a5a2138 cx=c_pps
+ a=NMvoxGxYzVyQPkMeJjVPKg==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=reDuT1hDkj-Uxv0C5A8A:9 a=QEXdDO2ut3YA:10
+ a=kLokIza1BN8a-hAJ3hfR:22
+X-Proofpoint-GUID: MB7VLPK0u3UCXz-eUrnBDyahTtu5r9Vh
+X-Proofpoint-ORIG-GUID: MB7VLPK0u3UCXz-eUrnBDyahTtu5r9Vh
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDEyOCBTYWx0ZWRfX9moVJV2P9/qx
+ BeBT+sN0tiGl0YVu1YPlH2x7RE0HYXTB2F0Hd/ocfEoGVZK8X7GUoK9oXblGbUDeX69n059Yltt
+ zRQfavJ7CVF/3Eoiin54FRy4dqDqaXfReeVln24Sil+tTFnXoC0RypgaqJYJyQPQS45DMruNKOr
+ ZJO3EFRDe+pn/eHm+hBMcuJclHrbM9Q0xY+/3iVqES3JwufxdNdrmx6ZfkRt9iMaNTNDWg44jmY
+ e+MFpwtN8rZL2JNMRM1qVpK92nGbYRFpFk7otza0TzNbeTGd2wycire1gX3DqXkv/fRtcDnAEWM
+ 80eC99Hu3p01wA5MNgTkctWBUe3OjDtAjzbR0imsNz2UH0gljFGYfNc16u/LBxQ5s2/LNjmCthe
+ xBIGh76KphskMRnnux3YM1kVKRAHD1CttsggJJOeTxyvQBu0A7O3WzpYoMpmXbwDWvrbNLn0qz9
+ 4mPb+3vdrAumaTUjXGA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDEyOCBTYWx0ZWRfX0z3uPjJaDfwq
+ uUKj+Yag4ZVQgaLQ9bWi4FZIAe7863j0qnetkFxfZrb/p/l56w+uLwzvL3fHkLsxCWbH8Bof35F
+ r8PDkvqF8DQ+5ZqKsrnCRYe0IokHRqQ=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-17_03,2026-07-17_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 clxscore=1015 suspectscore=0 priorityscore=1501
+ lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0 adultscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607170128
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,213 +153,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jul 17, 2026 at 12:19:12PM +0100, Mark Cave-Ayland wrote:
-> This more accurately reflects that these properties are held within the class and
-> not the object.
+
+
+On 7/17/2026 8:23 AM, Andrew Jones wrote:
+> Commit b795ea0ba471 ("hw/riscv/riscv-iommu.c: fault when !PTE_U and
+> no priv access") placed its check ahead of the leaf-vs-non-leaf
+> branch in riscv_iommu_spa_fetch(), so it fires on every PTE walked,
+> including non-leaf/table entries. Per the RISC-V privileged spec's
+> address translation algorithm (Sv39/Sv48/etc., the "leaf PTE has
+> been reached" step, followed separately by the U-bit permission
+> check), the U bit is only defined and checked for the leaf PTE
+> reached at the end of the walk -- non-leaf PTEs don't carry a
+> meaningful U bit at all.
 > 
-> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+> Move the check after the leaf/non-leaf branch, alongside the other
+> leaf-only checks, mirroring how the G_STAGE U-bit check (added in
+> 9158c900ab30) is already correctly placed.
+> 
+> Fixes: b795ea0ba471 ("hw/riscv/riscv-iommu.c: fault when !PTE_U and no priv access")
+> Signed-off-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
 > ---
->  include/qom/object.h | 32 ++++++++++++++++----------------
->  hw/riscv/spike.c     |  5 +++--
->  qom/object.c         | 28 ++++++++++++++++------------
->  3 files changed, 35 insertions(+), 30 deletions(-)
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+>   hw/riscv/riscv-iommu.c | 14 +++++++-------
+>   1 file changed, 7 insertions(+), 7 deletions(-)
 > 
-> diff --git a/include/qom/object.h b/include/qom/object.h
-> index 95fdf01e30..9df02de93b 100644
-> --- a/include/qom/object.h
-> +++ b/include/qom/object.h
-> @@ -2038,18 +2038,18 @@ ObjectProperty *object_property_add_uint8_ptr(Object *obj, const char *name,
->                                                ObjectPropertyFlags flags);
->  
->  /**
-> - * object_class_property_add_uint8_ptr:
-> - * @klass: the object class to add a property to
-> + * object_class_static_property_add_uint8_ptr:
-> + * @klass: the object class to add a static property to
->   * @name: the name of the property
->   * @v: pointer to value
->   * @flags: bitwise-or'd ObjectPropertyFlags
->   *
-> - * Add an integer property in memory.  This function will add a
-> + * Add a static integer property in memory.  This function will add a
->   * property of type 'uint8'.
->   *
-
-Can we add a bit boiler guidance here, something like
-
-    "A static property is one which is stored outside of
-     the object instance, typically in global variables.
-     It is only appropropriate to use static properties
-     when the class is designed as a singleton. If there
-     is a possibility of multiple instances, then properties
-     must be stored per-instance."
-
-
->   * Returns: The newly added property on success, or %NULL on failure.
->   */
-> -ObjectProperty *object_class_property_add_uint8_ptr(ObjectClass *klass,
-> +ObjectProperty *object_class_static_property_add_uint8_ptr(ObjectClass *klass,
->                                           const char *name,
->                                           const uint8_t *v,
->                                           ObjectPropertyFlags flags);
-> @@ -2071,18 +2071,18 @@ ObjectProperty *object_property_add_uint16_ptr(Object *obj, const char *name,
->                                      ObjectPropertyFlags flags);
->  
->  /**
-> - * object_class_property_add_uint16_ptr:
-> - * @klass: the object class to add a property to
-> + * object_class_static_property_add_uint16_ptr:
-> + * @klass: the object class to add a static property to
->   * @name: the name of the property
->   * @v: pointer to value
->   * @flags: bitwise-or'd ObjectPropertyFlags
->   *
-> - * Add an integer property in memory.  This function will add a
-> + * Add a static integer property in memory.  This function will add a
->   * property of type 'uint16'.
->   *
->   * Returns: The newly added property on success, or %NULL on failure.
->   */
-> -ObjectProperty *object_class_property_add_uint16_ptr(ObjectClass *klass,
-> +ObjectProperty *object_class_static_property_add_uint16_ptr(ObjectClass *klass,
->                                            const char *name,
->                                            const uint16_t *v,
->                                            ObjectPropertyFlags flags);
-> @@ -2104,18 +2104,18 @@ ObjectProperty *object_property_add_uint32_ptr(Object *obj, const char *name,
->                                      ObjectPropertyFlags flags);
->  
->  /**
-> - * object_class_property_add_uint32_ptr:
-> - * @klass: the object class to add a property to
-> + * object_class_static_property_add_uint32_ptr:
-> + * @klass: the object class to add a static property to
->   * @name: the name of the property
->   * @v: pointer to value
->   * @flags: bitwise-or'd ObjectPropertyFlags
->   *
-> - * Add an integer property in memory.  This function will add a
-> + * Add a static integer property in memory.  This function will add a
->   * property of type 'uint32'.
->   *
->   * Returns: The newly added property on success, or %NULL on failure.
->   */
-> -ObjectProperty *object_class_property_add_uint32_ptr(ObjectClass *klass,
-> +ObjectProperty *object_class_static_property_add_uint32_ptr(ObjectClass *klass,
->                                            const char *name,
->                                            const uint32_t *v,
->                                            ObjectPropertyFlags flags);
-> @@ -2137,18 +2137,18 @@ ObjectProperty *object_property_add_uint64_ptr(Object *obj, const char *name,
->                                      ObjectPropertyFlags flags);
->  
->  /**
-> - * object_class_property_add_uint64_ptr:
-> - * @klass: the object class to add a property to
-> + * object_class_static_property_add_uint64_ptr:
-> + * @klass: the object class to add a static property to
->   * @name: the name of the property
->   * @v: pointer to value
->   * @flags: bitwise-or'd ObjectPropertyFlags
->   *
-> - * Add an integer property in memory.  This function will add a
-> + * Add a static integer property in memory.  This function will add a
->   * property of type 'uint64'.
->   *
->   * Returns: The newly added property on success, or %NULL on failure.
->   */
-> -ObjectProperty *object_class_property_add_uint64_ptr(ObjectClass *klass,
-> +ObjectProperty *object_class_static_property_add_uint64_ptr(ObjectClass *klass,
->                                            const char *name,
->                                            const uint64_t *v,
->                                            ObjectPropertyFlags flags);
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 9fde0faf39..630b65f569 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -278,8 +278,9 @@ static void spike_machine_class_init(ObjectClass *oc, const void *data)
->      object_class_property_add_str(oc, "signature", NULL, spike_set_signature);
->      object_class_property_set_description(oc, "signature",
->                                            "File to write ACT test signature");
-> -    object_class_property_add_uint8_ptr(oc, "signature-granularity",
-> -                                        &line_size, OBJ_PROP_FLAG_WRITE);
-> +    object_class_static_property_add_uint8_ptr(oc, "signature-granularity",
-> +                                               &line_size,
-> +                                               OBJ_PROP_FLAG_WRITE);
->      object_class_property_set_description(oc, "signature-granularity",
->                                            "Size of each line in ACT signature "
->                                            "file");
-> diff --git a/qom/object.c b/qom/object.c
-> index 622840f9f8..47977b1f44 100644
-> --- a/qom/object.c
-> +++ b/qom/object.c
-> @@ -2724,9 +2724,10 @@ object_property_add_uint8_ptr(Object *obj, const char *name,
->  }
->  
->  ObjectProperty *
-> -object_class_property_add_uint8_ptr(ObjectClass *klass, const char *name,
-> -                                    const uint8_t *v,
-> -                                    ObjectPropertyFlags flags)
-> +object_class_static_property_add_uint8_ptr(ObjectClass *klass,
-> +                                           const char *name,
-> +                                           const uint8_t *v,
-> +                                           ObjectPropertyFlags flags)
->  {
->      ObjectPropertyAccessor *getter = NULL;
->      ObjectPropertyAccessor *setter = NULL;
-> @@ -2764,9 +2765,10 @@ object_property_add_uint16_ptr(Object *obj, const char *name,
->  }
->  
->  ObjectProperty *
-> -object_class_property_add_uint16_ptr(ObjectClass *klass, const char *name,
-> -                                     const uint16_t *v,
-> -                                     ObjectPropertyFlags flags)
-> +object_class_static_property_add_uint16_ptr(ObjectClass *klass,
-> +                                            const char *name,
-> +                                            const uint16_t *v,
-> +                                            ObjectPropertyFlags flags)
->  {
->      ObjectPropertyAccessor *getter = NULL;
->      ObjectPropertyAccessor *setter = NULL;
-> @@ -2804,9 +2806,10 @@ object_property_add_uint32_ptr(Object *obj, const char *name,
->  }
->  
->  ObjectProperty *
-> -object_class_property_add_uint32_ptr(ObjectClass *klass, const char *name,
-> -                                     const uint32_t *v,
-> -                                     ObjectPropertyFlags flags)
-> +object_class_static_property_add_uint32_ptr(ObjectClass *klass,
-> +                                            const char *name,
-> +                                            const uint32_t *v,
-> +                                            ObjectPropertyFlags flags)
->  {
->      ObjectPropertyAccessor *getter = NULL;
->      ObjectPropertyAccessor *setter = NULL;
-> @@ -2844,9 +2847,10 @@ object_property_add_uint64_ptr(Object *obj, const char *name,
->  }
->  
->  ObjectProperty *
-> -object_class_property_add_uint64_ptr(ObjectClass *klass, const char *name,
-> -                                     const uint64_t *v,
-> -                                     ObjectPropertyFlags flags)
-> +object_class_static_property_add_uint64_ptr(ObjectClass *klass,
-> +                                            const char *name,
-> +                                            const uint64_t *v,
-> +                                            ObjectPropertyFlags flags)
->  {
->      ObjectPropertyAccessor *getter = NULL;
->      ObjectPropertyAccessor *setter = NULL;
-> -- 
-> 2.43.0
-> 
-
-With regards,
-Daniel
--- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index f6865d1e164e..ed9fb09f8bc7 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -476,13 +476,6 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>               break;                /* Invalid PTE */
+>           } else if (pte & PTE_RESERVED(false)) {
+>               break;                /* Reserved PTE bits set */
+> -        } else if (!(pte & PTE_U) && !pv) {
+> -            /*
+> -             * All accesses are assumed to be User mode unless
+> -             * process_id is valid (pv).  In case we have a
+> -             * non-user mode PTE and !pv we need to fault.
+> -             */
+> -            break;
+>           } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+>               base = PPN_PHYS(ppn); /* Inner PTE, continue walking */
+>           } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
+> @@ -491,6 +484,13 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>               break;                /* Reserved leaf PTE flags: PTE_W + PTE_X */
+>           } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
+>               break;                /* Misaligned PPN */
+> +        } else if (!(pte & PTE_U) && !pv) {
+> +            /*
+> +             * All accesses are assumed to be User mode unless
+> +             * process_id is valid (pv).  In case we have a
+> +             * non-user mode leaf PTE and !pv we need to fault.
+> +             */
+> +            break;
+>           } else if ((iotlb->perm & IOMMU_RO) && !(pte & PTE_R)) {
+>               break;                /* Read access check failed */
+>           } else if ((iotlb->perm & IOMMU_WO) && !(pte & PTE_W)) {
 
 
