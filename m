@@ -4,114 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 143B8C44512
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jul 2026 21:14:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C519EC44507
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 08:55:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkTP5-0006sR-1P; Thu, 16 Jul 2026 17:13:59 -0400
+	id 1wkeM1-00082j-55; Fri, 17 Jul 2026 04:55:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
- id 1wkTOw-0006rB-By; Thu, 16 Jul 2026 17:13:50 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
- id 1wkTOu-0002or-Q6; Thu, 16 Jul 2026 17:13:50 -0400
-Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66GKBuvv013177; Thu, 16 Jul 2026 21:13:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=9kf6TK
- o2X9dk1+tdxDVhKkGNG8nX3776hSfDw9WQ9CE=; b=ohvHfRHyVP0R4oaKFk7SsZ
- yw3kMfQ8TNPmCPUBJdtDVDjLyqCsJStqo+fHYMJVELXfybhFRBcHVU2PYMULt0eS
- QQdrRo5+qM1jcmZhc0anHB7NZi+FW9xHfjCrvM3cPwLsZTMrTUUTetRBdvzSaVwx
- 2VHWCacomeIbX6oXMLIh+zYJfFFHCH7S5D7m5TT2IxoVtBEhuIaDZwWJ+4JZYZ9r
- yML0AFAiW+oeHe//8ibJU3UaUHJQ4hpT9n8/9X8EYMsuyshk7+EOYopfhX6jMdmy
- Gf65v3nY0pZpcaW9vQxkH9hfmyGJUYP64ZTEz5E+P4lua0/mMXWY/C2hqc23HC/w
- ==
-Received: from ppma12.dal12v.mail.ibm.com
- (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4fbepxu4kc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 16 Jul 2026 21:13:45 +0000 (GMT)
-Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
- by ppma12.dal12v.mail.ibm.com (8.18.1.7/8.18.1.7) with ESMTP id 66GL4bVm012529;
- Thu, 16 Jul 2026 21:13:44 GMT
-Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
- by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 4fc05qf2h5-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 16 Jul 2026 21:13:44 +0000 (GMT)
-Received: from smtpav06.fra02v.mail.ibm.com (smtpav06.fra02v.mail.ibm.com
- [10.20.54.105])
- by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 66GLDgZd49480090
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 16 Jul 2026 21:13:42 GMT
-Received: from smtpav06.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 45AAC2004B;
- Thu, 16 Jul 2026 21:13:42 +0000 (GMT)
-Received: from smtpav06.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id E955320040;
- Thu, 16 Jul 2026 21:13:41 +0000 (GMT)
-Received: from [0.0.0.0] (unknown [9.111.65.221])
- by smtpav06.fra02v.mail.ibm.com (Postfix) with ESMTP;
- Thu, 16 Jul 2026 21:13:41 +0000 (GMT)
-Message-ID: <b18f0a7a-d0c4-4166-b88e-bd871b5e5ff2@linux.ibm.com>
-Date: Thu, 16 Jul 2026 23:13:41 +0200
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1wkeLy-000824-08
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 04:55:30 -0400
+Received: from mail-yw1-x1129.google.com ([2607:f8b0:4864:20::1129])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1wkeLv-0005Ll-G8
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 04:55:29 -0400
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-81ecf499af9so43773257b3.1
+ for <qemu-riscv@nongnu.org>; Fri, 17 Jul 2026 01:55:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784278526; cv=none;
+ d=google.com; s=arc-20260327;
+ b=R3rHCwjX0KZO5NkPaMEGykBXdmQ+IXlWUBVGcnJ7MC39dTP39sWhPjPaBOvp27fz23
+ QfpcmN7y/CkFihx4HHuwUd8jArfMixPDL/2wvGvcUtYcaPiEXEB2LbSzMxUUUYDlvUGj
+ YYHn/5nNM/xkLI5k+jJrBCTXASLCKobbXcJBcQWhJQUDSnUmJPkdw37xs+d2Fdlecztf
+ MZbzlAjcBfiotxILj7EJOTl0caM25OU70OuQJFN1W87TKNvM+k5b2nIn3+VM6uH4d0O/
+ Oi9/u8p4oi8pFpF9aF8mmmWl+WvZchIDguKljYafWcopzDnE7elHcG4HScTG7Q5SrQ3a
+ hiZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=qfDpFj5sI7c1lMBs2+vjZfAUb2p+bBhzlM8dFQ160u8=;
+ fh=aJr00jAe+lJp5LnH4N5mdANg0ahKSOLFkPhriqIZcwU=;
+ b=Dk5onTjeVpThTpfrFVoV/eCrGrSl5uc2+JU4xd4URQDdmcrQ+vT2N82ETcrBifln5u
+ 1/goV0wfIbb7aps9dONo7qwinuezM9fcjWxKK3nE/xxe/klVMn8GTzpqhrcaihJMyLz6
+ 5bgKq0m1NV6zUqboedWVg9RvOIroFeHJTSVb87QQJRfoLlKKgeyJ8usxLuf9uENjdTpp
+ y3QShIf2s7wRSugVBf3fxLurAG5nZL8w7VY3PD9PzZUUxMiBfiVVpmnVgpbf1MN2l3hX
+ 6/5fGLimlAcuUQEkfw1tlrP3/PVsDBWEts4f7aoLnQQdE2hhMLulGUZwtIkmdDC0LJlk
+ vFAQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1784278526; x=1784883326; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=qfDpFj5sI7c1lMBs2+vjZfAUb2p+bBhzlM8dFQ160u8=;
+ b=KoF3yKPQSFaDe/Kt9avpmfj9d79tX7MyBbJlpIIdS4xdGSj9ixIhkOcqJdFMIFMmck
+ Qb3kXoUMAWE7D7Do6biMTkNE0d+iNkIneYch2kWbxM3V9CfVa8XlkM3Mv2Wld5/MAdGw
+ dwOfK9PfdRVECKody5pbhUlhZ1RecDsBKHaS1eSV65y2nIvQhGTdkeZsYRNgteVfE23W
+ pKwsvHwUZuUb29RU108TExmbpOf1g+ABFArL5zwUYCW9W2rfyg2PsZnG3O+COX/zYLd4
+ 8bHtjMbH1va2YeESeNsz3fr9/Kfafh4NeBiQS/HRJseCUHaJqdcpt5oPM8x301r8bRMQ
+ 6Vxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784278526; x=1784883326;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=qfDpFj5sI7c1lMBs2+vjZfAUb2p+bBhzlM8dFQ160u8=;
+ b=KGg7W/oM1f1ANVMY+kcrH7sxa96YnJejCu3w8eqa5RvKqQJaiCkqkX4d4taYgpaXip
+ JPyl4c8ihNe1fVhtazePQ8sp804mWXWKnAM6994ZvzWegTKdTlS21Y+S68G20kJREtdX
+ uhstnvzBYBuqSzgYLBz4R3w0eUGwewH20vDXlHf9zAar1tMhf0P/1IkOrk42zX1+FCQ5
+ 1Rb7TM98BqJek9E6gb8gq/NrLYFfaJV/0uZ3uawY9tCzd61ybiVbJfqO+5SwJ0bbEI4a
+ Yzgnc3ZRtbnOpdkIRxi5cACInLC7XeAKodz3XFxx66PY6hpJyM9AgvROhwy/XGJ5e831
+ TNzg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RplM05WI++WxsKABacUuJR5b2kgQwMM8QzsSAs/oW4xO9rvum6EzHQ7ShHWlauOBdZzzDKR0Mn3X8hA@nongnu.org
+X-Gm-Message-State: AOJu0YxjhWQ9lrdIV+kYUsmfc4d5F6FV9V827iYlZrA/aqxcUsj86ym1
+ FNmnyb69KdbolsUkXDm4WtRoZJhayCqQxFe2FHjnu6BIZh9dOs2HmnyLNE78h4gckZMl08WSxt5
+ h+l7CtLGvs06FOOe6VDuMzmDw0aPcOFAu+4518Ou1tg==
+X-Gm-Gg: AfdE7clx5xIOz+zGvzt+d5okeh10zQfEA3qK+E4X6GBDs8LaCGlX/FR82VF8x3Rf1NC
+ bhK5Mkn/cLuj8/MEW8CkNHiPlOZn5KeHPL6kuvMpVKgpPkB+2SO9oXd8fdGzuHhUw7UOxcfqdhl
+ uNma2d/zrBNKxSnXNGAZbXugInxBKBJ+hgEyTmPVbV5xZFsRSiwrhw5sDi0yvNewqZYlKOHxQzJ
+ 01zSQPUWRAWfN2Aq0s5hYYlY9lrnNdrGExTwCQrraf8RKQk97uTkK9RofaJ7XT7X9p0c71frEd/
+ mj+Mdm36iGziSZjx+uOVZ+lUMqFFAQpjE5NN7O1kUAPBhTITWYDHAveo
+X-Received: by 2002:a05:690c:3a0:b0:81e:b981:3eb5 with SMTP id
+ 00721157ae682-81ef25ae906mr4941747b3.23.1784278525669; Fri, 17 Jul 2026
+ 01:55:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 25/51] exec/breakpoint: Merge CPUBreakpoint and
- CPUWatchpoint
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
-References: <20260710205401.836304-1-richard.henderson@linaro.org>
- <20260710205401.836304-26-richard.henderson@linaro.org>
-Content-Language: en-US
-From: Ilya Leoshkevich <iii@linux.ibm.com>
-In-Reply-To: <20260710205401.836304-26-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-GUID: NgEgFfJz5Bvy7ISvezU1KTm-WMWxXQfA
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDIxNiBTYWx0ZWRfXw/j6kslvhzwd
- zgzXsCP/TwEpdZ8H+O5ps64ysLXbHyu2MphU76cl7/9TPpNJE1RE36GjT+7unCwoFyzgvKoiEjs
- 2MN19PxAtqDu2pfu/0qBvrHj00VAxlk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDIxNiBTYWx0ZWRfX+11viB9vc3rJ
- SwKpkc2179gxi89ScSJasUw+1rnqPlFK3bzj1qZhfxMZctvrT2EJEWwkVgTPJsb1ju6cwFcDmW8
- TdWpPsRO4JbJpYg0vpmUmcTHF0SWfVA4w/Yhz5ayT1Rgs8vdjUPBnDpsMuL0E2kaIraDzYQv9lt
- 9K+m4iGGj7r5bTkacREJLSKgvm5S+VfnVWKvxil3oYBXJKw83TLzBoEum3UtzjUWye4TgXdGm8f
- F6Ntpg8PuSLPO32aaagBhHmzkDPeVK00I5im2xJWj6wHpBxFj5G8yiQuCM6cw76G+jrT9wPKzZ8
- sGJ+xn6GeCMMXrWSDMKAytWiB5YnNDdG2BPwBGn7DZuwiNspw89QlkwCPOYHXuM3F/dKUnUKGrH
- sxtYdeQSJKiklXasgcb4qTU+p921D0SBBJCs2/19MmgOgLLMFhre0wd7wtcML//8k5FMQ8qgFV9
- fFT6YBYkM6Hs+t2RIQA==
-X-Authority-Analysis: v=2.4 cv=XbS5Co55 c=1 sm=1 tr=0 ts=6a594989 cx=c_pps
- a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=iQ6ETzBq9ecOQQE5vZCe:22 a=KKAkSRfTAAAA:8
- a=VnNF1IyMAAAA:8 a=7c5n3m91VUN4t1GCEA0A:9 a=QEXdDO2ut3YA:10
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: ANQFxZX6v_1ZWtRNGLDVI9CWUj1UzJ24
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-16_07,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 spamscore=0 phishscore=0 lowpriorityscore=0
- priorityscore=1501 adultscore=0 malwarescore=0 impostorscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160216
-Received-SPF: pass client-ip=148.163.156.1; envelope-from=iii@linux.ibm.com;
- helo=mx0a-001b2d01.pphosted.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
+References: <20260715190737.1381701-1-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20260715190737.1381701-1-frederic.petrot@univ-grenoble-alpes.fr>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 17 Jul 2026 09:55:14 +0100
+X-Gm-Features: AUfX_mzIBdcuIA0_XiDSTG-R6hxX7SXzzbEIjX6Yf0tDT0ixLrWe6e-nujP8a_0
+Message-ID: <CAFEAcA9FoE33wE9HqcsmP8Xe=g6-JYCGgGyw8YnaEJs8Z5Kbbw@mail.gmail.com>
+Subject: Re: [PATCH 0/3] Correct cbo and lq disassembly
+To: frederic.petrot@univ-grenoble-alpes.fr
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, 
+ daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com, 
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ julien.thillard@univ-grenoble-alpes.fr
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1129;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1129.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -127,44 +122,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Wed, 15 Jul 2026 at 20:08, <frederic.petrot@univ-grenoble-alpes.fr> wrot=
+e:
+>
+> From: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-grenoble-alpes=
+.fr>
+>
+> The CBO instructions were, AFAIU, disassembled erroneously.
+> In addition, lq (load-quad, a RV128 instruction) shares the same
+> opcode space as the CBOs, which also led to incorrect dasm for that
+> instruction (understandable since RV128 is an experimental feature).
+> To avoid overlaps, we now require that lq is decoded only if
+> rd is not 0, as CBO requires the field corresponding to rd to be zero,
+> both in dasm and decodetree.
+> The last patch corrects the original indentation that was making
+> checkpatch unhappy.
 
+Reminder: please put some disambiguator in the subject lines
+of cover letter emails. "Correct cbo and lq disassembly" doesn't
+say it's riscv related so you can't tell without looking into
+the email body. Doing this assists people in easily scanning
+through the list to find or skip over topics.
 
-On 7/10/26 22:53, Richard Henderson wrote:
-> Drop the CPUBreakpoint structure and rename
-> CPUWatchpoint to CPUBreakpoint.
-> 
-> Mechanical change to adjust all uses.
-> 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   include/accel/tcg/cpu-ops.h  |  2 +-
->   include/exec/breakpoint.h    | 10 ++--------
->   include/hw/core/cpu.h        |  2 +-
->   include/qemu/typedefs.h      |  1 -
->   target/arm/cpu.h             |  2 +-
->   target/arm/internals.h       |  8 ++++----
->   target/i386/cpu.h            |  2 +-
->   target/ppc/cpu.h             |  2 +-
->   target/ppc/internal.h        |  2 +-
->   target/riscv/cpu.h           |  2 +-
->   target/riscv/debug.h         |  2 +-
->   target/xtensa/cpu.h          |  2 +-
->   accel/tcg/cpu-exec.c         |  2 +-
->   accel/tcg/user-exec-stub.c   |  4 ++--
->   accel/tcg/watchpoint.c       |  8 ++++----
->   system/watchpoint.c          | 12 ++++++------
->   target/arm/hvf/hvf.c         |  2 +-
->   target/arm/hyp_gdbstub.c     |  2 +-
->   target/arm/kvm.c             |  2 +-
->   target/arm/tcg/debug.c       |  4 ++--
->   target/i386/kvm/kvm.c        |  2 +-
->   target/ppc/kvm.c             |  2 +-
->   target/ppc/tcg-excp_helper.c |  2 +-
->   target/riscv/debug.c         |  4 ++--
->   target/s390x/kvm/kvm.c       |  2 +-
->   target/s390x/tcg/debug.c     |  2 +-
->   26 files changed, 40 insertions(+), 47 deletions(-)
-
-Reviewed-by: Ilya Leoshkevich <iii@linux.ibm.com>
-
+thanks
+-- PMM
 
