@@ -4,95 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C12DC4451B
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 14:10:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B4C7C4451C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 14:17:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkjGh-0006J6-CL; Fri, 17 Jul 2026 10:10:23 -0400
+	id 1wkjN8-00081B-Qh; Fri, 17 Jul 2026 10:17:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wkjGf-0006Fh-Ix
- for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 10:10:21 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1wkjGc-0004sq-86
- for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 10:10:20 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-383b4a3755fso4346429a91.3
- for <qemu-riscv@nongnu.org>; Fri, 17 Jul 2026 07:10:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1784297416; x=1784902216; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=S6lVprp8mJOSoV18qk/VmLgX7ktHbEq3PtjuHN29kUg=;
- b=kbwVlnzYN8Xsk5yufZxZB4vzzaQtzoKUhWuac8iSlP+8Gf6vBe6dra3IVuxYv9Jnao
- +B/WCg2C1q38Sh1lxf8H0i+ZdkJMrjG/BI9nv8FTPkyxkIS/5Xg9yZ1aXJYBJCvmeKsA
- qikHNoClV0LE+/OlUIdNBK9nMLdLazQsuQLoWEiytwZSj+fHhO9mY60s65PbJGF+9BTl
- XsOVyuxDpHRwM/lLkKz+i+GrAZm7zRcUMnmxEzYhwaQFPa2IQunKXtp3MWL8rGnQc//L
- OIfQMDj9o3Mby2nEVb48VZAuDQ78+QTq31JDx0G9fCfdjyaL6H5nV8WiCQRttsvnXks8
- 7rCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784297416; x=1784902216;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=S6lVprp8mJOSoV18qk/VmLgX7ktHbEq3PtjuHN29kUg=;
- b=i1xrchOpbvLfq2ynLXnOTiPLX7U1q777ymWG6Gu8nOMVBRleaHLT2DAGhIbHbR8OKg
- gVW+vZDxm1dlR+g0lfFIZ8//phnGqrDAMdFsrMWbOtrc7FXP0nXo5aph33HPoEXFfbDo
- 0Xq6TJRl8StUG4gqq4TGCZwjAB+2L29CPtk3PRoOiFNdSeZRyPPy4uSo/7gJ03uCjQVP
- KpN/eWIJA48tE9O1EOvGpw3WXS9qotf1Q3M76hEkFnUe4XUEn02f4Y0ZJ1de/KTGha3s
- nzdidIzYdp+WaFLgR7K5DTOyHbOgqgE1kejQO/aSdlnNGUTNpSwidsFQXHNEL90guxGx
- SgNQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoX2O5AoSrch3/hyCu3xw1VX2STUeF0GLkQPDfphyL+uDtg/e6fzTMVB0rChzBh9nBiWquf2lr1lBk0@nongnu.org
-X-Gm-Message-State: AOJu0Yz0GZUbDe2PfxuFbeCkuoaYn+z8vYHCriihck4ZY+bHnVGCReau
- /HgUfEswYoJ7oYQZCD8LJ2ghHiGXGToFAcaiANKIIhNKQnKnm5/30oA01dfppaUrbrk=
-X-Gm-Gg: AfdE7clDL/Uz0U9bPX7L06lzatkfnQ7Gcbvdnd7JsgbEOWX95kU+XUGp8+gHCZGuoQC
- bnPr4xkgTChqDsg+siKRKYmgw2HbgA5CHdYQOeb728GKCCAGlZUgnsBoAkicIqkqZXQHIKtpMA1
- M21+pmOWCTVK8MYdnIVUY8ipubRb1xuQCDSWEwAJa5LHXy1BZ5o/c9GgFoKk93mVBWGrPqVu6Pf
- zF6TMSK/7hqrIftdVbWAYvFGl4VzJDCHpIVKpQZ1QxGcqrhYCkpJzHCp5jpShrqCCDQAFxDpGKp
- VeaS8+jh48mH1zJARyRoJzE7aS06pcAFbJ4OF5NmwNXMXAUng+6D7ych4tPD52Z506j+CRdfBDf
- orEBOVexmGE9ePLAqdgnCArVDn02zFMwZcLf5sZmyWveBdTfbLJNyXgVDGDfyn551tzXWCQ5ggX
- c0F6oqgpaFgDYYaGhNMS0=
-X-Received: by 2002:a17:90b:3b90:b0:380:7763:3b16 with SMTP id
- 98e67ed59e1d1-38e4b498176mr2868307a91.19.1784297416454; 
- Fri, 17 Jul 2026 07:10:16 -0700 (PDT)
-Received: from [10.213.131.227] ([32.140.233.50])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3142a1bb8a4sm8590636eec.14.2026.07.17.07.10.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Jul 2026 07:10:15 -0700 (PDT)
-Message-ID: <2e2b32b3-95e2-456f-8bf7-8901c3adac3d@linaro.org>
-Date: Fri, 17 Jul 2026 07:10:11 -0700
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1wkjN7-0007zp-HN
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 10:17:01 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1wkjN5-000677-5q
+ for qemu-riscv@nongnu.org; Fri, 17 Jul 2026 10:17:01 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1784297817;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=K8RwmA1elj5CN9Hey07Cbu3GOWBcuyV2M217cRLO85Q=;
+ b=F6A/za9y5mtP2rOK3ISImLHS1vXUW1CYDMnzeny4MpA6rZXDbn0I2Eg6OmNWgGFciiKNrL
+ 7tCmovPlnn6KD2O3mIAdLi9FI+fidILrq//8L2kAFV5kghSOsr9Uuszby82qCRTvSrO6Dw
+ 40XQ55DJa98/tTBe697Ao/+LKEoEPL8=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-380-BEobqyF2M-SyfMnyEBMehA-1; Fri,
+ 17 Jul 2026 10:16:54 -0400
+X-MC-Unique: BEobqyF2M-SyfMnyEBMehA-1
+X-Mimecast-MFC-AGG-ID: BEobqyF2M-SyfMnyEBMehA_1784297813
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 5E66319540D3; Fri, 17 Jul 2026 14:16:52 +0000 (UTC)
+Received: from redhat.com (unknown [10.44.34.221])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 59FD418005B3; Fri, 17 Jul 2026 14:16:49 +0000 (UTC)
+Date: Fri, 17 Jul 2026 15:16:45 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ pbonzini@redhat.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: Re: [PATCH v2 4/6] qom/object.h: rename @child to @targetp in
+ object_property_add_link() documentation
+Message-ID: <alo5TQ-SmJvIXs5M@redhat.com>
+References: <20260717135254.508701-1-mark.caveayland@nutanix.com>
+ <20260717135254.508701-5-mark.caveayland@nutanix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 47/51] accel/tcg: Use addr/last in
- tlb_flush_range_locked
-To: Ilya Leoshkevich <iii@linux.ibm.com>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, jcmvbkbc@gmail.com
-References: <20260710205401.836304-1-richard.henderson@linaro.org>
- <20260710205401.836304-48-richard.henderson@linaro.org>
- <f7bac53c-07b7-423d-9097-597f22de24cd@linux.ibm.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Content-Language: en-US
-In-Reply-To: <f7bac53c-07b7-423d-9097-597f22de24cd@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <20260717135254.508701-5-mark.caveayland@nutanix.com>
+User-Agent: Mutt/2.4.0 (2026-06-19)
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: Iq10II6mvNhbKoDJLZcnz-SVISIpE8YeQOA_sFDGKgw_1784297813
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1034.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: permerror client-ip=170.10.133.124;
+ envelope-from=berrange@redhat.com; helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 12
+X-Spam_score: 1.2
+X-Spam_bar: +
+X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ T_SPF_PERMERROR=0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,29 +90,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/16/26 12:13, Ilya Leoshkevich wrote:
-> On 7/10/26 22:53, Richard Henderson wrote:
->> Change from addr/len to addr/last in the implementation.
->>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   accel/tcg/cputlb.c | 71 +++++++++++++++++++++++++---------------------
->>   1 file changed, 38 insertions(+), 33 deletions(-)
+On Fri, Jul 17, 2026 at 02:51:44PM +0100, Mark Cave-Ayland wrote:
+> This was missed when updating the parameter name in commit 36854207f0 ("object:
+> rename link "child" to "target"").
 > 
->> @@ -733,7 +736,7 @@ static void tlb_flush_range_by_mmuidx_async_0(CPUState *cpu,
->>        * If the length is larger than the jump cache size, then it will take
->>        * longer to clear each entry individually than it will to clear it all.
->>        */
->> -    if (d.len >= (TARGET_PAGE_SIZE * TB_JMP_CACHE_SIZE)) {
->> +    if (((d.last - d.addr) >> TARGET_PAGE_SIZE) + 1 >= TB_JMP_CACHE_SIZE) {
-> 
->  >> TARGET_PAGE_SHIFT?
+> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+> Fixes: 36854207f0 ("object: rename link "child" to "target"")
+> ---
+>  include/qom/object.h | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-Oops, thanks.
+Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 
 
-r~
+With regards,
+Daniel
+-- 
+|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
+|: https://libvirt.org          ~~          https://entangle-photo.org :|
+|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+
 
