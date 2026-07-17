@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDFABC44516
-	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 10:10:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26C96C44507
+	for <qemu-riscv@archiver.kernel.org>; Fri, 17 Jul 2026 10:11:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wkfTp-0003cR-Nl; Fri, 17 Jul 2026 06:07:41 -0400
+	id 1wkfTp-0003c4-1J; Fri, 17 Jul 2026 06:07:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1wkfTl-0003YN-98; Fri, 17 Jul 2026 06:07:37 -0400
+ id 1wkfTn-0003bN-SR; Fri, 17 Jul 2026 06:07:39 -0400
 Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1wkfTg-0006an-Bl; Fri, 17 Jul 2026 06:07:37 -0400
+ id 1wkfTg-0006ab-9T; Fri, 17 Jul 2026 06:07:39 -0400
 Received: from xiaoou-ubuntu-02.home.arpa (unknown [36.110.52.2])
- by APP-01 (Coremail) with SMTP id qwCowAB3T_Pa_llqSAw4AA--.34459S11;
- Fri, 17 Jul 2026 18:07:25 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowAB3T_Pa_llqSAw4AA--.34459S5;
+ Fri, 17 Jul 2026 18:07:23 +0800 (CST)
 From: Molly Chen <xiaoou@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
@@ -28,33 +28,32 @@ To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
 Cc: xiaoou@iscas.ac.cn,
 	qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
-Subject: [PATCH v2 09/18] target/riscv: Add packed SIMD pack,
- merge and count-leading instructions
-Date: Fri, 17 Jul 2026 10:07:02 +0000
-Message-Id: <c7576a6619a66f64eff13e6861e214b54e85d448.1784280142.git.xiaoou@iscas.ac.cn>
+Subject: [PATCH v2 03/18] target/riscv: Add packed SIMD arithmetic instructions
+Date: Fri, 17 Jul 2026 10:06:56 +0000
+Message-Id: <3935baa46fdc44f7b68e2b740c7bedf8b7c0b974.1784280142.git.xiaoou@iscas.ac.cn>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1784280142.git.xiaoou@iscas.ac.cn>
 References: <cover.1784280142.git.xiaoou@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAB3T_Pa_llqSAw4AA--.34459S11
-X-Coremail-Antispam: 1UD129KBjvJXoW3CrWDtF13CFWkZryfJrWrZrb_yoWkZF17pF
- WxJry3XrW8XryYqa4xKr4ayw43WrsIk3y8GrW3tF1Fva15JF4rJw1qqr13tF45Xr9rWFy5
- Wa92yr9FyFZ5t3JanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUmm14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
- 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r4UJVWxJr1lOx8S6xCaFVCjc4AY6r1j
- 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
- 8vn2kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE
- 7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI
- 8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8
- JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr
- 0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
- YxBIdaVFxhVjvjDU0xZFpf9x0JULvtZUUUUU=
+X-CM-TRANSID: qwCowAB3T_Pa_llqSAw4AA--.34459S5
+X-Coremail-Antispam: 1UD129KBjvAXoWfWFy5ZF4Uury3Gr1xAFW5Jrb_yoW5CF1rZo
+ WfKr45Cr1xt343ZwnxCw4xX3srAr97uwn7WrW5Zr47uasxJr1Ikr17Jw1xZ3WxAry5KrWf
+ Ga93Wrn8tFn3uFnrn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UjIYCTnIWjp_UUUO47AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
+ j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r1rM28IrcIa0x
+ kI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84AC
+ jcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJw
+ A2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
+ e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
+ 8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r4UJVWxJr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+ kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkE
+ bVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67
+ AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI
+ 42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMI
+ IF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVF
+ xhVjvjDU0xZFpf9x0JUJrcfUUUUU=
 X-Originating-IP: [36.110.52.2]
 X-CM-SenderInfo: 50ld003x6l2u1dvotugofq/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=xiaoou@iscas.ac.cn;
@@ -82,315 +81,859 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
 ---
- target/riscv/helper.h                       |  41 ++++++
- target/riscv/insn32.decode                  |  41 ++++++
- target/riscv/tcg/insn_trans/trans_rvp.c.inc |  41 ++++++
- target/riscv/tcg/psimd_helper.c             | 148 ++++++++++++++++++++
- 4 files changed, 271 insertions(+)
+ target/riscv/helper.h                       |  41 ++
+ target/riscv/insn32.decode                  |  63 +++
+ target/riscv/tcg/insn_trans/trans_rvp.c.inc | 547 ++++++++++++++++++++
+ target/riscv/tcg/psimd_helper.c             | 114 ++++
+ target/riscv/tcg/translate.c                |   4 +
+ 5 files changed, 769 insertions(+)
+ create mode 100644 target/riscv/tcg/insn_trans/trans_rvp.c.inc
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 5fe650c5d71..f83af437d40 100644
+index 542b7c264fc..eebb2febd95 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1520,3 +1520,44 @@ DEF_HELPER_3(predsum_hs, tl, env, tl, tl)
- DEF_HELPER_3(predsumu_hs, tl, env, tl, tl)
- DEF_HELPER_3(predsum_ws, i64, env, i64, i64)
- DEF_HELPER_3(predsumu_ws, i64, env, i64, i64)
+@@ -1358,3 +1358,44 @@ DEF_HELPER_1(ssamoswap_disabled, void, env)
+ 
+ /* Zalrsc SC write probe */
+ DEF_HELPER_FLAGS_3(sc_probe_write, TCG_CALL_NO_WG, void, env, tl, tl)
 +
-+/* Packed SIMD - Pack, Unpack, and Merge Operations */
-+DEF_HELPER_3(ppaire_b, tl, env, tl, tl)
-+DEF_HELPER_3(ppaireo_b, tl, env, tl, tl)
-+DEF_HELPER_3(ppairoe_b, tl, env, tl, tl)
-+DEF_HELPER_3(ppairo_b, tl, env, tl, tl)
-+DEF_HELPER_3(ppaire_h, i64, env, i64, i64)
-+DEF_HELPER_3(ppaireo_h, tl, env, tl, tl)
-+DEF_HELPER_3(ppairoe_h, tl, env, tl, tl)
-+DEF_HELPER_3(ppairo_h, tl, env, tl, tl)
-+DEF_HELPER_3(ppaireo_w, i64, env, i64, i64)
-+DEF_HELPER_3(ppairoe_w, i64, env, i64, i64)
-+DEF_HELPER_3(ppairo_w, i64, env, i64, i64)
-+DEF_HELPER_2(psext_h_b, tl, env, tl)
-+DEF_HELPER_2(psext_w_b, i64, env, i64)
-+DEF_HELPER_2(psext_w_h, i64, env, i64)
-+DEF_HELPER_2(rev, tl, env, tl)
-+DEF_HELPER_2(rev16, i64, env, i64)
-+DEF_HELPER_3(zip8p, i64, env, i64, i64)
-+DEF_HELPER_3(zip8hp, i64, env, i64, i64)
-+DEF_HELPER_3(unzip8p, i64, env, i64, i64)
-+DEF_HELPER_3(unzip8hp, i64, env, i64, i64)
-+DEF_HELPER_3(zip16p, i64, env, i64, i64)
-+DEF_HELPER_3(zip16hp, i64, env, i64, i64)
-+DEF_HELPER_3(unzip16p, i64, env, i64, i64)
-+DEF_HELPER_3(unzip16hp, i64, env, i64, i64)
-+DEF_HELPER_4(slx, tl, env, tl, tl, tl)
-+DEF_HELPER_4(srx, tl, env, tl, tl, tl)
-+DEF_HELPER_4(mvm, tl, env, tl, tl, tl)
-+DEF_HELPER_4(mvmn, tl, env, tl, tl, tl)
-+DEF_HELPER_4(merge, tl, env, tl, tl, tl)
-+DEF_HELPER_3(pnclipp_b, i64, env, i64, i64)
-+DEF_HELPER_3(pnclipup_b, i64, env, i64, i64)
-+DEF_HELPER_3(pnclipp_h, i64, env, i64, i64)
-+DEF_HELPER_3(pnclipup_h, i64, env, i64, i64)
-+DEF_HELPER_3(pnclipp_w, i64, env, i64, i64)
-+DEF_HELPER_3(pnclipup_w, i64, env, i64, i64)
-+
-+/* Packed SIMD - Count Leading Operations */
-+DEF_HELPER_2(cls, tl, env, tl)
-+DEF_HELPER_2(clsw, i64, env, i64)
++/* Packed SIMD */
++/* Packed SIMD - Arithmetic Operations(Non-Saturating and Saturating) */
++DEF_HELPER_3(padd_b, tl, env, tl, tl)
++DEF_HELPER_3(padd_h, tl, env, tl, tl)
++DEF_HELPER_3(padd_w, i64, env, i64, i64)
++DEF_HELPER_3(padd_bs, tl, env, tl, tl)
++DEF_HELPER_3(padd_hs, tl, env, tl, tl)
++DEF_HELPER_3(padd_ws, i64, env, i64, i64)
++DEF_HELPER_3(psub_b, tl, env, tl, tl)
++DEF_HELPER_3(psub_h, tl, env, tl, tl)
++DEF_HELPER_3(psub_w, i64, env, i64, i64)
++DEF_HELPER_3(psh1add_h, tl, env, tl, tl)
++DEF_HELPER_3(psh1add_w, i64, env, i64, i64)
++DEF_HELPER_3(pssh1sadd_h, tl, env, tl, tl)
++DEF_HELPER_3(pssh1sadd_w, i64, env, i64, i64)
++DEF_HELPER_3(ssh1sadd, i32, env, i32, i32)
++DEF_HELPER_3(psadd_b, tl, env, tl, tl)
++DEF_HELPER_3(psadd_h, tl, env, tl, tl)
++DEF_HELPER_3(psadd_w, i64, env, i64, i64)
++DEF_HELPER_3(psaddu_b, tl, env, tl, tl)
++DEF_HELPER_3(psaddu_h, tl, env, tl, tl)
++DEF_HELPER_3(psaddu_w, i64, env, i64, i64)
++DEF_HELPER_3(sadd, i32, env, i32, i32)
++DEF_HELPER_3(saddu, i32, env, i32, i32)
++DEF_HELPER_3(pssub_b, tl, env, tl, tl)
++DEF_HELPER_3(pssub_h, tl, env, tl, tl)
++DEF_HELPER_3(pssub_w, i64, env, i64, i64)
++DEF_HELPER_3(pssubu_b, tl, env, tl, tl)
++DEF_HELPER_3(pssubu_h, tl, env, tl, tl)
++DEF_HELPER_3(pssubu_w, i64, env, i64, i64)
++DEF_HELPER_3(ssub, i32, env, i32, i32)
++DEF_HELPER_3(ssubu, i32, env, i32, i32)
++DEF_HELPER_3(psati_h, tl, env, tl, tl)
++DEF_HELPER_3(pusati_h, tl, env, tl, tl)
++DEF_HELPER_3(psati_w, i64, env, i64, i64)
++DEF_HELPER_3(pusati_w, i64, env, i64, i64)
++DEF_HELPER_3(sati_32, i32, env, i32, i32)
++DEF_HELPER_3(usati_32, i32, env, i32, i32)
++DEF_HELPER_3(sati_64, i64, env, i64, i64)
++DEF_HELPER_3(usati_64, i64, env, i64, i64)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 9d0f5c48b6d..14dab4cb641 100644
+index 21272fdb504..8da13669d73 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -1296,3 +1296,44 @@ predsum_hs   1001100 ..... ..... 100 ..... 0011011 @r
- predsumu_hs  1011100 ..... ..... 100 ..... 0011011 @r
- predsum_ws   1001101 ..... ..... 100 ..... 0011011 @r
- predsumu_ws  1011101 ..... ..... 100 ..... 0011011 @r
+@@ -40,6 +40,9 @@
+ %imm_z6   26:1 15:5
+ %imm_mop5 30:1 26:2 20:2
+ %imm_mop3 30:1 26:2
++%imm_p_ui16 20:4
++%imm_p_ui32 20:5
++%imm_p_ui64 20:6
+ 
+ # Argument sets:
+ &empty
+@@ -60,6 +63,7 @@
+ &k_aes     shamt rs2 rs1 rd
+ &mop5 imm rd rs1
+ &mop3 imm rd rs1 rs2
++&p_ui imm rs1 rd
+ 
+ # Formats 32:
+ @r       .......   ..... ..... ... ..... ....... &r                %rs2 %rs1 %rd
+@@ -105,6 +109,10 @@
+ @mop5 . . .. .. .... .. ..... ... ..... ....... &mop5 imm=%imm_mop5 %rd %rs1
+ @mop3 . . .. .. . ..... ..... ... ..... ....... &mop3 imm=%imm_mop3 %rd %rs1 %rs2
+ 
++@p_ui16 ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui16 %rs1 %rd
++@p_ui32 ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui32 %rs1 %rd
++@p_ui64 ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui64 %rs1 %rd
 +
-+# Packed SIMD - Pack, Unpack, and Merge Operations
-+ppaire_b    1000000 ..... ..... 100 ..... 0111011 @r
-+ppaireo_b   1001000 ..... ..... 100 ..... 0111011 @r
-+ppairoe_b   1010000 ..... ..... 100 ..... 0111011 @r
-+ppairo_b    1011000 ..... ..... 100 ..... 0111011 @r
-+ppaireo_h   1001001 ..... ..... 100 ..... 0111011 @r
-+ppairoe_h   1010001 ..... ..... 100 ..... 0111011 @r
-+ppairo_h    1011001 ..... ..... 100 ..... 0111011 @r
-+ppaire_h    1000001 ..... ..... 100 ..... 0111011 @r
-+ppaireo_w   1001011 ..... ..... 100 ..... 0111011 @r
-+ppairoe_w   1010011 ..... ..... 100 ..... 0111011 @r
-+ppairo_w    1011011 ..... ..... 100 ..... 0111011 @r
-+psext_h_b   1110000 00100 ..... 010 ..... 0011011 @r2
-+psext_w_b   1110001 00100 ..... 010 ..... 0011011 @r2
-+psext_w_h   1110001 00101 ..... 010 ..... 0011011 @r2
-+rev         01101 0111111 ..... 101 ..... 0010011 @r2
-+rev16       01101 0110000 ..... 101 ..... 0010011 @r2
-+zip8p       1111000 ..... ..... 010 ..... 0111011 @r
-+zip8hp      1111010 ..... ..... 010 ..... 0111011 @r
-+unzip8p     1110000 ..... ..... 010 ..... 0111011 @r
-+unzip8hp    1110010 ..... ..... 010 ..... 0111011 @r
-+zip16p      1111001 ..... ..... 010 ..... 0111011 @r
-+zip16hp     1111011 ..... ..... 010 ..... 0111011 @r
-+unzip16p    1110001 ..... ..... 010 ..... 0111011 @r
-+unzip16hp   1110011 ..... ..... 010 ..... 0111011 @r
-+slx         1000111 ..... ..... 001 ..... 0111011 @r
-+srx         1010111 ..... ..... 001 ..... 0111011 @r
-+mvm         1010100 ..... ..... 001 ..... 0111011 @r
-+mvmn        1010101 ..... ..... 001 ..... 0111011 @r
-+merge       1010110 ..... ..... 001 ..... 0111011 @r
-+pnclipp_b   1100000 ..... ..... 010 ..... 0111011 @r
-+pnclipup_b  1000000 ..... ..... 010 ..... 0111011 @r
-+pnclipp_h   1100001 ..... ..... 010 ..... 0111011 @r
-+pnclipup_h  1000001 ..... ..... 010 ..... 0111011 @r
-+pnclipp_w   1100011 ..... ..... 010 ..... 0111011 @r
-+pnclipup_w  1000011 ..... ..... 010 ..... 0111011 @r
+ # Formats 64:
+ @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
+ 
+@@ -1084,3 +1092,58 @@ sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
+ sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
+ sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
+ sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
 +
-+# Packed SIMD - Count Leading Operations
-+cls    01100 0000011 ..... 001 ..... 0010011 @r2
-+clsw   01100 0000011 ..... 001 ..... 0011011 @r2
++# *** P Experimental Extension Version v020 ***
++# Packed SIMD - Arithmetic Operations(Non-Saturating and Saturating)
++padd_b     1000010 ..... ..... 000 ..... 0111011 @r
++padd_h     1000000 ..... ..... 000 ..... 0111011 @r
++padd_w     1000001 ..... ..... 000 ..... 0111011 @r
++padd_bs    1001110 ..... ..... 010 ..... 0011011 @r
++padd_hs    1001100 ..... ..... 010 ..... 0011011 @r
++padd_ws    1001101 ..... ..... 010 ..... 0011011 @r
++psub_b     1100010 ..... ..... 000 ..... 0111011 @r
++psub_h     1100000 ..... ..... 000 ..... 0111011 @r
++psub_w     1100001 ..... ..... 000 ..... 0111011 @r
++psh1add_h  1010000 ..... ..... 010 ..... 0111011 @r
++psh1add_w  1010001 ..... ..... 010 ..... 0111011 @r
++pssh1sadd_h   1011000 ..... ..... 010 ..... 0111011 @r
++{
++  ssh1sadd    1011001 ..... ..... 010 ..... 0111011 @r
++  pssh1sadd_w 1011001 ..... ..... 010 ..... 0111011 @r
++}
++psadd_b    1001010 ..... ..... 000 ..... 0111011 @r
++psadd_h    1001000 ..... ..... 000 ..... 0111011 @r
++{
++  sadd     1001001 ..... ..... 000 ..... 0111011 @r
++  psadd_w  1001001 ..... ..... 000 ..... 0111011 @r
++}
++psaddu_b   1011010 ..... ..... 000 ..... 0111011 @r
++psaddu_h   1011000 ..... ..... 000 ..... 0111011 @r
++{
++  saddu    1011001 ..... ..... 000 ..... 0111011 @r
++  psaddu_w 1011001 ..... ..... 000 ..... 0111011 @r
++}
++pssub_b    1101010 ..... ..... 000 ..... 0111011 @r
++pssub_h    1101000 ..... ..... 000 ..... 0111011 @r
++{
++  ssub     1101001 ..... ..... 000 ..... 0111011 @r
++  pssub_w  1101001 ..... ..... 000 ..... 0111011 @r
++}
++pssubu_b   1111010 ..... ..... 000 ..... 0111011 @r
++pssubu_h   1111000 ..... ..... 000 ..... 0111011 @r
++{
++  ssubu      1111001 ..... ..... 000 ..... 0111011 @r
++  pssubu_w   1111001 ..... ..... 000 ..... 0111011 @r
++}
++psati_h    11100 001.... ..... 100 ..... 0011011 @p_ui16
++pusati_h   10100 001.... ..... 100 ..... 0011011 @p_ui16
++{
++  sati_32  11100 01..... ..... 100 ..... 0011011 @p_ui32
++  psati_w  11100 01..... ..... 100 ..... 0011011 @p_ui32
++}
++{
++  usati_32 10100 01..... ..... 100 ..... 0011011 @p_ui32
++  pusati_w 10100 01..... ..... 100 ..... 0011011 @p_ui32
++}
++sati_64    111001 ...... ..... 100 ..... 0011011 @p_ui64
++usati_64   101001 ...... ..... 100 ..... 0011011 @p_ui64
 diff --git a/target/riscv/tcg/insn_trans/trans_rvp.c.inc b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-index 9f2ae9da1d1..486184eeaf3 100644
---- a/target/riscv/tcg/insn_trans/trans_rvp.c.inc
+new file mode 100644
+index 00000000000..056ccfb486e
+--- /dev/null
 +++ b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-@@ -666,3 +666,44 @@ GEN_SIMD_TRANS(predsumu_hs)
- GEN_SIMD_TRANS_64(predsum_ws)
- GEN_SIMD_TRANS_64(predsumu_ws)
- 
-+/* Packed SIMD - Pack, Unpack, and Merge Operations */
-+GEN_SIMD_TRANS(ppaire_b)
-+GEN_SIMD_TRANS(ppaireo_b)
-+GEN_SIMD_TRANS(ppairoe_b)
-+GEN_SIMD_TRANS(ppairo_b)
-+GEN_SIMD_TRANS_64(ppaire_h)
-+GEN_SIMD_TRANS(ppaireo_h)
-+GEN_SIMD_TRANS(ppairoe_h)
-+GEN_SIMD_TRANS(ppairo_h)
-+GEN_SIMD_TRANS_64(ppaireo_w)
-+GEN_SIMD_TRANS_64(ppairoe_w)
-+GEN_SIMD_TRANS_64(ppairo_w)
-+GEN_SIMD_TRANS_R1(psext_h_b)
-+GEN_SIMD_TRANS_R1_64(psext_w_b)
-+GEN_SIMD_TRANS_R1_64(psext_w_h)
-+GEN_SIMD_TRANS_R1(rev)
-+GEN_SIMD_TRANS_R1_64(rev16)
-+GEN_SIMD_TRANS_64(zip8p)
-+GEN_SIMD_TRANS_64(zip8hp)
-+GEN_SIMD_TRANS_64(unzip8p)
-+GEN_SIMD_TRANS_64(unzip8hp)
-+GEN_SIMD_TRANS_64(zip16p)
-+GEN_SIMD_TRANS_64(zip16hp)
-+GEN_SIMD_TRANS_64(unzip16p)
-+GEN_SIMD_TRANS_64(unzip16hp)
-+GEN_SIMD_TRANS_ACC(slx)
-+GEN_SIMD_TRANS_ACC(srx)
-+GEN_SIMD_TRANS_ACC(mvm)
-+GEN_SIMD_TRANS_ACC(mvmn)
-+GEN_SIMD_TRANS_ACC(merge)
-+GEN_SIMD_TRANS_64_VXSAT(pnclipp_b)
-+GEN_SIMD_TRANS_64_VXSAT(pnclipup_b)
-+GEN_SIMD_TRANS_64_VXSAT(pnclipp_h)
-+GEN_SIMD_TRANS_64_VXSAT(pnclipup_h)
-+GEN_SIMD_TRANS_64_VXSAT(pnclipp_w)
-+GEN_SIMD_TRANS_64_VXSAT(pnclipup_w)
+@@ -0,0 +1,547 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/* RISC-V translation routines for the P Standard Extensions. */
++/* Copyright (c) 2026 ISRC ISCAS. */
 +
-+/* Packed SIMD - Count Leading Operations */
-+GEN_SIMD_TRANS_R1(cls)
-+GEN_SIMD_TRANS_R1_64(clsw)
++/* Save a 64 bit data in src to dst and dst + 1 */
 +
-diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
-index 0acf0414bf9..99f11f084f2 100644
---- a/target/riscv/tcg/psimd_helper.c
-+++ b/target/riscv/tcg/psimd_helper.c
-@@ -2111,3 +2111,151 @@ GEN_PSIMD_REDSUM(predsum_ws, uint64_t, int64_t, int32_t,
- GEN_PSIMD_REDSUM(predsumu_ws, uint64_t, uint64_t, uint32_t,
-                  EXTRACT32, ELEMS_W, rs2)
- 
-+/* Packing/unpacking operations */
-+
-+GEN_PSIMD_PAIR_PACK(ppaire_b, target_ulong, uint16_t,
-+                    EXTRACT16, INSERT16, ELEMS_H, 0x00ff, 8,
-+                    PSIMD_PAIR_LO, PSIMD_PAIR_LO)
-+GEN_PSIMD_PAIR_PACK(ppaireo_b, target_ulong, uint16_t,
-+                    EXTRACT16, INSERT16, ELEMS_H, 0x00ff, 8,
-+                    PSIMD_PAIR_HI, PSIMD_PAIR_LO)
-+GEN_PSIMD_PAIR_PACK(ppairoe_b, target_ulong, uint16_t,
-+                    EXTRACT16, INSERT16, ELEMS_H, 0x00ff, 8,
-+                    PSIMD_PAIR_LO, PSIMD_PAIR_HI)
-+GEN_PSIMD_PAIR_PACK(ppairo_b, target_ulong, uint16_t,
-+                    EXTRACT16, INSERT16, ELEMS_H, 0x00ff, 8,
-+                    PSIMD_PAIR_HI, PSIMD_PAIR_HI)
-+
-+GEN_PSIMD_PAIR_PACK(ppaire_h, uint64_t, uint32_t,
-+                    EXTRACT32, INSERT32, ELEMS_W, 0x0000ffff, 16,
-+                    PSIMD_PAIR_LO, PSIMD_PAIR_LO)
-+GEN_PSIMD_PAIR_PACK(ppaireo_h, target_ulong, uint32_t,
-+                    EXTRACT32, INSERT32, ELEMS_W, 0x0000ffff, 16,
-+                    PSIMD_PAIR_HI, PSIMD_PAIR_LO)
-+GEN_PSIMD_PAIR_PACK(ppairoe_h, target_ulong, uint32_t,
-+                    EXTRACT32, INSERT32, ELEMS_W, 0x0000ffff, 16,
-+                    PSIMD_PAIR_LO, PSIMD_PAIR_HI)
-+GEN_PSIMD_PAIR_PACK(ppairo_h, target_ulong, uint32_t,
-+                    EXTRACT32, INSERT32, ELEMS_W, 0x0000ffff, 16,
-+                    PSIMD_PAIR_HI, PSIMD_PAIR_HI)
-+
-+GEN_PSIMD_PAIR_WORD(ppaireo_w, 0, 1)
-+GEN_PSIMD_PAIR_WORD(ppairoe_w, 1, 0)
-+GEN_PSIMD_PAIR_WORD(ppairo_w, 1, 1)
-+
-+GEN_PSIMD_SIGN_EXTEND(psext_h_b, target_ulong, int8_t, int16_t,
-+                      EXTRACT8, INSERT16, ELEMS_H, 2)
-+GEN_PSIMD_SIGN_EXTEND(psext_w_b, uint64_t, int8_t, int32_t,
-+                      EXTRACT8, INSERT32, ELEMS_W, 4)
-+GEN_PSIMD_SIGN_EXTEND(psext_w_h, uint64_t, int16_t, int32_t,
-+                      EXTRACT16, INSERT32, ELEMS_W, 2)
-+
-+/**
-+ * REV - Reverse all bits
-+ */
-+target_ulong HELPER(rev)(CPURISCVState *env, target_ulong rs1)
++static bool require_rvp(DisasContext *ctx)
 +{
-+    target_ulong rd = 0;
++    uint32_t opcode = ctx->opcode & 0x7f;
 +
-+    for (int i = 0; i < TARGET_LONG_BITS; i++) {
-+        rd = (rd << 1) | (rs1 & 1);
-+        rs1 >>= 1;
++    if (!has_ext(ctx, RVP)) {
++        return false;
 +    }
 +
-+    return rd;
-+}
-+
-+/**
-+ * REV16 - Reverse 16-bit chunks (RV64 only)
-+ */
-+uint64_t HELPER(rev16)(CPURISCVState *env, uint64_t rs1)
-+{
-+    uint64_t rd = 0;
-+
-+    for (int i = 0; i < 4; i++) {
-+        uint16_t chunk = EXTRACT16(rs1, i);
-+        rd = (rd << 16) | chunk;
++    /*
++     * P_VXSAT_EXCP is encoded in the TB flags only when P is implemented
++     * without Zve*, where stateen0.VXSAT controls the whole OP-32 and
++     * OP-IMM-32 P instruction spaces.  When Zve* is present, this field
++     * remains NONE and vxsat access is checked by the VS path instead.
++     */
++    if ((opcode == 0x3b || opcode == 0x1b) &&
++        ctx->p_vxsat_excp != P_VXSAT_EXCP_NONE) {
++        ctx->virt_inst_excp =
++            ctx->p_vxsat_excp == P_VXSAT_EXCP_VIRTUAL;
++        return false;
 +    }
 +
-+    return rd;
++    return true;
 +}
 +
-+GEN_PSIMD_ZIP(zip8p, uint8_t, EXTRACT8, 4, 8, 3)
-+GEN_PSIMD_ZIP(zip8hp, uint8_t, EXTRACT8, 4, 8, 7)
-+GEN_PSIMD_UNZIP(unzip8p, EXTRACT8, 4, 8, 0)
-+GEN_PSIMD_UNZIP(unzip8hp, EXTRACT8, 4, 8, 1)
-+
-+GEN_PSIMD_ZIP(zip16p, uint16_t, EXTRACT16, 2, 16, 1)
-+GEN_PSIMD_ZIP(zip16hp, uint16_t, EXTRACT16, 2, 16, 3)
-+GEN_PSIMD_UNZIP(unzip16p, EXTRACT16, 2, 16, 0)
-+GEN_PSIMD_UNZIP(unzip16hp, EXTRACT16, 2, 16, 1)
-+
-+/* Merge and mask operations */
-+
-+/**
-+ * SLX - Shift left extended (concatenate rd and rs1, shift left, take upper)
-+ */
-+target_ulong HELPER(slx)(CPURISCVState *env, target_ulong rs1,
-+                         target_ulong rs2, target_ulong rd)
++static bool prepare_rvp_vxsat(DisasContext *ctx)
 +{
-+    int shamt = (TARGET_LONG_BITS == 32) ? (rs2 & 0x1F) : (rs2 & 0x3F);
-+    target_ulong xrs1 = 0;
-+    target_ulong xrd = 0;
-+
-+    if (shamt <= TARGET_LONG_BITS) {
-+        xrs1 = rs1 >> (TARGET_LONG_BITS - shamt);
-+        xrd = (rd << shamt) + xrs1;
-+    } else {
-+        xrd = rs1 << (shamt - TARGET_LONG_BITS);
++    if (!ctx->cfg_ptr->ext_zve32x) {
++        return true;
 +    }
 +
-+    return xrd;
-+}
-+
-+/**
-+ * SRX - Shift right extended (concatenate rs1 and rd, shift right, take lower)
-+ */
-+target_ulong HELPER(srx)(CPURISCVState *env, target_ulong rs1,
-+                         target_ulong rs2, target_ulong rd)
-+{
-+    int shamt = (TARGET_LONG_BITS == 32) ? (rs2 & 0x1F) : (rs2 & 0x3F);
-+    target_ulong xrs1 = 0;
-+    target_ulong xrd = 0;
-+
-+    if (shamt <= TARGET_LONG_BITS) {
-+        xrs1 = rs1 << (TARGET_LONG_BITS - shamt);
-+        xrd = (rd >> shamt) + xrs1;
-+    } else {
-+        xrd = rs1 >> (shamt - TARGET_LONG_BITS);
++    if (ctx->mstatus_vs == EXT_STATUS_DISABLED) {
++        return false;
 +    }
 +
-+    return xrd;
++    mark_vs_dirty(ctx);
++    return true;
 +}
 +
-+GEN_PSIMD_BIT_SELECT(mvm, rs2, rs1, rd)
-+GEN_PSIMD_BIT_SELECT(mvmn, rs2, rd, rs1)
-+GEN_PSIMD_BIT_SELECT(merge, rd, rs2, rs1)
++#define REQUIRE_RVP(ctx) do {             \
++    if (!require_rvp(ctx)) {              \
++        return false;                     \
++    }                                     \
++} while (0)
 +
-+GEN_PSIMD_NCLIP_PACK(pnclipp_b, int16_t, int8_t,
-+                     EXTRACT16, INSERT8, 4, signed_saturate_b)
-+GEN_PSIMD_NCLIP_PACK(pnclipup_b, uint16_t, uint8_t,
-+                     EXTRACT16, INSERT8, 4, unsigned_saturate_b)
-+GEN_PSIMD_NCLIP_PACK(pnclipp_h, int32_t, int16_t,
-+                     EXTRACT32, INSERT16, 2, signed_saturate_h)
-+GEN_PSIMD_NCLIP_PACK(pnclipup_h, uint32_t, uint16_t,
-+                     EXTRACT32, INSERT16, 2, unsigned_saturate_h)
-+GEN_PSIMD_NCLIP_PACK(pnclipp_w, int64_t, int32_t,
-+                     EXTRACT64, INSERT32_64, 1, signed_saturate_w)
-+GEN_PSIMD_NCLIP_PACK(pnclipup_w, uint64_t, uint32_t,
-+                     EXTRACT64, INSERT32_64, 1, unsigned_saturate_w)
++#define GEN_SIMD_TRANS_BODY(NAME, VXSAT)                    \
++do {                                                        \
++    REQUIRE_RVP(ctx);                                       \
++    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                 \
++        return false;                                       \
++    }                                                       \
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);             \
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);             \
++    TCGv dest = dest_gpr(ctx, a->rd);                       \
++    gen_helper_##NAME(dest, tcg_env, src1, src2);           \
++    gen_set_gpr(ctx, a->rd, dest);                          \
++    return true;                                            \
++} while (0)
 +
-+/* Count leading operations */
++#define GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)                 \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    return true;                                           \
++}
 +
-+#if TARGET_LONG_BITS == 64
-+GEN_PSIMD_CLS(cls, target_ulong, uint64_t, clrsb64)
++#define GEN_SIMD_TRANS_UNAVAILABLE_64(NAME)                 \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_64BIT(ctx);                                     \
++    return true;                                           \
++}
++
++#define GEN_SIMD_TRANS(NAME)                                \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    GEN_SIMD_TRANS_BODY(NAME, false);                       \
++}
++
++#define GEN_SIMD_TRANS_VXSAT(NAME)                         \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    GEN_SIMD_TRANS_BODY(NAME, true);                        \
++}
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_32(NAME)                             \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a)  \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    GEN_SIMD_TRANS_BODY(NAME, false);                       \
++}
++#define GEN_SIMD_TRANS_32_VXSAT(NAME)                      \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    GEN_SIMD_TRANS_BODY(NAME, true);                        \
++}
 +#else
-+GEN_PSIMD_CLS(cls, target_ulong, uint32_t, clrsb32)
++#define GEN_SIMD_TRANS_32(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#define GEN_SIMD_TRANS_32_VXSAT(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
 +#endif
 +
-+GEN_PSIMD_CLS(clsw, uint64_t, uint32_t, clrsb32)
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_64(NAME) GEN_SIMD_TRANS_UNAVAILABLE_64(NAME)
++#define GEN_SIMD_TRANS_64_VXSAT(NAME) GEN_SIMD_TRANS_UNAVAILABLE_64(NAME)
++#else
++#define GEN_SIMD_TRANS_64(NAME)                             \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a)  \
++{                                                           \
++    REQUIRE_64BIT(ctx);                                     \
++    GEN_SIMD_TRANS_BODY(NAME, false);                       \
++}
++#define GEN_SIMD_TRANS_64_VXSAT(NAME)                      \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_64BIT(ctx);                                     \
++    GEN_SIMD_TRANS_BODY(NAME, true);                        \
++}
++#endif
 +
++#define GEN_SIMD_TRANS_ACC_BODY(NAME, VXSAT)                \
++do {                                                        \
++    REQUIRE_RVP(ctx);                                       \
++    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                 \
++        return false;                                       \
++    }                                                       \
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);             \
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);             \
++    TCGv dest = dest_gpr(ctx, a->rd);                       \
++    TCGv t = tcg_temp_new();                                \
++    gen_helper_##NAME(t, tcg_env, src1, src2, dest);        \
++    gen_set_gpr(ctx, a->rd, t);                             \
++    return true;                                            \
++} while (0)
++
++#define GEN_SIMD_TRANS_ACC(NAME)                            \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    GEN_SIMD_TRANS_ACC_BODY(NAME, false);                   \
++}
++
++#define GEN_SIMD_TRANS_ACC_VXSAT(NAME)                     \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    GEN_SIMD_TRANS_ACC_BODY(NAME, true);                    \
++}
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_ACC_32(NAME)                         \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    GEN_SIMD_TRANS_ACC_BODY(NAME, false);                   \
++}
++#else
++#define GEN_SIMD_TRANS_ACC_32(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#endif
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_ACC_64(NAME) GEN_SIMD_TRANS_UNAVAILABLE_64(NAME)
++#else
++#define GEN_SIMD_TRANS_ACC_64(NAME)                         \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_64BIT(ctx);                                     \
++    GEN_SIMD_TRANS_ACC_BODY(NAME, false);                   \
++}
++#endif
++
++#define GEN_SIMD_TRANS_R1_BODY(NAME, VXSAT)                 \
++do {                                                        \
++    REQUIRE_RVP(ctx);                                       \
++    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                 \
++        return false;                                       \
++    }                                                       \
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);             \
++    TCGv dest = dest_gpr(ctx, a->rd);                       \
++    gen_helper_##NAME(dest, tcg_env, src1);                 \
++    gen_set_gpr(ctx, a->rd, dest);                          \
++    return true;                                            \
++} while (0)
++
++#define GEN_SIMD_TRANS_R1(NAME)                             \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    GEN_SIMD_TRANS_R1_BODY(NAME, false);                    \
++}
++
++#define GEN_SIMD_TRANS_R1_VXSAT(NAME)                      \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    GEN_SIMD_TRANS_R1_BODY(NAME, true);                     \
++}
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_R1_64(NAME) GEN_SIMD_TRANS_UNAVAILABLE_64(NAME)
++#define GEN_SIMD_TRANS_R1_64_VXSAT(NAME) GEN_SIMD_TRANS_UNAVAILABLE_64(NAME)
++#else
++#define GEN_SIMD_TRANS_R1_64(NAME)                          \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_64BIT(ctx);                                     \
++    GEN_SIMD_TRANS_R1_BODY(NAME, false);                    \
++}
++#define GEN_SIMD_TRANS_R1_64_VXSAT(NAME)                   \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_64BIT(ctx);                                     \
++    GEN_SIMD_TRANS_R1_BODY(NAME, true);                     \
++}
++#endif
++
++#define GEN_SIMD_TRANS_IMM_BODY(NAME, VXSAT)                \
++do {                                                        \
++    REQUIRE_RVP(ctx);                                       \
++    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                 \
++        return false;                                       \
++    }                                                       \
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);             \
++    TCGv imm = tcg_constant_tl(a->imm);                     \
++    TCGv dest = dest_gpr(ctx, a->rd);                       \
++    gen_helper_##NAME(dest, tcg_env, src1, imm);            \
++    gen_set_gpr(ctx, a->rd, dest);                          \
++    return true;                                            \
++} while (0)
++
++#define GEN_SIMD_TRANS_IMM(NAME)                            \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    GEN_SIMD_TRANS_IMM_BODY(NAME, false);                   \
++}
++
++#define GEN_SIMD_TRANS_IMM_VXSAT(NAME)                     \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    GEN_SIMD_TRANS_IMM_BODY(NAME, true);                    \
++}
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_IMM_32(NAME)                         \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    GEN_SIMD_TRANS_IMM_BODY(NAME, false);                   \
++}
++#define GEN_SIMD_TRANS_IMM_32_VXSAT(NAME)                  \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    GEN_SIMD_TRANS_IMM_BODY(NAME, true);                    \
++}
++#else
++#define GEN_SIMD_TRANS_IMM_32(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#define GEN_SIMD_TRANS_IMM_32_VXSAT(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#endif
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_IMM_64(NAME) GEN_SIMD_TRANS_UNAVAILABLE_64(NAME)
++#define GEN_SIMD_TRANS_IMM_64_VXSAT(NAME) GEN_SIMD_TRANS_UNAVAILABLE_64(NAME)
++#else
++#define GEN_SIMD_TRANS_IMM_64(NAME)                         \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_64BIT(ctx);                                     \
++    GEN_SIMD_TRANS_IMM_BODY(NAME, false);                   \
++}
++#define GEN_SIMD_TRANS_IMM_64_VXSAT(NAME)                  \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_64BIT(ctx);                                     \
++    GEN_SIMD_TRANS_IMM_BODY(NAME, true);                    \
++}
++#endif
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_REG_PAIR_SCALAR_OP(NAME, SRC2)       \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    REQUIRE_RVP(ctx);                                       \
++    TCGv_i32 src1 = get_gpr(ctx, a->rs1, EXT_NONE);         \
++    TCGv_i32 src2 = SRC2;                                   \
++    TCGv_i64 t = tcg_temp_new_i64();                        \
++    gen_helper_##NAME(t, tcg_env, src1, src2);              \
++    set_pair_regs(ctx, (a->rd) * 2, t);                     \
++    return true;                                            \
++}
++
++#define GEN_SIMD_TRANS_REG_PAIR_SCALAR(NAME) \
++    GEN_SIMD_TRANS_REG_PAIR_SCALAR_OP(NAME, get_gpr(ctx, a->rs2, EXT_NONE))
++
++#define GEN_SIMD_TRANS_REG_PAIR_SCALAR_IMM(NAME) \
++    GEN_SIMD_TRANS_REG_PAIR_SCALAR_OP(NAME, tcg_constant_i32(a->imm))
++#else
++#define GEN_SIMD_TRANS_REG_PAIR_SCALAR(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#define GEN_SIMD_TRANS_REG_PAIR_SCALAR_IMM(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#endif
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_REG_PAIR_OP(INSN, HELPER, SRC2_0, SRC2_1, VXSAT) \
++static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a)       \
++{                                                                 \
++    REQUIRE_32BIT(ctx);                                           \
++    REQUIRE_RVP(ctx);                                             \
++    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                       \
++        return false;                                             \
++    }                                                             \
++    TCGv src1_0 = get_gpr(ctx, (a->rs1) * 2, EXT_NONE);           \
++    TCGv src2_0 = SRC2_0;                                         \
++    TCGv dest_0 = dest_gpr(ctx, (a->rd) * 2);                     \
++    TCGv src1_1 = get_gpr(ctx, (a->rs1) * 2 + 1, EXT_NONE);       \
++    TCGv src2_1 = SRC2_1;                                         \
++    TCGv dest_1 = dest_gpr(ctx, (a->rd) * 2 + 1);                 \
++    gen_helper_##HELPER(dest_0, tcg_env, src1_0, src2_0);         \
++    gen_helper_##HELPER(dest_1, tcg_env, src1_1, src2_1);         \
++    gen_set_gpr(ctx, (a->rd) * 2, dest_0);                        \
++    gen_set_gpr(ctx, (a->rd) * 2 + 1, dest_1);                    \
++    return true;                                                  \
++}
++
++#define GEN_SIMD_TRANS_REG_PAIR_LANE(INSN, HELPER)                   \
++    GEN_SIMD_TRANS_REG_PAIR_OP(INSN, HELPER,                       \
++        get_gpr(ctx, (a->rs2) * 2, EXT_NONE),                     \
++        get_gpr(ctx, (a->rs2) * 2 + 1, EXT_NONE), false)
++
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_VXSAT(INSN, HELPER)            \
++    GEN_SIMD_TRANS_REG_PAIR_OP(INSN, HELPER,                       \
++        get_gpr(ctx, (a->rs2) * 2, EXT_NONE),                     \
++        get_gpr(ctx, (a->rs2) * 2 + 1, EXT_NONE), true)
++
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_IMM(INSN, HELPER)               \
++    GEN_SIMD_TRANS_REG_PAIR_OP(INSN, HELPER,                       \
++        tcg_constant_tl(a->imm), tcg_constant_tl(a->imm), false)
++
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_IMM_VXSAT(INSN, HELPER)        \
++    GEN_SIMD_TRANS_REG_PAIR_OP(INSN, HELPER,                       \
++        tcg_constant_tl(a->imm), tcg_constant_tl(a->imm), true)
++#else
++#define GEN_SIMD_TRANS_REG_PAIR_LANE(INSN, HELPER) \
++    GEN_SIMD_TRANS_UNAVAILABLE_32(INSN)
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_VXSAT(INSN, HELPER) \
++    GEN_SIMD_TRANS_UNAVAILABLE_32(INSN)
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_IMM(INSN, HELPER) \
++    GEN_SIMD_TRANS_UNAVAILABLE_32(INSN)
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_IMM_VXSAT(INSN, HELPER) \
++    GEN_SIMD_TRANS_UNAVAILABLE_32(INSN)
++#endif
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_SCALAR_OP(INSN, HELPER, VXSAT)     \
++static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a)    \
++{                                                              \
++    REQUIRE_32BIT(ctx);                                        \
++    REQUIRE_RVP(ctx);                                          \
++    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                    \
++        return false;                                          \
++    }                                                          \
++    TCGv src1_0 = get_gpr(ctx, (a->rs1) * 2, EXT_NONE);        \
++    TCGv dest_0 = dest_gpr(ctx, (a->rd) * 2);                    \
++    TCGv src1_1 = get_gpr(ctx, (a->rs1) * 2 + 1, EXT_NONE);        \
++    TCGv dest_1 = dest_gpr(ctx, (a->rd) * 2 + 1);                  \
++    TCGv src2   = get_gpr(ctx, a->rs2, EXT_NONE);              \
++    gen_helper_##HELPER(dest_0, tcg_env, src1_0, src2);        \
++    gen_helper_##HELPER(dest_1, tcg_env, src1_1, src2);        \
++    gen_set_gpr(ctx, (a->rd) * 2, dest_0);                     \
++    gen_set_gpr(ctx, (a->rd) * 2 + 1, dest_1);                 \
++    return true;                                              \
++}
++
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_SCALAR(INSN, HELPER)              \
++    GEN_SIMD_TRANS_REG_PAIR_LANE_SCALAR_OP(INSN, HELPER, false)
++
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_SCALAR_VXSAT(INSN, HELPER)       \
++    GEN_SIMD_TRANS_REG_PAIR_LANE_SCALAR_OP(INSN, HELPER, true)
++#else
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_SCALAR(INSN, HELPER) \
++    GEN_SIMD_TRANS_UNAVAILABLE_32(INSN)
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_SCALAR_VXSAT(INSN, HELPER) \
++    GEN_SIMD_TRANS_UNAVAILABLE_32(INSN)
++#endif
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_UNARY_OP(INSN, HELPER, VXSAT)     \
++static bool trans_##INSN(DisasContext *ctx, arg_##INSN * a)    \
++{                                                              \
++    REQUIRE_RVP(ctx);                                          \
++    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                    \
++        return false;                                          \
++    }                                                          \
++    TCGv src1_0 = get_gpr(ctx, (a->rs1) * 2, EXT_NONE);        \
++    TCGv dest_0 = dest_gpr(ctx, (a->rd) * 2);                  \
++    TCGv src1_1 = get_gpr(ctx, (a->rs1) * 2 + 1, EXT_NONE);    \
++    TCGv dest_1 = dest_gpr(ctx, (a->rd) * 2 + 1);              \
++    gen_helper_##HELPER(dest_0, tcg_env, src1_0);              \
++    gen_helper_##HELPER(dest_1, tcg_env, src1_1);              \
++    gen_set_gpr(ctx, (a->rd) * 2, dest_0);                     \
++    gen_set_gpr(ctx, (a->rd) * 2 + 1, dest_1);                 \
++    return true;                                               \
++}
++
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_UNARY(INSN, HELPER)               \
++    GEN_SIMD_TRANS_REG_PAIR_LANE_UNARY_OP(INSN, HELPER, false)
++
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_UNARY_VXSAT(INSN, HELPER)        \
++    GEN_SIMD_TRANS_REG_PAIR_LANE_UNARY_OP(INSN, HELPER, true)
++#else
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_UNARY(INSN, HELPER) \
++    GEN_SIMD_TRANS_UNAVAILABLE_32(INSN)
++#define GEN_SIMD_TRANS_REG_PAIR_LANE_UNARY_VXSAT(INSN, HELPER) \
++    GEN_SIMD_TRANS_UNAVAILABLE_32(INSN)
++#endif
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_REG_PAIR_ACC(NAME)                   \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    REQUIRE_RVP(ctx);                                       \
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);             \
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);             \
++    TCGv_i64 t = tcg_temp_new_i64();                        \
++    if (a->rd == 0) {                                         \
++        tcg_gen_movi_i64(t, 0);                             \
++    } else {                                                  \
++        get_pair_regs(ctx, t, (a->rd) * 2);                   \
++    }                                                       \
++    gen_helper_##NAME(t, tcg_env, src1, src2, t);           \
++    set_pair_regs(ctx, (a->rd) * 2, t);                       \
++    return true;                                           \
++}
++#else
++#define GEN_SIMD_TRANS_REG_PAIR_ACC(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#endif
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_REG_PAIR_PREDSUM(NAME)               \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    REQUIRE_RVP(ctx);                                       \
++    TCGv_i32 src1_l;                                        \
++    TCGv_i32 src1_h;                                        \
++    TCGv_i32 src2 = get_gpr(ctx, a->rs2, EXT_NONE);         \
++    TCGv_i32 dest = dest_gpr(ctx, a->rd);                   \
++    if (a->rs1 == 0) {                                        \
++        src1_l = tcg_temp_new_i32();                        \
++        src1_h = tcg_temp_new_i32();                        \
++        tcg_gen_movi_i32(src1_l, 0);                        \
++        tcg_gen_movi_i32(src1_h, 0);                        \
++    } else {                                                  \
++        src1_l = get_gpr(ctx, (a->rs1) * 2, EXT_NONE);        \
++        src1_h = get_gpr(ctx, (a->rs1) * 2 + 1, EXT_NONE);      \
++    }                                                       \
++    gen_helper_##NAME(dest, tcg_env, src1_l, src1_h, src2); \
++    gen_set_gpr(ctx, a->rd, dest);                          \
++    return true;                                           \
++}
++#else
++#define GEN_SIMD_TRANS_REG_PAIR_PREDSUM(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#endif
++
++#if defined(TARGET_RISCV32)
++#define GEN_SIMD_TRANS_PN_OP(NAME, SRC2, VXSAT)            \
++static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a) \
++{                                                           \
++    REQUIRE_32BIT(ctx);                                     \
++    REQUIRE_RVP(ctx);                                       \
++    if (VXSAT && !prepare_rvp_vxsat(ctx)) {                 \
++        return false;                                       \
++    }                                                       \
++    TCGv_i64 s1 = tcg_temp_new_i64();                       \
++    if (a->rs1 == 0) {                                      \
++        tcg_gen_mov_i64(s1, 0);                             \
++    } else {                                                \
++        get_pair_regs(ctx, s1, a->rs1 * 2);                 \
++    }                                                       \
++    TCGv src2 = SRC2;                                       \
++    TCGv dest = dest_gpr(ctx, a->rd);                       \
++    gen_helper_##NAME(dest, tcg_env, s1, src2);             \
++    gen_set_gpr(ctx, a->rd, dest);                          \
++    return true;                                            \
++}
++
++#define GEN_SIMD_TRANS_PN_OP_IMM(NAME) \
++    GEN_SIMD_TRANS_PN_OP(NAME, tcg_constant_tl(a->imm), false)
++
++#define GEN_SIMD_TRANS_PN_OP_IMM_VXSAT(NAME) \
++    GEN_SIMD_TRANS_PN_OP(NAME, tcg_constant_tl(a->imm), true)
++
++#define GEN_SIMD_TRANS_PN_OP_REG(NAME) \
++    GEN_SIMD_TRANS_PN_OP(NAME, get_gpr(ctx, a->rs2, EXT_NONE), false)
++
++#define GEN_SIMD_TRANS_PN_OP_REG_VXSAT(NAME) \
++    GEN_SIMD_TRANS_PN_OP(NAME, get_gpr(ctx, a->rs2, EXT_NONE), true)
++#else
++#define GEN_SIMD_TRANS_PN_OP_IMM(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#define GEN_SIMD_TRANS_PN_OP_IMM_VXSAT(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#define GEN_SIMD_TRANS_PN_OP_REG(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#define GEN_SIMD_TRANS_PN_OP_REG_VXSAT(NAME) GEN_SIMD_TRANS_UNAVAILABLE_32(NAME)
++#endif
++
++/* Packed SIMD - Arithmetic Operations(Non-Saturating and Saturating) */
++GEN_SIMD_TRANS(padd_b)
++GEN_SIMD_TRANS(padd_h)
++GEN_SIMD_TRANS_64(padd_w)
++GEN_SIMD_TRANS(padd_bs)
++GEN_SIMD_TRANS(padd_hs)
++GEN_SIMD_TRANS_64(padd_ws)
++GEN_SIMD_TRANS(psub_b)
++GEN_SIMD_TRANS(psub_h)
++GEN_SIMD_TRANS_64(psub_w)
++GEN_SIMD_TRANS(psh1add_h)
++GEN_SIMD_TRANS_64(psh1add_w)
++GEN_SIMD_TRANS_VXSAT(pssh1sadd_h)
++GEN_SIMD_TRANS_64_VXSAT(pssh1sadd_w)
++GEN_SIMD_TRANS_32_VXSAT(ssh1sadd)
++GEN_SIMD_TRANS_VXSAT(psadd_b)
++GEN_SIMD_TRANS_VXSAT(psadd_h)
++GEN_SIMD_TRANS_64_VXSAT(psadd_w)
++GEN_SIMD_TRANS_VXSAT(psaddu_b)
++GEN_SIMD_TRANS_VXSAT(psaddu_h)
++GEN_SIMD_TRANS_64_VXSAT(psaddu_w)
++GEN_SIMD_TRANS_32_VXSAT(sadd)
++GEN_SIMD_TRANS_32_VXSAT(saddu)
++GEN_SIMD_TRANS_VXSAT(pssub_b)
++GEN_SIMD_TRANS_VXSAT(pssub_h)
++GEN_SIMD_TRANS_64_VXSAT(pssub_w)
++GEN_SIMD_TRANS_VXSAT(pssubu_b)
++GEN_SIMD_TRANS_VXSAT(pssubu_h)
++GEN_SIMD_TRANS_64_VXSAT(pssubu_w)
++GEN_SIMD_TRANS_32_VXSAT(ssub)
++GEN_SIMD_TRANS_32_VXSAT(ssubu)
++GEN_SIMD_TRANS_IMM_VXSAT(psati_h)
++GEN_SIMD_TRANS_IMM_VXSAT(pusati_h)
++GEN_SIMD_TRANS_IMM_64_VXSAT(psati_w)
++GEN_SIMD_TRANS_IMM_64_VXSAT(pusati_w)
++GEN_SIMD_TRANS_IMM_32_VXSAT(sati_32)
++GEN_SIMD_TRANS_IMM_32_VXSAT(usati_32)
++GEN_SIMD_TRANS_IMM_64_VXSAT(sati_64)
++GEN_SIMD_TRANS_IMM_64_VXSAT(usati_64)
++
+diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
+index 2948bbb2a86..52c58e0287e 100644
+--- a/target/riscv/tcg/psimd_helper.c
++++ b/target/riscv/tcg/psimd_helper.c
+@@ -1654,3 +1654,117 @@ uint32_t HELPER(NAME)(CPURISCVState *env, uint64_t s1, uint32_t shamt)    \
+ 
+ /* Basic addition operations (non-saturating) */
+ 
++GEN_PSIMD_BINOP(padd_b, target_ulong, uint8_t, uint8_t,
++                EXTRACT8, INSERT8, ELEMS_B, PSIMD_DO_ADD)
++GEN_PSIMD_BINOP(padd_h, target_ulong, uint16_t, uint16_t,
++                EXTRACT16, INSERT16, ELEMS_H, PSIMD_DO_ADD)
++GEN_PSIMD_BINOP(padd_w, uint64_t, uint32_t, uint32_t,
++                EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_ADD)
++
++GEN_PSIMD_BINOP_SCALAR(padd_bs, target_ulong, uint8_t,
++                       EXTRACT8, INSERT8, ELEMS_B, PSIMD_DO_ADD)
++GEN_PSIMD_BINOP_SCALAR(padd_hs, target_ulong, uint16_t,
++                       EXTRACT16, INSERT16, ELEMS_H, PSIMD_DO_ADD)
++GEN_PSIMD_BINOP_SCALAR(padd_ws, uint64_t, uint32_t,
++                       EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_ADD)
++
++/* Basic subtraction operations (non-saturating) */
++
++GEN_PSIMD_BINOP(psub_b, target_ulong, uint8_t, uint8_t,
++                EXTRACT8, INSERT8, ELEMS_B, PSIMD_DO_SUB)
++GEN_PSIMD_BINOP(psub_h, target_ulong, uint16_t, uint16_t,
++                EXTRACT16, INSERT16, ELEMS_H, PSIMD_DO_SUB)
++GEN_PSIMD_BINOP(psub_w, uint64_t, uint32_t, uint32_t,
++                EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_SUB)
++
++/* Shift-left-by-one and add operations */
++
++GEN_PSIMD_SHADD(psh1add_h, target_ulong, uint16_t,
++                EXTRACT16, INSERT16, ELEMS_H, 1)
++GEN_PSIMD_SHADD(psh1add_w, uint64_t, uint32_t,
++                EXTRACT32, INSERT32, ELEMS_W, 1)
++
++GEN_PSIMD_SAT_SHADD(pssh1sadd_h, target_ulong, int16_t, int32_t,
++                    EXTRACT16, INSERT16, ELEMS_H, 1, -0x4000, 0x3fff,
++                    SAT_MIN_H, SAT_MAX_H, signed_saturate_h)
++GEN_PSIMD_SAT_SHADD(pssh1sadd_w, uint64_t, int32_t, int64_t,
++                    EXTRACT32, INSERT32, ELEMS_W, 1, -0x40000000,
++                    0x3fffffff, SAT_MIN_W, SAT_MAX_W, signed_saturate_w)
++
++GEN_PSIMD_SAT_SHADD(ssh1sadd, uint32_t, int32_t, int64_t,
++                    EXTRACT32, INSERT32, ELEMS_W, 1, -0x40000000,
++                    0x3fffffff, SAT_MIN_W, SAT_MAX_W, signed_saturate_w)
++
++/* Saturating addition operations */
++
++GEN_PSIMD_SAT_BINOP(psadd_b, target_ulong, int8_t, int32_t,
++                    EXTRACT8, INSERT8, ELEMS_B, PSIMD_DO_ADD,
++                    signed_saturate_b)
++GEN_PSIMD_SAT_BINOP(psadd_h, target_ulong, int16_t, int32_t,
++                    EXTRACT16, INSERT16, ELEMS_H, PSIMD_DO_ADD,
++                    signed_saturate_h)
++GEN_PSIMD_SAT_BINOP(psadd_w, uint64_t, int32_t, int64_t,
++                    EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_ADD,
++                    signed_saturate_w)
++
++GEN_PSIMD_SAT_BINOP(psaddu_b, target_ulong, uint8_t, uint32_t,
++                    EXTRACT8, INSERT8, ELEMS_B, PSIMD_DO_ADD,
++                    unsigned_saturate_b)
++GEN_PSIMD_SAT_BINOP(psaddu_h, target_ulong, uint16_t, uint32_t,
++                    EXTRACT16, INSERT16, ELEMS_H, PSIMD_DO_ADD,
++                    unsigned_saturate_h)
++GEN_PSIMD_SAT_BINOP(psaddu_w, uint64_t, uint32_t, uint64_t,
++                    EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_ADD,
++                    unsigned_saturate_w)
++
++GEN_PSIMD_SAT_BINOP(sadd, uint32_t, int32_t, int64_t,
++                    EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_ADD,
++                    signed_saturate_w)
++GEN_PSIMD_SAT_BINOP(saddu, uint32_t, uint32_t, uint64_t,
++                    EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_ADD,
++                    unsigned_saturate_w)
++
++/* Saturating subtraction operations */
++
++GEN_PSIMD_SAT_BINOP(pssub_b, target_ulong, int8_t, int32_t,
++                    EXTRACT8, INSERT8, ELEMS_B, PSIMD_DO_SUB,
++                    signed_saturate_b)
++GEN_PSIMD_SAT_BINOP(pssub_h, target_ulong, int16_t, int32_t,
++                    EXTRACT16, INSERT16, ELEMS_H, PSIMD_DO_SUB,
++                    signed_saturate_h)
++GEN_PSIMD_SAT_BINOP(pssub_w, uint64_t, int32_t, int64_t,
++                    EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_SUB,
++                    signed_saturate_w)
++
++GEN_PSIMD_USUB_SAT(pssubu_b, target_ulong, uint8_t,
++                   EXTRACT8, INSERT8, ELEMS_B)
++GEN_PSIMD_USUB_SAT(pssubu_h, target_ulong, uint16_t,
++                   EXTRACT16, INSERT16, ELEMS_H)
++GEN_PSIMD_USUB_SAT(pssubu_w, uint64_t, uint32_t,
++                   EXTRACT32, INSERT32, ELEMS_W)
++
++GEN_PSIMD_SAT_BINOP(ssub, uint32_t, int32_t, int64_t,
++                    EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_SUB,
++                    signed_saturate_w)
++GEN_PSIMD_USUB_SAT(ssubu, uint32_t, uint32_t,
++                   EXTRACT32, INSERT32, ELEMS_W)
++
++/* Saturation instructions (SAT, USAT) */
++
++GEN_PSIMD_SATI(psati_h, target_ulong, int16_t, int64_t,
++               EXTRACT16, INSERT16, ELEMS_H, 0x0f)
++GEN_PSIMD_USATI(pusati_h, target_ulong, int16_t, uint16_t, uint32_t,
++                EXTRACT16, INSERT16, ELEMS_H, 1U)
++GEN_PSIMD_SATI(psati_w, uint64_t, int32_t, int64_t,
++               EXTRACT32, INSERT32, ELEMS_W, 0x1f)
++GEN_PSIMD_USATI(pusati_w, uint64_t, int32_t, uint32_t, uint64_t,
++                EXTRACT32, INSERT32, ELEMS_W, 1ULL)
++GEN_PSIMD_SATI(sati_32, uint32_t, int32_t, int64_t,
++               EXTRACT32, INSERT32, ELEMS_W, 0x1f)
++GEN_PSIMD_USATI(usati_32, uint32_t, int32_t, uint32_t, uint32_t,
++                EXTRACT32, INSERT32, ELEMS_W, 1U)
++GEN_PSIMD_SATI(sati_64, uint64_t, int64_t, int64_t,
++               EXTRACT64, INSERT64, ELEMS_D, 0x3f)
++GEN_PSIMD_USATI(usati_64, uint64_t, int64_t, uint64_t, uint64_t,
++                EXTRACT64, INSERT64, ELEMS_D, 1ULL)
++
+diff --git a/target/riscv/tcg/translate.c b/target/riscv/tcg/translate.c
+index 9684dbe7528..0df9d4190f1 100644
+--- a/target/riscv/tcg/translate.c
++++ b/target/riscv/tcg/translate.c
+@@ -103,6 +103,7 @@ typedef struct DisasContext {
+     bool vstart_eq_zero;
+     bool vl_eq_vlmax;
+     bool altfmt;
++    uint8_t p_vxsat_excp;
+     CPUState *cs;
+     TCGv zero;
+     /* actual address width */
+@@ -1199,6 +1200,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvh.c.inc"
+ #include "insn_trans/trans_rvv.c.inc"
+ #include "insn_trans/trans_rvb.c.inc"
++#include "insn_trans/trans_rvp.c.inc"
+ #include "insn_trans/trans_rvzicond.c.inc"
+ #include "insn_trans/trans_rvzacas.c.inc"
+ #include "insn_trans/trans_rvzabha.c.inc"
+@@ -1333,6 +1335,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->vstart_eq_zero = FIELD_EX32(tb_flags, TB_FLAGS, VSTART_EQ_ZERO);
+     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+     ctx->altfmt = FIELD_EX64(ext_tb_flags, EXT_TB_FLAGS, ALTFMT);
++    ctx->p_vxsat_excp = FIELD_EX64(ext_tb_flags, EXT_TB_FLAGS,
++                                   P_VXSAT_EXCP);
+     ctx->misa_mxl_max = mcc->def->misa_mxl_max;
+     ctx->xl = FIELD_EX32(tb_flags, TB_FLAGS, XL);
+     ctx->address_xl = FIELD_EX32(tb_flags, TB_FLAGS, AXL);
 -- 
 2.34.1
 
