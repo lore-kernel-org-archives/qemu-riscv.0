@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0412C4451B
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:15:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1835C4450A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:15:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlDJc-000577-KN; Sat, 18 Jul 2026 18:15:24 -0400
+	id 1wlDJZ-0004qM-Js; Sat, 18 Jul 2026 18:15:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlDJV-0004aJ-43; Sat, 18 Jul 2026 18:15:17 -0400
-Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.13.214.179])
+ id 1wlDJN-0004Mz-Sm; Sat, 18 Jul 2026 18:15:13 -0400
+Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.245.243.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlDJT-0007Je-D5; Sat, 18 Jul 2026 18:15:16 -0400
+ id 1wlDJK-00077U-8C; Sat, 18 Jul 2026 18:15:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784412915; x=1815948915;
+ t=1784412906; x=1815948906;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=lSks51wnlNrgb7X5bIiCp+KrpRFYjBhNLlcNYBC5Pog=;
- b=X0TFKI7YTJ3nV9rEeueC51gPio0F7DBvbzKtcGyxxBbpoMFv+6+uIzuf
- JpKxqJcCashfe3T4OiE0V5uucDeccr0eMeaPG3k0Kjat5CbhY6KDDmdAv
- phw7JDcd4H2LIFCtgU0/lPOTtnegWqXi+HVUWq6VzCwGBE1Q/3dcNwrsH
- ZD2xl8HeKuWRxQF93aUS84gk3aUbAOcdpG27vZenLSPGPh1KRkLRlx8ZL
- 0AkfFmQ03f6+GAN/nUOVvrnG23mAl5G3ndypAXUQHbDGiykAfXGbGp24Y
- GRT6YWCj9yAthweU9ykDXXBqh3uA2Ev3TM1925avb/lusnSvLHaAWrLlz w==;
-X-CSE-ConnectionGUID: VXC+4TOLQZWKEBw+uE/CjA==
-X-CSE-MsgGUID: Ox6b6rW8QESuBPM3kvCF4g==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23905060"
-Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
- by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:15:11 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.111:28417]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.41.246:2525]
+ bh=Kn1MUAOIEK05pqPjEqHHPU7H8BZuLmOaTQp8KZvj590=;
+ b=l7N34ecfKliQqsGwd1FbiHxGTBQTw0jNEcKBekUIvenQnYFfCjVOf4KB
+ BUWKCJK9+aZmNx3V7xWtZRc8P1aEH4fSVLxPFL1cENH3cX11QkCMC9UDk
+ dJwI0cawEnT9gWrjPMkC91YntVT6Wnmj5ckowF1rwI1qmc/u2aVVKV4DO
+ mItZ8vDqdon6bc4ZadUfg37f/Cf2FlfO51Q1zAZCvrnC3+FADKnQ2I/U5
+ zHQ0DRhBdwnos+D9CFichC5kk9vkoZ3vQRk7qqv/i0nvbArY4OVDMxCif
+ O7ePs13adhujirq6e/sq2dkfxAX95qOD8XyZUV6YSXiZrPnsd29NEuPrv w==;
+X-CSE-ConnectionGUID: HlvVdsQhRLiSszKeJXKhDw==
+X-CSE-MsgGUID: bomBcti/Ryern5a1EmSkBA==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23424001"
+Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+ by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:15:02 +0000
+Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.105:16389]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.19.34:2525]
  with esmtp (Farcaster)
- id c9ca1e07-4fe8-4dc6-8dcd-7aac7ed717c8; Sat, 18 Jul 2026 22:15:11 +0000 (UTC)
-X-Farcaster-Flow-ID: c9ca1e07-4fe8-4dc6-8dcd-7aac7ed717c8
+ id 2dd8e872-f7cf-4b1b-bff4-26ff92e74a44; Sat, 18 Jul 2026 22:15:01 +0000 (UTC)
+X-Farcaster-Flow-ID: 2dd8e872-f7cf-4b1b-bff4-26ff92e74a44
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
+ EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:15:10 +0000
+ Sat, 18 Jul 2026 22:15:01 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:15:01 +0000
+ Sat, 18 Jul 2026 22:14:52 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,10 +93,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 137/137] MAINTAINERS: Add
- scripts/coccinelle/qom-parent/ under QOM
-Date: Sat, 18 Jul 2026 21:36:52 +0000
-Message-ID: <20260718213652.37673-138-graf@amazon.com>
+Subject: [RFC PATCH v2 136/137] docs/devel/qom: Document the composition-tree
+ parenting contract
+Date: Sat, 18 Jul 2026 21:36:51 +0000
+Message-ID: <20260718213652.37673-137-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -107,9 +107,9 @@ Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
 X-ClientProxiedBy: EX19D043UWC003.ant.amazon.com (10.13.139.240) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.13.214.179;
+Received-SPF: pass client-ip=44.245.243.92;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -133,28 +133,126 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Coccinelle scripts used to perform the tree-wide *_orphan()
-renames are stored under scripts/coccinelle/qom-parent/.  Add the
-directory to the QOM MAINTAINERS entry.
+Add a section to the QOM developer documentation explaining that
+every object must have a composition-tree parent before use, how
+to pick the parent (creator owns lifetime), how to name children,
+the reference-count contract for parented creators, and where the
+contract is enforced (device_set_realized, memory_region_do_init,
+qdev_connect_gpio_out_named).
 
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+ docs/devel/qom.rst | 96 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 96 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ecb8cfdc41..1f0586e71c 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3639,6 +3639,7 @@ S: Supported
- F: docs/devel/qom.rst
- F: include/qom/
- F: qapi/qom.json
-+F: scripts/coccinelle/qom-parent/
- F: scripts/coccinelle/qom-parent-type.cocci
- F: scripts/qom-cast-macro-clean-cocci-gen.py
- F: qom/
+diff --git a/docs/devel/qom.rst b/docs/devel/qom.rst
+index 935bb1004a..ffcb3333b5 100644
+--- a/docs/devel/qom.rst
++++ b/docs/devel/qom.rst
+@@ -27,6 +27,102 @@ that make up a QEMU "machine". You can view this tree by running
+ objects created by the machine itself as well those created due to
+ user configuration.
+ 
++Composition-tree parenting contract
++====================================
++
++Every QOM object that participates in the running system must have a
++composition-tree parent before it is used.  The parent gives the object
++a stable, canonical path such as ``/machine/soc/uart[0]`` that is
++visible in ``info qom-tree`` and addressable via ``qom-get`` and
++``qom-set``.  Objects that reach ``realize`` (for devices), that are
++wired to another object (for IRQ lines), or that are given a name (for
++memory regions) without a parent are programming errors.
++
++Creating parented objects
++-------------------------
++
++The standard creation helpers all take the composition-tree parent and
++the child name as their first two arguments:
++
++.. code-block:: c
++
++    Object      *object_new_child(Object *parent, const char *id,
++                                  const char *typename);
++    DeviceState *qdev_new(Object *parent, const char *id,
++                          const char *typename);
++    DeviceState *sysbus_create_simple(Object *parent, const char *id,
++                                      const char *type, hwaddr, qemu_irq);
++    PCIDevice   *pci_new(Object *parent, const char *id, ...);
++    ISADevice   *isa_new(Object *parent, const char *id, ...);
++    /* i2c_slave_new(), ssi_create_peripheral(), usb_new(),
++       cpu_create() etc. follow the same pattern. */
++
++``object_new()`` remains available as the primitive allocator for
++transient introspection objects and for ``qdev_device_add()``, which
++parents the device via ``qdev_set_id()``.  All other callers should use
++one of the parented helpers above, or ``object_initialize_child()`` for
++objects that are embedded by value in the parent's instance struct.
++
++Choosing the parent
++-------------------
++
++The QOM parent is the object that owns the child's lifetime.  In
++practice this is the object whose code is creating the child:
++
++* Board code (``MachineClass.init``) parents onboard devices to the
++  machine: ``OBJECT(machine)``.
++* A composite device's ``DeviceClass.realize`` parents the sub-devices
++  it creates to itself: ``OBJECT(dev)``.
++* An SoC container likewise parents the devices it creates to the SoC
++  object.
++
++The bus a device is plugged into is *not* its composition-tree parent.
++A device may sit on a bus owned by ``B`` without being a child of
++``B``; the bus relationship is expressed through the ``parent_bus``
++link, not the ``child<>`` property.
++
++Choosing the child name
++-----------------------
++
++* A single instance takes a bare noun: ``"uart"``, ``"gic"``, ``"rtc"``.
++* A fixed number of identical instances take an explicit index:
++  ``"uart[0]"``, ``"uart[1]"``.
++* When the caller does not care about the index, ``"uart[*]"`` lets
++  QOM allocate the next free slot in the ``uart[]`` array.
++* Address-based names such as ``"eth@0x30000000"`` should only be used
++  when the address is genuinely the identity of the device.
++
++Child names share the parent's property namespace, so avoid names that
++collide with class-defined properties of the parent (in particular,
++machine class properties visible on ``/machine``).
++
++Reference-count contract
++------------------------
++
++``object_new_child()``, ``qdev_new()`` and the per-bus creators return
++with the object's single reference held by the parent's ``child<>``
++property.  The caller does *not* hold a reference of its own and must
++therefore pair creation with plain ``qdev_realize()`` rather than
++``qdev_realize_and_unref()``.  The object is finalized when the parent
++drops its ``child<>`` property, typically via ``object_unparent()``.
++
++Enforcement
++-----------
++
++The parenting contract is enforced at the points where an unparented
++object would first become visible or entangled with another object:
++
++* ``device_set_realized()`` fails with an ``Error`` if the device has
++  no composition-tree parent.
++* ``memory_region_do_init()`` asserts that a memory region given a
++  non-empty name also has an owner.
++* ``qdev_connect_gpio_out_named()`` asserts that the outbound IRQ
++  line being connected already has a composition-tree parent.
++
++There is no ``/machine/unattached`` fallback container; an object that
++would previously have landed there now triggers one of the errors
++above instead.
++
+ Creating a QOM class
+ ====================
+ 
 -- 
 2.47.1
 
