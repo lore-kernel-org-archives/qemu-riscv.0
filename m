@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72474C4451B
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:11:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF941C4451B
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:11:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlDEr-0002nF-4T; Sat, 18 Jul 2026 18:10:29 -0400
+	id 1wlDFA-00048v-Sb; Sat, 18 Jul 2026 18:10:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlDEd-0002Wx-Fz; Sat, 18 Jul 2026 18:10:16 -0400
-Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.77.92])
+ id 1wlDF8-000401-49; Sat, 18 Jul 2026 18:10:46 -0400
+Received: from pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.12.53.23])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlDEb-0006ZK-N5; Sat, 18 Jul 2026 18:10:15 -0400
+ id 1wlDF6-0006ot-AM; Sat, 18 Jul 2026 18:10:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784412613; x=1815948613;
+ t=1784412644; x=1815948644;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=9Qn6R6pxE5AvdQsbIZhdL+G28xuxoC+uESHB8pn4JQU=;
- b=ZtPSPaWXmreIPBnYTyLwqO3WbBUrU6w7mUxJq+kU2dr7zxPYD9AeHmb4
- ZYnZ2ax3x5FMV438iDqZBHgO0+IzWOJoWAOoqm2QlphtZOHBjKk6YBPoi
- A2GMxJ7cB7V2OIl0LEfp1Gk11/wS7o3GlhLS+h6BX5/OqMF+6sXXUWq02
- /Qvb0T81YGpG/6K2Y6MubJ4zCC8yG4874z9Ifdd+jX74Qj+xVaT4w2bzl
- 9YOBZ0vt2Zrr6l+Ak52Kh3860DoOXH5nWu4zic/zzfdLNxtYSfQwC6Dyy
- shBG2a6nWAUrR+JXBnaLn/lwU34oJOtd531N7xmixb9lgCEev2QBWa1KO A==;
-X-CSE-ConnectionGUID: 0Vx/TroqSRiAP/Thw0Aq+A==
-X-CSE-MsgGUID: 8+BGN2RJTuGWy5lPVNy4vQ==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23918132"
-Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
- by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:10:09 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.111:15151]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.30.230:2525]
+ bh=MBBs+r4D9ciSt9jJWEKbWpQa5N9YAToQOfGqPWyypko=;
+ b=mlBRBarcqJjjD6l6DpuPUfb5q7EKp8dHrDr/YioAgAnVzncFvhqWRpLe
+ oO8qxVm4Y8/UQTgxZ1+YyrQnj0ddAz2Rk6qQDjm8Tw/SGo3lEjmIYnokz
+ WPnCfLdpDTDtF0g+KPaASk/iI0gx/muTjv+lSVPYczt7NovfKPY8OXvcn
+ vec485+1nKJaYuQ1ek58xvnLoSqRxXNOCVa5/lCj6f0aOQ/AZ4XcC3VmH
+ YEJZMEgHlBMCuYMaWOacJN/bfcoOoSpFHY4GnsEfEen+1oX7v+Dxf5QpQ
+ /LYFJC3LzHe5DnPr/QUaRUqYDFb3kGeItgJhE5fgVvNJCOWbLpswxaA8p Q==;
+X-CSE-ConnectionGUID: B5fxCVjdQ72D+nla9K5uVA==
+X-CSE-MsgGUID: STLuVnsbTLeqUtl9rQQ6Ag==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23795955"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:10:40 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.111:22030]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.199:2525]
  with esmtp (Farcaster)
- id 84d3792a-25d4-4505-ae8c-01ddd0eac50e; Sat, 18 Jul 2026 22:10:09 +0000 (UTC)
-X-Farcaster-Flow-ID: 84d3792a-25d4-4505-ae8c-01ddd0eac50e
+ id bd32d152-e438-4285-8d5c-6547172343b7; Sat, 18 Jul 2026 22:10:40 +0000 (UTC)
+X-Farcaster-Flow-ID: bd32d152-e438-4285-8d5c-6547172343b7
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
  EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:10:09 +0000
+ Sat, 18 Jul 2026 22:10:40 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:09:59 +0000
+ Sat, 18 Jul 2026 22:10:30 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,10 +93,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 119/137] accel: Parent the accelerator singleton under
- /machine
-Date: Sat, 18 Jul 2026 21:36:34 +0000
-Message-ID: <20260718213652.37673-120-graf@amazon.com>
+Subject: [RFC PATCH v2 120/137] hw/intc/mips_gic: Register reset handler at
+ realize, not instance_init
+Date: Sat, 18 Jul 2026 21:36:35 +0000
+Message-ID: <20260718213652.37673-121-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -105,18 +105,18 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D036UWC003.ant.amazon.com (10.13.139.214) To
+X-ClientProxiedBy: EX19D039UWB002.ant.amazon.com (10.13.138.79) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.77.92;
+Received-SPF: pass client-ip=52.12.53.23;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
 X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ RCVD_IN_MSPIKE_H2=-0.01, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -133,37 +133,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-do_configure_accelerator() runs after qemu_create_machine(), so
-current_machine is available.  Give the AccelState singleton a
-canonical path at /machine/accel and drop the floating caller
-reference; on init failure, unparent instead of unref.
+mips_gic_init() calls qemu_register_reset(gic_reset, s), but there is
+no matching qemu_unregister_reset() in an instance_finalize.  This
+leaks a reset handler every time the type is introspected via
+device-list-properties (object_new + object_unref).  The following
+patch makes each legacy reset handler visible in the composition tree
+under /machine/reset-container/legacy-reset[*], which turns this
+pre-existing leak into a device-introspect-test failure.
+
+Move the registration to mips_gic_realize(), matching every other
+in-tree interrupt controller.
 
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- accel/accel-system.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ hw/intc/mips_gic.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/accel/accel-system.c b/accel/accel-system.c
-index 9176665202..987c982c16 100644
---- a/accel/accel-system.c
-+++ b/accel/accel-system.c
-@@ -41,12 +41,14 @@ int accel_init_machine(AccelState *accel, MachineState *ms)
-     AccelClass *acc = ACCEL_GET_CLASS(accel);
-     int ret;
-     ms->accelerator = accel;
-+    object_property_add_child(OBJECT(ms), "accel", OBJECT(accel));
-+    object_unref(OBJECT(accel));
-     *(acc->allowed) = true;
-     ret = acc->init_machine(accel, ms);
-     if (ret < 0) {
-         ms->accelerator = NULL;
-         *(acc->allowed) = false;
--        object_unref(OBJECT(accel));
-+        object_unparent(OBJECT(accel));
-     } else {
-         object_set_accelerator_compat_props(acc->compat_props);
+diff --git a/hw/intc/mips_gic.c b/hw/intc/mips_gic.c
+index 4777c70d6b..c0f1501bcc 100644
+--- a/hw/intc/mips_gic.c
++++ b/hw/intc/mips_gic.c
+@@ -394,7 +394,6 @@ static void mips_gic_init(Object *obj)
+     memory_region_init_io(&s->mr, OBJECT(s), &gic_ops, s,
+                           "mips-gic", GIC_ADDRSPACE_SZ);
+     sysbus_init_mmio(sbd, &s->mr);
+-    qemu_register_reset(gic_reset, s);
+ }
+ 
+ static void mips_gic_realize(DeviceState *dev, Error **errp)
+@@ -430,6 +429,7 @@ static void mips_gic_realize(DeviceState *dev, Error **errp)
+     for (i = 0; i < s->num_irq; i++) {
+         s->irq_state[i].irq = qdev_get_gpio_in(dev, i);
      }
++    qemu_register_reset(gic_reset, s);
+ }
+ 
+ static const Property mips_gic_properties[] = {
 -- 
 2.47.1
 
