@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B8CC44521
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:46:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C65C4450A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:47:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlCrE-0000HH-JR; Sat, 18 Jul 2026 17:46:04 -0400
+	id 1wlCrn-0002Aq-PJ; Sat, 18 Jul 2026 17:46:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCqv-0007zB-VL; Sat, 18 Jul 2026 17:45:46 -0400
+ id 1wlCrW-0001nx-UJ; Sat, 18 Jul 2026 17:46:23 -0400
 Received: from pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com
  ([35.155.198.111])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCqr-0003FY-Ri; Sat, 18 Jul 2026 17:45:45 -0400
+ id 1wlCrU-0003Jx-Ru; Sat, 18 Jul 2026 17:46:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784411141; x=1815947141;
+ t=1784411180; x=1815947180;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=fZD1WnZ0mWfdYta3eAgKsSlaPes0ejnsjEdNg73jO0E=;
- b=n8S5TWWH+Mep8UtIPw/9Y4K6dYQx1dKphTN4K8yOsn7bQuhNn5QegPde
- q/yp/TgHoigfOtG+33NSbzXLYRVgeDijdbqXJqAkDxG6DqXDcEd+dnDe7
- UGUtHcyFRbW1kcJM+h2iBzLtBJAClFDqq7SR3IB3Uxzh70geRrGbSH/8Z
- DvHKhBICp3KFirsJ8IEbgB/66x97gSaS069b7+2fy6HADPKz0wqij4sdt
- G8j+eywAzwBth5xX3k4VgECbShqNVdoAl84QHxHSmCzQ/Sazyz3yPJtlP
- ckQ9I9rkEI93Gvr/ki4ycA+SpMzncYfkzxWde/BaH+w/qVfummgwyJwGn w==;
-X-CSE-ConnectionGUID: RykFZm12TDaiJWDsTXK77g==
-X-CSE-MsgGUID: y1xc5WjvR/Kyi7oMD+KUXg==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23816452"
-Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+ bh=tcpsK52XFqezXpOlLJQb4X1gXgJtDN+MPTQXfo8z5K8=;
+ b=gqSvN/lf9Uk/bVk+RCY3Z5+Rk0IGsXXlELwT0r3rXNtAs1ivoNV/5oSE
+ OrptaiWpu4x9OB003I4FfNr+QB/nBtJLEuYGh88rVVchT6z4Rc9GohxVs
+ xaqDlrCMAv0Bttyrzig0Ps54GrUN5vbz0kKTpGCwwdtcnOXmWT01h60Uw
+ upbhOUnosaka5H5VxU/cuKMyhYXanOo2ITDSoc8y/XG8L6uwV62FH1WTL
+ u+Pw8Kpt3vVhpfCyvjQcZFPp1oxGQjD/PQ2QDxETDVY9pOs9+Y6Ui1rdx
+ gfObNpO6MOrYOK+aNLXQ9WVC5qBaiQHDVEkuiMKktO/GpuckNr01g8Npx g==;
+X-CSE-ConnectionGUID: xmhSenv8T+e8GhNC+Km8sA==
+X-CSE-MsgGUID: 1KgPUGwDQHiHnfOc9lmR3g==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23816486"
+Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
  by internal-pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:45:36 +0000
-Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.182:4708]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.29.147:2525]
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:46:17 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:29621]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.35.17:2525]
  with esmtp (Farcaster)
- id 66dce21b-701e-40f8-8f56-3074698cc1ab; Sat, 18 Jul 2026 21:45:36 +0000 (UTC)
-X-Farcaster-Flow-ID: 66dce21b-701e-40f8-8f56-3074698cc1ab
+ id 845e8aec-94d3-454e-9bd4-98384038b8d8; Sat, 18 Jul 2026 21:46:16 +0000 (UTC)
+X-Farcaster-Flow-ID: 845e8aec-94d3-454e-9bd4-98384038b8d8
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA001.ant.amazon.com (10.250.64.217) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:45:36 +0000
+ Sat, 18 Jul 2026 21:46:16 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:45:26 +0000
+ Sat, 18 Jul 2026 21:46:07 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,18 +93,18 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 031/137] hw/hexagon: Give onboard devices a QOM parent
-Date: Sat, 18 Jul 2026 21:35:06 +0000
-Message-ID: <20260718213652.37673-32-graf@amazon.com>
+Subject: [RFC PATCH v2 033/137] hw/display: Give onboard devices a QOM parent
+Date: Sat, 18 Jul 2026 21:35:08 +0000
+Message-ID: <20260718213652.37673-34-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
  <20260718213652.37673-1-graf@amazon.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D046UWB003.ant.amazon.com (10.13.139.174) To
+X-ClientProxiedBy: EX19D039UWB004.ant.amazon.com (10.13.138.57) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
 Received-SPF: pass client-ip=35.155.198.111;
  envelope-from=prvs=65292d44c=graf@amazon.de;
@@ -132,7 +132,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/hexagon to the new
+Convert the *_orphan() device-creation calls in hw/display to the new
 parented API introduced earlier in this series, so every onboard
 device gets a stable path in the composition tree instead of landing
 in /machine/unattached with an unstable device[N] name.
@@ -143,97 +143,77 @@ composite children.  Names follow existing QOM conventions.
 
 Per-site rationale (reviewers: dispute the modeling here):
 
-hw/hexagon/hexagon_dsp.c:134 | qdev_new | OBJECT(machine) | "global-regs" | board init helper; collapse existing object_property_add_child()
-hw/hexagon/hexagon_dsp.c:141 | qdev_new | OBJECT(machine) | "tlb" | board init helper; collapse existing object_property_add_child()
-hw/hexagon/virt.c:132 | qdev_new | OBJECT(vms) | "uart" | board-init helper receives HexagonVirtMachineState*; drop const on vms
-hw/hexagon/virt.c:271 | qdev_new | OBJECT(ms) | "global-regs" | board init; collapse existing object_property_add_child()
-hw/hexagon/virt.c:277 | qdev_new | OBJECT(ms) | "tlb" | board init; collapse existing object_property_add_child()
+hw/display/sii9022.c:167 | i2c_slave_create_simple | OBJECT(dev) | "ddc" | DeviceClass.realize(); DDC slave owned by sii9022 device
+hw/display/sm501.c:1913 | qdev_new | OBJECT(dev) | "ddc" | sm501_init() helper receives realizing DeviceState *dev; drop _and_unref
+hw/display/xlnx_dp.c:1349 | qdev_new | obj | "dpcd" | instance_init(Object *obj); collapse existing add_child+unref, keep name
+hw/display/xlnx_dp.c:1353 | qdev_new | obj | "edid" | instance_init(Object *obj); collapse existing add_child+unref, keep name
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/hexagon/hexagon_dsp.c | 12 +++++-------
- hw/hexagon/virt.c        | 16 +++++++---------
- 2 files changed, 12 insertions(+), 16 deletions(-)
+ hw/display/sii9022.c |  2 +-
+ hw/display/sm501.c   |  4 ++--
+ hw/display/xlnx_dp.c | 14 +++-----------
+ 3 files changed, 6 insertions(+), 14 deletions(-)
 
-diff --git a/hw/hexagon/hexagon_dsp.c b/hw/hexagon/hexagon_dsp.c
-index 712749cda8..ccd9a06f51 100644
---- a/hw/hexagon/hexagon_dsp.c
-+++ b/hw/hexagon/hexagon_dsp.c
-@@ -131,18 +131,16 @@ static void hexagon_common_init(MachineState *machine, Rev_t rev,
-                            machine->ram_size, &error_fatal);
-     memory_region_add_subregion(address_space, 0x0, &hms->ram);
+diff --git a/hw/display/sii9022.c b/hw/display/sii9022.c
+index 0bf49195d7..2accebf193 100644
+--- a/hw/display/sii9022.c
++++ b/hw/display/sii9022.c
+@@ -164,7 +164,7 @@ static void sii9022_realize(DeviceState *dev, Error **errp)
+     I2CBus *bus;
  
--    glob_regs_dev = qdev_new_orphan(TYPE_HEXAGON_GLOBALREG);
--    object_property_add_child(OBJECT(machine), "global-regs",
--                              OBJECT(glob_regs_dev));
-+    glob_regs_dev = qdev_new(OBJECT(machine), "global-regs",
-+                             TYPE_HEXAGON_GLOBALREG);
-     qdev_prop_set_uint64(glob_regs_dev, "config-table-addr", m_cfg->cfgbase);
-     qdev_prop_set_uint32(glob_regs_dev, "dsp-rev", rev);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(glob_regs_dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(glob_regs_dev), &error_fatal);
- 
--    tlb_dev = qdev_new_orphan(TYPE_HEXAGON_TLB);
--    object_property_add_child(OBJECT(machine), "tlb", OBJECT(tlb_dev));
-+    tlb_dev = qdev_new(OBJECT(machine), "tlb", TYPE_HEXAGON_TLB);
-     qdev_prop_set_uint32(tlb_dev, "num-entries",
-                          m_cfg->cfgtable.jtlb_size_entries);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(tlb_dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(tlb_dev), &error_fatal);
- 
-     for (int i = 0; i < machine->smp.cpus; i++) {
-         HexagonCPU *cpu = HEXAGON_CPU(object_new(machine->cpu_type));
-diff --git a/hw/hexagon/virt.c b/hw/hexagon/virt.c
-index a7a6a8fbeb..0619f06c41 100644
---- a/hw/hexagon/virt.c
-+++ b/hw/hexagon/virt.c
-@@ -116,7 +116,7 @@ static int32_t fdt_add_clocks(const HexagonVirtMachineState *vms)
-     return clk_phandle;
+     bus = I2C_BUS(qdev_get_parent_bus(dev));
+-    i2c_slave_create_simple_orphan(bus, TYPE_I2CDDC, 0x50);
++    i2c_slave_create_simple(OBJECT(dev), "ddc", bus, TYPE_I2CDDC, 0x50);
  }
  
--static void fdt_add_uart(const HexagonVirtMachineState *vms, int uart,
-+static void fdt_add_uart(HexagonVirtMachineState *vms, int uart,
-                          int32_t clk_phandle)
- {
-     char *nodename;
-@@ -129,11 +129,11 @@ static void fdt_add_uart(const HexagonVirtMachineState *vms, int uart,
-     DeviceState *dev;
-     SysBusDevice *s;
+ static void sii9022_class_init(ObjectClass *klass, const void *data)
+diff --git a/hw/display/sm501.c b/hw/display/sm501.c
+index 1e47e6a32b..56075a0303 100644
+--- a/hw/display/sm501.c
++++ b/hw/display/sm501.c
+@@ -1956,9 +1956,9 @@ static void sm501_init(SM501State *s, DeviceState *dev,
+     /* i2c */
+     s->i2c_bus = i2c_init_bus(dev, "sm501.i2c");
+     /* ddc */
+-    I2CDDCState *ddc = I2CDDC(qdev_new_orphan(TYPE_I2CDDC));
++    I2CDDCState *ddc = I2CDDC(qdev_new(OBJECT(dev), "ddc", TYPE_I2CDDC));
+     i2c_slave_set_address(I2C_SLAVE(ddc), 0x50);
+-    qdev_realize_and_unref(DEVICE(ddc), BUS(s->i2c_bus), &error_abort);
++    qdev_realize(DEVICE(ddc), BUS(s->i2c_bus), &error_abort);
  
--    dev = qdev_new_orphan(TYPE_PL011);
-+    dev = qdev_new(OBJECT(vms), "uart", TYPE_PL011);
-     s = SYS_BUS_DEVICE(dev);
-     qdev_prop_set_chr(dev, "chardev", serial_hd(0));
-     qdev_connect_clock_in(dev, "clk", vms->apb_clk);
--    sysbus_realize_and_unref(s, &error_fatal);
-+    sysbus_realize(s, &error_fatal);
-     sysbus_mmio_map(s, 0, base);
+     /* mmio */
+     memory_region_init(&s->mmio_region, OBJECT(dev), "sm501.mmio", MMIO_SIZE);
+diff --git a/hw/display/xlnx_dp.c b/hw/display/xlnx_dp.c
+index e8490d644d..5968466e79 100644
+--- a/hw/display/xlnx_dp.c
++++ b/hw/display/xlnx_dp.c
+@@ -1341,19 +1341,11 @@ static void xlnx_dp_init(Object *obj)
+      */
+     s->aux_bus = aux_bus_init(DEVICE(obj), "aux");
  
-     nodename = g_strdup_printf("/pl011@%" PRIx64, base);
-@@ -268,17 +268,15 @@ static void virt_init(MachineState *ms)
-                                 &vms->parent_obj.cfgtable_rom);
-     fdt_add_hvx(vms, m_cfg);
+-    /*
+-     * Initialize DPCD and EDID. Once we have added the objects as
+-     * child properties of this device, we can drop the reference we
+-     * hold to them, leaving the child-property as the only reference.
+-     */
+-    s->dpcd = DPCD(qdev_new_orphan("dpcd"));
+-    object_property_add_child(OBJECT(s), "dpcd", OBJECT(s->dpcd));
+-    object_unref(s->dpcd);
++    /* Initialize DPCD and EDID. */
++    s->dpcd = DPCD(qdev_new(obj, "dpcd", "dpcd"));
  
--    gsregs_dev = qdev_new_orphan(TYPE_HEXAGON_GLOBALREG);
--    object_property_add_child(OBJECT(ms), "global-regs", OBJECT(gsregs_dev));
-+    gsregs_dev = qdev_new(OBJECT(ms), "global-regs", TYPE_HEXAGON_GLOBALREG);
-     qdev_prop_set_uint64(gsregs_dev, "config-table-addr", m_cfg->cfgbase);
-     qdev_prop_set_uint32(gsregs_dev, "dsp-rev", v68_rev);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(gsregs_dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(gsregs_dev), &error_fatal);
+-    s->edid = I2CDDC(qdev_new_orphan("i2c-ddc"));
++    s->edid = I2CDDC(qdev_new(obj, "edid", "i2c-ddc"));
+     i2c_slave_set_address(I2C_SLAVE(s->edid), 0x50);
+-    object_property_add_child(OBJECT(s), "edid", OBJECT(s->edid));
+-    object_unref(s->edid);
  
--    tlb_dev = qdev_new_orphan(TYPE_HEXAGON_TLB);
--    object_property_add_child(OBJECT(ms), "tlb", OBJECT(tlb_dev));
-+    tlb_dev = qdev_new(OBJECT(ms), "tlb", TYPE_HEXAGON_TLB);
-     qdev_prop_set_uint32(tlb_dev, "num-entries",
-                          m_cfg->cfgtable.jtlb_size_entries);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(tlb_dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(tlb_dev), &error_fatal);
- 
-     cpu0 = NULL;
-     for (int i = 0; i < ms->smp.cpus; i++) {
+     fifo8_create(&s->rx_fifo, 16);
+     fifo8_create(&s->tx_fifo, 16);
 -- 
 2.47.1
 
