@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D977C4450A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24513C4450A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:52:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlCwq-0003l1-Vo; Sat, 18 Jul 2026 17:51:53 -0400
+	id 1wlCvx-0001bI-H5; Sat, 18 Jul 2026 17:50:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCwm-0003Oa-SZ; Sat, 18 Jul 2026 17:51:48 -0400
-Received: from pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.1.125])
+ id 1wlCvu-0001WZ-BJ; Sat, 18 Jul 2026 17:50:54 -0400
+Received: from pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.42.203.116])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCwi-0003wJ-MZ; Sat, 18 Jul 2026 17:51:47 -0400
+ id 1wlCvs-0003qk-1l; Sat, 18 Jul 2026 17:50:54 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784411504; x=1815947504;
+ t=1784411452; x=1815947452;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=67o+dJAgMQu4a2nxLUqSwMFvCmm75QaSyZHK2B38t+w=;
- b=BQBbI61PTl+3jfLIdEw2xePxeKWtWeA5AC9/1LF2mHCWaUelOwFrGTRK
- OR+QLSZcFYKYblqpeZd+j+aWfb/5pFAc/vTwaTZRgVdTs8csnsrvWlY/E
- plMklVJuFwUXqwd9zf1tfiZrWcIT4ZjjFGt8xqV9G53/MTCR47LWF5gFi
- XrxqUz6n1tJp6rzuGQGrtgNsyK0bf/qSDGSz6t50tlMYyWgtKVHF0kyqk
- TST4ZcGViPMPBVvY3rQPdGQA6p64JHzCfwXUQ5RmaG5vp6IUTxGDL/VA+
- ePvrdtM/8pXsg6zWpPDzZ/3iplebQ6hpT/ZG4oNyDRnUg6cfWeusLfoPQ g==;
-X-CSE-ConnectionGUID: gV/eL2z7TiaVoogTVDcu0w==
-X-CSE-MsgGUID: Vp4X2s1AT/eZG9QH79vJ0w==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23927224"
-Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
- by internal-pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:51:40 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.51:25143]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.19.34:2525]
+ bh=+RNJaiqptSSrIdptc8tdkEhBXcnP9xpkHfL4NA622Zo=;
+ b=IvWDkXYggu7gL1XhbW7S2JvTKEANxLiXTW+vkcJAeAO6vefL13TG/n0B
+ bkVnoPWXtjl4j1WZLKm43ZCDh4Z96hsZMYH9EooNPt/xt6Ah/Bj3J41XD
+ cVjN5sxty4oJbdDKhaia0JHDoLQwdXsVyibX0KJo2o83cK1V+RaggJb1T
+ xwkz02SNDzokJNlX3GP+pwXj7P7ywlqSRsLBxtJ7v/D8uu9WSAjb2Hy6n
+ o7c5u0htGlrNAXnLfQbZ/axR3F3Qs4wotzG08gTHDdCT+3wbXEBFRck0b
+ V0hoB7ahoc29+/uihNChcTk/NCCOZoiFmNbvW6XTerHfa9N4lIeK9xLTL g==;
+X-CSE-ConnectionGUID: mukdyU+ZSBi8tenxBzs+1g==
+X-CSE-MsgGUID: 1S+k1wGwSzeygliDisBLHg==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23939800"
+Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+ by internal-pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:50:49 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:5917]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.30.230:2525]
  with esmtp (Farcaster)
- id 65468b4d-094d-46a7-9bfd-88bfa8e7db87; Sat, 18 Jul 2026 21:51:40 +0000 (UTC)
-X-Farcaster-Flow-ID: 65468b4d-094d-46a7-9bfd-88bfa8e7db87
+ id 9914b55e-c942-4ae4-b510-999ad951e746; Sat, 18 Jul 2026 21:50:49 +0000 (UTC)
+X-Farcaster-Flow-ID: 9914b55e-c942-4ae4-b510-999ad951e746
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:51:40 +0000
+ Sat, 18 Jul 2026 21:50:48 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:51:30 +0000
+ Sat, 18 Jul 2026 21:50:39 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,9 +93,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 053/137] hw/mips: Give onboard devices a QOM parent
-Date: Sat, 18 Jul 2026 21:35:28 +0000
-Message-ID: <20260718213652.37673-54-graf@amazon.com>
+Subject: [RFC PATCH v2 050/137] hw/isa: Give onboard devices a QOM parent
+Date: Sat, 18 Jul 2026 21:35:25 +0000
+Message-ID: <20260718213652.37673-51-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -104,11 +104,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D031UWC002.ant.amazon.com (10.13.139.212) To
+X-ClientProxiedBy: EX19D039UWB001.ant.amazon.com (10.13.138.119) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.1.125;
+Received-SPF: pass client-ip=52.42.203.116;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -132,7 +132,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/mips to the new
+Convert the *_orphan() device-creation calls in hw/isa to the new
 parented API introduced earlier in this series, so every onboard
 device gets a stable path in the composition tree instead of landing
 in /machine/unattached with an unstable device[N] name.
@@ -143,386 +143,142 @@ composite children.  Names follow existing QOM conventions.
 
 Per-site rationale (reviewers: dispute the modeling here):
 
-hw/mips/boston.c:435 | qdev_new | parent | "pcie[*]" | static helper called 3x from board init; thread Object *parent as first arg
-hw/mips/boston.c:691 | qdev_new | OBJECT(machine) | "boston" | board MachineClass.init()
-hw/mips/boston.c:773 | pci_create_simple_multifunction | OBJECT(machine) | "ahci" | board MachineClass.init()
-hw/mips/fuloong2e.c:289 | pci_new_multifunction | OBJECT(machine) | "via" | board MachineClass.init()
-hw/mips/fuloong2e.c:315 | pci_new | OBJECT(machine) | "vga" | board MachineClass.init()
-hw/mips/jazz.c:130 | qdev_new | parent | "dp8393x" | static helper called from board init; thread Object *parent as first arg
-hw/mips/jazz.c:292 | isa_new | OBJECT(machine) | "pcspk" | board MachineClass.init() helper receiving MachineState*
-hw/mips/jazz.c:299 | qdev_new | OBJECT(machine) | "g364" | board MachineClass.init() helper receiving MachineState*
-hw/mips/jazz.c:316 | qdev_new | OBJECT(machine) | "vga" | board MachineClass.init() helper receiving MachineState*
-hw/mips/jazz.c:332 | qdev_new | OBJECT(machine) | "esp" | board MachineClass.init() helper receiving MachineState*
-hw/mips/jazz.c:363 | qdev_new | OBJECT(machine) | "i8042" | board MachineClass.init() helper receiving MachineState*
-hw/mips/jazz.c:393 | qdev_new | OBJECT(machine) | "nvram" | board MachineClass.init() helper receiving MachineState*
-hw/mips/jazz.c:399 | sysbus_create_simple | OBJECT(machine) | "led" | board MachineClass.init() helper receiving MachineState*
-hw/mips/loongson3_virt.c:427 | qdev_new | OBJECT(machine) | "pcie" | inline helper receiving MachineState* from board init
-hw/mips/loongson3_virt.c:468 | pci_create_simple | OBJECT(machine) | "ohci" | inline helper receiving MachineState* from board init
-hw/mips/loongson3_virt.c:471 | usb_create_simple | OBJECT(machine) | "usb-kbd" | inline helper receiving MachineState* from board init
-hw/mips/loongson3_virt.c:472 | usb_create_simple | OBJECT(machine) | "usb-tablet" | inline helper receiving MachineState* from board init
-hw/mips/loongson3_virt.c:522 | qdev_new | OBJECT(machine) | "ipi" | board MachineClass.init()
-hw/mips/loongson3_virt.c:530 | qdev_new | OBJECT(machine) | "liointc" | board MachineClass.init()
-hw/mips/loongson3_virt.c:539 | sysbus_create_simple | OBJECT(machine) | "rtc" | board MachineClass.init()
-hw/mips/malta.c:1101 | qdev_new | OBJECT(machine) | "malta" | board MachineClass.init()
-hw/mips/malta.c:1230 | qdev_new | OBJECT(machine) | "gt64120" | board MachineClass.init()
-hw/mips/malta.c:1237 | pci_new_multifunction | OBJECT(machine) | "piix4" | board MachineClass.init()
-hw/mips/malta.c:1257 | isa_create_simple | OBJECT(machine) | "superio" | board MachineClass.init()
+hw/isa/i82378.c:106 | isa_new | OBJECT(s) | "pcspk" | i82378_realize() creates ISA children of the i82378 PCI-ISA bridge
+hw/isa/i82378.c:113 | isa_create_simple | OBJECT(s) | "dma" | i82378_realize() creates ISA children of the i82378 PCI-ISA bridge
+hw/isa/isa-bus.c:62 | qdev_new_orphan | ORPHAN-JUSTIFIED | - | fallback isabus-bridge when caller passes dev==NULL; parenting requires isa_bus_new() signature change across many callers, deferred
+hw/isa/isa-bus.c:174 | isa_new_orphan | ORPHAN-JUSTIFIED | - | API definition (transitional _orphan wrapper)
+hw/isa/isa-bus.c:176 | qdev_new_orphan | ORPHAN-JUSTIFIED | - | API definition body of isa_new_orphan()
+hw/isa/isa-bus.c:179 | isa_try_new_orphan | ORPHAN-JUSTIFIED | - | API definition (transitional _orphan wrapper)
+hw/isa/isa-bus.c:181 | qdev_try_new_orphan | ORPHAN-JUSTIFIED | - | API definition body of isa_try_new_orphan()
+hw/isa/isa-bus.c:184 | isa_create_simple_orphan | ORPHAN-JUSTIFIED | - | API definition (transitional _orphan wrapper)
+hw/isa/isa-bus.c:188 | isa_new_orphan | ORPHAN-JUSTIFIED | - | API definition body of isa_create_simple_orphan()
+hw/isa/isa-bus.c:208 | isa_create_simple_orphan | ORPHAN-JUSTIFIED | - | isa_vga_init() is a public helper called from board code (hw/i386/pc.c); needs Object *parent threaded through include/hw/isa/isa.h; deferred to caller-side patch
+hw/isa/isa-bus.c:213 | isa_create_simple_orphan | ORPHAN-JUSTIFIED | - | isa_vga_init() is a public helper called from board code; deferred to caller-side patch
+hw/isa/isa-superio.c:57 | isa_new | OBJECT(dev) | name | isa_superio_realize(); collapse existing object_property_add_child(OBJECT(dev), name, ...) keeping dynamic per-index name
+hw/isa/isa-superio.c:96 | isa_new | OBJECT(dev) | name | isa_superio_realize(); collapse existing object_property_add_child(OBJECT(dev), name, ...) keeping dynamic per-index name
+hw/isa/isa-superio.c:123 | isa_new | OBJECT(sio) | "isa-fdc" | isa_superio_realize(); collapse existing object_property_add_child(OBJECT(sio), "isa-fdc", ...)
+hw/isa/isa-superio.c:147 | isa_new | OBJECT(sio) | TYPE_I8042 | isa_superio_realize(); collapse existing object_property_add_child(OBJECT(sio), TYPE_I8042, ...)
+hw/isa/isa-superio.c:154 | isa_new | OBJECT(sio) | "isa-ide" | isa_superio_realize(); collapse existing object_property_add_child(OBJECT(sio), "isa-ide", ...)
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/mips/boston.c         | 21 +++++++++++----------
- hw/mips/fuloong2e.c      |  9 +++++----
- hw/mips/jazz.c           | 36 +++++++++++++++++++-----------------
- hw/mips/loongson3_virt.c | 22 ++++++++++++----------
- hw/mips/malta.c          | 16 +++++++++-------
- 5 files changed, 56 insertions(+), 48 deletions(-)
+ hw/isa/i82378.c      |  6 +++---
+ hw/isa/isa-superio.c | 25 ++++++++++---------------
+ 2 files changed, 13 insertions(+), 18 deletions(-)
 
-diff --git a/hw/mips/boston.c b/hw/mips/boston.c
-index 770160c4e5..a156b218fb 100644
---- a/hw/mips/boston.c
-+++ b/hw/mips/boston.c
-@@ -424,7 +424,7 @@ static const struct fit_loader boston_fit_loader = {
- };
+diff --git a/hw/isa/i82378.c b/hw/isa/i82378.c
+index da09d869f5..1c0a6ad779 100644
+--- a/hw/isa/i82378.c
++++ b/hw/isa/i82378.c
+@@ -103,14 +103,14 @@ static void i82378_realize(PCIDevice *pci, Error **errp)
+     pit = i8254_pit_init(isabus, 0x40, 0, NULL);
  
- static inline XilinxPCIEHost *
--xilinx_pcie_init(MemoryRegion *sys_mem, uint32_t bus_nr,
-+xilinx_pcie_init(Object *parent, MemoryRegion *sys_mem, uint32_t bus_nr,
-                  hwaddr cfg_base, uint64_t cfg_size,
-                  hwaddr mmio_base, uint64_t mmio_size,
-                  qemu_irq irq)
-@@ -432,7 +432,7 @@ xilinx_pcie_init(MemoryRegion *sys_mem, uint32_t bus_nr,
-     DeviceState *dev;
-     MemoryRegion *cfg, *mmio;
- 
--    dev = qdev_new_orphan(TYPE_XILINX_PCIE_HOST);
-+    dev = qdev_new(parent, "pcie[*]", TYPE_XILINX_PCIE_HOST);
- 
-     qdev_prop_set_uint32(dev, "bus_nr", bus_nr);
-     qdev_prop_set_uint64(dev, "cfg_base", cfg_base);
-@@ -440,7 +440,7 @@ xilinx_pcie_init(MemoryRegion *sys_mem, uint32_t bus_nr,
-     qdev_prop_set_uint64(dev, "mmio_base", mmio_base);
-     qdev_prop_set_uint64(dev, "mmio_size", mmio_size);
- 
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     cfg = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
-     memory_region_add_subregion_overlap(sys_mem, cfg_base, cfg, 0);
-@@ -688,8 +688,8 @@ static void boston_mach_init(MachineState *machine)
-         exit(1);
-     }
- 
--    dev = qdev_new_orphan(TYPE_BOSTON);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    dev = qdev_new(OBJECT(machine), "boston", TYPE_BOSTON);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     s = BOSTON(dev);
-     s->mach = machine;
-@@ -727,21 +727,21 @@ static void boston_mach_init(MachineState *machine)
-                              MIN(machine->ram_size, (256 * MiB)));
-     memory_region_add_subregion_overlap(sys_mem, 0, ddr_low_alias, 0);
- 
--    xilinx_pcie_init(sys_mem, 0,
-+    xilinx_pcie_init(OBJECT(machine), sys_mem, 0,
-                      boston_memmap[BOSTON_PCIE0].base,
-                      boston_memmap[BOSTON_PCIE0].size,
-                      boston_memmap[BOSTON_PCIE0_MMIO].base,
-                      boston_memmap[BOSTON_PCIE0_MMIO].size,
-                      get_cps_irq(&s->cps, 2));
- 
--    xilinx_pcie_init(sys_mem, 1,
-+    xilinx_pcie_init(OBJECT(machine), sys_mem, 1,
-                      boston_memmap[BOSTON_PCIE1].base,
-                      boston_memmap[BOSTON_PCIE1].size,
-                      boston_memmap[BOSTON_PCIE1_MMIO].base,
-                      boston_memmap[BOSTON_PCIE1_MMIO].size,
-                      get_cps_irq(&s->cps, 1));
- 
--    pcie2 = xilinx_pcie_init(sys_mem, 2,
-+    pcie2 = xilinx_pcie_init(OBJECT(machine), sys_mem, 2,
-                              boston_memmap[BOSTON_PCIE2].base,
-                              boston_memmap[BOSTON_PCIE2].size,
-                              boston_memmap[BOSTON_PCIE2_MMIO].base,
-@@ -770,8 +770,9 @@ static void boston_mach_init(MachineState *machine)
-     qemu_chr_fe_set_handlers(&s->lcd_display, NULL, NULL,
-                              boston_lcd_event, NULL, s, NULL, true);
- 
--    pdev = pci_create_simple_multifunction_orphan(&PCI_BRIDGE(&pcie2->root)->sec_bus,
--                                           PCI_DEVFN(0, 0), TYPE_ICH9_AHCI);
-+    pdev = pci_create_simple_multifunction(OBJECT(machine), "ahci",
-+                                    &PCI_BRIDGE(&pcie2->root)->sec_bus,
-+                                    PCI_DEVFN(0, 0), TYPE_ICH9_AHCI);
-     ich9 = ICH9_AHCI(pdev);
-     g_assert(ARRAY_SIZE(hd) == ich9->ahci.ports);
-     ide_drive_get(hd, ich9->ahci.ports);
-diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
-index 0046423d40..88d2901829 100644
---- a/hw/mips/fuloong2e.c
-+++ b/hw/mips/fuloong2e.c
-@@ -286,7 +286,8 @@ static void mips_fuloong2e_init(MachineState *machine)
-     pci_bus = bonito_init(OBJECT(machine), (qemu_irq *)&(env->irq[2]));
- 
-     /* South bridge -> IP5 */
--    pci_dev = pci_new_multifunction_orphan(PCI_DEVFN(FULOONG2E_VIA_SLOT, 0),
-+    pci_dev = pci_new_multifunction(OBJECT(machine), "via",
-+                                    PCI_DEVFN(FULOONG2E_VIA_SLOT, 0),
-                                     TYPE_VT82C686B_ISA);
- 
-     /* Set properties on individual devices before realizing the south bridge */
-@@ -295,7 +296,7 @@ static void mips_fuloong2e_init(MachineState *machine)
-         qdev_prop_set_string(dev, "audiodev", machine->audiodev);
-     }
- 
--    pci_realize_and_unref(pci_dev, pci_bus, &error_abort);
-+    qdev_realize(DEVICE(pci_dev), BUS(pci_bus), &error_abort);
- 
-     object_property_add_alias(OBJECT(machine), "rtc-time",
-                               object_resolve_path_component(OBJECT(pci_dev),
-@@ -312,12 +313,12 @@ static void mips_fuloong2e_init(MachineState *machine)
-     /* GPU */
-     if (vga_interface_type != VGA_NONE) {
-         vga_interface_created = true;
--        pci_dev = pci_new_orphan(-1, "ati-vga");
-+        pci_dev = pci_new(OBJECT(machine), "vga", -1, "ati-vga");
-         dev = DEVICE(pci_dev);
-         qdev_prop_set_uint32(dev, "vgamem_mb", 16);
-         qdev_prop_set_uint16(dev, "x-device-id", 0x5159);
-         qdev_prop_set_uint64(dev, "x-linear-aper-size", 16 * MiB);
--        pci_realize_and_unref(pci_dev, pci_bus, &error_fatal);
-+        qdev_realize(DEVICE(pci_dev), BUS(pci_bus), &error_fatal);
-     }
- 
-     /* Populate SPD eeprom data */
-diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
-index 31ef357554..208e59fbeb 100644
---- a/hw/mips/jazz.c
-+++ b/hw/mips/jazz.c
-@@ -113,7 +113,8 @@ static const MemoryRegionOps dma_dummy_ops = {
-     .endianness = DEVICE_NATIVE_ENDIAN,
- };
- 
--static void mips_jazz_init_net(IOMMUMemoryRegion *rc4030_dma_mr,
-+static void mips_jazz_init_net(Object *parent,
-+                               IOMMUMemoryRegion *rc4030_dma_mr,
-                                DeviceState *rc4030, MemoryRegion *dp8393x_prom)
- {
-     DeviceState *dev;
-@@ -127,14 +128,14 @@ static void mips_jazz_init_net(IOMMUMemoryRegion *rc4030_dma_mr,
+     /* speaker */
+-    pcspk = isa_new_orphan(TYPE_PC_SPEAKER);
++    pcspk = isa_new(OBJECT(s), "pcspk", TYPE_PC_SPEAKER);
+     object_property_set_link(OBJECT(pcspk), "pit", OBJECT(pit), &error_fatal);
+-    if (!isa_realize_and_unref(pcspk, isabus, errp)) {
++    if (!qdev_realize(DEVICE(pcspk), BUS(isabus), errp)) {
          return;
      }
  
--    dev = qdev_new_orphan("dp8393x");
-+    dev = qdev_new(parent, "dp8393x", "dp8393x");
-     qdev_set_nic_properties(dev, nd);
-     qdev_prop_set_uint8(dev, "it_shift", 2);
-     qdev_prop_set_bit(dev, "big_endian", TARGET_BIG_ENDIAN);
-     object_property_set_link(OBJECT(dev), "dma_mr",
-                              OBJECT(rc4030_dma_mr), &error_abort);
-     sysbus = SYS_BUS_DEVICE(dev);
--    sysbus_realize_and_unref(sysbus, &error_fatal);
-+    sysbus_realize(sysbus, &error_fatal);
-     sysbus_mmio_map(sysbus, 0, 0x80001000);
-     sysbus_connect_irq(sysbus, 0, qdev_get_gpio_in(rc4030, 4));
- 
-@@ -289,16 +290,16 @@ static void mips_jazz_init(MachineState *machine,
-     isa_bus_register_input_irqs(isa_bus, i8259);
-     i8257_dma_init(OBJECT(rc4030), isa_bus, 0);
-     pit = i8254_pit_init(isa_bus, 0x40, 0, NULL);
--    pcspk = isa_new_orphan(TYPE_PC_SPEAKER);
-+    pcspk = isa_new(OBJECT(machine), "pcspk", TYPE_PC_SPEAKER);
-     object_property_set_link(OBJECT(pcspk), "pit", OBJECT(pit), &error_fatal);
--    isa_realize_and_unref(pcspk, isa_bus, &error_fatal);
-+    qdev_realize(DEVICE(pcspk), BUS(isa_bus), &error_fatal);
- 
-     /* Video card */
-     switch (jazz_model) {
-     case JAZZ_MAGNUM:
--        dev = qdev_new_orphan("sysbus-g364");
-+        dev = qdev_new(OBJECT(machine), "g364", "sysbus-g364");
-         sysbus = SYS_BUS_DEVICE(dev);
--        sysbus_realize_and_unref(sysbus, &error_fatal);
-+        sysbus_realize(sysbus, &error_fatal);
-         sysbus_mmio_map(sysbus, 0, 0x60080000);
-         sysbus_mmio_map(sysbus, 1, 0x40000000);
-         sysbus_connect_irq(sysbus, 0, qdev_get_gpio_in(rc4030, 3));
-@@ -313,10 +314,10 @@ static void mips_jazz_init(MachineState *machine,
-         }
-         break;
-     case JAZZ_PICA61:
--        dev = qdev_new_orphan(TYPE_VGA_MMIO);
-+        dev = qdev_new(OBJECT(machine), "vga", TYPE_VGA_MMIO);
-         qdev_prop_set_uint8(dev, "it_shift", 0);
-         sysbus = SYS_BUS_DEVICE(dev);
--        sysbus_realize_and_unref(sysbus, &error_fatal);
-+        sysbus_realize(sysbus, &error_fatal);
-         sysbus_mmio_map(sysbus, 0, 0x60000000);
-         sysbus_mmio_map(sysbus, 1, 0x400a0000);
-         sysbus_mmio_map(sysbus, 2, VBE_DISPI_LFB_PHYSICAL_ADDRESS);
-@@ -326,10 +327,10 @@ static void mips_jazz_init(MachineState *machine,
-     }
- 
-     /* Network controller */
--    mips_jazz_init_net(rc4030_dma_mr, rc4030, dp8393x_prom);
-+    mips_jazz_init_net(OBJECT(machine), rc4030_dma_mr, rc4030, dp8393x_prom);
- 
-     /* SCSI adapter */
--    dev = qdev_new_orphan(TYPE_SYSBUS_ESP);
-+    dev = qdev_new(OBJECT(machine), "esp", TYPE_SYSBUS_ESP);
-     sysbus_esp = SYSBUS_ESP(dev);
-     esp = &sysbus_esp->esp;
-     esp->dma_memory_read = rc4030_dma_read;
-@@ -340,7 +341,7 @@ static void mips_jazz_init(MachineState *machine,
-     esp->dma_enabled = 1;
- 
-     sysbus = SYS_BUS_DEVICE(dev);
--    sysbus_realize_and_unref(sysbus, &error_fatal);
-+    sysbus_realize(sysbus, &error_fatal);
-     sysbus_connect_irq(sysbus, 0, qdev_get_gpio_in(rc4030, 5));
-     sysbus_mmio_map(sysbus, 0, 0x80002000);
- 
-@@ -360,10 +361,10 @@ static void mips_jazz_init(MachineState *machine,
-     memory_region_add_subregion(address_space, 0x80004000, rtc);
- 
-     /* Keyboard (i8042) */
--    i8042 = I8042_MMIO(qdev_new_orphan(TYPE_I8042_MMIO));
-+    i8042 = I8042_MMIO(qdev_new(OBJECT(machine), "i8042", TYPE_I8042_MMIO));
-     qdev_prop_set_uint64(DEVICE(i8042), "mask", 1);
-     qdev_prop_set_uint32(DEVICE(i8042), "size", 0x1000);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(i8042), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(i8042), &error_fatal);
- 
-     qdev_connect_gpio_out(DEVICE(i8042), I8042_KBD_IRQ,
-                           qdev_get_gpio_in(rc4030, 6));
-@@ -390,13 +391,14 @@ static void mips_jazz_init(MachineState *machine,
-     /* FIXME: missing Jazz sound at 0x8000c000, rc4030[2] */
- 
-     /* NVRAM */
--    dev = qdev_new_orphan("ds1225y");
-+    dev = qdev_new(OBJECT(machine), "nvram", "ds1225y");
-     sysbus = SYS_BUS_DEVICE(dev);
--    sysbus_realize_and_unref(sysbus, &error_fatal);
-+    sysbus_realize(sysbus, &error_fatal);
-     sysbus_mmio_map(sysbus, 0, 0x80009000);
- 
-     /* LED indicator */
--    sysbus_create_simple_orphan("jazz-led", 0x8000f000, NULL);
-+    sysbus_create_simple(OBJECT(machine), "led", "jazz-led",
-+                         0x8000f000, NULL);
- 
-     g_free(dmas);
+     /* 2 82C37 (dma) */
+-    isa_create_simple_orphan(isabus, "i82374");
++    isa_create_simple(OBJECT(s), "dma", isabus, "i82374");
  }
-diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
-index 6f2ac8ba90..9ab1edceb2 100644
---- a/hw/mips/loongson3_virt.c
-+++ b/hw/mips/loongson3_virt.c
-@@ -424,8 +424,8 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
-     MachineClass *mc = MACHINE_GET_CLASS(machine);
-     LoongsonMachineState *s = LOONGSON_MACHINE(machine);
  
--    dev = qdev_new_orphan(TYPE_GPEX_HOST);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    dev = qdev_new(OBJECT(machine), "pcie", TYPE_GPEX_HOST);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
-     pci_bus = PCI_HOST_BRIDGE(dev)->bus;
- 
-     s->ecam_alias = g_new0(MemoryRegion, 1);
-@@ -465,11 +465,12 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
-     if (defaults_enabled() && object_class_by_name("pci-ohci")) {
-         USBBus *usb_bus;
- 
--        pci_create_simple_orphan(pci_bus, -1, "pci-ohci");
-+        pci_create_simple(OBJECT(machine), "ohci", pci_bus, -1, "pci-ohci");
-         usb_bus = USB_BUS(object_resolve_type_unambiguous(TYPE_USB_BUS,
-                                                           &error_abort));
--        usb_create_simple_orphan(usb_bus, "usb-kbd");
--        usb_create_simple_orphan(usb_bus, "usb-tablet");
-+        usb_create_simple(OBJECT(machine), "usb-kbd", usb_bus, "usb-kbd");
-+        usb_create_simple(OBJECT(machine), "usb-tablet", usb_bus,
-+                          "usb-tablet");
+ static void i82378_init(Object *obj)
+diff --git a/hw/isa/isa-superio.c b/hw/isa/isa-superio.c
+index 2d65255f34..d0c3c1dbd3 100644
+--- a/hw/isa/isa-superio.c
++++ b/hw/isa/isa-superio.c
+@@ -54,7 +54,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
+             } else {
+                 name = g_strdup_printf("parallel%d", i);
+             }
+-            isa = isa_new_orphan(TYPE_ISA_PARALLEL);
++            isa = isa_new(OBJECT(dev), name, TYPE_ISA_PARALLEL);
+             d = DEVICE(isa);
+             qdev_prop_set_uint32(d, "index", i);
+             if (k->parallel.get_iobase) {
+@@ -65,8 +65,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
+                 qdev_prop_set_uint32(d, "irq", k->parallel.get_irq(sio, i));
+             }
+             qdev_prop_set_chr(d, "chardev", chr);
+-            object_property_add_child(OBJECT(dev), name, OBJECT(isa));
+-            isa_realize_and_unref(isa, bus, &error_fatal);
++            qdev_realize(DEVICE(isa), BUS(bus), &error_fatal);
+             sio->parallel[i] = isa;
+             trace_superio_create_parallel(i,
+                                           k->parallel.get_iobase ?
+@@ -93,7 +92,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
+             } else {
+                 name = g_strdup_printf("serial%d", i);
+             }
+-            isa = isa_new_orphan(TYPE_ISA_SERIAL);
++            isa = isa_new(OBJECT(dev), name, TYPE_ISA_SERIAL);
+             d = DEVICE(isa);
+             qdev_prop_set_uint32(d, "index", i);
+             if (k->serial.get_iobase) {
+@@ -104,8 +103,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
+                 qdev_prop_set_uint32(d, "irq", k->serial.get_irq(sio, i));
+             }
+             qdev_prop_set_chr(d, "chardev", chr);
+-            object_property_add_child(OBJECT(dev), name, OBJECT(isa));
+-            isa_realize_and_unref(isa, bus, &error_fatal);
++            qdev_realize(DEVICE(isa), BUS(bus), &error_fatal);
+             sio->serial[i] = isa;
+             trace_superio_create_serial(i,
+                                         k->serial.get_iobase ?
+@@ -120,7 +118,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
+     assert(k->floppy.count <= 1);
+     if (k->floppy.count &&
+         (!k->floppy.is_enabled || k->floppy.is_enabled(sio, 0))) {
+-        isa = isa_new_orphan(TYPE_ISA_FDC);
++        isa = isa_new(OBJECT(sio), "isa-fdc", TYPE_ISA_FDC);
+         d = DEVICE(isa);
+         if (k->floppy.get_iobase) {
+             qdev_prop_set_uint32(d, "iobase", k->floppy.get_iobase(sio, 0));
+@@ -132,8 +130,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
+         for (i = 0; i < MAX_FD; i++) {
+             fd[i] = drive_get(IF_FLOPPY, 0, i);
+         }
+-        object_property_add_child(OBJECT(sio), "isa-fdc", OBJECT(isa));
+-        isa_realize_and_unref(isa, bus, &error_fatal);
++        qdev_realize(DEVICE(isa), BUS(bus), &error_fatal);
+         isa_fdc_init_drives(isa, fd);
+         sio->floppy = isa;
+         trace_superio_create_floppy(0,
+@@ -144,14 +141,13 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
      }
  
-     pci_init_nic_devices(pci_bus, mc->default_nic);
-@@ -519,16 +520,16 @@ static void mips_loongson3_virt_init(MachineState *machine)
+     /* Keyboard, mouse */
+-    isa = isa_new_orphan(TYPE_I8042);
+-    object_property_add_child(OBJECT(sio), TYPE_I8042, OBJECT(isa));
+-    isa_realize_and_unref(isa, bus, &error_fatal);
++    isa = isa_new(OBJECT(sio), TYPE_I8042, TYPE_I8042);
++    qdev_realize(DEVICE(isa), BUS(bus), &error_fatal);
+     sio->kbc = isa;
  
-     memory_region_init(iocsr, OBJECT(machine), "loongson3.iocsr", UINT32_MAX);
- 
--    ipi = qdev_new_orphan(TYPE_LOONGSON_IPI);
-+    ipi = qdev_new(OBJECT(machine), "ipi", TYPE_LOONGSON_IPI);
-     qdev_prop_set_uint32(ipi, "num-cpu", machine->smp.cpus);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(ipi), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(ipi), &error_fatal);
-     memory_region_add_subregion(iocsr, SMP_IPI_MAILBOX,
-                             sysbus_mmio_get_region(SYS_BUS_DEVICE(ipi), 0));
-     memory_region_add_subregion(iocsr, MAIL_SEND_ADDR,
-                             sysbus_mmio_get_region(SYS_BUS_DEVICE(ipi), 1));
- 
--    liointc = qdev_new_orphan("loongson.liointc");
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(liointc), &error_fatal);
-+    liointc = qdev_new(OBJECT(machine), "liointc", "loongson.liointc");
-+    sysbus_realize(SYS_BUS_DEVICE(liointc), &error_fatal);
- 
-     sysbus_mmio_map(SYS_BUS_DEVICE(liointc), 0, virt_memmap[VIRT_LIOINTC].base);
- 
-@@ -536,7 +537,8 @@ static void mips_loongson3_virt_init(MachineState *machine)
-                    qdev_get_gpio_in(liointc, UART_IRQ), 115200, serial_hd(0),
-                    DEVICE_LITTLE_ENDIAN);
- 
--    sysbus_create_simple_orphan("goldfish_rtc", virt_memmap[VIRT_RTC].base,
-+    sysbus_create_simple(OBJECT(machine), "rtc", "goldfish_rtc",
-+                         virt_memmap[VIRT_RTC].base,
-                          qdev_get_gpio_in(liointc, RTC_IRQ));
- 
-     cpuclk = clock_new(OBJECT(machine), "cpu-refclk");
-diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-index ea11299af8..ebd1456657 100644
---- a/hw/mips/malta.c
-+++ b/hw/mips/malta.c
-@@ -1098,8 +1098,8 @@ void mips_malta_init(MachineState *machine)
-     PCIDevice *piix4;
-     DeviceState *dev;
- 
--    s = MIPS_MALTA(qdev_new_orphan(TYPE_MIPS_MALTA));
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(s), &error_fatal);
-+    s = MIPS_MALTA(qdev_new(OBJECT(machine), "malta", TYPE_MIPS_MALTA));
-+    sysbus_realize(SYS_BUS_DEVICE(s), &error_fatal);
- 
-     /* create CPU */
-     mips_create_cpu(machine, s, &cbus_irq, &i8259_irq);
-@@ -1227,16 +1227,17 @@ void mips_malta_init(MachineState *machine)
-     stl_p(memory_region_get_ram_ptr(bios_copy) + 0x10, 0x00000420);
- 
-     /* Northbridge */
--    dev = qdev_new_orphan("gt64120");
-+    dev = qdev_new(OBJECT(machine), "gt64120", "gt64120");
-     qdev_prop_set_bit(dev, "cpu-little-endian", !TARGET_BIG_ENDIAN);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
-     pci_bus = PCI_BUS(qdev_get_child_bus(dev, "pci"));
-     pci_bus_map_irqs(pci_bus, malta_pci_slot_get_pirq);
- 
-     /* Southbridge */
--    piix4 = pci_new_multifunction_orphan(PIIX4_PCI_DEVFN, TYPE_PIIX4_PCI_DEVICE);
-+    piix4 = pci_new_multifunction(OBJECT(machine), "piix4",
-+                                  PIIX4_PCI_DEVFN, TYPE_PIIX4_PCI_DEVICE);
-     qdev_prop_set_uint32(DEVICE(piix4), "smb_io_base", 0x1100);
--    pci_realize_and_unref(piix4, pci_bus, &error_fatal);
-+    qdev_realize(DEVICE(piix4), BUS(pci_bus), &error_fatal);
-     isa_bus = ISA_BUS(qdev_get_child_bus(DEVICE(piix4), "isa.0"));
- 
-     dev = DEVICE(object_resolve_path_component(OBJECT(piix4), "ide"));
-@@ -1254,7 +1255,8 @@ void mips_malta_init(MachineState *machine)
-     g_free(smbus_eeprom_buf);
- 
-     /* Super I/O: SMS FDC37M817 */
--    isa_create_simple_orphan(isa_bus, TYPE_FDC37M81X_SUPERIO);
-+    isa_create_simple(OBJECT(machine), "superio", isa_bus,
-+                      TYPE_FDC37M81X_SUPERIO);
- 
-     /* Network card */
-     network_init(pci_bus);
+     /* IDE */
+     if (k->ide.count && (!k->ide.is_enabled || k->ide.is_enabled(sio, 0))) {
+-        isa = isa_new_orphan("isa-ide");
++        isa = isa_new(OBJECT(sio), "isa-ide", "isa-ide");
+         d = DEVICE(isa);
+         if (k->ide.get_iobase) {
+             qdev_prop_set_uint32(d, "iobase", k->ide.get_iobase(sio, 0));
+@@ -162,8 +158,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
+         if (k->ide.get_irq) {
+             qdev_prop_set_uint32(d, "irq", k->ide.get_irq(sio, 0));
+         }
+-        object_property_add_child(OBJECT(sio), "isa-ide", OBJECT(isa));
+-        isa_realize_and_unref(isa, bus, &error_fatal);
++        qdev_realize(DEVICE(isa), BUS(bus), &error_fatal);
+         sio->ide = isa;
+         trace_superio_create_ide(0,
+                                  k->ide.get_iobase ?
 -- 
 2.47.1
 
