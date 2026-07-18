@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F650C4451B
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:45:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92E24C44521
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:45:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlCqB-000779-8A; Sat, 18 Jul 2026 17:44:59 -0400
+	id 1wlCqL-0007I5-4R; Sat, 18 Jul 2026 17:45:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCq4-0006zK-Qn; Sat, 18 Jul 2026 17:44:53 -0400
-Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.13.214.179])
+ id 1wlCqD-0007BW-AM; Sat, 18 Jul 2026 17:45:01 -0400
+Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.245.243.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCq2-0002xn-2j; Sat, 18 Jul 2026 17:44:52 -0400
+ id 1wlCqB-0002yF-Db; Sat, 18 Jul 2026 17:45:01 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784411090; x=1815947090;
+ t=1784411099; x=1815947099;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=IlAfRgTZKqxlJXJg22OA6rDJEPP0BNN9PWbpHGMM0ic=;
- b=Ek5C8vC4wloyjooQ+bbb8bjWsWcEXyraqAsrdi2UtNq0q0YyqLBOdSep
- jhdKXphJLgLTCRx1rj8LxOnuD2c7kyhggP5DQTd2tMudClCGSKlaXDxXp
- kdTwVd7QUzworsPIt84SdzfjsxMbYqD7F57sHLNNm/q2vxAu5WdZ3XHhz
- ldCWGVmFPcdvAV1t22PQu2ubyOQZ4cJF6rv2Al8jzoIRh1Pc4cIplzVAA
- O81gXV3Fy6OJyelyv4f2a1IRDaWdQ+U3VGPtzB43Na9e9lSa/+xZNeULG
- JU27cFtwN0jC17VdAoFdLVH3pIUks77xwuRmRSPP3zYxNSsNin0DpsVC+ A==;
-X-CSE-ConnectionGUID: 72KlE3H2SLWn/GxwSbecig==
-X-CSE-MsgGUID: AZes84UNTRy5RQlJ5GuiOg==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23903681"
+ bh=qVCl/LGYfL4UCle58yHXW8mCdP/ph3jgnSmOc1JYYvo=;
+ b=ZhkIruUSOh3piSQKjvyBkYCv7yWqrr2JZRCA4RM3InDbNQnWf9i8rp9u
+ +p3lVBRAWvgKSWxec4JUYIw3VxztDuIrlSgrhCAOX6mTTayC/zRpP27mJ
+ CV/tzv1oh2QOxFSRiaC3T6uYVsCeZpn7TDpp5YkzonDG2sAS7hR2L0orl
+ kpSkNjHD8VYSo0GTCkpb8kx6bCwEyUINeYUhuQUQJfyjiTspLvOcjTcYk
+ DV7oeBkLWYLqVoy2VIFLAK0IcqwVUVhJqBnB/NLWw0qEEudemqdMSj4Gw
+ QWxDMXetYQ2r8necpMc4+0YgOcPYDl8R/cVmMYeQ7ZKQk3gS3m51H9Pvp A==;
+X-CSE-ConnectionGUID: 7j7rb7PISgqsU1wtkjzSIw==
+X-CSE-MsgGUID: rJ+oC4gXQ96g7IvRC437ig==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23422691"
 Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:44:46 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:2512]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.0.115:2525]
+ by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:44:55 +0000
+Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.234:3753]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.151:2525]
  with esmtp (Farcaster)
- id 75caf168-7a0d-4d7d-89f9-717c82ef29a9; Sat, 18 Jul 2026 21:44:46 +0000 (UTC)
-X-Farcaster-Flow-ID: 75caf168-7a0d-4d7d-89f9-717c82ef29a9
+ id 3a5ed661-dd78-4c44-992b-09c3c211baf5; Sat, 18 Jul 2026 21:44:55 +0000 (UTC)
+X-Farcaster-Flow-ID: 3a5ed661-dd78-4c44-992b-09c3c211baf5
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
+ EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:44:46 +0000
+ Sat, 18 Jul 2026 21:44:55 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:44:36 +0000
+ Sat, 18 Jul 2026 21:44:46 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,9 +93,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 028/137] hw/vfio: Give onboard devices a QOM parent
-Date: Sat, 18 Jul 2026 21:35:03 +0000
-Message-ID: <20260718213652.37673-29-graf@amazon.com>
+Subject: [RFC PATCH v2 029/137] hw/mem: Give onboard devices a QOM parent
+Date: Sat, 18 Jul 2026 21:35:04 +0000
+Message-ID: <20260718213652.37673-30-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -106,9 +106,9 @@ Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
 X-ClientProxiedBy: EX19D035UWB002.ant.amazon.com (10.13.138.97) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.13.214.179;
+Received-SPF: pass client-ip=44.245.243.92;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -132,7 +132,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/vfio to the new
+Convert the *_orphan() device-creation calls in hw/mem to the new
 parented API introduced earlier in this series, so every onboard
 device gets a stable path in the composition tree instead of landing
 in /machine/unattached with an unstable device[N] name.
@@ -143,31 +143,64 @@ composite children.  Names follow existing QOM conventions.
 
 Per-site rationale (reviewers: dispute the modeling here):
 
-hw/vfio/igd.c:337 | pci_create_simple | OBJECT(vdev) | "igd-lpc-bridge" | Called from IGD quirk during vfio-pci realize; the LPC stub is created by and lives with the passed-through IGD device
+hw/mem/sparse-mem.c:111 | qdev_new | parent (new arg) | "sparse-mem" | Public helper; thread Object *parent through. Only caller is generic_fuzz which passes qdev_get_machine()
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/vfio/igd.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ hw/mem/sparse-mem.c             | 6 +++---
+ include/hw/mem/sparse-mem.h     | 2 +-
+ tests/qtest/fuzz/generic_fuzz.c | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/hw/vfio/igd.c b/hw/vfio/igd.c
-index bea0d57a11..aee40646ed 100644
---- a/hw/vfio/igd.c
-+++ b/hw/vfio/igd.c
-@@ -334,8 +334,9 @@ static int vfio_pci_igd_lpc_init(VFIOPCIDevice *vdev,
-     lpc_bridge = pci_find_device(pci_device_root_bus(pdev),
-                                  0, PCI_DEVFN(0x1f, 0));
-     if (!lpc_bridge) {
--        lpc_bridge = pci_create_simple_orphan(pci_device_root_bus(pdev),
--                                 PCI_DEVFN(0x1f, 0), "vfio-pci-igd-lpc-bridge");
-+        lpc_bridge = pci_create_simple(OBJECT(vdev), "igd-lpc-bridge",
-+                                       pci_device_root_bus(pdev),
-+                                       PCI_DEVFN(0x1f, 0), "vfio-pci-igd-lpc-bridge");
-     }
+diff --git a/hw/mem/sparse-mem.c b/hw/mem/sparse-mem.c
+index 3310504578..fbf94eb8e7 100644
+--- a/hw/mem/sparse-mem.c
++++ b/hw/mem/sparse-mem.c
+@@ -104,14 +104,14 @@ static const Property sparse_mem_properties[] = {
+     DEFINE_PROP_UINT64("maxsize", SparseMemState, maxsize, 10 * MiB),
+ };
  
-     ret = vfio_pci_igd_copy(vdev, lpc_bridge, info, igd_lpc_bridge_infos,
+-MemoryRegion *sparse_mem_init(uint64_t addr, uint64_t length)
++MemoryRegion *sparse_mem_init(Object *parent, uint64_t addr, uint64_t length)
+ {
+     DeviceState *dev;
+ 
+-    dev = qdev_new_orphan(TYPE_SPARSE_MEM);
++    dev = qdev_new(parent, "sparse-mem", TYPE_SPARSE_MEM);
+     qdev_prop_set_uint64(dev, "baseaddr", addr);
+     qdev_prop_set_uint64(dev, "length", length);
+-    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     sysbus_mmio_map_overlap(SYS_BUS_DEVICE(dev), 0, addr, -10000);
+     return &SPARSE_MEM(dev)->mmio;
+ }
+diff --git a/include/hw/mem/sparse-mem.h b/include/hw/mem/sparse-mem.h
+index f9863b154b..79c30cf412 100644
+--- a/include/hw/mem/sparse-mem.h
++++ b/include/hw/mem/sparse-mem.h
+@@ -14,6 +14,6 @@
+ #define SPARSE_MEM_H
+ #define TYPE_SPARSE_MEM "sparse-mem"
+ 
+-MemoryRegion *sparse_mem_init(uint64_t addr, uint64_t length);
++MemoryRegion *sparse_mem_init(Object *parent, uint64_t addr, uint64_t length);
+ 
+ #endif
+diff --git a/tests/qtest/fuzz/generic_fuzz.c b/tests/qtest/fuzz/generic_fuzz.c
+index e48f868775..99b38a7fd4 100644
+--- a/tests/qtest/fuzz/generic_fuzz.c
++++ b/tests/qtest/fuzz/generic_fuzz.c
+@@ -788,7 +788,7 @@ static void generic_pre_fuzz(QTestState *s)
+      * Create a special device that we can use to back DMA buffers at very
+      * high memory addresses
+      */
+-    sparse_mem_mr = sparse_mem_init(0, UINT64_MAX);
++    sparse_mem_mr = sparse_mem_init(qdev_get_machine(), 0, UINT64_MAX);
+ 
+     dma_regions = g_array_new(false, false, sizeof(address_range));
+     dma_patterns = g_array_new(false, false, sizeof(pattern));
 -- 
 2.47.1
 
