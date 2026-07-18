@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93283C4451B
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:43:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FDB5C4450A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:43:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlCoh-0002fA-B0; Sat, 18 Jul 2026 17:43:27 -0400
+	id 1wlCoF-0000ka-9U; Sat, 18 Jul 2026 17:42:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCod-0002Jy-Kq; Sat, 18 Jul 2026 17:43:23 -0400
-Received: from pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.245.243.92])
+ id 1wlCnn-00007v-W0; Sat, 18 Jul 2026 17:42:36 -0400
+Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.13.214.179])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCoa-0002mT-EQ; Sat, 18 Jul 2026 17:43:23 -0400
+ id 1wlCnl-0002fP-Bz; Sat, 18 Jul 2026 17:42:31 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784411000; x=1815947000;
+ t=1784410949; x=1815946949;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Xu9OP68cz7KLt15uWNEaAAQ9k7wKLSmWyxxwrGyp3/I=;
- b=eOcjFvW3bCPD99lkiL2kyDWodBvFy4A5uHoPFH+WawsItSbcBgsFjYQZ
- AKFvx55aoYVpcNj7hF/sDLxJ/+poddSGgxVqCKn1zhRIsul5H3hsBQiwS
- TyV9heWejxOIj2UyI8WTRWusZcZipXXlD161YWvQz1naR0uAhLPSTXXLU
- adO1g9bKWXVAC7VRe+kq8uSl/hbdD8Kmq+eHB/vUGJpeH156fcZ8JIojv
- qPUgPbRpNsD60AUENE4Gt49zjnWky0IoLvrsekK5HLOZ7MfgS05var02W
- IEHtHzRQQpxqdmm/m5YfJd+v8F3/RimwcG6TRLRo4LsvfymmDMCPOtqT1 A==;
-X-CSE-ConnectionGUID: vjT6TDXST2+BLpGax7ufog==
-X-CSE-MsgGUID: wuzA1zuiTsaNXkpNS8S0NQ==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23422643"
-Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:43:16 +0000
-Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.234:4920]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.151:2525]
+ bh=5f3HzwuXe0MvsCBU0ME0zpexJU3MHLtq9ie+g2sflTM=;
+ b=Zypekd1FV+MDzw0VPLQJyXXEUe4pbmyNhtB+ea1A0I/TytAyz2++vBBw
+ IjSy9hSoREiaAunF5vx1DntIUtrdRI0gFR3kTABlhCl/o1rkcClL12lRV
+ Cc+CbwRd3NZKCj9bgrNww9Cn44NVqLpRk3PzgW6gSxd03FtOh+7SaIuGI
+ k9sdZ9gPm1YfiaiVrCy2V5urHKxj2CPqhr+ayr5czNB6adUHtmE2sf6C4
+ ShWQHsVT5In4Ms+ePme4RLniSppCh8bGXLdzUD2OPo7fcRXI7A8IRRsfj
+ 6ATjyNBqlDn4GhiB4OY5U+KiQ85zMIJ/G9vhfgz1OnT9OW3RxdZ2bKuae Q==;
+X-CSE-ConnectionGUID: K9+R2bHIRgaKIegRivN9sg==
+X-CSE-MsgGUID: ODEi2OHxRbqb0tBCbjOHOg==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23903655"
+Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+ by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:42:26 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.182:6891]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.199:2525]
  with esmtp (Farcaster)
- id 6b8f73a0-dafc-4a45-8f42-8ca276182d8b; Sat, 18 Jul 2026 21:43:16 +0000 (UTC)
-X-Farcaster-Flow-ID: 6b8f73a0-dafc-4a45-8f42-8ca276182d8b
+ id f206f6b6-4a63-4ecf-9627-73aa492ccfd6; Sat, 18 Jul 2026 21:42:25 +0000 (UTC)
+X-Farcaster-Flow-ID: f206f6b6-4a63-4ecf-9627-73aa492ccfd6
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
+ EX19MTAUWA001.ant.amazon.com (10.250.64.217) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:43:16 +0000
+ Sat, 18 Jul 2026 21:42:25 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:43:06 +0000
+ Sat, 18 Jul 2026 21:42:15 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,9 +93,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 023/137] hw/pci-host: Give onboard devices a QOM parent
-Date: Sat, 18 Jul 2026 21:34:58 +0000
-Message-ID: <20260718213652.37673-24-graf@amazon.com>
+Subject: [RFC PATCH v2 020/137] hw/or1k: Give onboard devices a QOM parent
+Date: Sat, 18 Jul 2026 21:34:55 +0000
+Message-ID: <20260718213652.37673-21-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -104,11 +104,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D037UWC002.ant.amazon.com (10.13.139.250) To
+X-ClientProxiedBy: EX19D039UWA002.ant.amazon.com (10.13.139.32) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.245.243.92;
+Received-SPF: pass client-ip=52.13.214.179;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-001.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -132,7 +132,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/pci-host to the new
+Convert the *_orphan() device-creation calls in hw/or1k to the new
 parented API introduced earlier in this series, so every onboard
 device gets a stable path in the composition tree instead of landing
 in /machine/unattached with an unstable device[N] name.
@@ -143,380 +143,190 @@ composite children.  Names follow existing QOM conventions.
 
 Per-site rationale (reviewers: dispute the modeling here):
 
-  hw/pci-host/articia.c:188 | OBJECT(dev) | "host-func" | articia_realize(): PCI-facing host function is composite child of the ArticiaS host bridge
-  hw/pci-host/articia.c:191 | OBJECT(dev) | "pci-bridge" | articia_realize(): on-chip PCI bridge is composite child of the ArticiaS host bridge
-  hw/pci-host/astro.c:524 | OBJECT(s) | "elroy[*]" | elroy_init() static helper called from astro_realize(); Elroy PCI host is composite child of the Astro chip; thread Object *parent from caller
-  hw/pci-host/bonito.c:744 | OBJECT(machine) | "pci-host" | bonito_init() public helper called from board init (fuloong2e); thread Object *parent from caller
-  hw/pci-host/bonito.c:750 | OBJECT(pcihost) | "pci" | PCI-facing Bonito function is composite child of the Bonito host-bridge SysBus device
-  hw/pci-host/grackle.c:63 | OBJECT(dev) | "pci" | grackle_realize(): PCI-facing grackle function is composite child of the host bridge
-  hw/pci-host/gt64120.c:1207 | OBJECT(dev) | "pci" | gt64120_realize(): PCI-facing GT-64120 function is composite child of the host bridge
-  hw/pci-host/i440fx.c:285 | OBJECT(dev) | "pci" | i440fx_pcihost_realize(): i440FX PCI function is composite child of the host bridge
-  hw/pci-host/mv64361.c:97 | OBJECT(dev) | "pci" | mv64361_pcihost_realize(): PCI-facing MV64361 bridge function is composite child of the host bridge
-  hw/pci-host/pnv_phb.c:170 | OBJECT(dev) | "root-port" | pnv_phb_realize(): built-in PHB root port is composite child of the PnvPHB proxy device
-  hw/pci-host/pnv_phb4_pec.c:183 | OBJECT(pec) | "phb[*]" | pnv_pec_default_phb_realize() called from pnv_pec_realize(); already parented via object_property_add_child(pec,"phb[*]",...); fold into qdev_new()
-  hw/pci-host/ppc4xx_pci.c:335 | OBJECT(dev) | "pci" | ppc4xx_pcihost_realize(): PCI-facing 4xx host bridge function is composite child of the host bridge
-  hw/pci-host/ppce500.c:476 | OBJECT(dev) | "pci" | e500_pcihost_realize(): PCI-facing e500 bridge function is composite child of the host bridge
-  hw/pci-host/raven.c:284 | OBJECT(d) | "pci" | raven_pcihost_realizefn(DeviceState *d,...): PCI-facing Raven function is composite child of the host bridge
-  hw/pci-host/sabre.c:386 | OBJECT(dev) | "pci" | sabre_realize(): PCI-facing Sabre function is composite child of the host bridge
-  hw/pci-host/sabre.c:394 | OBJECT(dev) | "bridge-b" | sabre_realize(): on-board Simba PCI bridge B is composite child of the Sabre host bridge
-  hw/pci-host/sabre.c:399 | OBJECT(dev) | "bridge-a" | sabre_realize(): on-board Simba PCI bridge A is composite child of the Sabre host bridge
-  hw/pci-host/sh_pci.c:145 | OBJECT(dev) | "pci" | sh_pcic_host_realize(): PCI-facing SH host function is composite child of the host bridge
-  hw/pci-host/uninorth.c:129 | OBJECT(dev) | "pci" | pci_unin_main_realize(): PCI-facing UniNorth function is composite child of the host bridge
-  hw/pci-host/uninorth.c:179 | OBJECT(dev) | "pci" | pci_u3_agp_realize(): PCI-facing U3-AGP function is composite child of the host bridge
-  hw/pci-host/uninorth.c:223 | OBJECT(dev) | "pci" | pci_unin_agp_realize(): PCI-facing UniNorth-AGP function is composite child of the host bridge
-  hw/pci-host/uninorth.c:256 | OBJECT(dev) | "pci" | pci_unin_internal_realize(): PCI-facing internal-UniNorth function is composite child of the host bridge
+  hw/or1k/or1k-sim.c:189 | OBJECT(state) | "irq-splitter[*]" | board-init helper receives Or1ksimState; auto-index (net + serial share the pool)
+  hw/or1k/or1k-sim.c:224 | OBJECT(state) | "ompic" | board-init helper receives Or1ksimState; single OMPIC per machine
+  hw/or1k/or1k-sim.c:257 | OBJECT(state) | "irq-splitter[*]" | board-init helper receives Or1ksimState; auto-index alongside net splitter
+  hw/or1k/or1k-sim.c:302 | OBJECT(machine) | "cpu[*]" | MachineClass.init(); auto-index over smp_cpus
+  hw/or1k/virt.c:113 | parent | "irq-splitter[*]" | static helper had no parent-capable arg; add Object *parent first arg, thread OBJECT(state) from all callers; auto-index (serial+rtc+virtio*N)
+  hw/or1k/virt.c:209 | OBJECT(state) | "ompic" | board-init helper receives OR1KVirtState; single OMPIC
+  hw/or1k/virt.c:303 | OBJECT(state) | "rtc" | board-init helper receives OR1KVirtState; single Goldfish RTC
+  hw/or1k/virt.c:382 | OBJECT(state) | "pcie" | board-init helper receives OR1KVirtState; single GPEX host
+  hw/or1k/virt.c:454 | OBJECT(state) | "virtio-mmio[*]" | board-init helper receives OR1KVirtState; called VIRTIO_COUNT times, auto-index
+  hw/or1k/virt.c:484 | OBJECT(machine) | "cpu[*]" | MachineClass.init(); auto-index over smp_cpus
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/mips/fuloong2e.c        |  2 +-
- hw/pci-host/articia.c      |  6 ++++--
- hw/pci-host/astro.c        |  8 ++++----
- hw/pci-host/bonito.c       | 10 +++++-----
- hw/pci-host/grackle.c      |  2 +-
- hw/pci-host/gt64120.c      |  3 ++-
- hw/pci-host/i440fx.c       |  2 +-
- hw/pci-host/mv64361.c      |  2 +-
- hw/pci-host/pnv_phb.c      |  5 +++--
- hw/pci-host/pnv_phb4_pec.c |  3 +--
- hw/pci-host/ppc4xx_pci.c   |  2 +-
- hw/pci-host/ppce500.c      |  2 +-
- hw/pci-host/raven.c        |  3 ++-
- hw/pci-host/sabre.c        | 12 +++++++-----
- hw/pci-host/sh_pci.c       |  3 ++-
- hw/pci-host/uninorth.c     | 11 +++++++----
- include/hw/mips/mips.h     |  2 +-
- 17 files changed, 44 insertions(+), 34 deletions(-)
+ hw/or1k/or1k-sim.c | 17 ++++++++++-------
+ hw/or1k/virt.c     | 37 ++++++++++++++++++++++---------------
+ 2 files changed, 32 insertions(+), 22 deletions(-)
 
-diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
-index e0cbf4df3d..5e5ade46f3 100644
---- a/hw/mips/fuloong2e.c
-+++ b/hw/mips/fuloong2e.c
-@@ -283,7 +283,7 @@ static void mips_fuloong2e_init(MachineState *machine)
-     cpu_mips_clock_init(cpu);
+diff --git a/hw/or1k/or1k-sim.c b/hw/or1k/or1k-sim.c
+index 6962313315..da05d7cbe3 100644
+--- a/hw/or1k/or1k-sim.c
++++ b/hw/or1k/or1k-sim.c
+@@ -186,9 +186,10 @@ static void openrisc_sim_net_init(Or1ksimState *state, hwaddr base, hwaddr size,
+     s = SYS_BUS_DEVICE(dev);
+     sysbus_realize_and_unref(s, &error_fatal);
+     if (num_cpus > 1) {
+-        DeviceState *splitter = qdev_new_orphan(TYPE_SPLIT_IRQ);
++        DeviceState *splitter = qdev_new(OBJECT(state), "irq-splitter[*]",
++                                         TYPE_SPLIT_IRQ);
+         qdev_prop_set_uint32(splitter, "num-lines", num_cpus);
+-        qdev_realize_and_unref(splitter, NULL, &error_fatal);
++        qdev_realize(splitter, NULL, &error_fatal);
+         for (i = 0; i < num_cpus; i++) {
+             qdev_connect_gpio_out(splitter, i, get_cpu_irq(cpus, i, irq_pin));
+         }
+@@ -221,11 +222,11 @@ static void openrisc_sim_ompic_init(Or1ksimState *state, hwaddr base,
+     char *nodename;
+     int i;
  
-     /* North bridge, Bonito --> IP2 */
--    pci_bus = bonito_init((qemu_irq *)&(env->irq[2]));
-+    pci_bus = bonito_init(OBJECT(machine), (qemu_irq *)&(env->irq[2]));
+-    dev = qdev_new_orphan("or1k-ompic");
++    dev = qdev_new(OBJECT(state), "ompic", "or1k-ompic");
+     qdev_prop_set_uint32(dev, "num-cpus", num_cpus);
  
-     /* South bridge -> IP5 */
-     pci_dev = pci_new_multifunction_orphan(PCI_DEVFN(FULOONG2E_VIA_SLOT, 0),
-diff --git a/hw/pci-host/articia.c b/hw/pci-host/articia.c
-index 0556c0ccff..5ec0e6a05f 100644
---- a/hw/pci-host/articia.c
-+++ b/hw/pci-host/articia.c
-@@ -185,10 +185,12 @@ static void articia_realize(DeviceState *dev, Error **errp)
-     h->bus = pci_register_root_bus(dev, NULL, articia_pcihost_set_irq,
-                                    amigaone_pcihost_bus0_map_irq, dev, &s->mem,
-                                    &s->io, PCI_DEVFN(8, 0), 4, TYPE_PCI_BUS);
--    pdev = pci_create_simple_multifunction_orphan(h->bus, PCI_DEVFN(0, 0),
-+    pdev = pci_create_simple_multifunction(OBJECT(dev), "host-func", h->bus,
-+                                           PCI_DEVFN(0, 0),
-                                            TYPE_ARTICIA_PCI_HOST);
-     ARTICIA_PCI_HOST(pdev)->as = s;
--    pci_create_simple_orphan(h->bus, PCI_DEVFN(0, 1), TYPE_ARTICIA_PCI_BRIDGE);
-+    pci_create_simple(OBJECT(dev), "pci-bridge", h->bus, PCI_DEVFN(0, 1),
-+                      TYPE_ARTICIA_PCI_BRIDGE);
+     s = SYS_BUS_DEVICE(dev);
+-    sysbus_realize_and_unref(s, &error_fatal);
++    sysbus_realize(s, &error_fatal);
+     for (i = 0; i < num_cpus; i++) {
+         sysbus_connect_irq(s, i, get_cpu_irq(cpus, i, irq_pin));
+     }
+@@ -254,9 +255,10 @@ static void openrisc_sim_serial_init(Or1ksimState *state, hwaddr base,
+     int i;
  
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->reg);
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mem);
-diff --git a/hw/pci-host/astro.c b/hw/pci-host/astro.c
-index 1de3960713..61519d1d29 100644
---- a/hw/pci-host/astro.c
-+++ b/hw/pci-host/astro.c
-@@ -517,13 +517,13 @@ static void elroy_register_types(void)
- type_init(elroy_register_types)
+     if (num_cpus > 1) {
+-        DeviceState *splitter = qdev_new_orphan(TYPE_SPLIT_IRQ);
++        DeviceState *splitter = qdev_new(OBJECT(state), "irq-splitter[*]",
++                                         TYPE_SPLIT_IRQ);
+         qdev_prop_set_uint32(splitter, "num-lines", num_cpus);
+-        qdev_realize_and_unref(splitter, NULL, &error_fatal);
++        qdev_realize(splitter, NULL, &error_fatal);
+         for (i = 0; i < num_cpus; i++) {
+             qdev_connect_gpio_out(splitter, i, get_cpu_irq(cpus, i, irq_pin));
+         }
+@@ -299,7 +301,8 @@ static void openrisc_sim_init(MachineState *machine)
  
+     assert(smp_cpus >= 1 && smp_cpus <= OR1KSIM_CPUS_MAX);
+     for (n = 0; n < smp_cpus; n++) {
+-        cpus[n] = OPENRISC_CPU(cpu_create_orphan(machine->cpu_type));
++        cpus[n] = OPENRISC_CPU(cpu_create(OBJECT(machine), "cpu[*]",
++                                          machine->cpu_type));
+         if (cpus[n] == NULL) {
+             fprintf(stderr, "Unable to find CPU definition!\n");
+             exit(1);
+diff --git a/hw/or1k/virt.c b/hw/or1k/virt.c
+index f222efafde..7362433a02 100644
+--- a/hw/or1k/virt.c
++++ b/hw/or1k/virt.c
+@@ -105,14 +105,16 @@ static qemu_irq get_cpu_irq(OpenRISCCPU *cpus[], int cpunum, int irq_pin)
+     return qdev_get_gpio_in_named(DEVICE(cpus[cpunum]), "IRQ", irq_pin);
+ }
  
--static ElroyState *elroy_init(int num)
-+static ElroyState *elroy_init(Object *parent, int num)
+-static qemu_irq get_per_cpu_irq(OpenRISCCPU *cpus[], int num_cpus, int irq_pin)
++static qemu_irq get_per_cpu_irq(Object *parent, OpenRISCCPU *cpus[],
++                                int num_cpus, int irq_pin)
  {
-     DeviceState *dev;
+     int i;
  
--    dev = qdev_new_orphan(TYPE_ELROY_PCI_HOST_BRIDGE);
-+    dev = qdev_new(parent, "elroy[*]", TYPE_ELROY_PCI_HOST_BRIDGE);
-     dev->id = g_strdup_printf("elroy%d", num);
+     if (num_cpus > 1) {
+-        DeviceState *splitter = qdev_new_orphan(TYPE_SPLIT_IRQ);
++        DeviceState *splitter = qdev_new(parent, "irq-splitter[*]",
++                                         TYPE_SPLIT_IRQ);
+         qdev_prop_set_uint32(splitter, "num-lines", num_cpus);
+-        qdev_realize_and_unref(splitter, NULL, &error_fatal);
++        qdev_realize(splitter, NULL, &error_fatal);
+         for (i = 0; i < num_cpus; i++) {
+             qdev_connect_gpio_out(splitter, i, get_cpu_irq(cpus, i, irq_pin));
+         }
+@@ -206,11 +208,11 @@ static void openrisc_virt_ompic_init(OR1KVirtState *state, hwaddr base,
+     char *nodename;
+     int i;
+ 
+-    dev = qdev_new_orphan("or1k-ompic");
++    dev = qdev_new(OBJECT(state), "ompic", "or1k-ompic");
+     qdev_prop_set_uint32(dev, "num-cpus", num_cpus);
+ 
+     s = SYS_BUS_DEVICE(dev);
+-    sysbus_realize_and_unref(s, &error_fatal);
++    sysbus_realize(s, &error_fatal);
+     for (i = 0; i < num_cpus; i++) {
+         sysbus_connect_irq(s, i, get_cpu_irq(cpus, i, irq_pin));
+     }
+@@ -233,7 +235,8 @@ static void openrisc_virt_serial_init(OR1KVirtState *state, hwaddr base,
+ {
+     void *fdt = state->fdt;
+     char *nodename;
+-    qemu_irq serial_irq = get_per_cpu_irq(cpus, num_cpus, irq_pin);
++    qemu_irq serial_irq = get_per_cpu_irq(OBJECT(state), cpus, num_cpus,
++                                          irq_pin);
+ 
+     serial_mm_init(get_system_memory(), base, 0, serial_irq, 115200,
+                    serial_hd(0), DEVICE_BIG_ENDIAN);
+@@ -297,10 +300,12 @@ static void openrisc_virt_rtc_init(OR1KVirtState *state, hwaddr base,
+ {
+     void *fdt = state->fdt;
+     char *nodename;
+-    qemu_irq rtc_irq = get_per_cpu_irq(cpus, num_cpus, irq_pin);
++    qemu_irq rtc_irq = get_per_cpu_irq(OBJECT(state), cpus, num_cpus,
++                                       irq_pin);
+ 
+     /* Goldfish RTC */
+-    sysbus_create_simple_orphan(TYPE_GOLDFISH_RTC, base, rtc_irq);
++    sysbus_create_simple(OBJECT(state), "rtc", TYPE_GOLDFISH_RTC, base,
++                         rtc_irq);
+ 
+     /* Goldfish RTC FDT */
+     nodename = g_strdup_printf("/soc/rtc@%" HWADDR_PRIx, base);
+@@ -379,8 +384,8 @@ static void openrisc_virt_pcie_init(OR1KVirtState *state,
+     qemu_irq pcie_irq;
+     int i;
+ 
+-    dev = qdev_new_orphan(TYPE_GPEX_HOST);
 -    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    dev = qdev_new(OBJECT(state), "pcie", TYPE_GPEX_HOST);
 +    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
  
-     return ELROY_PCI_HOST_BRIDGE(dev);
- }
-@@ -1015,7 +1015,7 @@ static void astro_realize(DeviceState *obj, Error **errp)
-         addr_offset = elroy_hpa_offsets[i];
-         rope = elroy_rope_nr[i];
+     /* Map ECAM space. */
+     alias = g_new0(MemoryRegion, 1);
+@@ -410,7 +415,7 @@ static void openrisc_virt_pcie_init(OR1KVirtState *state,
  
--        elroy = elroy_init(i);
-+        elroy = elroy_init(OBJECT(s), i);
-         s->elroy[i] = elroy;
-         elroy->hpa = ASTRO_HPA + addr_offset;
-         elroy->pci_bus_num = i;
-diff --git a/hw/pci-host/bonito.c b/hw/pci-host/bonito.c
-index 40a62d62b6..83b328840a 100644
---- a/hw/pci-host/bonito.c
-+++ b/hw/pci-host/bonito.c
-@@ -733,7 +733,7 @@ static void bonito_pci_realize(PCIDevice *dev, Error **errp)
-     pci_set_byte(dev->config + PCI_MAX_LAT, 0x00);
- }
+     /* Connect IRQ lines. */
+     for (i = 0; i < PCI_NUM_PINS; i++) {
+-        pcie_irq = get_per_cpu_irq(cpus, num_cpus, irq_base + i);
++        pcie_irq = get_per_cpu_irq(OBJECT(state), cpus, num_cpus, irq_base + i);
  
--PCIBus *bonito_init(qemu_irq *pic)
-+PCIBus *bonito_init(Object *parent, qemu_irq *pic)
- {
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, pcie_irq);
+         gpex_set_irq_num(GPEX_HOST(dev), i, irq_base + i);
+@@ -448,13 +453,14 @@ static void openrisc_virt_virtio_init(OR1KVirtState *state, hwaddr base,
+     char *nodename;
      DeviceState *dev;
-     BonitoState *pcihost;
-@@ -741,17 +741,17 @@ PCIBus *bonito_init(qemu_irq *pic)
-     PCIBonitoState *s;
-     PCIDevice *d;
+     SysBusDevice *sysbus;
+-    qemu_irq virtio_irq = get_per_cpu_irq(cpus, num_cpus, irq_pin);
++    qemu_irq virtio_irq = get_per_cpu_irq(OBJECT(state), cpus, num_cpus,
++                                          irq_pin);
  
--    dev = qdev_new_orphan(TYPE_BONITO_PCI_HOST_BRIDGE);
-+    dev = qdev_new(parent, "pci-host", TYPE_BONITO_PCI_HOST_BRIDGE);
-     phb = PCI_HOST_BRIDGE(dev);
-     pcihost = BONITO_PCI_HOST_BRIDGE(dev);
-     pcihost->pic = pic;
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
+     /* VirtIO MMIO devices */
+-    dev = qdev_new_orphan(TYPE_VIRTIO_MMIO);
++    dev = qdev_new(OBJECT(state), "virtio-mmio[*]", TYPE_VIRTIO_MMIO);
+     qdev_prop_set_bit(dev, "force-legacy", false);
+     sysbus = SYS_BUS_DEVICE(dev);
+-    sysbus_realize_and_unref(sysbus, &error_fatal);
++    sysbus_realize(sysbus, &error_fatal);
+     sysbus_connect_irq(sysbus, 0, virtio_irq);
+     sysbus_mmio_map(sysbus, 0, base);
  
--    d = pci_new_orphan(PCI_DEVFN(0, 0), TYPE_PCI_BONITO);
-+    d = pci_new(OBJECT(pcihost), "pci-host", PCI_DEVFN(0, 0), TYPE_PCI_BONITO);
-     s = PCI_BONITO(d);
-     s->pcihost = pcihost;
-     pcihost->pci_dev = s;
--    pci_realize_and_unref(d, phb->bus, &error_fatal);
-+    qdev_realize(DEVICE(d), BUS(phb->bus), &error_fatal);
+@@ -481,7 +487,8 @@ static void openrisc_virt_init(MachineState *machine)
  
-     return phb->bus;
- }
-diff --git a/hw/pci-host/grackle.c b/hw/pci-host/grackle.c
-index c76cb61dc9..c4c8dc15e4 100644
---- a/hw/pci-host/grackle.c
-+++ b/hw/pci-host/grackle.c
-@@ -60,7 +60,7 @@ static void grackle_realize(DeviceState *dev, Error **errp)
-                                      &s->pci_io,
-                                      0, 4, TYPE_PCI_BUS);
- 
--    pci_create_simple_orphan(phb->bus, 0, "grackle");
-+    pci_create_simple(OBJECT(dev), "pci-host", phb->bus, 0, "grackle");
- }
- 
- static void grackle_init(Object *obj)
-diff --git a/hw/pci-host/gt64120.c b/hw/pci-host/gt64120.c
-index c1a94a3daa..780c86cd9a 100644
---- a/hw/pci-host/gt64120.c
-+++ b/hw/pci-host/gt64120.c
-@@ -1204,7 +1204,8 @@ static void gt64120_realize(DeviceState *dev, Error **errp)
-                                 get_system_io(),
-                                 PCI_DEVFN(18, 0), TYPE_PCI_BUS);
- 
--    pci_create_simple_orphan(phb->bus, PCI_DEVFN(0, 0), "gt64120_pci");
-+    pci_create_simple(OBJECT(dev), "pci-host", phb->bus, PCI_DEVFN(0, 0),
-+                      "gt64120_pci");
-     memory_region_init_io(&phb->conf_mem, OBJECT(phb),
-                           &pci_host_conf_le_ops,
-                           s, "pci-conf-idx", 4);
-diff --git a/hw/pci-host/i440fx.c b/hw/pci-host/i440fx.c
-index e91ddd5d07..c49b5d5c15 100644
---- a/hw/pci-host/i440fx.c
-+++ b/hw/pci-host/i440fx.c
-@@ -282,7 +282,7 @@ static void i440fx_pcihost_realize(DeviceState *dev, Error **errp)
-                          s->io_memory, 0, TYPE_PCI_BUS);
-     phb->bus = b;
- 
--    d = pci_create_simple_orphan(b, 0, s->pci_type);
-+    d = pci_create_simple(OBJECT(dev), "pci-host", b, 0, s->pci_type);
-     f = I440FX_PCI_DEVICE(d);
- 
-     range_set_bounds(&s->pci_hole, s->below_4g_mem_size,
-diff --git a/hw/pci-host/mv64361.c b/hw/pci-host/mv64361.c
-index f75951c873..3ef51fef1b 100644
---- a/hw/pci-host/mv64361.c
-+++ b/hw/pci-host/mv64361.c
-@@ -94,7 +94,7 @@ static void mv64361_pcihost_realize(DeviceState *dev, Error **errp)
-                                    pci_swizzle_map_irq_fn, dev,
-                                    &s->mem, &s->io, 0, 4, TYPE_PCI_BUS);
-     g_free(name);
--    pci_create_simple_orphan(h->bus, 0, TYPE_MV64361_PCI_BRIDGE);
-+    pci_create_simple(OBJECT(dev), "pci-host", h->bus, 0, TYPE_MV64361_PCI_BRIDGE);
-     qdev_init_gpio_out(dev, s->irq, ARRAY_SIZE(s->irq));
- }
- 
-diff --git a/hw/pci-host/pnv_phb.c b/hw/pci-host/pnv_phb.c
-index fc0b226bef..160aa86c48 100644
---- a/hw/pci-host/pnv_phb.c
-+++ b/hw/pci-host/pnv_phb.c
-@@ -167,9 +167,10 @@ static void pnv_phb_realize(DeviceState *dev, Error **errp)
-     }
- 
-     if (defaults_enabled()) {
--        PCIDevice *root = pci_new_orphan(PCI_DEVFN(0, 0), TYPE_PNV_PHB_ROOT_PORT);
-+        PCIDevice *root = pci_new(OBJECT(dev), "root-port",
-+                                  PCI_DEVFN(0, 0), TYPE_PNV_PHB_ROOT_PORT);
- 
--        pci_realize_and_unref(root, pci->bus, errp);
-+        qdev_realize(DEVICE(root), BUS(pci->bus), errp);
-     }
- }
- 
-diff --git a/hw/pci-host/pnv_phb4_pec.c b/hw/pci-host/pnv_phb4_pec.c
-index 54dac5e989..b1af93d49b 100644
---- a/hw/pci-host/pnv_phb4_pec.c
-+++ b/hw/pci-host/pnv_phb4_pec.c
-@@ -180,10 +180,9 @@ static PnvPHB *pnv_pec_default_phb_realize(PnvPhb4PecState *pec,
-                                            int stack_no,
-                                            Error **errp)
- {
--    PnvPHB *phb = PNV_PHB(qdev_new_orphan(TYPE_PNV_PHB));
-+    PnvPHB *phb = PNV_PHB(qdev_new(OBJECT(pec), "phb[*]", TYPE_PNV_PHB));
-     int phb_id = pnv_phb4_pec_get_phb_id(pec, stack_no);
- 
--    object_property_add_child(OBJECT(pec), "phb[*]", OBJECT(phb));
-     object_property_set_link(OBJECT(phb), "pec", OBJECT(pec),
-                              &error_abort);
-     object_property_set_int(OBJECT(phb), "chip-id", pec->chip_id,
-diff --git a/hw/pci-host/ppc4xx_pci.c b/hw/pci-host/ppc4xx_pci.c
-index cd7b16aa87..223b37354b 100644
---- a/hw/pci-host/ppc4xx_pci.c
-+++ b/hw/pci-host/ppc4xx_pci.c
-@@ -332,7 +332,7 @@ static void ppc4xx_pcihost_realize(DeviceState *dev, Error **errp)
-                               TYPE_PCI_BUS);
-     h->bus = b;
- 
--    pci_create_simple_orphan(b, 0, TYPE_PPC4xx_HOST_BRIDGE);
-+    pci_create_simple(OBJECT(dev), "pci-host", b, 0, TYPE_PPC4xx_HOST_BRIDGE);
- 
-     /* XXX split into 2 memory regions, one for config space, one for regs */
-     memory_region_init(&s->container, OBJECT(s), "pci-container", PCI_ALL_SIZE);
-diff --git a/hw/pci-host/ppce500.c b/hw/pci-host/ppce500.c
-index 838a01608c..01576c1a61 100644
---- a/hw/pci-host/ppce500.c
-+++ b/hw/pci-host/ppce500.c
-@@ -473,7 +473,7 @@ static void e500_pcihost_realize(DeviceState *dev, Error **errp)
-     address_space_init(&s->bm_as, &s->bm, "pci-bm");
-     pci_setup_iommu(b, &ppce500_iommu_ops, s);
- 
--    pci_create_simple_orphan(b, 0, TYPE_PPC_E500_PCI_BRIDGE);
-+    pci_create_simple(OBJECT(dev), "pci-host", b, 0, TYPE_PPC_E500_PCI_BRIDGE);
- 
-     memory_region_init(&s->container, OBJECT(h), "pci-container", PCIE500_ALL_SIZE);
-     memory_region_init_io(&h->conf_mem, OBJECT(h), &pci_host_conf_be_ops, h,
-diff --git a/hw/pci-host/raven.c b/hw/pci-host/raven.c
-index abcf9b28e1..b6ab686ff5 100644
---- a/hw/pci-host/raven.c
-+++ b/hw/pci-host/raven.c
-@@ -281,7 +281,8 @@ static void raven_pcihost_realizefn(DeviceState *d, Error **errp)
-                           "pci-intack", 1);
-     memory_region_add_subregion(address_space_mem, 0xbffffff0, &s->pci_intack);
- 
--    pci_create_simple_orphan(h->bus, PCI_DEVFN(0, 0), TYPE_RAVEN_PCI_DEVICE);
-+    pci_create_simple(OBJECT(d), "pci-host", h->bus, PCI_DEVFN(0, 0),
-+                      TYPE_RAVEN_PCI_DEVICE);
- 
-     address_space_init(&s->bm_as, &s->bm, "raven-bm");
-     pci_setup_iommu(h->bus, &raven_iommu_ops, s);
-diff --git a/hw/pci-host/sabre.c b/hw/pci-host/sabre.c
-index d8c815d404..3c52fa2727 100644
---- a/hw/pci-host/sabre.c
-+++ b/hw/pci-host/sabre.c
-@@ -383,7 +383,7 @@ static void sabre_realize(DeviceState *dev, Error **errp)
-                                      &s->pci_ioport,
-                                      0, 0x40, TYPE_PCI_BUS);
- 
--    pci_create_simple_orphan(phb->bus, 0, TYPE_SABRE_PCI_DEVICE);
-+    pci_create_simple(OBJECT(dev), "pci-host", phb->bus, 0, TYPE_SABRE_PCI_DEVICE);
- 
-     /* IOMMU */
-     memory_region_add_subregion_overlap(&s->sabre_config, 0x200,
-@@ -391,15 +391,17 @@ static void sabre_realize(DeviceState *dev, Error **errp)
-     pci_setup_iommu(phb->bus, &sabre_iommu_ops, s->iommu);
- 
-     /* APB secondary busses */
--    pci_dev = pci_new_multifunction_orphan(PCI_DEVFN(1, 0), TYPE_SIMBA_PCI_BRIDGE);
-+    pci_dev = pci_new_multifunction(OBJECT(dev), "bridge-b",
-+                                    PCI_DEVFN(1, 0), TYPE_SIMBA_PCI_BRIDGE);
-     s->bridgeB = PCI_BRIDGE(pci_dev);
-     pci_bridge_map_irq(s->bridgeB, "pciB", pci_simbaB_map_irq);
--    pci_realize_and_unref(pci_dev, phb->bus, &error_fatal);
-+    qdev_realize(DEVICE(pci_dev), BUS(phb->bus), &error_fatal);
- 
--    pci_dev = pci_new_multifunction_orphan(PCI_DEVFN(1, 1), TYPE_SIMBA_PCI_BRIDGE);
-+    pci_dev = pci_new_multifunction(OBJECT(dev), "bridge-a",
-+                                    PCI_DEVFN(1, 1), TYPE_SIMBA_PCI_BRIDGE);
-     s->bridgeA = PCI_BRIDGE(pci_dev);
-     pci_bridge_map_irq(s->bridgeA, "pciA", pci_simbaA_map_irq);
--    pci_realize_and_unref(pci_dev, phb->bus, &error_fatal);
-+    qdev_realize(DEVICE(pci_dev), BUS(phb->bus), &error_fatal);
- }
- 
- static void sabre_init(Object *obj)
-diff --git a/hw/pci-host/sh_pci.c b/hw/pci-host/sh_pci.c
-index 749b9d76a1..79ebe36fe1 100644
---- a/hw/pci-host/sh_pci.c
-+++ b/hw/pci-host/sh_pci.c
-@@ -142,7 +142,8 @@ static void sh_pcic_host_realize(DeviceState *dev, Error **errp)
-     sysbus_init_mmio(sbd, &s->memconfig_a7);
-     memory_region_add_subregion(get_system_memory(), 0xfe240000, &s->isa);
- 
--    s->dev = pci_create_simple_orphan(phb->bus, PCI_DEVFN(0, 0), "sh_pci_host");
-+    s->dev = pci_create_simple(OBJECT(dev), "pci-host", phb->bus, PCI_DEVFN(0, 0),
-+                               "sh_pci_host");
- }
- 
- static void sh_pcic_pci_realize(PCIDevice *d, Error **errp)
-diff --git a/hw/pci-host/uninorth.c b/hw/pci-host/uninorth.c
-index 4590687bd3..ac22f2dd8c 100644
---- a/hw/pci-host/uninorth.c
-+++ b/hw/pci-host/uninorth.c
-@@ -126,7 +126,8 @@ static void pci_unin_main_realize(DeviceState *dev, Error **errp)
-                                    &s->pci_io,
-                                    PCI_DEVFN(11, 0), 4, TYPE_PCI_BUS);
- 
--    pci_create_simple_orphan(h->bus, PCI_DEVFN(11, 0), "uni-north-pci");
-+    pci_create_simple(OBJECT(dev), "pci-host", h->bus, PCI_DEVFN(11, 0),
-+                      "uni-north-pci");
- 
-     /*
-      * DEC 21154 bridge was unused for many years, this comment is
-@@ -176,7 +177,7 @@ static void pci_u3_agp_realize(DeviceState *dev, Error **errp)
-                                    &s->pci_io,
-                                    PCI_DEVFN(11, 0), 4, TYPE_PCI_BUS);
- 
--    pci_create_simple_orphan(h->bus, PCI_DEVFN(11, 0), "u3-agp");
-+    pci_create_simple(OBJECT(dev), "pci-host", h->bus, PCI_DEVFN(11, 0), "u3-agp");
- }
- 
- static void pci_u3_agp_init(Object *obj)
-@@ -220,7 +221,8 @@ static void pci_unin_agp_realize(DeviceState *dev, Error **errp)
-                                    &s->pci_io,
-                                    PCI_DEVFN(11, 0), 4, TYPE_PCI_BUS);
- 
--    pci_create_simple_orphan(h->bus, PCI_DEVFN(11, 0), "uni-north-agp");
-+    pci_create_simple(OBJECT(dev), "pci-host", h->bus, PCI_DEVFN(11, 0),
-+                      "uni-north-agp");
- }
- 
- static void pci_unin_agp_init(Object *obj)
-@@ -253,7 +255,8 @@ static void pci_unin_internal_realize(DeviceState *dev, Error **errp)
-                                    &s->pci_io,
-                                    PCI_DEVFN(14, 0), 4, TYPE_PCI_BUS);
- 
--    pci_create_simple_orphan(h->bus, PCI_DEVFN(14, 0), "uni-north-internal-pci");
-+    pci_create_simple(OBJECT(dev), "pci-host", h->bus, PCI_DEVFN(14, 0),
-+                      "uni-north-internal-pci");
- }
- 
- static void pci_unin_internal_init(Object *obj)
-diff --git a/include/hw/mips/mips.h b/include/hw/mips/mips.h
-index 1f3672ba5f..cd0ccb4e5d 100644
---- a/include/hw/mips/mips.h
-+++ b/include/hw/mips/mips.h
-@@ -10,7 +10,7 @@
- #include "system/memory.h"
- 
- /* bonito.c */
--PCIBus *bonito_init(qemu_irq *pic);
-+PCIBus *bonito_init(Object *parent, qemu_irq *pic);
- 
- /* rc4030.c */
- typedef struct rc4030DMAState *rc4030_dma;
+     assert(smp_cpus >= 1 && smp_cpus <= VIRT_CPUS_MAX);
+     for (n = 0; n < smp_cpus; n++) {
+-        cpus[n] = OPENRISC_CPU(cpu_create_orphan(machine->cpu_type));
++        cpus[n] = OPENRISC_CPU(cpu_create(OBJECT(machine), "cpu[*]",
++                                          machine->cpu_type));
+         if (cpus[n] == NULL) {
+             fprintf(stderr, "Unable to find CPU definition!\n");
+             exit(1);
 -- 
 2.47.1
 
