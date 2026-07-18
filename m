@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B48AC4450A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62FD9C4451B
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:01:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlD6F-0008MD-1W; Sat, 18 Jul 2026 18:01:35 -0400
+	id 1wlD5v-0006ui-0Y; Sat, 18 Jul 2026 18:01:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlD6C-0008D8-On; Sat, 18 Jul 2026 18:01:32 -0400
-Received: from pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([52.12.53.23])
+ id 1wlD5h-0006PT-3t; Sat, 18 Jul 2026 18:01:05 -0400
+Received: from pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.42.203.116])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlD6A-0005Fx-Ty; Sat, 18 Jul 2026 18:01:32 -0400
+ id 1wlD5f-00059H-9R; Sat, 18 Jul 2026 18:01:00 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784412090; x=1815948090;
+ t=1784412059; x=1815948059;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=qNvBAQnsropPFuCvMHAkpcPv/ub05GpIkFSZ2G7cECE=;
- b=fsovACCvlIyvL5l/qV3FJAmQt0WaYLFkXfkAl1KV4eR613Jx5DvsHJSH
- t59NoOwETVdAngDU8+uKKmpk9iSoapEtrVqSkGLgi33bEhg+Ysqr2W+Hw
- xVCMp2+nPh7MigvbKzmfYmQZ/CThHC+wb3n8ApYXMA+o1VFunRDqz6WQm
- 36ADgaW3Hntb4KbId7eoESujLa/fmGINFZVoQ3AJ8tDuSp6TkqLhff348
- OQN9pdzTCSmFHa/UbBZ42RtKm9SBDd9495ua5qmMT2Az1SnHZZ6V6yFCk
- Rm8/A5AqsrC7BiDLz8tMGJRNZ3CEVxkbVfupiTmfIY4FJLk05hmH//DKi A==;
-X-CSE-ConnectionGUID: IFy8SzVNTJ6KYUJKuSfx9w==
-X-CSE-MsgGUID: hWjvNeiBRWKuLpvT0bPDiw==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23795565"
+ bh=1pkQn3/9x2L+GgRgyaJRqVz1nB5NSwMUxiFMHCcRqjw=;
+ b=ehIQX96DZlXzAAT4gHS7ONRLHzkWrY0bkrx+591Wu42sJ0d+Fyt0iGe3
+ c9eaBWv56WceLcWPk7zJaGw1/CCnpZy4CGaGik7mOAAYo2J2QRGCxN8aj
+ zgaeYnqf58xmx4eTcInJPtnqI9117EKykjpQWXiQUk0o/auUJzaO7vijb
+ Z93yMuKO55dRxpK8jMcdXWUsZ099CfTlQsw/TVQv95ORrcBXDBvVJsF5c
+ 9Ay/frEMEZ/uAlxbjP0Ohkv8bHghTFqJ4PBw7+ELtCzk6hCZ8N/f5t3kg
+ P7fQ4DXnDKXXFTXy/SAx0foeodSg57lTiJr2oSfPxsyiBu1+cIhAzsODN w==;
+X-CSE-ConnectionGUID: SXK0AEsGQciEcg918FNbGA==
+X-CSE-MsgGUID: 6uxgIRAjQ4S7TPehJ52yCQ==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23940288"
 Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
- by internal-pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:01:27 +0000
-Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.234:15836]
+ by internal-pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:00:56 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:9848]
  by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.11.151:2525]
  with esmtp (Farcaster)
- id f004e84a-99c8-4385-9526-854b0bdd6e20; Sat, 18 Jul 2026 22:01:27 +0000 (UTC)
-X-Farcaster-Flow-ID: f004e84a-99c8-4385-9526-854b0bdd6e20
+ id ec2b0a44-07e9-4f8c-b20b-7e10147a0876; Sat, 18 Jul 2026 22:00:56 +0000 (UTC)
+X-Farcaster-Flow-ID: ec2b0a44-07e9-4f8c-b20b-7e10147a0876
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:01:26 +0000
+ Sat, 18 Jul 2026 22:00:55 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:01:17 +0000
+ Sat, 18 Jul 2026 22:00:46 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,29 +93,29 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 087/137] cpu: Remove cpu_create_orphan()
-Date: Sat, 18 Jul 2026 21:36:02 +0000
-Message-ID: <20260718213652.37673-88-graf@amazon.com>
+Subject: [RFC PATCH v2 086/137] pci: Remove *_orphan() creator variants
+Date: Sat, 18 Jul 2026 21:36:01 +0000
+Message-ID: <20260718213652.37673-87-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
  <20260718213652.37673-1-graf@amazon.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D037UWB004.ant.amazon.com (10.13.138.84) To
+X-ClientProxiedBy: EX19D036UWC003.ant.amazon.com (10.13.139.214) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=52.12.53.23;
+Received-SPF: pass client-ip=52.42.203.116;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-010.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-008.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
 X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H2=-0.01, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -132,59 +132,95 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All targets create their CPUs with an explicit parent now.
+All boards create their PCI devices with an explicit QOM parent
+now.  Drop pci_new_orphan(), pci_new_multifunction_orphan(),
+pci_create_simple_orphan(), pci_create_simple_multifunction_orphan()
+and the internal pci_new_internal() they wrapped.
 
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/core/cpu-common.c  | 12 ------------
- include/hw/core/cpu.h | 10 ----------
- 2 files changed, 22 deletions(-)
+ hw/pci/pci.c         | 35 -----------------------------------
+ include/hw/pci/pci.h |  5 -----
+ 2 files changed, 40 deletions(-)
 
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index eef243c1ad..829a044e9e 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -68,18 +68,6 @@ CPUState *cpu_create(Object *parent, const char *id, const char *typename)
-     return cpu;
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index ca5882ba59..5ef9dfa8b7 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -2388,16 +2388,6 @@ static void pci_qdev_realize(DeviceState *qdev, Error **errp)
+     pci_dev->msi_trigger = pci_msi_trigger;
  }
  
--CPUState *cpu_create_orphan(const char *typename)
+-static PCIDevice *pci_new_internal(int devfn, bool multifunction,
+-                                   const char *name)
 -{
--    Error *err = NULL;
--    CPUState *cpu = CPU(object_new(typename));
--    if (!qdev_realize(DEVICE(cpu), NULL, &err)) {
--        error_report_err(err);
--        object_unref(OBJECT(cpu));
--        exit(EXIT_FAILURE);
--    }
--    return cpu;
+-    DeviceState *dev;
+-
+-    dev = qdev_new_orphan(name);
+-    qdev_prop_set_int32(dev, "addr", devfn);
+-    qdev_prop_set_bit(dev, "multifunction", multifunction);
+-    return PCI_DEVICE(dev);
+-}
+ 
+ static PCIDevice *pci_new_child_internal(Object *parent, const char *id,
+                                           int devfn, bool multifunction,
+@@ -2440,36 +2430,11 @@ PCIDevice *pci_create_simple(Object *parent, const char *id,
+     return dev;
+ }
+ 
+-PCIDevice *pci_new_multifunction_orphan(int devfn, const char *name)
+-{
+-    return pci_new_internal(devfn, true, name);
 -}
 -
- void cpu_reset_interrupt(CPUState *cpu, int mask)
- {
-     qatomic_and(&cpu->interrupt_request, ~mask);
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 1b2ec1ab1e..544740a699 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -857,16 +857,6 @@ char *cpu_model_from_type(const char *typename);
-  */
- CPUState *cpu_create(Object *parent, const char *id, const char *typename);
- 
--/**
-- * cpu_create_orphan:
-- * @typename: The CPU type.
-- *
-- * Instantiates a CPU and realizes the CPU.
-- *
-- * Returns: A #CPUState or %NULL if an error occurred.
-- */
--CPUState *cpu_create_orphan(const char *typename);
+-PCIDevice *pci_new_orphan(int devfn, const char *name)
+-{
+-    return pci_new_internal(devfn, false, name);
+-}
 -
- /**
-  * parse_cpu_option:
-  * @cpu_option: The -cpu option including optional parameters.
+ bool pci_realize_and_unref(PCIDevice *dev, PCIBus *bus, Error **errp)
+ {
+     return qdev_realize_and_unref(&dev->qdev, &bus->qbus, errp);
+ }
+ 
+-PCIDevice *pci_create_simple_multifunction_orphan(PCIBus *bus, int devfn,
+-                                           const char *name)
+-{
+-    PCIDevice *dev = pci_new_multifunction_orphan(devfn, name);
+-    pci_realize_and_unref(dev, bus, &error_fatal);
+-    return dev;
+-}
+-
+-PCIDevice *pci_create_simple_orphan(PCIBus *bus, int devfn, const char *name)
+-{
+-    PCIDevice *dev = pci_new_orphan(devfn, name);
+-    pci_realize_and_unref(dev, bus, &error_fatal);
+-    return dev;
+-}
+-
+ static uint8_t pci_find_space(PCIDevice *pdev, uint8_t size)
+ {
+     int offset = PCI_CONFIG_HEADER_SIZE;
+diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+index 9c6bcc0b96..d6191fc529 100644
+--- a/include/hw/pci/pci.h
++++ b/include/hw/pci/pci.h
+@@ -1098,13 +1098,8 @@ PCIDevice *pci_create_simple_multifunction(Object *parent, const char *id,
+ PCIDevice *pci_create_simple(Object *parent, const char *id,
+                              PCIBus *bus, int devfn, const char *type);
+ 
+-PCIDevice *pci_new_multifunction_orphan(int devfn, const char *name);
+-PCIDevice *pci_new_orphan(int devfn, const char *name);
+ bool pci_realize_and_unref(PCIDevice *dev, PCIBus *bus, Error **errp);
+ 
+-PCIDevice *pci_create_simple_multifunction_orphan(PCIBus *bus, int devfn,
+-                                           const char *name);
+-PCIDevice *pci_create_simple_orphan(PCIBus *bus, int devfn, const char *name);
+ 
+ void lsi53c8xx_handle_legacy_cmdline(DeviceState *lsi_dev);
+ 
 -- 
 2.47.1
 
