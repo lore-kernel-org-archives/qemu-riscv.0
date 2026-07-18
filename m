@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C65C4450A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:47:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B871C4451B
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:47:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlCrn-0002Aq-PJ; Sat, 18 Jul 2026 17:46:39 -0400
+	id 1wlCrp-0002Hl-AQ; Sat, 18 Jul 2026 17:46:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCrW-0001nx-UJ; Sat, 18 Jul 2026 17:46:23 -0400
+ id 1wlCrf-0001zk-KW; Sat, 18 Jul 2026 17:46:33 -0400
 Received: from pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com
  ([35.155.198.111])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCrU-0003Jx-Ru; Sat, 18 Jul 2026 17:46:22 -0400
+ id 1wlCrd-0003Jx-Ce; Sat, 18 Jul 2026 17:46:31 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784411180; x=1815947180;
+ t=1784411189; x=1815947189;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=tcpsK52XFqezXpOlLJQb4X1gXgJtDN+MPTQXfo8z5K8=;
- b=gqSvN/lf9Uk/bVk+RCY3Z5+Rk0IGsXXlELwT0r3rXNtAs1ivoNV/5oSE
- OrptaiWpu4x9OB003I4FfNr+QB/nBtJLEuYGh88rVVchT6z4Rc9GohxVs
- xaqDlrCMAv0Bttyrzig0Ps54GrUN5vbz0kKTpGCwwdtcnOXmWT01h60Uw
- upbhOUnosaka5H5VxU/cuKMyhYXanOo2ITDSoc8y/XG8L6uwV62FH1WTL
- u+Pw8Kpt3vVhpfCyvjQcZFPp1oxGQjD/PQ2QDxETDVY9pOs9+Y6Ui1rdx
- gfObNpO6MOrYOK+aNLXQ9WVC5qBaiQHDVEkuiMKktO/GpuckNr01g8Npx g==;
-X-CSE-ConnectionGUID: xmhSenv8T+e8GhNC+Km8sA==
-X-CSE-MsgGUID: 1KgPUGwDQHiHnfOc9lmR3g==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23816486"
+ bh=9ZufOTJt2VRTFWvQzbx90SPgJlrAPNTbprAWyn+gGOU=;
+ b=DVo58JO2rijNHLE0ogh8s/+dAeHcm3TFDgpkCd9b7nbtHf2/9vMZ9bro
+ Qw5aTyJsM4PqaMtjevOsKbeEu66u5ROQP0bG1+0eZdhBhkylNRnpTRX55
+ hY9AYKBi0TrJgxBfSUIrIkIt0qF81ncWMikgTsgcFSkSyqkvELFXI7LWS
+ EtoXwcU+5oVOpTJH7xyf31mTswHFnZ2fawwg6Gpk3VobNWtXUBvRZR2fp
+ 2uquQ8PxrA5HEufb5iqhmdk2gtAVRuCEE7nm8sAKiQtlNJvmdDrBJ9AQ9
+ 5kjVRNwGfiVhA2l+2gibgKe8ALqYFw9D9LGj0QI97+SVlyK9A1mcnSIOA g==;
+X-CSE-ConnectionGUID: yVbvdho4RrKCdZTRzFKcHg==
+X-CSE-MsgGUID: tNV55YJrSGOlppi0kjE+ng==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23816500"
 Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
  by internal-pdx-out-009.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:46:17 +0000
-Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:29621]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.35.17:2525]
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:46:26 +0000
+Received: from EX19MTAUWA002.ant.amazon.com [205.251.233.234:19989]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.0.115:2525]
  with esmtp (Farcaster)
- id 845e8aec-94d3-454e-9bd4-98384038b8d8; Sat, 18 Jul 2026 21:46:16 +0000 (UTC)
-X-Farcaster-Flow-ID: 845e8aec-94d3-454e-9bd4-98384038b8d8
+ id ac4b6c22-ff69-4e63-b818-a00715442ac2; Sat, 18 Jul 2026 21:46:26 +0000 (UTC)
+X-Farcaster-Flow-ID: ac4b6c22-ff69-4e63-b818-a00715442ac2
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
+ EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:46:16 +0000
+ Sat, 18 Jul 2026 21:46:26 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:46:07 +0000
+ Sat, 18 Jul 2026 21:46:16 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,16 +93,16 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 033/137] hw/display: Give onboard devices a QOM parent
-Date: Sat, 18 Jul 2026 21:35:08 +0000
-Message-ID: <20260718213652.37673-34-graf@amazon.com>
+Subject: [RFC PATCH v2 034/137] hw/nvram: Give onboard devices a QOM parent
+Date: Sat, 18 Jul 2026 21:35:09 +0000
+Message-ID: <20260718213652.37673-35-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
  <20260718213652.37673-1-graf@amazon.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
 X-ClientProxiedBy: EX19D039UWB004.ant.amazon.com (10.13.138.57) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
@@ -132,7 +132,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/display to the new
+Convert the *_orphan() device-creation calls in hw/nvram to the new
 parented API introduced earlier in this series, so every onboard
 device gets a stable path in the composition tree instead of landing
 in /machine/unattached with an unstable device[N] name.
@@ -143,77 +143,59 @@ composite children.  Names follow existing QOM conventions.
 
 Per-site rationale (reviewers: dispute the modeling here):
 
-hw/display/sii9022.c:167 | i2c_slave_create_simple | OBJECT(dev) | "ddc" | DeviceClass.realize(); DDC slave owned by sii9022 device
-hw/display/sm501.c:1913 | qdev_new | OBJECT(dev) | "ddc" | sm501_init() helper receives realizing DeviceState *dev; drop _and_unref
-hw/display/xlnx_dp.c:1349 | qdev_new | obj | "dpcd" | instance_init(Object *obj); collapse existing add_child+unref, keep name
-hw/display/xlnx_dp.c:1353 | qdev_new | obj | "edid" | instance_init(Object *obj); collapse existing add_child+unref, keep name
+hw/nvram/eeprom_at24c.c:151 | i2c_slave_new | ORPHAN-JUSTIFIED | - | public helper with ~80 callers in hw/arm board files; parent threading deferred to per-board conversion to keep patch scoped to hw/nvram
+hw/nvram/fw_cfg.c:1032 | qdev_new | OBJECT(qdev_get_machine()) | TYPE_FW_CFG | collapse existing add_child(machine, TYPE_FW_CFG, dev); drop _and_unref
+hw/nvram/fw_cfg.c:1064 | qdev_new | OBJECT(qdev_get_machine()) | TYPE_FW_CFG | collapse existing add_child(machine, TYPE_FW_CFG, dev); drop _and_unref
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/display/sii9022.c |  2 +-
- hw/display/sm501.c   |  4 ++--
- hw/display/xlnx_dp.c | 14 +++-----------
- 3 files changed, 6 insertions(+), 14 deletions(-)
+ hw/nvram/fw_cfg.c | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
 
-diff --git a/hw/display/sii9022.c b/hw/display/sii9022.c
-index 0bf49195d7..2accebf193 100644
---- a/hw/display/sii9022.c
-+++ b/hw/display/sii9022.c
-@@ -164,7 +164,7 @@ static void sii9022_realize(DeviceState *dev, Error **errp)
-     I2CBus *bus;
+diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
+index 01fba1c6f6..d3f055718c 100644
+--- a/hw/nvram/fw_cfg.c
++++ b/hw/nvram/fw_cfg.c
+@@ -1029,13 +1029,11 @@ FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, AddressSpace *dma_as)
  
-     bus = I2C_BUS(qdev_get_parent_bus(dev));
--    i2c_slave_create_simple_orphan(bus, TYPE_I2CDDC, 0x50);
-+    i2c_slave_create_simple(OBJECT(dev), "ddc", bus, TYPE_I2CDDC, 0x50);
- }
+     assert(dma_as);
  
- static void sii9022_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/display/sm501.c b/hw/display/sm501.c
-index 1e47e6a32b..56075a0303 100644
---- a/hw/display/sm501.c
-+++ b/hw/display/sm501.c
-@@ -1956,9 +1956,9 @@ static void sm501_init(SM501State *s, DeviceState *dev,
-     /* i2c */
-     s->i2c_bus = i2c_init_bus(dev, "sm501.i2c");
-     /* ddc */
--    I2CDDCState *ddc = I2CDDC(qdev_new_orphan(TYPE_I2CDDC));
-+    I2CDDCState *ddc = I2CDDC(qdev_new(OBJECT(dev), "ddc", TYPE_I2CDDC));
-     i2c_slave_set_address(I2C_SLAVE(ddc), 0x50);
--    qdev_realize_and_unref(DEVICE(ddc), BUS(s->i2c_bus), &error_abort);
-+    qdev_realize(DEVICE(ddc), BUS(s->i2c_bus), &error_abort);
+-    dev = qdev_new_orphan(TYPE_FW_CFG_IO);
+-
+-    object_property_add_child(OBJECT(qdev_get_machine()), TYPE_FW_CFG,
+-                              OBJECT(dev));
++    dev = qdev_new(OBJECT(qdev_get_machine()), TYPE_FW_CFG,
++                   TYPE_FW_CFG_IO);
  
-     /* mmio */
-     memory_region_init(&s->mmio_region, OBJECT(dev), "sm501.mmio", MMIO_SIZE);
-diff --git a/hw/display/xlnx_dp.c b/hw/display/xlnx_dp.c
-index e8490d644d..5968466e79 100644
---- a/hw/display/xlnx_dp.c
-+++ b/hw/display/xlnx_dp.c
-@@ -1341,19 +1341,11 @@ static void xlnx_dp_init(Object *obj)
-      */
-     s->aux_bus = aux_bus_init(DEVICE(obj), "aux");
+     sbd = SYS_BUS_DEVICE(dev);
+-    sysbus_realize_and_unref(sbd, &error_fatal);
++    sysbus_realize(sbd, &error_fatal);
+     ios = FW_CFG_IO(dev);
+     memory_region_add_subregion(iomem, iobase, &ios->comb_iomem);
  
--    /*
--     * Initialize DPCD and EDID. Once we have added the objects as
--     * child properties of this device, we can drop the reference we
--     * hold to them, leaving the child-property as the only reference.
--     */
--    s->dpcd = DPCD(qdev_new_orphan("dpcd"));
--    object_property_add_child(OBJECT(s), "dpcd", OBJECT(s->dpcd));
--    object_unref(s->dpcd);
-+    /* Initialize DPCD and EDID. */
-+    s->dpcd = DPCD(qdev_new(obj, "dpcd", "dpcd"));
+@@ -1061,17 +1059,15 @@ static FWCfgState *fw_cfg_init_mem_internal(hwaddr ctl_addr,
+     FWCfgState *s;
+     bool dma_requested = dma_addr && dma_as;
  
--    s->edid = I2CDDC(qdev_new_orphan("i2c-ddc"));
-+    s->edid = I2CDDC(qdev_new(obj, "edid", "i2c-ddc"));
-     i2c_slave_set_address(I2C_SLAVE(s->edid), 0x50);
--    object_property_add_child(OBJECT(s), "edid", OBJECT(s->edid));
--    object_unref(s->edid);
+-    dev = qdev_new_orphan(TYPE_FW_CFG_MEM);
++    dev = qdev_new(OBJECT(qdev_get_machine()), TYPE_FW_CFG,
++                   TYPE_FW_CFG_MEM);
+     qdev_prop_set_uint32(dev, "data_width", data_width);
+     if (!dma_requested) {
+         qdev_prop_set_bit(dev, "dma_enabled", false);
+     }
  
-     fifo8_create(&s->rx_fifo, 16);
-     fifo8_create(&s->tx_fifo, 16);
+-    object_property_add_child(OBJECT(qdev_get_machine()), TYPE_FW_CFG,
+-                              OBJECT(dev));
+-
+     sbd = SYS_BUS_DEVICE(dev);
+-    sysbus_realize_and_unref(sbd, &error_fatal);
++    sysbus_realize(sbd, &error_fatal);
+     sysbus_mmio_map(sbd, 0, ctl_addr);
+     sysbus_mmio_map(sbd, 1, data_addr);
+ 
 -- 
 2.47.1
 
