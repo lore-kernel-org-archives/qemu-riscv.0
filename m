@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B01DC44521
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10398C4450A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:02:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlD6Y-0000y0-BI; Sat, 18 Jul 2026 18:01:54 -0400
+	id 1wlD74-0002fJ-Ev; Sat, 18 Jul 2026 18:02:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlD6V-0000ow-5i; Sat, 18 Jul 2026 18:01:51 -0400
-Received: from pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.1.125])
+ id 1wlD70-0002di-DX; Sat, 18 Jul 2026 18:02:22 -0400
+Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([44.246.77.92])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlD6T-0005I6-AJ; Sat, 18 Jul 2026 18:01:50 -0400
+ id 1wlD6y-0005LK-Oa; Sat, 18 Jul 2026 18:02:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784412109; x=1815948109;
+ t=1784412140; x=1815948140;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=gFz4tkd1KJwCvb3Rl1/cy5JLi/p+MBu/0U/TuIwPjWU=;
- b=VCyxGr58HPbC1meUb8qTi/7RsgBEo7q2ReS8V185BwI5022HY91aQtUb
- 0KGZYHMN3GQ6o2OpmSctGegE2zH61CQKW34+knAvhMMRgkLyZ9ZQQN3zG
- xKiweb7K9kbe/t21OYrA75BF0Bw/qB0ukHvBet9KaSykZwt9fsDvwiVyo
- xgYEqUAVVOS5DeQJZ41NHWYHD/zmqsv4iD+oiPWHUEamzL3NkrL449OXR
- V0BChAmy/ujzr48M2iAH4h5t+TpOR2fTo3oEaRg4n5OzkDBxdH1coVyRi
- vdPK23GwvEhGC5znGUDxCEbT/eKNoDvnoBQ3ScE+cXQUyaBKrt/QKh4tI A==;
-X-CSE-ConnectionGUID: kJNB4abfQdeXrvuWzpFnLg==
-X-CSE-MsgGUID: teDMr8DeQ6Sn4eG5OZdexA==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23927606"
+ bh=Dn3otMTNYt42pCrVX9LAFPRVYwV4S524ppbCyB1xSIw=;
+ b=BqCi+UMl34lcO3DIOsLYYm0vovBnXR8vNHCSAm6P9rlSJUsipKh+l5xi
+ +UeMq8s0wu1x94sLIw+JdBjrPwmpPeupBAm7xOHMD3MVzla2JuZ5bdvfn
+ 6KdrV3YZb7HKk6nZ8RQBqa0aERnwPFH05eIdmkNCIVwKmfCZ7AqoUija5
+ J6YduYNNdJVX4gl4gs2TFxVJ4vb+m/0GgXIF6WPrOHDhgdVefZPjjwPRX
+ hO9ySxgbt87MvPYZnHuWHOr9llqN+yepziilz54yOKDN0NH19LBtiOEEq
+ DIZW8LnDnyAxt3WzBs033dFHynRqPPlsAA8NahfZdXRKtLet57uOEr3oh Q==;
+X-CSE-ConnectionGUID: CgFqv+b9SR61IJwDiwrTFA==
+X-CSE-MsgGUID: EOh2bZtGSMueFQ8gggRFqQ==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23917749"
 Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:01:45 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.51:9718]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.19.34:2525]
+ by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:02:17 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.182:19126]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.199:2525]
  with esmtp (Farcaster)
- id abec0ef8-c6ad-457f-a6bc-46fc6b9d85df; Sat, 18 Jul 2026 22:01:45 +0000 (UTC)
-X-Farcaster-Flow-ID: abec0ef8-c6ad-457f-a6bc-46fc6b9d85df
+ id aab7997c-e6ee-4723-94f1-2c842ee15e89; Sat, 18 Jul 2026 22:02:16 +0000 (UTC)
+X-Farcaster-Flow-ID: aab7997c-e6ee-4723-94f1-2c842ee15e89
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:01:45 +0000
+ Sat, 18 Jul 2026 22:02:16 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:01:36 +0000
+ Sat, 18 Jul 2026 22:02:06 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,10 +93,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 089/137] qdev: Remove qdev_new_orphan() and
- qdev_try_new_orphan()
-Date: Sat, 18 Jul 2026 21:36:04 +0000
-Message-ID: <20260718213652.37673-90-graf@amazon.com>
+Subject: [RFC PATCH v2 090/137] memory: Accept non-device owners in
+ memory_region_init_ram()
+Date: Sat, 18 Jul 2026 21:36:05 +0000
+Message-ID: <20260718213652.37673-91-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -105,11 +105,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D037UWB004.ant.amazon.com (10.13.138.84) To
+X-ClientProxiedBy: EX19D044UWA002.ant.amazon.com (10.13.139.11) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.1.125;
+Received-SPF: pass client-ip=44.246.77.92;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -133,114 +133,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Every bus-layer *_orphan() wrapper is gone and the last direct
-caller, qdev_device_add_from_qdict(), now uses object_new() plus
-qdev_set_id() to place -device instances under
-/machine/peripheral{,-anon} as before.  There is no remaining
-legitimate way to create a device without picking its parent, so
-drop the transitional *_orphan() spellings and update the doc
-comments that still referenced them.
+memory_region_register_ram() casts the owner to DeviceState with an
+asserting DEVICE() check. Historically this was fine because every
+caller either passed a device or NULL, but the following patches
+give board-created RAM regions their machine as owner, which is not
+a device.
+
+vmstate_register_ram() only uses the device to prefix the RAMBlock
+idstr with the device's canonical path. Use object_dynamic_cast()
+so non-device owners degrade to the same NULL-owner idstr they had
+before, and drop the stale TODO comment.
+
+No functional change for existing callers.
 
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/core/qdev.c         | 13 -------------
- include/hw/core/qdev.h | 30 +++---------------------------
- system/qdev-monitor.c  |  2 +-
- 3 files changed, 4 insertions(+), 41 deletions(-)
+ system/memory.c | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
 
-diff --git a/hw/core/qdev.c b/hw/core/qdev.c
-index 947ba7db80..89bc1e30c0 100644
---- a/hw/core/qdev.c
-+++ b/hw/core/qdev.c
-@@ -165,19 +165,6 @@ DeviceState *qdev_try_new(Object *parent, const char *id, const char *type)
-     return DEVICE(obj);
+diff --git a/system/memory.c b/system/memory.c
+index 5fc36708ec..838be57b4d 100644
+--- a/system/memory.c
++++ b/system/memory.c
+@@ -3631,15 +3631,16 @@ void mtree_info(bool flatview, bool dispatch_tree, bool owner, bool disabled)
+ 
+ static void memory_region_register_ram(MemoryRegion *mr, Object *owner)
+ {
+-    DeviceState *owner_dev;
+-
+-    /* This will assert if owner is neither NULL nor a DeviceState.
+-     * We only want the owner here for the purposes of defining a
+-     * unique name for migration. TODO: Ideally we should implement
+-     * a naming scheme for Objects which are not DeviceStates, in
+-     * which case we can relax this restriction.
++    /*
++     * vmstate_register_ram() prefixes the RAMBlock idstr with the
++     * bus-class dev-path of @owner (via qdev_get_dev_path()), not
++     * the QOM canonical path, when it is a DeviceState.  Board-
++     * created RAM regions are owned by the machine, which is not a
++     * device; pass NULL there so the idstr is the bare region name,
++     * matching historical behaviour for owner==NULL callers.
+      */
+-    owner_dev = DEVICE(owner);
++    DeviceState *owner_dev =
++        (DeviceState *)object_dynamic_cast(owner, TYPE_DEVICE);
+     vmstate_register_ram(mr, owner_dev);
  }
  
--DeviceState *qdev_new_orphan(const char *name)
--{
--    return DEVICE(object_new(name));
--}
--
--DeviceState *qdev_try_new_orphan(const char *name)
--{
--    ObjectClass *oc = module_object_class_by_name(name);
--    if (!oc) {
--        return NULL;
--    }
--    return DEVICE(object_new_with_class(oc));
--}
- 
- static QTAILQ_HEAD(, DeviceListener) device_listeners
-     = QTAILQ_HEAD_INITIALIZER(device_listeners);
-diff --git a/include/hw/core/qdev.h b/include/hw/core/qdev.h
-index e692a1d48e..9220e9e3b1 100644
---- a/include/hw/core/qdev.h
-+++ b/include/hw/core/qdev.h
-@@ -440,30 +440,6 @@ DeviceState *qdev_new(Object *parent, const char *id, const char *type);
-  */
- DeviceState *qdev_try_new(Object *parent, const char *id, const char *type);
- 
--/**
-- * qdev_new_orphan: Create a device on the heap
-- * @name: device type to create (we assert() that this type exists)
-- *
-- * This only allocates the memory and initializes the device state
-- * structure, ready for the caller to set properties if they wish.
-- * The device still needs to be realized.
-- *
-- * Return: a derived DeviceState object with a reference count of 1.
-- */
--DeviceState *qdev_new_orphan(const char *name);
--
--/**
-- * qdev_try_new_orphan: Try to create a device on the heap
-- * @name: device type to create
-- *
-- * This is like qdev_new_orphan(), except it returns %NULL when type @name
-- * does not exist, rather than asserting.
-- *
-- * Return: a derived DeviceState object with a reference count of 1 or
-- * NULL if type @name does not exist.
-- */
--DeviceState *qdev_try_new_orphan(const char *name);
--
- /**
-  * qdev_is_realized() - check if device is realized
-  * @dev: The device to check.
-@@ -488,8 +464,8 @@ static inline bool qdev_is_realized(DeviceState *dev)
-  * If @bus, plug @dev into @bus.  This takes a reference to @dev.
-  * If @dev has no QOM parent, make one up, taking another reference.
-  *
-- * If you created @dev using qdev_new_orphan(), you probably want to use
-- * qdev_realize_and_unref() instead.
-+ * If you created @dev via object_new() directly (holding a floating
-+ * reference), you probably want to use qdev_realize_and_unref() instead.
-  *
-  * Return: true on success, else false setting @errp with error
-  */
-@@ -506,7 +482,7 @@ bool qdev_realize(DeviceState *dev, BusState *bus, Error **errp);
-  * (private) reference, which is dropped on return regardless of
-  * success or failure.  Intended use::
-  *
-- *     dev = qdev_new_orphan();
-+ *     dev = DEVICE(object_new(TYPE_FOO));
-  *     [...]
-  *     qdev_realize_and_unref(dev, bus, errp);
-  *
-diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
-index adc37d6a89..0e13b1540c 100644
---- a/system/qdev-monitor.c
-+++ b/system/qdev-monitor.c
-@@ -707,7 +707,7 @@ DeviceState *qdev_device_add_from_qdict(const QDict *opts,
-     }
- 
-     /* create device */
--    dev = qdev_new_orphan(driver);
-+    dev = DEVICE(object_new(driver));
- 
-     /* Check whether the hotplug is allowed by the machine */
-     if (phase_check(PHASE_MACHINE_READY) &&
 -- 
 2.47.1
 
