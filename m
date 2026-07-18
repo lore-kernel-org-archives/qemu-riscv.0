@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EA15C44521
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81317C4451B
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 22:07:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlDB6-00026Q-Uv; Sat, 18 Jul 2026 18:06:37 -0400
+	id 1wlDBl-0005FS-Sq; Sat, 18 Jul 2026 18:07:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlDAc-0001Sx-Pk; Sat, 18 Jul 2026 18:06:20 -0400
-Received: from pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.77.92])
+ id 1wlDBa-0004y2-Ek; Sat, 18 Jul 2026 18:07:06 -0400
+Received: from pdx-out-015.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([50.112.246.219])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlDAX-0006EX-52; Sat, 18 Jul 2026 18:06:03 -0400
+ id 1wlDBY-0006He-GX; Sat, 18 Jul 2026 18:07:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784412361; x=1815948361;
+ t=1784412424; x=1815948424;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=WVG7UbEd5jReDUPwyZrcT5g0dUYQucY4eitOzKM6+GY=;
- b=jwChfzwMmc9QTb5gNfYdSl2qJUwMKNIAo7NJPsGjYjxzHsg2mqgeGvVH
- Lwj0t1Bq46oz3n0yKGm9O/vHdFAB2QJ6sbRzrZjv6ozwPxrEHfolysvKn
- sTxzn6ekKI7V/HX/6bzuCnL50rM/EceIn5q59MeEO4CF4LC2dZJqAXgyQ
- knX/rBpfJUwcTYbhegK6J/7Vj2ShqKNoUEUdiKvsZeXfdrt+QMOgIHsKk
- yHmPIeLJD/RmCdncv67dBYmvmtSaLEp4MzzvOBqsdDfsWi1qCJkUYvqth
- yb2xu5BRBe0vattsIhZYAZAcyLuUcyUMK/ZP4lZN7oiW+/b7q3A0Dfih2 Q==;
-X-CSE-ConnectionGUID: vyNQ7YcwR32+ML3nTz/a7A==
-X-CSE-MsgGUID: uaheAJs9TTKFfoJU1OXPOQ==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23917985"
+ bh=Bf2p0UMpWSGplqSzcxf51p2ckh1yy0+rCZ/xLdiJQho=;
+ b=tZTZ+vy66yqZxEkHq5g0DW81Jn2sEKTzcu5ZUIjx1Yn1N1fXntzrJkH3
+ DGejF0cd2Y1M5qy/Rwg0gxCiJLK3Iokzy+pDaIEF57YxG2VmPu+3ccX6i
+ oN/9nJFmNV8JARoBEbAyIJ4SCEs5jXYaJHN+XSc2mkrzznQLKCxIj2REK
+ dBeYtieUY9nnZuiE08zxOuBc6Hfa34X/svsQW04Ir5kF2mALqfq1f3/32
+ 5Pe1b+Ct+S5Dmv2AW02tb0NZgFjceCluIxyXYFTBCa/dI3cGCljpHZW0y
+ mr1KsDr234sNo0nPW8G7BkVU70tytZ1PsdRGmOt4sPjsIXaNJXCaOJfwe w==;
+X-CSE-ConnectionGUID: 9v2wO3KOQXamLkHy88kWMA==
+X-CSE-MsgGUID: x3d2y7ZISLueLRjDa8hQHg==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23725699"
 Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
  smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
- by internal-pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:05:57 +0000
-Received: from EX19MTAUWC002.ant.amazon.com [205.251.233.51:13970]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.35.17:2525]
+ by internal-pdx-out-015.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 22:06:48 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:24486]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.48.250:2525]
  with esmtp (Farcaster)
- id 240222be-972a-462e-8aca-ac2f19d26365; Sat, 18 Jul 2026 22:05:57 +0000 (UTC)
-X-Farcaster-Flow-ID: 240222be-972a-462e-8aca-ac2f19d26365
+ id c9f51611-2e7a-4f79-be1b-3b34475a82d4; Sat, 18 Jul 2026 22:06:48 +0000 (UTC)
+X-Farcaster-Flow-ID: c9f51611-2e7a-4f79-be1b-3b34475a82d4
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC002.ant.amazon.com (10.250.64.143) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:05:56 +0000
+ Sat, 18 Jul 2026 22:06:47 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 22:05:47 +0000
+ Sat, 18 Jul 2026 22:06:38 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,10 +93,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 104/137] hw/char: Give parallel and htif memory regions
- an explicit owner
-Date: Sat, 18 Jul 2026 21:36:19 +0000
-Message-ID: <20260718213652.37673-105-graf@amazon.com>
+Subject: [RFC PATCH v2 107/137] hw/ide: Let ide_init_ioport() take an explicit
+ owner
+Date: Sat, 18 Jul 2026 21:36:22 +0000
+Message-ID: <20260718213652.37673-108-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -105,11 +105,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D040UWA001.ant.amazon.com (10.13.139.22) To
+X-ClientProxiedBy: EX19D036UWB002.ant.amazon.com (10.13.139.139) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.77.92;
+Received-SPF: pass client-ip=50.112.246.219;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-004.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-015.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -133,147 +133,122 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thread Object *owner as the first argument through parallel_mm_init()
-and htif_mm_init(). All callers are inside board init functions
-and pass OBJECT(machine).
+hw/ide/piix.c calls ide_init_ioport() with a NULL ISADevice because
+the PIIX IDE function is a PCI device, not an ISA one.  That NULL
+propagates to isa_register_portio_list() and from there to
+portio_list_init() as owner==NULL, which the following commit turns
+into a hard error.
 
-No functional change intended.
+Change ide_init_ioport() to take an Object *owner directly.  When the
+owner is an ISADevice, keep the existing isa_register_portio_list()
+path so isa_init_ioport() still records the base I/O port for firmware
+paths.  When it is not (the PIIX case), register the port lists with
+the given owner directly.
 
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/char/parallel.c           | 5 +++--
- hw/char/riscv_htif.c         | 5 +++--
- hw/hppa/machine.c            | 5 +++--
- hw/mips/jazz.c               | 2 +-
- hw/riscv/spike.c             | 2 +-
- include/hw/char/parallel.h   | 3 ++-
- include/hw/char/riscv_htif.h | 3 ++-
- 7 files changed, 15 insertions(+), 10 deletions(-)
+ hw/ide/ide-internal.h |  2 +-
+ hw/ide/ioport.c       | 37 ++++++++++++++++++++++++++-----------
+ hw/ide/isa.c          |  2 +-
+ hw/ide/piix.c         |  2 +-
+ 4 files changed, 29 insertions(+), 14 deletions(-)
 
-diff --git a/hw/char/parallel.c b/hw/char/parallel.c
-index 07bbc9443f..39a1d77e9f 100644
---- a/hw/char/parallel.c
-+++ b/hw/char/parallel.c
-@@ -585,7 +585,8 @@ static const MemoryRegionOps parallel_mm_ops = {
- };
+diff --git a/hw/ide/ide-internal.h b/hw/ide/ide-internal.h
+index 281d07c9d5..3f48335cdf 100644
+--- a/hw/ide/ide-internal.h
++++ b/hw/ide/ide-internal.h
+@@ -419,7 +419,7 @@ uint32_t ide_data_readl(void *opaque, uint32_t addr);
+ int ide_init_drive(IDEState *s, IDEDevice *dev, IDEDriveKind kind, Error **errp);
+ void ide_exit(IDEState *s);
+ void ide_bus_init_output_irq(IDEBus *bus, qemu_irq irq_out);
+-int ide_init_ioport(IDEBus *bus, ISADevice *isa, int iobase, int iobase2);
++int ide_init_ioport(IDEBus *bus, Object *owner, int iobase, int iobase2);
+ void ide_bus_set_irq(IDEBus *bus);
+ void ide_bus_register_restart_cb(IDEBus *bus);
  
- /* If fd is zero, it means that the parallel device uses the console */
--bool parallel_mm_init(MemoryRegion *address_space,
-+bool parallel_mm_init(Object *owner,
-+                      MemoryRegion *address_space,
-                       hwaddr base, int it_shift, qemu_irq irq,
-                       Chardev *chr)
+diff --git a/hw/ide/ioport.c b/hw/ide/ioport.c
+index a2f457f0bd..afafe6844c 100644
+--- a/hw/ide/ioport.c
++++ b/hw/ide/ioport.c
+@@ -1,5 +1,5 @@
+ /*
+- * QEMU IDE disk and CD/DVD-ROM Emulator
++ * QEMU IDE Emulation: PIO ioport registration.
+  *
+  * Copyright (c) 2003 Fabrice Bellard
+  * Copyright (c) 2006 Openedhand Ltd.
+@@ -28,19 +28,34 @@
+ #include "ide-internal.h"
+ #include "trace.h"
+ 
+-int ide_init_ioport(IDEBus *bus, ISADevice *dev, int iobase, int iobase2)
++int ide_init_ioport(IDEBus *bus, Object *owner, int iobase, int iobase2)
  {
-@@ -597,7 +598,7 @@ bool parallel_mm_init(MemoryRegion *address_space,
-     s->it_shift = it_shift;
-     qemu_register_reset(parallel_reset, s);
++    ISADevice *isa = ISA_DEVICE(object_dynamic_cast(owner, TYPE_ISA_DEVICE));
+     int ret;
  
--    memory_region_init_io(&s->iomem, NULL, &parallel_mm_ops, s,
-+    memory_region_init_io(&s->iomem, owner, &parallel_mm_ops, s,
-                           "parallel", 8 << it_shift);
-     memory_region_add_subregion(address_space, base, &s->iomem);
-     return true;
-diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-index 488f938d98..f9e39c31aa 100644
---- a/hw/char/riscv_htif.c
-+++ b/hw/char/riscv_htif.c
-@@ -329,7 +329,8 @@ static const MemoryRegionOps htif_mm_ops = {
-     },
- };
+-    /* ??? Assume only ISA and PCI configurations, and that the PCI-ISA
+-       bridge has been setup properly to always register with ISA.  */
+-    ret = isa_register_portio_list(dev, &bus->portio_list,
+-                                   iobase, ide_portio_list, bus, "ide");
+-
+-    if (ret == 0 && iobase2) {
+-        ret = isa_register_portio_list(dev, &bus->portio2_list,
+-                                       iobase2, ide_portio2_list, bus, "ide");
++    if (isa) {
++        ret = isa_register_portio_list(isa, &bus->portio_list,
++                                       iobase, ide_portio_list, bus, "ide");
++        if (ret == 0 && iobase2) {
++            ret = isa_register_portio_list(isa, &bus->portio2_list,
++                                           iobase2, ide_portio2_list, bus,
++                                           "ide");
++        }
++        return ret;
+     }
  
--HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
-+HTIFState *htif_mm_init(Object *owner,
-+                        MemoryRegion *address_space, Chardev *chr,
-                         uint64_t nonelf_base, bool custom_base)
- {
-     uint64_t base, size, tohost_offset, fromhost_offset;
-@@ -359,7 +360,7 @@ HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
-     qemu_chr_fe_set_handlers(&s->chr, htif_can_recv, htif_recv, htif_event,
-         htif_be_change, s, NULL, true);
- 
--    memory_region_init_io(&s->mmio, NULL, &htif_mm_ops, s,
-+    memory_region_init_io(&s->mmio, owner, &htif_mm_ops, s,
-                           TYPE_HTIF_UART, size);
-     memory_region_add_subregion_overlap(address_space, base,
-                                         &s->mmio, 1);
-diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
-index 233cf6318b..ea02b9e70e 100644
---- a/hw/hppa/machine.c
-+++ b/hw/hppa/machine.c
-@@ -613,7 +613,8 @@ static void machine_HP_715_init(MachineState *machine)
-         serial_hd(0), DEVICE_BIG_ENDIAN);
- 
-     /* Parallel port */
--    parallel_mm_init(addr_space, translate(NULL, LASI_HPA_715 + LASI_LPT + 0x800), 0,
-+    parallel_mm_init(OBJECT(machine), addr_space,
-+                     translate(NULL, LASI_HPA_715 + LASI_LPT + 0x800), 0,
-                      qdev_get_gpio_in(lasi_dev, LASI_IRQ_LPT_HPA),
-                      parallel_hds[0]);
- 
-@@ -706,7 +707,7 @@ static void machine_HP_B160L_init(MachineState *machine)
-         serial_hd(1), DEVICE_BIG_ENDIAN);
- 
-     /* Parallel port */
--    parallel_mm_init(addr_space,
-+    parallel_mm_init(OBJECT(machine), addr_space,
-                      translate(NULL, LASI_HPA + LASI_LPT + 0x800), 0,
-                      qdev_get_gpio_in(lasi_dev, LASI_IRQ_LPT_HPA),
-                      parallel_hds[0]);
-diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
-index 8999efb352..ff18b28c86 100644
---- a/hw/mips/jazz.c
-+++ b/hw/mips/jazz.c
-@@ -385,7 +385,7 @@ static void mips_jazz_init(MachineState *machine,
- 
-     /* Parallel port */
-     if (parallel_hds[0])
--        parallel_mm_init(address_space, 0x80008000, 0,
-+        parallel_mm_init(OBJECT(machine), address_space, 0x80008000, 0,
-                          qdev_get_gpio_in(rc4030, 0), parallel_hds[0]);
- 
-     /* FIXME: missing Jazz sound at 0x8000c000, rc4030[2] */
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 9f1a1b5898..cd9a2ee0df 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -247,7 +247,7 @@ static void spike_board_init(MachineState *machine)
-                               fdt_load_addr);
- 
-     /* initialize HTIF using symbols found in load_kernel */
--    htif_mm_init(system_memory, serial_hd(0), memmap[SPIKE_HTIF].base,
-+    htif_mm_init(OBJECT(machine), system_memory, serial_hd(0), memmap[SPIKE_HTIF].base,
-                  htif_custom_base);
+-    return ret;
++    /* PIIX3/4: no ISADevice, but ISA I/O space is set up by the PCI-ISA */
++    /* bridge; register the port lists directly with the given owner.   */
++    if (!isa_address_space_io(NULL)) {
++        return -ENODEV;
++    }
++    portio_list_init(&bus->portio_list, owner, ide_portio_list, bus, "ide");
++    portio_list_add(&bus->portio_list, isa_address_space_io(NULL), iobase);
++    if (iobase2) {
++        portio_list_init(&bus->portio2_list, owner,
++                         ide_portio2_list, bus, "ide");
++        portio_list_add(&bus->portio2_list,
++                        isa_address_space_io(NULL), iobase2);
++    }
++    return 0;
  }
+diff --git a/hw/ide/isa.c b/hw/ide/isa.c
+index 37457be035..7949625e00 100644
+--- a/hw/ide/isa.c
++++ b/hw/ide/isa.c
+@@ -71,7 +71,7 @@ static void isa_ide_realizefn(DeviceState *dev, Error **errp)
+     ISAIDEState *s = ISA_IDE(dev);
  
-diff --git a/include/hw/char/parallel.h b/include/hw/char/parallel.h
-index 782cc12602..7e8b9c9012 100644
---- a/include/hw/char/parallel.h
-+++ b/include/hw/char/parallel.h
-@@ -25,7 +25,8 @@ typedef struct ParallelState {
+     ide_bus_init(&s->bus, sizeof(s->bus), dev, 0, 2);
+-    ide_init_ioport(&s->bus, isadev, s->iobase, s->iobase2);
++    ide_init_ioport(&s->bus, OBJECT(isadev), s->iobase, s->iobase2);
+     ide_bus_init_output_irq(&s->bus, isa_get_irq(isadev, s->irqnum));
+     vmstate_register_any(VMSTATE_IF(dev), &vmstate_ide_isa, s);
+     ide_bus_register_restart_cb(&s->bus);
+diff --git a/hw/ide/piix.c b/hw/ide/piix.c
+index a0f2709c69..5c5b91fa52 100644
+--- a/hw/ide/piix.c
++++ b/hw/ide/piix.c
+@@ -134,7 +134,7 @@ static bool pci_piix_init_bus(PCIIDEState *d, unsigned i, Error **errp)
+     int ret;
  
- void parallel_hds_isa_init(Object *parent, ISABus *bus, int n);
- 
--bool parallel_mm_init(MemoryRegion *address_space,
-+bool parallel_mm_init(Object *owner,
-+                      MemoryRegion *address_space,
-                       hwaddr base, int it_shift, qemu_irq irq,
-                       Chardev *chr);
- 
-diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
-index 9d61e60d0a..40516adc08 100644
---- a/include/hw/char/riscv_htif.h
-+++ b/include/hw/char/riscv_htif.h
-@@ -48,7 +48,8 @@ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
-     uint64_t st_size);
- 
- /* legacy pre qom */
--HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
-+HTIFState *htif_mm_init(Object *owner,
-+                        MemoryRegion *address_space, Chardev *chr,
-                         uint64_t nonelf_base, bool custom_base);
- 
- #endif
+     ide_bus_init(&d->bus[i], sizeof(d->bus[i]), DEVICE(d), i, 2);
+-    ret = ide_init_ioport(&d->bus[i], NULL, port_info[i].iobase,
++    ret = ide_init_ioport(&d->bus[i], OBJECT(d), port_info[i].iobase,
+                           port_info[i].iobase2);
+     if (ret) {
+         error_setg_errno(errp, -ret, "Failed to realize %s port %u",
 -- 
 2.47.1
 
