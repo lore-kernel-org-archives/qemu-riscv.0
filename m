@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5360C4451B
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:40:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A191C4451B
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:40:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlCkQ-0001r6-CQ; Sat, 18 Jul 2026 17:39:02 -0400
+	id 1wlCld-0003or-0e; Sat, 18 Jul 2026 17:40:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCkI-0001fB-NP; Sat, 18 Jul 2026 17:38:55 -0400
-Received: from pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([34.218.115.239])
+ id 1wlCl5-0002ny-GL; Sat, 18 Jul 2026 17:39:44 -0400
+Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([52.13.214.179])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCkF-000236-Iw; Sat, 18 Jul 2026 17:38:54 -0400
+ id 1wlCl1-00025p-Op; Sat, 18 Jul 2026 17:39:43 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784410731; x=1815946731;
+ t=1784410779; x=1815946779;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=NX8h0Ii0dqKDkHZLFo4SWosF5/zhX7cRqNZjQ4zBGsI=;
- b=QLarVAS/69UzCVfai6A58ZEfyBQ9UIHS4pvAg2HRv9XuROrPiWTs1/y6
- GsmmOJAoosCmvEvRGSRT/m8SFG2hsIhdvbzhyTZ+FMy4mp/PEu9aW3hqe
- yVanso9UfkafG0gEZbdscgM8Fgm/fss3m0VJUQXUsVhqbf5VbR2+L0dpS
- jYZ9z2SRArEn4aITQgPgEmvfT82jCTYeA+k/XHmtSo6kh4EOt3CfkZMHQ
- TuO+0t+ni5tkIddLrD8DW4DHhNJIFkOi1ECW+PwNH8N8wn/5jaWZChIqS
- tXMLeh1HF0/SLTx7yFQMxcEakaHtt1tqgYn1q6SWkv8b+Nx9sQB2rGrZ+ g==;
-X-CSE-ConnectionGUID: suM5oRkeROS5vpvJ4PTtQA==
-X-CSE-MsgGUID: dt9W30uHQW6O+s9doWltyA==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23718839"
-Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
- by internal-pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:38:46 +0000
-Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.53:13373]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.199:2525]
+ bh=VPXZ5oufGK6iiKeqRU37vBXb9Gf3bdR2KTWvztToIpo=;
+ b=bhgVNw51cp43CS6+46Lg+MXW/sKBxr7Z3WtNz7CqqpRE6snuBNa23ypu
+ hLpAqC9UTgL+KVgsAl8sfGt1Vx222oniCbPEK3NeabnSS0kNG/uN6gOSe
+ ckTAEmzvXY4LGhq+98+G62PeBV7iOe54MR2NSsmzPXP0eDb5cPzYX8CFQ
+ F/SxJSUz7kTtktlGdT71ACMDQtX1FT538hj/7TYry7g/9dWO6q/YXh0xs
+ 52OFEl/9Y5fNLOhLuqrl0RvbZIUp8wzpO4tZS6aL0oS6nvWk31nDADRFV
+ VDpZ6yYSZvJNwyqwFxDHa/BWdbhLhn1HBUDiPb7DGZq+IquGT2ZqHS48z Q==;
+X-CSE-ConnectionGUID: YdAJvaFlQ3CsWSNCVBs2WQ==
+X-CSE-MsgGUID: b2AUPqtNTWaN0Uu2rGcgpQ==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23903583"
+Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+ by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:39:36 +0000
+Received: from EX19MTAUWB001.ant.amazon.com [205.251.233.104:29025]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.19.34:2525]
  with esmtp (Farcaster)
- id 6597940d-9f96-4d38-915b-4518bcffa94d; Sat, 18 Jul 2026 21:38:45 +0000 (UTC)
-X-Farcaster-Flow-ID: 6597940d-9f96-4d38-915b-4518bcffa94d
+ id 7687f1f1-42b7-4909-adea-36dbff4460f1; Sat, 18 Jul 2026 21:39:35 +0000 (UTC)
+X-Farcaster-Flow-ID: 7687f1f1-42b7-4909-adea-36dbff4460f1
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
+ EX19MTAUWB001.ant.amazon.com (10.250.64.248) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:38:45 +0000
+ Sat, 18 Jul 2026 21:39:35 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:38:36 +0000
+ Sat, 18 Jul 2026 21:39:26 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,10 +93,9 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 006/137] isa: Make
- isa_new()/isa_try_new()/isa_create_simple() take a QOM parent
-Date: Sat, 18 Jul 2026 21:34:41 +0000
-Message-ID: <20260718213652.37673-7-graf@amazon.com>
+Subject: [RFC PATCH v2 009/137] cpu: Make cpu_create() take a QOM parent
+Date: Sat, 18 Jul 2026 21:34:44 +0000
+Message-ID: <20260718213652.37673-10-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -105,18 +104,18 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
-X-ClientProxiedBy: EX19D046UWA001.ant.amazon.com (10.13.139.112) To
+X-ClientProxiedBy: EX19D046UWB003.ant.amazon.com (10.13.139.174) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=34.218.115.239;
+Received-SPF: pass client-ip=52.13.214.179;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-013.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
 X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
  HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H2=-0.01, SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -133,554 +132,488 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Same rename-and-reintroduce treatment as the qdev, sysbus and PCI
-layers: mechanically rename the three ISA creation helpers to
-*_orphan() and reintroduce the short names with a leading
-(parent, id, ...) pair.
+CPUs are the single largest source of orphans in /machine/unattached
+because virtually every board that isn't SoC-based creates them via
+cpu_create(), which calls object_new() with no parent.  This is also
+where the user-visible garbage in query-cpus-fast comes from: qom_path
+reads /machine/unattached/device[N] instead of /machine/cpu[N].
 
-The parented isa_create_simple() calls qdev_realize() (not
-isa_realize_and_unref()) since the child<> property already holds
-the sole reference.
+Apply the same rename-and-reintroduce treatment: mechanically rename
+cpu_create() to cpu_create_orphan() and reintroduce cpu_create()
+with a leading (parent, id, ...) pair built on object_new_child().
+On realize failure the parented variant unparents (rather than
+unrefs) since the sole reference is held by the parent.
 
 The mechanical rename part is generated by
 
-  spatch --sp-file scripts/coccinelle/qom-parent/isa-new-orphan.cocci \
-         --in-place --include-headers --dir .
+  spatch --sp-file \
+      scripts/coccinelle/qom-parent/cpu-create-orphan.cocci \
+      --in-place --include-headers --dir .
 
 or equivalently
 
   git ls-files '*.[ch]' '*.[ch].inc' '*.rst' '*.py' | \
       grep -v '^subprojects/' | \
-      xargs sed -i \
-          's/\bisa_create_simple\b/&_orphan/g;
-           s/\bisa_try_new\b/&_orphan/g;
-           s/\bisa_new\b/&_orphan/g'
+      xargs sed -i 's/\bcpu_create\b/cpu_create_orphan/g'
 
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/alpha/dp264.c                              |  2 +-
- hw/char/parallel-isa.c                        |  2 +-
- hw/char/serial-isa.c                          |  2 +-
- hw/dma/i8257.c                                |  4 +--
- hw/i386/isapc.c                               |  2 +-
- hw/i386/pc.c                                  | 12 ++++----
- hw/ide/isa.c                                  |  2 +-
- hw/intc/i8259_common.c                        |  2 +-
- hw/isa/i82378.c                               |  4 +--
- hw/isa/isa-bus.c                              | 30 +++++++++++++++----
- hw/isa/isa-superio.c                          | 10 +++----
- hw/mips/jazz.c                                |  2 +-
- hw/mips/malta.c                               |  2 +-
- hw/ppc/pnv.c                                  |  2 +-
- hw/ppc/prep.c                                 | 12 ++++----
- hw/rtc/mc146818rtc.c                          |  2 +-
- hw/sparc64/sun4u.c                            |  4 +--
- include/hw/i386/vmport.h                      |  2 +-
- include/hw/isa/isa.h                          | 10 +++++--
- include/hw/net/ne2000-isa.h                   |  2 +-
- include/hw/timer/i8254.h                      |  4 +--
- .../qom-parent/isa-new-orphan.cocci           | 23 ++++++++++++++
- 22 files changed, 91 insertions(+), 46 deletions(-)
- create mode 100644 scripts/coccinelle/qom-parent/isa-new-orphan.cocci
+ bsd-user/main.c                                   |  2 +-
+ hw/alpha/dp264.c                                  |  2 +-
+ hw/arm/musicpal.c                                 |  2 +-
+ hw/arm/omap1.c                                    |  2 +-
+ hw/arm/strongarm.c                                |  2 +-
+ hw/core/cpu-common.c                              | 14 +++++++++++++-
+ hw/core/null-machine.c                            |  2 +-
+ hw/hppa/machine.c                                 |  2 +-
+ hw/m68k/an5206.c                                  |  2 +-
+ hw/m68k/mcf5208.c                                 |  2 +-
+ hw/m68k/next-cube.c                               |  2 +-
+ hw/m68k/virt.c                                    |  2 +-
+ hw/or1k/or1k-sim.c                                |  2 +-
+ hw/or1k/virt.c                                    |  2 +-
+ hw/ppc/amigaone.c                                 |  2 +-
+ hw/ppc/mac_newworld.c                             |  2 +-
+ hw/ppc/mac_oldworld.c                             |  2 +-
+ hw/ppc/pegasos.c                                  |  2 +-
+ hw/ppc/ppc440_bamboo.c                            |  2 +-
+ hw/ppc/prep.c                                     |  2 +-
+ hw/ppc/sam460ex.c                                 |  2 +-
+ hw/ppc/virtex_ml507.c                             |  2 +-
+ hw/sh4/r2d.c                                      |  2 +-
+ hw/tricore/tricore_testboard.c                    |  2 +-
+ hw/xtensa/sim.c                                   |  2 +-
+ hw/xtensa/xtfpga.c                                |  2 +-
+ include/hw/core/cpu.h                             | 15 ++++++++++++++-
+ linux-user/main.c                                 |  4 ++--
+ .../coccinelle/qom-parent/cpu-create-orphan.cocci | 13 +++++++++++++
+ 29 files changed, 67 insertions(+), 29 deletions(-)
+ create mode 100644 scripts/coccinelle/qom-parent/cpu-create-orphan.cocci
 
+diff --git a/bsd-user/main.c b/bsd-user/main.c
+index 694481ae3e..5269ea42a5 100644
+--- a/bsd-user/main.c
++++ b/bsd-user/main.c
+@@ -474,7 +474,7 @@ int main(int argc, char **argv)
+     set_preferred_target_page_bits(ctz32(host_page_size));
+     finalize_target_page_bits();
+ 
+-    cpu = cpu_create(cpu_type);
++    cpu = cpu_create_orphan(cpu_type);
+     env = cpu_env(cpu);
+     cpu_reset(cpu);
+     thread_cpu = cpu;
 diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
-index 6999168df6..b07dcebaa0 100644
+index b07dcebaa0..512b270838 100644
 --- a/hw/alpha/dp264.c
 +++ b/hw/alpha/dp264.c
-@@ -126,7 +126,7 @@ static void clipper_init(MachineState *machine)
-     pci_init_nic_devices(pci_bus, mc->default_nic);
- 
-     /* Super I/O */
--    isa_create_simple(isa_bus, TYPE_SMC37C669_SUPERIO);
-+    isa_create_simple_orphan(isa_bus, TYPE_SMC37C669_SUPERIO);
- 
-     /* IDE disk setup.  */
-     pci_dev = pci_create_simple_orphan(pci_bus, -1, "cmd646-ide");
-diff --git a/hw/char/parallel-isa.c b/hw/char/parallel-isa.c
-index 92e94138f4..19583c0f23 100644
---- a/hw/char/parallel-isa.c
-+++ b/hw/char/parallel-isa.c
-@@ -22,7 +22,7 @@ static void parallel_init(ISABus *bus, int index, Chardev *chr)
-     DeviceState *dev;
-     ISADevice *isadev;
- 
--    isadev = isa_new(TYPE_ISA_PARALLEL);
-+    isadev = isa_new_orphan(TYPE_ISA_PARALLEL);
-     dev = DEVICE(isadev);
-     qdev_prop_set_uint32(dev, "index", index);
-     qdev_prop_set_chr(dev, "chardev", chr);
-diff --git a/hw/char/serial-isa.c b/hw/char/serial-isa.c
-index eaa4e843c0..4dbdc0df91 100644
---- a/hw/char/serial-isa.c
-+++ b/hw/char/serial-isa.c
-@@ -165,7 +165,7 @@ static void serial_isa_init(ISABus *bus, int index, Chardev *chr)
-     DeviceState *dev;
-     ISADevice *isadev;
- 
--    isadev = isa_new(TYPE_ISA_SERIAL);
-+    isadev = isa_new_orphan(TYPE_ISA_SERIAL);
-     dev = DEVICE(isadev);
-     qdev_prop_set_uint32(dev, "index", index);
-     qdev_prop_set_chr(dev, "chardev", chr);
-diff --git a/hw/dma/i8257.c b/hw/dma/i8257.c
-index 5771549889..d1ab17b80d 100644
---- a/hw/dma/i8257.c
-+++ b/hw/dma/i8257.c
-@@ -651,7 +651,7 @@ void i8257_dma_init(Object *parent, ISABus *bus, bool high_page_enable)
-     ISADevice *isa1, *isa2;
-     DeviceState *d;
- 
--    isa1 = isa_new(TYPE_I8257);
-+    isa1 = isa_new_orphan(TYPE_I8257);
-     object_property_add_child(parent, "dma[*]", OBJECT(isa1));
-     d = DEVICE(isa1);
-     qdev_prop_set_int32(d, "base", 0x00);
-@@ -660,7 +660,7 @@ void i8257_dma_init(Object *parent, ISABus *bus, bool high_page_enable)
-     qdev_prop_set_int32(d, "dshift", 0);
-     isa_realize_and_unref(isa1, bus, &error_fatal);
- 
--    isa2 = isa_new(TYPE_I8257);
-+    isa2 = isa_new_orphan(TYPE_I8257);
-     object_property_add_child(parent, "dma[*]", OBJECT(isa2));
-     d = DEVICE(isa2);
-     qdev_prop_set_int32(d, "base", 0xc0);
-diff --git a/hw/i386/isapc.c b/hw/i386/isapc.c
-index 1ba9ae22cc..03d68f748f 100644
---- a/hw/i386/isapc.c
-+++ b/hw/i386/isapc.c
-@@ -112,7 +112,7 @@ static void pc_init_isa(MachineState *machine)
-                           &error_abort);
-     isa_bus_register_input_irqs(isa_bus, x86ms->gsi);
- 
--    x86ms->rtc = isa_new(TYPE_MC146818_RTC);
-+    x86ms->rtc = isa_new_orphan(TYPE_MC146818_RTC);
-     qdev_prop_set_int32(DEVICE(x86ms->rtc), "base_year", 2000);
-     isa_realize_and_unref(x86ms->rtc, isa_bus, &error_fatal);
-     irq = object_property_get_uint(OBJECT(x86ms->rtc), "irq",
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 11a9d5df97..905b4960a3 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -998,7 +998,7 @@ static void pc_superio_init(ISABus *isa_bus, bool create_fdctrl,
-     }
-     if (create_fdctrl) {
- #ifdef CONFIG_FDC_ISA
--        ISADevice *fdc = isa_new(TYPE_ISA_FDC);
-+        ISADevice *fdc = isa_new_orphan(TYPE_ISA_FDC);
-         if (fdc) {
-             isa_realize_and_unref(fdc, isa_bus, &error_fatal);
-             isa_fdc_init_drives(fdc, fd);
-@@ -1014,10 +1014,10 @@ static void pc_superio_init(ISABus *isa_bus, bool create_fdctrl,
-         return;
+@@ -65,7 +65,7 @@ static void clipper_init(MachineState *machine)
+     /* Create up to 4 cpus.  */
+     memset(cpus, 0, sizeof(cpus));
+     for (i = 0; i < smp_cpus; ++i) {
+-        cpus[i] = ALPHA_CPU(cpu_create(machine->cpu_type));
++        cpus[i] = ALPHA_CPU(cpu_create_orphan(machine->cpu_type));
      }
  
--    i8042 = isa_create_simple(isa_bus, TYPE_I8042);
-+    i8042 = isa_create_simple_orphan(isa_bus, TYPE_I8042);
-     if (!no_vmport) {
--        isa_create_simple(isa_bus, TYPE_VMPORT);
--        vmmouse = isa_try_new("vmmouse");
-+        isa_create_simple_orphan(isa_bus, TYPE_VMPORT);
-+        vmmouse = isa_try_new_orphan("vmmouse");
-     } else {
-         vmmouse = NULL;
-     }
-@@ -1026,7 +1026,7 @@ static void pc_superio_init(ISABus *isa_bus, bool create_fdctrl,
-                                  &error_abort);
-         isa_realize_and_unref(vmmouse, isa_bus, &error_fatal);
-     }
--    port92 = isa_create_simple(isa_bus, TYPE_PORT92);
-+    port92 = isa_create_simple_orphan(isa_bus, TYPE_PORT92);
- 
-     a20_line = qemu_allocate_irqs(handle_a20_line_change, first_cpu, 2);
-     qdev_connect_gpio_out_named(DEVICE(i8042),
-@@ -1639,7 +1639,7 @@ static void pc_machine_initfn(Object *obj)
-     pcms->default_bus_bypass_iommu = false;
- 
-     pc_system_flash_create(pcms);
--    pcms->pcspk = isa_new(TYPE_PC_SPEAKER);
-+    pcms->pcspk = isa_new_orphan(TYPE_PC_SPEAKER);
-     object_property_add_alias(OBJECT(pcms), "pcspk-audiodev",
-                               OBJECT(pcms->pcspk), "audiodev");
-     if (pcmc->pci_enabled) {
-diff --git a/hw/ide/isa.c b/hw/ide/isa.c
-index c97b7a1ff4..c9c997344b 100644
---- a/hw/ide/isa.c
-+++ b/hw/ide/isa.c
-@@ -84,7 +84,7 @@ ISADevice *isa_ide_init(ISABus *bus, int iobase, int iobase2, int irqnum,
-     ISADevice *isadev;
-     ISAIDEState *s;
- 
--    isadev = isa_new(TYPE_ISA_IDE);
-+    isadev = isa_new_orphan(TYPE_ISA_IDE);
-     dev = DEVICE(isadev);
-     qdev_prop_set_uint32(dev, "iobase",  iobase);
-     qdev_prop_set_uint32(dev, "iobase2", iobase2);
-diff --git a/hw/intc/i8259_common.c b/hw/intc/i8259_common.c
-index 8ceb5841b9..45eb0e14a8 100644
---- a/hw/intc/i8259_common.c
-+++ b/hw/intc/i8259_common.c
-@@ -94,7 +94,7 @@ ISADevice *i8259_init_chip(const char *name, ISABus *bus, bool master)
-     DeviceState *dev;
-     ISADevice *isadev;
- 
--    isadev = isa_new(name);
-+    isadev = isa_new_orphan(name);
-     dev = DEVICE(isadev);
-     qdev_prop_set_uint32(dev, "iobase", master ? 0x20 : 0xa0);
-     qdev_prop_set_uint32(dev, "elcr_addr", master ? 0x4d0 : 0x4d1);
-diff --git a/hw/isa/i82378.c b/hw/isa/i82378.c
-index dfa8a3775c..63d4050db2 100644
---- a/hw/isa/i82378.c
-+++ b/hw/isa/i82378.c
-@@ -103,14 +103,14 @@ static void i82378_realize(PCIDevice *pci, Error **errp)
-     pit = i8254_pit_init(isabus, 0x40, 0, NULL);
- 
-     /* speaker */
--    pcspk = isa_new(TYPE_PC_SPEAKER);
-+    pcspk = isa_new_orphan(TYPE_PC_SPEAKER);
-     object_property_set_link(OBJECT(pcspk), "pit", OBJECT(pit), &error_fatal);
-     if (!isa_realize_and_unref(pcspk, isabus, errp)) {
-         return;
+     /*
+diff --git a/hw/arm/musicpal.c b/hw/arm/musicpal.c
+index baab159bfd..a07359813e 100644
+--- a/hw/arm/musicpal.c
++++ b/hw/arm/musicpal.c
+@@ -1232,7 +1232,7 @@ static void musicpal_init(MachineState *machine)
+         exit(EXIT_FAILURE);
      }
  
-     /* 2 82C37 (dma) */
--    isa_create_simple(isabus, "i82374");
-+    isa_create_simple_orphan(isabus, "i82374");
+-    cpu = ARM_CPU(cpu_create(machine->cpu_type));
++    cpu = ARM_CPU(cpu_create_orphan(machine->cpu_type));
+ 
+     memory_region_add_subregion(address_space_mem, 0, machine->ram);
+ 
+diff --git a/hw/arm/omap1.c b/hw/arm/omap1.c
+index 9115d12fad..eefa2e441a 100644
+--- a/hw/arm/omap1.c
++++ b/hw/arm/omap1.c
+@@ -3749,7 +3749,7 @@ struct omap_mpu_state_s *omap310_mpu_init(MemoryRegion *dram,
+     MemoryRegion *system_memory = get_system_memory();
+ 
+     /* Core */
+-    s->cpu = ARM_CPU(cpu_create(cpu_type));
++    s->cpu = ARM_CPU(cpu_create_orphan(cpu_type));
+     s->sdram_size = memory_region_size(dram);
+     s->sram_size = OMAP15XX_SRAM_SIZE;
+ 
+diff --git a/hw/arm/strongarm.c b/hw/arm/strongarm.c
+index f67aaa23ed..1704db8baa 100644
+--- a/hw/arm/strongarm.c
++++ b/hw/arm/strongarm.c
+@@ -1620,7 +1620,7 @@ StrongARMState *sa1110_init(const char *cpu_type)
+         exit(1);
+     }
+ 
+-    s->cpu = ARM_CPU(cpu_create(cpu_type));
++    s->cpu = ARM_CPU(cpu_create_orphan(cpu_type));
+ 
+     s->pic = sysbus_create_varargs_orphan("strongarm_pic", 0x90050000,
+                     qdev_get_gpio_in(DEVICE(s->cpu), ARM_CPU_IRQ),
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index e314f916f8..eef243c1ad 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -56,7 +56,19 @@ bool cpu_exists(int64_t id)
+     return !!cpu_by_arch_id(id);
  }
  
- static void i82378_init(Object *obj)
-diff --git a/hw/isa/isa-bus.c b/hw/isa/isa-bus.c
-index 5e6340f635..c15cf53469 100644
---- a/hw/isa/isa-bus.c
-+++ b/hw/isa/isa-bus.c
-@@ -153,21 +153,39 @@ int isa_register_portio_list(ISADevice *dev,
-     return 0;
- }
- 
--ISADevice *isa_new(const char *name)
-+ISADevice *isa_new(Object *parent, const char *id, const char *type)
+-CPUState *cpu_create(const char *typename)
++CPUState *cpu_create(Object *parent, const char *id, const char *typename)
 +{
-+    return ISA_DEVICE(qdev_new(parent, id, type));
++    Error *err = NULL;
++    CPUState *cpu = CPU(object_new_child(parent, id, typename));
++    if (!qdev_realize(DEVICE(cpu), NULL, &err)) {
++        error_report_err(err);
++        object_unparent(OBJECT(cpu));
++        exit(EXIT_FAILURE);
++    }
++    return cpu;
 +}
 +
-+ISADevice *isa_try_new(Object *parent, const char *id, const char *type)
-+{
-+    return ISA_DEVICE(qdev_try_new(parent, id, type));
-+}
-+
-+ISADevice *isa_create_simple(Object *parent, const char *id,
-+                             ISABus *bus, const char *type)
-+{
-+    ISADevice *dev = isa_new(parent, id, type);
-+    qdev_realize(DEVICE(dev), BUS(bus), &error_fatal);
-+    return dev;
-+}
-+
-+ISADevice *isa_new_orphan(const char *name)
++CPUState *cpu_create_orphan(const char *typename)
  {
-     return ISA_DEVICE(qdev_new_orphan(name));
- }
+     Error *err = NULL;
+     CPUState *cpu = CPU(object_new(typename));
+diff --git a/hw/core/null-machine.c b/hw/core/null-machine.c
+index f132a7b89b..7cc4b9ab3b 100644
+--- a/hw/core/null-machine.c
++++ b/hw/core/null-machine.c
+@@ -25,7 +25,7 @@ static void machine_none_init(MachineState *mch)
  
--ISADevice *isa_try_new(const char *name)
-+ISADevice *isa_try_new_orphan(const char *name)
- {
-     return ISA_DEVICE(qdev_try_new_orphan(name));
- }
+     /* Initialize CPU (if user asked for it) */
+     if (mch->cpu_type) {
+-        cpu = cpu_create(mch->cpu_type);
++        cpu = cpu_create_orphan(mch->cpu_type);
+         if (!cpu) {
+             error_report("Unable to initialize CPU");
+             exit(1);
+diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
+index 44dab9225a..a4b8e9ee77 100644
+--- a/hw/hppa/machine.c
++++ b/hw/hppa/machine.c
+@@ -298,7 +298,7 @@ static TranslateFn *machine_HP_common_init_cpus(MachineState *machine)
  
--ISADevice *isa_create_simple(ISABus *bus, const char *name)
-+ISADevice *isa_create_simple_orphan(ISABus *bus, const char *name)
- {
-     ISADevice *dev;
- 
--    dev = isa_new(name);
-+    dev = isa_new_orphan(name);
-     isa_realize_and_unref(dev, bus, &error_fatal);
-     return dev;
- }
-@@ -187,12 +205,12 @@ ISADevice *isa_vga_init(ISABus *bus)
-     vga_interface_created = true;
-     switch (vga_interface_type) {
-     case VGA_CIRRUS:
--        return isa_create_simple(bus, "isa-cirrus-vga");
-+        return isa_create_simple_orphan(bus, "isa-cirrus-vga");
-     case VGA_QXL:
-         error_report("%s: qxl: no PCI bus", __func__);
-         return NULL;
-     case VGA_STD:
--        return isa_create_simple(bus, "isa-vga");
-+        return isa_create_simple_orphan(bus, "isa-vga");
-     case VGA_VMWARE:
-         error_report("%s: vmware_vga: no PCI bus", __func__);
-         return NULL;
-diff --git a/hw/isa/isa-superio.c b/hw/isa/isa-superio.c
-index dc6ae3cb10..2d65255f34 100644
---- a/hw/isa/isa-superio.c
-+++ b/hw/isa/isa-superio.c
-@@ -54,7 +54,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
-             } else {
-                 name = g_strdup_printf("parallel%d", i);
-             }
--            isa = isa_new(TYPE_ISA_PARALLEL);
-+            isa = isa_new_orphan(TYPE_ISA_PARALLEL);
-             d = DEVICE(isa);
-             qdev_prop_set_uint32(d, "index", i);
-             if (k->parallel.get_iobase) {
-@@ -93,7 +93,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
-             } else {
-                 name = g_strdup_printf("serial%d", i);
-             }
--            isa = isa_new(TYPE_ISA_SERIAL);
-+            isa = isa_new_orphan(TYPE_ISA_SERIAL);
-             d = DEVICE(isa);
-             qdev_prop_set_uint32(d, "index", i);
-             if (k->serial.get_iobase) {
-@@ -120,7 +120,7 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
-     assert(k->floppy.count <= 1);
-     if (k->floppy.count &&
-         (!k->floppy.is_enabled || k->floppy.is_enabled(sio, 0))) {
--        isa = isa_new(TYPE_ISA_FDC);
-+        isa = isa_new_orphan(TYPE_ISA_FDC);
-         d = DEVICE(isa);
-         if (k->floppy.get_iobase) {
-             qdev_prop_set_uint32(d, "iobase", k->floppy.get_iobase(sio, 0));
-@@ -144,14 +144,14 @@ static void isa_superio_realize(DeviceState *dev, Error **errp)
+     /* Create CPUs.  */
+     for (unsigned int i = 0; i < smp_cpus; i++) {
+-        cpu[i] = HPPA_CPU(cpu_create(machine->cpu_type));
++        cpu[i] = HPPA_CPU(cpu_create_orphan(machine->cpu_type));
      }
  
-     /* Keyboard, mouse */
--    isa = isa_new(TYPE_I8042);
-+    isa = isa_new_orphan(TYPE_I8042);
-     object_property_add_child(OBJECT(sio), TYPE_I8042, OBJECT(isa));
-     isa_realize_and_unref(isa, bus, &error_fatal);
-     sio->kbc = isa;
+     /* Initialize memory */
+diff --git a/hw/m68k/an5206.c b/hw/m68k/an5206.c
+index f29c3b5226..b649605140 100644
+--- a/hw/m68k/an5206.c
++++ b/hw/m68k/an5206.c
+@@ -46,7 +46,7 @@ static void an5206_init(MachineState *machine)
+     MemoryRegion *address_space_mem = get_system_memory();
+     MemoryRegion *sram = g_new(MemoryRegion, 1);
  
-     /* IDE */
-     if (k->ide.count && (!k->ide.is_enabled || k->ide.is_enabled(sio, 0))) {
--        isa = isa_new("isa-ide");
-+        isa = isa_new_orphan("isa-ide");
-         d = DEVICE(isa);
-         if (k->ide.get_iobase) {
-             qdev_prop_set_uint32(d, "iobase", k->ide.get_iobase(sio, 0));
-diff --git a/hw/mips/jazz.c b/hw/mips/jazz.c
-index a902e400cf..849c97eb10 100644
---- a/hw/mips/jazz.c
-+++ b/hw/mips/jazz.c
-@@ -289,7 +289,7 @@ static void mips_jazz_init(MachineState *machine,
-     isa_bus_register_input_irqs(isa_bus, i8259);
-     i8257_dma_init(OBJECT(rc4030), isa_bus, 0);
-     pit = i8254_pit_init(isa_bus, 0x40, 0, NULL);
--    pcspk = isa_new(TYPE_PC_SPEAKER);
-+    pcspk = isa_new_orphan(TYPE_PC_SPEAKER);
-     object_property_set_link(OBJECT(pcspk), "pit", OBJECT(pit), &error_fatal);
-     isa_realize_and_unref(pcspk, isa_bus, &error_fatal);
+-    cpu = M68K_CPU(cpu_create(machine->cpu_type));
++    cpu = M68K_CPU(cpu_create_orphan(machine->cpu_type));
+     env = &cpu->env;
  
-diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-index 38edbbadd6..da6dd15a59 100644
---- a/hw/mips/malta.c
-+++ b/hw/mips/malta.c
-@@ -1253,7 +1253,7 @@ void mips_malta_init(MachineState *machine)
-     g_free(smbus_eeprom_buf);
+     /* Initialize CPU registers.  */
+diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
+index a8068c91f2..d79ec173e6 100644
+--- a/hw/m68k/mcf5208.c
++++ b/hw/m68k/mcf5208.c
+@@ -288,7 +288,7 @@ static void mcf5208evb_init(MachineState *machine)
+     MemoryRegion *sram = g_new(MemoryRegion, 1);
+     DeviceState *intc;
  
-     /* Super I/O: SMS FDC37M817 */
--    isa_create_simple(isa_bus, TYPE_FDC37M81X_SUPERIO);
-+    isa_create_simple_orphan(isa_bus, TYPE_FDC37M81X_SUPERIO);
+-    cpu = M68K_CPU(cpu_create(machine->cpu_type));
++    cpu = M68K_CPU(cpu_create_orphan(machine->cpu_type));
+     env = &cpu->env;
  
-     /* Network card */
-     network_init(pci_bus);
-diff --git a/hw/ppc/pnv.c b/hw/ppc/pnv.c
-index b85b6dd46c..8346613a68 100644
---- a/hw/ppc/pnv.c
-+++ b/hw/ppc/pnv.c
-@@ -1010,7 +1010,7 @@ static bool pnv_match_cpu(const char *default_type, const char *cpu_type)
+     /* Initialize CPU registers.  */
+diff --git a/hw/m68k/next-cube.c b/hw/m68k/next-cube.c
+index 0c1f5b4481..d97168d9f3 100644
+--- a/hw/m68k/next-cube.c
++++ b/hw/m68k/next-cube.c
+@@ -1260,7 +1260,7 @@ static void next_cube_init(MachineState *machine)
+     DeviceState *pcdev;
  
- static void pnv_ipmi_bt_init(ISABus *bus, IPMIBmc *bmc, uint32_t irq)
- {
--    ISADevice *dev = isa_new("isa-ipmi-bt");
-+    ISADevice *dev = isa_new_orphan("isa-ipmi-bt");
+     /* Initialize the cpu core */
+-    cpu = M68K_CPU(cpu_create(machine->cpu_type));
++    cpu = M68K_CPU(cpu_create_orphan(machine->cpu_type));
+     if (!cpu) {
+         error_report("Unable to find m68k CPU definition");
+         exit(1);
+diff --git a/hw/m68k/virt.c b/hw/m68k/virt.c
+index e2af0196e8..64ac8c8166 100644
+--- a/hw/m68k/virt.c
++++ b/hw/m68k/virt.c
+@@ -145,7 +145,7 @@ static void virt_init(MachineState *machine)
+     reset_info = g_new0(ResetInfo, 1);
  
-     object_property_set_link(OBJECT(dev), "bmc", OBJECT(bmc), &error_fatal);
-     object_property_set_int(OBJECT(dev), "irq", irq, &error_fatal);
+     /* init CPUs */
+-    cpu = M68K_CPU(cpu_create(machine->cpu_type));
++    cpu = M68K_CPU(cpu_create_orphan(machine->cpu_type));
+ 
+     reset_info->cpu = cpu;
+     qemu_register_reset(main_cpu_reset, reset_info);
+diff --git a/hw/or1k/or1k-sim.c b/hw/or1k/or1k-sim.c
+index bd668d0e47..6962313315 100644
+--- a/hw/or1k/or1k-sim.c
++++ b/hw/or1k/or1k-sim.c
+@@ -299,7 +299,7 @@ static void openrisc_sim_init(MachineState *machine)
+ 
+     assert(smp_cpus >= 1 && smp_cpus <= OR1KSIM_CPUS_MAX);
+     for (n = 0; n < smp_cpus; n++) {
+-        cpus[n] = OPENRISC_CPU(cpu_create(machine->cpu_type));
++        cpus[n] = OPENRISC_CPU(cpu_create_orphan(machine->cpu_type));
+         if (cpus[n] == NULL) {
+             fprintf(stderr, "Unable to find CPU definition!\n");
+             exit(1);
+diff --git a/hw/or1k/virt.c b/hw/or1k/virt.c
+index 9451a0b7df..f222efafde 100644
+--- a/hw/or1k/virt.c
++++ b/hw/or1k/virt.c
+@@ -481,7 +481,7 @@ static void openrisc_virt_init(MachineState *machine)
+ 
+     assert(smp_cpus >= 1 && smp_cpus <= VIRT_CPUS_MAX);
+     for (n = 0; n < smp_cpus; n++) {
+-        cpus[n] = OPENRISC_CPU(cpu_create(machine->cpu_type));
++        cpus[n] = OPENRISC_CPU(cpu_create_orphan(machine->cpu_type));
+         if (cpus[n] == NULL) {
+             fprintf(stderr, "Unable to find CPU definition!\n");
+             exit(1);
+diff --git a/hw/ppc/amigaone.c b/hw/ppc/amigaone.c
+index c6b331ff16..80802d42c6 100644
+--- a/hw/ppc/amigaone.c
++++ b/hw/ppc/amigaone.c
+@@ -279,7 +279,7 @@ static void amigaone_init(MachineState *machine)
+     struct boot_info *bi = NULL;
+ 
+     /* init CPU */
+-    cpu = POWERPC_CPU(cpu_create(machine->cpu_type));
++    cpu = POWERPC_CPU(cpu_create_orphan(machine->cpu_type));
+     env = &cpu->env;
+     if (PPC_INPUT(env) != PPC_FLAGS_INPUT_6xx) {
+         error_report("Incompatible CPU, only 6xx bus supported");
+diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
+index 72baeef60a..8c46ecd6d1 100644
+--- a/hw/ppc/mac_newworld.c
++++ b/hw/ppc/mac_newworld.c
+@@ -159,7 +159,7 @@ static void ppc_core99_init(MachineState *machine)
+ 
+     /* init CPUs */
+     for (i = 0; i < machine->smp.cpus; i++) {
+-        cpu = POWERPC_CPU(cpu_create(machine->cpu_type));
++        cpu = POWERPC_CPU(cpu_create_orphan(machine->cpu_type));
+         env = &cpu->env;
+ 
+         /* Set time-base frequency to 100 Mhz */
+diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+index e6c5830c38..4c5746b754 100644
+--- a/hw/ppc/mac_oldworld.c
++++ b/hw/ppc/mac_oldworld.c
+@@ -111,7 +111,7 @@ static void ppc_heathrow_init(MachineState *machine)
+ 
+     /* init CPUs */
+     for (i = 0; i < machine->smp.cpus; i++) {
+-        cpu = POWERPC_CPU(cpu_create(machine->cpu_type));
++        cpu = POWERPC_CPU(cpu_create_orphan(machine->cpu_type));
+         env = &cpu->env;
+ 
+         /* Set time-base frequency to 16.6 Mhz */
+diff --git a/hw/ppc/pegasos.c b/hw/ppc/pegasos.c
+index 0030068ab3..bba73f60c8 100644
+--- a/hw/ppc/pegasos.c
++++ b/hw/ppc/pegasos.c
+@@ -163,7 +163,7 @@ static void pegasos_init(MachineState *machine)
+     uint8_t *spd_data;
+ 
+     /* init CPU */
+-    pm->cpu = POWERPC_CPU(cpu_create(machine->cpu_type));
++    pm->cpu = POWERPC_CPU(cpu_create_orphan(machine->cpu_type));
+     env = &pm->cpu->env;
+     if (PPC_INPUT(env) != PPC_FLAGS_INPUT_6xx) {
+         error_report("Incompatible CPU, only 6xx bus supported");
+diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
+index 7a6c3ebec5..68c7328129 100644
+--- a/hw/ppc/ppc440_bamboo.c
++++ b/hw/ppc/ppc440_bamboo.c
+@@ -148,7 +148,7 @@ static void bamboo_init(MachineState *machine)
+         exit(EXIT_FAILURE);
+     }
+ 
+-    cpu = POWERPC_CPU(cpu_create(machine->cpu_type));
++    cpu = POWERPC_CPU(cpu_create_orphan(machine->cpu_type));
+     env = &cpu->env;
+ 
+     if (env->mmu_model != POWERPC_MMU_BOOKE) {
 diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
-index a716d5da6a..32a28bc12a 100644
+index 32a28bc12a..c861e022f0 100644
 --- a/hw/ppc/prep.c
 +++ b/hw/ppc/prep.c
-@@ -309,20 +309,20 @@ static void ibm_40p_init(MachineState *machine)
-     isa_bus = ISA_BUS(qdev_get_child_bus(i82378_dev, "isa.0"));
- 
-     /* system control ports */
--    isa_dev = isa_new("prep-systemio");
-+    isa_dev = isa_new_orphan("prep-systemio");
-     dev = DEVICE(isa_dev);
-     qdev_prop_set_uint32(dev, "ibm-planar-id", 0xfc);
-     qdev_prop_set_uint32(dev, "equipment", 0xc0);
-     isa_realize_and_unref(isa_dev, isa_bus, &error_fatal);
- 
-     /* Memory controller */
--    isa_dev = isa_new("rs6000-mc");
-+    isa_dev = isa_new_orphan("rs6000-mc");
-     dev = DEVICE(isa_dev);
-     qdev_prop_set_uint32(dev, "ram-size", machine->ram_size);
-     isa_realize_and_unref(isa_dev, isa_bus, &error_fatal);
- 
-     /* RTC */
--    isa_dev = isa_new(TYPE_MC146818_RTC);
-+    isa_dev = isa_new_orphan(TYPE_MC146818_RTC);
-     dev = DEVICE(isa_dev);
-     qdev_prop_set_int32(dev, "base_year", 1900);
-     isa_realize_and_unref(isa_dev, isa_bus, &error_fatal);
-@@ -334,9 +334,9 @@ static void ibm_40p_init(MachineState *machine)
- 
-     /* add some more devices */
-     if (defaults_enabled()) {
--        m48t59 = NVRAM(isa_create_simple(isa_bus, "isa-m48t59"));
-+        m48t59 = NVRAM(isa_create_simple_orphan(isa_bus, "isa-m48t59"));
- 
--        isa_dev = isa_new("cs4231a");
-+        isa_dev = isa_new_orphan("cs4231a");
-         dev = DEVICE(isa_dev);
-         qdev_prop_set_uint32(dev, "iobase", 0x830);
-         qdev_prop_set_uint32(dev, "irq", 10);
-@@ -345,7 +345,7 @@ static void ibm_40p_init(MachineState *machine)
-         }
-         isa_realize_and_unref(isa_dev, isa_bus, &error_fatal);
- 
--        isa_dev = isa_new("pc87312");
-+        isa_dev = isa_new_orphan("pc87312");
-         dev = DEVICE(isa_dev);
-         qdev_prop_set_uint32(dev, "config", 12);
-         isa_realize_and_unref(isa_dev, isa_bus, &error_fatal);
-diff --git a/hw/rtc/mc146818rtc.c b/hw/rtc/mc146818rtc.c
-index ba396435d1..b9e5ec6ff6 100644
---- a/hw/rtc/mc146818rtc.c
-+++ b/hw/rtc/mc146818rtc.c
-@@ -930,7 +930,7 @@ MC146818RtcState *mc146818_rtc_init(ISABus *bus, int base_year,
-     ISADevice *isadev;
-     MC146818RtcState *s;
- 
--    isadev = isa_new(TYPE_MC146818_RTC);
-+    isadev = isa_new_orphan(TYPE_MC146818_RTC);
-     dev = DEVICE(isadev);
-     s = MC146818_RTC(isadev);
-     qdev_prop_set_int32(dev, "base_year", base_year);
-diff --git a/hw/sparc64/sun4u.c b/hw/sparc64/sun4u.c
-index 5de873126c..b60588cf7d 100644
---- a/hw/sparc64/sun4u.c
-+++ b/hw/sparc64/sun4u.c
-@@ -329,13 +329,13 @@ static void ebus_realize(PCIDevice *pci_dev, Error **errp)
-     parallel_hds_isa_init(s->isa_bus, MAX_PARALLEL_PORTS);
- 
-     /* Keyboard */
--    isa_create_simple(s->isa_bus, TYPE_I8042);
-+    isa_create_simple_orphan(s->isa_bus, TYPE_I8042);
- 
-     /* Floppy */
-     for (i = 0; i < MAX_FD; i++) {
-         fd[i] = drive_get(IF_FLOPPY, 0, i);
+@@ -257,7 +257,7 @@ static void ibm_40p_init(MachineState *machine)
      }
--    isa_dev = isa_new(TYPE_ISA_FDC);
-+    isa_dev = isa_new_orphan(TYPE_ISA_FDC);
-     dev = DEVICE(isa_dev);
-     qdev_prop_set_uint32(dev, "dma", -1);
-     isa_realize_and_unref(isa_dev, s->isa_bus, &error_fatal);
-diff --git a/include/hw/i386/vmport.h b/include/hw/i386/vmport.h
-index 8f5e27c6f5..22dd3645d2 100644
---- a/include/hw/i386/vmport.h
-+++ b/include/hw/i386/vmport.h
-@@ -20,7 +20,7 @@ typedef enum {
  
- static inline void vmport_init(ISABus *bus)
- {
--    isa_create_simple(bus, TYPE_VMPORT);
-+    isa_create_simple_orphan(bus, TYPE_VMPORT);
- }
+     /* init CPU */
+-    cpu = POWERPC_CPU(cpu_create(machine->cpu_type));
++    cpu = POWERPC_CPU(cpu_create_orphan(machine->cpu_type));
+     env = &cpu->env;
+     if (PPC_INPUT(env) != PPC_FLAGS_INPUT_6xx) {
+         error_report("only 6xx bus is supported on this machine");
+diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
+index 39e704dfaa..d23d2c2bd8 100644
+--- a/hw/ppc/sam460ex.c
++++ b/hw/ppc/sam460ex.c
+@@ -260,7 +260,7 @@ static void sam460ex_init(MachineState *machine)
+     uint8_t *spd_data;
+     int success;
  
- void vmport_register(VMPortCommand command, VMPortReadFunc *func, void *opaque);
-diff --git a/include/hw/isa/isa.h b/include/hw/isa/isa.h
-index 94bff33fcc..af8e07c253 100644
---- a/include/hw/isa/isa.h
-+++ b/include/hw/isa/isa.h
-@@ -80,10 +80,14 @@ IsaDma *isa_bus_get_dma(ISABus *bus, int nchan);
-  * Return IRQ @irqnum from the PIC associated on ISA @bus.
+-    cpu = POWERPC_CPU(cpu_create(machine->cpu_type));
++    cpu = POWERPC_CPU(cpu_create_orphan(machine->cpu_type));
+     env = &cpu->env;
+     if (env->mmu_model != POWERPC_MMU_BOOKE) {
+         error_report("Only MMU model BookE is supported by this machine.");
+diff --git a/hw/ppc/virtex_ml507.c b/hw/ppc/virtex_ml507.c
+index d7fd72d353..9163d8acf8 100644
+--- a/hw/ppc/virtex_ml507.c
++++ b/hw/ppc/virtex_ml507.c
+@@ -76,7 +76,7 @@ static PowerPCCPU *ppc440_init_xilinx(const char *cpu_type, uint32_t sysclk)
+     DeviceState *uicdev;
+     SysBusDevice *uicsbd;
+ 
+-    cpu = POWERPC_CPU(cpu_create(cpu_type));
++    cpu = POWERPC_CPU(cpu_create_orphan(cpu_type));
+     env = &cpu->env;
+ 
+     ppc_booke_timers_init(cpu, sysclk, 0/* no flags */);
+diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
+index 6f8d270fae..9f313a77cb 100644
+--- a/hw/sh4/r2d.c
++++ b/hw/sh4/r2d.c
+@@ -251,7 +251,7 @@ static void r2d_init(MachineState *machine)
+     USBBus *usb_bus;
+     r2d_fpga_t *fpga;
+ 
+-    cpu = SUPERH_CPU(cpu_create(machine->cpu_type));
++    cpu = SUPERH_CPU(cpu_create_orphan(machine->cpu_type));
+     env = &cpu->env;
+ 
+     reset_info = g_new0(ResetData, 1);
+diff --git a/hw/tricore/tricore_testboard.c b/hw/tricore/tricore_testboard.c
+index afed9ad0ae..69794d3445 100644
+--- a/hw/tricore/tricore_testboard.c
++++ b/hw/tricore/tricore_testboard.c
+@@ -67,7 +67,7 @@ static void tricore_testboard_init(MachineState *machine, int board_id)
+     MemoryRegion *pcp_data = g_new(MemoryRegion, 1);
+     MemoryRegion *pcp_text = g_new(MemoryRegion, 1);
+ 
+-    cpu = TRICORE_CPU(cpu_create(machine->cpu_type));
++    cpu = TRICORE_CPU(cpu_create_orphan(machine->cpu_type));
+     env = &cpu->env;
+     memory_region_init_ram(ext_cram, NULL, "powerlink_ext_c.ram",
+                            2 * MiB, &error_fatal);
+diff --git a/hw/xtensa/sim.c b/hw/xtensa/sim.c
+index 835cd04fe0..17245a0388 100644
+--- a/hw/xtensa/sim.c
++++ b/hw/xtensa/sim.c
+@@ -63,7 +63,7 @@ XtensaCPU *xtensa_sim_common_init(MachineState *machine)
+     int n;
+ 
+     for (n = 0; n < machine->smp.cpus; n++) {
+-        cpu = XTENSA_CPU(cpu_create(machine->cpu_type));
++        cpu = XTENSA_CPU(cpu_create_orphan(machine->cpu_type));
+         env = &cpu->env;
+ 
+         env->sregs[PRID] = n;
+diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
+index 4b1009a398..0ee7350945 100644
+--- a/hw/xtensa/xtfpga.c
++++ b/hw/xtensa/xtfpga.c
+@@ -250,7 +250,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
+     for (n = 0; n < smp_cpus; n++) {
+         CPUXtensaState *cenv = NULL;
+ 
+-        cpu = XTENSA_CPU(cpu_create(machine->cpu_type));
++        cpu = XTENSA_CPU(cpu_create_orphan(machine->cpu_type));
+         cenv = &cpu->env;
+         if (!env) {
+             env = cenv;
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index b54035fb13..1b2ec1ab1e 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -846,13 +846,26 @@ char *cpu_model_from_type(const char *typename);
+ 
+ /**
+  * cpu_create:
++ * @parent: the QOM parent (usually the machine or SoC container)
++ * @id: child<> property name, e.g. "cpu[0]" or "cpu[*]"
++ * @typename: the CPU type
++ *
++ * Instantiates a CPU as a child of @parent under @id and realizes it.
++ * The returned CPU is owned by @parent.
++ *
++ * Returns: A #CPUState.  Failure to realize is fatal.
++ */
++CPUState *cpu_create(Object *parent, const char *id, const char *typename);
++
++/**
++ * cpu_create_orphan:
+  * @typename: The CPU type.
+  *
+  * Instantiates a CPU and realizes the CPU.
+  *
+  * Returns: A #CPUState or %NULL if an error occurred.
   */
- qemu_irq isa_bus_get_irq(ISABus *bus, unsigned irqnum);
--ISADevice *isa_new(const char *name);
--ISADevice *isa_try_new(const char *name);
-+ISADevice *isa_new(Object *parent, const char *id, const char *type);
-+ISADevice *isa_try_new(Object *parent, const char *id, const char *type);
-+ISADevice *isa_create_simple(Object *parent, const char *id,
-+                             ISABus *bus, const char *type);
-+ISADevice *isa_new_orphan(const char *name);
-+ISADevice *isa_try_new_orphan(const char *name);
- bool isa_realize_and_unref(ISADevice *dev, ISABus *bus, Error **errp);
--ISADevice *isa_create_simple(ISABus *bus, const char *name);
-+ISADevice *isa_create_simple_orphan(ISABus *bus, const char *name);
+-CPUState *cpu_create(const char *typename);
++CPUState *cpu_create_orphan(const char *typename);
  
- ISADevice *isa_vga_init(ISABus *bus);
- 
-diff --git a/include/hw/net/ne2000-isa.h b/include/hw/net/ne2000-isa.h
-index 1e14d1afc0..ef8b3334d7 100644
---- a/include/hw/net/ne2000-isa.h
-+++ b/include/hw/net/ne2000-isa.h
-@@ -22,7 +22,7 @@ static inline ISADevice *isa_ne2000_init(ISABus *bus, int base, int irq,
+ /**
+  * parse_cpu_option:
+diff --git a/linux-user/main.c b/linux-user/main.c
+index 60a695b7ca..966322dbb3 100644
+--- a/linux-user/main.c
++++ b/linux-user/main.c
+@@ -235,7 +235,7 @@ void init_task_state(TaskState *ts)
+ CPUArchState *cpu_copy(CPUArchState *env)
  {
-     ISADevice *d;
+     CPUState *cpu = env_cpu(env);
+-    CPUState *new_cpu = cpu_create(cpu_type);
++    CPUState *new_cpu = cpu_create_orphan(cpu_type);
+     CPUArchState *new_env = cpu_env(new_cpu);
+     CPUBreakpoint *bp;
  
--    d = isa_try_new(TYPE_ISA_NE2000);
-+    d = isa_try_new_orphan(TYPE_ISA_NE2000);
-     if (d) {
-         DeviceState *dev = DEVICE(d);
+@@ -817,7 +817,7 @@ int main(int argc, char **argv, char **envp)
+     set_preferred_target_page_bits(ctz32(host_page_size));
+     finalize_target_page_bits();
  
-diff --git a/include/hw/timer/i8254.h b/include/hw/timer/i8254.h
-index 65775b789d..38f896063e 100644
---- a/include/hw/timer/i8254.h
-+++ b/include/hw/timer/i8254.h
-@@ -51,7 +51,7 @@ static inline ISADevice *i8254_pit_init(ISABus *bus, int base, int isa_irq,
-     DeviceState *dev;
-     ISADevice *d;
- 
--    d = isa_new(TYPE_I8254);
-+    d = isa_new_orphan(TYPE_I8254);
-     dev = DEVICE(d);
-     qdev_prop_set_uint32(dev, "iobase", base);
-     isa_realize_and_unref(d, bus, &error_fatal);
-@@ -67,7 +67,7 @@ static inline ISADevice *kvm_pit_init(ISABus *bus, int base)
-     DeviceState *dev;
-     ISADevice *d;
- 
--    d = isa_new(TYPE_KVM_I8254);
-+    d = isa_new_orphan(TYPE_KVM_I8254);
-     dev = DEVICE(d);
-     qdev_prop_set_uint32(dev, "iobase", base);
-     isa_realize_and_unref(d, bus, &error_fatal);
-diff --git a/scripts/coccinelle/qom-parent/isa-new-orphan.cocci b/scripts/coccinelle/qom-parent/isa-new-orphan.cocci
+-    cpu = cpu_create(cpu_type);
++    cpu = cpu_create_orphan(cpu_type);
+     env = cpu_env(cpu);
+     cpu_reset(cpu);
+     thread_cpu = cpu;
+diff --git a/scripts/coccinelle/qom-parent/cpu-create-orphan.cocci b/scripts/coccinelle/qom-parent/cpu-create-orphan.cocci
 new file mode 100644
-index 0000000000..75393543c8
+index 0000000000..c268c05b0c
 --- /dev/null
-+++ b/scripts/coccinelle/qom-parent/isa-new-orphan.cocci
-@@ -0,0 +1,23 @@
++++ b/scripts/coccinelle/qom-parent/cpu-create-orphan.cocci
+@@ -0,0 +1,13 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +//
-+// Rename isa_new()/isa_try_new()/isa_create_simple() to *_orphan()
-+// so that the short names can be reintroduced with a mandatory
-+// (parent, id, ...) signature.
++// Rename cpu_create() to cpu_create_orphan() so that the short
++// name can be reintroduced with a mandatory (parent, id, type)
++// signature.
 +//
-+// spatch --sp-file scripts/coccinelle/qom-parent/isa-new-orphan.cocci \
++// spatch --sp-file scripts/coccinelle/qom-parent/cpu-create-orphan.cocci \
 +//        --in-place --include-headers --dir .
 +
 +@@
 +@@
-+- isa_new
-++ isa_new_orphan
-+
-+@@
-+@@
-+- isa_try_new
-++ isa_try_new_orphan
-+
-+@@
-+@@
-+- isa_create_simple
-++ isa_create_simple_orphan
++- cpu_create
+++ cpu_create_orphan
 -- 
 2.47.1
 
