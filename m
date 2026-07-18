@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E98C4451B
-	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 289DAC4450A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 18 Jul 2026 21:53:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlCxR-0005wD-Ac; Sat, 18 Jul 2026 17:52:29 -0400
+	id 1wlCxg-0006LO-2D; Sat, 18 Jul 2026 17:52:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCxK-0005gl-9B; Sat, 18 Jul 2026 17:52:22 -0400
-Received: from pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
- ([44.246.1.125])
+ id 1wlCxa-0006DT-KT; Sat, 18 Jul 2026 17:52:38 -0400
+Received: from pdx-out-012.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ ([35.162.73.231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=65292d44c=graf@amazon.de>)
- id 1wlCxE-0003ya-Fb; Sat, 18 Jul 2026 17:52:21 -0400
+ id 1wlCxW-000407-Bh; Sat, 18 Jul 2026 17:52:37 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
- t=1784411536; x=1815947536;
+ t=1784411554; x=1815947554;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=zdByMBkcpMZr9GoUkRYLLMcG2ley+YOXCuAbSTQQN+I=;
- b=iXWVqlQZAB1Ca3RNNXtX68/16E2Etosiag+58lf01/CJLaRpuZ0E9W2S
- 9Xu+IV0ZIVEpGdT4AjauoNH6EDpiMCX4G3kkSQMckeJnssRRct2XWMIvO
- ysgRT/P0d2jaPazlAMDrUMRh6HXGbS//5efXveUY0CUDFWRHoOtJDSZsQ
- gn0FmUctis9VgVQQ/iiYjisXEQ2PkXcvgliqUvDgSEVilKf21KqiSeiTQ
- 4HnlUJQvFIRCJG0dc++dEL1KdPHoJS73F1TSTm3zBXLsGz42uTwlL3nmi
- HNLxYE5qpAB1/aMdus+8V+doCve/DL00sAjw43CHiB/1J+/vfosAMAolj g==;
-X-CSE-ConnectionGUID: yjupSh+UR8aU6+9EXpAt4g==
-X-CSE-MsgGUID: 7NgJ+IdkT0+Mmapbd6WxVw==
-X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23927252"
-Received: from ip-10-5-0-115.us-west-2.compute.internal (HELO
- smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.0.115])
- by internal-pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:52:12 +0000
-Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:16946]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.19.34:2525]
+ bh=VT5Xn5WbVnSZ7ByuXx0hTwhAi7XNb6UyTHSfSUFkxdc=;
+ b=CuOa8nC5YyVHYnQ1llILcrhl1fA4sATjsmB0TYpXuuxTfAJZ3RRpMGxH
+ Ks6/ffEezNLkb37o+/NBzJQ1oje6bX+TOG0GDkdDvnay5L8zFygJZhjtS
+ /vCqQD2jOrr7toEBPiX2fxmotAieCdjJ6v3+pQhwkevTEX1JNYVjuwbtm
+ 064edRmZtDCJOZYwKTdgw+WZOiFpO1aCQYN4enZ4ZnRW+7Y5TeOGwIqjc
+ R9TKcj4IplmJsB8f/PDctAKHNeeBZLTI3MAK1stPqWHq9Wqm1qU2k9OtZ
+ mgprmTYgQpuwUl0ljiuSQCmp7ubBsCcieYXjAQI2IgZyqOiYewtO1CZBs w==;
+X-CSE-ConnectionGUID: tUPGAHQ1RqmLPiCZ6CJCNA==
+X-CSE-MsgGUID: xoVE2v16TGaE2nRbRgJLqg==
+X-IronPort-AV: E=Sophos;i="6.25,171,1779148800"; d="scan'208";a="23715854"
+Received: from ip-10-5-6-203.us-west-2.compute.internal (HELO
+ smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.6.203])
+ by internal-pdx-out-012.esa.us-west-2.outbound.mail-perimeter.amazon.com with
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2026 21:52:30 +0000
+Received: from EX19MTAUWB002.ant.amazon.com [205.251.233.48:14792]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.30.230:2525]
  with esmtp (Farcaster)
- id f8ac7780-7698-482f-bb29-89404e36c165; Sat, 18 Jul 2026 21:52:11 +0000 (UTC)
-X-Farcaster-Flow-ID: f8ac7780-7698-482f-bb29-89404e36c165
+ id bce34910-ea26-41eb-87b9-81931ed62287; Sat, 18 Jul 2026 21:52:30 +0000 (UTC)
+X-Farcaster-Flow-ID: bce34910-ea26-41eb-87b9-81931ed62287
 Received: from EX19D001UWA001.ant.amazon.com (10.13.138.214) by
- EX19MTAUWA001.ant.amazon.com (10.250.64.217) with Microsoft SMTP Server
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:52:11 +0000
+ Sat, 18 Jul 2026 21:52:30 +0000
 Received: from ip-10-253-83-51.amazon.com (172.19.99.218) by
  EX19D001UWA001.ant.amazon.com (10.13.138.214) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.43;
- Sat, 18 Jul 2026 21:52:01 +0000
+ Sat, 18 Jul 2026 21:52:20 +0000
 From: Alexander Graf <graf@amazon.com>
 To: <qemu-devel@nongnu.org>
 CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
@@ -93,9 +93,10 @@ CC: <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-riscv@nongnu.org>,
  Stafford Horne <shorne@gmail.com>, Sergio Lopez <slp@redhat.com>, "Subbaraya
  Sundeep" <sundeep.lkml@gmail.com>, Thomas Huth <th.huth+qemu@posteo.eu>, "Ran
  Wang" <wangran@bosc.ac.cn>, Hao Wu <wuhaotsh@google.com>
-Subject: [RFC PATCH v2 054/137] hw/i386: Give onboard devices a QOM parent
-Date: Sat, 18 Jul 2026 21:35:29 +0000
-Message-ID: <20260718213652.37673-55-graf@amazon.com>
+Subject: [RFC PATCH v2 056/137] hw/pci,
+ hw/isa: Give VGA and slot-NIC helpers a QOM parent
+Date: Sat, 18 Jul 2026 21:35:31 +0000
+Message-ID: <20260718213652.37673-57-graf@amazon.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20260718213652.37673-1-graf@amazon.com>
 References: <20260711223707.42139-1-graf@amazon.com>
@@ -106,9 +107,9 @@ Content-Type: text/plain
 X-Originating-IP: [172.19.99.218]
 X-ClientProxiedBy: EX19D042UWA001.ant.amazon.com (10.13.139.92) To
  EX19D001UWA001.ant.amazon.com (10.13.138.214)
-Received-SPF: pass client-ip=44.246.1.125;
+Received-SPF: pass client-ip=35.162.73.231;
  envelope-from=prvs=65292d44c=graf@amazon.de;
- helo=pdx-out-002.esa.us-west-2.outbound.mail-perimeter.amazon.com
+ helo=pdx-out-012.esa.us-west-2.outbound.mail-perimeter.amazon.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -132,789 +133,430 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Convert the *_orphan() device-creation calls in hw/i386 to the new
-parented API introduced earlier in this series, so every onboard
-device gets a stable path in the composition tree instead of landing
-in /machine/unattached with an unstable device[N] name.
+Now that all callers of pci_vga_init(), pci_init_nic_in_slot() and
+isa_vga_init() live in already-converted board files, thread an
+Object *parent through these three convenience helpers so that the
+default VGA and default NIC created via -vga and -net become proper
+children of their machine instead of landing under
+/machine/unattached.
 
-The parent for each device is the object that owns its lifetime: the
-machine for board-created devices, the containing device for
-composite children.  Names follow existing QOM conventions.
-
-Six of the singletons in hw/i386/kvm/ (kvmclock, xen-evtchn,
-xen-gnttab, xen-overlay, xen-xenstore, xen-primary-console) are
-created via a public helper; those helpers gain an Object *parent
-first argument and all callers are updated in this patch.
-
-The pcspk device created in pc_machine_initfn() is left orphan for
-now: it is created in instance_init and object_unref()ed in
-instance_finalize when never realized.  Making it a child<> would
-free it via object_property_del_all() before finalize runs, leaving
-finalize with a dangling pointer.  This site needs a separate
-refactor of pc_machine_finalize() first.
-
-Per-site rationale (reviewers: dispute the modeling here):
-
-hw/i386/isapc.c:115 | isa_new | OBJECT(machine) | "rtc" | board init pc_init_isa()
-hw/i386/kvm/clock.c:380 | sysbus_create_simple | parent | "kvmclock" | thread Object *parent into kvmclock_create(); callers pass OBJECT(machine)/OBJECT(mms)
-hw/i386/kvm/xen_evtchn.c:309 | sysbus_create_simple | parent | "xen-evtchn" | thread Object *parent into xen_evtchn_create(); caller pc_basic_device_init passes OBJECT(pcms)
-hw/i386/kvm/xen_gnttab.c:155 | sysbus_create_simple | parent | "xen-gnttab" | thread Object *parent into xen_gnttab_create(); caller passes OBJECT(pcms)
-hw/i386/kvm/xen_overlay.c:172 | sysbus_create_simple | parent | "xen-overlay" | thread Object *parent into xen_overlay_create(); caller passes OBJECT(pcms)
-hw/i386/kvm/xen_primary_console.c:87 | sysbus_create_simple | parent | "xen-primary-console" | thread Object *parent into xen_primary_console_create(); callers: pc.c stub-guarded, xen_console_realize passes OBJECT(xendev)
-hw/i386/kvm/xen_xenstore.c:279 | sysbus_create_simple | parent | "xen-xenstore" | thread Object *parent into xen_xenstore_create(); caller passes OBJECT(pcms)
-hw/i386/microvm.c:111 | qdev_new | OBJECT(mms) | "gpex" | board helper create_gpex(MicrovmMachineState *mms)
-hw/i386/microvm.c:200 | sysbus_create_simple | OBJECT(mms) | "virtio-mmio[*]" | board init loop
-hw/i386/microvm.c:207 | qdev_new | OBJECT(mms) | "acpi-ged" | board init; already sysbus_realize (no unref), just parent
-hw/i386/microvm.c:219 | qdev_new | OBJECT(mms) | "xhci" | board init; already sysbus_realize (no unref), just parent
-hw/i386/nitro_enclave.c:49 | qdev_new | OBJECT(nems) | "vsock" | board helper receiving NitroEnclaveMachineState*
-hw/i386/nitro_enclave.c:78 | qdev_new | OBJECT(nems) | "nsm" | board helper receiving NitroEnclaveMachineState*
-hw/i386/pc.c:1001 | isa_new | parent | "fdc" | pc_superio_init already has Object *parent
-hw/i386/pc.c:1017 | isa_create_simple | parent | "i8042" | pc_superio_init already has Object *parent
-hw/i386/pc.c:1019 | isa_create_simple | parent | "vmport" | pc_superio_init already has Object *parent
-hw/i386/pc.c:1020 | isa_try_new | parent | "vmmouse" | pc_superio_init already has Object *parent
-hw/i386/pc.c:1029 | isa_create_simple | parent | "port92" | pc_superio_init already has Object *parent
-hw/i386/pc.c:1068 | qdev_try_new | OBJECT(pcms) | "hpet" | pc_basic_device_init receives PCMachineState*
-hw/i386/pc.c:1107 | pci_create_simple | OBJECT(pcms) | "xen-platform" | pc_basic_device_init receives PCMachineState*
-hw/i386/pc.c:1642 | isa_new | ORPHAN-JUSTIFIED | - | instance_init + explicit unref in instance_finalize; parenting here would double-free via object_property_del_all before finalize; needs separate refactor of pc_machine_finalize
-hw/i386/pc_piix.c:196 | qdev_new | OBJECT(machine) | "i440fx" | collapse existing object_property_add_child(machine,"i440fx")
-hw/i386/pc_piix.c:239 | pci_new_multifunction | OBJECT(machine) | "south-bridge" | board init pc_init1()
-hw/i386/pc_piix.c:387 | pci_create_simple | OBJECT(machine) | "xen-platform" | board init pc_xen_hvm_init()
-hw/i386/pc_q35.c:117 | pci_new_multifunction | parent | "ehci[*]" | thread Object *parent into ehci_create_ich9_with_companions(); caller passes OBJECT(machine)
-hw/i386/pc_q35.c:122 | pci_new_multifunction | parent | "uhci[*]" | thread Object *parent into ehci_create_ich9_with_companions()
-hw/i386/pc_q35.c:202 | qdev_new | OBJECT(machine) | "q35" | collapse existing object_property_add_child(machine,"q35")
-hw/i386/pc_q35.c:238 | pci_new_multifunction | OBJECT(machine) | "lpc" | board init pc_q35_init()
-hw/i386/pc_q35.c:293 | pci_create_simple_multifunction | OBJECT(machine) | "sata" | board init pc_q35_init()
-hw/i386/pc_q35.c:314 | pci_create_simple_multifunction | OBJECT(machine) | "smbus" | board init pc_q35_init()
-hw/i386/pc_sysfw.c:82 | qdev_new | OBJECT(pcms) | name | collapse existing object_property_add_child(pcms,name); drop explicit object_unref
-hw/i386/sgx.c:314 | qdev_new | OBJECT(pcms) | "sgx-epc[*]" | board helper receiving PCMachineState*
-hw/i386/x86-common.c:508 | qdev_new | parent | "ioapic" | collapse existing object_property_add_child(parent,"ioapic")
-hw/i386/x86-common.c:510 | qdev_new | parent | "ioapic" | collapse existing object_property_add_child(parent,"ioapic")
-hw/i386/x86-common.c:528 | qdev_new | parent | "ioapic2" | thread Object *parent into ioapic_init_secondary(); caller passes OBJECT(mms)
+pc_vga_init() and the two static network_init() helpers in
+hw/mips/{fuloong2e,malta}.c gain the parent argument as well and
+pass it through.
 
 Link: https://lore.kernel.org/qemu-devel/87jyr3w9tc.fsf@pond.sub.org/
 AI-used-for: code (refactoring)
 Signed-off-by: Alexander Graf <graf@amazon.com>
 ---
- hw/char/xen_console.c             |  2 +-
- hw/i386/isapc.c                   |  6 +++---
- hw/i386/kvm/clock.c               |  4 ++--
- hw/i386/kvm/clock.h               |  2 +-
- hw/i386/kvm/xen-stubs.c           |  2 +-
- hw/i386/kvm/xen_evtchn.c          |  6 ++++--
- hw/i386/kvm/xen_evtchn.h          |  3 ++-
- hw/i386/kvm/xen_gnttab.c          |  6 ++++--
- hw/i386/kvm/xen_gnttab.h          |  2 +-
- hw/i386/kvm/xen_overlay.c         |  6 ++++--
- hw/i386/kvm/xen_overlay.h         |  2 +-
- hw/i386/kvm/xen_primary_console.c |  5 +++--
- hw/i386/kvm/xen_primary_console.h |  2 +-
- hw/i386/kvm/xen_xenstore.c        |  5 +++--
- hw/i386/kvm/xen_xenstore.h        |  2 +-
- hw/i386/microvm.c                 | 15 ++++++++-------
- hw/i386/nitro_enclave.c           |  9 +++++----
- hw/i386/pc.c                      | 29 ++++++++++++++--------------
- hw/i386/pc_piix.c                 | 15 ++++++++-------
- hw/i386/pc_q35.c                  | 32 +++++++++++++++++--------------
- hw/i386/pc_sysfw.c                | 10 ++--------
- hw/i386/sgx.c                     |  5 +++--
- hw/i386/x86-common.c              | 13 ++++++-------
- include/hw/i386/x86.h             |  2 +-
- 24 files changed, 98 insertions(+), 87 deletions(-)
+ hw/alpha/dp264.c         |  2 +-
+ hw/i386/isapc.c          |  2 +-
+ hw/i386/pc.c             |  6 +++---
+ hw/i386/pc_piix.c        |  2 +-
+ hw/i386/pc_q35.c         |  2 +-
+ hw/isa/isa-bus.c         |  6 +++---
+ hw/mips/fuloong2e.c      |  6 +++---
+ hw/mips/loongson3_virt.c |  2 +-
+ hw/mips/malta.c          |  8 ++++----
+ hw/pci/pci.c             | 18 +++++++++---------
+ hw/ppc/amigaone.c        |  2 +-
+ hw/ppc/mac_newworld.c    |  2 +-
+ hw/ppc/mac_oldworld.c    |  2 +-
+ hw/ppc/pegasos.c         |  2 +-
+ hw/ppc/prep.c            |  4 ++--
+ hw/ppc/spapr.c           |  6 +++---
+ hw/riscv/boston-aia.c    |  3 ++-
+ hw/sh4/r2d.c             |  2 +-
+ include/hw/i386/pc.h     |  2 +-
+ include/hw/isa/isa.h     |  2 +-
+ include/hw/pci/pci.h     |  4 ++--
+ 21 files changed, 43 insertions(+), 42 deletions(-)
 
-diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-index 57520192b9..cd440b82f4 100644
---- a/hw/char/xen_console.c
-+++ b/hw/char/xen_console.c
-@@ -440,7 +440,7 @@ static void xen_console_realize(XenDevice *xendev, Error **errp)
-      */
-     if (!con->dev) {
-         if (xen_mode == XEN_EMULATE) {
--            xen_primary_console_create();
-+            xen_primary_console_create(OBJECT(xendev));
-         } else if (xen_device_frontend_scanf(xendev, "ring-ref", "%u", &u)
-                    != 1 ||
-                    xen_device_frontend_scanf(xendev, "port", "%u", &u) != 1) {
+diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
+index 40dee88f2d..d7d4fe3e8b 100644
+--- a/hw/alpha/dp264.c
++++ b/hw/alpha/dp264.c
+@@ -122,7 +122,7 @@ static void clipper_init(MachineState *machine)
+     mc146818_rtc_init(mo, isa_bus, 1900, rtc_irq);
+ 
+     /* VGA setup.  Don't bother loading the bios.  */
+-    pci_vga_init(pci_bus);
++    pci_vga_init(OBJECT(machine), pci_bus);
+ 
+     /* Network setup.  e1000 is good enough, failing Tulip support.  */
+     pci_init_nic_devices(pci_bus, mc->default_nic);
 diff --git a/hw/i386/isapc.c b/hw/i386/isapc.c
-index c2a3f23f2c..c5bba66967 100644
+index c5bba66967..842ae94acb 100644
 --- a/hw/i386/isapc.c
 +++ b/hw/i386/isapc.c
-@@ -90,7 +90,7 @@ static void pc_init_isa(MachineState *machine)
-     x86_cpus_init(x86ms, pcmc->default_cpu_version);
- 
-     if (kvm_enabled()) {
--        kvmclock_create(pcmc->kvmclock_create_always);
-+        kvmclock_create(OBJECT(machine), pcmc->kvmclock_create_always);
+@@ -130,7 +130,7 @@ static void pc_init_isa(MachineState *machine)
+         x86_register_ferr_irq(x86ms->gsi[13]);
      }
  
-     /* allocate ram and load rom/bios */
-@@ -112,9 +112,9 @@ static void pc_init_isa(MachineState *machine)
-                           &error_abort);
-     isa_bus_register_input_irqs(isa_bus, x86ms->gsi);
+-    pc_vga_init(isa_bus, NULL);
++    pc_vga_init(OBJECT(machine), isa_bus, NULL);
  
--    x86ms->rtc = isa_new_orphan(TYPE_MC146818_RTC);
-+    x86ms->rtc = isa_new(OBJECT(machine), "rtc", TYPE_MC146818_RTC);
-     qdev_prop_set_int32(DEVICE(x86ms->rtc), "base_year", 2000);
--    isa_realize_and_unref(x86ms->rtc, isa_bus, &error_fatal);
-+    qdev_realize(DEVICE(x86ms->rtc), BUS(isa_bus), &error_fatal);
-     irq = object_property_get_uint(OBJECT(x86ms->rtc), "irq",
-                                    &error_fatal);
-     isa_connect_gpio_out(ISA_DEVICE(x86ms->rtc), 0, irq);
-diff --git a/hw/i386/kvm/clock.c b/hw/i386/kvm/clock.c
-index de0df2c82a..34abba88f4 100644
---- a/hw/i386/kvm/clock.c
-+++ b/hw/i386/kvm/clock.c
-@@ -369,7 +369,7 @@ static const TypeInfo kvmclock_info = {
- };
- 
- /* Note: Must be called after VCPU initialization. */
--void kvmclock_create(bool create_always)
-+void kvmclock_create(Object *parent, bool create_always)
- {
-     X86CPU *cpu = X86_CPU(first_cpu);
- 
-@@ -377,7 +377,7 @@ void kvmclock_create(bool create_always)
-     if (create_always ||
-         cpu->env.features[FEAT_KVM] & (CPUID_KVM_CLOCK |
-                                        CPUID_KVM_CLOCK2)) {
--        sysbus_create_simple_orphan(TYPE_KVM_CLOCK, -1, NULL);
-+        sysbus_create_simple(parent, "kvmclock", TYPE_KVM_CLOCK, -1, NULL);
-     }
- }
- 
-diff --git a/hw/i386/kvm/clock.h b/hw/i386/kvm/clock.h
-index 401c7e445b..e86aa3aa88 100644
---- a/hw/i386/kvm/clock.h
-+++ b/hw/i386/kvm/clock.h
-@@ -13,6 +13,6 @@
- #ifndef HW_I386_KVM_CLOCK_H
- #define HW_I386_KVM_CLOCK_H
- 
--void kvmclock_create(bool create_always);
-+void kvmclock_create(Object *parent, bool create_always);
- 
- #endif
-diff --git a/hw/i386/kvm/xen-stubs.c b/hw/i386/kvm/xen-stubs.c
-index bf6ac28bef..afdceeeb2a 100644
---- a/hw/i386/kvm/xen-stubs.c
-+++ b/hw/i386/kvm/xen-stubs.c
-@@ -32,7 +32,7 @@ bool xen_evtchn_deliver_pirq_msi(uint64_t address, uint32_t data)
-     return false;
- }
- 
--void xen_primary_console_create(void)
-+void xen_primary_console_create(Object *parent)
- {
- }
- 
-diff --git a/hw/i386/kvm/xen_evtchn.c b/hw/i386/kvm/xen_evtchn.c
-index 1a406fbc00..89e59b612a 100644
---- a/hw/i386/kvm/xen_evtchn.c
-+++ b/hw/i386/kvm/xen_evtchn.c
-@@ -304,9 +304,11 @@ static void gsi_assert_bh(void *opaque)
-     }
- }
- 
--void xen_evtchn_create(unsigned int nr_gsis, qemu_irq *system_gsis)
-+void xen_evtchn_create(Object *parent, unsigned int nr_gsis,
-+                       qemu_irq *system_gsis)
- {
--    XenEvtchnState *s = XEN_EVTCHN(sysbus_create_simple_orphan(TYPE_XEN_EVTCHN,
-+    XenEvtchnState *s = XEN_EVTCHN(sysbus_create_simple(parent, "xen-evtchn",
-+                                                        TYPE_XEN_EVTCHN,
-                                                         -1, NULL));
-     int i;
- 
-diff --git a/hw/i386/kvm/xen_evtchn.h b/hw/i386/kvm/xen_evtchn.h
-index 8d339db560..87e9d4bb9f 100644
---- a/hw/i386/kvm/xen_evtchn.h
-+++ b/hw/i386/kvm/xen_evtchn.h
-@@ -16,7 +16,8 @@
- 
- typedef uint32_t evtchn_port_t;
- 
--void xen_evtchn_create(unsigned int nr_gsis, qemu_irq *system_gsis);
-+void xen_evtchn_create(Object *parent, unsigned int nr_gsis,
-+                       qemu_irq *system_gsis);
- int xen_evtchn_soft_reset(void);
- int xen_evtchn_set_callback_param(uint64_t param);
- void xen_evtchn_set_callback_level(int level);
-diff --git a/hw/i386/kvm/xen_gnttab.c b/hw/i386/kvm/xen_gnttab.c
-index eb43e9f385..ea5a561b05 100644
---- a/hw/i386/kvm/xen_gnttab.c
-+++ b/hw/i386/kvm/xen_gnttab.c
-@@ -150,9 +150,11 @@ static const TypeInfo xen_gnttab_info = {
-     .class_init    = xen_gnttab_class_init,
- };
- 
--void xen_gnttab_create(void)
-+void xen_gnttab_create(Object *parent)
- {
--    xen_gnttab_singleton = XEN_GNTTAB(sysbus_create_simple_orphan(TYPE_XEN_GNTTAB,
-+    xen_gnttab_singleton = XEN_GNTTAB(sysbus_create_simple(parent,
-+                                                           "xen-gnttab",
-+                                                           TYPE_XEN_GNTTAB,
-                                                            -1, NULL));
- }
- 
-diff --git a/hw/i386/kvm/xen_gnttab.h b/hw/i386/kvm/xen_gnttab.h
-index ee215239b0..6e9c430476 100644
---- a/hw/i386/kvm/xen_gnttab.h
-+++ b/hw/i386/kvm/xen_gnttab.h
-@@ -12,7 +12,7 @@
- #ifndef QEMU_XEN_GNTTAB_H
- #define QEMU_XEN_GNTTAB_H
- 
--void xen_gnttab_create(void);
-+void xen_gnttab_create(Object *parent);
- int xen_gnttab_reset(void);
- int xen_gnttab_map_page(uint64_t idx, uint64_t gfn);
- 
-diff --git a/hw/i386/kvm/xen_overlay.c b/hw/i386/kvm/xen_overlay.c
-index 1ef47539e4..bfa4807427 100644
---- a/hw/i386/kvm/xen_overlay.c
-+++ b/hw/i386/kvm/xen_overlay.c
-@@ -167,9 +167,11 @@ static const TypeInfo xen_overlay_info = {
-     .class_init    = xen_overlay_class_init,
- };
- 
--void xen_overlay_create(void)
-+void xen_overlay_create(Object *parent)
- {
--    xen_overlay_singleton = XEN_OVERLAY(sysbus_create_simple_orphan(TYPE_XEN_OVERLAY,
-+    xen_overlay_singleton = XEN_OVERLAY(sysbus_create_simple(parent,
-+                                                             "xen-overlay",
-+                                                             TYPE_XEN_OVERLAY,
-                                                              -1, NULL));
- 
-     /* If xen_domid wasn't explicitly set, at least make sure it isn't zero. */
-diff --git a/hw/i386/kvm/xen_overlay.h b/hw/i386/kvm/xen_overlay.h
-index 75ecb6b359..37cd86f7ce 100644
---- a/hw/i386/kvm/xen_overlay.h
-+++ b/hw/i386/kvm/xen_overlay.h
-@@ -12,7 +12,7 @@
- #ifndef QEMU_XEN_OVERLAY_H
- #define QEMU_XEN_OVERLAY_H
- 
--void xen_overlay_create(void);
-+void xen_overlay_create(Object *parent);
- 
- int xen_overlay_map_shinfo_page(uint64_t gpa);
- void *xen_overlay_get_shinfo_ptr(void);
-diff --git a/hw/i386/kvm/xen_primary_console.c b/hw/i386/kvm/xen_primary_console.c
-index f22ce4b14b..323b0747a2 100644
---- a/hw/i386/kvm/xen_primary_console.c
-+++ b/hw/i386/kvm/xen_primary_console.c
-@@ -82,9 +82,10 @@ static const TypeInfo xen_primary_console_info = {
- };
- 
- 
--void xen_primary_console_create(void)
-+void xen_primary_console_create(Object *parent)
- {
--    DeviceState *dev = sysbus_create_simple_orphan(TYPE_XEN_PRIMARY_CONSOLE, -1, NULL);
-+    DeviceState *dev = sysbus_create_simple(parent, "xen-primary-console",
-+                                            TYPE_XEN_PRIMARY_CONSOLE, -1, NULL);
- 
-     trace_xen_primary_console_create();
- 
-diff --git a/hw/i386/kvm/xen_primary_console.h b/hw/i386/kvm/xen_primary_console.h
-index 7e2989ea0d..240c55f0b0 100644
---- a/hw/i386/kvm/xen_primary_console.h
-+++ b/hw/i386/kvm/xen_primary_console.h
-@@ -12,7 +12,7 @@
- #ifndef QEMU_XEN_PRIMARY_CONSOLE_H
- #define QEMU_XEN_PRIMARY_CONSOLE_H
- 
--void xen_primary_console_create(void);
-+void xen_primary_console_create(Object *parent);
- int xen_primary_console_reset(void);
- 
- uint16_t xen_primary_console_get_port(void);
-diff --git a/hw/i386/kvm/xen_xenstore.c b/hw/i386/kvm/xen_xenstore.c
-index 92493bcb6d..1719eab20e 100644
---- a/hw/i386/kvm/xen_xenstore.c
-+++ b/hw/i386/kvm/xen_xenstore.c
-@@ -274,9 +274,10 @@ static const TypeInfo xen_xenstore_info = {
-     .class_init    = xen_xenstore_class_init,
- };
- 
--void xen_xenstore_create(void)
-+void xen_xenstore_create(Object *parent)
- {
--    DeviceState *dev = sysbus_create_simple_orphan(TYPE_XEN_XENSTORE, -1, NULL);
-+    DeviceState *dev = sysbus_create_simple(parent, "xen-xenstore",
-+                                            TYPE_XEN_XENSTORE, -1, NULL);
- 
-     xen_xenstore_singleton = XEN_XENSTORE(dev);
- 
-diff --git a/hw/i386/kvm/xen_xenstore.h b/hw/i386/kvm/xen_xenstore.h
-index 8c3768e075..a36626e4ff 100644
---- a/hw/i386/kvm/xen_xenstore.h
-+++ b/hw/i386/kvm/xen_xenstore.h
-@@ -12,7 +12,7 @@
- #ifndef QEMU_XEN_XENSTORE_H
- #define QEMU_XEN_XENSTORE_H
- 
--void xen_xenstore_create(void);
-+void xen_xenstore_create(Object *parent);
- int xen_xenstore_reset(void);
- 
- uint16_t xen_xenstore_get_port(void);
-diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
-index 8e52cdd0db..d701672c1a 100644
---- a/hw/i386/microvm.c
-+++ b/hw/i386/microvm.c
-@@ -108,8 +108,8 @@ static void create_gpex(MicrovmMachineState *mms)
-     DeviceState *dev;
-     int i;
- 
--    dev = qdev_new_orphan(TYPE_GPEX_HOST);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    dev = qdev_new(OBJECT(mms), "gpex", TYPE_GPEX_HOST);
-+    sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     /* Map only the first size_ecam bytes of ECAM space */
-     ecam_alias = g_new0(MemoryRegion, 1);
-@@ -177,11 +177,11 @@ static void microvm_devices_init(MicrovmMachineState *mms)
- 
-     ioapic_init_gsi(gsi_state, OBJECT(mms));
-     if (ioapics > 1) {
--        x86ms->ioapic2 = ioapic_init_secondary(gsi_state);
-+        x86ms->ioapic2 = ioapic_init_secondary(OBJECT(mms), gsi_state);
-     }
- 
-     if (kvm_enabled()) {
--        kvmclock_create(true);
-+        kvmclock_create(OBJECT(mms), true);
-     }
- 
-     mms->virtio_irq_base = 5;
-@@ -197,14 +197,15 @@ static void microvm_devices_init(MicrovmMachineState *mms)
-     }
- 
-     for (i = 0; i < mms->virtio_num_transports; i++) {
--        sysbus_create_simple_orphan("virtio-mmio",
-+        sysbus_create_simple(OBJECT(mms), "virtio-mmio[*]", "virtio-mmio",
-                              VIRTIO_MMIO_BASE + i * 512,
-                              x86ms->gsi[mms->virtio_irq_base + i]);
-     }
- 
-     /* Optional and legacy devices */
-     if (x86_machine_is_acpi_enabled(x86ms)) {
--        DeviceState *dev = qdev_new_orphan(TYPE_ACPI_GED);
-+        DeviceState *dev = qdev_new(OBJECT(mms), "acpi-ged",
-+                                    TYPE_ACPI_GED);
-         qdev_prop_set_uint32(dev, "ged-event", ACPI_GED_PWR_DOWN_EVT);
-         sysbus_realize(SYS_BUS_DEVICE(dev), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, GED_MMIO_BASE);
-@@ -216,7 +217,7 @@ static void microvm_devices_init(MicrovmMachineState *mms)
-     }
- 
-     if (x86_machine_is_acpi_enabled(x86ms) && machine_usb(MACHINE(mms))) {
--        DeviceState *dev = qdev_new_orphan(TYPE_XHCI_SYSBUS);
-+        DeviceState *dev = qdev_new(OBJECT(mms), "xhci", TYPE_XHCI_SYSBUS);
-         qdev_prop_set_uint32(dev, "intrs", 1);
-         qdev_prop_set_uint32(dev, "slots", XHCI_MAXSLOTS);
-         qdev_prop_set_uint32(dev, "p2", 8);
-diff --git a/hw/i386/nitro_enclave.c b/hw/i386/nitro_enclave.c
-index fcad27bd9b..359d83dd49 100644
---- a/hw/i386/nitro_enclave.c
-+++ b/hw/i386/nitro_enclave.c
-@@ -46,7 +46,8 @@ static BusState *find_free_virtio_mmio_bus(void)
- 
- static void vhost_user_vsock_init(NitroEnclaveMachineState *nems)
- {
--    DeviceState *dev = qdev_new_orphan(TYPE_VHOST_USER_VSOCK);
-+    DeviceState *dev = qdev_new(OBJECT(nems), "vsock",
-+                                TYPE_VHOST_USER_VSOCK);
-     VHostUserVSock *vsock = VHOST_USER_VSOCK(dev);
-     BusState *bus;
- 
-@@ -70,12 +71,12 @@ static void vhost_user_vsock_init(NitroEnclaveMachineState *nems)
- 
-     vsock->conf.chardev.chr = chardev;
- 
--    qdev_realize_and_unref(dev, bus, &error_fatal);
-+    qdev_realize(dev, bus, &error_fatal);
- }
- 
- static void virtio_nsm_init(NitroEnclaveMachineState *nems)
- {
--    DeviceState *dev = qdev_new_orphan(TYPE_VIRTIO_NSM);
-+    DeviceState *dev = qdev_new(OBJECT(nems), "nsm", TYPE_VIRTIO_NSM);
-     VirtIONSM *vnsm = VIRTIO_NSM(dev);
-     BusState *bus = find_free_virtio_mmio_bus();
- 
-@@ -86,7 +87,7 @@ static void virtio_nsm_init(NitroEnclaveMachineState *nems)
- 
-     qdev_prop_set_string(dev, "module-id", nems->id);
- 
--    qdev_realize_and_unref(dev, bus, &error_fatal);
-+    qdev_realize(dev, bus, &error_fatal);
-     nems->vnsm = vnsm;
- }
- 
+     /* init basic PC hardware */
+     pc_basic_device_init(pcms, isa_bus, x86ms->gsi, x86ms->rtc,
 diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 3d405cb33c..1073888b42 100644
+index 1073888b42..0c89310ab7 100644
 --- a/hw/i386/pc.c
 +++ b/hw/i386/pc.c
-@@ -998,9 +998,9 @@ static void pc_superio_init(Object *parent, ISABus *isa_bus, bool create_fdctrl,
-     }
-     if (create_fdctrl) {
- #ifdef CONFIG_FDC_ISA
--        ISADevice *fdc = isa_new_orphan(TYPE_ISA_FDC);
-+        ISADevice *fdc = isa_new(parent, "fdc", TYPE_ISA_FDC);
-         if (fdc) {
--            isa_realize_and_unref(fdc, isa_bus, &error_fatal);
-+            qdev_realize(DEVICE(fdc), BUS(isa_bus), &error_fatal);
-             isa_fdc_init_drives(fdc, fd);
-         }
- #endif
-@@ -1014,19 +1014,19 @@ static void pc_superio_init(Object *parent, ISABus *isa_bus, bool create_fdctrl,
-         return;
+@@ -946,15 +946,15 @@ uint64_t pc_pci_hole64_start(void)
+     return ROUND_UP(hole64_start, 1 * GiB);
+ }
+ 
+-DeviceState *pc_vga_init(ISABus *isa_bus, PCIBus *pci_bus)
++DeviceState *pc_vga_init(Object *parent, ISABus *isa_bus, PCIBus *pci_bus)
+ {
+     DeviceState *dev = NULL;
+ 
+     if (pci_bus) {
+-        PCIDevice *pcidev = pci_vga_init(pci_bus);
++        PCIDevice *pcidev = pci_vga_init(parent, pci_bus);
+         dev = pcidev ? &pcidev->qdev : NULL;
+     } else if (isa_bus) {
+-        ISADevice *isadev = isa_vga_init(isa_bus);
++        ISADevice *isadev = isa_vga_init(parent, isa_bus);
+         dev = isadev ? DEVICE(isadev) : NULL;
      }
  
--    i8042 = isa_create_simple_orphan(isa_bus, TYPE_I8042);
-+    i8042 = isa_create_simple(parent, "i8042[*]", isa_bus, TYPE_I8042);
-     if (!no_vmport) {
--        isa_create_simple_orphan(isa_bus, TYPE_VMPORT);
--        vmmouse = isa_try_new_orphan("vmmouse");
-+        isa_create_simple(parent, "vmport[*]", isa_bus, TYPE_VMPORT);
-+        vmmouse = isa_try_new(parent, "vmmouse", "vmmouse");
-     } else {
-         vmmouse = NULL;
-     }
-     if (vmmouse) {
-         object_property_set_link(OBJECT(vmmouse), TYPE_I8042, OBJECT(i8042),
-                                  &error_abort);
--        isa_realize_and_unref(vmmouse, isa_bus, &error_fatal);
-+        qdev_realize(DEVICE(vmmouse), BUS(isa_bus), &error_fatal);
-     }
--    port92 = isa_create_simple_orphan(isa_bus, TYPE_PORT92);
-+    port92 = isa_create_simple(parent, "port92", isa_bus, TYPE_PORT92);
- 
-     a20_line = qemu_allocate_irqs(handle_a20_line_change, first_cpu, 2);
-     qdev_connect_gpio_out_named(DEVICE(i8042),
-@@ -1065,7 +1065,7 @@ void pc_basic_device_init(struct PCMachineState *pcms,
-     if (pcms->hpet_enabled) {
-         qemu_irq rtc_irq;
- 
--        hpet = qdev_try_new_orphan(TYPE_HPET);
-+        hpet = qdev_try_new(OBJECT(pcms), "hpet[*]", TYPE_HPET);
-         if (!hpet) {
-             error_report("couldn't create HPET device");
-             exit(1);
-@@ -1080,7 +1080,7 @@ void pc_basic_device_init(struct PCMachineState *pcms,
-         if (!compat) {
-             qdev_prop_set_uint32(hpet, HPET_INTCAP, hpet_irqs);
-         }
--        sysbus_realize_and_unref(SYS_BUS_DEVICE(hpet), &error_fatal);
-+        sysbus_realize(SYS_BUS_DEVICE(hpet), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(hpet), 0, HPET_BASE);
- 
-         for (i = 0; i < IOAPIC_NUM_PINS; i++) {
-@@ -1099,12 +1099,13 @@ void pc_basic_device_init(struct PCMachineState *pcms,
- 
- #ifdef CONFIG_XEN_EMU
-     if (xen_mode == XEN_EMULATE) {
--        xen_overlay_create();
--        xen_evtchn_create(IOAPIC_NUM_PINS, gsi);
--        xen_gnttab_create();
--        xen_xenstore_create();
-+        xen_overlay_create(OBJECT(pcms));
-+        xen_evtchn_create(OBJECT(pcms), IOAPIC_NUM_PINS, gsi);
-+        xen_gnttab_create(OBJECT(pcms));
-+        xen_xenstore_create(OBJECT(pcms));
-         if (pcms->pcibus) {
--            pci_create_simple_orphan(pcms->pcibus, -1, "xen-platform");
-+            pci_create_simple(OBJECT(pcms), "xen-platform", pcms->pcibus,
-+                              -1, "xen-platform");
-         }
-         xen_bus_init();
-     }
 diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-index 44ce592ea2..8ae2108e73 100644
+index 8ae2108e73..c9e6c61734 100644
 --- a/hw/i386/pc_piix.c
 +++ b/hw/i386/pc_piix.c
-@@ -187,14 +187,13 @@ static void pc_init1(MachineState *machine, const char *pci_type)
-     x86_cpus_init(x86ms, pcmc->default_cpu_version);
- 
-     if (kvm_enabled()) {
--        kvmclock_create(pcmc->kvmclock_create_always);
-+        kvmclock_create(OBJECT(machine), pcmc->kvmclock_create_always);
+@@ -290,7 +290,7 @@ static void pc_init1(MachineState *machine, const char *pci_type)
+         x86_register_ferr_irq(x86ms->gsi[13]);
      }
  
-     pci_memory = g_new(MemoryRegion, 1);
-     memory_region_init(pci_memory, NULL, "pci", UINT64_MAX);
+-    pc_vga_init(isa_bus, pcms->pcibus);
++    pc_vga_init(OBJECT(machine), isa_bus, pcms->pcibus);
  
--    phb = OBJECT(qdev_new_orphan(TYPE_I440FX_PCI_HOST_BRIDGE));
--    object_property_add_child(OBJECT(machine), "i440fx", phb);
-+    phb = OBJECT(qdev_new(OBJECT(machine), "i440fx", TYPE_I440FX_PCI_HOST_BRIDGE));
-     object_property_set_link(phb, PCI_HOST_PROP_RAM_MEM,
-                              OBJECT(ram_memory), &error_fatal);
-     object_property_set_link(phb, PCI_HOST_PROP_PCI_MEM,
-@@ -209,7 +208,7 @@ static void pc_init1(MachineState *machine, const char *pci_type)
-                              x86ms->above_4g_mem_size, &error_fatal);
-     object_property_set_str(phb, I440FX_HOST_PROP_PCI_TYPE, pci_type,
-                             &error_fatal);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(phb), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(phb), &error_fatal);
- 
-     pcms->pcibus = PCI_BUS(qdev_get_child_bus(DEVICE(phb), "pci.0"));
-     pci_bus_map_irqs(pcms->pcibus,
-@@ -236,7 +235,8 @@ static void pc_init1(MachineState *machine, const char *pci_type)
- 
-     gsi_state = pc_gsi_create(&x86ms->gsi, true);
- 
--    pci_dev = pci_new_multifunction_orphan(-1, pcms->south_bridge);
-+    pci_dev = pci_new_multifunction(OBJECT(machine), "south-bridge", -1,
-+                                    pcms->south_bridge);
-     object_property_set_bool(OBJECT(pci_dev), "has-usb",
-                              machine_usb(machine), &error_abort);
-     object_property_set_bool(OBJECT(pci_dev), "has-acpi",
-@@ -254,7 +254,7 @@ static void pc_init1(MachineState *machine, const char *pci_type)
-     for (i = 0; i < ISA_NUM_IRQS; i++) {
-         qdev_connect_gpio_out_named(dev, "isa-irqs", i, x86ms->gsi[i]);
-     }
--    pci_realize_and_unref(pci_dev, pcms->pcibus, &error_fatal);
-+    qdev_realize(DEVICE(pci_dev), BUS(pcms->pcibus), &error_fatal);
- 
-     if (xen_enabled()) {
-         pci_device_set_intx_routing_notifier(
-@@ -384,7 +384,8 @@ static void pc_xen_hvm_init(MachineState *machine)
-                       : TYPE_I440FX_PCI_DEVICE);
- 
-     xen_igd_reserve_slot(pcms->pcibus);
--    pci_create_simple_orphan(pcms->pcibus, -1, "xen-platform");
-+    pci_create_simple(OBJECT(machine), "xen-platform", pcms->pcibus, -1,
-+                      "xen-platform");
- }
- #endif
- 
+     /* init basic PC hardware */
+     pc_basic_device_init(pcms, isa_bus, x86ms->gsi, x86ms->rtc,
 diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
-index bfea390825..1a65811fae 100644
+index 1a65811fae..62625abed8 100644
 --- a/hw/i386/pc_q35.c
 +++ b/hw/i386/pc_q35.c
-@@ -93,7 +93,8 @@ static const struct ehci_companions ich9_1a[] = {
-     { .name = TYPE_ICH9_USB_UHCI(6), .func = 2, .port = 4 },
- };
- 
--static int ehci_create_ich9_with_companions(PCIBus *bus, int slot)
-+static int ehci_create_ich9_with_companions(Object *parent, PCIBus *bus,
-+                                             int slot)
- {
-     const struct ehci_companions *comp;
-     PCIDevice *ehci, *uhci;
-@@ -114,16 +115,17 @@ static int ehci_create_ich9_with_companions(PCIBus *bus, int slot)
-         return -1;
+@@ -325,7 +325,7 @@ static void pc_q35_init(MachineState *machine)
      }
  
--    ehci = pci_new_multifunction_orphan(PCI_DEVFN(slot, 7), name);
--    pci_realize_and_unref(ehci, bus, &error_fatal);
-+    ehci = pci_new_multifunction(parent, "ehci[*]", PCI_DEVFN(slot, 7), name);
-+    qdev_realize(DEVICE(ehci), BUS(bus), &error_fatal);
-     usbbus = QLIST_FIRST(&ehci->qdev.child_bus);
+     /* the rest devices to which pci devfn is automatically assigned */
+-    pc_vga_init(isa_bus, pcms->pcibus);
++    pc_vga_init(OBJECT(machine), isa_bus, pcms->pcibus);
+     pc_nic_init(pcmc, isa_bus, pcms->pcibus);
  
-     for (i = 0; i < 3; i++) {
--        uhci = pci_new_multifunction_orphan(PCI_DEVFN(slot, comp[i].func),
-+        uhci = pci_new_multifunction(parent, "uhci[*]",
-+                                     PCI_DEVFN(slot, comp[i].func),
-                                      comp[i].name);
-         qdev_prop_set_string(&uhci->qdev, "masterbus", usbbus->name);
-         qdev_prop_set_uint32(&uhci->qdev, "firstport", comp[i].port);
--        pci_realize_and_unref(uhci, bus, &error_fatal);
-+        qdev_realize(DEVICE(uhci), BUS(bus), &error_fatal);
-     }
-     return 0;
- }
-@@ -195,11 +197,11 @@ static void pc_q35_init(MachineState *machine)
-     x86_cpus_init(x86ms, pcmc->default_cpu_version);
- 
-     if (kvm_enabled()) {
--        kvmclock_create(pcmc->kvmclock_create_always);
-+        kvmclock_create(OBJECT(machine), pcmc->kvmclock_create_always);
-     }
- 
-     /* create pci host bus */
--    phb = OBJECT(qdev_new_orphan(TYPE_Q35_HOST_DEVICE));
-+    phb = OBJECT(qdev_new(OBJECT(machine), "q35", TYPE_Q35_HOST_DEVICE));
- 
-     pci_hole64_size = object_property_get_uint(phb,
-                                                PCI_HOST_PROP_PCI_HOLE64_SIZE,
-@@ -209,7 +211,6 @@ static void pc_q35_init(MachineState *machine)
-     memory_region_init(pci_memory, NULL, "pci", UINT64_MAX);
-     pc_memory_init(pcms, system_memory, pci_memory, pci_hole64_size);
- 
--    object_property_add_child(OBJECT(machine), "q35", phb);
-     object_property_set_link(phb, PCI_HOST_PROP_RAM_MEM,
-                              OBJECT(machine->ram), NULL);
-     object_property_set_link(phb, PCI_HOST_PROP_PCI_MEM,
-@@ -226,7 +227,7 @@ static void pc_q35_init(MachineState *machine)
-                              pcms->default_bus_bypass_iommu, NULL);
-     object_property_set_bool(phb, PCI_HOST_PROP_SMM_RANGES,
-                              x86_machine_is_smm_enabled(x86ms), NULL);
--    sysbus_realize_and_unref(SYS_BUS_DEVICE(phb), &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(phb), &error_fatal);
- 
-     /* pci */
-     pcms->pcibus = PCI_BUS(qdev_get_child_bus(DEVICE(phb), "pcie.0"));
-@@ -235,7 +236,8 @@ static void pc_q35_init(MachineState *machine)
-     gsi_state = pc_gsi_create(&x86ms->gsi, true);
- 
-     /* create ISA bus */
--    lpc = pci_new_multifunction_orphan(PCI_DEVFN(ICH9_LPC_DEV, ICH9_LPC_FUNC),
-+    lpc = pci_new_multifunction(OBJECT(machine), "lpc",
-+                                PCI_DEVFN(ICH9_LPC_DEV, ICH9_LPC_FUNC),
-                                 TYPE_ICH9_LPC_DEVICE);
-     lpc_dev = DEVICE(lpc);
-     qdev_prop_set_bit(lpc_dev, "smm-enabled",
-@@ -243,7 +245,7 @@ static void pc_q35_init(MachineState *machine)
-     for (i = 0; i < IOAPIC_NUM_PINS; i++) {
-         qdev_connect_gpio_out_named(lpc_dev, ICH9_GPIO_GSI, i, x86ms->gsi[i]);
-     }
--    pci_realize_and_unref(lpc, pcms->pcibus, &error_fatal);
-+    qdev_realize(DEVICE(lpc), BUS(pcms->pcibus), &error_fatal);
- 
-     x86ms->rtc = ISA_DEVICE(object_resolve_path_component(OBJECT(lpc), "rtc"));
- 
-@@ -290,7 +292,8 @@ static void pc_q35_init(MachineState *machine)
-         AHCIPCIState *ich9;
- 
-         /* ahci and SATA device, for q35 1 ahci controller is built-in */
--        pdev = pci_create_simple_multifunction_orphan(pcms->pcibus,
-+        pdev = pci_create_simple_multifunction(OBJECT(machine), "sata[*]",
-+                                               pcms->pcibus,
-                                                PCI_DEVFN(ICH9_SATA1_DEV,
-                                                          ICH9_SATA1_FUNC),
-                                                "ich9-ahci");
-@@ -304,14 +307,15 @@ static void pc_q35_init(MachineState *machine)
- 
-     if (machine_usb(machine)) {
-         /* Should we create 6 UHCI according to ich9 spec? */
--        ehci_create_ich9_with_companions(pcms->pcibus, 0x1d);
-+        ehci_create_ich9_with_companions(OBJECT(machine), pcms->pcibus, 0x1d);
-     }
- 
-     if (pcms->smbus_enabled) {
-         PCIDevice *smb;
- 
-         /* TODO: Populate SPD eeprom data.  */
--        smb = pci_create_simple_multifunction_orphan(pcms->pcibus,
-+        smb = pci_create_simple_multifunction(OBJECT(machine), "smbus[*]",
-+                                              pcms->pcibus,
-                                               PCI_DEVFN(ICH9_SMB_DEV,
-                                                         ICH9_SMB_FUNC),
-                                               TYPE_ICH9_SMB_DEVICE);
-diff --git a/hw/i386/pc_sysfw.c b/hw/i386/pc_sysfw.c
-index d351e3da77..02d75e2838 100644
---- a/hw/i386/pc_sysfw.c
-+++ b/hw/i386/pc_sysfw.c
-@@ -79,19 +79,13 @@ static PFlashCFI01 *pc_pflash_create(PCMachineState *pcms,
-                                      const char *name,
-                                      const char *alias_prop_name)
- {
--    DeviceState *dev = qdev_new_orphan(TYPE_PFLASH_CFI01);
-+    DeviceState *dev = qdev_new(OBJECT(pcms), name, TYPE_PFLASH_CFI01);
- 
-     qdev_prop_set_uint64(dev, "sector-length", FLASH_SECTOR_SIZE);
-     qdev_prop_set_uint8(dev, "width", 1);
-     qdev_prop_set_string(dev, "name", name);
--    object_property_add_child(OBJECT(pcms), name, OBJECT(dev));
-     object_property_add_alias(OBJECT(pcms), alias_prop_name,
-                               OBJECT(dev), "drive");
--    /*
--     * The returned reference is tied to the child property and
--     * will be removed with object_unparent.
--     */
--    object_unref(OBJECT(dev));
-     return PFLASH_CFI01(dev);
+     if (machine->nvdimms_state->is_enabled) {
+diff --git a/hw/isa/isa-bus.c b/hw/isa/isa-bus.c
+index c15cf53469..fb20c43869 100644
+--- a/hw/isa/isa-bus.c
++++ b/hw/isa/isa-bus.c
+@@ -200,17 +200,17 @@ ISABus *isa_bus_from_device(ISADevice *dev)
+     return ISA_BUS(qdev_get_parent_bus(DEVICE(dev)));
  }
  
-@@ -189,7 +183,7 @@ static void pc_system_flash_map(PCMachineState *pcms,
-         gpa = 0x100000000ULL - total_size; /* where the flash is mapped */
-         qdev_prop_set_uint32(DEVICE(system_flash), "num-blocks",
-                              size / FLASH_SECTOR_SIZE);
--        sysbus_realize_and_unref(SYS_BUS_DEVICE(system_flash), &error_fatal);
-+        sysbus_realize(SYS_BUS_DEVICE(system_flash), &error_fatal);
-         sysbus_mmio_map(SYS_BUS_DEVICE(system_flash), 0, gpa);
- 
-         if (i == 0) {
-diff --git a/hw/i386/sgx.c b/hw/i386/sgx.c
-index c326385456..c5a8febf29 100644
---- a/hw/i386/sgx.c
-+++ b/hw/i386/sgx.c
-@@ -311,7 +311,8 @@ void pc_machine_init_sgx_epc(PCMachineState *pcms)
-                                 &sgx_epc->mr);
- 
-     for (list = x86ms->sgx_epc_list; list; list = list->next) {
--        DeviceState *dev = qdev_new_orphan(TYPE_SGX_EPC);
-+        DeviceState *dev = qdev_new(OBJECT(pcms), "sgx-epc[*]",
-+                                    TYPE_SGX_EPC);
- 
-         /* set the memdev link with memory backend */
-         object_property_parse(OBJECT(dev), SGX_EPC_MEMDEV_PROP,
-@@ -319,7 +320,7 @@ void pc_machine_init_sgx_epc(PCMachineState *pcms)
-         /* set the numa node property for sgx epc object */
-         object_property_set_uint(OBJECT(dev), SGX_EPC_NUMA_NODE_PROP,
-                                  list->value->node, &error_fatal);
--        qdev_realize_and_unref(dev, NULL, &error_fatal);
-+        qdev_realize(dev, NULL, &error_fatal);
-     }
- 
-     if ((sgx_epc->base + sgx_epc->size) < sgx_epc->base) {
-diff --git a/hw/i386/x86-common.c b/hw/i386/x86-common.c
-index b8e541e376..73a53fbf3f 100644
---- a/hw/i386/x86-common.c
-+++ b/hw/i386/x86-common.c
-@@ -505,13 +505,12 @@ void ioapic_init_gsi(GSIState *gsi_state, Object *parent)
- 
-     assert(parent);
-     if (kvm_ioapic_in_kernel()) {
--        dev = qdev_new_orphan(TYPE_KVM_IOAPIC);
-+        dev = qdev_new(parent, "ioapic", TYPE_KVM_IOAPIC);
-     } else {
--        dev = qdev_new_orphan(TYPE_IOAPIC);
-+        dev = qdev_new(parent, "ioapic", TYPE_IOAPIC);
-     }
--    object_property_add_child(parent, "ioapic", OBJECT(dev));
-     d = SYS_BUS_DEVICE(dev);
--    sysbus_realize_and_unref(d, &error_fatal);
-+    sysbus_realize(d, &error_fatal);
-     sysbus_mmio_map(d, 0, IO_APIC_DEFAULT_ADDRESS);
- 
-     for (i = 0; i < IOAPIC_NUM_PINS; i++) {
-@@ -519,15 +518,15 @@ void ioapic_init_gsi(GSIState *gsi_state, Object *parent)
-     }
+-ISADevice *isa_vga_init(ISABus *bus)
++ISADevice *isa_vga_init(Object *parent, ISABus *bus)
+ {
+     vga_interface_created = true;
+     switch (vga_interface_type) {
+     case VGA_CIRRUS:
+-        return isa_create_simple_orphan(bus, "isa-cirrus-vga");
++        return isa_create_simple(parent, "vga", bus, "isa-cirrus-vga");
+     case VGA_QXL:
+         error_report("%s: qxl: no PCI bus", __func__);
+         return NULL;
+     case VGA_STD:
+-        return isa_create_simple_orphan(bus, "isa-vga");
++        return isa_create_simple(parent, "vga", bus, "isa-vga");
+     case VGA_VMWARE:
+         error_report("%s: vmware_vga: no PCI bus", __func__);
+         return NULL;
+diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
+index 88d2901829..477ad99c87 100644
+--- a/hw/mips/fuloong2e.c
++++ b/hw/mips/fuloong2e.c
+@@ -201,10 +201,10 @@ static void main_cpu_reset(void *opaque)
  }
  
--DeviceState *ioapic_init_secondary(GSIState *gsi_state)
-+DeviceState *ioapic_init_secondary(Object *parent, GSIState *gsi_state)
+ /* Network support */
+-static void network_init(PCIBus *pci_bus)
++static void network_init(Object *parent, PCIBus *pci_bus)
  {
-     DeviceState *dev;
-     SysBusDevice *d;
-     unsigned int i;
+     /* The Fuloong board has a RTL8139 card using PCI SLOT 7 */
+-    pci_init_nic_in_slot(pci_bus, "rtl8139", NULL, "07");
++    pci_init_nic_in_slot(parent, pci_bus, "rtl8139", NULL, "07");
+     pci_init_nic_devices(pci_bus, "rtl8139");
+ }
  
--    dev = qdev_new_orphan(TYPE_IOAPIC);
-+    dev = qdev_new(parent, "ioapic2[*]", TYPE_IOAPIC);
-     d = SYS_BUS_DEVICE(dev);
--    sysbus_realize_and_unref(d, &error_fatal);
-+    sysbus_realize(d, &error_fatal);
-     sysbus_mmio_map(d, 0, IO_APIC_SECONDARY_ADDRESS);
+@@ -326,7 +326,7 @@ static void mips_fuloong2e_init(MachineState *machine)
+     smbus_eeprom_init_one(OBJECT(machine), smbus, 0x50, spd_data);
  
-     for (i = 0; i < IOAPIC_NUM_PINS; i++) {
-diff --git a/include/hw/i386/x86.h b/include/hw/i386/x86.h
-index 71fe6b5e12..61d6ec1755 100644
---- a/include/hw/i386/x86.h
-+++ b/include/hw/i386/x86.h
-@@ -147,7 +147,7 @@ typedef struct GSIState {
- qemu_irq x86_allocate_cpu_irq(void);
- void gsi_handler(void *opaque, int n, int level);
- void ioapic_init_gsi(GSIState *gsi_state, Object *parent);
--DeviceState *ioapic_init_secondary(GSIState *gsi_state);
-+DeviceState *ioapic_init_secondary(Object *parent, GSIState *gsi_state);
+     /* Network card: RTL8139D */
+-    network_init(pci_bus);
++    network_init(OBJECT(machine), pci_bus);
+ }
  
- /* pc_sysfw.c */
- void x86_firmware_configure(hwaddr gpa, void *ptr, int size);
+ static void mips_fuloong2e_machine_init(MachineClass *mc)
+diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
+index 9ab1edceb2..99d2016ef1 100644
+--- a/hw/mips/loongson3_virt.c
++++ b/hw/mips/loongson3_virt.c
+@@ -460,7 +460,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
+     }
+     msi_nonbroken = true;
+ 
+-    pci_vga_init(pci_bus);
++    pci_vga_init(OBJECT(machine), pci_bus);
+ 
+     if (defaults_enabled() && object_class_by_name("pci-ohci")) {
+         USBBus *usb_bus;
+diff --git a/hw/mips/malta.c b/hw/mips/malta.c
+index ebd1456657..e8c130d5bb 100644
+--- a/hw/mips/malta.c
++++ b/hw/mips/malta.c
+@@ -602,10 +602,10 @@ static MaltaFPGAState *malta_fpga_init(Object *parent, MemoryRegion *address_spa
+ }
+ 
+ /* Network support */
+-static void network_init(PCIBus *pci_bus)
++static void network_init(Object *parent, PCIBus *pci_bus)
+ {
+     /* The malta board has a PCNet card using PCI SLOT 11 */
+-    pci_init_nic_in_slot(pci_bus, "pcnet", NULL, "0b");
++    pci_init_nic_in_slot(parent, pci_bus, "pcnet", NULL, "0b");
+     pci_init_nic_devices(pci_bus, "pcnet");
+ }
+ 
+@@ -1259,10 +1259,10 @@ void mips_malta_init(MachineState *machine)
+                       TYPE_FDC37M81X_SUPERIO);
+ 
+     /* Network card */
+-    network_init(pci_bus);
++    network_init(OBJECT(machine), pci_bus);
+ 
+     /* Optional PCI video card */
+-    pci_vga_init(pci_bus);
++    pci_vga_init(OBJECT(machine), pci_bus);
+ }
+ 
+ static void mips_malta_instance_init(Object *obj)
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index 61b9f2a230..ca5882ba59 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -2083,7 +2083,7 @@ void pci_init_nic_devices(PCIBus *bus, const char *default_model)
+                                 "virtio", "virtio-net-pci");
+ }
+ 
+-bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
++bool pci_init_nic_in_slot(Object *parent, PCIBus *rootbus, const char *model,
+                           const char *alias, const char *devaddr)
+ {
+     NICInfo *nd = qemu_find_nic_info(model, true, alias);
+@@ -2118,26 +2118,26 @@ bool pci_init_nic_in_slot(PCIBus *rootbus, const char *model,
+         exit(1);
+     }
+ 
+-    pci_dev = pci_new_orphan(devfn, model);
++    pci_dev = pci_new(parent, "nic[*]", devfn, model);
+     qdev_set_nic_properties(&pci_dev->qdev, nd);
+-    pci_realize_and_unref(pci_dev, bus, &error_fatal);
++    qdev_realize(DEVICE(pci_dev), BUS(bus), &error_fatal);
+     return true;
+ }
+ 
+-PCIDevice *pci_vga_init(PCIBus *bus)
++PCIDevice *pci_vga_init(Object *parent, PCIBus *bus)
+ {
+     vga_interface_created = true;
+     switch (vga_interface_type) {
+     case VGA_CIRRUS:
+-        return pci_create_simple_orphan(bus, -1, "cirrus-vga");
++        return pci_create_simple(parent, "vga", bus, -1, "cirrus-vga");
+     case VGA_QXL:
+-        return pci_create_simple_orphan(bus, -1, "qxl-vga");
++        return pci_create_simple(parent, "vga", bus, -1, "qxl-vga");
+     case VGA_STD:
+-        return pci_create_simple_orphan(bus, -1, "VGA");
++        return pci_create_simple(parent, "vga", bus, -1, "VGA");
+     case VGA_VMWARE:
+-        return pci_create_simple_orphan(bus, -1, "vmware-svga");
++        return pci_create_simple(parent, "vga", bus, -1, "vmware-svga");
+     case VGA_VIRTIO:
+-        return pci_create_simple_orphan(bus, -1, "virtio-vga");
++        return pci_create_simple(parent, "vga", bus, -1, "virtio-vga");
+     case VGA_NONE:
+     default: /* Other non-PCI types. Checking for unsupported types is already
+                 done in vl.c. */
+diff --git a/hw/ppc/amigaone.c b/hw/ppc/amigaone.c
+index faf76f12be..60aed15a6e 100644
+--- a/hw/ppc/amigaone.c
++++ b/hw/ppc/amigaone.c
+@@ -370,7 +370,7 @@ static void amigaone_init(MachineState *machine)
+                                                              "pirq", i));
+     }
+     pci_ide_create_devs(PCI_DEVICE(object_resolve_path_component(via, "ide")));
+-    pci_vga_init(pci_bus);
++    pci_vga_init(OBJECT(machine), pci_bus);
+ 
+     if (!machine->kernel_filename) {
+         return;
+diff --git a/hw/ppc/mac_newworld.c b/hw/ppc/mac_newworld.c
+index e9ee44a2f1..a6af53e21a 100644
+--- a/hw/ppc/mac_newworld.c
++++ b/hw/ppc/mac_newworld.c
+@@ -435,7 +435,7 @@ static void ppc_core99_init(MachineState *machine)
+         }
+     }
+ 
+-    pci_vga_init(pci_bus);
++    pci_vga_init(OBJECT(machine), pci_bus);
+ 
+     if (!graphic_width) {
+         graphic_width = 800;
+diff --git a/hw/ppc/mac_oldworld.c b/hw/ppc/mac_oldworld.c
+index 6ef8207f96..f9b62a518a 100644
+--- a/hw/ppc/mac_oldworld.c
++++ b/hw/ppc/mac_oldworld.c
+@@ -267,7 +267,7 @@ static void ppc_heathrow_init(MachineState *machine)
+         }
+     }
+ 
+-    pci_vga_init(pci_bus);
++    pci_vga_init(OBJECT(machine), pci_bus);
+ 
+     pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+diff --git a/hw/ppc/pegasos.c b/hw/ppc/pegasos.c
+index 6ce1e3f174..4917d8137a 100644
+--- a/hw/ppc/pegasos.c
++++ b/hw/ppc/pegasos.c
+@@ -267,7 +267,7 @@ static void pegasos_init(MachineState *machine)
+     smbus_eeprom_init_one(OBJECT(machine), i2c_bus, 0x57, spd_data);
+ 
+     /* other PC hardware */
+-    pci_vga_init(pci_bus);
++    pci_vga_init(OBJECT(machine), pci_bus);
+ 
+     /* pci interrupt routing */
+     switch (pm->type) {
+diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
+index ff85a4e64b..52f94b206a 100644
+--- a/hw/ppc/prep.c
++++ b/hw/ppc/prep.c
+@@ -357,10 +357,10 @@ static void ibm_40p_init(MachineState *machine)
+         qdev_connect_gpio_out(dev, 0, qdev_get_gpio_in(i82378_dev, 13));
+ 
+         /* XXX: s3-trio at PCI_DEVFN(2, 0) */
+-        pci_vga_init(pci_bus);
++        pci_vga_init(OBJECT(machine), pci_bus);
+ 
+         /* First PCNET device at PCI_DEVFN(3, 0) */
+-        pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "3");
++        pci_init_nic_in_slot(OBJECT(machine), pci_bus, mc->default_nic, NULL, "3");
+         pci_init_nic_devices(pci_bus, mc->default_nic);
+     }
+ 
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index fbf6c59516..9b6b5e7257 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -1909,7 +1909,7 @@ static void spapr_rtc_create(SpaprMachineState *spapr)
+ }
+ 
+ /* Returns whether we want to use VGA or not */
+-static bool spapr_vga_init(PCIBus *pci_bus, Error **errp)
++static bool spapr_vga_init(Object *parent, PCIBus *pci_bus, Error **errp)
+ {
+     vga_interface_created = true;
+     switch (vga_interface_type) {
+@@ -1920,7 +1920,7 @@ static bool spapr_vga_init(PCIBus *pci_bus, Error **errp)
+     case VGA_STD:
+     case VGA_VIRTIO:
+     case VGA_CIRRUS:
+-        return pci_vga_init(pci_bus) != NULL;
++        return pci_vga_init(parent, pci_bus) != NULL;
+     default:
+         error_setg(errp,
+                    "Unsupported VGA mode, only -vga std or -vga virtio is supported");
+@@ -3066,7 +3066,7 @@ static void spapr_machine_init(MachineState *machine)
+     }
+ 
+     /* Graphics */
+-    has_vga = spapr_vga_init(phb->bus, &error_fatal);
++    has_vga = spapr_vga_init(OBJECT(machine), phb->bus, &error_fatal);
+     if (has_vga) {
+         spapr->want_stdout_path = !machine->enable_graphics;
+         machine->usb |= defaults_enabled() && !machine->usb_disabled;
+diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
+index 3b0eba00a7..5a9ec28068 100644
+--- a/hw/riscv/boston-aia.c
++++ b/hw/riscv/boston-aia.c
+@@ -428,7 +428,8 @@ static void boston_mach_init(MachineState *machine)
+     ahci_ide_create_devs(&ich9->ahci, hd);
+ 
+     /* Create e1000e using slot 0 func 1 */
+-    pci_init_nic_in_slot(&PCI_BRIDGE(&pcie2->root)->sec_bus, "e1000e", NULL,
++    pci_init_nic_in_slot(OBJECT(machine), &PCI_BRIDGE(&pcie2->root)->sec_bus,
++                         "e1000e", NULL,
+                          "00.1");
+     pci_init_nic_devices(&PCI_BRIDGE(&pcie2->root)->sec_bus, "e1000e");
+ 
+diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
+index c03df91aca..6154aed2c4 100644
+--- a/hw/sh4/r2d.c
++++ b/hw/sh4/r2d.c
+@@ -315,7 +315,7 @@ static void r2d_init(MachineState *machine)
+                           0x555, 0x2aa, 0);
+ 
+     /* NIC: rtl8139 on-board, and 2 slots. */
+-    pci_init_nic_in_slot(pci_bus, mc->default_nic, NULL, "2");
++    pci_init_nic_in_slot(OBJECT(machine), pci_bus, mc->default_nic, NULL, "2");
+     pci_init_nic_devices(pci_bus, mc->default_nic);
+ 
+     /* USB keyboard */
+diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+index dbaf61bcf1..a059409243 100644
+--- a/include/hw/i386/pc.h
++++ b/include/hw/i386/pc.h
+@@ -183,7 +183,7 @@ void pc_memory_init(PCMachineState *pcms,
+                     MemoryRegion *rom_memory,
+                     uint64_t pci_hole64_size);
+ uint64_t pc_pci_hole64_start(void);
+-DeviceState *pc_vga_init(ISABus *isa_bus, PCIBus *pci_bus);
++DeviceState *pc_vga_init(Object *parent, ISABus *isa_bus, PCIBus *pci_bus);
+ void pc_basic_device_init(struct PCMachineState *pcms,
+                           ISABus *isa_bus, qemu_irq *gsi,
+                           ISADevice *rtc_state,
+diff --git a/include/hw/isa/isa.h b/include/hw/isa/isa.h
+index af8e07c253..9e35d88b1e 100644
+--- a/include/hw/isa/isa.h
++++ b/include/hw/isa/isa.h
+@@ -89,7 +89,7 @@ ISADevice *isa_try_new_orphan(const char *name);
+ bool isa_realize_and_unref(ISADevice *dev, ISABus *bus, Error **errp);
+ ISADevice *isa_create_simple_orphan(ISABus *bus, const char *name);
+ 
+-ISADevice *isa_vga_init(ISABus *bus);
++ISADevice *isa_vga_init(Object *parent, ISABus *bus);
+ 
+ qemu_irq isa_get_irq(ISADevice *dev, unsigned isairq);
+ void isa_connect_gpio_out(ISADevice *isadev, int gpioirq, unsigned isairq);
+diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+index cbbb6a3756..9c6bcc0b96 100644
+--- a/include/hw/pci/pci.h
++++ b/include/hw/pci/pci.h
+@@ -337,9 +337,9 @@ void pci_device_set_intx_routing_notifier(PCIDevice *dev,
+ void pci_device_reset(PCIDevice *dev);
+ 
+ void pci_init_nic_devices(PCIBus *bus, const char *default_model);
+-bool pci_init_nic_in_slot(PCIBus *rootbus, const char *default_model,
++bool pci_init_nic_in_slot(Object *parent, PCIBus *rootbus, const char *default_model,
+                           const char *alias, const char *devaddr);
+-PCIDevice *pci_vga_init(PCIBus *bus);
++PCIDevice *pci_vga_init(Object *parent, PCIBus *bus);
+ 
+ static inline PCIBus *pci_get_bus(const PCIDevice *dev)
+ {
 -- 
 2.47.1
 
