@@ -4,89 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC79BC4450A
-	for <qemu-riscv@archiver.kernel.org>; Sun, 19 Jul 2026 15:17:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B428FC4450A
+	for <qemu-riscv@archiver.kernel.org>; Sun, 19 Jul 2026 18:03:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wlTGq-0000HO-4O; Sun, 19 Jul 2026 11:17:36 -0400
+	id 1wlVrS-0006xW-N0; Sun, 19 Jul 2026 14:03:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ahshehab24@gmail.com>)
- id 1wlPXO-0001Ov-Ug
- for qemu-riscv@nongnu.org; Sun, 19 Jul 2026 07:18:26 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
+ id 1wlVrQ-0006wf-K7
+ for qemu-riscv@nongnu.org; Sun, 19 Jul 2026 14:03:32 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ahshehab24@gmail.com>)
- id 1wlPXN-0007Ru-5m
- for qemu-riscv@nongnu.org; Sun, 19 Jul 2026 07:18:26 -0400
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4955aa106b1so2342335e9.0
- for <qemu-riscv@nongnu.org>; Sun, 19 Jul 2026 04:18:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <163wangjack@gmail.com>)
+ id 1wlVrI-0004hr-KR
+ for qemu-riscv@nongnu.org; Sun, 19 Jul 2026 14:03:26 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-8453427d3f4so8573588b3a.3
+ for <qemu-riscv@nongnu.org>; Sun, 19 Jul 2026 11:03:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784459903; x=1785064703; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=9Lo5f6GFevx6PMuevYT9MUZ2WXBpORzQ4ehhGxe4MBM=;
- b=fZyZWgRaXJ1581qfb9UF7mW8878wr7TlmRK2KnH0USzFVuC39kI+/Lp1tvsQWPkWzH
- 5d2syV365I/1r7IcYVZYNpvBXjKpKMyksei0nZ1aUr5251k/LxhtErvDjJGQrf1b8sPM
- Q2ADEm/tjKlNex6Mv82wvM9iAkrcSZWHQ8E5LnaqEdc8TP6zkv6A2gZDSBHV6f8giZME
- edEwdKi8IgslcfEdvl08eXyRXP2h0NwHquI2KlfsgVxqu/SRNGow7fl6Ps/Jc85XZySB
- 5iRL8TnbijqmhjihgRwOOVwdPnsZvRIZKuFoqV3bIjznsDMyJjwkwpM/DRb+5vcHz77a
- jihg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784459903; x=1785064703;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1784484203; x=1785089003; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=9Lo5f6GFevx6PMuevYT9MUZ2WXBpORzQ4ehhGxe4MBM=;
- b=DllKiJTBpJ/0fx5xYZcpON4RRXObpzedq+45r0nfg7Ca5GRyEg5lw5aH2y8OBnTYw9
- 3rA5WgXCaZZP2MGqNxIDm7k8ug5B27iU2N4AoIFDs+59G4ZrFM5HDjLcdqqCuMXH+U+/
- NCqSTOTekHfIsk+w+Jka1j5FTLUOYepbSpdH995TU/Ig4Pai4wjrdDFwAEQBfkEvaepl
- Boc1ZYUaF0fdwatX/+MwcHA6K7qLtEvs6SClrKdOO1w65KoIA+AOTTtxPy6MAivIJtih
- K+HOayhwVZapToQsLUTNSoatW1Rcr+NRlbMVYXEqzkKCKtFf0Yeug4BfAcYzxD2zHf0S
- 7Rcg==
-X-Gm-Message-State: AOJu0YwQCVsMnPM4AfKc291hLusVRLx7ahic+BpvWozEfaUSfJbkmhpS
- Hda4DBCdMx+pH8qeQf2BskU0HvTWNPKUX7Z2KHg8Abkzol8TKQIdhreJ
-X-Gm-Gg: AfdE7clXUkbgIBMX0enzZ9DPkDDtRr4cTt2kNsINV6YOB8uwWKNa/oxfRUq3HR254cl
- cr7pA50dtwn2uUrcw/hJysYI2RKqAis+knMM/P5xTxfwFzJFUJRbIxyCNEZnRGx+MAxmGrd4aUG
- GMWz5YRj9cUANL0NjO63OYasMJNsL9wqYhiH2pC0GWk/YOfiuJ/Ejv9FrH8tVCvLcbvA15pzfp0
- Km3BX1bujxawTuugQD2Us2KpdXXudqSet724FFyl5JPGA/lG2Vap1eU1tjtwh1R5Twg6ocQGsK6
- ZGoa2MUGzMo4DOT3m0PWExJZt+8XzWc4NyfuPrBW4HZw6RoqrgEWlLk9Di0k1b61+gIpWwvIn0X
- hE8uvMeR3MtZD0bVySBnIiVPpvXjfiYM+p0lrQJ/Jae3DA8mtI7dyC9gApnVVojK8pC2Xk46iQu
- o5yrU8tgLTHbuPhayMQ9E71BsPuT0rXGthWyO20NFnW2/WbA==
-X-Received: by 2002:a05:600c:4f94:b0:493:d741:5d72 with SMTP id
- 5b1f17b1804b1-4954a513ef9mr103415475e9.38.1784459902897; 
- Sun, 19 Jul 2026 04:18:22 -0700 (PDT)
-Received: from 5520-BMRXQ93.eg.si-vision.com ([41.33.244.227])
+ bh=TwQYHCt7Kk8nxw2rwfRfbN3mzgvXTaoOo6RqYm4euOs=;
+ b=IJd8u8w4t6i45iuB1xmNiKQKQ8lEwUanJxcDVeb8C/g87BYv+wPnaOKcpVNDAg7PJ9
+ CpQRHmNTqgkmXNh85l6RsvQv3adIg6351lqOqJMwCw3lPyEtTCqNaUqCVeVK9Ar6Eumc
+ f2z1JjTFZ3oE/qw1o2o/QQQRDeVN8UeAskN1tUx6vL0PAZTFppvCf95WcsZnJLtig99K
+ fAmla++QGiQs0vwqtLu5yz6MMiwqYWiIUmlaybek1gzI7AkJJpzl7Aa39N9DZi8RtEtd
+ 2RJTuMNDFbLXkfS5kAB/AB50fQR2fF3IAgrtYwEquR69aN68ultka9fYff23GxDAou+F
+ Z4rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784484203; x=1785089003;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=TwQYHCt7Kk8nxw2rwfRfbN3mzgvXTaoOo6RqYm4euOs=;
+ b=rrzGOQFKEaTXvVQg7GIiFPPfOWYQoEkhGYHiKMnMXXdECz9Iv3P4GbzT+aLzN3ECyf
+ Rt1p1eTsRLt5UtBxlgdKnV/6a7YXoJLNZUJqXF5FqW/yDNxemfx5OqD7jgd69JP9LKBT
+ JYU9PwMICEuZjlSIGfeoVLUYvAFfI58ZdU/uHrZiJTYTgeRNna52oQ286kdeSyAwaYPg
+ 9D0g/t5S4IaeaZXxwEBtPU5/AkUmkkt5aKJk1cGCO//pMxBU4x00QPFtDjo+QoGVtwAh
+ 4xEISNMeitt1kaYI3PvsUM+LQVupKljMcH9NAtTU3KgCQ1R95SxFJtpPT+P+D6SXU4v6
+ K6gw==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RpvT0etbv4lIhaUNrLOQiIh3yq1kGdBolYMdsT/hJkkJQnJDwTfLwRXYlS8czM6nG+PvbScekWsQlxK@nongnu.org
+X-Gm-Message-State: AOJu0YxXHzxmziTZfSDtzbgxwzA/ACF6C2iatN5W++lBKJ0s38/ncABF
+ mM2Z46O0rvsaANKAobsbGpMmWq5kXitGFTGYbtEioQBEXCL7r3kKOSJv
+X-Gm-Gg: AfdE7ckB+796cTbpOOiKI6vKvXpBpVejwtbYAJZQJMn7WlwBNxkz3RXhoAqBHsvPCBZ
+ alg+Yf+21Ctqy/gVVnt8cI0c9S/v17nZklHQ15OO/sLwkTdsf9phsvkCUZGpgI5DnixFgaPRf3H
+ b8w0Ezya/k+YMxgaAK3+le7WSDCQbyOOA/9fMOiiytl/WAntVGN7exyb63b5AVtx2kDjhSUOomn
+ jxC2q8iN8PjvF0XXRgd5uR5XkH/selj2TzgESw7nUXg950IwMjTCNcp8yDvcQ7mvfq/3hL9Sivh
+ m3UM7tTPG7bKe3tj74uzB0jYvtCIL4OQFowh5FfGJccSdSpB1r+cL4JMBWHaAhmble3YZL9pMYO
+ gTVVIfByCv+FWTs8TLIOAlYhyOGJgB9LQRQQ4FckFU4dlkhSwryKOmX0PJoRllbdMDQ40r0ZUeo
+ y2d377KvNMfIlI+g==
+X-Received: by 2002:a05:6a21:3983:b0:3c3:68b0:e273 with SMTP id
+ adf61e73a8af0-3c3ad6042c6mr12130265637.15.1784484202793; 
+ Sun, 19 Jul 2026 11:03:22 -0700 (PDT)
+Received: from localhost.localdomain ([82.40.42.115])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4954a2aa698sm177784285e9.4.2026.07.19.04.18.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Jul 2026 04:18:22 -0700 (PDT)
-From: A-Shehab <ahshehab24@gmail.com>
+ 41be03b00d2f7-cb519de3437sm3312907a12.28.2026.07.19.11.03.16
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sun, 19 Jul 2026 11:03:21 -0700 (PDT)
+From: Jack Wang <163wangjack@gmail.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
- debug@rivosinc.com, A-Shehab <ahshehab24@gmail.com>
-Subject: [PATCH] target/riscv: allow menvcfg/henvcfg LPE and SSE bits on RV32
-Date: Sun, 19 Jul 2026 14:17:49 +0300
-Message-ID: <20260719111749.23777-1-ahshehab24@gmail.com>
+Cc: Chao Liu <chao.liu.zevorn@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Jack Wang <163wangjack@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Fabiano Rosas <farosas@suse.de>,
+ Laurent Vivier <lvivier@redhat.com>,
+ qemu-riscv@nongnu.org (open list:K230 Machines)
+Subject: [PATCH v2 2/2] hw/riscv/k230: wire up the RMU device
+Date: Mon, 20 Jul 2026 02:02:47 +0800
+Message-ID: <20260719180247.8660-3-163wangjack@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260719180247.8660-1-163wangjack@gmail.com>
+References: <20260719180247.8660-1-163wangjack@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=ahshehab24@gmail.com; helo=mail-wm1-x333.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=163wangjack@gmail.com; helo=mail-pf1-x42f.google.com
+X-Spam_score_int: -13
+X-Spam_score: -1.4
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ FROM_STARTS_WITH_NUMS=0.738, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 19 Jul 2026 11:17:31 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,107 +111,374 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Zicfilp landing-pad enable (LPE, bit 2) and Zicfiss shadow-stack
-enable (SSE, bit 3) controls live in the low 32 bits of menvcfg and
-henvcfg, and the CFI specification defines them for both RV32 and RV64.
+The previous commit added the K230 RMU device model but left it
+unconnected. This commit integrates it into the K230 SoC:
 
-QEMU only adds MENVCFG_LPE/MENVCFG_SSE (and the henvcfg equivalents) to
-the writable mask inside the "riscv_cpu_mxl(env) == MXL_RV64" block, so
-on RV32 these bits are silently dropped and the features cannot be
-enabled. This is inconsistent with write_senvcfg(), which already
-handles SENVCFG_LPE/SENVCFG_SSE regardless of MXLEN.
+- Instantiate K230RmuState in K230SoCState structure
+- Realize and memory-map the device at 0x91101000 in k230_soc_realize()
+- Connect the two watchdogs via the RMU "wdt0"/"wdt1" QOM links so that a
+  software reset request in PERI0 cold-resets the real WDT devices
+- Remove the create_unimplemented_device("rmu") stub
+- Add CONFIG_K230_RMU=y selection in hw/riscv/Kconfig
+- Update documentation to list RMU in supported devices
+- Add the qtest and its MAINTAINERS entry
 
-Hoist the LPE/SSE mask handling out of the RV64-only block in
-write_menvcfg() and write_henvcfg() so the bits become writable on RV32
-as well. The upper-half writers (write_menvcfgh/write_henvcfgh) are
-unaffected because these bits reside in the low 32 bits.
+The qtest lives here rather than with the device model so the series stays
+bisectable: it drives "-machine k230", which only exists once the device is
+wired up. It covers all reset types, the documented reset values, the
+reserved-bit masks, the CPU1 two-step assert/deassert sequence and the real
+watchdog reset propagation.
 
-Reproducible on qemu-system-riscv32 -cpu rv32,zicfilp=true,zicfiss=true:
-an M-mode write of menvcfg.{LPE,SSE} reads back as zero, while the same
-program on rv64 keeps the bits set.
-
-Fixes: 4923f672e3d7 ("target/riscv: Introduce elp state and enabling controls for zicfilp")
-Fixes: 8205bc127a83 ("target/riscv: introduce ssp and enabling controls for zicfiss")
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4045
-Signed-off-by: A-Shehab <ahshehab24@gmail.com>
+Signed-off-by: Jack Wang <163wangjack@gmail.com>
 ---
- target/riscv/csr.c | 45 +++++++++++++++++++++++++++------------------
- 1 file changed, 27 insertions(+), 18 deletions(-)
+ MAINTAINERS                 |   1 +
+ docs/system/riscv/k230.rst  |   1 +
+ hw/riscv/Kconfig            |   1 +
+ hw/riscv/k230.c             |  15 ++-
+ include/hw/riscv/k230.h     |   2 +
+ tests/qtest/k230-rmu-test.c | 225 ++++++++++++++++++++++++++++++++++++
+ tests/qtest/meson.build     |   3 +-
+ 7 files changed, 244 insertions(+), 4 deletions(-)
+ create mode 100644 tests/qtest/k230-rmu-test.c
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index dd9726fcf4..58828a269a 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -3211,6 +3211,19 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
-                     MENVCFG_CBZE;
-     bool stce_changed = false;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 80061ce66d..91305b86fe 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1814,6 +1814,7 @@ F: hw/watchdog/k230_wdt.c
+ F: include/hw/misc/k230_rmu.h
+ F: include/hw/riscv/k230.h
+ F: include/hw/watchdog/k230_wdt.h
++F: tests/qtest/k230-rmu-test.c
+ F: tests/qtest/k230-wdt-test.c
  
-+    /*
-+     * menvcfg.LPE (Zicfilp) and menvcfg.SSE (Zicfiss) reside in the low
-+     * 32 bits and are defined for both RV32 and RV64, so they must be
-+     * writable regardless of MXLEN.
-+     */
-+    if (cfg->ext_zicfilp) {
-+        mask |= MENVCFG_LPE;
+ RX Machines
+diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
+index cea8202e55..3f2313a127 100644
+--- a/docs/system/riscv/k230.rst
++++ b/docs/system/riscv/k230.rst
+@@ -19,6 +19,7 @@ The ``k230`` machine supports the following devices:
+ * Core Local Interruptor (CLINT)
+ * Platform-Level Interrupt Controller (PLIC)
+ * 2 K230 Watchdog Timer
++* K230 Reset Management Unit (RMU)
+ * 5 UART
+ 
+ Boot options
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 54e41a6afc..bffa4e69c8 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -149,3 +149,4 @@ config K230
+     select SERIAL_MM
+     select UNIMP
+     select K230_WDT
++    select K230_RMU
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 502281c52c..dc008eb6fa 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -110,6 +110,7 @@ static void k230_soc_init(Object *obj)
+     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
+     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
+     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
++    object_initialize_child(obj, "k230-rmu",  &s->rmu,    TYPE_K230_RMU);
+ 
+     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
+     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
+@@ -206,6 +207,17 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
+                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
+ 
++    /* RMU (reset management unit) */
++    /* Link the watchdogs so the RMU can reset them (before realize). */
++    object_property_set_link(OBJECT(&s->rmu), "wdt0",
++                             OBJECT(&s->wdt[0]), &error_abort);
++    object_property_set_link(OBJECT(&s->rmu), "wdt1",
++                             OBJECT(&s->wdt[1]), &error_abort);
++    if (!sysbus_realize(SYS_BUS_DEVICE(&s->rmu), errp)) {
++        return;
++    }
++    sysbus_mmio_map(SYS_BUS_DEVICE(&s->rmu), 0, memmap[K230_DEV_RMU].base);
++
+     /* unimplemented devices */
+     create_unimplemented_device("kpu.l2-cache",
+                                 memmap[K230_DEV_KPU_L2_CACHE].base,
+@@ -268,9 +280,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+     create_unimplemented_device("cmu", memmap[K230_DEV_CMU].base,
+                                 memmap[K230_DEV_CMU].size);
+ 
+-    create_unimplemented_device("rmu", memmap[K230_DEV_RMU].base,
+-                                memmap[K230_DEV_RMU].size);
+-
+     create_unimplemented_device("boot", memmap[K230_DEV_BOOT].base,
+                                 memmap[K230_DEV_BOOT].size);
+ 
+diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+index 592e1c26bf..13f2a1ab0b 100644
+--- a/include/hw/riscv/k230.h
++++ b/include/hw/riscv/k230.h
+@@ -18,6 +18,7 @@
+ #include "hw/core/boards.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/watchdog/k230_wdt.h"
++#include "hw/misc/k230_rmu.h"
+ 
+ #define C908_CPU_HARTID   (0)
+ 
+@@ -33,6 +34,7 @@ typedef struct K230SoCState {
+     RISCVHartArrayState c908_cpu; /* Small core */
+ 
+     K230WdtState wdt[2];
++    K230RmuState rmu;
+     MemoryRegion sram;
+     MemoryRegion bootrom;
+ 
+diff --git a/tests/qtest/k230-rmu-test.c b/tests/qtest/k230-rmu-test.c
+new file mode 100644
+index 0000000000..a16c837382
+--- /dev/null
++++ b/tests/qtest/k230-rmu-test.c
+@@ -0,0 +1,225 @@
++/*
++ * QTest for the K230 Reset Management Unit.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++#include "qemu/osdep.h"
++#include "qemu/bitops.h"
++#include "libqtest.h"
++#include "hw/misc/k230_rmu.h"
++
++#define K230_RMU_BASE 0x91101000ULL
++
++static inline uint32_t rd(QTestState *qts, uint64_t off)
++{
++    return qtest_readl(qts, K230_RMU_BASE + off);
++}
++static inline void wr(QTestState *qts, uint64_t off, uint32_t val)
++{
++    qtest_writel(qts, K230_RMU_BASE + off, val);
++}
++
++/*
++ * Documented reset values (K230 TRM chapter 2.1.5, per-bit "Reset" column).
++ * The *_rst_done status bits reset to 0, so these differ from each register's
++ * summarised "Total Reset Value".
++ */
++static void test_reset_values(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++
++    /* Control registers. */
++    g_assert_cmphex(rd(qts, K230_RMU_CPU0_CTRL),  ==, 0x00000000);
++    g_assert_cmphex(rd(qts, K230_RMU_CPU1_CTRL),  ==, 0x00000001);
++    g_assert_cmphex(rd(qts, K230_RMU_AI_CTRL),    ==, 0x00000000);
++    g_assert_cmphex(rd(qts, K230_RMU_PERI0_CTRL), ==, 0x000ff0ff);
++    g_assert_cmphex(rd(qts, K230_RMU_PERI1_CTRL), ==, 0x007e7fff);
++    g_assert_cmphex(rd(qts, K230_RMU_HISYS_CTRL), ==, 0x00000000);
++    g_assert_cmphex(rd(qts, K230_RMU_SRAM_CTRL),  ==, 0x00000002);
++    g_assert_cmphex(rd(qts, K230_RMU_ISP_CTRL),   ==, 0x0000039f);
++
++    /* A representative reset-time-control register. */
++    g_assert_cmphex(rd(qts, K230_RMU_CPU0_TIM),   ==, 0x00fff880);
++    g_assert_cmphex(rd(qts, K230_RMU_USB_TIM),    ==, 0x0008d288);
++
++    qtest_quit(qts);
++}
++
++/*
++ * Reset-time-control registers are plain read/write storage: they come up with
++ * their documented value and accept arbitrary writes with no side effects.
++ */
++static void test_tim_storage(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++
++    g_assert_cmphex(rd(qts, K230_RMU_MCTL_TIM), ==, 0x00000304);
++    wr(qts, K230_RMU_MCTL_TIM, 0x12345678);
++    g_assert_cmphex(rd(qts, K230_RMU_MCTL_TIM), ==, 0x12345678);
++
++    qtest_quit(qts);
++}
++
++/*
++ * Reserved bits are read-only zero: a write to an undocumented bit position is
++ * dropped. ISP_CTL documents bits 0-9 and 28-29; bit 15 is reserved.
++ */
++static void test_reserved_bits(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++    uint32_t before = rd(qts, K230_RMU_ISP_CTRL);
++
++    wr(qts, K230_RMU_ISP_CTRL, before | BIT(15));
++    g_assert_cmphex(rd(qts, K230_RMU_ISP_CTRL) & BIT(15), ==, 0);
++
++    qtest_quit(qts);
++}
++
++/*
++ * CPU0: a low-half write without its strobe is ignored; with the strobe the
++ * reset request fires, latches done (bit12), and the request bit auto-clears.
++ */
++static void test_cpu_write_enable(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++
++    /* No strobe: the low-half write is dropped, reads back as 0. */
++    wr(qts, K230_RMU_CPU0_CTRL, K230_RMU_CPU_RESET);
++    g_assert_cmphex(rd(qts, K230_RMU_CPU0_CTRL), ==, 0);
++
++    /* With strobe (bit16): request bit0 takes effect, done (bit12) latches. */
++    wr(qts, K230_RMU_CPU0_CTRL,
++       K230_RMU_CPU_RESET | (K230_RMU_CPU_RESET << K230_RMU_WE_SHIFT));
++    g_assert_cmphex(rd(qts, K230_RMU_CPU0_CTRL), ==, K230_RMU_CPU_DONE);
++
++    qtest_quit(qts);
++}
++
++/*
++ * HW_DONE: no write-enable needed. Writing HISYS request bit0 latches its
++ * done bit (bit4); writing 1 to the done bit clears it.
++ */
++static void test_hw_done_and_w1c(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++    uint32_t v;
++
++    wr(qts, K230_RMU_HISYS_CTRL, BIT(0));      /* no strobe */
++    v = rd(qts, K230_RMU_HISYS_CTRL);
++    g_assert_cmphex(v & BIT(4), ==, BIT(4));   /* done latched */
++    g_assert_cmphex(v & BIT(0), ==, 0);        /* request bit auto-cleared */
++
++    wr(qts, K230_RMU_HISYS_CTRL, BIT(4));      /* write-1-to-clear */
++    g_assert_cmphex(rd(qts, K230_RMU_HISYS_CTRL) & BIT(4), ==, 0);
++
++    qtest_quit(qts);
++}
++
++/* Repeated resets: one HW_DONE line can be triggered again and again. */
++static void test_repeat_reset(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++
++    for (int i = 0; i < 3; i++) {
++        wr(qts, K230_RMU_AI_CTRL, BIT(0));                 /* request */
++        g_assert_cmphex(rd(qts, K230_RMU_AI_CTRL) & BIT(31), ==, BIT(31));
++        wr(qts, K230_RMU_AI_CTRL, BIT(31));                /* W1C done */
++        g_assert_cmphex(rd(qts, K230_RMU_AI_CTRL) & BIT(31), ==, 0);
 +    }
 +
-+    if (cfg->ext_zicfiss) {
-+        mask |= MENVCFG_SSE;
-+    }
++    qtest_quit(qts);
++}
 +
-     if (riscv_cpu_mxl(env) == MXL_RV64) {
-         mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
-                 (cfg->ext_sstc ? MENVCFG_STCE : 0) |
-@@ -3218,14 +3231,6 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
-                 (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
-                 (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
- 
--        if (env_archcpu(env)->cfg.ext_zicfilp) {
--            mask |= MENVCFG_LPE;
--        }
--
--        if (env_archcpu(env)->cfg.ext_zicfiss) {
--            mask |= MENVCFG_SSE;
--        }
--
-         /* Update PMM field only if the value is valid according to Zjpm v1.0 */
-         if (env_archcpu(env)->cfg.ext_smnpm &&
-             get_field(val, MENVCFG_PMM) != PMM_FIELD_RESERVED) {
-@@ -3373,20 +3378,24 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
-         return ret;
-     }
- 
-+    /*
-+     * henvcfg.LPE (Zicfilp) and henvcfg.SSE (Zicfiss) reside in the low
-+     * 32 bits and are defined for both RV32 and RV64, so they must be
-+     * writable regardless of MXLEN.
-+     */
-+    if (cfg->ext_zicfilp) {
-+        mask |= HENVCFG_LPE;
-+    }
++/* FLUSH: the CPU0 bit4 flush request is auto-cleared, reads back as 0. */
++static void test_flush_auto_clear(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
 +
-+    /* H can light up SSE for VS only if HS had it from menvcfg */
-+    if (cfg->ext_zicfiss && get_field(env->menvcfg, MENVCFG_SSE)) {
-+        mask |= HENVCFG_SSE;
-+    }
++    wr(qts, K230_RMU_CPU0_CTRL,
++       K230_RMU_CPU_FLUSH | (K230_RMU_CPU_FLUSH << K230_RMU_WE_SHIFT));
++    g_assert_cmphex(rd(qts, K230_RMU_CPU0_CTRL) & K230_RMU_CPU_FLUSH, ==, 0);
 +
-     if (riscv_cpu_mxl(env) == MXL_RV64) {
-         mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE |
-                                 HENVCFG_DTE);
++    qtest_quit(qts);
++}
++
++/* SW_DONE: the PERI0 low half is plain storage, no strobe and no done bit. */
++static void test_sw_done_storage(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++
++    /* WDT0 / WDT1 reset bits */
++    wr(qts, K230_RMU_PERI0_CTRL, BIT(12) | BIT(13));
++    g_assert_cmphex(rd(qts, K230_RMU_PERI0_CTRL), ==, (BIT(12) | BIT(13)));
++
++    qtest_quit(qts);
++}
++
++/*
++ * CPU1 needs separate assert and deassert operations: unlike CPU0 its reset
++ * request bit does NOT self-clear. Assert (bit0 + strobe) latches done (bit12)
++ * and keeps bit0 set; deassert (strobe only, bit0 low) clears bit0.
++ */
++static void test_cpu1_two_step(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++
++    /* Assert: request bit0 stays set AND done bit12 latches. */
++    wr(qts, K230_RMU_CPU1_CTRL,
++       K230_RMU_CPU_RESET | (K230_RMU_CPU_RESET << K230_RMU_WE_SHIFT));
++    g_assert_cmphex(rd(qts, K230_RMU_CPU1_CTRL), ==,
++                    K230_RMU_CPU_RESET | K230_RMU_CPU_DONE);
++
++    /* Deassert: drive bit0 low with its strobe; bit0 clears, done stays. */
++    wr(qts, K230_RMU_CPU1_CTRL, K230_RMU_CPU_RESET << K230_RMU_WE_SHIFT);
++    g_assert_cmphex(rd(qts, K230_RMU_CPU1_CTRL), ==, K230_RMU_CPU_DONE);
++
++    /* Done is write-1-to-clear (gated by its strobe). */
++    wr(qts, K230_RMU_CPU1_CTRL,
++       K230_RMU_CPU_DONE | (K230_RMU_CPU_DONE << K230_RMU_WE_SHIFT));
++    g_assert_cmphex(rd(qts, K230_RMU_CPU1_CTRL), ==, 0);
++
++    qtest_quit(qts);
++}
++
++/*
++ * Reset propagation: asserting a watchdog reset line in PERI0_CTRL performs a
++ * real cold reset of the linked WDT device. Put WDT0 into a non-default state
++ * (TORR != 0), pulse the RMU, and confirm WDT0 came back to its reset value.
++ */
++#define K230_WDT0_BASE 0x91106000ULL
++#define K230_WDT_TORR  0x04
++
++static void test_wdt_reset_propagation(void)
++{
++    QTestState *qts = qtest_init("-machine k230");
++
++    /* Dirty WDT0: TORR reset value is 0, write a non-zero timeout range. */
++    qtest_writel(qts, K230_WDT0_BASE + K230_WDT_TORR, 0xf);
++    g_assert_cmphex(qtest_readl(qts, K230_WDT0_BASE + K230_WDT_TORR), ==, 0xf);
++
++    /* Assert WDT0's software reset line through the RMU (PERI0 bit12). */
++    wr(qts, K230_RMU_PERI0_CTRL, K230_RMU_PERI0_WDT0_RST);
++
++    /* WDT0 must be back to its reset value. */
++    g_assert_cmphex(qtest_readl(qts, K230_WDT0_BASE + K230_WDT_TORR), ==, 0);
++
++    qtest_quit(qts);
++}
++
++int main(int argc, char **argv)
++{
++    g_test_init(&argc, &argv, NULL);
++
++    qtest_add_func("/k230/rmu/reset_values",   test_reset_values);
++    qtest_add_func("/k230/rmu/tim_storage",    test_tim_storage);
++    qtest_add_func("/k230/rmu/reserved_bits",  test_reserved_bits);
++    qtest_add_func("/k230/rmu/cpu_we",         test_cpu_write_enable);
++    qtest_add_func("/k230/rmu/cpu1_two_step",  test_cpu1_two_step);
++    qtest_add_func("/k230/rmu/hw_done_w1c",    test_hw_done_and_w1c);
++    qtest_add_func("/k230/rmu/repeat_reset",   test_repeat_reset);
++    qtest_add_func("/k230/rmu/flush",          test_flush_auto_clear);
++    qtest_add_func("/k230/rmu/sw_done",        test_sw_done_storage);
++    qtest_add_func("/k230/rmu/wdt_reset_prop", test_wdt_reset_propagation);
++
++    return g_test_run();
++}
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index 822e0bd286..70c9a53454 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -294,7 +294,8 @@ qtests_riscv64 = ['riscv-csr-test'] + \
+   (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
+    config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
+    ['iommu-riscv-test'] : []) + \
+-  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
++  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test',
++                                                'k230-rmu-test'] : [])
  
--        if (env_archcpu(env)->cfg.ext_zicfilp) {
--            mask |= HENVCFG_LPE;
--        }
--
--        /* H can light up SSE for VS only if HS had it from menvcfg */
--        if (env_archcpu(env)->cfg.ext_zicfiss &&
--            get_field(env->menvcfg, MENVCFG_SSE)) {
--            mask |= HENVCFG_SSE;
--        }
--
-         /* Update PMM field only if the value is valid according to Zjpm v1.0 */
-         if (env_archcpu(env)->cfg.ext_ssnpm &&
-             get_field(val, HENVCFG_PMM) != PMM_FIELD_RESERVED) {
+ qtests_hexagon = ['boot-serial-test']
+ 
 -- 
 2.53.0
 
