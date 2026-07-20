@@ -4,131 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E23CFC44515
-	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Jul 2026 11:05:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F284C44520
+	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Jul 2026 11:05:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wllmE-0002tq-I1; Mon, 20 Jul 2026 07:03:14 -0400
+	id 1wllme-0003CK-7u; Mon, 20 Jul 2026 07:03:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wllmC-0002t7-BH
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 07:03:12 -0400
+ id 1wllmc-00037T-DE
+ for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 07:03:38 -0400
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wllmA-0002tW-9k
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 07:03:12 -0400
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ id 1wllmZ-0002w2-Gc
+ for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 07:03:38 -0400
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66KAvTqu2078328
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 11:03:09 GMT
+ 66KAvV2A2542253
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 11:03:23 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=DrbhwKdAuWk
- vVsmEmNdJDaB/bRIDM17cHjw4EXW+DtM=; b=N5trmxD7YcWIHExSQE+9M6sAne8
- iFCBwJ/gKvylcgmzP/u1t5fo8rZsJh5I/vEJ1pNltEziuxm8WTpAXDzJiPrAEhdi
- UweQWARVk5vnRVXR/mN+C7Uy4MbUp2v2Xpy3uHQjekaRyxd5ahO+n5eMNUmfz/69
- x7Ppq8xXdjGpBFY1PQqJ1/zw8oorHh7ZWuGZJ8BC1+SeAhHFO7HK6VL1MdX+UP88
- 2aa70zRRNB6ZB2CrSQ8U1Y37ODd8vqeui7xZmbVk3/5UEuDtCwqSzAfxQSDGD0xA
- sboMFmHBXZ0BSvz+kJLJKKGpvmnhrzdTVYFkJdOo4wFX9LXJLxaUH600/2A==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhh5y0bra-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=HMrs1aUXPR1
+ wotr76QF42UdfH6/G0aqwJitfeRGRIqc=; b=Xzk6BD/QkKVj+2Rj+Pj8xl4RY5u
+ rFDE3xav69RgQsiZ1QAiJpDkcX26EFb61T5Ww3+rZsh2tGc3Sisjre39k4/LRmKs
+ Pwt21vpHmWWc6bghYfKOlNRWHqUtqrfVVfdSdSIotzeCFGDTLWDtIAxN6uM6qUtV
+ ks56JKYoT2rgT0UIMo5pRws76kQE+F1SKaSE/wkwrSj85vB6aZ73DFPJ5IX8jXBe
+ Fgpq4iGBDgPp58bGDgbuenUK5p2WNKTglQOk+uUfZp58MECaqsBB8JrBG3EpeCdV
+ 1PuLGZvLkAXL0Rwg8AX+9uztQtf8WiRpZas9dOHWq23so9M4YdEzPOtn7YA==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhfdcgwhp-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 11:03:08 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2cc4c126cf0so28656595ad.1
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 04:03:08 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 11:03:20 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2ced1ed870fso21835065ad.2
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 04:03:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784545388; x=1785150188; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1784545399; x=1785150199; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=DrbhwKdAuWkvVsmEmNdJDaB/bRIDM17cHjw4EXW+DtM=;
- b=UxZWKgmnnroVbdpaPr4/20bIid4qJ2fuX4uO7d5N+WKQENoWSS/0B56wxIVkJgx56D
- B9Ys+k2zzdZliBRIcfB/p+VExJzrSxzbAK2K2X729zVWydrJPacXj2EGKhIKL4tt7/Uw
- WA2oneR7qichvOyD5hBePqon3YvF1/mS2oboV4wGbelliVEfzDjnh9RhZL+yNICZmFwv
- E+BCYUDy3pSE27mNPQB18WbyhzhjUoLxy1k4N+ut3odkriz9OcM+V0vxFAU9zcSbRvfs
- Eh7XE4BZSxXDO898xUAlDXj+YIR/c+Y+ZiraZQnRtHxtebL9oJqsRM3YCWl5wwRTbd3b
- xeSA==
+ bh=HMrs1aUXPR1wotr76QF42UdfH6/G0aqwJitfeRGRIqc=;
+ b=Yj1vh0PqXtsegpDLpvmRs639dHnV6XdTccVQ23giouh4ZsU8y5a3gKfFFVNw9kLQbH
+ sUWKIskARIIS0D2igqIdkqT6gvJbd1/Va7zV/aExaq2KP9pcDxO9ndySm7dfOxP8qxeS
+ ZzH7E+PdYibsjube7Jd3Sz9AMYiZiARN+h6A/IUYwnb0vU46F1Gk9ZBHzmbJcUhUZN10
+ Kz0VKXWs14Ze5IR6DqXcTemH6NAEz/zdCCGPHTg74Yr89gshWr61F+OpFowsXu8N5BGn
+ nctSpqFXoBbtuxn5DZ1ObVXpfKj8sIIYl+iO7UnK2esKht4lbEIdNZMBd2j/TNgR4Lzz
+ /c9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784545388; x=1785150188;
+ d=1e100.net; s=20251104; t=1784545399; x=1785150199;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=DrbhwKdAuWkvVsmEmNdJDaB/bRIDM17cHjw4EXW+DtM=;
- b=iLQd2DFOre9MhMNhVGHPMA+cT2YW22I4KjCbbSH/7LjOo6YE4ZHjo7RkGkKSsoSirm
- cDWL4rXN103+BGgjqHqD30fCD0oNPTjmeLRPW3Pd5C4gfQghGMhU4w8jwaEbrc3X6I9L
- lD6YOLj2lsJS7P94nQmILJHUjt0Z1XoNEdJ3TSB640ZWpuHSrc3BiweHFJOGt/JJJ94i
- CA+Raozd81td0xeZ35Jxq+JIkbBV7yWR2297do7zuHusDgxDsdkonoYbt2Izez/USGbV
- mcQL+od7KJdZUzUURP9TUdTLnZWTShWTudHt//HN3duR2DaQUv0G8sTWMpyQOx6l+phV
- OXYw==
-X-Gm-Message-State: AOJu0YzkedqIVit0LUouOqhEPTl6IkV0kDHFuA6eZjN+DC/8huaWdgQz
- hMEr1MdamZ49phR6Q4aof/JnmYnoJOPqzmEgZO48seoKbWBtLOme0cpWpsXg5fQ/M9CB9yBU4MG
- Km/PKjYoW4PJoGrsjz6rsbYcE3HbpEVakFoiBiNtt8nMaLoiv7YYzE5/1etb4aVXfsg==
-X-Gm-Gg: AR+sD10mvFHD7YQTTiUgdUeBuuxzPSioriHfOww1RpVg9ApOAn0ug75yxTYGxAW5zE7
- hgLk7I2JLBOduLR+dXB1NhMWuarNvavMJwhaV2i7LKSLJOn166+W94FlVrdnokK84gwZvwLKtPA
- Odb7FCQrKGUBRIXnvdfJwh0nUUPj38Wyk2xSOTQpOJwyx0baRItUVHcYL0aLu8ims3OINpiu3/D
- xinQC8BjqDAB5Mht8WW3gXO1Y8o+bC92Xqq4IvnJfEp2KClR57GulmBACW/YgL4gCEH4a9rY+R2
- zKKTtVG1u6E0eROv9lce1kplbJvW4Rupa+RIPDoL+SHfqD+75nrs/93nyrSR3gvD7FN9KJc9tXE
- 80iumWta1kLwnL703JptHmdjySm4Qjb1qic/9ewlBVXU3Am8oLHCQaZGznyq7w0AqNR4rHQFTEb
- SeEQw8q8wW8WlROa0aZpyklUzrbwq4sKA=
-X-Received: by 2002:a17:902:e74d:b0:2cc:7d4a:3f59 with SMTP id
- d9443c01a7336-2cf349d1353mr120632455ad.6.1784545387537; 
- Mon, 20 Jul 2026 04:03:07 -0700 (PDT)
-X-Received: by 2002:a17:902:e74d:b0:2cc:7d4a:3f59 with SMTP id
- d9443c01a7336-2cf349d1353mr120632085ad.6.1784545387009; 
- Mon, 20 Jul 2026 04:03:07 -0700 (PDT)
+ bh=HMrs1aUXPR1wotr76QF42UdfH6/G0aqwJitfeRGRIqc=;
+ b=bS1ZZsPbgRiUxS3ykbnsxgAy8BHWOxNbmtqBgIEIAZqvWNurVXiWckxByGwJaOxrhu
+ TPcuy4rYCcT5Dekd5tAJx3jUV2+X/vS6sAkGlbmUnnnzA67213LKfckRs/fV59ZgrwDT
+ q7NLt+MhmgVAFuJL1fhyf2B/MavrIg2QEjNQsd0J15ybE2xZ5A0Aq6Tgk5aGSsuGMoMO
+ 55OsSTOdHwhWl+NpWf6iC3SHvYoTpk4k9HYgLZsxGqku7Gyr5OmOblDKya7aljCdlTJX
+ rtJFFvRtvNBtMlaLOoE838zaVqvvX50n8hfDF4MSVEt3CAXAnbOkrFtldeJ7ffKpEKhF
+ VIrQ==
+X-Gm-Message-State: AOJu0YyfayqULntYwbD4fm9aFOz8EdbllKmN0roP1QI4LKjFuPK4IXhA
+ eCkOLFQtibdvsANhdliEArgTm5y830/hPXOE4aDflWohSwRdPy/tVeNWj1Fm6e+eeLMFGoN2Uiy
+ KFzNhSWEby9HN6iJFUw5ykj+HgRtxcqqGy3HHRTu3sEXPhssJcDF8q8+0vCbg4XiybQ==
+X-Gm-Gg: AR+sD11V/IQU0qPSOWtBtdtpbSJDhzHu8EuiP2J9OLE/FevuuuXyTS8iksqUHaYSYwW
+ wRslDX1AjmNf+hx6dQCztHHUyUy/XFwR2GBW9TcT4ZvPRYPm3riJUrePxB4DXuINpBa+Hv4F79A
+ xR6lCy4QC5IGCSD0cO957Rkce6Sqp6fstFn22FH6MxHZHmGZ+qzV4gIGV4CCnhYtwMj9HHzXtQo
+ 0a7dcJCtLp9Z0TxSBsjTBmle4vIBHOIMYdfjele8DWdjU4I/Uyu714U82hFpndYeU/aU4qHbg03
+ GOAPg7hXituXmsWlqf3UGzbZ5FeKTgmneRxfI8zKRI8gTZLy7fQkWw+f9qKsZVNqD5DlbsCBYhT
+ 9uJjm6cq4IMfDqwPTL/p1se7RwL3mqwnkXOb77b5MoOkTxlQz1+6A7Vc0AL0YtEO0TrGgu5BAbu
+ PA0jZYLzUjdTRSrYoBxIrPFPN0TQCl9BM=
+X-Received: by 2002:a17:902:f686:b0:2c9:d8c6:1db3 with SMTP id
+ d9443c01a7336-2cf349c0eedmr116610715ad.8.1784545399461; 
+ Mon, 20 Jul 2026 04:03:19 -0700 (PDT)
+X-Received: by 2002:a17:902:f686:b0:2c9:d8c6:1db3 with SMTP id
+ d9443c01a7336-2cf349c0eedmr116610315ad.8.1784545398948; 
+ Mon, 20 Jul 2026 04:03:18 -0700 (PDT)
 Received: from hu-slingapp-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3142a20b1f3sm34698566eec.26.2026.07.20.04.03.03
+ 5a478bee46e88-3142a20b1f3sm34698566eec.26.2026.07.20.04.03.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 04:03:06 -0700 (PDT)
+ Mon, 20 Jul 2026 04:03:18 -0700 (PDT)
 From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
 To: qemu-riscv@nongnu.org
 Cc: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu.zevorn@gmail.com>,
  qemu-devel@nongnu.org (open list:All patches CC here)
-Subject: [PATCH v4 04/10] hw/riscv/virt: add opt-in RPMI base support
-Date: Mon, 20 Jul 2026 16:32:27 +0530
-Message-ID: <0652503b00cfe26e708a0a5e3527b1fee0ad3edc.1784541996.git.subrahmanya.lingappa@oss.qualcomm.com>
+Subject: [PATCH v4 07/10] riscv: add RPMI system suspend service
+Date: Mon, 20 Jul 2026 16:32:30 +0530
+Message-ID: <342558d4f77f12a6a40907da6d056600b8a299c6.1784541996.git.subrahmanya.lingappa@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1784541996.git.subrahmanya.lingappa@oss.qualcomm.com>
 References: <cover.1784541996.git.subrahmanya.lingappa@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDEyMyBTYWx0ZWRfX2Axkv0sMyTTi
- 5DnTTP0GQkXMbCiNWVk7Oj+zcPMRlJwX4QjH9kItSIL2J1Kdt5PTAv0lWIF/7UUbVQfGTm5ua8C
- ZPYTBEfddTd00tojZjKg6Mzm99sesbw=
-X-Proofpoint-GUID: 41xNaS_649oeUDx53tfE92CIrdfMVGqv
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDEyMyBTYWx0ZWRfX1xHDRd43/a3n
- hfyynH24JBYytWDUV/yaoWt2RAMlg7qEvlS7bjRbq5A/FM9P/bJs77/9hcJoZGbiOhgJX/1VXwk
- 1Yz3X9ufAkRglLrIIKdSPUHGu1RiTqttBegjfj5kZPn2rLcRItbGlVafQGDQrUholf68846EzUp
- 8Mk8aRwZeKkDtSCpnbnnGhPtvx/niHXUMYCp3nzF4HvW1BYmg6loA1m6bXnoTUHUcgrUIOnuLSV
- 9QOo9h17hX1aDtL2UH2ALEgb2GuvLr05CCH9IhWc7vZsJhzaydHgZ8+btTf4tUQgsSYU6Oe3Twa
- /T64OOrcWNHJ9/F2LzgT8eQUrQr0DJbaDS4s4b4TscfJxYgXxmqDwIIO2SnWzagcynCopGdlf2H
- VSLMr98ieMZ4wLzV/+ZLTu9SrU5V0TMmZ0Vpj76YSuk4FWWTmt+QHdjrqUs/h9dmxBKgbkQuQb/
- DyUHBSevWIZKsNiIYLg==
-X-Proofpoint-ORIG-GUID: 41xNaS_649oeUDx53tfE92CIrdfMVGqv
-X-Authority-Analysis: v=2.4 cv=f/x4wuyM c=1 sm=1 tr=0 ts=6a5e006c cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: -GeKZAf36vTITolBNxkng7_GfKSW5pOq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDEyMyBTYWx0ZWRfX74RqLXD5Ukc8
+ c23AxGdwE4Cb4xIuJDftTPAYyetDPPnUdFFNlUm2H7SVM2CynwpORLLP1kGdyaGfyyZpmhURBRI
+ 4I9XiCsaHUeLR9Q7tepRfuDpHwYmZ8Wy/z6b6sJHdoj4gqH30dv0H3AAfihcn8bJufnPxxHQ6Cx
+ VfMdpfQNxZfiBHrvm3wS7v3t+oK2Uy/HX3j88wg1Xhowtx9d86NwS5epuWML8O4QmIRf40a9IwR
+ /EPLlZFY+1RuFl+S5u9qlj1ZXbpJXTtEI14eQkp0gTr1W6AFs+0j3UMRKkUcwtxzNJpFpVApIWn
+ vgKjUK9XQtAyh4JtTL79VsiSJ/vnozwYs4O3WPcqR726WMgEw8qxe0/hhdg5A9VTV++4++rvJbL
+ Ml3Ua2HOis+LffAtKO9/tVBpHCa9IxiAdzRuvUAxm5daq9fJHopUZDEZ1/ubn8W1UAvg5lYTE1M
+ FrV4fF6GTyrMuvqVhtQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDEyMyBTYWx0ZWRfX6cZDe5HaHilk
+ aGv1VnPUhaGDOefZu7ctazXl7rfgOomPSMK6X+OZLk+zd8EAj+sUipQDIAwWYjilg9suW4Fq5HS
+ rCGY3wAdm48rqSFFF95VFXaE3q1jhAk=
+X-Proofpoint-GUID: -GeKZAf36vTITolBNxkng7_GfKSW5pOq
+X-Authority-Analysis: v=2.4 cv=bv58wkai c=1 sm=1 tr=0 ts=6a5e007a cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=UDgfl1FA6r1Qzf0Ob0MA:9 a=1OuFwYUASf3TG4hYMiVC:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=YpNgDGc-obDsCk2VH-MA:9 a=uG9DUKGECoFWVXl0Dc02:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-20_02,2026-07-20_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 priorityscore=1501 clxscore=1015 adultscore=0
- malwarescore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 suspectscore=0
+ impostorscore=0 bulkscore=0 priorityscore=1501 spamscore=0 malwarescore=0
+ phishscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200123
 Received-SPF: pass client-ip=205.220.168.131;
@@ -140,7 +139,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,239 +155,384 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add the virt machine rpmi=on/off option and wire the initial RPMI Base
-transport into machine realization.
+Add the RPMI System Suspend service group for RISC-V virt.
 
-The option remains disabled by default and requires TCG plus librpmi.
-Invalid accelerator/build combinations fail during machine
-initialization. When enabled, virt allocates the RPMI shared-memory
-transport, creates the RPMI device, configures Base service metadata,
-and emits the corresponding device-tree nodes for firmware discovery.
+The service advertises suspend-to-RAM support through librpmi,
+registers QEMU wakeup support, and routes the suspend finalize callback
+to the machine suspend path. On wakeup it processes RPMI group events
+and defers the HSM hart resume until vCPUs are ready to run again.
 
 Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- hw/riscv/Kconfig             |  1 +
- hw/riscv/virt.c              | 96 ++++++++++++++++++++++++++++++++++++
- include/hw/misc/riscv_rpmi.h |  9 ++++
- include/hw/riscv/virt.h      |  3 ++
- 4 files changed, 109 insertions(+)
+ hw/misc/meson.build           |   1 +
+ hw/misc/riscv_rpmi.c          |   4 +
+ hw/misc/riscv_rpmi_hsm.c      |   9 +-
+ hw/misc/riscv_rpmi_internal.h |   5 +
+ hw/misc/riscv_rpmi_syssusp.c  | 191 ++++++++++++++++++++++++++++++++++
+ hw/riscv/virt.c               |  25 +++++
+ include/hw/misc/riscv_rpmi.h  |  11 ++
+ 7 files changed, 245 insertions(+), 1 deletion(-)
+ create mode 100644 hw/misc/riscv_rpmi_syssusp.c
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 54e41a6afc..4e25be113a 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -49,6 +49,7 @@ config RISCV_VIRT
-     imply VIRTIO_VGA
-     imply TEST_DEVICES
-     imply TPM_TIS_SYSBUS
-+    imply RISCV_RPMI
-     select DEVICE_TREE
-     select RISCV_NUMA
-     select GOLDFISH_RTC
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 33775a61fd..e52ccfae1f 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -45,6 +45,8 @@
- #include "hw/intc/riscv_aplic.h"
- #include "hw/intc/sifive_plic.h"
- #include "hw/misc/sifive_test.h"
-+#include "hw/misc/riscv_rpmi.h"
-+#include "hw/riscv/rpmi-fdt.h"
- #include "hw/core/platform-bus.h"
- #include "chardev/char.h"
- #include "system/device_tree.h"
-@@ -97,6 +99,8 @@ static const MemMapEntry virt_memmap[] = {
-     [VIRT_UART0] =        { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
-     [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
-+    [VIRT_RPMI_SHMEM] =   { 0x10200000,       0x20000 },
-+    [VIRT_RPMI_DOORBELL] = { 0x10230000,        0x1000 },
-     [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
-     [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
-     [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
-@@ -1002,6 +1006,40 @@ static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
-     s->pci_iommu_bdf = bdf;
- }
- 
-+
-+static RiscvRpmiConfig virt_rpmi_config(RISCVVirtState *s,
-+                                        const uint32_t *hart_ids,
-+                                        uint32_t hart_count)
-+{
-+    return (RiscvRpmiConfig) {
-+        .doorbell_base = s->memmap[VIRT_RPMI_DOORBELL].base,
-+        .shmem_base = s->memmap[VIRT_RPMI_SHMEM].base,
-+        .shmem_size = s->memmap[VIRT_RPMI_SHMEM].size,
-+        .a2p_req_size = VIRT_RPMI_A2P_REQ_SIZE,
-+        .p2a_req_size = VIRT_RPMI_P2A_REQ_SIZE,
-+        .platform_info = "QEMU RISC-V virt RPMI",
-+        .hart_ids = hart_ids,
-+        .hart_count = hart_count,
-+    };
-+}
-+
-+static void create_fdt_rpmi(RISCVVirtState *s, uint32_t *phandle,
-+                            uint32_t msi_phandle)
-+{
-+    RiscvRpmiConfig rpmi_cfg = virt_rpmi_config(s, NULL, 0);
-+    uint32_t rpmi_mbox_handle;
-+    RiscvRpmiFdtMboxConfig cfg = {
-+        .shmem_base = rpmi_cfg.shmem_base,
-+        .doorbell_base = rpmi_cfg.doorbell_base,
-+        .a2p_req_size = rpmi_cfg.a2p_req_size,
-+        .p2a_req_size = rpmi_cfg.p2a_req_size,
-+        .doorbell_size = s->memmap[VIRT_RPMI_DOORBELL].size,
-+    };
-+
-+    riscv_rpmi_fdt_add_mbox(MACHINE(s)->fdt, &cfg, phandle,
-+                            &rpmi_mbox_handle);
-+}
-+
- static void finalize_fdt(RISCVVirtState *s)
- {
-     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
-@@ -1021,6 +1059,10 @@ static void finalize_fdt(RISCVVirtState *s)
-     create_fdt_pcie(s, irq_pcie_phandle, msi_pcie_phandle,
-                     iommu_sys_phandle);
- 
-+    if (s->have_rpmi) {
-+        create_fdt_rpmi(s, &phandle, msi_pcie_phandle);
-+    }
-+
-     create_fdt_reset(s, &phandle);
- 
-     create_fdt_uart(s, irq_mmio_phandle);
-@@ -1410,6 +1452,18 @@ static void virt_machine_init(MachineState *machine)
-         exit(1);
-     }
- 
-+
-+    if (s->have_rpmi) {
-+#ifndef CONFIG_LIBRPMI
-+        error_report("RISC-V RPMI support is not compiled in");
-+        exit(1);
-+#else
-+        if (kvm_enabled()) {
-+            error_report("RISC-V RPMI support is not available with KVM");
-+            exit(1);
-+        }
-+#endif
-+    }
-     /* Initialize sockets */
-     mmio_irqchip = virtio_irqchip = pcie_irqchip = NULL;
-     for (i = 0; i < socket_count; i++) {
-@@ -1552,6 +1606,25 @@ static void virt_machine_init(MachineState *machine)
-     /* SiFive Test MMIO device */
-     sifive_test_create(s->memmap[VIRT_TEST].base);
- 
-+    if (s->have_rpmi) {
-+        MachineClass *mc = MACHINE_GET_CLASS(machine);
-+        const CPUArchIdList *possible_cpus = mc->possible_cpu_arch_ids(machine);
-+        g_autofree uint32_t *rpmi_hart_ids =
-+            g_new0(uint32_t, machine->smp.cpus);
-+        RiscvRpmiConfig rpmi_cfg;
-+        Error *local_err = NULL;
-+
-+        for (i = 0; i < machine->smp.cpus; i++) {
-+            rpmi_hart_ids[i] = possible_cpus->cpus[i].arch_id;
-+        }
-+
-+        rpmi_cfg = virt_rpmi_config(s, rpmi_hart_ids, machine->smp.cpus);
-+        if (!riscv_rpmi_create(&rpmi_cfg, &local_err)) {
-+            error_report_err(local_err);
-+            exit(1);
-+        }
-+    }
-+
-     /* VirtIO MMIO devices */
-     for (i = 0; i < VIRTIO_COUNT; i++) {
-         sysbus_create_simple("virtio-mmio",
-@@ -1636,6 +1709,7 @@ static void virt_machine_instance_init(Object *obj)
- 
-     s->oem_id = g_strndup(ACPI_BUILD_APPNAME6, 6);
-     s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
-+    s->have_rpmi = false;
-     s->acpi = ON_OFF_AUTO_AUTO;
-     s->iommu_sys = ON_OFF_AUTO_AUTO;
- }
-@@ -1710,6 +1784,21 @@ static void virt_set_aclint(Object *obj, bool value, Error **errp)
-     s->have_aclint = value;
- }
- 
-+
-+static bool virt_get_rpmi(Object *obj, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    return s->have_rpmi;
-+}
-+
-+static void virt_set_rpmi(Object *obj, bool value, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    s->have_rpmi = value;
-+}
-+
- bool virt_is_iommu_sys_enabled(RISCVVirtState *s)
- {
-     return s->iommu_sys == ON_OFF_AUTO_ON;
-@@ -1831,6 +1920,13 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
-                                           "enable/disable emulating "
-                                           "ACLINT devices");
- 
-+
-+    object_class_property_add_bool(oc, "rpmi", virt_get_rpmi,
-+                                   virt_set_rpmi);
-+    object_class_property_set_description(oc, "rpmi",
-+                                          "Set on/off to enable/disable "
-+                                          "RISC-V RPMI devices");
-+
-     object_class_property_add_str(oc, "aia", virt_get_aia,
-                                   virt_set_aia);
-     object_class_property_set_description(oc, "aia",
-diff --git a/include/hw/misc/riscv_rpmi.h b/include/hw/misc/riscv_rpmi.h
-index cb2658e57e..cbc3fe9153 100644
---- a/include/hw/misc/riscv_rpmi.h
-+++ b/include/hw/misc/riscv_rpmi.h
-@@ -85,6 +85,15 @@ struct RiscvRpmiState {
-     bool has_shmem;
+diff --git a/hw/misc/meson.build b/hw/misc/meson.build
+index fc5b11ed57..cb093a8642 100644
+--- a/hw/misc/meson.build
++++ b/hw/misc/meson.build
+@@ -172,4 +172,5 @@ system_ss.add(when: 'CONFIG_RISCV_RPMI', if_true: [files(
+   'riscv_rpmi.c',
+   'riscv_rpmi_sysreset.c',
+   'riscv_rpmi_hsm.c',
++  'riscv_rpmi_syssusp.c',
+ ), librpmi])
+diff --git a/hw/misc/riscv_rpmi.c b/hw/misc/riscv_rpmi.c
+index bc7b77f5d2..016a3cc923 100644
+--- a/hw/misc/riscv_rpmi.c
++++ b/hw/misc/riscv_rpmi.c
+@@ -187,6 +187,10 @@ static const RiscvRpmiServiceOps riscv_rpmi_service_ops[] = {
+         .kind = RISCV_RPMI_SERVICE_HSM,
+         .add = riscv_rpmi_hsm_add,
+         .remove = riscv_rpmi_hsm_remove,
++    }, {
++        .kind = RISCV_RPMI_SERVICE_SYSSUSP,
++        .add = riscv_rpmi_syssusp_add,
++        .remove = riscv_rpmi_syssusp_remove,
+     },
  };
  
-+#ifdef CONFIG_LIBRPMI
- DeviceState *riscv_rpmi_create(const RiscvRpmiConfig *cfg, Error **errp);
-+#else
-+static inline DeviceState *riscv_rpmi_create(
-+    const RiscvRpmiConfig *cfg G_GNUC_UNUSED,
-+    Error **errp G_GNUC_UNUSED)
+diff --git a/hw/misc/riscv_rpmi_hsm.c b/hw/misc/riscv_rpmi_hsm.c
+index 9a9859b10c..bacdabcac6 100644
+--- a/hw/misc/riscv_rpmi_hsm.c
++++ b/hw/misc/riscv_rpmi_hsm.c
+@@ -235,7 +235,6 @@ static void riscv_rpmi_hsm_destroy(RiscvRpmiState *s)
+     g_clear_pointer(&s->hsm_hw_states, g_free);
+ }
+ 
+-
+ bool riscv_rpmi_hsm_add(RiscvRpmiState *s, Error **errp)
+ {
+     struct rpmi_service_group *group;
+@@ -278,3 +277,11 @@ void riscv_rpmi_hsm_reset(RiscvRpmiState *s)
+         rpmi_hsm_process_state_changes(s->hsm);
+     }
+ }
++
++void riscv_rpmi_hsm_resume(RiscvRpmiState *s, uint32_t hart_index)
 +{
-+    return NULL;
++    riscv_rpmi_hsm_set_hw_state(s, hart_index, RPMI_HART_HW_STATE_STARTED);
++    if (s->hsm) {
++        rpmi_hsm_process_state_changes(s->hsm);
++    }
 +}
-+#endif
+diff --git a/hw/misc/riscv_rpmi_internal.h b/hw/misc/riscv_rpmi_internal.h
+index 42a6708907..34cab35c32 100644
+--- a/hw/misc/riscv_rpmi_internal.h
++++ b/hw/misc/riscv_rpmi_internal.h
+@@ -33,5 +33,10 @@ void riscv_rpmi_sysreset_remove(RiscvRpmiState *s);
+ bool riscv_rpmi_hsm_add(RiscvRpmiState *s, Error **errp);
+ void riscv_rpmi_hsm_remove(RiscvRpmiState *s);
+ void riscv_rpmi_hsm_reset(RiscvRpmiState *s);
++void riscv_rpmi_hsm_resume(RiscvRpmiState *s, uint32_t hart_index);
++
++bool riscv_rpmi_syssusp_add(RiscvRpmiState *s, Error **errp);
++void riscv_rpmi_syssusp_remove(RiscvRpmiState *s);
++
  
  #endif
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 18a2a323a3..f7c48613bf 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -55,6 +55,7 @@ struct RISCVVirtState {
+diff --git a/hw/misc/riscv_rpmi_syssusp.c b/hw/misc/riscv_rpmi_syssusp.c
+new file mode 100644
+index 0000000000..d455e08163
+--- /dev/null
++++ b/hw/misc/riscv_rpmi_syssusp.c
+@@ -0,0 +1,191 @@
++/*
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * RISC-V RPMI System Suspend service.
++ *
++ * Copyright (c) 2026 Qualcomm Technologies, Inc.
++ * Author:
++ *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
++ */
++
++#include "qemu/osdep.h"
++#include "riscv_rpmi_internal.h"
++#include "qemu/timer.h"
++#include "system/runstate.h"
++
++static const struct rpmi_system_suspend_type riscv_rpmi_syssusp_types[] = {
++    {
++        .type = RPMI_SYSSUSP_TYPE_SUSPEND_TO_RAM,
++        .attr = RPMI_SYSSUSP_ATTRS_FLAGS_RESUMEADDR,
++    },
++};
++
++static enum rpmi_error riscv_rpmi_syssusp_prepare(
++    void *priv, rpmi_uint32_t hart_index,
++    const struct rpmi_system_suspend_type *syssusp_type,
++    rpmi_uint64_t resume_addr)
++{
++    RiscvRpmiState *s = priv;
++
++    if (s->machine_ops && s->machine_ops->register_wakeup_support) {
++        s->machine_ops->register_wakeup_support(s->machine_opaque);
++    }
++    return RPMI_SUCCESS;
++}
++
++static rpmi_bool_t riscv_rpmi_syssusp_ready(void *priv,
++                                            rpmi_uint32_t hart_index)
++{
++    return true;
++}
++
++static void riscv_rpmi_syssusp_finalize(
++    void *priv, rpmi_uint32_t hart_index,
++    const struct rpmi_system_suspend_type *syssusp_type,
++    rpmi_uint64_t resume_addr)
++{
++    RiscvRpmiState *s = priv;
++
++    if (s->machine_ops && s->machine_ops->system_suspend) {
++        s->machine_ops->system_suspend(s->machine_opaque);
++    }
++}
++
++static rpmi_bool_t riscv_rpmi_syssusp_can_resume(void *priv,
++                                                 rpmi_uint32_t hart_index)
++{
++    RiscvRpmiState *s = priv;
++
++    if (s->machine_ops && s->machine_ops->system_can_resume) {
++        return s->machine_ops->system_can_resume(s->machine_opaque);
++    }
++
++    return true;
++}
++
++static enum rpmi_error riscv_rpmi_syssusp_resume(
++    void *priv, rpmi_uint32_t hart_index,
++    const struct rpmi_system_suspend_type *syssusp_type,
++    rpmi_uint64_t resume_addr)
++{
++    RiscvRpmiState *s = priv;
++
++    s->syssusp_resume_hart_index = hart_index;
++    s->syssusp_resume_pending = true;
++    return RPMI_SUCCESS;
++}
++
++static const struct rpmi_syssusp_platform_ops riscv_rpmi_syssusp_ops = {
++    .system_suspend_prepare = riscv_rpmi_syssusp_prepare,
++    .system_suspend_ready = riscv_rpmi_syssusp_ready,
++    .system_suspend_finalize = riscv_rpmi_syssusp_finalize,
++    .system_suspend_can_resume = riscv_rpmi_syssusp_can_resume,
++    .system_suspend_resume = riscv_rpmi_syssusp_resume,
++};
++
++static void riscv_rpmi_wakeup_timer(void *opaque)
++{
++    RiscvRpmiState *s = opaque;
++
++    if (s->syssusp_resume_pending) {
++        riscv_rpmi_hsm_resume(s, s->syssusp_resume_hart_index);
++        s->syssusp_resume_pending = false;
++    }
++}
++
++static void riscv_rpmi_wakeup_notify(Notifier *notifier, void *data)
++{
++    RiscvRpmiState *s = container_of(notifier, RiscvRpmiState,
++                                     wakeup_notifier);
++
++    if (s->context) {
++        rpmi_context_process_group_events(s->context,
++                                          RPMI_SRVGRP_SYSTEM_SUSPEND);
++    }
++    if (s->wakeup_timer) {
++        /*
++         * Wakeup notifiers run before vCPUs resume. Defer the HSM
++         * kick so OpenSBI can leave WFI after QEMU restarts execution.
++         */
++        timer_mod(s->wakeup_timer, qemu_clock_get_ms(QEMU_CLOCK_REALTIME) + 10);
++    }
++}
++
++static bool riscv_rpmi_syssusp_create(RiscvRpmiState *s,
++                                      struct rpmi_service_group **group,
++                                      Error **errp)
++{
++    if (!s->hsm) {
++        error_setg(errp, "RPMI system suspend service requires HSM service");
++        return false;
++    }
++
++    if (s->machine_ops && s->machine_ops->register_wakeup_support) {
++        s->machine_ops->register_wakeup_support(s->machine_opaque);
++    }
++    if (!s->wakeup_timer) {
++        s->wakeup_timer = timer_new_ms(QEMU_CLOCK_REALTIME,
++                                       riscv_rpmi_wakeup_timer, s);
++    }
++    if (!s->wakeup_notifier_registered) {
++        s->wakeup_notifier.notify = riscv_rpmi_wakeup_notify;
++        qemu_register_wakeup_notifier(&s->wakeup_notifier);
++        s->wakeup_notifier_registered = true;
++    }
++
++    *group = rpmi_service_group_syssusp_create(
++        s->hsm, ARRAY_SIZE(riscv_rpmi_syssusp_types),
++        riscv_rpmi_syssusp_types, &riscv_rpmi_syssusp_ops, s);
++    if (!*group) {
++        error_setg(errp, "failed to create RPMI system suspend service group");
++        return false;
++    }
++
++    return true;
++}
++
++static void riscv_rpmi_syssusp_destroy(RiscvRpmiState *s)
++{
++    if (s->wakeup_notifier_registered) {
++        notifier_remove(&s->wakeup_notifier);
++        s->wakeup_notifier_registered = false;
++    }
++    if (s->wakeup_timer) {
++        timer_free(s->wakeup_timer);
++        s->wakeup_timer = NULL;
++    }
++
++    if (s->syssusp_group) {
++        rpmi_service_group_syssusp_destroy(s->syssusp_group);
++        s->syssusp_group = NULL;
++    }
++}
++
++bool riscv_rpmi_syssusp_add(RiscvRpmiState *s, Error **errp)
++{
++    struct rpmi_service_group *group;
++
++    if (s->syssusp_group) {
++        error_setg(errp, "duplicate RPMI system suspend descriptor");
++        return false;
++    }
++
++    if (!riscv_rpmi_syssusp_create(s, &group, errp)) {
++        return false;
++    }
++
++    if (!riscv_rpmi_context_add_group(s, group, "system suspend", errp)) {
++        s->syssusp_group = group;
++        riscv_rpmi_syssusp_destroy(s);
++        return false;
++    }
++
++    s->syssusp_group = group;
++    return true;
++}
++
++void riscv_rpmi_syssusp_remove(RiscvRpmiState *s)
++{
++    riscv_rpmi_context_remove_group(s, s->syssusp_group);
++    riscv_rpmi_syssusp_destroy(s);
++}
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 2b5f367bdb..21c218a78d 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -51,6 +51,7 @@
+ #include "chardev/char.h"
+ #include "system/device_tree.h"
+ #include "system/system.h"
++#include "system/runstate.h"
+ #include "system/tcg.h"
+ #include "system/kvm.h"
+ #include "system/tpm.h"
+@@ -1020,6 +1021,12 @@ static const RiscvRpmiServiceConfig virt_rpmi_services[] = {
+         .compatible = "riscv,rpmi-hsm",
+         .service_group = RISCV_RPMI_SRVGRP_HSM,
+     },
++    {
++        .kind = RISCV_RPMI_SERVICE_SYSSUSP,
++        .node_name = "suspend",
++        .compatible = "riscv,rpmi-system-suspend",
++        .service_group = RISCV_RPMI_SRVGRP_SYSTEM_SUSPEND,
++    },
+ };
  
-     int fdt_size;
-     bool have_aclint;
-+    bool have_rpmi;
-     RISCVVirtAIAType aia_type;
-     int aia_guests;
-     char *oem_id;
-@@ -79,6 +80,8 @@ enum {
-     VIRT_UART0,
-     VIRT_VIRTIO,
-     VIRT_FW_CFG,
-+    VIRT_RPMI_SHMEM,
-+    VIRT_RPMI_DOORBELL,
-     VIRT_IMSIC_M,
-     VIRT_IMSIC_S,
-     VIRT_FLASH,
+ static uint32_t virt_rpmi_service_count(RISCVVirtState *s)
+@@ -1037,9 +1044,27 @@ static void virt_rpmi_system_shutdown(void *opaque)
+     qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
+ }
+ 
++static void virt_rpmi_system_suspend(void *opaque)
++{
++    qemu_system_suspend_request();
++}
++
++static void virt_rpmi_register_wakeup_support(void *opaque)
++{
++    qemu_register_wakeup_support();
++}
++
++static bool virt_rpmi_system_can_resume(void *opaque)
++{
++    return runstate_check(RUN_STATE_RUNNING);
++}
++
+ static const RiscvRpmiMachineOps virt_rpmi_machine_ops = {
+     .system_reset = virt_rpmi_system_reset,
+     .system_shutdown = virt_rpmi_system_shutdown,
++    .system_suspend = virt_rpmi_system_suspend,
++    .register_wakeup_support = virt_rpmi_register_wakeup_support,
++    .system_can_resume = virt_rpmi_system_can_resume,
+ };
+ 
+ static RiscvRpmiConfig virt_rpmi_config(RISCVVirtState *s,
+diff --git a/include/hw/misc/riscv_rpmi.h b/include/hw/misc/riscv_rpmi.h
+index 2da6c4c4bd..8ff30fa80c 100644
+--- a/include/hw/misc/riscv_rpmi.h
++++ b/include/hw/misc/riscv_rpmi.h
+@@ -29,6 +29,7 @@
+ 
+ #define RISCV_RPMI_SRVGRP_SYSTEM_RESET   3
+ #define RISCV_RPMI_SRVGRP_HSM            5
++#define RISCV_RPMI_SRVGRP_SYSTEM_SUSPEND 4
+ 
+ #define TYPE_RISCV_RPMI "riscv-rpmi"
+ OBJECT_DECLARE_SIMPLE_TYPE(RiscvRpmiState, RISCV_RPMI)
+@@ -43,11 +44,15 @@ typedef enum RiscvRpmiServiceKind {
+     RISCV_RPMI_SERVICE_INVALID = 0,
+     RISCV_RPMI_SERVICE_SYSRESET,
+     RISCV_RPMI_SERVICE_HSM,
++    RISCV_RPMI_SERVICE_SYSSUSP,
+ } RiscvRpmiServiceKind;
+ 
+ typedef struct RiscvRpmiMachineOps {
+     void (*system_reset)(void *opaque);
+     void (*system_shutdown)(void *opaque);
++    void (*system_suspend)(void *opaque);
++    void (*register_wakeup_support)(void *opaque);
++    bool (*system_can_resume)(void *opaque);
+ } RiscvRpmiMachineOps;
+ typedef struct RiscvRpmiServiceConfig {
+     RiscvRpmiServiceKind kind;
+@@ -86,9 +91,15 @@ struct RiscvRpmiState {
+     const RiscvRpmiMachineOps *machine_ops;
+     void *machine_opaque;
+     struct rpmi_service_group *sysreset_group;
++    struct rpmi_service_group *syssusp_group;
+     struct rpmi_hsm *hsm;
+     struct rpmi_service_group *hsm_group;
+     uint32_t *hsm_hw_states;
++    Notifier wakeup_notifier;
++    bool wakeup_notifier_registered;
++    QEMUTimer *wakeup_timer;
++    bool syssusp_resume_pending;
++    uint32_t syssusp_resume_hart_index;
+     uint32_t *hart_ids;
+     uint32_t hart_count;
+     const RiscvRpmiServiceConfig *services;
 -- 
 2.43.0
 
