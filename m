@@ -4,159 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00CF3C44515
-	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Jul 2026 11:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49526C44515
+	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Jul 2026 11:09:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wllpn-0008Rf-Pm; Mon, 20 Jul 2026 07:06:55 -0400
+	id 1wlls8-0000mG-OT; Mon, 20 Jul 2026 07:09:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wllpl-0008Ij-CK
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 07:06:53 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1wlls6-0000lo-Sa
+ for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 07:09:18 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wllpj-0003eg-DX
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 07:06:53 -0400
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1wlls3-0003xt-Eg
+ for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 07:09:18 -0400
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66KAvnvY2326069
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 11:06:50 GMT
+ 66KAvSNq2421638
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 11:09:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- sJv7+Gv0zK/wu1dnqyCdssPDKIHV7fNZoHB2V7OGyGI=; b=I/t6YE1D7ed/swI3
- dcb4Z0Md15H4elB05Kt8U7w7sFCJ62X0FW8eLH37sJO6Q+HG9degCqHFym1C3IOC
- rBPXN8Jd/NDPRXqKyslnCCcSWN/YeSUjp1f2IpkjZfbDb6/y5iRqA3pbKzD3sgOZ
- K42ABVI+JXUCB6+KX3CoIusQqJu3uJqZ1yNv/qvFZmMpSNMprX0zChaIWECcrIvO
- dGI7VRIt/mXhjCb+qrgKY5beBspHsyA9pYBQSheVMUxeIrxXjJrsXTvktwhZukvb
- cqsSYfloZmr7phtq4jd/rZ5mrG/MpM8cNreukQcRkwcVIvp3+5kVrmrwyDKOpkon
- JTGfdQ==
-Received: from mail-yx1-f72.google.com (mail-yx1-f72.google.com
- [74.125.224.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fgd04vyv4-1
+ la5KGUh8THY+lus/4Vif97itBE75uAIMxsk0vtwJ6Sc=; b=QeHUnmqBoUnxRBnB
+ 5Zr1IrwORZbV8m5kdChEQF1sTyethXJ1DgjdEzkF5WmKjtl432MOCmPioAsM1ehQ
+ 8pdFX/hF6ueJ9Wo3yAb5zxgqLVEc1nVAbcnLieSZwpAEVroApgMG+H+fCEqawm8X
+ H1GyTWCFRXFrTyECOJNWR9NwCyLzdpyy2c3aPmAHy8TPi/LPCW4ownndzgQNOgMY
+ R5DsQ4Sx2UtFto01e96ZjZhDr0zqOtvrAiAvs2J5iePzNly3h4w0x09nccixmy1N
+ T788AagI6tOHsMzSU6+wQdhnxDq8WkFf6h1dMoO2AKO3KgBj2+rkdyT0dY4wZhSW
+ u+gMPQ==
+Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
+ [209.85.128.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhfvxgv4j-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 11:06:46 +0000 (GMT)
-Received: by mail-yx1-f72.google.com with SMTP id
- 956f58d0204a3-664b1b06f81so2585947d50.0
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 04:06:46 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784545550; cv=none;
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 11:09:13 +0000 (GMT)
+Received: by mail-yw1-f197.google.com with SMTP id
+ 00721157ae682-80e6f2f0c3aso32813367b3.2
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 04:09:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784545753; cv=none;
  d=google.com; s=arc-20260327;
- b=kYCZDtk7s0XZXDekyP61xi+s+7810A3cWboiBQxStl1eW+8dKXqVoEfCG1CKCivtuw
- j8e3Ix+sC8AnMnJGr6Tm/Y20imUviVw0hfCbCg12MXqzZW1XFsn9YxPRqAZE4b/Gurb0
- qU/x06nOIFmY/JuSk2dCTO/jUAz/tpQeQxb9rtE7yIgPnQozu3PUtMK7gVip/o9idkDl
- bQTZ4D7g9ksX/GI9iYfUx5L4Pbn6vdqdPLLM7IDO+uLf4vtiaYAhYqNht/JKka8vP6VI
- zZz9qefN8RBf3nexXmZPfibZjU0EyVPLg5q2rrOWHA7eAabZ+ifcWIODmfhOzAyLyhb8
- rfYw==
+ b=VX9g37p8VMZ/VweftrkQZFfNt2fjpq9WwYlSxnGAy8YARaGbnaA+4t/fVVWsOU2Ea3
+ TrFdiVIBWSFG+LdDoqcsNqhPDDb9vT5xs9lo+hUhznjAM1/3HaE/gcza6kjcYXAIs3CX
+ KrH3WyXCjyoOHQYRbaIZVnToQ9JjiBhNYb1xRzdyfQXeB6Gp5k/3/JhcJdwEa/44Lyh0
+ Z0ueqFL+fljY1gUTFK4EXq8062u7NF1hyXvbWnGOqSIhUqkwX4yLrcIQ6CADKJEMJTmm
+ +ZE3sdtdmhCQUF1VPfc37M/K7G3u5cAbKtkQmBPajY/jkW7Y0T2rkDHHKg4rh0STsN/1
+ GNUQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=sJv7+Gv0zK/wu1dnqyCdssPDKIHV7fNZoHB2V7OGyGI=;
- fh=FB4bcYYNU1TeChBauDq3lxEwf4s7bQRy2o0AG86uxNE=;
- b=ADmDPb0ArFEYMaPPne1WyRZvuFs0QuLPfc9YZcegpG2qjxMXhGCCQB+J5WbSq43vOR
- qQybB6sPeUNuA2SsspLQZq/uf3lzpFC81WP5edWVB07Q4XkgZvU9O8jshaNDCbttUpxm
- R8A7bq7yx1E07OkVe6LkpYa0kJ7wyrtYy5ivZU1lCpY4kesz1csaLgE9d2WRSWTCdYdG
- +HJvdOHx0Lp6TmHU1YsuZxbbHml9xWSj7n/6txxDqOFLfcMEqMRp9sUgMxqvTsbzCW+R
- Mwc2uTWnM/9drJ7Dy+kTA82asFETxEV0ji/sgB8rAcuxGwVjX8xcoJ5zKFiT1F5zjpdS
- GVHA==; darn=nongnu.org
+ bh=la5KGUh8THY+lus/4Vif97itBE75uAIMxsk0vtwJ6Sc=;
+ fh=mmXHDD5HK9ae1XN60BqQ1/OszQU2d8ALqtlzGTUdlf4=;
+ b=TPP5JXTdAxHYHg4dYMn86Ky159CqgwI7VvcFvGcRUiADbmqKRvmQysDG99FOIuDnPl
+ DsJdsVKNlTpZ8oJcDtfLh/uj6nq9vINNxnO/n1xOmdsme7OenqTXAQx1DSTq6vdNs4T3
+ P1zdKArYZbrkoj3NloWB2QWfaKU5V/+PhqbnK3Eli1RYdap465tZwbBTXM3Nwm1OhJNZ
+ /ieWR9dAGFUxdc8y6IbTiQqvpK2G3XtR+0ZR7xVw4Wzm0yEM5xcU61I3vzOWax230FzF
+ EHbA6HzXFmqTafzkIdKOWuMUzWpvZkQ6oKr5BAobyZQBM3R6GqzEcwS8xqxWGJxg1UAg
+ 52pg==; darn=nongnu.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784545550; x=1785150350; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1784545753; x=1785150553; darn=nongnu.org;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=sJv7+Gv0zK/wu1dnqyCdssPDKIHV7fNZoHB2V7OGyGI=;
- b=SUq1NqgaOzkMGXDjsK8+OTntG6+zOPMJ7LpPTZOMctPalcy7Q5uAjAia7vMIrRvCN0
- n52SUEmzILjLsMPr0s5PdRNSEzpzCALPqPTTZx6ZMJPCsEAA/E0B+jNb4vxIWfZeYgnU
- 4NV88gUBXZ7xfHigjBgWILJsW4I9Xa754qu88D1vE781UAleLTHGqydCrFR67CMHXIcg
- uAKRnRnC/8R8th5ulB/I1Gt3Ky26UEFCMcLwAt1ccisVMA2t2mrVp8qdkY1EoyeClJxZ
- ywNbbjvt+aVBwsJdU8uuyKfLQXMt+U1F95iNKQBwqKOyvax9IHlgc6QO8acIRUvNHIm/
- sPzg==
+ bh=la5KGUh8THY+lus/4Vif97itBE75uAIMxsk0vtwJ6Sc=;
+ b=CUWA+UTzCSlvbiU65YjTGqp6grYAcbYDk4wHMu0BQj0yB78aUAVBiuM8whIWwx4CqC
+ qPrdgLM0v9R2nvTh2tsCezi2ij42hRCwwsudvq2b3fg9U0Zfsoqxp3DhnyPYpQ6aTA5P
+ 5Uk84RUn609R51slmBeG5CQkU2cW77pNymFBSoqnVA2ScSOBYLwKRL12gYjxL2xkySEO
+ DBiztmi8IygPwc5V/jw1H2rO/fefYBHKFtE0U25BEkGJizOjAPlFWCyTpY/8Lmv3Eefy
+ dDWgeNjIHkEHrzqQdYXjeu3HbWoCG+EXdvFZNccf5+Uzia+GguvIqtw/comGfiuOStKD
+ jAag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784545550; x=1785150350;
+ d=1e100.net; s=20251104; t=1784545753; x=1785150553;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=sJv7+Gv0zK/wu1dnqyCdssPDKIHV7fNZoHB2V7OGyGI=;
- b=K8pTnRUzGrpqWo8m+B+K8Lo9kEcQiqRza7eBDfL8oMyoqkZSlGcNP7HZdswXJd+QmB
- bbDyvzWT3CR67LOlxpkrRjrfjykKUKXBeP8kU+Daq2/D+DuK5E22QGCfXkx7uSz0+yhL
- pb5zprSKS3TSESKBvd+/MRUYLZTUaJp2/CKmsvKDV2hyfHLg31B5ndyneitPCQSOivyf
- 05+ZUWoO9r38EO/pKF4TI5B7D7AGkBnCfQiGjhsWwnWRgNdaRzdFWGHv0KXVHOncnCKf
- eXGo5JtAC6OTYUPwP7hjudLeoOPsdbtVb4PkoBEmSI7pTJW76yxelZbUmBEVp/ydF+oi
- vPng==
-X-Gm-Message-State: AOJu0Yy6lvtYBiKIE0p6OKhFnuyt3W5DCGrtkAgrY6brG2dPzzmOWV8Z
- 38b7Pu7cULAWrkWGBJY4VrfmnKyz9j33iqqkiDzC1Re/yWfP3QuOX6ZFfEnYHnzWjoUg8rfzK1S
- EHJTZ0pYFr6/usbZy0zSIfELq54yW/gV4Kb75E3uRUqtHeVlDQTHIlGHBqc6zpIctd3GIBV8dRP
- pChWrPzmAs7o1imBFz0T8PXeTEenr2YXPl
-X-Gm-Gg: AR+sD11oiq7QDqQWCEKluNIr09Vq3bLIeOz+dMSUpf2odtTt2Wln5XJIhKM0r/lgrrE
- XqUV3EqE5/norzz1uA0qxaxRJRIN6tgifyhaIYV7HZbh2Wh/rC03ebhztzEDMi+eugkn4KNe4Jk
- vNnrGPu7hswyZ5QbP7OoQ6F9nGXiGYA3FuWT5cLQnHNbXyqdmcjhnOtoXpgw0=
-X-Received: by 2002:a05:690c:9990:b0:81a:ea53:c40b with SMTP id
- 00721157ae682-81ef2672ae7mr44629537b3.8.1784545549901; 
- Mon, 20 Jul 2026 04:05:49 -0700 (PDT)
-X-Received: by 2002:a05:690c:9990:b0:81a:ea53:c40b with SMTP id
- 00721157ae682-81ef2672ae7mr44629357b3.8.1784545549432; Mon, 20 Jul 2026
- 04:05:49 -0700 (PDT)
+ bh=la5KGUh8THY+lus/4Vif97itBE75uAIMxsk0vtwJ6Sc=;
+ b=q3B4T3hgBh9Y4IxPjflsXhkk0mnlG8EhFVwEA7CHpzgLWUtfTrcd60GSTy2cL0qZcT
+ ooj6cTViB3LkNvDS9tkUepcRhIz3SYvyTJYLzH8l/IdGbi8c9M4QkkjAGsDp9MnfNcJA
+ XoDSu/9wSO/ZU88OawrYi40Lq0ZAerAdZSeiUUQH5OLmPML3IdYRZxx54z1QtKDhZkfF
+ L9EWjYU+7lns7d6E1gr//sFEIkdGkMXi19ykvQ280R/2drv430/TavAdV1EuegylIpwK
+ 4SqKN7cnogteDqICedIbzqxrNFZ8/P5+C8csGtrcTUbPrR7aMxb4uMhPUxawQ0GUy/2R
+ IwsA==
+X-Gm-Message-State: AOJu0YxskyLp/ORN54iejpUcB4b634jbHRAqGV1wwed5AgvJ7uZZBFNH
+ oN05ClE/8MlBJQ5nguCV5QbtLWs/b1TevYApAQ//Dcx/wnHK8t4nkUoRkjFaI2wOOz+fIxfpo+d
+ YTmVWNCqJNIkLEa08EYKXM4UqaWYmiRH+fQmlYptohVShEc2MZD4Pnfj6jdxze0esn1Vt3jn/aw
+ exKGSWfhS6eykIGlQ+/ai1UUBHuo1Ig0tn
+X-Gm-Gg: AR+sD13++nRmXKgxFpvUHVAlH5O/mh2nbpPnTQyLrPjxUugeqfcZi33M78MfNwS934U
+ yQcRBPw/UKe87K5KAWZUTZWkJCX9EMGBIgu9imh1KWP21/eGeeaNPF0YBsubAU1L0YqF9AyRpV5
+ HsmHdExpfhyvapvr01p2zedgrLDM2G/UYeOANEC0SJ6oTuw8GWSvEnKbUfTAU=
+X-Received: by 2002:a05:690c:6604:b0:7ef:9eb0:a4e5 with SMTP id
+ 00721157ae682-81f20c4ff11mr823627b3.0.1784545752618; 
+ Mon, 20 Jul 2026 04:09:12 -0700 (PDT)
+X-Received: by 2002:a05:690c:6604:b0:7ef:9eb0:a4e5 with SMTP id
+ 00721157ae682-81f20c4ff11mr823537b3.0.1784545752240; Mon, 20 Jul 2026
+ 04:09:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260714075659.2258023-1-subrahmanya.lingappa@oss.qualcomm.com>
- <20260714075659.2258023-2-subrahmanya.lingappa@oss.qualcomm.com>
- <e0a13116-ecfb-481e-a883-5c95e3b31b73@oss.qualcomm.com>
-In-Reply-To: <e0a13116-ecfb-481e-a883-5c95e3b31b73@oss.qualcomm.com>
+ <20260714075659.2258023-3-subrahmanya.lingappa@oss.qualcomm.com>
+ <767b4e5e-7a24-4b5d-bc59-4a21006e9ed2@oss.qualcomm.com>
+In-Reply-To: <767b4e5e-7a24-4b5d-bc59-4a21006e9ed2@oss.qualcomm.com>
 From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 16:35:38 +0530
-X-Gm-Features: AUfX_myFHzKRRGIWqOEBb6DNVLSBLify9UnYarl8reLlfSA9wltntYQmTVaiOLI
-Message-ID: <CAPxK-6fRW7gXXcpDmJqDwc_19uUDnRiOPR0R5bmju_a8+DL+zg@mail.gmail.com>
-Subject: Re: [PATCH v3 01/10] build: add optional librpmi dependency
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
+Date: Mon, 20 Jul 2026 16:39:01 +0530
+X-Gm-Features: AUfX_mxDHgIKvSVSLcIINefXrI4i8Oj3kld_5XKxrXZwtAsSu-M2904qhfV7RtM
+Message-ID: <CAPxK-6fGvJkFtYDHAifRacP-Jwm1D7DZQsWuuaGGNp9S_f0Mpg@mail.gmail.com>
+Subject: Re: [PATCH v3 02/10] hw/misc: add RISC-V RPMI transport and Base
+ support
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Cc: qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@mailo.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>,
  "open list:All patches CC here" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=POs/P/qC c=1 sm=1 tr=0 ts=6a5e0146 cx=c_pps
- a=VEzVgl358Dq0xwHDEbsOzA==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+X-Authority-Analysis: v=2.4 cv=HKLz0Itv c=1 sm=1 tr=0 ts=6a5e01d9 cx=c_pps
+ a=0mLRTIufkjop4KoA/9S1MA==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8 a=LgkO7a-NOqtw3HH30u4A:9
- a=QEXdDO2ut3YA:10 a=uujmmnXaIg8lM0-o0HFK:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDEyMyBTYWx0ZWRfX1R4wuRc9M1FU
- AcZT2WwQbEhqpNAiy4np1NFTr76kCZFnkFC98VOhLrxxuzpn4YKQw+zg2rbc/FGtx9irDVakAWg
- flv2ZA1TmEwuDNlfNcJIUIES2r1SLTSG6JcL8Fb1WkvE9HEptLxgJ1kQ32hjtZ2P9TBVE1KUlVE
- tfLCrDi1opBu/J2WFiC5yPr5yP4cSbRYibTVn2Ko2cU8Ol7a/EZm4u1ih3ZvbHQFfThojEvLkhw
- MUMtyQ614ftp/7g+RsDKN1Kh/A6sj4gAvbDEHkw0nzRawAGJ3A5U11H/ExGP/En0AfQi4qkV5D9
- FG4yS07QpoJI6xWpSEs3hqv6tIiCMJmA3Kpq/HYItP7vlXivDVURd3pbuWI6eO8H34ofvKDcD3g
- WQI8rXm2H/yhXXe+IDWAMBYB3C3JVR8J2qUJcoBg2XNoe6hA0sEawzoQpJoX8ythgE8skT5PN3q
- TOgPR65OFcsw5VRlV7A==
-X-Proofpoint-ORIG-GUID: G7cPtMeikt2FNMuO851HtYNL8YEFm7Ze
-X-Proofpoint-GUID: G7cPtMeikt2FNMuO851HtYNL8YEFm7Ze
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDEyMyBTYWx0ZWRfXwg17P7pDbq2K
- 5NZ43ABKS1XZPhivYUQYfXzD1Dkjb8tsTQ43oz1FvqkqqglwoVLFR0HgloKNUnFfetiPjIZgCeK
- GZzPG2gA3mIJ7LBNLn3yZD1bIEga2vI=
+ a=yOCtJkima9RkubShWh1s:22 a=V1jnuoLLAAAA:20 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8
+ a=_IOB-gDGozFwuC063SEA:9 a=QEXdDO2ut3YA:10 a=WgItmB6HBUc_1uVUp3mg:22
+ a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDEyNCBTYWx0ZWRfX0m0x2F+Ehq2T
+ 78Uk0xoGWlhkAOuzSJS+uiaIB5l5vcveiqCzYtWXWDV00mMAHAJW255QoQMUg3wiw0eFIrqJ7Mc
+ kd4FI/huuBhm5ASXHWaCF1SgXxUrvuA=
+X-Proofpoint-GUID: kUR9iVgNuCN3wNVTq9VcZrC6xbpmU1AP
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDEyNCBTYWx0ZWRfX66QzG0zaCFVi
+ J6DAW1Gxl+jYdKo+LWSYICfS/gj1cbk165pbBKQYweyGTHG6hN03uST7CAtUaIADaanFkv8S8UF
+ sAaVvQbh4DQguXrfJx9SbzQfdEp77kSHA774DcmfLcF0O09gbMUJfryuTFBLv21H2LN83u8nLwj
+ gHqJ6RKWw+g8G/edgU6rYbKHUS39bgTjYdXnlyrFGQYyvfpbfDWaGh0xoptR+JKGw5tfV0nFLpW
+ wkhlJrGGoWYsljbV2kxkFrPK+JOUhDCE1gwC56morcUAwepYRbjJPgy+oL4c0bi9pdjsa0UX4Or
+ tHaerghGVfddv1Z82coxxlDC5dkEVi4VPjOk8rxJdcbcZjzoRhHpObrKF8HSO98wIVrsSDpd7su
+ SwhA9hE2N7Zpl8bqXl7EjPQ5YzvakSWU3hPABkb4M5ibxUFZulBjLhDjWPbERvyX84q1tO/HHrJ
+ 7mxyuv/RYTns6emDn5A==
+X-Proofpoint-ORIG-GUID: kUR9iVgNuCN3wNVTq9VcZrC6xbpmU1AP
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-20_02,2026-07-20_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 adultscore=0 clxscore=1015 suspectscore=0
- priorityscore=1501 malwarescore=0 impostorscore=0 phishscore=0 bulkscore=0
+ adultscore=0 impostorscore=0 clxscore=1015 malwarescore=0 bulkscore=0
+ spamscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200123
-Received-SPF: pass client-ip=205.220.180.131;
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200124
+Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_BL_SPAMCOP_NET=1.347, RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -172,90 +173,284 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Philippe
+Daniel,
 
-On Mon, Jul 20, 2026 at 2:49=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@oss.qualcomm.com> wrote:
+On Fri, Jul 17, 2026 at 6:24=E2=80=AFPM Daniel Henrique Barboza
+<daniel.barboza@oss.qualcomm.com> wrote:
 >
-> Hi,
+> Hi Subbu,
 >
-> On 14/7/26 09:56, Subrahmanya Lingappa wrote:
-> > Add a meson option and config probe for librpmi so RISC-V machines can
-> > opt into RPMI support when the library is available. Keep the dependenc=
-y
-> > optional so default builds without librpmi continue to work.
+> On 7/14/2026 4:56 AM, Subrahmanya Lingappa wrote:
+> > RPMI (RISC-V Platform Management Interface) is the RISC-V non-ISA
+> > platform management specification. It defines a shared-memory transport=
+,
+> > message protocol, and service groups for platform management.
+> >
+> > Add the QEMU transport backend and Base service plumbing for virt using
+> > librpmi.
+> >
+> > This implementation targets the RISC-V Platform Management Interface
+> > (RPMI) Specification v1.0 Ratified:
+> >
+> > https://github.com/riscv-non-isa/riscv-rpmi/releases/download/v1.0/risc=
+v-rpmi.pdf
+> >
+> > The librpmi backend is maintained at:
+> >
+> > https://github.com/riscv-software-src/librpmi
 > >
 > > Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.=
 com>
 > > ---
-> >   Kconfig.host                  |  3 +++
-> >   meson.build                   | 14 ++++++++++++++
-> >   meson_options.txt             |  2 ++
-> >   scripts/meson-buildoptions.sh |  3 +++
-> >   4 files changed, 22 insertions(+)
+> >   MAINTAINERS                   |   2 +
+> >   hw/misc/Kconfig               |   4 +
+> >   hw/misc/meson.build           |   3 +
+> >   hw/misc/riscv_rpmi.c          | 476 +++++++++++++++++++++++++++++++++=
++
+> >   hw/misc/riscv_rpmi_internal.h |  24 ++
+> >   include/hw/misc/riscv_rpmi.h  |  90 +++++++
+> >   6 files changed, 599 insertions(+)
+> >   create mode 100644 hw/misc/riscv_rpmi.c
+> >   create mode 100644 hw/misc/riscv_rpmi_internal.h
+> >   create mode 100644 include/hw/misc/riscv_rpmi.h
+> >
+>
+> [ ... ]
+>
+> > +
+> > +static void riscv_rpmi_class_init(ObjectClass *klass, const void *data=
+)
+> > +{
+> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
+> > +
+> > +    dc->realize =3D riscv_rpmi_realize;
+> > +    dc->unrealize =3D riscv_rpmi_unrealize;
+> > +    dc->vmsd =3D &riscv_rpmi_vmstate;
+> > +    device_class_set_legacy_reset(dc, riscv_rpmi_reset);
 >
 >
-> >   ignored =3D [ 'TARGET_XML_FILES', 'TARGET_ABI_DIR' ]
-> > @@ -4971,6 +4984,7 @@ summary_info +=3D {'TPM support':       have_tpm}
-> >   summary_info +=3D {'IGVM support':      igvm}
-> >   summary_info +=3D {'libssh support':    libssh}
-> >   summary_info +=3D {'lzo support':       lzo}
-> > +summary_info +=3D {'librpmi support':   librpmi}
+> This is something that I noticed yesterday with another work and I didn't=
+ point to
+> you earlier - we shouldn't use this legacy API.  In include/hw/core/qdev.=
+h:
 >
-> "rpmi support"?
 >
-> >   summary_info +=3D {'snappy support':    snappy}
-> >   summary_info +=3D {'bzip2 support':     libbzip2}
-> >   summary_info +=3D {'lzfse support':     liblzfse}
-> > diff --git a/meson_options.txt b/meson_options.txt
-> > index a07cb47d35..9f773a7886 100644
-> > --- a/meson_options.txt
-> > +++ b/meson_options.txt
-> > @@ -204,6 +204,8 @@ option('lzfse', type : 'feature', value : 'auto',
-> >          description: 'lzfse support for DMG images')
-> >   option('lzo', type : 'feature', value : 'auto',
-> >          description: 'lzo compression support')
-> > +option('librpmi', type : 'feature', value : 'auto',
-> > +       description: 'RISC-V RPMI support')
+>   * device_class_set_legacy_reset(): set the DeviceClass::reset method
+>   * @dc: The device class
+>   * @dev_reset: the reset function
+>   *
+>   * This function sets the DeviceClass::reset method. This is widely
+>   * used in existing code, but new code should prefer to use the
+>   * Resettable API as documented in docs/devel/reset.rst.
 >
-> Either "RISC-V PMI" or "RPMI".
 >
-> >   option('pvg', type: 'feature', value: 'auto',
-> >          description: 'macOS paravirtualized graphics support')
-> >   option('rbd', type : 'feature', value : 'auto',
-> > diff --git a/scripts/meson-buildoptions.sh b/scripts/meson-buildoptions=
-.sh
-> > index c003985047..e8a20068e7 100644
-> > --- a/scripts/meson-buildoptions.sh
-> > +++ b/scripts/meson-buildoptions.sh
-> > @@ -140,6 +140,7 @@ meson_options_help() {
-> >     printf "%s\n" '  libkeyutils     Linux keyutils support'
-> >     printf "%s\n" '  libnfs          libnfs block device driver'
-> >     printf "%s\n" '  libpmem         libpmem support'
-> > +  printf "%s\n" '  librpmi         RISC-V RPMI support'
+> Unless this device has an exclusive reset procedure you can do like riscv=
+-iommu-sys
+> does:
 >
-> Ditto, "RPMI support", otherwise:
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
 >
-> >     printf "%s\n" '  libssh          ssh block device support'
-> >     printf "%s\n" '  libudev         Use libudev to enumerate host devi=
-ces'
-> >     printf "%s\n" '  libusb          libusb support for USB passthrough=
-'
-> > @@ -376,6 +377,8 @@ _meson_option_parse() {
-> >       --disable-libnfs) printf "%s" -Dlibnfs=3Ddisabled ;;
-> >       --enable-libpmem) printf "%s" -Dlibpmem=3Denabled ;;
-> >       --disable-libpmem) printf "%s" -Dlibpmem=3Ddisabled ;;
-> > +    --enable-librpmi) printf "%s" -Dlibrpmi=3Denabled ;;
-> > +    --disable-librpmi) printf "%s" -Dlibrpmi=3Ddisabled ;;
-> >       --enable-libssh) printf "%s" -Dlibssh=3Denabled ;;
-> >       --disable-libssh) printf "%s" -Dlibssh=3Ddisabled ;;
-> >       --enable-libudev) printf "%s" -Dlibudev=3Denabled ;;
+>      ResettableClass *rc =3D RESETTABLE_CLASS(klass);
 >
-
-  Fixed in v4. I changed the user-facing Meson option/help/summary text
-  to "RPMI support" instead of "RISC-V RPMI support".
+>      rc->phases.hold =3D riscv_iommu_sys_reset_hold;
+>
+>
+> In this case you would do
+>
+>
+>      rc->phases.hold =3D   riscv_rpmi_reset
+>
+>
+> You can ignore the extra ResetType argument in case you don't need it.
+>
+>
+> The rest of the code LGTM.  Thanks,
+> Daniel
+>
+  Fixed in v4. I switched the RPMI device reset handling to the Resettable
+  API instead of device_class_set_legacy_reset().
 
 Thanks,
-Subbu
+subbu
+
+>
+>
+>
+>
+>
+> > +    device_class_set_props(dc, riscv_rpmi_properties);
+> > +}
+> > +
+> > +static const TypeInfo riscv_rpmi_info =3D {
+> > +    .name          =3D TYPE_RISCV_RPMI,
+> > +    .parent        =3D TYPE_SYS_BUS_DEVICE,
+> > +    .instance_size =3D sizeof(RiscvRpmiState),
+> > +    .instance_init =3D riscv_rpmi_init,
+> > +    .instance_finalize =3D riscv_rpmi_finalize,
+> > +    .class_init    =3D riscv_rpmi_class_init,
+> > +};
+> > +
+> > +static void riscv_rpmi_register_types(void)
+> > +{
+> > +    type_register_static(&riscv_rpmi_info);
+> > +}
+> > +
+> > +type_init(riscv_rpmi_register_types)
+> > +
+> > +DeviceState *riscv_rpmi_create(const RiscvRpmiConfig *cfg, Error **err=
+p)
+> > +{
+> > +    DeviceState *dev;
+> > +    RiscvRpmiState *s;
+> > +
+> > +    if (!cfg) {
+> > +        error_setg(errp, "missing RPMI configuration");
+> > +        return NULL;
+> > +    }
+> > +
+> > +    dev =3D qdev_new(TYPE_RISCV_RPMI);
+> > +    qdev_prop_set_uint64(dev, "shmem-base", cfg->shmem_base);
+> > +    qdev_prop_set_uint64(dev, "shmem-size", cfg->shmem_size);
+> > +    qdev_prop_set_uint32(dev, "a2p-req-size", cfg->a2p_req_size);
+> > +    qdev_prop_set_uint32(dev, "p2a-req-size", cfg->p2a_req_size);
+> > +
+> > +    s =3D RISCV_RPMI(dev);
+> > +    riscv_rpmi_configure_base(s, cfg);
+> > +
+> > +    if (!sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), errp)) {
+> > +        return NULL;
+> > +    }
+> > +
+> > +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, cfg->doorbell_base);
+> > +    return dev;
+> > +}
+> > diff --git a/hw/misc/riscv_rpmi_internal.h b/hw/misc/riscv_rpmi_interna=
+l.h
+> > new file mode 100644
+> > index 0000000000..447c0acb55
+> > --- /dev/null
+> > +++ b/hw/misc/riscv_rpmi_internal.h
+> > @@ -0,0 +1,24 @@
+> > +/*
+> > + * SPDX-License-Identifier: GPL-2.0-or-later
+> > + *
+> > + * RISC-V RPMI internal service helpers.
+> > + *
+> > + * Copyright (c) 2026 Qualcomm Technologies, Inc.
+> > + * Author:
+> > + *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+> > + */
+> > +
+> > +#ifndef HW_MISC_RISCV_RPMI_INTERNAL_H
+> > +#define HW_MISC_RISCV_RPMI_INTERNAL_H
+> > +
+> > +#include "qapi/error.h"
+> > +#include "hw/misc/riscv_rpmi.h"
+> > +#include "librpmi.h"
+> > +
+> > +#define RPMI_PLAT_INFO "QEMU RISC-V RPMI"
+> > +
+> > +extern const struct rpmi_shmem_platform_ops rpmi_shmem_qemu_ops;
+> > +bool riscv_rpmi_service_enabled(RiscvRpmiState *s,
+> > +                                RiscvRpmiServiceKind kind);
+> > +
+> > +#endif
+> > diff --git a/include/hw/misc/riscv_rpmi.h b/include/hw/misc/riscv_rpmi.=
+h
+> > new file mode 100644
+> > index 0000000000..cb2658e57e
+> > --- /dev/null
+> > +++ b/include/hw/misc/riscv_rpmi.h
+> > @@ -0,0 +1,90 @@
+> > +/*
+> > + * SPDX-License-Identifier: GPL-2.0-or-later
+> > + *
+> > + * RISC-V RPMI definitions shared by RPMI transport and FDT helpers.
+> > + *
+> > + * Copyright (c) 2026 Qualcomm Technologies, Inc.
+> > + * Author:
+> > + *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+> > + */
+> > +
+> > +#ifndef HW_MISC_RISCV_RPMI_H
+> > +#define HW_MISC_RISCV_RPMI_H
+> > +
+> > +#include "exec/hwaddr.h"
+> > +#include "hw/core/sysbus.h"
+> > +#include "qom/object.h"
+> > +#include "qemu/notify.h"
+> > +
+> > +#define RPMI_QUEUE_SLOT_SIZE 64
+> > +#define RPMI_DBREG_SIZE      0x1000
+> > +
+> > +#define RPMI_ALL_NUM_QUEUES 4
+> > +#define RPMI_A2P_NUM_QUEUES 2
+> > +#define RPMI_ALL_NUM_REGS   (RPMI_ALL_NUM_QUEUES + 1)
+> > +#define RPMI_A2P_NUM_REGS   (RPMI_A2P_NUM_QUEUES + 1)
+> > +
+> > +#define VIRT_RPMI_A2P_REQ_SIZE (16 * RPMI_QUEUE_SLOT_SIZE)
+> > +#define VIRT_RPMI_P2A_REQ_SIZE 0
+> > +
+> > +
+> > +#define TYPE_RISCV_RPMI "riscv-rpmi"
+> > +OBJECT_DECLARE_SIMPLE_TYPE(RiscvRpmiState, RISCV_RPMI)
+> > +
+> > +struct rpmi_context;
+> > +struct rpmi_service_group;
+> > +struct rpmi_shmem;
+> > +struct rpmi_transport;
+> > +
+> > +typedef enum RiscvRpmiServiceKind {
+> > +    RISCV_RPMI_SERVICE_INVALID =3D 0,
+> > +} RiscvRpmiServiceKind;
+> > +
+> > +typedef struct RiscvRpmiServiceConfig {
+> > +    RiscvRpmiServiceKind kind;
+> > +    const char *node_name;
+> > +    const char *compatible;
+> > +    uint32_t service_group;
+> > +    bool has_mpxy_channel;
+> > +    uint32_t mpxy_channel;
+> > +} RiscvRpmiServiceConfig;
+> > +
+> > +typedef struct RiscvRpmiConfig {
+> > +    hwaddr doorbell_base;
+> > +    hwaddr shmem_base;
+> > +    hwaddr shmem_size;
+> > +    uint32_t a2p_req_size;
+> > +    uint32_t p2a_req_size;
+> > +    const char *platform_info;
+> > +
+> > +    const uint32_t *hart_ids;
+> > +    uint32_t hart_count;
+> > +    const RiscvRpmiServiceConfig *services;
+> > +    uint32_t service_count;
+> > +} RiscvRpmiConfig;
+> > +
+> > +struct RiscvRpmiState {
+> > +    SysBusDevice parent_obj;
+> > +
+> > +    MemoryRegion mmio;
+> > +    MemoryRegion shmem;
+> > +    uint64_t shmem_base;
+> > +    uint64_t shmem_size;
+> > +    uint32_t a2p_req_size;
+> > +    uint32_t p2a_req_size;
+> > +    char *platform_info;
+> > +
+> > +    uint32_t *hart_ids;
+> > +    uint32_t hart_count;
+> > +    const RiscvRpmiServiceConfig *services;
+> > +    uint32_t service_count;
+> > +    uint32_t doorbell;
+> > +    struct rpmi_shmem *rpmi_shmem;
+> > +    struct rpmi_transport *transport;
+> > +    struct rpmi_context *context;
+> > +    bool has_shmem;
+> > +};
+> > +
+> > +DeviceState *riscv_rpmi_create(const RiscvRpmiConfig *cfg, Error **err=
+p);
+> > +
+> > +#endif
+>
 
