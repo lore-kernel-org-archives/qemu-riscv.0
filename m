@@ -4,95 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62282C44521
-	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Jul 2026 07:26:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD40C4451B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 20 Jul 2026 08:26:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wliNu-0004Ne-Kx; Mon, 20 Jul 2026 03:25:54 -0400
+	id 1wljK5-0006d6-GL; Mon, 20 Jul 2026 04:26:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wliNh-0004MT-Pl
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 03:25:46 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wliNe-0002y3-Re
- for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 03:25:41 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-848643382fcso10876064b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 00:25:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wljJd-0006Zh-QE
+ for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 04:25:35 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
+ id 1wljJZ-0001di-RT
+ for qemu-riscv@nongnu.org; Mon, 20 Jul 2026 04:25:33 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66K6RVfo1520116
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 08:25:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ UQTmmlk3Ftp56dW3WFZ8bcsagWfeiqwA7V2wJpSIxpU=; b=RZ7afEKWl5wCeByS
+ G16daZdK1FAAMw2q64I/IcE4dU5G4voWbrqNf1NTVAI2UGPcrfwYHgqv26yVTvcG
+ GcJ3Rl90J2IpFbqRKPhzaUtqvhFhF4/gpHHhTEyGDrVyzT7z9DIAKOOLL5Q5CUtp
+ Uoc1E71OzHGFiQV6OH5r/CyQDpwYt2yt6wjgdSt1KF/I2DG7MtYcRg0nwtaGiG6d
+ 8WMTmfXceCSdXP4W3u9VkyLWK56CukFGbIL4MJ1mSeRlOwhIckOd6zJC22H8Ur32
+ aXFS53p7NL21QAqvKHRAEhUte9UVyyCnUz4ihZYeAKeJykO8A/uxlD35srWaxdgc
+ 13KQHg==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2chn5q8-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 08:25:26 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-51a8b0a08d2so144713801cf.0
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 01:25:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1784532329; x=1785137129; darn=nongnu.org;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=H4HP+j/EkYRR+Vruw/OntbiZHmHVJZSk2k9qn/JO9HM=;
- b=c1T3hpiLUNg5CCsWa4x5zqjODDS121URTVV+KC2M0bPTk7WX3zQsJP93Y34Yfzf0Q1
- MGyxymdX2HcFYK2qqpfYcHEW+5c9SMvp2tRf0PFmGZUkwlvZI4/7vZz0L0/GysrCAgVQ
- mfn1woz88XuVPYHRxvai9vnRE+WfgtABJW6uw4Go7Hg0Q7sBJa3jkzGHDetx7vyMVGl5
- 96hMBpx2ZvJHUlGnSly3SeZnSUmhQnUUPZs6LyC8MTZhOo3m48Q10K4PEWUpEv8CzHaX
- qauLWpDQJSmIWDKA5aInVdlzjo10qF2PHF/l+BMAA6L1xVgjtcnYqN7McLDn87jtlwV4
- 3XkQ==
+ d=oss.qualcomm.com; s=google; t=1784535925; x=1785140725; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=UQTmmlk3Ftp56dW3WFZ8bcsagWfeiqwA7V2wJpSIxpU=;
+ b=Kd3AqQpT7+RZaiqSUhc1wZT66gdLZhOPngyUnNFOfHSLBIxEuRjiLrwPmapaj2H54P
+ FSP9kl0A4G79dmOF34UxE3OC2P0+6C9RBgBi8RTAJTVad91tRm3UwFCTkHMnhjPlGrrW
+ rzxD7dPTN4+O6MDsxTGkG1s71l1elVj+MH33Ad6LkzS/bfQ/xynt65NF3LiXjXuIvyGA
+ jfOhvuZmMdLUIKFBcapXwKyg4JPTRf4GMgY1GEpGgFr7zcMwbfLLPGn27b4iB6PRQu8i
+ d5TMGet8lf79IIDLiR90EcE/p4iHHtkM2b8ijQMsvZx27fNCB9fzsShiewJtOxJSsi5x
+ ywUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784532329; x=1785137129;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=H4HP+j/EkYRR+Vruw/OntbiZHmHVJZSk2k9qn/JO9HM=;
- b=MLfqSL049Jr/goSzTrcu9zj/XlIKDHc+56B9j8WP9MERoFq7GzH5+qgC/phJ17WyjV
- OPcGrFerZ12muP4BOJkrTKDvMqf0vQRte7E2FI8ocgmGawpUJq9xnkire0hBRfT3yLyr
- ORP902whLxmz9PC06lAInD5wAYuyB+rLr15Xw9MjTEEsMFWmjgpoHna7QXBIX4Exl5j/
- m3eO+8T8Ccp5NCI4kyBJ5Fq8wht6vP/GqZQmt/d69ZrZd1/ZMx4utrzZ9oWl/DgGG7gV
- eOA3IfqNZrq2YSkt/c6bEIb2x5yduEv3Y1JHT+5RXg8KHnDQXk6c4lJK/M4GZ0JSPuAe
- k5Cw==
+ d=1e100.net; s=20251104; t=1784535925; x=1785140725;
+ h=content-transfer-encoding:content-type:in-reply-to:from:references
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=UQTmmlk3Ftp56dW3WFZ8bcsagWfeiqwA7V2wJpSIxpU=;
+ b=aPoxw9wk5H0vc8TmAQhgth6gJYazFsSKqY6Vyh/1SrIg3LT+Af6T1+m6LXyymGG2EP
+ k0gsgEDG70NbsA/ggpeHwsNyZPUCx2L5OUiBo07RXP6EbB5lTdKWv48T7pfAFGfcGvJ5
+ nt7jTqhLidU2YPo05YlzIuxHzBCZDKKHDTQxB70Eo/MzG/nIxVtprp17tWR+JvaSa+LH
+ O69OOM2HpydufgzvpUsCdMRIVZBXDi0ZFcs+/dWzpTawVaQXoss5q+Ze2piZe5+FL4IR
+ dDv3SQbjTK3QEro7xiCuJWFv6jwckw+FEaHLstNILCUV557Dn7W5952DimtQpYp735RS
+ ShLg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RoCI6KLJXC9HGqnTaMmJFvlHP9ymfbdVjCFakxFlpVMBrlq1ovWsIyffObYcnojsPB+OjOfstuDVLN2@nongnu.org
-X-Gm-Message-State: AOJu0YyZ4PeNopdC6krK+zyj56RNkeqH7kb4GMGfjS3FmYUImi4gLKog
- jWisvX2c700e0nZa8b1WEVNadF06OyUmhgoF4ruU5AUiTUT5n8oos4jN7PYjEqLB3MU=
-X-Gm-Gg: AfdE7cmksHpBFMky9myhjITlP2XhbtXESwFLT8b1XHpIk7QVXOVEQ9DWxZUOTniiQXH
- Ugj9M1wSyrFbaSvDt0tIyILuJMKed1U7YFDLhC7muK4VmZymPDnJoDoyoBxkiPwS3KnGKgE7f84
- dlL/7tBIQAQeiG6EiioCodGDGPAkKl1oq/fh2nPNYqeI5ujbL/ytkzFweYCSkbMy19nDQbnFFcI
- /od0uJKTpJ7RydDIk8hCk4X+Qidd1REldr9vGHI3/RZQG4NwcHW6grNV6yIJA1Zxjf5YUeNwulj
- rRRsTOuK9TxXvSsoZ9SDloEGdn4bfuX4z+bJZTEHqaVgDeqNtgiZUyG5EY0jT1rh0viNX4tyGkx
- l3sG2XuTgUk5yhSu8NK6sYR0DsW0qIJ6FOPbi9JG0/axnZT6Sg2LqtOx6RM/38LoX/pGlZlUi89
- doJb9cbw/gLDLe802upN14jkjW7MTf7PwbskANbDPDKuP748zG
-X-Received: by 2002:a05:6a00:a245:b0:846:22ea:e171 with SMTP id
- d2e1a72fcca58-84c292d02ddmr12717258b3a.3.1784532328639; 
- Mon, 20 Jul 2026 00:25:28 -0700 (PDT)
-Received: from sifive.com ([136.226.240.181]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84c2af30d0dsm5168457b3a.32.2026.07.20.00.25.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 00:25:28 -0700 (PDT)
-Date: Mon, 20 Jul 2026 15:25:23 +0800
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Aurelien Jarno <aurelien@aurel32.net>, Peter Maydell <peter.maydell@linaro.org>,
- Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Weiwei Li <liwei1518@gmail.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Chao Liu <chao.liu.zevorn@gmail.com>
-Subject: Re: [PATCH v6 0/9] target/riscv: Add RISC-V Zvfofp8min extension
- support
-Message-ID: <al3MQlLMm5xyM0dV@sifive.com>
-References: <20260708161859.1124848-1-max.chou@sifive.com>
+ AHgh+RplI4D4oMtxcBM2WwKbKeZS29xNEuuheAmKNW+vgh9RLDdq9wLglsokAQrXBUEZR2mPOTLjdBQbAgdz@nongnu.org
+X-Gm-Message-State: AOJu0Yw6NueObyPAHTPWWECOfDfKVocZ/mntOiL31ew8M6koQ8UNkAok
+ rGbPF6ZBJrwgadUc+D78Yp6VQXdGLFmQqTWN4KyymF1NcLv2THcJa1/v82AxMW9YYzVnJk4ptyC
+ xHivBYF6PBHGxu7B74mKdyETttWSBNfvCUaxNqiEajL8OQd5fu6Mta99WWA==
+X-Gm-Gg: AfdE7cmxxzM0uXnAxjvMQaZBhZjFRSEHzAEL9RHjT0wEYFmhVcqO4fjwIxRtpP8df29
+ sOLME3nyMPp3OEuDkGiWQHOv/SKriC27rPQWe8zMEPcJj+vRXZ2Z3krHprp8TiGCEDbosQK/bFS
+ v+ZeHhMpYYwQul2EuacfACfjPRMwGEE5NGCM9IOFykMbSNf1NZxpiqQBOoR5Wvi9ObDqgielKF8
+ n4cbu3Hp4lKNPmwxVVx/k885FZaVsR6voS+3eX+YpOmdhVPKg9mOMquDj6z0uR/KdMPOpbP2lb4
+ UeMPkTowk9b/A6NUoqKx6kkNoWGStH/qJ2MrLzS5yJMHt8bPYQO16y0BYBLUBUxE6QAJrXqlmLM
+ 33SfYZFsz7EitJmfkd9QBDBnvyRpKXgZJu0rnbEuW9XobegkLS7U=
+X-Received: by 2002:ac8:5ac1:0:b0:51b:fc54:c23c with SMTP id
+ d75a77b69052e-5213e67a3c3mr119006661cf.61.1784535925481; 
+ Mon, 20 Jul 2026 01:25:25 -0700 (PDT)
+X-Received: by 2002:ac8:5ac1:0:b0:51b:fc54:c23c with SMTP id
+ d75a77b69052e-5213e67a3c3mr119006431cf.61.1784535925104; 
+ Mon, 20 Jul 2026 01:25:25 -0700 (PDT)
+Received: from [192.168.69.219] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-47f63e52aa4sm28555684f8f.10.2026.07.20.01.25.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Jul 2026 01:25:24 -0700 (PDT)
+Message-ID: <45c9ab4c-3f47-44a0-8f48-bad329c9c1cd@oss.qualcomm.com>
+Date: Mon, 20 Jul 2026 10:25:23 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260708161859.1124848-1-max.chou@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=max.chou@sifive.com; helo=mail-pf1-x42d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] riscv/virt: Add optional UART1
+Content-Language: en-US
+To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com,
+ pierrick.bouvier@oss.qualcomm.com, sunilvl@ventanamicro.com,
+ palmer@dabbelt.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu.zevorn@gmail.com
+References: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+In-Reply-To: <tencent_4EEBFC805F3E59863BEDC38094EF5A109206@qq.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDA5MiBTYWx0ZWRfX7y1I+J6vHDXW
+ +5hx4FW7QwKBSO8SY8EWDEc8+ZTllIV57BwTFgp0u3VKVURA6CPD9J38SW6s69yvW4nmj93kE36
+ gCwhI5m7cq3t8hqKYdq7Q2kKNL+NYj8=
+X-Proofpoint-GUID: 32vib6kg1qxoGzPPs2zuD_yvAyTpBDJA
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDA5MiBTYWx0ZWRfX2JJF5naECwom
+ vvap9M1bU9hhZ9UaE/lIdNIjsRg6Xa3jfwinjHKuv537fzdQ1HEFwB2mPWD0xJzgDraDItVcnMg
+ 3Surfb3rOGA/AHWYgVqhnRrAoJEwHEdh9o10LDsl1halPDe4RpjLJ2e/3HSInlnTQAd7sWSDHPO
+ RqGfMCBuQNAflUPJ59zWJKDbmyz+9dQS/tEU+PB5Valo3yIWhm+PPSV0E3ME/DBDs+xUTM5ylK7
+ JgOTtkKjj6DOhwClngNTRCh9Z1B5/NFl4TXdi0OIZl65KpPojqIbUj8JQI7Oc+QjhJWX+ohToX5
+ wETlwUqv4wkeQOm8mIg1nqhYEY/s/5X+E/yUMQTQCR40ngtYZz8Z8r4tbPzW6alnflSByHUsSvj
+ m3173383Nj5E89TbOs2dhR/+sFYn9UmeIapfaADot7XoMo8p2rfd6jXO7N8iGwn8WCd86HNKzsJ
+ 1XMry/pmn6k4WB553dg==
+X-Authority-Analysis: v=2.4 cv=T5K8ifKQ c=1 sm=1 tr=0 ts=6a5ddb76 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=4s3hRJSeHn4rkQlkrse1kQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=dZbOZ2KzAAAA:8 a=EUspDBNiAAAA:8 a=1tSEMpTH9XP_W59IOagA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-ORIG-GUID: 32vib6kg1qxoGzPPs2zuD_yvAyTpBDJA
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-20_01,2026-07-17_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 malwarescore=0 impostorscore=0 bulkscore=0 adultscore=0
+ suspectscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607200092
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,139 +158,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Gental ping.
+On 18/7/26 04:16, Yanfeng Liu wrote:
+> This adds optional UART1 to RiscV virt board if required at
+> runtime to simplify multicore development.
+> 
+> Note that UART0 remains default serial_hd(0) and it is:
+> 
+> - the lowest address UART
+> - first serial in DTB
+> - behind /aliases/serial0 in DTB
+> - the /chosen/stdout-path in DTB
+> 
+> Note that UART1 is placed at different page from UART0 to
+> support page level isolation.
+> 
+> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+> ---
+>   docs/system/riscv/virt.rst |  5 ++++-
+>   hw/riscv/virt-acpi-build.c | 12 ++++++++----
+>   hw/riscv/virt.c            | 40 ++++++++++++++++++++++++++++----------
+>   include/hw/riscv/virt.h    |  3 +++
+>   4 files changed, 45 insertions(+), 15 deletions(-)
 
-On 2026-07-09 00:18, Max Chou wrote:
-> This patchset adds support for the RISC-V Zvfofp8min ISA extension that
-> provides conversion operations for OCP FP8 formats which provide the
-> foundation for the future vector matrix extensions.
-> 
-> Ratification status:
-> - Zvfofp8min is currently v0.9 and is going through the RVIA ratification
->   process. This series tracks the v0.9 isa-manual tag below.
-> - riscv-isa-manual tag:
->   https://github.com/riscv/riscv-isa-manual/releases/tag/zvfofp8min-0.9
-> 
-> Zvfofp8min (v0.9):
-> - The Zvfofp8min extension provides minimal vector conversion support for
->   the OFP8 formats. It requires the Zve32f extension and leverages the
->   altfmt field in the VTYPE CSR (introduced by Zvfbfa) to select between
->   E4M3 (altfmt=0) and E5M2 (altfmt=1) formats. Per the OCP FP8 spec and
->   the extension definition:
->   - Canonical NaN for both E4M3 and E5M2 is 0x7f.
->   - All NaNs are treated as quiet NaNs.
->   - Widening conversions are exact: no rounding and no exception flags.
-> - These conversions are the data-movement primitives that feed and drain
->   the OFP8 vector/matrix compute pipeline.
-> - The LLVM RISC-V backend emits these instructions as of LLVM 22.1.0:
->   https://releases.llvm.org/22.1.0/docs/ReleaseNotes.html#changes-to-the-risc-v-backend
-> 
-> Instructions:
->   Extended (existing instructions taught to handle OFP8):
->   - vfwcvtbf16.f.f.v   : OFP8 to BF16 widening conversion
->   - vfncvtbf16.f.f.w   : BF16 to OFP8 narrowing conversion
->   New:
->   - vfncvtbf16.sat.f.f.w : BF16 to OFP8 narrowing with saturation
->   - vfncvt.f.f.q         : FP32 to OFP8 quad-width (4x) narrowing conversion
->   - vfncvt.sat.f.f.q     : FP32 to OFP8 quad-width narrowing with saturation
-> 
-> Verification:
-> - riscv-tests (fork https://github.com/riscv-software-src/riscv-tests):
->   https://github.com/rnax/riscv-tests/tree/dev/rnax/support_zvfofp8min
->   - Require LLVM 22.1.0
->     https://releases.llvm.org/22.1.0/docs/ReleaseNotes.html#changes-to-the-risc-v-backend
->   - Zvfofp8min test target: rv64uzvfofp8min/rv32uzvfofp8min
->   - Both Spike and QEMU applied this patchset could pass the riscv-tests
-> 
-> References:
-> - OCP FP8 specification:
->   https://www.opencompute.org/documents/ocp-8-bit-floating-point-specification-ofp8-revision-1-0-2023-12-01-pdf-1
-> 
-> 
-> Changes in v6
-> - Add patch 1 to fix the biased exponent write bug in the
->   parts_float_to_e5m2() saturate path. FloatParts64.exp holds an
->   unbiased exponent, so exp_bias must be subtracted when storing
->   the max-normal biased exponent value.
-> - Initialize float_e4m3_nan_is_snan to false in riscv_cpu_reset_hold()
->   to ensure consistent NaN handling for OFP8 E4M3 operations.
-> - Merge "Expose Zvfofp8min property" into "Add cfg property for
->   Zvfofp8min extension" to keep the property registration together
->   with the cfg field definition.
-> - Fix indentation of cbo.* opcode table entries in the disas patch.
-> - Rebase on riscv-to-apply.next (commit 267b5a2)
-> 
-> Changes in v5
-> - Drop Zvfofp4min which is not going through the RVIA ratification
->   process yet.
-> - Fix typos.
-> - Rebase on riscv-to-apply.next (commit bf76a00)
-> 
-> Changes in v4
-> - Rebase on riscv-to-apply.next (commit 21101a7)
-> - Remove the softfloat library related patches (Thanks for RH's help to
->   split this part)
-> - Add missing illegal ALTFMT SEW pattern checking for Zvfofp8min in
->   patch 4 (target/riscv: rvv: Make vfwcvtbf16.f.f.v support OFP8 to BF16
->   conversion for Zvfofp8min extension)
-> 
-> Changes in v3
-> - Add floatN_nan_is_snan to simply the quiet/signaling NaN checking flow
->   in patch 2 & 3
-> - Add patch 4 to fix pseudo-NaN handling in FPATAN/FYL2XP1/FYL2X helpers
-> 
-> Changes in v2
-> - Merged v1 patch 2 & 3 to v2 patch 3, v1 patch 4 & 5 to v2 patch 4
-> - Added new v2 patch 2 to refactor the IEEE format NaN classification
->   functions (float16, bfloat16, float32, float64) to use internal helper
->   functions, reducing code duplication and improving maintainability.
->   The OCP FP8 NaN classification functions follow the same pattern.
-> - Refactored softfloat implementation to use capability-based FloatFmt
->   flags (no_infinity, limited_nan, overflow_raises_invalid, normal_frac_max)
->   instead of monolithic flags
-> - Removed ocp_fp8e5m2_no_signal_nan and ocp_fp8_same_canonical_nan flags
->   from float_status; now using local float_status with no_signaling_nans
->   and default_nan_pattern for RISC-V Zvfofp8min instructions
-> - Rebased on latest riscv-to-apply.next with zvfbfa v3 patchset
-> 
-> v5: 20260427060928.2322570-1-max.chou@sifive.com
-> v4: 20260304134006.2908449-1-max.chou@sifive.com
-> v3: 20260204051756.667397-1-max.chou@sifive.com
-> v2: 20260127063723.442734-1-max.chou@sifive.com
-> v1: 20260108151650.16329-1-max.chou@sifive.com
-> 
-> 
-> Max Chou (9):
->   fpu: Fix biased exponent write in parts_float_to_e5m2 saturate path
->   target/riscv: rvv: Fix NOP_UU_B vs2 width
->   target/riscv: Add cfg property for Zvfofp8min extension
->   target/riscv: Add implied rules for Zvfofp8min extension
->   target/riscv: rvv: Make vfwcvtbf16.f.f.v support OFP8 to BF16
->     conversion for Zvfofp8min extension
->   target/riscv: rvv: Make vfncvtbf16.f.f.w support BF16 to OFP8
->     conversion for Zvfofp8min extension
->   target/riscv: rvv: Add vfncvtbf16.sat.f.f.w instruction for Zvfofp8min
->     extension
->   target/riscv: rvv: Add vfncvt.f.f.q and vfncvt.sat.f.f.q instructions
->     for Zvfofp8min extension
->   disas/riscv: Add support of Zvfofp8min extension
-> 
->  disas/riscv.c                                 |  19 ++-
->  fpu/softfloat.c                               |   3 +-
->  target/riscv/cpu.c                            |  13 +-
->  target/riscv/cpu_cfg_fields.h.inc             |   1 +
->  target/riscv/helper.h                         |  12 ++
->  target/riscv/insn32.decode                    |   5 +
->  .../riscv/tcg/insn_trans/trans_rvbf16.c.inc   |  32 +++--
->  .../riscv/tcg/insn_trans/trans_rvofp8.c.inc   | 105 +++++++++++++++
->  target/riscv/tcg/insn_trans/trans_rvv.c.inc   |  40 ++++++
->  target/riscv/tcg/tcg-cpu.c                    |   5 +
->  target/riscv/tcg/translate.c                  |   1 +
->  target/riscv/tcg/vector_helper.c              | 120 +++++++++++++++++-
->  12 files changed, 338 insertions(+), 18 deletions(-)
->  create mode 100644 target/riscv/tcg/insn_trans/trans_rvofp8.c.inc
-> 
-> -- 
-> 2.55.0
-> 
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 
