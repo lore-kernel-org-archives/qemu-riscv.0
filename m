@@ -4,147 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11381C4452B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jul 2026 06:39:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C058AC44529
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jul 2026 07:05:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wm46n-0002yx-1y; Tue, 21 Jul 2026 02:37:41 -0400
+	id 1wm4XM-0008Ux-7l; Tue, 21 Jul 2026 03:05:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wm46T-0002V8-Tz
- for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 02:37:24 -0400
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
+ id 1wm4XD-0008SE-Pa; Tue, 21 Jul 2026 03:05:01 -0400
+Received: from forwardcorp1d.mail.yandex.net
+ ([2a02:6b8:c41:1300:1:45:d181:df01])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wm46N-0004TH-NF
- for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 02:37:21 -0400
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66L447V9534581
- for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 06:37:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=zp7Zv1e0JxS
- zNlGu5SEkv0oUvgYrIqS9zwQ0sn6d5jg=; b=aRVt3wv61jUS/djBI6/ed7V6oj7
- PxPgknro0LBj7f8HG9tDBRV3b+Smh6UU6vqVD/H1hbu89yYI3X7K0gl8h5HGkNTZ
- AdY8FCw3qc3d+/J2YmqiTL5XmAX8tXTivgA8UQvid3XESZtJtGcdfs1HYEwJKicY
- F3Y7SJztXgtijDbUW0mi/IFgjQY8ouyoZFuqumoL6bazM+pQQEdX/MxCY5EVXeiU
- F763HtcE7xCaWjZWZ9Yc3HTg+NoOYLah0qWGDTYSIaTKebpk/gup7x7S1Cem1NCn
- Rg+Wi6tnZYC/zUpIS1ZuOe/4pWx+gxeJnosbQA8TyYCwyf6kenBbNlMKEcw==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj1dughhs-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 06:37:14 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2c6a72d672aso36197395ad.1
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 23:37:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784615833; x=1785220633; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=zp7Zv1e0JxSzNlGu5SEkv0oUvgYrIqS9zwQ0sn6d5jg=;
- b=KFzjnzt8haTPhfAkdkEys56hq6DHgWVblf6cScPuZSlQabJqJ+vUTiHHklgDyKBeQP
- 0ZeBaeUCsrkzUA5acjsZM7sGmH7hzTUXFJHH/1QjbKQ/LWyzB/3in3okQNCAIXrCX5+b
- s70GVSYJ5/1aoOj3NRa2InAoK3/4+E+MWsayUXVRB+eSNM7MH2noSkYSiqR7js51Daww
- MHXa1PXgvU0JXekHdI6e6U9q3h11ebarOxD0gSWQiVtpbssP3J6pukuZWSJJ4x8vX5nq
- fC6qYZp2QsCMUVR/Iz0qRQ3snMLvBwF5RIfZfVzjRLpL9NLiJZaBlYkBe4mBEXREtBVZ
- mkrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784615833; x=1785220633;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=zp7Zv1e0JxSzNlGu5SEkv0oUvgYrIqS9zwQ0sn6d5jg=;
- b=m1Xm2BWpoEOJpcnujEoMfyHT2654xhbpunADEIW6rNlh4xKy8hsKKQizXOAHV/4uGf
- 8h0LuxhkrlhJdvReQndYIQFOh+Jgx89mC+WwQUsjdQeX0aOgOsJ2NJQkrmzhCG1vSqjq
- MvrhfVltL2CtbYjO0IOpnS6LpkJldi8lqbd5RRCotOhwtX5BGFaBHNLQ2T93BOnEWQbG
- 28AhDCIi6714Ok+ht0AzvaRoyODKda14wvYLL0/Dxr0qZwSTp64XUcd378d6olGaft4/
- bhdvnDA+5mt+pUKXC/z9liXZ2C7NJKyUfWc5Zzp3/oFdzBsR2Z8DzQuHUEZwW+QD6Ifd
- 7VVg==
-X-Gm-Message-State: AOJu0Yz4Cy39QTtuZsOYn5balCW7Xglk9w5e9d3yRUD43ICPB1SiawfO
- yqHxE8b7ulUVtsP0ud0xnPIk10KtpgsUM+fUooLK5EclGI9bnZT7qYOxWyVdeGvuFYZMJ62oEpJ
- nNg5GDD8p9H3cMmkt1HH+WVcQucw1dhLoZKkdrN9Fmtm5qULHrGtJRa9nZCklCRdygA==
-X-Gm-Gg: AR+sD10druT2byzK+QpVhcgLvSyIczpF3/UNskWSxNA/pbC6z7wk1ZJxvZkZ41uum4X
- RBjC9GZ8yGT2jhZzFJMoW6Dly3KoTHeHfwCOVjpWhg93G3efIcbB16Pebmy52qpUS2qbh0aGTV4
- 8MBczrvKxrvmQi+zA/gpk7D3L0OaUF3no52V1vNX13sU+Zs1/7abV81v5vQDMaJsMhLzJfujfTV
- xC1zhKyWCXqz9wzMFeUiLhBMXeQejA3qFL319AYE84qrXiscwE73cXUUY6MSeNXRetukkvYqfwE
- SrocBPdNITWKCwOw6A+MItP1hfwGT+I6tmWdeiXkf+mzuCVK8CvchaMYV+oRD1l+UMvu9P8sXi8
- DgJN6RtycSYfmAA4h0895591LhFk8znNN15al13AecLS+LuUq79VWf8mOezqQJWHRuvaYvCrpi3
- YIC2oWOTIWsBfjYFZrhb82dCHI0WR/ukg=
-X-Received: by 2002:a17:903:910:b0:2c7:ef84:c58e with SMTP id
- d9443c01a7336-2cf802b31e1mr18514495ad.1.1784615833417; 
- Mon, 20 Jul 2026 23:37:13 -0700 (PDT)
-X-Received: by 2002:a17:903:910:b0:2c7:ef84:c58e with SMTP id
- d9443c01a7336-2cf802b31e1mr18514275ad.1.1784615832956; 
- Mon, 20 Jul 2026 23:37:12 -0700 (PDT)
-Received: from hu-slingapp-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3142a1bb8a4sm47161380eec.14.2026.07.20.23.37.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 23:37:12 -0700 (PDT)
-From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-To: qemu-riscv@nongnu.org
-Cc: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>,
- qemu-devel@nongnu.org (open list:All patches CC here)
-Subject: [PATCH v5 07/10] riscv: add RPMI system suspend service
-Date: Tue, 21 Jul 2026 12:06:33 +0530
-Message-ID: <01ad1022c6fd4f08316768df5134fab2500aca80.1784547370.git.subrahmanya.lingappa@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1784547370.git.subrahmanya.lingappa@oss.qualcomm.com>
-References: <cover.1784547370.git.subrahmanya.lingappa@oss.qualcomm.com>
+ (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
+ id 1wm4XA-0008Pe-E2; Tue, 21 Jul 2026 03:04:59 -0400
+Received: from mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
+ (mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
+ [IPv6:2a02:6b8:c42:86a0:0:640:75de:0])
+ by forwardcorp1d.mail.yandex.net (postfix) with ESMTPS id AC555807C6;
+ Tue, 21 Jul 2026 10:04:51 +0300 (MSK)
+Received: from [IPV6:2a02:6bf:8080:45b::1:22] (unknown
+ [2a02:6bf:8080:45b::1:22])
+ by mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net (smtpcorp) with ESMTPSA
+ id n4QARH1Z2qM0-rIM1JkaF; Tue, 21 Jul 2026 10:04:51 +0300
+Precedence: bulk
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+ s=default; t=1784617491;
+ bh=5eXo5OMb05NzrqYIKMUqwTtEMWdHoYTOtALuQXSrorY=;
+ h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
+ b=nzgq2HueebqPNHf6NPcPL3668BJ4XjXv7hcR8XNDf2RCSP0uD6bMwDvTgHElsWWnF
+ v27O2rTooJbPifLiEYAlEoF9TvlLonrXrucm2DT77ZdzVo0ESXmkRyee7Li5xr9S1B
+ e98W4slHamru2tv9lehCt3BbWrGU9gQk4YtUgbBg=
+Authentication-Results: mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net;
+ dkim=pass header.i=@yandex-team.ru
+Message-ID: <3460003e-8e38-438c-ab81-730103880571@yandex-team.ru>
+Date: Tue, 21 Jul 2026 10:04:49 +0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v19 03/15] net/tap: deprecate "no" as special value for
+ script/downscript
+To: Markus Armbruster <armbru@redhat.com>
+Cc: jasowang@redhat.com, mst@redhat.com, peterx@redhat.com, farosas@suse.de,
+ raphael.s.norwitz@gmail.com, bchaney@akamai.com, qemu-devel@nongnu.org,
+ berrange@redhat.com, pbonzini@redhat.com, yc-core@yandex-team.ru,
+ mark.caveayland@nutanix.com,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Sergio Lopez <slp@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Bernhard Beschow <shentey@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Jason Wang <jasowangio@gmail.com>,
+ Eric Blake <eblake@redhat.com>,
+ "open list:Incompatible changes" <devel@lists.libvirt.org>,
+ "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>,
+ "open list:e500" <qemu-ppc@nongnu.org>,
+ "open list:Microchip PolarFi..." <qemu-riscv@nongnu.org>
+References: <20260714154246.1242856-1-vsementsov@yandex-team.ru>
+ <20260714154246.1242856-4-vsementsov@yandex-team.ru>
+ <87pl0gsvec.fsf@pond.sub.org>
+Content-Language: en-US
+From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+In-Reply-To: <87pl0gsvec.fsf@pond.sub.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 1jWERoEgcTQiauL8j30zery67qYX63ON
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDA2NyBTYWx0ZWRfXyinL8yAiZenu
- jokjnHX/6G4DcHbqEljUDjQkhEMWQSzbysZFQC6LhwLGATCk+Egg9IyXOt3PZRLDJFU/vc81FzX
- wcQ+TKvoDsAIW7PAFUppgtmHDQP7ggNqMepOn6JmZRCm7z5ZEOl9l5YQfnEo6GSN+6QY9EXV43e
- pgsktkFMZHzBiCPjvrYhSRfhJ2tiWLNZ8WCP+pDN+feX9Lfl2EBKij2GIpG/z6dhJTnD/dSt4TQ
- yyGH9gomIeySjAjDX5Kj5Na+ejqU/hz9MKS/MCNx1pEGYQv4XF7FYBKs9whAqbEeBG3+scWm9vr
- XrAOsv3piVqtT+bM2cJTwABclgufynqpyfGlngFq8cfwbh5NlP1b2xx4EczG94/rRR2KCHVj+OK
- nWnBzrM7OXEVBDgTskEW+uFt/O/Cd72tAiVEb4OOu0yYqSIMcO9rRR6k37dia0xftvims8cvecJ
- Dfx54RhXrEg/xqoz2ZA==
-X-Authority-Analysis: v=2.4 cv=I9JVgtgg c=1 sm=1 tr=0 ts=6a5f139a cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=YpNgDGc-obDsCk2VH-MA:9 a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-GUID: 1jWERoEgcTQiauL8j30zery67qYX63ON
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDA2NyBTYWx0ZWRfX1xC9rnEYatBn
- +ofmWhfDvTgB8DBJJpdomZd1ho7X6/Og4cZaLF8+Ur1hpxvtHS/UUdDlBeey+f+K1Qwm61JcuQ5
- XHKMBeX1eq9REVH7/YeztXmnkT1dAD0=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-20_06,2026-07-20_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 spamscore=0 clxscore=1015 suspectscore=0
- lowpriorityscore=0 phishscore=0 priorityscore=1501 impostorscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607210067
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Received-SPF: pass client-ip=2a02:6b8:c41:1300:1:45:d181:df01;
+ envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1d.mail.yandex.net
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
-Precedence: list
 List-Id: <qemu-riscv.nongnu.org>
 List-Unsubscribe: <https://lists.nongnu.org/mailman/options/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=unsubscribe>
@@ -156,385 +93,316 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add the RPMI System Suspend service group for RISC-V virt.
+On 21.07.26 09:34, Markus Armbruster wrote:
+> Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
+> 
+>> The interface is ambiguous, as "no" is valid file name. So,
+>> using "no" as a special value to disable script is deprecated.
+>> Use an empty string ("script=" / "downscript=") instead.
+>>
+>> In a future version, "no" will be treated as a plain file name, just
+>> like any other non-empty value.
+>>
+>> Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
+>> and qemu-options.hx. Update other docs to use empty string instead of
+>> "no". Add a warning.
+>>
+>> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+>> ---
+>>   docs/about/deprecated.rst                  | 18 ++++++++++++++
+>>   docs/system/i386/microvm.rst               |  4 +--
+>>   docs/system/i386/xenpvh.rst                |  2 +-
+>>   docs/system/ppc/ppce500.rst                |  4 +--
+>>   docs/system/riscv/microchip-icicle-kit.rst |  2 +-
+>>   docs/system/riscv/sifive_u.rst             |  2 +-
+>>   net/tap.c                                  | 29 ++++++++++++++--------
+>>   qapi/net.json                              | 12 ++++++---
+>>   qemu-options.hx                            |  7 ++++--
+>>   9 files changed, 56 insertions(+), 24 deletions(-)
+>>
+>> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+>> index 0c656a968fc..c4929317e3a 100644
+>> --- a/docs/about/deprecated.rst
+>> +++ b/docs/about/deprecated.rst
+>> @@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
+>>   ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
+>>   short convenience options are not deprecated, only ``-mon``.
+>>   
+>> +``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
+>> +'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+>> +
+>> +The special value ``"no"`` for the ``script`` and ``downscript``
+>> +parameters of ``-netdev tap`` disables script execution.  This special
+>> +treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
+>> +or ``downscript=``) to disable script execution instead.  In a future
+>> +version, ``"no"`` will be treated as a plain file name.
+>> +
+>>   QEMU Machine Protocol (QMP) commands
+>>   ------------------------------------
+>>   
+>> @@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
+>>   
+>>   Use ``query-accelerators`` instead.
+>>   
+>> +``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
+>> +'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+>> +
+>> +The special value ``"no"`` for the ``script`` and ``downscript``
+>> +parameters of ``netdev_add`` with ``type=tap`` disables script
+>> +execution.  This special treatment of ``"no"`` is deprecated.  Use an
+>> +empty string instead.  In a future version, ``"no"`` will be treated as
+>> +a plain file name.
+>> +
+>>   Human Machine Protocol (HMP) commands
+>>   -------------------------------------
+>>   
+>> diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
+>> index 1675e37d3e7..077ea15751e 100644
+>> --- a/docs/system/i386/microvm.rst
+>> +++ b/docs/system/i386/microvm.rst
+>> @@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
+>>        -serial stdio \
+>>        -drive id=test,file=test.img,format=raw,if=none \
+>>        -device virtio-blk-device,drive=test \
+>> -     -netdev tap,id=tap0,script=no,downscript=no \
+>> +     -netdev tap,id=tap0,script=,downscript= \
+>>        -device virtio-net-device,netdev=tap0
+>>   
+>>   While the example above works, you might be interested in reducing the
+>> @@ -103,7 +103,7 @@ disabled::
+>>        -device virtconsole,chardev=virtiocon0 \
+>>        -drive id=test,file=test.img,format=raw,if=none \
+>>        -device virtio-blk-device,drive=test \
+>> -     -netdev tap,id=tap0,script=no,downscript=no \
+>> +     -netdev tap,id=tap0,script=,downscript= \
+>>        -device virtio-net-device,netdev=tap0
+>>   
+>>   
+>> diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
+>> index 904778e3f5c..862f38830b1 100644
+>> --- a/docs/system/i386/xenpvh.rst
+>> +++ b/docs/system/i386/xenpvh.rst
+>> @@ -42,7 +42,7 @@ case you need to construct one manually:
+>>         -vnc none                                       \
+>>         -display none                                   \
+>>         -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
+>> -      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
+>> +      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
+>>         -smp 4,maxcpus=4                                \
+>>         -nographic                                      \
+>>         -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
+>> diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
+>> index c9fe0915dc5..ec5aaf14fd9 100644
+>> --- a/docs/system/ppc/ppce500.rst
+>> +++ b/docs/system/ppc/ppce500.rst
+>> @@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
+>>     $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
+>>                         -display none -serial stdio \
+>>                         -bios u-boot \
+>> -                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
+>> +                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
+>>   
+>>   The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
+>>   if “-device eTSEC” is given to QEMU:
+>>   
+>>   .. code-block:: bash
+>>   
+>> -  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
+>> +  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
+>>   
+>>   Root file system on flash drive
+>>   -------------------------------
+>> diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+>> index 9809e94b84b..7fdb96601ad 100644
+>> --- a/docs/system/riscv/microchip-icicle-kit.rst
+>> +++ b/docs/system/riscv/microchip-icicle-kit.rst
+>> @@ -84,7 +84,7 @@ Then we can boot the machine by:
+>>     $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
+>>         -sd path/to/sdcard.img \
+>>         -nic user,model=cadence_gem \
+>> -      -nic tap,ifname=tap,model=cadence_gem,script=no \
+>> +      -nic tap,ifname=tap,model=cadence_gem,script= \
+>>         -display none -serial stdio \
+>>         -kernel path/to/u-boot/build/dir/u-boot.bin \
+>>         -dtb path/to/u-boot/build/dir/u-boot.dtb
+>> diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+>> index 8f55ae8e313..0e4dcf3e70c 100644
+>> --- a/docs/system/riscv/sifive_u.rst
+>> +++ b/docs/system/riscv/sifive_u.rst
+>> @@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
+>>   
+>>     $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
+>>         -display none -serial stdio \
+>> -      -nic tap,ifname=tap0,script=no,downscript=no \
+>> +      -nic tap,ifname=tap0,script=,downscript= \
+>>         -kernel /path/to/vxWorks \
+>>         -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
+>>   
+>> diff --git a/net/tap.c b/net/tap.c
+>> index fedd48c48d2..2e94b4015f6 100644
+>> --- a/net/tap.c
+>> +++ b/net/tap.c
+>> @@ -92,34 +92,40 @@ static void launch_script(const char *setup_script, const char *ifname,
+>>   static void tap_send(void *opaque);
+>>   static void tap_writable(void *opaque);
+>>   
+>> -static bool tap_is_explicit_no_script(const char *script_arg)
+>> +static bool tap_is_explicit_no_script(const char *script_arg_name,
+>> +                                      const char *script_arg_value)
+>>   {
+>> -    if (!script_arg) {
+>> +    if (!script_arg_value) {
+>>           return false;
+>>       }
+>>   
+>> -    if (script_arg[0] == '\0') {
+>> +    if (script_arg_value[0] == '\0') {
+>>           return true;
+>>       }
+>>   
+>> -    if (strcmp(script_arg, "no") == 0) {
+>> +    if (strcmp(script_arg_value, "no") == 0) {
+>> +        warn_report("%s=no is deprecated; use %s= instead "
+> 
+> Maybe "'%s=no' is deprecated; use '%s=' instead ".
 
-The service advertises suspend-to-RAM support through librpmi,
-registers QEMU wakeup support, and routes the suspend finalize callback
-to the machine suspend path. On wakeup it processes RPMI group events
-and defers the HSM hart resume until vCPUs are ready to run again.
+Ok
 
-Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- hw/misc/meson.build           |   1 +
- hw/misc/riscv_rpmi.c          |   4 +
- hw/misc/riscv_rpmi_hsm.c      |   9 +-
- hw/misc/riscv_rpmi_internal.h |   5 +
- hw/misc/riscv_rpmi_syssusp.c  | 191 ++++++++++++++++++++++++++++++++++
- hw/riscv/virt.c               |  25 +++++
- include/hw/misc/riscv_rpmi.h  |  11 ++
- 7 files changed, 245 insertions(+), 1 deletion(-)
- create mode 100644 hw/misc/riscv_rpmi_syssusp.c
+> 
+>> +                    "(empty string instead of 'no')",
+> 
+> Not sure this is needed.
 
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index 6c70d93358..b37acee0f1 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -172,4 +172,5 @@ system_ss.add(when: 'CONFIG_RISCV_RPMI', if_true: [files(
-   'riscv_rpmi.c',
-   'riscv_rpmi_sysreset.c',
-   'riscv_rpmi_hsm.c',
-+  'riscv_rpmi_syssusp.c',
- ), librpmi], if_false: files('riscv_rpmi-stub.c'))
-diff --git a/hw/misc/riscv_rpmi.c b/hw/misc/riscv_rpmi.c
-index 5eb68810a5..ba347a7af5 100644
---- a/hw/misc/riscv_rpmi.c
-+++ b/hw/misc/riscv_rpmi.c
-@@ -187,6 +187,10 @@ static const RiscvRpmiServiceOps riscv_rpmi_service_ops[] = {
-         .kind = RISCV_RPMI_SERVICE_HSM,
-         .add = riscv_rpmi_hsm_add,
-         .remove = riscv_rpmi_hsm_remove,
-+    }, {
-+        .kind = RISCV_RPMI_SERVICE_SYSSUSP,
-+        .add = riscv_rpmi_syssusp_add,
-+        .remove = riscv_rpmi_syssusp_remove,
-     },
- };
- 
-diff --git a/hw/misc/riscv_rpmi_hsm.c b/hw/misc/riscv_rpmi_hsm.c
-index 9a9859b10c..bacdabcac6 100644
---- a/hw/misc/riscv_rpmi_hsm.c
-+++ b/hw/misc/riscv_rpmi_hsm.c
-@@ -235,7 +235,6 @@ static void riscv_rpmi_hsm_destroy(RiscvRpmiState *s)
-     g_clear_pointer(&s->hsm_hw_states, g_free);
- }
- 
--
- bool riscv_rpmi_hsm_add(RiscvRpmiState *s, Error **errp)
- {
-     struct rpmi_service_group *group;
-@@ -278,3 +277,11 @@ void riscv_rpmi_hsm_reset(RiscvRpmiState *s)
-         rpmi_hsm_process_state_changes(s->hsm);
-     }
- }
-+
-+void riscv_rpmi_hsm_resume(RiscvRpmiState *s, uint32_t hart_index)
-+{
-+    riscv_rpmi_hsm_set_hw_state(s, hart_index, RPMI_HART_HW_STATE_STARTED);
-+    if (s->hsm) {
-+        rpmi_hsm_process_state_changes(s->hsm);
-+    }
-+}
-diff --git a/hw/misc/riscv_rpmi_internal.h b/hw/misc/riscv_rpmi_internal.h
-index 42a6708907..34cab35c32 100644
---- a/hw/misc/riscv_rpmi_internal.h
-+++ b/hw/misc/riscv_rpmi_internal.h
-@@ -33,5 +33,10 @@ void riscv_rpmi_sysreset_remove(RiscvRpmiState *s);
- bool riscv_rpmi_hsm_add(RiscvRpmiState *s, Error **errp);
- void riscv_rpmi_hsm_remove(RiscvRpmiState *s);
- void riscv_rpmi_hsm_reset(RiscvRpmiState *s);
-+void riscv_rpmi_hsm_resume(RiscvRpmiState *s, uint32_t hart_index);
-+
-+bool riscv_rpmi_syssusp_add(RiscvRpmiState *s, Error **errp);
-+void riscv_rpmi_syssusp_remove(RiscvRpmiState *s);
-+
- 
- #endif
-diff --git a/hw/misc/riscv_rpmi_syssusp.c b/hw/misc/riscv_rpmi_syssusp.c
-new file mode 100644
-index 0000000000..440e0b6e3d
---- /dev/null
-+++ b/hw/misc/riscv_rpmi_syssusp.c
-@@ -0,0 +1,191 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * RISC-V RPMI System Suspend service.
-+ *
-+ * Copyright (c) 2026 Qualcomm Technologies, Inc.
-+ * Author:
-+ *  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "riscv_rpmi_internal.h"
-+#include "qemu/timer.h"
-+#include "system/runstate.h"
-+
-+static const struct rpmi_system_suspend_type riscv_rpmi_syssusp_types[] = {
-+    {
-+        .type = RPMI_SYSSUSP_TYPE_SUSPEND_TO_RAM,
-+        .attr = RPMI_SYSSUSP_ATTRS_FLAGS_RESUMEADDR,
-+    },
-+};
-+
-+static enum rpmi_error riscv_rpmi_syssusp_prepare(
-+    void *priv, rpmi_uint32_t hart_index,
-+    const struct rpmi_system_suspend_type *syssusp_type,
-+    rpmi_uint64_t resume_addr)
-+{
-+    RiscvRpmiState *s = priv;
-+
-+    if (s->machine_ops && s->machine_ops->register_wakeup_support) {
-+        s->machine_ops->register_wakeup_support();
-+    }
-+    return RPMI_SUCCESS;
-+}
-+
-+static rpmi_bool_t riscv_rpmi_syssusp_ready(void *priv,
-+                                            rpmi_uint32_t hart_index)
-+{
-+    return true;
-+}
-+
-+static void riscv_rpmi_syssusp_finalize(
-+    void *priv, rpmi_uint32_t hart_index,
-+    const struct rpmi_system_suspend_type *syssusp_type,
-+    rpmi_uint64_t resume_addr)
-+{
-+    RiscvRpmiState *s = priv;
-+
-+    if (s->machine_ops && s->machine_ops->system_suspend) {
-+        s->machine_ops->system_suspend();
-+    }
-+}
-+
-+static rpmi_bool_t riscv_rpmi_syssusp_can_resume(void *priv,
-+                                                 rpmi_uint32_t hart_index)
-+{
-+    RiscvRpmiState *s = priv;
-+
-+    if (s->machine_ops && s->machine_ops->system_can_resume) {
-+        return s->machine_ops->system_can_resume();
-+    }
-+
-+    return true;
-+}
-+
-+static enum rpmi_error riscv_rpmi_syssusp_resume(
-+    void *priv, rpmi_uint32_t hart_index,
-+    const struct rpmi_system_suspend_type *syssusp_type,
-+    rpmi_uint64_t resume_addr)
-+{
-+    RiscvRpmiState *s = priv;
-+
-+    s->syssusp_resume_hart_index = hart_index;
-+    s->syssusp_resume_pending = true;
-+    return RPMI_SUCCESS;
-+}
-+
-+static const struct rpmi_syssusp_platform_ops riscv_rpmi_syssusp_ops = {
-+    .system_suspend_prepare = riscv_rpmi_syssusp_prepare,
-+    .system_suspend_ready = riscv_rpmi_syssusp_ready,
-+    .system_suspend_finalize = riscv_rpmi_syssusp_finalize,
-+    .system_suspend_can_resume = riscv_rpmi_syssusp_can_resume,
-+    .system_suspend_resume = riscv_rpmi_syssusp_resume,
-+};
-+
-+static void riscv_rpmi_wakeup_timer(void *opaque)
-+{
-+    RiscvRpmiState *s = opaque;
-+
-+    if (s->syssusp_resume_pending) {
-+        riscv_rpmi_hsm_resume(s, s->syssusp_resume_hart_index);
-+        s->syssusp_resume_pending = false;
-+    }
-+}
-+
-+static void riscv_rpmi_wakeup_notify(Notifier *notifier, void *data)
-+{
-+    RiscvRpmiState *s = container_of(notifier, RiscvRpmiState,
-+                                     wakeup_notifier);
-+
-+    if (s->context) {
-+        rpmi_context_process_group_events(s->context,
-+                                          RPMI_SRVGRP_SYSTEM_SUSPEND);
-+    }
-+    if (s->wakeup_timer) {
-+        /*
-+         * Wakeup notifiers run before vCPUs resume. Defer the HSM
-+         * kick so OpenSBI can leave WFI after QEMU restarts execution.
-+         */
-+        timer_mod(s->wakeup_timer, qemu_clock_get_ms(QEMU_CLOCK_REALTIME) + 10);
-+    }
-+}
-+
-+static bool riscv_rpmi_syssusp_create(RiscvRpmiState *s,
-+                                      struct rpmi_service_group **group,
-+                                      Error **errp)
-+{
-+    if (!s->hsm) {
-+        error_setg(errp, "RPMI system suspend service requires HSM service");
-+        return false;
-+    }
-+
-+    if (s->machine_ops && s->machine_ops->register_wakeup_support) {
-+        s->machine_ops->register_wakeup_support();
-+    }
-+    if (!s->wakeup_timer) {
-+        s->wakeup_timer = timer_new_ms(QEMU_CLOCK_REALTIME,
-+                                       riscv_rpmi_wakeup_timer, s);
-+    }
-+    if (!s->wakeup_notifier_registered) {
-+        s->wakeup_notifier.notify = riscv_rpmi_wakeup_notify;
-+        qemu_register_wakeup_notifier(&s->wakeup_notifier);
-+        s->wakeup_notifier_registered = true;
-+    }
-+
-+    *group = rpmi_service_group_syssusp_create(
-+        s->hsm, ARRAY_SIZE(riscv_rpmi_syssusp_types),
-+        riscv_rpmi_syssusp_types, &riscv_rpmi_syssusp_ops, s);
-+    if (!*group) {
-+        error_setg(errp, "failed to create RPMI system suspend service group");
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
-+static void riscv_rpmi_syssusp_destroy(RiscvRpmiState *s)
-+{
-+    if (s->wakeup_notifier_registered) {
-+        notifier_remove(&s->wakeup_notifier);
-+        s->wakeup_notifier_registered = false;
-+    }
-+    if (s->wakeup_timer) {
-+        timer_free(s->wakeup_timer);
-+        s->wakeup_timer = NULL;
-+    }
-+
-+    if (s->syssusp_group) {
-+        rpmi_service_group_syssusp_destroy(s->syssusp_group);
-+        s->syssusp_group = NULL;
-+    }
-+}
-+
-+bool riscv_rpmi_syssusp_add(RiscvRpmiState *s, Error **errp)
-+{
-+    struct rpmi_service_group *group;
-+
-+    if (s->syssusp_group) {
-+        error_setg(errp, "duplicate RPMI system suspend descriptor");
-+        return false;
-+    }
-+
-+    if (!riscv_rpmi_syssusp_create(s, &group, errp)) {
-+        return false;
-+    }
-+
-+    if (!riscv_rpmi_context_add_group(s, group, "system suspend", errp)) {
-+        s->syssusp_group = group;
-+        riscv_rpmi_syssusp_destroy(s);
-+        return false;
-+    }
-+
-+    s->syssusp_group = group;
-+    return true;
-+}
-+
-+void riscv_rpmi_syssusp_remove(RiscvRpmiState *s)
-+{
-+    riscv_rpmi_context_remove_group(s, s->syssusp_group);
-+    riscv_rpmi_syssusp_destroy(s);
-+}
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 34b20429ce..f7311cea09 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -51,6 +51,7 @@
- #include "chardev/char.h"
- #include "system/device_tree.h"
- #include "system/system.h"
-+#include "system/runstate.h"
- #include "system/tcg.h"
- #include "system/kvm.h"
- #include "system/tpm.h"
-@@ -1020,6 +1021,12 @@ static const RiscvRpmiServiceConfig virt_rpmi_services[] = {
-         .compatible = "riscv,rpmi-hsm",
-         .service_group = RISCV_RPMI_SRVGRP_HSM,
-     },
-+    {
-+        .kind = RISCV_RPMI_SERVICE_SYSSUSP,
-+        .node_name = "suspend",
-+        .compatible = "riscv,rpmi-system-suspend",
-+        .service_group = RISCV_RPMI_SRVGRP_SYSTEM_SUSPEND,
-+    },
- };
- 
- static uint32_t virt_rpmi_service_count(RISCVVirtState *s)
-@@ -1037,9 +1044,27 @@ static void virt_rpmi_system_shutdown(void)
-     qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
- }
- 
-+static void virt_rpmi_system_suspend(void)
-+{
-+    qemu_system_suspend_request();
-+}
-+
-+static void virt_rpmi_register_wakeup_support(void)
-+{
-+    qemu_register_wakeup_support();
-+}
-+
-+static bool virt_rpmi_system_can_resume(void)
-+{
-+    return runstate_check(RUN_STATE_RUNNING);
-+}
-+
- static const RiscvRpmiMachineOps virt_rpmi_machine_ops = {
-     .system_reset = virt_rpmi_system_reset,
-     .system_shutdown = virt_rpmi_system_shutdown,
-+    .system_suspend = virt_rpmi_system_suspend,
-+    .register_wakeup_support = virt_rpmi_register_wakeup_support,
-+    .system_can_resume = virt_rpmi_system_can_resume,
- };
- 
- static RiscvRpmiConfig virt_rpmi_config(RISCVVirtState *s,
-diff --git a/include/hw/misc/riscv_rpmi.h b/include/hw/misc/riscv_rpmi.h
-index 96e5d3d747..c89dfa7140 100644
---- a/include/hw/misc/riscv_rpmi.h
-+++ b/include/hw/misc/riscv_rpmi.h
-@@ -29,6 +29,7 @@
- 
- #define RISCV_RPMI_SRVGRP_SYSTEM_RESET   3
- #define RISCV_RPMI_SRVGRP_HSM            5
-+#define RISCV_RPMI_SRVGRP_SYSTEM_SUSPEND 4
- 
- #define TYPE_RISCV_RPMI "riscv-rpmi"
- OBJECT_DECLARE_SIMPLE_TYPE(RiscvRpmiState, RISCV_RPMI)
-@@ -43,11 +44,15 @@ typedef enum RiscvRpmiServiceKind {
-     RISCV_RPMI_SERVICE_INVALID = 0,
-     RISCV_RPMI_SERVICE_SYSRESET,
-     RISCV_RPMI_SERVICE_HSM,
-+    RISCV_RPMI_SERVICE_SYSSUSP,
- } RiscvRpmiServiceKind;
- 
- typedef struct RiscvRpmiMachineOps {
-     void (*system_reset)(void);
-     void (*system_shutdown)(void);
-+    void (*system_suspend)(void);
-+    void (*register_wakeup_support)(void);
-+    bool (*system_can_resume)(void);
- } RiscvRpmiMachineOps;
- typedef struct RiscvRpmiServiceConfig {
-     RiscvRpmiServiceKind kind;
-@@ -84,9 +89,15 @@ struct RiscvRpmiState {
-     char *platform_info;
-     const RiscvRpmiMachineOps *machine_ops;
-     struct rpmi_service_group *sysreset_group;
-+    struct rpmi_service_group *syssusp_group;
-     struct rpmi_hsm *hsm;
-     struct rpmi_service_group *hsm_group;
-     uint32_t *hsm_hw_states;
-+    Notifier wakeup_notifier;
-+    bool wakeup_notifier_registered;
-+    QEMUTimer *wakeup_timer;
-+    bool syssusp_resume_pending;
-+    uint32_t syssusp_resume_hart_index;
-     uint32_t *hart_ids;
-     uint32_t hart_count;
-     const RiscvRpmiServiceConfig *services;
+With you single quotes, agree, everything is clear without this note.
+
+> 
+>> +                    script_arg_name, script_arg_name);
+>>           return true;
+>>       }
+>>   
+>>       return false;
+>>   }
+> 
+> Less churn if you name the argument @script_arg_value in PATCH 01.
+
+Right, will move.
+
+> 
+>>   
+>> -static char *tap_parse_script(const char *script_arg, const char *default_path)
+>> +static char *tap_parse_script(const char *script_arg_name,
+>> +                              const char *script_arg_value,
+>> +                              const char *default_path)
+>>   {
+>> -    if (tap_is_explicit_no_script(script_arg)) {
+>> +    if (tap_is_explicit_no_script(script_arg_name, script_arg_value)) {
+>>           return NULL;
+>>       }
+>>   
+>> -    if (!script_arg) {
+>> +    if (!script_arg_value) {
+>>           return get_relocated_path(default_path);
+>>       }
+>>   
+>> -    return g_strdup(script_arg);
+>> +    return g_strdup(script_arg_value);
+>>   }
+>>   
+>>   static void tap_update_fd_handler(TAPState *s)
+>> @@ -740,7 +746,7 @@ static bool net_init_tap_one(const NetdevTapOptions *tap, NetClientState *peer,
+>>           qemu_set_info_str(&s->nc, "helper=%s", tap->helper);
+>>       } else {
+>>           qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
+>> -                          script ?: "no", downscript ?: "no");
+>> +                          script ?: "", downscript ?: "");
+>>   
+>>           if (downscript) {
+>>               snprintf(s->down_script, sizeof(s->down_script), "%s", downscript);
+>> @@ -946,9 +952,10 @@ int net_init_tap(const Netdev *netdev, const char *name,
+>>           }
+>>       } else {
+>>           g_autofree char *script =
+>> -            tap_parse_script(tap->script, DEFAULT_NETWORK_SCRIPT);
+>> +            tap_parse_script("script", tap->script, DEFAULT_NETWORK_SCRIPT);
+>>           g_autofree char *downscript =
+>> -            tap_parse_script(tap->downscript, DEFAULT_NETWORK_DOWN_SCRIPT);
+>> +            tap_parse_script("downscript", tap->downscript,
+>> +                             DEFAULT_NETWORK_DOWN_SCRIPT);
+>>   
+>>           if (tap->ifname) {
+>>               pstrcpy(ifname, sizeof ifname, tap->ifname);
+>> diff --git a/qapi/net.json b/qapi/net.json
+>> index 8f0915c4d86..ada0329ef9d 100644
+>> --- a/qapi/net.json
+>> +++ b/qapi/net.json
+>> @@ -399,15 +399,19 @@
+>>   # @fds: multiple file descriptors of already opened multiqueue capable
+>>   #     tap
+>>   #
+>> -# @script: script to initialize the interface.  An empty string or
+>> -#     "no" disables script execution.  Defaults to
+>> +# @script: script to initialize the interface.  An empty string
+>> +#     disables script execution.  Defaults to
+>>   #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
+>>   #     system configuration directory at build time (typically /etc).
+>> +#     Using "no" to disable script execution is deprecated (since
+>> +#     11.2); use an empty string instead.
+>>   #
+>> -# @downscript: script to shut down the interface.  An empty string or
+>> -#     "no" disables script execution.  Defaults to
+>> +# @downscript: script to shut down the interface.  An empty string
+>> +#     disables script execution.  Defaults to
+>>   #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
+>>   #     system configuration directory at build time (typically /etc).
+>> +#     Using "no" to disable script execution is deprecated (since
+>> +#     11.2); use an empty string instead.
+>>   #
+>>   # @br: bridge name (since 2.8)
+>>   #
+>> diff --git a/qemu-options.hx b/qemu-options.hx
+>> index 200949655ea..7b9a14f5b38 100644
+>> --- a/qemu-options.hx
+>> +++ b/qemu-options.hx
+>> @@ -3014,7 +3014,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
+>>       "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
+>>       "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
+>>       "                to deconfigure it\n"
+>> -    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
+>> +    "                use '[down]script=' to disable script execution\n"
+>> +    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
+>>       "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
+>>       "                configure it\n"
+>>       "                use 'fd=h' to connect to an already opened TAP interface\n"
+>> @@ -3553,7 +3554,9 @@ SRST
+>>       ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
+>>       ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
+>>       configuration directory at build time (typically ``/etc``).
+>> -    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
+>> +    Use ``[down]script=`` to disable script execution.
+>> +    Using ``[down]script=no`` is deprecated; in a future version it will
+>> +    be treated as a plain file name.
+>>   
+>>       If running QEMU as an unprivileged user, use the network helper
+>>       to configure the TAP interface and attach it to the bridge.
+> 
+> You mention what "no" does only in QMP documentation.
+> 
+> You mention what "no" will do in a future version only in CLI
+> documentation.
+
+Inconsistent, right.. Will touch up.
+
+> 
+> If information is useful enough to justify the space in one place, it's
+> likely useful enough in the other place, too.
+> 
+> Up to you.
+> 
+> Reviewed-by: Markus Armbruster <armbru@redhat.com>
+> 
+
+
 -- 
-2.43.0
-
+Best regards,
+Vladimir
 
