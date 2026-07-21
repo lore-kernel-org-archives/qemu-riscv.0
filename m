@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6455CC44529
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jul 2026 12:20:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4E5C44529
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jul 2026 12:21:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wm9Sq-0001yD-5e; Tue, 21 Jul 2026 08:20:49 -0400
+	id 1wm9Ss-0001yu-4i; Tue, 21 Jul 2026 08:20:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wm9So-0001xf-Sz
+ id 1wm9So-0001xj-Te
  for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 08:20:46 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1wm9Sk-0003mS-HH
+ id 1wm9Sm-0003mk-QM
  for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 08:20:46 -0400
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-cbb8b54fcf8so36078a12.0
- for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 05:20:41 -0700 (PDT)
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-c981c2c37cbso6609423a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 05:20:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1784636440; x=1785241240; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=XXIhvTqq9Eipcf9U4LdfAxixy8SIppPnstIw922mqg4=;
- b=SOsmK6ITznqW74AO2czBgJuPvJ9+mLNATGncLjrtv9yZ2x7YtA+bb9rmnN1UZrJ3JY
- eQnN6IDMdzh5AShZJg3YwCeRj0XKR1j0ABAgdl6g3BhrRFTOU2JYaciQEs8WKbtqGLlt
- cYY4j8p8ILiMCEjoQ2wI47Q5KNoVPX958BX1kxMmdiJQOhrzcg1jxwHB34c0lSwwwwZt
- 3w83OOwn52YRz6OUfXQW3MhKmIsqLvvAnaK1wBYzc/pKIso0ak/skmRZTDgRUZs6Pak7
- UcMmhI+yah7YxxmQxoKSbx2ggNR4DhzC6hifQANAiYXl5Da1lRZ1zEzfw3mOtriOi7x9
- O2Zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784636440; x=1785241240;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=sifive.com; s=google; t=1784636443; x=1785241243; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=XXIhvTqq9Eipcf9U4LdfAxixy8SIppPnstIw922mqg4=;
- b=WBYhBJcmKGIJtnL7e5URkzY0PTGKf6Cx7niP4PaoS6gi7o/8ujirVgLW1YLytaFLTM
- RhkNovFgLs4xu6L4bAzw/PXFJsrPAdBmLVpvAmogm6REEwIdL00vJsWFjbNhXtwG0jZ8
- Z4iTJRfhtfbE8XihalKIdKlSkoCU9+wiloMIkpHch+mmK6ydBQoaHyLnpKKqC2WP3xET
- gAzED1NNL9TXyueBQEFvDDnRY2dPrG/+d3QvepVW+8HDEpWqZlNpqA/0ox/dSh/R3NeA
- tlwj0b8bCw6eLsSSXENLD5D2G+qFtyRekAeaNhYj1o1mFSu+xSVfWem0mdJaznC8kYGh
- 2dqA==
+ bh=JIo0Ig4EH8UXlTV7LuZYL76vFSc4wKXBvyZXP0Ii10c=;
+ b=cDkMfM4+hohHErdK/IIhpnYNNVrwKkUPqtVl+qBXTmV3JKfEjDBawYSMH+TnXnmLNb
+ Y4ETjmou4P92Iznc0SWZILhqW3Mz7exSmCJEpgQhG3fAGu6jru9r8/wrOKqDcAq6P98J
+ oH8+TOiqHqP2Iv0Or/9sygNf64OnCb9I6fosG19XgdudmwgpdWKMglkSWc0YvvL1zEIG
+ SKt3QK8m8CAdIzKZ0QIoyZ2kaOFfXhJhIzMXamy9mODnzViiXM3wrowUHCuT1XwP7vlP
+ 87N+5crpEjgPm0tWCUDhqT5KQuvF2gcSdrJ2kN2gemBjknAP1z1OPFEvndQwdO60LoZH
+ 0rwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784636443; x=1785241243;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=JIo0Ig4EH8UXlTV7LuZYL76vFSc4wKXBvyZXP0Ii10c=;
+ b=j3RokMwbpBEtKjXs3yUiygdB61oQerZfwjdCMgBAyaQUvmpcsOqKkMx6vuZSNdjj8D
+ WdJ1o35DAMf/jWE5cR0p9ivcFI3AU4Yx0hO9NCeqTz5Conh+17Wiy7qTsTgj4Pfkh8SO
+ r26LkbjW0pJj0v5sY7+poxiXXpgvIoP77IgUEXqclOoHEmEZljWjfJzuO1a9n/fnTV8S
+ ZJSCo0gGsRMLejMrzYk20yUydZHBwT6FvJRryuoHxrVoGjHLDxCKmwddfG1CocQq2tdq
+ RrzDuw+JNmdNrljb7wccF7iB5YgB8/Iv2eQbHTpd2FDvyS7GdtIaWGaeED3hCNL1ubKm
+ k9SA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rou5QXddLYyN/58EdYRmpSIcVrCk8RMlEeigzqiYrLgUDIkcZH0Z5VlHacV2LqCr0PDUd/BNV4FUt3/@nongnu.org
-X-Gm-Message-State: AOJu0YxLr33jlDTpwGjVLAaY/yLXCe7jk0uQbd0/xX7TzWdHJeVRGRqk
- a07+troKJFZrqB+5lAeQ2TOSt8UCGJ7EPXs5zaUVkOnlBNOgJ2uxAIob+TXMNODOUlg=
-X-Gm-Gg: AfdE7cmh635gWTCUDj4PSwmTcb0WDwtVilZtdxWSbFSi4y1q+SwiLY4TA9Mc/onuJDu
- Y81s8WI3kJfYq7LUm5cAGK+P+R7iKjK4z5hBQ6uop/OBhi4DTiszlEjvf1fmbIW1HSmc02JCdVa
- QlQsTArXcCekC+YnkhYt0qE5P1Phxkpco+Z9uhE91PDxz905uG0rWy5iEAvJfpFz0gjgkmGxNVV
- LVRwTiCiQJoynEiAnLpNsJE09qTV7Cxs9eyG2NT4B4X5vog7dQqAfRoqxPeX8UEPIHwjKRyfG0u
- cRZTuD1xsRq0yVhsiTaqjc8dGIIMBb4Th84Qty1vYaAWuu587BOPRN1v0bGY2XVJtXjkopAWjXc
- lgDEMq2cMh4Sb416YOratqzXxnfO5N7xY5GzP4GB5WDec3ID4iCaQxoGowli26IFVJEgVrfy6KP
- +SdBDHF5EukSiPb5bl3JSv+OF1+07OX8LlToTZzawAiXIG2hFLREgjAFwmScUbXahf88jXcUEOy
- yCH3Q==
-X-Received: by 2002:a05:6a20:9397:b0:3c3:83e8:c211 with SMTP id
- adf61e73a8af0-3c3ada1fe89mr19704643637.63.1784636440444; 
- Tue, 21 Jul 2026 05:20:40 -0700 (PDT)
+ AHgh+Rq1mwvm4w/9adP6vVb+higOZIbzMjhSlk4SXycAD3GQQw5qO+eI1C8xV/Y2fVhosIS6lITFi/MF9bfh@nongnu.org
+X-Gm-Message-State: AOJu0YwXS8eGyyn/xivMjkCJgDXtJkVom+YVPJnLWt767HM3GZtUmDGt
+ xMPXXNTrWds54DsnfP5zLJWqsywpVVm5B8bPNlonGb5C9fZSoZ3Jkqes+dhCQWl+26bwHtLpkm2
+ MNaUf
+X-Gm-Gg: AfdE7cnf1ulk2bGE1wGiHXu3vLNEneurL9lDk/mJFoUZ4eDsETViTEOI43BanndyPN/
+ f7gTD0oFehzjk1J2nqDPx6tquIh0diDBiQacV0ax/Ujx4/HowmVTFJWGSMEdNHF3LZkAuntEnie
+ JQlssQsg4ANx0SYUYW+TJxNgh9YkdDWvC+Z23uijIJ2T5x3XXhJOsWz+83DQOnvH2iQ7+lYrhD6
+ CBRcqiEJaGbKs3DfYcF/V7bRtCg/JtNNQ1Lq1vDlAV2qHfRQzvwELu60GzA/6oSrPfKb3akXMtL
+ NQZtaXZ+pqEF3Y/QVoXAan1GbmXqQ4dbTtUs4eXm8F8DGHK8qw1LYJ3TBb2jeahFdjCKgSpWWtz
+ FqNWOwmgIQAu46+jZU6j0kRoDg57eiltab0OwAuMEnXz5De6hhMd0lJ6iTmOxFOuo6b+bnjSuvo
+ rzCuSv1WN5i2JZEPtJXdccdhAxWg8D81ahhwuap35Emx0s4b2j0jxWmQjpVjGM7GVDeNsUTUvo/
+ 7ckaQ==
+X-Received: by 2002:a05:6a20:9397:b0:3c3:8de3:8eee with SMTP id
+ adf61e73a8af0-3c3ad95142fmr20595025637.61.1784636442994; 
+ Tue, 21 Jul 2026 05:20:42 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cb517aad95dsm5904568a12.7.2026.07.21.05.20.38
+ 41be03b00d2f7-cb517aad95dsm5904568a12.7.2026.07.21.05.20.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Jul 2026 05:20:40 -0700 (PDT)
+ Tue, 21 Jul 2026 05:20:42 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -73,23 +75,26 @@ Cc: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>
-Subject: [PATCH 0/5] target/riscv: Add SiFive Xsfvqmaccdod/Xsfvqmaccqoq int8
- matmul extensions
-Date: Tue, 21 Jul 2026 20:20:28 +0800
-Message-ID: <20260721122034.1567146-1-max.chou@sifive.com>
+ Chao Liu <chao.liu@processmission.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH 1/5] target/riscv: Add cfg property for SiFive int8 matmul
+ extensions
+Date: Tue, 21 Jul 2026 20:20:29 +0800
+Message-ID: <20260721122034.1567146-2-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260721122034.1567146-1-max.chou@sifive.com>
+References: <20260721122034.1567146-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=max.chou@sifive.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,59 +110,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patchset adds SiFive's custom int8 matrix-multiply vector
-extensions Xsfvqmaccdod and Xsfvqmaccqoq. Each extension provides 4
-signedness variants (unsigned/unsigned, signed/signed,
-unsigned/signed, signed/unsigned) for a total of 8 instructions:
-sf.vqmacc{u,,us,su}.{4x8x4,2x8x2}.
+Add the CPU config properties for SiFive's custom int8 matrix
+multiply vector extensions:
 
-The toolchains support Xsfvqmaccdod/Xsfvqmaccqoq extensions:
- - LLVM 18.1.0
-   - llvm/llvm-project#68295, commit d1985e3d1fed, merged 2023-10-20.
-   https://github.com/llvm/llvm-project/pull/68295
- - GCC 15
-   - commit 139bd3198a73 ("RISC-V: Add the mini support for SiFive extensions"), 2024-11-17.
+- Xsfvqmaccdod: 2x8x2 int8 matrix-multiply-accumulate operations
+- Xsfvqmaccqoq: 4x8x4 int8 matrix-multiply-accumulate operations
 
-References:
- - SiFive Int8 Matrix Multiplication Extensions Specification
-   https://www.sifive.com/document-file/sifive-int8-matrix-multiplication-extensions-specification
+All instructions of these extensions require the Zve32x extension
+to be present whenever either extension is enabled. Validate this
+in riscv_cpu_validate_vendor_ext() alongside the existing vector
+extension validation in riscv_cpu_validate_set_extensions().
 
-Frank Chang (2):
-  target/riscv: Add SiFive custom int8 matmul extension implied rules
-  target/riscv: rvv: Add SiFive custom int8 matmul instructions
+Signed-off-by: Max Chou <max.chou@sifive.com>
+---
+ target/riscv/cpu.c                |  2 ++
+ target/riscv/cpu_cfg_fields.h.inc |  2 ++
+ target/riscv/tcg/tcg-cpu.c        | 16 ++++++++++++++++
+ 3 files changed, 20 insertions(+)
 
-Jason Chien (1):
-  disas/riscv: Add disassembler support for Xsfvqmaccdod/Xsfvqmaccqoq
-
-Max Chou (2):
-  target/riscv: Add cfg property for SiFive int8 matmul extensions
-  tests/tcg/riscv64: Add tests for SiFive int8 matmul extensions
-
- MAINTAINERS                                 |   9 +
- disas/meson.build                           |   3 +-
- disas/riscv-xsf.c                           |  79 ++++++
- disas/riscv-xsf.h                           |  18 ++
- disas/riscv.c                               |   2 +
- disas/riscv.h                               |   1 +
- target/riscv/cpu.c                          |  21 ++
- target/riscv/cpu_cfg.h                      |   5 +
- target/riscv/cpu_cfg_fields.h.inc           |   2 +
- target/riscv/helper.h                       |  10 +
- target/riscv/meson.build                    |   1 +
- target/riscv/tcg/insn_trans/trans_xsf.c.inc |  98 ++++++++
- target/riscv/tcg/tcg-cpu.c                  |  16 ++
- target/riscv/tcg/translate.c                |   3 +
- target/riscv/tcg/vector_helper.c            |  74 ++++++
- target/riscv/xsf.decode                     |  30 +++
- tests/tcg/riscv64/Makefile.softmmu-target   |   7 +
- tests/tcg/riscv64/test-xsfvqmacc.S          | 260 ++++++++++++++++++++
- 18 files changed, 638 insertions(+), 1 deletion(-)
- create mode 100644 disas/riscv-xsf.c
- create mode 100644 disas/riscv-xsf.h
- create mode 100644 target/riscv/tcg/insn_trans/trans_xsf.c.inc
- create mode 100644 target/riscv/xsf.decode
- create mode 100644 tests/tcg/riscv64/test-xsfvqmacc.S
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 5a82e6563b..e643d7c7af 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -298,6 +298,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(xmipscbop, PRIV_VERSION_1_12_0, ext_xmipscbop),
+     ISA_EXT_DATA_ENTRY(xmipscmov, PRIV_VERSION_1_12_0, ext_xmipscmov),
+     ISA_EXT_DATA_ENTRY(xmipslsp, PRIV_VERSION_1_12_0, ext_xmipslsp),
++    ISA_EXT_DATA_ENTRY(xsfvqmaccdod, PRIV_VERSION_1_13_0, ext_xsfvqmaccdod),
++    ISA_EXT_DATA_ENTRY(xsfvqmaccqoq, PRIV_VERSION_1_13_0, ext_xsfvqmaccqoq),
+     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
+     ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+index 9eb47af0a7..73448fab5e 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -156,6 +156,8 @@ BOOL_FIELD(ext_xmipscbop)
+ BOOL_FIELD(ext_xmipscmov)
+ BOOL_FIELD(ext_xmipslsp)
+ BOOL_FIELD(ext_xlrbr)
++BOOL_FIELD(ext_xsfvqmaccdod)
++BOOL_FIELD(ext_xsfvqmaccqoq)
+ 
+ BOOL_FIELD(big_endian)
+ BOOL_FIELD(mmu)
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 4af5cd9c73..c90023a212 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -417,6 +417,16 @@ static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
+     }
+ }
+ 
++static void riscv_cpu_validate_vendor_ext(RISCVCPU *cpu, Error **errp)
++{
++    if ((cpu->cfg.ext_xsfvqmaccdod || cpu->cfg.ext_xsfvqmaccqoq) &&
++        !cpu->cfg.ext_zve32x) {
++        error_setg(errp, "Xsfvqmaccdod/Xsfvqmaccqoq extensions require "
++                         "Zve32x extension");
++        return;
++    }
++}
++
+ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+ {
+     CPURISCVState *env = &cpu->env;
+@@ -794,6 +804,12 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
++    riscv_cpu_validate_vendor_ext(cpu, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return;
++    }
++
+     if (mcc->def->misa_mxl_max == MXL_RV32 && cpu->cfg.ext_svukte) {
+         error_setg(errp, "svukte is not supported for RV32");
+         return;
 -- 
 2.55.0
 
