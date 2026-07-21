@@ -4,147 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29101C4452D
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jul 2026 19:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F2A5C4452B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jul 2026 19:12:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wmFjT-0005qY-I7; Tue, 21 Jul 2026 15:02:23 -0400
+	id 1wmFsg-000114-LZ; Tue, 21 Jul 2026 15:11:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wmFjN-0005hY-VD
- for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 15:02:21 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wmFsf-00010V-1d; Tue, 21 Jul 2026 15:11:53 -0400
+Received: from flow-b2-smtp.messagingengine.com ([202.12.124.137])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wmFjK-0000Xf-Aq
- for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 15:02:16 -0400
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66LH2UWp2548696
- for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 19:02:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- QQcit1q4zrxsxP8H4kYgkzTUZRdtT6xIydcTKqebWvU=; b=e4/tefLK+6R/51Z4
- dLO9L9vBGZMhkYt/bv3m6l5xdzBNjR4oV3BnmcqhtudhYR5moX02s0epjYH9tDtG
- HzNalB3gc860XVv5oEpZX/uKsFrUcdjSMEB+h4AErsMJwLx637G+nAPBZl55rf7i
- lIU7XWo1RzEQej/dxDzq7r6XqCaTMyGM8DWKPOVsONbKYbpzt9Z8KHWMytFeFYtV
- XqBBzQYvKsNN0Vf0pLDvI1pH0WGGujzgNj8Lvbf4H9SyCBbdDWfUPrjCeylm71CS
- EZV56pKfoy0miIGEd2VbL8wxxi1mUCWxLPJXdtb0z36pujf35Wv3A0xu6x4pmvTr
- Urf5gA==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj6r3jhn1-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 19:02:10 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-92e5fc4c7e9so1061131385a.3
- for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 12:02:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784660530; x=1785265330; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=QQcit1q4zrxsxP8H4kYgkzTUZRdtT6xIydcTKqebWvU=;
- b=CyJp+pBfdUt/KyLAR2nlzV5x3d/zC2UdMtpKD4yGmeBt5aPYsN1lMQwC9nTowBHvuq
- DRezXwcNh8VJE2hifwYj5tCPupOHjVJVAnc2DGFlN6R8lXYqxALIMNeGStIprNuH36pL
- fCqs4jdqhlkFtv39NLxkDEpyt/B6NshNpTbh3kYUfn7GJqgM22hEnvyQNVbYMwbkqQAz
- 74KANjFpGA5gzV9O2beBirx5gjp9IJnELkr+EjbkJbq053QYU3NfVOrjjS7nboUBe/UK
- qEgL2CZX2B3+t4VG5fxJpTQ+CuA/GJyxrvQmd8etiKpbsZVYgmqn/RKEvKyJt364BJ9A
- sIRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784660530; x=1785265330;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=QQcit1q4zrxsxP8H4kYgkzTUZRdtT6xIydcTKqebWvU=;
- b=VTmwTBk2Xw+ai/kgcGLKhecMRE/CHhJNhJpr2JjNEw3LT2DbqtC1GaF1cGXz2o44Pu
- AhKazWLx6rlpnoy6Pr0eDSGM2XQzIsG0G0PqqvIWfP0vELLtKF7MPBMmLJ1nCC1j3ywn
- rK9NpvubxQUYopVQY/kyG7mrd2zVu1NR8R78zab6jOlhpCx2f1Wnei1GWtxOHY+rk0WS
- CBMWRC+Bd2Kl+2nz0ZlRnzqFtA3Lsh0GhgD3vwA6GQ0E5YcMLeV3XpeNkLvx+WHJXS6Y
- cJqm4fFw8ewU7v3Aai/Duv8sUmwtaO0aHOkv21g1phajnT+NenLOZuS9bXQyfqLnlJga
- f1iQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RoKdUGmNlQXiQiNoSUOeJs6SjGbCBttb+pNGZaKkfa3xo80xcbw2gQD1FCqSeGmRebqj5MGpiZRvFfy@nongnu.org
-X-Gm-Message-State: AOJu0YwYxBKgZA/aeGB/q0pwQftqyUmhFrzFfzjBHIfGurDJ661cbGzz
- kl6XAF+knZrf3RDFDeY/IWGZoYGrCft3lRYwwA+YmErFM7Jv5/rPNxCKjOGN5k0OnrFD6Fx+k8z
- Dy6dkMPr90g8l6vGT4zEdUxMUN7lKBRstCJr3sqm/9/42aWq3t0tTFSXRkw==
-X-Gm-Gg: AR+sD12T/CPvWeen5RyaHK+sQ2yUdgEh057fJixZ11eXjLnTYg7VNlOQDWAT9tqXIFb
- DmAJ1odRTQacjfH5NRXK+94LEE2uNDmeg1ogni9IVBerf+RQbD8R8UgIP6Fzqphc2lGGDFZ6vYw
- CQX9o/Fn0prdQnRbZ9++HQdcNaD1jGE3iJAmoSpFIB+n0kuOwwlN9C47l1EjiR3x9LyUM1srlbr
- atJ6sfQohvB4pHhlff2XgPRVDBoKFLpwiKV9r20a51Eux15EvrRxbYP1GVS/82Kd0mbYHtgUcUJ
- yqgMFnIWjc+Gd4JNEsUDx1ZYhfOkFM2+z/abbwurKsdCmI9ZXGPb+0/fKEzPzkUTV754+ET5CFH
- Dskm+JwoA/S9zmzKBaVDhoNxZTn5XBFAIBPYBxQ==
-X-Received: by 2002:ad4:5ae9:0:b0:8e9:f62b:8fa2 with SMTP id
- 6a1803df08f44-907783dded3mr204376536d6.55.1784660529702; 
- Tue, 21 Jul 2026 12:02:09 -0700 (PDT)
-X-Received: by 2002:ad4:5ae9:0:b0:8e9:f62b:8fa2 with SMTP id
- 6a1803df08f44-907783dded3mr204376116d6.55.1784660529258; 
- Tue, 21 Jul 2026 12:02:09 -0700 (PDT)
-Received: from [192.168.68.105] ([152.234.122.204])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-907ba8b92c0sm2995116d6.6.2026.07.21.12.02.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jul 2026 12:02:08 -0700 (PDT)
-Message-ID: <7c85ba9f-a9ef-4880-9905-61f6397c23b4@oss.qualcomm.com>
-Date: Tue, 21 Jul 2026 16:02:05 -0300
+ (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
+ id 1wmFsd-0001Ti-8n; Tue, 21 Jul 2026 15:11:52 -0400
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+ by mailflow.stl.internal (Postfix) with ESMTP id C4240130024B;
+ Tue, 21 Jul 2026 15:11:48 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-02.internal (MEProxy); Tue, 21 Jul 2026 15:11:48 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
+ t=1784661108; x=1784668308; bh=NO/Bf4Hy+riUTl2qe/TbgQ7CWxbCHlQJ
+ 5TwBNd0+lN8=; b=RNL1jnOKrhjM917Qf60Bnp0vytJub9B6oaKxWAAOTzNymNuU
+ +ubRKVHZw2+HqRcQJWfanw0EQupJcmTkDOBa23Fqb9B6aa3FZIaipGSjo4AkIK9Y
+ hBNx+k6f+p+9ieLcLVx5oZ2+DRdGqV500VmcvhBrNAOeEASzdlKC5eoA42K+PoIt
+ 0m1NBhNb+jlxQXtqfiTdqc4pkYnlryYsVv9GJ7srwEl7E7Lp40MBRnarjXhAg/Hb
+ uAq/+SB/TmMWtoJkn1PmihS5EtVxh5rJQ6iMCN/ASGsHT04pUAMTzH5y+EQGD6/H
+ l7wQ8CF92uxnfJgnp0rK52Qim9IPiGCzXMf8iw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1784661108; x=
+ 1784668308; bh=NO/Bf4Hy+riUTl2qe/TbgQ7CWxbCHlQJ5TwBNd0+lN8=; b=a
+ O+FGUW+XfHKQxMtNuuSHrpbbpuddEhOJlKK6LheCH7tuWi+pH8hw9vENJJpbId2I
+ D4SHvC1U08VxYfYNKHUSu1skbTCWJJg9R4k0pgX/QEC1tVy1o+dtCN8ybLF9bqgi
+ Qmri8rJ3/boiPDDNafbTjWzZOtgPXGjowAV4pe5XpcU7oPoMwAdFAMqtnh5AWhNf
+ XP7NBzJDU+WRvjmrp8C1vDMk5oOoxYm2H1qsDoQcJFm+j60r9B/x8lM7S7hlO/vP
+ DN+MnY9OXo5y3peBPZG8HW1V+jYeQUCO7kr7BXoJvTxY1HigGAoTExePI6pfgIzq
+ ZBT+ikdxNsvHTmlZeaHhQ==
+X-ME-Sender: <xms:dMRfasWdwwZ7zM2aHhDTczo8SjLXQfHEhpWVJKxY-xMH3xEugZeQWw>
+ <xme:dMRfahSZVHcahTqVEiDs4CMJBZpyuODGdQzDBTRlDQmbG6KpC6jNrCVm3lly5aFpO
+ OXd07cJgtiWYjJ5HFvVQUn3cEtpuGiDc4bRtZlDN7htS7Wl-ph9Jw>
+X-ME-Received: <xmr:dMRfaun5sY7qv34raHEoxKfTGuv1a3HL3gU0yZ6tnM4yfRv1C4ciBuW7mudh63MYggwPgRSMql5H0FR2KjiZnnLTWrqJ2rAOrsqO4TtwvTdkcClYZ8zq>
+X-ME-Proxy-Cause: dmFkZTGDu7H/ySR8IrV9f0/NN4Nt1zS6GSOHhNpq6s+dLsH+eTaIhgfsq7Hlq6TR8mVXen
+ +IY5HkfX2erXSZs3qi5dVJ+hpT3SzUm8HRPHRyMhcpDLDaW1aXZSF6sdsfzXzyFDpMfwm4
+ JyzKki2h0hZQdaLvZ9bcNakoIvdcVH0BjSxctHZlmkH3XONi9D4DmnyyeBp30dgsCf5J+D
+ hC1y9alDAOJ1jcXvmBjumzIr7nOplErO6CLmhJovxd3XcNsyQClAYtM3AvpkW13EUgkyx6
+ YFIkoKrUvHhcw7TM5m6HeHnSLIiMhblD5EnvjyeuLzv1Jlzxe0YqQg1fwVETx7x+susxdr
+ IK3EtuMZ8dp8QFZIPilINBOUu1IIYIMjeFUY+3AU6h2uRHXErTg0Ee+tZKxFWuZPnqJsse
+ 8Q17Q1AjsgN4Hpt8gYOSInT/ZjMdmNSvVtIkBqWOGxtHMAoKaM4AN8gG1LcS/iKcpSC6G2
+ X+82RA0QKBSfyK0Y4avQAmgegF+DcJM9SAXeBElFUQonaAbNo3p/fzJtrVh9+lMxWymIMC
+ y/8mIbVSX2BFGEkU5xgze0vP5oLVmITZ+NJQV6ZBiiRdzuJm/KCQZDlrueCuoK1W1E1qks
+ iJtYRu3sqmBuESCN5JR0UMXtlolgjP0t10/ukNPdRtNEotMvcNrRZxvbPWiA
+X-ME-Proxy: <xmx:dMRfav4daGsgEs6vH3alKYzeRWSXTLXmgiQ4-bUjWqcEFFGbzDIACg>
+ <xmx:dMRfashUSaREn91mmrbFJ4Dj8VOMlDAOQOnn4GEbQQCqfndU6b_yAQ>
+ <xmx:dMRfakHELfyy28rr-vzyNcicPhnv_uKLzX2RaeSTaQSOk5S5rtJ0ug>
+ <xmx:dMRfaqSzR1vJCtuy-5VsLuNKjOBxo6FfuWJLAqmYuVHiYSoEr4zxgg>
+ <xmx:dMRfaifHRYQ1_wr6ArCzs627ebxyQv4orDohrFIaD0SGtpjvEzKrYkN7>
+Feedback-ID: ifd214418:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 21 Jul 2026 15:11:48 -0400 (EDT)
+Message-ID: <28c36627407ccdfb548f4410dc2e798cb1c25bfd.camel@alistair23.me>
+Subject: Re: riscv & qemu-stable (was: [PULL 0/4] riscv-to-apply queue)
+From: Alistair <alistair@alistair23.me>
+To: Michael Tokarev <mjt@tls.msk.ru>, Alistair Francis	
+ <Alistair.Francis@wdc.com>, "alistair23@gmail.com" <alistair23@gmail.com>, 
+ "qemu-devel@nongnu.org"	 <qemu-devel@nongnu.org>, QEMU RISC-V TCG CPUs
+ <qemu-riscv@nongnu.org>
+Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, qemu-stable
+ <qemu-stable@nongnu.org>
+Date: Wed, 22 Jul 2026 05:11:47 +1000
+In-Reply-To: <e375775e-9450-4725-b124-e5a6d3b50ac9@tls.msk.ru>
+References: <20260714040758.28332-1-alistair.francis@wdc.com>
+ <a6c5b847faea8793440e4e0aa7334e7b02b838b3.camel@wdc.com>
+ <e375775e-9450-4725-b124-e5a6d3b50ac9@tls.msk.ru>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.2 (by Flathub.org) 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Regular QEMU RISC-V Call
-To: Alistair Francis <alistair@alistair23.me>, Joel Stanley <joel@jms.id.au>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, qemu-riscv@nongnu.org,
- Max Chou <max.chou@sifive.com>, Michael Neuling <mikey@neuling.org>
-References: <6315a319-19d9-4533-83ed-eaba9c0b29d5@app.fastmail.com>
- <CACPK8Xe9JVggXzX9kku-zm7RYzM++fqcr=fx-MdkKiViHdiMYw@mail.gmail.com>
- <ad259828-65b3-4c4a-bf3f-73cc195c19f5@alistair23.me>
- <68917b26-32a2-49e6-94ea-1ca587948f23@app.fastmail.com>
- <e282de71-5390-41d8-8a8d-6156aae01079@alistair23.me>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <e282de71-5390-41d8-8a8d-6156aae01079@alistair23.me>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDIwMCBTYWx0ZWRfX8nTjAmifHjvJ
- hU+ZJMFozpL3w4x9Uhx5dNzwGR1baKbBMVkDxR/sVHPZvtik4yQJ7FhqdGmPea1x/nLwrmAGJEL
- mHiUkPpWejdINCyIYwzJmkX6zWnUHpVk2NP+Wbk3v9bJk/P/ps0zIVu9SSJrYcH7HxrdD6ODCEz
- zanpBWkzGNhAxQfBNRiJNW7jv8SCedccb3/DQo1QmpKTyfb7ajM6Yj55Yd45Jpz9RdENSFLioDp
- /BCHn4KA8it8MbqO7szE1611ylVx9zYpK8q80JujBVPNCxFi1jjkMx99KqqZHZ6rCX0ND6A6G4n
- SqCuY/UmDKLc9PDeNYwYxa6jnEXazWc3i6w/UeIQTYgnFLCrhMGtzZfhSzCu/0YRJdoU8lD5yJS
- jPGPzEBLtPmJraLmhXcnT1ppFn1qRWg4zlpcXKYU9CP+TQ6WEE0TZ8ziS/qdobsT+J5mneraQDg
- qm+ok6saxhfPmJBnDdg==
-X-Proofpoint-ORIG-GUID: qFci9-CzHd3C0eCrO8HFpjihK3vkK3LT
-X-Proofpoint-GUID: qFci9-CzHd3C0eCrO8HFpjihK3vkK3LT
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDIwMCBTYWx0ZWRfX4I0mF8+fM/7l
- N+M6xBEtj6LpIufuBTd14phuJMMI/VDOnkVLYPC8Mo8GehfxWYRfTqFUqLLl7eZ3dnW/dUX7o7G
- YZBTSr1ssHYJv3PZMmKbKJztM32P4Jc=
-X-Authority-Analysis: v=2.4 cv=SIRykuvH c=1 sm=1 tr=0 ts=6a5fc232 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=yMhMjlubAAAA:8 a=VwQbUJbxAAAA:8 a=NojvYFcnAAAA:8 a=geJiPS1HS6w1hIBJGI4A:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
- a=D5talKjwNa0n2BCLPXqP:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-21_03,2026-07-21_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 spamscore=0 phishscore=0 clxscore=1015
- suspectscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210200
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+Received-SPF: pass client-ip=202.12.124.137;
+ envelope-from=alistair@alistair23.me; helo=flow-b2-smtp.messagingengine.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -161,125 +111,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Wed, 2026-07-15 at 15:30 +0300, Michael Tokarev wrote:
+> On 7/14/26 07:19, Alistair Francis wrote:
+> [..]
+> > Assuming that we don't backport plugin fixes then nothing in this
+> > PR
+> > should be backported to stable.
+>=20
+> I was afraid you might feel uncomfortable, after recent my emails
+> about qemu-stable in context of riscv.=C2=A0 But everything I'm trying
+> to do are attempts to make things easier, not more complicated :)
 
+Not at all!
 
-On 7/21/2026 3:37 PM, Alistair Francis wrote:
-> On 17/6/26 09:18, Alistair wrote:
->> On Tue, 16 Jun 2026, at 8:35 PM, Alistair Francis wrote:
->>> On 16/6/26 16:07, Joel Stanley wrote:
->>>> On Thu, 11 Jun 2026 at 13:52, Alistair <alistair@alistair23.me> wrote:
->>>>> For the time, I'm picking Wednesday the 17th of June at 10AM AEST (UTC+10). Hopefully that works ok for everyone. If it doesn't let me know and we might be able to move it around.
->>>
->>> That means the meeting should start in a little less then 13 and a half
->>> hours! I'll send out a Teams invite tomorrow
-> 
-> Hey!
-> 
-> I realised that it's now been a month. I leave for holidays in a few days, am currently recovering from some sickness and don't have any agenda items. So let's skip this month and start again in August
+I just feel guilty that you are picking up the slack and trying to make
+things easier/clearer
 
-In fact the meeting was yesterday according to the calendar invite Palmer sent
-:D figured that ppl forgot about it and I dropped the call after 10 minutes.
+> Maybe I wanted too much, asking if there's something for stable
+> in every riscv pullreq in the past :)
 
-If we're going to stick with Palmer's existing invite the next meeting will be
-August 18th 10AM UTC+10.
+I felt that was just because I was doing a bad job of indicating what
+should be backproted.
 
-As an agenda for next call I have a couple of topics:
+>=20
+> I learned about the riscv pull requests - everything with Fixes and
+> Resolves should be picked up.=C2=A0 That's okay with me.=C2=A0 I think I'=
+ll
 
-- ongoing Debug related work.  Hopefully we'll have some Debug 0.13/1.0 patches
-under review by that date;
-- there is a chance that common efforts led by ARM folks (single binary, multi accel ..)
-will spill in the RISC-V tree.  I'll talk with Phil and Pierrick later this week and see
-if there's something to do on our side.
+That seems like a good starting place. I can CC qemu-stable on anything
+else that stands out.
 
+Do others not do something similar? Fixes and Resolves seems like the
+perfect indicator for backporting.
 
-Cheers,
-Daniel
+> take it easier - pick things up for the most recent stable series
+> (currently 11.0.x), and for older/LTS series, I'll take just what
+> can be easily applied - to avoid losing everyone's time and patience
+> in long discussions about what needs to be picked up and what should
+> not.=C2=A0 As long as riscv don't have versioned machines in qemu, I
+> assume it is a fast-moving target, so older qemu is not very relevant
+> for it anymore (because besides fixes, older versions don't have many
+> required features too, developed later), and there's no need to spend
+> significant resources in that area.
 
+That all seems reasonable to me. It's tricky as it is moving fast and
+we have things like draft extensions, which makes more complex.
 
-> 
-> Alistair
-> 
->>
->> Call in details are below. Starting in 40 minutes!
->>
->> ________________________________________________________________________________
->> Microsoft Teams meeting
->>
->> Join:
->> https://teams.microsoft.com/meet/275503449279724?p=C2D0EDrqxwFb5LuRnB
->>
->> Meeting ID:
->> 275 503 449 279 724
->>
->> Passcode:
->> kS9Vg23i
->>
->> ________________________________________
->> Need
->>   help? |
->> System reference
->> Dial in by phone
->>
->> +1
->>   408-627-4258,,498330396#
->> United States, San Jose
->> Find
->>   a local number
->> Phone conference ID:
->> 498 330 396#
->>
->> Join on a video conferencing device
->>
->> Tenant key:
->> wdc@m.webex.com
->>
->> Video ID:
->> 119 833 426 2
->>
->> More
->>   info
->> For organizers:
->> Meeting
->>   options |
->> Reset dial-in PIN
->>
->> ________________________________________________________________________________
->>
->>>
->>>>
->>>> I'll be on, hopefully in the right timezone this time around. 9:30 ACST.
->>>>
->>>>> If anyone has anything they want to discuss let me know. I can send an agenda and confirmed meeting time out in a few days.
->>>>
->>>> Two agenda items:
->>>>
->>>> * RISC-V Code Policy
->>>>
->>>> https://lore.kernel.org/qemu-riscv/057cb481-c6f3-489c-aad7-1bee152fc336@alistair23.me/
->>>>
->>>> Good idea writing down your expectations somewhere everyone can see.
->>>> Do you want to raise it as a topic and we can talk it through?
->>>
->>> Yep!
->>>
->>>>
->>>> * Machine model use cases
->>>>
->>>> I wanted to share my perspective on the system emulator machines, what
->>>> they are for, who they are for, and hear what others had to say.
->>>
->>> Sounds good as well
->>>
->>> Alistair
->>>
->>>>
->>>> See you on the call tomorrow.
->>>>
->>>> Cheers,
->>>>
->>>> Joel
->>>
->>>
-> 
+Alistair
 
+>=20
+> Hopefully this roadmap will work :)
+>=20
+> Thanks,
+>=20
+> /mjt
 
