@@ -4,84 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C058AC44529
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jul 2026 07:05:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FACFC4451C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jul 2026 09:24:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wm4XM-0008Ux-7l; Tue, 21 Jul 2026 03:05:08 -0400
+	id 1wm6i8-0006Ee-Qe; Tue, 21 Jul 2026 05:24:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1wm4XD-0008SE-Pa; Tue, 21 Jul 2026 03:05:01 -0400
-Received: from forwardcorp1d.mail.yandex.net
- ([2a02:6b8:c41:1300:1:45:d181:df01])
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1wm6i7-0006EA-KW; Tue, 21 Jul 2026 05:24:23 -0400
+Received: from mail-japaneastazolkn190120002.outbound.protection.outlook.com
+ ([2a01:111:f403:d405::2] helo=TYPPR03CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vsementsov@yandex-team.ru>)
- id 1wm4XA-0008Pe-E2; Tue, 21 Jul 2026 03:04:59 -0400
-Received: from mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- (mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net
- [IPv6:2a02:6b8:c42:86a0:0:640:75de:0])
- by forwardcorp1d.mail.yandex.net (postfix) with ESMTPS id AC555807C6;
- Tue, 21 Jul 2026 10:04:51 +0300 (MSK)
-Received: from [IPV6:2a02:6bf:8080:45b::1:22] (unknown
- [2a02:6bf:8080:45b::1:22])
- by mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net (smtpcorp) with ESMTPSA
- id n4QARH1Z2qM0-rIM1JkaF; Tue, 21 Jul 2026 10:04:51 +0300
-Precedence: bulk
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
- s=default; t=1784617491;
- bh=5eXo5OMb05NzrqYIKMUqwTtEMWdHoYTOtALuQXSrorY=;
- h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
- b=nzgq2HueebqPNHf6NPcPL3668BJ4XjXv7hcR8XNDf2RCSP0uD6bMwDvTgHElsWWnF
- v27O2rTooJbPifLiEYAlEoF9TvlLonrXrucm2DT77ZdzVo0ESXmkRyee7Li5xr9S1B
- e98W4slHamru2tv9lehCt3BbWrGU9gQk4YtUgbBg=
-Authentication-Results: mail-nwsmtp-smtp-corp-main-68.klg.yp-c.yandex.net;
- dkim=pass header.i=@yandex-team.ru
-Message-ID: <3460003e-8e38-438c-ab81-730103880571@yandex-team.ru>
-Date: Tue, 21 Jul 2026 10:04:49 +0300
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
+ id 1wm6i5-0001h9-VI; Tue, 21 Jul 2026 05:24:23 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PKw+GvryZ1RMltAWFcmlV5TK6Xk6YxpKMKZlYMlGTn8OltlI9qev/j173Drjhwp4l8kbDgVWkJ6BeqtcWvgQsuM/mInrXmaVtU11+F7YIXjlHi2X5/VQXi+sCQAupgw3rrwO6cEX936Fv/9HitmkUVp7m32wLLJ/GT51lLIcSXDEDsgLckUeo0IEj3h97n1jMbxlkSp8Ud7ZQanXG7F4qKbv9jth6tpwqLlF2SQrzKGE3klvJNy4CqHOutzKAlr4PHVO7c3Oj5FCJSegKxPSTShewVDBITz5+TtctPgm6aPewc+RVezboXrALy18mg9zf0S7qzpX0//whYpU9Q4XQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EIDpaqZKFMDwcaLe7vxZo+kTDfMP6/EVxGXZs/6eaVw=;
+ b=wUBZrnHBNPOoOCC9FsT/cc0mhJqOdTVWDMQj9EW9VS8LUqsCeJgKXNZqDXzspRZfyYMWdJ3FWcfYmqhLYw4n9hv2mfei2I5a8BFKbSxn1q55EE1upONXpe+ksgLLhK1FSCP0c9QQfApnd63wsptAGRPIqTVyRsyEKhN4tQoszk1ADcL3IK9sr13TKp9w4udn4pb/Ufn0Sbi8fsy6XuRvEbxMgnvmdP3IIH7O/XlQ9tsirQXgX7cDsAKy4616HRiUnVD3Faqtj3vttaFIP8VVMXrEoltHoa3Ktn7b/74uXKbtTVy4Sfpmx7aYBlGy858ptVB6CHF3bpSEFLQrlIv5zQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EIDpaqZKFMDwcaLe7vxZo+kTDfMP6/EVxGXZs/6eaVw=;
+ b=HGm9iG2ys/PLW6gZ05sPLRkBExjdwKk1d++wMrvUW1C2/PB8PzO8vuDiQgTCscw1JH95qJNykTaddBKZg8tBoUoI5IOGAEmWvJrWSUVbny0mAwkzL3Zi3tHxz+ZltLVH2K2enEe25MlEVL41Sx+Xzs18pYfAX+DlIjOdYJyTD3Hu5zrdhLIE1SVSYu6pG9Oa0BjNn9A9HudJmpdNyCk1KbUs+0ABI7GyoKiFfzWVd/ehQVOyLq2v7rJxKGdOgnwfMPcBEj//0VBqLIMVYkH7EBkuUkM6//UmEzVscs4vEGU9Q4Nx7TpITU4TGt/7OHw36WSOBfG5y9ZtI+M0QfPv1w==
+Received: from SE3PR04MB8922.apcprd04.prod.outlook.com (2603:1096:101:2e9::7)
+ by SETPR04MB9714.apcprd04.prod.outlook.com (2603:1096:101:317::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Tue, 21 Jul
+ 2026 09:24:16 +0000
+Received: from SE3PR04MB8922.apcprd04.prod.outlook.com
+ ([fe80::3450:f139:5238:8f58]) by SE3PR04MB8922.apcprd04.prod.outlook.com
+ ([fe80::3450:f139:5238:8f58%5]) with mapi id 15.21.0245.009; Tue, 21 Jul 2026
+ 09:24:16 +0000
+Message-ID: <SE3PR04MB8922C6C73BB1982D8F66BC4FF3C22@SE3PR04MB8922.apcprd04.prod.outlook.com>
+Date: Tue, 21 Jul 2026 17:24:02 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v19 03/15] net/tap: deprecate "no" as special value for
- script/downscript
-To: Markus Armbruster <armbru@redhat.com>
-Cc: jasowang@redhat.com, mst@redhat.com, peterx@redhat.com, farosas@suse.de,
- raphael.s.norwitz@gmail.com, bchaney@akamai.com, qemu-devel@nongnu.org,
- berrange@redhat.com, pbonzini@redhat.com, yc-core@yandex-team.ru,
- mark.caveayland@nutanix.com,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Sergio Lopez <slp@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Bernhard Beschow <shentey@gmail.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Jason Wang <jasowangio@gmail.com>,
- Eric Blake <eblake@redhat.com>,
- "open list:Incompatible changes" <devel@lists.libvirt.org>,
- "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>,
- "open list:e500" <qemu-ppc@nongnu.org>,
- "open list:Microchip PolarFi..." <qemu-riscv@nongnu.org>
-References: <20260714154246.1242856-1-vsementsov@yandex-team.ru>
- <20260714154246.1242856-4-vsementsov@yandex-team.ru>
- <87pl0gsvec.fsf@pond.sub.org>
+Subject: Re: [PATCH] hw/riscv/riscv-iommu: fix U-bit check to apply only to
+ leaf S/VS-stage PTEs
+To: Andrew Jones <andrew.jones@oss.qualcomm.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, palmer@dabbelt.com,
+ daniel.barboza@oss.qualcomm.com
+References: <20260717112340.1071148-1-andrew.jones@oss.qualcomm.com>
 Content-Language: en-US
-From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
-In-Reply-To: <87pl0gsvec.fsf@pond.sub.org>
+From: "Nutty.Liu" <nutty.liu@hotmail.com>
+In-Reply-To: <20260717112340.1071148-1-andrew.jones@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a02:6b8:c41:1300:1:45:d181:df01;
- envelope-from=vsementsov@yandex-team.ru; helo=forwardcorp1d.mail.yandex.net
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: TP0P295CA0047.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:3::13) To SE3PR04MB8922.apcprd04.prod.outlook.com
+ (2603:1096:101:2e9::7)
+X-Microsoft-Original-Message-ID: <64218c7c-2039-4546-96cc-1ff344d04c10@hotmail.com>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SE3PR04MB8922:EE_|SETPR04MB9714:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9142d187-1101-4b27-35f5-08dee709d56f
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|23021999003|4140399003|25010399006|19110799012|8060799015|22091999003|5072599009|12121999013|19101099003|55001999006|24121999003|15080799012|6090799003|41001999006|440099028|3412199025|40105399003|52005399003|26121999007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UlE4enRBNzJuZXRuYzZZQkNIVFRMY0hXSDcreGE4bTI0RnlTcHR3czZSVSs2?=
+ =?utf-8?B?VTNpcVJmaEEybER4YkwzT3ZORHpwb0pIaUl6QVA4cGFxRTBnV1lHYitGUVcv?=
+ =?utf-8?B?ZmVPYWFtQ2ZFVUo4NjdNcStRdWtsaFhuSXg1UVQ4MnN2blc4Uk9hbS9jRERK?=
+ =?utf-8?B?N01qaEdONWhmbEgvK3ZOSVRJLzNMYW9VQlBBR0s2Q3drcmVvVVV5V3BYYTkz?=
+ =?utf-8?B?bXcvNWs0RDdid3RkY1hoZDExWVRCZEZabjM4ai9TL3FheEhvQzBMZ0NmdGc1?=
+ =?utf-8?B?ZDNCdUVpR05WMDNrMHB5L05EM090NERNWkZ5VkpiK0hiNHJHSGdSdGpzK2h4?=
+ =?utf-8?B?L2R5QzNzdlJLbkJ6NDFTVlUzbHBzRy9rbUNkYjNnNERQNUF5RlRCTWVTYncw?=
+ =?utf-8?B?YVZCS0xjTCtoUFJhbWdQTXhPYlI4OVprWEROR2lGOUpNbi96R01XNk5EaTJP?=
+ =?utf-8?B?QVdxZjlIRUwvVGZUNkdQQldXTDFrWVNRTVhwY2lvcVpteUcrWXZMc1d0elpT?=
+ =?utf-8?B?NjV4M0lwQXZwNXp4V1RWVDRqUmhRSkpPMGRtRndOR1FDd3gzOXhiYnV5SjlW?=
+ =?utf-8?B?RnIxd1piSzVhdkEzVFA0emFuVEZraUJXYitUS2dveGxydTVoVFFvSjlrV01a?=
+ =?utf-8?B?a1hpMXE0cU9scHZ2ODlGeUdzSTBXYUM0dmlTNU5XK3RnTFBoaUpiOC9kQ3lZ?=
+ =?utf-8?B?eUFvM3l0L0h6MXlBWkJlSGN1MGZDM2xtdDVNcDJzekFpczFRUmxkVE9qd1JH?=
+ =?utf-8?B?V0xRVTZMUCt0OEZzcFNVYzFkWCtPQ3ZRNDdsczYwSUkzcmNCelEwbGZyRnR6?=
+ =?utf-8?B?OFZacmdHaTF0Uy8yTzNWM2JWWWFMSURma1ZGdHVYNCtXdDRhTCsvTWF2Q3Fn?=
+ =?utf-8?B?SmNuaDNjZmhLNVFoM0hxc2dQT3VpWEtvZmd6ZUlzT2dxb1R0OFVjTGl3Vm5p?=
+ =?utf-8?B?RUsxQWMwN2kwZ0Mwd1BhZUJNVUlUbGRoU2xMTzNaUHZPMWxnR1FRNUVFKzFO?=
+ =?utf-8?B?cmloU0tGVXZOK0FWY1NLZnpTYTcvWjFLLzA4RTlRWjlMMmJlUlJLMU54RERy?=
+ =?utf-8?B?UDQ4QnpSR0FVUnZIZVVaZ1EvR2pKY3RpcDY4RWNvNTAxTTRMTS9UdzlWMlRu?=
+ =?utf-8?B?UDNFNWdib1dUanJCeHM2Ym5xcWhyU200ZXRpN0JRUFE5UFJVWGx5a1NnZFBS?=
+ =?utf-8?B?UU82MFVqTHVJb1RzeUVjUDVyMDdYTnZ4S1QwRmozYXU2U1FMQWxHOENpWUd3?=
+ =?utf-8?B?anV1ZndiQVRsdzFzUTF5RWthZDE2TTFKV2dxQ015RS9rT2MvT2s2UVQ0YWJE?=
+ =?utf-8?B?NWM1Z0NwT2dSNWFmQUNhQzRsdWpHUXZ0TVM1ZG9vZHhoaC9WUmY1Qjd1WGRO?=
+ =?utf-8?B?eVlRWU5JUHZ2VUFzSHhoVkxiMktZZFU4TEZFUjRTR3A2L3E2dmxtSTdDRHpG?=
+ =?utf-8?B?MldHYkRpcFdQUXZ6U09lZWFnY3RGQkdLMGhlVVVBdVp0bVB6eGU3RURQVm9N?=
+ =?utf-8?B?WWlxTG1sdHhqYlJ1a3NaeVFoZXZQVVUxN2NnUmxYR0hHVU1DTGtQODFoUGNq?=
+ =?utf-8?B?eG5YZz09?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MnBydndGUE44bjZBSFBiQWRlYy9LVmNXZ0ZGak9NSmtEV0hxRjZ1cVZrdkVF?=
+ =?utf-8?B?ckhiWmFraGVuL3ZkS1p5bHBmZzdtcmNYd2I0UkFNVUhxV0hZYWVzdkxPUHhB?=
+ =?utf-8?B?dUJOanJiQWltM0xIQmlpaFF2dWNpaWt6andBWXYyZndRWEk5M0VMd2VncjRm?=
+ =?utf-8?B?M3FBQ1l3Mi9pOFRSYVh0Z0NuU3R5aUxsTHhiUDBINlRHOVlYMldGU05ZNEpD?=
+ =?utf-8?B?dUVpOTIvUHk0WFhPTjloUWQzUGUzWUhPQ2FRbFZPUnFhczZxODFnaGpTVmg4?=
+ =?utf-8?B?b0xVOEQrMk8vQm5jRzZKTE4zQ1RUa0RtTzViZnhERHVVdHRpRStUdllZa2Nu?=
+ =?utf-8?B?UUl0MldsZFYwRmFHcThkd0ZSQ1prQ3R5Tm16Ykk1ZWJDdEZpR3pzbFZIMHpu?=
+ =?utf-8?B?Q3RBWm9zU09UT21GMEZaekw5SktlM1RTdS80aFB6dW94U0ZKR250bGIxQWJr?=
+ =?utf-8?B?Ky9xNjBvUW43VEYzaWswL20xSHFoNGZNQ2UzaGFrK3p6ZDJscVJXaFAzMURM?=
+ =?utf-8?B?eUxZaEZwa2pOYkhJTmtDUVVEWGg2c3Rsc0NDUEJ0LzF3a0dFTHhnS1NzczZu?=
+ =?utf-8?B?dHhoc0p5K215NUExbGtMMU03UTRpUnE5ZWxBMCtHWktRNzhKK3lrdzFZb2Y0?=
+ =?utf-8?B?bFVzdXY5QjdzeU1uSmxOTHJMbWM5L3I3bGVyWW05UW53L21ZR3lxaWxUb3Zr?=
+ =?utf-8?B?QW9zSTNqMkdNQUF5bmc2WEN4KzQ2dElQK3BFbms1SmxOZVBMVnl6b3JPMFdQ?=
+ =?utf-8?B?a3YvUHgrZUNUbWw2bTNxVlUzaytXQlB0TXNlN09jVW9VSjk3WEZCODllYnhU?=
+ =?utf-8?B?TnorZ0U5a08yeGp1dkM2QzU4ZVpMN05YNVhiMHNIQ1hrK2lRL01pTjk3SFBn?=
+ =?utf-8?B?MlpwVmpySVFUSm80U1c5QmtFdlNnOUVGcGhzbFZDMy9HUG11T0lYeWhpOUVi?=
+ =?utf-8?B?di9lVmFDQnNKcEQ4LzczckJEeC9hN1RrRW41YlFBZnpGNis2azlGV2ZuakFY?=
+ =?utf-8?B?WmZyaldZVHJ1WkdHQ1pIN2oxVjVrVlJrdFhWN1RISXVwRmpEMWtDZi9MQmhs?=
+ =?utf-8?B?dml5cWxpYU5ZZGorTE91MUp4UXNEUFRkSWMxNUJySnJvbThBcjBkQVZKYzlK?=
+ =?utf-8?B?Qlhmc1RML1F2MmJITThKNjlnZzA1MUhLUi9EeE9LWDJXLzM3djFRblg0R2ZE?=
+ =?utf-8?B?Um8yTlNqRW5rakVaNWJUbVIra0xjWE81NnlDVGJMV1hXTThreTNyeDlOOURO?=
+ =?utf-8?B?YWk2R1ppVTd5N2pxSXI5dnVEMHJ2TDU4NDJwVEpRVGxOQVpXUGhzOTNIeU11?=
+ =?utf-8?B?SFlocFFKOXlxelNDN2lKWTJhcHhaODJpREV1VHd5V1dvVVVra1QvOCtsa0tL?=
+ =?utf-8?B?MVpZdFdPZmtDQUtnR0lPZ3pKaE41eDNWcnNNSWprUk8vQjZZUnMwd3JoSnZ4?=
+ =?utf-8?B?YXdMbHN3ODF3V1FXa1FHQWdtQXZ3S1NvQkRRS1RySVdRVUtWV2pqS0xGbi9I?=
+ =?utf-8?B?OHVBUFZHOXkxUVVpejdBaVRWd0Y2WURIT29UdDFXM1FxSUhQN3ZNbG40QUla?=
+ =?utf-8?B?aGJBSE9NL1NHWU5NRzR4VS9FbnNSMXVKWjF0alVlemFDZVRhRFl6ZElGeXlq?=
+ =?utf-8?B?U1RJbDZWMHk4dWM4R0l2SWJXTHJMdU56OCsyMjZVdUswUnhrcElQOC8rcjZu?=
+ =?utf-8?B?T1Y3TTU2OWIwV1J3MnNYeTJyeTVLd3FDeGllR0p5YVRzRE1FSWhmSjJnRW9V?=
+ =?utf-8?B?a3UxbndMeGVoQU15aHVoY3FuZTFvaldoTEJMNXRYU1BEVVRDeEt3WFRoallu?=
+ =?utf-8?B?QkRzZ0xLaFJhZHZrV2NIMzF6RDFoV1V4Q2hiTEtaUVhPYjZSVWlEeXNoS25v?=
+ =?utf-8?Q?/NPUjSfQcbukA?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9142d187-1101-4b27-35f5-08dee709d56f
+X-MS-Exchange-CrossTenant-AuthSource: SE3PR04MB8922.apcprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 09:24:15.9787 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SETPR04MB9714
+Received-SPF: pass client-ip=2a01:111:f403:d405::2;
+ envelope-from=nutty.liu@hotmail.com;
+ helo=TYPPR03CU001.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
+Precedence: list
 List-Id: <qemu-riscv.nongnu.org>
 List-Unsubscribe: <https://lists.nongnu.org/mailman/options/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=unsubscribe>
@@ -93,316 +161,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 21.07.26 09:34, Markus Armbruster wrote:
-> Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru> writes:
-> 
->> The interface is ambiguous, as "no" is valid file name. So,
->> using "no" as a special value to disable script is deprecated.
->> Use an empty string ("script=" / "downscript=") instead.
->>
->> In a future version, "no" will be treated as a plain file name, just
->> like any other non-empty value.
->>
->> Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
->> and qemu-options.hx. Update other docs to use empty string instead of
->> "no". Add a warning.
->>
->> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
->> ---
->>   docs/about/deprecated.rst                  | 18 ++++++++++++++
->>   docs/system/i386/microvm.rst               |  4 +--
->>   docs/system/i386/xenpvh.rst                |  2 +-
->>   docs/system/ppc/ppce500.rst                |  4 +--
->>   docs/system/riscv/microchip-icicle-kit.rst |  2 +-
->>   docs/system/riscv/sifive_u.rst             |  2 +-
->>   net/tap.c                                  | 29 ++++++++++++++--------
->>   qapi/net.json                              | 12 ++++++---
->>   qemu-options.hx                            |  7 ++++--
->>   9 files changed, 56 insertions(+), 24 deletions(-)
->>
->> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
->> index 0c656a968fc..c4929317e3a 100644
->> --- a/docs/about/deprecated.rst
->> +++ b/docs/about/deprecated.rst
->> @@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
->>   ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
->>   short convenience options are not deprecated, only ``-mon``.
->>   
->> +``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
->> +'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
->> +
->> +The special value ``"no"`` for the ``script`` and ``downscript``
->> +parameters of ``-netdev tap`` disables script execution.  This special
->> +treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
->> +or ``downscript=``) to disable script execution instead.  In a future
->> +version, ``"no"`` will be treated as a plain file name.
->> +
->>   QEMU Machine Protocol (QMP) commands
->>   ------------------------------------
->>   
->> @@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
->>   
->>   Use ``query-accelerators`` instead.
->>   
->> +``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
->> +'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
->> +
->> +The special value ``"no"`` for the ``script`` and ``downscript``
->> +parameters of ``netdev_add`` with ``type=tap`` disables script
->> +execution.  This special treatment of ``"no"`` is deprecated.  Use an
->> +empty string instead.  In a future version, ``"no"`` will be treated as
->> +a plain file name.
->> +
->>   Human Machine Protocol (HMP) commands
->>   -------------------------------------
->>   
->> diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
->> index 1675e37d3e7..077ea15751e 100644
->> --- a/docs/system/i386/microvm.rst
->> +++ b/docs/system/i386/microvm.rst
->> @@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
->>        -serial stdio \
->>        -drive id=test,file=test.img,format=raw,if=none \
->>        -device virtio-blk-device,drive=test \
->> -     -netdev tap,id=tap0,script=no,downscript=no \
->> +     -netdev tap,id=tap0,script=,downscript= \
->>        -device virtio-net-device,netdev=tap0
->>   
->>   While the example above works, you might be interested in reducing the
->> @@ -103,7 +103,7 @@ disabled::
->>        -device virtconsole,chardev=virtiocon0 \
->>        -drive id=test,file=test.img,format=raw,if=none \
->>        -device virtio-blk-device,drive=test \
->> -     -netdev tap,id=tap0,script=no,downscript=no \
->> +     -netdev tap,id=tap0,script=,downscript= \
->>        -device virtio-net-device,netdev=tap0
->>   
->>   
->> diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
->> index 904778e3f5c..862f38830b1 100644
->> --- a/docs/system/i386/xenpvh.rst
->> +++ b/docs/system/i386/xenpvh.rst
->> @@ -42,7 +42,7 @@ case you need to construct one manually:
->>         -vnc none                                       \
->>         -display none                                   \
->>         -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
->> -      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
->> +      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
->>         -smp 4,maxcpus=4                                \
->>         -nographic                                      \
->>         -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
->> diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
->> index c9fe0915dc5..ec5aaf14fd9 100644
->> --- a/docs/system/ppc/ppce500.rst
->> +++ b/docs/system/ppc/ppce500.rst
->> @@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
->>     $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
->>                         -display none -serial stdio \
->>                         -bios u-boot \
->> -                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
->> +                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
->>   
->>   The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
->>   if “-device eTSEC” is given to QEMU:
->>   
->>   .. code-block:: bash
->>   
->> -  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
->> +  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
->>   
->>   Root file system on flash drive
->>   -------------------------------
->> diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
->> index 9809e94b84b..7fdb96601ad 100644
->> --- a/docs/system/riscv/microchip-icicle-kit.rst
->> +++ b/docs/system/riscv/microchip-icicle-kit.rst
->> @@ -84,7 +84,7 @@ Then we can boot the machine by:
->>     $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
->>         -sd path/to/sdcard.img \
->>         -nic user,model=cadence_gem \
->> -      -nic tap,ifname=tap,model=cadence_gem,script=no \
->> +      -nic tap,ifname=tap,model=cadence_gem,script= \
->>         -display none -serial stdio \
->>         -kernel path/to/u-boot/build/dir/u-boot.bin \
->>         -dtb path/to/u-boot/build/dir/u-boot.dtb
->> diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
->> index 8f55ae8e313..0e4dcf3e70c 100644
->> --- a/docs/system/riscv/sifive_u.rst
->> +++ b/docs/system/riscv/sifive_u.rst
->> @@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
->>   
->>     $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
->>         -display none -serial stdio \
->> -      -nic tap,ifname=tap0,script=no,downscript=no \
->> +      -nic tap,ifname=tap0,script=,downscript= \
->>         -kernel /path/to/vxWorks \
->>         -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
->>   
->> diff --git a/net/tap.c b/net/tap.c
->> index fedd48c48d2..2e94b4015f6 100644
->> --- a/net/tap.c
->> +++ b/net/tap.c
->> @@ -92,34 +92,40 @@ static void launch_script(const char *setup_script, const char *ifname,
->>   static void tap_send(void *opaque);
->>   static void tap_writable(void *opaque);
->>   
->> -static bool tap_is_explicit_no_script(const char *script_arg)
->> +static bool tap_is_explicit_no_script(const char *script_arg_name,
->> +                                      const char *script_arg_value)
->>   {
->> -    if (!script_arg) {
->> +    if (!script_arg_value) {
->>           return false;
->>       }
->>   
->> -    if (script_arg[0] == '\0') {
->> +    if (script_arg_value[0] == '\0') {
->>           return true;
->>       }
->>   
->> -    if (strcmp(script_arg, "no") == 0) {
->> +    if (strcmp(script_arg_value, "no") == 0) {
->> +        warn_report("%s=no is deprecated; use %s= instead "
-> 
-> Maybe "'%s=no' is deprecated; use '%s=' instead ".
 
-Ok
+On 7/17/2026 7:23 PM, Andrew Jones wrote:
+> Commit b795ea0ba471 ("hw/riscv/riscv-iommu.c: fault when !PTE_U and
+> no priv access") placed its check ahead of the leaf-vs-non-leaf
+> branch in riscv_iommu_spa_fetch(), so it fires on every PTE walked,
+> including non-leaf/table entries. Per the RISC-V privileged spec's
+> address translation algorithm (Sv39/Sv48/etc., the "leaf PTE has
+> been reached" step, followed separately by the U-bit permission
+> check), the U bit is only defined and checked for the leaf PTE
+> reached at the end of the walk -- non-leaf PTEs don't carry a
+> meaningful U bit at all.
+>
+> Move the check after the leaf/non-leaf branch, alongside the other
+> leaf-only checks, mirroring how the G_STAGE U-bit check (added in
+> 9158c900ab30) is already correctly placed.
+>
+> Fixes: b795ea0ba471 ("hw/riscv/riscv-iommu.c: fault when !PTE_U and no priv access")
+> Signed-off-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
+Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
 
-> 
->> +                    "(empty string instead of 'no')",
-> 
-> Not sure this is needed.
-
-With you single quotes, agree, everything is clear without this note.
-
-> 
->> +                    script_arg_name, script_arg_name);
->>           return true;
->>       }
->>   
->>       return false;
->>   }
-> 
-> Less churn if you name the argument @script_arg_value in PATCH 01.
-
-Right, will move.
-
-> 
->>   
->> -static char *tap_parse_script(const char *script_arg, const char *default_path)
->> +static char *tap_parse_script(const char *script_arg_name,
->> +                              const char *script_arg_value,
->> +                              const char *default_path)
->>   {
->> -    if (tap_is_explicit_no_script(script_arg)) {
->> +    if (tap_is_explicit_no_script(script_arg_name, script_arg_value)) {
->>           return NULL;
->>       }
->>   
->> -    if (!script_arg) {
->> +    if (!script_arg_value) {
->>           return get_relocated_path(default_path);
->>       }
->>   
->> -    return g_strdup(script_arg);
->> +    return g_strdup(script_arg_value);
->>   }
->>   
->>   static void tap_update_fd_handler(TAPState *s)
->> @@ -740,7 +746,7 @@ static bool net_init_tap_one(const NetdevTapOptions *tap, NetClientState *peer,
->>           qemu_set_info_str(&s->nc, "helper=%s", tap->helper);
->>       } else {
->>           qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
->> -                          script ?: "no", downscript ?: "no");
->> +                          script ?: "", downscript ?: "");
->>   
->>           if (downscript) {
->>               snprintf(s->down_script, sizeof(s->down_script), "%s", downscript);
->> @@ -946,9 +952,10 @@ int net_init_tap(const Netdev *netdev, const char *name,
->>           }
->>       } else {
->>           g_autofree char *script =
->> -            tap_parse_script(tap->script, DEFAULT_NETWORK_SCRIPT);
->> +            tap_parse_script("script", tap->script, DEFAULT_NETWORK_SCRIPT);
->>           g_autofree char *downscript =
->> -            tap_parse_script(tap->downscript, DEFAULT_NETWORK_DOWN_SCRIPT);
->> +            tap_parse_script("downscript", tap->downscript,
->> +                             DEFAULT_NETWORK_DOWN_SCRIPT);
->>   
->>           if (tap->ifname) {
->>               pstrcpy(ifname, sizeof ifname, tap->ifname);
->> diff --git a/qapi/net.json b/qapi/net.json
->> index 8f0915c4d86..ada0329ef9d 100644
->> --- a/qapi/net.json
->> +++ b/qapi/net.json
->> @@ -399,15 +399,19 @@
->>   # @fds: multiple file descriptors of already opened multiqueue capable
->>   #     tap
->>   #
->> -# @script: script to initialize the interface.  An empty string or
->> -#     "no" disables script execution.  Defaults to
->> +# @script: script to initialize the interface.  An empty string
->> +#     disables script execution.  Defaults to
->>   #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
->>   #     system configuration directory at build time (typically /etc).
->> +#     Using "no" to disable script execution is deprecated (since
->> +#     11.2); use an empty string instead.
->>   #
->> -# @downscript: script to shut down the interface.  An empty string or
->> -#     "no" disables script execution.  Defaults to
->> +# @downscript: script to shut down the interface.  An empty string
->> +#     disables script execution.  Defaults to
->>   #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
->>   #     system configuration directory at build time (typically /etc).
->> +#     Using "no" to disable script execution is deprecated (since
->> +#     11.2); use an empty string instead.
->>   #
->>   # @br: bridge name (since 2.8)
->>   #
->> diff --git a/qemu-options.hx b/qemu-options.hx
->> index 200949655ea..7b9a14f5b38 100644
->> --- a/qemu-options.hx
->> +++ b/qemu-options.hx
->> @@ -3014,7 +3014,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
->>       "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
->>       "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
->>       "                to deconfigure it\n"
->> -    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
->> +    "                use '[down]script=' to disable script execution\n"
->> +    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
->>       "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
->>       "                configure it\n"
->>       "                use 'fd=h' to connect to an already opened TAP interface\n"
->> @@ -3553,7 +3554,9 @@ SRST
->>       ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
->>       ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
->>       configuration directory at build time (typically ``/etc``).
->> -    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
->> +    Use ``[down]script=`` to disable script execution.
->> +    Using ``[down]script=no`` is deprecated; in a future version it will
->> +    be treated as a plain file name.
->>   
->>       If running QEMU as an unprivileged user, use the network helper
->>       to configure the TAP interface and attach it to the bridge.
-> 
-> You mention what "no" does only in QMP documentation.
-> 
-> You mention what "no" will do in a future version only in CLI
-> documentation.
-
-Inconsistent, right.. Will touch up.
-
-> 
-> If information is useful enough to justify the space in one place, it's
-> likely useful enough in the other place, too.
-> 
-> Up to you.
-> 
-> Reviewed-by: Markus Armbruster <armbru@redhat.com>
-> 
-
-
--- 
-Best regards,
-Vladimir
+Thanks,
+Nutty
+> ---
+>   hw/riscv/riscv-iommu.c | 14 +++++++-------
+>   1 file changed, 7 insertions(+), 7 deletions(-)
+>
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index f6865d1e164e..ed9fb09f8bc7 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -476,13 +476,6 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>               break;                /* Invalid PTE */
+>           } else if (pte & PTE_RESERVED(false)) {
+>               break;                /* Reserved PTE bits set */
+> -        } else if (!(pte & PTE_U) && !pv) {
+> -            /*
+> -             * All accesses are assumed to be User mode unless
+> -             * process_id is valid (pv).  In case we have a
+> -             * non-user mode PTE and !pv we need to fault.
+> -             */
+> -            break;
+>           } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+>               base = PPN_PHYS(ppn); /* Inner PTE, continue walking */
+>           } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
+> @@ -491,6 +484,13 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+>               break;                /* Reserved leaf PTE flags: PTE_W + PTE_X */
+>           } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
+>               break;                /* Misaligned PPN */
+> +        } else if (!(pte & PTE_U) && !pv) {
+> +            /*
+> +             * All accesses are assumed to be User mode unless
+> +             * process_id is valid (pv).  In case we have a
+> +             * non-user mode leaf PTE and !pv we need to fault.
+> +             */
+> +            break;
+>           } else if ((iotlb->perm & IOMMU_RO) && !(pte & PTE_R)) {
+>               break;                /* Read access check failed */
+>           } else if ((iotlb->perm & IOMMU_WO) && !(pte & PTE_W)) {
 
