@@ -4,133 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 762A5C4451C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A50E9C4452B
 	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jul 2026 06:39:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wm48E-0004az-JP; Tue, 21 Jul 2026 02:39:10 -0400
+	id 1wm48A-0004M3-Nb; Tue, 21 Jul 2026 02:39:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wm46m-0002uC-Dc
- for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 02:37:40 -0400
+ id 1wm46d-0002gh-MC
+ for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 02:37:36 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1wm46h-0004UR-T8
- for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 02:37:38 -0400
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ id 1wm46b-0004TY-UG
+ for qemu-riscv@nongnu.org; Tue, 21 Jul 2026 02:37:31 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66L6CoIT3884161
- for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 06:37:25 GMT
+ 66L44Ef2534739
+ for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 06:37:17 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=BWLwBmsUZ0g
- qQ+SJaw2KLoRPhk8YOH8CBqELd3wjg7A=; b=nNAbYFHFClAx81Y7Si8XydIWn2f
- FnFQjpiV1VTpMGzCfM/4V2dVe7D8vKMCWatIcE/Hq7u35FxeE1iiC9EUZv7cTQdM
- p8zrageVhFBcc5jVceiUEDhz0w3aY95xsBcnQcm2WdardwB9pgihODbec2+R8DuM
- S7VmeXQp+ua+wsSwhEp0yyxG1m7fgVDmSn7NPLLTWVmYhSVMk3sxoMY1pvYjq1Pr
- J8dT6gAbnK9yLHkyslc0CMqyy4Bd+GBnL+vkmuoVBRDiHFr/vxCSbiy7vBCZ7aCW
- kYCvRnNr5WpCk25xm3HdEf7caClL6IfBQLGiRE0OGKJM5ypmyYPNk00ydHw==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhqvcasey-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=vNILrqZOki4
+ ga/4fJZJkmvVhO0/4YSMRXaOl2EAjZlM=; b=SQRau4pAbe0Eb1I8SCtEre18F8L
+ 4ss/Vez+T1dG5nxAZ+WznR92tZcQS/cw0f1khxC6G2KqGcaNj0Q3J6VZiDrGzZBT
+ Xf2+5mf5AlIwlEmVKdPqs4CjRU6ROBSpvCSKkY+oij181o2H5iq+C1H1srhZ7T1t
+ KuB419DSablmI1hKUH4e/Fb8A61TA02Ee7A0Xv1vHKWOT/KFUjQCF0dgVsMBGJJi
+ PEF9d4ckA22Nm8zNheXebtUul/CEOkk7sgHfcKE+2zf34mH6ZxKN2EqGUd3re0bI
+ rnjp0HV1yZDcgDOBN5dJmbpdMxp2O5OKSoCalEgDYuctTpKK0XsXnCFVn7A==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj1dughj2-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 06:37:24 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2cc7ea29141so49316025ad.1
- for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 23:37:24 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Tue, 21 Jul 2026 06:37:16 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2cc7ea29141so49315685ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jul 2026 23:37:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784615844; x=1785220644; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1784615836; x=1785220636; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=BWLwBmsUZ0gqQ+SJaw2KLoRPhk8YOH8CBqELd3wjg7A=;
- b=K0ojm719Q4J2nZKGj5EQJeOdneVoIMUeF38Pf1fNiFu87270IUkxA8kGgI/zTrCeo+
- NcsoGoPLblGaBdTGme1tWTB0mtDOBiRtgLIu1HI9DmBh8lgfndhHJPkeehgC6uVCwPVB
- jrYk5AouluPAXilROX9Km2treLyzeUDlXJdVA+TyxcZAxLaDsdEHhbhvH1uqhQfNNJgM
- ywKxOivCDZw1sLCBTDKgYtZe+5WTxzAvcDoqGMhTaA3SeHlosKrzs+fYxnaQ7lCxSkKt
- HQh4bD4N2HJwi8h0pS5Fmk2vhHOR1rJsib/QZ6MSgow8GUfP6P7usN+Cc3GBHNlpDfZw
- pLZQ==
+ bh=vNILrqZOki4ga/4fJZJkmvVhO0/4YSMRXaOl2EAjZlM=;
+ b=OnwiNdTgKiVED6NvLb+5iDRgRSuZzhXBWShntA7gnAlzE60qdfvU4eydxB+vvae5gO
+ l13H1s2Vd6f+U+uFgSOcUrBooa3co/r8SgfD49MmL3ahCMVD9GLoBfxjbByft8GGrLpj
+ tT97zcz6VmCr+u7RaScqYtk7KRtuyP/Bp2fHsEX58oPpsbmtCnMpOgnCSQDAie5LvQPF
+ Co9LIvmmaTDFCva+0JTR7P6uQoocKcGWntpheM9ZgmNQP2GiYWwWMKai3sgEkwDEGHlw
+ XVBm0aKdHGPB/NIIWup4NbSTPQWtyCoqaKUFl2/JBEnc79uiRJ6fS6zYf9LMHvRYalCZ
+ DjFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784615844; x=1785220644;
+ d=1e100.net; s=20251104; t=1784615836; x=1785220636;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=BWLwBmsUZ0gqQ+SJaw2KLoRPhk8YOH8CBqELd3wjg7A=;
- b=M+BmFJ2938h9l45/dz1Tqwp2zlfJjUSrpGQlvJP/yrFrUXGLAOUwmGV4pg7daS0m+x
- Nr7mTda4d+iNdXgoZL4CAhIkm9U+Nz9CcbNMPjDB7GsYeRP1oAYrfzfssSdFho4e+Wap
- BazD4Kf/INUbFddiQh97HPbUndWGxNQDQX+W2dH9aop72kz77jA/ZsISXmOma0imSP9W
- k0UKNRKFPvl9cZgd4QsQwACcWqAozlJXQCONGC5qISeJaTsJU/DD2jSqz37Z1fDFKD3e
- SrHq7LnYKvExPjQwJq5mBAwbmAja+ndi9McxnNmtqgHBf7FbeWJPjTUtPEGeXtovi4D+
- i27A==
-X-Gm-Message-State: AOJu0Yxs7+JVGcyUZMgixUo1Djwz09RGUb7mDri1D3AmrXMex3Cg6y/i
- W8FL6/X85/i/x7rXJD48JVxufMbz1VZAS7P/PuruAFhCzb1/U+R6JuZClnyFx2wQ9nLWNNfNt+m
- 5FxzVyTohzrjOK7UG0C1YwkhaqxUU8H+6g+l/wAhU+JItkN0XHPbnz6uPFqD27Ylhzg==
-X-Gm-Gg: AR+sD116XDVDkOSTY/VnL/Xp2DFwGU4zJnAAm9jiUNW0op3ZgK9Jc9jWQlCVN0pskna
- g+OSWK6jB6LGbXci3Lc0PRnUUKpgpSpDDnI2klRmQ3f8WHHGkjJBNvZLkj4zOP11Wsiwuc9HES/
- zgQNCRo9rUXKm+w9jolkEwfE3DC81knbvXNbEtntMyy3OPwzNViU7QY6LU3fpGXhV9+Cc8Ghfmk
- zolBDMIdZw80TXf53za2BnMoOhNYULB8l2jHGdGlqN1rkNN6Lgd+pQQFx8+PLxhfjrfA/CzTgNP
- 7bS7x40nqBr/a4YkYCx959T6JKPl4Ql/JYIEREH78n8hE3K69DUCn3SCUVCTDGgvX+1WY72twpt
- 191pgAUkIqyIGSlCCBV91KEoJoypDwqj0K5sFVOUqirxp+RyhK+mFxlXch4G2sayW2G4CNOggPP
- bYXIqq4FoOg34WF53cXP4r0OJYshGQ5Fs=
-X-Received: by 2002:a17:902:f78c:b0:2c9:b96a:2855 with SMTP id
- d9443c01a7336-2cf34667e9fmr137902375ad.0.1784615843977; 
- Mon, 20 Jul 2026 23:37:23 -0700 (PDT)
-X-Received: by 2002:a17:902:f78c:b0:2c9:b96a:2855 with SMTP id
- d9443c01a7336-2cf34667e9fmr137902245ad.0.1784615843548; 
- Mon, 20 Jul 2026 23:37:23 -0700 (PDT)
+ bh=vNILrqZOki4ga/4fJZJkmvVhO0/4YSMRXaOl2EAjZlM=;
+ b=sxtyFy5h8mF59uE84lNlAF4DBZ5rywLfkl/L8dR/773VVbBm+AFVQC4D2Mz1OSamG6
+ RG8ZXxGePRh5DVl8VVWl1JK87DZ1uxuIhHbREuQ1zSnP1y9K4MIiOQoNW42RragnUBFu
+ tWmMP/TzepiBCgRFUsEcd5PaP8BkN1kTsZNynIZWnGU7SaEBzGbpxf7u0mc2QzarWClh
+ 9tgl5rM5nNy/oo4FSc33qr/W6EpHVlaI/NUYeDeKAqOFndYJsQ5tKZO4JRBBRUdZtyeZ
+ GsGQUSkAUUvwDgQw7mGWAGpDtN/CrWUM1MwGqQ/6jFmKruFK0fJcqUbGmGnpLWhmWxn0
+ lPqA==
+X-Gm-Message-State: AOJu0YxF9NbiVBmiR25ki5t08hFyHLXNghZxS3S6H451bt68byanI4oe
+ zjSaVDH0KDH6zipLD0s5UyQrYxZ38f+A0WZM66lJ3+mySBviT5dipGqEMw0MFZzu1VDiJuyN76k
+ xfo7X0Oz8WKrO+ciLQCwcP33zsjvjeqi3DwnfAVfeB2GNZB0WPniuojTKBKjGnVnh7A==
+X-Gm-Gg: AfdE7cmTzBGtXQVtVgpRP+0GgbNOTXRKJMhBFB+22he4xMYmNGy7AA2/WaHJdQqN0Ds
+ hEiviFwm2RF2QVxE2nn9+WF6T6jSOe0AoJcfU7bTaIp4cL2Ck/UBlEogsbpkhOWSnGh7QNX4B8b
+ VKon36wqx2TUAkEc+8PTNmh45OmIHfgiIUE9JEQHeB0snOuY+d7V4JBVFHGp+kFZSJ8qqYFEYUq
+ PWCowaRsTxDzEOnKmdgvji8OnMGe66O8OjvxZPopfqpo9H4HRMSSMFvzJk6ex9+bhSIf/XF0TY1
+ 4v18rpMiQmecJBoSbheQKVsrNpmNdDwDSF245/FKLAsPL1h7u2FIUgfPV/kSVYJihIaw2COc1m8
+ pfeAryL/MA33WkF384YsjgOEpiYpWsN2Qo+sBtaJTEnJUc8jlwC7jcDz4iyT6C2uc94mxFViJKy
+ 4zIwO6L1zCdy1a+4fX6oOyFS+DmBG776E=
+X-Received: by 2002:a17:903:b88:b0:2cc:e3b6:f305 with SMTP id
+ d9443c01a7336-2cf349ba609mr138979255ad.4.1784615835966; 
+ Mon, 20 Jul 2026 23:37:15 -0700 (PDT)
+X-Received: by 2002:a17:903:b88:b0:2cc:e3b6:f305 with SMTP id
+ d9443c01a7336-2cf349ba609mr138979075ad.4.1784615835518; 
+ Mon, 20 Jul 2026 23:37:15 -0700 (PDT)
 Received: from hu-slingapp-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3142a1bb8a4sm47161380eec.14.2026.07.20.23.37.20
+ 5a478bee46e88-3142a1bb8a4sm47161380eec.14.2026.07.20.23.37.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jul 2026 23:37:23 -0700 (PDT)
+ Mon, 20 Jul 2026 23:37:15 -0700 (PDT)
 From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
 To: qemu-riscv@nongnu.org
 Cc: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  qemu-devel@nongnu.org (open list:All patches CC here)
-Subject: [PATCH v5 10/10] tests/functional: add initial RPMI virt guest smoke
-Date: Tue, 21 Jul 2026 12:06:36 +0530
-Message-ID: <80175c70a9fe4392fb4638c248863e3143c26005.1784547370.git.subrahmanya.lingappa@oss.qualcomm.com>
+Subject: [PATCH v5 08/10] docs/system/riscv: document initial virt RPMI support
+Date: Tue, 21 Jul 2026 12:06:34 +0530
+Message-ID: <3a8f2d3fdff3bbd3760d0a5ae75bcaffbda1c47b.1784547370.git.subrahmanya.lingappa@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1784547370.git.subrahmanya.lingappa@oss.qualcomm.com>
 References: <cover.1784547370.git.subrahmanya.lingappa@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDA2NyBTYWx0ZWRfX5XrmuQcMtLzY
- jIT7G9MoFwcvj8d5Ja+lDiy2pYQjXhPiqLMv6ixJsiRwtm7M+OBYx8isVlXWRXlVas3OxNBWuIe
- zc3JuZwppWf5t1b5VXYTILQT0hV8NQE=
-X-Proofpoint-GUID: FMRqCaJ4QMEDXT8MUHeTP6BluAkNHXsM
-X-Authority-Analysis: v=2.4 cv=OMYXGyaB c=1 sm=1 tr=0 ts=6a5f13a5 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: 4S1yXQvibFV0L6TuJFF8VKcmH_NqQb3w
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDA2NyBTYWx0ZWRfX/IkQ75kQIIMr
+ Vt3d/T01O3I36qSoRsoxLDKOnuySTl0KSSMBBHCRU0RdpRstO5fafIcbKKpVnX3U8kRdcUrHvsc
+ h1Aza0Jm/gNpE2+sQVy1aG1rR6gEMJtd8DasooUBg7LXyX3GFwmit9kmZdl6tDOPCHuofgL8rEH
+ hZNZtN/sLxW0vF6tpd0v+2Z1683qKeNl4WAoXzMGHzC0TU00VlPnuIPhjD5f9c3o5bm064QQAdN
+ LTgkAGF+xRam4LSL4623rFa+QkURw+VZQQVnRR62M+yl6DeyQaog9qvjmD6E9XWJuUCil5Z3uR9
+ azk051fwUb9FW7ran1Sa6HZcIOcc0RqKWlz4ZWnrmHhvSg/ladN0jOLKCRgau7XoOQVhK3OFWz8
+ ZUJfhDj/lfP3+fskSxWjtbkAjotedp7fadUivR0d643/SZIHk0DmlQZPh0w2gJePnsnyOJ6AdtX
+ 5Sk7qRDhrSE8EUxclGA==
+X-Authority-Analysis: v=2.4 cv=I9JVgtgg c=1 sm=1 tr=0 ts=6a5f139c cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=Cnp7e1vNUpDCZbjFkkcA:9 a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-ORIG-GUID: FMRqCaJ4QMEDXT8MUHeTP6BluAkNHXsM
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDA2NyBTYWx0ZWRfX03kW4Yy/2zup
- iIB34Vpmq3tpht0f0FDcHRgfzo0vFDcZFLhPKKnu88mlKOrZOxuMKY3zFSXNGvp5bT4ESjWV7Qz
- +l1MIXwoQ7+aCSJjM1uFlp8EUqYdptXBi8fuy1IsbTr1q9mbTOqnAgM+IBaFm0pXCXpi31i74kw
- 7tu0Oans40c/b6mm/vauGsr8T2H4oO8P9O8sQnqOxM1LnZfUQMWdd0hWzG/MwZ03SxUdhYfl+UC
- svr2wxWYQfO0xbYV+na0gJjs4b2KPS4SOgQ10h9jSyipg+znHMJvcuU9X8IEu6yAif+RoBBUDfy
- 0QEj1+YCarDHM7HRjhtrSr+5lZbV4eOVolPB+GO1ABKOxc1ZQRjqamDpPRCgbelh02GXwn1byfq
- 6tF3bx7Mm2J1URjSFPKOySgpB4tolQVA0eZPncX5VkPmvd6Ra3L6PHF/vGDgq3O3Wmdzd6J1DeG
- bPsXkAE0JUCngY9VJvA==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=NEAV23lmAAAA:8
+ a=V1jnuoLLAAAA:20 a=EUspDBNiAAAA:8 a=RyhCfiGMEKD-kOZgqhYA:9
+ a=uG9DUKGECoFWVXl0Dc02:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-GUID: 4S1yXQvibFV0L6TuJFF8VKcmH_NqQb3w
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDA2NyBTYWx0ZWRfX9pIVFvq5N8z0
+ etXrjz2m+NEHS5BQFajrJG3T+opp08EIWWFC2dTQ7tyaq91OqHxu6elpoYJ6tSjPeEKecgeGa2N
+ gZbMqXqFk7p6anZfRClBn692Y++zsLs=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-20_06,2026-07-20_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
- bulkscore=0 malwarescore=0 clxscore=1015 impostorscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210067
+ bulkscore=0 adultscore=0 spamscore=0 clxscore=1015 suspectscore=0
+ lowpriorityscore=0 phishscore=0 priorityscore=1501 impostorscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607210067
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
  helo=mx0b-0031df01.pphosted.com
@@ -156,211 +154,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Boot an RPMI-enabled RISC-V virt guest and exercise the initial HSM,
-system suspend, and system reset paths.
+Document the opt-in virt RPMI transport and the initial HSM, system
+reset, and system suspend service groups.
 
 Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- tests/functional/riscv64/meson.build       |   2 +
- tests/functional/riscv64/test_rpmi_virt.py | 171 +++++++++++++++++++++
- 2 files changed, 173 insertions(+)
- create mode 100644 tests/functional/riscv64/test_rpmi_virt.py
+ docs/system/riscv/virt.rst | 65 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 65 insertions(+)
 
-diff --git a/tests/functional/riscv64/meson.build b/tests/functional/riscv64/meson.build
-index 5871211e89..619a0735fa 100644
---- a/tests/functional/riscv64/meson.build
-+++ b/tests/functional/riscv64/meson.build
-@@ -3,6 +3,7 @@
- test_riscv64_timeouts = {
-   'boston' : 120,
-   'tuxrun' : 120,
-+  'rpmi_virt' : 300,
- }
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+index 60850970ce..31cd945a3b 100644
+--- a/docs/system/riscv/virt.rst
++++ b/docs/system/riscv/virt.rst
+@@ -146,6 +146,71 @@ The following machine-specific options are supported:
  
- tests_riscv64_system_quick = [
-@@ -15,4 +16,5 @@ tests_riscv64_system_thorough = [
-   'boston',
-   'sifive_u',
-   'tuxrun',
-+  'rpmi_virt',
- ]
-diff --git a/tests/functional/riscv64/test_rpmi_virt.py b/tests/functional/riscv64/test_rpmi_virt.py
-new file mode 100644
-index 0000000000..1c199da301
---- /dev/null
-+++ b/tests/functional/riscv64/test_rpmi_virt.py
-@@ -0,0 +1,171 @@
-+#!/usr/bin/env python3
-+#
-+# RISC-V virt RPMI Linux guest integration tests
-+#
-+# Copyright (c) 2026 Qualcomm Technologies, Inc.
-+#
-+# Author:
-+#  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-+#
-+# SPDX-License-Identifier: GPL-2.0-or-later
+   Enables the riscv-iommu-sys platform device. Defaults to 'off'.
+ 
++- rpmi=[on|off]
 +
-+import os
-+from pathlib import Path
-+import subprocess
-+import time
++  Enables the RISC-V RPMI shared-memory transport. This option defaults to
++  "off", is TCG-only, and is available only when QEMU is built with librpmi
++  support. This support targets the RISC-V Platform Management Interface
++  (RPMI) Specification v1.0 Ratified (`RPMI v1.0 specification`_). The initial
++  ``virt`` implementation exposes RPMI system reset, system suspend, and HSM
++  service groups. System reset can request shutdown or cold reboot through
++  RPMI. HSM uses the ``virt`` hart IDs and supports hart discovery, status,
++  start, stop, and suspend commands. System suspend uses QEMU's suspend and
++  wakeup path. Migration is currently blocked while RPMI transport and service
++  VMState support is being designed.
 +
-+from qemu_test import QemuSystemTest
-+from qemu_test import exec_command
-+from qemu_test import exec_command_and_wait_for_pattern
-+from qemu_test import get_qemu_img
-+from qemu_test import wait_for_console_pattern
++  The build dependency is provided by `librpmi`_. QEMU requires librpmi 1.0.0
++  or newer. If the host distribution does not provide a librpmi development
++  package, build and install it from the upstream source tree so that
++  ``pkg-config`` can find ``librpmi.pc``:
 +
++  .. code-block:: bash
 +
-+class RiscvVirtRpmiGuestTest(QemuSystemTest):
-+    """Boot Linux and exercise RPMI-backed services through guest APIs.
++    $ git clone https://github.com/riscv-software-src/librpmi.git
++    $ cd librpmi
++    $ make
++    $ make install I=/usr/local
++    $ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
++    $ pkg-config --modversion librpmi
 +
-+    This test intentionally keeps guest artifacts external. Set:
++  The librpmi repository can also generate installable ``librpmi-dev`` Debian
++  packages with ``make deb-pkg`` and ``librpmi-devel`` RPM packages with
++  ``make rpm-pkg``. After installing librpmi, configure QEMU with
++  ``--enable-librpmi`` or ``-Dlibrpmi=enabled``.
 +
-+      QEMU_TEST_RPMI_OPENSBI=/path/to/fw_jump.bin
-+      QEMU_TEST_RPMI_KERNEL=/path/to/Image
-+      QEMU_TEST_RPMI_ROOTFS=/path/to/rootfs.ext4
++.. _RPMI v1.0 specification: https://github.com/riscv-non-isa/riscv-rpmi/releases/download/v1.0/riscv-rpmi.pdf
++.. _librpmi: https://github.com/riscv-software-src/librpmi
 +
-+    Exact RPMI packet command-ID coverage remains in riscv-rpmi qtests. This
-+    functional test verifies Linux/OpenSBI integration paths visible from a
-+    real guest without adding probe hooks to production RPMI sources.
-+    """
++RPMI firmware and guest smoke
++-----------------------------
 +
-+    timeout = 360
-+    PROMPT = 'root@tuxtest:~#'
++A firmware-level RPMI smoke test can be run with OpenSBI, a Linux kernel, and a
++RISC-V disk image:
 +
-+    def _require_path(self, env_name):
-+        value = os.getenv(env_name)
-+        if not value:
-+            self.skipTest(f'{env_name} is required')
-+        path = Path(value)
-+        if not path.exists():
-+            self.skipTest(f'{env_name} does not exist: {path}')
-+        return path
++.. code-block:: bash
 +
-+    def setUp(self):
-+        super().setUp()
-+        self.opensbi = self._require_path('QEMU_TEST_RPMI_OPENSBI')
-+        self.kernel = self._require_path('QEMU_TEST_RPMI_KERNEL')
-+        self.rootfs = self._require_path('QEMU_TEST_RPMI_ROOTFS')
-+        self.qemu_img = get_qemu_img(self)
++  $ qemu-system-riscv64 \
++      -machine virt,rpmi=on \
++      -cpu rv64 -smp 4 -m 4G -nographic \
++      -bios /path/to/fw_jump.bin \
++      -kernel /path/to/Image \
++      -append "root=/dev/vda rw console=ttyS0 earlycon=sbi" \
++      -drive file=/path/to/rootfs.img,format=raw,if=virtio,snapshot=on
 +
-+    def _create_rootfs_overlay(self):
-+        overlay = Path(self.scratch_file('rootfs.qcow2'))
-+        subprocess.run([
-+            self.qemu_img, 'create', '-q', '-f', 'qcow2', '-F', 'raw',
-+            '-b', str(self.rootfs), str(overlay),
-+        ], check=True)
-+        return overlay
++The OpenSBI banner should report RPMI-backed HSM and system suspend support.
++After the guest reaches a shell, normal guest reboot/poweroff commands exercise
++the RPMI system reset path.
 +
-+    def _boot_guest(self, smp=4):
-+        self.set_machine('virt')
-+        self.machine = 'virt,rpmi=on,aia=aplic-imsic'
-+        rootfs_overlay = self._create_rootfs_overlay()
++RPMI device tree policy
++-----------------------
 +
-+        self.vm.set_console()
-+        self.vm.add_args(
-+            '-cpu', 'rv64',
-+            '-smp', str(smp),
-+            '-m', '1G',
-+            '-bios', str(self.opensbi),
-+            '-kernel', str(self.kernel),
-+            '-append', 'printk.time=0 root=/dev/vda rw console=ttyS0 '
-+                       'earlycon=sbi loglevel=8 no_console_suspend',
-+            '-blockdev', 'driver=qcow2,file.driver=file,'
-+                         f'file.filename={rootfs_overlay},node-name=hd0',
-+            '-device', 'virtio-blk-device,drive=hd0',
-+        )
-+        self.vm.launch()
++RPMI is currently described through FDT only; no ACPI representation is emitted
++for the RPMI transport or service groups. The ``virt`` machine uses the
++``riscv,rpmi-shmem-mbox`` shared-memory mailbox node plus child service nodes
++with ``riscv,rpmi-*`` compatible strings. These binding names are part of the
++RPMI RFC surface and may be revised if the RISC-V RPMI bindings change during
++review.
 +
-+    def _expect_rpmi_firmware_and_linux(self):
-+        patterns = [
-+            'Platform HSM Device         : rpmi-hsm',
-+            'Platform Suspend Device     : rpmi-system-suspend',
-+            'Standard SBI Extensions',
-+            'susp',
-+            'tuxtest login:',
-+        ]
-+        for pattern in patterns:
-+            wait_for_console_pattern(self, pattern)
-+        exec_command_and_wait_for_pattern(self, 'root', self.PROMPT)
-+
-+    def _run_marker_command(self, command, marker, failure_marker=None):
-+        out = exec_command_and_wait_for_pattern(self, command, marker,
-+                                                failure_message=failure_marker)
-+        self.assertIn(marker.encode(), out)
-+        return out
-+
-+    def _validate_hsm_boot_start(self, online_cpus):
-+        self._run_marker_command(
-+            'echo RPMI_LINUX_HSM_START_BEGIN; '
-+            'cat /sys/devices/system/cpu/present; '
-+            'online=$(cat /sys/devices/system/cpu/online); '
-+            'echo "$online"; '
-+            f'if [ "$online" = "{online_cpus}" ]; '
-+            'then echo RPMI_LINUX_HSM_START_PASS; '
-+            'else echo RPMI_LINUX_HSM_START_FAIL; fi',
-+            'RPMI_LINUX_HSM_START_PASS', 'RPMI_LINUX_HSM_START_FAIL')
-+
-+    def _validate_hsm_stop(self):
-+        self._run_marker_command(
-+            'echo RPMI_LINUX_HSM_STOP_BEGIN; '
-+            'if [ -w /sys/devices/system/cpu/cpu1/online ]; then '
-+            'echo 0 > /sys/devices/system/cpu/cpu1/online && '
-+            '[ "$(cat /sys/devices/system/cpu/online)" = 0 ] && '
-+            'echo RPMI_LINUX_HSM_STOP_PASS || echo RPMI_LINUX_HSM_STOP_FAIL; '
-+            'else echo RPMI_LINUX_HSM_STOP_FAIL; fi',
-+            'RPMI_LINUX_HSM_STOP_PASS', 'RPMI_LINUX_HSM_STOP_FAIL')
-+
-+    def _validate_system_suspend(self):
-+        exec_command(
-+            self,
-+            'echo RPMI_LINUX_SUSPEND_BEGIN; '
-+            'if grep -qw mem /sys/power/state; then '
-+            'echo mem > /sys/power/state; '
-+            'else echo RPMI_LINUX_SUSPEND_FAIL; fi')
-+        wait_for_console_pattern(self, 'RPMI_LINUX_SUSPEND_BEGIN')
-+        wait_for_console_pattern(self, 'PM: suspend entry')
-+        self.vm.event_wait('SUSPEND', 10)
-+        self.vm.qmp('system_wakeup')
-+        self.vm.event_wait('WAKEUP', 10)
-+        wait_for_console_pattern(self, 'PM: suspend exit')
-+        wait_for_console_pattern(self, self.PROMPT)
-+        self._run_marker_command(
-+            'marker=RPMI_LINUX_WAKEUP; echo ${marker}_PASS',
-+            'RPMI_LINUX_WAKEUP_PASS')
-+
-+    def _validate_reset_poweroff(self):
-+        exec_command(self, 'echo RPMI_LINUX_RESET_POWEROFF_BEGIN; poweroff -f')
-+        wait_for_console_pattern(self, 'RPMI_LINUX_RESET_POWEROFF_BEGIN')
-+        wait_for_console_pattern(self, 'reboot: Power down')
-+        self.vm.wait()
-+
-+    def test_linux_guest_service_enumeration(self):
-+        self._boot_guest(smp=4)
-+        self._expect_rpmi_firmware_and_linux()
-+        self._validate_hsm_boot_start('0-3')
-+
-+    def test_linux_guest_hsm_stop(self):
-+        self._boot_guest(smp=2)
-+        self._expect_rpmi_firmware_and_linux()
-+        self._validate_hsm_boot_start('0-1')
-+        self._validate_hsm_stop()
-+
-+    def test_linux_guest_suspend(self):
-+        self._boot_guest(smp=1)
-+        self._expect_rpmi_firmware_and_linux()
-+        self._validate_system_suspend()
-+
-+    def test_linux_guest_reset_poweroff(self):
-+        self._boot_guest(smp=1)
-+        self._expect_rpmi_firmware_and_linux()
-+        self._validate_reset_poweroff()
-+
-+
-+if __name__ == '__main__':
-+    QemuSystemTest.main()
+ Running Linux kernel
+ --------------------
+ 
 -- 
 2.43.0
 
