@@ -4,77 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0BEAC4453C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jul 2026 14:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8A28C4453A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jul 2026 19:53:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wmYEu-0002FZ-Qx; Wed, 22 Jul 2026 10:48:04 -0400
+	id 1wmd04-0006mi-4V; Wed, 22 Jul 2026 15:53:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <junjie.cao@intel.com>)
- id 1wmXOZ-0004pS-No; Wed, 22 Jul 2026 09:54:00 -0400
-Received: from mgamail.intel.com ([198.175.65.18])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wmczz-0006mA-SD
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2026 15:53:00 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <junjie.cao@intel.com>)
- id 1wmXOT-0006OA-5x; Wed, 22 Jul 2026 09:53:58 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1784728434; x=1816264434;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=WkQP+VLLIUcupmM/h8M3bLBbXU5+xR/+0pbsUwRlOyw=;
- b=hr+eMjt/H0k3vi8wZkiP+kj8WLsrGhe99V7Ii5RtkYjy5Q5PCGOlgGsV
- UPep+v1P76byQn4rxEM1wJ1jG1VLk8RQLFh13i0dA9ifeRXR+5UVnScPL
- lZWx/zhD6+ARIhzOqB/9Fm183CBuqRS9fWexsmxsTMAd4ToZb2+cgieR0
- IMyLuxcpjag2sK1TltGSzeLDfdsa6fIBIUl5zurT4LI03ng02t6P1LsOJ
- wfcwlnRE2p7LzhVQ8DAZkEN4m+ky3I8Y3WMttMdvu+U1qhbOVke7BGCXO
- ApwNLgvfWUQopEPPWKWzpFELsWuQYeHhrdeG28rhrCcZDwZKWqo6urpHo Q==;
-X-CSE-ConnectionGUID: BIqtd92SSeqDkkWc8R5TWw==
-X-CSE-MsgGUID: Q5YExawXS6iEz9PXxcPPyg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11854"; a="85455080"
-X-IronPort-AV: E=Sophos;i="6.25,178,1779174000"; d="scan'208";a="85455080"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jul 2026 06:53:32 -0700
-X-CSE-ConnectionGUID: cywj4bg0QqWWIhVHLsmINg==
-X-CSE-MsgGUID: ARkzCj6xSN+AapMbVWmVdA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,178,1779174000"; d="scan'208";a="251796121"
-Received: from junjie-desk-dev.bj.intel.com (HELO
- junjie-desk-dev.tail2c02c1.ts.net) ([10.238.152.71])
- by fmviesa009-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jul 2026 06:53:27 -0700
-From: Junjie Cao <junjie.cao@intel.com>
-To: Chen Pei <cp0613@linux.alibaba.com>
-Cc: jic23@kernel.org, pbonzini@redhat.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, sunilvl@ventanamicro.com, dave.jiang@intel.com,
- alison.schofield@intel.com, imammedo@redhat.com, mst@redhat.com,
- guoren@kernel.org, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- linux-cxl@vger.kernel.org
-Subject: Re: [PATCH v2 3/4] hw/riscv/virt,
- gpex: Provide 32-bit MMIO window for CXL host bridges
-Date: Wed, 22 Jul 2026 21:52:38 +0800
-Message-ID: <20260722135240.763013-1-junjie.cao@intel.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260618093827.3507-4-cp0613@linux.alibaba.com>
-References: <20260618093827.3507-1-cp0613@linux.alibaba.com>
- <20260618093827.3507-4-cp0613@linux.alibaba.com>
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wmczx-0007wh-Np
+ for qemu-riscv@nongnu.org; Wed, 22 Jul 2026 15:52:59 -0400
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66MHrKZT1380357
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2026 19:52:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 6D6q7FvIXmuaKBt6BXeR1nUN9WMG1wnIPvVkC2j2eq8=; b=lJY7VZk39BgcQ+Ph
+ /a9WckOWc7Lxojn9knFpNuJD5rQB8vIDgGQASh2OsuNnJCDr7tZNOzJjzTcqa63i
+ 3usAPVz+ZLi0JrL3sgw2Oh1swnzt2SiFt/05//5bymWQ7Di1bdnar0W6O7Wp5m9X
+ d5Q8BH0jd18+70nrbVxgzMX3xdQfeW1FPj3LFnyUyAZqvMkECBWI77Z8y9eRhSpM
+ xb6a7zA/Y3oWJtarA8k7b9xXxKG6PWViQOJwiHGSuoNvbOtFIy1N4/FCj+Ys5QTM
+ UDRj3Eklgcc3bppIrazB5o0LejMXJOaH/dwNVjvQXZO4PVJfG5UZt8YamitZByJR
+ GN5Omg==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk275gmv4-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2026 19:52:53 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-8efad04d884so189149116d6.0
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2026 12:52:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1784749973; x=1785354773; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=6D6q7FvIXmuaKBt6BXeR1nUN9WMG1wnIPvVkC2j2eq8=;
+ b=LLiuFF27k4U7SISOU5P3Cqw9p3SlnM83GUDHL3Lug/TcRza+StEsVJAXKxpWWnKXgS
+ MRR8Vfkz01UT0/ZzX/19UOYKM2iTd2gVqZD/Y7AmXTYWsheSnKZq0KNmZM4xAxVW5Ok5
+ Qt72186innXYIDVUJeGYm4ppAhmONcXgk9/svBRnHO5cIgpk+nx1+N/DEl/lRsYsN7v6
+ k++KulQQ6M6gAJM/z/KUugZdsoBYQ7SJsZRjNeXK3MCLleiUgb2NxrOx1WizxRY6Sx1+
+ BBcNMAwU6orXf7v0rzxZ2e+jNkKOcwalvz0n14N8iSqlkqKj4Lb07ol3fQhSkr5cB+6/
+ cWbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784749973; x=1785354773;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=6D6q7FvIXmuaKBt6BXeR1nUN9WMG1wnIPvVkC2j2eq8=;
+ b=lyhgzdLYdwRBf1mzmgR74/XOG+wGsLH4zzFyROOdzXqXsTl+jg2sAJ6GGDs0JCXvoV
+ INuWwusvhTb3uM07AmkTQi68Ay9g/bkmnFiqShMEKLuDbQmomHMMQovDP8gsBt0q+2u8
+ 5XwI/ItgzelbQ/qz/oiq7fFjv4ldNjkZ6r+yi1+Cl51dIOVz24B2TEzNrH+ZB3BD/sHe
+ GUSOzmy3i+0akUPtRjaiYr3kNgtW7yJuzvAk+lmXI6cHrMX/0vANTvNv8bmP8O/TCqn+
+ nYOH/PUxK03eFHttq7r/MTPiWfJqQFuqBW+75bNHMORuUt1+0izwVWua6DgMODOXPy25
+ ivFA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrIp8ZKoR99/2/v2f9z+aoeFsR2Wqz0sls+Fe53I+sK38Fj0pwmxVr4sNZOeSLwCfp7DhlFZajfQdap@nongnu.org
+X-Gm-Message-State: AOJu0YwMhDarXC8uR8moLN+miLOfRYk51H+sdJJGv/VLnnLiZ+ylSyUx
+ YMkEyREfj5suU9ZYxyp7W1B1oQlkP13E/eIA0Aqk1MBXYZM9q0gepHV8gG53n+W7dmrQW4FLP0m
+ pc/GqMVWE0N2JWBWERLUA4JZ+6eJQQYAq/Pm0QRUL6InIVgaAgPOgSc2Eqw==
+X-Gm-Gg: AR+sD103ZA0bnZbKdVZA445+LO0mRACzutLRiaseHiwKLHBpX553WYNnCysd1GvSmzr
+ txXkLJvTTpfIIKWKluUfqiDZMTEOEDF6iC9s4zh+eQtTspgfAuAa5LezarHAUQ/dazb5Lvaam1w
+ Nxuf8n81YER/JQkKt+SDWfDUpSwSSh6tbh6TpB3k21PwRMZfRCdk0NWrTK5JeG38HMaPpcPH4QD
+ 7uRAYN8WxmvwhNh5XORQhphLFLFU+2sOf6ikoohxrpxznn3g7CHLcCMsz452aIBlQHCldNaAsPu
+ 0L3lkjo9tC1ffEn4D8g5qp+1KfoAC57jyPVXPMCt+GHQvnTj17SjKp1mguti77nvrPgBUX5SEEo
+ 8ndDSx9fZ+hBktrzN7g+BzWqvAOcwP7/bkX/2SA==
+X-Received: by 2002:a05:6214:2464:b0:8ef:7fd6:11db with SMTP id
+ 6a1803df08f44-907ca6388a2mr3399066d6.51.1784749971862; 
+ Wed, 22 Jul 2026 12:52:51 -0700 (PDT)
+X-Received: by 2002:a05:6214:2464:b0:8ef:7fd6:11db with SMTP id
+ 6a1803df08f44-907ca6388a2mr3398206d6.51.1784749970545; 
+ Wed, 22 Jul 2026 12:52:50 -0700 (PDT)
+Received: from [192.168.68.107] ([152.234.122.204])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-907ba8b5f6esm28221526d6.5.2026.07.22.12.52.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Jul 2026 12:52:50 -0700 (PDT)
+Message-ID: <8cc10b77-22a0-40f0-b883-5d3491248fac@oss.qualcomm.com>
+Date: Wed, 22 Jul 2026 16:52:46 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 00/11] target/riscv: Implement Smsdid and Smmpt
+ extension
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair <alistair@alistair23.me>, qemu-devel@nongnu.org,
+ xiangyi.zeng@linux.alibaba.com
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, chao.liu.zevorn@gmail.com,
+ liwei1518@gmail.com, qemu-riscv@nongnu.org, cxx194832@alibaba-inc.com,
+ rahul.pathak@oss.qualcomm.com
+References: <20260715145016.17369-1-zhiwei_liu@linux.alibaba.com>
+ <a568614fb2f7221583bbcc2c67cf7282d50e4d83.camel@alistair23.me>
+ <db11d478-c0cb-4ca6-b7b4-3f53b281452b@linux.alibaba.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <db11d478-c0cb-4ca6-b7b4-3f53b281452b@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=198.175.65.18; envelope-from=junjie.cao@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+X-Authority-Analysis: v=2.4 cv=Q53iJY2a c=1 sm=1 tr=0 ts=6a611f95 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=xvfqbYfxAAAA:20 a=JfrnYn6hAAAA:8 a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=mDV3o1hIAAAA:8 a=5dsZQrsRkkb-I2esH_cA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22 a=1CNFftbPRP8L7MoqJWF3:22
+ a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDE5NiBTYWx0ZWRfX72s2VNUm7PWO
+ LOtius8F9N9Aevrgni1z82rM2OorY3o+FU1RRdfrDfIJX7dPHCe5/KG5cDZtOGIKHthmH5radsa
+ 1zzBm2g6nsYjO8eJw3Ms1ie49uRgiXg=
+X-Proofpoint-GUID: qD5EjuFh3cD36VlnmHykgiLHoh3D-p_r
+X-Proofpoint-ORIG-GUID: qD5EjuFh3cD36VlnmHykgiLHoh3D-p_r
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDE5NiBTYWx0ZWRfX9AnYQTFasIaL
+ FBLHHve+Tc0i2T5CxFcuUSxeth4lCz2kPq2c0DncwjNIpTYGdZ+ZRVx3cxBcSxLqKldTx+9k01C
+ ps4OqtnMro7vAMJSN9fNCW8DScTeP7IZOp2to5oIxpyZc+DwH0m5N0WQoLEQEVK4G3v1w+v3Sbj
+ 9rdA2pUSd7gz72SyZH9ygivOSz36m5RGM5bfyWwxQLIX2aSWmenKot5QzgwumGLJj54Wbit2WS/
+ 4XEVlID73pmUlt4J5EvvRFeen9reiZcAbalEq7GA74emJ2O2VvIYMeMLdzZjOi90YbveZZkWScm
+ aj8Hn8bMLjwdCKE54KyJ5oL1H89GCMhVk4bMVkSPuZg6gvIPSzDpDzZWNccDiE0iy55VvImpTGj
+ mHqE6exTpbyUNv+dPh7JMFKS7YJi4db8J0ivsvZcjSV2yviOC1p13aItG9OqPYwk/DFGa+CHqd3
+ PH2htPXTzK6tZ2LJAhw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_05,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 spamscore=0 priorityscore=1501 adultscore=0 bulkscore=0
+ clxscore=1015 lowpriorityscore=0 phishscore=0 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220196
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 22 Jul 2026 10:47:26 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,69 +162,160 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Chen Pei,
 
-On Thu, 18 Jun 2026 17:38:25 +0800, Chen Pei wrote:
-> +            if (is_cxl && cfg->cxl_mmio32.size) {
-> +                uint64_t cxl_base = cfg->cxl_mmio32.base;
-> +                uint64_t cxl_size = cfg->cxl_mmio32.size;
-> +                crs = aml_resource_template();
-> +                /* 32-bit MMIO range for CXL devices */
-> +                aml_append(crs,
-> +                    aml_dword_memory(AML_POS_DECODE, AML_MIN_FIXED,
-> +                                     AML_MAX_FIXED, AML_NON_CACHEABLE,
-> +                                     AML_READ_WRITE, 0,
-> +                                     cxl_base, cxl_base + cxl_size - 1,
-> +                                     0, cxl_size));
 
-cfg->cxl_mmio32 is a single range on the main GPEX host, but this block
-runs once per CXL host bridge in the QLIST_FOREACH(bus, &bus->child)
-loop, so with more than one pxb-cxl every ACPI0016 gets a _CRS that
-declares the *same* [cxl_base, cxl_base + 256 MiB) window.
+On 7/22/2026 12:11 AM, LIU Zhiwei wrote:
+> 
+> On 7/22/26 8:56 AM, Alistair wrote:
+>> On Wed, 2026-07-15 at 22:50 +0800, LIU Zhiwei wrote:
+>>> This patch set introduces support for the RISC-V Smsdid and Smmpt
+>>> (Supervisor Domain Identifier and Memory Protection Table) extensions
+>>> v0.4.9(https://github.com/riscv/riscv-smmtt/releases/tag/v0.4.9).
+>>> Smmpt provides a hardware mechanism for fine-grained memory
+>>> protection,
+>>> checked after address translation, which is particularly useful for
+>>> supervisor-level sandboxing and security monitoring.
+> Hi Alistair,
+>> Can you include a link to the upstream submitted patches to use this
+>> functionality
+> Xiangyi is currently working on OpenSBI support for SMMPT, and we already have an internal implementation in place. We plan to upstream the OpenSBI support as soon as possible, and once that is done, I’ll be able to include a link here.
 
-I realise build_crs() returns nothing usable for these bridges at
-ACPI-build time (the BARs aren't assigned yet, per your commit message),
-which is why the static path exists -- but it hands that one shared
-cfg->cxl_mmio32 to every CXL bridge.
+Please be aware that Rahul already sent OpenSBI patches for smmpt and smsdid:
 
-I checked the generated DSDT for a two-pxb-cxl riscv64 config (cxl.1 at
-bus_nr=12, cxl.2 at bus_nr=200): both ACPI0016 host bridges (PC0C and
-PCC8) come up with the identical producer window
+[RFC PATCH 0/5] Add Smsdid and Smmpt supervisor domain protection
+https://lists.infradead.org/pipermail/opensbi/2026-July/010235.html
 
-    DWordMemory (ResourceProducer, PosDecode, MinFixed, MaxFixed, ...)
-        0x70000000,   // Range Minimum
-        0x7FFFFFFF,   // Range Maximum
-        0x10000000,   // Length
+In fact, as I said in another thread [1], Rahul also has a QEMU implementation of his own.
+His OpenSBI patches works with his QEMU changes:
 
-while PCI0 is correctly shrunk to 0x40000000-0x6FFFFFFF. That 256 MiB
-window is the only memory range either ACPI0016 advertises, so every BAR
-behind the two bridges has to come from it; and since two host bridges
-can't both decode the same range, at most one of them can actually
-claim it. Multiple pxb-cxl is a supported topology in QEMU generally.
-Partitioning the window per bridge may be one way out, but whether
-that's the right model is your call -- is supporting more than one
-pxb-cxl in scope for this series, or is a single CXL host bridge the
-intended target for now? If the latter, a note to that effect in the
-commit message would help.
+https://github.com/pathakraul/qemu/tree/rpathak_smmpt_v1
 
-One smaller thing about the hand-built template: the bus range is
-hard-coded to [bus_num, bus_num + 15], so with cxl.1 at bus_nr=12 and
-cxl.2 at bus_nr=16 the two _CRS come out as [0x0C,0x1B] and [0x10,0x1F],
-which overlap on buses 0x10-0x1B. The real width depends on how many
-buses the pxb-cxl spans, which isn't known at ACPI-build time (pxb-cxl
-only carries a bus_nr). build_crs() is no drop-in here either: with the
-static path disabled I saw the range collapse to a single bus
-[bus_num, bus_num], since no subordinate buses are enumerated yet -- so
-it under-sizes rather than over-sizes.
+But seems like his OpenSBI patches does *not* work with this QEMU patches, but works
+with his QEMU implementation.  Seems like there might be things to improve in both
+implementations.
 
-Both really trace back to the same spot: the static branch synthesises
-the bridge's window and bus range from machine-global constants
-(cfg->cxl_mmio32 and the fixed +15) rather than anything per-bridge, so
-neither scales past one pxb-cxl. Going static is fair enough given
-build_crs() has nothing to offer at build time -- as above, it supplies
-neither the window nor a usable bus range -- so the real question is
-just where the per-bridge window size and bus span should come from.
+I asked him to not send his QEMU patches on top of yours because I'd rather work in
+collaboration on top of a single series, and I advise to not send another OpenSBI support
+for the same stuff in that mailing as well.
 
-Many thanks,
-Junjie
+IMO you and Rahul should sync up in both OpenSBI and QEMU bits to avoid effort duplication
+on both sides.
+
+
+Cheers,
+Daniel
+
+
+[1] https://lore.kernel.org/qemu-devel/2e2de5da-9eb0-4d56-b193-d8b06b7a3512@oss.qualcomm.com/
+
+
+> 
+> Thanks,
+> Zhiwei
+>>
+>> Alistair
+>>
+>>> The rfc patch set:
+>>> https://mail.gnu.org/archive/html/qemu-riscv/2025-09/msg00216.html
+>>>
+>>> v6->v7:
+>>>      The implementation is updated from the v0.3.4 specification to
+>>>      v0.4.9. The main changes are:
+>>>      1. Update the mmpt CSR number to 0x382 and msdcfg to 0x74E.
+>>>      2. Update the mmpt register layout: the SDID and PPN field
+>>> positions
+>>>         changed and the RV64 PPN is now 44 bits.
+>>>      3. Rework the MPTE format: the N (NAPOT) bit now lives at bit 2,
+>>> the
+>>>         non-leaf NAPOT form is removed, NAPOT leaf entries encode a
+>>> single
+>>>         XWR tuple plus a G granularity field, and non-NAPOT leaf
+>>> entries
+>>>         hold per-page XWR tuples.
+>>>      4. Treat XWR=000 as "no access" and a non-leaf entry with N=1 as
+>>> a
+>>>         fault.
+>>>      5. Enforce the Smmpt64 root-table PPN alignment (low 3 bits
+>>> zero).
+>>>      6. Rename the fence instructions mfence.spa/minval.spa to
+>>>         mfence.pa/minval.pa.
+>>>      7. Drop stale Reviewed-by tags on the substantially reworked
+>>> patches.
+>>>      8. Introduce the configurable "smmpt-sdidlen" CPU property.
+>>>      9. Add disassembly support for the Smmpt.
+>>>      10. Add bare-metal M-mode system tests.
+>>>      11. Rebase to master.
+>>>
+>>> v5->v6:
+>>>      1. Use explicitly bit fields extract instead of mpte_union_t.
+>>>      2. Use the same exception behavior for MPT valiation as PMP
+>>>         valiation.
+>>>      3. Use PAGE_* instead of MPT_ACCESS_* as they have same value.
+>>>      4. Use address_space_*_le instead of address_space_* for SMMPT.
+>>>      5. Only print SMMPT address check log when SMMPT is enabled.
+>>>      6. Add implied rule for SMMPT as it depends on SMSDID.
+>>>      7. Rebase to master.
+>>>
+>>> v4->v5:
+>>>      1. Rebase to master.
+>>> v3->v4:
+>>>      1. Add missing review tags.
+>>> v2->v3:
+>>>      1. Fix build error in patch 2.
+>>>      2. Rebase to master.
+>>>
+>>> rfc->v2:
+>>>      1. When ext_smmpt is false or BARE mode, make other fields in
+>>> mmpt
+>>>         CSR zero.
+>>>      2. Add patch 5 to fix smrnmi ISA string order.
+>>>      3. Fix patch 6 smmpt and smsdid ISA string order.
+>>>      4. Make smmpt and smsdid experiment extensions.
+>>>      5. Add review tags.
+>>>
+>>> LIU Zhiwei (11):
+>>>    target/riscv: Add basic definitions and CSRs for SMMPT
+>>>    target/riscv: Add smmpt-sdidlen property for the mmpt SDID field
+>>>    target/riscv: Implement core SMMPT lookup logic
+>>>    target/riscv: Integrate SMMPT checks into MMU and TLB fill
+>>>    target/riscv: Implement SMMPT fence instructions
+>>>    target/riscv: Fix smrnmi isa alphabetical order
+>>>    target/riscv: Add disassembly for Smmpt instructions and CSRs
+>>>    target/riscv: Enable SMMPT extension
+>>>    target/riscv: Add system test for SMMPT extension
+>>>    target/riscv: Add system tests for Smmpt52 and Smmpt64
+>>>    target/riscv: Add system test for Smmpt34
+>>>
+>>>   disas/riscv.c                                 |   9 +-
+>>>   target/riscv/cpu.c                            |  60 +++-
+>>>   target/riscv/cpu.h                            |   8 +
+>>>   target/riscv/cpu_bits.h                       |  27 ++
+>>>   target/riscv/cpu_cfg_fields.h.inc             |   3 +
+>>>   target/riscv/insn32.decode                    |   2 +
+>>>   target/riscv/meson.build                      |   1 +
+>>>   target/riscv/riscv_smmpt.c                    | 339
+>>> ++++++++++++++++++
+>>>   target/riscv/riscv_smmpt.h                    |  26 ++
+>>>   target/riscv/tcg/cpu_helper.c                 | 119 +++++-
+>>>   target/riscv/tcg/csr.c                        | 106 ++++++
+>>>   .../tcg/insn_trans/trans_privileged.c.inc     |  30 ++
+>>>   target/riscv/tcg/pmp.h                        |   3 +
+>>>   tests/tcg/riscv64/Makefile.softmmu-target     |  12 +
+>>>   tests/tcg/riscv64/smmpt-common.S              | 256 +++++++++++++
+>>>   tests/tcg/riscv64/test-smmpt.S                |  85 +++++
+>>>   tests/tcg/riscv64/test-smmpt34.S              |  97 +++++
+>>>   tests/tcg/riscv64/test-smmpt52.S              |  91 +++++
+>>>   tests/tcg/riscv64/test-smmpt64.S              |  98 +++++
+>>>   19 files changed, 1353 insertions(+), 19 deletions(-)
+>>>   create mode 100644 target/riscv/riscv_smmpt.c
+>>>   create mode 100644 target/riscv/riscv_smmpt.h
+>>>   create mode 100644 tests/tcg/riscv64/smmpt-common.S
+>>>   create mode 100644 tests/tcg/riscv64/test-smmpt.S
+>>>   create mode 100644 tests/tcg/riscv64/test-smmpt34.S
+>>>   create mode 100644 tests/tcg/riscv64/test-smmpt52.S
+>>>   create mode 100644 tests/tcg/riscv64/test-smmpt64.S
+>>>
+>>>
+>>> base-commit: 499039798cdad7d86b787fec0eaf1da4151c0f05
+
 
