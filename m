@@ -4,111 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 632B0C531F8
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 16:08:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 305ADC531F7
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 17:39:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wmvxv-0004Ie-UJ; Thu, 23 Jul 2026 12:08:07 -0400
+	id 1wmxNl-0005rH-Vj; Thu, 23 Jul 2026 13:38:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1wmvxt-0004Hz-EK
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 12:08:05 -0400
-Received: from mail-yx1-xb136.google.com ([2607:f8b0:4864:20::b136])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1wmvxr-0007WG-3c
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 12:08:04 -0400
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-6689f36ae56so996300d50.3
- for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 09:08:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784822882; cv=none;
- d=google.com; s=arc-20260327;
- b=KcotQKN4lpNFdnLyBuwAWW4bm2hygtRmIsq8Kd6X53VqS6DxOeO/hjUTofRRD9iBP/
- +jP2oLtoVZuG0xyAySChOALrUE2sbRugDRRcXpRQcxiwtUVnlL141Uo922kxYUPMv1Ut
- vPcEI3pK1QjbydaX3m0zpShDSCKVB9ySuUsFlk1jGV+AhjgSe5egdwywwTDrRcRoLC71
- sm9iBIY5YaOGO9QIh9BHD5qXQbyuA6A7mMkuL9exSuDb+F2Tk0RFe0gyMF2FP4PZy3lE
- SQWF6IRuk2uTXwflSw064oXZY6DnRnuf6u0Hp00kAeG452VqBNzRse+4C9YIxUtH6emj
- KdvQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Vp/UAfBxtrNkqiFGWr8HdOUPysHpaod4R8kEC8Gjb40=;
- fh=sEYqtYJ8qSn8wbGRM4Ad4C1Ksm88nX010A7ZoA1pFHc=;
- b=M4eb9vmcjLaQxX+9jc/eLBDdIF2Bu+3Qj51MUaH7WaoL8pfjQRyKEwZ2Z3qg3E/Y9x
- wHcvcCw1mxc2jay5rhOndZ8cP6R+521xkZHWhaz1t8xSjfAYIobQHwHNifw97HoiYAUS
- 8XHW+elGmxz/OwoEgCHaYfELmE7WtQ/qw0mjYx5axtREi6MQKPOHsbC1UTYiim1J9Fx8
- ai5D/OYVJCgW4DeZZiM6M2OPUiMHK+0YknbGDDjKpJWbho+mnM9wMagdU9VFh748HZ5y
- SBi8GVRirJ1zwYgXdWFP1JcUUnthLPo146Vbacsh8x0NUNQeJLiomDlnNknBCy8/RBn9
- vvwA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wmxNd-0005mW-T0
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 13:38:47 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wmxNZ-000568-RV
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 13:38:45 -0400
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66NHXTSB405624
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 17:38:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ ibk5HMSkBUrJkeQntdQVXOLFdNw2Xb3EfqWYU2N4qlA=; b=E0jTOhwIu8ufmp87
+ 7qOiSZ287YhnAaxcm6ny2YzKVuMuhBovVIegks4HmfSZzrLmtrPBlNYHwLWOCdxg
+ g42Sx9X2DZiadW7Xxs6bcFy7evIAKF54xFaP8mPNQ8Lc/+q/AUjOth7bOMyGedP5
+ sm/9fAdUMs1gyAH1A/If81is4e3/5ZJWUshw/oJwGDgg5TgV0Ce/eKv2oQTxVccZ
+ KfruPsFm2T3YETe4OUBiKRz4T0cciEUOBSwcpN4GdId1DTgdnMtZtbOEAaJpGtz/
+ zXBBvO8WMpHvz+uapo51ZUAoF6f9YVRxI2IbWAAV1msMBoEhs9lkX+QUwbzLJCQA
+ jcLEIg==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fke0kttb5-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 17:38:40 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-51c110a3b6aso13628641cf.1
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 10:38:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1784822882; x=1785427682; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=Vp/UAfBxtrNkqiFGWr8HdOUPysHpaod4R8kEC8Gjb40=;
- b=BMMgzEHem2ZR4VM+CGt+ZK9keLlzVzKSXs1wiLRL2zK0t0cP4VL3y1FtdKsfrxZ43o
- vWAiLnHFYoFodz0U+Bb1sjlqI4LKtZwpTBi+LEZG3hxzwvYWZ3K5mUY4uRZUCf/+gEzS
- z64eCk5+4yMGauFlF7/znd30P1RiMwkN+/xosrNrAV01/LiIRu620qcxsIkmZDYVjzZg
- cB70Zv1I6wbPk2LMAri7WmcVD+SaLw7RUitkSAgvsiyhw3ErwX416l+/NwND4IszGuCi
- /B81mDyMLlw8pchxZgkn9CLSzOOPmMUqEiWw7pKN8ugO4iKBbHwdqThov3CjwV+jlhzz
- 4gig==
+ d=oss.qualcomm.com; s=google; t=1784828320; x=1785433120; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=ibk5HMSkBUrJkeQntdQVXOLFdNw2Xb3EfqWYU2N4qlA=;
+ b=j1gFqAXezMAlF1jwpXygwG1tWWkPkq5PayE9/Bb2Sllxlh4L7BPs2ZzKHT5zts1Feo
+ 5ME3yHcYjEdy6QfinR13UHb87IX3mMyjNDt42yoooeUO0pyOMQGujz8dKNKjT7GcIEIg
+ +erAyhxc+rwcDMfI3dK3LFTK2ZcNYyDxBuIavpPQmZhe8WGF5OuaKe2HodD8pjGisI+0
+ zPyjmNkrt3cCoccuo6QCPt4P9tR9+Rq2WvE9OQBm/AUszh9Z6GGZ3zXhNiDJyh2kjITA
+ /uEf0e0jGtXDp2uv4mExi0C99B1Q3EYRL/m3rbB0jG8ZtlTfr8RGfNmsEbrdro2XritR
+ MVjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784822882; x=1785427682;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Vp/UAfBxtrNkqiFGWr8HdOUPysHpaod4R8kEC8Gjb40=;
- b=XtEKoAfnFXbyD1qE7VTHCjl1YwPMPjcKU3J/gy6lbc/GR1IncneKhoo8h+KQDCdM00
- GxBwrxi54hSRqgFh8l2F9g7fnk6lordKnkWVBi7RrjkDzuSYbAgonIpLCc0fVs2BKlZt
- l+ptXZJ+UwJTiSKnMJZWbp0mxrvaQ2I9MyUDVtrwlC0IvmSz7eqI1pvRTHIKiaZKCe+r
- 6/mj6zIe7W9OkafHXBz0Xz5lL7m8vMwnSzPyHCBTQ8lScuGbHSYO7MiNsyFk60U+pCCm
- DVBQFKEEsX+aH/yd7wXPWf+mVbVF305u4yDAAl4jAyTH11WR09PXYuuJlTu1E84ZvlIa
- otCQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RqzwZGeZI1D/VZGyMzlFzaU4mFtilcQboquB/oCTL/wnslzqRXvmXZe0nd/kY04CGbz831OhS2gEA8o@nongnu.org
-X-Gm-Message-State: AOJu0Yxqv0722yldJYs/p/BuK9qWvyajFiTblZ8WMziE/JSdm/+/62mb
- dfqoh6GBtWAeoTzzBfCDqHHnCUcdl9x5y/cUaQ9+CrYM/oTr9KU47nbV/giQG/LNrOnT4Gd5qji
- 59wFxgT6Bu6RwDx6gQTY1QnHLqXqxxv4=
-X-Gm-Gg: AR+sD10vJuZD3Ywli//G6T5fIQyqz5U3JE61a/8FXpe94AO8Ztvy4o8JlSgo7XZDQw6
- /dgQ9U93cHjXL6MSG1MNpUOfZJQp20fWZ7tMxOpZCQwFhqFPtAE3fizkrK9YOSU5xzvBFGeoUsq
- jSjLpzSYoO2oRKSWUfj/70dXUqlqB+qaQMMJHq5Y8WN/uQbWm4OjNJwSWtwi1VQn9im44L1SuOJ
- Da87i7TBj+URcaTMmakjniFiIMbRbGMmuSnll/jNE9xCp3mxktwuol+gfAARRM+TWrr6yYs
-X-Received: by 2002:a05:690e:1583:20b0:667:d808:af7d with SMTP id
- 956f58d0204a3-668a4bae19fmr849846d50.14.1784822881671; Thu, 23 Jul 2026
- 09:08:01 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1784828320; x=1785433120;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=ibk5HMSkBUrJkeQntdQVXOLFdNw2Xb3EfqWYU2N4qlA=;
+ b=UdurHb38jvvBDuvdpCpKMLON3bnjO+pRHqNEfh4fqIscqjHUHb9YhhjRym3z07YTIG
+ oFPBaMX6k2nki+4w/o048baSglqQKIQ82HDYYx78IA0TXGt4dV6zzFZxdXOeryVgapED
+ kEH/g13fy0Eemk/QEd6jdOOw9sQJX4lV7pJ9fT/4Xc51F+9Z/1KfBHTV2LYihhdQuGkh
+ 6Y0hfe0w4S4KZRF85S9+8q48Ntu5QW3Rd+7gqfH1IplhIWi37Q/0MgjOLoU1m9T6ReGP
+ UwjgX9x1qjQnUB9CEwjncAgKyXeZZURKo8tme0b29nFmbhdLGn/LJ9yTi3zuGry8l+u8
+ OmUA==
+X-Gm-Message-State: AOJu0Yzu2/CoEuKkBbVHSiQEtJ0BBdKTGVmVZC4FNy5Gp2rm5SFuTTOd
+ 8s74gfkygWVj0HLAHw1G4rxQHFDYu0kObt0NcL24GJqQyuuDED8J/Rarf3DwLxLCjH/9S8cvanb
+ BuvPl4ofTN1iNEabIbHUhO5wXly2WGtgRZDAjhVaCD3SMg+lwzBHJzZqYJg==
+X-Gm-Gg: AR+sD13jqY0KUfe4rCYGY7Ss++gGqq3KdgyOLvxeq4yvo3mnFCbgSNE9iQLgtHe6MEt
+ bx7hL/Sz9RPsqfkmFfg97tes/9AMRs9cP6LNehLAVqRwuC6nhIg5CJsQ8BXtHSMh4DNh4hfhZL6
+ 4jnWAX6Nwqs0oiPH5eBsGabJPGaILME0t+/a6FPYgIo3XtGf8OgJ94138ZRrqocT2WBviYxNava
+ +Pem2EpWlv7Wkk/9ZVWRmWrGXhw/Os92Bzdp8YdFFmqkCDVxgpFpBXEfwgNLS3IUnl8lnYyF02G
+ j6dWH0L8iduZC+SNMPsz6tk5YYLzy4G1mbmVxX88zMTzNJBKhnq9/ACrHmWdaOhqwucGerf9V5l
+ hcmLv6W/NiRomcu/f+hEL2OZ7MFgxnus+6cn/5A==
+X-Received: by 2002:a05:622a:142:b0:51c:1fd1:e755 with SMTP id
+ d75a77b69052e-5283de98bffmr35530951cf.36.1784828319602; 
+ Thu, 23 Jul 2026 10:38:39 -0700 (PDT)
+X-Received: by 2002:a05:622a:142:b0:51c:1fd1:e755 with SMTP id
+ d75a77b69052e-5283de98bffmr35530791cf.36.1784828319196; 
+ Thu, 23 Jul 2026 10:38:39 -0700 (PDT)
+Received: from [192.168.68.107] ([152.234.122.204])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-907ba8d585bsm51019666d6.15.2026.07.23.10.38.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 23 Jul 2026 10:38:38 -0700 (PDT)
+Message-ID: <8e12d0b0-f7dc-411f-a750-f638c5158cee@oss.qualcomm.com>
+Date: Thu, 23 Jul 2026 14:38:35 -0300
 MIME-Version: 1.0
-References: <20260723151853.2143177-1-bin.meng@processmission.com>
- <20260723151853.2143177-17-bin.meng@processmission.com>
- <20260723-seducing-plunging-ef7d4c60d917@spud>
- <CAEUhbmVYdwUbp_y8TKZggoz7oNRWo7+sfe1Q+vbqApawp7jEmg@mail.gmail.com>
- <20260723-sliding-plural-bf980dc1e567@spud>
-In-Reply-To: <20260723-sliding-plural-bf980dc1e567@spud>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 24 Jul 2026 00:07:49 +0800
-X-Gm-Features: AUfX_mx_3-qV5-6YKA0203tBzlND2xWQFxjH3QqwMXHNVbrbPC2l9RaiC5nat74
-Message-ID: <CAEUhbmUVQ5M4Gw_viYq3BShCYCuA1HCDufKy9xV+TmfWKbpv8w@mail.gmail.com>
-Subject: Re: [PATCH 16/26] hw/rtc: Add PolarFire SoC RTC model
-To: Conor Dooley <conor@kernel.org>
-Cc: Bin Meng <bin.meng@processmission.com>, QEMU <qemu-devel@nongnu.org>, 
- Paolo Bonzini <pbonzini@redhat.com>,
- Sebastian Huber <sebastian.huber@embedded-brains.de>, 
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b136;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yx1-xb136.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] target/riscv: use SXL instead of MXL for read_sstatus
+To: Abhigyan Kumar <314abh@gmail.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20260723142254.1683113-1-314abh@gmail.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260723142254.1683113-1-314abh@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: _EfRhaIOcbwXmBRdVAMgamUklotss6e8
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE3MCBTYWx0ZWRfX0cKicuvDcJW2
+ S6wqrHUqW6SFkGoy0pVuecOpMQKZg+eyaR4NTMj1Qu4ePWb0QIim6HPQqxrPLgdWD82p/RBqMJq
+ gv93usP4yQXdI38eiFKdbdiGpL9DBuY=
+X-Authority-Analysis: v=2.4 cv=S7DpBosP c=1 sm=1 tr=0 ts=6a6251a0 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=LOtmT-1FezyT_fMOqjwA:9 a=QEXdDO2ut3YA:10
+ a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-GUID: _EfRhaIOcbwXmBRdVAMgamUklotss6e8
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE3MCBTYWx0ZWRfX4CerwdHrbpl/
+ eMcshLZ7t7h7SWv05sDVhXwAyc7iPYQBS75QJkJ73MrGWVxz/yOk6GZUfbYchbT0EKWZ+lOJoxd
+ Wti1cIZN73UTcFZIm/JHk4vj/sHjf+Xq6eWYhjM9AXRLCwwse8GKxIIS+q2qKZcZfeaGotdP5bK
+ yN0sdl1cIqYC2a0srVscNQ56YLIwGOm5c/GyGipsLkhcwWI5O67++Gdqm8L9LgsCWfT9NURsP0s
+ lwF7E00gHeIYzo4vCJN0Lt7t2o6Jex1tyO5iTkkylh7zFstKo+7PWUB8oS3d3rFoeJL3fdG5k9W
+ CijzT991Nmvh3vhLsmbLdYBedYShYUEqusNzgxm5x1O+5QN5loCgDvaKjWDUOwPzrDPiioMnG/o
+ Esj7Rj4hp1rIKMDhNGlJZ6WHQ4Kb/wm623fFKT2gC1+OSqrF0T6wR+WTM6ebSM6c7tNnh4FIquk
+ xsjBk4Kupo20S5kXWKg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-23_05,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 lowpriorityscore=0 malwarescore=0 suspectscore=0 bulkscore=0
+ priorityscore=1501 adultscore=0 impostorscore=0 phishscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230170
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -124,58 +153,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 23, 2026 at 11:58=E2=80=AFPM Conor Dooley <conor@kernel.org> wr=
-ote:
->
-> On Thu, Jul 23, 2026 at 11:55:03PM +0800, Bin Meng wrote:
-> > On Thu, Jul 23, 2026 at 11:29=E2=80=AFPM Conor Dooley <conor@kernel.org=
-> wrote:
-> > >
-> > > On Thu, Jul 23, 2026 at 11:18:43PM +0800, Bin Meng wrote:
-> > > > The PolarFire SoC exposes an RTC with binary and calendar modes,
-> > > > programmable prescaling, alarms, and wakeup and match interrupts.
-> > > >
-> > > > Add a standalone device model with explicit MMIO handling for time,
-> > > > commands, alarms, interrupt state, reset, and migration. Add its
-> > > > Kconfig and Meson entries and list it under the PolarFire SoC
-> > > > maintainer section.
-> > > >
-> > > > Signed-off-by: Bin Meng <bin.meng@processmission.com>
-> > > > +
-> > > > +#define RTC_REG(offset) ((offset) / sizeof(uint32_t))
-> > > > +
-> > > > +static uint64_t mchp_pfsoc_rtc_get_count(MchpPfSoCRtcState *s)
-> > > > +{
-> > > > +    if (!s->running) {
-> > > > +        return s->frozen_count;
-> > > > +    }
-> > > > +
-> > > > +    return s->tick_offset +
-> > > > +           qemu_clock_get_ns(rtc_clock) / NANOSECONDS_PER_SECOND;
-> > > > +}
-> > >
-> > > Just to be sure, this is done to match the hardware's behaviour of
-> > > resetting the count when the device is power cycled?
-> > >
-> >
-> > Yes, the rtc_clock + tick_offset scheme is commonly used by other QEMU
-> > RTC models, such as PL031, etc. It is not specifically intended to
->
-> You say "yes" here, but the rest of the sentence is addressing something
-> I did not ask so it is not clear if you actually mean that this matches
-> the hardware's behaviour.
-> Could you clarify please?
 
-I mean yes this formula is commonly seen across all other RTC models.
-The resetting of the RTC model is not controlled in this routine here
-but in mchp_pfsoc_rtc_reset(). Currently the counter is reloaded but
-maybe it should be left as it is and just initialize once.
 
->
-> > model the counter being reset on a power cycle. Instead, it maps
-> > QEMU's clock source to the guest-programmable RTC counter value.
-> >
+On 7/23/2026 11:22 AM, Abhigyan Kumar wrote:
+> According to the RISC-V spec, a 64-bit system can have M-mode in 64-bit
+> with S-mode being 32-bit (SXL bits or mstatus[35:34] being 1). In this
+> case, read_sstatus should use SXL.
+> 
+> QEMU doesn't allow changing the SXL bits in mstatus in M-mode. This was
+> because of the missing MSTATUS64_SXL mask in write_mstatus. Now, both
+> the SXL field in mstatus can be safely modified in M-mode and
+> read_sstatus correctly uses SXL not MXL.
+> 
+> Fixes: b550f89457 ("target/riscv: Compute mstatus.sd on demand")
+> Signed-off-by: Abhigyan Kumar <314abh@gmail.com>
+> ---
 
-Regards,
-Bin
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+>   target/riscv/tcg/csr.c | 9 +++++++--
+>   1 file changed, 7 insertions(+), 2 deletions(-)
+> 
+> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+> index 36f2004bc..a90449b87 100644
+> --- a/target/riscv/tcg/csr.c
+> +++ b/target/riscv/tcg/csr.c
+> @@ -2067,6 +2067,11 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>       }
+>   
+>       if (xl != MXL_RV32 || env->debugger) {
+> +        if ((val & MSTATUS64_SXL) != 0) {
+> +            mask |= MSTATUS64_SXL;
+> +            val = riscv_write_uxl(env, val, MSTATUS64_SXL);
+> +        }
+> +
+>           if ((val & MSTATUS64_UXL) != 0) {
+>               mask |= MSTATUS64_UXL;
+>               val = riscv_write_uxl(env, val, MSTATUS64_UXL);
+> @@ -4014,8 +4019,8 @@ static RISCVException read_sstatus(CPURISCVState *env, int csrno,
+>       if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
+>           mask |= SSTATUS_SDT;
+>       }
+> -    /* TODO: Use SXL not MXL. */
+> -    *val = add_status_sd(riscv_cpu_mxl(env), env->mstatus & mask);
+> +
+> +    *val = add_status_sd(riscv_cpu_sxl(env), env->mstatus & mask);
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+
 
