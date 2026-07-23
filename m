@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B710DC531D1
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 15:22:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2599BC531F8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 15:22:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wmvDp-0005QS-Ur; Thu, 23 Jul 2026 11:20:29 -0400
+	id 1wmvCt-00043Y-N2; Thu, 23 Jul 2026 11:19:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1wmvDN-0004NT-1b; Thu, 23 Jul 2026 11:20:02 -0400
-Received: from mail-japaneastazlp170120005.outbound.protection.outlook.com
- ([2a01:111:f403:c405::5] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ id 1wmvCq-0003vG-RQ; Thu, 23 Jul 2026 11:19:28 -0400
+Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
+ ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1wmvDL-00084Z-9g; Thu, 23 Jul 2026 11:20:00 -0400
+ id 1wmvCo-0007zZ-LJ; Thu, 23 Jul 2026 11:19:28 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xkAvaA4IujZbfEEHBfULHim//3Y1mEBiETLVPf9KH2eZVZ4FEC3i6LDmCA1u8gIiLCYMyWvQKBTgcXFvkY/4kHSt0tYiA1lPCF7EhV1zS/8av/Cmj79R2EaHiHTa2esurhbwr7i650JlNxV3/eqVPwVqzpUD1hPV878lZeWuD+2l95o4DymA9EPJe/T+MUhiIYWDiibbhQ/iJ/CeGAwWKCnu2MPelBU2Cp9nobPmnfrazG2obh5cY3wpBfLCOhh3ymK7kyomqeZYPnXiG0kJLhK4tBUb2TiB1+9bXai1ZzXZoPt93JSQa0Pg6SQgaxr+uDgUSXMAqv0rQX1GjAWv6w==
+ b=qIGeYft2omkqcHwNdS11mKo/3LYJxZITX/OYuFDKAvC++bSzx5j2rDV0FjAtG6eKgEkFMIT7qUt3P9wJE2iaBTfQrEwrX5zvADncDm5K44LL/jUCcUA+BDZpy+rwK66fSIQL27Qi+UfTvSiOICA2whHj4cFHD0F0ZE/W8OOwrnRnP+txcxCqPqCCiHJJUVpPaIhaXDP9G/xck/KWWqYN2BK9ewEvU80JUhrF4yzKljmjgXz/su3J/+dQPzGqidsmoSMifVUz+Y9eQikq4/9yWksCaaAZeDvOiWzXSwt0cq7AmeqAdep/Mh5HWpZM9dzf0s4tRB91ClNb134lp8AHJQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xVxG9LusGwObsmg1FgHMpBS+nQpGUFdg75hulxmQJsQ=;
- b=M/MDGyVg5IEE6wGg/J0F7XYe8uheFa1dsrqnpOfR03k/y85M3mmK0WnsDJEWZ4XB8Fg11RQ/HSlzakf9pzSlfwq5B8w6+8rtm1o4TrAHUj/LtO5hBXNSx7qlD7wcyExqhIzKfJnEOE/Soy9SFfc2UO18h/b03ZgDnRNJW3YV60mCuSkITMmIS/0YI3fP6BzfKBOu2vlciv29nd0w8oNoQe67+4nsU630VXe5Vl4P6pcphiNUaS5iAVcRporDo8EuoqKMTn/IoDYB9c0n+oeDch+PeVrD0iJGretbyIM99GozffV2D7dvEOVqYDIS/8qUZ9UhDgGY9gOZbqrkAWFB/Q==
+ bh=G6RtfaFuncVDNGD1RNqTDJeog9eykOiM2rsSnnHAZvk=;
+ b=nvAWslad16RXOfB9FKvkuPe4pasxz8roRujRcRzeL74T87OEhaqHpzjh8F3+FthCeg/WcdUkWmr/0LwYwjP8VOmI58i/mgYHqkO+HXTo9yy0qWHdykftCEkoRpKgKRX2h3up0uhgqVksPjsBkSoym9uIUm50lwy2d7rMNaFQN0kaV8snuFXrVqIJR15AxmXH2Hzshk6XjlURhoTCXy6DngUDZbpMfHCJegUIKW1XuWnjwti0bb6BXSP7jU7JhITGrLFt3XSiYve0eX8/lWau8Nd8ZKzbqoocCSbo7ML4mZXdvmJYpcxc8KqcZCTnLutCP6l9LOE77Z60dR+e1UPP0w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=processmission.com; dmarc=pass action=none
  header.from=processmission.com; dkim=pass header.d=processmission.com;
@@ -33,19 +33,19 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xVxG9LusGwObsmg1FgHMpBS+nQpGUFdg75hulxmQJsQ=;
- b=qZeqomNHseDwH89Sz8UJtxXNTTFq2qKyddlv3WWoPNjTWoyyObaoUUqqSdWjhKPlIGkga+7SN9+Iz14Ip3VR+Vk+Lio/Ps+POlJb7R+4OT2DC5cD/TxW6TK29j6qY5n+addaTZmozSrYXFfP//OD7SAxqkTLqku3mPkZeYxweAg35oTwZTy++VPvQ6bYWEMdr8+kXAhOxYmzSN6ehrOr/c5Vd54VUoElXw4sgA3AmHL0f2dwlp0D2z3lS9pw1tioH7VZfKz9EU5DKCrq0hy1/CB4uxFzPPDXTwKxnBOo3+2xvlxPytgw75blcqPqzU14xdChGbh3nyGmwtr14njeiA==
+ bh=G6RtfaFuncVDNGD1RNqTDJeog9eykOiM2rsSnnHAZvk=;
+ b=nfRu5MlK8uTZbDB2DZxAQ8zkSMxOGHwfdjbDx/aAAR+sNYKzYhLHDHUkTaD1YqlZW0twaU0SR2iHWWLrZ4EXEFB2FQgAI87Tvnybek757ztxlVv1wTgUrvyMAQJa5SRtviSV7HWj5KnNNqGnWjsXWasVXuOMfLoi5XUr0OmfJEK8n3N5DaUXvx+Rngpg/AU6yCfBaGlE+VATmroOz75FYOaW7NAteeAIEdsfAq1FjwhwyPHcdpShPqehq4xzDM47MDsTf719yQCMWax5JyW5Hg43I32MxTJse1OiGTspmUITlZ0TGk7xlFsr2JkxXCy/93KOVCbHS+ruGN1h+/WbiQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=processmission.com;
 Received: from KL1PR02MB4977.apcprd02.prod.outlook.com (2603:1096:820:71::8)
- by SEYPR02MB7097.apcprd02.prod.outlook.com (2603:1096:101:1a3::13) with
+ by KL1PR02MB6215.apcprd02.prod.outlook.com (2603:1096:820:9f::11) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Thu, 23 Jul
- 2026 15:19:43 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.11; Thu, 23 Jul
+ 2026 15:19:16 +0000
 Received: from KL1PR02MB4977.apcprd02.prod.outlook.com
  ([fe80::9fdf:2557:8351:6c03]) by KL1PR02MB4977.apcprd02.prod.outlook.com
  ([fe80::9fdf:2557:8351:6c03%4]) with mapi id 15.21.0245.010; Thu, 23 Jul 2026
- 15:19:43 +0000
+ 15:19:16 +0000
 From: Bin Meng <bin.meng@processmission.com>
 To: QEMU <qemu-devel@nongnu.org>
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -53,12 +53,11 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Sebastian Huber <sebastian.huber@embedded-brains.de>,
  Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
-Subject: [PATCH 21/26] hw/riscv: pfsoc: Fix Icicle Kit RAM size at 2 GiB
-Date: Thu, 23 Jul 2026 23:18:48 +0800
-Message-Id: <20260723151853.2143177-22-bin.meng@processmission.com>
+Subject: [PATCH 02/26] hw/riscv: pfsoc: Map the L2 zero device window
+Date: Thu, 23 Jul 2026 23:18:29 +0800
+Message-Id: <20260723151853.2143177-3-bin.meng@processmission.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260723151853.2143177-1-bin.meng@processmission.com>
 References: <20260723151853.2143177-1-bin.meng@processmission.com>
@@ -69,67 +68,66 @@ X-ClientProxiedBy: KU0P306CA0037.MYSP306.PROD.OUTLOOK.COM
  (2603:1096:820:71::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: KL1PR02MB4977:EE_|SEYPR02MB7097:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1372d0a7-24ba-4d8d-a68a-08dee8cdd264
+X-MS-TrafficTypeDiagnostic: KL1PR02MB4977:EE_|KL1PR02MB6215:EE_
+X-MS-Office365-Filtering-Correlation-Id: 53b5db24-76a8-4893-cad5-08dee8cdc254
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|34096008|376014|366016|23010399003|1800799024|6133799003|22082099003|18002099003|10067099003|56012099006;
-X-Microsoft-Antispam-Message-Info: O7AuEI8A9lvD1eJNm7w2Ci3pAIDkgTPARpkeaupcFeqDjSJB3+Jcwy8OdI4p+mTC6sR8INUr8s8ow+Wl5JKrdBDT+CqF2qOFXYbCf5J6fxRaDsbM6vsBK6s/qiyGUpDiILl8KlhRqcktkJAd65hyCvdcQeecgqRAye4hGgObRTApL8pa3UGDFpiS8aPY3eQwVUX0FHdlRLA7L4ompmkUay11e8sg80Sh9644tf9HJHAhthYvZnTg+kkxY52wBf1xNRjSRgb+/LZyV2JDQKR124ycgA4kMNWk9NhhiMto/5KRb9o5vzqD0txhpY77psLhbLAgShivZnCe3TvICpvGIfIoZ9AnROV0SP6P2gN+SRleUq3S8SCdPsQzxA/EznbtaZxGEYloqPQpYZ/ul8B0JJQnHYRJMO85IA6MLxQBIWoAA6wnn3DIQeSJV33q5dxK/Z468nj0lXia3kXU8UsZ+v6rGMwH8Jn5ZF21Ch+hTzKpOs2CzHihj8lARfoZRELmwsYI5RrRPThPIRsY++nTklbjYq31vHAxfnsU7+mYq4ROvW4zKh4LHv0Ef0YXXTS0r+FHup8aExcohhO1VH7qC59lXBf4vGbFDiKgkjU8wNxa+PWdqnbSdxPMHw1askP9nCqWD9SJVJVJRAH0i6Om3Aiqf3eTMAVn4JiNtnNjXao=
+ ARA:13230040|34096008|23010399003|1800799024|376014|366016|56012099006|10067099003|18002099003|22082099003|6133799003;
+X-Microsoft-Antispam-Message-Info: h8T+G4pkfvCdso7hwwBb0jOlduem5gTzeNJk4qFRB411o6QrNFN0lUfjzCLQJW34M+b53S4jG+wy6Y+6buhyieK+qiLcRkbH7UEfpIl4ZLohK/sVYI6C69FocZF+lrbCWbkJMGUx7ymXMMiDxR7h4ehZZ2CifCvWb/CEJZxlJnqfmnk1gjthhpBfxfQHG/3zZPuQ+4Yma5sEbd3rl59JqibbiSVEoH34P5fzp67dzoUz29OJ7bXDilBHoTEHkVtpCE35OH7Y6sXeqnc8LEV4dBZwKvz6dNbk5lQ0VqoAkpc+vm4Nve51tY1+riIGCzG50dAtpBPGU0E4Vg9krMZ+Iso72wrSxS7N65VkWaebOsxDcGoagTWcsIyQFbZVlID/Gtbg3uaRq68SAVbcVbAt66tWKyE2+doIRo2megZ1TELkDfc2oykU0ugud+53YTnMFvi2W0Agsd62nRaU4YSgh0kU2pyXB9EdznQ5qhRSkG1HtLlybfSacZc3nWKraFi/ihwRAu043mV4Bf4XNKkc9HeHq3aGYpCPi8FzLnSZrrW4gckS5dmgdY0an7Q4ingPhJHpQjgoLk0QBipZv16E2Agf9ynGzFIISc9uRSgaHomWYEJBnh7Eo4GmAoXkgXsOCapjKqlxVVPi7U3mIefYvuDyXA8zRhXIxtTjsZf4c1M=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:KL1PR02MB4977.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(34096008)(376014)(366016)(23010399003)(1800799024)(6133799003)(22082099003)(18002099003)(10067099003)(56012099006);
+ SFS:(13230040)(34096008)(23010399003)(1800799024)(376014)(366016)(56012099006)(10067099003)(18002099003)(22082099003)(6133799003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gGlSH/r6ubRwFExGNs6M8f+HuCz4LfOBBB2q6VP+f03gqLvKh5C6rBAOAcVu?=
- =?us-ascii?Q?r7x5W5kY6LOtU1IJ0jV88lWvV08L8oyI/e0W9KZ7OT/cgdXn2UMHjkRWqONB?=
- =?us-ascii?Q?Jom81BCj3Pr2BaOhdPGIj0LyhSTGGkoE/mpGk6O+NlyWqvvU4p5iP0YJ9OLL?=
- =?us-ascii?Q?z0G57ePdzh38qyoNbYboCSKlilvStZJiNxTT/1gX6UbqkemEK5ih6w0itZ59?=
- =?us-ascii?Q?qROaNkKXJetqS0Vzlltxt31jg6VtH2IIAmSKyJ4+ng/20HbkVy0DjBoTq6R5?=
- =?us-ascii?Q?wv2Gr8Toulo7wPL3EDS7erUI7+Zx8nv8XY+nVX/Zk2D2upUFSaPS4bQUupwo?=
- =?us-ascii?Q?MTLgxSWLYCjW1ldF57Ym76uHbAt66/3jpN9HF+2GxORMogkevPjK4NJHabmZ?=
- =?us-ascii?Q?wkwyf6G/EYPHu0rdhzmllcsPikx2MMzxt12m+1gSKyKbs1PZ4ILra3atexS/?=
- =?us-ascii?Q?Fx4RRg52Hd79XsmTpgm9QmvpxIWG7ms/2O2SKslQJrRfzVRPPg/ZscCsvotK?=
- =?us-ascii?Q?qsv3EwB10GYR20rhY7ntI4FWxbvl5HCfOan+Wm/VMWpY5oIPNea4SQarvuFd?=
- =?us-ascii?Q?g5QWKmUgSq9p3AvOVqszAxU2On4BcxIrjJfwtc/k3kbUE0n5LAwpWM2olrIG?=
- =?us-ascii?Q?83x/etc+cMMlk77HMkCbjwnMNg/DeMnSDcuL8RE7Np34+cHC7Nvt8wX//O/7?=
- =?us-ascii?Q?2GBGZuEfW2EjKOZdfOkOJOSnXUrpoweoHkg0w1Z71YzrwwztjJVsV4eRJztb?=
- =?us-ascii?Q?CFdy48YS6g/ofv4e+CXqjyLbkmBo6SfprbFxxIVcUFogwMhIj8SR3WXDovSc?=
- =?us-ascii?Q?IawKs0vkgNf9BrMUiHN+Sq3c7tdFJeS9kUV46nc4KQ/eTA/Y+8Ce6C1UnXOj?=
- =?us-ascii?Q?UtL4jRGeWz1K+aQ8TQUSri4rIcPkxwjOxJVh9Egf7v91Z090Bh6B5xaePbGi?=
- =?us-ascii?Q?QDXmBEq36slX9iQZq+YWzJatrPYaUhLAstUhvH2Ykcb0aOjJLi526x2r8vCN?=
- =?us-ascii?Q?VnnfxwKKWVkMb5QcA9AFpPBnPpRCjLdjHn7Qv3uXjbPvlDHGGvFhfgcC0ODc?=
- =?us-ascii?Q?2jdSuAA7FqMWTnyYIXWO+m8pMBe2oPCNXvOZuADB3x3YZKTpBzKFxym4Jfj3?=
- =?us-ascii?Q?Omfox278jUHCr84Sl5YRzZXYwLJQRdh4/C1ESKi7hXfETXJwR4T+k/Hm5koA?=
- =?us-ascii?Q?eZFlgai+e/f3aBjCdi9IJ0fTdnxCrGFRZquD86/0BGwuYyoAOWmCigUO6GYV?=
- =?us-ascii?Q?jRuQLGBfRWfXvUkTcKAXgBusF6gb169Ycr4uzYx65lO8t1Eeqm3ICTl0PwMN?=
- =?us-ascii?Q?R5akRpwsLjbeb3Z9PyyXz1hRRIEdPSAi5JMshCCAmbGq61RRcgsZI+j/dBis?=
- =?us-ascii?Q?MQAoZqGCopdyFqbxZUCqMZLX6oNDHsOKPTSR5bv70RDLSg96UEtz2FsT8TeR?=
- =?us-ascii?Q?zqzGWsiiwsNidFBQDzwuHOvO198zik0/kqRA2ynIB//K2NUyiSqXvRSc9tak?=
- =?us-ascii?Q?Z7br4j3AxPOwq05HZlzC80nChc+gG/AOhke+wj3upVu7o8yX7W0kYtyVY5eO?=
- =?us-ascii?Q?Nam/PvjKMWxCKgyOQLUAnuE8KaepRzz4h27lJWJR4oBAAMiY91rwHsQHRqZy?=
- =?us-ascii?Q?KV5fX7RkDDZZcX7xiiTI+k6PoQlAF87RXHJtSiarXyotRpTq29WIKaAxfBEh?=
- =?us-ascii?Q?HK8iJvwawbY7U8pkkaBBM6hLDiunuxrIclkP3B6ycFazT1Ni4T0+wFdizgnj?=
- =?us-ascii?Q?mqXmZBp/A05lcfxM6XfGA7JnfqchUUc=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?cnJgfk7/tVXDvWYX8AXTpQXyraTl+Ho2SlhXHJfDl3jzsDrOvNCLbWhdSkZ5?=
+ =?us-ascii?Q?/ZlkY7beHIjEnu4biz3/56wO1HhECopQqT0iTiv+z+OsxjbP/+Sh0fIvs27c?=
+ =?us-ascii?Q?70FZxC2Gf35n7aBg505bjlvXDN0/PBe9Hb9sbC++elH1XANXxc3sYUpcBgAU?=
+ =?us-ascii?Q?OasWVVj9j1nyE0ru1IwEO0Om6GIOY5LMt1E/Tmx6ulbDKOjCtdKxY6SjH3JD?=
+ =?us-ascii?Q?Tg76GAw+SY87jB+TQLZVi6KnB6JKodjJz0aY7oI98MckED0GYfrDnVZFbMJ6?=
+ =?us-ascii?Q?X5Cz6oksSAPKDTdEW5wq3V4lszhP0W+qLYSOUTqhGA3GXZsDGazZaTidEJqG?=
+ =?us-ascii?Q?F1QCG8J+qqXDNeG1Uj9SXgwF6Lp9gMuZu7/4iSpVpRDrZqjEfiRox05sS6gY?=
+ =?us-ascii?Q?gldVHHv3Q1pWS1VmW6bEhLlghB2ejfA+vFZCTi6mx/97BMvEiJiI75SROg5Z?=
+ =?us-ascii?Q?TFfPa/SuGciaZ2dg48GVWFNn0cT4UZUrhFgeOKn+C/68yGehCe+I2bOeQKBo?=
+ =?us-ascii?Q?Dil2Iqc8TD+SsuYd4MtQCrvDAOcdVrLmPz/k8WR/PXr8oqoDYjBkcpbcrvko?=
+ =?us-ascii?Q?jd1R/uAWxBdgR8VGIMfyAeMUEP7xzLPlJqz8t7mfOwN7mVARZEEYQogzSNe6?=
+ =?us-ascii?Q?ZEOjqX9iuCID0wLQa94hVBFgnr3ERT2t8DtewcTydF8zY1tdzDQoymMWsZs3?=
+ =?us-ascii?Q?gDZDFClBN/WyBTIX2VRGwREtzhxeIBi7jYLKtraokyTYIeVAS/GTq5v9s+Bq?=
+ =?us-ascii?Q?hm+Si5drm+dVstuJniUGpRZ4O1ijehjc1FtEsqYadMy5P0WFdFYOeKKTTEm3?=
+ =?us-ascii?Q?DjMs45s31RaMCi0Uls2AYvwY1Bjb/LQSnxFph23A3VO+OfWbuXGFIcOsplPj?=
+ =?us-ascii?Q?kknNAUGu+EYthET7ad+vK590C4OE8cReKMgvMp0sImrJLuhtkvtEOINhzGax?=
+ =?us-ascii?Q?uGupaw1eMW+slKqYBUHDgDwtvi4QswYL8lToVKLlQ/WfLN8ecP2kQrlcuh5L?=
+ =?us-ascii?Q?wkU/IOShkVbppdY/DG+EB1RCdTt2PToIh+Imd53eVlr4sUfqPBviVbKdaIot?=
+ =?us-ascii?Q?76F+Gbo9SFxN+QXsEWjf8rnuD/qDVwTY1MIDGIe80ZuSN68tFvQ4IxldBOP9?=
+ =?us-ascii?Q?c4H7drPNLHvHMdXgZh6V8jDY5Zk3yoflBoDbAKegwn/hCb05DCuPAc+n8lC9?=
+ =?us-ascii?Q?PrCUSHPq0YjnEpHP+TZwMf9nozC+JRdb7ptuRLMqjkeXwc22gmQNBkmBvBBL?=
+ =?us-ascii?Q?y7/JLOpawezkUhF9Mtc3GklSuoK2hXSzbxjCGYubNY0DGYSaiOW4PiU4UVTv?=
+ =?us-ascii?Q?b+DjwSFUICfrgerGYP5ckHQQbD+CDhigd6+30cf6Oky22qyrdsjfV0KJzdJV?=
+ =?us-ascii?Q?N4n+Ih9uNRcB3pQFTfLk6bjjLpv3WQlE/d09bazApGumd0fCxB7flsKZscmG?=
+ =?us-ascii?Q?bqfwogNbg3sX8x0LDhXGy3UvINRohoVeQgzg51hU7flz3Qg0ztemSBEbKgVV?=
+ =?us-ascii?Q?g8n3EDAhV6K1BBhE6sQv2t9LFJSRgf459oXD1ZSyXeQkl006RR2MiLD94P8Q?=
+ =?us-ascii?Q?s04xc0lfgqT3Omd4oKokEN54qyB18tde8XCFzhsKzdBkIHRC2/mexxDJEiny?=
+ =?us-ascii?Q?/ohKeALtVs781Oc4eBjFU971SJKTYwEu4i6i+zpTyrIkvDAIT0Ty6YPF4qXg?=
+ =?us-ascii?Q?QwwhdDLSyEtaDCJ0VFg4l/HDd7rKpuOQkpoPRp8L7Z1DTNzGjlWr6ebrf1dq?=
+ =?us-ascii?Q?G3FxFqEpySl2fEOTVSpQ2m26dZh2HuQ=3D?=
 X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1372d0a7-24ba-4d8d-a68a-08dee8cdd264
+X-MS-Exchange-CrossTenant-Network-Message-Id: 53b5db24-76a8-4893-cad5-08dee8cdc254
 X-MS-Exchange-CrossTenant-AuthSource: KL1PR02MB4977.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 15:19:42.9637 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 15:19:16.0319 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TlT8z8KpHq9iGJOFJEEQD6YpVponN5R97rs3GxxtaSaoO+lMBQdI5oUfcUUBWjWPaEB2KaPLyc1UB6oxO7QQmbgD5rLRth1upm4Dgmwe7jg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR02MB7097
-Received-SPF: pass client-ip=2a01:111:f403:c405::5;
+X-MS-Exchange-CrossTenant-UserPrincipalName: bN3DhbNIgzQGE/Tuikoq391WN/h2d7tFvPwRa1VXN2onjOu4E3c6DlVsicFDnwQ0XpkV5Xh2qGtL0bhJKHVTcp6L9Ntam1oezzbgHUGyIHw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR02MB6215
+Received-SPF: pass client-ip=2a01:111:f403:c406::3;
  envelope-from=bin.meng@processmission.com;
- helo=TYPPR03CU001.outbound.protection.outlook.com
+ helo=OS8PR02CU002.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -146,70 +144,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Icicle Kit has 2 GiB of RAM, and its firmware device tree
-describes that fixed capacity. The model currently defaults to
-1537 MiB and accepts any larger size, allowing configurations
-that do not match the board.
+HSS uses a window at 0x0a000000 while setting up the L2 cache,
+decompressing its runtime image, and executing that image.
+The missing mapping causes the E51 to trap before firmware can
+initialize its UART.
 
-Set the default to 2 GiB and reject every other size. Update the
-documentation and L2CC qtest command line accordingly.
+Represent the window with RAM to provide its persistent read,
+write, and execute effects without claiming to model the L2
+cache itself.
 
 Signed-off-by: Bin Meng <bin.meng@processmission.com>
 ---
 
- docs/system/riscv/microchip-icicle-kit.rst |  4 +---
- hw/riscv/microchip_pfsoc.c                 | 15 ++++-----------
- 2 files changed, 5 insertions(+), 14 deletions(-)
+ include/hw/riscv/microchip_pfsoc.h |  1 +
+ hw/riscv/microchip_pfsoc.c         | 13 +++++++++++++
+ 2 files changed, 14 insertions(+)
 
-diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
-index 9809e94b84..3db2b3c7e3 100644
---- a/docs/system/riscv/microchip-icicle-kit.rst
-+++ b/docs/system/riscv/microchip-icicle-kit.rst
-@@ -26,9 +26,7 @@ The ``microchip-icicle-kit`` machine supports the following devices:
- * 2 GEM Ethernet controllers
- * 1 SDHC storage controller
- 
--The memory is set to 1537 MiB by default.  A sanity check on RAM size is
--performed in the machine init routine to prompt user to increase the RAM size
--to > 1537 MiB when less than 1537 MiB RAM is detected.
-+The machine has a fixed 2 GiB of RAM. Other memory sizes are rejected.
- 
- Boot options
- ------------
+diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+index a30b944afa..612fd2b69c 100644
+--- a/include/hw/riscv/microchip_pfsoc.h
++++ b/include/hw/riscv/microchip_pfsoc.h
+@@ -90,6 +90,7 @@ enum {
+     MICROCHIP_PFSOC_L2CC,
+     MICROCHIP_PFSOC_DMA,
+     MICROCHIP_PFSOC_L2LIM,
++    MICROCHIP_PFSOC_L2ZERO,
+     MICROCHIP_PFSOC_PLIC,
+     MICROCHIP_PFSOC_MMUART0,
+     MICROCHIP_PFSOC_WDOG0,
 diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index a2fbc89222..b604f7008b 100644
+index 218cccab69..fd28ee75fe 100644
 --- a/hw/riscv/microchip_pfsoc.c
 +++ b/hw/riscv/microchip_pfsoc.c
-@@ -557,10 +557,10 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-     DriveInfo *dinfo = drive_get(IF_SD, 0, 0);
-     RISCVBootInfo boot_info;
+@@ -97,6 +97,7 @@ static const MemMapEntry microchip_pfsoc_memmap[] = {
+     [MICROCHIP_PFSOC_L2CC] =            {  0x2010000,       0x1000 },
+     [MICROCHIP_PFSOC_DMA] =             {  0x3000000,     0x100000 },
+     [MICROCHIP_PFSOC_L2LIM] =           {  0x8000000,     0x200000 },
++    [MICROCHIP_PFSOC_L2ZERO] =          {  0xa000000,     0x200000 },
+     [MICROCHIP_PFSOC_PLIC] =            {  0xc000000,    0x4000000 },
+     [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,       0x1000 },
+     [MICROCHIP_PFSOC_WDOG0] =           { 0x20001000,       0x1000 },
+@@ -201,6 +202,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     MemoryRegion *rsvd0_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *e51_dtim_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
++    MemoryRegion *l2zero_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *envm_data = g_new(MemoryRegion, 1);
+     MemoryRegion *qspi_xip_mem = g_new(MemoryRegion, 1);
+     char *plic_hart_config;
+@@ -277,6 +279,17 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+                                 memmap[MICROCHIP_PFSOC_L2LIM].base,
+                                 l2lim_mem);
  
--    /* Sanity check on RAM size */
--    if (machine->ram_size < mc->default_ram_size) {
-+    /* The board has a fixed RAM size */
-+    if (machine->ram_size != mc->default_ram_size) {
-         char *sz = size_to_str(mc->default_ram_size);
--        error_report("Invalid RAM size, should be bigger than %s", sz);
-+        error_report("Invalid RAM size, should be %s", sz);
-         g_free(sz);
-         exit(EXIT_FAILURE);
-     }
-@@ -770,14 +770,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc,
-     mc->default_ram_id = "microchip.icicle.kit.ram";
-     mc->auto_create_sdcard = true;
++    /*
++     * HSS decompresses into the L2 zero-device window and executes there.
++     * Model it as RAM because QEMU does not model the backing L2 cache.
++     */
++    memory_region_init_ram(l2zero_mem, NULL, "microchip.pfsoc.l2zero",
++                           memmap[MICROCHIP_PFSOC_L2ZERO].size,
++                           &error_fatal);
++    memory_region_add_subregion(system_memory,
++                                memmap[MICROCHIP_PFSOC_L2ZERO].base,
++                                l2zero_mem);
++
+     /* create PLIC hart topology configuration string */
+     plic_hart_config = riscv_plic_hart_config_string(ms->smp.cpus);
  
--    /*
--     * Map 513 MiB high memory, the minimum required high memory size, because
--     * HSS will do memory test against the high memory address range regardless
--     * of physical memory installed.
--     *
--     * See memory_tests() in mss_ddr.c in the HSS source code.
--     */
--    mc->default_ram_size = 1537 * MiB;
-+    mc->default_ram_size = 2 * GiB;
- 
-     object_class_property_add(oc, "clint-timebase-frequency", "uint32_t",
-                               microchip_icicle_kit_get_clint_timebase_freq,
 -- 
 2.34.1
 
