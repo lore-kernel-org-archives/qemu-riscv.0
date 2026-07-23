@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 492B4C531F7
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 15:23:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05065C531D1
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 15:23:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wmvDl-00057h-Ho; Thu, 23 Jul 2026 11:20:25 -0400
+	id 1wmvCu-00044S-VN; Thu, 23 Jul 2026 11:19:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1wmvDG-0004Ez-7e; Thu, 23 Jul 2026 11:19:54 -0400
-Received: from mail-koreacentralazlp170130006.outbound.protection.outlook.com
- ([2a01:111:f403:c40f::6] helo=SEYPR02CU001.outbound.protection.outlook.com)
+ id 1wmvCt-00043b-Qv; Thu, 23 Jul 2026 11:19:31 -0400
+Received: from mail-japanwestazlp170120003.outbound.protection.outlook.com
+ ([2a01:111:f403:c406::3] helo=OS8PR02CU002.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1wmvD9-00085x-NQ; Thu, 23 Jul 2026 11:19:52 -0400
+ id 1wmvCr-00081v-44; Thu, 23 Jul 2026 11:19:31 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nd8/CdSoMFTR7Rx/UN9aLvTP/J7I7wvzzWacAogiR/SuTSoOzvGJXeDg8ZgBhM46HadBqbR8VjcgasEK/i/l2F2z+PE9bVcQepJ/U5gj5smtMo6hlPV+R2fzJUiHsh5fx2U2SEXJWLyIF2f7HJZg9KdvCbFFH3FyK6JM0SEF2wrJeYjcwLigQqt7LDKbUhcbn92EwZL30EMgpUpCmh2aclDHNek7FR9YCVT2UEEVaGZEVNPzRtgZ+NqNwhpMEDCFI6T8bglsgbM9ztPwnD89GkVZXQZi55cHK2wK8ixDDLdhecPYopChFUrZngTm2MngnJBGNlH/JxIrFUV1DpzYvg==
+ b=loeyDrWHT+cw5cZCZqn4y4aL2kSvD2zYF16jHAuQoSuv94NwELI4RDx8rWMHlQ4KXHKzG+SOUG9L0W6KA1db0AmkfVNWrIzJCM8G2ukmGUIPeJh9qY79wqcLK/QRRo+GP5vkYoLWG7yPhrls4m3MAT6zD9M71ELuC7unX+0/Bl/5kAKpI7MZH/lXYgVe/oACVjYUwaCmN5VI+ZE0C1ApWH1t7BxTHvZWSe5bnFmMDb0lEV1hL1749zMM6s0qOZWMepaY98S6S2sNtZ7GDj7ueMuZ9xEa9lB1Ev/Rw8WgKpykTCC9qeZkySYW5HUNYwiyzLicuSNRmesy46PmReeb3g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ubmzn700Y1571Kajvg9ykUb1B05ivONiGbWqi0GDxIQ=;
- b=F0cKyeO0fk4UhWhk1dYubHdnXQfz6S9rnV53J5qDjOo0q+8WNn/4awExzcFgGG/ydVcyyyxUvfbwwUg8L/J/BgESXxk9cTQhpyE8kKd9eCNRWQMsJL6jf//6fQucle0vkiRCVYJL5MnQW3RUJeop0cibiLNuPDEJEq1yhMUCeCxjn+zru9hKXkyrBqAKWPQFWjb84z149FsDFIYTfrestXp4RlkXQtHr7T3JAMGKpdwxeZLoV9XO8KsMVmgQibNzjlRy9Ydn/1DBScKVZ/mYs4qWu5J0jM4zUrIXADkDTANf0Pvl6HCQpQGIaDpuIcWPQYjDHbJlo4c+7yuMnyOj4w==
+ bh=5wYrVDiK0b+IKPefObTgD4xoi35IUbw4JoICN7zd96s=;
+ b=v9BrAJxAEf7U1JoNME+1qN5YjKXhV7tPHP83f4O4+WsEK7UtvuxTiPmNOxL2bl4yR4sUUdeeQqNmK5xZsL1CJBkqLfFGiDu0bLvVkqNXqWcic3qE+nO1v8JD5Su0zAFU9z6J3s6/f9R+sfnJww1mWyKPzEi/EzvkngIS1QH2+dN/x2dcrDy4QcXYSYtRQzTtv1B79nuBA5+NdS2XMirzG8+WjeGK5bZF58dZO186BNHHi3DZbQyN0UbjrA0zpx/I2JvD85mI2AWQGatgvDF4kffCstrNXncjDaDTfXQElN8iuRnEip9pxg2uS0JDDsrx22/zJtAiGXf7mTGBQCJs+g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=processmission.com; dmarc=pass action=none
  header.from=processmission.com; dkim=pass header.d=processmission.com;
@@ -33,107 +33,97 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ubmzn700Y1571Kajvg9ykUb1B05ivONiGbWqi0GDxIQ=;
- b=GepqGX/CNLWmzSFqygi+isLD4JkTracRAnfzdrKJ7nJ0V8SOm0UuhSymiXDjvkK4YMjUnRajE0i+VqFNFLeI+l1eKTZx2Sl0w1glNrY2F/6OSa7p27qejUSnknmdjjTN1nQkqydmBfpyJu8b48AveiZZFqAAhgooY07/olnuhMY0ecaA1cPhbj/MUYO3vf/IbuxLEfJ0eOyLS8X3NzOPH59K02q3JDi/8L88ms7rTWmP53Cl6i6f6BrIoUHOa5HcFh4nVQ8NgMkYtNAxGqDtkV2AsNA5q43DNvwWx3nODAg2Et2c5dVHS9gqj1ByC4QkRu/u1gYGhC7ILuTzy/rGXg==
+ bh=5wYrVDiK0b+IKPefObTgD4xoi35IUbw4JoICN7zd96s=;
+ b=jmaDugTM6QwWuhAiT2DiMMehzjHuxEHuC7kD7JAhUVG75ltwapxicT8KY3nLbpSBPlGo7BRNdWuG9z0ZnPkaCziP5ZKeMc2B9EA6Q0sGCigMziozfYoJTpnvpJQQdT0/boyu49h4zUqp6S01AXBOM6beDg43X7kwworS2Nfj6h2esfVyOhV9rOBFW4vBxQPMUA4DyvT+TZX5AcW0g8vxiNyzSsEUfi0he9ZtSTxWCIHdQS1dCFabq1WxZAzRdRQEzOLyrZiQptaCD6B6WEZQYTFbM7whcLeCN7gNhC8fBiCSpEnAlEw+QpzxsMwG3CVkfHJBRNI3dpDPTyKd0Z2Fwg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=processmission.com;
 Received: from KL1PR02MB4977.apcprd02.prod.outlook.com (2603:1096:820:71::8)
- by SEYPR02MB7097.apcprd02.prod.outlook.com (2603:1096:101:1a3::13) with
+ by KL1PR02MB6215.apcprd02.prod.outlook.com (2603:1096:820:9f::11) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Thu, 23 Jul
- 2026 15:19:33 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.11; Thu, 23 Jul
+ 2026 15:19:17 +0000
 Received: from KL1PR02MB4977.apcprd02.prod.outlook.com
  ([fe80::9fdf:2557:8351:6c03]) by KL1PR02MB4977.apcprd02.prod.outlook.com
  ([fe80::9fdf:2557:8351:6c03%4]) with mapi id 15.21.0245.010; Thu, 23 Jul 2026
- 15:19:33 +0000
+ 15:19:17 +0000
 From: Bin Meng <bin.meng@processmission.com>
 To: QEMU <qemu-devel@nongnu.org>
 Cc: Conor Dooley <conor@kernel.org>,
  Sebastian Huber <sebastian.huber@embedded-brains.de>, qemu-riscv@nongnu.org
-Subject: [PATCH 15/26] hw/misc: pfsoc: Model PolarFire SoC serial number
- service
-Date: Thu, 23 Jul 2026 23:18:42 +0800
-Message-Id: <20260723151853.2143177-16-bin.meng@processmission.com>
+Subject: [PATCH 03/26] hw/misc: pfsoc: Support PolarFire SoC DDR training with
+ newer version HSS
+Date: Thu, 23 Jul 2026 23:18:30 +0800
+Message-Id: <20260723151853.2143177-4-bin.meng@processmission.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260723151853.2143177-1-bin.meng@processmission.com>
 References: <20260723151853.2143177-1-bin.meng@processmission.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-ClientProxiedBy: KU0P306CA0037.MYSP306.PROD.OUTLOOK.COM
  (2603:1096:d10:29::8) To KL1PR02MB4977.apcprd02.prod.outlook.com
  (2603:1096:820:71::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: KL1PR02MB4977:EE_|SEYPR02MB7097:EE_
-X-MS-Office365-Filtering-Correlation-Id: f38e5c02-edcf-4f54-3789-08dee8cdcc4a
+X-MS-TrafficTypeDiagnostic: KL1PR02MB4977:EE_|KL1PR02MB6215:EE_
+X-MS-Office365-Filtering-Correlation-Id: a0967dd5-2d8e-47dc-7c49-08dee8cdc2ea
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|34096008|376014|366016|23010399003|1800799024|6133799003|22082099003|18002099003|10067099003|56012099006;
-X-Microsoft-Antispam-Message-Info: h67B/WMFLtmPh9K+HeYBPmRZDR12jlDkmPZlAlAjgnXlUFBGidUdeYFVFxv8wk9GbWCO40PiTjiAe3Q2Ib+1d6llxunixKMmtUm4PxGZok9oR+t1jRkvt9g29TgrOZ4uIE1hHxsg5PQtkqEyRlJH95wGUTnn7KhrYGfyH+Ln9t1wAQh8rEaZD0xrA2zW0xygBeTdyLM6f7Kp4KJdw+OKE2lGR+EF14spsJuSR63MYl/Kt23qLpxVQooJkg+chravqk3MXsq3etIbS8vdk13eGokn+HRVUXH+LloZhgDfdH6/fqGUGUJUwd7ZbuccHa+lK2Rga0TU78DIOJGbNkN6jx0IQAFkVKg3VSgWVZN505u1tl+h9EnSc/ATbdPrV2FcSKBOZqgtoLG2Tam+uJMfWnKNA5KanAv1WnnsOp3nBWSbqG6fh2oE9y4r8qEfgWDW+gRjVQooMgmOqo4LI3NmRHjYFEmuV6L5/b4vQYK/Hbhsr51TjxgZlNci58c+4XAoavtrTFZDBpO/YTajk7hP0jLhJlf+muXl2bxI8y10+XzaBd0suXQxFzYxJWswYJ92J+Ms7J85fdKrZ3Itw26f9VWA4fbvg1+mHhzOiUgSt9FhD8cQ+ZWvMmKq04w2cYkCHvy+Yqg/ACFyspDlSZ83WQOMWcIoMEjGa/HFvpZkKeM=
+ ARA:13230040|34096008|23010399003|1800799024|376014|366016|56012099006|10067099003|18002099003|22082099003|6133799003|5023799004|3023799007;
+X-Microsoft-Antispam-Message-Info: 7iuhxewvljDNoCZC62DpByJbxGJekPChog35fGYtSdu//kc9ARJuphCD842QXanU5MPa2BdiUTnzXl4h5cbxaiECisHn+hKAlbU18WsFRlKLTSsm7uhJNRXzvGq85K241jT93mix82j6pX5awuUQrWhEG59cMkUBr3ryyVpyRov50faw98+yLwRFYnXmZ9zgiAtSvYVS7mVGuNLYDN/mwxFRMKky7KnbnvdQumlQEV9kh81A47ktG5/Ci+WAlIgwoFu/xa0alcmpIb3hc/tL38jbyGPIQGLFYDu78zvBgh0bBQKQQMLbNk+wMUv5PC8TO1vGm4xgBK3Qzh1g+/98VOjOGE4Fu5IVapV1L0w5ngsMcJ6UAQx6o7ZiNCF4uX0FkZpV0NPfC/AGUTMCxm4mgTt70FwauQfdP5/TKhR0k8wqx4R2TlpUPXeKKAjOceD2CA8KFoyiSGx6d7ZfrCvWCNH6oKCNAvaDN5czrVNQYVlxv5/D5JiPFJvfO2SczMII/No+xYswvvk2uwJ2h+3Va24gHU7YZdaIW9oum7YblU3PSqmWI7nyd23MM/VIyZwKODP4AMktTh6wJb+tiG3t4Ht5U1FRhKEPswuWzCBB+jRkaD8u90C5sJFEBHE4zWJLh4AKP/aMo1JCBRnjv4YqlhNUR+jGtXFM/Ru3KXQN0Cc=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:KL1PR02MB4977.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(34096008)(376014)(366016)(23010399003)(1800799024)(6133799003)(22082099003)(18002099003)(10067099003)(56012099006);
+ SFS:(13230040)(34096008)(23010399003)(1800799024)(376014)(366016)(56012099006)(10067099003)(18002099003)(22082099003)(6133799003)(5023799004)(3023799007);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aldNaEgrN0dOcmVvUU9PbXFwN2pDZlFjZC9WLzBlZEhpRUxnbFNMWVRncHNu?=
- =?utf-8?B?TXhhYkdrbzg4bFJ0QWdKRmdRTGpiVDk2dDdFajh0WWlVdkJMQUtnUFdVby9y?=
- =?utf-8?B?ZkVQc25jVEdHQ2pqSURmcW1OQ3NhNG1aK1VhZnU1SHNMZWVJZjh1U0J6eTJp?=
- =?utf-8?B?cnFRS2lMNGRaNTkxdVdMZ3Q4Z240T3MrU1BPOHF1dzBtODNWeGdZM1FwTmM5?=
- =?utf-8?B?WFdIelRlV015SUc1aFhTSzJMM3NLZXUzZWJ6dzVmVklUMVJMb2tnQUQ1ZUpa?=
- =?utf-8?B?SjlmTEMwQ3o4aEh5U01lQ211OHJ3cFJHaUY1aEl4ZW5vR0NpWTZIYUJWc2NV?=
- =?utf-8?B?NUFTRDRiYytkMFZJRnJVS0VzejY4QUIwU3AvZXU2Tit0QktsYWRuK2VEVFFq?=
- =?utf-8?B?ekhTN0tYcjU4SmkzV1didlROUVVFaGp5NzByUklOYnRrdmZ1b0dZSUZPZ3JP?=
- =?utf-8?B?aFJLUElmZzZkMWRMTUpyeU1SbW9Zend3QkQzZEM3ZGx2VGV3d3dTMzFRYmFN?=
- =?utf-8?B?Yjd5SUZLVTBWelphTFl2VVZrNjhCNjdtTzZZa2xvd0lyWGN5QmdPdEtPZVRP?=
- =?utf-8?B?bmxPOUlNOURVVlJLdmhzbzM3RkFVRnRGaW9FYVJXZ01ZRU01MEZpOUlLTjlU?=
- =?utf-8?B?elNMNVhPaER4dytTS1hZbi9qeW9XNjg1M2UycUhmRkpTUGlvejloVHgwUkpK?=
- =?utf-8?B?TjZRTmc3dldBTURPR1pka0RMNHhhNmIrZW9TVFlLemE1MzFURXRpUnM1YThF?=
- =?utf-8?B?eWRUNkxTNWhuVm1mOGo3NkxQVDJGazVwTmMvUlN1L25nK3k4dWxNL2loWEpw?=
- =?utf-8?B?NThhSWJvMmMyeGxOcmRLekx2dEsvU1VLNHM5V0wyUWtkR0Z5emZ4TEphcy9x?=
- =?utf-8?B?M3phT1h0bTVicnhGVllTWnprRmtoVG9UU0g1bWlwOFRhSUo3TmRyc2gxK3I1?=
- =?utf-8?B?N001QzNaUlN0cFA4YkpiTE1lM2xwVW0vdTJ6Rzd2NFdBSDhDNHA5cHBxcDFt?=
- =?utf-8?B?OEhaTGdTYWtHM2RQRnVDTGs1Nnp4NFpDOHZPbzgxWERXR0tYNkJSSDFlTEla?=
- =?utf-8?B?M2x6SWZvY2ZnUjd4YkRvZXF3N0t3K0N0R04vTGJXOTNwQVduaVJEV0ZML0Q4?=
- =?utf-8?B?UUNma1d0OHQwV0RXdGIya3BsMkxvcit3aWVNSjVoMzA2UmZZNmRQY0pqb0lC?=
- =?utf-8?B?Zk5CbnlkVUM1MG1uWDJDbDEzLzV2WUZkRW90Yk85MXpDTXBRRVZVQXh2WHI3?=
- =?utf-8?B?RzVTenZUUVREQmt0M2lZb3h2REVnZ2F4OTBVcmZDZWhaWkJtT0JCUGpGV2hJ?=
- =?utf-8?B?NG5UeXN1d1lOMzVrTUJhSnQyclgremhGdlJJRkVSSFJCUG14R2pIWnhGYXdi?=
- =?utf-8?B?U0NuT2YyTVN4c2F3RG9BK2tIRHZ5bFhUN0E5M0tXalM5T2Z4aGxQV0JrRnJ2?=
- =?utf-8?B?Lyt1K1dhdWZ3b3JlNnpQNmNMMUxpWFJmRmd1Z2lGY3liV1Z5RmNvN2Y1OGRv?=
- =?utf-8?B?R3QwQjNaditXWWN5Ykl4K0tMbzRwUllWU0lRak95dVE3UjRUZjh3Z3F3ZG1o?=
- =?utf-8?B?WE90cXdTZHpMRmFEL01wS29wZVpsVlcwUkxOTzQ2SWFBRHljTEVmVGZObGxu?=
- =?utf-8?B?dnZ6WE9LWmFUdnBreUVUS1RyUHVIcXp6bTlCVURCZ3ZSME13Z0hZT3plYldB?=
- =?utf-8?B?VHU2YlZSdjZBWFkvU1NRQmpHcjVhVWlZSE1hUXpQanB4YU9KczVLRXBwUTg5?=
- =?utf-8?B?T0VKUDJvOHRtRUVMREhrTnRlcitiQ2FZY3ppSzJHT3FqSmdvTXJSWXE3TlRx?=
- =?utf-8?B?NFNBU0ZVd0xocklvUnY3TmlxOEQ1bmlJeG03RU5OcXZrcndGaEJzOTlNa1BV?=
- =?utf-8?B?SEJBQkJ1bGtXeVkwVDRxbnFhLzNsOC8zdDJQczNoekdmZ3dLSmVjSFNKK2dU?=
- =?utf-8?B?cHp4amk3UXljaDBWWEsyL1R1RXVrWVRpTEtsY3NDN3FsSnBIVC81aFJ3R1Fo?=
- =?utf-8?B?OTlwK2lJQXp6Q0s3NHB2YWxJQ2NOSCtaUStqVnoxUW4xbDVhV2FadXcyUXNa?=
- =?utf-8?B?Q2ZVbHlOMWFXUWxWTmhzY2dNQkFkdWFweHkvYm8wZklGSEhqVk9YY2RTbDZU?=
- =?utf-8?B?WFRDNStxOXptYlAybWx1WXdnNGo4ZFNMN3p5OG9BNDZJVHFJUkdyUklOYUd5?=
- =?utf-8?B?cDRMVFkvMXZsZnN4aE9vdTJCN2hub1Z4V25oOENDZzJ1TUxuT0ZzK2xxQkFF?=
- =?utf-8?B?TUR5bFFLU1pTR3BCa3RabjltYlFLczkwSndzRWNnRkdRdFR5Um1ETmNkbXE2?=
- =?utf-8?B?VTlVM09LQVZpRE4wU0l5UDdKUEtIeGQ0QXNFQkJFS3RFdFRFUTVMcEluZnVx?=
- =?utf-8?Q?tCmJL7pMCEK6C8K4=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LDbrO9IdS1XvsulntiYrFa4CL+LymuF0OQkA5mK+29sHlm4583vDw7i8R7tI?=
+ =?us-ascii?Q?sZIqEgOb6lEK3F62FJyMMuvJRTaGDnd+XcyHO4iYaupC7ANTZdPi/hrzVsW5?=
+ =?us-ascii?Q?IlNav5Idxr2i3FS/Xzw5PkoalJX7ksTOTt0Mhm967xdE8n47Nqb7ah6urcYH?=
+ =?us-ascii?Q?sToiswyd8Z6gtw4EulSbRxlz7AkIayfV7QD4HjBlSoKlzp/LIUcq0N9/mXZ8?=
+ =?us-ascii?Q?gQgIeJGrI+PULfoE7bvH856/jDpvMGDOkZ6aAztHmkG76PzmHJbA9aWX4mxL?=
+ =?us-ascii?Q?LE+QtwW+y8wYKjBWxMUcFr8S89hin45mfsltf+syfE3JyuGkaZVHSKUkkfR6?=
+ =?us-ascii?Q?ydlj5H3EGqlDVbP1sTTXxXWCmJ292J8S7UP7Z6minQlmlr5OJvEccRgtx2b+?=
+ =?us-ascii?Q?RcAkqd2eFjd0j3keaxjgJQaLqdOLq0Ww2uFoddvZsIAC6JHSknjoIOt7OMd1?=
+ =?us-ascii?Q?ATAAaylbB2spQiwETlS3/X++Cx02U/bdZQoxY3U5QvMyr+rDlUPfQK3FLFaP?=
+ =?us-ascii?Q?MvGmrnmx6cy7R/UL+TaeBoyWX3Esi2LyuupLbhR7VrrvQ0oUZpKBuKWnYshG?=
+ =?us-ascii?Q?54N0MB6u70ZjIbcvIaSgOnzmfuYjfx287k2RPPIaB8BHpUqpTqPgTk53PCHS?=
+ =?us-ascii?Q?cLbVcCNBhSmz8nuZ8GnN8e6ZJckcER2IBDWZhNZysJn/FTkHIRBgrqIP9srO?=
+ =?us-ascii?Q?PZIHJMQKT2FJDbalzOMj6KIEtu6o0YAEH6d9ZbImJRCBaIyveKhiyqI4rIVu?=
+ =?us-ascii?Q?kZb7MPN7vr4whzEIRqB1rZ+zTQ828ROQ1keOsSZ1Y4xg30hbfqbu8iLQk7vO?=
+ =?us-ascii?Q?JasKH806GPcPQgnn1NmaYENVV66wSIyw6Q7wMgdz29Cv56tObOCzwpScsESQ?=
+ =?us-ascii?Q?pe5aB7SDbqvES7AFYVHWNqdeJHk/fXNAwxpFPpO55aoIymGkQlyqGE2LF+1p?=
+ =?us-ascii?Q?2KI5ZMKdedl7qiAAyr/vy1GWas65h7TFe0qCoPZwDpeYEY4rEdsRRY25nZKu?=
+ =?us-ascii?Q?+/n50R+9/b/iI+FAuvLil44hdrapugXiOkTLJeL9Vif2qeNE/x/E+BHkaX6j?=
+ =?us-ascii?Q?wVw5uuSq9JADkUtcWeUMAvvYMuYUzomI3v6ms7AfLb6uIv9Ear4nZ/Djqb5L?=
+ =?us-ascii?Q?jqX9zS/jJVizdvQRRxhsOJrUts5V5rHX3Jw9p3iPpSG05a9RI9u6KqEx6lUa?=
+ =?us-ascii?Q?KFzvKVIg/h7IldnIpkFF+1LXyk42XNWK0gnuKAQo3RQ1y6l1B6fzc7NFUuB9?=
+ =?us-ascii?Q?UDr8+rxN5PYjIt+s1qrLrMTjYHnKVpS7pDbbQ+bfpJzjkl00Cw70IaBudq7U?=
+ =?us-ascii?Q?YkmdWHUQi130RvSzknwEwr0eckWK3PJ4yTFvAiDhRYp9UImCHCYWAur0g6Eb?=
+ =?us-ascii?Q?lvmU9+PKjTKaN4cEXLP0lhymBHMGjAk3lYq/TEkLXTMVircMS5McZT5sOVMK?=
+ =?us-ascii?Q?NNHC3tyICPck8r//Bqa2rQ1O+hwEEFBwCVqqdsRV0xvbNh2A4tFgEGNHIk2U?=
+ =?us-ascii?Q?lqEPAr9s62ZurKdFBRH7ckJpI+eY10DizWaoRwnMrXDHrXdR0o5w4AFPUELy?=
+ =?us-ascii?Q?xctBXa81J2UciKZ6xO0qD1aW49zXL5Jt+4H1UPIIDpw8pn9TpQVpHwFDi5uk?=
+ =?us-ascii?Q?Se9N7EL5FDOO23tqRLevMcNymNro1WRS3FSjdGAYSvtH/vfOqL0PdHBuLSyT?=
+ =?us-ascii?Q?0ncTxDnukr2/AfrUssokvH6cTg+aKp2DBV9cGs1Xvxida/GXwirEbTuJYT6T?=
+ =?us-ascii?Q?rHOkHBGI/VcXJaIWKyY98uXC3qbhZ+w=3D?=
 X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f38e5c02-edcf-4f54-3789-08dee8cdcc4a
+X-MS-Exchange-CrossTenant-Network-Message-Id: a0967dd5-2d8e-47dc-7c49-08dee8cdc2ea
 X-MS-Exchange-CrossTenant-AuthSource: KL1PR02MB4977.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 15:19:32.8793 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 15:19:17.1103 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EEusJXxbRGKsiu1AM4LmTvJsAzxI5INtcfFhqOmwndHV1ly+2ajJJmoMViqD9sLFKi3u8eK9fBbraUiYRldqIQZ2gH6E5rFeFRa2HsMSfTU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR02MB7097
-Received-SPF: pass client-ip=2a01:111:f403:c40f::6;
+X-MS-Exchange-CrossTenant-UserPrincipalName: WCbzX3wjx2MJt+g5RLbvlWIJNhZp9TbcIF9vs4Ovt7JKFo3jK752400oKNHvNkSNHGeR25/CWrYU9LffmAiqKPUcA0D0lv+SIcTnLnh/4Xo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR02MB6215
+Received-SPF: pass client-ip=2a01:111:f403:c406::3;
  envelope-from=bin.meng@processmission.com;
- helo=SEYPR02CU001.outbound.protection.outlook.com
+ helo=OS8PR02CU002.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -150,266 +140,398 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-U-Boot requests the PolarFire SoC device serial number during board
-late initialization. The IOSCB previously rejected every request, so
-board setup could not complete.
+HSS v2024.06 performs DDR and SGMII initialization through the DMC
+register window before it can complete platform startup. The existing
+model, which was validated against older version HSS in the early days,
+exposes only a few fixed training results, so newer version HSS stalls
+while waiting for PVT, PLL, DLL, ADDCMD, and verification status.
 
-Model the System Services control registers and byte-addressable
-mailbox. Obtain the 128-bit serial number from an optional device
-property, using a deterministic value when it is not configured.
-Return an explicit failure for unsupported services and reset the new
-runtime state with the rest of the device.
+Update the DMC model by adding the minimum state and status behavior
+needed by that firmware flow. Model the SGMII control registers,
+main DDR PLL lock, deterministic ADDCMD transitions, and successful
+gate and DQ/DQS verification. Keep training progress and writable
+controls per device and clear them on reset.
+
+These values are compatibility responses for HSS v2024.06 rather than
+a cycle-accurate description of the DDR PHY. Document that limitation
+in the source.
+
+While we are here, update the license text to use the SPDX format.
+
+Note at the time being there is an HSS bug [1] that consistenly blocks
+the DDR traning from succeed when using an HSS image built from certain
+version compiler like GCC 8.3.0. A patch [2] was proposed and verified
+against HSS v2024.06.
+
+[1] https://github.com/polarfire-soc/platform/issues/36
+[2] https://github.com/processmission/qemu-machine-images/blob/main/
+    machine/riscv64/microchip-icicle-kit/
+    0001-mpfs_hal-preserve-DDR-pattern-test-parameters.patch
 
 Signed-off-by: Bin Meng <bin.meng@processmission.com>
 ---
 
- include/hw/misc/mchp_pfsoc_ioscb.h |   6 ++
- hw/misc/mchp_pfsoc_ioscb.c         | 141 +++++++++++++++++++++++++----
- 2 files changed, 130 insertions(+), 17 deletions(-)
+ include/hw/misc/mchp_pfsoc_dmc.h |   6 +
+ hw/misc/mchp_pfsoc_dmc.c         | 272 ++++++++++++++++++++++++++++---
+ 2 files changed, 254 insertions(+), 24 deletions(-)
 
-diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
-index 9687ea25b1..fd31427304 100644
---- a/include/hw/misc/mchp_pfsoc_ioscb.h
-+++ b/include/hw/misc/mchp_pfsoc_ioscb.h
-@@ -25,6 +25,8 @@
+diff --git a/include/hw/misc/mchp_pfsoc_dmc.h b/include/hw/misc/mchp_pfsoc_dmc.h
+index 2ed582fb8c..6a1986c2c2 100644
+--- a/include/hw/misc/mchp_pfsoc_dmc.h
++++ b/include/hw/misc/mchp_pfsoc_dmc.h
+@@ -28,10 +28,16 @@
+ /* DDR SGMII PHY module */
  
- #include "hw/core/sysbus.h"
+ #define MCHP_PFSOC_DDR_SGMII_PHY_REG_SIZE   0x1000
++#define MCHP_PFSOC_DDR_SGMII_PHY_REG_NUM \
++    (MCHP_PFSOC_DDR_SGMII_PHY_REG_SIZE / sizeof(uint32_t))
  
-+#define MCHP_PFSOC_IOSCB_MAILBOX_SIZE 0x1000
-+
- typedef struct MchpPfSoCIoscbState {
+ typedef struct MchpPfSoCDdrSgmiiPhyState {
      SysBusDevice parent;
-     MemoryRegion container;
-@@ -47,6 +49,10 @@ typedef struct MchpPfSoCIoscbState {
-     MemoryRegion cfm_sgmii;
-     MemoryRegion bc_sgmii;
-     MemoryRegion io_calib_sgmii;
-+    uint32_t services_cr;
-+    uint32_t services_sr;
-+    uint8_t mailbox_data[MCHP_PFSOC_IOSCB_MAILBOX_SIZE];
-+    char *serial_number;
-     qemu_irq irq;
- } MchpPfSoCIoscbState;
+     MemoryRegion sgmii_phy;
++    uint32_t regs[MCHP_PFSOC_DDR_SGMII_PHY_REG_NUM];
++    uint8_t training_status_bit;
++    uint8_t addcmd_tap;
++    bool addcmd_move_active;
+ } MchpPfSoCDdrSgmiiPhyState;
  
-diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
-index 09b702e520..7c82b55986 100644
---- a/hw/misc/mchp_pfsoc_ioscb.c
-+++ b/hw/misc/mchp_pfsoc_ioscb.c
-@@ -25,6 +25,7 @@
- #include "qemu/log.h"
- #include "qapi/error.h"
- #include "hw/core/irq.h"
-+#include "hw/core/qdev-properties.h"
- #include "hw/core/sysbus.h"
- #include "hw/misc/mchp_pfsoc_ioscb.h"
+ #define TYPE_MCHP_PFSOC_DDR_SGMII_PHY "mchp.pfsoc.ddr_sgmii_phy"
+diff --git a/hw/misc/mchp_pfsoc_dmc.c b/hw/misc/mchp_pfsoc_dmc.c
+index 1fe4535464..443de5ddd1 100644
+--- a/hw/misc/mchp_pfsoc_dmc.c
++++ b/hw/misc/mchp_pfsoc_dmc.c
+@@ -2,22 +2,20 @@
+  * Microchip PolarFire SoC DDR Memory Controller module emulation
+  *
+  * Copyright (c) 2020 Wind River Systems, Inc.
++ * Copyright (c) 2026 Process Mission
+  *
+  * Author:
+  *   Bin Meng <bin.meng@windriver.com>
+  *
+- * This program is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU General Public License as
+- * published by the Free Software Foundation; either version 2 or
+- * (at your option) version 3 of the License.
++ * Updated by Bin Meng <bin.meng@processmission.com> to support DDR
++ * training emulation for with newer version Hart Software Services,
++ * aka HSS.
+  *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
++ * The DMC register model is based on HSS v2024.06. Its read/write
++ * behavior is the minimum needed for DDR training to complete and
++ * may not reflect actual hardware register behavior.
+  *
+- * You should have received a copy of the GNU General Public License along
+- * with this program; if not, see <http://www.gnu.org/licenses/>.
++ * SPDX-License-Identifier: GPL-2.0-or-later
+  */
  
-@@ -37,6 +38,9 @@
- #define IOSCB_CCC_REG_SIZE          0x2000000
- #define IOSCB_CTRL_REG_SIZE         0x800
- #define IOSCB_QSPIXIP_REG_SIZE      0x200
-+#define IOSCB_SERIAL_NUMBER_SIZE    16U
-+#define IOSCB_DEFAULT_SERIAL_NUMBER "0123456789abcdef"
-+#define IOSCB_PROP_SERIAL_NUMBER    "serial-number"
+ #include "qemu/osdep.h"
+@@ -29,17 +27,56 @@
  
+ /* DDR SGMII PHY module */
  
- /*
-@@ -186,33 +190,71 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
-     .endianness = DEVICE_LITTLE_ENDIAN,
- };
- 
--#define SERVICES_CR             0x50
--#define SERVICES_SR             0x54
--#define SERVICES_STATUS_SHIFT   16
-+#define SERVICES_CR                         0x50
-+#define SERVICES_CR_REQUEST                 BIT(0)
-+#define SERVICES_CR_COMMAND_SHIFT           16
-+#define SERVICES_CR_COMMAND_WIDTH           8
-+#define SERVICES_CR_COMMAND_MASK            \
-+        MAKE_64BIT_MASK(SERVICES_CR_COMMAND_SHIFT, SERVICES_CR_COMMAND_WIDTH)
-+#define SERVICES_CR_MASK                    \
-+        (SERVICES_CR_REQUEST | SERVICES_CR_COMMAND_MASK)
-+#define SERVICES_SR                         0x54
-+#define SERVICES_SR_STATUS_SHIFT            16
-+#define SERVICES_COMMAND_SERIAL_NUMBER      0
-+#define SERVICES_STATUS_SUCCESS             0
-+#define SERVICES_STATUS_FAILED              1
-+#define SERVICES_MAILBOX_RESPONSE_OFFSET    0
+-#define SGMII_PHY_IOC_REG1              0x208
+-#define SGMII_PHY_TRAINING_STATUS       0x814
+-#define SGMII_PHY_DQ_DQS_ERR_DONE       0x834
+-#define SGMII_PHY_DQDQS_STATUS1         0x84c
+-#define SGMII_PHY_PVT_STAT              0xc20
++#define PHY_ADDCMD_CK_TRANSITION_TAP              12
++#define PHY_ADDCMD_A5_TRANSITION_TAP              20
++#define PHY_ADDCMD_CK_READBACK                    5
++#define PHY_ADDCMD_A5_READBACK                    (3 << 8)
++#define PHY_GT_TXDLY_VALUE                        0x01010101
++#define PHY_DQDQS_STATUS2_VALUE                   5
 +
-+static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
-+{
-+    uint32_t command;
-+    uint32_t status = SERVICES_STATUS_FAILED;
-+
-+    if (device_is_in_reset(DEVICE(s)) ||
-+        !(value & SERVICES_CR_REQUEST)) {
-+        return;
-+    }
-+
-+    /*
-+     * System services complete synchronously in this model, so clear the
-+     * request bit before exposing the response to the guest.
-+     */
-+    s->services_cr &= ~SERVICES_CR_REQUEST;
-+
-+    command = (value & SERVICES_CR_COMMAND_MASK) >>
-+              SERVICES_CR_COMMAND_SHIFT;
-+    if (command == SERVICES_COMMAND_SERIAL_NUMBER) {
-+        /*
-+         * The serial-number service returns a 128-bit response starting at
-+         * the beginning of the mailbox.
-+         */
-+        memset(&s->mailbox_data[SERVICES_MAILBOX_RESPONSE_OFFSET], 0,
-+               IOSCB_SERIAL_NUMBER_SIZE);
-+        memcpy(&s->mailbox_data[SERVICES_MAILBOX_RESPONSE_OFFSET],
-+               s->serial_number, strlen(s->serial_number));
-+        status = SERVICES_STATUS_SUCCESS;
-+    }
-+
-+    s->services_sr = status << SERVICES_SR_STATUS_SHIFT;
-+    qemu_irq_raise(s->irq);
-+}
++#define SGMII_PHY_PLL_CTRL_MAIN                   0x084
++#define SGMII_PHY_PLL_CTRL_MAIN_CONTROL_LO_MASK   0x0000007f
++#define SGMII_PHY_PLL_CTRL_MAIN_LP_REQUIRES_LOCK  BIT(24)
++#define SGMII_PHY_PLL_CTRL_MAIN_LOCK              BIT(25)
++#define SGMII_PHY_IOC_REG1                        0x208
++#define SGMII_PHY_TRAINING_STATUS                 0x814
++#define SGMII_PHY_GT_ERR_COMB                     0x81c
++#define SGMII_PHY_GT_CLK_SEL                      0x820
++#define SGMII_PHY_GT_TXDLY                        0x824
++#define SGMII_PHY_DQ_DQS_ERR_DONE                 0x834
++#define SGMII_PHY_DQDQS_STATUS1                   0x84c
++#define SGMII_PHY_DQDQS_STATUS2                   0x850
++#define SGMII_PHY_EXPERT_DLYCNT_MOVE_REG1         0x880
++#define SGMII_PHY_EXPERT_DLYCNT_MOVE_CONTROL_MASK 0x001fffff
++#define SGMII_PHY_EXPERT_DLYCNT_MOVE_ADDCMD_MASK  0x00180000
++#define SGMII_PHY_EXPERT_DLYCNT_LOAD_REG1         0x890
++#define SGMII_PHY_EXPERT_DLYCNT_LOAD_CONTROL_MASK 0x001fffff
++#define SGMII_PHY_EXPERT_DLYCNT_LOAD_ADDCMD_MASK  0x00180000
++#define SGMII_PHY_EXPERT_ADDCMD_LN_READBACK       0x8ac
++#define SGMII_PHY_SOFT_RESET_SGMII                0xc00
++#define SGMII_PHY_SGMII_MODE                      0xc04
++#define SGMII_PHY_PLL_CNTL                        0xc08
++#define SGMII_PHY_PLL_CNTL_LOCK                   BIT(7)
++#define SGMII_PHY_CH0_CNTL                        0xc0c
++#define SGMII_PHY_CH1_CNTL                        0xc10
++#define SGMII_PHY_RECAL_CNTL                      0xc14
++#define SGMII_PHY_RECAL_CNTL_STATUS_MASK          0xffff0000
++#define SGMII_PHY_RECAL_CNTL_LOCK                 BIT(23)
++#define SGMII_PHY_CLK_CNTL                        0xc18
++#define SGMII_PHY_DYN_CNTL                        0xc1c
++#define SGMII_PHY_PVT_STAT                        0xc20
++#define SGMII_PHY_PVT_STAT_IO_ENABLE              BIT(6)
++#define SGMII_PHY_PVT_STAT_CALIBRATED             BIT(14)
++#define SGMII_PHY_PVT_STAT_GUEST_CTRL_MASK        0xc0000000
++#define SGMII_PHY_SPARE_CNTL                      0xc24
++#define SGMII_PHY_SPARE_STAT                      0xc28
  
- static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
-                                      unsigned size)
+ static uint64_t mchp_pfsoc_ddr_sgmii_phy_read(void *opaque, hwaddr offset,
+                                               unsigned size)
  {
--    uint32_t val = 0;
-+    MchpPfSoCIoscbState *s = opaque;
+     uint32_t val = 0;
+-    static int training_status_bit;
++    MchpPfSoCDdrSgmiiPhyState *s = opaque;
++    uint32_t index = offset / sizeof(uint32_t);
  
      switch (offset) {
-+    case SERVICES_CR:
-+        return s->services_cr;
-     case SERVICES_SR:
--        /*
--         * Although some services have no error codes, most do. All services
--         * that do implement errors, begin their error codes at 1. Treat all
--         * service requests as failures & return 1.
--         * See the "PolarFire® FPGA and PolarFire SoC FPGA System Services"
--         * user guide for more information on service error codes.
--         */
--        val = 1u << SERVICES_STATUS_SHIFT;
--        break;
-+        return s->services_sr;
-     default:
-         qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
-                       "(size %d, offset 0x%" HWADDR_PRIx ")\n",
-                       __func__, size, offset);
-+        return 0;
-     }
--
--    return val;
- }
- 
- static void mchp_pfsoc_ctrl_write(void *opaque, hwaddr offset,
-@@ -222,13 +264,17 @@ static void mchp_pfsoc_ctrl_write(void *opaque, hwaddr offset,
- 
-     switch (offset) {
-     case SERVICES_CR:
--        qemu_irq_raise(s->irq);
-+        s->services_cr = value & SERVICES_CR_MASK;
-+        services_cr_write(s, value);
+     case SGMII_PHY_IOC_REG1:
+@@ -53,8 +90,8 @@ static uint64_t mchp_pfsoc_ddr_sgmii_phy_read(void *opaque, hwaddr offset,
+          *
+          * See ddr_setup() in mss_ddr.c in the HSS source codes.
+          */
+-        val = 1 << training_status_bit;
+-        training_status_bit = (training_status_bit + 1) % 5;
++        val = BIT(s->training_status_bit);
++        s->training_status_bit = (s->training_status_bit + 1) % 5;
+         break;
+     case SGMII_PHY_DQ_DQS_ERR_DONE:
+         /*
+@@ -71,8 +108,106 @@ static uint64_t mchp_pfsoc_ddr_sgmii_phy_read(void *opaque, hwaddr offset,
+         val = 0xff;
+         break;
+     case SGMII_PHY_PVT_STAT:
+-        /* See sgmii_channel_setup() in HSS */
+-        val = BIT(14) | BIT(6);
++        /*
++         * HSS polls IO enable and calibration status, then writes the
++         * calibration lock. The HSS register definitions mark bits 31:30
++         * as writable controls.
++         *
++         * See sgmii_channel_setup() in mss_sgmii.c in HSS.
++         */
++        val = s->regs[index] | SGMII_PHY_PVT_STAT_IO_ENABLE |
++              SGMII_PHY_PVT_STAT_CALIBRATED;
 +        break;
-+    case SERVICES_SR:
++    case SGMII_PHY_PLL_CTRL_MAIN:
++        /*
++         * HSS programs the main DDR PLL controls and polls LOCK after
++         * changing the PLL dividers during LPDDR4 manual training. The
++         * HSS register definitions mark bits 6:0 and 24 as writable.
++         *
++         * See ddr_pll_config() in mss_pll.c and
++         * lpddr4_manual_training() in mss_ddr.c in HSS.
++         */
++        val = s->regs[index] | SGMII_PHY_PLL_CTRL_MAIN_LOCK;
++        break;
++    case SGMII_PHY_PLL_CNTL:
++        /*
++         * HSS programs the SGMII PLL controls and polls aro_pll0_lock.
++         *
++         * See setup_sgmii_rpc_per_config() and sgmii_channel_setup()
++         * in mss_sgmii.c in HSS.
++         */
++        val = s->regs[index] | SGMII_PHY_PLL_CNTL_LOCK;
++        break;
++    case SGMII_PHY_RECAL_CNTL:
++        /*
++         * HSS programs the low control half, polls sro_dll_lock, and
++         * reads sro_dll_90_code from the read-only status half.
++         *
++         * See setup_sgmii_rpc_per_config() and sgmii_channel_setup()
++         * in mss_sgmii.c in HSS.
++         */
++        val = s->regs[index] | SGMII_PHY_RECAL_CNTL_LOCK;
++        break;
++    case SGMII_PHY_EXPERT_ADDCMD_LN_READBACK:
++        /*
++         * HSS pulses the ADDCMD move controls while sampling CK from
++         * bits 3:0 and A5 from bits 9:8. The transition tap positions
++         * below are deterministic QEMU model choices.
++         *
++         * See lpddr4_manual_training() in mss_ddr.c in HSS.
++         */
++        if (s->addcmd_tap >= PHY_ADDCMD_CK_TRANSITION_TAP) {
++            val |= PHY_ADDCMD_CK_READBACK;
++        }
++        if (s->addcmd_tap >= PHY_ADDCMD_A5_TRANSITION_TAP) {
++            val |= PHY_ADDCMD_A5_READBACK;
++        }
++        break;
++    case SGMII_PHY_GT_ERR_COMB:
++    case SGMII_PHY_GT_CLK_SEL:
++        /*
++         * HSS fails DDR verification on any gate error, a zero delay
++         * selected by gt_clk_sel, or more than one zero delay byte.
++         * Model no gate errors; the all-nonzero delay below makes the
++         * deterministic clock selection immaterial.
++         *
++         * See DDR_TRAINING_IP_SM_VERIFY in ddr_setup() in mss_ddr.c
++         * in HSS.
++         */
++        val = 0;
++        break;
++    case SGMII_PHY_GT_TXDLY:
++        val = PHY_GT_TXDLY_VALUE;
++        break;
++    case SGMII_PHY_DQDQS_STATUS2:
++        /*
++         * HSS requires the calculated DQ/DQS window to be at least
++         * DQ_DQS_NUM_TAPS, which is 5. Return the minimum pass value.
++         *
++         * See DDR_TRAINING_IP_SM_VERIFY in ddr_setup() and the
++         * DQ_DQS_NUM_TAPS definition in mss_ddr.h in HSS.
++         */
++        val = PHY_DQDQS_STATUS2_VALUE;
++        break;
++    case SGMII_PHY_EXPERT_DLYCNT_MOVE_REG1:
++    case SGMII_PHY_EXPERT_DLYCNT_LOAD_REG1:
++    case SGMII_PHY_SOFT_RESET_SGMII:
++    case SGMII_PHY_SGMII_MODE:
++    case SGMII_PHY_CH0_CNTL:
++    case SGMII_PHY_CH1_CNTL:
++    case SGMII_PHY_CLK_CNTL:
++    case SGMII_PHY_DYN_CNTL:
++    case SGMII_PHY_SPARE_CNTL:
++    case SGMII_PHY_SPARE_STAT:
++        /*
++         * HSS programs the ADDCMD and SGMII controls and reads
++         * SPARE_STAT to classify the silicon and select eye-width
++         * thresholds.
++         *
++         * See lpddr4_manual_training() in mss_ddr.c and the SGMII setup
++         * functions in mss_sgmii.c in HSS.
++         */
++        val = s->regs[index];
          break;
      default:
-         qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
-                       "(size %d, value 0x%" PRIx64
-                       ", offset 0x%" HWADDR_PRIx ")\n",
-                       __func__, size, value, offset);
+         qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
+@@ -87,10 +222,88 @@ static uint64_t mchp_pfsoc_ddr_sgmii_phy_read(void *opaque, hwaddr offset,
+ static void mchp_pfsoc_ddr_sgmii_phy_write(void *opaque, hwaddr offset,
+                                            uint64_t value, unsigned size)
+ {
+-    qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
+-                  "(size %d, value 0x%" PRIx64
+-                  ", offset 0x%" HWADDR_PRIx ")\n",
+-                  __func__, size, value, offset);
++    MchpPfSoCDdrSgmiiPhyState *s = opaque;
++    uint32_t index = offset / sizeof(uint32_t);
++
++    switch (offset) {
++    case SGMII_PHY_IOC_REG1:
++    case SGMII_PHY_TRAINING_STATUS:
++    case SGMII_PHY_GT_ERR_COMB:
++    case SGMII_PHY_GT_CLK_SEL:
++    case SGMII_PHY_GT_TXDLY:
++    case SGMII_PHY_DQ_DQS_ERR_DONE:
++    case SGMII_PHY_DQDQS_STATUS1:
++    case SGMII_PHY_DQDQS_STATUS2:
++    case SGMII_PHY_EXPERT_ADDCMD_LN_READBACK:
++    case SGMII_PHY_SPARE_STAT:
++        /*
++         * The HSS register definitions declare these status and
++         * readback registers read-only.
++         *
++         * See mss_ddr_sgmii_phy_defs.h in HSS.
++         */
++        return;
++    case SGMII_PHY_PLL_CTRL_MAIN:
++        value &= SGMII_PHY_PLL_CTRL_MAIN_CONTROL_LO_MASK |
++                 SGMII_PHY_PLL_CTRL_MAIN_LP_REQUIRES_LOCK;
 +        break;
-     }
- }
- 
-@@ -236,6 +282,55 @@ static const MemoryRegionOps mchp_pfsoc_ctrl_ops = {
-     .read = mchp_pfsoc_ctrl_read,
-     .write = mchp_pfsoc_ctrl_write,
-     .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid = {
-+        .min_access_size = sizeof(uint32_t),
-+        .max_access_size = sizeof(uint32_t),
-+    },
-+};
++    case SGMII_PHY_PLL_CNTL:
++        value &= ~SGMII_PHY_PLL_CNTL_LOCK;
++        break;
++    case SGMII_PHY_RECAL_CNTL:
++        value &= ~SGMII_PHY_RECAL_CNTL_STATUS_MASK;
++        break;
++    case SGMII_PHY_PVT_STAT:
++        value &= SGMII_PHY_PVT_STAT_GUEST_CTRL_MASK;
++        break;
++    case SGMII_PHY_EXPERT_DLYCNT_MOVE_REG1: {
++        bool active;
 +
-+/*
-+ * The System Controller uses the mailbox as a byte-addressable shared buffer
-+ * for service command payloads and responses.
-+ */
-+static uint64_t mchp_pfsoc_mailbox_read(void *opaque, hwaddr offset,
-+                                        unsigned size)
-+{
-+    MchpPfSoCIoscbState *s = opaque;
-+
-+    return ldn_le_p(&s->mailbox_data[offset], size);
-+}
-+
-+static void mchp_pfsoc_mailbox_write(void *opaque, hwaddr offset,
-+                                     uint64_t value, unsigned size)
-+{
-+    MchpPfSoCIoscbState *s = opaque;
-+
-+    stn_le_p(&s->mailbox_data[offset], size, value);
-+}
-+
-+static const MemoryRegionOps mchp_pfsoc_mailbox_ops = {
-+    .read = mchp_pfsoc_mailbox_read,
-+    .write = mchp_pfsoc_mailbox_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid = {
-+        .min_access_size = sizeof(uint8_t),
-+        .max_access_size = sizeof(uint32_t),
-+    },
-+};
-+
-+static void mchp_pfsoc_ioscb_reset(DeviceState *dev)
-+{
-+    MchpPfSoCIoscbState *s = MCHP_PFSOC_IOSCB(dev);
-+
-+    s->services_cr = 0;
-+    s->services_sr = 0;
-+    memset(s->mailbox_data, 0, sizeof(s->mailbox_data));
-+    qemu_irq_lower(s->irq);
-+}
-+
-+static const Property mchp_pfsoc_ioscb_properties[] = {
-+    DEFINE_PROP_STRING(IOSCB_PROP_SERIAL_NUMBER,
-+                       MchpPfSoCIoscbState, serial_number),
- };
- 
- static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
-@@ -243,6 +338,16 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
-     MchpPfSoCIoscbState *s = MCHP_PFSOC_IOSCB(dev);
-     SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
- 
-+    /* Use a deterministic identity when no serial number is configured */
-+    if (!s->serial_number) {
-+        s->serial_number = g_strdup(IOSCB_DEFAULT_SERIAL_NUMBER);
++        /*
++         * HSS pulses 0 -> 0x180000 -> 0 while scanning the ADDCMD eye.
++         * Count each rising pulse as one abstract delay tap.
++         *
++         * See lpddr4_manual_training() in mss_ddr.c in HSS.
++         */
++        value &= SGMII_PHY_EXPERT_DLYCNT_MOVE_CONTROL_MASK;
++        active = value & SGMII_PHY_EXPERT_DLYCNT_MOVE_ADDCMD_MASK;
++        if (active && !s->addcmd_move_active &&
++            s->addcmd_tap != UINT8_MAX) {
++            s->addcmd_tap++;
++        }
++        s->addcmd_move_active = active;
++        break;
 +    }
-+    if (strlen(s->serial_number) > IOSCB_SERIAL_NUMBER_SIZE) {
-+        error_setg(errp, "The serial number can't be longer than %u bytes",
-+                   IOSCB_SERIAL_NUMBER_SIZE);
++    case SGMII_PHY_EXPERT_DLYCNT_LOAD_REG1:
++        /*
++         * HSS pulses 0x180000 before each ADDCMD scan. Restart the
++         * abstract QEMU tap position when that load pulse is asserted.
++         *
++         * See lpddr4_manual_training() in mss_ddr.c in HSS.
++         */
++        value &= SGMII_PHY_EXPERT_DLYCNT_LOAD_CONTROL_MASK;
++        if (value & SGMII_PHY_EXPERT_DLYCNT_LOAD_ADDCMD_MASK) {
++            s->addcmd_tap = 0;
++            s->addcmd_move_active = false;
++        }
++        break;
++    case SGMII_PHY_SOFT_RESET_SGMII:
++    case SGMII_PHY_SGMII_MODE:
++    case SGMII_PHY_CH0_CNTL:
++    case SGMII_PHY_CH1_CNTL:
++    case SGMII_PHY_CLK_CNTL:
++    case SGMII_PHY_DYN_CNTL:
++    case SGMII_PHY_SPARE_CNTL:
++        break;
++    default:
++        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
++                      "(size %d, value 0x%" PRIx64
++                      ", offset 0x%" HWADDR_PRIx ")\n",
++                      __func__, size, value, offset);
 +        return;
 +    }
 +
-     memory_region_init(&s->container, OBJECT(s),
-                        "mchp.pfsoc.ioscb", IOSCB_WHOLE_REG_SIZE);
-     sysbus_init_mmio(sbd, &s->container);
-@@ -265,7 +370,7 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
-                           "mchp.pfsoc.ioscb.qspixip", IOSCB_QSPIXIP_REG_SIZE);
-     memory_region_add_subregion(&s->container, IOSCB_QSPIXIP_BASE, &s->qspixip);
- 
--    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
-+    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_mailbox_ops, s,
-                           "mchp.pfsoc.ioscb.mailbox", IOSCB_SUBMOD_REG_SIZE);
-     memory_region_add_subregion(&s->container, IOSCB_MAILBOX_BASE, &s->mailbox);
- 
-@@ -343,6 +448,8 @@ static void mchp_pfsoc_ioscb_class_init(ObjectClass *klass, const void *data)
- 
-     dc->desc = "Microchip PolarFire SoC IOSCB modules";
-     dc->realize = mchp_pfsoc_ioscb_realize;
-+    device_class_set_legacy_reset(dc, mchp_pfsoc_ioscb_reset);
-+    device_class_set_props(dc, mchp_pfsoc_ioscb_properties);
++    s->regs[index] = value;
  }
  
- static const TypeInfo mchp_pfsoc_ioscb_info = {
+ static const MemoryRegionOps mchp_pfsoc_ddr_sgmii_phy_ops = {
+@@ -99,6 +312,16 @@ static const MemoryRegionOps mchp_pfsoc_ddr_sgmii_phy_ops = {
+     .endianness = DEVICE_LITTLE_ENDIAN,
+ };
+ 
++static void mchp_pfsoc_ddr_sgmii_phy_reset(DeviceState *dev)
++{
++    MchpPfSoCDdrSgmiiPhyState *s = MCHP_PFSOC_DDR_SGMII_PHY(dev);
++
++    memset(s->regs, 0, sizeof(s->regs));
++    s->training_status_bit = 0;
++    s->addcmd_tap = 0;
++    s->addcmd_move_active = false;
++}
++
+ static void mchp_pfsoc_ddr_sgmii_phy_realize(DeviceState *dev, Error **errp)
+ {
+     MchpPfSoCDdrSgmiiPhyState *s = MCHP_PFSOC_DDR_SGMII_PHY(dev);
+@@ -117,6 +340,7 @@ static void mchp_pfsoc_ddr_sgmii_phy_class_init(ObjectClass *klass,
+ 
+     dc->desc = "Microchip PolarFire SoC DDR SGMII PHY module";
+     dc->realize = mchp_pfsoc_ddr_sgmii_phy_realize;
++    device_class_set_legacy_reset(dc, mchp_pfsoc_ddr_sgmii_phy_reset);
+ }
+ 
+ static const TypeInfo mchp_pfsoc_ddr_sgmii_phy_info = {
 -- 
 2.34.1
 
