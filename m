@@ -4,133 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC160C531CB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 11:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6DD2C531CB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 12:42:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wms4R-0003LN-8V; Thu, 23 Jul 2026 07:58:35 -0400
+	id 1wmski-00049S-TM; Thu, 23 Jul 2026 08:42:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wms4P-0003KE-1V
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 07:58:33 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1wmskh-00043n-BR
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 08:42:15 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wms4N-0002Dx-4z
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 07:58:32 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ id 1wmske-0000Yk-EK
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 08:42:15 -0400
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66N8qZSl467333
- for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 11:58:29 GMT
+ 66N8qbRU3489432
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 12:42:10 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- NK4dhrme4XrzquhYr7cLM+zPTtgLCUpN/ePFbxvjOwA=; b=PWd2QkLsWS3i9wDo
- jUVXmg76VRzvPgQmBwg3F5Fn+x+crLj9xq2PgLz0AvojrUlE+pb6zaj1O8YI2MQL
- sDLBJra2zPqd6F0nzX/S4/SthlmqE9PcoV0lFYRG1Xj6MzNS5dgav96zR/kdgNZE
- wXXHDGhj1vKhoAWP8nJlFcaFdC0VgSudSEw6XYwm3dtNCxTqQ4/vm59/TwXZa2ZY
- sWN1NnWcgrBOHkhkzg/5/aNYYDfF65nIbp5pGpI212UovhvVooCq1jztyljbigNt
- LNrOEVwLiaBUAF61liOSzwhATr+Quhw0Owu0cwa6XhlBG2nkYiQmZD4IJ7wDlMPW
- DdCHUQ==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk28xuwgu-1
+ wnOrB86813Czpqi53VsusJmjdd4gfMw6y7MX17Po0Ao=; b=Z/nCo5BSDsjPgIWH
+ 4J+mWtlvCY+hJL6EQ/LNLXlPPkoMw56v1RrSdM+fWzIKYwk0kGQ+jE9RUJKwbQ1j
+ nFwNzE4QrnMscXH8qLxdqjdbSKV3fN11lYojfYNzVAH4UgsQLoZUmnEZrEv4PNoh
+ um6Iu14ru8w6j5cntdZAAV7QG9GbodtjZEq+gmR7j1tG8TR2Ypt6xQBJb8ooXEgV
+ 0LpPZbrWTW7CFqQuSPsLETLuq1t9GofVhD1AvsJblrTx0GKjbM7xdHQXnyxbIQNQ
+ XSKaFb6S6sI9BpvuXQz05Ah8JUS/M6EA3YXyRzpZTqDxyXlIqSyzD+iQ47d5AlPA
+ fsHDMA==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk28vm4hq-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 11:58:28 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-8eec6acbe21so16691246d6.3
- for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 04:58:28 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 12:42:10 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-8e9489f62bfso13590036d6.2
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 05:42:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784807908; x=1785412708; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1784810530; x=1785415330; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=NK4dhrme4XrzquhYr7cLM+zPTtgLCUpN/ePFbxvjOwA=;
- b=MJO+n8dw0sMOG2ITQNi4dUGFxOE8LzZ83jlPzWAry4ySqao2kGFsA0GVMBW1lZuFYB
- K19sPogAEUAJLtzgAwWVbzIafDXnv2qEXtxohk8Pr60v1VE52fK4oByvuYi1aAKDq8iz
- bwYTw33M1pWExWPqFfFi1wMczpx5R2Aks5TpW13sejALLGX6faAcdbL6YvKmiGZD7Jwz
- l0AEMyIiR52XQTeMOSyaPTlqnBdHoilZMbAvUbKbyLP1CwE5/9Exq4ZbncuizFMiwvab
- MeVBBUQT6OyOrFr3X/i0HStew7O76hZXGzwhzts00ae2a3Z/e40/lLHqlP1wtErOStnG
- FUpg==
+ bh=wnOrB86813Czpqi53VsusJmjdd4gfMw6y7MX17Po0Ao=;
+ b=Lwa3m/9rMKxqK9LRZXmS/YYbTghO49ZW64dTcgakWQUeFN9ZuUcfUMTJJ/Ov06NPLD
+ jsTTYFbwsMnMgfXZ231LYMfyjuM/ws4EF3knz7oreJobGQayl9ZOsXBqY2QqksN3kjfv
+ f0QiPWMCHFo4c3SXdha0OLsuGFyFBldT/o8Xpxx8M2EN3Sicg2RBOWM9YlUNE1JBkZXh
+ 2Zc0bme1igwPSkdPcqx/CTc0+7Zd9wFmCYYXZWqU8BeRbh3EPGKW7yJezd8yLlJ6X89G
+ pCq4GMIFCYJwsXKMkbqvjDDkYh9OI+vHXrn8c9BPGfUEJCMuuXOseuO8NWvDCeUDQAqq
+ DH/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784807908; x=1785412708;
+ d=1e100.net; s=20251104; t=1784810530; x=1785415330;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=NK4dhrme4XrzquhYr7cLM+zPTtgLCUpN/ePFbxvjOwA=;
- b=V2cdgvRaRN195hMJjLr8RziWqbmfrlhmeC8jRBbG6H9v7W0HlVrepOVHtHROaHr2tU
- Ob8afOSts/9axjSQRhHAm0Er4VDsoH9I6O5cEpPuHovE7kekfcA9MCXtNk5Td7rkade0
- TKIFbeZzXVm7fsYvPan0ZBf6LbkCGc/es61ndw0DPTiMSHT+3YHiPhxgfR75fVHrjjiM
- 4k+iGk49XMwxwP7rwRWiCO5Lu0svb4hXZwAO7XeuHVK3wuJ9J6cMLr2Nn8whM5jtAmMM
- opZOMpb+p5W9yqWQ+/Q+d/iv0C2yd1PLMpk8aVvzPo3eyuQbGgngnyuUUZDCygon1ZvR
- nHDw==
-X-Gm-Message-State: AOJu0YxDqG8fuWA38IDqWEpipQf2LyvgmpAUyeCb7A4NuggRo3GUSWNz
- /NtDAg2ylJOiouP/86pBj/31neomKd0XVo3Nl8/Q2A9NmW6ZjxdOz0PjXRqp0uwod598+Ao4Vgm
- 7qAKRV/a+0Dgh5MkZTYhwe5pdEfnRru02O0eX24A51j0E1l4y8+W0ZeUTVQ==
-X-Gm-Gg: AR+sD11b7QyBbCgArqr7xANMU6CN7tXbFa1SuuBK1AHJiC81rJprV1Am52Ew0VpvbWm
- oG5t5q6F+8e+bEGwmgf8G/ncnwnJpStOl2mtnNJUbTM02YGhVJ5Qdx+36IkVuCnW9pFw9AdzIwM
- DiHuR4hjSTUAbNyIYRS+v+rVl1rcAesyibLlkb+EIKe4uqxJFVqBixUgrVKsKSHBq0AG/v8o+X7
- ZfjO7/USuY4cCauD4oUCleEwCy3RamwZRXNNf9Vh61cMB9QE5xB3Yo+jWMEJxGcsliQylTQAbMJ
- yILKGE+noPetNY8vv6ZROXjhhwVCIbEWwTMJ+9r5zKC5XLDouPb0uIx+g2g7Rz9qH+ZIr3hQEmo
- vC9gs3j6qFNfl2kQysadUcbLnOTAltHO86mvwhg==
-X-Received: by 2002:a05:622a:c85:b0:51c:88b:d7e3 with SMTP id
- d75a77b69052e-5283dda2c48mr23464821cf.3.1784807907478; 
- Thu, 23 Jul 2026 04:58:27 -0700 (PDT)
-X-Received: by 2002:a05:622a:c85:b0:51c:88b:d7e3 with SMTP id
- d75a77b69052e-5283dda2c48mr23464411cf.3.1784807906847; 
- Thu, 23 Jul 2026 04:58:26 -0700 (PDT)
+ bh=wnOrB86813Czpqi53VsusJmjdd4gfMw6y7MX17Po0Ao=;
+ b=cu7uHSzGXVfCbUNQV541DhMwfq+BJGn2In/kSkZ76tk+GvOR/ySNfkhGuvIVclA6sy
+ Pi9lva2xsblS6WICU3zeR87B/cvYvdcLIv9rraqeMj6H3muemsa87KKIXSLK+Ouir1nr
+ Ph2y2BS3lvfBlp/qIO1EWiRHn7sP8nxzpdQAuWRuRsuFZwQK5Ft9NrfX4MQheKJBltzw
+ BTixYbojbJBhkoeZjkBpW0fbMo83tXR0Cuf7nqM9BuhOQ/dsU0IlYGdUJUk5n8zCQydx
+ 5WzzuAgVDitvyUN6dxMTFmvToMKzyVP48rGvl3OXzcyrB5IP1A6ud8zJ8zFSfDo69pbS
+ A14Q==
+X-Gm-Message-State: AOJu0YyKArP/Wv9pyWs68G02SCG7dxfm0Qh0dYz0owmHUvjEkC0LAe68
+ YOESV+s1qesqzYSfSU1uWwLPcBXyntaZ8yobSfabn2KdrorI/CSZVuJGTyWd/daglIfDiCKeMJh
+ /0+Qdpk1tsBtPShMTNGI5Cf/0NvvF9UEA+ifduk72CK17zBqWdf6omC3fGw==
+X-Gm-Gg: AR+sD13Xr3YhoiYo+CNPxlsui5hlMn976hr4Bo6m4kFV2ywQ1E2dYzPhfoIeJj57Mns
+ xQAwppvvhXNnSeIcy9eB5TWq6ufr9g+x1xolOhvDFBHpQUn8M00flcmP1OSyhzw8kzHGbXxGo64
+ ny9B3WUvR30FXPx63v7eC1F5rJGGtXUy08K6JDfneJtMwxwnw3+OPnLvtYLOyw7/kFwHOPfwVs7
+ nfVfSEoqUCQMmcK/WZnR1MxpnuG/PibmhI9UcIXjmfcwNV+xmAbVU0UXzoHrKM/kG4dBavkifEE
+ EG93B4bey2zosqLB/hGlUYCjbvlgpMFX7CcadWsVvtQ3LZn7eJyVWhK1dREaj9Pfwm4MHoJChl4
+ xIUTN4WCGWyBR/W5RigZSJKMli8y7m5z+Gt6ftQ==
+X-Received: by 2002:ac8:58d2:0:b0:51c:167d:b328 with SMTP id
+ d75a77b69052e-5283deef102mr23719761cf.40.1784810529571; 
+ Thu, 23 Jul 2026 05:42:09 -0700 (PDT)
+X-Received: by 2002:ac8:58d2:0:b0:51c:167d:b328 with SMTP id
+ d75a77b69052e-5283deef102mr23719361cf.40.1784810529010; 
+ Thu, 23 Jul 2026 05:42:09 -0700 (PDT)
 Received: from [192.168.68.107] ([152.234.122.204])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-907baa0f4dasm43209446d6.41.2026.07.23.04.58.24
+ d75a77b69052e-527d3b4149bsm33424371cf.28.2026.07.23.05.42.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 04:58:26 -0700 (PDT)
-Message-ID: <ab82b172-e605-4a16-b0d6-865caa839b40@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 08:58:23 -0300
+ Thu, 23 Jul 2026 05:42:08 -0700 (PDT)
+Message-ID: <926f8a64-a8a8-43be-835d-362682faa477@oss.qualcomm.com>
+Date: Thu, 23 Jul 2026 09:42:05 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: use SXL instead of MXL for read_sstatus
-To: Abhigyan Kumar <314abh@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20260720105612.953478-1-314abh@gmail.com>
+Subject: Re: [PATCH] target/riscv: allow menvcfg/henvcfg LPE and SSE bits on
+ RV32
+To: A-Shehab <ahshehab24@gmail.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu.zevorn@gmail.com, debug@rivosinc.com
+References: <20260719111749.23777-1-ahshehab24@gmail.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260720105612.953478-1-314abh@gmail.com>
+In-Reply-To: <20260719111749.23777-1-ahshehab24@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: 4ThNLKIaeFiSkc-CYVDKhB_VGn3VfzRI
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDExOCBTYWx0ZWRfX8G6v073NTuQ5
- V26pS4Wn8JLIiBPIvg//+Wg/EVn4vT17OQf66sgRfeHXK1iKbzCqGvSfCBdAhGRsZ6Wc9PtyucG
- g3yyCcZJMvmFQQjSc21oHRw7QIZ+PQo=
-X-Proofpoint-GUID: 4ThNLKIaeFiSkc-CYVDKhB_VGn3VfzRI
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDExOCBTYWx0ZWRfX0MBn0tLeygHT
- jTUkIDC581rRkptgKIzKEV6Dt4HblmQDpYgMr8/yISqUQdbbORyGiIKir6yBdq4j9biRpi2b8ut
- Hrolgieri/l2xLWmWEWyGspdew06pdxHh7ulghyKIyWQyn/tvSbxD/Ar8F5lxMNK9COnJEFWVPo
- uac7uwaFmwrIss+qC4BcyKqNv8shRi5ogS1VK+76itkYooFhOeIkbrbli/lMh30SHnGTgSgElOz
- CLSyL1BfyXmc+9cCQ2QrsteNiymPcc392zEzyWcVqfJxhPGG9x6gPC6JALvdOs9PhKd1slfYmnW
- ZJ11awEsb8LuGS7f9h9PsUpB8aIOL/CE5gimDAZEVLSsr36ALdd+FZg3M6A240VLSDQMdYad698
- b4aByTnJnIbQLJpr28vgp5GgQOTD30/gzwgZd4Pww9LwBACv20ZOctUtNmZ182QYWwdFHI7GiP5
- DK6/sDnhK67hoav9Ugw==
-X-Authority-Analysis: v=2.4 cv=WNxPmHsR c=1 sm=1 tr=0 ts=6a6201e4 cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDEyNSBTYWx0ZWRfX2Do/3ipE0MLQ
+ P+ZWEJO+BlvxTdK2/CuzbiS+v8MJh5uF8De7xzbRTmyTXvQGVF3UsYA8t9EmftFJGgidkrFsTIB
+ v3SQmi4WSfqcUDlUZUEqLvoK4VrieLk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDEyNSBTYWx0ZWRfX0LKw8QG7LAUO
+ b/o3tp4BmR/9xOiSxPKuhqFoZFAXmmYGaLcHitf4coxSqrbXV7DgJxWMLKQgPAEXs0p4F0U45yG
+ VPAjPONBdyVmrtmZQF5btkDLrLe3P0zOlK+8Vo6r7dZcPIW4edsrugVdupu+/yMpPn1ylz6J2ut
+ gsa0DjRuMuvCgL+PTJfIWeeFRsGq//XZWAk7NmvuLJk2YLTBLB5F62AAlQS/CXq3bP7hcN/Kpsf
+ 1CPHZjglgAoYeONtYOdLmVlAodGP6mic0tDV5BsUqIh+8VvgSFsB6n33kok9QRNqR3hHeHD+6xO
+ bQu0GvAhYs0dqVCwTmPKLNkrybSpd3Kau3TezPFu6dbpZBwCh8mZp26S+o4Su+bLXhypKm3KVB+
+ KK5Vx4ox2uZMNjfgeTsrFWJvOK9/+5A0UCkDPPgJjmUD3B7QqyyL34YQq+l1wa6cX5FzmKl30mi
+ GANG79VKkB0v/v95r+g==
+X-Proofpoint-ORIG-GUID: FlDTz5KZ0w8Yq-no1Xr9PyINZDFntI_O
+X-Proofpoint-GUID: FlDTz5KZ0w8Yq-no1Xr9PyINZDFntI_O
+X-Authority-Analysis: v=2.4 cv=D4V37PRj c=1 sm=1 tr=0 ts=6a620c22 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=pGLkceISAAAA:8 a=bBBmsoVW4sAyd_EGzYsA:9 a=QEXdDO2ut3YA:10
- a=OIgjcC2v60KrkQgK7BGD:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=p0WdMEafAAAA:8 a=pGLkceISAAAA:8 a=Tqcxryd4_fsETz_ZCVYA:9 a=QEXdDO2ut3YA:10
+ a=pJ04lnu7RYOZP9TFuWaZ:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_03,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 bulkscore=0 priorityscore=1501 malwarescore=0 phishscore=0
- impostorscore=0 suspectscore=0 clxscore=1015 spamscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230118
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ lowpriorityscore=0 malwarescore=0 adultscore=0 priorityscore=1501
+ phishscore=0 spamscore=0 bulkscore=0 suspectscore=0 impostorscore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607230125
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -153,74 +155,122 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
 
-On 7/20/2026 7:56 AM, Abhigyan Kumar wrote:
-> According to the RISC-V spec, a 64-bit system can have M-mode in 64-bit
-> with S-mode being 32-bit (SXL bits or mstatus[35:34] being 1). In this
-> case, read_sstatus should use SXL.
+
+On 7/19/2026 8:17 AM, A-Shehab wrote:
+> The Zicfilp landing-pad enable (LPE, bit 2) and Zicfiss shadow-stack
+> enable (SSE, bit 3) controls live in the low 32 bits of menvcfg and
+> henvcfg, and the CFI specification defines them for both RV32 and RV64.
 > 
-> QEMU doesn't allow changing the SXL bits in mstatus in M-mode. This was
-> because of the missing MSTATUS64_SXL mask in write_mstatus. Now, both
-> the SXL field in mstatus can be safely modified in M-mode and
-> read_sstatus correctly uses SXL not MXL.
+> QEMU only adds MENVCFG_LPE/MENVCFG_SSE (and the henvcfg equivalents) to
+> the writable mask inside the "riscv_cpu_mxl(env) == MXL_RV64" block, so
+> on RV32 these bits are silently dropped and the features cannot be
+> enabled. This is inconsistent with write_senvcfg(), which already
+> handles SENVCFG_LPE/SENVCFG_SSE regardless of MXLEN.
 > 
-
-Please add:
-
-Fixes: b550f89457 ("target/riscv: Compute mstatus.sd on demand")
-
-> Signed-off-by: Abhigyan Kumar <314abh@gmail.com>
+> Hoist the LPE/SSE mask handling out of the RV64-only block in
+> write_menvcfg() and write_henvcfg() so the bits become writable on RV32
+> as well. The upper-half writers (write_menvcfgh/write_henvcfgh) are
+> unaffected because these bits reside in the low 32 bits.
+> 
+> Reproducible on qemu-system-riscv32 -cpu rv32,zicfilp=true,zicfiss=true:
+> an M-mode write of menvcfg.{LPE,SSE} reads back as zero, while the same
+> program on rv64 keeps the bits set.
+> 
+> Fixes: 4923f672e3d7 ("target/riscv: Introduce elp state and enabling controls for zicfilp")
+> Fixes: 8205bc127a83 ("target/riscv: introduce ssp and enabling controls for zicfiss")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4045
+> Signed-off-by: A-Shehab <ahshehab24@gmail.com>
 > ---
 
-There's a style nit that checkpatch detected:
+Patch LGTM but it doesn't apply in current master.  We changed the file location in the
+last PR (it's now on target/riscv/tcg/csr.c).
 
 
-$ ./scripts/checkpatch.pl 0001-target-riscv-use-SXL-instead-of-MXL-for-read_sstatus.patch
-ERROR: trailing whitespace
-#32: FILE: target/riscv/tcg/csr.c:2074:
-+    $
-
-total: 1 errors, 0 warnings, 21 lines checked
-
-0001-target-riscv-use-SXL-instead-of-MXL-for-read_sstatus.patch has style problems, please review.  If any of these errors
-are false positives report them to the maintainer, see
-CHECKPATCH in MAINTAINERS.
+I fixed the conflict and applied it.  Code LGTM. Please re-send it on top of current master
+to be merged.
 
 
-
-Other than that LGTM.  Thanks,
+Cheers,
 Daniel
 
->   target/riscv/tcg/csr.c | 9 +++++++--
->   1 file changed, 7 insertions(+), 2 deletions(-)
+
+>   target/riscv/csr.c | 45 +++++++++++++++++++++++++++------------------
+>   1 file changed, 27 insertions(+), 18 deletions(-)
 > 
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index 36f2004bc..b67a5a301 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -2067,6 +2067,11 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index dd9726fcf4..58828a269a 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -3211,6 +3211,19 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>                       MENVCFG_CBZE;
+>       bool stce_changed = false;
+>   
+> +    /*
+> +     * menvcfg.LPE (Zicfilp) and menvcfg.SSE (Zicfiss) reside in the low
+> +     * 32 bits and are defined for both RV32 and RV64, so they must be
+> +     * writable regardless of MXLEN.
+> +     */
+> +    if (cfg->ext_zicfilp) {
+> +        mask |= MENVCFG_LPE;
+> +    }
+> +
+> +    if (cfg->ext_zicfiss) {
+> +        mask |= MENVCFG_SSE;
+> +    }
+> +
+>       if (riscv_cpu_mxl(env) == MXL_RV64) {
+>           mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+>                   (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+> @@ -3218,14 +3231,6 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>                   (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
+>                   (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
+>   
+> -        if (env_archcpu(env)->cfg.ext_zicfilp) {
+> -            mask |= MENVCFG_LPE;
+> -        }
+> -
+> -        if (env_archcpu(env)->cfg.ext_zicfiss) {
+> -            mask |= MENVCFG_SSE;
+> -        }
+> -
+>           /* Update PMM field only if the value is valid according to Zjpm v1.0 */
+>           if (env_archcpu(env)->cfg.ext_smnpm &&
+>               get_field(val, MENVCFG_PMM) != PMM_FIELD_RESERVED) {
+> @@ -3373,20 +3378,24 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>           return ret;
 >       }
 >   
->       if (xl != MXL_RV32 || env->debugger) {
-> +        if ((val & MSTATUS64_SXL) != 0) {
-> +            mask |= MSTATUS64_SXL;
-> +            val = riscv_write_uxl(env, val, MSTATUS64_SXL);
-> +        }
+> +    /*
+> +     * henvcfg.LPE (Zicfilp) and henvcfg.SSE (Zicfiss) reside in the low
+> +     * 32 bits and are defined for both RV32 and RV64, so they must be
+> +     * writable regardless of MXLEN.
+> +     */
+> +    if (cfg->ext_zicfilp) {
+> +        mask |= HENVCFG_LPE;
+> +    }
 > +
->           if ((val & MSTATUS64_UXL) != 0) {
->               mask |= MSTATUS64_UXL;
->               val = riscv_write_uxl(env, val, MSTATUS64_UXL);
-> @@ -4014,8 +4019,8 @@ static RISCVException read_sstatus(CPURISCVState *env, int csrno,
->       if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
->           mask |= SSTATUS_SDT;
->       }
-> -    /* TODO: Use SXL not MXL. */
-> -    *val = add_status_sd(riscv_cpu_mxl(env), env->mstatus & mask);
+> +    /* H can light up SSE for VS only if HS had it from menvcfg */
+> +    if (cfg->ext_zicfiss && get_field(env->menvcfg, MENVCFG_SSE)) {
+> +        mask |= HENVCFG_SSE;
+> +    }
 > +
-> +    *val = add_status_sd(riscv_cpu_sxl(env), env->mstatus & mask);
->       return RISCV_EXCP_NONE;
->   }
+>       if (riscv_cpu_mxl(env) == MXL_RV64) {
+>           mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE |
+>                                   HENVCFG_DTE);
 >   
+> -        if (env_archcpu(env)->cfg.ext_zicfilp) {
+> -            mask |= HENVCFG_LPE;
+> -        }
+> -
+> -        /* H can light up SSE for VS only if HS had it from menvcfg */
+> -        if (env_archcpu(env)->cfg.ext_zicfiss &&
+> -            get_field(env->menvcfg, MENVCFG_SSE)) {
+> -            mask |= HENVCFG_SSE;
+> -        }
+> -
+>           /* Update PMM field only if the value is valid according to Zjpm v1.0 */
+>           if (env_archcpu(env)->cfg.ext_ssnpm &&
+>               get_field(val, HENVCFG_PMM) != PMM_FIELD_RESERVED) {
 
 
