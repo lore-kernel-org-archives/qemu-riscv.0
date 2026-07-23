@@ -4,131 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 305ADC531F7
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 17:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B9CC531D0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 18:18:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wmxNl-0005rH-Vj; Thu, 23 Jul 2026 13:38:54 -0400
+	id 1wmxzO-0006Lo-FO; Thu, 23 Jul 2026 14:17:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wmxNd-0005mW-T0
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 13:38:47 -0400
+ id 1wmxzD-0006JZ-5E
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 14:17:36 -0400
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wmxNZ-000568-RV
- for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 13:38:45 -0400
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ id 1wmxzB-0001eO-1j
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 14:17:34 -0400
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66NHXTSB405624
- for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 17:38:40 GMT
+ 66NHX9T0629329
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 18:17:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ibk5HMSkBUrJkeQntdQVXOLFdNw2Xb3EfqWYU2N4qlA=; b=E0jTOhwIu8ufmp87
- 7qOiSZ287YhnAaxcm6ny2YzKVuMuhBovVIegks4HmfSZzrLmtrPBlNYHwLWOCdxg
- g42Sx9X2DZiadW7Xxs6bcFy7evIAKF54xFaP8mPNQ8Lc/+q/AUjOth7bOMyGedP5
- sm/9fAdUMs1gyAH1A/If81is4e3/5ZJWUshw/oJwGDgg5TgV0Ce/eKv2oQTxVccZ
- KfruPsFm2T3YETe4OUBiKRz4T0cciEUOBSwcpN4GdId1DTgdnMtZtbOEAaJpGtz/
- zXBBvO8WMpHvz+uapo51ZUAoF6f9YVRxI2IbWAAV1msMBoEhs9lkX+QUwbzLJCQA
- jcLEIg==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fke0kttb5-1
+ KPLEDTfe3bivJmjuuyXa7Jy9Fd42cqkcp2RKaFXmMTE=; b=BFl3g28bSgx99+/f
+ 8sP/l66fw96DRvB6MtAOnxkcIzISjP86JLIrWObPJ8/60Ik0qJhD5N9smihb8o2U
+ aSIyU2XWm0kO8BszJGWdmyH8Ff9KkYm7BX7CxNHyd6rIaIgKTGCTWWmoMQJUI80Z
+ ASu34EY7uzsB11YStrnST1GTSDtcDf/mnFSwXsGFmj9V8rADAX++zqIKyNda6a4v
+ XO3Wmlb1m/uYxzRSpygjWN3uCupvyS/nAl0M1vCJ2ii4tlwmA+/WY8ph32VsICmL
+ G2n8WeZCPxASfR8F39ihYVP0irZwwhKTSylk8AYwqBjfcmywZvoOb19dbErGweJN
+ 3O9rQw==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fke7qjyu1-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 17:38:40 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-51c110a3b6aso13628641cf.1
- for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 10:38:40 -0700 (PDT)
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 18:17:30 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-8ea75996387so25715136d6.1
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 11:17:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784828320; x=1785433120; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1784830650; x=1785435450; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=ibk5HMSkBUrJkeQntdQVXOLFdNw2Xb3EfqWYU2N4qlA=;
- b=j1gFqAXezMAlF1jwpXygwG1tWWkPkq5PayE9/Bb2Sllxlh4L7BPs2ZzKHT5zts1Feo
- 5ME3yHcYjEdy6QfinR13UHb87IX3mMyjNDt42yoooeUO0pyOMQGujz8dKNKjT7GcIEIg
- +erAyhxc+rwcDMfI3dK3LFTK2ZcNYyDxBuIavpPQmZhe8WGF5OuaKe2HodD8pjGisI+0
- zPyjmNkrt3cCoccuo6QCPt4P9tR9+Rq2WvE9OQBm/AUszh9Z6GGZ3zXhNiDJyh2kjITA
- /uEf0e0jGtXDp2uv4mExi0C99B1Q3EYRL/m3rbB0jG8ZtlTfr8RGfNmsEbrdro2XritR
- MVjQ==
+ bh=KPLEDTfe3bivJmjuuyXa7Jy9Fd42cqkcp2RKaFXmMTE=;
+ b=dYC8XiiEjAe/vrbX3axxMzEEHkF4hP2B3d4972d3QWy8vLQk10ol6B9LoGep53rRJZ
+ 5p4jkgCd736Idm2d2nx/7gueaOcYvVfO9aqE/2TKNGHhSBy6E5hFkz2bkGJ/gkWhBJrg
+ UGsRpm84VWBpKzaT7SzM1gNKt+AwkG7cugZHeRbeLILnLkXC8ai585wydI+YL1KoKsXv
+ JE2WZZboJ/XOzkYJC897szPR2G4qRvENycVS0m73/cYcsZsmiDqAvHItOyOML1y+gYtu
+ YwrLdiXFbc+kgfsnZL4/reaMJtjYQwZCylv5RMf/jz/KQoL1ufzl3Tho0AIO0X5wbw9v
+ ysow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784828320; x=1785433120;
+ d=1e100.net; s=20251104; t=1784830650; x=1785435450;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ibk5HMSkBUrJkeQntdQVXOLFdNw2Xb3EfqWYU2N4qlA=;
- b=UdurHb38jvvBDuvdpCpKMLON3bnjO+pRHqNEfh4fqIscqjHUHb9YhhjRym3z07YTIG
- oFPBaMX6k2nki+4w/o048baSglqQKIQ82HDYYx78IA0TXGt4dV6zzFZxdXOeryVgapED
- kEH/g13fy0Eemk/QEd6jdOOw9sQJX4lV7pJ9fT/4Xc51F+9Z/1KfBHTV2LYihhdQuGkh
- 6Y0hfe0w4S4KZRF85S9+8q48Ntu5QW3Rd+7gqfH1IplhIWi37Q/0MgjOLoU1m9T6ReGP
- UwjgX9x1qjQnUB9CEwjncAgKyXeZZURKo8tme0b29nFmbhdLGn/LJ9yTi3zuGry8l+u8
- OmUA==
-X-Gm-Message-State: AOJu0Yzu2/CoEuKkBbVHSiQEtJ0BBdKTGVmVZC4FNy5Gp2rm5SFuTTOd
- 8s74gfkygWVj0HLAHw1G4rxQHFDYu0kObt0NcL24GJqQyuuDED8J/Rarf3DwLxLCjH/9S8cvanb
- BuvPl4ofTN1iNEabIbHUhO5wXly2WGtgRZDAjhVaCD3SMg+lwzBHJzZqYJg==
-X-Gm-Gg: AR+sD13jqY0KUfe4rCYGY7Ss++gGqq3KdgyOLvxeq4yvo3mnFCbgSNE9iQLgtHe6MEt
- bx7hL/Sz9RPsqfkmFfg97tes/9AMRs9cP6LNehLAVqRwuC6nhIg5CJsQ8BXtHSMh4DNh4hfhZL6
- 4jnWAX6Nwqs0oiPH5eBsGabJPGaILME0t+/a6FPYgIo3XtGf8OgJ94138ZRrqocT2WBviYxNava
- +Pem2EpWlv7Wkk/9ZVWRmWrGXhw/Os92Bzdp8YdFFmqkCDVxgpFpBXEfwgNLS3IUnl8lnYyF02G
- j6dWH0L8iduZC+SNMPsz6tk5YYLzy4G1mbmVxX88zMTzNJBKhnq9/ACrHmWdaOhqwucGerf9V5l
- hcmLv6W/NiRomcu/f+hEL2OZ7MFgxnus+6cn/5A==
-X-Received: by 2002:a05:622a:142:b0:51c:1fd1:e755 with SMTP id
- d75a77b69052e-5283de98bffmr35530951cf.36.1784828319602; 
- Thu, 23 Jul 2026 10:38:39 -0700 (PDT)
-X-Received: by 2002:a05:622a:142:b0:51c:1fd1:e755 with SMTP id
- d75a77b69052e-5283de98bffmr35530791cf.36.1784828319196; 
- Thu, 23 Jul 2026 10:38:39 -0700 (PDT)
+ bh=KPLEDTfe3bivJmjuuyXa7Jy9Fd42cqkcp2RKaFXmMTE=;
+ b=IHQniSV3TyY8UgYEcfB1G9UecApcEGaPgCzVGjFSZIbVuhzNqyASgglEDQuO0XbVDK
+ 8TaPIx4/WZ6fFaEiNmjTISB+Mh73UWqpx+uXZwZs80BDWE88R8zYoKuyLBnxG1oJZVOy
+ YLICeWyKu1bXO4ok1im+xASx5Lnolc2EuXhvBVWD8mGxNjOkH5pxLD//zN28nE5V1JSd
+ 0KQExWx6GXKF3KBI4FH22ybeeSfa9RLx7rW3x8I7NjJPl2EmDwySbYm9+s6NSqsTjxAX
+ blasnM3Caz5lmz0IFiA3OMT6mPoDUcH0jtFwKYBvFvwBPNSj61ZdFtt+Ln2FOJqwcupF
+ t07Q==
+X-Gm-Message-State: AOJu0YwXQCk5w/FAS2u81f0Jw6LxYn+/L8orV87IBMC2dvay9Xfqne+t
+ QwrUopd5sIdamF1tql2CJ1+xkTyXUVMBOWC5FmEONRazyxAbjnlVpj6xix0+PmxQ82xXIKjavxt
+ E7pcZ+yi2AOszD8VH2404jB8S/LZ/AJ9OXluYMT5QIpT20kXbbij9VBfwaw==
+X-Gm-Gg: AR+sD13jQzykVX/oIa6YbkxrCgn/fQwy7Zwf5ocp4s6OD4El8ehdep5tnh6/RHENTwF
+ nBx77QOwmoz8N+7UfI/vcPbZYim5ZeAB6aQiTDzcnRCiLfoODKY361RHhoHOhgjmdOoamYxkTC9
+ uUj6xxNVx0+vUi4xFgzDstxlid9rPK8BayK371oL2+j98ejRI7UWCEcxGvBcfP01Pb61NUBX4I5
+ 1FEMPqyV46vtw0s9MBVuhZVC9o/LdxbK4AJH+CI8ikLoinnoZNgheztFQ1MO0+D1yA2GMCAV3Ka
+ At1rqXZEErMXN0M1NlWxjBaWfvpJnTBECxyiPS+WUnueHSyhsUVFLiumdhG4n6FnDLf+iCVDsMY
+ jHjK6xnuEBpAlqSrpfkA3vVBfEbQ7/oblhGVs/A==
+X-Received: by 2002:a05:6214:5501:b0:8ef:feee:f91a with SMTP id
+ 6a1803df08f44-907ca34d286mr49074586d6.42.1784830649838; 
+ Thu, 23 Jul 2026 11:17:29 -0700 (PDT)
+X-Received: by 2002:a05:6214:5501:b0:8ef:feee:f91a with SMTP id
+ 6a1803df08f44-907ca34d286mr49074236d6.42.1784830649362; 
+ Thu, 23 Jul 2026 11:17:29 -0700 (PDT)
 Received: from [192.168.68.107] ([152.234.122.204])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-907ba8d585bsm51019666d6.15.2026.07.23.10.38.36
+ 6a1803df08f44-907ba9e18besm51295826d6.24.2026.07.23.11.17.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Jul 2026 10:38:38 -0700 (PDT)
-Message-ID: <8e12d0b0-f7dc-411f-a750-f638c5158cee@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 14:38:35 -0300
+ Thu, 23 Jul 2026 11:17:28 -0700 (PDT)
+Message-ID: <9b31ecf6-35f8-4d11-a2cc-28d1306bacd0@oss.qualcomm.com>
+Date: Thu, 23 Jul 2026 15:17:25 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: use SXL instead of MXL for read_sstatus
-To: Abhigyan Kumar <314abh@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20260723142254.1683113-1-314abh@gmail.com>
+Subject: Re: [PATCH] hw/riscv/riscv-iommu.c: always send MRIF notice MSI
+To: Flavien Solt <flavien@nus.edu.sg>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "qemu-stable@nongnu.org" <qemu-stable@nongnu.org>,
+ "palmer@dabbelt.com" <palmer@dabbelt.com>,
+ "alistair.francis@wdc.com" <alistair.francis@wdc.com>,
+ "liwei1518@gmail.com" <liwei1518@gmail.com>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>,
+ "chao.liu@processmission.com" <chao.liu@processmission.com>
+References: <KL1PR0601MB4874F12178F49F9BB8BEA7DF8DF92@KL1PR0601MB4874.apcprd06.prod.outlook.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260723142254.1683113-1-314abh@gmail.com>
+In-Reply-To: <KL1PR0601MB4874F12178F49F9BB8BEA7DF8DF92@KL1PR0601MB4874.apcprd06.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: _EfRhaIOcbwXmBRdVAMgamUklotss6e8
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE3MCBTYWx0ZWRfX0cKicuvDcJW2
- S6wqrHUqW6SFkGoy0pVuecOpMQKZg+eyaR4NTMj1Qu4ePWb0QIim6HPQqxrPLgdWD82p/RBqMJq
- gv93usP4yQXdI38eiFKdbdiGpL9DBuY=
-X-Authority-Analysis: v=2.4 cv=S7DpBosP c=1 sm=1 tr=0 ts=6a6251a0 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE3OCBTYWx0ZWRfXyFhJZ14zU55l
+ rV+wc853bt9wEtjNxinnz6jt89ceR1texxhqt3r5hkOh+5X2qCN124ijJgKLZct/NdD8eFmdVr4
+ utxmKxzV1HRSjPVkdSQqsxBdreYlrbE=
+X-Authority-Analysis: v=2.4 cv=aYxRWxot c=1 sm=1 tr=0 ts=6a625aba cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=LOtmT-1FezyT_fMOqjwA:9 a=QEXdDO2ut3YA:10
- a=uxP6HrT_eTzRwkO_Te1X:22
-X-Proofpoint-GUID: _EfRhaIOcbwXmBRdVAMgamUklotss6e8
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE3MCBTYWx0ZWRfX4CerwdHrbpl/
- eMcshLZ7t7h7SWv05sDVhXwAyc7iPYQBS75QJkJ73MrGWVxz/yOk6GZUfbYchbT0EKWZ+lOJoxd
- Wti1cIZN73UTcFZIm/JHk4vj/sHjf+Xq6eWYhjM9AXRLCwwse8GKxIIS+q2qKZcZfeaGotdP5bK
- yN0sdl1cIqYC2a0srVscNQ56YLIwGOm5c/GyGipsLkhcwWI5O67++Gdqm8L9LgsCWfT9NURsP0s
- lwF7E00gHeIYzo4vCJN0Lt7t2o6Jex1tyO5iTkkylh7zFstKo+7PWUB8oS3d3rFoeJL3fdG5k9W
- CijzT991Nmvh3vhLsmbLdYBedYShYUEqusNzgxm5x1O+5QN5loCgDvaKjWDUOwPzrDPiioMnG/o
- Esj7Rj4hp1rIKMDhNGlJZ6WHQ4Kb/wm623fFKT2gC1+OSqrF0T6wR+WTM6ebSM6c7tNnh4FIquk
- xsjBk4Kupo20S5kXWKg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=69wJf7TsAAAA:8 a=EUspDBNiAAAA:8 a=3NAPQOWDTWkrN7lJYGsA:9 a=QEXdDO2ut3YA:10
+ a=iYH6xdkBrDN1Jqds4HTS:22 a=Fg1AiH1G6rFz08G2ETeA:22
+X-Proofpoint-GUID: eZYEIzxX1fizt-N2fqG5JFvWWw-PotxS
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE3OCBTYWx0ZWRfX502qsi/jBcRi
+ 9ztgwB+ycJ2Y+XyQhbE2WFxh9aav30hGETUDuEzddny4ypru3XcLHgpsBROg8z/2JisPbcw8Sp1
+ rKWdPL4CVSCslI9CLgbpKl9lbwWKzbE5pPrGmI2cIyH+tHY964Ibpu8ZxOuiQaXXmtDeHoBmwJq
+ FrPm8GNQ8zt9VILbUMAqB5mmpXwT8Ll1EBWl+6jKMDbvDbtvrywZ7Tb32eGkQJmr61HZwXr5xEo
+ LIhDLxIzYA1NZU1nSUEG6RPt2wD4vI4HcutsFYjQD+QWYewCkGa2yx0Tp2MoeEE0bTKfnT0uSii
+ ONC50MS7ak2lx2/VButW3FE0PYMOQUo58c4F9hhYi1OYrsAuW4LYIQsYqVQj5GkvpQeys19ipJt
+ /ZlyfRJfC+UAzNhsKBabGDpzgGj0blzkMjxlnLtdZGLmbIBFMnvSy3eioO/ScZ9TqIWN4Qr7djn
+ bJg46ig7OfU+YdG+gEA==
+X-Proofpoint-ORIG-GUID: eZYEIzxX1fizt-N2fqG5JFvWWw-PotxS
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_05,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 malwarescore=0 suspectscore=0 bulkscore=0
- priorityscore=1501 adultscore=0 impostorscore=0 phishscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230170
+ priorityscore=1501 impostorscore=0 malwarescore=0 spamscore=0
+ lowpriorityscore=0 phishscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607230178
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -155,51 +161,61 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 7/23/2026 11:22 AM, Abhigyan Kumar wrote:
-> According to the RISC-V spec, a 64-bit system can have M-mode in 64-bit
-> with S-mode being 32-bit (SXL bits or mstatus[35:34] being 1). In this
-> case, read_sstatus should use SXL.
+On 7/14/2026 3:01 AM, Flavien Solt wrote:
+> The AIA specification requires an IOMMU to send the configured notice MSI after storing an MSI to an MRIF even when the corresponding interrupt-enable bit is clear. The problem is that riscv_iommu_msi_write() currently reads the MRIF interrupt-enable doubleword and suppresses the notice MSI when the bit is zero.
 > 
-> QEMU doesn't allow changing the SXL bits in mstatus in M-mode. This was
-> because of the missing MSTATUS64_SXL mask in write_mstatus. Now, both
-> the SXL field in mstatus can be safely modified in M-mode and
-> read_sstatus correctly uses SXL not MXL.
+> This patch removes the enable-word read and always sends the notice MSI after updating the MRIF pending bit.
 > 
-> Fixes: b550f89457 ("target/riscv: Compute mstatus.sd on demand")
-> Signed-off-by: Abhigyan Kumar <314abh@gmail.com>
+> Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+> Cc: qemu-stable@nongnu.org
+> Signed-off-by: Flavien Solt <flavien@nus.edu.sg>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   target/riscv/tcg/csr.c | 9 +++++++--
->   1 file changed, 7 insertions(+), 2 deletions(-)
+> Tested with a deterministic qtest using qemu-system-riscv64.
 > 
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index 36f2004bc..a90449b87 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -2067,6 +2067,11 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+> After this patch we get:
+>    enable=0: pending=0x20 notice=0x12d
+>    enable=1: pending=0x20 notice=0x12d
+> 
+>   hw/riscv/riscv-iommu.c | 15 +--------------
+>   1 file changed, 1 insertion(+), 14 deletions(-)
+> 
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index f6865d1..9627cab 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -788,20 +788,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
+>           goto err;
 >       }
->   
->       if (xl != MXL_RV32 || env->debugger) {
-> +        if ((val & MSTATUS64_SXL) != 0) {
-> +            mask |= MSTATUS64_SXL;
-> +            val = riscv_write_uxl(env, val, MSTATUS64_SXL);
-> +        }
-> +
->           if ((val & MSTATUS64_UXL) != 0) {
->               mask |= MSTATUS64_UXL;
->               val = riscv_write_uxl(env, val, MSTATUS64_UXL);
-> @@ -4014,8 +4019,8 @@ static RISCVException read_sstatus(CPURISCVState *env, int csrno,
->       if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
->           mask |= SSTATUS_SDT;
->       }
-> -    /* TODO: Use SXL not MXL. */
-> -    *val = add_status_sd(riscv_cpu_mxl(env), env->mstatus & mask);
-> +
-> +    *val = add_status_sd(riscv_cpu_sxl(env), env->mstatus & mask);
->       return RISCV_EXCP_NONE;
->   }
->   
+> 
+> -    /* Get MRIF enable bits */
+> -    addr = addr + sizeof(intn);
+> -    res = dma_memory_read(s->target_as, addr, &intn, sizeof(intn), attrs);
+> -    if (res != MEMTX_OK) {
+> -        cause = RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT;
+> -        goto err;
+> -    }
+> -
+> -    if (!(intn & data)) {
+> -        /* notification disabled, MRIF update completed. */
+> -        return MEMTX_OK;
+> -    }
+> -
+> -    /* Send notification message */
+>       addr = PPN_PHYS(get_field(pte[1], RISCV_IOMMU_MSI_MRIF_NPPN));
+>       n190 = get_field(pte[1], RISCV_IOMMU_MSI_MRIF_NID) |
+>             (get_field(pte[1], RISCV_IOMMU_MSI_MRIF_NID_MSB) << 10);
+> 
+> base-commit: 499039798cdad7d86b787fec0eaf1da4151c0f05
+> --
+> 2.54.0
+> 
+> 
+> ________________________________
+> 
+> Important: This email is confidential and may be privileged. If you are not the intended recipient, please delete it and notify us immediately; you should not copy or use it for any purpose, nor disclose its contents to any other person. Thank you.
+> 
 
 
