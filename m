@@ -4,143 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7979C44536
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jul 2026 20:17:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B855C44524
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 03:47:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wmdNK-0003wU-Hd; Wed, 22 Jul 2026 16:17:06 -0400
+	id 1wmkOg-0006a7-36; Wed, 22 Jul 2026 23:46:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wmdNI-0003vj-3n
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2026 16:17:04 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1wmkOb-0006Yv-Jf; Wed, 22 Jul 2026 23:46:54 -0400
+Received: from [115.124.30.101] (helo=out30-101.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wmdND-00039q-PR
- for qemu-riscv@nongnu.org; Wed, 22 Jul 2026 16:17:03 -0400
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66MHrlNS1269387
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2026 20:16:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- yIRWZ6106kn+OZ3ttXKrJvJwkCUWLuvtIglE8CAYVuE=; b=ors/zyfNq15TOD37
- WRnlJmyCRisAhSuZNyPKXsl9c1EJ60HY8sStXNcCBCpIvvCekyHSNSqE2gGH3nn3
- 8933U6mvsQG2jRSpwMjjo34eOAhqlViMyH6hzA2Qhg5NHz1nvYLFh4LoK7oU1Tdi
- jBtteBv3905khjGQ5jOHhOkSYzH3kWP6SgQTXpaqX4tX1zB/Hoi0soVerVrCAwYz
- 6Uy3alqP+RtpKpFjVfY/oJOpdspMpiLcJ8rOhATsHevYHszVENDv59mZ9/G1Jn3r
- Y73qKPiylhPMjQhpXBGfiU4mv2J8xYFOdaLotoF73zlbRiaRloJqZ9oxb7ExjVrJ
- 7LyclQ==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fju22au0e-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2026 20:16:56 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-8eac2620cb0so181433756d6.3
- for <qemu-riscv@nongnu.org>; Wed, 22 Jul 2026 13:16:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1wmkOU-0004V5-KP; Wed, 22 Jul 2026 23:46:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1784751416; x=1785356216; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=yIRWZ6106kn+OZ3ttXKrJvJwkCUWLuvtIglE8CAYVuE=;
- b=DkotghTUdanJ2vBmiFtWhQAmnp5h+yiB1iuXVNcPJ0m/guQIRPuzE0AVgFeoLMzL2A
- FXZyMI1kFGNIZJI4EteS0WVe757Iud0r4As2zHA08K42d3TqU6ZVUlfXDI6LmzBFLsr0
- bdZhDsRBSBzr1L6W+Vq9C7BVD0767PAGO+rGPA258s2XwEmA3nfHCbkzpcheBS3vHcBJ
- D+T0iNVdWaApz1XY5XSzlrS+rNJQIzkwYxDqd9bOMy7frruDyXYpt4j3R6k8ZS5L7W7D
- jst1h0WFyD5KbXbEck4l1smxrWSfGVj+bBYclBoyigoqi1xowH3AYDCLmv4yKouTOxbR
- 9AjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1784751416; x=1785356216;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=yIRWZ6106kn+OZ3ttXKrJvJwkCUWLuvtIglE8CAYVuE=;
- b=YBz1kUO1xvC4rTuuGS6Wocqw03Q0t0cKNzzuhNSTDLNf+6j4fDAbkBqZkYz2sVAShP
- 4TTV4UR4PjKJrT6XPT4drQj1vhEuNZj2kdWuQm2gtaLsJwP+tLWARJ6sCU2AyDH4C+wA
- lGDjojTs2Bxup1Lq9ez/BLNP6oyPn5nQ1MAK/GvSvmURLgIVe2gwf2lNiy1MVzA3XZC2
- 6FDQfJ5TG5NdnW3k6B0a+o3XuVWqk4SIRK1NCvDKgAXdPENPUXJ+btYDSDlr9oR3gtH+
- fiseHRww954eVS15R1YkamdXy7QUdwH901qMbOS600McbHEAMFJudzo/7GttljcPUGdC
- b0PQ==
-X-Gm-Message-State: AOJu0YxLNvzIajJFklgpjHhov73yfac3j9RNCXyuop0jp1wzXFsNL3UL
- dGlRlzSzmDgEfiXJxiKJqASYg4Uti8rNdzFjD/zBEoU9k9fWCDscdWunOq35su9ZRpsHh5FcuSo
- QzdK7+2dptVgNDXCNX9Eq1YwkUF0EaGp2vgzXghTmxD9bz1kVYGR5wtNYSw==
-X-Gm-Gg: AR+sD119u943ys4SCebec5NVbAkZh59nDLAuhQia3uTAYL4zDjGCsLXoEgAijGcrQYs
- ZsSEuFnqNmJ1sERKYAVpNOqo2QxqWAbW8MiOVxLci88WVvwxvl6SUWmrFHCVTZ0ygHDFOyMKvR2
- rU5qNG0eO30/s9vHIYT5x6i+7xshbaaIGx9rDBAc9PWBpHCFiN7AyJM1ztYJqGejriSpKQWPmmx
- zggo+pCRIxqqzukUskWPYe+2xni3D72PaCFbRIpCkmhWFYCjrXeXBE0jwhEjSaF9BNrXk6pzhVE
- TUZfvl+BVP6GDECRmtPPmMuugmQaPah/PEyoQ0sjCdn9PZ7HnoSvv7LFV/2xdmy+eS7Tk8sl8Fc
- e1hkdJ1iQoLGS7l4cwdp6kqxw9JKpxquX7JRVmQ==
-X-Received: by 2002:a05:6214:3d11:b0:8ee:b165:5dbf with SMTP id
- 6a1803df08f44-907ca28ff6dmr5650626d6.10.1784751415742; 
- Wed, 22 Jul 2026 13:16:55 -0700 (PDT)
-X-Received: by 2002:a05:6214:3d11:b0:8ee:b165:5dbf with SMTP id
- 6a1803df08f44-907ca28ff6dmr5650036d6.10.1784751415098; 
- Wed, 22 Jul 2026 13:16:55 -0700 (PDT)
-Received: from [192.168.68.107] ([152.234.122.204])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-907ba9ddd4bsm28798306d6.26.2026.07.22.13.16.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jul 2026 13:16:54 -0700 (PDT)
-Message-ID: <dbbba142-41d0-4a62-ba46-1338591429d7@oss.qualcomm.com>
-Date: Wed, 22 Jul 2026 17:16:51 -0300
+ d=linux.alibaba.com; s=default;
+ t=1784778382; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=oUUq4FugiH3fS+Az6GU1EViJio6Tdn8HQU+tFqjcIt8=;
+ b=D6+KpOE/qWPyoCU8xx2qBFG5ulUueMoLpCRNAmGcQKaJrVB32K3laqhDVz3WXzGpgKbs1g31ueHfyXZiy/0z/9E5qZK2Y02ZDhph2o7FrzX+zqdBE6RpWLvsE5lJg1WRJoJjbmcyEN1UIUgAlC7OZLlAJy2NETGKM9ek+I8P1Zk=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R561e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam011083073210;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=11; SR=0;
+ TI=SMTPD_---0X7epHR7_1784778379; 
+Received: from 30.166.65.93(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0X7epHR7_1784778379 cluster:ay36) by smtp.aliyun-inc.com;
+ Thu, 23 Jul 2026 11:46:20 +0800
+Message-ID: <705186b9-dd43-4e8e-ba42-0b6d0af05081@linux.alibaba.com>
+Date: Thu, 23 Jul 2026 11:46:19 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] tests/qtest: Add K230 DDR controller tests
-To: Junze Cao <caojunze424@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, chao.liu@processmission.com,
- pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, farosas@suse.de, lvivier@redhat.com,
- pbonzini@redhat.com
-References: <20260716132423.931427-1-caojunze424@gmail.com>
- <20260716132423.931427-4-caojunze424@gmail.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: Re: [PATCH v7 00/11] target/riscv: Implement Smsdid and Smmpt
+ extension
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Alistair <alistair@alistair23.me>, qemu-devel@nongnu.org,
+ xiangyi.zeng@linux.alibaba.com
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, chao.liu.zevorn@gmail.com,
+ liwei1518@gmail.com, qemu-riscv@nongnu.org, cxx194832@alibaba-inc.com,
+ rahul.pathak@oss.qualcomm.com
+References: <20260715145016.17369-1-zhiwei_liu@linux.alibaba.com>
+ <a568614fb2f7221583bbcc2c67cf7282d50e4d83.camel@alistair23.me>
+ <db11d478-c0cb-4ca6-b7b4-3f53b281452b@linux.alibaba.com>
+ <8cc10b77-22a0-40f0-b883-5d3491248fac@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20260716132423.931427-4-caojunze424@gmail.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <8cc10b77-22a0-40f0-b883-5d3491248fac@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=X4Bi7mTe c=1 sm=1 tr=0 ts=6a612538 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=wTgq6UDN7QN8hzUyWYkA:9 a=QEXdDO2ut3YA:10
- a=pJ04lnu7RYOZP9TFuWaZ:22
-X-Proofpoint-GUID: 0AEFhyVSeIgcf8oQAeng4p_8pxOLY_SF
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDIwMCBTYWx0ZWRfX0Fv8XVvwmC6U
- qQw3BDKVp7OvDS3srVHnMvoiNr2G2zKTxg0fLkl8fH5yEEKx5EyWKsW4ujVqvq2GepToUNrt42H
- h6wuKqQ8lygTSh5g6jy7nw0LzD1njLU=
-X-Proofpoint-ORIG-GUID: 0AEFhyVSeIgcf8oQAeng4p_8pxOLY_SF
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDIwMCBTYWx0ZWRfX9kstdMfB7YuB
- WPmkcdpThuxoJTUBRBpdbjKIb0UbYklV886BVfGKdsTHRWC8VTFaZKfh97P+Lreg391itz85ZdR
- 4+b9J92wvI9vkPVQJ4zU/aidDajG40Up/v0JWsWsEeCkN7nTx9EPhHsEUzwNRO2ToRG3+ZCHjQc
- 9YHV6BQRET166M1FV/Muk27J4cRSz43bzi42+fh3Rp7JYiPk1I4JzbkFS96MEc1ReuyA6rnKws3
- yDooIaS3fs/Yo4/mOvONDh4gVcEUYrakWXxEPNFxQ9shUAgFKezj4tLUM2xWZnUYjkKa7ViQam/
- weCb1wZSlrA/ij3tP9Kw6Qkz0k3v0ypQYEgOmaiQk0bnkmodffHdkwdkChyJRpbfDcsgPRlUxVb
- J+p+thjbbztcWVY481hjy//ojoGL0B/td7+BW4DCdrk3RMnpMZpgWOQbbBJ3vXGqum863parz1o
- fu8oXxFFvTleXE+fT2Q==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-22_05,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 lowpriorityscore=0 suspectscore=0 phishscore=0 malwarescore=0
- clxscore=1015 priorityscore=1501 spamscore=0 adultscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220200
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.101 (deferred)
+Received-SPF: pass client-ip=115.124.30.101;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-101.freemail.mail.aliyun.com
+X-Spam_score_int: -166
+X-Spam_score: -16.7
+X-Spam_bar: ----------------
+X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_PASS=-0.001,
+ T_SPF_HELO_TEMPERROR=0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -157,284 +79,199 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
+On 7/23/26 3:52 AM, Daniel Henrique Barboza wrote:
+>
+>
+> On 7/22/2026 12:11 AM, LIU Zhiwei wrote:
+>>
+>> On 7/22/26 8:56 AM, Alistair wrote:
+>>> On Wed, 2026-07-15 at 22:50 +0800, LIU Zhiwei wrote:
+>>>> This patch set introduces support for the RISC-V Smsdid and Smmpt
+>>>> (Supervisor Domain Identifier and Memory Protection Table) extensions
+>>>> v0.4.9(https://github.com/riscv/riscv-smmtt/releases/tag/v0.4.9).
+>>>> Smmpt provides a hardware mechanism for fine-grained memory
+>>>> protection,
+>>>> checked after address translation, which is particularly useful for
+>>>> supervisor-level sandboxing and security monitoring.
+>> Hi Alistair,
+>>> Can you include a link to the upstream submitted patches to use this
+>>> functionality
+>> Xiangyi is currently working on OpenSBI support for SMMPT, and we 
+>> already have an internal implementation in place. We plan to upstream 
+>> the OpenSBI support as soon as possible, and once that is done, I’ll 
+>> be able to include a link here.
+>
+Hi Daniel
+> Please be aware that Rahul already sent OpenSBI patches for smmpt and 
+> smsdid:
+>
+> [RFC PATCH 0/5] Add Smsdid and Smmpt supervisor domain protection
+> https://lists.infradead.org/pipermail/opensbi/2026-July/010235.html
+>
+> In fact, as I said in another thread [1], Rahul also has a QEMU 
+> implementation of his own.
+> His OpenSBI patches works with his QEMU changes:
+>
+> https://github.com/pathakraul/qemu/tree/rpathak_smmpt_v1
+Thank you very much for pointing this out and for coordinating between 
+us. I was not aware of Rahul's OpenSBI patches and QEMU implementation.
+>
+> But seems like his OpenSBI patches does *not* work with this QEMU patches,
+It seams probe_sdidlen in OpenSBI write a sdid to mmpt with bare mode. 
+According to the specification, in bare mode, "The remaining fields in 
+mmpt (SDID, PPN) must
+be set to zeros.
+>  but works
+> with his QEMU implementation.  Seems like there might be things to 
+> improve in both
+> implementations.
+>
+> I asked him to not send his QEMU patches on top of yours because I'd 
+> rather work in
+> collaboration on top of a single series, and I advise to not send 
+> another OpenSBI support
+> for the same stuff in that mailing as well.
+>
+> IMO you and Rahul should sync up in both OpenSBI and QEMU bits to 
+> avoid effort duplication
+> on both sides.
 
-On 7/16/2026 10:24 AM, Junze Cao wrote:
-> Add qtests for DDRC and PHY reset values, register access policy, the
-> software-update handshake, and PHY register ownership.
-> 
-> Exercise PHY training and mailbox acknowledgement through the DFI
-> initialization sequence. Include negative coverage to ensure DFI cannot
-> complete before PHY training or enter Normal mode before completion is
-> enabled.
-> 
-> Signed-off-by: Junze Cao <caojunze424@gmail.com>
-> ---
+I agree with your suggestion that it is better to avoid duplicated 
+effort and collaborate on a single direction for both the QEMU and 
+OpenSBI sides.
 
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Since the SMMPT v0.4.9 specification is already close to stabilization, 
+and implementation work has already started in both OpenSBI and QEMU, I 
+believe we should be able to converge quickly through collaboration and 
+help move SMMPT upstream sooner.
 
->   MAINTAINERS                 |   1 +
->   tests/qtest/k230-ddr-test.c | 226 ++++++++++++++++++++++++++++++++++++
->   tests/qtest/meson.build     |   3 +-
->   3 files changed, 229 insertions(+), 1 deletion(-)
->   create mode 100644 tests/qtest/k230-ddr-test.c
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 1cb3ef6c02..ace7def55e 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1833,6 +1833,7 @@ F: include/hw/misc/k230_ddr.h
->   F: include/hw/riscv/k230.h
->   F: include/hw/watchdog/k230_wdt.h
->   F: tests/functional/riscv64/test_k230.py
-> +F: tests/qtest/k230-ddr-test.c
->   F: tests/qtest/k230-wdt-test.c
->   
->   RX Machines
-> diff --git a/tests/qtest/k230-ddr-test.c b/tests/qtest/k230-ddr-test.c
-> new file mode 100644
-> index 0000000000..72362929bc
-> --- /dev/null
-> +++ b/tests/qtest/k230-ddr-test.c
-> @@ -0,0 +1,226 @@
-> +/*
-> + * QTest testcase for the K230 DDR controller and PHY
-> + *
-> + * Exercises register access, reset, PHY ownership, training mailbox, and DFI
-> + * initialization.
-> + *
-> + * Copyright (c) 2026 Junze Cao <caojunze424@gmail.com>
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "libqtest.h"
-> +
-> +#define K230_DDRC_BASE    UINT64_C(0x98000000)
-> +#define K230_DDR_PHY_BASE UINT64_C(0x9a000000)
-> +
-> +#define K230_DDRC_MSTR    0x000
-> +#define K230_DDRC_STAT    0x004
-> +#define K230_DDRC_DRAMTMG4 0x110
-> +#define K230_DDRC_DFIMISC 0x1b0
-> +#define K230_DDRC_DFISTAT 0x1bc
-> +#define K230_DDRC_SWCTL   0x320
-> +#define K230_DDRC_SWSTAT  0x324
-> +
-> +#define K230_DDRC_STAT_OPERATING_MODE_MASK          0x7
-> +#define K230_DDRC_DFISTAT_DFI_INIT_COMPLETE_MASK    0x1
-> +
-> +#define K230_DDR_PHY_CSR(index) \
-> +    (K230_DDR_PHY_BASE + (uint64_t)(index) * sizeof(uint32_t))
-> +
-> +#define K230_DDR_PHY_ATX_IMPEDANCE      0x00043
-> +#define K230_DDR_PHY_TX_IMPEDANCE_CTRL1 0x10049
-> +#define K230_DDR_PHY_VREF_IN_GLOBAL     0x200b2
-> +#define K230_DDR_PHY_MICRO_CONT_MUX_SEL 0xd0000
-> +#define K230_DDR_PHY_TRAINING_STATUS    0xd0004
-> +#define K230_DDR_PHY_TRAINING_ACK       0xd0031
-> +#define K230_DDR_PHY_TRAINING_MESSAGE   0xd0032
-> +#define K230_DDR_PHY_TRAINING_TRIGGER   0xd0099
-> +
-> +static void complete_phy_training(QTestState *qts)
-> +{
-> +    qtest_writel(qts,
-> +                 K230_DDR_PHY_CSR(K230_DDR_PHY_MICRO_CONT_MUX_SEL), 1);
-> +    qtest_writel(qts, K230_DDR_PHY_CSR(K230_DDR_PHY_TRAINING_TRIGGER), 9);
-> +    qtest_writel(qts, K230_DDR_PHY_CSR(K230_DDR_PHY_TRAINING_TRIGGER), 1);
-> +    qtest_writel(qts, K230_DDR_PHY_CSR(K230_DDR_PHY_TRAINING_TRIGGER), 0);
-> +}
-> +
-> +static void test_reset_and_register_access(void)
-> +{
-> +    QTestState *qts = qtest_init("-machine k230");
-> +
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_MSTR),
-> +                    ==, 0x01040000);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_STAT),
-> +                    ==, 0x00000000);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_DRAMTMG4),
-> +                    ==, 0x05040405);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_DFIMISC),
-> +                    ==, 0x00000001);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_SWCTL),
-> +                    ==, 0x00000001);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_SWSTAT),
-> +                    ==, 0x00000001);
-> +
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDR_PHY_CSR(K230_DDR_PHY_ATX_IMPEDANCE)),
-> +                    ==, 0x03ff);
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDR_PHY_CSR(K230_DDR_PHY_TX_IMPEDANCE_CTRL1)),
-> +                    ==, 0x0fff);
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDR_PHY_CSR(K230_DDR_PHY_VREF_IN_GLOBAL)),
-> +                    ==, 0x0200);
-> +
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_MSTR, 0x01040008);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_MSTR),
-> +                    ==, 0x01040008);
-> +
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_STAT, 0xffffffff);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_STAT),
-> +                    ==, 0x00000000);
-> +
-> +    qtest_writel(qts, K230_DDR_PHY_CSR(K230_DDR_PHY_VREF_IN_GLOBAL),
-> +                 0xffffffff);
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDR_PHY_CSR(K230_DDR_PHY_VREF_IN_GLOBAL)),
-> +                    ==, 0x7fff);
-> +
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_DRAMTMG4, 0);
-> +
-> +    qtest_system_reset(qts);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_MSTR),
-> +                    ==, 0x01040000);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_DRAMTMG4),
-> +                    ==, 0x05040405);
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDR_PHY_CSR(K230_DDR_PHY_VREF_IN_GLOBAL)),
-> +                    ==, 0x0200);
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_software_update_handshake(void)
-> +{
-> +    QTestState *qts = qtest_init("-machine k230");
-> +
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_SWCTL, 0);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_SWSTAT),
-> +                    ==, 0);
-> +
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_SWCTL, 1);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_SWSTAT),
-> +                    ==, 1);
-> +
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_SWSTAT, 0);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_SWSTAT),
-> +                    ==, 1);
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_phy_ownership(void)
-> +{
-> +    QTestState *qts = qtest_init("-machine k230");
-> +    uint64_t atx = K230_DDR_PHY_CSR(K230_DDR_PHY_ATX_IMPEDANCE);
-> +    uint64_t mux = K230_DDR_PHY_CSR(K230_DDR_PHY_MICRO_CONT_MUX_SEL);
-> +
-> +    qtest_writel(qts, atx, 0x155);
-> +    g_assert_cmphex(qtest_readl(qts, atx), ==, 0x155);
-> +
-> +    qtest_writel(qts, mux, 1);
-> +    qtest_writel(qts, atx, 0x2aa);
-> +    g_assert_cmphex(qtest_readl(qts, atx), ==, 0x155);
-> +
-> +    qtest_writel(qts, mux, 0);
-> +    qtest_writel(qts, atx, 0x2aa);
-> +    g_assert_cmphex(qtest_readl(qts, atx), ==, 0x2aa);
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_dfi_prerequisites(void)
-> +{
-> +    QTestState *qts = qtest_init("-machine k230");
-> +
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_DFIMISC, 0x20);
-> +
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDRC_BASE + K230_DDRC_DFISTAT) &
-> +                    K230_DDRC_DFISTAT_DFI_INIT_COMPLETE_MASK,
-> +                    ==, 0);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_STAT) &
-> +                    K230_DDRC_STAT_OPERATING_MODE_MASK,
-> +                    ==, 0);
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_dfi_complete_enable(void)
-> +{
-> +    QTestState *qts = qtest_init("-machine k230");
-> +
-> +    complete_phy_training(qts);
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_DFIMISC, 0x20);
-> +
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDRC_BASE + K230_DDRC_DFISTAT) &
-> +                    K230_DDRC_DFISTAT_DFI_INIT_COMPLETE_MASK,
-> +                    ==, 1);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_STAT) &
-> +                    K230_DDRC_STAT_OPERATING_MODE_MASK,
-> +                    ==, 0);
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_training_and_dfi_handshake(void)
-> +{
-> +    QTestState *qts = qtest_init("-machine k230");
-> +
-> +    complete_phy_training(qts);
-> +
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDR_PHY_CSR(K230_DDR_PHY_TRAINING_STATUS)),
-> +                    ==, 0);
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDR_PHY_CSR(K230_DDR_PHY_TRAINING_MESSAGE)),
-> +                    ==, 0x07);
-> +
-> +    qtest_writel(qts, K230_DDR_PHY_CSR(K230_DDR_PHY_TRAINING_ACK), 0);
-> +    g_assert_cmphex(qtest_readl(qts,
-> +                    K230_DDR_PHY_CSR(K230_DDR_PHY_TRAINING_STATUS)),
-> +                    ==, 1);
-> +    qtest_writel(qts, K230_DDR_PHY_CSR(K230_DDR_PHY_TRAINING_ACK), 1);
-> +
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_DFIMISC, 0x20);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_DFISTAT),
-> +                    ==, 1);
-> +
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_DFIMISC, 0);
-> +    qtest_writel(qts, K230_DDRC_BASE + K230_DDRC_DFIMISC, 1);
-> +    g_assert_cmphex(qtest_readl(qts, K230_DDRC_BASE + K230_DDRC_STAT) & 0x7,
-> +                    ==, 1);
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +int main(int argc, char **argv)
-> +{
-> +    g_test_init(&argc, &argv, NULL);
-> +
-> +    qtest_add_func("/k230-ddr/reset-and-register-access",
-> +                   test_reset_and_register_access);
-> +    qtest_add_func("/k230-ddr/software-update-handshake",
-> +                   test_software_update_handshake);
-> +    qtest_add_func("/k230-ddr/phy-ownership", test_phy_ownership);
-> +    qtest_add_func("/k230-ddr/dfi-prerequisites", test_dfi_prerequisites);
-> +    qtest_add_func("/k230-ddr/dfi-complete-enable",
-> +                   test_dfi_complete_enable);
-> +    qtest_add_func("/k230-ddr/training-and-dfi-handshake",
-> +                   test_training_and_dfi_handshake);
-> +
-> +    return g_test_run();
-> +}
-> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> index 56ff860e21..dc110f72c8 100644
-> --- a/tests/qtest/meson.build
-> +++ b/tests/qtest/meson.build
-> @@ -297,7 +297,8 @@ qtests_riscv64 = ['riscv-csr-test'] + \
->     (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
->      config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
->      ['iommu-riscv-test'] : []) + \
-> -  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
-> +  (config_all_devices.has_key('CONFIG_K230') ?
-> +   ['k230-ddr-test', 'k230-wdt-test'] : [])
->   
->   qtests_hexagon = ['boot-serial-test']
->   
+Xiangyi and I will continue to review Rahul's OpenSBI patches to 
+understand the current differences and why they are not yet compatible 
+with our QEMU series. I will also reach out to Rahul directly so that we 
+can sync up and work toward a common implementation.
 
+Thanks again for the pointers.
+
+Best regards,
+Zhiwei
+
+>
+>
+> Cheers,
+> Daniel
+>
+>
+> [1] 
+> https://lore.kernel.org/qemu-devel/2e2de5da-9eb0-4d56-b193-d8b06b7a3512@oss.qualcomm.com/
+>
+>
+>>
+>> Thanks,
+>> Zhiwei
+>>>
+>>> Alistair
+>>>
+>>>> The rfc patch set:
+>>>> https://mail.gnu.org/archive/html/qemu-riscv/2025-09/msg00216.html
+>>>>
+>>>> v6->v7:
+>>>>      The implementation is updated from the v0.3.4 specification to
+>>>>      v0.4.9. The main changes are:
+>>>>      1. Update the mmpt CSR number to 0x382 and msdcfg to 0x74E.
+>>>>      2. Update the mmpt register layout: the SDID and PPN field
+>>>> positions
+>>>>         changed and the RV64 PPN is now 44 bits.
+>>>>      3. Rework the MPTE format: the N (NAPOT) bit now lives at bit 2,
+>>>> the
+>>>>         non-leaf NAPOT form is removed, NAPOT leaf entries encode a
+>>>> single
+>>>>         XWR tuple plus a G granularity field, and non-NAPOT leaf
+>>>> entries
+>>>>         hold per-page XWR tuples.
+>>>>      4. Treat XWR=000 as "no access" and a non-leaf entry with N=1 as
+>>>> a
+>>>>         fault.
+>>>>      5. Enforce the Smmpt64 root-table PPN alignment (low 3 bits
+>>>> zero).
+>>>>      6. Rename the fence instructions mfence.spa/minval.spa to
+>>>>         mfence.pa/minval.pa.
+>>>>      7. Drop stale Reviewed-by tags on the substantially reworked
+>>>> patches.
+>>>>      8. Introduce the configurable "smmpt-sdidlen" CPU property.
+>>>>      9. Add disassembly support for the Smmpt.
+>>>>      10. Add bare-metal M-mode system tests.
+>>>>      11. Rebase to master.
+>>>>
+>>>> v5->v6:
+>>>>      1. Use explicitly bit fields extract instead of mpte_union_t.
+>>>>      2. Use the same exception behavior for MPT valiation as PMP
+>>>>         valiation.
+>>>>      3. Use PAGE_* instead of MPT_ACCESS_* as they have same value.
+>>>>      4. Use address_space_*_le instead of address_space_* for SMMPT.
+>>>>      5. Only print SMMPT address check log when SMMPT is enabled.
+>>>>      6. Add implied rule for SMMPT as it depends on SMSDID.
+>>>>      7. Rebase to master.
+>>>>
+>>>> v4->v5:
+>>>>      1. Rebase to master.
+>>>> v3->v4:
+>>>>      1. Add missing review tags.
+>>>> v2->v3:
+>>>>      1. Fix build error in patch 2.
+>>>>      2. Rebase to master.
+>>>>
+>>>> rfc->v2:
+>>>>      1. When ext_smmpt is false or BARE mode, make other fields in
+>>>> mmpt
+>>>>         CSR zero.
+>>>>      2. Add patch 5 to fix smrnmi ISA string order.
+>>>>      3. Fix patch 6 smmpt and smsdid ISA string order.
+>>>>      4. Make smmpt and smsdid experiment extensions.
+>>>>      5. Add review tags.
+>>>>
+>>>> LIU Zhiwei (11):
+>>>>    target/riscv: Add basic definitions and CSRs for SMMPT
+>>>>    target/riscv: Add smmpt-sdidlen property for the mmpt SDID field
+>>>>    target/riscv: Implement core SMMPT lookup logic
+>>>>    target/riscv: Integrate SMMPT checks into MMU and TLB fill
+>>>>    target/riscv: Implement SMMPT fence instructions
+>>>>    target/riscv: Fix smrnmi isa alphabetical order
+>>>>    target/riscv: Add disassembly for Smmpt instructions and CSRs
+>>>>    target/riscv: Enable SMMPT extension
+>>>>    target/riscv: Add system test for SMMPT extension
+>>>>    target/riscv: Add system tests for Smmpt52 and Smmpt64
+>>>>    target/riscv: Add system test for Smmpt34
+>>>>
+>>>>   disas/riscv.c                                 |   9 +-
+>>>>   target/riscv/cpu.c                            |  60 +++-
+>>>>   target/riscv/cpu.h                            |   8 +
+>>>>   target/riscv/cpu_bits.h                       |  27 ++
+>>>>   target/riscv/cpu_cfg_fields.h.inc             |   3 +
+>>>>   target/riscv/insn32.decode                    |   2 +
+>>>>   target/riscv/meson.build                      |   1 +
+>>>>   target/riscv/riscv_smmpt.c                    | 339
+>>>> ++++++++++++++++++
+>>>>   target/riscv/riscv_smmpt.h                    |  26 ++
+>>>>   target/riscv/tcg/cpu_helper.c                 | 119 +++++-
+>>>>   target/riscv/tcg/csr.c                        | 106 ++++++
+>>>>   .../tcg/insn_trans/trans_privileged.c.inc     |  30 ++
+>>>>   target/riscv/tcg/pmp.h                        |   3 +
+>>>>   tests/tcg/riscv64/Makefile.softmmu-target     |  12 +
+>>>>   tests/tcg/riscv64/smmpt-common.S              | 256 +++++++++++++
+>>>>   tests/tcg/riscv64/test-smmpt.S                |  85 +++++
+>>>>   tests/tcg/riscv64/test-smmpt34.S              |  97 +++++
+>>>>   tests/tcg/riscv64/test-smmpt52.S              |  91 +++++
+>>>>   tests/tcg/riscv64/test-smmpt64.S              |  98 +++++
+>>>>   19 files changed, 1353 insertions(+), 19 deletions(-)
+>>>>   create mode 100644 target/riscv/riscv_smmpt.c
+>>>>   create mode 100644 target/riscv/riscv_smmpt.h
+>>>>   create mode 100644 tests/tcg/riscv64/smmpt-common.S
+>>>>   create mode 100644 tests/tcg/riscv64/test-smmpt.S
+>>>>   create mode 100644 tests/tcg/riscv64/test-smmpt34.S
+>>>>   create mode 100644 tests/tcg/riscv64/test-smmpt52.S
+>>>>   create mode 100644 tests/tcg/riscv64/test-smmpt64.S
+>>>>
+>>>>
+>>>> base-commit: 499039798cdad7d86b787fec0eaf1da4151c0f05
+>
 
