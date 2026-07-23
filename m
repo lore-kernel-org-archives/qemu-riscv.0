@@ -4,130 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D4A0C531C7
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 08:43:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 995A6C531CB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jul 2026 11:13:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wmp0c-0007Ud-73; Thu, 23 Jul 2026 04:42:26 -0400
+	id 1wmrMV-00057r-BV; Thu, 23 Jul 2026 07:13:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wmp0Y-0007Sh-3b; Thu, 23 Jul 2026 04:42:22 -0400
-Received: from mail-japaneastazlp170130007.outbound.protection.outlook.com
- ([2a01:111:f403:c405::7] helo=TYDPR03CU002.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wmrMQ-00057Q-Vd
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 07:13:07 -0400
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1wmp0W-0008Ep-71; Thu, 23 Jul 2026 04:42:21 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uQ22HfRXMYr3mUCGPsArPAsMQ/aS3EKer6VnG9ZbaD0Ufr5axMQ9In00yiJ36tTEQ3qQF23qrcEhVMXZ+VGSeNVFmdu3o6k+utDYjBYK7L7642pgGfSn5WVeqzJI/nXu3GMrz+7bD1iUJpjx3077jyIfRi9LSNj2r1VHk4fGTp0tXGxKsa9WQlTi3zd0uOzu5Gk5JrpXpeFV9aXiEDreEqWmiTvL5iN8yZ6g10j9PFoYfJAF2VRm4xCnP4kPIEpsrE1UlcT42+cdcH12aGZ/SEjfV2g2eWg5F8lUH0Rru0yahadWnRYKhLF5vg2GCfRAhLGR55D2fiJ83aJws/HMrA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sgtgsCYDr3HvGcJPfwXEJts7D8rovo89I5ZmlO8uhHU=;
- b=WMMPyhajXalMvV3oOYnGV234g2kggXEfoF1XCOZneFUYXdhsQU5sGFfDLsBdr+6me4kyRklu68NN0QvJonkyFz0walV94NSKlFBo05GB33pMSLyhh60praaRLdhCDs6Jx8Azym0fdxu+dU/wZ2VlkSqhZ6HHBilvTgoP0OMA8JQ2a1B9qNtTwF8qq4RxcFloVF49csHxMhbfmQX2W9b3j8vi3xkbGD8Tu0YuFiPtBI/tYn5L/aWGrydBu0v/k2eSFgyqFePuIBm4lse1C7nltnp8upF1NJ0sL+4Ms7U7lryUtm3CRpyArq7vjstVYcyfJG0PYLcy2dKhCrqstuwsxA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sgtgsCYDr3HvGcJPfwXEJts7D8rovo89I5ZmlO8uhHU=;
- b=enhQB1oV2HqN+FrfIwISg4LFvsyaUr5LJg0jiLvA3HeAJjS1Q9OGWabryqk7lkDt26dg61fIcZsDrjurm3M1PIwOJddAVhmeSk1fZYrICz1HidclvaMzJbWqKe7LXuH1WcIXJ5ldzUIVJZbo8FGVqobGUThlgixa2yg2Pj8bC5wPDtM0W8CBA1VzszRY9E0oXwg4hv47Kqdx+xVu1iLIx1GETR/Sr7636IliJLSPVQ9Nbl45WhpznaNN1D5xl85tP3aiUS1K9CpS7QxnMb8VqEhjIzVexwYMaCZOWTO0yjEH38DJ+GNxIIFZXHtbbHZtupTI1Jh+huI6HfEh+5fIgQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from KUXPR02MB9336.apcprd02.prod.outlook.com (2603:1096:d10:a3::10)
- by KUXPR02MB9071.apcprd02.prod.outlook.com (2603:1096:d10:5c::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Thu, 23 Jul
- 2026 08:42:12 +0000
-Received: from KUXPR02MB9336.apcprd02.prod.outlook.com
- ([fe80::1451:cb49:7950:b10d]) by KUXPR02MB9336.apcprd02.prod.outlook.com
- ([fe80::1451:cb49:7950:b10d%3]) with mapi id 15.21.0245.009; Thu, 23 Jul 2026
- 08:42:12 +0000
-Date: Thu, 23 Jul 2026 16:42:05 +0800
-From: Chao Liu <chao.liu@processmission.com>
-To: Junze Cao <caojunze424@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- pierrick.bouvier@oss.qualcomm.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, 
- farosas@suse.de, lvivier@redhat.com, pbonzini@redhat.com
-Subject: Re: [PATCH 2/3] hw/riscv: Connect K230 DDR controller and PHY models
-Message-ID: <amHTzdDJUVGpfzCw@ChaodeMacBook-Pro.local>
-References: <20260716132423.931427-1-caojunze424@gmail.com>
- <20260716132423.931427-3-caojunze424@gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260716132423.931427-3-caojunze424@gmail.com>
-X-ClientProxiedBy: PH8PR07CA0003.namprd07.prod.outlook.com
- (2603:10b6:510:2cd::17) To KUXPR02MB9336.apcprd02.prod.outlook.com
- (2603:1096:d10:a3::10)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1wmrMO-0004DK-2R
+ for qemu-riscv@nongnu.org; Thu, 23 Jul 2026 07:13:06 -0400
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 66N8qX1J3044796
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 11:12:59 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ qLmqx/qzHQSf++rK7BlvdfnI6uRSd9Z25dCIQExYcgc=; b=VVidWoWwWcTIvsdY
+ zwNA3bOYEakdWzOKHKkqw3Se19fUxQlk3NYb83xxA0RU8Q11/81QIIMXGK6VP90h
+ Gc+1w/l857EKTlfm5JEOer9TVIzJBEna/7hiYXzkKY/ToxFAdrL1gRSBLVSojTjH
+ JbVHj+jF5jnnqY/SYH2zWKM+HUMb9s92c8oWB9P21/Qz9kwbJRPxPSkWDJ9JC8pg
+ j5tjtVKnT2gDoGyXfy9JxDiGGlggdP8QtMSBJ3pRRp/5xCUFfNMDMgimHeSLUbYE
+ +EdQpC3LzqLjhBRQF0+bogKQfvqWpjBbvaSVSfeiZXR4l0tsez9dO2ljiGw64e4g
+ 3cX9DQ==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkeuq8skt-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 11:12:58 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-92e5fc4c7e9so62379685a.3
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jul 2026 04:12:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1784805178; x=1785409978; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=qLmqx/qzHQSf++rK7BlvdfnI6uRSd9Z25dCIQExYcgc=;
+ b=QO6FSShzIMyGQmfPG+y8a90eJKriX+G12vMuSDJBEgApPZQEZYYAMSlcC3sMIj7NHJ
+ E4t71/ngcJqsxan5wFe69TIl28vvPZZSrba6PKwk6P8wJiOSB6DdyuhYJB0cLtzo8frV
+ uoN1dDNURUZeSOk4UnYs1zMmAcVZw1oB0DsfpvxZ3c2EyFBvr8D7Tm7IZj/ae8FpmQJn
+ y/IFh0fBUNg8irot+ngJkKA9eqyh8Pz79E1S31n3hvMeEVt1Y3jyr0stJLXxjpW8fKXG
+ xveeD0XvAN1S0f7uUs4rdwLe+P8ONErB6Vc46zkwlP6PHYQAfq9Ddi1AvVwcxaHDYYIP
+ 8wYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784805178; x=1785409978;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=qLmqx/qzHQSf++rK7BlvdfnI6uRSd9Z25dCIQExYcgc=;
+ b=CivFRZHmdpgEmWWzaq3JiTq0Ylx2DJu6tNiCUUc2W3fsbIwr3QntctIpjEy14hxPu4
+ 7LO30LDbtaG2/yO+cpO6HtvVreLeQ2eb13pAJa6UiRus7WzVNaHVw5Upu2L/AFTvWv1K
+ xuSRc+T832j67bpnxlQXdwQLA/ITsF5SsYupAB37vE71oz2zNGhE8Y9F/TMPXfYlV+Ol
+ ZqlD6CNn/OC27Ht0Q2OJ4QeLijfCTd32VJH2sO87MFlnoOpPVlgGneyOIuSvKu3pwAqK
+ FURw43DvMHHDn7wvU6DSRs6urtV1cNmYwGhkjVSzlH7ukqS6tuKKIdwJ0CPYaS4jzAxz
+ Innw==
+X-Gm-Message-State: AOJu0YzUsR6mYHJWrK4ogqOxuqgPBGxLKn4nkuDjdXyo05Yq4WQ6OxTF
+ aEZw1pb3DFVDjyAf0ZciSS576GxczQXm/7qyNKdHC2L6XZ8kSonftjkYzJ5gpr0T/+Geam4P3LY
+ n2P+mNOsvJqiGdGQhBrHJIyw0mj2p11HtLhQVOU7PZAZ1loRBMyihZHKhog==
+X-Gm-Gg: AR+sD139GFxP7Xpu4/XGDMcDDf1Ls31YtgqUSNUbtiXKjR9f1SFG4lgtukuKHBgxWct
+ BsOyeNTfa+MuZTdU9NTrCuycy1JLqXdoLqSmGA/6h0wHFsmF1Zh06hI9On71BcvfFyFUv7SOgI/
+ t4R+NkIsIUBgKKwIt/1EKZZy7emzjyrTU/qQ+Z3jOa/SmJ/cHSZim6UywVm33/TaE5aqdfrEhMD
+ aLx8zQ1PnbDsDI6LNWuNsWztGzmrxqy8eNx9Q+toCit+dFIMqNT7hpO03NZ7m/TL8JOwSD2Zfpq
+ kob060/fWx23JzqITdEZY4cAu9+kl6jb+7A3B7RiqoSl0vs90wayMRFPHPtzdqWPckpjUTGVmXB
+ /ArUcoGuc9oTn9qqnAT3/yE03CRU7T0O57zMuSg==
+X-Received: by 2002:a05:620a:4625:b0:92e:5259:1154 with SMTP id
+ af79cd13be357-9310363595amr274550385a.39.1784805177827; 
+ Thu, 23 Jul 2026 04:12:57 -0700 (PDT)
+X-Received: by 2002:a05:620a:4625:b0:92e:5259:1154 with SMTP id
+ af79cd13be357-9310363595amr274547085a.39.1784805177343; 
+ Thu, 23 Jul 2026 04:12:57 -0700 (PDT)
+Received: from [192.168.68.107] ([152.234.122.204])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-930f6a88b88sm388862185a.42.2026.07.23.04.12.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 23 Jul 2026 04:12:56 -0700 (PDT)
+Message-ID: <0d68a8df-d742-497c-a59a-aab6cda454c5@oss.qualcomm.com>
+Date: Thu, 23 Jul 2026 08:12:53 -0300
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: KUXPR02MB9336:EE_|KUXPR02MB9071:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3803b062-7294-4099-6b60-08dee8964a64
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|34096008|1800799024|366016|7416014|376014|23010399003|4143699003|10067099003|6133799003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: +Z0I72FsiynwGDqYUPXuKRTRp9zL36//a3K0XFFhY/ey8oRA7di/wue0jaLGbZ0yyIe6y1SDQ+I3u4fO3OAS3+A7MMQY4ghSjpDfEpTTj/9qg66kTLZDds/OKcNNm/i4LZLa12fFpfnmndX5WUi3qLSRHnLZRl+IZZNOJtDvyZCpv1eWxlYVdfaQLf/TA45/+6yalgtQJjgTzEDgfiejgg1k3IQUy4eRezkDD+6qKI10RX8LvtOLMkUuWwyuvcCoUYsbeVIZS0KFPFUcd0q1lDvpd7xPvbs033FVoMNZdUiIw0hGQRSkMW1/bfs/1l8HPWmAAU0SjsLGbbylsSpPM/pw7BsozlickG3ZZ3oqld+K1hpqBOVq+sNfMGzGLRWEa17mmVPBm8Eq8WO8AdLoh9x5kizHVc+wRUfyP9JRSKnpJ1KY39Uo+FQzRn44K4Cvk4YE77fR9HR5X2NWIzZ+9kT5prDxNdNAbEI8E7oT3uLOpwkF0F6sEqviWciieUDlAoLv2CAtP/0QYHsEHIqZ439XNIJsJ0px0tQG4f1IN+DzXmTJ5nazbRvTKNtXmYuodSeWcAYA+g/9bMfLnX1MvRtPs8Er0T949Iohr/RJhKRu2WpAqtexlJCFpskob8QVICRO82Ca8/h6UOm98Jpt7pGoXo+E8CcTwXk5sBQLeow=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:KUXPR02MB9336.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(34096008)(1800799024)(366016)(7416014)(376014)(23010399003)(4143699003)(10067099003)(6133799003)(56012099006)(18002099003)(22082099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/BhfgiIJbxHmuPs181NO5ZkT/QDcltNaCNSWTfhk1hC/EyET1amaNBkKMVcC?=
- =?us-ascii?Q?icElRG8KXS/tZAhyivuimroBvQIrMWt/hMRlaxqu5ZgEMKLuOipga9ln2oXU?=
- =?us-ascii?Q?mj5gK1vaE1VdbumEVEgtFqrA4oCJcvweTm963Frqh7z06LhNRTdbfANMQ51j?=
- =?us-ascii?Q?yc1KeKN+voCYDqlYxXZ4CxPQdtazjCxI18oGork61+Y5hJGZc4PH1kVn7RcY?=
- =?us-ascii?Q?iHDh+nbkNIiigqCR1DTB2oRmsxcdxHRrPHNu3pLVkWZkDAZTAKr5zEcqhtWn?=
- =?us-ascii?Q?tFy8XKLqxDuWNwWhc8nXNVQ1kchxSKMGu5wGz6766mm8uG5iGd6+T3r5MfOe?=
- =?us-ascii?Q?bbdTsrVlz2JrWtxauL3jh6FC9DRccFX6dgvJbPAalz02ZB02RBW8Hai7sTcQ?=
- =?us-ascii?Q?ADMJ4aW2JC/xaUbF/ASw4x/KKEt2mVgQV8bk27cO2x6nHgSE0A9e44Bqewhm?=
- =?us-ascii?Q?YKtjMDgFncXtBbwVhAn564N21JeSNEa1JupY0o7kNjHUtAnDCEz3+4+nugtc?=
- =?us-ascii?Q?gvp2HjVXl7CU63g2LGV/lXM69wTTTJnqQxdfIBROnhw0YsLdqAofrcMi0kpT?=
- =?us-ascii?Q?B5iQ5JtFSKtWcq67z4PboDJhJy+yBAHRo1NHkU0Jxoqt5D5K2wjRWn21PMdH?=
- =?us-ascii?Q?yGXdYURvXbD44T3VSkowEPip68NRpKdCaC+CKnzBvKr28sQuoFgth8/5KDKd?=
- =?us-ascii?Q?7evRZPRy10eIf0OJB9nG4SBdvlsJ1X/DF1aWDFIVN3mZpvxNFAw6q4iMcn67?=
- =?us-ascii?Q?yeNpZ8wInoBuUnaUksPWzk3EI1cl3ElT7parIL3ReOWU6f3RfWBpk53s50Fe?=
- =?us-ascii?Q?uYspzTbb7GBH/+kVmdoavmsvVj9oLUh493+7cugut6ZsA47FnFWFs1t/hVTY?=
- =?us-ascii?Q?hxs4QYyMlXwjUhsdljTyGcfv9K80Brl9dhW64C0tDq5StOEPAN9sfP/H6Z8R?=
- =?us-ascii?Q?6ZNNxWh5NwD1urzW0oxc8l43jyS7XZyuI63+lEhmY7G6BI45LDWjNXewe3tj?=
- =?us-ascii?Q?UXkqsoEr+uyjgflQ49ANeXeQZZeiGnwjiR96miOaVilv5huvpH0SRqBZZljx?=
- =?us-ascii?Q?IirPQerP7pYg5a2GMD0gVhyDQehV21H2BK+HiL/Idtxwmq6x+a8HonxYl/56?=
- =?us-ascii?Q?dle7HaN0bsuqKpXSagHyhOu0tDvz67ILP1I7r4nTBqB8kiFDcX4oXtVmvsZR?=
- =?us-ascii?Q?zaDBTuasJZZPZ2XJdzurvve0i1+Q2FUaFFfi7qc0Ze1N/l/pi51uTIfTOtCu?=
- =?us-ascii?Q?vPpPpcu7n4Z7efPqSCa6qR5EgVyZZpb4oJfPLZJIKK96kXlcaOp0H9ecSKNm?=
- =?us-ascii?Q?ydr8Xaso6w9DETQCXfKZAD8TlIsfMBV0XVHNv7Wzj/3a9/dKtOAhmZzkCDsg?=
- =?us-ascii?Q?24dORkaRwdMd3iJ9yR6Z4LuWisNl5hAEWK00tng+h8PnE4f1moF9HpAgeJqi?=
- =?us-ascii?Q?pcO8a5iyO2+UDPfpCZOCRrJJnow0DjVtfcyQEbIvLawnUyem5LZAGV/kqByg?=
- =?us-ascii?Q?nvcHwqMpEnRMd7JtxLek9XoBjLfvyzpCQWd/dFdLBnmB7ylP3Pe2tAJgezLI?=
- =?us-ascii?Q?XSMT5UdPDk8tCWPjl0/ur5gePwKzHWU+M4HDexCRGNnzhivGPnpKRYpoS9WD?=
- =?us-ascii?Q?P9eZcyfz2YUKqOW0zYOco8HONtYuRQVLUpvvoNLBq6b/YhRP4dabmmUG4u41?=
- =?us-ascii?Q?ZKBzR6KVqy5in44N8Aft86Td3ZoyOGkQ6fVLBOsp3OAr/dT5G7WXxCWDOatJ?=
- =?us-ascii?Q?7xGuVyGW3SZ0eXrPgwDmzgfDdxEvH5U=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3803b062-7294-4099-6b60-08dee8964a64
-X-MS-Exchange-CrossTenant-AuthSource: KUXPR02MB9336.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 08:42:12.6258 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: rNKDD+6iXMoYQ8VX2KQcJJDDVIcpTGemQAopvEbqS82L25BS74jKDPhSdxFdbLYA8OEJ1W1HM0mWZduHT+hjsuCqaW/tt/fkWhHS3mYRCgE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KUXPR02MB9071
-Received-SPF: pass client-ip=2a01:111:f403:c405::7;
- envelope-from=chao.liu@processmission.com;
- helo=TYDPR03CU002.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: Fix memory leak in riscv_trigger_unrealize()
+To: Zeng Chi <zeng_chi911@163.com>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, zengchi@kylinos.cn
+References: <20260723095911.3951185-1-zeng_chi911@163.com>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260723095911.3951185-1-zeng_chi911@163.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDExMCBTYWx0ZWRfX9gjcpR1lDW5K
+ TEtAs91vS9Q31A4kPsLkGRzHe4oWVeM+hKbPq7V22kbD72BT+W/2AN4DRNmV0uySs0WFOFbAKLg
+ NrS0aW/FtP/vzUQLPmiqT3XSVTwJSUI=
+X-Proofpoint-ORIG-GUID: 3X7GTWJVVDwcZWgDXi8lj6XbVV5ldiDb
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDExMCBTYWx0ZWRfXxRdsvwBgIwck
+ HCibpLZQgTIOc+GTHaxTxFtNCKBCtkso5MdKO2z6tzu1gf06WvepocBHylz96bwdXtd2nNbtAVy
+ ciVzIldhqMXGX4sok77r25QrP59x6FO0r5TiK9h/wAMXyIsakHqMbWpZTOmhRoGQnJrrY7bGGMx
+ rLEKKJKFOLKgt5TRlQAU7ZsW8bV7oD132yQpZwd72ylBeWQnrsfwBAbTFtAo0+mLF2FtMnOhE9L
+ jbq+nZ1yqswmjSdyi6GCoKEd9OHLwFlBkrkKJdrvXuf6EUCBQjbBPZG9JZiG79j18Y4pHakqqQ4
+ aDNm7Sj+jTJJEc3ScLNfmuHnNcK12+51cwcWduVEXqTPK1TxHg4k1N22qqWWjNy1dNQQBdI3Hi3
+ SgtOQt7AlG5R57x+J+2jd7+kKU9/+Wx9Y/sb7lf6xxOP1q/FJ2fTWi5sh2bO2AEtq6+mLy3/xxA
+ 9XKDbN8A+2NpQ2BTXJg==
+X-Authority-Analysis: v=2.4 cv=cPDQdFeN c=1 sm=1 tr=0 ts=6a61f73b cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=J0RmenBMOwS19r/fhzI3tQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=wZvz4ChZffczwv6EFa0A:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-GUID: 3X7GTWJVVDwcZWgDXi8lj6XbVV5ldiDb
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-23_03,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 impostorscore=0 lowpriorityscore=0 adultscore=0 phishscore=0
+ clxscore=1015 suspectscore=0 priorityscore=1501 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230110
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -143,127 +153,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jul 16, 2026 at 09:24:22PM +0800, Junze Cao wrote:
-> Replace the unimplemented K230 DDR configuration region with the DDRC
-> model and map the PHY model at 0x9a000000.
-> 
-> Connect the controller to the PHY so DFI status reflects PHY training and
-> initialization state.
-> 
-> Signed-off-by: Junze Cao <caojunze424@gmail.com>
-Suggested-by: Chao Liu <chao.liu@processmission.com>
 
-Thanks,
-Chao
 
+On 7/23/2026 6:59 AM, Zeng Chi wrote:
+> From: Zeng Chi <zengchi@kylinos.cn>
+> 
+> In riscv_trigger_unrealize(), the per-trigger QEMUTimer objects are
+> created in riscv_trigger_realize() using timer_new_ns().  However,
+> unrealize only calls timer_del() to cancel them, but never frees the
+> timer objects themselves. This results in a memory leak every time a
+> CPU instance is unrealized (e.g., during hot-unplug or machine teardown).
+> 
+> Fix it by calling timer_free() for each timer after timer_del().
+
+I made the assumption that timer_del() calls g_free() under the hood.  Seems
+like the best assumption is always to not make assumptions ...
+
+> 
+> Fixes: 820552a92e32 ("target/riscv: dynamic alloc of debug trigger arrays")
+> Signed-off-by: Zeng Chi <zengchi@kylinos.cn>
 > ---
->  docs/system/riscv/k230.rst |  4 ++++
->  hw/riscv/k230.c            | 19 ++++++++++++++++---
->  include/hw/riscv/k230.h    |  4 ++++
->  3 files changed, 24 insertions(+), 3 deletions(-)
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+>   target/riscv/tcg/debug.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
-> index cea8202e55..06a819fbdb 100644
-> --- a/docs/system/riscv/k230.rst
-> +++ b/docs/system/riscv/k230.rst
-> @@ -20,12 +20,16 @@ The ``k230`` machine supports the following devices:
->  * Platform-Level Interrupt Controller (PLIC)
->  * 2 K230 Watchdog Timer
->  * 5 UART
-> +* K230 DDRC CFG and DDR PHY
->  
->  Boot options
->  ------------
->  The ``k230`` machine supports K230 SDK boot through M-mode U-Boot, which then
->  starts OpenSBI/Linux with ``bootm``. It also supports direct Linux boot.
->  
-> +The DDRC CFG and DDR PHY models allow the K230 SDK U-Boot SPL to complete DDR
-> +initialization before loading the next boot stage.
-> +
->  K230 SDK Linux kernels use T-HEAD C9xx private MAEE page table attributes. QEMU
->  does not implement MAEE in the generic RISC-V MMU, so such kernels need to be
->  built with standard RISC-V PTE bits before they can boot under QEMU.
-> diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-> index 656f28190c..627150b463 100644
-> --- a/hw/riscv/k230.c
-> +++ b/hw/riscv/k230.c
-> @@ -97,6 +97,7 @@ static const MemMapEntry memmap[] = {
->      [K230_DEV_SPI] =          { 0x91584000,  0x00001000 },
->      [K230_DEV_HI_SYS_CFG] =   { 0x91585000,  0x00000400 },
->      [K230_DEV_DDRC_CFG] =     { 0x98000000,  0x02000000 },
-> +    [K230_DEV_DDR_PHY] =      { 0x9A000000,  0x00400000 },
->      [K230_DEV_FLASH] =        { 0xC0000000,  0x08000000 },
->      [K230_DEV_PLIC] =         { 0xF00000000, 0x00400000 },
->      [K230_DEV_CLINT] =        { 0xF04000000, 0x00400000 },
-> @@ -108,6 +109,11 @@ static void k230_soc_init(Object *obj)
->      RISCVHartArrayState *cpu0 = &s->c908_cpu;
->  
->      object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
-> +    object_initialize_child(obj, "ddr-cfg", &s->ddr_cfg,
-> +                            TYPE_K230_DDR_CFG);
-> +    object_initialize_child(obj, "ddr-phy", &s->ddr_phy,
-> +                            TYPE_K230_DDR_PHY);
-> +    s->ddr_cfg.phy = &s->ddr_phy;
->      object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
->      object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
->  
-> @@ -158,6 +164,16 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
->      int c908_cpus;
->  
->      sysbus_realize(SYS_BUS_DEVICE(&s->c908_cpu), &error_fatal);
-> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->ddr_cfg), errp)) {
-> +        return;
-> +    }
-> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->ddr_phy), errp)) {
-> +        return;
-> +    }
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddr_cfg), 0,
-> +                    memmap[K230_DEV_DDRC_CFG].base);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddr_phy), 0,
-> +                    memmap[K230_DEV_DDR_PHY].base);
->  
->      c908_cpus = s->c908_cpu.num_harts;
->  
-> @@ -361,9 +377,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
->      create_unimplemented_device("hi_sys_cfg", memmap[K230_DEV_HI_SYS_CFG].base,
->                                  memmap[K230_DEV_HI_SYS_CFG].size);
->  
-> -    create_unimplemented_device("ddrc_cfg", memmap[K230_DEV_DDRC_CFG].base,
-> -                                memmap[K230_DEV_DDRC_CFG].size);
-> -
->      create_unimplemented_device("flash", memmap[K230_DEV_FLASH].base,
->                                  memmap[K230_DEV_FLASH].size);
->  }
-> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-> index 592e1c26bf..80ca16338c 100644
-> --- a/include/hw/riscv/k230.h
-> +++ b/include/hw/riscv/k230.h
-> @@ -16,6 +16,7 @@
->  #define HW_K230_H
->  
->  #include "hw/core/boards.h"
-> +#include "hw/misc/k230_ddr.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/watchdog/k230_wdt.h"
->  
-> @@ -32,6 +33,8 @@ typedef struct K230SoCState {
->      /*< public >*/
->      RISCVHartArrayState c908_cpu; /* Small core */
->  
-> +    K230DDRCfgState ddr_cfg;
-> +    K230DDRPhyState ddr_phy;
->      K230WdtState wdt[2];
->      MemoryRegion sram;
->      MemoryRegion bootrom;
-> @@ -112,6 +115,7 @@ enum {
->      K230_DEV_SPI,
->      K230_DEV_HI_SYS_CFG,
->      K230_DEV_DDRC_CFG,
-> +    K230_DEV_DDR_PHY,
->      K230_DEV_FLASH,
->      K230_DEV_PLIC,
->      K230_DEV_CLINT,
-> -- 
-> 2.53.0
-> 
+> diff --git a/target/riscv/tcg/debug.c b/target/riscv/tcg/debug.c
+> index 3c0fe70101..ffbdc17023 100644
+> --- a/target/riscv/tcg/debug.c
+> +++ b/target/riscv/tcg/debug.c
+> @@ -1081,6 +1081,7 @@ void riscv_trigger_unrealize(CPURISCVState *env)
+>   
+>       for (int i = 0; i < env->num_triggers; i++) {
+>           timer_del(env->itrigger_timer[i]);
+> +        timer_free(env->itrigger_timer[i]);
+>       }
+>       g_free(env->itrigger_timer);
+>   }
+
 
