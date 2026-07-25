@@ -4,60 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D82A0C531C9
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jul 2026 14:00:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 366DDC531D0
+	for <qemu-riscv@archiver.kernel.org>; Sat, 25 Jul 2026 12:03:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wnGR8-0002NO-F8; Fri, 24 Jul 2026 09:59:38 -0400
+	id 1wnb5f-000632-Be; Sat, 25 Jul 2026 08:02:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <1640586082@qq.com>)
- id 1wnGQx-0002J7-FS; Fri, 24 Jul 2026 09:59:36 -0400
-Received: from out203-205-221-173.mail.qq.com ([203.205.221.173])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <1640586082@qq.com>)
- id 1wnGQs-0003Pr-CE; Fri, 24 Jul 2026 09:59:27 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1784901550; bh=jRCHhEy3Ym//nIqFz4nduByULiPG8zb4EYEv8H9caPM=;
- h=From:Subject:Date:To:Cc;
- b=LrOnQHFFDgite14ASZcrz0DCjd4K0e3mY3L8bqPEupbtGTazomqSnC3BM6V9pqK2x
- 7m9oTP+IkoSY2EdYA+cTGqDZo5c5y47IiJZ7N82leoIk97oAurFq5XaYb0sLqqEzqa
- HKFf0S2epEPEJW9NOeWbvln6AT7nnimrwxUB3jHQ=
-Received: from [127.0.1.1] ([240e:3bb:a98:9fe1:fbb4:4428:c3bc:a339])
- by newxmesmtplogicsvrszb51-1.qq.com (NewEsmtp) with SMTP
- id EC68C209; Fri, 24 Jul 2026 21:59:06 +0800
-X-QQ-mid: xmsmtpt1784901546te02jlweo
-Message-ID: <tencent_EA98FCE27E3F63CFA80C69037A207CCDAF07@qq.com>
-X-QQ-XMAILINFO: NqJ9OIiNOgx8Z/xS5vBtraVvHjerB0/s2bsocaBL+SQP+6rbH5ZT1rI0r9OzZd
- 8K8ycBdis8JS0/cuz9zpH/S8h4FbusC0xLEIl9OCkznBMF+SeJVUmhMtAh4ZpxHMvXRZXFLAqKAB
- d5nw6lgnbWugGhYxFjAnHzwlhgMM8fobwX6yU8dF8K00fmqRqqq5pcnHb+FLTMibe/O9toahw2ql
- vvz/ST33BQ7IqBFT2m9uAm/4DHsWePrJjIAZFV1zXaJCiBXQB1vGnFFTG8Qnp8ywGUKqUQDJKy1N
- dcMIAjMnr2zssv4I/mTyspO8bMUpUJxq2nYfcrzEoY4RHH5CZzPqTJ0pDcGDRQiBp6fdfFjRQd5d
- UJ3E2DBQvR5ghSmYighfb+bgvT7u2XHhOEmUrIQB5xpLg2FOOTF7QQMVyN1iqaPtkjWStA5jAOFf
- fg1RjhVj2K9eYXBfNhMQsp2jSvYdgYojX+bnU/sIyfSa3XmfnWeRKlVt6EfCEUL/RAErDF+noZoF
- zWfYXsBA1lAikjZ6kWUcR3LsgkAvY3flSc2oub8o/FqcPhvaN9L4suneWF2b0tYp8mpnQ25t7QVW
- 62bOBLDvMN+siqyNWyMt2HP0LzAqh9vxHIvBGMc9WjEtPAELJDG8bY7sJEwBYpf85DdIAGQMj5iO
- X2y3SN1Q6tKUUXiHr9NBWXpuUtt+n4VH2UcyBPkd/cAu14Cs5yIayRFccdPn4ueQG8/t+um1kqjF
- odZNAdS9WEES7PiVSL4to9xpcl3CkqQyqsexQcAT5VR7GEC8v2ypWvRBVnztUL8d4PJDnSScaiEU
- 7wvZzu488h+ve4B5HM58jcBujkwGdwGx0xVvXT3jUOmHqQEmC/6i2heVQ+PTvFq43gVR+vaqpiRH
- IO48Ef64HB5nvdbOXw7CP/Ud1qRh0SyBdQshqgI3ZS3S2PXTtRn2J+9hrCpXCLp5bCprVeG5ZLpv
- D0VhZ44kEFiT794nuFwhbnPFcfh9zHxQ8gBlo4nhHovKAuelS7BBBfiS5GLpPxTTaf2Z2CWGyfHE
- u5d2HnNgiXVGh3RsSz/axBtTKwWYwxMJz4aRm48W6L73G/JneeK/kmzs4d6K18aqn9pjRqh+bpfL
- mJmXdgOL1RtQEQwfn6uufA2D2aA+7n6Uvmg+pq6ICuUw2j0RHfdHsulmFje/+jjG8jgZfjIstZ5l
- uaSaIjZg7efP2rHlTZWFrwbyw5paml7wNF2uHx+PWlE6F0RublGb+cz7liJ09+RgB8NbU=
-X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
-From: zhenbaii <1640586082@qq.com>
-Subject: [PATCH 0/3] riscv: Add K230 DW 8250-compatible UART
-Date: Fri, 24 Jul 2026 21:58:58 +0800
-X-OQ-MSGID: <20260724-k230-uart-v2-v1-0-4c0657a703e5@qq.com>
+ (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
+ id 1wnTQq-0004qh-2n
+ for qemu-riscv@nongnu.org; Fri, 24 Jul 2026 23:52:12 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
+ id 1wnTQo-0005xS-Fk
+ for qemu-riscv@nongnu.org; Fri, 24 Jul 2026 23:52:11 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2cfbbdfa60bso10906645ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jul 2026 20:52:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1784951529; x=1785556329; darn=nongnu.org;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=6dFRLJCIuK8K51JYGTHe5j8n8fDntlIRsDnj9x+IWW4=;
+ b=dpGLs6efZGgD57A/1rWuZtqWZ1eNBMeu6Ckcix8FMEwInEkbmsNm4QQZLsZwm6YciU
+ RnCTt62tRVQ27LxKWKhInhGVs4WlKB1YhxH2GHFfOW+8vF7H73bEqhtCXPA0x8uaSH7a
+ 7VH2d7oLjgBF17Tb7WiIS5zEtq1q5ypCq77wKf+WflGfbb007nlSWKgoJ0vAS9Q7dnL6
+ 4oVGfB11sf1b1KXhMjbpRrZ+/fTMaotwohPYMLi9SCE3058SZKP7Uk58EgTCghuTb21M
+ ez1oDXDK8ZQ5SrwqC1bihYw176liXm3JeY3+fhS3Mzh74NQNsr0r+ZqC7MrQZxI7CL18
+ rK7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1784951529; x=1785556329;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=6dFRLJCIuK8K51JYGTHe5j8n8fDntlIRsDnj9x+IWW4=;
+ b=gZAOIuh51vpJItX+GxwwhB9zu1e+MFLAu2CDfVvnKbPCvwfxRK8ygXJwAT7QnzbEU3
+ XFQu0aSf/99nGN+NhBmYiCdm7jn1dBkFAsXBYLjGDuTLMg6Vd/z//IVEZxoi3lqXNZM6
+ 514skR5UOEYPFDuxSF+/qwDjesS8OSf1HP0qzNoklrF6t9zJlKhFOtEnXTV6zxz/3EN6
+ h4ja5ia9iU3X8XG6UyUKQI9MXNVmCt9qh7qqGOjZj0Nr3aMJNohGsfPvFRa22Kx4QXI4
+ cH8E7VdTOKlb7RkSD0IgD2e1RxDZ3CG+i7TbASsJ5oA32fToKalSFDDOj7BcQUpBmhsZ
+ bkGg==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Rrr94/xy22Cf4GoemG9VwrihaE6ly0x6uyRjh841XeuJA1lNZooWLIxYHPCHZYOLxMuBq493Q8D/SQF@nongnu.org
+X-Gm-Message-State: AOJu0Yzz2qfjhQAt/JCUuEvUQHfH3/4GAiK9zQfBeGkxzEUOn3Rr+LW6
+ sLZg6jFITzlDw3B2/3JP0TE1E/IhWna9BrmxJPu3bUyvrs9u4WQxTQlx
+X-Gm-Gg: AR+sD11u/o4kPjcvimYUxm89ezqgKNuSdapA5M1Hro2p5Eps9Q5OgtuiDhQ+98rYBmX
+ hb9cN1TswhAQvRNMJ/7tXK6ml/ffsQDRw7Hj0KdrUQcPfXpCVadQ166HzZK0okhBm8X/zgloxDu
+ vViOnzsXuHXyUSZvnHmL8a82P5KBJkrtXJ7SYek6MWbtDamo8ji9Qk3URkgLiLJMDzOnonC2PVb
+ xy48lByEiAZcOxa4dBErciDn/gBlZJ2Ow05R5DefxyhlIf8ifuqGdZcCiZFxX9XNsm0wUD4jFOd
+ uRHwHS5scNlicGwu0X+ujNjhFHRH5SS1A+jyf5+w5Ssb8FQz1B9igCs3EH/JiBpy0NRuKUc8sRQ
+ 8gTAuduKk7o7Nr9XNnX21eVfqqoNPUUdCZ0+008Xed7TTyxx29JqaygKVfEL2MV35CxHSK/7hdZ
+ qU
+X-Received: by 2002:a17:903:2446:b0:2c9:97a8:afef with SMTP id
+ d9443c01a7336-2cfde8673a4mr9628515ad.40.1784951528612; 
+ Fri, 24 Jul 2026 20:52:08 -0700 (PDT)
+Received: from [127.0.1.1] ([183.6.125.102]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2cfde5c8337sm4109975ad.20.2026.07.24.20.52.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Jul 2026 20:52:08 -0700 (PDT)
+From: WX Chen <wxchen0913@gmail.com>
+Subject: [PATCH RESEND v2 0/3] riscv: Add K230 DW 8250-compatible UART
+Date: Sat, 25 Jul 2026 11:52:02 +0800
+Message-Id: <20260725-feat-k230-uart-v2-v2-0-d5fe82c47c28@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAKJvY2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDcyMT3WwjYwPd0sSiEt0yI93kpCQDc4PEVONUyzQloJaCotS0zAqwcdG
- xtbUALv3dIV4AAAA=
-X-Change-ID: 20260724-k230-uart-v2-cbb070ae3e9f
+X-B4-Tracking: v=1; b=H4sIAOIyZGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
+ vPSU3UzU4B8JSMDIzMDcyNT3bTUxBLdbCNjA93SxKIS3TIjXcO0pMRUAzPLtCQzMyWgvoKi1LT
+ MCrCZ0UpBrsGufi5KsbW1AFi9RG9rAAAA
+X-Change-ID: 20260725-feat-k230-uart-v2-1fbae069fb66
 To: qemu-devel@nongnu.org
 Cc: Paolo Bonzini <pbonzini@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
@@ -67,26 +85,27 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org, 
  Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
- zhenbaii <1640586082@qq.com>
+ WX Chen <wxchen0913@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784901547; l=1497;
- i=1640586082@qq.com; s=20260721; h=from:subject:message-id;
- bh=LX92DradPJ5JKhlIaOJIvmN/IsOvWjrWWfmEihRc9X4=;
- b=LZNTwPXcI1ZvFXev2p4hr3snWobfmVjZqB3TrMkBkdNXQfrl4rQSU1Ahf8nBfwaxj707bBMUW
- rbZHPG65SZEADMgCrq9186zjfoyNsDX635tPK9CkYF0i7zkKcL4oGYi
-X-Developer-Key: i=1640586082@qq.com; a=ed25519;
- pk=AjRy6i+I/zX9djX87K/xR2OQ2Myy7s7j7bDdi9Qz3zw=
-Received-SPF: pass client-ip=203.205.221.173; envelope-from=1640586082@qq.com;
- helo=out203-205-221-173.mail.qq.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784951524; l=1598;
+ i=wxchen0913@gmail.com; s=20260725; h=from:subject:message-id;
+ bh=t3s0n52K6syGOckb8m4qMRqobLTZd+klY3EaiVPmOnc=;
+ b=cj4xcfgGow95m/qHLDIBs0UiJOxdl7PSB8VeXAlVMJke9mbivPiyLbP9cysJml+SXfbKffC4p
+ LEpxOUYXqp4DUI7HrlCvcPoTJTAXH7QGwiYtUWVPpuYl6elC5n0K98t
+X-Developer-Key: i=wxchen0913@gmail.com; a=ed25519;
+ pk=FX63IRxmtz1BCNzHxOOWDPTo8L/D0YUxlIKc1WKi7wo=
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=wxchen0913@gmail.com; helo=mail-pl1-x62c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HELO_STATIC_HOST=-0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Sat, 25 Jul 2026 08:02:50 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -111,15 +130,18 @@ Changes since v1 [1]:
   - Split into a 3-patch series.
   - Fixed indentation of preprocessing macros.
 
+Resend with a new sender address due to unexpected issues with the
+previous email setup.
+
 Testing: 8 qtest cases pass.  With the k230-boot-assets image from
 https://github.com/zevorn/k230-boot-assets, the driver probes
 successfully and the shell works bidirectionally over pty.
 
 [1] https://lore.kernel.org/qemu-devel/tencent_FE5823EA5F7A9EDE163FEDCB3DBFBE1FD905@qq.com/
 
-Signed-off-by: zhenbaii <1640586082@qq.com>
+Signed-off-by: WX Chen <wxchen0913@gmail.com>
 ---
-zhenbaii (3):
+WX Chen (3):
       hw/char: add K230 DW 8250-compatible UART
       hw/riscv: k230: connect DW 8250 UART
       tests/qtest: add K230 UART test
@@ -135,10 +157,10 @@ zhenbaii (3):
  8 files changed, 1565 insertions(+), 14 deletions(-)
 ---
 base-commit: 30e8a06b64aa58a3990ba39cb5d09531e7d265e0
-change-id: 20260724-k230-uart-v2-cbb070ae3e9f
+change-id: 20260725-feat-k230-uart-v2-1fbae069fb66
 
 Best regards,
 -- 
-zhenbaii <1640586082@qq.com>
+WX Chen <wxchen0913@gmail.com>
 
 
