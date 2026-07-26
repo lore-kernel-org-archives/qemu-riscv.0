@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46A6C531CC
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 05:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13053C531CC
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 05:55:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wnrpP-0005Cm-L1; Sun, 26 Jul 2026 01:55:11 -0400
+	id 1wnrpN-0005B7-67; Sun, 26 Jul 2026 01:55:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wnrpO-0005CT-SJ
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 01:55:10 -0400
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ id 1wnrpL-0005Ah-QJ
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 01:55:07 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wnrpN-0000VI-Bm
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 01:55:10 -0400
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-c8612812170so223153a12.2
- for <qemu-riscv@nongnu.org>; Sat, 25 Jul 2026 22:55:08 -0700 (PDT)
+ id 1wnrpK-0000Uc-95
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 01:55:07 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2cad68425a7so2614565ad.1
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jul 2026 22:55:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785045308; x=1785650108; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785045305; x=1785650105; darn=nongnu.org;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=xUM5ZXHD/oLWvFDoO+hHlLuSDfgeblRNtAYDQvQBs2Q=;
- b=sgov9Tjv9Yj6zjeTZu0VLlIow6chFznAFOdob0xo0F8Pytj/FZ9Ipp57+/DrKLr21D
- 83+rwPKizxLEnd6ygj33d0K4YcbxtOReDWn8bsk6a/FPbbUmo/3NUF/+MaXK1LBtPG3l
- RDQDbfaj7za7hjmZmZdrAcZqfzop2xbXOMAbL5sePl7hfFWtX10XkfovMqFdtaBfDZhI
- eNRpmoAn/m6q+IccDIeX92VSDfFIdooYDg44XM9n9MjbSjHFCoL9nearmExni9zc5kaC
- UExagu5DPHtZW1UD7GNwAw1+ohqZKXbDt0z5GqAhKpF9StJ2Cg9tYUDSklOIyqLTNfSc
- EUkA==
+ bh=CBfvrk8os9xzIn90NyWspZLoAEpNM4UXQR7rW6BPBGQ=;
+ b=OIl7kJyaJBI6Tyyctd9vvpcslPi1BwPeyIAld00dZtNER6C/icwd3hlH+2Xaio8uCH
+ TH1w9M/zUepxPEOxoT+B8wppUgwC154QDRFWB27Z2lz/+eTjOzpXEsGF5pFgBG46/TTp
+ 6hgHeygMxnjMhNoB9EeVzNnww3clJa5+TnsiT85lP/ODiq6NViwtJWxFAFrFc+v84+IG
+ /s2j8FLhuRvlZgLF0yt20pQmokTFt29h+K4pvwZqNzqJ0uTWZAEGaFxibieipxyOY2o6
+ Y6WfCCJl8H0UflFAxdXAVfPyP3Dj0V8jMkNQpIHpqkLTLLHPUR8ocmB5xul+0Sa6QO0P
+ ZeeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785045308; x=1785650108;
+ d=1e100.net; s=20251104; t=1785045305; x=1785650105;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=xUM5ZXHD/oLWvFDoO+hHlLuSDfgeblRNtAYDQvQBs2Q=;
- b=m8HqAgTjWbczleFXcX2HjYMicDNwjp8WuVP+BStrxGAT+ufZQRr57h851OGLS4c2Ru
- 9xdeBmgIKvGyULZ2cc+r2amsWRlioSpPujwEhEjPb+3roN5lHkL0cf4MmHNYoAKTQrcr
- rQD0RSL+pTLt1+AC3jkv/gsr9AKGLAmiBoupO8M3XHCvchs1sRwvhjHKjuhHW/wLuC+L
- oeV6ojT5d/MnuSY6GgDW4sppSGmcuI7JqjMFjdnAHxYabXGNriErPWGSwqXunrT5xybk
- 1y5NCFaCgoq4TUW6OXmHyQrm2QBHO4ZVJB2FnhqqsscB3bldD4vbgy/9VHbO4psWANBP
- Nkmw==
+ bh=CBfvrk8os9xzIn90NyWspZLoAEpNM4UXQR7rW6BPBGQ=;
+ b=oDJOkBzujxjLZzUvfCxYovJ03/6AdoMAvVCllbbFOq8Z2BamiVY0M4vAFNSSBGBXwe
+ Wb5GPqIJarVZnrzo8QE7hwcxqCvNITehOUKSIwiCIPEFnRGrs7mDG8CQjoQxMCfR1BBb
+ mlIpJAefa4RCPJzdnWsVfDtytObQmW1mBYNQykmi4VfbWqQ2Ao84G72G3GY+9NcEuUlZ
+ Jw+i6Gl/RgPTeWsR13kuAiruLlDwxsrgNvyWrA95b7rKYPcgXZy7Fuh3Jhz8pPnk4era
+ T+zPytnlEY0MOdyStM6sjJC3ujRgT3N4lwNjT+9A9hV67bQKTOBLCOLs9Tx4Uyj6ldrs
+ d3qw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpSNOvtVQvKDFQKM1G7aN8xZeJlcfamPRJVxmwTYS2z+rvloWYg67Gbx6SQBnIcOZZ3R0jU/ZK0Uknb@nongnu.org
-X-Gm-Message-State: AOJu0YwshNawRo+DREJ9qSDh1+gT/8rio1QfCG0yj+cZXiQkPJCL/aQZ
- MzlXVWSG8bxmDbo5OXCh1lunWrhoal2Km5JCSkMRv/b/w0DUCXM6qWenx5kz/Wpky6Q=
-X-Gm-Gg: AR+sD124Od9cTeF4Dn821QMaTB2Cy0W5KStCsLSZHsM98s+0BDVo3Yj1FX096vgoPke
- BPG3buoacER9mWNvZ91lXXjboZRX+sJM7fcLhdS0K6z619YxcykRu2m7x0xweypBcARzSaU+Rrd
- 63hNwz3z6TENU88a0HMdiH+lcHzFq+1VIz4lp0vUpjOtvWO+pbVmQKfEXLgfJclJiHIZseja+hf
- b03IiXnYDW8IOpphtExdnoiaIWw8lvr/6Hq53FWK8YOROcK5dHcDXFtoM2EZ0VUZJ5E/f5gVmoN
- R++8NYrHiUnoCiC7ANncKkJZwYsErWyaxjNjouBjhk5a37aUJ/Q2jQyJMgf6kDYudkoLolNX6Ml
- kGz8BbDcks7SRTecWWkEpEzaeeZy+isT4P5G/7F+cWDrVzuPjGaaZzgzfEdQ+fEvupuIka2s+Hk
- I0KjJHBGXJ6uRnV/ZMZH3b1R2KfRNaaQo=
-X-Received: by 2002:a17:903:1843:b0:2cf:7dfa:7f56 with SMTP id
- d9443c01a7336-2cfde792b83mr33341805ad.2.1785045307775; 
- Sat, 25 Jul 2026 22:55:07 -0700 (PDT)
+ AHgh+RpO8LZaPF2c3xVyALrTSyVo9mGym46wRv4iYoLW7w9RTWm50P+iY6hbDVsZh9HHZ7Z89D/qB0jY8JyO@nongnu.org
+X-Gm-Message-State: AOJu0YwTbTuIgK7l3ctc0oN156n8Rfg2qBSAeLIuayhheBGWC16A2bMh
+ eRdgfh1pU3OYYf3UBM/1go3g6+Xy3EyCNN4QyVrFN0YyaAgVQtDTVW+yS40JqchU1gA=
+X-Gm-Gg: AR+sD11vz/mCwblgLvTxoAlIgUqnZ6tRhPoXNiUMLRzYiKCw4D2HzHFSBE92tzDvmnX
+ ou78OqM6GU+JbBv8EeYYN2awvq8uYlDfs7zJjQCszeeii0rSdCoG/+2zdlLDNUh0zlar7MnGGfV
+ USpGHxNfl0d1al8CjjqXYMptKHeawtMRVaOwOz13jqyv0xJGG2xUVdDtl4kFucdYXk6+w5gBb6g
+ yiqPS7EiMwlZ3Ht8WKRcz5Dg8vdHEppNVtBGSjsadAWCToUA1J15oXFcFX21DcnP+L38MxKZSg/
+ 8ba+tU+H8a3ABGkk/kwPy/y5BAUe7SFLTkSsRl0GBJYeugxuWNup5Ck/U+InkVICnL+N0ysByOC
+ HJTpq//2+OGHZtXZ9h8R5aOe4T8ZjrUp4Tyt+dVRfjKwnxfkJ16M2RcbwsdcPF+HCj5+wrIMUro
+ lBKLqy7pO6TTYlWrjSKJO2
+X-Received: by 2002:a17:902:e544:b0:2ca:e134:9e6d with SMTP id
+ d9443c01a7336-2cfde8a8c22mr34696025ad.8.1785045304615; 
+ Sat, 25 Jul 2026 22:55:04 -0700 (PDT)
 Received: from DESKTOP-7HME356.localdomain ([38.34.7.236])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-314bc447f6bsm19200010eec.12.2026.07.25.22.55.04
+ 5a478bee46e88-314bc447f6bsm19200010eec.12.2026.07.25.22.55.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jul 2026 22:55:07 -0700 (PDT)
+ Sat, 25 Jul 2026 22:55:04 -0700 (PDT)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 3/7] tests/qtest: add test for K230 gsdma
+Subject: Re: [PATCH 0/7] K230: add gsdma and decomp_gzip
 From: Junze Cao <caojunze424@gmail.com>
 To: Tao Ding <dingtao0430@163.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
  palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
  chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com
-In-Reply-To: <20260721161335.73872-4-dingtao0430@163.com>
+In-Reply-To: <20260721161335.73872-1-dingtao0430@163.com>
 References: <20260721161335.73872-1-dingtao0430@163.com>
- <20260721161335.73872-4-dingtao0430@163.com>
 Date: Sun, 26 Jul 2026 13:54:57 +0800
-Message-Id: <178504529704.906524.5128555664916138089.b4-review@b4>
+Message-Id: <178504529703.906524.8632816566598507450.b4-review@b4>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785045302; l=848;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785045302; l=1284;
  i=caojunze424@gmail.com; s=junze-gmail; h=from:subject:message-id;
- bh=7MpjXv6qCPx3zXPy801wbS7gVS/EmtI8CjqujWNQ8dE=;
- b=IDNd01fXNgki4OaXfz0inGNKABsxmcRzS+rWwxc5ClbiPA5jmN4gBKwSo2j0e1Ip8js8zvmVU
- DxOqd0kPPR2DTicKxWVyWWwjuLfu3rh2zkEFERGpLnM4b0DAxj+/tB8
+ bh=Ya97V4uwAaMNf/oQMtltgzJireX6asGpPB3owByG3/8=;
+ b=/pn3BXCQhJCGnEZQmybVq6CYJf6TXMPptBg6xcTneZ65PtemWc0A7WJmW4w/tWdkGHAzj+1gX
+ ihT3vCgvgvFBFC62Cs1jCQUHYHk0xSjXqDWUvg3Y5rtvW+6CvDLwIBk
 X-Developer-Key: i=caojunze424@gmail.com; a=ed25519;
  pk=lnFIWNw+6CoDrHFIKUJKdgrRbvgAbQGcEFiVsIigOJ8=
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=caojunze424@gmail.com; helo=mail-pg1-x535.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=caojunze424@gmail.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,7 +98,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,24 +114,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 22 Jul 2026 00:13:31 +0800, Tao Ding <dingtao0430@163.com> wrote:
-> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> index 56ff860e21..1b13a777c9 100644
-> --- a/tests/qtest/meson.build
-> +++ b/tests/qtest/meson.build
-> @@ -297,7 +297,7 @@ qtests_riscv64 = ['riscv-csr-test'] + \
->    (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
->     config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
->     ['iommu-riscv-test'] : []) + \
-> -  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
-> +  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test', 'k230-gsdma-test'] : [])
->  
->  qtests_hexagon = ['boot-serial-test']
->  
+On Wed, 22 Jul 2026 00:13:28 +0800, Tao Ding <dingtao0430@163.com> wrote:
+> [...]
+>  hw/misc/meson.build                 |   1 +
+>  hw/misc/trace-events                |   4 +
+>  hw/riscv/Kconfig                    |   2 +
+>  hw/riscv/k230.c                     |  38 +-
+>  include/hw/dma/k230_gsdma.h         | 128 +++++++
+>  include/hw/misc/k230_decomp_gzip.h  |  92 +++++
+>  include/hw/riscv/k230.h             |   5 +
+>  tests/qtest/k230-decomp-gzip-test.c | 181 ++++++++++
+>  tests/qtest/k230-gsdma-test.c       | 201 +++++++++++
+>  tests/qtest/meson.build             |   2 +-
+>  16 files changed, 1689 insertions(+), 8 deletions(-)
+>  create mode 100644 hw/dma/k230_gsdma.c
+>  create mode 100644 hw/misc/k230_decomp_gzip.c
+>  create mode 100644 include/hw/dma/k230_gsdma.h
+>  create mode 100644 include/hw/misc/k230_decomp_gzip.h
+>  create mode 100644 tests/qtest/k230-decomp-gzip-test.c
+>  create mode 100644 tests/qtest/k230-gsdma-test.c
+> 
+> base-commit: bd6079a7a1d14de0918a7715ef6db85dc32de3bb
+> --
+> 2.43.0
 
-The new source files haven't been added to the MAINTAINERS.
-Please update.
-Other than that, there are no issues.
+This series adds K230-specific GSDMA and decompression-GZIP models, but it
+does not update MAINTAINERS. The existing "K230 Machines" entry does not
+cover the new source, header, or qtest files.
 
 -- 
 Junze Cao <caojunze424@gmail.com>
