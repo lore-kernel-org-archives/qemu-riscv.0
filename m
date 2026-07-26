@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF17C531CC
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 06:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF6A3C531F9
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 06:55:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wnslV-00018S-Rj; Sun, 26 Jul 2026 02:55:15 -0400
+	id 1wnslv-0001Iq-UF; Sun, 26 Jul 2026 02:55:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wnslT-00013b-3P
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 02:55:11 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ id 1wnslf-0001DZ-Jr
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 02:55:27 -0400
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wnslR-0007lI-FC
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 02:55:10 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-380f3c1b087so245750a91.3
- for <qemu-riscv@nongnu.org>; Sat, 25 Jul 2026 23:55:08 -0700 (PDT)
+ id 1wnsld-0007ww-Vd
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 02:55:23 -0400
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-cb20b0a387bso257849a12.0
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jul 2026 23:55:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785048908; x=1785653708; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785048914; x=1785653714; darn=nongnu.org;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=h9zdu+NP1j3pJX5DfF1j9xjunQdsEahMuGk29P1KGj8=;
- b=NazXcapvpdFZIWHENEXn1Idf1lFY9JAtQAv0ZKJszjN/5/rkOU032Jm+ALKOwqdOSk
- 7WYhgasC3r0lNu8LCQ84sI0JiFBljxCIf94lxCyO6jtat6SnC8T7Fshz1SU6SJHYjuw8
- fFzSNGV8gsclGuUWJuByt/c4JeOugQUDFHiGQvQrNbLfVWZsrV7+uIWIsYxNuHcZAe+B
- A/lbTg+V4gedwce1jSx2gWAvkCfehbUwSEiQIpi/LWtC05jOiaTnAhjm0sb4cA+iqYgU
- x9+IsIccnjV0YYrQFH9971r6cMwc3N3r0OWLWBLQBT91g1sGUyipYG3zkdJnjpv5Qx/z
- 3K9w==
+ bh=poNx4OEMADHrVJFSdzzYXGPFYjtewrgn/4DHYeOfu2I=;
+ b=r9oLg77WtY5Sw8nJVPs22/vXsun82eNmYb7J/vPYMTXTOerqPoMjTTDhHwlVkE6p6b
+ BASvUIokmKrvnjkheqwU1EDi7Z7bRzpKaHuqjsWfjf+RF65gNEZyPaLS9UrKhnQFamkA
+ Ni/4TPTcBT9Pk3LWNCDpwQjoHnDExmcMATlXR+mCpfRBsl2lBRZPEQ68fLjnFO7XA7Ts
+ aZDwFUO3p4SENb8U3ENI9hgZu/fJ7x6iiCM4g/QF3TYrfbqKI5HDRDCQ1J/hyVRbmiBt
+ 5R6BOanprS+VSgp0RgGWUdplRHKxUre3mWXT9iPeYB58oBMZkkcdtgxnpvJgKiX5adlp
+ z/uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785048908; x=1785653708;
+ d=1e100.net; s=20251104; t=1785048914; x=1785653714;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=h9zdu+NP1j3pJX5DfF1j9xjunQdsEahMuGk29P1KGj8=;
- b=EGna2DwYyYuPAGgjGRKqK/ZlSLmPLafAcx6S0zAdVsb3EukHi+C8fUWucdTDDu9ctM
- UpbGq5MafXdtmt61V8/LSEYfbDNfoJKAZFEdbMeZjacTrAmV8F5+Z0Mz60smFhIMFtNS
- 1BlKupTle9FOa3xKRH7Z+c86AXnEytDeWcoZ15FEWdZkVvGKrVj5sZ0lfLmVnjz9fOwl
- +FsaEcgUlcbirfHC55wnAnxWbot1+b7zG/7Z6NLskehHDwSIzpYdgNvAxeyEGMWELgc9
- Wd0v9xEH3oDLr83krqs2n0U+leTMApLmjjU7c9EQPEAl4mU2tmgyDlbsstX0OoIyBMRN
- WowA==
+ bh=poNx4OEMADHrVJFSdzzYXGPFYjtewrgn/4DHYeOfu2I=;
+ b=S/NctShyeOh/pq95LX5sLOxXowjfpU3+htd12eM7y0ND8+mD47XI6xqZyYLo3vTGPF
+ XUr67PMoSIPc6xQRikDpuh1JUG7z17QGqIWzzhR8OF+98hc7K3V/WlP1pJL6hPzN1832
+ ur7VfyvDEZ57n+vGF+tldpXU2lrndChO/cPynDFEJ23ykrZAIefdZ9HLQUNO7nKyCNoT
+ nG3yi+utYkryqerRwKD91Lv80FiBwc7HL8brGr1tA3t869CK0EbBhA3FfqOlF+4/DVcN
+ bouUdjR0Cay7Dwsj1JVRXMOwImaikBNQ7oIdKElJB7FBUelyU1yDKktXrBHt3EyVYb7A
+ Sj6Q==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrCJpGRnQHHnprKG5vrDKqOqzqYJWITuybgaeY8E16ErkP3W1zY735Yr8lOEaB9JADS+NAkLuylkCCQ@nongnu.org
-X-Gm-Message-State: AOJu0YwCkuyGR+/Dg5ZgA/6VEcRNKv6RbflEEPigu+2STRQONZkWsJwo
- ZQnLidHM5TJhBfSW6L+dCgePk2/u3igein5s7PT/JKLVdMvxjkBy11tbAFpEar1jezM=
-X-Gm-Gg: AR+sD11l4jFJCOl/+7B9DGLIoXq2J7q2/QJLW/7XcBIsElSekukcgOO42PWkwI/jPPL
- JqXb/leXl/8MUaUgr3WAj0hTzc2HHEpsKkU9+HNROvIOqkCNw29YlAUNVJlSlZiueOg7EBUQyTO
- +lEE1HMSb/Hkgbyyc4VIkdJrn0stg70/gAO3PzwthFHXp/UerSG8WpqGDZSDypAp00ufg4Pp9PS
- wPpt/THJEU0xflUvBYVXXPhUuhomgIRLuaKIf6M4f67FcJnVo4HyQ6qTPtfD49K1EInhAwdHyTX
- oIDjxWVb8/dmzLw2Sfn83PBEil1jBZGMK+U9HTuGD+AmmJOlZm/jqZwttdB0ZsdZxbr0eOB3pis
- 1rfAG1A7rVs3ACENVvsjP+KjMJUoYT58XJ9pxFgjQJoswzsLN0+g9prD3qdpo46Boa+32u8H0UB
- xXDZjbtv9mO+NsL3Nh8sOV88FrSL+ExEw=
-X-Received: by 2002:a17:90b:5625:b0:38e:76f8:fcbb with SMTP id
- 98e67ed59e1d1-38f296051f1mr2992609a91.4.1785048907783; 
- Sat, 25 Jul 2026 23:55:07 -0700 (PDT)
+ AHgh+RpDs+/vRuJbKMH0rC9jWhiccY04ksu4hzjAC+YuAu+v0KZsQCz9ZV7KqaXDa+6hmZnrpzyvQysUKopp@nongnu.org
+X-Gm-Message-State: AOJu0Yw+jWEv1qSipm4mmdIEggsT95y5o5oCSxp+Y4/Z66pnaLZelbkS
+ pOuEF9QOV8+ezo+hUE4o7PgMkqmH2tgMPr4P9EKpfulePgAYayEoFXIwbVN0mvobT8Q=
+X-Gm-Gg: AR+sD11RmjgTqTpFv3FVIWkS1cBXqk1OfJfsNykiuoExLKIHvOCgpvy4A7dFZ5mabYg
+ Nowi5D7awml+lVMrDN302TWAcYkYLBHD+ws+w+hpbckG06GOCEI3RFo0JigGzUOJdmJ3BpIbM1Y
+ VhXjNrYQvdwUCDf+f07E8buGNBoF6l3cfHolhj0UaoQi6YBz5UuuBbaE4CKn+Swr/d5FzEsCYqA
+ En3yzejk4VGKY4V70T2aMptcPTC0cEir8IgoaINcCli1D7thHW8J3aXKRJnx2S6lGMPxPcsk6D7
+ kiNO/hL+VhLSP3YVuIw+T2/6q7W3b/YdADURAIq9fjVVyXzS1rtIl+/8LKjOdkaqUYEZRoigTyU
+ qZ37dXG85vn0Gp3GCBOZ/3D5dsJOIUuaQumDM9m9Y6OC4k1+wcJv8gxb/mV+CX04Zl+oPDSgYvV
+ ckM7qELfK6AxaIafJVDKCr
+X-Received: by 2002:a17:90b:3952:b0:36d:de94:f31 with SMTP id
+ 98e67ed59e1d1-38f29784889mr3028224a91.7.1785048914291; 
+ Sat, 25 Jul 2026 23:55:14 -0700 (PDT)
 Received: from DESKTOP-7HME356.localdomain ([38.34.7.236])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-314bc44cb92sm29618246eec.13.2026.07.25.23.55.04
+ 5a478bee46e88-314bc44cb92sm29618246eec.13.2026.07.25.23.55.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jul 2026 23:55:07 -0700 (PDT)
+ Sat, 25 Jul 2026 23:55:13 -0700 (PDT)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 4/7] hw/misc: add K230 decomp gzip
+Subject: Re: [PATCH 6/7] tests/qtest: add test for K230 decomp gzip
 From: Junze Cao <caojunze424@gmail.com>
 To: Tao Ding <dingtao0430@163.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
  palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
  chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com
-In-Reply-To: <20260721161335.73872-5-dingtao0430@163.com>
+In-Reply-To: <20260721161335.73872-7-dingtao0430@163.com>
 References: <20260721161335.73872-1-dingtao0430@163.com>
- <20260721161335.73872-5-dingtao0430@163.com>
+ <20260721161335.73872-7-dingtao0430@163.com>
 Date: Sun, 26 Jul 2026 14:55:01 +0800
-Message-Id: <178504890121.906524.9693776132093948045.b4-review@b4>
+Message-Id: <178504890123.906524.16716266235289264118.b4-review@b4>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785048904; l=3006;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785048904; l=1285;
  i=caojunze424@gmail.com; s=junze-gmail; h=from:subject:message-id;
- bh=GoCpHz0Ytch7ChMSVIBpBkVEYuEezmBW4tyXDiRs184=;
- b=DXMBSWjpFDyr7rQKx+MjI7qj09rgF7fzuMBuYwwVFoT/mbfXQF9kujO3VBVgjYfp96B+UFioT
- FYihtMrltrbC+YTXUyv7eq+scOravkRTYiCPzYX3J3Y6aGaiSqrpnq4
+ bh=3MzUKesDjiW/MLg4jFuf6vDzvj5409nuV7wHjFweBqg=;
+ b=BKgS8RvpOleh2a7H8o2CjNZNTO6SVpOY4pTKuex1ZtkqSlBAeLIBiYNpPgfiDRI8HtmC3I6Iq
+ YSC1bsy1bKhBpBzALh53Gte4Nf6/tGF6YL1cIdsfCDTxZWOJ38uxlQ3
 X-Developer-Key: i=caojunze424@gmail.com; a=ed25519;
  pk=lnFIWNw+6CoDrHFIKUJKdgrRbvgAbQGcEFiVsIigOJ8=
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=caojunze424@gmail.com; helo=mail-pj1-x102c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=caojunze424@gmail.com; helo=mail-pg1-x52a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -115,89 +115,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 22 Jul 2026 00:13:32 +0800, Tao Ding <dingtao0430@163.com> wrote:
-> diff --git a/hw/misc/k230_decomp_gzip.c b/hw/misc/k230_decomp_gzip.c
+On Wed, 22 Jul 2026 00:13:34 +0800, Tao Ding <dingtao0430@163.com> wrote:
+> diff --git a/tests/qtest/k230-decomp-gzip-test.c b/tests/qtest/k230-decomp-gzip-test.c
 > new file mode 100644
-> index 0000000000..4284262259
+> index 0000000000..adddf8f2eb
 > --- /dev/null
-> +++ b/hw/misc/k230_decomp_gzip.c
-> @@ -0,0 +1,498 @@
-> [ ... skip 184 lines ... ]
-> +                                        s->output_buf, produced)) {
-> +            return false;
-> +        }
-> +        s->output.current_offset += produced;
-> +        s->total_produced += produced;
-> +    }
-> +
-> +    if (consumed) {
-> +        s->input.current_offset += consumed;
-> +    }
-> +
-> +    if (ret == Z_STREAM_END) {
-> +        s->stream_end = true;
-> +        if (s->total_produced != output_size) {
-> +            return false;
-> +        }
-> +    }
-> +
-> +    return true;
+> +++ b/tests/qtest/k230-decomp-gzip-test.c
+> @@ -0,0 +1,181 @@
+> [ ... skip 38 lines ... ]
 > +}
 > +
-
-The current implementation calls a universal DEFLATE decoder, which natively supports three BType formats: 00, 01, and 10.
-Based on the K230 technical manual's semantics, the current settings support the Dynamic Huffman format. 
-I believe we need to add a BType==10 validation.
-
-> [ ... skip 109 lines ... ]
-> +    if (!(s->gzip_src_size & K230_DECOMP_GZIP_CTRL_EN) ||
-> +        input_size == 0 || s->gzip_out_size == 0) {
-> +        k230_decomp_gzip_finish(s, false);
-> +        return;
-> +    }
-> +
-> +    s->active = true;
-> +    k230_decomp_gzip_update_ctrl_en(s);
-> +    k230_decomp_gzip_kick(s);
-> +}
-> +
-> +static uint64_t k230_decomp_gzip_read(void *opaque, hwaddr offset,
-> +                                      unsigned size)
+> +static inline hwaddr k230_sram_addr(hwaddr off)
 > +{
-> +    K230DecompGzipState *s = opaque;
-> +    uint64_t value = 0;
-> +
-> +    switch (offset) {
-> +    case K230_DECOMP_GZIP_DECOMP_START:
-> +        value = s->decomp_start;
-> +        break;
-
-Bit 0 of this register, decomp_start, is write-only. I believe the semantics here are inconsistent with the manual.
-
-> [ ... skip 124 lines ... ]
-> +
-> +    memory_region_init_io(&s->iomem, OBJECT(dev), &k230_decomp_gzip_ops, s,
-> +                          TYPE_K230_DECOMP_GZIP,
-> +                          K230_DECOMP_GZIP_MMIO_SIZE);
-> +    sysbus_init_mmio(sbd, &s->iomem);
-> +    qdev_init_gpio_in(dev, k230_decomp_gzip_handle_ack,
-> +                      K230_DECOMP_GZIP_NUM_GPIOS_IN);
-> +    qdev_init_gpio_out(dev, s->signal_out,
-> +                       K230_DECOMP_GZIP_NUM_GPIOS_OUT);
+> +    return K230_SRAM_BASE + off;
 > +}
 > +
-> +static const Property k230_decomp_gzip_properties[] = {
-> +    DEFINE_PROP_UINT64("sram-base", K230DecompGzipState, sram_base, 0),
+> +static inline hwaddr k230_sram_input_addr(unsigned int slot)
+> +{
+> +    return k230_sram_addr(K230_DECOMP_GZIP_SRAM_IN_BASE +
+> +                          slot * K230_DECOMP_GZIP_BLOCK_SIZE);
+> +}
+> +
+> +static const uint8_t test_gzip_data[] = {
+> +    0x1f, 0x8b, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00,
+> +    0x02, 0xff, 0xf3, 0x36, 0x32, 0x36, 0x50, 0x48,
+> +    0xaf, 0xca, 0x2c, 0x50, 0x28, 0x2e, 0x29, 0x4a,
+> +    0x4d, 0xcc, 0xcd, 0xcc, 0x4b, 0x57, 0x28, 0x49,
+> +    0x2d, 0x2e, 0xe1, 0xf2, 0x1e, 0x5a, 0x12, 0x00,
+> +    0xdb, 0x9d, 0xbc, 0xdd, 0xc8, 0x00, 0x00, 0x00,
 > +};
-> +
-> +static void k230_decomp_gzip_class_init(ObjectClass *oc, const void *data)
-> +{
-> +    DeviceClass *dc = DEVICE_CLASS(oc);
-> +
-> +    dc->realize = k230_decomp_gzip_realize;
-> +    device_class_set_legacy_reset(dc, k230_decomp_gzip_reset);
 
-This interface has been deprecated; please refer to qdev.h for further details. This issue is similar to patch 1/7 (actually, it's identical).
+What is the source of the data here? 
+Was it extracted from the SDK?
+I've noticed that this data is in fixed Huffman format, but the K230 GZIP manual only supports dynamic Huffman format.
 
 -- 
 Junze Cao <caojunze424@gmail.com>
