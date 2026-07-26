@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6E82C531C9
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 12:31:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F226BC53200
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 12:31:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wnxyr-0001GF-MK; Sun, 26 Jul 2026 08:29:23 -0400
+	id 1wnxyd-00018C-Ve; Sun, 26 Jul 2026 08:29:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wnxyg-0001A9-EB
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:29:10 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1wnxyb-00015X-IF
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:29:05 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wnxye-0003HS-4x
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:29:10 -0400
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-8485bd28dd0so1907701b3a.2
- for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 05:29:07 -0700 (PDT)
+ id 1wnxyY-00039a-3G
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:29:05 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-8485ef63b68so1852949b3a.1
+ for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 05:29:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785068946; x=1785673746; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785068941; x=1785673741; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=HjFRlm+7Pma7rC3OyN70J41dQ5x7B6INTRW4EeE9d/E=;
- b=b2p37hLsafLVdOwx5oDuIFmP/m5eAZFym1p7IQaV7H/xbVexJt2Od9vYXCVxBllNj7
- 2qGjNwYwzUQ/rewyFBZ9ocYHBF9kz8XgT8GksXBJ5sek58qp2tE0X8KJlqpCH9DbYK79
- Y+566no9GHAn3gL6Js7xaMA4vO3Aw89Sa8vHZ71DKSjr6sygYel+X0VXlM3wy+P+P4NR
- QoN3WOY+egso58+cLPzzd768dwaVCbifvSP5/GwVU/htJHzSHSzZRf9T5nw3nZTowKEl
- rJW7wTkVgjP32KLiM/Sl4l0KbaejKjg0nNj3btUWSBaQMn1jrCtWU0tRA6lyCsjT1YFk
- ERcg==
+ bh=fvncanYCyzys4CM+KI8EyRNfFpb7xenD64P3Z3txnoM=;
+ b=cJLDHeSVqNUW4WHDG8gKyVZz1adTDe9spYAHdyiKXvoXZOjbRnSlezF5D/5eIflELq
+ 2u9Vt6iresXEMPiq3jtiYaA+Qphw9d5Jb1X3qo+Jrak0l6tirG7xyj/EHI2lTDp8ZV11
+ XtOxhjv/VGEUga7NS8LQAOxjNVnPr+HauyQNhNvHjenhU1fBrPBVbkApeoXXj2z511qs
+ yZY+tODgcbQZHRLq9T8UqVv4hEc6KLpTTgT3Azo3wRFMoxGHvScd/BGqOuEv5nQHDNmx
+ OPEjcRTVt3rv1jqKA4v3xFO9JoJZB1d7O697Hc/C2EzOlggo8QooCM9ary0dVEKtIGS/
+ QfGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785068946; x=1785673746;
+ d=1e100.net; s=20251104; t=1785068941; x=1785673741;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=HjFRlm+7Pma7rC3OyN70J41dQ5x7B6INTRW4EeE9d/E=;
- b=rvAwj0z6x5RaaLBtTzHnpUqH6QIpf1sB4XbICPyz5RHpx8cwL0v6DhBlGVCKtm59uI
- fIgBNgRdBaDCaRNVGjoepZ5q5rv0thOt7WZRzoKS5o/SCW+rCzT9PVUT15OGmvmY2zOG
- 45YN5vG9wb7y69vw2VH2ncQSo86IPyzHZSwHD8lfNrNU0tyoc842yeBfYOcmhodSJyp2
- h1mIOepL8n2Do2/LS/FnxpToa7TOHtlIo/s+0rQgSxWA6/7s8ymCr6lQSo1Tj9g+ILc+
- StW3rsC0D1zRk9+0QYQCHdMSFkuTd+WWaus/jVFH14u+1BDr8goTU8ycDkOuH2T7bz4k
- LgrA==
+ bh=fvncanYCyzys4CM+KI8EyRNfFpb7xenD64P3Z3txnoM=;
+ b=abAbkUHdk+jet4aC6NvfhOeUlp9L6pkbxmhn9+IPHMUsriAKoO6DiMB+Ab0q3bIbhz
+ F/c/Sm6FGnl54SFs8mSzk5bVYSZH6zAG8NiG2AsHMest72Uw1p2JbODUjig09ERB/Sqr
+ JvTR6IuqlIcfvM60Q8P98kXmqBqa2FStVm1CojMnLHKLloFuMK5/Np/yKfvuqMEqwXN4
+ oEUCXBBI8Bao5RKGvqse/HMn/DTNpbtbO2+X6vTD2S82gK9kDNFG8tXTFvBkw/MoejQR
+ bxbgrZd8i+Ym5QU4CXWV3MITbNhtThBcT6iwkgorqFdlSekacy+Nx0Tt96fbNSn8ufFv
+ YKPw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RouNyRjt3j140gitvg2UWmQafZQuHDvr2bVGUSAWGj4dStd5hHuYA015UPlFbwevCc6amGbypZmkVg1@nongnu.org
-X-Gm-Message-State: AOJu0YwBJOudr41Hy5MWL5LS9MGiyGDeXDM7NR+ZurNEOlCaj+kaJxgB
- jVvomVp8IAhq/p54QfIJO33F2GGuPrVHYRDnRYJaG7/yQUo9aiZ+IPsL
-X-Gm-Gg: AR+sD12yQoNxM2w2wJz0oste4WEbkm2iTHgf1ySD+rAoHd8gEdrGU6tqRCo4YY0kWeP
- gdixLoW2Z05L4alQZuj9jMQnBQ2OJG6XdiugleCUjwoAva168MTVrspnJxwxst9TXqFejvuPxZL
- SEj4WphW16kAClKifBi1naLxrV8s+++cF7EnJ4S+h+dCWg5qS7AQQp6dXgwYYCXdwT77CSOK4JI
- a8w+R6NNIxanEcg5gCvWCugOpEc0q+J4sKcg2dzpQUwo8njwUBajBNZRNIYZ4y5uXvNGViobWhZ
- gb+Oif2LDeVjth4bGgyD51KRyj+FTZqDNDGroa7eZa/ShNytp3f0oNdOuPz3ocQ4OOjR8CT66vF
- 1MpzBAGZ+AgSClvWRksMMrH+xfw/V0Q8LRiZFNjkhq1IUESG+Cri89qpoKQmClzqafhPu1X1Rz3
- 4+KbBe6PDlX+6AHKQaoOo2AKy5vRJP3eU=
-X-Received: by 2002:a05:6a00:6c95:b0:848:63c9:ee39 with SMTP id
- d2e1a72fcca58-84e5942e856mr3781574b3a.12.1785068946465; 
- Sun, 26 Jul 2026 05:29:06 -0700 (PDT)
+ AHgh+Rox6n88i7cE3ya7pnfFjkmg32tI4FOPVCGoMIDE1a1NeWkiSNXD6AvJZaBqHMRQwhC0Ge3FeBhSreyM@nongnu.org
+X-Gm-Message-State: AOJu0YyqOuLXzKITprZ12tiUFTN4FrL3V0kwriq8kymd8sGIjFPFFhzZ
+ T823OkheN6ILgzInM25jUJjvYtTFv/qAnS22KekPoRaa3mnn8h1Zu+1c
+X-Gm-Gg: AR+sD11ciphHYxRaPTadJTaIz5Bv5uANWlWjLVh5Z9Y8L48dr1TmUQflwEq99pQwUkZ
+ 38U91UU1VSb8g5GM9sMwckCYbQxvnZ9XbQy/kKxdl+kajoPQ13mW7Jumxa1f4PifgtaS2yUScbz
+ dALdneteexMFEmQ/kim8wv+gglgiabrHjCjYKa0qO9vdJJhyvAGur7Fwz9aVIQ/667XKc7Ih8IJ
+ zq3qCpFMKGP1cm8JUw4yAifcmmDpHtQTfGaBrp7i+LORKdidhVhf+/WNtUKcxP/ez9Q6mJK82ak
+ SPrwaJe0xucayKurW0HfNIaYv0ZtRlI1oZhEAtvLBT6E2cgVxdRHqPe8XoUXWevLBPXkQ3BDDnY
+ Lp2Ksh06+2y9HfGS8BwgUBcwedJAkrkOGdT88QGkp9zPVVw5pT7CYLjv9BFy1puI+ugnzqQJJFT
+ fGNWy8cPfY8xKwmiEXj33X
+X-Received: by 2002:a05:6a00:194b:b0:848:42d0:bc91 with SMTP id
+ d2e1a72fcca58-84e5943007dmr3975804b3a.12.1785068940242; 
+ Sun, 26 Jul 2026 05:29:00 -0700 (PDT)
 Received: from localhost.localdomain ([111.201.4.215])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84e53426628sm1861647b3a.49.2026.07.26.05.29.01
+ d2e1a72fcca58-84e53426628sm1861647b3a.49.2026.07.26.05.28.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jul 2026 05:29:05 -0700 (PDT)
+ Sun, 26 Jul 2026 05:28:59 -0700 (PDT)
 From: Kangjie Huang <flamboyant.h.01@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Kangjie Huang <flamboyant.h.01@gmail.com>, qemu-riscv@nongnu.org,
@@ -78,16 +78,16 @@ Cc: Kangjie Huang <flamboyant.h.01@gmail.com>, qemu-riscv@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Fabiano Rosas <farosas@suse.de>,
  Laurent Vivier <lvivier@redhat.com>
-Subject: [PATCH 02/11] hw/riscv/k230: Instantiate K230 SSI controllers
-Date: Sun, 26 Jul 2026 20:28:20 +0800
-Message-ID: <41750ee3b9b96b8f6caf234b0855f4cae79b761c.1785064313.git.flamboyant.h.01@gmail.com>
+Subject: [PATCH 01/11] hw/ssi: Add K230 DesignWare SSI register model
+Date: Sun, 26 Jul 2026 20:28:19 +0800
+Message-ID: <12e325190a15045cff5c429b154217814cd9e618.1785064313.git.flamboyant.h.01@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1785064312.git.flamboyant.h.01@gmail.com>
 References: <cover.1785064312.git.flamboyant.h.01@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-pf1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=flamboyant.h.01@gmail.com; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -95,7 +95,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,338 +111,907 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Instantiate the three SSI controller profiles used by K230 and map their
-MMIO regions at the documented addresses.
+Add a SysBus model for the K230 DesignWare SSI controllers.
 
-Add the K230 SSI qtest target. Cover the three instance profiles, reset
-state, chip-select masks, representative register masks, and system
-reset behaviour.
+Implement the register layout, reset values, writable masks, FIFO state,
+chip-select GPIOs, and the MMIO regions needed by the K230 machine,
+based on the K230 Technical Reference Manual. The controller is not
+instantiated by this patch.
 
 Signed-off-by: Kangjie Huang <flamboyant.h.01@gmail.com>
 ---
- docs/system/riscv/k230.rst     |   1 +
- hw/riscv/Kconfig               |   1 +
- hw/riscv/k230.c                |  35 +++++--
- include/hw/riscv/k230.h        |   2 +
- tests/qtest/k230-dw-ssi-test.c | 178 +++++++++++++++++++++++++++++++++
- tests/qtest/meson.build        |   4 +-
- 6 files changed, 211 insertions(+), 10 deletions(-)
- create mode 100644 tests/qtest/k230-dw-ssi-test.c
+ hw/ssi/Kconfig               |   4 +
+ hw/ssi/k230_dw_ssi.c         | 795 +++++++++++++++++++++++++++++++++++
+ hw/ssi/meson.build           |   1 +
+ include/hw/ssi/k230_dw_ssi.h |  50 +++
+ 4 files changed, 850 insertions(+)
+ create mode 100644 hw/ssi/k230_dw_ssi.c
+ create mode 100644 include/hw/ssi/k230_dw_ssi.h
 
-diff --git a/docs/system/riscv/k230.rst b/docs/system/riscv/k230.rst
-index cea8202e55..0358709d2c 100644
---- a/docs/system/riscv/k230.rst
-+++ b/docs/system/riscv/k230.rst
-@@ -20,6 +20,7 @@ The ``k230`` machine supports the following devices:
- * Platform-Level Interrupt Controller (PLIC)
- * 2 K230 Watchdog Timer
- * 5 UART
-+* 3 K230 SSI controllers for SPI and QSPI
+diff --git a/hw/ssi/Kconfig b/hw/ssi/Kconfig
+index 1bd56463c1..05ff0e89ee 100644
+--- a/hw/ssi/Kconfig
++++ b/hw/ssi/Kconfig
+@@ -6,6 +6,10 @@ config SIFIVE_SPI
+     bool
+     select SSI
  
- Boot options
- ------------
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index de37c08cae..69059ae044 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -162,3 +162,4 @@ config K230
-     select SERIAL_MM
-     select UNIMP
-     select K230_WDT
-+    select K230_DW_SSI
-diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-index 656f28190c..acd5445b31 100644
---- a/hw/riscv/k230.c
-+++ b/hw/riscv/k230.c
-@@ -110,6 +110,12 @@ static void k230_soc_init(Object *obj)
-     object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
-     object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
-     object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
-+    object_initialize_child(obj, "k230-qspi0", &s->dw_ssi[0],
-+                            TYPE_K230_DW_SSI);
-+    object_initialize_child(obj, "k230-qspi1", &s->dw_ssi[1],
-+                            TYPE_K230_DW_SSI);
-+    object_initialize_child(obj, "k230-spi-opi", &s->dw_ssi[2],
-+                            TYPE_K230_DW_SSI);
- 
-     qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
-     qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
-@@ -198,6 +204,19 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-         }
-     }
- 
-+    qdev_prop_set_uint32(DEVICE(&s->dw_ssi[0]), "num-cs", 5);
-+    qdev_prop_set_uint32(DEVICE(&s->dw_ssi[1]), "num-cs", 5);
-+    qdev_prop_set_uint32(DEVICE(&s->dw_ssi[2]), "num-cs", 1);
-+    qdev_prop_set_uint32(DEVICE(&s->dw_ssi[0]), "max-lines", 4);
-+    qdev_prop_set_uint32(DEVICE(&s->dw_ssi[1]), "max-lines", 4);
-+    qdev_prop_set_uint32(DEVICE(&s->dw_ssi[2]), "max-lines", 8);
++config K230_DW_SSI
++    bool
++    select SSI
 +
-+    for (int i = 0; i < ARRAY_SIZE(s->dw_ssi); i++) {
-+        if (!sysbus_realize(SYS_BUS_DEVICE(&s->dw_ssi[i]), errp)) {
-+            return;
-+        }
-+    }
-+
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->wdt[0]), 0, memmap[K230_DEV_WDT0].base);
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[0]), 0,
-                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT0_IRQ));
-@@ -206,6 +225,13 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
-                        qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
+ config SSI
+     bool
  
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->dw_ssi[0]), 0,
-+                    memmap[K230_DEV_QSPI0].base);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->dw_ssi[1]), 0,
-+                    memmap[K230_DEV_QSPI1].base);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->dw_ssi[2]), 0,
-+                    memmap[K230_DEV_SPI].base);
-+
-     /* unimplemented devices */
-     create_unimplemented_device("kpu.l2-cache",
-                                 memmap[K230_DEV_KPU_L2_CACHE].base,
-@@ -349,15 +375,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
-     create_unimplemented_device("sd1", memmap[K230_DEV_SD1].base,
-                                 memmap[K230_DEV_SD1].size);
- 
--    create_unimplemented_device("qspi0", memmap[K230_DEV_QSPI0].base,
--                                memmap[K230_DEV_QSPI0].size);
--
--    create_unimplemented_device("qspi1", memmap[K230_DEV_QSPI1].base,
--                                memmap[K230_DEV_QSPI1].size);
--
--    create_unimplemented_device("spi", memmap[K230_DEV_SPI].base,
--                                memmap[K230_DEV_SPI].size);
--
-     create_unimplemented_device("hi_sys_cfg", memmap[K230_DEV_HI_SYS_CFG].base,
-                                 memmap[K230_DEV_HI_SYS_CFG].size);
- 
-diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-index 592e1c26bf..4a79b7ed45 100644
---- a/include/hw/riscv/k230.h
-+++ b/include/hw/riscv/k230.h
-@@ -17,6 +17,7 @@
- 
- #include "hw/core/boards.h"
- #include "hw/riscv/riscv_hart.h"
-+#include "hw/ssi/k230_dw_ssi.h"
- #include "hw/watchdog/k230_wdt.h"
- 
- #define C908_CPU_HARTID   (0)
-@@ -33,6 +34,7 @@ typedef struct K230SoCState {
-     RISCVHartArrayState c908_cpu; /* Small core */
- 
-     K230WdtState wdt[2];
-+    K230DwSsiState dw_ssi[3];
-     MemoryRegion sram;
-     MemoryRegion bootrom;
- 
-diff --git a/tests/qtest/k230-dw-ssi-test.c b/tests/qtest/k230-dw-ssi-test.c
+diff --git a/hw/ssi/k230_dw_ssi.c b/hw/ssi/k230_dw_ssi.c
 new file mode 100644
-index 0000000000..dcd6cb1d6e
+index 0000000000..d0dcad4312
 --- /dev/null
-+++ b/tests/qtest/k230-dw-ssi-test.c
-@@ -0,0 +1,178 @@
++++ b/hw/ssi/k230_dw_ssi.c
+@@ -0,0 +1,795 @@
 +/*
-+ * QTest for the Kendryte K230 DesignWare SSI
++ * Kendryte K230 DesignWare SSI
 + *
 + * Copyright (c) 2026 Kangjie Huang <flamboyant.h.01@gmail.com>
 + *
 + * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Emulates the DesignWare SSI controllers documented by the K230
++ * Technical Reference Manual, including standard SPI, Dual/Quad SDR,
++ * internal DMA, and the XIP read window.
++ *
++ * K230 Technical Reference Manual V0.3.1 (2024-11-18):
++ * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
++ *
++ * For more information, see <https://www.kendryte.com/en/proDetail/230>
 + */
 +
 +#include "qemu/osdep.h"
-+#include "libqtest.h"
++#include "hw/core/registerfields.h"
++#include "hw/core/qdev-properties.h"
++#include "hw/core/irq.h"
++#include "hw/ssi/k230_dw_ssi.h"
++#include "migration/vmstate.h"
++#include "qapi/error.h"
 +#include "qemu/bitops.h"
++#include "qemu/log.h"
++#include "qemu/module.h"
 +
-+#define K230_SPI0_BASE          0x91584000ULL
-+#define K230_SPI1_BASE          0x91582000ULL
-+#define K230_SPI2_BASE          0x91583000ULL
-+#define K230_SSI_CTRLR0          0x000
-+#define K230_SSI_CTRLR1          0x004
-+#define K230_SSI_SSIENR          0x008
-+#define K230_SSI_SER             0x010
-+#define K230_SSI_BAUDR           0x014
-+#define K230_SSI_TXFTLR          0x018
-+#define K230_SSI_TXFLR           0x020
-+#define K230_SSI_RXFLR           0x024
-+#define K230_SSI_SR              0x028
-+#define K230_SSI_IMR             0x02c
-+#define K230_SSI_ISR             0x030
-+#define K230_SSI_RISR            0x034
-+#define K230_SSI_DMACR           0x04c
-+#define K230_SSI_IDR             0x058
-+#define K230_SSI_VERSION_ID      0x05c
-+#define K230_SSI_SPI_CTRLR0      0x0f4
-+#define K230_SSI_XIP_MODE_BITS   0x0fc
-+#define K230_SSI_XIP_INCR_INST   0x100
-+#define K230_SSI_SPIDR           0x120
-+#define K230_SSI_SPIAR           0x124
-+#define K230_SSI_AXIAR0          0x128
-+#define K230_SSI_AXIAR1          0x12c
-+#define K230_SSI_AXIECR          0x130
-+#define K230_SSI_DONECR          0x134
++#define K230_DW_SSI_FIFO_CAPACITY 256
 +
-+#define K230_SSI_CTRLR0_RESET           0x00004007U
-+#define K230_SSI_SPI_CTRLR0_SPI_RESET   0x04000200U
-+#define K230_SSI_SPI_CTRLR0_FMC_RESET   0x28000200U
-+#define K230_SSI_IMR_RESET              0x0000003fU
-+#define K230_SSI_IDR_RESET              0xa1b2c3d5U
-+#define K230_SSI_VERSION_RESET          0x3130332aU
++#define K230_DW_SSI_CTRLR0_RESET            0x00004007
++#define K230_DW_SSI_SR_RESET                0x00000006
++#define K230_DW_SSI_IMR_RESET               0x0000003f
++#define K230_DW_SSI_IDR_RESET               0xa1b2c3d5
++#define K230_DW_SSI_SPI_CTRLR0_SPI_RESET    0x04000200
++#define K230_DW_SSI_SPI_CTRLR0_FMC_RESET    0x28000200
++#define K230_DW_SSI_AXIAWLEN_RESET          0x00000700
++#define K230_DW_SSI_AXIARLEN_RESET          0x00000700
++#define K230_DW_SSI_VERSION                 0x3130332a
 +
-+#define K230_SSI_CTRLR0_WRITABLE_MASK   0x01cf7f1fU
-+#define K230_SSI_BAUDR_WRITABLE_MASK    0x0000fffeU
++REG32(CTRLR0, 0x000)
++    FIELD(CTRLR0, DFS, 0, 5)
++    FIELD(CTRLR0, FRF, 6, 2)
++    FIELD(CTRLR0, SCPH, 8, 1)
++    FIELD(CTRLR0, SCPOL, 9, 1)
++    FIELD(CTRLR0, TMOD, 10, 2)
++    FIELD(CTRLR0, SLV_OE, 12, 1)
++    FIELD(CTRLR0, SRL, 13, 1)
++    FIELD(CTRLR0, SSTE, 14, 1)
++    FIELD(CTRLR0, CFS, 16, 4)
++    FIELD(CTRLR0, SPI_FRF, 22, 2)
++    FIELD(CTRLR0, SPI_HYPERBUS_EN, 24, 1)
++    FIELD(CTRLR0, SPI_DWS_EN, 25, 1)
++REG32(CTRLR1, 0x004)
++    FIELD(CTRLR1, NDF, 0, 16)
++REG32(SSIENR, 0x008)
++    FIELD(SSIENR, SSIC_EN, 0, 1)
++REG32(MWCR, 0x00c)
++    FIELD(MWCR, MWMOD, 0, 1)
++    FIELD(MWCR, MDD, 1, 1)
++    FIELD(MWCR, MHS, 2, 1)
++REG32(SER, 0x010)
++REG32(BAUDR, 0x014)
++    FIELD(BAUDR, SCKDV, 1, 15)
++REG32(TXFTLR, 0x018)
++    FIELD(TXFTLR, TFT, 0, 8)
++    FIELD(TXFTLR, TXFTHR, 16, 11)
++REG32(RXFTLR, 0x01c)
++    FIELD(RXFTLR, RFT, 0, 8)
++REG32(TXFLR, 0x020)
++    FIELD(TXFLR, TXTFL, 0, 9)
++REG32(RXFLR, 0x024)
++    FIELD(RXFLR, RXTFL, 0, 9)
++REG32(SR, 0x028)
++    FIELD(SR, CMPLTD_DF, 15, 17)
++    FIELD(SR, DCOL, 6, 1)
++    FIELD(SR, TXE, 5, 1)
++    FIELD(SR, BUSY, 0, 1)
++    FIELD(SR, TFNF, 1, 1)
++    FIELD(SR, TFE, 2, 1)
++    FIELD(SR, RFNE, 3, 1)
++    FIELD(SR, RFF, 4, 1)
++REG32(IMR, 0x02c)
++    FIELD(IMR, DONEM, 11, 1)
++    FIELD(IMR, SPITEM, 10, 1)
++    FIELD(IMR, AXIEM, 8, 1)
++    FIELD(IMR, TXUIM, 7, 1)
++    FIELD(IMR, XRXOIM, 6, 1)
++    FIELD(IMR, MSTIM, 5, 1)
++    FIELD(IMR, RXOIM, 3, 1)
++    FIELD(IMR, RXUIM, 2, 1)
++    FIELD(IMR, TXOIM, 1, 1)
++    FIELD(IMR, TXEIM, 0, 1)
++    FIELD(IMR, RXFIM, 4, 1)
++REG32(ISR, 0x030)
++    FIELD(ISR, DONES, 11, 1)
++    FIELD(ISR, SPITES, 10, 1)
++    FIELD(ISR, AXIES, 8, 1)
++    FIELD(ISR, TXUIS, 7, 1)
++    FIELD(ISR, XRXOIS, 6, 1)
++    FIELD(ISR, MSTIS, 5, 1)
++    FIELD(ISR, RXOIS, 3, 1)
++    FIELD(ISR, RXUIS, 2, 1)
++    FIELD(ISR, TXOIS, 1, 1)
++    FIELD(ISR, TXEIS, 0, 1)
++    FIELD(ISR, RXFIS, 4, 1)
++REG32(RISR, 0x034)
++    FIELD(RISR, DONER, 11, 1)
++    FIELD(RISR, SPITER, 10, 1)
++    FIELD(RISR, AXIER, 8, 1)
++    FIELD(RISR, TXUIR, 7, 1)
++    FIELD(RISR, XRXOIR, 6, 1)
++    FIELD(RISR, MSTIR, 5, 1)
++    FIELD(RISR, RXOIR, 3, 1)
++    FIELD(RISR, RXUIR, 2, 1)
++    FIELD(RISR, TXOIR, 1, 1)
++    FIELD(RISR, TXEIR, 0, 1)
++    FIELD(RISR, RXFIR, 4, 1)
++REG32(TXEICR, 0x038)
++    FIELD(TXEICR, TXEICR, 0, 1)
++REG32(RXOICR, 0x03c)
++    FIELD(RXOICR, RXOICR, 0, 1)
++REG32(RXUICR, 0x040)
++    FIELD(RXUICR, RXUICR, 0, 1)
++REG32(MSTICR, 0x044)
++    FIELD(MSTICR, MSTICR, 0, 1)
++REG32(ICR, 0x048)
++    FIELD(ICR, ICR, 0, 1)
++REG32(DMACR, 0x04c)
++    FIELD(DMACR, RDMAE, 0, 1)
++    FIELD(DMACR, TDMAE, 1, 1)
++    FIELD(DMACR, IDMAE, 2, 1)
++    FIELD(DMACR, ATW, 3, 2)
++    FIELD(DMACR, AINC, 6, 1)
++    FIELD(DMACR, ACACHE, 8, 4)
++    FIELD(DMACR, APROT, 12, 3)
++    FIELD(DMACR, AID, 15, 4)
++REG32(AXIAWLEN, 0x050)
++    FIELD(AXIAWLEN, AWLEN, 8, 8)
++REG32(AXIARLEN, 0x054)
++    FIELD(AXIARLEN, ARLEN, 8, 8)
++REG32(IDR, 0x058)
++    FIELD(IDR, IDCODE, 0, 32)
++REG32(SSIC_VERSION_ID, 0x05c)
++    FIELD(SSIC_VERSION_ID, VERSION_ID, 0, 32)
++REG32(DR0, 0x060)
++REG32(DR_END, 0x0ec)
++REG32(RX_SAMPLE_DELAY, 0x0f0)
++    FIELD(RX_SAMPLE_DELAY, RSD, 0, 8)
++    FIELD(RX_SAMPLE_DELAY, SE, 16, 1)
++REG32(SPI_CTRLR0, 0x0f4)
++    FIELD(SPI_CTRLR0, CLK_STRETCH_EN, 30, 1)
++    FIELD(SPI_CTRLR0, XIP_PREFETCH_EN, 29, 1)
++    FIELD(SPI_CTRLR0, XIP_MBL, 26, 2)
++    FIELD(SPI_CTRLR0, SPI_RXDS_SIG_EN, 25, 1)
++    FIELD(SPI_CTRLR0, SPI_DM_EN, 24, 1)
++    FIELD(SPI_CTRLR0, SSIC_XIP_CONT_XFER_EN, 21, 1)
++    FIELD(SPI_CTRLR0, XIP_INST_EN, 20, 1)
++    FIELD(SPI_CTRLR0, XIP_DFS_HC, 19, 1)
++    FIELD(SPI_CTRLR0, SPI_RXDS_EN, 18, 1)
++    FIELD(SPI_CTRLR0, INST_DDR_EN, 17, 1)
++    FIELD(SPI_CTRLR0, SPI_DDR_EN, 16, 1)
++    FIELD(SPI_CTRLR0, WAIT_CYCLES, 11, 5)
++    FIELD(SPI_CTRLR0, INST_L, 8, 2)
++    FIELD(SPI_CTRLR0, XIP_MD_BIT_EN, 7, 1)
++    FIELD(SPI_CTRLR0, ADDR_L, 2, 4)
++    FIELD(SPI_CTRLR0, TRANS_TYPE, 0, 2)
++REG32(DDR_DRIVE_EDGE, 0x0f8)
++    FIELD(DDR_DRIVE_EDGE, TDE, 0, 8)
++REG32(XIP_MODE_BITS, 0x0fc)
++    FIELD(XIP_MODE_BITS, XIP_MD_BITS, 0, 16)
++REG32(XIP_INCR_INST, 0x100)
++    FIELD(XIP_INCR_INST, INCR_INST, 0, 16)
++REG32(XIP_WRAP_INST, 0x104)
++    FIELD(XIP_WRAP_INST, WRAP_INST, 0, 16)
++REG32(XIP_CTRL, 0x108)
++REG32(XIP_SER, 0x10c)
++REG32(XRXOICR, 0x110)
++REG32(XIP_CNT_TIME_OUT, 0x114)
++REG32(SPI_CTRLR1, 0x118)
++REG32(SPITECR, 0x11c)
++REG32(SPIDR, 0x120)
++    FIELD(SPIDR, SPI_INST, 0, 16)
++REG32(SPIAR, 0x124)
++    FIELD(SPIAR, SDAR, 0, 32)
++REG32(AXIAR0, 0x128)
++    FIELD(AXIAR0, AXIAR_0_31, 0, 32)
++REG32(AXIAR1, 0x12c)
++    FIELD(AXIAR1, AXIAR_32_63, 0, 32)
++REG32(AXIECR, 0x130)
++    FIELD(AXIECR, AXIECR, 0, 1)
++REG32(DONECR, 0x134)
++    FIELD(DONECR, DONECR, 0, 1)
++REG32(RSVD_138, 0x138)
++REG32(RSVD_13C, 0x13c)
++REG32(XIP_WRITE_INCR_INST, 0x140)
++REG32(XIP_WRITE_WRAP_INST, 0x144)
++REG32(XIP_WRITE_CTRL, 0x148)
 +
-+#define K230_SSI_CTRLR0_DFS_MASK        0x1fU
-+#define K230_SSI_CTRLR0_TMOD_SHIFT      10
++#define K230_DW_SSI_CTRLR0_WRITABLE_MASK \
++    (R_CTRLR0_DFS_MASK | \
++     R_CTRLR0_SCPH_MASK | \
++     R_CTRLR0_SCPOL_MASK | \
++     R_CTRLR0_TMOD_MASK | \
++     R_CTRLR0_SLV_OE_MASK | \
++     R_CTRLR0_SRL_MASK | \
++     R_CTRLR0_SSTE_MASK | \
++     R_CTRLR0_CFS_MASK | \
++     R_CTRLR0_SPI_FRF_MASK | \
++     R_CTRLR0_SPI_HYPERBUS_EN_MASK)
 +
-+#define K230_SSI_TMOD_TR                0
-+#define K230_SSI_TMOD_EEPROM_READ       3
++#define K230_DW_SSI_CTRLR1_WRITABLE_MASK R_CTRLR1_NDF_MASK
++#define K230_DW_SSI_MWCR_WRITABLE_MASK \
++    (R_MWCR_MWMOD_MASK | R_MWCR_MDD_MASK)
++#define K230_DW_SSI_BAUDR_WRITABLE_MASK R_BAUDR_SCKDV_MASK
++#define K230_DW_SSI_TXFTLR_WRITABLE_MASK \
++    (R_TXFTLR_TFT_MASK | R_TXFTLR_TXFTHR_MASK)
++#define K230_DW_SSI_RXFTLR_WRITABLE_MASK R_RXFTLR_RFT_MASK
++#define K230_DW_SSI_DMACR_WRITABLE_MASK \
++    (R_DMACR_IDMAE_MASK | R_DMACR_ATW_MASK | R_DMACR_AINC_MASK | \
++     R_DMACR_ACACHE_MASK | R_DMACR_APROT_MASK | R_DMACR_AID_MASK)
++#define K230_DW_SSI_AXIAWLEN_WRITABLE_MASK R_AXIAWLEN_AWLEN_MASK
++#define K230_DW_SSI_AXIARLEN_WRITABLE_MASK R_AXIARLEN_ARLEN_MASK
++#define K230_DW_SSI_IMR_WRITABLE_MASK \
++    (R_IMR_TXEIM_MASK | R_IMR_TXOIM_MASK | R_IMR_RXUIM_MASK | \
++     R_IMR_RXOIM_MASK | R_IMR_RXFIM_MASK | R_IMR_MSTIM_MASK | \
++     R_IMR_TXUIM_MASK | R_IMR_AXIEM_MASK | R_IMR_DONEM_MASK)
++#define K230_DW_SSI_RX_SAMPLE_DELAY_WRITABLE_MASK \
++    (R_RX_SAMPLE_DELAY_RSD_MASK | R_RX_SAMPLE_DELAY_SE_MASK)
++#define K230_DW_SSI_SPI_CTRLR0_WRITABLE_MASK \
++    (R_SPI_CTRLR0_CLK_STRETCH_EN_MASK | \
++     R_SPI_CTRLR0_XIP_PREFETCH_EN_MASK | \
++     R_SPI_CTRLR0_XIP_MBL_MASK | \
++     R_SPI_CTRLR0_SPI_RXDS_SIG_EN_MASK | \
++     R_SPI_CTRLR0_SPI_DM_EN_MASK | \
++     R_SPI_CTRLR0_SSIC_XIP_CONT_XFER_EN_MASK | \
++     R_SPI_CTRLR0_XIP_INST_EN_MASK | \
++     R_SPI_CTRLR0_XIP_DFS_HC_MASK | \
++     R_SPI_CTRLR0_INST_DDR_EN_MASK | \
++     R_SPI_CTRLR0_SPI_DDR_EN_MASK | \
++     R_SPI_CTRLR0_SPI_RXDS_EN_MASK | \
++     R_SPI_CTRLR0_WAIT_CYCLES_MASK | \
++     R_SPI_CTRLR0_INST_L_MASK | \
++     R_SPI_CTRLR0_XIP_MD_BIT_EN_MASK | \
++     R_SPI_CTRLR0_ADDR_L_MASK | \
++     R_SPI_CTRLR0_TRANS_TYPE_MASK)
++#define K230_DW_SSI_DDR_DRIVE_EDGE_WRITABLE_MASK \
++    R_DDR_DRIVE_EDGE_TDE_MASK
++#define K230_DW_SSI_XIP_MODE_BITS_WRITABLE_MASK \
++    R_XIP_MODE_BITS_XIP_MD_BITS_MASK
++#define K230_DW_SSI_XIP_INCR_INST_WRITABLE_MASK \
++    R_XIP_INCR_INST_INCR_INST_MASK
++#define K230_DW_SSI_XIP_WRAP_INST_WRITABLE_MASK \
++    R_XIP_WRAP_INST_WRAP_INST_MASK
++#define K230_DW_SSI_SPIDR_WRITABLE_MASK R_SPIDR_SPI_INST_MASK
++#define K230_DW_SSI_SPIAR_WRITABLE_MASK R_SPIAR_SDAR_MASK
++#define K230_DW_SSI_AXIAR0_WRITABLE_MASK R_AXIAR0_AXIAR_0_31_MASK
++#define K230_DW_SSI_AXIAR1_WRITABLE_MASK R_AXIAR1_AXIAR_32_63_MASK
 +
-+#define K230_SSI_SR_BUSY                BIT(0)
-+#define K230_SSI_SR_TFNF                BIT(1)
-+#define K230_SSI_SR_TFE                 BIT(2)
-+#define K230_SSI_SR_RFNE                BIT(3)
++static void k230_dw_ssi_write_masked(K230DwSsiState *s, unsigned int reg,
++                                     uint32_t value, uint32_t mask)
++{
++    s->regs[reg] = (s->regs[reg] & ~mask) | (value & mask);
++}
 +
-+#define K230_SSI_INT_AXIE               BIT(8)
-+#define K230_SSI_INT_DONE               BIT(11)
++static uint32_t k230_dw_ssi_frame_masked(K230DwSsiState *s)
++{
++    unsigned int bits = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, DFS) + 1;
 +
-+typedef struct K230SsiInstance {
-+    uint64_t base;
-+    uint32_t num_cs;
-+    uint32_t spi_ctrlr0_reset;
-+} K230SsiInstance;
++    return bits == 32 ? UINT32_MAX : MAKE_64BIT_MASK(0, bits);
++}
 +
-+static const K230SsiInstance k230_ssi_instances[3] = {
-+    {
-+        .base = K230_SPI0_BASE,
-+        .num_cs = 1,
-+        .spi_ctrlr0_reset = K230_SSI_SPI_CTRLR0_FMC_RESET,
-+    }, {
-+        .base = K230_SPI1_BASE,
-+        .num_cs = 5,
-+        .spi_ctrlr0_reset = K230_SSI_SPI_CTRLR0_SPI_RESET,
-+    }, {
-+        .base = K230_SPI2_BASE,
-+        .num_cs = 5,
-+        .spi_ctrlr0_reset = K230_SSI_SPI_CTRLR0_SPI_RESET,
++
++static bool k230_dw_ssi_enabled(K230DwSsiState *s)
++{
++    return FIELD_EX32(s->regs[R_SSIENR], SSIENR, SSIC_EN);
++}
++
++static void k230_dw_ssi_deselect(K230DwSsiState *s)
++{
++    if (s->active_cs < 0) {
++        return;
++    }
++
++    qemu_irq_raise(s->cs_lines[s->active_cs]);
++    s->active_cs = -1;
++}
++
++static void k230_dw_ssi_select(K230DwSsiState *s, unsigned cs)
++{
++    if (cs >= s->num_cs) {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: invalid chip select %u\n",
++                      DEVICE(s)->canonical_path, cs);
++        k230_dw_ssi_deselect(s);
++        return;
++    }
++
++    if (s->active_cs == cs) {
++        return;
++    }
++
++    k230_dw_ssi_deselect(s);
++    qemu_irq_lower(s->cs_lines[cs]);
++    s->active_cs = cs;
++}
++
++static void k230_dw_ssi_update_cs(K230DwSsiState *s)
++{
++    uint32_t ser = s->regs[R_SER];
++
++    if (!k230_dw_ssi_enabled(s) || !ser) {
++        k230_dw_ssi_deselect(s);
++        return;
++    }
++
++    if (ser & (ser - 1)) {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: multiple chip selects enabled: 0x%x\n",
++                      DEVICE(s)->canonical_path, ser);
++        k230_dw_ssi_deselect(s);
++        return;
++    }
++
++    k230_dw_ssi_select(s, ctz32(ser));
++}
++
++static void k230_dw_ssi_abort_transfer(K230DwSsiState *s)
++{
++    k230_dw_ssi_deselect(s);
++    fifo32_reset(&s->tx_fifo);
++    fifo32_reset(&s->rx_fifo);
++}
++
++static uint32_t k230_dw_ssi_status(K230DwSsiState *s)
++{
++    uint32_t tx_used = fifo32_num_used(&s->tx_fifo);
++    uint32_t rx_used = fifo32_num_used(&s->rx_fifo);
++    uint32_t sr = 0;
++
++    sr = FIELD_DP32(sr, SR, TFNF, tx_used < K230_DW_SSI_FIFO_CAPACITY);
++    sr = FIELD_DP32(sr, SR, TFE, tx_used == 0);
++    sr = FIELD_DP32(sr, SR, RFNE, rx_used != 0);
++    sr = FIELD_DP32(sr, SR, RFF,
++                    rx_used == K230_DW_SSI_FIFO_CAPACITY);
++
++    return sr;
++}
++
++static void k230_dw_ssi_run_transfer(K230DwSsiState *s);
++
++static void k230_dw_ssi_push_tx(K230DwSsiState *s, uint32_t tx)
++{
++    if (!k230_dw_ssi_enabled(s) || s->active_cs < 0) {
++        return;
++    }
++
++    if (fifo32_is_full(&s->tx_fifo)) {
++        return;
++    }
++
++    fifo32_push(&s->tx_fifo, tx & k230_dw_ssi_frame_masked(s));
++    k230_dw_ssi_run_transfer(s);
++}
++
++
++static void k230_dw_ssi_run_transfer(K230DwSsiState *s)
++{
++}
++
++
++
++static bool k230_dw_ssi_is_dr(hwaddr addr)
++{
++    return addr >= A_DR0 && addr <= A_DR_END &&
++           (addr & 0x3) == 0;
++}
++
++static bool k230_dw_ssi_is_razwi(hwaddr addr)
++{
++    switch (addr) {
++    case A_XIP_CTRL:
++    case A_XIP_SER:
++    case A_XRXOICR:
++    case A_XIP_CNT_TIME_OUT:
++    case A_SPI_CTRLR1:
++    case A_SPITECR:
++    case A_RSVD_138:
++    case A_RSVD_13C:
++    case A_XIP_WRITE_INCR_INST:
++    case A_XIP_WRITE_WRAP_INST:
++    case A_XIP_WRITE_CTRL:
++        return true;
++    default:
++        return false;
++    }
++}
++
++static bool k230_dw_ssi_write_requires_disabled(hwaddr addr)
++{
++    switch (addr) {
++    case A_CTRLR0:
++    case A_CTRLR1:
++    case A_MWCR:
++    case A_BAUDR:
++    case A_SPI_CTRLR0:
++        return true;
++    default:
++        return false;
++    }
++}
++
++static uint64_t k230_dw_ssi_read(void *opaque, hwaddr addr, unsigned int size)
++{
++    K230DwSsiState *s = K230_DW_SSI(opaque);
++    uint32_t value = 0;
++
++    if (k230_dw_ssi_is_dr(addr)) {
++        if (!fifo32_is_empty(&s->rx_fifo)) {
++            value = fifo32_pop(&s->rx_fifo) & k230_dw_ssi_frame_masked(s);
++        }
++        return value;
++    }
++
++    if (k230_dw_ssi_is_razwi(addr)) {
++        return 0;
++    }
++
++    switch (addr) {
++    case A_CTRLR0:
++    case A_CTRLR1:
++    case A_SSIENR:
++    case A_MWCR:
++    case A_BAUDR:
++    case A_TXFTLR:
++    case A_RXFTLR:
++    case A_IMR:
++    case A_DMACR:
++    case A_AXIAWLEN:
++    case A_AXIARLEN:
++    case A_IDR:
++    case A_SSIC_VERSION_ID:
++    case A_RX_SAMPLE_DELAY:
++    case A_SPI_CTRLR0:
++    case A_DDR_DRIVE_EDGE:
++    case A_XIP_MODE_BITS:
++    case A_XIP_INCR_INST:
++    case A_XIP_WRAP_INST:
++    case A_SPIDR:
++    case A_SPIAR:
++    case A_AXIAR0:
++    case A_AXIAR1:
++        value = s->regs[addr / sizeof(uint32_t)];
++        break;
++    case A_SER:
++        value = s->regs[R_SER] & MAKE_64BIT_MASK(0, s->num_cs);
++        break;
++    case A_TXFLR:
++        value = fifo32_num_used(&s->tx_fifo);
++        break;
++    case A_RXFLR:
++        value = fifo32_num_used(&s->rx_fifo);
++        break;
++    case A_SR:
++        value = k230_dw_ssi_status(s);
++        break;
++    case A_ISR:
++    case A_RISR:
++        value = 0;
++        break;
++    case A_TXEICR:
++    case A_RXOICR:
++    case A_RXUICR:
++    case A_MSTICR:
++    case A_ICR:
++        value = 0;
++        break;
++    case A_AXIECR:
++    case A_DONECR:
++        value = 0;
++        break;
++    default:
++        if (addr >= K230_DW_SSI_REGS_SIZE || (addr & 0x3) != 0) {
++            qemu_log_mask(LOG_GUEST_ERROR,
++                          "%s: bad read offset 0x%" HWADDR_PRIx "\n",
++                          DEVICE(s)->canonical_path, addr);
++        }
++        break;
++    }
++
++    return value;
++}
++
++static void k230_dw_ssi_write(void *opaque, hwaddr addr,
++                              uint64_t value, unsigned int size)
++{
++    K230DwSsiState *s = K230_DW_SSI(opaque);
++
++    if (k230_dw_ssi_is_dr(addr)) {
++        k230_dw_ssi_push_tx(s, value);
++        return;
++    }
++
++    if (k230_dw_ssi_is_razwi(addr)) {
++        return;
++    }
++
++    if (k230_dw_ssi_write_requires_disabled(addr) &&
++        k230_dw_ssi_enabled(s)) {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: write to offset 0x%" HWADDR_PRIx
++                      " while SSI is enabled\n",
++                      DEVICE(s)->canonical_path, addr);
++        return;
++    }
++
++    switch (addr) {
++    case A_CTRLR0:
++        k230_dw_ssi_write_masked(s, R_CTRLR0, value,
++                                 K230_DW_SSI_CTRLR0_WRITABLE_MASK);
++        break;
++    case A_CTRLR1:
++        k230_dw_ssi_write_masked(s, R_CTRLR1, value,
++                                 K230_DW_SSI_CTRLR1_WRITABLE_MASK);
++        break;
++    case A_SSIENR: {
++        bool old_enabled = k230_dw_ssi_enabled(s);
++        bool new_enabled = value & R_SSIENR_SSIC_EN_MASK;
++
++        if (old_enabled == new_enabled) {
++            return;
++        }
++
++        s->regs[R_SSIENR] = FIELD_DP32(0, SSIENR, SSIC_EN, new_enabled);
++        if (!new_enabled) {
++            k230_dw_ssi_abort_transfer(s);
++            return;
++        }
++
++        k230_dw_ssi_update_cs(s);
++        break;
++    }
++    case A_MWCR:
++        k230_dw_ssi_write_masked(s, R_MWCR, value,
++                                 K230_DW_SSI_MWCR_WRITABLE_MASK);
++        break;
++    case A_SER:
++        s->regs[R_SER] = value & MAKE_64BIT_MASK(0, s->num_cs);
++        break;
++    case A_BAUDR:
++        k230_dw_ssi_write_masked(s, R_BAUDR, value,
++                                 K230_DW_SSI_BAUDR_WRITABLE_MASK);
++        break;
++    case A_TXFTLR:
++        k230_dw_ssi_write_masked(s, R_TXFTLR, value,
++                                 K230_DW_SSI_TXFTLR_WRITABLE_MASK);
++        break;
++    case A_RXFTLR:
++        k230_dw_ssi_write_masked(s, R_RXFTLR, value,
++                                 K230_DW_SSI_RXFTLR_WRITABLE_MASK);
++        break;
++    case A_TXFLR:
++    case A_RXFLR:
++    case A_SR:
++        break;
++    case A_IMR:
++        k230_dw_ssi_write_masked(s, R_IMR, value,
++                                 K230_DW_SSI_IMR_WRITABLE_MASK);
++        break;
++    case A_ISR:
++    case A_RISR:
++        break;
++    case A_TXEICR:
++    case A_RXOICR:
++    case A_RXUICR:
++    case A_MSTICR:
++    case A_ICR:
++        break;
++    case A_DMACR:
++        k230_dw_ssi_write_masked(s, R_DMACR, value,
++                                 K230_DW_SSI_DMACR_WRITABLE_MASK);
++        if (FIELD_EX32(s->regs[R_DMACR], DMACR, IDMAE)) {
++            qemu_log_mask(LOG_UNIMP,
++                          "%s: DMACR.IDMAE enabled, internal DMA is not "
++                          "implemented\n",
++                          DEVICE(s)->canonical_path);
++        }
++        break;
++    case A_AXIAWLEN:
++        k230_dw_ssi_write_masked(s, R_AXIAWLEN, value,
++                                 K230_DW_SSI_AXIAWLEN_WRITABLE_MASK);
++        break;
++    case A_AXIARLEN:
++        k230_dw_ssi_write_masked(s, R_AXIARLEN, value,
++                                 K230_DW_SSI_AXIARLEN_WRITABLE_MASK);
++        break;
++    case A_IDR:
++    case A_SSIC_VERSION_ID:
++        break;
++    case A_RX_SAMPLE_DELAY:
++        k230_dw_ssi_write_masked(
++            s, R_RX_SAMPLE_DELAY, value,
++            K230_DW_SSI_RX_SAMPLE_DELAY_WRITABLE_MASK);
++        break;
++    case A_SPI_CTRLR0:
++        k230_dw_ssi_write_masked(
++            s, R_SPI_CTRLR0, value,
++            K230_DW_SSI_SPI_CTRLR0_WRITABLE_MASK);
++        break;
++    case A_DDR_DRIVE_EDGE:
++        k230_dw_ssi_write_masked(
++            s, R_DDR_DRIVE_EDGE, value,
++            K230_DW_SSI_DDR_DRIVE_EDGE_WRITABLE_MASK);
++        break;
++    case A_XIP_MODE_BITS:
++        k230_dw_ssi_write_masked(
++            s, R_XIP_MODE_BITS, value,
++            K230_DW_SSI_XIP_MODE_BITS_WRITABLE_MASK);
++        break;
++    case A_XIP_INCR_INST:
++        k230_dw_ssi_write_masked(
++            s, R_XIP_INCR_INST, value,
++            K230_DW_SSI_XIP_INCR_INST_WRITABLE_MASK);
++        break;
++    case A_XIP_WRAP_INST:
++        k230_dw_ssi_write_masked(
++            s, R_XIP_WRAP_INST, value,
++            K230_DW_SSI_XIP_WRAP_INST_WRITABLE_MASK);
++        break;
++    case A_SPIDR:
++        k230_dw_ssi_write_masked(s, R_SPIDR, value,
++                                 K230_DW_SSI_SPIDR_WRITABLE_MASK);
++        break;
++    case A_SPIAR:
++        k230_dw_ssi_write_masked(s, R_SPIAR, value,
++                                 K230_DW_SSI_SPIAR_WRITABLE_MASK);
++        break;
++    case A_AXIAR0:
++        k230_dw_ssi_write_masked(s, R_AXIAR0, value,
++                                 K230_DW_SSI_AXIAR0_WRITABLE_MASK);
++        break;
++    case A_AXIAR1:
++        k230_dw_ssi_write_masked(s, R_AXIAR1, value,
++                                 K230_DW_SSI_AXIAR1_WRITABLE_MASK);
++        break;
++    case A_AXIECR:
++    case A_DONECR:
++        break;
++    default:
++        if (addr >= K230_DW_SSI_REGS_SIZE || (addr & 0x3) != 0) {
++            qemu_log_mask(LOG_GUEST_ERROR,
++                          "%s: bad write offset 0x%" HWADDR_PRIx "\n",
++                          DEVICE(s)->canonical_path, addr);
++        }
++        break;
++    }
++}
++
++static const MemoryRegionOps k230_dw_ssi_ops = {
++    .read = k230_dw_ssi_read,
++    .write = k230_dw_ssi_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++        .unaligned = false,
++    },
++    .valid = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++        .unaligned = false,
 +    },
 +};
 +
-+static QTestState *k230_ssi_start(void)
++static void k230_dw_ssi_enter_reset(Object *obj, ResetType type)
 +{
-+    return qtest_init("-machine k230");
++    K230DwSsiState *s = K230_DW_SSI(obj);
++
++    memset(s->regs, 0, sizeof(s->regs));
++    fifo32_reset(&s->tx_fifo);
++    fifo32_reset(&s->rx_fifo);
++
++    s->regs[R_CTRLR0] = K230_DW_SSI_CTRLR0_RESET;
++    s->regs[R_SR] = K230_DW_SSI_SR_RESET;
++    s->regs[R_IMR] = K230_DW_SSI_IMR_RESET;
++    s->regs[R_AXIAWLEN] = K230_DW_SSI_AXIAWLEN_RESET;
++    s->regs[R_AXIARLEN] = K230_DW_SSI_AXIARLEN_RESET;
++    s->regs[R_IDR] = K230_DW_SSI_IDR_RESET;
++    s->regs[R_SSIC_VERSION_ID] = K230_DW_SSI_VERSION;
++    s->regs[R_SPI_CTRLR0] = s->max_lines == 8 ?
++        K230_DW_SSI_SPI_CTRLR0_FMC_RESET :
++        K230_DW_SSI_SPI_CTRLR0_SPI_RESET;
 +}
 +
-+static uint32_t k230_ssi_readl(QTestState *qts, uint64_t base,
-+                               uint32_t offset)
++static void k230_dw_ssi_hold_reset(Object *obj, ResetType type)
 +{
-+    return qtest_readl(qts, base + offset);
++    K230DwSsiState *s = K230_DW_SSI(obj);
++    s->active_cs = -1;
++
++    if (s->cs_lines) {
++        for (int i = 0; i < s->num_cs; i++) {
++            qemu_irq_raise(s->cs_lines[i]);
++        }
++    }
 +}
 +
-+static void k230_ssi_writel(QTestState *qts, uint64_t base,
-+                            uint32_t offset, uint32_t value)
++static const VMStateDescription vmstate_k230_dw_ssi = {
++    .name = TYPE_K230_DW_SSI,
++    .fields = (const VMStateField[]) {
++        VMSTATE_UINT32_ARRAY(regs, K230DwSsiState, K230_DW_SSI_NUM_REGS),
++        VMSTATE_FIFO32(tx_fifo, K230DwSsiState),
++        VMSTATE_FIFO32(rx_fifo, K230DwSsiState),
++        VMSTATE_INT32(active_cs, K230DwSsiState),
++        VMSTATE_END_OF_LIST()
++    },
++};
++
++static void k230_dw_ssi_init(Object *obj)
 +{
-+    qtest_writel(qts, base + offset, value);
++    K230DwSsiState *s = K230_DW_SSI(obj);
++    DeviceState *dev = DEVICE(obj);
++    SysBusDevice *sbd = SYS_BUS_DEVICE(obj);
++
++    s->spi = ssi_create_bus(dev, "spi");
++
++    memory_region_init_io(&s->mmio, obj, &k230_dw_ssi_ops, s,
++                          TYPE_K230_DW_SSI, K230_DW_SSI_MMIO_SIZE);
++    sysbus_init_mmio(sbd, &s->mmio);
++
++    fifo32_create(&s->tx_fifo, K230_DW_SSI_FIFO_CAPACITY);
++    fifo32_create(&s->rx_fifo, K230_DW_SSI_FIFO_CAPACITY);
++    s->active_cs = -1;
 +}
 +
-+static void k230_ssi_disable(QTestState *qts, uint64_t base)
++static void k230_dw_ssi_realize(DeviceState *dev, Error **errp)
 +{
-+    k230_ssi_writel(qts, base, K230_SSI_SSIENR, 0);
-+}
++    K230DwSsiState *s = K230_DW_SSI(dev);
 +
-+static void k230_ssi_configure(QTestState *qts, uint64_t base,
-+                               uint32_t tmod, uint32_t dfs_bits,
-+                               uint32_t ndf)
-+{
-+    uint32_t ctrlr0;
-+
-+    g_assert_cmpuint(dfs_bits, >=, 4);
-+    g_assert_cmpuint(dfs_bits, <=, 32);
-+    g_assert_cmpuint(tmod, <=, K230_SSI_TMOD_EEPROM_READ);
-+
-+    k230_ssi_disable(qts, base);
-+    ctrlr0 = (dfs_bits - 1) & K230_SSI_CTRLR0_DFS_MASK;
-+    ctrlr0 |= tmod << K230_SSI_CTRLR0_TMOD_SHIFT;
-+    k230_ssi_writel(qts, base, K230_SSI_CTRLR0, ctrlr0);
-+    k230_ssi_writel(qts, base, K230_SSI_CTRLR1, ndf);
-+    k230_ssi_writel(qts, base, K230_SSI_BAUDR, 2);
-+}
-+
-+static void k230_ssi_enable_cs(QTestState *qts, uint64_t base, uint32_t ser)
-+{
-+    k230_ssi_writel(qts, base, K230_SSI_SER, ser);
-+    k230_ssi_writel(qts, base, K230_SSI_SSIENR, 1);
-+}
-+
-+static void test_register_contract(void)
-+{
-+    QTestState *qts = k230_ssi_start();
-+
-+    for (int i = 0; i < ARRAY_SIZE(k230_ssi_instances); i++) {
-+        const K230SsiInstance *inst = &k230_ssi_instances[i];
-+
-+        g_assert_cmphex(k230_ssi_readl(qts, inst->base, K230_SSI_CTRLR0),
-+                        ==, K230_SSI_CTRLR0_RESET);
-+        g_assert_cmphex(k230_ssi_readl(qts, inst->base, K230_SSI_SSIENR),
-+                        ==, 0);
-+        g_assert_cmphex(k230_ssi_readl(qts, inst->base,
-+                                      K230_SSI_SPI_CTRLR0),
-+                        ==, inst->spi_ctrlr0_reset);
-+        k230_ssi_writel(qts, inst->base, K230_SSI_SER, UINT32_MAX);
-+        g_assert_cmphex(k230_ssi_readl(qts, inst->base, K230_SSI_SER),
-+                        ==, MAKE_64BIT_MASK(0, inst->num_cs));
++    if (s->num_cs == 0 || s->num_cs > 8) {
++        error_setg(errp, "%s: num-cs must be in range 1..8",
++                   dev->canonical_path);
++        return;
 +    }
 +
-+    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_IDR),
-+                    ==, K230_SSI_IDR_RESET);
-+    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI0_BASE,
-+                                  K230_SSI_VERSION_ID),
-+                    ==, K230_SSI_VERSION_RESET);
-+    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_CTRLR0, UINT32_MAX);
-+    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_CTRLR0),
-+                    ==, K230_SSI_CTRLR0_WRITABLE_MASK);
-+    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_BAUDR, UINT32_MAX);
-+    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_BAUDR),
-+                    ==, K230_SSI_BAUDR_WRITABLE_MASK);
++    if (s->max_lines != 1 && s->max_lines != 4 && s->max_lines != 8) {
++        error_setg(errp, "%s: max-lines must be 1, 4, or 8",
++                   dev->canonical_path);
++        return;
++    }
 +
-+    qtest_system_reset(qts);
-+    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_CTRLR0),
-+                    ==, K230_SSI_CTRLR0_RESET);
-+    g_assert_cmphex(k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_IMR),
-+                    ==, K230_SSI_IMR_RESET);
-+    qtest_quit(qts);
++    s->cs_lines = g_new0(qemu_irq, s->num_cs);
++    qdev_init_gpio_out_named(dev, s->cs_lines, "cs", s->num_cs);
 +}
 +
-+int main(int argc, char **argv)
++static void k230_dw_ssi_finalize(Object *obj)
 +{
-+    g_test_init(&argc, &argv, NULL);
++    K230DwSsiState *s = K230_DW_SSI(obj);
 +
-+    qtest_add_func("/k230-dw-ssi/register-contract", test_register_contract);
-+    return g_test_run();
++    fifo32_destroy(&s->tx_fifo);
++    fifo32_destroy(&s->rx_fifo);
++    g_free(s->cs_lines);
 +}
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index 56ff860e21..f5bcc7bece 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -297,7 +297,8 @@ qtests_riscv64 = ['riscv-csr-test'] + \
-   (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
-    config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
-    ['iommu-riscv-test'] : []) + \
--  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
-+  (config_all_devices.has_key('CONFIG_K230') ?
-+   ['k230-wdt-test', 'k230-dw-ssi-test'] : [])
- 
- qtests_hexagon = ['boot-serial-test']
- 
-@@ -400,6 +401,7 @@ qtests = {
-                        [gio],
-   'erst-test': files('erst-test.c'),
-   'ivshmem-test': [rt, '../../contrib/ivshmem-server/ivshmem-server.c'],
-+  'k230-dw-ssi-test': files('k230-dw-ssi-test.c'),
-   'migration-test': test_migration_files + migration_tls_files + migration_colo_files,
-   'pxe-test': files('boot-sector.c'),
-   'pnv-xive2-test': files('pnv-xive2-common.c', 'pnv-xive2-flush-sync.c',
++
++static const Property k230_dw_ssi_properties[] = {
++    DEFINE_PROP_UINT32("num-cs", K230DwSsiState, num_cs, 1),
++    DEFINE_PROP_UINT32("max-lines", K230DwSsiState, max_lines, 1),
++};
++
++static void k230_dw_ssi_class_init(ObjectClass *klass, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
++
++    dc->realize = k230_dw_ssi_realize;
++    dc->vmsd = &vmstate_k230_dw_ssi;
++    device_class_set_props(dc, k230_dw_ssi_properties);
++    rc->phases.enter = k230_dw_ssi_enter_reset;
++    rc->phases.hold = k230_dw_ssi_hold_reset;
++}
++
++static const TypeInfo k230_dw_ssi_info = {
++    .name = TYPE_K230_DW_SSI,
++    .parent = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(K230DwSsiState),
++    .instance_init = k230_dw_ssi_init,
++    .instance_finalize = k230_dw_ssi_finalize,
++    .class_init = k230_dw_ssi_class_init,
++};
++
++static void k230_dw_ssi_register_types(void)
++{
++    type_register_static(&k230_dw_ssi_info);
++}
++
++type_init(k230_dw_ssi_register_types)
+diff --git a/hw/ssi/meson.build b/hw/ssi/meson.build
+index 6afb1ea200..1e9c1d72c4 100644
+--- a/hw/ssi/meson.build
++++ b/hw/ssi/meson.build
+@@ -1,6 +1,7 @@
+ system_ss.add(when: 'CONFIG_ALLWINNER_A10_SPI', if_true: files('allwinner-a10-spi.c'))
+ system_ss.add(when: 'CONFIG_ASPEED_SOC', if_true: files('aspeed_smc.c'))
+ system_ss.add(when: 'CONFIG_MSF2', if_true: files('mss-spi.c'))
++system_ss.add(when: 'CONFIG_K230_DW_SSI', if_true: files('k230_dw_ssi.c'))
+ system_ss.add(when: 'CONFIG_NPCM7XX', if_true: files('npcm7xx_fiu.c', 'npcm_pspi.c'))
+ system_ss.add(when: 'CONFIG_PL022', if_true: files('pl022.c'))
+ system_ss.add(when: 'CONFIG_SIFIVE_SPI', if_true: files('sifive_spi.c'))
+diff --git a/include/hw/ssi/k230_dw_ssi.h b/include/hw/ssi/k230_dw_ssi.h
+new file mode 100644
+index 0000000000..953f6cc0e5
+--- /dev/null
++++ b/include/hw/ssi/k230_dw_ssi.h
+@@ -0,0 +1,50 @@
++/*
++ * Kendryte K230 DesignWare SSI
++ *
++ * Copyright (c) 2026 Kangjie Huang <flamboyant.h.01@gmail.com>
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Emulates the DesignWare SSI controllers documented by the K230
++ * Technical Reference Manual, including standard SPI, Dual/Quad SDR,
++ * internal DMA, and the XIP read window.
++ *
++ * K230 Technical Reference Manual V0.3.1 (2024-11-18):
++ * https://github.com/revyos/external-docs/blob/master/K230/en-us/K230_Technical_Reference_Manual_V0.3.1_20241118.pdf
++ *
++ * For more information, see <https://www.kendryte.com/en/proDetail/230>
++ */
++
++#ifndef HW_SSI_K230_DW_SSI_H
++#define HW_SSI_K230_DW_SSI_H
++
++#include "hw/core/sysbus.h"
++#include "hw/ssi/ssi.h"
++#include "qemu/fifo32.h"
++#include "qom/object.h"
++
++#define TYPE_K230_DW_SSI "riscv.k230.dw-ssi"
++OBJECT_DECLARE_SIMPLE_TYPE(K230DwSsiState, K230_DW_SSI)
++
++#define K230_DW_SSI_MMIO_SIZE 0x1000
++#define K230_DW_SSI_REGS_SIZE 0x14c
++#define K230_DW_SSI_NUM_REGS \
++    (K230_DW_SSI_REGS_SIZE / sizeof(uint32_t))
++
++struct K230DwSsiState {
++    SysBusDevice parent_obj;
++
++    MemoryRegion mmio;
++    SSIBus *spi;
++    qemu_irq *cs_lines;
++
++    Fifo32 tx_fifo;
++    Fifo32 rx_fifo;
++    uint32_t regs[K230_DW_SSI_NUM_REGS];
++
++    uint32_t num_cs;
++    uint32_t max_lines;
++    int active_cs;
++};
++
++#endif /* HW_SSI_K230_DW_SSI_H */
 -- 
 2.43.0
 
