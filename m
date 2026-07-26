@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEB89C531FA
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 06:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B219C531F9
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 07:43:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wnslf-0001A0-9N; Sun, 26 Jul 2026 02:55:27 -0400
+	id 1wntW7-00044f-Bv; Sun, 26 Jul 2026 03:43:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wnslV-00018W-UV
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 02:55:15 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ id 1wntW5-00044L-5w
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 03:43:21 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wnslU-0007wO-Jt
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 02:55:13 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2cf110997efso4121245ad.2
- for <qemu-riscv@nongnu.org>; Sat, 25 Jul 2026 23:55:12 -0700 (PDT)
+ id 1wntW3-0004ke-KM
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 03:43:20 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2cad85b7b5aso2652145ad.1
+ for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 00:43:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785048911; x=1785653711; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785051798; x=1785656598; darn=nongnu.org;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=yQcSsWuGcuYv9mWdw2DlPMe/MrOO7NK+HgvDmXGBT/E=;
- b=fh4fUUYTgZprgSi96miVktxF2f805wyH/7QDxu0/HvurCFh9dcoISsCvNQQPX4LYEj
- PQwHy7HOlIS09Vt9jGI0KGEKNSXhPWHVfqFpoq2NFloxx80j0QVsjHOiLOCBL+A4/tGg
- 3dpP9UHWwLw0YR0XR5aE9YAWw+aLRj2p1+3ec+cQKP8lPkJXL8srxSDj+SmMyGy58Op1
- 5lcfxZ0PFdlKg40WzmyzHfggkcvCm3mYY2NZfXatJmrG9+ByUMcIpaSVJAdM5Rw6YNLT
- VxlMM/f1CSipHcHpEw61Ts9CFtS24f8bIGRVWHqXWjJJ12DLAv23xqbTsQ6kKZzLPbcr
- 9Iyg==
+ bh=b9KU7z4y4buiVrgRcV1hklRK/bdxHz8ig1mbBaIdLeQ=;
+ b=UC3RfyjqCT9ZDU0bgzS8mpTAnnMCO1n64ZpdV1bkzk6O/QfzoMC/HrYDIbd44R/kK+
+ 8WWONbtLO5QkCZeBF5qyMKF2FML/BJfkvz3mvs4uea9MeatH86itNznD8VoToEM2IbR1
+ IJAsGpkST5UZynQEv4Hw2NAUfe9OeljH8Fy9FKYKo8l6j/FCtvpP6oZpARfuDdZqml7P
+ KiQI/a+cNMG3QJ3jFetYtPo/1zt9tExoCRvt5h5LE3OW/aNrawyfS8rst22LSwXumUDB
+ l1gBL5LPu6gOfMAfVUSL/PdddSFYXxiNEDXXHgQ+mVc4YnsWp/IEPx81zpc7TrB2EBYh
+ i/GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785048911; x=1785653711;
+ d=1e100.net; s=20251104; t=1785051798; x=1785656598;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=yQcSsWuGcuYv9mWdw2DlPMe/MrOO7NK+HgvDmXGBT/E=;
- b=HEP+k0msRbmWxJYcjNqJdIdd45ArIFzvibcPOvHyzfnUI5fkja15SUjK+VnQIPGOUQ
- XPszOC059uCQD+48Wb9LgtzfwBOMyYjsgiewRItzhvUpUKObzfOlyMEb7dBv/XCvm8T+
- X2Ioiyt6NGa24oMak8sWrTXA15IscYIpjJLgf6t+JpCPsHjAwf1FpMvvSpbG3IhMjc+P
- pgeVQL/R4ousyGtfNzNC7J10QBIAIi/xvdLFzFUdVi6j0puDV1y5LAsvFBqE+0C40UJw
- Zqwcsthw6uR1MT1v/ax+SqsIqbTyp/bCxrfCt/79EPe3Y9DWJB4rXRG/BdIMWuvgvq/s
- E8iA==
+ bh=b9KU7z4y4buiVrgRcV1hklRK/bdxHz8ig1mbBaIdLeQ=;
+ b=i6r8pv71LAZoYlgUWe2MGoj+d6IwJf0p/T7IBsfyRuWCfdvEjLgiQ+wqzvtHVuXZQH
+ oEKXszafjkJLYww4wYo0N1HMWcAwnIwqi5y0Hez4hLvQpzWM4gUQ4IF+1gFzmYwTHfS7
+ BiPdM2Y+xTHxL3rj9bfjypZNGfiAvwS9f6axsIwWfwdV4qr7oFy5x+Ip5RqpZuvtM9/+
+ GuR4YftmZ7GM+bkLl9WEZJiw+Ga9Dvohz8JjVjNs7o67DEhgf4toUIilg8sTmQImXekv
+ cJhEyq+J0MjvNW1Vuml7xmcboT4rWDbmqeXYJ9XyV9Pssu3/1b+A4mL8wztsVDm4ohi0
+ BfMA==
 X-Forwarded-Encrypted: i=1;
- AHgh+Rqwm/k7//iV12abYSrFf1CvKc3FIdxO2wa7H2tUsBHuKUVzvCSGOHzGLhfuA4ARf5yxNr4herG+0SXu@nongnu.org
-X-Gm-Message-State: AOJu0YwQczpkyPbwXSNRtWACmAc8zsN68Gtr76+hv1zy1MTCe+ldk1Mf
- QbEvxamdDtwx0K+w09HuoYbfrB0f9dsjpk1Ndgl6aUMsnERnLwGH92jY0/G/fsIAxxE=
-X-Gm-Gg: AR+sD13X91dkA4PDhn5lb8OjwCSWMsQ+IpraRTPhH2kgK1wwjlM0TDm3kEbtOtKfGmr
- vi8hlDenvZACyDNqbbV9w5+EaRSeeF3NDRb5K+1oDGKrqb6BdKQCzlOyKj18QlWYTri8NLrW6PR
- ubQs8pZJ3U6cPmBiq1SN8mQU95ZaSjIXTHFwhcclmkXyQ9/YE1cCegsd5QWq8wVrugpw3tvh2vF
- UCHuSSJB3PkyHrEtEVE+JYgMMUE60tsoUcLKSNpQkGwtAmfOzLvpxE56IomGoqeYlKT/vwD+h1F
- wIrKoI6W9aOR9xBrP2C+/hJmq+9Yoa92QmnArxrOhjWoEhwYNZ9BDGynn5MPPTMYcVoNxEhWyTD
- Bf47H0H0UaJPd1rLxAQuKlZB2JthGF4rLIfRlMORWRjpV2SG+VjLJjuVVYK/5slA6PH3bLPYDwa
- 4GJHZHZCZE34KwMM1/fGwO
-X-Received: by 2002:a17:90b:1fc4:b0:38e:6a7c:abbc with SMTP id
- 98e67ed59e1d1-38f29625594mr4826105a91.3.1785048911040; 
- Sat, 25 Jul 2026 23:55:11 -0700 (PDT)
+ AHgh+RrLQX0N+D6lFZUo9IrfDRjP0bqAvyhqpRIujlHrXzvYG6Mjm8/F7oADCl6QWdhhtIXtU2FLjs9y/erS@nongnu.org
+X-Gm-Message-State: AOJu0YwN7Tm8JCTpBQ/4ofEGotRCzimkh6OmneUHEFGjxGJOuMg2bzpa
+ O1lHLWAmubCUJ5GYS5+UttMXVmMt02wIRj4R475VycSJdMEVqLsWJHBz
+X-Gm-Gg: AR+sD11gVCAaAq6aP7LaBjelYLgEJ+n5hsy7P1CNQQAgqVjCz/pIGYe2TDx5j6vPOV+
+ sPMpW7SXT4usyOa1gHtStlAeGm9KE5vg+Ot5LB4+O8tTqFz1wU71XPtvEqsivwbOoJk/vNRUlQX
+ jGOYiA/tZfRWn2ySYSASFC7yISTuZjuhH02JBrTpPsl0OvokI8WRwyelxEqy1ewMm1woEJV2l/c
+ lso2YmB9zcYgK9rKCpONiRl/eOEfZ5lisj4cGLFqL+vQTBuNKm7+uvc48DEUr61KhLazsLKCaL9
+ rQgI8lrIw7omXNIx8F1c5KI89yyzEwVryj1uMLAf7edL/ExX2VPRtXO7Rv4KR9HOknUoRpO7SC0
+ LZsumtRXAApA+0JpACBJl2+v4AMxIdDxgbPK6OOhPZh3/eU1hqE0KGyWNrJDxAvde9EoN7teRHQ
+ O8C8zE0gZyIRm6v4QxHHlU
+X-Received: by 2002:a17:903:390c:b0:2c9:fbde:ab68 with SMTP id
+ d9443c01a7336-2cfde844f2bmr58129325ad.3.1785051797884; 
+ Sun, 26 Jul 2026 00:43:17 -0700 (PDT)
 Received: from DESKTOP-7HME356.localdomain ([38.34.7.236])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-314bc44cb92sm29618246eec.13.2026.07.25.23.55.08
+ 5a478bee46e88-314bc548e63sm18236602eec.19.2026.07.26.00.43.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jul 2026 23:55:10 -0700 (PDT)
+ Sun, 26 Jul 2026 00:43:17 -0700 (PDT)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -80,18 +80,18 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
 In-Reply-To: <20260721161335.73872-6-dingtao0430@163.com>
 References: <20260721161335.73872-1-dingtao0430@163.com>
  <20260721161335.73872-6-dingtao0430@163.com>
-Date: Sun, 26 Jul 2026 14:55:01 +0800
-Message-Id: <178504890122.906524.1584451280442158867.b4-review@b4>
+Date: Sun, 26 Jul 2026 15:43:12 +0800
+Message-Id: <178505179207.940286.1406120293278713894.b4-review@b4>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785048904; l=279;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785051795; l=681;
  i=caojunze424@gmail.com; s=junze-gmail; h=from:subject:message-id;
- bh=EFA3HxIFQzwTubhuOmsFZTW7rAhGvnoGb9B0i+rXEJU=;
- b=JV9fXgLgvDRQMCZEkd2mLcf+Nnf/FwbqPmGxta8lUJbLUfJloIUoP1bZ5jHHFJOcyuWDWM6JU
- lkSk1s0T7kvCqNl69Xg85vJAkSn+JfX1Yvc07k8ck3aXELn7YsBkfQo
+ bh=Y5S6DlMXNN8pl1AoHZnUuI7INPc9wZud/rupcev/3Rs=;
+ b=5z7ih+Aeci4FPuUU04aRDEFMgtxG+gmmsviP1d43oWTCr0IWgY+XJs+CkK+KTApw+Qb1ZLl8h
+ l4TjOQaBBIKCJ1J2eooX+PaWnoulavGjOI+t0mChgaduhdJ9jfD/Pw1
 X-Developer-Key: i=caojunze424@gmail.com; a=ed25519;
  pk=lnFIWNw+6CoDrHFIKUJKdgrRbvgAbQGcEFiVsIigOJ8=
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=caojunze424@gmail.com; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=caojunze424@gmail.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,7 +99,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,10 +116,23 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On Wed, 22 Jul 2026 00:13:33 +0800, Tao Ding <dingtao0430@163.com> wrote:
-> This commit replaces the unimplemented part of Decomp_gzip in K230.
-> Connect to the handshake interface of GSDMA.
+> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
+> index 156a386edc..a12d36965a 100644
+> --- a/include/hw/riscv/k230.h
+> +++ b/include/hw/riscv/k230.h
+> @@ -35,6 +36,7 @@ typedef struct K230SoCState {
+>  
+>      K230WdtState wdt[2];
+>      K230GSDMAState gsdma;
+> +    K230DecompGzipState decomp_gzip;
+>      MemoryRegion sram;
+>      MemoryRegion bootrom;
+>  
 
-Reviewed-by: bbbbbq <2082291273@qq.com>
+Please disregard the Reviewed-by tag in my previous reply; it used an
+obsolete identity. The review itself is unchanged.
+
+Reviewed-by: Junze Cao <caojunze424@gmail.com>
 
 -- 
 Junze Cao <caojunze424@gmail.com>
