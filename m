@@ -4,140 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 148DEC531CC
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 09:05:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE27C531C9
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 12:29:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wnumc-0000k7-C8; Sun, 26 Jul 2026 05:04:30 -0400
+	id 1wnxyF-0000iR-Om; Sun, 26 Jul 2026 08:28:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wnuma-0000jm-Hb
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 05:04:28 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1wnumW-0003yM-6t
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 05:04:28 -0400
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 66Q8GoUU1269255
- for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 09:04:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 7NvVxfP/bRFLs3O0RTeMPjC7MehX8Ssm82xo4wsPEzU=; b=mz3z0OmjXMD71QQB
- tY5L3LXASHNIN9Bfw1lbgPOboIRhNTVSBIoTmJBk4/T6ppP/lB3Da8zN3I2rjSBb
- rCC5oU3gRLMZWWIkWPHfRVRhVd6zQPRpY1jKaAqn01+tmv4uSQBYujo5KE+bgc+H
- ZFhyiYlQOnyGJXBQ0+re7Plkh8iEpWCosSEIkvN2DDFswgtuuaRrKLM3hxa6PwCk
- n8CxX6P9eULXrbAPZ3R3oAw0nZIvAGT7kJmE/6OnZX7bzuSs1BsqrcMAXEYOLZ4h
- DNoAhRLsxunWA2bp+sShRxsIEFILFPnqtLbsrNSOGuG2ZpX0rxWG2Z5qALI8of7W
- FKp58g==
-Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com
- [209.85.221.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fmjuftuf5-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 09:04:20 +0000 (GMT)
-Received: by mail-vk1-f197.google.com with SMTP id
- 71dfb90a1353d-5c2e847a4c5so2141733e0c.3
- for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 02:04:20 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
+ id 1wnxy9-0000dM-3z
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:28:37 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
+ id 1wnxy4-0002tJ-M4
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:28:36 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-8485b358552so1932757b3a.2
+ for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 05:28:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1785056659; x=1785661459; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=7NvVxfP/bRFLs3O0RTeMPjC7MehX8Ssm82xo4wsPEzU=;
- b=jpPVwj4oTzq4C4VKcgFpSC6Db+ox/pfmF6Gsg5VqeNOGd3F28DJGGJDuapeYQW4Ha6
- Mrtd2HvCxf1VZqpjlgFsy7v8amA9WT5TlGsJQ8ysavT2w5ELR+MwWZ2KHch/+Pr4kCy5
- Ky/MODiB1PX5jHdl/dBAohEcomfACnGo8MwhjIZbiCcTzbrF6tczsFNQPH+sgH7Vtt6J
- hBlS4vgfAPIhbcPYO31WtkYmo3AiWPp6/JmBY5sbuP+iYW1giQEjPFPwVlQ90xLgwHjx
- bAZ48X1bq8nMnHfjHv/7fCIzE6ZLxdOSw5EA3Si5Vl52x21AqnGKe2jkn9pcgYr5/F03
- u0oA==
+ d=gmail.com; s=20251104; t=1785068908; x=1785673708; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=g/XAcSm17QqKQ9ETpqNQkH3Hsms2HSSgWJglT/dAeR0=;
+ b=qGwvbEoOvjwKT70A1wiISoYhv7o6G4IETgCSMfLrmcGoqn88EPIUR/RSVX2G/U6+Cv
+ 8cHviXpKhW+QZPIlHK5eGoXwZq/z5uig3mREaZqBbX7LxDgL8K0EAJ39+6k65eiJYM6+
+ +t7kxCYf3lE9sOpcg9cpqie1TIY1mZWmtacsBfScc2kVWpKCfyWHrgRMPdJ1YWw8qLvz
+ r8QeeVmhQut1oDf4wOETQinybxZY+2JkCWoOIZuhT5ForAPB3hHzoMNAIfkyJ7GdDCww
+ ZPKcK4um1KQqkmoioez2QtKpJwxa3OC4x0TPEMidIfHkEyPrsu2oM4UHkRr2PW0lbwPg
+ fwKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785056659; x=1785661459;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1785068908; x=1785673708;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=7NvVxfP/bRFLs3O0RTeMPjC7MehX8Ssm82xo4wsPEzU=;
- b=glF5VJzyo4MIv7fnuJuPLW0QPYUIaLvXKavrjVP2pUd6FF+H/OnmRuyruq8vb/wSry
- JSsHuq8DSxwEYo5sFH0tevnPzs7ils6TGoygkL/qUTmPRsh8u5FaPvK+A1NAit8CN9/r
- rX6pzK4xK+fAmB9JtZcQUjYPjcJUrn7ZaYSEj+sPOAD43bPU38rU7cCqZX+vrwkFpl18
- KuSyixPBZGgU23Qr9Hwb5FaBj+lV4yuJ6RveUhqN+vUIQ9R+3vQDwnXLEXM9zUwDA1qN
- qil2/vhuNksMQxpU3nQCDA/mMBZuJXjqOEOBA0cdhik34Qo4ChwshBHQ9duKpRA1PPam
- qbhA==
-X-Gm-Message-State: AOJu0YwlkxYnOCbb8z9rZ+2uEk6/jiFCO5I8ZChghM4oaJUS3YveyG23
- T+QOGt845OUcO0oejZhz2HZVNaQm2HzLq73lPfxOQ34om9rNr5fLMqflYbwpLzDN0GwuEe2q5nj
- 60EFKpcELADiW16/jPBT9N1nJp/s+5ajqUVaiWDV9j6nNXaIoWGL9jxJM9g==
-X-Gm-Gg: AR+sD11C8OuVII24q6Qif5rUDJ/hQI+fWxjHHEG4ejWw1nfwUYcjSbeicPyaXiBVM/L
- /iahlrxPys1mHMiDEMj3c5BfsK27dgbtvBva4/FVivyK/Nlt2lhXGYzEws65d9/S504PJPDkKaa
- Wl+rDT/JHGDSp5ztQFRfGnj/nZWWaKQOGePGIvNGgYohlmXavwFZ5o8KuWpzAOik2ZEZ735ZTcj
- uDHWFYHWAC4YPieqCOcBMvNJVTXXcNbzj4XsjqVtk3aruUR6KQ92mzWFqrZp7Phd2PuyPJqL0W4
- jv7sJrkBwmhTaOgoI3BGy3qh+RIkm/lUJCxqCgpI0juVU0s3A0jhvS9XzQGHHouhNUY2UlajSoa
- M9gYSmrhaL0zRjFzzSnVDb3mSrvTYX5u7SHHSnA==
-X-Received: by 2002:a05:6122:168c:b0:5bd:a5e1:c7c7 with SMTP id
- 71dfb90a1353d-5c306bb8fe7mr2186539e0c.1.1785056659616; 
- Sun, 26 Jul 2026 02:04:19 -0700 (PDT)
-X-Received: by 2002:a05:6122:168c:b0:5bd:a5e1:c7c7 with SMTP id
- 71dfb90a1353d-5c306bb8fe7mr2186534e0c.1.1785056659178; 
- Sun, 26 Jul 2026 02:04:19 -0700 (PDT)
-Received: from [192.168.68.104] ([191.202.238.134])
+ bh=g/XAcSm17QqKQ9ETpqNQkH3Hsms2HSSgWJglT/dAeR0=;
+ b=WiCoPGEZgB2CbPp0ON6pSMOaY+baQuUP9t4+Zpi19EPauvXOw/T3U8VQRF1HXB4LCJ
+ a1Iqr3BCic4zayK2Hw2IRb60zfHx+1RIHWGE8SvmuFa01VRaPHDpF68R8UlB/9xVN+4Q
+ oiollGEETjToSmd5y2xYpTVQc6YqcIUlpUzqYYdv4u87TYDJ1U/QuaH89+Qe6Pt1xElr
+ 3rKsJdHfIuLHoIhHz2qsJbC/p5vtLXdg6GCUZi+KH9JetiLQqpYbsTlsx/VE2QO0hEVB
+ T8+u98dLqjFONdyecZdBFf2hLQl4+17mQgAFjx2eR8C16jFdv8vuIPK9NeIZ3t+bU5ao
+ hHlA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RqtpiQgmqqoqLXYaatuWK4ODiX1RJ+FDUZwT2bel9dNhuoLgCHxfVByIY5H1ARGfd7Oog8arVzogbAn@nongnu.org
+X-Gm-Message-State: AOJu0Ywbf1EIuGErS1ABWMoaZ9vu8DzKWEBetYb704ueqO/adiEzJDcl
+ Xek7cHEzzEHCeKMT0P2guG5UwbAv5NHfLoLkE8/LsjxQN2rg0Qwnf/v4
+X-Gm-Gg: AR+sD13c7kS9hqTr/9iT116l3FYGQ19+rWKrtWeCw4Em/rcsfjuLw1T5hITzibmSwNx
+ DARVYWYeDtgiQjBW9t9Lou9KTPB7Q8LF6aG/YX+Gac4Bpwh5Tx8jmto93ftnGxraEa7PCu2Q+DC
+ vSQ8o2Zd0iETtzAGEZbV8G+77VAGavkZQf1eLBwkXHs771h707IPsJb4H7v6Aru6FlRNDWKT5a8
+ Emc214kzzkGMvF9QZ9/wenag0Iz/UZdDKDJeBSkBFJdOtSK6G91aOU2kjyMgm0ya6J3KDJNF27a
+ 27zKerQFocWFUJiisamYGyUWHA0VLRE+vwS7SlEdLiXnL5nAhns2ez0kHidqkezoQ1mdgzu9qVr
+ I6YqTdTBAdOmNdcIaCgps9zwQwzG9hXJIDzAXfOg1ko1zYTEh+VzB48sff0qMr5w8GTJXJH/YyY
+ bfI5mfhh8LLPHpnvwI59M1
+X-Received: by 2002:a05:6a00:b42:b0:84e:2722:5d9e with SMTP id
+ d2e1a72fcca58-84e593ff2e6mr3917400b3a.1.1785068908246; 
+ Sun, 26 Jul 2026 05:28:28 -0700 (PDT)
+Received: from localhost.localdomain ([111.201.4.215])
  by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-5c3056c917esm3903887e0c.11.2026.07.26.02.04.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 26 Jul 2026 02:04:18 -0700 (PDT)
-Message-ID: <c14dadb1-6f4c-425f-88b7-a6349a7d5814@oss.qualcomm.com>
-Date: Sun, 26 Jul 2026 06:04:13 -0300
+ d2e1a72fcca58-84e533d13f0sm1836751b3a.35.2026.07.26.05.28.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 26 Jul 2026 05:28:27 -0700 (PDT)
+From: Kangjie Huang <flamboyant.h.01@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Kangjie Huang <flamboyant.h.01@gmail.com>, qemu-riscv@nongnu.org,
+ Chao Liu <chao.liu@processmission.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Laurent Vivier <lvivier@redhat.com>
+Subject: [PATCH 00/11] hw/riscv: Add K230 SPI, QSPI, IDMA and XIP support
+Date: Sun, 26 Jul 2026 20:27:57 +0800
+Message-ID: <cover.1785064312.git.flamboyant.h.01@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: allow menvcfg/henvcfg LPE and SSE bits
- on RV32
-To: A-Shehab <ahshehab24@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com, debug@rivosinc.com
-References: <20260726080537.13913-1-ahshehab24@gmail.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260726080537.13913-1-ahshehab24@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: 8hIwYsUBk4BGAOFqftya1BtURbZCYn6x
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI2MDA4OSBTYWx0ZWRfX+isvc2Rn+6uD
- UJPPTt6k0I0nIVFcANttVYrLVNu31SXW2uLVwhLz9GdwYSHXrRycHo74VaoTGk/4NysZ4XRf2Wf
- 2PfCyPs4gZ26B04/Z2PneGh+yxz1qes=
-X-Proofpoint-GUID: 8hIwYsUBk4BGAOFqftya1BtURbZCYn6x
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI2MDA4OSBTYWx0ZWRfX+fQG4ikKEj15
- +VjVWbn1gTUJFjBD7ZSCtBKyQ7PEcTU1LTTmo1ZbzNcbRf27O3VwnmwZJihP9HrSPH6QImzUy5+
- cxMauaHJ0MJ+UuAuEJmpR9pWgwSiY5aiRQOTcyl6E8Nk3w7CfgI+K+UuhuXa2EEmDYB3Os0O2oP
- ceh0cvWb13hl4DMw/yK3/NzIFzROoSJYwVyz2KHTRfPJ4of+ktwSXTBGKjQFCXduSy2OnHWpsYp
- B58w1MfqMPkJUmYKVGiH9+EObLhBDHUnJe20n08mXOiedNsC4NUp2iQO+YshpW/WyPUUQuxTVlr
- ee2r+kh9lVrKLcuZ4LofozyY297ZP3G5fJ2Z3AA1f9MZYST/w6S0JFMwVUXH4nxjwfnaHWxxC0d
- UI15mEN7v0ZR/CUcGFvAJl2iTXY8bH5GgeOuRlyngFdyvXDQf+1lip7DGlkRiFSzxzu2zKjzm17
- 2ovl1c/9WvF9y7beNYg==
-X-Authority-Analysis: v=2.4 cv=F5ZnsKhN c=1 sm=1 tr=0 ts=6a65cd94 cx=c_pps
- a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=krItrnN2KmZux9Htc+7Wjw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=p0WdMEafAAAA:8 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
- a=iEunc7SmayLcI2BJZTUA:9 a=QEXdDO2ut3YA:10 a=tNoRWFLymzeba-QzToBc:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-26_02,2026-07-24_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 lowpriorityscore=0 priorityscore=1501 phishscore=0 bulkscore=0
- spamscore=0 malwarescore=0 suspectscore=0 clxscore=1015 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607260089
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=flamboyant.h.01@gmail.com; helo=mail-pf1-x42a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -154,118 +108,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi,
+
+The k230 machine currently models the C908 core, CLINT, PLIC, watchdogs
+and UARTs, but cannot yet model the real boot path. This series adds the
+Kendryte K230 DesignWare SSI controllers and their machine integration
+as groundwork for full boot support, enabling U-Boot to boot from SPI
+NOR through standard PIO, QSPI IDMA, and the XIP read window.
+
+K230 contains three SSI instances with different capabilities. The SDK
+numbers them according to the address map: spi0 is the SPI-OPI instance,
+while spi1 and spi2 are QSPI0 and QSPI1. The series models the register
+contract documented in the K230 Technical Reference Manual V0.3.1
+(2024-11-18), standard FIFO-backed SPI transfers, interrupt routing,
+Dual/Quad SDR transfers, SPI NOR attachment, synchronous internal DMA,
+the HI_SYS SSI_CTRL wrapper, and the spi0 XIP read window.
+
+The implementation is split so that the register model and machine
+integration come first, followed by the PIO data path, interrupt support,
+enhanced transfers, flash integration, IDMA, HI_SYS, and XIP. A single
+K230 SSI qtest binary grows with the series and exercises each layer when
+it becomes available.
+
+The final patch adds trace events covering register accesses (excluding
+DR, whose per-frame traffic would drown out everything else during U-Boot
+and Linux SPI NOR transfers), transaction boundaries, interrupt levels,
+IDMA start/completion/error, and XIP reads. The trace points are placed
+in a dedicated patch at the end of the series so that the functional
+patches stay focused on behaviour and the trace surface can be reviewed
+in one place. The events only observe model behaviour and do not change
+it.
+
+Testing:
+
+* Built qemu-system-riscv64 at every commit with the riscv64-softmmu
+  configuration.
+* Ran the cumulative K230 SSI qtest after every commit that provides the
+  test target. The final revision passes all ten scenarios:
+  register-contract, pio-data-path, interrupt-controller, plic-routing,
+  qspi-config, spi-nor, qspi-sdr, idma, hi-sys, and xip-read-window.
+* Standard SPI: U-Boot detected W25Q256, loaded OpenSBI, Linux, initrd,
+  and DTB with sf read, and reached the Linux initramfs shell.
+* Quad SPI: with spi0 configured for 4-bit transfers, U-Boot erased a
+  64 KiB sector, wrote and read back 256 bytes successfully, loaded all
+  boot payloads from QSPI flash, and reached the Linux initramfs shell.
+* XIP: U-Boot read the OpenSBI uImage header from 0xc0000000, verified
+  its checksum, and reached the Linux initramfs shell through bootm.
+* git diff --check reports no whitespace errors.
+* checkpatch reports no errors.
+
+Kangjie Huang (11):
+  hw/ssi: Add K230 DesignWare SSI register model
+  hw/riscv/k230: Instantiate K230 SSI controllers
+  hw/ssi: Implement K230 SSI FIFO and standard PIO transfers
+  hw/ssi: Add K230 SSI interrupt controller
+  hw/riscv: Route K230 SSI IRQs to the PLIC
+  hw/ssi: Implement K230 enhanced QSPI transfers
+  hw/riscv/k230: Attach SPI NOR flash to spi0
+  hw/ssi: Implement K230 SSI internal DMA transfers
+  hw/misc: Add K230 HI_SYS SSI control
+  hw/ssi: Add K230 SSI XIP read window
+  hw/ssi: Add trace events for K230 DesignWare SSI
+
+ docs/system/riscv/k230.rst     |    4 +
+ hw/misc/k230_hi_sys.c          |  169 +++
+ hw/misc/meson.build            |    1 +
+ hw/riscv/Kconfig               |    2 +
+ hw/riscv/k230.c                |  165 ++-
+ hw/ssi/Kconfig                 |    4 +
+ hw/ssi/k230_dw_ssi.c           | 1754 ++++++++++++++++++++++++++++++++
+ hw/ssi/meson.build             |    1 +
+ hw/ssi/trace-events            |   11 +
+ include/hw/misc/k230_hi_sys.h  |   55 +
+ include/hw/riscv/k230.h        |    9 +
+ include/hw/ssi/k230_dw_ssi.h   |  111 ++
+ tests/qtest/k230-dw-ssi-test.c |  917 +++++++++++++++++
+ tests/qtest/meson.build        |    4 +-
+ 14 files changed, 3191 insertions(+), 16 deletions(-)
+ create mode 100644 hw/misc/k230_hi_sys.c
+ create mode 100644 hw/ssi/k230_dw_ssi.c
+ create mode 100644 include/hw/misc/k230_hi_sys.h
+ create mode 100644 include/hw/ssi/k230_dw_ssi.h
+ create mode 100644 tests/qtest/k230-dw-ssi-test.c
 
 
-On 7/26/2026 5:05 AM, A-Shehab wrote:
-> The Zicfilp landing-pad enable (LPE, bit 2) and Zicfiss shadow-stack
-> enable (SSE, bit 3) controls live in the low 32 bits of menvcfg and
-> henvcfg, and the CFI specification defines them for both RV32 and RV64.
-> 
-> QEMU only adds MENVCFG_LPE/MENVCFG_SSE (and the henvcfg equivalents) to
-> the writable mask inside the "riscv_cpu_mxl(env) == MXL_RV64" block, so
-> on RV32 these bits are silently dropped and the features cannot be
-> enabled. This is inconsistent with write_senvcfg(), which already
-> handles SENVCFG_LPE/SENVCFG_SSE regardless of MXLEN.
-> 
-> Hoist the LPE/SSE mask handling out of the RV64-only block in
-> write_menvcfg() and write_henvcfg() so the bits become writable on RV32
-> as well. The upper-half writers (write_menvcfgh/write_henvcfgh) are
-> unaffected because these bits reside in the low 32 bits.
-> 
-> Reproducible on qemu-system-riscv32 -cpu rv32,zicfilp=true,zicfiss=true:
-> an M-mode write of menvcfg.{LPE,SSE} reads back as zero, while the same
-> program on rv64 keeps the bits set.
-> 
-> Fixes: 4923f672e3d7 ("target/riscv: Introduce elp state and enabling controls for zicfilp")
-> Fixes: 8205bc127a83 ("target/riscv: introduce ssp and enabling controls for zicfiss")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4045
-> Signed-off-by: A-Shehab <ahshehab24@gmail.com>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-
-> v2: Rebase on current master; the file moved from target/riscv/csr.c to
->      target/riscv/tcg/csr.c (noted by Daniel Henrique Barboza). No
->      functional change.
-> 
-> v1: https://lore.kernel.org/qemu-devel/20260719111749.23777-1-ahshehab24@gmail.com/
-> 
->   target/riscv/tcg/csr.c | 45 +++++++++++++++++++++++++-----------------
->   1 file changed, 27 insertions(+), 18 deletions(-)
-> 
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index 36f2004bc5..0182e4c408 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -3216,6 +3216,19 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->                       MENVCFG_CBZE;
->       bool stce_changed = false;
->   
-> +    /*
-> +     * menvcfg.LPE (Zicfilp) and menvcfg.SSE (Zicfiss) reside in the low
-> +     * 32 bits and are defined for both RV32 and RV64, so they must be
-> +     * writable regardless of MXLEN.
-> +     */
-> +    if (cfg->ext_zicfilp) {
-> +        mask |= MENVCFG_LPE;
-> +    }
-> +
-> +    if (cfg->ext_zicfiss) {
-> +        mask |= MENVCFG_SSE;
-> +    }
-> +
->       if (riscv_cpu_mxl(env) == MXL_RV64) {
->           mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
->                   (cfg->ext_sstc ? MENVCFG_STCE : 0) |
-> @@ -3223,14 +3236,6 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->                   (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
->                   (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
->   
-> -        if (env_archcpu(env)->cfg.ext_zicfilp) {
-> -            mask |= MENVCFG_LPE;
-> -        }
-> -
-> -        if (env_archcpu(env)->cfg.ext_zicfiss) {
-> -            mask |= MENVCFG_SSE;
-> -        }
-> -
->           /* Update PMM field only if the value is valid according to Zjpm v1.0 */
->           if (env_archcpu(env)->cfg.ext_smnpm &&
->               get_field(val, MENVCFG_PMM) != PMM_FIELD_RESERVED) {
-> @@ -3378,20 +3383,24 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->           return ret;
->       }
->   
-> +    /*
-> +     * henvcfg.LPE (Zicfilp) and henvcfg.SSE (Zicfiss) reside in the low
-> +     * 32 bits and are defined for both RV32 and RV64, so they must be
-> +     * writable regardless of MXLEN.
-> +     */
-> +    if (cfg->ext_zicfilp) {
-> +        mask |= HENVCFG_LPE;
-> +    }
-> +
-> +    /* H can light up SSE for VS only if HS had it from menvcfg */
-> +    if (cfg->ext_zicfiss && get_field(env->menvcfg, MENVCFG_SSE)) {
-> +        mask |= HENVCFG_SSE;
-> +    }
-> +
->       if (riscv_cpu_mxl(env) == MXL_RV64) {
->           mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE |
->                                   HENVCFG_DTE);
->   
-> -        if (env_archcpu(env)->cfg.ext_zicfilp) {
-> -            mask |= HENVCFG_LPE;
-> -        }
-> -
-> -        /* H can light up SSE for VS only if HS had it from menvcfg */
-> -        if (env_archcpu(env)->cfg.ext_zicfiss &&
-> -            get_field(env->menvcfg, MENVCFG_SSE)) {
-> -            mask |= HENVCFG_SSE;
-> -        }
-> -
->           /* Update PMM field only if the value is valid according to Zjpm v1.0 */
->           if (env_archcpu(env)->cfg.ext_ssnpm &&
->               get_field(val, HENVCFG_PMM) != PMM_FIELD_RESERVED) {
-
+base-commit: f893c46c3931b3684d235d221bf8b7844ddbf1d7
+-- 
+2.43.0
 
