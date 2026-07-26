@@ -4,115 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BDC4C53200
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 13:00:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AD8EC531C9
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 13:41:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wnyRp-0001Dv-2v; Sun, 26 Jul 2026 08:59:17 -0400
+	id 1wnz6V-0005du-6V; Sun, 26 Jul 2026 09:41:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <flavien.solt97@gmail.com>)
- id 1wnxrj-0001fk-Cc
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:22:00 -0400
-Received: from mail-qv1-xf2c.google.com ([2607:f8b0:4864:20::f2c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <flavien.solt97@gmail.com>)
- id 1wnxrg-0001fh-JY
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:21:57 -0400
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-8efb708b1a0so14885446d6.3
- for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 05:21:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785068515; cv=none;
- d=google.com; s=arc-20260327;
- b=qaFpDKgaxfiE3oXzRQff7sETi+nNK+DB9nfuTZWyLbbtKXbASxVu7T9PUmAXjlYcqN
- 6SLOdurwW/zyE6YPYC502h82CbyUOWcsjoMbdnzhQH6S31DIr7d9Tx89GmEY3ngO3Mge
- XeoE6zddwI/i873dqL0BCaW/a/pGrm3LVsy3c1VN1u220OtHSuVBfikilPiTtxOYtUC9
- qMdc7d5sU+na9anCAkWrnh1bWQ3er+rOFH82dZLKOpgRrg0vv51Wc1864WflSPFd1gvR
- Dwrs8WoEqyBkKBZOi6u9JsWqzZfxeBZGuMrKhAEC3ArlcjgpUqdr435aNwMtD0TY9dMG
- 2mFQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:references:in-reply-to:from
- :mime-version:dkim-signature;
- bh=rYHszDW0j9AqaazmGUXICI8AbZSM6RDOpOvAxriK8is=;
- fh=uyabCLEm0uqzMNAsIYkyVrHZAOjrXY7bH/yG4RoUZKQ=;
- b=i1Uod9ii91Gm51p3970JP632MpseQlHD3VHEGjbx5AXeIilm1RrLsL6Bjo4v5+Inmx
- ltUYzearPBvaoKqyj9SphNOHEnFAz6sGlm0EAWiDJ2RsnQEAdgqbE6Sf87TVp0h3Z/K/
- iUMKTegpJfWtkY9luCa1sgTWzlpEYcfkj6SXy5fJAJZ7WpHLovj0Mq5CUMBgdDEUpfVr
- NMKjXGMvfg3Eo6S+/yU0SoofnRLjv4EqYZ/7/cks3kKHNVrjIOKRc+xzwmZFkrLrad4e
- hX9rSHDm73TXS5xMS4ALug2nFXrxSF+ebiOY8azeBJD7IRx6YllwqoTbelDkEDC+QX/v
- nJYA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785068515; x=1785673315; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:references:in-reply-to
- :from:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=rYHszDW0j9AqaazmGUXICI8AbZSM6RDOpOvAxriK8is=;
- b=PTF5Wqhe02D/cYXVxVPHWBjp6wda8/kMtwzSL7oX/C0UlGFrE4h+M2FmWhobMjh+Sc
- Gm99UesQOE5nkG/Zish9JoEBASJmmi5ZQOeiCJxlqtZ7QY76tj9FXN84EGmL2QBK3YiT
- ala8/2o+pCNTBDsZZb83NxHcC+LMjOd8TBuNX7OGtcGtXBS/bB7NPQ8MN50t0Hi9SOS4
- CY6jctqSLBGh82ZVvD5Sn0bg97lp4tr0FcHIlwNLnV4d5PvQVB6USLTWQA16hmlbemfe
- W7nZ6W0+gUfneVVoZU2nM4jVmC71+p1638VzjIJKRz3x9ampAsJ/gifCJdmfeXDpfxb8
- l+iQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785068515; x=1785673315;
- h=content-type:cc:to:subject:message-id:date:references:in-reply-to
- :from:mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=rYHszDW0j9AqaazmGUXICI8AbZSM6RDOpOvAxriK8is=;
- b=VjAR7lPAplZhWrNAV1ZKlBCOq7bkv0bQm/fGEckQS4/AbIu+g+BQliEYT4D0ek7wwL
- mRnYmjGrnWAzSVLc8M0VLoRvjQhl3CM9zADz3CKYZm0DhQFN+HQeZQhEkWBDV6CNH6jX
- cFoGfeRd4ketIEP/uTuV4TUVpaGYQbQTVyFz+uRJxbteKR2Sx8TZ9+KhH3wFHjDKdMfh
- M+p8gqTsYvhYotV7Orf2fClmOhJ3IDkdIiktDm4tU/lMchTRmOjXGA4hvoh/UbadS4Do
- fb6wuqPn2xHXSZbCR9wrSld1nRuPikVYIkCK1rqLw41K4aK4PupVdD2bcvje9rrHLzt/
- Gm2A==
-X-Gm-Message-State: AOJu0YwL6RPwffX62dzXkdHRV1ZE5J3RrItDri5RsJLmm7byY/TqwJ4L
- v8L4z698Zk+pRDn3iRJVtMW+2ASP9pdrmHt8Vq5cfA0MzbLmcE0uVtMwWcRkC5EUOex89FqvQ3p
- M5FgKQre0M/SGM4NndNvUIYcUTPH2hio=
-X-Gm-Gg: AR+sD12ZrEKR8RflVMc7w0tdciox2m6UoG1RZyGb/dtGjYb5ZTyJdHKqjgwDtYzhZZV
- AuvuP8kNAJ7x5C3nkwbbO2Dk1U7nu3+ipSNbHhFA/OxPuW4iRD+JkCUPv6ArwLeak4cNcSuOu4g
- 6VGbfg2NCeSJqFwG8W/Ol08K4xG+wz49NFJDTL72mhVP2IedKg4qChUcSfmWVRZjsdTNC2vQM/d
- LWTMJ2yHRA2yrgl56RMWczQohx/uguj6lq70xXhFGBEv4cE3Ru4IZGidXUktP/yZoBiyBhp/PL4
- TwCuJs5QI0FQ9Rau2A==
-X-Received: by 2002:a05:620a:2617:b0:92e:9cb3:3f71 with SMTP id
- af79cd13be357-932df5eeca8mr502396985a.36.1785068514780; Sun, 26 Jul 2026
- 05:21:54 -0700 (PDT)
-Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST; 
- Sun, 26 Jul 2026 05:21:54 -0700
-Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST; 
- Sun, 26 Jul 2026 05:21:11 -0700
-Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST; 
- Sun, 26 Jul 2026 05:20:09 -0700
+ (Exim 4.90_1) (envelope-from <dingtao0430@163.com>)
+ id 1wnz6S-0005dN-W4; Sun, 26 Jul 2026 09:41:17 -0400
+Received: from m16.mail.163.com ([117.135.210.2])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <dingtao0430@163.com>)
+ id 1wnz6O-00064r-Sp; Sun, 26 Jul 2026 09:41:16 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Content-Type:Message-ID:Date:MIME-Version:Subject:
+ To:From; bh=JiXyN3AM2zGEa4b3xq3EXzMr40W951LJ0l1kXWm48vc=; b=GSXL
+ fKaeuEY0D5UbmRARa7sTVE9/6utp2a2QLSlrDY1INjKA//z9dky1Neu6bF2LfDjd
+ nQdDU2pTfOGWGVlsdNjEAoctSSLRVCHnXNncJ9NZgC9ydRsT0ARTogcycDMPKyRv
+ rRAI2YtpmoE/bd3ersPSDGcZgvWPiYWjzlR5V+k=
+Received: from [IPV6:2408:8266:ba01:5541:f862:fcef:372b:3496] (unknown [])
+ by gzga-smtp-mtada-g1-4 (Coremail) with SMTP id
+ _____wAHhdlgDmZquY57MA--.19850S2; 
+ Sun, 26 Jul 2026 21:40:48 +0800 (CST)
+Content-Type: multipart/alternative;
+ boundary="------------WPfMADm9LVBV7VF0omcZVp7w"
+Message-ID: <f50ef53b-4efc-4dd4-93e4-1e35f499f79c@163.com>
+Date: Sun, 26 Jul 2026 21:40:48 +0800
 MIME-Version: 1.0
-From: flavien.solt97@gmail.com
-In-Reply-To: <CANVUYGtOgMnNRkfU=zs=jvtg7yKOHXZVb8k5oVnp+D2=U4xeWA@mail.gmail.com>
-References: <CANVUYGtOgMnNRkfU=zs=jvtg7yKOHXZVb8k5oVnp+D2=U4xeWA@mail.gmail.com>
-Date: Sun, 26 Jul 2026 05:21:54 -0700
-X-Gm-Features: AUfX_myu_3RtLfEw5Ykzc3zSdO6Ztl0os6GynQKVkbpeXOAEb03rcyYkURJh4VE
-Message-ID: <CANVUYGvfGv=C4qEcANeiLO6bFF1xChn49z9ONdcJfnuh0-Wc1A@mail.gmail.com>
-Subject: [PATCH v2 2/3] hw/riscv/riscv-iommu.c: always send MRIF notice MSI
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-stable@nongnu.org, 
- Andrew Jones <andrew.jones@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2c;
- envelope-from=flavien.solt97@gmail.com; helo=mail-qv1-xf2c.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/7] hw/dma: add K230 gsdma
+To: Junze Cao <caojunze424@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
+ palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com
+References: <20260721161335.73872-1-dingtao0430@163.com>
+ <20260721161335.73872-2-dingtao0430@163.com>
+ <178504345275.903105.7911994626854937851.b4-review@b4>
+From: Tao Ding <dingtao0430@163.com>
+In-Reply-To: <178504345275.903105.7911994626854937851.b4-review@b4>
+X-CM-TRANSID: _____wAHhdlgDmZquY57MA--.19850S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7WFWxZFW5Aw47Kry5Jr18Krg_yoW8KFyDpF
+ W5GF1DGr97Xa1a9Fs7Ww4UuFyF9wn5GF4q9rn5W397Zw45WF1IqrWSgan0qry0kr4DA345
+ X3W2qr90934DZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0z_ku4UUUUUU=
+X-Originating-IP: [2408:8266:ba01:5541:f862:fcef:372b:3496]
+X-CM-SenderInfo: pglqw3tdrqkjqq6rljoofrz/xtbC4gHPDmpmDmE40AAA3p
+Received-SPF: pass client-ip=117.135.210.2; envelope-from=dingtao0430@163.com;
+ helo=m16.mail.163.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
+ RCVD_IN_MSPIKE_H2=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sun, 26 Jul 2026 08:59:12 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -127,51 +77,181 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The AIA specification requires an IOMMU to send the configured notice
-MSI after storing an MSI to an MRIF, even when the corresponding
-interrupt-enable bit is clear.
+This is a multi-part message in MIME format.
+--------------WPfMADm9LVBV7VF0omcZVp7w
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-riscv_iommu_msi_write() currently reads the MRIF interrupt-enable
-doubleword and suppresses the notice MSI when the matching bit is zero.
-This makes notice delivery depend on a bit that AIA requires the IOMMU
-to ignore.
 
-Remove the enable-word read and send the notice MSI unconditionally
-after updating the MRIF pending bit.
+On 7/26/2026 1:24 PM, Junze Cao wrote:
 
-Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-Cc: qemu-stable@nongnu.org
-Reviewed-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
-Signed-off-by: Flavien Solt <flavien.solt97@gmail.com>
----
- hw/riscv/riscv-iommu.c | 13 -------------
- 1 file changed, 13 deletions(-)
+> On Wed, 22 Jul 2026 00:13:29 +0800, Tao Ding<dingtao0430@163.com> wrote:
+>> diff --git a/hw/dma/k230_gsdma.c b/hw/dma/k230_gsdma.c
+>> new file mode 100644
+>> index 0000000000..1f76f62fa0
+>> --- /dev/null
+>> +++ b/hw/dma/k230_gsdma.c
+>> @@ -0,0 +1,532 @@
+>> [ ... skip 75 lines ... ]
+>> +    /* Stride line size required for 2d mode */
+>> +    uint32_t line_space = extract32(line_cfg, 16, 16);
+>> +
+>> +    bool dat_mode = c->cfg & K230_GSDMA_CH_CFG_DAT_MODE;
+>> +    bool src_fixed = c->cfg & K230_GSDMA_CH_CFG_SRC_FIXED;
+>> +    bool dst_fixed = c->cfg & K230_GSDMA_CH_CFG_DST_FIXED;
+> The handling for chx_dat_endian is completely missing here. Could you please check this register field in the TRM and implement its functionality?
 
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index f6865d1..2bbac30 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -788,19 +788,6 @@ static MemTxResult
-riscv_iommu_msi_write(RISCVIOMMUState *s,
-         goto err;
-     }
+It will be added in the next patch.
 
--    /* Get MRIF enable bits */
--    addr = addr + sizeof(intn);
--    res = dma_memory_read(s->target_as, addr, &intn, sizeof(intn), attrs);
--    if (res != MEMTX_OK) {
--        cause = RISCV_IOMMU_FQ_CAUSE_MSI_LOAD_FAULT;
--        goto err;
--    }
--
--    if (!(intn & data)) {
--        /* notification disabled, MRIF update completed. */
--        return MEMTX_OK;
--    }
--
-     /* Send notification message */
-     addr = PPN_PHYS(get_field(pte[1], RISCV_IOMMU_MSI_MRIF_NPPN));
-     n190 = get_field(pte[1], RISCV_IOMMU_MSI_MRIF_NID) |
--- 
-2.54.0
+>> [ ... skip 39 lines ... ]
+>> +            remaining -= chunk;
+>> +        }
+>> +
+>> +        if (!dat_mode) {
+>> +            if (llt_cfg & K230_GSDMA_LLT_2D_MODE) { /*2d mode*/
+>> +                src += line_size + line_space;
+> The 2D mode semantics here don't match the TRM.
+> According to the TRM, when in 2D mode and SRC_FIXED equals 1, the correct behaviour is that SRC_ADDR should not increment.
+> There is currently no check here to determine whether SRC_FIXED is set to 1.
+
+yes, it's a bug.
+
+>> [ ... skip 62 lines ... ]
+>> +            return;
+>> +        }
+>> +
+>> +        addr = next;
+>> +    }
+>> +
+> When CHx_CTL.START is written via MMIO, the entire llt is processed synchronously. During this period, the vCPU is unable to stop, resume, or reset command. This could potentially cause QEMU to be blocked here for an indefinite amount of time.
+>
+> For the implementation, please refer to the reference in i8257.c.
+
+Yes, the transmission is processed synchronously after startup.
+Only when the software is set incorrectly, such as LLT being a circular linked list.
+DMA may fall into a dead loop, in which case stop and other operations cannot be performed.
+I think we can add a limit on the maximum number of LLT processing times.
+For example, when transmitting 1GB, assuming that LLT is performed every 4KB, the number of LLTs is 1GB/4KB=0x40000.
+
+
+>> [ ... skip 315 lines ... ]
+>> +static void k230_gsdma_class_init(ObjectClass *klass, const void *data)
+>> +{
+>> +    DeviceClass *dc = DEVICE_CLASS(klass);
+>> +
+>> +    dc->realize = k230_gsdma_realize;
+>> +    device_class_set_legacy_reset(dc, k230_gsdma_reset);
+> This interface is no longer recommended for use. For further details, please refer to the comments for this interface in qdev.h.
+>
+--------------WPfMADm9LVBV7VF0omcZVp7w
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <pre class="moz-cite-prefix">On 7/26/2026 1:24 PM, Junze Cao wrote:
+</pre>
+    <blockquote type="cite"
+      cite="mid:178504345275.903105.7911994626854937851.b4-review@b4">
+      <pre wrap="" class="moz-quote-pre">On Wed, 22 Jul 2026 00:13:29 +0800, Tao Ding <a class="moz-txt-link-rfc2396E" href="mailto:dingtao0430@163.com">&lt;dingtao0430@163.com&gt;</a> wrote:
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">diff --git a/hw/dma/k230_gsdma.c b/hw/dma/k230_gsdma.c
+new file mode 100644
+index 0000000000..1f76f62fa0
+--- /dev/null
++++ b/hw/dma/k230_gsdma.c
+@@ -0,0 +1,532 @@
+[ ... skip 75 lines ... ]
++    /* Stride line size required for 2d mode */
++    uint32_t line_space = extract32(line_cfg, 16, 16);
++
++    bool dat_mode = c-&gt;cfg &amp; K230_GSDMA_CH_CFG_DAT_MODE;
++    bool src_fixed = c-&gt;cfg &amp; K230_GSDMA_CH_CFG_SRC_FIXED;
++    bool dst_fixed = c-&gt;cfg &amp; K230_GSDMA_CH_CFG_DST_FIXED;
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+The handling for chx_dat_endian is completely missing here. Could you please check this register field in the TRM and implement its functionality?</pre>
+    </blockquote>
+    <pre>It will be added in the next patch.</pre>
+    <blockquote type="cite"
+      cite="mid:178504345275.903105.7911994626854937851.b4-review@b4">
+      <pre wrap="" class="moz-quote-pre">
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">[ ... skip 39 lines ... ]
++            remaining -= chunk;
++        }
++
++        if (!dat_mode) {
++            if (llt_cfg &amp; K230_GSDMA_LLT_2D_MODE) { /*2d mode*/
++                src += line_size + line_space;
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+The 2D mode semantics here don't match the TRM. 
+According to the TRM, when in 2D mode and SRC_FIXED equals 1, the correct behaviour is that SRC_ADDR should not increment. 
+There is currently no check here to determine whether SRC_FIXED is set to 1.
+</pre>
+    </blockquote>
+    <pre>yes, it's a bug.</pre>
+    <blockquote type="cite"
+      cite="mid:178504345275.903105.7911994626854937851.b4-review@b4">
+      <pre wrap="" class="moz-quote-pre">
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">[ ... skip 62 lines ... ]
++            return;
++        }
++
++        addr = next;
++    }
++
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+When CHx_CTL.START is written via MMIO, the entire llt is processed synchronously. During this period, the vCPU is unable to stop, resume, or reset command. This could potentially cause QEMU to be blocked here for an indefinite amount of time.
+
+For the implementation, please refer to the reference in i8257.c.
+</pre>
+    </blockquote>
+    <pre>Yes, the transmission is processed synchronously after startup. 
+Only when the software is set incorrectly, such as LLT being a circular linked list.
+DMA may fall into a dead loop, in which case stop and other operations cannot be performed.
+I think we can add a limit on the maximum number of LLT processing times.
+For example, when transmitting 1GB, assuming that LLT is performed every 4KB, the number of LLTs is 1GB/4KB=0x40000.
+
+
+</pre>
+    <blockquote type="cite"
+      cite="mid:178504345275.903105.7911994626854937851.b4-review@b4">
+      <pre wrap="" class="moz-quote-pre">
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">[ ... skip 315 lines ... ]
++static void k230_gsdma_class_init(ObjectClass *klass, const void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    dc-&gt;realize = k230_gsdma_realize;
++    device_class_set_legacy_reset(dc, k230_gsdma_reset);
+</pre>
+      </blockquote>
+      <pre wrap="" class="moz-quote-pre">
+This interface is no longer recommended for use. For further details, please refer to the comments for this interface in qdev.h.
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------WPfMADm9LVBV7VF0omcZVp7w--
+
 
