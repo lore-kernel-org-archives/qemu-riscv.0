@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B219C531F9
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 07:43:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 151D0C531F9
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 07:45:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wntW7-00044f-Bv; Sun, 26 Jul 2026 03:43:23 -0400
+	id 1wntY2-0004gw-I2; Sun, 26 Jul 2026 03:45:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wntW5-00044L-5w
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 03:43:21 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1wntXp-0004aU-Lf
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 03:45:11 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wntW3-0004ke-KM
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 03:43:20 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2cad85b7b5aso2652145ad.1
- for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 00:43:19 -0700 (PDT)
+ id 1wntXn-0004ob-C0
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 03:45:09 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2cad85b7b5aso2653765ad.1
+ for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 00:45:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785051798; x=1785656598; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785051906; x=1785656706; darn=nongnu.org;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=b9KU7z4y4buiVrgRcV1hklRK/bdxHz8ig1mbBaIdLeQ=;
- b=UC3RfyjqCT9ZDU0bgzS8mpTAnnMCO1n64ZpdV1bkzk6O/QfzoMC/HrYDIbd44R/kK+
- 8WWONbtLO5QkCZeBF5qyMKF2FML/BJfkvz3mvs4uea9MeatH86itNznD8VoToEM2IbR1
- IJAsGpkST5UZynQEv4Hw2NAUfe9OeljH8Fy9FKYKo8l6j/FCtvpP6oZpARfuDdZqml7P
- KiQI/a+cNMG3QJ3jFetYtPo/1zt9tExoCRvt5h5LE3OW/aNrawyfS8rst22LSwXumUDB
- l1gBL5LPu6gOfMAfVUSL/PdddSFYXxiNEDXXHgQ+mVc4YnsWp/IEPx81zpc7TrB2EBYh
- i/GQ==
+ bh=5zepJt2tXsansCFxMv8tU8qJmMzWfPWX4SjXZhlCkpc=;
+ b=iCJIvjTlSyTyfM3B9+ebmazr7VYTRxGHBmPNDjqIacSid3MaXerSwgSn0LWmP3sfKC
+ dm+VRQr4m6eLGPmVzKdPQVfoCACZ3k5ZkVqZqm1avJ8A7ZiA7H+b+3dwHD9CsbX3YDAT
+ GV93RkBIvo8ywr32gEJ2wcS8msX4SUyFnYHS+hemx7lQ7UQCHlwVs2OijgkUXPHTThzy
+ Y9I4bpv/u/6Nfcv765Mk4UUlBJPz/xQv72lX/2R1xoe55UfE2ms8MSx8HqojPx8cEMAV
+ YxqN8awzwrWGI5eZyzQZW8HAV4vZ3aI6uYMmLWaVa7nBP5c2p0lWiX0r5bNdabZ1ZK65
+ qzfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785051798; x=1785656598;
+ d=1e100.net; s=20251104; t=1785051906; x=1785656706;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=b9KU7z4y4buiVrgRcV1hklRK/bdxHz8ig1mbBaIdLeQ=;
- b=i6r8pv71LAZoYlgUWe2MGoj+d6IwJf0p/T7IBsfyRuWCfdvEjLgiQ+wqzvtHVuXZQH
- oEKXszafjkJLYww4wYo0N1HMWcAwnIwqi5y0Hez4hLvQpzWM4gUQ4IF+1gFzmYwTHfS7
- BiPdM2Y+xTHxL3rj9bfjypZNGfiAvwS9f6axsIwWfwdV4qr7oFy5x+Ip5RqpZuvtM9/+
- GuR4YftmZ7GM+bkLl9WEZJiw+Ga9Dvohz8JjVjNs7o67DEhgf4toUIilg8sTmQImXekv
- cJhEyq+J0MjvNW1Vuml7xmcboT4rWDbmqeXYJ9XyV9Pssu3/1b+A4mL8wztsVDm4ohi0
- BfMA==
+ bh=5zepJt2tXsansCFxMv8tU8qJmMzWfPWX4SjXZhlCkpc=;
+ b=c85E6G/nye/ihtDvCa6VDChhYwIFRTWanyP8rhWn66vrYFqVqvd6jyUBSeMVXobnKu
+ K9hnAbT/ACXSN/as018zAZZ+wy46TjrtcBjoz2Fz8Na+sicV0UiPKsqdPJj1VKOQmxaR
+ TpX9t9pNjAwoJJVZImE303nUSi1dmcbwXejYcNlQ/NeJu0Q0XMvTQbviGH//Wg/rrAB3
+ DIeN8qv5NNqsTI/jLX+8sC679VBr+Idf2dAOTkFN/6CQac3EYW/L8vOd+pJhQoMOM5N/
+ 9XISu1i30AUOqSBu8+X8wyUMpAKNIhCxsVkeTF4DsMagu8pIu7pRTobObBCx92e4mbPe
+ sOjg==
 X-Forwarded-Encrypted: i=1;
- AHgh+RrLQX0N+D6lFZUo9IrfDRjP0bqAvyhqpRIujlHrXzvYG6Mjm8/F7oADCl6QWdhhtIXtU2FLjs9y/erS@nongnu.org
-X-Gm-Message-State: AOJu0YwN7Tm8JCTpBQ/4ofEGotRCzimkh6OmneUHEFGjxGJOuMg2bzpa
- O1lHLWAmubCUJ5GYS5+UttMXVmMt02wIRj4R475VycSJdMEVqLsWJHBz
-X-Gm-Gg: AR+sD11gVCAaAq6aP7LaBjelYLgEJ+n5hsy7P1CNQQAgqVjCz/pIGYe2TDx5j6vPOV+
- sPMpW7SXT4usyOa1gHtStlAeGm9KE5vg+Ot5LB4+O8tTqFz1wU71XPtvEqsivwbOoJk/vNRUlQX
- jGOYiA/tZfRWn2ySYSASFC7yISTuZjuhH02JBrTpPsl0OvokI8WRwyelxEqy1ewMm1woEJV2l/c
- lso2YmB9zcYgK9rKCpONiRl/eOEfZ5lisj4cGLFqL+vQTBuNKm7+uvc48DEUr61KhLazsLKCaL9
- rQgI8lrIw7omXNIx8F1c5KI89yyzEwVryj1uMLAf7edL/ExX2VPRtXO7Rv4KR9HOknUoRpO7SC0
- LZsumtRXAApA+0JpACBJl2+v4AMxIdDxgbPK6OOhPZh3/eU1hqE0KGyWNrJDxAvde9EoN7teRHQ
- O8C8zE0gZyIRm6v4QxHHlU
-X-Received: by 2002:a17:903:390c:b0:2c9:fbde:ab68 with SMTP id
- d9443c01a7336-2cfde844f2bmr58129325ad.3.1785051797884; 
- Sun, 26 Jul 2026 00:43:17 -0700 (PDT)
+ AHgh+RryqZ2Y63Yame9uYOHfBtRk/yItEYZg15Tc8BtpaVG2txkfd4mZI0K3SeHCFaw9JwhDoWocQDzLtQSg@nongnu.org
+X-Gm-Message-State: AOJu0Yz5r5V1TYAkNRcImotx/mr/3cY0yX8/j6FNkvNowug/FIKc7ykz
+ GpRfZgidSaOXC2a+tlvnnWP/bn5OP6bOfXKKZuxaBNC1tYe0KN3D8yEn
+X-Gm-Gg: AR+sD13o1EZOrKaPMvf74mqd3Rm7sv6L51XckCnV6wrI+PCVfnDWRU4LrWLjKyOqV3B
+ cAaROHHzw94h8evVMFDhxT6YExteJ6uVWbAEw9zg+79RzkVhFgQzZiBnWr0/uM1RMK/LlAfE//L
+ dzoRKzWzwNKSuyXqrIK73oKDCwlAe59hCM3Rp1oViFc6gRZPs7yMNIr7KhHEuiEwC85HJbQRI19
+ Ud2Xyus0Jz91pgXjBSTfViq2N9rpkZjo9h+b9ZrLhpQW8XGvHuU2/l22Ccz6k6yhbrhX2zx2WvD
+ hijGwuOaIlJkYkl62ki7TqN7Il8ub7d7k116eY8zMQyVeVtni+xFFVZGUPvo32LptitCxWn1swf
+ AiLOs2K0tz5/LDRLEqxbAOyD3oeLcRt9A1xu1ijDhYqRe+qKVNnKjw4qJC6NO24lDm8dNebPMeI
+ huM9cGM/PM98Qx2u2V4ba8
+X-Received: by 2002:a17:903:1aae:b0:2cc:e7f3:d39e with SMTP id
+ d9443c01a7336-2cfde683892mr57972455ad.2.1785051905825; 
+ Sun, 26 Jul 2026 00:45:05 -0700 (PDT)
 Received: from DESKTOP-7HME356.localdomain ([38.34.7.236])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-314bc548e63sm18236602eec.19.2026.07.26.00.43.14
+ 5a478bee46e88-314bc3e1255sm28155188eec.4.2026.07.26.00.45.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jul 2026 00:43:17 -0700 (PDT)
+ Sun, 26 Jul 2026 00:45:05 -0700 (PDT)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 5/7] hw/riscv: k230: add decomp gzip in K230 board
+Subject: Re: [PATCH 7/7] hw/riscv: k230: add a noc stub region in K230
+ board
 From: Junze Cao <caojunze424@gmail.com>
 To: Tao Ding <dingtao0430@163.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
  palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
  chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com
-In-Reply-To: <20260721161335.73872-6-dingtao0430@163.com>
+In-Reply-To: <20260721161335.73872-8-dingtao0430@163.com>
 References: <20260721161335.73872-1-dingtao0430@163.com>
- <20260721161335.73872-6-dingtao0430@163.com>
-Date: Sun, 26 Jul 2026 15:43:12 +0800
-Message-Id: <178505179207.940286.1406120293278713894.b4-review@b4>
+ <20260721161335.73872-8-dingtao0430@163.com>
+Date: Sun, 26 Jul 2026 15:44:59 +0800
+Message-Id: <178505189962.940286.11302517412616157706.b4-review@b4>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785051795; l=681;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785051903; l=930;
  i=caojunze424@gmail.com; s=junze-gmail; h=from:subject:message-id;
- bh=Y5S6DlMXNN8pl1AoHZnUuI7INPc9wZud/rupcev/3Rs=;
- b=5z7ih+Aeci4FPuUU04aRDEFMgtxG+gmmsviP1d43oWTCr0IWgY+XJs+CkK+KTApw+Qb1ZLl8h
- l4TjOQaBBIKCJ1J2eooX+PaWnoulavGjOI+t0mChgaduhdJ9jfD/Pw1
+ bh=5ozCAA3hwnEZgPYB8rIc6gXwM3rj8BzGJd/eFkWsWtI=;
+ b=s41npXniTFpEGGMGsj+BVu5ZCcZkQgvUZLjkgj9zAhqLaG7TDlhHQ5wjtEipGpQJJT/HgjqLI
+ f9h6WGzvByeDrdMkkZExQeuxh9i3rCDCLMlA/mbvJsYBdTK2MbHUXzR
 X-Developer-Key: i=caojunze424@gmail.com; a=ed25519;
  pk=lnFIWNw+6CoDrHFIKUJKdgrRbvgAbQGcEFiVsIigOJ8=
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=caojunze424@gmail.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=caojunze424@gmail.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -115,19 +116,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 22 Jul 2026 00:13:33 +0800, Tao Ding <dingtao0430@163.com> wrote:
-> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-> index 156a386edc..a12d36965a 100644
-> --- a/include/hw/riscv/k230.h
-> +++ b/include/hw/riscv/k230.h
-> @@ -35,6 +36,7 @@ typedef struct K230SoCState {
+On Wed, 22 Jul 2026 00:13:35 +0800, Tao Ding <dingtao0430@163.com> wrote:
+> diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+> index 7fd1ec4c25..ff834d6724 100644
+> --- a/hw/riscv/k230.c
+> +++ b/hw/riscv/k230.c
+> @@ -234,6 +234,9 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
+>                                qdev_get_gpio_in(DEVICE(&s->decomp_gzip), i));
+>      }
 >  
->      K230WdtState wdt[2];
->      K230GSDMAState gsdma;
-> +    K230DecompGzipState decomp_gzip;
->      MemoryRegion sram;
->      MemoryRegion bootrom;
->  
+> +    /* Noc stub, the k230 decomp_gzip driver in uboot will access this region */
+> +    create_unimplemented_device("noc-stub", 0x91302000, 0x1000);
+> +
+>      /* unimplemented devices */
+>      create_unimplemented_device("kpu.l2-cache",
+>                                  memmap[K230_DEV_KPU_L2_CACHE].base,
 
 Please disregard the Reviewed-by tag in my previous reply; it used an
 obsolete identity. The review itself is unchanged.
