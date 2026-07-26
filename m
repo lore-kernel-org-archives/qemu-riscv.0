@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 157A0C531FA
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 05:31:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46A6C531CC
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 05:55:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wnrSL-0007Iv-H6; Sun, 26 Jul 2026 01:31:21 -0400
+	id 1wnrpP-0005Cm-L1; Sun, 26 Jul 2026 01:55:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wnrSK-0007Id-5p
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 01:31:20 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1wnrpO-0005CT-SJ
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 01:55:10 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <caojunze424@gmail.com>)
- id 1wnrSI-0006LI-G6
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 01:31:19 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2cf49dc28ccso3165945ad.0
- for <qemu-riscv@nongnu.org>; Sat, 25 Jul 2026 22:31:18 -0700 (PDT)
+ id 1wnrpN-0000VI-Bm
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 01:55:10 -0400
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-c8612812170so223153a12.2
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jul 2026 22:55:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785043877; x=1785648677; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785045308; x=1785650108; darn=nongnu.org;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=Gh5SGwp3syKEsgHMMV7WvgBsAMLiuwFuownj8+ZpGMs=;
- b=MMyyZfySWRwkqA3E62/CGBuJLiYhChOJ4njKlQphhucO+gIRLXkl1TmqAOkF+os8fB
- eJiP94N6cTESEWTy8Z20WEVrXPdpc+Sy6x235AESA0qOmZmafDiUT+U29z7gZqP46nJz
- A0LhuUKslV1qdeqXMfvQzLn4ECOnAsKsfLSXhMfmB93s+O/UH6v2BW3KpSAIKe9uHh1M
- JigN2wzfgl2T0m3cgLENQ7J443qlG/JqBaOyQNpmik0k+hHlpCDuOyLfof5PtE/WSf3R
- /Qa0oNgfo+DLHIqLMMteTF+UTxB3zHOS+8rWJsV4zME3qMnJsIyQ1JB+2PIRe2zkPW5k
- sfvQ==
+ bh=xUM5ZXHD/oLWvFDoO+hHlLuSDfgeblRNtAYDQvQBs2Q=;
+ b=sgov9Tjv9Yj6zjeTZu0VLlIow6chFznAFOdob0xo0F8Pytj/FZ9Ipp57+/DrKLr21D
+ 83+rwPKizxLEnd6ygj33d0K4YcbxtOReDWn8bsk6a/FPbbUmo/3NUF/+MaXK1LBtPG3l
+ RDQDbfaj7za7hjmZmZdrAcZqfzop2xbXOMAbL5sePl7hfFWtX10XkfovMqFdtaBfDZhI
+ eNRpmoAn/m6q+IccDIeX92VSDfFIdooYDg44XM9n9MjbSjHFCoL9nearmExni9zc5kaC
+ UExagu5DPHtZW1UD7GNwAw1+ohqZKXbDt0z5GqAhKpF9StJ2Cg9tYUDSklOIyqLTNfSc
+ EUkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785043877; x=1785648677;
+ d=1e100.net; s=20251104; t=1785045308; x=1785650108;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:content-type:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Gh5SGwp3syKEsgHMMV7WvgBsAMLiuwFuownj8+ZpGMs=;
- b=awvTRDHHjfP+pe4jo9OKJeoElvV9+CGQlMM4qAznJRNyXWSHUP7PKb8C2+9VKri+X1
- fzlXLGhmoA1BKmevWvEllZZjfafLXxmfbhTWyaXbu/+OCFdCnu7kDhfxZ8oYiN66rx0j
- Oj4yEJ/UTodeniWk2AfUpAKPK1e8qQ0u1lt3CKerm0rKkIFMJcSuEpzOf4dnG4seuEP/
- iURav4LQn5km/xB7gDe55u8I4Z7RasWnSs+j6rMU/CAlveaxnKyyHWOUKbZBRGj02Ba0
- LXifugeslUy5UaztMHVKOyghSG0+gnfijLrKdgcE3zQSrAx9C5xtwwngMkTzYDp83GkN
- NIHA==
+ bh=xUM5ZXHD/oLWvFDoO+hHlLuSDfgeblRNtAYDQvQBs2Q=;
+ b=m8HqAgTjWbczleFXcX2HjYMicDNwjp8WuVP+BStrxGAT+ufZQRr57h851OGLS4c2Ru
+ 9xdeBmgIKvGyULZ2cc+r2amsWRlioSpPujwEhEjPb+3roN5lHkL0cf4MmHNYoAKTQrcr
+ rQD0RSL+pTLt1+AC3jkv/gsr9AKGLAmiBoupO8M3XHCvchs1sRwvhjHKjuhHW/wLuC+L
+ oeV6ojT5d/MnuSY6GgDW4sppSGmcuI7JqjMFjdnAHxYabXGNriErPWGSwqXunrT5xybk
+ 1y5NCFaCgoq4TUW6OXmHyQrm2QBHO4ZVJB2FnhqqsscB3bldD4vbgy/9VHbO4psWANBP
+ Nkmw==
 X-Forwarded-Encrypted: i=1;
- AHgh+Ro2iXpnxXcEulEL5I329uJ8FxUUi8xyGxn0X39kRhN1MY3khZ5+1BcUPcAgow1HaRXkfQQxmhrEqkf8@nongnu.org
-X-Gm-Message-State: AOJu0Yw71yvJ+8kc7FbYHiukNNnK09ZqJ/n2bJh86FOgPO+a/PeKemB+
- Lhl/QpPxw2TPmunuPmM0PwSS0UqHB/HUgzmPH1EMG8QP5FMajpWREzjR
-X-Gm-Gg: AR+sD11tQogOqDjiHlnhh1iBY0qKKX/W/jKoc1SuWkAJipz3GdYkSpn9PXODLlTNwML
- BGb/bV3wm2+LBgnPjYT7Nqg13htZWgzEp6nzwwOMsxMceMicvDCFweE7sVo3bfaF8AXUd3EFCiH
- KCiXfbkBkAcXe2SxMoYN4Db22OgG697/QYOQZSAUyO66KFUvk9YHxZhEmVY758i6figFc7DGHKz
- /XimjePi+7C1HvFfk7ibrP7CIcCN8u5ocY6BJoDTSpnZjfJioOa7k9w9Oyq5hdcv+78Kx6W6+rN
- IxccJaPPD6CVF2PZm7tA01MY2RFobyS2PfoqF6OKWgbcFZJybBWlk6w/xSE3uwvt8nPCWUpJfSG
- Z8MZSzEI5aPVVa6A2ENnVCLEUzCzt22nfTAbS8Ru1OTohzvhkwEDD5l04UvXEkr9IKU89siFd7i
- TuSpK4vJzLlnOc8xeOt+66
-X-Received: by 2002:a17:90b:2f8c:b0:38e:c140:2a0b with SMTP id
- 98e67ed59e1d1-38f29604998mr2953166a91.3.1785043876910; 
- Sat, 25 Jul 2026 22:31:16 -0700 (PDT)
+ AHgh+RpSNOvtVQvKDFQKM1G7aN8xZeJlcfamPRJVxmwTYS2z+rvloWYg67Gbx6SQBnIcOZZ3R0jU/ZK0Uknb@nongnu.org
+X-Gm-Message-State: AOJu0YwshNawRo+DREJ9qSDh1+gT/8rio1QfCG0yj+cZXiQkPJCL/aQZ
+ MzlXVWSG8bxmDbo5OXCh1lunWrhoal2Km5JCSkMRv/b/w0DUCXM6qWenx5kz/Wpky6Q=
+X-Gm-Gg: AR+sD124Od9cTeF4Dn821QMaTB2Cy0W5KStCsLSZHsM98s+0BDVo3Yj1FX096vgoPke
+ BPG3buoacER9mWNvZ91lXXjboZRX+sJM7fcLhdS0K6z619YxcykRu2m7x0xweypBcARzSaU+Rrd
+ 63hNwz3z6TENU88a0HMdiH+lcHzFq+1VIz4lp0vUpjOtvWO+pbVmQKfEXLgfJclJiHIZseja+hf
+ b03IiXnYDW8IOpphtExdnoiaIWw8lvr/6Hq53FWK8YOROcK5dHcDXFtoM2EZ0VUZJ5E/f5gVmoN
+ R++8NYrHiUnoCiC7ANncKkJZwYsErWyaxjNjouBjhk5a37aUJ/Q2jQyJMgf6kDYudkoLolNX6Ml
+ kGz8BbDcks7SRTecWWkEpEzaeeZy+isT4P5G/7F+cWDrVzuPjGaaZzgzfEdQ+fEvupuIka2s+Hk
+ I0KjJHBGXJ6uRnV/ZMZH3b1R2KfRNaaQo=
+X-Received: by 2002:a17:903:1843:b0:2cf:7dfa:7f56 with SMTP id
+ d9443c01a7336-2cfde792b83mr33341805ad.2.1785045307775; 
+ Sat, 25 Jul 2026 22:55:07 -0700 (PDT)
 Received: from DESKTOP-7HME356.localdomain ([38.34.7.236])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-13d13015052sm38684005c88.5.2026.07.25.22.31.13
+ 5a478bee46e88-314bc447f6bsm19200010eec.12.2026.07.25.22.55.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jul 2026 22:31:16 -0700 (PDT)
+ Sat, 25 Jul 2026 22:55:07 -0700 (PDT)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 2/7] hw/riscv: k230: add gsdma in K230 board
+Subject: Re: [PATCH 3/7] tests/qtest: add test for K230 gsdma
 From: Junze Cao <caojunze424@gmail.com>
 To: Tao Ding <dingtao0430@163.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com, 
  palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
  chao.liu@processmission.com, farosas@suse.de, lvivier@redhat.com
-In-Reply-To: <20260721161335.73872-3-dingtao0430@163.com>
+In-Reply-To: <20260721161335.73872-4-dingtao0430@163.com>
 References: <20260721161335.73872-1-dingtao0430@163.com>
- <20260721161335.73872-3-dingtao0430@163.com>
-Date: Sun, 26 Jul 2026 13:31:10 +0800
-Message-Id: <178504387085.903859.4880530568877113564.b4-review@b4>
+ <20260721161335.73872-4-dingtao0430@163.com>
+Date: Sun, 26 Jul 2026 13:54:57 +0800
+Message-Id: <178504529704.906524.5128555664916138089.b4-review@b4>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785043874; l=3633;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785045302; l=848;
  i=caojunze424@gmail.com; s=junze-gmail; h=from:subject:message-id;
- bh=MKFm7KchDXG4VHHj+M9MgGc9OUP/OW9vgMs3SUORzsE=;
- b=YGW6yeyNPV/P8QgZnTgCWQMK6w20vA1Q/sGWwEtZoKXaGc3L1rjumyjw/5E9GgIIQE8F9nxck
- IWPvrHhz21XDOU3Hi1A7JdHq0ANheIXtax6n8Dy/7aNDy7rhDHrf4KF
+ bh=7MpjXv6qCPx3zXPy801wbS7gVS/EmtI8CjqujWNQ8dE=;
+ b=IDNd01fXNgki4OaXfz0inGNKABsxmcRzS+rWwxc5ClbiPA5jmN4gBKwSo2j0e1Ip8js8zvmVU
+ DxOqd0kPPR2DTicKxWVyWWwjuLfu3rh2zkEFERGpLnM4b0DAxj+/tB8
 X-Developer-Key: i=caojunze424@gmail.com; a=ed25519;
  pk=lnFIWNw+6CoDrHFIKUJKdgrRbvgAbQGcEFiVsIigOJ8=
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=caojunze424@gmail.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=caojunze424@gmail.com; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,7 +99,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,93 +115,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-# Add your code comments below. There is no need to trim or delete
-# any existing content -- just insert your comments under the relevant
-# lines of code. Lines starting with "> " are quoted diff context and
-# lines starting with "| " are comments from other reviewers.
-# The final email will be reformatted automatically to include only
-# the sections that have your comments.
-#
-> This commit replaces the unimplemented part of GSDMA in K230. And connect the interrupt to plic.
-> 
-> Signed-off-by: Tao Ding <dingtao0430@163.com>
->
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index de37c08cae..d28ac06043 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -162,3 +162,4 @@ config K230
->      select SERIAL_MM
->      select UNIMP
->      select K230_WDT
-> +    select K230_GSDMA
-> diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
-> index 656f28190c..c80bd65694 100644
-> --- a/hw/riscv/k230.c
-> +++ b/hw/riscv/k230.c
-> @@ -110,6 +110,7 @@ static void k230_soc_init(Object *obj)
->      object_initialize_child(obj, "c908-cpu", cpu0, TYPE_RISCV_HART_ARRAY);
->      object_initialize_child(obj, "k230-wdt0", &s->wdt[0], TYPE_K230_WDT);
->      object_initialize_child(obj, "k230-wdt1", &s->wdt[1], TYPE_K230_WDT);
-> +    object_initialize_child(obj, "k230-gsdma", &s->gsdma, TYPE_K230_GSDMA);
+On Wed, 22 Jul 2026 00:13:31 +0800, Tao Ding <dingtao0430@163.com> wrote:
+> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+> index 56ff860e21..1b13a777c9 100644
+> --- a/tests/qtest/meson.build
+> +++ b/tests/qtest/meson.build
+> @@ -297,7 +297,7 @@ qtests_riscv64 = ['riscv-csr-test'] + \
+>    (config_all_devices.has_key('CONFIG_IOMMU_TESTDEV') and
+>     config_all_devices.has_key('CONFIG_RISCV_IOMMU') ?
+>     ['iommu-riscv-test'] : []) + \
+> -  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test'] : [])
+> +  (config_all_devices.has_key('CONFIG_K230') ? ['k230-wdt-test', 'k230-gsdma-test'] : [])
 >  
->      qdev_prop_set_uint32(DEVICE(cpu0), "hartid-base", 0);
->      qdev_prop_set_string(DEVICE(cpu0), "cpu-type", TYPE_RISCV_CPU_THEAD_C908);
-> @@ -206,6 +207,14 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
->      sysbus_connect_irq(SYS_BUS_DEVICE(&s->wdt[1]), 0,
->                         qdev_get_gpio_in(DEVICE(s->c908_plic), K230_WDT1_IRQ));
+>  qtests_hexagon = ['boot-serial-test']
 >  
-> +    /* Gsdma */
-> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->gsdma), errp)) {
-> +        return;
-> +    }
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->gsdma), 0, memmap[K230_DEV_GSDMA].base);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->gsdma), 0,
-> +                       qdev_get_gpio_in(DEVICE(s->c908_plic), K230_GSDMA_IRQ));
-> +
->      /* unimplemented devices */
->      create_unimplemented_device("kpu.l2-cache",
->                                  memmap[K230_DEV_KPU_L2_CACHE].base,
-> @@ -221,9 +230,6 @@ static void k230_soc_realize(DeviceState *dev, Error **errp)
->                                  memmap[K230_DEV_AI_2D_ENGINE].base,
->                                  memmap[K230_DEV_AI_2D_ENGINE].size);
->  
-> -    create_unimplemented_device("gsdma", memmap[K230_DEV_GSDMA].base,
-> -                                memmap[K230_DEV_GSDMA].size);
-> -
->      create_unimplemented_device("dma", memmap[K230_DEV_DMA].base,
->                                  memmap[K230_DEV_DMA].size);
->  
-> diff --git a/include/hw/riscv/k230.h b/include/hw/riscv/k230.h
-> index 592e1c26bf..156a386edc 100644
-> --- a/include/hw/riscv/k230.h
-> +++ b/include/hw/riscv/k230.h
-> @@ -18,6 +18,7 @@
->  #include "hw/core/boards.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/watchdog/k230_wdt.h"
-> +#include "hw/dma/k230_gsdma.h"
->  
->  #define C908_CPU_HARTID   (0)
->  
-> @@ -33,6 +34,7 @@ typedef struct K230SoCState {
->      RISCVHartArrayState c908_cpu; /* Small core */
->  
->      K230WdtState wdt[2];
-> +    K230GSDMAState gsdma;
->      MemoryRegion sram;
->      MemoryRegion bootrom;
->  
-> @@ -129,6 +131,7 @@ enum {
->      K230_UART4_IRQ  = 20,
->      K230_WDT0_IRQ   = 107,
->      K230_WDT1_IRQ   = 108,
-> +    K230_GSDMA_IRQ  = 140,
->  };
->  
->  #define K230_UART_COUNT 5
 
-Reviewed-by: Junze Cao <caojunze424@gmail.com>
+The new source files haven't been added to the MAINTAINERS.
+Please update.
+Other than that, there are no issues.
 
 -- 
 Junze Cao <caojunze424@gmail.com>
