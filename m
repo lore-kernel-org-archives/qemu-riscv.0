@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 942B6C53200
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 12:30:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A371C53200
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jul 2026 12:30:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1wnxz8-0001Sh-Is; Sun, 26 Jul 2026 08:29:38 -0400
+	id 1wnxyv-0001HF-4A; Sun, 26 Jul 2026 08:29:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wnxz6-0001Pl-2Q
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:29:36 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1wnxyo-0001Ft-NR
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:29:20 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1wnxz3-0003JB-6S
- for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:29:35 -0400
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-8485b358552so1933174b3a.2
- for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 05:29:32 -0700 (PDT)
+ id 1wnxym-0003I1-GW
+ for qemu-riscv@nongnu.org; Sun, 26 Jul 2026 08:29:18 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-84e3007a2b7so1596490b3a.0
+ for <qemu-riscv@nongnu.org>; Sun, 26 Jul 2026 05:29:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785068972; x=1785673772; darn=nongnu.org;
+ d=gmail.com; s=20251104; t=1785068955; x=1785673755; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=u5wBFH4kuOWR6ro+3Rls6E6onh4AnTwIygY1OrxRai0=;
- b=NVF4i4lnU3wyVoiw4/ZNknmFC17J2nUeN33yavf3WaD8Yq03YBXLjjNukuxw1OzGrn
- KwDmEZjrCz5ZBVXLFRn/U9RLlzXC4r21cRiLnWxmkKT4wq6u5pZvpTUdBCgx7kebbsLI
- zlcvB3eivWgyJ098eDobzOqwTzdJ2VDaiIpG9P2VOgsCMaZXgpRgHNkeASvHQiEs/VNA
- reQB6J8nfoOc23LhTPhR3WAm4GPVitQbmf1mKbYwhXzlku8d7Kdq2Tf3eICaYRQTQu3T
- kP3sC8HA+M18IybaNZ+jP92UqgsdAfrxv3CmBWvEfXXJykCb69QXNjeJbg3qdVr4qvH5
- ropg==
+ bh=RfeUrKHUGv+U9oRVEXuUSDC6Vwliyabt5KfqsBfccrY=;
+ b=QaLS2140Sal3XJhimitHJlK2Ku9oME2A91EkFwvc5B1Jc/vnhNKheZ4JMavAGxSRJb
+ BhmSi8Xo52HEpiN2h6kwzSYgld2O+7E63NcTjrMIX0028zo19lJ/Kk6aa6VuvAhxDTID
+ Odqj/NIIijsO73d4XRD15tzODV1Tb0fpg3qAtG5OJB+U/iD8TF2tJ9OMWpEDP+FlKbpz
+ D5rx6s7XglK/6eLlguRkxjPkssqtD0gU683CGTklBJqOQYyho14gomrX8EQhVHt2SaZk
+ khBH437OlU0f8OmP/3qlxvVGp3STZIkSU+bZyzXLT0z0C36w9wgibhMakOsL2vIAIldy
+ amGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785068972; x=1785673772;
+ d=1e100.net; s=20251104; t=1785068955; x=1785673755;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=u5wBFH4kuOWR6ro+3Rls6E6onh4AnTwIygY1OrxRai0=;
- b=BAX6IluMqdyFZJ9TgBbPDcR/ofU4xv7ikXsRZbuVFlXUcM5k/9JHE+eceE8Qyt0qwx
- kY9r2TnTbpp7TlMbmQZmpzYN8azPTFFfH14zgU8Q29rIfJdAotlPdo7K7R+qslp0beea
- zx0pgnwysDSBInmYJjtP8Dp3n7H37Hi3as6CJ9xNeGnz1IrgD1QUEhQfD8K60XJsLeDE
- j9UmHlrcy2pWjpU6NTNQLuvsgADhQyg+ZcsLZ23Kzyu+iAI9bYqjzT83uxzV6E96m21n
- WPXwc+ENZlj+xrXItppbuTZ2n5io7gTsXpRFxnp35vO6n8NqjWNBEms1RPqjj6wOQziR
- FS+w==
+ bh=RfeUrKHUGv+U9oRVEXuUSDC6Vwliyabt5KfqsBfccrY=;
+ b=bJX9DTf5Zthf6qfMdZuqw346zGUhMxfBFONaLDHHGLUUeat9C7sg56RtAxW2DH5cvb
+ Sg3bNAu33J1h3VwVacf6eXY23BhHsCeEVjjjwLh36/Khm4B8o4q/ziZczfgv2YUC4BZb
+ /HOlWHcCcT4V3SOLPoyl6cvppSOysHJM1Ge2eKBtRrUEaE3tB3DRO5QziaZR6EPVo8Cz
+ 3VvoeiZHzYptGAsHaVfAO35rlLL+sfINJdeNDY7bRYnUEM6D+6SNiVrlyXrl/hb2RaS3
+ aCqxVXOZMnvze2IcOnR3oEm+2CmbbQDkzANsT3Z8vyah8fLwGUKkI6fEy/JMQajkdqWK
+ zbsw==
 X-Forwarded-Encrypted: i=1;
- AHgh+RpUNlJLjsTjCp2x0D6rdik3jZUwe5+dXkic4kugLqBz8sOyINta0D+nHvcN3iOflvvdHkMiWwC8Wdes@nongnu.org
-X-Gm-Message-State: AOJu0Ywh06jJFQ3wjesFnk0QuEds8D8KK9rBa4wY5LBmNmPoAgBfd36b
- H5hATBAbn4PPaSmGR9f30yTIChBdxL4WF9BxS/S54ldYDAkM/c1/XMWj
-X-Gm-Gg: AR+sD10Xx4hlX1uqWYCeDvfOporRlwrMTr1lCv+hryXGZgB7J9Ji+joaEG1VMg2qOnB
- wM1X67kh4EfrQZbn3eUOVGqpr9jwnPpjPNdaNYAvIrrdXMWFyMCCgVtOyo+F4nwXI6v2QOpZLkq
- mdgv0dYzo+J/f7Qk2DpFDTdp8hBeIzMu1+14To0D8VInSPizXJ51fBGuwg5Ruhjpc/CKfpv5Fx7
- 2hF2cLuUhLQ0THbdAUKKANhej86d5B2PD3cJjBBIYlDH2EOAmPfPWC1RLFLBiPA9FgeSO9daBXz
- QkoLghOd8HXOEDeolRzsS9t66ct4SzGTLL6DP+tC1v3i4JbrM1bTYGa9XuOqNy+deHUJztGFNIa
- wDFDDYuCrcZbv0/3Fb4kwAs+p5uNiVpQ7Tqzwh2YaoD9xKDtC+QW612r39SppVzVWs9JAV9JFpQ
- hZSVqM3gLu8Uk4PyIf6KWB
-X-Received: by 2002:a05:6a00:2e1e:b0:848:2f84:732 with SMTP id
- d2e1a72fcca58-84e5959438amr3832009b3a.69.1785068971551; 
- Sun, 26 Jul 2026 05:29:31 -0700 (PDT)
+ AHgh+RrKpMBXTSlfHLVEV/MBxLJ3mkTGbf3f85SKhdgCzJd0Exqv9r0tGommJa0iNAXPZoauO2Y3l6IVS6DG@nongnu.org
+X-Gm-Message-State: AOJu0YwVDNWwCF0oqgXCFJb4urpX3fM+0xS50TuwlQe1zgHCp1jRuOrL
+ /b/MqFFnA8avyjzCvcm5znORF6dIzJwmR5FO5cj0QzDcPW1Hph/g2jXK
+X-Gm-Gg: AR+sD113JYdt4p22D3zBvzWVzQbVRInE8pHH3YpP31jH5IJQB9NTGVzrhkRy7DLkdtY
+ ffrjUsyqGtgvEAaJXfPB8Y83KNXNtGZYpvvsRo14oaVnQl7Zpv2r2joudyLr5NV4wEXpNKna1Ev
+ PLkAHBJgucG43E7Oav/XmEfT/lUBMC310k9K0np9OcLudyLLWxBc0GgAHCHXCOaTzgextpZ8ksR
+ OW2X14nbVt4huQC5hiO0vBz162Kp/3pvg4ruVu80S0HrSCwHmKmrXJwPDD8+Jt712aQbqCmsOVp
+ udjHyv4CAaGGQDFS0rNxtNOjkYWj7Yc7UH1736knVqIi9aehuErUDOnhufz7z5yulruEdbav5cn
+ nN4a9nev72IIXECbPtmwFG0C6GkPapsaOyAWPHbQB5Syc3L6hWg8ZI0qqkygYQXSa9BPWXB5eO3
+ GNauc8ZbKvvL+Ed7MztXdk4Zg0pRjmz/I=
+X-Received: by 2002:a05:6a00:1f05:b0:846:c7f4:74d with SMTP id
+ d2e1a72fcca58-84e5955b5b4mr3526491b3a.41.1785068955003; 
+ Sun, 26 Jul 2026 05:29:15 -0700 (PDT)
 Received: from localhost.localdomain ([111.201.4.215])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84e53426628sm1861647b3a.49.2026.07.26.05.29.26
+ d2e1a72fcca58-84e53426628sm1861647b3a.49.2026.07.26.05.29.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jul 2026 05:29:30 -0700 (PDT)
+ Sun, 26 Jul 2026 05:29:14 -0700 (PDT)
 From: Kangjie Huang <flamboyant.h.01@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Kangjie Huang <flamboyant.h.01@gmail.com>, qemu-riscv@nongnu.org,
@@ -78,16 +78,17 @@ Cc: Kangjie Huang <flamboyant.h.01@gmail.com>, qemu-riscv@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Fabiano Rosas <farosas@suse.de>,
  Laurent Vivier <lvivier@redhat.com>
-Subject: [PATCH 06/11] hw/ssi: Implement K230 enhanced QSPI transfers
-Date: Sun, 26 Jul 2026 20:28:24 +0800
-Message-ID: <db4d5698e19e610c3e84b85b5ea8b0b3758546be.1785064313.git.flamboyant.h.01@gmail.com>
+Subject: [PATCH 03/11] hw/ssi: Implement K230 SSI FIFO and standard PIO
+ transfers
+Date: Sun, 26 Jul 2026 20:28:21 +0800
+Message-ID: <6fc734d599f433d0f4e3193be70fcf60615e031e.1785064313.git.flamboyant.h.01@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1785064312.git.flamboyant.h.01@gmail.com>
 References: <cover.1785064312.git.flamboyant.h.01@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-pf1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=flamboyant.h.01@gmail.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -111,562 +112,425 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add controller-side Dual and Quad SDR phases for instruction, address,
-mode, dummy, and data fields.
+Implement FIFO-backed standard SPI transfers for all four TMOD modes.
 
-Reject unsupported Octal, DDR, RXDS, and invalid transfer configurations
-without consuming FIFO data.
+Writes to DR while the TX FIFO is full are dropped, and frames wider
+than the DFS field are truncated on read, per the K230 TRM. Disabling
+the controller stops the serial engine but leaves queued frames in the
+FIFOs.
 
-Use qtest to check an accepted Quad SDR configuration and representative
-Octal and DDR rejection paths.
-
-According to the K230 SDK driver, multi-line QSPI data transfers use the
-controller's internal IDMA path. That SDK-facing path is implemented by
-a later patch.
+Extend the qtest with an 8-bit loopback transfer, receive-only NDF
+handling, FIFO status checks, and FIFO cleanup on controller disable.
 
 Signed-off-by: Kangjie Huang <flamboyant.h.01@gmail.com>
 ---
- hw/ssi/k230_dw_ssi.c           | 297 ++++++++++++++++++++++++++++++++-
- include/hw/ssi/k230_dw_ssi.h   |  22 +++
- tests/qtest/k230-dw-ssi-test.c |  65 ++++++++
- 3 files changed, 376 insertions(+), 8 deletions(-)
+ hw/ssi/k230_dw_ssi.c           | 160 ++++++++++++++++++++++++++++++++-
+ include/hw/ssi/k230_dw_ssi.h   |  11 +++
+ tests/qtest/k230-dw-ssi-test.c |  77 ++++++++++++++++
+ 3 files changed, 245 insertions(+), 3 deletions(-)
 
 diff --git a/hw/ssi/k230_dw_ssi.c b/hw/ssi/k230_dw_ssi.c
-index 26ac052a63..31da3a06a3 100644
+index d0dcad4312..d7315f28ef 100644
 --- a/hw/ssi/k230_dw_ssi.c
 +++ b/hw/ssi/k230_dw_ssi.c
-@@ -40,6 +40,13 @@
- #define K230_DW_SSI_PIO_TX_BATCH            64
- #define K230_DW_SSI_IRQ_VALID_MASK          0x000009bf
+@@ -37,6 +37,7 @@
+ #define K230_DW_SSI_AXIAWLEN_RESET          0x00000700
+ #define K230_DW_SSI_AXIARLEN_RESET          0x00000700
+ #define K230_DW_SSI_VERSION                 0x3130332a
++#define K230_DW_SSI_PIO_TX_BATCH            64
  
-+enum {
-+    K230_DW_SSI_TMOD_TR,
-+    K230_DW_SSI_TMOD_TO,
-+    K230_DW_SSI_TMOD_RO,
-+    K230_DW_SSI_TMOD_EEPROM_READ,
-+};
-+
  REG32(CTRLR0, 0x000)
      FIELD(CTRLR0, DFS, 0, 5)
-     FIELD(CTRLR0, FRF, 6, 2)
-@@ -324,7 +331,6 @@ static uint32_t k230_dw_ssi_frame_masked(K230DwSsiState *s)
-     return bits == 32 ? UINT32_MAX : MAKE_64BIT_MASK(0, bits);
- }
- 
--
- static bool k230_dw_ssi_enabled(K230DwSsiState *s)
- {
-     return FIELD_EX32(s->regs[R_SSIENR], SSIENR, SSIC_EN);
-@@ -386,6 +392,7 @@ static void k230_dw_ssi_abort_transfer(K230DwSsiState *s)
+@@ -330,6 +331,8 @@ static void k230_dw_ssi_abort_transfer(K230DwSsiState *s)
+     k230_dw_ssi_deselect(s);
+     fifo32_reset(&s->tx_fifo);
      fifo32_reset(&s->rx_fifo);
-     s->phase = K230_DW_SSI_PHASE_IDLE;
-     s->remaining_frames = 0;
-+    memset(&s->enhanced, 0, sizeof(s->enhanced));
-     k230_dw_ssi_update_irq(s);
++    s->phase = K230_DW_SSI_PHASE_IDLE;
++    s->remaining_frames = 0;
  }
  
-@@ -419,7 +426,7 @@ static void k230_dw_ssi_push_tx(K230DwSsiState *s, uint32_t tx)
+ static uint32_t k230_dw_ssi_status(K230DwSsiState *s)
+@@ -338,6 +341,7 @@ static uint32_t k230_dw_ssi_status(K230DwSsiState *s)
+     uint32_t rx_used = fifo32_num_used(&s->rx_fifo);
+     uint32_t sr = 0;
+ 
++    sr = FIELD_DP32(sr, SR, BUSY, s->phase != K230_DW_SSI_PHASE_IDLE);
+     sr = FIELD_DP32(sr, SR, TFNF, tx_used < K230_DW_SSI_FIFO_CAPACITY);
+     sr = FIELD_DP32(sr, SR, TFE, tx_used == 0);
+     sr = FIELD_DP32(sr, SR, RFNE, rx_used != 0);
+@@ -351,7 +355,7 @@ static void k230_dw_ssi_run_transfer(K230DwSsiState *s);
+ 
+ static void k230_dw_ssi_push_tx(K230DwSsiState *s, uint32_t tx)
+ {
+-    if (!k230_dw_ssi_enabled(s) || s->active_cs < 0) {
++    if (!k230_dw_ssi_enabled(s)) {
          return;
      }
  
--    fifo32_push(&s->tx_fifo, tx & k230_dw_ssi_frame_masked(s));
-+    fifo32_push(&s->tx_fifo, tx);
+@@ -360,12 +364,139 @@ static void k230_dw_ssi_push_tx(K230DwSsiState *s, uint32_t tx)
+     }
  
-     if (s->phase != K230_DW_SSI_PHASE_STANDARD_TX_ONLY) {
-         k230_dw_ssi_run_transfer(s);
-@@ -444,6 +451,267 @@ static uint32_t k230_dw_ssi_send_frame(K230DwSsiState *s,
-     return rx & mask;
+     fifo32_push(&s->tx_fifo, tx & k230_dw_ssi_frame_masked(s));
+-    k230_dw_ssi_run_transfer(s);
++
++    if (s->phase != K230_DW_SSI_PHASE_STANDARD_TX_ONLY) {
++        k230_dw_ssi_run_transfer(s);
++    }
  }
  
-+static bool k230_dw_ssi_enhanced_config_supported(K230DwSsiState *s)
-+{
-+    uint32_t ctrlr0 = s->regs[R_CTRLR0];
-+    uint32_t spi_ctrlr0 = s->regs[R_SPI_CTRLR0];
-+    uint32_t spi_frf;
-+    uint32_t trans_type;
-+    uint32_t tmod;
-+    uint32_t required_lines;
-+
-+    spi_frf = FIELD_EX32(ctrlr0, CTRLR0, SPI_FRF);
-+    trans_type = FIELD_EX32(spi_ctrlr0, SPI_CTRLR0, TRANS_TYPE);
-+    tmod = FIELD_EX32(ctrlr0, CTRLR0, TMOD);
-+
-+    switch (spi_frf) {
-+    case 1: /* Dual */
-+        required_lines = 2;
-+        break;
-+    case 2: /* Quad */
-+        required_lines = 4;
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: unsupported SPI_FRF=%u\n",
-+                      DEVICE(s)->canonical_path, spi_frf);
-+        return false;
-+    }
-+
-+    if (required_lines > s->max_lines) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: SPI_FRF=%u requires %u lines, only %u available\n",
-+                      DEVICE(s)->canonical_path,
-+                      spi_frf, required_lines, s->max_lines);
-+        return false;
-+    }
-+
-+    if (trans_type > 2) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: unsupported TRANS_TYPE=%u\n",
-+                      DEVICE(s)->canonical_path, trans_type);
-+        return false;
-+    }
-+
-+    if (tmod != K230_DW_SSI_TMOD_RO && tmod != K230_DW_SSI_TMOD_TO) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: unsupported enhanced TMOD=%u\n",
-+                      DEVICE(s)->canonical_path, tmod);
-+        return false;
-+    }
-+
-+    if (FIELD_EX32(spi_ctrlr0, SPI_CTRLR0, SPI_DDR_EN) ||
-+        FIELD_EX32(spi_ctrlr0, SPI_CTRLR0, INST_DDR_EN) ||
-+        FIELD_EX32(spi_ctrlr0, SPI_CTRLR0, SPI_RXDS_EN) ||
-+        FIELD_EX32(spi_ctrlr0, SPI_CTRLR0, SPI_RXDS_SIG_EN)) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: DDR/RXDS enhanced mode is unsupported\n",
-+                      DEVICE(s)->canonical_path);
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
-+static bool k230_dw_ssi_decode_enhanced_command(
-+    K230DwSsiState *s, K230DwSsiEnhancedCommand *command)
-+{
-+    uint32_t spi_frf = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, SPI_FRF);
-+    uint32_t inst_l = FIELD_EX32(s->regs[R_SPI_CTRLR0], SPI_CTRLR0, INST_L);
-+    uint32_t addr_l = FIELD_EX32(s->regs[R_SPI_CTRLR0], SPI_CTRLR0, ADDR_L);
-+    uint32_t trans_type = FIELD_EX32(s->regs[R_SPI_CTRLR0],
-+                                     SPI_CTRLR0, TRANS_TYPE);
-+    uint32_t inst_bits;
-+    uint32_t addr_bits = addr_l << 2;
-+    uint32_t mode_bits = 0;
-+    bool mode_bits_enabled =
-+        FIELD_EX32(s->regs[R_SPI_CTRLR0], SPI_CTRLR0, XIP_MD_BIT_EN);
-+
-+    if (!k230_dw_ssi_enhanced_config_supported(s)) {
-+        return false;
-+    }
-+
-+    inst_bits = inst_l ? (1U << (inst_l + 1)) : 0;
-+
-+    if (addr_bits > 32) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: unsupported enhanced address length %u bits\n",
-+                      DEVICE(s)->canonical_path, addr_bits);
-+        return false;
-+    }
-+
-+    if (mode_bits_enabled) {
-+        uint32_t mode_length_encoding =
-+            FIELD_EX32(s->regs[R_SPI_CTRLR0], SPI_CTRLR0, XIP_MBL);
-+
-+        mode_bits = 1U << (mode_length_encoding + 1);
-+    }
-+
-+    command->instruction_bits = inst_bits;
-+    command->address_bits = addr_bits;
-+    command->mode_bits = mode_bits;
-+    command->mode_bits_enabled = mode_bits_enabled;
-+    command->wait_cycles =
-+        FIELD_EX32(s->regs[R_SPI_CTRLR0], SPI_CTRLR0, WAIT_CYCLES);
-+    command->data_frames =
-+        FIELD_EX32(s->regs[R_CTRLR1], CTRLR1, NDF) + 1;
-+    command->spi_frf = spi_frf;
-+    command->trans_type = trans_type;
-+    command->tmod = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, TMOD);
-+
-+    if (mode_bits_enabled) {
-+        command->mode = s->regs[R_XIP_MODE_BITS] &
-+            (uint32_t)MAKE_64BIT_MASK(0, mode_bits);
-+    }
-+
-+    return true;
-+}
-+
-+static bool k230_dw_ssi_prepare_enhanced_command(K230DwSsiState *s)
-+{
-+    K230DwSsiEnhancedCommand command = { 0 };
-+    uint32_t required_items;
-+
-+    if (!k230_dw_ssi_decode_enhanced_command(s, &command)) {
-+        return false;
-+    }
-+
-+    required_items = (command.instruction_bits != 0) +
-+                     (command.address_bits != 0);
-+    if (fifo32_num_used(&s->tx_fifo) < required_items) {
-+        return false;
-+    }
-+
-+    if (command.instruction_bits != 0) {
-+        command.instruction = fifo32_pop(&s->tx_fifo) &
-+            (uint32_t)MAKE_64BIT_MASK(0, command.instruction_bits);
-+    }
-+    if (command.address_bits != 0) {
-+        command.address = fifo32_pop(&s->tx_fifo) &
-+            (uint32_t)MAKE_64BIT_MASK(0, command.address_bits);
-+    }
-+
-+    s->enhanced = command;
-+    s->remaining_frames = command.data_frames;
-+    s->phase = K230_DW_SSI_PHASE_ENHANCED_INSTRUCTION;
-+    return true;
-+}
-+
-+static void k230_dw_ssi_send_enhanced_field(K230DwSsiState *s,
-+                                             uint32_t value,
-+                                             uint32_t bits)
-+{
-+    uint32_t bytes = DIV_ROUND_UP(bits, 8);
-+
-+    for (uint32_t i = 0; i < bytes; i++) {
-+        uint32_t shift = (bytes - i - 1) * 8;
-+
-+        ssi_transfer(s->spi, (value >> shift) & 0xff);
-+    }
-+}
-+
-+static uint32_t k230_dw_ssi_dummy_bytes(uint32_t spi_frf,
-+                                         uint32_t trans_type,
-+                                         uint32_t wait_cycles)
-+{
-+    uint32_t lines = 1;
-+
-+    if (trans_type != 0) {
-+        lines = spi_frf == 1 ? 2 : 4;
-+    }
-+
-+    return DIV_ROUND_UP(wait_cycles * lines, 8);
-+}
-+
-+static void k230_dw_ssi_run_enhanced_rx_data(K230DwSsiState *s)
-+{
-+    while (!fifo32_is_full(&s->rx_fifo) &&
-+           s->remaining_frames > 0) {
-+        uint32_t rx = ssi_transfer(s->spi, 0);
-+
-+        fifo32_push(&s->rx_fifo,
-+                    rx & k230_dw_ssi_frame_masked(s));
-+        s->remaining_frames--;
-+    }
-+}
-+
-+static void k230_dw_ssi_run_enhanced_tx_data(K230DwSsiState *s)
++static uint32_t k230_dw_ssi_send_frame(K230DwSsiState *s,
++                                        uint32_t tx)
 +{
 +    uint32_t mask = k230_dw_ssi_frame_masked(s);
++    uint32_t rx;
 +
-+    while (!fifo32_is_empty(&s->tx_fifo) &&
-+           s->remaining_frames > 0) {
-+        uint32_t tx = fifo32_pop(&s->tx_fifo);
++    tx &= mask;
 +
-+        ssi_transfer(s->spi, tx & mask);
-+        s->remaining_frames--;
++    if (FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, SRL)) {
++        rx = tx;
++    } else {
++        rx = ssi_transfer(s->spi, tx);
 +    }
++
++    return rx & mask;
 +}
+ 
+ static void k230_dw_ssi_run_transfer(K230DwSsiState *s)
+ {
++    uint32_t spi_frf;
++    uint32_t tmod;
 +
-+static void k230_dw_ssi_run_enhanced_transfer(K230DwSsiState *s)
-+{
-+    if (s->phase == K230_DW_SSI_PHASE_IDLE) {
-+        if (!k230_dw_ssi_prepare_enhanced_command(s)) {
-+            return;
++    if (!k230_dw_ssi_enabled(s) || s->active_cs < 0) {
++        return;
++    }
++
++    spi_frf = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, SPI_FRF);
++    if (spi_frf != 0) {
++        return;
++    }
++
++    tmod = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, TMOD);
++
++    switch (tmod) {
++    case 0: /* TX_AND_RX */
++        while (!fifo32_is_empty(&s->tx_fifo)) {
++            uint32_t tx = fifo32_pop(&s->tx_fifo);
++            uint32_t rx = k230_dw_ssi_send_frame(s, tx);
++            if (!fifo32_is_full(&s->rx_fifo)) {
++                fifo32_push(&s->rx_fifo, rx);
++            }
 +        }
-+    }
-+
-+    if (s->phase == K230_DW_SSI_PHASE_ENHANCED_INSTRUCTION) {
-+        if (s->enhanced.instruction_bits != 0) {
-+            k230_dw_ssi_send_enhanced_field(
-+                s, s->enhanced.instruction,
-+                s->enhanced.instruction_bits);
-+        }
-+        s->phase = K230_DW_SSI_PHASE_ENHANCED_ADDRESS;
-+    }
-+
-+    if (s->phase == K230_DW_SSI_PHASE_ENHANCED_ADDRESS) {
-+        if (s->enhanced.address_bits != 0) {
-+            k230_dw_ssi_send_enhanced_field(
-+                s, s->enhanced.address, s->enhanced.address_bits);
-+        }
-+        s->phase = K230_DW_SSI_PHASE_ENHANCED_MODE;
-+    }
-+
-+    if (s->phase == K230_DW_SSI_PHASE_ENHANCED_MODE) {
-+        if (s->enhanced.mode_bits_enabled) {
-+            k230_dw_ssi_send_enhanced_field(
-+                s, s->enhanced.mode, s->enhanced.mode_bits);
-+        }
-+        s->phase = K230_DW_SSI_PHASE_ENHANCED_DUMMY;
-+    }
-+
-+    if (s->phase == K230_DW_SSI_PHASE_ENHANCED_DUMMY) {
-+        uint32_t dummy_bytes = k230_dw_ssi_dummy_bytes(
-+            s->enhanced.spi_frf, s->enhanced.trans_type,
-+            s->enhanced.wait_cycles);
-+
-+        for (uint32_t i = 0; i < dummy_bytes; i++) {
-+            ssi_transfer(s->spi, 0);
-+        }
-+        s->phase = K230_DW_SSI_PHASE_ENHANCED_DATA;
-+    }
-+
-+    if (s->phase != K230_DW_SSI_PHASE_ENHANCED_DATA) {
-+        g_assert_not_reached();
-+    }
-+
-+    switch (s->enhanced.tmod) {
-+    case K230_DW_SSI_TMOD_RO:
-+        k230_dw_ssi_run_enhanced_rx_data(s);
 +        break;
-+    case K230_DW_SSI_TMOD_TO:
-+        k230_dw_ssi_run_enhanced_tx_data(s);
++    case 1: { /* TX_ONLY */
++        unsigned int frames = 0;
++
++        if (fifo32_is_empty(&s->tx_fifo)) {
++            s->phase = K230_DW_SSI_PHASE_IDLE;
++            break;
++        }
++
++        s->phase = K230_DW_SSI_PHASE_STANDARD_TX_ONLY;
++        while (!fifo32_is_empty(&s->tx_fifo) &&
++               frames < K230_DW_SSI_PIO_TX_BATCH) {
++            uint32_t tx = fifo32_pop(&s->tx_fifo);
++
++            k230_dw_ssi_send_frame(s, tx);
++            frames++;
++        }
++        if (fifo32_is_empty(&s->tx_fifo)) {
++            s->phase = K230_DW_SSI_PHASE_IDLE;
++        }
++        break;
++    }
++    case 2: /* RX_ONLY */
++        switch (s->phase) {
++        case K230_DW_SSI_PHASE_IDLE:
++            if (fifo32_is_empty(&s->tx_fifo)) {
++                break;
++            }
++            fifo32_pop(&s->tx_fifo);
++            s->phase = K230_DW_SSI_PHASE_RX_ONLY;
++            s->remaining_frames = FIELD_EX32(s->regs[R_CTRLR1], CTRLR1,
++                                              NDF) + 1;
++            /* Fall through. */
++        case K230_DW_SSI_PHASE_RX_ONLY:
++            while (!fifo32_is_full(&s->rx_fifo) &&
++                   s->remaining_frames > 0) {
++                uint32_t rx = k230_dw_ssi_send_frame(s, 0x00);
++
++                fifo32_push(&s->rx_fifo, rx);
++                s->remaining_frames--;
++            }
++            if (s->remaining_frames == 0) {
++                s->phase = K230_DW_SSI_PHASE_IDLE;
++            }
++            break;
++        }
++        break;
++    case 3: /* EEPROM_READ */
++        switch (s->phase) {
++        case K230_DW_SSI_PHASE_IDLE:
++            if (fifo32_is_empty(&s->tx_fifo)) {
++                break;
++            }
++            s->phase = K230_DW_SSI_PHASE_EEPROM_COMMAND;
++            /* Fall through. */
++        case K230_DW_SSI_PHASE_EEPROM_COMMAND:
++            if (fifo32_is_empty(&s->tx_fifo)) {
++                break;
++            }
++            while (!fifo32_is_empty(&s->tx_fifo)) {
++                uint32_t tx = fifo32_pop(&s->tx_fifo);
++
++                k230_dw_ssi_send_frame(s, tx);
++            }
++            s->phase = K230_DW_SSI_PHASE_EEPROM_DATA;
++            s->remaining_frames = FIELD_EX32(s->regs[R_CTRLR1], CTRLR1,
++                                              NDF) + 1;
++            /* Fall through. */
++        case K230_DW_SSI_PHASE_EEPROM_DATA:
++            while (!fifo32_is_full(&s->rx_fifo) &&
++                   s->remaining_frames > 0) {
++                uint32_t rx = k230_dw_ssi_send_frame(s, 0x00);
++
++                fifo32_push(&s->rx_fifo, rx);
++                s->remaining_frames--;
++            }
++            if (s->remaining_frames == 0) {
++                s->phase = K230_DW_SSI_PHASE_IDLE;
++            }
++            break;
++        }
 +        break;
 +    default:
 +        g_assert_not_reached();
 +    }
-+
-+    if (s->remaining_frames == 0) {
-+        s->phase = K230_DW_SSI_PHASE_IDLE;
-+    }
-+}
-+
- static void k230_dw_ssi_run_transfer(K230DwSsiState *s)
- {
-     uint32_t spi_frf;
-@@ -455,16 +723,18 @@ static void k230_dw_ssi_run_transfer(K230DwSsiState *s)
- 
-     spi_frf = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, SPI_FRF);
-     if (spi_frf != 0) {
-+        k230_dw_ssi_run_enhanced_transfer(s);
-         return;
-     }
- 
-     tmod = FIELD_EX32(s->regs[R_CTRLR0], CTRLR0, TMOD);
- 
-     switch (tmod) {
--    case 0: /* TX_AND_RX */
-+    case K230_DW_SSI_TMOD_TR:
-         while (!fifo32_is_empty(&s->tx_fifo)) {
-             uint32_t tx = fifo32_pop(&s->tx_fifo);
-             uint32_t rx = k230_dw_ssi_send_frame(s, tx);
-+
-             if (!fifo32_is_full(&s->rx_fifo)) {
-                 fifo32_push(&s->rx_fifo, rx);
-             } else {
-@@ -476,7 +746,7 @@ static void k230_dw_ssi_run_transfer(K230DwSsiState *s)
-             }
-         }
-         break;
--    case 1: { /* TX_ONLY */
-+    case K230_DW_SSI_TMOD_TO: {
-         unsigned int frames = 0;
- 
-         if (fifo32_is_empty(&s->tx_fifo)) {
-@@ -497,7 +767,7 @@ static void k230_dw_ssi_run_transfer(K230DwSsiState *s)
-         }
-         break;
-     }
--    case 2: /* RX_ONLY */
-+    case K230_DW_SSI_TMOD_RO:
-         switch (s->phase) {
-         case K230_DW_SSI_PHASE_IDLE:
-             if (fifo32_is_empty(&s->tx_fifo)) {
-@@ -522,7 +792,7 @@ static void k230_dw_ssi_run_transfer(K230DwSsiState *s)
-             break;
-         }
-         break;
--    case 3: /* EEPROM_READ */
-+    case K230_DW_SSI_TMOD_EEPROM_READ:
-         switch (s->phase) {
-         case K230_DW_SSI_PHASE_IDLE:
-             if (fifo32_is_empty(&s->tx_fifo)) {
-@@ -562,8 +832,6 @@ static void k230_dw_ssi_run_transfer(K230DwSsiState *s)
-     }
  }
  
--
--
- static bool k230_dw_ssi_is_dr(hwaddr addr)
- {
-     return addr >= A_DR0 && addr <= A_DR_END &&
-@@ -920,6 +1188,7 @@ static void k230_dw_ssi_enter_reset(Object *obj, ResetType type)
-     s->phase = K230_DW_SSI_PHASE_IDLE;
-     s->remaining_frames = 0;
-     s->irq_latched = 0;
-+    memset(&s->enhanced, 0, sizeof(s->enhanced));
+ 
+@@ -419,6 +550,8 @@ static uint64_t k230_dw_ssi_read(void *opaque, hwaddr addr, unsigned int size)
+         if (!fifo32_is_empty(&s->rx_fifo)) {
+             value = fifo32_pop(&s->rx_fifo) & k230_dw_ssi_frame_masked(s);
+         }
++
++        k230_dw_ssi_run_transfer(s);
+         return value;
+     }
+ 
+@@ -457,12 +590,18 @@ static uint64_t k230_dw_ssi_read(void *opaque, hwaddr addr, unsigned int size)
+         break;
+     case A_TXFLR:
+         value = fifo32_num_used(&s->tx_fifo);
++        if (s->phase == K230_DW_SSI_PHASE_STANDARD_TX_ONLY) {
++            k230_dw_ssi_run_transfer(s);
++        }
+         break;
+     case A_RXFLR:
+         value = fifo32_num_used(&s->rx_fifo);
+         break;
+     case A_SR:
+         value = k230_dw_ssi_status(s);
++        if (s->phase == K230_DW_SSI_PHASE_STANDARD_TX_ONLY) {
++            k230_dw_ssi_run_transfer(s);
++        }
+         break;
+     case A_ISR:
+     case A_RISR:
+@@ -538,15 +677,26 @@ static void k230_dw_ssi_write(void *opaque, hwaddr addr,
+         }
+ 
+         k230_dw_ssi_update_cs(s);
++        k230_dw_ssi_run_transfer(s);
+         break;
+     }
+     case A_MWCR:
+         k230_dw_ssi_write_masked(s, R_MWCR, value,
+                                  K230_DW_SSI_MWCR_WRITABLE_MASK);
+         break;
+-    case A_SER:
++    case A_SER: {
++        uint32_t old_ser = s->regs[R_SER];
++
+         s->regs[R_SER] = value & MAKE_64BIT_MASK(0, s->num_cs);
++        if (old_ser && !s->regs[R_SER]) {
++            k230_dw_ssi_abort_transfer(s);
++            break;
++        }
++
++        k230_dw_ssi_update_cs(s);
++        k230_dw_ssi_run_transfer(s);
+         break;
++    }
+     case A_BAUDR:
+         k230_dw_ssi_write_masked(s, R_BAUDR, value,
+                                  K230_DW_SSI_BAUDR_WRITABLE_MASK);
+@@ -679,6 +829,8 @@ static void k230_dw_ssi_enter_reset(Object *obj, ResetType type)
+     memset(s->regs, 0, sizeof(s->regs));
+     fifo32_reset(&s->tx_fifo);
+     fifo32_reset(&s->rx_fifo);
++    s->phase = K230_DW_SSI_PHASE_IDLE;
++    s->remaining_frames = 0;
  
      s->regs[R_CTRLR0] = K230_DW_SSI_CTRLR0_RESET;
      s->regs[R_SR] = K230_DW_SSI_SR_RESET;
-@@ -983,6 +1252,18 @@ static const VMStateDescription vmstate_k230_dw_ssi = {
-         VMSTATE_UINT32(irq_latched, K230DwSsiState),
-         VMSTATE_UINT32(phase, K230DwSsiState),
-         VMSTATE_UINT32(remaining_frames, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.instruction, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.address, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.mode, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.mode_bits, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.instruction_bits, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.address_bits, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.wait_cycles, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.data_frames, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.spi_frf, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.trans_type, K230DwSsiState),
-+        VMSTATE_UINT32(enhanced.tmod, K230DwSsiState),
-+        VMSTATE_BOOL(enhanced.mode_bits_enabled, K230DwSsiState),
+@@ -710,6 +862,8 @@ static const VMStateDescription vmstate_k230_dw_ssi = {
+         VMSTATE_UINT32_ARRAY(regs, K230DwSsiState, K230_DW_SSI_NUM_REGS),
+         VMSTATE_FIFO32(tx_fifo, K230DwSsiState),
+         VMSTATE_FIFO32(rx_fifo, K230DwSsiState),
++        VMSTATE_UINT32(phase, K230DwSsiState),
++        VMSTATE_UINT32(remaining_frames, K230DwSsiState),
          VMSTATE_INT32(active_cs, K230DwSsiState),
          VMSTATE_END_OF_LIST()
      },
 diff --git a/include/hw/ssi/k230_dw_ssi.h b/include/hw/ssi/k230_dw_ssi.h
-index 404215245b..b692a616d6 100644
+index 953f6cc0e5..993cb19745 100644
 --- a/include/hw/ssi/k230_dw_ssi.h
 +++ b/include/hw/ssi/k230_dw_ssi.h
-@@ -51,8 +51,29 @@ typedef enum K230DwSsiPhase {
-     K230_DW_SSI_PHASE_RX_ONLY,
-     K230_DW_SSI_PHASE_EEPROM_COMMAND,
-     K230_DW_SSI_PHASE_EEPROM_DATA,
-+
-+    K230_DW_SSI_PHASE_ENHANCED_INSTRUCTION,
-+    K230_DW_SSI_PHASE_ENHANCED_ADDRESS,
-+    K230_DW_SSI_PHASE_ENHANCED_MODE,
-+    K230_DW_SSI_PHASE_ENHANCED_DUMMY,
-+    K230_DW_SSI_PHASE_ENHANCED_DATA,
- } K230DwSsiPhase;
+@@ -31,6 +31,14 @@ OBJECT_DECLARE_SIMPLE_TYPE(K230DwSsiState, K230_DW_SSI)
+ #define K230_DW_SSI_NUM_REGS \
+     (K230_DW_SSI_REGS_SIZE / sizeof(uint32_t))
  
-+typedef struct K230DwSsiEnhancedCommand {
-+    uint32_t instruction;
-+    uint32_t address;
-+    uint32_t mode;
-+    uint32_t instruction_bits;
-+    uint32_t address_bits;
-+    uint32_t mode_bits;
-+    uint32_t wait_cycles;
-+    uint32_t data_frames;
-+    uint32_t spi_frf;
-+    uint32_t trans_type;
-+    uint32_t tmod;
-+    bool mode_bits_enabled;
-+} K230DwSsiEnhancedCommand;
++typedef enum K230DwSsiPhase {
++    K230_DW_SSI_PHASE_IDLE,
++    K230_DW_SSI_PHASE_STANDARD_TX_ONLY,
++    K230_DW_SSI_PHASE_RX_ONLY,
++    K230_DW_SSI_PHASE_EEPROM_COMMAND,
++    K230_DW_SSI_PHASE_EEPROM_DATA,
++} K230DwSsiPhase;
 +
  struct K230DwSsiState {
      SysBusDevice parent_obj;
  
-@@ -69,6 +90,7 @@ struct K230DwSsiState {
+@@ -42,6 +50,9 @@ struct K230DwSsiState {
+     Fifo32 rx_fifo;
+     uint32_t regs[K230_DW_SSI_NUM_REGS];
  
-     uint32_t phase;
-     uint32_t remaining_frames;
-+    K230DwSsiEnhancedCommand enhanced;
- 
++    uint32_t phase;
++    uint32_t remaining_frames;
++
      uint32_t num_cs;
      uint32_t max_lines;
+     int active_cs;
 diff --git a/tests/qtest/k230-dw-ssi-test.c b/tests/qtest/k230-dw-ssi-test.c
-index e6c0e2ee8c..a507814b66 100644
+index dcd6cb1d6e..a62b1a7ff6 100644
 --- a/tests/qtest/k230-dw-ssi-test.c
 +++ b/tests/qtest/k230-dw-ssi-test.c
-@@ -55,12 +55,23 @@
+@@ -28,6 +28,7 @@
+ #define K230_SSI_DMACR           0x04c
+ #define K230_SSI_IDR             0x058
+ #define K230_SSI_VERSION_ID      0x05c
++#define K230_SSI_DR0             0x060
+ #define K230_SSI_SPI_CTRLR0      0x0f4
+ #define K230_SSI_XIP_MODE_BITS   0x0fc
+ #define K230_SSI_XIP_INCR_INST   0x100
+@@ -50,8 +51,11 @@
+ 
  #define K230_SSI_CTRLR0_DFS_MASK        0x1fU
  #define K230_SSI_CTRLR0_TMOD_SHIFT      10
- #define K230_SSI_CTRLR0_SRL             BIT(13)
-+#define K230_SSI_CTRLR0_SPI_FRF_SHIFT   22
-+#define K230_SSI_CTRLR0_SPI_FRF_MASK    (3U << K230_SSI_CTRLR0_SPI_FRF_SHIFT)
++#define K230_SSI_CTRLR0_SRL             BIT(13)
  
  #define K230_SSI_TMOD_TR                0
- #define K230_SSI_TMOD_TO                1
- #define K230_SSI_TMOD_RO                2
++#define K230_SSI_TMOD_TO                1
++#define K230_SSI_TMOD_RO                2
  #define K230_SSI_TMOD_EEPROM_READ       3
  
-+#define K230_SSI_FRF_QUAD               2
-+#define K230_SSI_FRF_OCTAL              3
-+
-+#define K230_SSI_SPI_CTRLR0_TRANS_TYPE(v) ((v) & 0x3U)
-+#define K230_SSI_SPI_CTRLR0_ADDR_L(bits)  (((bits) / 4U) << 2)
-+#define K230_SSI_SPI_CTRLR0_INST_L_8      (2U << 8)
-+#define K230_SSI_SPI_CTRLR0_WAIT(v)       (((v) & 0x1fU) << 11)
-+#define K230_SSI_SPI_CTRLR0_SPI_DDR_EN    BIT(16)
-+
  #define K230_SSI_SR_BUSY                BIT(0)
- #define K230_SSI_SR_TFNF                BIT(1)
- #define K230_SSI_SR_TFE                 BIT(2)
-@@ -104,6 +115,8 @@ static const K230SsiInstance k230_ssi_instances[3] = {
-     },
- };
+@@ -62,6 +66,8 @@
+ #define K230_SSI_INT_AXIE               BIT(8)
+ #define K230_SSI_INT_DONE               BIT(11)
  
-+#define FLASH_CMD_JEDEC         0x9f
++#define K230_SSI_FIFO_DEPTH             256
 +
- static QTestState *k230_ssi_start(void)
+ typedef struct K230SsiInstance {
+     uint64_t base;
+     uint32_t num_cs;
+@@ -130,6 +136,45 @@ static void k230_ssi_enable_cs(QTestState *qts, uint64_t base, uint32_t ser)
+     k230_ssi_writel(qts, base, K230_SSI_SSIENR, 1);
+ }
+ 
++static void k230_ssi_write_frame(QTestState *qts, uint64_t base,
++                                 uint32_t value)
++{
++    k230_ssi_writel(qts, base, K230_SSI_DR0, value);
++}
++
++static uint32_t k230_ssi_read_frame(QTestState *qts, uint64_t base)
++{
++    return k230_ssi_readl(qts, base, K230_SSI_DR0);
++}
++
++static void k230_ssi_wait_mask(QTestState *qts, uint64_t base,
++                               uint32_t offset, uint32_t mask,
++                               uint32_t expected)
++{
++    for (int i = 0; i < 1000; i++) {
++        uint32_t value = k230_ssi_readl(qts, base, offset);
++
++        if ((value & mask) == expected) {
++            return;
++        }
++        qtest_clock_step(qts, 1000);
++    }
++
++    g_assert_cmphex(k230_ssi_readl(qts, base, offset) & mask,
++                    ==, expected);
++}
++
++static void configure_loopback(QTestState *qts, uint32_t tmod,
++                               uint32_t ndf)
++{
++    uint32_t ctrlr0;
++
++    k230_ssi_configure(qts, K230_SPI1_BASE, tmod, 8, ndf);
++    ctrlr0 = k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_CTRLR0);
++    k230_ssi_writel(qts, K230_SPI1_BASE, K230_SSI_CTRLR0,
++                    ctrlr0 | K230_SSI_CTRLR0_SRL);
++}
++
+ static void test_register_contract(void)
  {
-     return qtest_init("-machine k230");
-@@ -326,6 +339,57 @@ static void test_plic_routing(void)
+     QTestState *qts = k230_ssi_start();
+@@ -169,10 +214,42 @@ static void test_register_contract(void)
      qtest_quit(qts);
  }
  
-+static void assert_enhanced_config_rejected(QTestState *qts, uint32_t frf,
-+                                            uint32_t extra_spi_ctrlr0)
-+{
-+    uint32_t ctrlr0;
-+    uint32_t spi_ctrlr0;
-+
-+    k230_ssi_configure(qts, K230_SPI0_BASE, K230_SSI_TMOD_RO, 8, 3);
-+    ctrlr0 = k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_CTRLR0);
-+    ctrlr0 |= frf << K230_SSI_CTRLR0_SPI_FRF_SHIFT;
-+    spi_ctrlr0 = K230_SSI_SPI_CTRLR0_INST_L_8 | extra_spi_ctrlr0;
-+    k230_ssi_writel(qts, K230_SPI0_BASE, K230_SSI_CTRLR0, ctrlr0);
-+    k230_ssi_writel(qts, K230_SPI0_BASE, K230_SSI_SPI_CTRLR0, spi_ctrlr0);
-+    k230_ssi_enable_cs(qts, K230_SPI0_BASE, BIT(0));
-+    k230_ssi_write_frame(qts, K230_SPI0_BASE, FLASH_CMD_JEDEC);
-+    g_assert_cmpuint(k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_TXFLR),
-+                     ==, 1);
-+    g_assert_cmpuint(k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_RXFLR),
-+                     ==, 0);
-+    k230_ssi_disable(qts, K230_SPI0_BASE);
-+}
-+
-+static void test_qspi_config(void)
++static void test_pio_data_path(void)
 +{
 +    QTestState *qts = k230_ssi_start();
-+    uint32_t ctrlr0;
-+    uint32_t spi_ctrlr0;
++    uint32_t status;
 +
-+    assert_enhanced_config_rejected(qts, K230_SSI_FRF_OCTAL, 0);
-+    assert_enhanced_config_rejected(qts, K230_SSI_FRF_QUAD,
-+                                    K230_SSI_SPI_CTRLR0_SPI_DDR_EN);
++    configure_loopback(qts, K230_SSI_TMOD_TR, 0);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0xa5);
++    k230_ssi_wait_mask(qts, K230_SPI1_BASE, K230_SSI_SR,
++                       K230_SSI_SR_RFNE, K230_SSI_SR_RFNE);
++    g_assert_cmphex(k230_ssi_read_frame(qts, K230_SPI1_BASE), ==, 0xa5);
 +
-+    k230_ssi_configure(qts, K230_SPI0_BASE, K230_SSI_TMOD_RO, 8, 3);
-+    ctrlr0 = k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_CTRLR0);
-+    ctrlr0 |= K230_SSI_FRF_QUAD << K230_SSI_CTRLR0_SPI_FRF_SHIFT;
-+    spi_ctrlr0 = K230_SSI_SPI_CTRLR0_TRANS_TYPE(1) |
-+                 K230_SSI_SPI_CTRLR0_ADDR_L(24) |
-+                 K230_SSI_SPI_CTRLR0_INST_L_8 |
-+                 K230_SSI_SPI_CTRLR0_WAIT(8);
-+    k230_ssi_writel(qts, K230_SPI0_BASE, K230_SSI_CTRLR0, ctrlr0);
-+    k230_ssi_writel(qts, K230_SPI0_BASE, K230_SSI_SPI_CTRLR0, spi_ctrlr0);
-+    k230_ssi_enable_cs(qts, K230_SPI0_BASE, BIT(0));
-+    k230_ssi_write_frame(qts, K230_SPI0_BASE, FLASH_CMD_JEDEC);
-+    k230_ssi_write_frame(qts, K230_SPI0_BASE, 0x123456);
-+    g_assert_cmpuint(k230_ssi_readl(qts, K230_SPI0_BASE, K230_SSI_RXFLR),
-+                     ==, 4);
++    configure_loopback(qts, K230_SSI_TMOD_RO, 3);
++    k230_ssi_enable_cs(qts, K230_SPI1_BASE, BIT(0));
++    k230_ssi_write_frame(qts, K230_SPI1_BASE, 0);
++    k230_ssi_wait_mask(qts, K230_SPI1_BASE, K230_SSI_RXFLR,
++                       UINT32_MAX, 4);
 +    for (int i = 0; i < 4; i++) {
-+        g_assert_cmphex(k230_ssi_read_frame(qts, K230_SPI0_BASE), ==, 0);
++        g_assert_cmphex(k230_ssi_read_frame(qts, K230_SPI1_BASE), ==, 0);
 +    }
++
++    k230_ssi_disable(qts, K230_SPI1_BASE);
++    status = k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_SR);
++    g_assert_cmpuint(k230_ssi_readl(qts, K230_SPI1_BASE, K230_SSI_RXFLR),
++                     ==, 0);
++    g_assert_cmphex(status & (K230_SSI_SR_BUSY | K230_SSI_SR_TFNF |
++                              K230_SSI_SR_TFE | K230_SSI_SR_RFNE),
++                    ==, K230_SSI_SR_TFNF | K230_SSI_SR_TFE);
 +    qtest_quit(qts);
 +}
 +
  int main(int argc, char **argv)
  {
      g_test_init(&argc, &argv, NULL);
-@@ -335,5 +399,6 @@ int main(int argc, char **argv)
-     qtest_add_func("/k230-dw-ssi/interrupt-controller",
-                    test_interrupt_controller);
-     qtest_add_func("/k230-dw-ssi/plic-routing", test_plic_routing);
-+    qtest_add_func("/k230-dw-ssi/qspi-config", test_qspi_config);
+ 
+     qtest_add_func("/k230-dw-ssi/register-contract", test_register_contract);
++    qtest_add_func("/k230-dw-ssi/pio-data-path", test_pio_data_path);
      return g_test_run();
  }
 -- 
