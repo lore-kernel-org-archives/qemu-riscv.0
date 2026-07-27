@@ -4,116 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D76E5C53219
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 08:20:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64B4DC53219
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jul 2026 08:42:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1woGZX-0006fm-Cv; Mon, 27 Jul 2026 04:20:27 -0400
+	id 1woGuz-0002KQ-Ok; Mon, 27 Jul 2026 04:42:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1woGZV-0006ei-V2
- for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 04:20:25 -0400
-Received: from mail-yx1-xb131.google.com ([2607:f8b0:4864:20::b131])
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1woGuy-0002K1-Q8
+ for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 04:42:36 -0400
+Received: from mail-pj2-x00.google.com ([2607:f8b0:4864:39::])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <flamboyant.h.01@gmail.com>)
- id 1woGZU-0003dW-Fj
- for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 04:20:25 -0400
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-66807ba2f0fso3012379d50.3
- for <qemu-riscv@nongnu.org>; Mon, 27 Jul 2026 01:20:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785140423; cv=none;
- d=google.com; s=arc-20260327;
- b=e3bCTbMRD5PPsDhlX1VTvlHmUsWNV08Jy7vn3oXpB4jKdhmN/X0c0nIBmXE77PGOxS
- BzkrFZICRK7hLPqVRp3BtTvo+R41LDj4vJ8SlrAk3F4FBMLGcLpuouc2QMDCeiChL0nT
- OHd6cKRMsaeQ6f633CvHezFLL8v7mgA7jNTS/lHPb1+bH5ndCbpL1oddfHSbd6iC5ebC
- OvgiXSaoUA84QszTeUrO7VqkBbglXr8Wlu4blJXQ+mw8ejh751inPDbBi0TRnyNU+xkh
- lK/apnyvFHncdlhRjW/j1TB/uFzTvUUmoi6vLw2RpbcuPdInMlYOfabLQyxzN9gBupnM
- Ifew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=jY5R4YnftG+67F752+w1fCDnLdBQjLukzln0QJWYakA=;
- fh=+3VQw2jiaykP8ZqsYUXXsz1IHCpmNyjNzt6j6Mo8hRg=;
- b=BmvVSqXhkMBGsFk4lNnWGVXo9NKJBHpNAo49oMkSVpGI3BdkgUx4d4Ipdd1YDWndGL
- ljV4o9zK8bEfCmPDHkfwbTI0uBPZsKhfAEP0m804RZy8x2WDq4sM6vJ+5buUBasSwWHM
- q1X9ObkV9AOqXJXm46t8zcAxOlUDUKusnzfv7A9p/IM2M3M1DZRWeAHrCfdLoJG/uP23
- O8AITnPkFaukMUsClbcyHxPCXLbE63kgmv89lesVRFqXFYbFElNowQHMGjRe02dbr5ag
- 3UZfj4q4A2MSTDoMLTtuxHWRmmaHIEf/PjDj3EwZOP3J8QsmPOwDeNnNJv2TsOUc5hFp
- SB9w==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1woGuw-0005df-U2
+ for qemu-riscv@nongnu.org; Mon, 27 Jul 2026 04:42:36 -0400
+Received: by mail-pj2-x00.google.com with SMTP id
+ d9443c01a7336-2cc6bb7476dso3818075ad.0
+ for <qemu-riscv@nongnu.org>; Mon, 27 Jul 2026 01:42:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1785140423; x=1785745223; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=jY5R4YnftG+67F752+w1fCDnLdBQjLukzln0QJWYakA=;
- b=QirrN9HsWGijEltmMy6UcPRS55Ynk0Gfve2atWffmuSjyPRQzzXalUEVeLP9DGEhng
- 2IDM5yLfCpSrXlpuQiXy0N9D2rstpSqqKatid6k05zwPlzVhAc9ey5kdSb/a3aDfsVF+
- imAjJyMvskiRz/3i+hAaXrPwtS0s8YneXO720VkFurOiwc4KzdfniULXgxdAC4xzhHzz
- zHq2SmSRWM1RGuw5Do1Nl7VwA6duggPPu0h2AdJtpXIjROcT87O67Lae2TJW/Xs3SupZ
- 7Lr84DGjPbQfNSC+ibwB5y0dRDN9eycbtzrL9OzQihmprfV3nFmfj5AFZM8rWVQAC6kS
- S7Fg==
+ d=gmail.com; s=20251104; t=1785141753; x=1785746553; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=7JHbtJerH3/rQGbPisECyh5JnAIvKEhV7En67m13MGo=;
+ b=nWRlwCpNtpAhRZyNG6YJwiUdEuKcw4Iih20w6gNowzkr3hIXG7FOh1L2QvJ2wuI/55
+ QPJ6baJQFWjydRQbnHw9MVFR7tcE4Ou3O42vDRbuK5qW7SfvVzPwNshR1xPRZXDTnm0q
+ hiQYl6M9yqeBtjtv2p73vd/TwbxUP8XS6kfVePKbTJJCzTA7kIQ1hZinb9f18jLZj1sb
+ wU7Ecd9OGOaL4XeoZpfkT3WyVv/gZ8wHmXZHJKaPwWqXVIqbQ/p7aKR68mKA2l1+qcgm
+ kqN/SQf8oY/8vsA6Q1IAHyMAYp0YNRQ4kVh07hnrpbnIGdgeWKb5+j+UqpZCmw4g2hEy
+ hlhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1785140423; x=1785745223;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=jY5R4YnftG+67F752+w1fCDnLdBQjLukzln0QJWYakA=;
- b=YJSmUEwEHXL3ACvq6h1qvGTnD/q3a0uDTHCY0X28Kls7LhV9TKbF9GhluySBK8rAkQ
- t5zSKXRadaobGfUxOf/q6DYnvi/KOisDj94zZmHO1ugBTlagxqd2g3IWV1G07YOfGCdW
- 4QZR9TF6ZaSLeFdPw4TfzXjPMITiHQV7nEi1jqTZJ9bP2mFSfYdYItWw42G9N3KI5+T8
- 1QDangGWQWgV6IifxrD5+/fPRXUUjSgDYgFaF0F8xvdVCuZoqmkcXaEXIW6K4B9ergOh
- nCV6H7J5dCX0dIwEK58yCyQPfzb44UGiSzIBWmYAqKJQKaNmwIJfh02dO07qySz1V5AO
- /zjQ==
-X-Forwarded-Encrypted: i=1;
- AHgh+RouiIsIC2GqFKhDrZ6vsRgZkTXKtjrnymFPud1VucMMuXymqNaaaFtOoydnYBQ9N9ijj4xsVQZIsvlg@nongnu.org
-X-Gm-Message-State: AOJu0YyxdQxsRb2l8WfIJI6gth3NVBSSovoeUQ2cUy+dM8aAhnSDxzUm
- xqTNljoBTpBemYJ5TiCDDjphU/s3yjkEE1L8tFJWXzx5g3yS8icZulRsg9s5TvomYEoQkyUox5h
- TrmXl8xjtuM0yKqbd1jqwYh2TR5Y2kxg=
-X-Gm-Gg: AR+sD11XKP+1W1vTy/4zPc/Cp6IgdeGHCU1x5GUdcHpTkwQ3VCIEkAVWkZCxget3535
- cbkcvfBRW0aBN9MmjHOzjyiRcsWiYmU7s8g842jM7QhoOWHHFiflJTEReUipedrV4q/Dp8vRv2v
- BV1ALPMOhvPA/iV8PBRuCDMG9w7tFPqzQ8QLbvZaw6cQ0d4rI9vhLdpLAYLD2l8NBBxI8mt4Lao
- qeB8S/GchiZWRuQOY1BqaHIgzn0AySsLwAD+HhNIIrqEUD/QO4GLBDsqtcNuozCEnjD450m8jUZ
- dZmBz16YNuPtlTykauvL
-X-Received: by 2002:a05:690e:43dc:b0:664:d186:4737 with SMTP id
- 956f58d0204a3-668c79ea27cmr1581439d50.27.1785140423193; Mon, 27 Jul 2026
- 01:20:23 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1785141753; x=1785746553;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=7JHbtJerH3/rQGbPisECyh5JnAIvKEhV7En67m13MGo=;
+ b=rZ0K3lv87jHt7Eo3zXOkfOetrU+XkiiI7kxKzuYeX8Yp9mFwBEhXP0McMmyQHGmnM0
+ 20KFNE1AuZOwubCNN4h758gjvHiDZMs/ACA2RAipLx7N/AcobtfbzVD5GOavaZDwMG4t
+ Dq5AmLYKhxwRFOA7VrXdm5xmjbF7PErAEbmnfl+e0FkdMii73ilCYBcNCYDVBZ/QQoEY
+ XiBXGGQ9cxmHwZLRRIoZgTKQHAKRJQcMu3yEaN+Vs/gj2HAFmsgoZVEDaAzgFKokMP5d
+ tJ19QuZgB4Mf2DtJUVCdv7oqmHwxD0JR5dkCdGEQk34lKim/4elsG4dz84OfAlek6AuS
+ wDVQ==
+X-Gm-Message-State: AOJu0YwTAGP3EzTs7HNkGTtuczaOKmsUM6VY0AG4L/q3nmZLoD4P+bTb
+ 2R+hpH+0TJ4oM7SWSFBvHk0NHTVOjMeICtzu+oyY1nNAhfLVSHojsqW7
+X-Gm-Gg: AR+sD12drEAhfOSjxSd5lxqwkXtwv2B0HSeVDrzG46VHegKVXi/g9EWCS9ybHqnRu8N
+ FI07CosBIxzD1CdmyJuz4MgmPkPGP6/q7DEyvKnfTlXrKpOaEbPk0oWvccsB1drvs23OLLfw7Eh
+ hBnx2zYwjqkOJ12cNXK2Qm3Tqs5zzni5zEJFOoZ236dVkEACHTf8CVQq9n0DWQclJBJPHBaCYsi
+ Ii6fqY3s9tvTEzlp8ij3s21jXqqo4U6AsGScvRECoDupTDopSE3usMdEpircErMNV6cEgsVoFN3
+ h5Px+oEZuwZtKp5p5lUxVfrovJ/t30Hq1nMnHJS5vqu22WeMGVIrbNATpCXKaaAzrHWLtcll4vK
+ oemiSsz1aUyMMV7pRLYFISL6eMDAoWD/BsSh/QbHYsfYBRDRXAoMo2NOYXeXZo+oYReOipKZcJz
+ RrQidzxMsD/1eq6aW6FJPZYyeOuBkGRJE=
+X-Received: by 2002:a17:902:e803:b0:2bf:13af:b077 with SMTP id
+ d9443c01a7336-2cfdf3f056amr64493725ad.14.1785141752522; 
+ Mon, 27 Jul 2026 01:42:32 -0700 (PDT)
+Received: from Dell-WorkStation.localdomain ([139.59.245.192])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2cfde59bc68sm30767175ad.2.2026.07.27.01.42.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jul 2026 01:42:31 -0700 (PDT)
+From: Zephyr Li <fritchleybohrer@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, chao.liu@processmission.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH v2] target/riscv: preserve vl on element-zero fault
+Date: Mon, 27 Jul 2026 16:42:03 +0800
+Message-ID: <20260727084203.881580-1-fritchleybohrer@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260724030145.14778-1-fritchleybohrer@gmail.com>
+References: <20260724030145.14778-1-fritchleybohrer@gmail.com>
 MIME-Version: 1.0
-References: <cover.1785064312.git.flamboyant.h.01@gmail.com>
- <12e325190a15045cff5c429b154217814cd9e618.1785064313.git.flamboyant.h.01@gmail.com>
- <CAEUhbmUEF7fLEP9+HbE6mKE5OKsVm0rds+1S==BtRLArLZMbxA@mail.gmail.com>
-In-Reply-To: <CAEUhbmUEF7fLEP9+HbE6mKE5OKsVm0rds+1S==BtRLArLZMbxA@mail.gmail.com>
-From: Kangjie Huang <flamboyant.h.01@gmail.com>
-Date: Mon, 27 Jul 2026 16:20:13 +0800
-X-Gm-Features: AUfX_my5W-JnReOjWkXYfWOzexfEZY9mN_IT7v3NsbVMsx3V2W48XUR2rDhTa1A
-Message-ID: <CAAW0U4YezAk=RRM2ERqen=znt=kY4+nLrjJOEE2r=pwzc0Q+vA@mail.gmail.com>
-Subject: Re: [PATCH 01/11] hw/ssi: Add K230 DesignWare SSI register model
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: qemu-devel@nongnu.org, "open list:K230 Machines" <qemu-riscv@nongnu.org>, 
- Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Alistair Francis <alistair@alistair23.me>, Palmer Dabbelt <palmer@dabbelt.com>,
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>, 
- Kangjie Huang <flamboyant.h.01@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b131;
- envelope-from=flamboyant.h.01@gmail.com; helo=mail-yx1-xb131.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:39::;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x00.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -131,24 +102,177 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Bin,
-Bin Meng <bmeng.cn@gmail.com> =E4=BA=8E2026=E5=B9=B47=E6=9C=8827=E6=97=A5=
-=E5=91=A8=E4=B8=80 12:45=E5=86=99=E9=81=93=EF=BC=9A
->
-> Please split the model into 2 models:
->
-> - One generic model for Synopsys DesignWare SSI controller
-> - One K230 specific wrapper model on top of the Synopsys DesignWare
-> SSI controller [optional, if the generic model is enough to make the
-> k230 software happy]
->
-> This way we can reuse the Synopsys DesignWare SSI controller model by
-> other machines in the future.
+A unit-stride fault-only-first load must leave vl unchanged when element
+zero raises a synchronous exception. Keep the shortened value in a local
+bound until all loads complete, and only then update the architectural vl.
 
-Thanks for the review and the suggestion!
-I will look into the common parts between the generic DesignWare SSI
-and the K230 implementation, and complete the split in v2.
+Add a bare-metal RVV regression test which faults vle32ff.v on element zero
+and checks that vl remains unchanged in the trap handler.
 
-Regards,
-Kangjie
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3544
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+---
+Changes in v2:
+- Fix commit message formatting.
+- Enable vector state in the bare-metal test.
+- Use an aligned unmapped address and compare against the vsetvli result.
+- Express the mstatus.VS setting as a field shift.
+
+ target/riscv/tcg/vector_helper.c          | 23 +++++----
+ tests/tcg/riscv64/Makefile.softmmu-target |  5 ++
+ tests/tcg/riscv64/test-vle32ff.S          | 57 +++++++++++++++++++++++
+ 3 files changed, 76 insertions(+), 9 deletions(-)
+ create mode 100644 tests/tcg/riscv64/test-vle32ff.S
+
+diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+index e321ca2616..5a310822b7 100644
+--- a/target/riscv/tcg/vector_helper.c
++++ b/target/riscv/tcg/vector_helper.c
+@@ -686,7 +686,7 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
+           uint32_t desc, vext_ldst_elem_fn_tlb *ldst_tlb,
+           vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz, uintptr_t ra)
+ {
+-    uint32_t i, k, vl = 0;
++    uint32_t i, k, vl = 0, load_vl;
+     uint32_t nf = vext_nf(desc);
+     uint32_t vm = vext_vm(desc);
+     uint32_t max_elems = vext_max_elems(desc, log2_esz);
+@@ -752,22 +752,24 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
+         }
+     }
+ ProbeSuccess:
+-    /* load bytes from guest memory */
+-    if (vl != 0) {
+-        env->vl = vl;
+-    }
++    /*
++     * Keep a shortened vl local until all loads complete. In particular,
++     * an exception from element zero must leave the architectural vl alone.
++     */
++    load_vl = vl ? vl : env->vl;
+ 
+-    if (env->vstart < env->vl) {
++    if (env->vstart < load_vl) {
+         if (vm) {
+             /* Load/store elements in the first page */
+             if (likely(elems)) {
++                elems = MIN(elems, load_vl - env->vstart);
+                 vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
+                                   log2_esz, true, mmu_index, ldst_tlb,
+                                   ldst_host, ra);
+             }
+ 
+             /* Load/store elements in the second page */
+-            if (unlikely(env->vstart < env->vl)) {
++            if (unlikely(env->vstart < load_vl)) {
+                 /* Cross page element */
+                 if (unlikely(page_split % msize)) {
+                     for (k = 0; k < nf; k++) {
+@@ -780,7 +782,7 @@ ProbeSuccess:
+ 
+                 addr = base + ((env->vstart * nf) << log2_esz);
+                 /* Get number of elements of second page */
+-                elems = env->vl - env->vstart;
++                elems = load_vl - env->vstart;
+ 
+                 /* Load/store elements in the second page */
+                 vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
+@@ -788,7 +790,7 @@ ProbeSuccess:
+                                   ldst_host, ra);
+             }
+         } else {
+-            for (i = env->vstart; i < env->vl; i++) {
++            for (i = env->vstart; i < load_vl; i++) {
+                 k = 0;
+                 while (k < nf) {
+                     if (!vext_elem_mask(v0, i)) {
+@@ -806,6 +808,9 @@ ProbeSuccess:
+             }
+         }
+     }
++    if (vl != 0) {
++        env->vl = vl;
++    }
+     env->vstart = 0;
+ 
+     vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
+index 82be8a2c91..7ae225bd73 100644
+--- a/tests/tcg/riscv64/Makefile.softmmu-target
++++ b/tests/tcg/riscv64/Makefile.softmmu-target
+@@ -41,5 +41,10 @@ comma:= ,
+ run-test-crc32: test-crc32
+ 	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)xlrbr=true $(QEMU_OPTS)$<)
+ 
++EXTRA_RUNS += run-test-vle32ff
++run-test-vle32ff: test-vle32ff
++	$(call run-test, $<, $(QEMU) -cpu rv64$(comma)v=true $(QEMU_OPTS)$<)
++test-vle32ff: CFLAGS += -march=rv64gcv
++
+ # We don't currently support the multiarch system tests
+ undefine MULTIARCH_TESTS
+diff --git a/tests/tcg/riscv64/test-vle32ff.S b/tests/tcg/riscv64/test-vle32ff.S
+new file mode 100644
+index 0000000000..f510960c05
+--- /dev/null
++++ b/tests/tcg/riscv64/test-vle32ff.S
+@@ -0,0 +1,57 @@
++/*
++ * Verify that a fault-only-first load keeps vl unchanged when element zero
++ * raises a synchronous exception.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++	.option norvc
++
++	.text
++	.globl _start
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++
++	li	t0, (1 << 9)	/* Set mstatus.VS to Initial. */
++	csrs	mstatus, t0
++	li	t1, 4
++	vsetvli	t2, t1, e32, m1, ta, ma
++	li	t0, 0x18000000	/* Unmapped gap in the virt memory map. */
++	vle32ff.v	v1, (t0)
++
++	/* Element zero did not trap. */
++	li	a0, 1
++	j	_exit
++
++trap:
++	csrr	t0, mcause
++	li	t1, 5		/* Load access fault. */
++	bne	t0, t1, trap_fail
++
++	csrr	t0, vl
++	bne	t0, t2, trap_fail
++
++	li	a0, 0
++	j	_exit
++
++trap_fail:
++	li	a0, 1
++
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	8
++semiargs:
++	.space	16
 
